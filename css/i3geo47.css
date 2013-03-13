@@ -1267,239 +1267,256 @@ version: 2.9.0
 */
 .yui-pb-bar,.yui-pb-mask{width:100%;height:100%}.yui-pb{position:relative;top:0;left:0;width:200px;height:20px;padding:0;border:0;margin:0;text-align:left}.yui-pb-mask{position:absolute;top:0;left:0;z-index:2}.yui-pb-mask div{width:50%;height:50%;background-repeat:no-repeat;padding:0;position:absolute}.yui-pb-tl{background-position:top left}.yui-pb-tr{background-position:top right;left:50%}.yui-pb-bl{background-position:bottom left;top:50%}.yui-pb-br{background-position:bottom right;left:50%;top:50%}.yui-pb-bar{margin:0;position:absolute;left:0;top:0;z-index:1}.yui-pb-ltr .yui-pb-bar{_position:static}.yui-pb-rtl .yui-pb-bar{background-position:right}.yui-pb-btt .yui-pb-bar{background-position:left bottom}.yui-pb-bar{background-color:blue}.yui-pb{border:thin solid #808080}.yui-skin-sam .yui-pb{background-color:transparent;border:solid #808080;border-width:1px 0}.yui-skin-sam .yui-pb-rtl,.yui-skin-sam .yui-pb-ltr{background-image:url(back-h.png);background-repeat:repeat-x}.yui-skin-sam .yui-pb-ttb,.yui-skin-sam .yui-pb-btt{background-image:url(back-v.png);background-repeat:repeat-y}.yui-skin-sam .yui-pb-bar{background-color:transparent}.yui-skin-sam .yui-pb-ltr .yui-pb-bar,.yui-skin-sam .yui-pb-rtl .yui-pb-bar{background-image:url(bar-h.png);background-repeat:repeat-x}.yui-skin-sam .yui-pb-ttb .yui-pb-bar,.yui-skin-sam .yui-pb-btt .yui-pb-bar{background-image:url(bar-v.png);background-repeat:repeat-y}.yui-skin-sam .yui-pb-mask{border:solid #808080;border-width:0 1px;margin:0 -1px}.yui-skin-sam .yui-pb-caption{color:#000;text-align:center;margin:0 auto}.yui-skin-sam .yui-pb-range{color:#a6a6a6}
 .yui-skin-sam .yuimenubar {
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 0;
-border:1px solid #808080;
-font-size:93%;
-line-height:2;
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 0;
+border: 1px solid #808080;
+font-size: 93%;
+line-height: 2;
 }
 .yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu {
-background:transparent url(../pacotes/yui290/build/menu/assets/skins/sam/menubaritem_submenuindicator.png) no-repeat scroll right center;
+background: transparent url(../pacotes/yui290/build/menu/assets/skins/sam/menubaritem_submenuindicator.png) no-repeat scroll right center;
 }
 .yui-skin-sam .yuimenubaritem-selected {
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -1700px;
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -1700px;
 }
 .yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu-disabled {
-background-image:url(../pacotes/yui290/build/menu/assets/skins/sam/menubaritem_submenuindicator_disabled.png);
+background-image: url(../pacotes/yui290/build/menu/assets/skins/sam/menubaritem_submenuindicator_disabled.png);
 }
 .yuimenubaritem {
-float:right;
+float: right;
 border-left: 1px solid gray;
 }
-.yui-skin-sam .yuimenubaritemlabel
-{
-border-color:#808080;
-border-style:solid;
-border-width:1px 0;
-color:#000000;
-cursor:default;
-margin:-1px 0;
-padding:0 20px;
-text-decoration:none;
+.yui-skin-sam .yuimenubaritemlabel {
+border-color: #808080;
+border-style: solid;
+border-width: 1px 0;
+color: #000000;
+cursor: default;
+margin: -1px 0;
+padding: 0 20px;
+text-decoration: none;
 }
-.yui-skin-sam .topscrollbar, .yui-skin-sam .bottomscrollbar {
-background:#FFFFFF url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
-border:1px solid #808080;
-height:16px;
+.yui-skin-sam .topscrollbar,.yui-skin-sam .bottomscrollbar {
+background: #FFFFFF url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
+border: 1px solid #808080;
+height: 16px;
 }
 .yui-skin-sam .yuimenuitem-hassubmenu {
-background-image:url(../pacotes/yui290/build/menu/assets/skins/sam/menuitem_submenuindicator.png);
-background-position:right center;
-background-repeat:no-repeat;
+background-image: url(../pacotes/yui290/build/menu/assets/skins/sam/menuitem_submenuindicator.png);
+background-position: right center;
+background-repeat: no-repeat;
 }
 .yui-skin-sam .yuimenuitem-checked {
-background-image:url(../pacotes/yui290/build/menu/assets/skins/sam/menuitem_checkbox.png);
-background-position:left center;
-background-repeat:no-repeat;
+background-image: url(../pacotes/yui290/build/menu/assets/skins/sam/menuitem_checkbox.png);
+background-position: left center;
+background-repeat: no-repeat;
 }
 .yui-skin-sam .yuimenuitem-hassubmenu-disabled {
-background-image:url(../pacotes/yui290/build/menu/assets/skins/sam/menuitem_submenuindicator_disabled.png);
+background-image: url(../pacotes/yui290/build/menu/assets/skins/sam/menuitem_submenuindicator_disabled.png);
 }
 .yui-skin-sam .yuimenuitem-checked-disabled {
-background-image:url(../pacotes/yui290/build/menu/assets/skins/sam/menuitem_checkbox_disabled.png);
+background-image: url(../pacotes/yui290/build/menu/assets/skins/sam/menuitem_checkbox_disabled.png);
 }
 .yui-skin-sam .yui-panel .hd {
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
-color:#000000;
-font-size:80%;
-font-weight:bold;
-line-height:2;
-padding:0 10px;
-height:30px;
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+color: #000000;
+font-size: 80%;
+font-weight: bold;
+line-height: 2;
+padding: 0 10px;
+height: 30px;
 }
 .yui-skin-sam .yui-panel .hd1 {
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
-color:#000000;
-font-size:80%;
-font-weight:bold;
-line-height:2;
-padding:0 10px;
-height:20px;
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+color: #000000;
+font-size: 80%;
+font-weight: bold;
+line-height: 2;
+padding: 0 10px;
+height: 20px;
 }
 .yui-skin-sam .yui-panel .hd2 {
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
-color:#000000;
-font-size:80%;
-font-weight:bold;
-line-height:2;
-padding:0 10px;
-height:30px;
-opacity:.80;
-filter:alpha(opacity=80);
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+color: #000000;
+font-size: 80%;
+font-weight: bold;
+line-height: 2;
+padding: 0 10px;
+height: 30px;
+opacity: .80;
+filter: alpha(opacity =     80);
 }
 .yui-skin-sam .container-close {
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
-cursor:pointer;
-height:25px;
-position:absolute;
-right:1px;
-top:3px;
-width:25px;
-z-index:2001;
-opacity:.80;
-filter:alpha(opacity=80);
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
+cursor: pointer;
+height: 25px;
+position: absolute;
+right: 1px;
+top: 3px;
+width: 25px;
+z-index: 2001;
+opacity: .80;
+filter: alpha(opacity =     80);
 }
 .yui-skin-sam .container-minimiza {
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
-cursor:pointer;
-height:25px;
-position:absolute;
-right:35px;
-top:3px;
-width:25px;
-z-index:2001;
-opacity:.8;
-filter:alpha(opacity=80);
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
+cursor: pointer;
+height: 25px;
+position: absolute;
+right: 35px;
+top: 3px;
+width: 25px;
+z-index: 2001;
+opacity: .8;
+filter: alpha(opacity =     80);
 }
-.yui-skin-sam .yui-panel .bd{
+.yui-skin-sam .yui-panel .bd {
 text-align: left;
 font-size: 10px;
 }
 .yui-skin-sam .yui-simple-dialog .bd .yui-icon {
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
-float:left;
-height:16px;
-margin-right:10px;
-width:16px;
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
+float: left;
+height: 16px;
+margin-right: 10px;
+width: 16px;
 }
-.yui-navset{
-background:#d8d8d8 url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x; /* tab background */
-z-index:1;/* 3000 */
+.yui-navset {
+background: #d8d8d8 url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x;
+/* tab background */
+z-index: 1; /* 3000 */
 }
-.ygtvtn
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -5600px;
-height:22px;
-width:18px;
+.ygtvtn {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -5600px;
+height: 22px;
+width: 18px;
 }
-.ygtvln
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -1600px;
-height:22px;
-width:18px;
+.ygtvln {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -1600px;
+height: 22px;
+width: 18px;
 }
-.ygtvtp
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -6400px;
-cursor:pointer;
-height:25px;
-width:18px;
+.ygtvtp {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -6400px;
+cursor: pointer;
+height: 25px;
+width: 18px;
 }
-.ygtvtph
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -7200px;
-cursor:pointer;
-height:25px;
-width:18px;
+.ygtvtph {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -7200px;
+cursor: pointer;
+height: 25px;
+width: 18px;
 }
-.ygtvlp
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -2400px;
-cursor:pointer;
-height:22px;
-width:18px;
+.ygtvlp {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -2400px;
+cursor: pointer;
+height: 22px;
+width: 18px;
 }
-.ygtvlph
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -3200px;
-cursor:pointer;
-height:22px;
-width:18px;
+.ygtvlph {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -3200px;
+cursor: pointer;
+height: 22px;
+width: 18px;
 }
-.ygtvloading
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-loading.gif) no-repeat scroll 0 0;
-height:22px;
-width:18px;
+.ygtvloading {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-loading.gif) no-repeat scroll 0 0;
+height: 22px;
+width: 18px;
 }
-.ygtvlm
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 0;
-cursor:pointer;
-height:22px;
-width:18px;
+.ygtvlm {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 0;
+cursor: pointer;
+height: 22px;
+width: 18px;
 }
-.ygtvlmh
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -800px;
-cursor:pointer;
-height:22px;
-width:18px;
+.ygtvlmh {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -800px;
+cursor: pointer;
+height: 22px;
+width: 18px;
 }
-.ygtvdepthcell
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -8000px;
-height:22px;
-width:18px;
+.ygtvdepthcell {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -8000px;
+height: 22px;
+width: 18px;
 }
-.ygtvtm
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -4000px;
-cursor:pointer;
-height:22px;
-width:18px;
+.ygtvtm {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -4000px;
+cursor: pointer;
+height: 22px;
+width: 18px;
 }
-.ygtvtmh
-{
-background:transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -4800px;
-cursor:pointer;
-height:22px;
-width:18px;
+.ygtvtmh {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -4800px;
+cursor: pointer;
+height: 22px;
+width: 18px;
 }
-.ygtvhtml{text-align:left;}
-.ygtvitem{text-align:left;}
-td.ygtvcell{
-border:0;
-padding:0;
+.ygtvhtml {
+text-align: left;
+}
+.ygtvitem {
+text-align: left;
+}
+td.ygtvcell {
+border: 0;
+padding: 0;
 padding-right: 3px;
 }
-.yui-skin-sam .yui-navset .yui-nav a,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a
-{background:#d8d8d8 url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x;border:solid #a3a3a3;border-width:0 1px;color:#000;position:relative;text-decoration:none;}
-.yui-skin-sam .yui-navset .yui-nav .selected a,.yui-skin-sam .yui-navset .yui-nav .selected a:focus,.yui-skin-sam .yui-navset .yui-nav .selected a:hover
-{background:white url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x left -1400px;color:white;}
-.yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus{
-background-color:white;
+.yui-skin-sam .yui-navset .yui-nav a,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
+background: #d8d8d8 url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x;
+border: solid #a3a3a3;
+border-width: 0 1px;
+color: #000;
+position: relative;
+text-decoration: none;
 }
-.yui-skin-sam .yui-navset .yui-nav a:hover,
-.yui-skin-sam .yui-navset .yui-nav a:focus {
-background:#bfdaff url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x left -1300px; /* selected tab background */
-outline:0;
+.yui-skin-sam .yui-navset .yui-nav .selected a,.yui-skin-sam .yui-navset .yui-nav .selected a:focus,.yui-skin-sam .yui-navset .yui-nav .selected a:hover {
+background: white url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x left -1400px;
+color: white;
 }
-.yui-skin-sam .yui-button button, .yui-skin-sam .yui-button a {
-color:#000000;
-font-size:95%;
-line-height:2;
-min-height:1em;
-padding:0 10px;
+.yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus {
+background-color: white;
 }
-.yui-resize .yui-resize-handle{position:absolute;z-index:1;font-size:0;margin:0;padding:0;zoom:1;height:250px;width:5px;}
+.yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus {
+background: #bfdaff url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x left -1300px; /* selected tab background */
+outline: 0;
+}
+.yui-skin-sam .yui-button button,.yui-skin-sam .yui-button a {
+color: #000000;
+font-size: 95%;
+line-height: 2;
+min-height: 1em;
+padding: 0 10px;
+}
+.yui-resize .yui-resize-handle {
+position: absolute;
+z-index: 1;
+font-size: 0;
+margin: 0;
+padding: 0;
+zoom: 1;
+height: 250px;
+width: 5px;
+}
 .ygtvcontent {
-font-size:12px;
-padding:0 3px 10px 0;
+font-size: 12px;
+padding: 0 3px 10px 0;
 }
 .ygtvcell {
-font-size:12px;
-padding:0 3px 5px 0;
+font-size: 12px;
+padding: 0 3px 5px 0;
 }
+.yui-skin-sam .yui-panel-container.shadow .underlay {
+bottom: 0;
+box-shadow: 0 0 8px 1px black;
+left: 0;
+opacity: 0.3;
+position: absolute;
+right: 0;
+top: 0;
+background-color: white;}
 div.olMap {
 z-index: 0;
 padding: 0px!important;
