@@ -8,17 +8,17 @@
 <div id=arvoreAdicionaTema style='position:absolute;top:15px;left:15px'></div>
 <div style='position:absolute;top:15px;left:350px;width:600px'>
 <p class=paragrafo >
-A &aacute;rvore de temas mostra a lista de layers que est&atilde;o dispon&iacute;veis para ser adicionados ao mapa atual, bem como op&ccedil;&otilde;es de pesquisa na base 
+A &aacute;rvore de temas mostra a lista de layers que est&atilde;o dispon&iacute;veis para ser adicionados ao mapa atual, bem como op&ccedil;&otilde;es de pesquisa na base
 de temas e conex&atilde;o com Web Services.
 </p>
 <p class=paragrafo >
-Nesta p&aacute;gina s&atilde;o mostrados os par&acirc;metros principais que podem ser utilizados para customizar a &aacute;rvore, 
-modificando o seu comportamento normal. 
+Nesta p&aacute;gina s&atilde;o mostrados os par&acirc;metros principais que podem ser utilizados para customizar a &aacute;rvore,
+modificando o seu comportamento normal.
 </p>
 <p class=paragrafo >
-Voc&ecirc; pode testar os par&acirc;metros e obter o código javascript necess&aacute;rio para faz&ecirc;-los funcionar. Os códigos 
-normalmente devem ser inseridos no HTML utilizado para montar o seu mapa. Por exemplo, voc&ecirc; pode editar o 
-arquivo padr&atilde;o do i3Geo: i3geo/locaplic/geral.htm. Nesse caso, os códigos devem ser inseridos antes da linha:<br>
+Voc&ecirc; pode testar os par&acirc;metros e obter o c&oacute;digo javascript necess&aacute;rio para faz&ecirc;-los funcionar. Os c&oacute;digos
+normalmente devem ser inseridos no HTML utilizado para montar o seu mapa. Por exemplo, voc&ecirc; pode editar o
+arquivo padr&atilde;o do i3Geo: i3geo/interface/openlayers.htm. Nesse caso, os c&oacute;digos devem ser inseridos antes da linha:<br>
 i3GEO.cria();
 </p>
 <p class=paragrafo >
@@ -27,175 +27,228 @@ i3GEO.cria();
 <div id=ARVparametros >
 <p class=paragrafo ><b>Par&acirc;metros:</b></p>
 <p class=paragrafo >
-	<select name="OPCOESADICIONAIS.incluiArvore">
+	<select name="OPCOESADICIONAIS.incluiArvore" onchange="ARVatualizar()">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Inclui ou n&atilde;o os &iacute;cones de op&ccedil;&otilde;es
 </p>
+
 <p class=paragrafo >
-	<select name="OPCOESADICIONAIS.uploaddbf">
+	<select name="OPCOESADICIONAIS.uploadarquivo" onchange="ARVatualizar()">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
-	Inclui &iacute;cone de upload de arquivo dbf ou CSV
+	Inclui ou n&atilde;o o &iacute;cone de upload de arquivos (se for verdadeiro n&atilde;o permite os &iacute;cones individuais das op&ccedil;&otilde;es de upload)
 </p>
 <p class=paragrafo >
-	<select name="OPCOESADICIONAIS.uploadlocal">
+	<select name="OPCOESADICIONAIS.carregaKml" onchange="ARVatualizar()">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
-	Inclui &iacute;cone de upload de arquivo shapefile ou imagem local
+	Inclui ou n&atilde;o o &iacute;cone de inclus&atilde;o de KML
 </p>
 <p class=paragrafo >
-	<select name="OPCOESADICIONAIS.downloadbase">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Inclui &iacute;cone para acessar o sistema de download de dados
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.importarwmc">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Inclui &iacute;cone para importar WMC
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.conectarwms">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Inclui &iacute;cone da ferramenta de conex&atilde;o com WMS
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.conectarwmst">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Inclui &iacute;cone da ferramenta de conex&atilde;o com WMS-T
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.conectargeorss">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Inclui &iacute;cone da ferramenta de conex&atilde;o com geoRSS
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.nuvemTags">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Inclui &iacute;cone da ferramenta nuvem de tags
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.nuvemTagsFlash">
-		<option value=true >true</option>
-		<option value=false selected >false</option>
-	</select>
-	Inclui &iacute;cone da ferramenta nuvem de tags - op&ccedil;&atilde;o em Flash
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.navegacaoDir">
-		<option value=true  >true</option>
-		<option value=false selected >false</option>
-	</select>
-	Inclui op&ccedil;&atilde;o de navega&ccedil;&atilde;o na &aacute;rvore de diretórios (apenas para usu&aacute;rios cadastrados como editores)
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.incluibusca">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Inclui campo de formul&aacute;rio para realizar busca por temas existentes na &aacute;rvore
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.kml">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Nas op&ccedil;&otilde;es de cada tema, inclui a op&ccedil;&atilde;o de obten&ccedil;&atilde;o do endere&ccedil;o de acesso aos dados em KML
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.qrcode">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Nas op&ccedil;&otilde;es de cada tema, inclui a op&ccedil;&atilde;o de obten&ccedil;&atilde;o do qrcode
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.mini">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Nas op&ccedil;&otilde;es de cada tema, inclui a op&ccedil;&atilde;o de obten&ccedil;&atilde;o da imagem miniatura
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.estrelas">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Nas op&ccedil;&otilde;es de cada tema, inclui a pontua&ccedil;&atilde;o em estrelas (baseado no n&uacute;mero de acessos)
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.comentarios">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Nas op&ccedil;&otilde;es de cada tema, inclui a op&ccedil;&atilde;o de coment&aacute;rios
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.bookmark">
-		<option value=true selected >true</option>
-		<option value=false >false</option>
-	</select>
-	Nas op&ccedil;&otilde;es de cada tema, inclui a op&ccedil;&atilde;o de bookmark
-</p>
-<p class=paragrafo >
-	<select name="OPCOESADICIONAIS.refresh">
+	<select name="OPCOESADICIONAIS.refresh" onchange="ARVatualizar()">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Inclui o &iacute;cone de "refresh" da &aacute;rvore
 </p>
 <p class=paragrafo >
-	<select name="INCLUIESTRELAS">
+	<select name="OPCOESADICIONAIS.inde" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Abre a ferramenta INDE.
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.uploaddbf" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui &iacute;cone de upload de arquivo dbf ou CSV
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.uploadlocal" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui &iacute;cone de upload de arquivo shapefile ou imagem local
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.downloadbase" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui &iacute;cone para acessar o sistema de download de dados
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.importarwmc" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui &iacute;cone para importar WMC
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.conectarwms" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui &iacute;cone da ferramenta de conex&atilde;o com WMS
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.conectarwmst" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui &iacute;cone da ferramenta de conex&atilde;o com WMS-T
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.conectargeorss" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui &iacute;cone da ferramenta de conex&atilde;o com geoRSS
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.conectargeojson" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui &iacute;cone da ferramenta de conex&atilde;o com geoJSON
+</p>
+
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.uploadgpx" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui &iacute;cone da ferramenta de upload de arquivo gpx
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.nuvemTags" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui &iacute;cone da ferramenta nuvem de tags
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.nuvemTagsFlash" onchange="ARVatualizar()">
+		<option value=true >true</option>
+		<option value=false selected >false</option>
+	</select>
+	Inclui &iacute;cone da ferramenta nuvem de tags - op&ccedil;&atilde;o em Flash
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.carousel" onchange="ARVatualizar()">
+		<option value=true >true</option>
+		<option value=false selected >false</option>
+	</select>
+	Inclui &iacute;cone da ferramenta que mostra as miniaturas para escolher a camada
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.googleearth" onchange="ARVatualizar()">
+		<option value=true >true</option>
+		<option value=false selected >false</option>
+	</select>
+	Inclui link para abrir a &aacute;rvore no Googleearth
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.kml" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas op&ccedil;&otilde;es de cada tema, inclui a op&ccedil;&atilde;o de obten&ccedil;&atilde;o do endere&ccedil;o de acesso aos dados em KML
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.navegacaoDir" onchange="ARVatualizar()">
+		<option value=true  >true</option>
+		<option value=false selected >false</option>
+	</select>
+	Inclui op&ccedil;&atilde;o de navega&ccedil;&atilde;o na &aacute;rvore de diretórios (apenas para usu&aacute;rios cadastrados como editores)
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.incluibusca" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui campo de formul&aacute;rio para realizar busca por temas existentes na &aacute;rvore
+</p>
+
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.qrcode" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas op&ccedil;&otilde;es de cada tema, inclui a op&ccedil;&atilde;o de obten&ccedil;&atilde;o do qrcode
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.mini" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas op&ccedil;&otilde;es de cada tema, inclui a op&ccedil;&atilde;o de obten&ccedil;&atilde;o da imagem miniatura
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.estrelas" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas op&ccedil;&otilde;es de cada tema, inclui a pontua&ccedil;&atilde;o em estrelas (baseado no n&uacute;mero de acessos)
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.comentarios" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas op&ccedil;&otilde;es de cada tema, inclui a op&ccedil;&atilde;o de coment&aacute;rios
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.bookmark" onchange="ARVatualizar()">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas op&ccedil;&otilde;es de cada tema, inclui a op&ccedil;&atilde;o de bookmark
+</p>
+
+<p class=paragrafo >
+	<select name="INCLUIESTRELAS" onchange="ARVatualizar()">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Inclui um nó na &aacute;rvore com os temas classificados pelo n&uacute;mero de estrelas
 </p>
 <p class=paragrafo >
-	<select name="INCLUISISTEMAS">
+	<select name="INCLUISISTEMAS" onchange="ARVatualizar()">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Inclui um nó na &aacute;rvore com a lista de sistemas especiais de acesso a dados cadastrados no sistema de administra&ccedil;&atilde;o
 </p>
 <p class=paragrafo >
-	<select name="INCLUIWMS">
+	<select name="INCLUIWMS" onchange="ARVatualizar()">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Inclui um nó na &aacute;rvore com a lista de WMS cadastrados no sistema de administra&ccedil;&atilde;o
 </p>
 <p class=paragrafo >
-	<select name="FILTRADOWNLOAD">
+	<select name="FILTRADOWNLOAD" onchange="ARVatualizar()">
 		<option value=true >true</option>
 		<option value=false selected >false</option>
 	</select>
 	N&atilde;o mostra na &aacute;rvore os nós que n&atilde;o possuem temas para download
 </p>
 <p class=paragrafo >
-	<select name="FILTRAOGC">
+	<select name="FILTRAOGC" onchange="ARVatualizar()">
 		<option value=true >true</option>
 		<option value=false selected >false</option>
 	</select>
 	N&atilde;o mostra na &aacute;rvore os nós que n&atilde;o permitem a gera&ccedil;&atilde;o de WMS
 </p>
 <p class=paragrafo >
-	<select name="TIPOBOTAO">
+	<select name="TIPOBOTAO" onchange="ARVatualizar()">
 		<option value="'checkbox'" >checkbox</option>
 		<option value="'radio'" selected >radio</option>
 	</select>
@@ -209,7 +262,7 @@ i3GEO.cria();
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.cria();
 i3GEO.inicia();
-i3GEO.ajuda.ATIVAJANELA = false
+i3GEO.ajuda.ATIVAJANELA = false;
 function ARVatualizar(){
 	$i("arvoreAdicionaTema").innerHTML = "Aguarde...";
 	var par = $i("ARVparametros").getElementsByTagName("select"),
@@ -225,6 +278,7 @@ function ARVatualizar(){
 	$i("codigo").innerHTML = codigo;
 	i3GEO.arvoreDeTemas.atualiza();
 }
+ARVatualizar();
 </script>
 </body>
 
