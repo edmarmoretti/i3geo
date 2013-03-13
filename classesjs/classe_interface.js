@@ -559,6 +559,9 @@ i3GEO.Interface = {
 				ma = i3GEO.Interface.openlayers.MAXEXTENT,
 				i = $i(i3GEO.Interface.IDCORPO),
 				bb = i3GEO.barraDeBotoes;
+			if(typeof(OpenLayers) == 'undefined'){
+				return;
+			}
 			OpenLayers.DOTS_PER_INCH = i3GEO.util.calculaDPI();
 			//corrige a localiza&ccedil;&atilde;o do script
 			OpenLayers._getScriptLocation = function(){
@@ -613,6 +616,9 @@ i3GEO.Interface = {
 			i3geoOL = new OpenLayers.Map('openlayers', i3GEO.Interface.openlayers.parametrosMap);
 		},
 		inicia: function(){
+			if(typeof(OpenLayers) == 'undefined'){
+				return;
+			}
 			//
 			//monta o mapa ap&oacute;s receber o resultado da cria&ccedil;&atilde;o do mapfile tempor&aacute;rio
 			//

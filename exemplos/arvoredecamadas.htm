@@ -29,77 +29,77 @@ i3GEO.cria();
 <div id=ARVparametros >
 <p class=paragrafo ><b>Par&acirc;metros:</b></p>
 <p class=paragrafo >
-	<select name="ARRASTARORDEM">
+	<select name="ARRASTARORDEM" onchange="ARVatualizar()">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Ativa a op&ccedil;&atilde;o de arrastar um tema para alterar a ordem de desenho das camadas
 </p>
 <p class=paragrafo >
-	<select name="ARRASTARLIXEIRA">
+	<select name="ARRASTARLIXEIRA" onchange="ARVatualizar()">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Ativa a op&ccedil;&atilde;o de arrastar um tema para a lixeria quando se quer remov&ecirc;-lo do mapa
 </p>
 <p class=paragrafo >
-	<select name="LIGARDESLIGARTODOS">
+	<select name="LIGARDESLIGARTODOS" onchange="ARVatualizar()">
 		<option value=true selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Mostra os &iacute;cones de desligar/ligar todos os temas
 </p>
 <p class=paragrafo >
-	<select name="PERMITEEXPANDIRTEMAS">
+	<select name="PERMITEEXPANDIRTEMAS" onchange="ARVatualizar()">
 		<option value=true  selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Permite que as op&ccedil;&otilde;es abaixo dos nós referentes acada tema sejam mostradas
 </p>
 <p class=paragrafo >
-	<select name="EXPANDIDA">
+	<select name="EXPANDIDA" onchange="ARVatualizar()">
 		<option value=true  >true</option>
 		<option value=false selected >false</option>
 	</select>
 	Indica se a &aacute;rvore ser&aacute; montada de forma expandida ou n&atilde;o. Se true, os nós do primeiro n&iacute;vel ser&atilde;o abertos na inicializa&ccedil;&atilde;o da &aacute;rvore
 </p>
 <p class=paragrafo >
-	<select name="EXPANDESOLEGENDA">
+	<select name="EXPANDESOLEGENDA" onchange="ARVatualizar()">
 		<option value=true  >true</option>
 		<option value=false selected >false</option>
 	</select>
 	Ao expandir um tema mostra apenas a legenda, sem as outras op&ccedil;&otilde;es
 </p>
 <p class=paragrafo >
-	<select name="LEGENDAEXPANDIDA">
+	<select name="LEGENDAEXPANDIDA" onchange="ARVatualizar()">
 		<option value=true  >true</option>
 		<option value=false selected >false</option>
 	</select>
 	Indica se a legenda da &aacute;rvore ser&aacute; montada de forma expandida ou n&atilde;o
 </p>
 <p class=paragrafo >
-	<select name="OPCOESICONES">
+	<select name="OPCOESICONES" onchange="ARVatualizar()">
 		<option value=true  selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Inclui ou n&atilde;o os &iacute;cones de op&ccedil;&otilde;es em cada tema (farol, zoom para o tema, etc)
 </p>
 <p class=paragrafo >
-	<select name="OPCOESTEMAS">
+	<select name="OPCOESTEMAS" onchange="ARVatualizar()">
 		<option value=true  selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Inclui ou n&atilde;o o nó com as op&ccedil;&otilde;es de manipula&ccedil;&atilde;o de cada tema
 </p>
 <p class=paragrafo >
-	<select name="OPCOESLEGENDA">
+	<select name="OPCOESLEGENDA" onchange="ARVatualizar()">
 		<option value=true  selected >true</option>
 		<option value=false >false</option>
 	</select>
 	Inclui ou n&atilde;o o nó para mostrar a legenda do tema
 </p>
 <p class=paragrafo >
-	<select name="AGUARDALEGENDA">
+	<select name="AGUARDALEGENDA" onchange="ARVatualizar()">
 		<option value=true  >true</option>
 		<option value=false selected >false</option>
 	</select>
@@ -128,6 +128,7 @@ function ARVatualizar(){
 	$i("codigo").innerHTML = codigo;
 	i3GEO.arvoreDeCamadas.atualiza()
 }
+ARVatualizar();
 </script>
 </body>
 
