@@ -62,7 +62,7 @@ td
 input
 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid gray;text-align: center;cursor: text;}
 select
-{box-shadow:1px 1px 3px 0px gray;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid rgb(230,230,230);text-align: left;cursor: pointer;}
+{box-shadow:1px 1px 3px 0 lightgray;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid rgb(230,230,230);text-align: left;cursor: pointer;}
 select option:hover {
 background-color: #CCFFFF;
 }
@@ -118,7 +118,7 @@ top:2px;
 .aplicar
 {visibility:visible;color: #2F4632;background:rgb(240,240,240);text-align: center;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;border-style:outset;border-width:2px;border-color:#cc0000;cursor:pointer;z-index:1000;}
 .digitar
-{box-shadow:1px 1px 3px 0px gray;margin:0px;color:#426252;background-color:white;border:1px solid rgb(250,250,250); font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+{box-shadow:1px 1px 3px 0px lightgray;margin:0px;color:#426252;background-color:white;border:1px solid rgb(250,250,250); font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .digitarOver
 {
 margin:0px;color:#426252;background-color:#F6F6F6;border:1px solid rgb(250,250,250);font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -245,7 +245,7 @@ width: 95%;
 padding: 5px;
 }
 #i3geoCartoParametros_corpo select {
-box-shadow:0 1px 5px gray;
+box-shadow:0 1px 5px lightgray;
 height: 20px;
 }
 .bd div{
@@ -260,7 +260,7 @@ margin-top: 15px;
 #editor_bd input {
 background-color: #F6F6F6;
 border: 1px solid #FAFAFA;
-box-shadow: 0 1px 3px gray;
+box-shadow: 0 1px 3px lightgray;
 color: #426252;
 font-family: Verdana,Arial,Helvetica,sans-serif;
 font-size: 10px;
@@ -618,7 +618,7 @@ cursor:pointer;
 height:14px;
 text-align:center;
 width:25px;
-box-shadow:1px 1px 3px 0px gray;
+box-shadow:1px 1px 3px 0px lightgray;
 margin-left:1px;
 }
 .x
@@ -1144,7 +1144,7 @@ border-radius:5px 5px 5px 5px;
 background-image:none;
 margin-left:8px;
 border:solid 1px gray;
-box-shadow:0px 1px 3px gray;
+box-shadow:0px 1px 3px lightgray;
 }
 .iconeMini{
 border-radius:5px 5px 5px 5px;
@@ -1531,9 +1531,18 @@ border: 0px;
 }
 .yui-skin-sam .yui-panel .bd {
 border: 0px;
+box-shadow: 0 0 0px 0px black;
 }
 .yui-skin-sam .yui-panel .ft {
 border: 0px;
+}
+.yui-skin-sam .yui-panel .bd .yui-navset {
+background: none;
+z-index: 1;
+border-bottom: 2px solid lightgray;
+}
+.yui-skin-sam .bd .yui-navset .yui-nav a, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-nav a em, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,.yui-skin-sam .bd .yui-button, .yui-skin-sam .bd .yui-button button, .yui-skin-sam .bd .yui-button a, .yui-skin-sam .bd .yui-button .first-child{
+border-color: lightgray;
 }
 div.olMap {
 z-index: 0;

@@ -301,10 +301,20 @@ td.ygtvcell {
 }
 .yui-skin-sam .yui-panel .hd {
 	border: 0px;
+
 }
 .yui-skin-sam .yui-panel .bd {
 	border: 0px;
+	box-shadow: 0 0 0px 0px black;
 }
 .yui-skin-sam .yui-panel .ft {
 	border: 0px;
+}
+.yui-skin-sam .yui-panel .bd .yui-navset {
+    background: none;
+    z-index: 1;
+    border-bottom: 2px solid lightgray;
+}
+.yui-skin-sam .bd .yui-navset .yui-nav a, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-nav a em, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,.yui-skin-sam .bd .yui-button, .yui-skin-sam .bd .yui-button button, .yui-skin-sam .bd .yui-button a, .yui-skin-sam .bd .yui-button .first-child{
+	border-color: lightgray;
 }
