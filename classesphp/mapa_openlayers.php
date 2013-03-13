@@ -171,7 +171,7 @@ elseif($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum")
 
 if($cache == true && $_GET["cache"] != "nao"){
 	//carregaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);
-	carregaCacheImagem($cachedir,$map,$tms);
+	carregaCacheImagem($cachedir,$map,$_GET["tms"]);
 }
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);
