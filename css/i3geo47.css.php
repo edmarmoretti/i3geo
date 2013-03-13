@@ -1508,6 +1508,9 @@ padding: 0 3px 10px 0;
 font-size: 12px;
 padding: 0 3px 5px 0;
 }
+.yui-skin-sam .yui-panel{
+border: 0px;
+}
 .yui-skin-sam .yui-panel-container.shadow .underlay {
 bottom: 0;
 box-shadow: 0 0 8px 1px black;
@@ -1516,7 +1519,22 @@ opacity: 0.3;
 position: absolute;
 right: 0;
 top: 0;
-background-color: white;}
+background-color: white;
+}
+.yui-skin-sam .yui-panel-container {
+padding: 0 1px;
+border-radius: 5px 5px 5px 5px;
+border: 1px solid white;
+}
+.yui-skin-sam .yui-panel .hd {
+border: 0px;
+}
+.yui-skin-sam .yui-panel .bd {
+border: 0px;
+}
+.yui-skin-sam .yui-panel .ft {
+border: 0px;
+}
 div.olMap {
 z-index: 0;
 padding: 0px!important;
