@@ -6,21 +6,21 @@ MAP
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	"NAO"
+      "cache"	"SIM"
       "CLASSE"	"SIM"
       "permitekmz"	"nao"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "permitedownload"	"sim"
       "metaestat"	""
-      "permitekml"	"sim"
       "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "convcaracter"	""
       "TEMA"	"Biomas shapefile (acentuação)"
     END # METADATA
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
     STATUS OFF
     TEMPLATE "none.htm"
-    TILEITEM "location"
     OPACITY 50
     TYPE POLYGON
     UNITS METERS

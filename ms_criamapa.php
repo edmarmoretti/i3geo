@@ -1202,17 +1202,23 @@ function criaDirMapa($dir_tmp,$cachedir="")
 	{
 		$tmpdirname = nomeRandomico();
 		$crdir = @mkdir ($dir_tmp."/".$tmpdirname,0777);
+		chmod($dir_tmp."/".$tmpdirname,0777);
 		$crdiri = @mkdir ($dir_tmp."/img".$tmpdirname,0777);
+		chmod($dir_tmp."/img".$tmpdirname,0777);
 		$mapfile = $dir_tmp."/".$tmpdirname."/".$tmpdirname.".map";
 		$tmpimgname = "img".$tmpdirname;
 		@mkdir($dir_tmp."/comum",0777);
 		if($cachedir == ""){
 			@mkdir($dir_tmp."/cache",0777);
+			chmod($dir_tmp."/cache",0777);
 			@mkdir($dir_tmp."/cache/googlemaps",0777);
+			chmod($dir_tmp."/cache/googlemaps",0777);
 		}
 		else{
 			@mkdir($cachedir,0777);
+			chmod($cachedir,0777);
 			@mkdir($cachedir."/googlemaps",0777);
+			chmod($cachedir."/googlemaps",0777);
 		}
 		if(file_exists($dir_tmp."/".$tmpdirname))
 		return array($mapfile,$tmpdirname,$tmpimgname);

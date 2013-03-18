@@ -290,21 +290,9 @@ else{
 	else{
 		if($img->imagepath == "")
 		{echo "Erro IMAGEPATH vazio";exit;}
-		if(extension_loaded("imagick")){
-			header('Content-Type: image/png');
-			$img->saveImage();
-		}
-		else{
-			$nomer = ($img->imagepath)."temp".nomeRand().".png";
-			$img->saveImage($nomer);
-			$img = imagecreatefrompng($nomer);
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
-			ob_clean();
-			echo header("Content-type: image/png \n\n");
-			imagepng($img);
-			imagedestroy($img);
-		}
+		//se der erro aqui veja em mapa_openlayers_alternativo.php
+		header('Content-Type: image/png');
+		$img->saveImage();
 	}
 }
 function salvaCacheImagem($cachedir,$map,$tms){
@@ -317,6 +305,7 @@ function salvaCacheImagem($cachedir,$map,$tms){
 	}
 	if(!file_exists($nome)){
 		@mkdir(dirname($nome),0777,true);
+		chmod(dirname($nome),0777);
 		$img->saveImage($nome);
 		chmod($nome,0777);
 	}

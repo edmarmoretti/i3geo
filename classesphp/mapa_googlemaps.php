@@ -297,21 +297,9 @@ else{
 		fpassthru(fopen($nomer, 'rb'));
 	}
 	else{
-		if(extension_loaded("imagick")){
-			header('Content-Type: image/png');
-			$img->saveImage();
-		}
-		else{
-			$nomer = ($img->imagepath)."temp".nomeRand().".png";
-			$img->saveImage($nomer);
-			$img = imagecreatefrompng($nomer);
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
-			ob_clean();
-			echo header("Content-type: image/png \n\n");
-			imagepng($img);
-			imagedestroy($img);
-		}
+		//se der erro aqui veja em mapa_googlemaps_alternativo.php
+		header('Content-Type: image/png');
+		$img->saveImage();
 	}
 	exit;
 }
@@ -328,6 +316,7 @@ function salvaCacheImagem(){
 	if(!file_exists($c."/$y.png")){
 		mkdir($cachedir."/googlemaps/$layer/$z/$x",0777,true);
 		$img->saveImage($c."/$y.png");
+		chmod($cachedir."/googlemaps/$layer/$z/$x",0777);
 		chmod($c."/$y.png",0777);
 	}
 	return $nome;
