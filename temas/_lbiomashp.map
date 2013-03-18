@@ -21,6 +21,7 @@ MAP
     PROCESSING "ITEMS=CD_LEGENDA"
     STATUS OFF
     TEMPLATE "none.htm"
+    TILEITEM "location"
     OPACITY 50
     TYPE POLYGON
     UNITS METERS
@@ -29,7 +30,7 @@ MAP
       EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
       STYLE
         ANGLE 0
-        COLOR 21 44 114
+        COLOR 255 255 0
         OFFSET 0 0
       END # STYLE
     END # CLASS
@@ -56,7 +57,7 @@ MAP
       EXPRESSION ('[CD_LEGENDA]'eq'PANTANAL')
       STYLE
         ANGLE 0
-        COLOR 242 192 145
+        COLOR 0 192 145
         OFFSET 0 0
       END # STYLE
     END # CLASS

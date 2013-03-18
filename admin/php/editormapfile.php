@@ -2030,8 +2030,14 @@ function alterarEstilo()
 	$nclasses = $layer->numclasses;
 	$classe = $layer->getclass($indiceClasse);
 	$estilo = $classe->getstyle($indiceEstilo);
-	$estilo->set("symbolname",$symbolname);
+	if(!empty($symbolname)){
+		$estilo->set("symbolname",$symbolname);
+	}
+	if(empty($symbolname)){
+		$estilo->set("symbolname"," ");
+	}
 	corE($estilo,$color,"color");
+
 	$estilo->set("size",$size);
 	$estilo->set("minsize",$minsize);
 	$estilo->set("maxsize",$maxsize);
@@ -2052,6 +2058,15 @@ function alterarEstilo()
 
 function removeCabecalho($arq,$symbolset=true)
 {
+	global $dir_tmp;
+	//remove o cache OGC
+	$nomeMapfileTmp = $dir_tmp."/ogc_".md5($arq).".map";
+	$nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
+	$nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
+	chmod($nomeMapfileTmp,0777);
+	unlink($nomeMapfileTmp);
+	//echo $nomeMapfileTmp;exit;
+	//remove o cache OGC
 	$handle = fopen($arq, "r");
 	if ($handle)
 	{

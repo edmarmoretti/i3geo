@@ -43,6 +43,14 @@ body {
 			{
 				echo "Arquivo $mapfile n&atilde;o existe.";exit;
 			}
+			//remove o cache OGC
+			$nomeMapfileTmp = $dir_tmp."/ogc_".md5($mapfile).".map";
+			$nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
+			$nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
+			chmod($nomeMapfileTmp,0777);
+			unlink($nomeMapfileTmp);
+			//echo $nomeMapfileTmp;exit;
+			//
 			if($_POST["tipo"] == "gravar"){
 				$fp = fopen($mapfile,"w");
 				fwrite($fp,$gravarTexto);
