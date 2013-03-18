@@ -297,7 +297,7 @@ else{
 		fpassthru(fopen($nomer, 'rb'));
 	}
 	else{
-			if(ms_GetVersionInt() != 60003	){
+		if(extension_loaded("imagick")){
 			header('Content-Type: image/png');
 			$img->saveImage();
 		}

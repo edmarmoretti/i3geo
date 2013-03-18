@@ -290,7 +290,7 @@ else{
 	else{
 		if($img->imagepath == "")
 		{echo "Erro IMAGEPATH vazio";exit;}
-		if(ms_GetVersionInt() != 60003	){
+		if(extension_loaded("imagick")){
 			header('Content-Type: image/png');
 			$img->saveImage();
 		}

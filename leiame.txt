@@ -87,6 +87,8 @@ Após instalar utilize o localhost/i3geo/testainstal.php para ver se está tudo ce
 
 Se o testaisntal.php estiver mostrando os mapas e mesmo assim ao abrir o i3Geo as camadas não são mostradas, considere o seguinte:
 
+Primeiro, experimente instalar a biblioteca php5-imagick no Linux.
+
 Alguns usuários reportaram problemas em algumas instalações do Mapserver. Esses usuários conseguem adicionar camadas
 ao mapa mas nada é mostrado, mesmo quando as questões de projeção e outras estão todas configuradas de acordo. Se esse for o seu caso,
 experimente trocar os arquivos de renderização fazendo o seguinte:
