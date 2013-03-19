@@ -1260,7 +1260,7 @@ filter:alpha(opacity=80);
 .yui-skin-sam .container-close {
 background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
 cursor:pointer;
-height:25px;
+height:15px;
 position:absolute;
 right:1px;
 top:3px;

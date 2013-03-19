@@ -72,7 +72,7 @@ i3GEO.janela = {
 	Default:
 	{display:block;padding:5px 0px 5px 2px}
 	*/
-	ESTILOBD: "display:block;padding:5px 2px 5px 2px;",
+	ESTILOBD: "display:block;padding:5px 3px 5px 3px;",
 	/*
 	Propriedade: ESTILOAGUARDE
 
