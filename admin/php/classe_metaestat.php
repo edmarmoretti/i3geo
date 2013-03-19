@@ -277,7 +277,7 @@ class Metaestat{
 		}
 		if($agregaregiao == false){
 			if($todasascolunas == 0){
-				/*
+
 				if($dados["colunaidunico"] != $dados["colunaidgeo"]){
 					$sql = " SELECT d.".$dados["colunaidunico"].",d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
 					$colunas[] = $dados["colunaidunico"];
@@ -285,8 +285,8 @@ class Metaestat{
 				else{
 					$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
 				}
-				*/
-				$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
+
+				//$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
 				$colunas[] = $dados["colunavalor"];
 				$colunas[] = $dados["colunaidgeo"];
 				if(!empty($agruparpor)){
@@ -365,7 +365,7 @@ class Metaestat{
 					$sqlgeo .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$dados["colunaidunico"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
 				}
 				*/
-				$sqlgeo .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
+				$sqlgeo .= " FROM (SELECT * FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
 				if(count($parametrosMedida) > 0){
 					$parametrosMedida = implode(",",$parametrosMedida).",";
 				}
@@ -430,6 +430,10 @@ class Metaestat{
 				$tipolayer = "polygon";
 			}
 			$meta = $this->listaMedidaVariavel("",$id_medida_variavel);
+			//evita agregar regioes qd nao e necessario
+			if($meta["codigo_tipo_regiao"] == $codigo_tipo_regiao || empty($codigo_tipo_regiao) ){
+				$agruparpor = "";
+			}
 			if($titulolayer == ""){
 				$titulolayer = $meta["nomemedida"];
 			}
