@@ -62,7 +62,7 @@ error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //
-include_once(__DIR__."/login.php");
+include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"ALTERAROPERACOES",
 		"ADICIONAPAPELOPERACOES",
@@ -117,7 +117,7 @@ function alterarOperacoes()
 	global $id_operacao,$codigo,$descricao;
 	try
 	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		if($convUTF){
 			$descricao = utf8_encode($descricao);
 		}
@@ -146,7 +146,7 @@ function adicionaPapelOperacoes(){
 	global $id_operacao,$id_papel;
 	try
 	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis (id_operacao,id_papel) VALUES ($id_operacao,$id_papel)");
 		$dbhw = null;
 		$dbh = null;
@@ -160,7 +160,7 @@ function excluirPapelOperacao(){
 	global $id_operacao,$id_papel;
 	try
 	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		$dbhw->query("DELETE from ".$esquemaadmin."i3geousr_operacoespapeis WHERE id_operacao = $id_operacao AND id_papel = $id_papel");
 		$dbhw = null;
 		$dbh = null;

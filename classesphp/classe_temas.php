@@ -108,7 +108,7 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 */
 	function __construct($map_file,$tema=null,$locaplic="",$ext="")
 	{
-  		//error_reporting(E_ALL);
+  		//error_reporting(0);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
 		$this->arquivo = $map_file;
   		if(file_exists($locaplic."/funcoes_gerais.php"))
@@ -547,7 +547,7 @@ $valor - Novo valor da transpar&ecirc;ncia
 */
 	function mudaTransparencia($valor)
 	{
-        //error_reporting(E_ALL);
+        //error_reporting(0);
 		$v = versao();
 		foreach ($this->grupo as $lg)
 		{
@@ -565,7 +565,7 @@ Muda o metadata CLASSE, invertendo seu valor
 */
 	function inverteStatusLegenda()
 	{
-        //error_reporting(E_ALL);
+        //error_reporting(0);
 		$valor = $this->layer->getmetadata("classe");
 		if($valor == "" || strtolower($valor) == "sim")
 		{$valor = "NAO";}

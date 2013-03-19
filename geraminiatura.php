@@ -64,7 +64,7 @@ tipo - tipo de imagem que ser&aacute; gerada mini|grande|todos
 */
 
 //clearstatcache();
-error_reporting(E_ALL);
+error_reporting(0);
 //set_time_limit(300);
 //ini_set('max_execution_time', 300);
 //
@@ -87,7 +87,7 @@ if(!function_exists("versao"))
 require_once($locaplic."/classesphp/pega_variaveis.php");
 include_once ($locaplic."/classesphp/carrega_ext.php");
 */
-include_once (__DIR__."/admin/php/admin.php");
+include_once (dirname(__FILE__)."/admin/php/admin.php");
 $versao = versao();
 $versao = $versao["principal"];
 //
@@ -122,7 +122,7 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 			exit;
 		}
 	}
-	error_reporting(E_ALL);
+	error_reporting(0);
 	$arqs = listaArquivos("temas");
 	ob_start();
 	foreach ($arqs["arquivos"] as $arq)

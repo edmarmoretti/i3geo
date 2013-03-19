@@ -140,7 +140,7 @@ $numSteps - n&uacute;mero de cores finais
 	return $arquivos;
   }
   public function geraCoresColourRamp($locaplic="",$codigo=1,$inicio=0,$fim=255,$ncores=0){
-	//error_reporting(E_ALL);
+	//error_reporting(0);
 	$arq = $locaplic."/symbols/colourramp/".$codigo.".cores";
 	$handle = fopen ($arq, "r");
 	$conteudo = fread ($handle, filesize ($arq));

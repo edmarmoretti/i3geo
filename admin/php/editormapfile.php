@@ -39,7 +39,7 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
-include_once(__DIR__."/login.php");
+include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"CRIARNOVOMAP",
 		"EDITASIMBOLO",
@@ -143,7 +143,7 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "EDITASIMBOLO":
-		include_once(__DIR__."/../../classesphp/classe_legenda.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_legenda.php");
 		$versao = versao();
 		$versao = $versao["principal"];
 		if($base == "" || !isset($base)){
@@ -1068,7 +1068,7 @@ switch (strtoupper($funcao))
 function clonarMapfile()
 {
 	global $novomap, $codigomap, $locaplic;
-	error_reporting(E_ALL);
+	error_reporting(0);
 	$arqtema = $locaplic."/temas/".$codigomap.".map";
 	$novotema = $locaplic."/temas/".$novomap.".map";
 	copy($arqtema,$novotema);
@@ -1082,7 +1082,7 @@ function clonarMapfile()
 function refazerLayer()
 {
 	global $nomelayer, $codigomap, $maporigem, $locaplic;
-	error_reporting(E_ALL);
+	error_reporting(0);
 	$mapa = ms_newMapObj($maporigem);
 	$arqtema = $locaplic."/temas/".$codigomap.".map";
 	$mapatema = ms_newMapObj($arqtema);
@@ -1686,7 +1686,7 @@ function alterarConexao()
 function pegaMetadados()
 {
 	global $codigoMap,$codigoLayer,$locaplic,$postgis_mapa;
-	//error_reporting(E_ALL);
+	//error_reporting(0);
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1833,7 +1833,7 @@ function pegaClasseGeral()
 {
 	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
 
-	error_reporting(E_ALL);
+	error_reporting(0);
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);

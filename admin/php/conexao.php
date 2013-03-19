@@ -45,7 +45,7 @@ if(isset($locaplic) && $locaplic != ""){
 	include($locaplic."/ms_configura.php");
 }
 else{
-	include(__DIR__."/../../ms_configura.php");
+	include(dirname(__FILE__)."/../../ms_configura.php");
 }
 if(!isset($conexaoadmin)){
 	$conexaoadmin = "";

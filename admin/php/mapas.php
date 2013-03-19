@@ -40,7 +40,7 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que de
 
 */
 
-include_once(__DIR__."/login.php");
+include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"ALTERARMAPA",
 		"EXCLUIRMAPA",

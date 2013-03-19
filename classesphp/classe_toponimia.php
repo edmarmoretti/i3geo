@@ -77,7 +77,7 @@ $tema - nome do tema que ser&aacute; processado
 */
 	function __construct($map_file,$tema="",$locaplic="")
 	{
-  		//error_reporting(E_ALL);
+  		//error_reporting(0);
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
   		else
@@ -159,7 +159,7 @@ Retorno:
 */
 	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema="sim")
 	{
-		error_reporting(E_ALL);
+		error_reporting(0);
 		if(!$this->layer){return "erro";}
 		if (!isset($tipo)){$tipo = "";}
 		if ($item != "") //o layer nao tem tabela mas tem toponimia

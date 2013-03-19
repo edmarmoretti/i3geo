@@ -1,7 +1,7 @@
 <?php
 require_once("../../classesphp/funcoes_gerais.php");
 include_once ("../../classesphp/carrega_ext.php");
-error_reporting(E_ALL);
+error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($_POST["g_sid"]))
 {session_id($_POST["g_sid"]);}
@@ -16,7 +16,7 @@ $map_file = $_SESSION["map_file"];
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
-error_reporting(E_ALL);
+error_reporting(0);
 require_once ("../../ms_configura.php");
 $dirmap = dirname($map_file);
 $arquivo = "";

@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -14,7 +14,7 @@ Ativa as etiquetas de um tema.
 <Toponimia->ativaEtiquetas>
 */
 	case "ATIVAETIQUETAS":
-		include_once(__DIR__."/../../classesphp/classe_toponimia.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
 		$retorno = $m->ativaEtiquetas($item);
@@ -29,7 +29,7 @@ Desativa as etiquetas de um tema.
 <Toponimia->removeEtiquetas>
 */
 	case "REMOVEETIQUETAS":
-		include_once(__DIR__."/../../classesphp/classe_toponimia.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
 		$retorno = $m->removeEtiquetas();

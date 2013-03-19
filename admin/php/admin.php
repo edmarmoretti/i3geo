@@ -33,12 +33,13 @@ Arquivo:
 
 i3geo/admin/php/admin.php
 */
-if(!isset($locaplic)){
+if(!isset($locaplic) || !isset($dir_tmp)){
 	$locaplic = "";
-	include(__DIR__."/../../ms_configura.php");
+	include(dirname(__FILE__)."/../../ms_configura.php");
 }
 if(!file_exists($dir_tmp)){
 	@mkdir ($dir_tmp,0777);
+	chmod($dir_tmp,0777);
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
 error_reporting(0);
@@ -181,7 +182,7 @@ function pegaDados($sql,$locaplic="")
 	else
 		include("$locaplic/admin/php/conexao.php");
 
-	error_reporting(E_ALL);
+	error_reporting(0);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 	if($q)
 	{

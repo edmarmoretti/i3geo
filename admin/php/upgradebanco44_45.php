@@ -61,7 +61,7 @@ else{
 		exit;
 	}
 }
-error_reporting(E_ALL);
+error_reporting(0);
 $tabelas = array(
 "CREATE TABLE i3geoadmin_comentarios (comentario TEXT, data TEXT, openidnome TEXT, openidimagem TEXT, openidservico TEXT, openidusuario TEXT, openidurl TEXT, id_tema NUMERIC)",
 "CREATE TABLE i3geoadmin_acessostema (codigo_tema TEXT, nacessos NUMERIC,dia NUMERIC, mes NUMERIC, ano NUMERIC)"

@@ -44,7 +44,7 @@ error_reporting(0);
 //n&atilde;o sei pq mas ob_start e clean s&atilde;o necess&aacute;rios no Linux para n&atilde;o gerar erro indesejado
 //
 ob_start();
-include_once(__DIR__."/login.php");
+include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"ALTERARWS",
 		"EXCLUIR"

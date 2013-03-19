@@ -75,8 +75,8 @@ $tema - nome do tema
 */
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
-		//error_reporting(E_ALL);
-		include_once(__DIR__."/funcoes_gerais.php");
+		//error_reporting(0);
+		include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		$this->locaplic = $locaplic;
 		$this->mapa = ms_newMapObj($map_file);
 		$this->arquivo = $map_file;
@@ -569,7 +569,7 @@ Adiciona opacidade vari&aacute;vel de 0 a 100 conforme o n&uacute;mero de classe
 */
 	function adicionaopacidade()
 	{
-		//error_reporting(E_ALL);
+		//error_reporting(0);
 		if(!$this->layer){return "erro";}
 		$numclasses = $this->layer->numclasses;
 		$n = intval(100 / $numclasses);
@@ -600,7 +600,7 @@ $cor {string} - cor rgb
 */
 	function alteracor($idclasse,$cor)
 	{
-		error_reporting(E_ALL);
+		error_reporting(0);
 		if(!$this->layer){return "erro";}
 		$numclasses = $this->layer->numclasses;
 		$cor = str_replace(" ",",",$cor);
@@ -627,7 +627,7 @@ $tipo {string} - tipo de representa&ccedil;&atilde;o
 */
 	function alterageometria($tipo)
 	{
-		error_reporting(E_ALL);
+		error_reporting(0);
 		if(!$this->layer){return "erro";}
 		$numclasses = $this->layer->numclasses;
 		for($i=0;$i<$numclasses;++$i)

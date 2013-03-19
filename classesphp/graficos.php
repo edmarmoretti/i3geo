@@ -38,7 +38,7 @@ function graficoPizza()
 {
 	global $cp,$map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path,$R_libpath;
 	global $percentual,$nome,$margem,$margemexterna,$margeminterna,$border,$las,$radius,$lwd,$lty,$fontsub,$fontmain,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$fg,$colmain,$font,$cex,$nval,$main,$cexmain,$sub,$cexsub;
-	//error_reporting(E_ALL);
+	//error_reporting(0);
 	//gera os nomes dos arquivos com os dados
 	$dir = dirname(dirname($map_file));
 	if($nome == "")
@@ -378,7 +378,7 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 {
 	global $interface;
 	//pega os valores
-	//error_reporting(E_ALL);
+	//error_reporting(0);
 	$map = ms_newMapObj($map_file);
 	if($interface == "googlemaps")
 	{

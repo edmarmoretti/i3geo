@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -14,7 +14,7 @@ Pega a cor do fundo do mapa atual.
 <Mapa->corfundo>
 */
 	case "PEGACORFUNDO":
-		include_once(__DIR__."/../../classesphp/classe_mapa.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_mapa.php");
 		//no caso da interface openlayers, o mapfile &eacute; outro
 		/*
 		$nomefundo = str_replace(".map","fundo.map",$map_file);
@@ -34,7 +34,7 @@ Altera a cor do fundo do mapa.
 <Mapa->corfundo>
 */
 	case "CORFUNDO":
-		include_once(__DIR__."/../../classesphp/classe_mapa.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$m->corfundo($cor);

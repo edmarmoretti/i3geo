@@ -3,7 +3,7 @@ require_once("../../../classesphp/pega_variaveis.php");
 require_once("../../../classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
-error_reporting(E_ALL);
+error_reporting(0);
 if (isset($_FILES['i3GEOuploadfile']['name']))
 {
 	require_once ("../../../ms_configura.php");

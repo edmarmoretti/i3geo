@@ -62,9 +62,9 @@ ogc.php?intervalo=0,50
 //valida&ccedil;&otilde;es e includes
 //
 $cache = true;
-require_once(__DIR__."/classesphp/carrega_ext.php");
-include(__DIR__."/ms_configura.php");
-include(__DIR__."/classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/classesphp/carrega_ext.php");
+include(dirname(__FILE__)."/ms_configura.php");
+include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
 if(!isset($temas) && isset($tema)){
 	$temas = $tema;
 }
@@ -104,19 +104,19 @@ if(isset($ajuda)){
 //imprime na tela a lista de temas dispon&iacute;veis
 //
 if(isset($lista) && $lista == "temas"){
-	include_once(__DIR__."/classesphp/classe_menutemas.php");
+	include_once(dirname(__FILE__)."/classesphp/classe_menutemas.php");
 	ogc_imprimeListaDeTemas();
 	exit;
 }
 if(isset($lista) && $lista == "temaswfs"){
-	include_once(__DIR__."/classesphp/classe_menutemas.php");
+	include_once(dirname(__FILE__)."/classesphp/classe_menutemas.php");
 	ogc_imprimeListaDeTemasWfs();
 	exit;
 }
 //
 //cria o web service
 //
-include(__DIR__."/classesphp/funcoes_gerais.php");
+include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 error_reporting(0);
 $versao = versao();
 $versao = $versao["principal"];

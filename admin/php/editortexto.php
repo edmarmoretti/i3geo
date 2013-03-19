@@ -33,7 +33,7 @@ body {
 				$gravarTexto = $_POST["texto"];
 				$_POST["texto"] = "";
 			}
-			include_once(__DIR__."/login.php");
+			include_once(dirname(__FILE__)."/login.php");
 			if(verificaOperacaoSessao("admin/php/editortexto") == false){
 				echo "Vc nao pode realizar essa operacao.";exit;
 			}

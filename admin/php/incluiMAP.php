@@ -34,7 +34,7 @@ i3geo/admin/php/incluiMAP.php
 */
 
 $funcao = "";
-$locaplic = __DIR__."/../..";
+$locaplic = dirname(__FILE__)."/../..";
 include_once("admin.php");
 include_once("conexao.php");
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){

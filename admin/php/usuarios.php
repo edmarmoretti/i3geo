@@ -62,7 +62,7 @@ error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //
-include_once(__DIR__."/login.php");
+include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"ALTERARUSUARIOS",
 		"EXCLUIRUSUARIO"
@@ -131,7 +131,7 @@ switch (strtoupper($funcao))
 cpjson($retorno);
 function enviarSenhaEmail(){
 	global $id_usuario;
-	include(__DIR__."/conexao.php");
+	include(dirname(__FILE__)."/conexao.php");
 	$novaSenha = rand(9000,1000000);
 	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where id_usuario = $id_usuario and ativo = 1");
 	if(count($dados) > 0){
@@ -152,7 +152,7 @@ function alterarUsuarios()
 	global $id_usuario,$ativo,$data_cadastro,$email,$login,$nome_usuario,$senha;
 	try
 	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		if($convUTF){
 			$nome_usuario = utf8_encode($nome_usuario);
 		}
@@ -197,7 +197,7 @@ function adicionaPapelUsuario(){
 	global $id_usuario,$id_papel;
 	try
 	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papelusuario (id_usuario,id_papel) VALUES ($id_usuario,$id_papel)");
 		$dbhw = null;
 		$dbh = null;
@@ -212,7 +212,7 @@ function excluirUsuario()
 	global $id_usuario;
 	try
 	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		//echo "DELETE from ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario";exit;
 		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario ");
 		$dbhw = null;
@@ -229,7 +229,7 @@ function excluirPapelUsuario()
 	global $id_usuario,$id_papel;
 	try
 	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		//echo "DELETE from ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario";exit;
 		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geousr_papelusuario WHERE id_usuario = $id_usuario AND id_papel = $id_papel ");
 		$dbhw = null;

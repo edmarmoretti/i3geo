@@ -76,7 +76,7 @@ $map_file - Endere&ccedil;o do mapfile no servidor.
 */
 	function __construct($map_file,$locaplic="")
 	{
-  		error_reporting(E_ALL);
+  		error_reporting(0);
   		if (!function_exists('ms_newMapObj')) {return false;}
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
@@ -1641,7 +1641,7 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 		//cria o shapefile com os dados
 		if (count($resultado) > 0){
 			//para manipular dbf
-			include_once (__DIR__."/../pacotes/phpxbase/api_conversion.php");
+			include_once (dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php");
 			$diretorio = dirname($this->arquivo);
 			$tipol = MS_SHP_POLYGON;
 			if ($tipog == "georsspoint"){$tipol = MS_SHP_POINT;}

@@ -48,7 +48,7 @@ $atlasxml - Objeto xml com o atlas.
 */
 	function __construct($xml)
 	{
-  		error_reporting(E_ALL);
+  		error_reporting(0);
   		$this->xml = $xml;
 	}
 /*

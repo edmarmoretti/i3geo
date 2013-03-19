@@ -209,7 +209,7 @@ class Atributos
 		if(!$this->layer){
 			return "erro";
 		}
-		//error_reporting(E_ALL);
+		//error_reporting(0);
 		$this->layer->set("template","none.htm");
 		//$this->layer->setfilter("");
 		$ext = "";
@@ -577,7 +577,7 @@ class Atributos
 		*/
 	function buscaRegistros($palavra,$lista,$tipo,$onde)
 	{
-		//error_reporting(E_ALL);
+		//error_reporting(0);
 		$resultado = array();
 		if ($onde == "mapa")
 		{
@@ -1344,7 +1344,7 @@ class Atributos
 						if($editavel == "sim"){
 							$id_medida_variavel = $layer->getMetaData("METAESTAT_ID_MEDIDA_VARIAVEL");
 							if($id_medida_variavel != ""){
-								include_once(__DIR__."/../admin/php/classe_metaestat.php");
+								include_once(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
 								$m = new Metaestat();
 								$medidaVariavel = $m->listaMedidaVariavel("",$id_medida_variavel);
 								$editavel = $medidaVariavel["colunavalor"];
@@ -1765,7 +1765,7 @@ class Atributos
 				//caso esri
 				if($n[0] == "")
 				{
-					//error_reporting(E_ALL);
+					//error_reporting(0);
 					$resposta = file($res);
 					$cabecalho = str_replace('"   "','"|"',$resposta[0]);
 					$cabecalho = explode("|",$cabecalho);
@@ -2118,7 +2118,7 @@ class Atributos
 				}
 				//caso esri
 				if($n[0] == ""){
-					//error_reporting(E_ALL);
+					//error_reporting(0);
 					$resposta = file($res);
 					$cabecalho = str_replace('"   "','"|"',$resposta[0]);
 					$cabecalho = explode("|",$cabecalho);

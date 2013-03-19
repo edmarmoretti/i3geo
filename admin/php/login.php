@@ -62,8 +62,8 @@ error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //
-include_once(__DIR__."/../../classesphp/pega_variaveis.php");
-include_once(__DIR__."/admin.php");
+include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once(dirname(__FILE__)."/admin.php");
 error_reporting(0);
 session_write_close();
 session_name("i3GeoLogin");
@@ -180,7 +180,7 @@ switch (strtoupper($funcao))
 	break;
 }
 function alterarSenha($usuario,$novaSenha){
-	include(__DIR__."/conexao.php");
+	include(dirname(__FILE__)."/conexao.php");
 	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where senha = '".md5($_SESSION["senha"])."' and login = '$usuario' and ativo = 1",$locaplic);
 	if(count($dados) > 0){
 		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='".md5($novaSenha)."' WHERE login = '$usuario'");
@@ -196,7 +196,7 @@ function alterarSenha($usuario,$novaSenha){
 	}
 }
 function recuperarSenha($usuario){
-	include(__DIR__."/conexao.php");
+	include(dirname(__FILE__)."/conexao.php");
 	$novaSenha = rand(9000,1000000);
 	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$locaplic);
 	if(count($dados) > 0){
@@ -263,7 +263,7 @@ function validaSessao(){
 //registra as operacoes, papeis e grupos do usuario na SESSION
 //
 function autenticaUsuario($usuario,$senha){
-	include(__DIR__."/conexao.php");
+	include(dirname(__FILE__)."/conexao.php");
 	$senhamd5 = md5($senha);
 	//verifica se o usuario esta cadastrado no ms_configura.php em $i3geomaster
 	if(verificaMaster($usuario,$senha) == true){

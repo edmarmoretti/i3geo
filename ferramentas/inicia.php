@@ -26,7 +26,7 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-include_once(__DIR__."/../classesphp/pega_variaveis.php");
+include_once(dirname(__FILE__)."/../classesphp/pega_variaveis.php");
 session_name("i3GeoPHP");
 session_id($g_sid);
 session_start();
@@ -35,7 +35,7 @@ foreach(array_keys($_SESSION) as $k){
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
 $postgis_mapa = $_SESSION["postgis_mapa"];
-include_once(__DIR__."/../classesphp/funcoes_gerais.php");
+include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 if(isset($fingerprint))	{
 	$f = explode(",",$fingerprint);
 	if($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id())){
@@ -43,9 +43,9 @@ if(isset($fingerprint))	{
 		return;
 	}
 }
-include_once(__DIR__."/../ms_configura.php");
-include_once(__DIR__."/../classesphp/classe_vermultilayer.php");
-include_once(__DIR__."/../classesphp/classe_estatistica.php");
+include_once(dirname(__FILE__)."/../ms_configura.php");
+include_once(dirname(__FILE__)."/../classesphp/classe_vermultilayer.php");
+include_once(dirname(__FILE__)."/../classesphp/classe_estatistica.php");
 //
 //substitui a string de conex&atilde;o
 //
@@ -60,12 +60,12 @@ function redesenhaMapa()
 	{$utilizacgi = "nao";}
 	if (connection_aborted()){exit();}
 	if($interface == "googleearth" && $mapexten != ""){
-		include_once(__DIR__."/../classesphp/classe_navegacao.php");
+		include_once(dirname(__FILE__)."/../classesphp/classe_navegacao.php");
 		$m = new Navegacao($map_file);
 		$m->mudaExtensao($mapexten);
 		$m->salva();
 	}
-	include_once(__DIR__."/../classesphp/classe_mapa.php");
+	include_once(dirname(__FILE__)."/../classesphp/classe_mapa.php");
 	$m = New Mapa($map_file);
 	$par = $m->parametrosTemas();
 	//

@@ -98,7 +98,7 @@ $ext - extens&atilde;o geogr&aacute;fica do mapa
 
 	function __construct($map_file,$tema="",$ext="")
 	{
-  		include_once(__DIR__."/funcoes_gerais.php");
+  		include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->qyfile = str_replace(".map",".qy",$map_file);
@@ -592,7 +592,7 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 		}
 		else
 		{
-			error_reporting(E_ALL);
+			error_reporting(0);
 			$projInObj = ms_newprojectionobj("proj=latlong");
 			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$pt->x.",x_0=5000000,y_0=10000000");
 
@@ -716,7 +716,7 @@ $shp_atual - Indices dos elementos j&aacute; selecionados.
 */
 	function selecaoAdiciona($shpi,$shp_atual)
 	{
-		error_reporting(E_ALL);
+		error_reporting(0);
 		if(!$this->layer){return "erro";}
 		$indxlayer = $this->layer->index;
 		$shp = array_merge($shpi,$shp_atual);

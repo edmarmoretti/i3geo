@@ -2,7 +2,7 @@
 require_once("../../classesphp/pega_variaveis.php");
 require_once("../../classesphp/funcoes_gerais.php");
 include_once ("../../classesphp/carrega_ext.php");
-error_reporting(E_ALL);
+error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($g_sid))
 {session_id($g_sid);}

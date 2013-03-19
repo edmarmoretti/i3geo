@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -14,7 +14,7 @@ Cria um novo tema com a sele&ccedil;&atilde;o atual.
 <Selecao->selecao2tema>
 */
 	case "CRIATEMASEL":
-		include_once(__DIR__."/../../classesphp/classe_selecao.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$retorno = $m->selecao2tema($locaplic,$dir_tmp);
@@ -29,7 +29,7 @@ Limpa a sele&ccedil;&atilde;o existente em um tema.
 <Selecao->selecaoLimpa>
 */
 	case "LIMPASEL":
-		include_once(__DIR__."/../../classesphp/classe_selecao.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		$m = new Selecao($map_file,$tema);
 		$retorno = $m->selecaoLimpa();
 		//
@@ -46,7 +46,7 @@ Sleciona elementos de um tema com base em outro tema.
 <Selecao->selecaoTema>
 */
 	case "SELECAOTEMA":
-		include_once(__DIR__."/../../classesphp/classe_selecao.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		copiaSeguranca($map_file);
 		$temas = explode(",",$tema);
 		foreach($temas as $tema)
@@ -67,7 +67,7 @@ Seleciona elementos com base nos atributos utilizando sintaxe complexa.
 <Selecao->selecaoAtributos2>
 */
 	case "SELECAOATRIB2":
-		include_once(__DIR__."/../../classesphp/classe_selecao.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema,$ext);
 		$retorno = $m->selecaoAtributos2($filtro,$tipo);
@@ -82,7 +82,7 @@ Seleciona elementos utilizando a extens&atilde;o do mapa.
 <Selecao->selecaoEXT>
 */
 	case "SELECAOEXT":
-		include_once(__DIR__."/../../classesphp/classe_selecao.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		copiaSeguranca($map_file);
 		$temas = explode(",",$tema);
 		foreach($temas as $tema)
@@ -103,7 +103,7 @@ Seleciona elementos utilizando um ret&acirc;ngulo.
 <Selecao->selecaoBOX>
 */
 	case "SELECAOBOX":
-		include_once(__DIR__."/../../classesphp/classe_selecao.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		copiaSeguranca($map_file);
 		$temas = explode(",",$tema);
 		foreach($temas as $tema)
@@ -122,8 +122,8 @@ Seleciona elementos utilizando um ponto.
 <Selecao->selecaoPT>
 */
 	case "SELECAOPT":
-		//error_reporting(E_ALL);
-		include_once(__DIR__."/../../classesphp/classe_selecao.php");
+		//error_reporting(0);
+		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		copiaSeguranca($map_file);
 		if(!isset($xy)){$xy = "";}
 		$temas = explode(",",$tema);
@@ -159,7 +159,7 @@ Lista os pontos dos elementos selecionados de um layer
 <SHP->listaPontosShapeSel>
 */
 	case "LISTAPONTOSSHAPESEL":
-		include_once(__DIR__."/../../classesphp/classe_shp.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_shp.php");
 		$m = new SHP($map_file,$tema);
 		$retorno = $m->listaPontosShapeSel();
 	break;
@@ -183,7 +183,7 @@ Include:
 function selecaoPoli($xs,$ys,$tema,$tipo)
 {
 	global $map_file;
-	include_once(__DIR__."/../../classesphp/classe_selecao.php");
+	include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 	$temas = explode(",",$tema);
 	foreach($temas as $tema)
 	{

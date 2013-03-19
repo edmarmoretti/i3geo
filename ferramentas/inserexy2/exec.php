@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -14,7 +14,7 @@ Insere um ponto em um shape file existente.
 <SHP->insereSHP>
 */
 	case "INSERESHP":
-		include_once(__DIR__."/../../classesphp/classe_shp.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_shp.php");
 		copiaSeguranca($map_file);
 		$m = new SHP($map_file,$tema);
 		if (!isset($projecao)){$projecao = "";}

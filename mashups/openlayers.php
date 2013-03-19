@@ -2,12 +2,12 @@
 include_once("../ms_configura.php");
 include_once("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
-error_reporting(E_ALL);
+error_reporting(0);
 //
 //recupera um mapa salvo no banco de administracao
 //
 if(!empty($restauramapa)){
-	include(__DIR__."/../admin/php/conexao.php");
+	include(dirname(__FILE__)."/../admin/php/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}

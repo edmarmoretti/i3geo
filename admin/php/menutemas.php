@@ -42,8 +42,8 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que de
 
 */
 
-include_once(__DIR__."/admin.php");
-include_once(__DIR__."/login.php");
+include_once(dirname(__FILE__)."/admin.php");
+include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"ALTERAMENUS",
 		"ALTERAGRUPOS",
@@ -1111,7 +1111,7 @@ function registraTema()
 function alteraTemas()
 {
 	global $esquemaadmin,$nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags,$kmz,$locaplic,$es,$it,$en;
-	//error_reporting(E_ALL);
+	//error_reporting(0);
 	try
 	{
 		$retorna = "ok";

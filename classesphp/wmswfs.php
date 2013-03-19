@@ -335,7 +335,7 @@ function temaswms()
 	
 	include_once("../admin/php/webservices.php");
 
-	//error_reporting(E_ALL);
+	//error_reporting(0);
 	if($wms_service_request == "erro") {
 		# Cannot download the capabilities file.
 		//registra a tentativa de acesso

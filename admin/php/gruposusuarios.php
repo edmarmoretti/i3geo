@@ -62,7 +62,7 @@ error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //
-include_once(__DIR__."/login.php");
+include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"ALTERARGRUPOS",
 		"EXCLUIRGRUPO"
@@ -130,7 +130,7 @@ function alterarGrupos()
 	global $id_grupo,$nome,$descricao;
 	try
 	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		if($convUTF){
 			$nome = utf8_encode($nome);
 			$descricao = utf8_encode($descricao);
@@ -165,7 +165,7 @@ function alterarGrupos()
 function adicionaUsuarioGrupo(){
 	global $id_usuario,$id_grupo;
 	try	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_grupousuario (id_usuario,id_grupo) VALUES ($id_usuario,$id_grupo)");
 		$dbhw = null;
 		$dbh = null;
@@ -180,7 +180,7 @@ function excluirGrupo()
 	global $id_grupo;
 	try
 	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geousr_grupos WHERE id_grupo = $id_grupo ");
 		$dbhw = null;
 		$dbh = null;
@@ -196,7 +196,7 @@ function excluirUsuarioGrupo()
 	global $id_usuario,$id_grupo;
 	try
 	{
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		//echo "DELETE from ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario";exit;
 		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geousr_grupousuario WHERE id_usuario = $id_usuario AND id_grupo = $id_grupo ");
 		$dbhw = null;

@@ -35,8 +35,12 @@ Arquivo:
 i3geo/classesphp/mapa_googleearth.php
 
 */
-//error_reporting(E_ALL);
+//error_reporting(0);
 error_reporting(0);
+//para efeitos de compatibilidade
+if (!function_exists('ms_GetVersion')){
+	include_once ("carrega_ext.php");
+}
 clearstatcache();
 if (!function_exists('ms_GetVersion'))
 {

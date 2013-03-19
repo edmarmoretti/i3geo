@@ -61,7 +61,7 @@ $arquivo - Nome completo da imagem em disco.
 */
 	function __construct($arquivo)
 	{
-  		//error_reporting(E_ALL);
+  		//error_reporting(0);
   		if (file_exists($arquivo))
   		{
   			$this->arquivoimg = $arquivo;

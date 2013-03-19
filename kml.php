@@ -67,13 +67,13 @@ $protocolo = strtolower($protocolo[0]);
 $protocolo1 = strtolower($protocolo . '://'.$_SERVER['SERVER_NAME']);
 $protocolo = $protocolo . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/kml.php","",$protocolo.$_SERVER["PHP_SELF"]);
-//error_reporting(E_ALL);
+//error_reporting(0);
 if(!isset($perfil)){$perfil = "";}
 //
 //monta o xml
 //
 echo "<Document><name>Menu i3geo</name><open>0</open><description></description><visibility>0</visibility>\n";
-include(__DIR__."/admin/php/admin.php");
+include(dirname(__FILE__)."/admin/php/admin.php");
 if(!empty($esquemaadmin)){
 	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }

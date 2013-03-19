@@ -24,7 +24,7 @@ This file is part of KMLMAPSERVER.
 
 http://10.1.1.34:80/i3geo/pacotes/kmlmapserver/kmlservice.php?map=bioma&typename=bioma&request=kml
 */
-error_reporting(E_ALL);
+error_reporting(0);
 set_time_limit(0);
 include 'classes/kmlserver.class.php';
 $server = new KmlServer();

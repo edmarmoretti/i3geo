@@ -49,7 +49,7 @@ class Metaestat{
 	*/
 	function __construct(){
 		error_reporting(0);
-		include(__DIR__."/conexao.php");
+		include(dirname(__FILE__)."/conexao.php");
 		//vem do include
 		$this->dir_tmp = $dir_tmp;
 		$this->locaplic = $locaplic;
@@ -777,7 +777,7 @@ class Metaestat{
 				//var_dump($valores);exit;
 				$min = $valores[0];
 				$max = $valores[$quantidade - 1];
-				include_once(__DIR__."/../../classesphp/classe_estatistica.php");
+				include_once(dirname(__FILE__)."/../../classesphp/classe_estatistica.php");
 				$calc = new estatistica();
 				$calc->calcula($valores);
 				$v = $calc->resultado;
@@ -2137,7 +2137,7 @@ class Metaestat{
 		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
 		$dados = $this->obtemDadosTabelaDB($regiao["codigo_estat_conexao"],$regiao["esquemadb"],$regiao["tabela"],"sim");
 		$tipol = $this->listaPropGeoRegiao($codigo_tipo_regiao);
-		include_once(__DIR__."/../../classesphp/classe_shp.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_shp.php");
 		$s = new SHP();
 		//st_dimension returns 0 for POINT, 1 for LINESTRING, 2 for POLYGON
 		//echo MS_SHP_POINT.", ".MS_SHP_ARC.", ".MS_SHP_POLYGON.", ".MS_SHP_MULTIPOINT;

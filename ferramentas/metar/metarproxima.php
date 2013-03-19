@@ -46,7 +46,7 @@ echo "<html><style>
 	{padding-top:1px;COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 	</style>";
 require_once("../../classesphp/pega_variaveis.php");
-error_reporting(E_ALL);
+error_reporting(0);
 $url = "http://ws.geonames.org/findNearByWeatherXML?lat=$y&lng=$x&lang=pt";
 
 $xml = simplexml_load_file($url);

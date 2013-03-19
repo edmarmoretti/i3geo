@@ -50,7 +50,7 @@ body {
 	if(!isset($locaplic))
 	{
 		$locaplic = "";
-		include(__DIR__."/../ms_configura.php");
+		include(dirname(__FILE__)."/../ms_configura.php");
 	}
 	include_once($locaplic."/classesphp/pega_variaveis.php");
 	include_once($locaplic."/admin/php/admin.php");

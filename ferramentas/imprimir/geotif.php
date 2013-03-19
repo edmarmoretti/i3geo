@@ -59,7 +59,7 @@ if (array_search( "MapScript", $exts) != TRUE)
 	{dl('php_mapscript.so');}
 }
 require("../../classesphp/funcoes_gerais.php");
-error_reporting(E_ALL);
+error_reporting(0);
 $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
 $temp = str_replace(".map","xxx.map",$map_file);

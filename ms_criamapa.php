@@ -141,7 +141,7 @@ $parurl = array_merge($_GET,$_POST);
 if (!isset($parurl["debug"]))
 {error_reporting(0);$debug="nao";}
 else
-{error_reporting(E_ALL);$debug="sim";}
+{error_reporting(0);$debug="sim";}
 if(!isset($funcao))
 {ob_end_clean();}
 /*
@@ -150,14 +150,14 @@ if(!isset($funcao))
 Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o.
 A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela própria inicializa&ccedil;&atilde;o do PHP.
 */
-include_once (__DIR__."/classesphp/carrega_ext.php");
+include_once (dirname(__FILE__)."/classesphp/carrega_ext.php");
 /*
 Include dos arquivos PHP.
 
 Inclui os programas php com fun&ccedil;&otilde;es utilizadas pelo ms_criamapa.php
 */
-include_once (__DIR__."/classesphp/pega_variaveis.php");
-include_once (__DIR__."/classesphp/funcoes_gerais.php");
+include_once (dirname(__FILE__)."/classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
 
@@ -181,7 +181,7 @@ if(empty($_SESSION["usuario"])){
 //se restauramapa estiver definido, usa o mapfile guardado no banco como a base
 //
 if(!empty($restauramapa)){
-	include(__DIR__."/admin/php/conexao.php");
+	include(dirname(__FILE__)."/admin/php/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}
@@ -206,7 +206,7 @@ if(!empty($restauramapa)){
 		$tempBaseX = $base;
 	}
 	if(!isset($dir_tmp)){
-		include_once (__DIR__."/ms_configura.php");
+		include_once (dirname(__FILE__)."/ms_configura.php");
 	}
 	if(isset($tempBaseX) && $tempBaseX != ""){
 		$base = $tempBaseX;
@@ -490,7 +490,7 @@ if(isset($url_wms))
 adaptaLayers();
 
 if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
-{require_once(__DIR__."/ms_registraip.php");}
+{require_once(dirname(__FILE__)."/ms_registraip.php");}
 //echo $tmpfname;exit;
 if ($interface != "mashup")
 {abreInterface($interface,$caminho,$tempo);}
@@ -673,7 +673,7 @@ function incluiTemasIniciais(){
 				if($extensao == ".map"){
 					$maptemp = @ms_newMapObj($arqtemp);
 					for($i=0;$i<($maptemp->numlayers);++$i){
-						//error_reporting(E_ALL);
+						//error_reporting(0);
 						$layern = $maptemp->getLayer($i);
 						if($layern->type == MS_LAYER_RASTER)
 						{$existeraster = true;}
@@ -776,11 +776,11 @@ function mostraAguarde()
 		echo '<div id="aguarde"><center>';
 		echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...preparando o mapa</p>';
 		echo '<table><tr>';
-		echo "<td colspan=3 ><center><img src='".__DIR__."/imagens/i3geo1.jpg'></td></tr>";
-		echo "<tr><td><center><img src='".__DIR__."/imagens/pspb.png'></td>";
-		echo "<td><center><img src='".__DIR__."/imagens/mapserv.png'></td>";
-		echo "<td><center><img src='".__DIR__."/imagens/yui-logo.png'></td>";
-		echo "<td><center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".__DIR__."/imagens/somerights20_pt.gif' ></a></td>";
+		echo "<td colspan=3 ><center><img src='".dirname(__FILE__)."/imagens/i3geo1.jpg'></td></tr>";
+		echo "<tr><td><center><img src='".dirname(__FILE__)."/imagens/pspb.png'></td>";
+		echo "<td><center><img src='".dirname(__FILE__)."/imagens/mapserv.png'></td>";
+		echo "<td><center><img src='".dirname(__FILE__)."/imagens/yui-logo.png'></td>";
+		echo "<td><center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".dirname(__FILE__)."/imagens/somerights20_pt.gif' ></a></td>";
 		echo "</tr></table>";
 		echo '<BODY bgcolor="white" style="background-color:white">';
 	}

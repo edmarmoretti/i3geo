@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -16,7 +16,7 @@ S&atilde;o considerados apenas os pontos próximos definidos por um buffer.
 <Analise->distanciaptpt>
 */
 	case "DISTANCIAPTPT":
-		include_once(__DIR__."/../../classesphp/classe_analise.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$temaorigem,$locaplic,$ext);
 		$temaoverlay = $m->criaBuffer($distancia,$locaplic);

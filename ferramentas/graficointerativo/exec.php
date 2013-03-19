@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -14,7 +14,7 @@ Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 <iniciaDadosGrafico>
 */
 	case "GRAFICOSELECAO":
-		include(__DIR__."/../../classesphp/graficos.php");
+		include(dirname(__FILE__)."/../../classesphp/graficos.php");
 		if(!isset($exclui))
 		{$exclui = "";}
 		if(!isset($tipo))

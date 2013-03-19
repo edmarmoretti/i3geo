@@ -51,7 +51,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 */
-$locaplic = __DIR__;
+$locaplic = dirname(__FILE__);
 include_once("admin/php/admin.php");
 include_once("ms_configura.php");
 if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
@@ -65,7 +65,7 @@ if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 		echo "<script>";
 		echo "var f = document.getElementById('formularioLoginMaster');";
 		echo "var ins = '<br><br><input type=checkbox name=criaPastaMstmp unchecked /> Cria a pasta $dir_tmp <br><br>';";
-		echo "ins += '<input type=checkbox name=criaLink unchecked /> Cria o link simbolico ".__DIR__."/../ms_tmp <br><br>';";
+		echo "ins += '<input type=checkbox name=criaLink unchecked /> Cria o link simbolico ".dirname(__FILE__)."/../ms_tmp <br><br>';";
 		echo "ins += '<input type=checkbox name=permPastaI3geo unchecked /> Altera as permissoes da pasta $locaplic <br>';";
 		echo "f.innerHTML += ins;";
 
@@ -80,7 +80,7 @@ else{
 		exit;
 	}
 }
-error_reporting(E_ALL);
+error_reporting(0);
 //echo "<pre>\n";
 echo "<span style=font-size:10px >Observa&ccedil;&atilde;o: se voc&ecirc; estiver usando Linux e a biblioteca CAIRO estiver instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e geral1debianv6.map para remover os coment&aacute;rios do OUTPUTFORMAT que utiliza SVG com o drive Cairo</span><br>\n";
 echo "<br><b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
@@ -128,7 +128,7 @@ if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaPastaMstmp"] == "on"){
 	}
 }
 if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaLink"] == "on"){
-	$d = __DIR__."/../ms_tmp";
+	$d = dirname(__FILE__)."/../ms_tmp";
 	echo "<br>Criando o link simb&oacute;lico $d \n";
 	if(!file_exists($d)){
 		@symlink($dir_tmp,$d);

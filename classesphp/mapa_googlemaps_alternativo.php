@@ -59,7 +59,7 @@ Arquivo:
 i3geo/classesphp/mapa_googlemaps.php
 
 */
-//error_reporting(E_ALL);
+//error_reporting(0);
 error_reporting(0);
 clearstatcache();
 //verifica&ccedil;&atilde;o de seguran&ccedil;a
@@ -346,7 +346,7 @@ function carregaCacheImagem(){
 function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
 	global $img,$map_size;
 	//layers que s&atilde;o sempre iguais
-	//error_reporting(E_ALL);
+	//error_reporting(0);
 	if($layer == "copyright" || $layer == "")
 	{$bbox = "";}
 	if($layer == "")

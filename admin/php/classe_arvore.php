@@ -122,7 +122,7 @@ class Arvore
 			$this->pubsql = "";
 		}
 		if(!function_exists("listaTemasIndevidos")){
-			include_once(__DIR__."/../../classesphp/funcoes_gerais.php");
+			include_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 		}
 		$this->temasindevidos = listaTemasIndevidos();
 	}
@@ -614,7 +614,7 @@ class Arvore
 	*/
 	function formataGruposMenu ($id_menu,$perfil,$listasgrupos)
 	{
-		//error_reporting(E_ALL);
+		//error_reporting(0);
 		$dados = $this->pegaGruposMenu($id_menu);
 		$resultado = array();
 		$temasraiz = array();
@@ -841,7 +841,7 @@ class Arvore
 	function execSQL($sql)
 	{
 		//echo "<br>".$sql;
-		//error_reporting(E_ALL);
+		//error_reporting(0);
 		$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
 		if($q)
 		{

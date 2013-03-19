@@ -162,7 +162,7 @@ $twitteroauth = array(
 	Tipo:
 	{string}
 */
-include(__DIR__."/versao.php");
+include(dirname(__FILE__)."/versao.php");
 /*
 	Variable: tituloInstituicao
 
@@ -250,7 +250,7 @@ Caminho completo onde fica o I3Geo
 Tipo:
 {string}
 */
-$locaplic = __DIR__;
+$locaplic = dirname(__FILE__);
 /*
  Variable: locmapserv
 
@@ -472,7 +472,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 else //se for linux
 {
 	//verifica se est&aacute; sendo utilizado o diret&oacute;rio "opt" ou "var"
-	$locaplic = __DIR__;
+	$locaplic = dirname(__FILE__);
 	if(dirname($locaplic) == "/opt/www/html"){
 		$dir_tmp = "/var/tmp/ms_tmp";
 	}

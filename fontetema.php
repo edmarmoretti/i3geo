@@ -39,9 +39,9 @@ Exemplos:
 fontetema.php?tema=bioma
 
 */
-include(__DIR__."/ms_configura.php");
-include(__DIR__."/classesphp/pega_variaveis.php");
-include(__DIR__."/admin/php/classe_arvore.php");
+include(dirname(__FILE__)."/ms_configura.php");
+include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
+include(dirname(__FILE__)."/admin/php/classe_arvore.php");
 
 $m = new Arvore($locaplic);
 $retorno = $m->pegaTemaPorCodigo($tema);

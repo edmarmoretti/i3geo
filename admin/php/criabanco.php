@@ -47,10 +47,10 @@
 		i3geo/admin/php/criabanco.php
 		*/
 		$funcao = "";
-		//echo __DIR__;
+		//echo dirname(__FILE__);
 		$esquemaadmin = "";
 		include("admin.php");
-		error_reporting(E_ALL);
+		error_reporting(0);
 		$tabelas = array(
 				//tabelas gerais do sistema de administracao
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_grupos (desc_grupo TEXT, id_grupo INTEGER PRIMARY KEY, nome_grupo TEXT, it TEXT, es TEXT, en TEXT)",

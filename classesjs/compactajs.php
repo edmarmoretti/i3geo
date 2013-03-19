@@ -34,7 +34,7 @@ i3geo/classesjs/compactajs.php
 //
 //compacta os arquivos do richdraw
 //
-$locaplic = __DIR__."/..";
+$locaplic = dirname(__FILE__)."/..";
 include_once("../admin/php/admin.php");
 include_once("../admin/php/conexao.php");
 

@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -14,7 +14,7 @@ Adiciona um tema baseado em um RSS.
 <Mapa->adicionaTemaGeoRSS>
 */
 	case "ADICIONATEMAGEORSS":
-		include_once(__DIR__."/../../classesphp/classe_mapa.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$retorno = $m->adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal);

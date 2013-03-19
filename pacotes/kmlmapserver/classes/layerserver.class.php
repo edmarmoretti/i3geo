@@ -946,8 +946,8 @@ class LayerServer {
 			$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 			$servidor = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'];
 			$temp = $this->map;
-			if(file_exists(__DIR__."/ms_configura.php")){
-				include(__DIR__."/ms_configura.php");
+			if(file_exists(dirname(__FILE__)."/ms_configura.php")){
+				include(dirname(__FILE__)."/ms_configura.php");
 			}
 			else{
 				include("../../ms_configura.php");
@@ -1082,7 +1082,7 @@ class LayerServer {
 		if($k != ""){
 			return $k;
 		}
-		include(__DIR__."/../../ms_configura.php");
+		include(dirname(__FILE__)."/../../ms_configura.php");
         return  $dir_tmp.'/'. md5($_SERVER['QUERY_STRING']) . ($this->_zipped ? '.kmz' : '.kml');
     }
 

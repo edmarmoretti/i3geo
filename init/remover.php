@@ -11,7 +11,7 @@
 Remove a tela inicial de apresenta&ccedil;&atilde;o do i3Geo substituindo-a pela inicialliza&ccedil;&atilde;o direta do mapa.
 Ap&oacute;s remover, a tela inicial pode ser vista utilizando-se o endere&ccedil;o i3geo/init.
 <?php
-$locaplic = __DIR__."/..";
+$locaplic = dirname(__FILE__)."/..";
 include_once("../admin/php/admin.php");
 include_once("../admin/php/conexao.php");
 
@@ -26,7 +26,7 @@ else{
 		exit;
 	}
 }
-error_reporting(E_ALL);
+error_reporting(0);
 unlink("../index.htm");
 unlink("../index.html");
 if(file_exists("../index.htm") || file_exists("../index.html")){

@@ -46,7 +46,7 @@ i3geo/admin/hiperbolica.php
 */
 
 error_reporting(0);
-include(__DIR__."/../ms_configura.php");
+include(dirname(__FILE__)."/../ms_configura.php");
 include("$locaplic/admin/php/admin.php");
 include("$locaplic/admin/php/conexao.php");
 //

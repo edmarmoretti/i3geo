@@ -24,9 +24,9 @@
 
 
 // Can be changed to another data connector class
-require_once (__DIR__.'/TME_i3geo_DataConnector.php');
+require_once (dirname(__FILE__).'/TME_i3geo_DataConnector.php');
 // Include engine class
-require_once (__DIR__.'/TME_Engine.php');
+require_once (dirname(__FILE__).'/TME_Engine.php');
 //
 //este programa pode ser incluido em outros que nao tenham sid aberto
 //nesse caso e necessario forcar o uso e evitar o bloqueio do programa
@@ -43,7 +43,7 @@ if(!isset($_GET["sid"]) && $verificaSID == true)
 	echo "Erro. Acesso não permitido";exit;
 }
 if(!isset($dir_tmp)){
-	include(__DIR__."/../../ms_configura.php");
+	include(dirname(__FILE__)."/../../ms_configura.php");
 }
 $colunas = str_replace(","," ",$_GET["colunasvalor"]);
 $colunas = explode(" ",$colunas);
@@ -82,7 +82,7 @@ $file = $map->getKML($dataConnector->url,$download);
 if(!$download){
 	if(!function_exists("cpjson"))
 	{
-		require(__DIR__."/../../classesphp/funcoes_gerais.php");
+		require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 	}
 	cpjson(array('url' => $file));
 }

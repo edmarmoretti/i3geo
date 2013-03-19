@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -14,7 +14,7 @@ Inclu&iacute; elementos em uma sele&ccedil;&atilde;o.
 <Selecao->incluiSel>
 */
 	case "INCLUISEL":
-		include_once(__DIR__."/../../classesphp/classe_selecao.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		$m = new Selecao($map_file,$tema);
 		$retorno = $m->incluiSel($ids);
 		//
@@ -31,7 +31,7 @@ Calcula estat&iacute;sticas b&aacute;sicas de uma tabela de um tema.
 <Atributos->estatDescritivas>
 */
 	case "ESTATISTICA":
-		include_once(__DIR__."/../../classesphp/classe_atributos.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_atributos.php");
 		$m = new Atributos($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->estatDescritivas($item,$exclui);
 	break;
@@ -43,7 +43,7 @@ Cria um gr&aacute;fico de pizza.
 <graficoPizza>
 */
 	case "GRAFICOPIZZA":
-		include_once(__DIR__."/../../classesphp/graficos.php");
+		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
 		$retorno = graficoPizza();
 	break;
 /*
@@ -54,7 +54,7 @@ Cria um gr&aacute;fico do tipo estrela.
 <graficoEstrela>
 */
 	case "GRAFICOESTRELA":
-		include_once(__DIR__."/../../classesphp/graficos.php");
+		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
 		$retorno = graficoEstrela();
 	break;
 /*
@@ -65,7 +65,7 @@ Cria um gr&aacute;fico de distribui&ccedil;&atilde;o de pontos.
 <graficoScatter>
 */
 	case "GRAFICOSCATTER":
-		include_once(__DIR__."/../../classesphp/graficos.php");
+		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
 		$retorno = graficoScatter();
 	break;
 /*
@@ -76,7 +76,7 @@ Cria um gr&aacute;fico de distribui&ccedil;&atilde;o de pontos com agrupamento e
 <graficoScatterBins>
 */
 	case "GRAFICOSCATTERBINS":
-		include_once(__DIR__."/../../classesphp/graficos.php");
+		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
 		$retorno = graficoScatterBins();
 	break;
 /*
@@ -87,7 +87,7 @@ Cria um gr&aacute;fico de linhas.
 <graficoLinhas>
 */
 	case "GRAFICOLINHAS":
-		include_once(__DIR__."/../../classesphp/graficos.php");
+		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
 		$retorno = graficoLinhas();
 	break;
 /*
@@ -98,7 +98,7 @@ Cria um gr&aacute;fico de histograma.
 <graficoHist>
 */
 	case "GRAFICOHIST":
-		include_once(__DIR__."/../../classesphp/graficos.php");
+		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
 		$retorno = graficoHist();
 	break;
 /*
@@ -109,7 +109,7 @@ Cria um gr&aacute;fico de barras.
 <graficoBarras>
 */
 	case "GRAFICOBARRAS":
-		include_once(__DIR__."/../../classesphp/graficos.php");
+		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
 		$retorno = graficoBarras();
 	break;
 /*
@@ -120,9 +120,9 @@ Faz a fus&atilde;o da imagem de um gr&aacute;fico com a imagem do mapa atual.
 <fusaoGrafico>
 */
 	case "FUSAOGRAFICO":
-		include_once(__DIR__."/../../classesphp/graficos.php");
+		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
 		restauraCon($map_file,$postgis_mapa);
-		include_once(__DIR__."/../../classesphp/classe_imagem.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_imagem.php");
 		if($map_file != "")
 		{
 			$mapa = ms_newMapObj($map_file);

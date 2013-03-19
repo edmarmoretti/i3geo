@@ -113,7 +113,7 @@ class DataConnector
     // Make data store
     function getDataStore($nomelayer,$colunasvalor,$colunanomeregiao,$titulo,$descricao,$ext=""){ //$indicatorID, $year, $region){
     	if(!function_exists("versao")){
-    		include(__DIR__."/../../classesphp/funcoes_gerais.php");
+    		include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
     	}
 
 		$versao = versao();

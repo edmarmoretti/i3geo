@@ -6,7 +6,7 @@
 require_once("../../classesphp/pega_variaveis.php");
 require_once("../../classesphp/funcoes_gerais.php");
 include_once ("../../classesphp/carrega_ext.php");
-error_reporting(E_ALL);
+error_reporting(0);
 session_name("i3GeoPHP");
 if(isset($g_sid) && $g_sid != ""){
 	session_id($g_sid);
@@ -34,7 +34,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	}
 	if(isset($dirDestino) && $dirDestino != ""){
 		$dirmap = $dirDestino;
-		include_once(__DIR__."/../../admin/php/login.php");
+		include_once(dirname(__FILE__)."/../../admin/php/login.php");
 		if(verificaOperacaoSessao("admin/php/editortexto") == false){
 			echo "Vc nao pode realizar salvar os dados no servidor em uma pasta espec&iacute;fica";exit;
 		}

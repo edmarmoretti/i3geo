@@ -68,7 +68,7 @@ $map_file - Endere&ccedil;o do mapfile no servidor.
 */
 	function __construct($map_file,$nomeImagem="",$locaplic="")
 	{
-  		//error_reporting(E_ALL);
+  		//error_reporting(0);
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
   		else

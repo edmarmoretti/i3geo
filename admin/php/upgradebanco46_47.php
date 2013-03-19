@@ -49,7 +49,7 @@ Arquivo:
 i3geo/admin/php/criabanco.php
 */
 $funcao = "";
-$locaplic = __DIR__."/../..";
+$locaplic = dirname(__FILE__)."/../..";
 include_once("admin.php");
 include_once("conexao.php");
 if(!empty($esquemaadmin)){
@@ -67,7 +67,7 @@ else{
 		exit;
 	}
 }
-error_reporting(E_ALL);
+error_reporting(0);
 //tabelas do controle de usuarios e sistema metaestat
 $tabelas = array(
 		"ALTER TABLE ".$esquemaadmin."i3geoadmin_mapas ADD mapfile TEXT",

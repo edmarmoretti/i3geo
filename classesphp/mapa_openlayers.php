@@ -59,6 +59,10 @@ i3geo/classesphp/mapa_openlayers.php
 
 */
 error_reporting(0);
+//para efeitos de compatibilidade
+if (!function_exists('ms_GetVersion')){
+	include_once ("carrega_ext.php");
+}
 //carrega dados da se&ccedil;&atilde;o, verifica seguran&ccedil;a
 inicializa();
 //

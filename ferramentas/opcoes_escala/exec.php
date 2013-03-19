@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -14,7 +14,7 @@ Aplica novos par&acirc;metros na barra de escala atual.
 <Escala->mudaEscalaGrafica>
 */
 	case "MUDAESCALAGRAFICA":
-		include_once(__DIR__."/../../classesphp/classe_escala.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_escala.php");
 		copiaSeguranca($map_file);
 		$m = new Escala($map_file);
 		$retorno = $m->mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor);
@@ -28,7 +28,7 @@ Pega os par&acirc;metros da barra de escala atual.
 <Escala->parametrosBarraEscala>
 */
 	case "ESCALAPARAMETROS":
-		include_once(__DIR__."/../../classesphp/classe_escala.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_escala.php");
 		$m = new Escala($map_file);
 		$retorno = $m->parametrosBarraEscala();
 	break;
@@ -40,7 +40,7 @@ Testa os novos par&acirc;metros de uma barra de escala.
 <Escala->testaescalagrafica>
 */
 	case "TESTAESCALAGRAFICA":
-		include_once(__DIR__."/../../classesphp/classe_escala.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_escala.php");
 		$m = new Escala($map_file);
 		$retorno = $m->testaescalagrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor);
 	break;

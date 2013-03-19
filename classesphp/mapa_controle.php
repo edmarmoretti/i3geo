@@ -151,7 +151,7 @@ if(isset($interfaceTemp) && $interfaceTemp != ""){
 //verifica se deve ativar o debug
 //
 if (isset($debug) && strtolower($debug) == "sim")
-{error_reporting(E_ALL);}
+{error_reporting(0);}
 //
 //teste de timeout
 //
@@ -205,7 +205,7 @@ if (!isset($map_file))
 include_once("classe_vermultilayer.php");
 include_once("classe_estatistica.php");
 if (isset($debug) && strtolower($debug) == "sim")
-{error_reporting(E_ALL);}
+{error_reporting(0);}
 //
 //identifica qual a url do i3geo
 //
@@ -217,7 +217,7 @@ $urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["
 //inserido na vers&atilde;o 4.6
 //
 if(!isset($locaplic)){
-	include_once(__DIR__."/../ms_configura.php");
+	include_once(dirname(__FILE__)."/../ms_configura.php");
 }
 //
 //substitui a string de conex&atilde;o
@@ -795,8 +795,8 @@ Obt&eacute;m o nome de um layer e de seu arquivo mapfile original.
 	case "PEGAMETADATA":
 		include_once("classe_temas.php");
 		//pode pegar os metadata de um mapfile existente em i3geo/temas
-		if(file_exists(__DIR__."/../temas/".$tema.".map")){
-			$map_file = __DIR__."/../temas/".$tema.".map";
+		if(file_exists(dirname(__FILE__)."/../temas/".$tema.".map")){
+			$map_file = dirname(__FILE__)."/../temas/".$tema.".map";
 		}
 		$m = new Temas($map_file,$tema);
 		$retorno = $m->pegametadata();
@@ -1117,7 +1117,7 @@ Altera uma classe de um tema, aplicando uma nova classifica&ccedil;&atilde;o ou 
 		if ($opcao == "alteraclasses")
 		{
 			//esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
-			//error_reporting(E_ALL);
+			//error_reporting(0);
 			alteraclassesPost($ids,$nomes,$exps);
 			restauraCon($map_file,$postgis_mapa);
 			cpjson("");

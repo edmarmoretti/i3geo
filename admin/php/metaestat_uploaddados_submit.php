@@ -1,10 +1,10 @@
 <?php
 $colunasarquivo = "";
 $nomearquivoserv = "";
-error_reporting(E_ALL);
+error_reporting(0);
 if (isset($_FILES['i3GEOuploadArquivo']['name']))
 {
-	require_once (__DIR__."/../../ms_configura.php");
+	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	$Arquivoup = $_FILES['i3GEOuploadArquivo']['tmp_name'];
 	$nomearquivoserv = $dir_tmp."/upload".basename($Arquivoup);
 	//echo $nomearquivoserv;

@@ -37,11 +37,11 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
-include_once(__DIR__."/login.php");
+include_once(dirname(__FILE__)."/login.php");
 if(verificaOperacaoSessao("admin/html/ogcws") == false){
 	retornaJSON("Vc nao pode realizar essa operacao.");exit;
 }
-//error_reporting(E_ALL);
+//error_reporting(0);
 $versao = versao();
 $map_file = $locaplic."/aplicmap/ogcwsv".$versao["principal"].".map";
 $mapa = ms_newMapObj($map_file);

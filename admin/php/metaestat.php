@@ -36,9 +36,9 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 */
-include_once(__DIR__."/admin.php");
+include_once(dirname(__FILE__)."/admin.php");
 
-include_once(__DIR__."/login.php");
+include_once(dirname(__FILE__)."/login.php");
 //lista de funcoes que passam pela validacao de login
 $funcoesEdicao = array(
 	"ALTERAMAPAGRUPO",
@@ -93,7 +93,7 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}
 }
-include(__DIR__."/classe_metaestat.php");
+include(dirname(__FILE__)."/classe_metaestat.php");
 error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
@@ -297,7 +297,7 @@ switch (strtoupper($funcao))
 	//a pasta com alista e definida na variavel $metaestatTemplates localizada no ms_configura.php
 	case "LISTATEMPLATESMAPA":
 		if(empty($metaestatTemplates)){
-			$d = __DIR__."/../../ferramentas/metaestat/templates";
+			$d = dirname(__FILE__)."/../../ferramentas/metaestat/templates";
 		}
 		else{
 			$d = $locaplic.$metaestatTemplates;
@@ -311,7 +311,7 @@ switch (strtoupper($funcao))
 	//a pasta com alista e definida na variavel $metaestatTemplates/logos localizada no ms_configura.php
 	case "LISTALOGOSMAPA":
 		if(empty($metaestatTemplates)){
-			$metaestatTemplates = __DIR__."/../../ferramentas/metaestat/templates";
+			$metaestatTemplates = dirname(__FILE__)."/../../ferramentas/metaestat/templates";
 		}
 		else{
 			$metaestatTemplates = $locaplic.$metaestatTemplates;
@@ -1075,7 +1075,7 @@ switch (strtoupper($funcao))
 			echo($m->formataXML($dados));
 		}
 		if($formato == "csv"){
-			require_once(__DIR__."/../../pacotes/parsecsv/parsecsv.lib.php");
+			require_once(dirname(__FILE__)."/../../pacotes/parsecsv/parsecsv.lib.php");
 			$csv = new parseCSV();
 			$csv->titles = array_keys($dados[0]);
 			$csv->output(true, 'mvar'.$id_medida_variavel.'_'.date('dmY').'.csv', $dados);
@@ -1149,11 +1149,11 @@ switch (strtoupper($funcao))
 			$_REQUEST["typename"] = $r["layer"];
 			$_REQUEST["request"] = $formato;
 			//$_REQUEST["service"] = "icon";
-			include (__DIR__."/../../pacotes/kmlmapserver/classes/kmlserver.class.php");
+			include (dirname(__FILE__)."/../../pacotes/kmlmapserver/classes/kmlserver.class.php");
 			$server = new KmlServer();
 		}else{//3d com tme
 			if(!isset($dir_tmp)){
-				include(__DIR__."/../../ms_configura.php");
+				include(dirname(__FILE__)."/../../ms_configura.php");
 			}
 			$verificaSID = false;
 			$mv = $m->listaMedidaVariavel("",$id_medida_variavel);
@@ -1178,7 +1178,7 @@ switch (strtoupper($funcao))
 					'dirtmp' => $dir_tmp,
 					'barSize'=> 5000
 			);
-			include (__DIR__."/../../pacotes/tme/TME_i3geo.php");
+			include (dirname(__FILE__)."/../../pacotes/tme/TME_i3geo.php");
 		}
 		exit;
 	break;
@@ -1333,7 +1333,7 @@ switch (strtoupper($funcao))
 		}
 		if($formato == "csv"){
 			$dados = $m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo,$nreg);
-			require_once(__DIR__."/../../pacotes/parsecsv/parsecsv.lib.php");
+			require_once(dirname(__FILE__)."/../../pacotes/parsecsv/parsecsv.lib.php");
 			$csv = new parseCSV();
 			//$csv->encoding('UTF-16', 'UTF-8');
 			$csv->titles = $dados["nomescolunas"];
@@ -1427,7 +1427,7 @@ switch (strtoupper($funcao))
 	case "REGIAO2SHP":
 		$m = new Metaestat();
 		$shp = $m->regiao2shp($codigo_tipo_regiao);
-		include(__DIR__."/../../pacotes/kmlmapserver/classes/zip.class.php");
+		include(dirname(__FILE__)."/../../pacotes/kmlmapserver/classes/zip.class.php");
 
 		$handle = fopen($shp.".shp", "r");
 		$contentsshp = fread($handle, filesize($shp.".shp"));

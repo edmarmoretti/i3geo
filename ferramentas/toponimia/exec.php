@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -14,7 +14,7 @@ Cria um novo tema com a topon&iacute;mia do tema atual.
 <Toponimia->criaToponimia>
 */
 	case "CRIATOPONIMIA":
-		include_once(__DIR__."/../../classesphp/classe_toponimia.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
 		if(!isset($tipo))

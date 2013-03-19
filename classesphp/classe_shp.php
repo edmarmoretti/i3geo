@@ -89,10 +89,10 @@ $ext - extensao geogr&aacute;fica que ser&aacute; aplicada ao mapa
 	function __construct($map_file="",$tema="",$locaplic="",$ext=""){
 		if (!function_exists('ms_newMapObj')){return false;}
 		if($locaplic == ""){
-			include (__DIR__."/../ms_configura.php");
+			include (dirname(__FILE__)."/../ms_configura.php");
 		}
 		if(!function_exists("corRGB")){
-			include_once(__DIR__."/funcoes_gerais.php");
+			include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		}
 		$this->v = versao();
 		$this->v = $this->v["principal"];
@@ -408,7 +408,7 @@ array - xy
 */
 	function listaPontosShapeSel()
 	{
-		//error_reporting(E_ALL);
+		//error_reporting(0);
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");

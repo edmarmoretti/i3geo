@@ -498,7 +498,7 @@ Retorno:
 */
 function substituiCon($map_file,$postgis_mapa)
 {
-	error_reporting(E_ALL);
+	error_reporting(0);
 	if (!empty($postgis_mapa) && (file_exists($map_file)))
 	{
 		if(!@ms_newMapObj($map_file)){return false;}
@@ -977,7 +977,7 @@ Retorno:
 */
 function buscaRapida($servico,$palavra)
 {
-	//error_reporting(E_ALL);
+	//error_reporting(0);
 	if(!function_exists('preg_match'))
 	{
 		include_once('../pacotes/SOAPdepreciado/nusoap.php');
@@ -2373,7 +2373,7 @@ Return:
 */
 function verificaPapelUsuario($id_papel)
 {
-	include_once(__DIR__."/../admin/php/login.php");
+	include_once(dirname(__FILE__)."/../admin/php/login.php");
 	$r = verificaPapelSessao($id_papel);
 	return $r;
 }
@@ -2502,7 +2502,7 @@ Lista os temas que possuem restricao de acesso para apenas alguns grupos de usua
 O retorno e um array com a chave sendo o codigo do tema e o valor um array com a lista de ids de grupos que podem acessar
 */
 function listaTemasRestritos(){
-	include_once(__DIR__."/../admin/php/admin.php");
+	include_once(dirname(__FILE__)."/../admin/php/admin.php");
 	error_reporting(0);
 	$res = pegaDados("select id_grupo,codigo_tema from ".$esquemaadmin."i3geousr_grupotema as gt,".$esquemaadmin."i3geoadmin_temas as te where gt.id_tema = te.id_tema");
 	$restritos = array();

@@ -38,7 +38,7 @@ i3geo/admin/php/xml.php
 //essa vari&aacute;vel precisa ter um . no final quando n&atilde;o for vazia, evitando erros na inclus&atilde;o dentro dos SQLs
 //
 if (!isset($esquemaadmin)){
-	include_once(__DIR__."/../../ms_configura.php");
+	include_once(dirname(__FILE__)."/../../ms_configura.php");
 }
 if(!empty($esquemaadmin)){
 	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
@@ -575,7 +575,7 @@ function geraXmlIdentifica($perfil,$locaplic,$editores)
 			if($target == ""){$target = "_self";}
 			$xml .= "  <TARGET>".$target."</TARGET>\n";
 			$xml .= " </FUNCAO>\n";
-		}error_reporting(E_ALL);
+		}error_reporting(0);
 	}
 	$xml .= "</SISTEMAS>\n";
 	$dbh = null;

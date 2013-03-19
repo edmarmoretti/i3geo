@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__."/../inicia.php");
+include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -14,7 +14,7 @@ Mostra na tela o SLD de um tema
 <Temas->sld>
 */
 	case "TEMA2SLD":
-		include_once(__DIR__."/../../classesphp/classe_temas.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
 		$m = new Temas($map_file,$tema);
 		$sld = $m->sld();
 		echo header('Content-Disposition: attachment; filename="'.$tema.'.sld"');
@@ -30,7 +30,7 @@ Adiciona LABEL em uma classe de um layer
 <Temas->adicionaLabel>
 */
 	case "ADICIONALABELCLASSE":
-		include_once(__DIR__."/../../classesphp/classe_temas.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
 		$m = new Temas($map_file,$tema);
 		$l = $m->mapa->getlayerbyname($tema);
 		if(empty($item))
@@ -49,7 +49,7 @@ function: REMOVELABELCLASSE
 Remove LABEL em uma classe de um layer
 */
 	case "REMOVELABELCLASSE":
-		include_once(__DIR__."/../../classesphp/classe_temas.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
 		$m = new Temas($map_file,$tema);
 		$m->removeLabel($classe);
 		$m->salva();
@@ -63,7 +63,7 @@ Cria elementos para construir uma legenda no formato de tabela em HTML.
 <Legenda->tabelaLegenda>
 */
 	case "EDITALEGENDA":
-		include_once(__DIR__."/../../classesphp/classe_legenda.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_legenda.php");
 		$m = new Legenda($map_file,$locaplic,$tema);
 		$r = $m->tabelaLegenda();
 		if (!$r){$r = "erro.Erro legenda nao disponivel";}
@@ -77,7 +77,7 @@ Acrescenta a contagem de elementos em cada classe.
 <Legenda->tabelaLegenda>
 */
 	case "CONTAGEMCLASSE":
-		include_once(__DIR__."/../../classesphp/classe_legenda.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_legenda.php");
 		$m = new Legenda($map_file,$locaplic,$tema);
 		$r = $m->tabelaLegenda("sim");
 		if (!$r){$r = "erro.Erro legenda nao disponivel";}

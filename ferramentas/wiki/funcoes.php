@@ -4,7 +4,7 @@ $usuarioGeonames = "i3geo";
 require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../classesphp/pega_variaveis.php");
 require_once("../../classesphp/carrega_ext.php");
-error_reporting(E_ALL);
+error_reporting(0);
 $cp = new cpaint();
 $cp->register('listaartigos');
 $cp->start();

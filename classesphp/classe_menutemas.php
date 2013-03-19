@@ -64,7 +64,7 @@ $idioma - (opcional) pt|en|es|it
 	function __construct($map_file="",$perfil="",$locaplic="",$urli3geo="",$editores="",$idioma="pt")
 	{
 		if($locaplic == ""){
-			include(__DIR__."/../ms_configura.php");
+			include(dirname(__FILE__)."/../ms_configura.php");
 		}
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
@@ -147,7 +147,7 @@ array
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
-				include_once(__DIR__."/../admin/php/classe_arvore.php");
+				include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
 				$arvore = new Arvore($this->locaplic,$this->idioma);
 				$grupos = $arvore->formataGruposMenu($idmenu,$this->perfil,$listasgrupos);
 				unset($arvore);
@@ -180,7 +180,7 @@ array
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
-				include_once(__DIR__."/../admin/php/classe_arvore.php");
+				include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
 				$arvore = new Arvore($this->locaplic,$this->idioma);
 				$subGrupos = $arvore->formataSubgruposGrupo($idmenu,$codgrupo,$this->perfil);
 				unset($arvore);
@@ -207,7 +207,7 @@ array
 */
 	function pegaListaDeTemas($grupo,$subgrupo,$idmenu)
 	{
-		include_once(__DIR__."/../admin/php/classe_arvore.php");
+		include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
 		$temas = $arvore->formataTemasSubgrupo($subgrupo,$this->perfil);
 		unset($arvore);
@@ -369,7 +369,7 @@ $procurar - String que ser&aacute; procurada.
 		}
 		else
 		{
-			include_once(__DIR__."/../admin/php/classe_arvore.php");
+			include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
 			$arvore = new Arvore($this->locaplic,$this->idioma);
 			$temas = $arvore->procuraTemas($procurar,$this->perfil);
 			unset($arvore);
@@ -480,7 +480,7 @@ $procurar - String que ser&aacute; procurada.
 */
 	function procurartemas2($procurar)
 	{
-		include_once(__DIR__."/../admin/php/classe_arvore.php");
+		include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
 		$temas = $arvore->procuraTemas($procurar,$this->perfil);
 		unset($arvore);

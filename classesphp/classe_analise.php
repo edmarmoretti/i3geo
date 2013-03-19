@@ -100,11 +100,11 @@ $ext - Extens&atilde;o geogr&aacute;fica do mapa
 */
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
-  		//error_reporting(E_ALL);
+  		//error_reporting(0);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
-  		include_once(__DIR__."/funcoes_gerais.php");
+  		include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		if(empty($locaplic)){
-			$locaplic = __DIR__."/..";
+			$locaplic = dirname(__FILE__)."/..";
 		}
   		$this->v = versao();
 		$this->v = $this->v["principal"];
@@ -236,7 +236,7 @@ Include:
 			break;
 			//delaunay e voronoi
 			case "deldir":
-				//error_reporting(E_ALL);
+				//error_reporting(0);
 				$this->mapaDeldir($nomearq,$dir_tmp,$R_path,$locaplic);
 				$this->deldirDir2shp($nomearq."dirsgs",$dir_tmp,$locaplic);
 				$this->deldirDel2shp($nomearq."delsgs",$dir_tmp,$locaplic);
@@ -1079,7 +1079,7 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo.
 			$lineo = $spt->line(0);
 			$pt = $lineo->point(0);
 			//faz a pesquisa
-			//error_reporting(E_ALL);
+			//error_reporting(0);
 			foreach ($layers as $layer)
 			{
 				$layer->set("template","none.htm");
@@ -1170,7 +1170,7 @@ itemdestino - nome do item na tabela de atributos do tema de origem que ser&aacu
 */
 function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem="",$itemdestino="")
 {
-	//error_reporting(E_ALL);
+	//error_reporting(0);
 	set_time_limit(180);
 	//para manipular dbf
 	if($this->dbaseExiste == false){
@@ -1432,7 +1432,7 @@ $item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valore
 			else
 			include_once "../pacotes/phpxbase/api_conversion.php";
 		}
-		//error_reporting(E_ALL);
+		//error_reporting(0);
 		$nomeCentro = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentro;
 		//pega os shapes selecionados
@@ -2035,7 +2035,7 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 */
 	function nptPol($temaPt,$temaPo,$locaplic)
 	{
-		//error_reporting(E_ALL);
+		//error_reporting(0);
 		set_time_limit(180);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
@@ -2451,7 +2451,7 @@ $operacao - Tipo de an&aacute;lise.
 */
 	function calculaGeometrias($dir_tmp,$imgdir,$lista,$operacao)
 	{
-		//error_reporting(E_ALL);
+		//error_reporting(0);
 		$lista = explode(",",$lista);
 		$dir = $dir_tmp."/".$imgdir."/";
 		foreach ($lista as $l)

@@ -117,8 +117,8 @@ $template - nome do template para processar a legenda
 
 	function __construct($map_file="",$locaplic="",$tema="",$template="")
 	{
-  		//error_reporting(E_ALL);
-  		include_once(__DIR__."/funcoes_gerais.php");
+  		//error_reporting(0);
+  		include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->localaplicacao = $locaplic;
@@ -523,7 +523,7 @@ String no formato HTML com as imagens dos s&iacute;mbolos
 	{
 		$versao = versao();
 		$versao = $versao["principal"];
-		error_reporting(E_ALL);
+		error_reporting(0);
 		if ($tipo == 3){$tipo = 2;} //tipo raster
 		if($imgdir == "")
 		{$dir = $dir_tmp;}
@@ -720,7 +720,7 @@ array - "imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$positi
 */
 	function pegaParametrosLegImg()
 	{
-		error_reporting(E_ALL);
+		error_reporting(0);
 		$legenda = $this->mapa->legend;
 		$height = $legenda->height;
 		$width = $legenda->width;

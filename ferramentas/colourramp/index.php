@@ -1,8 +1,8 @@
 <?php
-	include_once(__DIR__."/../../classesphp/pega_variaveis.php");
-	include_once(__DIR__."/../../classesphp/class.palette.php");
+	include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+	include_once(dirname(__FILE__)."/../../classesphp/class.palette.php");
 	$m = new palette();
-	$lista = implode(",",($m->listaColourRamps(__DIR__."/../..")));
+	$lista = implode(",",($m->listaColourRamps(dirname(__FILE__)."/../..")));
 	if(!isset($ncores))
 	{$ncores = 10;}
 	if(empty($locaplic)){
