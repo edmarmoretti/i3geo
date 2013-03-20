@@ -136,6 +136,19 @@ i3GEOF.editorlimites = {
         	i3GEOF.editorlimites.clearSelection
         );
 	},
+	/**
+	 * Atualiza as camadas do mapa que sao oriundas do sistema METAESTAT
+	 */
+	atualizaCamadasMetaestat: function(){
+		var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=LISTACAMADASMETAESTAT&g_sid="+i3GEO.configura.sid,
+			temp = function(retorno){
+				var n = retorno.data.length,i;
+				for(i=0;i<n;i++){
+					i3GEO.Interface.atualizaTema("",retorno.data[i]);
+				}
+			};
+		cpJSON.call(p,"foo",temp);
+	},
 	/*
 	Function: html
 
@@ -831,6 +844,7 @@ i3GEOF.editorlimites = {
 				re = new RegExp("idunico_", "g"),//prefixo usado para marcar o id dos elementos input que contem os valores que se quer obter
 				temp = function(retorno){
 					i3GEOF.editorlimites.editarAtributos.pegaDados();
+					i3GEOF.editorlimites.atualizaCamadasMetaestat();
 					i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
 				};
 			if(codigo_tipo_regiao == ""){
