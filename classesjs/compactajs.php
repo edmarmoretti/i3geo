@@ -189,7 +189,7 @@ $jsfiles = array(
 );
 
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
-salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto47.js","js");
+salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto5.js","js");
 //
 //gera um unico css
 //
@@ -217,7 +217,7 @@ $cssfiles = array(
 );
 
 $buffer = "";
-salvatudojs($cssfiles,$buffer,"../css/i3geo47.css","css");
+salvatudojs($cssfiles,$buffer,"../css/i3geo5.css","css");
 //css das ferramentas
 $cssfiles = array(
 "../css/button.css",
@@ -235,10 +235,10 @@ foreach ($cssfiles as $f)
 	fclose($abre);
 	$buffer .= "\n";
 }
-$abre = fopen("../css/i3geo_ferramentas47.css", "wt");
+$abre = fopen("../css/i3geo_ferramentas5.css", "wt");
 $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
-chmod("../css/i3geo_ferramentas47.css",0777);
+chmod("../css/i3geo_ferramentas5.css",0777);
 //
 //compacta os codigos para o Mashup do OpenLayers
 //

@@ -106,7 +106,7 @@
 	</div>
 </div>
 
-<script src="../classesjs/i3geo47.js"></script>
+<script src="../classesjs/i3geo5.js"></script>
 <script src="../pacotes/openlayers/OpenLayers211.js.php"></script>
 <!-- estilo necess&aacute;rio para a ferramenta de edi&ccedil;&atilde;o -->
 <style>

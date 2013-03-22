@@ -392,12 +392,12 @@ body,td
 <script>
 
 //carrega a lista de gadgets registrados em
-var ins = "<table><tr><td></td><td><b>Gadgets</b> (ferramentas do i3geo que tamb&eacute;m podem ser usadas de forma independente):</td></tr>"
-var obj = g_traducao_ajuda.ferramentas
+var ins = "<table><tr><td></td><td><b>Gadgets</b> (ferramentas do i3geo que tamb&eacute;m podem ser usadas de forma independente):</td></tr>";
+var obj = g_traducao_ajuda.ferramentas;
 for(var k in obj){
 	if(obj[k].gadget)
-	ins += "<tr><td></td><td><a href='"+obj[k].gadget+"' target=_blank >"+obj[k].titulo+"</a></td></tr>"
+	ins += "<tr><td></td><td><a href='"+obj[k].gadget+"' target=_blank >"+obj[k].titulo+"</a></td></tr>";
 }
-document.getElementById("gadgets").innerHTML = ins+"</table>"
+document.getElementById("gadgets").innerHTML = ins+"</table>";
 
 </script>

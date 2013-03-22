@@ -888,7 +888,7 @@ class Arvore
 	}
 	/**
 	 *
-	 * TODO RC2 verificar a acentuacao das palavras nessa funcao
+	 * TODO V5 verificar a acentuacao das palavras nessa funcao
 	 */
 	function removeAcentos($s)
 	{

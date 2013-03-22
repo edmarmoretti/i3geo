@@ -58,7 +58,7 @@ Default:
 array(array("usuario"=>"admin", "senha"=>"adminx"));
 
 */
-//@TODO v47 alterar a senha para admin
+//@TODO v5 alterar a senha para admin
 $i3geomaster = array(
 		array("usuario"=>"admin", "senha"=>"admin")
 );
@@ -207,7 +207,6 @@ Tipo:
 */
 $metaestatTemplates = "/ferramentas/metaestat/templates";
 
-//@TODO controlar pelo sistema de login de usuario
 /*
  Variable: navegadoresLocais
 

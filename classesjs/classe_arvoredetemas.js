@@ -1299,30 +1299,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	montaTextoTema: function(cor,tema){
 		var html,
-			estilo = "",
 			clique;
-		/*
-		if(navm)
-		{estilo = "padding-top:1px;";}
-		html = "<td style='"+estilo+"'><span>";
-		if(i3GEO.arvoreDeTemas.TIPOBOTAO !== "download")
-		{html += "<input title='"+tema.tid+"' style='width:12px;height:12px;cursor:pointer;border:solid 0 white;' ";}
-		else
-		{html += "<img title='"+tema.tid+"' src='"+$im("down1.gif")+"'";}
-		if(i3GEO.arvoreDeTemas.ATIVATEMA !== "")
-		{clique = "onclick=\""+i3GEO.arvoreDeTemas.ATIVATEMA+"\"";}
-		else{
-			clique = "onclick='i3GEO.arvoreDeTemas.adicionaTemas([\""+tema.tid+"\"])'";
-		}
-		html += clique;
-		if(i3GEO.arvoreDeTemas.TIPOBOTAO !== "download")
-		{html += " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' />";}
-		else
-		{html += " /> ";}
-		html += "</td><td title='"+tema.tid+"' onmouseout='javascript:this.style.color=\""+cor+"\";' onmouseover='javascript:this.style.color=\"blue\";' style='cursor:pointer;font-size:11px;text-align:left;color:"+cor+";padding-left:0px;' "+clique+">";
-		html += tema.nome;
-		html += "</td></span>";
-		*/
 		html = "<td class='ygtvcontent' style='text-align:left;'>";
 		//verifica que tipo de botao sera usado para o usuario clicar
 		if(i3GEO.arvoreDeTemas.TIPOBOTAO !== "download"){

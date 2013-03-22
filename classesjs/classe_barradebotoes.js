@@ -561,7 +561,7 @@ i3GEO.barraDeBotoes = {
 		if(i3GEO.barraDeBotoes.ATIVA === false){
 			return;
 		}
-		var estilo,temp,ist,cor,ko,estiloatual;
+		var estilo,temp,ist,cor,ko,estiloatual = "white";
 		if($i(icone)){
 			estiloatual = $i(icone).style.backgroundColor;
 		}
