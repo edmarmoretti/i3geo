@@ -193,6 +193,7 @@ $emailInstituicao = "geoprocessamento@mma.gov.br";
 	Tipo:
 	{string}
 */
+//TODO v5 remover
 $googleApiKey = "ABQIAAAAKguAlmd-hSDulF2T_tfWMxT3OAK09d_ZSDyC36iPGlww-4j-9xSrR2ZZUxVeZC01q8anfe5ntl_U4w";
 /*
 Variable: metaestatTemplates

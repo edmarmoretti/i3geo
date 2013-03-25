@@ -1310,10 +1310,9 @@ i3GEO.navega = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.dialogo.google()");}
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") > 0)
 			{i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");}
-			i3GEO.util.criaBox();
 			g_operacao = "navega";
 			var idgoogle = "googlemaps"+Math.random();
-			i3GEO.janela.cria((i3GEO.parametros.w/2)+25+"px",(i3GEO.parametros.h/2)+18+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>",idgoogle);
+			i3GEO.janela.cria((i3GEO.parametros.w/2.5)+25+"px",(i3GEO.parametros.h/2.5)+18+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps1/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>",idgoogle);
 			atualizagoogle = function(){
 				try{
 					parent.frames[idgoogle+"i"].panTogoogle();
