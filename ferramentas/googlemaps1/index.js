@@ -374,18 +374,13 @@ function constroiRota()
 			var point = place.geometry.location;
 			//marker = new google.maps.Marker({point:point});
 			endereco2 = place.formatted_address;
-			/*
-			var infowindow = new google.maps.InfoWindow({
-				map: map,
-				position: point,
-				content: '<span style=font-size:9px ><b>latlng:</b>' + point.lat() + "," + point.lng() + '<br><b>Address:</b>' + endereco2 + '<br>'
-			});
-			*/
-			endereco2 = window.prompt("Endereco do final",endereco2)
-			if (endereco2!=null && endereco2!=""){
-				//marker.setMap(map);
-				montaRota();
-			}
+			endereco2 = i3GEO.janela.prompt(
+				"Endereco do final",
+				function(){
+					montaRota();
+				},
+				endereco2
+			);
 		}
 		else{
 			i3GEO.janela.tempoMsg("Ocorreu um erro");
@@ -397,21 +392,16 @@ function constroiRota()
 			var place = response[0];
 			var point = place.geometry.location;
 			endereco1 = place.formatted_address;
-			/*
-			var infowindow = new google.maps.InfoWindow({
-				map: map,
-				position: point,
-				content: '<span style=font-size:9px ><b>latlng:</b>' + point.lat() + "," + point.lng() + '<br><b>Address:</b>' + endereco1 + '<br>'
-			});
-			*/
-			endereco1 = window.prompt("Endereco do inicio",endereco1)
-			if (endereco1 != null && endereco1 != ""){
-				//marker.setMap(map);
-				geocoder.geocode(
-					{'location':pontoRota2},
-					pt2
-				);
-			}
+			endereco1 = i3GEO.janela.prompt(
+				"Endereco do inicio",
+				function(){
+					geocoder.geocode(
+						{'location':pontoRota2},
+						pt2
+					);
+				},
+				endereco1
+			);
 		}
 		else{
 			i3GEO.janela.tempoMsg("Ocorreu um erro");
