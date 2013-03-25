@@ -13,18 +13,22 @@ Se vc está fazendo um upgrade do i3geo, faça cópia dos diretórios temas, aplicma
 e dos arquivos ms_configura.php. Consulte o documento i3geo/guia_de_migracao.txt para verificar
 quais cuidados vc deve tomar nos upgrades
 
+---------
+
+Mantenha-se sempre atualizado utilizando o SVN
+
+Isso permite que eventuais bugs sejam rapidamente corrigidos
+
+Veja como usar o SVN em: http://svn.softwarepublico.gov.br/trac/i3geo
+
+---------
+
 Altere a senha da variável $i3geomaster existente em ms_configura.php para desbloquear o i3geo.
 
 ---------
 
 Se vc está instalando pela primeira vez, veja no site da comunidade i3geo no www.softwarepublico.gov.br
 as instruções que ficam no item "documentacao". Para ter acesso ao portal, vc terá de fazer o cadastramento.
-
----------
-
-A partir da versão 3.9 do i3geo foi incluida uma página principal com endereços para
-os aplicativos que vêm com o i3geo (não esqueça de dar uma olhada):
-http://localhost/i3geo/principal.htm
 
 ---------
 
