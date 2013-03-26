@@ -1,0 +1,1 @@
+def.type('pvc.visual.BarPlot',pvc.visual.BarPlotAbstract).add({type:'bar'});

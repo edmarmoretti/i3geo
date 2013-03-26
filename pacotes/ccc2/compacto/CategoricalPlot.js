@@ -1,0 +1,1 @@
+def.scope(function(){def.type('pvc.visual.CategoricalPlot',pvc.visual.CartesianPlot).add({_getOptionsDefinition:function(){return pvc.visual.CategoricalPlot.optionsDef}});pvc.visual.CategoricalPlot.optionsDef=def.create(pvc.visual.CartesianPlot.optionsDef,{Stacked:{resolve:'_resolveFull',cast:Boolean,value:false},BaseRole:{value:'category'},OrthoRole:{value:'value'}})});

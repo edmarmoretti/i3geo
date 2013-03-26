@@ -1,0 +1,1 @@
+def.scope(function(){def.type('pvc.visual.MetricXYPlot',pvc.visual.CartesianPlot).add({_getOptionsDefinition:function(){return pvc.visual.MetricXYPlot.optionsDef}});pvc.visual.MetricXYPlot.optionsDef=def.create(pvc.visual.CartesianPlot.optionsDef,{BaseRole:{value:'x'},OrthoAxis:{resolve:null},OrthoRole:{value:'y'}})});

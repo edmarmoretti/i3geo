@@ -1,0 +1,1 @@
+def.scope(function(){def.type('pvc.visual.NormalizedBarPlot',pvc.visual.BarPlotAbstract).add({type:'bar',_getOptionsDefinition:function(){return pvc.visual.NormalizedBarPlot.optionsDef}});pvc.visual.NormalizedBarPlot.optionsDef=def.create(pvc.visual.BarPlotAbstract.optionsDef,{Stacked:{resolve:null,value:true}})});

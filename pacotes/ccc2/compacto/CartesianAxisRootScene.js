@@ -1,0 +1,1 @@
+def.type('pvc.visual.CartesianAxisRootScene',pvc.visual.Scene);

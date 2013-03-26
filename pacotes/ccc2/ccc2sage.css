@@ -1,0 +1,23 @@
+body{
+	text-align: left;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.sage_fonte {
+	font-size: 10px;
+}
+@media print{
+	.noprint {
+		display:none
+	}
+}
+table{
+	text-align: left;
+	font-size: 9px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+td{
+	border: 1px solid gray;
+	padding: 2px;
+	text-align: right;
+}

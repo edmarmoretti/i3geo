@@ -1,0 +1,1 @@
+def.type('pvc.visual.CartesianAxisTickScene',pvc.visual.Scene).init(function(parent,keyArgs){this.base(parent,keyArgs);this.vars.tick=new pvc.visual.ValueLabelVar(def.get(keyArgs,'tick'),def.get(keyArgs,'tickLabel'),def.get(keyArgs,'tickRaw'))});

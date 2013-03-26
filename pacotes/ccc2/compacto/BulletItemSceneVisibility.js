@@ -1,0 +1,1 @@
+def.type('pvc.visual.legend.BulletItemSceneVisibility').add({isOn:function(){return this.datums().any(function(datum){return!datum.isNull&&datum.isVisible})},isClickable:function(){return true},click:function(){if(pvc.data.Data.toggleVisible(this.datums())){this.chart().render(true,true,false)}}});
