@@ -2313,15 +2313,16 @@ $objmapa
 function carregaquery2($mapfile,&$objlayer,&$objmapa)
 {
 	$qyfile = dirname($mapfile)."/".$objlayer->name.".php";
-	if(file_exists($qyfile))
-	{
+	if(file_exists($qyfile)){
 		$indxlayer = $objlayer->index;
 		$handle = fopen ($qyfile, "r");
 		$conteudo = fread ($handle, filesize ($qyfile));
 		fclose ($handle);
 		$shp = unserialize($conteudo);
-		foreach ($shp as $indx)
-		{$objmapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
+		foreach ($shp as $indx){
+
+			$objmapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);
+		}
 		return "sim";
 	}
 	return "nao";

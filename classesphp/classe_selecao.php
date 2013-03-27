@@ -228,53 +228,44 @@ $temao - Tema que ser&aacute; processado.
 
 $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 */
-	function selecaoTema($temao,$tipo)
-	{
+	function selecaoTema($temao,$tipo){
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
-		if ($tipo == "novo")
-		{
+		if ($tipo == "novo"){
 			$this->selecaoLimpa();
 			$tipo = "adiciona";
 		}
-		if ($tipo == "limpa")
-		{return($this->selecaoLimpa());}
-		if ($tipo == "inverte")
-		{return($this->selecaoInverte());}
+		if ($tipo == "limpa"){
+			return($this->selecaoLimpa());
+		}
+		if ($tipo == "inverte"){
+			return($this->selecaoInverte());
+		}
 		$layero = $this->mapa->getlayerbyname($temao);
-		if ($layero->type == MS_LAYER_LINE || $layero->type == 1)
-		{return("erro. O tema de sobreposicao nao pode ser do tipo linear.");}
+		if ($layero->type == MS_LAYER_LINE || $layero->type == 1){
+			return("erro. O tema de sobreposicao nao pode ser do tipo linear.");
+		}
 		$tipoLayer = $this->layer->type;
 		$tipoLayero = $layero->type;
 		$this->layer->set("template","none.htm");
 		$layero->set("template","none.htm");
-		/*
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
-		*/
+		//if (file_exists($this->qyfile))
+		//{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
+		carregaquery2($this->arquivo,$layero,$this->mapa);
 		$res_count = $this->layer->getNumresults();
 		$res_counto = $layero->getNumresults();
-		if ($res_counto == 0)
-		{return false;}
-		/*
-		$shp_atual = array();
-		for ($i = 0; $i < $res_count;++$i)
-		{
-			$rc = $this->layer->getResult($i);
-			$shp_atual[] = $rc->shapeindex;
+		if ($res_counto == 0){
+			return false;
 		}
-		$this->mapa->freequery($indxlayer);
-		*/
 		$shp_atual = array();
-		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
-		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
-
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema)){
+			$shp_atual = $this->unserializeQ($this->qyfileTema);
+		}
 		$shpi = array();
 		$i = $layero->index;
 		$selecao = "";
-		if (($selecao != "ok") && ($layero->data != ""))
-		{
+		if ($layero->data != ""){
 			$sopen = $layero->open();
 			if($sopen == MS_FAILURE){return "erro";}
 			$res_count = $layero->getNumresults();

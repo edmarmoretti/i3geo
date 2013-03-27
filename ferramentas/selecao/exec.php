@@ -47,14 +47,12 @@ Sleciona elementos de um tema com base em outro tema.
 */
 	case "SELECAOTEMA":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
-		copiaSeguranca($map_file);
+		//copiaSeguranca($map_file);
 		$temas = explode(",",$tema);
-		foreach($temas as $tema)
-		{
+		foreach($temas as $tema){
 			$m = new Selecao($map_file,$tema);
 			$ok[] = $m->selecaoTema($temao,$tipo);
 		}
-		$retorno = implode(",",$ok);
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
