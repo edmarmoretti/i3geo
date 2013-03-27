@@ -135,12 +135,10 @@ foreach ($_GET as $k=>$v){
 		$tipo = "metadados";
 		$cache = false;
 	}
-	if(strtolower($k) == "layers" && empty($_GET["tema"]))
-	{
+	if(strtolower($k) == "layers" && empty($_GET["tema"])){
 		$tema = $v;
 	}
-	if(strtolower($k) == "layer" && empty($_GET["tema"]))
-	{
+	if(strtolower($k) == "layer" && empty($_GET["tema"])){
 		$tema = $v;
 	}
 }
@@ -162,17 +160,6 @@ if(isset($version) && !isset($VERSION)){
 if(!isset($VERSION)){
 	$req->setParameter("VeRsIoN","1.0.0");
 }
-/*
-$n =  $req->numparams;
-for($i=0;$i<$n;$i++){
-	echo $req->getName($i);
-	echo "=";
-	echo $req->getValue($i);
-	echo "<br>";
-}
-exit;
-*/
-
 if (!isset($intervalo)){
 	$intervalo = "0,5000";
 }
@@ -190,7 +177,6 @@ if(!isset($tema)){
 $nomeMapfileTmp = $dir_tmp."/ogc_".md5($tema).".map";
 $nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
 $nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
-
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
@@ -461,21 +447,63 @@ else{
 	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
 	$oMap->save($nomeMapfileTmp);
 }
-if($cache == true){
-
+//
+//verifica se a requisicao e do tipo TMS. Se for, tenta gerar ou usar o cache
+//
+//
+//calcula a extensao geografica com base no x,y,z em requisições TMS
+//quando for do tipo tms $_GET["tms"] contem os parametros do tile
+//essa rotina faz um exit ao final
+//o cache tms so fucniona se houver apenas uma camada no mapa
+//tms e usado basicamente por mashup
+//
+if(isset($_GET["tms"])){
+	$temp = explode("/",$_GET["tms"]);
+	$z = $temp[2];
+	$x = $temp[3];
+	$y = str_replace(".png","",$temp[4]);
+	$n = pow(2,$z+1);
+	$lon1 = $x / $n * 360.0 - 180.0;
+	$lon2 = ($x+1) / $n * 360.0 - 180.0;
+	$n = pow(2,$z);
+	$lat1 = $y / $n * 180.0 - 90.0;
+	$lat2 = ($y+1) / $n * 180.0 - 90.0;
+	//essa funcao termina o processo se a imagem existir
+	//carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+	//se nao existir, salva a imagem
+	//echo $lon1." ".$lat1." ".$lon2." ".$lat2;exit;
+	$oMap->setExtent($lon1,$lat1,$lon2,$lat2);
+	$oMap->setsize(256,256);
+	$oMap->getlayer(0)->set("status",MS_DEFAULT);
+	$img = $oMap->draw();
+	if($img->imagepath == ""){
+		exit;
+	}
+	salvaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
 }
-
+if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
+	$l = $oMap->getlayer(0);
+	if($req->getValueByName("LAYER") == ""){
+		$req->setParameter("LAYER",$l->name);
+	}
+	if($req->getValueByName("FORMAT") == ""){
+		$req->setParameter("FORMAT","image/png");
+	}
+}
+if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
+	$l = $oMap->getlayer(0);
+	if($req->getValueByName("TYPENAME") == "" || $req->getValueByName("TYPENAME") == "undefined"){
+		$req->setParameter("TYPENAME",$l->name);
+	}
+}
 //
 //altera os caminhos das imagens
 //
 if((isset($legenda)) && (strtolower($legenda) == "sim")){
 	$leg = $oMap->legend;
 	$leg->set("status",MS_EMBED);
-	$cache = false;
 }
-
 ms_ioinstallstdouttobuffer();
-
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
 if(strtolower($request) == "getcapabilities"){
@@ -585,37 +613,46 @@ function ogc_imprimeListaDeTemasWfs(){
 	}
 	echo $imprimir."</body></html>";
 }
-//FIXME cache fora do novo padrao de xyz
-function carregaCacheImagem($bbox,$layer,$w,$h,$cachedir=""){
+function carregaCacheImagem($cachedir,$map,$tms){
 	global $dir_tmp;
-	$nome = $w.$h.$bbox.".png";
-	if($cachedir == "")
-	{
-		$nome = $dir_tmp."/cache/".$layer."/".$nome;
+	if($cachedir == ""){
+		$nome = $dir_tmp."/cache".$tms;
 	}
-	else
-	{$nome = $cachedir."/".$layer."/".$nome;
+	else{
+		$nome = $cachedir.$tms;
 	}
 	if(file_exists($nome)){
-		ob_start();
-		// assuming you have image data in $imagedata
-		$img = file_get_contents($nome);
-		$length = strlen($img);
-		$ft = filemtime($nome);
-		if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) && (strtotime($_SERVER["HTTP_IF_MODIFIED_SINCE"]) == $ft)) {
-			// Client's cache IS current, so we just respond '304 Not Modified'.
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 304);
-		} else {
-			// Image not cached or cache outdated, we respond '200 OK' and output the image.
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s', $ft).' GMT', true, 200);
-		}
-		header('Accept-Ranges: bytes');
-		header('Content-Length: '.$length);
+		header('Content-Length: '.filesize($nome));
 		header('Content-Type: image/png');
-		print($img);
-		ob_end_flush();
+		header('Cache-Control: max-age=3600, must-revalidate');
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
+		$etag = md5_file($nome);
+		header('Etag: '.$etag);
+		fpassthru(fopen($nome, 'rb'));
 		exit;
 	}
+}
+function salvaCacheImagem($cachedir,$map,$tms){
+	global $img,$dir_tmp;
+	if($cachedir == ""){
+		$nome = $dir_tmp."/cache".$tms;
+	}
+	else{
+		$nome = $cachedir.$tms;
+	}
+	@mkdir(dirname($nome),0777,true);
+	chmod(dirname($nome),0777);
+	$img->saveImage($nome);
+	chmod($nome,0777);
+
+	header('Content-Length: '.filesize($nome));
+	header('Content-Type: image/png');
+	header('Cache-Control: max-age=3600, must-revalidate');
+	header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
+	fpassthru(fopen($nome, 'rb'));
+	exit;
 }
 function texto2iso($texto){
 	if (function_exists("mb_convert_encoding")){

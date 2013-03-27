@@ -204,7 +204,7 @@ i3GEO.editorOL = {
 		{i3GEO.editorOL.ativaLayerSwitcher();}
 		if(i3GEO.editorOL.ativarodadomouse === false)
 		{i3GEO.editorOL.desativaRodaDoMouse();}
-		
+
 		if(i3GEO.editorOL.numzoom !== ""){
 			i3GEO.editorOL.mapa.setOptions({
 				numZoomLevels: i3GEO.editorOL.numzoom
@@ -276,6 +276,17 @@ i3GEO.editorOL = {
 			}
 		}
 		return ins;
+	},
+	layersClonados: function(paramsLayers){
+		var layers = i3GEO.editorOL.mapa.layers,
+			nlayers = layers.length,
+			ins = [],i;
+		for(i=0;i<nlayers;i++){
+			if(layers[i].params.CLONETMS === paramsLayers){
+				return(layers[i]);
+			}
+		}
+		return false;
 	},
 	coordenadas: function(){
 		//
@@ -702,7 +713,7 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLzoomtot",
 				trigger: function(){i3GEO.editorOL.mapa.zoomToMaxExtent();},
-				title: "ajusta extens&atilde;o",
+				title: "ajusta extensao",
 				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
@@ -725,7 +736,7 @@ i3GEO.editorOL = {
 					handlerOptions: {layerOptions: {styleMap: styleMap}},
 					persist: true,
 					displayClass: "editorOLdistancia",
-					title: "dist&acirc;ncia",
+					title: "distancia",
 					type: OpenLayers.Control.TYPE_TOOL
 				}
 			);
@@ -746,7 +757,7 @@ i3GEO.editorOL = {
 					handlerOptions: {layerOptions: {styleMap: styleMap}},
 					persist: true,
 					displayClass: "editorOLarea",
-					title: "&aacute;rea",
+					title: "area",
 					type: OpenLayers.Control.TYPE_TOOL
 				}
 			);
@@ -771,6 +782,14 @@ i3GEO.editorOL = {
 				displayClass: "editorOLidentifica",
 				eventListeners: {
 					getfeatureinfo: function(event) {
+						var ativo = [i3GEO.editorOL.layerAtivo()];
+						//se for TMS tem de pegar o clone wms
+						if(ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS"){
+							temp = i3GEO.editorOL.layersClonados(ativo[0].layername);
+							if(temp != ""){
+								temp.setVisibility(false);
+							}
+						}
 						var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy),
 							lonlattexto = "<hr>",
 							formata;
@@ -815,7 +834,15 @@ i3GEO.editorOL = {
 						));
 					},
 					beforegetfeatureinfo: function(event){
-						var ativo = [i3GEO.editorOL.layerAtivo()];
+						var temp,ativo = [i3GEO.editorOL.layerAtivo()];
+						//se for TMS tem de pegar o clone wms
+						if(ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS"){
+							temp = i3GEO.editorOL.layersClonados(ativo[0].layername);
+							if(temp != ""){
+								temp.setVisibility(true);
+								ativo = [temp];
+							}
+						}
 						event.object.layers = ativo;
 						botaoIdentifica.layers = ativo;
 						botaoIdentifica.url = ativo[0].url;
@@ -895,7 +922,7 @@ i3GEO.editorOL = {
 				OpenLayers.Handler.Polygon,
 				{
 					displayClass: "editorOLpoligono",
-					title: "digitalizar pol&iacute;gono",
+					title: "digitalizar poligono",
 					type: OpenLayers.Control.TYPE_TOOL,
 					//handlerOptions: {holeModifier: "altKey"},
 					callbacks:{

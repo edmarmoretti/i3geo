@@ -334,28 +334,6 @@ function carregaCacheImagem($cachedir,$map,$tms){
 		exit;
 	}
 }
-function XcarregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
-	if($layer == "copyright" || $layer == "")
-	{$bbox = "";}
-	if($layer == "")
-	{$layer = "fundo";}
-	$nome = $w.$h.$bbox.".png";
-	if($cachedir == "")
-	{$nome = dirname(dirname($map))."/cache/".$layer."/".$nome;}
-	else
-	{$nome = $cachedir."/".$layer."/".$nome;}
-	if(file_exists($nome)){
-		header('Content-Length: '.filesize($nome));
-		header('Content-Type: image/png');
-		header('Cache-Control: max-age=3600, must-revalidate');
-		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
-		$etag = md5_file($nome);
-		header('Etag: '.$etag);
-		fpassthru(fopen($nome, 'rb'));
-		exit;
-	}
-}
 function nomeRand($n=10)
 {
 	$nomes = "";

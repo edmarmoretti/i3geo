@@ -140,7 +140,6 @@ if(isset($fundo) && $fundo != ""){
 	$fundo = str_replace(","," ",$fundo);
 	$fundo = explode(" ",$fundo);
 }
-
 //
 //define quais os layers que compor&atilde;o o mapa
 //
@@ -189,7 +188,8 @@ if($temas != ""){
 					$layers = array();
 					$maptemp = @ms_newMapObj($nomeMap);
 					if($maptemp){
-						for($i=0;$i<($maptemp->numlayers);++$i)	{
+						$nlayers = $maptemp->numlayers;
+						for($i=0;$i<($nlayers);++$i)	{
 							$layern = $maptemp->getLayer($i);
 							$layers[] = $layern->name;
 						}
@@ -204,7 +204,17 @@ if($temas != ""){
 						$visivel = "false";
 						if(in_array($tema,$visiveis))
 						{$visivel = "true";}
-						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+						if($nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM"){
+							//nesse caso o layer e adicionado como TMS
+							//tms leva os parametros do TMS
+							$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "../ogc.php?tema='.$tema.'",{tileOrigin: new OpenLayers.LonLat(-180, -90),serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png"})';
+							//cria um clone WMS para efeitos de getfeatureinfo
+							$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,singleTile:true,visibility:false,isBaseLayer:false})';
+						}
+						else{
+							$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+						}
+						//var_dump($objOpenLayers);exit;
 					}
 				}
 				else
@@ -313,18 +323,19 @@ Par&acirc;metros:
 <script type="text/javascript" src="../pacotes/yui290/build/dragdrop/dragdrop-min.js"></script>
 <script type="text/javascript" src="../pacotes/yui290/build/container/container-min.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
+<script type="text/javascript" src="../classesjs/compactados/classe_util_compacto.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers211.js"></script>
 <script type="text/javascript" src="openlayers.js"></script>
-
+<link rel="stylesheet" href="theme/default/style.css" type="text/css" />
+<link rel="stylesheet" href="openlayers.css" type="text/css" />
 -->
+
+
 <script type="text/javascript" src="openlayers_compacto.js.php"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_util_compacto.js"></script>
 <link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
 
-<!--
-<link rel="stylesheet" href="theme/default/style.css" type="text/css" />
-<link rel="stylesheet" href="openlayers.css" type="text/css" />
--->
+
 <style>
 .yui-skin-sam .container-minimiza {
 	background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
@@ -433,7 +444,7 @@ i3GEO.editorOL.mapa = new OpenLayers.Map(
 	'i3geoMapa',
 	{
 		controls:[],
-		resolutions:[0.703125,0.3515625,0.17578125,0.087890625,0.0439453125,0.02197265625,0.010986328125,0.0054931640625,0.00274658203125,0.001373291015625,0.0006866455078125,0.00034332275390625,0.000171661376953125,0.0000858306884765625,0.00004291534423828125,0.000021457672119140625]
+		resolutions: [0.703125,0.3515625,0.17578125,0.087890625,0.0439453125,0.02197265625,0.010986328125,0.0054931640625,0.00274658203125,0.001373291015625,0.0006866455078125,0.00034332275390625,0.000171661376953125,0.0000858306884765625,0.00004291534423828125,0.000021457672119140625,0.000010728836059570312,0.000005364418029785156,0.000002682209014892578]
 	}
 );
 i3GEO.editorOL.inicia();
