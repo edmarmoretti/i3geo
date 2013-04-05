@@ -633,10 +633,15 @@ function incluiTemasIniciais(){
 		$arqt = trim($arqt);
 		if ($arqt == "")
 		{continue;}
-		if (file_exists($arqt)){
+		$extensao = ".map";
+		$arqt = str_replace(".gvp","",$arqt);
+		if(file_exists($arqt.".gvp")){
+			$extensao = ".gvp";
+			$arqt = $arqt.".gvp";
+		}
+		if(file_exists($arqt)){
 			$arqtemp = $arqt;
 		}
-		$extensao = ".map";
 		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt."php"))){
 			$extensao = ".php";
 		}

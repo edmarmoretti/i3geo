@@ -279,8 +279,7 @@ i3GEO.editorOL = {
 	},
 	layersClonados: function(paramsLayers){
 		var layers = i3GEO.editorOL.mapa.layers,
-			nlayers = layers.length,
-			ins = [],i;
+			nlayers = layers.length,i;
 		for(i=0;i<nlayers;i++){
 			if(layers[i].params.CLONETMS === paramsLayers){
 				return(layers[i]);
