@@ -194,7 +194,9 @@ i3GEObuscaRapida = {
 				}
 			);
 		}
-
+		else{
+			$i("resultadoGoogle").style.display = "none";
+		}
 		if(temasmapa === true){
 			try{
 				var verificaTema = window.parent.i3GEO.arvoreDeCamadas.filtraCamadas("itembuscarapida","","diferente",window.parent.i3GEO.arvoreDeCamadas.CAMADAS);
@@ -202,10 +204,10 @@ i3GEObuscaRapida = {
 					alert("Nenhum tema configurado para busca");
 					return;
 				}
-				aguarde("block");
+				//aguarde("block");
 				i3GEO.php.buscaRapida(i3GEObuscaRapida.montaResultadoTemas,locaplic,"temas",palavra);
 			}
-			catch(e){}
+			catch(e){alert(e)}
 		}
 		else{
 			if($i("resultadoTemas"))

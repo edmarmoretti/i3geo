@@ -9,26 +9,29 @@
 <div style="top:5px;left:1px;display:block;width:90%;"  id="resultadoTemas" >Buscando no mapa...</div>
 <div style="top:5px;left:1px;display:block;width:90%;"  id="resultado" >Buscando fora...</div>
 
-<script src="../../classesjs/i3geo_tudo_compacto47.js.php" type="text/javascript"></script>
+<script src="../../classesjs/i3geo_tudo_compacto5.js.php" type="text/javascript"></script>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript">
 try{
 	var id = window.parent.i3GEO.gadgets.mostraBuscaRapida.id;
 }
 catch(e){id = "";}
-var v = window.parent.document.getElementById("valorBuscaRapida"+id);
 
+var v = window.parent.document.getElementById("valorBuscaRapida"+id);
 if(!v){
 	v = window.parent.document.getElementById("valorBuscaRapidabuscaRapida");
 }
-i3GEObuscaRapida.inicia(
-	v.value,
-   	window.parent.i3GEO.configura.locaplic,
-	i3GEObuscaRapida.montaResultado,
-	window.parent.i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos,
-	window.parent.i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa,
-	window.parent.i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google
-);
+
+if(v){
+	i3GEObuscaRapida.inicia(
+		v.value,
+	   	window.parent.i3GEO.configura.locaplic,
+		i3GEObuscaRapida.montaResultado,
+		window.parent.i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos,
+		window.parent.i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa,
+		window.parent.i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google
+	);
+}
 </script>
 </body>
 </html>
