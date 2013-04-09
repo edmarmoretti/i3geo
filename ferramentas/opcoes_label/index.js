@@ -47,7 +47,7 @@ i3GEOF.proplabel = {
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
 	criaJanelaFlutuante: function(){
-		i3GEOF.distanciaptpt.iniciaDicionario();
+		i3GEOF.proplabel.iniciaDicionario();
 	},
 	/*
 	Function: iniciaDicionario
