@@ -248,13 +248,13 @@ i3GEOadmin.editor = {
 								i,j,l,w;
 							tabela.push("<head><body><table style='border:1px solid black'><tr>");
 							for(i=0;i<ncolunas;i++){
-								tabela.push("<td style='border:1px solid gray' >"+dados.colunas[i].field+"</td>");
+								tabela.push("<td style='border:1px solid gray' >"+dados.nomescolunas[i]+"</td>");
 							}
 							tabela.push("</tr>");
 							for(i=0;i<nlinhas;i++){
 								tabela.push("<tr>");
 								l = linhas[i];
-								for(j=0;j<dados.nomescolunas.length;j++){
+								for(j=0;j<ncolunas;j++){
 									tabela.push("<td style='border:1px solid beige'>"+l[j]+"</td>");
 								}
 								tabela.push("</tr>");
