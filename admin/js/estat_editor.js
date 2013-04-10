@@ -234,14 +234,14 @@ i3GEOadmin.editor = {
 				alert("Escolha a tabela");
 				return;
 			}
-			
+
 			var nreg = window.prompt("Numero maximo de registros"),
 				callback = {
 					success:function(o){
 						try	{
 							core_carregando("desativa");
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
-								ncolunas = dados.colunas.length,
+								ncolunas = dados.nomescolunas.length,
 								linhas = dados.linhas,
 								nlinhas = linhas.length,
 								tabela = [],
@@ -254,7 +254,7 @@ i3GEOadmin.editor = {
 							for(i=0;i<nlinhas;i++){
 								tabela.push("<tr>");
 								l = linhas[i];
-								for(j=0;j<ncolunas;j++){
+								for(j=0;j<dados.nomescolunas.length;j++){
 									tabela.push("<td style='border:1px solid beige'>"+l[j]+"</td>");
 								}
 								tabela.push("</tr>");
