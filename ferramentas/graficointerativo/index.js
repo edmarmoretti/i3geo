@@ -43,7 +43,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
 /*
-Classe: i3GEOF.graficointerativo
+Classe: i3GEOF.graficointerativo (Versao em flash. Depreciado. Utilize graficointerativo1)
 
 */
 i3GEOF.graficointerativo = {

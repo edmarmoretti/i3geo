@@ -52,10 +52,18 @@ i3GEO.analise = {
 		/*
 		Function: graficoInterativo
 
-		Abre a janela de dialogo da ferramenta graficointerativo
+		Abre a janela de dialogo da ferramenta graficointerativo versao flash
 		*/
 		graficoInterativo: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.graficoInterativo()","graficointerativo","graficointerativo");
+		},
+		/*
+		Function: graficoInterativo1
+
+		Abre a janela de dialogo da ferramenta graficointerativo
+		*/
+		graficoInterativo1: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.graficoInterativo1()","graficointerativo1","graficointerativo1");
 		},
 		/*
 		Function: linhaDoTempo
