@@ -395,8 +395,7 @@ i3GEOadmin.variaveis = {
 		},
 		classesAuto: function(id_classificacao,id_medida_variavel){
 			core_montaEditor("","450px","200px","","Criar classes");
-			var ins = "<p class='paragrafo' >Utilize um dos m&eacute;todos abaixo para gerar as classes que ser&atilde;o utilizadas para representar os dados no cartograma" +
-			"<br><br><p>" +
+			var ins = "<p class='paragrafo' >Utilize um dos m&eacute;todos abaixo para gerar as classes que ser&atilde;o utilizadas para representar os dados no cartograma</p>" +
 			"&nbsp;<input id=i3GEOFmetaestatEditorBotao8 type='button' value='Escolher cores' />" +
 			"<br><br>";
 			ins += "&nbsp;<input id=i3GEOFmetaestatEditorBotao6 type='button' value='Divis&atilde;o em quartis' />" +

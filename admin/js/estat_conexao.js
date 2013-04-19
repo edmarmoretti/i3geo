@@ -19,7 +19,7 @@ i3GEOadmin.conexao = {
 		elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
 	},
 	formatSenha: function(elCell, oRecord, oColumn){
-		elCell.innerHTML = "a senha deve ser editada<br>diretamente no banco de dados";
+		elCell.innerHTML = "A senha deve ser editada diretamente no banco de dados de administra&ccedil;&atilde;o. Veja o i3geo/ms_configura.php para saber qual &eacute; o banco.";
 	},
 	defColunas: function(){
 		return [

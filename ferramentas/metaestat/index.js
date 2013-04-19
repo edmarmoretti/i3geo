@@ -1248,7 +1248,7 @@ i3GEOF.metaestat = {
 				};
 			if(cores == ""){
 				alert("Escolha as cores primeiro");
-				$i("listaColourRampEditor").onchange = function(){i3GEOF.metaestat.editor.intervalosIguais();};
+				$i("listaColourRampEditor").onchange = function(){i3GEOF.metaestat.editor.intervalosIguaisMM();};
 				i3GEO.util.abreColourRamp("","listaColourRampEditor",5);
 				return;
 			}
@@ -1466,7 +1466,7 @@ i3GEOF.metaestat = {
 					ins += '<input type=hidden  value="" id="listaColourRampEditor"  />' + //utilizado pelo seletor de colourramp;
 						"<br><p class='paragrafo' >" + $trad(17,i3GEOF.metaestat.dicionario1) + "</p>" +
 						"<p class='paragrafo' >" + $trad(18,i3GEOF.metaestat.dicionario1) +
-						"&nbsp;<input type=text class=digitar size=5 value=1 id=i3GEOFmetaestatEditorVmin />&nbsp;&nbsp;" +
+						"&nbsp;<input type=text class=digitar size=5 value=0 id=i3GEOFmetaestatEditorVmin />&nbsp;&nbsp;" +
 						$trad(19,i3GEOF.metaestat.dicionario1) +
 						"&nbsp;<input type=text class=digitar size=5 value=100 id=i3GEOFmetaestatEditorVmax /></p>" +
 						"<input id='i3GEOFmetaestatEditorBotao9' type='button' value='"+$trad(12,i3GEOF.metaestat.dicionario1)+"' />";
