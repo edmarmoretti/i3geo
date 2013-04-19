@@ -84,16 +84,21 @@ i3GEOadmin.editor = {
 							temp = "<fieldset>" +
 							"<p class=paragrafo ><input type=button value='Upload Shapefile' id='i3GEOadmin_botaoupload' /></p>" +
 							"<div id='i3GEOadmin_formupload'></div>" +
+							"<input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' />" +
+							"</fieldset>";
+
+							temp += "<fieldset>" +
 							"<p>Escolha uma tabela existente: " +
 							"<select id='i3GEOadmintabela' onchange='i3GEOadmin.editor.coluna.lista()'>";
 							temp += core_comboObjeto(dados,"tabela","tabela");
 							temp += "</select>" +
 								"<p class=paragrafo ><input type=button value='Mostrar dados' id='i3GEOadmintabelaMostrar' />" +
 								"<input type=button value='CSV' id='i3GEOadmintabelaCsv'/>" +
-								"<input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' />" +
 								"<input type=button value='Alterar nome atual' id='i3GEOadmintabelaAlterarNome' />" +
-								"<input type=button value='Copiar para' id='i3GEOadmintabelaCopiar' />";
-							$i(i3GEOadmin.editor.tabela.onde).innerHTML = temp+"</fieldset>";
+								"<input type=button value='Copiar para' id='i3GEOadmintabelaCopiar' />" +
+							"</fieldset>";
+							$i(i3GEOadmin.editor.tabela.onde).innerHTML = temp;
+
 							new YAHOO.widget.Button(
 								"i3GEOadmin_botaoupload",
 								{onclick:{fn: i3GEOadmin.editor.uploadshp.inicia}}
@@ -423,7 +428,6 @@ i3GEOadmin.editor = {
 		},
 		formulario: function(){
 			var ins = '<fieldset><form id=i3GEOuploadf target="i3GEOuploadiframe" action="../php/metaestat_uploadshp_submit.php" method="post" ENCTYPE="multipart/form-data">' +
-			'<p class="paragrafo" >Ap&oacute;s terminar o processo, atualize essa p&aacute;gina</p>' +
 			'<p class="paragrafo" >shp: <br><input class=digitar type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >shx: <br><input class=digitar type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >dbf: <br><input class=digitar type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
@@ -436,7 +440,10 @@ i3GEOadmin.editor = {
 			'<input type="hidden" id="i3GEOuploadesquema" name="i3GEOuploadesquema" value="">' +
 			'</form>' +
 			"<p class='paragrafo' style=color:red >N&atilde;o utilize '_' no nome do arquivo. Apenas letras e n&uacute;meros s&atilde;o aceitos!!!</p>" +
-			'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="400px"></iframe></fieldset>';
+			'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="400px"></iframe>' +
+			'<p class="paragrafo" >Ap&oacute;s terminar o processo, atualize essa p&aacute;gina para que a nova tabela criada apare&ccedil;a nas listas de sele&ccedil;&atilde;o.</p>' +
+			'<p class="paragrafo" >Utilize o <a href="./estat_tipo_regiao.html" >cadastro de regi&otilde;es</a> para registrar a tabela criada como uma nova unidade geogr&aacute;fica que poder&aacute; ser escolhida no processo de cria&ccedil;&atilde;o de vari&aacute;veis.</p>' +
+			'</fieldset>';
 			return ins;
 		},
 		submit: function(){
