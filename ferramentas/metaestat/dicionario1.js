@@ -108,7 +108,7 @@ it:""
 }],
 "16":[
 {
-pt:"Escolha primeiro as cores que ser&atilde;o utilizadas para representar cada classe no mapa",
+pt:"Aten&ccedil;&atilde;o: atualize o mapa ap&oacute;s alterar a classifica&ccedil;&atilde;o. Escolha primeiro as cores que ser&atilde;o utilizadas para representar cada classe no mapa",
 en:"",
 es:"",
 it:""

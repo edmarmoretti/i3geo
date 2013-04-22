@@ -1045,7 +1045,7 @@ i3GEOF.metaestat = {
 				};
 				janela = i3GEO.janela.cria(
 						"400px",
-						"280px",
+						"320px",
 						"",
 						"",
 						"",
@@ -1222,7 +1222,12 @@ i3GEOF.metaestat = {
 			temp = function(retorno){
 				core_carregando("desativa");
 				//fecha o editor
-				YAHOO.i3GEO.janela.manager.find("i3geoCartoEditor").destroy();
+				if(retorno == "erro"){
+					alert("N&atilde;o foi poss&iacute;vel gerar as classes. Verifique se j&aacute; existem dados para essa medida");
+				}
+				else{
+					YAHOO.i3GEO.janela.manager.find("i3geoCartoEditor").destroy();
+				}
 			};
 			if(cores == ""){
 				i3GEO.janela.tempoMsg("Escolha as cores primeiro. Depois acione a op&ccedil;&atilde;o de classifica&ccedil;&atilde;o novamente");
@@ -1262,7 +1267,12 @@ i3GEOF.metaestat = {
 			p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguais5&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid,
 			temp = function(retorno){
 				core_carregando("desativa");
-				YAHOO.i3GEO.janela.manager.find("i3geoCartoEditor").destroy();
+				if(retorno == "erro"){
+					alert("N&atilde;o foi poss&iacute;vel gerar as classes. Verifique se j&aacute; existem dados para essa medida");
+				}
+				else{
+					YAHOO.i3GEO.janela.manager.find("i3geoCartoEditor").destroy();
+				}
 			};
 			if(cores == ""){
 				alert("Escolha as cores primeiro");
@@ -1306,7 +1316,7 @@ i3GEOF.metaestat = {
 							};
 							janela = i3GEO.janela.cria(
 									"500px",
-									"400px",
+									"450px",
 									i3GEO.configura.locaplic+"/ferramentas/metaestat/upload.html",
 									"",
 									"",

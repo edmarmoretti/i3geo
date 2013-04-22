@@ -212,7 +212,7 @@ i3GEOF.identifica = {
 				{i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);}
 			}
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		catch(erro){}
 
 		var Dom = YAHOO.util.Dom,
 			col1 = null,

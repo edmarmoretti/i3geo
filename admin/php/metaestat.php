@@ -455,6 +455,10 @@ switch (strtoupper($funcao))
 		if($tipo == "quartil"){
 			$m = new Metaestat();
 			$dados = $m->sumarioMedidaVariavel($id_medida_variavel);
+			if($dados == false){
+				retornaJSON("erro");
+				exit;
+			}
 			$dados = $dados["quartis"];
 			$n = count($dados["expressoes"]);
 			$m->excluirRegistro("i3geoestat_classes","id_classificacao",$id_classificacao);
@@ -474,6 +478,10 @@ switch (strtoupper($funcao))
 		if($tipo == "intiguais5"){
 			$m = new Metaestat();
 			$dados = $m->sumarioMedidaVariavel($id_medida_variavel);
+			if($dados == false){
+				retornaJSON("erro");
+				exit;
+			}
 			$min = $dados["menor"];
 			$max = $dados["maior"];
 			$item = $dados["colunavalor"];
@@ -503,8 +511,8 @@ switch (strtoupper($funcao))
 		//o menor e o maior valor sao enviados como parametro ($min e $max)
 		if($tipo == "intiguais5mm"){
 			$m = new Metaestat();
-			$dados = $m->sumarioMedidaVariavel($id_medida_variavel);
-			$item = $dados["colunavalor"];
+			$metaVariavel = $m->listaMedidaVariavel("",$id_medida_variavel);
+			$item = $metaVariavel["colunavalor"];
 			$intervalo = ($max - $min) / 5;
 			//adiciona as classes novas
 			$intatual = $min;
@@ -528,7 +536,6 @@ switch (strtoupper($funcao))
 				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","255","255","255","2");
 			}
 		}
-
 		retornaJSON("ok");
 		exit;
 	break;

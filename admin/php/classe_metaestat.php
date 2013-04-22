@@ -277,7 +277,6 @@ class Metaestat{
 		}
 		if($agregaregiao == false){
 			if($todasascolunas == 0){
-
 				if($dados["colunaidunico"] != $dados["colunaidgeo"]){
 					$sql = " SELECT d.".$dados["colunaidunico"].",d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
 					$colunas[] = $dados["colunaidunico"];
@@ -372,7 +371,9 @@ class Metaestat{
 				else{
 					$parametrosMedida = "";
 				}
-				$sql .= " FROM (SELECT $parametrosMedida".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
+				//$sql .= " FROM (SELECT $parametrosMedida".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
+				$sql .= " FROM (SELECT $parametrosMedida * FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
+
 			}
 		}
 		else{
@@ -702,6 +703,7 @@ class Metaestat{
 		elseif(!empty($filtro)){
 			$sqlf .= " WHERE ".$filtro;
 		}
+		//echo $sqlf;exit;
 		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
 		if(!empty($metaVariavel["codigo_estat_conexao"])){
 			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
