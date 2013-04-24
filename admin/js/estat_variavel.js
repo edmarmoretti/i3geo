@@ -1325,6 +1325,10 @@ i3GEOadmin.variaveis = {
 		if(!eleValue || !eleCodigoConexao){
 			return;
 		}
+		if(eleCodigoConexao.value == ""){
+			alert("Escolha uma conexao");
+			return;
+		}
 		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=esquemasConexao&formato=json&codigo_estat_conexao="+eleCodigoConexao.value,callback);
 	},
 	selTabela: function(idEleValue,idEleCodigoConexao,idEleNomeEsquema){
@@ -1352,6 +1356,14 @@ i3GEOadmin.variaveis = {
 				argument: { foo:"foo", bar:"bar" }
 		};
 		if(!eleValue || !eleCodigoConexao || !eleNomeEsquema){
+			return;
+		}
+		if(eleCodigoConexao.value == ""){
+			alert("Escolha uma conexao");
+			return;
+		}
+		if(eleNomeEsquema.value == ""){
+			alert("Escolha um esquema");
 			return;
 		}
 		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=tabelasEsquema&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value,callback);
@@ -1382,6 +1394,18 @@ i3GEOadmin.variaveis = {
 				argument: { foo:"foo", bar:"bar" }
 		};
 		if(!eleValue || !eleCodigoConexao || !eleNomeEsquema || !eleNomeTabela){
+			return;
+		}
+		if(eleCodigoConexao.value == ""){
+			alert("Escolha uma conexao");
+			return;
+		}
+		if(eleNomeEsquema.value == ""){
+			alert("Escolha um esquema");
+			return;
+		}
+		if(eleNomeTabela.value == ""){
+			alert("Escolha uma tabela");
 			return;
 		}
 		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=colunasTabela&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value+"&nome_tabela="+eleNomeTabela.value,callback);

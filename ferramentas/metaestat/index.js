@@ -1129,6 +1129,11 @@ i3GEOF.metaestat = {
 			$i("Ecodigo_tipo_periodo").value = 0;
 			//impede a alteracao do filtro
 			$i("Efiltro").disabled = "disabled";
+			//altera a tabela quando escolher
+			$i("Ecodigo_tipo_regiao").onchange = function(){
+				alert("Escolha uma tabela compat&iacute;vel com essa regi&atilde;o");
+				$i("Etabela").value = "";
+			};
 		},
 		editaMedidaVariavel: function(){
 			i3GEOadmin.variaveis.aposGravar = function(){
@@ -1291,7 +1296,7 @@ i3GEOF.metaestat = {
 			var ins = "<p class='paragrafo' >" + $trad(2,i3GEOF.metaestat.dicionario1) +
 			"<br><br><p><input id=i3GEOFmetaestatEditorBotaot01 type='button' value='"+$trad(3,i3GEOF.metaestat.dicionario1)+"' />" +
 			"&nbsp<input id=i3GEOFmetaestatEditorBotaot02 type='button' value='"+$trad(4,i3GEOF.metaestat.dicionario1)+"' />" +
-			"&nbsp<input id=i3GEOFmetaestatEditorBotaot03 type='button' value='Upload' />";
+			"&nbsp<input id=i3GEOFmetaestatEditorBotaot03 type='button' value='Upload CSV' />";
 			i3GEO.util.proximoAnterior("","i3GEOF.metaestat.editor.t1()",ins,"i3GEOF.metaestat.editor.t0","i3GEOFmetaestatEditor");
 			new YAHOO.widget.Button(
 					"i3GEOFmetaestatEditorBotaot01",

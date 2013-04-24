@@ -58,24 +58,24 @@ i3GEOadmin.uploaddados = {
 		fimsubmit: function(){
 			core_carregando("desativa");
 			var ins = "";
-			ins += "<p>Abaixo voc&ecirc; deve definir quais colunas do arquivo que foi enviado corresponde &agrave;s colunas do banco de dados de destino</p>" +
-				"<p>Cont&eacute;m os c&oacute;digos que identificam o limite geogr&aacute;fico, como o c&oacute;digo do munic&iacute;pio ou bairro</p>" +
+			ins += "<p class=paragrafo ><b>Abaixo voc&ecirc; deve definir quais colunas do arquivo que foi enviado corresponde &agrave;s colunas do banco de dados de destino</b></p>" +
+				"<p class=paragrafo >Cont&eacute;m os c&oacute;digos que identificam o limite geogr&aacute;fico, como o c&oacute;digo do munic&iacute;pio ou bairro</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_codigoregiao") +
-				"<p>Cont&eacute;m os valores da medida</p>" +
+				"<p class=paragrafo >Cont&eacute;m os valores da medida</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_valor") +
-				"<p>Cont&eacute;m o ano (opcional)</p>" +
+				"<p class=paragrafo >Cont&eacute;m o ano (opcional)</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_ano") +
-				"<p>Cont&eacute;m o m&ecirc;s (opcional)</p>" +
+				"<p class=paragrafo >Cont&eacute;m o m&ecirc;s (opcional)</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_mes") +
-				"<p>Cont&eacute;m o dia (opcional)</p>" +
+				"<p class=paragrafo >Cont&eacute;m o dia (opcional)</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_dia") +
-				"<p>Cont&eacute;m a hora (opcional)</p>" +
+				"<p class=paragrafo >Cont&eacute;m a hora (opcional)</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_hora") +
 				//"<p>Tipo de valores</p>" +
 				//i3GEOadmin.uploaddados.upload.tipoValores("i3geoupload_tipoval") +
-				"<p>Tipo de inclus&atilde;o</p>" +
+				"<p class=paragrafo >Tipo de inclus&atilde;o</p>" +
 				i3GEOadmin.uploaddados.upload.tipoInclusao("i3geoupload_tipoinclusao") +
-				"<p><input type=button value='Concluir envio' id='i3geoupload_concluir' />";
+				"<p class=paragrafo ><input type=button value='Concluir envio' id='i3geoupload_concluir' /></p>";
 
 			$i(i3GEOadmin.uploaddados.upload.onde).innerHTML = ins;
 			new YAHOO.widget.Button(
@@ -163,8 +163,8 @@ i3GEOadmin.uploaddados = {
 			i3GEO.php.listaVariavel(i3GEOadmin.uploaddados.variaveis.combo,"i3geo_metaestat");
 		},
 		combo: function(dados){
-			$i(i3GEOadmin.uploaddados.variaveis.onde).innerHTML = "<p>Escolha a vari&aacute;vel</p>" +
-				i3GEOF.metaestat.principal.comboVariaveis(dados,"i3GEOadminEditorVariaveis_combo","i3GEOadmin.uploaddados.medidas.lista()","","nao");
+			$i(i3GEOadmin.uploaddados.variaveis.onde).innerHTML = "<p class=paragrafo >Escolha a vari&aacute;vel</p>" +
+				i3GEOF.metaestat.principal.comboVariaveis(dados,"i3GEOadminEditorVariaveis_combo","i3GEOadmin.uploaddados.medidas.lista()","250","nao","nao");
 		}
 	},
 	medidas:{
@@ -178,8 +178,8 @@ i3GEOadmin.uploaddados = {
 			i3GEO.php.listaMedidaVariavel($i("i3GEOadminEditorVariaveis_combo").value,i3GEOadmin.uploaddados.medidas.combo);
 		},
 		combo: function(dados){
-			$i(i3GEOadmin.uploaddados.medidas.onde).innerHTML = "<p>Escolha a medida da vari&aacute;vel</p>" +
-				i3GEOF.metaestat.principal.comboMedidasVariavel(dados,"i3GEOadminEditorMedidas_combo","");
+			$i(i3GEOadmin.uploaddados.medidas.onde).innerHTML = "<p class=paragrafo >Escolha a medida da vari&aacute;vel</p>" +
+				i3GEOF.metaestat.principal.comboMedidasVariavel(dados,"i3GEOadminEditorMedidas_combo","","","250","nao","nao");
 		}
 	}
 };
