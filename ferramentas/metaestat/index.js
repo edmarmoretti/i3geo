@@ -837,15 +837,24 @@ i3GEOF.metaestat = {
 			//function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor=""){
 			var v = i3GEOF.metaestat.comum.verificaParametros(),
 			temp = function(retorno){
+				var atualiza = function(){
+					i3GEO.atualiza();
+					i3GEOF.metaestat.CAMADAS.push(retorno.layer);
+					i3GEO.mapa.ativaTema(retorno.layer);
+					i3GEOF.metaestat.analise.comboCamadas();
+				},
+				c = i3GEO.arvoreDeCamadas.capturaCheckBox(retorno.layer);
 				if(i3GEO.arvoreDeCamadas.pegaTema(retorno.layer) == ""){
 					i3GEOF.metaestat.comum.desligaCamadas();
-					var atualiza = function(){
-						i3GEO.atualiza();
-						i3GEOF.metaestat.CAMADAS.push(retorno.layer);
-						i3GEO.mapa.ativaTema(retorno.layer);
-						i3GEOF.metaestat.analise.comboCamadas();
-					};
 					i3GEO.php.adtema(atualiza,retorno.mapfile);
+				}
+				else{
+					if(c){
+						i3GEOF.metaestat.comum.desligaCamadas();
+						i3GEO.mapa.ativaTema(retorno.layer);
+						c.checked = true;
+						i3GEO.Interface.ligaDesliga(c);
+					}
 				}
 			};
 			if(v != true){
