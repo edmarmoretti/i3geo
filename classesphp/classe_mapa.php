@@ -1093,6 +1093,9 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 								for ($i = $numlayers-1;$i > 0;$i--){
 									$layerAbaixo = $this->mapa->getlayer($i);
 									$tipo = $layerAbaixo->type;
+									if($tipo == 2 && ($layerAbaixo->getclass(0)->getstyle(0)->color->red == -1)) {
+										$tipo = 0;
+									}
 									if (($tipo != 2) && ($tipo != 3)){
 										$nummove++;
 									}
