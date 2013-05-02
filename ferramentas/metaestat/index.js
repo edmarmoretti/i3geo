@@ -1832,13 +1832,15 @@ i3GEOF.metaestat = {
 			i3GEO.php.listaVariavel(temp);
 		},
 		comboVariaveisOnchange: function(combo){
+			if($i("i3geoCartoParametrosMedidasVariavel")){
+				$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
+			}
 			if(combo.value != ""){
 				i3GEOF.metaestat.principal.opcoesMedidasVariavel(combo.value);
 			}
 			else{
 				$i("i3geoCartoMedidasVariavel").innerHTML = "";
 			}
-			$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
 			i3GEOF.metaestat.classes.zeraParametros();
 		},
 		comboMedidasVariavel: function(dados,idcombo,stronchange,filtroesquema,largura,mostraIconeprop,mostraIconedown){
@@ -1890,13 +1892,13 @@ i3GEOF.metaestat = {
 			i3GEO.php.listaMedidaVariavel(codigo_variavel,temp);
 		},
 		comboMedidaVariavelOnchange: function(combo){
+			if($i("i3geoCartoParametrosMedidasVariavel")){
+				$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
+			}
 			if(combo.value != ""){
 				//i3GEOF.metaestat.classes.inicia();
 				i3GEOF.metaestat.parametros.lista(combo.value);
 				i3GEOF.metaestat.principal.botaoAdicionaCamada();
-			}
-			else{
-				$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
 			}
 			i3GEOF.metaestat.classes.zeraParametros();
 		},

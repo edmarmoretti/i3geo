@@ -184,7 +184,7 @@ i3GEOadmin.fonteinfo = {
 		par += "&id_fonteinfo="+id;
 		core_carregando("ativa");
 		core_carregando(" gravando o registro do id= "+id);
-		sUrl = "../php/metaestat.php?funcao=alterarFonteinfo"+par;
+		sUrl = "../php/metaestat.php?funcao=alteraFonteinfo"+par;
 		callback = {
 	  		success:function(o){
 	  			try	{
