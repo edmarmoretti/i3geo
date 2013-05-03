@@ -608,7 +608,7 @@ width:20px;
 height:10px;
 cursor:pointer;
 }
-/*ícone de aplicar*/
+/*ï¿½cone de aplicar*/
 .tic
 {
 background-image:url(../imagens/visual/default/sprite.png);
@@ -911,7 +911,7 @@ height:10px;
 cursor:pointer;
 margin-right:3px;
 }
-/*marcador de lista das opções do tema*/
+/*marcador de lista das opï¿½ï¿½es do tema*/
 .ticOpcoesTemas
 {
 background-image:URL('../imagens/visual/default/sprite.png');
@@ -1156,6 +1156,25 @@ box-shadow:0px 1px 3px #3CA5EB;
 }
 .iconeGuiaMovelMouseOut{
 box-shadow:0px 1px 3px gray;
+}
+#euDock_euImage_2{
+border: 0px solid lightgray;
+border-radius: 35px 0px 0px 5px;
+opacity: 0.6;
+background: lightgray;
+}
+#euDock_euImage_3{
+border: 0px solid lightgray;
+opacity: 0.6;
+background: lightgray;
+}
+#euDock_euImage_4{
+border: 0px solid lightgray;
+border-radius: 0px 35px 5px 0px;
+opacity: 0.6;
+background: lightgray;
+}
+#euDock_0 img {
 }
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}

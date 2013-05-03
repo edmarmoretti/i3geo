@@ -39,6 +39,14 @@ body {
 	border: 0px solid #fff;"></iframe>
 	<div id=logajax style="display: block"></div>
 	<script>
+		//recupera a variavel escolhida se existir
+		try{
+			if(window.parent && window.parent.i3GEOF && window.parent.i3GEOF.metaestat){
+				i3GEOF.metaestat.CODIGO_VARIAVEL = window.parent.i3GEOF.metaestat.CODIGO_VARIAVEL;
+				i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = window.parent.i3GEOF.metaestat.ID_MEDIDA_VARIAVEL;
+			}
+		}
+		catch(e){}
 		//necessario para a ferramenta login e outras
 		i3GEO.configura = {
 			locaplic : "../.."

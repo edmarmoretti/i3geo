@@ -165,6 +165,9 @@ i3GEOadmin.uploaddados = {
 		combo: function(dados){
 			$i(i3GEOadmin.uploaddados.variaveis.onde).innerHTML = "<p class=paragrafo >Escolha a vari&aacute;vel</p>" +
 				i3GEOF.metaestat.principal.comboVariaveis(dados,"i3GEOadminEditorVariaveis_combo","i3GEOadmin.uploaddados.medidas.lista()","250","nao","nao");
+			if($i("i3GEOadminEditorVariaveis_combo").value != ""){
+				i3GEOadmin.uploaddados.medidas.lista();
+			}
 		}
 	},
 	medidas:{
