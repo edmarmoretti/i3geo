@@ -108,7 +108,7 @@ i3GEO.ajuda = {
 	/*
 	Propriedade: TRANSICAOSUAVE
 
-	Altera a transpar&ecirc;ncia quando o mouse sobrep&otilde;e à janela e quando sai
+	Altera a transpar&ecirc;ncia quando o mouse sobrep&otilde;e ï¿½ janela e quando sai
 
 	Tipo:
 	{boolean}
