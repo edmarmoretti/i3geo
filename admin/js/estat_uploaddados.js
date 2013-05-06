@@ -163,10 +163,16 @@ i3GEOadmin.uploaddados = {
 			i3GEO.php.listaVariavel(i3GEOadmin.uploaddados.variaveis.combo,"i3geo_metaestat");
 		},
 		combo: function(dados){
-			$i(i3GEOadmin.uploaddados.variaveis.onde).innerHTML = "<p class=paragrafo >Escolha a vari&aacute;vel</p>" +
-				i3GEOF.metaestat.principal.comboVariaveis(dados,"i3GEOadminEditorVariaveis_combo","i3GEOadmin.uploaddados.medidas.lista()","250","nao","nao");
-			if($i("i3GEOadminEditorVariaveis_combo").value != ""){
-				i3GEOadmin.uploaddados.medidas.lista();
+			if(dados.length == 0){
+				$i(i3GEOadmin.uploaddados.variaveis.onde).innerHTML = "<span style=color:red >N&atilde;o existem vari&aacute;veis cadastradas que possam ser editadas. Apenas as vari&aacute;veis criadas por meio do assistente podem ser editadas.</span>";
+				return;
+			}
+			else{
+				$i(i3GEOadmin.uploaddados.variaveis.onde).innerHTML = "<p class=paragrafo >Escolha a vari&aacute;vel</p>" +
+					i3GEOF.metaestat.principal.comboVariaveis(dados,"i3GEOadminEditorVariaveis_combo","i3GEOadmin.uploaddados.medidas.lista()","250","nao","nao");
+				if($i("i3GEOadminEditorVariaveis_combo").value != ""){
+					i3GEOadmin.uploaddados.medidas.lista();
+				}
 			}
 		}
 	},

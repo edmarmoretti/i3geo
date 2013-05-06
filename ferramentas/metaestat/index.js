@@ -1936,9 +1936,7 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.parametros.lista(combo.value);
 				i3GEOF.metaestat.principal.botaoAdicionaCamada();
 			}
-			else{
-				$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
-			}
+			$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
 			i3GEOF.metaestat.classes.zeraParametros();
 		},
 		comboClassificacoesMedidaVariavel: function(dados,idcombo){
