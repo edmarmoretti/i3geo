@@ -45,7 +45,7 @@ Arquivo: ms_configura.php
 
 */
 /*
- Variable: i3geomaster
+Variable: i3geomaster
 
 Usu&aacute;rio e senha que podem realizar opera&ccedil;&otilde;es de administra&ccedil;&atilde;o inicial do i3Geo, como a cria&ccedil;&atilde;o do banco de dados de administra&ccedil;&atilde;o ou opera&ccedil;&otilde;es cr&iacute;ticas do sistema
 
@@ -209,7 +209,7 @@ Tipo:
 $metaestatTemplates = "/ferramentas/metaestat/templates";
 
 /*
- Variable: navegadoresLocais
+Variable: navegadoresLocais
 
 Ip dos usuarios que podem navegar no servidor para acessar arquivos de dados geogr&aacute;ficos.
 
@@ -233,7 +233,7 @@ Tipo:
 //ver opcao especifica abaixo para o sistema operacional
 $navegadoresLocais = "";
 /*
- Variable: dir_tmp
+Variable: dir_tmp
 
 Caminho completo do diret&oacute;rio tempor&aacute;rio utilizado pelo mapserver.
 
@@ -243,7 +243,7 @@ Tipo:
 //ver opcao especifica abaixo para o sistema operacional
 $dir_tmp = "";
 /*
- Variable: locaplic
+Variable: locaplic
 
 Caminho completo onde fica o I3Geo
 
@@ -252,7 +252,7 @@ Tipo:
 */
 $locaplic = dirname(__FILE__);
 /*
- Variable: locmapserv
+Variable: locmapserv
 
 Localiza&ccedil;&atilde;o do execut&aacute;vel do Mapserver conforme deve ser acrescentado a URL ap&oacute;s o nome do host.
 
@@ -266,7 +266,7 @@ Tipo:
 //ver opcao especifica abaixo para o sistema operacional
 $locmapserv = "";
 /*
- Variable: locmapas
+Variable: locmapas
 
 Onde fica o xml, para preencher a guia mapas.
 
@@ -281,7 +281,7 @@ Tipo:
 */
 $locmapas = "";
 /*
- Variable: R_path
+Variable: R_path
 
 Onde esta o executavel do software R
 
@@ -294,7 +294,7 @@ Tipo:
 //ver opcao especifica abaixo para o sistema operacional
 $R_path = "";
 /*
- Variable: R_pathlib
+Variable: R_pathlib
 
 Onde ficam as bibliotecas adicionais necess&aacute;rias ao funcionamento do R
 
@@ -306,7 +306,7 @@ Tipo:
 //ver opcao especifica abaixo para o sistema operacional
 $R_libpath = "";
 /*
- Variable: postgis_mapa
+Variable: postgis_mapa
 
 String de conex&atilde;o para acesso aos dados (opcional).
 
@@ -343,7 +343,7 @@ $postgis_mapa = array(
 		"postgres"=>"user=postgres password=postgres dbname=postgis host=localhost port=5432",
 );
 /*
- Variable: utilizacgi
+Variable: utilizacgi
 
 Vari&aacute;vel indicando se o desenho do corpo do mapa ser&aacute; baseado no modo cgi.
 
@@ -361,7 +361,7 @@ Tipo:
 */
 $utilizacgi = "nao";
 /*
- Variable: expoeMapfile
+Variable: expoeMapfile
 
 Essa vari&aacute;vel controla se o nome do mapfile atual ser&aacute; ou n&atilde;o retornado para a aplica&ccedil;&atilde;o via ajax.
 
@@ -372,7 +372,7 @@ Tipo:
 */
 $expoeMapfile = "sim";
 /*
- Variable: conexaoadmin
+Variable: conexaoadmin
 
 Arquivo PHP que define a string de conex&atilde;o (PDO) com o banco de dados administrativo.
 
@@ -397,7 +397,7 @@ Tipo:
 */
 $conexaoadmin = "";
 /*
- Variable: $esquemaadmin
+Variable: $esquemaadmin
 
 Indica em qual esquema do banco de dados de administra&ccedil;&atilde;o est&atilde;o armazenadas as tabelas do sistema de administra&ccedil;&atilde;o. Por default, utiliza-se o esquema public.
 
@@ -406,7 +406,7 @@ Tipo:
 */
 $esquemaadmin = "";
 /*
- Variable: interfacePadrao
+Variable: interfacePadrao
 
 Interface padr&atilde;o utilizada para abrir o mapa.
 
@@ -421,7 +421,7 @@ Tipo:
 */
 $interfacePadrao = "openlayers.htm";
 /*
- Variable: base
+Variable: base
 
 Ender&ccedil;o do arquivo mapfile que ser&aacute; utilizado como base para a cria&ccedil;&atilde;o do mapa
 
@@ -438,7 +438,7 @@ Tipo:
 */
 $base = "";
 /*
- Variable: cachedir
+Variable: cachedir
 
 Pasta onde ficar&atilde;o armazenadas as imagens geradas pelo i3Geo para os LAYERS que permitem cache.
 
@@ -473,6 +473,7 @@ else //se for linux
 {
 	//verifica se est&aacute; sendo utilizado o diret&oacute;rio "opt" ou "var"
 	$locaplic = dirname(__FILE__);
+	$dir_tmp = "/tmp/ms_tmp";
 	if(dirname($locaplic) == "/opt/www/html"){
 		$dir_tmp = "/var/tmp/ms_tmp";
 	}

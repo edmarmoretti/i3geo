@@ -1,39 +1,39 @@
 /*
- Title: Cartogramas estat&iacute;sticos
+Title: Cartogramas estat&iacute;sticos
 
- Arquivo:
+Arquivo:
 
- i3geo/ferramentas/metaestat/index.js
+i3geo/ferramentas/metaestat/index.js
 
- Licenca:
+Licenca:
 
- GPL2
+GPL2
 
- i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
- Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
- Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
- Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
- e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
- GNU conforme publicada pela Free Software Foundation;
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+GNU conforme publicada pela Free Software Foundation;
 
- Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
- por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
- de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
- Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
- Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- GNU junto com este programa; se n&atilde;o, escreva para a
- Free Software Foundation, Inc., no endere&ccedil;o
- 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
  */
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
 /*
- Classe: i3GEOF.metaestat
+Classe: i3GEOF.metaestat
 
- Gerencia os componentes do m&oacute;dulo de gera&ccedil;&atilde;o de cartogramas estat&iacute;sticos
+Gerencia os componentes do m&oacute;dulo de gera&ccedil;&atilde;o de cartogramas estat&iacute;sticos
  */
 i3GEOF.metaestat = {
 	/**
@@ -741,10 +741,10 @@ i3GEOF.metaestat = {
 			var onde = $i("i3geoCartoTipoRep"),
 			ins,i,
 			dados = [
-			         {"codigo":"polygon","nome":"pol&iacute;gonos"},
-			         {"codigo":"point","nome":"pontos"}
-			         ],
-			         n = dados.length;
+							{"codigo":"polygon","nome":"pol&iacute;gonos"},
+							{"codigo":"point","nome":"pontos"}
+							],
+							n = dados.length;
 			ins = '' +
 			'<br><p class="paragrafo" >'+$trad(8,i3GEOF.metaestat.dicionario)+'</p>' +
 			"<select id='i3geoCartoComboTipoRep' style='box-shadow:0 1px 5px gray;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px' onchange=''>";
@@ -1931,12 +1931,12 @@ i3GEOF.metaestat = {
 		},
 		comboMedidaVariavelOnchange: function(combo){
 			i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = combo.value;
+			$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
 			if(combo.value != ""){
 				//i3GEOF.metaestat.classes.inicia();
 				i3GEOF.metaestat.parametros.lista(combo.value);
 				i3GEOF.metaestat.principal.botaoAdicionaCamada();
 			}
-			$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
 			i3GEOF.metaestat.classes.zeraParametros();
 		},
 		comboClassificacoesMedidaVariavel: function(dados,idcombo){
