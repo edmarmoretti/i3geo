@@ -1,1 +1,0 @@
-INDEX VERSION 1.122+C:\ms4w\Apache\htdocs\i3geo\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
