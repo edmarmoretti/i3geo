@@ -173,16 +173,16 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		{isBaseLayer:true,visibility:false}
 	);
 	var tms = new OpenLayers.Layer.TMS(
-	    "OSGEO",
-	    "http://tilecache.osgeo.org/wms-c/Basic.py/",
-	    {
-	        layername: "basic",
-	        type: "png",
-	        // set if different than the bottom left of map.maxExtent
-	        tileOrigin: new OpenLayers.LonLat(-180,-90),
-	        isBaseLayer:true,
-	        visibility:false
-	    }
+			"OSGEO",
+			"http://tilecache.osgeo.org/wms-c/Basic.py/",
+			{
+					layername: "basic",
+					type: "png",
+					// set if different than the bottom left of map.maxExtent
+					tileOrigin: new OpenLayers.LonLat(-180,-90),
+					isBaseLayer:true,
+					visibility:false
+			}
 	);
 
 	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,tms,bra];
@@ -201,7 +201,7 @@ i3GEO.inicia();
 //parametros especificos dos cartogramas
 //ver i3geo/ferramentas/metaestat
 i3GEOF.metaestat.INTERFACE = "flutuante";
-i3GEOF.metaestat.CONEXAODEFAULT = 9;
+i3GEOF.metaestat.CONEXAODEFAULT = 1;
 i3GEOF.metaestat.TOP = 50;
 i3GEOF.metaestat.LEFT = 100;
 //i3GEOF.metaestat.LARGURA = 270;

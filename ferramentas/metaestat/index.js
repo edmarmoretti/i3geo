@@ -1098,6 +1098,9 @@ i3GEOF.metaestat = {
 				i3GEOadmin.variaveis.editar("variavel",codigo_variavel);
 			}
 		},
+		//
+		//os valores default sao definidos em i3GEOF.metaestat.inicia
+		//
 		criaMedidaVariavel: function(){
 			i3GEOadmin.variaveis.aposGravar = function(){
 				core_carregando("desativa");
@@ -1108,11 +1111,20 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.principal.inicia();
 			};
 			i3GEOadmin.variaveis.editar("medidaVariavel","");
+			//insere uma opcao para ativar as opcoes adicionais que sao usadas quando o usuario quer
+			//usar dados ja existentes em um banco de dados
+			var botoesdiv = $i("okcancel_checkbox"),
+				btn = document.createElement("div");
+			btn.innerHTML = "<br><input type=checkbox style='position:relative;top:3px;cursor:pointer;' onclick='javascript:$i(\"editorMedidaDefault\").style.display = \"block\";'/> Quero usar uma tabela j&aacute; existente ou alterar os par&acirc;metros adicionais";
+			botoesdiv.appendChild(btn);
+
+			$i("editorMedidaDefault").style.display = "none";
 			//passa o codigo da variavel
 			$i("Ecodigo_variavel").value = $i("i3geoCartoComboVariavelEditor").value;
 			//define os valores que sao padrao
 			//a conexao e com o default
 			$i("Ecodigo_estat_conexao").value = i3GEOF.metaestat.CONEXAODEFAULT;
+			$i("Ecodigo_estat_conexao").style.width = "90%";
 			//o esquema e o public
 			$i("Eesquemadb").value = "i3geo_metaestat";
 			//a tabela onde ficarao os dados
@@ -1125,15 +1137,27 @@ i3GEOF.metaestat = {
 			$i("Ecolunaidunico").value = "gid";
 			//unidade de medida
 			$i("Ecodigo_unidade_medida").value = 1;
+			$i("Ecodigo_unidade_medida").style.width = "90%";
 			//periodo
 			$i("Ecodigo_tipo_periodo").value = 0;
+			$i("Ecodigo_tipo_periodo").style.width = "90%";
 			//impede a alteracao do filtro
 			$i("Efiltro").disabled = "disabled";
 			//altera a tabela quando escolher
 			$i("Ecodigo_tipo_regiao").onchange = function(){
-				alert("Escolha uma tabela compat&iacute;vel com essa regi&atilde;o");
-				$i("Etabela").value = "";
+				var c = $i("Ecodigo_tipo_regiao");
+				if(c.value != ""){
+					//nesse caso, o nome da tabela e padrao
+					if(i3GEOadmin && $i("Eesquemadb").value === "i3geo_metaestat"){
+						$i("Etabela").value = i3GEOadmin.variaveis.dadosAuxiliares.tipo_regiao[c.selectedIndex - 1].tabela;
+					}
+					else{
+						alert("Escolha uma tabela compat&iacute;vel com essa regi&atilde;o");
+						$i("Etabela").value = "";
+					}
+				}
 			};
+			$i("Ecodigo_tipo_regiao").style.width = "90%";
 		},
 		editaMedidaVariavel: function(){
 			i3GEOadmin.variaveis.aposGravar = function(){
@@ -1431,16 +1455,21 @@ i3GEOF.metaestat = {
 				//remove o conteudo anteriormente construido
 				i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3a");
 			}
-			if($i("i3geoCartoComboMedidaVariavelEditor").value === ""){
-				i3GEO.janela.tempoMsg($trad(2,i3GEOF.metaestat.dicionario));
-				i3GEOF.metaestat.editor.t2(false);
+			if(i3GEOF.metaestat.DADOSMEDIDASVARIAVEL[0].esquemadb !== "i3geo_metaestat"){
+				i3GEOF.metaestat.editor.t3(true,textoSelecionado);
 			}
 			else{
-				var ins = "<p class='paragrafo' >" + $trad(20,i3GEOF.metaestat.dicionario1) +
-				"<br><br><p><input id=i3GEOFmetaestatEditorBotaot3a type='button' value='Upload CSV' />";
-				i3GEO.util.proximoAnterior("i3GEOF.metaestat.editor.t2()","i3GEOF.metaestat.editor.t3()",ins,"i3GEOF.metaestat.editor.t3a","i3GEOFmetaestatEditor",true);
-				i3GEOF.metaestat.editor.botaoUpload("i3GEOFmetaestatEditorBotaot3a");
-				$i("i3GEOFmetaestatEditorBotaot3a-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
+				if($i("i3geoCartoComboMedidaVariavelEditor").value === ""){
+					i3GEO.janela.tempoMsg($trad(2,i3GEOF.metaestat.dicionario));
+					i3GEOF.metaestat.editor.t2(false);
+				}
+				else{
+					var ins = "<p class='paragrafo' >" + $trad(20,i3GEOF.metaestat.dicionario1) +
+					"<br><br><p><input id=i3GEOFmetaestatEditorBotaot3a type='button' value='Upload CSV' />";
+					i3GEO.util.proximoAnterior("i3GEOF.metaestat.editor.t2()","i3GEOF.metaestat.editor.t3()",ins,"i3GEOF.metaestat.editor.t3a","i3GEOFmetaestatEditor",true);
+					i3GEOF.metaestat.editor.botaoUpload("i3GEOFmetaestatEditorBotaot3a");
+					$i("i3GEOFmetaestatEditorBotaot3a-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
+				}
 			}
 		},
 		/**
