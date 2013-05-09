@@ -558,18 +558,30 @@ i3GEOadmin.variaveis = {
 									{titulo:"Express&atilde;o (no estilo Mapserver)<br> exemplo (([nu_farm_funcionando] > 0) and ([nu_farm_funcionando] < 5)):",id:"Eexpressao",size:"50",value:i.expressao,tipo:"text",div:""},
 									{titulo:"S&iacute;mbolo:",id:"Esimbolo",size:"10",value:i.simbolo,tipo:"text",div:""},
 									{titulo:"Tamanho do s&iacute;mbolo:",id:"Etamanho",size:"10",value:i.tamanho,tipo:"text",div:""},
-									{titulo:"Vermelho:",id:"Evermelho",size:"10",value:i.vermelho,tipo:"text",div:""},
+									{titulo:"Vermelho: <img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\"inputEventoCor\");' />",id:"Evermelho",size:"10",value:i.vermelho,tipo:"text",div:""},
 									{titulo:"Verde:",id:"Everde",size:"10",value:i.verde,tipo:"text",div:""},
 									{titulo:"Azul:",id:"Eazul",size:"10",value:i.azul,tipo:"text",div:""},
 									{titulo:"Contorno - tamanho do s&iacute;mbolo:",id:"Eotamanho",size:"10",value:i.otamanho,tipo:"text",div:""},
-									{titulo:"Contorno - Vermelho:",id:"Eovermelho",size:"10",value:i.overmelho,tipo:"text",div:""},
+									{titulo:"Contorno - Vermelho <img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\"inputEventoOutlineCor\");' />:",id:"Eovermelho",size:"10",value:i.overmelho,tipo:"text",div:""},
 									{titulo:"Contorno - Verde:",id:"Eoverde",size:"10",value:i.overde,tipo:"text",div:""},
 									{titulo:"Contorno - Azul:",id:"Eoazul",size:"10",value:i.oazul,tipo:"text",div:""}
 				]
 			};
 			ins += core_geraLinhas(param);
 			//ins += "<br><br><br>";
-			$i("editor_bd").innerHTML = ins;
+			//o input hidden recebe a cor da janela de selecao interativa e executa o preenchimento dos campos rgb
+
+			$i("editor_bd").innerHTML = ins+"<input type=hidden value='' id='inputEventoCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoCor\",\"E\")' />";
+			$i("editor_bd").innerHTML = ins+"<input type=hidden value='' id='inputEventoOutlineCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoOutlineCor\",\"Eo\")' />";
+
+		},
+		preencheCores: function(id,prefixo){
+			var cor = $i(id).value.split(",");
+			if(cor.length == 3){
+				$i(prefixo+"vermelho").value = cor[0];
+				$i(prefixo+"verde").value = cor[1];
+				$i(prefixo+"azul").value = cor[2];
+			}
 		}
 	},
 	parametro:{
@@ -867,7 +879,7 @@ i3GEOadmin.variaveis = {
 							core_montaEditor("","480px","300px","","Testes",false);
 							ins = "<p><b>Select simples:</b> "+dados.sql;
 							ins += "<p><b>Mapserver:</b> "+dados.sqlmapserver;
-							ins += "<p><b>�ltima URL:</b><div id='ultimaUrl'></div> ";
+							ins += "<p><b>&Uacute;ltima URL:</b><div id='ultimaUrl'></div> ";
 							ins += "<p><b>Colunas:</b> "+dados.colunas;
 							ins +="<p><input style='position:relative;top:2px' type='checkbox' id='incluirtodascolunas' />Incluir todas as colunas no resultado";
 							ins +="<p>Filtro opcional (exemplo: valor = 1)<br>";

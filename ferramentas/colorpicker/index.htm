@@ -4,10 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <style type="text/css">
 /*margin and padding on body element
-  can introduce errors in determining
-  element position and are not recommended;
-  we turn them off as a foundation for YUI
-  CSS treatments. */
+	can introduce errors in determining
+	element position and are not recommended;
+	we turn them off as a foundation for YUI
+	CSS treatments. */
 body {
 	margin:0;
 	padding:0;border:0px;
@@ -24,8 +24,8 @@ body {
 <!--begin custom header content for this example-->
 
 <style type="text/css">
-  #container { position: relative; padding: 6px; background-color: #eeeeee; width: 300px; height:200px; }
-  .yui-picker-controls li {padding: 01px;}
+	#container { position: relative; padding: 6px; background-color: #eeeeee; width: 300px; height:200px; }
+	.yui-picker-controls li {padding: 01px;}
 </style>
 <!--end custom header content for this example-->
 <title></title>
@@ -39,18 +39,18 @@ body {
 API -->
 <script type="text/javascript">
 (function() {
-    var Event = YAHOO.util.Event,
-        picker;
+		var Event = YAHOO.util.Event,
+				picker;
 
-    Event.onDOMReady(function() {
-            picker = new YAHOO.widget.ColorPicker("container", {
-                    showhsvcontrols: true,
-                    showhexcontrols: true,
+		Event.onDOMReady(function() {
+						picker = new YAHOO.widget.ColorPicker("container", {
+										showhsvcontrols: true,
+										showhexcontrols: true,
 					images: {
 						PICKER_THUMB: window.parent.i3GEO.configura.locaplic+"/pacotes/yui290/build/colorpicker/assets/picker_thumb.png",
 						HUE_THUMB: window.parent.i3GEO.configura.locaplic+"/pacotes/yui290/build/colorpicker/assets/hue_thumb.png"
-    				}
-                });
+						}
+								});
 			var onRgbChange = function(o) {
 			};
 			picker.on("rgbChange", onRgbChange);
@@ -64,12 +64,13 @@ API -->
 			});
 			Event.on("gethex", "click", function(e) {
 			});
-        });
+				});
 
 })();
 //
-//utilize tipo para definir o tipo de cor de retorno
-//
+//utilize tipo na url para definir o tipo de cor de retorno
+//default e hex
+//se for usado rgbSep, o retorno sera em rgb separado por " "
 function aplicarCor()
 {
 	navm = false; // IE
