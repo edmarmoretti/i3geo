@@ -17,7 +17,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -330,7 +330,7 @@ function montaDivMapa(i)
 		{
 			"linhas":[
 			{titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
-			{titulo:"Template <img onclick='selTemplate(\"Etemplate\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>:",id:"Etemplate",size:"50",value:i.template,tipo:"text",div:""},
+			{titulo:"Template (<a href='../php/metaestat_templates.php' target='_blank'>pr&eacute;via</a>) <img onclick='selTemplate(\"Etemplate\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>:",id:"Etemplate",size:"50",value:i.template,tipo:"text",div:""},
 			{titulo:"Logo (esquerdo) <img onclick='selLogo(\"Elogoesquerdo\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>:",id:"Elogoesquerdo",size:"50",value:i.logoesquerdo,tipo:"text",div:""},
 			{titulo:"Logo (direito) <img onclick='selLogo(\"Elogodireito\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>::",id:"Elogodireito",size:"50",value:i.logodireito,tipo:"text",div:""}
 			]
@@ -377,8 +377,10 @@ function selTemplate(id){
 				textos = [],
 				selecionados = [$i(id).value];
 				for(i=0;i<n;i++){
-					valores.push(dados[i]);
-					textos.push(dados[i]);
+					if(dados[i].split(".")[1] === "php"){
+						valores.push(dados[i]);
+						textos.push(dados[i]);
+					}
 				}
 				core_menuCheckBox(valores,textos,selecionados,$i(id),"","","sim");
 			}

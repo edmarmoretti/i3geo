@@ -414,6 +414,17 @@ function listaArquivos($diretorio)
 	{return "erro";}
 }
 /*
+ Function: echoimg
+
+ Envia para o navegador uma imagem. Utilizado na tag IMG em arquivos HTML
+ */
+function echoimg($arquivo,$tipo){
+	echo header("Content-type: image/png \n\n");
+	header('Content-Length: '.filesize($arquivo));
+	fpassthru(fopen($arquivo, 'rb'));
+	exit;
+}
+/*
 Function: gravaDados
 
 Grava as linhas de um array em um arquivo.
