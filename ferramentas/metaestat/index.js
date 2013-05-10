@@ -2001,8 +2001,10 @@ i3GEOF.metaestat = {
 				ins = '<input type=hidden id=i3geoCartoComboMedidasVariavel value=""/>',
 				i;
 				for(i=0;i<n;i++){
-					ins += '<p class="paragrafo" >'+dados[i].titulo+'</p>';
-					ins += '<div id="comboTemasMapa_'+dados[i].id_mapa_grupo+'"></div>';
+					ins += '<div class="divGrupo">';
+					ins += '<p class="tituloGrupo" >'+dados[i].titulo+'</p>';
+					ins += '<div class="divComboMedidas" id="comboTemasMapa_'+dados[i].id_mapa_grupo+'"></div>';
+					ins += '</div>';
 				}
 				$i(onde).innerHTML = ins;
 				for(i=0;i<n;i++){
@@ -2019,7 +2021,7 @@ i3GEOF.metaestat = {
 
 				ins = "<select style='width:"+(i3GEOF.metaestat.LARGURA - 60)+"px' onchange='i3GEOF.metaestat.publicador.comboMedidaVariavelOnchange(this)'><option value=''>---</option>";
 				for(i=0;i<n;i++){
-					ins += "<option value='"+dados[i].id_mapa_tema+"'>"+dados[i].titulo+"</option>";
+					ins += "<option value='"+dados[i].id_medida_variavel+"'>"+dados[i].titulo+"</option>";
 				}
 				ins += "</select>";
 				ins += "<img class='ticPropriedades2' src='"+i3GEO.configura.locaplic+"/imagens/visual/default/branco.gif' style='height:14px;position:relative;cursor:pointer;left:5px;top:4px;' onclick='i3GEOF.metaestat.classes.inicia()' title='"+$trad(18,i3GEOF.metaestat.dicionario)+"'/>";

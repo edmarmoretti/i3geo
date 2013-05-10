@@ -14,7 +14,7 @@ i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
 i3GEO.Interface.openlayers.GADGETS = {
 		PanZoomBar:true,
 		PanZoom:false,
-		LayerSwitcher:true,
+		LayerSwitcher:false,
 		ScaleLine:true,
 		OverviewMap:false
 	};
@@ -33,6 +33,7 @@ i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = false;
 i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = false;
 i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
+i3GEO.arvoreDeCamadas.finaliza = "i3GEO.arvoreDeCamadas.ARVORE.collapseAll()";
 i3GEO.mapa.AUTORESIZE = true;
 OpenLayers.ImgPath = "../../../pacotes/openlayers/img/";
 //
@@ -58,16 +59,16 @@ OpenLayers.ImgPath = "../../../pacotes/openlayers/img/";
 		{isBaseLayer:true,visibility:false}
 	);
 	var tms = new OpenLayers.Layer.TMS(
-	    "OSGEO",
-	    "http://tilecache.osgeo.org/wms-c/Basic.py/",
-	    {
-	        layername: "basic",
-	        type: "png",
-	        // set if different than the bottom left of map.maxExtent
-	        tileOrigin: new OpenLayers.LonLat(-180,-90),
-	        isBaseLayer:true,
-	        visibility:false
-	    }
+			"OSGEO",
+			"http://tilecache.osgeo.org/wms-c/Basic.py/",
+			{
+					layername: "basic",
+					type: "png",
+					// set if different than the bottom left of map.maxExtent
+					tileOrigin: new OpenLayers.LonLat(-180,-90),
+					isBaseLayer:true,
+					visibility:false
+			}
 	);
 	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,tms];
 })();

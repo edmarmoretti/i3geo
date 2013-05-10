@@ -72,26 +72,10 @@ $dadosmapa = dadosmapa("../../../");
 	<tr style="border:0px">
 		<td height="2" colspan=2 id="barraSuperior" style="background-image:  url('../../../imagens/cabeca.png');height:10px"></td>
 	</tr>
-	<tr>
-		<td>
-			<table width=100% cellspacing=0 cellpadding=0 >
-				<tr>
-					<td>
-						<div class=verdeescuro style="top:0px;cursor:pointer;">
-							<div id=guia1 class=guia ></div>
-							<div id=guia4 class=guia ></div>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</td>
-		<td id="contemMenu" style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
-			<div id="menus" ></div>
-		</td>
-	</tr>
+
 	<tr>
 		<td align="left" id=contemFerramentas style="vertical-align:top;width:300px;text-align:left;" >
-			<div id='guia1obj' align="left" >
+			<div id='guia1obj' align="left" style="overflow:auto;">
 				<div id="i3geoCartoParametros_corpo" style="left:5px;position:relative; top:10px; display:block; text-align:left; width:248px;" >
 					<div id="i3geoCartoVariaveisContainer">
 						<div class="paragrafo" id="i3geoCartoMedidasVariavel" >
@@ -103,14 +87,15 @@ $dadosmapa = dadosmapa("../../../");
 				</div>
 				<div align="left" id=listaTemas style="position:relative;top:25px;" ></div>
 			</div>
-			<div align="left" id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../../../imagens/branco.gif" width=248 /></div>
-			<div align="left" id='guia4obj' style='display:none;text-align:left'>
-				<div align="left" id='legenda' style='text-align:left'></div>
-			</div>
 		</td>
 		<td style="vertical-align:top;border-width:0px;">
 			<table width="100%" style="vertical-align:top;border-width:0px">
-				<tr>
+	<tr>
+		<td id="contemMenu" style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
+			<div id="menus" ></div>
+		</td>
+	</tr>
+			<tr>
 					<td  class=verdeclaro id=contemImg > <div id=corpoMapa style="background-image:  url('../../../imagens/i3geo1bw.jpg');"></div></td>
 				</tr>
 			</table>
@@ -153,6 +138,7 @@ $dadosmapa = dadosmapa("../../../");
 <script src="../dicionario.js" ></script>
 <link rel="stylesheet" type="text/css" href="lib/default.css">
 <script>
+i3GEO.finalizaAPI = '$i("guia1obj").style.height = 20 + i3GEO.parametros.h+"px";';
 i3GEO.barraDeBotoes.OFFSET = 7;
 i3GEO.barraDeBotoes.defBotao("localizar").funcaoonclick = function(){
 	i3GEO.mapa.dialogo.locregiao();
@@ -183,6 +169,7 @@ i3GEOF.metaestat.inicia();
 i3GEOF.metaestat.publicador.montaGrupos("i3geoCartoMedidasVariavel");
 i3GEOF.metaestat.principal.botaoAdicionaCamada(150);
 i3GEOF.metaestat.INTERFACE = "flutuante";
+
 </script>
 </body>
 </html>
