@@ -118,7 +118,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: LISTAVARIAVEL
+	Valor: LISTAVARIAVEL
 
 	Lista de variaveis
 
@@ -154,7 +154,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: LISTACLASSECLASSIFICACAO
+	Valor: LISTACLASSECLASSIFICACAO
 
 	Lista as classes de uma classificacoes
 
@@ -168,7 +168,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: LISTAMEDIDAVARIAVEL
+	Valor: LISTAMEDIDAVARIAVEL
 
 	Lista das medidas de uma variavel
 
@@ -182,7 +182,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: LISTAPARAMETRO
+	Valor: LISTAPARAMETRO
 
 	Lista de parametros
 
@@ -201,7 +201,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: LISTAUNIDADEMEDIDA
+	Valor: LISTAUNIDADEMEDIDA
 
 	Lista de unidades de medida
 
@@ -225,7 +225,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: LISTATIPOPERIODO
+	Valor: LISTATIPOPERIODO
 
 	Lista de unidades de medida
 
@@ -239,7 +239,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: LISTATIPOREGIAO
+	Valor: LISTATIPOREGIAO
 
 	Lista de tipos de regiao
 
@@ -340,7 +340,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERAMEDIDAVARIAVEL
+	Valor: ALTERAMEDIDAVARIAVEL
 
 	Altera os dados de uma medida de uma variavel
 
@@ -401,7 +401,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERAPARAMETROMEDIDA
+	Valor: ALTERAPARAMETROMEDIDA
 
 	Altera os dados de uma parametro de uma medida
 
@@ -422,7 +422,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERACLASSIFICACAOMEDIDA
+	Valor: ALTERACLASSIFICACAOMEDIDA
 
 	Altera os dados de uma classificacao de uma medida
 
@@ -540,7 +540,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERACLASSECLASSIFICACAO
+	Valor: ALTERACLASSECLASSIFICACAO
 
 	Altera os dados de uma classe de uma classificacao
 
@@ -592,7 +592,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERARUNIDADEMEDIDA
+	Valor: ALTERARUNIDADEMEDIDA
 
 	Altera a tabela de unidades de medida
 
@@ -612,7 +612,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERARCONEXAO
+	Valor: ALTERARCONEXAO
 
 	Altera a tabela de conexoes
 
@@ -632,7 +632,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERARTIPOREGIAO
+	Valor: ALTERARTIPOREGIAO
 
 	Altera a tabela de regioes
 
@@ -664,7 +664,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERARTIPOPERIODO
+	Valor: ALTERARTIPOPERIODO
 
 	Altera a tabela de tipos de periodo
 
@@ -687,7 +687,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERAMAPA
+	Valor: ALTERAMAPA
 
 	Altera a tabela de mapas para publicacao
 
@@ -707,7 +707,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: ALTERAMAPAGRUPO
+	Valor: ALTERAMAPAGRUPO
 
 	Altera a tabela de grupos para publicacao
 
@@ -738,7 +738,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: EXCLUIRMAPA
+	Valor: EXCLUIRMAPA
 
 	Exclui um mapa do publicador
 
@@ -800,7 +800,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: EXCLUIRTIPOPERIODO
+	Valor: EXCLUIRTIPOPERIODO
 
 	Exclui uma variavel
 
@@ -832,7 +832,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: EXCLUIRUNIDADEMEDIDA
+	Valor: EXCLUIRUNIDADEMEDIDA
 
 	Exclui uma unidade de medida"Dados inseridos"
 
@@ -900,7 +900,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: EXCLUIRTIPOREGIAO
+	Valor: EXCLUIRTIPOREGIAO
 
 	Exclui uma regiao
 
@@ -928,7 +928,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: EXCLUIRMEDIDAVARIAVEL
+	Valor: EXCLUIRMEDIDAVARIAVEL
 
 	Exclui uma medida da variavel
 
@@ -971,7 +971,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: EXCLUIRCLASSIFICACAOMEDIDA
+	Valor: EXCLUIRCLASSIFICACAOMEDIDA
 
 	Exclui uma classificacao de uma medida da variavel
 
@@ -996,7 +996,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: EXCLUIRCLASSECLASSIFICACAO
+	Valor: EXCLUIRCLASSECLASSIFICACAO
 
 	Exclui uma classe de uma classificacao
 
@@ -1090,7 +1090,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: MAPFILEMEDIDAVARIAVEL
+	Valor: MAPFILEMEDIDAVARIAVEL
 
 	Cria o mapfile de uma media de uma variavel
 
@@ -1139,7 +1139,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: KMLMEDIDAVARIAVEL
+	Valor: KMLMEDIDAVARIAVEL
 
 	Gera um arquivo kml que pode ser aberto no googleearth
 
@@ -1290,7 +1290,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: COLUNASTABELA
+	Valor: COLUNASTABELA
 
 	Lista as colunas de uma tabela
 
@@ -1349,7 +1349,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: DESCREVECOLUNASTABELA
+	Valor: DESCREVECOLUNASTABELA
 
 	Lista as colunas de uma tabela
 
@@ -1374,6 +1374,15 @@ switch (strtoupper($funcao))
 		}
 		exit;
 	break;
+	case "ARVOREVAR":
+		$m = new Metaestat();
+		if(empty($codigo_variavel)){
+			$codigo_variavel = "";
+		}
+		$dados = $m->relatorioCompleto($codigo_variavel,$dadosGerenciais);
+		retornaJSON($dados);
+		exit;
+		break;
 	case "RELATORIOCOMPLETO":
 		$m = new Metaestat();
 		if(empty($codigo_variavel)){

@@ -209,6 +209,61 @@ function cabecalhoGeral(id,excluir){
 	//temp.style.padding = "10px";
 }
 /*
+Function: core_arvore
+
+Cria uma arvore com base em um objeto contendo as propriedades.
+
+No objeto com as propriedades, se "url" for igual a "", sera incluido o texto original definido em "text".
+
+Parametros:
+
+titulo - {String} cabecalho da arvore
+
+onde - {String} nome do id doelemento que contera a arvore
+
+obj - {Object} objeto contendo os parametros, exemplo
+
+	g_listaPropriedades = {
+
+	"propriedades": [
+
+	{ text: "p2", url: "javascript:tipoimagem()" }
+
+	]}
+
+*/
+function core_arvore(titulo,onde,obj){
+	var arvore,root,tempNode,d,c,i,linha,conteudo,j,temaNode;
+	if(!$i(onde)){return;}
+	arvore = new YAHOO.widget.TreeView(onde);
+	root = arvore.getRoot();
+	try{
+		tempNode = new YAHOO.widget.TextNode('', root, false);
+		tempNode.isLeaf = false;
+		tempNode.enableHighlight = false;
+	}
+	catch(e){
+		if(typeof(console) !== 'undefined'){console.error(e);}
+	}
+	titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
+	d = {html:titulo};
+	tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
+	tempNode.enableHighlight = false;
+	c = obj.propriedades.length;
+	for (i=0, j=c; i<j; i++){
+		linha = obj.propriedades[i];
+		if(linha.url !== "")
+		{conteudo = "<a href='#' onclick='"+linha.url+"'>"+linha.text+"</a>";}
+		else
+		{conteudo = linha.text;}
+		d = {html:conteudo};
+		temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
+		temaNode.enableHighlight = false;
+	}
+	arvore.collapseAll();
+	arvore.draw();
+}
+/*
 Function: core_movimentaNo
 
 Movimenta um nó para cima ou para baixo na &aacute;rvore.
@@ -413,17 +468,17 @@ function core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho)
 	YAHOO.namespace("continua.container");
 	YAHOO.continua.container.simpledialog1 =
 		new YAHOO.widget.SimpleDialog("simpledialog1",
-			 { width: largura+"px",
-			   fixedcenter: true,
-			   visible: false,
-			   draggable: false,
-			   close: true,
-			   text: mensagem,
-			   icon: YAHOO.widget.SimpleDialog.ICON_HELP,
-			   modal: true,
-			   constraintoviewport: true,
-			   buttons: [ { text:"Sim", handler:handleYes, isDefault:true },
-						  { text:"N&atilde;o",  handler:handleNo } ]
+			{ width: largura+"px",
+				fixedcenter: true,
+				visible: false,
+				draggable: false,
+				close: true,
+				text: mensagem,
+				icon: YAHOO.widget.SimpleDialog.ICON_HELP,
+				modal: true,
+				constraintoviewport: true,
+				buttons: [ { text:"Sim", handler:handleYes, isDefault:true },
+							{ text:"N&atilde;o",  handler:handleNo } ]
 	} );
 	YAHOO.continua.container.simpledialog1.setHeader(cabecalho);
 	YAHOO.continua.container.simpledialog1.render(document.body);
@@ -450,17 +505,17 @@ function core_dialogoPergunta(handleYes,handleNo,mensagem,largura)
 	YAHOO.namespace("continua.container");
 	YAHOO.continua.container.simpledialog1 =
 		new YAHOO.widget.SimpleDialog("simpledialog1",
-			 { width: largura+"px",
-			   fixedcenter: true,
-			   visible: false,
-			   draggable: false,
-			   close: true,
-			   text: mensagem,
-			   icon: "",
-			   modal: true,
-			   constraintoviewport: true,
-			   buttons: [ { text:"Continua", handler:handleYes, isDefault:true },
-						  { text:"Cancela",  handler:handleNo } ]
+			{ width: largura+"px",
+				fixedcenter: true,
+				visible: false,
+				draggable: false,
+				close: true,
+				text: mensagem,
+				icon: "",
+				modal: true,
+				constraintoviewport: true,
+				buttons: [ { text:"Continua", handler:handleYes, isDefault:true },
+							{ text:"Cancela",  handler:handleNo } ]
 	} );
 	//YAHOO.continua.container.simpledialog1.setHeader("Tem certeza?");
 	YAHOO.continua.container.simpledialog1.render(document.body);
@@ -526,21 +581,21 @@ function core_pegaPerfis(funcao)
 	var sUrl = "../php/menutemas.php?funcao=pegaPerfis";
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				$perfis = YAHOO.lang.JSON.parse(o.responseText);
-  				$perfisArray = new Array();
-  				for (var i=0;i<$perfis.length;i++)
-  				{$perfisArray.push($perfis[i].perfil);}
-  				if(funcao != "")
-  				eval(funcao);
-  			}
-  			catch(e){core_handleFailure(o,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			success:function(o)
+			{
+				try
+				{
+					$perfis = YAHOO.lang.JSON.parse(o.responseText);
+					$perfisArray = new Array();
+					for (var i=0;i<$perfis.length;i++)
+					{$perfisArray.push($perfis[i].perfil);}
+					if(funcao != "")
+					eval(funcao);
+				}
+				catch(e){core_handleFailure(o,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -576,18 +631,18 @@ function core_pegaMapfiles(funcaoM,letra,filtro)
 	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra+"&filtro="+filtro;
 	var callbackM =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				$mapfiles = YAHOO.lang.JSON.parse(o.responseText);
-  				if(funcaoM != "")
-  				eval(funcaoM);
-  			}
-  			catch(e){core_handleFailure(o,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			success:function(o)
+			{
+				try
+				{
+					$mapfiles = YAHOO.lang.JSON.parse(o.responseText);
+					if(funcaoM != "")
+					eval(funcaoM);
+				}
+				catch(e){core_handleFailure(o,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callbackM);
 }
@@ -683,11 +738,11 @@ function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
 	var sUrl = "../php/atlas.php?funcao=pegaPranchas&id_atlas="+id_atlas;
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				var valores = YAHOO.lang.JSON.parse(o.responseText);
+			success:function(o)
+			{
+				try
+				{
+					var valores = YAHOO.lang.JSON.parse(o.responseText);
 				if(arguments.length == 3)
 				{funcao = "";}
 				if (funcao != "")
@@ -696,11 +751,11 @@ function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
 				ins += core_comboObjeto(valores,"id_prancha","titulo_prancha",marcar);
 				ins += "</select></p>";
 				$i(onde).innerHTML = ins;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -726,11 +781,11 @@ function core_comboGrupos(onde,id,marcar,funcao)
 	var sUrl = "../php/menutemas.php?funcao=pegaGrupos";
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				var valores = YAHOO.lang.JSON.parse(o.responseText);
+			success:function(o)
+			{
+				try
+				{
+					var valores = YAHOO.lang.JSON.parse(o.responseText);
 				if(arguments.length == 3)
 				{funcao = "";}
 				if (funcao != "")
@@ -739,11 +794,11 @@ function core_comboGrupos(onde,id,marcar,funcao)
 				ins += core_comboObjeto(valores,"id_grupo","nome_grupo",marcar);
 				ins += "</select></p>";
 				$i(onde).innerHTML = ins;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -769,11 +824,11 @@ function core_comboSubGrupos(onde,id,marcar,funcao)
 	var sUrl = "../php/menutemas.php?funcao=pegaSubGrupos";
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				var valores = YAHOO.lang.JSON.parse(o.responseText);
+			success:function(o)
+			{
+				try
+				{
+					var valores = YAHOO.lang.JSON.parse(o.responseText);
 				if(arguments.length == 3)
 				{funcao = "";}
 				if (funcao != "")
@@ -782,11 +837,11 @@ function core_comboSubGrupos(onde,id,marcar,funcao)
 				ins += core_comboObjeto(valores,"id_subgrupo","nome_subgrupo",marcar);
 				ins += "</select></p>";
 				$i(onde).innerHTML = ins;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -812,11 +867,11 @@ function core_comboTemas(onde,id,marcar,funcao)
 	var sUrl = "../php/menutemas.php?funcao=pegaTemas2";
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				var valores = YAHOO.lang.JSON.parse(o.responseText);
+			success:function(o)
+			{
+				try
+				{
+					var valores = YAHOO.lang.JSON.parse(o.responseText);
 				if(arguments.length == 3)
 				{funcao = "";}
 				if (funcao != "")
@@ -825,11 +880,11 @@ function core_comboTemas(onde,id,marcar,funcao)
 				ins += core_comboObjeto(valores,"id_tema","nome_tema",marcar,"codigo_tema");
 				ins += "</select></p>";
 				$i(onde).innerHTML = ins;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -852,19 +907,19 @@ function core_pegaTags(funcao)
 	var sUrl = "../php/menutemas.php?funcao=pegaTags";
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				$tags = YAHOO.lang.JSON.parse(o.responseText);
-  				if($tags == ""){$tags = " ";}
-  				if(funcao != "")
-  				eval(funcao);
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			success:function(o)
+			{
+				try
+				{
+					$tags = YAHOO.lang.JSON.parse(o.responseText);
+					if($tags == ""){$tags = " ";}
+					if(funcao != "")
+					eval(funcao);
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -1144,25 +1199,25 @@ function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 		core_carregando(" adicionando um novo registro");
 		var callback =
 		{
-  			success:function(o)
-  			{
-  				var texto = "";
+				success:function(o)
+				{
+					var texto = "";
 				try
-  				{
-  					core_carregando("desativa");
-  					if(nomeFuncao != "")
-  					{eval(nomeFuncao+"()");}
-  					else{
+					{
+						core_carregando("desativa");
+						if(nomeFuncao != "")
+						{eval(nomeFuncao+"()");}
+						else{
 						texto = YAHOO.lang.JSON.parse(o.responseText)[0];
 						if(texto === "")
 						{texto = "Clique para editar";}
 						myDataTable.addRow(texto,0);
 					}
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};
@@ -1188,23 +1243,23 @@ function core_pegaDados(mensagem,sUrl,funcaoRetorno)
 	core_carregando(mensagem);
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				if(funcaoRetorno != "")
-  				{eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");}
-  				core_carregando("desativa");
-  			}
-  			catch(e)
-  			{
-  				if("mensagem" != "")
-  				{core_carregando("desativa");}
-  				core_handleFailure(o,o.responseText);
-  			}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			success:function(o)
+			{
+				try
+				{
+					if(funcaoRetorno != "")
+					{eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");}
+					core_carregando("desativa");
+				}
+				catch(e)
+				{
+					if("mensagem" != "")
+					{core_carregando("desativa");}
+					core_handleFailure(o,o.responseText);
+				}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -1233,8 +1288,8 @@ function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 	nomeFuncao = "";
 	var callback =
 	{
-  		success:function(o)
-  		{
+			success:function(o)
+			{
 			core_carregando("desativa");
 			var rec = myDataTable.getRecordSet().getRecord(row);
 			var linha = myDataTable.getTrEl(rec);
@@ -1248,12 +1303,12 @@ function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 			else
 			{
 				myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
-  			}
+				}
 			linha.style.color = "";
 			linha.style.textDecoration = "none";
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -1286,30 +1341,30 @@ function core_excluiLinha(sUrl,row,mensagem,cabecalho,tabela)
 		core_carregando(mensagem);
 		var callback =
 		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  					{
-  						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem outras tabelas com registros vinculados a este</span>");
-  						setTimeout("core_carregando('desativa')",3000);
-  					}
-  					else
-  					{
-  						if(tabela){
-  							tabela.deleteRow(row);
-  						}
-  						else{
-  							myDataTable.deleteRow(row);
-  						}
-  						core_carregando("desativa");
-  					}
-  				}
-  				catch(e){core_handleFailure(o,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
+				success:function(o)
+				{
+					try
+					{
+						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+						{
+							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem outras tabelas com registros vinculados a este</span>");
+							setTimeout("core_carregando('desativa')",3000);
+						}
+						else
+						{
+							if(tabela){
+								tabela.deleteRow(row);
+							}
+							else{
+								myDataTable.deleteRow(row);
+							}
+							core_carregando("desativa");
+						}
+					}
+					catch(e){core_handleFailure(o,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};
@@ -1349,28 +1404,28 @@ function core_excluiNoTree(sUrl,no,mensagem,cabecalho)
 		core_carregando(mensagem);
 		var callback =
 		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  					{
-  						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem outras tabelas com registros vinculados a este</span>");
-  						setTimeout("core_carregando('desativa')",3000);
-  					}
-  					else
-  					{
+				success:function(o)
+				{
+					try
+					{
+						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+						{
+							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem outras tabelas com registros vinculados a este</span>");
+							setTimeout("core_carregando('desativa')",3000);
+						}
+						else
+						{
 						if(no){
 							tree.removeNode(no);
 							tree.draw();
-  						}
+							}
 						core_carregando("desativa");
-  					}
-  				}
-  				catch(e){core_handleFailure(o,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
+						}
+					}
+					catch(e){core_handleFailure(o,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};

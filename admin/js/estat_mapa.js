@@ -46,19 +46,19 @@ function ativaBotaoAdiciona(sUrl,idBotao)
 		core_carregando(" adicionando um novo registro");
 		var callback =
 		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					var j = YAHOO.lang.JSON.parse(o.responseText);
+				success:function(o)
+				{
+					try
+					{
+						var j = YAHOO.lang.JSON.parse(o.responseText);
 					adicionaNosMapa([j],true);
 					editar("mapa",j.id_mapa);
-  					core_carregando("desativa");
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
+						core_carregando("desativa");
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};
@@ -125,8 +125,8 @@ function montaArvore(dados)
 		}
 		buildTree();
 	}();
-   	adicionaNosMapa(dados);
-   	tree.draw();
+		adicionaNosMapa(dados);
+		tree.draw();
 }
 function testarMapfile(codigoMap)
 {
@@ -290,14 +290,35 @@ function editar(tipo,id)
 	if(sUrl)
 	{core_makeRequest(sUrl,callback);}
 }
-function montaDivTema(i)
-{
-	var sUrl = "../php/metaestat.php?funcao=relatorioCompleto&dadosGerenciais=nao&detalhes=nao",
+function montaDivTema(i){
+	var sUrl = "../php/metaestat.php?funcao=arvoreVar&dadosGerenciais=nao&detalhes=nao",
 		ins = "",
 		callback = {
 			success:function(o){
-				ins += "<br><div>"+YAHOO.lang.JSON.parse(o.responseText)+"</div>";
+				var o = YAHOO.lang.JSON.parse(o.responseText),
+					n = o.length,
+					m,i,j,filhos,a,b;
+				//monta os divs onde entrarao as arvores
+				for(i=0;i<n;i++){
+					ins += "<div id=arvore_"+i+" >"+o[i].titulo+"</div>";
+				}
 				$i("editor_bd").innerHTML = ins;
+				//monta as arvores
+				for(i=0;i<n;i++){
+					a = [];
+					filhos = o[i].filhos;
+					m = filhos.length;
+					for(j=0;j<m;j++){
+						b = {};
+						b.text = filhos[j].titulo;
+						b.url = 'javascript:$i(\"Eid_medida_variavel\").value=\"'+filhos[j].id+'\"';
+						a.push(b);
+					}
+					core_arvore(o[i].titulo,"arvore_"+i,{"propriedades":a})
+
+				}
+				//ins += "<br><div>"+YAHOO.lang.JSON.parse(o.responseText)+"</div>";
+				//$i("editor_bd").innerHTML = ins;
 			},
 			failure: function(){return ins;},
 			argument: { foo:"foo", bar:"bar" }
@@ -305,7 +326,7 @@ function montaDivTema(i)
 		param = {
 			"linhas":[
 			{titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
-			{titulo:"ID da medida de uma vari&aacute;vel (veja em ID no relat&oacute;rio abaixo):",id:"Eid_medida_variavel",size:"50",value:i.id_medida_variavel,tipo:"text",div:""}
+			{titulo:"ID da medida de uma vari&aacute;vel (clique nos links abaixo para escolher):",id:"Eid_medida_variavel",size:"50",value:i.id_medida_variavel,tipo:"text",div:""}
 			]
 		};
 	ins += core_geraLinhas(param);
@@ -433,8 +454,8 @@ function adicionarTema(id)
 			adicionaNosTemas(no,[dados],true);
 			editar('tema',dados.id_mapa_tema);
 		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -450,8 +471,8 @@ function adicionarGrupo(id_mapa)
 			adicionaNosGrupos(no,[dados],true);
 			editar('grupo',dados.id_mapa_grupo);
 		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -494,47 +515,47 @@ function gravaDados(tipo,id)
 
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  				{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else
-  				{
-  					if(tipo == "mapa")
-  					{
-  						var no = tree.getNodeByProperty("id_mapa",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo").value;
+			success:function(o)
+			{
+				try
+				{
+					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+					{
+						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						setTimeout("core_carregando('desativa')",3000);
+					}
+					else
+					{
+						if(tipo == "mapa")
+						{
+							var no = tree.getNodeByProperty("id_mapa",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
-  						no.html = no.getContentEl().innerHTML;
-  					}
-  					if(tipo == "grupo")
-  					{
-  						var no = tree.getNodeByProperty("id_mapa_grupo",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo").value;
+							no.html = no.getContentEl().innerHTML;
+						}
+						if(tipo == "grupo")
+						{
+							var no = tree.getNodeByProperty("id_mapa_grupo",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
-  						no.html = no.getContentEl().innerHTML;
-  					}
-  					if(tipo == "tema")
-  					{
-  						var no = tree.getNodeByProperty("id_mapa_tema",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo").value;
+							no.html = no.getContentEl().innerHTML;
+						}
+						if(tipo == "tema")
+						{
+							var no = tree.getNodeByProperty("id_mapa_tema",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
-  						no.html = no.getContentEl().innerHTML;
-  					}
-  					core_carregando("desativa");
-  				}
+							no.html = no.getContentEl().innerHTML;
+						}
+						core_carregando("desativa");
+					}
 				YAHOO.admin.container.panelEditor.destroy();
 				YAHOO.admin.container.panelEditor = null;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	if(prog && par){
 		core_carregando("ativa");
