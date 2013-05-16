@@ -181,7 +181,7 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: execSQLDB
+	Function: execSQLDB
 
 	Executa um SQL no banco de dados definido em uma conexao
 	*/
@@ -226,7 +226,7 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: sqlMedidaVariavel
+	Function: sqlMedidaVariavel
 
 	Monta o sql que permite acessar os dados de uma media de uma variavel
 
@@ -413,6 +413,11 @@ class Metaestat{
 			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		}
 		//echo $sqlgeo;exit;
+		//remove ambiguidades
+		$sqlgeo = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlgeo);
+		$sql = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sql);
+		$sqlagrupamento = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlagrupamento);
+
 		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"],"titulo"=>$titulo);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao=""){
@@ -624,16 +629,16 @@ class Metaestat{
 				$dados[] = '	END';
 				$dados[] = '    CLASS';
 				$dados[] = '        NAME ""';
- 				$dados[] = '        LABEL';
+				$dados[] = '        LABEL';
 				$dados[] = '           FONT "arial"';
 				$dados[] = '           SIZE 10';
 				$dados[] = '           COLOR 0 0 0';
 				$dados[] = '           MINDISTANCE 0';
 				$dados[] = '           MINFEATURESIZE 0';
 				$dados[] = '           OFFSET 0 0';
- 				$dados[] = '           OUTLINECOLOR 255 255 255';
- 				$dados[] = '           PARTIALS FALSE';
- 				$dados[] = '           POSITION AUTO';
+				$dados[] = '           OUTLINECOLOR 255 255 255';
+				$dados[] = '           PARTIALS FALSE';
+				$dados[] = '           POSITION AUTO';
 				$dados[] = '           SHADOWSIZE 1 1';
 				$dados[] = '           TYPE TRUETYPE';
 				$dados[] = '        END';
@@ -824,7 +829,7 @@ class Metaestat{
 		return false;
 	}
 	/*
-	 Function: alteraMapa
+	Function: alteraMapa
 
 	Altera um mapa ou adiciona um novo
 
@@ -848,7 +853,7 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: alteraMapaGrupo
+	Function: alteraMapaGrupo
 
 	Altera um grupo de um mapa ou adiciona um novo
 
@@ -875,7 +880,7 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: alteraMapaTema
+	Function: alteraMapaTema
 
 	Altera um tema de um grupo de um mapa ou adiciona um novo
 
@@ -902,7 +907,7 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: alteraVariavel
+	Function: alteraVariavel
 
 	Altera uma variavel ou cria uma nova
 
@@ -957,7 +962,7 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: alteraLinkMedida
+	Function: alteraLinkMedida
 
 	Altera um link
 
@@ -1018,7 +1023,7 @@ class Metaestat{
 		$this->dbhw->query("INSERT INTO ".$this->esquemaadmin."i3geoestat_fonteinfo_medida (id_medida_variavel,id_fonteinfo) VALUES ('$id_medida_variavel','$id_fonteinfo')");
 	}
 	/*
-	 Function: alteraUnidadeMedida
+	Function: alteraUnidadeMedida
 
 	Altera uma medida de uma variavel ou cria uma nova
 	*/
@@ -1041,7 +1046,7 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: alteraTipoPeriodo
+	Function: alteraTipoPeriodo
 
 	Altera um tipo de periodo de tempo
 	*/
@@ -1086,7 +1091,7 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: alteraTipoRegiao
+	Function: alteraTipoRegiao
 
 	Altera uma regiao
 	*/
@@ -1177,7 +1182,7 @@ class Metaestat{
 		}
 	}
 	/*
-	 Function: alteraClasseClassificacao
+	Function: alteraClasseClassificacao
 
 	Altera uma classe de uma classificacao
 	*/
@@ -1224,7 +1229,7 @@ class Metaestat{
 		return $this->execSQL($sql,$id_mapa);
 	}
 	/*
-	 Function: listaGruposMapa
+	Function: listaGruposMapa
 
 	Lista os grupos de um mapa cadastrados para publicacao
 	*/
@@ -1239,7 +1244,7 @@ class Metaestat{
 		return $this->execSQL($sql,$id_mapa_grupo);
 	}
 	/*
-	 Function: listaTemasMapa
+	Function: listaTemasMapa
 
 	Lista os temas de um grupo de um mapa cadastrados para publicacao
 	*/
@@ -1254,7 +1259,7 @@ class Metaestat{
 		return $this->execSQL($sql,$id_mapa_tema);
 	}
 	/*
-	 Function: listaUnidadeMedida
+	Function: listaUnidadeMedida
 
 	Lista as unidades de medida cadastradas ou uma unica unidade
 
@@ -1271,7 +1276,7 @@ class Metaestat{
 		return $this->execSQL($sql,$codigo_unidade_medida);
 	}
 	/*
-	 Function: listaFonteinfo
+	Function: listaFonteinfo
 
 	Lista as fontes cadastradas ou uma unica unidade
 
@@ -1285,7 +1290,7 @@ class Metaestat{
 		return $this->execSQL($sql,$id_fonteinfo);
 	}
 	/*
-	 Function: listaFonteinfoMedida
+	Function: listaFonteinfoMedida
 
 	Lista as fontes cadastradas ou uma unica unidade
 
@@ -1301,7 +1306,7 @@ class Metaestat{
 		return $this->execSQL($sql,$id_fonteinfo);
 	}
 	/*
-	 Function: listaVariavel
+	Function: listaVariavel
 
 	Lista as variaveis cadastradas ou uma unica variavel
 
@@ -1340,7 +1345,7 @@ class Metaestat{
 		return $this->execSQL($sql,$id_classificacao);
 	}
 	/*
-	 Function: listaLinkMedida
+	Function: listaLinkMedida
 
 	Lista os links de uma medida de uma variavel
 
@@ -1358,7 +1363,7 @@ class Metaestat{
 		return $this->execSQL($sql,$id_link);
 	}
 	/*
-	 Function: listaClasseClassificacao
+	Function: listaClasseClassificacao
 
 	Lista as classes de uma classificacao
 	*/
@@ -1402,7 +1407,7 @@ class Metaestat{
 		return $this->execSQL($sql,$id_medida_variavel);
 	}
 	/*
-	 Function: listaRegioesMedida
+	Function: listaRegioesMedida
 
 	Lista as regioes de uma medida variavel
 	*/
@@ -1417,7 +1422,7 @@ class Metaestat{
 		return $regioes;
 	}
 	/*
-	 Function: listaConexao
+	Function: listaConexao
 
 	Lista as conexoes cadastradas ou uma unica conexao
 
@@ -1442,7 +1447,7 @@ class Metaestat{
 		return $this->execSQL($sql,$codigo_estat_conexao);
 	}
 	/*
-	 Function: listaParametro
+	Function: listaParametro
 
 	Lista os parametros cadastradas ou uma unica variavel
 
@@ -1483,7 +1488,7 @@ class Metaestat{
 		return $nsm;
 	}
 	/*
-	 Function: listaTipoPeriodo
+	Function: listaTipoPeriodo
 
 	Lista os tipos de per�odos de tempo cadastrados ou um �nico per�odo
 
