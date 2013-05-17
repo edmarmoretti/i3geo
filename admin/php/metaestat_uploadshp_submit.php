@@ -72,11 +72,12 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	$colunasTemp = $layer->getItems();
 	$colunas = array();
 	foreach($colunasTemp as $c){
-		if(!is_numeric($c)){
+		//abaixo gid e forçado a entrar
+		if(!is_numeric($c) && strtolower($c) != "gid"){
 			$colunas[] = $c;
 		}
 	}
-	
+
 	echo "<br>Numshapes: ". $numshapes;
 	$tipo = $shapefileObj->type;
 	echo "<br>Tipo: ". $tipo;
@@ -142,7 +143,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
 	}
-	
+
 	foreach($sqltabela as $linha){
 		try {
 			$dbh->query($linha);

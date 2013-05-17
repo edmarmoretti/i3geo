@@ -432,9 +432,6 @@ class Metaestat{
 		//outros metadados tambem sao utilizados, veja em admin/php/editormapfile.php
 		$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		if(!file_exists($arq)){
-			if(empty($tipolayer)){
-				$tipolayer = "polygon";
-			}
 			$meta = $this->listaMedidaVariavel("",$id_medida_variavel);
 			//evita agregar regioes qd nao e necessario
 			if($meta["codigo_tipo_regiao"] == $codigo_tipo_regiao || empty($codigo_tipo_regiao) ){
@@ -449,6 +446,14 @@ class Metaestat{
 			if(empty($codigo_tipo_regiao)){
 				$d = $this->listaMedidaVariavel("",$id_medida_variavel);
 				$codigo_tipo_regiao = $d["codigo_tipo_regiao"];
+			}
+			//define o tipo correto de layer
+			$dg = $this->listaDadosGeometriaRegiao($codigo_tipo_regiao);
+			if(empty($tipolayer) || $dg["dimension"] == 0){
+				$tipolayer = "point";
+			}
+			if($dg["dimension"] == 1){
+				$tipolayer = "line";
 			}
 			$sqlf = $sql["sqlmapserver"];
 			//echo $sqlf;exit;
@@ -567,6 +572,14 @@ class Metaestat{
 		}
 		if(!file_exists($arq)){
 			$tipolayer = "polygon";
+			//define o tipo correto de layer
+			$dg = $this->listaDadosGeometriaRegiao($codigo_tipo_regiao);
+			if(empty($tipolayer) || $dg["dimension"] == 0){
+				$tipolayer = "point";
+			}
+			if($dg["dimension"] == 1){
+				$tipolayer = "line";
+			}
 			$meta = $this->listaTipoRegiao($codigo_tipo_regiao);
 			$titulolayer = $meta["nome_tipo_regiao"];
 			$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
@@ -603,8 +616,16 @@ class Metaestat{
 			$dados[] = '        NAME ""';
 			$dados[] = '        STYLE';
 			$dados[] = '        	OUTLINECOLOR '.$outlinecolor;
-			$dados[] = '        	COLOR -1 -1 -1';
+
 			$dados[] = '        	WIDTH '.$width;
+			if(strtolower($tipolayer) == "point"){
+				$dados[] = '        SYMBOL "ponto"';
+				$dados[] = '        SIZE 5';
+				$dados[] = '        COLOR 0 0 0 ';
+			}
+			else{
+				$dados[] = '        	COLOR -1 -1 -1';
+			}
 			$dados[] = '        END';
 			//$dados[] = '        STYLE';
 			//$dados[] = '        	OUTLINECOLOR -1 -1 -1';
@@ -1575,6 +1596,22 @@ class Metaestat{
 		$r = array();
 		if($q){
 			$r = $q->fetchAll();
+		}
+		return $r;
+	}
+	function listaDadosGeometriaRegiao($codigo_tipo_regiao){
+		//pega a tabela, esquema e conexao para acessar os dados da regiao
+		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
+		$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		$c = $regiao["colunageo"];
+		$s = "ST_dimension($c) as dimension ";
+		$sql = "select $s,".$regiao["colunanomeregiao"]." as nome_regiao,".$regiao["identificador"]." as identificador_regiao from ".$regiao["esquemadb"].".".$regiao["tabela"];
+		$sql .= " limit 1";
+		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+		$r = array();
+		if($q){
+			$r = $q->fetchAll()[0];
 		}
 		return $r;
 	}
