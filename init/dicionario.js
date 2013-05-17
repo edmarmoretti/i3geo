@@ -124,5 +124,11 @@ es:""
 pt:"Manual de administra&ccedil;&atilde;o",
 en:"",
 es:""
+}],
+22: [
+{
+pt:"Google Maps com aplica&ccedil;&atilde;o de estilo",
+en:"",
+es:""
 }]
 };

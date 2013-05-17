@@ -138,6 +138,10 @@ botoesIni.push({
 	"href":"../interface/googlemaps.phtml",
 	"titulo":$trad(6,g_traducao_init)
 	},{
+	"img":"googlemaps_noite.png",
+	"href":"../interface/googlemaps_noite.phtml",
+	"titulo":$trad(22,g_traducao_init)
+	},{
 	"img":"googleearth.png",
 	"href":"../interface/googleearth.phtml",
 	"titulo":$trad(7,g_traducao_init)

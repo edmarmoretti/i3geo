@@ -1332,6 +1332,152 @@ i3GEO.Interface = {
 	*/
 	googlemaps:{
 		/*
+		Propriedade: ESTILOS
+
+		Estilos que podem ser utilizados com o mapa
+
+
+		Para novos estilos, acrescente seu codigo nesse objeto
+
+		Fonte http://maps-api-tt.appspot.com/apilite/styled/styled.html
+
+		Tipo:
+		{objeto estilo do Google Maps}
+		 */
+		ESTILOS: {
+			'Red': [
+				{
+					featureType: 'all',
+					stylers: [{hue: '#ff0000'}]
+				}
+			],
+			'Countries': [
+				{
+					featureType: 'all',
+					stylers: [
+						{visibility: 'off'}
+					]
+				},
+				{
+					featureType: 'water',
+					stylers: [
+						{visibility: 'on'},
+						{lightness: -100 }
+					]
+				}
+			],
+			'Night': [
+				{
+					featureType: 'all',
+					stylers: [{invert_lightness: 'true'}]
+				}
+			],
+			'Blue': [
+				{
+					featureType: 'all',
+					elementType: 'geometry',
+					stylers: [
+						{hue: '#0000b0'},
+						{invert_lightness: 'true'},
+						{saturation: -30}
+					]
+				}
+			],
+			'Greyscale': [
+				{
+					featureType: 'all',
+					stylers: [
+						{saturation: -100},
+						{gamma: 0.50}
+					]
+				}
+			],
+			'No roads': [
+				{
+					featureType: 'road',
+					stylers: [
+						{visibility: 'off'}
+					]
+				}
+			],
+			'Mixed': [
+				{
+					featureType: 'landscape',
+					stylers: [{hue: '#00dd00'}]
+				}, {
+					featureType: 'road',
+					stylers: [{hue: '#dd0000'}]
+				}, {
+					featureType: 'water',
+					stylers: [{hue: '#000040'}]
+				}, {
+					featureType: 'poi.park',
+					stylers: [{visibility: 'off'}]
+				}, {
+					featureType: 'road.arterial',
+					stylers: [{hue: '#ffff00'}]
+				}, {
+					featureType: 'road.local',
+					stylers: [{visibility: 'off'}]
+				}
+			],
+			'Chilled': [
+				{
+					featureType: 'road',
+					elementType: 'geometry',
+					stylers: [{'visibility': 'simplified'}]
+				}, {
+					featureType: 'road.arterial',
+					stylers: [
+					{hue: 149},
+					{saturation: -78},
+					{lightness: 0}
+					]
+				}, {
+					featureType: 'road.highway',
+					stylers: [
+						{hue: -31},
+						{saturation: -40},
+						{lightness: 2.8}
+					]
+				}, {
+					featureType: 'poi',
+					elementType: 'label',
+					stylers: [{'visibility': 'off'}]
+				}, {
+					featureType: 'landscape',
+					stylers: [
+						{hue: 163},
+						{saturation: -26},
+						{lightness: -1.1}
+					]
+				}, {
+					featureType: 'transit',
+					stylers: [{'visibility': 'off'}]
+				}, {
+					featureType: 'water',
+					stylers: [
+						{hue: 3},
+						{saturation: -24.24},
+						{lightness: -38.57}
+					]
+				}
+			]
+		},
+		/*
+		Propriedade: ESTILOPADRAO
+
+		Nome do estilo definido em ESTILOS que sera usado como padrao para o mapa. Se for "" sera usado o estilo normal do Google
+
+		Estilos pre-definidos Red, Countries, Night, Blue, Greyscale, No roads, Mixed, Chilled
+
+		Tipo:
+		{string}
+
+		Default: ""
+		 */
+		ESTILOPADRAO: "",
+		/*
 		Propriedade: MAPOPTIONS
 
 		Objeto contendo op&ccedil;&otilde;es que ser&atilde;o utilizadas no construtor do mapa conforme a API do GoogleMaps
@@ -1474,16 +1620,30 @@ i3GEO.Interface = {
 				$i("i3GEOprogressoDiv").style.display = "block";
 			}
 			montaMapa = function(retorno){
-				var sw,ne,
+				var sw,ne,estilo,
 				dobra = $i("i3GEOdobraPagina");
+				if(i3GEO.Interface.googlemaps.ESTILOS && i3GEO.Interface.googlemaps.ESTILOPADRAO != ""){
+					i3GEO.Interface.googlemaps.MAPOPTIONS.mapTypeId = i3GEO.Interface.googlemaps.ESTILOPADRAO;
+				}
 				try{
 					i3GeoMap = new google.maps.Map($i(i3GEO.Interface.IDMAPA),i3GEO.Interface.googlemaps.MAPOPTIONS);
 				}
 				catch(e){alert(e);return;}
+				if(i3GEO.Interface.googlemaps.ESTILOS && i3GEO.Interface.googlemaps.ESTILOPADRAO != ""){
+					estilo = i3GEO.Interface.googlemaps.ESTILOS[i3GEO.Interface.googlemaps.ESTILOPADRAO];
+					i3GeoMap.mapTypes.set(
+						i3GEO.Interface.googlemaps.ESTILOPADRAO,
+						new google.maps.StyledMapType(
+							estilo,
+							{name: i3GEO.Interface.googlemaps.ESTILOPADRAO}
+						)
+					);
+				}
+				else{
+					i3GeoMap.setMapTypeId(i3GEO.Interface.googlemaps.TIPOMAPA);
+				}
 				if(dobra)
 				{$i(i3GEO.Interface.IDMAPA).appendChild(dobra);}
-
-				i3GeoMap.setMapTypeId(i3GEO.Interface.googlemaps.TIPOMAPA);
 				sw = new google.maps.LatLng(ret[1],ret[0]);
 				ne = new google.maps.LatLng(ret[3],ret[2]);
 				i3GeoMap.fitBounds(new google.maps.LatLngBounds(sw,ne));
@@ -1537,7 +1697,7 @@ i3GEO.Interface = {
 				else{
 					if(i3GEO.finalizaAPI != "")
 					{eval(i3GEO.finalizaAPI);}
-				}				
+				}
 			};
 			i3GEO.php.googlemaps(montaMapa);
 		},
@@ -1642,7 +1802,7 @@ i3GEO.Interface = {
 					telax: tela.x + pos[0],
 					telay: tela.y + pos[1]
 				};
-			});			
+			});
 		},
 		retornaIndiceLayer: function(nomeLayer){
 			var i = false;
