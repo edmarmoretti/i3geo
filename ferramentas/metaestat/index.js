@@ -843,6 +843,9 @@ i3GEOF.metaestat = {
 						i3GEO.atualiza();
 						i3GEOF.metaestat.CAMADAS.push(retorno.layer);
 						i3GEO.mapa.ativaTema(retorno.layer);
+						if(i3GEO.Interface.ATUAL == "googlemaps"){
+								//i3GEO.Interface.aplicaOpacidade(0.7);
+						}
 						i3GEOF.metaestat.analise.comboCamadas();
 					};
 					i3GEO.php.adtema(atualiza,retorno.mapfile);
@@ -856,6 +859,12 @@ i3GEOF.metaestat = {
 			if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
 				i3GEOF.metaestat.classes.aplicar();
 			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				opacidade = 70;
+			}
+			else{
+				opacidade = "";
+			}	
 			i3GEO.php.mapfileMedidaVariavel(
 				temp,
 				$i("i3geoCartoComboMedidasVariavel").value,
@@ -865,7 +874,8 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.comum.defineTitulo(),
 				i3GEOF.metaestat.comum.tipoClassificacao[0],
 				i3GEOF.metaestat.comum.defineAgruparPor(),
-				i3GEOF.metaestat.comum.tipoRegiao[0]
+				i3GEOF.metaestat.comum.tipoRegiao[0],
+				opacidade
 			);
 		},
 		ativaCamada: function(camada){

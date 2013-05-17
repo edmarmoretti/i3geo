@@ -420,7 +420,7 @@ class Metaestat{
 
 		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"],"titulo"=>$titulo);
 	}
-	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao=""){
+	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao="",$opacidade=""){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
 		//indicando onde deve comecar e terminar uma possivel clausula where
 		//ou com /*FA*//*FA*/
@@ -484,6 +484,9 @@ class Metaestat{
 			$dados[] = '	CONNECTIONTYPE POSTGIS';
 			$dados[] = '	STATUS OFF';
 			$dados[] = '	TEMPLATE "none.htm"';
+			if($opacidade != ""){
+				$dados[] = '	OPACITY '.$opacidade;
+			}
 			$dados[] = '	METADATA';
 			$dados[] = '		TEMA "'.$titulolayer.'"';
 			$dados[] = '		TIP "'.$sql["colunavalor"].'"';

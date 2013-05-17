@@ -1113,8 +1113,11 @@ switch (strtoupper($funcao))
 		if(!isset($codigo_tipo_regiao)){
 			$codigo_tipo_regiao = "";
 		}
+		if(!isset($opacidade)){
+			$opacidade = "";
+		}
 		if($formato == "json"){
-			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor,$codigo_tipo_regiao));
+			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor,$codigo_tipo_regiao,$opacidade));
 		}
 		exit;
 	break;
