@@ -449,7 +449,10 @@ class Metaestat{
 			}
 			//define o tipo correto de layer
 			$dg = $this->listaDadosGeometriaRegiao($codigo_tipo_regiao);
-			if(empty($tipolayer) || $dg["dimension"] == 0){
+			if(empty($tipolayer)){
+				$tipolayer = "polygon";
+			}
+			if($dg["dimension"] == 0){
 				$tipolayer = "point";
 			}
 			if($dg["dimension"] == 1){
@@ -574,7 +577,10 @@ class Metaestat{
 			$tipolayer = "polygon";
 			//define o tipo correto de layer
 			$dg = $this->listaDadosGeometriaRegiao($codigo_tipo_regiao);
-			if(empty($tipolayer) || $dg["dimension"] == 0){
+			if(empty($tipolayer)){
+				$tipolayer = "polygon";
+			}
+			if($dg["dimension"] == 0){
 				$tipolayer = "point";
 			}
 			if($dg["dimension"] == 1){
