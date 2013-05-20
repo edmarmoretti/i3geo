@@ -1617,9 +1617,9 @@ class Metaestat{
 		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 		$r = array();
 		if($q){
-			$r = $q->fetchAll()[0];
+			$r = $q->fetchAll();
 		}
-		return $r;
+		return $r[0];
 	}
 	function listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_agregaregiao ";
