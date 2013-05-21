@@ -130,7 +130,12 @@ i3GEOadmin.uploaddados = {
 					argument: { foo:"foo", bar:"bar" }
 			};
 			core_carregando("inserindo dados...");
-			core_makeRequest("../php/metaestat.php?funcao=inserirDados"+par,callback);
+			if(i3GEO && i3GEO.configura.locaplic){
+				core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=inserirDados"+par,callback);
+			}
+			else{
+				core_makeRequest("../php/metaestat.php?funcao=inserirDados"+par,callback);
+			}
 		}
 	},
 	conexao:{

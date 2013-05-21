@@ -298,20 +298,33 @@ i3GEOadmin.variaveis = {
 										{titulo:"Nome:",id:"Enomemedida",size:"50",value:i.nomemedida,tipo:"text",div:""},
 										{titulo:"Unidade de medida:",id:"",size:"50",value:i.codigo_unidade_medida,tipo:"text",div:"<div id=Ccodigo_unidade_medida ></div>"},
 										{titulo:"Tipo de per&iacute;odo:",id:"",size:"50",value:i.codigo_tipo_periodo,tipo:"text",div:"<div id=Ccodigo_tipo_periodo ></div>"},
-										{titulo:"Tipo de regi&atilde;o:",id:"",size:"50",value:i.codigo_tipo_regiao,tipo:"text",div:"<div id=Ccodigo_tipo_regiao ></div>"}
-					]
+										{titulo:"Tipo de regi&atilde;o:",id:"",size:"50",value:i.codigo_tipo_regiao,tipo:"text",div:"<div id=Ccodigo_tipo_regiao ></div>"},
+										{titulo:"Tabela do banco que contem os valores: <img onclick='i3GEOadmin.variaveis.selTabela(\"Etabela\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"sim\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Etabela",size:"50",value:i.tabela,tipo:"text",div:""}
+
+						]
 				};
 			ins += core_geraLinhas(param);
-			ins += "<div id='editorMedidaDefault' >";
+			ins += "<br><br><div id='editorMedidaDefault' >";
 			param = {
 				"linhas":[
 									{titulo:"Conex&atilde;o:",id:"",size:"50",value:i.codigo_estat_conexao,tipo:"text",div:"<div id=Ccodigo_estat_conexao ></div>"},
 									{titulo:"Esquema do banco: <img onclick='i3GEOadmin.variaveis.selEsquema(\"Eesquemadb\",\"Ecodigo_estat_conexao\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Eesquemadb",size:"50",value:i.esquemadb,tipo:"text",div:""},
-									{titulo:"Tabela do banco: <img onclick='i3GEOadmin.variaveis.selTabela(\"Etabela\",\"Ecodigo_estat_conexao\",\"Eesquemadb\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Etabela",size:"50",value:i.tabela,tipo:"text",div:""},
 									{titulo:"Coluna com os valores: <img onclick='i3GEOadmin.variaveis.selColuna(\"Ecolunavalor\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunavalor",size:"50",value:i.colunavalor,tipo:"text",div:""},
 									{titulo:"Coluna de liga&ccedil;&atilde;o com a tabela GEO: <img onclick='i3GEOadmin.variaveis.selColuna(\"Ecolunaidgeo\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunaidgeo",size:"50",value:i.colunaidgeo,tipo:"text",div:""},
 									{titulo:"Coluna com os IDs &uacute;nicos que identificam cada registro da tabela com os valores: <img onclick='i3GEOadmin.variaveis.selColuna(\"Ecolunaidunico\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunaidunico",size:"50",value:i.colunaidunico,tipo:"text",div:""},
 									{titulo:"Filtro adicional:",id:"Efiltro",size:"50",value:i.filtro,tipo:"text",div:""}
+				]
+			};
+			ins += core_geraLinhas(param);
+			//utilizados pelo ajudante de criacao de variaveis
+			//para permitir a criacao de parametros de tempo
+			ins += "<div id=EparametrosTempo style='display:none' >";
+			param = {
+				"linhas":[
+									{titulo:"Coluna com o ano (se couber): <img onclick='i3GEOadmin.variaveis.selColuna(\"EcolunaAno\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"EcolunaAno",size:"50",value:i.colunaano,tipo:"text",div:""},
+									{titulo:"Coluna com o m&ecirc;s (se couber): <img onclick='i3GEOadmin.variaveis.selColuna(\"EcolunaMes\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"EcolunaMes",size:"50",value:i.colunames,tipo:"text",div:""},
+									{titulo:"Coluna com o dia (se couber): <img onclick='i3GEOadmin.variaveis.selColuna(\"EcolunaDia\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"EcolunaDia",size:"50",value:i.colunadia,tipo:"text",div:""},
+									{titulo:"Coluna com a hora (se couber): <img onclick='i3GEOadmin.variaveis.selColuna(\"EcolunaHora\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"EcolunaHora",size:"50",value:i.colunahora,tipo:"text",div:""}
 				]
 			};
 			ins += core_geraLinhas(param);
@@ -343,6 +356,10 @@ i3GEOadmin.variaveis = {
 				temp += "</select>";
 				$i("Ccodigo_estat_conexao").innerHTML = temp;
 			}
+			$i("Ecodigo_tipo_regiao").onchange = function(){
+				//alert("Escolha uma tabela compat&iacute;vel com essa regi&atilde;o");
+				//$i("Etabela").value = "";
+			};
 		}
 	},
 	classificacao:{
@@ -1136,7 +1153,7 @@ i3GEOadmin.variaveis = {
 			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraVariavel";
 		}
 		if(tipo == "medidaVariavel"){
-			campos = new Array("codigo_variavel","codigo_unidade_medida","codigo_tipo_periodo","codigo_tipo_regiao","codigo_estat_conexao","esquemadb","tabela","colunavalor","colunaidgeo","colunaidunico","filtro","nomemedida");
+			campos = new Array("colunaAno","colunaMes","colunaDia","colunaHora","codigo_variavel","codigo_unidade_medida","codigo_tipo_periodo","codigo_tipo_regiao","codigo_estat_conexao","esquemadb","tabela","colunavalor","colunaidgeo","colunaidunico","filtro","nomemedida");
 			par = "&id_medida_variavel="+id;
 			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraMedidaVariavel";
 		}
@@ -1349,7 +1366,10 @@ i3GEOadmin.variaveis = {
 		}
 		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=esquemasConexao&formato=json&codigo_estat_conexao="+eleCodigoConexao.value,callback);
 	},
-	selTabela: function(idEleValue,idEleCodigoConexao,idEleNomeEsquema){
+	selTabela: function(idEleValue,idEleCodigoConexao,idEleNomeEsquema,excluigeom){
+		if(!excluigeom){
+			excluigeom = "nao";
+		}
 		var eleValue = $i(idEleValue),
 		eleCodigoConexao = $i(idEleCodigoConexao),
 		eleNomeEsquema = $i(idEleNomeEsquema),
@@ -1384,7 +1404,7 @@ i3GEOadmin.variaveis = {
 			alert("Escolha um esquema");
 			return;
 		}
-		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=tabelasEsquema&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value,callback);
+		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=tabelasEsquema&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value+"&excluigeom="+excluigeom,callback);
 	},
 	selColuna: function(idEleValue,idEleCodigoConexao,idEleNomeEsquema,idEleNomeTabela){
 		var eleValue = $i(idEleValue),

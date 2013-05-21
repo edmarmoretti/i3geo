@@ -370,31 +370,48 @@ switch (strtoupper($funcao))
 			$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$colunaidunico,$filtro,$nomemedida);
 		}
 		//adiciona os parametros de tempo conforme o tipo de periodo escolhido
+		//
+		//se os nomes das colunas com os parametros de tempo forem definidas
+		//os parametros sao criados
+		//isso acontece se a criacao da medida estiver sendo feita em uma tabela que nao e a default
+		//
 		if($default == true){
 			$m->excluirRegistro("i3geoestat_parametro_medida","id_medida_variavel",$id_medida_variavel);
 			$id_pai = 0;
 			//anual
 			if($codigo_tipo_periodo >= 1){
+				if(empty($nomeAno)){
+					$nomeAno = "ano";
+				}
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","","ano",$id_pai,1);
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","",$nomeAno,$id_pai,1);
 				$id_pai = $id_parametro_medida;
 			}
 			//mensal
 			if($codigo_tipo_periodo >= 2){
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","","mes",$id_pai,2);
+				if(empty($nomeMes)){
+					$nomeMes = "mes";
+				}
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","",$nomeMes,$id_pai,2);
 				$id_pai = $id_parametro_medida;
 			}
 			//diario
 			if($codigo_tipo_periodo >= 3){
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","","dia",$id_pai,3);
+				if(empty($nomeDia)){
+					$nomeDia = "dia";
+				}
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","",$nomeDia,$id_pai,3);
 				$id_pai = $id_parametro_medida;
 			}
 			//horario
 			if($codigo_tipo_periodo == 4){
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","","hora",$id_pai,4);
+				if(empty($nomeHora)){
+					$nomeHora = "hora";
+				}
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","",$nomeHora,$id_pai,4);
 			}
 		}
 		retornaJSON($m->listaMedidaVariavel("",$id_medida_variavel));
@@ -946,6 +963,7 @@ switch (strtoupper($funcao))
 		$f = verificaFilhos();
 		if(!$f){
 			$m = new Metaestat();
+			$m->negativaValoresMedidaVariavel($id);
 			retornaJSON($m->excluirRegistro("i3geoestat_medida_variavel","id_medida_variavel",$id));
 		}
 		else
@@ -1260,8 +1278,11 @@ switch (strtoupper($funcao))
 	*/
 	case "TABELASESQUEMA":
 		$m = new Metaestat();
+		if(empty($excluigeom)){
+			$excluigeom = "";
+		}
 		if($formato == "json"){
-			retornaJSON($m->tabelasEsquema($codigo_estat_conexao,$nome_esquema));
+			retornaJSON($m->tabelasEsquema($codigo_estat_conexao,$nome_esquema,$excluigeom));
 		}
 		exit;
 	break;

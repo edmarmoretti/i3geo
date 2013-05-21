@@ -5,10 +5,10 @@
 <title>Upload de dados</title>
 <style type="text/css">
 /*margin and padding on body element
-          can introduce errors in determining
-          element position and are not recommended;
-          we turn them off as a foundation for YUI
-          CSS treatments. */
+					can introduce errors in determining
+					element position and are not recommended;
+					we turn them off as a foundation for YUI
+					CSS treatments. */
 body {
 	margin: 0;
 	padding: 0;
@@ -28,29 +28,30 @@ body {
 	<br>
 	<form id=i3GEOupload target="i3GEOuploadiframe" action="../../admin/php/metaestat_uploaddados_submit.php" onsubmit="i3GEOadmin.uploaddados.upload.submit();" method="post" ENCTYPE="multipart/form-data">
 		<p class="paragrafo">
-			<input class=digitar type="file" size=22 name="i3GEOuploadArquivo" style="top: 0px;left: 0px;cursor: pointer;">
+			<input class=digitar type="file" size=22 name="i3GEOuploadArquivo" style="top: 0px; left: 0px; cursor: pointer;">
 		</p>
-		<input type="hidden" name="MAX_FILE_SIZE" value="1000000"> <input type="submit" value="Enviar" size="22">
+		<input type="hidden" name="MAX_FILE_SIZE" value="100000000"> <input type="submit" value="Enviar" size="22">
 	</form>
 	<br>
 	<div id="i3GEOadminEditorColunas" style="left: -5px;"></div>
-	<iframe id="i3GEOuploadiframe" name="i3GEOuploadiframe" src="#" style="width: 0;
-	height: 0;
-	border: 0px solid #fff;"></iframe>
+	<iframe id="i3GEOuploadiframe" name="i3GEOuploadiframe" src="#" style="width: 0; height: 0; border: 0px solid #fff;"></iframe>
 	<div id=logajax style="display: block"></div>
 	<script>
 		//recupera a variavel escolhida se existir
-		try{
-			if(window.parent && window.parent.i3GEOF && window.parent.i3GEOF.metaestat){
+		try {
+			if (window.parent && window.parent.i3GEOF
+					&& window.parent.i3GEOF.metaestat) {
 				i3GEOF.metaestat.CODIGO_VARIAVEL = window.parent.i3GEOF.metaestat.CODIGO_VARIAVEL;
 				i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = window.parent.i3GEOF.metaestat.ID_MEDIDA_VARIAVEL;
+				i3GEO.configura.locaplic = window.parent.i3GEO.configura.locaplic;
 			}
+		} catch (e) {
+			i3GEO.configura = {
+				locaplic : "../.."
+			};
 		}
-		catch(e){}
 		//necessario para a ferramenta login e outras
-		i3GEO.configura = {
-			locaplic : "../.."
-		};
+
 		i3GEOadmin.uploaddados.inicia();
 		/*
 		temp = function() {

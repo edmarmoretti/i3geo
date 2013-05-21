@@ -729,6 +729,7 @@ class Metaestat{
 	}
 	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = ""){
 		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor);
+		//var_dump($sql);exit;
 		$sqlf = $sql["sql"];
 		if($sql["filtro"] == true){
 			if(!empty($filtro)){
@@ -1345,7 +1346,7 @@ class Metaestat{
 	$codigo_variavel - opcional
 	*/
 	function listaVariavel($codigo_variavel="",$filtro_esquema=""){
-		$sql = "select a.* from ".$this->esquemaadmin."i3geoestat_variavel as a ";
+		$sql = "select DISTINCT a.* from ".$this->esquemaadmin."i3geoestat_variavel as a ";
 		if($codigo_variavel != ""){
 			$sql .= "WHERE a.codigo_variavel = $codigo_variavel ";
 		}
@@ -1645,8 +1646,12 @@ class Metaestat{
 	function criaEsquemaDB($codigo_estat_conexao,$nome_esquema){
 		return $this->execSQLDB($codigo_estat_conexao,"create schema $nome_esquema");
 	}
-	function tabelasEsquema($codigo_estat_conexao,$nome_esquema){
-		return $this->execSQLDB($codigo_estat_conexao,"SELECT table_name as tabela FROM information_schema.tables where table_schema = '$nome_esquema'");
+	function tabelasEsquema($codigo_estat_conexao,$nome_esquema,$excluigeom=""){
+		$sql = "SELECT table_name as tabela FROM information_schema.tables where table_schema = '$nome_esquema'";
+		if(strtolower($excluigeom) == "sim"){
+			$sql = "SELECT c.table_name as tabela FROM information_schema.tables as c left join (SELECT distinct a.table_name FROM information_schema.tables as a left join information_schema.columns as b	on	a.table_name = b.table_name	where a.table_schema = '$nome_esquema' and	udt_name = 'geometry' ) as d on c.table_name = d.table_name where c.table_schema = '$nome_esquema' and d.table_name isnull";
+		}
+		return $this->execSQLDB($codigo_estat_conexao,$sql);
 	}
 	function criaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela){
 		return $this->execSQLDB($codigo_estat_conexao,"create table ".$nome_esquema.".".$nome_tabela." (gid serial, CONSTRAINT ".$nome_tabela."_pkey PRIMARY KEY (gid ))");
@@ -1940,6 +1945,8 @@ class Metaestat{
 			$linha = fgets($handle);
 			if($linha != $cabecalho){
 				$linha = str_replace("\n",'',$linha);
+				$linha = str_replace('"','',$linha);
+				$linha = str_replace("'",'',$linha);
 				$linha = explode($separador,$linha);
 				//var_dump($linha);exit;
 				if(count($linha) > 2){
@@ -1964,6 +1971,7 @@ class Metaestat{
 			}
 		}
 		fclose ($handle);
+		//var_dump($linhas);
 		//pega a conexao
 		$c = $this->listaConexao($medidavariavel["codigo_estat_conexao"],true);
 		//gera o objeto pdo
@@ -2157,6 +2165,33 @@ class Metaestat{
 		}
 		return array("ok");
 	}
+	//altera os registros de uma medida de variavel (muda para negativo)
+	function negativaValoresMedidaVariavel($id_medida_variavel){
+		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
+		if($medida["esquemadb"] != "i3geo_metaestat"){
+			return "erro";
+		}
+		$c = $this->listaConexao($medida["codigo_estat_conexao"],true);
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+		if($id_medida_variavel != ""){
+			if($medida["filtro"] != ""){
+				$sql = "UPDATE from i3geo_metaestat.".$medida["tabela"];
+				$sql .= "SET id_medida_variavel = id_medida_variavel * -1 WHERE id_medida_variavel = $id_medida_variavel";
+				try {
+					$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					$dbh->beginTransaction();
+					$sth = $dbh->exec($sql);
+					$dbh->commit();
+				} catch (Exception $e) {
+					$dbh->rollBack();
+					return array("Falhou: " . $e->getMessage());
+				}
+			}
+		}
+		return array("ok");
+	}
+
+	//exclui o valor de uma medida em uma regiao especifica (utilizado pelo editor de limites)
 	function excluiAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$id){
 		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
 		if($medida["esquemadb"] != "i3geo_metaestat"){

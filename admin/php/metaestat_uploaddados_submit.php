@@ -2,6 +2,7 @@
 $colunasarquivo = "";
 $nomearquivoserv = "";
 error_reporting(0);
+//var_dump($_FILES);exit;
 if (isset($_FILES['i3GEOuploadArquivo']['name']))
 {
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
@@ -23,7 +24,6 @@ if (isset($_FILES['i3GEOuploadArquivo']['name']))
 		if(count($colunas) == 1){
 			$colunas = explode(",",$buffer);
 		}
-		//var_dump($colunas);
 		$colunasarquivo = implode(",",$colunas);
 	}
 }

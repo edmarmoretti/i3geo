@@ -314,7 +314,7 @@ function montaDivTema(i){
 						b.url = 'javascript:$i(\"Eid_medida_variavel\").value=\"'+filhos[j].id+'\"';
 						a.push(b);
 					}
-					core_arvore(o[i].titulo,"arvore_"+i,{"propriedades":a})
+					core_arvore(o[i].titulo,"arvore_"+i,{"propriedades":a});
 
 				}
 				//ins += "<br><div>"+YAHOO.lang.JSON.parse(o.responseText)+"</div>";

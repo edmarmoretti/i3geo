@@ -136,7 +136,7 @@ it:""
 }],
 "20":[
 {
-pt:"Antes de continuar voc&ecirc; pode inserir dados na vari&aacute;vel que foi criada fazendo o upload de um arquivo no formato CSV. Essa inclus&atilde;o poder&aacute; ser feita posteriormente, nesse caso voc&ecirc; dever&aacute; atualizar a defini&ccedil;&atilde;o das classes que forem utilizadas na representa&ccedil;&atilde;o dos dados",
+pt:"Antes de continuar voc&ecirc; com o ajudante, pode inserir dados na vari&aacute;vel que foi criada fazendo o upload de um arquivo no formato CSV. Essa inclus&atilde;o poder&aacute; ser feita posteriormente, nesse caso lembre-se que voc&ecirc; dever&aacute; atualizar a defini&ccedil;&atilde;o das classes que forem utilizadas na representa&ccedil;&atilde;o dos dados",
 en:"",
 es:"",
 it:""

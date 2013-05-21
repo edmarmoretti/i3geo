@@ -61,6 +61,8 @@ i3GEOF.metaestat = {
 		if(Interface && Interface != ""){
 			i3GEOF.metaestat.INTERFACE = Interface;
 		}
+		i3GEOF.metaestat.CODIGO_VARIAVEL = "";
+		i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = "";
 		if(codigo_variavel && codigo_variavel != ""){
 			i3GEOF.metaestat.CODIGO_VARIAVEL = codigo_variavel;
 		}
@@ -864,7 +866,7 @@ i3GEOF.metaestat = {
 			}
 			else{
 				opacidade = "";
-			}	
+			}
 			i3GEO.php.mapfileMedidaVariavel(
 				temp,
 				$i("i3geoCartoComboMedidasVariavel").value,
@@ -1123,7 +1125,7 @@ i3GEOF.metaestat = {
 			i3GEOadmin.variaveis.editar("medidaVariavel","");
 			//insere uma opcao para ativar as opcoes adicionais que sao usadas quando o usuario quer
 			//usar dados ja existentes em um banco de dados
-			var botoesdiv = $i("okcancel_checkbox"),
+			var temp,botoesdiv = $i("okcancel_checkbox"),
 				btn = document.createElement("div");
 			btn.innerHTML = "<br><input type=checkbox style='position:relative;top:3px;cursor:pointer;' onclick='javascript:$i(\"editorMedidaDefault\").style.display = \"block\";'/> Quero usar uma tabela j&aacute; existente ou alterar os par&acirc;metros adicionais";
 			botoesdiv.appendChild(btn);
@@ -1138,7 +1140,7 @@ i3GEOF.metaestat = {
 			//o esquema e o public
 			$i("Eesquemadb").value = "i3geo_metaestat";
 			//a tabela onde ficarao os dados
-			$i("Etabela").value = "indicadores_bairro";
+			$i("Etabela").value = "dados_medidas";
 			//coluna com os valores
 			$i("Ecolunavalor").value = "valor_num";
 			//id que liga com o geo
@@ -1149,25 +1151,27 @@ i3GEOF.metaestat = {
 			$i("Ecodigo_unidade_medida").value = 1;
 			$i("Ecodigo_unidade_medida").style.width = "90%";
 			//periodo
-			$i("Ecodigo_tipo_periodo").value = 0;
-			$i("Ecodigo_tipo_periodo").style.width = "90%";
+			temp = $i("Ecodigo_tipo_periodo");
+			temp.value = 0;
+			temp.style.width = "90%";
+			//mostra os campos para definir os parametros de tempo
+			temp.onchange = function(){
+				$i("EparametrosTempo").style.display = "block";
+				if($i("editorMedidaDefault").style.display == "block"){
+					i3GEO.janela.tempoMsg("Especifique as colunas que cont&eacute;m os dados temporais no final do formul&aacute;rio");
+				}
+				if($i("EparametrosTempo").value == ""){
+					$i("EcolunaAno").value = "";
+					$i("EcolunaMes").value = "";
+					$i("EcolunaDia").value = "";
+					$i("EcolunaHora").value = "";
+				}
+			}
 			//impede a alteracao do filtro
 			$i("Efiltro").disabled = "disabled";
 			//altera a tabela quando escolher
-			$i("Ecodigo_tipo_regiao").onchange = function(){
-				var c = $i("Ecodigo_tipo_regiao");
-				if(c.value != ""){
-					//nesse caso, o nome da tabela e padrao
-					if(i3GEOadmin && $i("Eesquemadb").value === "i3geo_metaestat"){
-						$i("Etabela").value = i3GEOadmin.variaveis.dadosAuxiliares.tipo_regiao[c.selectedIndex - 1].tabela;
-					}
-					else{
-						alert("Escolha uma tabela compat&iacute;vel com essa regi&atilde;o");
-						$i("Etabela").value = "";
-					}
-				}
-			};
 			$i("Ecodigo_tipo_regiao").style.width = "90%";
+
 		},
 		editaMedidaVariavel: function(){
 			i3GEOadmin.variaveis.aposGravar = function(){
@@ -1249,9 +1253,11 @@ i3GEOF.metaestat = {
 		},
 		comboVariaveisOnchange: function(){
 			i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t2");
+			i3GEOF.metaestat.CODIGO_VARIAVEL = $i("i3geoCartoComboVariavelEditor").value;
 		},
 		comboMedidaVariavelOnchange: function(combo){
 			i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");
+			i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = $i("i3geoCartoComboMedidaVariavelEditor").value;
 		},
 		quartis: function(){
 			var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
@@ -1617,9 +1623,11 @@ i3GEOF.metaestat = {
 						novoel.id = idpar;
 						novoel.className = "paragrafo";
 						onde.appendChild(novoel);
-						onde = novoel;
 					}
 					onde = $i(idpar);
+					//if($i(idcombo)){
+					//	$i(idcombo).parentNode.innerHTML = "";
+					//}
 					if(!$i(idcombo)){
 						i3GEOF.metaestat.comum.aguarde(onde);
 						novoel = document.createElement("div");
@@ -1656,9 +1664,9 @@ i3GEOF.metaestat = {
 			i3GEO.php.listaValoresParametroMedidaVariavel(id_parametro_medida,temp);
 		},
 		antesCombo: function(){
-			if(!$i("i3geoCartoClasses_corpo")){
-				i3GEOF.metaestat.classes.inicia();
-			}
+			//if(!$i("i3geoCartoClasses_corpo")){
+				//i3GEOF.metaestat.classes.inicia();
+			//}
 		},
 		//retorna o id do parametro que e filho de um outro parametro
 		retornaIdFilho:function(pai){
