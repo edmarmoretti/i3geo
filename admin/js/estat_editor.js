@@ -82,9 +82,14 @@ i3GEOadmin.editor = {
 						try	{
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
 							temp = "<fieldset>" +
-							"<p class=paragrafo ><input type=button value='Upload Shapefile' id='i3GEOadmin_botaoupload' /></p>" +
+							"<p class=paragrafo >Crie uma tabela no banco contendo limites ou localidades que poder&aacute; ser utilizada para espacializar os dados estat&iacute;sticos existentes em outras tabelas<br>" +
+							"<input type=button value='Upload Shapefile' id='i3GEOadmin_botaoupload' /></p>" +
 							"<div id='i3GEOadmin_formupload'></div>" +
-							"<input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' />" +
+							"<p class=paragrafo >Crie uma tabela nova a partir de um arquivo CSV. Utilize essa op&ccedil;&atilde;o para armazenar no banco os dados que ser&atilde;o relacionados &agrave;s tabelas contendo limites ou localidades </p>" +
+							"<input type=button value='Upload CSV' id='i3GEOadmin_botaouploadcsv' /></p>" +
+							"<div id='i3GEOadmin_formuploadcsv'></div>" +
+
+							"<p class=paragrafo >Crie uma tabela vazia no banco de dados, definindo o nome e os tipos de colunas<br><input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' /></p>" +
 							"</fieldset>";
 
 							temp += "<fieldset>" +
@@ -102,6 +107,10 @@ i3GEOadmin.editor = {
 							new YAHOO.widget.Button(
 								"i3GEOadmin_botaoupload",
 								{onclick:{fn: i3GEOadmin.editor.uploadshp.inicia}}
+							);
+							new YAHOO.widget.Button(
+								"i3GEOadmin_botaouploadcsv",
+								{onclick:{fn: i3GEOadmin.editor.uploadcsv.inicia}}
 							);
 							new YAHOO.widget.Button(
 								"i3GEOadmintabelaMostrar",
@@ -458,6 +467,44 @@ i3GEOadmin.editor = {
 			$i("i3GEOuploadcodigoconexao").value = $i("i3GEOadmincodigo_estat_conexao").value;
 			$i("i3GEOuploadesquema").value = $i("i3GEOadminesquema").value;
 			$i("i3GEOuploadf").submit();
+		}
+	},
+	uploadcsv: {
+		inicia: function(){
+			var onde = $i("i3GEOadmin_formuploadcsv");
+			if(onde.innerHTML != ""){
+				onde.innerHTML = "";
+				return;
+			}
+			$i("i3GEOadmin_formupload").innerHTML = i3GEOadmin.editor.uploadcsv.formulario();
+			new YAHOO.widget.Button(
+				"i3GEOuploadcsvsubmit",
+				{onclick:{fn: i3GEOadmin.editor.uploadcsv.submit}}
+			);
+		},
+		formulario: function(){
+			var ins = '<fieldset><form id=i3GEOuploadcsvf target="i3GEOuploadcsviframe" action="../php/metaestat_uploadcsv_submit.php" method="post" ENCTYPE="multipart/form-data">' +
+			'<p class="paragrafo" >CSV: <br><input class=digitar type="file" size=22 name="i3GEOuploadcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >Nome da nova tabela:<br><input class=digitar type="text" size=20 id="tabelaDestinocsv" name="tabelaDestinocsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
+
+			'<p class="paragrafo" ><input id=i3GEOuploadcsvsubmit type="button" value="Enviar" size=12 />' +
+			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
+			'<input type="hidden" id="i3GEOuploadcsvcodigoconexao" name="i3GEOuploadcsvcodigoconexao" value="">' +
+			'<input type="hidden" id="i3GEOuploadcsvesquema" name="i3GEOuploadcsvesquema" value="">' +
+			'</form>' +
+			'<iframe name=i3GEOuploadcsviframe style="text-align:left;border:1px solid gray;" width="98%" height="400px"></iframe>' +
+			'<p class="paragrafo" >Ap&oacute;s terminar o processo, atualize essa p&aacute;gina para que a nova tabela criada apare&ccedil;a nas listas de sele&ccedil;&atilde;o.</p>' +
+			'</fieldset>';
+			return ins;
+		},
+		submit: function(){
+			if($i("tabelaDestinocsv").value == ""){
+				alert("Digite o nome da tabela a ser criada");
+				return;
+			}
+			$i("i3GEOuploadcsvcodigoconexao").value = $i("i3GEOadmincodigo_estat_conexao").value;
+			$i("i3GEOuploadcsvesquema").value = $i("i3GEOadminesquema").value;
+			$i("i3GEOuploadcsvf").submit();
 		}
 	}
 
