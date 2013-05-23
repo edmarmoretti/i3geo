@@ -630,8 +630,8 @@ Liga e desliga temas no mapa atual.
 <Mapa->ligaDesligaTemas>
 */
 	case "LIGATEMAS":
-  		include_once("classe_mapa.php");
-  		copiaSeguranca($map_file);
+			include_once("classe_mapa.php");
+			copiaSeguranca($map_file);
 		$m = new Mapa($map_file,$locaplic);
 		$retorno = $m->ligaDesligaTemas($ligar,$desligar,$adicionar);
 		$m->salva();
@@ -649,8 +649,8 @@ Veja no livro "Javascript de Alto Desempenho", de Nicholas C. Zakas pg. 162
 <Mapa->ligaDesligaTemas>
 */
 	case "LIGATEMASBEACON":
-  		include_once("classe_mapa.php");
-  		copiaSeguranca($map_file);
+			include_once("classe_mapa.php");
+			copiaSeguranca($map_file);
 		$m = new Mapa($map_file,$locaplic);
 		$retorno = $m->ligaDesligaTemas($ligar,$desligar,$adicionar);
 		$m->salva();
@@ -715,7 +715,7 @@ Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo,$time,$tile);
+		$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo,$time,$tile);
 		$teste = "ok";//testaMapa($map_file,$postgis_mapa);
 		if ($teste == "ok")
 		{$retorno = "ok";$_SESSION["contadorsalva"]++;}
@@ -757,7 +757,7 @@ Muda o OUTPUTFORMAT.
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-	 	$res = $m->mudaoutputformat($tipo);
+		$res = $m->mudaoutputformat($tipo);
 		if($res != 1)
 		{$m->salva();$_SESSION["contadorsalva"]++;}
 		else
@@ -784,7 +784,7 @@ Obt&eacute;m o nome de um layer e de seu arquivo mapfile original.
 		$retorno = $m->peganomelayer();
 	break;
 	/*
-	 Valor: PEGAMETADATA
+	Valor: PEGAMETADATA
 
 	Obt&eacute;m os metadados de um tema
 
@@ -1634,7 +1634,7 @@ Identifica elementos no mapa.
 		$retorno = $m->identifica2($opcao,$xy,$resolucao,$ext,$listaDeTemas,$wkt);
 	break;
 /*
- Valor: IDENTIFICA3
+Valor: IDENTIFICA3
 
 Identifica elementos no mapa.
 

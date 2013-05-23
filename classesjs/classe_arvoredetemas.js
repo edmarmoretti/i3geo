@@ -974,29 +974,31 @@ i3GEO.arvoreDeTemas = {
 					);
 				}catch(e){i3GEO.arvoreDeTemas.ARVORE.draw();return;}
 				ig=0;
-				do{
-					nomeSis = sis[ig].NOME;
-					if(sis[ig].PUBLICADO){
-						if(sis[ig].PUBLICADO.toLowerCase() === "nao")
-						{nomeSis = "<span style='color:red'>"+sis[ig].NOME+"</span>";}
-					}
-					sisNode = new YAHOO.widget.HTMLNode(
-						{html:nomeSis,expanded:false,enableHighlight:false},
-						tempNode
-					);
-					funcoes = sis[ig].FUNCOES;
-					tempf = funcoes.length;
-					for (ig2=0;ig2<tempf;ig2+=1){
-						abre = "i3GEO.janela.cria('"+(funcoes[ig2].W)+"px','"+(funcoes[ig2].H)+"px','"+(funcoes[ig2].ABRIR)+"','','','"+$trad("a11")+"')";
-						nomeFunc = "<a href='#' onclick=\""+abre+"\">"+funcoes[ig2].NOME+"</a>";
-						new YAHOO.widget.HTMLNode(
-							{html:nomeFunc,expanded:false,enableHighlight:false,isLeaf:true},
-							sisNode
+				if(sis.length > 0){
+					do{
+						nomeSis = sis[ig].NOME;
+						if(sis[ig].PUBLICADO){
+							if(sis[ig].PUBLICADO.toLowerCase() === "nao")
+							{nomeSis = "<span style='color:red'>"+sis[ig].NOME+"</span>";}
+						}
+						sisNode = new YAHOO.widget.HTMLNode(
+							{html:nomeSis,expanded:false,enableHighlight:false},
+							tempNode
 						);
+						funcoes = sis[ig].FUNCOES;
+						tempf = funcoes.length;
+						for (ig2=0;ig2<tempf;ig2+=1){
+							abre = "i3GEO.janela.cria('"+(funcoes[ig2].W)+"px','"+(funcoes[ig2].H)+"px','"+(funcoes[ig2].ABRIR)+"','','','"+$trad("a11")+"')";
+							nomeFunc = "<a href='#' onclick=\""+abre+"\">"+funcoes[ig2].NOME+"</a>";
+							new YAHOO.widget.HTMLNode(
+								{html:nomeFunc,expanded:false,enableHighlight:false,isLeaf:true},
+								sisNode
+							);
+						}
+						ig+=1;
 					}
-					ig+=1;
+					while(ig<iglt);
 				}
-				while(ig<iglt);
 				if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir === false)
 				{i3GEO.arvoreDeTemas.ARVORE.draw();}
 				else

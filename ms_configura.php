@@ -488,6 +488,22 @@ else //se for linux
 				array("caminho"=>"/tmp","nome"=>"tmp"),
 				array("caminho"=>"/var/www","nome"=>"www")
 			)
+		),
+		array(
+			"ip"=>"::1",
+			"drives"=>array(
+					array("caminho"=>"/home","nome"=>"home"),
+					array("caminho"=>"/tmp","nome"=>"tmp"),
+					array("caminho"=>"/var/www","nome"=>"www")
+			)
+		),
+		array(
+			"ip"=>"localhost",
+			"drives"=>array(
+					array("caminho"=>"/home","nome"=>"home"),
+					array("caminho"=>"/tmp","nome"=>"tmp"),
+					array("caminho"=>"/var/www","nome"=>"www")
+			)
 		)
 	);
 	$locmapserv = "/cgi-bin/mapserv";

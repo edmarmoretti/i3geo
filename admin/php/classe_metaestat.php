@@ -321,16 +321,18 @@ class Metaestat{
 				}
 			}
 			$aliasvis = $dadosgeo["apelidos"];
-			$aliasvis = str_replace(" ",",",$aliasvis);
-			$aliasvis = str_replace(",,",",",$aliasvis);
-			$aliasvis = explode(",",$aliasvis);
-			if(count($aliasvis) == count($colunasvisiveis)){
-				$n = count($colunas);
-				for($i=0;$i<$n;$i++){
-					$nj = count($colunasvisiveis);
-					for($j=0;$j<$nj;$j++){
-						if($colunas[$i] === $colunasvisiveis[$j]){
-							$alias[$i] = mb_convert_encoding($aliasvis[$j],"ISO-8859-1",mb_detect_encoding($aliasvis[$j]));
+			if($aliasvis != ""){
+				$aliasvis = str_replace(";",",",$aliasvis);
+				$aliasvis = str_replace(",,",",",$aliasvis);
+				$aliasvis = explode(",",$aliasvis);
+				if(count($aliasvis) == count($colunasvisiveis)){
+					$n = count($colunas);
+					for($i=0;$i<$n;$i++){
+						$nj = count($colunasvisiveis);
+						for($j=0;$j<$nj;$j++){
+							if($colunas[$i] === $colunasvisiveis[$j]){
+								$alias[$i] = mb_convert_encoding($aliasvis[$j],"ISO-8859-1",mb_detect_encoding($aliasvis[$j]));
+							}
 						}
 					}
 				}
@@ -417,7 +419,6 @@ class Metaestat{
 		$sqlgeo = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlgeo);
 		$sql = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sql);
 		$sqlagrupamento = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlagrupamento);
-
 		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"],"titulo"=>$titulo);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao="",$opacidade=""){
@@ -595,9 +596,36 @@ class Metaestat{
 			$srid = $meta["srid"];
 			//st_setsrid(".$colunageo.",".$srid.") as ".$colunageo
 			$vis = $meta["colunasvisiveis"];
-			$vis = str_replace(" ",",",$vis);
+			if($vis == ""){
+				$vis = $meta["colunanomeregiao"];
+			}
+			$vis = str_replace(";",",",$vis);
 			$vis = str_replace(",,",",",$vis);
-			$sqlf = $meta["colunageo"]." from (select st_setsrid(".$colunageo.",".$srid.") as $colunageo,$vis,gid from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$srid;
+			$vis = explode(",",$vis);
+			$itens = $vis;//array
+			$vis[] = "gid";
+			$vis = array_unique($vis);
+			$visiveis = array();
+			//verifica se as colunas existem mesmo
+			$colunastabela = $this->colunasTabela($meta["codigo_estat_conexao"],$meta["esquemadb"],$meta["tabela"]);
+			foreach($vis as $v){
+				if(in_array($v,$colunastabela)){
+					$visiveis[] = $v;
+				}
+			}
+			$vis = implode(",",$visiveis);
+			//apelidos
+			$apelidos = $meta["apelidos"];
+			if($apelidos == ""){
+				$apelidos = "Nome";
+			}
+			$apelidos = str_replace(";",",",$apelidos);
+			$apelidos = str_replace(",,",",",$apelidos);
+			$apelidos = mb_convert_encoding($apelidos,"ISO-8859-1",mb_detect_encoding($apelidos));
+			$apelidos = explode(",",$apelidos);
+			$apelidos = array_unique($apelidos);
+
+			$sqlf = $meta["colunageo"]." from (select st_setsrid(".$colunageo.",".$srid.") as $colunageo,$vis from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$srid;
 			$sqlf = str_replace(",,",",",$sqlf);
 			$outlinecolor = str_replace(","," ",$outlinecolor);
 			$dados[] = "MAP";
@@ -616,7 +644,12 @@ class Metaestat{
 			$dados[] = '		CLASSE "SIM"';
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
-			$dados[] = '		TIP "'.$vis.'"';
+			$dados[] = '		TIP "'.$meta["colunanomeregiao"].'"';
+			if(count($itens) == count($apelidos)){
+				$dados[] = '		ITENS "'.implode(",",$itens).'"';
+				$dados[] = '		ITENSDESC "'.implode(",",$apelidos).'"';
+			}
+
 			$dados[] = '	END';
 			$dados[] = '    CLASS';
 			$dados[] = '        NAME ""';
@@ -1132,6 +1165,7 @@ class Metaestat{
 				if($this->convUTF){
 					$nome_tipo_regiao = utf8_encode($nome_tipo_regiao);
 					$descricao_tipo_regiao = utf8_encode($descricao_tipo_regiao);
+					$apelidos = utf8_encode($apelidos);
 				}
 				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid', colunasvisiveis = '$colunasvisiveis', apelidos = '$apelidos' WHERE codigo_tipo_regiao = $codigo_tipo_regiao";exit;
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid', colunasvisiveis = '$colunasvisiveis', apelidos = '$apelidos' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
