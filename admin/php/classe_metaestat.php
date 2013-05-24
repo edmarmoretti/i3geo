@@ -1983,7 +1983,7 @@ class Metaestat{
 				$linha = str_replace("'",'',$linha);
 				$linha = explode($separador,$linha);
 				//var_dump($linha);exit;
-				if(count($linha) > 2){
+				if(count($linha) == count($colunas)){
 					$ano = 0;
 					$mes = 0;
 					$dia = 0;

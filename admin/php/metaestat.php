@@ -352,21 +352,21 @@ switch (strtoupper($funcao))
 		$m = new Metaestat();
 		$default = false;
 		//verifica se a criacao da medida esta sendo feita na tabela default
-		if($codigo_tipo_periodo < 5 && $esquemadb == "i3geo_metaestat" && $colunaidgeo == "codigoregiao"){
+		if($codigo_tipo_periodo < 5 && $esquemadb == "i3geo_metaestat" && $colunaidgeo == "codigoregiao" && $tabela = "dados_medidas"){
 			$default = true;
 		}
 		if(empty($id_medida_variavel)){
 			//isso ira criar um novo registro
 			$id_medida_variavel = $m->alteraMedidaVariavel($codigo_variavel);
-			//o filtro e necessario para permitir a selecao dos registros apenas do que pertence a medida da variavel escolhida
-			if($default == true){
-				$filtro = " id_medida_variavel = $id_medida_variavel ";
-			}
 			if(!empty($nomemedida)){
 				$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$colunaidunico,$filtro,$nomemedida);
 			}
 		}
 		else{
+			//o filtro e necessario para permitir a selecao dos registros apenas do que pertence a medida da variavel escolhida
+			if($default == true && $filtro == ""){
+				$filtro = " id_medida_variavel = $id_medida_variavel ";
+			}
 			$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$colunaidunico,$filtro,$nomemedida);
 		}
 		//adiciona os parametros de tempo conforme o tipo de periodo escolhido
@@ -963,8 +963,8 @@ switch (strtoupper($funcao))
 		$f = verificaFilhos();
 		if(!$f){
 			$m = new Metaestat();
-			$m->negativaValoresMedidaVariavel($id);
 			retornaJSON($m->excluirRegistro("i3geoestat_medida_variavel","id_medida_variavel",$id));
+			$m->negativaValoresMedidaVariavel($id);
 		}
 		else
 			retornaJSON("erro");
