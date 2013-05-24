@@ -424,6 +424,7 @@ i3GEOadmin.editor = {
 	},
 	uploadshp: {
 		inicia: function(){
+			i3GEOadmin.editor.esvaziaFormsUpload();
 			var onde = $i("i3GEOadmin_formupload");
 			if(onde.innerHTML != ""){
 				onde.innerHTML = "";
@@ -471,12 +472,13 @@ i3GEOadmin.editor = {
 	},
 	uploadcsv: {
 		inicia: function(){
+			i3GEOadmin.editor.esvaziaFormsUpload();
 			var onde = $i("i3GEOadmin_formuploadcsv");
 			if(onde.innerHTML != ""){
 				onde.innerHTML = "";
 				return;
 			}
-			$i("i3GEOadmin_formupload").innerHTML = i3GEOadmin.editor.uploadcsv.formulario();
+			$i("i3GEOadmin_formuploadcsv").innerHTML = i3GEOadmin.editor.uploadcsv.formulario();
 			new YAHOO.widget.Button(
 				"i3GEOuploadcsvsubmit",
 				{onclick:{fn: i3GEOadmin.editor.uploadcsv.submit}}
@@ -506,6 +508,15 @@ i3GEOadmin.editor = {
 			$i("i3GEOuploadcsvesquema").value = $i("i3GEOadminesquema").value;
 			$i("i3GEOuploadcsvf").submit();
 		}
+	},
+	esvaziaFormsUpload: function(){
+		var csv = $i("i3GEOadmin_formuploadcsv"),
+			shp = $i("i3GEOadmin_formupload")
+		if(csv){
+			csv.innerHTML = "";
+		}
+		if(shp){
+			shp.innerHTML = "";
+		}
 	}
-
 };

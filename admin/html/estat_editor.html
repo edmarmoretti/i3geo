@@ -5,10 +5,10 @@
 <title>Conexao com banco de dados</title>
 <style type="text/css">
 /*margin and padding on body element
-          can introduce errors in determining
-          element position and are not recommended;
-          we turn them off as a foundation for YUI
-          CSS treatments. */
+					can introduce errors in determining
+					element position and are not recommended;
+					we turn them off as a foundation for YUI
+					CSS treatments. */
 body {
 	margin: 0;
 	padding: 0;
@@ -38,8 +38,8 @@ body {
 				</div>
 				<div class="ft"></div>
 			</div>
-			<p>
-			Aten&ccedil;&atilde;o: para poder editar o banco de dados, o usu&aacute;rio da conex&atilde;o escolhida deve ter direitos de edi&ccedil;&atilde;o<br>
+			<p style="font-size:10px;">
+			Aten&ccedil;&atilde;o: para poder editar o banco de dados, o usu&aacute;rio da conex&atilde;o escolhida deve ter direitos de edi&ccedil;&atilde;o.
 			Apenas as tabelas e os dados existentes no esquema i3geo_metaestat podem ser editados</p>
 			<div id="i3GEOadminEditorConexao" style="left: -5px;"></div><br>
 			<div id="i3GEOadminEditorEsquema" style="left: -5px;"></div>
@@ -52,33 +52,33 @@ body {
 	<div id=logajax style="display: block"></div>
 	<script>
 		/*
-		 Title: Editor de tabelas do sistema de metadados estat&iacute;sticos
+		Title: Editor de tabelas do sistema de metadados estat&iacute;sticos
 
-		 Licenca:
+		Licenca:
 
-		 GPL2
+		GPL2
 
-		 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+		i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-		 Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-		 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+		Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+		Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
 
-		 Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-		 e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-		 GNU conforme publicada pela Free Software Foundation;
+		Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+		e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+		GNU conforme publicada pela Free Software Foundation;
 
-		 Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-		 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-		 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-		 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-		 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
-		 GNU junto com este programa; se n&atilde;o, escreva para a
-		 Free Software Foundation, Inc., no endere&ccedil;o
-		 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+		Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+		por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+		de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+		Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+		Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+		GNU junto com este programa; se n&atilde;o, escreva para a
+		Free Software Foundation, Inc., no endere&ccedil;o
+		59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-		 Arquivo:
+		Arquivo:
 
-		 i3geo/admin/html/estat_editor.html
+		i3geo/admin/html/estat_editor.html
 		 */
 
 		//necessario para a ferramenta login e outras
