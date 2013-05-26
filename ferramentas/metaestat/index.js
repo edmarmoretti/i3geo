@@ -398,19 +398,21 @@ i3GEOF.metaestat = {
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.animacao()","animacao","animacao","index.js","i3GEOF.metaestat.analise.listaCamadasAnimacao()");
 		},
 		listaCamadasAnimacao: function(){
+			i3GEOF.animacao.iniciaJanelaFlutuante();
+			i3GEOF.animacao.listaDeCamadas();
 			var temp = function(retorno){
 				var temas = retorno.data,
 					n = temas.length,
-					camadas = [],
-					i,t;
-				i3GEOF.animacao.iniciaJanelaFlutuante();
+					cs = $i("i3GEOFanimacaoLista").getElementsByTagName("input"),
+					ns = cs.length,
+					i,j;
 				for(i=0;i<n;i++){
-					t = i3GEO.arvoreDeCamadas.pegaTema(temas[i]);
-					if(t != ""){
-						camadas.push(t);
+					for(j=0;j<ns;j++){
+						if(cs[j].value == temas[i]){
+							cs[j].checked = true;
+						}
 					}
 				}
-				i3GEOF.animacao.listaDeCamadas(camadas);
 			};
 			i3GEO.php.listaCamadasMetaestat(temp);
 		},

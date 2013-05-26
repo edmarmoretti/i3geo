@@ -102,7 +102,6 @@ i3GEOF.animacao = {
 	*/
 	html:function(){
 		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
-			n = camadas.length,
 			ins = "";
 		ins += "" +
 			"<div style='text-align:center;position:relative;cursor:pointer'  >" +
@@ -217,8 +216,9 @@ i3GEOF.animacao = {
 		switch(i3GEO.Interface.ATUAL){
 			case "openlayers":
 				layer = i3geoOL.getLayersByName(codigoTema)[0];
-				if(tipo === "troca")
-				{layer.setVisibility(!layer.getVisibility());}
+				if(tipo === "troca"){
+					layer.setVisibility(!layer.getVisibility());
+				}
 				if(tipo === "liga")
 				{layer.setVisibility(true);}
 				if(tipo === "desliga")
