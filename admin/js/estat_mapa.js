@@ -86,12 +86,10 @@ function montaArvore(dados)
 	YAHOO.example.treeExample = new function()
 	{
 		tree = "";
-		function changeIconMode()
-		{
+		function changeIconMode(){
 			buildTree();
 		}
-		function loadNodeData(node, fnLoadComplete)
-		{
+		function loadNodeData(node, fnLoadComplete){
 			var sUrl = "../php/metaestat.php?funcao=listaGruposMapa&id_mapa="+node.data.id_mapa;
 			var callback =
 			{
@@ -125,8 +123,8 @@ function montaArvore(dados)
 		}
 		buildTree();
 	}();
-		adicionaNosMapa(dados);
-		tree.draw();
+	adicionaNosMapa(dados);
+	tree.draw();
 }
 function testarMapfile(codigoMap)
 {
@@ -530,21 +528,22 @@ function gravaDados(tipo,id)
 						{
 							var no = tree.getNodeByProperty("id_mapa",id);
 							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo").value;
-						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
+							no.getContentEl().getElementsByTagName("span")[0].style.color = "";
 							no.html = no.getContentEl().innerHTML;
+							core_pegaDados("buscando mapas...","../php/metaestat.php?funcao=listaMapas","montaArvore");
 						}
 						if(tipo == "grupo")
 						{
 							var no = tree.getNodeByProperty("id_mapa_grupo",id);
 							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo").value;
-						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
+							no.getContentEl().getElementsByTagName("span")[0].style.color = "";
 							no.html = no.getContentEl().innerHTML;
 						}
 						if(tipo == "tema")
 						{
 							var no = tree.getNodeByProperty("id_mapa_tema",id);
 							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo").value;
-						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
+							no.getContentEl().getElementsByTagName("span")[0].style.color = "";
 							no.html = no.getContentEl().innerHTML;
 						}
 						core_carregando("desativa");
