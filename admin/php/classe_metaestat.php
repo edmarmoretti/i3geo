@@ -1704,9 +1704,12 @@ class Metaestat{
 	function copiaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela){
 		return $this->execSQLDB($codigo_estat_conexao,"CREATE TABLE ".$nome_esquema.".".$novonome_tabela." AS select * from ".$nome_esquema.".".$nome_tabela );
 	}
-	function colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
+	function colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,$tipo=""){
 		$colunas = array();
-		$res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'");
+		$res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna,udt_name FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'");
+		if($tipo != ""){
+			$res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna,udt_name FROM information_schema.columns where table_schema = '$nome_esquema' and udt_name = '$tipo' and table_name = '$nome_tabela'");
+		}
 		foreach($res as $c){
 			$colunas[] = $c["coluna"];
 		}

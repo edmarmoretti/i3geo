@@ -58,25 +58,25 @@ function montaTabela(dados){
 			elCell.innerHTML = "<div class=download style='text-align:center' title='shape file' ></div>";
 		},
 		myColumnDefs = [
-		                {key:"excluir",label:"excluir",formatter:formatExclui},
-		                {key:"shapefile",label:"download",formatter:formatShp},
-		                {key:"rel",label:"agrega&ccedil;&otilde;es",formatter:formatRel},
-		                {key:"mais",label:"propriedades",formatter:formatMais},
-		                {label:"c&oacute;digo",key:"codigo_tipo_regiao", formatter:formatTexto},
-		                {label:"Nome",resizeable:true,key:"nome_tipo_regiao", formatter:formatTexto},
-		                {label:"Descri&ccedil;&atilde;o",resizeable:true,key:"descricao_tipo_regiao", formatter:formatTexto},
-		                {label:"Conex&atilde;o",key:"codigo_estat_conexao",formatter:formatTexto},
-		                {label:"Esquema",key:"esquemadb",formatter:formatTexto},
-		                {label:"Tabela",key:"tabela",formatter:formatTexto},
-		                {label:"Geometria",key:"colunageo",formatter:formatTexto},
-		                {label:"Centr&oacute;ide",key:"colunacentroide",formatter:formatTexto},
-		                {label:"Data",key:"data",formatter:formatTexto},
-		                {label:"Regi&atilde;o",key:"identificador",formatter:formatTexto},
-		                {label:"Nomes",resizeable:false,key:"colunanomeregiao",formatter:formatTexto},
-		                {label:"Colunas vis&iacute;veis (separa com v&iacute;rgula)",resizeable:false,key:"colunasvisiveis",formatter:formatTexto},
-		                {label:"Apelidos",resizeable:false,key:"apelidos",formatter:formatTexto},
-		                {label:"SRID",key:"srid",formatter:formatTexto}
-		                ];
+										{key:"excluir",label:"excluir",formatter:formatExclui},
+										{key:"shapefile",label:"download",formatter:formatShp},
+										{key:"rel",label:"agrega&ccedil;&otilde;es",formatter:formatRel},
+										{key:"mais",label:"propriedades",formatter:formatMais},
+										{label:"c&oacute;digo",key:"codigo_tipo_regiao", formatter:formatTexto},
+										{label:"Nome",resizeable:true,key:"nome_tipo_regiao", formatter:formatTexto},
+										{label:"Descri&ccedil;&atilde;o",resizeable:true,key:"descricao_tipo_regiao", formatter:formatTexto},
+										{label:"Conex&atilde;o",key:"codigo_estat_conexao",formatter:formatTexto},
+										{label:"Esquema",key:"esquemadb",formatter:formatTexto},
+										{label:"Tabela",key:"tabela",formatter:formatTexto},
+										{label:"Geometria",key:"colunageo",formatter:formatTexto},
+										{label:"Centr&oacute;ide",key:"colunacentroide",formatter:formatTexto},
+										{label:"Data",key:"data",formatter:formatTexto},
+										{label:"Regi&atilde;o",key:"identificador",formatter:formatTexto},
+										{label:"Nomes",resizeable:false,key:"colunanomeregiao",formatter:formatTexto},
+										{label:"Colunas vis&iacute;veis (separa com v&iacute;rgula)",resizeable:false,key:"colunasvisiveis",formatter:formatTexto},
+										{label:"Apelidos",resizeable:false,key:"apelidos",formatter:formatTexto},
+										{label:"SRID",key:"srid",formatter:formatTexto}
+										];
 		myDataSource = new YAHOO.util.DataSource(dados);
 		myDataTable = new YAHOO.widget.ScrollingDataTable("tabela", myColumnDefs, myDataSource,{width:"100%"});
 
@@ -280,8 +280,8 @@ function montaDiv(i){
 			{titulo:"C&oacute;digo da conex&atilde;o com o banco:",id:"",size:"50",value:i.codigo_estat_conexao,tipo:"text",div:"<div id=Ccodigo_estat_conexao ></div>"},
 			{titulo:"Esquema no banco de dados: <img onclick='selEsquema(\"Eesquemadb\",\"Ecodigo_estat_conexao\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Eesquemadb",size:"50",value:i.esquemadb,tipo:"text",div:""},
 			{titulo:"Tabela: <img onclick='selTabela(\"Etabela\",\"Ecodigo_estat_conexao\",\"Eesquemadb\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Etabela",size:"50",value:i.tabela,tipo:"text",div:""},
-			{titulo:"Coluna com a geometria principal (normalmente poligonal): <img onclick='selColuna(\"Ecolunageo\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunageo",size:"50",value:i.colunageo,tipo:"text",div:""},
-			{titulo:"Coluna com pontos (pode ser a mesmo que a anterior):<img onclick='selColuna(\"Ecolunacentroide\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunacentroide",size:"50",value:i.colunacentroide,tipo:"text",div:""},
+			{titulo:"Coluna com a geometria principal (normalmente poligonal): <img onclick='selColuna(\"Ecolunageo\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\",\"geometry\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunageo",size:"50",value:i.colunageo,tipo:"text",div:""},
+			{titulo:"Coluna com pontos (pode ser a mesmo que a anterior):<img onclick='selColuna(\"Ecolunacentroide\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\",\"geometry\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunacentroide",size:"50",value:i.colunacentroide,tipo:"text",div:""},
 			{titulo:"Data a qual se referem os dados:",id:"Edata",size:"50",value:i.data,tipo:"text",div:""},
 			{titulo:"Coluna com o c&oacute;digo de cada registro:<img onclick='selColuna(\"Eidentificador\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Eidentificador",size:"50",value:i.identificador,tipo:"text",div:""},
 			{titulo:"Coluna com o nome do limite geogr&aacute;fico:<img onclick='selColuna(\"Ecolunanomeregiao\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunanomeregiao",size:"50",value:i.colunanomeregiao,tipo:"text",div:""},
@@ -445,7 +445,10 @@ function selTabela(idEleValue,idEleCodigoConexao,idEleNomeEsquema){
 	}
 	core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=tabelasEsquema&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value,callback);
 }
-function selColuna(idEleValue,idEleCodigoConexao,idEleNomeEsquema,idEleNomeTabela){
+function selColuna(idEleValue,idEleCodigoConexao,idEleNomeEsquema,idEleNomeTabela,tipo){
+	if(!tipo){
+		tipo = "";
+	}
 	var eleValue = $i(idEleValue),
 	eleCodigoConexao = $i(idEleCodigoConexao),
 	eleNomeEsquema = $i(idEleNomeEsquema),
@@ -473,7 +476,7 @@ function selColuna(idEleValue,idEleCodigoConexao,idEleNomeEsquema,idEleNomeTabel
 	if(!eleValue || !eleCodigoConexao || !eleNomeEsquema || !eleNomeTabela){
 		return;
 	}
-	core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=colunasTabela&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value+"&nome_tabela="+eleNomeTabela.value,callback);
+	core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=colunasTabela&tipo="+tipo+"&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value+"&nome_tabela="+eleNomeTabela.value,callback);
 }
 
 //YAHOO.util.Event.addListener(window, "load", initMenu);

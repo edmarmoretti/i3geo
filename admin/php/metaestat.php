@@ -1334,8 +1334,11 @@ switch (strtoupper($funcao))
 	*/
 	case "COLUNASTABELA":
 		$m = new Metaestat();
+		if(empty($tipo)){
+			$tipo = "";
+		}
 		if($formato == "json"){
-			retornaJSON($m->colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela));
+			retornaJSON($m->colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,$tipo));
 		}
 		exit;
 	break;
