@@ -123,7 +123,7 @@ echo '</div>';
 echo '<script>if(screen.availWidth > 700){document.getElementById("divGeral").style.width = "700px";}</script>';
 echo '</body></html>';
 function verifica($map,$solegenda){
-	global $tipo,$locaplic,$postgis_mapa,$versao,$base;
+	global $tipo,$locaplic,$postgis_mapa,$versao,$base,$dir_tmp;
 	$mapUrl = $map;
 	if ($tipo == "mini" && file_exists('temas/miniaturas/'.$map.".mini.png")){
 		Header("Content-type: image/png");
@@ -322,20 +322,23 @@ function verifica($map,$solegenda){
 
 		}
 		if ($tipo == "mini"){
-		 	 $mapa->setsize(50,50);
-			 $sca = $mapa->scalebar;
-			 $sca->set("status",MS_OFF);
+				$mapa->setsize(50,50);
+			$sca = $mapa->scalebar;
+			$sca->set("status",MS_OFF);
 		}
 		if ($tipo == "grande"){
-		 	 $mapa->setsize(300,300);
-			 $sca = $mapa->scalebar;
-			 $sca->set("status",MS_OFF);
+				$mapa->setsize(300,300);
+			$sca = $mapa->scalebar;
+			$sca->set("status",MS_OFF);
 		}
 		if($tipo == "todos"){
-		 	 $mapa->setsize(150,150);
-			 $sca = $mapa->scalebar;
-			 $sca->set("status",MS_OFF);
+			$mapa->setsize(150,150);
+			$sca = $mapa->scalebar;
+			$sca->set("status",MS_OFF);
 		}
+		$destino = $dir_tmp."/".nomeRandomico().".map";
+		$mapa->save($destino);
+		$mapa = ms_newMapObj($destino);
 		$objImagem = @$mapa->draw();
 		$objImagemLegenda = @$mapa->drawLegend();
 		if (!$objImagem){

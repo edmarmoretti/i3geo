@@ -1,37 +1,37 @@
 MAP
-  FONTSET "../symbols/fontes.txt"
-  SYMBOLSET "../symbols/simbolos.sym"
-  LAYER
-    DATA "/var/www/geodados/cbersgeo.img"
-    METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "classe"	"NAO"
-      "permitekmz"	"nao"
-      "iconetema"	""
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "permitedownload"	"sim"
-      "metaestat"	""
-      "DOWNLOAD"	"sim"
-      "permitekml"	"sim"
-      "permiteogc"	"sim"
-      "tema"	"_Imagem cbersgeo"
-      "cache" "sim"
-    END # METADATA
-    NAME "_lcbersgeo"
-    STATUS DEFAULT
-    TILEITEM "location"
-    TYPE RASTER
-    UNITS METERS
-    CLASS
-      NAME ""
-      STYLE
-        ANGLE 0
-        COLOR 0 255 255
-        OFFSET 0 0
-        OUTLINECOLOR 0 0 0
-      END # STYLE
-    END # CLASS
-  END # LAYER
+	FONTSET "../symbols/fontes.txt"
+	SYMBOLSET "../symbols/simbolos.sym"
+	LAYER
+		DATA "/var/www/geodados/cbersgeo.img"
+		METADATA
+			"METAESTAT_ID_MEDIDA_VARIAVEL"	""
+			"classe"	"NAO"
+			"permitekmz"	"nao"
+			"iconetema"	""
+			"METAESTAT_CODIGO_TIPO_REGIAO"	""
+			"permitedownload"	"sim"
+			"metaestat"	""
+			"DOWNLOAD"	"sim"
+			"permitekml"	"sim"
+			"permiteogc"	"sim"
+			"tema"	"_Imagem cbersgeo"
+			"cache" "SIM"
+		END # METADATA
+		NAME "_lcbersgeo"
+		STATUS DEFAULT
+		TILEITEM "location"
+		TYPE RASTER
+		UNITS METERS
+		CLASS
+			NAME ""
+			STYLE
+				ANGLE 0
+				COLOR 0 255 255
+				OFFSET 0 0
+				OUTLINECOLOR 0 0 0
+			END # STYLE
+		END # CLASS
+	END # LAYER
 
 END # MAP
 
