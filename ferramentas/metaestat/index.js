@@ -1120,7 +1120,7 @@ i3GEOF.metaestat = {
 				core_carregando("desativa");
 				//refaz o conteudo para mostrar a nova adicao
 				i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t2");
-				// Enome e o id do input onde o usuario escolheu o nome da nova variavel
+				// Enomemedida e o id do input onde o usuario escolheu o nome da nova variavel
 				i3GEOF.metaestat.editor.t2(true,$i("Enomemedida").value);
 				i3GEOF.metaestat.principal.inicia();
 			};
@@ -1347,7 +1347,7 @@ i3GEOF.metaestat = {
 						janela = i3GEO.janela.cria(
 								"500px",
 								"450px",
-								i3GEO.configura.locaplic+"/ferramentas/metaestat/upload.html",
+								i3GEO.configura.locaplic+"/ferramentas/metaestat/upload.html",//abre em um iframe
 								"",
 								"",
 								"Upload",
@@ -1417,6 +1417,7 @@ i3GEOF.metaestat = {
 				$i("i3GEOFmetaestatEditorBotao3a-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
 				if(textoSelecionado){
 					i3GEOF.metaestat.editor.selComboPorTexto("i3geoCartoComboVariavelEditor",textoSelecionado);
+					i3GEOF.metaestat.CODIGO_VARIAVEL = $i("i3geoCartoComboVariavelEditor").value;
 				}
 			};
 			i3GEO.php.listaVariavel(temp);
@@ -1436,17 +1437,18 @@ i3GEOF.metaestat = {
 			}
 			else{
 				var temp = function(dados){
-					//guarda os dados
 					var ins = "<p class='paragrafo' >" + $trad(2,i3GEOF.metaestat.dicionario) + "<br><br>" +
 					"<span>" + i3GEOF.metaestat.principal.comboMedidasVariavel(dados,"i3geoCartoComboMedidaVariavelEditor","i3GEOF.metaestat.editor.comboMedidaVariavelOnchange(this)","","","nao") + "</span>" +
 					"<br><br><p><input id=i3GEOFmetaestatEditorBotao4 type='button' value='"+$trad(8,i3GEOF.metaestat.dicionario1)+"' />" +
 					"&nbsp;<input id=i3GEOFmetaestatEditorBotao4a type='button' value='"+$trad(5,i3GEOF.metaestat.dicionario1)+"' /><br>";
 					i3GEO.util.proximoAnterior("i3GEOF.metaestat.editor.t1()","i3GEOF.metaestat.editor.t3a()",ins,"i3GEOF.metaestat.editor.t2","i3GEOFmetaestatEditor",true);
+					//edita existente
 					new YAHOO.widget.Button(
 							"i3GEOFmetaestatEditorBotao4",
 							{onclick:{fn: i3GEOF.metaestat.editor.editaMedidaVariavel}}
 					);
 					$i("i3GEOFmetaestatEditorBotao4-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
+					//cria nova
 					new YAHOO.widget.Button(
 							"i3GEOFmetaestatEditorBotao4a",
 							{onclick:{fn: i3GEOF.metaestat.editor.criaMedidaVariavel}}
@@ -1454,6 +1456,7 @@ i3GEOF.metaestat = {
 					$i("i3GEOFmetaestatEditorBotao4a-button").style.width = (i3GEOF.metaestat.LARGURA / 2) + "px";
 					if(textoSelecionado){
 						i3GEOF.metaestat.editor.selComboPorTexto("i3geoCartoComboMedidaVariavelEditor",textoSelecionado);
+						i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = $i("i3geoCartoComboMedidaVariavelEditor").value;
 					}
 				},
 				codigo_variavel = $i("i3geoCartoComboVariavelEditor").value;
@@ -1914,6 +1917,7 @@ i3GEOF.metaestat = {
 		},
 		comboVariaveisOnchange: function(combo){
 			i3GEOF.metaestat.CODIGO_VARIAVEL = combo.value;
+			i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = "";
 			if(combo.value != ""){
 				i3GEOF.metaestat.principal.opcoesMedidasVariavel(combo.value);
 			}

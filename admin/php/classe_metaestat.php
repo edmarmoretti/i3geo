@@ -300,6 +300,9 @@ class Metaestat{
 			}
 			//prepara a lista de colunas que ficarao visiveis no sql geo
 			$vis = $dadosgeo["colunasvisiveis"];
+			if(empty($vis)){
+				$vis = $dadosgeo["colunanomeregiao"];
+			}
 			$vis = str_replace(" ",",",$vis);
 			$vis = str_replace(",,",",",$vis);
 			$colunasvisiveis = explode(",",$vis);
@@ -419,7 +422,7 @@ class Metaestat{
 		$sqlgeo = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlgeo);
 		$sql = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sql);
 		$sqlagrupamento = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlagrupamento);
-		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"],"titulo"=>$titulo);
+		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"],"titulo"=>$titulo,"nomeregiao"=>$dadosgeo["colunanomeregiao"]);
 	}
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao="",$opacidade=""){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
@@ -498,7 +501,7 @@ class Metaestat{
 			}
 			$dados[] = '	METADATA';
 			$dados[] = '		TEMA "'.$titulolayer.'"';
-			$dados[] = '		TIP "'.$sql["colunavalor"].'"';
+			$dados[] = '		TIP "'.$sql["colunavalor"].','.$sql["nomeregiao"].'"';
 			$dados[] = '		CLASSE "SIM"';
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
