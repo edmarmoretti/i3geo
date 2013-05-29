@@ -192,22 +192,8 @@ i3GEOF.graficointerativo1 = {
 				function outputStatus(e) {
 					//alert("oi");
 				}
-				swfobject.embedSWF(
-					i3GEO.configura.locaplic+"/pacotes/openflashchart/open-flash-chart.swf",
-					"i3GEOgraficointerativo1Grafico",
-					"95%",
-					"88%",
-					"9.0.0",
-					"expressInstall.swf",
-					{
-						"get-data":"i3GEOF.graficointerativo1.tabela2dados",
-						"loading":"Criando grafico..."
-					},
-					false,
-					false,
-					outputStatus
-				);
-				var t = $i("i3GEOgraficointerativo1Grafico");
+				var t = $i("i3GEOgraficointerativo1Grafico"),
+					dados = i3GEOF.graficointerativo1.tabela2dados;
 				t.style.display = "block";
 				t.style.position = "relative";
 				t.style.top = "-5px";
@@ -259,33 +245,33 @@ i3GEOF.graficointerativo1 = {
 		'<div class=guiaobj id="i3GEOgraficointerativo1guia1obj" style="left:1px;display:none;">' +
 		'	<p class=paragrafo >Escolha o tipo de gr&aacute;fico: </p>' +
 		'	<table class=lista6 >' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-pie-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="pizza2d" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>pizza 2d</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-area-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="area" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>&aacute;rea 2d</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-scatter-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="scatter" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>distribui&ccedil;&atilde;o de pontos</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-line-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="line" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>linha</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-polar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="radar" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>radar</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-pie-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="pizza2d" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>pizza 2d</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-area-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="area" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>&aacute;rea 2d</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-scatter-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="scatter" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>distribui&ccedil;&atilde;o de pontos</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-line-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="line" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>linha</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-polar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="radar" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>radar</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
 		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_filled" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras simples</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras 2 cores</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_3d" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras 3d</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_sketch" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras rascunho</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_cylinder" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cilindro</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_cylinder_outline" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cilindro com contorno</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_round_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras c&uacute;pula</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_round" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras p&iacute;lula</td></tr>' +
-		'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="hbar" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras horizontais</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras 2 cores</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_3d" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras 3d</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_sketch" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras rascunho</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_cylinder" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cilindro</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_cylinder_outline" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cilindro com contorno</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_round_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras c&uacute;pula</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_round" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras p&iacute;lula</td></tr>' +
+		//'		<tr><td>&nbsp;</td></tr>' +
+		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="hbar" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras horizontais</td></tr>' +
 		'	</table>' +
 		'</div> ' +
 		'<div class=guiaobj id="i3GEOgraficointerativo1guia2obj" style="left:1px;display:none;top:-5px">' +
@@ -374,7 +360,7 @@ i3GEOF.graficointerativo1 = {
 					google.maps.event.removeListener(graficointerativo1Zoomend);
 				}
 				if(i3GEO.Interface.ATUAL === "googleearth"){
-	   				google.earth.removeEventListener(graficointerativo1Dragend);
+						google.earth.removeEventListener(graficointerativo1Dragend);
 				}
 				if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.graficointerativo1.comboTemas()") > 0)
 				{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.graficointerativo1.comboTemas()");}
@@ -508,24 +494,24 @@ i3GEOF.graficointerativo1 = {
 			tema,
 			function(retorno){
 				if(retorno.tipo === "erro"){
-		 			$i("i3GEOgraficointerativo1ComboX").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
-		 			$i("i3GEOgraficointerativo1ComboY").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
-		 		}
-		 		else{
-		 			$i("i3GEOgraficointerativo1ComboY").innerHTML = retorno.dados + "&nbsp;<input title='Digite o t&iacute;tulo' class=digitar type=text size=20 id=i3GEOgraficointerativo1ComboYidTitulo value='' />";
-		 			$i("i3GEOgraficointerativo1ComboXid").id = "i3GEOgraficointerativo1ComboYid";
-		 			$i("i3GEOgraficointerativo1ComboX").innerHTML = retorno.dados + "&nbsp;<input title='Digite o t&iacute;tulo' class=digitar type=text size=20 id=i3GEOgraficointerativo1ComboXidTitulo value='' />";
-		 			$i("i3GEOgraficointerativo1ComboXid").style.width = "160px";
-		 			$i("i3GEOgraficointerativo1ComboYid").style.width = "160px";
-		 			$i("i3GEOgraficointerativo1ComboXid").onchange = function(){
-		 				var combo = $i("i3GEOgraficointerativo1ComboXid");
-		 				$i("i3GEOgraficointerativo1ComboXidTitulo").value = combo.options[combo.selectedIndex].label;
-		 			};
-		 			$i("i3GEOgraficointerativo1ComboYid").onchange = function(){
-		 				var combo = $i("i3GEOgraficointerativo1ComboYid");
-		 				$i("i3GEOgraficointerativo1ComboYidTitulo").value = combo.options[combo.selectedIndex].label;
-		 			};
-		 		}
+					$i("i3GEOgraficointerativo1ComboX").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
+					$i("i3GEOgraficointerativo1ComboY").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
+				}
+				else{
+					$i("i3GEOgraficointerativo1ComboY").innerHTML = retorno.dados + "&nbsp;<input title='Digite o t&iacute;tulo' class=digitar type=text size=20 id=i3GEOgraficointerativo1ComboYidTitulo value='' />";
+					$i("i3GEOgraficointerativo1ComboXid").id = "i3GEOgraficointerativo1ComboYid";
+					$i("i3GEOgraficointerativo1ComboX").innerHTML = retorno.dados + "&nbsp;<input title='Digite o t&iacute;tulo' class=digitar type=text size=20 id=i3GEOgraficointerativo1ComboXidTitulo value='' />";
+					$i("i3GEOgraficointerativo1ComboXid").style.width = "160px";
+					$i("i3GEOgraficointerativo1ComboYid").style.width = "160px";
+					$i("i3GEOgraficointerativo1ComboXid").onchange = function(){
+						var combo = $i("i3GEOgraficointerativo1ComboXid");
+						$i("i3GEOgraficointerativo1ComboXidTitulo").value = combo.options[combo.selectedIndex].label;
+					};
+					$i("i3GEOgraficointerativo1ComboYid").onchange = function(){
+						var combo = $i("i3GEOgraficointerativo1ComboYid");
+						$i("i3GEOgraficointerativo1ComboYidTitulo").value = combo.options[combo.selectedIndex].label;
+					};
+				}
 			},
 			"i3GEOgraficointerativo1ComboX",
 			""
@@ -776,7 +762,7 @@ i3GEOF.graficointerativo1 = {
 				"title":{
 					"text": titulo,
 					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
-	  			},
+					},
 				"num_decimals": 2,
 				"is_fixed_num_decimals_forced": true,
 				"is_decimal_separator_comma": true,
@@ -834,7 +820,7 @@ i3GEOF.graficointerativo1 = {
 				"title":{
 					"text": titulo,
 					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
-	  			}
+					}
 			};
 			if($i("i3GEOgraficointerativo1AdLinhas").checked){
 				parametros.elements.push({
@@ -863,8 +849,8 @@ i3GEOF.graficointerativo1 = {
 					"steps": parseInt((maior / divisoesY),10)
 				};
 				parametros.y_axis = {
-    				"offset": 1,
-    				"labels": nomes
+						"offset": 1,
+						"labels": nomes
 				};
 				parametros.x_legend.text = legendaY;
 				parametros.y_legend.text = legendaX;
@@ -914,8 +900,8 @@ i3GEOF.graficointerativo1 = {
 				"title":{
 					"text": titulo,
 					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
-  				},
-  				"bg_colour": "#DFFFEC"
+					},
+					"bg_colour": "#DFFFEC"
 			};
 		}
 		return( JSON1.stringify(parametros));
@@ -1004,11 +990,11 @@ i3GEOF.graficointerativo1 = {
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.graficointerativo1.obterDados()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-   				graficointerativo1Dragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.graficointerativo1.obterDados();});
-   				graficointerativo1Zoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.graficointerativo1.obterDados();});
+					graficointerativo1Dragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.graficointerativo1.obterDados();});
+					graficointerativo1Zoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.graficointerativo1.obterDados();});
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
-   				graficointerativo1Dragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.graficointerativo1.obterDados();});
+					graficointerativo1Dragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.graficointerativo1.obterDados();});
 			}
 		}
 		else{
@@ -1027,177 +1013,177 @@ i3GEOF.graficointerativo1 = {
 };
 //pacotes/openflashchart/json2.js
 if (!this.JSON1) {
-    JSON1 = function () {
+		JSON1 = function () {
 
-        function f(n) {    // Format integers to have at least two digits.
-            return n < 10 ? '0' + n : n;
-        }
-        Date.prototype.toJSON = function () {
-            return this.getUTCFullYear()   + '-' +
-                 f(this.getUTCMonth() + 1) + '-' +
-                 f(this.getUTCDate())      + 'T' +
-                 f(this.getUTCHours())     + ':' +
-                 f(this.getUTCMinutes())   + ':' +
-                 f(this.getUTCSeconds())   + 'Z';
-        };
-        var escapeable = /["\\\x00-\x1f\x7f-\x9f]/g,
-            gap,
-            indent,
-            meta = {    // table of character substitutions
-                '\b': '\\b',
-                '\t': '\\t',
-                '\n': '\\n',
-                '\f': '\\f',
-                '\r': '\\r',
-                '"' : '\\"',
-                '\\': '\\\\'
-            },
-            rep;
-        function quote(string) {
-            return escapeable.test(string) ?
-                '"' + string.replace(escapeable, function (a) {
-                    var c = meta[a];
-                    if (typeof c === 'string') {
-                        return c;
-                    }
-                    c = a.charCodeAt();
-                    return '\\u00' + Math.floor(c / 16).toString(16) +
-                                               (c % 16).toString(16);
-                }) + '"' :
-                '"' + string + '"';
-        }
-        function str(key, holder) {
-            var i,          // The loop counter.
-                k,          // The member key.
-                v,          // The member value.
-                length,
-                mind = gap,
-                partial,
-                value = holder[key];
-            if (value && typeof value === 'object' &&
-                    typeof value.toJSON === 'function') {
-                value = value.toJSON(key);
-            }
-            if (typeof rep === 'function') {
-                value = rep.call(holder, key, value);
-            }
-            switch (typeof value) {
-            case 'string':
-                return quote(value);
+				function f(n) {    // Format integers to have at least two digits.
+						return n < 10 ? '0' + n : n;
+				}
+				Date.prototype.toJSON = function () {
+						return this.getUTCFullYear()   + '-' +
+								f(this.getUTCMonth() + 1) + '-' +
+								f(this.getUTCDate())      + 'T' +
+								f(this.getUTCHours())     + ':' +
+								f(this.getUTCMinutes())   + ':' +
+								f(this.getUTCSeconds())   + 'Z';
+				};
+				var escapeable = /["\\\x00-\x1f\x7f-\x9f]/g,
+						gap,
+						indent,
+						meta = {    // table of character substitutions
+								'\b': '\\b',
+								'\t': '\\t',
+								'\n': '\\n',
+								'\f': '\\f',
+								'\r': '\\r',
+								'"' : '\\"',
+								'\\': '\\\\'
+						},
+						rep;
+				function quote(string) {
+						return escapeable.test(string) ?
+								'"' + string.replace(escapeable, function (a) {
+										var c = meta[a];
+										if (typeof c === 'string') {
+												return c;
+										}
+										c = a.charCodeAt();
+										return '\\u00' + Math.floor(c / 16).toString(16) +
+																							(c % 16).toString(16);
+								}) + '"' :
+								'"' + string + '"';
+				}
+				function str(key, holder) {
+						var i,          // The loop counter.
+								k,          // The member key.
+								v,          // The member value.
+								length,
+								mind = gap,
+								partial,
+								value = holder[key];
+						if (value && typeof value === 'object' &&
+										typeof value.toJSON === 'function') {
+								value = value.toJSON(key);
+						}
+						if (typeof rep === 'function') {
+								value = rep.call(holder, key, value);
+						}
+						switch (typeof value) {
+						case 'string':
+								return quote(value);
 
-            case 'number':
-                return isFinite(value) ? String(value) : 'null';
+						case 'number':
+								return isFinite(value) ? String(value) : 'null';
 
-            case 'boolean':
-            case 'null':
-                return String(value);
-            case 'object':
-                if (!value) {
-                    return 'null';
-                }
-                gap += indent;
-                partial = [];
-                if (typeof value.length === 'number' &&
-                        !(value.propertyIsEnumerable('length'))) {
-                    length = value.length;
-                    for (i = 0; i < length; i += 1) {
-                        partial[i] = str(i, value) || 'null';
-                    }
-                    v = partial.length === 0 ? '[]' :
-                        gap ? '[\n' + gap + partial.join(',\n' + gap) +
-                                  '\n' + mind + ']' :
-                              '[' + partial.join(',') + ']';
-                    gap = mind;
-                    return v;
-                }
-                if (typeof rep === 'object') {
-                    length = rep.length;
-                    for (i = 0; i < length; i += 1) {
-                        k = rep[i];
-                        if (typeof k === 'string') {
-                            v = str(k, value, rep);
-                            if (v) {
-                                partial.push(quote(k) + (gap ? ': ' : ':') + v);
-                            }
-                        }
-                    }
-                } else {
-                    for (k in value) {
-                        v = str(k, value, rep);
-                        if (v) {
-                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
-                        }
-                    }
-                }
-                v = partial.length === 0 ? '{}' :
-                    gap ? '{\n' + gap + partial.join(',\n' + gap) +
-                              '\n' + mind + '}' :
-                          '{' + partial.join(',') + '}';
-                gap = mind;
-                return v;
-            }
-        }
-        return {
-            stringify: function (value, replacer, space) {
-                var i;
-                gap = '';
-                indent = '';
-                if (space) {
-                    if (typeof space === 'number') {
-                        for (i = 0; i < space; i += 1) {
-                            indent += ' ';
-                        }
-                    } else if (typeof space === 'string') {
-                        indent = space;
-                    }
-                }
-                if (!replacer) {
-                    rep = function (key, value) {
-                        if (!Object.hasOwnProperty.call(this, key)) {
-                            return undefined;
-                        }
-                        return value;
-                    };
-                } else if (typeof replacer === 'function' ||
-                        (typeof replacer === 'object' &&
-                         typeof replacer.length === 'number')) {
-                    rep = replacer;
-                } else {
-                    throw new Error('JSON.stringify');
-                }
-                return str('', {'': value});
-            },
-            parse: function (text, reviver) {
-                var j;
+						case 'boolean':
+						case 'null':
+								return String(value);
+						case 'object':
+								if (!value) {
+										return 'null';
+								}
+								gap += indent;
+								partial = [];
+								if (typeof value.length === 'number' &&
+												!(value.propertyIsEnumerable('length'))) {
+										length = value.length;
+										for (i = 0; i < length; i += 1) {
+												partial[i] = str(i, value) || 'null';
+										}
+										v = partial.length === 0 ? '[]' :
+												gap ? '[\n' + gap + partial.join(',\n' + gap) +
+																	'\n' + mind + ']' :
+															'[' + partial.join(',') + ']';
+										gap = mind;
+										return v;
+								}
+								if (typeof rep === 'object') {
+										length = rep.length;
+										for (i = 0; i < length; i += 1) {
+												k = rep[i];
+												if (typeof k === 'string') {
+														v = str(k, value, rep);
+														if (v) {
+																partial.push(quote(k) + (gap ? ': ' : ':') + v);
+														}
+												}
+										}
+								} else {
+										for (k in value) {
+												v = str(k, value, rep);
+												if (v) {
+														partial.push(quote(k) + (gap ? ': ' : ':') + v);
+												}
+										}
+								}
+								v = partial.length === 0 ? '{}' :
+										gap ? '{\n' + gap + partial.join(',\n' + gap) +
+															'\n' + mind + '}' :
+													'{' + partial.join(',') + '}';
+								gap = mind;
+								return v;
+						}
+				}
+				return {
+						stringify: function (value, replacer, space) {
+								var i;
+								gap = '';
+								indent = '';
+								if (space) {
+										if (typeof space === 'number') {
+												for (i = 0; i < space; i += 1) {
+														indent += ' ';
+												}
+										} else if (typeof space === 'string') {
+												indent = space;
+										}
+								}
+								if (!replacer) {
+										rep = function (key, value) {
+												if (!Object.hasOwnProperty.call(this, key)) {
+														return undefined;
+												}
+												return value;
+										};
+								} else if (typeof replacer === 'function' ||
+												(typeof replacer === 'object' &&
+												typeof replacer.length === 'number')) {
+										rep = replacer;
+								} else {
+										throw new Error('JSON.stringify');
+								}
+								return str('', {'': value});
+						},
+						parse: function (text, reviver) {
+								var j;
 
-                function walk(holder, key) {
-                    var k, v, value = holder[key];
-                    if (value && typeof value === 'object') {
-                        for (k in value) {
-                            if (Object.hasOwnProperty.call(value, k)) {
-                                v = walk(value, k);
-                                if (v !== undefined) {
-                                    value[k] = v;
-                                } else {
-                                    delete value[k];
-                                }
-                            }
-                        }
-                    }
-                    return reviver.call(holder, key, value);
-                }
-                if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
+								function walk(holder, key) {
+										var k, v, value = holder[key];
+										if (value && typeof value === 'object') {
+												for (k in value) {
+														if (Object.hasOwnProperty.call(value, k)) {
+																v = walk(value, k);
+																if (v !== undefined) {
+																		value[k] = v;
+																} else {
+																		delete value[k];
+																}
+														}
+												}
+										}
+										return reviver.call(holder, key, value);
+								}
+								if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
 replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
 replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-                    j = eval('(' + text + ')');
-                    return typeof reviver === 'function' ?
-                        walk({'': j}, '') : j;
-                }
-                throw new SyntaxError('JSON.parse');
-            },
-            quote: quote
-        };
-    }();
+										j = eval('(' + text + ')');
+										return typeof reviver === 'function' ?
+												walk({'': j}, '') : j;
+								}
+								throw new SyntaxError('JSON.parse');
+						},
+						quote: quote
+				};
+		}();
 }
 
 
