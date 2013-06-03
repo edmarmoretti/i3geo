@@ -1,18 +1,18 @@
 /*
- Title: Editor vetorial de limites de regi&otilde;es do sistema METAESTAT
+Title: Editor vetorial de limites de regi&otilde;es do sistema METAESTAT
 
- Arquivo:
+Arquivo:
 
- i3geo/ferramentas/metaestat/editorlimites.js
+i3geo/ferramentas/metaestat/editorlimites.js
 
 Licenca:
 
 GPL2
 
- i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
- Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
- Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
 Esse programa utiliza parcialmente os codigos da aplicacao calculadora de carbono desenvolvido pelo
 IPAM - Instituto de Pesquisa Ambiental da Amazonia
@@ -35,9 +35,9 @@ if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
 /*
- Classe: i3GEOF.editorlimites
+Classe: i3GEOF.editorlimites
 
- Fun&ccedil;&otilde;es de edi&ccedil;&atilde;o vetorial utilizadas pelo editor de regi&otilde;es do sistema METAESTAT
+Fun&ccedil;&otilde;es de edi&ccedil;&atilde;o vetorial utilizadas pelo editor de regi&otilde;es do sistema METAESTAT
  */
 i3GEOF.editorlimites = {
 	/**
@@ -125,16 +125,16 @@ i3GEOF.editorlimites = {
 				i3GEOF.editorlimites.shapes.push(newShape);
 			}
 		});
-        google.maps.event.addListener(
-        	i3GEOF.editorlimites.drawingManager,
-        	'drawingmode_changed',
-        	i3GEOF.editorlimites.clearSelection
-        );
-        google.maps.event.addListener(
-        	i3GeoMap,
-        	'click',
-        	i3GEOF.editorlimites.clearSelection
-        );
+				google.maps.event.addListener(
+					i3GEOF.editorlimites.drawingManager,
+					'drawingmode_changed',
+					i3GEOF.editorlimites.clearSelection
+				);
+				google.maps.event.addListener(
+					i3GeoMap,
+					'click',
+					i3GEOF.editorlimites.clearSelection
+				);
 	},
 	/**
 	 * Atualiza as camadas do mapa que sao oriundas do sistema METAESTAT
@@ -236,7 +236,7 @@ i3GEOF.editorlimites = {
 			lista = [],
 			n = i3GEOF.editorlimites.shapes.length,
 			tipo = "",
-			ps,nps,j,p,i;
+			ps,nps,j,p = {},i;
 
 		for(i=0;i<n;i++){
 			coordenadas = [];
@@ -325,27 +325,13 @@ i3GEOF.editorlimites = {
 							if(temp[i].alias == "wkt"){
 								wkt = temp[i].valor;
 							}
-							if(temp[i].alias == colunaid){
+							if(temp[i].alias == colunaid || temp[i].item == colunaid){
 								valorid = temp[i].valor;
 							}
-							if(temp[i].alias == colunanome){
+							if(temp[i].alias == colunanome || temp[i].item == colunanome){
 								valornome = temp[i].valor;
 							}
 						}
-						/*
-						re = new RegExp("POLYGON \\(\\(", "g");
-						wkt = wkt.replace(re,'');
-						re = new RegExp("\\)\\)", "g");
-						wkt = wkt.replace(re,'');
-						re = new RegExp(", ", "g");
-						wkt = wkt.replace(re,',');
-						wkt = wkt.split(",");
-						n = wkt.length;
-						for(i=0;i<n;i++){
-							j = wkt[i].split(" ");
-							pontos.push([j[0],j[1]]);
-						}
-						*/
 						//objeto do wicket ver pacotes/wicket
 						WicketWkt = new Wkt.Wkt();
 						//wkt = "MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 45 20, 30 5, 10 10, 10 30, 20 35), (30 20, 20 25, 20 15, 30 20)))";
@@ -509,10 +495,10 @@ i3GEOF.editorlimites = {
 		}
 		*/
 		var pol;
-        if (Wkt.isArray(obj)) { // Distinguish multigeometries (Arrays) from objects
-            for (i in obj) {
-                if (obj.hasOwnProperty(i) && !Wkt.isArray(obj[i])) {
-                	pol = new google.maps.Polygon({
+				if (Wkt.isArray(obj)) { // Distinguish multigeometries (Arrays) from objects
+						for (i in obj) {
+								if (obj.hasOwnProperty(i) && !Wkt.isArray(obj[i])) {
+									pol = new google.maps.Polygon({
 						path: obj[i].getPath(),
 						map: i3GeoMap,
 						fillColor: '#ffff00',
@@ -531,10 +517,10 @@ i3GEOF.editorlimites = {
 						i3GEOF.editorlimites.setSelection(pol);
 					});
 					i3GEOF.editorlimites.shapes.push(pol);
-                }
-            }
-            return;
-        }
+								}
+						}
+						return;
+				}
 		if (obj.type === 'polygon' || obj.type === 'linestring'){
 			pol = new google.maps.Polygon({
 				paths: obj.getPaths(),
@@ -913,7 +899,7 @@ i3GEOF.editorlimites = {
 			return ins;
 		},
 		comboVariaveis: function(){
-			 var temp = function(dados){
+			var temp = function(dados){
 				var i,n = dados.length, ins = '';
 				ins += '<p class="paragrafo" >Escolha uma vari&aacute;vel para editar</p>';
 				ins += "<select style='box-shadow:0 1px 5px gray;width:200px' onchange='i3GEOF.editorlimites.editarAtributos.comboMedidasVariavel(this)'><option value=''>---</option>";
@@ -926,7 +912,7 @@ i3GEOF.editorlimites = {
 			i3GEO.php.listaVariavel(temp,"i3geo_metaestat");
 		},
 		comboMedidasVariavel: function(comboMedidas){
-			 var temp = function(dados){
+			var temp = function(dados){
 				var i,n = dados.length, ins = '';
 				ins += '<p class="paragrafo" >Escolha uma medida da vari&aacute;vel para editar</p>';
 				ins += "<select id='editarAtributosComboMedidas' style='box-shadow:0 1px 5px gray;width:200px' onchange=''><option value=''>---</option>";
