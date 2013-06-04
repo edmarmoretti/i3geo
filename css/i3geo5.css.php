@@ -278,903 +278,869 @@ font-size: 10px;
 }
 #abreJanelaLegenda,#localizar,#barraedicao,#abregoogleearth,#uploadgpx,#metar,#carouselTemas,#identificaBalao,#rota,#buscafotos,#area,#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
 {
-margin:2px;
-cursor:pointer;
-border: 0px solid rgb(50,50,50);
-border-bottom:1px solid rgb(50,50,50);
-border-left:1px solid rgb(50,50,50);
-width:24px;
-height:24px;
-z-index:1000;
-position:relative;
+margin: 2px;
+cursor: pointer;
+border: 0px solid rgb(50, 50, 50);
+border-bottom: 1px solid rgb(50, 50, 50);
+border-left: 1px solid rgb(50, 50, 50);
+width: 24px;
+height: 24px;
+z-index: 1000;
+position: relative;
 }
-#box1
-{font-size:0px;cursor:crosshair;opacity:.25;background-color: gray;position: absolute;visibility: hidden;width: 0px;height: 0px;border: 2px solid #ff0000;}
-#boxg
-{position: absolute;visibility: visible;width: 20px;height: 20px;border: 2px solid red;display:none;}
-#obj
-{position:absolute;z-index:500;height:0;width: 0}
-#lente
-{z-index:101;top:10px;position: absolute;}
-#boxlente
-{display:none;z-index: 200;border: 2px solid #ff0000;top:10px;position:absolute;width: 240px;height: 240px;}
-#aguarde
-{top:0px;position:absolute;visibility: hidden;}
-#mensagem
-{background-color:white;position:absolute;visibility:hidden}
-.i3geoBotaoAplicar
-{display:none;position:absolute;cursor:pointer;z-index:1000;background-color:#F6F6F6;color:#426252;}
-#img,#imgL,#imgO,#imgN,#imgS
-{border: 0px solid black;cursor:crosshair;top:0px;left:0px;}
-#img_d
-{border: 0px solid black;cursor:crosshair;}
-#carrega
-{background-image:URL('../imagens/carrega.gif');}
-#salva
-{background-image:URL('../imagens/salva.gif');}
-#tamanho
-{background-image:URL('../imagens/amp.gif');}
-#cruza
-{background-image:URL('../imagens/cruzapt.png');}
-#pegaimagens
-{background-image:URL('../imagens/legend.gif');}
-#realca
-{background-image:URL('../imagens/realca.gif');}
-#zoomlo
-{background-image:URL('../imagens/zoomlo.gif');}
-#imprimir
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#box1 {
+font-size: 0px;
+cursor: crosshair;
+opacity: .25;
+background-color: gray;
+position: absolute;
+visibility: hidden;
+width: 0px;
+height: 0px;
+border: 2px solid #ff0000;
+}
+#boxg {
+position: absolute;
+visibility: visible;
+width: 20px;
+height: 20px;
+border: 2px solid red;
+display: none;
+}
+#obj {
+position: absolute;
+z-index: 500;
+height: 0;
+width: 0
+}
+#lente {
+z-index: 101;
+top: 10px;
+position: absolute;
+}
+#boxlente {
+display: none;
+z-index: 200;
+border: 2px solid #ff0000;
+top: 10px;
+position: absolute;
+width: 240px;
+height: 240px;
+}
+#aguarde {
+top: 0px;
+position: absolute;
+visibility: hidden;
+}
+#mensagem {
+background-color: white;
+position: absolute;
+visibility: hidden
+}
+.i3geoBotaoAplicar {
+display: none;
+position: absolute;
+cursor: pointer;
+z-index: 1000;
+background-color: #F6F6F6;
+color: #426252;
+}
+#img,#imgL,#imgO,#imgN,#imgS {
+border: 0px solid black;
+cursor: crosshair;
+top: 0px;
+left: 0px;
+}
+#img_d {
+border: 0px solid black;
+cursor: crosshair;
+}
+#carrega {
+background-image: URL('../imagens/carrega.gif');
+}
+#salva {
+background-image: URL('../imagens/salva.gif');
+}
+#tamanho {
+background-image: URL('../imagens/amp.gif');
+}
+#cruza {
+background-image: URL('../imagens/cruzapt.png');
+}
+#pegaimagens {
+background-image: URL('../imagens/legend.gif');
+}
+#realca {
+background-image: URL('../imagens/realca.gif');
+}
+#zoomlo {
+background-image: URL('../imagens/zoomlo.gif');
+}
+#imprimir {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px 0px;
 }
-#mede
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#mede {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -24px;
 }
-#textofid
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#textofid {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -48px;
 }
-#inserexy
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#inserexy {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -72px;
 }
-#selecao
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#selecao {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -96px;
 }
-#exten
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#exten {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -120px;
 }
-#reinicia
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#reinicia {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -144px;
 }
-#lentei
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#lentei {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -168px;
 }
-#identificaBalao
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#identificaBalao {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -192px;
-cursor:pointer;
+cursor: pointer;
 }
-#zoomtot
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#zoomtot {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -216px;
 }
-#pan
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#pan {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -240px;
 }
-#google
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#google {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -264px;
 }
-#referencia
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#referencia {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -288px;
 }
-#inseregrafico
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#inseregrafico {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -312px;
 }
-#wiki
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#wiki {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -336px;
 }
-#scielo
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#scielo {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -360px;
 }
-#confluence
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#confluence {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -384px;
 }
-#v3d
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#v3d {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -408px;
 }
-#area
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#area {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -432px;
 }
-#identifica
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#identifica {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -456px;
-cursor:pointer;
+cursor: pointer;
 }
-#metar
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#metar {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -480px;
-cursor:pointer;
+cursor: pointer;
 }
-#buscafotos
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#buscafotos {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -504px;
-cursor:pointer;
+cursor: pointer;
 }
-#rota
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#rota {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -528px;
 }
-.abregoogleearth
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+.abregoogleearth {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -576px;
 }
-.ticPropriedades2
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+.ticPropriedades2 {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: -5px -603px;
 height: 15px;
 width: 15px;
 }
-.ticDownload
-{
+.ticDownload {
 background-image: url("../imagens/visual/default/sprite.png");
 background-position: 0 -1124px;
 background-repeat: no-repeat;
 height: 15px;
 width: 15px;
 }
-.carregarKml
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+.carregarKml {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -624px;
-width:16px;
+width: 16px;
 border: 1px solid #DCDCDC;
 }
-.buscaInde
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+.buscaInde {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -700px;
-width:16px;
+width: 16px;
 border: 1px solid #DCDCDC;
 }
-#barraedicao
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#barraedicao {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -648px;
 }
-#localizar
-{
-background-image:URL('../imagens/visual/default/sprite2.png');
+#localizar {
+background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -672px;
 }
-#ondeestou
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#ondeestou {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -475px;
-width:20px;
-height:10px;
+width: 20px;
+height: 10px;
 }
-#menuinterface
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#menuinterface {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -550px;
-width:52px;
-height:15px;
+width: 52px;
+height: 15px;
 }
-#menuajudaMenu
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#menuajudaMenu {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -500px;
-width:52px;
-height:15px;
+width: 52px;
+height: 15px;
 }
-#menuanalise
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#menuanalise {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -525px;
-width:52px;
-height:15px;
+width: 52px;
+height: 15px;
 }
-#menujanelas
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#menujanelas {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -550px;
-width:52px;
-height:15px;
+width: 52px;
+height: 15px;
 }
-#menuferramentas
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#menuferramentas {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -2157px;
-width:65px;
-height:15px;
+width: 65px;
+height: 15px;
 }
-#menuarquivos
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#menuarquivos {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -575px;
-width:52px;
-height:15px;
+width: 52px;
+height: 15px;
 }
 /*bandeira do brasil*/
-#brasil
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#brasil {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -600px;
-width:20px;
-height:10px;
-cursor:pointer;
+width: 20px;
+height: 10px;
+cursor: pointer;
 }
 /*bandeira inglaterra*/
-#uk
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#uk {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -625px;
-width:20px;
-height:10px;
-cursor:pointer;
+width: 20px;
+height: 10px;
+cursor: pointer;
 }
-#espanhol
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#espanhol {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1400px;
-width:20px;
-height:10px;
-cursor:pointer;
+width: 20px;
+height: 10px;
+cursor: pointer;
 }
-#italiano
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#italiano {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1725px;
-width:20px;
-height:10px;
-cursor:pointer;
+width: 20px;
+height: 10px;
+cursor: pointer;
 }
 /*�cone de aplicar*/
-.tic
-{
-background-image:url(../imagens/visual/default/sprite.png);
-background-position:0px -650px;
-background-repeat:no-repeat;
-cursor:pointer;
-height:14px;
-text-align:center;
-width:25px;
-box-shadow:1px 1px 3px 0px lightgray;
-margin-left:1px;
+.tic {
+background-image: url(../imagens/visual/default/sprite.png);
+background-position: 0px -650px;
+background-repeat: no-repeat;
+cursor: pointer;
+height: 14px;
+text-align: center;
+width: 25px;
+box-shadow: 1px 1px 3px 0px lightgray;
+margin-left: 1px;
 }
-.x
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.x {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -675px;
-width:9px;
-height:9px;
-cursor:pointer;
+width: 9px;
+height: 9px;
+cursor: pointer;
 }
-.sobe
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.sobe {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -700px;
-width:9px;
-height:9px;
-cursor:pointer;
+width: 9px;
+height: 9px;
+cursor: pointer;
 }
-.desce
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.desce {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -725px;
-width:9px;
-height:9px;
-cursor:pointer;
+width: 9px;
+height: 9px;
+cursor: pointer;
 }
-.extent
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.extent {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -750px;
-width:9px;
-height:9px;
-cursor:pointer;
+width: 9px;
+height: 9px;
+cursor: pointer;
 }
-.menuarrow
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.menuarrow {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -775px;
-width:16px;
-height:16px;
-cursor:pointer;
-left:3px;
-top:2px;
+width: 16px;
+height: 16px;
+cursor: pointer;
+left: 3px;
+top: 2px;
 }
-.mais
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.mais {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -800px;
-width:17px;
-height:9px;
-cursor:pointer;
+width: 17px;
+height: 9px;
+cursor: pointer;
 }
-.menos
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.menos {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -825px;
-width:17px;
-height:9px;
-cursor:pointer;
+width: 17px;
+height: 9px;
+cursor: pointer;
 }
-.ponto
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.ponto {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -850px;
-width:17px;
-height:9px;
-cursor:pointer;
+width: 17px;
+height: 9px;
+cursor: pointer;
 }
-.quadro
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.quadro {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -875px;
-width:13px;
-height:13px;
-cursor:pointer;
+width: 13px;
+height: 13px;
+cursor: pointer;
 }
-.quadro1
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.quadro1 {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -900px;
-width:13px;
-height:13px;
-cursor:pointer;
+width: 13px;
+height: 13px;
+cursor: pointer;
 }
-.slider
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.slider {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -925px;
-width:20px;
-height:9px;
+width: 20px;
+height: 9px;
 }
-#vertMenosZoom
-{
-cursor:pointer;
-position:relative;
-top:-1px;
-width:18px;
-background:url('../imagens/visual/default/sprite.png');
+#vertMenosZoom {
+cursor: pointer;
+position: relative;
+top: -1px;
+width: 18px;
+background: url('../imagens/visual/default/sprite.png');
 background-position: 0px -950px;
-height:18px;
+height: 18px;
 }
-#vertMaisZoom
-{
-cursor:pointer;
-position:relative;
-top:2px;
-width:18px;
-background:url('../imagens/visual/default/sprite.png');
+#vertMaisZoom {
+cursor: pointer;
+position: relative;
+top: 2px;
+width: 18px;
+background: url('../imagens/visual/default/sprite.png');
 background-position: 0px -975px;
-height:18px;
+height: 18px;
 }
-#zoomli
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#zoomli {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1000px;
 }
-.foldermapa1
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.foldermapa1 {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1025px;
-width:17px;
-height:15px;
+width: 17px;
+height: 15px;
 }
-.foldermapa
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.foldermapa {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1050px;
-width:17px;
-height:15px;
+width: 17px;
+height: 15px;
 }
-#i3geo_lixeira
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#i3geo_lixeira {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1078px;
-width:18px;
-height:18px;
+width: 18px;
+height: 18px;
 }
-#i3geo_refresh
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#i3geo_refresh {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2205px;
-width:18px;
-height:18px;
-cursor:pointer;
+width: 18px;
+height: 18px;
+cursor: pointer;
 }
-.upload
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.upload {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1099px;
-width:16px;
+width: 16px;
 border: 1px solid #DCDCDC;
 }
-.download
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.download {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1124px;
-width:16px;
+width: 16px;
 border: 1px solid #DCDCDC;
 }
-.conectarwms
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.conectarwms {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 1px -1149px;
-width:16px;
+width: 16px;
 border: 1px solid #DCDCDC;
 }
-.conectargeorss
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.conectargeorss {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 1px -1174px;
-width:16px;
+width: 16px;
 border: 1px solid #DCDCDC;
 }
-.conectarservidor
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.conectarservidor {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1200px;
-width:14px;
-height:14px;
+width: 14px;
+height: 14px;
 border-left: 1px solid gray;
-border-bottom:1px solid gray;
-border-top:1px solid #F8F8F8;
-border-right:1px solid #F8F8F8;
+border-bottom: 1px solid gray;
+border-top: 1px solid #F8F8F8;
+border-right: 1px solid #F8F8F8;
 }
-.folder
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.folder {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1225px;
-width:17px;
-height:15px;
+width: 17px;
+height: 15px;
 }
-.rosanorte
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.rosanorte {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1250px;
-width:14px;
-height:14px;
+width: 14px;
+height: 14px;
 }
-.rosasul
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.rosasul {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1275px;
-width:14px;
-height:14px;
+width: 14px;
+height: 14px;
 }
-.rosaleste
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.rosaleste {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1300px;
-width:14px;
-height:14px;
+width: 14px;
+height: 14px;
 }
-.rosaoeste
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.rosaoeste {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1325px;
-width:14px;
-height:14px;
+width: 14px;
+height: 14px;
 }
-.rosamais
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.rosamais {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1350px;
-width:10px;
-height:20px;
+width: 10px;
+height: 20px;
 }
-.rosamenos
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.rosamenos {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1375px;
-width:10px;
-height:20px;
+width: 10px;
+height: 20px;
 }
-#desceferramentas
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#desceferramentas {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1450px;
-cursor:pointer;
-width:22px;
-height:20px;
+cursor: pointer;
+width: 22px;
+height: 20px;
 margin: 2px;
 }
-#sobeferramentas
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#sobeferramentas {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1475px;
-cursor:pointer;
-width:22px;
-height:20px;
+cursor: pointer;
+width: 22px;
+height: 20px;
 margin: 2px;
 }
 /*marcador de lista das propriedades do mapa*/
-.ticPropriedades
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.ticPropriedades {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1500px;
-width:9px;
-height:10px;
-cursor:pointer;
-margin-right:3px;
+width: 9px;
+height: 10px;
+cursor: pointer;
+margin-right: 3px;
 }
 /*marcador de lista das op��es do tema*/
-.ticOpcoesTemas
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.ticOpcoesTemas {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1500px;
-width:9px;
-height:10px;
-cursor:pointer;
-margin-right:3px;
+width: 9px;
+height: 10px;
+cursor: pointer;
+margin-right: 3px;
 }
-.uploaddbf
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.uploaddbf {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 1px -1523px;
-width:16px;
+width: 16px;
 border: 1px solid #DCDCDC;
 }
-.rosanordeste
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.rosanordeste {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1550px;
-width:14px;
-height:14px;
+width: 14px;
+height: 14px;
 }
-.rosasudeste
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.rosasudeste {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1575px;
-width:14px;
-height:14px;
+width: 14px;
+height: 14px;
 }
-.rosanoroeste
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.rosanoroeste {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1600px;
-width:14px;
-height:14px;
+width: 14px;
+height: 14px;
 }
-.rosasudoeste
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.rosasudoeste {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1625px;
-width:14px;
-height:14px;
+width: 14px;
+height: 14px;
 }
-.nuvemtags
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.nuvemtags {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 1px -1648px;
-width:16px;
+width: 16px;
 border: 1px solid #DCDCDC;
 }
-.zoomAnterior
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.zoomAnterior {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1675px;
-width:10px;
-height:11px;
-cursor:pointer;
+width: 10px;
+height: 11px;
+cursor: pointer;
 }
-.zoomProximo
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.zoomProximo {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1700px;
-width:10px;
-height:11px;
-cursor:pointer;
+width: 10px;
+height: 11px;
+cursor: pointer;
 }
-.i3geo_refresh2
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.i3geo_refresh2 {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1749px;
-width:18px;
-height:20px;
-cursor:pointer;
+width: 18px;
+height: 20px;
+cursor: pointer;
 }
-.conectarwmst
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.conectarwmst {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 1px -1824px;
-width:16px;
+width: 16px;
 border: 1px solid #DCDCDC;
 }
-.fonte
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.fonte {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1850px;
-width:9px;
-height:9px;
-cursor:pointer;
+width: 9px;
+height: 9px;
+cursor: pointer;
 }
-#zoomiauto
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#zoomiauto {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1875px;
-cursor:pointer;
+cursor: pointer;
 }
-#zoomoauto
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#zoomoauto {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1900px;
-cursor:pointer;
+cursor: pointer;
 }
-#olhoAberto
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#olhoAberto {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1925px;
-cursor:pointer;
-width:25px;
-height:20px;
+cursor: pointer;
+width: 25px;
+height: 20px;
 }
-#olhoFechado
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#olhoFechado {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1949px;
-width:25px;
-height:20px;
-cursor:pointer;
+width: 25px;
+height: 20px;
+cursor: pointer;
 }
-.carouselTemas
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.carouselTemas {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2000px;
 width: 16px;
 border: 1px solid #DCDCDC;
-cursor:pointer;
+cursor: pointer;
 }
-.uploadgpx
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.uploadgpx {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2052px;
 width: 16px;
 border: 1px solid #DCDCDC;
-cursor:pointer;
+cursor: pointer;
 }
-#i3geo_filtro
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#i3geo_filtro {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2073px;
-width:18px;
-height:18px;
+width: 18px;
+height: 18px;
 }
-#abreJanelaLegenda
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#abreJanelaLegenda {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2100px;
-cursor:pointer;
-width:22px;
-height:22px;
+cursor: pointer;
+width: 22px;
+height: 22px;
 }
-#soltaLeg
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#soltaLeg {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2100px;
-cursor:pointer;
-width:22px;
-height:22px;
+cursor: pointer;
+width: 22px;
+height: 22px;
 }
-#soltaLeg2
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#soltaLeg2 {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2125px;
-cursor:pointer;
-width:20px;
-height:16px;
+cursor: pointer;
+width: 20px;
+height: 16px;
 }
-#soltaleg2
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#soltaleg2 {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2123px;
-cursor:pointer;
-width:18px;
-height:18px;
+cursor: pointer;
+width: 18px;
+height: 18px;
 }
-#opacidadeMapa
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#opacidadeMapa {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2173px;
-cursor:pointer;
-width:18px;
-height:18px;
+cursor: pointer;
+width: 18px;
+height: 18px;
 }
-#animaMapa
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+#animaMapa {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2187px;
-cursor:pointer;
-width:18px;
-height:18px;
+cursor: pointer;
+width: 18px;
+height: 18px;
 }
-.importarwmc
-{
-background-image:URL('../imagens/visual/default/sprite.png');
+.importarwmc {
+background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2140px;
 border: 1px solid #DCDCDC;
-cursor:pointer;
-width:16px;
+cursor: pointer;
+width: 16px;
 }
-button{background:url(../imagens/tic2.png) 99% 50% no-repeat;}
-#encolheFerramentas
-{background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}
-.iconeGuiaMovel{
-padding:2px;
-border-radius:5px 5px 5px 5px;
-background-image:none;
-margin-left:8px;
-border:solid 1px gray;
-box-shadow:0px 1px 3px lightgray;
+button {
+background: url(../imagens/tic2.png) 99% 50% no-repeat;
 }
-.iconeMini{
-border-radius:5px 5px 5px 5px;
-border:solid 1px gray;
+#encolheFerramentas {
+background-image: URL('../imagens/encolhe.png');
+background-repeat: no-repeat;
+background-position: center;
+cursor: pointer;
+}
+.iconeGuiaMovel {
+padding: 2px;
+border-radius: 5px 5px 5px 5px;
+background-image: none;
+margin-left: 8px;
+border: solid 1px gray;
+box-shadow: 0px 1px 3px lightgray;
+}
+.iconeMini {
+border-radius: 5px 5px 5px 5px;
+border: solid 1px gray;
 margin: 2px;
 }
-.iconeGuiaMovelMouseOver{
-box-shadow:0px 1px 3px #3CA5EB;
+.iconeGuiaMovelMouseOver {
+box-shadow: 0px 1px 3px #3CA5EB;
 }
-.iconeGuiaMovelMouseOut{
-box-shadow:0px 1px 3px gray;
+.iconeGuiaMovelMouseOut {
+box-shadow: 0px 1px 3px gray;
 }
-#euDock_euImage_2{
+#euDock_euImage_2 {
 border: 0px solid lightgray;
 border-radius: 35px 0px 0px 5px;
 opacity: 0.6;
 background: lightgray;
 }
-#euDock_euImage_3{
+#euDock_euImage_3 {
 border: 0px solid lightgray;
 opacity: 0.6;
 background: lightgray;
 }
-#euDock_euImage_4{
+#euDock_euImage_4 {
 border: 0px solid lightgray;
 border-radius: 0px 35px 5px 0px;
 opacity: 0.6;
 background: lightgray;
 }
 #euDock_0 img {
+}
+#euDockMensagem {
+font-weight: bold;
+color: gray;
+margin-top: 5px;
+font-size: 11px;
+top: 38px;
 }
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}

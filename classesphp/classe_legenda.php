@@ -117,19 +117,19 @@ $template - nome do template para processar a legenda
 
 	function __construct($map_file="",$locaplic="",$tema="",$template="")
 	{
-  		//error_reporting(0);
-  		include_once(dirname(__FILE__)."/funcoes_gerais.php");
+			//error_reporting(0);
+			include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->localaplicacao = $locaplic;
-  		if($map_file == "")
+			if($map_file == "")
 		{return;}
 		$this->mapa = ms_newMapObj($map_file);
-  		$this->arquivo = $map_file;
-   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
-  		{
-  			$this->layer = $this->mapa->getlayerbyname($tema);
-  			$this->nome = $tema;
+			$this->arquivo = $map_file;
+			if($tema != "" && @$this->mapa->getlayerbyname($tema))
+			{
+				$this->layer = $this->mapa->getlayerbyname($tema);
+				$this->nome = $tema;
 			$vermultilayer = new vermultilayer();
 			$vermultilayer->verifica($map_file,$tema);
 			if ($vermultilayer->resultado == 1) // o tema e multi layer
@@ -148,13 +148,13 @@ $template - nome do template para processar a legenda
 				$t = $this->mapa->getlayerbyname($l);
 				$this->indices[] = $t->index;
 			}
-  		}
-  		if ($template == ""){$template="legenda.htm";}
-  		if(file_exists($template))
-  		{
-  			$this->templateleg = $template;
-  			return;
-  		}
+			}
+			if ($template == ""){$template="legenda.htm";}
+			if(file_exists($template))
+			{
+				$this->templateleg = $template;
+				return;
+			}
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{$this->templateleg = $locaplic."\\aplicmap\\".$template;}
 		else
@@ -165,10 +165,10 @@ function: salva
 
 Salva o mapfile atual
 */
- 	function salva()
- 	{
-	  	if (connection_aborted()){exit();}
-	  	$this->recalculaSLD();
+	function salva()
+	{
+			if (connection_aborted()){exit();}
+			$this->recalculaSLD();
 		$this->mapa->save($this->arquivo);
 	}
 /*
@@ -209,42 +209,40 @@ string com a legenda HTML
 	{
 		$l = "";
 		$numlayers = $this->mapa->numlayers;
-		if($this->nome != "")
-		{
+		if($this->nome != ""){
 			//verifica se &eacute; wms ou se o metadata legendaimg est&aacute; definido
 			$c = $this->layer->connectiontype;
-			if ($c == 7 || $this->layer->getmetadata("legendaimg") != "")
-			{
+			if ($c == 7 || $this->layer->getmetadata("legendaimg") != ""){
 				return($this->tabelaLegenda());
 			}
-			for ($i=0;$i < $numlayers;++$i)
-			{
+			for ($i=0;$i < $numlayers;++$i){
 				$la = $this->mapa->getlayer($i);
 				if ($la->name != $this->nome)
 				{$la->set("status",MS_OFF);}
 				if ($la->group == $this->nome)
 				{$la->set("status",MS_DEFAULT);}
+				$la->set("minscaledenom",0);
+				$la->set("maxscaledenom",0);
 			}
 			$this->layer->set("status",MS_DEFAULT);
 		}
 		$desligar = array();
 		$conta = 0;
 		$desligar = array();
-		for ($i=0;$i < $numlayers;++$i)
-		{
+		for ($i=0;$i < $numlayers;++$i){
 			$la = $this->mapa->getlayer($i);
 			if (strtoupper($la->getmetadata("ESCONDIDO")) == "SIM")
 			{$la->set("status",MS_OFF);}
-			if($la->status == MS_DEFAULT)
-			{
+			if($la->status == MS_DEFAULT){
 				$nc = $la->numclasses;
-				for ($c = 0;$c < $nc;$c++)
-				{
+				for ($c = 0;$c < $nc;$c++){
 					$classe = $la->getclass($c);
 					if($classe->status == MS_OFF)
 					{$desligar[] = $conta;}
 					$conta = $conta + 1;
 				}
+				$la->set("minscaledenom",0);
+				$la->set("maxscaledenom",0);
 			}
 		}
 		$legenda = $this->mapa->legend;

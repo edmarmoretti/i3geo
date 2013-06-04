@@ -804,7 +804,6 @@ i3GEO.barraDeBotoes = {
 		offsEut();
 		euThread();
 		//
-		i3GEO.barraDeBotoes.AJUDA = false;
 		euEnv.imageBasePath=i3GEO.configura.locaplic+"/pacotes/eudock/";
 		var botao,
 			dica,
@@ -812,6 +811,7 @@ i3GEO.barraDeBotoes = {
 			i,
 			dock = new euDock(),
 			temp = "dockBg-r.png",
+			tempAjuda = "dockBg-l.png",
 			chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
 			n = chaves.length,
 			preload;
@@ -819,12 +819,16 @@ i3GEO.barraDeBotoes = {
 		preload.src = i3GEO.configura.locaplic+"/imagens/gisicons/eudock/sobe1.png";
 		dock.setObjectAlign(i3GEO.Interface.IDCORPO,euDOWN,(parseInt(document.body.style.height,10))*-1 + i3GEO.barraDeBotoes.OFFSET,euUP);
 		if(i3GEO.barraDeBotoes.MAXBOTOES >= chaves.length)
-		{temp = "dockBg-r2.png";}
+		{temp = "vazio.png";}
+		if(i3GEO.barraDeBotoes.AJUDA === false){
+			tempAjuda = "vazio.png";
+		}
 		dock.setBar({
-			left:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-l.png"}},
+			left:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/"+tempAjuda}},
 			horizontal:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/dockBg-c-o.png"}},
 			right:{euImage:{image:i3GEO.configura.locaplic+"/pacotes/eudock/barImages/"+temp}}
 		});
+		i3GEO.barraDeBotoes.AJUDA = false;
 		dock.setIconsOffset(7);
 		if(i3GEO.barraDeBotoes.MAXBOTOES > 0)
 		{n = i3GEO.barraDeBotoes.MAXBOTOES;}
@@ -905,10 +909,7 @@ i3GEO.barraDeBotoes = {
 		//div que mostra o t&iacute;tulo do bot&atilde;o
 		if(!$i("euDockMensagem")){
 			temp = document.createElement("div");
-			temp.style.top = "38px";
-			temp.style.color = "gray";
 			temp.style.textAlign = "center";
-			temp.style.fontSize = "10px";
 			temp.innerHTML = "";
 			temp.id = "euDockMensagem";
 			euEnv.euDockArray.euDock_0.div.appendChild(temp);
