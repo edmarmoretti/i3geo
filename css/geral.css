@@ -65,7 +65,7 @@ input
 select
 {box-shadow:1px 1px 3px 0 lightgray;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid rgb(230,230,230);text-align: left;cursor: pointer;}
 select option:hover {
-    background-color: #CCFFFF;
+		background-color: #CCFFFF;
 }
 
 .ajuda_usuario
@@ -184,42 +184,42 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 
 .yui-panel-container .yui-resizepanel .bd {
 
-    overflow: auto;
-    background-color: #fff;
+		overflow: auto;
+		background-color: #fff;
 
 }
 .yui-panel-container.hide-scrollbars .yui-resizepanel .bd {
-    overflow: hidden;
+		overflow: hidden;
 }
 .yui-panel-container.show-scrollbars .yui-resizepanel .bd {
-    overflow: auto;
+		overflow: auto;
 }
 .yui-panel-container.show-scrollbars .underlay {
-    overflow: visible;
+		overflow: visible;
 }
 .yui-resizepanel .resizehandle {
 
-     position: absolute;
-     width: 10px;
-     height: 10px;
-     right: 0;
-     bottom: 0;
-     margin: 0;
-     padding: 0;
-     z-index: 3000;
-     background: url(../pacotes/yui290/build/container/img/corner_resize.gif) left bottom no-repeat;
-     cursor: se-resize;
- }
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		right: 0;
+		bottom: 0;
+		margin: 0;
+		padding: 0;
+		z-index: 3000;
+		background: url(../pacotes/yui290/build/container/img/corner_resize.gif) left bottom no-repeat;
+		cursor: se-resize;
+}
 #googlemapsdiv {
-   -moz-user-select: -moz-none;
-   -khtml-user-select: none;
-   -webkit-user-select: none;
-   /*
-     Introduced in IE 10.
-     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-   */
-   -ms-user-select: none;
-   user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	/*
+		Introduced in IE 10.
+		See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+	 */
+	-ms-user-select: none;
+	user-select: none;
 }
 /* utilizado pela ferramenta de cartogramas */
 .var_div_relatorio h1{
@@ -268,12 +268,32 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 }
 #editor_bd input {
 	background-color: #F6F6F6;
-    border: 1px solid #FAFAFA;
-    box-shadow: 0 1px 3px lightgray;
-    color: #426252;
-    font-family: Verdana,Arial,Helvetica,sans-serif;
-    font-size: 10px;
+		border: 1px solid #FAFAFA;
+		box-shadow: 0 1px 3px lightgray;
+		color: #426252;
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+		font-size: 10px;
 }
+/* usado pelos graficos interativos (CCC2)*/
+.tipsy { pointer-events: none; padding: 5px; font-size: 10px; font-family: Arial,Helvetica,sans-serif; position: absolute; z-index: 100000; }
+	.tipsy-inner { padding: 5px 8px 4px 8px; background-color: black; color: white; max-width: 200px; text-align: center; }
+	.tipsy-inner { border-radius: 3px; -moz-border-radius:3px; -webkit-border-radius:3px; }
+
+	/* Uncomment for shadow */
+	/*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+
+	.tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
+
+	.tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
+		.tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
+		.tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
+
+	.tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -5px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
+		.tipsy-sw .tipsy-arrow { bottom: 0; left: 10px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
+		.tipsy-se .tipsy-arrow { bottom: 0; right: 10px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent; }
+
+	.tipsy-e .tipsy-arrow { right: 0; top: 50%; margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent; }
+	.tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent;  }
 
 
 

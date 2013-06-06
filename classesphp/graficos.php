@@ -433,10 +433,10 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 	{
 		foreach ($valores as $v)
 		{
-			 $temp = $v[0].";".$v[1];
-			 if($incluicores == true)
-			 {$temp = $temp.";".$cores[$v[0]];}
-			 $tempval[] = $temp;
+			$temp = $v[0].";".$v[1];
+			if($incluicores == true)
+			{$temp = $temp.";".$cores[$v[0]];}
+			$tempval[] = $temp;
 		}
 	}
 	if($ordenax == "sim")
@@ -716,7 +716,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 					$v["centroide"] = "POINT(".$c->x." ".$c->y.")";
 				}
 				if($nclasses > 0){
-					$classe = $layer->getclass($shape->classindex);
+					$classe = $layer->getclass($layer->getClassIndex($shape));
 					$cor = $classe->getstyle(0)->color;
 					$v["cores"] = $cor->red." ".$cor->green." ".$cor->blue;
 				}

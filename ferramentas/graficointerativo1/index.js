@@ -1,7 +1,7 @@
 
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Gr&aacute;fico interativo
+Title: Gr&aacute;fico interativo 1
 
 Representa&ccedil;&atilde;o gr&aacute;fica de dados. O gr&aacute;fico &eacute; constru&iacute;do tendo como base os atributos de um tema e &eacute; modificado
 conforme o usu&aacute;rio navega pelo mapa. A renderiza&ccedil;&atilde;o do gr&aacute;fico &eacute; feito pelo navegador por meio do aplicativo openflashchart.
@@ -145,7 +145,7 @@ i3GEOF.graficointerativo1 = {
 		}
 		if(typeof(i3GEOF.graficointerativo1.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/graficointerativo1/dicionario.js",
+				i3GEO.configura.locaplic+"/ferramentas/graficointerativo1/dependencias.php",
 				"i3GEOF.graficointerativo1.iniciaJanelaFlutuante()",
 				"i3GEOF.graficointerativo1.dicionario_script"
 			);
@@ -189,11 +189,8 @@ i3GEOF.graficointerativo1 = {
 			};
 			$i("i3GEOgraficointerativo1guia4").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativo1guia4","i3GEOgraficointerativo1guia");
-				function outputStatus(e) {
-					//alert("oi");
-				}
 				var t = $i("i3GEOgraficointerativo1Grafico"),
-					dados = i3GEOF.graficointerativo1.tabela2dados;
+					dados = i3GEOF.graficointerativo1.tabela2dados();
 				t.style.display = "block";
 				t.style.position = "relative";
 				t.style.top = "-5px";
@@ -255,7 +252,7 @@ i3GEOF.graficointerativo1 = {
 		//'		<tr><td>&nbsp;</td></tr>' +
 		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-polar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="radar" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>radar</td></tr>' +
 		//'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_filled" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras simples</td></tr>' +
+		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras simples</td></tr>' +
 		//'		<tr><td>&nbsp;</td></tr>' +
 		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras 2 cores</td></tr>' +
 		//'		<tr><td>&nbsp;</td></tr>' +
@@ -294,6 +291,7 @@ i3GEOF.graficointerativo1 = {
 		'	<div class=paragrafo id=i3GEOgraficointerativo1AjudaPizza >Se vc escolher para X e Y o mesmo item, ser&aacute; considerada a frequ&ecirc;ncia das ocorr&ecirc;ncias para compor cada parte da pizza. Caso contr&aacute;rio, ser&aacute; feita a soma dos valores existentes em Y para cada ocorr&ecirc;ncia existente em X.</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOgraficointerativo1guia3obj" style="left:1px;display:none;top:-5px">' +
+		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1xInclinado checked /> Inclina os textos do eixo X</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1AdLinhas checked /> Adiciona as linhas em gr&aacute;ficos de barras</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1Acumula /> Utiliza valores acumulados</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1Relativa /> Utiliza valores relativos (%)</p>' +
@@ -301,9 +299,12 @@ i3GEOF.graficointerativo1 = {
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1DadosPuros /> N&atilde;o processa os valores ao obter os dados (mant&eacute;m os dados como est&atilde;o na tabela de atributos) - essa op&ccedil;&atilde;o &eacute; &uacute;til nos gr&aacute;ficos de distribui&ccedil;&atilde;o de pontos</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox onclick="i3GEOF.graficointerativo1.ativaNavegacao(this.checked)" /> Atualiza o gr&aacute;fico ao navegar pelo mapa</p>' +
 		'	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo1.obterDados()" id="i3GEOgraficointerativo1TipoAgregacao" ><option value="soma">Soma</option><option value="media">M&eacute;dia</option></select> Tipo de agrega&ccedil;&atilde;o dos valores do eixo Y</p>' +
+		'	<p class=paragrafo ><input style=cursor:pointer;width:50px; value=40 type=text id=i3GEOgraficointerativo1FatorTamanho /> Fator de c&aacute;lculo da largura do gr&aacute;fico. O n&uacute;mero de ocorr&ecirc;ncias ser&aacute; multiplicado por esse fator para calcular o tamanho final do gr&aacute;fico em pixels.</p>' +
+
 		'</div>'+
 		'<div class=guiaobj id="i3GEOgraficointerativo1guia4obj" style="left:1px;display:none;top:-10px">' +
 		'	<a href="#" onclick="i3GEOF.graficointerativo1.novaJanela()" >abrir em uma janela separada</a>' +
+		'	<div id=i3GEOgraficointerativo1guia4objCanvas ></div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOgraficointerativo1guia5obj" style="font-size:10px;left:10px;display:none;top:-0px">' +
 		'</div>' +
@@ -649,6 +650,9 @@ i3GEOF.graficointerativo1 = {
 	Obt&eacute;m os dados da tabela para compor o gr&aacute;fico
 	*/
 	tabela2dados: function(){
+		if(i3GEOF.graficointerativo1.aguarde.visibility === "visible")
+		{return;}
+		i3GEOF.graficointerativo1.aguarde.visibility = "visible";
 		var temp = 0,
 			ultimo = 0,
 			inputs = $i("i3GEOgraficointerativo1Dados").getElementsByTagName("input"),
@@ -662,7 +666,6 @@ i3GEOF.graficointerativo1 = {
 			acum,
 			nomes = [],
 			cores = [],
-			indice = "",
 			titulo = "",
 			par = [],
 			parcor = [],
@@ -686,10 +689,12 @@ i3GEOF.graficointerativo1 = {
 			legendaX = "",
 			legendaY = "",
 			fill = "#C4B86A",
-			pointSize = 4;
+			pointSize = 4,
+			metadata = [],
+			dados = {},
+			xInclinado = $i("i3GEOgraficointerativo1xInclinado").checked;
 		if($i("i3GEOgraficointerativo1ComboTemasId")){
-			indice = $i("i3GEOgraficointerativo1ComboTemasId").options.selectedIndex;
-			titulo = $i("i3GEOgraficointerativo1ComboTemasId").options[indice].text;
+			titulo = $i("i3GEOgraficointerativo1ComboTemasId").options[$i("i3GEOgraficointerativo1ComboTemasId").options.selectedIndex].text;
 		}
 		if(i3GEOF.graficointerativo1.titulo != "")
 		{titulo = i3GEOF.graficointerativo1.titulo;}
@@ -702,11 +707,11 @@ i3GEOF.graficointerativo1 = {
 			total += temp;
 		}
 		for(i=0;i<ninputs;i = i + 3){
-			nomes.push(inputs[i].value+" ");
+			//nomes.push(inputs[i].value+" ");
 			cores.push(inputs[i+2].value);
 			temp = inputs[i+1].value * 1;
-			valores.push(temp);
-			valoresS.push(temp+" ");
+			//valores.push(temp);
+			//valoresS.push(temp+" ");
 			acum = ultimo + temp;
 			acumulado.push(acum);
 			ultimo = ultimo + temp;
@@ -720,14 +725,15 @@ i3GEOF.graficointerativo1 = {
 			{maiorNome = temp;}
 			if(temp < menorNome)
 			{menorNome = temp;}
-			par.push({"value":inputs[i+1].value * 1,"label":inputs[i].value+" "});
-
+			//par.push({"value":inputs[i+1].value * 1,"label":inputs[i].value+" "});
+			par.push([inputs[i].value+" ",inputs[i+1].value * 1]);
 			temp = inputs[i+1].value * 1;
 			if($i("i3GEOgraficointerativo1Acumula").checked)
 			{temp = acum;}
 			if($i("i3GEOgraficointerativo1Relativa").checked)
 			{temp = (temp * 100) / total;}
-			parcor.push({"colour":inputs[i+2].value,"value":temp,"label":inputs[i].value+" "});
+			//parcor.push({"colour":inputs[i+2].value,"value":temp,"label":inputs[i].value+" "});
+			parcor.push([inputs[i].value+" ",temp,inputs[i+2].value]);
 		}
 		if($i("i3GEOgraficointerativo1Acumula").checked){
 			valores = acumulado;
@@ -746,29 +752,20 @@ i3GEOF.graficointerativo1 = {
 			maior = 100;
 			menor = 0;
 		}
-		if(i3GEOF.graficointerativo1.tipo === "pizza2d"){
-			parametros = {
-				"elements":[{
-					"type":      "pie",
-					"start-angle": 180,
-					"colours":   cores,
-					"alpha":     alpha,
-					"stroke":    stroke,
-					"animate":   1,
-					"values" :   par,
-					"tip": "#val# de #total#<br>#percent# de 100%",
-					"gradient-fill": gradient
-				}],
-				"title":{
-					"text": titulo,
-					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
-					},
-				"num_decimals": 2,
-				"is_fixed_num_decimals_forced": true,
-				"is_decimal_separator_comma": true,
-				"is_thousand_separator_disabled": true,
-				"x_axis": null
+		dados = {
+				"resultset": par,
+				"metadata": [
+										{"colIndex":0,"colType":"String","colName":"X"},
+										{"colIndex":1,"colType":"Numeric","colName":"Y"}
+				]
 			};
+		switch(i3GEOF.graficointerativo1.tipo){
+			case "bar_1":
+				legendaX = "";
+				i3GEOF.graficointerativo1.barras(dados,maior,cores,legendaY,legendaX,xInclinado);
+				break;
+			default:
+				alert("Escolha um tipo de gr&aacute;fico");
 		}
 		if(i3GEOF.graficointerativo1.tipo === "line" || i3GEOF.graficointerativo1.tipo === "scatter" || i3GEOF.graficointerativo1.tipo === "hbar" || i3GEOF.graficointerativo1.tipo === "area" || i3GEOF.graficointerativo1.tipo === "bar_round" || i3GEOF.graficointerativo1.tipo === "bar_round_glass" || i3GEOF.graficointerativo1.tipo === "bar_filled" || i3GEOF.graficointerativo1.tipo === "bar_glass" || i3GEOF.graficointerativo1.tipo === "bar_3d" || i3GEOF.graficointerativo1.tipo === "bar_sketch" || i3GEOF.graficointerativo1.tipo === "bar_cylinder" || i3GEOF.graficointerativo1.tipo === "bar_cylinder_outline"){
 			temp = valores;
@@ -904,7 +901,6 @@ i3GEOF.graficointerativo1 = {
 					"bg_colour": "#DFFFEC"
 			};
 		}
-		return( JSON1.stringify(parametros));
 	},
 	/*
 	Function: excluilinha
@@ -936,11 +932,10 @@ i3GEOF.graficointerativo1 = {
 				trs = tabela.getElementsByTagName("tr"),
 				ntrs = trs.length,
 				psort = [],
-				t,
-				psortfim,
+				t = 0,
 				npsortfim,
-				ins,
-				p,
+				ins = "",
+				p = 0,
 				e,
 				temp,
 				chaves = [],
@@ -948,10 +943,9 @@ i3GEOF.graficointerativo1 = {
 
 			function sortNumber(a,b)
 			{return a - b;}
-			for (t=1;t<ntrs;t++)
-			{
+			for(t=1;t<ntrs;t++){
 				temp = trs[t].childNodes[cid];
-				if (temp){
+				if(temp){
 					psort.push(temp.childNodes[0].value);
 					chaves[temp.childNodes[0].value] = t;
 					if(temp.childNodes[0].value *1)
@@ -960,15 +954,14 @@ i3GEOF.graficointerativo1 = {
 			}
 			//recosntroi a tabela
 			if(numero)
-			{psortfim = psort.sort(sortNumber);}
+			{psort = psort.sort(sortNumber);}
 			else
-			{psortfim = psort.sort();}
+			{psort = psort.sort();}
 			ins = "<tr>" + trs[0].innerHTML + "</tr>";
-			npsortfim = psortfim.length;
-			for (p=0;p<npsortfim;p++)
+			npsortfim = psort.length;
+			for (p=0;p<psort;p++)
 			{
-				e = chaves[psortfim[p]];
-				//e = psortfim[p].split("+")[1] * 1;
+				e = chaves[psort[p]];
 				if (trs[e] !== undefined)
 				{ins += "<tr>" + trs[e].innerHTML + "</tr>";}
 			}
@@ -1009,187 +1002,74 @@ i3GEOF.graficointerativo1 = {
 				google.earth.removeEventListener(graficointerativo1Dragend);
 			}
 		}
+	},
+	barras: function(dados,maior,cores,legendaY,legendaX,xInclinado){
+		var config = {
+			canvas : "i3GEOgraficointerativo1guia4objCanvas",
+			width : dados.resultset.length * $i("i3GEOgraficointerativo1FatorTamanho").value,
+			height : parseInt($i("i3GEOF.graficointerativo1_corpo").style.height,10) - 80,
+			orthoAxisTitle: legendaY,
+			orthoAxisFixedMax: maior,
+			valuesFont : 'normal 9px sans-serif ',
+			baseAxisTitle: legendaX,
+			baseAxisTitleAlign: 'left',
+			tooltipEnabled : true,
+			tooltipArrowVisible: true,
+			tooltipFade : false,
+			tooltipFollowMouse : false,
+			tooltipFormat : function(scene) {
+				var cat = this.scene.datum.atoms['category'].value,
+					val = this.scene.datum.atoms['value'].value;
+				return "<span style=color:yellow >"+cat+"</span><br>" + format( "#.###,", val);
+			},
+			baseAxisTitleFont : '9px sans-serif',
+			yAxisTickFormatter: function(valor){
+				valor = valor+"";
+				valor = format( "#.###,", valor);
+				return valor;
+			},
+			valueFormat: function(valor){
+				valor = valor+"";
+				valor = format( "#.###,", valor);
+				return valor;
+			},
+			valuesAnchor : 'top',
+			valuesVisible: false,
+			orthoAxisOriginIsZero:false,
+			titleAlign : 'center',
+			orientation: 'vertical',
+			baseAxisTicks: true,
+			stacked : false,
+			animate : true,
+			hoverable:  false,
+			axisGrid:   true,
+			contentMargins :5,
+			axisOffset: 0.02,
+			panelSizeRatio : 0.8,
+			orthoAxisLabelSpacingMin : 2 ,
+			selectable : false,
+			extensionPoints: {
+				continuousAxisTicks_strokeStyle: 'gray',
+				axisGrid_strokeStyle:  'lightgray',
+				xAxisLabel_textStyle: 'black',
+				label_textBaseline: "bottom",
+				xAxisLabel_font: 'normal 10px sans-serif',
+				bar_fillStyle: function(d) {
+					return cores[this.index];
+				}
+			}
+		};
+		if(xInclinado == true){
+			config.extensionPoints.xAxisLabel_textAngle = -Math.PI/3;
+			config.extensionPoints.xAxisLabel_textBaseline = 'top';
+			config.extensionPoints.xAxisLabel_textAlign = 'right';
+		}
+		new pvc.BarChart(
+				config
+			).setData(dados, {
+			crosstabMode : false
+		}).render();
+		i3GEOF.graficointerativo1.aguarde.visibility = "hidden";
 	}
 };
-//pacotes/openflashchart/json2.js
-if (!this.JSON1) {
-		JSON1 = function () {
 
-				function f(n) {    // Format integers to have at least two digits.
-						return n < 10 ? '0' + n : n;
-				}
-				Date.prototype.toJSON = function () {
-						return this.getUTCFullYear()   + '-' +
-								f(this.getUTCMonth() + 1) + '-' +
-								f(this.getUTCDate())      + 'T' +
-								f(this.getUTCHours())     + ':' +
-								f(this.getUTCMinutes())   + ':' +
-								f(this.getUTCSeconds())   + 'Z';
-				};
-				var escapeable = /["\\\x00-\x1f\x7f-\x9f]/g,
-						gap,
-						indent,
-						meta = {    // table of character substitutions
-								'\b': '\\b',
-								'\t': '\\t',
-								'\n': '\\n',
-								'\f': '\\f',
-								'\r': '\\r',
-								'"' : '\\"',
-								'\\': '\\\\'
-						},
-						rep;
-				function quote(string) {
-						return escapeable.test(string) ?
-								'"' + string.replace(escapeable, function (a) {
-										var c = meta[a];
-										if (typeof c === 'string') {
-												return c;
-										}
-										c = a.charCodeAt();
-										return '\\u00' + Math.floor(c / 16).toString(16) +
-																							(c % 16).toString(16);
-								}) + '"' :
-								'"' + string + '"';
-				}
-				function str(key, holder) {
-						var i,          // The loop counter.
-								k,          // The member key.
-								v,          // The member value.
-								length,
-								mind = gap,
-								partial,
-								value = holder[key];
-						if (value && typeof value === 'object' &&
-										typeof value.toJSON === 'function') {
-								value = value.toJSON(key);
-						}
-						if (typeof rep === 'function') {
-								value = rep.call(holder, key, value);
-						}
-						switch (typeof value) {
-						case 'string':
-								return quote(value);
-
-						case 'number':
-								return isFinite(value) ? String(value) : 'null';
-
-						case 'boolean':
-						case 'null':
-								return String(value);
-						case 'object':
-								if (!value) {
-										return 'null';
-								}
-								gap += indent;
-								partial = [];
-								if (typeof value.length === 'number' &&
-												!(value.propertyIsEnumerable('length'))) {
-										length = value.length;
-										for (i = 0; i < length; i += 1) {
-												partial[i] = str(i, value) || 'null';
-										}
-										v = partial.length === 0 ? '[]' :
-												gap ? '[\n' + gap + partial.join(',\n' + gap) +
-																	'\n' + mind + ']' :
-															'[' + partial.join(',') + ']';
-										gap = mind;
-										return v;
-								}
-								if (typeof rep === 'object') {
-										length = rep.length;
-										for (i = 0; i < length; i += 1) {
-												k = rep[i];
-												if (typeof k === 'string') {
-														v = str(k, value, rep);
-														if (v) {
-																partial.push(quote(k) + (gap ? ': ' : ':') + v);
-														}
-												}
-										}
-								} else {
-										for (k in value) {
-												v = str(k, value, rep);
-												if (v) {
-														partial.push(quote(k) + (gap ? ': ' : ':') + v);
-												}
-										}
-								}
-								v = partial.length === 0 ? '{}' :
-										gap ? '{\n' + gap + partial.join(',\n' + gap) +
-															'\n' + mind + '}' :
-													'{' + partial.join(',') + '}';
-								gap = mind;
-								return v;
-						}
-				}
-				return {
-						stringify: function (value, replacer, space) {
-								var i;
-								gap = '';
-								indent = '';
-								if (space) {
-										if (typeof space === 'number') {
-												for (i = 0; i < space; i += 1) {
-														indent += ' ';
-												}
-										} else if (typeof space === 'string') {
-												indent = space;
-										}
-								}
-								if (!replacer) {
-										rep = function (key, value) {
-												if (!Object.hasOwnProperty.call(this, key)) {
-														return undefined;
-												}
-												return value;
-										};
-								} else if (typeof replacer === 'function' ||
-												(typeof replacer === 'object' &&
-												typeof replacer.length === 'number')) {
-										rep = replacer;
-								} else {
-										throw new Error('JSON.stringify');
-								}
-								return str('', {'': value});
-						},
-						parse: function (text, reviver) {
-								var j;
-
-								function walk(holder, key) {
-										var k, v, value = holder[key];
-										if (value && typeof value === 'object') {
-												for (k in value) {
-														if (Object.hasOwnProperty.call(value, k)) {
-																v = walk(value, k);
-																if (v !== undefined) {
-																		value[k] = v;
-																} else {
-																		delete value[k];
-																}
-														}
-												}
-										}
-										return reviver.call(holder, key, value);
-								}
-								if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
-replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-										j = eval('(' + text + ')');
-										return typeof reviver === 'function' ?
-												walk({'': j}, '') : j;
-								}
-								throw new SyntaxError('JSON.parse');
-						},
-						quote: quote
-				};
-		}();
-}
-
-
-
-
-/*	SWFObject v2.2 <http://code.google.com/p/swfobject/>
-	is released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
-*/
-swfobject=function(){var D="undefined",r="object",S="Shockwave Flash",W="ShockwaveFlash.ShockwaveFlash",q="application/x-shockwave-flash",R="SWFObjectExprInst",x="onreadystatechange",O=window,j=document,t=navigator,T=false,U=[h],o=[],N=[],I=[],l,Q,E,B,J=false,a=false,n,G,m=true,M=function(){var aa=typeof j.getElementById!=D&&typeof j.getElementsByTagName!=D&&typeof j.createElement!=D,ah=t.userAgent.toLowerCase(),Y=t.platform.toLowerCase(),ae=Y?/win/.test(Y):/win/.test(ah),ac=Y?/mac/.test(Y):/mac/.test(ah),af=/webkit/.test(ah)?parseFloat(ah.replace(/^.*webkit\/(\d+(\.\d+)?).*$/,"$1")):false,X=!+"\v1",ag=[0,0,0],ab=null;if(typeof t.plugins!=D&&typeof t.plugins[S]==r){ab=t.plugins[S].description;if(ab&&!(typeof t.mimeTypes!=D&&t.mimeTypes[q]&&!t.mimeTypes[q].enabledPlugin)){T=true;X=false;ab=ab.replace(/^.*\s+(\S+\s+\S+$)/,"$1");ag[0]=parseInt(ab.replace(/^(.*)\..*$/,"$1"),10);ag[1]=parseInt(ab.replace(/^.*\.(.*)\s.*$/,"$1"),10);ag[2]=/[a-zA-Z]/.test(ab)?parseInt(ab.replace(/^.*[a-zA-Z]+(.*)$/,"$1"),10):0}}else{if(typeof O.ActiveXObject!=D){try{var ad=new ActiveXObject(W);if(ad){ab=ad.GetVariable("$version");if(ab){X=true;ab=ab.split(" ")[1].split(",");ag=[parseInt(ab[0],10),parseInt(ab[1],10),parseInt(ab[2],10)]}}}catch(Z){}}}return{w3:aa,pv:ag,wk:af,ie:X,win:ae,mac:ac}}(),k=function(){if(!M.w3){return}if((typeof j.readyState!=D&&j.readyState=="complete")||(typeof j.readyState==D&&(j.getElementsByTagName("body")[0]||j.body))){f()}if(!J){if(typeof j.addEventListener!=D){j.addEventListener("DOMContentLoaded",f,false)}if(M.ie&&M.win){j.attachEvent(x,function(){if(j.readyState=="complete"){j.detachEvent(x,arguments.callee);f()}});if(O==top){(function(){if(J){return}try{j.documentElement.doScroll("left")}catch(X){setTimeout(arguments.callee,0);return}f()})()}}if(M.wk){(function(){if(J){return}if(!/loaded|complete/.test(j.readyState)){setTimeout(arguments.callee,0);return}f()})()}s(f)}}();function f(){if(J){return}try{var Z=j.getElementsByTagName("body")[0].appendChild(C("span"));Z.parentNode.removeChild(Z)}catch(aa){return}J=true;var X=U.length;for(var Y=0;Y<X;Y++){U[Y]()}}function K(X){if(J){X()}else{U[U.length]=X}}function s(Y){if(typeof O.addEventListener!=D){O.addEventListener("load",Y,false)}else{if(typeof j.addEventListener!=D){j.addEventListener("load",Y,false)}else{if(typeof O.attachEvent!=D){i(O,"onload",Y)}else{if(typeof O.onload=="function"){var X=O.onload;O.onload=function(){X();Y()}}else{O.onload=Y}}}}}function h(){if(T){V()}else{H()}}function V(){var X=j.getElementsByTagName("body")[0];var aa=C(r);aa.setAttribute("type",q);var Z=X.appendChild(aa);if(Z){var Y=0;(function(){if(typeof Z.GetVariable!=D){var ab=Z.GetVariable("$version");if(ab){ab=ab.split(" ")[1].split(",");M.pv=[parseInt(ab[0],10),parseInt(ab[1],10),parseInt(ab[2],10)]}}else{if(Y<10){Y++;setTimeout(arguments.callee,10);return}}X.removeChild(aa);Z=null;H()})()}else{H()}}function H(){var ag=o.length;if(ag>0){for(var af=0;af<ag;af++){var Y=o[af].id;var ab=o[af].callbackFn;var aa={success:false,id:Y};if(M.pv[0]>0){var ae=c(Y);if(ae){if(F(o[af].swfVersion)&&!(M.wk&&M.wk<312)){w(Y,true);if(ab){aa.success=true;aa.ref=z(Y);ab(aa)}}else{if(o[af].expressInstall&&A()){var ai={};ai.data=o[af].expressInstall;ai.width=ae.getAttribute("width")||"0";ai.height=ae.getAttribute("height")||"0";if(ae.getAttribute("class")){ai.styleclass=ae.getAttribute("class")}if(ae.getAttribute("align")){ai.align=ae.getAttribute("align")}var ah={};var X=ae.getElementsByTagName("param");var ac=X.length;for(var ad=0;ad<ac;ad++){if(X[ad].getAttribute("name").toLowerCase()!="movie"){ah[X[ad].getAttribute("name")]=X[ad].getAttribute("value")}}P(ai,ah,Y,ab)}else{p(ae);if(ab){ab(aa)}}}}}else{w(Y,true);if(ab){var Z=z(Y);if(Z&&typeof Z.SetVariable!=D){aa.success=true;aa.ref=Z}ab(aa)}}}}}function z(aa){var X=null;var Y=c(aa);if(Y&&Y.nodeName=="OBJECT"){if(typeof Y.SetVariable!=D){X=Y}else{var Z=Y.getElementsByTagName(r)[0];if(Z){X=Z}}}return X}function A(){return !a&&F("6.0.65")&&(M.win||M.mac)&&!(M.wk&&M.wk<312)}function P(aa,ab,X,Z){a=true;E=Z||null;B={success:false,id:X};var ae=c(X);if(ae){if(ae.nodeName=="OBJECT"){l=g(ae);Q=null}else{l=ae;Q=X}aa.id=R;if(typeof aa.width==D||(!/%$/.test(aa.width)&&parseInt(aa.width,10)<310)){aa.width="310"}if(typeof aa.height==D||(!/%$/.test(aa.height)&&parseInt(aa.height,10)<137)){aa.height="137"}j.title=j.title.slice(0,47)+" - Flash Player Installation";var ad=M.ie&&M.win?"ActiveX":"PlugIn",ac="MMredirectURL="+O.location.toString().replace(/&/g,"%26")+"&MMplayerType="+ad+"&MMdoctitle="+j.title;if(typeof ab.flashvars!=D){ab.flashvars+="&"+ac}else{ab.flashvars=ac}if(M.ie&&M.win&&ae.readyState!=4){var Y=C("div");X+="SWFObjectNew";Y.setAttribute("id",X);ae.parentNode.insertBefore(Y,ae);ae.style.display="none";(function(){if(ae.readyState==4){ae.parentNode.removeChild(ae)}else{setTimeout(arguments.callee,10)}})()}u(aa,ab,X)}}function p(Y){if(M.ie&&M.win&&Y.readyState!=4){var X=C("div");Y.parentNode.insertBefore(X,Y);X.parentNode.replaceChild(g(Y),X);Y.style.display="none";(function(){if(Y.readyState==4){Y.parentNode.removeChild(Y)}else{setTimeout(arguments.callee,10)}})()}else{Y.parentNode.replaceChild(g(Y),Y)}}function g(ab){var aa=C("div");if(M.win&&M.ie){aa.innerHTML=ab.innerHTML}else{var Y=ab.getElementsByTagName(r)[0];if(Y){var ad=Y.childNodes;if(ad){var X=ad.length;for(var Z=0;Z<X;Z++){if(!(ad[Z].nodeType==1&&ad[Z].nodeName=="PARAM")&&!(ad[Z].nodeType==8)){aa.appendChild(ad[Z].cloneNode(true))}}}}}return aa}function u(ai,ag,Y){var X,aa=c(Y);if(M.wk&&M.wk<312){return X}if(aa){if(typeof ai.id==D){ai.id=Y}if(M.ie&&M.win){var ah="";for(var ae in ai){if(ai[ae]!=Object.prototype[ae]){if(ae.toLowerCase()=="data"){ag.movie=ai[ae]}else{if(ae.toLowerCase()=="styleclass"){ah+=' class="'+ai[ae]+'"'}else{if(ae.toLowerCase()!="classid"){ah+=" "+ae+'="'+ai[ae]+'"'}}}}}var af="";for(var ad in ag){if(ag[ad]!=Object.prototype[ad]){af+='<param name="'+ad+'" value="'+ag[ad]+'" />'}}aa.outerHTML='<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"'+ah+">"+af+"</object>";N[N.length]=ai.id;X=c(ai.id)}else{var Z=C(r);Z.setAttribute("type",q);for(var ac in ai){if(ai[ac]!=Object.prototype[ac]){if(ac.toLowerCase()=="styleclass"){Z.setAttribute("class",ai[ac])}else{if(ac.toLowerCase()!="classid"){Z.setAttribute(ac,ai[ac])}}}}for(var ab in ag){if(ag[ab]!=Object.prototype[ab]&&ab.toLowerCase()!="movie"){e(Z,ab,ag[ab])}}aa.parentNode.replaceChild(Z,aa);X=Z}}return X}function e(Z,X,Y){var aa=C("param");aa.setAttribute("name",X);aa.setAttribute("value",Y);Z.appendChild(aa)}function y(Y){var X=c(Y);if(X&&X.nodeName=="OBJECT"){if(M.ie&&M.win){X.style.display="none";(function(){if(X.readyState==4){b(Y)}else{setTimeout(arguments.callee,10)}})()}else{X.parentNode.removeChild(X)}}}function b(Z){var Y=c(Z);if(Y){for(var X in Y){if(typeof Y[X]=="function"){Y[X]=null}}Y.parentNode.removeChild(Y)}}function c(Z){var X=null;try{X=j.getElementById(Z)}catch(Y){}return X}function C(X){return j.createElement(X)}function i(Z,X,Y){Z.attachEvent(X,Y);I[I.length]=[Z,X,Y]}function F(Z){var Y=M.pv,X=Z.split(".");X[0]=parseInt(X[0],10);X[1]=parseInt(X[1],10)||0;X[2]=parseInt(X[2],10)||0;return(Y[0]>X[0]||(Y[0]==X[0]&&Y[1]>X[1])||(Y[0]==X[0]&&Y[1]==X[1]&&Y[2]>=X[2]))?true:false}function v(ac,Y,ad,ab){if(M.ie&&M.mac){return}var aa=j.getElementsByTagName("head")[0];if(!aa){return}var X=(ad&&typeof ad=="string")?ad:"screen";if(ab){n=null;G=null}if(!n||G!=X){var Z=C("style");Z.setAttribute("type","text/css");Z.setAttribute("media",X);n=aa.appendChild(Z);if(M.ie&&M.win&&typeof j.styleSheets!=D&&j.styleSheets.length>0){n=j.styleSheets[j.styleSheets.length-1]}G=X}if(M.ie&&M.win){if(n&&typeof n.addRule==r){n.addRule(ac,Y)}}else{if(n&&typeof j.createTextNode!=D){n.appendChild(j.createTextNode(ac+" {"+Y+"}"))}}}function w(Z,X){if(!m){return}var Y=X?"visible":"hidden";if(J&&c(Z)){c(Z).style.visibility=Y}else{v("#"+Z,"visibility:"+Y)}}function L(Y){var Z=/[\\\"<>\.;]/;var X=Z.exec(Y)!=null;return X&&typeof encodeURIComponent!=D?encodeURIComponent(Y):Y}var d=function(){if(M.ie&&M.win){window.attachEvent("onunload",function(){var ac=I.length;for(var ab=0;ab<ac;ab++){I[ab][0].detachEvent(I[ab][1],I[ab][2])}var Z=N.length;for(var aa=0;aa<Z;aa++){y(N[aa])}for(var Y in M){M[Y]=null}M=null;for(var X in swfobject){swfobject[X]=null}swfobject=null})}}();return{registerObject:function(ab,X,aa,Z){if(M.w3&&ab&&X){var Y={};Y.id=ab;Y.swfVersion=X;Y.expressInstall=aa;Y.callbackFn=Z;o[o.length]=Y;w(ab,false)}else{if(Z){Z({success:false,id:ab})}}},getObjectById:function(X){if(M.w3){return z(X)}},embedSWF:function(ab,ah,ae,ag,Y,aa,Z,ad,af,ac){var X={success:false,id:ah};if(M.w3&&!(M.wk&&M.wk<312)&&ab&&ah&&ae&&ag&&Y){w(ah,false);K(function(){ae+="";ag+="";var aj={};if(af&&typeof af===r){for(var al in af){aj[al]=af[al]}}aj.data=ab;aj.width=ae;aj.height=ag;var am={};if(ad&&typeof ad===r){for(var ak in ad){am[ak]=ad[ak]}}if(Z&&typeof Z===r){for(var ai in Z){if(typeof am.flashvars!=D){am.flashvars+="&"+ai+"="+Z[ai]}else{am.flashvars=ai+"="+Z[ai]}}}if(F(Y)){var an=u(aj,am,ah);if(aj.id==ah){w(ah,true)}X.success=true;X.ref=an}else{if(aa&&A()){aj.data=aa;P(aj,am,ah,ac);return}else{w(ah,true)}}if(ac){ac(X)}})}else{if(ac){ac(X)}}},switchOffAutoHideShow:function(){m=false},ua:M,getFlashPlayerVersion:function(){return{major:M.pv[0],minor:M.pv[1],release:M.pv[2]}},hasFlashPlayerVersion:F,createSWF:function(Z,Y,X){if(M.w3){return u(Z,Y,X)}else{return undefined}},showExpressInstall:function(Z,aa,X,Y){if(M.w3&&A()){P(Z,aa,X,Y)}},removeSWF:function(X){if(M.w3){y(X)}},createCSS:function(aa,Z,Y,X){if(M.w3){v(aa,Z,Y,X)}},addDomLoadEvent:K,addLoadEvent:s,getQueryParamValue:function(aa){var Z=j.location.search||j.location.hash;if(Z){if(/\?/.test(Z)){Z=Z.split("?")[1]}if(aa==null){return L(Z)}var Y=Z.split("&");for(var X=0;X<Y.length;X++){if(Y[X].substring(0,Y[X].indexOf("="))==aa){return L(Y[X].substring((Y[X].indexOf("=")+1)))}}}return""},expressInstallCallback:function(){if(a){var X=c(R);if(X&&l){X.parentNode.replaceChild(l,X);if(Q){w(Q,true);if(M.ie&&M.win){l.style.display="block"}}if(E){E(B)}}a=false}}}}();
