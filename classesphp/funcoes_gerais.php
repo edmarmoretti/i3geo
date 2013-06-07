@@ -1298,6 +1298,8 @@ Retorno:
 */
 function criaLayer($oMapa,$ms_tipo,$ms_status,$metaTema,$metaClasse="SIM",$reposiciona=true)
 {
+	$versao = versao();
+	$versao = $versao["principal"];
 	$l = ms_newLayerObj($oMapa);
 	$l->set("type",$ms_tipo);
 	$l->set("name", nomeRandomico());
@@ -1305,6 +1307,11 @@ function criaLayer($oMapa,$ms_tipo,$ms_status,$metaTema,$metaClasse="SIM",$repos
 	$l->setmetadata("classe",$metaClasse);
 	$l->set("status",$ms_status);
 	$l->set("template","none.htm");
+	//evita problemas no modo tile
+	if(versao > 5){
+		$l->setprocessing("LABEL_NO_CLIP=True");
+		$l->setprocessing("POLYLINE_NO_CLIP=True");
+	}
 	$classe = ms_newClassObj($l);
 	$classe->set("name","");
 	$estilo = ms_newStyleObj($classe);

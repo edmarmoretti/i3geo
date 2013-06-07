@@ -973,6 +973,8 @@ i3GEO.Interface = {
 						urllayer = url+"&cache=&layer="+camada.name+"&r="+Math.random();
 					}
 					try{
+						//Layer types do mapserver
+						//MS_LAYER_POINT, MS_LAYER_LINE, MS_LAYER_POLYGON, MS_LAYER_RASTER, MS_LAYER_ANNOTATION (deprecated since 6.2), MS_LAYER_QUERY, MS_LAYER_CIRCLE, MS_LAYER_TILEINDEX, MS_LAYER_CHART
 						temp = camada.type === 0 ? opcoes.gutter = 20 : opcoes.gutter = 0;
 						temp = camada.transitioneffect === "nao" ? opcoes.transitionEffect = "null" : opcoes.transitionEffect = "resize";
 						//
@@ -990,7 +992,7 @@ i3GEO.Interface = {
 							{layer.url = layer.url+"&SRS="+camada.wmssrs+"&CRS="+camada.wmssrs;}
 						}
 						else{
-							if(camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim" || camada.connectiontype === 10 || (camada.type === 0 && camada.cache === "nao") || camada.type === 4 || camada.type === 8 )
+							if(camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim" || camada.connectiontype === 10 || (camada.type === 0 && camada.cache === "nao") || camada.type === 8 )
 							{opcoes.singleTile = true;}
 							else{
 								temp = camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);

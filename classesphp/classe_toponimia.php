@@ -198,8 +198,8 @@ Retorno:
 		}
 		$nclasses = $this->layer->numclasses;
 		for ($i=0; $i < $nclasses; ++$i){
-			$novac = $this->layer->getclass($i);
-			$label = $novac->label;
+			$novac = $this->layer->getclass($i);		
+			$label = $novac->getlabel(0);
 			if($wrap != "")
 			{
 				$label->set("maxlength",1);

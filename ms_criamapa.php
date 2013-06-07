@@ -499,7 +499,7 @@ Adapta os dados de cada layer.
 Faz altera&ccedil;&otilde;es em cada layer caso sejam necess&aacute;rias.
 */
 function adaptaLayers(){
-	global $tmpfname;
+	global $tmpfname,$versao;
 	$mapa = ms_newMapObj($tmpfname);
 	$path = $mapa->shapepath;
 	$numlayers = $mapa->numlayers;
@@ -524,6 +524,10 @@ function adaptaLayers(){
 		//para impedir erros na legenda
 		if($layer->getmetadata("classe") == "")
 		{$layer->setmetadata("classe","");}
+		if($versao > 5){
+			$layer->setprocessing("LABEL_NO_CLIP=True");
+			$layer->setprocessing("POLYLINE_NO_CLIP=True");
+		}
 	}
 	$mapa->save($tmpfname);
 	erroCriacao();

@@ -301,6 +301,10 @@ else{
 							}
 						}
 						autoClasses($l,$oMap);
+						if($versao > 5){
+							$l->setprocessing("LABEL_NO_CLIP=True");
+							$l->setprocessing("POLYLINE_NO_CLIP=True");
+						}
 						ms_newLayerObj($oMap, $l);
 						//$req->setParameter("LAYERS", "mundo");
 					}

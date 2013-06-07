@@ -22,6 +22,7 @@ Cria um novo tema com a topon&iacute;mia do tema atual.
 		if(!isset($novotema))
 		{$novotema = "sim";}
 		$retorno = $m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema);
+		
 		if ($tipo != "teste")
 		{$m->salva();$_SESSION["contadorsalva"]++;}
 	break;

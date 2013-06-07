@@ -247,6 +247,9 @@ class gvsig2mapfile{
 			$oLayer->setmetadata("TEMA",$lname);
 			$oLayer->set("template","none.htm");
 			$oLayer = $this->data2layer($oLayer,$dataLayer);
+			//evita problemas no modo tile
+			$oLayer->setprocessing("LABEL_NO_CLIP=True");
+			$oLayer->setprocessing("POLYLINE_NO_CLIP=True");
 		}
 		return $objMap;
 	}

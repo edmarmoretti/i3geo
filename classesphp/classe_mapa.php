@@ -306,8 +306,8 @@ string - javascript com os parametros
 					}
 				}
 				$tiles = "";
-				if($oLayer->labelitem != "")
-				{$tiles = "nao";}
+				//if($oLayer->labelitem != "")
+				//{$tiles = "nao";}
 				$temas[] = array(
 					"name"=>($oLayer->name),
 					"nomeoriginal"=>($oLayer->getmetadata("nomeoriginal")),
@@ -1045,6 +1045,11 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 					//include_once($locaplic."/classesphp/funcoes_gerais.php");
 					foreach ($novosnomes as $n){
 						$nlayer = $nmap->getlayerbyname($n);
+						//evita problemas no modo tile
+						if($this->v > 5){
+							$nlayer->setprocessing("LABEL_NO_CLIP=True");
+							$nlayer->setprocessing("POLYLINE_NO_CLIP=True");
+						}
 						//para impedir erros na legenda
 						if($nlayer->getmetadata("classe") == ""){
 							$nlayer->setmetadata("classe","");
@@ -1701,6 +1706,11 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 			$layer->set("name",basename($nomeshp));
 			$layer->setmetadata("DOWNLOAD","sim");
 			$layer->setmetadata("TEMALOCAL","SIM");
+			//evita problemas no modo tile
+			if($this->v > 5){
+				$layer->setprocessing("LABEL_NO_CLIP=True");
+				$layer->setprocessing("POLYLINE_NO_CLIP=True");
+			}
 			if($tipol == MS_LAYER_POLYGON)
 			{
 				$classe = $layer->getclass(0);
