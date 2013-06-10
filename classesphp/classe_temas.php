@@ -125,8 +125,9 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 			else
 			include_once("funcoes_gerais.php");
 		$this->v = versao();
+		$this->vi = $this->v["inteiro"];
 		$this->v = $this->v["principal"];
-		$this->vi = $this->vi["inteiro"];
+		
 			$this->locaplic = $locaplic;
 			if($map_file != "")
 		{
@@ -1104,7 +1105,8 @@ Adiciona LABEL em uma classe de um tema
 */
 	function adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position){
 		if($this->vi >= 60200){
-			$label = $novac->getLabel(0);
+			$indiceLabel = $novac->addLabel(new labelObj());
+			$label = $novac->getLabel($indiceLabel);
 		}
 		else{
 			$label = $novac->label;
@@ -1115,7 +1117,12 @@ Adiciona LABEL em uma classe de um tema
 			$s = "CLASS LABEL WRAP '$wrap' END END";
 			$novac->updateFromString($s);
 		}
-		$label = $novac->label;
+		if($this->vi >= 60200){
+			$label = $novac->getLabel($indiceLabel);
+		}
+		else{
+			$label = $novac->label;
+		}
 		if($fonte != "bitmap")
 		{
 			$label->set("type",MS_TRUETYPE);
