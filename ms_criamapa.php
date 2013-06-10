@@ -145,7 +145,7 @@ else
 if(!isset($funcao))
 {ob_end_clean();}
 /*
- Carrega as extens&otilde;es PHP
+Carrega as extens&otilde;es PHP
 
 Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o.
 A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela própria inicializa&ccedil;&atilde;o do PHP.
@@ -232,7 +232,7 @@ criaIndex();
 $tmpfname = $diretorios[0];
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 /*
- Prepara as vari&aacute;veis que ser&atilde;o incluidas na se&ccedil;&atilde;o
+Prepara as vari&aacute;veis que ser&atilde;o incluidas na se&ccedil;&atilde;o
 
 As vari&aacute;veis v&ecirc;m do arquivo ms_configura.php e s&atilde;o armazenadas em uma se&ccedil;&atilde;o com nome espec&iacute;fico para o i3geo.
 */
@@ -262,24 +262,33 @@ $expoeMapfile_ = $expoeMapfile;
 $googleApiKey_ = $googleApiKey;
 $mensagemInicia_ = $mensagemInicia;
 $interfacePadrao_ = $interfacePadrao;
-if(isset($interface)){$interface_ = $interface;}
+if(isset($interface))
+{$interface_ = $interface;}
 else{$interface_ = $interfacePadrao;}
-if(isset($kmlurl)){$kmlurl_ = $kmlurl;}
+if(isset($kmlurl))
+{$kmlurl_ = $kmlurl;}
 //
 //se houver string de conex&atilde;o para substitui&ccedil;&atilde;o
 //o modo cgi n&atilde;o ir&aacute; funcionar
 //
 if($postgis_mapa != "")
 {$utilizacgi = "nao";}
-if(!isset($perfil)){$perfil="";}
+if(!isset($perfil))
+{$perfil="";}
 $perfil_ = $perfil;
 $utilizacgi_ = $utilizacgi;
 if ((isset($navegadoresLocais)) && ($navegadoresLocais != ""))
-$navegadoresLocais_ = "sim";
+{$navegadoresLocais_ = "sim";}
 else
-$navegadoresLocais_ = "nao";
+{$navegadoresLocais_ = "nao";}
+if(empty($i3georendermode)){
+	$i3georendermode_ = 0;
+}
+else{
+	$i3georendermode_ = $i3georendermode;
+}
 /*
- Inicia a se&ccedil;&atilde;o
+Inicia a se&ccedil;&atilde;o
 
 O i3geo inicia uma se&ccedil;&atilde;o espec&iacute;fica no servidor, denominada i3GeoPHP.
 Se j&aacute; houver uma se&ccedil;&atilde;o aberta, em fun&ccedil;&atilde;o de outro browser estar ativo, cria uma nova. Faz a cópia das vari&aacute;veis definidas para itens da se&ccedil;&atilde;o.
@@ -291,7 +300,7 @@ if (!isset($g_sid)){$g_sid="";}
 if(isset($_SESSION["map_file"]) || $g_sid != "" || $g_sid == "undefined")
 {session_regenerate_id();$_SESSION = array();}
 /*
- Aguarde
+Aguarde
 
 Monta a apresenta&ccedil;&atilde;o do aguarde.
 
@@ -330,6 +339,7 @@ $_SESSION['fingerprint'] = md5($fingerprint . session_id());
 $_SESSION["mapdir"] = $diretorios[1];
 $_SESSION["imgdir"] = $diretorios[2];
 $_SESSION["contadorsalva"] = 0;//essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
+$_SESSION["i3georendermode"] = $i3georendermode_;
 //
 //pega todas as vari&aacute;veis da sess&atilde;o, mesmo as que foram definidas anteriormente
 //
@@ -338,7 +348,7 @@ foreach(array_keys($_SESSION) as $k)
 {eval("\$".$k."='".$_SESSION[$k]."';");}
 $postgis_mapa = $postgis_mapa_;
 /*
- Define os arquivos .map
+Define os arquivos .map
 
 Seleciona os arquivos mapfile que ser&atilde;o carregados como base conforme o tipo de sistema operacional.
 
@@ -372,7 +382,7 @@ if(!isset($base) || $base == "")
 //if(!isset($estadosl))
 //{$estadosl = "estadosl";}
 /*
- Cria os objetos map que ser&atilde;o processados
+Cria os objetos map que ser&atilde;o processados
 
 O arquivo definido em $base &eacute; lido como um objeto map. Esse objeto ser&aacute; processado para incluir novos layers e alterar outros par&acirc;metros definidos pelo usu&aacute;rio.
 */
@@ -394,7 +404,7 @@ if(!empty($gvsiggvp)){
 	incluiMapaGvsig($gvsiggvp,$gvsigview);
 }
 /*
- Par&acirc;metros adicionais.
+Par&acirc;metros adicionais.
 
 Processa os par&acirc;metros para a inicializa&ccedil;&atilde;o verificando se foram passados pela URL ou n&atilde;o.
 */
@@ -1141,7 +1151,7 @@ function incluiTemaWms()
 	else
 	$nome = $nome_wms;
 	$m = new Mapa($tmpfname);
- 	$m->adicionatemawms($layer_wms,$url_wms,$style_wms,$srs_wms,$image_wms,$locaplic,"",$versao_wms,$nome,"","","","","nao","text/plain","");
+	$m->adicionatemawms($layer_wms,$url_wms,$style_wms,$srs_wms,$image_wms,$locaplic,"",$versao_wms,$nome,"","","","","nao","text/plain","");
 	$salvo = $m->salva($tmpfname);
 	//echo $tmpfname;exit;
 	erroCriacao();

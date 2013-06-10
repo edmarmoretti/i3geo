@@ -63,6 +63,17 @@ $i3geomaster = array(
 		array("usuario"=>"admin", "senha"=>"admin")
 );
 /*
+	Variable: i3georendermode
+
+	Opcoes que definem a rotina que sera utilizada para enviar ao navegador as imagens geradas de cada camada
+
+	0 - modo default. Utiliza a funcao imagepng() do PHP para enviar a imagem ao navegador
+	1 - utiliza a funcao do Mapserver saveImage() para enviar a imagem ao navegador (e mais rapida, mas nao funciona em algumas versoes do Mapserver)
+	2 - utiliza X-Sendfile (mais rapido que as outras opcoes) mas exige modificacoes na instalacao do Apache. Veja em: https://tn123.org/mod_xsendfile/ e http://edmarmoretti.blogspot.com.br/
+ */
+//@TODO documentar no manual de administracao
+$i3georendermode = 0;
+/*
 	Variavel: linkedinoauth (ainda n&atilde;o implementado)
 
 	Par&acirc;metros registrados no Linkedin para permitir que o i3Geo fa&ccedil;a autentica&ccedil;&atilde;o com base na conta do usu&aacute;rio

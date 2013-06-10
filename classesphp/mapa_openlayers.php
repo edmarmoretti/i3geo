@@ -5,10 +5,11 @@ Title: mapa_openlayers.php
 Faz o processamento de um mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substitui&ccedil;&atilde;o
 das vari&aacute;veis de conex&atilde;o com banco e outras opera&ccedil;&otilde;es espec&iacute;ficas do i3Geo.
 
-&Eacute; utilizado especificamente nas interfaces que utilizam a biblioteca OpenLayers em LAYERS do tipo WMS.
+&Eacute; utilizado especificamente nas interfaces que utilizam a biblioteca OpenLayers.
 
-Precisa do codigo da "section" PHP aberta pelo i3Geo ou o codigo para acesso especial indicado no par&acirc;metro telaR
+Precisa do codigo da "section" PHP aberta pelo i3Geo (veja ms_criamapa.php) ou o codigo para acesso especial indicado no par&acirc;metro telaR
 (veja a ferramenta TELAREMOTA).
+
 
 Parametros:
 
@@ -93,7 +94,7 @@ $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
 
 if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
-	carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"]);
+	carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"],$_SESSION["i3georendermode"]);
 }
 //
 //map_fileX e para o caso register_globals = On no PHP.INI
@@ -259,13 +260,14 @@ else{
 		$status = $l->whichShapes($mapa->extent);
 		while ($shape = $l->nextShape())
 		{
-		  if(in_array($shape->index,$shp))
-		  $shape->draw($mapa,$l,$img);
+			if(in_array($shape->index,$shp))
+			$shape->draw($mapa,$l,$img);
 		}
 		$l->close();
 	}
 	$cache = false;
 }
+//nao usa o cache pois e necessario processar a imagem com alguma rotina de filtro
 if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
 	if($img->imagepath == "")
 	{echo "Erro IMAGEPATH vazio";exit;}
@@ -282,21 +284,51 @@ if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
 }
 else{
 	if($cache == true && $_GET["cache"] != "nao"){
-		//$nomer = salvaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);
+		//cache ativo. Salva a imagem em cache
 		$nomer = salvaCacheImagem($cachedir,$map_fileX,$_GET["tms"]);
-		header('Content-Length: '.filesize($nomer));
-		header('Content-Type: image/png');
-		header('Cache-Control: max-age=3600, must-revalidate');
-		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
-		fpassthru(fopen($nomer, 'rb'));
+		if($_SESSION["i3georendermode"] == 2){
+			ob_clean();
+			header("X-Sendfile: $nomer");
+			header("Content-type: image/png");
+		}
+		else{
+			ob_clean();
+			header('Content-Length: '.filesize($nomer));
+			header('Content-Type: image/png');
+			header('Cache-Control: max-age=3600, must-revalidate');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
+			fpassthru(fopen($nomer, 'rb'));
+		}
 	}
 	else{
+		//cache inativo
 		if($img->imagepath == "")
 		{echo "Erro IMAGEPATH vazio";exit;}
-		//se der erro aqui veja em mapa_openlayers_alternativo.php
-		header('Content-Type: image/png');
-		$img->saveImage();
+		if($_SESSION["i3georendermode"] == 0){
+			$nomer = ($img->imagepath)."temp".nomeRand().".png";
+			$img->saveImage($nomer);
+			$img = imagecreatefrompng($nomer);
+			imagealphablending($img, false);
+			imagesavealpha($img, true);
+			ob_clean();
+			echo header("Content-type: image/png \n\n");
+			imagepng($img);
+			imagedestroy($img);
+			exit;
+		}
+		if($_SESSION["i3georendermode"] == 1){
+			ob_clean();
+			header('Content-Type: image/png');
+			$img->saveImage();
+		}
+		if($_SESSION["i3georendermode"] == 2){
+			$nomer = ($img->imagepath)."temp".nomeRand().".png";
+			$img->saveImage($nomer);
+			ob_clean();
+			header("X-Sendfile: $nomer");
+			header("Content-type: image/png");
+		}
 	}
 }
 function salvaCacheImagem($cachedir,$map,$tms){
@@ -315,7 +347,7 @@ function salvaCacheImagem($cachedir,$map,$tms){
 	}
 	return $nome;
 }
-function carregaCacheImagem($cachedir,$map,$tms){
+function carregaCacheImagem($cachedir,$map,$tms,$i3georendermode=0){
 	if($cachedir == ""){
 		$nome = dirname(dirname($map))."/cache".$tms;
 	}
@@ -323,14 +355,18 @@ function carregaCacheImagem($cachedir,$map,$tms){
 		$nome = $cachedir.$tms;
 	}
 	if(file_exists($nome)){
-		header('Content-Length: '.filesize($nome));
-		header('Content-Type: image/png');
-		header('Cache-Control: max-age=3600, must-revalidate');
-		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
-		$etag = md5_file($nome);
-		header('Etag: '.$etag);
-		fpassthru(fopen($nome, 'rb'));
+		if($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)){
+			header('Content-Length: '.filesize($nome));
+			header('Content-Type: image/png');
+			header('Cache-Control: max-age=3600, must-revalidate');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
+			fpassthru(fopen($nome, 'rb'));
+		}
+		else{
+			header("X-Sendfile: $nome");
+			header("Content-type: image/png");
+		}
 		exit;
 	}
 }

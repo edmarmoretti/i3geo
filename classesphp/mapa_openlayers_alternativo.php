@@ -59,6 +59,10 @@ i3geo/classesphp/mapa_openlayers.php
 
 */
 error_reporting(0);
+//para efeitos de compatibilidade
+if (!function_exists('ms_GetVersion')){
+	include_once ("carrega_ext.php");
+}
 //carrega dados da se&ccedil;&atilde;o, verifica seguran&ccedil;a
 inicializa();
 //
@@ -255,8 +259,8 @@ else{
 		$status = $l->whichShapes($mapa->extent);
 		while ($shape = $l->nextShape())
 		{
-		  if(in_array($shape->index,$shp))
-		  $shape->draw($mapa,$l,$img);
+			if(in_array($shape->index,$shp))
+			$shape->draw($mapa,$l,$img);
 		}
 		$l->close();
 	}

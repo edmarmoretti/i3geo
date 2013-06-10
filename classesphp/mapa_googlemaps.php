@@ -92,6 +92,7 @@ if(!isset($_SESSION["map_file"])){
 $map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 $cachedir = $_SESSION["cachedir"];
+$i3georendermode = $_SESSION["i3georendermode"];
 //
 //converte a requisi&ccedil;&atilde;o do tile em coordenadas geo
 //http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#tile_numbers_to_lon.2Flat_2
@@ -104,7 +105,7 @@ $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
 
 if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
-	carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"]);
+	carregaCacheImagem();
 }
 
 $n = pow(2,$z);
@@ -297,17 +298,46 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum"){
 else{
 	if($cache == true){
 		$nomer = salvaCacheImagem();
-		header('Content-Length: '.filesize($nomer));
-		header('Content-Type: image/png');
-		header('Cache-Control: max-age=3600, must-revalidate');
-		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
-		fpassthru(fopen($nomer, 'rb'));
+		if($_SESSION["i3georendermode"] == 2){
+			ob_clean();
+			header("X-Sendfile: $nomer");
+			header("Content-type: image/png");
+		}
+		else{
+			ob_clean();
+			header('Content-Length: '.filesize($nomer));
+			header('Content-Type: image/png');
+			header('Cache-Control: max-age=3600, must-revalidate');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
+			fpassthru(fopen($nomer, 'rb'));
+		}
 	}
 	else{
-		//se der erro aqui veja em mapa_googlemaps_alternativo.php
-		header('Content-Type: image/png');
-		$img->saveImage();
+		if($_SESSION["i3georendermode"] == 0){
+			$nomer = ($img->imagepath)."temp".nomeRand().".png";
+			$img->saveImage($nomer);
+			$img = imagecreatefrompng($nomer);
+			imagealphablending($img, false);
+			imagesavealpha($img, true);
+			ob_clean();
+			echo header("Content-type: image/png \n\n");
+			imagepng($img);
+			imagedestroy($img);
+			exit;
+		}
+		if($_SESSION["i3georendermode"] == 1){
+			ob_clean();
+			header('Content-Type: image/png');
+			$img->saveImage();
+		}
+		if($_SESSION["i3georendermode"] == 2){
+			$nomer = ($img->imagepath)."temp".nomeRand().".png";
+			$img->saveImage($nomer);
+			ob_clean();
+			header("X-Sendfile: $nomer");
+			header("Content-type: image/png");
+		}
 	}
 	exit;
 }
@@ -330,7 +360,7 @@ function salvaCacheImagem(){
 	return $nome;
 }
 function carregaCacheImagem(){
-	global $img,$cachedir,$x,$y,$z,$map_fileX;
+	global $img,$cachedir,$x,$y,$z,$map_fileX,$i3georendermode;
 	$layer = $_GET["layer"];
 	if($layer == "")
 	{$layer = "fundo";}
@@ -338,50 +368,20 @@ function carregaCacheImagem(){
 		$cachedir = dirname(dirname($map_fileX))."/cache";
 	}
 	$c = $cachedir."/googlemaps/$layer/$z/$x";
-	if(file_exists($c."/$y.png")){
-		header('Content-Length: '.filesize($c."/$y.png"));
-		header('Content-Type: image/png');
-		fpassthru(fopen($c."/$y.png", 'rb'));
-		exit;
-	}
-}
-/*
-function salvaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
-	global $img,$map_size;
-	//layers que s&atilde;o sempre iguais
-	//error_reporting(0);
-	if($layer == "copyright" || $layer == "")
-	{$bbox = "";}
-	if($layer == "")
-	{$layer = "fundo";}
-	if($cachedir == "")
-	{$cachedir = dirname(dirname($map))."/cache/googlemaps/".$layer;}
-	else
-	{$cachedir = $cachedir."/googlemaps/".$layer;}
-	@mkdir($cachedir,0777);
-	$nome = $cachedir."/".$w.$h.$bbox.".png";
-	if(!file_exists($nome))
-	{$img->saveImage($nome);}
-	return $nome;
-}
-function carregaCacheImagem($cachedir,$bbox,$layer,$map,$w,$h){
-	if($layer == "copyright" || $layer == "")
-	{$bbox = "";}
-	if($layer == "")
-	{$layer = "fundo";}
-	$nome = $w.$h.$bbox.".png";
-	if($cachedir == "")
-	{$nome = dirname(dirname($map))."/cache/googlemaps/".$layer."/".$nome;}
-	else
-	{$nome = $cachedir."/googlemaps/".$layer."/".$nome;}
+	$nome = $c."/$y.png";
 	if(file_exists($nome)){
-		header('Content-Length: '.filesize($nome));
-		header('Content-Type: image/png');
-		fpassthru(fopen($nome, 'rb'));
+		if($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)){
+			header('Content-Length: '.filesize($nome));
+			header('Content-Type: image/png');
+			fpassthru(fopen($nome, 'rb'));
+		}
+		else{
+			header("X-Sendfile: $nome");
+			header("Content-type: image/png");
+		}
 		exit;
 	}
 }
-*/
 function nomeRand($n=10)
 {
 	$nomes = "";
