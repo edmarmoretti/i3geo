@@ -92,6 +92,15 @@ class Temas
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
+	/*
+	Variavel: $vi
+
+	Vers&atilde;o atual do Mapserver (valor inteiro)
+
+	Returns the MapServer version number (x.y.z) as an integer (x*10000 + y*100 + z). (New in v5.0) e.g. V5.4.3 would return 50403
+	*/
+	public $vi;
+
 /*
 function __construct
 
@@ -108,17 +117,18 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 */
 	function __construct($map_file,$tema=null,$locaplic="",$ext="")
 	{
-  		//error_reporting(0);
+			//error_reporting(0);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
 		$this->arquivo = $map_file;
-  		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		include_once($locaplic."/funcoes_gerais.php");
-  		else
-  		include_once("funcoes_gerais.php");
+			if(file_exists($locaplic."/funcoes_gerais.php"))
+			include_once($locaplic."/funcoes_gerais.php");
+			else
+			include_once("funcoes_gerais.php");
 		$this->v = versao();
 		$this->v = $this->v["principal"];
-  		$this->locaplic = $locaplic;
-  		if($map_file != "")
+		$this->vi = $this->vi["inteiro"];
+			$this->locaplic = $locaplic;
+			if($map_file != "")
 		{
 			$this->mapa = ms_newMapObj($map_file);
 			$this->arquivo = $map_file;
@@ -156,13 +166,13 @@ function: salva
 
 Salva o mapfile atual
 */
- 	function salva()
- 	{
-	  	if (connection_aborted()){exit();}
-	  	$this->mapa->save($this->arquivo);
+	function salva()
+	{
+			if (connection_aborted()){exit();}
+			$this->mapa->save($this->arquivo);
 	}
 /*
- function: pegaMetadata
+function: pegaMetadata
 
 Pega os metadata do tema
 
@@ -213,7 +223,7 @@ Nome da imagem gravada
 */
 	function gravaImagemCorpo()
 	{
-	 	$imgo = $this->mapa->draw();
+		$imgo = $this->mapa->draw();
 		$nome = ($imgo->imagepath).nomeRandomico().".png";
 		$imgo->saveImage($nome);
 		return ($imgo->imageurl).basename($nome);
@@ -449,7 +459,7 @@ Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa
 			$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
 			//echo "oi";exit;
 		}
-	  	if($this->mapa->getmetadata("interface") == "googlemaps")
+			if($this->mapa->getmetadata("interface") == "googlemaps")
 		{$this->mapa->setProjection($projO);}
 		return("ok");
 	}
@@ -547,7 +557,7 @@ $valor - Novo valor da transpar&ecirc;ncia
 */
 	function mudaTransparencia($valor)
 	{
-        //error_reporting(0);
+				//error_reporting(0);
 		$v = versao();
 		foreach ($this->grupo as $lg)
 		{
@@ -565,7 +575,7 @@ Muda o metadata CLASSE, invertendo seu valor
 */
 	function inverteStatusLegenda()
 	{
-        //error_reporting(0);
+				//error_reporting(0);
 		$valor = $this->layer->getmetadata("classe");
 		if($valor == "" || strtolower($valor) == "sim")
 		{$valor = "NAO";}
@@ -935,7 +945,7 @@ tema - código do tema
 	{
 		include_once($this->locaplic."/admin/php/xml.php");
 		require($this->locaplic."/classesphp/classe_menutemas.php");
-  		$menutemas = new Menutemas("","","",$this->locaplic);
+			$menutemas = new Menutemas("","","",$this->locaplic);
 		$linkfonte = "erro";
 		$tipo = "";
 		$this->xml = "";
@@ -1021,7 +1031,7 @@ Calcula a extens&atilde;o geogr&aacute;fica dos elementos selecionados de um tem
 			$ret->project($projInObj, $projOutObj);
 		}
 		$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
-	  	if($this->mapa->getmetadata("interface") == "googlemaps")
+			if($this->mapa->getmetadata("interface") == "googlemaps")
 		{$this->mapa->setProjection($projO);}
 		return("ok");
 	}
@@ -1093,7 +1103,12 @@ function: adicionaLabel
 Adiciona LABEL em uma classe de um tema
 */
 	function adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position){
-		$label = $novac->label;
+		if($this->vi >= 60200){
+			$label = $novac->getLabel(0);
+		}
+		else{
+			$label = $novac->label;
+		}
 		if($wrap != "")
 		{
 			$label->set("maxlength",1);
