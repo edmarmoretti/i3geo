@@ -1,6 +1,6 @@
 <?php
 /*
- Title: editormapfile.php
+Title: editormapfile.php
 
 Fun&ccedil;&otilde;es utilizadas pelo editor de arquivos mapfile.
 
@@ -85,12 +85,12 @@ error_reporting(0);
 switch (strtoupper($funcao))
 {
 	/*
-	 Note:
+	Note:
 
 	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 	/*
-	 Valor: CRIARNOVOMAP
+	Valor: CRIARNOVOMAP
 
 	Cria um novo mapfile
 
@@ -128,7 +128,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: EDITASIMBOLO
+	Valor: EDITASIMBOLO
 
 	Lista os s&iacute;mbolos de um determinado tipo
 
@@ -180,7 +180,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGALAYERS
+		Valor: PEGALAYERS
 
 		Lista os layers existentes em um mapfile
 
@@ -197,7 +197,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGAITENSLAYER
+		Valor: PEGAITENSLAYER
 
 		Lista os itens da tabela de atributos de um layer
 
@@ -216,7 +216,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: LIMPARCACHEMAPFILE
+		Valor: LIMPARCACHEMAPFILE
 
 		Apaga o diretório contendo o cache de um tema (mapfile)
 
@@ -251,7 +251,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: EXCLUIRMAPFILE
+		Valor: EXCLUIRMAPFILE
 
 		Exclui um mapfile.
 
@@ -299,7 +299,7 @@ switch (strtoupper($funcao))
 		}
 		break;
 		/*
-		 Valor: REFAZERLAYER
+		Valor: REFAZERLAYER
 
 		Altera um layer existente em um mapfile com base em um layer existente em outro mapfile
 
@@ -320,7 +320,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: CLONARMAPFILE
+		Valor: CLONARMAPFILE
 
 		Copia um mapfile existente
 
@@ -339,7 +339,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: CRIARNOVOLAYER
+		Valor: CRIARNOVOLAYER
 
 		Cria um novo layer em um mapfile
 
@@ -358,7 +358,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: EXCLUIRLAYER
+		Valor: EXCLUIRLAYER
 
 		Exclui um layer de um mapfile
 
@@ -378,7 +378,7 @@ switch (strtoupper($funcao))
 		break;
 
 		/*
-		 Valor: LISTACLASSES
+		Valor: LISTACLASSES
 
 		Lista as classes da legenda de um layer em um mapfile
 
@@ -397,7 +397,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: AUTOCLASSESLAYER
+		Valor: AUTOCLASSESLAYER
 
 		Cria classes em um layer com base na tabela de atributos
 
@@ -421,7 +421,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: CRIARNOVACLASSE
+		Valor: CRIARNOVACLASSE
 
 		Cria uma nova classe em um layer
 
@@ -440,7 +440,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: EXCLUIRCLASSE
+		Valor: EXCLUIRCLASSE
 
 		Cria uma nova classe em um layer
 
@@ -462,7 +462,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: LISTAESTILOS
+		Valor: LISTAESTILOS
 
 		Lista de estilos existentes em uma classe de um layer
 
@@ -483,7 +483,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: CRIARNOVOESTILO
+		Valor: CRIARNOVOESTILO
 
 		Adiciona um novo estilo em uma classe
 
@@ -504,7 +504,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: EXCLUIRESTILO
+		Valor: EXCLUIRESTILO
 
 		Exclui um estilo de uma classe
 
@@ -528,7 +528,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGAESTILO
+		Valor: PEGAESTILO
 
 		Obt&eacute;m os dados de um estilo de uma classe
 
@@ -551,7 +551,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERARESTILO
+		Valor: ALTERARESTILO
 
 		Altera um estilo de uma classe
 
@@ -603,7 +603,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGACONEXAO
+		Valor: PEGACONEXAO
 
 		Obt&eacute;m os valores dos elementos de conex&atilde;o com uma base de dados de um layer
 
@@ -622,7 +622,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERARCONEXAO
+		Valor: ALTERARCONEXAO
 
 		Altera os valores dos elementos de conex&atilde;o com uma base de dados de um layer
 
@@ -657,7 +657,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGAMETADADOS
+		Valor: PEGAMETADADOS
 
 		Obt&eacute;m os valores dos elementos de metadados de um layer
 
@@ -676,7 +676,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGATITULO
+		Valor: PEGATITULO
 
 		Obt&eacute;m os valores de titulo, descricao, etc
 
@@ -719,7 +719,7 @@ switch (strtoupper($funcao))
 		break;
 
 		/*
-		 Valor: ALTERARMETADADOS
+		Valor: ALTERARMETADADOS
 
 		Altera os valores dos elementos de metadados de um layer
 
@@ -813,7 +813,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGAGERAL
+		Valor: PEGAGERAL
 
 		Obt&eacute;m os valores dos elementos de configura&ccedil;&atilde;o geral de um layer
 
@@ -832,7 +832,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERARGERAL
+		Valor: ALTERARGERAL
 
 		Modifica os valores dos elementos de configura&ccedil;&atilde;o geral de um layer
 
@@ -898,7 +898,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGACLASSEGERAL
+		Valor: PEGACLASSEGERAL
 
 		Obt&eacute;m os valores dos elementos de configura&ccedil;&atilde;o geral de uma classe
 
@@ -919,7 +919,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERARCLASSEGERAL
+		Valor: ALTERARCLASSEGERAL
 
 		Altera os valores dos elementos de configura&ccedil;&atilde;o geral de uma classe
 
@@ -955,7 +955,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGACLASSELABEL
+		Valor: PEGACLASSELABEL
 
 		Obt&eacute;m os valores dos elementos de configura&ccedil;&atilde;o da topon&iacute;mia de uma classe
 
@@ -976,7 +976,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERARCLASSELABEL
+		Valor: ALTERARCLASSELABEL
 
 		Altera os valores dos elementos de configura&ccedil;&atilde;o da topon&iacute;mia de uma classe
 
@@ -1891,7 +1891,14 @@ function pegaClasseLabel()
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$classe = $layer->getclass($indiceClasse);
-	$label = $classe->label;
+	$v = versao();
+	$vi = $v["inteiro"];
+	if($vi >= 60200){
+		$label = $classe->getLabel(0);
+	}
+	else{
+		$label = $classe->label;
+	}
 	if ($label != "")
 	{
 		$dados["font"] = $label->font;

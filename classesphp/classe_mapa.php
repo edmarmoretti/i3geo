@@ -65,6 +65,14 @@ class Mapa
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
+	/*
+	Variavel: $vi
+
+	Vers&atilde;o atual do Mapserver (valor inteiro)
+
+	Returns the MapServer version number (x.y.z) as an integer (x*10000 + y*100 + z). (New in v5.0) e.g. V5.4.3 would return 50403
+	*/
+	public $vi;
 /*
 Function: __construct
 
@@ -76,20 +84,21 @@ $map_file - Endere&ccedil;o do mapfile no servidor.
 */
 	function __construct($map_file,$locaplic="")
 	{
-  		error_reporting(0);
-  		if (!function_exists('ms_newMapObj')) {return false;}
-  		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		include_once($locaplic."/funcoes_gerais.php");
-  		else
-  		include_once("funcoes_gerais.php");
+			error_reporting(0);
+			if (!function_exists('ms_newMapObj')) {return false;}
+			if(file_exists($locaplic."/funcoes_gerais.php"))
+			include_once($locaplic."/funcoes_gerais.php");
+			else
+			include_once("funcoes_gerais.php");
 		$this->v = versao();
+		$this->vi = $this->v["inteiro"];
 		$this->v = $this->v["principal"];
 		$this->qyfile = str_replace(".map",".qy",$map_file);
-  		$this->locaplic = $locaplic;
-  		if(!file_exists($map_file))
-  		{return $this->arquivo = false;}
-  		if(!@ms_newMapObj($map_file))
-  		{return $this->mapa = false;}
+			$this->locaplic = $locaplic;
+			if(!file_exists($map_file))
+			{return $this->arquivo = false;}
+			if(!@ms_newMapObj($map_file))
+			{return $this->mapa = false;}
 		$this->mapa = @ms_newMapObj($map_file);
 		$this->arquivo = $map_file;
 		$c = $this->mapa->numlayers;
@@ -104,10 +113,10 @@ Method: salva
 
 Salva o mapfile atual
 */
- 	function salva()
- 	{
-	  	if(connection_aborted()){exit();}
-	  	$this->mapa->save($this->arquivo);
+	function salva()
+	{
+			if(connection_aborted()){exit();}
+			$this->mapa->save($this->arquivo);
 	}
 /*
 Method: listaTemasBuscaRapida
@@ -141,8 +150,8 @@ Parametro:
 
 tipo {string} - OUTPUTFORMAT que ser&aacute; aplicado. deve existir no mapfile b&aacute;sico que iniciou o i3Geo
 */
- 	function mudaoutputformat($tipo)
- 	{
+	function mudaoutputformat($tipo)
+	{
 		foreach($this->layers as $l)
 		{$l->setMetaData("cache","");}
 		return $this->mapa->selectOutputFormat($tipo);
@@ -176,7 +185,7 @@ Grava a imagem do mapa atual
 */
 	function gravaImagemCorpo()
 	{
-	 	$imgo = $this->mapa->draw();
+		$imgo = $this->mapa->draw();
 		$nome = ($imgo->imagepath).nomeRandomico().".png";
 		$imgo->saveImage($nome);
 		$nome = ($imgo->imageurl).basename($nome);
@@ -374,9 +383,9 @@ Include:
 	{
 		ms_ResetErrorList();
 		if(file_exists($this->locaplic."/classe_imagem.php"))
-  		include_once($this->locaplic."/classe_imagem.php");
-  		else
-  		include_once("classe_imagem.php");
+			include_once($this->locaplic."/classe_imagem.php");
+			else
+			include_once("classe_imagem.php");
 		$nomer = "";
 		$qy = file_exists($this->qyfile);
 		if($qy)
@@ -632,7 +641,7 @@ nome
 		{
 			foreach ($this->layers as $layer)
 			{
-			 	if ($layer->getmetadata("ESCONDIDO") == "")
+				if ($layer->getmetadata("ESCONDIDO") == "")
 				{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}
 			}
 		}
@@ -735,7 +744,7 @@ nome
 				$res_count = $layer->getNumresults();
 				if ($res_count > 0)
 				{
-				 	$nometmp = pegaNome($layer,"UTF-8");
+					$nometmp = pegaNome($layer,"UTF-8");
 					$final[] = array("tema"=>$layer->name,"nome"=>$nometmp);
 				}
 			}
@@ -887,7 +896,12 @@ $incluitexto - sim|nao
 		$cor->setrgb($corlinha[0],$corlinha[1],$corlinha[2]);
 		if($incluitexto == "sim")
 		{
-			$label = $classe->label;
+			if($this->vi >= 60200){
+				$label = $classe->getLabel(0);
+			}
+			else{
+				$label = $classe->label;
+			}
 			$label->set("size",$tamanhotexto);
 			$label->set("type",MS_BITMAP);
 			if ($fonte != "bitmap")
@@ -1786,14 +1800,14 @@ $arq - Nome do arquivo.
 	}
 	function adicionaAcesso($codigo_tema,$locaplic)
 	{
-    	$resultado = array();
-    	include("$locaplic/admin/php/conexao.php");
-    	if(!empty($esquemaadmin)){
-    		$esquemaadmin = $esquemaadmin.".";
-    	}
-    	$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_acessostema (codigo_tema,nacessos,dia,mes,ano) VALUES ('$codigo_tema',1,".abs(date("d")).",".abs(date("m")).",".abs(date("Y")).")");
+			$resultado = array();
+			include("$locaplic/admin/php/conexao.php");
+			if(!empty($esquemaadmin)){
+				$esquemaadmin = $esquemaadmin.".";
+			}
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_acessostema (codigo_tema,nacessos,dia,mes,ano) VALUES ('$codigo_tema',1,".abs(date("d")).",".abs(date("m")).",".abs(date("Y")).")");
 		$dbh = null;
-    	$dbhw = null;
+			$dbhw = null;
 	}
 	//
 	//esta fun&ccedil;&atilde;o n&atilde;o est&aacute; concluida

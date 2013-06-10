@@ -65,6 +65,20 @@ class Toponimia
 	Nome do layer
 	*/
 	protected $nome;
+	/*
+	Variavel: $v
+
+	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
+	*/
+	public $v;
+	/*
+	Variavel: $vi
+
+	Vers&atilde;o atual do Mapserver (valor inteiro)
+
+	Returns the MapServer version number (x.y.z) as an integer (x*10000 + y*100 + z). (New in v5.0) e.g. V5.4.3 would return 50403
+	*/
+	public $vi;
 /*
 function __construct
 
@@ -77,28 +91,29 @@ $tema - nome do tema que ser&aacute; processado
 */
 	function __construct($map_file,$tema="",$locaplic="")
 	{
-  		//error_reporting(0);
-  		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		include_once($locaplic."/funcoes_gerais.php");
-  		else
-  		include_once("funcoes_gerais.php");
+		//error_reporting(0);
+		if(file_exists($locaplic."/funcoes_gerais.php"))
+		include_once($locaplic."/funcoes_gerais.php");
+		else
+		include_once("funcoes_gerais.php");
 		$this->v = versao();
+		$this->vi = $this->v["inteiro"];
 		$this->v = $this->v["principal"];
-  		$this->mapa = ms_newMapObj($map_file);
-  		$this->arquivo = $map_file;
-  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
- 		$this->layer = $this->mapa->getlayerbyname($tema);
-  		$this->nome = $tema;
+		$this->mapa = ms_newMapObj($map_file);
+		$this->arquivo = $map_file;
+		if($tema != "" && @$this->mapa->getlayerbyname($tema))
+		$this->layer = $this->mapa->getlayerbyname($tema);
+		$this->nome = $tema;
 	}
 /*
 function: salva
 
 Salva o mapfile atual
 */
- 	function salva()
- 	{
-	  	if (connection_aborted()){exit();}
-	  	$this->mapa->save($this->arquivo);
+	function salva()
+	{
+			if (connection_aborted()){exit();}
+			$this->mapa->save($this->arquivo);
 	}
 /*
 function: criaToponimia
@@ -198,8 +213,14 @@ Retorno:
 		}
 		$nclasses = $this->layer->numclasses;
 		for ($i=0; $i < $nclasses; ++$i){
-			$novac = $this->layer->getclass($i);		
-			$label = $novac->getlabel(0);
+			$novac = $this->layer->getclass($i);
+			if($this->vi >= 60200){
+				$indiceLabel = $novac->addLabel(new labelObj());
+				$label = $novac->getLabel($indiceLabel);
+			}
+			else{
+				$label = $novac->label;
+			}
 			if($wrap != "")
 			{
 				$label->set("maxlength",1);
@@ -207,7 +228,13 @@ Retorno:
 				$s = "CLASS LABEL WRAP '$wrap' END END";
 				$novac->updateFromString($s);
 			}
-			$label = $novac->label;
+			if($this->vi >= 60200){
+				$indiceLabel = $novac->addLabel(new labelObj());
+				$label = $novac->getLabel($indiceLabel);
+			}
+			else{
+				$label = $novac->label;
+			}
 			if ($fonte != "bitmap")
 			{
 				$label->set("type",MS_TRUETYPE);
@@ -254,7 +281,7 @@ Retorno:
 			$label->set("position",$p[$position]);
 		}
 		if ($tipo == "teste"){
-	 		$i = gravaImagemMapa($this->mapa);
+			$i = gravaImagemMapa($this->mapa);
 			return ($i["url"]);
 		}
 		else
