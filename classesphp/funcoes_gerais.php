@@ -221,10 +221,10 @@ Retorno:
 */
 function RGB2hex($rgb)
 {
-    $r = str_pad(dechex($rgb[0]), 2, '0', STR_PAD_LEFT);
-    $g = str_pad(dechex($rgb[1]), 2, '0', STR_PAD_LEFT);
-    $b = str_pad(dechex($rgb[2]), 2, '0', STR_PAD_LEFT);
-    return($r . $g . $b);
+		$r = str_pad(dechex($rgb[0]), 2, '0', STR_PAD_LEFT);
+		$g = str_pad(dechex($rgb[1]), 2, '0', STR_PAD_LEFT);
+		$b = str_pad(dechex($rgb[2]), 2, '0', STR_PAD_LEFT);
+		return($r . $g . $b);
 }
 /*
 Section: arquivos
@@ -414,9 +414,9 @@ function listaArquivos($diretorio)
 	{return "erro";}
 }
 /*
- Function: echoimg
+Function: echoimg
 
- Envia para o navegador uma imagem. Utilizado na tag IMG em arquivos HTML
+Envia para o navegador uma imagem. Utilizado na tag IMG em arquivos HTML
  */
 function echoimg($arquivo,$tipo){
 	echo header("Content-type: image/png \n\n");
@@ -893,9 +893,9 @@ Retorno:
 */
 function gravaImagemMapa($mapa)
 {
- 	if(is_string($mapa))
- 	{$mapa = ms_newMapObj($mapa);}
- 	$imgo = @$mapa->draw();
+	if(is_string($mapa))
+	{$mapa = ms_newMapObj($mapa);}
+	$imgo = @$mapa->draw();
 	if(!$imgo)
 	{
 		return array("url"=>"","arquivo"=>"");
@@ -1471,7 +1471,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 				{
 					$vreg = $shape->values[$ni];
 					if(strlen($vreg) > 255){
-					 $vreg = substr($vreg,0,255);
+					$vreg = substr($vreg,0,255);
 					}
 					$reg[] = $vreg;
 				}
@@ -1945,6 +1945,7 @@ function versao()
 	$versao["completa"] = $v;
 	$v = explode(".",$v);
 	$versao["principal"] = $v[0];
+	$versao["inteiro"] = ms_GetVersionInt();
 	return $versao;
 }
 /*
@@ -2134,8 +2135,8 @@ function autoClasses(&$nlayer,$mapa,$locaplic=null)
 			$legenda=true;
 			for($value=$rule["v0"]; $value<$rule["v1"]; $value+=$delta)
 			{
-    			$class = ms_newClassObj($nlayer);
-    			$style = ms_newStyleObj($class);
+					$class = ms_newClassObj($nlayer);
+					$style = ms_newStyleObj($class);
 				if ($legenda)
 				{
 					$class->set(name,round($value,0));
@@ -2361,7 +2362,7 @@ Return:
 function verificaEditores($editores)
 {
 	return;
-	if (strtolower($_SERVER['HTTP_HOST']) == "localhost")
+	if (strtolower($_SERVER['HTTP_HOST']) == "localhost" || strtolower($_SERVER['SERVER_NAME']) == "localhost")
 	{return "sim";}
 	$editor = "nao";
 	if($editores == ""){return $editor;}
@@ -2376,7 +2377,7 @@ function verificaEditores($editores)
 	return $editor;
 }
 /*
- Function: verificaPapelUsuario
+Function: verificaPapelUsuario
 
 Verifica se o usu&aacute;rio logado est&aacute; cadastrado em determinado papel.
 
@@ -2546,11 +2547,11 @@ function listaLayersIndevidos($map_file){
 	$restritos = listaTemasRestritos();
 	/*
 		array(1) {
-		  ["_wlocalirestrito"]=>
-		  array(1) {
+			["_wlocalirestrito"]=>
+			array(1) {
 			[0]=>
 			string(1) "1"
-		  }
+			}
 		}
 	*/
 	if(count($restritos) > 0){
@@ -2590,7 +2591,7 @@ function listaLayersIndevidos($map_file){
 	return $indevidos;
 }
 /*
- Function: listaTemasIndevidos
+Function: listaTemasIndevidos
 
 Lista os temas que sao restritos e que nao sao permitidos ao usuario logado
 */
@@ -2612,7 +2613,7 @@ function listaTemasIndevidos(){
 	return $indevidos;
 }
 /*
- Function: listaGruposUsrLogin
+Function: listaGruposUsrLogin
 
 Lista os grupos ao qual pertence o usuario atualmente logado
 */

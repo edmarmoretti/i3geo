@@ -387,7 +387,7 @@ i3GEOF.graficointerativo1 = {
 	novaJanela: function(){
 		var janela = "",
 			divid,
-			g = $i("i3GEOgraficointerativo1Grafico"),
+			g = $i("i3GEOgraficointerativo1guia4objCanvas"),
 			v = g.cloneNode(true),
 			cabecalho = function(){},
 			id = YAHOO.util.Dom.generateId(),
@@ -410,7 +410,6 @@ i3GEOF.graficointerativo1 = {
 		);
 		divid = janela[2].id;
 		$i(divid).style.marginTop = "0px";
-		v = g.cloneNode(true);
 		v.id = id+"ngrafico";
 		v.style.marginTop = "0px";
 		$i(divid).appendChild(v);

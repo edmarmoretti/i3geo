@@ -102,10 +102,13 @@ $versao = versao();
 $versao = $versao["principal"];
 $exts = get_loaded_extensions();
 echo "MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
-echo ms_GetVersion()."<br><br>";
+echo "Vers&atilde;o:<br>";
+echo ms_GetVersion();
+echo "<br><br>";
+var_dump (versao())."<br><br>";
 if(!function_exists("ms_GetVersion"))
 {echo "<span style=color:red >PARECE QUE O MAPSERVER NAO ESTA INSTALADO!!!<br><br>";}
-echo "---<br>";
+echo "<br>---<br>";
 
 if (get_cfg_var("safe_mode") == 1){
 	echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
