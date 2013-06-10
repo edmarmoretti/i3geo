@@ -229,7 +229,6 @@ Retorno:
 				$novac->updateFromString($s);
 			}
 			if($this->vi >= 60200){
-				$indiceLabel = $novac->addLabel(new labelObj());
 				$label = $novac->getLabel($indiceLabel);
 			}
 			else{
