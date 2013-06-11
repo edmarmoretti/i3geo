@@ -1,1 +1,0 @@
-def.type('pvc.PlotBgPanel',pvc.BasePanel).init(function(chart,parent,options){this.base(chart,parent,options)}).add({anchor:'fill',_getExtensionId:function(){return'plotBg'},_createCore:function(layoutInfo){this.pvPanel.borderPanel.lock('zOrder',-13).antialias(false);this.base(layoutInfo)}});

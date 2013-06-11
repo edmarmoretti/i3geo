@@ -1,1 +1,0 @@
-def.type('pvc.visual.legend.BulletItemRenderer');
