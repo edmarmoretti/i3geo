@@ -11,12 +11,16 @@
 error_reporting(0);
 ob_start('ob_gzhandler');
 include_once ("dicionario.js");
-include_once ("../../pacotes/ccc2/cdf/jquery.js");
-include_once ("../../pacotes/ccc2/lib/jquery.tipsy.js");
-include_once ("../../pacotes/ccc2/lib/protovis-d3.3.js");
-include_once ("../../pacotes/ccc2/lib/protovis-msie.js");
-include_once ("../../pacotes/ccc2/def/def.js");
-include_once ("../../pacotes/ccc2/lib/tipsy.js");
-include_once ("../../pacotes/ccc2/ccc2sage.js");
-include_once ("../../pacotes/formatnumber.js");
+$s = array("../../pacotes/ccc2/ccc/def.js",
+		"../../pacotes/ccc2/ccc/jquery.js",
+		"../../pacotes/ccc2/ccc/jquery.tipsy.js",
+		"../../pacotes/ccc2/ccc/protovis.js",
+		"../../pacotes/ccc2/ccc/protovis-msie.js",
+		"../../pacotes/ccc2/ccc/pvc-r2.0.js",
+		"../../pacotes/ccc2/ccc/tipsy.js",
+		"../../pacotes/formatnumber.js"
+);
+foreach($s as $i){
+	include_once($i);
+}
 ?>
