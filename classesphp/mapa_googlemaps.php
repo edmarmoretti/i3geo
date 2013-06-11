@@ -300,6 +300,8 @@ else{
 		$nomer = salvaCacheImagem();
 		if($_SESSION["i3georendermode"] == 2){
 			ob_clean();
+			header('Cache-Control: public, max-age=22222222');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
 			header("X-Sendfile: $nomer");
 			header("Content-type: image/png");
 		}
@@ -307,9 +309,11 @@ else{
 			ob_clean();
 			header('Content-Length: '.filesize($nomer));
 			header('Content-Type: image/png');
-			header('Cache-Control: max-age=3600, must-revalidate');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
+			//header('Cache-Control: max-age=3600, must-revalidate');
+			//header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+			//header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
+			header('Cache-Control: public, max-age=22222222');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
 			fpassthru(fopen($nomer, 'rb'));
 		}
 	}
@@ -335,6 +339,8 @@ else{
 			$nomer = ($img->imagepath)."temp".nomeRand().".png";
 			$img->saveImage($nomer);
 			ob_clean();
+			header('Cache-Control: public, max-age=22222222');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
 			header("X-Sendfile: $nomer");
 			header("Content-type: image/png");
 		}
@@ -373,9 +379,13 @@ function carregaCacheImagem(){
 		if($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)){
 			header('Content-Length: '.filesize($nome));
 			header('Content-Type: image/png');
+			header('Cache-Control: public, max-age=22222222');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
 			fpassthru(fopen($nome, 'rb'));
 		}
 		else{
+			header('Cache-Control: public, max-age=22222222');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
 			header("X-Sendfile: $nome");
 			header("Content-type: image/png");
 		}
