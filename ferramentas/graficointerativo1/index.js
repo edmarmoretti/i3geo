@@ -242,33 +242,19 @@ i3GEOF.graficointerativo1 = {
 		'<div class=guiaobj id="i3GEOgraficointerativo1guia1obj" style="left:1px;display:none;">' +
 		'	<p class=paragrafo >Escolha o tipo de gr&aacute;fico: </p>' +
 		'	<table class=lista6 >' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-pie-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="pizza2d" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>pizza 2d</td></tr>' +
+		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-pie-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="pizza_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>pizza 2d</td></tr>' +
 		//'		<tr><td>&nbsp;</td></tr>' +
 		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-area-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="area" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>&aacute;rea 2d</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-scatter-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="scatter" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>distribui&ccedil;&atilde;o de pontos</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-line-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="line" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>linha</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-scatter-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="ponto_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>distribui&ccedil;&atilde;o de pontos</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-line-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="linha_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>linhas simples</td></tr>' +
 		//'		<tr><td>&nbsp;</td></tr>' +
 		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-polar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="radar" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>radar</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras simples</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras 2 cores</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_3d" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras 3d</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_sketch" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras rascunho</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_cylinder" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cilindro</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_cylinder_outline" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras cilindro com contorno</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_round_glass" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras c&uacute;pula</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_round" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras p&iacute;lula</td></tr>' +
-		//'		<tr><td>&nbsp;</td></tr>' +
-		//'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="hbar" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras horizontais</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras verticais</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon-h.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_2" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras horizontais</td></tr>' +
 		'	</table>' +
 		'</div> ' +
 		'<div class=guiaobj id="i3GEOgraficointerativo1guia2obj" style="left:1px;display:none;top:-5px">' +
@@ -761,144 +747,25 @@ i3GEOF.graficointerativo1 = {
 		switch(i3GEOF.graficointerativo1.tipo){
 			case "bar_1":
 				legendaX = "";
-				i3GEOF.graficointerativo1.barras(dados,maior,cores,legendaY,legendaX,xInclinado);
+				i3GEOF.graficointerativo1.barras(dados,maior,cores,legendaY,legendaX,xInclinado,"vertical");
+				break;
+			case "bar_2":
+				legendaX = "";
+				i3GEOF.graficointerativo1.barras(dados,maior,cores,legendaY,legendaX,xInclinado,"horizontal");
+				break;
+			case "linha_1":
+				legendaX = "";
+				i3GEOF.graficointerativo1.linhas(dados,maior,cores,legendaY,legendaX,xInclinado);
+				break;
+			case "pizza_1":
+				legendaX = "";
+				i3GEOF.graficointerativo1.pizzas(dados,maior,cores,legendaY,legendaX);
+				break;
+			case "ponto_1":
+				i3GEOF.graficointerativo1.pontos(dados,maior,cores,legendaY,legendaX);
 				break;
 			default:
 				alert("Escolha um tipo de gr&aacute;fico");
-		}
-		if(i3GEOF.graficointerativo1.tipo === "line" || i3GEOF.graficointerativo1.tipo === "scatter" || i3GEOF.graficointerativo1.tipo === "hbar" || i3GEOF.graficointerativo1.tipo === "area" || i3GEOF.graficointerativo1.tipo === "bar_round" || i3GEOF.graficointerativo1.tipo === "bar_round_glass" || i3GEOF.graficointerativo1.tipo === "bar_filled" || i3GEOF.graficointerativo1.tipo === "bar_glass" || i3GEOF.graficointerativo1.tipo === "bar_3d" || i3GEOF.graficointerativo1.tipo === "bar_sketch" || i3GEOF.graficointerativo1.tipo === "bar_cylinder" || i3GEOF.graficointerativo1.tipo === "bar_cylinder_outline"){
-			temp = valores;
-			if(i3GEOF.graficointerativo1.tipo === "line" || i3GEOF.graficointerativo1.tipo === "scatter" || i3GEOF.graficointerativo1.tipo === "area")
-			{temp = parcor;}
-			parametros = {
-				"elements":[
-				{
-					"type":      i3GEOF.graficointerativo1.tipo,
-					"start-angle": 180,
-					"colour":   corunica,
-					"outlinecolor": outlinecolor,
-					"alpha":     alpha,
-					"stroke":    stroke,
-					"animate":   1,
-					"values" :   temp,
-					"tip": "#val#",
-					"gradient-fill": gradient,
-					"fill": fill,
-					"fill-alpha": alpha,
-					"dot-style": { "type": "solid-dot", "colour": "#9C0E57", "dot-size": pointSize }
-				}
-				],
-				"x_axis": {
-					"colour": "#A2ACBA",
-					"grid-colour": corGrid,
-					"offset": true,
-					"steps": 1,
-					"labels": {
-						"steps": 1,
-						"rotate": rotacaoX,
-						"colour": "#000000",
-						"labels": nomes
-					}
-				},
-				"y_axis": {
-					"min": menor,
-					"max": maior,
-					"steps": parseInt((parseInt(maior - menor,10) / divisoesY),10)
-				},
-				"x_legend": {
-					"text": legendaX,
-					"style": "{font-size: 12px; color: #778877}"
-				},
-				"y_legend": {
-					"text": legendaY,
-					"style": "{font-size: 12px; color: #778877}"
-				},
-				"title":{
-					"text": titulo,
-					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
-					}
-			};
-			if($i("i3GEOgraficointerativo1AdLinhas").checked){
-				parametros.elements.push({
-					"type":      "line",
-					"colour":	"#FFFFFF",
-					"start-angle": 180,
-					"alpha":     0,
-					"stroke":    0,
-					"width": 0,
-					"animate":   1,
-					"values" :   parcor,
-					"dot-style": { "type": "solid-dot", "colour": "#9C0E57", "dot-size": pointSize }
-				});
-			}
-			if(i3GEOF.graficointerativo1.tipo === "hbar"){
-				n = valores.length;
-				temp = [];
-				for(i=0;i<n;i++){
-					temp.push({"left":0,right:valores[i]});
-				}
-				parametros.elements[0].values = temp;
-
-				parametros.x_axis = {
-					"min": 0,
-					"max": maior,
-					"steps": parseInt((maior / divisoesY),10)
-				};
-				parametros.y_axis = {
-						"offset": 1,
-						"labels": nomes
-				};
-				parametros.x_legend.text = legendaY;
-				parametros.y_legend.text = legendaX;
-			}
-			if(i3GEOF.graficointerativo1.tipo === "scatter"){
-				n = valores.length;
-				temp = [];
-				for(i=0;i<n;i++){
-					temp.push({"x":nomes[i],"y":valores[i]});
-				}
-				parametros.elements[0].values = temp;
-				parametros.x_axis = {
-					"min": menor,
-					"max": maior,
-					"steps": parseInt(((maior - menor) / divisoesY),10)
-				};
-				parametros.x_axis = {
-					"min": menorNome,
-					"max": maiorNome,
-					"steps": parseInt(((maiorNome - menorNome) / divisoesY),10)
-				};
-				parametros.elements[0].tip = "#x#  -  #y#";
-			}
-		}
-		if(i3GEOF.graficointerativo1.tipo === "radar"){
-			parametros = {
-				"elements": [{
-					"type": "area",
-					"width": 1,
-					"dot-style": { "type": "anchor", "colour": "#9C0E57", "dot-size": pointSize },
-					"colour": "#45909F",
-					"fill": "#45909F",
-					"fill-alpha": 0.4,
-					"loop": true,
-					"values": parcor
-				}],
-				"radar_axis": {
-					"max": maior,
-					"steps": parseInt(((maior - menor) / divisoesY),10),
-					"colour": "#EFD1EF",
-					"grid-colour": "#EFD1EF",
-					"spoke-labels": {
-						"labels": nomes,
-						"colour": "#9F819F"
-					}
-				},
-				"title":{
-					"text": titulo,
-					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
-					},
-					"bg_colour": "#DFFFEC"
-			};
 		}
 	},
 	/*
@@ -1002,26 +869,139 @@ i3GEOF.graficointerativo1 = {
 			}
 		}
 	},
-	barras: function(dados,maior,cores,legendaY,legendaX,xInclinado){
+	configDefault: function(dados,maior,cores,legendaY,legendaX){
+		var config = {
+				canvas : "i3GEOgraficointerativo1guia4objCanvas",
+				width : dados.resultset.length * $i("i3GEOgraficointerativo1FatorTamanho").value,
+				height : parseInt($i("i3GEOF.graficointerativo1_corpo").style.height,10) - 80,
+				orthoAxisTitle: legendaY,
+				orthoAxisFixedMax: maior,
+				valuesFont : 'normal 9px sans-serif ',
+				baseAxisTitle: legendaX,
+				baseAxisTitleAlign: 'left',
+				tooltipEnabled : true,
+				tooltipArrowVisible: true,
+				tooltipFade : false,
+				tooltipFollowMouse : false,
+				tooltipFormat : function(scene) {
+					var cat = this.scene.datum.atoms['category'].value,
+						val = this.scene.datum.atoms['value'].value;
+					return "<span style=color:yellow >"+cat+"</span><br>" + format( "#.###,", val);
+				},
+				baseAxisTitleFont : '9px sans-serif',
+				yAxisTickFormatter: function(valor){
+					valor = valor+"";
+					valor = format( "#.###,", valor);
+					return valor;
+				},
+				valueFormat: function(valor){
+					valor = valor+"";
+					valor = format( "#.###,", valor);
+					return valor;
+				},
+				valuesAnchor : 'top',
+				valuesVisible: false,
+				orthoAxisOriginIsZero:false,
+				titleAlign : 'center',
+				orientation: 'vertical',
+				baseAxisTicks: true,
+				stacked : false,
+				animate : true,
+				hoverable:  false,
+				axisGrid:   true,
+				contentMargins :5,
+				axisOffset: 0.02,
+				panelSizeRatio : 0.8,
+				orthoAxisLabelSpacingMin : 2 ,
+				selectable : false,
+				extensionPoints: {
+					continuousAxisTicks_strokeStyle: 'gray',
+					axisGrid_strokeStyle:  'lightgray',
+					xAxisLabel_textStyle: 'black',
+					label_textBaseline: "bottom",
+					xAxisLabel_font: 'normal 10px sans-serif'
+				}
+			};
+		return config;
+	},
+	barras: function(dados,maior,cores,legendaY,legendaX,xInclinado,tipo){
+		config = i3GEOF.graficointerativo1.configDefault(dados,maior,cores,legendaY,legendaX);
+		config.extensionPoints.bar_fillStyle = function(d) {
+			return cores[this.index];
+		}
+		if(tipo === "horizontal"){
+			config.orientation = 'horizontal';
+		}
+		if(xInclinado == true){
+			config.extensionPoints.xAxisLabel_textAngle = -Math.PI/3;
+			config.extensionPoints.xAxisLabel_textBaseline = 'top';
+			config.extensionPoints.xAxisLabel_textAlign = 'right';
+		}
+		new pvc.BarChart(
+				config
+			).setData(dados, {
+			crosstabMode : false
+		}).render();
+		i3GEOF.graficointerativo1.aguarde.visibility = "hidden";
+	},
+	linhas: function(dados,maior,cores,legendaY,legendaX,xInclinado,tipo){
+		config = i3GEOF.graficointerativo1.configDefault(dados,maior,cores,legendaY,legendaX);
+		if(xInclinado == true){
+			config.extensionPoints.xAxisLabel_textAngle = -Math.PI/3;
+			config.extensionPoints.xAxisLabel_textBaseline = 'top';
+			config.extensionPoints.xAxisLabel_textAlign = 'right';
+		}
+		config.dotsVisible = true;
+		new pvc.LineChart(
+				config
+			).setData(dados, {
+			crosstabMode : false
+		}).render();
+		i3GEOF.graficointerativo1.aguarde.visibility = "hidden";
+	},
+	pizzas: function(dados,maior,cores,legendaY,legendaX,tipo){
+		config = i3GEOF.graficointerativo1.configDefault(dados,maior,cores,legendaY,legendaX);
 		var config = {
 			canvas : "i3GEOgraficointerativo1guia4objCanvas",
 			width : dados.resultset.length * $i("i3GEOgraficointerativo1FatorTamanho").value,
 			height : parseInt($i("i3GEOF.graficointerativo1_corpo").style.height,10) - 80,
-			orthoAxisTitle: legendaY,
-			orthoAxisFixedMax: maior,
-			valuesFont : 'normal 9px sans-serif ',
-			baseAxisTitle: legendaX,
-			baseAxisTitleAlign: 'left',
-			tooltipEnabled : true,
-			tooltipArrowVisible: true,
-			tooltipFade : false,
-			tooltipFollowMouse : false,
+			animate:    true,
+			selectable: true,
+			hoverable:  true,
+			valuesVisible: true,
+			valuesLabelStyle: 'inside',
+			valuesMask: "{category}",
+			colors: cores,
 			tooltipFormat : function(scene) {
 				var cat = this.scene.datum.atoms['category'].value,
 					val = this.scene.datum.atoms['value'].value;
 				return "<span style=color:yellow >"+cat+"</span><br>" + format( "#.###,", val);
 			},
-			baseAxisTitleFont : '9px sans-serif',
+			extensionPoints: {
+				slice_strokeStyle: 'white'
+			}
+		};
+		new pvc.PieChart(
+				config
+			).setData(dados, {
+			crosstabMode : false
+		}).render();
+		i3GEOF.graficointerativo1.aguarde.visibility = "hidden";
+	},
+	pontos: function(dados,maior,cores,legendaY,legendaX,tipo){
+		config = i3GEOF.graficointerativo1.configDefault(dados,maior,cores,legendaY,legendaX);
+		var config = {
+			canvas : "i3GEOgraficointerativo1guia4objCanvas",
+			width : dados.resultset.length * $i("i3GEOgraficointerativo1FatorTamanho").value,
+			height : parseInt($i("i3GEOF.graficointerativo1_corpo").style.height,10) - 80,
+			animate:    true,
+			selectable: true,
+			hoverable:  true,
+			valuesVisible: false,
+			colors: cores,
+			orthoAxisTitle: legendaY,
+			valuesFont : 'normal 9px sans-serif ',
+			baseAxisTitle: legendaX,
 			yAxisTickFormatter: function(valor){
 				valor = valor+"";
 				valor = format( "#.###,", valor);
@@ -1032,38 +1012,13 @@ i3GEOF.graficointerativo1 = {
 				valor = format( "#.###,", valor);
 				return valor;
 			},
-			valuesAnchor : 'top',
-			valuesVisible: false,
-			orthoAxisOriginIsZero:false,
-			titleAlign : 'center',
-			orientation: 'vertical',
-			baseAxisTicks: true,
-			stacked : false,
-			animate : true,
-			hoverable:  false,
-			axisGrid:   true,
-			contentMargins :5,
-			axisOffset: 0.02,
-			panelSizeRatio : 0.8,
-			orthoAxisLabelSpacingMin : 2 ,
-			selectable : false,
-			extensionPoints: {
-				continuousAxisTicks_strokeStyle: 'gray',
-				axisGrid_strokeStyle:  'lightgray',
-				xAxisLabel_textStyle: 'black',
-				label_textBaseline: "bottom",
-				xAxisLabel_font: 'normal 10px sans-serif',
-				bar_fillStyle: function(d) {
-					return cores[this.index];
-				}
+			tooltipFormat : function(scene) {
+				var cat = this.scene.datum.atoms['category'].value,
+					val = this.scene.datum.atoms['value'].value;
+				return "<span style=color:yellow >X: "+cat+"</span><br>Y: " + format( "#.###,", val);
 			}
 		};
-		if(xInclinado == true){
-			config.extensionPoints.xAxisLabel_textAngle = -Math.PI/3;
-			config.extensionPoints.xAxisLabel_textBaseline = 'top';
-			config.extensionPoints.xAxisLabel_textAlign = 'right';
-		}
-		new pvc.BarChart(
+		new pvc.DotChart(
 				config
 			).setData(dados, {
 			crosstabMode : false
