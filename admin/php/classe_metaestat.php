@@ -262,7 +262,7 @@ class Metaestat{
 				$colunageo = $dadosgeoagregada["colunacentroide"];
 				$titulo .= " (pt) ";
 			}
-			$titulo .= $dadosagregada["nome_tipo_regiao"];
+			$titulo .= $dadosgeoagregada["nome_tipo_regiao"];
 		}
 		else{
 			if($tipolayer != "point"){
@@ -348,27 +348,24 @@ class Metaestat{
 		$tipoconta = "";
 		if($dados["permitesoma"] == 1){
 			$tipoconta = "sum";
+			$titulo .= " - soma";
 		}
 		elseif($dados["permitemedia"] == 1){
-			$tipoconta = "mean";
+			$tipoconta = "avg";
+			$titulo .= " - media";
 		}
 		$sqlagrupamento = "";
+		$dadosfiltro = "";
+		if(!empty($dados["filtro"])){
+			$dadosfiltro = " WHERE ".$dados["filtro"];
+			$filtro = true;
+		}
 		if(empty($agruparpor)){
-			//$sql .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d ";
-			//$sqlgeo .= " FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g ";
 			if($agregaregiao == true){
 				$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",sb.".$dadosAgregacao["colunaligacao_regiaopai"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." as sa,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"] ." as sb WHERE sa.".$dados["colunaidgeo"]." = sb.".$dadosgeo["identificador"]." __dadosfiltro__ group by sb.".$dadosAgregacao["colunaligacao_regiaopai"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeoagregada["tabela"]." as g";
-				$sql .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",sb.".$dadosAgregacao["colunaligacao_regiaopai"]." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as sa,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as sb WHERE	sa.".$dados["colunaidgeo"]." = sb.".$dadosgeo["identificador"]." __dadosfiltro__ group by sb.".$dadosAgregacao["colunaligacao_regiaopai"].") as d ";
+				$sql .= "    FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",sb.".$dadosAgregacao["colunaligacao_regiaopai"]." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as sa,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as sb WHERE	sa.".$dados["colunaidgeo"]." = sb.".$dadosgeo["identificador"]." __dadosfiltro__ group by sb.".$dadosAgregacao["colunaligacao_regiaopai"].") as d ";
 			}
 			else{
-				/*
-				if($dados["colunaidgeo"] == $dados["colunaidunico"]){
-					$sqlgeo .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
-				}
-				else{
-					$sqlgeo .= " FROM (SELECT ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$dados["colunaidunico"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
-				}
-				*/
 				$sqlgeo .= " FROM (SELECT * FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
 				if(count($parametrosMedida) > 0){
 					$parametrosMedida = implode(",",$parametrosMedida).",";
@@ -376,28 +373,20 @@ class Metaestat{
 				else{
 					$parametrosMedida = "";
 				}
-				//$sql .= " FROM (SELECT $parametrosMedida".$dados["colunavalor"].",".$dados["colunaidgeo"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
 				$sql .= " FROM (SELECT $parametrosMedida * FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
-
 			}
 		}
 		else{
 			$sqlagrupamento = " SELECT d.".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d group by ".$agruparpor." order by ".$agruparpor;
 			if($agregaregiao == true){
-				$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dadosAgregacao["colunaligacao_regiaopai"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dadosAgregacao["colunaligacao_regiaopai"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeoagregada["tabela"]." as g";
-				$sql .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dadosAgregacao["colunaligacao_regiaopai"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dadosAgregacao["colunaligacao_regiaopai"].") as d ";
+				$sqlAgregaRegiao = ",".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as r1, ".$dadosgeoagregada["esquemadb"].".".$dadosgeoagregada["tabela"]." as r2 WHERE r.".$dados["colunaidgeo"]."::text = r1.".$dadosgeo["identificador"]."::text AND r1.".$dadosAgregacao["colunaligacao_regiaopai"]." = r2.".$dadosgeoagregada["identificador"];
+				$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",r1.".$dadosAgregacao["colunaligacao_regiaopai"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as r" .$sqlAgregaRegiao." __dadosfiltro__ group by ".$agruparpor.",r1.".$dadosAgregacao["colunaligacao_regiaopai"].") as d, ".$dadosgeoagregada["esquemadb"].".".$dadosgeoagregada["tabela"]." as g";
+				$sql .=    " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",r1.".$dadosAgregacao["colunaligacao_regiaopai"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as r" .$sqlAgregaRegiao." __dadosfiltro__ group by ".$agruparpor.",r1.".$dadosAgregacao["colunaligacao_regiaopai"].") as d ";
 			}
 			else{
 				$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
-				$sql .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
+				$sql .= "    FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
 			}
-		}
-		$dadosfiltro = "";
-		if(!empty($dados["filtro"])){
-			//$sql .= " WHERE ".$dados["filtro"];
-			//$sqlgeo .= " WHERE ".$dados["filtro"];
-			$dadosfiltro = " WHERE ".$dados["filtro"];
-			$filtro = true;
 		}
 		$sql = str_replace("__dadosfiltro__",$dadosfiltro,$sql);
 		$sqlgeo = str_replace("__dadosfiltro__",$dadosfiltro,$sqlgeo);
@@ -411,13 +400,11 @@ class Metaestat{
 		$sqlgeo .= " WHERE ".$j;
 
 		if($agregaregiao == true){
-			//$sqlgeo = "select pg.*,".$dados["colunavalor"]." from (select ".$sqlgeo." __filtro__ group by g.".$dadosAgregacao["colunaligacao_regiaopai"].") as fg, ".$dadosgeoagregada["esquemadb"].".".$dadosgeoagregada["tabela"]." as pg where fg.".$dadosAgregacao["colunaligacao_regiaopai"]." = pg.".$dadosgeoagregada["identificador"];
 			$sqlgeo = $colunageo." from ( ".$sqlgeo." __filtro__  ) as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];
 		}
 		else{
 			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		}
-		//echo $sqlgeo;exit;
 		//remove ambiguidades
 		$sqlgeo = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlgeo);
 		$sql = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sql);
@@ -1483,6 +1470,7 @@ class Metaestat{
 		$variavel = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$codigo_tipo_regiao = $variavel["codigo_tipo_regiao"];
 		$regioes[] = $this->listaTipoRegiao($codigo_tipo_regiao);
+		//var_dump($regioes);exit;
 		$agregacoes = $this->listaAgregaRegiao($codigo_tipo_regiao);
 		foreach($agregacoes as $a){
 			$regioes[] = $this->listaTipoRegiao($a["codigo_tipo_regiao_pai"]);

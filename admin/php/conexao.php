@@ -1,6 +1,6 @@
 <?php
 /*
- Title: conexao.php
+Title: conexao.php
 
 Define a conex&atilde;o com o banco de dados que cont&eacute;m as tabelas do sistema de administra&ccedil;&atilde;o do i3geo.
 

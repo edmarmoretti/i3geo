@@ -213,7 +213,7 @@ if(!empty($restauramapa)){
 	}
 }
 //verifica se o usuario trocou a senha do master
-if($_SERVER['HTTP_HOST'] != "localhost" && ($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin") ){
+if($_SERVER['SERVER_NAME'] != "localhost" && ($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin") ){
 	echo json_encode(array("bloqueado"=>"Bloqueado. ATENCAO!!! Acesso bloqueado: edite o arquivo i3geo/ms_configura.php e altere o login e senha da variavel i3geomaster"));
 	exit;
 }
