@@ -218,14 +218,14 @@ i3GEOF.identifica = {
 			col1 = null,
 			col2 = null;
 
-        col1 = Dom.get('i3GEOidentificatemaativo');
-        col2 = Dom.get('i3GEOidentificaocorrencia');
-        var resize = new YAHOO.util.Resize('i3GEOidentificatemaativo', {
-            handles: ['r'],
+				col1 = Dom.get('i3GEOidentificatemaativo');
+				col2 = Dom.get('i3GEOidentificaocorrencia');
+				var resize = new YAHOO.util.Resize('i3GEOidentificatemaativo', {
+						handles: ['r'],
 			maxWidth: 180
-        });
-        resize.on('resize', function(ev) {
-            Dom.setStyle(col1, 'height', '');
+				});
+				resize.on('resize', function(ev) {
+						Dom.setStyle(col1, 'height', '');
 			//150 &eacute; o tamanho inicial da parte esquerda, corresponde a 40%
 			var w1 = parseInt(col1.style.width);
 			var dif = parseInt((w1 * 40) / 150,10);
@@ -235,13 +235,18 @@ i3GEOF.identifica = {
 				$i("yui-gen6").style.height = "250px";
 				$i("yui-gen6").style.width = "5px";
 			}
-        });
-        resize.resize(null, null, null, 0, 0, true);
+				});
+				resize.resize(null, null, null, 0, 0, true);
 	},
 	atualizaSistemas: function(){
 		if(i3GEOF.identifica.mostraSistemasAdicionais === true){
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegaSistemasIdentificacao&g_sid="+i3GEO.configura.sid;
-			cpJSON.call(p,"foo",i3GEOF.identifica.montaListaSistemas);
+			if(i3GEOF.identifica.sistemasAdicionais.length == 0){
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegaSistemasIdentificacao&g_sid="+i3GEO.configura.sid;
+				cpJSON.call(p,"foo",i3GEOF.identifica.montaListaSistemas);
+			}
+			else{
+				i3GEOF.identifica.montaListaSistemas("");
+			}
 		}
 	},
 	/*
@@ -487,30 +492,31 @@ i3GEOF.identifica = {
 		if (retorno !== undefined)
 		{
 			divins = $i("i3GEOidentificalistaSistemas");
-			sis = retorno.data;
-			for (ig=0;ig<sis.length;ig++)
-			{
-				sistema = sis[ig].NOME;
-				if(sis[ig].PUBLICADO)
-				{
+			if(i3GEOF.identifica.sistemasAdicionais.length == 0){
+				sis = retorno.data;
+				for (ig=0;ig<sis.length;ig++){
+					sistema = sis[ig].NOME;
 					if(sis[ig].PUBLICADO)
 					{
-						pub = sis[ig].PUBLICADO;
-						if(pub === "NAO" || pub === "nao")
-						{sistema = "<s>"+sistema+"</s>";}
+						if(sis[ig].PUBLICADO)
+						{
+							pub = sis[ig].PUBLICADO;
+							if(pub === "NAO" || pub === "nao")
+							{sistema = "<s>"+sistema+"</s>";}
+						}
 					}
+					exec = sis[ig].ABRIR;
+					temp = exec.split('"');
+					if(temp.length === 1)
+					{exec = '"'+exec+'"';}
+					temp = exec.split("?");
+					if(temp.length !== 2)
+					{exec += '+"?"';}
+					t = "blank";
+					if (sis[ig].TARGET)
+					{t = sis[ig].TARGET;}
+					i3GEOF.identifica.sistemasAdicionais.push(sistema+","+exec+","+t);
 				}
-				exec = sis[ig].ABRIR;
-				temp = exec.split('"');
-				if(temp.length === 1)
-				{exec = '"'+exec+'"';}
-				temp = exec.split("?");
-				if(temp.length !== 2)
-				{exec += '+"?"';}
-				t = "blank";
-				if (sis[ig].TARGET)
-				{t = sis[ig].TARGET;}
-				i3GEOF.identifica.sistemasAdicionais.push(sistema+","+exec+","+t);
 			}
 			if (i3GEOF.identifica.sistemasAdicionais.length > 0)
 			{
