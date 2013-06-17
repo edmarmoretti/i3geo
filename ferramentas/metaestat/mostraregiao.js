@@ -1,18 +1,20 @@
 /*
- Title: Ferramenta que permite mostrar os limites de um tipo de regi&atilde;o baseada no cadastro do m&oacute;dulo METAESTAT
+Title: Ferramenta que permite mostrar os limites de um tipo de regi&atilde;o baseada no cadastro do m&oacute;dulo METAESTAT
 
- Arquivo:
+A regiao e mostrada como uma nova camada no mapa
 
- i3geo/ferramentas/metaestat/mostraregiao.js
+Arquivo:
+
+i3geo/ferramentas/metaestat/mostraregiao.js
 
 Licenca:
 
 GPL2
 
- i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
- Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
- Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
 Esse programa utiliza parcialmente os codigos da aplicacao calculadora de carbono desenvolvido pelo
 IPAM - Instituto de Pesquisa Ambiental da Amazonia
@@ -34,11 +36,14 @@ if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
 /*
- Classe: i3GEOF.mostraregiao
+Classe: i3GEOF.mostraregiao
 
- Permite que o usu&aacute;rio escolha um tipo de regi&atilde;o para incluir no mapa
+Permite que o usu&aacute;rio escolha um tipo de regi&atilde;o para incluir no mapa
  */
 i3GEOF.mostraregiao = {
+	/**
+	 * Ativa/desativa o indicador de aguarde
+	 */
 	aguarde: function(obj){
 		if(!obj){
 			return "<img style='display:block;z-index:2' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
@@ -60,6 +65,10 @@ i3GEOF.mostraregiao = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.mostraregiao.iniciaDicionario();
 	},
+	/**
+	 * Inicia a ferramenta ativando as opcoes
+	 * Executa i3GEOF.mostraregiao.comboRegioes
+	 */
 	inicia: function(divid){
 		$i(divid).innerHTML = i3GEOF.mostraregiao.html();
 		i3GEOF.mostraregiao.comboRegioes($i("i3geomostraregiaoTipoRegiao"));
@@ -70,7 +79,10 @@ i3GEOF.mostraregiao = {
 		);
 		$i("i3geomostraregiaoAplica-button").style.width = "180px";
 	},
-	//utiliza o dicionario compartilhado
+	/**
+	 * Carrega o dicionario com a traducao
+	 * Executa i3GEOF.mostraregiao.iniciaJanelaFlutuante();
+	 */
 	iniciaDicionario: function(){
 		if(!i3GEOF.metaestat || typeof(i3GEOF.metaestat.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -83,6 +95,10 @@ i3GEOF.mostraregiao = {
 			i3GEOF.mostraregiao.iniciaJanelaFlutuante();
 		}
 	},
+	/**
+	 * Abre a janela flutuante com o conteudo da ferramenta
+	 * Executa i3GEOF.mostraregiao.inicia
+	 */
 	iniciaJanelaFlutuante: function(){
 		if($i("i3GEOF.mostraregiao_corpo")){
 			return;
@@ -113,6 +129,11 @@ i3GEOF.mostraregiao = {
 		i3GEOF.mostraregiao.inicia(divid);
 		i3GEO.janela.tempoMsg("Utilize a guia lateral para ligar/desligar camadas que j&aacute; estejam no mapa");
 	},
+	/**
+	 * HTML com o conteudo da ferramenta
+	 *
+	 * @return HTML
+	 */
 	html: function(){
 		var ins = "" +
 		'<div class="paragrafo" id="i3geomostraregiaoTipoRegiao" >' +
@@ -125,6 +146,10 @@ i3GEOF.mostraregiao = {
 		'<br><br>' ;
 		return ins;
 	},
+	/**
+	 * Monta o combo com as regioes cadastradas
+	 * Executa i3GEO.php.listaTipoRegiao
+	 */
 	comboRegioes: function(objonde){
 		if(objonde){
 			i3GEOF.mostraregiao.aguarde(objonde);
@@ -145,6 +170,10 @@ i3GEOF.mostraregiao = {
 		};
 		i3GEO.php.listaTipoRegiao(temp);
 	},
+	/**
+	 * Obtem os parametros necessarios e adiciona ao mapa uma nova camada com a regiao
+	 * Executa ferramentas/metaestat/analise.php?funcao=adicionaLimiteRegiao
+	 */
 	aplica: function(){
 		var combo = $i("i3geomostraregiaoComboTipoRegiao"),
 			nomes = $i("i3geomostraregiaoNomes");
@@ -176,6 +205,9 @@ i3GEOF.mostraregiao = {
 		i3GEO.util.ajaxGet(p,temp);
 		//i3GEO.php.mapfileTipoRegiao(temp,combo.value,$i("i3geomostraregiaoOutlinecolor").value,$i("i3geomostraregiaoWidth").value,nomes);
 	},
+	/**
+	 * Abre a janela de dialogo para escolha da cor que sera usada para desenhar a regiao
+	 */
 	corj: function(obj){
 		i3GEO.util.abreCor("",obj);
 	}
