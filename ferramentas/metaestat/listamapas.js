@@ -1,18 +1,18 @@
 /*
- Title: Ferramenta que permite listar os mapas publicados
+Title: Ferramenta que permite listar os mapas cadastrados para publicacao
 
- Arquivo:
+Arquivo:
 
- i3geo/ferramentas/metaestat/listamapas.js
+i3geo/ferramentas/metaestat/listamapas.js
 
 Licenca:
 
 GPL2
 
- i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
- Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
- Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
 Esse programa utiliza parcialmente os codigos da aplicacao calculadora de carbono desenvolvido pelo
 IPAM - Instituto de Pesquisa Ambiental da Amazonia
@@ -33,7 +33,14 @@ Free Software Foundation, Inc., no endereco
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
+/*
+Classe: i3GEOF.listamapas
+ */
 i3GEOF.listamapas = {
+	/**
+	 * Abre a janela flutuante que recebera o conteudo html da ferramenta
+	 * Executa i3GEOF.listamapas.html();
+	 */
 	iniciaJanelaFlutuante: function(){
 		if($i("i3GEOF.listamapas_corpo")){
 			return;
@@ -60,6 +67,12 @@ i3GEOF.listamapas = {
 		divid = janela[2].id;
 		i3GEOF.listamapas.html(divid);
 	},
+	/**
+	 * Retorna o HTML com o conteudo da ferramenta
+	 * Executa admin/php/metaestat.php?funcao=listaTemplatesMapa para obter os templates disponiveis para uso nos mapas
+	 * Executa admin/php/metaestat.php?funcao=listaMapas para obter a lista de mapas
+	 * @param id do DIV que recebera o conteudo
+	 */
 	html: function(divid){
 		var ins = "",
 			listaTemplates = function(templates){
