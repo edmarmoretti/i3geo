@@ -1,18 +1,18 @@
 /*
- Title: Ferramenta que permite localizar uma regi&atilde;o baseada no cadastro do m&oacute;dulo METAESTAT
+Title: Ferramenta que permite localizar uma regi&atilde;o baseada no cadastro do m&oacute;dulo METAESTAT
 
- Arquivo:
+Arquivo:
 
- i3geo/ferramentas/metaestat/locregiao.js
+i3geo/ferramentas/metaestat/locregiao.js
 
 Licenca:
 
 GPL2
 
- i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
- Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
- Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
 Esse programa utiliza parcialmente os codigos da aplicacao calculadora de carbono desenvolvido pelo
 IPAM - Instituto de Pesquisa Ambiental da Amazonia
@@ -34,17 +34,34 @@ if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
 /*
- Classe: i3GEOF.locregiao
+Classe: i3GEOF.locregiao
 
- Permite que o usu&aacute;rio escolha uma regi&atilde;o para alterar o zoom ou aplicar um filtro
+Permite que o usu&aacute;rio escolha uma regi&atilde;o para alterar o zoom ou aplicar um filtro
  */
 i3GEOF.locregiao = {
-	//CODIGOREGIAOPAI: "", //guarda o valor da regiao pai que originou o ultimo combo
-	ULTIMO_CODIGO_TIPO_REGIAO: "", //ultimo tipo de regiao escolhido
-	ULTIMO_CODIGO_REGIAO: "",//ultima regiao escolhida
+	/**
+	 * Guarda o ultimo codigo de tipo de regiao escolhido
+	 */
+	ULTIMO_CODIGO_TIPO_REGIAO: "",
+	/**
+	 * Guarda o ultimo codigo de regiao escolhido
+	 */
+	ULTIMO_CODIGO_REGIAO: "",
+	/**
+	 * Guarda o penultimo codigo de tipo de regiao escolhido
+	 */
 	PENULTIMO_CODIGO_TIPO_REGIAO: "",
+	/**
+	 * Guarda o penultimo codigo de regiao escolhido
+	 */
 	PENULTIMO_CODIGO_REGIAO: "",
-	ATIVAFILTRO: false, //ativa ou nao os botoes que permitem filtrar a regiao. Usado quando a ferramenta e aberta com opcao de filtragem.
+	/**
+	 * Ativa ou nao os botoes que permitem filtrar a regiao. Usado quando a ferramenta e aberta com opcao de filtragem.
+	 */
+	ATIVAFILTRO: false,
+	/**
+	 * Ativa/desativa o indicador de aguarde
+	 */
 	aguarde: function(obj){
 		if(!obj){
 			return "<img style='display:block;z-index:2' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
@@ -66,7 +83,11 @@ i3GEOF.locregiao = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.locregiao.iniciaDicionario();
 	},
-	//abre a ferramenta com a opcao de filtro ativada
+	/**
+	 * Abre a ferramenta com a opcao de filtro ativada
+	 * Com o filtro ativado, apenas a regiao escolhida e mostrada no mapa
+	 * Executa i3GEOF.locregiao.comboHierarquiaRegioes
+	 */
 	abreComFiltro: function(){
 		i3GEOF.locregiao.ATIVAFILTRO = true;
 		var divbotoes = $i("i3geoLocregiaoBotoesFiltro");
@@ -81,6 +102,10 @@ i3GEOF.locregiao = {
 			i3GEOF.locregiao.comboHierarquiaRegioes($i("i3geoLocregiaoTipoRegiao"));
 		}
 	},
+	/**
+	 * Inicia a ferramenta ativando as opcoes
+	 * Executa i3GEOF.locregiao.comboHierarquiaRegioes
+	 */
 	inicia: function(divid){
 		$i(divid).innerHTML = i3GEOF.locregiao.html();
 		i3GEOF.locregiao.comboHierarquiaRegioes($i("i3geoLocregiaoTipoRegiao"));
@@ -93,7 +118,10 @@ i3GEOF.locregiao = {
 			$i("i3geoLocregiaoBotoesFiltro").style.display = "block";
 		}
 	},
-	//utiliza o dicionario compartilhado
+	/**
+	 * Carrega o dicionario com a traducao
+	 * Executa i3GEOF.locregiao.iniciaJanelaFlutuante();
+	 */
 	iniciaDicionario: function(){
 		if(!i3GEOF.metaestat || typeof(i3GEOF.metaestat.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -106,6 +134,10 @@ i3GEOF.locregiao = {
 			i3GEOF.locregiao.iniciaJanelaFlutuante();
 		}
 	},
+	/**
+	 * Abre a janela flutuante com o conteudo da ferramenta
+	 * Executa i3GEOF.locregiao.inicia
+	 */
 	iniciaJanelaFlutuante: function(){
 		if($i("i3GEOF.locregiao_corpo")){
 			return;
@@ -141,6 +173,11 @@ i3GEOF.locregiao = {
 		$i("i3GEOF.locregiao_corpo").style.backgroundColor = "white";
 		i3GEOF.locregiao.inicia(divid);
 	},
+	/**
+	 * HTML com o conteudo da ferramenta
+	 *
+	 * @return HTML
+	 */
 	html: function(){
 		var ins = "" +
 		'<div id="i3geoLocregiaoBotoesFiltro" style="display:none" >' +
@@ -153,6 +190,10 @@ i3GEOF.locregiao = {
 		'</div>';
 		return ins;
 	},
+	/**
+	 * Altera a extensao geografica do mapa para enquadrar uma regiao
+	 * @param string contendo a extensao geografica. Essa string e composta, sendo necessario converter em array e obter o segundo valor
+	 */
 	zoom: function(valorregiaopai){
 		var temp = valorregiaopai.split(";");
 		if(temp.length > 1 && temp[1] != ""){
@@ -160,6 +201,16 @@ i3GEOF.locregiao = {
 		}
 		return temp[0];
 	},
+	/**
+	 * Executado quando o usuario escolhe uma regiao
+	 * Atualiza as variaveis que guardam as selecoes anteriores
+	 * Aplica o zoom se for necessario
+	 * Executa i3GEOF.locregiao.comboHierarquiaRegioes que ira montar a lista de regioes ou tipos de regioes de nivel inferior
+	 * @param objeto DOM do combo de selecao de regioes
+	 * @param codigo do tipo de regiao que e pai da atualmente selecionada
+	 * @param codigo do tipo de regiao selecionada
+	 * @param codigo da regiao pai da regiao selecionada
+	 */
 	comboHierarquiaRegioesOnChange: function(combo,codigoregiaopai,codigo_tipo_regiao,valorregiaopai){
 		var onde = combo.parentNode.getElementsByTagName("div")[0];
 		i3GEOF.locregiao.PENULTIMO_CODIGO_REGIAO = i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO;
@@ -188,6 +239,14 @@ i3GEOF.locregiao = {
 		}
 		i3GEOF.locregiao.comboHierarquiaRegioes(onde,codigoregiaopai,codigo_tipo_regiao,valorregiaopai);
 	},
+	/**
+	 * Monta o combo de regioes para escolha do usuario
+	 * A funcao onchange podera reexecutar essa funcao para montar o combo de hierarquia inferior
+	 * @param objeto DOM onde o combo sera inserido
+	 * @param codigo do tipo da regiao pai da atual
+	 * @param codigo do tipo de regiao atual
+	 * @param codigo da regiao pai
+	 */
 	comboHierarquiaRegioes: function(objonde,codigoregiaopai,codigo_tipo_regiao,valorregiaopai){
 		if(objonde){
 			i3GEOF.locregiao.aguarde(objonde);
@@ -232,6 +291,13 @@ i3GEOF.locregiao = {
 		};
 		i3GEO.php.listaHierarquiaRegioes(temp,codigo_tipo_regiao,codigoregiaopai,valorregiaopai);
 	},
+	/**
+	 * Aplica um filtro nas camadas do mapa oriundas do banco de metadados
+	 * O mapa ira mostrar apenas o que passar pelo filtro
+	 * Executa i3GEO.php.aplicaFiltroRegiao
+	 * @param codigo da regiao
+	 * @param codigo do tipo de regiao
+	 */
 	aplicaFiltro: function(codigo_regiao,codigo_tipo_regiao){
 		if(codigo_regiao === "" || codigo_tipo_regiao === ""){
 			return;
@@ -247,6 +313,10 @@ i3GEOF.locregiao = {
 		i3GEO.php.aplicaFiltroRegiao(temp,codigo_tipo_regiao,codigo_regiao);
 		i3GEO.janela.tempoMsg("O filtro &eacute; aplicado a todas as camadas oriundas do sistema de metadados estat&iacute;cos.");
 	},
+	/**
+	 * Remove os filtros aplicados com aplicaFiltro
+	 * Executa i3GEO.php.aplicaFiltroRegiao
+	 */
 	removeFiltro: function(){
 		var tipo = "",
 		temp = function(){
