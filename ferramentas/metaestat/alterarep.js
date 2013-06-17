@@ -1,21 +1,21 @@
 /*
- Title: Ferramenta que mostra opcoes adicionais de analise do m&oacute;dulo METAESTAT
+Title: Ferramenta que mostra opcoes para alteracao da representacao cartografica de uma camada oriunda do METAESTAT
 
- Arquivo:
+Utilizado em i3geo/ferramentas/metaestat/index.js
 
- i3geo/ferramentas/metaestat/alterarep.js
+Arquivo:
+
+i3geo/ferramentas/metaestat/alterarep.js
 
 Licenca:
 
 GPL2
 
- i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
- Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
- Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
 
-Esse programa utiliza parcialmente os codigos da aplicacao calculadora de carbono desenvolvido pelo
-IPAM - Instituto de Pesquisa Ambiental da Amazonia
 
 Este programa e software livre; voce pode redistribui-lo
 e/ou modifica-lo sob os termos da Licenca Publica Geral
@@ -34,9 +34,12 @@ if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
 /*
- Classe: i3GEOF.alterarep
+Classe: i3GEOF.alterarep
  */
 i3GEOF.alterarep = {
+	/**
+	 * Ativa/desativa a imagem de aguarde
+	 */
 	aguarde: function(obj){
 		if(!obj){
 			return "<img style='display:block;z-index:2' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
@@ -58,6 +61,12 @@ i3GEOF.alterarep = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.alterarep.iniciaDicionario();
 	},
+	/**
+	 * Inicia a ferramenta
+	 * Monta o conteudo HTML e ativa os botoes de opcoes
+	 * Executa i3GEOF.alterarep.html();
+	 * @param id do DIV que recebera o conteudo HTML da ferramenta
+	 */
 	inicia: function(divid){
 		$i(divid).innerHTML = i3GEOF.alterarep.html();
 		new YAHOO.widget.Button(
@@ -91,7 +100,10 @@ i3GEOF.alterarep = {
 		);
 		$i("i3geoalterarepArea2-button").style.width = 230 + "px";
 	},
-	//utiliza o dicionario compartilhado
+	/**
+	 * Carrega o dicionario com a traducao das opcoes
+	 * Ao final executa i3GEOF.alterarep.iniciaJanelaFlutuante()
+	 */
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.metaestat.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -104,6 +116,10 @@ i3GEOF.alterarep = {
 			i3GEOF.alterarep.iniciaJanelaFlutuante();
 		}
 	},
+	/**
+	 * Abre a janela flutuante que recebera o HTML com as opcoes
+	 * Executa ao final i3GEOF.alterarep.inicia();
+	 */
 	iniciaJanelaFlutuante: function(){
 		if($i("i3GEOF.alterarep_corpo")){
 			return;
@@ -134,6 +150,9 @@ i3GEOF.alterarep = {
 		i3GEOF.alterarep.inicia(divid);
 		i3GEO.janela.tempoMsg("Utilize a guia lateral para ligar/desligar camadas que j&aacute; estejam no mapa");
 	},
+	/**
+	 * HTML com os componentes da ferramenta
+	 */
 	html: function(){
 		var ins = "" +
 		'	<fieldset style="padding:5px;margin:2px;">'+
@@ -150,6 +169,10 @@ i3GEOF.alterarep = {
 		'	</fieldset><br>';
 		return ins;
 	},
+	/**
+	 * Aplica a operacao de transformacao da representacao da camada conforme a escolha do usuario
+	 * Executa ferramentas/metaestat/analise.php passando como parametro o valor de &funcao, que indica a operacao que devera ser realizada
+	 */
 	aplica: function(tipo){
 		if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 			i3GEO.janela.tempoMsg("Ative uma camada primeiro");
