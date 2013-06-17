@@ -195,6 +195,11 @@ i3GEOF.metaestat = {
 				icone: "imagens/gisicons/label.png"
 			}
 		],
+		/**
+		 * Inicia a ferramenta ativando os componentes da interface
+		 * Executa as funcoes i3GEOF.metaestat.analise.abreJanela() e i3GEOF.metaestat.analise.comboCamadas()
+		 * @param id do div que recebera os componentes HTML da ferramenta
+		 */ 
 		inicia: function(iddiv){
 			var ics,n,i;
 			if(!iddiv || !$i(iddiv)){
@@ -220,6 +225,10 @@ i3GEOF.metaestat = {
 			}
 			i3GEOF.metaestat.analise.comboCamadas();
 		},
+		/**
+		 * Abre a janela flutuante com os componentes da ferramenta
+		 * Para recuperar o objeto YUI utilize janela = YAHOO.i3GEO.janela.manager.find("i3geoCartoAnalise")
+		 */
 		abreJanela: function(){
 			var cabecalho,minimiza,imagemxy,janela;
 			if (!$i("i3geoCartoAnalise")){
@@ -252,6 +261,11 @@ i3GEOF.metaestat = {
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			janela.moveTo(imagemxy[0]+(i3GEOF.metaestat.LEFT*2)+i3GEOF.metaestat.LARGURA+10,i3GEOF.metaestat.TOP);
 		},
+		/**
+		 * Monta o HTML contendo os elementos DIV que receberao os principais componentes da ferramenta
+		 * Utilizado para criar a janela da ferramenta
+		 * @return HTML
+		 */
 		html: function(){
 			var ins = '<div id="i3geoCartoAnaliseContainer" style="margin-left:5px;line-height:25px">',
 				b = i3GEOF.metaestat.analise.botoes,
@@ -264,6 +278,12 @@ i3GEOF.metaestat = {
 			ins += '</div><input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
 			return ins;
 		},
+		/**
+		 * Monta um combo contendo a lista de camadas originadas do sistema de metadados estatisticos
+		 * A lista de camadas e obtida com i3GEO.php.listaCamadasMetaestat()
+		 * O ombo e utilizado para o usuario escolher qual a camada que sera alvo de determinado porcesso de analise
+		 * O combo e inserido no elemento DOM com ID i3geoCartoAnaliseCamadas
+		 */ 
 		comboCamadas: function(){
 			if(!$i("i3geoCartoAnaliseCamadas")){
 				return;
@@ -289,6 +309,11 @@ i3GEOF.metaestat = {
 			};
 			i3GEO.php.listaCamadasMetaestat(temp);
 		},
+		/**
+		 * Abre a janela da ferramenta que permite adicionar labels
+		 * Executa i3GEO.util.dialogoFerramenta() mas com a funcao i3GEOF.metaestat.analise.abreToponimia()
+		 * isso permite a obtencao dos parametros necessarios, como a lista de itens que o usuario podera escolher
+		 */
 		toponimia: function(){
 			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
@@ -297,6 +322,10 @@ i3GEOF.metaestat = {
 			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
 			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia","index.js","i3GEOF.metaestat.analise.abreToponimia()");
 		},
+		/**
+		 * Obtem os parametros necessarios ao funcionamento de i3GEOF.metaestat.analise.toponimia()
+		 * Abre a janela de opcoes de i3GEOF.toponimia.iniciaJanelaFlutuante()
+		 */
 		abreToponimia: function(){
 			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
 				"&funcao=pegaDadosTME&tema="+i3GEO.temaAtivo,
@@ -308,6 +337,10 @@ i3GEOF.metaestat = {
 			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
+		/**
+		 * Ativa a ferramenta que permite a modificacao do tipo de representacao da camada
+		 * Executa i3GEOF.alterarep.iniciaJanelaFlutuante();
+		 */
 		alteraRep: function(){
 			if(typeof(i3GEOF.alterarep) === 'undefined'){
 				i3GEO.util.scriptTag(
@@ -320,6 +353,10 @@ i3GEOF.metaestat = {
 				i3GEOF.alterarep.iniciaJanelaFlutuante();
 			}
 		},
+		/**
+		 * Ativa a ferramenta que permite a criacao de mapa de calor
+		 * Executa ferramentas/metaestat/analise.php?funcao=calor;
+		 */
 		calor: function(){
 			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
@@ -339,6 +376,10 @@ i3GEOF.metaestat = {
 			i3GEO.janela.abreAguarde("aguardecalor","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
+		/**
+		 * Ativa a ferramenta que permite ativar a visualizacao de determinada regiao cadastrada
+		 * Executa i3GEOF.mostraregiao.iniciaJanelaFlutuante();
+		 */
 		mostraRegiao: function(){
 			if(typeof(i3GEOF.mostraregiao) === 'undefined'){
 				i3GEO.util.scriptTag(
@@ -351,6 +392,10 @@ i3GEOF.metaestat = {
 				i3GEOF.mostraregiao.iniciaJanelaFlutuante();
 			}
 		},
+		/**
+		 * Ativa a ferramenta que permite ativar/desativar o contorno dos limites utilizados em uma camada
+		 * Executa ferramentas/metaestat/analise.php?funcao=alteraContorno;
+		 */
 		contorno: function(){
 			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
@@ -368,6 +413,11 @@ i3GEOF.metaestat = {
 			i3GEO.janela.abreAguarde("aguardecontorno","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
+		/**
+		 * Ativa a ferramenta que permite obter e visualizar os dados em KMZ no Google Earth
+		 * Primeiro obtem os parametros necesarios, como a lista de itens da camada
+		 * Executa i3GEO.tema.dialogo.tme() com a funcao i3GEOF.metaestat.analise.abreTme()
+		 */
 		ativaTme: function(){
 			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
@@ -376,6 +426,10 @@ i3GEOF.metaestat = {
 			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
 			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tme()","tme","tme","index.js","i3GEOF.metaestat.analise.abreTme()");
 		},
+		/**
+		 * Abre a ferramenta de visualização em 3d
+		 * Executa i3GEOF.tme.iniciaJanelaFlutuante();
+		 */
 		abreTme: function(){
 			//i3GEOF.tme.ITEMNOMEREGIOES
 			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
@@ -389,6 +443,10 @@ i3GEOF.metaestat = {
 			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
+		/**
+		 * Abre a ferramenta que mostra um relatorio com sumario estatistico dos dados
+		 * Executa ferramentas/tabela/exec.php?funcao=estatistica
+		 */
 		estatistica: function(){
 			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
@@ -443,9 +501,18 @@ i3GEOF.metaestat = {
 			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
+		/**
+		 * Abre a ferramenta que permite realizar uma animacao baseada nas camadas existentes no mapa
+		 * executa i3GEO.mapa.dialogo.animacao() com a funcao i3GEOF.metaestat.analise.listaCamadasAnimacao()
+		 */
 		ativaAnimacao: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.animacao()","animacao","animacao","index.js","i3GEOF.metaestat.analise.listaCamadasAnimacao()");
 		},
+		/**
+		 * Lista as camadas que podem ser usadas na ferramenta de animacao
+		 * Preenche o div com a lista usando i3GEOF.animacao.listaDeCamadas()
+		 * Marca os checkbox das camadas que sao oriundas do sistema metaestat e que estao no mapa
+		 */
 		listaCamadasAnimacao: function(){
 			i3GEOF.animacao.iniciaJanelaFlutuante();
 			i3GEOF.animacao.listaDeCamadas();
@@ -465,6 +532,10 @@ i3GEOF.metaestat = {
 			};
 			i3GEO.php.listaCamadasMetaestat(temp);
 		},
+		/**
+		 * Ativa a ferramenta que permite alterar a classificacao dos dados utilizada na legenda de uma camada
+		 * Executa i3GEOF.legenda.iniciaJanelaFlutuante(); e ativa a guia com as opcoes de alteracao das classes
+		 */
 		ativaEditorLegenda: function(){
 			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
@@ -483,14 +554,24 @@ i3GEOF.metaestat = {
 			var temp = $i("i3GEOF.legenda_corpo");
 			temp.getElementsByTagName("div")[0].style.display = "none";
 		},
+		/**
+		 * Ativa a ferramenta que permite editar os simbolos utilizados em uma classe da legenda
+		 * Executa i3GEO.tema.dialogo.editaLegenda()
+		 */
 		alteraClasses: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editaLegenda()","legenda","legenda","index.js","i3GEOF.metaestat.analise.ativaEditorLegenda()");
 		},
+		/**
+		 * Ativa a ferramenta que permite modificar o degrade de cores utilizado
+		 */
 		alteraCores: function(){
 			//listaColourRampAnaliseMetaestat e o id do elemento input que recebera a lista de cores
 			i3GEO.util.abreColourRamp("","listaColourRampAnaliseMetaestat",10);
 		},
-		//disparado no evento onchange do input que guarda o numero de cores
+		/**
+		 * Aplica o novo degrade de cores
+		 * Disparado no evento onchange do input que guarda o numero de cores
+		 */
 		aplicaColourRamp: function(){
 			var i = $i("listaColourRampAnaliseMetaestat");
 			if(i.value != ""){
@@ -512,6 +593,7 @@ i3GEOF.metaestat = {
 				i3GEO.util.ajaxGet(p,temp);
 			}
 		},
+		//TODO documentar e testar
 		filtraPeriodo: {
 			//CAMADAS: "",
 			inicia: function(){
@@ -690,7 +772,19 @@ i3GEOF.metaestat = {
 			}
 		}
 	},
+	/**
+	 * Funcoes que controlam a janela de parametros
+	 * Os parametros permitem que o usuario modifique as opcoes default
+	 * aplicadas quando uma camada e adicionada ao mapa
+	 */
 	classes:{
+		/**
+		 * Inicia a ferramenta
+		 * Preenche os componetes da interface conforme o tipo definido em i3GEOF.metaestat.INTERFACE
+		 * Executa as funcoes que constroem os combos
+		 * Executa i3GEOF.metaestat.classes.abreJanela(); e i3GEOF.metaestat.classes.html();
+		 * @param ID do div que recebera os componentes da ferramenta
+		 */
 		inicia: function(iddiv){
 			if(!$i("i3geoCartoComboMedidasVariavel")){
 				i3GEO.janela.tempoMsg("erro: i3geoCartoComboMedidasVariavel???");
@@ -716,6 +810,9 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.classes.comboTipoClassificacao();
 			}
 		},
+		/**
+		 * Abre a janela flutuante da ferramenta
+		 */
 		abreJanela: function(){
 			var cabecalho,minimiza,janela;
 			if (!$i("i3geoCartoClasses")){
@@ -748,6 +845,11 @@ i3GEOF.metaestat = {
 			//imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			//janela.moveTo(imagemxy[0]+i3GEOF.metaestat.LEFT+i3GEOF.metaestat.LARGURA+20,i3GEOF.metaestat.TOP);
 		},
+		/**
+		 * Ativa o botao que aplica e guarda os parametros escolhidos
+		 * O botao e o elemento com ID i3GEOcartoClassesBotaoAaplicar
+		 * A funcao a ser executada e i3GEOF.metaestat.classes.aplicar()
+		 */
 		botaoAplicar: function(){
 			YAHOO.i3GEO.janela.manager.find("i3geoCartoClasses").setFooter('<input type="button" id="i3GEOcartoClassesBotaoAaplicar" value="Aplicar" class="paragrafo" style="width:200px;cursor:pointer;color:blue" />');
 			new YAHOO.widget.Button(
@@ -756,6 +858,13 @@ i3GEOF.metaestat = {
 			);
 			$i("i3GEOcartoClassesBotaoAaplicar-button").style.width = i3GEOF.metaestat.LARGURA - 15 + "px";
 		},
+		/**
+		 * Aplica os parametros
+		 * Os valores sao armazenados nas variaveis
+		 * i3GEOF.metaestat.comum.tipoRep
+		 * i3GEOF.metaestat.comum.tipoClassificacao
+		 * i3GEOF.metaestat.comum.tipoRegiao
+		 */
 		aplicar: function(){
 			if($i("i3geoCartoComboTipoRep") && $i("i3geoCartoComboTipoRep").options){
 				i3GEOF.metaestat.comum.tipoRep = [$i("i3geoCartoComboTipoRep").value,$i("i3geoCartoComboTipoRep").options[$i("i3geoCartoComboTipoRep").selectedIndex].label];
@@ -768,17 +877,31 @@ i3GEOF.metaestat = {
 
 			i3GEOF.metaestat.classes.destroiJanela();
 		},
+		/**
+		 * Zera os parametros escolhidos alterando as variaveis
+		 * i3GEOF.metaestat.comum.tipoRep
+		 * i3GEOF.metaestat.comum.tipoClassificacao
+		 * i3GEOF.metaestat.comum.tipoRegiao
+		 */
 		zeraParametros: function(){
 			i3GEOF.metaestat.comum.tipoRep = ["",""];
 			i3GEOF.metaestat.comum.tipoClassificacao = ["",""];
 			i3GEOF.metaestat.comum.tipoRegiao = ["",""];
 		},
+		/**
+		 * Destroi a janela com os parameros
+		 */
 		destroiJanela: function(){
 			var janela = YAHOO.i3GEO.janela.manager.find("i3geoCartoClasses");
 			if(janela){
 				janela.destroy();
 			}
 		},
+		/**
+		 * Constroi o HtmL que recera os componentes da interface
+		 * Usado pela funcao que abre a janela flutuante
+		 * @return HTML
+		 */
 		html: function(){
 			var ins = '<div id="i3geoCartoClassesContainer" style="margin-left:5px;">' +
 			'<div class="paragrafo" id="i3geoCartoTipoRep" >' +
@@ -790,6 +913,10 @@ i3GEOF.metaestat = {
 			'</div>';
 			return ins;
 		},
+		/**
+		 * Monta o combo com as opcoes de tipo de representacao
+		 * @return HTML
+		 */
 		comboTipoRep: function(){
 			var onde = $i("i3geoCartoTipoRep"),
 			ins,i,
@@ -811,6 +938,11 @@ i3GEOF.metaestat = {
 			}
 			return ins;
 		},
+		/**
+		 * Monta o combo com as opcoes de tipo de classificacao
+		 * Obtem a lista de i3GEO.php.listaClassificacaoMedida()
+		 * @retrun HTML
+		 */
 		comboTipoClassificacao: function(){
 			var onde = $i("i3geoCartoTipoClassificacao"),
 			combo = $i("i3geoCartoComboMedidasVariavel"),
@@ -840,6 +972,11 @@ i3GEOF.metaestat = {
 		comboTipoClassificacaoOnchange: function(){
 
 		},
+		/**
+		 * Monta o combo com as opcoes de tipo de regiao
+		 * Obtem a lista de i3GEO.php.listaRegioesMedidaVariavel()
+		 * @retrun HTML
+		 */
 		comboRegiao: function(id_medida_variavel){
 			i3GEOF.metaestat.comum.aguarde($i("i3geoCartoRegioesMedidasVariavel"));
 			var onde = $i("i3geoCartoRegioesMedidasVariavel"),
@@ -864,6 +1001,9 @@ i3GEOF.metaestat = {
 			}
 		}
 	},
+	/**
+	 * Funcoes de uso comum das demais funcoes
+	 */
 	comum:{
 		/**
 		 * Faz a carga do dicionario de traducao e na sequencia inicia a ferramenta com i3GEOF.metaestat.principal.inicia()
@@ -880,15 +1020,46 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.principal.inicia();
 			}
 		},
+		/**
+		 * Aplica ao mapa o status de ligado/desligado de cada camada
+		 * O status das camadas e mantido em i3GEOF.metaestat.CAMADAS
+		 * Utiliza a funcao i3GEO.arvoreDeCamadas.ligaDesligaTemas
+		 */
 		desligaCamadas: function(){
 			if(i3GEOF.metaestat.CAMADAS.length > 0){
 				i3GEO.arvoreDeCamadas.ligaDesligaTemas(i3GEOF.metaestat.CAMADAS.join(","),false);
 			}
 		},
-		//parametros para adicionar a camada
+		/**
+		 * Armazena o tipo de representacao que o usuario escolheu pela ultima vez
+		 * O tipo de representacao corresponde ao tipo de geometria que sera utilizada para desenhar os componentes da camada
+		 * E definida pelo onchange do combo criado por i3GEOF.metaestat.classes.comboTipoRep();
+		 * Armazena o valor de [value,texto]
+		 */
 		tipoRep: [],
+		/**
+		 * Armazena o tipo de regiao que o usuario escolheu pela ultima vez
+		 * O tipo de regiao corresponde ao tipo de limite geografico utilizado para desenhar a camada a ser escolhida
+		 * E definida pelo onchange do combo criado por i3GEOF.metaestat.classes.comboRegiao();
+		 * Armazena o valor de [value,texto]
+		 */
 		tipoRegiao: [],
+		/**
+		 * Armazena o tipo de classificacao que o usuario escolheu pela ultima vez
+		 * E definida pelo onchange do combo criado por i3GEOF.metaestat.classes.comboTipoClassificacao();
+		 * A classificacao define os intervalos de classe e simbologia utilizadas pela camada
+		 * Armazena o valor de [value,texto]
+		 */
 		tipoClassificacao: [],
+		/**
+		 * Adiciona uma nova camada ao mapa conforme as opcoes escolhidas pelo usuario
+		 * O usuario deve ter escolhido antes a variavel, medida e demais parametros
+		 * Os parametros sao obtidos dos componentes de formulario ou variaveis ja definidas em 
+		 * funcao das escolhas feitas pelo usuario
+		 * Ao executar, primeiro cria um mapfile temporario com i3GEO.php.mapfileMedidaVariavel() e 
+		 * depois adiciona com i3GEO.php.adtema()
+		 * Atualiza o combo da janela de analise com i3GEOF.metaestat.analise.comboCamadas();
+		 */
 		adicionaCamada: function(){
 			//function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor=""){
 			var v = i3GEOF.metaestat.comum.verificaParametros(),
@@ -934,6 +1105,12 @@ i3GEOF.metaestat = {
 				opacidade
 			);
 		},
+		/**
+		 * Mostra no mapa uma camada escolhida
+		 * E usado quando uma nova camada e adicionada ao mapa
+		 * Primeiro todas as camadas guardadas em i3GEOF.metaestat.CAMADAS sao desligadas
+		 * @param identificador da camada que sera ligada. Correpsonde ao item "name" do mapfile atual do mapa
+		 */
 		ativaCamada: function(camada){
 			if(i3GEOF.metaestat.CAMADAS.length > 0){
 				i3GEO.arvoreDeCamadas.ligaDesligaTemas(i3GEOF.metaestat.CAMADAS.join(","),false);
@@ -941,6 +1118,11 @@ i3GEOF.metaestat = {
 				i3GEO.mapa.ativaTema(camada);
 			}
 		},
+		/**
+		 * Avalia os parametros escolhidos pelo usuario e define qual sera o titulo da camada escolhida
+		 * E usado quando uma camada e adicionada ao mapa
+		 * @return string
+		 */
 		defineTitulo: function(){
 			//se nao tiver parametros, filtro e vazio
 			if(i3GEOF.metaestat.parametros.dados.length == 0 || i3GEOF.metaestat.INTERFACE === "flutuanteSimples"){
@@ -974,6 +1156,11 @@ i3GEOF.metaestat = {
 				return titulo;
 			}
 		},
+		/**
+		 * Avalia os parametros escolhidos pelo usuario e define qual sera o filtro para a camada escolhida
+		 * E usado quando uma camada e adicionada ao mapa
+		 * @return string
+		 */
 		defineFiltro: function(){
 			//se nao tiver parametros, filtro e vazio
 			if(i3GEOF.metaestat.parametros.dados.length == 0){
@@ -997,6 +1184,11 @@ i3GEOF.metaestat = {
 				return "";
 			}
 		},
+		/**
+		 * Avalia os parametros escolhidos pelo usuario e define qual o nivel de agregacao dos dados para a camada escolhida
+		 * E usado quando uma camada e adicionada ao mapa
+		 * @return string
+		 */
 		defineAgruparPor: function(){
 			//se nao tiver parametros, filtro e vazio
 			if(i3GEOF.metaestat.parametros.dados.length == 0){
@@ -1020,6 +1212,10 @@ i3GEOF.metaestat = {
 				return "";
 			}
 		},
+		/**
+		 * Verifica se os parametros obrigatorios foram escolhidos
+		 * Utilizado quando uma nova camada e adicionada ao mapa
+		 */
 		verificaParametros: function(){
 			var ok = true,
 			combos = ["i3geoCartoComboMedidasVariavel"],
@@ -1036,6 +1232,11 @@ i3GEOF.metaestat = {
 			}
 			return ok;
 		},
+		/**
+		 * Torna visivel/invisivel a imagem com o sinal de aguarde
+		 * @param objeto DOM que contem a imagem
+		 * @return objeto DOM com a imagem caso nao exista
+		 */
 		aguarde: function(obj){
 			if(!obj){
 				return "<img style='display:block;z-index:2' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
@@ -1054,7 +1255,16 @@ i3GEOF.metaestat = {
 			}
 		}
 	},
+	/**
+	 * Funcoes que controlam o ajudante de edicao do cadastro de variaveis
+	 */
 	editor: {
+		/**
+		 * Inicia o editor carregando as dependencias de javascript necessarias
+		 * Como as dependencias sao carregadas em paralelo, a carga e definida em funcoes em cascata
+		 * Carrega ferramentas/metaestat/dicionario1.js
+		 * Executa i3GEOF.metaestat.editor.dependenciasjs0()
+		 */
 		inicia: function(){
 			YAHOO.namespace("admin.container");
 			if(typeof(i3GEOF.metaestat.dicionario1) === 'undefined'){
@@ -1068,7 +1278,11 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.editor.dependenciasjs0();
 			}
 		},
-		//carrega os javascripts do sistema de administracao e que tbm sao usados aqui
+		/**
+		 * Carrega os javascripts do sistema de administracao do i3Geo e que tbm sao usados aqui
+		 * Carrega admin/js/core.js
+		 * Executa i3GEOF.metaestat.editor.dependenciasjs1()
+		 */  
 		dependenciasjs0: function(){
 			i3GEO.util.scriptTag(
 					i3GEO.configura.locaplic+"/admin/js/core.js",
@@ -1076,6 +1290,11 @@ i3GEOF.metaestat = {
 					"i3GEOF.metaestat.dependenciasjs0_script"
 			);
 		},
+		/**
+		 * Carrega os javascripts do sistema de administracao do i3Geo e que tbm sao usados aqui
+		 * Carrega admin/js/estat_variavel.js
+		 * Executa i3GEOF.metaestat.editor.ativa()
+		 */ 
 		dependenciasjs1: function(){
 			i3GEO.util.scriptTag(
 					i3GEO.configura.locaplic+"/admin/js/estat_variavel.js",
@@ -1646,11 +1865,20 @@ i3GEOF.metaestat = {
 			}
 		}
 	},
+	/**
+	 * Funcoes que controlam a exibicao e escolha dos parametros cadastrados para uma medida de variavel
+	 * Parametros podem ter filhos
+	 */
 	parametros: {
-		//guarda a lista de parametros
+		/**
+		 * Guarda a lista de parametros que foram obtidos na inicializacao
+		 */
 		dados: [],
-		//obtem a lista com os parametros da medida
-		//cria os combos para os parametros que sao pai de todos
+		/**
+		 * Obtem a lista com os parametros da medida
+		 * Cria os combos para os parametros que sao pai de todos
+		 * Executa i3GEO.php.listaParametrosMedidaVariavel()
+		 */
 		lista: function(id_medida_variavel){
 			i3GEOF.metaestat.comum.aguarde($i("i3geoCartoParametrosMedidasVariavel"));
 			var temp = function(dados){
@@ -1660,7 +1888,14 @@ i3GEOF.metaestat = {
 			};
 			i3GEO.php.listaParametrosMedidaVariavel(id_medida_variavel,temp);
 		},
-		//cria um combo para escolher os valores de um parametro
+		/**
+		 * Cria os elementos que receberao so combos para escolher os valores de um parametro
+		 * Para criar os combos, executa i3GEOF.metaestat.parametros.valoresCombo()
+		 * O combo e inserido no elemento com ID i3geoCartoParametrosMedidasVariavel
+		 * Cada combo recebe um ID cujo valor e definido em funcao do id do parametro e do nivel na hierarquia
+		 * O combo e inserido dentro de um div ja existente ou e criado um novo se o nivel for 0
+		 * @param nivel do parametro na hierarquia, sendo 0 para o pai de todos
+		 */
 		combos: function(nivel){
 			var dados = i3GEOF.metaestat.parametros.dados,
 			n = dados.length,
@@ -1696,6 +1931,15 @@ i3GEOF.metaestat = {
 				}
 			}
 		},
+		/**
+		 * Cria um combo com os valores de um determinado parametro
+		 * Executa i3GEO.php.listaValoresParametroMedidaVariavel() para obter os dados
+		 * @param id da medida da variavel
+		 * @param titulo do combo
+		 * @param nivel na hierarquia de parametros
+		 * @param onde o combo sera inserido
+		 * @param id que o combo recebera
+		 */
 		valoresCombo: function(id_parametro_medida,titulo,nivel,onde,idcombo){
 			var temp = function(dados){
 				var n = dados.length,
@@ -1725,7 +1969,12 @@ i3GEOF.metaestat = {
 				//i3GEOF.metaestat.classes.inicia();
 			//}
 		},
-		//retorna o id do parametro que e filho de um outro parametro
+		/**
+		 * Retorna o id do parametro que e filho de um outro parametro
+		 * Varre a variavel i3GEOF.metaestat.parametros.dados para pegar o filho
+		 * @param id pai
+		 * @return id do parametro ou false
+		 */
 		retornaIdFilho:function(pai){
 			var dados = i3GEOF.metaestat.parametros.dados,
 			n = dados.length,
@@ -1737,7 +1986,12 @@ i3GEOF.metaestat = {
 			}
 			return false;
 		},
-		//retorna o id do parametro que e pai de um outro parametro
+		/**
+		 * Retorna o id do parametro que e pai de um outro parametro
+		 * Varre a variavel i3GEOF.metaestat.parametros.dados para pegar o pai
+		 * @param id filho
+		 * @return id do parametro ou false
+		 */
 		retornaIdPai:function(filho){
 			var dados = i3GEOF.metaestat.parametros.dados,
 			n = dados.length,
@@ -1750,6 +2004,9 @@ i3GEOF.metaestat = {
 			return false;
 		}
 	},
+	/**
+	 * Funcoes utilizadas pelos componentes principais da ferramenta (janela inicial)
+	 */
 	principal: {
 		/**
 		 * Inicia a ferramenta principal com as opcoes de escolha de variaveis, medidas e parametros
@@ -2142,6 +2399,14 @@ i3GEOF.metaestat = {
 			}
 			i3GEOF.metaestat.classes.zeraParametros();
 		},
+		/**
+		 * Executado quando o usuário opta por alterar a classificacao default utilizada (sempre a primeira cadastrada)
+		 * Monta o combo com a lista de classificacoes
+		 * 
+		 * @param objeto contendo os dados que farao parte do combo
+		 * @param string que sera atribuida como ID do combo
+		 * @return string HTML (select)
+		 */	
 		comboClassificacoesMedidaVariavel: function(dados,idcombo){
 			var ins,i,n = dados.length;
 			ins = "<select id='"+idcombo+"' style='box-shadow:0 1px 5px gray;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px' onchange='i3GEOF.metaestat.principal.comboClassificacoesMedidaVariavelOnchange(this)'><option value=''>---</option>";
@@ -2154,6 +2419,10 @@ i3GEOF.metaestat = {
 		comboClassificacoesMedidaVariavelOnchange: function(combo){
 
 		},
+		/**
+		 * Abre uma nova janela do navegador para download dos dados de uma medida de uma variavel
+		 * Executa admin/php/metaestat.php?funcao=dadosMedidaVariavel que retorna os dados em CSV
+		 */
 		downloadMedida: function(){
 			if(!$i("i3geoCartoComboMedidasVariavel")){
 				i3GEO.janela.tempoMsg("erro: i3geoCartoComboMedidasVariavel???");
