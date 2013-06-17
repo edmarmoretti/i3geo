@@ -38,20 +38,20 @@ Gerencia os componentes do m&oacute;dulo de gera&ccedil;&atilde;o de cartogramas
 i3GEOF.metaestat = {
 	/**
 	 * Tipo de interface utilizada para construcao dos parametros
-	 * 
+	 *
 	 * flutuante - uma janela flutuante sera criada e os componentes da ferramenta serao inseridos nessa janela
-	 * 
+	 *
 	 * flutuanteSimples -interface qd a medida da variavel ja tiver sido definida. Utilizada ao adicionar uma camada via catalogo de temas
-	 * 
+	 *
 	 * "" - os componentes serao inseridos em um div qualquer definido em i3GEOF.metaestat.inicia
 	 */
 	INTERFACE: "flutuante",
 	/**
-	 * guarda o valor do codigo da ultima variavel escolhida ou passada como parametro na inicializacao 
+	 * guarda o valor do codigo da ultima variavel escolhida ou passada como parametro na inicializacao
 	 */
 	CODIGO_VARIAVEL: "",
 	/**
-	 * guarda o valor do codigo da ultima medidda da variavel escolhida ou passada como parametro na inicializacao 
+	 * guarda o valor do codigo da ultima medidda da variavel escolhida ou passada como parametro na inicializacao
 	 */
 	ID_MEDIDA_VARIAVEL: "",
 	/**
@@ -199,7 +199,7 @@ i3GEOF.metaestat = {
 		 * Inicia a ferramenta ativando os componentes da interface
 		 * Executa as funcoes i3GEOF.metaestat.analise.abreJanela() e i3GEOF.metaestat.analise.comboCamadas()
 		 * @param id do div que recebera os componentes HTML da ferramenta
-		 */ 
+		 */
 		inicia: function(iddiv){
 			var ics,n,i;
 			if(!iddiv || !$i(iddiv)){
@@ -283,7 +283,7 @@ i3GEOF.metaestat = {
 		 * A lista de camadas e obtida com i3GEO.php.listaCamadasMetaestat()
 		 * O ombo e utilizado para o usuario escolher qual a camada que sera alvo de determinado porcesso de analise
 		 * O combo e inserido no elemento DOM com ID i3geoCartoAnaliseCamadas
-		 */ 
+		 */
 		comboCamadas: function(){
 			if(!$i("i3geoCartoAnaliseCamadas")){
 				return;
@@ -1054,9 +1054,9 @@ i3GEOF.metaestat = {
 		/**
 		 * Adiciona uma nova camada ao mapa conforme as opcoes escolhidas pelo usuario
 		 * O usuario deve ter escolhido antes a variavel, medida e demais parametros
-		 * Os parametros sao obtidos dos componentes de formulario ou variaveis ja definidas em 
+		 * Os parametros sao obtidos dos componentes de formulario ou variaveis ja definidas em
 		 * funcao das escolhas feitas pelo usuario
-		 * Ao executar, primeiro cria um mapfile temporario com i3GEO.php.mapfileMedidaVariavel() e 
+		 * Ao executar, primeiro cria um mapfile temporario com i3GEO.php.mapfileMedidaVariavel() e
 		 * depois adiciona com i3GEO.php.adtema()
 		 * Atualiza o combo da janela de analise com i3GEOF.metaestat.analise.comboCamadas();
 		 */
@@ -1282,7 +1282,7 @@ i3GEOF.metaestat = {
 		 * Carrega os javascripts do sistema de administracao do i3Geo e que tbm sao usados aqui
 		 * Carrega admin/js/core.js
 		 * Executa i3GEOF.metaestat.editor.dependenciasjs1()
-		 */  
+		 */
 		dependenciasjs0: function(){
 			i3GEO.util.scriptTag(
 					i3GEO.configura.locaplic+"/admin/js/core.js",
@@ -1294,7 +1294,7 @@ i3GEOF.metaestat = {
 		 * Carrega os javascripts do sistema de administracao do i3Geo e que tbm sao usados aqui
 		 * Carrega admin/js/estat_variavel.js
 		 * Executa i3GEOF.metaestat.editor.ativa()
-		 */ 
+		 */
 		dependenciasjs1: function(){
 			i3GEO.util.scriptTag(
 					i3GEO.configura.locaplic+"/admin/js/estat_variavel.js",
@@ -1302,6 +1302,12 @@ i3GEOF.metaestat = {
 					"i3GEOF.metaestat.dependenciasjs1_script"
 			);
 		},
+		/**
+		 * Inicia a ferramenta
+		 * Verifica se o usuario esta logado
+		 * Se estiver, chama a funcao para montagem da interface
+		 * Executa i3GEOF.metaestat.editor.t0();
+		 */
 		ativa: function(iddiv){
 			var loginok = function(){
 				i3GEOadmin.variaveis.inicia();
@@ -1321,6 +1327,9 @@ i3GEOF.metaestat = {
 			//verifica login
 			i3GEO.login.verificaOperacao("admin/metaestat/geral",i3GEO.configura.locaplic, loginok, "sessao",loginNok);
 		},
+		/**
+		 * Funcao que abre a janela flutuante se i3GEOF.metaestat.INTERFACE == "flutuante"
+		 */
 		abreJanela: function(){
 			var cabecalho,minimiza,imagemxy,janela;
 			if (!$i("i3geoCartoEditor")){
@@ -1352,12 +1361,19 @@ i3GEOF.metaestat = {
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			janela.moveTo(imagemxy[0]+i3GEOF.metaestat.LEFT+i3GEOF.metaestat.LARGURA+20,i3GEOF.metaestat.TOP+20);
 		},
+		/**
+		 * Retorna o HTML com os elementos DIV, com id i3GEOFmetaestatEditor, onde os conteudos da interface serao inseridos
+		 * @return HTML
+		 */
 		html: function(){
 			var ins = '';
 			ins +=	'<div style="background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;margin-left:5px;" id="i3GEOFmetaestatEditor" >';
 			ins +=	'</div>';
 			return ins;
 		},
+		/**
+		 * Abre o formulario para criacao de uma variavel
+		 */
 		criaVariavel: function(){
 			i3GEOadmin.variaveis.aposGravar = function(){
 				core_carregando("desativa");
@@ -1369,6 +1385,9 @@ i3GEOF.metaestat = {
 			};
 			i3GEOadmin.variaveis.editar("variavel","");
 		},
+		/**
+		 * Abre o formulario para edicao de uma variavel
+		 */
 		editaVariavel: function(){
 			i3GEOadmin.variaveis.aposGravar = function(){
 				core_carregando("desativa");
@@ -1383,9 +1402,10 @@ i3GEOF.metaestat = {
 				i3GEOadmin.variaveis.editar("variavel",codigo_variavel);
 			}
 		},
-		//
-		//os valores default sao definidos em i3GEOF.metaestat.inicia
-		//
+		/**
+		 * Abre o formulario para criacao de uma medida de variavel
+		 * Os valores default sao definidos em i3GEOF.metaestat.inicia
+		 */
 		criaMedidaVariavel: function(){
 			i3GEOadmin.variaveis.aposGravar = function(){
 				core_carregando("desativa");
@@ -1446,6 +1466,9 @@ i3GEOF.metaestat = {
 			$i("Ecodigo_tipo_regiao").style.width = "90%";
 
 		},
+		/**
+		 * Abre o formulario para edicao de uma medida de variavel
+		 */
 		editaMedidaVariavel: function(){
 			i3GEOadmin.variaveis.aposGravar = function(){
 				core_carregando("desativa");
@@ -1460,6 +1483,9 @@ i3GEOF.metaestat = {
 				i3GEOadmin.variaveis.editar("medidaVariavel",id_medida_variavel);
 			}
 		},
+		/**
+		 * Abre o formulario para criacao de uma classificacao
+		 */
 		criaClassificacao: function(){
 			i3GEOadmin.variaveis.aposGravar = function(){
 				core_carregando("desativa");
@@ -1471,6 +1497,9 @@ i3GEOF.metaestat = {
 			i3GEOadmin.variaveis.editar("classificacaoMedida","");
 			$i("Eid_medida_variavel").value = $i("i3geoCartoComboMedidaVariavelEditor").value;
 		},
+		/**
+		 * Abre o formulario para edicao de uma classificacao
+		 */
 		editaClassificacao: function(){
 			i3GEOadmin.variaveis.aposGravar = function(){
 				core_carregando("desativa");
@@ -1484,12 +1513,21 @@ i3GEOF.metaestat = {
 				i3GEOadmin.variaveis.editar("classificacaoMedida",id_classificacao);
 			}
 		},
+		/**
+		 * Remove um elemento do DOM
+		 * @param id do elemento que sera removido
+		 */
 		removeEl:function(id){
 			var no = $i(id);
 			if(no){
 				no.parentNode.removeChild(no);
 			}
 		},
+		/**
+		 * Define a selecao ativa de um combo com base no texto
+		 * @param id do combo
+		 * @param texto valor do texto
+		 */
 		selComboPorTexto: function(idcombo,texto){
 			var c = $i(idcombo),n,i;
 			if(c){
@@ -1504,6 +1542,7 @@ i3GEOF.metaestat = {
 		},
 		/**
 		 * Obtem um parametro da medida variavel escolhida. Os parametros sao obtidos da chamada em ajax que pega a lista de medidas de uma variavel
+		 * @param nome do parametro
 		 */
 		dadoMedidaSelecionada: function(parametro){
 			var c = $i("i3geoCartoComboMedidaVariavelEditor"),n,i;
@@ -1524,14 +1563,28 @@ i3GEOF.metaestat = {
 				return "";
 			}
 		},
+		/**
+		 * Funcao executada quando o usuario escolhe uma variavel
+		 * Define a variavel i3GEOF.metaestat.CODIGO_VARIAVEL
+		 */
 		comboVariaveisOnchange: function(){
 			i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t2");
 			i3GEOF.metaestat.CODIGO_VARIAVEL = $i("i3geoCartoComboVariavelEditor").value;
 		},
+		/**
+		 * Funcao executada quando o usuario escolhe uma medida de variavel
+		 * Define a variavel i3GEOF.metaestat.ID_MEDIDA_VARIAVEL
+		 */
 		comboMedidaVariavelOnchange: function(combo){
 			i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t3");
 			i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = $i("i3geoCartoComboMedidaVariavelEditor").value;
 		},
+		/**
+		 * Calcula os intervalos de classe com base na técnica de quartis
+		 * Altera uma classificacao ja existente
+		 * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha
+		 * Executa admin/php/metaestat.php?funcao=calculaClassificacao&tipo=quartil
+		 */
 		quartis: function(){
 			var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
 			id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value,
@@ -1556,6 +1609,13 @@ i3GEOF.metaestat = {
 			core_carregando("ativa");
 			i3GEO.util.ajaxGet(p,temp);
 		},
+		/**
+		 * Calcula os intervalos de classe com base na técnica de intervalos iguais
+		 * Altera uma classificacao ja existente
+		 * O usuario deve definir o menor e o maior valor
+		 * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha
+		 * Executa admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguais5mm
+		 */
 		intervalosIguaisMM: function(){
 			var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
 				id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value,
@@ -1578,6 +1638,13 @@ i3GEOF.metaestat = {
 			core_carregando("ativa");
 			i3GEO.util.ajaxGet(p,temp);
 		},
+		/**
+		 * Calcula os intervalos de classe com base na técnica de intervalos iguais
+		 * Altera uma classificacao ja existente
+		 * O menor e maior valor sao calculados com base nos valores da medida da variavel
+		 * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha
+		 * Executa admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguais5mm
+		 */
 		intervalosIguais: function(){
 			var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
 			id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value,
@@ -1602,7 +1669,9 @@ i3GEOF.metaestat = {
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
-		 * Botao de upload
+		 * Ativa o botao de upload
+		 * Ao ser clicado, abre uma janela flutuante com as opcoes de download
+		 * @param id do elemento DOM utilizado para compor o botao
 		 */
 		botaoUpload: function(id){
 			new YAHOO.widget.Button(
@@ -1641,6 +1710,12 @@ i3GEOF.metaestat = {
 		},
 		/**
 		 * Abertura do ajudante
+		 * Primeira tela da ferramenta
+		 * Oferece opcoes na forma de botoes e um botao do tipo "continua"
+		 * O botao de id i3GEOFmetaestatEditorBotaot01 abre o editor de variaveis do sistema de administracao
+		 * O botao de id i3GEOFmetaestatEditorBotaot02 abre o editor de limites geograficos
+		 * O botao de id i3GEOFmetaestatEditorBotaot03 abre a interface para upload de um arquivo CSV
+		 * Na sequencia, executa i3GEOF.metaestat.editor.t1()
 		 *
 		 **/
 		t0: function(){
@@ -1663,7 +1738,9 @@ i3GEOF.metaestat = {
 			i3GEOF.metaestat.editor.botaoUpload("i3GEOFmetaestatEditorBotaot03");
 		},
 		/**
-		 * Edicao da variavel
+		 * Opcoes para escolha ou edicao/criacao de uma variavel
+		 * Feita a escolha e definida a variavel i3GEOF.metaestat.CODIGO_VARIAVEL
+		 * Na sequencia executa i3GEOF.metaestat.editor.t1()
 		 */
 		t1: function(remove,textoSelecionado){
 			if(remove == true){
@@ -1694,8 +1771,9 @@ i3GEOF.metaestat = {
 			i3GEO.php.listaVariavel(temp);
 		},
 		/**
-		 * Edicao da medida da variavel
-		 *
+		 * Opcoes para escolha ou edicao/criacao de uma medida
+		 * Feita a escolha e definida a variavel i3GEOF.metaestat.ID_MEDIDA_VARIAVEL
+		 * Na sequencia executa i3GEOF.metaestat.editor.t3a()
 		 */
 		t2: function(remove,textoSelecionado){
 			if(remove == true){
@@ -1740,7 +1818,9 @@ i3GEOF.metaestat = {
 			}
 		},
 		/**
-		 * Opcao de upload
+		 * Mostra a opcao de upload
+		 * Ativa o botao de upload com i3GEOF.metaestat.editor.botaoUpload
+		 * Na sequencia executa i3GEOF.metaestat.editor.t3()
 		 */
 		t3a: function(remove,textoSelecionado){
 			if(remove == true){
@@ -1765,7 +1845,8 @@ i3GEOF.metaestat = {
 			}
 		},
 		/**
-		 * Edicao da classificacao
+		 * Opcoes para escolha ou edicao/criacao de uma classificacao
+		 * Na sequencia executa i3GEOF.metaestat.editor.t4()
 		 */
 		t3: function(remove,textoSelecionado){
 			if(remove == true){
@@ -1804,7 +1885,7 @@ i3GEOF.metaestat = {
 			}
 		},
 		/**
-		 * Edicao das classes
+		 * Opcoes para definicao dos intervalos e cores de uma classificacao
 		 */
 		t4: function(){
 			//remove o conteudo anteriormente construido
@@ -2010,13 +2091,13 @@ i3GEOF.metaestat = {
 	principal: {
 		/**
 		 * Inicia a ferramenta principal com as opcoes de escolha de variaveis, medidas e parametros
-		 * 
+		 *
 		 * Cria a janela flutuante com i3GEOF.metaestat.principal.abreJanela();
 		 * Preenche o conteudo da janela com i3GEOF.metaestat.principal.html();
 		 * Ativa as opcoes da janela com i3GEOF.metaestat.principal.opcoesVariaveis();
-		 * 
+		 *
 		 * @param id do div onde os componentes serao inseridos. Se nao for definido, utiliza "i3geoCartoParametros_corpo"
-		 * 
+		 *
 		 */
 		inicia: function(iddiv){
 			if(!iddiv || !$i(iddiv)){
@@ -2062,7 +2143,7 @@ i3GEOF.metaestat = {
 		},
 		/**
 		 * Cria uma janela flutuante para inserir os componetes da interface
-		 * 
+		 *
 		 * Para capturar o objeto janela utilize janela = YAHOO.i3GEO.janela.manager.find("i3geoCartoParametros");
 		 */
 		abreJanela: function(){
@@ -2120,9 +2201,9 @@ i3GEOF.metaestat = {
 		},
 		/**
 		 * Abre uma janela flutuante com um relatorio contendo os metadados da variavel escolhida
-		 * 
+		 *
 		 * Verifica o combo com id "i3geoCartoComboVariavel" para verificar se a variavel foi escolhida
-		 * 
+		 *
 		 * O relatorio e montado com i3GEO.php.relatorioVariavel
 		 */
 		maisInfo: function(){
@@ -2173,13 +2254,13 @@ i3GEOF.metaestat = {
 		/**
 		 * Monta um combo com a lista de variaveis cadastradas
 		 * Retorna o HTML do combo
-		 * 
+		 *
 		 * @param objeto contendo a lista de variaveis e demais parametros de cada uma. Veja i3GEOF.metaestat.principal.opcoesVariaveis
 		 * @param id que sera atribuido ao combo
 		 * @param string que sera inserida no evento onchange
 		 * @param largura em pixel
 		 * @param sim|nao indicando se o icone da opcao 'mais info' sera mostrado ou nao
-		 * 
+		 *
 		 * @return HTML
 		 */
 		comboVariaveis: function(dados,idcombo,stronchange,largura,mostraIconeinfo){
@@ -2222,7 +2303,7 @@ i3GEOF.metaestat = {
 		 * Formata o botao de abertura do editor de limites geograficos e define a funcao que sera executada
 		 * Procura pelo id "i3GEOcartoBotaoEditor"
 		 * Define como funcao de onclick i3GEOF.metaestat.editor.inicia()
-		 */		
+		 */
 		botaoJanelaEditor: function(){
 			new YAHOO.widget.Button(
 					"i3GEOcartoBotaoEditor",
@@ -2234,7 +2315,7 @@ i3GEOF.metaestat = {
 		 * Formata o botao que adiciona uma nova camada ao mapa e define a funcao que sera executada
 		 * Procura pelo id "i3GEOcartoBotaoAdicionaCamada"
 		 * Define como funcao de onclick i3GEOF.metaestat.comum.adicionaCamada()
-		 */	
+		 */
 		botaoAdicionaCamada: function(largura){
 			if(!largura){
 				largura = i3GEOF.metaestat.LARGURA - 15;
@@ -2255,7 +2336,7 @@ i3GEOF.metaestat = {
 		 * Formata o botao que abre a janela de opcoes de analis e define a funcao que sera executada
 		 * Procura pelo id "i3GEOcartoBotaoAnalise"
 		 * Define como funcao de onclick i3GEOF.metaestat.analise.inicia()
-		 */	
+		 */
 		botaoJanelaAnalise: function(){
 			new YAHOO.widget.Button(
 					"i3GEOcartoBotaoAnalise",
@@ -2310,7 +2391,7 @@ i3GEOF.metaestat = {
 		/**
 		 * Gera o HTML correspondente a um combo para escolha de uma medida de uma variavel
 		 * Define o valor de i3GEOF.metaestat.DADOSMEDIDASVARIAVEL
-		 * 
+		 *
 		 * @param objeto contendo os dados referentes as medidas de uma determinada variavel
 		 * @param id que sera atribuido ao combo criado
 		 * @param string que sera atribuida ao evento onchange
@@ -2386,9 +2467,9 @@ i3GEOF.metaestat = {
 		 * Monta os parametros de uma medida com i3GEOF.metaestat.parametros.lista
 		 * Ativa o botao de adicionar camadas com i3GEOF.metaestat.principal.botaoAdicionaCamada
 		 * Define a variavel i3GEOF.metaestat.ID_MEDIDA_VARIAVEL
-		 * 
+		 *
 		 * @param objeto combo utilizado para escolher a variavel
-		 */		
+		 */
 		comboMedidaVariavelOnchange: function(combo){
 			i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = combo.value;
 			$i("i3geoCartoParametrosMedidasVariavel").innerHTML = "";
@@ -2402,11 +2483,11 @@ i3GEOF.metaestat = {
 		/**
 		 * Executado quando o usuÃ¡rio opta por alterar a classificacao default utilizada (sempre a primeira cadastrada)
 		 * Monta o combo com a lista de classificacoes
-		 * 
+		 *
 		 * @param objeto contendo os dados que farao parte do combo
 		 * @param string que sera atribuida como ID do combo
 		 * @return string HTML (select)
-		 */	
+		 */
 		comboClassificacoesMedidaVariavel: function(dados,idcombo){
 			var ins,i,n = dados.length;
 			ins = "<select id='"+idcombo+"' style='box-shadow:0 1px 5px gray;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px' onchange='i3GEOF.metaestat.principal.comboClassificacoesMedidaVariavelOnchange(this)'><option value=''>---</option>";
