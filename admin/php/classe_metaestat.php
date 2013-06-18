@@ -32,8 +32,8 @@ Arquivo:
 
 i3geo/admin/php/classe_metaestat.php
 */
-/*
-Classe: Metaestat
+/**
+Classe metaestat
 */
 class Metaestat{
 	protected $esquemaadmin;
@@ -42,10 +42,9 @@ class Metaestat{
 	protected $convUTF;
 	public $dir_tmp;
 	public $nomecache;
-	/*
-	Function: __construct
-
-	Cria um objeto Metaestat
+	/**
+	 * Construtor
+	 * Faz o include de conexao.php que por sua vez faz o include de i3geo/ms_configura.php
 	*/
 	function __construct(){
 		error_reporting(0);
