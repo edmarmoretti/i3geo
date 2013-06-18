@@ -38,16 +38,26 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 */
 error_reporting(0);
+/**
+ * admin.php faz o include de classesphp/pega_variaveis.php
+ * esse programa obtem os parametros passado pela URL e os transforma e variaveis do PHP
+ */
 include(dirname(__FILE__)."/../../admin/php/admin.php");
 include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
 session_name("i3GeoPHP");
 session_id($g_sid);
 session_start();
+/**
+ * transforma o array da sessao em variaveis
+ */
 foreach(array_keys($_SESSION) as $k)
 {
 	if(!is_array($_SESSION[$k]))
 		eval("\$".$k."='".$_SESSION[$k]."';");
 }
+/**
+ * verifica se esse programa esta sendo executado dentro de um mapa do i3geo
+ */
 if(isset($fingerprint)){
 	$f = explode(",",$fingerprint);
 	if($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id())){
@@ -56,6 +66,15 @@ if(isset($fingerprint)){
 	}
 }
 $retorno = "";
+/**
+ * A variavel $funcao define a rotina que sera executada
+ * Cada rotina recebe parametros especificos
+ * A documentacao de cada rotina encontra-se no programa PHP que e executado
+ * $map_file e obtido da variavel session e corresponde ao mapa que esta sendo usado
+ * 
+ * Quando um layer original do sistema METAESTAT e alterado, isso e indicado pelo metadata METAESTAT_DERIVADO
+ * que passa a ser marcado com "sim"
+ */
 switch (strtoupper($funcao)){
 	case "APLICAFILTROREGIAO":
 		$retorno = analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao);
@@ -120,6 +139,16 @@ if (!connection_aborted()){
 }
 else
 {exit();}
+/**
+ * Adiciona ao mapa atual um novo layer para a representacao de uma regiao
+ * Se o layer ja existir, sera removido e criado outro
+ * 
+ * @param arquivo mapfile do mapa atual
+ * @param codigo da regiao no cadastro
+ * @param cor do contorno
+ * @param largura do contorno
+ * @param sim|nao inclui ou nao um layer com a toponimia
+ */
 function adicionaLimiteRegiao($map_file,$codigo_tipo_regiao,$outlinecolor,$width,$nomes){
 	global $locaplic,$dir_tmp;
 	$m = new Metaestat();
@@ -145,6 +174,14 @@ function adicionaLimiteRegiao($map_file,$codigo_tipo_regiao,$outlinecolor,$width
 	$mapa->save($map_file);
 	return "ok";
 }
+/**
+ * Gera uma imagem com a representacao das ocorrencias na forma de mapa de calor
+ * A imagem e gerada usando o software R
+ * A coluna que sera usada para calcular o mapa de calor e obtida do cadastro de variaveis. Por isso, o layer deve
+ * ser original do METAESTAT
+ * @param arquivo mapfile do mapa atual
+ * @param nome do layer fonte dos dados
+ */
 function mapaDeCalor($map_file,$tema){
 	global $locaplic,$dir_tmp,$R_path,$ext;
 	$nome = basename($map_file).$tema."calor";
@@ -154,6 +191,8 @@ function mapaDeCalor($map_file,$tema){
 		return "";
 	}
 	$layer = $mapa->getlayerbyname($tema);
+	//verifica se o layer e original ou se foi alterado
+	//se foi alterado, nao e possivel obter a coluna para calcular o mapa de calor
 	if($layer->getmetadata("METAESTAT_DERIVADO") == "sim"){
 		return "";
 	}
@@ -167,6 +206,13 @@ function mapaDeCalor($map_file,$tema){
 	$m->salva();
 	return $retorno;
 }
+/**
+ * Altera as caracteristicas de representacao de um layer
+ * 
+ * @param mapfile do mapa atual
+ * @param nome do layer que sera processado
+ * @param tipo de processamento pponto|hachurea|opacidade
+ */
 function classes2preenchimento($map_file,$tema,$tipo){
 	$nome = basename($map_file).$tema.$tipo;
 	$mapa = ms_newMapObj($map_file);
@@ -188,12 +234,14 @@ function classes2preenchimento($map_file,$tema,$tipo){
 	}
 	$numclasses = $layer->numclasses;
 	if($tipo == "ponto" || $tipo == "hachurea"){
+		//as classes serao preenchidas com pontos
 		if($tipo == "ponto"){
 			$layer->setmetadata("tema",$layer->getmetadata("tema")." - pontos");
 			$s = "ponto";
 			$si = 10;
 			$w = 4;
 		}
+		//as classes serao preenchidas com hachureas
 		if($tipo == "hachurea"){
 			$layer->setmetadata("tema",$layer->getmetadata("tema")." - hachurea");
 			$s = "p3";
@@ -210,6 +258,7 @@ function classes2preenchimento($map_file,$tema,$tipo){
 			}
 		}
 	}
+	//cada classe recebera um valor de opacidade
 	if($tipo == "opacidade"){
 		$layer->setmetadata("tema",$layer->getmetadata("tema")." - opac");
 		if ($numclasses > 0){
@@ -223,10 +272,17 @@ function classes2preenchimento($map_file,$tema,$tipo){
 			}
 		}
 	}
+	//marca o novo layer como derivado do original
 	$layer->setmetadata("METAESTAT_DERIVADO","sim");
 	$mapa->save($map_file);
 	return $nome;
 }
+/**
+ * Altera a representacao de um layer mostrando circulos cujo tamanho corresponde a um valor
+ * @param nome do arquivo mapfile em uso
+ * @param nome do layer que sera processado
+ * @param variatamanho|variacor|continuo tipo de processo
+ */
 function classes2circulos($map_file,$tema,$tipo){
 	$nome = basename($map_file).$tema.$tipo;
 	$mapa = ms_newMapObj($map_file);
@@ -325,6 +381,12 @@ function classes2circulos($map_file,$tema,$tipo){
 	$mapa->save($map_file);
 	return $nome;
 }
+/**
+ * Altera o estilo do outline ativando-o com cor branca
+ * Se a cor ja estiver definida, o contorno e desativado
+ * @param arquivo mapfile do mapa atual
+ * @param nome do tema que sera processado
+ */
 function alteraContorno($map_file,$tema){
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getlayerbyname($tema);
@@ -345,6 +407,12 @@ function alteraContorno($map_file,$tema){
 	}
 	return "ok";
 }
+/**
+ * Obtem dados descritivos sobre a medida da variavel usada para compor o layer
+ * @param nome do mapfile atual
+ * @param nome do tema que sera processado
+ * @return array com coluna que contem os nomes das regioe, coluna que contem os dados
+ */
 function pegaDadosTME($map_file,$tema){
 	$retorno = array("itemNomeRegioes"=>"","itemDados"=>"");
 	$mapa = ms_newMapObj($map_file);
@@ -360,6 +428,12 @@ function pegaDadosTME($map_file,$tema){
 	}
 	return $retorno;
 }
+/**
+ * Lista filtros aplicados ao mapa atual
+ * @param nome do mapfile atual
+ * @param opcional. Codigo da regiao cujos filhos serao considerados na busca
+ * @return array
+ */
 function listaFiltroTempoRaiz($map_file,$nivel){
 	$mapa = ms_newMapObj($map_file);
 	$layers = analise_listaLayersMetaestat($mapa);
@@ -381,8 +455,11 @@ function listaFiltroTempoRaiz($map_file,$nivel){
 	}
 	return $filtros;
 }
-
-//lista as camadas que possuem filtro temporais
+/**
+ * Lista os layers do mapa atual que contem filtros de tempo
+ * @param nome do mapfile atual
+ * @return Array
+ */
 function analise_listaCamadasFiltroTempo($map_file){
 	$mapa = ms_newMapObj($map_file);
 	$layers = analise_listaLayersMetaestat($mapa);
