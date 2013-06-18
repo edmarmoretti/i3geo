@@ -1,6 +1,10 @@
 /*
 Title: Editor vetorial de limites de regi&otilde;es do sistema METAESTAT
 
+Utilizado em i3geo/metaestat/editorlimites.php
+
+Utiliza a API do Google Maps e pacotes/wicket/wicket.js (que cria o objeto Wkt com funcoes para processamento de Wkt)
+
 Arquivo:
 
 i3geo/ferramentas/metaestat/editorlimites.js
@@ -41,24 +45,44 @@ Fun&ccedil;&otilde;es de edi&ccedil;&atilde;o vetorial utilizadas pelo editor de
  */
 i3GEOF.editorlimites = {
 	/**
-	 * Estilo do objeto DOM com a imagem de aguarde existente no cabecalho da janela
+	 * Objeto DOM com a imagem de aguarde existente no cabecalho da janela
 	 *
 	*/
 	aguarde: "",
+	/**
+	 * Guarda o Id do DIV que recebera o conteudo HTML do editor
+	 */
 	iddiv: "",
+	/**
+	 * Objeto criado com new google.maps.drawing.DrawingManager
+	 */
 	drawingManager: "",
 	selectedShape: null,
+	/**
+	 * Array que guarda todos os objetos que estao atualmente no mapa
+	 * E atualizado toda vez que uma figura e acrescentada ou removida
+	 */
 	shapes: [],
-	regioestemas:{},//guarda o mapeamento entre o codigo da regiao e o codigo do layer adicionado ao mapa
-	temasregioes:{},//guarda o mapeamento entre o codigo da regiao e o codigo do layer adicionado ao mapa
-	descregioes:[],//guarda os dados descritivos sobre cada regiao obtidos na formacao no combo de escolha de regioes
+	/**
+	 * guarda o mapeamento entre o codigo da regiao e o codigo do layer adicionado ao mapa
+	 */
+	regioestemas:{},
+	/**
+	 * Guarda o mapeamento entre o codigo da regiao e o codigo do layer adicionado ao mapa
+	 */
+	temasregioes:{},
+	/**
+	 * Guarda os dados descritivos sobre cada regiao obtidos na formacao no combo de escolha de regioes
+	 */
+	descregioes:[],
 	/**
 	 * Inicia o editor
 	 *
-	 * O objeto googlemap e i3GeoMap
+	 * Cria o objeto da API do Google Maps com new google.maps.drawing.DrawingManager
+	 * A janela flutuante que recebera os componentes do editor ja deve estar aberta (veja editorlimites.php)
+	 * Executa i3GEOF.editorlimites.html
 	 *
-	 * @param {String} Id do DIV que recebera o conteudo HTML do editor. Ja deve estar criado no HTML
-	 * @return
+	 * @param Id do DIV que recebera o conteudo HTML do editor
 	*/
 	inicia: function(iddiv){
 		var i,n,ics;
@@ -125,19 +149,21 @@ i3GEOF.editorlimites = {
 				i3GEOF.editorlimites.shapes.push(newShape);
 			}
 		});
-				google.maps.event.addListener(
-					i3GEOF.editorlimites.drawingManager,
-					'drawingmode_changed',
-					i3GEOF.editorlimites.clearSelection
-				);
-				google.maps.event.addListener(
-					i3GeoMap,
-					'click',
-					i3GEOF.editorlimites.clearSelection
-				);
+		google.maps.event.addListener(
+			i3GEOF.editorlimites.drawingManager,
+			'drawingmode_changed',
+			i3GEOF.editorlimites.clearSelection
+		);
+		google.maps.event.addListener(
+			i3GeoMap,
+			'click',
+			i3GEOF.editorlimites.clearSelection
+		);
 	},
 	/**
 	 * Atualiza as camadas do mapa que sao oriundas do sistema METAESTAT
+	 * Busca a lista de camadas com ferramentas/metaestat/analise.php?funcao=LISTACAMADASMETAESTAT
+	 * Faz um loop para atualizar cada camada
 	 */
 	atualizaCamadasMetaestat: function(){
 		var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=LISTACAMADASMETAESTAT&g_sid="+i3GEO.configura.sid,
@@ -149,15 +175,11 @@ i3GEOF.editorlimites = {
 			};
 		cpJSON.call(p,"foo",temp);
 	},
-	/*
-	Function: html
-
-	Gera o código html para apresentaç&atilde;o das opções da ferramenta
-
-	Retorno:
-
-	String com o código html
-	*/
+	/**
+	 * Monta o codigo HTML com o conteudo da ferramenta
+	 * Define os botoes e demais elementos que serao preenchidos via codigo
+	 * @return html
+	 */
 	html:function(){
 		var ins = '<div style=margin-left:5px >' +
 		'	<button title="Desenhar um polígono" onclick="i3GEOF.editorlimites.digitalizaPol(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon-create.png" /></button>' +
@@ -170,22 +192,26 @@ i3GEOF.editorlimites = {
 		'	<br><div id="i3geoCartoRegioesEditaveisDiv" ><img style="display:block;z-index:2" src="'+i3GEO.configura.locaplic+'/imagens/aguarde.gif" /></div></div>'; //combo para escolher a regiao
 		return ins;
 	},
-	/*
-	Function: ativaFoco
-
-	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
-	*/
+	/**
+	 * Atualiza a ferramenta quando a janela flutuante tem seu foco ativado
+	 */
 	ativaFoco: function(){
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 		i3GEO.barraDeBotoes.ativaIcone("pan");
 		i3GEOF.editorlimites.mudaicone();
 		i3GEO.Interface.googlemaps.recalcPar();
 	},
+	/**
+	 * Marca uma figura como selecionada
+	 * @param objeto shape que sera marcado
+	 */
 	setSelection: function(shape){
-		//i3GEOF.editorlimites.clearSelection();
-		//i3GEOF.editorlimites.selectedShape = shape;
 		shape.setEditable(!shape.editable);
 	},
+	/**
+	 * Marca todas as figuras como nao selecionadas
+	 * As figuras existentes no mapa sao mantidas na variavel i3GEOF.editorlimites.shapes
+	 */
 	clearSelection: function(){
 		var i,
 			n = i3GEOF.editorlimites.shapes.length;
@@ -195,6 +221,10 @@ i3GEOF.editorlimites = {
 			}
 		}
 	},
+	/**
+	 * Remove do mapa as figuras que estiverem selecionadas
+	 * @param boolean indica se deve ser feita uma confirmacao ou nao antes de apagar
+	 */
 	deleteSelectedShape: function(naoconfirma) {
 		if(!naoconfirma){
 			naoconfirma = false;
@@ -221,6 +251,10 @@ i3GEOF.editorlimites = {
 			i3GEO.janela.tempoMsg("Selecione pelo menos uma figura");
 		}
 	},
+	/**
+	 * Lista as figuras que estao marcadas como selecionadas
+	 * @return array de shapes
+	 */
 	selectedShapes: function() {
 		var i,s = [],
 		n = i3GEOF.editorlimites.shapes.length;
@@ -231,6 +265,10 @@ i3GEOF.editorlimites = {
 		}
 		return s;
 	},
+	/**
+	 * Lista as coordenadas de todas as figuras existentes
+	 * @return objeto contendo a indicacao do tipo de figura e o array com a lista de coordenadas
+	 */
 	getCoordenadas: function(){
 		var coordenadas = [],
 			lista = [],
@@ -256,41 +294,24 @@ i3GEOF.editorlimites = {
 		p = {"tipo":tipo,"coordenadas":lista};
 		return p;
 	},
+	/**
+	 * Converte um objeto shape em uma string WKT
+	 * @param shape
+	 */
 	toWKT: function(obj){
 		var wkt = new Wkt.Wkt();
 		wkt.fromObject(obj);
 		return wkt.write();
-		/*
-		var wkt = "",
-			coordenadas = obj.coordenadas,
-			n = coordenadas.length,
-			lista = [],
-			i,c;
-		if(obj.tipo == "polygon" || obj.tipo == "" || obj.tipo == undefined ){
-			if(n == 1 && coordenadas[0] != ""){
-				coordenadas.push(coordenadas[0][0]);
-				wkt = "POLYGON(("+coordenadas.toString()+"))";
-			}
-			else{
-				for(i=0;i<n;i++){
-					c = coordenadas[i];
-					c.push(c[0][0]);
-					lista.push("(("+c.toString()+"))");
-				}
-				if(lista.length > 0)
-				{wkt = "MULTIPOLYGON("+lista.toString()+")";}
-			}
-		}
-		if(obj.tipo == "point"){
-
-		}
-		if(obj.tipo == "polyline"){
-
-		}
-		return wkt;
-		*/
 	},
+	/**
+	 * Funcoes que controlam o processo de obtencao das coordenadas de um componente de uma camada existente no mapa
+	 */
 	capturaPoligonoTema:{
+		/**
+		 * Ativa a operaco de captura definindo o evento que sera executado no onclick do mouse sobre o mapa
+		 * O evento executa i3GEOF.editorlimites.capturaPoligonoTema.captura
+		 * @param botao da interface que foi pressionado
+		 */
 		ativa: function(botao){
 			i3GEOF.editorlimites.mudaicone(botao);
 			i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
@@ -299,6 +320,11 @@ i3GEOF.editorlimites = {
 		},
 		desativa: function(){
 		},
+		/**
+		 * Realiza a captura de um componente do mapa quando o usuario faz o clique
+		 * A captura e feita com classesphp/mapa_controle.php&funcao=identifica3
+		 * O resultado e adicionado ao mapa como um novo objeto shape
+		 */
 		captura: function(){
 			var temp,tema="",regiao="",p,par,
 				aguarde = $i("janelaEditorLimites_imagemCabecalho");
@@ -366,40 +392,12 @@ i3GEOF.editorlimites = {
 			}
 		}
 	},
-	/*
-	Function: mudaicone
-
-	Altera as bordas dos ícones e desativa eventos anteriores
-	*/
-	mudaicone: function(botao){
-		var c = $i(i3GEOF.editorlimites.iddiv),
-			ci = c.getElementsByTagName("img"),
-			n = ci.length,
-			i;
-		for(i=0;i<n;i++){
-			ci[i].parentNode.style.backgroundColor = "#F5F5F5";
-		}
-		i3GEO.eventos.MOUSECLIQUE = [];
-		i3GEOF.editorlimites.capturaPoligonoTema.desativa();
-		i3GEOF.editorlimites.editarAtributos.desativa();
-		if(botao && botao.style){
-			botao.style.backgroundColor = "#cedff2";
-		}
-	},
-	digitalizaPol: function(botao){
-		i3GEOF.editorlimites.mudaicone(botao);
-		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
-		i3GEOF.editorlimites.drawingManager.setOptions({
-			drawingMode: google.maps.drawing.OverlayType.POLYGON
-		});
-	},
-	seleciona: function(botao){
-		i3GEOF.editorlimites.mudaicone(botao);
-		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
-		i3GEOF.editorlimites.drawingManager.setOptions({
-			drawingMode: null
-		});
-	},
+	/**
+	 * Monta um combo com a lista de regioes cadastradas e que podem ser editadas pelo editor
+	 * A regiao em edicao sera a escolhida nesse combo
+	 * Ao ser escolhida, e adicionada uma camada no mapa
+	 * @param opcional codigo da regiao no cadastro. Se nao for definido, busca todas
+	 */
 	comboRegiaoEditavel: function(codigo_tipo_regiao){
 		if(!codigo_tipo_regiao){
 			codigo_tipo_regiao = "";
@@ -425,6 +423,10 @@ i3GEOF.editorlimites = {
 		};
 		i3GEO.php.listaTipoRegiao(temp,codigo_tipo_regiao);
 	},
+	/**
+	 * Funcao ativada no evento onchange do combo criado com comboRegiaoEditavel
+	 * Executa i3GEO.php.mapfileTipoRegiao
+	 */
 	comboRegiaoEditavelOnchange: function(combo){
 		if(combo.value === ""){
 			return;
@@ -440,6 +442,57 @@ i3GEOF.editorlimites = {
 		};
 		i3GEO.php.mapfileTipoRegiao(temp,combo.value);
 	},
+	/**
+	 * Altera as bordas dos icones e desativa eventos
+	 * Desativa todos os botoes e ativa o indicado
+	 * @param objeto DOM que representa o botao que sera focado
+	 */
+	mudaicone: function(botao){
+		var c = $i(i3GEOF.editorlimites.iddiv),
+			ci = c.getElementsByTagName("img"),
+			n = ci.length,
+			i;
+		for(i=0;i<n;i++){
+			ci[i].parentNode.style.backgroundColor = "#F5F5F5";
+		}
+		i3GEO.eventos.MOUSECLIQUE = [];
+		i3GEOF.editorlimites.capturaPoligonoTema.desativa();
+		i3GEOF.editorlimites.editarAtributos.desativa();
+		if(botao && botao.style){
+			botao.style.backgroundColor = "#cedff2";
+		}
+	},
+	/**
+	 * Ativa a digitalizacao de poligono
+	 * @param objeto DOM que representa o botao que sera focado
+	 */
+	digitalizaPol: function(botao){
+		i3GEOF.editorlimites.mudaicone(botao);
+		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
+		i3GEOF.editorlimites.drawingManager.setOptions({
+			drawingMode: google.maps.drawing.OverlayType.POLYGON
+		});
+	},
+	/**
+	 * Ativa a selecao de figuras
+	 * @param objeto DOM que representa o botao que sera focado
+	 */
+	seleciona: function(botao){
+		i3GEOF.editorlimites.mudaicone(botao);
+		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
+		i3GEOF.editorlimites.drawingManager.setOptions({
+			drawingMode: null
+		});
+	},
+	/**
+	 * Adiciona uma nova figura ao mapa (shape)
+	 * @param objeto shape (API do Google)
+	 * @param codigo do layer que sera vinculado ao shape
+	 * @param coluna do tema que contem os identificadores de cada um de seus elementos (registros)
+	 * @param valor do identificador
+	 * @param coluna que cntem os nomes das regioes
+	 * @param nome da regiao a ser adicionada
+	 */
 	adicionaPoligonos: function(obj,tema,colunaid,valorid,colunanome,valornome){
 		if(!tema){
 			tema = $i("i3geoCartoRegioesEditaveis").value;
@@ -456,25 +509,12 @@ i3GEOF.editorlimites = {
 		if(!valornome){
 			valornome = "";
 		}
-		/*
-		var n = listaDePontos.length,
-		i = 0,
-		nn,
-		temp,
-		j,
-		pol,
-		pontos = [];
-
-		for(i=0;i<n;i++){
-			pontos = [];
-			nn = listaDePontos[i].length;
-			for(j=0;j<nn;j++){
-				temp = listaDePontos[i][j];
-				pontos.push(new google.maps.LatLng(temp[1],temp[0]));
-			}
-			pontos.push(pontos[0]);
-			pol = new google.maps.Polygon({
-				path: pontos,
+		var pol;
+		if (Wkt.isArray(obj)) { // Distinguish multigeometries (Arrays) from objects
+				for (i in obj) {
+						if (obj.hasOwnProperty(i) && !Wkt.isArray(obj[i])) {
+							pol = new google.maps.Polygon({
+				path: obj[i].getPath(),
 				map: i3GeoMap,
 				fillColor: '#ffff00',
 				fillOpacity: .5,
@@ -492,35 +532,10 @@ i3GEOF.editorlimites = {
 				i3GEOF.editorlimites.setSelection(pol);
 			});
 			i3GEOF.editorlimites.shapes.push(pol);
-		}
-		*/
-		var pol;
-				if (Wkt.isArray(obj)) { // Distinguish multigeometries (Arrays) from objects
-						for (i in obj) {
-								if (obj.hasOwnProperty(i) && !Wkt.isArray(obj[i])) {
-									pol = new google.maps.Polygon({
-						path: obj[i].getPath(),
-						map: i3GeoMap,
-						fillColor: '#ffff00',
-						fillOpacity: .5,
-						strokeWeight: 2,
-						clickable: true,
-						zIndex: 1,
-						editable: true,
-						tema: tema,
-						colunaid: colunaid,
-						valorid: valorid,
-						colunanome: colunanome,
-						valornome: valornome
-					});
-					google.maps.event.addListener(pol, 'click', function() {
-						i3GEOF.editorlimites.setSelection(pol);
-					});
-					i3GEOF.editorlimites.shapes.push(pol);
-								}
 						}
-						return;
 				}
+				return;
+		}
 		if (obj.type === 'polygon' || obj.type === 'linestring'){
 			pol = new google.maps.Polygon({
 				paths: obj.getPaths(),
@@ -544,7 +559,14 @@ i3GEOF.editorlimites = {
 			return;
 		}
 	},
+	/**
+	 * Salva um poligono no banco de dados
+	 */
 	salvaLimite: {
+		/**
+		 * Inicia a ferramenta definindo as funcoes dos botoes
+		 * Executa i3GEOF.editorlimites.salvaLimite.criaJanelaFlutuante
+		 */
 		inicia: function(){
 			if(i3GEO.login.verificaCookieLogin() === false){
 				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
@@ -587,7 +609,9 @@ i3GEOF.editorlimites = {
 				i3GEO.janela.tempoMsg("Selecione uma figura");
 			}
 		},
-		//altera um poligono que ja existia
+		/**
+		 * Monta o HTML para o formulario que permite salvar os dados
+		 */
 		html:function(colunaIdElemento,valorIdElemento,colunaNomeElemento,valorNomeElemento){
 			var ins = '' +
 				'<p class=paragrafo >Se o valor do c&oacute;digo for vazio, ser&aacute; criado um novo elemento. Caso contr&aacute;rio, os valores atualmente registrados ser&atilde;o atualizados.</p>' +
@@ -606,6 +630,10 @@ i3GEOF.editorlimites = {
 				'<br><br><input id=i3GEOFmetaestati3GEOF.editorlimitesBotao3 type="button" value="Excluir pol&iacute;gono" />';
 			return ins;
 		},
+		/**
+		 * Cria a janela flutuante para receber os componentes da ferramenta
+		 * @param html com o conteudo da ferramenta
+		 */
 		criaJanelaFlutuante: function(html){
 			var titulo,cabecalho,minimiza,janela;
 			cabecalho = function(){};
@@ -630,6 +658,11 @@ i3GEOF.editorlimites = {
 			$i("salvaLimite_corpo").innerHTML = html;
 			YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.editorlimites.mudaicone);
 		},
+		/**
+		 * Aplica a operacao de salvar os dados no banco para o shape selecionado
+		 * Executa admin/php/metaestat.php?funcao=mantemDadosRegiao
+		 * @param boolean indica se as coordenadas serao salvas tambem
+		 */
 		gravaDados: function(comwkt){
 			if(i3GEO.login.verificaCookieLogin() === false){
 				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
@@ -663,6 +696,10 @@ i3GEOF.editorlimites = {
 			p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mantemDadosRegiao&tipo=";
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificadornovo="+identificadornovo+"&identificador="+identificador+"&nome="+nome+"&wkt="+wkt);
 		},
+		/**
+		 * Exclui um registro do banco de dados
+		 * Executa admin/php/metaestat.php?funcao=mantemDadosRegiao&tipo=excluir
+		 */
 		excluiPoligono: function(){
 			if(i3GEO.login.verificaCookieLogin() === false){
 				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
@@ -685,10 +722,20 @@ i3GEOF.editorlimites = {
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador="+identificador);
 		}
 	},
+	/**
+	 *Funcoes que controlam o processo de edicao de atributos de um shape
+	 */
 	editarAtributos: {
 		aliascolunas: "", //guarda os nomes das colunas e seus aliases para permitir a criacao de novos registros
 		x: "",
 		y: "",
+		/**
+		 * Ativa a ferramenta
+		 * Define os eventos de onclick para abrir formulario quando o usuario clica no mapa
+		 * Para cada regiao sao obtidas todas as variaveis cadastradas
+		 * Executa i3GEOF.editorlimites.editarAtributos.criaJanelaFlutuante
+		 * Executa i3GEOF.editorlimites.editarAtributos.comboVariaveis();
+		 */
 		ativa: function(botao){
 			if($i("i3geoCartoRegioesEditaveis").value == ""){
 				i3GEO.janela.tempoMsg("Escolha uma regiao");
@@ -706,12 +753,96 @@ i3GEOF.editorlimites = {
 				i3GEOF.editorlimites.editarAtributos.comboVariaveis();
 			}
 		},
+		/**
+		 * Fecha a janela de edicao
+		 */
 		desativa: function(){
 			var janela = YAHOO.i3GEO.janela.manager.find("editaAtributos");
 			if(janela){
 				janela.destroy();
 			}
 		},
+		criaJanelaFlutuante: function(html){
+			var janela,titulo,cabecalho,minimiza;
+			cabecalho = function(){};
+			minimiza = function(){
+				i3GEO.janela.minimiza("editaAtributos");
+			};
+			titulo = "Atributos&nbsp;&nbsp;&nbsp;</a>";
+			janela = i3GEO.janela.cria(
+				"250px",
+				"265px",
+				"",
+				"",
+				"",
+				titulo,
+				"editaAtributos",
+				false,
+				"hd",
+				cabecalho,
+				minimiza
+			);
+			$i("editaAtributos_corpo").style.backgroundColor = "white";
+			$i("editaAtributos_corpo").innerHTML = html;
+			i3GEO.janela.tempoMsg("Ap&oacute;s escolher a medida da vari&aacute;vel, clique no mapa para escolher o limite geogr&aacute;fico.");
+			YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.editorlimites.mudaicone);
+		},
+		/**
+		 * Fornece o HTML com os objetos que receberao os componentes da ferramenta
+		 * @return html
+		 */
+		html: function(){
+			var ins = '' +
+				'<p class="paragrafo" ><div id="editarAtributosVariaveis" ></div></p>' +
+				'<p class="paragrafo" ><div id="editarAtributosMedidasVariavel" ></div></p>' +
+				'<p class="paragrafo" ><div id="editarAtributosRegiao" ></div></p>' +
+				'<p class="paragrafo" ><div id="editarAtributosForm" ></div></p>' +
+				'';
+			return ins;
+		},
+		/**
+		 * Monta um combo para escolha de uma variavel que sera editada
+		 * Executa i3GEO.php.listaVariavel
+		 */
+		comboVariaveis: function(){
+			var temp = function(dados){
+				var i,n = dados.length, ins = '';
+				ins += '<p class="paragrafo" >Escolha uma vari&aacute;vel para editar</p>';
+				ins += "<select style='box-shadow:0 1px 5px gray;width:200px' onchange='i3GEOF.editorlimites.editarAtributos.comboMedidasVariavel(this)'><option value=''>---</option>";
+				for(i=0;i<n;i++){
+					ins += "<option title='"+dados[i].descricao+"' value='"+dados[i].codigo_variavel+"'>"+dados[i].nome+"</option>";
+				}
+				ins += "</select>";
+				$i("editarAtributosVariaveis").innerHTML = ins;
+			};
+			i3GEO.php.listaVariavel(temp,"i3geo_metaestat");
+		},
+		/**
+		 * Monta um combo com as medidas de uma variavel
+		 * Executa i3GEO.php.listaMedidaVariavel
+		 * @param objeto DOM do tipo select que contem a lista de variaveis
+		 */
+		comboMedidasVariavel: function(comboMedidas){
+			var temp = function(dados){
+				var i,n = dados.length, ins = '';
+				ins += '<p class="paragrafo" >Escolha uma medida da vari&aacute;vel para editar</p>';
+				ins += "<select id='editarAtributosComboMedidas' style='box-shadow:0 1px 5px gray;width:200px' onchange=''><option value=''>---</option>";
+				for(i=0;i<n;i++){
+					if(dados[i].esquemadb == "i3geo_metaestat" && dados[i].codigo_tipo_regiao == $i("i3geoCartoRegioesEditaveis").value){
+						ins += "<option value='"+dados[i].id_medida_variavel+"'>"+dados[i].nomemedida+"</option>";
+					}
+				}
+				ins += "</select>";
+				$i("editarAtributosMedidasVariavel").innerHTML = ins;
+			};
+			if(comboMedidas.value !== ""){
+				i3GEO.php.listaMedidaVariavel(comboMedidas.value,temp);
+			}
+		},
+		/**
+		 * Captura os atributos de um elemento do mapa
+		 * Executa i3GEOF.editorlimites.editarAtributos.pegaDados();
+		 */
 		captura: function(){
 			if(!YAHOO.i3GEO.janela.manager.find("editaAtributos")){
 				i3GEOF.editorlimites.mudaicone(botao);
@@ -721,6 +852,11 @@ i3GEOF.editorlimites = {
 			i3GEOF.editorlimites.editarAtributos.y = objposicaocursor.ddy;
 			i3GEOF.editorlimites.editarAtributos.pegaDados();
 		},
+		/**
+		 * Obtem os dados de um elemento de uma regiao
+		 * Monta o formulario para edicao
+		 * Executa admin/php/metaestat.php?funcao=listaAtributosMedidaVariavelXY
+		 */
 		pegaDados: function(){
 			var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaAtributosMedidaVariavelXY",
 				codigo_tipo_regiao = $i("i3geoCartoRegioesEditaveis").value,
@@ -786,6 +922,9 @@ i3GEOF.editorlimites = {
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&id_medida_variavel="+id_medida_variavel+"&x="+i3GEOF.editorlimites.editarAtributos.x+"&y="+i3GEOF.editorlimites.editarAtributos.y);
 		},
 		//TODO redesenhar as camadas que sofrerem alterações em função do salvar ou excluir
+		/**
+		 * Exclui o valor de uma medida de variavel para o componente de uma regiao
+		 */
 		excluir: function(id){
 			if(i3GEO.login.verificaCookieLogin() === false){
 				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
@@ -805,6 +944,9 @@ i3GEOF.editorlimites = {
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+identificador_regiao+"&id_medida_variavel="+id_medida_variavel+"&id="+id);
 
 		},
+		/**
+		 * Salva os valores digitados
+		 */
 		salva: function(){
 			if(i3GEO.login.verificaCookieLogin() === false){
 				i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
@@ -863,72 +1005,11 @@ i3GEOF.editorlimites = {
 			i3GEO.janela.abreAguarde("aguardeSalvaAtributos","Salvando...");
 			i3GEO.janela.AGUARDEMODAL = false;
 			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+identificador_regiao+"&id_medida_variavel="+id_medida_variavel+"&colunas="+colunasT[0]+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT.join(";"));
-		},
-		criaJanelaFlutuante: function(html){
-			var janela,titulo,cabecalho,minimiza;
-			cabecalho = function(){};
-			minimiza = function(){
-				i3GEO.janela.minimiza("editaAtributos");
-			};
-			titulo = "Atributos&nbsp;&nbsp;&nbsp;</a>";
-			janela = i3GEO.janela.cria(
-				"250px",
-				"265px",
-				"",
-				"",
-				"",
-				titulo,
-				"editaAtributos",
-				false,
-				"hd",
-				cabecalho,
-				minimiza
-			);
-			$i("editaAtributos_corpo").style.backgroundColor = "white";
-			$i("editaAtributos_corpo").innerHTML = html;
-			i3GEO.janela.tempoMsg("Ap&oacute;s escolher a medida da vari&aacute;vel, clique no mapa para escolher o limite geogr&aacute;fico.");
-			YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.editorlimites.mudaicone);
-		},
-		html: function(){
-			var ins = '' +
-				'<p class="paragrafo" ><div id="editarAtributosVariaveis" ></div></p>' +
-				'<p class="paragrafo" ><div id="editarAtributosMedidasVariavel" ></div></p>' +
-				'<p class="paragrafo" ><div id="editarAtributosRegiao" ></div></p>' +
-				'<p class="paragrafo" ><div id="editarAtributosForm" ></div></p>' +
-				'';
-			return ins;
-		},
-		comboVariaveis: function(){
-			var temp = function(dados){
-				var i,n = dados.length, ins = '';
-				ins += '<p class="paragrafo" >Escolha uma vari&aacute;vel para editar</p>';
-				ins += "<select style='box-shadow:0 1px 5px gray;width:200px' onchange='i3GEOF.editorlimites.editarAtributos.comboMedidasVariavel(this)'><option value=''>---</option>";
-				for(i=0;i<n;i++){
-					ins += "<option title='"+dados[i].descricao+"' value='"+dados[i].codigo_variavel+"'>"+dados[i].nome+"</option>";
-				}
-				ins += "</select>";
-				$i("editarAtributosVariaveis").innerHTML = ins;
-			};
-			i3GEO.php.listaVariavel(temp,"i3geo_metaestat");
-		},
-		comboMedidasVariavel: function(comboMedidas){
-			var temp = function(dados){
-				var i,n = dados.length, ins = '';
-				ins += '<p class="paragrafo" >Escolha uma medida da vari&aacute;vel para editar</p>';
-				ins += "<select id='editarAtributosComboMedidas' style='box-shadow:0 1px 5px gray;width:200px' onchange=''><option value=''>---</option>";
-				for(i=0;i<n;i++){
-					if(dados[i].esquemadb == "i3geo_metaestat" && dados[i].codigo_tipo_regiao == $i("i3geoCartoRegioesEditaveis").value){
-						ins += "<option value='"+dados[i].id_medida_variavel+"'>"+dados[i].nomemedida+"</option>";
-					}
-				}
-				ins += "</select>";
-				$i("editarAtributosMedidasVariavel").innerHTML = ins;
-			};
-			if(comboMedidas.value !== ""){
-				i3GEO.php.listaMedidaVariavel(comboMedidas.value,temp);
-			}
 		}
 	},
+	/**
+	 * Abre a janela de ajuda sobre a operacao dos botoes do editor
+	 */
 	ajuda: function(){
 		var titulo,cabecalho,minimiza,html = "";
 		cabecalho = function(){};
