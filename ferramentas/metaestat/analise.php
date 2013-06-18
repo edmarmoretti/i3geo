@@ -71,7 +71,7 @@ $retorno = "";
  * Cada rotina recebe parametros especificos
  * A documentacao de cada rotina encontra-se no programa PHP que e executado
  * $map_file e obtido da variavel session e corresponde ao mapa que esta sendo usado
- * 
+ *
  * Quando um layer original do sistema METAESTAT e alterado, isso e indicado pelo metadata METAESTAT_DERIVADO
  * que passa a ser marcado com "sim"
  */
@@ -142,7 +142,7 @@ else
 /**
  * Adiciona ao mapa atual um novo layer para a representacao de uma regiao
  * Se o layer ja existir, sera removido e criado outro
- * 
+ *
  * @param arquivo mapfile do mapa atual
  * @param codigo da regiao no cadastro
  * @param cor do contorno
@@ -208,7 +208,7 @@ function mapaDeCalor($map_file,$tema){
 }
 /**
  * Altera as caracteristicas de representacao de um layer
- * 
+ *
  * @param mapfile do mapa atual
  * @param nome do layer que sera processado
  * @param tipo de processamento pponto|hachurea|opacidade
@@ -485,6 +485,16 @@ function analise_listaCamadasFiltroTempo($map_file){
 	}
 	return $camadas;
 }
+/**
+ * Aplica um filtro de tempo em uma camada
+ * @param arquivo mapfile do mapa atual
+ * @param nome do layer que sera processado
+ * @param lista com os ids dos parametros de tempo inicial
+ * @param lista com os valores dos parametros de pari
+ * @param lista com os ids dos parametros de tempo final
+ * @param lista com os valores dos parametros de parf
+ * @return string
+ */
 function analise_aplicaFiltroTempo($map_file,$tema,$pari,$vali,$parf,$valf){
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getlayerbyname($tema);
@@ -516,6 +526,12 @@ function analise_aplicaFiltroTempo($map_file,$tema,$pari,$vali,$parf,$valf){
 	$mapa->save($map_file);
 	return "ok";
 }
+/**
+ * Remove o filtro de tempo
+ * @param arquivo mapfile do mapa atual
+ * @param nome do layer que sera processado
+ * @return string
+ */
 function analise_removeFiltroTempo($map_file,$tema){
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getlayerbyname($tema);
@@ -527,6 +543,11 @@ function analise_removeFiltroTempo($map_file,$tema){
 	$mapa->save($map_file);
 	return "ok";
 }
+/**
+ * Lista os nomes das camadas do mapa atual que sao originarias do sistema de metadados
+ * @param arquivo mapfile do mapa atual
+ * @return Array com o nome dos layers
+ */
 function analise_listaCamadasMetaestat($map_file){
 	$mapa = ms_newMapObj($map_file);
 	$layers = analise_listaLayersMetaestat($mapa);
@@ -536,7 +557,40 @@ function analise_listaCamadasMetaestat($map_file){
 	}
 	return $camadas;
 }
-//se $tipo for igual a "" remove os filtros
+/**
+ * Lista os objetos layers do mapa atual que sao originarias do sistema de metadados
+ * @param arquivo mapfile do mapa atual
+ * @return Array com os layers
+ */
+function analise_listaLayersMetaestat($mapa){
+	$c = $mapa->numlayers;
+	$layers = array();
+	for ($i=0;$i < $c;++$i){
+		$l = $mapa->getlayer($i);
+		if($l->getmetadata("METAESTAT") == "SIM"){
+			$layers[] = $l;
+		}
+	}
+	return $layers;
+}
+function analise_listaLayersRegiao($layers,$codigo_tipo_regiao){
+	$final = array();
+	foreach($layers as $l){
+		if($l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO") == $codigo_tipo_regiao){
+			$final[] = $l;
+		}
+	}
+	return $final;
+}
+/**
+ * Aplica um filtro para mostrar apenas uma regiao escolhida pelo usuario
+ * Altera todos os layers com o mesmo codigo_tipo_regiao
+ * Se codigo_tipo_regiao for vazio, remove os filtros de todos os layers
+ * @param arquivo mapfile do mapa atual
+ * @param codigo da regiao
+ * @param valor da regiao (id)
+ * @return string
+ */
 function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao){
 	//echo $codigo_tipo_regiao;exit;
 	$m = new Metaestat();
@@ -576,25 +630,5 @@ function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao
 	}
 	$mapa->save($map_file);
 	return "ok";
-}
-function analise_listaLayersMetaestat($mapa){
-	$c = $mapa->numlayers;
-	$layers = array();
-	for ($i=0;$i < $c;++$i){
-		$l = $mapa->getlayer($i);
-		if($l->getmetadata("METAESTAT") == "SIM"){
-			$layers[] = $l;
-		}
-	}
-	return $layers;
-}
-function analise_listaLayersRegiao($layers,$codigo_tipo_regiao){
-	$final = array();
-	foreach($layers as $l){
-		if($l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO") == $codigo_tipo_regiao){
-			$final[] = $l;
-		}
-	}
-	return $final;
 }
 ?>
