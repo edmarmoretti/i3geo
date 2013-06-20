@@ -33,14 +33,35 @@ Arquivo:
 i3geo/admin/php/classe_metaestat.php
 */
 /**
-Classe metaestat
+ * Classe metaestat
+ * O construtor da classe faz o include do programa conexao.php que por sua vez faz o include
+ * de i3geo/ms_configura.php. Com base nesses programas sao definidas algumas das variaveis globais
 */
 class Metaestat{
+	/**
+	 * Nome do esquema no banco de dados utilizado para armazenar as tabelas
+	 * do sistema de admnistracao. Obtido de ms_configura.php
+	 */
 	protected $esquemaadmin;
+	/**
+	 * Objeto PDO obtido com new PDO com direito de leitura no banco de dados de administracao
+	 */
 	public $dbh;
+	/**
+	 * Objeto PDO obtido com new PDO com direito de escrita no banco de dados de administracao
+	 */
 	protected $dbhw;
+	/**
+	 * Indica se e necessario converter para UTF strings obtidas do banco de administracao
+	 */
 	protected $convUTF;
+	/**
+	 * Pasta temporaria utilizada pelo mapserver
+	 */
 	public $dir_tmp;
+	/**
+	 * Pasta onde e feito o cache de imagens do i3Geo
+	 */
 	public $nomecache;
 	/**
 	 * Construtor
@@ -68,9 +89,18 @@ class Metaestat{
 	function __destruct(){
 		$this->fechaConexao;
 	}
+	/**
+	 * Cria um nome de arquivo concatenando $_request
+	 * @return string
+	 */
 	function nomeCache(){
 		return md5(implode("x",$_REQUEST));
 	}
+	/**
+	 * Cria um nome aleatorio
+	 * @param numero de caracteres
+	 * @return string
+	 */
 	function nomeRandomico($n=10){
 		$nomes = "";
 		$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -81,11 +111,19 @@ class Metaestat{
 		}
 		return $nomes;
 	}
+	/**
+	 * Fecha a conexao com o banco de dados de administracao
+	 */
 	function fechaConexao(){
 		$this->dbh = null;
 		$this->dbhw = null;
 	}
-	//aceita string ou array
+	/**
+	 * Aplica a conversao de caracteres em um array ou string conforme o padrao do banco de administracao
+	 * Verifica se o parametro e um array ou um texto e executa converteTexto()
+	 * @param string|array
+	 * @return string|array
+	 */
 	function converteTextoArray($texto){
 		try	{
 			if(empty($texto) || strtoupper($texto) == "NULL"){
@@ -115,6 +153,11 @@ class Metaestat{
 			return $texto;
 		}
 	}
+	/**
+	 * Converte a codificacao de caracteres de uma string conforme o padrao do banco de admnistracao
+	 * @param string
+	 * @return string
+	 */
 	function converteTexto($texto){
 		if($texto == "0"){
 			return "0";
@@ -130,21 +173,15 @@ class Metaestat{
 		}
 		return $texto;
 	}
-	/*
-	Function: execSQL
-
-	Executa um SQL no banco de administracao
-
-	Parametros:
-
-	$sql {string}
-
-	$id {string} - se for vazio retorna todos os registros, caso contrario, retorna apenas o primeiro
-
-	Return:
-
-	{array}
-	*/
+	/**
+	 * Executa um SQL no banco de administracao
+	 * Utiliza fetchAll() para obter os dados
+	 * O resultado e processado por converteTextoArray se for desejado
+	 * @param string sql
+	 * @param se for vazio retorna todos os registros, caso contrario, retorna apenas o primeiro
+	 * @param indica se deve ser feita a conversao de caracteres
+	 * @return Array
+	 */
 	function execSQL($sql,$id="",$convTexto=true){
 		try	{
 			$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
@@ -179,10 +216,11 @@ class Metaestat{
 			return false;
 		}
 	}
-	/*
-	Function: execSQLDB
-
-	Executa um SQL no banco de dados definido em uma conexao
+	/**
+	 * Executa um SQL no banco de dados definido em uma conexao cadastrada no sistema de admnistracao
+	 * @param codigo da conexao
+	 * @param tring sql
+	 * @return resultado de execSQL
 	*/
 	function execSQLDB($codigo_estat_conexao,$sql){
 		$c = $this->listaConexao($codigo_estat_conexao,true);
@@ -193,10 +231,18 @@ class Metaestat{
 		$this->dbh = $dbhold;
 		return $res;
 	}
+	/**
+	 * Insere um registro em uma tabela do sistema de administracao
+	 * Para efeitos de compatibilidade entre bancos de dados, ao inserir um registro e definido um valor aleatorio
+	 * que e armazenado em uma das colunas. Esse valor e usado para recuperar o registro criado e assim
+	 * permitir a obtencao de seu ID
+	 * @param nome da tabela
+	 * @param nome da coluna que recebera o valor temporario
+	 * @param nome da coluna com os identificadores unicos
+	 * @return id do registro criado
+	 */
 	function insertId($tabela,$colunatemp,$colunaid){
 		$idtemp = (rand (9000,10000)) * -1;
-		//echo "INSERT INTO ".$this->esquemaadmin.$tabela." ($colunatemp) VALUES ('$idtemp')";exit;
-
 		$this->dbhw->query("INSERT INTO ".$this->esquemaadmin.$tabela." ($colunatemp) VALUES ('$idtemp')");
 		$id = $this->dbh->query("SELECT $colunaid FROM ".$this->esquemaadmin.$tabela." WHERE $colunatemp = '$idtemp'");
 		$id = $id->fetchAll();
@@ -204,8 +250,13 @@ class Metaestat{
 		$this->dbhw->query("UPDATE ".$this->esquemaadmin.$tabela." SET $colunatemp = '' WHERE $colunaid = $id AND $colunatemp = '$idtemp'");
 		return $id;
 	}
-	function excluirRegistro($tabela,$coluna,$id)
-	{
+	/**
+	 * Exclui um registro de uma tabela no banco de administracao
+	 * @param tabela alvo
+	 * @param coluna com os ids que identificam os registros
+	 * @param id do registro que sera selecionado e excluido
+	 */
+	function excluirRegistro($tabela,$coluna,$id){
 		try	{
 			$this->dbhw->query("DELETE from ".$this->esquemaadmin.$tabela." WHERE $coluna = $id");
 			return "ok";
@@ -214,8 +265,12 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	function excluirFonteinfoMedida($id_medida_variavel,$id_fonteinfo)
-	{
+	/**
+	 * Exclui um registro da tabela de ligacao entre medida de variavel e fonte
+	 * @paraam id da medida da variavel
+	 * @param id da fonte
+	 */
+	function excluirFonteinfoMedida($id_medida_variavel,$id_fonteinfo){
 		try	{
 			$this->dbhw->query("DELETE from ".$this->esquemaadmin."i3geoestat_fonteinfo_medida WHERE id_medida_variavel = $id_medida_variavel and id_fonteinfo = $id_fonteinfo");
 			return "ok";
@@ -224,17 +279,15 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: sqlMedidaVariavel
-
-	Monta o sql que permite acessar os dados de uma media de uma variavel
-
-	Parametros:
-
-	$id_medida_variavel - opcional
-
-	$todasascolunas - opcional
-	*/
+	/**
+	 * Monta o sql que permite acessar os dados de uma media de uma variavel
+	 * @param id da medida da variavel
+	 * @param inclui todas as colunas da tabela com os dados ou nao
+	 * @param coluna que sera usada para agrupar os dados
+	 * @param tipo de layer. Usado para escolher qual coluna com as geometrias sera incluida no sql
+	 * @param codigo do tipo de regiao. Se nao for definido, utiliza-se o default da variavel
+	 * @return array("sqlagrupamento"=>,"sql"=>,"sqlmapserver"=>,"filtro"=>,"colunas"=>,"alias"=>,"colunavalor"=>,"titulo"=>,"nomeregiao"=>)
+	 */
 	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = ""){
 		$filtro = false;
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
@@ -410,6 +463,23 @@ class Metaestat{
 		$sqlagrupamento = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlagrupamento);
 		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"],"titulo"=>$titulo,"nomeregiao"=>$dadosgeo["colunanomeregiao"]);
 	}
+	/**
+	 * Cria um arquivo mapfile para uma medida de variavel
+	 * Inclui no arquivo o layer de acesso aos dados
+	 * O mapfile contem apenas o layer
+	 * O arquivo e armazenado em uma pasta temporaria
+	 * O sql e obtido com o metodo sqlMedidaVariavel
+	 * @param id da medida da variavel
+	 * @param filtro que sera concatenado ao sql padrao da medida
+	 * @param 0|1 indica se todas as colunas da tabela original dos dados sera incluida no sql
+	 * @param tipo de layer
+	 * @param titulo do layer
+	 * @param id da classificacao cadastrada,se for vazio usa o primeiro
+	 * @param coluna que sera usada como agrupamento no sql
+	 * @param codigo do tipo de regiao cadastrada
+	 * @param valor de opacidade do layer
+	 * @return array("mapfile"=>,"layer"=>,"titulolayer"=>)
+	 */
 	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao="",$opacidade=""){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
 		//indicando onde deve comecar e terminar uma possivel clausula where
@@ -552,6 +622,19 @@ class Metaestat{
 		}
 		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
 	}
+	/**
+	 * Cria um mapfile para visualizacao de regioes
+	 * Inclui no arquivo o layer de acesso aos dados
+	 * O mapfile contem apenas o layer
+	 * O arquivo e armazenado em uma pasta temporaria
+	 * Se o arquivo para a mesma regiao ja existir, tenta usa-lo ao inves de criar um novo
+	 * @param codigo da regiao
+	 * @param cor do outline do simbolo de desenho
+	 * @param largura do simbolo
+	 * @param sim|nao inclui ou nao os labels
+	 * @param boolean remove o arquivo em cache e cria um novo
+	 * @return array("mapfile"=>,"layer"=>,"titulolayer"=>,"codigo_tipo_regiao"=>)
+	 */
 	function mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor="255,0,0",$width=1,$nomes="nao",$forcaArquivo=false){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
 		//indicando onde deve comecar e terminar uma possivel clausula where
@@ -705,6 +788,12 @@ class Metaestat{
 		}
 		return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
 	}
+	/**
+	 * Complementa um mapfile resumido inserindo seus layers em um mapfile completo, contendo todos os elementos necessarios para uso
+	 * Usado na geracao de WMS e outros servicos
+	 * @param mapfile resumido
+	 * @return nome do arquivo com o mapfile completo
+	 */
 	function mapfileCompleto($mapfile){
 		$f = $this->base;
 		if($f == ""){
@@ -749,6 +838,14 @@ class Metaestat{
 		$mapa->save($novonome);
 		return $novonome;
 	}
+	/**
+	 * Obtem os dados de uma medida de variavel
+	 * @param id da medida
+	 * @param filtro que sera concatenado ao sql
+	 * @param 0|1 mostra ou nao todas as colunas da tabela com os dados
+	 * @param coluna de agrupamento
+	 * @return execSQL
+	 */
 	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = ""){
 		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor);
 		//var_dump($sql);exit;
@@ -774,6 +871,12 @@ class Metaestat{
 		}
 		return false;
 	}
+	/**
+	 * Lista as ocorrencias de valores em uma coluna de uma medida de variavel
+	 * @param id da medida de variavel
+	 * @param coluna
+	 * @return execSQL
+	 */
 	function valorUnicoMedidaVariavel($id_medida_variavel,$coluna){
 		$sqlf = $this->sqlMedidaVariavel($id_medida_variavel,0,$coluna);
 		$sqlf = $sqlf["sqlagrupamento"];
@@ -789,6 +892,13 @@ class Metaestat{
 		}
 		return false;
 	}
+	/**
+	 * Sumario estatistico de uma medida de variavel
+	 * @param id da medida
+	 * @param filtro a ser concatenado ao sql
+	 * @param coluna de agrupamento
+	 * @return array("colunavalor"=>,"soma"=>,"media"=>,"menor"=>,"maior"=>,"quantidade"=>,"histograma"=>,"grupos"=>,"unidademedida"=>,"quartis"=>) 
+	 */
 	function sumarioMedidaVariavel($id_medida_variavel,$filtro="",$agruparpor=""){
 		if(!empty($agruparpor)){
 			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,1);
@@ -881,12 +991,18 @@ class Metaestat{
 		}
 		return false;
 	}
-	/*
-	Function: alteraMapa
-
-	Altera um mapa ou adiciona um novo
-
-	*/
+	/**
+	 * Altera um mapa cadastrado ou adiciona um novo
+	 * Mapas sao armazenados na tabela i3geoestat_mapa
+	 * Mapas contem grupos e grupos contem temas
+	 * Se o id for vazio, cria um novo mapa
+	 * @param id do mapa
+	 * @param titulo do mapa
+	 * @param string logotipo 1
+	 * @param string logotipo 2
+	 * @param publicado ou nao
+	 * @return id do mapa
+	 */
 	function alteraMapa($id_mapa="",$titulo="",$template="",$logoesquerdo="",$logodireito="",$publicado=""){
 		try	{
 			if($this->convUTF){
@@ -905,12 +1021,15 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraMapaGrupo
-
-	Altera um grupo de um mapa ou adiciona um novo
-
-	*/
+	/**
+	 * Altera um grupo de um mapa ou adiciona um novo
+	 * Se o id do grupo for vazio, cria um novo
+	 * Grupo contem temas
+	 * @param id do mapa que contem o grupo
+	 * @param id do grupo
+	 * @param titulo
+	 * @return id do grupo
+	 */
 	function alteraMapaGrupo($id_mapa,$id_mapa_grupo="",$titulo=""){
 		try	{
 			if($this->convUTF){
@@ -932,12 +1051,15 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraMapaTema
-
-	Altera um tema de um grupo de um mapa ou adiciona um novo
-
-	*/
+	/**
+	 * Altera um tema de um grupo de um mapa ou adiciona um novo
+	 * Se o id do tema for vazio, cria um novo
+	 * @param id do grupo
+	 * @param id do tema
+	 * @param titulo do tema
+	 * @param id da medida da variavel vinculada ao tema
+	 * @return id do tema
+	 */
 	function alteraMapaTema($id_mapa_grupo,$id_mapa_tema="",$titulo="",$id_medida_variavel=""){
 		try	{
 			if($this->convUTF){
@@ -959,15 +1081,15 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraVariavel
-
-	Altera uma variavel ou cria uma nova
-
-	Parametros:
-
-	$codigo_variavel - opcional
-	*/
+	/**
+	 * Altera uma variavel ou cria uma nova
+	 * Variaveis contem medidas de variavel
+	 * Se o codigo for vazio, cria uma nova
+	 * @param codigo da variavel
+	 * @param nome da variavel
+	 * @param descricao
+	 * @return id da variavel
+	 */
 	function alteraVariavel($codigo_variavel="",$nome="",$descricao=""){
 		try	{
 			if($this->convUTF){
@@ -987,10 +1109,24 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraMedidaVariavel
-
-	Altera uma medida de uma variavel ou cria uma nova
+	/**
+	 * Altera uma medida de uma variavel ou cria uma nova
+	 * Medidas contem links, fontes, parametros e classificacoes
+	 * Se id for vazio, cria uma nova
+	 * @param codigo da variavel pai
+	 * @param id da medida da variavel
+	 * @param codigo da unidade de medida utilizada
+	 * @param codigo do tipo de periodo
+	 * @param codigo do tipo de regiao
+	 * @param codigo da conexao que acessa o banco onde estao os dados
+	 * @param nome do esquema no banco de daods
+	 * @param nome da tabela
+	 * @param coluna que armazena os valores da medida
+	 * @param nome da coluna com os identificadores de regiao
+	 * @param coluna que identifica de forma unica cada registro da medida em sua tabela de valores
+	 * @param filtro (sql) que otem os registros da medida na tabela com os valores
+	 * @param nome da medida
+	 * @return id da medida
 	*/
 	function alteraMedidaVariavel($codigo_variavel,$id_medida_variavel="",$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$colunaidunico,$filtro,$nomemedida){
 		try	{
@@ -1014,12 +1150,15 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraLinkMedida
-
-	Altera um link
-
-	*/
+	/**
+	 * Cria ou altera um link vinculado a uma medida
+	 * Links nao sao compartilhados entre medidas
+	 * @param id da medida de variavel
+	 * @param id do link
+	 * @param nome do link
+	 * @param url do link
+	 * @return id do link
+	 */
 	function alteraLinkMedida($id_medida_variavel,$id_link="",$nome,$link){
 		try	{
 			if($id_link != ""){
@@ -1041,12 +1180,15 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraFonteinfo
-
-	Altera uma fonte
-
-	*/
+	/**
+	 * Cria ou altera uma fonte
+	 * Fontes sao usadas para documentar medidas
+	 * Fontes podem ser compartilhadas entre medidas
+	 * @param id da fonte
+	 * @param titulo
+	 * @param url
+	 * @return id da fonte
+	 */
 	function alteraFonteinfo($id_fonteinfo="",$titulo,$link){
 		try	{
 			if($id_fonteinfo != ""){
@@ -1065,21 +1207,26 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: adicinaFonteinfoMedida
-
-	Adiciona um fonte a uma medida
-
-	*/
+	/**
+	 * Vincula o registro de uma fonte a uma medida
+	 * @param id da medida
+	 * @param id da fonte
+	 */
 	function adicinaFonteinfoMedida($id_medida_variavel,$id_fonteinfo){
 		//echo "INSERT INTO ".$this->esquemaadmin."i3geoestat_fonteinfo_medida (id_medida_variavel,id_fonteinfo) VALUES ('$id_medida_variavel','$id_fonteinfo')";exit;
 		$this->dbhw->query("INSERT INTO ".$this->esquemaadmin."i3geoestat_fonteinfo_medida (id_medida_variavel,id_fonteinfo) VALUES ('$id_medida_variavel','$id_fonteinfo')");
 	}
-	/*
-	Function: alteraUnidadeMedida
-
-	Altera uma medida de uma variavel ou cria uma nova
-	*/
+	/**
+	 * Cria ou modifica uma unidade de medida
+	 * Unidade de medida e uma tabela controlada de tipos de unidades
+	 * Uma variavel possui obrigatoriamente uma unidade de medida
+	 * @param codigo da unidade de medida
+	 * @param nome
+	 * @param sigla
+	 * @param permite somar seus valores
+	 * @param permite calcular a media
+	 * @return id da unidade
+	 */
 	function alteraUnidadeMedida($codigo_unidade_medida,$nome,$sigla,$permitesoma,$permitemedia){
 		try	{
 			if($codigo_unidade_medida != ""){
@@ -1098,11 +1245,14 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraTipoPeriodo
-
-	Altera um tipo de periodo de tempo
-	*/
+	/**
+	 * Cria ou modifica um tipo de periodo de tempo
+	 * Periodo e uma tabela controlada usada nas medidas de variavel
+	 * @param codigo do tipo de periodo
+	 * @param nome
+	 * @param descricao
+	 * @return codigo do tipo de periodo
+	 */
 	function alteraTipoPeriodo($codigo_tipo_periodo,$nome,$descricao){
 		try	{
 			if($codigo_tipo_periodo != ""){
@@ -1123,11 +1273,17 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraConexao
-
-	Altera uma conexao
-	*/
+	/**
+	 * Cria ou modifica uma conexao
+	 * Conexoes sao parametros necessarios para realizar o acesso a um banco de dados
+	 * A senha deve ser cadastrada manualmente
+	 * @param codigo da conexao
+	 * @param banco de dados
+	 * @param hostname
+	 * @param porta
+	 * @param usuario
+	 * @return id da conexao
+	 */
 	function alteraConexao($codigo_estat_conexao,$bancodedados,$host,$porta,$usuario){
 		try	{
 			if($codigo_estat_conexao != ""){
@@ -1143,11 +1299,28 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraTipoRegiao
-
-	Altera uma regiao
-	*/
+	/**
+	 * Cria ou altera um tipo de regiao
+	 * Regioes sao tipos de localizacao geografica que permite espacializar os dados estatisticos
+	 * Possuem uma coluna com as geometrias de cada localizacao e um identificador unico
+	 * Regioes podem ter relacionamentos entre si que permitem realizar agregacoes de dados estatisticos por meio de soma ou media dos valores
+	 * A hierarquia e registrada por meio das tabelas de agregacao que indicam a relacao pai-filho
+	 * @param codigo unico da regiao
+	 * @param nome do tipo de regiao
+	 * @param descricao
+	 * @param esquema do banco de dados onde fica a tabela com os dados que compoe a regiao
+	 * @param tabela com os dados
+	 * @param coluna com as geometrias
+	 * @param coluna com o centroide
+	 * @param data dos dados
+	 * @param coluna que identifica de forma unica cada localizacao
+	 * @param coluna que contem os nomes de cada localizacao
+	 * @param codigo srid indicando a projecao dos dados
+	 * @param codigo da conexao com o banco de dados
+	 * @param lista de colunas que devem ser incluidas quando a regiao e mostrada no mapa
+	 * @param apelidos das colunas visiveis
+	 * @return id da regiao
+	 */
 	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao,$colunasvisiveis,$apelidos){
 		try	{
 			if($codigo_tipo_regiao != ""){
@@ -1169,6 +1342,15 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
+	/**
+	 * Cria ou altera o registro de uma agregacao de regiao
+	 * Agregacoes indica a relacao de pai-filho entre tipos de regiao
+	 * @param codigo do tipo de regiao
+	 * @param id que identifica a agregacao
+	 * @param codigo do tipo de regiao pai
+	 * @param nome da coluna que faz a ligacao com a tabela da regiao pai
+	 * @return id
+	 */
 	function alteraAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao="",$codigo_tipo_regiao_pai="",$colunaligacao_regiaopai=""){
 		try	{
 			if($id_agregaregiao != ""){
@@ -1185,11 +1367,19 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraParametroMedida
-
-	Altera uma parametro de uma medida ou cria uma nova
-	*/
+	/**
+	 * Cria ou altera um parametro de uma medida de variavel
+	 * Parametros permitem caracterizar os dados, por exemplo, um ano, mes e dia
+	 * Parametros podem ter uma hierarquia
+	 * @param id da medida da variavel
+	 * @param id do parametro
+	 * @param nome do parametro
+	 * @param descricao
+	 * @param nome da coluna na tabela que armazena os valores do parametro
+	 * @param i do parametro pai do atual
+	 * @param tipo de parametro. Utilizado para parametros que indicam tempo sendo 0=ano,1=mes,2=dia,3=hora
+	 * @return id do parametro
+	 */
 	function alteraParametroMedida($id_medida_variavel,$id_parametro_medida="",$nome,$descricao,$coluna,$id_pai,$tipo="0"){
 		try	{
 			if($id_parametro_medida != ""){
@@ -1213,6 +1403,16 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
+	/*
+	 * Cria ou altera uma classificacao de uma medida
+	 * Classificacoes possuem classes que definem os intervalos e simbologia
+	 * Uma medida pode ter varias classificacoes
+	 * @param id da medida de variavel
+	 * @param id da classificacao
+	 * @param nome
+	 * @param observacao
+	 * @return id
+	 */
 	function alteraClassificacaoMedida($id_medida_variavel,$id_classificacao="",$nome="",$observacao=""){
 		try	{
 			if($id_classificacao != ""){
@@ -1235,11 +1435,22 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: alteraClasseClassificacao
-
-	Altera uma classe de uma classificacao
-	*/
+	/**
+	 * Cria ou altera uma classe de uma classificacao
+	 * @param id da classificacao
+	 * @param id da classe
+	 * @param titulo da classe
+	 * @param expressao de selecao (no padrao mapfile)
+	 * @param componente vermelho da cor da classe
+	 * @param verde
+	 * @param azul
+	 * @param tamanho do simbolo
+	 * @param componente vermelho da cor do outline da classe
+	 * @param verde
+	 * @param azul
+	 * @param tamanho do outline (expessura)
+	 * @return id
+	 */
 	function alteraClasseClassificacao($id_classificacao,$id_classe="",$titulo="",$expressao="",$vermelho="",$verde="",$azul="",$tamanho="",$simbolo="",$overmelho="",$overde="",$oazul="",$otamanho=""){
 		try	{
 			if($id_classe != ""){
@@ -1265,15 +1476,10 @@ class Metaestat{
 			return "Error!: " . $e->getMessage();
 		}
 	}
-	/*
-	Function: listaMapas
-
-	Lista os mapas cadastrados para publicacao
-
-	Parametros:
-
-	$id_mapa - opcional
-	*/
+	/**
+	 * Lista os dados de um ou de todos os mapas cadastrados
+	 * @param id do mapa
+	 */
 	function listaMapas($id_mapa=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_mapa ";
 		if($id_mapa != ""){
@@ -1282,11 +1488,11 @@ class Metaestat{
 		$sql .= "ORDER BY titulo";
 		return $this->execSQL($sql,$id_mapa);
 	}
-	/*
-	Function: listaGruposMapa
-
-	Lista os grupos de um mapa cadastrados para publicacao
-	*/
+	/**
+	 * Lista os dados de um ou de todos os mapas grupos de um mapa
+	 * @param id do mapa
+	 * @param id do grupo
+	 */
 	function listaGruposMapa($id_mapa,$id_mapa_grupo){
 		if(!empty($id_mapa)){
 			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_mapa_grupo WHERE id_mapa = $id_mapa";
@@ -1297,11 +1503,12 @@ class Metaestat{
 		$sql .= " ORDER BY titulo";
 		return $this->execSQL($sql,$id_mapa_grupo);
 	}
-	/*
-	Function: listaTemasMapa
-
-	Lista os temas de um grupo de um mapa cadastrados para publicacao
-	*/
+	/**
+	 * Lista os dados de um ou de todos os temas de um grupo de um mapa
+	 * @param id do mapa
+	 * @param id do grupo
+	 * @param id do tema
+	 */
 	function listaTemasMapa($id_mapa_grupo,$id_mapa_tema){
 		if(!empty($id_mapa_grupo)){
 			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_mapa_tema WHERE id_mapa_grupo = $id_mapa_grupo";
@@ -1312,15 +1519,10 @@ class Metaestat{
 		$sql .= " ORDER BY titulo";
 		return $this->execSQL($sql,$id_mapa_tema);
 	}
-	/*
-	Function: listaUnidadeMedida
-
-	Lista as unidades de medida cadastradas ou uma unica unidade
-
-	Parametros:
-
-	$codigo_unidade_medida - opcional
-	*/
+	/**
+	 * Lista os dados de uma ou todas as unidades de medida cadastradas
+	 * @param codigo da unidade
+	 */
 	function listaUnidadeMedida($codigo_unidade_medida=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_unidade_medida ";
 		if($codigo_unidade_medida != ""){
@@ -1329,12 +1531,10 @@ class Metaestat{
 		$sql .= "ORDER BY nome";
 		return $this->execSQL($sql,$codigo_unidade_medida);
 	}
-	/*
-	Function: listaFonteinfo
-
-	Lista as fontes cadastradas ou uma unica unidade
-
-	*/
+	/**
+	 * Lista os dados de uma ou todas as fontes cadastradas
+	 * @param id da fonte
+	 */
 	function listaFonteinfo($id_fonteinfo=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_fonteinfo ";
 		if($id_fonteinfo != ""){
@@ -1343,12 +1543,10 @@ class Metaestat{
 		$sql .= "ORDER BY titulo";
 		return $this->execSQL($sql,$id_fonteinfo);
 	}
-	/*
-	Function: listaFonteinfoMedida
-
-	Lista as fontes cadastradas ou uma unica unidade
-
-	*/
+	/**
+	 * Lista as fontes vinculadas a uma medida de variavel
+	 * @param id da medida de variavel
+	 */
 	function listaFonteinfoMedida($id_medida_variavel){
 		$sql = "SELECT i3geoestat_fonteinfo.* ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_fonteinfo ";
@@ -1359,15 +1557,11 @@ class Metaestat{
 		//echo $sql;exit;
 		return $this->execSQL($sql,$id_fonteinfo);
 	}
-	/*
-	Function: listaVariavel
-
-	Lista as variaveis cadastradas ou uma unica variavel
-
-	Parametros:
-
-	$codigo_variavel - opcional
-	*/
+	/**
+	 * Lista os dados de uma ou todas as variaveis cadastradas
+	 * @param codigo da variavel
+	 * @param mostra apenas as variaveis cujas tabelas ficam nesse esquema
+	 */
 	function listaVariavel($codigo_variavel="",$filtro_esquema=""){
 		$sql = "select DISTINCT a.* from ".$this->esquemaadmin."i3geoestat_variavel as a ";
 		if($codigo_variavel != ""){
@@ -1380,15 +1574,11 @@ class Metaestat{
 		//echo $sql;exit;
 		return $this->execSQL($sql,$codigo_variavel);
 	}
-	/*
-	Function: listaClassificacaoMedida
-
-	Lista as classificacoes de uma medida de uma variavel
-
-	Parametros:
-
-	$id_medida_variavel
-	*/
+	/**
+	 * Lista os dados de uma ou todas as classificacoes de uma medida de variavel
+	 * @param id da medida de variavel
+	 * @param id da classificacao
+	 */
 	function listaClassificacaoMedida($id_medida_variavel,$id_classificacao=""){
 		if(!empty($id_medida_variavel)){
 			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_classificacao WHERE id_medida_variavel = $id_medida_variavel";
@@ -1398,15 +1588,11 @@ class Metaestat{
 		}
 		return $this->execSQL($sql,$id_classificacao);
 	}
-	/*
-	Function: listaLinkMedida
-
-	Lista os links de uma medida de uma variavel
-
-	Parametros:
-
-	$id_medida_variavel
-	*/
+	/**
+	 * Lista os dados de um ou todos os links de uma medida
+	 * @param id da medida
+	 * @param id do link
+	 */
 	function listaLinkMedida($id_medida_variavel,$id_link=""){
 		if(!empty($id_medida_variavel)){
 			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_medida_variavel_link WHERE id_medida_variavel = $id_medida_variavel";
@@ -1416,11 +1602,11 @@ class Metaestat{
 		}
 		return $this->execSQL($sql,$id_link);
 	}
-	/*
-	Function: listaClasseClassificacao
-
-	Lista as classes de uma classificacao
-	*/
+	/**
+	 * Lista os dados de uma ou todas as classes de uma classificacao
+	 * @param id da classificacao
+	 * @param id da classe
+	 */
 	function listaClasseClassificacao($id_classificacao,$id_classe=""){
 		if(!empty($id_classificacao)){
 			$sql = "SELECT * from ".$this->esquemaadmin."i3geoestat_classes WHERE id_classificacao = $id_classificacao";
@@ -1430,17 +1616,11 @@ class Metaestat{
 		}
 		return $this->execSQL($sql,$id_classe);
 	}
-	/*
-	Function: listaMedidaVariavel
-
-	Lista as medidas das variaveis cadastradas para uma variavel ou uma unica medida
-
-	Parametros:
-
-	$codigo_variavel
-
-	$id_medida_variavel - opcional
-	*/
+	/**
+	 * Lista os dados de uma ou todas as medidas de variavel de uma variavel
+	 * @param codigo da variavel
+	 * @param id da medida de variavel
+	 */
 	function listaMedidaVariavel($codigo_variavel,$id_medida_variavel=""){
 		$sql = "SELECT i3geoestat_medida_variavel.*,i3geoestat_variavel.nome as nome_variavel,i3geoestat_unidade_medida.permitemedia,i3geoestat_unidade_medida.permitesoma,i3geoestat_unidade_medida.nome as unidade_medida ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_variavel ";
@@ -1460,11 +1640,10 @@ class Metaestat{
 		//echo $sql;exit;
 		return $this->execSQL($sql,$id_medida_variavel);
 	}
-	/*
-	Function: listaRegioesMedida
-
-	Lista as regioes de uma medida variavel
-	*/
+	/**
+	 * Lista as regioes vinculadas a uma medida de variavel
+	 * @param id da medida de vriavel
+	 */
 	function listaRegioesMedida($id_medida_variavel){
 		$variavel = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$codigo_tipo_regiao = $variavel["codigo_tipo_regiao"];
@@ -1476,17 +1655,11 @@ class Metaestat{
 		}
 		return $regioes;
 	}
-	/*
-	Function: listaConexao
-
-	Lista as conexoes cadastradas ou uma unica conexao
-
-	Parametros:
-
-	$id {string} - opcional
-
-	$senha {boolean} - mostra ou nao a senha - opcional
-	*/
+	/**
+	 * Lista os dads de uma conexao ou de todas
+	 * @param id da conexao
+	 * @param boolean inclui na lista a senha ou nao
+	 */
 	function listaConexao($codigo_estat_conexao="",$senha=false){
 		if($senha == true){
 			$colunas = "codigo_estat_conexao, bancodedados, host, porta, usuario, senha";
@@ -1501,17 +1674,12 @@ class Metaestat{
 		$sql .= "ORDER BY bancodedados,host,usuario";
 		return $this->execSQL($sql,$codigo_estat_conexao);
 	}
-	/*
-	Function: listaParametro
-
-	Lista os parametros cadastradas ou uma unica variavel
-
-	Parametros:
-
-	$id_medida_variavel
-
-	$id_parametro_variavel - opcional
-	*/
+	/**
+	 * Lista os dados de um ou de todos os parametros relacionados a uma medida de variavel
+	 * @param id da medida de variavel
+	 * @param id do parametro
+	 * @param id do pai (se definido, lista apenas os filhos deste)
+	 */
 	function listaParametro($id_medida_variavel,$id_parametro_medida="",$id_pai=""){
 		$sql = "SELECT i3geoestat_parametro_medida.*,i3geoestat_medida_variavel.* ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_parametro_medida ";
@@ -1532,6 +1700,11 @@ class Metaestat{
 		//echo $sql;exit;
 		return $this->execSQL($sql,$id_parametro_medida);
 	}
+	/**
+	 * Lista os valores (unicos) que ocorrem em um parametro de uma medida de variavel
+	 * @param id do parametro
+	 * @return array com os valores
+	 */
 	function listaValoresParametro($id_parametro_medida){
 		$parametro = $this->listaParametro("",$id_parametro_medida);
 		//$medida = $this->listaMedidaVariavel("",$parametro["id_medida_variavel"]);
@@ -1542,15 +1715,10 @@ class Metaestat{
 		}
 		return $nsm;
 	}
-	/*
-	Function: listaTipoPeriodo
-
-	Lista os tipos de per�odos de tempo cadastrados ou um �nico per�odo
-
-	Parametros:
-
-	$codigo_tipo_periodo - opcional
-	*/
+	/**
+	 * Lista os dados de um ou todos os tipos de periodo cadastrados
+	 * @param id
+	 */
 	function listaTipoPeriodo($codigo_tipo_periodo=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_tipo_periodo ";
 		if($codigo_tipo_periodo != ""){
@@ -1559,12 +1727,11 @@ class Metaestat{
 		$sql .= "ORDER BY nome";
 		return $this->execSQL($sql,$codigo_tipo_periodo);
 	}
-	/*
-	Function: listaDimensaoRegiao
-
-	Lista a dimensao de uma tabela contendo as regioes
-
-	*/
+	/**
+	 * Lista as propriedades da coluna com as geometrias de uma regiao geografica
+	 * @param codigo do tipo de regiao
+	 * @return array com os parametros, inclusive a dimensao (st_dimension)
+	 */
 	function listaPropGeoRegiao($codigo_tipo_regiao){
 		//st_dimension returns 0 for POINT, 1 for LINESTRING, 2 for POLYGON
 		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
@@ -1580,15 +1747,10 @@ class Metaestat{
 		}
 		return $r;
 	}
-	/*
-	Function: listaTipoRegiao
-
-	Lista os tipos de regiao cadastrados ou uma unica
-
-	Parametros:
-
-	$codigo_tipo_periodo - opcional
-	*/
+	/**
+	 * Lista os dados de uma ou todas as regioes cadastradas
+	 * @param codigo do tipo de regiao
+	 */
 	function listaTipoRegiao($codigo_tipo_regiao=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_tipo_regiao ";
 		if($codigo_tipo_regiao != ""){
@@ -1597,6 +1759,10 @@ class Metaestat{
 		$sql .= "ORDER BY nome_tipo_regiao";
 		return $this->execSQL($sql,$codigo_tipo_regiao);
 	}
+	/**
+	 * Lista os dados de agregacao de uma regiao pai
+	 * @param codigo da regiao
+	 */
 	function listaHierarquiaRegioes($codigoregiaopai=""){
 		$sql = "select i3geoestat_agregaregiao.colunaligacao_regiaopai,i3geoestat_tipo_regiao.codigo_tipo_regiao,i3geoestat_tipo_regiao.nome_tipo_regiao from ".$this->esquemaadmin."i3geoestat_tipo_regiao ";
 		$sql .= "LEFT JOIN ".$this->esquemaadmin."i3geoestat_agregaregiao ";
@@ -1609,6 +1775,14 @@ class Metaestat{
 		}
 		return $this->execSQL($sql,"");
 	}
+	/**
+	 * Lista os registros de um tipo de regiao
+	 * Se for definido o pai, lista os valores da regiao que e filha
+	 * Nesse caso e necessario definir o identificador da regiao pai para obter os registros na regiao filha
+	 * @param codigo do tipo de regiao
+	 * @param codigo do tipo de regiao pai
+	 * @param identificador da regiao (registro) pai
+	 */
 	function listaDadosRegiao($codigo_tipo_regiao,$codigo_tipo_regiaopai="",$valorregiaopai=""){
 		//pega a tabela, esquema e conexao para acessar os dados da regiao
 		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
@@ -1630,6 +1804,10 @@ class Metaestat{
 		}
 		return $r;
 	}
+	/**
+	 * Lista os registros de uma tabela que e uma regiao
+	 * @param codigo do tipo de regiao
+	 */
 	function listaDadosGeometriaRegiao($codigo_tipo_regiao){
 		//pega a tabela, esquema e conexao para acessar os dados da regiao
 		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
@@ -1646,6 +1824,11 @@ class Metaestat{
 		}
 		return $r[0];
 	}
+	/**
+	 * Lista uma ou todas as agregacoes de regioes existentes para um tipo de regiao
+	 * @param codigo do tipo de regiao
+	 * @param id da agregacao
+	 */
 	function listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_agregaregiao ";
 		if($id_agregaregiao != ""){
@@ -1658,6 +1841,11 @@ class Metaestat{
 		//echo $sql;exit;
 		return $this->execSQL($sql,$id_agregaregiao);
 	}
+	/**
+	 * Lista uma ou todas as agregacoes de regioes filhas de um tipo de regiao
+	 * @param codigo do tipo de regiao
+	 * @param codigo do tipo de regiao que e pai
+	 */
 	function listaAgregaRegiaoFilho($codigo_tipo_regiao,$codigo_tipo_regiao_pai){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_agregaregiao ";
 		$sql .= "WHERE codigo_tipo_regiao_pai = $codigo_tipo_regiao_pai ";
