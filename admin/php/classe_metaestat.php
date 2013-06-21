@@ -23,7 +23,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -897,7 +897,7 @@ class Metaestat{
 	 * @param id da medida
 	 * @param filtro a ser concatenado ao sql
 	 * @param coluna de agrupamento
-	 * @return array("colunavalor"=>,"soma"=>,"media"=>,"menor"=>,"maior"=>,"quantidade"=>,"histograma"=>,"grupos"=>,"unidademedida"=>,"quartis"=>) 
+	 * @return array("colunavalor"=>,"soma"=>,"media"=>,"menor"=>,"maior"=>,"quantidade"=>,"histograma"=>,"grupos"=>,"unidademedida"=>,"quartis"=>)
 	 */
 	function sumarioMedidaVariavel($id_medida_variavel,$filtro="",$agruparpor=""){
 		if(!empty($agruparpor)){
@@ -1852,12 +1852,30 @@ class Metaestat{
 		$sql .= "AND codigo_tipo_regiao = $codigo_tipo_regiao";
 		return $this->execSQL($sql,$codigo_tipo_regiao_pai);
 	}
+	/**
+	 * Lista os esquemas em um banco de dados
+	 * @param codigo da conexao
+	 * @return execSQLDB
+	 */
 	function esquemasConexao($codigo_estat_conexao){
 		return $this->execSQLDB($codigo_estat_conexao,"SELECT oid,nspname as esquema FROM pg_namespace group by nspname,oid order by nspname");
 	}
+	/**
+	 * Cria um novo esquema no banco de dados
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @return execSQLDB
+	 */
 	function criaEsquemaDB($codigo_estat_conexao,$nome_esquema){
 		return $this->execSQLDB($codigo_estat_conexao,"create schema $nome_esquema");
 	}
+	/**
+	 * Lista as tabelas de um esquema
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @param sim|nao exclui da lista as tabelas que contem geometria
+	 * @return execSQLDB
+	 */
 	function tabelasEsquema($codigo_estat_conexao,$nome_esquema,$excluigeom=""){
 		$sql = "SELECT table_name as tabela FROM information_schema.tables where table_schema = '$nome_esquema'";
 		if(strtolower($excluigeom) == "sim"){
@@ -1865,9 +1883,26 @@ class Metaestat{
 		}
 		return $this->execSQLDB($codigo_estat_conexao,$sql);
 	}
+	/**
+	 * Cria uma nova tabela no banco de dados
+	 * A nova tabela tera apenas uma coluna chamada gid (PK)
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @param nome da tabela
+	 * @return execSQLDB
+	 */
 	function criaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela){
 		return $this->execSQLDB($codigo_estat_conexao,"create table ".$nome_esquema.".".$nome_tabela." (gid serial, CONSTRAINT ".$nome_tabela."_pkey PRIMARY KEY (gid ))");
 	}
+	/**
+	 * ALtera o nome de uma tabela
+	 * Atualiza as tabelas i3geoestat_medida_variavel e i3geoestat_tipo_regiao
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @param nome da tabela atual
+	 * @param novo nome da tabela
+	 * @return execSQLDB
+	 */
 	function alteraNomeTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela){
 		$res = $this->execSQLDB($codigo_estat_conexao,"ALTER TABLE ".$nome_esquema.".".$nome_tabela." RENAME TO ".$novonome_tabela );
 		$tabela = $this->execSQLDB($codigo_estat_conexao,"SELECT table_name FROM information_schema.tables where table_name = '$novonome_tabela' and table_schema = '$nome_esquema'");
@@ -1879,9 +1914,25 @@ class Metaestat{
 		}
 		return $res;
 	}
+	/**
+	 * Faz uma copia de uma tabela
+	 * @param codigo da conexao
+	 * @param esquema
+	 * @param nome da tabela existente
+	 * @param nome da nova tabela
+	 * @return execSQLDB
+	 */
 	function copiaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela){
 		return $this->execSQLDB($codigo_estat_conexao,"CREATE TABLE ".$nome_esquema.".".$novonome_tabela." AS select * from ".$nome_esquema.".".$nome_tabela );
 	}
+	/**
+	 * Lista as colunas de uma tabela e seus metadados
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @param nome da tabela
+	 * @param tipo de coluna (opcional)
+	 * @return execSQLDB
+	 */
 	function colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,$tipo=""){
 		$colunas = array();
 		$res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna,udt_name FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'");
@@ -1893,9 +1944,28 @@ class Metaestat{
 		}
 		return $colunas;
 	}
+	/**
+	 * Cria uma coluna em uma tabela do banco
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @param nome da tabela
+	 * @param nome da nova coluna
+	 * @param tipo da coluna
+	 * @return execSQLDB
+	 */
 	function criaColunaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nova_coluna,$tipo){
 		return $this->execSQLDB($codigo_estat_conexao,"ALTER TABLE ".$nome_esquema.".".$nome_tabela." ADD COLUMN $nova_coluna $tipo ");
 	}
+	/**
+	 * Altera o nome de uma coluna de uma tabela
+	 * Atualiza as tabelas i3geoestat_medida_variavel, i3geoestat_tipo_regiao, i3geoestat_parametro_medida e i3geoestat_agregaregiao
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @param nome da tabela
+	 * @param nome da coluna
+	 * @param novo nome
+	 * @return execSQLDB
+	 */
 	function alteraNomeColunaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nome_coluna,$novonome_coluna){
 		$res = $this->execSQLDB($codigo_estat_conexao,"ALTER TABLE ".$nome_esquema.".".$nome_tabela." RENAME COLUMN $nome_coluna TO ".$novonome_coluna );
 		$coluna = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name FROM information_schema.columns where table_name = '$novonome_tabela' and table_schema = '$nome_esquema' and column_name = '$novonome_coluna'");
@@ -1920,9 +1990,26 @@ class Metaestat{
 		}
 		return $res;
 	}
+	/**
+	 * Lista os metadados de uma coluna
+	 * Os metadados são obtidos do próprio PostgreSQL
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @param nome da tabela
+	 * @return execSQLDB
+	 */
 	function descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
 		return $this->execSQLDB($codigo_estat_conexao,"SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE c.relname = '$nome_tabela' and p.nspname = '$nome_esquema' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname");
 	}
+	/**
+	 * Lista os dados de uma tabela
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @param nome da tabela
+	 * @param sim|nao inclui o WKT da geometria de colunas geo
+	 * @param (opcional) numero de registros que serao listados
+	 * @return execSQLDB
+	 */
 	function obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo="nao",$nreg=""){
 		$desccolunas = $this->descreveColunasTabela($codigo_estat_conexao, $nome_esquema, $nome_tabela);
 		$colunas = array();
@@ -1952,6 +2039,12 @@ class Metaestat{
 		}
 		return array("nomescolunas"=>$colunas,"colunas"=>$desccolunas,"linhas"=>$linhas);
 	}
+	/**
+	 * Relatorio completo com a lista de variaveis e medidas
+	 * @param codigo da variavel
+	 * @param sim|nao inclui dados detalhados
+	 * @return Array
+	 */
 	function relatorioCompleto($codigo_variavel="",$dadosGerenciais="nao"){
 		$dados = array();
 		if($codigo_variavel != "" || !empty($codigo_variavel)){
@@ -1988,7 +2081,12 @@ class Metaestat{
 		}
 		return $dados;
 	}
-	//$dados vem de relatorioCompleto
+	/**
+	 * Cria um raltorio formatado em HTML
+	 * @param dados obtidos com relatorioCompleto
+	 * @param sim|nao inclui os dados detalhados
+	 * @return string
+	 */
 	function formataRelatorioHtml($dados,$detalhes="sim"){
 		$html[] = "<div class='var_div_relatorio'>";
 		$var_cor = "var_cor1";
@@ -2034,6 +2132,11 @@ class Metaestat{
 		$html[] = "</div><br><br>";
 		return implode("",$html);
 	}
+	/**
+	 * Cria um relatorio no formato XML
+	 * @param dados obtidos com relatorioCompleto
+	 * @return string
+	 */
 	function formataXML($dados){
 		$chaves = array_keys($dados[0]);
 		if(count($chaves) == 0){
@@ -2094,7 +2197,13 @@ class Metaestat{
 		$xml .= '</result-set>' . PHP_EOL;
 		return $xml;
 	}
-	//busca o valor de uma chave em um array multiplo
+	/**
+	 * Verifica se em um array existe uma chave com determinado valor
+	 * @param Array
+	 * @param nome da chave
+	 * @param valor a ser buscado
+	 * @return boolean
+	 */
 	function buscaNoArray($lista,$chave,$valor){
 		foreach($lista as $l){
 			if($l[$chave] == $valor){
