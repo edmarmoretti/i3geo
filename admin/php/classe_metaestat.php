@@ -2212,6 +2212,22 @@ class Metaestat{
 		}
 		return false;
 	}
+	/**
+	 * Insere dados de um arquivo CSV em uma tabela no padrão usado pelo METAESTAT
+	 * O arquivo ja deve estar no servidor
+	 * A medida de variavel ja deve ter sido criada
+	 * A tabela deve ter a estrutura de colunas utilizada como padrao do METAESTAT
+	 * @param nome do arquivo csv (no servidor)
+	 * @param ID da medida da variavel
+	 * @param codigo do tipo de regiao
+	 * @param nome da coluna no CSV que contem os valores
+	 * @param substituir|adicionar os dados
+	 * @param (opcional) nome da coluna no arquivo csv que contem o ano do dado
+	 * @param (opcional) nome da coluna no arquivo csv que contem o mes do dado
+	 * @param (opcional) nome da coluna no arquivo csv que contem o dia do dado
+	 * @param (opcional) nome da coluna no arquivo csv que contem a hora do dado
+	 * @return string
+	 */
 	function inserirDados($nomearquivoserv,$id_medida_variavel,$codigoregiao,$valor,$tipoinclusao,$ano="",$mes="",$dia="",$hora=""){
 		if(!file_exists($nomearquivoserv)){
 			return "Arquivo de dados nao encontrado";
@@ -2320,6 +2336,16 @@ class Metaestat{
 		}
 		return "Processo concluido para ".count($linhas)." linhas";
 	}
+	/**
+	 * Edita a tabela com os dados de um tipo de regiao
+	 * @param codigo do tipo de regiao no cadastro
+	 * @param nome da coluna que identifica cada registro na tabela de regioes
+	 * @param valor do indicador
+	 * @param nome da regiao
+	 * @param wkt
+	 * @param excluir|alterar tipo de operacao
+	 * @return string
+	 */
 	function mantemDadosRegiao($codigo_tipo_regiao,$identificador,$identificadornovo,$nome,$wkt="",$tipo=""){
 		if($tipo != "excluir" && ($identificadornovo == "" || $nome == "")){
 			return array("erro");
@@ -2397,6 +2423,13 @@ class Metaestat{
 		}
 		return array("ok");
 	}
+	/**
+	 * Obtem o valor de um registro de uma tabela de regiao com base na coordenada de longitude e latitude
+	 * @param codigo do tipo de regiao
+	 * @param longitude
+	 * @param latitude
+	 * @return array
+	 */
 	function xy2regiao($codigo_tipo_regiao,$x,$y){
 		//pega a tabela, esquema e conexao para acessar os dados da regiao
 		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
@@ -2412,6 +2445,14 @@ class Metaestat{
 			return "";
 		}
 	}
+	/**
+	 * Busca os dados de uma medida de variavel para uma regiao
+	 * Identificador da regiao e o valor a ser encontrado na coluna de
+	 * ligacao da tabela da medida da variavel com a tabela com as localidades (tipo de regiao)
+	 * @param identificador da regiao
+	 * @param id da medida da variavel
+	 * @return multitype:unknown multitype: string
+	 */
 	function listaAtributosMedidaVariavelRegiao ($identificador_regiao,$id_medida_variavel){
 		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$c = $this->listaConexao($medida["codigo_estat_conexao"],true);
@@ -2439,6 +2480,16 @@ class Metaestat{
 		$r = $q->fetchAll();
 		return array("dados"=>$r,"aliascolunas"=>$alias,"colunas"=>$colunas,"descricao"=>$descricao);
 	}
+	/**
+	 * Salva os atributos de uma medida de variavel com base em uma localizacao
+	 * @param id da medida de variavel
+	 * @param codigo do tipo de regiao
+	 * @param identificador da regiao
+	 * @param array contendo os identificadores unicos de cada registro na tabela com os dados da medida de variavel
+	 * @param array com as colunas que contem os dados que serao modificados
+	 * @param array com os valores para as colunas
+	 * @return string
+	 */
 	function salvaAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$idsunicos,$colunas,$valores){
 		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
 		if($medida["esquemadb"] != "i3geo_metaestat"){
@@ -2489,7 +2540,13 @@ class Metaestat{
 		}
 		return array("ok");
 	}
-	//altera os registros de uma medida de variavel (muda para negativo)
+	/**
+	 * Transforma em um valor negativo o id de uma medida de variavel na tabela com os dados
+	 * A tabela com os dados deve ter uma coluna chamada id_medida_variavel
+	 * Utilizado para marcar como removido os registros de uma medida de variavel
+	 * @param id da medida de variavel
+	 * @return string
+	 */
 	function negativaValoresMedidaVariavel($id_medida_variavel){
 		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
 		if($medida["esquemadb"] != "i3geo_metaestat"){
@@ -2514,8 +2571,15 @@ class Metaestat{
 		}
 		return array("ok");
 	}
-
-	//exclui o valor de uma medida em uma regiao especifica (utilizado pelo editor de limites)
+	/**
+	 * Exclui o valor de uma medida em uma regiao especifica
+	 * Utilizado pelo editor de limites
+	 * @param id da medida de variavel
+	 * @param codigo do tipo de regiao
+	 * @param identificador da regiao
+	 * @param identificador do registro que sera removido da tabela com os dados
+	 * @return string
+	 */
 	function excluiAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$id){
 		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
 		if($medida["esquemadb"] != "i3geo_metaestat"){
@@ -2545,6 +2609,11 @@ class Metaestat{
 		}
 		return array("ok");
 	}
+	/**
+	 * Converte um tipo de regiao em shapefile
+	 * @param codigo do tipo de regiao
+	 * @return nome do arquivo criado
+	 */
 	function regiao2shp($codigo_tipo_regiao){
 		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
 		$dados = $this->obtemDadosTabelaDB($regiao["codigo_estat_conexao"],$regiao["esquemadb"],$regiao["tabela"],"sim");
