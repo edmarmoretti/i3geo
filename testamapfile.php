@@ -294,7 +294,6 @@ function verifica($map,$solegenda){
 				}
 				ms_newLayerObj($mapa, $layern);
 
-
 				//pega simbolos locais e aplica no novo mapa
 				$numclasses = $layern->numclasses;
 				for($ci=0;$ci < $numclasses;$ci++){
@@ -304,13 +303,12 @@ function verifica($map,$solegenda){
 						$estilo = $classe->getstyle($ei);
 						if($estilo->symbolname != ""){
 							$nomesimbolo = $estilo->symbolname;
-
 							$simbolo = new symbolObj($nmapa, $nomesimbolo);
 							$ipath = $simbolo->imagepath;
 							if(ms_newSymbolObj($nmapa, $nomesimbolo) != ms_newSymbolObj($mapa, $nomesimbolo)+1){
 								$simbolon = new symbolObj($mapa, $nomesimbolo);
-								$simbolon->setImagePath($ipath);
 								$simbolon->set("inmapfile",MS_TRUE);
+								$simbolon->setImagePath($ipath);
 							}
 							//algumas versoes do mapserver nao funciona
 							if($simbolon->imagePath != $ipath){
@@ -319,9 +317,6 @@ function verifica($map,$solegenda){
 						}
 					}
 				}
-
-
-
 
 				if ($layern->data == ""){
 					$dados = $layern->connection;
@@ -368,8 +363,9 @@ function verifica($map,$solegenda){
 			$sca->set("status",MS_OFF);
 		}
 		$destino = $dir_tmp."/".nomeRandomico().".map";
+		echo $destino;exit;
 		$mapa->save($destino);
-		//echo $destino;exit;
+
 		$mapa = ms_newMapObj($destino);
 		$objImagem = @$mapa->draw();
 		$objImagemLegenda = @$mapa->drawLegend();
