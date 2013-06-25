@@ -3,9 +3,14 @@ MAP
 	#SYMBOLSET "../symbols/vazio.sym"
 	SYMBOLSET "../symbols/simbolosv6.sym"
 SYMBOL
-	NAME "teste"
+	NAME "/var/www/i3geo/imagens/google/condominium.png"
 	TYPE pixmap
-	IMAGE "/var/www/i3geo/imagens/google/foto.png"
+	IMAGE "/var/www/i3geo/imagens/google/condominium.png"
+END
+SYMBOL
+	NAME "/var/www/i3geo/imagens/google/condominium1.png"
+	TYPE pixmap
+	IMAGE "/var/www/i3geo/imagens/google/condominium1.png"
 END
 	LAYER
 		CONNECTION ""
@@ -58,8 +63,8 @@ END
 				ANGLE 0
 				COLOR 250 193 4
 				OFFSET 0 0
-				SIZE 4
-				SYMBOL "ponto"
+				SIZE 20
+				SYMBOL "/var/www/i3geo/imagens/google/condominium.png"
 			END # STYLE
 		END # CLASS
 		CLASS
@@ -69,8 +74,8 @@ END
 				ANGLE 0
 				COLOR 62 9 41
 				OFFSET 0 0
-				SIZE 6
-				SYMBOL "teste"
+				SIZE 20
+				SYMBOL "/var/www/i3geo/imagens/google/condominium1.png"
 			END # STYLE
 		END # CLASS
 		CLASS
@@ -81,7 +86,7 @@ END
 				COLOR 112 203 244
 				OFFSET 0 0
 				SIZE 6
-				SYMBOL "capital"
+				SYMBOL "vila"
 			END # STYLE
 		END # CLASS
 	END # LAYER

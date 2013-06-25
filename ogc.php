@@ -1,6 +1,6 @@
 <?php
 /*
- Title: Gerador de servi&ccedil;os OGC
+Title: Gerador de servi&ccedil;os OGC
 
 Gera web services nos padr&otilde;es OGC para os temas existentes na pasta i3geo/temas
 
@@ -430,6 +430,7 @@ else{
 										$l->setmetadata("wms_attribution_logourl_width","50");
 										$l->setmetadata("wms_attribution_logourl_href",$mini);
 									}
+									cloneInlineSymbol($l,$nmap,$oMap);
 									ms_newLayerObj($oMap, $l);
 								}
 							}

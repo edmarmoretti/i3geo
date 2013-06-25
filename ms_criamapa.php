@@ -722,6 +722,7 @@ function incluiTemasIniciais(){
 							$layern->set("type",$tipotemp);
 							$layern->set("status",$statustemp);
 						}
+						cloneInlineSymbol($layern,$maptemp,$mapn);
 						ms_newLayerObj($mapn, $layern);
 					}
 				}

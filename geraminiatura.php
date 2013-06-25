@@ -213,6 +213,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			for ($i=0;$i < $numlayers;$i++){
 				$layern = $nmapa->getlayer($i);
 				$layern->set("status",MS_DEFAULT);
+				cloneInlineSymbol($layern,$nmapa,$mapa);
 				ms_newLayerObj($mapa, $layern);
 				autoClasses($layern,$mapa,$locaplic);
 				if ($layern->data == ""){
@@ -261,7 +262,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			$urlM = $weboM->imageurl."/".$map;
 		}
 		if ($tipo == "grande"  || $tipo == "todos"){
-		 	$mapa->setsize(300,300);
+			$mapa->setsize(300,300);
 			$sca = $mapa->scalebar;
 			$sca->set("status",MS_OFF);
 			$objImagemG = @$mapa->draw();

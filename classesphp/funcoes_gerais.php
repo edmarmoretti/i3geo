@@ -2635,4 +2635,43 @@ function listaGruposUsrLogin(){
 	session_start();
 	return $res;
 }
+/*
+Function: cloneInlineSymbol
+
+Importa os simbolos inline de um layer de um mapfile para outro mapfile
+
+@fixme
+No caso de imagens, o nome do simbolo deve ser o mesmo do caminho da imagem (bug do mapserver)
+
+Parameters:
+
+layern - objeto layer que contem o simbolo original
+
+nmapa - objeto map que contem o layer layern
+
+mapa - objeto mapa destino do simbolo clonado
+*/
+function cloneInlineSymbol($layern,$nmapa,$mapa){
+	$versao = versao();
+	if($versao["principal"] > 5){
+		$numclasses = $layern->numclasses;
+		for($ci=0;$ci < $numclasses;$ci++){
+			$classe = $layern->getclass($ci);
+			$numestilos = $classe->numstyles;
+			for($ei=0;$ei < $numestilos;$ei++){
+				$estilo = $classe->getstyle($ei);
+				if($estilo->symbolname != ""){
+					$nomesimbolo = $estilo->symbolname;
+					$simbolo = new symbolObj($nmapa, $nomesimbolo);
+					$ipath = $simbolo->imagepath;
+					if($simbolo->inmapfile == MS_TRUE){
+						$simbolon = new symbolObj($mapa, $nomesimbolo);
+						$simbolon->set("inmapfile",MS_TRUE);
+						$simbolon->setImagePath($ipath);
+					}
+				}
+			}
+		}
+	}
+}
 ?>

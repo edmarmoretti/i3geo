@@ -1100,6 +1100,7 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 							$nlayer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
 							$nlayer->set("type",$tipotemp);
 						}
+						cloneInlineSymbol($nlayer,$nmap,$this->mapa);
 						ms_newLayerObj($this->mapa, $nlayer);
 						$l = $this->mapa->getlayerbyname($nlayer->name);
 						//reposiciona o layer se for o caso
