@@ -258,6 +258,7 @@ function verifica($map,$solegenda){
 			}
 			$numlayers = $nmapa->numlayers;
 			$dados = "";
+			$simbolos = array();
 			for ($i=0;$i < $numlayers;$i++){
 				$layern = $nmapa->getlayer($i);
 				$layern->set("status",MS_DEFAULT);
@@ -292,6 +293,36 @@ function verifica($map,$solegenda){
 					$layern->set("type",$tipotemp);
 				}
 				ms_newLayerObj($mapa, $layern);
+
+
+				//pega simbolos locais e aplica no novo mapa
+				$numclasses = $layern->numclasses;
+				for($ci=0;$ci < $numclasses;$ci++){
+					$classe = $layern->getclass($ci);
+					$numestilos = $classe->numstyles;
+					for($ei=0;$ei < $numestilos;$ei++){
+						$estilo = $classe->getstyle($ei);
+						if($estilo->symbolname != ""){
+							$nomesimbolo = $estilo->symbolname;
+
+							$simbolo = new symbolObj($nmapa, $nomesimbolo);
+							$ipath = $simbolo->imagepath;
+							if(ms_newSymbolObj($nmapa, $nomesimbolo) != ms_newSymbolObj($mapa, $nomesimbolo)+1){
+								$simbolon = new symbolObj($mapa, $nomesimbolo);
+								$simbolon->setImagePath($ipath);
+								$simbolon->set("inmapfile",MS_TRUE);
+							}
+							//algumas versoes do mapserver nao funciona
+							if($simbolon->imagePath != $ipath){
+								$layern->set("status",MS_DELETE);
+							}
+						}
+					}
+				}
+
+
+
+
 				if ($layern->data == ""){
 					$dados = $layern->connection;
 				}
@@ -322,7 +353,7 @@ function verifica($map,$solegenda){
 
 		}
 		if ($tipo == "mini"){
-				$mapa->setsize(50,50);
+			$mapa->setsize(50,50);
 			$sca = $mapa->scalebar;
 			$sca->set("status",MS_OFF);
 		}
@@ -338,6 +369,7 @@ function verifica($map,$solegenda){
 		}
 		$destino = $dir_tmp."/".nomeRandomico().".map";
 		$mapa->save($destino);
+		//echo $destino;exit;
 		$mapa = ms_newMapObj($destino);
 		$objImagem = @$mapa->draw();
 		$objImagemLegenda = @$mapa->drawLegend();
