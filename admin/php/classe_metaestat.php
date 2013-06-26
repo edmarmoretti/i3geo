@@ -544,6 +544,16 @@ class Metaestat{
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
 			$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';
+			//inclui os simbolos que podem ser definidos como imagens
+			foreach($classes as $classe){
+				if(file_exists($classe["simbolo"])){
+					$dados[] = "SYMBOL";
+					$dados[] = '	NAME "'.$classe["simbolo"].'"';
+					$dados[] = '			TYPE pixmap';
+					$dados[] = '	IMAGE "'.$classe["simbolo"].'"';
+					$dados[] = "END";
+				}
+			}
 			$dados[] = "LAYER";
 			$dados[] = '	NAME "'.$this->nomecache.'"';
 			$dados[] = "	TYPE $tipolayer";

@@ -57,7 +57,8 @@ body {
 				fclose($fp);
 			}
 			echo 'RGB: <input type=text value="clique" size=10 id="corrgb" onclick="i3GEO.util.abreCor(\'\',\'corrgb\',\'rgbSep\')" /><br><br>';
-			echo "Edite:<br>";
+			echo "<i>Voc&ecirc; pode usar s&iacute;mbolos em linha, veja exemplo no mapfile _llocali</i>";
+			echo "<br>Edite:<br>";
 			echo "<TEXTAREA name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
 			echo file_get_contents($mapfile);
 			echo "</TEXTAREA>";

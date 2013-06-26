@@ -572,7 +572,7 @@ i3GEOadmin.variaveis = {
 				"linhas":[
 									{titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
 									{titulo:"Express&atilde;o (no estilo Mapserver)<br> exemplo (([nu_farm_funcionando] > 0) and ([nu_farm_funcionando] < 5)):",id:"Eexpressao",size:"50",value:i.expressao,tipo:"text",div:""},
-									{titulo:"S&iacute;mbolo:",id:"Esimbolo",size:"10",value:i.simbolo,tipo:"text",div:""},
+									{titulo:"S&iacute;mbolo (pode ser utilizado uma imagem, exemplo: /var/www/i3geo/imagensteste.png) :",id:"Esimbolo",size:"10",value:i.simbolo,tipo:"text",div:""},
 									{titulo:"Tamanho do s&iacute;mbolo:",id:"Etamanho",size:"10",value:i.tamanho,tipo:"text",div:""},
 									{titulo:"Vermelho: <img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\"inputEventoCor\");' />",id:"Evermelho",size:"10",value:i.vermelho,tipo:"text",div:""},
 									{titulo:"Verde:",id:"Everde",size:"10",value:i.verde,tipo:"text",div:""},
