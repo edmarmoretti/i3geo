@@ -125,7 +125,7 @@ error_reporting(0);
 						$vs[] = "'".$s[$j]."'";
 					}
 					else{
-						if(empty($s[$j])){
+						if($s[$j] == ""){
 							$vs[] = 'null';
 						}
 						else{
