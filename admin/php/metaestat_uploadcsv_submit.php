@@ -91,7 +91,7 @@ error_reporting(0);
 				for ($i=0; $i<$testar;$i++){
 					$s = $linhas[$i];
 					$v = $s[$j];
-					if(!is_numeric($v)){
+					if(!empty($v) && !is_numeric($v)){
 						$tipo = "varchar";
 					}
 				}
@@ -125,7 +125,12 @@ error_reporting(0);
 						$vs[] = "'".$s[$j]."'";
 					}
 					else{
-						$vs[] = $s[$j];
+						if(empty($s[$j])){
+							$vs[] = 'null';
+						}
+						else{
+							$vs[] = $s[$j];
+						}
 					}
 				}
 				$linhasql[] = $insert."VALUES(".implode(",",$vs).")";
