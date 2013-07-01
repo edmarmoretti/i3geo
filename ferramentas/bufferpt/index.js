@@ -60,8 +60,8 @@ i3GEOF.bufferpt = {
 	/*
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.bufferpt.iniciaDicionario();
+	criaJanelaFlutuante: function(x,y){
+		i3GEOF.bufferpt.iniciaDicionario(x,y);
 	},
 	/*
 	Function: iniciaDicionario
@@ -70,16 +70,16 @@ i3GEOF.bufferpt = {
 
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 	*/
-	iniciaDicionario: function(){
+	iniciaDicionario: function(x,y){
 		if(typeof(i3GEOF.bufferpt.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
 				i3GEO.configura.locaplic+"/ferramentas/bufferpt/dicionario.js",
-				"i3GEOF.bufferpt.iniciaJanelaFlutuante()",
+				"i3GEOF.bufferpt.iniciaJanelaFlutuante("+x+","+y+")",
 				"i3GEOF.bufferpt.dicionario_script"
 			);
 		}
 		else{
-			i3GEOF.bufferpt.iniciaJanelaFlutuante();
+			i3GEOF.bufferpt.iniciaJanelaFlutuante(x,y);
 		}
 	},
 	/*

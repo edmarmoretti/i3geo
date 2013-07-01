@@ -191,7 +191,7 @@ i3GEOF.identifica = {
 				new YAHOO.widget.Button("i3GEOidentificabotao2",{
 					onclick:{
 						fn: function(){
-							var js = i3GEO.configura.locaplic+"/ferramentas/bufferpt/index.js.php";
+							var js = i3GEO.configura.locaplic+"/ferramentas/bufferpt/index.js";
 							i3GEO.util.scriptTag(js,"i3GEOF.bufferpt.criaJanelaFlutuante("+i3GEOF.identifica.x+","+i3GEOF.identifica.y+")","i3GEOF.bufferpt_script");
 						}
 					}
