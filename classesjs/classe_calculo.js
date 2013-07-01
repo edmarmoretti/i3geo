@@ -220,15 +220,22 @@ i3GEO.calculo = {
 	tela2dd: function(xfign,yfign,g_celula,imgext,idorigem){
 		try
 		{
-			var amext,longdd,latdd;
+			var amext,longdd,latdd,point;
 			if(i3GEO.Interface.ATUAL === "googlemaps" && arguments.length === 4){
 				amext = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(xfign,yfign));
 				return [amext.lng(),amext.lat()];
+			}
+			if(i3GEO.Interface.openlayers.googleLike === true){
+				amext = i3geoOL.getLonLatFromPixel(new OpenLayers.Pixel(xfign,yfign));
+				var point = new OpenLayers.LonLat(amext.lon, amext.lat);
+				amext =  point.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
+				return [amext.lon,amext.lat];
 			}
 			if(i3GEO.Interface.ATUAL === "openlayers" && arguments.length === 4){
 				amext = i3geoOL.getLonLatFromPixel(new OpenLayers.Pixel(xfign,yfign));
 				return [amext.lon,amext.lat];
 			}
+
 			if (navm){
 				xfign = xfign - 2.2;
 				yfign = yfign - 2.7;
@@ -240,6 +247,8 @@ i3GEO.calculo = {
 			amext = imgext.split(" ");
 			longdd = (amext[0] * 1) + (g_celula * xfign);
 			latdd = (amext[3] * 1) - (g_celula * yfign);
+
+			//console.info(longdd)
 			return [longdd,latdd];
 		}
 		catch(e){return(0);}
@@ -308,6 +317,7 @@ i3GEO.calculo = {
 	{Numeric}
 	*/
 	distancia: function(lon1,lat1,lon2,lat2){
+		//console.info(lon1+" "+lat1);
 		if(i3GEO.calculo.metododistancia === "haversine")
 		{return i3GEO.calculo.distHaversine(lon1,lat1,lon2,lat2);}
 		if(i3GEO.calculo.metododistancia === "vicenty")

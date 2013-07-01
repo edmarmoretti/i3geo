@@ -130,5 +130,11 @@ es:""
 pt:"Google Maps com aplica&ccedil;&atilde;o de estilo",
 en:"",
 es:""
+}],
+23: [
+{
+pt:"Mapa com Open Street Map (OSM)",
+en:"",
+es:""
 }]
 };

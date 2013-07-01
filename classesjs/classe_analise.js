@@ -420,6 +420,7 @@ i3GEO.analise = {
 				YAHOO.util.Dom.setStyle("mostradistancia","display","block");
 				n = pontosdistobj.xpt.length;
 				try{
+					//console.info(objposicaocursor.ddx);
 					if (n > 0){
 						d = calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 						r = calculo.direcao(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);

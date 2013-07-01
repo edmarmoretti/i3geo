@@ -130,6 +130,10 @@ botoesIni.push({
 	"href":"../interface/openlayersdebug.htm",
 	"titulo":$trad(5,g_traducao_init)
 	},{
+		"img":"osm.png",
+		"href":"../interface/osm.htm",
+		"titulo":$trad(23,g_traducao_init)
+	},{
 	"img":"mashup.png",
 	"href":"../mashups",
 	"titulo":$trad(18,g_traducao_init)

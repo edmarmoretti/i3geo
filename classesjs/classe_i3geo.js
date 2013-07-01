@@ -307,7 +307,7 @@ var i3GEO = {
 		{i3GEOmantemCompatibilidade();}
 		montaMapa = function(retorno){
 			try{
-				var temp,abreJM;
+				var temp,abreJM,nomecookie = "i3geoUltimaExtensao";
 				//verifica se existe bloqueio em funcao da senha no ms_configura.php
 				if(retorno.bloqueado){
 					alert(retorno.bloqueado);
@@ -339,13 +339,16 @@ var i3GEO = {
 						}
 						//obtem o cookie com a ultima extensao geografica
 						if(i3GEO.configura.guardaExtensao === true){
-							temp = i3GEO.util.pegaCookie("i3geoUltimaExtensao");
+							if(i3GEO.Interface.openlayers.googleLike === true){
+								nomecookie = "i3geoUltimaExtensaoOSM";
+							}
+							temp = i3GEO.util.pegaCookie(nomecookie);
 							if(temp){
 								temp = temp.replace(/[\+]/g, " ");
 								i3GEO.parametros.mapexten = temp;
 							}
 							i3GEO.eventos.NAVEGAMAPA.push(function(){
-								i3GEO.util.insereCookie("i3geoUltimaExtensao",i3GEO.parametros.mapexten);
+								i3GEO.util.insereCookie(nomecookie,i3GEO.parametros.mapexten);
 							});
 						}
 						//anula os cookies de login se for necessario

@@ -1263,8 +1263,15 @@ i3GEO.php = {
 	inicia: function(funcao,embedLegenda,w,h){
 		//i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
-			par = "funcao=inicia&embedLegenda="+embedLegenda+"&w="+w+"&h="+h+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL,
+			par = "funcao=inicia&embedLegenda="+embedLegenda+"&w="+w+"&h="+h+"&g_sid="+i3GEO.configura.sid+"&interface=",
 			cp = new cpaint();
+		//muda a interface na criacao
+		if(i3GEO.Interface.openlayers.googleLike === true){
+			par += "googlemaps";
+		}
+		else{
+			par += i3GEO.Interface.ATUAL;
+		}
 		cp.set_response_type("JSON");
 		if(i3GEO.util.versaoNavegador() === "FF3")
 		{cp.set_async(true);}

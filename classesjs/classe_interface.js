@@ -541,6 +541,7 @@ i3GEO.Interface = {
 
 		*/
 		LAYERSADICIONAIS: [],
+		googleLike: false,
 		redesenha: function(){
 			//
 			//s&atilde;o criados apenas os layers que ainda n&atilde;o existirem no mapa
@@ -613,6 +614,18 @@ i3GEO.Interface = {
 				bb.INCLUIBOTAO.pan = true;
 				bb.INCLUIBOTAO.zoomtot = true;
 			}
+			if(i3GEO.Interface.openlayers.googleLike === true){
+				i3GEO.Interface.openlayers.parametrosMap = {
+						//maxExtent: new OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892),
+						numZoomLevels:18,
+						maxResolution:156543.0339,
+						units:'m',
+						projection: "EPSG:900913",
+						displayProjection: new OpenLayers.Projection("EPSG:4326"),
+						controls: [],
+						fractionalZoom: false
+				};
+			};
 			i3geoOL = new OpenLayers.Map('openlayers', i3GEO.Interface.openlayers.parametrosMap);
 		},
 		inicia: function(){
@@ -923,6 +936,9 @@ i3GEO.Interface = {
 				i3GEO.Interface.STATUS.atualizando = [];
 				temp.style.display = "none";
 			}
+			if(i3GEO.Interface.openlayers.googleLike === true){
+				url = configura.locaplic+"/classesphp/mapa_googlemaps.php?g_sid="+i3GEO.configura.sid+"&TIPOIMAGEM="+configura.tipoimagem;
+			}
 			//
 			//verifica se algum layer adicional &eacute; do tipo baselayer. Se for, adiciona o layer fundo, mas n&atilde;o como base
 			//
@@ -997,7 +1013,7 @@ i3GEO.Interface = {
 							else{
 								temp = camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);
 							}
-							if(opcoes.singleTile === true){
+							if(opcoes.singleTile === true && i3GEO.Interface.openlayers.googleLike === false){
 								layer = new OpenLayers.Layer.WMS(
 									camada.name,
 									urllayer,
@@ -1011,19 +1027,28 @@ i3GEO.Interface = {
 								//layer = new OpenLayers.Layer.TileCache(camada.name, urllayer,{LAYERS:camada.name,map_imagetype:i3GEO.Interface.OUTPUTFORMAT},opcoes);
 							}
 							else{
-								layer = new OpenLayers.Layer.TMS(
-									camada.name,
-									urllayer,
-									{
-										isBaseLayer:false,
-										serviceVersion:"&tms=",
-										type:"png",
-										layername:camada.name,
-										map_imagetype:i3GEO.Interface.OUTPUTFORMAT,
-										tileOrigin: new OpenLayers.LonLat(-180, -90)
-									},
-									opcoes
-								);
+								if(i3GEO.Interface.openlayers.googleLike === true){
+									layer = new OpenLayers.Layer.OSM(
+										camada.name,
+										urllayer+"&Z=${z}&X=${x}&Y=${y}",
+										{isBaseLayer:false}
+									);
+								}
+								else{
+									layer = new OpenLayers.Layer.TMS(
+											camada.name,
+											urllayer,
+											{
+												isBaseLayer:false,
+												serviceVersion:"&tms=",
+												type:"png",
+												layername:camada.name,
+												map_imagetype:i3GEO.Interface.OUTPUTFORMAT
+											},
+											opcoes
+										);
+								}
+
 							}
 						}
 					}
@@ -1229,8 +1254,14 @@ i3GEO.Interface = {
 			calcCoord = function(e){
 				var p,lonlat,d,pos;
 				p = e.xy;
-				//altera o indicador de localizacao
 				lonlat = i3geoOL.getLonLatFromPixel(p);
+				if(i3GEO.Interface.openlayers.googleLike === true){
+					var projWGS84 = new OpenLayers.Projection("EPSG:4326");
+					var proj900913 = new OpenLayers.Projection("EPSG:900913");
+					var point = new OpenLayers.LonLat(lonlat.lon, lonlat.lat);
+					lonlat =  point.transform(proj900913, projWGS84);
+				}
+
 				if(!lonlat)
 				{return;}
 				d = i3GEO.calculo.dd2dms(lonlat.lon,lonlat.lat);
@@ -1248,6 +1279,7 @@ i3GEO.Interface = {
 				catch(e){
 					if(typeof(console) !== 'undefined'){console.error(e);}
 				}
+				//console.info("registraEventos "+objposicaocursor.ddx);
 			};
 			//
 			//ativa os eventos espec&iacute;ficos do i3geo
