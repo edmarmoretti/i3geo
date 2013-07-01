@@ -1049,6 +1049,8 @@ i3GEO.php = {
 		}
 		if(listaDeTemas === undefined)
 		{listaDeTemas = "";}
+		//verifica se nao e necessario alterar as coordenadas
+		ext = i3GEO.util.extOSM2Geo(ext);
 		var p = locaplic+"/classesphp/mapa_controle.php",
 			par = "funcao=identifica3&opcao="+opcao+"&xy="+x+","+y+"&resolucao="+resolucao+"&g_sid="+sid+"&ext="+ext+"&listaDeTemas="+listaDeTemas;
 		if(opcao !== "tip")

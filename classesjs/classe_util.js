@@ -2496,7 +2496,7 @@ i3GEO.util = {
 	Se for detectado, utiliza a interface alternativa definida em i3GEO.Interface.ALTTABLET
 
 	A deteccao e feita com base em i3geo/pacotes/mobileesp/mdetect.js
-	
+
 	*/
 	detectaTablet: function(){
 		var p,
@@ -2508,7 +2508,7 @@ i3GEO.util = {
 			window.location = i3GEO.configura.locaplic+'/interface/'+i3GEO.Interface.ALTTABLET+'?'+i3GEO.configura.sid;
 			return true;
 		}
-	},	
+	},
 	/*
 	Function: detectaMobile
 
@@ -2517,7 +2517,7 @@ i3GEO.util = {
 	Se for detectado, utiliza a interface alternativa definida em i3GEO.Interface.ALTTABLET
 
 	A deteccao e feita com base em i3geo/pacotes/mobileesp/mdetect.js
-	
+
 	*/
 	detectaMobile: function(){
 		var p,
@@ -2737,6 +2737,48 @@ i3GEO.util = {
 		else{
 			return false;
 		}
+	},
+	/*
+	Function: extGeo2OSM
+
+	 Converte string xmin ymin xmax ymax de geo para a projecao OSM
+	*/
+	extGeo2OSM: function(ext){
+		if(i3GEO.Interface.openlayers.googleLike === true){
+			var metrica,point,proj900913,projWGS84,temp = ext.split(" ");
+			if(temp[0]*1 <= 180 && temp[0]*1 >= -180){
+				projWGS84 = new OpenLayers.Projection("EPSG:4326");
+				proj900913 = new OpenLayers.Projection("EPSG:900913");
+				point = new OpenLayers.LonLat(temp[0], temp[1]);
+				metrica =  point.transform(projWGS84,proj900913);
+				ext = metrica.lon+" "+metrica.lat;
+				point = new OpenLayers.LonLat(temp[2], temp[3]);
+				metrica =  point.transform(projWGS84,proj900913);
+				ext += " "+metrica.lon+" "+metrica.lat;
+			}
+		}
+		return ext;
+	},
+	/*
+	Function: extGeo2OSM
+
+	 Converte string xmin ymin xmax ymax de geo para a projecao OSM
+	*/
+	extOSM2Geo: function(ext){
+		if(i3GEO.Interface.openlayers.googleLike === true){
+			var metrica,point,proj900913,projWGS84,temp = ext.split(" ");
+			if(temp[0]*1 >= 180 || temp[0]*1 <= -180){
+				projWGS84 = new OpenLayers.Projection("EPSG:4326");
+				proj900913 = new OpenLayers.Projection("EPSG:900913");
+				point = new OpenLayers.LonLat(temp[0], temp[1]);
+				metrica =  point.transform(proj900913,projWGS84);
+				ext = metrica.lon+" "+metrica.lat;
+				point = new OpenLayers.LonLat(temp[2], temp[3]);
+				metrica =  point.transform(proj900913,projWGS84);
+				ext += " "+metrica.lon+" "+metrica.lat;
+			}
+		}
+		return ext;
 	}
 };
 //

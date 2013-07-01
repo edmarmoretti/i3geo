@@ -328,14 +328,16 @@ i3GEO.navega = {
 	*/
 	zoomExt: function(locaplic,sid,tipoimagem,ext){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomExt()");}
-		//YAHOO.log("zoomExt", "i3geo");
+		var f,temp,point,metrica,projWGS84,proj900913;
 		if(locaplic !== "")
 		{i3GEO.configura.locaplic = locaplic;}
 		if(sid !== "")
 		{i3GEO.configura.sid = sid;}
 		if(tipoimagem === "")
 		{tipoimagem = "nenhum";}
-		var f = "i3GEO.navega.timerNavega = null;"+
+		//verifica se nao e necessario alterar as coordenadas
+		ext = i3GEO.util.extGeo2OSM(ext);
+		f = "i3GEO.navega.timerNavega = null;"+
 			"i3GEO.php.mudaext(i3GEO.atualiza,'"+tipoimagem+"','"+ext+"');";
 		if(i3GEO.navega.timerNavega !== undefined)
 		{clearTimeout(i3GEO.navega.timerNavega);}

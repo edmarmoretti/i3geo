@@ -584,7 +584,7 @@ i3GEOF.tabela = {
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.tabela.aguarde.visibility = "visible";
-		var p,
+		var p,ext,
 			cp = new cpaint();
 		if(!tiporeg){
 			if($i("i3GEOtabelatiporeg").checked){
@@ -626,7 +626,9 @@ i3GEOF.tabela = {
 		if(!funcao){
 			funcao = i3GEOF.tabela.montaTabela;
 		}
-		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaregistros&inicio="+inicio+"&fim="+fim+"&tema="+i3GEOF.tabela.tema+"&tipo="+tiporeg+"&tipolista="+tipolista+"&ext="+i3GEO.parametros.mapexten+"&dadosDaClasse="+dadosDaClasse;
+		ext = i3GEO.parametros.mapexten;
+		ext = i3GEO.util.extOSM2Geo(ext);
+		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaregistros&inicio="+inicio+"&fim="+fim+"&tema="+i3GEOF.tabela.tema+"&tipo="+tiporeg+"&tipolista="+tipolista+"&ext="+ext+"&dadosDaClasse="+dadosDaClasse;
 		cp.set_response_type("JSON");
 		cp.call(p,"listaRegistros",funcao);
 	},

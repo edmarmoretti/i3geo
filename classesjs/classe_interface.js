@@ -1252,18 +1252,17 @@ i3GEO.Interface = {
 			//vari&aacute;vel que indica se o usu&aacute;rio est&aacute; movimentando o mapa
 			var calcCoord,modoAtual = "";
 			calcCoord = function(e){
-				var p,lonlat,d,pos;
+				var point,p,lonlat,d,pos,projWGS84,proj900913;
 				p = e.xy;
 				lonlat = i3geoOL.getLonLatFromPixel(p);
-				if(i3GEO.Interface.openlayers.googleLike === true){
-					var projWGS84 = new OpenLayers.Projection("EPSG:4326");
-					var proj900913 = new OpenLayers.Projection("EPSG:900913");
-					var point = new OpenLayers.LonLat(lonlat.lon, lonlat.lat);
-					lonlat =  point.transform(proj900913, projWGS84);
-				}
-
 				if(!lonlat)
 				{return;}
+				if(i3GEO.Interface.openlayers.googleLike === true){
+					projWGS84 = new OpenLayers.Projection("EPSG:4326");
+					proj900913 = new OpenLayers.Projection("EPSG:900913");
+					point = new OpenLayers.LonLat(lonlat.lon, lonlat.lat);
+					lonlat =  point.transform(proj900913, projWGS84);
+				}
 				d = i3GEO.calculo.dd2dms(lonlat.lon,lonlat.lat);
 				try{
 					objposicaocursor.ddx = lonlat.lon;
@@ -1342,13 +1341,26 @@ i3GEO.Interface = {
 			i3GEO.gadgets.atualizaEscalaNumerica(parseInt(escalaAtual,10));
 		},
 		zoom2ext: function(ext){
-			var m,b;
+			var m,b,projWGS84,proj900913,point,metrica;
+			ext = i3GEO.util.extGeo2OSM(ext);
 			m = ext.split(" ");
 			b = new OpenLayers.Bounds(m[0],m[1],m[2],m[3]);
 			i3geoOL.zoomToExtent(b,true);
 			i3GEO.eventos.cliquePerm.status = true;
 		},
 		pan2ponto:function(x,y){
+			//verifica se nao e necessario alterar as coordenadas
+			if(i3GEO.Interface.openlayers.googleLike === true){
+				var projWGS84,proj900913,point,metrica;
+				if(x < 180 && x > -180){
+					projWGS84 = new OpenLayers.Projection("EPSG:4326");
+					proj900913 = new OpenLayers.Projection("EPSG:900913");
+					point = new OpenLayers.LonLat(x, y);
+					metrica =  point.transform(projWGS84,proj900913);
+					x = metrica.lon;
+					y = metrica.lat;
+				}
+			}
 			i3geoOL.panTo(new OpenLayers.LonLat(x,y));
 		}
 	},
