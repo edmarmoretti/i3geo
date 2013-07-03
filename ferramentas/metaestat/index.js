@@ -337,7 +337,28 @@ i3GEOF.metaestat = {
 				if($i("i3GEOF.junta_corpo")){
 					return;
 				}
-				var minimiza,cabecalho,titulo,ins,n,i,lista = "<table class=lista4 >";
+				var aplica,minimiza,cabecalho,titulo,ins,n,i,lista = "<table class=lista4 >";
+				aplica = function(){
+					var atualiza,p,lista,i,ics = $i("i3GEOF.junta_corpo").getElementsByTagName("input");
+					n = ics.length;
+					for(i=0;i<n;i++){
+						if(ics[i].type == "checkbox" && ics[i].checked == true){
+							lista.push(ics[i].value);
+						}
+					}
+					if(lista.length == 0){
+						alert("Escolha uma camada");
+						return;
+					}
+					i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
+					p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
+						"&funcao=juntaMedidasVariaveis&layerNames=".lista.join(",");
+					atualiza = function(){
+						i3GEO.janela.fechaAguarde("aguardeBuscaDados");
+						i3GEO.atualiza();
+					};
+					i3GEO.util.ajaxGet(p,atualiza);
+				};
 				cabecalho = function(){
 				};
 				minimiza = function(){
@@ -371,7 +392,7 @@ i3GEOF.metaestat = {
 				$i("i3GEOF.junta_corpo").innerHTML = ins;
 				new YAHOO.widget.Button(
 					"i3geojuntaAplica",
-					{onclick:{fn: i3GEOF.metaestat.analise.filtraPeriodo.adicionaFiltro}}
+					{onclick:{fn: aplica}}
 				);
 			};
 			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
