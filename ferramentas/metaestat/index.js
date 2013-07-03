@@ -193,6 +193,10 @@ i3GEOF.metaestat = {
 				titulo: "Mostra os valores como textos no mapa",
 				onclick: "i3GEOF.metaestat.analise.toponimia()",
 				icone: "imagens/gisicons/label.png"
+			},{
+				titulo: "Junta dados das camadas",
+				onclick: "i3GEOF.metaestat.analise.juntaMedidasVariaveis()",
+				icone: "imagens/gisicons/layer-group-add.png"
 			}
 		],
 		/**
@@ -321,6 +325,57 @@ i3GEOF.metaestat = {
 			}
 			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
 			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia","index.js","i3GEOF.metaestat.analise.abreToponimia()");
+		},
+		/**
+		 * Junta camadas em uma nova, contendo as colunas das medidas
+		 */
+		juntaMedidasVariaveis: function(){
+			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
+			"&funcao=listaLayersAgrupados",
+			temp = function(retorno){
+				i3GEO.janela.fechaAguarde("aguardeBuscaDados");
+				if($i("i3GEOF.junta_corpo")){
+					return;
+				}
+				var minimiza,cabecalho,titulo,ins,n,i,lista = "<table class=lista4 >";
+				cabecalho = function(){
+				};
+				minimiza = function(){
+					i3GEO.janela.minimiza("i3GEOF.junta");
+				};
+				//cria a janela flutuante
+				titulo = "Jun&ccedil;&atilde;o de medidas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
+				i3GEO.janela.cria(
+					"260px",
+					"340px",
+					"",
+					"",
+					"",
+					titulo,
+					"i3GEOF.junta",
+					false,
+					"hd",
+					cabecalho,
+					minimiza
+				);
+				$i("i3GEOF.junta_corpo").style.backgroundColor = "white";
+				n = retorno.data.length;
+				for(i=0;i<n;i++){
+					lista += "<tr><td><input style=cursor:pointer type=checkbox id='"+retorno.data[i].layer+"' ></td><td>"+retorno.data[i].tema+"</td></tr>";
+				}
+				lista += "</table>";
+				ins = "" +
+				'<p class=paragrafo ><b>Escolha as camadas de mesmo tipo e regi&atilde;o:</b></p>' +
+				lista +
+				'<br><br><input id=i3geojuntaAplica type="button" value="Aplicar" />';
+				$i("i3GEOF.junta_corpo").innerHTML = ins;
+				new YAHOO.widget.Button(
+					"i3geojuntaAplica",
+					{onclick:{fn: i3GEOF.metaestat.analise.filtraPeriodo.adicionaFiltro}}
+				);
+			};
+			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
+			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
 		 * Obtem os parametros necessarios ao funcionamento de i3GEOF.metaestat.analise.toponimia()

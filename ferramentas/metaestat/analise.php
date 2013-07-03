@@ -121,6 +121,9 @@ switch (strtoupper($funcao)){
 	case "CALOR":
 		$retorno = mapaDeCalor($map_file,$tema);
 	break;
+	case "LISTALAYERSAGRUPADOS":
+		$retorno = listaLayersAgrupados($map_file);
+	break;
 	case "ADICIONALIMITEREGIAO":
 		if(empty($outlinecolor)){
 			$outlinecolor = "255,0,0";
@@ -630,5 +633,43 @@ function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao
 	}
 	$mapa->save($map_file);
 	return "ok";
+}
+/**
+ * Cria um novo layer no mapa atual fazendo a juncao dos SQLs para obter em uma mesma tabela todas as colunas das medidas de variavies
+ *
+ * @param string com a lista de nomes de layers separados por virgula
+ * @return Nome do layer criado
+ *
+ */
+function juntaMedidasVariaveis($map_file,$layerNames){
+
+}
+/**
+ * Lista os nomes dos layers originados do sistema METAESTAT.
+ * Os layers sao agrupados por tipo de regiao e tipo de representacao
+ * @param unknown $map_file
+ * @return string
+ */
+function listaLayersAgrupados($map_file){
+	//MS_LAYER_POINT, MS_LAYER_LINE, MS_LAYER_POLYGON
+	$tipos[0] = "ponto";
+	$tipos[1] = "linha";
+	$tipos[2] = "poligono";
+	$mapa = ms_newMapObj($map_file);
+	$layers = analise_listaLayersMetaestat($mapa);
+	$m = new Metaestat();
+	$camadas = array();
+	foreach($layers as $l){
+		$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");
+		$tema = (mb_convert_encoding(($l->getmetadata("tema")),"UTF-8","ISO-8859-1"));
+		$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
+		$camadas[] = array(
+				"layer"=>$l->name,
+				"tema"=>$tema,
+				"codigo_tipo_regiao"=>$codigo_tipo_regiao,
+				"tipolayer"=>$tipos[$l->type]
+		);
+	}
+	return $camadas;
 }
 ?>

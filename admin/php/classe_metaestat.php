@@ -289,6 +289,9 @@ class Metaestat{
 	 * @return array("sqlagrupamento"=>,"sql"=>,"sqlmapserver"=>,"filtro"=>,"colunas"=>,"alias"=>,"colunavalor"=>,"titulo"=>,"nomeregiao"=>)
 	 */
 	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = ""){
+		//
+		//o sql que faz acesso aos dados e marcado com /*SE*//*SE*/ na string que sera usada nos mapfiles
+		//
 		$filtro = false;
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$pp = $this->listaParametro($id_medida_variavel,"",0);
@@ -452,10 +455,10 @@ class Metaestat{
 		$sqlgeo .= " WHERE ".$j;
 
 		if($agregaregiao == true){
-			$sqlgeo = $colunageo." from ( ".$sqlgeo." __filtro__  ) as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];
+			$sqlgeo = $colunageo." from /*SE*/( ".$sqlgeo." __filtro__  )/*SE*/ as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];
 		}
 		else{
-			$sqlgeo = $colunageo." from (".$sqlgeo." __filtro__ ) as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
+			$sqlgeo = $colunageo." from /*SE*/(".$sqlgeo." __filtro__ )/*SE*/ as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
 		}
 		//remove ambiguidades
 		$sqlgeo = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlgeo);
