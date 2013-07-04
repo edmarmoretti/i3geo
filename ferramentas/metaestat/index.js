@@ -339,10 +339,10 @@ i3GEOF.metaestat = {
 				}
 				var aplica,minimiza,cabecalho,titulo,ins,n,i,lista = "<table class=lista4 >";
 				aplica = function(){
-					var atualiza,p,lista,i,ics = $i("i3GEOF.junta_corpo").getElementsByTagName("input");
+					var atualiza,p,lista = [],i,ics = $i("i3GEOF.junta_corpo").getElementsByTagName("input");
 					n = ics.length;
 					for(i=0;i<n;i++){
-						if(ics[i].type == "checkbox" && ics[i].checked == true){
+						if(ics[i].type == "checkbox" && ics[i].checked === true){
 							lista.push(ics[i].value);
 						}
 					}
@@ -352,7 +352,7 @@ i3GEOF.metaestat = {
 					}
 					i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
 					p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
-						"&funcao=juntaMedidasVariaveis&layerNames=".lista.join(",");
+						"&funcao=juntaMedidasVariaveis&layerNames="+lista.join(",")+"&nome="+$i("i3GEOFjuntaNovoNome").value;
 					atualiza = function(){
 						i3GEO.janela.fechaAguarde("aguardeBuscaDados");
 						i3GEO.atualiza();
@@ -382,12 +382,14 @@ i3GEOF.metaestat = {
 				$i("i3GEOF.junta_corpo").style.backgroundColor = "white";
 				n = retorno.data.length;
 				for(i=0;i<n;i++){
-					lista += "<tr><td><input style=cursor:pointer type=checkbox id='"+retorno.data[i].layer+"' ></td><td>"+retorno.data[i].tema+"</td></tr>";
+					lista += "<tr><td><input style=cursor:pointer type=checkbox value='"+retorno.data[i].layer+"' ></td><td>"+retorno.data[i].tema+"</td></tr>";
 				}
 				lista += "</table>";
 				ins = "" +
 				'<p class=paragrafo ><b>Escolha as camadas de mesmo tipo e regi&atilde;o:</b></p>' +
 				lista +
+				'<br><p class=paragrafo >Nome da nova camada</p>' +
+				$inputText("","","i3GEOFjuntaNovoNome","",30,'') +
 				'<br><br><input id=i3geojuntaAplica type="button" value="Aplicar" />';
 				$i("i3GEOF.junta_corpo").innerHTML = ins;
 				new YAHOO.widget.Button(

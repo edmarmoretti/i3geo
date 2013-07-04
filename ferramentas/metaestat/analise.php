@@ -124,6 +124,9 @@ switch (strtoupper($funcao)){
 	case "LISTALAYERSAGRUPADOS":
 		$retorno = listaLayersAgrupados($map_file);
 	break;
+	case "JUNTAMEDIDASVARIAVEIS":
+		$retorno = juntaMedidasVariaveis($map_file,$layerNames,$nome);
+	break;
 	case "ADICIONALIMITEREGIAO":
 		if(empty($outlinecolor)){
 			$outlinecolor = "255,0,0";
@@ -501,7 +504,7 @@ function analise_listaCamadasFiltroTempo($map_file){
 function analise_aplicaFiltroTempo($map_file,$tema,$pari,$vali,$parf,$valf){
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getlayerbyname($tema);
-	$id_medida_variavel = $layer->getmetadata("ID_MEDIDA_VARIAVEL");
+	$id_medida_variavel = $layer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
 	$data = $layer->data;
 	$m = new Metaestat();
 	//pega os parametros de tempo inicial
@@ -563,15 +566,21 @@ function analise_listaCamadasMetaestat($map_file){
 /**
  * Lista os objetos layers do mapa atual que sao originarias do sistema de metadados
  * @param arquivo mapfile do mapa atual
+ * @excluiderivados exclui da lista os layers marcados como derivados de outros layers do sistema metaestat
  * @return Array com os layers
  */
-function analise_listaLayersMetaestat($mapa){
+function analise_listaLayersMetaestat($mapa,$excluiderivados = false){
 	$c = $mapa->numlayers;
 	$layers = array();
 	for ($i=0;$i < $c;++$i){
 		$l = $mapa->getlayer($i);
 		if($l->getmetadata("METAESTAT") == "SIM"){
-			$layers[] = $l;
+			if($excluiderivados == false){
+				$layers[] = $l;
+			}
+			elseif ($l->getmetadata("METAESTAT_DERIVADO") != "sim"){
+				$layers[] = $l;
+			}
 		}
 	}
 	return $layers;
@@ -641,8 +650,54 @@ function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao
  * @return Nome do layer criado
  *
  */
-function juntaMedidasVariaveis($map_file,$layerNames){
+function juntaMedidasVariaveis($map_file,$layerNames,$nome){
+	//o sql que faz acesso aos dados e marcado com /*SE*//*SE*/
+	$mapa = ms_newMapObj($map_file);
+	$layernames = explode(",",$layerNames);
+	$sqlLayers = array();
+	$conta = 0;
+	$m = new Metaestat();
+	$colunasValor = array();
+	$colunasIdentificador = array();
+	$sqls = array();
+	$nomesLayers = array();
+	foreach($layernames as $layername){
+		$l = $mapa->getlayerbyname($layername);
+		$s = explode("/*SE*/",$l->data);
+		//pega o sql e da define um alias
+		$sqls[] = $s[1]." as tabela".$conta;
+		//
+		$id_medida_variavel = $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
+		$nomesLayers[] = $l->getmetadata("tema");
+		$medidavariavel = $m->listaMedidaVariavel("",$id_medida_variavel);
+		//pega o nome da coluna que contem os valores e a coluna de ligacao
+		$colunasValor[] = $medidavariavel["colunavalor"];
+		$colunasIdentificador[] = $medidavariavel["colunaidgeo"];
+		//pega valores do primeiro layer para a tabela0
+		if($conta == 0){
+			$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");
+			$gid = $medidavariavel["colunaidunico"];
+		}
+		$conta++;
+	}
+	//coluna com a geometria
+	$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
+	$n = count($sqls);
 
+	$cwhere = array();
+	for($i=1;$i<$n;$i++){
+		$cwhere[] = "tabela0.".$colunasIdentificador[0]." = "."tabela".$i.".".$colunasIdentificador[$i];
+	}
+	$colunasDados = array();
+	for($i=0;$i<$n;$i++){
+		$colunasDados[] = "tabela".$i.".".$colunasValor[$i]." as valorTema".$i;
+	}
+	$sqlfinal = "SELECT tabela0.".$gid.",tabela0.".$regiao["colunageo"]." as the_geom,".implode(",",$colunasDados)." from ".implode(",",$sqls)." WHERE ";
+	$sqlfinal .= implode($cwhere," AND ");
+	$sqlfinal = str_replace("/*FA*/","",$sqlfinal);
+	$sqlfinal = str_replace("/*FAT*/","",$sqlfinal);
+	$data = "SELECT the_geom from ($sqlfinal) as foo using unique $gid using srid=".$regiao["srid"];
+	return $data;
 }
 /**
  * Lista os nomes dos layers originados do sistema METAESTAT.
@@ -656,7 +711,7 @@ function listaLayersAgrupados($map_file){
 	$tipos[1] = "linha";
 	$tipos[2] = "poligono";
 	$mapa = ms_newMapObj($map_file);
-	$layers = analise_listaLayersMetaestat($mapa);
+	$layers = analise_listaLayersMetaestat($mapa,true);
 	$m = new Metaestat();
 	$camadas = array();
 	foreach($layers as $l){
