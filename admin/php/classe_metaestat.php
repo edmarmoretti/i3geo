@@ -857,9 +857,11 @@ class Metaestat{
 	 * @param filtro que sera concatenado ao sql
 	 * @param 0|1 mostra ou nao todas as colunas da tabela com os dados
 	 * @param coluna de agrupamento
+	 * @param limite do numero de registros
 	 * @return execSQL
 	 */
-	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = ""){
+	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = "",$limite=""){
+		set_time_limit(0);
 		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor);
 		//var_dump($sql);exit;
 		$sqlf = $sql["sql"];
@@ -871,7 +873,9 @@ class Metaestat{
 		elseif(!empty($filtro)){
 			$sqlf .= " WHERE ".$filtro;
 		}
-		//echo $sqlf;exit;
+		if($limite != ""){
+			$sqlf .= " limit ".$limite;
+		}
 		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
 		if(!empty($metaVariavel["codigo_estat_conexao"])){
 			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
@@ -912,12 +916,12 @@ class Metaestat{
 	 * @param coluna de agrupamento
 	 * @return array("colunavalor"=>,"soma"=>,"media"=>,"menor"=>,"maior"=>,"quantidade"=>,"histograma"=>,"grupos"=>,"unidademedida"=>,"quartis"=>)
 	 */
-	function sumarioMedidaVariavel($id_medida_variavel,$filtro="",$agruparpor=""){
+	function sumarioMedidaVariavel($id_medida_variavel,$filtro="",$agruparpor="",$limite=""){
 		if(!empty($agruparpor)){
-			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,1);
+			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,1,"",$limite);
 		}
 		else{
-			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,0);
+			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,0,"",$limite);
 		}
 		if($dados){
 			$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);

@@ -663,6 +663,7 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome){
 	$nomesLayers = array();
 	foreach($layernames as $layername){
 		$l = $mapa->getlayerbyname($layername);
+		$l->set("status",MS_OFF);
 		$s = explode("/*SE*/",$l->data);
 		//pega o sql e da define um alias
 		$sqls[] = $s[1]." as tabela".$conta;
@@ -686,18 +687,43 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome){
 
 	$cwhere = array();
 	for($i=1;$i<$n;$i++){
-		$cwhere[] = "tabela0.".$colunasIdentificador[0]." = "."tabela".$i.".".$colunasIdentificador[$i];
+		$cwhere[] = "tabela0.".$colunasIdentificador[0]."::text = "."tabela".$i.".".$colunasIdentificador[$i]."::text";
 	}
 	$colunasDados = array();
+	$itens = array($gid);
+	$itensdesc = array("gid");
 	for($i=0;$i<$n;$i++){
 		$colunasDados[] = "tabela".$i.".".$colunasValor[$i]." as valorTema".$i;
+		$itens[] = "valorTema".$i;
+		$itensdesc[] = $nomesLayers[$i];
 	}
 	$sqlfinal = "SELECT tabela0.".$gid.",tabela0.".$regiao["colunageo"]." as the_geom,".implode(",",$colunasDados)." from ".implode(",",$sqls)." WHERE ";
 	$sqlfinal .= implode($cwhere," AND ");
 	$sqlfinal = str_replace("/*FA*/","",$sqlfinal);
 	$sqlfinal = str_replace("/*FAT*/","",$sqlfinal);
-	$data = "SELECT the_geom from ($sqlfinal) as foo using unique $gid using srid=".$regiao["srid"];
-	return $data;
+	$data = "the_geom from ($sqlfinal) as foo using unique $gid using srid=".$regiao["srid"];
+	$nlayer = ms_newLayerObj($mapa,$mapa->getlayerbyname($layernames[0]));
+	$nlayer->set("data",$data);
+	$nlayer->set("name",$nlayer->name."_");
+	$nlayer->setmetadata("tema",$nome);
+	$nlayer->setmetadata("METAESTAT_DERIVADO","sim");
+	$nlayer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL","");
+    $nlayer->setmetadata("TIP","");
+    $nlayer->setmetadata("arquivotemaoriginal","");
+    $nlayer->setmetadata("nomeoriginal","");
+    $nlayer->setmetadata("ITENS",implode(",",$itens));
+    $nlayer->setmetadata("ITENSDESC",implode(",",$itensdesc));
+	
+	$nclass = $nlayer->numclasses;
+	for($i=1;$i<$nclass;$i++){
+		$nlayer->getclass($i)->set("status",MS_DELETE);
+	}
+	$c = $nlayer->getclass(0);
+	$c->set("name"," ");
+	$c->setexpression("");
+	$nlayer->set("status",MS_DEFAULT);
+	$mapa->save($map_file);
+	return $nlayer->name;
 }
 /**
  * Lista os nomes dos layers originados do sistema METAESTAT.

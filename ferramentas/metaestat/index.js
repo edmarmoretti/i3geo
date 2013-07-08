@@ -330,15 +330,23 @@ i3GEOF.metaestat = {
 		 * Junta camadas em uma nova, contendo as colunas das medidas
 		 */
 		juntaMedidasVariaveis: function(){
+			if($i("aguardeAnalise_c") && $i("aguardeAnalise_c").style.visibility == "visible"){
+				return;
+			};
 			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
 			"&funcao=listaLayersAgrupados",
 			temp = function(retorno){
-				i3GEO.janela.fechaAguarde("aguardeBuscaDados");
+				i3GEO.janela.fechaAguarde("aguardeAnalise");
 				if($i("i3GEOF.junta_corpo")){
 					return;
 				}
 				var aplica,minimiza,cabecalho,titulo,ins,n,i,lista = "<table class=lista4 >";
 				aplica = function(){
+					if($i("aguardeAnalise_c") && $i("aguardeAnalise_c").style.visibility == "visible"){
+						return;
+					};
+					i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
+
 					var atualiza,p,lista = [],i,ics = $i("i3GEOF.junta_corpo").getElementsByTagName("input");
 					n = ics.length;
 					for(i=0;i<n;i++){
@@ -350,12 +358,13 @@ i3GEOF.metaestat = {
 						alert("Escolha uma camada");
 						return;
 					}
-					i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
+					i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
 					p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
 						"&funcao=juntaMedidasVariaveis&layerNames="+lista.join(",")+"&nome="+$i("i3GEOFjuntaNovoNome").value;
 					atualiza = function(){
-						i3GEO.janela.fechaAguarde("aguardeBuscaDados");
+						i3GEO.janela.fechaAguarde("aguardeAnalise");
 						i3GEO.atualiza();
+						i3GEOF.metaestat.analise.comboCamadas();
 					};
 					i3GEO.util.ajaxGet(p,atualiza);
 				};
@@ -368,7 +377,7 @@ i3GEOF.metaestat = {
 				titulo = "Jun&ccedil;&atilde;o de medidas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
 				i3GEO.janela.cria(
 					"260px",
-					"340px",
+					"300px",
 					"",
 					"",
 					"",
@@ -397,7 +406,7 @@ i3GEOF.metaestat = {
 					{onclick:{fn: aplica}}
 				);
 			};
-			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
+			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
@@ -408,11 +417,11 @@ i3GEOF.metaestat = {
 			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
 				"&funcao=pegaDadosTME&tema="+i3GEO.temaAtivo,
 				temp = function(retorno){
-					i3GEO.janela.fechaAguarde("aguardeBuscaDados");
+					i3GEO.janela.fechaAguarde("aguardeAnalise");
 					i3GEOF.toponimia.ATIVAITEM = retorno.data.itemDados;
 					i3GEOF.toponimia.iniciaJanelaFlutuante();
 				};
-			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
+			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
@@ -436,6 +445,10 @@ i3GEOF.metaestat = {
 		 * Executa ferramentas/metaestat/analise.php?funcao=calor;
 		 */
 		calor: function(){
+			if($i("aguardeAnalise_c") && $i("aguardeAnalise_c").style.visibility == "visible"){
+				return;
+			};
+
 			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
 				return;
@@ -448,10 +461,10 @@ i3GEOF.metaestat = {
 			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
 				"&funcao=calor&tema="+$i("i3geoCartoAnaliseCamadasCombo").value+"&ext="+i3GEO.parametros.mapexten,
 				temp = function(retorno){
-					i3GEO.janela.fechaAguarde("aguardecalor");
+					i3GEO.janela.fechaAguarde("aguardeAnalise");
 					i3GEO.atualiza();
 				};
-			i3GEO.janela.abreAguarde("aguardecalor","Aguarde...");
+			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
@@ -475,6 +488,10 @@ i3GEOF.metaestat = {
 		 * Executa ferramentas/metaestat/analise.php?funcao=alteraContorno;
 		 */
 		contorno: function(){
+			if($i("aguardeAnalise_c") && $i("aguardeAnalise_c").style.visibility == "visible"){
+				return;
+			};
+
 			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
 				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
 				return;
@@ -483,12 +500,12 @@ i3GEOF.metaestat = {
 			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
 				"&funcao=alteraContorno&tema="+$i("i3geoCartoAnaliseCamadasCombo").value,
 				temp = function(retorno){
-					i3GEO.janela.fechaAguarde("aguardecontorno");
+					i3GEO.janela.fechaAguarde("aguardeAnalise");
 					i3GEO.atualiza();
 					i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
 					i3GEO.arvoreDeCamadas.atualizaLegenda(i3GEO.temaAtivo);
 				};
-			i3GEO.janela.abreAguarde("aguardecontorno","Aguarde...");
+			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
@@ -513,12 +530,12 @@ i3GEOF.metaestat = {
 			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
 				"&funcao=pegaDadosTME&tema="+i3GEO.temaAtivo,
 				temp = function(retorno){
-					i3GEO.janela.fechaAguarde("aguardeBuscaDados");
+					i3GEO.janela.fechaAguarde("aguardeAnalise");
 					i3GEOF.tme.ITEMNOMEREGIOES = retorno.data.itemNomeRegioes;
 					i3GEOF.tme.ITEMDADOS = retorno.data.itemDados;
 					i3GEOF.tme.iniciaJanelaFlutuante();
 				};
-			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
+			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
@@ -542,7 +559,7 @@ i3GEOF.metaestat = {
 							i3GEO.configura.sid+"&funcao=estatistica&item="+item+
 							"&tema="+i3GEO.temaAtivo+"&exclui=&ext="+i3GEO.parametros.extentTotal,
 							monta = function(retorno){
-								i3GEO.janela.fechaAguarde("aguardeBuscaDados");
+								i3GEO.janela.fechaAguarde("aguardeAnalise");
 								var ins = "",
 									nometema,
 									nome,
@@ -572,11 +589,14 @@ i3GEOF.metaestat = {
 						i3GEO.util.ajaxGet(p,monta);
 					}
 					else{
-						i3GEO.janela.fechaAguarde("aguardeBuscaDados");
+						i3GEO.janela.fechaAguarde("aguardeAnalise");
 						i3GEO.janela.tempoMsg("Ocorreu algum erro");
 					}
 				};
-			i3GEO.janela.abreAguarde("aguardeBuscaDados","Aguarde...");
+			if($i("aguardeAnalise_c") && $i("aguardeAnalise_c").style.visibility == "visible"){
+				return;
+			};
+			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
@@ -655,7 +675,7 @@ i3GEOF.metaestat = {
 			if(i.value != ""){
 				var p,temp,cores = i.value;
 				temp = function(){
-					i3GEO.janela.fechaAguarde("aguardeAplicaCores");
+					i3GEO.janela.fechaAguarde("aguardeAnalise");
 					i3GEO.atualiza();
 					i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
 					i3GEO.arvoreDeCamadas.atualizaLegenda(i3GEO.temaAtivo);
@@ -666,7 +686,11 @@ i3GEOF.metaestat = {
 					"&tema="+i3GEO.temaAtivo +
 					"&cores=" + cores;
 				i3GEO.janela.AGUARDEMODAL = true;
-				i3GEO.janela.abreAguarde("aguardeAplicaCores","Aplicando...");
+				if($i("aguardeAnalise_c") && $i("aguardeAnalise_c").style.visibility == "visible"){
+					return;
+				};
+
+				i3GEO.janela.abreAguarde("aguardeAnalise","Aplicando...");
 				i3GEO.janela.AGUARDEMODAL = false;
 				i3GEO.util.ajaxGet(p,temp);
 			}
@@ -794,11 +818,11 @@ i3GEOF.metaestat = {
 				i3GEO.janela.tempoMsg("O filtro de tempo n&atilde;o modifica as camadas que foram criadas considerando-se uma data espec&iacute;fica");
 				var p,pini,pfim,
 				temp = function(retorno){
-					i3GEO.janela.fechaAguarde("aguardeAplicaFiltro");
+					i3GEO.janela.fechaAguarde("aguardeAnalise");
 					i3GEO.Interface.atualizaMapa();
 				};
 				i3GEO.janela.AGUARDEMODAL = true;
-				i3GEO.janela.abreAguarde("aguardeAplicaFiltro","Aplicando...");
+				i3GEO.janela.abreAguarde("aguardeAnalise","Aplicando...");
 				i3GEO.janela.AGUARDEMODAL = false;
 				//pega o filtro
 				pini = i3GEOF.metaestat.analise.filtraPeriodo.pegaParametros("i3GEOF.filtraperiodo.Pi_0");
@@ -812,7 +836,7 @@ i3GEOF.metaestat = {
 					"&tema="+$i("i3GEOF.filtraperiodo.comboCamada").value +
 					"&g_sid="+i3GEO.configura.sid;
 				if(pini[0].length == 0 || pini[1].length == 0){
-					i3GEO.janela.fechaAguarde("aguardeAplicaFiltro");
+					i3GEO.janela.fechaAguarde("aguardeAnalise");
 					return;
 				}
 				i3GEO.util.ajaxGet(p,temp);
@@ -820,11 +844,11 @@ i3GEOF.metaestat = {
 			removeFiltro: function(){
 				var p,
 				temp = function(retorno){
-					i3GEO.janela.fechaAguarde("aguardeAplicaFiltro");
+					i3GEO.janela.fechaAguarde("aguardeAnalise");
 					i3GEO.Interface.atualizaMapa();
 				};
 				i3GEO.janela.AGUARDEMODAL = true;
-				i3GEO.janela.abreAguarde("aguardeAplicaFiltro","Aplicando...");
+				i3GEO.janela.abreAguarde("aguardeAnalise","Aplicando...");
 				i3GEO.janela.AGUARDEMODAL = false;
 				p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=removeFiltroTempo" +
 					"&tema="+$i("i3GEOF.filtraperiodo.comboCamada").value +

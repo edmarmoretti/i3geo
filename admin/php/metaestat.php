@@ -474,9 +474,12 @@ switch (strtoupper($funcao))
 			$cores = str_replace(")","",$cores);
 			$cores = explode(";",$cores);
 		}
+		if(empty($limite)){
+			$limite = 10000;
+		}
 		if($tipo == "quartil"){
 			$m = new Metaestat();
-			$dados = $m->sumarioMedidaVariavel($id_medida_variavel);
+			$dados = $m->sumarioMedidaVariavel($id_medida_variavel,"","",$limite);
 			if($dados == false){
 				retornaJSON("erro");
 				exit;
@@ -499,7 +502,7 @@ switch (strtoupper($funcao))
 		}
 		if($tipo == "intiguais5"){
 			$m = new Metaestat();
-			$dados = $m->sumarioMedidaVariavel($id_medida_variavel);
+			$dados = $m->sumarioMedidaVariavel($id_medida_variavel,"","",$limite);
 			if($dados == false){
 				retornaJSON("erro");
 				exit;
