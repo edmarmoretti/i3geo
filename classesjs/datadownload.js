@@ -303,9 +303,11 @@ function mostraDownload(retorno)
 		{ins = "<p style=color:red >Ocorreu um erro. O tema n&atilde;o foi encontrado. Pode ser que o c&oacute;digo do tema n&atilde;o existe na defini&ccedil;&atilde;o do mapfile. Informe o administrador do sistema.<br>";}
 		else
 		{
-			ins = "<b>Clique nos links para pegar os arquivos.</b><br><br>";
+			ins = "<b>Links de acesso:</b><br><br>";
 			ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+retorno.mapfileurl+"' target=blank >Arquivo de configura&ccedil;&atilde;o Mapfile</a><br>";
 			ins += "<a href='"+g_locaplic+"/classesphp/mapa_controle.php?funcao=TEMA2SLD&tema="+retorno.tema+"&map_file="+retorno.mapfile+"' target=blank >Arquivo de legenda SLD</a><br><br>";
+			ins += "Servi&ccedil;o OGC: "+g_locaplic+"/ogc.php?tema="+retorno.tema+"<br><br>";
+			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities' target=blank >OGC GetCapabilities</a><br><br>";
 
 			for (var arq=0;arq<n;arq++)
 			{
