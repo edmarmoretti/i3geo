@@ -684,10 +684,10 @@ class Atributos
 						}
 						else
 						{
-							if ($v == $palavra || (stristr(strtr($v,$buscas,$trocas),strtr($palavra,$buscas,$trocas))))
+
+							if (strtolower($v) == strtolower($palavra) || (stristr(strtr(strtolower($v),$buscas,$trocas),strtr(strtolower($palavra),$buscas,$trocas))))
 							{
-								if($convC == true)
-								{
+								if($convC == true){
 									$v = $this->converte($v);
 								}
 								$r[] = array("item" => $item,"valor" => $v);
