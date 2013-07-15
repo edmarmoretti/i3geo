@@ -146,28 +146,27 @@ i3GEOF.agrupaElementos = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo' >Essa ferramenta transforma v&aacute;rios elementos selecionados de um tema em um s&oacute; gerando um pol&iacute;gono para cada grupo (pol&iacute;gonos convexos).";
-		ins += "<p class='paragrafo' >Para definir quais elementos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema.";
-		ins += "Os elementos que possu&iacute;rem o mesmo valor ser&atilde;o considerados no mesmo grupo. Caso n&atilde; tenha sido escolhido nenhum item, todas os elementos ser&atilde;o agrupados em um s&oacute;";
-		ins += "<p class='paragrafo' >O resultado final ser&aacute; um novo tema com elementos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas o item escolhido.";
+		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.agrupaElementos.dicionario);
+		ins += "<p class='paragrafo' >"+$trad(2,i3GEOF.agrupaElementos.dicionario);
+		ins += "<p class='paragrafo' >"+$trad(3,i3GEOF.agrupaElementos.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.agrupaElementos.t1()",ins,"i3GEOFgradeDePontost0","i3GEOagrupaelementosresultado");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo' >Tema que cont&eacute;m os elementos (pelo menos um elemento deve estar selecionado):<br>";
+		var ins = "<p class='paragrafo' >"+$trad(4,i3GEOF.agrupaElementos.dicionario)+":<br>";
 		ins += "<div id='i3GEOagrupaelementosSelTemas' style='text-align:left;font-size:11px'></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t0()","i3GEOF.agrupaElementos.t2()",ins,"i3GEOF.agrupaElementos.t1","i3GEOagrupaelementosresultado");
 		i3GEOF.agrupaElementos.comboTemasSel();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo' >Escolha o item da tabela de atributos que ser&aacute; utilizado para agregar. (opcional)";
+		var ins = "<p class='paragrafo' >"+$trad(5,i3GEOF.agrupaElementos.dicionario);
 		ins += "<div id='i3GEOagrupaelementosSelItens' style='text-align:left;font-size:11px;'></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t1()","i3GEOF.agrupaElementos.t3()",ins,"i3GEOF.agrupaElementos.t2","i3GEOagrupaelementosresultado");
 		$i("i3GEOagrupaelementosSelItens").style.display = "block";
 		i3GEOF.agrupaElementos.comboItensSel();
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>O tema com o agrupamento ser&aacute; adicionado ao mapa atual.";
-		ins += "<br><br><input id=i3GEOagrupaelementosbotao1 type='buttom' value='Criar agrupamento' />";
+		var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.agrupaElementos.dicionario);
+		ins += "<br><br><input id=i3GEOagrupaelementosbotao1 type='buttom' value='"+$trad(10,i3GEOF.agrupaElementos.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t2()","",ins,"i3GEOF.agrupaElementos.t3","i3GEOagrupaelementosresultado");
 		new YAHOO.widget.Button(
 			"i3GEOagrupaelementosbotao1",
@@ -198,7 +197,7 @@ i3GEOF.agrupaElementos = {
 				fim = function(retorno){
 					i3GEOF.agrupaElementos.aguarde.visibility = "hidden";
 					if (retorno.data === undefined )
-					{$i("i3GEOagrupaelementosfim").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";}
+					{$i("i3GEOagrupaelementosfim").innerHTML = $trad(7,i3GEOF.agrupaElementos.dicionario);}
 					else
 					{i3GEO.atualiza();}
 				};
@@ -208,7 +207,7 @@ i3GEOF.agrupaElementos = {
 				cp.call(p,"agrupaElementos",fim);
 			}
 			else
-			{i3GEO.janela.tempoMsg("Tema invalido");}
+			{i3GEO.janela.tempoMsg($trad(8,i3GEOF.agrupaElementos.dicionario));}
 		}
 		catch(e){$i("i3GEOagrupaelementosfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.agrupaElementos.aguarde.visibility = "hidden";}
 	},
@@ -259,7 +258,7 @@ i3GEOF.agrupaElementos = {
 			tema,
 			function(retorno){
 		 		if(retorno.tipo === "erro"){
-		 			$i("i3GEOagrupaelementosSelItens").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
+		 			$i("i3GEOagrupaelementosSelItens").innerHTML = "<br><br><span style='color:red'>"+$trad(9,i3GEOF.agrupaElementos.dicionario)+"</span><br><br>";
 		 		}
 		 		else{
 		 			$i("i3GEOagrupaelementosSelItens").innerHTML = retorno.dados;

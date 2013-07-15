@@ -121,27 +121,27 @@ i3GEOF.busca = {
 	html:function(){
 		var ins = '';
 		ins += '<p class="paragrafo" >';
-		ins += $inputText("","","i3GEObuscapalavra","",35,"digite aqui o texto...");
-		ins += '<p class="paragrafo" ><input id=i3GEObuscabotao1 size=20  type=button value="Procurar" />';
+		ins += $inputText("","","i3GEObuscapalavra","",35,$trad(1,i3GEOF.busca.dicionario));
+		ins += '<p class="paragrafo" ><input id=i3GEObuscabotao1 size=20  type=button value="'+$trad(2,i3GEOF.busca.dicionario)+'" />';
 		ins += '<br><br><table summary="Lista de opcoes" class=lista3 width="250px">';
 		ins += '	<tr>';
 		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscaqualquer name=i3GEObuscatipo checked /></td>';
-		ins += '		<td>qualquer lugar do item, ou</td>';
+		ins += '		<td>'+$trad(3,i3GEOF.busca.dicionario)+'</td>';
 		ins += '	</tr>';
 		ins += '	<tr>';
 		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscaexata name=i3GEObuscatipo /></td>';
-		ins += '		<td>a frase exata</td>';
+		ins += '		<td>'+$trad(4,i3GEOF.busca.dicionario)+'</td>';
 		ins += '	</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '	<tr>';
 		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscamapa name=i3GEObuscaonde checked /></td>';
-		ins += '		<td>procurar no mapa todo, ou</td>';
+		ins += '		<td>'+$trad(5,i3GEOF.busca.dicionario)+'</td>';
 		ins += '	</tr>';
 		ins += '	<tr>';
 		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscaregiao name=i3GEObuscaonde /></td>';
-		ins += '		<td>na regi&atilde;o atual</td>';
+		ins += '		<td>'+$trad(6,i3GEOF.busca.dicionario)+'</td>';
 		ins += '	</tr>';
 		ins += '</table>';
-		ins += '<p class="paragrafo" ><b>Buscar nos itens:</b>';
+		ins += '<p class="paragrafo" ><b>'+$trad(7,i3GEOF.busca.dicionario)+'</b>';
 		ins += '<div id=i3GEObuscalistai class=digitar style="text-align:left;width:250px;overflow:auto;height:115px">';
 		ins += '</div>';
 		return ins;
@@ -197,7 +197,7 @@ i3GEOF.busca = {
 	*/
 	ativaFoco: function(){
 		if(i3GEOF.busca.tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.busca.tema) === "")
-		{alert("O tema ja nao existe mais no mapa");}
+		{alert($trad(8,i3GEOF.busca.dicionario));}
 		var i = $i("i3GEOF.busca_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
@@ -224,7 +224,7 @@ i3GEOF.busca = {
 			$i("i3GEObuscalistai").innerHTML = ins;
 		}
 		catch(e)
-		{$i("i3GEObuscalistai").innerHTML = "<p style=color:red >Ocorreu um erro<br>"+e;}
+		{$i("i3GEObuscalistai").innerHTML = "<p style=color:red >"+$trad(9,i3GEOF.busca.dicionario)+"<br>"+e;}
 	},
 	/*
 	Function: procurar
@@ -239,7 +239,7 @@ i3GEOF.busca = {
 		if(i3GEOF.busca.aguarde.visibility === "visible")
 		{return;}
 		if(i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.busca.tema) === "")
-		{alert("O tema ja nao existe mais no mapa");return;}
+		{alert($trad(10,i3GEOF.busca.dicionario));return;}
 		var inputs = $i("i3GEObuscalistai").getElementsByTagName("input"),
 			n = inputs.length,
 			listai = [],
@@ -255,7 +255,7 @@ i3GEOF.busca = {
 			{listai.push(inputs[i].name);}
 		}
 		if (listai.length === 0)
-		{alert("Selecione um item");}
+		{alert($trad(11,i3GEOF.busca.dicionario));}
 		else{
 			if ($i("i3GEObuscapalavra").value === "")
 			{alert("Digite uma palavra");}
@@ -283,7 +283,7 @@ i3GEOF.busca = {
 		i3GEOF.busca.aguarde.visibility = "hidden";
 		var palavra = $i("i3GEObuscapalavra").value,
 			idJanela = YAHOO.util.Dom.generateId(),
-			naoEncontrado = "<p style=color:red >Nenhum registro encontrado<br>",
+			naoEncontrado = "<p style=color:red >"+$trad(12,i3GEOF.busca.dicionario)+"<br>",
 			ins = [],
 			linhas,
 			nlinhas,
@@ -311,7 +311,7 @@ i3GEOF.busca = {
 					valores = (linhas[linha].box).split(" ");
 					x = (valores[0] * 1) + ((((valores[0] * -1) - (valores[2] * -1)) / 2) * 1);
 					y = (valores[1] * 1) + ((((valores[1] * -1) - (valores[3] * -1)) / 2) * 1);
-					ins.push("<table><tr><td onclick='i3GEO.navega.zoomExt(\"\",\"\",\"\",\""+linhas[linha].box+"\")' style='cursor:pointer;color:navy'>zoom&nbsp;</td><td onclick='i3GEO.navega.zoomponto(\"\",\"\","+x+","+y+")' style='color:navy;cursor:pointer;'>&nbsp;localiza</td></tr></table>");
+					ins.push("<table><tr><td onclick='i3GEO.navega.zoomExt(\"\",\"\",\"\",\""+linhas[linha].box+"\")' style='cursor:pointer;color:navy'>zoom&nbsp;</td><td onclick='i3GEO.navega.zoomponto(\"\",\"\","+x+","+y+")' style='color:navy;cursor:pointer;'>&nbsp;"+$trad(13,i3GEOF.busca.dicionario)+"</td></tr></table>");
 					for (i=0;i<linhas[linha].valores.length; i++){
 						er = new RegExp(palavra, "gi");
 						tr = (linhas[linha].valores[i].valor).replace(er,"<span style=color:red;text-align:left >"+palavra+"</span>");
@@ -323,6 +323,6 @@ i3GEOF.busca = {
 			$i(idJanela+"_corpo").innerHTML = "<div style='position:relative;top:0px;left:0px;width:160;overflow:auto;'>"+naoEncontrado+ins.join("")+"</div>";
 		}
 		else
-		{$i(idJanela+"_corpo").innerHTML = "<p style=color:red >Ocorreu um erro<br>";}
+		{$i(idJanela+"_corpo").innerHTML = "<p style=color:red >"+$trad(9,i3GEOF.busca.dicionario)+"<br>";}
 	}
 };

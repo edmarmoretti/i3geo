@@ -148,26 +148,26 @@ i3GEOF.buffer = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo' >O entorno, ou buffer, &eacute; um pol&iacute;gono que circunda um elemento geogr&aacute;fico em uma dist&acirc;ncia fixa.";
-		ins += "<p class='paragrafo' >Para gerar o entorno, voc&ecirc; precisa selecionar alguns elementos de um tema. Utilize para isso a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de atributos do tema desejado.";
+		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.buffer.dicionario);
+		ins += "<p class='paragrafo' >"+$trad(2,i3GEOF.buffer.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.buffer.t1()",ins,"i3GEOFgradeDePontost0","i3GEObufferresultado");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo'>Tema, com sele&ccedil;&atilde;o, que ser&aacute; utilizado:";
+		var ins = "<p class='paragrafo'>"+$trad(3,i3GEOF.buffer.dicionario)+":";
 		ins += "<div id='i3GEObufferSelTemas' style='text-align:left;font-size:11px'></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t0()","i3GEOF.buffer.t2()",ins,"i3GEOF.buffer.t1","i3GEObufferresultado");
 		i3GEOF.buffer.comboTemasSel();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo'>Dist&acirc;ncia do entorno em metros";
+		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.buffer.dicionario);
 		ins += "<br><br><input onclick='javascript:this.select();' class=digitar id='i3GEObufferd' type=text size=10 value='0'/><br>";
-		ins += "<p class='paragrafo'>Considerar os elementos selecionados como se fossem um s&oacute;?";
-		ins += "<br><br><select id=i3GEObufferunir ><option value=nao selected >n&atilde;o</option><option value=sim >sim</option></select>";
+		ins += "<p class='paragrafo'>"+$trad(5,i3GEOF.buffer.dicionario);
+		ins += "<br><br><select id=i3GEObufferunir ><option value=nao selected >"+$trad("x15")+"</option><option value=sim >"+$trad("x14")+"</option></select>";
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t1()","i3GEOF.buffer.t3()",ins,"i3GEOF.buffer.t2","i3GEObufferresultado");
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>O tema com o entorno ser&aacute; adicionado ao mapa atual.";
-		ins += "<br><br><input id=i3GEObufferbotao1 type='button' value='Criar entorno' />";
+		var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.buffer.dicionario);
+		ins += "<br><br><input id=i3GEObufferbotao1 type='button' value='"+$trad(7,i3GEOF.buffer.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t2()","",ins,"i3GEOF.buffer.t3","i3GEObufferresultado");
 		new YAHOO.widget.Button(
 			"i3GEObufferbotao1",
@@ -198,7 +198,7 @@ i3GEOF.buffer = {
 				fim = function(retorno){
 					i3GEOF.buffer.aguarde.visibility = "hidden";
 					if (retorno.data === undefined )
-					{$i("i3GEObufferfim").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";}
+					{$i("i3GEObufferfim").innerHTML = $trad(8,i3GEOF.buffer.dicionario);}
 					else
 					{i3GEO.atualiza();}
 				};
@@ -208,7 +208,7 @@ i3GEOF.buffer = {
 				cp.call(p,"criaBuffer",fim);
 			}
 			else
-			{i3GEO.janela.tempoMsg("Distancia invalida");}
+			{i3GEO.janela.tempoMsg($trad(9,i3GEOF.buffer.dicionario));}
 		}
 		catch(e){$i("i3GEObufferfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.buffer.aguarde.visibility = "hidden";}
 	},

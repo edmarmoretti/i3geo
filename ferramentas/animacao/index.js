@@ -105,14 +105,14 @@ i3GEOF.animacao = {
 			ins = "";
 		ins += "" +
 			"<div style='text-align:center;position:relative;cursor:pointer'  >" +
-			"	<img title='inicia' src='"+i3GEO.configura.locaplic+"/imagens/player_inicia.png' onclick='i3GEOF.animacao.dispara()' />&nbsp;" +
-			"	<img title='rebobina' src='"+i3GEO.configura.locaplic+"/imagens/player_para.png' onclick='i3GEOF.animacao.termina()' />&nbsp;" +
-			"	<img title='mais rapido' src='"+i3GEO.configura.locaplic+"/imagens/player_avanca.png' onclick='i3GEOF.animacao.maisrapido()' />&nbsp;" +
-			"	<img title='mais lento' src='"+i3GEO.configura.locaplic+"/imagens/player_volta.png' onclick='i3GEOF.animacao.maislento()' />&nbsp;" +
+			"	<img title='"+$trad(1,i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_inicia.png' onclick='i3GEOF.animacao.dispara()' />&nbsp;" +
+			"	<img title='"+$trad(2,i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_para.png' onclick='i3GEOF.animacao.termina()' />&nbsp;" +
+			"	<img title='"+$trad(3,i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_avanca.png' onclick='i3GEOF.animacao.maisrapido()' />&nbsp;" +
+			"	<img title='"+$trad(4,i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_volta.png' onclick='i3GEOF.animacao.maislento()' />&nbsp;" +
 			"</div>" +
 			"<div id='i3GEOFanimacaoLista' ></div><br>" +
 			'<div id=i3GEOanimacaomen1 style="display:block;left:0px;">' +
-			'	<p class=paragrafo >Marque as camadas que ser&atilde;o inclu&iacute;das na anima&ccedil;&atilde;o e depois clique no bot&atilde;o "inicia"</p>' +
+			'	<p class=paragrafo >'+$trad(5,i3GEOF.animacao.dicionario)+'</p>' +
 			'</div>';
 		return ins;
 	},

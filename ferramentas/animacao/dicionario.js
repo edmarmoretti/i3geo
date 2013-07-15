@@ -1,61 +1,31 @@
 //+$trad(1,i3GEOF.animacao.dicionario)+
 i3GEOF.animacao.dicionario = {
 1: [{
-pt:"",
+pt:"inicia",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
+pt:"rebobina",
 en:"",
 es:"",
 it:""
 }],
 3: [{
-pt:"",
+pt:"mais rapido",
 en:"",
 es:"",
 it:""
 }],
 4: [{
-pt:"",
+pt:"mais lento",
 en:"",
 es:"",
 it:""
 }],
 5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
+pt:"Marque as camadas que ser&atilde;o inclu&iacute;das na anima&ccedil;&atilde;o e depois clique no bot&atilde;o <i>inicia</i>",
 en:"",
 es:"",
 it:""

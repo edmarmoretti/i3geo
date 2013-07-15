@@ -1,55 +1,55 @@
 //+$trad(1,i3GEOF.buffer.dicionario)+
 i3GEOF.buffer.dicionario = {
 1: [{
-pt:"",
+pt:"O entorno, ou buffer, &eacute; um pol&iacute;gono que circunda um elemento geogr&aacute;fico em uma dist&acirc;ncia fixa.",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
+pt:"Para gerar o entorno, voc&ecirc; precisa selecionar alguns elementos de um tema. Utilize para isso a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de atributos do tema desejado.",
 en:"",
 es:"",
 it:""
 }],
 3: [{
-pt:"",
+pt:"Tema, com sele&ccedil;&atilde;o, que ser&aacute; utilizado",
 en:"",
 es:"",
 it:""
 }],
 4: [{
-pt:"",
+pt:"Dist&acirc;ncia do entorno em metros",
 en:"",
 es:"",
 it:""
 }],
 5: [{
-pt:"",
+pt:"Considerar os elementos selecionados como se fossem um s&oacute;?",
 en:"",
 es:"",
 it:""
 }],
 6: [{
-pt:"",
+pt:"O tema com o entorno ser&aacute; adicionado ao mapa atual",
 en:"",
 es:"",
 it:""
 }],
 7: [{
-pt:"",
+pt:"Criar entorno",
 en:"",
 es:"",
 it:""
 }],
 8: [{
-pt:"",
+pt:"Erro. A opera&ccedil;&atilde;o demorou muito",
 en:"",
 es:"",
 it:""
 }],
 9: [{
-pt:"",
+pt:"Distancia invalida",
 en:"",
 es:"",
 it:""
