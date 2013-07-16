@@ -1,61 +1,31 @@
 //+$trad(1,i3GEOF.centroide.dicionario)+
 i3GEOF.centroide.dicionario = {
 1: [{
-pt:"",
+pt:"Calcula o centro de cada pol&iacute;gono gerado uma nova camada. O c&aacute;lculo baseia-se no pol&iacute;gono envolvente e podem ocorrer casos em que o ponto &eacute; posicionado fora do pol&iacute;gono fonte",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
+pt:"Tema, com sele&ccedil;&atilde;o, que ser&aacute; utilizado:",
 en:"",
 es:"",
 it:""
 }],
 3: [{
-pt:"",
+pt:"O tema com os pontos ser&aacute; adicionado ao mapa atual.",
 en:"",
 es:"",
 it:""
 }],
 4: [{
-pt:"",
+pt:"Criar centr&oacute;ides",
 en:"",
 es:"",
 it:""
 }],
 5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
+pt:"Erro. A opera&ccedil;&atilde;o demorou muito.",
 en:"",
 es:"",
 it:""

@@ -45,7 +45,7 @@ Classe: i3GEOF.conectargeojson
 i3GEOF.conectargeojson = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -57,11 +57,11 @@ i3GEOF.conectargeojson = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.conectargeojson.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -73,19 +73,19 @@ i3GEOF.conectargeojson = {
 		else{
 			i3GEOF.conectargeojson.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
 		if(navm)
-		{i3GEO.janela.tempoMsg("N&atilde;o funciona coretamente no Internet Explorer. Use o Firefox ou outro navegador");}
+		{i3GEO.janela.tempoMsg($trad(1,i3GEOF.conectargeojson.dicionario));}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.conectargeojson.html();
 			var monta = function(retorno){
@@ -104,34 +104,34 @@ i3GEOF.conectargeojson = {
 			new YAHOO.widget.Button(
 				"i3GEOconectargeojsonbotao1",
 				{onclick:{fn: i3GEOF.conectargeojson.adiciona}}
-			);			
+			);
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
-		'<p class="paragrafo" >Endere&ccedil;o (URL) do GeoJson (ou escolha da lista):<br><br>' +	
+		'<p class="paragrafo" >'+$trad(2,i3GEOF.conectargeojson.dicionario)+'<br><br>' +
 		$inputText("","","i3GEOconectargeojsonurl","",45,"") +
 		'<br><br>' +
-		'<div id="i3GEOconectargeojsonCombo" style="left:1px;display:block;width:315px;text-align:left;">Aguarde...' +
+		'<div id="i3GEOconectargeojsonCombo" style="left:1px;display:block;width:315px;text-align:left;">' + $trad("o1") +
 		'</div>' +
-		'<br><br><input id=i3GEOconectargeojsonbotao1 type="buttom" value="Aplicar" />';
-		return ins;		
+		'<br><br><input id=i3GEOconectargeojsonbotao1 type="buttom" value="'+$trad("p14")+'" />';
+		return ins;
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
@@ -161,7 +161,7 @@ i3GEOF.conectargeojson = {
 	},
 	/*
 	Function: adiciona
-	
+
 	Adiciona a URL ao mapa
 	*/
 	adiciona: function(){
@@ -183,7 +183,7 @@ i3GEOF.conectargeojson = {
 			};
 			cp.set_transfer_mode('POST');
 			cp.set_response_type("JSON");
-			cp.call(p,"foo",funcao,"servico="+url);			
+			cp.call(p,"foo",funcao,"servico="+url);
 			i3GEOF.conectargeojson.aguarde.visibility = "hidden";
 		}
 	}

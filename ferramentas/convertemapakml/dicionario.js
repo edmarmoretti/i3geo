@@ -1,61 +1,31 @@
 //+$trad(1,i3GEOF.convertemapakml.dicionario)+
 i3GEOF.converteMapaKml.dicionario = {
 1: [{
-pt:"",
+pt:"Voc&ecirc; pode utilizar os endere&ccedil;os para visualizar o mapa atual em softwares que aceitam o formato kml,",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
+pt:"O endere&ccedil;o de acesso &eacute; tempor&aacute;rio, ficando dispon&iacute;vel por determinado per&iacute;odo de tempo conforme definido pelo administrador do i3Geo.",
 en:"",
 es:"",
 it:""
 }],
 3: [{
-pt:"",
+pt:"clique para mais detalhes sobre como usar o link kml no Google Earth.",
 en:"",
 es:"",
 it:""
 }],
 4: [{
-pt:"",
+pt:"Kml baseado em um servico WMS:",
 en:"",
 es:"",
 it:""
 }],
 5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
+pt:"Voc&ecirc; pode tamb&eacute;m utilizar o link abaixo para mostrar a &aacute;rvore completa de temas no GoogleEarth (incluindo dados vetoriais)",
 en:"",
 es:"",
 it:""

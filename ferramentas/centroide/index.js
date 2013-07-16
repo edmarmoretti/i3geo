@@ -145,18 +145,18 @@ i3GEOF.centroide = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo' >Calcula o centro de cada pol&iacute;gono gerado uma nova camada. O c&aacute;lculo baseia-se no pol&iacute;gono envolvente e podem ocorrer casos em que o ponto &eacute; posicionado fora do pol&iacute;gono fonte";
+		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.centroide.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.centroide.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentroideresultado");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo'>Tema, com sele&ccedil;&atilde;o, que ser&aacute; utilizado:";
+		var ins = "<p class='paragrafo'>"+$trad(2,i3GEOF.centroide.dicionario);
 		ins += "<div id='i3GEOcentroideSelTemas' style='text-align:left;font-size:11px'></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.centroide.t0()","i3GEOF.centroide.t2()",ins,"i3GEOF.centroide.t1","i3GEOcentroideresultado");
 		i3GEOF.centroide.comboTemasSel();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo'>O tema com os pontos ser&aacute; adicionado ao mapa atual.";
-		ins += "<br><br><input id=i3GEOcentroidebotao1 type='buttom' value='Criar centr&oacute;ides' />";
+		var ins = "<p class='paragrafo'>"+$trad(3,i3GEOF.centroide.dicionario);
+		ins += "<br><br><input id=i3GEOcentroidebotao1 type='buttom' value='"+$trad(4,i3GEOF.centroide.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.centroide.t2()","",ins,"i3GEOF.centroide.t3","i3GEOcentroideresultado");
 		new YAHOO.widget.Button(
 			"i3GEOcentroidebotao1",
@@ -184,7 +184,7 @@ i3GEOF.centroide = {
 			fim = function(retorno){
 				i3GEOF.centroide.aguarde.visibility = "hidden";
 				if (retorno.data === undefined )
-				{$i("i3GEOcentroidefim").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";}
+				{$i("i3GEOcentroidefim").innerHTML = $trad(5,i3GEOF.centroide.dicionario);}
 				else
 				{i3GEO.atualiza();}
 			};

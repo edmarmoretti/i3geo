@@ -85,7 +85,7 @@ i3GEOF.etiqueta = {
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela");
 		if(i3GEO.temaAtivo === ""){
-			$i(iddiv).innerHTML = '<img src="../imagens/opcoes.gif" ><p style="position: relative; top: -35px; width: 180px; font-size: 15px; text-align: left; left: 35px;">Escolha um tema da lista</p>';
+			$i(iddiv).innerHTML = '<img src="../imagens/opcoes.gif" ><p style="position: relative; top: -35px; width: 180px; font-size: 15px; text-align: left; left: 35px;">'+$trad(1,i3GEOF.etiqueta.dicionario)+'</p>';
 			return;
 		}
 		try{
@@ -113,12 +113,12 @@ i3GEOF.etiqueta = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<p class="paragrafo" >Escolha o item que ser&aacute; utilizado como fonte de dados para mostrar na etiqueta:<br>';
+		ins += '<p class="paragrafo" >'+$trad(2,i3GEOF.etiqueta.dicionario)+':<br>';
 		ins += '<div id=i3GEOetiquetalistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>';
 		ins += '<br>';
 		ins += '<p class="paragrafo" >';
-		ins += '<input id=i3GEOetiquetabotao1 size=35  type=button value="Aplicar" />';
-		ins += '<input id=i3GEOetiquetabotao2 size=35  type=button value="Desativar todas as etiquetas" />';
+		ins += '<input id=i3GEOetiquetabotao1 size=35  type=button value="'+$trad("p14")+'" />';
+		ins += '<input id=i3GEOetiquetabotao2 size=35  type=button value="'+$trad(3,i3GEOF.etiqueta.dicionario)+'" />';
 		return ins;
 	},
 	/*
@@ -205,7 +205,7 @@ i3GEOF.etiqueta = {
 			ins.push("</table>");
 		}
 		catch(e)
-		{$i("i3GEOetiquetalistai").innerHTML = "<p style=color:red >Ocorreu um erro<br>"+e;}
+		{$i("i3GEOetiquetalistai").innerHTML = "<p style=color:red >Erro<br>"+e;}
 	},
 	/*
 	Function: pegaItensMarcados

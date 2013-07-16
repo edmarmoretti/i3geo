@@ -83,16 +83,16 @@ i3GEOF.converteKml = {
 
 	*/
 	html:function(divid,tema,tipo){
-		var ins = '<p class="paragrafo" >Voc&ecirc; pode utilizar os endere&ccedil;os para visualizar dados em softwares que aceitam o formato kml,' +
-		'como o <a href="http://earth.google.com/intl/pt/" target="_blank" > Google Earth</a>.' +
-		'<p class="paragrafo" >Clique <a href="'+i3GEO.configura.locaplic+'/documentacao/ajuda/googleearth.htm" target="blank" >aqui</a> para mais detalhes sobre como usar o link kml no Google Earth.' +
-		'<p class="paragrafo" ><b>Kml com "GroundOverlay" baseado em um servico WMS: </b></p>' +
+		var ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.convertekml.dicionario) +
+		'<a href="http://earth.google.com/intl/pt/" target="_blank" > Google Earth</a>.' +
+		'<p class="paragrafo" >Googleearth <a href="'+i3GEO.configura.locaplic+'/documentacao/ajuda/googleearth.htm" target="blank" ></a> ' + $trad(2,i3GEOF.convertekml.dicionario) +
+		'<p class="paragrafo" ><b>'+$trad(3,i3GEOF.convertekml.dicionario) + '</b></p>' +
 		'<p class="paragrafo" > <textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+tema+'&typename='+tema+'&request=kml</textarea></p>';
 		if(tipo == "kmz"){
-			ins += '<p class="paragrafo" ><b>Kmz que gera um arquivo kml vetorial: </b></p>' +
+			ins += '<p class="paragrafo" ><b>'+$trad(4,i3GEOF.convertekml.dicionario)+' </b></p>' +
 			'<p class="paragrafo" ><textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+tema+'&typename='+tema+'&request=kmz</textarea></p>';
 		}
-		ins += '<p class="paragrafo" >Voc&ecirc; pode tamb&eacute;m utilizar o link abaixo para mostrar a &aacute;rvore completa de temas no GoogleEarth' +
+		ins += '<p class="paragrafo" >'+$trad(5,i3GEOF.convertekml.dicionario) +
 		'<p class="paragrafo" ><textarea cols="55" rows="2" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/kml.php </textarea></p>';
 		$i(divid).innerHTML += ins;
 	},

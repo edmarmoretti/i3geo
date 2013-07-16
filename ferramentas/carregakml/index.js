@@ -45,7 +45,7 @@ Classe: i3GEOF.carregakml
 i3GEOF.carregakml = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -57,11 +57,11 @@ i3GEOF.carregakml = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.carregakml.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -73,14 +73,14 @@ i3GEOF.carregakml = {
 		else{
 			i3GEOF.carregakml.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -102,34 +102,34 @@ i3GEOF.carregakml = {
 			new YAHOO.widget.Button(
 				"i3GEOcarregakmlbotao1",
 				{onclick:{fn: i3GEOF.carregakml.adiciona}}
-			);			
+			);
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
 		var ins = '' +
-		'<p class="paragrafo" >Endere&ccedil;o (URL) do KML (ou escolha da lista):<br><br>' +	
+		'<p class="paragrafo" >'+$trad(1,i3GEOF.carregakml.dicionario)+':<br><br>' +
 		$inputText("","","i3GEOcarregakmlurl","",40,"") +
 		'<br><br>' +
-		'<div id="i3GEOcarregakmlCombo" style="left:1px;display:block;width:315px;text-align:left;">Aguarde...' +
+		'<div id="i3GEOcarregakmlCombo" style="left:1px;display:block;width:315px;text-align:left;">' + $trad("o1") +
 		'</div>' +
-		'<br><br><input id=i3GEOcarregakmlbotao1 type="buttom" value="Aplicar" />';
-		return ins;		
+		'<br><br><input id=i3GEOcarregakmlbotao1 type="buttom" value="'+$trad("p14")+'" />';
+		return ins;
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
 		//cria a janela flutuante
@@ -159,7 +159,7 @@ i3GEOF.carregakml = {
 	},
 	/*
 	Function: adiciona
-	
+
 	Adiciona o KML ao mapa
 	*/
 	adiciona: function(){

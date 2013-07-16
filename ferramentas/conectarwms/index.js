@@ -80,7 +80,7 @@ function listaRSS(g_RSS,onde)
 		var reg = /Erro/gi;
 		if (retorno.data.rss.search(reg) != -1)
 		{
-			i3GEO.janela.tempoMsg("Oops! Ocorreu um erro\n"+retorno.data);
+			i3GEO.janela.tempoMsg($trad(1,i3GEOF.conectarwms.dicionario)+"\n"+retorno.data);
 			return;
 		}
 		var canais = retorno.data.canais;
@@ -93,7 +93,7 @@ function listaRSS(g_RSS,onde)
 			if(caso.nacessos > 0)
 			{
 				var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos);
-				ins += " \<span style=color:gray \>(disponibilidade: "+pc+"%, acessos considerados: "+caso.nacessos+")\<\/span>\<\/p\>";
+				ins += " \<span style=color:gray \>("+$trad(2,i3GEOF.conectarwms.dicionario)+": "+pc+"%, "+$trad(3,i3GEOF.conectarwms.dicionario)+": "+caso.nacessos+")\<\/span>\<\/p\>";
 			}
 		}
 		document.getElementById(onde).innerHTML = ins+"<br><br>";
@@ -117,7 +117,7 @@ Abre uma nova janela com o resultado da chamada GETCAPABILITIES sobre o WMS esco
 */
 function getcapabilities()
 {
-	if ($i("servico").value == ""){i3GEO.janela.tempoMsg("Servi&ccedil;o n&atilde;o definido");}
+	if ($i("servico").value == ""){i3GEO.janela.tempoMsg($trad(4,i3GEOF.conectarwms.dicionario));}
 	else
 	{window.open($i("servico").value+"&service=wms&request=getcapabilities&version=1.1.1");}
 }
@@ -133,7 +133,7 @@ Veja:
 function clickGuia2()
 {
 	mostraGuia("guia2");
-	if ($i("servico").value == ""){i3GEO.janela.tempoMsg("Servi&ccedil;o n&atilde;o definido");}
+	if ($i("servico").value == ""){i3GEO.janela.tempoMsg($trad(4,i3GEOF.conectarwms.dicionario));}
 	else
 	{
 		var metadados = function(retorno){
@@ -145,7 +145,7 @@ function clickGuia2()
 			else
 			{
 				aguarde("none");
-				$i("resultadoget").innerHTML = "<p style=color:red >Ocorreu um erro<br>";
+				$i("resultadoget").innerHTML = "<p style=color:red >"+$trad(1,i3GEOF.conectarwms.dicionario)+"<br>";
 			}
 		};
 		$i("guia2obj").style.display="block";
@@ -195,7 +195,7 @@ function clickGuia3()
 		{$i("listatemas").innerHTML = "erro";}
 	};
 	mostraGuia("guia3");
-	if ($i("servico").value == ""){i3GEO.janela.tempoMsg("Servi&ccedil;o n&atilde;o definido");}
+	if ($i("servico").value == ""){i3GEO.janela.tempoMsg($trad(4,i3GEOF.conectarwms.dicionario));}
 	else
 	{
 		$i("listatemas").innerHTML = "";
@@ -259,7 +259,7 @@ function seltema(tipo,tema,legenda,nometema,nomecamada,sldflag)
 		{
 			aguarde("none");
 			if(retorno.data != "ok")
-			{i3GEO.janela.tempoMsg("Ooops! Problemas ao acessar o servi&ccedil;o.");aguarde("none");}
+			{i3GEO.janela.tempoMsg($trad(5,i3GEOF.conectarwms.dicionario));aguarde("none");}
 			else
 			{window.parent.i3GEO.atualiza();}
 		};

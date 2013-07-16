@@ -86,14 +86,14 @@ i3GEOF.converteMapaWS = {
 	*/
 	html:function(divid,enderecowms,enderecowmc){
 		try{
-			var ins = '<p class="paragrafo" >Voc&ecirc; pode utilizar o endere&ccedil;o em softwares de geoprocessamento instalados em seu computador, como por exemplo, o <a href="http://www.openjump.org" target=blank >OpenJump</a> ou <a href="http://www.gvsig.gva.es/" target=blank > gvSig</a>' +
-			'<p class="paragrafo" >O "web service" criado, utiliza o padr&atilde;o WMS, conforme definido pelo OGC. A disponibilidade do endere&ccedil;o &eacute; tempor&aacute;ria, permanecendo ativa apenas no dia em que foi criado.' +
-			'<p class="paragrafo" >O Web Map Context (WMC) pode ou n&atilde;o ser gerado dependendo da configura&ccedil;&atilde;o do servidor onde o i3Geo est&aacute; instalado. <a href="'+enderecowmc+'" target=_blank >Clique para obter o Web Map Context</a>'+
+			var ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.converteMapaWS.dicionario)+' <a href="http://www.gvsig.gva.es/" target=blank > gvSig</a>' +
+			'<p class="paragrafo" >' + $trad(2,i3GEOF.converteMapaWS.dicionario) +
+			'<p class="paragrafo" >' + $trad(3,i3GEOF.converteMapaWS.dicionario) + '<a href=\"'+enderecowmc+'\" target=_blank >'+$trad(6,i3GEOF.converteMapaWS.dicionario)+'</a>' +
 			'<p class="paragrafo" ><b>WMS: </b></p>' +
 			'<p class="paragrafo" > <textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
 			enderecowms + '</textarea></p>' +
 			'<p class="paragrafo" >' +
-			'<a href="' + enderecowms + '&request=getcapabilities&version=1.1.0&service=wms" target=blank >Clique para testar<br>';
+			'<a href="' + enderecowms + '&request=getcapabilities&version=1.1.0&service=wms" target=blank >'+$trad(4,i3GEOF.converteMapaWS.dicionario)+'<br>';
 			$i(divid).innerHTML += ins;
 			i3GEOF.converteMapaWS.aguarde.visibility = "hidden";
 		}catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.converteMapaWS.aguarde.visibility = "hidden";}
@@ -131,8 +131,8 @@ i3GEOF.converteMapaWS = {
 		i3GEOF.converteMapaWS.aguarde = $i("i3GEOF.converteMapaWS_imagemCabecalho").style;
 		i3GEOF.converteMapaWS.aguarde.visibility = "visible";
 		temp = function(retorno){
-			var enderecowms = "Ocorreu um erro ao criar o WMS",
-				enderecowmc = "Ocorreu um erro ao criar o WMS";
+			var enderecowms = $trad(5,i3GEOF.converteMapaWS.dicionario),
+				enderecowmc = $trad(5,i3GEOF.converteMapaWS.dicionario);
 			if (retorno.data != undefined){
 				enderecowms = i3GEO.configura.locaplic+retorno.data.wms+"&";
 				enderecowmc = window.location.protocol+"//"+window.location.host+retorno.data.wmc+"&";

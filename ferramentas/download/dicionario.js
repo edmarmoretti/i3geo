@@ -1,19 +1,19 @@
 //+$trad(1,i3GEOF.download.dicionario)+
 i3GEOF.download.dicionario = {
 1: [{
-pt:"",
+pt:"Clique com o bot&atilde;o da direita do mouse sobre o(s) arquivo(s) abaixo para fazer o download.",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
+pt:"Ocorreu um erro. O tema n&atilde;o foi encontrado. Pode ser que o c&oacute;digo do tema n&atilde;o existe na defini&ccedil;&atilde;o do mapfile. Informe o administrador do sistema.",
 en:"",
 es:"",
 it:""
 }],
 3: [{
-pt:"",
+pt:"N&uacute;mero de registros",
 en:"",
 es:"",
 it:""

@@ -1,61 +1,19 @@
 //+$trad(1,i3GEOF.etiqueta.dicionario)+
 i3GEOF.etiqueta.dicionario = {
 1: [{
-pt:"",
+pt:"Escolha um tema da lista",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
+pt:"Escolha o item que ser&aacute; utilizado como fonte de dados para mostrar na etiqueta",
 en:"",
 es:"",
 it:""
 }],
 3: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-4: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
+pt:"Desativar todas as etiquetas",
 en:"",
 es:"",
 it:""

@@ -145,21 +145,21 @@ i3GEOF.centromassa = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>O centro m&eacute;dio &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o ponto que indica o centro de equil&iacute;brio de uma distribui&ccedil;&atilde;o.</p>";
-		ins += "<p class='paragrafo'>Para gerar o c&aacute;lculo &eacute; necess&aacute;rio que no mapa exista pelo menos um tema de pontos. Se n&atilde;o houverem elementos selecionados, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica.</p>";
+		var ins = "<p class='paragrafo'>"+$trad(1,i3GEOF.centromassa.dicionario)+"</p>";
+		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.centromassa.dicionario)+"</p>";
 		i3GEO.util.proximoAnterior("","i3GEOF.centromassa.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentromassaresultado");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo' >Tema contendo os pontos:<br>";
+		var ins = "<p class='paragrafo' >"+$trad(3,i3GEOF.centromassa.dicionario)+"<br>";
 		ins += "<div style='text-align:left;' id='i3GEOcentromassaDivPontos' ></div><br>";
-		ins += "<p class='paragrafo' >Utilizar o seguinte item para ponderar os valores:<br>";
+		ins += "<p class='paragrafo' >"+$trad(4,i3GEOF.centromassa.dicionario)+"<br>";
 		ins += "<div id=i3GEOondeItens style='text-align:left;display:block' ></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t0()","i3GEOF.centromassa.t2()",ins,"i3GEOF.centromassa.t1","i3GEOcentromassaresultado");
 		i3GEOF.centromassa.comboTemasPontos();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo'>O tema com o centro ser&aacute; adicionado ao mapa atual.";
-		ins += "<br><br><input id=i3GEOcentromassabotao1 type='buttom' value='Calcular' />";
+		var ins = "<p class='paragrafo'>"+$trad(5,i3GEOF.centromassa.dicionario);
+		ins += "<br><br><input id=i3GEOcentromassabotao1 type='buttom' value='"+$trad(6,i3GEOF.centromassa.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t1()","",ins,"i3GEOF.centromassa.t2","i3GEOcentromassaresultado");
 		new YAHOO.widget.Button(
 			"i3GEOcentromassabotao1",
@@ -184,7 +184,7 @@ i3GEOF.centromassa = {
 			cp,
 			fim = function(retorno){
 				if (retorno.data==undefined )
-				{$i("i3GEOcentromassafim").innerHTML = "<p class='paragrafo' >Erro. A opera&ccedil;&atilde;o demorou muito.";}
+				{$i("i3GEOcentromassafim").innerHTML = "<p class='paragrafo' >"+$trad(7,i3GEOF.centromassa.dicionario);}
 				else
 				{i3GEO.atualiza();}
 				i3GEOF.centromassa.aguarde.visibility = "hidden";
@@ -196,7 +196,7 @@ i3GEOF.centromassa = {
 			else
 			{ext = i3GEO.parametros.mapexten;}
 			if(tema == ""){
-				i3GEO.janela.tempoMsg("Selecione um tema");
+				i3GEO.janela.tempoMsg($trad(8,i3GEOF.centromassa.dicionario));
 				i3GEOF.centromassa.aguarde.visibility = "hidden";
 				return;
 			}
@@ -226,7 +226,7 @@ i3GEOF.centromassa = {
 		 		if (c){
 		 			c.onchange = function(){
 		 				$i("i3GEOondeItens").style.display = "block";
-						$i("i3GEOondeItens").innerHTML = "Aguarde...";
+						$i("i3GEOondeItens").innerHTML = $trad("o1");
 						i3GEO.mapa.ativaTema(c.value);
 						i3GEOF.centromassa.comboItens();
 		 			};
@@ -235,7 +235,7 @@ i3GEOF.centromassa = {
 					if(c)
 					{c.value = i3GEO.temaAtivo;}
 		 			$i("i3GEOondeItens").style.display = "block";
-					$i("i3GEOondeItens").innerHTML = "Aguarde...";
+					$i("i3GEOondeItens").innerHTML = $trad("o1");
 					i3GEOF.centromassa.comboItens();
 				}
 			},

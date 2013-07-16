@@ -1,61 +1,31 @@
 //+$trad(1,i3GEOF.conectarwms.dicionario)+
 i3GEOF.conectarwms.dicionario = {
 1: [{
-pt:"",
+pt:"Oops! Ocorreu um erro",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
+pt:"disponibilidade",
 en:"",
 es:"",
 it:""
 }],
 3: [{
-pt:"",
+pt:"acessos considerados",
 en:"",
 es:"",
 it:""
 }],
 4: [{
-pt:"",
+pt:"Servi&ccedil;o n&atilde;o definido",
 en:"",
 es:"",
 it:""
 }],
 5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
+pt:"Ooops! Problemas ao acessar o servi&ccedil;o.",
 en:"",
 es:"",
 it:""

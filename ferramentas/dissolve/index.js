@@ -146,24 +146,24 @@ i3GEOF.dissolve = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>Essa ferramenta transforma v&aacute;rios pol&iacute;gonos em um s&oacute; eliminando as divisas entre eles. Caso seja escolhido um item da tabela de atributos, os pol&iacute;gonos que possu&iacute;rem o mesmo valor ser&atilde;o considerados no mesmo grupo e suas divisas eliminadas e caso n&atilde;o tenha sido escolhido nenhum item, todas os pol&iacute;gonos ser&atilde;o agrupados em um s&oacute;. O resultado final ser&aacute; um novo tema com pol&iacute;gonos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas um item.";
+		var ins = "<p class='paragrafo'>"+$trad(1,i3GEOF.dissolve.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.dissolve.t1()",ins,"i3GEOFgradeDePontost0","i3GEOdissolveresultado");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo'>Tema, com sele&ccedil;&atilde;o, que ser&aacute; utilizado:";
+		var ins = "<p class='paragrafo'>"+$trad(2,i3GEOF.dissolve.dicionario);
 		ins += "<div id='i3GEOdissolveSelTemas' style='text-align:left;'></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.dissolve.t0()","i3GEOF.dissolve.t2()",ins,"i3GEOF.dissolve.t1","i3GEOdissolveresultado");
 		i3GEOF.dissolve.comboTemasSel();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo' >Escolha o item que ser&aacute; utilizado (opcional)</p>";
-		ins += "<div style='text-align:left;' id='i3GEOdissolveDivItem' >Aguarde...</div>";
+		var ins = "<p class='paragrafo' >"+$trad(3,i3GEOF.dissolve.dicionario);
+		ins += "<div style='text-align:left;' id='i3GEOdissolveDivItem' >"+$trad("o1")+"</div>";
 		i3GEO.util.proximoAnterior("i3GEOF.dissolve.t1()","i3GEOF.dissolve.t3()",ins,"i3GEOF.dissolve.t2","i3GEOdissolveresultado");
 		i3GEOF.dissolve.comboItem();
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>O tema com as divisas eliminadas ser&aacute; adicionado ao mapa atual.";
-		ins += "<br><br><input id=i3GEOdissolvebotao1 type='buttom' value='Dissolver' />";
+		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.dissolve.dicionario);
+		ins += "<br><br><input id=i3GEOdissolvebotao1 type='buttom' value='"+$trad(5,i3GEOF.dissolve.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.dissolve.t2()","",ins,"i3GEOF.dissolve.t3","i3GEOdissolveresultado");
 		new YAHOO.widget.Button(
 			"i3GEOdissolvebotao1",
@@ -192,7 +192,7 @@ i3GEOF.dissolve = {
 			fim = function(retorno){
 				i3GEOF.dissolve.aguarde.visibility = "hidden";
 				if (retorno.data === undefined )
-				{$i("i3GEOdissolvefim").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";}
+				{$i("i3GEOdissolvefim").innerHTML = $trad(6,i3GEOF.dissolve.dicionario);}
 				else
 				{i3GEO.atualiza();}
 			};

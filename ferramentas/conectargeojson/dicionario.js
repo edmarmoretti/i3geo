@@ -1,61 +1,13 @@
 //+$trad(1,i3GEOF.conectargeojson.dicionario)+
 i3GEOF.conectargeojson.dicionario = {
 1: [{
-pt:"",
+pt:"N&atilde;o funciona coretamente no Internet Explorer. Use o Firefox ou outro navegador",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-3: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-4: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
+pt:"Endere&ccedil;o (URL) do GeoJson (ou escolha da lista):",
 en:"",
 es:"",
 it:""

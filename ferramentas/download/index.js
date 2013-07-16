@@ -93,7 +93,7 @@ i3GEOF.download = {
 	*/
 	html:function(divid,tema){
 		var cp,p,ins,mostraDownload;
-		ins = '<p class="paragrafo" >Clique com o bot&atilde;o da direita do mouse sobre o(s) arquivo(s) abaixo para fazer o download.</p>';
+		ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.download.dicionario)+'</p>';
 		ins += '<p class="paragrafo" ><div id=i3GEOdownloadResultado ></div>';
 		$i(divid).innerHTML += ins;
 		mostraDownload = function(retorno){
@@ -104,17 +104,17 @@ i3GEOF.download = {
 				arqs = retorno.arquivos.split(",");
 				n = arqs.length;
 				if(retorno == "erro")
-				{ins = "<p style=color:red >Ocorreu um erro. O tema n&atilde;o foi encontrado. Pode ser que o c&oacute;digo do tema n&atilde;o existe na defini&ccedil;&atilde;o do mapfile. Informe o administrador do sistema.<br>";}
+				{ins = "<p style=color:red >"+$trad(2,i3GEOF.download.dicionario)+"<br>";}
 				else{
 					for (arq=0;arq<n;arq++){
 						ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>";
 					}
 				}
 				if(retorno.nreg)
-				{ins += "<br><br>N&uacute;mero de registros ="+retorno.nreg;}
+				{ins += "<br><br>"+$trad(3,i3GEOF.download.dicionario)+" ="+retorno.nreg;}
 			}
 			else
-			{ins = "<p style=color:red >Ocorreu um erro<br>";}
+			{ins = "<p style=color:red >"+$trad("x66")+"<br>";}
 			$i("i3GEOdownloadResultado").innerHTML = ins;
 			i3GEOF.download.aguarde.visibility = "hidden";
 		};

@@ -147,35 +147,35 @@ i3GEOF.distanciaptpt = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>O c&aacute;lculo de dist&acirc;ncias &eacute; feito de um ponto em rela&ccedil;&atilde;o aos mais pr&oacute;ximos existentes no mesmo tema ou em outro tema.";
-		ins += "<p class='paragrafo'>O ponto origem, deve estar selecionado em um dos temas existentes no mapa.";
-		ins += "<p class='paragrafo'>Os pontos de destino s&atilde;o selecionados em fun&ccedil;&atilde;o de uma dist&acirc;ncia fixa do ponto origem.";
+		var ins = "<p class='paragrafo'>" + $trad(1,i3GEOF.distanciaptpt.dicionario);
+		ins += "<p class='paragrafo'>" + $trad(2,i3GEOF.distanciaptpt.dicionario);
+		ins += "<p class='paragrafo'>" + $trad(3,i3GEOF.distanciaptpt.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.distanciaptpt.t1()",ins,"i3GEOFgradeDePontost0","i3GEOdistanciaptptresultado");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo' >Tema que cont&eacute;m os pontos de origem (pelo menos um ponto deve estar selecionado):<br>";
+		var ins = "<p class='paragrafo' >" + $trad(4,i3GEOF.distanciaptpt.dicionario)+"<br>";
 		ins += "<div style='text-align:left;' id='i3GEOdistanciaptptSelTemasOrigem' ></div><br>";
-		ins += "<p class='paragrafo' >Tema que cont&eacute;m o(s) ponto(s) de destino:<br>";
+		ins += "<p class='paragrafo' >" + $trad(5,i3GEOF.distanciaptpt.dicionario)+"<br>";
 		ins += "<div style='text-align:left;' id='i3GEOdistanciaptptSelTemasDestino' ></div><br>";
-		ins += "<p class='paragrafo' >Distância (metros) m&aacute;xima que ser&aacute; considerada entre os pontos de origem e os pontos de destino:<br>";
+		ins += "<p class='paragrafo' >" + $trad(6,i3GEOF.distanciaptpt.dicionario)+"<br>";
 		ins += $inputText("","","i3GEOFdistanciaptptdistancia","",10,"100000");
 		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t0()","i3GEOF.distanciaptpt.t2()",ins,"i3GEOF.distanciaptpt.t1","i3GEOdistanciaptptresultado");
 		i3GEOF.distanciaptpt.comboTemasOrigem();
 		i3GEOF.distanciaptpt.comboTemasDestino();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo' >Escolha os itens das tabelas de atributos dos temas de origem e de destino que ser&atilde;o acrescentados ao novo tema que ser&aacute; criado com o resultado do c&aacute;lculo.</p>";
-		ins += "<p class='paragrafo' >Para o tema de origem:</p>";
-		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaOrigem' >Aguarde...</div>";
-		ins += "<br><p class='paragrafo' >Para o tema de destino:</p>";
-		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaDestino' >Aguarde...</div>";
+		var ins = "<p class='paragrafo' >" + $trad(7,i3GEOF.distanciaptpt.dicionario)+"</p>";
+		ins += "<p class='paragrafo' >" + $trad(8,i3GEOF.distanciaptpt.dicionario)+"</p>";
+		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaOrigem' >"+$trad("o1")+"</div>";
+		ins += "<br><p class='paragrafo' >" + $trad(9,i3GEOF.distanciaptpt.dicionario)+"</p>";
+		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaDestino' >"+$trad("o1")+"</div>";
 		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t1()","i3GEOF.distanciaptpt.t3()",ins,"i3GEOF.distanciaptpt.t2","i3GEOdistanciaptptresultado");
 		i3GEOF.distanciaptpt.comboItensOrigem();
 		i3GEOF.distanciaptpt.comboItensDestino();
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>O tema com o c&aacute;lculo ser&aacute; adicionado ao mapa atual.";
-		ins += "<br><br><input id=i3GEOdistanciaptptbotao1 type='buttom' value='Calcular' />";
+		var ins = "<p class='paragrafo'>" + $trad(10,i3GEOF.distanciaptpt.dicionario);
+		ins += "<br><br><input id=i3GEOdistanciaptptbotao1 type='buttom' value='"+$trad(11,i3GEOF.distanciaptpt.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t2()","",ins,"i3GEOF.distanciaptpt.t3","i3GEOdistanciaptptresultado");
 		new YAHOO.widget.Button(
 			"i3GEOdistanciaptptbotao1",
@@ -205,7 +205,7 @@ i3GEOF.distanciaptpt = {
 				i3GEOF.distanciaptpt.aguarde.visibility = "visible";
 				fim = function(retorno){
 					if (retorno.data==undefined )
-					{$i("i3GEOdistanciaptptfim").innerHTML = "<p class='paragrafo' >Erro. A opera&ccedil;&atilde;o demorou muito.";}
+					{$i("i3GEOdistanciaptptfim").innerHTML = "<p class='paragrafo' >"+$trad(12,i3GEOF.distanciaptpt.dicionario);}
 					else
 					{i3GEO.atualiza();}
 					i3GEOF.distanciaptpt.aguarde.visibility = "hidden";
@@ -216,7 +216,7 @@ i3GEOF.distanciaptpt = {
 				cp.call(p,"distanciaptpt",fim);
 			}
 			else
-			{$i("i3GEOdistanciaptptfim").innerHTML = "Algum par&acirc;metro n&atilde;o foi preenchido.";}
+			{$i("i3GEOdistanciaptptfim").innerHTML = $trad(13,i3GEOF.distanciaptpt.dicionario);}
 		}
 		catch(e){$i("i3GEOdistanciaptptfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.distanciaptpt.aguarde.visibility = "hidden";}
 	},

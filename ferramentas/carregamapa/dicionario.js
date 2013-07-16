@@ -1,61 +1,13 @@
 //+$trad(1,i3GEOF.carregaMapa.dicionario)+
 i3GEOF.carregaMapa.dicionario = {
 1: [{
-pt:"",
+pt:"Arquivo para upload:",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-3: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-4: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
+pt:"Carregar arquivo",
 en:"",
 es:"",
 it:""

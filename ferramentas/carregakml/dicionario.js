@@ -1,61 +1,7 @@
 //+$trad(1,i3GEOF.carregakml.dicionario)+
 i3GEOF.carregakml.dicionario = {
 1: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-2: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-3: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-4: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
+pt:"Endere&ccedil;o (URL) do KML (ou escolha da lista)",
 en:"",
 es:"",
 it:""
