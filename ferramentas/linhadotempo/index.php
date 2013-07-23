@@ -15,7 +15,6 @@ Timeline_parameters='bundle=true';
 </style>
 </head>
 <body name="ancora" onload="inicializa()" onresize="onResize()">
-<p class=paragrafo >Escolha o tema para gerar a linha do tempo:</p>
 <div class=paragrafo id="combotemas" ></div>
 <div class=paragrafo id="totaleventos" style="position:absolute;top:30px;left:200px;"></div>
 <div class=paragrafo id="tl" style="height: 220px; border: 1px solid #aaa;overflow-x:hidden; overflow-y:scroll"> </div>
@@ -116,7 +115,7 @@ Cria o objeto bandInfos com os parâmetros necess&aacute;rios para a cria&ccedil;
 */
 function bandas(){
 	tl_el = $i("tl");
-	tl_el.innerHTML = "<span style=color:red; >Aguarde...</span>";
+	tl_el.innerHTML = "<span style=color:red; >"+$trad("o1")+"</span>";
 	var theme1 = Timeline.ClassicTheme.create();
 	theme1.event.bubble.width = 250;
 	if(navn){
@@ -168,7 +167,7 @@ Veja:
 */
 function carregaDados(){
 	//alert(window.parent.i3GEO.parametros.mapexten)
-	tl_el.innerHTML = "<span style=color:red; >Aguarde...</span>";
+	tl_el.innerHTML = "<span style=color:red; >"+$trad("o1")+"</span>";
 	var retorna = function(retorno){
 		//eventSource1.clear();
 		$i("totaleventos").innerHTML = retorno.data.events.length+" eventos";
