@@ -167,7 +167,7 @@ i3GEOF.identifica = {
 				i3GEOF.identifica.listaTemas("ligados");
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");
 				if(i3GEO.temaAtivo === "")
-				{$i("i3GEOidentificaocorrencia").innerHTML = "Escolha um tema da lista";}
+				{$i("i3GEOidentificaocorrencia").innerHTML = $trad(1,i3GEOF.identifica.dicionario);}
 			};
 			$i("i3GEOidentificaguia2").onclick = function(){i3GEOF.identifica.listaTemas("todos");i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");};
 			$i("i3GEOidentificaguia3").onclick = function(){i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia3","i3GEOidentificaguia");};
@@ -177,13 +177,13 @@ i3GEOF.identifica = {
 					if(i3GEO.temaAtivo !== ""){
 						var ltema = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
 						if(ltema.identifica == "nao" || ltema.identifica == "NAO")
-						{i3GEO.janela.tempoMsg("Esse tema n&atilde;o permite etiquetas");}
+						{i3GEO.janela.tempoMsg($trad(2,i3GEOF.identifica.dicionario));}
 						else
 						{i3GEO.tema.dialogo.etiquetas(i3GEO.temaAtivo);}
 						$i("i3GEOidentificaocorrencia").innerHTML = "";
 					}
 					else
-					{$i("i3GEOidentificaocorrencia").innerHTML = "Escolha um tema da lista";}
+					{$i("i3GEOidentificaocorrencia").innerHTML = $trad(1,i3GEOF.identifica.dicionario);}
 				}}});
 			};
 			$i("i3GEOidentificaguia5").onclick = function(){
@@ -337,37 +337,37 @@ i3GEOF.identifica = {
 		var ins = '';
 		ins += '<div id=i3GEOidentificaguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia1" style="text-align:center;left:0px;" >Temas vis&iacute;veis</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia2" style="text-align:center;left:0px;" >Todos</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia4" style="text-align:center;left:0px;" >Etiquetas</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia2" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia4" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia5" style="text-align:center;left:0px;" >XY/buffer</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia3" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia3" style="text-align:center;left:0px;" >'+$trad(6,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div>';
 		//ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia1obj" style="left:1px;90%">';
 		ins += '		<div id="i3GEOidentificatemaativo" class="geralFerramentas" style="overflow: hidden;display:block;position:relative;top:-5px;left:0px;width:150px">';
-		ins += '			<div style="left:0px;width:150px;text-align:left;" id="i3GEOidentificalistaTemas" >Aguarde...</div>';
-		ins += '			<div style="left:0px;width:150px;text-align:left;" id="i3GEOidentificalistaSistemas" >Aguarde...</div>';
+		ins += '			<div style="left:0px;width:150px;text-align:left;" id="i3GEOidentificalistaTemas" >'+$trad(7,i3GEOF.identifica.dicionario)+'...</div>';
+		ins += '			<div style="left:0px;width:150px;text-align:left;" id="i3GEOidentificalistaSistemas" >'+$trad(7,i3GEOF.identifica.dicionario)+'...</div>';
 		ins += '		</div>';
 		ins += '		<div id="i3GEOidentificaocorrencia" style="overflow: hidden;font-size: 10px;display:block;position:absolute;top:5px;left:165px;width:60%"></div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia2obj" style="left:1px">';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia3obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
-		ins += '		Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados:<br><br>';
+		ins += $trad(8,i3GEOF.identifica.dicionario)+':<br><br>';
 		ins += '&nbsp;&nbsp;'+$inputText("","10","i3GEOidentificaresolucao","","5","5");
 		//<input onclick="javascript:this.select();" type=text class=digitar value=5 id="i3GEOidentificaresolucao" size=2 />';
 		ins += '	<br><br></div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia4obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
-		ins += '		As etiquetas s&atilde;o mostradas quando o mouse &eacute; estacionado sobre um elemento.';
-		ins += '		<br><br><input id=i3GEOidentificabotao1 size=20  type=button value="Configurar etiquetas" />';
+		ins += $trad(9,i3GEOF.identifica.dicionario);
+		ins += '		<br><br><input id=i3GEOidentificabotao1 size=20  type=button value="'+$trad(10,i3GEOF.identifica.dicionario)+'" />';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia5obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
-		ins += '		<b>Valores para o ponto indicado no mapa<br></b>';
+		ins += '		<b>'+$trad(11,i3GEOF.identifica.dicionario)+'<br></b>';
 		ins += '		<div id=i3GEOidentificacoord ></div><br>';
 		ins += '		<div id=i3GEOidentificacoordtexto style=text-align:left ></div>';
-		ins += '		<br><br><input id=i3GEOidentificabotao2 size=20  type=button value="Criar entorno (buffer)" />';
+		ins += '		<br><br><input id=i3GEOidentificabotao2 size=20  type=button value="'+$trad(12,i3GEOF.identifica.dicionario)+'" />';
 		ins += '	</div>';
 		//ins += '</div>	';
 		return ins;
@@ -424,7 +424,7 @@ i3GEOF.identifica = {
 		//
 		//monta a lista de temas
 		//
-		linhas += "<span style=color:gray; >Clique no tema para ver os dados</span>";
+		linhas += "<span style=color:gray; >"+$trad(13,i3GEOF.identifica.dicionario)+"</span>";
 		linhas1 = "";
 		for (l=0;l<lista.length;l++)
 		{
@@ -643,7 +643,7 @@ i3GEOF.identifica = {
 		{atualN = $i("i3GEOFidentificaNocorrencias").value;}
 		$i("i3GEOF.identifica_corpo").scrollTop = 0;
 		if(retorno == undefined || retorno == "")
-		{$i("i3GEOidentificaocorrencia").innerHTML="Nada encontrado";return;}
+		{$i("i3GEOidentificaocorrencia").innerHTML=$trad(14,i3GEOF.identifica.dicionario);return;}
 		i = $i("i3GEOmarcaIdentifica");
 		if(i)
 		{i.style.display = "block";}
@@ -742,7 +742,7 @@ i3GEOF.identifica = {
 		select = "<select id=i3GEOFidentificaNocorrencias onchange='i3GEOF.identifica.mostraDadosTema(i3GEOF.identifica.dadosIdentifica)'>";
 		if(atual == "todas")
 		{sel = "SELECTED";}
-		select += "<option value='todas' "+sel+" >todas</option>";
+		select += "<option value='todas' "+sel+" >"+$trad(15,i3GEOF.identifica.dicionario)+"</option>";
 		nocor = nres + 1;
 		for(i=1;i<nocor;i++)
 		{
@@ -753,7 +753,7 @@ i3GEOF.identifica = {
 		}
 		select += "</select>";
 		ins = "<table><tr>";
-		ins += "<td>Mostra a ocorr&ecirc;ncia: </td>";
+		ins += "<td>"+$trad(16,i3GEOF.identifica.dicionario)+": </td>";
 		ins += "<td> "+select+"</td>";
 		ins += "</tr></table>";
 		if(nres == 1)

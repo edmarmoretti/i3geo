@@ -233,63 +233,63 @@ i3GEOF.graficointerativo1 = {
 			'<div id=i3GEOgraficointerativo1guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 			'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
 			'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad("p13")+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
-			'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia1" style="text-align:center;left:0px;" >Tipo</div></em></a></li>' +
-			'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia2" style="text-align:center;left:0px;" >Dados</div></em></a></li>' +
-			'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia4" style="text-align:center;left:0px;" >Gr&aacute;fico</div></em></a></li>' +
+			'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.graficointerativo1.dicionario)+'</div></em></a></li>' +
+			'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia2" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.graficointerativo1.dicionario)+'</div></em></a></li>' +
+			'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia4" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.graficointerativo1.dicionario)+'</div></em></a></li>' +
 			'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia5" style="text-align:center;left:0px;" >CSV</div></em></a></li>' +
 			'	</ul>' +
 			'</div><br>' +
 			'<div class=guiaobj id="i3GEOgraficointerativo1guia1obj" style="left:1px;display:none;">' +
-			'	<p class=paragrafo >Escolha o tipo de gr&aacute;fico: </p>' +
+			'	<p class=paragrafo >'+$trad(4,i3GEOF.graficointerativo1.dicionario)+': </p>' +
 			'	<table class=lista6 >' +
-			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-pie-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="pizza_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>pizza 2d</td></tr>' +
+			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-pie-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="pizza_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'+$trad(5,i3GEOF.graficointerativo1.dicionario)+'</td></tr>' +
 			'		<tr><td>&nbsp;</td></tr>' +
-			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-area-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="area_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>&aacute;rea simples</td></tr>' +
+			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-area-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="area_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'+$trad(6,i3GEOF.graficointerativo1.dicionario)+'</td></tr>' +
 			'		<tr><td>&nbsp;</td></tr>' +
-			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-scatter-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="ponto_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>distribui&ccedil;&atilde;o de pontos</td></tr>' +
+			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-scatter-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="ponto_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'+$trad(7,i3GEOF.graficointerativo1.dicionario)+'</td></tr>' +
 			'		<tr><td>&nbsp;</td></tr>' +
-			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-line-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="linha_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>linhas simples</td></tr>' +
+			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-line-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="linha_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'+$trad(8,i3GEOF.graficointerativo1.dicionario)+'</td></tr>' +
 			'		<tr><td>&nbsp;</td></tr>' +
-			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon-t.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="arvore_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>&Aacute;rvore</td></tr>' +
+			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon-t.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="arvore_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'+$trad(9,i3GEOF.graficointerativo1.dicionario)+'</td></tr>' +
 			'		<tr><td>&nbsp;</td></tr>' +
-			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras verticais</td></tr>' +
+			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'+$trad(10,i3GEOF.graficointerativo1.dicionario)+'</td></tr>' +
 			'		<tr><td>&nbsp;</td></tr>' +
-			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon-h.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_2" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>barras horizontais</td></tr>' +
+			'		<tr><td><img style=cursor:text; src="'+locaplic+'/imagens/oxygen/22x22/Actions-office-chart-bar-icon-h.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this)" value="bar_2" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'+$trad(11,i3GEOF.graficointerativo1.dicionario)+'</td></tr>' +
 			'	</table>' +
 			'</div> ' +
 			'<div class=guiaobj id="i3GEOgraficointerativo1guia2obj" style="left:1px;display:none;top:-5px">' +
-			'	<p class=paragrafo >Escolha os dados que compor&atilde;o o gr&aacute;fico: </p>' +
-			'	<p class=paragrafo >Tema:</p>' +
+			'	<p class=paragrafo >'+$trad(12,i3GEOF.graficointerativo1.dicionario)+': </p>' +
+			'	<p class=paragrafo >'+$trad(13,i3GEOF.graficointerativo1.dicionario)+':</p>' +
 			'	<div class=paragrafo id=i3GEOgraficointerativo1ComboTemas ></div>' +
 			'	<div class=paragrafo id=i3GEOgraficointerativo1ComboXlinha >' +
-			'		<p class=paragrafo >Item com as classes ou eixo X:</p>' +
+			'		<p class=paragrafo >'+$trad(14,i3GEOF.graficointerativo1.dicionario)+':</p>' +
 			'		<div class=paragrafo id=i3GEOgraficointerativo1ComboX ></div>' +
 			'	</div>'+
 			'	<div id=i3GEOgraficointerativo1ComboYlinha style=display:block >'+
-			'		<p class=paragrafo >Item com os valores ou eixo Y: </p>'+
+			'		<p class=paragrafo >'+$trad(15,i3GEOF.graficointerativo1.dicionario)+': </p>'+
 			'		<div class=paragrafo id=i3GEOgraficointerativo1ComboY ></div>' +
 			'	</div>' +
-			'	<p class=paragrafo >Excluir o seguinte valor: ' +
+			'	<p class=paragrafo >'+$trad(16,i3GEOF.graficointerativo1.dicionario)+': ' +
 			$inputText("","","i3GEOgraficointerativo1excluir","",3,"") +
-			'	<p class=paragrafo ><input type=checkbox style="cursor:pointer;top:3px;position:relative;" id=i3GEOgraficointerativo1CoresA /> gera cores aleat&oacute;rias</p>' +
-			'	<p class=paragrafo ><input id=i3GEOgraficointerativo1botao1 type="buttom" value="Obter dados" /></p>'+
+			'	<p class=paragrafo ><input type=checkbox style="cursor:pointer;top:3px;position:relative;" id=i3GEOgraficointerativo1CoresA /> '+$trad(17,i3GEOF.graficointerativo1.dicionario)+'</p>' +
+			'	<p class=paragrafo ><input id=i3GEOgraficointerativo1botao1 type="buttom" value="'+$trad(18,i3GEOF.graficointerativo1.dicionario)+'" /></p>'+
 			'	<div id=i3GEOgraficointerativo1Dados ></div>'+
-			'	<div class=paragrafo id=i3GEOgraficointerativo1AjudaPizza >Se vc escolher para X e Y o mesmo item, ser&aacute; considerada a frequ&ecirc;ncia das ocorr&ecirc;ncias para compor cada parte da pizza. Caso contr&aacute;rio, ser&aacute; feita a soma dos valores existentes em Y para cada ocorr&ecirc;ncia existente em X.</div>' +
+			'	<div class=paragrafo id=i3GEOgraficointerativo1AjudaPizza >'+$trad(19,i3GEOF.graficointerativo1.dicionario)+'</div>' +
 			'</div>' +
 			'<div class=guiaobj id="i3GEOgraficointerativo1guia3obj" style="left:1px;display:none;top:-5px">' +
-			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1xInclinado checked /> Inclina os textos do eixo X</p>' +
-			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1AdLinhas checked /> Adiciona as linhas em gr&aacute;ficos de barras</p>' +
-			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1Acumula /> Utiliza valores acumulados</p>' +
-			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1Relativa /> Utiliza valores relativos (%)</p>' +
-			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1OrdenaX checked /> Ordena o eixo X</p>' +
-			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1DadosPuros /> N&atilde;o processa os valores ao obter os dados (mant&eacute;m os dados como est&atilde;o na tabela de atributos) - essa op&ccedil;&atilde;o &eacute; &uacute;til nos gr&aacute;ficos de distribui&ccedil;&atilde;o de pontos</p>' +
+			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1xInclinado checked /> '+$trad(20,i3GEOF.graficointerativo1.dicionario)+'</p>' +
+			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1AdLinhas checked /> '+$trad(21,i3GEOF.graficointerativo1.dicionario)+'</p>' +
+			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1Acumula /> '+$trad(22,i3GEOF.graficointerativo1.dicionario)+'</p>' +
+			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1Relativa /> '+$trad(23,i3GEOF.graficointerativo1.dicionario)+' (%)</p>' +
+			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1OrdenaX checked /> '+$trad(24,i3GEOF.graficointerativo1.dicionario)+'</p>' +
+			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativo1DadosPuros /> '+$trad(25,i3GEOF.graficointerativo1.dicionario)+'</p>' +
 			'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOFgraficointerativo1ativaNavegacao onclick="i3GEOF.graficointerativo1.ativaNavegacao(this.checked)" /> Atualiza o gr&aacute;fico ao navegar pelo mapa</p>' +
-			'	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo1.obterDados()" id="i3GEOgraficointerativo1TipoAgregacao" ><option value="soma">Soma</option><option value="media">M&eacute;dia</option></select> Tipo de agrega&ccedil;&atilde;o dos valores do eixo Y</p>' +
-			'	<p class=paragrafo ><input style=cursor:pointer;width:50px; value=40 type=text id=i3GEOgraficointerativo1FatorTamanho /> Fator de c&aacute;lculo da largura do gr&aacute;fico. O n&uacute;mero de ocorr&ecirc;ncias ser&aacute; multiplicado por esse fator para calcular o tamanho final do gr&aacute;fico em pixels.</p>' +
+			'	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo1.obterDados()" id="i3GEOgraficointerativo1TipoAgregacao" ><option value="soma">'+$trad(26,i3GEOF.graficointerativo1.dicionario)+'</option><option value="media">'+$trad(27,i3GEOF.graficointerativo1.dicionario)+'</option></select> '+$trad(28,i3GEOF.graficointerativo1.dicionario)+'</p>' +
+			'	<p class=paragrafo ><input style=cursor:pointer;width:50px; value=40 type=text id=i3GEOgraficointerativo1FatorTamanho /> '+$trad(29,i3GEOF.graficointerativo1.dicionario)+'.</p>' +
 
 			'</div>'+
 			'<div class=guiaobj id="i3GEOgraficointerativo1guia4obj" style="left:1px;display:none;top:-10px">' +
-			'	<a href="#" onclick="i3GEOF.graficointerativo1.novaJanela()" >abrir em uma janela separada</a>' +
+			'	<a href="#" onclick="i3GEOF.graficointerativo1.novaJanela()" >'+$trad(30,i3GEOF.graficointerativo1.dicionario)+'</a>' +
 			'	<div id=i3GEOgraficointerativo1guia4objCanvas ></div>' +
 			'</div>' +
 			'<div class=guiaobj id="i3GEOgraficointerativo1guia5obj" style="font-size:10px;left:10px;display:none;top:-0px">' +
@@ -456,7 +456,7 @@ i3GEOF.graficointerativo1 = {
 				}catch(e){}
 			};
 			if (i3GEOF.graficointerativo1.tipo === ""){
-				i3GEO.janela.tempoMsg("Escolha um tipo de grafico");
+				i3GEO.janela.tempoMsg($trad(31,i3GEOF.graficointerativo1.dicionario));
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativo1guia1","i3GEOgraficointerativo1guia");
 				return;
 			}
@@ -480,13 +480,13 @@ i3GEOF.graficointerativo1 = {
 					tema,
 					function(retorno){
 						if(retorno.tipo === "erro"){
-							$i("i3GEOgraficointerativo1ComboX").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
-							$i("i3GEOgraficointerativo1ComboY").innerHTML = "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";
+							$i("i3GEOgraficointerativo1ComboX").innerHTML = "<br><br><span style='color:red'>"+$trad(32,i3GEOF.graficointerativo1.dicionario)+"</span><br><br>";
+							$i("i3GEOgraficointerativo1ComboY").innerHTML = "<br><br><span style='color:red'>"+$trad(32,i3GEOF.graficointerativo1.dicionario)+"</span><br><br>";
 						}
 						else{
-							$i("i3GEOgraficointerativo1ComboY").innerHTML = retorno.dados + "&nbsp;<input title='Digite o t&iacute;tulo' class=digitar type=text size=20 id=i3GEOgraficointerativo1ComboYidTitulo value='' />";
+							$i("i3GEOgraficointerativo1ComboY").innerHTML = retorno.dados + "&nbsp;<input title='"+$trad(33,i3GEOF.graficointerativo1.dicionario)+"' class=digitar type=text size=20 id=i3GEOgraficointerativo1ComboYidTitulo value='' />";
 							$i("i3GEOgraficointerativo1ComboXid").id = "i3GEOgraficointerativo1ComboYid";
-							$i("i3GEOgraficointerativo1ComboX").innerHTML = retorno.dados + "&nbsp;<input title='Digite o t&iacute;tulo' class=digitar type=text size=20 id=i3GEOgraficointerativo1ComboXidTitulo value='' />";
+							$i("i3GEOgraficointerativo1ComboX").innerHTML = retorno.dados + "&nbsp;<input title='"+$trad(33,i3GEOF.graficointerativo1.dicionario)+"' class=digitar type=text size=20 id=i3GEOgraficointerativo1ComboXidTitulo value='' />";
 							$i("i3GEOgraficointerativo1ComboXid").style.width = "160px";
 							$i("i3GEOgraficointerativo1ComboYid").style.width = "160px";
 							$i("i3GEOgraficointerativo1ComboXid").onchange = function(){
@@ -538,18 +538,18 @@ i3GEOF.graficointerativo1 = {
 			{ordenax = "nao";}
 
 			if(tema === "")
-			{i3GEO.janela.tempoMsg("Escolha um tema");return;}
+			{i3GEO.janela.tempoMsg($trad(34,i3GEOF.graficointerativo1.dicionario));return;}
 			if(x === "")
-			{i3GEO.janela.tempoMsg("Escolha um item para X");return;}
+			{i3GEO.janela.tempoMsg($trad(35,i3GEOF.graficointerativo1.dicionario));return;}
 			if(y === "")
-			{i3GEO.janela.tempoMsg("Escolha um item para Y");return;}
+			{i3GEO.janela.tempoMsg($trad(36,i3GEOF.graficointerativo1.dicionario));return;}
 			monta = function(retorno){
 				i3GEOF.graficointerativo1.aguarde.visibility = "hidden";
 				i3GEOF.graficointerativo1.montaTabelaDados(retorno);
 				$i("i3GEOgraficointerativo1guia4").onclick.call();
 				//verifica para nao ficar mostrando a janela toda vez que redesenha o mapa
 				if($i("i3GEOFgraficointerativo1ativaNavegacao").checked == false){
-					i3GEO.janela.tempoMsg("Os dados utilizados referem-se apenas &agrave; regi&atilde;o atual mostrada no mapa");
+					i3GEO.janela.tempoMsg($trad(37,i3GEOF.graficointerativo1.dicionario));
 				}
 			};
 			i3GEOF.graficointerativo1.aguarde.visibility = "visible";
@@ -578,10 +578,10 @@ i3GEOF.graficointerativo1 = {
 			else
 			{dados = retorno;}
 			n = dados.length;
-			ins.push("<p class=paragrafo >Tabela de dados para o gr&aacute;fico. Os valores podem ser editados</p><table class=lista4 id=i3GEOgraficointerativo1tabeladados ><tr><td></td>");
-			ins.push("<td style=background-color:yellow >&nbsp;<img style=cursor:pointer onclick='i3GEOF.graficointerativo1.ordenaColuna(this,1)' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /> nome</td>");
-			ins.push("<td style=background-color:yellow >&nbsp;<img style=cursor:pointer onclick='i3GEOF.graficointerativo1.ordenaColuna(this,2)' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /> valor</td>");
-			ins.push("<td style=background-color:yellow >cor</td><td></td></tr>");
+			ins.push("<p class=paragrafo >"+$trad(38,i3GEOF.graficointerativo1.dicionario)+"</p><table class=lista4 id=i3GEOgraficointerativo1tabeladados ><tr><td></td>");
+			ins.push("<td style=background-color:yellow >&nbsp;<img style=cursor:pointer onclick='i3GEOF.graficointerativo1.ordenaColuna(this,1)' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /> "+$trad(39,i3GEOF.graficointerativo1.dicionario)+"</td>");
+			ins.push("<td style=background-color:yellow >&nbsp;<img style=cursor:pointer onclick='i3GEOF.graficointerativo1.ordenaColuna(this,2)' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /> "+$trad(40,i3GEOF.graficointerativo1.dicionario)+"</td>");
+			ins.push("<td style=background-color:yellow >"+$trad(41,i3GEOF.graficointerativo1.dicionario)+"</td><td></td></tr>");
 			for (i=1;i<n; i++){
 				v = dados[i].split(";");
 				v[0] = v[0].replace("'","");
@@ -589,11 +589,11 @@ i3GEOF.graficointerativo1 = {
 				//ins += v[0]+" "+v[1];
 				id = "i3GEOgraficointerativo1Dados"+i; //layer+indice da classe
 				ins.push("<tr><td>");
-				ins.push("<img style='cursor:pointer' title='clique para excluir' onclick='i3GEOF.graficointerativo1.excluilinha(this)' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' /></td>");
+				ins.push("<img style='cursor:pointer' onclick='i3GEOF.graficointerativo1.excluilinha(this)' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad(42,i3GEOF.graficointerativo1.dicionario)+"' /></td>");
 				ins.push("</td><td>");
-				ins.push($inputText("","",id+"_nome","digite o novo nome",20,v[0],"nome"));
+				ins.push($inputText("","",id+"_nome",$trad(43,i3GEOF.graficointerativo1.dicionario),20,v[0],"nome"));
 				ins.push("</td><td>");
-				ins.push($inputText("","",id+"_valor","digite o novo valor",12,v[1],"valor"));
+				ins.push($inputText("","",id+"_valor",$trad(44,i3GEOF.graficointerativo1.dicionario),12,v[1],"valor"));
 				ins.push("</td><td>");
 				if($i("i3GEOgraficointerativo1CoresA").checked){
 					cor = i3GEO.util.rgb2hex(i3GEO.util.randomRGB());
@@ -602,7 +602,7 @@ i3GEOF.graficointerativo1 = {
 				if(v[2]){
 					cor = i3GEO.util.rgb2hex(v[2]);
 				}
-				ins.push($inputText("","",id+"_cor","",12,cor,"cor"));
+				ins.push($inputText("","",id+"_cor","",12,cor,$trad(41,i3GEOF.graficointerativo1.dicionario)));
 				ins.push("</td><td>");
 				ins.push("<img alt='aquarela.gif' style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\""+id+"_cor\")' />");
 				ins.push("</td></tr>");
@@ -729,8 +729,8 @@ i3GEOF.graficointerativo1 = {
 			}
 			if(legendaX == legendaY){
 				menor = 0;
-				legendaX += " (casos)";
-				legendaY += " (n. de casos)";
+				legendaX += " ("+$trad(45,i3GEOF.graficointerativo1.dicionario)+")";
+				legendaY += " ("+$trad(46,i3GEOF.graficointerativo1.dicionario)+")";
 			}
 			if($i("i3GEOgraficointerativo1Relativa").checked){
 				n = valores.length;
@@ -775,7 +775,7 @@ i3GEOF.graficointerativo1 = {
 				i3GEOF.graficointerativo1.arvores(dados,maior,cores,legendaY,legendaX);
 				break;
 			default:
-				alert("Escolha um tipo de gr&aacute;fico");
+				alert($trad(4,i3GEOF.graficointerativo1.dicionario));
 			}
 		},
 		/*
@@ -1081,4 +1081,3 @@ i3GEOF.graficointerativo1 = {
 			i3GEOF.graficointerativo1.aguarde.visibility = "hidden";
 		}
 };
-

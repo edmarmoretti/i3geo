@@ -1,61 +1,13 @@
 //+$trad(1,i3GEOF.excluirarvore.dicionario)+
-i3GEOF.excluuirarvore.dicionario = {
+i3GEOF.excluirarvore.dicionario = {
 1: [{
-pt:"",
+pt:"Remover do mapa os marcados",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-3: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-4: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
+pt:"Escolha uma camada pelo menos",
 en:"",
 es:"",
 it:""

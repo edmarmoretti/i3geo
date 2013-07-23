@@ -113,18 +113,18 @@ i3GEOF.insereGrafico = {
 		var ins = '';
 		ins += '<div id=i3GEOinseregraficoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia1" style="text-align:center;left:0px;" >Fonte dos dados</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia2" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.insereGrafico.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia2" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.insereGrafico.dicionario)+'</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div><br>';
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia1obj" style="left:1px;display:none;">';
 		ins += '		<p class="paragrafo">Escolha o tema com os dados:';
-		ins += '		<div id=i3GEOinseregraficotemasi style="display:block;position:relative;top:10px;left:0px;text-align:left;">Aguarde...';
+		ins += '		<div id=i3GEOinseregraficotemasi style="display:block;position:relative;top:10px;left:0px;text-align:left;">'+$trad(3,i3GEOF.insereGrafico.dicionario)+'...';
 		ins += '		</div>';
-		ins += '		<div id=i3GEOinseregraficolistai class=digitar style="left:0px;top:20px;330px;height:80px;overflow:auto;display:block;">Escolha o tema para ver a lista de itens</div>';
+		ins += '		<div id=i3GEOinseregraficolistai class=digitar style="left:0px;top:20px;330px;height:80px;overflow:auto;display:block;">'+$trad(4,i3GEOF.insereGrafico.dicionario)+'</div>';
 		ins += '		<br><br><br>';
 		ins += '		<p class="paragrafo"><input id=i3GEOinseregraficobotao1 size=35  type=button value="mostrar legenda no mapa" />';
-		ins += '		<div id=i3GEOinseregraficomen1 style=top:10px;left:1px ><p class="paragrafo">Marque os itens para compor as partes do gr&aacute;fico: Edite os valores de cor (R,G,B) conforme o desejado. Ap&oacute;s escolher os itens, clique no elemento do mapa para inserir o gr&aacute;fico.</div>';
+		ins += '		<div id=i3GEOinseregraficomen1 style=top:10px;left:1px ><p class="paragrafo">'+$trad(5,i3GEOF.insereGrafico.dicionario)+'</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia2obj" style="left:1px;display:none;">';
 		ins += '		<table summary="" class=lista width="70%">';
@@ -134,12 +134,12 @@ i3GEOF.insereGrafico = {
 		ins += $inputText("","","i3GEOinseregraficow","",5,"50")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '		<tr>';
-		ins += '			<td>Inclina&ccedil;&atilde;o do c&iacute;rculo:</td>';
+		ins += '			<td>'+$trad(6,i3GEOF.insereGrafico.dicionario)+':</td>';
 		ins += '			<td>';
 		ins += $inputText("","","i3GEOinseregraficoinclinacao","",4,"1.5")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '		<tr>';
-		ins += '			<td>Tamanho da sombra:</td>';
+		ins += '			<td>'+$trad(7,i3GEOF.insereGrafico.dicionario)+':</td>';
 		ins += '			<td>';
 		ins += $inputText("","","i3GEOinseregraficosombra","",4,"5")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
@@ -234,11 +234,11 @@ i3GEOF.insereGrafico = {
 				shadow_height = $i("i3GEOinseregraficosombra").value,
 				itens,
 				temp;
-			if (tema === ""){i3GEO.janela.tempoMsg("Nenhum tema definido para pegar os dados");}
+			if (tema === ""){i3GEO.janela.tempoMsg($trad(8,i3GEOF.insereGrafico.dicionario));}
 			else{
 				itens = i3GEOF.insereGrafico.pegaItensMarcados();
 				if (itens === "")
-				{i3GEO.janela.tempoMsg("Nenhum item foi escolhido");}
+				{i3GEO.janela.tempoMsg($trad(9,i3GEOF.insereGrafico.dicionario));}
 				else{
 					temp = function(){
 						i3GEOF.insereGrafico.aguarde.visibility = "hidden";
@@ -267,7 +267,7 @@ i3GEOF.insereGrafico = {
 		 		$i("i3GEOinseregraficotemasi").innerHTML = retorno.dados;
 		 		if ($i("i3GEOinseregraficotemasLigados")){
 		 			$i("i3GEOinseregraficotemasLigados").onchange = function(){
-		 				$i("i3GEOinseregraficolistai").innerHTML = "<p style=color:red >Aguarde...<br>";
+		 				$i("i3GEOinseregraficolistai").innerHTML = "<p style=color:red >"+$trad(3,i3GEOF.insereGrafico.dicionario)+"...<br>";
 		 				i3GEO.php.listaItensTema(i3GEOF.insereGrafico.listaItens,$i("i3GEOinseregraficotemasLigados").value);
 		 				i3GEO.mapa.ativaTema($i("i3GEOinseregraficotemasLigados").value);
 		 			};
@@ -309,7 +309,7 @@ i3GEOF.insereGrafico = {
 			$i("i3GEOinseregraficolistai").innerHTML = ins.join("");
 		}
 		catch(e)
-		{$i("i3GEOinseregraficolistai").innerHTML = "<p style=color:red >Ocorreu um erro "+e+"<br>";}
+		{$i("i3GEOinseregraficolistai").innerHTML = "<p style=color:red >Erro "+e+"<br>";}
 	},
 	/*
 	Function: corj
@@ -373,6 +373,6 @@ i3GEOF.insereGrafico = {
 			w = w[2].id;
 			$i(w).innerHTML = par;
 		}
-		catch(e){i3GEO.janela.tempoMsg("Ocorreu um erro. legendaGrafico"+e);}
+		catch(e){i3GEO.janela.tempoMsg("Erro. legendaGrafico"+e);}
 	}
 };

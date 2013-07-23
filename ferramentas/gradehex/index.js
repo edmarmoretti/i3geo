@@ -150,33 +150,33 @@ i3GEOF.gradeDeHex = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo' >A grade &eacute; formada por hex&aacute;gonos espa&ccedil;ados conforme os par&acirc;metros de x e y.";
-		ins += "<p class='paragrafo'>A grade criada &eacute; adicionada como um novo tema no mapa, podendo ser utilizada em opera&ccedil;&otilde;es como o cruzamento entre pontos e pol&iacute;gonos.";
-		ins += "<p class='paragrafo'>O ponto inicial da grade deve ser definido pelo usu&aacute;rio e o ponto final (inferior direito) &eacute; definido em fun&ccedil;&atilde;o da abran&ecirc;ncia do mapa ou da quantidade de pontos.";
+		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.gradeDeHex.dicionario);
+		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.gradeDeHex.dicionario);
+		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.gradeDeHex.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.gradeDeHex.t1()",ins,"i3GEOFgradeDeHext0","i3GEOgradedehexresultado");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo'>Espa&ccedil;amento da grade";
-		ins += "<p class='paragrafo'>em X: ";
-		ins += "Grau<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxg' title='grau' type=text size=3 value='1'/>";
-		ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxm' title='minuto' type=text size=5 value='00'/>";
-		ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxs' title='segundo' type=text size=5 value='00.00'/>";
-		ins += "<p class='paragrafo'>em Y: ";
-		ins += "Grau<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexyg' title='grau' type=text size=3 value='1'/>";
-		ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexym' title='minuto' type=text size=5 value='00'/>";
-		ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexys' title='segundo' type=text size=5 value='00.00'/>";
+		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.gradeDeHex.dicionario);
+		ins += "<p class='paragrafo'>X: ";
+		ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxg' title='grau' type=text size=3 value='1'/>";
+		ins += $trad(6,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxm' title='minuto' type=text size=5 value='00'/>";
+		ins += $trad(7,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxs' title='segundo' type=text size=5 value='00.00'/>";
+		ins += "<p class='paragrafo'>Y: ";
+		ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexyg' title='grau' type=text size=3 value='1'/>";
+		ins += $trad(6,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexym' title='minuto' type=text size=5 value='00'/>";
+		ins += $trad(7,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexys' title='segundo' type=text size=5 value='00.00'/>";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t0()","i3GEOF.gradeDeHex.t2()",ins,"i3GEOF.gradeDeHex.t1","i3GEOgradedehexresultado");
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo'>Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). <b>Voc&ecirc; pode clicar no mapa para pegar o ponto.</b>";
-		ins += "<p class='paragrafo'>em X: ";
-		ins += "Grau<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixg' title='grau'  type=text size=3 value='-00'/>";
-		ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixm' title='minuto'  type=text size=5 value='00'/>";
-		ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixs' title='segundo'  type=text size=5 value='00.00'/>";
-		ins += "<p class='paragrafo'>em Y: ";
-		ins += "Grau<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiyg' title='grau'  type=text size=3 value='-00'/>";
-		ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiym' title='minuto'  type=text size=5 value='00'/>";
-		ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiys' title='segundo'  type=text size=5 value='00.00'/>";
+		var ins = "<p class='paragrafo'>"+$trad(8,i3GEOF.gradeDeHex.dicionario);
+		ins += "<p class='paragrafo'>X: ";
+		ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixg' title='grau'  type=text size=3 value='-00'/>";
+		ins += $trad(6,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixm' title='minuto'  type=text size=5 value='00'/>";
+		ins += $trad(7,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixs' title='segundo'  type=text size=5 value='00.00'/>";
+		ins += "<p class='paragrafo'>Y: ";
+		ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiyg' title='grau'  type=text size=3 value='-00'/>";
+		ins += $trad(6,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiym' title='minuto'  type=text size=5 value='00'/>";
+		ins += $trad(7,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiys' title='segundo'  type=text size=5 value='00.00'/>";
 		g_tipoacao = "capturaponto";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t1()","i3GEOF.gradeDeHex.t3()",ins,"i3GEOF.gradeDeHex.t2","i3GEOgradedehexresultado");
 		i3GEO.eventos.cliquePerm.desativa();
@@ -184,16 +184,16 @@ i3GEOF.gradeDeHex = {
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDeHex.capturaPonto()");}
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>N&uacute;mero de hex&aacute;gonos. Total m&aacute;ximo de 10.000";
-		ins += "<p class='paragrafo'>em X: ";
+		var ins = "<p class='paragrafo'>"+$trad(9,i3GEOF.gradeDeHex.dicionario);
+		ins += "<p class='paragrafo'>X: ";
 		ins += "<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexnptx' title='pontos em x'  type=text size=3 value='10'/>";
-		ins += "<p class='paragrafo'>em Y: ";
+		ins += "<p class='paragrafo'>Y: ";
 		ins += "<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexnpty' title='pontos em y'  type=text size=3 value='10'/>";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t2()","i3GEOF.gradeDeHex.t4()",ins,"i3GEOF.gradeDeHex.t3","i3GEOgradedehexresultado");
 	},
 	t4: function(){
-		var ins = "<p class='paragrafo'>A grade ser&aacute; acrescentada como um novo tema no mapa";
-		ins += "<p class='paragrafo'><input id=i3GEOgradedehexbotao1 size=18 class=executar type='button' value='Criar grade' />";
+		var ins = "<p class='paragrafo'>"+$trad(10,i3GEOF.gradeDeHex.dicionario);
+		ins += "<p class='paragrafo'><input id=i3GEOgradedehexbotao1 size=18 class=executar type='button' value='"+$trad(11,i3GEOF.gradeDeHex.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t3()","",ins,"i3GEOF.gradeDeHex.t4","i3GEOgradedehexresultado");
 		new YAHOO.widget.Button(
 			"i3GEOgradedehexbotao1",
@@ -222,16 +222,16 @@ i3GEOF.gradeDeHex = {
 			nptx = $i("i3GEOgradedehexnptx").value;
 			npty = $i("i3GEOgradedehexnpty").value;
 			if ((dx == 0) || (dy == 0))
-			{i3GEO.janela.tempoMsg("Distância entre os pontos n&atilde;o pode ser 0");return;}
+			{i3GEO.janela.tempoMsg($trad(12,i3GEOF.gradeDeHex.dicionario));return;}
 			if ((nptx == 0) || (npty == 0))
-			{i3GEO.janela.tempoMsg("N&uacute;mero de pontos n&atilde;o pode ser 0");return;}
+			{i3GEO.janela.tempoMsg($trad(13,i3GEOF.gradeDeHex.dicionario));return;}
 			if (nptx * npty > 10000)
-			{i3GEO.janela.tempoMsg("N&uacute;mero de pontos n&atilde;o pode ser maior que 10.000");return;}
+			{i3GEO.janela.tempoMsg($trad(13,i3GEOF.gradeDeHex.dicionario));return;}
 			fim = function(retorno)
 			{
 				i3GEOF.gradeDeHex.aguarde.visibility = "hidden";
 				if (retorno.data == undefined )
-				{$i("i3GEOgradedehexfim").innerHTML = "<p class='paragrafo'>Erro. A opera&ccedil;&atilde;o demorou muito(?).";}
+				{$i("i3GEOgradedehexfim").innerHTML = "<p class='paragrafo'>Erro. ";}
 				else
 				{i3GEO.atualiza();}
 			};

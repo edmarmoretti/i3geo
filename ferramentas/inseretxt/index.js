@@ -118,7 +118,7 @@ i3GEOF.inseretxt = {
 				 		$i("i3GEOinseretxtDivComboTemas").style.display = "block";
 				 		if ($i("i3GEOinseretxtComboTemas")){
 				 			$i("i3GEOinseretxtComboTemas").onchange = function(){
-				 				$i("i3GEOinseretxtDivComboItens").innerHTML = "<p class=paragrafo style=color:red >Aguarde...</p>";
+				 				$i("i3GEOinseretxtDivComboItens").innerHTML = "<p class=paragrafo style=color:red >"+$trad(1,i3GEOF.inseretxt.dicionario)+"...</p>";
 								i3GEO.mapa.ativaTema($i("i3GEOinseretxtComboTemas").value);
 				 				//combodeitens
 								i3GEO.util.comboItens(
@@ -170,50 +170,50 @@ i3GEOF.inseretxt = {
 		var ins = '' +
 		'<div id=i3GEOinseretxtguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="Propriedades" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia1" style="text-align:center;left:0px;" >Digitar</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia2" style="text-align:center;left:0px;" >Capturar</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad(2,i3GEOF.inseretxt.dicionario)+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia2" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia1obj" style="left:1px;display:none;">' +
-		'		<p class="paragrafo" >Texto que ser&aacute; inserido:<br><br>' +
+		'		<p class="paragrafo" >'+$trad(5,i3GEOF.inseretxt.dicionario)+':<br><br>' +
 		$inputText("","","i3GEOinseretxttexto","",45,"") +
 		'		<br><br>' +
-		'		<input class=inputsb style=cursor:pointer type=checkbox id=i3GEOinseretxttextoconector >&nbsp;Insere com conector' +
+		'		<input class=inputsb style=cursor:pointer type=checkbox id=i3GEOinseretxttextoconector >'+$trad(6,i3GEOF.inseretxt.dicionario) +
 		'		<div id=i3GEOinseretxtmen1 style="text-align:left;" >'+
-		'			<p class="paragrafo" >Digite o texto e clique no mapa no ponto de inclus&atilde;o. Para definir os par&acirc;metros de fonte, tamanho, etc, utilize a guia de propriedades. Se o texto contiver acentua&ccedil;&atilde;o, n&atilde;o use a fonte padr&atilde;o (bitmap). Ativando o conector, vc dever&aacute; clicar no ponto inicial e final.' +
+		'			<p class="paragrafo" >'+$trad(7,i3GEOF.inseretxt.dicionario) +
 		'		</div>' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia2obj" style="left:1px;display:none;">' +
-		'		<p class=paragrafo >Escolha o tema:' +
-		'		<div id=i3GEOinseretxtDivComboTemas style="text-align:left;">Aguarde...' +
+		'		<p class=paragrafo >' + $trad(8,i3GEOF.inseretxt.dicionario) +
+		'		<div id=i3GEOinseretxtDivComboTemas style="text-align:left;">'+$trad(1,i3GEOF.inseretxt.dicionario)+'...' +
 		'		</div><br>' +
-		'		<p class=paragrafo >Escolha o item:' +
+		'		<p class=paragrafo >'+$trad(9,i3GEOF.inseretxt.dicionario)+':' +
 		'		<div id=i3GEOinseretxtDivComboItens style="text-align:left;">'+
 		'		</div>' +
 		'		<br><br>' +
 		'		<div id=i3GEOinseretxtmen2 style="text-align:left;" >' +
-		'			<p class=paragrafo >Ap&oacute;s escolher o tema e o item da tabela de atributos, clique no mapa no lugar desejado para incluir o texto.</p>' +
+		'			<p class=paragrafo >' + $trad(10,i3GEOF.inseretxt.dicionario) + '</p>' +
 		'		</div>' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia3obj" style="left:1px;display:none;">' +
 		'		<table summary="" class=lista width="98%">' +
-		'			<tr><td>Fonte:</td><td><span id="i3GEOinseretxtDivListaFonte">Aguarde...</span></td></tr>' +
+		'			<tr><td>'+$trad(11,i3GEOF.inseretxt.dicionario)+':</td><td><span id="i3GEOinseretxtDivListaFonte">'+$trad(1,i3GEOF.inseretxt.dicionario)+'...</span></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Tamanho:</td><td>' +
+		'			<tr><td>'+$trad(12,i3GEOF.inseretxt.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOinseretxttamanho_i","",2,"8") +
 		'			</td></tr>' +
-		'			<tr><td>Largura do conector:</td><td>' +
+		'			<tr><td>'+$trad(13,i3GEOF.inseretxt.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOinseretxttamanho_c","",2,"2") +
 		'			</td></tr>' +
 
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO ou FOLLOW (segue a linha), nesses casos, a fonte n&atilde;o pode ser do tipo bitmap):</td><td>' +
+		'			<tr><td>'+$trad(14,i3GEOF.inseretxt.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOinseretxtangulo_i","",4,"0") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
 		'			<tr>' +
-		'				<td>Deslocamento do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o:</td>' +
+		'				<td>'+$trad(15,i3GEOF.inseretxt.dicionario)+':</td>' +
 		'				<td>x ' +
 		$inputText("","","i3GEOinseretxtoffsetx_i","",2,"0") +
 		'					y ' +
@@ -221,87 +221,87 @@ i3GEOF.inseretxt = {
 		'				</td>' +
 		'			</tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor do texto:</td><td>'+
+		'			<tr><td>'+$trad(16,i3GEOF.inseretxt.dicionario)+':</td><td>'+
 		$inputText("","","i3GEOinseretxtfrente_i","",11,"0 0 0") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.inseretxt.corj(\'i3GEOinseretxtfrente_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor do conector:</td><td>'+
+		'			<tr><td>'+$trad(17,i3GEOF.inseretxt.dicionario)+':</td><td>'+
 		$inputText("","","i3GEOinseretxtfrente_c","",11,"0 0 0") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.inseretxt.corj(\'i3GEOinseretxtfrente_c\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor da m&aacute;scara de um pixel de entorno:</td><td>' +
+		'			<tr><td>'+$trad(18,i3GEOF.inseretxt.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOinseretxtmascara_i","",11,"") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.inseretxt.corj(\'i3GEOinseretxtmascara_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
 		'			<tr>' +
-		'				<td>Posicionamento:</td>' +
+		'				<td>'+$trad(19,i3GEOF.inseretxt.dicionario)+':</td>' +
 		'				<td>' +
 		'					<select id=i3GEOinseretxtposition_i >' +
-		'						<option value="MS_AUTO" >autom&aacute;tico</option>' +
-		'						<option value="MS_UL" >superior esquerdo</option>' +
-		'						<option value="MS_UC" >superior centro</option>' +
-		'						<option value="MS_UR" selected >superior direito</option>' +
-		'						<option value="MS_CL" >centro esquerdo</option>' +
-		'						<option value="MS_CC" >centro</option>' +
-		'						<option value="MS_CR" >centro direito</option>' +
-		'						<option value="MS_LL" >inferior esquerdo</option>' +
-		'						<option value="MS_LC" >inferior centro</option>' +
-		'						<option value="MS_LR" >inferior direito</option>' +
+		'						<option value="MS_AUTO" >'+$trad(20,i3GEOF.inseretxt.dicionario)+'</option>' +
+		'						<option value="MS_UL" >'+$trad(21,i3GEOF.inseretxt.dicionario)+'</option>' +
+		'						<option value="MS_UC" >'+$trad(22,i3GEOF.inseretxt.dicionario)+'</option>' +
+		'						<option value="MS_UR" selected >'+$trad(23,i3GEOF.inseretxt.dicionario)+'</option>' +
+		'						<option value="MS_CL" >'+$trad(24,i3GEOF.inseretxt.dicionario)+'</option>' +
+		'						<option value="MS_CC" >'+$trad(25,i3GEOF.inseretxt.dicionario)+'</option>' +
+		'						<option value="MS_CR" >'+$trad(26,i3GEOF.inseretxt.dicionario)+'</option>' +
+		'						<option value="MS_LL" >'+$trad(27,i3GEOF.inseretxt.dicionario)+'</option>' +
+		'						<option value="MS_LC" >'+$trad(28,i3GEOF.inseretxt.dicionario)+'</option>' +
+		'						<option value="MS_LR" >'+$trad(29,i3GEOF.inseretxt.dicionario)+'</option>' +
 		'					</select>' +
 		'				</td>' +
 		'			</tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor do fundo:</td><td>' +
+		'			<tr><td>'+$trad(30,i3GEOF.inseretxt.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOinseretxtfundoc_i","",9,"") +
 		'				<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.inseretxt.corj(\'i3GEOinseretxtfundoc_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor da sombra do fundo:</td><td>'+
+		'			<tr><td>'+$trad(31,i3GEOF.inseretxt.dicionario)+':</td><td>'+
 		$inputText("","","i3GEOinseretxtsombra_i","",9,"") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.inseretxt.corj(\'i3GEOinseretxtsombra_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Deslocamento da sombra do fundo:</td><td>x ' +
+		'			<tr><td>'+$trad(32,i3GEOF.inseretxt.dicionario)+':</td><td>x ' +
 		$inputText("","","i3GEOinseretxtsombrax_i","",1,"1") +
 		'			 y' +
 		$inputText("","","i3GEOinseretxtsombray_i","",1,"1") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor do texto de fundo (duplicado)):</td><td>' +
+		'			<tr><td>'+$trad(33,i3GEOF.inseretxt.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOinseretxtfrentes_i","",9,"") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.inseretxt.corj(\'i3GEOinseretxtfrentes_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Deslocamento do texto de fundo (duplicado):</td><td>x '+
+		'			<tr><td>'+$trad(34,i3GEOF.inseretxt.dicionario)+':</td><td>x '+
 		$inputText("","","i3GEOinseretxtfrentex_i","",1,"1") +
 		'			 y '+
 		$inputText("","","i3GEOinseretxtfrentey_i","",1,"1") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>For&ccedil;a colis&otilde;es entre textos?:</td>' +
+		'			<tr><td>'+$trad(35,i3GEOF.inseretxt.dicionario)+':</td>' +
 		'				<td>' +
 		'					<select id=i3GEOinseretxtforce_i >' +
-		'						<option value="0" >n&atilde;o</option>' +
-		'						<option value="1" >sim</option>' +
+		'						<option value="0" >'+$trad('x15')+'</option>' +
+		'						<option value="1" >'+$trad('x14')+'</option>' +
 		'					</select>' +
 		'				</td>' +
 		'			</tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Dist&acirc;ncia m&iacute;nima entre textos duplicados (em pixel):</td><td>' +
+		'			<tr><td>'+$trad(36,i3GEOF.inseretxt.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOinseretxtmindistance_i","",4,"auto") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Tamanho m&iacute;nimo do elemento cartogr&aacute;fico(em pixel):</td><td>' +
+		'			<tr><td>'+$trad(37,i3GEOF.inseretxt.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOinseretxtminfeaturesize_i","",4,"auto") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>O texto pode ultrapassar o mapa?:</td>' +
+		'			<tr><td>'+$trad(38,i3GEOF.inseretxt.dicionario)+':</td>' +
 		'				<td>' +
 		'					<select id=i3GEOinseretxtpartials_i >' +
-		'						<option value="1" >sim</option>' +
-		'						<option value="0" >n&atilde;o</option>' +
+		'						<option value="1" >'+$trad('x14')+'</option>' +
+		'						<option value="0" >'+$trad('x15')+'</option>' +
 		'					</select>' +
 		'				</td>' +
 		'			</tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Caractere usado para indicar uma quebra de texto:</td><td>' +
+		'			<tr><td>'+$trad(39,i3GEOF.inseretxt.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOinseretxtwrap_i","",5,"") +
 		'			</td></tr>' +
 		'		</table>' +
@@ -402,7 +402,7 @@ i3GEOF.inseretxt = {
 			if(i3GEOF.inseretxt.aguarde.visibility === "visible")
 			{return;}
 			if($i("i3GEOinseretxtguia3obj").style.display === "block"){
-				i3GEO.janela.tempoMsg("Ative a guia 1 ou 2 para definir o texto");
+				i3GEO.janela.tempoMsg($trad(40,i3GEOF.inseretxt.dicionario));
 				return;
 			}
 			i3GEOF.inseretxt.aguarde.visibility = "visible";
@@ -416,7 +416,7 @@ i3GEOF.inseretxt = {
 			else{
 				temp = function(retorno){
 					if(retorno.data[0] == " "){
-						i3GEO.janela.tempoMsg("Nada encontrado.");
+						i3GEO.janela.tempoMsg($trad(41,i3GEOF.inseretxt.dicionario));
 						i3GEOF.inseretxt.aguarde.visibility = "hidden";
 						return;
 					}
@@ -446,7 +446,7 @@ i3GEOF.inseretxt = {
 					i3GEOF.inseretxt.contaPontos = 1;
 					i3GEOF.inseretxt.pontoi = objposicaocursor.ddx+" "+objposicaocursor.ddy;
 					i3GEOF.inseretxt.aguarde.visibility = "hidden";
-					i3GEO.janela.tempoMsg("Clique no fim do conector");
+					i3GEO.janela.tempoMsg($trad(42,i3GEOF.inseretxt.dicionario));
 					return;
 				}
 				if(i3GEOF.inseretxt.contaPontos == 1){

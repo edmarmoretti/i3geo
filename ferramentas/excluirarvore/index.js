@@ -123,7 +123,7 @@ i3GEOF.excluirarvore = {
 			n = camadas.length,
 			ins = "";
 
-		ins = "<p class=paragrafo ><input id=i3GEOexcluirbotao1 type='buttom' value='Remover do mapa os marcados' /></p>" +
+		ins = "<p class=paragrafo ><input id=i3GEOexcluirbotao1 type='buttom' value='"+$trad(1,i3GEOF.excluirarvore.dicionario)+"' /></p>" +
 			"<table id='i3GEOFexcluirarvoreLista' style='width:95%' class='lista8'>";
 		while(n > 0){
 			n -= 1;
@@ -170,9 +170,6 @@ i3GEOF.excluirarvore = {
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)") < 0)
 		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)");}
-
-
-
 		i3GEOF.excluirarvore.inicia(divid);
 	},
 	/*
@@ -202,7 +199,7 @@ i3GEOF.excluirarvore = {
 		if(lista.length > 0)
 		{i3GEO.php.excluitema(temp,lista);}
 		else{
-			i3GEO.janela.tempoMsg("Escolha uma camada pelo menos");
+			i3GEO.janela.tempoMsg($trad(2,i3GEOF.excluirarvore.dicionario));
 			i3GEOF.excluirarvore.aguarde.visibility = "hidden";
 		}
 	}

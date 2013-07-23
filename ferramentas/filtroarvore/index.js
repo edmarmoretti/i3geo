@@ -97,22 +97,22 @@ i3GEOF.filtroarvore = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<p class=paragrafo >Escolha o tipo de filtro ou "nenhum" para n&atilde;o filtrar<br><br>' +
+		var ins = '<p class=paragrafo >'+$trad(1,i3GEOF.filtroarvore.dicionario)+'<br><br>' +
 			'<select onchange="i3GEO.arvoreDeCamadas.ARVORE = null;i3GEO.arvoreDeCamadas.FILTRO = this.value;i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)">' +
 			'<option value="naofaznada">---</option>' +
-			'<option value="">remover filtro</option>' +
-			'<option value="ligados">ligados</option>' +
-			'<option value="desligados">desligados</option>' +
-			'<option value="selecionados">com sele&ccedil;&atilde;o</option>' +
-			'<option value="download">permitem download</option>' +
-			'<option value="wms">s&atilde;o do tipo WMS</option>' +
-			'<option value="raster">s&atilde;o do tipo raster</option>' +
-			'<option value="toponimia">contem apenas texto</option>' +
+			'<option value="">'+$trad(2,i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="ligados">'+$trad(3,i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="desligados">'+$trad(4,i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="selecionados">'+$trad(5,i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="download">'+$trad(6,i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="wms">'+$trad(7,i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="raster">'+$trad(8,i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="toponimia">'+$trad(9,i3GEOF.filtroarvore.dicionario)+'</option>' +
 			'</select><br><br>' +
-			'Opera&ccedil;&atilde;o<br><br>' +
+			$trad(10,i3GEOF.filtroarvore.dicionario)+'<br><br>' +
 			'<select onchange="i3GEOF.filtroarvore.lote(this)" >' +
 			'<option value="">---</option>' +
-			'<option value="excluir">excluir</option>' +
+			'<option value="excluir">'+$trad(11,i3GEOF.filtroarvore.dicionario)+'</option>' +
 			'</select>';
 		return ins;
 	},

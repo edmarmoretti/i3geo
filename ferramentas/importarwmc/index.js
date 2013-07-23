@@ -105,9 +105,9 @@ i3GEOF.importarwmc = {
 	*/
 	html:function(){
 		var ins = '<form id=i3GEOimportarwmcf target="i3GEOimportarwmciframe" action="'+i3GEO.configura.locaplic+'/ferramentas/importarwmc/upload.php" method="post" ENCTYPE="multipart/form-data">' +
-		'<p class="paragrafo" >Arquivo: <br><input type="file" size=18 name="i3GEOimportarwmc" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p class="paragrafo" >'+$trad(1,i3GEOF.importarwmc.dicionario)+': <br><input type="file" size=18 name="i3GEOimportarwmc" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >Ou URL: <br><input type="text" size=35 name="i3GEOimportarwmcurl" style="top:0px;left:0px;cursor:text;"></p>' +
-		'<br><p class="paragrafo" ><input id=i3GEOimportarwmcbotao1 type="button" value="Importar" size=12 name="submit">' +
+		'<br><p class="paragrafo" ><input id=i3GEOimportarwmcbotao1 type="button" value="'+$trad(2,i3GEOF.importarwmc.dicionario)+'" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
 		'</form>' +
@@ -156,4 +156,3 @@ i3GEOF.importarwmc = {
 		$i("i3GEOimportarwmcf").submit();
 	}
 };
-

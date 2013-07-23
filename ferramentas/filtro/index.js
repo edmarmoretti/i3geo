@@ -148,23 +148,23 @@ i3GEOF.filtro = {
 		var ins = '' +
 		'<div id=i3GEOfiltroguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">'+
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'+
-		'		<li><a href="#ancora"><em><div id="i3GEOfiltroguia1" style="text-align:center;left:0px;" >Construir</div></em></a></li>'+
-		'		<li><a href="#ancora"><em><div id="i3GEOfiltroguia2" style="text-align:center;left:0px;" >Digitar</div></em></a></li>'+
-		'		<li><a href="#ancora"><em><div id="i3GEOfiltroguia3" style="text-align:center;left:0px;" >Testar</div></em></a></li>'+
+		'		<li><a href="#ancora"><em><div id="i3GEOfiltroguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
+		'		<li><a href="#ancora"><em><div id="i3GEOfiltroguia2" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
+		'		<li><a href="#ancora"><em><div id="i3GEOfiltroguia3" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
 		'	</ul>'+
 		'</div><br>'+
 		'<p class=paragrafo >'+
-		'	<input id=i3GEOfiltrobotao1 size=18  type="button" value="Incluir/aplicar" />'+
-		'	<input id=i3GEOfiltrobotao2 size=18 type="button" value="Remover" />'+
+		'	<input id=i3GEOfiltrobotao1 size=18  type="button" value="'+$trad(4,i3GEOF.filtro.dicionario)+'" />'+
+		'	<input id=i3GEOfiltrobotao2 size=18 type="button" value="'+$trad(5,i3GEOF.filtro.dicionario)+'" />'+
 		'</p>'+
 		'<div class=guiaobj id="i3GEOfiltroguia1obj" style="left:1px;display:none;">'+
 		'	<div id=i3GEOfiltropar style="display:block;position:relative;top:5px;left:0px;">'+
 		'		<table summary="" id="i3GEOfiltroparametros" >'+
 		'			<tr><td></td><td></td>'+
-		'				<td style=background-color:yellow >Item</td>'+
-		'				<td style=background-color:yellow >Operador</td>'+
-		'				<td style=background-color:yellow >Valor</td>'+
-		'				<td style=background-color:yellow >Conector</td>'+
+		'				<td style=background-color:yellow >'+$trad(6,i3GEOF.filtro.dicionario)+'</td>'+
+		'				<td style=background-color:yellow >'+$trad(7,i3GEOF.filtro.dicionario)+'</td>'+
+		'				<td style=background-color:yellow >'+$trad(8,i3GEOF.filtro.dicionario)+'</td>'+
+		'				<td style=background-color:yellow >'+$trad(9,i3GEOF.filtro.dicionario)+'</td>'+
 		'			</tr>'+
 		'			<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>'+
 		'		</table>'+
@@ -173,10 +173,10 @@ i3GEOF.filtro = {
 		'	</div>'+
 		'	<div id=i3GEOfiltrovalores style="position:relative;top:5px;left:0px">'+
 		'	</div>'+
-		'	<div id=i3GEOfiltromen1 style=top:15px;left:0px; ><p class=paragrafo >O resultado da filtragem ser&aacute; mostrado no mapa. Certifique-se que o tema est&aacute; v&iacute;sivel. Antes de aplicar, vc pode testar o filtro definido. Na op&ccedil;&atilde;o IN separe os valores com v&iacute;rgula.</div>'+
+		'	<div id=i3GEOfiltromen1 style=top:15px;left:0px; ><p class=paragrafo >'+$trad(10,i3GEOF.filtro.dicionario)+'</div>'+
 		'</div>'+
 		'<div class=guiaobj id="i3GEOfiltroguia2obj" style="left:1px;display:none;">'+
-		'	<p class=paragrafo >Digite o filtro:<br>'+
+		'	<p class=paragrafo >'+$trad(11,i3GEOF.filtro.dicionario)+':<br>'+
 		$inputText("","","i3GEOfiltrofiltro","",65,"") +
 		'</p></div>'+
 		'<div class=guiaobj id="i3GEOfiltroguia3obj" style="left:1px;display:none;">'+
@@ -243,7 +243,7 @@ i3GEOF.filtro = {
 
 			interrogacao = document.createElement("img");
 			interrogacao.src = i3GEO.configura.locaplic+'/imagens/interrogacao.gif';
-			interrogacao.title='mostra valores';
+			interrogacao.title= $trad(12,i3GEOF.filtro.dicionario);
 			interrogacao.style.cursor="pointer";
 			interrogacao.onclick = function(){
 				var obj, itemTema;
@@ -254,7 +254,7 @@ i3GEOF.filtro = {
 					i3GEO.temaAtivo,
 					itemTema,
 					function(retorno){
-						$i("i3GEOfiltrovalores").innerHTML = "<br><p class=paragrafo >Escolha o valor:"+this.dados+"</p>";
+						$i("i3GEOfiltrovalores").innerHTML = "<br><p class=paragrafo >"+$trad(13,i3GEOF.filtro.dicionario)+":"+this.dados+"</p>";
 						if ($i("i3GEOfiltrocbitens")){
 							$i("i3GEOfiltrocbitens").onchange = function()
 							{obj.value = this.value;};
@@ -265,19 +265,19 @@ i3GEOF.filtro = {
 			};
 
 			operador = "<select>";
-			operador += "<option value='='>igual</option>";
+			operador += "<option value='='>"+$trad(14,i3GEOF.filtro.dicionario)+"</option>";
 			operador += "<option value='!='>dif</option>";
-			operador += "<option value='<'>menor</option>";
-			operador += "<option value='>'>maior</option>";
+			operador += "<option value='<'>"+$trad(15,i3GEOF.filtro.dicionario)+"</option>";
+			operador += "<option value='>'>"+$trad(16,i3GEOF.filtro.dicionario)+"</option>";
 			operador += "<option value='<='><=</option>";
 			operador += "<option value='>='>>=</option>";
 			operador += "<option value='in'>in</option>";
 			operador += "<option value='~='>regExp</option></select>";
 
 			conector = "<select>";
-			conector += "<option value='and'>e</option>";
-			conector += "<option value='or'>ou</option>";
-			conector += "<option value='not'>n&atilde;o</option></select>";
+			conector += "<option value='and'>"+$trad(17,i3GEOF.filtro.dicionario)+"</option>";
+			conector += "<option value='or'>"+$trad(18,i3GEOF.filtro.dicionario)+"</option>";
+			conector += "<option value='not'>"+$trad(19,i3GEOF.filtro.dicionario)+"</option></select>";
 
 			valor = document.createElement("input");
 			valor.type = "text";
@@ -443,4 +443,3 @@ i3GEOF.filtro = {
 		}
 	}
 };
-

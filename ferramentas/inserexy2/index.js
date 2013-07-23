@@ -175,64 +175,64 @@ i3GEOF.inserexy = {
 		var ins = '' +
 		'<div id=i3GEOinserexyguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia1" style="text-align:center;left:0px;" >Tema</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia2" style="text-align:center;left:0px;" >Direc/dist</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia3" style="text-align:center;left:0px;" >Digitar</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia4" style="text-align:center;left:0px;" >Colar</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia5" style="text-align:center;left:0px;" >Converter</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia6" style="text-align:center;left:0px;" >Coordenadas</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia3" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia4" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia5" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia6" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'<div id=i3GEOinserexyprojecao style="text-align:left;left:0px;display:none">' +
-		'   <p class=paragrafo >Proje&ccedil;&atilde;o das coordenadas inseridas:</p>' +
+		'   <p class=paragrafo >'+$trad(6,i3GEOF.inserexy.dicionario)+':</p>' +
 		'	<div id="i3GEOinserexylistaepsg" style="text-align:left;border:1px solid gray;width:300px;overflow:auto;height:60px;display:block;left:1px" >' +
 		'	</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia1obj" style="left:1px;display:none;top:10px">' +
-		'	<p class=paragrafo >Escolha o tema edit&aacute;vel para inserir os pontos:</p>' +
+		'	<p class=paragrafo >'+$trad(7,i3GEOF.inserexy.dicionario)+':</p>' +
 		'	<div id=i3GEOinserexyshapefile style="left:0px;text-align:left;">' +
 		'	</div><br>' +
-	 	'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="Criar um tema edit&aacute;vel" />' +
-	 	'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="Gr&aacute;fico de perfil" /></p>' +
+	 	'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="'+$trad(8,i3GEOF.inserexy.dicionario)+'" />' +
+	 	'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="'+$trad(9,i3GEOF.inserexy.dicionario)+'" /></p>' +
 
 		'	<div id=i3GEOinserexyopcitens style=display:none;left:0px;text-align:left; >' +
-		'		<p class=paragrafo >Se vc quiser, escolha um item existente no tema e o valor que ser&aacute; inclu&iacute;do quando o ponto for adicionado. Vc pode mudar o valor quando desejar:</p>' +
+		'		<p class=paragrafo >'+$trad(10,i3GEOF.inserexy.dicionario)+':</p>' +
 		'		<div id=i3GEOinserexyshapefileitem style="left:0px;text-align:left;">' +
 		'		</div>' +
 		'		<p class=paragrafo >Valor: '+
 		$inputText("","","i3GEOinserexyvalorItem","",20,"") +
 		'	<br></div>' +
 		'	<div id=i3GEOinserexymen1 style="display:block;left:0px;">' +
-		'		<p class=paragrafo >Ap&oacute;s selecionar ou criar um tema, clique no mapa para inserir os pontos ou use as op&ccedil;&otilde;es das guias acima.</p>' +
-		'		<p class=paragrafo >Para inserir pontos, &eacute; necess&aacute;rio a exist&ecirc;ncia de um tema edit&aacute;vel dispon&iacute;vel no mapa.</p>' +
-		'		<p class=paragrafo >Utilize o bot&atilde;o "criar um novo" se n&atilde;o existir nenhum tema desse tipo no mapa.</p>' +
+		'		<p class=paragrafo >'+$trad(11,i3GEOF.inserexy.dicionario)+'</p>' +
+		'		<p class=paragrafo >'+$trad(12,i3GEOF.inserexy.dicionario)+'</p>' +
+		'		<p class=paragrafo >'+$trad(13,i3GEOF.inserexy.dicionario)+'</p>' +
 		'	</div>' +
 		'</div>' +
 
 		'<div class=guiaobj id="i3GEOinserexyguia2obj" style="left:1px;display:none;">' +
-		'	<p class=paragrafo >Dire&ccedil;&atilde;o:</p>' +
+		'	<p class=paragrafo >'+$trad(14,i3GEOF.inserexy.dicionario)+':</p>' +
 		$inputText("","","i3GEOinserexyxgdd","grau",3,"00") +
 		$inputText("","","i3GEOinserexyxmdd","minuto",3,"00") +
 		$inputText("","","i3GEOinserexyxsdd","segundo",3,"0.0") +
-		'	<br><br><p class=paragrafo >Distância em Km:</p>' +
+		'	<br><br><p class=paragrafo >'+$trad(15,i3GEOF.inserexy.dicionario)+':</p>' +
 		$inputText("","","i3GEOinserexydistdd","km",5,"0.0") +
 		'	<div id=opcdd style="top:15px;left:0px">' +
-		'		<p class=paragrafo ><input id=i3GEOinserexybotaodd type="button" size=14 value="Insere"  /></p>' +
+		'		<p class=paragrafo ><input id=i3GEOinserexybotaodd type="button" size=14 value="'+$trad(16,i3GEOF.inserexy.dicionario)+'"  /></p>' +
 		'	</div>' +
 		'	<div id=i3GEOinserexymendd style="position:relative;left:0px;top:20px">' +
-		'		<p class=paragrafo >O pr&oacute;ximo ponto ser&aacute; inclu&iacute;do em rela&ccedil;&atilde;o ao &uacute;ltimo ponto existente no tema, considerando-se apenas os pontos vis&iacute;veis na extens&atilde;o do mapa atual.</p>' +
-		'		<p class=paragrafo >Digite o ângulo em rela&ccedil;&atilde;o ao Norte e a distância em Km.</p>' +
+		'		<p class=paragrafo >'+$trad(17,i3GEOF.inserexy.dicionario)+'</p>' +
+		'		<p class=paragrafo >'+$trad(18,i3GEOF.inserexy.dicionario)+'</p>' +
 		'	</div>' +
 		'</div> '+
 		'<div class=guiaobj id="i3GEOinserexyguia3obj" style="left:1px;display:none;">' +
 		'	<div id=i3GEOinserexytipodig style="text-align:left;left:0px">' +
-		'		<p class=paragrafo >Tipo de entrada:</p>' +
-		'		<table summary="Tipo de entrada" class=lista6 >' +
+		'		<p class=paragrafo >'+$trad(19,i3GEOF.inserexy.dicionario)+':</p>' +
+		'		<table class=lista6 >' +
 		'		<tr>' +
 		'			<td><input style="border:0px solid white;cursor:pointer" title="DMS" onclick="i3GEOF.inserexy.escolhedig(\'i3GEOinserexydigmascara\')" name=i3GEOinserexytipodig type=radio id="i3GEOinserexytipodigmascara" checked /></td>' +
-		'			<td>M&aacute;scara</td>' +
+		'			<td>'+$trad(20,i3GEOF.inserexy.dicionario)+'</td>' +
 		'			<td><input style="border:0px solid white;cursor:pointer" title="DMS" onclick="i3GEOF.inserexy.escolhedig(\'i3GEOinserexydigcampo\')" name=i3GEOinserexytipodig type=radio id="i3GEOinserexytipodigcampo" /></td>' +
-		'			<td>Campo &uacute;nico</td>' +
+		'			<td>'+$trad(21,i3GEOF.inserexy.dicionario)+'</td>' +
 		'		</tr>' +
 		'		</table><br>' +
 		'	</div>' +
@@ -252,26 +252,26 @@ i3GEOF.inserexy = {
 		'		</p><p class=paragrafo >Y: '+
 		$inputText("","","i3GEOinserexylatitude","dms",16,"") +
 		'	</p></div>' +
-		'	<br><p class=paragrafo ><input id=i3GEOinserexybotao2 type="button" size=14 value="Insere"  />' +
+		'	<br><p class=paragrafo ><input id=i3GEOinserexybotao2 type="button" size=14 value="'+$trad(16,i3GEOF.inserexy.dicionario)+'"  />' +
 		'	<div id=i3GEOinserexymen2 style="left:0px;">' +
-		'		<p class=paragrafo >Digite as coordenadas do ponto desejado e clique em "Insere".' +
-		'		<p class=paragrafo >A coordenada X corresponde a longitude (leste-oeste) e a coordenada Y corresponde a latitude (norte-sul).' +
-		'		<p class=paragrafo >Os valores devem sempre estar no formato Grau, Minuto e Segundo, sendo que no caso da op&ccedil;&atilde;o de campo &uacute;nico, os valores devem estar separados por espa&ccedil;os. Caso as coordenadas estejam em d&eacute;cimos de grau, utilize a guia "Colar".' +
-		'		<p class=paragrafo >O valor correspondente ao Grau deve receber o sinal de negativo("-") nos casos de longitude oeste (todo o Brasil est&aacute; nesse caso) e nos casos de latitude Sul.<br><br><br>' +
+		'		<p class=paragrafo >'+$trad(22,i3GEOF.inserexy.dicionario)+
+		'		<p class=paragrafo >'+$trad(23,i3GEOF.inserexy.dicionario)+
+		'		<p class=paragrafo >'+$trad(24,i3GEOF.inserexy.dicionario)+
+		'		<p class=paragrafo >'+$trad(25,i3GEOF.inserexy.dicionario)+'<br><br><br>' +
 		'	</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia4obj" style="left:1px;display:none;">' +
-		'	<br><p class=paragrafo >Cole ou digite a lista de coordenadas:</p>' +
+		'	<br><p class=paragrafo >'+$trad(26,i3GEOF.inserexy.dicionario)+':</p>' +
 		$inputText("","","i3GEOinserexycolar","pares",50,"") +
-		'	<br><br><p class=paragrafo ><input id=i3GEOinserexybotao6 type="button" size=14 value="Insere"  /></p>' +
+		'	<br><br><p class=paragrafo ><input id=i3GEOinserexybotao6 type="button" size=14 value="'+$trad(16,i3GEOF.inserexy.dicionario)+'"  /></p>' +
 		'	<div id=i3GEOinserexymen3 style="display:block;left:0px;">' +
-		'		<p class=paragrafo >Cole os valores de X e Y, em d&eacute;cimos de grau, com sinal de negativo para oeste e sul, exemplo:<br> -54.23 -12.5 -50 -5.33<br>' +
+		'		<p class=paragrafo >'+$trad(27,i3GEOF.inserexy.dicionario)+'<br> -54.23 -12.5 -50 -5.33<br>' +
 		'	</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia5obj" style="left:1px;display:none;">' +
-		'	<p class=paragrafo ><input id=i3GEOinserexybotao3 type="button" size=25 value="Lista wkt" /></p>' +
-		'	<p class=paragrafo ><input id=i3GEOinserexybotao4 type="button" size=25 value="Cria tema poligonal" /></p>' +
-		'	<p class=paragrafo ><input id=i3GEOinserexybotao5 type="button" size=25 value="Cria tema linear" /></p>' +
+		'	<p class=paragrafo ><input id=i3GEOinserexybotao3 type="button" size=25 value="'+$trad(28,i3GEOF.inserexy.dicionario)+'" /></p>' +
+		'	<p class=paragrafo ><input id=i3GEOinserexybotao4 type="button" size=25 value="'+$trad(29,i3GEOF.inserexy.dicionario)+'" /></p>' +
+		'	<p class=paragrafo ><input id=i3GEOinserexybotao5 type="button" size=25 value="'+$trad(30,i3GEOF.inserexy.dicionario)+'" /></p>' +
 		'	<div id=i3GEOinserexywktres style="display:block;left:0px">' +
 		'	</div>'+
 		'</div>' +
@@ -408,7 +408,7 @@ i3GEOF.inserexy = {
 				i3GEOF.inserexy.aguarde.visibility = "hidden";
 			}
 		};
-		i3GEO.janela.prompt("T&iacute;tulo do novo tema",funcaoOK,"Pontos inseridos "+parseInt((Math.random() * 100),10));
+		i3GEO.janela.prompt($trad(31,i3GEOF.inserexy.dicionario),funcaoOK,$trad(32,i3GEOF.inserexy.dicionario)+parseInt((Math.random() * 100),10));
 	},
 	/*
 	Function: listaPontos
@@ -429,7 +429,7 @@ i3GEOF.inserexy = {
 				$i("i3GEOinserexyguia6obj").innerHTML = ins.join("");
 			}
 			else
-			{$i("i3GEOinserexyguia6obj").innerHTML = "<p style=color:red >Ocorreu um erro<br>";}
+			{$i("i3GEOinserexyguia6obj").innerHTML = "<p style=color:red >Erro<br>";}
 		};
 		cp = new cpaint();
 		cp.set_response_type("JSON");
@@ -616,7 +616,7 @@ i3GEOF.inserexy = {
 				valoritem = $i("i3GEOinserexyvalorItem").value;
 			}
 			if (tema === "")
-			{i3GEO.janela.tempoMsg("Nenhum tema definido para editar");}
+			{i3GEO.janela.tempoMsg($trad(33,i3GEOF.inserexy.dicionario));}
 			else{
 				temp = function(retorno){
 					if(i3GEO.Interface.ATUAL === "padrao")
@@ -703,7 +703,7 @@ i3GEOF.inserexy = {
 						$i("i3GEOinserexywktres").innerHTML = "<p class=paragrafo >"+ins+"</p>";
 					}
 					else
-					{$i("i3GEOinserexywktres").innerHTML = "<p style=color:red >Ocorreu um erro<br>";}
+					{$i("i3GEOinserexywktres").innerHTML = "<p style=color:red >Erro<br>";}
 				};
 			for (i=0;i<n;i++)
 			{xy.push(divs[i].innerHTML);}
@@ -733,7 +733,7 @@ i3GEOF.inserexy = {
 				y.push(xy[1]);
 			}
 			if(x.length == 0)
-			{i3GEO.janela.tempoMsg("Nenhum ponto encontrado");return;}
+			{i3GEO.janela.tempoMsg($trad(34,i3GEOF.inserexy.dicionario));return;}
 			pontosdistobj = {
 				xpt: x,
 				ypt: y
@@ -744,4 +744,3 @@ i3GEOF.inserexy = {
 		catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
 	}
 };
-
