@@ -64,7 +64,8 @@ i3GEOF.perfil = {
 	/*
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
-	criaJanelaFlutuante: function(){
+	criaJanelaFlutuante: function(pontos){
+		i3GEOF.perfil.pontos = pontos;
 		i3GEOF.perfil.iniciaDicionario();
 	},
 	/*
@@ -74,7 +75,7 @@ i3GEOF.perfil = {
 
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 	*/
-	iniciaDicionario: function(){
+	iniciaDicionario: function(pontos){
 		if(typeof(i3GEOF.perfil.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
 				i3GEO.configura.locaplic+"/ferramentas/perfil/dicionario.js",
@@ -139,7 +140,9 @@ i3GEOF.perfil = {
 	*/
 	iniciaJanelaFlutuante: function(pontos){
 		var minimiza,cabecalho,janela,divid,titulo;
-		i3GEOF.perfil.pontos = pontos;
+		if(pontos){
+			i3GEOF.perfil.pontos = pontos;
+		}
 		//cria a janela flutuante
 		titulo = $trad("x54")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=96' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
@@ -185,13 +188,17 @@ i3GEOF.perfil = {
 					{$i("i3GEOperfilfim").innerHTML = "Erro ao acessar o servi&ccedil;o de fornecimento dos dados";return;}
 					i3GEOF.perfil.converteDados(retorno.data.results);
 					if(!$i("i3GEOF.graficointerativo_script")){
-						var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
+						var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js";
 						i3GEO.util.scriptTag(js,"i3GEOF.perfil.iniciaGrafico()","i3GEOF.graficointerativo_script");
+					}
+					else{
+						i3GEOF.perfil.iniciaGrafico();
 					}
 					//&eacute; obrigado mostrar o mapa do google quando o perfil usa o google
 					if($i("i3GEOFperfilFonteGoogle").checked === true && i3GEO.Interface.ATUAL !== "googlemaps"){
 						i3GEO.navega.dialogo.google(i3GEOF.perfil.listaPontos(true).split(","));
 					}
+
 				}
 			};
 			if($i("i3GEOFperfilFonteGoogle").checked === true){
@@ -247,7 +254,7 @@ i3GEOF.perfil = {
 		for(i=0;i<n;i++){
 			lista.push(ys[i]+" "+xs[i]);
 		}
-		return lista.toString(",");
+		return lista.join(",");
 	},
 	/*
 	Function: converteDados
@@ -265,11 +272,10 @@ i3GEOF.perfil = {
 		var n = google.length,
 			i = 0,
 			dados = ["n;x"];
-		for (i=0; i<n;i++){
-			dados.push(i+";"+google[i].elevation);
+		for (i=0;i<n;i++){
+			dados.push(i + ";" + google[i].elevation);
 		}
 		i3GEOF.perfil.dadosGrafico = dados;
-		return dados;
 	},
 	/*
 	Function: comboTemas

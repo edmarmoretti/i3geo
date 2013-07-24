@@ -231,7 +231,9 @@ i3GEOF.graficointerativo = {
 				i3GEOF.graficointerativo.montaTabelaDados(i3GEOF.graficointerativo.dados);
 				$i("i3GEOgraficointerativoguia4").onclick.call();
 			}
-			i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia1","i3GEOgraficointerativoguia");
+			else{
+				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia1","i3GEOgraficointerativoguia");
+			}
 		//}
 		//catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -359,6 +361,9 @@ i3GEOF.graficointerativo = {
 			cabecalho,
 			minimiza
 		);
+		if(!janela){
+			return;
+		}
 		divid = janela[2].id;
 		i3GEOF.graficointerativo.aguarde = $i("i3GEOF.graficointerativo_imagemCabecalho").style;
 		$i("i3GEOF.graficointerativo_corpo").style.backgroundColor = "white";

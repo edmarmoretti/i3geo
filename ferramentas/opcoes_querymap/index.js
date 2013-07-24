@@ -65,7 +65,7 @@ i3GEOF.opcoesQuery = {
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.opcoesQuery.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/opcoes_query/dicionario.js",
+				i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/dicionario.js",
 				"i3GEOF.opcoesQuery.iniciaJanelaFlutuante()",
 				"i3GEOF.opcoesQuery.dicionario_script"
 			);
@@ -95,7 +95,7 @@ i3GEOF.opcoesQuery = {
 				cp = new cpaint(),
 				retorno = function(retorno){
 					i3GEOF.opcoesQuery.aguarde.visibility = "hidden";
-					if(retorno.data.erro){i3GEO.janela.tempoMsg("Ocorreu um erro");return;}
+					if(retorno.data.erro){i3GEO.janela.tempoMsg("Erro");return;}
 					$i("i3GEOopcoesQuerycor").value = retorno.data;
 				};
 			cp.set_response_type("JSON");
@@ -116,7 +116,7 @@ i3GEOF.opcoesQuery = {
 		var ins = $inputText("","","i3GEOopcoesQuerycor","",12,"") +
 		'<img alt="aquarela.gif" style=cursor:pointer '+
 		'src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesQuery.corj(\'i3GEOopcoesQuerycor\')" /> ' +
-		'<br><br><p class=paragrafo ><input size=20 id=i3GEOopcoesQuerybotao1 type=button value="Aplica"  />';
+		'<br><br><p class=paragrafo ><input size=20 id=i3GEOopcoesQuerybotao1 type=button value="'+$trad(1,i3GEOF.opcoesQuery.dicionario)+'"  />';
 		return ins;
 	},
 	/*

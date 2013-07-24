@@ -117,16 +117,16 @@ i3GEOF.opcoesTamanho = {
 	html:function(){
 		var ins = '<table summary="" class=lista width="100%">' +
 		'<table summary="" class=lista > '+
-		'	<tr><td>Largura:</td><td>' +
+		'	<tr><td>'+$trad(1,i3GEOF.opcoesTamanho.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOopcoesTamanhol","",4,i3GEO.parametros.w) +
 		'	</td></tr><tr><td>&nbsp;</td><td></td></tr>'+
-		'	<tr><td>Altura:</td><td>' +
+		'	<tr><td>'+$trad(2,i3GEOF.opcoesTamanho.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOopcoesTamanhoa","",4,i3GEO.parametros.h) +
 		'	</td></tr><tr><td>&nbsp;</td><td></td></tr>'+
 		'</table>' +
-		'<p class=paragrafo >Valores em pixels.</p>' +
-		'<p class=paragrafo ><input id=i3GEOopcoesTamanhobotao2 size=16  type=button value="Testa"/>' +
-	  	'<input id=i3GEOopcoesTamanhobotao1 size=16  type=button value="Aplicar"/>';
+		'<p class=paragrafo >'+$trad(3,i3GEOF.opcoesTamanho.dicionario)+'</p>' +
+		'<p class=paragrafo ><input id=i3GEOopcoesTamanhobotao2 size=16  type=button value="'+$trad(4,i3GEOF.opcoesTamanho.dicionario)+'"/>' +
+	  	'<input id=i3GEOopcoesTamanhobotao1 size=16  type=button value="'+$trad(5,i3GEOF.opcoesTamanho.dicionario)+'"/>';
 		return ins;
 	},
 	/*
