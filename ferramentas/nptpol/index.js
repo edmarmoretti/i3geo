@@ -145,23 +145,23 @@ i3GEOF.nptpol = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outro com pol&iacute;gonos considerando-se a extens&atilde;o geogr&aacute;fica do mapa atual.</p>";
-		ins += "<p class='paragrafo'>O resultado ser&aacute; um novo tema do tipo poligonal, sendo que a tabela de atributos conter&aacute; o total de pontos que se sobrep&otilde;em ao pol&iacute;gono.</p>";
-		ins += "<p class='paragrafo'>Para gerar o cruzamento &eacute; necess&aacute;rio que no mapa exista pelo menos um tema poligonal e um com os pontos.</p>";
+		var ins = "<p class='paragrafo'>"+$trad(1,i3GEOF.nptpol.dicionario)+"</p>";
+		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.nptpol.dicionario)+"</p>";
+		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.nptpol.dicionario)+"</p>";
 		i3GEO.util.proximoAnterior("","i3GEOF.nptpol.t1()",ins,"i3GEOFgradeDePontost0","i3GEOnptpolresultado");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo' >Tema contendo os pontos:<br>";
+		var ins = "<p class='paragrafo' >"+$trad(4,i3GEOF.nptpol.dicionario)+":<br>";
 		ins += "<div style='text-align:left;' id='i3GEOnptpolDivPontos' ></div><br>";
-		ins += "<p class='paragrafo' >Tema contendo os pol&iacute;gonos:<br>";
+		ins += "<p class='paragrafo' >"+$trad(5,i3GEOF.nptpol.dicionario)+":<br>";
 		ins += "<div style='text-align:left;' id='i3GEOnptpolDivPoligonos' ></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t0()","i3GEOF.nptpol.t2()",ins,"i3GEOF.nptpol.t1","i3GEOnptpolresultado");
 		i3GEOF.nptpol.comboTemasPontos();
 		i3GEOF.nptpol.comboTemasPoligonos();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo'>O tema com o cruzamento ser&aacute; adicionado ao mapa atual.";
-		ins += "<br><br><input id=i3GEOnptpolbotao1 type='buttom' value='Calcular' />";
+		var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.nptpol.dicionario);
+		ins += "<br><br><input id=i3GEOnptpolbotao1 type='buttom' value='"+$trad(7,i3GEOF.nptpol.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t1()","",ins,"i3GEOF.nptpol.t2","i3GEOnptpolresultado");
 		new YAHOO.widget.Button(
 			"i3GEOnptpolbotao1",
@@ -186,7 +186,7 @@ i3GEOF.nptpol = {
 			cp,
 			fim = function(retorno){
 				if (retorno.data==undefined )
-				{$i("i3GEOnptpolfim").innerHTML = "<p class='paragrafo' >Erro. A opera&ccedil;&atilde;o demorou muito.";}
+				{$i("i3GEOnptpolfim").innerHTML = "<p class='paragrafo' >Erro";}
 				else
 				{i3GEO.atualiza();}
 				i3GEOF.nptpol.aguarde.visibility = "hidden";

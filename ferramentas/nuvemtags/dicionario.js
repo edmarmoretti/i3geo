@@ -1,55 +1,55 @@
 //+$trad(1,i3GEOF.nuvemtags.dicionario)+
 i3GEOF.nuvemtags.dicionario = {
 1: [{
-pt:"",
+pt:"Escolha o RSS para cruzar com a lista de tags ou digite um novo valor",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
+pt:"Cruzar",
 en:"",
 es:"",
 it:""
 }],
 3: [{
-pt:"",
+pt:"Digite um endereco RSS",
 en:"",
 es:"",
 it:""
 }],
 4: [{
-pt:"",
+pt:"Lista",
 en:"",
 es:"",
 it:""
 }],
 5: [{
-pt:"",
+pt:"Cruzamento",
 en:"",
 es:"",
 it:""
 }],
 6: [{
-pt:"",
+pt:"Clique na TAG para localizar temas relacionados. Os temas encontrados s&atilde;o mostrados na &aacute;rvore de temas",
 en:"",
 es:"",
 it:""
 }],
 7: [{
-pt:"",
+pt:"menos tags",
 en:"",
 es:"",
 it:""
 }],
 8: [{
-pt:"",
+pt:"mais tags",
 en:"",
 es:"",
 it:""
 }],
 9: [{
-pt:"",
+pt:"Nenhum tag encontrado",
 en:"",
 es:"",
 it:""

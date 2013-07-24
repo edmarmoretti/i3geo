@@ -93,7 +93,7 @@ i3GEOF.opcoesFundo = {
 				cp = new cpaint(),
 				retorno = function(retorno){
 					i3GEOF.opcoesFundo.aguarde.visibility = "hidden";
-					if(retorno.data.erro){i3GEO.janela.tempoMsg("Ocorreu um erro");return;}
+					if(retorno.data.erro){i3GEO.janela.tempoMsg("Erro");return;}
 					$i("i3GEOopcoesFundocor").value = retorno.data;
 				};
 			cp.set_response_type("JSON");
@@ -101,7 +101,7 @@ i3GEOF.opcoesFundo = {
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 		if(i3GEO.Interface.ATUAL === "googlemaps" || i3GEO.Interface.ATUAL === "googleearth")
-		{i3GEO.janela.tempoMsg("Essa operacao afeta apenas a ferramenta de impressao do mapa");}
+		{i3GEO.janela.tempoMsg($trad(1,i3GEOF.opcoesFundo.dicionario));}
 	},
 	/*
 	Function: html
@@ -116,7 +116,7 @@ i3GEOF.opcoesFundo = {
 		var ins = $inputText("","","i3GEOopcoesFundocor","",12,"") +
 		'<img alt="aquarela.gif" style=cursor:pointer '+
 		'src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesFundo.corj(\'i3GEOopcoesFundocor\')" /> ' +
-		'<br><br><p class=paragrafo ><input size=20 id=i3GEOopcoesFundobotao1 type=button value="Aplica"  />';
+		'<br><br><p class=paragrafo ><input size=20 id=i3GEOopcoesFundobotao1 type=button value="'+$trad(2,i3GEOF.opcoesFundo.dicionario)+'"  />';
 		return ins;
 	},
 	/*

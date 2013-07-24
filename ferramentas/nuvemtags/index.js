@@ -121,7 +121,7 @@ i3GEOF.nuvemtags = {
 			$i("i3GEOnuvemtagsguia2").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOnuvemtagsguia2","i3GEOnuvemtagsguia");
 
-				var i,ins = "<p class=paragrafo >Escolha o RSS para cruzar com a lista de tags ou digite um novo valor</p>",
+				var i,ins = "<p class=paragrafo >"+$trad(1,i3GEOF.nuvemtags.dicionario)+"</p>",
 					n = i3GEOF.nuvemtags.listaRSS.length;
 				ins += $inputText("","","i3GEOnuvemtagsRSS","",65,"");
 				ins += "<br><br><p class=paragrafo ><select onchange='javascript:$i(\"i3GEOnuvemtagsRSS\").value = this.value' >";
@@ -130,7 +130,7 @@ i3GEOF.nuvemtags = {
 					ins += "<option value='"+i3GEOF.nuvemtags.listaRSS[i]+"' >"+i3GEOF.nuvemtags.listaRSS[i]+"</option>";
 				}
 				ins += "</select>";
-				ins += "<br><p class=paragrafo ><input type=buttom value=Cruzar id=i3GEOnuvemtagsbotao3 />";
+				ins += "<br><p class=paragrafo ><input type=buttom value="+$trad(2,i3GEOF.nuvemtags.dicionario)+" id=i3GEOnuvemtagsbotao3 />";
 				$i("i3GEOnuvemtagsguia2obj").innerHTML = ins;
 
 				new YAHOO.widget.Button(
@@ -147,7 +147,7 @@ i3GEOF.nuvemtags = {
 									i3GEOF.nuvemtags.montaNuvem();
 									i3GEO.guias.mostraGuiaFerramenta("i3GEOnuvemtagsguia1","i3GEOnuvemtagsguia");
 								};
-							if (rss == ""){i3GEO.janela.tempoMsg("Digite um endereco RSS");return;}
+							if (rss == ""){i3GEO.janela.tempoMsg($trad(3,i3GEOF.nuvemtags.dicionario));return;}
 							i3GEOF.nuvemtags.aguarde.visibility = "visible";
 							cp.set_response_type("JSON");
 							cp.call(p,"listaTags",temp);
@@ -173,8 +173,8 @@ i3GEOF.nuvemtags = {
 		var ins = '' +
 		'<div id=i3GEOnuvemtagsguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a href="#ancora"><em><div id="i3GEOnuvemtagsguia1" style="text-align:center;left:0px;" >Lista</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOnuvemtagsguia2" style="text-align:center;left:0px;" >Cruzamento</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOnuvemtagsguia1" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.nuvemtags.dicionario)+'</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOnuvemtagsguia2" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.nuvemtags.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'<div class=guiaobj id="i3GEOnuvemtagsguia1obj" style="left:1px;display:none;">' +
@@ -252,9 +252,9 @@ i3GEOF.nuvemtags = {
 			r,
 			n;
 		if(retorno.data){
-			tags = "<p class=paragrafo >Clique na TAG para localizar temas relacionados. Os temas encontrados s&atilde;o mostrados na &aacute;rvore de temas</p>";
-			tags += "<p class=paragrafo ><input type=buttom id=i3GEOnuvemtagsbotao1 value='menos tags' />&nbsp;";
-			tags +="<input type=buttom id=i3GEOnuvemtagsbotao2 value='mais tags' /></p>";
+			tags = "<p class=paragrafo >"+$trad(6,i3GEOF.nuvemtags.dicionario)+"</p>";
+			tags += "<p class=paragrafo ><input type=buttom id=i3GEOnuvemtagsbotao1 value='"+$trad(7,i3GEOF.nuvemtags.dicionario)+"' />&nbsp;";
+			tags +="<input type=buttom id=i3GEOnuvemtagsbotao2 value='"+$trad(8,i3GEOF.nuvemtags.dicionario)+"' /></p>";
 			//tags +="<span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='javascript:flash();' style='cursor:pointer;vertical-align:middle;color:navy;font-size:'12'pt;'>animar</span><br><br>"
 			if((i3GEOF.nuvemtags.inicio < 0) || (i3GEOF.nuvemtags.inicio > retorno.data.length))
 			{return;}
@@ -278,7 +278,7 @@ i3GEOF.nuvemtags = {
 			}
 		}
 		else
-		{tags = "Nenhum tag encontrado";}
+		{tags = $trad(9,i3GEOF.nuvemtags.dicionario);}
 		$i("i3GEOnuvemtagsguia1obj").innerHTML = tags;
 		new YAHOO.widget.Button(
 			"i3GEOnuvemtagsbotao1",

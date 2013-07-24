@@ -1,61 +1,19 @@
 //+$trad(1,i3GEOF.opcoesTempo.dicionario)+
 i3GEOF.opcoesTempo.dicionario = {
 1: [{
-pt:"",
+pt:"Tempo em segundos ap&oacute;s o qual o mapa ser&aacute; redesenhado automaticamente",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
+pt:"Aplicar",
 en:"",
 es:"",
 it:""
 }],
 3: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-4: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
+pt:"Parar",
 en:"",
 es:"",
 it:""

@@ -104,35 +104,35 @@ i3GEOF.mostraExten = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<p class="paragrafo" >Extens&atilde;o geogr&aacute;fica atual, em d&eacute;cimos de grau. As coordenadas correspondem a menor longitude, menor latitude, maior longitude e maior latitude:</p>' +
+		var ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.mostraExten.dicionario)+':</p>' +
 		'<textarea id=i3GEOmostraExtenatual rows=3 cols=50 onclick="javascript:this.select();"></textarea>' +
-		'<p class="paragrafo" >	Digite as coordenadas referentes a nova extens&atilde;o geogr&aacute;fica desejada para o mapa. Utilize coordenadas (graus) negativos para indicar a longitude como oeste e latitude como sul:</p>' +
+		'<p class="paragrafo" >	'+$trad(2,i3GEOF.mostraExten.dicionario)+':</p>' +
 		'	<table class=lista3 >' +
-		'		<tr><td>Menor longitude (oeste):</td>' +
+		'		<tr><td>'+$trad(3,i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
 		$inputText("","","i3GEOmostraExtenxg","",3,"-00") +
 		$inputText("","","i3GEOmostraExtenxm","",3,"00") +
 		$inputText("","","i3GEOmostraExtenxs","",3,"0.0") +
 		'		</td></tr>' +
-		'		<tr><td>Menor latitude (sul):</td>' +
+		'		<tr><td>'+$trad(4,i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
 		$inputText("","","i3GEOmostraExtenyg","",3,"-00") +
 		$inputText("","","i3GEOmostraExtenym","",3,"00") +
 		$inputText("","","i3GEOmostraExtenys","",3,"0.0") +
 		'		</td></tr>' +
-		'		<tr><td>Maior longitude (leste):</td>' +
+		'		<tr><td>'+$trad(5,i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
 		$inputText("","","i3GEOmostraExtenxxg","",3,"-00") +
 		$inputText("","","i3GEOmostraExtenxxm","",3,"00") +
 		$inputText("","","i3GEOmostraExtenxxs","",3,"0.0") +
 		'		</td></tr>' +
-		'		<tr><td>Maior latitude (norte):</td>' +
+		'		<tr><td>'+$trad(6,i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
 		$inputText("","","i3GEOmostraExtenyyg","",3,"-00") +
 		$inputText("","","i3GEOmostraExtenyym","",3,"00") +
 		$inputText("","","i3GEOmostraExtenyys","",3,"0.0") +
 		'		</td></tr></table>' +
-		'<br><p class="paragrafo" ><input id=i3GEOmostraExtenbotao1 type="button" size=14 value="Aplicar a nova extens&atilde;o"  /></p>';
+		'<br><p class="paragrafo" ><input id=i3GEOmostraExtenbotao1 type="button" size=14 value="'+$trad(7,i3GEOF.mostraExten.dicionario)+'"  /></p>';
 		return ins;
 	},
 	/*
@@ -202,11 +202,11 @@ i3GEOF.mostraExten = {
 			var y = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyg").value,$i("i3GEOmostraExtenym").value,$i("i3GEOmostraExtenys").value);
 			var yy = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyyg").value,$i("i3GEOmostraExtenyym").value,$i("i3GEOmostraExtenyys").value);
 			if ((x == xx) || (y == yy))
-			{i3GEO.janela.tempoMsg("Digite coordenadas v&aacute;lidas");return;}
+			{i3GEO.janela.tempoMsg($trad(8,i3GEOF.mostraExten.dicionario));return;}
 			if ((x > xx) || (y > yy))
-			{i3GEO.janela.tempoMsg("Digite coordenadas v&aacute;lidas");return;}
+			{i3GEO.janela.tempoMsg($trad(8,i3GEOF.mostraExten.dicionario));return;}
 			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,window.parent.i3GEO.parametros.tipoimagem,(x+" "+y+" "+xx+" "+yy));
 		}
-		catch(e){i3GEO.janela.tempoMsg(e+" Erro. Digite coordenadas v&aacute;lidas");}
+		catch(e){i3GEO.janela.tempoMsg(e+" Erro.");}
 	}
 };
