@@ -174,7 +174,8 @@ if(!isset($tema)){
 }
 
 //nome do mapfile que ficara em cache
-$nomeMapfileTmp = $dir_tmp."/ogc_".md5($tema).".map";
+$agora = intval(time() / 1000);
+$nomeMapfileTmp = $dir_tmp."/ogc_".md5($tema)."_".$agora.".map";
 $nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
 $nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
