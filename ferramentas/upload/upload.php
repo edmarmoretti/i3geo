@@ -47,27 +47,32 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	verificaNome($_FILES['i3GEOuploaddbf']['name']);
 	//remove acentos
 	$nomePrefixo = str_replace(" ","_",removeAcentos(str_replace(".shp","",$_FILES['i3GEOuploadshp']['name'])));
-	$nomePrefixo = $nomePrefixo."_".(nomeRandomico(4));
+	if(file_exists($dirmap."/".$nomePrefixo.".shp")){
+		$nomePrefixo = $nomePrefixo."_".(nomeRandomico(4));
+	}
+
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploadshp']['tmp_name'];
 	if(file_exists($dirmap."/".$nomePrefixo.".shp"))
-	{echo "<p class='paragrafo' >J&aacute; existe um SHP com o nome ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}	
+	{echo "<p class='paragrafo' >J&aacute; existe um SHP com o nome ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shp");
 	if($status != 1)
-	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP";paraAguarde();exit;}	
+	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP";paraAguarde();exit;}
 	$Arquivo = $_FILES['i3GEOuploadshx']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shx");
 	if($status != 1)
-	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHX";paraAguarde();exit;}	
+	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHX";paraAguarde();exit;}
 	$Arquivo = $_FILES['i3GEOuploaddbf']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".dbf");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo DBF";paraAguarde();exit;}
-	
+
 	if(!file_exists($dirmap."/".$nomePrefixo.".shp"))
-	{echo "<p class='paragrafo' >Ocorreu algum problema no envio do arquivo ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}	
-	
+	{echo "<p class='paragrafo' >Ocorreu algum problema no envio do arquivo ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}
+
 	echo "<p class='paragrafo' >Arquivo enviado.</p>";
+	echo "<p class='paragrafo'>Nome: ".$dirmap."/".$nomePrefixo.".shp </p>";
+
 	if(isset($map_file)){
 		echo "<p class='paragrafo' >Adicionando tema...</p>";
 		$novolayer = ms_newLayerObj($mapa);
@@ -95,7 +100,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 			$estilo->set("size",6);
 		}
 		$estilo->color->setrgb(200,50,0);
-		$estilo->outlinecolor->setrgb(0,0,0);		
+		$estilo->outlinecolor->setrgb(0,0,0);
 		// le os itens
 		$novolayer->set("status",MS_DEFAULT);
 		$abriu = $novolayer->open();
@@ -119,7 +124,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 }
 else
 {
-	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";	
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
 }
 paraAguarde();
 function paraAguarde(){
