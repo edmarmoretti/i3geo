@@ -308,8 +308,8 @@ function montaDivTema(i){
 					m = filhos.length;
 					for(j=0;j<m;j++){
 						b = {};
-						b.text = filhos[j].titulo;
-						b.url = 'javascript:$i(\"Eid_medida_variavel\").value=\"'+filhos[j].id+'\"';
+						b.text = "<b>"+(j+1)+"</b>&nbsp;" + filhos[j].titulo+"<br><br>";
+						b.url = 'javascript:$i(\"Etitulo\").value=\"'+filhos[j].titulo+'\";$i(\"Eid_medida_variavel\").value=\"'+filhos[j].id+'\"';
 						a.push(b);
 					}
 					core_arvore(o[i].titulo,"arvore_"+i,{"propriedades":a});
@@ -427,7 +427,7 @@ function excluir(tipo,id)
 	}
 	if(tipo == "tema")
 	{
-		no = tree.getNodeByProperty("id_tema",id);
+		no = tree.getNodeByProperty("id_mapa_tema",id);
 		sUrl = "../php/metaestat.php?funcao=excluirMapaTema&id_mapa_tema="+id;
 	}
 	if(sUrl)

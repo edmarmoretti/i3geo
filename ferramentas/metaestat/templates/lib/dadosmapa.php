@@ -26,7 +26,11 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 */
-function dadosmapa($loc){
+function dadosmapa($loc==""){
+	global $id;
+	if($loc == ""){
+		$loc = dirname(__FILE__)."/../../../..";
+	}
 	include($loc."/admin/php/admin.php");
 	include($loc."/admin/php/classe_metaestat.php");
 	if(empty($id)){
