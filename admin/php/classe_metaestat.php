@@ -375,7 +375,7 @@ class Metaestat{
 			$n = count($colunas);
 			for($i=0;$i<$n;$i++){
 				if($colunas[$i] === $dados["colunavalor"]){
-					$alias[$i] = mb_convert_encoding($dados["nomemedida"],"ISO-8859-1",mb_detect_encoding($dados["nomemedida"]));
+					$alias[$i] = "Valor";//mb_convert_encoding($dados["nomemedida"],"ISO-8859-1",mb_detect_encoding($dados["nomemedida"]));
 				}
 			}
 			$aliasvis = $dadosgeo["apelidos"];
@@ -403,11 +403,15 @@ class Metaestat{
 		$tipoconta = "";
 		if($dados["permitesoma"] == 1){
 			$tipoconta = "sum";
-			$titulo .= " - soma";
+			if($agregaregiao == true){
+				$titulo .= " - soma";
+			}
 		}
 		elseif($dados["permitemedia"] == 1){
 			$tipoconta = "avg";
-			$titulo .= " - media";
+			if($agregaregiao == true){
+				$titulo .= " - media";
+			}
 		}
 		$sqlagrupamento = "";
 		$dadosfiltro = "";
@@ -544,7 +548,7 @@ class Metaestat{
 			else{
 				$titulolayer = mb_convert_encoding($sql["titulo"],"ISO-8859-1",mb_detect_encoding($sql["titulo"]));
 			}
-			
+
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
 			$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';

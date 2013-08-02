@@ -44,7 +44,8 @@ body {
 				echo "Arquivo $mapfile n&atilde;o existe.";exit;
 			}
 			//remove o cache OGC
-			$nomeMapfileTmp = $dir_tmp."/ogc_".md5($mapfile).".map";
+			$agora = intval(time() / 1000);
+			$nomeMapfileTmp = $dir_tmp."/ogc_".md5($mapfile)."_".$agora.".map";
 			$nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
 			$nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
 			chmod($nomeMapfileTmp,0777);
@@ -63,10 +64,12 @@ body {
 			echo file_get_contents($mapfile);
 			echo "</TEXTAREA>";
 			$mapfile = str_replace("\\","/",$mapfile);
+			$mapa = ms_newMapObj($mapfile);
 			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=490&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
 			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
-			$mapa = ms_newMapObj($mapfile);
+
+
 			$n = $mapa->numlayers;
 			echo "<br><br>Colunas dos layers:<br><br>";
 			for($i=0;$i<$n;$i++){
