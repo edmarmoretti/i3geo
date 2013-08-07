@@ -117,13 +117,13 @@ i3GEOF.perfil = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = "<p class='paragrafo' >Escolha qual ser&aacute; a fonte dos dados de Z:";
-		ins += "<p class='paragrafo' ><input onclick='if(this.checked == true){$i(\"i3GEOFperfilTemasSel\").value = \"\";$i(\"i3GEOFperfilDivComboItens\").innerHTML = \"\";}' style=cursor:pointer checked type=radio name=i3GEOFperfilFonte id=i3GEOFperfilFonteGoogle /> Google ou";
-		ins += "<p class='paragrafo' >um tema do mapa: <div style=text-align:left; id=i3GEOFperfilTemas ></div>";
+		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.perfil.dicionario);
+		ins += "<p class='paragrafo' ><input onclick='if(this.checked == true){$i(\"i3GEOFperfilTemasSel\").value = \"\";$i(\"i3GEOFperfilDivComboItens\").innerHTML = \"\";}' style=cursor:pointer checked type=radio name=i3GEOFperfilFonte id=i3GEOFperfilFonteGoogle /> Google";
+		ins += "<p class='paragrafo' >"+$trad(2,i3GEOF.perfil.dicionario)+" <div style=text-align:left; id=i3GEOFperfilTemas ></div>";
 		ins += "<div style=text-align:left; id=i3GEOFperfilDivComboItens ></div><br>";
 
-		ins += "<p class='paragrafo' ><input type=text id=i3GEOFperfilAmostragem value=20 size=3 /> N&uacute;mero de pontos que ser&atilde;o obtidos ao longo da linha";
-		ins += "<br><br><input id=i3GEOperfilbotao1 type='buttom' value='Criar gr&aacute;fico' />";
+		ins += "<p class='paragrafo' ><input type=text id=i3GEOFperfilAmostragem value=20 size=3 /> "+$trad(3,i3GEOF.perfil.dicionario);
+		ins += "<br><br><input id=i3GEOperfilbotao1 type='buttom' value='"+$trad(4,i3GEOF.perfil.dicionario)+"' />";
 		ins += "<br><br><div style=text-align:left id=i3GEOperfilfim ></div>";
 		return ins;
 	},
@@ -185,7 +185,7 @@ i3GEOF.perfil = {
 				{$i("i3GEOperfilfim").innerHTML = "Erro.";return;}
 				else{
 					if(retorno.data.status != "OK")
-					{$i("i3GEOperfilfim").innerHTML = "Erro ao acessar o servi&ccedil;o de fornecimento dos dados";return;}
+					{$i("i3GEOperfilfim").innerHTML = $trad(5,i3GEOF.perfil.dicionario);return;}
 					i3GEOF.perfil.converteDados(retorno.data.results);
 					if(!$i("i3GEOF.graficointerativo_script")){
 						var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js";
@@ -209,9 +209,9 @@ i3GEOF.perfil = {
 			else{
 				var pontos = i3GEOF.perfil.listaPontos(false);
 				if($i("i3GEOFperfilTemasSel").value === "")
-				{i3GEO.janela.tempoMsg("Selecione um tema");return;}
+				{i3GEO.janela.tempoMsg($trad(6,i3GEOF.perfil.dicionario));return;}
 				if($i("i3GEOFperfilComboItens").value === "")
-				{i3GEO.janela.tempoMsg("Selecione um item");return;}
+				{i3GEO.janela.tempoMsg($trad(7,i3GEOF.perfil.dicionario));return;}
 				i3GEOF.perfil.aguarde.visibility = "visible";
 				i3GEO.php.dadosPerfilRelevo(fim,$i("i3GEOFperfilTemasSel").value,pontos,$i("i3GEOFperfilAmostragem").value,$i("i3GEOFperfilComboItens").value);
 			}
@@ -302,7 +302,7 @@ i3GEOF.perfil = {
 								"i3GEOFperfilComboItens",
 								i3GEO.temaAtivo,
 								function(retorno){
-									$i("i3GEOFperfilDivComboItens").innerHTML = "<p class=paragrafo >Item com os valores: <br>"+retorno.dados+"</p>";
+									$i("i3GEOFperfilDivComboItens").innerHTML = "<p class=paragrafo >"+$trad(8,i3GEOF.perfil.dicionario)+" <br>"+retorno.dados+"</p>";
 								}
 							);
 						}

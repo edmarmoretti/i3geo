@@ -96,12 +96,12 @@ i3GEOF.salvamapfile = {
 					i3GEOF.salvamapfile.aguarde.visibility = "hidden";
 					var nome = retorno.data.nomeoriginal;
 					if(nome == ""){
-						$i(iddiv).innerHTML = "<p class=paragrafo >N&atilde;o existe um arquivo mapfile cadastrado para essa camada. Utilize o sistema de administra&ccedil;&atilde;o para <a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >criar um</a>";
+						$i(iddiv).innerHTML = "<p class=paragrafo >"+$trad(1,i3GEOF.salvamapfile.dicionario)+"<a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >link</a>";
 					}
 					else{
-						var ins = "<p class=paragrafo >Apenas usu&aacute;rios cadastrados como editores podem salvar um mapfile. O tema ("+nome+") ativo possui um mapfile j&aacute; criado. Ao salvar, as defini&ccedil;&otilde;es originais  de legenda, filtros e outras, ser&atilde;o substitu&iacute;das pelas atuais" +
-						'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > Conclu&iacute;do!</span></p>' +
-						'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="Salvar"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="Testar"  />';
+						var ins = "<p class=paragrafo >"+$trad(2,i3GEOF.salvamapfile.dicionario) +
+						'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > '+$trad(3,i3GEOF.salvamapfile.dicionario)+'</span></p>' +
+						'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="'+$trad(4,i3GEOF.salvamapfile.dicionario)+'"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="'+$trad(5,i3GEOF.salvamapfile.dicionario)+'"  />';
 						$i(iddiv).innerHTML = ins;
 						new YAHOO.widget.Button(
 							"i3GEOsalvamapfilebotao1",

@@ -95,7 +95,7 @@ i3GEOF.selecao = {
 			};
 			$i("i3GEOselecaoguia2").onclick = function(){
 				if($i("i3GEOselecaotemasLigados").value === "")
-				{i3GEO.janela.tempoMsg("Selecione um tema primeiro");return;}
+				{i3GEO.janela.tempoMsg($trad(1,i3GEOF.selecao.dicionario));return;}
 				i3GEO.mapa.ativaTema($i("i3GEOselecaotemasLigados").value);
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOselecaoguia2","i3GEOselecaoguia");
 				try
@@ -153,49 +153,49 @@ i3GEOF.selecao = {
 		var ins = '' +
 		'<div id=i3GEOselecaoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a href="#ancora"><em><div id="i3GEOselecaoguia1" style="text-align:center;left:0px;" >Mapa</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOselecaoguia2" style="text-align:center;left:0px;" >Atributos</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOselecaoguia3" style="text-align:center;left:0px;" >Cruzamento</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOselecaoguia1" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOselecaoguia2" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOselecaoguia3" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'<div class=guiaobj id="i3GEOselecaoguia1obj" style="left:1px;display:none;top:-5px">' +
 		'	<p class=paragrafo ><button title="Clique no mapa para selecionar" value="i3GEOselecaopt" onclick="i3GEOF.selecao.tiposel(this)"><img id=i3GEOselecaopt src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-one.png" /></button>';
 		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth")
-		{ins += '	<button title="Desenhe um poligono no mapa para selecionar" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaopoli"><img id=i3GEOselecaopoli src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-polygon.png" /></button>';}
-		ins += '	<button title="Seleciona o que estiver visivel no mapa" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaoext" ><img id=i3GEOselecaoext src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" /></button>';
+		{ins += '	<button title="'+$trad(5,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaopoli"><img id=i3GEOselecaopoli src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-polygon.png" /></button>';}
+		ins += '	<button title="'+$trad(6,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaoext" ><img id=i3GEOselecaoext src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" /></button>';
 		if(i3GEO.Interface.ATUAL != "googlemaps" && i3GEO.Interface.ATUAL != "googleearth" && !navm)
-		{ins += '	<button title="Desenhe um retangulo no mapa para selecionar" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaobox" ><img id=i3GEOselecaobox src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-rectangle.png" /></button>';}
-		ins += '	<button title="Inverte a selecao" onclick="i3GEOF.selecao.operacao(\'inverte\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selection-invert.png" /></button>' +
-		'	<button title="Limpa a selecao" onclick="i3GEOF.selecao.operacao(\'limpa\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
-		'	<button title="Salva a selecao como um novo tema" onclick="i3GEOF.selecao.criatema()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" /></button>' +
-		'	<button title="Grafico" onclick="i3GEOF.selecao.grafico()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" /></button>' +
-		'	<button title="Perfil"  onclick="i3GEOF.selecao.graficoPerfil()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/grafico-perfil.png" /></button>' +
+		{ins += '	<button title="'+$trad(7,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaobox" ><img id=i3GEOselecaobox src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-rectangle.png" /></button>';}
+		ins += '	<button title="'+$trad(8,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.operacao(\'inverte\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selection-invert.png" /></button>' +
+		'	<button title="'+$trad(9,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.operacao(\'limpa\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
+		'	<button title="'+$trad(10,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.criatema()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" /></button>' +
+		'	<button title="'+$trad(11,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.grafico()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" /></button>' +
+		'	<button title="'+$trad(12,i3GEOF.selecao.dicionario)+'"  onclick="i3GEOF.selecao.graficoPerfil()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/grafico-perfil.png" /></button>' +
 		'	<div style=margin-left:8px;text-align:left;  >' +
 		'		<p class=paragrafo >' +
-		'		<select title="Tipo de operacao" style=position:relative;top:6px; id=i3GEOselecaotipoOperacao >' +
-		'		<option value="adiciona" >Adicionar à sele&ccedil;&atilde;o</option>' +
-		'		<option value="novo" >Nova sele&ccedil;&atilde;o</option>' +
-		'		<option value="retira" >Retirar da sele&ccedil;&atilde;o</option>' +
+		'		<select title="'+$trad(13,i3GEOF.selecao.dicionario)+'" style=position:relative;top:6px; id=i3GEOselecaotipoOperacao >' +
+		'		<option value="adiciona" >'+$trad(14,i3GEOF.selecao.dicionario)+'</option>' +
+		'		<option value="novo" >'+$trad(15,i3GEOF.selecao.dicionario)+'</option>' +
+		'		<option value="retira" >'+$trad(16,i3GEOF.selecao.dicionario)+'</option>' +
 		'		</select>' +
 		'		<span id=i3GEOselecaoNsel style="position:relative;top:5px;" >0</span></p>' +
-		'		<p class=paragrafo >Temas:<div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
-		'		<br><p class=paragrafo >Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):' +
+		'		<p class=paragrafo >'+$trad(17,i3GEOF.selecao.dicionario)+'<div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
+		'		<br><p class=paragrafo >'+$trad(18,i3GEOF.selecao.dicionario) +
 		$inputText("","","i3GEOselecaotoleranciapt","",3,"0") +
 		'		</p><div id=i3GEOselecaomen1 style=left:0px;width:100%; >' +
-		'		<p class=paragrafo >Escolha o(s) tema(s) alvo(s) e o tipo de opera&ccedil;&atilde;o. ' +
-		'		Depois, clique no mapa sobre o elemento desejado.</p>' +
+		'		<p class=paragrafo >'+$trad(19,i3GEOF.selecao.dicionario) +
+		'		</p>' +
 		'		</div> '+
 		'	</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOselecaoguia2obj" style="left:1px;display:none;">' +
-		'	<p class=paragrafo ><input id=i3GEOselecaobotao1 size=18  type="button" value="Selecionar" /></p>'+
+		'	<p class=paragrafo ><input id=i3GEOselecaobotao1 size=18  type="button" value="'+$trad(20,i3GEOF.selecao.dicionario)+'" /></p>'+
 		'	<table summary="" id="i3GEOselecaoparametros" style="width:330px" >'+
 		'		<tbody><tr><td></td><td></td>'+
-		'			<td style=background-color:yellow >Item</td>'+
-		'			<td style=background-color:yellow >Operador</td>'+
-		'			<td style=background-color:yellow >Valor</td>'+
+		'			<td style=background-color:yellow >'+$trad(21,i3GEOF.selecao.dicionario)+'</td>'+
+		'			<td style=background-color:yellow >'+$trad(22,i3GEOF.selecao.dicionario)+'</td>'+
+		'			<td style=background-color:yellow >'+$trad(23,i3GEOF.selecao.dicionario)+'</td>'+
 		'			<td style=background-color:yellow ></td>'+
-		'			<td style=background-color:yellow >Conector</td>'+
+		'			<td style=background-color:yellow >'+$trad(24,i3GEOF.selecao.dicionario)+'</td>'+
 		'		</tr>'+
 		'		<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>'+
 		'	</table>'+
@@ -203,13 +203,13 @@ i3GEOF.selecao = {
 		'	</div>'+
 		'	<div id=i3GEOselecaovalores style="position:relative;top:5px;left:0px">'+
 		'	</div>'+
-		'	<div id=i3GEOselecaomen2 style=top:15px;left:0px; ><p class=paragrafo >Na op&ccedil;&atilde;o IN separe os valores com v&iacute;rgula.</div>'+
+		'	<div id=i3GEOselecaomen2 style=top:15px;left:0px; ><p class=paragrafo >'+$trad(25,i3GEOF.selecao.dicionario)+'</div>'+
 		'</div> '+
 		'<div class=guiaobj id="i3GEOselecaoguia3obj" style="left:1px;display:none;">' +
-		'	<p class=paragrafo >Tema que ser&aacute; utilizado para selecionar o tema definido na guia Mapa (esse tema deve ser do tipo pontual ou poligonal e deve possuir elementos j&aacute; selecionados):</p>'+
+		'	<p class=paragrafo >'+$trad(26,i3GEOF.selecao.dicionario)+'</p>'+
 		'	<div id="i3GEOselecaooverlay" style="text-align:left;left:0px">' +
 		'	</div>' +
-		'	<br><p class=paragrafo ><input id=i3GEOselecaobotao2 size=10 type=button value="Aplicar">' +
+		'	<br><p class=paragrafo ><input id=i3GEOselecaobotao2 size=10 type=button value="'+$trad(27,i3GEOF.selecao.dicionario)+'">' +
 		'</div>';
 		return ins;
 	},
@@ -304,7 +304,7 @@ i3GEOF.selecao = {
 				//verifica qts elementos selecionados
 				if(i3GEO.temaAtivo != ""){
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
-					$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
+					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 				}
 				$i("i3GEOselecaotemasLigados").onchange = function(){i3GEOF.selecao.pegaTemasSel();};
 			},
@@ -348,7 +348,7 @@ i3GEOF.selecao = {
 		i3GEO.mapa.ativaTema(selectedArray[0]);
 		if(i3GEO.temaAtivo != ""){
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
-			$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
+			$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 		}
 		return selectedArray.toString();
 	},
@@ -382,7 +382,7 @@ i3GEOF.selecao = {
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					//verifica qts elementos selecionados
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-					$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
+					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 				};
 			i3GEO.php.selecaopt(fim,tema,"",tipo,0);
 		}
@@ -412,7 +412,7 @@ i3GEOF.selecao = {
 					{i3GEO.atualiza(retorno);}
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-					$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
+					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 				},
 				tema = i3GEOF.selecao.pegaTemasSel();
 			if (obj.value == "i3GEOselecaoext"){
@@ -456,10 +456,10 @@ i3GEOF.selecao = {
 		*/
 		inicia: function(){
 			if($i("i3GEOselecaotemasLigados").value === "")
-			{i3GEO.janela.tempoMsg("Escolha um tema");return;}
+			{i3GEO.janela.tempoMsg($trad(1,i3GEOF.selecao.dicionario));return;}
 			if(g_tipoacao !== 'selecaobox')
 			{return;}
-			
+
 			i3GEO.Interface.openlayers.OLpan.deactivate();
 			i3geoOL.removeControl(i3GEO.Interface.openlayers.OLpan);
 			i3GEOF.selecao.box.criaBox();
@@ -609,7 +609,7 @@ i3GEOF.selecao = {
 			var nsel;
 			i3GEO.Interface.atualizaTema(retorno,tema);
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-			$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
+			$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 		};
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.selecaobox(retorna,tema,tipo,box);
@@ -652,7 +652,7 @@ i3GEOF.selecao = {
 			{i3GEO.atualiza(retorno);}
 			i3GEO.Interface.atualizaTema(retorno,tema);
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-			$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
+			$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 		};
 		//i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.selecaopt(retorna,tema,objposicaocursor.ddx+" "+objposicaocursor.ddy,tipo,tolerancia);
@@ -676,7 +676,7 @@ i3GEOF.selecao = {
 			pontosdistobj = [];
 			i3GEO.util.insereMarca.limpa();
 			g_tipoacao = "selecaopoli";
-			i3GEO.janela.tempoMsg("Clique no mapa para desenhar o pol&iacute;gono.");
+			i3GEO.janela.tempoMsg($trad(29,i3GEOF.selecao.dicionario));
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.selecao.clique()");
 			if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEOF.selecao.poligono.move()") < 0)
 			{i3GEO.eventos.MOUSEMOVE.push("i3GEOF.selecao.poligono.move()");}
@@ -777,7 +777,7 @@ i3GEOF.selecao = {
 				{i3GEO.atualiza(retorno);}
 				i3GEO.Interface.atualizaTema(retorno,tema);
 				nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-				$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
+				$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 			};
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			p = i3GEO.configura.locaplic+"/ferramentas/selecao/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoPoli";
@@ -844,7 +844,7 @@ i3GEOF.selecao = {
 					i3GEO.temaAtivo,
 					itemTema,
 					function(retorno){
-						$i("i3GEOselecaovalores").innerHTML = "<br><p class=paragrafo >Escolha o valor:"+retorno.dados+"</p>";
+						$i("i3GEOselecaovalores").innerHTML = "<br><p class=paragrafo >"+$trad(30,i3GEOF.selecao.dicionario)+":"+retorno.dados+"</p>";
 						if ($i("i3GEOselecaocbitens")){
 							$i("i3GEOselecaocbitens").onchange = function()
 							{obj.value = this.value;};
@@ -853,21 +853,20 @@ i3GEOF.selecao = {
 					"i3GEOselecaovalores"
 				);
 			};
-
 			operador = "<select>";
-			operador += "<option value='='>igual</option>";
-			operador += "<option value='!='>dif</option>";
-			operador += "<option value='<'>menor</option>";
-			operador += "<option value='>'>maior</option>";
-			operador += "<option value='<='><=</option>";
-			operador += "<option value='>='>>=</option>";
-			operador += "<option value='in'>in</option>";
-			operador += "<option value='~='>regExp</option></select>";
+			operador += "<option value='='>=</option>";
+			operador += "<option value='!='> != </option>";
+			operador += "<option value='<'> < </option>";
+			operador += "<option value='>'> > </option>";
+			operador += "<option value='<='> <= </option>";
+			operador += "<option value='>='> >= </option>";
+			operador += "<option value='in'> in </option>";
+			operador += "<option value='~='> regExp </option></select>";
 
 			conector = "<select>";
-			conector += "<option value='and'>e</option>";
-			conector += "<option value='or'>ou</option>";
-			conector += "<option value='not'>n&atilde;o</option></select>";
+			conector += "<option value='and'>and</option>";
+			conector += "<option value='or'>or</option>";
+			conector += "<option value='not'>not</option></select>";
 
 			valor = document.createElement("input");
 			valor.type = "text";
@@ -928,7 +927,7 @@ i3GEOF.selecao = {
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
 		{return;}
 		if($i("i3GEOselecaotemasLigados").value === "")
-		{i3GEO.janela.tempoMsg("Escolha um tema");return;}
+		{i3GEO.janela.tempoMsg($trad(1,i3GEOF.selecao.dicionario));return;}
 		try{
 			i3GEOF.selecao.aguarde.visibility = "visible";
 			var filtro = "",
@@ -989,7 +988,7 @@ i3GEOF.selecao = {
 		if(i3GEOF.selecao.aguarde.visibility === "visible")
 		{return;}
 		if($i("i3GEOselecaotemasLigados").value === ""){
-			i3GEO.janela.tempoMsg("Escolha um tema");
+			i3GEO.janela.tempoMsg($trad(1,i3GEOF.selecao.dicionario));
 			i3GEOF.selecao.aguarde.visibility = "hidden";
 			return;
 		}
@@ -1002,7 +1001,7 @@ i3GEOF.selecao = {
 		 		i3GEOF.selecao.aguarde.visibility = "hidden";
 				i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 				nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-				$i("i3GEOselecaoNsel").innerHTML = "Selecionados: "+(nsel.nsel);
+				$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 		 	};
 			g_operacao = "selecao";
 			i3GEO.php.selecaotema(temp,$i("i3GEOselecaoTemaoverlay").value,i3GEO.temaAtivo,$i("i3GEOselecaotipoOperacao").value);
@@ -1046,7 +1045,7 @@ i3GEOF.selecao = {
 						y.push(retorno.data[i].y);
 					}
 					if(x.length == 0)
-					{i3GEO.janela.tempoMsg("Nenhum ponto encontrado");return;}
+					{i3GEO.janela.tempoMsg($trad(31,i3GEOF.selecao.dicionario));return;}
 					pontosdistobj = {
 						xpt: x,
 						ypt: y
@@ -1064,5 +1063,4 @@ i3GEOF.selecao = {
 			i3GEOF.selecao.aguarde.visibility = "hidden";
 		}
 	}
-
 };

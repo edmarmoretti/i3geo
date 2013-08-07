@@ -1,49 +1,49 @@
 //+$trad(1,i3GEOF.perfil.dicionario)+
 i3GEOF.perfil.dicionario = {
 1: [{
-pt:"",
+pt:"Escolha qual ser&aacute; a fonte dos dados de Z:",
 en:"",
 es:"",
 it:""
 }],
 2: [{
-pt:"",
+pt:"ou um tema do mapa:",
 en:"",
 es:"",
 it:""
 }],
 3: [{
-pt:"",
+pt:"N&uacute;mero de pontos que ser&atilde;o obtidos ao longo da linha",
 en:"",
 es:"",
 it:""
 }],
 4: [{
-pt:"",
+pt:"Criar gr&aacute;fico",
 en:"",
 es:"",
 it:""
 }],
 5: [{
-pt:"",
+pt:"Erro ao acessar o servi&ccedil;o de fornecimento dos dados",
 en:"",
 es:"",
 it:""
 }],
 6: [{
-pt:"",
+pt:"Selecione um tema",
 en:"",
 es:"",
 it:""
 }],
 7: [{
-pt:"",
+pt:"Selecione um item",
 en:"",
 es:"",
 it:""
 }],
 8: [{
-pt:"",
+pt:"Item com os valores:",
 en:"",
 es:"",
 it:""

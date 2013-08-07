@@ -1881,7 +1881,7 @@ i3GEO.util = {
 			}
 			else
 			{temp = {dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
-			funcao.call(temp);
+			eval("funcao(temp)");
 		};
 		i3GEO.php.listaValoresItensTema(monta,tema,itemTema);
 	},

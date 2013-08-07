@@ -148,20 +148,20 @@ i3GEOF.pontoEmPoligono = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outros com pol&iacute;gonos ou raster.";
-		ins += "<p class='paragrafo'>As informa&ccedil;&otilde;es do tema poligonal ser&atilde;o inseridas na tabela de atributos de um novo tema do tipo pontual.";
-		ins += "<p class='paragrafo'>Para gerar o cruzamento &eacute; necess&aacute;rio que no mapa exista pelo menos um tema poligonal e um com os pontos.";
+		var ins = "<p class='paragrafo'>"+$trad(1,i3GEOF.pontoEmPoligono.dicionario);
+		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.pontoEmPoligono.dicionario);
+		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.pontoEmPoligono.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.pontoEmPoligono.t1()",ins,"i3GEOFgradeDePontost0","i3GEOpontoEmPoligonoresultado");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo'>Escolha o tema que cont&eacute;m os pontos:";
+		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.pontoEmPoligono.dicionario);
 		ins += "<div id='i3GEOpontoEmPoligonoSelTemasPt' style='text-align:left;font-size:11px'></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t0()","i3GEOF.pontoEmPoligono.t2()",ins,"i3GEOF.pontoEmPoligono.t1","i3GEOpontoEmPoligonoresultado");
 		i3GEOF.pontoEmPoligono.comboTemasSelPt();
 	},
 	t2: function(){
 		var erro = function(){
-			var ins = "<p class=i3GEO.janela.tempoMsga >Voc&ecirc; precisa escolher um tema com os pontos.";
+			var ins = "<p class=i3GEO.janela.tempoMsga >"+$trad(5,i3GEOF.pontoEmPoligono.dicionario);
 			i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado");
 		};
 		if($i("i3GEOpontoEmPoligonotemasComSelPt"))
@@ -170,7 +170,7 @@ i3GEOF.pontoEmPoligono = {
 			{erro.call();}
 			else
 			{
- 				var ins = "<p class='paragrafo'>Escolha os temas que ser&atilde;o utilizados para cruzar com os pontos:";
+ 				var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.pontoEmPoligono.dicionario);
 				ins += "<div id='i3GEOpontoEmPoligonoSelTemasPo' style='text-align:left;font-size:11px'></div>";
 				i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","i3GEOF.pontoEmPoligono.t3()",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado");
 				i3GEOF.pontoEmPoligono.comboTemasSelPo();
@@ -180,7 +180,7 @@ i3GEOF.pontoEmPoligono = {
 		{erro.call();}
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>O tema resultante ser&aacute; adicionado ao mapa atual.";
+		var ins = "<p class='paragrafo'>"+$trad(7,i3GEOF.pontoEmPoligono.dicionario);
 		ins += "<br><br><input id=i3GEOpontoEmPoligonobotao1 type='buttom' value='Cruzar' />";
 		i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t2()","",ins,"i3GEOF.pontoEmPoligono.t3","i3GEOpontoEmPoligonoresultado");
 		new YAHOO.widget.Button(
@@ -213,17 +213,17 @@ i3GEOF.pontoEmPoligono = {
 				}
 			}
 			if (tsl == 0)
-			{i3GEO.janela.tempoMsg("Escolha um tema raster ou poligonal pelo menos");}
+			{i3GEO.janela.tempoMsg($trad(8,i3GEOF.pontoEmPoligono.dicionario));}
 			else
 			{
 				i3GEOF.pontoEmPoligono.aguarde.visibility = "visible";
 				fim = function(retorno){
 					i3GEOF.pontoEmPoligono.aguarde.visibility = "hidden";
 					if (retorno.data==undefined )
-					{i3GEO.janela.tempoMsg("Erro. A opera&ccedil;&atilde;o demorou muito.");}
+					{i3GEO.janela.tempoMsg("Erro.");}
 					else{
 						i3GEO.atualiza();
-						i3GEO.janela.mensagemSimples(retorno.data,"Colunas");
+						i3GEO.janela.mensagemSimples(retorno.data,$trad(9,i3GEOF.pontoEmPoligono.dicionario));
 					}
 				};
 				p = i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pontoEmPoligono&temaPt="+temapt+"&temasPo="+tsl.join(",")+"&ext="+i3GEO.parametros.mapexten;

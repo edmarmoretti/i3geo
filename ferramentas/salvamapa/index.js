@@ -100,9 +100,9 @@ i3GEOF.salvaMapa = {
 					local = map_file.split("ms_tmp");
 				teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file;
 				local = i3GEO.util.protocolo()+"://"+window.location.host+"/ms_tmp"+local[1];
-				onde.innerHTML = "<a href='#' onclick='i3GEOF.salvaMapa.salvaMapaBanco()' >Clique aqui para salvar o mapa</a><br>" +
-					"<a href='#' onclick='i3GEO.mapa.dialogo.listaDeMapasBanco()'>Clique aqui para ver a lista de mapas</a><br>" +
-					"<a href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target='_blank' >Clique aqui para editar a lista de mapas</a>";
+				onde.innerHTML = "<a href='#' onclick='i3GEOF.salvaMapa.salvaMapaBanco()' >"+$trad(1,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a href='#' onclick='i3GEO.mapa.dialogo.listaDeMapasBanco()'>"+$trad(2,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target='_blank' >"+$trad(3,i3GEOF.salvaMapa.dicionario)+"</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		}
@@ -116,8 +116,8 @@ i3GEOF.salvaMapa = {
 					local = map_file.split("ms_tmp");
 				teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file;
 				local = i3GEO.util.protocolo()+"://"+window.location.host+"/ms_tmp"+local[1];
-				onde.innerHTML = "<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a><br>" +
-					"<a href='"+teste+"' target='_blank' >Clique aqui para testar</a>";
+				onde.innerHTML = "<a href='"+local+"' target='_blank' >"+$trad(4,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a href='"+teste+"' target='_blank' >"+$trad(5,i3GEOF.salvaMapa.dicionario)+"</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		}
@@ -138,7 +138,7 @@ i3GEOF.salvaMapa = {
 				}
 				temp = function(retorno){
 					if(retorno.id && retorno.id != ""){
-						i3GEO.janela.tempoMsg("Mapa salvo");
+						i3GEO.janela.tempoMsg($trad(6,i3GEOF.salvaMapa.dicionario));
 					}
 					else{
 						if(retorno.status){
@@ -151,8 +151,8 @@ i3GEOF.salvaMapa = {
 				};
 				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa);
 			};
-			texto = "ID do mapa que ser&aacute; atualizado (opcional).<br>Se for um mapa novo, deixe em branco<br><input id=salvamapaId  type=text /><br>";
-			i3GEO.janela.prompt(texto + "<br>T&iacute;tulo do mapa",funcaoOK);
+			texto = $trad(7,i3GEOF.salvaMapa.dicionario)+"<br><input id=salvamapaId  type=text /><br>";
+			i3GEO.janela.prompt(texto + "<br>"+$trad(8,i3GEOF.salvaMapa.dicionario),funcaoOK);
 		}
 	},
 	/*
@@ -166,18 +166,16 @@ i3GEOF.salvaMapa = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<p class="paragrafo" >Salvando o mapa atual, voc&ecirc; poder&aacute; carreg&aacute;-lo novamente.</p>' +
-			'<p class="paragrafo" >Existem duas maneiras de fazer isso, conforme explicado a seguir.</p>' +
+		ins += '<p class="paragrafo" >'+$trad(9,i3GEOF.salvaMapa.dicionario)+'</p>' +
+			'<p class="paragrafo" >'+$trad(10,i3GEOF.salvaMapa.dicionario)+'</p>' +
 			'<div style=background-color:white;padding:5px;margin:5px >' +
-			'	<p class="paragrafo" ><b>1- </b>Armazene o arquivo de configura&ccedil;&atilde;o do mapa em seu computador, ' +
-			'	fazendo o download. Isso permitir&aacute; que voc&ecirc; faça o upload desse mesmo arquivo, restaurando o mapa. '+
-			'	<p class="paragrafo" >Clique no link abaixo com o bot&atilde;o direito do mouse e salve o arquivo em seu computador.' +
-			'	Para carregar o mapa salvo utilize a op&ccedil;&atilde;o de carregar mapa.' +
+			'	<p class="paragrafo" ><b>1- </b>'+$trad(11,i3GEOF.salvaMapa.dicionario) +
+				$trad(12,i3GEOF.salvaMapa.dicionario) +
+			'	<p class="paragrafo" >' + $trad(13,i3GEOF.salvaMapa.dicionario) +
 			'	<div id="i3GEOFsalvaMapaLocal"></div>' +
 			'</div>' +
 			'<div style=background-color:white;padding:5px;margin:5px >' +
-			'	<p class="paragrafo" ><b>2- </b>Fa&ccedil;a login e cadastre o mapa atual no banco de dados existente no servidor web.' +
-			'	Com isso o mapa ser&aacute; salvo de forma permanente e outros usu&aacute;rios poderão utiliz&aacute;-lo. Consulte o admnistrador do site que você está utilizando para saber mais sobre a pol&iacute;tica de uso do mapa que for salvo' +
+			'	<p class="paragrafo" ><b>2- </b>' + $trad(14,i3GEOF.salvaMapa.dicionario) +
 			'	<div id="i3GEOFsalvaMapaBanco"></div>' +
 			'</div><br>';
 		return ins;
