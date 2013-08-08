@@ -1,4 +1,4 @@
-//+$trad(1,i3GEOF.convertemapakml.dicionario)+
+//+$trad(1,i3GEOF.convertemapaKml.dicionario)+
 i3GEOF.converteMapaKml.dicionario = {
 1: [{
 pt:"Voc&ecirc; pode utilizar os endere&ccedil;os para visualizar o mapa atual em softwares que aceitam o formato kml,",

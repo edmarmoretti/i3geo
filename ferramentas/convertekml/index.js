@@ -12,7 +12,7 @@ Veja:
 
 Arquivo:
 
-i3geo/ferramentas/convertekml/index.js.php
+i3geo/ferramentas/converteKml/index.js.php
 
 Licenca:
 
@@ -60,7 +60,7 @@ i3GEOF.converteKml = {
 		if(typeof(i3GEOF.converteKml.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
 				i3GEO.configura.locaplic+"/ferramentas/convertekml/dicionario.js",
-				"i3GEOF.converteKml.iniciaJanelaFlutuante('"+tema+"','"+tipo+")",
+				"i3GEOF.converteKml.iniciaJanelaFlutuante('"+tema+"','"+tipo+"')",
 				"i3GEOF.converteKml.dicionario_script"
 			);
 		}
@@ -83,16 +83,16 @@ i3GEOF.converteKml = {
 
 	*/
 	html:function(divid,tema,tipo){
-		var ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.convertekml.dicionario) +
+		var ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.converteKml.dicionario) +
 		'<a href="http://earth.google.com/intl/pt/" target="_blank" > Google Earth</a>.' +
-		'<p class="paragrafo" >Googleearth <a href="'+i3GEO.configura.locaplic+'/documentacao/ajuda/googleearth.htm" target="blank" ></a> ' + $trad(2,i3GEOF.convertekml.dicionario) +
-		'<p class="paragrafo" ><b>'+$trad(3,i3GEOF.convertekml.dicionario) + '</b></p>' +
+		'<p class="paragrafo" >Googleearth <a href="'+i3GEO.configura.locaplic+'/documentacao/ajuda/googleearth.htm" target="blank" ></a> ' + $trad(2,i3GEOF.converteKml.dicionario) +
+		'<p class="paragrafo" ><b>'+$trad(3,i3GEOF.converteKml.dicionario) + '</b></p>' +
 		'<p class="paragrafo" > <textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+tema+'&typename='+tema+'&request=kml</textarea></p>';
 		if(tipo == "kmz"){
-			ins += '<p class="paragrafo" ><b>'+$trad(4,i3GEOF.convertekml.dicionario)+' </b></p>' +
+			ins += '<p class="paragrafo" ><b>'+$trad(4,i3GEOF.converteKml.dicionario)+' </b></p>' +
 			'<p class="paragrafo" ><textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+tema+'&typename='+tema+'&request=kmz</textarea></p>';
 		}
-		ins += '<p class="paragrafo" >'+$trad(5,i3GEOF.convertekml.dicionario) +
+		ins += '<p class="paragrafo" >'+$trad(5,i3GEOF.converteKml.dicionario) +
 		'<p class="paragrafo" ><textarea cols="55" rows="2" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/kml.php </textarea></p>';
 		$i(divid).innerHTML += ins;
 	},

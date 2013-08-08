@@ -12,7 +12,7 @@ Veja:
 
 Arquivo:
 
-i3geo/ferramentas/convertemapakml/index.js.php
+i3geo/ferramentas/converteMapaKml/index.js.php
 
 Licenca:
 
@@ -83,13 +83,13 @@ i3GEOF.converteMapaKml = {
 		var ins = "",lista,tema;
 		lista = i3GEO.arvoreDeCamadas.CAMADAS;
 		tema = lista[0].name;
-		ins = '<p class="paragrafo" >' + $trad(1,i3GEOF.convertemapakml.dicionario) +
-		'como o <a href="http://earth.google.com/intl/pt/" target="_blank" > Google Earth</a>. ' + $trad(2,i3GEOF.convertemapakml.dicionario) +
-		'<p class="paragrafo" >Googleearth <a href="'+i3GEO.configura.locaplic+'/documentacao/ajuda/googleearth.htm" target="blank" ></a> '+ $trad(3,i3GEOF.convertemapakml.dicionario) +
-		'<p class="paragrafo" ><b>'+$trad(4,i3GEOF.convertemapakml.dicionario)+' </b></p>' +
+		ins = '<p class="paragrafo" >' + $trad(1,i3GEOF.converteMapaKml.dicionario) +
+		'como o <a href="http://earth.google.com/intl/pt/" target="_blank" > Google Earth</a>. ' + $trad(2,i3GEOF.converteMapaKml.dicionario) +
+		'<p class="paragrafo" >Googleearth <a href="'+i3GEO.configura.locaplic+'/documentacao/ajuda/googleearth.htm" target="blank" ></a> '+ $trad(3,i3GEOF.converteMapaKml.dicionario) +
+		'<p class="paragrafo" ><b>'+$trad(4,i3GEOF.converteMapaKml.dicionario)+' </b></p>' +
 		'<p class="paragrafo" > <textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
 		i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+i3GEO.parametros.mapfile+'&typename='+tema+'&request=kml</textarea></p>';
-		ins += '<p class="paragrafo" >'+$trad(5,i3GEOF.convertemapakml.dicionario) +
+		ins += '<p class="paragrafo" >'+$trad(5,i3GEOF.converteMapaKml.dicionario) +
 		'<p class="paragrafo" ><textarea cols="55" rows="2" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/kml.php </textarea></p>';
 		$i(divid).innerHTML += ins;
 	},
