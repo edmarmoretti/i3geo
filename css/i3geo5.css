@@ -1,3 +1,21 @@
+.toolTipBalaoTitulo{
+text-decoration:underline;
+text-align:left;
+font-size:8pt;
+font-weight:normal;
+}
+.toolTipBalaoTexto{
+text-align:left;
+font-size:8pt;
+background-color:#E0E0E0;
+color:black;
+}
+.toolTipBalaoTexto1{
+text-align:left;
+font-size:8pt;
+background-color:#F8F8F8;
+color:black;
+}
 .comboTemasCabecalho{
 z-index: 1; position: absolute; left: 4px;
 }

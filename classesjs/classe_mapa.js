@@ -843,7 +843,7 @@ i3GEO.mapa = {
 			if(i3GEO.Interface.ATUAL === "googleearth")
 			{i3GEO.Interface.googleearth.aguarde.visibility = "visible";}
 			retorna = function(retorno){
-				var pos,temp,n,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s,balloon,
+				var classeCor,pos,temp,n,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s,balloon,
 					configura = i3GEO.configura,
 					tipotip = configura.tipotip;
 				i = $i("i3geo_rosa");
@@ -861,7 +861,7 @@ i3GEO.mapa = {
 						for(j=0;j<ntemas;j += 1){
 							titulo = temas[j].nome;
 							if (tipotip === "completo" || tipotip === "balao")
-							{titulo = "<span style='text-decoration:underline;text-align:left;font-size:9pt'><b>"+titulo+"</b></span><br>";}
+							{titulo = "<span class='toolTipBalaoTitulo'><b>"+titulo+"</b></span><br>";}
 							else
 							{titulo = "";}
 							tips = (temas[j].resultado.tips).split(",");
@@ -871,7 +871,9 @@ i3GEO.mapa = {
 							if(ds !== " " && ds[0] && ds[0] != " "){
 								try{
 									nds = ds.length;
+									classeCor = "toolTipBalaoTexto";
 									for(s=0;s<nds;s += 1){
+										ins += "<div class='"+classeCor+"'>";
 										for(r=0;r<ntips;r += 1){
 											try{
 												eval("var alias = ds[s]."+tips[r]+".alias");
@@ -880,22 +882,30 @@ i3GEO.mapa = {
 												eval("var img = ds[s]."+tips[r]+".img");
 												if (tipotip === "completo" || tipotip === "balao"){
 													if(valor !== "" && link === "")
-													{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";}
+													{ins += "<span>" + alias + " :" + valor + "</span><br>";}
 													if(valor !== "" && link !== "")
-													{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";}
+													{ins += "<span>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";}
 													if(img !== "")
 													{ins += img+"<br>";}
-													ins += "<nl>";
 													mostra = true;
 												}
 												else{
-													ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + valor + "</span><br>";
+													ins += "<span>" + valor + "</span><br>";
 													mostra = true;
 												}
 											}
 											catch(e){}
 										}
+										if(classeCor === "toolTipBalaoTexto"){
+											classeCor = "toolTipBalaoTexto1";
+										}
+										else{
+											classeCor = "toolTipBalaoTexto";
+										}
+										ins += "</div>";
 									}
+
+
 								}
 								catch(e){
 									if(typeof(console) !== 'undefined'){console.error(e);}

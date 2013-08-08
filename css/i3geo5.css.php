@@ -1,4 +1,22 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.comboTemasCabecalho{
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.toolTipBalaoTitulo{
+text-decoration:underline;
+text-align:left;
+font-size:8pt;
+font-weight:normal;
+}
+.toolTipBalaoTexto{
+text-align:left;
+font-size:8pt;
+background-color:#E0E0E0;
+color:black;
+}
+.toolTipBalaoTexto1{
+text-align:left;
+font-size:8pt;
+background-color:#F8F8F8;
+color:black;
+}
+.comboTemasCabecalho{
 z-index: 1; position: absolute; left: 4px;
 }
 fieldset
