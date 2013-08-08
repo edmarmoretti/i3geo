@@ -2,7 +2,7 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
-    CONNECTION "user=guest_sala password=151617 dbname=dbspo host=10.1.2.25 port=5432"
+    CONNECTION "user=guest_sala password= dbname=dbspo host= port=5432"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom from (
 		SELECT
@@ -26,14 +26,17 @@ MAP
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "CLASSE"	"SIM"
-      "permitekmz"	"nao"
+      "permitekmz"	"sim"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "permitedownload"	"sim"
       "metaestat"	""
-      "permitekml"	"sim"
+      "download"	"SIM"
+      "arquivokmz"	""
+      "arquivodownload"	""
       "permiteogc"	"sim"
-      "convcaracter"	""
+      "permitekml"	"sim"
       "TEMA"	"Teste UBS kml"
+      "convcaracter"	""
     END # METADATA
     NAME "_lubs"
     STATUS DEFAULT
@@ -44,6 +47,8 @@ MAP
     CLASS
       NAME ""
       STYLE
+        ANGLE 0
+        OFFSET 0 0
         OUTLINECOLOR 255 0 0
         SYMBOL "p0"
       END # STYLE
