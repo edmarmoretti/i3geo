@@ -19,19 +19,34 @@ if(!function_exists('curl_init'))
 {@dl( 'php_curl'.'.'.$s );}
 if(!function_exists('curl_init'))
 {echo "curl n&atilde;o instalado";}
+include("../../ms_configura.php");
+
+
+$ch = curl_init();
+curl_setopt($ch,CURLOPT_URL, 'https://api.twitter.com/oauth2/token');
+curl_setopt($ch,CURLOPT_POST, true);
+$data = array();
+$data['grant_type'] = "client_credentials";
+curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
+$consumerKey = $twitteroauth["consumerkey"]; //add your app key
+$consumerSecret = $twitteroauth["consumersecret"]; //add your app secret
+curl_setopt($ch,CURLOPT_USERPWD, $consumerKey . ':' . $consumerSecret);
+curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+$result = curl_exec($ch);
+curl_close($ch);
+
+$bearer_token = json_decode($result);
+$bearer = $bearer_token->{'access_token'}; // this is your app token
+
 $curl = curl_init();
-//lista de places
-curl_setopt ($curl, CURLOPT_URL, "http://api.twitter.com/1/geo/nearby_places.json?lat=".$_GET["y"]."&long=".$_GET["x"]."&accuracy=0&granularity=neighborhood");
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($curl,CURLOPT_URL, "https://api.twitter.com/1.1/geo/reverse_geocode.json?lat=".$_GET["y"]."&long=".$_GET["x"]."&accuracy=0&granularity=neighborhood");
+curl_setopt($curl,CURLOPT_HTTPHEADER,array('Authorization: Bearer ' . $bearer));
+curl_setopt($curl,CURLOPT_RETURNTRANSFER, true);
 $result = curl_exec($curl);
 curl_close ($curl);
 $result = fixEncoding($result);
 $result = json_decode( $result, true );
-/*
-echo "<pre>";
-var_dump($result);
-exit;
-*/
+
 if(isset($result["error"]) || count($result["result"]["places"]) == 0)
 {
 	echo "Nada encontrado";
@@ -41,8 +56,8 @@ else
 	$html = "<table class='lista4'>";
 	$places = $result["result"]["places"];
 	foreach($places as $p)
-	{ 
-		
+	{
+
 		$html .= "<tr>";
 		$html .= "<td><a href='http://search.twitter.com/search?q=place:".$p["id"]."' target=_self '>".$p["full_name"]."</a><br>";
 		$html .= "<span style=color:gray >".$p["place_type"]."</span>";
@@ -57,6 +72,6 @@ function fixEncoding($in_str)
 	{return $in_str;}
 	else
 	{return utf8_encode($in_str);}
-} 
+}
 ?>
 </body>

@@ -2,17 +2,19 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
-    CONNECTION "user=guest_sala password= dbname=dbspo host= port=5432"
+    CONNECTION "user=guest_sala password= dbname=dbspo host=10.1.2.25 port=5432"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom from (
 		SELECT
-		st_geomfromtext('POINT(' || dbgeral.tb_estab_geo.long || ' ' || dbgeral.tb_estab_geo.lat || ')', 4326)as the_geom,
-		dbsismob.tb_sismob_unid_func.no_unidade,
-		tb_sismob_unid_func.co_cnes as gid,
-		dbgeral.tb_ibge.uf,
-		dbgeral.tb_ibge.cidade,
-		dbacoes_saude.tb_cnes_estabelecimento.no_logradouro,
-		dbacoes_saude.tb_cnes_estabelecimento.no_bairro
+		st_geomfromtext('POINT(' || dbgeral.tb_estab_geo.long || ' ' || dbgeral.tb_estab_geo.lat || ')', 4326) as the_geom,
+		'UBS - '||dbsismob.tb_sismob_unid_func.no_unidade||' - cnes:'||tb_sismob_unid_func.co_cnes as nome,
+		dbgeral.tb_ibge.uf
+		||' ,'
+		||dbgeral.tb_ibge.cidade
+		||' ,'
+		||dbacoes_saude.tb_cnes_estabelecimento.no_logradouro
+		||' ,'||dbacoes_saude.tb_cnes_estabelecimento.no_bairro as desc,
+		tb_sismob_unid_func.co_cnes as cnes
 		FROM
 		dbsismob.tb_sismob_unid_func
 		INNER JOIN dbacoes_saude.tb_cnes_estabelecimento ON
@@ -21,8 +23,8 @@ MAP
 			ON dbsismob.tb_sismob_unid_func.co_ibge = dbgeral.tb_ibge.ibge
 		INNER JOIN dbgeral.tb_estab_geo
 			ON dbsismob.tb_sismob_unid_func.co_cnes = dbgeral.tb_estab_geo.co_cnes
-				WHERE dbsismob.tb_sismob_unid_func.co_sismob_programa = 1	limit 100
-		) as foo using unique gid using srid=4326"
+				WHERE dbsismob.tb_sismob_unid_func.co_sismob_programa = 1 limit 500
+		) as foo using unique cnes using srid=4326"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "CLASSE"	"SIM"

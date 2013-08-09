@@ -4,66 +4,85 @@
 <link rel="stylesheet" type="text/css" href="../../css/i3geo45.css.php">
 <style>
 p {
-color:#2F4632;
-font-family:Verdana,Arial,Helvetica,sans-serif;
-font-size:12px;
-text-align:left;
+	color: #2F4632;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align: left;
 }
 </style>
 </head>
-<body style="background-color:white;margin:10px">
-<?php
-if(empty($_GET["km"]))
-{$km = 5;}
-else
-{$km = $_GET["km"];}
-$par = $_GET["x"].",".$_GET["y"];
-echo "<p class=paragrafo >Raio de <input type=text size=4 value='$km' id=km onchange='recarrega($par,this.value)'> km</p>";
-include("../../classesphp/carrega_ext.php");
-$s = PHP_SHLIB_SUFFIX;
-if(!function_exists('curl_init'))
-{@dl( 'php_curl'.'.'.$s );}
-if(!function_exists('curl_init'))
-{echo "curl n&atilde;o instalado";return;}
-$curl = curl_init();
-curl_setopt ($curl, CURLOPT_URL, "http://search.twitter.com/search.json?geocode=".$_GET["y"].",".$_GET["x"].",".$km."km");
-//teste
-//curl_setopt ($curl, CURLOPT_URL, "http://search.twitter.com/search.json?geocode=37.781157,-122.398720,2km");
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-$result = curl_exec($curl);
-curl_close ($curl);
-$result = fixEncoding($result);
-$result = json_decode( $result, true );
+<body style="background-color: white; margin: 10px">
+	<?php
+	if(empty($_GET["km"]))
+	{
+		$km = 5;
+	}
+	else
+	{$km = $_GET["km"];
+	}
+	$par = $_GET["x"].",".$_GET["y"];
+	echo "<p class=paragrafo >Raio de <input type=text size=4 value='$km' id=km onchange='recarrega($par,this.value)'> km</p>";
+	include("../../classesphp/carrega_ext.php");
+	include("../../ms_configura.php");
+	$s = PHP_SHLIB_SUFFIX;
+	if(!function_exists('curl_init'))
+	{
+		@dl( 'php_curl'.'.'.$s );
+	}
+	if(!function_exists('curl_init'))
+	{
+		echo "curl n&atilde;o instalado";return;
+	}
 
-//echo "<pre>";
-//var_dump($result);
+	$ch = curl_init();
+	curl_setopt($ch,CURLOPT_URL, 'https://api.twitter.com/oauth2/token');
+	curl_setopt($ch,CURLOPT_POST, true);
+	$data = array();
+	$data['grant_type'] = "client_credentials";
+	curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
+	$consumerKey = $twitteroauth["consumerkey"]; //add your app key
+	$consumerSecret = $twitteroauth["consumersecret"]; //add your app secret
+	curl_setopt($ch,CURLOPT_USERPWD, $consumerKey . ':' . $consumerSecret);
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+	$result = curl_exec($ch);
+	curl_close($ch);
 
-if(isset($result["error"]) || count($result["results"]) == 0)
-{
-	echo "Nada encontrado";
-}
-else
-{
+	$bearer_token = json_decode($result);
+	$bearer = $bearer_token->{'access_token'}; // this is your app token
+
+	$curl = curl_init();
+	curl_setopt($curl,CURLOPT_URL, "https://api.twitter.com/1.1/search/tweets.json?geocode=".$_GET["y"].",".$_GET["x"].",".$km."km");
+	curl_setopt($curl,CURLOPT_HTTPHEADER,array('Authorization: Bearer ' . $bearer));
+	curl_setopt($curl,CURLOPT_RETURNTRANSFER, true);
+
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	$result = curl_exec($curl);
+	curl_close ($curl);
+	$result = fixEncoding($result);
+	$result = json_decode( $result, true );
+
 	$html = "<table class='lista4'>";
-	foreach($result["results"] as $r)
-	{ 
-		
-		$html .= "<tr><td><img src='".$r["profile_image_url"]."' /></td>";
-		$html .= "<td><a href='http://twitter.com/".$r["from_user"]."' target=_blank '>".$r["from_user"]."</a><br>";
+	foreach($result["statuses"] as $r)
+	{
+		$usuario = $r["user"];
+		$html .= "<tr><td><img src='".$usuario["profile_image_url"]."' /></td>";
+		$html .= "<td><a href='http://twitter.com/".$usuario["screen_name"]."' target=_blank '>".$usuario["screen_name"]."</a><br>";
 		$html .= "<span style=color:gray >".$r["created_at"]."</span><br>";
 		$html .= $r["text"]."<br></td></tr>";
 	}
 	echo $html."</table>";
-}
-function fixEncoding($in_str)
-{
-	$cur_encoding = mb_detect_encoding($in_str) ;
-	if($cur_encoding == "UTF-8" && mb_check_encoding($in_str,"UTF-8"))
-	{return $in_str;}
-	else
-	{return utf8_encode($in_str);}
-} 
-?>
+	function fixEncoding($in_str)
+	{
+		$cur_encoding = mb_detect_encoding($in_str) ;
+		if($cur_encoding == "UTF-8" && mb_check_encoding($in_str,"UTF-8"))
+		{
+			return $in_str;
+		}
+		else
+		{return utf8_encode($in_str);
+		}
+	}
+	?>
 </body>
 <script>
 function recarrega(x,y,km){
