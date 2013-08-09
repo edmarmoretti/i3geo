@@ -306,6 +306,10 @@ string - javascript com os parametros
 				$wmstile = "";
 				if($ct == 7 && strtoupper($oLayer->getmetadata("cache")) != "SIM"){
 					$wmsurl = ($oLayer->connection)."&layers=".($oLayer->getmetadata("wms_name"))."&style=".($oLayer->getmetadata("wms_style"));
+					$tempo = $oLayer->getmetadata("wms_time");
+					if($tempo != ""){
+						$wmsurl .= "&TIME=".$tempo;
+					}
 					$wmsformat = $oLayer->getmetadata("wms_format");
 					$wmssrs = $oLayer->getmetadata("wms_srs");
 					$wmstile = $oLayer->getmetadata("wms_tile");
