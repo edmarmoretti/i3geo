@@ -82,7 +82,8 @@ ins += "<div id='divumaImagemPor' style=width:200px; ></div>";
 ins += "<div onclick='iniciaImagens()' style='text-align:left;left:0px;top:20px;'><input id='botao1' size=18 type='button' value='Continuar' /></div>";
 ins += "</div>";
 $i("parametros").innerHTML = ins;
-
+idServicoEscolhido = "";
+emPausa = true;
 //new YAHOO.widget.Button("botao1");
 /*
 Function: escolheuServico
@@ -94,6 +95,7 @@ Parametro:
 idWMS {String} - id do servi&ccedil;o escolhido
 */
 function escolheuServico(idWMS){
+	idServicoEscolhido = idWMS;
 	tipoServico = wms_configura[idWMS].tipo;
 	servico = wms_configura[idWMS].servico+"&VERSION=1.1.1&REQUEST=GetMap&layers="+wms_configura[idWMS].layers+"&styles="+wms_configura[idWMS].styles+"&srs="+wms_configura[idWMS].srs+"&format="+wms_configura[idWMS].format;
 	$i("iServico").value = servico;
@@ -241,7 +243,12 @@ function criaImg(tempo,id){
 	novoel.style.left = "0px";
 	novoel.style.width = dw+"px";
 	novoel.style.height = dh+"px";
+	novoel.style.cursor = "pointer";
 	novoel.src = $i("iServico").value+"&width="+dw+"&height="+dh+"&bbox="+bbox+"&time="+tempo; //"../../imagens/atlas1.jpg";
+	novoel.title = 'clique para adicionar ao mapa';
+	novoel.onclick = function(){
+		adicionaMapa(idServicoEscolhido);
+	};
 	novoel.onload = function(){
 		$i("status"+this.id).innerHTML = " <span style=color:red >OK</span>";
 		idsValidos.push(this.id);
@@ -325,7 +332,7 @@ function criaMarcadorTempo(){
 	for(var i=1;i<=nmarcas;i++){
 		ins += "<img title='clique para adicionar ao mapa' onclick='adicionaMapa(\""+i+"\")' onmouseover='mostraI(\""+i+"\")' onmouseout='escondeI(\""+i+"\")' style='position:absolute;top:"+(dh + 10)+"px;left:"+parseInt((distanciaMarcas*i - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1.gif' id='marcaTempo"+i+"' />";
 	}
-	ins += "<img style='position:absolute;top:"+(dh + 5)+"px;left:"+parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1red.gif' id='marcaDeTempo' />";
+	ins += "<img style='position:absolute;top:"+(dh - 5)+"px;left:"+parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1red.gif' id='marcaDeTempo' />";
 	ins += "<img style='position:absolute;top:"+(dh + 10)+"px;left:"+parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1cinza.gif' id='marcaGranulo' />";
 	ngranulo = nmarcas;
 	tgranulo = (parseInt((distanciaMarcas*i - (distanciaMarcas/2))) - ini) / 10;
@@ -376,9 +383,10 @@ Function: adicionaMapa
 Adiciona uma camada ao mapa baseado na imagem vista na tela
 
 */
-function adicionaMapa(obj){
+function adicionaMapa(idMarca){
 	aguarde("block");
-	var serv = wms_configura[obj-1];
+	idMarca = parseInt(idMarca,10);
+	var serv = wms_configura[idServicoEscolhido];
 	var fim = function(retorno){
 		aguarde("none");
 		if (retorno.data.erro)
@@ -397,10 +405,10 @@ function adicionaMapa(obj){
 	p += "&formato="+serv.format;
 	p += "&tipo=estilo";
 	p += "&versao=1.1.1";
-	p += "&nomecamada="+serv.titulo+" "+idsTempo[obj-1];
+	p += "&nomecamada="+serv.titulo+" "+idsTempo[idMarca-1];
 	p += "&tiporep=&suportasld=nao";
 	p += "&formatosinfo=text/plain,application/vnd.ogc.gml";
-	p += "&time="+idsTempo[obj-1];
+	p += "&time="+idsTempo[idMarca-1];
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
 	cp.call(p,"wmstime",fim);
@@ -418,15 +426,36 @@ function ativaQuadro(i){
 		q.style.position = "relative";
 		q.style.display = "block";
 	}
-	marcaVermelha.style.left = $i("marcaTempo"+(i)).style.left;
+	if($i("marcaTempo"+i)){
+		$i("marcaTempo"+i).style.display = "block";
+	}
+	if($i("marcaTempo"+(i))){
+		marcaVermelha.style.left = $i("marcaTempo"+(i)).style.left;
+	}
 }
 function pausarFilme(){
-	pulaGranulo = 11;
-	try{
-		clearTimeout(ganima);
-	}catch(e){}
+	emPausa = !emPausa;
+	if(emPausa == false){
+		anima();
+	}
+	else{
+		imgGranulo.style.display="none";
+		pulaGranulo = 11;
+		try{
+			clearTimeout(ganima);
+		}catch(e){}
+	}
+}
+function esconderMarcasTempo(){
+	var n = idsValidos.length;
+	for(var i=0;i<n;i++){
+		if($i("marcaTempo"+i)){
+			$i("marcaTempo"+i).style.display = "none";
+		}
+	}		
 }
 function pararFilme(){
+	emPausa = false;
 	imgGranulo.style.left = parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px";
 	quadroAtual = 0;
 	desativaQuadros();
@@ -439,10 +468,16 @@ function pararFilme(){
 	}catch(e){}
 }
 function iniciarFilme(){
+	emPausa = false;
+	esconderMarcasTempo();
 	imgGranulo.style.display="block";
 	//tanima = setTimeout("anima()",tempoAnima)
 	//ganima = setTimeout("animacaoGranulo()",tempoGranulo)
 	anima();
+}
+function rebobina(){
+	esconderMarcasTempo();
+	pararFilme();
 }
 function anima(){
 	desativaQuadros();
@@ -457,7 +492,6 @@ function anima(){
 	}
 	else{
 		imgGranulo.style.display="none";
-		pararFilme();
 	}
 }
 function animacaoGranulo(){
