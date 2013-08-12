@@ -1,1 +1,0 @@
-alert("utilize i3geo5.js");
