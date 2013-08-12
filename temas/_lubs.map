@@ -2,7 +2,7 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
-    CONNECTION "user=guest_sala password=151617 dbname=dbspo host=10.1.2.25 port=5432"
+    CONNECTION "user=guest_sala password= dbname=dbspo host=10.1.2.25 port=5432"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom from (
 		SELECT
