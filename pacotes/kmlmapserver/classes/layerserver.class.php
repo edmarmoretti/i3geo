@@ -646,7 +646,8 @@ class LayerServer {
         for($i = 0; $i < $numclasses; $i++){
             $class = $layer->getClass($i);
             if($vi >= 60200){
-            	$label = $classe->getLabel(0);
+				if($class->numlabels > 0)
+            	$label = $class->getLabel(0);
             }
             else{
             	$label = $class->label;
