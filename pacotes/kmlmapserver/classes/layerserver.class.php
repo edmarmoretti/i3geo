@@ -179,11 +179,11 @@ class LayerServer {
         $this->out_proj = ms_newProjectionObj("init=epsg:4326");
         // Set endpoint
         //die($_SERVER['REQUEST_URI']);
-      
+
 		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 		$protocolo = strtolower($protocolo[0]);
         $this->endpoint = $protocolo . '://'.$_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
-          
+
         // Process request
         if(!$this->has_error()) {
              $this->process_request();
@@ -193,7 +193,7 @@ class LayerServer {
         }
 
         return $this->send_stream($this->get_kml());
-            	
+
      }
 
     /**
@@ -365,7 +365,7 @@ class LayerServer {
                 {$namecol = explode(",",$namecol);$namecol = $namecol[0];}
                 // Add classes
                 $folder =& $this->_xml->Document->addChild('Folder');
-                
+
                 $class_list = $this->parse_classes($layer, $folder, $namecol, $title_field, $description_template);
 
                 //die(print_r($class_list, true));
@@ -375,7 +375,7 @@ class LayerServer {
                 //print("$searchfield && $searchstring");
                 if(!isset($searchfield)){$searchfield = false;}
                 if(!isset($searchstring)){$searchstring = false;}
-                
+
                 if($searchfield && $searchstring){
                     if(@$layer->queryByAttributes($searchfield, $searchstring, MS_MULTIPLE) == MS_SUCCESS){
                         $layer->open();
@@ -641,11 +641,16 @@ class LayerServer {
     function parse_classes(&$layer, &$folder,  &$namecol, &$title_field, &$description_template ){
         $style_ar = array();
         $numclasses = $layer->numclasses;
+        $versao = $this->versao();
+        $vi = $versao["inteiro"];
         for($i = 0; $i < $numclasses; $i++){
             $class = $layer->getClass($i);
-           
-            $label = $class->label;
-
+            if($vi >= 60200){
+            	$label = $classe->getLabel(0);
+            }
+            else{
+            	$label = $class->label;
+            }
             if($label){
                $style['label_color']        = $label->color;
                $style['label_size']         = $label->size;
@@ -1137,6 +1142,7 @@ function versao()
 	$versao["completa"] = $v;
 	$v = explode(".",$v);
 	$versao["principal"] = $v[0];
+	$versao["inteiro"] = ms_GetVersionInt();
 	return $versao;
 }
 }

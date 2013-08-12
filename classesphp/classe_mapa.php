@@ -1,6 +1,6 @@
 <?php
 /*
-Title: classe_mapa.php
+ Title: classe_mapa.php
 
 Manipula&ccedil;&atilde;o do mapa. Altera tamanho, lista temas, etc.
 
@@ -22,7 +22,7 @@ por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
+	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -31,74 +31,80 @@ Arquivo:
 i3geo/classesphp/classe_mapa.php
 */
 /*
-Classe: Mapa
+ Classe: Mapa
 */
 class Mapa
 {
 	/*
-	Variavel: $mapa
+	 Variavel: $mapa
 
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
-	Variavel: $arquivo
+	 Variavel: $arquivo
 
 	Arquivo map file
 	*/
 	public $arquivo;
 	/*
-	Variavel: $layers
+	 Variavel: $layers
 
 	Objetos layers
 	*/
 	public $layers;
 	/*
-	Variavel: $qyfile
+	 Variavel: $qyfile
 
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
-	Variavel: $v
+	 Variavel: $v
 
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 	/*
-	Variavel: $vi
+	 Variavel: $vi
 
 	Vers&atilde;o atual do Mapserver (valor inteiro)
 
 	Returns the MapServer version number (x.y.z) as an integer (x*10000 + y*100 + z). (New in v5.0) e.g. V5.4.3 would return 50403
 	*/
 	public $vi;
-/*
-Function: __construct
+	/*
+	 Function: __construct
 
-Cria um objeto mapa
+	Cria um objeto mapa
 
-parameters:
+	parameters:
 
-$map_file - Endere&ccedil;o do mapfile no servidor.
-*/
+	$map_file - Endere&ccedil;o do mapfile no servidor.
+	*/
 	function __construct($map_file,$locaplic="")
 	{
-			error_reporting(0);
-			if (!function_exists('ms_newMapObj')) {return false;}
-			if(file_exists($locaplic."/funcoes_gerais.php"))
+		error_reporting(0);
+		if (!function_exists('ms_newMapObj')) {
+			return false;
+		}
+		if(file_exists($locaplic."/funcoes_gerais.php"))
 			include_once($locaplic."/funcoes_gerais.php");
-			else
+		else
 			include_once("funcoes_gerais.php");
 		$this->v = versao();
 		$this->vi = $this->v["inteiro"];
 		$this->v = $this->v["principal"];
 		$this->qyfile = str_replace(".map",".qy",$map_file);
-			$this->locaplic = $locaplic;
-			if(!file_exists($map_file))
-			{return $this->arquivo = false;}
-			if(!@ms_newMapObj($map_file))
-			{return $this->mapa = false;}
+		$this->locaplic = $locaplic;
+		if(!file_exists($map_file))
+		{
+			return $this->arquivo = false;
+		}
+		if(!@ms_newMapObj($map_file))
+		{
+			return $this->mapa = false;
+		}
 		$this->mapa = @ms_newMapObj($map_file);
 		$this->arquivo = $map_file;
 		$c = $this->mapa->numlayers;
@@ -108,81 +114,91 @@ $map_file - Endere&ccedil;o do mapfile no servidor.
 			$this->nomes[] = $l->name;
 		}
 	}
-/*
-Method: salva
+	/*
+	 Method: salva
 
-Salva o mapfile atual
-*/
+	Salva o mapfile atual
+	*/
 	function salva()
 	{
-			if(connection_aborted()){exit();}
-			$this->mapa->save($this->arquivo);
+		if(connection_aborted()){
+			exit();
+		}
+		$this->mapa->save($this->arquivo);
 	}
-/*
-Method: listaTemasBuscaRapida
+	/*
+	 Method: listaTemasBuscaRapida
 
-Elabora uma lista de temas e seus respectivos itens para uso no m&eacute;todo buscaRegistros da classe classe_atributos
+	Elabora uma lista de temas e seus respectivos itens para uso no m&eacute;todo buscaRegistros da classe classe_atributos
 
-<Atributos->buscaRegistros>
+	<Atributos->buscaRegistros>
 
-A lista cont&eacute;m apenas os temas que est&atilde;o vis&iacute;veis e que possuem o metadata "itembuscarapida"
+	A lista cont&eacute;m apenas os temas que est&atilde;o vis&iacute;veis e que possuem o metadata "itembuscarapida"
 
-Retorno:
+	Retorno:
 
-{string} - Lista de busca no formato item;tema,item;tema
-*/
+	{string} - Lista de busca no formato item;tema,item;tema
+	*/
 	function listaTemasBuscaRapida(){
 		$lista = array();
 		foreach($this->layers as $l)
 		{
 			$metadata = $l->getmetadata("itembuscarapida");
 			if($metadata != "")
-			{$lista[] = $metadata.";".$l->name;}
+			{
+				$lista[] = $metadata.";".$l->name;
+			}
 		}
 		return implode(",",$lista);
 	}
-/*
-Method: mudaoutputformat
+	/*
+	 Method: mudaoutputformat
 
-Muda o OUTPUTFORMAT
+	Muda o OUTPUTFORMAT
 
-Parametro:
+	Parametro:
 
-tipo {string} - OUTPUTFORMAT que ser&aacute; aplicado. deve existir no mapfile b&aacute;sico que iniciou o i3Geo
-*/
+	tipo {string} - OUTPUTFORMAT que ser&aacute; aplicado. deve existir no mapfile b&aacute;sico que iniciou o i3Geo
+	*/
 	function mudaoutputformat($tipo)
 	{
 		foreach($this->layers as $l)
-		{$l->setMetaData("cache","");}
+		{
+			$l->setMetaData("cache","");
+		}
 		return $this->mapa->selectOutputFormat($tipo);
 	}
-/*
-Method: pegaMensagens
+	/*
+	 Method: pegaMensagens
 
-Pega as mensagens do metadata "mensagem" existentes nos layers do mapa atual
+	Pega as mensagens do metadata "mensagem" existentes nos layers do mapa atual
 
-Return:
+	Return:
 
-{String}
-*/
+	{String}
+	*/
 	function pegaMensagens()
 	{
 		$mensagem = "";
 		foreach($this->layers as $l)
 		{
 			if($l->status == MS_DEFAULT)
-			{$mensagem .= $l->getmetadata("mensagem");}
+			{
+				$mensagem .= $l->getmetadata("mensagem");
+			}
 		}
 		if (function_exists("mb_convert_encoding"))
-		{$mensagem = mb_convert_encoding($mensagem,"UTF-8","ISO-8859-1");}
+		{
+			$mensagem = mb_convert_encoding($mensagem,"UTF-8","ISO-8859-1");
+		}
 		return ($mensagem);
 	}
 
-/*
-Method: gravaImagemCorpo (depreciado)
+	/*
+	 Method: gravaImagemCorpo (depreciado)
 
-Grava a imagem do mapa atual
-*/
+	Grava a imagem do mapa atual
+	*/
 	function gravaImagemCorpo()
 	{
 		$imgo = $this->mapa->draw();
@@ -192,15 +208,15 @@ Grava a imagem do mapa atual
 		//$imgo->free();
 		return ($nome);
 	}
-/*
-Method: parametrosTemas
+	/*
+	 Method: parametrosTemas
 
-Pega os parametros dos layers do mapa.
+	Pega os parametros dos layers do mapa.
 
-return:
+	return:
 
-string - javascript com os parametros
-*/
+	string - javascript com os parametros
+	*/
 	function parametrosTemas()
 	{
 		$temas = array();
@@ -208,7 +224,9 @@ string - javascript com os parametros
 		$dir = dirname($this->arquivo);
 		//$qy = file_exists($this->qyfile);
 		foreach($this->layers as $l)
-		{$l->set("template","none.htm");}
+		{
+			$l->set("template","none.htm");
+		}
 		foreach ($this->layers as $oLayer)
 		{
 			$sel = "nao";
@@ -224,18 +242,24 @@ string - javascript com os parametros
 			}
 			$escondido = $oLayer->getmetadata("escondido");
 			if($escondido == "")
-			{$escondido = "nao";}
+			{
+				$escondido = "nao";
+			}
 			if ( (strtoupper($oLayer->getmetadata("tema")) != "NAO") )
 			{
 				$escala = $oLayer->getmetadata("escala");
-				if ($escala == ""){$escala = 0;}
+				if ($escala == ""){
+					$escala = 0;
+				}
 				$down = $oLayer->getmetadata("download");
 				//
 				//verifica se o layer &eacute; do tipo features
 				//
 				$f = "nao";
 				if (($oLayer->data == "") && ($oLayer->connection == ""))
-				{$f = "sim";}
+				{
+					$f = "sim";
+				}
 				$ct = $oLayer->connectiontype;
 				//
 				//verifica se o tema tem wfs
@@ -246,7 +270,9 @@ string - javascript com os parametros
 				//
 				$usasld = "nao";
 				if($oLayer->getmetadata("wms_sld_body") !== "" || $oLayer->getmetadata("wms_sld_url") !== "")
-				{$usasld = "sim";}
+				{
+					$usasld = "sim";
+				}
 				//
 				//verifica se o tema pode receber a opera&ccedil;&atilde;o de zoom para o tema
 				//
@@ -265,7 +291,9 @@ string - javascript com os parametros
 				//
 				$contextoescala = "nao";
 				if(($oLayer->minscaledenom > 0) || ($oLayer->maxscaledenom > 0))
-				{$contextoescala = "sim";}
+				{
+					$contextoescala = "sim";
+				}
 				//
 				//verifica se o usu&aacute;rio pode editar o SQL em DATA
 				//
@@ -273,33 +301,45 @@ string - javascript com os parametros
 				if($ct == 3 || $ct == 4 || $ct == 6 || $ct == 8)
 				{
 					if (strtoupper($oLayer->getmetadata("editorsql")) != "NAO")
-					{$editorsql = "sim";}
+					{
+						$editorsql = "sim";
+					}
 				}
 				//
 				//verifica se o tema pode ser utilizado para gerar gr&aacute;ficos de linha do tempo
 				//
 				$ltempo = "nao";
 				if($oLayer->getmetadata("ltempoformatodata") !== "")
-				{$ltempo = "sim";}
+				{
+					$ltempo = "sim";
+				}
 				//
 				//verifica se o tema faz cache automatico
 				//
 				$cache = "nao";
 				if(strtoupper($oLayer->getmetadata("cache")) == "SIM")
-				{$cache = "sim";}
+				{
+					$cache = "sim";
+				}
 				//
 				//verifica se o tema receber&aacute; efeito de transi&ccedil;&atilde;o de zoom
 				//
 				$transitioneffect = "sim";
 				if($oLayer->getmetadata("transitioneffect") == "NAO")
-				{$transitioneffect = "nao";}
+				{
+					$transitioneffect = "nao";
+				}
 				//
 				$permitecomentario = "nao";
 				if($oLayer->getmetadata("nomeoriginal") != "" && strtoupper($oLayer->getmetadata("permitecomentario")) != "NAO")
-				{$permitecomentario = "sim";}
+				{
+					$permitecomentario = "sim";
+				}
 				$aplicaextensao = "nao";
 				if(strtoupper($oLayer->getmetadata("aplicaextensao")) == "SIM")
-				{$aplicaextensao = "sim";}
+				{
+					$aplicaextensao = "sim";
+				}
 				$wmsurl = "";
 				$wmsformat = "";
 				$wmssrs = "";
@@ -322,42 +362,42 @@ string - javascript com os parametros
 				//if($oLayer->labelitem != "")
 				//{$tiles = "nao";}
 				$temas[] = array(
-					"name"=>($oLayer->name),
-					"nomeoriginal"=>($oLayer->getmetadata("nomeoriginal")),
-					"status"=>($oLayer->status),
-					"tema"=>(mb_convert_encoding(($oLayer->getmetadata("tema")),"UTF-8","ISO-8859-1")),
-					"transparency"=>($oLayer->opacity),
-					"type"=>($oLayer->type),
-					"sel"=>$sel,
-					"nsel"=>$nSel,
-					"escala"=>$escala,
-					"download"=>$down,
-					"features"=>$f,
-					"connectiontype"=>$ct,
-					"zoomtema"=>$zoomtema,
-					"contextoescala"=>$contextoescala,
-					"etiquetas"=>($oLayer->getmetadata("TIP")),
-					"identifica"=>($oLayer->getmetadata("IDENTIFICA")),
-					"editorsql"=>$editorsql,
-					"linhadotempo"=>$ltempo,
-					"escondido"=>strtolower($escondido),
-					"iconetema"=>($oLayer->getmetadata("iconetema")),
-					"classe"=>($oLayer->getmetadata("classe")),
-					"permitecomentario"=>$permitecomentario,
-					"exttema"=>$exttema,
-					"aplicaextensao"=>$aplicaextensao,
-					"transitioneffect"=>$transitioneffect,
-					"wmsurl"=>$wmsurl,
-					"wmsname"=>$wmsname,
-					"wmsformat"=>$wmsformat,
-					"wmssrs"=>$wmssrs,
-					"wmstile"=>$wmstile,
-					"tiles"=>$tiles,
-					"temporizador"=>($oLayer->getmetadata("temporizador")),
-					"permiteogc"=>($oLayer->getmetadata("permiteogc")),
-					"itembuscarapida"=>($oLayer->getmetadata("itembuscarapida")),
-					"usasld"=>$usasld,
-					"cache"=>$cache
+						"name"=>($oLayer->name),
+						"nomeoriginal"=>($oLayer->getmetadata("nomeoriginal")),
+						"status"=>($oLayer->status),
+						"tema"=>(mb_convert_encoding(($oLayer->getmetadata("tema")),"UTF-8","ISO-8859-1")),
+						"transparency"=>($oLayer->opacity),
+						"type"=>($oLayer->type),
+						"sel"=>$sel,
+						"nsel"=>$nSel,
+						"escala"=>$escala,
+						"download"=>$down,
+						"features"=>$f,
+						"connectiontype"=>$ct,
+						"zoomtema"=>$zoomtema,
+						"contextoescala"=>$contextoescala,
+						"etiquetas"=>($oLayer->getmetadata("TIP")),
+						"identifica"=>($oLayer->getmetadata("IDENTIFICA")),
+						"editorsql"=>$editorsql,
+						"linhadotempo"=>$ltempo,
+						"escondido"=>strtolower($escondido),
+						"iconetema"=>($oLayer->getmetadata("iconetema")),
+						"classe"=>($oLayer->getmetadata("classe")),
+						"permitecomentario"=>$permitecomentario,
+						"exttema"=>$exttema,
+						"aplicaextensao"=>$aplicaextensao,
+						"transitioneffect"=>$transitioneffect,
+						"wmsurl"=>$wmsurl,
+						"wmsname"=>$wmsname,
+						"wmsformat"=>$wmsformat,
+						"wmssrs"=>$wmssrs,
+						"wmstile"=>$wmstile,
+						"tiles"=>$tiles,
+						"temporizador"=>($oLayer->getmetadata("temporizador")),
+						"permiteogc"=>($oLayer->getmetadata("permiteogc")),
+						"itembuscarapida"=>($oLayer->getmetadata("itembuscarapida")),
+						"usasld"=>$usasld,
+						"cache"=>$cache
 				);
 			}
 		}
@@ -367,28 +407,28 @@ string - javascript com os parametros
 		$temas = array_reverse($temas);
 		return $temas;
 	}
-/*
-Method: redesenhaCorpo
+	/*
+	 Method: redesenhaCorpo
 
-Redesenha o mapa e retorna as vari&aacute;veis necess&aacute;rias para montar o mapa.
+	Redesenha o mapa e retorna as vari&aacute;veis necess&aacute;rias para montar o mapa.
 
-Parametros:
+	Parametros:
 
-$tipoimagem - filtro que ser&aacute; aplicado na imagem (opcional).
+	$tipoimagem - filtro que ser&aacute; aplicado na imagem (opcional).
 
-Return:
+	Return:
 
-string - parametros do corpo do mapa
+	string - parametros do corpo do mapa
 
-Include:
-<classe_imagem.php>
-*/
+	Include:
+	<classe_imagem.php>
+	*/
 	function redesenhaCorpo($tipoimagem,$utilizacgi,$locmapserv)
 	{
 		ms_ResetErrorList();
 		if(file_exists($this->locaplic."/classe_imagem.php"))
 			include_once($this->locaplic."/classe_imagem.php");
-			else
+		else
 			include_once("classe_imagem.php");
 		$nomer = "";
 		$qy = file_exists($this->qyfile);
@@ -415,7 +455,9 @@ Include:
 					{
 						$classe = $layer->getclass(0);
 						if (($classe->name == "") || ($classe->name == " "))
-						{$classe->set("name",$layer->getmetadata("tema"));}
+						{
+							$classe->set("name",$layer->getmetadata("tema"));
+						}
 					}
 				}
 			}
@@ -429,20 +471,25 @@ Include:
 		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim" && $tipoimagem=="nenhum" && !$qy)
 		{
 			foreach($this->layers as $l)
-			{$l->set("status",MS_OFF);}
+			{
+				$l->set("status",MS_OFF);
+			}
 			$imgo = @$this->mapa->draw();
 		}
 		else
 		{
 			//if($tipoimagem != "nenhum")
 			//{
-				$of = $this->mapa->outputformat;
-				$of->set("imagemode",MS_IMAGEMODE_RGB);
+			$of = $this->mapa->outputformat;
+			$of->set("imagemode",MS_IMAGEMODE_RGB);
 			//}
 			if (!$qy)
-			{$imgo = @$this->mapa->draw();}
+			{
+				$imgo = @$this->mapa->draw();
+			}
 			else
-			{$imgo = @$this->mapa->drawQuery();}
+			{$imgo = @$this->mapa->drawQuery();
+			}
 			$mensagemErro = "";
 			$error = ms_GetErrorObj();
 			while($error && $error->code != MS_NOERR)
@@ -466,30 +513,52 @@ Include:
 				foreach ($tiposImagem as $tipoimagem){
 					$m = new Imagem($nomer);
 					if ($tipoimagem == "cinza")
-					{imagepng($m->cinzaNormal(),str_replace("\\","/",$nomer));}
+					{
+						imagepng($m->cinzaNormal(),str_replace("\\","/",$nomer));
+					}
 					if ($tipoimagem == "sepiaclara")
-					{imagepng($m->sepiaClara(),str_replace("\\","/",$nomer));}
+					{
+						imagepng($m->sepiaClara(),str_replace("\\","/",$nomer));
+					}
 					if ($tipoimagem == "sepianormal")
-					{imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));}
+					{
+						imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));
+					}
 					if ($tipoimagem == "negativo")
-					{imagepng($m->negativo(),str_replace("\\","/",$nomer));}
+					{
+						imagepng($m->negativo(),str_replace("\\","/",$nomer));
+					}
 					if ($tipoimagem == "detectaBordas")
-					{imagepng($m->detectaBordas(),str_replace("\\","/",$nomer));}
+					{
+						imagepng($m->detectaBordas(),str_replace("\\","/",$nomer));
+					}
 					if ($tipoimagem == "embassa")
-					{imagepng($m->embassa(),str_replace("\\","/",$nomer));}
+					{
+						imagepng($m->embassa(),str_replace("\\","/",$nomer));
+					}
 					if ($tipoimagem == "gaussian_blur")
-					{imagepng($m->gaussian_blur(),str_replace("\\","/",$nomer));}
+					{
+						imagepng($m->gaussian_blur(),str_replace("\\","/",$nomer));
+					}
 					if ($tipoimagem == "selective_blur")
-					{imagepng($m->selective_blur(),str_replace("\\","/",$nomer));}
+					{
+						imagepng($m->selective_blur(),str_replace("\\","/",$nomer));
+					}
 					if ($tipoimagem == "mean_removal")
-					{imagepng($m->mean_removal(),str_replace("\\","/",$nomer));}
+					{
+						imagepng($m->mean_removal(),str_replace("\\","/",$nomer));
+					}
 					if ($tipoimagem == "pixelate")
-					{imagepng($m->pixelate(),str_replace("\\","/",$nomer));}
+					{
+						imagepng($m->pixelate(),str_replace("\\","/",$nomer));
+					}
 				}
 			}
 			$nomer = ($imgo->imageurl).basename($nomer);
 		}
-		if ($imgo == ""){return "erro";}
+		if ($imgo == ""){
+			return "erro";
+		}
 		$e = $this->mapa->extent;
 		$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
 		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim" && !$qy)
@@ -508,17 +577,17 @@ Include:
 		$res["erro"] = $mensagemErro;
 		return $res;
 	}
-/*
-Method: redesenhaEntorno (depreciado)
+	/*
+	 Method: redesenhaEntorno (depreciado)
 
-Redesenha o entorno do mapa (depreciado).
+	Redesenha o entorno do mapa (depreciado).
 
-Redesenha as partes norte, sul, leste e oeste do mapa e retorna as vari&aacute;veis necess&aacute;rias para montar o mapa.
+	Redesenha as partes norte, sul, leste e oeste do mapa e retorna as vari&aacute;veis necess&aacute;rias para montar o mapa.
 
-Return:
+	Return:
 
-string - javascript com as vari&aacute;veis para redesenho do mapa
-*/
+	string - javascript com as vari&aacute;veis para redesenho do mapa
+	*/
 	function redesenhaEntorno()
 	{
 		$nomes = nomeRandomico();
@@ -547,27 +616,27 @@ string - javascript com as vari&aacute;veis para redesenho do mapa
 		$nomeS = gravaImagemMapa();
 		return "var imagens=['".$nomeL["url"]."','".$nomeO["url"]."','".$nomeN["url"]."','".$nomeS["url"]."'];";
 	}
-/*
-Method: ativalegenda
+	/*
+	 Method: ativalegenda
 
-Ativa/desativa legenda, incluindo ou n&atilde;o no corpo do mapa.
-*/
+	Ativa/desativa legenda, incluindo ou n&atilde;o no corpo do mapa.
+	*/
 	function ativalegenda()
 	{
 		$legenda = $this->mapa->legend;
 		$legenda->status == MS_EMBED ? $legenda->set("status",MS_OFF) : $legenda->set("status",MS_EMBED) ;
 		return "ok";
 	}
-/*
-Method: ativalogo
+	/*
+	 Method: ativalogo
 
-Ativa/desativa logomarca.
+	Ativa/desativa logomarca.
 
-A logomarca &eacute; mostrada no canto superior direito da imagem do mapa.
-No mapfile padr&atilde;o (geral1.map), o layer "copyright" &eacute; utilizado para incluir a logomarca.
-Essa fun&ccedil;&atilde;o liga ou desliga esse layer, manipulando a propriedade "status".
+	A logomarca &eacute; mostrada no canto superior direito da imagem do mapa.
+	No mapfile padr&atilde;o (geral1.map), o layer "copyright" &eacute; utilizado para incluir a logomarca.
+	Essa fun&ccedil;&atilde;o liga ou desliga esse layer, manipulando a propriedade "status".
 
-*/
+	*/
 	function ativalogo()
 	{
 		$layer = $this->mapa->getlayerbyname("copyright");
@@ -577,19 +646,19 @@ Essa fun&ccedil;&atilde;o liga ou desliga esse layer, manipulando a propriedade 
 		}
 		return "ok";
 	}
-/*
-Method: listaTemasLocais
+	/*
+	 Method: listaTemasLocais
 
-Lista os temas locais de um mapa.
+	Lista os temas locais de um mapa.
 
-Lista os temas existentes no mapfile atual, que utilizam como fonte de dados shape file, e que est&atilde;o armazenados no diretório tempor&aacute;rio do mapa.
-Os arquivos shape file existentes no diretório tempor&aacute;rio do mapa s&atilde;o pass&iacute;veis de edi&ccedil;&atilde;o.
-Obs.: Toda vez que um tema local &eacute; criado pelo I3Geo, o METADATA "TEMALOCAL" &eacute; marcado como "sim".
+	Lista os temas existentes no mapfile atual, que utilizam como fonte de dados shape file, e que est&atilde;o armazenados no diretório tempor&aacute;rio do mapa.
+	Os arquivos shape file existentes no diretório tempor&aacute;rio do mapa s&atilde;o pass&iacute;veis de edi&ccedil;&atilde;o.
+	Obs.: Toda vez que um tema local &eacute; criado pelo I3Geo, o METADATA "TEMALOCAL" &eacute; marcado como "sim".
 
-Parameter:
+	Parameter:
 
-$tipo - tipo de layer que ser&aacute; considerado. Default &eacute; 0.
-*/
+	$tipo - tipo de layer que ser&aacute; considerado. Default &eacute; 0.
+	*/
 	function listaTemasLocais($tipo=0)
 	{
 		$final = array(); //resultado final
@@ -604,29 +673,29 @@ $tipo - tipo de layer que ser&aacute; considerado. Default &eacute; 0.
 		}
 		return $final;
 	}
-/*
-Method: listaTemas
+	/*
+	 Method: listaTemas
 
-Lista os temas de um mapa.
+	Lista os temas de um mapa.
 
-Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema &eacute; do
-tipo escondido, ou seja, n&atilde;o deve ser listado pelo I3Geo em combos ou listagens. Por isso,
-layers desse tipo s&atilde;o ignorados por essa fun&ccedil;&atilde;o.
+	Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema &eacute; do
+		tipo escondido, ou seja, n&atilde;o deve ser listado pelo I3Geo em combos ou listagens. Por isso,
+	layers desse tipo s&atilde;o ignorados por essa fun&ccedil;&atilde;o.
 
-Parameter:
+	Parameter:
 
-$opcao Situa&ccedil;&atilde;o desejada do tema (ligados ou todos).
+	$opcao Situa&ccedil;&atilde;o desejada do tema (ligados ou todos).
 
-Return:
+	Return:
 
-Array com os temas e seus nomes
+	Array com os temas e seus nomes
 
-Properties:
+	Properties:
 
-tema
+	tema
 
-nome
-*/
+	nome
+	*/
 	function listaTemas($opcao)
 	{
 		$final = array();
@@ -646,44 +715,50 @@ nome
 			foreach ($this->layers as $layer)
 			{
 				if ($layer->getmetadata("ESCONDIDO") == "")
-				{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}
+				{
+					$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));
+				}
 			}
 		}
 		return $final;
 	}
-/*
-Method: listaTemasTipo
+	/*
+	 Method: listaTemasTipo
 
-Lista os temas, vis&iacute;veis, de um determinado tipo de fei&ccedil;&atilde;o de um mapa.
+	Lista os temas, vis&iacute;veis, de um determinado tipo de fei&ccedil;&atilde;o de um mapa.
 
-Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema &eacute; do
-tipo escondido, ou seja, n&atilde;o deve ser listado pelo I3Geo em combos ou listagens. Por isso,
-layers desse tipo s&atilde;o ignorados por essa fun&ccedil;&atilde;o.
+	Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema &eacute; do
+		tipo escondido, ou seja, n&atilde;o deve ser listado pelo I3Geo em combos ou listagens. Por isso,
+	layers desse tipo s&atilde;o ignorados por essa fun&ccedil;&atilde;o.
 
-Parametros:
+	Parametros:
 
-$tipo Tipo de tema (pode ser mais de um) ponto,poligono,linha,raster
+	$tipo Tipo de tema (pode ser mais de um) ponto,poligono,linha,raster
 
-Return:
+	Return:
 
-Array com os temas e seus nomes
+	Array com os temas e seus nomes
 
-Properties:
+	Properties:
 
-tema
+	tema
 
-nome
+	nome
 
-*/
+	*/
 	function listaTemasTipo($tipo,$selecao="nao")
 	{
 		if (($selecao=="sim") && (file_exists($this->qyfile)))
-		{$this->mapa->loadquery($this->qyfile);}
+		{
+			$this->mapa->loadquery($this->qyfile);
+		}
 		$layers = array();
 		foreach($this->layers as $layer)
 		{
 			if (($layer->isvisible()) && ($layer->getmetadata("ESCONDIDO") == ""))
-			{$layers[] = $layer;}
+			{
+				$layers[] = $layer;
+			}
 		}
 		$final = array();
 		//substitui os tipos pelo código usado no mapserver
@@ -701,34 +776,37 @@ nome
 				{
 					$res_count = $layer->getNumresults();
 					if ($res_count > 0)
-					{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}
+					{
+						$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));
+					}
 				}
 				else
-				{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}
+				{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));
+				}
 			}
 		}
 		return $final;
 	}
-/*
-Method: listaTemasComSel
+	/*
+	 Method: listaTemasComSel
 
-Lista os temas de um mapa que possuem elementos selecionados.
+	Lista os temas de um mapa que possuem elementos selecionados.
 
-Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema &eacute; do
-tipo escondido, ou seja, n&atilde;o deve ser listado pelo I3Geo em combos ou listagens. Por isso,
-layers desse tipo s&atilde;o ignorados por essa fun&ccedil;&atilde;o.
+	Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, indica que o tema &eacute; do
+		tipo escondido, ou seja, n&atilde;o deve ser listado pelo I3Geo em combos ou listagens. Por isso,
+	layers desse tipo s&atilde;o ignorados por essa fun&ccedil;&atilde;o.
 
-Return:
+	Return:
 
-Array com os temas e seus nomes
+	Array com os temas e seus nomes
 
-Properties:
+	Properties:
 
-tema
+	tema
 
-nome
+	nome
 
-*/
+	*/
 	function listaTemasComSel()
 	{
 		$layers = array();
@@ -738,7 +816,9 @@ nome
 			foreach($this->layers as $layer)
 			{
 				if ($layer->getmetadata("ESCONDIDO") == "")
-				{$layers[] = $layer;}
+				{
+					$layers[] = $layer;
+				}
 			}
 			$this->mapa->loadquery($this->qyfile);
 			foreach ($layers as $layer)
@@ -755,20 +835,20 @@ nome
 		}
 		return $final;
 	}
-/*
-Method: mudaQS
+	/*
+	 Method: mudaQS
 
-Muda o tamanho do query map.
+	Muda o tamanho do query map.
 
-Essa fun&ccedil;&atilde;o &eacute; executada na inicializa&ccedil;&atilde;o do mapa ou quando o mapa tem suas dimens&otilde;es alteradas.
-A fun&ccedil;&atilde;o de altera&ccedil;&atilde;o dos par&acirc;metros do query map original do PHPMapscript, n&atilde;o funciona corretamente.
+	Essa fun&ccedil;&atilde;o &eacute; executada na inicializa&ccedil;&atilde;o do mapa ou quando o mapa tem suas dimens&otilde;es alteradas.
+	A fun&ccedil;&atilde;o de altera&ccedil;&atilde;o dos par&acirc;metros do query map original do PHPMapscript, n&atilde;o funciona corretamente.
 
-Parametros:
+	Parametros:
 
-$w - Largura.
+	$w - Largura.
 
-$h - Altura.
-*/
+	$h - Altura.
+	*/
 	function mudaQS($w,$h)
 	{
 		//le o map file
@@ -787,9 +867,12 @@ $h - Altura.
 		{
 			$testa = explode("QUERYMAP",$e);
 			if (count($testa) > 1)
-			{$pega = "sim";}
+			{
+				$pega = "sim";
+			}
 			else
-			{$pega = "nao";}
+			{$pega = "nao";
+			}
 			$testa = explode("SIZE",$e);
 			if ((count($testa) > 1) && ($pega == "sim"))
 			{
@@ -801,21 +884,23 @@ $h - Altura.
 		//salva o mapfile
 		$abre = fopen($this->arquivo, "wt");
 		foreach($novoarray as $linha)
-		{$escreve = fwrite ($abre,$linha);}
+		{
+			$escreve = fwrite ($abre,$linha);
+		}
 		$fecha = fclose ($abre);
 	}
-/*
-Method: corQM
+	/*
+	 Method: corQM
 
-Muda a cor do query map.
+	Muda a cor do query map.
 
-Muda a cor utilizada para mostrar os elementos selecionados de um tema ou retorna a cor atual
+	Muda a cor utilizada para mostrar os elementos selecionados de um tema ou retorna a cor atual
 
-Parameter:
+	Parameter:
 
-$cor - RGB separado por v&iacute;rgula. Se a cor for vazia, retorna a cor atual.
+	$cor - RGB separado por v&iacute;rgula. Se a cor for vazia, retorna a cor atual.
 
-*/
+	*/
 	function corQM($cor)
 	{
 		$c = $this->mapa->querymap->color;
@@ -831,16 +916,16 @@ $cor - RGB separado por v&iacute;rgula. Se a cor for vazia, retorna a cor atual.
 		}
 		return ($retorno);
 	}
-/*
-Method: corfundo
+	/*
+	 Method: corfundo
 
-Muda a cor do fundo do mapa.
+	Muda a cor do fundo do mapa.
 
-Parameter:
+	Parameter:
 
-$cor - RGB separado por v&iacute;rgula. Se a cor for vazia, retorna a cor atual.
+	$cor - RGB separado por v&iacute;rgula. Se a cor for vazia, retorna a cor atual.
 
-*/
+	*/
 	function corfundo($cor)
 	{
 		$c = $this->mapa->imagecolor;
@@ -852,32 +937,33 @@ $cor - RGB separado por v&iacute;rgula. Se a cor for vazia, retorna a cor atual.
 			$this->mapa->setmetadata("cache","");
 		}
 		else
-		{$retorno = $c->red.",".$c->green.",".$c->blue;}
+		{$retorno = $c->red.",".$c->green.",".$c->blue;
+		}
 		return ($retorno);
 	}
-/*
-Method: gradeCoord
+	/*
+	 Method: gradeCoord
 
-Gera uma grade de coordenadas
+	Gera uma grade de coordenadas
 
-A grade &eacute; incluida no mapa como um novo layer.
+	A grade &eacute; incluida no mapa como um novo layer.
 
-Parameter:
+	Parameter:
 
-$intervalo - intervalo entre as linhas da grade.
+	$intervalo - intervalo entre as linhas da grade.
 
-$corlinha - cor em RGB das linhas da grade
+	$corlinha - cor em RGB das linhas da grade
 
-$larguralinha - largura das linhas da grade em pixel
+	$larguralinha - largura das linhas da grade em pixel
 
-$tipolinha - s&iacute;mbolo das linhas
+	$tipolinha - s&iacute;mbolo das linhas
 
-$tamanhotexto - tamanho do texto
+	$tamanhotexto - tamanho do texto
 
-$cortexto - cor do texto
+	$cortexto - cor do texto
 
-$incluitexto - sim|nao
-*/
+	$incluitexto - sim|nao
+	*/
 	function gradeCoord($intervalo,$corlinha="200,200,200",$larguralinha=1,$tipolinha="linha",$tamanhotexto=MS_TINY,$fonte="bitmap",$cortexto="0,0,0",$incluitexto="sim",$mascara="-1,-1,-1",$shadowcolor="-1,-1,-1",$shadowsizex=0,$shadowsizey=0)
 	{
 		//echo $corlinha;
@@ -918,11 +1004,21 @@ $incluitexto - sim|nao
 			{
 				$label->set("type",MS_BITMAP);
 				$t = MS_TINY;
-				if ($tamanhotexto > 5 ){$t = MS_TINY;}
-				if ($tamanhotexto >= 7 ){$t = MS_SMALL;}
-				if ($tamanhotexto >= 10 ){$t = MS_MEDIUM;}
-				if ($tamanhotexto >= 12 ){$t = MS_LARGE;}
-				if ($tamanhotexto >= 14 ){$t = MS_GIANT;}
+				if ($tamanhotexto > 5 ){
+					$t = MS_TINY;
+				}
+				if ($tamanhotexto >= 7 ){
+					$t = MS_SMALL;
+				}
+				if ($tamanhotexto >= 10 ){
+					$t = MS_MEDIUM;
+				}
+				if ($tamanhotexto >= 12 ){
+					$t = MS_LARGE;
+				}
+				if ($tamanhotexto >= 14 ){
+					$t = MS_GIANT;
+				}
 				$label->set("size",$t);
 			}
 			$label->set("buffer",0);
@@ -935,7 +1031,7 @@ $incluitexto - sim|nao
 			$label->set("offsetx",0);
 			$label->set("offsety",0);
 			if($mascara != "")
-			corE($label,$mascara,"outlinecolor");
+				corE($label,$mascara,"outlinecolor");
 			if($shadowcolor != "")
 			{
 				corE($label,$shadowcolor,"shadowcolor");
@@ -945,27 +1041,27 @@ $incluitexto - sim|nao
 		}
 		return ("ok");
 	}
-/*
-Method: adicionaTema
+	/*
+	 Method: adicionaTema
 
-Acrescenta um novo tema em um arquivo map file.
+	Acrescenta um novo tema em um arquivo map file.
 
-O tema deve estar inclu&iacute;do em um arquivo .map localizado no diretório "temas".
-Ao ser adicionado, todos os layers do arquivo indicado ser&atilde;o acrescentados.
-Os layers que formam grupos tamb&eacute;m s&atilde;o processados, tendo seus nomes alterados de acordo.
-Cada novo layer receber&aacute; um novo nome, definido de forma aleatória.
-Os nomes dos temas podem conter o caminho completo do mapfile.
-O nome original do LAYER (NAME) sera armazenado no metadata nomeoriginal
-O nome do tema (mapfile) original sera armazenado no metadata arquivotemaoriginal
+	O tema deve estar inclu&iacute;do em um arquivo .map localizado no diretório "temas".
+	Ao ser adicionado, todos os layers do arquivo indicado ser&atilde;o acrescentados.
+	Os layers que formam grupos tamb&eacute;m s&atilde;o processados, tendo seus nomes alterados de acordo.
+	Cada novo layer receber&aacute; um novo nome, definido de forma aleatória.
+	Os nomes dos temas podem conter o caminho completo do mapfile.
+	O nome original do LAYER (NAME) sera armazenado no metadata nomeoriginal
+	O nome do tema (mapfile) original sera armazenado no metadata arquivotemaoriginal
 
-Parametros:
+	Parametros:
 
-$temas - string Lista separada por v&iacute;rgulas, dos arquivos que ser&atilde;o abertos para pegar os novos layers. N&atilde;o inclua a extens&atilde;o ".map".
+	$temas - string Lista separada por v&iacute;rgulas, dos arquivos que ser&atilde;o abertos para pegar os novos layers. N&atilde;o inclua a extens&atilde;o ".map".
 
-$locaplic - string Diretório onde fica a aplica&ccedil;&atilde;o.
+	$locaplic - string Diretório onde fica a aplica&ccedil;&atilde;o.
 
-$random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
-*/
+	$random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
+	*/
 	function adicionaTema($temas,$locaplic,$random="sim")
 	{
 		//limpa selecao
@@ -1082,7 +1178,7 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 						if ($nlayer->group != " " && $nlayer->group != "" ){
 							$lr = $nlayer->group;
 							if($nomeunico[$lr])
-							$nlayer->set("group",$nomeunico[$lr]);
+								$nlayer->set("group",$nomeunico[$lr]);
 						}
 						//
 						//verifica se &eacute; um WMS e se existem classes definidas
@@ -1101,7 +1197,7 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 							}
 							$sld = $nlayer->generateSLD();
 							if($sld != "")
-							$nlayer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
+								$nlayer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
 							$nlayer->set("type",$tipotemp);
 						}
 						cloneInlineSymbol($nlayer,$nmap,$this->mapa);
@@ -1136,21 +1232,23 @@ $random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 		}
 		return(true);
 	}
-/*
-Method: excluiTemas
+	/*
+	 Method: excluiTemas
 
-Exclui temas de um mapa.
+	Exclui temas de um mapa.
 
-O arquivo de sele&ccedil;&atilde;o (.qy) &eacute; apagado do diretório tempor&aacute;rio.
+	O arquivo de sele&ccedil;&atilde;o (.qy) &eacute; apagado do diretório tempor&aacute;rio.
 
-Parameter:
+	Parameter:
 
-$temas - lista separada por v&iacute;rgula dos temas que ser&atilde;o exclu&iacute;dos.
-*/
+	$temas - lista separada por v&iacute;rgula dos temas que ser&atilde;o exclu&iacute;dos.
+	*/
 	function excluiTemas($temas)
 	{
 		if (file_exists($this->qyfile))
-		{unlink($this->qyfile);}
+		{
+			unlink($this->qyfile);
+		}
 		$temas = explode(",",$temas);
 		foreach ($temas as $nome)
 		{
@@ -1180,21 +1278,21 @@ $temas - lista separada por v&iacute;rgula dos temas que ser&atilde;o exclu&iacu
 		}
 		return("ok");
 	}
-/*
-Method: ligaDesligaTemas
+	/*
+	 Method: ligaDesligaTemas
 
-Liga desliga temas.
+	Liga desliga temas.
 
-Torna temas vis&iacute;veis ou n&atilde;o no mapa alterando seu status.
+	Torna temas vis&iacute;veis ou n&atilde;o no mapa alterando seu status.
 
-Parametros:
+	Parametros:
 
-$ligar - lista separada por v&iacute;rgula dos temas que ser&atilde;o ligados.
+	$ligar - lista separada por v&iacute;rgula dos temas que ser&atilde;o ligados.
 
-$desligar - lista separada por v&iacute;rgula dos temas que ser&atilde;o desligados. Se for igual a todos, todos os layers ser&atilde;o desligados.
+	$desligar - lista separada por v&iacute;rgula dos temas que ser&atilde;o desligados. Se for igual a todos, todos os layers ser&atilde;o desligados.
 
-$adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&atilde;o existir no mapfile atual
-*/
+	$adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&atilde;o existir no mapfile atual
+	*/
 	function ligaDesligaTemas($ligar,$desligar,$adicionar="nao")
 	{
 		if(strTolower($adicionar) == "sim")
@@ -1209,7 +1307,9 @@ $adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&ati
 			}
 			foreach($teste as $t)
 			{
-				if(!in_array($t,$verificar)){$adicionar[] = $t;}
+				if(!in_array($t,$verificar)){
+					$adicionar[] = $t;
+				}
 			}
 			if(count($adicionar > 0))
 			{
@@ -1218,7 +1318,9 @@ $adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&ati
 				$this->mapa = ms_newMapObj($this->arquivo);
 				$c = $this->mapa->numlayers;
 				for ($i=0;$i < $c;++$i)
-				{$this->layers[] = $this->mapa->getlayer($i);}
+				{
+					$this->layers[] = $this->mapa->getlayer($i);
+				}
 			}
 		}
 		if($desligar == "todos")
@@ -1235,13 +1337,14 @@ $adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&ati
 				$vermultilayer = new vermultilayer();
 				$vermultilayer->verifica($this->arquivo,$layer);
 				if ($vermultilayer->resultado == 1) // o tema e multi layer
-				{$ls = $vermultilayer->temas;}
+				{$ls = $vermultilayer->temas;
+				}
 				$ls[] = $layer;
 				foreach ($ls as $l)
 				{
 					$l = $this->mapa->getlayerbyname($l);
 					if($l)
-					$l->set("status",2);
+						$l->set("status",2);
 				}
 			}
 		}
@@ -1254,60 +1357,64 @@ $adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&ati
 				$vermultilayer = new vermultilayer();
 				$vermultilayer->verifica($this->arquivo,$layer);
 				if ($vermultilayer->resultado == 1) // o tema e multi layer
-				{$ls = $vermultilayer->temas;}
+				{$ls = $vermultilayer->temas;
+				}
 				else
-				{$ls[] = $layer;}
+				{$ls[] = $layer;
+				}
 				foreach ($ls as $l)
 				{
 					$l = $this->mapa->getlayerbyname($l);
 					if($l)
-					$l->set("status",0);
+						$l->set("status",0);
 				}
 			}
 		}
 		return("ok");
 	}
-/*
-Method: adicionatemawms
+	/*
+	 Method: adicionatemawms
 
-Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
+	Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 
-Parametros:
+	Parametros:
 
-$tema - Tema que ser&aacute; adicionado.
-$servico - Endere&ccedil;o do web service.
-$nome - Nome do tema para a legenda.
-$proj - Lista das proje&ccedil;&otilde;es suportadas separadas por v&iacute;rgula.
-$formato - Lista dos formatos de imagem separadas por v&iacute;rgula.
-$locaplic - Diretório onde fica a aplica&ccedil;&atilde;o.
-$tipo - Tipo de representa&ccedil;&atilde;o poligonal|linear|pontual.
-$versao - Vers&atilde;o do getcapabilities
-$nomecamada - nome da camada do WMS
-$dir_tmp - diretório tempor&aacute;rio do I3Geo
-$imgdir - diretório tempor&aacute;rio das imagens
-$imgurl - url do imgdir
-$tiporep - tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es do mapa. Quando definido, &eacute; criado um sld para ser aplicado ao layer. poligonal|linear|pontual
-$suportasld - Suporta SLD sim|nao.
-$formatosinfo - lista de formatos da requisi&ccedil;&atilde;o de atributos para a fun&ccedil;&atilde;o getfeatureinfo (default text/plain)
-$time - espec&iacute;fico para WMS-T (par&acirc;mentro wms_time)
-$tile - indica se o WMS e do tipo TILE ou nao (0 ou 1)
-Include:
-<wmswfs.php>
-*/
+	$tema - Tema que ser&aacute; adicionado.
+	$servico - Endere&ccedil;o do web service.
+	$nome - Nome do tema para a legenda.
+	$proj - Lista das proje&ccedil;&otilde;es suportadas separadas por v&iacute;rgula.
+	$formato - Lista dos formatos de imagem separadas por v&iacute;rgula.
+	$locaplic - Diretório onde fica a aplica&ccedil;&atilde;o.
+	$tipo - Tipo de representa&ccedil;&atilde;o poligonal|linear|pontual.
+	$versao - Vers&atilde;o do getcapabilities
+	$nomecamada - nome da camada do WMS
+	$dir_tmp - diretório tempor&aacute;rio do I3Geo
+	$imgdir - diretório tempor&aacute;rio das imagens
+	$imgurl - url do imgdir
+	$tiporep - tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es do mapa. Quando definido, &eacute; criado um sld para ser aplicado ao layer. poligonal|linear|pontual
+	$suportasld - Suporta SLD sim|nao.
+	$formatosinfo - lista de formatos da requisi&ccedil;&atilde;o de atributos para a fun&ccedil;&atilde;o getfeatureinfo (default text/plain)
+	$time - espec&iacute;fico para WMS-T (par&acirc;mentro wms_time)
+	$tile - indica se o WMS e do tipo TILE ou nao (0 ou 1)
+	Include:
+	<wmswfs.php>
+	*/
 	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo="",$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain",$time="",$tile=0)
 	{
 		//echo $tile;exit;
 		if(file_exists($this->locaplic."/classesphp/wmswfs.php"))
-		include_once($this->locaplic."/classesphp/wmswfs.php");
+			include_once($this->locaplic."/classesphp/wmswfs.php");
 		else
-		include_once("wmswfs.php");
+			include_once("wmswfs.php");
 		//limpa selecao
 		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
+		{
+			unlink ($this->qyfile);
+		}
 		$layer = ms_newLayerObj($this->mapa);
 		$layer->set("status",MS_DEFAULT);
 		if($nomecamada == "default")
-		$nomecamada = $tema;
+			$nomecamada = $tema;
 		$layer->setmetadata("CLASSE","SIM");
 		$layer->setmetadata("TEXTO","NAO");
 		$layer->setmetadata("tema",$nomecamada);
@@ -1325,7 +1432,9 @@ Include:
 				$cor->setRGB(-1,-1,-1);
 			}
 			if ($tiporep == "pontual")
-			{$layer->set("type",MS_LAYER_POINT);}
+			{
+				$layer->set("type",MS_LAYER_POINT);
+			}
 			$sld = $layer->generateSLD();
 			$fp = fopen($dir_tmp."/".$imgdir."/".$layer->name."sld.xml", "a");
 			fputs( $fp, $sld );
@@ -1336,9 +1445,12 @@ Include:
 		$layer->set("connection",$servico);
 
 		if(ms_GetVersionInt() > 50201)
-		{$layer->setconnectiontype(MS_WMS);}
+		{
+			$layer->setconnectiontype(MS_WMS);
+		}
 		else
-		{$layer->set("connectiontype",MS_WMS);}
+		{$layer->set("connectiontype",MS_WMS);
+		}
 
 		$epsg = "EPSG:4618";
 		$e4291 = "nao";
@@ -1351,16 +1463,27 @@ Include:
 			{
 				$p = explode(":",$p);
 				if ($p[1] == "4326")
-				{$epsg = "EPSG:4326";}
+				{
+					$epsg = "EPSG:4326";
+				}
 				if ($p[1] == "4618")
-				{$epsg = "EPSG:4618";$e4291="sim";}
+				{
+					$epsg = "EPSG:4618";$e4291="sim";
+				}
 				if ($p[1] == "84")
-				{$ecrs = "CRS:84";$ecrs = "sim";}
+				{
+					$ecrs = "CRS:84";$ecrs = "sim";
+				}
 			}
 		}
-		else {$epsg = $proj;}
-		if ($e4291 == "sim"){$epsg = "EPSG:4618";}
-		if ($ecrs == "sim"){$epsg = $ecrs;}
+		else {$epsg = $proj;
+		}
+		if ($e4291 == "sim"){
+			$epsg = "EPSG:4618";
+		}
+		if ($ecrs == "sim"){
+			$epsg = $ecrs;
+		}
 		$epsg = trim($epsg);
 		$layer->setmetadata("wms_srs",$epsg);
 		$layer->setmetadata("wms_crs",$epsg);
@@ -1375,12 +1498,14 @@ Include:
 		//esse parametro e especifico do i3geo. Se for 1 indica um servico do tipo tile
 		$layer->setmetadata("wms_tile",$tile);
 		if($time != "")
-		$layer->setmetadata("wms_time",$time);
+			$layer->setmetadata("wms_time",$time);
 		//pega o tipo de formato de imagem que deve ser requisitado
 		//a prefer&ecirc;ncia &eacute; png, mas se n&atilde;o for poss&iacute;vel, pega o primeiro da lista de formatos
 		//dispon&iacute;veis no formato
 		if (stristr($formato,"png"))
-		{$im = "image/png";}
+		{
+			$im = "image/png";
+		}
 		else
 		{
 			$im = explode(",",$formato);
@@ -1405,29 +1530,29 @@ Include:
 		//$of->set("imagemode",MS_IMAGEMODE_RGB);
 		$this->salva();
 	}
-/*
-Method: converteWS
+	/*
+	 Method: converteWS
 
-Transforma o mapa atual em um web service.
+	Transforma o mapa atual em um web service.
 
-O novo map file &eacute; armazenado no mesmo diretório do map file original.
+	O novo map file &eacute; armazenado no mesmo diretório do map file original.
 
-Parametros:
+	Parametros:
 
-$locaplic - localiza&ccedil;&atilde;o do i3Geo
+	$locaplic - localiza&ccedil;&atilde;o do i3Geo
 
-$h - host name
+	$h - host name
 
-Return:
+	Return:
 
-Endere&ccedil;o do WMS
-*/
+	Endere&ccedil;o do WMS
+	*/
 	function converteWS($locaplic,$h)
 	{
 		//$nomews = str_replace(".map","ws.map",$this->arquivo);
 		$nomeurl = "/ogc.php?tema=".$this->arquivo;
 		/*
-		$w = $this->mapa->web;
+		 $w = $this->mapa->web;
 		$w->set("template","");
 		//adiciona os parametros no nivel do mapa
 		$this->mapa->setmetadata("wms_title","I3Geo");
@@ -1437,20 +1562,20 @@ Endere&ccedil;o do WMS
 		//$this->mapa->setmetadata("wms_getcontext_enabled","1");
 		foreach ($this->layers as $layer)
 		{
-			$n = pegaNome($layer);
-			$layer->setmetadata("wms_title",$n);
-			$layer->setmetadata("wms_name",$n);
-			$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
-			//$layer->setmetadata("wms_getcontext_enabled","1");
-			$layer->setmetadata("WMS_INCLUDE_ITEMS","all");
-			//$layer->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
-			$layer->set("status","ON");
-			$layer->set("template","none.htm");
-			$layer->setmetadata("gml_include_items","all");
-			$layer->set("dump",MS_TRUE);
-			$c = $layer->getclass(0);
-			if ($c->name == "")
-			{$c->name = " ";}
+		$n = pegaNome($layer);
+		$layer->setmetadata("wms_title",$n);
+		$layer->setmetadata("wms_name",$n);
+		$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
+		//$layer->setmetadata("wms_getcontext_enabled","1");
+		$layer->setmetadata("WMS_INCLUDE_ITEMS","all");
+		//$layer->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
+		$layer->set("status","ON");
+		$layer->set("template","none.htm");
+		$layer->setmetadata("gml_include_items","all");
+		$layer->set("dump",MS_TRUE);
+		$c = $layer->getclass(0);
+		if ($c->name == "")
+		{$c->name = " ";}
 		}
 		$eb = $this->mapa->scalebar;
 		$eb->set("status",MS_OFF);
@@ -1458,23 +1583,23 @@ Endere&ccedil;o do WMS
 		*/
 		return($nomeurl);
 	}
-/*
-Method: converteWMC
+	/*
+	 Method: converteWMC
 
-Transforma o mapa atual em um Web Map Context.
+	Transforma o mapa atual em um Web Map Context.
 
-O novo map file &eacute; armazenado no mesmo diretório do map file original.
+	O novo map file &eacute; armazenado no mesmo diretório do map file original.
 
-Parametros:
+	Parametros:
 
-$locmapserv - localiza&ccedil;&atilde;o do CGI do mapserver
+	$locmapserv - localiza&ccedil;&atilde;o do CGI do mapserver
 
-$h - host name
+	$h - host name
 
-Return:
+	Return:
 
-Endere&ccedil;o do WMC
-*/
+	Endere&ccedil;o do WMC
+	*/
 	function converteWMC($locmapserv,$h)
 	{
 		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
@@ -1500,7 +1625,9 @@ Endere&ccedil;o do WMC
 				$layer->setmetadata("wms_title",$n);
 				$codigo = $layer->getmetadata("nomeoriginal");
 				if($codigo == "")
-				{$codigo = $layer->name;}
+				{
+					$codigo = $layer->name;
+				}
 				$layer->setmetadata("wms_server_version","1.0.0");
 				$layer->setmetadata("wms_name",$codigo);
 				//$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
@@ -1514,17 +1641,24 @@ Endere&ccedil;o do WMC
 				$layer->set("template","none.htm");
 				$c = $layer->getclass(0);
 				if ($c->name == "")
-				{$c->name = " ";}
+				{
+					$c->name = " ";
+				}
 				if($layer->connectiontype != "WS_WMS" && $layer->getmetadata("permiteogc") == "" && $layer->getmetadata("TEMALOCAL") == ""){
 					if(ms_GetVersionInt() > 50201)
-					{$layer->setconnectiontype(MS_WMS);}
+					{
+						$layer->setconnectiontype(MS_WMS);
+					}
 					else
-					{$layer->set("connectiontype",MS_WMS);}
+					{$layer->set("connectiontype",MS_WMS);
+					}
 					$data = $urli3geo."/ogc.php?tema=".$codigo;
 					$layer->set("connection",$data);
 					$layer->set("data","");
 					if(file_exists("../temas/".$codigo.".map"))
-					{$layer->setmetadata("wms_onlineresource",$data);}
+					{
+						$layer->setmetadata("wms_onlineresource",$data);
+					}
 				}
 			}
 			else{
@@ -1536,18 +1670,18 @@ Endere&ccedil;o do WMC
 		$this->mapa->save($nomews);
 		return($nomeurl."&service=WMS&request=GetContext&version=1.1.0");
 	}
-/*
-Method: adicionaTemaGeoJson
+	/*
+	 Method: adicionaTemaGeoJson
 
-Adiciona um canal GeoRSS como um tema no mapa.
+	Adiciona um canal GeoRSS como um tema no mapa.
 
-Parametros:
+	Parametros:
 
-$servico - Endere&ccedil;o (url)  do GeoJson.
-$dir_tmp - Diretório onde o arquivo ser&aacute; criado.
-$locaplic - Localiza&ccedil;&atilde;o do I3geo
+	$servico - Endere&ccedil;o (url)  do GeoJson.
+	$dir_tmp - Diretório onde o arquivo ser&aacute; criado.
+	$locaplic - Localiza&ccedil;&atilde;o do I3geo
 
-*/
+	*/
 	function adicionaTemaGeoJson($servico,$dir_tmp,$locaplic){
 		$servico = str_replace("|","?",$servico);
 		$servico = str_replace("#","&",$servico);
@@ -1556,20 +1690,29 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 			$novolayer = ms_newLayerObj($this->mapa);
 			$novolayer->set("connection",$servico);
 			if(ms_GetVersionInt() > 50201)
-			{$novolayer->setconnectiontype(MS_OGR);}
+			{
+				$novolayer->setconnectiontype(MS_OGR);
+			}
 			else
-			{$novolayer->set("connectiontype",MS_OGR);}
+			{$novolayer->set("connectiontype",MS_OGR);
+			}
 			$nome = nomeRandomico(10)."geoJson";
 			$novolayer->set("name",$nome.$tipo);
 			$novolayer->setmetadata("TEMA","GeoJson ".$nome." ".$tipo);
 			$novolayer->setmetadata("DOWNLOAD","SIM");
 			$novolayer->setmetadata("CLASSE","SIM");
 			if($tipo == "pontos")
-			{$novolayer->set("type",MS_LAYER_POINT);}
+			{
+				$novolayer->set("type",MS_LAYER_POINT);
+			}
 			if($tipo == "linhas")
-			{$novolayer->set("type",MS_LAYER_LINE);}
+			{
+				$novolayer->set("type",MS_LAYER_LINE);
+			}
 			if($tipo == "poligonos")
-			{$novolayer->set("type",MS_LAYER_POLYGON);}
+			{
+				$novolayer->set("type",MS_LAYER_POLYGON);
+			}
 			$novolayer->set("type",$tipo);
 			$novolayer->set("data","OGRGeoJSON");
 			$novolayer->setfilter("");
@@ -1589,25 +1732,27 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 		}
 		return "ok";
 	}
-/*
-Method: adicionaTemaGeoRSS
+	/*
+	 Method: adicionaTemaGeoRSS
 
-Adiciona um canal GeoRSS como um tema no mapa.
+	Adiciona um canal GeoRSS como um tema no mapa.
 
-Parametros:
+	Parametros:
 
-$servico - Endere&ccedil;o (url) do RSS.
-$dir_tmp - Diretório onde o arquivo ser&aacute; criado.
-$locaplic - Localiza&ccedil;&atilde;o do I3geo
-$canal - Identificador do canal (ordem em que est&aacute; no RSS)
-*/
+	$servico - Endere&ccedil;o (url) do RSS.
+	$dir_tmp - Diretório onde o arquivo ser&aacute; criado.
+	$locaplic - Localiza&ccedil;&atilde;o do I3geo
+	$canal - Identificador do canal (ordem em que est&aacute; no RSS)
+	*/
 	function adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal)
 	{
 		$xml = simplexml_load_file($servico);
 		$conta = 0;
 		foreach($xml->channel as $c){
 			if ($conta == $canal)
-			{$canal = $c;}
+			{
+				$canal = $c;
+			}
 		}
 		$resultado = array();
 		$tipog = "";
@@ -1615,11 +1760,17 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 			$env = array();
 			//define o tipo
 			if ($item->xpath('geo:lat'))
-			{$tipog = "geo";}
+			{
+				$tipog = "geo";
+			}
 			if ($item->xpath('georss:point'))
-			{$tipog = "georsspoint";}
+			{
+				$tipog = "georsspoint";
+			}
 			if ($item->xpath('georss:where'))
-			{$tipog = "envelope";}
+			{
+				$tipog = "envelope";
+			}
 			if ($tipog == "envelope"){
 				foreach ($item->xpath('georss:where') as $w)
 				{
@@ -1638,7 +1789,9 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 							$xmin = $lc[1];
 							$xmax = $uc[1];
 							if ($ymin !="")
-							{$env = array($xmin,$ymin,$xmax,$ymax);}
+							{
+								$env = array($xmin,$ymin,$xmax,$ymax);
+							}
 						}
 					}
 				}
@@ -1671,8 +1824,12 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 			include_once (dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php");
 			$diretorio = dirname($this->arquivo);
 			$tipol = MS_SHP_POLYGON;
-			if ($tipog == "georsspoint"){$tipol = MS_SHP_POINT;}
-			if ($tipog == "geo"){$tipol = MS_SHP_POINT;}
+			if ($tipog == "georsspoint"){
+				$tipol = MS_SHP_POINT;
+			}
+			if ($tipog == "geo"){
+				$tipol = MS_SHP_POINT;
+			}
 			$novonomelayer = nomeRandomico(10)."georss";
 			$nomeshp = $diretorio."/".$novonomelayer;
 			$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
@@ -1681,9 +1838,12 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 			$def[] = array("DESC","C","254");
 			$def[] = array("CATEGORIA","C","254");
 			if(!function_exists(dbase_create))
-			{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+			{
+				$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+			}
 			else
-			{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+			{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+			}
 			//acrescenta os pontos no novo shapefile
 			$dbname = $nomeshp.".dbf";
 			$db=xbase_open($dbname,2);
@@ -1748,22 +1908,22 @@ $canal - Identificador do canal (ordem em que est&aacute; no RSS)
 		}
 		return("erro");
 	}
-/*
-Method: adicionaTemaSHP
+	/*
+	 Method: adicionaTemaSHP
 
-Adiciona um tema a partir de um arquivo shape file armazenado no servidor de arquivos.
+	Adiciona um tema a partir de um arquivo shape file armazenado no servidor de arquivos.
 
-Parametros:
-$arq - Nome do shape file.
-*/
+	Parametros:
+	$arq - Nome do shape file.
+	*/
 	function adicionaTemaSHP($arq)
 	{
 		if (file_exists($arq))
 		{
 			$s = ms_newShapefileObj($arq,-1);
 			/*
-			if($this->v == 6)
-			{$shape = $s->getshape(new resultObj(0));}
+			 if($this->v == 6)
+			 {$shape = $s->getshape(new resultObj(0));}
 			else
 			{$shape = $s->getshape(0);}
 			*/
@@ -1771,9 +1931,13 @@ $arq - Nome do shape file.
 			$t = $shape->type;
 			$tipo = MS_LAYER_POLYGON;
 			if ($t == 0)
-			{$tipo = MS_LAYER_POINT;}
+			{
+				$tipo = MS_LAYER_POINT;
+			}
 			if ($t == 1)
-			{$tipo = MS_LAYER_LINE;}
+			{
+				$tipo = MS_LAYER_LINE;
+			}
 			$layer = criaLayer($this->mapa,$tipo,MS_DEFAULT,basename($arq),"SIM");
 			$layer->set("data",$arq);
 			$layer->set("name",basename($arq));
@@ -1783,14 +1947,14 @@ $arq - Nome do shape file.
 		}
 		return("ok");
 	}
-/*
-Method: adicionaTemaIMG
+	/*
+	 Method: adicionaTemaIMG
 
-Adiciona um tema a partir de um arquivo imagem armazenado no servidor de arquivos.
+	Adiciona um tema a partir de um arquivo imagem armazenado no servidor de arquivos.
 
-Parametros:
-$arq - Nome do arquivo.
-*/
+	Parametros:
+	$arq - Nome do arquivo.
+	*/
 	function adicionaTemaIMG($arq)
 	{
 		if (file_exists($arq))
@@ -1805,14 +1969,14 @@ $arq - Nome do arquivo.
 	}
 	function adicionaAcesso($codigo_tema,$locaplic)
 	{
-			$resultado = array();
-			include("$locaplic/admin/php/conexao.php");
-			if(!empty($esquemaadmin)){
-				$esquemaadmin = $esquemaadmin.".";
-			}
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_acessostema (codigo_tema,nacessos,dia,mes,ano) VALUES ('$codigo_tema',1,".abs(date("d")).",".abs(date("m")).",".abs(date("Y")).")");
+		$resultado = array();
+		include("$locaplic/admin/php/conexao.php");
+		if(!empty($esquemaadmin)){
+			$esquemaadmin = $esquemaadmin.".";
+		}
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_acessostema (codigo_tema,nacessos,dia,mes,ano) VALUES ('$codigo_tema',1,".abs(date("d")).",".abs(date("m")).",".abs(date("Y")).")");
 		$dbh = null;
-			$dbhw = null;
+		$dbhw = null;
 	}
 	//
 	//esta fun&ccedil;&atilde;o n&atilde;o est&aacute; concluida
@@ -1837,7 +2001,9 @@ $arq - Nome do arquivo.
 		{
 			$testa = explode("NAME",$e);
 			if (count($testa) > 1)
-			{$pega = "sim";}
+			{
+				$pega = "sim";
+			}
 			$testa = explode('"'.$layername.'"',$e);
 			if ((count($testa) > 1) && ($pega == "sim"))
 			{
@@ -1849,42 +2015,56 @@ $arq - Nome do arquivo.
 		//salva o mapfile
 		$abre = fopen($this->arquivo, "wt");
 		foreach($novoarray as $linha)
-		{$escreve = fwrite ($abre,$linha);}
+		{
+			$escreve = fwrite ($abre,$linha);
+		}
 		$fecha = fclose ($abre);
 	}
-/*
-Method: converteInterfacePara
+	/*
+	 Method: converteInterfacePara
 
-Converte o mapfile atual ajustando o funcionamento para uma interface espec&iacute;fica
+	Converte o mapfile atual ajustando o funcionamento para uma interface espec&iacute;fica
 
-Parametros:
+	Parametros:
 
-$interface - googlemaps|openlayers
-*/
+	$interface - googlemaps|openlayers
+	*/
 	function converteInterfacePara($interface){
 		if($interface == "openlayers"){
 			$prefixo = "ol";
 			$this->mapa->setProjection("+proj=longlat +ellps=GRS67 +no_defs");
 		}
 		else
-		{$prefixo = "gm";}
+		{$prefixo = "gm";
+		}
 		foreach($this->layers as $l){
 			$opacidadeM = $l->getmetadata($prefixo."opacity");
 			$statusM = $l->getmetadata($prefixo."status");
 			if($opacidadeM == "")
-			{$l->setmetadata($prefixo."opacity",100);}
+			{
+				$l->setmetadata($prefixo."opacity",100);
+			}
 			else
-			{$l->set("opacity",$prefixo."opacity");}
+			{$l->set("opacity",$prefixo."opacity");
+			}
 			if($statusM != ""){
 				if($statusM == "OFF")
-				{$l->set("status",MS_OFF);}
+				{
+					$l->set("status",MS_OFF);
+				}
 				if($statusM == "DEFAULT")
-				{$l->set("status",MS_DEFAULT);}
+				{
+					$l->set("status",MS_DEFAULT);
+				}
 			}
 			if($prefixo == "gm" && ($l->name == "mundo" || $l->name == "estados"))
-			{$l->set("status",MS_OFF);}
+			{
+				$l->set("status",MS_OFF);
+			}
 			if($l->opacity == 0)
-			{$l->set("opacity",100);}
+			{
+				$l->set("opacity",100);
+			}
 		}
 		$this->salva();
 		return "ok";
