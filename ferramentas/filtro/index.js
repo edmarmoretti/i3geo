@@ -246,7 +246,8 @@ i3GEOF.filtro = {
 			interrogacao.title= $trad(12,i3GEOF.filtro.dicionario);
 			interrogacao.style.cursor="pointer";
 			interrogacao.onclick = function(){
-				var obj, itemTema;
+				var obj,
+				itemTema;
 				obj = (this.parentNode.getElementsByTagName("input"))[0];
 				itemTema = (this.parentNode.parentNode.getElementsByTagName("select"))[0].value;
 				i3GEO.util.comboValoresItem(
@@ -254,7 +255,7 @@ i3GEOF.filtro = {
 					i3GEO.temaAtivo,
 					itemTema,
 					function(retorno){
-						$i("i3GEOfiltrovalores").innerHTML = "<br><p class=paragrafo >"+$trad(13,i3GEOF.filtro.dicionario)+":"+this.dados+"</p>";
+						$i("i3GEOfiltrovalores").innerHTML = "<br><p class=paragrafo >"+$trad(13,i3GEOF.filtro.dicionario)+":"+retorno.dados+"</p>";
 						if ($i("i3GEOfiltrocbitens")){
 							$i("i3GEOfiltrocbitens").onchange = function()
 							{obj.value = this.value;};
