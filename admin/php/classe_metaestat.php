@@ -487,7 +487,7 @@ class Metaestat{
 	 * @param valor de opacidade do layer
 	 * @return array("mapfile"=>,"layer"=>,"titulolayer"=>)
 	 */
-	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao="",$opacidade=""){
+	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao="",$opacidade="",$suportaWMST = false){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
 		//indicando onde deve comecar e terminar uma possivel clausula where
 		//ou com /*FA*//*FA*/
@@ -548,7 +548,10 @@ class Metaestat{
 			else{
 				$titulolayer = mb_convert_encoding($sql["titulo"],"ISO-8859-1",mb_detect_encoding($sql["titulo"]));
 			}
-
+			//pega os parametros caso seja um mapfile para WMS-time
+			if($suportaWMST == true){
+				$resolucao = $this->listaResolucaoWMST($id_medida_variavel);
+			}
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
 			$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';
@@ -1696,13 +1699,20 @@ class Metaestat{
 		$sql .= "ORDER BY bancodedados,host,usuario";
 		return $this->execSQL($sql,$codigo_estat_conexao);
 	}
+	function listaResolucaoWMST($id_medida_variavel){
+		$parametros = $this->listaParametro($id_medida_variavel,"","",true);
+		//faz o sql para pegar os valores e definir a resolucao
+		
+		//se for apenas do tipo anual
+	}
 	/**
 	 * Lista os dados de um ou de todos os parametros relacionados a uma medida de variavel
 	 * @param id da medida de variavel
 	 * @param id do parametro
 	 * @param id do pai (se definido, lista apenas os filhos deste)
+	 * @param bool indica se apenas parametros do tipo temporal serao retornados
 	 */
-	function listaParametro($id_medida_variavel,$id_parametro_medida="",$id_pai=""){
+	function listaParametro($id_medida_variavel,$id_parametro_medida="",$id_pai="",$apenasTempo=false){
 		$sql = "SELECT i3geoestat_parametro_medida.*,i3geoestat_medida_variavel.* ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_parametro_medida ";
 		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
@@ -1719,6 +1729,13 @@ class Metaestat{
 		if($id_pai != ""){
 			$sql .= " AND id_pai = $id_pai";
 		}
+		if($apenasTempo == true){
+			$tempo = " i3geoestat_parametro_medida.tipo > 0 AND i3geoestat_parametro_medida.tipo < 5 ";
+			if($id_pai != ""){
+				$sql .= " AND ";
+			}
+			$sql .= $tempo;
+		}	
 		//echo $sql;exit;
 		return $this->execSQL($sql,$id_parametro_medida);
 	}

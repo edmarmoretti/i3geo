@@ -46,6 +46,9 @@ perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o m
 
 format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para abrir o mashup do OpenLayers com as camadas definida em temas
 
+id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
+	nao deve ser utilizado junto com tema
+
 Exemplos:
 
 ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
@@ -151,6 +154,10 @@ if(count($_GET) == 0){
 	$req->setParameter("SERVICE", "WMS");
 	$cache = false;
 }
+//define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
+if(isset($id_medida_variavel)){
+	$tema = "ogcmetaestat".$id_medida_variavel;
+}
 if(isset($tema) && $tipo != "metadados"){
 	$tipo = "";
 }
@@ -213,18 +220,29 @@ else{
 		//$temai3geo = true indica que o layer ser&aacute; buscado na pasta i3geo/temas
 		$temai3geo = true;
 		//FIXME não aceita gvp quando o caminho é completo
-		if(file_exists($_GET["tema"])){
+		if(file_exists($_GET["tema"]) && !isset($id_medida_variavel)){
 			$nmap = ms_newMapobj($_GET["tema"]);
 			$temai3geo = false;
 			$nmap->setmetadata("ows_enable_request","*");
 		}
 		foreach ($tema as $tx){
 			$extensao = ".map";
-			if(file_exists($locaplic."/temas/".$tx.".php") && $temai3geo == true){
-				$extensao = ".php";
+			//cria o mapfile com base no sistema de metadados estatisticos
+			if(isset($id_medida_variavel)){
+				$temai3geo = false;
+				include("admin/php/classe_metaestat.php");
+				$m = new Metaestat();
+				$m->nomecache = "ogcmetaestat".$id_medida_variavel;
+				$mapfileMetaestat = mapfileMedidaVariavel($id_medida_variavel,"",1,"","","","","","",true);
+				$nmap = ms_newMapobj($mapfileMetaestat["mapfile"]);
 			}
-			if(file_exists($locaplic."/temas/".$tx.".gvp") && $temai3geo == true){
-				$extensao = ".gvp";
+			else{
+				if(file_exists($locaplic."/temas/".$tx.".php") && $temai3geo == true){
+					$extensao = ".php";
+				}
+				if(file_exists($locaplic."/temas/".$tx.".gvp") && $temai3geo == true){
+					$extensao = ".gvp";
+				}
 			}
 			if($extensao == ".map"){
 				if($temai3geo == true){
