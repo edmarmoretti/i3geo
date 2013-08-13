@@ -193,10 +193,10 @@ i3GEOF.wiki = {
 		mostrar = function(retorno){
 			i3GEOF.wiki.aguarde.visibility = "hidden";
 			if (retorno.data === 'undefined' ){
-				$i("i3GEOwikiLista").innerHTML = "Erro. A opera&ccedil;&atilde;o demorou muito.";
+				$i("i3GEOwikiLista").innerHTML = "Erro.";
 				return;
 			}
-			$i("i3GEOwikiLista").innerHTML = retorno.data+"Navegue no mapa para atualizar a lista de resultados";
+			$i("i3GEOwikiLista").innerHTML = retorno.data+$trad(1,i3GEOF.wiki.dicionario);
 		};
 		cp = new cpaint();
 		cp.set_response_type("JSON");

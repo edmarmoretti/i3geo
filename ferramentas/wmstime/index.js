@@ -54,7 +54,7 @@ wms_configura = {
 		tipo: 2
 	}
 };
-ins = "<p>Escolha o servi&ccedil;o de fornecimento de dados (WMS-T)</p>";
+ins = "<p>"+$trad(1,i3GEOF.wmstime.dicionario)+"</p>";
 ins += "<select style='width:95%;border:1px solid gray;' onchange='escolheuServico(this.value)'>";
 ins += "<option value='' >---</option>";
 for(key in wms_configura){
@@ -64,22 +64,22 @@ ins += "</select>";
 ins += "<p><input onclick='javascript:this.select();' type=text id=iServico style=width:95% />";
 ins += "<p><TEXTAREA id='WMS_descricao' rows='3' style='width:95%' ></TEXTAREA></p>";
 ins += "<table style='text-align:left'>";
-ins += "<tr><td style='text-align:left'>Ano inicial: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anoinicio size=4 />";
-ins += "<td style='text-align:left'>Ano final: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anofim size=4 /></tr>";
+ins += "<tr><td style='text-align:left'>"+$trad(2,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anoinicio size=4 />";
+ins += "<td style='text-align:left'>"+$trad(3,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anofim size=4 /></tr>";
 
-ins += "<tr><td style='text-align:left'>M&ecirc;s inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesinicio size=4 />";
-ins += "<td style='text-align:left'>M&ecirc;s final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesfim size=4 /></tr>";
+ins += "<tr><td style='text-align:left'>"+$trad(4,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesinicio size=4 />";
+ins += "<td style='text-align:left'>"+$trad(5,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesfim size=4 /></tr>";
 
-ins += "<tr><td style='text-align:left'>Dia inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diainicio size=4 />";
-ins += "<td style='text-align:left'>Dia final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diafim size=4 /></tr>";
+ins += "<tr><td style='text-align:left'>"+$trad(6,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diainicio size=4 />";
+ins += "<td style='text-align:left'>"+$trad(7,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diafim size=4 /></tr>";
 
 ins += "</table>";
 //ins += "<div style='position:absolute;left:120px;top:180px'>"
-ins += "<p>Obter uma imagem por: ";
+ins += "<p>" + $trad(8,i3GEOF.wmstime.dicionario);
 ins += "<div id='divumaImagemPor' style=width:200px; ></div>";
 
 
-ins += "<div onclick='iniciaImagens()' style='text-align:left;left:0px;top:20px;'><input id='botao1' size=18 type='button' value='Continuar' /></div>";
+ins += "<div onclick='iniciaImagens()' style='text-align:left;left:0px;top:20px;'><input id='botao1' size=18 type='button' value='"+$trad(9,i3GEOF.wmstime.dicionario)+"' /></div>";
 ins += "</div>";
 $i("parametros").innerHTML = ins;
 idServicoEscolhido = "";
@@ -114,16 +114,16 @@ function escolheuServico(idWMS){
 
 	var ins = "<select id='umaImagemPor' style='border:1px solid gray;width:150px'>";
 	if(tipoServico == 1){
-		ins += "<option value='ano' selected >Ano</option></select>";
+		ins += "<option value='ano' selected >"+$trad(10,i3GEOF.wmstime.dicionario)+"</option></select>";
 	}
 	if(tipoServico == 2){
-		ins += "<option value='ano' >Ano</option>";
-		ins += "<option value='mes' selected >M&ecirc;s</option></select>";
+		ins += "<option value='ano' >"+$trad(10,i3GEOF.wmstime.dicionario)+"</option>";
+		ins += "<option value='mes' selected >"+$trad(11,i3GEOF.wmstime.dicionario)+"</option></select>";
 	}
 	if(tipoServico == 3){
-		ins += "<option value='ano'  >Ano</option>";
-		ins += "<option value='mes' >M&ecirc;s</option>";
-		ins += "<option value='dia' selected >Dia</option></select>";
+		ins += "<option value='ano'  >"+$trad(10,i3GEOF.wmstime.dicionario)+"</option>";
+		ins += "<option value='mes' >"+$trad(11,i3GEOF.wmstime.dicionario)+"</option>";
+		ins += "<option value='dia' selected >"+$trad(12,i3GEOF.wmstime.dicionario)+"</option></select>";
 	}
 	$i("divumaImagemPor").innerHTML = ins;
 }
@@ -245,7 +245,7 @@ function criaImg(tempo,id){
 	novoel.style.height = dh+"px";
 	novoel.style.cursor = "pointer";
 	novoel.src = $i("iServico").value+"&width="+dw+"&height="+dh+"&bbox="+bbox+"&time="+tempo; //"../../imagens/atlas1.jpg";
-	novoel.title = 'clique para adicionar ao mapa';
+	novoel.title = $trad(13,i3GEOF.wmstime.dicionario);
 	novoel.onclick = function(){
 		adicionaMapa(idServicoEscolhido);
 	};
@@ -290,13 +290,13 @@ function pararImagem(id){
 		$i(id).src = "";
 		//onde.removeChild(document.getElementById(id))
 		idsValidos.push(id);
-		$i("status"+id).innerHTML = "exclu&iacute;do";
+		$i("status"+id).innerHTML = $trad(14,i3GEOF.wmstime.dicionario);
 		parouQuantas++;
 		if(parouQuantas == ids.length)
 		{pararStatus();}
 	}
 	else
-	{i3GEO.janela.tempoMsg("Imagem exclu&iacute;da");}
+	{i3GEO.janela.tempoMsg($trad(15,i3GEOF.wmstime.dicionario));}
 }
 /*
 Function: pararStatus
@@ -330,7 +330,7 @@ function criaMarcadorTempo(){
 	var ins = "";
 	var ini = parseInt((distanciaMarcas*i - (distanciaMarcas/2)));
 	for(var i=1;i<=nmarcas;i++){
-		ins += "<img title='clique para adicionar ao mapa' onclick='adicionaMapa(\""+i+"\")' onmouseover='mostraI(\""+i+"\")' onmouseout='escondeI(\""+i+"\")' style='position:absolute;top:"+(dh + 10)+"px;left:"+parseInt((distanciaMarcas*i - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1.gif' id='marcaTempo"+i+"' />";
+		ins += "<img title='"+$trad(16,i3GEOF.wmstime.dicionario)+"' onclick='adicionaMapa(\""+i+"\")' onmouseover='mostraI(\""+i+"\")' onmouseout='escondeI(\""+i+"\")' style='position:absolute;top:"+(dh + 10)+"px;left:"+parseInt((distanciaMarcas*i - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1.gif' id='marcaTempo"+i+"' />";
 	}
 	ins += "<img style='position:absolute;top:"+(dh - 5)+"px;left:"+parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1red.gif' id='marcaDeTempo' />";
 	ins += "<img style='position:absolute;top:"+(dh + 10)+"px;left:"+parseInt((distanciaMarcas - (distanciaMarcas/2)))+"px;' src='../../imagens/dot1cinza.gif' id='marcaGranulo' />";
@@ -452,7 +452,7 @@ function esconderMarcasTempo(){
 		if($i("marcaTempo"+i)){
 			$i("marcaTempo"+i).style.display = "none";
 		}
-	}		
+	}
 }
 function pararFilme(){
 	emPausa = false;

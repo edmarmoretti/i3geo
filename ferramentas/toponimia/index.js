@@ -146,33 +146,33 @@ i3GEOF.toponimia = {
 		var ins = '' +
 		'<div id=i3GEOtoponimiaguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a href="#ancora"><em><div id="i3GEOtoponimiaguia1" style="text-align:center;left:0px;" >Fonte dos dados</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOtoponimiaguia2" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOtoponimiaguia3" style="text-align:center;left:0px;" >Testar</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOtoponimiaguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.toponimia.dicionario)+'</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOtoponimiaguia2" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.toponimia.dicionario)+'</div></em></a></li>' +
+		'		<li><a href="#ancora"><em><div id="i3GEOtoponimiaguia3" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.toponimia.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia1obj" style="left:1px;90%;display:none;">' +
-		'			<p class="paragrafo" >Escolha o item que cont&eacute;m os textos que ser&atilde;o mostrados no mapa<br>' +
+		'			<p class="paragrafo" >'+$trad(4,i3GEOF.toponimia.dicionario)+'<br>' +
 		'			<div id=i3GEOtoponimiaDivListaItens ></div>' +
 		'			<br>' +
-		'			<p class="paragrafo" ><input style="cursor:pointer" type="checkbox" id="i3GEOtoponimianovotema" />&nbsp;Adiciona a topon&iacute;mia no tema atual (deixe desmarcado para criar como uma nova camada)' +
+		'			<p class="paragrafo" ><input style="cursor:pointer" type="checkbox" id="i3GEOtoponimianovotema" />&nbsp;'+$trad(5,i3GEOF.toponimia.dicionario) +
 		'			<br>' +
-		'			<p class="paragrafo" ><input id=i3GEOtoponimiabotao1 size=35  type=button value="Criar topon&iacute;mia" />' +
+		'			<p class="paragrafo" ><input id=i3GEOtoponimiabotao1 size=35  type=button value="'+$trad(6,i3GEOF.toponimia.dicionario)+'" />' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia2obj" style="left:1px;display:none;">' +
 		'		<table summary="" class=lista width="98%">' +
-		'			<tr><td>Fonte:</td><td><span id="i3GEOtoponimiaDivListaFonte">Aguarde...</span></td></tr>' +
+		'			<tr><td>'+$trad(8,i3GEOF.toponimia.dicionario)+':</td><td><span id="i3GEOtoponimiaDivListaFonte">'+$trad(7,i3GEOF.toponimia.dicionario)+'...</span></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Tamanho:</td><td>' +
+		'			<tr><td>'+$trad(9,i3GEOF.toponimia.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOtoponimiatamanho_i","",2,"8") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO ou FOLLOW (segue a linha), nesses casos, a fonte n&atilde;o pode ser do tipo bitmap):</td><td>' +
+		'			<tr><td>'+$trad(10,i3GEOF.toponimia.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOtoponimiaangulo_i","",4,"0") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
 		'			<tr>' +
-		'				<td>Deslocamento do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o:</td>' +
+		'				<td>'+$trad(11,i3GEOF.toponimia.dicionario)+':</td>' +
 		'				<td>x ' +
 		$inputText("","","i3GEOtoponimiaoffsetx_i","",2,"0") +
 		'					y ' +
@@ -180,83 +180,83 @@ i3GEOF.toponimia = {
 		'				</td>' +
 		'			</tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor do texto:</td><td>'+
+		'			<tr><td>'+$trad(12,i3GEOF.toponimia.dicionario)+':</td><td>'+
 		$inputText("","","i3GEOtoponimiafrente_i","",11,"0 0 0") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.toponimia.corj(\'i3GEOtoponimiafrente_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor da m&aacute;scara de um pixel de entorno:</td><td>' +
+		'			<tr><td>'+$trad(13,i3GEOF.toponimia.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOtoponimiamascara_i","",11,"") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.toponimia.corj(\'i3GEOtoponimiamascara_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
 		'			<tr>' +
-		'				<td>Posicionamento:</td>' +
+		'				<td>'+$trad(14,i3GEOF.toponimia.dicionario)+':</td>' +
 		'				<td>' +
 		'					<select id=i3GEOtoponimiaposition_i >' +
-		'						<option value="MS_AUTO" >autom&aacute;tico</option>' +
-		'						<option value="MS_UL" >superior esquerdo</option>' +
-		'						<option value="MS_UC" >superior centro</option>' +
-		'						<option value="MS_UR" >superior direito</option>' +
-		'						<option value="MS_CL" >centro esquerdo</option>' +
-		'						<option value="MS_CC" >centro</option>' +
-		'						<option value="MS_CR" >centro direito</option>' +
-		'						<option value="MS_LL" >inferior esquerdo</option>' +
-		'						<option value="MS_LC" >inferior centro</option>' +
-		'						<option value="MS_LR" >inferior direito</option>' +
+		'						<option value="MS_AUTO" >auto</option>' +
+		'						<option value="MS_UL" >UL</option>' +
+		'						<option value="MS_UC" >UC</option>' +
+		'						<option value="MS_UR" >UR</option>' +
+		'						<option value="MS_CL" >CL</option>' +
+		'						<option value="MS_CC" >CC</option>' +
+		'						<option value="MS_CR" >CR</option>' +
+		'						<option value="MS_LL" >LL</option>' +
+		'						<option value="MS_LC" >LC</option>' +
+		'						<option value="MS_LR" >LR</option>' +
 		'					</select>' +
 		'				</td>' +
 		'			</tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor do fundo:</td><td>' +
+		'			<tr><td>'+$trad(15,i3GEOF.toponimia.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOtoponimiafundoc_i","",9,"") +
 		'				<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.toponimia.corj(\'i3GEOtoponimiafundoc_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor da sombra do fundo:</td><td>'+
+		'			<tr><td>'+$trad(16,i3GEOF.toponimia.dicionario)+':</td><td>'+
 		$inputText("","","i3GEOtoponimiasombra_i","",9,"") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.toponimia.corj(\'i3GEOtoponimiasombra_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Deslocamento da sombra do fundo:</td><td>x ' +
+		'			<tr><td>'+$trad(17,i3GEOF.toponimia.dicionario)+':</td><td>x ' +
 		$inputText("","","i3GEOtoponimiasombrax_i","",1,"1") +
 		'			 y' +
 		$inputText("","","i3GEOtoponimiasombray_i","",1,"1") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Cor da sombra:</td><td>' +
+		'			<tr><td>'+$trad(18,i3GEOF.toponimia.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOtoponimiafrentes_i","",9,"") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.toponimia.corj(\'i3GEOtoponimiafrentes_i\')" /></td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Deslocamento da sombra:</td><td>x '+
+		'			<tr><td>'+$trad(19,i3GEOF.toponimia.dicionario)+':</td><td>x '+
 		$inputText("","","i3GEOtoponimiafrentex_i","",1,"1") +
 		'			 y '+
 		$inputText("","","i3GEOtoponimiafrentey_i","",1,"1") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>For&ccedil;a colis&otilde;es entre textos?:</td>' +
+		'			<tr><td>'+$trad(20,i3GEOF.toponimia.dicionario)+':</td>' +
 		'				<td>' +
 		'					<select id=i3GEOtoponimiaforce_i >' +
-		'						<option value="0" >n&atilde;o</option>' +
-		'						<option value="1" >sim</option>' +
+		'						<option value="0" >'+$trad("x15")+'</option>' +
+		'						<option value="1" >'+$trad("x14")+'</option>' +
 		'					</select>' +
 		'				</td>' +
 		'			</tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Dist&acirc;ncia m&iacute;nima entre textos duplicados (em pixel):</td><td>' +
+		'			<tr><td>'+$trad(21,i3GEOF.toponimia.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOtoponimiamindistance_i","",4,"auto") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Tamanho m&iacute;nimo do elemento cartogr&aacute;fico(em pixel):</td><td>' +
+		'			<tr><td>'+$trad(22,i3GEOF.toponimia.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOtoponimiaminfeaturesize_i","",4,"auto") +
 		'			</td></tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>O texto pode ultrapassar o mapa?:</td>' +
+		'			<tr><td>'+$trad(23,i3GEOF.toponimia.dicionario)+':</td>' +
 		'				<td>' +
 		'					<select id=i3GEOtoponimiapartials_i >' +
-		'						<option value="0" >n&atilde;o</option>' +
-		'						<option value="1" >sim</option>' +
+		'						<option value="0" >'+$trad("x15")+'</option>' +
+		'						<option value="1" >'+$trad("x14")+'</option>' +
 		'					</select>' +
 		'				</td>' +
 		'			</tr>' +
 		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>Caractere usado para indicar uma quebra de texto:</td><td>' +
+		'			<tr><td>'+$trad(24,i3GEOF.toponimia.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOtoponimiawrap_i","",5,"") +
 		'			</td></tr>' +
 		'		</table>' +

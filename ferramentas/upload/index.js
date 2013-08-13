@@ -109,22 +109,22 @@ i3GEOF.upload = {
 		'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>';
 		if(i3GEO.parametros.editor === "sim")
-		{ins += '<p class="paragrafo" >pasta no servidor onde os dados<br>ser&atilde;o armazenados (opcional):<br><input class=digitar type="text" size=45 name="dirDestino" style="top:0px;left:0px;cursor:pointer;"></p>';}
-		ins += '<p class="paragrafo" >Tipo de geometria: ' +
+		{ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.upload.dicionario)+':<br><input class=digitar type="text" size=45 name="dirDestino" style="top:0px;left:0px;cursor:pointer;"></p>';}
+		ins += '<p class="paragrafo" >'+$trad(2,i3GEOF.upload.dicionario)+': ' +
 		'	<select id=tipo name=tipo >' +
-		'	<option value="">n&atilde;o conhecido</option>' +
-		'	<option value="1">pontual</option>' +
-		'	<option value="5">poligonal</option>' +
-		'	<option value="3">linear</option>' +
+		'	<option value="">'+$trad(3,i3GEOF.upload.dicionario)+'</option>' +
+		'	<option value="1">'+$trad(4,i3GEOF.upload.dicionario)+'</option>' +
+		'	<option value="5">'+$trad(5,i3GEOF.upload.dicionario)+'</option>' +
+		'	<option value="3">'+$trad(6,i3GEOF.upload.dicionario)+'</option>' +
 		'	</select>' +
 		'</p>' +
-		'<p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
+		'<p class=paragrafo >'+$trad(7,i3GEOF.upload.dicionario)+':</p>' +
 		'<div id=i3GEOuploadListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
-		'<br><p class="paragrafo" ><input id=i3GEOuploadbotao1 type="button" value="Enviar" size=12 name="submit">' +
+		'<br><p class="paragrafo" ><input id=i3GEOuploadbotao1 type="button" value="'+$trad(8,i3GEOF.upload.dicionario)+'" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
 		'</form>' +
-		"<p class='paragrafo' style=color:red >N&atilde;o utilize '_' no nome do arquivo. Apenas letras e n&uacute;meros s&atilde;o aceitos!!!</p>" +
+		"<p class='paragrafo' style=color:red >"+$trad(9,i3GEOF.upload.dicionario)+"</p>" +
 		'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>';
 		return ins;
 	},

@@ -111,13 +111,15 @@ i3GEOF.uploadkml = {
 	*/
 	html:function(){
 		var ins = '<form id=i3GEOuploadkmlf target="i3GEOuploadkmliframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadkml/upload.php" method="post" ENCTYPE="multipart/form-data">' +
-		'<p class="paragrafo" style=color:red >N&atilde;o use arquivos ou nome de layer com espa&ccedil;os em branco ou acentua&ccedil;&atilde;o</p>' +
-		'<p class="paragrafo" >Arquivo kml: <br><input type="file" size=22 name="i3GEOuploadkml" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class=paragrafo >Nome do layer KML: <br><input type=text size=42 name=layerkml value=""/></p>' +
-		'<p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
+		'<p class="paragrafo" style=color:red >' + $trad(1,i3GEOF.uploadkml.dicionario) + '</p>' +
+		'<p class="paragrafo" > ' + $trad(2,i3GEOF.uploadkml.dicionario) +
+		'<br><input type="file" size=22 name="i3GEOuploadkml" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p class=paragrafo >' + $trad(3,i3GEOF.uploadkml.dicionario) +
+		'<br><input type=text size=42 name=layerkml value=""/></p>' +
+		'<p class=paragrafo >' + $trad(4,i3GEOF.uploadkml.dicionario) + '</p>' +
 		'<div id=i3GEOuploadkmlListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
-		'<br><p class="paragrafo" ><input id=i3GEOuploadkmlbotao1 type="button" value="Criar camada" size=12 name="submit">' +
-		'<br><p class="paragrafo" >O nome do "layer" corresponde ao elemento folder->name existente no arquivo KML. Para descobrir esse valor, abra o arquivo KML em um editor de textos comum.</p>'+
+		'<br><p class="paragrafo" ><input id=i3GEOuploadkmlbotao1 type="button" value="'+$trad(5,i3GEOF.uploadkml.dicionario)+'" size=12 name="submit">' +
+		'<br><p class="paragrafo" >' + $trad(6,i3GEOF.uploadkml.dicionario)+'</p>'+
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
 		'</form>' +
@@ -166,4 +168,3 @@ i3GEOF.uploadkml = {
 		$i("i3GEOuploadkmlf").submit();
 	}
 };
-

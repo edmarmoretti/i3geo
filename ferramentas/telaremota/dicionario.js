@@ -1,63 +1,21 @@
 //+$trad(1,i3GEOF.telaremota.dicionario)+
 i3GEOF.telaremota.dicionario = {
-1: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-2: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-3: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-4: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-5: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-6: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-7: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-8: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-9: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}],
-10: [{
-pt:"",
-en:"",
-es:"",
-it:""
-}]
+		1: [{
+			pt:"Utilize o link abaixo para abrir o mapa em outro navegador ou computador.",
+			en:"",
+			es:"",
+			it:""
+		}],
+		2: [{
+			pt:"N&atilde;o feche essa janela ou a janela remota n&atilde;o receber&aacute; o valor da extens&atilde;o geogr&aacute;fica do mapa original.",
+			en:"",
+			es:"",
+			it:""
+		}],
+		3: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}]
 };

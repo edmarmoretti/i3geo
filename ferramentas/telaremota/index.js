@@ -82,8 +82,8 @@ i3GEOF.telaremota = {
 	*/
 	html:function(divid,tema){
 		var cp,p,ins;
-		ins = '<p class="paragrafo" >Utilize o link abaixo para abrir o mapa em outro navegador ou computador.</p>';
-		ins += '<p class="paragrafo" >N&atilde;o feche essa janela ou a janela remota n&atilde;o receber&aacute; o valor da extens&atilde;o geogr&aacute;fica do mapa original.</p>';
+		ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.telaremota.dicionario)+'</p>';
+		ins += '<p class="paragrafo" >'+$trad(2,i3GEOF.telaremota.dicionario)+'</p>';
 		ins += '<p class="paragrafo" ><div id=i3GEOtelaremotaResultado style=text-align:left ></div>';
 		$i(divid).innerHTML += ins;
 		mostraLink = function(retorno){
