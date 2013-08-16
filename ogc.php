@@ -179,7 +179,6 @@ if(!isset($tema)){
 	}
 	$tipo = "intervalo";
 }
-
 //nome do mapfile que ficara em cache
 $agora = intval(time() / 1000);
 $nomeMapfileTmp = $dir_tmp."/ogc_".md5($tema)."_".$agora.".map";
@@ -233,7 +232,7 @@ else{
 				include("admin/php/classe_metaestat.php");
 				$m = new Metaestat();
 				$m->nomecache = "ogcmetaestat".$id_medida_variavel;
-				$mapfileMetaestat = mapfileMedidaVariavel($id_medida_variavel,"",1,"","","","","","",true);
+				$mapfileMetaestat = $m->mapfileMedidaVariavel($id_medida_variavel,"",1,"","","","","","",true);
 				$nmap = ms_newMapobj($mapfileMetaestat["mapfile"]);
 			}
 			else{

@@ -1,0 +1,72 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "user=postgres password=postgres dbname=geosaude host=localhost port=5432"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom from ( SELECT ano,d.gid,d.pop_res_tot,d.co_municipio,g.no_cidade,g.co_uf,g.sg_uf,g.area_territorial,g.nu_ano_instalacao,st_setsrid(g.the_geom,4326) as the_geom FROM (SELECT * FROM ibge.populacao_residente  ) as d, i3geo_metaestat.municipios as g WHERE  d.co_municipio::text = g.co_municipio::text   ) as foo using unique co_municipio using srid=4326"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"nao"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "permitedownload"	"sim"
+      "METAESTAT"	""
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "TEMA"	"População total (pol) Município Teste de WMS Time"
+    "wms_title"    "População total (pol) Município Teste de WMS Time"
+    "wms_timeextent" "1970,1980,1991,2000"
+    "wms_timeitem" "ano"
+    "wms_timedefault" "1970"
+    "wms_enable_request" "*"      
+      
+      
+    END # METADATA
+    NAME "_lwmstime"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    FILTER (ano = 1970) #1970 1980 1991 2000
+    CLASS
+      NAME "<= 6008"
+      EXPRESSION ([pop_res_tot]<=6008)
+      STYLE
+        COLOR 255 255 255
+        OUTLINECOLOR 255 255 255
+        OUTLINEWIDTH 2
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "> 6008 e <= 11531"
+      EXPRESSION (([pop_res_tot]>6008)and([pop_res_tot]<=11531))
+      STYLE
+        COLOR 207 207 255
+        OUTLINECOLOR 255 255 255
+        OUTLINEWIDTH 2
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "> 11531 e <= 22638"
+      EXPRESSION (([pop_res_tot]>11531)and([pop_res_tot]<=22638))
+      STYLE
+        COLOR 160 160 255
+        OUTLINECOLOR 255 255 255
+        OUTLINEWIDTH 2
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "> 22638"
+      EXPRESSION ([pop_res_tot]>22638)
+      STYLE
+        COLOR 114 114 255
+        OUTLINECOLOR 255 255 255
+        OUTLINEWIDTH 2
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

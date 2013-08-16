@@ -143,7 +143,7 @@ i3GEOF.metaestat = {
 				icone: "imagens/gisicons/table.png"
 			},{
 				titulo: "Gr&aacute;fico interativo",
-				onclick: "i3GEO.analise.dialogo.graficoInterativo()",
+				onclick: "i3GEO.analise.dialogo.graficoInterativo1()",
 				icone: "imagens/oxygen/22x22/view_statistics.png"
 			},{
 				titulo: "Opacidade",
