@@ -549,7 +549,7 @@ class Metaestat{
 				$titulolayer = mb_convert_encoding($sql["titulo"],"ISO-8859-1",mb_detect_encoding($sql["titulo"]));
 			}
 			//pega os parametros caso seja um mapfile para WMS-time
-			
+
 			if($suportaWMST == true){
 				$resolucao = $this->listaResolucaoWMST($id_medida_variavel);
 			}
@@ -1701,16 +1701,18 @@ class Metaestat{
 		return $this->execSQL($sql,$codigo_estat_conexao);
 	}
 	function listaResolucaoWMST($id_medida_variavel){
+		$campoData = $this->listaParametroTempo2CampoData($id_medida_variavel);
+	}
+	function listaParametroTempo2CampoData($id_medida_variavel){
+		//lista os parametros temporais
 		$parametros = $this->listaParametro($id_medida_variavel,"","",true,true);
-		//var_dump($parametros);exit;
+		echo "<pre>";
+		var_dump($parametros);
 		//faz o sql para pegar os valores e definir a resolucao
 		foreach($parametros as $parametro){
-			
+
 		}
 		//se for apenas do tipo anual
-	}
-	function listaParametro2CampoData(){
-		
 	}
 	/**
 	 * Lista os dados de um ou de todos os parametros relacionados a uma medida de variavel
