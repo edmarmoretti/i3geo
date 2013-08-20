@@ -813,7 +813,8 @@ class Arvore
 		}
 		if(strtolower($recordset["tipoa_tema"]) == "wms")
 		{
-			$down = "nao";$ogc="nao";
+			$down = "nao";
+			$ogc = "nao";
 		}
 		if ($recordset["link_tema"] != "")
 		{

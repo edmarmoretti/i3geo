@@ -499,7 +499,7 @@ $fatorestrela - valor para normalizar o total de acessos com o valor da estrela
 */
 	function procurartemasestrela($nivel,$fatorestrela)
 	{
-		include_once(__DIR_."/../admin/php/classe_arvore.php");
+		include_once(__DIR__."/../admin/php/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
 		$temas = $arvore->procuraTemasEstrela($nivel,$fatorestrela,$this->perfil);
 		unset($arvore);

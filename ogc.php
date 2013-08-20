@@ -68,6 +68,12 @@ $cache = true;
 require_once(dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
 include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
+//define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
+if(isset($id_medida_variavel)){
+	$tema = "ogcmetaestat".$id_medida_variavel;
+	$_GET["layers"] = $tema;
+	$_GET["LAYERS"] = $tema;
+}
 if(!isset($temas) && isset($tema)){
 	$temas = $tema;
 }
@@ -154,10 +160,6 @@ if(count($_GET) == 0){
 	$req->setParameter("SERVICE", "WMS");
 	$cache = false;
 }
-//define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
-if(isset($id_medida_variavel)){
-	$tema = "ogcmetaestat".$id_medida_variavel;
-}
 if(isset($tema) && $tipo != "metadados"){
 	$tipo = "";
 }
@@ -234,6 +236,8 @@ else{
 				$m->nomecache = "ogcmetaestat".$id_medida_variavel;
 				$mapfileMetaestat = $m->mapfileMedidaVariavel($id_medida_variavel,"",1,"","","","","","",true);
 				$nmap = ms_newMapobj($mapfileMetaestat["mapfile"]);
+				$nmap->setmetadata("ows_enable_request","*");
+				$req->setParameter("LAYERS", "ogcmetaestat".$id_medida_variavel);
 			}
 			else{
 				if(file_exists($locaplic."/temas/".$tx.".php") && $temai3geo == true){

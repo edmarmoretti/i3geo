@@ -288,7 +288,7 @@ class Metaestat{
 	 * @param codigo do tipo de regiao. Se nao for definido, utiliza-se o default da variavel
 	 * @return array("sqlagrupamento"=>,"sql"=>,"sqlmapserver"=>,"filtro"=>,"colunas"=>,"alias"=>,"colunavalor"=>,"titulo"=>,"nomeregiao"=>)
 	 */
-	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = ""){
+	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = "",$suportaWMST = false){
 		//
 		//o sql que faz acesso aos dados e marcado com /*SE*//*SE*/ na string que sera usada nos mapfiles
 		//
@@ -432,6 +432,10 @@ class Metaestat{
 				else{
 					$parametrosMedida = "";
 				}
+				//o campo deve ser convertido para data
+				if($suportaWMST == true){
+					$parametrosMedida = $this->listaParametroTempo2CampoData($id_medida_variavel)." as dimtempo,";
+				}
 				$sql .= " FROM (SELECT $parametrosMedida * FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
 			}
 		}
@@ -457,13 +461,17 @@ class Metaestat{
 			$j = " d.".$dados["colunaidgeo"]."::text = g.".$dadosgeo["identificador"]."::text";
 		}
 		$sqlgeo .= " WHERE ".$j;
-
+		if($suportaWMST == true){
+			$sqlWMST = $this->listaParametroTempo2CampoData($id_medida_variavel,"d.")." as dimtempo";
+			$sqlgeo = str_replace("SELECT d.*","SELECT d.*,".$sqlWMST,$sqlgeo);
+		}
 		if($agregaregiao == true){
 			$sqlgeo = $colunageo." from /*SE*/( ".$sqlgeo." __filtro__  )/*SE*/ as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];
 		}
 		else{
-			$sqlgeo = $colunageo." from /*SE*/(".$sqlgeo." __filtro__ )/*SE*/ as foo using unique ".$dados["colunaidgeo"]." using srid=".$dadosgeo["srid"];
+			$sqlgeo = $colunageo." from /*SE*/(".$sqlgeo." __filtro__ )/*SE*/ as foo using unique ".$dados["colunaidunico"]." using srid=".$dadosgeo["srid"];
 		}
+		//var_dump($dados);exit;
 		//remove ambiguidades
 		$sqlgeo = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlgeo);
 		$sql = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sql);
@@ -507,9 +515,9 @@ class Metaestat{
 			if($titulolayer == ""){
 				$titulolayer = $meta["nomemedida"];
 			}
-			$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
-			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
-			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao);
+			$dconexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
+			$conexao = "user=".$dconexao["usuario"]." password=".$dconexao["senha"]." dbname=".$dconexao["bancodedados"]." host=".$dconexao["host"]." port=".$dconexao["porta"]."";
+			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao,$suportaWMST);
 			if(empty($codigo_tipo_regiao)){
 				$d = $this->listaMedidaVariavel("",$id_medida_variavel);
 				$codigo_tipo_regiao = $d["codigo_tipo_regiao"];
@@ -549,9 +557,9 @@ class Metaestat{
 				$titulolayer = mb_convert_encoding($sql["titulo"],"ISO-8859-1",mb_detect_encoding($sql["titulo"]));
 			}
 			//pega os parametros caso seja um mapfile para WMS-time
-
 			if($suportaWMST == true){
-				$resolucao = $this->listaResolucaoWMST($id_medida_variavel);
+				$sqlMinMax = "select min(dimtempo) as min,max(dimtempo) as max from(".$sql["sql"].") as x";
+				$minmaxdata = $this->execSQLDB($meta["codigo_estat_conexao"],$sqlMinMax );
 			}
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
@@ -591,6 +599,11 @@ class Metaestat{
 			if(count($sql["colunas"]) > 0){
 				$dados[] = '	ITENS "'.implode(",",$sql["colunas"]).'"';
 				$dados[] = '	ITENSDESC "'.implode(",",$sql["alias"]).'"';
+			}
+			if($suportaWMST == true){
+				$dados[] = '	"wms_timeitem"	"dimtempo"';
+				$dados[] = '	"wms_timeextent" "'.$minmaxdata[0]["min"]."/".$minmaxdata[0]["max"].'"';
+				$dados[] = '	"wms_timedefault" "'.$minmaxdata[0]["max"].'"';
 			}
 			$dados[] = '	END';
 			if($classes == ""){
@@ -1700,19 +1713,40 @@ class Metaestat{
 		$sql .= "ORDER BY bancodedados,host,usuario";
 		return $this->execSQL($sql,$codigo_estat_conexao);
 	}
-	function listaResolucaoWMST($id_medida_variavel){
-		$campoData = $this->listaParametroTempo2CampoData($id_medida_variavel);
-	}
-	function listaParametroTempo2CampoData($id_medida_variavel){
+	function listaParametroTempo2CampoData($id_medida_variavel,$prefixoAlias = ""){
 		//lista os parametros temporais
 		$parametros = $this->listaParametro($id_medida_variavel,"","",true,true);
 		echo "<pre>";
-		var_dump($parametros);
+		//var_dump($parametros);exit;
 		//faz o sql para pegar os valores e definir a resolucao
-		foreach($parametros as $parametro){
-
+		//o tempo deve comecar sempre pelo ano
+		$data = array();
+		if($parametros[0]["tipo"] == 1){
+			//ano
+			$data[] = $prefixoAlias.$parametros[0]["coluna"];
+			$tipodata = "YYYY";
+			//mes
+			if(!empty($parametros[1])){
+				$data[] = "'-'".$prefixoAlias.$parametros[1]["coluna"];
+				$tipodata = "YYYYMM";
+			}
+			else{
+				$data[] = "'-01'";
+			}
+			//dia
+			if(!empty($parametros[2])){
+				$data[] = "'-'".$prefixoAlias.$parametros[2]["coluna"];
+				$tipodata = "YYYYMMDD";
+			}
+			else{
+				$data[] = "'-01'";
+			}
+			$data = implode("||",$data);
+			/**
+			 * @TODO falta a hora
+			 */
+			return "to_date($data,'$tipodata')";
 		}
-		//se for apenas do tipo anual
 	}
 	/**
 	 * Lista os dados de um ou de todos os parametros relacionados a uma medida de variavel
