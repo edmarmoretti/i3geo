@@ -114,11 +114,11 @@ a {
 <script>
 botoesIni = [];
 botoesIni.push({
-	"img":"../imagens/oxygen/22x22/application-vnd.scribus.png",
+	"img":"start-here.png",
 	"href":"../testainstal.php",
 	"titulo":$trad(2,g_traducao_init)
 	},{
-	"img":"../imagens/oxygen/22x22/preferences-system.png",
+	"img":"applications-development-web.png",
 	"href":"../admin",
 	"titulo":$trad(3,g_traducao_init)
 	},{
@@ -158,39 +158,39 @@ botoesIni.push({
 	"href":"../ferramentas/metaestat/editorlimites.php",
 	"titulo":$trad(9,g_traducao_init)
 	},{
-	"img":"../imagens/oxygen/22x22/download.png",
+	"img":"svn-update.png",
 	"href":"../datadownload.htm",
 	"titulo":$trad(10,g_traducao_init)
 	},{
-	"img":"../imagens/oxygen/22x22/internet-web-browser.png",
+	"img":"ogc_logo.jpg",
 	"href":"../ogc.htm",
 	"titulo":$trad(11,g_traducao_init)
 	},{
-	"img":"../imagens/oxygen/22x22/internet-web-browser.png",
+	"img":"application-vnd-google-earth-kml.png",
 	"href":"../kml.php",
 	"titulo":$trad(12,g_traducao_init)
 	},{
-	"img":"../imagens/oxygen/22x22/preferences-web-browser-shortcuts.png",
+	"img":"insert-link.png",
 	"href":"../geradordelinks.htm",
 	"titulo":$trad(13,g_traducao_init)
 	},{
-	"img":"../imagens/oxygen/22x22/help-contents.png",
+	"img":"folder-image.png",
 	"href":"../exemplos",
 	"titulo":$trad(14,g_traducao_init)
 	},{
-	"img":"../imagens/oxygen/22x22/help-contents.png",
+	"img":"accessories-dictionary.png",
 	"href":"../documentacao/manual-i3geo-4_7-pt.pdf",
 	"titulo":$trad(15,g_traducao_init)
 	},{
-	"img":"../imagens/oxygen/22x22/help-contents.png",
+	"img":"accessories-dictionary.png",
 	"href":"../documentacao/manual-admin-i3geo-4_7-pt.pdf",
 	"titulo":$trad(21,g_traducao_init)
 	},{
-	"img":"../imagens/oxygen/22x22/help-contents.png",
+	"img":"accessories-dictionary.png",
 	"href":"../guia_de_migracao.txt",
 	"titulo":$trad(17,g_traducao_init)
 	},{
-	"img":"../imagens/oxygen/22x22/kbugbuster.png",
+	"img":"tools-report-bug.png",
 	"href":"http://svn.softwarepublico.gov.br/trac/i3geo",
 	"titulo":$trad(16,g_traducao_init)
 	}
