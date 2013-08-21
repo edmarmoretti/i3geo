@@ -460,7 +460,7 @@ $cp {CPAINT} - Objeto CPAINT.
 
 $rss {string} - Endere&ccedil;os dos RSS.
 
-$tipo {string} - Tipo de recurso, permite a escolha do programa PHP que ser&aacute; usado GEORSS|WMS|WS|DOWNLOAD
+$tipo {string} - Tipo de recurso, permite a escolha do programa PHP que ser&aacute; usado GEORSS|WMS|WS|DOWNLOAD|WMSMETAESTAT
 
 Retorno:
 

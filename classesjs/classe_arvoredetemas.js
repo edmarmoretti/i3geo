@@ -110,7 +110,9 @@ i3GEO.arvoreDeTemas = {
 
 		uploadarquivo: true, //upload de GPX, SHAPEFILE, DBF, CSV e KML
 
-		flutuante: true //mostra a opcao que permite abrir o catalogo em uma janela flutuante
+		flutuante: true, //mostra a opcao que permite abrir o catalogo em uma janela flutuante
+		
+		metaestat: true
 	}
 
 	Tipo:
@@ -144,7 +146,8 @@ i3GEO.arvoreDeTemas = {
 		importarwmc: true,
 		googleearth: true,
 		carregaKml: true,
-		flutuante: true
+		flutuante: true,
+		metaestat: true
 	},
 	/*
 	Propriedade: FATORESTRELA
@@ -175,6 +178,15 @@ i3GEO.arvoreDeTemas = {
 	{Boolean}
 	*/
 	INCLUIWMS: true,
+	/*
+	Propriedade: INCLUIWMSMETAESTAT
+
+	Inclui na arvore a lista de Web Services WMS advindos do sistema de metadados estatisticos?
+
+	Tipo:
+	{Boolean}
+	*/
+	INCLUIWMSMETAESTAT: true,
 	/*
 	Propriedade: INCLUIESTRELAS
 
@@ -406,6 +418,34 @@ i3GEO.arvoreDeTemas = {
 			node.loadComplete();
 		};
 		i3GEO.php.listaRSSwsARRAY(monta,"WMS");
+	},
+	/*
+	Lista os WMS cadastrados no sistema METAESTAT preenchendo o no OGC-WMS
+	*/	
+	listaWMSmetaestat: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaWMSmetaestat()");}
+		var monta = function(retorno){
+			var node,raiz,nraiz,i,html,tempNode;
+			node = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idwmsmetaestat","raiz");
+			raiz = retorno.data.canais;
+			nraiz = raiz.length;
+			for (i=0;i<nraiz; i += 1){
+				html = "<span title='"+raiz[i].description+"'> "+raiz[i].title;
+				if(raiz[i].nacessos > 0){
+					html += " ("+((raiz[i].nacessosok * 100) / (raiz[i].nacessos*1))+"%)</span>";
+				}
+				else
+				{html += " (% de acessos n&atilde;o definido)</span>";}
+				html += "<hr>";
+				tempNode = new YAHOO.widget.HTMLNode(
+					{html:html,id_ws:raiz[i].id_ws,url:raiz[i].link,nivel:0,expanded:false,enableHighlight:false},
+					node
+				);
+				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
+			}
+			node.loadComplete();
+		};
+		i3GEO.php.listaRSSwsARRAY(monta,"WMSMETAESTAT");		
 	},
 	/*
 	Lista os layers de um WMS e preenche o no OGC-WMS
@@ -913,6 +953,19 @@ i3GEO.arvoreDeTemas = {
 				root
 			);
 			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaWMS, 1);
+		}
+		//
+		//wmsmetaestat
+		//
+		if(i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT === true){
+			tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"<span style='position:relative;top:-2px;'><b>&nbsp;OGC-WMS Metaestat</b></span>"+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=112' >&nbsp;&nbsp;&nbsp;</a>"+editor,
+					idwmsmetaestat:"raiz",expanded:false,enableHighlight:false
+				},
+				root
+			);
+			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaWMSmetaestat, 1);
 		}
 		//
 		//estrelas
@@ -1482,6 +1535,10 @@ i3GEO.arvoreDeTemas = {
 		}
 		if(OPCOESADICIONAIS.inde === true){
 			ins += "<td><img "+estilo("buscaInde")+" onclick='i3GEO.arvoreDeTemas.dialogo.buscaInde()' title='Pesquisa na INDE'/></td>";
+			t += 20;
+		}
+		if(OPCOESADICIONAIS.metaestat === true){
+			ins += "<td><img "+estilo("iconeMetaestat")+" onclick='i3GEO.mapa.dialogo.metaestat()' title='Cartogramas estatisticos'/></td>";
 			t += 20;
 		}
 		return("<table width='"+t+"px' ><tr>"+ins+"</tr></table>");

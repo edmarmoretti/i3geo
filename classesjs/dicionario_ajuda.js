@@ -940,6 +940,14 @@ g_traducao_ajuda = {
 			complemento:"",
 			tela:"",
 			apijs:"i3GEO.mapa.dialogo.locregiao()"
+		},
+		"112": {
+			titulo: "&Aacute;rvore de endere&ccedil;os WMS Metaestat",
+			diretorio:"classe_arvoredetemas.js",
+			categoria:"4",
+			pt:"Mostra os WMS cuja origem &eacute; o sistema de metadados estat&iacute;cos. Esse sistema apresenta cartogramas gerados de forma din&aacute;mica no padr&atilde;o WMS-Time",
+			complemento:"",
+			apijs: "i3GEO.arvoreDeTemas.listaWMSmetaestat(node)"
 		}
 	}
 };
