@@ -1016,14 +1016,17 @@ i3GEOadmin.variaveis = {
 								var callback = 	{
 										success: function(oResponse){
 											var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
-											dados = dados.grupos;
-											if(dados == ""){
+											if(dados.grupos == undefined || dados.grupos == ""){
 												dados = dados.histograma;
+											}
+											else{
+												dados = dados.grupos;
 											}
 											//converte os dados para o padrao usado no grafico
 											abreDados = function(){
-												i3GEOF.graficointerativo.dados = dados;
-												i3GEOF.graficointerativo.montaTabelaDados = function(dados){
+												i3GEOF.graficointerativo1.dados = dados;
+												i3GEOF.graficointerativo1.tipo = "bar_1";
+												i3GEOF.graficointerativo1.montaTabelaDados = function(dados){
 													var i=0,
 													v,
 													ins,
@@ -1048,9 +1051,9 @@ i3GEOadmin.variaveis = {
 														ins.push("</td><td>");
 														ins.push($inputText("","",id+"_valor","digite o novo valor",12,v[1],"valor"));
 														ins.push("</td><td>");
-														if($i("i3GEOgraficointerativoCoresA").checked){
+														//if($i("i3GEOgraficointerativoCoresA").checked){
 															cor = i3GEO.util.rgb2hex(i3GEO.util.randomRGB());
-														}
+														//}
 														//verifica se no objeto com os dados existe um terceiro valor com as cores
 														if(v[2]){
 															cor = i3GEO.util.rgb2hex(v[2]);
@@ -1064,19 +1067,19 @@ i3GEOadmin.variaveis = {
 													ins.push("</table><br>");
 													//ins.push("<input type=hidden id=i3GEOgraficointerativoComboXid />");
 													//ins.push("<input type=hidden id=i3GEOgraficointerativoComboYid />");
-													$i("i3GEOgraficointerativoDados").innerHTML = ins.join("");
+													$i("i3GEOgraficointerativo1Dados").innerHTML = ins.join("");
 													if($i("agruparsql").value != ""){
 														//$i("i3GEOgraficointerativoComboXid").value = $i("agruparsql").value;
 														//$i("i3GEOgraficointerativoComboYid").value = "Soma";
 													}
 												};
-												i3GEOF.graficointerativo.criaJanelaFlutuante();
+												i3GEOF.graficointerativo1.criaJanelaFlutuante();
 												core_carregando("desativa");
 											};
 											i3GEO.util.scriptTag(
-													"../../ferramentas/graficointerativo/index.js",
+													"../../ferramentas/graficointerativo1/index.js",
 													"abreDados()",
-													"i3GEOF.graficointerativo_script"
+													"i3GEOF.graficointerativo1_script"
 											);
 										},
 										failure:core_handleFailure,

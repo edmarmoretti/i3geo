@@ -291,6 +291,7 @@ class Metaestat{
 	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = "",$suportaWMST = false){
 		//
 		//o sql que faz acesso aos dados e marcado com /*SE*//*SE*/ na string que sera usada nos mapfiles
+		//a parte que contem referencias a coluna com a geometria e marcada com /*SG*//*SG*/
 		//
 		$filtro = false;
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
@@ -365,7 +366,7 @@ class Metaestat{
 			$colunasvisiveis = array_unique($colunasvisiveis);
 			$colunas = array_merge($colunas,$colunasvisiveis);
 			$vis = implode(",g.",$colunasvisiveis);
-			$vis = "g.".$vis.",st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo;
+			$vis = "g.".$vis."/*SG*/,st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo."/*SG*/";
 			//$sqlgeo = $sql.",g.".$colunageo;
 			$sqlgeo = $sql.",".$vis;
 			//
@@ -398,7 +399,7 @@ class Metaestat{
 		}
 		else{
 			$dadosAgregacao = $this->listaAgregaRegiaoFilho($dados["codigo_tipo_regiao"], $codigo_tipo_regiao);
-			$sqlgeo =  "SELECT st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as the_geom ,g.".$dadosAgregacao["colunaligacao_regiaopai"].",d.".$dados["colunavalor"]." as ".$dados["colunavalor"];
+			$sqlgeo =  "SELECT /*SG*/st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as the_geom ,/*SG*/g.".$dadosAgregacao["colunaligacao_regiaopai"].",d.".$dados["colunavalor"]." as ".$dados["colunavalor"];
 		}
 		$tipoconta = "";
 		if($dados["permitesoma"] == 1){
@@ -426,12 +427,15 @@ class Metaestat{
 			}
 			else{
 				$sqlgeo .= " FROM (SELECT * FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
+				$parametrosMedida = "";
+				/*
 				if(count($parametrosMedida) > 0){
 					$parametrosMedida = implode(",",$parametrosMedida).",";
 				}
 				else{
 					$parametrosMedida = "";
 				}
+				*/
 				//o campo deve ser convertido para data
 				if($suportaWMST == true){
 					$parametrosMedida = $this->listaParametroTempo2CampoData($id_medida_variavel)." as dimtempo,";
@@ -896,8 +900,14 @@ class Metaestat{
 	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = "",$limite=""){
 		set_time_limit(0);
 		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor);
-		//var_dump($sql);exit;
-		$sqlf = $sql["sql"];
+		$sqlf = $sql["sqlmapserver"];
+		//remove marcadores geo
+		$sqlf = explode("/*SE*/",$sqlf)[1];
+		$sqlf = explode("/*SG*/",$sqlf);
+		$sqlf = $sqlf[0]." ".$sqlf[2];
+		$sqlf = str_replace("__filtro__",$filtro,$sqlf);
+echo $sqlf;exit;
+		/*
 		if($sql["filtro"] == true){
 			if(!empty($filtro)){
 				$sqlf = $sqlf." AND ".$filtro;
@@ -906,6 +916,7 @@ class Metaestat{
 		elseif(!empty($filtro)){
 			$sqlf .= " WHERE ".$filtro;
 		}
+		* */
 		if($limite != ""){
 			$sqlf .= " limit ".$limite;
 		}
