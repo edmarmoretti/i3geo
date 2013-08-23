@@ -111,7 +111,7 @@ i3GEO.arvoreDeTemas = {
 		uploadarquivo: true, //upload de GPX, SHAPEFILE, DBF, CSV e KML
 
 		flutuante: true, //mostra a opcao que permite abrir o catalogo em uma janela flutuante
-		
+
 		metaestat: true
 	}
 
@@ -186,7 +186,7 @@ i3GEO.arvoreDeTemas = {
 	Tipo:
 	{Boolean}
 	*/
-	INCLUIWMSMETAESTAT: true,
+	INCLUIWMSMETAESTAT: false,
 	/*
 	Propriedade: INCLUIESTRELAS
 
@@ -410,7 +410,7 @@ i3GEO.arvoreDeTemas = {
 				{html += " (% de acessos n&atilde;o definido)</span>";}
 				html += "<hr>";
 				tempNode = new YAHOO.widget.HTMLNode(
-					{html:html,id_ws:raiz[i].id_ws,url:raiz[i].link,nivel:0,expanded:false,enableHighlight:false},
+					{html:html,id_ws:raiz[i].id_ws,tipo_ws:raiz[i].tipo_ws,url:raiz[i].link,nivel:0,expanded:false,enableHighlight:false},
 					node
 				);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
@@ -420,32 +420,50 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.php.listaRSSwsARRAY(monta,"WMS");
 	},
 	/*
-	Lista os WMS cadastrados no sistema METAESTAT preenchendo o no OGC-WMS
-	*/	
-	listaWMSmetaestat: function(){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaWMSmetaestat()");}
+	Lista as variaveis cadastradas no sistema METAESTAT preenchendo
+	*/
+	listaVariaveisMetaestat: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaVariaveisMetaestat()");}
 		var monta = function(retorno){
 			var node,raiz,nraiz,i,html,tempNode;
 			node = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idwmsmetaestat","raiz");
-			raiz = retorno.data.canais;
-			nraiz = raiz.length;
+			nraiz = retorno.length;
 			for (i=0;i<nraiz; i += 1){
-				html = "<span title='"+raiz[i].description+"'> "+raiz[i].title;
-				if(raiz[i].nacessos > 0){
-					html += " ("+((raiz[i].nacessosok * 100) / (raiz[i].nacessos*1))+"%)</span>";
-				}
-				else
-				{html += " (% de acessos n&atilde;o definido)</span>";}
+				html = "<span title='"+retorno[i].descricao+"'> "+retorno[i].nome;
 				html += "<hr>";
 				tempNode = new YAHOO.widget.HTMLNode(
-					{html:html,id_ws:raiz[i].id_ws,url:raiz[i].link,nivel:0,expanded:false,enableHighlight:false},
+					{codigo_variavel:retorno[i].codigo_variavel,html:html,expanded:false,enableHighlight:false},
 					node
 				);
-				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
+				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaMedidasVariavel, 1);
 			}
 			node.loadComplete();
 		};
-		i3GEO.php.listaRSSwsARRAY(monta,"WMSMETAESTAT");		
+		i3GEO.php.listaVariavel(monta);
+		//"codigo_variavel":"10","nome":"População residente","descricao":""
+	},
+	/*
+	Lista as medidas de variaveis cadastradas no sistema METAESTAT preenchendo
+	*/
+	listaMedidasVariavel: function(node){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaMedidasVariavel()");}
+		var monta = function(retorno){
+			var tema,html,tempnode,i,n,data;
+			n = retorno.length;
+			for(i=0;i<n;i++){
+				//nameInput he incluido como 'name' no objeto input para que a funcao de clique no input saiba
+				//que se trata de uma camada vinda do sistema metaestat
+				tema = {"nameInput":"metaestat","tid":retorno[i].id_medida_variavel,"nome":retorno[i].nomemedida},
+				html = i3GEO.arvoreDeTemas.montaTextoTema("gray",tema),
+				tempNode = new YAHOO.widget.HTMLNode(
+					{html:html,expanded:false,enableHighlight:false},
+					node
+				);
+				tempNode.isleaf = true;
+			}
+			node.loadComplete();
+		};
+		i3GEO.php.listaMedidaVariavel(node.data.codigo_variavel,monta);
 	},
 	/*
 	Lista os layers de um WMS e preenche o no OGC-WMS
@@ -507,7 +525,7 @@ i3GEO.arvoreDeTemas = {
 			}
 			node.loadComplete();
 		};
-		i3GEO.php.listaLayersWMS(monta,node.data.url,(node.data.nivel*1 + 1),node.data.id_ws,node.data.layer);
+		i3GEO.php.listaLayersWMS(monta,node.data.url,(node.data.nivel*1 + 1),node.data.id_ws,node.data.layer,node.data.tipo_ws);
 	},
 	/*
 	Monta o texto que sera mostrado ao lado de cada layer de um WMS, permitindo incluir o layer no mapa.
@@ -960,12 +978,12 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT === true){
 			tempNode = new YAHOO.widget.HTMLNode(
 				{
-					html:"<span style='position:relative;top:-2px;'><b>&nbsp;OGC-WMS Metaestat</b></span>"+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=112' >&nbsp;&nbsp;&nbsp;</a>"+editor,
+					html:"<span style='position:relative;top:-2px;'><b>&nbsp;"+$trad("x57")+"</b></span>"+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=112' >&nbsp;&nbsp;&nbsp;</a>",
 					idwmsmetaestat:"raiz",expanded:false,enableHighlight:false
 				},
 				root
 			);
-			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaWMSmetaestat, 1);
+			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaVariaveisMetaestat, 1);
 		}
 		//
 		//estrelas
@@ -1372,6 +1390,9 @@ i3GEO.arvoreDeTemas = {
 		}
 		html += clique;
 		//se o icone nao for do tipo download, define os valores do input
+		if(tema.nameInput){
+			html += " name='"+tema.nameInput+"' ";
+		}
 		if(i3GEO.arvoreDeTemas.TIPOBOTAO !== "download"){
 			html += " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' />";
 		}

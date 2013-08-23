@@ -6,7 +6,7 @@
 <meta name="description" content="Mapa interativo do MMA">
 <meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia">
 <meta name="robots" content="index,follow">
-<script type="text/javascript" src="classesjs/i3geo.js"></script>
+<script type="text/javascript" src="classesjs/i3geonaocompacto.js"></script>
 <script type="text/javascript" src="classesjs/datadownload.js"></script>
 <style>
 P
@@ -18,7 +18,7 @@ P
 #arvoreDir
 {width:260px;}
 #corpo
-{text-align:left;font-size:12px;width:450px;position:absolute;top:0px;left:275px;background:rgb(250,250,250);}
+{text-align:left;font-size:12px;width:450px;position:absolute;top:0px;left:300px;background:rgb(250,250,250);}
 #bandeiras
 {width:80px;text-align:left;}
 </style>
@@ -95,6 +95,7 @@ g_RSSl = new Array("");
 i3GEO.idioma.IDSELETOR = "bandeiras";
 i3GEO.idioma.mostraSeletor();
 i3GEO.arvoreDeTemas.TIPOBOTAO = "download";
+i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT = true;
 $i("bm1").innerHTML = i3GEO.social.bookmark(window.location.href);
 loc = window.location.href;
 i3GEO.social.compartilhar("curtir",loc,loc,"comtotal");

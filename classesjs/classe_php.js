@@ -1308,9 +1308,9 @@ i3GEO.php = {
 
 	<LISTALAYERSWMS>
 	*/
-	listaLayersWMS: function(funcao,servico,nivel,id_ws,nomelayer){
+	listaLayersWMS: function(funcao,servico,nivel,id_ws,nomelayer,tipo_ws){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
-			par = "funcao=listaLayersWMS&servico="+servico+"&nivel="+nivel+"&id_ws="+id_ws+"&nomelayer="+nomelayer;
+			par = "funcao=listaLayersWMS&servico="+servico+"&nivel="+nivel+"&id_ws="+id_ws+"&nomelayer="+nomelayer+"&tipo_ws="+tipo_ws;
 		cpJSON.call(p,"listaLayersWMS",funcao,par);
 	},
 	/*

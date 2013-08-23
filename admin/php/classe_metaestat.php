@@ -560,6 +560,13 @@ class Metaestat{
 			if($suportaWMST == true){
 				$sqlMinMax = "select min(dimtempo) as min,max(dimtempo) as max from(".$sql["sql"].") as x";
 				$minmaxdata = $this->execSQLDB($meta["codigo_estat_conexao"],$sqlMinMax );
+				$fontemeta = $this->listaFonteinfoMedida($id_medida_variavel);
+				if(count($fontemeta) > 0){
+					$fontemeta = $fontemeta[0]["link"];
+				}
+				else{
+					$fontemeta = "";
+				}
 			}
 			$dados[] = "MAP";
 			$dados[] = 'SYMBOLSET "'.$this->locaplic.'/symbols/simbolosv6.sym"';
@@ -589,6 +596,7 @@ class Metaestat{
 			$dados[] = '		TEMA "'.$titulolayer.'"';
 			$dados[] = '		TIP "'.$sql["colunavalor"].','.$sql["nomeregiao"].'"';
 			$dados[] = '		CLASSE "SIM"';
+			$dados[] = '		permitedownload "SIM"';
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
 			$dados[] = '		METAESTAT_ID_MEDIDA_VARIAVEL "'.$id_medida_variavel.'"';
@@ -604,6 +612,9 @@ class Metaestat{
 				$dados[] = '	"wms_timeitem"	"dimtempo"';
 				$dados[] = '	"wms_timeextent" "'.$minmaxdata[0]["min"]."/".$minmaxdata[0]["max"].'"';
 				$dados[] = '	"wms_timedefault" "'.$minmaxdata[0]["max"].'"';
+				$dados[] = '	"ows_metadataurl_href" "'.$fontemeta.'"';
+				$dados[] = ' 	"ows_metadataurl_type" "TC211" ';
+				$dados[] = '	"ows_metadataurl_format" "text/html" ';
 			}
 			$dados[] = '	END';
 			if($classes == ""){

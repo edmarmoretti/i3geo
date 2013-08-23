@@ -59,28 +59,30 @@ function gravaCacheWMS($servico)
 	error_reporting(0);
 	try{
 		$teste = explode("=",$servico);
-		if ( count($teste) > 1 )
-		{$servico = $servico."&";}
-		else
-		{
+		if ( count($teste) > 1 ){
+			$servico = $servico."&";
+		}
+		else{
 			$teste = explode("?",$servico);
-			if ( count($teste) == 1 ){$servico = $servico."?";}
+			if ( count($teste) == 1 ){
+				$servico = $servico."?";
+			}
 		}
 		$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS";
 		$teste = explode("version",strtolower($wms_service_request));
-		if(count($teste) == 1)
-		{$wms_service_request .= "&VERSION=1.1.1";}
+		if(count($teste) == 1){
+			$wms_service_request .= "&VERSION=1.1.1";
+		}
 		$nome = $dir_tmp."/wms".md5($servico).".xml";
-		if(!file_exists($nome))
-		{
+		if(!file_exists($nome)){
 			$wms_capabilities = file($wms_service_request);
-			if( !$wms_capabilities )
-			{return "erro";}
-			else
-			{
+			if( !$wms_capabilities ){
+				return "erro";
+			}
+			else{
 				$fp = fopen($nome, 'w');
 				fwrite($fp, implode("",$wms_capabilities));
-				fclose($fp);	
+				fclose($fp);
 			}
 		}
 		return $nome;
@@ -219,8 +221,8 @@ function getcapabilities2()
 	if($entries == FALSE || $entries->length == 0){
 		$rn = $xpath->registerNamespace("tag", "http://www.opengis.net/wms");
 		$entries = $xpath->query('/tag:WMS_Capabilities/tag:Service/tag:Name');
-	}	
-	
+	}
+
 	$temp = "";
 	foreach ($entries as $entry){$temp .= $entry->nodeValue;}
 	$retorno .= "<b>Nome: </b>".$temp;
@@ -229,7 +231,7 @@ function getcapabilities2()
 	$entries = $xpath->query($query);
 	if($entries == FALSE || $entries->length == 0){
 		$entries = $xpath->query('/tag:WMS_Capabilities/tag:Service/tag:Title');
-	}	
+	}
 	$temp = "";
 	foreach ($entries as $entry){$temp .= $entry->nodeValue;}
 	$retorno .= "<br><br><b>T&iacute;tulo: </b>".$temp;
@@ -238,7 +240,7 @@ function getcapabilities2()
 	$entries = $xpath->query($query);
 	if($entries == FALSE || $entries->length == 0){
 		$entries = $xpath->query('/tag:WMS_Capabilities/tag:Service/tag:Abstract');
-	}	
+	}
 	$temp = "";
 	foreach ($entries as $entry){$temp .= $entry->nodeValue;}
 	$retorno .= "<br><br><b>Resumo: </b>".$temp;
@@ -247,7 +249,7 @@ function getcapabilities2()
 	$entries = $xpath->query($query);
 	if($entries == FALSE || $entries->length == 0){
 		$entries = $xpath->query('/tag:WMS_Capabilities/tag:Service/tag:KeywordList');
-	}	
+	}
 	$temp = "";
 	foreach ($entries as $entry){$temp .= $entry->nodeValue.".";}
 	$retorno .= "<br><br><b>Palavras-chave: </b>".$temp;
@@ -256,7 +258,7 @@ function getcapabilities2()
 	$entries = $xpath->query($query);
 	if($entries == FALSE || $entries->length == 0){
 		$entries = $xpath->query('/tag:WMS_Capabilities/tag:Service/tag:ContactInformation');
-	}	
+	}
 	$temp = "";
 	foreach ($entries as $entry){$temp .= $entry->nodeValue.".";}
 	$retorno .= "<br><br><b>Contato: </b>".$temp;
@@ -332,7 +334,7 @@ function temaswms()
 	#
 	//$wms_service_request = "c://temp//teste.xml";
 	include_once("../admin/php/admin.php");
-	
+
 	include_once("../admin/php/webservices.php");
 
 	//error_reporting(0);
@@ -353,7 +355,7 @@ function temaswms()
 	}
 	$handle = fopen ($wms_service_request, "r");
 	$wms_capabilities = fread($handle, filesize($wms_service_request));
-	fclose ($handle); 
+	fclose ($handle);
 
 	$dom = new DomDocument();
 	$dom->loadXML($wms_capabilities);
@@ -366,7 +368,7 @@ function temaswms()
 	$query = '//WMT_MS_Capabilities/Capability/UserDefinedSymbolization';
 	$entries = $xpath->query($query);
 	if($entries->length == 0){
-		$suporta = "sim";	
+		$suporta = "sim";
 	}
 	else{
 		foreach($entries as $e)
@@ -393,7 +395,7 @@ function temaswms()
 		{$layers1 = $layers;}
 		else{
 			$r = pegaTag($layer);
-			$retorna = imprimeTag($r,$retorna);		
+			$retorna = imprimeTag($r,$retorna);
 		}
 		foreach ($layers1 as $layer1)
 		{
@@ -439,7 +441,7 @@ function temaswms()
 			}
 			if(count($layers2) == 1){$retorna[] = "<hr>";}
 		}
-	}	
+	}
 	$retorna[] = "<br>Proj.:<input size=30 id=proj type=text class=digitar value='".implode(",",wms_srs($dom))."'/><br>";
 	$retorna[] = "<br>Formatos imagem:<input size=30 id=formatos type=text class=digitar value='".implode(",",wms_formats($dom))."'/><br><br>";
 	$retorna[] = "<br>Formatos info:<input size=30 id=formatosinfo type=text class=digitar value='".implode(",",wms_formatsinfo($dom))."'/><br><br>";
@@ -466,44 +468,42 @@ Retorno:
 */
 function listaLayersWMS()
 {
-	global $servico,$nivel,$id_ws,$nomelayer;
-	if(!isset($nomelayer)){$nomelayer = "undefined";}
+	global $servico,$nivel,$id_ws,$nomelayer,$tipo_ws;
+	if(!isset($nomelayer)){
+		$nomelayer = "undefined";
+	}
+	//para o caso do sistema de metadados estatisticos
 	$wms_service_request = gravaCacheWMS($servico);
 	include_once("../admin/php/admin.php");
 	include_once("../admin/php/webservices.php");
 	error_reporting(0);
-	
-	if($nivel < 2){
+	if($tipo_ws != "WMSMETAESTAT" && $nivel < 2){
 		if($wms_service_request == "erro") {
 			//registra a tentativa de acesso
-			if(isset($id_ws))
-			{
+			if(isset($id_ws)){
 				adicionaAcesso($id_ws,false);
 			}
 			$cp->set_data("Erro de acesso");
 			return;
 		}
-		elseif(isset($id_ws))
-		{
+		elseif(isset($id_ws)){
 			adicionaAcesso($id_ws,true);
-		}	
+		}
 	}
 	$handle = fopen ($wms_service_request, "r");
 	$wms_capabilities = fread ($handle, filesize ($wms_service_request));
-	fclose ($handle); 
+	fclose ($handle);
 	$dom = new DomDocument();
 	$dom->loadXML($wms_capabilities);
 	$xpath = new DOMXPath($dom);
 	$q = '//WMT_MS_Capabilities/Capability';
 	$res = array();
-	
-	if($nomelayer != "undefined")
-	{
-		for($i=0; $i < $nivel-1 ; ++$i)
-		$q .= "/Layer";
+	if($nomelayer != "undefined"){
+		for($i=0; $i < $nivel-1 ; ++$i){
+			$q .= "/Layer";
+		}
 		$layersanteriores = $xpath->query($q);
-		foreach ($layersanteriores as $layeranterior)
-		{
+		foreach ($layersanteriores as $layeranterior){
 			$r1 = pegaTag($layeranterior);
 			if($r1["nome"] == $nomelayer || $r1["titulo"] == $nomelayer)
 			{
@@ -521,13 +521,12 @@ function listaLayersWMS()
 			}
 		}
 	}
-	else
-	{
+	else{
 		//
 		//pega os layers no primeiro n&iacute;vel
 		//
 		$q .= "/Layer";
-		$layers = $xpath->query($q);	
+		$layers = $xpath->query($q);
 		$res = array();
 		foreach ($layers as $layer)
 		{
@@ -551,7 +550,7 @@ function imprimeEstilos($es,$suporta,$retorna,$tval,$tituloalternativo)
 		//if($nomecamada == "default" || $nomecamada == "")
 		//{$nomecamada = $tituloalternativo;}
 		$tituloestilo = $e["titulo"];
-		$retorna[] = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"estilo\",\"" . $tval . "\",\"\",\"" . $nomeestilo . "\",\"".$tituloalternativo." ".$nomecamada." ".$tituloestilo."\",\"".$suporta."\")' value='" . $nomeestilo . "'/><span style=color:blue >" . $nomeestilo." <i>".$tituloestilo."</i></span><br>";	
+		$retorna[] = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"estilo\",\"" . $tval . "\",\"\",\"" . $nomeestilo . "\",\"".$tituloalternativo." ".$nomecamada." ".$tituloestilo."\",\"".$suporta."\")' value='" . $nomeestilo . "'/><span style=color:blue >" . $nomeestilo." <i>".$tituloestilo."</i></span><br>";
 	}
 	return $retorna;
 }
@@ -577,16 +576,14 @@ function pegaTag($layer)
 	{
 		$tnome = $noslayer->item($i)->tagName;
 		$tvalor = $noslayer->item($i)->nodeValue;
-		if($tnome)
-		{
+		if($tnome){
 			if ($tnome == "Title")
 			{$resultado["titulo"] = $tvalor;}
 			if ($tnome == "Name")
 			{$resultado["nome"] = $tvalor;}
 			if ($tnome == "Abstract")
 			{$resultado["resumo"] = $tvalor;}
-			if ($tnome == "Style")
-			{
+			if ($tnome == "Style"){
 				$ss = $noslayer->item($i)->childNodes;
 				$ssl = $ss->length;
 				for ($s = 0; $s < $ssl; $s++)
@@ -644,7 +641,7 @@ function temaswfs()
 		$serv = "";
 		foreach ($vs as $v)
 		{$serv .= $v->nodeValue;}
-	}	
+	}
 	$layers = $dom->getElementsByTagName("FeatureType");
 	foreach ($layers as $layer)
 	{
@@ -652,12 +649,12 @@ function temaswfs()
 		$temp1 = "";
 		foreach ($vs as $v)
 		{$temp1 .= $v->nodeValue;}
-		
+
 		$vs = $layer->getElementsByTagName("Abstract");
 		$temp2 = "";
 		foreach ($vs as $v)
 		{$temp2 .= $v->nodeValue;}
-		
+
 		$vs = $layer->getElementsByTagName("SRS");
 		$temp3 = array();
 		foreach ($vs as $v)
@@ -668,7 +665,7 @@ function temaswfs()
 		$temp = "";
 		foreach ($vs as $v)
 		{$temp .= $v->nodeValue;}
-		$temp = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"" . $temp . "\",\"" .$temp1. "\",\"" . $temp3 . "\",\"" . $serv ."\")' /><span style=color:red >" . $temp . "</span><br>";		
+		$temp = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"" . $temp . "\",\"" .$temp1. "\",\"" . $temp3 . "\",\"" . $serv ."\")' /><span style=color:red >" . $temp . "</span><br>";
 		$retorno .= "<br>".$temp.$temp1."<br>".$temp2."<hr>";
 	}
 	$cp->set_data($retorno);
@@ -781,7 +778,7 @@ function wms_formats ( $dom )
 		$teste = $xpath->registerNamespace("tag", "http://www.opengis.net/wms");
 		$q = '/tag:WMS_Capabilities/tag:Capability/tag:Request/tag:GetMap/tag:Format';
 		$entries = $xpath->query($q);
-	}	
+	}
 	$arr = array();
 	foreach ($entries as $entry)
 	{
@@ -803,7 +800,7 @@ function wms_formatsinfo ( $dom )
 		$teste = $xpath->registerNamespace("tag", "http://www.opengis.net/wms");
 		$q = '/tag:WMS_Capabilities/tag:Capability/tag:Request/tag:GetCapabilities/tag:Format';
 		$entries = $xpath->query($q);
-	}	
+	}
 	$arr = array();
 	foreach ($entries as $entry)
 	{
@@ -878,12 +875,12 @@ function wms_layers ( $dom ) {
 	if ($entries->length == 0)
 	{
 		$query = '//WMT_MS_Capabilities/Capability/Layer';
-		$entries = $xpath->query($query);		
+		$entries = $xpath->query($query);
 	}
 	else
 	{
 		$query = '//WMT_MS_Capabilities/Capability/Layer/Layer';
-		$entries = $xpath->query($query);		
+		$entries = $xpath->query($query);
 	}
 	return $entries;
 }

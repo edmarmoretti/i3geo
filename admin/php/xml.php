@@ -299,6 +299,27 @@ function geraXmlWMS($locaplic)
 	return geraXmlRSS($locaplic,$sql,"Web services WMS-OGC");
 }
 /*
+ Function: geraXmlWMSmetaestat
+
+RSS com a lista de WMS das variaveis cadastradas no sistema de metadados estatisticos
+
+Parametros:
+
+locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
+
+Retorno:
+
+RSS
+*/
+function geraXmlWMSmetaestat($locaplic)
+{
+	global $esquemaadmin;
+	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace("/admin/php/xml.php","",__FILE__)));
+	$sql = "select DISTINCT b.id_medida_variavel as id_ws, 'WMSMETAESTAT' as tipo_ws,'".$url."/ogc.php?id_medida_variavel='||b.id_medida_variavel as link_ws,a.nome||' -> '||b.nomemedida as nome_ws,a.descricao as desc_ws, '' as autor_ws from i3geoestat_variavel as a ,i3geoestat_medida_variavel as b WHERE a.codigo_variavel = b.codigo_variavel ORDER BY a.nome";
+	return geraXmlRSS($locaplic,$sql,"Web services WMS-TIME OGC");
+}
+/*
 Function: geraXmlGeorss
 
 RSS com a lista de GEORSS cadastrados

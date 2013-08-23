@@ -183,6 +183,12 @@ if($temas != ""){
 					if(file_exists($tema)){
 						$nomeMap = $tema;
 					}
+					else{
+						//acontece caso o mapfile tenha sido gerado na pasta temporaria por algum sistema
+						if(file_exists($dir_tmp."/".$tema.".map")){
+							$nomeMap = $dir_tmp."/".$tema.".map";
+						}
+					}
 				}
 				if($nomeMap != ""){
 					$layers = array();

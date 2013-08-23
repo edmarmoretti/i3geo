@@ -1382,6 +1382,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	}
 	$map = @ms_newMapObj($map_file);
 	$layer = $map->getlayerbyname($tema);
+
 	$layer->set("template","none.htm");
 	$diretorio = dirname($dir_tmp);
 	$tipol = MS_SHP_POINT;
@@ -1393,11 +1394,16 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	{$novonomelayer = $tema."_".nomeRandomico(5);}
 	else
 	{$novonomelayer = $tema;}
+
+
 	$novonomelayer = str_replace(".","-",$novonomelayer);
 	$nomeshp = $dir_tmp."/".$novonomelayer;
+
 	if(file_exists($nomeshp.".shp"))
 	{return $nomeshp;}
+
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
+
 	//se for do tipo features
 	$data = $layer->data;
 	$resultadoFinal = true;
@@ -1440,7 +1446,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			$def[] = array($temp,"C","254");
 			$cni = $cni + 1;
 		}
-
 		if(!function_exists("dbase_create"))
 		{$db = xbase_create($nomeshp.".dbf", $def);}
 		else
@@ -1454,7 +1459,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		{@$layer->queryByrect($map->extent);}
 		//pega cada registro
 		$res_count = $layer->getNumresults();
-		//echo $res_count;exit;
 		if ($res_count > 0){
 			$sopen = $layer->open();
 			if($sopen == MS_FAILURE){return "erro";}
@@ -1629,7 +1633,13 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		}
 		//se o layer n&atilde;o existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
 		if($teste == ""){
-			$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
+			if(file_exists($tema.".map")){
+				$maptemp = ms_newMapObj($tema.".map");
+				$tema = basename($tema);
+			}
+			else{
+				$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
+			}
 			$numlayers = $maptemp->numlayers;
 			for ($i=0;$i < $numlayers;++$i){
 				$ll = $maptemp->getlayer($i);

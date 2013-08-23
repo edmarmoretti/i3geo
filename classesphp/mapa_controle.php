@@ -119,7 +119,7 @@ $interfaceTemp = $interface;
 //TEMA2SLD e usado por datadownload.htm
 //PEGAMAPAS e utilizado em varias funcoes
 //
-if ($funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS"){
+if ($funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funcao != "procurartemasestrela" && $funcao != "pegalistadegrupos" && $funcao != "pegalistademenus" && $funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS"){
 	session_name("i3GeoPHP");
 	if (isset($g_sid) && $g_sid != "")
 	{session_id($g_sid);}
@@ -891,6 +891,14 @@ Valor: DOWNLOAD3
 Gera os arquivos para download de um tema for&ccedil;ando um mapfile vazio.
 */
 	case "DOWNLOAD3":
+		//caso o tema tenha de vir do sistema de metadados estatisticos
+		if(isset($id_medida_variavel) && $id_medida_variavel != ""){
+			include("../admin/php/classe_metaestat.php");
+			$m = new Metaestat();
+			$m->nomecache = "ogcmetaestat".$id_medida_variavel;
+			$tema = $m->mapfileMedidaVariavel($id_medida_variavel,"",1,"","","","","","",true);
+			$tema = str_replace(".map","",$tema["mapfile"]);
+		}
 		$retorno = downloadTema2("",$tema,$locaplic,$dir_tmp,$postgis_mapa);
 	break;
 /*

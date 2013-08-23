@@ -498,6 +498,11 @@ function listaRSSwsARRAY()
 				$canali = simplexml_load_string(geraXmlWMS($locaplic));
 				$linkrss = $urli3geo."/admin/xmlservicoswms.php";
 			}
+			if($tipo == "WMSMETAESTAT")
+			{
+				$canali = simplexml_load_string(geraXmlWMSmetaestat($locaplic));
+				$linkrss = $urli3geo."/admin/xmlservicoswms.php";
+			}
 			if($tipo == "WS")
 			{
 				$canali = simplexml_load_string(geraXmlWS($locaplic));

@@ -561,6 +561,13 @@ background-position: 0px -700px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
+.iconeMetaestat {
+background-image: URL('../imagens/visual/default/sprite2.png');
+background-repeat: no-repeat;
+background-position: 0px -728px;
+width: 16px;
+border: 1px solid #DCDCDC;
+}
 #barraedicao {
 background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;

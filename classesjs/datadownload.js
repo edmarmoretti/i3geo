@@ -143,7 +143,7 @@ function DDinicia()
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false;
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca = false;
 		//i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
-		i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","datadownload_download\(this.title\)");
+		i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","datadownload_download\(this\)");
 	}
 	if (g_tipo == "dir")
 	{
@@ -155,7 +155,7 @@ function DDinicia()
 	}
 	dataDownloadLinks(g_RSSl);
 	if(temaDownload != ""){
-		datadownload_download(temaDownload);
+		datadownload_download({"title":temaDownload});
 	}
 }
 /*
@@ -263,11 +263,8 @@ function listaArquivos(dir)
 /*
 Gera os arquivos para download do shape file de um tema.
 
-Parametros:
-
-tema - c&oacute;digo do tema para download
 */
-function datadownload_download(tema)
+function datadownload_download(obj)
 {
 	if(!$i("panellistaarquivos")){
 		YAHOO.namespace("datadownloadLista");
@@ -281,8 +278,12 @@ function datadownload_download(tema)
 	YAHOO.datadownloadLista.panel.setBody($trad("d28"));
 	YAHOO.datadownloadLista.panel.show();
 	//document.getElementById("corpo").innerHTML = "Aguarde. Gerando arquivos..."
-	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&tema="+tema;
-	temaEscolhidoDownload = tema;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&tema="+obj.title;
+	//caso a camada venha do sistema de metadados estatisticos
+	if(obj.name && obj.name === "metaestat"){
+		p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&id_medida_variavel="+obj.title;
+	}
+	temaEscolhidoDownload = obj.title;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
