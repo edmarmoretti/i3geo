@@ -905,8 +905,7 @@ class Metaestat{
 		$sqlf = explode("/*SE*/",$sqlf)[1];
 		$sqlf = explode("/*SG*/",$sqlf);
 		$sqlf = $sqlf[0]." ".$sqlf[2];
-		$sqlf = str_replace("__filtro__",$filtro,$sqlf);
-echo $sqlf;exit;
+		$sqlf = str_replace("__filtro__"," AND ".$filtro,$sqlf);
 		/*
 		if($sql["filtro"] == true){
 			if(!empty($filtro)){
@@ -921,6 +920,7 @@ echo $sqlf;exit;
 			$sqlf .= " limit ".$limite;
 		}
 		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
+		
 		if(!empty($metaVariavel["codigo_estat_conexao"])){
 			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
 			$dbhold = $this->dbh;
