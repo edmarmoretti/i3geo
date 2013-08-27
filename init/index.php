@@ -190,6 +190,10 @@ botoesIni.push({
 	"href":"../guia_de_migracao.txt",
 	"titulo":$trad(17,g_traducao_init)
 	},{
+	"img":"accessories-dictionary.png",
+	"href":"documentacao",
+	"titulo":$trad(24,g_traducao_init)
+	},{
 	"img":"tools-report-bug.png",
 	"href":"http://svn.softwarepublico.gov.br/trac/i3geo",
 	"titulo":$trad(16,g_traducao_init)

@@ -136,5 +136,11 @@ es:""
 pt:"Mapa com Open Street Map (OSM)",
 en:"",
 es:""
+}],
+24: [
+{
+pt:"Documenta&ccedil;&atilde;o da API",
+en:"",
+es:""
 }]
 };
