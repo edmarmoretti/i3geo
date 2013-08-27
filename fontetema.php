@@ -1,6 +1,5 @@
 <?php
 /*
-Title: fontetema.php
 
 Busca o registro da fonte de um tema e abre o link.
 

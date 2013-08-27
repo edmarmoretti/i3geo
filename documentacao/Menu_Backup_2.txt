@@ -1,0 +1,127 @@
+Format: 1.52
+
+
+Title: i3Geo
+SubTitle: Par&acirc;metros de configura&ccedil;&atilde;o e customiza&ccedil;&atilde;o
+
+Footer: O i3Geo é Software Livre
+Timestamp: Gerado em day month, year
+#   m     - One or two digit month.  January is "1"
+#   mm    - Always two digit month.  January is "01"
+#   mon   - Short month word.  January is "Jan"
+#   month - Long month word.  January is "January"
+#   d     - One or two digit day.  1 is "1"
+#   dd    - Always two digit day.  1 is "01"
+#   day   - Day with letter extension.  1 is "1st"
+#   yy    - Two digit year.  2006 is "06"
+#   yyyy  - Four digit year.  2006 is "2006"
+#   year  - Four digit year.  2006 is "2006"
+
+# These are indexes you deleted, so Natural Docs will not add them again
+# unless you remove them from this line.
+
+Don't Index: Properties
+
+
+# --------------------------------------------------------------------------
+# 
+# Cut and paste the lines below to change the order in which your files
+# appear on the menu.  Don't worry about adding or removing files, Natural
+# Docs will take care of that.
+# 
+# You can further organize the menu by grouping the entries.  Add a
+# "Group: [name] {" line to start a group, and add a "}" to end it.
+# 
+# You can add text and web links to the menu by adding "Text: [text]" and
+# "Link: [name] ([URL])" lines, respectively.
+# 
+# The formatting and comments are auto-generated, so don't worry about
+# neatness when editing the file.  Natural Docs will clean it up the next
+# time it is run.  When working with groups, just deal with the braces and
+# forget about the indentation and comments.
+# 
+# --------------------------------------------------------------------------
+
+
+Link: Portal do Software P&uacute;blico Brasileiro  (http://www.softwarepublico.gov.br)
+File: Inicializa o i3Geo via URL ms_criamapa.php  (ms_criamapa.php)
+File: Lista de funcionalidades  (ajuda_usuario.php)
+File: Gerador de miniaturas &lparen;thumbnails&rparen;  (geraminiatura.php)
+File: Cat&aacute;logo de temas em KML  (kml.php)
+File: Gerador de servi&ccedil;os OGC  (ogc.php)
+File: Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php  (ms_configura.php)
+
+Group: API  {
+
+   File: &Aacute;rvore de temas  (classesjs\classe_arvoredetemas.js)
+   File: &Aacutervore de camadas  (no auto-title, classesjs\classe_arvoredecamadas.js)
+   File: Ajuda  (classesjs\classe_ajuda.js)
+   File: An&aacute;lise geogr&aacute;fica  (classesjs\classe_analise.js)
+   File: Barra de bot&otilde;es  (classesjs\classe_barradebotoes.js)
+   File: C&aacute;lculos  (classesjs\classe_calculo.js)
+   File: Configura&ccedil;&otilde;es gerais  (classesjs\classe_configura.js)
+   File: Controle de usu&aacute;rio  (classesjs\classe_login.js)
+   File: Coordenadas  (classesjs\classe_coordenadas.js)
+   File: Desenho de elementos gr&aacute;ficos  (classesjs\classe_desenho.js)
+   File: Eventos  (classesjs\classe_eventos.js)
+   File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\classe_gadgets.js)
+   File: Gerador de links  (classesjs\geradordelinks.js)
+   File: Guias  (classesjs\classe_guias.js)
+   File: i3Geo  (classesjs\classe_i3geo.js)
+   File: Idioma  (classesjs\classe_idioma.js)
+   File: Interface  (classesjs\classe_interface.js)
+   File: Janelas  (classesjs\classe_janela.js)
+   File: Mapa  (classesjs\classe_mapa.js)
+   File: Mapa de refer&ecirc;ncia  (classesjs\classe_maparef.js)
+   File: Navega&ccedil;&atilde;o sobre o mapa  (classesjs\classe_navega.js)
+   File: PHP  (classesjs\classe_php.js)
+   File: Social  (classesjs\classe_social.js)
+   File: Temas  (classesjs\classe_tema.js)
+   File: Utilit&aacute;rios  (classesjs\classe_util.js)
+   }  # Group: API
+
+Group: Diagramas e SQL  {
+
+   Group: SQL  {
+
+      Link: tabelas do banco de dados de amdinistra&ccedil;&atilde; para o controle de usu&aacute;rios  (../../admin/sql/cadastrodeusuarios.sql)
+      Link: tabelas do banco de dados de amdinistra&ccedil;&atilde; para o sistema de cartogramas estat&iacute;sticos  (../../admin/sql/metaestat.sql)
+      Link: povoamento das tabelas do banco de dados de amdinistra&ccedil;&atilde; para o controle de usu&aacute;rios  (../../admin/sql/usuarios_basededados.sql)
+      Link: povoamento das tabelas do banco de dados de amdinistra&ccedil;&atilde; para o sistema de cartogramas estat&iacute;sticos  (../../admin/sql/metaestat_basededados.sql)
+      }  # Group: SQL
+
+   Group: Figuras  {
+
+      Link: banco de dados de administração  (../diagramas/mer_banco_de_dados_de_administracao.png)
+      Link: banco de dados de usuários - gerado com Eclipse + ERMaster  (../diagramas/cadastrodeusuarios)
+      Link: banco de dados de metadados estatisticos - gerado com Eclipse + ERMaster  (../diagramas/metaestat)
+      Link: Arquitetura  (../diagramas/arquitetura.png)
+      Link: Caso de uso geral  (../diagramas/caso_de_uso_geral.png)
+      Link: Atividade abrir mapa interativo  (../diagramas/atividade_abrir_mapa_interativo.png)
+      Link: Atividade atualizar versão  (../diagramas/atividade_atualizar_versao.png)
+      Link: Atividade gerar arquivo de uma nova versão  (../diagramas/atividade_gerar_arquivo_nova_versao.png)
+      Link: Atividade gerar pacote de correções  (../diagramas/atividade_gerar_pacote_de_correcoes.png)
+      }  # Group: Figuras
+
+   Group: Arquivos originais  {
+
+      Link: Baixe o software DIA  (http://dia-installer.de/)
+      Link: MER do banco de dados de administração  (../diagramas/mer_banco_de_dados_de_administracao.dia)
+      Link: Arquitetura  (../diagramas/arquitetura.dia)
+      Link: Caso de uso geral  (../diagramas/caso_de_uso_geral.dia)
+      Link: Atividade abrir mapa interativo  (../diagramas/atividade_abrir_mapa_interativo.dia)
+      Link: Atividade atualizar versão  (../diagramas/atividade_atualizar_versao.dia)
+      Link: Atividade gerar arquivo de uma nova versão  (../diagramas/atividade_gerar_arquivo_nova_versao.dia)
+      Link: Atividade gerar pacote de correções  (../diagramas/atividade_gerar_pacote_de_correcoes.dia)
+      }  # Group: Arquivos originais
+
+   }  # Group: Diagramas e SQL
+
+Group: Index  {
+
+   Index: Everything
+   Function Index: Functions
+   Arquivo Index: Arquivos
+   Classe Index: Classe
+   }  # Group: Index
+
