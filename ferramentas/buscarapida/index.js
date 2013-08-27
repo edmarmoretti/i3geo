@@ -159,7 +159,7 @@ i3GEObuscaRapida = {
 			catch(e){}
 			i3GEO.php.buscaRapida(resultado,locaplic,i3GEObuscaRapida.servico,palavra);
 		}
-		if(google && google === true){
+		if(google && google === true && window.parent.google){
 			try
 			{aguarde("block");}
 			catch(e){}
@@ -274,8 +274,11 @@ i3GEObuscaRapida = {
 							ins += "</td><td onclick=\""+i3GEObuscaRapida.funcaozoom+"('"+wkt+"','"+layer+"','"+gid+"','"+retorno.data.geonames[i].lugares[j].nome+"')\" onmouseover=\"i3GEObuscaRapida.mostraxy('"+wkt+"','wkt')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>";
 						}
 					}
+					ins += "</table>";
 				}
-				ins += "</table>";
+				else{
+					ins += "-</table>";
+				}
 			}
 		}
 		catch(e){ins = $trad("x43")+" "+i3GEObuscaRapida.servico+"<br>";}
@@ -350,13 +353,15 @@ i3GEObuscaRapida = {
 	*/
 	zoom: function(wkt,layer,gid,nm){
     	var adicionaCamada = function(layer,gid,nm,ext){
-	 		var s = i3GEObuscaRapida.servicowms+"?gid="+gid+"&";
-			i3GEO.php.adicionaTemaWMS(window.parent.i3GEO.atualiza,s,layer,"default","EPSG:4618","image/png","1.1.0",nm+" - "+layer,"","nao","",i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
-			i3GEObuscaRapida.zoomExt(ext);
+	 		if(window.parent.i3GEO.Interface.openlayers.googleLike === false){
+	 			var s = i3GEObuscaRapida.servicowms+"?gid="+gid+"&";
+	 			i3GEO.php.adicionaTemaWMS(window.parent.i3GEO.atualiza,s,layer,"default","EPSG:4618","image/png","1.1.0",nm+" - "+layer,"","nao","",i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
+	 		}
+	 		i3GEObuscaRapida.zoomExt(ext);
 		};
 		var ext = i3GEO.util.wkt2ext(wkt,"polygon");
 		if(ext == false){alert("wkt invalido");return;}
-		try{window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));}catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+
 		i3GEO.php.mudaext(adicionaCamada(layer,gid,nm,ext),window.parent.i3GEO.configura.tipoimagem,ext,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
 	},
 	zoomExt: function(ext){
@@ -386,12 +391,13 @@ i3GEObuscaRapida = {
 	obj {Object dom} - objeto DOM do tipo INPUT tendo como valor o c&oacute;digo do tema
 	*/
 	adicionatema:function(obj){
-		if (obj.checked)
-		{
-			window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-			var temp = function()
-			{window.parent.i3GEO.atualiza("");};
-			i3GEO.php.adtema(temp,obj.value,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
+		if (obj.checked){
+			//window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+			if(window.parent.i3GEO.Interface.openlayers.googleLike === false){
+				var temp = function()
+				{window.parent.i3GEO.atualiza("");};
+				i3GEO.php.adtema(temp,obj.value,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
+			}
 		}
 		else
 		{alert("Escolha um tema");}
