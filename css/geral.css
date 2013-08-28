@@ -322,6 +322,8 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 @media print {
 	.noprint {display:none !important;}
 	.yuimenubar  {display:none !important;}
+	.eudockImagemBottom {display:none !important;}
+	.eudockImagemTop {display:none !important;}
 	#i3GEOcompartilhar {display:none !important;}
 	#i3GEOguiaMovel {display:none !important;}
 	#localizarxy {display:none !important;}

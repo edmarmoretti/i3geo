@@ -87,6 +87,21 @@ i3GEO.barraDeBotoes = {
 	*/
 	OFFSET: -205,
 	/*
+	 Propriedade: POSICAO
+
+	 Define o posicionamento da barra de bot&otilde;es do tipo olho de peixe
+
+	 Valores:
+	 {"top","bottom"}
+
+	 Tipo:
+	 {string}
+
+	 Default:
+	 {"bottom"}
+	*/
+	POSICAO: "bottom",
+	/*
 	Propriedade: MAXBOTOES
 
 	N&uacute;mero de bot&otilde;es iniciais (v&aacute;lido apenas para o tipo "olhodepeixe")
@@ -817,9 +832,15 @@ i3GEO.barraDeBotoes = {
 			preload;
 		preload = new Image();
 		preload.src = i3GEO.configura.locaplic+"/imagens/gisicons/eudock/sobe1.png";
-		dock.setObjectAlign(i3GEO.Interface.IDCORPO,euDOWN,(parseInt(document.body.style.height,10))*-1 + i3GEO.barraDeBotoes.OFFSET,euUP);
-		if(i3GEO.barraDeBotoes.MAXBOTOES >= chaves.length)
-		{temp = "vazio.png";}
+		if(i3GEO.barraDeBotoes.POSICAO === "top"){
+			dock.setObjectAlign(i3GEO.Interface.IDCORPO,euUP, (i3GEO.parametros.h)*1 + i3GEO.barraDeBotoes.OFFSET,euDOWN);
+		}
+		else{
+			dock.setObjectAlign(i3GEO.Interface.IDCORPO,euDOWN,(parseInt(document.body.style.height,10))*-1 + i3GEO.barraDeBotoes.OFFSET,euUP);
+		}
+		if(i3GEO.barraDeBotoes.MAXBOTOES >= chaves.length){
+			temp = "vazio.png";
+		}
 		if(i3GEO.barraDeBotoes.AJUDA === false){
 			tempAjuda = "vazio.png";
 		}
@@ -910,6 +931,9 @@ i3GEO.barraDeBotoes = {
 		if(!$i("euDockMensagem")){
 			temp = document.createElement("div");
 			temp.style.textAlign = "center";
+			if(i3GEO.barraDeBotoes.POSICAO === "top"){
+				temp.style.top = "25px";
+			}
 			temp.innerHTML = "";
 			temp.id = "euDockMensagem";
 			euEnv.euDockArray.euDock_0.div.appendChild(temp);

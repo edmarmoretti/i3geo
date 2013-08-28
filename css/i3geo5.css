@@ -305,6 +305,8 @@ font-size: 10px;
 @media print {
 .noprint {display:none !important;}
 .yuimenubar  {display:none !important;}
+.eudockImagemBottom {display:none !important;}
+.eudockImagemTop {display:none !important;}
 #i3GEOcompartilhar {display:none !important;}
 #i3GEOguiaMovel {display:none !important;}
 #localizarxy {display:none !important;}
@@ -661,7 +663,7 @@ width: 20px;
 height: 10px;
 cursor: pointer;
 }
-/*�cone de aplicar*/
+/*icone de aplicar*/
 .tic {
 background-image: url(../imagens/visual/default/sprite.png);
 background-position: 0px -650px;
@@ -1181,6 +1183,11 @@ color: gray;
 margin-top: 5px;
 font-size: 11px;
 top: 38px;
+}
+.eudockImagemBottom {
+box-shadow: 0 12px 15px -10px gray;
+}
+.eudockImagemTop {
 }
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}

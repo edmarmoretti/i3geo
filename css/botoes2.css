@@ -408,7 +408,7 @@
 	cursor: pointer;
 }
 
-/*�cone de aplicar*/
+/*icone de aplicar*/
 .tic {
 	background-image: url(../imagens/visual/default/sprite.png);
 	background-position: 0px -650px;
@@ -997,4 +997,10 @@ button {
 	margin-top: 5px;
 	font-size: 11px;
 	top: 38px;
+}
+.eudockImagemBottom {
+	box-shadow: 0 12px 15px -10px gray;
+}
+.eudockImagemTop {
+
 }
