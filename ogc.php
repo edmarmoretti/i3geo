@@ -183,6 +183,13 @@ if(!isset($tema)){
 }
 //nome do mapfile que ficara em cache
 $agora = intval(time() / 1000);
+//acrescenta ao nome a indicacao do tipo de TMS
+if(isset($_GET["tms"])){
+	$agora .= "tms";
+}
+if(isset($_GET["Z"]) && isset($_GET["X"])){
+	$agora .= "google";
+}
 $nomeMapfileTmp = $dir_tmp."/ogc_".md5($tema)."_".$agora.".map";
 $nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
 $nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
@@ -481,7 +488,7 @@ else{
 	}
 }
 //
-//verifica se a requisicao e do tipo TMS. Se for, tenta gerar ou usar o cache
+//verifica se a requisicao e do tipo TMS.
 //
 //
 //calcula a extensao geografica com base no x,y,z em requisições TMS
@@ -512,7 +519,10 @@ if(isset($_GET["tms"])){
 	if($img->imagepath == ""){
 		exit;
 	}
-	salvaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+	if($cache == true){
+		salvaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+	}
+	renderNocacheTms();
 }
 //
 //verifica se a chamada do servico e do tipo TILE no padrao do Google
@@ -553,7 +563,11 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	if($img->imagepath == ""){
 		exit;
 	}
-	salvaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+	/**
+	 * @TODO ativar cache
+	 */
+	//salvaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+	renderNocacheTms();
 }
 if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 	$l = $oMap->getlayer(0);
@@ -735,5 +749,41 @@ function texto2iso($texto){
 		}
 	}
 	return $texto;
+}
+function nomeRand($n=10)
+{
+	$nomes = "";
+	$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$max = 51;
+	for($i=0; $i < $n; ++$i)
+	{$nomes .= $a{mt_rand(0, $max)};}
+	return $nomes;
+}
+function renderNocacheTms(){
+	global $img,$i3georendermode,$dir_tmp;
+	if($i3georendermode == 0 || !isset($i3georendermode)){
+		$nomer = $dir_tmp."/temp".nomeRand().".png";
+		$img->saveImage($nomer);
+		header('Content-Length: '.filesize($nomer));
+		header('Content-Type: image/png');
+		header('Cache-Control: max-age=3600, must-revalidate');
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
+		fpassthru(fopen($nomer, 'rb'));
+	}
+	if($i3georendermode == 1){
+		ob_clean();
+		header('Content-Type: image/png');
+		$img->saveImage();
+	}
+	if($i3georendermode == 2){
+		$nomer = $dir_tmp."/temp".nomeRand().".png";
+		$img->saveImage($nomer);
+		ob_clean();
+		header('Cache-Control: public, max-age=22222222');
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
+		header("X-Sendfile: $nomer");
+		header("Content-type: image/png");
+	}
 }
 ?>
