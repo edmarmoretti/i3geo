@@ -488,7 +488,7 @@ else{
 //quando for do tipo tms $_GET["tms"] contem os parametros do tile
 //essa rotina faz um exit ao final
 //o cache tms so fucniona se houver apenas uma camada no mapa
-//tms e usado basicamente por mashup
+//tms e usado basicamente por mashup ou openlayers
 //
 if(isset($_GET["tms"])){
 	$temp = explode("/",$_GET["tms"]);
@@ -508,6 +508,47 @@ if(isset($_GET["tms"])){
 	$oMap->setExtent($lon1,$lat1,$lon2,$lat2);
 	$oMap->setsize(256,256);
 	$oMap->getlayer(0)->set("status",MS_DEFAULT);
+	$img = $oMap->draw();
+	if($img->imagepath == ""){
+		exit;
+	}
+	salvaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+}
+//
+//verifica se a chamada do servico e do tipo TILE no padrao do Google
+//
+if(isset($_GET["Z"]) && isset($_GET["X"])){
+	$x = $_GET["X"];
+	$y = $_GET["Y"];
+	$z = $_GET["Z"];
+	if($_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
+		//carregaCacheImagem();
+	}
+	$n = pow(2,$z);
+	$lon1 = $x / $n * 360.0 - 180.0;
+	$lat2 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
+	$x++;
+	$y++;
+	$lon2 = $x / $n * 360.0 - 180.0;
+	$lat1 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
+	$x--;
+	$y--;
+
+	$projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
+	$projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+
+	$poPoint1 = ms_newpointobj();
+	$poPoint1->setXY($lon1, $lat1);
+	$poPoint1->project($projInObj, $projOutObj);
+	$poPoint2 = ms_newpointobj();
+	$poPoint2->setXY($lon2, $lat2);
+	$poPoint2->project($projInObj, $projOutObj);
+	$oMap->setExtent($poPoint1->x,$poPoint1->y,$poPoint2->x,$poPoint2->y);
+	$oMap->setsize(256,256);
+	$oMap->getlayer(0)->set("status",MS_DEFAULT);
+	$oMap->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+	$oMap->getlayer(0)->setProjection("proj=latlong,a=6378137,b=6378137");
+	$oMap->save($nomeMapfileTmp);
 	$img = $oMap->draw();
 	if($img->imagepath == ""){
 		exit;
