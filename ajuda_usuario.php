@@ -119,18 +119,18 @@ function inicia()
 		{}
 		else{
 			if(idajuda == "")
-			ins += "<p style='font-size:18px' ><b>"+g_traducao_ajuda_categorias[key].titulo+"</b></p>";
+				ins += "<p style='font-size:18px' ><b>"+g_traducao_ajuda_categorias[key].titulo+"</b></p>";
 			if(g_traducao_ajuda_categorias[key].observacao && idajuda == "")
-			ins += "<p style='font-size:14px;color:gray' >"+g_traducao_ajuda_categorias[key].observacao+"</p>";
+				ins += "<p style='font-size:14px;color:gray' >"+g_traducao_ajuda_categorias[key].observacao+"</p>";
 			if(idajuda == "")
-			pegaAjuda("ferramentas",key);
+				pegaAjuda("ferramentas",key);
 			else{
 				pegaAjuda("ferramentas",g_traducao_ajuda_categorias[key]);
 			}
 			if(idcategoria == ""){
 				document.getElementById("resultado").innerHTML = ins+"</div>";
 				expande(idajuda);
-				return;
+				//return;
 			}
 		}
 	}
@@ -139,10 +139,12 @@ function inicia()
 }
 function expande(id){
 	var i = document.getElementById(id);
-	if(i.style.display=="none")
-	i.style.display = "block";
-	else
-	i.style.display="none";
+	if(i){
+		if(i.style.display=="none")
+		i.style.display = "block";
+		else
+		i.style.display="none";
+	}
 }
 function expandirtudo(){
 	for(var key in g_traducao_ajuda.ferramentas){
