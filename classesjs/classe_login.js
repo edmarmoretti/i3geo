@@ -83,17 +83,17 @@ i3GEO.login = {
 	/*
 	Classe: i3GEO.login.dialogo
 
-	Abre as telas de 
+	Abre as telas de
 
 	Exemplo:
 
 	Para abrir a mensagem de dialogo de login, utilize
 
 	i3GEO.login.dialogo.abreLogin();
-	
+
 	Para abrir a mensagem de dialogo de logout, utilize
 
-	i3GEO.login.dialogo.abreLogout()	
+	i3GEO.login.dialogo.abreLogout()
 	*/
 
 	dialogo: {
@@ -195,5 +195,24 @@ i3GEO.login = {
 		cp.set_response_type("JSON");
 		cp.set_transfer_mode("POST");
 		cp.call(p,"login",temp,"&operacao="+operacao);
+	},
+	/**
+	 * Adiciona os itens no objeto menu suspenso no processo de nicializacao do i3geo
+	 *
+	 * @param objeto com os parametros ja existentes no menu
+	 * @return objeto com os parametros complementados
+	 */
+	adicionaMenuSuspenso: function(obj){
+		obj.menu.push({nome:"Admin/Login",id:"i3GeoAdmin"});
+		obj.submenus.i3GeoAdmin = [];
+		obj.submenus.i3GeoAdmin.push(
+			{id:"omenudataAdminu1",text: "Login", url: "javascript:i3GEO.login.dialogo.abreLogin()" },
+			{id:"omenudataAdminu2",text: "Logout", url: "javascript:i3GEO.login.dialogo.abreLogout()" },
+			{id:"omenudataAdmin1",text: $trad("x1"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
+			{id:"omenudataAdmin2",text: $trad("g1a"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
+			{id:"omenudataAdmin3",text: $trad("x10"), url: "javascript:i3GEO.arvoreDeTemas.abrejanelaIframe('900','700','"+i3GEO.configura.locaplic+"/admin/html/menus.html\')"},
+			{id:"omenudataAdmin4",text: $trad("t44"), url: "javascript:i3GEO.janela.tempoMsg($trad('x63'))"}
+		);
+		return obj;
 	}
 };

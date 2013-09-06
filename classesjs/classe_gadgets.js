@@ -103,7 +103,7 @@ i3GEO.gadgets = {
 		catch(e){}
 		"mostraMenuSuspenso":
 
-		{permiteLogin: true,idhtml:"menus",deslocaEsquerda:0,finaliza:"",parametrosYUI={}},
+		{marcadores: true, permiteLogin: true,idhtml:"menus",deslocaEsquerda:0,finaliza:"",parametrosYUI={}},
 
 		"mostraMenuLista":
 
@@ -136,6 +136,7 @@ i3GEO.gadgets = {
 		{idhtml:"historicozoom"},
 		"mostraMenuSuspenso":{
 			permiteLogin: true,
+			marcadores: true,
 			idhtml:"menus",
 			deslocaEsquerda:0,
 			parametrosYUI: {iframe:false,autosubmenudisplay: false, showdelay: 200, hidedelay: 500, lazyload: false}
@@ -510,32 +511,17 @@ i3GEO.gadgets = {
 		{return;}
 		//cria o menu se ainda n&atilde;o existir
 		if(objid && objid.innerHTML === ""){
-			//inclui op&ccedil;&atilde;o admin
+			try{
+				if(ms.marcadores === true){
+					//complementa o array com os dados para o menu de marcadores
+					i3GEO.configura.oMenuData = i3GEO.marcador.adicionaMenuSuspenso(i3GEO.configura.oMenuData);
+				}
+			}
+			catch(e){}
+			//inclui opcoes admin
 			try{
 				if(ms.permiteLogin === true || i3GEO.parametros.editor === "sim"){
-					i3GEO.configura.oMenuData.menu.push({nome:"Admin/Login",id:"i3GeoAdmin"});
-					i3GEO.configura.oMenuData.submenus.i3GeoAdmin = [];
-					if(ms.permiteLogin === true){
-						i3GEO.configura.oMenuData.submenus.i3GeoAdmin.push(
-							{id:"omenudataAdminu1",text: "Login", url: "javascript:i3GEO.login.dialogo.abreLogin()" },
-							{id:"omenudataAdminu2",text: "Logout", url: "javascript:i3GEO.login.dialogo.abreLogout()" },
-							{id:"omenudataAdmin1",text: $trad("x1"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
-							{id:"omenudataAdmin2",text: $trad("g1a"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
-							{id:"omenudataAdmin3",text: $trad("x10"), url: "javascript:i3GEO.arvoreDeTemas.abrejanelaIframe('900','700','"+i3GEO.configura.locaplic+"/admin/html/menus.html\')"},
-							{id:"omenudataAdmin4",text: $trad("t44"), url: "javascript:i3GEO.janela.tempoMsg($trad('x63'))"}
-						);
-						//i3GEO.login.recarrega = true;
-					}
-					/*
-					if(i3GEO.login.verificaCookieLogin()){
-						i3GEO.configura.oMenuData.submenus.i3GeoAdmin.push(
-							{id:"omenudataAdmin1",text: $trad("x1"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
-							{id:"omenudataAdmin2",text: $trad("g1a"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
-							{id:"omenudataAdmin3",text: $trad("x10"), url: "javascript:i3GEO.arvoreDeTemas.abrejanelaIframe('900','700','"+i3GEO.configura.locaplic+"/admin/html/menus.html\')"},
-							{id:"omenudataAdmin4",text: $trad("t44"), url: "javascript:i3GEO.janela.tempoMsg($trad('x63'))"}
-						);
-					}
-					*/
+					i3GEO.configura.oMenuData = i3GEO.login.adicionaMenuSuspenso(i3GEO.configura.oMenuData);
 				}
 			}
 			catch(e){}

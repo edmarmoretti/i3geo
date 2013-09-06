@@ -1865,8 +1865,7 @@ i3GEO.util = {
 			var ins = [],
 				i,
 				pares,
-				j,
-				temp;
+				j;
 			if (retorno.data !== undefined){
 				ins.push("<select  id="+id+" >");
 				ins.push("<option value='' >---</option>");

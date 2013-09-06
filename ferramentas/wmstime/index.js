@@ -384,17 +384,17 @@ Adiciona uma camada ao mapa baseado na imagem vista na tela
 
 */
 function adicionaMapa(idMarca){
-	aguarde("block");
+	//aguarde("block");
 	idMarca = parseInt(idMarca,10);
 	var serv = wms_configura[idServicoEscolhido];
 	var fim = function(retorno){
-		aguarde("none");
+		//aguarde("none");
 		if (retorno.data.erro)
 		{i3GEO.janela.tempoMsg(retorno.data.erro);}
 		else
 		{window.parent.i3GEO.atualiza("");}
 	};
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=adicionatemawms";
+	var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid+"&funcao=adicionatemawms";
 	p += "&servico="+serv.servico;
 	if(serv.styles == "")
 	p += "&nome=";

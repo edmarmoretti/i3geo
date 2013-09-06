@@ -328,7 +328,7 @@ i3GEO.navega = {
 	*/
 	zoomExt: function(locaplic,sid,tipoimagem,ext){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomExt()");}
-		var f,temp,point,metrica,projWGS84,proj900913;
+		var f;
 		if(locaplic !== "")
 		{i3GEO.configura.locaplic = locaplic;}
 		if(sid !== "")

@@ -753,6 +753,9 @@ i3GEO.janela = {
 	valorDefault {string}
 	*/
 	prompt: function(pergunta,funcaoOk,valorDefault){
+		if($i("i3GEOjanelaprompt")){
+			return;
+		}
 		if(!valorDefault){
 			valorDefault = "";
 		}

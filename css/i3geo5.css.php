@@ -629,6 +629,13 @@ background-position: 3px -575px;
 width: 52px;
 height: 15px;
 }
+#menui3GeoMenuMarcador {
+background-image: url("../imagens/visual/default/sprite.png");
+background-position: 2px -47px;
+background-repeat: no-repeat;
+height: 12px;
+width: 65px;
+}
 /*bandeira do brasil*/
 #brasil {
 background-image: URL('../imagens/visual/default/sprite.png');

@@ -425,7 +425,7 @@ i3GEO.arvoreDeTemas = {
 	listaVariaveisMetaestat: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaVariaveisMetaestat()");}
 		var monta = function(retorno){
-			var node,raiz,nraiz,i,html,tempNode;
+			var node,nraiz,i,html,tempNode;
 			node = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idwmsmetaestat","raiz");
 			nraiz = retorno.length;
 			for (i=0;i<nraiz; i += 1){
@@ -443,23 +443,22 @@ i3GEO.arvoreDeTemas = {
 		//"codigo_variavel":"10","nome":"População residente","descricao":""
 	},
 	/*
-	Lista as medidas de variaveis cadastradas no sistema METAESTAT preenchendo
+	Lista as medidas de variaveis cadastradas no sistema METAESTAT
 	*/
 	listaMedidasVariavel: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaMedidasVariavel()");}
 		var monta = function(retorno){
-			var tema,html,tempnode,i,n,data;
+			var tema,html,i,n;
 			n = retorno.length;
 			for(i=0;i<n;i++){
 				//nameInput he incluido como 'name' no objeto input para que a funcao de clique no input saiba
 				//que se trata de uma camada vinda do sistema metaestat
 				tema = {"nameInput":"metaestat","tid":retorno[i].id_medida_variavel,"nome":retorno[i].nomemedida},
 				html = i3GEO.arvoreDeTemas.montaTextoTema("gray",tema),
-				tempNode = new YAHOO.widget.HTMLNode(
-					{html:html,expanded:false,enableHighlight:false},
+				 new YAHOO.widget.HTMLNode(
+					{isleaf:true,html:html,expanded:false,enableHighlight:false},
 					node
 				);
-				tempNode.isleaf = true;
 			}
 			node.loadComplete();
 		};

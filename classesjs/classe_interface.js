@@ -1341,7 +1341,7 @@ i3GEO.Interface = {
 			i3GEO.gadgets.atualizaEscalaNumerica(parseInt(escalaAtual,10));
 		},
 		zoom2ext: function(ext){
-			var m,b,projWGS84,proj900913,point,metrica;
+			var m,b;
 			ext = i3GEO.util.extGeo2OSM(ext);
 			m = ext.split(" ");
 			b = new OpenLayers.Bounds(m[0],m[1],m[2],m[3]);

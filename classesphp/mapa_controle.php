@@ -1747,6 +1747,33 @@ Altera a extens&atilde;o geogr&aacute;fica do mapa.
 <classe_navegacao.php>
 */
 /*
+ Valor: MARCADORES2SHP
+
+Converte marcadores em shapefile
+*/
+	case "MARCADORES2SHP":
+		$marcadores = explode(":",$_COOKIE["marcadoresDoI3Geo"]);
+		$marcas = array();
+		foreach($marcadores as $marcador){
+			$par = explode("|",$marcador);
+			if(count($par) == 2){
+				$marcas[] = array("ext"=>$par[1],"nome"=>$par[0]);
+			}
+		}
+		if(count($marcas) == 0){
+			$retorno = "";
+		}
+		else{
+			include_once("classe_analise.php");
+			$m = new Analise($map_file);
+			$imgdir = basename($map_file);
+			$dir_tmp = basename($imgdir);
+			$res = $m->incmapageometrias($dir_tmp,$imgdir,$marcas,"marcadores");
+			$retorno = $res;
+		}
+	break;
+
+/*
 Valor: GEO2UTM
 
 Retorna coordenadas utm a partir de coordenadas geo

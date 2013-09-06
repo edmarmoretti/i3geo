@@ -227,7 +227,7 @@ i3GEO.calculo = {
 			}
 			if(i3GEO.Interface.openlayers.googleLike === true){
 				amext = i3geoOL.getLonLatFromPixel(new OpenLayers.Pixel(xfign,yfign));
-				var point = new OpenLayers.LonLat(amext.lon, amext.lat);
+				point = new OpenLayers.LonLat(amext.lon, amext.lat);
 				amext =  point.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
 				return [amext.lon,amext.lat];
 			}

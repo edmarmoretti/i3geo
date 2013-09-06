@@ -1239,7 +1239,7 @@ it:"Immettere il nuovo valore di scala e clicca sul pulsante Applica per cambiar
 pt:"Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. Fa&ccedil;a um zoom no mapa antes de abrir essa op&ccedil;&atilde;o. Regi&ocirc;es muito extensas podem tornar a busca muito demorada",
 en:"Search data on Wikipedia in the current extend of the map. Make a zoom on the map before opening this option. Regions very extensive can make a very slow search ",
 es:"Busca datos en Wikipedia en el alcance actual del mapa. Haga zoom en el mapa antes de abrir esta opci&oacute;n. Regiones muy extensas pueden ocasionar una b&uacute;squeda muy lentas",
-it:"Ricerca dati su Wikipedia nell'ambito corrente della mappa. Fare uno zoom sulla mappa prima dell’apertura di questa opzione. Regioni molto ampie potrebbero causare una ricerca troppo lenta."
+it:"Ricerca dati su Wikipedia nell'ambito corrente della mappa. Fare uno zoom sulla mappa prima dell apertura di questa opzione. Regioni molto ampie potrebbero causare una ricerca troppo lenta."
 }],
 "d11t":[
 {
@@ -2070,6 +2070,63 @@ it:""
 "x76":[
 {
 pt:"O tema j&aacute;existe no mapa. Adiciona novamente?",
+en:"",
+es:"",
+it:""
+}],
+"x77":[
+{
+pt:"Nome do novo marcador",
+en:"",
+es:"",
+it:""
+}],
+"x78":[
+{
+pt:"Copie os marcadores e cole em um editor para guard&aacute;-los",
+en:"",
+es:"",
+it:""
+}],
+"x79":[
+{
+pt:"Marcadores",
+en:"",
+es:"",
+it:""
+}],
+"x80":[
+{
+pt:"Exportar",
+en:"",
+es:"",
+it:""
+}],
+"x81":[
+{
+pt:"Importar",
+en:"",
+es:"",
+it:""
+}],
+"x82":[
+{
+pt:"Marcar regi&atilde;o",
+en:"",
+es:"",
+it:""
+}]
+,
+"x83":[
+{
+pt:"Cole os marcadores para import&aacute;-los",
+en:"",
+es:"",
+it:""
+}],
+"x84":[
+{
+pt:"Exportar SHP",
 en:"",
 es:"",
 it:""

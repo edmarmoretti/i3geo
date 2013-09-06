@@ -307,7 +307,7 @@ var i3GEO = {
 		{i3GEOmantemCompatibilidade();}
 		montaMapa = function(retorno){
 			try{
-				var temp,abreJM,nomecookie = "i3geoUltimaExtensao";
+				var temp,nomecookie = "i3geoUltimaExtensao";
 				//verifica se existe bloqueio em funcao da senha no ms_configura.php
 				if(retorno.bloqueado){
 					alert(retorno.bloqueado);

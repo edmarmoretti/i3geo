@@ -2517,6 +2517,7 @@ $tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|ar
 	function incmapageometrias($dir_tmp,$imgdir,$lista,$tipoLista="stringArquivos")
 	{
 		$dir = $dir_tmp."/".$imgdir."/";
+		$tituloTema = " geometria";
 		if($tipoLista == "stringArquivos"){
 			$lista = explode(",",$lista);
 			$shapes = array();
@@ -2541,6 +2542,17 @@ $tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|ar
 			foreach ($lista as $l){
 				$shapes[] = ms_shapeObjFromWkt($l);
 			}
+		}
+		if($tipoLista == "marcadores"){
+			$shapes = array();
+			$valoresoriginais = array();
+			foreach ($lista as $l){
+				$valoresoriginais[] = $l["nome"];
+				$p = explode(" ",$l["ext"]);
+				$l = "POLYGON ((".$p[0]." ".$p[1].",".$p[0]." ".$p[3].",".$p[2]." ".$p[3].",".$p[2]." ".$p[1].",".$p[0]." ".$p[1]."))";
+				$shapes[] = ms_shapeObjFromWkt($l);
+			}
+			$tituloTema = " marcadores";
 		}
 		//verifica o tipo
 		if (count($shapes) == 0){return("erro.");}
@@ -2587,7 +2599,8 @@ $tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|ar
 		xbase_close($db);
 		else
 		dbase_close($db);
-		$l->setmetadata("tema",$novonomelayer." geometria");
+		$l->set("opacity",80);
+		$l->setmetadata("tema",$novonomelayer.$tituloTema);
 		$l->setmetadata("TEMALOCAL","SIM");
 		$l->setmetadata("DOWNLOAD","sim");
 		$l->set("data",$nomeshp);

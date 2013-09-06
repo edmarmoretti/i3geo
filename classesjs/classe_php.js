@@ -1633,5 +1633,15 @@ i3GEO.php = {
 			"&arqmapfile=" + i3GEO.parametros.mapfile +
 			"&nome_mapa=" + titulo;
 		i3GEO.util.ajaxGet(p+par,funcao);
+	},
+	/*
+	Function: marcadores2shp
+
+	Converte os marcadores de lugar em uma camada shapefile
+	*/
+	marcadores2shp: function(funcao){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?";
+			par = "funcao=marcadores2shp";
+		i3GEO.util.ajaxGet(p+par,funcao);
 	}
 };
