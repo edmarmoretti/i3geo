@@ -272,8 +272,8 @@ i3GEOF.tabela = {
 		ins += '			'+$trad(16,i3GEOF.tabela.dicionario)+' <img style=cursor:pointer onclick="i3GEOF.tabela.menos()" src="'+i3GEO.configura.locaplic+'/imagens/minus.gif" />';
 		ins += $inputText("","","i3GEOtabelainicio","",5,"1");
 		ins += '			'+$trad(17,i3GEOF.tabela.dicionario)+"&nbsp;";
-		ins += $inputText("","","i3GEOtabelafim","",5,"20");
 		ins += '			<img style=cursor:pointer onclick="i3GEOF.tabela.mais()" src="'+i3GEO.configura.locaplic+'/imagens/plus.gif" />';
+		ins += $inputText("","","i3GEOtabelafim","",5,"20");
 		ins += '			<input title="'+$trad(18,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotaoLista size=25  type=button value="'+$trad(19,i3GEOF.tabela.dicionario)+'"/>';
 		ins += '			<a href="#" onclick="i3GEOF.tabela.novaJanela()" >'+$trad(36,i3GEOF.tabela.dicionario)+'</a>';
 		ins += '		</div>';
