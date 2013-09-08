@@ -196,7 +196,9 @@ i3GEOF.tabela = {
 			);
 			$i("i3GEOtabelabotaoLista-button").style.minHeight = "1em";
 			$i("i3GEOtabelabotaoLista-button").style.padding = "0px 15px";
-			$i("i3GEOtabelabotaoLista-button").style.lineHeight = "1.2";
+			$i("i3GEOtabelabotaoLista-button").style.lineHeight = "1.3";
+			$i("i3GEOtabelabotaoLista").style.position = "relative";
+			$i("i3GEOtabelabotaoLista").style.top = "2px";
 			new YAHOO.widget.Button(
 				"i3GEOtabelabotao4",
 				{onclick:{fn: i3GEOF.tabela.estatistica}}
@@ -268,13 +270,16 @@ i3GEOF.tabela = {
 		ins += '		<input title="'+$trad(10,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao2 size=25 type=button value="'+$trad(11,i3GEOF.tabela.dicionario)+'" />';
 		ins += '		<input title="'+$trad(12,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao3 size=25  type=button value="'+$trad(13,i3GEOF.tabela.dicionario)+'"/>';
 		ins += '		<input title="'+$trad(14,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotao6 size=30  type=button value="'+$trad(15,i3GEOF.tabela.dicionario)+'"/>';
-		ins += '		<div id=i3GEOtabelacontador style="background-color:rgb(240,240,240);width:100%;position:relative;top:15px;left:0px;text-align:left">';
+		ins += '		<div id=i3GEOtabelacontador style="background-color:rgb(240,240,240);width:100%;position:relative;top:15px;left:0px;text-align:left;height:25px;">';
 		ins += '			'+$trad(16,i3GEOF.tabela.dicionario)+' <img style=cursor:pointer onclick="i3GEOF.tabela.menos()" src="'+i3GEO.configura.locaplic+'/imagens/minus.gif" />';
 		ins += $inputText("","","i3GEOtabelainicio","",5,"1");
 		ins += '			'+$trad(17,i3GEOF.tabela.dicionario)+"&nbsp;";
 		ins += '			<img style=cursor:pointer onclick="i3GEOF.tabela.mais()" src="'+i3GEO.configura.locaplic+'/imagens/plus.gif" />';
 		ins += $inputText("","","i3GEOtabelafim","",5,"20");
-		ins += '			<input title="'+$trad(18,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotaoLista size=25  type=button value="'+$trad(19,i3GEOF.tabela.dicionario)+'"/>';
+		ins += '			<img title="'+$trad(40,i3GEOF.tabela.dicionario)+'"style="cursor:pointer;position:relative;" onclick="i3GEOF.tabela.todos()" src="'+i3GEO.configura.locaplic+'/imagens/dot.gif" />';
+
+		ins += '			<input title="'+$trad(18,i3GEOF.tabela.dicionario)+'" id=i3GEOtabelabotaoLista size=25  style="position:relative;" type=button value="'+$trad(19,i3GEOF.tabela.dicionario)+'"/>';
+
 		ins += '			<a href="#" onclick="i3GEOF.tabela.novaJanela()" >'+$trad(36,i3GEOF.tabela.dicionario)+'</a>';
 		ins += '		</div>';
 		ins += '		<div id=i3GEOtabelaregistros style="position:relative;top:20px;left:0px;text-align:left;">';
@@ -638,8 +643,7 @@ i3GEOF.tabela = {
 	Monta a visualiza&ccedil;&atilde;o da tabela de atributos
 	*/
 	montaTabela: function(retorno){
-		if (retorno.data !== undefined)
-		{
+		if (retorno.data !== undefined){
 			var ins = [],
 				i,
 				vals,
@@ -658,6 +662,9 @@ i3GEOF.tabela = {
 			ins += "</tr>";
 			cor = "linha";
 			n = retorno.data[1].registros.length;
+			if($i("i3GEOtabelafim").value === ""){
+				$i("i3GEOtabelafim").value = n - 1;
+			}
 			for (i=0;i<n;i++){
 				ins += "<tr><td><img style=cursor:pointer onclick='i3GEOF.tabela.excluiLinha(this)' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad("t12")+"' /></td>";
 				ins += "<td>";
@@ -707,6 +714,18 @@ i3GEOF.tabela = {
 		$i("i3GEOtabelainicio").value = f + 1;
 		$i("i3GEOtabelafim").value = f + d + 1;
 		i3GEOF.tabela.pegaRegistros();
+	},
+	/*
+	Function: todos
+
+	Avan&ccedil;a o contador de registros para o fim da listagem
+	*/
+	todos:function(){
+		if(i3GEOF.tabela.aguarde.visibility === "visible")
+		{return;}
+		$i("i3GEOtabelainicio").value = 1;
+		$i("i3GEOtabelafim").value = "";
+		i3GEOF.tabela.pegaRegistros(false,false,false,1,true);
 	},
 	/*
 	Function: menos

@@ -233,5 +233,11 @@ pt:"Marque uma coluna primeiro",
 en:"",
 es:"",
 it:""
+}],
+40: [{
+pt:"Ver todos",
+en:"",
+es:"",
+it:""
 }]
 };

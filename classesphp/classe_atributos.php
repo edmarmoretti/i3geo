@@ -438,9 +438,9 @@ class Atributos
 		else{
 			$alias = $items;
 		}
-		$resultadoFinal[] = array("itens"=>$items,"alias"=>$alias);
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$res_count = count($shapes);
+		$resultadoFinal[] = array("totalSelecionados"=>$res_count,"itens"=>$items,"alias"=>$alias);
 		$registros = array();
 		//lista apenas os selecionados
 		if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO"){
@@ -489,6 +489,7 @@ class Atributos
 			$chk = "";
 			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS){
 				$res_count = $this->layer->getNumresults();
+				$totalGeral = $res_count;
 				if ($fim != ""){
 					if (($res_count >= $fim) && ($fim < $res_count)){
 						$res_count = $fim;
@@ -556,7 +557,7 @@ class Atributos
 				}
 				$this->layer->close();
 			}
-			$resultadoFinal[] = array("registros"=>$registros);
+			$resultadoFinal[] = array("totalGeral"=>$totalGeral,"registros"=>$registros);
 		}
 		return($resultadoFinal);
 	}

@@ -509,7 +509,9 @@ if(isset($_GET["tms"])){
 	$lat1 = $y / $n * 180.0 - 90.0;
 	$lat2 = ($y+1) / $n * 180.0 - 90.0;
 	//essa funcao termina o processo se a imagem existir
-	//carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+	if($cache == true){
+		carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+	}
 	//se nao existir, salva a imagem
 	//echo $lon1." ".$lat1." ".$lon2." ".$lat2;exit;
 	$oMap->setExtent($lon1,$lat1,$lon2,$lat2);
@@ -531,8 +533,9 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$x = $_GET["X"];
 	$y = $_GET["Y"];
 	$z = $_GET["Z"];
-	if($_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
-		//carregaCacheImagem();
+	$layer0 = $oMap->getlayer(0);
+	if($cache == true){
+		carregaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
 	}
 	$n = pow(2,$z);
 	$lon1 = $x / $n * 360.0 - 180.0;
@@ -557,8 +560,8 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$oMap->setsize(256,256);
 	$oMap->getlayer(0)->set("status",MS_DEFAULT);
 	$oMap->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
-	$oMap->getlayer(0)->setProjection("proj=latlong,a=6378137,b=6378137");
-	$oMap->save($nomeMapfileTmp);
+	$layer0->setProjection("proj=latlong,a=6378137,b=6378137");
+	//$oMap->save();
 	$img = $oMap->draw();
 	if($img->imagepath == ""){
 		exit;
@@ -566,7 +569,10 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	/**
 	 * @TODO ativar cache
 	 */
-	//salvaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+
+	if($cache == true){
+		salvaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
+	}
 	renderNocacheTms();
 }
 if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){

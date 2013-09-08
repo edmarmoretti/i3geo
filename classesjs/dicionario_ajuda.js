@@ -6,7 +6,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"O filtro possibilita gerar efeitos de colora&ccedil;&atilde;o no mapa. &Eacute; aplicado sobre a imagem gerada toda vez que o mapa &eacute; alterado. No caso de temas baseados em dados RASTER, os n&iacute;veis de cores obtidos com a ferramenta de identifica&ccedil;&atilde;o n&atilde;o s&atilde;o alterados.",
 			complemento:"Os filtros podem provocar um tempo maior de desenho do mapa, devendo ser utilizados com cuidado. As op&ccedil;&otilde;es s&eacute;pia e tons de cinza utilizam algor&iacute;tmos pr&oacute;prios do i3Geo, j&aacute; as demais, utilizam a op&ccedil;&atilde;o de filtro dispon&iacute;vel com o PHP 5. Mais detalhes <a href='http://www.php.net/manual/pt_BR/function.imagefilter.php' >aqui</a>.",
-			tela:"ferramentas/tipoimagem/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.tipoimagem()"
 		},
 		"2": {
@@ -15,7 +15,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"A legenda do mapa &eacute; utilizada em v&aacute;rias op&ccedil;&otilde;es do i3Geo e pode tamb&eacute;m ficar inserida na pr&oacute;pria imagem do mapa. A legenda mostra os s&iacute;mbolos utilizados no desenho de cada tema, podendo-se alterar caracter&iacute;sticas como fonte, tamanho dos textos, tamanho dos retângulos com os s&iacute;mbolos, etc.",
 			complemento:"Antes de aplicar uma altera&ccedil;&atilde;o, voc&ecirc; pode testar os parâmetros escolhidos para avaliar o resultado. No caso dos parâmetros que definem cores, utilize -1,-1,-1 para anular seu efeito.",
-			tela:"ferramentas/opcoes_legenda/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.opcoesLegenda()"
 		},
 		"3": {
@@ -24,7 +24,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"A barra de escala &eacute; uma imagem inserida no mapa que mostra a rela&ccedil;&atilde;o entre uma medida feita no mapa e no mundo real. A barra pode ser modificada especificando-se seu tamanho, n&uacute;mero de divis&otilde;es e cores.",
 			complemento:"Existem dois modelos b&aacute;sicos para a escala: linear e bloco. Para n&atilde;o mostrar a escala no mapa, escolha a 'sem escala' na op&ccedil;&atilde;o estilo.",
-			tela:"ferramentas/opcoes_escala/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.opcoesEscala()"
 		},
 		"4": {
@@ -33,7 +33,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"O tamanho do mapa &eacute; definido automaticamente quando o i3Geo &eacute; aberto, buscando-se otimizar o uso do espa&ccedil;o dispon&iacute;vel no monitor. A op&ccedil;&atilde;o de modifica&ccedil;&atilde;o do tamanho altera apenas o corpo do mapa, for&ccedil;ando o ajuste dos outros elementos, o que nem sempre provoca bons resultados.",
 			complemento:"O ajuste do tamanho do mapa pode ser utilizado para gerar imagens em tamanhos espec&iacute;ficos, principalmente para efeitos de impress&atilde;o. A medida do tamanho utilizado &eacute; pixel, que corresponde ao tamanho m&iacute;nimo de uma c&eacute;lula da imagem do mapa. Para calcular o tamanho do mapa em outra unidade de medida, necess&aacute;rio nos casos em que se deseja imprimir o mapa, deve ser feito considerando-se a resolu&ccedil;&atilde;o de impress&atilde;o desejada.",
-			tela:"ferramentas/opcoes_tamanho/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.tamanho()"
 		},
 		"5": {
@@ -42,7 +42,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"A cor da sele&ccedil;&atilde;o &eacute; utilizada para mostrar no mapa os elementos de um determinado tema que est&atilde;o selecionados. A sele&ccedil;&atilde;o consiste em destacar elementos para uso em determinadas opera&ccedil;&otilde;es, como por exemplo o c&aacute;lculo de entorno (buffer). A defini&ccedil;&atilde;o da cor &eacute; baseada no modelo R,G,B, sendo que cada componente varia de 0 a 255.",
 			complemento:"Ao definir os valores de RGB, separe-os com ','. Quando um tema possuir elementos selecionados, &eacute; inclu&iacute;da uma marca antes do nome do tema na lista de camadas dispon&iacute;veis no mapa.",
-			tela:"ferramentas/opcoes_querymap/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.queryMap()"
 		},
 		"6": {
@@ -51,7 +51,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"O corpo do mapa &eacute; constitu&iacute;do por uma imagem gerada com tamanho fixo. Essa imagem possu&iacute; uma cor padr&atilde;o, sobre a qual s&atilde;o sobrepostas as camadas. Por padr&atilde;o, a cor do fundo &eacute; definida como azul. A defini&ccedil;&atilde;o da cor &eacute; baseada no modelo R,G,B, sendo que cada componente varia de 0 a 255.",
 			complemento:"Ao definir os valores de RGB, separe-os com ','. Ao utilizar as op&ccedil;&otilde;es de convers&atilde;o do mapa atual para kml ou WMS, a altera&ccedil;&atilde;o da cor do fundo para 255,255,255 oferece melhores resultados na visualiza&ccedil;&atilde;o dos dados.",
-			tela:"ferramentas/opcoes_fundo/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.corFundo()"
 		},
 		"7": {
@@ -60,7 +60,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"A grade de coordenadas &eacute; formada por linhas verticais e horizontais representando determinadas latitudes e longitudes. A grade &eacute; um dos elementos principais na defini&ccedil;&atilde;o de um mapa, sendo utilizada na impress&atilde;o ou gera&ccedil;&atilde;o de figuras.",
 			complemento:"Ao adicionar uma grade, &eacute; criado uma nova camada no mapa, possibilitando que mais de uma grade seja criada. Uma grade pode ou n&atilde;o conter os textos indicando os valores de lat long, permitindo que se crie uma grade com espa&ccedil;amento de linhas diferente do espa&ccedil;amento dos textos.",
-			tela:"ferramentas/gradecoord/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.gradeCoord()"
 		},
 		"8": {
@@ -69,7 +69,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"Um template define como os componentes de um mapa s&atilde;o organizados no navegador. O administrador do i3Geo pode criar templates diferentes conforme as necessidades do usu&aacute;rio, sendo que alguns templates s&atilde;o fornecidos com o pr&oacute;prio i3Geo.",
 			complemento:"A cria&ccedil;&atilde;o de templates &eacute; uma tarefa do administrador do i3Geo. Para abrir um template espec&iacute;fico diretamente, utilize a URL que &eacute; mostrada no navegador quando um template &eacute; escolhido.",
-			tela:"ferramentas/template/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.template()"
 		},
 		"9": {
@@ -78,7 +78,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"O temporizador permite definir um intervalo de tempo em segundos que ir&aacute; disparar o redesenho do mapa.",
 			complemento:"Quando o mapa &eacute; redesenhado, as camadas existentes s&atilde;o lidas novamente para compor o novo mapa. Essa op&ccedil;&atilde;o &eacute; &uacute;til quando existirem camadas no mapa que sofrem atualiza&ccedil;&otilde;es frequentes, como por exemplo o deslocamento de aeronaves, carros ou navios.",
-			tela:"ferramentas/opcoes_autoredesenha/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.autoredesenha()"
 		},
 		"10": {
@@ -87,7 +87,7 @@ g_traducao_ajuda = {
 			categoria:"2",
 			pt:"O mapa que o usu&aacute;rio est&aacute; utilizando pode ser salvo localmente (na m&aacute;quina do usu&aacute;rio) ou no banco de dados no servidor onde o i3Geo est&aacute; instalado. para ser aberto posteriormente. Isso permite que um trabalho seja continuado em outro momento, uma vez que o mapa em uso &eacute; sempre perdido quando o usu&aacute;rio fecha o navegador.",
 			complemento:"Os dados locais que foram criados n&atilde;o s&atilde;o salvos, sendo necess&aacute;rio o seu download quando desejado. Isso afeta as op&ccedil;&otilde;es de inclus&atilde;o de pontos ou convers&atilde;o de elementos selecionados em camadas.",
-			tela:"ferramentas/salvamapa/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.salvaMapa()"
 		},
 		"11": {
@@ -96,7 +96,7 @@ g_traducao_ajuda = {
 			categoria:"2",
 			pt:"O mapa que o usu&aacute;rio est&aacute; utilizando pode ser salvo localmente (na m&aacute;quina do usu&aacute;rio) para ser aberto posteriormente. Isso permite que um trabalho seja continuado em outro momento, uma vez que o mapa em uso &eacute; sempre perdido quando o usu&aacute;rio fecha o navegador.",
 			complemento:"A op&ccedil;&atilde;o de carregar um mapa permite enviar para o servidor, onde o i3Geo est&aacute; instalado, o mapa que foi salvo anteriormente.",
-			tela:"ferramentas/carregamapa/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.carregaMapa()"
 		},
 		"12": {
@@ -105,7 +105,7 @@ g_traducao_ajuda = {
 			categoria:"2",
 			pt:"Convertendo o mapa atual em um WMS &eacute; poss&iacute;vel utilizar outros softwares para visualizar o mesmo mapa visto no i3Geo. O resultado da convers&atilde;o &eacute; um endere&ccedil;o (url) tempor&aacute;rio, esse endere&ccedil;o deve ser inserido no software que se quer usar e que suporte WMS.",
 			complemento:"WMS &eacute; um padr&atilde;o internacional e n&atilde;o espec&iacute;fico do i3Geo. Utilizando um WMS, pode-se adicionar ao mapa outras camadas de dados, inclusive dados locais, se estiver sendo utilizado um software instalado em um computador local. Conforme as caracter&iacute;sticas de cada servidor onde o i3Geo estiver instalado, o WMS poder&aacute; permanecer dispon&iacute;vel por per&iacute;odos de tempo vari&aacute;veis. Para acessar a lista de WMS dispon&iacute;veis utilize o link <a href='ogc.htm' >ogc.htm</a>.Mais informa&ccedil;&otilde;es em <a href='www.opengeospatial.org' >OGC.</a>",
-			tela:"ferramentas/convertews/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.convertews()"
 		},
 		"13": {
@@ -114,7 +114,7 @@ g_traducao_ajuda = {
 			categoria:"2",
 			pt:"Convertendo o mapa atual em KML &eacute; poss&iacute;vel utilizar outros softwares para visualizar o mesmo mapa visto no i3Geo. O resultado da convers&atilde;o &eacute; um endere&ccedil;o (url) tempor&aacute;rio, esse endere&ccedil;o deve ser inserido no software que se quer usar e que suporte KML. Para usar o KML no Google Earth, utilize a op&ccedil;&atilde;o desse softawre chamada 'adicionar link de rede'.",
 			complemento:"KML &eacute; um padr&atilde;o internacional e n&atilde;o espec&iacute;fico do i3Geo. Conforme as caracter&iacute;sticas de cada servidor onde o i3Geo estiver instalado, o KML poder&aacute; permanecer dispon&iacute;vel por per&iacute;odos de tempo vari&aacute;veis. O KML gerado pelo i3Geo n&atilde;o cont&eacute;m as coordenadas dos elementos de uma camada, mas sim um WMS embutido no KML. Essa estrutura limita o uso do KML mas permite uma maior performance no acesso aos dados. Mais informa&ccedil;&otilde;es em <a href='www.opengeospatial.org' >OGC.</a>",
-			tela:"ferramentas/convertekml/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.convertekml()"
 		},
 		"14": {
@@ -123,7 +123,7 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Cria uma nova camada no mapa contendo retângulos com espa&ccedil;amento determinado em x e y. A grade gerada pode ser obtida via download. O espa&ccedil;amento &eacute; definido em d&eacute;cimos de grau e as coordenadas do ponto inicial podem ser definida clicando-se no mapa ou digitando-se o valor.",
 			complemento:"A grade &eacute; &uacute;til para a realiza&ccedil;&atilde;o de an&aacute;lises onde deseja-se calcular ocorr&ecirc;ncias de fen&ocirc;menos pontuais e represent&aacute;-los posteriormente com base em totais. Observe que a &aacute;rea e as distâncias reais de cada pol&iacute;gono n&atilde;o s&atilde;o constantes, uma vez que &eacute; utilizada a proje&ccedil;&atilde;o geogr&aacute;fica na sua gera&ccedil;&atilde;o.",
-			tela:"ferramentas/gradepol/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.analise.dialogo.gradePol()"
 		},
 		"15": {
@@ -132,7 +132,7 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Cria uma nova camada no mapa contendo pontos com espa&ccedil;amento determinado em x e y. A grade gerada pode ser obtida via download. O espa&ccedil;amento &eacute; definido em d&eacute;cimos de grau e as coordenadas do ponto inicial podem ser definida clicando-se no mapa ou digitando-se o valor.",
 			complemento:"Observe que as distâncias reais entre cada ponto n&atilde;o s&atilde;o constantes, uma vez que &eacute; utilizada a proje&ccedil;&atilde;o geogr&aacute;fica na sua gera&ccedil;&atilde;o.",
-			tela:"ferramentas/gradepontos/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.analise.dialogo.gradePontos()"
 		},
 		"16": {
@@ -141,7 +141,7 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Cria uma nova camada no mapa contendo hex&aacute;gonos com espa&ccedil;amento determinado em x e y. A grade gerada pode ser obtida via download. O espa&ccedil;amento &eacute; definido em d&eacute;cimos de grau e as coordenadas do ponto inicial podem ser definida clicando-se no mapa ou digitando-se o valor.",
 			complemento:"A grade &eacute; &uacute;til para a realiza&ccedil;&atilde;o de an&aacute;lises onde deseja-se calcular ocorr&ecirc;ncias de fen&ocirc;menos pontuais e represent&aacute;-los posteriormente com base em totais. Observe que a &aacute;rea e as distâncias reais de cada pol&iacute;gono n&atilde;o s&atilde;o constantes, uma vez que &eacute; utilizada a proje&ccedil;&atilde;o geogr&aacute;fica na sua gera&ccedil;&atilde;o.",
-			tela:"ferramentas/gradehex/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.analise.dialogo.gradeHex()"
 		},
 		"17": {
@@ -150,7 +150,7 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"O c&aacute;lculo de dist&acirc;ncias &eacute; feito de um ponto em rela&ccedil;&atilde;o aos mais pr&oacute;ximos. O ponto origem, deve estar selecionado em um dos temas existentes no mapa. Para restringir a distância de busca, &eacute; necess&aacute;rio definir um raio m&aacute;ximo, os pontos considerados ser&atilde;o aqueles dentro desse raio. Em cada linha ligando dois pontos s&atilde;o inseridos atributos que indicam a distância e o identificador dos pontos. Esses identificadores s&atilde;o escolhidos com base nas colunas de atributos do tema pontual escolhido.",
 			complemento:"O resultado dos c&aacute;lculos s&atilde;o novas camadas inclu&iacute;das no mapa, sendo uma de linhas e uma com o entorno de busca considerado.",
-			tela:"ferramentas/distanciaptpt/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.analise.dialogo.distanciaptpt()"
 		},
 		"18": {
@@ -159,7 +159,7 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outros com pol&iacute;gonos (ou imagem raster). As informa&ccedil;&otilde;es do tema poligonal (ou raster) ser&atilde;o agregadas à tabela do novo tema pontual gerado. As colunas da tabela de atributos do novo tema gerado ser&atilde;o nomeadas em uma sequ&ecirc;ncia num&eacute;rica, uma vez que o tema original pode ter colunas com nomes incompat&iacute;veis com o formato shapefile, utilizado na gera&ccedil;&atilde;o do novo tema.",
 			complemento:"Pode-se escolher mais de um tema de origem dos dados, possibilitando agregar informa&ccedil;&otilde;es de temas diferentes. Essa op&ccedil;&atilde;o de cruzamento &eacute; &uacute;til nos casos onde a informa&ccedil;&atilde;o necess&aacute;ria para a an&aacute;lise de um tema encontra-se em outro tema. Por exemplo, &eacute; poss&iacute;vel cruzar um tema com a localiza&ccedil;&atilde;o das cidades com um tema com a delimita&ccedil;&atilde;o de biomas. O resultado permite elaborar estat&iacute;sticas por biomas com base nos dados dos pontos.",
-			tela:"ferramentas/pontoempoligono/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.analise.dialogo.pontoempoligono()"
 		},
 		"19": {
@@ -168,7 +168,7 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outro com pol&iacute;gono. O resultado &eacute; um novo tema poligonal, cuja tabela de atributos conter&aacute; um item com o total de pontos em cada pol&iacute;gono",
 			complemento:"O uso dessa ferramenta &eacute; indicado nas situa&ccedil;&otilde;es em que se deseja agregar dados de ocorr&ecirc;ncias pontuais em pol&iacute;gonos, possibilitando a visualiza&ccedil;&atilde;o dos dados por meio de t&eacute;cnicas de classifica&ccedil;&atilde;o e representa&ccedil;&atilde;o coropl&eacute;tica.",
-			tela:"ferramentas/nptpol/exemplo.htm",
+			//tela:"",
 			apijs:"i3GEO.analise.dialogo.nptPol()"
 		},
 		"20": {
@@ -184,7 +184,6 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Os centr&oacute;ides s&atilde;o pontos localizados no centro de massa de uma geometria. Para gerar os centr&oacute;ides, voc&ecirc; precisa selecionar alguns elementos de um tema. Utilize para isso a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de atributos do tema desejado.",
 			complemento:"Dependendo da forma de uma geometria, o ponto calculado pode ser posicionado fora do pol&iacute;gono <a href='http://postgis.refractions.net/documentation/manual-svn/ST_Centroid.html' >exemplo</a>.",
-			tela:"ferramentas/centroide/exemplo.htm",
 			apijs:"i3GEO.analise.dialogo.centroide()"
 		},
 		"22": {
@@ -193,7 +192,6 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Essa ferramenta transforma v&aacute;rios pol&iacute;gonos em um s&oacute; eliminando as divisas entre eles. Para definir quais os pol&iacute;gonos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema. Os pol&iacute;gonos que possu&iacute;rem o mesmo valor ser&atilde;o considerados no mesmo grupo e suas divisas eliminadas. Caso n&atilde;o tenha sido escolhido nenhum item, todas os pol&iacute;gonos ser&atilde;o agrupados em um s&oacute;.",
 			complemento:"O resultado final ser&aacute; um novo tema com pol&iacute;gonos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas o item escolhido. Caso as geometrias originais possuam fronteiras n&atilde;o ajustadas exatamente, o resultado pode apresentar pequenos pol&iacute;gonos internos.",
-			tela:"ferramentas/dissolve/exemplo.htm",
 			apijs:"i3GEO.analise.dialogo.dissolve()"
 		},
 		"23": {
@@ -202,7 +200,6 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Essa ferramenta permite processar elementos constituintes de um ou mais temas por meio de fun&ccedil;&otilde;es que atuam sobre a geometria que define o elemento. Essas fun&ccedil;&otilde;es possibilitam a realiza&ccedil;&atilde;o de c&aacute;lculos, como &aacute;rea e per&iacute;metro, e cruzamentos entre geometrias, como uni&atilde;o e intersec&ccedil;&atilde;o. Para utilizar a ferramenta, deve-se selecionar cada elemento desejado e convert&ecirc;-los em uma geometria ou conjunto de geometrias. Feito isso, as geometrias convertidas podem ser utilizadas nas opera&ccedil;&otilde;es.",
 			complemento:"Para selecionar elementos, utilize as op&ccedil;&otilde;es de sele&ccedil;&atilde;o dispon&iacute;veis no i3Geo ou ent&atilde;o clique no mapa no elemento desejado ap&oacute;s ativar a ferramenta. A sele&ccedil;&atilde;o &eacute; feita sobre o tema escolhido. Para ver as geometrias capturadas, clique na guia 'listar'. Para usar as op&ccedil;&otilde;es de an&aacute;lise, mostradas na guia 'an&aacute;lise', voc&ecirc; deve marcar as geometrias desejadas na guia 'listar'.",
-			tela:"ferramentas/analisageometrias/exemplo.htm",
 			apijs:"i3GEO.analise.dialogo.analisaGeometrias()"
 		},
 		"24": {
@@ -211,7 +208,6 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"O entorno, ou buffer, &eacute; um pol&iacute;gono que circunda um elemento geogr&aacute;fico em uma dist&acirc;ncia fixa. Para o c&aacute;lculo de distância o i3Geo utiliza a proje&ccedil;&atilde;o polic&ocirc;nica. Os atributos do tema alvo s&atilde;o copiados para os pol&iacute;gonos resultantes e uma nova camada &eacute; adicionada ao mapa. Opcionalmente, os pol&iacute;gonos resultantes podem ser unidos como um &uacute;nico.",
 			complemento:"Para gerar o entorno, voc&ecirc; precisa selecionar alguns elementos de um tema. Utilize para isso a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de atributos do tema desejado. O buffer pode ser gerado tamb&eacute;m por meio da ferramenta de identifica&ccedil;&atilde;o.",
-			tela:"ferramentas/buffer/exemplo.htm",
 			apijs:"i3GEO.analise.dialogo.buffer()"
 		},
 		"25": {
@@ -220,7 +216,7 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Essa ferramenta transforma v&aacute;rios elementos selecionados de um tema em um s&oacute; criando pol&iacute;gonos agrupados. Para definir quais elementos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema. Os elementos que possu&iacute;rem o mesmo valor nesse item ser&atilde;o considerados no mesmo grupo e suas divisas eliminadas. Caso n&atilde; tenha sido escolhido nenhum item, todas os elementos ser&atilde;o agrupados em um s&oacute;.",
 			complemento:"O resultado final ser&aacute; um novo tema com pol&iacute;gonos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas o item escolhido.",
-			tela:"ferramentas/agrupaelementos/exemplo.htm",
+			//tela:"ferramentas/agrupaelementos/exemplo.htm",
 			apijs:"i3GEO.analise.dialogo.agrupaElementos()"
 		},
 		"26": {
@@ -229,7 +225,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Utilize essa op&ccedil;&atilde;o para acrescentar um tema baseado nas coordenadas x e y presentes em uma tabela DBF ou arquivo CSV. Os valores de x e y devem utilizar '.' como separador de decimal. Se as coordenadas estiverem na proje&ccedil;&atilde;o geogr&aacute;fica, os valores dever&atilde;o estar em d&eacute;cimos de grau, com sinal negativo para pontos ao sul do equador e oeste do meridiano 0.",
 			complemento:"O arquivo DBF ou CSV ser&aacute; armazenado no servidor onde o i3geo est&aacute; instalado e permanecer&aacute; l&aacute; at&eacute; que os arquivos tempor&aacute;rios sejam apagados. N&atilde;o utilize essa op&ccedil;&atilde;o se existir alguma restri&ccedil;&atilde;o ao uso do arquivo e se a pol&iacute;tica de acesso aos dados, definidas pela entidade que hospeda o i3geo, n&atilde;o for compat&iacute;vel com essas restri&ccedil;&otilde;es.",
-			tela:"ferramentas/uploaddbf/exemplo.htm",
+			//tela:"ferramentas/uploaddbf/exemplo.htm",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.uploaddbf()"
 		},
 		"27": {
@@ -238,7 +234,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Permite que um arquivo do tipo shapefile seja enviado ao servidor e inclu&iacute;do no mapa como uma nova camada. O arquivo shapefile ser&aacute; armazenado no servidor onde o i3geo est&aacute; instalado e permanecer&aacute; l&aacute; at&eacute; que os arquivos tempor&aacute;rios sejam apagados. Um shapefile &eacute; composto basicamente por tr&ecirc;s tipos de arquivos (dbf, shp e shx), todos devem ser submetidos",
 			complemento:"N&atilde;o utilize essa op&ccedil;&atilde;o se existir alguma restri&ccedil;&atilde;o ao uso do arquivo e se a pol&iacute;tica de acesso aos dados, definidas pela entidade que hospeda o i3geo, n&atilde;o for compat&iacute;velcom essas restri&ccedil;&otilde;es.",
-			tela:"ferramentas/upload/exemplo.htm",
+			//tela:"ferramentas/upload/exemplo.htm",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.upload()"
 		},
 		"28": {
@@ -247,7 +243,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Uma conex&atilde;o WMS permite que dados dispon&iacute;veis em outros servidores sejam inclu&iacute;dos como camadas no i3Geo. Na ferramenta de conex&atilde;o &eacute; mostrada uma lista de endere&ccedil;os previamente cadastrados, mas pode-se digitar um outro endere&ccedil;o qualquer, desde que seja um servi&ccedil;o no padr&atilde;o WMS. Ap&oacute;s um servi&ccedil;o ser escolhido, a lista de camadas dispon&iacute;veis &eacute; mostrada na guia 'Temas'.",
 			complemento:"Camadas obtidas por meio de conex&atilde;o WMS n&atilde;o permitem que algumas opera&ccedil;&otilde;es dispon&iacute;veis no i3Geo sejam executadas, como por exemplo a altera&ccedil;&atilde;o na legenda, sele&ccedil;&atilde;o, entre outras. Quando um servidor apresentar problemas, a camada n&atilde;o poder&aacute; ser adicionada.",
-			tela:"ferramentas/conectarwms/exemplo.htm",
+			//tela:"ferramentas/conectarwms/exemplo.htm",
 			apijs:"i3GEO.arvoreDeTemas.conectarwms.upload()"
 		},
 		"29": {
@@ -256,7 +252,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Uma conex&atilde;o GeoRSS permite obter a localiza&ccedil;&atilde;o de conte&uacute;dos dispon&iacute;veis no formato RSS com coordenadas geogr&aacute;ficas inclu&iacute;das. Na ferramenta de conex&atilde;o &eacute; mostrada uma lista de endere&ccedil;os previamente cadastrados, mas pode-se digitar um outro endere&ccedil;o qualquer, desde que seja um servi&ccedil;o no padr&atilde;o GeoRSS.",
 			complemento:"A camada adicionada ao mapa baseia-se em um arquivo shapefile criado temporariamente pelo i3Geo. Caso o servi&ccedil;o GeoRSS sofrer altera&ccedil;&otilde;es, como a inclus&atilde;o de um novo item, &eacute; necess&aacute;rio fazer novamente a conex&atilde;o para que a camada reflita a altera&ccedil;&atilde;o.",
-			tela:"ferramentas/conectargeorss/exemplo.htm",
+			//tela:"ferramentas/conectargeorss/exemplo.htm",
 			apijs:"i3GEO.arvoreDeTemas.conectargeorss.upload()"
 		},
 		"30": {
@@ -265,7 +261,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"A nuvem de tags &eacute; uma forma de localizar camadas dispon&iacute;veis para ser vistas no mapa. A busca &eacute; feita por meio de tags ou palavras-chave. As tags s&atilde;o registradas pelo administrador do i3Geo para cada tema dispon&iacute;vel na &aacute;rvore de temas.",
 			complemento:"Ao escolher uma tag, &eacute; feita dos temas correspondentes e o resultado &eacute; adicionado à arvore de temas. Opcionalmente, o usu&aacute;rio pode escolher navegar na nuvem 'animada' que mostra as tags como um globo 3d.",
-			tela:"ferramentas/nuvemtags/exemplo.htm",
+			//tela:"ferramentas/nuvemtags/exemplo.htm",
 			apijs:"i3GEO.arvoreDeTemas.conectargeorss.nuvemTags()"
 		},
 		"31": {
@@ -306,7 +302,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"Cada tema possu&iacute; um conjunto de dados descritivos associados aos elementos geogr&aacute;ficos (tabela de atributos). A op&ccedil;&atilde;o 'procurar' realiza uma pesquisa nesses atributos e localiza as correspond&ecirc;ncias. O resultado &eacute; mostrado em uma lista de elementos que permite destacar cada um deles.",
 			complemento:"Para fazer a busca deve-se selecionar em quais titens da tabela de atributos a mesma ser&aacute; feita, podendo-se escolher mais de um. A busca pode ser feita no mapa todo ou apenas na regi&atilde;o vis&iacute;vel do mapa.",
-			tela:"ferramentas/busca/exemplo.htm",
+			//tela:"ferramentas/busca/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.procuraratrib()"
 		},
 		"36": {
@@ -315,7 +311,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"A topon&iacute;mia s&atilde;o os textos mostrados no mapa que identificam lugares ou elementos que constituem um tema. Os textos s&atilde;o baseados na tabela de atributos de cada tema, que cont&eacute;m os dados descritivos de cada elemento.",
 			complemento:"Ao inserir uma topon&iacute;mia, um novo tema &eacute; adicionado ao mapa, podendo ser exclu&iacute;do ou movimentado. Dessa forma &eacute; poss&iacute;vel incluir mais de um tema com a topon&iacute;mia. Ao inserir a topon&iacute;mia deve-se esco&ccedil;her o item da tabela de atributos e, caso necess&aacute;rio, pode-se modificar as op&ccedil;&otilde;es padr&atilde;o de simbologia utilizadas nos textos, como fonte, cor, m&aacute;scara, etc. &Eacute; poss&iacute;vel ainda testar as op&ccedil;&otilde;es antes de concluir a inclus&atilde;o da topon&iacute;mia.",
-			tela:"ferramentas/toponimia/exemplo.htm",
+			//tela:"ferramentas/toponimia/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.toponimia()"
 		},
 		"37": {
@@ -324,7 +320,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"As etiquetas s&atilde;o textos descritivos mostrados no mapa quando o mouse &eacute; estacionado por alguns instantes sobre um elemento. Cada tema pode ter uma etiqueta ativa, sendo esta baseada em um item da tabela de atributos do tema.",
 			complemento:"Para ver as etiquetas, ative a opera&ccedil;&atilde;o de identifica&ccedil;&atilde;o.",
-			tela:"ferramentas/etiqueta/exemplo.htm",
+			//tela:"ferramentas/etiqueta/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.etiquetas()"
 		},
 		"38": {
@@ -333,7 +329,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"Filtrar um tema significa definir um crit&eacute;rio para que um determinado elemento seja mostrado. Esse crit&eacute;rio &eacute; baseado nos dados descritivos (tabela de atributos). Um filtro &eacute; uma express&atilde;o que relaciona os itens da tabela de atributos e seus valores, por exemplo, 'UF' = 'SP', onde 'UF' &eacute; o nome da coluna (item) e 'SP' &eacute; o valor. As express&otilde;es podem ser definidas por meio de um 'construtor' (guia default da ferramenta) ou digitando-se diretamente a express&atilde;o. Veja <a href='http://mapserver.org/mapfile/expressions.html#mapserver-expressions' >como</a>.",
 			complemento:"Cada tema pode ter apenas um filtro. O filtro apenas deixa de mostrar os dados no mapa, ou seja, os dados continuam na tabela de atributos. Antes de aplicar um filtro, pode-se test&aacute;-lo para verificar seu efeito. O construtor de express&otilde;es permite a utiliza&ccedil;&atilde;o de mais de uma coluna, para isso, deve-se adicionar novas linhas e escolher um conector, como 'e' ou 'ou'. Por exemplo, em um tema com os munic&iacute;pios pode-se mostrar apenas aqueles de determinados estados escolhendo-se 'colun' = 'valor' 'e' 'coluna' = 'valor'.",
-			tela:"ferramentas/filtro/exemplo.htm",
+			//tela:"ferramentas/filtro/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.filtro()"
 		},
 		"39": {
@@ -342,7 +338,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"Cada tema possui informa&ccedil;&otilde;es descritivas associadas a cada elemento, esses dados s&atilde;o conhecidos como 'tabela de atributos'. Essa op&ccedil;&atilde;o mostra os dados existentes na tabela e permite a realiza&ccedil;&atilde;o de uma s&eacute;rie de opera&ccedil;&otilde;es diretamente sobre os registros existentes, como por exemplo, sele&ccedil;&atilde;o, zoom, relat&oacute;rios e gr&aacute;ficos.",
 			complemento:"Como o n&uacute;mero de registros de um tema pode ser grande, os dados s&atilde;o mostrados em p&aacute;ginas. Ao lado de cada registro existe uma caixa que permite marcar os registros. Os registros marcados s&atilde;o mostrados na guia 'Marcados'. As opera&ccedil;&otilde;es dispon&iacute;veis nessa ferramenta atuam sobre todos os elementos da tabela ou sobre os selecinados. Para selecionar os elementos marcados, utilize a op&ccedil;&atilde;o 'Ativa sele&ccedil;&atilde;o' na guia 'Marcados'.",
-			tela:"ferramentas/tabela/exemplo.htm",
+			//tela:"ferramentas/tabela/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.tabela()"
 		},
 		"40": {
@@ -351,7 +347,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"Permite inserir gr&aacute;ficos em cada elemento que comp&otilde;e uma camada para representar valores associados. Para a montagem de cada gr&aacute;fico &eacute; necess&aacute;rio selecionar um tema que contenha os dados que ser&atilde;o representados. Os dados s&atilde;o aqueles que encontram-se na tabela de atributos do tema.",
 			complemento:"Ap&oacute;s selecionado o tema, &eacute; mostrada uma lista com os itens existentes na tabela de atributos. Escolha os itens que ser&atilde;o utilizados no gr&aacute;fico clicando no box que aparece na lista de itens. Cada item ir&aacute; compor uma fatia do gr&aacute;fico. Ao lado do item, &eacute; mostrada a cor que ser&aacute; utilizada na representa&ccedil;&atilde;o. Cada cor &eacute; definida em RGB. Na guia 'propriedades' &eacute; poss&iacute;vel definir propriedades de representa&ccedil;&atilde;o de cada gr&aacute;fico. As defini&ccedil;&otilde;es afetar&atilde;o a forma de cada gr&aacute;fico. Cada gr&aacute;fico adicionado &eacute; inclu&iacute;do no mapa como um novo tema.",
-			tela:"ferramentas/graficotema/exemplo.htm",
+			//tela:"ferramentas/graficotema/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.graficotema()"
 		},
 		"41": {
@@ -360,7 +356,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"A legenda de um tema consiste nas defini&ccedil;&otilde;es dos s&iacute;mbolos utilizados na representa&ccedil;&atilde;o de cada elemento. A l&eacute;m dos s&iacute;mbolos, uma das propriedades da legenda &eacute; o tipo de classifica&ccedil;&atilde;o utilizado na representa&ccedil;&atilde;o dos dados, por exemplo, pode-se mostrar todos os elementos com um &uacute;nico s&iacute;mbolo ou agrupar elementos e utilizar s&iacute;mbolos diferentes para cada grupo. No editor, a guia 'Classes' permite definir a classifica&ccedil;&atilde;o e na guia principal s&atilde;o mostrados os s&iacute;mbolos. Quando um s&iacute;mbolo &eacute; clicado, &eacute; ativada a guia que permite definir as caracter&iacute;sticas do s&iacute;mbolo.",
 			complemento:"As classes s&atilde;o definidas por meio de express&otilde;es que definem um tipo de filtro que ser&aacute; usado para definir que elementos fazem parte de cada classe. O editor possui alguns m&eacute;todos para defini&ccedil;&atilde;o autom&aacute;tica das classes, mas pode-se incluir classes livremente digitando-se o filtro. Veja <a href='http://mapserver.org/mapfile/class.html' >como</a>.",
-			tela:"ferramentas/legenda/exemplo.htm",
+			//tela:"ferramentas/legenda/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.editaLegenda()"
 		},
 		"42": {
@@ -424,7 +420,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"Selecionar elementos consiste em destacar um sub-conjunto do conjunto total de componentes de um tema. Algumas opera&ccedil;&otilde;es do i3Geo atuam sobre o conjunto selecionado, como buffer, exporta&ccedil;&atilde;o, etc. Os elementos selecionados s&atilde;o mostrados em uma cor especial, diferente daquela definida na legenda do tema. Os temas que possuem elementos selecionados s&atilde;o marcados com um &iacute;cone circular mostrado junto ao nome na lista de camadas. A janela de op&ccedil;&otilde;es para sele&ccedil;&atilde;o, al&eacute;m das op&ccedil;&otilde;es de tipo de opera&ccedil;&atilde;o, permite gerar gr&aacute;ficos dinâmicos e criar um novo tema com base nos elementos selecionados.",
 			complemento:"Existem v&aacute;rias maneiras de fazer a sele&ccedil;&atilde;o: clicando-se sobre cada elemento, desenhando-se um retângulo ou pol&iacute;gono no mapa, definindo-se uma express&atilde;o que ir&aacute; buscar os elementos aderentes (com base na tabela de atributos) ou cruzando-se um tema com outro. Tendo-se um conjunto j&aacute; definido, novos elementos podem ser acrescentados ou retirados da sele&ccedil;&atilde;o.",
-			tela:"ferramentas/selecao/exemplo.htm",
+			//tela:"ferramentas/selecao/exemplo.htm",
 			apijs:"i3GEO.selecao.janelaOpcoes()"
 		},
 		"49": {
@@ -433,7 +429,7 @@ g_traducao_ajuda = {
 			categoria:"6",
 			pt:"Utilize essa op&ccedil;&atilde;o para gerar uma p&aacute;gina espec&iacute;fica para impress&atilde;o do mapa. Na janela de op&ccedil;&otilde;es deve-se escolher o tipo de p&aacute;gina desejada, que pode variar desde p&aacute;ginas padronizadas em PDF at&eacute; aplicativos onde o mapa &eacute; montado de forma interativa.",
 			complemento:"",
-			tela:"ferramentas/imprimir/exemplo.htm",
+			//tela:"ferramentas/imprimir/exemplo.htm",
 			apijs:"i3GEO.configura.funcoesBotoes"
 		},
 		"50": {
@@ -466,7 +462,7 @@ g_traducao_ajuda = {
 			categoria:"7",
 			pt:"A extens&atilde;o geogr&aacute;fica &eacute; a abrang&ecirc;ncia espacial do mapa definido por meio de uma lista de coordenadas em d&eacute;cimos de grau e na ordem menor longitude, menor latitude, maior longitude, maior latitude. A extens&atilde;o geogr&aacute;fica do mapa pode ser alterada digitando-se novas coordenadas por meio dessa ferramenta.",
 			complemento:"O resultado final do mapa quando se altera a extens&atilde;o pode n&atilde;o corresponder as espectativas, uma vez que o mapa &eacute; um retângulo cujas propor&ccedil;&otilde;es podem n&atilde;o ser compat&iacute;veis com as coordenadas digitadas.",
-			tela:"ferramentas/mostraexten/exemplo.htm",
+			//tela:"ferramentas/mostraexten/exemplo.htm",
 			apijs:"i3GEO.configura.funcoesBotoes"
 		},
 		"56": {
@@ -572,7 +568,7 @@ g_traducao_ajuda = {
 			pt:"Essa op&ccedil;&atilde;o mostra em uma janela interna o mapa produzido pelo Google Maps. A janela &eacute; sincronizada com o mapa mostrado no i3Geo, permitindo que a navega&ccedil;&atilde;o em um ou noutro modifique os dois mapas.",
 			complemento:"Al&eacute;m das op&ccedil;&otilde;es de tipo de mapa &eacute; poss&iacute;vel tra&ccedil;ar rotas no Google Maps e mostrar nessa janela o mapa visto no i3Geo. Ao tra&ccedil;ar uma rota, o resultado &eacute; inclu&iacute;do no i3Geo como uma nova camada, que pode inclusive ser obtida via download. Quando o mapa do i3Geo &eacute; inclu&iacute;do no mapa do Google, os pol&iacute;gonos com s&iacute;mbolos n&atilde;o transparentes podem encubrir o mapa, nesse caso, altere a legenda das camadas para permitir a visualiza&ccedil;&atilde;o correta.",
 			apijs:"i3GEO.configura.funcoesBotoes a chave de acesso da API do Google Maps &eacute; definida em ms_configura.php",
-			tela:"ferramentas/googlemaps/index.php"
+			//tela:"ferramentas/googlemaps/index.php"
 		},
 		"69": {
 			titulo: "Visualiza&ccedil;&atilde;o 3d",
@@ -581,7 +577,7 @@ g_traducao_ajuda = {
 			pt:"A visualiza&ccedil;&atilde;o em 3d gera um arquivo no formato 'wrl' considerando a abrang&ecirc;ncia espacial do mapa atual. Para a gera&ccedil;&atilde;o do modelo &eacute; utilizado um mapa de fundo com a representa&ccedil;&atilde;o da altimetria, esse mapa &eacute; obtido por meio de um servi&ccedil;o WMS baseado nos dados SRTM.",
 			complemento:"Para ver o modelo 3d &eacute; necess&aacute;rio a instala&ccedil;&atilde;o de um plugin no navegador, ou ent&atilde;o, deve-se salvar o arquivo para visualiza&ccedil;&atilde;o em algum outro software. O modelo 3d &eacute; simplificado, permitindo apenas a navega&ccedil;&atilde;o b&aacute;sica.",
 			apijs:"i3GEO.configura.funcoesBotoes",
-			tela:"ferramentas/3d/exemplo.htm"
+			//tela:"ferramentas/3d/exemplo.htm"
 		},
 		"70": {
 			titulo: "Identificar",
@@ -598,7 +594,7 @@ g_traducao_ajuda = {
 			pt:"Essa op&ccedil;&atilde;o permite localizar dados com base em palavras ou frases, por exemplo 'S&atilde;o Paulo'. A busca &eacute; feita nos temas do mapa ou em um Web Service cujo banco de dados pode variar em cada instala&ccedil;&atilde;o do i3Geo. Quando um lugar &eacute; encontrado, uma nova janela &eacute; mostrada na tela com o resultado. Clicando-se nos links dispon&iacute;veis, o mapa &eacute; deslocado para o lugar definido e uma nova camada &eacute; adicionada ao mapa.",
 			complemento:"A busca &eacute; feita tamb&eacute;m no Web Service do Google, permitindo a localiza&ccedil;&atilde;o de endere&ccedil;os. Utilize as propriedades para definir se a busca ser&aacute; feita ou n&atilde;o nos temas existentes no mapa. Apenas os temas que tiverem sido preparados pelo administrador do i3Geo pode ser pesquisado.",
 			apijs:"i3GEO.gadgets.mostraBuscaRapida(id)",
-			tela:"ferramentas/buscarapida/exemplo.htm",
+			//tela:"ferramentas/buscarapida/exemplo.htm",
 			gadget:"ferramentas/buscarapida/gadget.php?palavra=tanabi&locaplic=../../../i3geo"
 		},
 		"72": {
@@ -616,7 +612,7 @@ g_traducao_ajuda = {
 			pt:"A <a href='http://pt.wikipedia.org/wiki/P%C3%A1gina_principal' target='_blank' >Wikipedia</a> &eacute; uma base de conhecimento livre. Alguns dos artigos existentes s&atilde;o georreferenciados, permitindo sua busca por regi&atilde;o geogr&aacute;fica. Essa ferramenta abre uma janela sobre o mapa procurando resultados na Wikipedia para a regi&atilde;o de abrang&ecirc;ncia do mapa.",
 			complemento:"Para maior performance, o mapa deve estar na escala 1:500.000 ou maior. Ao navegar no mapa, a lista de lugares &eacute; atualizada.",
 			apijs:"i3GEO.configura",
-			tela:"ferramentas/wiki/exemplo.htm"
+			//tela:"ferramentas/wiki/exemplo.htm"
 		},
 		"74": {
 			titulo: "Localizar fotos",
@@ -625,7 +621,7 @@ g_traducao_ajuda = {
 			pt:"Existem v&aacute;rios servi&ccedil;os na Internet que permitem cadastrar e visualizar fotos georreferenciadas. Essa ferramenta procura fotos para a regi&atilde;o de abrang&ecirc;ncia do mapa nos servi&ccedil;os Panorâmio, Flicker e Locr.",
 			complemento:"Para maior performance, o mapa deve estar na escala 1:150.000 ou maior.Ao passar o mouse sobre a foto, a sua localiza&ccedil;&atilde;o &eacute; mostrada no mapa.",
 			apijs:"i3GEO.configura",
-			tela:"ferramentas/buscafotos/exemplo.htm"
+			//tela:"ferramentas/buscafotos/exemplo.htm"
 		},
 		"75": {
 			titulo: "Conflu&ecirc;ncias",
@@ -634,7 +630,7 @@ g_traducao_ajuda = {
 			pt:"O projeto 'Confluences' registra expedi&ccedil;&otilde;es aos lugares na terra cuja coordenada geogr&aacute;fica corresponde ao cruzamento de 1 grau por 1 grau. Essa ferramenta permite localizar as conflu&ecirc;ncias no mapa que est&aacute; sendo visto e abrir a p&aacute;gina correspondente.",
 			complemento:"O mapa deve estar pelo menos na escala 1:2.000.000 para que as conflu&ecirc;ncias sejam mostradas.",
 			apijs:"i3GEO.configura",
-			tela:"ferramentas/confluence/exemplo.htm"
+			//tela:"ferramentas/confluence/exemplo.htm"
 		},
 		"76": {
 			titulo: "Conex&atilde;o WMS-T",
@@ -642,7 +638,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Uma conex&atilde;o WMS-T permite que dados dispon&iacute;veis em outros servidores sejam inclu&iacute;dos como camadas no i3Geo. Na ferramenta de conex&atilde;o &eacute; mostrada uma lista de endere&ccedil;os previamente cadastrados, mas pode-se digitar um outro endere&ccedil;o qualquer, desde que seja um servi&ccedil;o no padr&atilde;o WMS-T. Ap&oacute;s ser escolhido o servi&ccedil;o, deve-se definir o per&iacute;odo das imagens e o intervalo desejado (di&aacute;rio, mensal ou anual).",
 			complemento:"Ap&oacute;s definido o per&iacute;odo, a ferramenta far&aacute; a busca das imagens para sua apresenta&ccedil;&atilde;o em sequ&ecirc;ncia. Ao parar a anima&ccedil;&atilde;o, a imagem mostrada poder&aacute; ser acrescentada ao mapa como uma nova camada. A visualiza&ccedil;&atilde;o das imagens s&oacute; &eacute; poss&iacute;vel ap&oacute;s a carga de todas as datas selecionadas. Caso seja necess&aacute;rio cancelar a carga de uma ou mais datas, deve-se clicar em 'parar' na lista de imagens que est&atilde;o sendo carregadas.",
-			tela:"ferramentas/wmstime/exemplo.htm",
+			//tela:"ferramentas/wmstime/exemplo.htm",
 			apijs:"i3GEO.arvoreDeTemas"
 		},
 		"78": {
@@ -675,7 +671,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"Convertendo um tema em KML &eacute; poss&iacute;vel utilizar outros softwares para visualizar os dados. O i3Geo permite isso de duas maneiras, a primeira utiliza um WMS embutido dentro de um KML, ou seja, os dados s&atilde;o vistos como uma imagem raster georreferenciada, sendo que as coordenadas e atributos n&atilde;o s&atilde;o acess&iacute;veis diretamente.Dessa forma, grandes volumes de dados podem ser utilizados, pois n&atilde;o ocorre o download dos arquivos.<p>A segunda maneira converte os dados de um tema em arquivos KML compactados contendo as coordenadas e atributos dos elementos que comp&otilde;em o tema.",
 			complemento:"KML &eacute; um padr&atilde;o internacional e n&atilde;o &eacute; espec&iacute;fico do i3Geo. Conforme as caracter&iacute;sticas de cada servidor onde o i3Geo estiver instalado, o KML poder&aacute; permanecer dispon&iacute;vel por per&iacute;odos de tempo vari&aacute;veis. Para usar o KML no Google Earth, utilize a op&ccedil;&atilde;o desse software chamada 'adicionar link de rede'",
-			tela:"ferramentas/convertekml/exemplo.htm",
+			//tela:"ferramentas/convertekml/exemplo.htm",
 			apijs:"i3GEO.mapa.dialogo.convertekml()"
 		},
 		"82": {
@@ -684,7 +680,7 @@ g_traducao_ajuda = {
 			categoria:"2",
 			pt:"Permite o download de um tema escolhido. No caso de dados vetoriais derivados de outros temas ou camadas com elementos selecionados, os dados s&atilde;o sempre fornecidos no formato 'shapefile'. Nos outros casos, o arquivo fornecido depender&aacute; da configura&ccedil;&atilde;o de cada camada, mas, por padr&atilde;o, os dados s&atilde;o fornecidos em 'shapefile'",
 			complemento:"",
-			tela:"ferramentas/download/exemplo.htm",
+			//tela:"ferramentas/download/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.download()"
 		},
 		"83": {
@@ -726,7 +722,7 @@ g_traducao_ajuda = {
 			pt:"A rede <a href='http://weather.noaa.gov/' target='_blank' >metar</a> reune dados de esta&ccedil;&otilde;es meteorol&oacute;gicas espalhadas por toto o mundo. Essa ferramenta mostra as esta&ccedil;&otilde;es existentes na extens&atilde;o geogr&aacute;fica do mapa",
 			complemento:"Os dados da rede Metar s&atilde;o acessados indiretamente por meio dos Web Services do site Geonames.",
 			apijs:"i3GEO.configura",
-			tela:""
+			//tela:""
 		},
 		"88": {
 			titulo: "Linha do tempo",
@@ -735,7 +731,7 @@ g_traducao_ajuda = {
 			pt:"Constr&oacute;i um gr&aacute;fico do tipo 'linha do tempo' tendo como fonte dos dados a tabela de atributos de um tema. Veja: <a href='http://www.simile-widgets.org/timeline/' target=_blank >Simline</a>",
 			complemento:"Ao navegar pelo mapa, o gr&aacute;fico &eacute; atualizado sendo utilizado apenas os dados existentes na extens&atilde;o do mapa. Ao passar o mouse sobre um dos nomes mostrados no gr&aacute;fico, &eacute; indicado a posi&ccedil;&atilde;o no mapa. Ao ser clicado um &iacute;cone no gr&aacute;fico, abre-se um bal&atilde;o com informa&ccedil;&otilde;es adicionais, podendo incluir links e imagens. O gr&aacute;fico s&oacute; &eacute; mostrado para os temas que estiverem configurados pelo administrador do i3Geo.",
 			apijs:"i3GEO.configura",
-			tela:""
+			//tela:""
 		},
 		"89": {
 			titulo: "Tipo de imagem",
@@ -743,7 +739,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"Modifica o tipo de imagem utilizada na gera&ccedil;&atilde;o do mapa.",
 			complemento:"Modifica o parâmetro OUTPUTFORMAT do mapa em uso permitindo-se escolher entre PNG e JPEG com tecnologia de gera&ccedil;&atilde;o AGG ou GD.",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.outputformat()"
 		},
 		"90": {
@@ -752,7 +748,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"Permite mostrar e esconder uma camada existente no mapa em um movimento cont&iacute;nuo. O efeito 'cortina' permite comparar um tema com outro.",
 			complemento:"",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.tema.dialogo.cortina()"
 		},
 		"91": {
@@ -785,7 +781,7 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"O centro m&eacute;dio &eacute; uma medida da distribui&ccedil;&atilde;o de um conjunto de pontos. Sendo definido por Gerardi & Silva (1980) como: o ponto que minimiza a soma das distâncias quadr&aacute;ticas a todos os outros pontos do plano",
 			complemento:"Mais detalhes em http://www.criminologia-rsm.org/LinkClick.aspx?fileticket=XT%2BDy%2BNyrZM%3D&tabid=484&mid=1614",
-			tela:"ferramentas/nptpol/exemplo.htm",
+			//tela:"ferramentas/nptpol/exemplo.htm",
 			apijs:"i3GEO.analise.dialogo.centromassa()"
 		},
 		"95": {
@@ -794,7 +790,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Cada vez que um usu&aacute;rio adiciona uma camada ao mapa, por meio do cat&aacute;logo de temas, &eacute; feito um registro no banco de dados de administra&ccedil;&atilde;o. Esse registro &eacute; cumulativo e permite classificar os temas conforme sua popularidade.",
 			complemento:"",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.arvoreDeTemas"
 		},
 		"96": {
@@ -803,7 +799,7 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Cria um gr&aacute;fico de perfil com base em um conjunto de dados contendo os valores de Z.",
 			complemento:"Os valores de Z podem ser obtidos de um tema ou de um servi&ccedil;o do tipo Google API",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.analise"
 		},
 		"97": {
@@ -812,7 +808,7 @@ g_traducao_ajuda = {
 			categoria:"7",
 			pt:"Filtra as camadas que s&atilde;o mostradas na &aacute;rvore de camadas conforme as caracter&iacute;sticas de cada uma",
 			complemento:"",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.arvoreDeCamadas"
 		},
 		"98": {
@@ -821,7 +817,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Adiciona ao mapa camadas definidas em um arquivo XML no padr&atilde;o WMC 'Web Map Context'. O WMC permite que mapas sejam transferidos entre aplica&ccedil;&otilde;es.",
 			complemento:"O arquivo XML pode estar em um servidor ou pode ser feito o upload para o servidor do i3Geo",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.importarwmc()"
 		},
 		"99": {
@@ -830,7 +826,7 @@ g_traducao_ajuda = {
 			categoria:"7",
 			pt:"Cria um link que permite abrir o mapa atual em outro computador ou navegador. O mapa clonado &eacute; atualizado conforme o original for sendo modificado.",
 			complemento:"Essa funcionalidade permite que um mapa seja mostrado em uma tela remota com uma interface diferente da original. &Uacute;til para proje&ccedil;&atilde;o em tel&otilde;es e salas de situa&ccedil;&atilde;o.",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.telaRemota()"
 		},
 		"100": {
@@ -839,7 +835,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Permite que o usu&aacute;rio fa&ccedil;a o upload de um arquivo KML ou KMZ para o servidor para que seja acrescentado como uma camada ao mapa.",
 			complemento:"O arquivo &eacute; armazenado no servidor temporariamente. &Eacute; necess&aacute;rio que o usu&aacute;rio saiba qual o tipo de elementos existentes no arquivo KML e qual o nome do folder que ser&aacute; utilizado.",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.uploadkml()"
 		},
 		"101": {
@@ -848,7 +844,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"Aplica um temporizador que atualiza uma determinada camada ap&oacute;s um intervalo de tempo e de forma cont&iacute;nua. Para finalizar o temporizador, digite o ou vazio e aplique novamente.",
 			complemento:"",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.tema.temporizador()"
 		},
 		"102": {
@@ -857,7 +853,7 @@ g_traducao_ajuda = {
 			categoria:"7",
 			pt:"Altera a opacidade do mapa de forma interativa. Aplica-se aos temas que n&atilde;o est&atilde;o definidos como 'fundo'. A altera&ccedil;&atilde;o &eacute; feita diretamente no objeto HTML, sendo que o efeito &eacute; imediato.",
 			complemento:"",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.opacidade()"
 		},
 		"103": {
@@ -866,7 +862,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Permite que um arquivo do tipo GPX, normalmente gerado por programas que utilizam GPS, seja enviado ao servidor e inclu&iacute;do no mapa como uma nova camada. O arquivo GPX ser&aacute; armazenado no servidor onde o i3geo est&aacute; instalado e permanecer&aacute; l&aacute; at&eacute; que os arquivos tempor&aacute;rios sejam apagados.",
 			complemento:"N&atilde;o utilize essa op&ccedil;&atilde;o se existir alguma restri&ccedil;&atilde;o ao uso do arquivo e se a pol&iacute;tica de acesso aos dados, definidas pela entidade que hospeda o i3geo, n&atilde;o for compat&iacute;velcom essas restri&ccedil;&otilde;es.",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.uploadgpx()"
 		},
 		"104": {
@@ -875,7 +871,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Permite que um arquivo do tipo KML, seja enviado ao servidor e inclu&iacute;do no mapa como uma nova camada. O arquivo GPX ser&aacute; armazenado no servidor onde o i3geo est&aacute; instalado e permanecer&aacute; l&aacute; at&eacute; que os arquivos tempor&aacute;rios sejam apagados.",
 			complemento:"N&atilde;o utilize essa op&ccedil;&atilde;o se existir alguma restri&ccedil;&atilde;o ao uso do arquivo e se a pol&iacute;tica de acesso aos dados, definidas pela entidade que hospeda o i3geo, n&atilde;o for compat&iacute;velcom essas restri&ccedil;&otilde;es.",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.uploadkml()"
 		},
 		"105": {
@@ -884,7 +880,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Cria um novo layer com base no endere&ccedil;o (url) de um arquivo KML. O layer &eacute; baseado em uma conex&atilde;o OGR.",
 			complemento:"S&atilde;o criadas 3 novas camadas no mapa, uma para pontos, uma para linhas e outra para os pol&iacute;gonos. N&atilde;o necessariamente existir&atilde;o elementos nas tr&ecirc;s camadas.",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.arvoreDeTemas.carregakml()"
 		},
 		"106": {
@@ -893,7 +889,7 @@ g_traducao_ajuda = {
 			categoria:"4",
 			pt:"Cria um novo layer com base no endere&ccedil;o (url) de um arquivo no formato GeoJson. O layer &eacute; baseado em uma conex&atilde;o OGR.",
 			complemento:"S&atilde;o criadas 3 novas camadas no mapa, uma para pontos, uma para linhas e outra para os pol&iacute;gonos. N&atilde;o necessariamente existir&atilde;o elementos nas tr&ecirc;s camadas.",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.arvoreDeTemas.conectargeojson()"
 		},
 		"107": {
@@ -902,7 +898,7 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"Mostra camadas em uma sequ&ecirc;ncia definida pelo usu&aacute;rio e em um determinado intervalo de tempo. As camadas s&atilde;o automaticamente desligadas e ligadas, formando uma sequ&ecirc;ncia que proporciona um efeito de anima&ccedil;&atilde;o",
 			complemento:"",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.animacao()"
 		},
 		"108": {
@@ -911,7 +907,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"Cria um arquivo no formato KML, representando os dados de uma coluna da tabela de atributos como elementos em 3d. Mais detalhes em http://thematicmapping.org/",
 			complemento:"",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.tme()"
 		},
 		"109": {
@@ -920,7 +916,7 @@ g_traducao_ajuda = {
 			categoria:"8",
 			pt:"Busca metadados no banco de dados da Infraestrutura Nacional de Dados Espaciais (INDE) do Brasil.",
 			complemento:"A busca ainda &eacute; experimental, permitindo apenas a localiza&ccedil;&atilde;o dos registros, sem que o tema possa ser adicionado diretamente ao mapa.",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.buscainde()"
 		},
 		"110": {
@@ -929,7 +925,7 @@ g_traducao_ajuda = {
 			categoria:"6",
 			pt:"Lista as camadas que est&atilde;o no mapa para que o usu&aacute;rio escolha quais deseja remover. As camadas utilizadas no in&iacute;cio do mapa aparecem desmarcadas na lista.",
 			complemento:"",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.arvoreDeCamadas.dialogo.excluir()"
 		},
 		"111": {
@@ -938,7 +934,7 @@ g_traducao_ajuda = {
 			categoria:"6",
 			pt:"Lista as regi&otilde;es cadastradas no sistema de metadados estat&iacute;sticos conforme a hierarquia definida. Conforme uma regi&atilde;o &eacute; escolhida, o mapa tem a extens&atilde;o geogr&aacute;fica alterada, destacando a escolha. Essa mesma ferramenta &eacute; usada para aplicar filtros. Os filtros funcionam apenas nas camadas que forem oriundas da aplica&ccedil;&atilde;o de gera&ccedil;&atilde;o de cartogramas estat&iacute;sticos.",
 			complemento:"",
-			tela:"",
+			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.locregiao()"
 		},
 		"112": {
@@ -948,6 +944,14 @@ g_traducao_ajuda = {
 			pt:"Mostra os WMS cuja origem &eacute; o sistema de metadados estat&iacute;cos. Esse sistema apresenta cartogramas gerados de forma din&aacute;mica no padr&atilde;o WMS-Time",
 			complemento:"",
 			apijs: "i3GEO.arvoreDeTemas.listaWMSmetaestat(node)"
+		},
+		"113": {
+			titulo: "Marcador",
+			diretorio:"classe_marcador.js",
+			categoria:"7",
+			pt:"Os marcadores permitem armazenar a regi&atilde;o de abrang&ecirc;ncia do mapa que est&aacute; sendo visto para que seja poss&iacute;vel voltar a essa regi&atilde;o. Para cinar as op&ccedil;&otilde;es de marca&ccedil;&atilde;o utilize a op&ccedil;&atilde;o Marcadores existente no menu suspenso. O menu permite remover marcadores, exportar, importar e converter em shapefile. Os marcadores s&atilde;o mantidos como cookies no navegador, por isso, ao limpar o seu hist&oacute;rico os registros podem ser perdidos. Para evitar isso, exporte seus marcadores como texto e depois importe-os novamente.",
+			complemento:"",
+			apijs: "i3GEO.marcador.prompt()"
 		}
 	}
 };
