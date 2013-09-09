@@ -41,6 +41,10 @@ Function: inicializa
 Cria o mapa do Google Maps e adiciona os bot&otilde;es especiais do i3Geo. Define os eventos que disparam modifica&ccedil;&otilde;es no mapa
 principal do i3Geo quando &eacute; feita a navega&ccedil;&atilde;o.
 */
+navm = false; // IE
+navn = false; // netscape
+var app = navigator.appName.substring(0,1);
+if (app=='N') navn=true; else navm=true;
 i3GEO = window.parent.i3GEO;
 $i = function(id){
 	return window.parent.document.getElementById(id);
@@ -52,7 +56,10 @@ if(i3GEO){
 };
 function inicializa(){
 	counterClick = 0;
-	var m = document.getElementById("mapa");
+	var m = document.getElementById("mapa"),
+		nz = 8,
+		coordenadas = false,
+		pol,ret,pt1,pt2,centro;
 	if(i3GEO){
 		i3GEO.util.criaPin("boxpingoogle",i3GEO.configura.locaplic+'/imagens/dot1red.gif',"5px","5px");
 		box = $i("boxpingoogle");
@@ -62,31 +69,26 @@ function inicializa(){
 		if($i("boxg")){
 			$i("boxg").style.zIndex = 0;
 		}
-		navm = false; // IE
-		navn = false; // netscape
-		var app = navigator.appName.substring(0,1);
-		if (app=='N') navn=true; else navm=true;
-		var pol = i3GEO.parametros.mapexten;
-		var ret = pol.split(" ");
-		var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
-		var pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
-		var pt = pt1+","+pt2;
+
+		pol = i3GEO.parametros.mapexten;
+		ret = pol.split(" ");
+		pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
+		pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
 		try{
-			var coordenadas = i3GEO.navega.dialogo.google.coordenadas;
+			coordenadas = i3GEO.navega.dialogo.google.coordenadas;
 		}
 		catch(e){}
 	}
 	else{
-		var pt1 = -54;
-		var pt2 = -12;
+		pt1 = -54;
+		pt2 = -12;
 	}
-	var centro = new google.maps.LatLng(pt2,pt1);
-	var nz = 8;
+	centro = new google.maps.LatLng(pt2,pt1);
 	if(i3GEO && i3GEO.Interface.ATUAL === "openlayers"){
 		nz = window.parent.i3geoOL.getZoom() + 2;
 	}
 	map = new google.maps.Map(m,{zoom:nz,center:centro,scaleControl:true,mapTypeControl:true,streetViewControl:true,zoomControl:true,mapTypeId:google.maps.MapTypeId.SATELLITE});
-	if(coordenadas){
+	if(coordenadas != false){
 		adicionaMarcasMapa(coordenadas);
 	}
 
@@ -99,7 +101,7 @@ function inicializa(){
 		}
 	});
 	google.maps.event.addListener(map, "mousemove", function(ponto) {
-		var teladms,tela,temp,
+		var teladms,temp,
 			mapexten = i3GEO.parametros.mapexten;
 		teladms = i3GEO.calculo.dd2dms(ponto.x,ponto.y);
 		window.parent.objposicaocursor = {
@@ -278,7 +280,7 @@ function panTogoogle(){
 	var ret = pol.split(" ");
 	var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
 	var pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
-	map.panTo(new google.maps.LatLng(pt2,pt1))
+	map.panTo(new google.maps.LatLng(pt2,pt1));
 }
 /*
 Function: bbox
@@ -366,13 +368,10 @@ Function: constroiRota
 
 Cria a rota do ponto de origem ao ponto de destino
 */
-function constroiRota()
-{
+function constroiRota(){
 	var pt2 = function(response,status){
 		if (status == google.maps.GeocoderStatus.OK) {
 			var place = response[0];
-			var point = place.geometry.location;
-			//marker = new google.maps.Marker({point:point});
 			endereco2 = place.formatted_address;
 			endereco2 = i3GEO.janela.prompt(
 				"Endereco do final",
@@ -390,7 +389,6 @@ function constroiRota()
 		//map.clearOverlays();
 		if (status == google.maps.GeocoderStatus.OK) {
 			var place = response[0];
-			var point = place.geometry.location;
 			endereco1 = place.formatted_address;
 			endereco1 = i3GEO.janela.prompt(
 				"Endereco do inicio",
@@ -433,16 +431,17 @@ function montaRota(){
 		{origin: pontoRota1,destination: pontoRota2,'travelMode':google.maps.TravelMode.DRIVING},
 		function(retorno, status) {
 			if (status == google.maps.GeocoderStatus.OK){
-				var directionsDisplay = new google.maps.DirectionsRenderer();
+				var i,p,nvertices,vertice,
+					directionsDisplay = new google.maps.DirectionsRenderer();
 				directionsDisplay.setPanel(descrota);
 				directionsDisplay.setMap(map);
 				directionsDisplay.setDirections(retorno);
 
-				var p = retorno.routes[0].overview_path;
-				var nvertices = p.length;
+				p = retorno.routes[0].overview_path;
+				nvertices = p.length;
 				pontos = [];
 				for(i=0;i<nvertices;i++){
-					var vertice = p[i];
+					vertice = p[i];
 					pontos.push(vertice.lng()+" "+vertice.lat());
 				}
 				function ativanovotema(retorno){
@@ -452,7 +451,7 @@ function montaRota(){
 						cp.set_response_type("JSON");
 						var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=sphPT2shp&para=linha&tema="+temaNovo;
 						cp.call(p,"sphPT2shp",i3GEO.atualiza);
-					}
+					};
 					var p = window.parent.i3GEO.configura.locaplic+"/ferramentas/inserexy2/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=insereSHP&tema="+retorno.data;
 					var cp = new cpaint();
 					cp.set_response_type("JSON");

@@ -207,7 +207,7 @@ i3GEObuscaRapida = {
 				//aguarde("block");
 				i3GEO.php.buscaRapida(i3GEObuscaRapida.montaResultadoTemas,locaplic,"temas",palavra);
 			}
-			catch(e){alert(e)}
+			catch(e){alert(e);}
 		}
 		else{
 			if($i("resultadoTemas"))

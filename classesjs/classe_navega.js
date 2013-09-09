@@ -41,6 +41,14 @@ if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
 i3GEO.navega = {
+	/**
+	 * Guarda as ultimas extensoes geograficas das operacoes de navegacao
+	 */
+	EXTENSOES: {
+		lista: ["","","","","","","","","","","","","","","","","","","","","","","","",""],
+		posicao: 0,
+		emAcao: false
+	},
 	/*
 	Tempo em milisegundos que ser&aacute; esperado para executar uma opera&ccedil;&atilde;o de navega&ccedil;&atilde;o sobre o mapa.
 
@@ -69,6 +77,47 @@ i3GEO.navega = {
 	Objeto do tipo timer utilizado no contador de tempo para o delay de execu&ccedil;&atilde;o das fun&ccedil;&otilde;es de navega&ccedil;&atilde;o
 	*/
 	timerNavega: null,
+	/**
+	 * Registra uma extensao na variavel EXTENSOES
+	 */
+	registraExt: function(ext){
+		var n = i3GEO.navega.EXTENSOES.lista.length;
+		if(ext == "" || ext == i3GEO.navega.EXTENSOES.lista[n-1]){
+			i3GEO.navega.EXTENSOES.posicao = 0;
+			i3GEO.navega.EXTENSOES.emAcao = false;
+			return;
+		}
+		if(i3GEO.navega.EXTENSOES.emAcao === false){
+			i3GEO.navega.EXTENSOES.lista.shift();
+			i3GEO.navega.EXTENSOES.lista.push(ext);
+			i3GEO.navega.EXTENSOES.posicao = 0;
+			i3GEO.navega.EXTENSOES.emAcao = false;
+		}
+		i3GEO.navega.EXTENSOES.emAcao = false;
+	},
+	extensaoAnterior: function(){
+		i3GEO.navega.EXTENSOES.emAcao = true;
+		var n = i3GEO.navega.EXTENSOES.lista.length,
+			ext;
+		if(i3GEO.navega.EXTENSOES.posicao >= n){
+			i3GEO.navega.EXTENSOES.posicao = 0;
+		}
+		ext = i3GEO.navega.EXTENSOES.lista[(n - 1) - i3GEO.navega.EXTENSOES.posicao];
+		if(ext == i3GEO.parametros.mapexten){
+			ext = i3GEO.navega.EXTENSOES.lista[(n - 2) - i3GEO.navega.EXTENSOES.posicao];
+		}
+		i3GEO.navega.EXTENSOES.posicao++;
+		if(ext && ext != ""){
+			i3GEO.navega.zoomExt("","","",ext);
+		}
+		else{
+			i3GEO.navega.EXTENSOES.posicao = 0;
+		}
+	},
+	extensaoProximo: function(){
+		i3GEO.navega.EXTENSOES.posicao--;
+		i3GEO.navega.extensaoAnterior();
+	},
 	/*
 	Function: centroDoMapa
 

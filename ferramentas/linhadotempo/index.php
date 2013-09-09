@@ -14,7 +14,7 @@ Timeline_parameters='bundle=true';
 {visibility:hidden;display:none;}
 </style>
 </head>
-<body name="ancora" onload="inicializa()" onresize="onResize()">
+<body onload="inicializa()" onresize="onResize()">
 <div class=paragrafo id="combotemas" ></div>
 <div class=paragrafo id="totaleventos" style="position:absolute;top:30px;left:200px;"></div>
 <div class=paragrafo id="tl" style="height: 220px; border: 1px solid #aaa;overflow-x:hidden; overflow-y:scroll"> </div>

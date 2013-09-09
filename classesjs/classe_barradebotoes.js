@@ -114,7 +114,7 @@ i3GEO.barraDeBotoes = {
 	Default:
 	{10}
 	*/
-	MAXBOTOES: 11,
+	MAXBOTOES: 12,
 	/*
 	Propriedade: AJUDA
 
@@ -347,7 +347,11 @@ i3GEO.barraDeBotoes = {
 
 		v3d: true,
 
-		localizar: true
+		localizar: true,
+
+		zoomproximo: true,
+
+		zoomanterior: true
 	}
 
 	Tipo:
@@ -356,7 +360,9 @@ i3GEO.barraDeBotoes = {
 	INCLUIBOTAO: {
 		abreJanelaLegenda: true,
 		localizar: true,
+		zoomanterior: true,
 		zoomli: true,
+		zoomproximo: true,
 		zoomiauto: false,
 		zoomoauto: false,
 		pan: true,
@@ -365,8 +371,8 @@ i3GEO.barraDeBotoes = {
 		identificaBalao: true,
 		mede: true,
 		area: true,
-		imprimir: true,
 		selecao: true,
+		imprimir: true,
 		google: true,
 		barraedicao: true,
 		referencia: true,
@@ -396,6 +402,10 @@ i3GEO.barraDeBotoes = {
 	ICONEBOTAO: {
 
 		zoomli: "/imagens/gisicons/eudock/zoom-region.png",
+
+		zoomproximo: "/imagens/gisicons/eudock/zoom-next.png",
+
+		zoomanterior: "/imagens/gisicons/eudock/zoom-last.png",
 
 		pan: "/imagens/gisicons/eudock/pan.png",
 
@@ -451,6 +461,8 @@ i3GEO.barraDeBotoes = {
 	*/
 	ICONEBOTAO: {
 		zoomli: "/imagens/gisicons/eudock/zoom-region.png",
+		zoomproximo: "/imagens/gisicons/eudock/zoom-next.png",
+		zoomanterior: "/imagens/gisicons/eudock/zoom-last.png",
 		zoomiauto: "/imagens/gisicons/eudock/zoom-in.png",
 		zoomoauto: "/imagens/gisicons/eudock/zoom-out.png",
 		pan: "/imagens/gisicons/eudock/pan.png",

@@ -101,8 +101,7 @@ i3GEOF.animacao = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
-			ins = "";
+		var ins = "";
 		ins += "" +
 			"<div style='text-align:center;position:relative;cursor:pointer'  >" +
 			"	<img title='"+$trad(1,i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_inicia.png' onclick='i3GEOF.animacao.dispara()' />&nbsp;" +

@@ -578,7 +578,7 @@ i3GEO.arvoreDeCamadas = {
 		}
 		var novoel;
 		//inclui o div para a barra de progresso
-		if(i3GEO.arvoreDeCamadas.BARRAPROGRESSO === true && i3GEO.Interface.ATUAL !== "googleearth"){
+		if(i3GEO.arvoreDeCamadas.BARRAPROGRESSO === true && i3GEO.Interface.ATUAL === "openlayers"){
 			if(!$i("i3GEOprogressoDiv")){
 				novoel = document.createElement("div");
 				novoel.id = "i3GEOprogressoDiv";

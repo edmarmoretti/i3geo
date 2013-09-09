@@ -728,6 +728,24 @@ i3GEO.configura = {
 			}
 		},
 		{
+			iddiv:"zoomanterior",
+			tipo:"dinamico",
+			dica:"",
+			titulo:"",
+			funcaoonclick:function(){
+				i3GEO.navega.extensaoAnterior();
+			}
+		},
+		{
+			iddiv:"zoomproximo",
+			tipo:"dinamico",
+			dica:"",
+			titulo:"",
+			funcaoonclick:function(){
+				i3GEO.navega.extensaoProximo();
+			}
+		},
+		{
 			//Ativa o bot&atilde;o que realiza a opera&ccedil;&atilde;o de deslocamento (pan).
 			//ao fazer o pan e motrada uma marca no centro do mapa, veja em
 			//i3GEO.navega.marcaCentroDoMapa

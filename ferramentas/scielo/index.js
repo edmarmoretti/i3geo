@@ -44,16 +44,16 @@ function listaartigos(retorno)
 {
 	$link = "http://www.scielo.br/scielo.php?script=sci_abstract&pid=";
 	if(retorno.data == "")
-	{$i("resultadoscielo").innerHTML = "N&atilde;o foi poss&iacute;vel acessar os dados";return}
-	var res = retorno.data.scielo
-	var ins = "<span style=color:red>Navegue pelo mapa para ver o resultado!</span><br><br>"
+	{$i("resultadoscielo").innerHTML = "N&atilde;o foi poss&iacute;vel acessar os dados";return;}
+	var res = retorno.data.scielo;
+	var ins = "<span style=color:red>Navegue pelo mapa para ver o resultado!</span><br><br>";
 	if (res.length == 0)
 	{ins += "<br><span style=color:red>Nada encontrado nessa regi&atilde;o!</span><br><br>";}
 	else
 	{
-		for (i=0;i<res.length;i++)
+		for (var i=0;i<res.length;i++)
 		{
-			ins += "<br><a href='"+$link+res[i].codigo+"' target=blank >"+res[i].titulo+"</a><br><br>"
+			ins += "<br><a href='"+$link+res[i].codigo+"' target=blank >"+res[i].titulo+"</a><br><br>";
 		}
 	}
 	$i("resultadoscielo").innerHTML = ins;

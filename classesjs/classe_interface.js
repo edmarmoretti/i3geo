@@ -1308,6 +1308,8 @@ i3GEO.Interface = {
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);
 				i3GEO.eventos.cliquePerm.status = false;
+				//guarda a extensao geografica atual
+				i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
 			});
 			i3geoOL.events.register("mousemove", i3geoOL, function(e){
 				if(modoAtual === "move"){
@@ -1808,12 +1810,15 @@ i3GEO.Interface = {
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);
 				i3GEO.eventos.cliquePerm.status = false;
+				i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
 			});
 			google.maps.event.addListener(i3GeoMap, "tilesloaded", function() {
-				if($i("i3GEOprogressoDiv")){
-					$i("i3GEOprogressoDiv").style.display = "none";
-				}
+				//if($i("i3GEOprogressoDiv")){
+				//	$i("i3GEOprogressoDiv").style.display = "none";
+				//}
 				i3GEO.Interface.googlemaps.recalcPar();
+				//guarda a extensao geografica atual
+				i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
 			});
 			google.maps.event.addListener(i3GeoMap, "bounds_changed", function() {
 				var xy;
@@ -1826,9 +1831,9 @@ i3GEO.Interface = {
 				//
 				xy = i3GEO.navega.centroDoMapa();
 				i3GEO.coordenadas.mostraCoordenadas(false,"",xy[0],xy[1]);
-				if($i("i3GEOprogressoDiv")){
-					$i("i3GEOprogressoDiv").style.display = "block";
-				}
+				//if($i("i3GEOprogressoDiv")){
+				//	$i("i3GEOprogressoDiv").style.display = "block";
+				//}
 			});
 			google.maps.event.addListener(i3GeoMap, "mousemove", function(ponto) {
 				var teladms,tela,
@@ -2392,6 +2397,8 @@ i3GEO.Interface = {
 			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomli = false;
 			i3GEO.barraDeBotoes.INCLUIBOTAO.pan = false;
 			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomtot = false;
+			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomproximo = false;
+			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomanterior = false;
 			i3GEO.Interface.IDMAPA = "i3GeoMap3d";
 			if(i3GEO.arvoreDeCamadas.ATIVATEMA === "")
 			{i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.googleearth.ligaDesliga(this)";}
@@ -2532,6 +2539,8 @@ i3GEO.Interface = {
 				function(e){
 					i3GEO.Interface.googleearth.recalcPar();
 					i3GEO.eventos.cliquePerm.status = false;
+					//guarda a extensao geografica atual
+					i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
 				}
 			);
 			google.earth.addEventListener(

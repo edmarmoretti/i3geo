@@ -283,7 +283,6 @@ i3GEOF.analisaGeometrias = {
 				temp.style.cursor="pointer";
 			}
 		}
-		var i = $i("i3GEOF.analisaGeometrias_c").style;
 		i3GEO.barraDeBotoes.ativaIcone("selecao");
 	},
 	/*
