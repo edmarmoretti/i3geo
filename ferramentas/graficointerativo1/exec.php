@@ -21,6 +21,10 @@ Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 		{$tipo = "nenhum";}
 		if(!isset($ordenax))
 		{$ordenax = "nao";}
+		$itemvalores = explode(",",$itemvalores);
+		if(count($itemvalores) == 1){
+			$itemvalores = $itemvalores[0];
+		}
 		$retorno = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,false,$ext,true,$ordenax);
 	break;
 }

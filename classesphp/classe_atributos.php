@@ -2290,6 +2290,7 @@ class Atributos
 						$resultado[] = $shape->values[$item];
 					}
 					else{
+						//var_dump($itens);exit;
 						foreach ($itens as $it){
 							$val = $shape->values[$it];
 							if($convC == true){

@@ -377,11 +377,10 @@ function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexter
 function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,$ext="",$incluicores=true,$ordenax="nao")
 {
 	global $interface;
-	//pega os valores
-	//error_reporting(0);
+	//prepara o mapfile
+	//
 	$map = ms_newMapObj($map_file);
-	if($interface == "googlemaps")
-	{
+	if($interface == "googlemaps"){
 		$projMapa = $map->getProjection();
 		$map->setProjection("init=epsg:4618,a=6378137,b=6378137");
 	}
@@ -391,57 +390,70 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 	}
 	$layer = $map->getLayerByName($tema);
+	//verifica se tem selecao
 	$selecionados = carregaquery2($map_file,$layer,$map);
 	if ($exclui == ""){$exclui = "nulo";}
-	$valores = pegaValoresM($map,$layer,array($itemclasses,$itemvalores),$exclui,$selecionados);
-	$dados = agrupaValores($valores,0,1,$tipo);
-	foreach($valores as $valor){
-		$cores[$valor[0]] = $valor["cores"];
-	}
-	//calcula os parametros para o grafico
-	$nval = count($dados);
-	$max = max($dados);
-	$soma = array_sum($dados);
-	$tempm = array_keys($dados);
-	$tempval = array();
-	$nnval[] = "n;x";
-	if ($tipo != "xy")
-	{
-		for ($i=0;$i < $nval; ++$i)
-		{
-			if ($dados[$tempm[$i]] > 0)
-			{
-				$pp = ($dados[$tempm[$i]] * 100) / $soma;
-				if ($percentual == "TRUE")
-				{
-
-					$temp = "'".$tempm[$i]." (".round($pp,0)."%)';".$dados[$tempm[$i]];
-					if($incluicores == true)
-					{$temp = $temp.";".$cores[$tempm[$i]];}
+	//pega os valores
+	//$itemvalores pode ser um array de intens
+	$nnval = array();
+	if(!is_array($itemvalores)){
+		$valores = pegaValoresM($map,$layer,array($itemclasses,$itemvalores),$exclui,$selecionados);
+		//agrupa se for o caso
+		$dados = agrupaValores($valores,0,1,$tipo);
+		foreach($valores as $valor){
+			$cores[$valor[0]] = $valor["cores"];
+		}
+		//calcula os parametros para o grafico
+		$nval = count($dados);
+		$max = max($dados);
+		$soma = array_sum($dados);
+		$tempm = array_keys($dados);
+		$tempval = array();
+		$nnval[] = "n;x";
+		if ($tipo != "xy"){
+			for ($i=0;$i < $nval; ++$i){
+				if ($dados[$tempm[$i]] > 0){
+					$pp = ($dados[$tempm[$i]] * 100) / $soma;
+					if ($percentual == "TRUE"){
+						$temp = "'".$tempm[$i]." (".round($pp,0)."%)';".$dados[$tempm[$i]];
+						if($incluicores == true){
+							$temp = $temp.";".$cores[$tempm[$i]];
+						}
+					}
+					else{
+						$temp = "'".$tempm[$i]."';".$dados[$tempm[$i]];
+						if($incluicores == true){
+							$temp = $temp.";".$cores[$tempm[$i]];
+						}
+					}
+					$tempval[] = $temp;
 				}
-				else
-				{
-					$temp = "'".$tempm[$i]."';".$dados[$tempm[$i]];
-					if($incluicores == true)
-					{$temp = $temp.";".$cores[$tempm[$i]];}
+			}
+		}
+		else{
+			foreach ($valores as $v){
+				$temp = $v[0].";".$v[1];
+				if($incluicores == true){
+					$temp = $temp.";".$cores[$v[0]];
 				}
 				$tempval[] = $temp;
 			}
 		}
-	}
-	else
-	{
-		foreach ($valores as $v)
-		{
-			$temp = $v[0].";".$v[1];
-			if($incluicores == true)
-			{$temp = $temp.";".$cores[$v[0]];}
-			$tempval[] = $temp;
+		if($ordenax == "sim"){
+			sort($tempval);
 		}
+		$nnval = array_merge($nnval,$tempval);
 	}
-	if($ordenax == "sim")
-	{sort($tempval);}
-	$nnval = array_merge($nnval,$tempval);
+	else{
+		$colunas = array_merge(array($itemclasses),$itemvalores);
+		$valores = pegaValoresM($map,$layer,$colunas,$exclui,$selecionados);
+		$nval = count($dados);
+		$nnval[] = implode(";",$colunas);
+		foreach($valores as $valor){
+			$nnval[] = implode(";",$valor);
+		}
+		$max = "";
+	}
 	return array("dados"=>$nnval,"ndados"=>$nval,"max"=>$max);
 }
 function dadosLinhaDoTempo($map_file,$tema,$ext="")
@@ -654,8 +666,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 
 	$indicesel = array();
 	//pega os valores dos indices dos elementos selecionados para comparacao posterior
-	if ($selecionados == "sim")
-	{
+	if ($selecionados == "sim"){
 		$sopen = $layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $layer->getNumresults();
@@ -668,15 +679,12 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 	}
 	$valores = array();
 	$nclasses = $layer->numclasses;
-	if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
-	{
+	if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS){
 		//$layer->draw();
 		$sopen = $layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $layer->getNumresults();
-
-		for ($i=0;$i<$res_count;++$i)
-		{
+		for ($i=0;$i<$res_count;++$i){
 			if($versao == 6){
 				$shape = $layer->getShape($layer->getResult($i));
 				$shp_index = $shape->index;
@@ -690,40 +698,42 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 			{continue;}
 			$considera = "sim";
 			//verifica se no registro deve ser considerado
-			if ($exclui != "nulo")
-			{
+			if ($exclui != "nulo"){
 				foreach ($itens as $item)
 				{if($shape->values[$item] == $exclui){$considera = "nao";}}
 			}
 			//pega os valores
 			$v = array();
-			if ($considera == "sim")
-			{
+			if ($considera == "sim"){
+				//pega os valores dos itens do registro
 				foreach ($itens as $item){
 					if($chaves == false)
 					{$v[] = $shape->values[$item];}
 					else
 					{$v[$item] = $shape->values[$item];}
 				}
+				//pega o centroide
 				if($centroide == true){
 					$c = $shape->getCentroid();
-					if (($prjTema != "") && ($prjMapa != $prjTema))
-					{
+					if (($prjTema != "") && ($prjMapa != $prjTema)){
 						$projOutObj = ms_newprojectionobj($prjTema);
 						$projInObj = ms_newprojectionobj($prjMapa);
 						$c->project($projInObj, $projOutObj);
 					}
 					$v["centroide"] = "POINT(".$c->x." ".$c->y.")";
 				}
+				//pega a cor da classe onde cai o registro
 				if($nclasses > 0){
 					$classe = $layer->getclass($layer->getClassIndex($shape));
 					$cor = $classe->getstyle(0)->color;
 					$v["cores"] = $cor->red." ".$cor->green." ".$cor->blue;
 				}
-				if (count($v) == 1)
-				{$valores[] = $v[0];}
-				else
-				{$valores[] = $v;}
+				if (count($v) == 1){
+					$valores[] = $v[0];
+				}
+				else{
+					$valores[] = $v;
+				}
 			}
 		}
 		$layer->close();
@@ -754,12 +764,10 @@ Retorno:
 function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
 {
 	$valores = null;
-	foreach ($lista as $linha)
-	{
+	foreach ($lista as $linha){
 		$c = $linha[$indiceChave];
 		$v = $linha[$indiceValor];
-		if ($tipo == "conta")
-		{
+		if ($tipo == "conta"){
 			if(@$valores[$c])
 			$valores[$c] = $valores[$c] + 1;
 			else
@@ -767,18 +775,15 @@ function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
 		}
 		if (($tipo == "soma"))
 		{
-			if (($v != "") && (is_numeric($v)))
-			{
+			if (($v != "") && (is_numeric($v))){
 				if(@$valores[$c])
 				$valores[$c] = $valores[$c] + $v;
 				else
 				$valores[$c] = $v;
 			}
 		}
-		if ($tipo == "media")
-		{
-			if (($v != "") && (is_numeric($v)))
-			{
+		if ($tipo == "media"){
+			if (($v != "") && (is_numeric($v))){
 				if(@$soma[$c])
 				$soma[$c] = $soma[$c] + $v;
 				else
@@ -790,8 +795,7 @@ function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
 				$conta[$c] = 1;
 			}
 		}
-		if ($tipo == "nenhum")
-		{
+		if ($tipo == "nenhum"){
 			//if (($v != "") && (is_numeric($v)))
 			//{
 				$valoresn[] = $v;
@@ -799,11 +803,9 @@ function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
 			$valores = $valoresn;
 		}
 	}
-	if ($tipo == "media")
-	{
+	if ($tipo == "media"){
 		$chaves = array_keys($conta);
-		foreach ($chaves as $c)
-		{
+		foreach ($chaves as $c){
 			$valores[$c] = $soma[$c] / $conta[$c];
 		}
 	}

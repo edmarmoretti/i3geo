@@ -372,6 +372,7 @@ class Metaestat{
 			//
 			//prepara os alias das colunas
 			//
+			$colunas = array_unique($colunas);
 			$alias = $colunas;
 			$n = count($colunas);
 			for($i=0;$i<$n;$i++){
@@ -541,7 +542,7 @@ class Metaestat{
 			//echo $sqlf;exit;
 			if(!empty($filtro)){
 				$sqlf = str_replace("__filtro__"," AND ".$filtro." /*FA*//*FA*/ /*FAT*//*FAT*/",$sqlf);
-				$sql["titulo"] .= ", ".$filtro;
+				$sql["titulo"] .= " - ".$filtro;
 			}
 			else{
 				$sqlf = str_replace("__filtro__"," /*FA*//*FA*/ /*FAT*//*FAT*/",$sqlf);
@@ -560,6 +561,9 @@ class Metaestat{
 			else{
 				$titulolayer = mb_convert_encoding($sql["titulo"],"ISO-8859-1",mb_detect_encoding($sql["titulo"]));
 			}
+			//necessario para evitar problemas com ITENSDESC
+			$titulolayer = str_replace(","," ",$titulolayer);
+			$titulolayer = str_replace("=",": ",$titulolayer);
 			//pega os parametros caso seja um mapfile para WMS-time
 			if($suportaWMST == true){
 				$sqlMinMax = "select min(dimtempo) as min,max(dimtempo) as max from(".$sql["sql"].") as x";
@@ -920,7 +924,7 @@ class Metaestat{
 			$sqlf .= " limit ".$limite;
 		}
 		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
-		
+
 		if(!empty($metaVariavel["codigo_estat_conexao"])){
 			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
 			$dbhold = $this->dbh;

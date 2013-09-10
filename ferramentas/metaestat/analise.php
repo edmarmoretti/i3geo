@@ -690,14 +690,14 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome){
 		$cwhere[] = "tabela0.".$colunasIdentificador[0]."::text = "."tabela".$i.".".$colunasIdentificador[$i]."::text";
 	}
 	$colunasDados = array();
-	$itens = array($gid);
-	$itensdesc = array("gid");
+	$itens = array($gid,"regiao");
+	$itensdesc = array("gid","Regiao");
 	for($i=0;$i<$n;$i++){
-		$colunasDados[] = "tabela".$i.".".$colunasValor[$i]." as valorTema".$i;
-		$itens[] = "valorTema".$i;
+		$colunasDados[] = "tabela".$i.".".$colunasValor[$i]." as valortema".$i;
+		$itens[] = "valortema".$i;
 		$itensdesc[] = $nomesLayers[$i];
 	}
-	$sqlfinal = "SELECT tabela0.".$gid.",tabela0.".$regiao["colunageo"]." as the_geom,".implode(",",$colunasDados)." from ".implode(",",$sqls)." WHERE ";
+	$sqlfinal = "SELECT tabela0.".$gid.",tabela0.".$regiao["colunanomeregiao"]." as regiao,tabela0.".$regiao["colunageo"]." as the_geom,".implode(",",$colunasDados)." from ".implode(",",$sqls)." WHERE ";
 	$sqlfinal .= implode($cwhere," AND ");
 	$sqlfinal = str_replace("/*FA*/","",$sqlfinal);
 	$sqlfinal = str_replace("/*FAT*/","",$sqlfinal);
@@ -713,7 +713,6 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome){
     $nlayer->setmetadata("nomeoriginal","");
     $nlayer->setmetadata("ITENS",implode(",",$itens));
     $nlayer->setmetadata("ITENSDESC",implode(",",$itensdesc));
-	
 	$nclass = $nlayer->numclasses;
 	for($i=1;$i<$nclass;$i++){
 		$nlayer->getclass($i)->set("status",MS_DELETE);

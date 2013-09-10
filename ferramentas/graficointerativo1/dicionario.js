@@ -85,7 +85,7 @@ i3GEOF.graficointerativo1.dicionario = {
 			it:""
 		}],
 		15: [{
-			pt:"Item com os valores ou eixo Y",
+			pt:"Item(ns) com os valores ou eixo Y",
 			en:"",
 			es:"",
 			it:""
@@ -277,19 +277,19 @@ i3GEOF.graficointerativo1.dicionario = {
 			it:""
 		}],
 		47: [{
-			pt:"",
+			pt:"Atualiza o gr&aacute;fico ao navegar pelo mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
 		48: [{
-			pt:"",
+			pt:"Utiliza barras divididas entre os valores (stacked)",
 			en:"",
 			es:"",
 			it:""
 		}],
 		49: [{
-			pt:"",
+			pt:"As linhas  de dados ficam nas colunas",
 			en:"",
 			es:"",
 			it:""
