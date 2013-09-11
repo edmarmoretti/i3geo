@@ -60,6 +60,10 @@ i3GEOF.locregiao = {
 	 */
 	ATIVAFILTRO: false,
 	/**
+	 * Valor que sera adicionado as coordeandas que definem o zoom
+	 */
+	FATORZOOM: 0.05,
+	/**
 	 * Ativa/desativa o indicador de aguarde
 	 */
 	aguarde: function(obj){
@@ -118,7 +122,7 @@ i3GEOF.locregiao = {
 			$i("i3geoLocregiaoBotoesFiltro").style.display = "block";
 		}
 	},
-	/**
+	/**FATORZOOM
 	 * Carrega o dicionario com a traducao
 	 * Executa i3GEOF.locregiao.iniciaJanelaFlutuante();
 	 */
@@ -195,11 +199,17 @@ i3GEOF.locregiao = {
 	 * @param string contendo a extensao geografica. Essa string e composta, sendo necessario converter em array e obter o segundo valor
 	 */
 	zoom: function(valorregiaopai){
-		var temp = valorregiaopai.split(";");
+		var temp = valorregiaopai.split(";"),
+			retorno = temp[0];
 		if(temp.length > 1 && temp[1] != ""){
-			i3GEO.navega.zoomExt("","","",temp[1]);
+			temp = temp[1].split(" ");
+			temp[0] = temp[0]*1 - i3GEOF.locregiao.FATORZOOM;
+			temp[1] = temp[1]*1 - i3GEOF.locregiao.FATORZOOM;
+			temp[2] = temp[2]*1 + i3GEOF.locregiao.FATORZOOM;
+			temp[3] = temp[3]*1 + i3GEOF.locregiao.FATORZOOM;
+			i3GEO.navega.zoomExt("","","",temp.join(" "));
 		}
-		return temp[0];
+		return retorno;
 	},
 	/**
 	 * Executado quando o usuario escolhe uma regiao
