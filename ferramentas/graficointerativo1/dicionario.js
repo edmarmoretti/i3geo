@@ -67,7 +67,7 @@ i3GEOF.graficointerativo1.dicionario = {
 			it:""
 		}],
 		12: [{
-			pt:"Escolha os dados que compor&atilde;o o gr&aacute;fico",
+			pt:"Configura&ccedil;&atilde;o do gr&aacute;fico",
 			en:"",
 			es:"",
 			it:""
@@ -128,7 +128,8 @@ i3GEOF.graficointerativo1.dicionario = {
 		}],
 		22: [{
 			pt:"Utiliza valores acumulados",
-			en:"",
+			en:"",titleFont:  'bold 14px sans-serif',
+								titlePosition: "top",
 			es:"",
 			it:""
 		}],
@@ -193,7 +194,7 @@ i3GEOF.graficointerativo1.dicionario = {
 			it:""
 		}],
 		33: [{
-			pt:"Digite o t&iacute;tulo",
+			pt:"Digite o t&iacute;tulo para legenda",
 			en:"",
 			es:"",
 			it:""
@@ -295,7 +296,19 @@ i3GEOF.graficointerativo1.dicionario = {
 			it:""
 		}],
 		50: [{
-			pt:"",
+			pt:"T&iacute;tulo",
+			en:"",
+			es:"",
+			it:""
+		}],
+		51: [{
+			pt:"T&iacute;tulo do eixo X",
+			en:"",
+			es:"",
+			it:""
+		}],
+		52: [{
+			pt:"T&iacute;tulo do eixo Y",
 			en:"",
 			es:"",
 			it:""
