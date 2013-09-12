@@ -906,8 +906,8 @@ class Metaestat{
 		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor);
 		$sqlf = $sql["sqlmapserver"];
 		//remove marcadores geo
-		$sqlf = explode("/*SE*/",$sqlf)[1];
-		$sqlf = explode("/*SG*/",$sqlf);
+		$sqlf = explode("/*SE*/",$sqlf);
+		$sqlf = explode("/*SG*/",$sqlf[1]);
 		$sqlf = $sqlf[0]." ".$sqlf[2];
 		$sqlf = str_replace("__filtro__"," AND ".$filtro,$sqlf);
 		/*
