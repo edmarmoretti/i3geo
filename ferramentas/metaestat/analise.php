@@ -718,6 +718,9 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome){
 		$nlayer->getclass($i)->set("status",MS_DELETE);
 	}
 	$c = $nlayer->getclass(0);
+	$s = $c->getstyle(0);
+	$sc = $s->outlinecolor;
+	$sc->setrgb(130,130,130);
 	$c->set("name"," ");
 	$c->setexpression("");
 	$nlayer->set("status",MS_DEFAULT);

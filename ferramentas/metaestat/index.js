@@ -195,7 +195,7 @@ i3GEOF.metaestat = {
 				icone: "imagens/gisicons/label.png"
 			},{
 				titulo: "Junta dados das camadas",
-				onclick: "i3GEOF.metaestat.analise.juntaMedidasVariaveis()",
+				onclick: "i3GEOF.metaestat.analise.juntaMedidasVariaveis.inicia()",
 				icone: "imagens/gisicons/layer-group-add.png"
 			}
 		],
@@ -329,13 +329,17 @@ i3GEOF.metaestat = {
 		/**
 		 * Junta camadas em uma nova, contendo as colunas das medidas
 		 */
-		juntaMedidasVariaveis: function(){
-			if($i("aguardeAnalise_c") && $i("aguardeAnalise_c").style.visibility == "visible"){
-				return;
-			};
-			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
-			"&funcao=listaLayersAgrupados",
-			temp = function(retorno){
+		juntaMedidasVariaveis: {
+			inicia: function(){
+				if($i("aguardeAnalise_c") && $i("aguardeAnalise_c").style.visibility == "visible"){
+					return;
+				};
+				var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
+				"&funcao=listaLayersAgrupados";
+				i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
+				i3GEO.util.ajaxGet(p,i3GEOF.metaestat.analise.juntaMedidasVariaveis.janelaFlutuante);
+			},
+			janelaFlutuante: function(retorno){			
 				i3GEO.janela.fechaAguarde("aguardeAnalise");
 				if($i("i3GEOF.junta_corpo")){
 					return;
@@ -347,8 +351,10 @@ i3GEOF.metaestat = {
 					};
 					i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
 
-					var atualiza,p,lista = [],i,ics = $i("i3GEOF.junta_corpo").getElementsByTagName("input");
-					n = ics.length;
+					var atualiza,p,i,
+						lista = [],
+						ics = $i("i3GEOF.junta_corpo").getElementsByTagName("input"),
+						n = ics.length;
 					for(i=0;i<n;i++){
 						if(ics[i].type == "checkbox" && ics[i].checked === true){
 							lista.push(ics[i].value);
@@ -405,9 +411,7 @@ i3GEOF.metaestat = {
 					"i3geojuntaAplica",
 					{onclick:{fn: aplica}}
 				);
-			};
-			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
-			i3GEO.util.ajaxGet(p,temp);
+			}
 		},
 		/**
 		 * Obtem os parametros necessarios ao funcionamento de i3GEOF.metaestat.analise.toponimia()

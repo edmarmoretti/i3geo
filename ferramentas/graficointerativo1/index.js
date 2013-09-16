@@ -1036,7 +1036,7 @@ i3GEOF.graficointerativo1 = {
 						legendaX);
 				break;
 			default:
-				alert($trad(4, i3GEOF.graficointerativo1.dicionario));
+				//alert($trad(4, i3GEOF.graficointerativo1.dicionario));
 			}
 		},
 		/*
