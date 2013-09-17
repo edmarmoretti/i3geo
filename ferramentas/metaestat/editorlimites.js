@@ -274,7 +274,7 @@ i3GEOF.editorlimites = {
 			lista = [],
 			n = i3GEOF.editorlimites.shapes.length,
 			tipo = "",
-			ps,nps,j,p = {},i;
+			ps,nps,j,p,i,r = {};
 
 		for(i=0;i<n;i++){
 			coordenadas = [];
@@ -291,8 +291,8 @@ i3GEOF.editorlimites = {
 				lista.push(coordenadas);
 			}
 		}
-		p = {"tipo":tipo,"coordenadas":lista};
-		return p;
+		r = {"tipo":tipo,"coordenadas":lista};
+		return r;
 	},
 	/**
 	 * Converte um objeto shape em uma string WKT

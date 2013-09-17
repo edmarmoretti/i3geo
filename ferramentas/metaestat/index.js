@@ -339,41 +339,12 @@ i3GEOF.metaestat = {
 				i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
 				i3GEO.util.ajaxGet(p,i3GEOF.metaestat.analise.juntaMedidasVariaveis.janelaFlutuante);
 			},
-			janelaFlutuante: function(retorno){			
+			janelaFlutuante: function(retorno){
 				i3GEO.janela.fechaAguarde("aguardeAnalise");
 				if($i("i3GEOF.junta_corpo")){
 					return;
 				}
-				var aplica,minimiza,cabecalho,titulo,ins,n,i,lista = "<table class=lista4 >";
-				aplica = function(){
-					if($i("aguardeAnalise_c") && $i("aguardeAnalise_c").style.visibility == "visible"){
-						return;
-					};
-					i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
-
-					var atualiza,p,i,
-						lista = [],
-						ics = $i("i3GEOF.junta_corpo").getElementsByTagName("input"),
-						n = ics.length;
-					for(i=0;i<n;i++){
-						if(ics[i].type == "checkbox" && ics[i].checked === true){
-							lista.push(ics[i].value);
-						}
-					}
-					if(lista.length == 0){
-						alert("Escolha uma camada");
-						return;
-					}
-					i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
-					p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
-						"&funcao=juntaMedidasVariaveis&layerNames="+lista.join(",")+"&nome="+$i("i3GEOFjuntaNovoNome").value;
-					atualiza = function(){
-						i3GEO.janela.fechaAguarde("aguardeAnalise");
-						i3GEO.atualiza();
-						i3GEOF.metaestat.analise.comboCamadas();
-					};
-					i3GEO.util.ajaxGet(p,atualiza);
-				};
+				var minimiza,cabecalho,titulo,ins,n,i,lista = "<table class=lista4 >";
 				cabecalho = function(){
 				};
 				minimiza = function(){
@@ -405,12 +376,86 @@ i3GEOF.metaestat = {
 				lista +
 				'<br><p class=paragrafo >Nome da nova camada</p>' +
 				$inputText("","","i3GEOFjuntaNovoNome","",30,'') +
-				'<br><br><input id=i3geojuntaAplica type="button" value="Aplicar" />';
+				'<br><br><input id=i3geojuntaAplica type="button" value="Aplicar" />' +
+				'<div id=i3GEOFjuntaColunasCalculadas >' +
+				'<br><p class=paragrafo ><b>Colunas calculadas (opcional)</b></p></div>' +
+				'<div id=i3GEOFjuntaColunasCalculadasMensagemAjuda ></div>' ;
 				$i("i3GEOF.junta_corpo").innerHTML = ins;
 				new YAHOO.widget.Button(
 					"i3geojuntaAplica",
-					{onclick:{fn: aplica}}
+					{onclick:{fn: i3GEOF.metaestat.analise.juntaMedidasVariaveis.aplica}}
 				);
+				i3GEOF.metaestat.analise.juntaMedidasVariaveis.noNovoCalculo();
+				//ajuda para o calculo
+				i3GEO.util.mensagemAjuda("i3GEOFjuntaColunasCalculadasMensagemAjuda",
+						"As colunas calculadas s&atilde;o f&oacute;rmulas que utilizam as colunas que forem juntadas e que ser&atilde;o acrescentadas"+
+						"&agrave; nova camada. Cada uma dessas colunas receber&aacute; um nome sequencial, por exemplo <i>valortema0,valortema1,"+
+						"valortema2...</i><br>As colunas calculadas podem utilizar essas colunas como entrada em f&oacute;rmulas."+
+						"Cada f&oacute;rmula ir&aacute; gerar uma nova coluna na tabela e deve utilizar a sintaxe SQL (<a href='http://www.postgresql.org/docs/9.3/static/functions-math.html' target=_blank >SQL no Postgres</a>)"+
+						"<br>Exemplos de uso:<br>" +
+						"coluna de nome <b>soma</b><br>" +
+						"valortema0 + valortema1 <br>" +
+						"coluna de nome <b>taxa</b><br>" +
+						"(valortema0 * 100) / valortema1"
+				);
+			},
+			noNovoCalculo: function(){
+				var no = document.createElement("div");
+				no.style.margin = "10px";
+				no.style.padding = "5px";
+				no.style.backgroundColor = "beige";
+				no.style.width = "210px";
+				no.innerHTML = '<p class=paragrafo >Nome (apenas letras e n&uacute;meros)<br>' +
+					'<input type=text value="" style=width:205px />' +
+					'<br>F&oacute;rmula (padr&atilde;o sql)<br>' +
+					'<textarea style=width:205px ></textarea></p>';
+				$i("i3GEOFjuntaColunasCalculadas").appendChild(no);
+			},
+			pegaCalculos: function(){
+				var div = $i("i3GEOFjuntaColunasCalculadas"),
+					nomes = div.getElementsByTagName("input"),
+					formulas = div.getElementsByTagName("textarea"),
+					n = nomes.length,
+					parnomes = [],
+					parformulas = [],
+					i;
+				for(i=0;i<n;i++){
+					if(nomes[i].value != "" && formulas[i].value != ""){
+						parnomes.push(nomes[i].value);
+						parformulas.push(formulas[i].value);
+					}
+				}
+				return "&colunascalc="+parnomes.join(",")+"&formulas="+parformulas.join(",");
+			},
+			aplica: function(){
+				if($i("aguardeAnalise_c") && $i("aguardeAnalise_c").style.visibility == "visible"){
+					return;
+				};
+				i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
+				var ps,atualiza,p,i,
+					lista = [],
+					ics = $i("i3GEOF.junta_corpo").getElementsByTagName("input"),
+					n = ics.length;
+				for(i=0;i<n;i++){
+					if(ics[i].type == "checkbox" && ics[i].checked === true){
+						lista.push(ics[i].value);
+					}
+				}
+				if(lista.length == 0){
+					alert("Escolha uma camada");
+					return;
+				}
+				i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
+				p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
+					"&funcao=juntaMedidasVariaveis&layerNames="+lista.join(",")+"&nome="+$i("i3GEOFjuntaNovoNome").value;
+				ps = i3GEOF.metaestat.analise.juntaMedidasVariaveis.pegaCalculos();
+				atualiza = function(){
+					i3GEO.janela.fechaAguarde("aguardeAnalise");
+					i3GEO.atualiza();
+					i3GEOF.metaestat.analise.comboCamadas();
+				};
+				//i3GEO.util.ajaxGet(p,atualiza);
+				cpJSON.call(p,"foo",atualiza,ps);
 			}
 		},
 		/**
@@ -1565,7 +1610,7 @@ i3GEOF.metaestat = {
 					$i("EcolunaDia").value = "";
 					$i("EcolunaHora").value = "";
 				}
-			}
+			};
 			//impede a alteracao do filtro
 			$i("Efiltro").disabled = "disabled";
 			//altera a tabela quando escolher

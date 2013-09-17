@@ -125,7 +125,7 @@ switch (strtoupper($funcao)){
 		$retorno = listaLayersAgrupados($map_file);
 	break;
 	case "JUNTAMEDIDASVARIAVEIS":
-		$retorno = juntaMedidasVariaveis($map_file,$layerNames,$nome);
+		$retorno = juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formulas);
 	break;
 	case "ADICIONALIMITEREGIAO":
 		if(empty($outlinecolor)){
@@ -650,7 +650,7 @@ function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao
  * @return Nome do layer criado
  *
  */
-function juntaMedidasVariaveis($map_file,$layerNames,$nome){
+function juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formulas){
 	//o sql que faz acesso aos dados e marcado com /*SE*//*SE*/
 	$mapa = ms_newMapObj($map_file);
 	$layernames = explode(",",$layerNames);
@@ -692,12 +692,36 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome){
 	$colunasDados = array();
 	$itens = array($gid,"regiao");
 	$itensdesc = array("gid","Regiao");
+	$tabelaColuna = [];
 	for($i=0;$i<$n;$i++){
 		$colunasDados[] = "tabela".$i.".".$colunasValor[$i]." as valortema".$i;
+		$tabelaColuna[valortema.$i] = "tabela".$i.".".$colunasValor[$i];
 		$itens[] = "valortema".$i;
 		$itensdesc[] = $nomesLayers[$i];
 	}
-	$sqlfinal = "SELECT tabela0.".$gid.",tabela0.".$regiao["colunanomeregiao"]." as regiao,tabela0.".$regiao["colunageo"]." as the_geom,".implode(",",$colunasDados)." from ".implode(",",$sqls)." WHERE ";
+	//pega as colunas e as formulas adicionais
+	$colunascalc = explode(",",$colunascalc);
+	$formulas = explode(",",$formulas);
+	$nformulas = count($formulas);
+	$complemento = array();
+	for($i=0;$i<$nformulas;$i++){
+		$complemento[] = "(".$formulas[$i].") as ".$colunascalc[$i];
+	}
+	$complemento = implode(",",$complemento);
+	//substitui pelo nome correto das colunas
+	foreach(array_keys($tabelaColuna) as $k){
+		$complemento = str_replace($k,$tabelaColuna[$k],$complemento);
+	}
+	if($complemento != ""){
+		$complemento .= ",";
+		$itens = array_merge($itens,$colunascalc);
+		$itensdesc = array_merge($itensdesc,$colunascalc);
+		$complemento = str_ireplace("select","",$complemento);
+		$complemento = str_ireplace("update","",$complemento);
+		$complemento = str_ireplace("delete","",$complemento);
+	}
+	//echo $complemento;exit;
+	$sqlfinal = "SELECT $complemento tabela0.".$gid.",tabela0.".$regiao["colunanomeregiao"]." as regiao,tabela0.".$regiao["colunageo"]." as the_geom,".implode(",",$colunasDados)." from ".implode(",",$sqls)." WHERE ";
 	$sqlfinal .= implode($cwhere," AND ");
 	$sqlfinal = str_replace("/*FA*/","",$sqlfinal);
 	$sqlfinal = str_replace("/*FAT*/","",$sqlfinal);
@@ -708,11 +732,11 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome){
 	$nlayer->setmetadata("tema",$nome);
 	$nlayer->setmetadata("METAESTAT_DERIVADO","sim");
 	$nlayer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL","");
-    $nlayer->setmetadata("TIP","");
-    $nlayer->setmetadata("arquivotemaoriginal","");
-    $nlayer->setmetadata("nomeoriginal","");
-    $nlayer->setmetadata("ITENS",implode(",",$itens));
-    $nlayer->setmetadata("ITENSDESC",implode(",",$itensdesc));
+		$nlayer->setmetadata("TIP","");
+		$nlayer->setmetadata("arquivotemaoriginal","");
+		$nlayer->setmetadata("nomeoriginal","");
+		$nlayer->setmetadata("ITENS",implode(",",$itens));
+		$nlayer->setmetadata("ITENSDESC",implode(",",$itensdesc));
 	$nclass = $nlayer->numclasses;
 	for($i=1;$i<$nclass;$i++){
 		$nlayer->getclass($i)->set("status",MS_DELETE);
