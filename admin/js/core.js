@@ -77,8 +77,8 @@ function cabecalhoMetaestat(id,excluir){
 			{id:"conexao",titulo:"Conex&otilde;es",link:"estat_conexao.html"},
 			{id:"tipo_regiao",titulo:"Regi&otilde;es",link:"estat_tipo_regiao.html"},
 			{id:"fonteinfo",titulo:"Fonte",link:"estat_fonteinfo.html"},
-			{id:"editor",titulo:"Editor",link:"estat_editor.html"},
-			{id:"uploaddados",titulo:"Upload",link:"estat_uploaddados.html"},
+			{id:"editor",titulo:"Gerenciador BD/Upload",link:"estat_editor.html"},
+			//{id:"uploaddados",titulo:"Upload",link:"estat_uploaddados.html"},
 			{id:"mapa",titulo:"Publicador",link:"estat_mapa.html"},
 			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
 		];

@@ -587,8 +587,8 @@ i3GEOadmin.variaveis = {
 			//ins += "<br><br><br>";
 			//o input hidden recebe a cor da janela de selecao interativa e executa o preenchimento dos campos rgb
 
-			$i("editor_bd").innerHTML = ins+"<input type=hidden value='' id='inputEventoCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoCor\",\"E\")' />";
-			$i("editor_bd").innerHTML = ins+"<input type=hidden value='' id='inputEventoOutlineCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoOutlineCor\",\"Eo\")' />";
+			$i("editor_bd").innerHTML = ins+"<input type=hidden value='' id='inputEventoCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoCor\",\"E\")' />" +
+			"<input type=hidden value='' id='inputEventoOutlineCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoOutlineCor\",\"Eo\")' />";
 
 		},
 		preencheCores: function(id,prefixo){

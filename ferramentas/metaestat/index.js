@@ -327,6 +327,33 @@ i3GEOF.metaestat = {
 			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia","index.js","i3GEOF.metaestat.analise.abreToponimia()");
 		},
 		/**
+		 * Obtem os parametros necessarios ao funcionamento de i3GEOF.metaestat.analise.toponimia()
+		 * Abre a janela de opcoes de i3GEOF.toponimia.iniciaJanelaFlutuante()
+		 */
+		abreToponimia: function(){
+			if(typeof(i3GEOF.toponimia.dicionario) === 'undefined'){
+				i3GEO.util.scriptTag(
+					i3GEO.configura.locaplic+"/ferramentas/toponimia/dicionario.js",
+					"i3GEOF.metaestat.analise.janelaToponimia()",
+					"i3GEOF.toponimia.dicionario_script"
+				);
+			}
+			else{
+				i3GEOF.metaestat.analise.janelaToponimia();
+			}
+		},
+		janelaToponimia: function(){
+			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
+				"&funcao=pegaDadosTME&tema="+i3GEO.temaAtivo,
+				temp = function(retorno){
+					i3GEO.janela.fechaAguarde("aguardeAnalise");
+					i3GEOF.toponimia.ATIVAITEM = retorno.data.itemDados;
+					i3GEOF.toponimia.iniciaJanelaFlutuante();
+				};
+			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
+			i3GEO.util.ajaxGet(p,temp);			
+		},
+		/**
 		 * Junta camadas em uma nova, contendo as colunas das medidas
 		 */
 		juntaMedidasVariaveis: {
@@ -458,21 +485,7 @@ i3GEOF.metaestat = {
 				cpJSON.call(p,"foo",atualiza,ps);
 			}
 		},
-		/**
-		 * Obtem os parametros necessarios ao funcionamento de i3GEOF.metaestat.analise.toponimia()
-		 * Abre a janela de opcoes de i3GEOF.toponimia.iniciaJanelaFlutuante()
-		 */
-		abreToponimia: function(){
-			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
-				"&funcao=pegaDadosTME&tema="+i3GEO.temaAtivo,
-				temp = function(retorno){
-					i3GEO.janela.fechaAguarde("aguardeAnalise");
-					i3GEOF.toponimia.ATIVAITEM = retorno.data.itemDados;
-					i3GEOF.toponimia.iniciaJanelaFlutuante();
-				};
-			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
-			i3GEO.util.ajaxGet(p,temp);
-		},
+
 		/**
 		 * Ativa a ferramenta que permite a modificacao do tipo de representacao da camada
 		 * Executa i3GEOF.alterarep.iniciaJanelaFlutuante();
@@ -563,11 +576,6 @@ i3GEOF.metaestat = {
 		 * Executa i3GEO.tema.dialogo.tme() com a funcao i3GEOF.metaestat.analise.abreTme()
 		 */
 		ativaTme: function(){
-			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
-				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
-				return;
-			}
-			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
 			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tme()","tme","tme","index.js","i3GEOF.metaestat.analise.abreTme()");
 		},
 		/**
@@ -575,7 +583,23 @@ i3GEOF.metaestat = {
 		 * Executa i3GEOF.tme.iniciaJanelaFlutuante();
 		 */
 		abreTme: function(){
-			//i3GEOF.tme.ITEMNOMEREGIOES
+			if($i("i3geoCartoAnaliseCamadasCombo").value == ""){
+				i3GEO.janela.tempoMsg("Ative uma camada primeiro");
+				return;
+			}
+			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
+			if(typeof(i3GEOF.tme.dicionario) === 'undefined'){
+				i3GEO.util.scriptTag(
+					i3GEO.configura.locaplic+"/ferramentas/tme/dicionario.js",
+					"i3GEOF.metaestat.analise.janelaTme()",
+					"i3GEOF.tme.dicionario_script"
+				);
+			}
+			else{
+				i3GEOF.metaestat.analise.janelaTme();
+			}
+		},
+		janelaTme: function(){
 			var p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
 				"&funcao=pegaDadosTME&tema="+i3GEO.temaAtivo,
 				temp = function(retorno){
@@ -585,7 +609,7 @@ i3GEOF.metaestat = {
 					i3GEOF.tme.iniciaJanelaFlutuante();
 				};
 			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
-			i3GEO.util.ajaxGet(p,temp);
+			i3GEO.util.ajaxGet(p,temp);			
 		},
 		/**
 		 * Abre a ferramenta que mostra um relatorio com sumario estatistico dos dados
@@ -689,6 +713,19 @@ i3GEOF.metaestat = {
 				return;
 			}
 			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
+			
+			if(typeof(i3GEOF.legenda.dicionario) === 'undefined'){
+				i3GEO.util.scriptTag(
+					i3GEO.configura.locaplic+"/ferramentas/legenda/dicionario.js",
+					"i3GEOF.metaestat.analise.janelaEditorLegenda()",
+					"i3GEOF.legenda.dicionario_script"
+				);
+			}
+			else{
+				i3GEOF.metaestat.analise.janelaEditorLegenda();
+			}			
+		},
+		janelaEditorLegenda: function(){
 			i3GEOF.legenda.iniciaJanelaFlutuante();
 			i3GEO.guias.mostraGuiaFerramenta('i3GEOlegendaguia2','i3GEOlegendaguia');
 			//desmarca a opcao que considera apenas os elementos visiveis
@@ -699,7 +736,7 @@ i3GEOF.metaestat = {
 				$i("i3GEOFlegendaClassesOpcionais").style.display = "none";
 			}
 			var temp = $i("i3GEOF.legenda_corpo");
-			temp.getElementsByTagName("div")[0].style.display = "none";
+			temp.getElementsByTagName("div")[0].style.display = "none";		
 		},
 		/**
 		 * Ativa a ferramenta que permite editar os simbolos utilizados em uma classe da legenda
@@ -1873,7 +1910,7 @@ i3GEOF.metaestat = {
 			var ins = "<p class='paragrafo' >" + $trad(2,i3GEOF.metaestat.dicionario1) +
 			"<br><br><p><input id=i3GEOFmetaestatEditorBotaot01 type='button' value='"+$trad(3,i3GEOF.metaestat.dicionario1)+"' />" +
 			"&nbsp<input id=i3GEOFmetaestatEditorBotaot02 type='button' value='"+$trad(4,i3GEOF.metaestat.dicionario1)+"' />" +
-			"&nbsp<input id=i3GEOFmetaestatEditorBotaot03 type='button' value='Upload CSV' />";
+			"&nbsp<input id=i3GEOFmetaestatEditorBotaotUp type='button' value='Gerenciador BD/Upload' />";
 			i3GEO.util.proximoAnterior("","i3GEOF.metaestat.editor.t1()",ins,"i3GEOF.metaestat.editor.t0","i3GEOFmetaestatEditor");
 			new YAHOO.widget.Button(
 					"i3GEOFmetaestatEditorBotaot01",
@@ -1886,7 +1923,14 @@ i3GEOF.metaestat = {
 						window.open(i3GEO.configura.locaplic+"/ferramentas/metaestat/editorlimites.php");
 					}}}
 			);
-			i3GEOF.metaestat.editor.botaoUpload("i3GEOFmetaestatEditorBotaot03");
+			new YAHOO.widget.Button(
+					"i3GEOFmetaestatEditorBotaotUp",
+					{onclick:{fn: function(){
+						i3GEO.janela.tempoMsg($trad(15,i3GEOF.metaestat.dicionario1));
+						window.open(i3GEO.configura.locaplic+"/admin/html/estat_editor.html");
+					}}}
+			);
+			//i3GEOF.metaestat.editor.botaoUpload("i3GEOFmetaestatEditorBotaot03");
 		},
 		/**
 		 * Opcoes para escolha ou edicao/criacao de uma variavel

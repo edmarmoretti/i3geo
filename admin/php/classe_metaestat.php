@@ -341,7 +341,6 @@ class Metaestat{
 					$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
 				}
 
-				//$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
 				$colunas[] = $dados["colunavalor"];
 				$colunas[] = $dados["colunaidgeo"];
 				if(!empty($agruparpor)){
@@ -429,14 +428,6 @@ class Metaestat{
 			else{
 				$sqlgeo .= " FROM (SELECT * FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
 				$parametrosMedida = "";
-				/*
-				if(count($parametrosMedida) > 0){
-					$parametrosMedida = implode(",",$parametrosMedida).",";
-				}
-				else{
-					$parametrosMedida = "";
-				}
-				*/
 				//o campo deve ser convertido para data
 				if($suportaWMST == true){
 					$parametrosMedida = $this->listaParametroTempo2CampoData($id_medida_variavel)." as dimtempo,";
@@ -642,7 +633,9 @@ class Metaestat{
 					//var_dump($classe);exit;
 					$dados[] = '    CLASS';
 					$dados[] = '        NAME "'.mb_convert_encoding($classe["titulo"],"ISO-8859-1",mb_detect_encoding($classe["titulo"])).'"';
-					$dados[] = '        EXPRESSION '.$classe["expressao"];
+					if($classe["expressao"] != ""){
+						$dados[] = '        EXPRESSION '.$classe["expressao"];
+					}
 					$dados[] = '        STYLE';
 					$dados[] = '        	COLOR '.$classe["vermelho"].' '.$classe["verde"].' '.$classe["azul"];
 					if(!empty($classe["tamanho"])){
@@ -909,7 +902,12 @@ class Metaestat{
 		$sqlf = explode("/*SE*/",$sqlf);
 		$sqlf = explode("/*SG*/",$sqlf[1]);
 		$sqlf = $sqlf[0]." ".$sqlf[2];
-		$sqlf = str_replace("__filtro__"," AND ".$filtro,$sqlf);
+		if($filtro != ""){
+			$sqlf = str_replace("__filtro__"," AND ".$filtro,$sqlf);
+		}
+		else{
+			$sqlf = str_replace("__filtro__"," ",$sqlf);
+		}
 		/*
 		if($sql["filtro"] == true){
 			if(!empty($filtro)){

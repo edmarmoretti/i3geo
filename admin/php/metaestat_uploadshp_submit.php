@@ -126,7 +126,9 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	//encoding do banco de dados
 	$sql = "SELECT pg_encoding_to_char(encoding) FROM pg_database WHERE datname = '".$conexao["bancodedados"]."'";
 	$res = $dbh->query($sql,PDO::FETCH_ASSOC);
-	$encodingdb = $res->fetchAll()[0]["pg_encoding_to_char"];
+	$encodingdb = $res->fetchAll();
+	$encodingdb = $encodingdb[0];
+	$encodingdb = $encodingdb["pg_encoding_to_char"];
 	if($encodingdb == "UTF8"){
 		$encodingdb = "UTF-8";
 	}

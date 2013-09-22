@@ -355,11 +355,11 @@ switch (strtoupper($funcao))
 		if($codigo_tipo_periodo < 5 && $esquemadb == "i3geo_metaestat" && $colunaidgeo == "codigoregiao" && $tabela = "dados_medidas"){
 			$default = true;
 		}
-
 		if(empty($id_medida_variavel)){
 			//isso ira criar um novo registro
 			$id_medida_variavel = $m->alteraMedidaVariavel($codigo_variavel);
 			//o filtro e necessario para permitir a selecao dos registros apenas do que pertence a medida da variavel escolhida
+			//se a tabela nao for a default, o filtro nao se aplica
 			if($default == true && $filtro == ""){
 				$filtro = " id_medida_variavel = $id_medida_variavel ";
 			}
@@ -374,6 +374,9 @@ switch (strtoupper($funcao))
 			}
 			$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$colunaidunico,$filtro,$nomemedida);
 		}
+		if(!empty($colunaAno) || !empty($colunaMes) || !empty($colunaDia) || !empty($colunaHora)){
+			$default = true;
+		}
 		//adiciona os parametros de tempo conforme o tipo de periodo escolhido
 		//
 		//se os nomes das colunas com os parametros de tempo forem definidas
@@ -385,38 +388,38 @@ switch (strtoupper($funcao))
 			$id_pai = 0;
 			//anual
 			if($codigo_tipo_periodo >= 1){
-				if(empty($nomeAno)){
-					$nomeAno = "ano";
+				if(empty($colunaAno)){
+					$colunaAno = "ano";
 				}
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","",$nomeAno,$id_pai,1);
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","",$colunaAno,$id_pai,1);
 				$id_pai = $id_parametro_medida;
 			}
 			//mensal
 			if($codigo_tipo_periodo >= 2){
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				if(empty($nomeMes)){
-					$nomeMes = "mes";
+				if(empty($colunaMes)){
+					$colunaMes = "mes";
 				}
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","",$nomeMes,$id_pai,2);
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","",$colunaMes,$id_pai,2);
 				$id_pai = $id_parametro_medida;
 			}
 			//diario
 			if($codigo_tipo_periodo >= 3){
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				if(empty($nomeDia)){
-					$nomeDia = "dia";
+				if(empty($colunaDia)){
+					$colunaDia = "dia";
 				}
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","",$nomeDia,$id_pai,3);
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","",$colunaDia,$id_pai,3);
 				$id_pai = $id_parametro_medida;
 			}
 			//horario
 			if($codigo_tipo_periodo == 4){
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				if(empty($nomeHora)){
-					$nomeHora = "hora";
+				if(empty($colunaHora)){
+					$colunaHora = "hora";
 				}
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","",$nomeHora,$id_pai,4);
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","",$colunaHora,$id_pai,4);
 			}
 		}
 		retornaJSON($m->listaMedidaVariavel("",$id_medida_variavel));

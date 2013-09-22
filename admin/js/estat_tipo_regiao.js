@@ -264,8 +264,9 @@ function montaEditorAgregacoes(dados,id,recordid){
 		{ label: "Cancela", value: "CANCEL", checked: false }
 		]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-		YAHOO.admin.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { fixedcenter:true,close:false,width:"400px", height:"280px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal: true,fixedcenter:true,close:false,width:"400px", height:"280px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor2.render();
+		YAHOO.i3GEO.janela.manager.register(YAHOO.admin.container.panelEditor2);
 	}
 	YAHOO.admin.container.panelEditor2.show();
 	$i("editor_bd2").innerHTML = montaDivAgregacoes(dados);
