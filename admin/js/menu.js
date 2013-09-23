@@ -78,7 +78,11 @@ i3GEOadmin.menus = {
 		YAHOO.namespace("admin.container");
 		core_ativaPainelAjuda("ajuda","botaoAjuda");
 		YAHOO.namespace("menus");
-		core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu","i3GEOadmin.menus.obtem");
+		var temp = function(o){
+			i3GEOadmin.menus.obtem();
+			return;
+		};
+		core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu",temp);
 		i3GEOadmin.menus.obtem();
 	},
 	/*
@@ -103,6 +107,14 @@ i3GEOadmin.menus = {
 			};
 			//i3GEOadmin.menus.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.menus.defColunas(), myDataSource);
 			i3GEOadmin.menus.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.menus.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.menus.dataTable.subscribe('postRenderEvent',function(){
+					//abre o editor
+					if(i3GEOadmin.menus.dados[0].nome_menu == ""){
+						var rec = i3GEOadmin.menus.dataTable.getRecordSet().getRecord(0);
+						i3GEOadmin.menus.editor([i3GEOadmin.menus.dados[0]],i3GEOadmin.menus.dados[0].id_menu,rec.getId());
+					}
+				}
+			);
 			i3GEOadmin.menus.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),

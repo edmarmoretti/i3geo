@@ -1189,35 +1189,42 @@ nomeFuncao - nome da fun&ccedil;&atilde;o que ser&aacute; executada ao concluir 
 */
 function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 {
-	if(arguments.length == 1)
-	{idBotao = "adiciona";}
-	if(arguments.length < 3)
-	nomeFuncao = "";
-	var adicionalinha = function()
-	{
+	if(arguments.length == 1){
+		idBotao = "adiciona";
+	}
+	if(arguments.length < 3){
+		nomeFuncao = "";
+	}
+	var adicionalinha = function(){
 		core_carregando("ativa");
 		core_carregando(" adicionando um novo registro");
-		var callback =
-		{
-				success:function(o)
-				{
-					var texto = "";
-				try
-					{
-						core_carregando("desativa");
-						if(nomeFuncao != "")
-						{eval(nomeFuncao+"()");}
+		var callback = {
+			success:function(o){
+				var texto = "";
+				try{
+					core_carregando("desativa");
+					if(nomeFuncao != ""){
+						if(YAHOO.lang.isFunction(nomeFuncao)){
+							nomeFuncao.call(o);
+						}
 						else{
+							eval(nomeFuncao+"()");
+						}
+					}
+					else{
 						texto = YAHOO.lang.JSON.parse(o.responseText)[0];
-						if(texto === "")
-						{texto = "Clique para editar";}
+						if(texto === ""){
+							texto = "Clique para editar";
+						}
 						myDataTable.addRow(texto,0);
 					}
-					}
-					catch(e){core_handleFailure(e,o.responseText);}
-				},
-				failure:core_handleFailure,
-				argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){
+					core_handleFailure(e,o.responseText);
+				}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};

@@ -234,13 +234,12 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERAMENUS":
-		alteraMenus();
-		if(isset($id_menu) && $id_menu != "")
-		{
+		$retorna = alteraMenus();
+		if(isset($id_menu) && $id_menu != ""){
 			retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_menus where id_menu = $id_menu order by nome_menu"));
 		}
-		else
-		{retornaJSON("ok");
+		else{
+			retornaJSON($retorna);
 		}
 		exit;
 		break;
@@ -850,14 +849,21 @@ function alteraMenus()
 		if($id_menu != "")
 		{
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_menus SET en = '$en', es = '$es', it = '$it', publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome_menu', desc_menu = '$desc_menu', perfil_menu = '$perfil_mennu' WHERE id_menu = $id_menu");
+			$retorna = "ok";
 		}
 		else
 		{
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_menus (it,es,en,publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','','','','', '','SIM','')");
+			$id_temp = (rand (9000,10000)) * -1;
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_menus (it,es,en,publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','','','','$id_temp', '','SIM','')");
+			$id = $dbh->query("SELECT * FROM ".$esquemaadmin."i3geoadmin_menus WHERE nome_menu = '$id_temp'");
+			$id = $id->fetchAll();
+			$id = $id[0]['id_menu'];
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_menus SET nome_menu = '' WHERE id_menu = $id AND nome_menu = '$id_temp'");
+			$retorna = $id;			
 		}
 		$dbhw = null;
 		$dbh = null;
-		return "ok";
+		return $retorna;
 	}
 	catch (PDOException $e)
 	{

@@ -105,7 +105,7 @@ i3GEO.login = {
 			//if(typeof(console) !== 'undefined'){console.info("i3GEO.login.dialogo.abrelogin()");}
 			if(typeof(i3GEOF.loginusuario) === 'undefined'){
 				js = locaplic+"/ferramentas/loginusuario/index.js";
-				i3GEO.util.scriptTag(js,"i3GEOF.loginusuario.criaJanelaFlutuante()","i3GEOF.loginusuario_script");
+				i3GEO.util.scriptTag(js,"i3GEOF.loginusuario.criaJanelaFlutuante()","i3GEOF.loginusuario_script()");
 			}
 			else
 			{i3GEOF.loginusuario.criaJanelaFlutuante();}

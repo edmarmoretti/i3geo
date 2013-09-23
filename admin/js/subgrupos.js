@@ -76,7 +76,11 @@ i3GEOadmin.subgrupos = {
 		YAHOO.namespace("subgrupos");
 		YAHOO.namespace("admin.container");
 		core_ativaPainelAjuda("ajuda","botaoAjuda");
-		core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraSubGrupos","adicionaNovoSubGrupo","i3GEOadmin.subgrupos.obtem");
+		var temp = function(o){
+			i3GEOadmin.subgrupos.obtem();
+			return;
+		};
+		core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraSubGrupos","adicionaNovoSubGrupo",temp);
 		i3GEOadmin.subgrupos.obtem();
 	},
 	/*
@@ -101,6 +105,14 @@ i3GEOadmin.subgrupos = {
 			};
 			//i3GEOadmin.subgrupos.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.subgrupos.defColunas(), myDataSource);
 			i3GEOadmin.subgrupos.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.subgrupos.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.subgrupos.dataTable.subscribe('postRenderEvent',function(){
+					//abre o editor
+					if(i3GEOadmin.subgrupos.dados[0].nome_subgrupo == ""){
+						var rec = i3GEOadmin.subgrupos.dataTable.getRecordSet().getRecord(0);
+						i3GEOadmin.subgrupos.editor([i3GEOadmin.subgrupos.dados[0]],i3GEOadmin.subgrupos.dados[0].id_subgrupo,rec.getId());
+					}
+				}
+			);			
 			i3GEOadmin.subgrupos.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),
