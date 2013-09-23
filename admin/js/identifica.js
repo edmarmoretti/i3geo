@@ -56,7 +56,7 @@ i3GEOadmin.identifica = {
 			{label:"id",key:"id_i", formatter:i3GEOadmin.identifica.formatTexto},
 			{label:"nome",resizeable:true,key:"nome_i", formatter:i3GEOadmin.identifica.formatTexto},
 			{label:"publicado?",resizeable:true,key:"publicado_i", formatter:i3GEOadmin.identifica.formatTexto},
-			{label:"programa",resizeable:true,key:"programa_i", formatter:i3GEOadmin.identifica.formatTexto},
+			{label:"programa",resizeable:true,key:"abrir_i", formatter:i3GEOadmin.identifica.formatTexto},
 			{label:"abrir como?",resizeable:true,key:"target_i", formatter:i3GEOadmin.identifica.formatTexto}
 		];
 	},
@@ -67,7 +67,11 @@ i3GEOadmin.identifica = {
 		YAHOO.namespace("identifica");
 		YAHOO.namespace("admin.container");
 		core_ativaPainelAjuda("ajuda","botaoAjuda");
-		core_ativaBotaoAdicionaLinha("../php/identifica.php?funcao=alterarFuncoes","adicionaNovoIdentifica","i3GEOadmin.identifica.obtem");
+		var temp = function(o){
+			i3GEOadmin.identifica.obtem();
+			return;
+		};
+		core_ativaBotaoAdicionaLinha("../php/identifica.php?funcao=alterarFuncoes","adicionaNovoIdentifica",temp);
 		i3GEOadmin.identifica.obtem();
 	},
 	/*
@@ -92,6 +96,14 @@ i3GEOadmin.identifica = {
 			};
 			//i3GEOadmin.identifica.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.identifica.defColunas(), myDataSource);
 			i3GEOadmin.identifica.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.identifica.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.identifica.dataTable.subscribe('postRenderEvent',function(){
+					//abre o editor
+					if(i3GEOadmin.identifica.dados[0].nome_i == ""){
+						var rec = i3GEOadmin.identifica.dataTable.getRecordSet().getRecord(0);
+						i3GEOadmin.identifica.editor([i3GEOadmin.identifica.dados[0]],i3GEOadmin.identifica.dados[0].id_i,rec.getId());
+					}
+				}
+			);
 			i3GEOadmin.identifica.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),
@@ -111,14 +123,14 @@ i3GEOadmin.identifica = {
 					$recordid = registro.getId();
 					sUrl = "../php/identifica.php?funcao=pegafuncoes&id_i="+$clicouId;
 					callback = {
-	  					success:function(o){
-	  						try{
-	  							i3GEOadmin.identifica.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
-	  						}
-	  						catch(e){core_handleFailure(e,o.responseText);}
-	  					},
-	  					failure:core_handleFailure,
-	  					argument: { foo:"foo", bar:"bar" }
+							success:function(o){
+								try{
+									i3GEOadmin.identifica.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+								}
+								catch(e){core_handleFailure(e,o.responseText);}
+							},
+							failure:core_handleFailure,
+							argument: { foo:"foo", bar:"bar" }
 					};
 					core_makeRequest(sUrl,callback);
 				}
@@ -231,23 +243,23 @@ i3GEOadmin.identifica = {
 		core_carregando(" gravando o registro do id= "+id);
 		sUrl = "../php/identifica.php?funcao=alterarFuncoes"+par;
 		callback = {
-	  		success:function(o){
-	  			try	{
-	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
-	  					setTimeout("core_carregando('desativa')",3000);
-	  				}
-	  				else{
-	  					var rec = i3GEOadmin.identifica.dataTable.getRecordSet().getRecord(recordid);
-	  					i3GEOadmin.identifica.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
-	  					i3GEOadmin.identifica.dados = "";
-	  					core_carregando("desativa");
-	  				}
-	  			}
-	  			catch(e){core_handleFailure(e,o.responseText);}
-	  		},
-	  		failure:core_handleFailure,
-	  		argument: { foo:"foo", bar:"bar" }
+				success:function(o){
+					try	{
+						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+							setTimeout("core_carregando('desativa')",3000);
+						}
+						else{
+							var rec = i3GEOadmin.identifica.dataTable.getRecordSet().getRecord(recordid);
+							i3GEOadmin.identifica.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+							i3GEOadmin.identifica.dados = "";
+							core_carregando("desativa");
+						}
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	}

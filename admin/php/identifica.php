@@ -1,6 +1,6 @@
 <?php
 /*
- Title: identifica.php
+Title: identifica.php
 
 Fun&ccedil;&otilde;es utilizadas pelo editor das op&ccedil;&otilde;es de identifica&ccedil;&atilde;o
 
@@ -55,12 +55,12 @@ error_reporting(0);
 switch (strtoupper($funcao))
 {
 		/*
-		 Note:
+		Note:
 
 		Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 		*/
 		/*
-		 Valor: PEGAFUNCOES
+		Valor: PEGAFUNCOES
 
 		Lista de opera&ccedil;&otilde;es cadastradas
 
@@ -69,18 +69,17 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "PEGAFUNCOES":
-		if(isset($id_i) && $id_i != "")
-		{
-			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_identifica where id_i = $id_i ");
+		if(isset($id_i) && $id_i != ""){
+			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_identifica where id_i = $id_i order by nome_i");
 		}
-		else
-		{$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_identifica");
+		else{
+			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_identifica order by nome_i");
 		}
 		retornaJSON($dados);
 		exit;
 		break;
 		/*
-		 Valor: ALTERARFUNCOES
+		Valor: ALTERARFUNCOES
 
 		Altera uma opera&ccedil;&atilde;o cadastrada
 
@@ -107,7 +106,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: EXCLUIR
+		Valor: EXCLUIR
 
 		Exclui uma opera&ccedil;&atilde;o cadastrada
 
@@ -125,7 +124,7 @@ switch (strtoupper($funcao))
 		break;
 }
 /*
- Altera o registro de um WS
+Altera o registro de um WS
 */
 function alterarFuncoes()
 {
@@ -150,7 +149,7 @@ function alterarFuncoes()
 			$id_i = $dbh->query("SELECT id_i FROM ".$esquemaadmin."i3geoadmin_identifica WHERE nome_i = '$idtemp'");
 			$id_i = $id_i->fetchAll();
 			$id_i = $id_i[0]['id_i'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_identifica SET nome_i = '' WHERE id_i = $id AND nome_i = '$idtemp'");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_identifica SET nome_i = '' WHERE id_i = $id_i AND nome_i = '$idtemp'");
 			$retorna = $id_i;
 		}
 		$dbhw = null;

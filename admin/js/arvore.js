@@ -156,8 +156,8 @@ function montaArvore(dados)
 		}
 		buildTree();
 	}();
-   	montaNosMenus(dados);
-   	tree.draw();
+		montaNosMenus(dados);
+		tree.draw();
 }
 function temaIconMode()
 {
@@ -445,8 +445,8 @@ function novoTemaRaiz(id)
 			tree.draw();
 			core_carregando("desativa");
 		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -477,8 +477,8 @@ function novoTemaRaizGrupo(idmenu,id)
 			tree.draw();
 			core_carregando("desativa");
 		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -511,8 +511,8 @@ function novoGrupo(id_menu)
 			core_carregando("desativa");
 			editar('grupo',dados.id_n1);
 		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -545,8 +545,8 @@ function novoSubGrupo(id_menu,id_n1)
 			core_carregando("desativa");
 			editar("subgrupo",dados.id_n2);
 		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -578,8 +578,8 @@ function novoTema(id_menu,id_n2)
 			core_carregando("desativa");
 			editar('tema',dados.id_n3);
 		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -786,89 +786,88 @@ function gravaDados(tipo,id)
 	var sUrl = prog+par;
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  				{
-  					core_carregando("<span style=color:red >Nao foi possivel excluir. Verifique se nao existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else
-  				{
-  					if(tipo == "grupo")
-  					{
-  						var obj = document.getElementById("Eid_grupo");
-  						var texto = obj.options[obj.selectedIndex].text;
-  						var objpub = document.getElementById("Epublicado");
-  						var publicado = objpub.options[objpub.selectedIndex].value;
-  						var no = tree.getNodeByProperty("id_n1",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
+			success:function(o)
+			{
+				try
+				{
+					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+					{
+						core_carregando("<span style=color:red >Nao foi possivel excluir. Verifique se nao existem menus vinculados a este tema</span>");
+						setTimeout("core_carregando('desativa')",3000);
+					}
+					else
+					{
+						if(tipo == "grupo"){
+							var texto = document.getElementById("Eid_grupo");
+							texto = texto.options[texto.selectedIndex].text;
+							var objpub = document.getElementById("Epublicado");
+							var publicado = objpub.options[objpub.selectedIndex].value;
+							var no = tree.getNodeByProperty("id_n1",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 
-  						if(publicado == "NAO")
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red";
-  						else
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
+							if(publicado == "NAO")
+							no.getContentEl().getElementsByTagName("span")[0].style.color = "red";
+							else
+							no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
 
-  						no.html = no.getContentEl().innerHTML;
-  					}
-  					if(tipo == "subgrupo")
-  					{
-  						var obj = document.getElementById("Eid_subgrupo");
-  						var texto = obj.options[obj.selectedIndex].text;
+							no.html = no.getContentEl().innerHTML;
+						}
+						if(tipo == "subgrupo")
+						{
+							var texto = document.getElementById("Eid_subgrupo");
+							texto = texto.options[texto.selectedIndex].text;
 
-  						var objpub = document.getElementById("Epublicado");
-  						var publicado = objpub.options[objpub.selectedIndex].value;
+							var objpub = document.getElementById("Epublicado");
+							var publicado = objpub.options[objpub.selectedIndex].value;
 
-  						var no = tree.getNodeByProperty("id_n2",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
+							var no = tree.getNodeByProperty("id_n2",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 
-  						if(publicado == "NAO")
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red";
-  						else
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
+							if(publicado == "NAO")
+							no.getContentEl().getElementsByTagName("span")[0].style.color = "red";
+							else
+							no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
 
-  						no.html = no.getContentEl().innerHTML;
-  					}
-  					if(tipo == "tema")
-  					{
-  						var obj = document.getElementById("Eid_tema");
-  						var texto = obj.options[obj.selectedIndex].text;
+							no.html = no.getContentEl().innerHTML;
+						}
+						if(tipo == "tema")
+						{
+							var texto = document.getElementById("Eid_tema");
+							texto = texto.options[texto.selectedIndex].text;
 
-  						var objpub = document.getElementById("Epublicado");
-  						var publicado = objpub.options[objpub.selectedIndex].value;
+							var objpub = document.getElementById("Epublicado");
+							var publicado = objpub.options[objpub.selectedIndex].value;
 
-  						var no = tree.getNodeByProperty("id_n3",id);
+							var no = tree.getNodeByProperty("id_n3",id);
 
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 
-  						if(publicado == "NAO")
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red";
-  						else
-  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
+							if(publicado == "NAO")
+							no.getContentEl().getElementsByTagName("span")[0].style.color = "red";
+							else
+							no.getContentEl().getElementsByTagName("span")[0].style.color = "black";
 
-  						no.html = no.getContentEl().innerHTML;
-  					}
+							no.html = no.getContentEl().innerHTML;
+						}
 					if(tipo == "raizmenu" || tipo == "raizgrupo")
-  					{
-  						var obje = document.getElementById("Eid_tema");
-  						if(obje){
-  							var texto = obje.options[obje.selectedIndex].text;
-  							var no = tree.getNodeByProperty("id_raiz",id);
-  							no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
-  							no.html = no.getContentEl().innerHTML;
-  						}
-  					}
-  					core_carregando("desativa");
-  				}
+						{
+							var obje = document.getElementById("Eid_tema");
+							if(obje){
+								var texto = obje.options[obje.selectedIndex].text;
+								var no = tree.getNodeByProperty("id_raiz",id);
+								no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
+								no.html = no.getContentEl().innerHTML;
+							}
+						}
+						core_carregando("desativa");
+					}
 				YAHOO.admin.container.panelEditor.destroy();
 				YAHOO.admin.container.panelEditor = null;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback,'POST');
 }
@@ -900,8 +899,8 @@ function sobeDesce(movimento,tipo,id)
 	{
 		success: function(oResponse)
 		{core_carregando("desativa");},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	if(movimenta)
 	{

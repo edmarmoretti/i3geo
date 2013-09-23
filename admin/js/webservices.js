@@ -65,7 +65,11 @@ i3GEOadmin.webservices = {
 		YAHOO.namespace("webservices");
 		YAHOO.namespace("admin.container");
 		core_ativaPainelAjuda("ajuda","botaoAjuda");
-		core_ativaBotaoAdicionaLinha("../php/webservices.php?funcao=alterarWS","adicionaNovoWebservice","i3GEOadmin.webservices.obtem");
+		var temp = function(o){
+			i3GEOadmin.webservices.obtem();
+			return;
+		};
+		core_ativaBotaoAdicionaLinha("../php/webservices.php?funcao=alterarWS","adicionaNovoWebservice",temp);
 		i3GEOadmin.webservices.obtem();
 	},
 	/*
@@ -97,6 +101,14 @@ i3GEOadmin.webservices = {
 			};
 			//i3GEOadmin.webservices.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.webservices.defColunas(), myDataSource);
 			i3GEOadmin.webservices.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.webservices.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.webservices.dataTable.subscribe('postRenderEvent',function(){
+					//abre o editor
+					if(i3GEOadmin.webservices.dados[0].nome_ws == ""){
+						var rec = i3GEOadmin.webservices.dataTable.getRecordSet().getRecord(0);
+						i3GEOadmin.webservices.editor([i3GEOadmin.webservices.dados[0]],i3GEOadmin.webservices.dados[0].id_ws,rec.getId());
+					}
+				}
+			);
 			i3GEOadmin.webservices.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),
@@ -116,14 +128,14 @@ i3GEOadmin.webservices = {
 					$recordid = registro.getId();
 					sUrl = "../php/webservices.php?funcao=pegaDados&id_ws="+$clicouId;
 					callback = {
-	  					success:function(o){
-	  						try{
-	  							i3GEOadmin.webservices.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
-	  						}
-	  						catch(e){core_handleFailure(e,o.responseText);}
-	  					},
-	  					failure:core_handleFailure,
-	  					argument: { foo:"foo", bar:"bar" }
+							success:function(o){
+								try{
+									i3GEOadmin.webservices.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+								}
+								catch(e){core_handleFailure(e,o.responseText);}
+							},
+							failure:core_handleFailure,
+							argument: { foo:"foo", bar:"bar" }
 					};
 					core_makeRequest(sUrl,callback);
 				}
@@ -260,23 +272,23 @@ i3GEOadmin.webservices = {
 		core_carregando(" gravando o registro do id= "+id);
 		sUrl = "../php/webservices.php?funcao=alterarWS"+par;
 		callback = {
-	  		success:function(o){
-	  			try	{
-	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
-	  					setTimeout("core_carregando('desativa')",3000);
-	  				}
-	  				else{
-	  					var rec = i3GEOadmin.webservices.dataTable.getRecordSet().getRecord(recordid);
-	  					i3GEOadmin.webservices.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
-	  					i3GEOadmin.webservices.dados = "";
-	  					core_carregando("desativa");
-	  				}
-	  			}
-	  			catch(e){core_handleFailure(e,o.responseText);}
-	  		},
-	  		failure:core_handleFailure,
-	  		argument: { foo:"foo", bar:"bar" }
+				success:function(o){
+					try	{
+						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+							setTimeout("core_carregando('desativa')",3000);
+						}
+						else{
+							var rec = i3GEOadmin.webservices.dataTable.getRecordSet().getRecord(recordid);
+							i3GEOadmin.webservices.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+							i3GEOadmin.webservices.dados = "";
+							core_carregando("desativa");
+						}
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	}

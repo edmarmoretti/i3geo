@@ -293,8 +293,8 @@ function montaDivTema(i){
 		ins = "",
 		callback = {
 			success:function(o){
-				var o = YAHOO.lang.JSON.parse(o.responseText),
-					n = o.length,
+				o = YAHOO.lang.JSON.parse(o.responseText);
+				var	n = o.length,
 					m,i,j,filhos,a,b;
 				//monta os divs onde entrarao as arvores
 				for(i=0;i<n;i++){

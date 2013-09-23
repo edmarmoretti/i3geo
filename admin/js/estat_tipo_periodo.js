@@ -34,7 +34,11 @@ i3GEOadmin.periodo = {
 		YAHOO.namespace("periodo");
 		YAHOO.namespace("admin.container");
 		core_ativaPainelAjuda("ajuda","botaoAjuda");
-		core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarTipoPeriodo","adicionaNovaLinha","i3GEOadmin.periodo.obtem");
+		var temp = function(o){
+			i3GEOadmin.periodo.obtem();
+			return;
+		};
+		core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarTipoPeriodo","adicionaNovaLinha",temp);
 		i3GEOadmin.periodo.obtem();
 	},
 	/*
@@ -59,6 +63,14 @@ i3GEOadmin.periodo = {
 			};
 			//i3GEOadmin.periodo.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.periodo.defColunas(), myDataSource);
 			i3GEOadmin.periodo.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.periodo.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.periodo.dataTable.subscribe('postRenderEvent',function(){
+					//abre o editor
+					if(i3GEOadmin.periodo.dados[0].nome == ""){
+						var rec = i3GEOadmin.periodo.dataTable.getRecordSet().getRecord(0);
+						i3GEOadmin.periodo.editor([i3GEOadmin.periodo.dados[0]],i3GEOadmin.periodo.dados[0].codigo_tipo_periodo,rec.getId());
+					}
+				}
+			);
 			i3GEOadmin.periodo.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),
@@ -78,14 +90,14 @@ i3GEOadmin.periodo = {
 					$recordid = registro.getId();
 					sUrl = "../php/metaestat.php?funcao=listaTipoPeriodo&codigo_tipo_periodo="+$clicouId;
 					callback = {
-	  					success:function(o){
-	  						try{
-	  							i3GEOadmin.periodo.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
-	  						}
-	  						catch(e){core_handleFailure(e,o.responseText);}
-	  					},
-	  					failure:core_handleFailure,
-	  					argument: { foo:"foo", bar:"bar" }
+							success:function(o){
+								try{
+									i3GEOadmin.periodo.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+								}
+								catch(e){core_handleFailure(e,o.responseText);}
+							},
+							failure:core_handleFailure,
+							argument: { foo:"foo", bar:"bar" }
 					};
 					core_makeRequest(sUrl,callback);
 				}
@@ -186,23 +198,23 @@ i3GEOadmin.periodo = {
 		core_carregando(" gravando o registro do id= "+id);
 		sUrl = "../php/metaestat.php?funcao=alterarTipoPeriodo"+par;
 		callback = {
-	  		success:function(o){
-	  			try	{
-	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
-	  					setTimeout("core_carregando('desativa')",3000);
-	  				}
-	  				else{
-	  					var rec = i3GEOadmin.periodo.dataTable.getRecordSet().getRecord(recordid);
-	  					i3GEOadmin.periodo.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
-	  					i3GEOadmin.periodo.dados = "";
-	  					core_carregando("desativa");
-	  				}
-	  			}
-	  			catch(e){core_handleFailure(e,o.responseText);}
-	  		},
-	  		failure:core_handleFailure,
-	  		argument: { foo:"foo", bar:"bar" }
+				success:function(o){
+					try	{
+						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+							setTimeout("core_carregando('desativa')",3000);
+						}
+						else{
+							var rec = i3GEOadmin.periodo.dataTable.getRecordSet().getRecord(recordid);
+							i3GEOadmin.periodo.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
+							i3GEOadmin.periodo.dados = "";
+							core_carregando("desativa");
+						}
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	}

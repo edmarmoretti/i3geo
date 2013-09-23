@@ -36,7 +36,11 @@ i3GEOadmin.umedida = {
 		YAHOO.namespace("umedida");
 		YAHOO.namespace("admin.container");
 		core_ativaPainelAjuda("ajuda","botaoAjuda");
-		core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarUnidadeMedida","adicionaNovaLinha","i3GEOadmin.umedida.obtem");
+		var temp = function(o){
+			i3GEOadmin.umedida.obtem();
+			return;
+		};
+		core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarUnidadeMedida","adicionaNovaLinha",temp);
 		i3GEOadmin.umedida.obtem();
 	},
 	/*
@@ -61,6 +65,14 @@ i3GEOadmin.umedida = {
 			};
 			//i3GEOadmin.umedida.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.umedida.defColunas(), myDataSource);
 			i3GEOadmin.umedida.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.umedida.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.umedida.dataTable.subscribe('postRenderEvent',function(){
+					//abre o editor
+					if(i3GEOadmin.umedida.dados[0].nome == ""){
+						var rec = i3GEOadmin.umedida.dataTable.getRecordSet().getRecord(0);
+						i3GEOadmin.umedida.editor([i3GEOadmin.umedida.dados[0]],i3GEOadmin.umedida.dados[0].codigo_unidade_medida,rec.getId());
+					}
+				}
+			);
 			i3GEOadmin.umedida.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),
@@ -80,14 +92,14 @@ i3GEOadmin.umedida = {
 					$recordid = registro.getId();
 					sUrl = "../php/metaestat.php?funcao=listaUnidadeMedida&codigo_unidade_medida="+$clicouId;
 					callback = {
-	  					success:function(o){
-	  						try{
-	  							i3GEOadmin.umedida.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
-	  						}
-	  						catch(e){core_handleFailure(e,o.responseText);}
-	  					},
-	  					failure:core_handleFailure,
-	  					argument: { foo:"foo", bar:"bar" }
+							success:function(o){
+								try{
+									i3GEOadmin.umedida.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+								}
+								catch(e){core_handleFailure(e,o.responseText);}
+							},
+							failure:core_handleFailure,
+							argument: { foo:"foo", bar:"bar" }
 					};
 					core_makeRequest(sUrl,callback);
 				}
@@ -213,23 +225,23 @@ i3GEOadmin.umedida = {
 		core_carregando(" gravando o registro do id= "+id);
 		sUrl = "../php/metaestat.php?funcao=alterarUnidadeMedida"+par;
 		callback = {
-	  		success:function(o){
-	  			try	{
-	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
-	  					setTimeout("core_carregando('desativa')",3000);
-	  				}
-	  				else{
-	  					var rec = i3GEOadmin.umedida.dataTable.getRecordSet().getRecord(recordid);
-	  					i3GEOadmin.umedida.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
-	  					i3GEOadmin.umedida.dados = "";
-	  					core_carregando("desativa");
-	  				}
-	  			}
-	  			catch(e){core_handleFailure(e,o.responseText);}
-	  		},
-	  		failure:core_handleFailure,
-	  		argument: { foo:"foo", bar:"bar" }
+				success:function(o){
+					try	{
+						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+							setTimeout("core_carregando('desativa')",3000);
+						}
+						else{
+							var rec = i3GEOadmin.umedida.dataTable.getRecordSet().getRecord(recordid);
+							i3GEOadmin.umedida.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
+							i3GEOadmin.umedida.dados = "";
+							core_carregando("desativa");
+						}
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	}

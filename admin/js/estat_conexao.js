@@ -40,7 +40,11 @@ i3GEOadmin.conexao = {
 		YAHOO.namespace("conexao");
 		YAHOO.namespace("admin.container");
 		core_ativaPainelAjuda("ajuda","botaoAjuda");
-		core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarConexao","adicionaNovaLinha","i3GEOadmin.conexao.obtem");
+		var temp = function(o){
+			i3GEOadmin.conexao.obtem();
+			return;
+		};
+		core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarConexao","adicionaNovaLinha",temp);
 		i3GEOadmin.conexao.obtem();
 	},
 	/*
@@ -65,6 +69,14 @@ i3GEOadmin.conexao = {
 			};
 			//i3GEOadmin.conexao.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.conexao.defColunas(), myDataSource);
 			i3GEOadmin.conexao.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.conexao.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.conexao.dataTable.subscribe('postRenderEvent',function(){
+					//abre o editor
+					if(i3GEOadmin.conexao.dados[0].bancodedados == ""){
+						var rec = i3GEOadmin.conexao.dataTable.getRecordSet().getRecord(0);
+						i3GEOadmin.conexao.editor([i3GEOadmin.conexao.dados[0]],i3GEOadmin.conexao.dados[0].codigo_estat_conexao,rec.getId());
+					}
+				}
+			);
 			i3GEOadmin.conexao.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),
@@ -84,14 +96,14 @@ i3GEOadmin.conexao = {
 					$recordid = registro.getId();
 					sUrl = "../php/metaestat.php?funcao=listaConexao&codigo_estat_conexao="+$clicouId;
 					callback = {
-	  					success:function(o){
-	  						try{
-	  							i3GEOadmin.conexao.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
-	  						}
-	  						catch(e){core_handleFailure(e,o.responseText);}
-	  					},
-	  					failure:core_handleFailure,
-	  					argument: { foo:"foo", bar:"bar" }
+							success:function(o){
+								try{
+									i3GEOadmin.conexao.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+								}
+								catch(e){core_handleFailure(e,o.responseText);}
+							},
+							failure:core_handleFailure,
+							argument: { foo:"foo", bar:"bar" }
 					};
 					core_makeRequest(sUrl,callback);
 				}
@@ -193,23 +205,23 @@ i3GEOadmin.conexao = {
 		core_carregando(" gravando o registro do id= "+id);
 		sUrl = "../php/metaestat.php?funcao=alterarConexao"+par;
 		callback = {
-	  		success:function(o){
-	  			try	{
-	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
-	  					setTimeout("core_carregando('desativa')",3000);
-	  				}
-	  				else{
-	  					var rec = i3GEOadmin.conexao.dataTable.getRecordSet().getRecord(recordid);
-	  					i3GEOadmin.conexao.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
-	  					i3GEOadmin.conexao.dados = "";
-	  					core_carregando("desativa");
-	  				}
-	  			}
-	  			catch(e){core_handleFailure(e,o.responseText);}
-	  		},
-	  		failure:core_handleFailure,
-	  		argument: { foo:"foo", bar:"bar" }
+				success:function(o){
+					try	{
+						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+							setTimeout("core_carregando('desativa')",3000);
+						}
+						else{
+							var rec = i3GEOadmin.conexao.dataTable.getRecordSet().getRecord(recordid);
+							i3GEOadmin.conexao.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
+							i3GEOadmin.conexao.dados = "";
+							core_carregando("desativa");
+						}
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	}

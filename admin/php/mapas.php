@@ -1,6 +1,6 @@
 <?php
 /*
- Title: mapas.php
+Title: mapas.php
 
 Fun&ccedil;&otilde;es utilizadas pelo editor do cadastro de mapas (links).
 
@@ -56,12 +56,12 @@ error_reporting(0);
 switch (strtoupper($funcao))
 {
 	/*
-	 Note:
+	Note:
 
 	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 	/*
-	 Valor: PEGAMAPAS
+	Valor: PEGAMAPAS
 
 	Lista os links existentes
 
@@ -76,7 +76,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 		/*
-		 Valor: PEGADADOSMAPA
+		Valor: PEGADADOSMAPA
 
 		Lista os dados de um link
 
@@ -94,7 +94,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERARMAPA
+		Valor: ALTERARMAPA
 
 		Altera os dados de um link
 
@@ -135,7 +135,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: EXCLUIRMAPA
+		Valor: EXCLUIRMAPA
 
 		Exclui um link
 
@@ -152,7 +152,7 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	/*
-	 Valor: SALVAMAPFILE
+	Valor: SALVAMAPFILE
 
 	Salva um mapfile no banco
 
@@ -211,7 +211,7 @@ function salvaMapfile(){
 	}
 }
 /*
- Altera o registro de um mapa
+Altera o registro de um mapa
 */
 function alterarMapa(){
 	global $esquemaadmin,$publicado_mapa,$ordem_mapa,$id_mapa,$desc_mapa,$ext_mapa,$imagem_mapa,$outros_mapa,$nome_mapa,$linkdireto_mapa,$temas_mapa,$ligados_mapa,$perfil_mapa;
@@ -235,7 +235,7 @@ function alterarMapa(){
 			$id = $dbh->query("SELECT * FROM ".$esquemaadmin."i3geoadmin_mapas WHERE nome_mapa = '$id_temp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_mapa'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_mapas SET nome_mapa = '' WHERE id_mapa = $id AND nome_mapa = '$idtemp'");
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_mapas SET nome_mapa = '' WHERE id_mapa = $id AND nome_mapa = '$id_temp'");
 			$retorna = $id;
 		}
 		$dbhw = null;

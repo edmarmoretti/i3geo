@@ -34,7 +34,11 @@ i3GEOadmin.fonteinfo = {
 		YAHOO.namespace("fonteinfo");
 		YAHOO.namespace("admin.container");
 		core_ativaPainelAjuda("ajuda","botaoAjuda");
-		core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alteraFonteinfo","adicionaNovaLinha","i3GEOadmin.fonteinfo.obtem");
+		var temp = function(o){
+			i3GEOadmin.fonteinfo.obtem();
+			return;
+		};
+		core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alteraFonteinfo","adicionaNovaLinha",temp);
 		i3GEOadmin.fonteinfo.obtem();
 	},
 	/*
@@ -59,6 +63,14 @@ i3GEOadmin.fonteinfo = {
 			};
 			//i3GEOadmin.fonteinfo.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.fonteinfo.defColunas(), myDataSource);
 			i3GEOadmin.fonteinfo.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.fonteinfo.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.fonteinfo.dataTable.subscribe('postRenderEvent',function(){
+					//abre o editor
+					if(i3GEOadmin.fonteinfo.dados[0].titulo == "" || i3GEOadmin.fonteinfo.dados[0].titulo == null ){
+						var rec = i3GEOadmin.fonteinfo.dataTable.getRecordSet().getRecord(0);
+						i3GEOadmin.fonteinfo.editor([i3GEOadmin.fonteinfo.dados[0]],i3GEOadmin.fonteinfo.dados[0].id_fonteinfo,rec.getId());
+					}
+				}
+			);
 			i3GEOadmin.fonteinfo.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),
@@ -78,14 +90,14 @@ i3GEOadmin.fonteinfo = {
 					$recordid = registro.getId();
 					sUrl = "../php/metaestat.php?funcao=listaFonteinfo&id_fonteinfo="+$clicouId;
 					callback = {
-	  					success:function(o){
-	  						try{
-	  							i3GEOadmin.fonteinfo.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
-	  						}
-	  						catch(e){core_handleFailure(e,o.responseText);}
-	  					},
-	  					failure:core_handleFailure,
-	  					argument: { foo:"foo", bar:"bar" }
+							success:function(o){
+								try{
+									i3GEOadmin.fonteinfo.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+								}
+								catch(e){core_handleFailure(e,o.responseText);}
+							},
+							failure:core_handleFailure,
+							argument: { foo:"foo", bar:"bar" }
 					};
 					core_makeRequest(sUrl,callback);
 				}
@@ -186,23 +198,23 @@ i3GEOadmin.fonteinfo = {
 		core_carregando(" gravando o registro do id= "+id);
 		sUrl = "../php/metaestat.php?funcao=alteraFonteinfo"+par;
 		callback = {
-	  		success:function(o){
-	  			try	{
-	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
-	  					setTimeout("core_carregando('desativa')",3000);
-	  				}
-	  				else{
-	  					var rec = i3GEOadmin.fonteinfo.dataTable.getRecordSet().getRecord(recordid);
-	  					i3GEOadmin.fonteinfo.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
-	  					i3GEOadmin.fonteinfo.dados = "";
-	  					core_carregando("desativa");
-	  				}
-	  			}
-	  			catch(e){core_handleFailure(e,o.responseText);}
-	  		},
-	  		failure:core_handleFailure,
-	  		argument: { foo:"foo", bar:"bar" }
+				success:function(o){
+					try	{
+						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+							setTimeout("core_carregando('desativa')",3000);
+						}
+						else{
+							var rec = i3GEOadmin.fonteinfo.dataTable.getRecordSet().getRecord(recordid);
+							i3GEOadmin.fonteinfo.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText));
+							i3GEOadmin.fonteinfo.dados = "";
+							core_carregando("desativa");
+						}
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	}

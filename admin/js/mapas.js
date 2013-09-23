@@ -66,7 +66,11 @@ i3GEOadmin.mapas = {
 		YAHOO.namespace("mapas");
 		YAHOO.namespace("admin.container");
 		core_ativaPainelAjuda("ajuda","botaoAjuda");
-		core_ativaBotaoAdicionaLinha("../php/mapas.php?funcao=alterarMapa","adicionaNovoMapa","i3GEOadmin.mapas.obtem");
+		var temp = function(o){
+			i3GEOadmin.mapas.obtem();
+			return;
+		};
+		core_ativaBotaoAdicionaLinha("../php/mapas.php?funcao=alterarMapa","adicionaNovoMapa",temp);
 		i3GEOadmin.mapas.obtem();
 	},
 	/*
@@ -91,6 +95,14 @@ i3GEOadmin.mapas = {
 			};
 			//i3GEOadmin.mapas.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.mapas.defColunas(), myDataSource);
 			i3GEOadmin.mapas.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.mapas.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.mapas.dataTable.subscribe('postRenderEvent',function(){
+					//abre o editor
+					if(i3GEOadmin.mapas.dados[0].nome_mapa == ""){
+						var rec = i3GEOadmin.mapas.dataTable.getRecordSet().getRecord(0);
+						i3GEOadmin.mapas.editor([i3GEOadmin.mapas.dados[0]],i3GEOadmin.mapas.dados[0].id_mapa,rec.getId());
+					}
+				}
+			);
 			i3GEOadmin.mapas.dataTable.subscribe('cellClickEvent',function(ev){
 				var sUrl, callback,$clicouId, $recordid,
 					target = YAHOO.util.Event.getTarget(ev),
@@ -110,14 +122,14 @@ i3GEOadmin.mapas = {
 					$recordid = registro.getId();
 					sUrl = "../php/mapas.php?funcao=pegaDadosMapa&id_mapa="+$clicouId;
 					callback = {
-	  					success:function(o){
-	  						try{
-	  							i3GEOadmin.mapas.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
-	  						}
-	  						catch(e){core_handleFailure(e,o.responseText);}
-	  					},
-	  					failure:core_handleFailure,
-	  					argument: { foo:"foo", bar:"bar" }
+							success:function(o){
+								try{
+									i3GEOadmin.mapas.editor(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+								}
+								catch(e){core_handleFailure(e,o.responseText);}
+							},
+							failure:core_handleFailure,
+							argument: { foo:"foo", bar:"bar" }
 					};
 					core_makeRequest(sUrl,callback);
 				}
@@ -255,23 +267,23 @@ i3GEOadmin.mapas = {
 		core_carregando(" gravando o registro do id= "+id);
 		sUrl = "../php/mapas.php?funcao=alterarMapa"+par;
 		callback = {
-	  		success:function(o){
-	  			try	{
-	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
-	  					setTimeout("core_carregando('desativa')",3000);
-	  				}
-	  				else{
-	  					var rec = i3GEOadmin.mapas.dataTable.getRecordSet().getRecord(recordid);
-	  					i3GEOadmin.mapas.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
-	  					i3GEOadmin.mapas.dados = "";
-	  					core_carregando("desativa");
-	  				}
-	  			}
-	  			catch(e){core_handleFailure(e,o.responseText);}
-	  		},
-	  		failure:core_handleFailure,
-	  		argument: { foo:"foo", bar:"bar" }
+				success:function(o){
+					try	{
+						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+							setTimeout("core_carregando('desativa')",3000);
+						}
+						else{
+							var rec = i3GEOadmin.mapas.dataTable.getRecordSet().getRecord(recordid);
+							i3GEOadmin.mapas.dataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+							i3GEOadmin.mapas.dados = "";
+							core_carregando("desativa");
+						}
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	}

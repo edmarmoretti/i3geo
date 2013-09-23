@@ -12,7 +12,11 @@ core_makeRequest("../php/metaestat.php?funcao=listaDadosTabelasAuxiliares",callb
 
 function initEditor(){
 	YAHOO.namespace("admin.container");
-	core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarTipoRegiao","adicionaNovaLinha","pegaDados");
+	var temp = function(o){
+		pegaDados();
+		return;
+	};
+	core_ativaBotaoAdicionaLinha("../php/metaestat.php?funcao=alterarTipoRegiao","adicionaNovaLinha",temp);
 	pegaDados();
 }
 function pegaDados(){
@@ -58,32 +62,45 @@ function montaTabela(dados){
 			elCell.innerHTML = "<div class=download style='text-align:center' title='shape file' ></div>";
 		},
 		myColumnDefs = [
-										{key:"excluir",label:"excluir",formatter:formatExclui},
-										{key:"shapefile",label:"download",formatter:formatShp},
-										{key:"rel",label:"agrega&ccedil;&otilde;es",formatter:formatRel},
-										{key:"mais",label:"propriedades",formatter:formatMais},
-										{label:"c&oacute;digo",key:"codigo_tipo_regiao", formatter:formatTexto},
-										{label:"Nome",resizeable:true,key:"nome_tipo_regiao", formatter:formatTexto},
-										{label:"Descri&ccedil;&atilde;o",resizeable:true,key:"descricao_tipo_regiao", formatter:formatTexto},
-										{label:"Conex&atilde;o",key:"codigo_estat_conexao",formatter:formatTexto},
-										{label:"Esquema",key:"esquemadb",formatter:formatTexto},
-										{label:"Tabela",key:"tabela",formatter:formatTexto},
-										{label:"Geometria",key:"colunageo",formatter:formatTexto},
-										{label:"Centr&oacute;ide",key:"colunacentroide",formatter:formatTexto},
-										{label:"Data",key:"data",formatter:formatTexto},
-										{label:"Regi&atilde;o",key:"identificador",formatter:formatTexto},
-										{label:"Nomes",resizeable:false,key:"colunanomeregiao",formatter:formatTexto},
-										{label:"Colunas vis&iacute;veis (separa com v&iacute;rgula)",resizeable:false,key:"colunasvisiveis",formatter:formatTexto},
-										{label:"Apelidos",resizeable:false,key:"apelidos",formatter:formatTexto},
-										{label:"SRID",key:"srid",formatter:formatTexto}
-										];
-		myDataSource = new YAHOO.util.DataSource(dados);
+			{key:"excluir",label:"excluir",formatter:formatExclui},
+			{key:"shapefile",label:"download",formatter:formatShp},
+			{key:"rel",label:"agrega&ccedil;&otilde;es",formatter:formatRel},
+			{key:"mais",label:"propriedades",formatter:formatMais},
+			{label:"c&oacute;digo",key:"codigo_tipo_regiao", formatter:formatTexto},
+			{label:"Nome",resizeable:true,key:"nome_tipo_regiao", formatter:formatTexto},
+			{label:"Descri&ccedil;&atilde;o",resizeable:true,key:"descricao_tipo_regiao", formatter:formatTexto},
+			{label:"Conex&atilde;o",key:"codigo_estat_conexao",formatter:formatTexto},
+			{label:"Esquema",key:"esquemadb",formatter:formatTexto},
+			{label:"Tabela",key:"tabela",formatter:formatTexto},
+			{label:"Geometria",key:"colunageo",formatter:formatTexto},
+			{label:"Centr&oacute;ide",key:"colunacentroide",formatter:formatTexto},
+			{label:"Data",key:"data",formatter:formatTexto},
+			{label:"Regi&atilde;o",key:"identificador",formatter:formatTexto},
+			{label:"Nomes",resizeable:false,key:"colunanomeregiao",formatter:formatTexto},
+			{label:"Colunas vis&iacute;veis (separa com v&iacute;rgula)",resizeable:false,key:"colunasvisiveis",formatter:formatTexto},
+			{label:"Apelidos",resizeable:false,key:"apelidos",formatter:formatTexto},
+			{label:"SRID",key:"srid",formatter:formatTexto}
+		];
+		var myDataSource = new YAHOO.util.DataSource(dados);
 		myDataTable = new YAHOO.widget.ScrollingDataTable("tabela", myColumnDefs, myDataSource,{width:"100%"});
 
 		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 		myDataSource.responseSchema = {
 				fields: ["codigo_tipo_regiao","nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","colunacentroide","data","identificador","codigo_estat_conexao","colunanomeregiao","colunasvisiveis","apelidos","srid"]
 		};
+		/**
+		 * @FIXME nao funciona qd ativado
+		 */
+		/*
+		myDataTable.subscribe('postRenderEvent',function(){
+			//abre o editor
+			var dados = myDataTable.getDataSource();
+			if(dados.liveData[0].nome_tipo_regiao == ""){
+				var rec = myDataTable.getRecordSet().getRecord(0);
+				montaEditor([dados.liveData[0]],dados.liveData[0].codigo_tipo_regiao,rec.getId());
+			}
+		});
+		*/
 		myDataTable.subscribe(
 			'cellClickEvent',
 			function(ev){
@@ -167,7 +184,7 @@ function montaTabelaAgregacoes(dados){
 		{label:"Pai",resizeable:true,key:"codigo_tipo_regiao_pai", formatter:formatTexto},
 		{label:"Coluna de ligacao",key:"colunaligacao_regiaopai",formatter:formatTexto}
 		];
-		myDataSource = new YAHOO.util.DataSource(dados);
+		var myDataSource = new YAHOO.util.DataSource(dados);
 		myDataTable = new YAHOO.widget.DataTable("tabelaAgrega", myColumnDefs, myDataSource);
 		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 		myDataSource.responseSchema = {

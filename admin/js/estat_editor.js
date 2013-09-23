@@ -528,7 +528,7 @@ i3GEOadmin.editor = {
 	},
 	esvaziaFormsUpload: function(){
 		var csv = $i("i3GEOadmin_formuploadcsv"),
-			shp = $i("i3GEOadmin_formupload")
+			shp = $i("i3GEOadmin_formupload");
 		if(csv){
 			csv.innerHTML = "";
 		}
