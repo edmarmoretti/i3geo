@@ -5,6 +5,7 @@ if(verificaOperacaoSessao("admin/metaestat/geral") == false){
 	echo "Vc nao pode realizar essa operacao.";exit;
 }
 error_reporting(0);
+if (ob_get_level() == 0) ob_start();
 ?>
 <html>
 <head>
@@ -14,10 +15,12 @@ error_reporting(0);
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
-var_dump($_FILES);exit;
 if (isset($_FILES['i3GEOuploadgvp']['name'])){
 	require_once ("../../ms_configura.php");
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
+	ob_flush();
+	flush();
+	sleep(1);
 	$arq = $locaplic."/temas/".$_FILES['i3GEOuploadgvp']['name'];
 	//verifica nomes
 	verificaNome($_FILES['i3GEOuploadgvp']['name']);
@@ -42,7 +45,7 @@ else{
 	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
 }
 function paraAguarde(){
-	echo "<script>window.parent.core_pegaMapfiles('montaArvore()');</script>";
+	echo "<script>window.scrollTo(0,10000);window.parent.core_pegaMapfiles('montaArvore()');</script>";
 }
 function verificaNome($nome)
 {

@@ -14,6 +14,7 @@ if(isset($g_sid) && $g_sid != ""){
 	foreach(array_keys($_SESSION) as $k)
 	{eval("\$".$k."='".$_SESSION[$k]."';");}
 }
+if (ob_get_level() == 0) ob_start();
 ?>
 <html>
 <head>
@@ -28,6 +29,9 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 {
 	require_once ("../../ms_configura.php");
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
+	ob_flush();
+	flush();
+	sleep(1);
 	if(isset($map_file)){
 		$mapa = ms_newMapObj($map_file);
 		$dirmap = dirname($map_file);
@@ -53,9 +57,10 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	$Arquivo = $_FILES['i3GEOuploadshp']['tmp_name'];
 	if(file_exists($dirmap."/".$nomePrefixo.".shp"))
 	{echo "<p class='paragrafo' >J&aacute; existe um SHP com o nome ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}
+
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shp");
 	if($status != 1)
-	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP";paraAguarde();exit;}
+	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP. Pode ser uma limita&ccedil;&atilde;o quanto ao tamanho do arquivo.";paraAguarde();exit;}
 	$Arquivo = $_FILES['i3GEOuploadshx']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shx");
 	if($status != 1)
@@ -70,9 +75,11 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 
 	echo "<p class='paragrafo' >Arquivo enviado.</p>";
 	echo "<p class='paragrafo'>Nome: ".$dirmap."/".$nomePrefixo.".shp </p>";
-
 	if(isset($map_file)){
 		echo "<p class='paragrafo' >Adicionando tema...</p>";
+		ob_flush();
+		flush();
+		sleep(1);
 		$novolayer = ms_newLayerObj($mapa);
 		$novolayer->set("data",$dirmap."/".$nomePrefixo.".shp");
 		$novolayer->set("name",$nomePrefixo.".shp");
@@ -116,8 +123,8 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		//$adiciona = ms_newLayerObj($mapa, $novolayer);
 		$salvo = $mapa->save($map_file);
 		//grava os templates de cada tema
-		echo "<p class='paragrafo' >Tema criado!!! Redesenhando o mapa.";
-		echo "<script>window.parent.i3GEO.atualiza()</script>";
+		echo "<b><p class='paragrafo' >Tema criado!!! Redesenhando o mapa.";
+		echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza()</script>";
 	}
 }
 else
@@ -126,7 +133,7 @@ else
 }
 paraAguarde();
 function paraAguarde(){
-	echo "<script>try{window.parent.i3GEOF.upload.aguarde.visibility='hidden';}catch(e){};</script>";
+	echo "<script>try{window.scrollTo(0,10000);window.parent.i3GEOF.upload.aguarde.visibility='hidden';}catch(e){};</script>";
 }
 function verificaNome($nome)
 {

@@ -10,6 +10,7 @@ session_start();
 foreach(array_keys($_SESSION) as $k)
 {eval("\$".$k."='".$_SESSION[$k]."';");}
 $postgis_mapa = $_SESSION["postgis_mapa"];
+if (ob_get_level() == 0) ob_start();
 ?>
 <html>
 <head>
@@ -25,6 +26,9 @@ if (isset($_FILES['i3GEOuploadkml']['name']))
 	require_once ("../../ms_configura.php");
 	$mapa = ms_newMapObj($map_file);
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
+	ob_flush();
+	flush();
+	sleep(1);
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	verificaNome($_FILES['i3GEOuploadkml']['name']);
@@ -38,7 +42,9 @@ if (isset($_FILES['i3GEOuploadkml']['name']))
 	if($status == 1)
 	{
 		echo "<p class='paragrafo' >Arquivo enviado. Adicionando tema...</p>";
-		
+		ob_flush();
+		flush();
+		sleep(1);
 		$tipos = array("pontos","linhas","poligonos");
 		foreach($tipos as $tipo){
 			$novolayer = ms_newLayerObj($mapa);
@@ -47,7 +53,7 @@ if (isset($_FILES['i3GEOuploadkml']['name']))
 			{$novolayer->setconnectiontype(MS_OGR);}
 			else
 			{$novolayer->set("connectiontype",MS_OGR);}
-			
+
 			$nome = str_replace(".","",$_FILES['i3GEOuploadkml']['name']);
 			$novolayer->set("name",$nome.$tipo);
 			$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadkml']['name']." ".$tipo);
@@ -83,8 +89,8 @@ if (isset($_FILES['i3GEOuploadkml']['name']))
 		}
 		$salvo = $mapa->save($map_file);
 		//grava os templates de cada tema
-		echo "<p class='paragrafo' >Camadas criadas!!! Redesenhando o mapa.";
-		echo "<script>window.parent.i3GEO.atualiza()</script>";
+		echo "<b><p class='paragrafo' >Camadas criadas!!! Redesenhando o mapa.";
+		echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza()</script>";
 	}
 	else
 	{
@@ -95,11 +101,11 @@ if (isset($_FILES['i3GEOuploadkml']['name']))
 }
 else
 {
-	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";	
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
 }
 paraAguarde();
 function paraAguarde(){
-	echo "<script>window.parent.i3GEOF.uploadkml.aguarde.visibility='hidden';</script>";
+	echo "<script>window.scrollTo(0,10000);window.parent.i3GEOF.uploadkml.aguarde.visibility='hidden';</script>";
 }
 function verificaNome($nome)
 {

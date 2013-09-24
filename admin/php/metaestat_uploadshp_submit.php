@@ -8,6 +8,7 @@ if(verificaOperacaoSessao("admin/metaestat/editorbanco") == false){
 	echo "Vc nao pode realizar essa operacao.";exit;
 }
 error_reporting(0);
+if (ob_get_level() == 0) ob_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -34,6 +35,9 @@ if ($_FILES['i3GEOuploadshp']['name'] == ""){
 if (isset($_FILES['i3GEOuploadshp']['name'])){
 	require_once ("../../ms_configura.php");
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
+	ob_flush();
+	flush();
+	sleep(1);
 	$arqshp = $_FILES['i3GEOuploadshp']['tmp_name'];
 	//verifica nomes e sobe arquivo
 	verificaNome($_FILES['i3GEOuploadshp']['name'],"shp");
@@ -82,6 +86,9 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	echo "<br>Tipo: ". $tipo;
 	echo "<br>Colunas: ";
 	var_dump($colunas);
+	ob_flush();
+	flush();
+	sleep(1);
 	$sqinsert = array();
 	//verifica o tipo de coluna
 	$tipoColuna = array();
@@ -105,14 +112,16 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	echo "<br>Tipos das colunas: <pre>";
 	var_dump($tipoColuna);
 	echo "</pre>";
-	
+	ob_flush();
+	flush();
+	sleep(1);
 	try {
 		$dbh = new PDO('pgsql:dbname='.$conexao["bancodedados"].';user='.$conexao["usuario"].';password='.$conexao["senha"].';host='.$conexao["host"].';port='.$conexao["porta"]);
 	} catch (PDOException $e) {
 		echo '<span style=color:red >Connection failed: ' . $e->getMessage();
 		exit;
 	}
-		
+
 	//gera o script para criar a tabela
 	//verifica se a tabela ja existe
 	$sql = "SELECT table_name FROM information_schema.tables where table_schema = '".$_POST["i3GEOuploadesquema"]."' AND table_name = '".$_POST["tabelaDestino"]."'";
@@ -149,6 +158,9 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 		echo "<br>Sql tabela: <pre>";
 		var_dump($sqltabela);
 		echo "</pre>";
+		ob_flush();
+		flush();
+		sleep(1);
 	}
 	if($tabelaExiste == true && $_POST["tipoOperacao"] == "criar"){
 		echo "<span style=color:red >A tabela existe. N&atilde;o pode ser criada.</span>";
@@ -160,11 +172,15 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	}
 	if($tabelaExiste == true && $_POST["tipoOperacao"] == "apagar" && $_POST["i3GEOuploadesquema"] != "i3geo_metaestat"){
 		echo "<span style=color:red >N&atilde;o &eacute; poss&iacute;vel executar essa opera&ccedil;&atilde;o nesse esquema.</span>";
-		exit;		
+		exit;
 	}
 	//gera o script para inserir os dados
 	$linhas = array();
 	$insert = "INSERT INTO ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]."( gid,".strtolower(implode(",",$colunas)).",the_geom)";
+	echo "<br>Preparando inclus&atilde;o de dados";
+	ob_flush();
+	flush();
+	sleep(1);
 	for ($i=0; $i<$numshapes;$i++){
 		$s = $layer->getShape(new resultObj($i));
 		$vs = array();
@@ -183,6 +199,11 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 		$linhas[] = $insert."VALUES(".implode(",",$vs).")";
 	}
 	$layer->close();
+	echo "<br>Incluindo dados";
+	echo "<script>window.scrollTo(0,10000);</script>";
+	ob_flush();
+	flush();
+	sleep(1);
 	foreach($sqltabela as $linha){
 		try {
 			$dbh->query($linha);
@@ -197,7 +218,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 			echo 'Erro: ' . $e->getMessage();
 		}
 	}
-	echo "<br>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
+	echo "<br><b>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
 }
 else{
 	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
@@ -212,5 +233,6 @@ function verificaNome($nome,$ext){
 	}
 }
 ?>
+<script>window.scrollTo(0,10000);</script>
 </body>
 </html>

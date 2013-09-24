@@ -8,6 +8,8 @@ if(verificaOperacaoSessao("admin/metaestat/editorbanco") == false){
 	echo "Vc nao pode realizar essa operacao.";exit;
 }
 error_reporting(0);
+if (ob_get_level() == 0) ob_start();
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -30,6 +32,9 @@ error_reporting(0);
 		if (isset($_FILES['i3GEOuploadcsv']['name'])){
 			require_once ("../../ms_configura.php");
 			echo "<p class='paragrafo' >Carregando o arquivo...</p>";
+			ob_flush();
+			flush();
+			sleep(1);
 			$arqcsv = $_FILES['i3GEOuploadcsv']['tmp_name'];
 			$nomePrefixo = str_replace(" ","_",removeAcentos($_FILES['i3GEOuploadcsv']['name']));
 			$nomePrefixo = $nomePrefixo."_".(nomeRandomico(4));
@@ -76,7 +81,7 @@ error_reporting(0);
 					$buffer = str_replace("\r",'',$buffer);
 					$temp = explode($separador,$buffer);
 					if(count($temp) == $ncolunas)
-					$linhas[] = $temp;
+						$linhas[] = $temp;
 				}
 			}
 			fclose ($handle);
@@ -100,6 +105,9 @@ error_reporting(0);
 			echo "<br>Tipos das colunas: <pre>";
 			var_dump($tipoColuna);
 			echo "</pre>";
+			ob_flush();
+			flush();
+			sleep(1);
 			//gera o script para criar a tabela
 			$sqltabela = array();
 			$sql = "CREATE TABLE ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]."(";
@@ -113,7 +121,14 @@ error_reporting(0);
 			echo "<br>Sql tabela: <pre>";
 			var_dump($sqltabela);
 			echo "</pre>";
+			ob_flush();
+			flush();
+			sleep(1);
 			//gera o script para inserir os dados
+			echo "<br>Preparando inclus&atilde;o de dados";
+			ob_flush();
+			flush();
+			sleep(1);
 			$linhasql = array();
 			$insert = "INSERT INTO ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]."(".strtolower(implode(",",$colunas)).")";
 			$nlinhas = count($linhas);
@@ -142,7 +157,11 @@ error_reporting(0);
 			} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
 	}
-
+	echo "<br>Incluindo dados";
+	echo "<script>window.scrollTo(0,10000);</script>";
+	ob_flush();
+	flush();
+	sleep(1);
 	foreach($sqltabela as $linha){
 		try {
 			$dbh->query($linha);
@@ -157,13 +176,13 @@ error_reporting(0);
 			echo 'Erro: ' . $e->getMessage();
 		}
 	}
-	echo "<br>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
+	echo "<b><br>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
 		}
 		else{
 	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
 }
 
 ?>
-
+<script>window.scrollTo(0,10000);</script>
 </body>
 </html>

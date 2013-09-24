@@ -9,6 +9,7 @@ session_start();
 foreach(array_keys($_SESSION) as $k)
 {eval("\$".$k."='".$_SESSION[$k]."';");}
 $postgis_mapa = $_SESSION["postgis_mapa"];
+if (ob_get_level() == 0) ob_start();
 ?>
 <html>
 <head>
@@ -23,7 +24,10 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 	//$ndir = dirname($filen);
 	require_once ("../../ms_configura.php");
 	$mapa = ms_newMapObj($map_file);
-	echo "<p>Carregando o arquivo...</p>";
+	echo "<p class='paragrafo'>Carregando o arquivo...</p>";
+	ob_flush();
+	flush();
+	sleep(1);
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	verificaNome($_FILES['i3GEOuploaddbffile']['name']);
@@ -88,11 +92,14 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 			else{
 				copy($dirmap."/".$_FILES['i3GEOuploaddbffile']['name'],$dirmap."/".$nome.".dbf");
 			}
-			echo "<p>Arquivo enviado. Criando shape file...$nomeshp </p>";
+			echo "<p class='paragrafo'>Arquivo enviado. Criando shape file...$nomeshp </p>";
+			ob_flush();
+			flush();
+			sleep(1);
 			$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 			$novoshpf->free();
 			if(!file_exists($nomeshp)){
-				echo "<p>Erro ao criar arquivo shapefile</p>";
+				echo "<p class='paragrafo'>Erro ao criar arquivo shapefile</p>";
 				paraAguarde();
 			}
 			$shapefileObj = ms_newShapefileObj($nomeshp,-2);
@@ -107,10 +114,13 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 			else
 			{
 				require_once("../../pacotes/phpxbase/api_conversion.php");
-				echo "<p>Lendo arquivo ".$dirmap."/".$_FILES['i3GEOuploaddbffile']['name']."</p>";
+				echo "<p class='paragrafo'>Lendo arquivo ".$dirmap."/".$_FILES['i3GEOuploaddbffile']['name']."</p>";
 				$dbf = xbase_open($dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
 				$records = xbase_numrecords($dbf);
-				echo "<p>Numero de pontos: $records</p>";
+				echo "<p class='paragrafo'>Numero de pontos: $records</p>";
+				ob_flush();
+				flush();
+				sleep(1);
 				$record = array();
 				for($x = 1; $x <= $records; $x++)
 				{
@@ -153,8 +163,8 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 			if(isset($uploaddbfEPSG) && $uploaddbfEPSG != "")
 			{$novolayer->setProjection("init=epsg:".$uploaddbfEPSG);}
 			$salvo = $mapa->save($map_file);
-			echo "Tema criado!!!";
-			echo "<script>window.parent.i3GEO.atualiza()</script>";
+			echo "<b>Tema criado!!!";
+			echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza()</script>";
 		}
 	}
 	else
@@ -165,7 +175,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 }
 paraAguarde();
 function paraAguarde(){
-	echo "<script>window.parent.i3GEOF.uploaddbf.aguarde.visibility='hidden';</script>";
+	echo "<script>window.scrollTo(0,10000);window.parent.i3GEOF.uploaddbf.aguarde.visibility='hidden';</script>";
 }
 function verificaNome($nome)
 {
