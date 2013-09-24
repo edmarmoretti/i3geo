@@ -114,7 +114,7 @@ i3GEOF.tme = {
 				i3GEOF.tme.tema,
 				function(retorno){
 					if($i("i3GEOTMEregioeslista"))
-			 		{$i("i3GEOTMEregioeslista").innerHTML = retorno.dados;}
+					{$i("i3GEOTMEregioeslista").innerHTML = retorno.dados;}
 					if(i3GEOF.tme.ITEMNOMEREGIOES != ""){
 						$i("i3GEOTMEregioes").value = i3GEOF.tme.ITEMNOMEREGIOES;
 					}
@@ -147,9 +147,9 @@ i3GEOF.tme = {
 		'<br><br>'+$trad(3,i3GEOF.tme.dicionario);
 		ins += $inputText("","","i3GEOTMEdesc","",48,"") +
 		'<br><br>'+$trad(4,i3GEOF.tme.dicionario);
-		ins += $inputText("","","i3GEOTMEbarSize","",20,"50000") +
+		ins += $inputText("","","i3GEOTMEbarSize","",20,"5000") +
 		'<br><br>'+$trad(5,i3GEOF.tme.dicionario);
-		ins += $inputText("","","i3GEOTMEmaxHeight","",20,"100") +
+		ins += $inputText("","","i3GEOTMEmaxHeight","",20,"2000000") +
 		'<br><br>'+$trad(6,i3GEOF.tme.dicionario) +
 		'<div id="i3GEOTMEregioeslista" style="text-align:left;" ></div>' +
 		'<p class="paragrafo" >' +

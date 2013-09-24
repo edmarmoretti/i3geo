@@ -40,13 +40,15 @@ if(!isset($download)){
 }
 if(!isset($_GET["sid"]) && $verificaSID == true)
 {
-	echo "Erro. Acesso não permitido";exit;
+	echo "Erro. Acesso n&atilde;o permitido";exit;
 }
 if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
 }
 $colunas = str_replace(","," ",$_GET["colunasvalor"]);
 $colunas = explode(" ",$colunas);
+$barSize = $_GET["barSize"]*1;
+$maxHeight = $_GET["maxHeight"]*1;
 if(!isset($parametersTME)){
 
 	//choropleth,prism,bar,symbol
