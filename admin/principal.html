@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Category"
+	content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" type="text/css" href="html/admin.css">
+<script type="text/javascript" src="js/core.js"></script>
+</head>
+<body class=" yui-skin-sam fundoPonto">
+	<center>
+		<div class="bordaSuperior">&nbsp;</div>
+		<div class="mascaraPrincipal" id="divGeral">
+			<div id=cabecalhoPrincipal></div>
+			<p style="color: red">Aten&ccedil;&atilde;o: o sistema de administra&ccedil;&atilde;o n&atilde;o
+				funciona corretamente com o navegador Internet Explorer.</p>
+			<h1>Administra&ccedil;&atilde;o do i3geo</h1>
+			<p>Se voc&ecirc; atualizou o Mapserver para a vers&atilde;o
+				5.2.2, seus mapfiles antigos podem n&atilde;o funcionar. Veja em
+				"Outras op&ccedil;&otilde;es" o item "Ajusta mapfiles".
+			<p>
+				Para informa&ccedil;&otilde;es sobre cadastro de usu&aacute;rios veja o t&oacute;pico espec&iacute;fico no manual.
+			</p>
+			<p>
+				<a href="../documentacao/manual-admin-i3geo-4_7-pt.pdf"
+					target="_blank">Manual do sistema de administra&ccedil;&atilde;o</a>
+			</p>
+			<div id="mensagemIE" style="display: none; position: relative">
+				<p style="color: red">Aten&ccedil;&atilde;o: o sistema de
+					administra&ccedil;&atilde;o funciona melhor no Firefox.</p>
+				<p>No Internet Explorer, vc deve alterar as configura&ccedil;&otilde;es
+					de armazenamento de 'cache' para n&atilde;o ter problemas.</p>
+				<p>No menu 'Ferramentas - Op&ccedil;&otilde;es da Internet - Geral'
+					clique em 'Configura&ccedil;&otilde;es' no item 'Hist&oacute;rico de
+					navega&ccedil;&atilde;o'</p>
+				<p>Marque a op&ccedil;&atilde;o 'Sempre que eu visitar a
+					p&aacute;gina da web'</p>
+			</div>
+			<p>
+				Se vc est&aacute; usando o banco de dados SQLITE, voc&ecirc; pode acessar
+				diretamente as tabelas por meio de formul&aacute;rios <a
+					href='../pacotes/phpliteadmin/phpliteadmin.php'>clique aqui</a>.
+				Veja tamb&eacute;m:<br><br>
+				<a href="../documentacao/diagramas/mer_banco_de_dados_de_administracao.png"
+					target="_new">diagrama MER </a>do banco de dados de administra&ccedil;&atilde;o.<br>
+				<a href="../documentacao/diagramas/cadastrodeusuarios/dbdocs/index.html"
+					target="_new">diagrama MER </a>do banco de dados de usu&aacute;rios.<br>
+				<a href="../documentacao/diagramas/metaestat/dbdocs/index.html"
+					target="_new">diagrama MER </a>do banco de dados do sistema de metadados estat&iacute;sticos.<br>
+			</p>
+			<fieldset>
+				<legend>Leia-me</legend>
+				<div>
+					<p>Entre uma vers&atilde;o e outra do i3Geo o banco de dados de
+						administra&ccedil;&atilde;o pode sofrer altera&ccedil;&otilde;es. Consulte o documento
+						i3geo/guia_de_migracao.txt para verificar os detalhes.</p>
+					<p>Antes da vers&atilde;o 4.0 o i3geo utilizava arquivos
+						armazenados em disco (arquivos XML) para configurar as
+						&aacute;rvores de adi&ccedil;&atilde;o de camadas, listagens de
+						endere&ccedil;os, lista de mapas, etc. Com a nova estrutura de
+						administra&ccedil;&atilde;o, esses arquivos foram
+						substitu&iacute;dos por registros em bancos de dados.</p>
+					<p>Para possibilitar a distribui&ccedil;&atilde;o do i3geo de
+						forma independente de banco de dados, optou-se pelo uso do
+						gerenciador SQLITE, cujo arquivo com os dados fica armazenado em
+						i3geo/admin/admin.db. Os programas em PHP que gerenciam esse banco
+						utilizam o pacote PDO, possibilitando que seja utilizado outro
+						gerenciador, como o POSTGRESQL, entre outros.</p>
+					<p>Para modificar a configura&ccedil;&atilde;o do PDO, e
+						utilizar outro gerenciador, deve-se editar o arquivo
+						i3geo/admin/conexao.php ou ent&atilde;o alterar a vari&aacute;vel
+						de configura&ccedil;&atilde;o, definida no ms_configura.php,
+						chamada $conexaoadmin. Essa vari&aacute;vel indica o nome de um
+						programa em PHP que ser&aacute; inclu&iacute;do nos programas que
+						fazem acesso ao banco de dados de administra&ccedil;&atilde;o. Um
+						exemplo de conex&atilde;o em PHP pode ser visto em
+						i3geo/admin/php/conexaomma.php.</p>
+					<p>Para usar um gerenciador diferente do SQLITE &eacute;
+						necess&aacute;rio criar as tabelas no novo banco de dados. Os sqls
+						para essa cria&ccedil;&atilde;o podem ser obtidos no item "Outras
+						op&ccedil;&otilde;es".</p>
+					<p>O SQLITE usa um arquivo em disco. Em sistemas Linux
+						principalmente, verifique as permiss&otilde;es de acesso caso ocorram
+						probelmas de escrita no banco.
+				</div>
+			</fieldset>
+	</center>
+</body>
+<script>
+navn = false;
+navm = false;
+//seta as vari&aacute;veis navn e navm
+i3GEO.configura = {
+	locaplic: ".."
+};
+//
+cabecalhoGeral("cabecalhoPrincipal","principal");
+</script>
+</html>

@@ -1,0 +1,325 @@
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+	<html>
+	<head>
+	<meta http-equiv="Category"
+		content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+	
+	<link rel="stylesheet" type="text/css" href="html/admin.css">
+	<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+	<style>
+		td.ygtvcell {
+			border: 0 none;
+			padding: 0 3px 5px 0;
+			text-align: left;
+		}	
+	
+	</style>
+	</head>
+	<body class=" yui-skin-sam" style="background-color:white;text-align:left;">
+			<div class="bordaSuperior">&nbsp;</div>
+	
+			<div style="margin-left:10px;" id=arvore ></div>
+	</body>
+	<script>
+	propriedades = [
+	{
+	label: "Configuração geral",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Abrir o i3geo",
+		type: "text",
+		href: "../ms_criamapa.php",
+		target: "principal"
+		},{
+		label: "Testar a instalação do i3geo (testainstal.php)",
+		type: "text",
+		href: "../testainstal.php",
+		target: "principal"
+		},{
+		label: "Remover a tela inicial de apresentação do i3Geo",
+		type: "text",
+		href: "../init/remover.php",
+		target: "principal"
+		}
+	]},{
+	label: "Controle de acesso e usuários",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Controle de operações",
+		type: "text",
+		href: "html/operacoes.html",
+		target: "principal"
+		},{
+		label: "Cadastro de usuários e relação com papéis",
+		type: "text",
+		href: "html/usuarios.html",
+		target: "principal"
+		},{
+		label: "Cadastro de grupos e relação com usuários",
+		type: "text",
+		href: "html/gruposusuarios.html",
+		target: "principal"
+		}
+	]},{
+	label: "Metadados estatísticos",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Cadastro principal de variáveis",
+		type: "text",
+		href: "html/estat_variavel.html",
+		target: "principal"
+		},{
+		label: "Cadastro de mapas para publicação",
+		type: "text",
+		href: "html/estat_mapa.html",
+		target: "principal"
+		},{
+		label: "Cadastro de unidades de medida",
+		type: "text",
+		href: "html/estat_unidade_medida.html",
+		target: "principal"
+		},{
+		label: "Cadastro de tipos de períodos de tempo",
+		type: "text",
+		href: "html/estat_tipo_periodo.html",
+		target: "principal"
+		},{
+		label: "Cadastro de conexões com banco de dados",
+		type: "text",
+		href: "html/estat_conexao.html",
+		target: "principal"
+		},{
+		label: "Cadastro de tabelas com regiões geográficas",
+		type: "text",
+		href: "html/estat_tipo_regiao.html",
+		target: "principal"
+		},{
+		label: "Cadastro de fontes de informação",
+		type: "text",
+		href: "html/estat_fonteinfo.html",
+		target: "principal"
+		},{
+		label: "Upload de dados para uma variável (para upload de shapefile, utilize o gerenciador de tabelas)",
+		type: "text",
+		href: "html/estat_uploaddados.html",
+		target: "principal"
+		},{
+		label: "Gerenciador de tabelas de dados estatísticos",
+		type: "text",
+		href: "html/estat_editor.html",
+		target: "principal"
+		}
+	]},{
+	label: "Enviar arquivo para o servidor",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Shape file",
+		type: "text",
+		href: "html/subirshapefile.html",
+		target: "principal"
+		}
+	]},{
+	label: "Editor de mapfiles",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Edição de mapfiles",
+		type: "text",
+		href: "html/editormapfile.html",
+		target: "principal"
+		},{
+		label: "Edição da lista de menus",
+		type: "text",
+		href: "html/menus.html",
+		target: "principal"
+		},{
+		label: "Árvore de temas",
+		type: "text",
+		href: "html/arvore.html",
+		target: "principal"
+		}
+	]},{
+	label: "Links para mapas",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Edição dos links",
+		type: "text",
+		href: "html/mapas.html",
+		target: "principal"
+		}
+	]},{
+	label: "Edição dos menus de adição de temas",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Editar a árvore completa dos menus",
+		type: "text",
+		href: "html/arvore.html",
+		target: "principal"
+		},{
+		label: "Editar a lista de menus",
+		type: "text",
+		href: "html/menus.html",
+		target: "principal"
+		}
+	]},{
+	label: "Edição das tabelas auxiliares",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Editar a lista de perfis",
+		type: "text",
+		href: "html/perfis.html",
+		target: "principal"
+		},{
+		label: "Editar a lista de tags (palavras-chave)",
+		type: "text",
+		href: "html/tags.html",
+		target: "principal"
+		}
+	]},{
+	label: "Atlas",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Edição dos atlas",
+		type: "text",
+		href: "html/atlas.html",
+		target: "principal"
+		}
+	]},{
+	label: "Web services e links para download",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Edição do cadastro",
+		type: "text",
+		href: "html/webservices.html",
+		target: "principal"
+		}
+	]},{
+	label: "Sistemas especiais de identificação",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Edição dos sistemas",
+		type: "text",
+		href: "html/identifica.html",
+		target: "principal"
+		}
+	]},{
+	label: "Sistemas que adicionam camadas",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Edição dos sistemas",
+		type: "text",
+		href: "html/sistemas.html",
+		target: "principal"
+		}
+	]},{
+	label: "Configuração dos serviços OGC",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Edição",
+		type: "text",
+		href: "html/ogcws.html",
+		target: "principal"
+		}
+	]},{
+	label: "Outras opções",
+	type: "text",
+	url: "",
+	children:[
+		{
+		label: "Estatísticas",
+		type: "text",
+		href: "php/estatisticas.php",
+		target: "principal"
+		},{
+		label: "Upgrade do Banco de administração - Adiciona as tabelas e colunas necessárias Ã  versão atual do i3Geo e que não existiam nas versões anteriores Ã  4.7. Apenas usuários cadastrados em ms_configura na variável $i3geomaster podem realizar essa operação",
+		type: "text",
+		href: "php/upgradebanco46_47.php",
+		target: "principal"
+		},{
+		label: "Descrição do banco padrão (SQLITE)",
+		type: "text",
+		href: "php/sqlite.php",
+		target: "principal"
+		},{
+		label: "Criar banco de dados - apenas usuários cadatsrados em ms_configura na variável $i3geomaster podem realizar essa operação",
+		type: "text",
+		href: "php/criabanco.php",
+		target: "principal"
+		},{
+		label: "Gera as miniaturas (thumbnails) para os temas existentes no diretório i3geo/temas",
+		type: "text",
+		href: "../geraminiatura.php",
+		target: "principal"
+		},{
+		label: "Ver xml com a lista de serviços Geo RSS",
+		type: "text",
+		href: "xmlgeorss.php",
+		target: "principal"
+		},{
+		label: "Ver xml com a lista de serviços WMS",
+		type: "text",
+		href: "xmlservicoswms.php",
+		target: "principal"
+		},{
+		label: "Ver xml com a lista de serviços WS (webservices convencionais)",
+		type: "text",
+		href: "xmlservicosws.php",
+		target: "principal"
+		},{
+		label: "Ver xml com a lista de serviços WMS originados do sistema de metadados estatísticos",
+		type: "text",
+		href: "xmlmetaestatogc.php",
+		target: "principal"
+		},{
+		label: "Ver xml com a lista de sistemas que adicionam temas especiais",
+		type: "text",
+		href: "xmlsistemas.php",
+		target: "principal"
+		},{
+		label: "Ver RSS com os grupos, subgrupos e temas",
+		type: "text",
+		href: "rssgrupos.php",
+		target: "principal"
+		},{
+		label: "Ver RSS com os comentários sobre os temas",
+		type: "text",
+		href: "rsscomentariostemas.php",
+		target: "principal"
+		},{
+		label: "Ver XML para árvorehiperbólica",
+		type: "text",
+		href: "hiperbolica.php",
+		target: "principal"
+		}
+	]}];
+	var tree = new YAHOO.widget.TreeView("arvore",propriedades);
+	tree.render();
+	</script>
+	</html>
+	

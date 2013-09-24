@@ -67,10 +67,10 @@ Armazena o objeto com a lista de perfis
 $perfis = "";
 function cabecalhoMetaestat(id,excluir){
 	var i,n,temp,
-		ins = "<fieldset><legend>Op&ccedil;&otilde;es principais</legend>",
+		ins = "<fieldset><legend>Atalhos</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
-			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
+			{id:"principal",titulo:"In&iacute;cio",link:"../principal.html"},
 			{id:"arvore",titulo:"&Aacute;rvore completa",link:"estat_variavel.html"},
 			{id:"unidade_medida",titulo:"Unidades",link:"estat_unidade_medida.html"},
 			{id:"periodo_tempo",titulo:"Per&iacute;odos",link:"estat_tipo_periodo.html"},
@@ -119,10 +119,10 @@ function cabecalhoMetaestat(id,excluir){
 
 function cabecalhoUsuarios(id,excluir){
 	var i,n,temp,
-		ins = "<fieldset ><legend>Op&ccedil;&otilde;es principais</legend>",
+		ins = "<fieldset ><legend>Atalhos</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
-			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
+			{id:"principal",titulo:"In&iacute;cio",link:"../principal.html"},
 			{id:"operacoes",titulo:"Opera&ccedil;&otilde;es",link:"operacoes.html"},
 			{id:"usuarios",titulo:"Usu&aacute;rios",link:"usuarios.html"},
 			{id:"gruposusuarios",titulo:"Grupos e Usu&aacute;rios",link:"gruposusuarios.html"},
@@ -164,10 +164,10 @@ function cabecalhoUsuarios(id,excluir){
 }
 function cabecalhoGeral(id,excluir){
 	var i,n,temp,
-		ins = "<fieldset ><legend>Op&ccedil;&otilde;es principais</legend>",
+		ins = "<fieldset ><legend>Atalhos</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
-			{id:"principal",titulo:"In&iacute;cio",link:"../index.html"},
+			{id:"principal",titulo:"In&iacute;cio",link:"../principal.html"},
 			{id:"menus",titulo:"Menus",link:"menus.html"},
 			{id:"arvore",titulo:"&Aacute;rvore de temas",link:"arvore.html"},
 			{id:"editormapfile",titulo:"Mapfiles",link:"editormapfile.html"},

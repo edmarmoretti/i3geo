@@ -332,7 +332,7 @@ i3GEO.util = {
 	*/
 	arvore: function(titulo,onde,obj){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.arvore()");}
-		var arvore,root,tempNode,d,c,i,linha,conteudo,j,temaNode;
+		var arvore,root,tempNode,d,c,i,linha,conteudo,j,temaNode,criaNo;
 		if(!$i(onde)){return;}
 		arvore = new YAHOO.widget.TreeView(onde);
 		root = arvore.getRoot();
@@ -348,19 +348,31 @@ i3GEO.util = {
 		d = {html:titulo};
 		tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
 		tempNode.enableHighlight = false;
-		c = obj.propriedades.length;
-		for (i=0, j=c; i<j; i++){
-			linha = obj.propriedades[i];
-			if(linha.url !== "")
-			{conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";}
-			else
-			{conteudo = linha.text;}
-			d = {html:conteudo};
-			temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
-			temaNode.enableHighlight = false;
-		}
+		criaNo = function(obj,noDestino){
+			var trad,i,j,linha,conteudo,temaNode,c = obj.propriedades.length;
+			for (i=0, j=c; i<j; i++){
+				linha = obj.propriedades[i];
+				if(linha.url !== ""){
+					trad = $trad(linha.text);
+					if(!trad){
+						trad = linha.text;
+					}
+					conteudo = "<a href='#' onclick='"+linha.url+"'>"+trad+"</a>";
+				}
+				else
+				{conteudo = linha.text;}
+				d = {html:conteudo};
+				temaNode = new YAHOO.widget.HTMLNode(d, noDestino, false,true);
+				temaNode.enableHighlight = false;
+				if(obj.propriedades[i].propriedades){
+					criaNo(obj.propriedades[i],temaNode);
+				}
+			}			
+		};
+		criaNo(obj,tempNode);
 		arvore.collapseAll();
 		arvore.draw();
+		return arvore;
 	},
 	/*
 	Function: removeAcentos
