@@ -2002,7 +2002,7 @@ class Metaestat{
 	}
 	/**
 	 * ALtera o nome de uma tabela
-	 * Atualiza as tabelas i3geoestat_medida_variavel e i3geoestat_tipo_regiao
+	 * Nao atualiza as tabelas i3geoestat_medida_variavel e i3geoestat_tipo_regiao
 	 * @param codigo da conexao
 	 * @param nome do esquema
 	 * @param nome da tabela atual
@@ -2011,6 +2011,7 @@ class Metaestat{
 	 */
 	function alteraNomeTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela){
 		$res = $this->execSQLDB($codigo_estat_conexao,"ALTER TABLE ".$nome_esquema.".".$nome_tabela." RENAME TO ".$novonome_tabela );
+		/*
 		$tabela = $this->execSQLDB($codigo_estat_conexao,"SELECT table_name FROM information_schema.tables where table_name = '$novonome_tabela' and table_schema = '$nome_esquema'");
 		if(count($tabela) > 0){
 			$sql = "UPDATE i3geoestat_medida_variavel SET tabela = '$novonome_tabela' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela'";
@@ -2018,6 +2019,7 @@ class Metaestat{
 			$sql = "UPDATE i3geoestat_tipo_regiao SET tabela = '$novonome_tabela' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela'";
 			$this->execSQL($sql,"",false);
 		}
+		*/
 		return $res;
 	}
 	/**
@@ -2030,6 +2032,17 @@ class Metaestat{
 	 */
 	function copiaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela){
 		return $this->execSQLDB($codigo_estat_conexao,"CREATE TABLE ".$nome_esquema.".".$novonome_tabela." AS select * from ".$nome_esquema.".".$nome_tabela );
+	}
+	/**
+	 * ALtera o nome de um esquema
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @param novo nome do esquema
+	 * @return execSQLDB
+	 */
+	function alteraNomeEsquemaDB($codigo_estat_conexao,$nome_esquema,$novonome_esquema){
+		$res = $this->execSQLDB($codigo_estat_conexao,"ALTER SCHEMA ".$nome_esquema." RENAME TO ".$novonome_esquema );
+		return $res;
 	}
 	/**
 	 * Lista as colunas de uma tabela e seus metadados

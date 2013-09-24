@@ -75,7 +75,9 @@ $funcoesEdicao = array(
 	"EXCLUIRCLASSECLASSIFICACAO",
 	"EXCLUIRLINKMEDIDA",
 	"CRIATABELADB",
+	"CRIAESQUEMADB",
 	"ALTERANOMETABELADB",
+	"ALTERANOMEESQUEMADB",
 	"COPIATABELADB",
 	"CRIACOLUNADB",
 	"ALTERANOMECOLUNADB",
@@ -1306,6 +1308,11 @@ switch (strtoupper($funcao))
 		retornaJSON($m->criaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela));
 		exit;
 	break;
+	case "CRIAESQUEMADB":
+		$m = new Metaestat();
+		retornaJSON($m->criaEsquemaDB($codigo_estat_conexao,$nome_esquema));
+		exit;
+		break;
 	case "ALTERANOMETABELADB":
 		$m = new Metaestat();
 		if($nome_esquema != "i3geo_metaestat"){
@@ -1313,6 +1320,11 @@ switch (strtoupper($funcao))
 			exit;
 		}
 		retornaJSON($m->alteraNomeTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela));
+		exit;
+	break;
+	case "ALTERANOMEESQUEMADB":
+		$m = new Metaestat();
+		retornaJSON($m->alteraNomeEsquemaDB($codigo_estat_conexao,$nome_esquema,$novonome_esquema));
 		exit;
 	break;
 	case "COPIATABELADB":
