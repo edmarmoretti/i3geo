@@ -162,6 +162,9 @@ if (ob_get_level() == 0) ob_start();
 	ob_flush();
 	flush();
 	sleep(1);
+	if($_POST["incluiserialcsv"] == "on"){
+		$linhasql[] = "alter table ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." add gid serial CONSTRAINT gid_pkey PRIMARY KEY";
+	}
 	foreach($sqltabela as $linha){
 		try {
 			$dbh->query($linha);
