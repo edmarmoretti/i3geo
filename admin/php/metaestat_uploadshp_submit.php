@@ -147,7 +147,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	//a tabela nao existe e e do tipo create
 	$sqltabela = array();
 	if($tabelaExiste == false && $_POST["tipoOperacao"] == "criar"){
-		$sql = "CREATE TABLE ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]."(gid integer, the_geom geometry";
+		$sql = "CREATE TABLE ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]."(the_geom geometry";
 		foreach($colunas as $coluna){
 			$sql .= ",".strtolower($coluna)." ".$tipoColuna[$coluna];
 		}
@@ -176,7 +176,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	}
 	//gera o script para inserir os dados
 	$linhas = array();
-	$insert = "INSERT INTO ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]."( gid,".strtolower(implode(",",$colunas)).",the_geom)";
+	$insert = "INSERT INTO ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." (".strtolower(implode(",",$colunas)).",the_geom)";
 	echo "<br>Preparando inclus&atilde;o de dados";
 	ob_flush();
 	flush();
@@ -184,7 +184,6 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	for ($i=0; $i<$numshapes;$i++){
 		$s = $layer->getShape(new resultObj($i));
 		$vs = array();
-		$vs[] = $i;
 		foreach($colunas as $coluna){
 			if($tipoColuna[$coluna] == "varchar"){
 				$texto = $s->getValue($layer,$coluna);
@@ -204,6 +203,10 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	ob_flush();
 	flush();
 	sleep(1);
+	if($_POST["incluiserialshp"] == "on"){
+		$linhas[] = "alter table ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." add gid serial CONSTRAINT gid_pkey PRIMARY KEY";
+	}
+
 	foreach($sqltabela as $linha){
 		try {
 			$dbh->query($linha);
