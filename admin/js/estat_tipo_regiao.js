@@ -1,6 +1,7 @@
 var callback = {
 	success:function(o){
 		try	{
+			//guarda os dados auxiliares para montagem de combos
 			dadosAuxiliares = YAHOO.lang.JSON.parse(o.responseText);
 		}
 		catch(e){core_handleFailure(e,o.responseText);}
@@ -271,7 +272,7 @@ function montaEditorAgregacoes(dados,id,recordid){
 			novoel = document.createElement("div");
 		novoel.id =  "janela_editor2";
 		ins = '<div class="hd">Editor</div>';
-		ins += "<div class='bd' style='height:354px;overflow:auto'>";
+		ins += "<div class='bd' style='height:384px;overflow:auto'>";
 		ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
 		novoel.innerHTML = ins;
 		document.body.appendChild(novoel);
@@ -281,7 +282,7 @@ function montaEditorAgregacoes(dados,id,recordid){
 		{ label: "Cancela", value: "CANCEL", checked: false }
 		]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-		YAHOO.admin.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal: true,fixedcenter:true,close:false,width:"400px", height:"280px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal: true,fixedcenter:true,close:false,width:"450px", height:"280px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor2.render();
 		YAHOO.i3GEO.janela.manager.register(YAHOO.admin.container.panelEditor2);
 	}
@@ -319,17 +320,78 @@ function montaDiv(i){
 	}
 }
 function montaDivAgregacoes(i){
-	var param = {
+	var limg = i3GEO.configura.locaplic+"/imagens/crialeg.jpg",
+		param = {
 			"linhas":[
-			{titulo:"C&oacute;digo do limite geogr&aacute;fico de n&iacute;vel superior:",id:"Ecodigo_tipo_regiao_pai",size:"50",value:i.codigo_tipo_regiao_pai,tipo:"text",div:""},
-			{titulo:"Coluna na tabela do limite geogr&aacute;fico de n&iacute;vel inferior que permite a liga&ccedil;&atilde;o:",id:"Ecolunaligacao_regiaopai",size:"50",value:i.colunaligacao_regiaopai,tipo:"text",div:""}
+			{titulo:"C&oacute;digo do limite geogr&aacute;fico de n&iacute;vel superior: <img onclick='selListaRegioes(\"Ecodigo_tipo_regiao_pai\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecodigo_tipo_regiao_pai",size:"30",value:i.codigo_tipo_regiao_pai,tipo:"text",div:""},
+			{titulo:"Coluna na tabela do limite geogr&aacute;fico de n&iacute;vel inferior que permite a liga&ccedil;&atilde;o: <img onclick='selListaColunasRegiao(\"Ecolunaligacao_regiaopai\",\""+i.codigo_tipo_regiao+"\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunaligacao_regiaopai",size:"30",value:i.colunaligacao_regiaopai,tipo:"text",div:""}
 			]
 		},
 		ins = "";
 	ins += core_geraLinhas(param);
 	return(ins);
 }
+function selListaColunasRegiao(idEleValue,codigo_tipo_regiao){
+	var eleValue = $i(idEleValue),
+		dados = dadosAuxiliares.tipo_regiao,
+		n = dados.length,
+		i,
+		valores = [],
+		textos = [],
+		selecionados = eleValue.value,
+		regiao;
 
+	if(!eleValue || codigo_tipo_regiao === ""){
+		return;
+	}
+	//pega a regiao
+	for(i=0;i<n;i++){
+		if(dados[i].codigo_tipo_regiao == codigo_tipo_regiao){
+			regiao = dados[i];
+		}
+	}
+
+	callback = {
+			success:function(o){
+				try	{
+					var dados = YAHOO.lang.JSON.parse(o.responseText),
+					n = dados.length,
+					i,
+					valores = [],
+					textos = [],
+					selecionados = [eleValue.value];
+					for(i=0;i<n;i++){
+						valores.push(dados[i]);
+						textos.push(dados[i]);
+					}
+					core_menuCheckBox(valores,textos,selecionados,eleValue,"","","sim");
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
+	};
+	core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=colunasTabela&formato=json&codigo_estat_conexao="+regiao.codigo_estat_conexao+"&nome_esquema="+regiao.esquemadb+"&nome_tabela="+regiao.tabela,callback);
+}
+function selListaRegioes(idEleValue){
+	var eleValue = $i(idEleValue),
+		dados = dadosAuxiliares.tipo_regiao,
+		n = dados.length,
+		i,
+		valores = [],
+		textos = [],
+		selecionados = eleValue.value;
+
+	if(!eleValue){
+		return;
+	}
+	for(i=0;i<n;i++){
+		valores.push(dados[i].codigo_tipo_regiao);
+		textos.push(dados[i].nome_tipo_regiao);
+	}
+	core_menuCheckBox(valores,textos,selecionados,eleValue,"","","sim");
+
+}
 function gravaDados(id,recordid){
 	var campos = new Array("codigo_estat_conexao","nome_tipo_regiao","descricao_tipo_regiao","esquemadb","tabela","colunageo","colunacentroide","data","identificador","colunanomeregiao","srid","colunasvisiveis","apelidos"),
 		par = "",
