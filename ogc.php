@@ -489,9 +489,9 @@ else{
 	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
 	$oMap->save($nomeMapfileTmp);
 	$oMap = ms_newMapobj($nomeMapfileTmp);
-	if(ob_get_contents ()){
-		ob_end_clean();
-	}
+}
+if(ob_get_contents ()){
+	ob_end_clean();
 }
 //
 //verifica se a requisicao e do tipo TMS.
