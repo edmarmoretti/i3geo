@@ -163,10 +163,9 @@ i3GEOadmin.editor = {
 							"<p class=paragrafo >Crie uma tabela no banco contendo limites ou localidades que poder&aacute; ser utilizada para espacializar os dados estat&iacute;sticos existentes em outras tabelas<br>" +
 							"<input type=button value='Upload Shapefile' id='i3GEOadmin_botaoupload' /></p>" +
 							"<div id='i3GEOadmin_formupload'></div>" +
-							"<p class=paragrafo >Crie uma tabela nova a partir de um arquivo CSV. Utilize essa op&ccedil;&atilde;o para armazenar no banco os dados que ser&atilde;o relacionados &agrave;s tabelas contendo limites ou localidades </p>" +
+							"<p class=paragrafo >Crie uma tabela nova a partir de um arquivo CSV. Utilize essa op&ccedil;&atilde;o para armazenar no banco os dados que ser&atilde;o relacionados &agrave;s tabelas contendo limites ou localidades. Se no CSV existirem colunas com as coordenadas, a tabela criada poder&aacute; armazenar a geometria possibilitando seu uso como localidades. </p>" +
 							"<input type=button value='Upload CSV' id='i3GEOadmin_botaouploadcsv' /></p>" +
 							"<div id='i3GEOadmin_formuploadcsv'></div>" +
-
 							"<p class=paragrafo >Crie uma tabela vazia no banco de dados, definindo o nome e os tipos de colunas<br><input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' /></p>" +
 							"</fieldset>";
 
@@ -586,7 +585,7 @@ i3GEOadmin.editor = {
 			'<p class="paragrafo" >CSV (utilize ponto como separador de valores decimais ou a importa&ccedil;&atilde;o poder&aacute; n&atilde;o ocorrer): <br><input class=digitar type="file" size=22 name="i3GEOuploadcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >Nome da nova tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br><input class=digitar type="text" size=20 id="tabelaDestinocsv" name="tabelaDestinocsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" ><input type="checkbox" id="incluiserialcsv" name="incluiserialcsv" style="cursor:pointer;position:relative;top:2px;">&nbsp;Inclui uma coluna gid do tipo serial e chave prim&aacute;ria com c&oacute;digo &uacute;nico</p>' +
-
+			'<p class="paragrafo" >Opcional: coluna que cont&eacute;m as latitudes (Y) <input class=digitar type="text" size=8 id="colunaycsv" name="colunaycsv" style="top:0px;left:0px;cursor:pointer;"> coluna que cont&eacute;m as longitudes (X) <input class=digitar type="text" size=8 id="colunaxcsv" name="colunaxcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" ><input id=i3GEOuploadcsvsubmit type="button" value="Enviar" size=12 />' +
 			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
 			'<input type="hidden" id="i3GEOuploadcsvcodigoconexao" name="i3GEOuploadcsvcodigoconexao" value="">' +

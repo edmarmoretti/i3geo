@@ -700,25 +700,28 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formula
 		$itensdesc[] = $nomesLayers[$i];
 	}
 	//pega as colunas e as formulas adicionais
-	$colunascalc = explode(",",$colunascalc);
-	$formulas = explode(",",$formulas);
-	$nformulas = count($formulas);
-	$complemento = array();
-	for($i=0;$i<$nformulas;$i++){
-		$complemento[] = "(".$formulas[$i].") as ".$colunascalc[$i];
-	}
-	$complemento = implode(",",$complemento);
-	//substitui pelo nome correto das colunas
-	foreach(array_keys($tabelaColuna) as $k){
-		$complemento = str_replace($k,$tabelaColuna[$k],$complemento);
-	}
-	if($complemento != ""){
-		$complemento .= ",";
-		$itens = array_merge($itens,$colunascalc);
-		$itensdesc = array_merge($itensdesc,$colunascalc);
-		$complemento = str_ireplace("select","",$complemento);
-		$complemento = str_ireplace("update","",$complemento);
-		$complemento = str_ireplace("delete","",$complemento);
+	$complemento = "";
+	if($colunascalc != "" && $formulas != ""){
+		$colunascalc = explode(",",$colunascalc);
+		$formulas = explode(",",$formulas);
+		$nformulas = count($formulas);
+		$complemento = array();
+		for($i=0;$i<$nformulas;$i++){
+			$complemento[] = "(".$formulas[$i].") as ".$colunascalc[$i];
+		}
+		$complemento = implode(",",$complemento);
+		//substitui pelo nome correto das colunas
+		foreach(array_keys($tabelaColuna) as $k){
+			$complemento = str_replace($k,$tabelaColuna[$k],$complemento);
+		}
+		if($complemento != ""){
+			$complemento .= ",";
+			$itens = array_merge($itens,$colunascalc);
+			$itensdesc = array_merge($itensdesc,$colunascalc);
+			$complemento = str_ireplace("select","",$complemento);
+			$complemento = str_ireplace("update","",$complemento);
+			$complemento = str_ireplace("delete","",$complemento);
+		}
 	}
 	//echo $complemento;exit;
 	$sqlfinal = "SELECT $complemento tabela0.".$gid.",tabela0.".$regiao["colunanomeregiao"]." as regiao,tabela0.".$regiao["colunageo"]." as the_geom,".implode(",",$colunasDados)." from ".implode(",",$sqls)." WHERE ";

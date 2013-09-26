@@ -115,6 +115,10 @@ if (ob_get_level() == 0) ob_start();
 			foreach($colunas as $coluna){
 				$temp[] = strtolower($coluna)." ".$tipoColuna[$coluna];
 			}
+			if($_POST["colunaxcsv"] != "" && $_POST["colunaycsv"] != ""){
+				$temp[] = "the_geom geometry";
+				$colunas[] = "the_geom";
+			}
 			$sql .= implode(",",$temp).") WITH(OIDS=FALSE)";
 			$sqltabela[] = $sql;
 			$sqltabela[] = "ALTER TABLE ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." OWNER TO ".$conexao["usuario"];
@@ -132,6 +136,8 @@ if (ob_get_level() == 0) ob_start();
 			$linhasql = array();
 			$insert = "INSERT INTO ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]."(".strtolower(implode(",",$colunas)).")";
 			$nlinhas = count($linhas);
+			$valorX = 0;
+			$valorY = 0;
 			for ($i=0; $i<$nlinhas;$i++){
 				$s = $linhas[$i];
 				$vs = array();
@@ -147,45 +153,55 @@ if (ob_get_level() == 0) ob_start();
 							$vs[] = $s[$j];
 						}
 					}
+					if($colunas[$j] == $_POST["colunaxcsv"]){
+						$valorX = $s[$j];
+					}
+					if($colunas[$j] == $_POST["colunaycsv"]){
+						$valorY = $s[$j];
+					}
+				}
+				if($_POST["colunaxcsv"] != "" && $_POST["colunaycsv"] != ""){
+					$vs[] = "ST_PointFromText('POINT(". str_replace(",",".",$valorX)." ".str_replace(",",".",$valorY).")',4326)";
 				}
 				$linhasql[] = $insert."VALUES(".implode(",",$vs).")";
 			}
-			//echo "<pre>";
+			echo "<pre>";
 			//var_dump($linhasql);exit;
 			try {
 				$dbh = new PDO('pgsql:dbname='.$conexao["bancodedados"].';user='.$conexao["usuario"].';password='.$conexao["senha"].';host='.$conexao["host"].';port='.$conexao["porta"]);
 			} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
-	}
-	echo "<br>Incluindo dados";
-	echo "<script>window.scrollTo(0,10000);</script>";
-	ob_flush();
-	flush();
-	sleep(1);
-	if($_POST["incluiserialcsv"] == "on"){
-		$linhasql[] = "alter table ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." add gid serial CONSTRAINT gid_pkey PRIMARY KEY";
-	}
-	foreach($sqltabela as $linha){
-		try {
-			$dbh->query($linha);
-		} catch (PDOException $e) {
-			echo 'Erro: ' . $e->getMessage();
-		}
-	}
-	foreach($linhasql as $linha){
-		try {
-			$dbh->query($linha);
-		} catch (PDOException $e) {
-			echo 'Erro: ' . $e->getMessage();
-		}
-	}
-	echo "<b><br>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
+				echo 'Connection failed: ' . $e->getMessage();
+			}
+			echo "<br>Incluindo dados";
+			echo "<script>window.scrollTo(0,10000);</script>";
+			ob_flush();
+			flush();
+			sleep(1);
+			if($_POST["incluiserialcsv"] == "on"){
+				$linhasql[] = "alter table ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." add gid serial CONSTRAINT gid_pkey PRIMARY KEY";
+			}
+			foreach($sqltabela as $linha){
+				try {
+					$dbh->query($linha);
+				} catch (PDOException $e) {
+					echo 'Erro: ' . $e->getMessage();
+				}
+			}
+			foreach($linhasql as $linha){
+				try {
+					$dbh->query($linha);
+				} catch (PDOException $e) {
+					echo 'Erro: ' . $e->getMessage();
+				}
+			}
+			echo "<b><br>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
 		}
 		else{
-	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
-}
+			echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
+		}
 
-?>
-<script>window.scrollTo(0,10000);</script>
+	?>
+	<script>window.scrollTo(0,10000);</script>
+
 </body>
 </html>

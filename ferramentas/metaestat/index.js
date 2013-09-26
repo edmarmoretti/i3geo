@@ -351,7 +351,7 @@ i3GEOF.metaestat = {
 					i3GEOF.toponimia.iniciaJanelaFlutuante();
 				};
 			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
-			i3GEO.util.ajaxGet(p,temp);			
+			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
 		 * Junta camadas em uma nova, contendo as colunas das medidas
@@ -405,7 +405,7 @@ i3GEOF.metaestat = {
 				$inputText("","","i3GEOFjuntaNovoNome","",30,'') +
 				'<br><br><input id=i3geojuntaAplica type="button" value="Aplicar" />' +
 				'<div id=i3GEOFjuntaColunasCalculadas >' +
-				'<br><p class=paragrafo ><b>Colunas calculadas (opcional)</b></p></div>' +
+				'<br><p class=paragrafo ><b>Colunas calculadas (opcional)</b>&nbsp;<img title="Adiciona entrada de formulario" onclick="i3GEOF.metaestat.analise.juntaMedidasVariaveis.noNovoCalculo()" src="'+i3GEO.configura.locaplic+'/imagens/plus.gif" style="cursor: pointer;"></p></div>' +
 				'<div id=i3GEOFjuntaColunasCalculadasMensagemAjuda ></div>' ;
 				$i("i3GEOF.junta_corpo").innerHTML = ins;
 				new YAHOO.widget.Button(
@@ -415,14 +415,14 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.analise.juntaMedidasVariaveis.noNovoCalculo();
 				//ajuda para o calculo
 				i3GEO.util.mensagemAjuda("i3GEOFjuntaColunasCalculadasMensagemAjuda",
-						"As colunas calculadas s&atilde;o f&oacute;rmulas que utilizam as colunas que forem juntadas e que ser&atilde;o acrescentadas"+
-						"&agrave; nova camada. Cada uma dessas colunas receber&aacute; um nome sequencial, por exemplo <i>valortema0,valortema1,"+
-						"valortema2...</i><br>As colunas calculadas podem utilizar essas colunas como entrada em f&oacute;rmulas."+
+						"Os c&aacute;lculos s&atilde;o f&oacute;rmulas que utilizam as colunas que forem juntadas e que ser&atilde;o inclu&iacute;das "+
+						"na nova camada. Cada uma dessas colunas receber&aacute; um nome sequencial, por exemplo <i>valortema0,valortema1,"+
+						"valortema2...</i><br><br>As colunas calculadas podem utilizar esses nomes como entrada em f&oacute;rmulas. "+
 						"Cada f&oacute;rmula ir&aacute; gerar uma nova coluna na tabela e deve utilizar a sintaxe SQL (<a href='http://www.postgresql.org/docs/9.3/static/functions-math.html' target=_blank >SQL no Postgres</a>)"+
-						"<br>Exemplos de uso:<br>" +
-						"coluna de nome <b>soma</b><br>" +
-						"valortema0 + valortema1 <br>" +
-						"coluna de nome <b>taxa</b><br>" +
+						"<br><br>Exemplos de uso:<br><br>" +
+						"coluna de nome: <b>soma</b><br>" +
+						"valortema0 + valortema1 <br><br>" +
+						"coluna de nome: <b>taxa</b><br>" +
 						"(valortema0 * 100) / valortema1"
 				);
 			},
@@ -476,9 +476,10 @@ i3GEOF.metaestat = {
 				p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?g_sid="+i3GEO.configura.sid +
 					"&funcao=juntaMedidasVariaveis&layerNames="+lista.join(",")+"&nome="+$i("i3GEOFjuntaNovoNome").value;
 				ps = i3GEOF.metaestat.analise.juntaMedidasVariaveis.pegaCalculos();
-				atualiza = function(){
+				atualiza = function(retorno){
 					i3GEO.janela.fechaAguarde("aguardeAnalise");
 					i3GEO.atualiza();
+					i3GEO.temaAtivo = retorno.data;
 					i3GEOF.metaestat.analise.comboCamadas();
 				};
 				//i3GEO.util.ajaxGet(p,atualiza);
@@ -609,7 +610,7 @@ i3GEOF.metaestat = {
 					i3GEOF.tme.iniciaJanelaFlutuante();
 				};
 			i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");
-			i3GEO.util.ajaxGet(p,temp);			
+			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
 		 * Abre a ferramenta que mostra um relatorio com sumario estatistico dos dados
@@ -713,7 +714,7 @@ i3GEOF.metaestat = {
 				return;
 			}
 			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
-			
+
 			if(typeof(i3GEOF.legenda.dicionario) === 'undefined'){
 				i3GEO.util.scriptTag(
 					i3GEO.configura.locaplic+"/ferramentas/legenda/dicionario.js",
@@ -723,7 +724,7 @@ i3GEOF.metaestat = {
 			}
 			else{
 				i3GEOF.metaestat.analise.janelaEditorLegenda();
-			}			
+			}
 		},
 		janelaEditorLegenda: function(){
 			i3GEOF.legenda.iniciaJanelaFlutuante();
@@ -736,7 +737,7 @@ i3GEOF.metaestat = {
 				$i("i3GEOFlegendaClassesOpcionais").style.display = "none";
 			}
 			var temp = $i("i3GEOF.legenda_corpo");
-			temp.getElementsByTagName("div")[0].style.display = "none";		
+			temp.getElementsByTagName("div")[0].style.display = "none";
 		},
 		/**
 		 * Ativa a ferramenta que permite editar os simbolos utilizados em uma classe da legenda
