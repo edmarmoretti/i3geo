@@ -1,4 +1,3 @@
-/*&ccedil;jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 $i = function(id)
 {return document.getElementById(id);};
 //seta as vari&aacute;veis navn e navm
@@ -418,10 +417,10 @@ i3GEO.editorOL = {
 		return i3GEO.editorOL.layersLigados()[id];
 	},
 	listaItens: function(layer,idonde,idobj){
-	    if(!layer){return;}
-	    if(!layer.params){return;}
-	    var u = layer.url+"&request=describefeaturetype&service=wfs&version=1.0.0";
-	    u += "&typename="+layer.params.LAYERS;
+			if(!layer){return;}
+			if(!layer.params){return;}
+			var u = layer.url+"&request=describefeaturetype&service=wfs&version=1.0.0";
+			u += "&typename="+layer.params.LAYERS;
 		document.body.style.cursor="wait";
 		document.getElementById("i3geoMapa").style.cursor = "wait";
 		OpenLayers.Request.issue({
@@ -454,9 +453,9 @@ i3GEO.editorOL = {
 	busca: function(layer,item,palavra,onde){
 		document.body.style.cursor="wait";
 		document.getElementById("i3geoMapa").style.cursor = "wait";
-	    var u = layer.url+"&request=getfeature&service=wfs&version=1.0.0";
-	    u += "&OUTPUTFORMAT=gml2&typename="+layer.params.LAYERS;
-	    u += "&filter=<Filter><PropertyIsLike wildcard=* singleChar=. escape=! ><PropertyName>"+item+"</PropertyName><Literal>*"+palavra+"*</Literal></PropertyIsLike></Filter>";
+			var u = layer.url+"&request=getfeature&service=wfs&version=1.0.0";
+			u += "&OUTPUTFORMAT=gml2&typename="+layer.params.LAYERS;
+			u += "&filter=<Filter><PropertyIsLike wildcard=* singleChar=. escape=! ><PropertyName>"+item+"</PropertyName><Literal>*"+palavra+"*</Literal></PropertyIsLike></Filter>";
 		document.body.style.cursor="wait";
 		document.getElementById("i3geoMapa").style.cursor = "wait";
 		document.getElementById(onde).innerHTML = "...";
@@ -534,9 +533,9 @@ i3GEO.editorOL = {
 		var layers = [i3GEO.editorOL.layerAtivo()],
 			xy = lonlat.split(","),
 			u = layers[0].url+"&request=getfeature&service=wfs&version=1.0.0";
-	    u += "&OUTPUTFORMAT=gml2&typename="+layers[0].params.LAYERS;
+			u += "&OUTPUTFORMAT=gml2&typename="+layers[0].params.LAYERS;
 
-	    //u += "&filter=<Filter><Intersects><PropertyName>Geometry</PropertyName><gml:Point><gml:coordinates>"+lonlat+"</gml:coordinates></gml:Point></Intersects></Filter>";
+			//u += "&filter=<Filter><Intersects><PropertyName>Geometry</PropertyName><gml:Point><gml:coordinates>"+lonlat+"</gml:coordinates></gml:Point></Intersects></Filter>";
 
 		xy[0] = xy[0] * 1;
 		xy[1] = xy[1] * 1;
@@ -618,9 +617,9 @@ i3GEO.editorOL = {
 			ins += "<b>Atributos: "+i+"</b><br>";
 			var a = geos[i].attributes;
 			for(key in a){
-   				if(a[key]){
-   					ins += key+" = "+a[key]+"<br>";
-   				}
+					 if(a[key]){
+						 ins += key+" = "+a[key]+"<br>";
+					 }
 			}
 		}
 		var w = window.open();
@@ -632,28 +631,28 @@ i3GEO.editorOL = {
 	},
 	criaBotoes: function(botoes){
 		var sketchSymbolizers = {
-		    "Point": {
-		        pointRadius: 4,
-		        graphicName: "square",
-		        fillColor: "white",
-		        fillOpacity: 1,
-		        strokeWidth: 1,
-		        strokeOpacity: 1,
-		        strokeColor: "#333333"
-		    },
-		    "Line": {
-		        strokeWidth: 3,
-		        strokeOpacity: 1,
-		        strokeColor: "#666666",
-		        strokeDashstyle: "dash"
-		    },
-		    "Polygon": {
-		        strokeWidth: 2,
-		        strokeOpacity: 1,
-		        strokeColor: "#666666",
-		        fillColor: "white",
-		        fillOpacity: 0.3
-		    }
+				"Point": {
+						pointRadius: 4,
+						graphicName: "square",
+						fillColor: "white",
+						fillOpacity: 1,
+						strokeWidth: 1,
+						strokeOpacity: 1,
+						strokeColor: "#333333"
+				},
+				"Line": {
+						strokeWidth: 3,
+						strokeOpacity: 1,
+						strokeColor: "#666666",
+						strokeDashstyle: "dash"
+				},
+				"Polygon": {
+						strokeWidth: 2,
+						strokeOpacity: 1,
+						strokeColor: "#666666",
+						fillColor: "white",
+						fillOpacity: 0.3
+				}
 		},
 		style = new OpenLayers.Style(),
 		styleMap = new OpenLayers.StyleMap({"default": style}),
@@ -661,7 +660,7 @@ i3GEO.editorOL = {
 		button,
 		controles = [];
 		style.addRules([
-		    new OpenLayers.Rule({symbolizer: sketchSymbolizers})
+				new OpenLayers.Rule({symbolizer: sketchSymbolizers})
 		]);
 		i3GEOpanelEditor = new OpenLayers.Control.Panel({
 			displayClass: "olControlEditingToolbar1 noprint",
@@ -1248,24 +1247,24 @@ i3GEO.editorOL = {
 		{return;}
 		var SHADOW_Z_INDEX = 10,
 			MARKER_Z_INDEX = 11,
-            layer = new OpenLayers.Layer.Vector(
-                "pontos",
-                {
-                    styleMap: new OpenLayers.StyleMap({
-                        externalGraphic: i3GEO.editorOL.marca,
-                        backgroundGraphic: "../pacotes/openlayers/img/marker_shadow.png",
-                        backgroundXOffset: 0,
-                        backgroundYOffset: -7,
-                        graphicZIndex: MARKER_Z_INDEX,
-                        backgroundGraphicZIndex: SHADOW_Z_INDEX,
-                        pointRadius: 10
-                    }),
-                    isBaseLayer: false,
-                    rendererOptions: {yOrdering: true},
+						layer = new OpenLayers.Layer.Vector(
+								"pontos",
+								{
+										styleMap: new OpenLayers.StyleMap({
+												externalGraphic: i3GEO.editorOL.marca,
+												backgroundGraphic: "../pacotes/openlayers/img/marker_shadow.png",
+												backgroundXOffset: 0,
+												backgroundYOffset: -7,
+												graphicZIndex: MARKER_Z_INDEX,
+												backgroundGraphicZIndex: SHADOW_Z_INDEX,
+												pointRadius: 10
+										}),
+										isBaseLayer: false,
+										rendererOptions: {yOrdering: true},
 					displayInLayerSwitcher:true,
 					visibility:true
-                }
-            ),
+								}
+						),
 			index,
 			x = [],
 			y = [],

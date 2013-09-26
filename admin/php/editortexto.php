@@ -65,7 +65,7 @@ body {
 			echo "</TEXTAREA>";
 			$mapfile = str_replace("\\","/",$mapfile);
 			$mapa = ms_newMapObj($mapfile);
-			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=490&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
+			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=490&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
 			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
 

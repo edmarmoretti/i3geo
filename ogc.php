@@ -49,6 +49,8 @@ format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application
 id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
 	nao deve ser utilizado junto com tema
 
+DESLIGACACHE (opcional) {sim|nao} - forca a nao usar o cache de imagens qd definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
+
 Exemplos:
 
 ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
@@ -189,6 +191,10 @@ if(isset($_GET["tms"])){
 }
 if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$agora .= "google";
+}
+if(isset($_GET["DESLIGACACHE"]) && $_GET["DESLIGACACHE"] == "sim"){
+	$agora = time();
+	$cache = false;
 }
 $nomeMapfileTmp = $dir_tmp."/ogc_".md5($tema)."_".$agora.".map";
 $nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
