@@ -312,6 +312,10 @@ i3GEO.mapa = {
 		*/
 		ID: "",
 		/*
+		 * Armazena a lista de camadas que devem ficar escondidas na legenda
+		 */
+		CAMADASSEMLEGENDA: [],
+		/*
 		Function: cria
 
 		Cria a legenda HTML
@@ -346,34 +350,46 @@ i3GEO.mapa = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.atualiza()");}
 			var idleg,
 				temp = function(retorno){
-					var ins,elementos,i,temp,re;
+					var legenda = "",ins,elementos,i,temp,re;
 					re = new RegExp("<img src='' />", "g");
-					if(i3GEO.mapa.legendaHTML.ID !== "" && $i(i3GEO.mapa.legendaHTML.ID)){
-						if ((retorno.data !== "erro") && (retorno.data !== undefined)){
-							ins = "";
-							if(i3GEO.mapa.legendaHTML.incluiBotaoLibera === true)
-							{ins += '<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -35px; top: -22px;">'+$trad("x11")+'</p></div>';}
-							temp = retorno.data.legenda;
-							temp = temp.replace(re,"");
-							ins += "<div id='corpoLegi' >"+ temp + "</div>";
-							$i(i3GEO.mapa.legendaHTML.ID).innerHTML = ins;
+					if (retorno.data !== "erro" && retorno.data !== undefined ){
+						legenda = "<div onclick='i3GEO.mapa.legendaHTML.mostraTodosOsTemas()' style=cursor:pointer;font-size:10px;text-align:left; >Mostra tudo</div><br>"+retorno.data.legenda;
+					}
+					if(legenda != "" && idleg){
+						ins = "";
+						if(i3GEO.mapa.legendaHTML.incluiBotaoLibera === true){
+							ins += '<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -35px; top: -22px;">'+$trad("x11")+'</p></div>';
 						}
+						legenda = legenda.replace(re,"");
+						ins += "<div id='corpoLegi' >"+ legenda + "</div>";
+
+						idleg.innerHTML = legenda;
 					}
-					if ($i("wlegenda_corpo")){
-						$i("wlegenda_corpo").innerHTML = retorno.data.legenda;
-						elementos = $i("wlegenda_corpo").getElementsByTagName("input");
-						for(i=0;i<elementos.length;i += 1)
-						{elementos[i].style.display="none";}
-					}
+					i3GEO.mapa.legendaHTML.escondeTemasMarcados();
 				};
-			if(i3GEO.mapa.legendaHTML.ID !== ""){
-				idleg = $i(i3GEO.mapa.legendaHTML.ID);
-				if(idleg && idleg.style.display === "block")
-				{i3GEO.mapa.legendaHTML.obtem(temp);}
-			}
 			idleg = $i("wlegenda_corpo");
-			if (idleg && idleg.style.display === "block")
-			{i3GEO.mapa.legendaHTML.obtem(temp);}
+			if (idleg && idleg.style.display === "block"){
+				//para o caso da legenda ja estar aberta
+				if(i3GEO.mapa.legendaHTML.ID !== ""){
+					idleg = $i(i3GEO.mapa.legendaHTML.ID);
+					if(idleg){
+						idleg.innerHTML = "";
+					}
+				}
+				idleg = $i("wlegenda_corpo");
+				i3GEO.mapa.legendaHTML.obtem(temp);
+			}
+			else{
+				if(idleg){
+					idleg.innerHTML = "";
+				}
+				if(i3GEO.mapa.legendaHTML.ID !== ""){
+					idleg = $i(i3GEO.mapa.legendaHTML.ID);
+					if(idleg && idleg.style.display === "block"){
+						i3GEO.mapa.legendaHTML.obtem(temp);
+					}
+				}
+			}
 		},
 		/*
 		Faz a chamada em AJAX que gera a legenda
@@ -408,6 +424,28 @@ i3GEO.mapa = {
 			else
 			{i3GEO.php.ligatemas(temp,"",inputbox.value);}
 		},
+		escondeTema: function(tema){
+			var d = $i("legendaLayer_"+tema);
+			if(d){
+				d.style.display = "none";
+				i3GEO.mapa.legendaHTML.CAMADASSEMLEGENDA.push(tema);
+			}
+		},
+		escondeTemasMarcados: function(){
+			var temas = i3GEO.mapa.legendaHTML.CAMADASSEMLEGENDA,
+				n = temas.length,
+				i,temp;
+			for(i=0;i<n;i++){
+				temp = $i(temas[i]);
+				if(temp){
+					temp.style.display = "none";
+				}
+			}
+		},
+		mostraTodosOsTemas: function(){
+			i3GEO.mapa.legendaHTML.CAMADASSEMLEGENDA = [];
+			i3GEO.mapa.legendaHTML.atualiza();
+		},
 		/*
 		Function: libera
 
@@ -422,46 +460,35 @@ i3GEO.mapa = {
 				ck = "nao";
 			}
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.libera()");}
-			var temp = function(retorno){
-				var i,cabecalho,minimiza,janela,temp,n;
-				if (!$i("wlegenda")){
-					cabecalho = function(){
-					};
-					minimiza = function(){
-						i3GEO.janela.minimiza("wlegenda");
-					};
-					janela = i3GEO.janela.cria(
-							"302px",
-							"300px",
-							"",
-							"",
-							"",
-							$trad("p3"),
-							"wlegenda",
-							false,
-							"hd",
-							cabecalho,
-							minimiza
-					);
-					janela = janela[0];
-					YAHOO.i3GEO.janela.manager.register(janela);
-					janela.render();
-				}
-				else{
-					janela = YAHOO.i3GEO.janela.manager.find("wlegenda");
-				}
-				$i("wlegenda_corpo").innerHTML = retorno.data.legenda;
-				$i("wlegenda_corpo").style.backgroundColor = "white";
-				if(ck === "nao"){
-					temp = $i("wlegenda_corpo").getElementsByTagName("input");
-					n = temp.length;
-					for(i=0;i<n;i += 1){
-						temp[i].style.display = "none";
-					}
-				}
-				janela.show();
-			};
-			i3GEO.mapa.legendaHTML.obtem(temp);
+			var i,cabecalho,minimiza,janela,temp,n;
+			if (!$i("wlegenda")){
+				cabecalho = function(){
+				};
+				minimiza = function(){
+					i3GEO.janela.minimiza("wlegenda");
+				};
+				janela = i3GEO.janela.cria(
+						"302px",
+						"300px",
+						"",
+						"",
+						"",
+						$trad("p3"),
+						"wlegenda",
+						false,
+						"hd",
+						cabecalho,
+						minimiza
+				);
+			}
+			else{
+				janela = YAHOO.i3GEO.janela.manager.find("wlegenda");
+			}
+			$i("wlegenda_corpo").style.backgroundColor = "white";
+			janela.show();
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.mapa.legendaHTML.atualiza()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.mapa.legendaHTML.atualiza()");}
+			i3GEO.mapa.legendaHTML.atualiza();
 		}
 	},
 	/*
