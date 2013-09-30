@@ -129,7 +129,7 @@ i3GEOF.graficointerativo1.dicionario = {
 		22: [{
 			pt:"Utiliza valores acumulados",
 			en:"",titleFont:  'bold 14px sans-serif',
-								titlePosition: "top",
+			titlePosition: "top",
 			es:"",
 			it:""
 		}],
@@ -170,7 +170,7 @@ i3GEOF.graficointerativo1.dicionario = {
 			it:""
 		}],
 		29: [{
-			pt:"Fator de c&aacute;lculo da largura do gr&aacute;fico. O n&uacute;mero de ocorr&ecirc;ncias ser&aacute; multiplicado por esse fator para calcular o tamanho final do gr&aacute;fico em pixels",
+			pt:"Fator de c&aacute;lculo da largura do gr&aacute;fico. O n&uacute;mero de ocorr&ecirc;ncias ser&aacute; multiplicado por esse fator para calcular o tamanho final do gr&aacute;fico em pixels. Deixe como 0 para usar o c&aacute;lculo autom&aacute;tico.",
 			en:"",
 			es:"",
 			it:""

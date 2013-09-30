@@ -92,8 +92,10 @@ i3GEOF.listamapas = {
 							ins += "</b></p>";
 							ins += "<p class=paragrafo >Templates: ";
 							for(j=0;j<m;j++){
-								url = i3GEO.configura.locaplic+templates.metaestatTemplates+"/"+templates.nomes[j]+"?id="+mapas[i].id_mapa;
-								ins += "<a href='"+url+"' class=paragrafo target='_blank' style='text-decoration:none;' >"+templates.nomes[j].replace(".php","")+"</a> - ";
+								if(templates.nomes[j].search('.png') < 0){
+									url = i3GEO.configura.locaplic+templates.metaestatTemplates+"/"+templates.nomes[j]+"?id="+mapas[i].id_mapa;
+									ins += "<a href='"+url+"' class=paragrafo target='_blank' style='text-decoration:none;' >"+templates.nomes[j].replace(".php","")+"</a> - ";
+								}
 							}
 							ins += "</p></div>";
 						}

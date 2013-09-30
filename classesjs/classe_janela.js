@@ -224,11 +224,13 @@ i3GEO.janela = {
 
 	funcaoMinimiza {function} - (opcional) funcao que ser&aacute; executada para minimizar a janela
 
+	funcaoAposRedim {function} - (opcional) funcao que ser&aacute; executada para alterar o tamanho da janela
+
 	Return:
 
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
-	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
+	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza, funcaoAposRedim){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
 		if($i(id)){
 			janela = YAHOO.i3GEO.janela.manager.find(id);
@@ -305,9 +307,16 @@ i3GEO.janela = {
 			$i(id+'_corpo').style.width=parseInt(wlargura,10)+"px";
 		}
 		//cria a janela
-		if(waltura === "auto")
-		{janela = new YAHOO.widget.Panel(id, { iframe:ifr,modal:modal, width: wlargurA,underlay:"none", fixedcenter: fix, constraintoviewport: true, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
-		else{janela = new YAHOO.widget.ResizePanel(id, { hideMode:'offsets',iframe:ifr,underlay:underlay, modal:modal, width: wlargurA, fixedcenter: fix, constraintoviewport: true, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		if(waltura === "auto"){
+			janela = new YAHOO.widget.Panel(id, {
+				iframe:ifr,modal:modal, width: wlargurA,underlay:"none", fixedcenter: fix, constraintoviewport: true, visible: true,monitorresize:false,dragOnly:true,keylisteners:null
+			} );
+		}
+		else{
+			janela = new YAHOO.widget.ResizePanel(id, {
+				hideMode:'offsets',iframe:ifr,underlay:underlay, modal:modal, width: wlargurA, fixedcenter: fix, constraintoviewport: true, visible: true,monitorresize:false,dragOnly:true,keylisteners:null
+			} );
+		}
 		if(nx !== "" && nx !== "center"){
 			janela.moveTo(nx,ny + 50);
 		}
@@ -320,6 +329,15 @@ i3GEO.janela = {
 		janela.cfg.setProperty("zIndex",[4]);
 		janela.render();
 		janela.bringToTop();
+		//funcao executada apos o mouse sair do icone de resize
+		if(funcaoAposRedim){
+			temp = $i(id + "_resizehandle");
+			if(temp){
+				temp.onmouseup = function(){
+					funcaoAposRedim.call();
+				};
+			}
+		}
 		//ajusta estilos e outras caracter&iacute;sticas da janela criada
 		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL === "googleearth")
 		{janela.moveTo(0,0);}
@@ -333,10 +351,12 @@ i3GEO.janela = {
 		}
 		YAHOO.util.Event.addListener($i(id), "click", YAHOO.util.Event.stopPropagation);
 		//finaliza
-		if(funcaoCabecalho)
-		{$i(id+'_cabecalho').onclick = funcaoCabecalho;}
-		if(funcaoMinimiza)
-		{$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;}
+		if(funcaoCabecalho){
+			$i(id+'_cabecalho').onclick = funcaoCabecalho;
+		}
+		if(funcaoMinimiza){
+			$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;
+		}
 		YAHOO.util.Event.addListener(janela.close, "click", i3GEO.janela.fecha,janela,{id:id},true);
 		//$i(id+"_c").style.zIndex = 20000;
 		return([janela,$i(id+"_cabecalho"),temp]);
@@ -1105,6 +1125,8 @@ try{
 				if (userConfig)
 				{this.cfg.applyConfig(userConfig, true);}
 				this.initEvent.fire(YAHOO.widget.ResizePanel);
+					//if(me.cfg.initialConfig
+					//oResizeHandle.onmouseup = function(){alert("oi")};
 			},
 			toString: function()
 			{return "ResizePanel " + this.id;}

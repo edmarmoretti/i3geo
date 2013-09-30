@@ -426,16 +426,18 @@ i3GEOF.graficointerativo1 = {
 				+ '</option></select> '
 				+ $trad(28, i3GEOF.graficointerativo1.dicionario)
 				+ '</p>'
-				+ '	<p class=paragrafo ><input style=cursor:pointer;width:50px; value=40 type=text id=i3GEOgraficointerativo1FatorTamanho /> '
+				+ '	<p class=paragrafo ><input style=cursor:pointer;width:50px; value=0 type=text id=i3GEOgraficointerativo1FatorTamanho /> '
 				+ $trad(29, i3GEOF.graficointerativo1.dicionario)
 				+ '</p>'
 				+ '</div>'
 				//aqui vai o grafico
 				+ '<div class=guiaobj id="i3GEOgraficointerativo1guia4obj" style="left:1px;display:none;top:-10px">'
-				+ '	<a href="#" onclick="i3GEOF.graficointerativo1.novaJanela()" >'
+				+ '	<a style=position:absolute;left:50px; href="#" onclick="i3GEOF.graficointerativo1.novaJanela()" >'
 				+ $trad(30, i3GEOF.graficointerativo1.dicionario)
 				+ '</a>'
-				+ '	<div id=i3GEOgraficointerativo1guia4objCanvas ></div>'
+				+ ' <img onclick="i3GEOF.graficointerativo1.alteraFatorPixel(\'menos\')" style=position:absolute; src="'+i3GEO.configura.locaplic+'/imagens/player_volta.png" />'
+				+ ' <img onclick="i3GEOF.graficointerativo1.alteraFatorPixel(\'mais\')" style=position:absolute;left:20px; src="'+i3GEO.configura.locaplic+'/imagens/player_avanca.png" />'
+				+ '	<div id=i3GEOgraficointerativo1guia4objCanvas style="top:15px;"></div>'
 				+ '</div>'
 				//csv
 				+ '<div class=guiaobj id="i3GEOgraficointerativo1guia5obj" style="font-size:10px;left:10px;display:none;top:-0px">'
@@ -470,13 +472,19 @@ i3GEOF.graficointerativo1 = {
 			minimiza = function() {
 				i3GEO.janela.minimiza("i3GEOF.graficointerativo1");
 			};
+			mudaTamanhoGrafico = function(){
+				var t = $i("i3GEOgraficointerativo1Grafico");
+				if(t.style.display === "block"){
+					i3GEOF.graficointerativo1.tabela2dados();
+				}
+			};
 			titulo = "&nbsp;&nbsp;&nbsp;"
 				+ $trad("t37b")
 				+ " <a class=ajuda_usuario target=_blank href='"
 				+ i3GEO.configura.locaplic
 				+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
 			janela = i3GEO.janela.cria("480px", "450px", "", "", "", titulo,
-					"i3GEOF.graficointerativo1", false, "hd", cabecalho, minimiza);
+					"i3GEOF.graficointerativo1", false, "hd", cabecalho, minimiza, mudaTamanhoGrafico);
 			divid = janela[2].id;
 			i3GEOF.graficointerativo1.aguarde = $i("i3GEOF.graficointerativo1_imagemCabecalho").style;
 			$i("i3GEOF.graficointerativo1_corpo").style.backgroundColor = "white";
@@ -582,6 +590,23 @@ i3GEOF.graficointerativo1 = {
 			} else {
 				$i("i3GEOgraficointerativo1guia4").onclick.call();
 			}
+		},
+		alteraFatorPixel: function(tipo){
+			var delta = 20,
+				temp = $i("i3GEOgraficointerativo1FatorTamanho"),
+				v = parseInt(temp.value,10);
+			if(temp.value >= 0){
+				if(tipo === "mais"){
+					temp.value = v + delta;
+				}
+				else{
+					temp.value = v - delta;
+				}
+			}
+			if(parseInt(temp.value,10) < 0){
+				temp.value = 0;
+			}
+			$i("i3GEOgraficointerativo1guia4").onclick.call();
 		},
 		/*
 		 * Function: configuraDados
@@ -926,8 +951,12 @@ i3GEOF.graficointerativo1 = {
 			ninputs = inputs.length,
 			tipoColuna = "String",
 			metadados = [],
-			i,j,
-			acumulado = [], acum, cores = [], par = [], total = 0, menor = inputs[1].value * 1, maior = 0, legendaX = "", legendaY = "", dados = {}, xInclinado = $i("i3GEOgraficointerativo1xInclinado").checked;
+			i,j,acumulado = [], acum, cores = [], par = [], total = 0,
+			menor = 0, maior = 0, legendaX = "", legendaY = "", dados = {}, xInclinado = $i("i3GEOgraficointerativo1xInclinado").checked;
+
+			if(ninputs > 0){
+				menor = inputs[1].value * 1;
+			}
 			if ($i("i3GEOgraficointerativo1ComboTemasId")) {
 				titulo = $i("i3GEOgraficointerativo1ComboTemasId").options[$i("i3GEOgraficointerativo1ComboTemasId").options.selectedIndex].text;
 			}
@@ -981,7 +1010,7 @@ i3GEOF.graficointerativo1 = {
 				}
 				cores = colunas[2];
 			}
-			if (legendaX == legendaY) {
+			if (legendaX == legendaY && (legendaX != "" && legendaY != "")) {
 				menor = 0;
 				legendaX += " (" + $trad(45, i3GEOF.graficointerativo1.dicionario)
 				+ ")";
@@ -1147,9 +1176,8 @@ i3GEOF.graficointerativo1 = {
 			}
 		},
 		configDefault : function(dados, maior, cores, legendaY, legendaX) {
-			var config = {
+			var temp,config = {
 					canvas : "i3GEOgraficointerativo1guia4objCanvas",
-					width : dados.resultset.length * $i("i3GEOgraficointerativo1FatorTamanho").value,
 					height : parseInt($i("i3GEOF.graficointerativo1_corpo").style.height, 10) - 80,
 					orthoAxisTitle : legendaY,
 					valuesFont : 'normal 9px sans-serif ',
@@ -1213,6 +1241,13 @@ i3GEOF.graficointerativo1 = {
 			}
 			if($i("i3GEOgraficointerativo1TituloY").value != ""){
 				config.orthoAxisTitle = $i("i3GEOgraficointerativo1TituloY").value;
+			}
+			var temp = $i("i3GEOgraficointerativo1FatorTamanho");
+			if(temp && temp.value > 0){
+				config.width = dados.resultset.length * temp.value;
+			}
+			else{
+				config.width = parseInt($i("i3GEOF.graficointerativo1_corpo").style.width,10) - 20;
 			}
 			return config;
 		},
