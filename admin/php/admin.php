@@ -60,6 +60,19 @@ if(!empty($esquemaadmin)){
 }
 
 /*
+ * Testa se os elementos de um array sao numericos
+ * Utilizado para evitar injecao de SQL
+ */
+function testaNumerico($valores){
+	foreach ($valores as $valor) {
+		if(!empty($valor) && !is_numeric($valor)) {
+			echo "valor nao numerico";
+			exit;
+		}
+	}
+}
+
+/*
  Function: retornaJSON
 
 Converte um array em um objeto do tipo JSON utilizando a biblioteca CPAINT
@@ -107,7 +120,7 @@ function retornaJSON($obj)
 /*
  Function: verificaDuplicados
 
-Verifica se o resultado de um SQL retoena mais de um registro
+Verifica se o resultado de um SQL retorna mais de um registro
 
 Parametros:
 

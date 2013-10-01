@@ -1363,7 +1363,7 @@ i3GEOF.metaestat = {
 			for(i=0;i<n;i++){
 				c = $i("comboparametro_"+dados[i].id_parametro_medida+"_"+dados[i].id_pai);
 				if(c && c.value != ""){
-					t.push(dados[i].coluna+"="+c.value);
+					t.push(dados[i].coluna+'="'+c.value+'"');
 				}
 			}
 			if(t.length > 0){

@@ -1140,6 +1140,8 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "MAPFILEMEDIDAVARIAVEL":
+		//$filtro usa aspas duplas para enviar os parametros
+		$filtro = str_replace('"',"'",$filtro);
 		$m = new Metaestat();
 		if(!isset($codigo_tipo_regiao)){
 			$codigo_tipo_regiao = "";

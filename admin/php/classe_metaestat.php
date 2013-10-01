@@ -183,6 +183,8 @@ class Metaestat{
 	 * @return Array
 	 */
 	function execSQL($sql,$id="",$convTexto=true){
+		$buscar = array("drop","update","insert","delete");
+		$sql = str_ireplace($buscar,"",$sql);
 		try	{
 			$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
 		}
@@ -223,6 +225,8 @@ class Metaestat{
 	 * @return resultado de execSQL
 	*/
 	function execSQLDB($codigo_estat_conexao,$sql){
+		$buscar = array("drop","update","insert","delete");
+		$sql = str_ireplace($buscar,"",$sql);
 		$c = $this->listaConexao($codigo_estat_conexao,true);
 		$dbhold = $this->dbh;
 		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
@@ -257,6 +261,7 @@ class Metaestat{
 	 * @param id do registro que sera selecionado e excluido
 	 */
 	function excluirRegistro($tabela,$coluna,$id){
+		$this->testaNumerico(array($id));
 		try	{
 			$this->dbhw->query("DELETE from ".$this->esquemaadmin.$tabela." WHERE $coluna = $id");
 			return "ok";
@@ -271,6 +276,7 @@ class Metaestat{
 	 * @param id da fonte
 	 */
 	function excluirFonteinfoMedida($id_medida_variavel,$id_fonteinfo){
+		$this->testaNumerico(array($id_medida_variavel,$id_fonteinfo));
 		try	{
 			$this->dbhw->query("DELETE from ".$this->esquemaadmin."i3geoestat_fonteinfo_medida WHERE id_medida_variavel = $id_medida_variavel and id_fonteinfo = $id_fonteinfo");
 			return "ok";
@@ -481,7 +487,10 @@ class Metaestat{
 		}
 		//adiciona a coluna com os valores no inicio do array()
 		$colunasSemGeo = array_merge(array($dados["colunavalor"]),$colunasSemGeo);
-
+		$buscar = array("drop","update","insert","create","alter","delete");
+		$sql = str_ireplace($buscar,"",$sql);
+		$sqlagrupamento = str_ireplace($buscar,"",$sqlagrupamento);
+		$sqlgeo = str_ireplace($buscar,"",$sqlgeo);
 		return array(
 			"nomeregiao"=>$dadosgeo["colunanomeregiao"],
 			"titulo"=>$titulo,
@@ -944,28 +953,12 @@ class Metaestat{
 	 */
 	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = "",$limite=""){
 		set_time_limit(0);
-		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor);
+		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,"polygon","",false,$filtro);
 		$sqlf = $sql["sqlmapserver"];
 		//remove marcadores geo
 		$sqlf = explode("/*SE*/",$sqlf);
 		$sqlf = explode("/*SG*/",$sqlf[1]);
 		$sqlf = $sqlf[0]." ".$sqlf[2];
-		if($filtro != ""){
-			$sqlf = str_replace("__filtro__"," AND ".$filtro,$sqlf);
-		}
-		else{
-			$sqlf = str_replace("__filtro__"," ",$sqlf);
-		}
-		/*
-		if($sql["filtro"] == true){
-			if(!empty($filtro)){
-				$sqlf = $sqlf." AND ".$filtro;
-			}
-		}
-		elseif(!empty($filtro)){
-			$sqlf .= " WHERE ".$filtro;
-		}
-		* */
 		if($limite != ""){
 			$sqlf .= " limit ".$limite;
 		}
@@ -1120,6 +1113,7 @@ class Metaestat{
 				$titulo = utf8_encode($titulo);
 			}
 			if($id_mapa != ""){
+				$this->testaNumerico(array($id_mapa));
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_mapa SET titulo='$titulo',template='$template',logoesquerdo='$logoesquerdo',logodireito='$logodireito',publicado='$publicado' WHERE id_mapa = $id_mapa");
 				$retorna = $id_mapa;
 			}
@@ -1142,6 +1136,7 @@ class Metaestat{
 	 * @return id do grupo
 	 */
 	function alteraMapaGrupo($id_mapa,$id_mapa_grupo="",$titulo=""){
+		$this->testaNumerico(array($id_mapa,$id_mapa_grupo));
 		try	{
 			if($this->convUTF){
 				$titulo = utf8_encode($titulo);
@@ -1172,6 +1167,7 @@ class Metaestat{
 	 * @return id do tema
 	 */
 	function alteraMapaTema($id_mapa_grupo,$id_mapa_tema="",$titulo="",$id_medida_variavel=""){
+		$this->testaNumerico(array($id_mapa_grupo,$id_mapa_tema,$id_medida_variavel));
 		try	{
 			if($this->convUTF){
 				$titulo = utf8_encode($titulo);
@@ -1202,6 +1198,7 @@ class Metaestat{
 	 * @return id da variavel
 	 */
 	function alteraVariavel($codigo_variavel="",$nome="",$descricao=""){
+		$this->testaNumerico(array($codigo_variavel));
 		try	{
 			if($this->convUTF){
 				$nome = utf8_encode($nome);
@@ -1240,6 +1237,7 @@ class Metaestat{
 	 * @return id da medida
 	*/
 	function alteraMedidaVariavel($codigo_variavel,$id_medida_variavel="",$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$colunaidunico,$filtro,$nomemedida){
+		$this->testaNumerico(array($codigo_variavel,$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao));
 		try	{
 			if($id_medida_variavel != ""){
 				if($this->convUTF){
@@ -1271,6 +1269,7 @@ class Metaestat{
 	 * @return id do link
 	 */
 	function alteraLinkMedida($id_medida_variavel,$id_link="",$nome,$link){
+		$this->testaNumerico(array($id_medida_variavel,$id_link));
 		try	{
 			if($id_link != ""){
 				if($this->convUTF){
@@ -1301,6 +1300,7 @@ class Metaestat{
 	 * @return id da fonte
 	 */
 	function alteraFonteinfo($id_fonteinfo="",$titulo,$link){
+		$this->testaNumerico(array($id_fonteinfo));
 		try	{
 			if($id_fonteinfo != ""){
 				if($this->convUTF){
@@ -1325,6 +1325,7 @@ class Metaestat{
 	 */
 	function adicinaFonteinfoMedida($id_medida_variavel,$id_fonteinfo){
 		//echo "INSERT INTO ".$this->esquemaadmin."i3geoestat_fonteinfo_medida (id_medida_variavel,id_fonteinfo) VALUES ('$id_medida_variavel','$id_fonteinfo')";exit;
+		$this->testaNumerico(array($id_medida_variavel,$id_fonteinfo));
 		$this->dbhw->query("INSERT INTO ".$this->esquemaadmin."i3geoestat_fonteinfo_medida (id_medida_variavel,id_fonteinfo) VALUES ('$id_medida_variavel','$id_fonteinfo')");
 	}
 	/**
@@ -1339,6 +1340,7 @@ class Metaestat{
 	 * @return id da unidade
 	 */
 	function alteraUnidadeMedida($codigo_unidade_medida,$nome,$sigla,$permitesoma,$permitemedia){
+		$this->testaNumerico(array($codigo_unidade_medida));
 		try	{
 			if($codigo_unidade_medida != ""){
 				if($this->convUTF){
@@ -1365,6 +1367,7 @@ class Metaestat{
 	 * @return codigo do tipo de periodo
 	 */
 	function alteraTipoPeriodo($codigo_tipo_periodo,$nome,$descricao){
+		$this->testaNumerico(array($codigo_tipo_periodo));
 		try	{
 			if($codigo_tipo_periodo != ""){
 				if($this->convUTF){
@@ -1396,6 +1399,7 @@ class Metaestat{
 	 * @return id da conexao
 	 */
 	function alteraConexao($codigo_estat_conexao,$bancodedados,$host,$porta,$usuario){
+		$this->testaNumerico(array($codigo_estat_conexao));
 		try	{
 			if($codigo_estat_conexao != ""){
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_conexao SET usuario = '$usuario',porta = '$porta',host = '$host',bancodedados = '$bancodedados' WHERE codigo_estat_conexao = $codigo_estat_conexao");
@@ -1433,6 +1437,7 @@ class Metaestat{
 	 * @return id da regiao
 	 */
 	function alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao,$colunasvisiveis,$apelidos){
+		$this->testaNumerico(array($codigo_tipo_regiao,$codigo_estat_conexao));
 		try	{
 			if($codigo_tipo_regiao != ""){
 				if($this->convUTF){
@@ -1463,6 +1468,7 @@ class Metaestat{
 	 * @return id
 	 */
 	function alteraAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao="",$codigo_tipo_regiao_pai="",$colunaligacao_regiaopai=""){
+		$this->testaNumerico(array($codigo_tipo_regiao,$id_agregaregiao,$codigo_tipo_regiao_pai));
 		try	{
 			if($id_agregaregiao != ""){
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_agregaregiao SET colunaligacao_regiaopai = '$colunaligacao_regiaopai', codigo_tipo_regiao_pai = '$codigo_tipo_regiao_pai' WHERE id_agregaregiao = $id_agregaregiao");
@@ -1492,6 +1498,7 @@ class Metaestat{
 	 * @return id do parametro
 	 */
 	function alteraParametroMedida($id_medida_variavel,$id_parametro_medida="",$nome,$descricao,$coluna,$id_pai,$tipo="0"){
+		$this->testaNumerico(array($id_medida_variavel,$id_parametro_medida,$id_pai));
 		try	{
 			if($id_parametro_medida != ""){
 				if($this->convUTF){
@@ -1525,6 +1532,7 @@ class Metaestat{
 	 * @return id
 	 */
 	function alteraClassificacaoMedida($id_medida_variavel,$id_classificacao="",$nome="",$observacao=""){
+		$this->testaNumerico(array($id_medida_variavel,$id_classificacao));
 		try	{
 			if($id_classificacao != ""){
 				if($this->convUTF){
@@ -1563,6 +1571,7 @@ class Metaestat{
 	 * @return id
 	 */
 	function alteraClasseClassificacao($id_classificacao,$id_classe="",$titulo="",$expressao="",$vermelho="",$verde="",$azul="",$tamanho="",$simbolo="",$overmelho="",$overde="",$oazul="",$otamanho=""){
+		$this->testaNumerico(array($id_classificacao,$id_classe));
 		try	{
 			if($id_classe != ""){
 				if($this->convUTF){
@@ -2135,26 +2144,31 @@ class Metaestat{
 	 * @return execSQLDB
 	 */
 	function alteraNomeColunaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nome_coluna,$novonome_coluna){
-		$res = $this->execSQLDB($codigo_estat_conexao,"ALTER TABLE ".$nome_esquema.".".$nome_tabela." RENAME COLUMN $nome_coluna TO ".$novonome_coluna );
+		$c = $this->listaConexao($codigo_estat_conexao,true);
+		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+
+		$sql = "ALTER TABLE ".$nome_esquema.".".$nome_tabela." RENAME COLUMN $nome_coluna TO ".$novonome_coluna;
+		$res = $dbh->query($sql,PDO::FETCH_ASSOC);
+			
 		$coluna = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name FROM information_schema.columns where table_name = '$novonome_tabela' and table_schema = '$nome_esquema' and column_name = '$novonome_coluna'");
 		if(count($coluna) > 0){
 			$sql = "UPDATE i3geoestat_medida_variavel SET colunavalor = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and colunavalor = '$nome_coluna'";
-			$this->execSQL($sql,"",false);
+			$dbh->query($sql,PDO::FETCH_ASSOC);
 			$sql = "UPDATE i3geoestat_medida_variavel SET colunaidgeo = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and colunaidgeo = '$nome_coluna'";
-			$this->execSQL($sql,"",false);
+			$dbh->query($sql,PDO::FETCH_ASSOC);
 			$sql = "UPDATE i3geoestat_medida_variavel SET colunaidunico = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and colunaidgeo = '$nome_coluna'";
-			$this->execSQL($sql,"",false);
+			$dbh->query($sql,PDO::FETCH_ASSOC);
 			$sql = "UPDATE i3geoestat_tipo_regiao SET colunageo = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' ' and colunageo = '$nome_coluna'";
-			$this->execSQL($sql,"",false);
+			$dbh->query($sql,PDO::FETCH_ASSOC);
 			$sql = "UPDATE i3geoestat_tipo_regiao SET colunanomeregiao = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' ' and colunanomeregiao = '$nome_coluna'";
-			$this->execSQL($sql,"",false);
+			$dbh->query($sql,PDO::FETCH_ASSOC);
 			$sql = "UPDATE i3geoestat_tipo_regiao SET colunacentroide = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' ' and colunacentroide = '$nome_coluna'";
-			$this->execSQL($sql,"",false);
+			$dbh->query($sql,PDO::FETCH_ASSOC);
 
 			$sql = "UPDATE i3geoestat_parametro_medida SET coluna = '$novonome_coluna' FROM i3geoestat_medida_variavel WHERE i3geoestat_parametro_medida.id_medida_variavel = i3geoestat_medida_variavel.id_medida_variavel and esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and coluna = '$nome_coluna'";
-			$this->execSQL($sql,"",false);
+			$dbh->query($sql,PDO::FETCH_ASSOC);
 			$sql = "UPDATE i3geoestat_agregaregiao SET colunaligacao_regiaopai = '$novonome_coluna' FROM i3geoestat_tipo_regiao WHERE i3geoestat_agregaregiao.codigo_tipo_regiao = i3geoestat_tipo_regiao.codigo_tipo_regiao and esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and colunaligacao_regiaopai = '$nome_coluna'";
-			$this->execSQL($sql,"",false);
+			$dbh->query($sql,PDO::FETCH_ASSOC);
 		}
 		return $res;
 	}
@@ -2723,6 +2737,8 @@ class Metaestat{
 	 * @return string
 	 */
 	function negativaValoresMedidaVariavel($id_medida_variavel){
+		$this->testaNumerico(array($id_medida_variavel));
+
 		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
 		if($medida["esquemadb"] != "i3geo_metaestat"){
 			return "erro";
@@ -2866,6 +2882,17 @@ class Metaestat{
 			dbase_close($db);
 		}
 		return $nomeshp;
+	}
+	/*
+	 * Testa se os elementos de um array sao numericos
+	 */
+	function testaNumerico($valores){
+		foreach ($valores as $valor) {
+			if(!empty($valor) && !is_numeric($valor)) {
+				echo "valor nao numerico";
+				exit;
+			}
+		}
 	}
 }
 ?>
