@@ -288,119 +288,117 @@ class Metaestat{
 	 * @param codigo do tipo de regiao. Se nao for definido, utiliza-se o default da variavel
 	 * @return array("sqlagrupamento"=>,"sql"=>,"sqlmapserver"=>,"filtro"=>,"colunas"=>,"alias"=>,"colunavalor"=>,"titulo"=>,"nomeregiao"=>)
 	 */
-	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = "",$suportaWMST = false){
+	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = "",$suportaWMST = false,$filtro = ""){
+		/* Modelo de SQL
+			SELECT regiao.*,sum(j.valorcalculado) OVER (PARTITION BY regiao.co_municipio) AS valorcalculado
+			FROM i3geo_metaestat.municipios AS regiao
+			INNER JOIN (
+				SELECT regiao.co_municipio AS cod_regiao,sum(j.valorcalculado) AS valorcalculado
+				FROM i3geo_metaestat.distritos_manaus AS regiao
+				LEFT JOIN
+				(
+					SELECT regiao.cod_dis AS cod_regiao,sum(j.valorcalculado) AS valorcalculado
+					FROM i3geo_metaestat.bairros_manaus AS regiao
+					LEFT JOIN
+					(
+						SELECT cod AS cod_regiao,sum(valor) AS valorCalculado
+						FROM i3geo_metaestat.obitos_maternos_manaus12
+						WHERE ano IN ('2012') AND cod_mes IN ('1','2')
+						GROUP BY cod_regiao
+					)
+					AS j ON j.cod_regiao = regiao.cod GROUP BY regiao.cod_dis
+				)
+				AS j ON j.cod_regiao = regiao.cod_dis GROUP BY regiao.co_municipio
+			)
+			AS j ON j.cod_regiao = regiao.co_municipio
+		 */
+
+
 		//
 		//o sql que faz acesso aos dados e marcado com /*SE*//*SE*/ na string que sera usada nos mapfiles
 		//a parte que contem referencias a coluna com a geometria e marcada com /*SG*//*SG*/
 		//
-		$filtro = false;
+		//registros da medida da variavel
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
+
+		if(!empty($dados["filtro"])){
+			if($filtro == ""){
+				$filtro = $dados["filtro"];
+			}
+			else{
+				$filtro = $filtro." AND (".$dados["filtro"].")";
+			}
+		}
+
+		//parametros da medida da variavel
+		$parametrosMedida = array();
 		$pp = $this->listaParametro($id_medida_variavel,"",0);
 		foreach($pp as $p){
 			$parametrosMedida[] = $p["coluna"];
 		}
-		//var_dump($parametrosMedida);exit;
-		$titulo = $dados["nomemedida"];
-		$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
-		//indica se os dados sao agregados a uma regiao de nivel superior
-		$agregaregiao = false;
-		$colunas = array();
 
+		//titulo da medida de variavel
+		$titulo = $dados["nomemedida"];
+		//indica se os dados devem ser agregados a uma regiao de nivel superior
+		$agregaregiao = false;
+		//nome da coluna que contem os limites geograficos da regiao desejada pelo usuario
+		$colunageo = "";
+
+		//se a regiao definida para a medida da variavel for diferente da regiao indicada pelo usuario
+		//significa que a regiao indicada pelo usuario e uma agragacao
 		if($codigo_tipo_regiao != "" && $dados["codigo_tipo_regiao"] != $codigo_tipo_regiao){
 			$agregaregiao = true;
 			//guarda os dados da regiao que agrega a regiao original da medida variavel
-			$dadosgeoagregada = $this->listaTipoRegiao($codigo_tipo_regiao);
-			if($tipolayer != "point"){
-				$colunageo = $dadosgeoagregada["colunageo"];
-				$titulo .= " (pol) ";
-			}
-			else{
-				$colunageo = $dadosgeoagregada["colunacentroide"];
-				$titulo .= " (pt) ";
-			}
-			$titulo .= $dadosgeoagregada["nome_tipo_regiao"];
+			$dadosgeo = $this->listaTipoRegiao($codigo_tipo_regiao);
 		}
 		else{
-			if($tipolayer != "point"){
-				$colunageo = $dadosgeo["colunageo"];
-				$titulo .= " (pol) ";
-			}
-			else{
-				$colunageo = $dadosgeo["colunacentroide"];
-				$titulo .= " (pt) ";
-			}
-			$titulo .= $dadosgeo["nome_tipo_regiao"];
+			$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
 		}
-		if($agregaregiao == false){
-			if($todasascolunas == 0){
-				if($dados["colunaidunico"] != $dados["colunaidgeo"]){
-					$sql = " SELECT d.".$dados["colunaidunico"].",d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
-					$colunas[] = $dados["colunaidunico"];
-				}
-				else{
-					$sql = " SELECT d.".$dados["colunavalor"].",d.".$dados["colunaidgeo"];
-				}
+		if($tipolayer != "point"){
+			$colunageo = $dadosgeo["colunageo"];
+			$titulo .= " (pol) ";
+		}
+		else{
+			$colunageo = $dadosgeo["colunacentroide"];
+			$titulo .= " (pt) ";
+		}
+		$titulo .= $dadosgeo["nome_tipo_regiao"];
 
-				$colunas[] = $dados["colunavalor"];
-				$colunas[] = $dados["colunaidgeo"];
-				if(!empty($agruparpor)){
-					$temp = explode(",",$agruparpor);
-					$sql .= ",d.".implode(",d.",$temp);
-					$colunas = array_merge($colunas,$temp);
-				}
-			}
-			else{
-				$sql = " SELECT d.* ";
-				$colunas = $this->colunasTabela($dados["codigo_estat_conexao"],$dados["esquemadb"],$dados["tabela"]);
-			}
-			//prepara a lista de colunas que ficarao visiveis no sql geo
-			$vis = $dadosgeo["colunasvisiveis"];
-			if(empty($vis)){
-				$vis = $dadosgeo["colunanomeregiao"];
-			}
+		$vis = $dadosgeo["colunasvisiveis"];
+		if(!empty($vis) && $suportaWMST == false){
+			$vis = $vis.",".$dados["colunaidunico"];
 			$vis = str_replace(" ",",",$vis);
 			$vis = str_replace(",,",",",$vis);
-			$colunasvisiveis = explode(",",$vis);
-			//$vis[] = "st_setsrid($colunageo,".$dadosgeo["srid"].") as $colunageo";
-			$colunasvisiveis = array_unique($colunasvisiveis);
-			$colunas = array_merge($colunas,$colunasvisiveis);
-			$vis = implode(",g.",$colunasvisiveis);
-			$vis = "g.".$vis."/*SG*/,st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo."/*SG*/";
-			//$sqlgeo = $sql.",g.".$colunageo;
-			$sqlgeo = $sql.",".$vis;
-			//
-			//prepara os alias das colunas
-			//
-			$colunas = array_unique($colunas);
-			$alias = $colunas;
-			$n = count($colunas);
-			for($i=0;$i<$n;$i++){
-				if($colunas[$i] === $dados["colunavalor"]){
-					$alias[$i] = "Valor";//mb_convert_encoding($dados["nomemedida"],"ISO-8859-1",mb_detect_encoding($dados["nomemedida"]));
-				}
+			$vis = str_replace(";",",",$vis);
+
+			$colunasSemGeo = explode(",",$vis);
+			$colunasSemGeo = array_unique($colunasSemGeo);
+
+			if($dadosgeo["apelidos"] != ""){
+				$alias = "Valor,".$dadosgeo["apelidos"].",".$dados["colunaidunico"];
+				$alias = mb_convert_encoding($alias,"ISO-8859-1",mb_detect_encoding($alias));
+				$alias = str_replace(";",",",$alias);
+				$alias = str_replace(",,",",",$alias);
+				$alias = explode(",",$alias);
+				$alias = array_unique($alias);
 			}
-			$aliasvis = $dadosgeo["apelidos"];
-			if($aliasvis != ""){
-				$aliasvis = str_replace(";",",",$aliasvis);
-				$aliasvis = str_replace(",,",",",$aliasvis);
-				$aliasvis = explode(",",$aliasvis);
-				if(count($aliasvis) == count($colunasvisiveis)){
-					$n = count($colunas);
-					for($i=0;$i<$n;$i++){
-						$nj = count($colunasvisiveis);
-						for($j=0;$j<$nj;$j++){
-							if($colunas[$i] === $colunasvisiveis[$j]){
-								$alias[$i] = mb_convert_encoding($aliasvis[$j],"ISO-8859-1",mb_detect_encoding($aliasvis[$j]));
-							}
-						}
-					}
-				}
+			else{
+				$alias = $colunasSemGeo;
+			}
+			if(count($alias)-1 != count($colunasSemGeo)){
+				$alias = array();
 			}
 		}
 		else{
-			$dadosAgregacao = $this->listaAgregaRegiaoFilho($dados["codigo_tipo_regiao"], $codigo_tipo_regiao);
-			$sqlgeo =  "SELECT /*SG*/st_setsrid(g.".$colunageo.",".$dadosgeo["srid"].") as the_geom ,/*SG*/g.".$dadosAgregacao["colunaligacao_regiaopai"].",d.".$dados["colunavalor"]." as ".$dados["colunavalor"];
+			//colunas da tabela geometria sem as colunas GEOMETRY
+			$colunasSemGeo = $this->colunasTabela($dadosgeo["codigo_estat_conexao"], $dadosgeo["esquemadb"], $dadosgeo["tabela"],"geometry","!=");
+			$alias = array();
+			if($suportaWMST == true){
+				$sqlWMST = $this->listaParametroTempo2CampoData($id_medida_variavel);
+				$colunasSemGeo[] = "dimtempo";
+			}
 		}
+		//verifica o tipo de calculo para agragacao de valores
 		$tipoconta = "";
 		if($dados["permitesoma"] == 1){
 			$tipoconta = "sum";
@@ -414,65 +412,117 @@ class Metaestat{
 				$titulo .= " - media";
 			}
 		}
-		$sqlagrupamento = "";
-		$dadosfiltro = "";
-		if(!empty($dados["filtro"])){
-			$dadosfiltro = " WHERE ".$dados["filtro"];
-			$filtro = true;
-		}
-		if(empty($agruparpor)){
-			if($agregaregiao == true){
-				$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",sb.".$dadosAgregacao["colunaligacao_regiaopai"]." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." as sa,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"] ." as sb WHERE sa.".$dados["colunaidgeo"]." = sb.".$dadosgeo["identificador"]." __dadosfiltro__ group by sb.".$dadosAgregacao["colunaligacao_regiaopai"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeoagregada["tabela"]." as g";
-				$sql .= "    FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",sb.".$dadosAgregacao["colunaligacao_regiaopai"]." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as sa,".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as sb WHERE	sa.".$dados["colunaidgeo"]." = sb.".$dadosgeo["identificador"]." __dadosfiltro__ group by sb.".$dadosAgregacao["colunaligacao_regiaopai"].") as d ";
-			}
-			else{
-				$sqlgeo .= " FROM (SELECT * FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
-				$parametrosMedida = "";
-				//o campo deve ser convertido para data
-				if($suportaWMST == true){
-					$parametrosMedida = $this->listaParametroTempo2CampoData($id_medida_variavel)." as dimtempo,";
-				}
-				$sql .= " FROM (SELECT $parametrosMedida * FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ ) as d ";
-			}
-		}
-		else{
-			$sqlagrupamento = " SELECT d.".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as d group by ".$agruparpor." order by ".$agruparpor;
-			if($agregaregiao == true){
-				$sqlAgregaRegiao = ",".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as r1, ".$dadosgeoagregada["esquemadb"].".".$dadosgeoagregada["tabela"]." as r2 WHERE r.".$dados["colunaidgeo"]."::text = r1.".$dadosgeo["identificador"]."::text AND r1.".$dadosAgregacao["colunaligacao_regiaopai"]." = r2.".$dadosgeoagregada["identificador"];
-				$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",r1.".$dadosAgregacao["colunaligacao_regiaopai"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as r" .$sqlAgregaRegiao." __dadosfiltro__ group by ".$agruparpor.",r1.".$dadosAgregacao["colunaligacao_regiaopai"].") as d, ".$dadosgeoagregada["esquemadb"].".".$dadosgeoagregada["tabela"]." as g";
-				$sql .=    " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",r1.".$dadosAgregacao["colunaligacao_regiaopai"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"]." as r" .$sqlAgregaRegiao." __dadosfiltro__ group by ".$agruparpor.",r1.".$dadosAgregacao["colunaligacao_regiaopai"].") as d ";
-			}
-			else{
-				$sqlgeo .= " FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d, ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." as g";
-				$sql .= "    FROM (SELECT $tipoconta(".$dados["colunavalor"].") as ".$dados["colunavalor"].",".$dados["colunaidgeo"].",".$agruparpor." FROM ".$dados["esquemadb"].".".$dados["tabela"] ." __dadosfiltro__ group by ".$agruparpor.",".$dados["colunaidgeo"].") as d ";
-			}
-		}
-		$sql = str_replace("__dadosfiltro__",$dadosfiltro,$sql);
-		$sqlgeo = str_replace("__dadosfiltro__",$dadosfiltro,$sqlgeo);
-		//join com a tabela geo
-		if($agregaregiao == true){
-			$j = " g.".$dadosgeoagregada["identificador"]."::text = d.".$dadosAgregacao["colunaligacao_regiaopai"]."::text";
-		}
-		else{
-			$j = " d.".$dados["colunaidgeo"]."::text = g.".$dadosgeo["identificador"]."::text";
-		}
-		$sqlgeo .= " WHERE ".$j;
+
+		//obtem o SQL que faz o acesso aos dados da media da variavel
+		$sqlDadosMedidaVariavel = "SELECT ".$dados["colunaidgeo"]." AS cod_regiao,$tipoconta(".$dados["colunavalor"].") AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
 		if($suportaWMST == true){
-			$sqlWMST = $this->listaParametroTempo2CampoData($id_medida_variavel,"d.")." as dimtempo";
-			$sqlgeo = str_replace("SELECT d.*","SELECT d.*,".$sqlWMST,$sqlgeo);
+			$sqlDadosMedidaVariavel = "SELECT $sqlWMST as dimtempo,".$dados["colunaidgeo"]." AS cod_regiao,".$dados["colunavalor"]." AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
 		}
+		if(!empty ($filtro)){
+			$sqlDadosMedidaVariavel .=	" WHERE ".$filtro;
+		}
+		if($suportaWMST != true){
+			$sqlDadosMedidaVariavel .= " /*FA*//*FA*/ /*FAT*//*FAT*/ GROUP BY cod_regiao ";
+		}
+		$sqlagrupamento = "";
+		//sql que retorna a lista de ocorrencias agrupados de uma coluna especifica
+		if(!empty($agruparpor)){
+			$sqlagrupamento = " SELECT $agruparpor FROM ".$dados["esquemadb"].".".$dados["tabela"];
+			if(!empty ($filtro)){
+				$sqlagrupamento .= " WHERE ".$filtro;
+			}
+			$sqlagrupamento .= " /*FA*//*FA*/ /*FAT*//*FAT*/ GROUP BY ".$agruparpor." ORDER BY ".$agruparpor;
+		}
+		//SQL para a primeira regiao __SQLDADOS__ ira conter os sqls dos niveis inferiores da regiao se ouver
+		//@TODO verificar tipos das colunas no join para tornar mais rapida a juncao
+		$sqlIntermediario = "SELECT (j.valorcalculado) AS ".$dados["colunavalor"].", __COLUNASSEMGEO__".
+		" FROM ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." AS regiao ".
+		" LEFT JOIN ( __SQLDADOS__ ) ".
+		" AS j ON j.cod_regiao::text = regiao.".$dadosgeo["identificador"]."::text";
+
+		//inclui os sqls de regioes de niveis inferiores
 		if($agregaregiao == true){
-			$sqlgeo = $colunageo." from /*SE*/( ".$sqlgeo." __filtro__  )/*SE*/ as foo using unique ".$dadosAgregacao["colunaligacao_regiaopai"]." using srid=".$dadosgeo["srid"];
+			$hierarquia = $this->regiaoFilhaAoPai($dados["codigo_tipo_regiao"],$codigo_tipo_regiao);
+			$caminho = $hierarquia["caminho"];
+			$dadosColunas = $hierarquia["colunas"];
+			//var_dump($hierarquia);exit;
+			if(count($caminho) > 0){
+				$caminho = array_reverse($caminho);
+				foreach($caminho as $idregiao){
+					if($idregiao != $codigo_tipo_regiao){//a regiao pai ja esta no sql
+						$tempDadosRegiao = $this->listaTipoRegiao($idregiao);
+						$temp = "SELECT regiao.".$dadosColunas[$idregiao]["colunaligacao_regiaopai"]." AS cod_regiao,sum(j.valorcalculado) AS valorcalculado ".
+						"FROM ".$tempDadosRegiao["esquemadb"].".".$tempDadosRegiao["tabela"]." AS regiao ".
+						"LEFT JOIN ".
+						"( __SQLDADOS__ )".
+						" AS j ON j.cod_regiao::text = regiao.".$tempDadosRegiao["identificador"]."::text GROUP BY regiao.".$dadosColunas[$idregiao]["colunaligacao_regiaopai"];
+						$sqlIntermediario = str_replace("__SQLDADOS__",$temp,$sqlIntermediario);
+					}
+				}
+			}
 		}
-		else{
-			$sqlgeo = $colunageo." from /*SE*/(".$sqlgeo." __filtro__ )/*SE*/ as foo using unique ".$dados["colunaidunico"]." using srid=".$dadosgeo["srid"];
+		//sql final que retorna os dados
+		//contem todas as colunas da tabela regiao, menos as que contem geometria
+		$sql = 	str_replace("__SQLDADOS__",$sqlDadosMedidaVariavel,$sqlIntermediario);
+		$sql = 	str_replace("__COLUNASSEMGEO__",implode(",",$colunasSemGeo),$sql);
+
+		//sql para o mapserver
+		$sqlgeo = 	str_replace("__SQLDADOS__",$sqlDadosMedidaVariavel,$sqlIntermediario);
+		$colunasComGeo = $colunasSemGeo;
+		$colunasComGeo[] = "/*SG*/st_setsrid(".$colunageo.",".$dadosgeo["srid"].") as the_geom /*SG*/";
+		$sqlgeo = str_replace("__COLUNASSEMGEO__",implode(",",$colunasComGeo),$sqlgeo);
+		$sqlgeo = $colunageo." from /*SE*/(".$sqlgeo.")/*SE*/ as foo using unique ".$dados["colunaidunico"]." using srid=".$dadosgeo["srid"];
+
+		//o SQL com os dados contem um filtro ou nao?
+		$contemfiltro = false;
+		if(!empty($filtro)){
+			$contemfiltro = true;
+			$titulo .= " ".$filtro;
 		}
-		//var_dump($dados);exit;
-		//remove ambiguidades
-		$sqlgeo = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlgeo);
-		$sql = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sql);
-		$sqlagrupamento = str_replace("d.".$dados["colunaidgeo"].",g.".$dados["colunaidgeo"],"d.".$dados["colunaidgeo"],$sqlagrupamento);
-		return array("sqlagrupamento"=>$sqlagrupamento,"sql"=>$sql,"sqlmapserver"=>$sqlgeo,"filtro"=>$filtro,"colunas"=>$colunas,"alias"=>$alias,"colunavalor"=>$dados["colunavalor"],"titulo"=>$titulo,"nomeregiao"=>$dadosgeo["colunanomeregiao"]);
+		//adiciona a coluna com os valores no inicio do array()
+		$colunasSemGeo = array_merge(array($dados["colunavalor"]),$colunasSemGeo);
+
+		return array(
+			"nomeregiao"=>$dadosgeo["colunanomeregiao"],
+			"titulo"=>$titulo,
+			"colunavalor"=>$dados["colunavalor"],
+			"sqlagrupamento"=>$sqlagrupamento,
+			"sql"=>$sql,
+			"sqlmapserver"=>$sqlgeo,
+			"filtro"=>$contemfiltro,
+			"colunas"=>$colunasSemGeo,
+			"alias"=>$alias
+		);
+	}
+	/**
+	 * Retorna os ids das regioes que permitem partir de uma regiao filha chegar a uma regiao pai
+	 * Usado para descobrir que regioes devem ser sequencialmente agregadas
+	 * @param partir da regiao
+	 * @param chegar na regiao
+	 * @return array lista de ids de regioes sequenciais do filho ate chegar ao pai indicado
+	 */
+	function regiaoFilhaAoPai($codigo_tipo_regiao,$codigo_tipo_regiao_pai){
+		//echo $codigo_tipo_regiao." ".$codigo_tipo_regiao_pai;
+		$pais = $this->listaAgregaRegiao($codigo_tipo_regiao);
+		$caminho = array($codigo_tipo_regiao);
+		$colunas = array();
+		if(count($pais) == 0){
+			return $caminho;
+		}
+		$achou = false;
+		foreach($pais as $pai){
+			$caminho[] = $pai["codigo_tipo_regiao_pai"];
+			$colunas[$pai["codigo_tipo_regiao"]] = $pai;
+			if($pai["codigo_tipo_regiao_pai"] == $codigo_tipo_regiao_pai){
+				$achou = true;
+				return array("caminho"=>$caminho,"colunas"=>$colunas);
+			}
+			$testaPai = $this->regiaoFilhaAoPai($pai["codigo_tipo_regiao_pai"],$codigo_tipo_regiao_pai);
+			if(count($testaPai) == 0){
+				$caminho = array();
+				$colunas = array();
+			}
+		}
 	}
 	/**
 	 * Cria um arquivo mapfile para uma medida de variavel
@@ -508,12 +558,17 @@ class Metaestat{
 			if($meta["codigo_tipo_regiao"] == $codigo_tipo_regiao || empty($codigo_tipo_regiao) ){
 				$agruparpor = "";
 			}
-			if($titulolayer == ""){
-				$titulolayer = $meta["nomemedida"];
-			}
 			$dconexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
 			$conexao = "user=".$dconexao["usuario"]." password=".$dconexao["senha"]." dbname=".$dconexao["bancodedados"]." host=".$dconexao["host"]." port=".$dconexao["porta"]."";
-			$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,$tipolayer,$codigo_tipo_regiao,$suportaWMST);
+			$sql = $this->sqlMedidaVariavel(
+					$id_medida_variavel,
+					$todasascolunas,
+					$agruparpor,
+					$tipolayer,
+					$codigo_tipo_regiao,
+					$suportaWMST,
+					$filtro
+				);
 			if(empty($codigo_tipo_regiao)){
 				$d = $this->listaMedidaVariavel("",$id_medida_variavel);
 				$codigo_tipo_regiao = $d["codigo_tipo_regiao"];
@@ -530,14 +585,7 @@ class Metaestat{
 				$tipolayer = "line";
 			}
 			$sqlf = $sql["sqlmapserver"];
-			//echo $sqlf;exit;
-			if(!empty($filtro)){
-				$sqlf = str_replace("__filtro__"," AND ".$filtro." /*FA*//*FA*/ /*FAT*//*FAT*/",$sqlf);
-				$sql["titulo"] .= " - ".$filtro;
-			}
-			else{
-				$sqlf = str_replace("__filtro__"," /*FA*//*FA*/ /*FAT*//*FAT*/",$sqlf);
-			}
+
 			$classes = "";
 			if(!empty($id_classificacao)){
 				$classes = $this->listaClasseClassificacao($id_classificacao);
@@ -546,7 +594,7 @@ class Metaestat{
 				$classificacoes = $this->listaClassificacaoMedida($id_medida_variavel);
 				$classes = $this->listaClasseClassificacao($classificacoes[0]["id_classificacao"]);
 			}
-			if(empty($titulolayer)){
+			if(!empty($titulolayer)){
 				$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
 			}
 			else{
@@ -603,7 +651,7 @@ class Metaestat{
 			if($meta["esquemadb"] == "i3geo_metaestat"){
 				$dados[] = '		METAESTATEDITAVEL "SIM"';
 			}
-			if(count($sql["colunas"]) > 0){
+			if(count($sql["alias"]) > 0){
 				$dados[] = '	ITENS "'.implode(",",$sql["colunas"]).'"';
 				$dados[] = '	ITENSDESC "'.implode(",",$sql["alias"]).'"';
 			}
@@ -2050,13 +2098,14 @@ class Metaestat{
 	 * @param nome do esquema
 	 * @param nome da tabela
 	 * @param tipo de coluna (opcional)
+	 * @param tipo de tratamento do parametro tipo, pode ser =|!=
 	 * @return execSQLDB
 	 */
-	function colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,$tipo=""){
+	function colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,$tipo="",$tipotratamento="="){
 		$colunas = array();
 		$res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna,udt_name FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'");
 		if($tipo != ""){
-			$res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna,udt_name FROM information_schema.columns where table_schema = '$nome_esquema' and udt_name = '$tipo' and table_name = '$nome_tabela'");
+			$res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna,udt_name FROM information_schema.columns where table_schema = '$nome_esquema' and udt_name $tipotratamento '$tipo' and table_name = '$nome_tabela'");
 		}
 		foreach($res as $c){
 			$colunas[] = $c["coluna"];
@@ -2115,10 +2164,17 @@ class Metaestat{
 	 * @param codigo da conexao
 	 * @param nome do esquema
 	 * @param nome da tabela
+	 * @param nome da coluna (opcional)
 	 * @return execSQLDB
 	 */
-	function descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
-		return $this->execSQLDB($codigo_estat_conexao,"SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE c.relname = '$nome_tabela' and p.nspname = '$nome_esquema' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname");
+	function descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nome_coluna=""){
+		if($nome_coluna == ""){
+			return $this->execSQLDB($codigo_estat_conexao,"SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE c.relname = '$nome_tabela' and p.nspname = '$nome_esquema' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname");
+		}
+		else{
+			$res = $this->execSQLDB($codigo_estat_conexao,"SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE a.attname = '$nome_coluna' AND c.relname = '$nome_tabela' and p.nspname = '$nome_esquema' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname");
+			return $res[0];
+		}
 	}
 	/**
 	 * Lista os dados de uma tabela

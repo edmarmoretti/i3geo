@@ -483,9 +483,10 @@ i3GEO.mapa = {
 			}
 			else{
 				janela = YAHOO.i3GEO.janela.manager.find("wlegenda");
+				janela.show();
 			}
 			$i("wlegenda_corpo").style.backgroundColor = "white";
-			janela.show();
+
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.mapa.legendaHTML.atualiza()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.mapa.legendaHTML.atualiza()");}
 			i3GEO.mapa.legendaHTML.atualiza();
