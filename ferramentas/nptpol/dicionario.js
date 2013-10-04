@@ -41,5 +41,11 @@ pt:"Calcular",
 en:"",
 es:"",
 it:""
+}],
+8: [{
+pt:"(Opcional) Item da tabela que ser&aacute; somado",
+en:"",
+es:"",
+it:""
 }]
 };

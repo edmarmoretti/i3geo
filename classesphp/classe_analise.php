@@ -2041,7 +2041,7 @@ $temaPo - Tema poligonal.
 
 $locaplic - Localiza&ccedil;&atilde;o do I3geo
 */
-	function nptPol($temaPt,$temaPo,$locaplic)
+	function nptPol($temaPt,$temaPo,$locaplic,$somaritem="")
 	{
 		//error_reporting(0);
 		set_time_limit(180);
@@ -2064,45 +2064,81 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		// cria o dbf
 		$def = array();
-		foreach ($itenspo as $ni)
-		{$def[] = array(substr($ni, 0, 10),"C","254");}
+		foreach ($itenspo as $ni){
+			$def[] = array(substr($ni, 0, 10),"C","254");
+		}
 		$def[] = array("npontos","N","10","0");
-		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
-		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		$def[] = array("soma","N","10","0");
+		$def[] = array("media","N","10","0");
+		if($this->dbaseExiste == false){
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
+		else{
+			$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
-		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
-		else
-		$db=dbase_open($dbname,2);
-		$shapes = retornaShapesMapext($layerPo,$this->mapa);
-		foreach($shapes as $shape)
-		{
-			$novoreg = array();
-			foreach($itenspo as $ipo)
-			{$novoreg[] = $shape->values[$ipo];}
-			$layerPt->querybyshape($shape);
-			$novoreg[] = $layerPt->getNumresults();
-			$novoshpf->addShape($shape);
-			if($this->dbaseExiste == false)
-			xbase_add_record($db,$novoreg);
-			else
-			dbase_add_record($db,$novoreg);
+		if($this->dbaseExiste == false){
+			$db=xbase_open($dbname,2);
 		}
-		if($this->dbaseExiste == false)
-		xbase_close($db);
-		else
-		dbase_close($db);
+		else{
+			$db=dbase_open($dbname,2);
+		}
+		$shapes = retornaShapesMapext($layerPo,$this->mapa);
+		foreach($shapes as $shape){
+			$novoreg = array();
+			foreach($itenspo as $ipo){
+				$novoreg[] = $shape->values[$ipo];
+			}
+			$layerPt->querybyshape($shape);
+			if($somaritem != ""){
+				$soma = 0;
+				$layerPt->open();
+				$res_count = $layerPt->getNumresults();
+				for ($i = 0; $i < $res_count; ++$i){
+					if($this->v == 6){
+						$s = $layerPt->getShape($layerPt->getResult($i));
+					}
+					else{
+						$result = $layerPt->getResult($i);
+						$shp_index  = $result->shapeindex;
+						$s = $layerPt->getfeature($shp_index,-1);
+					}
+					$soma += $s->values[$somaritem];
+				}
+				$fechou = $layerPt->close();
+				$novoreg[] = $res_count;
+				$novoreg[] = $soma;
+				$novoreg[] = $soma / $res_count;
+			}
+			else{
+				$novoreg[] = $layerPt->getNumresults();
+				$novoreg[] = 0;
+				$novoreg[] = 0;
+			}
+			$novoshpf->addShape($shape);
+			if($this->dbaseExiste == false){
+				xbase_add_record($db,$novoreg);
+			}
+			else{
+				dbase_add_record($db,$novoreg);
+			}
+		}
+		if($this->dbaseExiste == false){
+			xbase_close($db);
+		}
+		else{
+			dbase_close($db);
+		}
 		//adiciona o novo tema no mapa
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,"N pontos",$metaClasse="SIM",false);
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$novolayer->set("opacity","80");
-		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
+		if (file_exists($this->qyfile)){
+			unlink ($this->qyfile);
+		}
 		return("ok");
 	}
 /*

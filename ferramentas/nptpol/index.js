@@ -153,6 +153,10 @@ i3GEOF.nptpol = {
 	t1: function(){
 		var ins = "<p class='paragrafo' >"+$trad(4,i3GEOF.nptpol.dicionario)+":<br>";
 		ins += "<div style='text-align:left;' id='i3GEOnptpolDivPontos' ></div><br>";
+
+		ins += "<p class='paragrafo' >"+$trad(8,i3GEOF.nptpol.dicionario)+":<br>";
+		ins += "<div id=i3GEOnptpolondeItens style='text-align:left;display:block' >-</div><br>";
+
 		ins += "<p class='paragrafo' >"+$trad(5,i3GEOF.nptpol.dicionario)+":<br>";
 		ins += "<div style='text-align:left;' id='i3GEOnptpolDivPoligonos' ></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t0()","i3GEOF.nptpol.t2()",ins,"i3GEOF.nptpol.t1","i3GEOnptpolresultado");
@@ -183,20 +187,22 @@ i3GEOF.nptpol = {
 			{return;}
 			i3GEOF.nptpol.aguarde.visibility = "visible";
 			var p,
-			cp,
-			fim = function(retorno){
-				if (retorno.data==undefined )
-				{$i("i3GEOnptpolfim").innerHTML = "<p class='paragrafo' >Erro";}
-				else
-				{i3GEO.atualiza();}
-				i3GEOF.nptpol.aguarde.visibility = "hidden";
-			},
-			ext;
+				cp,
+				somaritem = $i("i3GEOnptpoltemasItem").value,
+				fim = function(retorno){
+					if (retorno.data==undefined )
+					{$i("i3GEOnptpolfim").innerHTML = "<p class='paragrafo' >Erro";}
+					else
+					{i3GEO.atualiza();}
+					i3GEOF.nptpol.aguarde.visibility = "hidden";
+				},
+				ext;
 			if(i3GEO.Interface.ATUAL === "googlemaps")
 			{ext = i3GEO.Interface.googlemaps.bbox();}
 			else
 			{ext = i3GEO.parametros.mapexten;}
 			p = i3GEO.configura.locaplic+"/ferramentas/nptpol/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=nptPol&temaPt="+$i("i3GEOnptpolPontos").value+"&temaPo="+$i("i3GEOnptpolPoligonos").value+"&ext="+ext;
+			p += "&somaritem="+somaritem;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"nptpol",fim);
@@ -216,15 +222,20 @@ i3GEOF.nptpol = {
 		i3GEO.util.comboTemas(
 			"i3GEOnptpolPontos",
 			function(retorno){
-		 		$i("i3GEOnptpolDivPontos").innerHTML = retorno.dados;
-		 		$i("i3GEOnptpolDivPontos").style.display = "block";
-		 		if ($i("i3GEOnptpolPontos")){
-		 			$i("i3GEOnptpolPontos").onchange = function(){
-		 				i3GEO.mapa.ativaTema($i("i3GEOnptpolPontos").value);
-		 			};
+				$i("i3GEOnptpolDivPontos").innerHTML = retorno.dados;
+				$i("i3GEOnptpolDivPontos").style.display = "block";
+				if ($i("i3GEOnptpolPontos")){
+					$i("i3GEOnptpolPontos").onchange = function(){
+						var v = $i("i3GEOnptpolPontos").value;
+						i3GEO.mapa.ativaTema(v);
+						if(v != ""){
+							i3GEOF.nptpol.comboItens();
+						}
+					};
 				}
 				if(i3GEO.temaAtivo !== ""){
 					$i("i3GEOnptpolPontos").value = i3GEO.temaAtivo;
+					i3GEOF.nptpol.comboItens();
 				}
 			},
 			"i3GEOnptpolDivPontos",
@@ -246,12 +257,12 @@ i3GEOF.nptpol = {
 		i3GEO.util.comboTemas(
 			"i3GEOnptpolPoligonos",
 			function(retorno){
-		 		$i("i3GEOnptpolDivPoligonos").innerHTML = retorno.dados;
-		 		$i("i3GEOnptpolDivPoligonos").style.display = "block";
-		 		if ($i("i3GEOnptpolPoligonos")){
-		 			$i("i3GEOnptpolPoligonos").onchange = function(){
-		 				i3GEO.mapa.ativaTema($i("i3GEOnptpolPoligonos").value);
-		 			};
+				$i("i3GEOnptpolDivPoligonos").innerHTML = retorno.dados;
+				$i("i3GEOnptpolDivPoligonos").style.display = "block";
+				if ($i("i3GEOnptpolPoligonos")){
+					$i("i3GEOnptpolPoligonos").onchange = function(){
+						i3GEO.mapa.ativaTema($i("i3GEOnptpolPoligonos").value);
+					};
 				}
 				if(i3GEO.temaAtivo !== ""){
 					$i("i3GEOnptpolPoligonos").value = i3GEO.temaAtivo;
@@ -262,5 +273,32 @@ i3GEOF.nptpol = {
 			false,
 			"poligonos"
 		);
+	},
+	/*
+	Function: comboItens
+
+	Cria um combo para escolha de um item do tema
+
+	Veja:
+
+	<i3GEO.util.comboItens>
+
+	*/
+	comboItens: function(){
+		var tema = $i("i3GEOnptpolPontos").value;
+		if(tema != ""){
+			i3GEO.util.comboItens(
+				"i3GEOnptpoltemasItem",
+				tema,
+				function(retorno){
+					$i("i3GEOnptpolondeItens").innerHTML = retorno.dados;
+					$i("i3GEOnptpolondeItens").style.display = "block";
+				},
+				"i3GEOnptpolondeItens"
+			);
+		}
+		else{
+			$i("i3GEOnptpolondeItens").innerHTML = "-";
+		}
 	}
 };
