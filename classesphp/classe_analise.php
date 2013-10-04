@@ -100,24 +100,24 @@ $ext - Extens&atilde;o geogr&aacute;fica do mapa
 */
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
-  		//error_reporting(0);
+			//error_reporting(0);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
-  		include_once(dirname(__FILE__)."/funcoes_gerais.php");
+			include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		if(empty($locaplic)){
 			$locaplic = dirname(__FILE__)."/..";
 		}
-  		$this->v = versao();
+			$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->dbaseExiste = false;
 		if(function_exists("dbase_create"))
 		{$this->dbaseExiste = true;}
-  		$this->locaplic = $locaplic;
-  		$this->mapa = ms_newMapObj($map_file);
-  		$this->arquivo = $map_file;
-  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
- 		{$this->layer = $this->mapa->getlayerbyname($tema);}
-  		$this->nome = $tema;
-  		$this->diretorio = dirname($this->arquivo);
+			$this->locaplic = $locaplic;
+			$this->mapa = ms_newMapObj($map_file);
+			$this->arquivo = $map_file;
+			if($tema != "" && @$this->mapa->getlayerbyname($tema))
+		{$this->layer = $this->mapa->getlayerbyname($tema);}
+			$this->nome = $tema;
+			$this->diretorio = dirname($this->arquivo);
 		if($ext && $ext != ""){
 			$e = explode(" ",$ext);
 			$extatual = $this->mapa->extent;
@@ -169,10 +169,10 @@ Method: salva
 
 Salva o mapfile atual
 */
- 	function salva()
- 	{
-	  	if (connection_aborted()){exit();}
-	  	$this->mapa->save($this->arquivo);
+	function salva()
+	{
+			if (connection_aborted()){exit();}
+			$this->mapa->save($this->arquivo);
 	}
 
 /*
@@ -733,7 +733,7 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 	{
 		if (file_exists($nomearq))
 		{
-  			if($this->dbaseExiste == false){
+				if($this->dbaseExiste == false){
 				if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 				include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
 				else
@@ -827,7 +827,7 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 	{
 		if (file_exists($nomearq))
 		{
-  			if($this->dbaseExiste == false){
+				if($this->dbaseExiste == false){
 				if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 				include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
 				else
@@ -1303,11 +1303,15 @@ $unir - sim|nao indica se os elementos selecionados dever&atilde;o ser unidos em
 $wkt - (opcional) elemento no formato wkt para o qual o buffer ser&aacute; gerado. Só de ve ser definido se $this->nome for vazio, ou seja
 se o par&acirc;metro "tema" n&atilde;o tiver sido fornecido ao construtor da classe
 
+$multiplicar - (opcional) multiplicar os valores por
+
+$itemdistancia - (opcional) coluna com os valores
+
 return:
 
 nome do layer criado com o buffer.
 */
-	function criaBuffer($distancia,$locaplic,$unir="nao",$wkt="")
+	function criaBuffer($distancia,$locaplic,$unir="nao",$wkt="",$multiplicar=1,$itemdistancia="")
 	{
 		set_time_limit(180);
 		error_reporting(0);
@@ -1345,18 +1349,22 @@ nome do layer criado com o buffer.
 			$dd1->setXY($rect->minx, $rect->miny);
 			$poPoint->project($projInObj, $projOutObj);
 			$dd2 = ms_newpointobj();
-			$dd2->setXY(($poPoint->x + $distancia), $poPoint->y);
-			$dd2->project($projOutObj,$projInObj);
-			$d = $dd1->distanceToPoint($dd2);
-			if ($distancia < 0){$d = $d * -1;}
-			//calcula a distancia 29100
-			//gera o buffer
-			$buffers[] = $shape->buffer($d);
-			$shapes[] = $shape;
+			if($itemdistancia != ""){
+				$distancia = $shape->values[$itemdistancia];
+			}
+			if(is_numeric($distancia)){
+				$dd2->setXY(($poPoint->x) + ($distancia * $multiplicar), $poPoint->y);
+				$dd2->project($projOutObj,$projInObj);
+				$d = $dd1->distanceToPoint($dd2);
+				if ($distancia < 0){$d = $d * -1;}
+				//calcula a distancia 29100
+				//gera o buffer
+				$buffers[] = $shape->buffer($d);
+				$shapes[] = $shape;
+			}
 		}
 		//faz a uni&atilde;o dos elementos se necess&aacute;rio
-		if($unir == "sim")
-		{
+		if($unir == "sim"){
 			$ns = $buffers[0];
 			for($s=1;$s < count($buffers);$s++)
 			{$ns = $ns->union($buffers[$s]);}
@@ -2419,7 +2427,7 @@ $operacao - Tipo de an&aacute;lise.
 				$statusoriginal = $sb->status;
 				$sb->set("status",MS_OFF);
 				$ext->setextent(($bounds->minx),($bounds->miny),($bounds->maxx),($bounds->maxy));
-	 			$imagem = gravaImagemMapa($this->mapa);
+				$imagem = gravaImagemMapa($this->mapa);
 				$this->mapa->setsize($w,$h);
 				$ext->setextent($minx,$miny,$maxx,$maxy);
 				$nlayer->set("status",MS_DELETE);
@@ -2461,7 +2469,7 @@ $operacao - Tipo de an&aacute;lise.
 			//verifica a vers&atilde;o do mapserver
 			//se for anterior a 5, utiliza a conex&atilde;o com o postgis para fazer o processamento dos daods
 			//
-            $v = versao();
+						$v = versao();
 			if (($v["principal"] < 5))
 			{return ("erro. E necessario uma vers&atilde;o maior que 5.0 do Mapserver.");}
 			foreach ($geos["dados"] as &$geo)

@@ -19,7 +19,7 @@ es:"",
 it:""
 }],
 4: [{
-pt:"Dist&acirc;ncia do entorno em metros",
+pt:"Dist&acirc;ncia do entorno em metros:",
 en:"",
 es:"",
 it:""
@@ -55,7 +55,13 @@ es:"",
 it:""
 }],
 10: [{
-pt:"",
+pt:"Ou um item da tabela de atributos que cont&eacute;m as dist&acirc;ncias:",
+en:"",
+es:"",
+it:""
+}],
+11: [{
+pt:"Multiplicar por:",
 en:"",
 es:"",
 it:""

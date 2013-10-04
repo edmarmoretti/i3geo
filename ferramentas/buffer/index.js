@@ -160,10 +160,15 @@ i3GEOF.buffer = {
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.buffer.dicionario);
-		ins += "<br><br><input onclick='javascript:this.select();' class=digitar id='i3GEObufferd' type=text size=10 value='0'/><br>";
-		ins += "<p class='paragrafo'>"+$trad(5,i3GEOF.buffer.dicionario);
-		ins += "<br><br><select id=i3GEObufferunir ><option value=nao selected >"+$trad("x15")+"</option><option value=sim >"+$trad("x14")+"</option></select>";
+		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEObufferd' type=text size=10 value='0'/>";
+
+		ins += "<br><br><p class='paragrafo' >"+$trad(10,i3GEOF.buffer.dicionario);
+		ins += "<br></p><div id=i3GEObufferondeItens style='text-align:left;display:block' ></div> ";
+
+		ins += "<br><p class='paragrafo'>"+$trad(5,i3GEOF.buffer.dicionario);
+		ins += "<br></p><select id=i3GEObufferunir ><option value=nao selected >"+$trad("x15")+"</option><option value=sim >"+$trad("x14")+"</option></select>";
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t1()","i3GEOF.buffer.t3()",ins,"i3GEOF.buffer.t2","i3GEObufferresultado");
+		i3GEOF.buffer.comboItens();
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.buffer.dicionario);
@@ -189,11 +194,12 @@ i3GEOF.buffer = {
 			{return;}
 			var distancia = $i("i3GEObufferd").value,
 				tema = $i("i3GEObuffertemasComSel").value,
+				multiplicar = $i("i3GEObufferdfator").value*1,
+				itemdistancia = $i("i3GEObuffertemasItem").value,
 				p,
 				fim,
 				cp;
-			if (distancia*1 !== 0)
-			{
+			if (distancia*1 !== 0 || itemdistancia != ""){
 				i3GEOF.buffer.aguarde.visibility = "visible";
 				fim = function(retorno){
 					i3GEOF.buffer.aguarde.visibility = "hidden";
@@ -202,7 +208,12 @@ i3GEOF.buffer = {
 					else
 					{i3GEO.atualiza();}
 				};
-				p = i3GEO.configura.locaplic+"/ferramentas/buffer/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=criabuffer&tema="+tema+"&distancia="+distancia+"&unir="+$i("i3GEObufferunir").value;
+				p = i3GEO.configura.locaplic+"/ferramentas/buffer/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=criabuffer&tema="+tema+"&unir="+$i("i3GEObufferunir").value;
+				if(itemdistancia != ""){
+					p += "&distancia=0&itemdistancia="+itemdistancia+"&multiplicar="+multiplicar;
+				}else{
+					p += "&distancia=" + distancia*1 + "&itemdistancia=&multiplicar=1";
+				}
 				cp = new cpaint();
 				cp.set_response_type("JSON");
 				cp.call(p,"criaBuffer",fim);
@@ -225,12 +236,12 @@ i3GEOF.buffer = {
 		i3GEO.util.comboTemas(
 			"i3GEObuffertemasComSel",
 			function(retorno){
-		 		$i("i3GEObufferSelTemas").innerHTML = retorno.dados;
-		 		$i("i3GEObufferSelTemas").style.display = "block";
-		 		if ($i("i3GEObuffertemasComSel")){
-		 			$i("i3GEObuffertemasComSel").onchange = function(){
-		 				i3GEO.mapa.ativaTema($i("i3GEObuffertemasComSel").value);
-		 			};
+				$i("i3GEObufferSelTemas").innerHTML = retorno.dados;
+				$i("i3GEObufferSelTemas").style.display = "block";
+				if ($i("i3GEObuffertemasComSel")){
+					$i("i3GEObuffertemasComSel").onchange = function(){
+						i3GEO.mapa.ativaTema($i("i3GEObuffertemasComSel").value);
+					};
 				}
 				if(i3GEO.temaAtivo !== ""){
 					$i("i3GEObuffertemasComSel").value = i3GEO.temaAtivo;
@@ -241,6 +252,27 @@ i3GEOF.buffer = {
 			"",
 			false,
 			"selecionados"
+		);
+	},
+	/*
+	Function: comboItens
+
+	Cria um combo para escolha de um item do tema
+
+	Veja:
+
+	<i3GEO.util.comboItens>
+
+	*/
+	comboItens: function(){
+		i3GEO.util.comboItens(
+			"i3GEObuffertemasItem",
+			$i("i3GEObuffertemasComSel").value,
+			function(retorno){
+				$i("i3GEObufferondeItens").innerHTML = retorno.dados + " " + $trad(11,i3GEOF.buffer.dicionario)+" <input onclick='javascript:this.select();' class=digitar id='i3GEObufferdfator' type=text size=10 value='1'/>";
+				$i("i3GEObufferondeItens").style.display = "block";
+			},
+			"i3GEObufferondeItens"
 		);
 	}
 };
