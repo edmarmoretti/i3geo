@@ -95,7 +95,7 @@ i3GEOF.filtro = {
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela");
 		if(i3GEO.temaAtivo === ""){
-			$i(iddiv).innerHTML = '<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
+			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
 		}
 		try{
@@ -128,8 +128,8 @@ i3GEOF.filtro = {
 				"none",
 				i3GEO.temaAtivo,
 				function(retorno){
-		 			i3GEOF.filtro.comboTemas = retorno.dados;
-		 			i3GEOF.filtro.adicionaLinhaFiltro();
+					i3GEOF.filtro.comboTemas = retorno.dados;
+					i3GEOF.filtro.adicionaLinhaFiltro();
 				}
 			);
 		}
@@ -423,18 +423,18 @@ i3GEOF.filtro = {
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode('POST');
 			if (testa.toLowerCase() === "sim"){
-			 	temp = function(retorno){
-			 		$i("i3GEOfiltroguia3obj").innerHTML = "<img src="+retorno.data+" />";
-			 		i3GEOF.filtro.aguarde.visibility = "hidden";
-			 	};
+				temp = function(retorno){
+					$i("i3GEOfiltroguia3obj").innerHTML = "<img src="+retorno.data+" />";
+					i3GEOF.filtro.aguarde.visibility = "hidden";
+				};
 			}
 			else{
-			 	temp = function(retorno){
-			 		if(i3GEO.Interface.ATUAL === "padrao")
+				temp = function(retorno){
+					if(i3GEO.Interface.ATUAL === "padrao")
 					{i3GEO.atualiza(retorno);}
 					i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
-			 		i3GEOF.filtro.aguarde.visibility = "hidden";
-			 	};
+					i3GEOF.filtro.aguarde.visibility = "hidden";
+				};
 			}
 			cp.call(p,"insereFiltro",temp,"tema="+i3GEO.temaAtivo,"filtro="+filtro,"testa="+testa);
 		}

@@ -132,9 +132,12 @@ i3GEOF.buffer = {
 			function(){},
 			function(){
 				i3GEO.janela.minimiza("i3GEOF.buffer");
-			}
+			},
+			"",
+			false
 		);
 		divid = janela[2].id;
+		janela[0].setFooter("<div id=i3GEOF.buffer_rodape style=background-color:#F2F2F2; ></div>");
 		i3GEOF.buffer.aguarde = $i("i3GEOF.buffer_imagemCabecalho").style;
 		i3GEOF.buffer.inicia(divid);
 		temp = function(){
@@ -150,12 +153,12 @@ i3GEOF.buffer = {
 	{
 		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.buffer.dicionario);
 		ins += "<p class='paragrafo' >"+$trad(2,i3GEOF.buffer.dicionario);
-		i3GEO.util.proximoAnterior("","i3GEOF.buffer.t1()",ins,"i3GEOFgradeDePontost0","i3GEObufferresultado");
+		i3GEO.util.proximoAnterior("","i3GEOF.buffer.t1()",ins,"i3GEOFgradeDePontost0","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo'>"+$trad(3,i3GEOF.buffer.dicionario)+":";
 		ins += "<div id='i3GEObufferSelTemas' style='text-align:left;font-size:11px'></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.buffer.t0()","i3GEOF.buffer.t2()",ins,"i3GEOF.buffer.t1","i3GEObufferresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.buffer.t0()","i3GEOF.buffer.t2()",ins,"i3GEOF.buffer.t1","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
 		i3GEOF.buffer.comboTemasSel();
 	},
 	t2: function(){
@@ -167,13 +170,13 @@ i3GEOF.buffer = {
 
 		ins += "<br><p class='paragrafo'>"+$trad(5,i3GEOF.buffer.dicionario);
 		ins += "<br></p><select id=i3GEObufferunir ><option value=nao selected >"+$trad("x15")+"</option><option value=sim >"+$trad("x14")+"</option></select>";
-		i3GEO.util.proximoAnterior("i3GEOF.buffer.t1()","i3GEOF.buffer.t3()",ins,"i3GEOF.buffer.t2","i3GEObufferresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.buffer.t1()","i3GEOF.buffer.t3()",ins,"i3GEOF.buffer.t2","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
 		i3GEOF.buffer.comboItens();
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.buffer.dicionario);
 		ins += "<br><br><input id=i3GEObufferbotao1 type='button' value='"+$trad(7,i3GEOF.buffer.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.buffer.t2()","",ins,"i3GEOF.buffer.t3","i3GEObufferresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.buffer.t2()","",ins,"i3GEOF.buffer.t3","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
 		new YAHOO.widget.Button(
 			"i3GEObufferbotao1",
 			{onclick:{fn: i3GEOF.buffer.criaBuffer}}

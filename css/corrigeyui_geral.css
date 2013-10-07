@@ -311,10 +311,33 @@ td.ygtvcell {
 	border: 0px;
 }
 .yui-skin-sam .yui-panel .bd .yui-navset {
-    background: none;
-    z-index: 1;
-    border-bottom: 2px solid lightgray;
+		background: none;
+		z-index: 1;
+		border-bottom: 2px solid lightgray;
 }
 .yui-skin-sam .bd .yui-navset .yui-nav a, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-nav a em, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,.yui-skin-sam .bd .yui-button, .yui-skin-sam .bd .yui-button button, .yui-skin-sam .bd .yui-button a, .yui-skin-sam .bd .yui-button .first-child{
 	border-color: lightgray;
+}
+.yui-skin-sam .yui-resize .yui-resize-handle-br {
+		right:0;
+		bottom:0;
+		height: 8px;
+		width: 8px;
+		position:absolute;
+}
+.yui-skin-sam .yui-resize .yui-resize-handle-b {
+		right:0;
+		bottom:0;
+		height: 8px;
+		width: 8px;
+		position:absolute;
+}
+
+.comboTemasCabecalho .yuimenuitemlabel {
+		color: black;
+		cursor: default;
+		font-size: 10px;
+		font-weight: normal;
+		padding: 0 0px;
+		text-decoration: none;
 }

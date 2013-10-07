@@ -124,7 +124,7 @@ i3GEOF.pontoEmPoligono = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"250px",
+			"150px",
 			"",
 			"",
 			"",
@@ -133,9 +133,12 @@ i3GEOF.pontoEmPoligono = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			false
 		);
 		divid = janela[2].id;
+		janela[0].setFooter("<div id=i3GEOF.pontoEmPoligono_rodape style=background-color:#F2F2F2; ></div>");
 		i3GEOF.pontoEmPoligono.aguarde = $i("i3GEOF.pontoEmPoligono_imagemCabecalho").style;
 		i3GEOF.pontoEmPoligono.inicia(divid);
 		temp = function(){
@@ -151,18 +154,18 @@ i3GEOF.pontoEmPoligono = {
 		var ins = "<p class='paragrafo'>"+$trad(1,i3GEOF.pontoEmPoligono.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.pontoEmPoligono.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.pontoEmPoligono.dicionario);
-		i3GEO.util.proximoAnterior("","i3GEOF.pontoEmPoligono.t1()",ins,"i3GEOFgradeDePontost0","i3GEOpontoEmPoligonoresultado");
+		i3GEO.util.proximoAnterior("","i3GEOF.pontoEmPoligono.t1()",ins,"i3GEOFgradeDePontost0","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.pontoEmPoligono.dicionario);
 		ins += "<div id='i3GEOpontoEmPoligonoSelTemasPt' style='text-align:left;font-size:11px'></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t0()","i3GEOF.pontoEmPoligono.t2()",ins,"i3GEOF.pontoEmPoligono.t1","i3GEOpontoEmPoligonoresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t0()","i3GEOF.pontoEmPoligono.t2()",ins,"i3GEOF.pontoEmPoligono.t1","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 		i3GEOF.pontoEmPoligono.comboTemasSelPt();
 	},
 	t2: function(){
 		var erro = function(){
 			var ins = "<p class=i3GEO.janela.tempoMsga >"+$trad(5,i3GEOF.pontoEmPoligono.dicionario);
-			i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado");
+			i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 		};
 		if($i("i3GEOpontoEmPoligonotemasComSelPt"))
 		{
@@ -170,9 +173,9 @@ i3GEOF.pontoEmPoligono = {
 			{erro.call();}
 			else
 			{
- 				var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.pontoEmPoligono.dicionario);
+				var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.pontoEmPoligono.dicionario);
 				ins += "<div id='i3GEOpontoEmPoligonoSelTemasPo' style='text-align:left;font-size:11px'></div>";
-				i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","i3GEOF.pontoEmPoligono.t3()",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado");
+				i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","i3GEOF.pontoEmPoligono.t3()",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 				i3GEOF.pontoEmPoligono.comboTemasSelPo();
 			}
 		}
@@ -182,7 +185,7 @@ i3GEOF.pontoEmPoligono = {
 	t3: function(){
 		var ins = "<p class='paragrafo'>"+$trad(7,i3GEOF.pontoEmPoligono.dicionario);
 		ins += "<br><br><input id=i3GEOpontoEmPoligonobotao1 type='buttom' value='Cruzar' />";
-		i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t2()","",ins,"i3GEOF.pontoEmPoligono.t3","i3GEOpontoEmPoligonoresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t2()","",ins,"i3GEOF.pontoEmPoligono.t3","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 		new YAHOO.widget.Button(
 			"i3GEOpontoEmPoligonobotao1",
 			{onclick:{fn: i3GEOF.pontoEmPoligono.executa}}
@@ -247,12 +250,12 @@ i3GEOF.pontoEmPoligono = {
 		i3GEO.util.comboTemas(
 			"i3GEOpontoEmPoligonotemasComSelPt",
 			function(retorno){
-		 		$i("i3GEOpontoEmPoligonoSelTemasPt").innerHTML = retorno.dados;
-		 		$i("i3GEOpontoEmPoligonoSelTemasPt").style.display = "block";
-		 		if ($i("i3GEOpontoEmPoligonotemasComSelPt")){
-		 			$i("i3GEOpontoEmPoligonotemasComSelPt").onchange = function(){
-		 				i3GEO.mapa.ativaTema($i("i3GEOpontoEmPoligonotemasComSelPt").value);
-		 			};
+				$i("i3GEOpontoEmPoligonoSelTemasPt").innerHTML = retorno.dados;
+				$i("i3GEOpontoEmPoligonoSelTemasPt").style.display = "block";
+				if ($i("i3GEOpontoEmPoligonotemasComSelPt")){
+					$i("i3GEOpontoEmPoligonotemasComSelPt").onchange = function(){
+						i3GEO.mapa.ativaTema($i("i3GEOpontoEmPoligonotemasComSelPt").value);
+					};
 				}
 				if(i3GEO.temaAtivo !== ""){
 					$i("i3GEOpontoEmPoligonotemasComSelPt").value = i3GEO.temaAtivo;
@@ -278,8 +281,8 @@ i3GEOF.pontoEmPoligono = {
 		i3GEO.util.checkTemas(
 			"i3GEOpontoEmPoligonotemasComSelPo",
 			function(retorno){
-		 		$i("i3GEOpontoEmPoligonoSelTemasPo").innerHTML = retorno.dados;
-		 		$i("i3GEOpontoEmPoligonoSelTemasPo").style.display = "block";
+				$i("i3GEOpontoEmPoligonoSelTemasPo").innerHTML = retorno.dados;
+				$i("i3GEOpontoEmPoligonoSelTemasPo").style.display = "block";
 			},
 			"i3GEOpontoEmPoligonoSelTemasPo",
 			"",

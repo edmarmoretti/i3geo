@@ -121,7 +121,7 @@ i3GEOF.centroide = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"180px",
+			"150px",
 			"",
 			"",
 			"",
@@ -130,9 +130,12 @@ i3GEOF.centroide = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			false
 		);
 		divid = janela[2].id;
+		janela[0].setFooter("<div id=i3GEOF.centroide_rodape style=background-color:#F2F2F2; ></div>");
 		i3GEOF.centroide.aguarde = $i("i3GEOF.centroide_imagemCabecalho").style;
 		i3GEOF.centroide.inicia(divid);
 		temp = function(){
@@ -146,18 +149,18 @@ i3GEOF.centroide = {
 	t0: function()
 	{
 		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.centroide.dicionario);
-		i3GEO.util.proximoAnterior("","i3GEOF.centroide.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentroideresultado");
+		i3GEO.util.proximoAnterior("","i3GEOF.centroide.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo'>"+$trad(2,i3GEOF.centroide.dicionario);
 		ins += "<div id='i3GEOcentroideSelTemas' style='text-align:left;font-size:11px'></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.centroide.t0()","i3GEOF.centroide.t2()",ins,"i3GEOF.centroide.t1","i3GEOcentroideresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.centroide.t0()","i3GEOF.centroide.t2()",ins,"i3GEOF.centroide.t1","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
 		i3GEOF.centroide.comboTemasSel();
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo'>"+$trad(3,i3GEOF.centroide.dicionario);
 		ins += "<br><br><input id=i3GEOcentroidebotao1 type='buttom' value='"+$trad(4,i3GEOF.centroide.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.centroide.t2()","",ins,"i3GEOF.centroide.t3","i3GEOcentroideresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.centroide.t2()","",ins,"i3GEOF.centroide.t3","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
 		new YAHOO.widget.Button(
 			"i3GEOcentroidebotao1",
 			{onclick:{fn: i3GEOF.centroide.criacentroide}}
@@ -208,12 +211,12 @@ i3GEOF.centroide = {
 		i3GEO.util.comboTemas(
 			"i3GEOcentroidetemasComSel",
 			function(retorno){
-		 		$i("i3GEOcentroideSelTemas").innerHTML = retorno.dados;
-		 		$i("i3GEOcentroideSelTemas").style.display = "block";
-		 		if ($i("i3GEOcentroidetemasComSel")){
-		 			$i("i3GEOcentroidetemasComSel").onchange = function(){
-		 				i3GEO.mapa.ativaTema($i("i3GEOcentroidetemasComSel").value);
-		 			};
+				$i("i3GEOcentroideSelTemas").innerHTML = retorno.dados;
+				$i("i3GEOcentroideSelTemas").style.display = "block";
+				if ($i("i3GEOcentroidetemasComSel")){
+					$i("i3GEOcentroidetemasComSel").onchange = function(){
+						i3GEO.mapa.ativaTema($i("i3GEOcentroidetemasComSel").value);
+					};
 				}
 				if(i3GEO.temaAtivo !== ""){
 					$i("i3GEOcentroidetemasComSel").value = i3GEO.temaAtivo;

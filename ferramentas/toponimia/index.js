@@ -96,7 +96,7 @@ i3GEOF.toponimia = {
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela");
 		if(i3GEO.temaAtivo === ""){
-			$i(iddiv).innerHTML = '<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
+			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
 		}
 		try{
@@ -122,9 +122,9 @@ i3GEOF.toponimia = {
 				"i3GEOtoponimiaListaItens",
 				i3GEO.temaAtivo,
 				function(retorno){
-		 			$i("i3GEOtoponimiaDivListaItens").innerHTML = '<p class="paragrafo" >'+retorno.dados;
-		 			$i("i3GEOtoponimiaDivListaItens").style.display = "block";
-		 			$i("i3GEOtoponimiaListaItens").value = i3GEOF.toponimia.ATIVAITEM;
+					$i("i3GEOtoponimiaDivListaItens").innerHTML = '<p class="paragrafo" >'+retorno.dados;
+					$i("i3GEOtoponimiaDivListaItens").style.display = "block";
+					$i("i3GEOtoponimiaListaItens").value = i3GEOF.toponimia.ATIVAITEM;
 				},
 				"i3GEOtoponimiaDivListaItens",
 				""
@@ -369,11 +369,11 @@ i3GEOF.toponimia = {
 			{return;}
 			i3GEOF.toponimia.aguarde.visibility = "visible";
 			var monta = function(){
-			 		i3GEOF.toponimia.aguarde.visibility = "hidden";
-			 		if($i("i3GEOtoponimianovotema").checked)
-			 		{i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);}
-			 		else
-			 		{i3GEO.atualiza();}
+					i3GEOF.toponimia.aguarde.visibility = "hidden";
+					if($i("i3GEOtoponimianovotema").checked)
+					{i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);}
+					else
+					{i3GEO.atualiza();}
 				},
 				par = i3GEOF.toponimia.pegaPar(),
 				p = i3GEO.configura.locaplic+"/ferramentas/toponimia/exec.php?g_sid="+i3GEO.configura.sid+
@@ -401,8 +401,8 @@ i3GEOF.toponimia = {
 		{return;}
 		i3GEOF.toponimia.aguarde.visibility = "visible";
 		var monta = function(retorno){
-		 		$i("i3GEOtoponimiaTeste").innerHTML= "<img src='"+retorno.data+"' >";
-		 		i3GEOF.toponimia.aguarde.visibility = "hidden";
+				$i("i3GEOtoponimiaTeste").innerHTML= "<img src='"+retorno.data+"' >";
+				i3GEOF.toponimia.aguarde.visibility = "hidden";
 			},
 			par = i3GEOF.toponimia.pegaPar(),
 			p = i3GEO.configura.locaplic+"/ferramentas/toponimia/exec.php?g_sid="+i3GEO.configura.sid+

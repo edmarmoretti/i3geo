@@ -51,19 +51,19 @@ Gera um arquivo para visualiza&ccedil;&atilde;o em 3d com o mapa atual.
 i3GEOF.t3d = {
 	/*
 	Variavel: aguarde
-	
+
 	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Propriedade: dmap
-	
+
 	Arquivo mapfile que cont&eacute;m o layer que ser&aacute; utilizado para a obten&ccedil;&atilde;o dos valores  de Z.
 	O arquivo deve ficar armazenado em i3geo/aplicmap
-	
+
 	Tipo:
 	{string}
-	
+
 	Default:
 	{3dmap.map}
 	*/
@@ -76,11 +76,11 @@ i3GEOF.t3d = {
 	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.t3d.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -92,14 +92,14 @@ i3GEOF.t3d = {
 		else{
 			i3GEOF.t3d.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante.
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -111,11 +111,11 @@ i3GEOF.t3d = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
@@ -127,9 +127,9 @@ i3GEOF.t3d = {
 	},
 	/*
 	Function: criaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//cria a janela flutuante
@@ -149,9 +149,12 @@ i3GEOF.t3d = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			false
 		);
 		divid = janela[2].id;
+		janela[0].setFooter("<div id=i3GEOF.t3d_rodape style=background-color:#F2F2F2; ></div>");
 		i3GEOF.t3d.aguarde = $i("i3GEOF.t3d_imagemCabecalho").style;
 		i3GEOF.t3d.inicia(divid);
 		temp = function(){
@@ -167,24 +170,27 @@ i3GEOF.t3d = {
 		var ins = "<p class='paragrafo' >O modelo 3d do mapa ser&aacute; gerado em WRML. Ap&oacute;s o processamento, o arquivo ficar&aacute; dispon&iacute;vel para download.";
 		ins += "<p class='paragrafo' > Para ver o arquivo em 3d vc precisar&aacute; de um software espec&iacute;fico.";
 		ins += "<p class='paragrafo' > Experimente utilizar o <a href='http://www.parallelgraphics.com/products/cortona/' target=blank >Cortona</a> ou <a href=http://sourceforge.net/projects/flux target=blank >FLUX</a>";
-		i3GEO.util.proximoAnterior("","i3GEOF.t3d.t1()",ins,"i3GEOFgradeDePontost0","i3GEO3dresultado");
+		$i("i3GEO3dresultado").innerHTML = ins;
+		i3GEO.util.proximoAnterior("","i3GEOF.t3d.t1()","","i3GEOFgradeDePontost0","i3GEOF.t3d_rodape");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo' >O tempo de processamento pode variar em fun&ccedil;&atilde;o do tamanho da imagem do mapa.";
 		ins += "<p class='paragrafo' >Para obter um melhor resultado, o mapa &eacute; sempre reduzido para 400x400 pixels'.";
-		i3GEO.util.proximoAnterior("i3GEOF.t3d.t0()","i3GEOF.t3d.t2()",ins,"i3GEOF.t3d.t1","i3GEO3dresultado");
+		$i("i3GEO3dresultado").innerHTML = ins;
+		i3GEO.util.proximoAnterior("i3GEOF.t3d.t0()","i3GEOF.t3d.t2()","","i3GEOF.t3d.t1","i3GEOF.t3d_rodape");
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo'>Diminuir o exagero vertical em:<br>";
 		ins += "<input onclick='javascript:this.select();' id=i3GEO3dfz size=2 class=digitar type=text value=10 /> x ";
-	 	ins += "<p class='paragrafo'>Escolha o tema (opcional) com os valores de Z (se existir no mapa):<br>";
-	 	ins += "<div id=i3GEO3ddest style=text-align:left ></div><br>";
+		ins += "<p class='paragrafo'>Escolha o tema (opcional) com os valores de Z (se existir no mapa):<br>";
+		ins += "<div id=i3GEO3ddest style=text-align:left ></div><br>";
 		ins += "<p class='paragrafo'><input id=i3GEO3dbotao1 size=20 type='buttom' value='Criar modelo 3d' />";
-		i3GEO.util.proximoAnterior("i3GEOF.t3d.t1()","",ins,"i3GEOF.t3d.t2","i3GEO3dresultado");
+		$i("i3GEO3dresultado").innerHTML = ins;
+		i3GEO.util.proximoAnterior("i3GEOF.t3d.t1()","","","i3GEOF.t3d.t2","i3GEOF.t3d_rodape");
 		new YAHOO.widget.Button(
 			"i3GEO3dbotao1",
 			{onclick:{fn: i3GEOF.t3d.criar3d}}
-		);	
+		);
 		i3GEO.util.comboTemas(
 			"i3GEO3dlistaRaster",
 			function(retorno){
@@ -192,26 +198,26 @@ i3GEOF.t3d = {
 				if ($i("i3GEO3dlistaRaster")){
 					$i("i3GEO3ddest").style.display="block";
 				}
-	 		},
-	 		"i3GEO3ddest",
-	 		"",
-	 		false,
-	 		"raster"
-	 	);
+			},
+			"i3GEO3ddest",
+			"",
+			false,
+			"raster"
+		);
 	},
 	/*
 	Function: criar3d
-	
+
 	Abre uma nova janela no navegador para criar o arquivo 3d
-	
+
 	O arquivo &eacute; gerado pelo programa ferramentas/3d/3d.php e o resultado &eacute; mostrado em uma nova janela no navegador.
 	*/
 	criar3d: function(){
-	    var raster = "",
-	    	p;
-	    if ($i("i3GEO3dlistaRaster"))
-	    {raster = $i("i3GEO3dlistaRaster").value;}
+			var raster = "",
+				p;
+			if ($i("i3GEO3dlistaRaster"))
+			{raster = $i("i3GEO3dlistaRaster").value;}
 		p = i3GEO.configura.locaplic+"/ferramentas/3d/3d.php?map3d="+i3GEOF.t3d.dmap+"&fz="+$i("i3GEO3dfz").value+"&temaz="+raster+"&ext="+i3GEO.parametros.mapexten;
-	    window.open(p);
+			window.open(p);
 	}
 };

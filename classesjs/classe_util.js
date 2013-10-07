@@ -332,7 +332,7 @@ i3GEO.util = {
 	*/
 	arvore: function(titulo,onde,obj){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.arvore()");}
-		var arvore,root,tempNode,d,c,i,linha,conteudo,j,temaNode,criaNo;
+		var arvore,root,tempNode,d,criaNo;
 		if(!$i(onde)){return;}
 		arvore = new YAHOO.widget.TreeView(onde);
 		root = arvore.getRoot();
@@ -367,7 +367,7 @@ i3GEO.util = {
 				if(obj.propriedades[i].propriedades){
 					criaNo(obj.propriedades[i],temaNode);
 				}
-			}			
+			}
 		};
 		criaNo(obj,tempNode);
 		arvore.collapseAll();
@@ -1528,33 +1528,52 @@ i3GEO.util = {
 	tipoCombo {String} - Tipo de temas que serao incluidos no combo ligados|selecionados|raster|pontosSelecionados|pontos|linhaDoTempo
 
 	estilo {string} - estilo (css) que sera aplicado ao combo
+
+	yui {boolean} - (opcional) indica se o combo sera montado com o estilo YUI (menu)
 	*/
-	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo,estilo){
+	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo,estilo,yui){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboTemas()");}
-		if (arguments.length > 2)
-		{i3GEO.util.defineValor(onde,"innerHTML","<span style=color:red;font-size:10px; >buscando temas...</span>");}
-		if (arguments.length === 3)
-		{nome = "";}
-		if (arguments.length < 5)
-		{multiplo = false;}
-		if(!estilo){
+		if (onde && onde !== ""){
+			i3GEO.util.defineValor(onde,"innerHTML","<span style=color:red;font-size:10px; >buscando temas...</span>");
+		}
+		if (!nome){
+			nome = "";
+		}
+		if (!multiplo){
+			multiplo = false;
+		}
+		if(!estilo || estilo == ""){
 			estilo = "font-size: 12px;width: 95%;";
+		}
+		if(!yui){
+			yui = false;
 		}
 		var monta, temp, temp1, temp2;
 		monta = function(retorno){
-			var i,comboTemas,n,nome = "";
-			if (retorno !== undefined)
-			{
-				if(retorno.data)
-				{retorno = retorno.data;}
+			var i,
+				comboTemas = '' ,
+				n,
+				nome = "";
+			if(yui === true){
+				comboTemas = '<input type="button" name='+id+'_button id="'+id+'" value="'+$trad("x33")+'&nbsp;&nbsp;">';
+				id = id + "select";
+				nome = id;
+			}
+			if (retorno !== undefined){
+				if(retorno.data){
+					retorno = retorno.data;
+				}
 				n = retorno.length;
-				if (n > 0)
-				{
-					if(multiplo)
-					{comboTemas = "<select style='"+estilo+"' id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";}
-					else
-					{comboTemas = "<select style='"+estilo+"' id='"+id+"' name='"+nome+"'>";}
-					comboTemas += "<option value=''>----</option>";
+				if (n > 0){
+					if(multiplo){
+						comboTemas += "<select style='"+estilo+"' id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";
+					}
+					else{
+						comboTemas += "<select style='"+estilo+"' id='"+id+"' name='"+nome+"'>";
+					}
+					if(yui === false){
+						comboTemas += "<option value=''>----</option>";
+					}
 					for (i=0;i<n;i++){
 						if(retorno[i].nome){
 							nome = retorno[i].nome;
@@ -2080,11 +2099,16 @@ i3GEO.util = {
 
 	idatual {String} - id do elemento DIV que sera criado para inserir o conteudo definido em 'texto"
 
-	container {String} - id do elemento DIV ja existente que recebera as telas.
+	container {String} - id do elemento DIV ja existente que recebera as telas (texto).
+
+	mantem {boolean} - mantem ou nao no container o texto ja produzido
+
+	onde {string} (opcional) id onde os botoes serao colocados
 	*/
-	proximoAnterior: function(anterior,proxima,texto,idatual,container,mantem){
+	proximoAnterior: function(anterior,proxima,texto,idatual,container,mantem,onde){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.proximoAnterior()");}
 		var temp = $i(idatual),
+			botoes = "",
 			ndiv = document.createElement("div"),
 			nids,
 			i,
@@ -2092,20 +2116,20 @@ i3GEO.util = {
 		if(!mantem){
 			mantem = false;
 		}
-		if(temp && mantem == false){$i(container).removeChild(temp);}
-		if (!document.getElementById(idatual))
-		{
-			fundo = $i(container).style.backgroundColor;
-			ndiv.id = idatual;
-			texto += "<br><br><table style='width:100%;background-color:"+fundo+";' ><tr style='width:100%'>";
-			if (anterior !== "")
-			{texto += "<td style='border:0px solid white;text-align:left;cursor:pointer;background-color:"+fundo+";'><input id='"+idatual+"anterior_' onclick='"+anterior+"' type='button' value='&nbsp;&nbsp;' /></td>";}
-			if (proxima !== "")
-			{texto += "<td style='border:0px solid white;text-align:right;cursor:pointer;background-color:"+fundo+";'><input id='"+idatual+"proxima_' onclick='"+proxima+"' type='button' value='&nbsp;&nbsp;' /></td>";}
-			ndiv.innerHTML = texto+"</tr></table>";
+		if(temp && mantem == false){
+			$i(container).removeChild(temp);
+		}
+		fundo = $i(container).style.backgroundColor;
 
-			$i(container).appendChild(ndiv);
+		botoes = "<table style='width:100%;background-color:"+fundo+";' ><tr style='width:100%'>";
+		if (anterior !== "")
+		{botoes += "<td style='border:0px solid white;text-align:left;cursor:pointer;background-color:"+fundo+";'><input id='"+idatual+"anterior_' onclick='"+anterior+"' type='button' value='&nbsp;&nbsp;' /></td>";}
+		if (proxima !== "")
+		{botoes += "<td style='border:0px solid white;text-align:right;cursor:pointer;background-color:"+fundo+";'><input id='"+idatual+"proxima_' onclick='"+proxima+"' type='button' value='&nbsp;&nbsp;' /></td>";}
+		botoes += "</tr></table>";
 
+		var ativaBotoes = function(anterior,proxima,idatual){
+			var i;
 			new YAHOO.widget.Button(idatual+"anterior_",{
 				onclick:{fn: function(){
 					eval(anterior+"()");
@@ -2130,7 +2154,20 @@ i3GEO.util = {
 				i.style.backgroundRepeat = "no-repeat";
 				i.style.backgroundPosition = "center center";
 			}
+		};
+		if(onde){
+			$i(onde).innerHTML = botoes;
 		}
+		else{
+			texto = texto+"<br><br>"+botoes;
+		}
+		if (!document.getElementById(idatual)){
+			ndiv.id = idatual;
+			ndiv.innerHTML = texto;
+			$i(container).appendChild(ndiv);
+		}
+		ativaBotoes(anterior,proxima,idatual);
+
 		temp = $i(container).getElementsByTagName("div");
 		nids = temp.length;
 		for (i=0;i<nids;i++){
@@ -2663,16 +2700,16 @@ i3GEO.util = {
 				alert(e);
 			},
 			callback = {
-		  		success:function(o){
-		  			try	{
-		  				funcaoRetorno.call("",YAHOO.lang.JSON.parse(o.responseText));
-		  			}
-		  			catch(e){
-		  				falhou(e);
-		  			}
-		  		},
-		  		failure:falhou,
-		  		argument: { foo:"foo", bar:"bar" }
+					success:function(o){
+						try	{
+							funcaoRetorno.call("",YAHOO.lang.JSON.parse(o.responseText));
+						}
+						catch(e){
+							falhou(e);
+						}
+					},
+					failure:falhou,
+					argument: { foo:"foo", bar:"bar" }
 			};
 		YAHOO.util.Connect.asyncRequest("GET", sUrl, callback);
 	},
@@ -2752,7 +2789,7 @@ i3GEO.util = {
 	/*
 	Function: extGeo2OSM
 
-	 Converte string xmin ymin xmax ymax de geo para a projecao OSM
+	Converte string xmin ymin xmax ymax de geo para a projecao OSM
 	*/
 	extGeo2OSM: function(ext){
 		if(i3GEO.Interface.openlayers.googleLike === true){
@@ -2773,7 +2810,7 @@ i3GEO.util = {
 	/*
 	Function: extGeo2OSM
 
-	 Converte string xmin ymin xmax ymax de geo para a projecao OSM
+	Converte string xmin ymin xmax ymax de geo para a projecao OSM
 	*/
 	extOSM2Geo: function(ext){
 		if(i3GEO.Interface.openlayers.googleLike === true){

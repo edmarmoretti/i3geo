@@ -122,7 +122,7 @@ i3GEOF.agrupaElementos = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"270px",
+			"250px",
 			"",
 			"",
 			"",
@@ -131,9 +131,12 @@ i3GEOF.agrupaElementos = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			false
 		);
 		divid = janela[2].id;
+		janela[0].setFooter("<div id=i3GEOF.agrupaElementos_rodape style=background-color:#F2F2F2; ></div>");
 		i3GEOF.agrupaElementos.aguarde = $i("i3GEOF.agrupaElementos_imagemCabecalho").style;
 		i3GEOF.agrupaElementos.inicia(divid);
 		temp = function(){
@@ -149,25 +152,25 @@ i3GEOF.agrupaElementos = {
 		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.agrupaElementos.dicionario);
 		ins += "<p class='paragrafo' >"+$trad(2,i3GEOF.agrupaElementos.dicionario);
 		ins += "<p class='paragrafo' >"+$trad(3,i3GEOF.agrupaElementos.dicionario);
-		i3GEO.util.proximoAnterior("","i3GEOF.agrupaElementos.t1()",ins,"i3GEOFgradeDePontost0","i3GEOagrupaelementosresultado");
+		i3GEO.util.proximoAnterior("","i3GEOF.agrupaElementos.t1()",ins,"i3GEOFgradeDePontost0","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo' >"+$trad(4,i3GEOF.agrupaElementos.dicionario)+":<br>";
 		ins += "<div id='i3GEOagrupaelementosSelTemas' style='text-align:left;font-size:11px'></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t0()","i3GEOF.agrupaElementos.t2()",ins,"i3GEOF.agrupaElementos.t1","i3GEOagrupaelementosresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t0()","i3GEOF.agrupaElementos.t2()",ins,"i3GEOF.agrupaElementos.t1","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
 		i3GEOF.agrupaElementos.comboTemasSel();
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo' >"+$trad(5,i3GEOF.agrupaElementos.dicionario);
 		ins += "<div id='i3GEOagrupaelementosSelItens' style='text-align:left;font-size:11px;'></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t1()","i3GEOF.agrupaElementos.t3()",ins,"i3GEOF.agrupaElementos.t2","i3GEOagrupaelementosresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t1()","i3GEOF.agrupaElementos.t3()",ins,"i3GEOF.agrupaElementos.t2","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
 		$i("i3GEOagrupaelementosSelItens").style.display = "block";
 		i3GEOF.agrupaElementos.comboItensSel();
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.agrupaElementos.dicionario);
 		ins += "<br><br><input id=i3GEOagrupaelementosbotao1 type='buttom' value='"+$trad(10,i3GEOF.agrupaElementos.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t2()","",ins,"i3GEOF.agrupaElementos.t3","i3GEOagrupaelementosresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t2()","",ins,"i3GEOF.agrupaElementos.t3","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
 		new YAHOO.widget.Button(
 			"i3GEOagrupaelementosbotao1",
 			{onclick:{fn: i3GEOF.agrupaElementos.criaAgrupamento}}
@@ -224,12 +227,12 @@ i3GEOF.agrupaElementos = {
 		i3GEO.util.comboTemas(
 			"i3GEOagrupaelementostemasComSel",
 			function(retorno){
-		 		$i("i3GEOagrupaelementosSelTemas").innerHTML = retorno.dados;
-		 		$i("i3GEOagrupaelementosSelTemas").style.display = "block";
-		 		if ($i("i3GEOagrupaelementostemasComSel")){
-		 			$i("i3GEOagrupaelementostemasComSel").onchange = function(){
-		 				i3GEO.mapa.ativaTema($i("i3GEOagrupaelementostemasComSel").value);
-		 			};
+				$i("i3GEOagrupaelementosSelTemas").innerHTML = retorno.dados;
+				$i("i3GEOagrupaelementosSelTemas").style.display = "block";
+				if ($i("i3GEOagrupaelementostemasComSel")){
+					$i("i3GEOagrupaelementostemasComSel").onchange = function(){
+						i3GEO.mapa.ativaTema($i("i3GEOagrupaelementostemasComSel").value);
+					};
 				}
 				if(i3GEO.temaAtivo !== ""){
 					$i("i3GEOagrupaelementostemasComSel").value = i3GEO.temaAtivo;
@@ -257,12 +260,12 @@ i3GEOF.agrupaElementos = {
 			"i3GEOagrupaelementosselItem",
 			tema,
 			function(retorno){
-		 		if(retorno.tipo === "erro"){
-		 			$i("i3GEOagrupaelementosSelItens").innerHTML = "<br><br><span style='color:red'>"+$trad(9,i3GEOF.agrupaElementos.dicionario)+"</span><br><br>";
-		 		}
-		 		else{
-		 			$i("i3GEOagrupaelementosSelItens").innerHTML = retorno.dados;
-		 		}
+				if(retorno.tipo === "erro"){
+					$i("i3GEOagrupaelementosSelItens").innerHTML = "<br><br><span style='color:red'>"+$trad(9,i3GEOF.agrupaElementos.dicionario)+"</span><br><br>";
+				}
+				else{
+					$i("i3GEOagrupaelementosSelItens").innerHTML = retorno.dados;
+				}
 			},
 			"i3GEOagrupaelementosSelItens",
 			""

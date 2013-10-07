@@ -135,7 +135,7 @@ i3GEOF.legenda = {
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFlegendaComboCabeca","i3GEOFlegendaComboCabecaSel","legenda","ligados");
 		if(i3GEO.temaAtivo === ""){
-			$i(iddiv).innerHTML = '<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
+			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
 		}
 		try{
@@ -308,7 +308,7 @@ i3GEOF.legenda = {
 				i3GEOF.legenda.tema,
 				function(retorno){
 					if($i("i3GEOlegendaitens"))
-			 		{$i("i3GEOlegendaitens").innerHTML = retorno.dados;}
+					{$i("i3GEOlegendaitens").innerHTML = retorno.dados;}
 				},
 				"i3GEOlegendaitens"
 			);
@@ -738,10 +738,10 @@ i3GEOF.legenda = {
 			nomes = nomes.join(";");
 			exps = exps.join(";");
 			temp = function(){
- 				i3GEOF.legenda.aguarde.visibility = "hidden";
+				i3GEOF.legenda.aguarde.visibility = "hidden";
 				i3GEOF.legenda.mostralegenda();
 				i3GEOF.legenda.aposAlterarLegenda();
- 				i3GEOF.legenda.aguarde.visibility = "hidden";
+				i3GEOF.legenda.aguarde.visibility = "hidden";
 			};
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&opcao=alteraclasses&ext="+i3GEO.parametros.mapexten;
 			cp = new cpaint();
@@ -1170,7 +1170,7 @@ i3GEOF.legenda = {
 				i3GEOF.legenda.tema,
 				function(retorno){
 					if($i("i3GEOlegendaitensLabel"))
-			 		{$i("i3GEOlegendaitensLabel").innerHTML = retorno.dados;}
+					{$i("i3GEOlegendaitensLabel").innerHTML = retorno.dados;}
 				},
 				"i3GEOlegendaitensLabel"
 			);

@@ -455,7 +455,7 @@ i3GEO.arvoreDeTemas = {
 				//que se trata de uma camada vinda do sistema metaestat
 				tema = {"nameInput":"metaestat","tid":retorno[i].id_medida_variavel,"nome":retorno[i].nomemedida},
 				html = i3GEO.arvoreDeTemas.montaTextoTema("gray",tema),
-				 new YAHOO.widget.HTMLNode(
+				new YAHOO.widget.HTMLNode(
 					{isleaf:true,html:html,expanded:false,enableHighlight:false},
 					node
 				);
@@ -2138,7 +2138,7 @@ i3GEO.arvoreDeTemas = {
 			$i("i3GEOFconectaservico_corpo").style.backgroundColor = "white";
 			$i("i3GEOFconectaservico_corpo").style.overflow = "hidden";
 			ins = "" +
-			"	<p class=paragrafo style='width:90%' ><b>Tipo de conex&aatilde;o</b><br><br>" +
+			"	<p class=paragrafo style='width:90%' ><b>Tipo de conex&atilde;o</b><br><br>" +
 			"	<table class=lista6 style=left:20px;position:relative >";
 
 			if(OPCOESADICIONAIS.carregaKml === true){

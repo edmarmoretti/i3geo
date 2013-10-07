@@ -280,16 +280,16 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 	);
 
 	var tms = new OpenLayers.Layer.TMS(
-	    "OSGEO",
-	    "http://tilecache.osgeo.org/wms-c/Basic.py/",
-	    {
-	        layername: "basic",
-	        type: "png",
-	        // set if different than the bottom left of map.maxExtent
-	        tileOrigin: new OpenLayers.LonLat(-180,-90),
-	        isBaseLayer:true,
-	        visibility:false
-	    }
+			"OSGEO",
+			"http://tilecache.osgeo.org/wms-c/Basic.py/",
+			{
+					layername: "basic",
+					type: "png",
+					// set if different than the bottom left of map.maxExtent
+					tileOrigin: new OpenLayers.LonLat(-180,-90),
+					isBaseLayer:true,
+					visibility:false
+			}
 	);
 
 	i3GEO.Interface.openlayers.LAYERSADICIONAIS = [oce,ims,wsm,tms,bra];

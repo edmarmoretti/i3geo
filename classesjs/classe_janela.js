@@ -72,7 +72,7 @@ i3GEO.janela = {
 	Default:
 	{display:block;padding:5px 0px 5px 2px}
 	*/
-	ESTILOBD: "display:block;padding:5px 3px 5px 3px;",
+	ESTILOBD: "display:block;padding:5px 1px 5px 1px;",
 	/*
 	Propriedade: ESTILOAGUARDE
 
@@ -226,12 +226,17 @@ i3GEO.janela = {
 
 	funcaoAposRedim {function} - (opcional) funcao que ser&aacute; executada para alterar o tamanho da janela
 
+	dimensionavel {boolean} - (opcional) a janela pode ser redimensionada ou nao pelo usuario
+
 	Return:
 
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
-	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza, funcaoAposRedim){
+	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza, funcaoAposRedim, dimensionavel){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
+		if(!dimensionavel){
+			dimensionavel == true;
+		}
 		if($i(id)){
 			janela = YAHOO.i3GEO.janela.manager.find(id);
 			janela.show();
@@ -271,7 +276,7 @@ i3GEO.janela = {
 		wlargurA = parseInt(wlargura,10)+temp+"px";
 		ins = '<div id="'+id+'_cabecalho" class="'+classe+'" style="background-color:white;">';
 		if(i3GEO.configura !== undefined)
-		{ins += "<img id='"+id+"_imagemCabecalho' style='z-index:2;position:absolute;left:3px;top:2px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";}
+		{ins += "<img id='"+id+"_imagemCabecalho' style='z-index:102;position:absolute;left:3px;top:6px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";}
 		ins += "<span style='font-size:10px;'>"+texto+"</span>";
 		if(funcaoMinimiza)
 		{ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza'></div>";}
@@ -279,6 +284,7 @@ i3GEO.janela = {
 		if(wsrc !== "")
 		{ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';}
 		ins += '</div>';
+		ins += '<div class="ft"></div>';
 		novoel = document.createElement("div");
 		novoel.id = id;
 		novoel.style.display="block";
@@ -302,20 +308,41 @@ i3GEO.janela = {
 			wdocaiframe.src = wsrc;
 		}
 		else{
-			if(waltura !== "auto")
-			{$i(id+'_corpo').style.height=parseInt(waltura,10)+"px";}
-			$i(id+'_corpo').style.width=parseInt(wlargura,10)+"px";
+			if(waltura !== "auto"){
+				$i(id+'_corpo').style.height=parseInt(waltura,10)+"px";
+			}
+			$i(id+'_corpo').style.width='100%'; //parseInt(wlargura,10)+"px";
+			$i(id+'_corpo').style.overflow = "auto";
 		}
 		//cria a janela
-		if(waltura === "auto"){
+		if(waltura === "auto" || dimensionavel == false){
 			janela = new YAHOO.widget.Panel(id, {
 				iframe:ifr,modal:modal, width: wlargurA,underlay:"none", fixedcenter: fix, constraintoviewport: true, visible: true,monitorresize:false,dragOnly:true,keylisteners:null
 			} );
 		}
 		else{
-			janela = new YAHOO.widget.ResizePanel(id, {
+			janela = new YAHOO.widget.Panel(id, {
 				hideMode:'offsets',iframe:ifr,underlay:underlay, modal:modal, width: wlargurA, fixedcenter: fix, constraintoviewport: true, visible: true,monitorresize:false,dragOnly:true,keylisteners:null
 			} );
+			var resize = new YAHOO.util.Resize(id, {
+				handles: ['br'],
+				autoRatio: false,
+				minWidth: 10,
+				minHeight: 10,
+				status: false,
+				proxy: true,
+				ghost: false,
+				animate: true
+			});
+			resize.on('resize', function(args) {
+						this.cfg.setProperty("height", args.height + "px");
+				}, janela, true);
+			if(funcaoAposRedim && funcaoAposRedim != ""){
+				resize.on('endResize', function(args) {
+					funcaoAposRedim.call();
+					i3GEO.janela.minimiza();
+				}, janela, true);
+			}
 		}
 		if(nx !== "" && nx !== "center"){
 			janela.moveTo(nx,ny + 50);
@@ -329,27 +356,14 @@ i3GEO.janela = {
 		janela.cfg.setProperty("zIndex",[4]);
 		janela.render();
 		janela.bringToTop();
-		//funcao executada apos o mouse sair do icone de resize
-		if(funcaoAposRedim){
-			temp = $i(id + "_resizehandle");
-			if(temp){
-				temp.onmouseup = function(){
-					funcaoAposRedim.call();
-				};
-			}
-		}
+
 		//ajusta estilos e outras caracter&iacute;sticas da janela criada
 		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL === "googleearth")
 		{janela.moveTo(0,0);}
 		if(ifr === true)
 		{janela.iframe.style.zIndex = 4;}
-		temp = $i(id+"_corpo");
-		if(temp){
-			if(navm)
-			{temp.style.paddingRight = "0px";}
-			temp.style.width = parseInt(temp.style.width,10) - 2 + "px";
-		}
-		YAHOO.util.Event.addListener($i(id), "click", YAHOO.util.Event.stopPropagation);
+
+		YAHOO.util.Event.addListener($i(id+'_corpo'), "click", YAHOO.util.Event.stopPropagation);
 		//finaliza
 		if(funcaoCabecalho){
 			$i(id+'_cabecalho').onclick = funcaoCabecalho;
@@ -358,7 +372,7 @@ i3GEO.janela = {
 			$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;
 		}
 		YAHOO.util.Event.addListener(janela.close, "click", i3GEO.janela.fecha,janela,{id:id},true);
-		//$i(id+"_c").style.zIndex = 20000;
+		temp = $i(id+"_corpo");
 		return([janela,$i(id+"_cabecalho"),temp]);
 	},
 	/*
@@ -373,6 +387,7 @@ i3GEO.janela = {
 			n,
 			i,
 			m = YAHOO.i3GEO.janela.manager.find(id);
+
 		if(temp){
 			if(temp.style.display === "block"){
 				temp.style.display = "none";
@@ -407,10 +422,23 @@ i3GEO.janela = {
 		}
 		temp = $i(id+"_corpo");
 		if(temp){
-			if(temp.style.display === "none")
-			{temp.style.display = "block";}
-			else
-			{temp.style.display = "none";}
+			if(temp.style.display === "none"){
+				temp.style.display = "block";
+			}
+			else{
+				temp.style.display = "none";
+			}
+
+		}
+		temp = $i(id);
+		if(temp){
+			if(temp.style.display === "none"){
+				temp.style.height = "100%";
+			}
+			else{
+				temp.style.height = "10%";
+			}
+
 		}
 	},
 	/*
@@ -970,53 +998,49 @@ i3GEO.janela = {
 	*/
 	comboCabecalhoTemas: function(idDiv,idCombo,ferramenta,tipo,funcaoOnChange){
 		var temp = $i(idDiv);
-		if(temp){
-			temp.innerHTML = "";
+		if(temp && !($i(idCombo))){
 			i3GEO.util.comboTemas(
 				temp.id+"Sel",
 				function(retorno){
-					var container = $i(idDiv),
-						c;
+					var tema,container = $i(idDiv),
+						botao,onButtonClick;
 					container.innerHTML = retorno.dados;
-					//container.style.left = "0px";
-					//container.styletextAlign = "left";
-					c = $i(idCombo);
-					c.style.width = "150px";
-					c.style.border = "solid #B4B4B4 1px";
-					c.style.top = "6px";
-					c.style.left = "2px";
-					c.style.position = "relative";
-					c.style.fontSize = "10px";
-					c.style.color = "#686868";
-					if(i3GEO.temaAtivo !== "")
-					{c.value = i3GEO.temaAtivo;}
-					if(i3GEOF[ferramenta] && i3GEOF[ferramenta].tema)
-					{c.value = i3GEOF[ferramenta].tema;}
-					if(c.value === "" && i3GEOF[ferramenta]){
-						i3GEOF[ferramenta].tema = "";
-						$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";
+					botao = new YAHOO.widget.Button(idCombo, {
+						type: "menu",
+						menu: idCombo+"select"
+					});
+
+					if(i3GEO.temaAtivo != ""){
+						tema = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
+						botao.set("label", tema.tema+"&nbsp;&nbsp;");
 					}
-					if(funcaoOnChange && funcaoOnChange != ""){
-						c.onchange = funcaoOnChange;
-					}
-					else{
-						c.onchange = function(){
-							var valor = $i(idCombo).value;
-							if(valor !== ""){
-								i3GEO.mapa.ativaTema(valor);
+					//botao.setStyle("width","150px");
+					//alert(botao.get("value"))
+					onButtonClick = function (p_sType, p_aArgs) {
+						//var oEvent = p_aArgs[0],	//	DOM event
+						var oMenuItem = p_aArgs[1];	//	MenuItem instance that was the
+													//	target of the event
+						if (oMenuItem) {
+							if(oMenuItem.value != ""){
+								i3GEO.mapa.ativaTema(oMenuItem.value);
+								botao.set("label", oMenuItem.cfg.getProperty("text")+"&nbsp;&nbsp;");
+
 								if(i3GEOF[ferramenta]){
-									i3GEOF[ferramenta].tema = valor;
+									i3GEOF[ferramenta].tema = oMenuItem.value;
 									$i("i3GEOF."+ferramenta+"_corpo").innerHTML = "";
 									eval("i3GEOF."+ferramenta+".inicia('i3GEOF."+ferramenta+"_corpo');");
 								}
 							}
-						};
-					}
+						}
+					};
+					botao.getMenu().subscribe("click", onButtonClick);
 				},
 				temp.id,
 				"",
 				false,
-				tipo
+				tipo,
+				"",
+				true
 			);
 		}
 		//
@@ -1031,109 +1055,3 @@ i3GEO.janela = {
 		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push(temp);}
 	}
 };
-try{
-	//controle dos pain&eacute;is que podem ser redimensionados
-	YAHOO.widget.ResizePanel = function(el, userConfig)	{
-		if (arguments.length > 0)
-		{YAHOO.widget.ResizePanel.superclass.constructor.call(this, el, userConfig);}
-	};
-	YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE = "yui-resizepanel";
-	YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE = "resizehandle";
-	YAHOO.extend(
-		YAHOO.widget.ResizePanel, YAHOO.widget.Panel,{
-			init: function(el, userConfig){
-				YAHOO.widget.ResizePanel.superclass.init.call(this, el);
-				this.beforeInitEvent.fire(YAHOO.widget.ResizePanel);
-				var Dom = YAHOO.util.Dom,
-					oInnerElement = this.innerElement,
-					oResizeHandle = document.createElement("DIV"),
-					sResizeHandleId = this.id + "_resizehandle";
-				oResizeHandle.id = sResizeHandleId;
-				oResizeHandle.className = YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE;
-				Dom.addClass(oInnerElement, YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE);
-				this.resizeHandle = oResizeHandle;
-				function initResizeFunctionality(){
-					var me = this,
-						oHeader = this.header,
-						oBody = this.body,
-						oFooter = this.footer,
-						nStartWidth,
-						nStartHeight,
-						aStartPos = 0,
-						nBodyBorderTopWidth,
-						nBodyBorderBottomWidth,
-						nBodyTopPadding,
-						nBodyBottomPadding,
-						nBodyOffset = 0;
-					oInnerElement.appendChild(oResizeHandle);
-					this.ddResize = new YAHOO.util.DragDrop(sResizeHandleId, this.id);
-					this.ddResize.setHandleElId(sResizeHandleId);
-					this.ddResize.onMouseDown = function(e){
-						//if(typeof(console) !== 'undefined'){console.error("down");}
-						nStartWidth = oInnerElement.offsetWidth;
-						nStartHeight = oInnerElement.offsetHeight;
-						if (YAHOO.env.ua.ie && document.compatMode  === "BackCompat")
-						{nBodyOffset = 0;}
-						else{
-							nBodyBorderTopWidth = parseInt(Dom.getStyle(oBody, "borderTopWidth"), 10);
-							nBodyBorderBottomWidth = parseInt(Dom.getStyle(oBody, "borderBottomWidth"), 10);
-							nBodyTopPadding = parseInt(Dom.getStyle(oBody, "paddingTop"), 10);
-							nBodyBottomPadding = parseInt(Dom.getStyle(oBody, "paddingBottom"), 10);
-							nBodyOffset = nBodyBorderTopWidth + nBodyBorderBottomWidth + nBodyTopPadding + nBodyBottomPadding;
-						}
-						//
-						//ajusta o tamanho do body no IE qd a janela &eacute; redimensionada
-						//
-						me.cfg.setProperty("width", nStartWidth + "px");
-						aStartPos = [YAHOO.util.Event.getPageX(e), YAHOO.util.Event.getPageY(e)];
-					};
-					this.ddResize.onDrag = function(e){
-						var aNewPos = [YAHOO.util.Event.getPageX(e), YAHOO.util.Event.getPageY(e)],
-							nOffsetX = aNewPos[0] - aStartPos[0],
-							nOffsetY = aNewPos[1] - aStartPos[1],
-							nNewWidth = Math.max(nStartWidth + nOffsetX, 10),
-							nNewHeight = Math.max(nStartHeight + nOffsetY, 10),
-							nBodyHeight = (nNewHeight - (oFooter.offsetHeight + oHeader.offsetHeight + nBodyOffset));
-						me.cfg.setProperty("width", nNewWidth + "px");
-						//if(navm)
-						//{nNewWidth = nNewWidth - 2;}
-						oBody.style.width = nNewWidth - 4 +"px";
-						if (nBodyHeight < 0)
-						{nBodyHeight = 0;}
-						oBody.style.height =  nBodyHeight + "px";
-						if ($i("wdocai")){
-							$i("wdocai").style.height = nBodyHeight + "px";
-							$i("wdocai").style.width = oBody.style.width + "px";
-						}
-					};
-					this.ddResize.onMouseUp = this.ddResize.onDrag.call();
-				}
-				function onBeforeShow(){
-					initResizeFunctionality.call(this);
-					this.unsubscribe("beforeShow", onBeforeShow);
-				}
-				function onBeforeRender(){
-					if (!this.footer)
-					{this.setFooter("");}
-					if (this.cfg.getProperty("visible"))
-					{initResizeFunctionality.call(this);}
-					else
-					{this.subscribe("beforeShow", onBeforeShow);}
-					this.unsubscribe("beforeRender", onBeforeRender);
-				}
-				this.subscribe("beforeRender", onBeforeRender);
-				if (userConfig)
-				{this.cfg.applyConfig(userConfig, true);}
-				this.initEvent.fire(YAHOO.widget.ResizePanel);
-					//if(me.cfg.initialConfig
-					//oResizeHandle.onmouseup = function(){alert("oi")};
-			},
-			toString: function()
-			{return "ResizePanel " + this.id;}
-		}
-	);
-}
-catch(e){
-	if(typeof(console) !== 'undefined'){console.error(e);}
-}
-//YAHOO.log("carregou classe janela", "Classes i3geo");

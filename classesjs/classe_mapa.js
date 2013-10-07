@@ -348,9 +348,9 @@ i3GEO.mapa = {
 		*/
 		atualiza: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.atualiza()");}
-			var idleg,
+			var idleg = $i("wlegenda_corpo"),
 				temp = function(retorno){
-					var legenda = "",ins,elementos,i,temp,re;
+					var legenda = "",ins,re;
 					re = new RegExp("<img src='' />", "g");
 					if (retorno.data !== "erro" && retorno.data !== undefined ){
 						legenda = "<div onclick='i3GEO.mapa.legendaHTML.mostraTodosOsTemas()' style=cursor:pointer;font-size:10px;text-align:left; >Mostra tudo</div><br>"+retorno.data.legenda;
@@ -367,7 +367,6 @@ i3GEO.mapa = {
 					}
 					i3GEO.mapa.legendaHTML.escondeTemasMarcados();
 				};
-			idleg = $i("wlegenda_corpo");
 			if (idleg && idleg.style.display === "block"){
 				//para o caso da legenda ja estar aberta
 				if(i3GEO.mapa.legendaHTML.ID !== ""){
@@ -460,7 +459,7 @@ i3GEO.mapa = {
 				ck = "nao";
 			}
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.libera()");}
-			var i,cabecalho,minimiza,janela,temp,n;
+			var cabecalho,minimiza,janela;
 			if (!$i("wlegenda")){
 				cabecalho = function(){
 				};

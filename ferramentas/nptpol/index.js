@@ -121,7 +121,7 @@ i3GEOF.nptpol = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"250px",
+			"150px",
 			"",
 			"",
 			"",
@@ -130,9 +130,12 @@ i3GEOF.nptpol = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			false
 		);
 		divid = janela[2].id;
+		janela[0].setFooter("<div id=i3GEOF.nptpol_rodape style=background-color:#F2F2F2; ></div>");
 		i3GEOF.nptpol.aguarde = $i("i3GEOF.nptpol_imagemCabecalho").style;
 		i3GEOF.nptpol.inicia(divid);
 		temp = function(){
@@ -148,7 +151,7 @@ i3GEOF.nptpol = {
 		var ins = "<p class='paragrafo'>"+$trad(1,i3GEOF.nptpol.dicionario)+"</p>";
 		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.nptpol.dicionario)+"</p>";
 		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.nptpol.dicionario)+"</p>";
-		i3GEO.util.proximoAnterior("","i3GEOF.nptpol.t1()",ins,"i3GEOFgradeDePontost0","i3GEOnptpolresultado");
+		i3GEO.util.proximoAnterior("","i3GEOF.nptpol.t1()",ins,"i3GEOFgradeDePontost0","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo' >"+$trad(4,i3GEOF.nptpol.dicionario)+":<br>";
@@ -159,14 +162,14 @@ i3GEOF.nptpol = {
 
 		ins += "<p class='paragrafo' >"+$trad(5,i3GEOF.nptpol.dicionario)+":<br>";
 		ins += "<div style='text-align:left;' id='i3GEOnptpolDivPoligonos' ></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t0()","i3GEOF.nptpol.t2()",ins,"i3GEOF.nptpol.t1","i3GEOnptpolresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t0()","i3GEOF.nptpol.t2()",ins,"i3GEOF.nptpol.t1","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
 		i3GEOF.nptpol.comboTemasPontos();
 		i3GEOF.nptpol.comboTemasPoligonos();
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.nptpol.dicionario);
 		ins += "<br><br><input id=i3GEOnptpolbotao1 type='buttom' value='"+$trad(7,i3GEOF.nptpol.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t1()","",ins,"i3GEOF.nptpol.t2","i3GEOnptpolresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t1()","",ins,"i3GEOF.nptpol.t2","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
 		new YAHOO.widget.Button(
 			"i3GEOnptpolbotao1",
 			{onclick:{fn: i3GEOF.nptpol.calcula}}

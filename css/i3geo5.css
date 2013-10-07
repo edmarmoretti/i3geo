@@ -17,7 +17,7 @@ background-color:#F8F8F8;
 color:black;
 }
 .comboTemasCabecalho{
-z-index: 1; position: absolute; left: 4px;
+z-index: 100; position: absolute; left: 0px; top:3px;
 }
 fieldset
 {text-align:left;	padding: 10px;	border: 0px solid gray;	border-radius: 5px 5px 5px 5px;	box-shadow: 0 1px 3px gray ;	background-color:rgb(250,250,250);	margin:15px;}
@@ -1611,6 +1611,28 @@ border-bottom: 2px solid lightgray;
 }
 .yui-skin-sam .bd .yui-navset .yui-nav a, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-nav a em, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,.yui-skin-sam .bd .yui-button, .yui-skin-sam .bd .yui-button button, .yui-skin-sam .bd .yui-button a, .yui-skin-sam .bd .yui-button .first-child{
 border-color: lightgray;
+}
+.yui-skin-sam .yui-resize .yui-resize-handle-br {
+right:0;
+bottom:0;
+height: 8px;
+width: 8px;
+position:absolute;
+}
+.yui-skin-sam .yui-resize .yui-resize-handle-b {
+right:0;
+bottom:0;
+height: 8px;
+width: 8px;
+position:absolute;
+}
+.comboTemasCabecalho .yuimenuitemlabel {
+color: black;
+cursor: default;
+font-size: 10px;
+font-weight: normal;
+padding: 0 0px;
+text-decoration: none;
 }
 div.olMap {
 z-index: 0;

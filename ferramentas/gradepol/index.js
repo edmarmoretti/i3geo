@@ -127,7 +127,7 @@ i3GEOF.gradeDePoligonos = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"250px",
+			"150px",
 			"",
 			"",
 			"",
@@ -136,9 +136,12 @@ i3GEOF.gradeDePoligonos = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			false
 		);
 		divid = janela[2].id;
+		janela[0].setFooter("<div id=i3GEOF.gradeDePoligonos_rodape style=background-color:#F2F2F2; ></div>");
 		i3GEOF.gradeDePoligonos.aguarde = $i("i3GEOF.gradeDePoligonos_imagemCabecalho").style;
 		i3GEOF.gradeDePoligonos.inicia(divid);
 		temp = function(){
@@ -152,7 +155,7 @@ i3GEOF.gradeDePoligonos = {
 		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.gradeDePoligonos.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.gradeDePoligonos.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.gradeDePoligonos.dicionario);
-		i3GEO.util.proximoAnterior("","i3GEOF.gradeDePoligonos.t1()",ins,"i3GEOFgradeDePoligonost0","i3GEOgradedepoligonosresultado");
+		i3GEO.util.proximoAnterior("","i3GEOF.gradeDePoligonos.t1()",ins,"i3GEOF.gradeDePoligonos.t0","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.gradeDePoligonos.dicionario);
@@ -164,7 +167,7 @@ i3GEOF.gradeDePoligonos = {
 		ins += $trad(5,i3GEOF.gradeDePoligonos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosyg' title='grau' type=text size=3 value='1'/>";
 		ins += $trad(6,i3GEOF.gradeDePoligonos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosym' title='minuto' type=text size=5 value='00'/>";
 		ins += $trad(7,i3GEOF.gradeDePoligonos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosys' title='segundo' type=text size=5 value='00.00'/>";
-		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t0()","i3GEOF.gradeDePoligonos.t2()",ins,"i3GEOF.gradeDePoligonos.t1","i3GEOgradedepoligonosresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t0()","i3GEOF.gradeDePoligonos.t2()",ins,"i3GEOF.gradeDePoligonos.t1","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo'>"+$trad(8,i3GEOF.gradeDePoligonos.dicionario);
@@ -177,7 +180,8 @@ i3GEOF.gradeDePoligonos = {
 		ins += $trad(6,i3GEOF.gradeDePoligonos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosiym' title='minuto'  type=text size=5 value='00'/>";
 		ins += $trad(7,i3GEOF.gradeDePoligonos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosiys' title='segundo'  type=text size=5 value='00.00'/>";
 		g_tipoacao = "capturaponto";
-		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t1()","i3GEOF.gradeDePoligonos.t3()",ins,"i3GEOF.gradeDePoligonos.t2","i3GEOgradedepoligonosresultado");
+
+		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t1()","i3GEOF.gradeDePoligonos.t3()",ins,"i3GEOF.gradeDePoligonos.t2","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 		i3GEO.eventos.cliquePerm.desativa();
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDePoligonos.capturaPonto()") < 0){
 			i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDePoligonos.capturaPonto()");
@@ -189,12 +193,14 @@ i3GEOF.gradeDePoligonos = {
 		ins += "<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosnptx' title='pontos em x'  type=text size=3 value='10'/>";
 		ins += "<p class='paragrafo'>Y: ";
 		ins += "<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepoligonosnpty' title='pontos em y'  type=text size=3 value='10'/>";
-		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t2()","i3GEOF.gradeDePoligonos.t4()",ins,"i3GEOF.gradeDePoligonos.t3","i3GEOgradedepoligonosresultado");
+
+		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t2()","i3GEOF.gradeDePoligonos.t4()",ins,"i3GEOF.gradeDePoligonos.t3","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 	},
 	t4: function(){
 		var ins = "<p class='paragrafo'>"+$trad(10,i3GEOF.gradeDePoligonos.dicionario);
 		ins += "<p class='paragrafo'><input id=i3GEOgradedepoligonosbotao1 size=18 class=executar type='button' value='"+$trad(11,i3GEOF.gradeDePoligonos.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t3()","",ins,"i3GEOF.gradeDePoligonos.t4","i3GEOgradedepoligonosresultado");
+
+		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t3()","",ins,"i3GEOF.gradeDePoligonos.t4","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 		new YAHOO.widget.Button(
 			"i3GEOgradedepoligonosbotao1",
 			{onclick:{fn: i3GEOF.gradeDePoligonos.criaGrade}}
@@ -227,8 +233,7 @@ i3GEOF.gradeDePoligonos = {
 			{i3GEO.janela.tempoMsg($trad(13,i3GEOF.gradeDePoligonos.dicionario));return;}
 			if (nptx * npty > 10000)
 			{i3GEO.janela.tempoMsg($trad(13,i3GEOF.gradeDePoligonos.dicionario));return;}
-			fim = function(retorno)
-			{
+			fim = function(retorno){
 				i3GEOF.gradeDePoligonos.aguarde.visibility = "hidden";
 				if (retorno.data == undefined )
 				{$i("i3GEOgradedepoligonosfim").innerHTML = "<p class='paragrafo'>Erro. ";}

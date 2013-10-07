@@ -121,7 +121,7 @@ i3GEOF.centromassa = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"250px",
+			"150px",
 			"",
 			"",
 			"",
@@ -130,9 +130,12 @@ i3GEOF.centromassa = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			false
 		);
 		divid = janela[2].id;
+		janela[0].setFooter("<div id=i3GEOF.centromassa_rodape style=background-color:#F2F2F2; ></div>");
 		i3GEOF.centromassa.aguarde = $i("i3GEOF.centromassa_imagemCabecalho").style;
 		i3GEOF.centromassa.inicia(divid);
 		temp = function(){
@@ -147,20 +150,20 @@ i3GEOF.centromassa = {
 	{
 		var ins = "<p class='paragrafo'>"+$trad(1,i3GEOF.centromassa.dicionario)+"</p>";
 		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.centromassa.dicionario)+"</p>";
-		i3GEO.util.proximoAnterior("","i3GEOF.centromassa.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentromassaresultado");
+		i3GEO.util.proximoAnterior("","i3GEOF.centromassa.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo' >"+$trad(3,i3GEOF.centromassa.dicionario)+"<br>";
 		ins += "<div style='text-align:left;' id='i3GEOcentromassaDivPontos' ></div><br>";
 		ins += "<p class='paragrafo' >"+$trad(4,i3GEOF.centromassa.dicionario)+"<br>";
 		ins += "<div id=i3GEOondeItens style='text-align:left;display:block' ></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t0()","i3GEOF.centromassa.t2()",ins,"i3GEOF.centromassa.t1","i3GEOcentromassaresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t0()","i3GEOF.centromassa.t2()",ins,"i3GEOF.centromassa.t1","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
 		i3GEOF.centromassa.comboTemasPontos();
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo'>"+$trad(5,i3GEOF.centromassa.dicionario);
 		ins += "<br><br><input id=i3GEOcentromassabotao1 type='buttom' value='"+$trad(6,i3GEOF.centromassa.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t1()","",ins,"i3GEOF.centromassa.t2","i3GEOcentromassaresultado");
+		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t1()","",ins,"i3GEOF.centromassa.t2","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
 		new YAHOO.widget.Button(
 			"i3GEOcentromassabotao1",
 			{onclick:{fn: i3GEOF.centromassa.calcula}}
@@ -222,19 +225,19 @@ i3GEOF.centromassa = {
 			function(retorno){
 				$i("i3GEOcentromassaDivPontos").innerHTML = retorno.dados;
 				var c = $i("i3GEOFcentromassaPontos");
-		 		$i("i3GEOcentromassaDivPontos").style.display = "block";
-		 		if (c){
-		 			c.onchange = function(){
-		 				$i("i3GEOondeItens").style.display = "block";
+				$i("i3GEOcentromassaDivPontos").style.display = "block";
+				if (c){
+					c.onchange = function(){
+						$i("i3GEOondeItens").style.display = "block";
 						$i("i3GEOondeItens").innerHTML = $trad("o1");
 						i3GEO.mapa.ativaTema(c.value);
 						i3GEOF.centromassa.comboItens();
-		 			};
+					};
 				}
 				if(i3GEO.temaAtivo !== ""){
 					if(c)
 					{c.value = i3GEO.temaAtivo;}
-		 			$i("i3GEOondeItens").style.display = "block";
+					$i("i3GEOondeItens").style.display = "block";
 					$i("i3GEOondeItens").innerHTML = $trad("o1");
 					i3GEOF.centromassa.comboItens();
 				}
@@ -260,8 +263,8 @@ i3GEOF.centromassa = {
 			"i3GEOFcentromassaItem",
 			$i("i3GEOFcentromassaPontos").value,
 			function(retorno){
-		 		$i("i3GEOondeItens").innerHTML = retorno.dados;
-		 		$i("i3GEOondeItens").style.display = "block";
+				$i("i3GEOondeItens").innerHTML = retorno.dados;
+				$i("i3GEOondeItens").style.display = "block";
 			},
 			"i3GEOondeItens"
 		);
