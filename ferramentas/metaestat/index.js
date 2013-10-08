@@ -83,6 +83,10 @@ i3GEOF.metaestat = {
 	 * guarda os dados das medidas obtidos para a ultima variavel escolhida
 	 */
 	DADOSMEDIDASVARIAVEL: [],
+	/**
+	 * ativa o modo de selecao de multiplos valores nos combos de parametros
+	 */
+	MULTIPARAMETROS: false,
 	//para efeitos de compatibilidade com i3GEO.mapa.dialogo
 	criaJanelaFlutuante: function(){
 		i3GEOF.metaestat.inicia();
@@ -2231,11 +2235,22 @@ i3GEOF.metaestat = {
 					oc = "i3GEOF.metaestat.comum.adicionaCamada()";
 				}
 				ins = "<p class=paragrafo >"+titulo+"</p>";
-				ins += "<select id='combo"+idcombo+"' style='background:beige;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px' onchange="+oc+" ><option value=''>---</option>";
-				for(i=0;i<n;i++){
-					ins += "<option value='"+dados[i]+"'>"+dados[i]+"</option>";
+				if(i3GEOF.metaestat.MULTIPARAMETROS == false){
+					ins += "<select id='combo"+idcombo+"' style='background:beige;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px' onchange="+oc+" ><option value=''>---</option>";
+					for(i=0;i<n;i++){
+						ins += "<option value='"+dados[i]+"'>"+dados[i]+"</option>";
+					}
+					ins += "</select>";
 				}
-				ins += "</select>";
+				else{
+					ins += i3GEO.util.checkCombo(
+						"combo"+idcombo,
+						dados,
+						dados,
+						"c"+id_parametro_medida,
+						"overflow:auto;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px;height:50px;border:1px solid gray;background-color:white"
+					);
+				}
 				novoel = document.createElement("div");
 				novoel.className = "paragrafo";
 				novoel.innerHTML = ins;

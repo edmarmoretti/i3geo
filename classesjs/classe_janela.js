@@ -317,7 +317,7 @@ i3GEO.janela = {
 		//cria a janela
 		if(waltura === "auto" || dimensionavel == false){
 			janela = new YAHOO.widget.Panel(id, {
-				iframe:ifr,modal:modal, width: wlargurA,underlay:"none", fixedcenter: fix, constraintoviewport: true, visible: true,monitorresize:false,dragOnly:true,keylisteners:null
+				iframe:ifr,modal:modal, width: wlargurA,underlay:underlay, fixedcenter: fix, constraintoviewport: true, visible: true,monitorresize:false,dragOnly:true,keylisteners:null
 			} );
 		}
 		else{

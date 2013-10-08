@@ -205,34 +205,6 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 #vertHandleDiv {cursor:pointer; width:20px; height:18px; position:absolute;left:-1;top:0px }
 #vertBGDiv {position:relative;top:0px; width:18px; left:0px;background:url(../imagens/zoombar.png) no-repeat;height:78px; }
 
-.yui-panel-container .yui-resizepanel .bd {
-
-		overflow: auto;
-		background-color: #fff;
-
-}
-.yui-panel-container.hide-scrollbars .yui-resizepanel .bd {
-		overflow: hidden;
-}
-.yui-panel-container.show-scrollbars .yui-resizepanel .bd {
-		overflow: auto;
-}
-.yui-panel-container.show-scrollbars .underlay {
-		overflow: visible;
-}
-.yui-resizepanel .resizehandle {
-
-		position: absolute;
-		width: 10px;
-		height: 10px;
-		right: 0;
-		bottom: 0;
-		margin: 0;
-		padding: 0;
-		z-index: 3000;
-		background: url(../pacotes/yui290/build/container/img/corner_resize.gif) left bottom no-repeat;
-		cursor: se-resize;
-}
 #googlemapsdiv {
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -279,12 +251,6 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 #i3geoCartoParametros_corpo select {
 	box-shadow:0 1px 5px lightgray;
 	height: 20px;
-}
-.bd div{
-	text-align:left;
-}
-.bd p{
-	text-align:left;
 }
 #editor_bd p {
 	margin-top: 15px;

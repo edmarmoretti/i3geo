@@ -1,0 +1,172 @@
+.yui-panel-container .yui-resizepanel .bd {
+
+		overflow: auto;
+		background-color: #fff;
+
+}
+.yui-panel-container.hide-scrollbars .yui-resizepanel .bd {
+		overflow: hidden;
+}
+.yui-panel-container.show-scrollbars .yui-resizepanel .bd {
+		overflow: auto;
+}
+.yui-panel-container.show-scrollbars .underlay {
+		overflow: visible;
+}
+
+.bd div{
+	text-align:left;
+}
+.bd p{
+	text-align:left;
+}
+
+.yui-resizepanel .resizehandle {
+
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		right: 0;
+		bottom: 0;
+		margin: 0;
+		padding: 0;
+		z-index: 3000;
+		background: url(../pacotes/yui290/build/container/img/corner_resize.gif) left bottom no-repeat;
+		cursor: se-resize;
+}
+
+
+.yui-skin-sam .yui-panel .hd {
+	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+	color: #000000;
+	font-size: 80%;
+	font-weight: bold;
+	line-height: 2;
+	padding: 0 10px;
+	height: 30px;
+}
+
+.yui-skin-sam .yui-panel .hd1 {
+	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+	color: #000000;
+	font-size: 80%;
+	font-weight: bold;
+	line-height: 2;
+	padding: 0 10px;
+	height: 20px;
+}
+
+.yui-skin-sam .yui-panel .hd2 {
+	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+	color: #000000;
+	font-size: 80%;
+	font-weight: bold;
+	line-height: 2;
+	padding: 0 10px;
+	height: 30px;
+	opacity: .80;
+	filter: alpha(opacity =     80);
+}
+
+.yui-skin-sam .container-close {
+	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
+	cursor: pointer;
+	height: 15px;
+	position: absolute;
+	right: 1px;
+	top: 3px;
+	width: 25px;
+	z-index: 2001;
+	opacity: .80;
+	filter: alpha(opacity =     80);
+}
+
+.yui-skin-sam .container-minimiza {
+	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
+	cursor: pointer;
+	height: 15px;
+	position: absolute;
+	right: 35px;
+	top: 3px;
+	width: 25px;
+	z-index: 2001;
+	opacity: .8;
+	filter: alpha(opacity =     80);
+}
+
+.yui-skin-sam .yui-panel .bd {
+	text-align: left;
+	font-size: 10px;
+}
+
+.yui-skin-sam .yui-simple-dialog .bd .yui-icon {
+	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
+	float: left;
+	height: 16px;
+	margin-right: 10px;
+	width: 16px;
+}
+
+
+.yui-resize .yui-resize-handle {
+	position: absolute;
+	z-index: 1;
+	font-size: 0;
+	margin: 0;
+	padding: 0;
+	zoom: 1;
+	height: 250px;
+	width: 5px;
+}
+
+.yui-skin-sam .yui-panel{
+	border: 0px;
+}
+.yui-skin-sam .yui-panel-container.shadow .underlay {
+	bottom: 0;
+	box-shadow: 0 0 8px 1px black;
+	left: 0;
+	opacity: 0.3;
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: white;
+}
+.yui-skin-sam .yui-panel-container {
+	padding: 0 1px;
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid white;
+}
+.yui-skin-sam .yui-panel .hd {
+	border: 0px;
+
+}
+.yui-skin-sam .yui-panel .bd {
+	border: 0px;
+	box-shadow: 0 0 0px 0px black;
+}
+.yui-skin-sam .yui-panel .ft {
+	border: 0px;
+}
+.yui-skin-sam .yui-panel .bd .yui-navset {
+		background: none;
+		z-index: 1;
+		border-bottom: 2px solid lightgray;
+}
+.yui-skin-sam .bd .yui-navset .yui-nav a, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-nav a em, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,.yui-skin-sam .bd .yui-button, .yui-skin-sam .bd .yui-button button, .yui-skin-sam .bd .yui-button a, .yui-skin-sam .bd .yui-button .first-child{
+	border-color: lightgray;
+}
+.yui-skin-sam .yui-resize .yui-resize-handle-br {
+		right:0;
+		bottom:0;
+		height: 8px;
+		width: 8px;
+		position:absolute;
+}
+.yui-skin-sam .yui-resize .yui-resize-handle-b {
+		right:0;
+		bottom:0;
+		height: 8px;
+		width: 8px;
+		position:absolute;
+}

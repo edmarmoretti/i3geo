@@ -94,7 +94,7 @@ i3GEOF.loginusuario = {
 	/*
 	Function: html
 
-	Gera o c&oacute;digo html para apresenta&ccedil;�o das op&ccedil;&otilde;es da ferramenta
+	Gera o c&oacute;digo html para apresentacao das op&ccedil;&otilde;es da ferramenta
 
 	Retorno:
 
@@ -154,7 +154,7 @@ i3GEOF.loginusuario = {
 		divid = janela[2].id;
 		janela[0].cfg.setProperty("constraintoviewport",false);
 		i3GEOF.loginusuario.aguarde = $i("i3GEOF.loginusuario_imagemCabecalho").style;
-		$i("i3GEOF.loginusuario_corpo").style.backgroundColor = "white";
+		$i("i3GEOF.loginusuario_corpo").style.backgroundColor = "#F2F2F2";
 		i3GEOF.loginusuario.inicia(divid);
 	},
 	/*

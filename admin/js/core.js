@@ -1696,6 +1696,7 @@ function core_listaDeLetras(onde,nomeFuncao){
 		"../../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
 		"../../pacotes/yui290/build/editor/assets/skins/sam/editor.css",
 		"../../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
+		"../../css/janelaflutuante.css",
 		"../html/admin.css"
 		);
 	}

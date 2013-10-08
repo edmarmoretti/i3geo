@@ -199,31 +199,6 @@ div.yui-b p em {color:#000;}
 h1 {padding:.25em .5em;background-color:#ccc;}
 #vertHandleDiv {cursor:pointer; width:20px; height:18px; position:absolute;left:-1;top:0px }
 #vertBGDiv {position:relative;top:0px; width:18px; left:0px;background:url(../imagens/zoombar.png) no-repeat;height:78px; }
-.yui-panel-container .yui-resizepanel .bd {
-overflow: auto;
-background-color: #fff;
-}
-.yui-panel-container.hide-scrollbars .yui-resizepanel .bd {
-overflow: hidden;
-}
-.yui-panel-container.show-scrollbars .yui-resizepanel .bd {
-overflow: auto;
-}
-.yui-panel-container.show-scrollbars .underlay {
-overflow: visible;
-}
-.yui-resizepanel .resizehandle {
-position: absolute;
-width: 10px;
-height: 10px;
-right: 0;
-bottom: 0;
-margin: 0;
-padding: 0;
-z-index: 3000;
-background: url(../pacotes/yui290/build/container/img/corner_resize.gif) left bottom no-repeat;
-cursor: se-resize;
-}
 #googlemapsdiv {
 -moz-user-select: -moz-none;
 -khtml-user-select: none;
@@ -270,12 +245,6 @@ padding: 5px;
 #i3geoCartoParametros_corpo select {
 box-shadow:0 1px 5px lightgray;
 height: 20px;
-}
-.bd div{
-text-align:left;
-}
-.bd p{
-text-align:left;
 }
 #editor_bd p {
 margin-top: 15px;
@@ -1384,70 +1353,6 @@ background-image: url(../pacotes/yui290/build/menu/assets/skins/sam/menuitem_sub
 .yui-skin-sam .yuimenuitem-checked-disabled {
 background-image: url(../pacotes/yui290/build/menu/assets/skins/sam/menuitem_checkbox_disabled.png);
 }
-.yui-skin-sam .yui-panel .hd {
-background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
-color: #000000;
-font-size: 80%;
-font-weight: bold;
-line-height: 2;
-padding: 0 10px;
-height: 30px;
-}
-.yui-skin-sam .yui-panel .hd1 {
-background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
-color: #000000;
-font-size: 80%;
-font-weight: bold;
-line-height: 2;
-padding: 0 10px;
-height: 20px;
-}
-.yui-skin-sam .yui-panel .hd2 {
-background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
-color: #000000;
-font-size: 80%;
-font-weight: bold;
-line-height: 2;
-padding: 0 10px;
-height: 30px;
-opacity: .80;
-filter: alpha(opacity =     80);
-}
-.yui-skin-sam .container-close {
-background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
-cursor: pointer;
-height: 15px;
-position: absolute;
-right: 1px;
-top: 3px;
-width: 25px;
-z-index: 2001;
-opacity: .80;
-filter: alpha(opacity =     80);
-}
-.yui-skin-sam .container-minimiza {
-background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
-cursor: pointer;
-height: 15px;
-position: absolute;
-right: 35px;
-top: 3px;
-width: 25px;
-z-index: 2001;
-opacity: .8;
-filter: alpha(opacity =     80);
-}
-.yui-skin-sam .yui-panel .bd {
-text-align: left;
-font-size: 10px;
-}
-.yui-skin-sam .yui-simple-dialog .bd .yui-icon {
-background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
-float: left;
-height: 16px;
-margin-right: 10px;
-width: 16px;
-}
 .yui-navset {
 background: #d8d8d8 url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x;
 /* tab background */
@@ -1558,6 +1463,117 @@ line-height: 2;
 min-height: 1em;
 padding: 0 10px;
 }
+.ygtvcontent {
+font-size: 12px;
+padding: 0 3px 10px 0;
+}
+.ygtvcell {
+font-size: 12px;
+padding: 0 3px 5px 0;
+}
+.comboTemasCabecalho .yuimenuitemlabel {
+color: black;
+cursor: default;
+font-size: 10px;
+font-weight: normal;
+padding: 0 0px;
+text-decoration: none;
+}
+.yui-panel-container .yui-resizepanel .bd {
+overflow: auto;
+background-color: #fff;
+}
+.yui-panel-container.hide-scrollbars .yui-resizepanel .bd {
+overflow: hidden;
+}
+.yui-panel-container.show-scrollbars .yui-resizepanel .bd {
+overflow: auto;
+}
+.yui-panel-container.show-scrollbars .underlay {
+overflow: visible;
+}
+.bd div{
+text-align:left;
+}
+.bd p{
+text-align:left;
+}
+.yui-resizepanel .resizehandle {
+position: absolute;
+width: 10px;
+height: 10px;
+right: 0;
+bottom: 0;
+margin: 0;
+padding: 0;
+z-index: 3000;
+background: url(../pacotes/yui290/build/container/img/corner_resize.gif) left bottom no-repeat;
+cursor: se-resize;
+}
+.yui-skin-sam .yui-panel .hd {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+color: #000000;
+font-size: 80%;
+font-weight: bold;
+line-height: 2;
+padding: 0 10px;
+height: 30px;
+}
+.yui-skin-sam .yui-panel .hd1 {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+color: #000000;
+font-size: 80%;
+font-weight: bold;
+line-height: 2;
+padding: 0 10px;
+height: 20px;
+}
+.yui-skin-sam .yui-panel .hd2 {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+color: #000000;
+font-size: 80%;
+font-weight: bold;
+line-height: 2;
+padding: 0 10px;
+height: 30px;
+opacity: .80;
+filter: alpha(opacity =     80);
+}
+.yui-skin-sam .container-close {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
+cursor: pointer;
+height: 15px;
+position: absolute;
+right: 1px;
+top: 3px;
+width: 25px;
+z-index: 2001;
+opacity: .80;
+filter: alpha(opacity =     80);
+}
+.yui-skin-sam .container-minimiza {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
+cursor: pointer;
+height: 15px;
+position: absolute;
+right: 35px;
+top: 3px;
+width: 25px;
+z-index: 2001;
+opacity: .8;
+filter: alpha(opacity =     80);
+}
+.yui-skin-sam .yui-panel .bd {
+text-align: left;
+font-size: 10px;
+}
+.yui-skin-sam .yui-simple-dialog .bd .yui-icon {
+background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
+float: left;
+height: 16px;
+margin-right: 10px;
+width: 16px;
+}
 .yui-resize .yui-resize-handle {
 position: absolute;
 z-index: 1;
@@ -1567,14 +1583,6 @@ padding: 0;
 zoom: 1;
 height: 250px;
 width: 5px;
-}
-.ygtvcontent {
-font-size: 12px;
-padding: 0 3px 10px 0;
-}
-.ygtvcell {
-font-size: 12px;
-padding: 0 3px 5px 0;
 }
 .yui-skin-sam .yui-panel{
 border: 0px;
@@ -1625,14 +1633,6 @@ bottom:0;
 height: 8px;
 width: 8px;
 position:absolute;
-}
-.comboTemasCabecalho .yuimenuitemlabel {
-color: black;
-cursor: default;
-font-size: 10px;
-font-weight: normal;
-padding: 0 0px;
-text-decoration: none;
 }
 div.olMap {
 z-index: 0;

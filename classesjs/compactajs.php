@@ -214,6 +214,7 @@ $cssfiles = array(
 "../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
 "../pacotes/yui290/build/progressbar/assets/skins/sam/progressbar.css",
 "../css/corrigeyui_geral.css",
+"../css/janelaflutuante.css",
 "../mashups/theme/default/style.css",
 "../mashups/openlayers.css"
 );

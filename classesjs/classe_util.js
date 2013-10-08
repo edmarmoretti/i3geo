@@ -1688,6 +1688,38 @@ i3GEO.util = {
 		}
 	},
 	/*
+	Function: checkCombo
+
+	Cria uma lista com check box generico baseado em um objeto com os dados
+
+	Parametros:
+
+	id {String} - id do elemento select que sera criado
+	 
+	nomes {Array} - array com os nomes
+	 
+	valores {Array} - array com os valores
+
+	obj {objeto} - objeto contendo name e value, exemplo {"nome":"a","valor":"1"}
+
+	prefixo {string} - Prefixo que sera usado no id de cada elemento
+	 
+	estilo {string} - string inserida no item style do container do combo
+
+	*/
+	checkCombo: function(id,nomes,valores,prefixo,estilo){
+		var n, i, combo = "",n;
+		n = valores.length;
+		if (n > 0){
+			combo = "<div style='"+estilo+"'><table class=lista3 id="+id+" >";
+			for (i=0;i<n;i++){
+				combo += "<tr><td><input size=2 style='cursor:pointer' type=checkbox name='"+prefixo+"_"+valores[i]+"' /></td><td>"+nomes[i]+"</td>";
+			}
+			combo += "</table></div>";
+		}
+		return combo;
+	},
+	/*
 	Function: checkTemas
 
 	Cria uma lista com check box de temas existentes no mapa e de determinado tipo
