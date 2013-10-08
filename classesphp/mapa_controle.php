@@ -823,7 +823,7 @@ Altera o valor definido no elemento DATA de um LAYER.
 	case "ALTERADATA":
 		include_once("classe_temas.php");
 		$m = new Temas($map_file,$tema);
-		$retorno = $m->alteradata($novodata);
+		$retorno = $m->alteradata($novodata,$removemeta);
 		if($retorno != "")
 		{$m->salva();}
 		$_SESSION["contadorsalva"]++;

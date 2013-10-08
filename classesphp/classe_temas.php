@@ -1080,7 +1080,7 @@ function: alteradata
 
 Altera o valor do elemento DATA
 */
-	function alteradata($data)
+	function alteradata($data,$removemeta="nao")
 	{
 		if(!$this->layer){return "erro";}
 		$data = str_ireplace("delete","",$data);
@@ -1089,14 +1089,20 @@ Altera o valor do elemento DATA
 		$data = str_ireplace("create","",$data);
 		$data = str_ireplace("alter","",$data);
 		$metadata = $this->layer->getmetadata("editorsql");
-		if(strtolower($metadata) != "nao")
-		{
+		if(strtolower($metadata) != "nao"){
 			$this->layer->set("data",$data);
 			$this->layer->setMetaData("cache","");
+			if($removemeta == "sim"){
+				$this->layer->setMetaData("itens","");
+				$this->layer->setMetaData("itensdesc","");
+				$this->layer->setMetaData("itensimg","");
+				$this->layer->setMetaData("tips","");
+			}
 			return $this->layer->data;
 		}
-		else
-		return "O layer n&atilde;o permite a alteracao do elemento DATA";
+		else{
+			return "O layer n&atilde;o permite a alteracao do elemento DATA";
+		}
 	}
 /*
 function: adicionaLabel

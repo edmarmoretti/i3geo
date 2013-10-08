@@ -4,11 +4,11 @@
 Created on Fri Jan 11 17:26:01 2013
 
 @author: Diego
+@email: moreira.geo@gmail.com
 """
 import os, subprocess
 import sqlite3
 import os
-import time
 
 TABELA_ORIGINAL = 'tb_proxy'
 
@@ -164,24 +164,6 @@ def insertProxy():
                 proxyDict[i] = ''
     return proxyDict
 
-def utilizarProxy(proxyDict):
-    serversPath = os.path.join(PROJECT_ROOT_PATH,'.subversion/servers')
-    serversFile = open(serversPath,'w')
-    serversFile.write("[global]\n")
-    
-    fileDict = {'proxy': 'http-proxy-host = ',
-    'port':'http-proxy-port = ',
-    'user': 'http-proxy-username = ',
-    'password':'http-proxy-username = ',
-    'exceptions':'http-proxy-password = '}
-    if proxyDict:
-        for k,v in proxyDict.items():
-            if v:
-                serversFile.write(fileDict[k] + v + '\n')
-    serversFile.close()
-    atualiza()
-    
-   
 def proxy():
     
     texto = "Se você utiliza um proxy para acessar a web é necessário que o proxy seja configurado para fazer o update.\
@@ -194,52 +176,87 @@ def proxy():
     
    
     a = metadadosDB.obterProxyList()
-    print 'Escolha o que fazer:'
-    print '-1 - para restaurar as configurações iniciais;'
-    print ' 0 - para cadastrar um proxy novo;'
-    print ' Ou Digite o numero de um proxy cadastrado, caso exista.\n'
-
     if len(a): 
-	print 'Proxies disponíveis:'
+        print 'Escolha a configuração que deseja utilizar:'
         for i in a:
             print i,' - ', a[i]['proxy'],a[i]['port'],a[i]['user'],a[i]['password'],a[i]['exceptions']
         metadadosDB.close() 
     
-    var = int(validaEntradaNumero(">>"))
+    var = int(validaEntradaNumero("Digite o número do proxy desejado ou 0 para inserir um novo\n>> "))
     
     proxyDict = None
     if var == 0:
         proxyDict = insertProxy()
-
-    elif var == -1:
-	proxyDict = None
     else:
         if var in a:
             proxyDict = a[var]
         else: 
             print 'Opção inválida!'
             return
-    utilizarProxy(proxyDict)           
+    utilizarProxy(proxyDict)   
+
+def utilizarProxy(proxyDict):
+    serversPath = os.path.join(PROJECT_ROOT_PATH,'.subversion/servers')
+    serversFile = open(serversPath,'w')
+    serversFile.write("[global]\n")
+    
+    fileDict = {'proxy': 'http-proxy-host = ',
+    'port':'http-proxy-port = ',
+    'user': 'http-proxy-username',
+    'password':'http-proxy-username = ',
+    'exceptions':'http-proxy-password = '}
+    
+    for k,v in proxyDict.items():
+        if v:
+            serversFile.write(fileDict[k] + v + '\n')
+    serversFile.close()
+    atualiza()        
 
 def atualiza():
-    os.chdir('/var/www')
+
+    print 'Escolha o que você deseja atualizar:'
+    print '1 - I3Geo'
+    print '2 - Docs'
+    print 'Outro número - Tudo'
+
+    var = int(validaEntradaNumero("Digite o número do proxy desejado ou 0 para inserir um novo\n>> "))
+    
+    diretorio = '/var/www'
+    os.chdir(diretorio)	
+    print 'Limpando diretório...'
+    subprocess.call(["svn","cleanup"], stdout=0) 
+
+    if var == 1:
+        diretorio = '/var/www/i3geo'
+    elif var == 2:
+        diretorio = '/var/www/docs'
+    print 'Atualizando ', diretorio         
+    os.chdir(diretorio)
     subprocess.call(["svn","update"], stdout=0) 
+    raw_input("Pressione qualquer tecla para sair.")
+
+def limparProxy():
+    serversPath = os.path.join(PROJECT_ROOT_PATH,'.subversion/servers')
+    serversFile = open(serversPath,'w')
+    serversFile.close()
        
 if __name__ == '__main__':
     continua = True
     while continua :
         print 'Opções:'
-        print '0 - Atualizar:'
-        print '1 - Configurar Proxy e Atualizar:'
-        print '2 - Sair:'
+        print '0 - Atualizar'
+        print '1 - Configurar Proxy e Atualizar'
+        print '2 - Limpar proxy'
+        print '3 - Sair'
         var = int(validaEntradaNumero("Escolha: "))
         if var == 0:
             atualiza()
+	    continua = False
         elif var == 1:
             proxy()
         elif var == 2: 
-            continua = False
+            limparProxy()
+        elif var == 3: 
+            continua = False        
         
-        continua = False
-    time.sleep(5)
  

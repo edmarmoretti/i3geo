@@ -1415,10 +1415,10 @@ i3GEO.php = {
 
 	<ALTERADATA>
 	*/
-	alteraData: function(funcao,tema,data){
+	alteraData: function(funcao,tema,data,removemeta){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
-			par = "g_sid="+i3GEO.configura.sid+"&funcao=alteradata&tema="+tema+"&novodata="+data;
+			par = "g_sid="+i3GEO.configura.sid+"&funcao=alteradata&tema="+tema+"&novodata="+data+"&removemeta="+removemeta;
 		cpJSON.call(p,"alteradata",funcao,par);
 	},
 	/*

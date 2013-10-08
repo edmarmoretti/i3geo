@@ -129,8 +129,9 @@ i3GEOF.editorsql = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = "<textarea rows='4' colums='20' cols='38' id=i3GEOeditorsqlSQL ></textarea>" +
+		var ins = "<textarea rows='8' colums='20' cols='38' style='font-size:14px;width:500px;height:200px' id=i3GEOeditorsqlSQL ></textarea>" +
 			'<br><br><p class=paragrafo ><input size=20 id=i3GEOeditorsqlbotao1 type=button value="'+$trad("p14")+'"  />' +
+			' <input style="position:relative;cursor:pointer" type=checkbox id=i3GEOeditorsqlRemoveMeta /> '+$trad(4,i3GEOF.editorsql.dicionario) +
 			'<br><br><a class=paragrafo href="http://postgis.refractions.net/documentation/manual-1.4/ch07.html" target=_blank >'+$trad(2,i3GEOF.editorsql.dicionario)+'</a>' +
 			'<br><p class=paragrafo >'+$trad(3,i3GEOF.editorsql.dicionario)+':</p>' +
 			'<div class=paragrafo id=i3GEOeditorsqlDivItem ></div>' +
@@ -147,8 +148,8 @@ i3GEOF.editorsql = {
 		//cria a janela flutuante
 		titulo = $trad("t41")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=86' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"300px",
-			"260px",
+			"550px",
+			"360px",
 			"",
 			"",
 			"",
@@ -195,10 +196,17 @@ i3GEOF.editorsql = {
 		if(i3GEOF.editorsql.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.editorsql.aguarde.visibility = "visible";
-		var temp = function(){
-			i3GEOF.editorsql.aguarde.visibility = "hidden";
-			i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
-		};
-		i3GEO.php.alteraData(temp,i3GEO.temaAtivo,$i("i3GEOeditorsqlSQL").value);
+		var removemeta = $i("i3GEOeditorsqlRemoveMeta"),
+			temp = function(){
+				i3GEOF.editorsql.aguarde.visibility = "hidden";
+				i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
+			};
+		if(removemeta.checked == true){
+			removemeta = "sim";
+		}
+		else{
+			removemeta = "nao";
+		}
+		i3GEO.php.alteraData(temp,i3GEO.temaAtivo,$i("i3GEOeditorsqlSQL").value,removemeta);
 	}
 };

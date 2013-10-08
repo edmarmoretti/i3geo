@@ -17,5 +17,11 @@ pt:"Lista de itens existentes na tabela de atributos do tema (escolha um para ve
 en:"",
 es:"",
 it:""
+}],
+4: [{
+pt:"Remove os metadados que fazem refer&ecirc;ncia as colunas do SQL",
+en:"",
+es:"",
+it:""
 }]
 };

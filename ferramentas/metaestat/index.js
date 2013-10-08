@@ -2178,6 +2178,9 @@ i3GEOF.metaestat = {
 			n = dados.length,
 			onde = $i("i3geoCartoParametrosMedidasVariavel"),
 			idpar,idcombo,i,novoel,teste;
+			if(n === 0){
+				i3GEOF.metaestat.comum.adicionaCamada();
+			}
 			//cria o combo para o parametro cujo id_pai for do nivel escolhido
 			for(i=0;i<n;i++){
 				if(dados[i].id_pai == nivel){
@@ -2225,7 +2228,7 @@ i3GEOF.metaestat = {
 				filho = i3GEOF.metaestat.parametros.retornaIdFilho(id_parametro_medida),
 				i,novoel;
 				if(filho == false){
-					oc = "";
+					oc = "i3GEOF.metaestat.comum.adicionaCamada()";
 				}
 				ins = "<p class=paragrafo >"+titulo+"</p>";
 				ins += "<select id='combo"+idcombo+"' style='background:beige;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px' onchange="+oc+" ><option value=''>---</option>";
