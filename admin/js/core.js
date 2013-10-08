@@ -1675,6 +1675,7 @@ function core_listaDeLetras(onde,nomeFuncao){
 		"../../pacotes/yui290/build/json/json-min.js",
 		"../../pacotes/yui290/build/menu/menu-min.js",
 		"../../pacotes/yui290/build/editor/editor-min.js",
+		"../../pacotes/yui290/build/resize/resize-min.js",
 		"../../classesjs/compactados/classe_util_compacto.js",
 		"../../classesjs/compactados/classe_login_compacto.js",
 		"../../classesjs/compactados/classe_janela_compacto.js",
@@ -1689,12 +1690,13 @@ function core_listaDeLetras(onde,nomeFuncao){
 		cssfiles =new Array(
 		"../../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
 		"../../pacotes/yui290/build/button/assets/skins/sam/button.css",
-		"../html/admin.css",
 		"../../pacotes/yui290/build/fonts/fonts-min.css",
 		"../../pacotes/yui290/build/datatable/assets/skins/sam/datatable.css",
 		"../../pacotes/yui290/build/container/assets/skins/sam/container.css",
 		"../../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
-		"../../pacotes/yui290/build/editor/assets/skins/sam/editor.css"
+		"../../pacotes/yui290/build/editor/assets/skins/sam/editor.css",
+		"../../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
+		"../html/admin.css"
 		);
 	}
 	//

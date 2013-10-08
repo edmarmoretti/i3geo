@@ -372,7 +372,7 @@ class Metaestat{
 
 		$vis = $dadosgeo["colunasvisiveis"];
 		if(!empty($vis) && $suportaWMST == false){
-			$vis = $vis.",".$dados["colunaidunico"];
+			$vis = $vis.",".$dadosgeo["identificador"];
 			$vis = str_replace(" ",",",$vis);
 			$vis = str_replace(",,",",",$vis);
 			$vis = str_replace(";",",",$vis);
@@ -381,7 +381,7 @@ class Metaestat{
 			$colunasSemGeo = array_unique($colunasSemGeo);
 
 			if($dadosgeo["apelidos"] != ""){
-				$alias = "Valor,".$dadosgeo["apelidos"].",".$dados["colunaidunico"];
+				$alias = "Valor,".$dadosgeo["apelidos"].",".$dadosgeo["identificador"];
 				$alias = mb_convert_encoding($alias,"ISO-8859-1",mb_detect_encoding($alias));
 				$alias = str_replace(";",",",$alias);
 				$alias = str_replace(",,",",",$alias);
@@ -475,9 +475,9 @@ class Metaestat{
 		//sql para o mapserver
 		$sqlgeo = 	str_replace("__SQLDADOS__",$sqlDadosMedidaVariavel,$sqlIntermediario);
 		$colunasComGeo = $colunasSemGeo;
-		$colunasComGeo[] = "/*SG*/st_setsrid(".$colunageo.",".$dadosgeo["srid"].") as the_geom /*SG*/";
+		$colunasComGeo[] = "/*SG*/st_setsrid(".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo." /*SG*/";
 		$sqlgeo = str_replace("__COLUNASSEMGEO__",implode(",",$colunasComGeo),$sqlgeo);
-		$sqlgeo = $colunageo." from /*SE*/(".$sqlgeo.")/*SE*/ as foo using unique ".$dados["colunaidunico"]." using srid=".$dadosgeo["srid"];
+		$sqlgeo = $colunageo." from /*SE*/(".$sqlgeo.")/*SE*/ as foo using unique ".$dadosgeo["identificador"]." using srid=".$dadosgeo["srid"];
 
 		//o SQL com os dados contem um filtro ou nao?
 		$contemfiltro = false;
@@ -2149,7 +2149,7 @@ class Metaestat{
 
 		$sql = "ALTER TABLE ".$nome_esquema.".".$nome_tabela." RENAME COLUMN $nome_coluna TO ".$novonome_coluna;
 		$res = $dbh->query($sql,PDO::FETCH_ASSOC);
-			
+
 		$coluna = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name FROM information_schema.columns where table_name = '$novonome_tabela' and table_schema = '$nome_esquema' and column_name = '$novonome_coluna'");
 		if(count($coluna) > 0){
 			$sql = "UPDATE i3geoestat_medida_variavel SET colunavalor = '$novonome_coluna' WHERE esquemadb = '$nome_esquema' and tabela = '$nome_tabela' and colunavalor = '$nome_coluna'";

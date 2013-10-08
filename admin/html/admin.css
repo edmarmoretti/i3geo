@@ -6,8 +6,8 @@
 	font-size: 10pt;
 }
 .yui-navset {
-    background: url("../../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 0 #D8D8D8;
-    z-index: 3000;
+		background: url("../../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 0 #D8D8D8;
+		z-index: 3000;
 }
 .yui-resizepanel .resizehandle {
 position: absolute;
@@ -25,7 +25,7 @@ cursor: se-resize;
 	font-size:1em;
 }
 .yui-skin-sam .yui-button {
-    margin: 0.25em;
+		margin: 0.25em;
 }
 .ajuda_usuario
 {

@@ -147,7 +147,9 @@ i3GEOF.loginusuario = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			false
 		);
 		divid = janela[2].id;
 		janela[0].cfg.setProperty("constraintoviewport",false);
