@@ -1360,14 +1360,20 @@ i3GEOF.metaestat = {
 				return "";
 			}
 			//se tiver parametro e todos estiverem vazios, aborta
-			var i,n,c,
+			var i,n,c,j,k,val,
 			t=[],
 			dados = i3GEOF.metaestat.parametros.dados;
 			n = dados.length;
 			for(i=0;i<n;i++){
 				c = $i("comboparametro_"+dados[i].id_parametro_medida+"_"+dados[i].id_pai);
-				if(c && c.value != ""){
-					t.push(dados[i].coluna+'="'+c.value+'"');
+				if(c){
+					if(c.value != "" && i3GEOF.metaestat.MULTIPARAMETROS === false){
+						t.push(dados[i].coluna+'="'+c.value+'"');
+					}
+					else{
+						val = i3GEO.util.valoresCheckCombo(c.id);
+						t.push(dados[i].coluna+' IN ("'+val.join('","')+'")');
+					}
 				}
 			}
 			if(t.length > 0){
@@ -2231,11 +2237,11 @@ i3GEOF.metaestat = {
 				oc = "'i3GEOF.metaestat.parametros.antesCombo();i3GEOF.metaestat.parametros.combos(\""+id_parametro_medida+"\")'",
 				filho = i3GEOF.metaestat.parametros.retornaIdFilho(id_parametro_medida),
 				i,novoel;
-				if(filho == false){
+				if(filho === false && i3GEOF.metaestat.MULTIPARAMETROS === false){
 					oc = "i3GEOF.metaestat.comum.adicionaCamada()";
 				}
 				ins = "<p class=paragrafo >"+titulo+"</p>";
-				if(i3GEOF.metaestat.MULTIPARAMETROS == false){
+				if(i3GEOF.metaestat.MULTIPARAMETROS === false){
 					ins += "<select id='combo"+idcombo+"' style='background:beige;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px' onchange="+oc+" ><option value=''>---</option>";
 					for(i=0;i<n;i++){
 						ins += "<option value='"+dados[i]+"'>"+dados[i]+"</option>";
@@ -2247,8 +2253,8 @@ i3GEOF.metaestat = {
 						"combo"+idcombo,
 						dados,
 						dados,
-						"c"+id_parametro_medida,
-						"overflow:auto;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px;height:50px;border:1px solid gray;background-color:white"
+						"overflow:auto;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px;height:50px;border:1px solid gray;background-color:white",
+						oc
 					);
 				}
 				novoel = document.createElement("div");

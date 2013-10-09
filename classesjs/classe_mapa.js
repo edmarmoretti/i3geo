@@ -580,7 +580,11 @@ i3GEO.mapa = {
 		Abre a janela de dialogo da ferramenta de cartogramas estatisticos METAESTAT
 		*/
 		metaestat: function(){
-			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()","metaestat","metaestat","index.js","i3GEOF.metaestat.inicia()");
+			var temp = function(){
+				i3GEOF.metaestat.MULTIPARAMETROS = true;
+				i3GEOF.metaestat.inicia();
+			};
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()","metaestat","metaestat","index.js",temp);
 		},
 		/*
 		Function: metaestatListaMapas

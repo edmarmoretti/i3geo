@@ -1324,7 +1324,7 @@ i3GEO.util = {
 
 	js {String} - endereco do JS
 
-	ini {String} - funcao que sera executada ao ser carregado o script (pode ser "")
+	ini {String} ou {function} - funcao que sera executada ao ser carregado o script (pode ser "")
 
 	id - id do elemento script que sera criado
 
@@ -1352,7 +1352,12 @@ i3GEO.util = {
 							if(i3GEO.janela){
 								i3GEO.janela.fechaAguarde(id+"aguarde");
 							}
-							eval(ini);
+							if(YAHOO.lang.isFunction(ini)){
+								ini.call();
+							}
+							else{
+								eval(ini);
+							}
 						}
 					};
 				}
@@ -1361,7 +1366,12 @@ i3GEO.util = {
 						if(i3GEO.janela){
 							i3GEO.janela.fechaAguarde(id+"aguarde");
 						}
-						eval(ini);
+						if(YAHOO.lang.isFunction(ini)){
+							ini.call();
+						}
+						else{
+							eval(ini);
+						}
 					};
 				}
 				i3GEO.janela.ESTILOAGUARDE = tipojanela;
@@ -1695,29 +1705,43 @@ i3GEO.util = {
 	Parametros:
 
 	id {String} - id do elemento select que sera criado
-	 
+
 	nomes {Array} - array com os nomes
-	 
+
 	valores {Array} - array com os valores
 
 	obj {objeto} - objeto contendo name e value, exemplo {"nome":"a","valor":"1"}
 
-	prefixo {string} - Prefixo que sera usado no id de cada elemento
-	 
 	estilo {string} - string inserida no item style do container do combo
 
+	funcaoclick {string} - string inserida no evento onclick
+
 	*/
-	checkCombo: function(id,nomes,valores,prefixo,estilo){
-		var n, i, combo = "",n;
-		n = valores.length;
+	checkCombo: function(id,nomes,valores,estilo,funcaoclick){
+		var i, combo = "",
+			n = valores.length;
 		if (n > 0){
 			combo = "<div style='"+estilo+"'><table class=lista3 id="+id+" >";
 			for (i=0;i<n;i++){
-				combo += "<tr><td><input size=2 style='cursor:pointer' type=checkbox name='"+prefixo+"_"+valores[i]+"' /></td><td>"+nomes[i]+"</td>";
+				combo += "<tr><td><input onclick="+funcaoclick+" size=2 style='top:1px;cursor:pointer' type=checkbox value='"+valores[i]+"' /></td><td>"+nomes[i]+"</td>";
 			}
 			combo += "</table></div>";
 		}
 		return combo;
+	},
+	valoresCheckCombo: function(id){
+		var el = $i(id),
+			res = [],n,i;
+		if(el){
+			el = el.getElementsByTagName("input");
+			n = el.length;
+			for(i=0;i<n;i++){
+				if(el[i].checked === true){
+					res.push(el[i].value);
+				}
+			}
+		}
+		return res;
 	},
 	/*
 	Function: checkTemas
@@ -2228,7 +2252,7 @@ i3GEO.util = {
 
 	nomejs {string} - nome do arquivo javascript
 
-	nomefuncao {string} - nome da funcao do javascript carregado que sera executado apos a carga, exemplo: i3GEOF.locregiao.abreComFiltro()
+	nomefuncao {string}  ou {function} - nome da funcao do javascript carregado que sera executado apos a carga, exemplo: i3GEOF.locregiao.abreComFiltro()
 	*/
 	dialogoFerramenta: function(mensagem,dir,nome,nomejs,nomefuncao){
 		if(typeof(console) !== 'undefined'){console.info(mensagem);}
