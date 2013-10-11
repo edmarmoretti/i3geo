@@ -1610,23 +1610,29 @@ i3GEO.arvoreDeCamadas = {
 
 	Parametro:
 
-	idtema - {String} ID do tema que ser&aacute; procurado
+	valor - {String} valor do parametro
 
-	camadas - {Objeto} - objeto com a lista de temas
+	camadas - {Objeto} - objeto com a lista de temas (escape com "" para usar o default)
+
+	parametro - {string} parametro que sera procurado
 
 	Return:
 
 	{JSON}
 	*/
-	pegaTema: function(idtema,camadas){
+	pegaTema: function(valor,camadas,parametro){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.pegaTema()");}
 		var i;
-		if(!camadas)
-		{camadas = i3GEO.arvoreDeCamadas.CAMADAS;}
+		if(!camadas || camadas == ""){
+			camadas = i3GEO.arvoreDeCamadas.CAMADAS;
+		}
+		if(!parametro){
+			parametro = "name";
+		}
 		i = camadas.length;
 		while(i > 0){
 			i -= 1;
-			if(camadas[i].name === idtema){
+			if(camadas[i][parametro] === valor){
 				return camadas[i];
 			}
 		}

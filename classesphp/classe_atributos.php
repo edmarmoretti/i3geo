@@ -1,6 +1,6 @@
 <?php
 /*
- Title: classe_atributos
+Title: classe_atributos
 
 Processa a tabela de atributos de um tema.
 
@@ -34,55 +34,55 @@ Arquivo:
 i3geo/classesphp/classe_atributos.php
 */
 /*
- Classe: Atributos
+Classe: Atributos
 
 */
 class Atributos
 {
 	/*
-	 Variavel: $mapa
+	Variavel: $mapa
 
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
-	 Variavel: $arquivo
+	Variavel: $arquivo
 
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
-	 Variavel: $layer
+	Variavel: $layer
 
 	Objeto layer
 	*/
 	protected $layer;
 	/*
-	 Variavel: $nome
+	Variavel: $nome
 
 	Nome do layer
 	*/
 	protected $nome;
 	/*
-	 Variavel: $qyfile
+	Variavel: $qyfile
 
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
-	 Variavel: $projO
+	Variavel: $projO
 
 	Objeto projection original do mapa. Obtido apenas na interface Googlemaps
 	*/
 	public $projO;
 	/*
-	 Variavel: $v
+	Variavel: $v
 
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 	/*
-	 Function: __construct
+	Function: __construct
 
 	Cria um objeto Atributos.
 
@@ -132,7 +132,7 @@ class Atributos
 		}
 	}
 	/*
-	 function: salva
+	function: salva
 
 	Salva o mapfile atual
 
@@ -150,7 +150,7 @@ class Atributos
 	}
 
 	/*
-	 function: extensaoShape
+	function: extensaoShape
 
 	Pega a extens&atilde;o geogr&aacute;fica de um objeto shape.
 
@@ -197,7 +197,7 @@ class Atributos
 		return $ext;
 	}
 	/*
-	 function - extensaoRegistro
+	function - extensaoRegistro
 
 	Pega a extens&atilde;o geogr&aacute;fica de um registro na tabela de atributos de um tema.
 
@@ -236,7 +236,7 @@ class Atributos
 		return($ext);
 	}
 	/*
-	 function: listaItens
+	function: listaItens
 
 	Lista os itens de um tema.
 	*/
@@ -301,7 +301,7 @@ class Atributos
 		return (array("valores"=>$lista,"temas"=>$l,"nomes"=>$nomestemas));
 	}
 	/*
-	 function: itensTexto
+	function: itensTexto
 
 	Pega todos os valores dos itens de uma tabela de um tema.
 
@@ -352,7 +352,7 @@ class Atributos
 		return(array("itens"=>implode(";",$items),"valores"=>$registros));
 	}
 	/*
-	 function: listaRegistros
+	function: listaRegistros
 
 	Pega todos os valores dos itens de uma tabela de um tema.
 
@@ -562,7 +562,7 @@ class Atributos
 		return($resultadoFinal);
 	}
 		/*
-		 function: buscaRegistros
+		function: buscaRegistros
 
 		Procura valores em uma tabela que aderem a uma palavra de busca.
 
@@ -712,7 +712,7 @@ class Atributos
 				$resultado[] = array("tema"=>$tema,"resultado"=>$fr);
 			}
 			/*
-			 $teste = $l->whichShapes($ret);
+			$teste = $l->whichShapes($ret);
 			if($teste){
 			$fr = array();
 			while ($shape = $l->nextShape())
@@ -764,7 +764,7 @@ class Atributos
 		return($resultado);
 	}
 	/*
-	 function: estatDescritivas
+	function: estatDescritivas
 
 	Calcula estat&iacute;sticas b&aacute;sicas de uma tabela de um tema.
 
@@ -839,7 +839,7 @@ class Atributos
 		return(array("indices"=>$chaves,"variaveis"=>$indice,"valores"=>$resultado));
 	}
 	/*
-	 function: identifica
+	function: identifica
 
 	Depreciado na vers&atilde;o 4.2 (utilize "identifica2")
 
@@ -975,7 +975,7 @@ class Atributos
 		}
 	}
 	/*
-	 function: identifica2
+	function: identifica2
 
 	Depreciado na vers&atilde;o 4.7 (utilize "identifica3")
 
@@ -1137,7 +1137,7 @@ class Atributos
 		}
 	}
 	/*
-	 function: identifica3
+	function: identifica3
 
 	Identifica elementos no mapa.
 
@@ -1366,7 +1366,7 @@ class Atributos
 	}
 
 	/*
-	 function: retornaI
+	function: retornaI
 
 	Depreciado na vers&atilde;o 4.2
 
@@ -1414,7 +1414,7 @@ class Atributos
 		return $final;
 	}
 	/*
-	 function: identificaQBP
+	function: identificaQBP
 
 	Depreciado na vers&atilde;o 4.2
 
@@ -2043,6 +2043,7 @@ class Atributos
 			$extmapa = $mapa->extent;
 			$e = explode(" ",$ext);
 			$extmapa->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+			//$mapa->save($this->arquivo);
 		}
 		if($tema == ""){
 			$layer = $this->layer;
@@ -2067,11 +2068,12 @@ class Atributos
 			$wkt = "nao";
 			$layer->set("toleranceunits",MS_PIXELS);
 			$layer->set("tolerance",$resolucao);
-			$ptimg = xy2imagem($map_file,array($x,$y));
-			//var_dump($ptimg);exit;
 			$mapa = desligatemas($mapa);
 			$mapa = desligamargem($mapa);
 			$imgo = $mapa->draw();
+			$ptimg = xy2imagem($map_file,array($x,$y),$mapa);
+			//var_dump($ptimg);exit;
+
 			//$formatoinfo = "MIME";
 			$formatosinfo = $layer->getmetadata("formatosinfo");
 			if ($formatosinfo != ""){
@@ -2100,25 +2102,26 @@ class Atributos
 			$res2 = str_replace("INFOFORMAT","INFO_FORMAT",$res2);
 
 			$resposta = file($res);
+			//var_dump($resposta);exit;
+
 			$n = array();
-			if(strtoupper($formatoinfo) == "TEXT/HTML"){
-				$n[] = array("alias"=>"","valor"=>"<iframe width=270px src='".$res."'></iframe>","link"=>"","img"=>"");
-			}
-			else{
+			if(strtoupper($formatoinfo) != "TEXT/HTML" && strtoupper($formatoinfo) != "MIME"){
 				foreach($resposta as $r){
 					$t = explode("=",$r);
-					$v = str_replace("\\n","",$t[1]);
-					$v = str_replace("\\r","",$v);
-					if(trim($v) != ""){
-						$va = trim($v);
-						if($convC == true){
-							$va = $this->converte($va);
+					if(count($t) > 1){
+						$v = str_replace("\\n","",$t[1]);
+						$v = str_replace("\\r","",$v);
+						if(trim($v) != ""){
+							$va = trim($v);
+							if($convC == true){
+								$va = $this->converte($va);
+							}
+							$n[] = array("alias"=>trim($t[0]),"valor"=>$va,"link"=>"","img"=>"");
 						}
-						$n[] = array("alias"=>trim($t[0]),"valor"=>$va,"link"=>"","img"=>"");
 					}
 				}
 				//caso esri
-				if($n[0] == ""){
+				if(count($n) > 0 && $n[0] == ""){
 					//error_reporting(0);
 					$resposta = file($res);
 					$cabecalho = str_replace('"   "','"|"',$resposta[0]);
@@ -2137,6 +2140,17 @@ class Atributos
 					}
 				}
 			}
+			//var_dump($n);exit;
+			if(count($n) == 0){
+				$formatoinfo = "MIME";
+			}
+			if(strtoupper($formatoinfo) == "TEXT/HTML"){
+				$n[] = array("alias"=>"","valor"=>"<iframe width=250px src='".$res."'></iframe>","link"=>"","img"=>"");
+			}
+			if(strtoupper($formatoinfo) == "MIME"){
+				$n[] = array("alias"=>"","valor"=>"<iframe width=250px src='".$res2."'></iframe>","link"=>"","img"=>"");
+			}
+
 			$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo ".$formatoinfo,"link"=>$res,"img"=>"");
 			$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo padr&atilde;o do servi&ccedil;o","link"=>$res2,"img"=>"");
 			return array($n);
@@ -2356,7 +2370,7 @@ class Atributos
 		return $resultado;
 	}
 	/*
-	 Function: converte
+	Function: converte
 
 	Converte uma string de ISO-8859-1 para UTF-8
 

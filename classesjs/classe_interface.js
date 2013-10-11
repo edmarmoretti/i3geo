@@ -620,11 +620,15 @@ i3GEO.Interface = {
 						numZoomLevels:18,
 						maxResolution:156543.0339,
 						units:'m',
-						projection: "EPSG:900913",
+						projection: new OpenLayers.Projection("EPSG:3857"),
 						displayProjection: new OpenLayers.Projection("EPSG:4326"),
 						controls: [],
 						fractionalZoom: false
 				};
+				//OpenLayers.Projection.addTransform("EPSG:4326", "EPSG:3857", OpenLayers.Layer.SphericalMercator.projectForward);
+				//OpenLayers.Projection.addTransform("EPSG:3857", "EPSG:4326", OpenLayers.Layer.SphericalMercator.projectInverse);
+				//OpenLayers.Projection.addTransform("EPSG:4326", "EPSG:900913", OpenLayers.Layer.SphericalMercator.projectForward);
+				//OpenLayers.Projection.addTransform("EPSG:900913", "EPSG:4326", OpenLayers.Layer.SphericalMercator.projectInverse);
 			};
 			i3geoOL = new OpenLayers.Map('openlayers', i3GEO.Interface.openlayers.parametrosMap);
 		},
@@ -995,8 +999,8 @@ i3GEO.Interface = {
 						temp = camada.transitioneffect === "nao" ? opcoes.transitionEffect = "null" : opcoes.transitionEffect = "resize";
 						//
 						//layers marcados com o metadata wmstile com valor 1 sao inseridos com Layer.TileCache
-						//
-						if(camada.connectiontype === 7 && camada.wmsurl !== "" && camada.usasld.toLowerCase() != "sim"){
+						//i3GEO.Interface.openlayers.googleLike === false &&
+						if(i3GEO.Interface.openlayers.googleLike === false && camada.connectiontype === 7 && camada.wmsurl !== "" && camada.usasld.toLowerCase() != "sim"){
 							urllayer = camada.wmsurl+"&r="+Math.random();
 							if(camada.wmstile == 1){
 								layer = new OpenLayers.Layer.TMS(camada.name, camada.wmsurl,{isBaseLayer:false,layername:camada.wmsname,type:'png'});
@@ -1004,8 +1008,9 @@ i3GEO.Interface = {
 							else{
 								layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{LAYERS:camada.name,format:camada.wmsformat,transparent:true},opcoes);
 							}
-							if(camada.wmssrs != "" && layer.url)
-							{layer.url = layer.url+"&SRS="+camada.wmssrs+"&CRS="+camada.wmssrs;}
+							if(camada.wmssrs != "" && layer.url){
+								layer.url = layer.url+"&SRS="+camada.wmssrs+"&CRS="+camada.wmssrs;
+							}
 						}
 						else{
 							if(camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim" || camada.connectiontype === 10 || (camada.type === 0 && camada.cache === "nao") || camada.type === 8 )

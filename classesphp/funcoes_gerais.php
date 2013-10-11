@@ -1058,19 +1058,23 @@ $map_file {string} - Arquivo map file.
 
 $xy {string | array} - XY com as coordenadas (separado por espa&ccedil;o no caso de string)
 
+$mapa objeto mapa (usado ao inves do nome do arquivo qd for o caso)
+
 Retorno:
 
 {mapscript point}
 */
-function xy2imagem($map_file,$xy)
+function xy2imagem($map_file,$xy,$map="")
 {
 	if (!is_array($xy))
 	{$xy = explode(" ",$xy);}
 	$pt = ms_newPointObj();
-	$map = ms_newMapObj($map_file);
-	$map = desligatemas($map);
-	$map = desligamargem($map);
-	$imgo = $map->draw();
+	if($map == ""){
+		$map = ms_newMapObj($map_file);
+		$map = desligatemas($map);
+		$map = desligamargem($map);
+		$imgo = $map->draw();
+	}
 	$e = $map->extent;
 	$vx = ($e->minx * -1) - ($xy[0] * -1);
 	$vy = ($xy[1] * -1) + ($e->maxy * 1);

@@ -955,13 +955,31 @@ i3GEO.php = {
 
 	<ADICIONATEMAWMS>
 	*/
-	adicionaTemaWMS: function(funcao,servico,tema,nome,proj,formato,versao,nomecamada,tiporep,suportasld,formatosinfo,locaplic,sid){
-		if(arguments.length === 11){
-			i3GEO.php.verifica();
+	adicionaTemaWMS: function(funcao,servico,tema,nome,proj,formato,versao,nomecamada,tiporep,suportasld,formatosinfo,locaplic,sid,checked){
+		var s,p,camadaArvore,par,ck;
+		if(!locaplic || locaplic === ""){
 			locaplic = i3GEO.configura.locaplic;
+		}
+		if(!sid || sid === ""){
 			sid = i3GEO.configura.sid;
 		}
-		var p = locaplic+"/classesphp/mapa_controle.php",
+		//verifica se a camada ja existe no mapa
+		if(checked || checked == false){
+			s = servico+"&layers="+tema+"&style="+nome;
+			s = s.replace("&&","&");
+			camadaArvore = i3GEO.arvoreDeCamadas.pegaTema(s,"","wmsurl");
+
+			if(camadaArvore){
+				ck = i3GEO.arvoreDeCamadas.capturaCheckBox(camadaArvore.name);
+				ck.checked = checked;
+				ck.onclick();
+				return;
+			}
+		}
+		//if(i3GEO.Interface.openlayers.googleLike === true){
+		//	proj = "EPSG:3857";
+		//}
+		p = locaplic+"/classesphp/mapa_controle.php",
 			par = "g_sid="+sid+"&funcao=adicionatemawms&servico="+servico+"&tema="+tema+"&nome="+nome+"&proj="+proj+"&formato="+formato+"&versao="+versao+"&nomecamada="+nomecamada+"&tiporep="+tiporep+"&suportasld="+suportasld+"&formatosinfo="+formatosinfo;
 		cpJSON.call(p,"adicionatemawms",funcao,par);
 	},

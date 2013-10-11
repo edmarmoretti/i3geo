@@ -2130,6 +2130,13 @@ pt:"Exportar SHP",
 en:"",
 es:"",
 it:""
+}],
+"x85":[
+{
+pt:"Visualizador de WMS da INDE-Br",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

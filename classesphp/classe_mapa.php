@@ -1,6 +1,6 @@
 <?php
 /*
- Title: classe_mapa.php
+Title: classe_mapa.php
 
 Manipula&ccedil;&atilde;o do mapa. Altera tamanho, lista temas, etc.
 
@@ -31,42 +31,42 @@ Arquivo:
 i3geo/classesphp/classe_mapa.php
 */
 /*
- Classe: Mapa
+Classe: Mapa
 */
 class Mapa
 {
 	/*
-	 Variavel: $mapa
+	Variavel: $mapa
 
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
-	 Variavel: $arquivo
+	Variavel: $arquivo
 
 	Arquivo map file
 	*/
 	public $arquivo;
 	/*
-	 Variavel: $layers
+	Variavel: $layers
 
 	Objetos layers
 	*/
 	public $layers;
 	/*
-	 Variavel: $qyfile
+	Variavel: $qyfile
 
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
-	 Variavel: $v
+	Variavel: $v
 
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 	/*
-	 Variavel: $vi
+	Variavel: $vi
 
 	Vers&atilde;o atual do Mapserver (valor inteiro)
 
@@ -74,7 +74,7 @@ class Mapa
 	*/
 	public $vi;
 	/*
-	 Function: __construct
+	Function: __construct
 
 	Cria um objeto mapa
 
@@ -115,7 +115,7 @@ class Mapa
 		}
 	}
 	/*
-	 Method: salva
+	Method: salva
 
 	Salva o mapfile atual
 	*/
@@ -127,7 +127,7 @@ class Mapa
 		$this->mapa->save($this->arquivo);
 	}
 	/*
-	 Method: listaTemasBuscaRapida
+	Method: listaTemasBuscaRapida
 
 	Elabora uma lista de temas e seus respectivos itens para uso no m&eacute;todo buscaRegistros da classe classe_atributos
 
@@ -152,7 +152,7 @@ class Mapa
 		return implode(",",$lista);
 	}
 	/*
-	 Method: mudaoutputformat
+	Method: mudaoutputformat
 
 	Muda o OUTPUTFORMAT
 
@@ -169,7 +169,7 @@ class Mapa
 		return $this->mapa->selectOutputFormat($tipo);
 	}
 	/*
-	 Method: pegaMensagens
+	Method: pegaMensagens
 
 	Pega as mensagens do metadata "mensagem" existentes nos layers do mapa atual
 
@@ -195,7 +195,7 @@ class Mapa
 	}
 
 	/*
-	 Method: gravaImagemCorpo (depreciado)
+	Method: gravaImagemCorpo (depreciado)
 
 	Grava a imagem do mapa atual
 	*/
@@ -209,7 +209,7 @@ class Mapa
 		return ($nome);
 	}
 	/*
-	 Method: parametrosTemas
+	Method: parametrosTemas
 
 	Pega os parametros dos layers do mapa.
 
@@ -408,7 +408,7 @@ class Mapa
 		return $temas;
 	}
 	/*
-	 Method: redesenhaCorpo
+	Method: redesenhaCorpo
 
 	Redesenha o mapa e retorna as vari&aacute;veis necess&aacute;rias para montar o mapa.
 
@@ -578,7 +578,7 @@ class Mapa
 		return $res;
 	}
 	/*
-	 Method: redesenhaEntorno (depreciado)
+	Method: redesenhaEntorno (depreciado)
 
 	Redesenha o entorno do mapa (depreciado).
 
@@ -617,7 +617,7 @@ class Mapa
 		return "var imagens=['".$nomeL["url"]."','".$nomeO["url"]."','".$nomeN["url"]."','".$nomeS["url"]."'];";
 	}
 	/*
-	 Method: ativalegenda
+	Method: ativalegenda
 
 	Ativa/desativa legenda, incluindo ou n&atilde;o no corpo do mapa.
 	*/
@@ -628,7 +628,7 @@ class Mapa
 		return "ok";
 	}
 	/*
-	 Method: ativalogo
+	Method: ativalogo
 
 	Ativa/desativa logomarca.
 
@@ -647,7 +647,7 @@ class Mapa
 		return "ok";
 	}
 	/*
-	 Method: listaTemasLocais
+	Method: listaTemasLocais
 
 	Lista os temas locais de um mapa.
 
@@ -674,7 +674,7 @@ class Mapa
 		return $final;
 	}
 	/*
-	 Method: listaTemas
+	Method: listaTemas
 
 	Lista os temas de um mapa.
 
@@ -723,7 +723,7 @@ class Mapa
 		return $final;
 	}
 	/*
-	 Method: listaTemasTipo
+	Method: listaTemasTipo
 
 	Lista os temas, vis&iacute;veis, de um determinado tipo de fei&ccedil;&atilde;o de um mapa.
 
@@ -788,7 +788,7 @@ class Mapa
 		return $final;
 	}
 	/*
-	 Method: listaTemasComSel
+	Method: listaTemasComSel
 
 	Lista os temas de um mapa que possuem elementos selecionados.
 
@@ -836,7 +836,7 @@ class Mapa
 		return $final;
 	}
 	/*
-	 Method: mudaQS
+	Method: mudaQS
 
 	Muda o tamanho do query map.
 
@@ -890,7 +890,7 @@ class Mapa
 		$fecha = fclose ($abre);
 	}
 	/*
-	 Method: corQM
+	Method: corQM
 
 	Muda a cor do query map.
 
@@ -917,7 +917,7 @@ class Mapa
 		return ($retorno);
 	}
 	/*
-	 Method: corfundo
+	Method: corfundo
 
 	Muda a cor do fundo do mapa.
 
@@ -942,7 +942,7 @@ class Mapa
 		return ($retorno);
 	}
 	/*
-	 Method: gradeCoord
+	Method: gradeCoord
 
 	Gera uma grade de coordenadas
 
@@ -1042,7 +1042,7 @@ class Mapa
 		return ("ok");
 	}
 	/*
-	 Method: adicionaTema
+	Method: adicionaTema
 
 	Acrescenta um novo tema em um arquivo map file.
 
@@ -1233,7 +1233,7 @@ class Mapa
 		return(true);
 	}
 	/*
-	 Method: excluiTemas
+	Method: excluiTemas
 
 	Exclui temas de um mapa.
 
@@ -1279,7 +1279,7 @@ class Mapa
 		return("ok");
 	}
 	/*
-	 Method: ligaDesligaTemas
+	Method: ligaDesligaTemas
 
 	Liga desliga temas.
 
@@ -1373,7 +1373,7 @@ class Mapa
 		return("ok");
 	}
 	/*
-	 Method: adicionatemawms
+	Method: adicionatemawms
 
 	Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 
@@ -1413,8 +1413,10 @@ class Mapa
 		}
 		$layer = ms_newLayerObj($this->mapa);
 		$layer->set("status",MS_DEFAULT);
-		if($nomecamada == "default")
+		$nomecamada = mb_convert_encoding($nomecamada,"ISO-8859-1","AUTO");
+		if($nomecamada == "default"){
 			$nomecamada = $tema;
+		}
 		$layer->setmetadata("CLASSE","SIM");
 		$layer->setmetadata("TEXTO","NAO");
 		$layer->setmetadata("tema",$nomecamada);
@@ -1531,7 +1533,7 @@ class Mapa
 		$this->salva();
 	}
 	/*
-	 Method: converteWS
+	Method: converteWS
 
 	Transforma o mapa atual em um web service.
 
@@ -1552,7 +1554,7 @@ class Mapa
 		//$nomews = str_replace(".map","ws.map",$this->arquivo);
 		$nomeurl = "/ogc.php?tema=".$this->arquivo;
 		/*
-		 $w = $this->mapa->web;
+		$w = $this->mapa->web;
 		$w->set("template","");
 		//adiciona os parametros no nivel do mapa
 		$this->mapa->setmetadata("wms_title","I3Geo");
@@ -1584,7 +1586,7 @@ class Mapa
 		return($nomeurl);
 	}
 	/*
-	 Method: converteWMC
+	Method: converteWMC
 
 	Transforma o mapa atual em um Web Map Context.
 
@@ -1671,7 +1673,7 @@ class Mapa
 		return($nomeurl."&service=WMS&request=GetContext&version=1.1.0");
 	}
 	/*
-	 Method: adicionaTemaGeoJson
+	Method: adicionaTemaGeoJson
 
 	Adiciona um canal GeoRSS como um tema no mapa.
 
@@ -1733,7 +1735,7 @@ class Mapa
 		return "ok";
 	}
 	/*
-	 Method: adicionaTemaGeoRSS
+	Method: adicionaTemaGeoRSS
 
 	Adiciona um canal GeoRSS como um tema no mapa.
 
@@ -1909,7 +1911,7 @@ class Mapa
 		return("erro");
 	}
 	/*
-	 Method: adicionaTemaSHP
+	Method: adicionaTemaSHP
 
 	Adiciona um tema a partir de um arquivo shape file armazenado no servidor de arquivos.
 
@@ -1922,8 +1924,8 @@ class Mapa
 		{
 			$s = ms_newShapefileObj($arq,-1);
 			/*
-			 if($this->v == 6)
-			 {$shape = $s->getshape(new resultObj(0));}
+			if($this->v == 6)
+			{$shape = $s->getshape(new resultObj(0));}
 			else
 			{$shape = $s->getshape(0);}
 			*/
@@ -1948,7 +1950,7 @@ class Mapa
 		return("ok");
 	}
 	/*
-	 Method: adicionaTemaIMG
+	Method: adicionaTemaIMG
 
 	Adiciona um tema a partir de um arquivo imagem armazenado no servidor de arquivos.
 
@@ -2021,7 +2023,7 @@ class Mapa
 		$fecha = fclose ($abre);
 	}
 	/*
-	 Method: converteInterfacePara
+	Method: converteInterfacePara
 
 	Converte o mapfile atual ajustando o funcionamento para uma interface espec&iacute;fica
 

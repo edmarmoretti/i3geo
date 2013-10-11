@@ -952,6 +952,14 @@ g_traducao_ajuda = {
 			pt:"Os marcadores permitem armazenar a regi&atilde;o de abrang&ecirc;ncia do mapa que est&aacute; sendo visto para que seja poss&iacute;vel voltar a essa regi&atilde;o. Para cinar as op&ccedil;&otilde;es de marca&ccedil;&atilde;o utilize a op&ccedil;&atilde;o Marcadores existente no menu suspenso. O menu permite remover marcadores, exportar, importar e converter em shapefile. Os marcadores s&atilde;o mantidos como cookies no navegador, por isso, ao limpar o seu hist&oacute;rico os registros podem ser perdidos. Para evitar isso, exporte seus marcadores como texto e depois importe-os novamente.",
 			complemento:"",
 			apijs: "i3GEO.marcador.prompt()"
+		},
+		"114": {
+			titulo: "Visualizador INDE",
+			diretorio:"i3geo/ferramentas/vinde",
+			categoria:"7",
+			pt:"Essa ferramenta apresenta os servi&ccedil;os WMS cadastrados no servidor da Infra-estrutura Nacional de Dados Espaciais do Brasil. O usu&aacute;rio pode escolher diferentes camadas para visualiza&ccedil;&atilde;o e consulta.",
+			complemento:"",
+			apijs: "i3GEO.arvoreDeTemas.dialogo.vinde()"
 		}
 	}
 };

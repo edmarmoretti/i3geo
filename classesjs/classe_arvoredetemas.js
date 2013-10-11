@@ -179,6 +179,15 @@ i3GEO.arvoreDeTemas = {
 	*/
 	INCLUIWMS: true,
 	/*
+	Propriedade: INCLUIINDIBR
+
+	Inclui na arvore a lista de servicos da INDE Br
+
+	Tipo:
+	{Boolean}
+	*/
+	INCLUIINDIBR: true,
+	/*
 	Propriedade: INCLUIWMSMETAESTAT
 
 	Inclui na arvore a lista de Web Services WMS advindos do sistema de metadados estatisticos?
@@ -529,14 +538,14 @@ i3GEO.arvoreDeTemas = {
 	/*
 	Monta o texto que sera mostrado ao lado de cada layer de um WMS, permitindo incluir o layer no mapa.
 	*/
-	montaTextoTemaWMS: function(servico,layer,estilo,titulo,proj,formatoinfo,versao,formatoimg,cor){
+	montaTextoTemaWMS: function(servico,layer,estilo,titulo,proj,formatoinfo,versao,formatoimg,cor,link){
 		var html,temp,adiciona;
 		html = "<td style='vertical-align:top;padding-top:5px;'><span ><input style='cursor:pointer;border:solid 0 white;' ";
 		temp = function(){
 			i3GEO.janela.fechaAguarde("ajaxredesenha");
 			i3GEO.atualiza();
 		};
-		adiciona = "i3GEO.arvoreDeTemas.checked=false;i3GEO.php.adicionaTemaWMS("+temp+"," +
+		adiciona = "i3GEO.php.adicionaTemaWMS("+temp+"," +
 		"\""+servico+"\"," +
 		"\""+layer+"\"," +
 		"\""+estilo+"\"," +
@@ -546,10 +555,18 @@ i3GEO.arvoreDeTemas = {
 		"\""+titulo+"\"," +
 		"\"\"," +
 		"\"nao\"," +
-		"\""+formatoinfo+"\")";
+		"\""+formatoinfo+"\"," +
+		"\"\"," +
+		"\"\"," +
+		"this.checked)";
 		html += "onclick='javascript:"+adiciona+"' " +
-		" type='radio'  /></td><td style='padding-top:4px;vertical-align:top;text-align:left;padding-left:3px;color:"+cor+";' >" +
-		layer+" - "+titulo +
+		" type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"'  /></td><td style='padding-top:4px;vertical-align:top;text-align:left;padding-left:3px;color:"+cor+";' >";
+		if(link){
+			html += "<a href='"+link+"' target=_blank >"+layer+" - "+titulo + "</a>";
+		}
+		else{
+			html += layer+" - "+titulo;
+		}
 		"</td></span>";
 		return(html);
 	},
@@ -953,6 +970,14 @@ i3GEO.arvoreDeTemas = {
 				},
 				root
 			);
+		}
+		//
+		//wms indi br
+		if(i3GEO.arvoreDeTemas.INCLUIINDIBR === true){
+			var temp = function(){
+				i3GEOF.vinde.inicia("",i3GEO.arvoreDeTemas.ARVORE);
+			};
+			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/vinde/index.js",temp,"i3GEOF.vinde_script");
 		}
 		//
 		//wms
@@ -2198,6 +2223,9 @@ i3GEO.arvoreDeTemas = {
 		*/
 		buscaInde: function(){
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/buscainde/index.js","i3GEOF.buscainde.criaJanelaFlutuante()","i3GEOF.buscainde_script");
+		},
+		vinde: function(){
+			i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/ferramentas/vinde/index.js","i3GEOF.vinde.criaJanelaFlutuante()","i3GEOF.vinde_script");
 		},
 		/*
 		Function: nuvemTags
