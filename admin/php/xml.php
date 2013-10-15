@@ -299,7 +299,7 @@ function geraXmlWMS($locaplic)
 	return geraXmlRSS($locaplic,$sql,"Web services WMS-OGC");
 }
 /*
- Function: geraXmlWMSmetaestat
+Function: geraXmlWMSmetaestat
 
 RSS com a lista de WMS das variaveis cadastradas no sistema de metadados estatisticos
 
@@ -619,6 +619,8 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	$q = "select * from ".$esquemaadmin."i3geoadmin_mapas";
 	$q = $dbh->query($q);
 	$editor = "nao";//$editor = "nao";//verificaEditores($editores);
+	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace("/admin/php/xml.php","",__FILE__)));
 	foreach($q as $row)
 	{
 		$mostraMapa = false;
@@ -637,15 +639,23 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 		if($mostraMapa)
 		{
 			$xml .= "<MAPA>\n";
-			$xml .= " <PERFIL>".$row["perfil_mapa"]."</PERFIL>\n";
+			$perfil = $row["perfil_mapa"];
+			$xml .= " <PERFIL>".$perfil."</PERFIL>\n";
 			$xml .= " <NOME>".xmlTexto_prepara($row["nome_mapa"])."</NOME>\n";
 			$xml .= " <DESCRICAO>".xmlTexto_prepara($row["desc_mapa"])."</DESCRICAO>\n";
 			$xml .= " <IMAGEM>".xmlTexto_prepara($row["imagem_mapa"])."</IMAGEM>\n";
 			$xml .= " <TEMAS>".$row["temas_mapa"]."</TEMAS>\n";
 			$xml .= " <LIGADOS>".$row["ligados_mapa"]."</LIGADOS>\n";
-			$xml .= " <EXTENSAO>".$row["ext_mapa"]."</EXTENSAO>\n";
-			$xml .= " <OUTROS>".xmlTexto_prepara($row["outros_mapa"])."</OUTROS>\n";
-			$xml .= " <LINKDIRETO>".xmlTexto_prepara($row["linkdireto_mapa"])."</LINKDIRETO>\n";
+			$extensao = $row["ext_mapa"];
+			$xml .= " <EXTENSAO>".$extensao."</EXTENSAO>\n";
+			$outros = xmlTexto_prepara($row["outros_mapa"]);
+			$xml .= " <OUTROS>".$outros."</OUTROS>\n";
+			$linkdireto = xmlTexto_prepara($row["linkdireto_mapa"]);
+			if(empty($linkdireto)){
+				$linkdireto = $url."/ms_criamapa.php?mapext=".$extensao."&perfil=".$perfil."&temasa=".$temas."&layers=".$ligados.$row["outros_mapa"];
+				$linkdireto = xmlTexto_prepara($linkdireto);
+			}
+			$xml .= " <LINKDIRETO>".$linkdireto."</LINKDIRETO>\n";
 			$xml .= " <PUBLICADO>".$row["publicado_mapa"]."</PUBLICADO>\n";
 			if($row["mapfile"] != ""){
 				$xml .= " <CONTEMMAPFILE>sim</CONTEMMAPFILE>\n";
@@ -861,13 +871,13 @@ function geraXmlSistemas_pegafuncoes($perfil,$xml,$id_sistema,$dbh)
 }
 function array_in_array($needle, $haystack)
 {
-   	//Make sure $needle is an array for foreach
-   	if(!is_array($needle)) $needle = array($needle);
-   	//For each value in $needle, return TRUE if in $haystack
-   	foreach($needle as $pin)
-       	if(in_array($pin, $haystack)) return TRUE;
-   	//Return FALSE if none of the values from $needle are found in $haystack
-   	return FALSE;
+		//Make sure $needle is an array for foreach
+		if(!is_array($needle)) $needle = array($needle);
+		//For each value in $needle, return TRUE if in $haystack
+		foreach($needle as $pin)
+				if(in_array($pin, $haystack)) return TRUE;
+		//Return FALSE if none of the values from $needle are found in $haystack
+		return FALSE;
 }
 function xmlTexto_prepara($texto)
 {

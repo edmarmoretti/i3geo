@@ -4,7 +4,7 @@
 	<meta http-equiv="Category"
 		content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-	
+
 	<link rel="stylesheet" type="text/css" href="html/admin.css">
 	<script type="text/javascript" src="../classesjs/i3geo.js"></script>
 	<style>
@@ -12,13 +12,13 @@
 			border: 0 none;
 			padding: 0 3px 5px 0;
 			text-align: left;
-		}	
-	
+		}
+
 	</style>
 	</head>
 	<body class=" yui-skin-sam" style="background-color:white;text-align:left;">
 			<div class="bordaSuperior">&nbsp;</div>
-	
+
 			<div style="margin-left:10px;" id=arvore ></div>
 	</body>
 	<script>
@@ -110,6 +110,11 @@
 		type: "text",
 		href: "html/estat_editor.html",
 		target: "principal"
+		},{
+		label: "Ver xml com a lista de serviços WMS originados do sistema de metadados estatísticos",
+		type: "text",
+		href: "xmlmetaestatogc.php",
+		target: "principal"
 		}
 	]},{
 	label: "Enviar arquivo para o servidor",
@@ -147,6 +152,16 @@
 		type: "text",
 		href: "html/arvore.html",
 		target: "principal"
+		},{
+		label: "Ver RSS com os grupos, subgrupos e temas",
+		type: "text",
+		href: "rssgrupos.php",
+		target: "principal"
+		},{
+		label: "Ver RSS com os comentários sobre os temas",
+		type: "text",
+		href: "rsscomentariostemas.php",
+		target: "principal"
 		}
 	]},{
 	label: "Links para mapas",
@@ -157,6 +172,11 @@
 		label: "Edição dos links",
 		type: "text",
 		href: "html/mapas.html",
+		target: "principal"
+		},{
+		label: "XML com a lista de mapas",
+		type: "text",
+		href: "xmlmapas.php",
 		target: "principal"
 		}
 	]},{
@@ -212,6 +232,21 @@
 		type: "text",
 		href: "html/webservices.html",
 		target: "principal"
+		},{
+		label: "Ver xml com a lista de serviços WS (webservices convencionais)",
+		type: "text",
+		href: "xmlservicosws.php",
+		target: "principal"
+		},{
+		label: "Ver xml com a lista de serviços WMS",
+		type: "text",
+		href: "xmlservicoswms.php",
+		target: "principal"
+		},{
+		label: "Ver xml com a lista de serviços Geo RSS",
+		type: "text",
+		href: "xmlgeorss.php",
+		target: "principal"
 		}
 	]},{
 	label: "Sistemas especiais de identificação",
@@ -233,6 +268,11 @@
 		label: "Edição dos sistemas",
 		type: "text",
 		href: "html/sistemas.html",
+		target: "principal"
+		},{
+		label: "Ver xml com a lista de sistemas que adicionam temas especiais",
+		type: "text",
+		href: "xmlsistemas.php",
 		target: "principal"
 		}
 	]},{
@@ -277,41 +317,6 @@
 		href: "../geraminiatura.php",
 		target: "principal"
 		},{
-		label: "Ver xml com a lista de serviços Geo RSS",
-		type: "text",
-		href: "xmlgeorss.php",
-		target: "principal"
-		},{
-		label: "Ver xml com a lista de serviços WMS",
-		type: "text",
-		href: "xmlservicoswms.php",
-		target: "principal"
-		},{
-		label: "Ver xml com a lista de serviços WS (webservices convencionais)",
-		type: "text",
-		href: "xmlservicosws.php",
-		target: "principal"
-		},{
-		label: "Ver xml com a lista de serviços WMS originados do sistema de metadados estatísticos",
-		type: "text",
-		href: "xmlmetaestatogc.php",
-		target: "principal"
-		},{
-		label: "Ver xml com a lista de sistemas que adicionam temas especiais",
-		type: "text",
-		href: "xmlsistemas.php",
-		target: "principal"
-		},{
-		label: "Ver RSS com os grupos, subgrupos e temas",
-		type: "text",
-		href: "rssgrupos.php",
-		target: "principal"
-		},{
-		label: "Ver RSS com os comentários sobre os temas",
-		type: "text",
-		href: "rsscomentariostemas.php",
-		target: "principal"
-		},{
 		label: "Ver XML para árvorehiperbólica",
 		type: "text",
 		href: "hiperbolica.php",
@@ -322,4 +327,4 @@
 	tree.render();
 	</script>
 	</html>
-	
+
