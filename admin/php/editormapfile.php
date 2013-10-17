@@ -157,13 +157,13 @@ switch (strtoupper($funcao))
 				if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 					$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 				}
-				if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				if($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 					$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
 				}
-				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 					$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 				}
-				if($f == "")
+				if($base == "")
 				{
 					$base = $locaplic."/aplicmap/geral1v".$versao.".map";
 				}
@@ -1237,20 +1237,48 @@ function autoClassesLayer()
 	include_once("$locaplic/classesphp/classe_alteraclasse.php");
 	error_reporting(0);
 	$nometemp = $dir_tmp."/".nomerandomico().".map";
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{
-		$geral = $locaplic."/aplicmap/geral1windows.map";
+
+	$versao = versao();
+	$versao = $versao["principal"];
+	if($base == "" || !isset($base)){
+		$base = "";
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+		{
+			$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+		}
+		else
+		{
+			if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+				$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+			}
+			if($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+			}
+			if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+			}
+			if($base == "")
+			{
+				$base = $locaplic."/aplicmap/geral1v".$versao.".map";
+			}
+		}
 	}
-	else
-	{$geral = $locaplic."/aplicmap/geral1.map";
+	else{
+		if(!file_exists($base))
+		{
+			$base = $locaplic."/aplicmap/".$base;
+		}
 	}
-	$mapageral = ms_newMapObj($geral);
+
+	$mapageral = ms_newMapObj($base);
+
 	$numlayers = $mapageral->numlayers;
 	for ($i=0;$i < $numlayers;$i++)
 	{
 		$layertemp = $mapageral->getlayer($i);
 		$layertemp->set("status",MS_DELETE);
 	}
+	
 	$mapatemp = ms_newMapObj($mapfile);
 	$numlayers = $mapatemp->numlayers;
 	for ($i=0;$i < $numlayers;$i++)
