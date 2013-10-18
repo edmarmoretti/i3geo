@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
 * The content of this file is (c) 2003-2005 digital media center GmbH
 * All rights reserved
 *
@@ -12,49 +12,49 @@
 */
 
 //---- includes ----------------------------------------------------------------
-	/**	
+	/**
 	* @include JSON
 	*/
-	require_once('../json.php');
-	
+	require_once(dirname(__FILE__).'/../json.php');
+
 //---- class -------------------------------------------------------------------
 	class MyObj {
 		var $id			= '';
 		var $name		= '';
 		var $attribs	= array("first",'4');
-		
+
 		function setId($id) {
 			$this->id = $id;
 		}
-		
+
 		function getId() {
 			return $this->id;
 		}
-		
+
 		function setName($name) {
 			$this->name = $name;
 		}
-		
+
 		function getName() {
 			return $this->name;
 		}
 	}
-	
+
 //---- variables ---------------------------------------------------------------
 	$JSON			= new JSON();
 	$myObj			= new MyObj();
-	
+
 //---- logic -------------------------------------------------------------------
 	/* initialize object */
-	$myObj->setId('Äl' . chr(18) . "ie\nn");
+	$myObj->setId('ï¿½l' . chr(18) . "ie\nn");
 	$myObj->setName('objectName');
-	array_push($myObj->attribs, 'øfirst');
+	array_push($myObj->attribs, 'ï¿½first');
 	array_push($myObj->attribs, 'second');
 	array_push($myObj->attribs, 3);
 
 	/* create JSON representation */
 	$jsonStr	= $JSON->stringify($myObj);
-	
+
 //---- clean-up ----------------------------------------------------------------
 //---- content -----------------------------------------------------------------
 
@@ -65,159 +65,159 @@
 	<script type="text/javascript" src="json.js"></script>
 	<script type="text/javascript">
 JSON.arrayObj = new Array();
-JSON.parse2 = function (text) 
-{		
+JSON.parse2 = function (text)
+{
 				var p = /^\s*(([,:{}\[\]])|"(\\.|[^\x00-\x1f"\\])*"|-?\d+(\.\d*)?([eE][+-]?\d+)?|true|false|null|\/\*Array\*\/)\s*/,
-            token,
-            operator;            
+						token,
+						operator;
 
-        function error(m, t) {
-            throw {
-                name: 'JSONError',
-                message: m,
-                text: t || operator || token
-            };
-        }
+				function error(m, t) {
+						throw {
+								name: 'JSONError',
+								message: m,
+								text: t || operator || token
+						};
+				}
 
-        function next() {
-            if (text) {
-                var t = p.exec(text);
-                if (t) {
-                		
-                    if (t[2]) {
-                        token = null;
-                        operator = t[2];
-                    } else {
-                        operator = null;
-                        if(t[1].search (/^\/\*Array\*\/$/g) > -1)
-                        {
-                        	token = function(){};
-                        }
-                        else
-                        {                        
-                        	try {
-                        	    token = eval(t[1]);                        
-                        	} catch (e) {
-                            	error("Bad token", t[1]);
-                           }
-                        }
-                    }
-                    text = text.substring(t[0].length);
-                } else {
-                    error("Unrecognized token", text);
-                }
-            } else {
-                token = operator = undefined;
-            }
-       }
+				function next() {
+						if (text) {
+								var t = p.exec(text);
+								if (t) {
+
+										if (t[2]) {
+												token = null;
+												operator = t[2];
+										} else {
+												operator = null;
+												if(t[1].search (/^\/\*Array\*\/$/g) > -1)
+												{
+													token = function(){};
+												}
+												else
+												{
+													try {
+															token = eval(t[1]);
+													} catch (e) {
+															error("Bad token", t[1]);
+													 }
+												}
+										}
+										text = text.substring(t[0].length);
+								} else {
+										error("Unrecognized token", text);
+								}
+						} else {
+								token = operator = undefined;
+						}
+			 }
 
 
-        function arr() {
-            var a = [];
+				function arr() {
+						var a = [];
 
-            next();
-            if (operator == ']') {
-                next();
-                return a;
-            }
-            for (;;) {
-                a.push(val());
-                switch (operator) {
-                case ']':
-                    next();
-                    return a;
-                case ',':
-                    next();
-                    break;
-                default:
-                    error("Missing ']'");
-                }
-            }
-        }
+						next();
+						if (operator == ']') {
+								next();
+								return a;
+						}
+						for (;;) {
+								a.push(val());
+								switch (operator) {
+								case ']':
+										next();
+										return a;
+								case ',':
+										next();
+										break;
+								default:
+										error("Missing ']'");
+								}
+						}
+				}
 
-        function obj() {
-            var k, o = {};
-				     
-            next();
-            if (operator == '}') {
-                next();
-                return o;
-            }
-            if (typeof(token) == 'function')	
-            {
-            	o = []; 
-            	next();           	
-            }       
-            for (;;) 
-            {
-            	
-            	
-                if (operator ||typeof token != 'string') {
-                    error("Missing key");
-                }
-                k = token;                
-                next();
-               
-                if (operator != ':') {
-                    error("Missing ':'");
-                }
-               
-                next();
-                o[k] = val();
-               
-                switch (operator) {
-                case '}':
-                    next();
-                    return o;
-                case ',':
-                    next();
-                    break;
-                case '#':
-                		next();
-                		break;
-                default:
-                    error("Missing '}'");
-                }               
-            }            
-        }
+				function obj() {
+						var k, o = {};
 
-        function val() {
-            switch (operator) {
-            case '{':
-                return obj();
-            case '[':
-                return arr();
-            default:
-                if (operator !== null) {
-                    error("Missing value");
-                }
-                var t = token;
-                next();
-                return t;
-            }
-        }
-        next();
-        return val();
+						next();
+						if (operator == '}') {
+								next();
+								return o;
+						}
+						if (typeof(token) == 'function')
+						{
+							o = [];
+							next();
+						}
+						for (;;)
+						{
+
+
+								if (operator ||typeof token != 'string') {
+										error("Missing key");
+								}
+								k = token;
+								next();
+
+								if (operator != ':') {
+										error("Missing ':'");
+								}
+
+								next();
+								o[k] = val();
+
+								switch (operator) {
+								case '}':
+										next();
+										return o;
+								case ',':
+										next();
+										break;
+								case '#':
+										next();
+										break;
+								default:
+										error("Missing '}'");
+								}
+						}
+				}
+
+				function val() {
+						switch (operator) {
+						case '{':
+								return obj();
+						case '[':
+								return arr();
+						default:
+								if (operator !== null) {
+										error("Missing value");
+								}
+								var t = token;
+								next();
+								return t;
+						}
+				}
+				next();
+				return val();
 };
 
 JSON.stringify2 = function(arg)
 {
 	var jsonstring = [];
 	var b = this;
-	function add(str) 
+	function add(str)
 	{
-       jsonstring[jsonstring.length] = str;
-   }
-   function validObj(obj)
-   {
-   	if (typeof(obj) != 'undefined' && typeof(obj) != 'function')
-   	{
-   		return true;
-   	}
-   	return false;
-   }
+			 jsonstring[jsonstring.length] = str;
+	 }
+	 function validObj(obj)
+	 {
+		 if (typeof(obj) != 'undefined' && typeof(obj) != 'function')
+		 {
+			 return true;
+		 }
+		 return false;
+	 }
 	function recurse(obj, prefix)
-	{				
+	{
 		switch (typeof(obj))
 		{
 			case 'object':
@@ -248,7 +248,7 @@ JSON.stringify2 = function(arg)
 						}
 					}
 					return add ('}');
-				}				
+				}
 				return add('null');
 				break;
 			case 'number':
@@ -256,42 +256,42 @@ JSON.stringify2 = function(arg)
 				break;
 			case 'string':
 				l = obj.length;
-                add('"');
-                for (i = 0; i < l; i += 1) {
-                    c = obj.charAt(i);
-                    if (c >= ' ') {
-                        if (c == '\\' || c == '"') {
-                            add('\\');
-                        }
-                        add(c);
-                    } else {
-                        switch (c) {
-                            case '\b':
-                                add('\\b');
-                                break;
-                            case '\f':
-                                add('\\f');
-                                break;
-                            case '\n':
-                                add('\\n');
-                                break;
-                            case '\r':
-                                add('\\r');
-                                break;
-                            case '\t':
-                                add('\\t');
-                                break;
-                            default:
-                                c = c.charCodeAt();
-                                add('\\u00' + Math.floor(c / 16).toString(16) + (c % 16).toString(16));
-                        }
-                    }
-                }
-                return add('"');                
+								add('"');
+								for (i = 0; i < l; i += 1) {
+										c = obj.charAt(i);
+										if (c >= ' ') {
+												if (c == '\\' || c == '"') {
+														add('\\');
+												}
+												add(c);
+										} else {
+												switch (c) {
+														case '\b':
+																add('\\b');
+																break;
+														case '\f':
+																add('\\f');
+																break;
+														case '\n':
+																add('\\n');
+																break;
+														case '\r':
+																add('\\r');
+																break;
+														case '\t':
+																add('\\t');
+																break;
+														default:
+																c = c.charCodeAt();
+																add('\\u00' + Math.floor(c / 16).toString(16) + (c % 16).toString(16));
+												}
+										}
+								}
+								return add('"');
 				break;
 			case 'boolean':
 				return add(String(obj));
-				break;	
+				break;
 			default:
 				return add('null');
 				break;
@@ -308,16 +308,16 @@ JSON.stringify2 = function(arg)
 		<!--
 		/* print JSON representation */
 		var jsonStr	= '<?php echo addslashes($jsonStr); ?>';
-		
+
 		document.write('JavaScript JSONstr: ' + jsonStr);
 
 		/* create another object from jsonStr */
-		try 
+		try
 		{
 		var myObj2	= JSON.parse(jsonStr);
-		
-			var myObj3 = JSON.parse2(jsonStr);		
-		
+
+			var myObj3 = JSON.parse2(jsonStr);
+
 
 		/* test the clone */
 		document.write('<br /><br />Original JSON implementation');
@@ -334,12 +334,12 @@ JSON.stringify2 = function(arg)
 		for (var i = 0; i < myObj3.attribs.length; i++) {
 			document.write('<br />attrib[' + i + ']: ' + myObj3.attribs[i]);
 		}
-		
+
 		/* convert newline to JSON */
 		var nl = "\n" + String.fromCharCode(18);
 		document.write('<br /><br /> Original JSON <br />newline as JSON: ' + JSON.stringify(nl));
 		document.write('<br /><br /> New JSON <br />newline as JSON: ' + JSON.stringify2(nl));
-		
+
 		//-->
 }
 		catch(e)

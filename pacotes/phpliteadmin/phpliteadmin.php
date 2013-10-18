@@ -28,7 +28,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////
 //adicionado por edmar
-include_once ("../../ms_configura.php");
+include_once (dirname(__FILE__)."/../../ms_configura.php");
 $editor = false;
 if (strtolower($_SERVER['HTTP_HOST']) !== "localhost")
 {echo "Acesso permitido apenas via localhost";exit;}
@@ -1790,7 +1790,7 @@ else //user is authorized - display the main application
 					echo "<table border='0' cellpadding='2' cellspacing='1' class='viewTable'>";
 					echo "<tr>";
 					$headings = array("Field", "Type", "Primary Key", "Autoincrement", "Not NULL", "Default Value");
-      			for($k=0; $k<count($headings); $k++)
+						for($k=0; $k<count($headings); $k++)
 						echo "<td class='tdheader'>" . $headings[$k] . "</td>";
 					echo "</tr>";
 
@@ -2106,47 +2106,47 @@ else //user is authorized - display the main application
 
 					for($i=0; $i<sizeof($result); $i++)
 					{
-					  $field = $result[$i][1];
-					  $type = $result[$i][2];
-					  $tdWithClass = "<td class='td".($i%2 ? "1" : "2")."'>";
-					  $tdWithClassLeft = "<td class='td".($i%2 ? "1" : "2")."' style='text-align:left;'>";
-					  echo "<tr>";
-					  echo $tdWithClassLeft;
-					  echo $field;
-					  echo "</td>";
-					  echo $tdWithClassLeft;
-					  echo $type;
-					  echo "</td>";
-					  echo $tdWithClassLeft;
-					  echo "<select name='".$field.":operator'>";
-					  echo "<option value='='>=</option>";
-					  if($type=="INTEGER" || $type=="REAL")
-					  {
-						  echo "<option value='>'>></option>";
-						  echo "<option value='>='>>=</option>";
-						  echo "<option value='<'><</option>";
-						  echo "<option value='<='><=</option>";
-					  }
-					  else if($type=="TEXT" || $type=="BLOB")
-					  {
-						  echo "<option value='= '''>= ''</option>";
-						  echo "<option value='!= '''>!= ''</option>";
-					  }
-					  echo "<option value='!='>!=</option>";
-					  if($type=="TEXT" || $type=="BLOB")
-						  echo "<option value='LIKE' selected='selected'>LIKE</option>";
-					  else
-						  echo "<option value='LIKE'>LIKE</option>";
-					  echo "<option value='NOT LIKE'>NOT LIKE</option>";
-					  echo "</select>";
-					  echo "</td>";
-					  echo $tdWithClassLeft;
-					  if($type=="INTEGER" || $type=="REAL" || $type=="NULL")
-						  echo "<input type='text' name='".$field."'/>";
-					  else
-						  echo "<textarea name='".$field."' wrap='hard' rows='1' cols='60'></textarea>";
-					  echo "</td>";
-					  echo "</tr>";
+						$field = $result[$i][1];
+						$type = $result[$i][2];
+						$tdWithClass = "<td class='td".($i%2 ? "1" : "2")."'>";
+						$tdWithClassLeft = "<td class='td".($i%2 ? "1" : "2")."' style='text-align:left;'>";
+						echo "<tr>";
+						echo $tdWithClassLeft;
+						echo $field;
+						echo "</td>";
+						echo $tdWithClassLeft;
+						echo $type;
+						echo "</td>";
+						echo $tdWithClassLeft;
+						echo "<select name='".$field.":operator'>";
+						echo "<option value='='>=</option>";
+						if($type=="INTEGER" || $type=="REAL")
+						{
+							echo "<option value='>'>></option>";
+							echo "<option value='>='>>=</option>";
+							echo "<option value='<'><</option>";
+							echo "<option value='<='><=</option>";
+						}
+						else if($type=="TEXT" || $type=="BLOB")
+						{
+							echo "<option value='= '''>= ''</option>";
+							echo "<option value='!= '''>!= ''</option>";
+						}
+						echo "<option value='!='>!=</option>";
+						if($type=="TEXT" || $type=="BLOB")
+							echo "<option value='LIKE' selected='selected'>LIKE</option>";
+						else
+							echo "<option value='LIKE'>LIKE</option>";
+						echo "<option value='NOT LIKE'>NOT LIKE</option>";
+						echo "</select>";
+						echo "</td>";
+						echo $tdWithClassLeft;
+						if($type=="INTEGER" || $type=="REAL" || $type=="NULL")
+							echo "<input type='text' name='".$field."'/>";
+						else
+							echo "<textarea name='".$field."' wrap='hard' rows='1' cols='60'></textarea>";
+						echo "</td>";
+						echo "</tr>";
 					}
 					echo "<tr>";
 					echo "<td class='tdheader' style='text-align:right;' colspan='4'>";
@@ -2704,7 +2704,7 @@ else //user is authorized - display the main application
 					echo "<table border='0' cellpadding='2' cellspacing='1' class='viewTable'>";
 					echo "<tr>";
 					$headings = array("Field", "Type", "Primary Key", "Autoincrement", "Not NULL", "Default Value");
-      			for($k=0; $k<count($headings); $k++)
+						for($k=0; $k<count($headings); $k++)
 						echo "<td class='tdheader'>" . $headings[$k] . "</td>";
 					echo "</tr>";
 

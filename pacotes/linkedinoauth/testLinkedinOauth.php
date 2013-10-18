@@ -1,6 +1,6 @@
 <?php
 require_once 'linkedin.php';
-include("../../ms_configura.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
 $consumer_key = $linkedinoauth["consumerkey"];
 $consumer_secret = $linkedinoauth["consumersecret"];
 echo "<pre>";

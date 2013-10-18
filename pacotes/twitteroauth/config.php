@@ -4,7 +4,7 @@
  * @file
  * A single location to store configuration.
  */
-include("../../ms_configura.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
 define('CONSUMER_KEY', $twitteroauth["consumerkey"]);
 define('CONSUMER_SECRET', $twitteroauth["consumersecret"]);
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);

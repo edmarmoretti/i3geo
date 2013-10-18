@@ -1,12 +1,12 @@
 <?php
-require_once("../../../classesphp/pega_variaveis.php");
-require_once("../../../classesphp/funcoes_gerais.php");
+require_once(dirname(__FILE__)."/../../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../../classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
 error_reporting(0);
 if (isset($_FILES['i3GEOuploadfile']['name']))
 {
-	require_once ("../../../ms_configura.php");
+	require_once (dirname(__FILE__)."/../../../ms_configura.php");
 	include_once("class.gvsig2mapfile.php");
 	if($base == "" or !isset($base)){
 		$base = "";
@@ -70,8 +70,8 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 		$handle = fopen(str_replace(".gvp",".map",$Arquivon), "r");
 		echo "<html>#mapfile: <br>";
 		while (!feof($handle))
-    	{
-        	$linha = fgets($handle);
+			{
+					$linha = fgets($handle);
 			echo $linha."<br>";
 		}
 		fclose($handle);
@@ -88,7 +88,7 @@ function verificaNome($nome)
 	$extensao = $lista[count($lista) - 1];
 	if($extensao != "gvp")
 	{
-		echo "Nome de arquivo inválido";
+		echo "Nome de arquivo invï¿½lido";
 		exit;
 	}
 }

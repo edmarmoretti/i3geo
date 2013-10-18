@@ -9,7 +9,7 @@ img
 //http://localhost/i3geo/pacotes/openid/login.php?g_sid=dqpk71kh6ei121s4u5g1qb9vi1
 session_name("openid");
 session_start();
-include("../../ms_configura.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
 if($_SESSION["openid"] == false)
 {
 	$dadosurl = array_merge($_GET,$_POST);
@@ -17,15 +17,15 @@ if($_SESSION["openid"] == false)
 		echo "<span style=color:red >Ocorreu algum erro</span><br><br>";
 	}
 
-}  
+}
 require 'openid.php';
 try {
-    $openid = new LightOpenID;
+		$openid = new LightOpenID;
 	if(!$openid->mode && $_SESSION["openid"] == false) {
-        if(isset($dadosurl['openid_identifier']) && empty($dadosurl["erro"])) {
+				if(isset($dadosurl['openid_identifier']) && empty($dadosurl["erro"])) {
 			$openid->identity = $dadosurl['openid_identifier'];
-            header('Location: ' . $openid->authUrl());
-        }
+						header('Location: ' . $openid->authUrl());
+				}
 ?>
 
 <body>
@@ -63,19 +63,19 @@ function submete(quem){
 	}
 	if(quem == "google")
 	{
-		var u = window.prompt("Usuário","");
+		var u = window.prompt("Usuï¿½rio","");
 		if(!u){return;}
 		var url = 'http://www.google.com/profiles/'+u;
 	}
 	if(quem == "myopenid")
 	{
-		var u = window.prompt("Usuário","");
+		var u = window.prompt("Usuï¿½rio","");
 		if(!u){return;}
 		var url = "http://"+u+".myopenid.com/";
-	}	
+	}
 	if(quem == "myspace")
 	{
-		var u = window.prompt("Usuário","");
+		var u = window.prompt("Usuï¿½rio","");
 		if(!u){return;}
 		var url = 'http://myspace.com/'+u;
 	}
@@ -85,13 +85,13 @@ function submete(quem){
 	}
 	if(quem == "wordpress")
 	{
-		var u = window.prompt("Usuário","");
+		var u = window.prompt("Usuï¿½rio","");
 		if(!u){return;}
 		var url = 'http://'+u+'wordpress.com';
 	}
 	if(quem == "blogger")
 	{
-		var u = window.prompt("Usuário","");
+		var u = window.prompt("Usuï¿½rio","");
 		if(!u){return;}
 		var url = 'http://'+u+'.blogspot.com';
 	}
@@ -108,9 +108,9 @@ function submete(quem){
 }
 </script>
 <?php
-    } elseif($openid->mode == 'cancel') {
-        echo 'User has canceled authentication!';
-    } else {
+		} elseif($openid->mode == 'cancel') {
+				echo 'User has canceled authentication!';
+		} else {
 		if($_SESSION["openidservico"] != "twitter" && $_SESSION["openidservico"] != "facebook" && $_SESSION["openidservico"] != "linkedin"){
 			$valido = $openid->validate();
 			$_SESSION["openid"] = false;
@@ -133,9 +133,9 @@ function submete(quem){
 			$url = "login.php?login&erro=ok";
 			header('Location: ' . $url);
 		}
-    }
+		}
 } catch(ErrorException $e) {
-    echo $e->getMessage();
+		echo $e->getMessage();
 	echo "<br>O nome de usuario pode estar errado.";
 }
 ?>

@@ -171,7 +171,7 @@ class ThematicMap
 					exit("cannot open <$file>\n");
 				}
 		*/
-				include(__DIR__."/../kmlmapserver/classes/zip.class.php");
+				include(dirname(__FILE__)."/../kmlmapserver/classes/zip.class.php");
 				$zip = new zipfile();
 				// Add balloon logo to archieve (300 x 30 px)
 				$zip->addFile($this->logoline, 'files/balloonlogo.png');

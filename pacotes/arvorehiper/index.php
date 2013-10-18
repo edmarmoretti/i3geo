@@ -1,5 +1,5 @@
 <?php
-include("../../ms_configura.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $url = $protocolo[0]."://".$_SERVER['HTTP_HOST']."/".basename($locaplic)."/admin/hiperbolica.php";
 $i3geo = $protocolo[0]."://".$_SERVER['HTTP_HOST']."/".basename($locaplic);
@@ -11,8 +11,8 @@ $i3geo = $protocolo[0]."://".$_SERVER['HTTP_HOST']."/".basename($locaplic);
 </head>
 <STYLE TYPE="text/css">
 table {
-    width:100%;
-    text-align: left;
+		width:100%;
+		text-align: left;
 }
 
 body,ul,td {
@@ -51,30 +51,30 @@ border: 1px solid black;
 </STYLE>
 <body leftmargin="0" topmargin="0" class=" yui-skin-sam">
 		<applet style=z-index:0;" code="tree.HTApplet.class" archive="tree4.jar" width="100%" height="100%" MAYSCRIPT="true">
-		    <param name="htfile"  value="">
-		    <param name="xmlfile" value="<?php echo $url;?>">
-		    <param name="xmltipo" value="verbete">
-		    <param name="htbackcoloredit" value="0xFF00FF">
-		    <param name="htbackcolor" value="0xFFFFFF">
-		    <param name="htlinkcolor" value="0x000000">
-		    <param name="htsearchcolor" value="0xFF0000">
-		    <param name="hthintcolor"  value="0xFFFFD9">
-		    <param name="colornode" value="0xFFFACD">
-		    <param name="colortextnode" value="0x000000">
-		    <param name="colorrelationnode" value="0xE6E6FA">
-		    <param name="colortextrelationnode" value="0x00FF00">
-		    <param name="htbordertype" value="rounded">
-		    <param name="htfont" value="arial" >
-		    <param name="htfontsize" value="11">
-		    <param name="htopenwindow" value="self"> 
-   		    <param name="funcaoJS" value="SelecionaTema"> 
-		</applet> 
+				<param name="htfile"  value="">
+				<param name="xmlfile" value="<?php echo $url;?>">
+				<param name="xmltipo" value="verbete">
+				<param name="htbackcoloredit" value="0xFF00FF">
+				<param name="htbackcolor" value="0xFFFFFF">
+				<param name="htlinkcolor" value="0x000000">
+				<param name="htsearchcolor" value="0xFF0000">
+				<param name="hthintcolor"  value="0xFFFFD9">
+				<param name="colornode" value="0xFFFACD">
+				<param name="colortextnode" value="0x000000">
+				<param name="colorrelationnode" value="0xE6E6FA">
+				<param name="colortextrelationnode" value="0x00FF00">
+				<param name="htbordertype" value="rounded">
+				<param name="htfont" value="arial" >
+				<param name="htfontsize" value="11">
+				<param name="htopenwindow" value="self">
+					 <param name="funcaoJS" value="SelecionaTema">
+		</applet>
 <script>
 YAHOO.namespace("example.container");
 function SelecionaTema(id) {
-   var myString = new String(id);
-   var myarray = myString.split(',');
-   
+	 var myString = new String(id);
+	 var myarray = myString.split(',');
+
 	if(myarray[0] == "tema")
 	{
 		core_montaEditor("","320px","500px")
@@ -88,7 +88,7 @@ function SelecionaTema(id) {
 		var fechar = function()
 		{
 			YAHOO.example.container.panelEditor.destroy();
-			YAHOO.example.container.panelEditor = null;			
+			YAHOO.example.container.panelEditor = null;
 		}
 		var i3geo = function()
 		{
@@ -121,7 +121,7 @@ function SelecionaTema(id) {
 }
 function listaTemasPorTag(dados)
 {
-	var ins = "Os seguintes temas contém o TAG clicado:<br><br>";
+	var ins = "Os seguintes temas contï¿½m o TAG clicado:<br><br>";
 	ins += '<input type=button id=fechar value="Fechar" style="left:-5px;" /><br>'
 
 	for (i=0;i < dados.length; i++)
@@ -141,7 +141,7 @@ function listaTemasPorTag(dados)
 	var fechar = function()
 	{
 		YAHOO.example.container.panelEditor.destroy();
-		YAHOO.example.container.panelEditor = null;			
+		YAHOO.example.container.panelEditor = null;
 	}
 	var adiciona = new YAHOO.widget.Button("fechar",{ onclick: { fn: fechar } });
 	var temp = function(e)
@@ -150,17 +150,17 @@ function listaTemasPorTag(dados)
 }
 function removeAcentos(palavra)
 {
-	var re = /ã|á|à|â/gi;
+	var re = /ï¿½|ï¿½|ï¿½|ï¿½/gi;
 	palavra = palavra.replace(re,"a");
-	var re = /é/gi;
+	var re = /ï¿½/gi;
 	palavra = palavra.replace(re,"e");
-	var re = /í/gi;
+	var re = /ï¿½/gi;
 	palavra = palavra.replace(re,"i");
-	var re = /ó|õ/gi;
+	var re = /ï¿½|ï¿½/gi;
 	palavra = palavra.replace(re,"o");
-	var re = /ç/gi;
+	var re = /ï¿½/gi;
 	palavra = palavra.replace(re,"c");
-	var re = /ú/gi;
+	var re = /ï¿½/gi;
 	palavra = palavra.replace(re,"u");
 	return(palavra);
 }

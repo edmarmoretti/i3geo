@@ -1,6 +1,6 @@
 <?php
 require_once("common.inc.php");
-include("../../../ms_configura.php");
+include(dirname(__FILE__)."/../../../ms_configura.php");
 
 $test_consumer = new OAuthConsumer($linkedinoauth["consumerkey"], $linkedinoauth["consumersecret"], NULL);
 $req_token = new OAuthConsumer($linkedinoauth["consumerkey"], $linkedinoauth["consumersecret"], 1);
@@ -9,7 +9,7 @@ $acc_token = new OAuthConsumer($linkedinoauth["consumerkey"], $linkedinoauth["co
 $sig_method = $hmac_method;
 $user_sig_method = @$_GET['sig_method'];
 if ($user_sig_method) {
-  $sig_method = $sig_methods[$user_sig_method];
+	$sig_method = $sig_methods[$user_sig_method];
 }
 
 $req_req = OAuthRequest::from_consumer_and_token($test_consumer, NULL, "GET", $base_url . "/request_token.php");
@@ -86,19 +86,19 @@ A successful request will echo the non-OAuth parameters sent to it, for example:
 <?php
 $sig_methods = $test_server->get_signature_methods();
 foreach ($sig_methods as $key => $method) {
-  print "<li>$key";
-  if ($key != $sig_method->get_name()) {
-    print "(<a href='?sig_method=$key'>switch</a>)";
-  }
-  print "</li>\n";
+	print "<li>$key";
+	if ($key != $sig_method->get_name()) {
+		print "(<a href='?sig_method=$key'>switch</a>)";
+	}
+	print "</li>\n";
 }
 ?>
 </ul>
 
-<?php 
+<?php
 if ("RSA-SHA1" == $sig_method->get_name()) {
-  print "<pre>" . $sig_method->fetch_private_cert($req_req) . "</pre>\n";
-  print "<pre>" . $sig_method->fetch_public_cert($req_req) . "</pre>\n";
+	print "<pre>" . $sig_method->fetch_private_cert($req_req) . "</pre>\n";
+	print "<pre>" . $sig_method->fetch_public_cert($req_req) . "</pre>\n";
 }
 ?>
 
