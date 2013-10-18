@@ -173,16 +173,14 @@ if($funcao == "criaMapa"){
 	//primeiro &eacute; necess&aacute;rio carregar o ms_configura.php para pegar a vari&aacute;vel $locaplic
 	//
 	$d = "";
-	if(!file_exists("ms_configura.php"))
-	{$d = "../";}
-	include_once($d."ms_configura.php");
+	include_once(dirname(__FILE__)."/../ms_configura.php");
 	//
 	//&eacute; necess&aacute;rio mudar o diretório em fun&ccedil;&atilde;o dos includes que s&atilde;o feitos pelo ms_criamapa.php
 	//
-	chdir($locaplic);
+	//chdir($locaplic);
 	$interfaceTemp = $interface;
 	$interface = "mashup";
-	include_once("ms_criamapa.php");
+	include_once(dirname(__FILE__)."/../ms_criamapa.php");
 	$_SESSION["interface"] = $interfaceTemp;
 	$temp = $_SESSION["map_file"];
 	$id = session_id();
@@ -893,7 +891,7 @@ Gera os arquivos para download de um tema for&ccedil;ando um mapfile vazio.
 	case "DOWNLOAD3":
 		//caso o tema tenha de vir do sistema de metadados estatisticos
 		if(isset($id_medida_variavel) && $id_medida_variavel != ""){
-			include("../admin/php/classe_metaestat.php");
+			include(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
 			$m = new Metaestat();
 			$m->nomecache = "ogcmetaestat".$id_medida_variavel;
 			$tema = $m->mapfileMedidaVariavel($id_medida_variavel,"",1,"","","","","","",true);
@@ -1747,7 +1745,7 @@ Altera a extens&atilde;o geogr&aacute;fica do mapa.
 <classe_navegacao.php>
 */
 /*
- Valor: MARCADORES2SHP
+Valor: MARCADORES2SHP
 
 Converte marcadores em shapefile
 */
@@ -2129,7 +2127,7 @@ Pega a lista de drives registrados para o usu&aacute;rio atual.
 A lista de drives &eacute; definida no ms_configura e permite que o usu&aacute;rio navegue pelos arquivos do servidor.
 */
 	case "LISTADRIVES":
-		include("../ms_configura.php");
+		include(dirname(__FILE__)."/../ms_configura.php");
 		//verifica se est&aacute; cadastrado
 		$ipcliente = pegaIPcliente();
 		$retorno = array();

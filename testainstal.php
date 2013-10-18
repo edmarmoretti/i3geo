@@ -160,6 +160,7 @@ echo "<br><pre>Extens&otilde;es:<br>";
 if (!extension_loaded("curl")){
 	echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a curl que pode afetar algumas funcionalidades do i3Geo<br></span>";
 }
+if (!extension_loaded("json")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a json<br></span>";}
 if (!extension_loaded("imagick")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a imagick<br></span>";}
 if (!extension_loaded("libxml")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a libxml<br></span>";}
 if (!extension_loaded( "PDO")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a PDO<br></span>";}

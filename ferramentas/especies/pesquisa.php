@@ -35,12 +35,12 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 */
 set_time_limit(180);
-require_once("../../pacotes/cpaint/cpaint2.inc.php");
-require_once("../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 if (function_exists('ereg'))
-{require_once('../../pacotes/SOAPdepreciado/nusoap.php');}
+{require_once(dirname(__FILE__).'/../../pacotes/SOAPdepreciado/nusoap.php');}
 else
-{require_once('../../pacotes/SOAP/nusoap.php');}
+{require_once(dirname(__FILE__).'/../../pacotes/SOAP/nusoap.php');}
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
@@ -48,8 +48,8 @@ foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
-require_once("../../pacotes/phpxbase/api_conversion.php");
-require_once ("../../classesphp/carrega_ext.php");
+require_once(dirname(__FILE__)."/../../pacotes/phpxbase/api_conversion.php");
+require_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 $cp = new cpaint();
 $servico = "http://mapas.mma.gov.br/webservices/especiesws.php";
 
@@ -89,7 +89,7 @@ function listaBancos()
 	if (function_exists('ereg'))
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
 	else
-	$soapclient = new nusoap_client($servico);	
+	$soapclient = new nusoap_client($servico);
 	$resultado = $soapclient->call("natureserveDatabase","");
 	$cp->set_data($resultado);
 }
@@ -134,17 +134,17 @@ function adicionatema()
 {
 	global $map_file,$dir_tmp,$imgdir,$banco,$familia,$servico,$cp,$especie,$cor,$locaplic,$imgurl;
 	$retorno = "erro.";
-	
+
 	if (function_exists('ereg'))
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
 	else
 	$soapclient = new nusoap_client($servico);
-	
+
 	$resultado = $soapclient->call("natureserveGidEspecie",array($banco,$especie));
 	$tabelas = $resultado["especies"];
 	$mapa = ms_newMapObj($map_file);
-	include("../../classesphp/classe_mapa.php");
-	include("../../classesphp/funcoes_gerais.php");
+	include(dirname(__FILE__)."/../../classesphp/classe_mapa.php");
+	include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 	$nomeslegenda["munamb1"] = "p&aacute;ssaros (poligonos) ".$especie;
 	$nomeslegenda["munamb2"] = "anf&iacute;bios (poligonos) ".$especie;
 	$nomeslegenda["munamb3"] = "mam&iacute;feros (poligonos) ".$especie;
@@ -157,17 +157,17 @@ function adicionatema()
 			$retorno = "ok";
 			$nometema = explode(".",$tabela["tabela"]);
 			$tema = $nometema[1];
-	 		$servico = "http://mapas.mma.gov.br/webservices/especieswms.php?gid=".$tabela["gids"]."&cor=".$cor;
-	 		$nome = "default";
-	 		$proj = "EPSG:4618";
-	 		$formato = "image/png";
-	 		$nomecamada = $nomeslegenda[$tema];
-	 		$suportasld = "nao";
-	 		$versao = "1.1.0";
-	 		$tiporep = "";
-	 		$tipo = "";
+			$servico = "http://mapas.mma.gov.br/webservices/especieswms.php?gid=".$tabela["gids"]."&cor=".$cor;
+			$nome = "default";
+			$proj = "EPSG:4618";
+			$formato = "image/png";
+			$nomecamada = $nomeslegenda[$tema];
+			$suportasld = "nao";
+			$versao = "1.1.0";
+			$tiporep = "";
+			$tipo = "";
 			$m = new Mapa($map_file);
-	 		$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld);
+			$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld);
 			$m->salva();
 		}
 	}

@@ -37,10 +37,10 @@ Arquivo:
 
 i3geo/admin/php/parsemapfile.php
 */
-include("../../ms_configura.php");
-include_once("../../classesphp/funcoes_gerais.php");
-include_once("../../classesphp/carrega_ext.php");
-include_once("../../classesphp/pega_variaveis.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
+include_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+include_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
+include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 //
 //essa variavel indica se a senha do banco e bloqueada ou nao caso
 //o tema seja do tipo postgis
@@ -196,7 +196,7 @@ function legendaValorUnico($layername)
 	$temp = implode(" ,",$temp);
 	//$temp = "1111 ,-1 ,-1 ,-1 ,-1 ,-1 ,-1";
 	$xml .= "<property key='typeKeys' value='$temp'/>\n";
-    $xml .= "<property key='typeValues' value='$temp'/>\n";
+		$xml .= "<property key='typeValues' value='$temp'/>\n";
 	$xml .= "<property key='followHeaderEncoding' value='true'/>\n";
 	$xml .= "<xml-tag><property key='className' value='com.iver.cit.gvsig.fmap.core.v02.FSymbol'/><property key='m_symbolType' value='4'/><property key='m_Style' value='1'/><property key='m_useOutline' value='true'/><property key='m_Color' value='150,150,150,255'/><property key='m_outlineColor' value='255,255,255,255'/><property key='m_bUseFontSize' value='true'/><property key='m_bDrawShape' value='true'/><property key='m_Size' value='2'/><property key='m_Rotation' value='0'/><property key='m_LinePattern' value='0'/><property key='m_stroke' value='1.0'/><property key='m_bUseSize' value='false'/><property key='m_AlingVert' value='0'/><property key='m_AlingHoriz' value='0'/><property key='m_Descrip' value='Default'/><property key='rgb' value='-14902251'/></xml-tag>";
 	$xml .= "<xml-tag><property key='className' value='com.iver.cit.gvsig.fmap.core.v02.FSymbol'/><property key='m_symbolType' value='4'/><property key='m_Style' value='1'/><property key='m_useOutline' value='true'/><property key='m_Color' value='150,150,150,255'/><property key='m_outlineColor' value='255,255,255,255'/><property key='m_bUseFontSize' value='true'/><property key='m_bDrawShape' value='true'/><property key='m_Size' value='2'/><property key='m_Rotation' value='0'/><property key='m_LinePattern' value='0'/><property key='m_stroke' value='1.0'/><property key='m_bUseSize' value='false'/><property key='m_AlingVert' value='0'/><property key='m_AlingHoriz' value='0'/><property key='m_Descrip' value='Default'/><property key='rgb' value='-14902251'/></xml-tag>\n";

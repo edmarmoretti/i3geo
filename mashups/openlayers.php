@@ -2,9 +2,9 @@
 /**
  * DESLIGACACHE (opcional) {sim|nao} - forca a nao usar o cache de imagens qd definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
  */
-include_once("../ms_configura.php");
-include_once("../classesphp/pega_variaveis.php");
-include_once("../classesphp/carrega_ext.php");
+include_once(dirname(__FILE__)."/../ms_configura.php");
+include_once(dirname(__FILE__)."/../classesphp/pega_variaveis.php");
+include_once(dirname(__FILE__)."/../classesphp/carrega_ext.php");
 error_reporting(0);
 //
 //recupera um mapa salvo no banco de administracao

@@ -733,11 +733,8 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 	{
 		if (file_exists($nomearq))
 		{
-				if($this->dbaseExiste == false){
-				if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-				include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-				else
-				include_once "../pacotes/phpxbase/api_conversion.php";
+			if($this->dbaseExiste == false){
+				include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 			}
 			//define o nome do novo shapefile que ser&aacute; criado
 			$nomefinal = nomeRandomico();
@@ -827,11 +824,8 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 	{
 		if (file_exists($nomearq))
 		{
-				if($this->dbaseExiste == false){
-				if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-				include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-				else
-				include_once "../pacotes/phpxbase/api_conversion.php";
+			if($this->dbaseExiste == false){
+				include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 			}
 			//
 			//define os nomes dos novos shapefiles que ser&atilde;o criados
@@ -1007,10 +1001,7 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo.
 	{
 		set_time_limit(3000);
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
-			else
-			{include_once "../pacotes/phpxbase/api_conversion.php";}
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		$layerPt = $this->mapa->getlayerbyname($temaPt);
 		$layerPt->set("template","none.htm");
@@ -1174,10 +1165,7 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	set_time_limit(180);
 	//para manipular dbf
 	if($this->dbaseExiste == false){
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 	}
 	//define o nome do novo shapefile que ser&aacute; criado
 	$nomefinal = nomeRandomico();
@@ -1321,10 +1309,7 @@ nome do layer criado com o buffer.
 		{$items = array();}
 		//para manipular dbf
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		$nomebuffer = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomebuffer;
@@ -1435,10 +1420,7 @@ $item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valore
 		set_time_limit(180);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		//error_reporting(0);
 		$nomeCentro = nomeRandomico();
@@ -1521,10 +1503,7 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo.
 		set_time_limit(180);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		$nomeCentroides = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentroides;
@@ -1604,10 +1583,7 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		set_time_limit(180);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
@@ -1733,10 +1709,7 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		set_time_limit(180);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
@@ -1888,10 +1861,7 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		set_time_limit(180);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
@@ -2047,10 +2017,7 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 		set_time_limit(180);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		$layerPt = $this->mapa->getlayerbyname($temaPt);
 		$layerPt->set("template","none.htm");
@@ -2155,10 +2122,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		//para manipular dbf
 		if(!isset($item)){$item="";}
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		$shapes =retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$indices = array();
@@ -2265,10 +2229,7 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 		//para manipular dbf
 		if(!isset($item)){$item="";}
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$indices = array();
@@ -2606,10 +2567,7 @@ $tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|ar
 		if ($tiposhape == 1){$tiposhapefile = MS_SHP_ARC;}
 		//cria o shapefile
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			else
-			include_once "../pacotes/phpxbase/api_conversion.php";
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 		$diretorio = dirname($this->arquivo);
 		$novonomelayer = nomeRandomico();

@@ -1,7 +1,7 @@
 <?php
-require_once("../../classesphp/pega_variaveis.php");
-require_once("../../classesphp/funcoes_gerais.php");
-include_once ("../../classesphp/carrega_ext.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($g_sid))
@@ -23,7 +23,7 @@ if (ob_get_level() == 0) ob_start();
 if (isset($_FILES['i3GEOuploadgpx']['name']))
 {
 	//$ndir = dirname($filen);
-	require_once ("../../ms_configura.php");
+	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	$mapa = ms_newMapObj($map_file);
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	ob_flush();

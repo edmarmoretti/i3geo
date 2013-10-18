@@ -13,7 +13,7 @@ $caminho = "../";
 //
 //include do ms_criamapa.php que inicia o I3Geo
 //
-include ("../ms_criamapa.php");
+include (dirname(__FILE__)."/../ms_criamapa.php");
 //
 //fun&ccedil;&atilde;o que ser&aacute; executada
 //

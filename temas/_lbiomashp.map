@@ -29,7 +29,9 @@ MAP
       NAME "CAATINGA"
       EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
       STYLE
-        COLOR 164 186 131
+        ANGLE 0
+        COLOR 247 114 249
+        OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS
@@ -37,7 +39,9 @@ MAP
       NAME "PAMPA"
       EXPRESSION ('[CD_LEGENDA]'eq'PAMPA')
       STYLE
-        COLOR 129 208 7
+        ANGLE 0
+        COLOR 178 88 255
+        OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS
@@ -45,7 +49,9 @@ MAP
       NAME "CERRADO"
       EXPRESSION ('[CD_LEGENDA]'eq'CERRADO')
       STYLE
-        COLOR 74 234 68
+        ANGLE 0
+        COLOR 67 52 102
+        OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS
@@ -53,7 +59,9 @@ MAP
       NAME "PANTANAL"
       EXPRESSION ('[CD_LEGENDA]'eq'PANTANAL')
       STYLE
-        COLOR 60 196 145
+        ANGLE 0
+        COLOR 220 65 64
+        OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS
@@ -61,7 +69,9 @@ MAP
       NAME "AMAZONIA"
       EXPRESSION ('[CD_LEGENDA]'eq'AMAZONIA')
       STYLE
-        COLOR 248 68 118
+        ANGLE 0
+        COLOR 195 70 245
+        OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS
@@ -69,7 +79,9 @@ MAP
       NAME "MATA ATLANTICA"
       EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLANTICA')
       STYLE
-        COLOR 7 115 180
+        ANGLE 0
+        COLOR 216 193 38
+        OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS

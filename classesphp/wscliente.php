@@ -48,9 +48,9 @@ http://localhost/i3geo/classesphp/wscliente.php?funcao=listaRSSws&rss=http://loc
 */
 include_once("pega_variaveis.php");
 include_once("lews/wms_functions.php");
-include_once("../pacotes/cpaint/cpaint2.inc.php");
+include_once(dirname(__FILE__)."/../pacotes/cpaint/cpaint2.inc.php");
 include_once("carrega_ext.php");
-include("../ms_configura.php");
+include(dirname(__FILE__)."/../ms_configura.php");
 $cp = new cpaint();
 //
 //busca o getcapabilities de um wms
@@ -137,7 +137,7 @@ Retorno:
 function funcoesws()
 {
 	global $servico,$cp;
-	include_once('../pacotes/SOAP/nusoap.php');
+	include_once(dirname(__FILE__).'/../pacotes/SOAP/nusoap.php');
 	$service_request = $servico; // . "?wsdl";
 	$service_r = file($service_request);
 	$service_r = implode("",$service_r);
@@ -239,8 +239,8 @@ function dadosWS()
 {
 	global $param,$cp,$servico,$funcaows;
 	//ini_set("memory_limit","28M");
-	include_once('../pacotes/SOAP/nusoap.php');
-	include_once("../pacotes/SOAP/easy_parser.inc");
+	include_once(dirname(__FILE__).'/../pacotes/SOAP/nusoap.php');
+	include_once(dirname(__FILE__)."/../pacotes/SOAP/easy_parser.inc");
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
 	$retorna = "erro";
 	$parametros = "";
@@ -309,7 +309,7 @@ function parFuncoesws()
 {
 	global $cp,$servico,$funcaows;
 	$retorna = array();
-	include_once('../pacotes/SOAP/nusoap.php');
+	include_once(dirname(__FILE__).'/../pacotes/SOAP/nusoap.php');
 	$service_request = $servico; // . "?wsdl";
 	$service_r = file($service_request);
 	$service_r = implode("",$service_r);
@@ -551,7 +551,7 @@ Retorno:
 function listaRSSws()
 {
 	global $cp,$rss;
-	require('../pacotes/magpierss/rss_fetch.inc');
+	require(dirname(__FILE__).'/../pacotes/magpierss/rss_fetch.inc');
 	$rsss = explode("|",$rss);
 	$erro = "Erro. Nao foi possivel ler o arquivo";
 	foreach ($rsss as $r)

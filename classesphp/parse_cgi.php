@@ -61,7 +61,7 @@ session_start();
 $mapext = $temp;
 $map_file = $_SESSION["map_file"];
 
-include("../ms_configura.php");
+include(dirname(__FILE__)."/../ms_configura.php");
 if(isset($fingerprint))
 {
 	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
@@ -95,7 +95,7 @@ foreach ($layersNames as $layerName)
 			for($j=0;$j<$nestilos;++$j){
 				$estilo = $classe->getstyle($j);
 				$estilo->set("symbolname","pt1");
-			}	
+			}
 		}
 	}
 }

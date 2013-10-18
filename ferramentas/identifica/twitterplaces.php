@@ -13,13 +13,13 @@ text-align:left;
 </head>
 <body style="background-color:white;margin:10px">
 <?php
-include("../../classesphp/carrega_ext.php");
+include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 $s = PHP_SHLIB_SUFFIX;
 if(!function_exists('curl_init'))
 {@dl( 'php_curl'.'.'.$s );}
 if(!function_exists('curl_init'))
 {echo "curl n&atilde;o instalado";}
-include("../../ms_configura.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
 
 
 $ch = curl_init();

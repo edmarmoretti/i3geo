@@ -1,5 +1,5 @@
 <?php
-include("../../ms_configura.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
 ?>
 <html>
 <head>
@@ -48,28 +48,28 @@ Function: inicializa
 
 Cria o mapa do Google Maps e adiciona os bot&otilde;es especiais do i3Geo. Define os eventos que disparam modifica&ccedil;&otilde;es no mapa
 principal do i3Geo quando &eacute; feita a navega&ccedil;&atilde;o.
-*/ 
+*/
 function inicializa(){
 	window.parent.i3GEO.util.criaPin("boxpingoogle",window.parent.i3GEO.configura.locaplic+'/imagens/dot1red.gif',"5px","5px");
 	var box = window.parent.$i("boxpingoogle");
 	counterClick = 0
-    var m = document.getElementById("mapa")
+		var m = document.getElementById("mapa")
 	if(window.parent.i3GEO){
-    	m.style.width = (window.parent.i3GEO.parametros.w / 2) - 20 + "px";
-    	m.style.height = (window.parent.i3GEO.parametros.h / 2) -20 + "px";
+			m.style.width = (window.parent.i3GEO.parametros.w / 2) - 20 + "px";
+			m.style.height = (window.parent.i3GEO.parametros.h / 2) -20 + "px";
 		i3geoOverlay = false;
 		if(window.parent.document.getElementById("boxg"))
 		window.parent.document.getElementById("boxg").style.zIndex = 0
-    	navm = false; // IE
-    	navn = false; // netscape
-    	var app = navigator.appName.substring(0,1);
-    	if (app=='N') navn=true; else navm=true;
-    	docmapa = window.parent.document
-    	pol = window.parent.i3GEO.parametros.mapexten
-    	ret = pol.split(" ")
-    	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1
-    	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1
-    	pt = pt1+","+pt2
+			navm = false; // IE
+			navn = false; // netscape
+			var app = navigator.appName.substring(0,1);
+			if (app=='N') navn=true; else navm=true;
+			docmapa = window.parent.document
+			pol = window.parent.i3GEO.parametros.mapexten
+			ret = pol.split(" ")
+			pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1
+			pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1
+			pt = pt1+","+pt2
 		try{
 			var coordenadas = window.parent.i3GEO.navega.dialogo.google.coordenadas;
 		}
@@ -79,38 +79,38 @@ function inicializa(){
 		var pt1 = -54;
 		var pt2 = -12;
 	}
-    map = new GMap2(m);
-    map.setMapType(G_SATELLITE_MAP);
-    map.addMapType(G_SATELLITE_3D_MAP);
-    map.addControl(new GLargeMapControl());
-    map.addControl(new GMapTypeControl());
-    map.addControl(new GScaleControl());
-    map.setCenter(new GLatLng(pt2,pt1), 8);
+		map = new GMap2(m);
+		map.setMapType(G_SATELLITE_MAP);
+		map.addMapType(G_SATELLITE_3D_MAP);
+		map.addControl(new GLargeMapControl());
+		map.addControl(new GMapTypeControl());
+		map.addControl(new GScaleControl());
+		map.setCenter(new GLatLng(pt2,pt1), 8);
 	if(coordenadas)
 	{adicionaMarcasMapa(coordenadas);}
-    GEvent.addListener(map, "moveend", function() {
-    	ondegoogle(map);
-    });
-   	GEvent.addListener(map, "zoomend", function() {
+		GEvent.addListener(map, "moveend", function() {
+			ondegoogle(map);
+		});
+		 GEvent.addListener(map, "zoomend", function() {
 		if(window.parent.i3GEO){
-   			ondegoogle();
-   			try{
+				 ondegoogle();
+				 try{
 				map.removeOverlay(wmsmap);
 				wmsmap = new GGroundOverlay(criaWMS(), map.getBounds());
 				map.addOverlay(wmsmap);
-   			}catch(x){}
+				 }catch(x){}
 		}
-   	}); 	
-   	GEvent.addListener(map, "dragend", function() {
+		 });
+		 GEvent.addListener(map, "dragend", function() {
 		if(window.parent.i3GEO){
 			ondegoogle();
 			try{
 				map.removeOverlay(wmsmap);
-   				wmsmap = new GGroundOverlay(criaWMS(), map.getBounds());
+					 wmsmap = new GGroundOverlay(criaWMS(), map.getBounds());
 				map.addOverlay(wmsmap);
 			}catch(x){}
 		}
-   	});
+		 });
 	GEvent.addListener(map, "mousemove", function(ponto) {
 		var teladms,tela,temp,
 			mapexten = window.parent.i3GEO.parametros.mapexten;
@@ -129,7 +129,7 @@ function inicializa(){
 		window.parent.i3GEO.eventos.mousemoveMapa();
 		if(window.parent.i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
-	 	temp = mapexten.split(" ");
+		temp = mapexten.split(" ");
 		if(ponto.x < temp[2] && ponto.y < temp[3]){
 			xy = window.parent.i3GEO.calculo.dd2tela(ponto.x,ponto.y,window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),mapexten,window.parent.i3GEO.parametros.pixelsize);
 			box.style.display = "block";
@@ -140,15 +140,15 @@ function inicializa(){
 		}
 	});
 	function botaoI3geo() {}
-    botaoI3geo.prototype = new GControl();
-    botaoI3geo.prototype.initialize = function(map) {
+		botaoI3geo.prototype = new GControl();
+		botaoI3geo.prototype.initialize = function(map) {
 		var container = document.createElement("div");
 		var i3geo = document.createElement("div");
 		this.setButtonStyle_(i3geo);
-    	container.appendChild(i3geo);
-      	i3geo.appendChild(document.createTextNode("i3Geo"));
-      	GEvent.addDomListener(i3geo, "click", function() {
-        	//ativaI3geo();
+			container.appendChild(i3geo);
+				i3geo.appendChild(document.createTextNode("i3Geo"));
+				GEvent.addDomListener(i3geo, "click", function() {
+					//ativaI3geo();
 			try
 			{map.removeOverlay(wmsmap);wmsmap = null;}
 			catch(x){
@@ -156,38 +156,38 @@ function inicializa(){
 				map.addOverlay(wmsmap);
 				if(typeof(console) !== 'undefined'){console.error(x);}
 			}
-      	});
+				});
 
-      	var rota = document.createElement("div");
-      	this.setButtonStyle_(rota);
-      	container.appendChild(rota);
-      	rota.appendChild(document.createTextNode("Rota"));
-      	GEvent.addDomListener(rota, "click", function() {
-      		ativaI3geoRota();
-      	});
-      	map.getContainer().appendChild(container);
-      	return container;
-    }
-    botaoI3geo.prototype.getDefaultPosition = function() {
-      	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(50, 50));
-    }
-    botaoI3geo.prototype.setButtonStyle_ = function(button) {
-      	button.style.textDecoration = "none";
-      	button.style.color = "black";
-      	button.style.backgroundColor = "white";
-      	button.style.font = "small Arial";
-      	button.style.border = "1px solid black";
-      	button.style.padding = "1px";
-      	button.style.marginBottom = "3px";
-      	button.style.textAlign = "center";
-      	button.style.width = "3em";
-      	button.style.cursor = "pointer";
-    }
-    if(window.parent.i3GEO){
-    	if(window.parent.i3GEO.parametros.mapfile)
+				var rota = document.createElement("div");
+				this.setButtonStyle_(rota);
+				container.appendChild(rota);
+				rota.appendChild(document.createTextNode("Rota"));
+				GEvent.addDomListener(rota, "click", function() {
+					ativaI3geoRota();
+				});
+				map.getContainer().appendChild(container);
+				return container;
+		}
+		botaoI3geo.prototype.getDefaultPosition = function() {
+				return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(50, 50));
+		}
+		botaoI3geo.prototype.setButtonStyle_ = function(button) {
+				button.style.textDecoration = "none";
+				button.style.color = "black";
+				button.style.backgroundColor = "white";
+				button.style.font = "small Arial";
+				button.style.border = "1px solid black";
+				button.style.padding = "1px";
+				button.style.marginBottom = "3px";
+				button.style.textAlign = "center";
+				button.style.width = "3em";
+				button.style.cursor = "pointer";
+		}
+		if(window.parent.i3GEO){
+			if(window.parent.i3GEO.parametros.mapfile)
 		map.addControl(new botaoI3geo());
 		ondegoogle(map);
-    }
+		}
 	if(coordenadas)
 	{adicionaMarcasMapa(coordenadas);}
 }
@@ -214,7 +214,7 @@ function ondegoogle()
 	var ne = bd.getNorthEast();
 	var xyMin = window.parent.i3GEO.calculo.dd2tela(so.lng(),so.lat(),window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
 	var xyMax = window.parent.i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
-	
+
 	var box = window.parent.$i("boxg")
 	var w = xyMax[0]-xyMin[0]
 	var h = xyMin[1]-xyMax[1]
@@ -284,14 +284,14 @@ function criaTile(){
 	parametros += '&mode=tile';
 	parametros += '&tilemode=gmap';
 	parametros += '&tile={X}+{Y}+{Z}';
-	return(cgi+parametros);		
+	return(cgi+parametros);
 }
 function ativaI3geo()
 {
 	var i3GEOTile = new GTileLayer(null,0,18,{
-		 tileUrlTemplate:criaTile(),
-		 isPng:true,
-		 opacity:1 });
+		tileUrlTemplate:criaTile(),
+		isPng:true,
+		opacity:1 });
 	i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
 	map.addOverlay(i3GEOTileO);
 }
@@ -314,7 +314,7 @@ Obt&eacute;m os parâmetros para cria&ccedil;&atilde;o da rota, inclusive o ponto
 function parametrosRota(overlay,latlng)
 {
 	if(counterClick == 1)
-	{	
+	{
 		counterClick++;
 		i3GEO.janela.tempoMsg("Clique o ponto de destino da rota");
 		pontoRota1 = latlng
@@ -357,9 +357,9 @@ function constroiRota()
 			}
 		}
 	}
-	
+
 	var pt1 = function(response)
-	{  	
+	{
 		map.clearOverlays();
 		if (!response || response.Status.code != 200) {
 			i3GEO.janela.tempoMsg("Status Code:" + response.Status.code);
@@ -368,7 +368,7 @@ function constroiRota()
 			point = new GLatLng(place.Point.coordinates[1],place.Point.coordinates[0]);
 			marker = new GMarker(point);
 			marker.openInfoWindowHtml(
-				'<b>orig latlng:</b>' + response.name + '<br/>' + 
+				'<b>orig latlng:</b>' + response.name + '<br/>' +
 				'<b>latlng:</b>' + place.Point.coordinates[0] + "," + place.Point.coordinates[1] + '<br>' +
 				'<b>Status Code:</b>' + response.Status.code + '<br>' +
 				'<b>Status Request:</b>' + response.Status.request + '<br>' +
@@ -423,7 +423,7 @@ function montaRota()
 			{
 				var cp = new cpaint();
 				cp.set_response_type("JSON");
-				//cp.set_debug(2) 
+				//cp.set_debug(2)
 				var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid+"&funcao=sphPT2shp&para=linha&tema="+temaNovo;
 				cp.call(p,"sphPT2shp",window.parent.i3GEO.atualiza);
 				cursor("default");
@@ -464,9 +464,9 @@ function cursor(c){
 	var d = document.getElementById("mapa");
 	d.firstChild.style.cursor = c;
 }
-    </script>
-  </head>
-  <body onload="inicializa()">
-    <div id="mapa" style="width: 440px; height: 340px"></div>
-    </body>
+		</script>
+	</head>
+	<body onload="inicializa()">
+		<div id="mapa" style="width: 440px; height: 340px"></div>
+		</body>
 </html>

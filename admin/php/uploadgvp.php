@@ -16,7 +16,7 @@ if (ob_get_level() == 0) ob_start();
 <p>
 <?php
 if (isset($_FILES['i3GEOuploadgvp']['name'])){
-	require_once ("../../ms_configura.php");
+	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	ob_flush();
 	flush();

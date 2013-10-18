@@ -1,5 +1,5 @@
 <?php
-include("../versao.php");
+include(dirname(__FILE__)."/../versao.php");
 ?>
 <html>
 <head>
@@ -17,10 +17,10 @@ p,td
 	padding:2px;
 }
 .olControlEditingToolbar1 {
-    height: 20px;
-    left: 20px;
-    position: relative;
-    width: 100%;
+		height: 20px;
+		left: 20px;
+		position: relative;
+		width: 100%;
 	float: left;
 }
 
@@ -32,7 +32,7 @@ p,td
 <p><img src="../imagens/i3geo1.jpg" /></p>
 <p><?php echo $mensagemInicia;?></p>
 <p style='font-size:16px'>Documenta&ccedil;&atilde;o do editor</p>
-</div> 
+</div>
 <table class="olControlEditingToolbar1" >
 	<tr>
 		<td style=width:20px ><div class="editorOLprocuraItemInactive"></div></td>
@@ -85,7 +85,7 @@ p,td
 	<tr>
 		<td style=width:20px ><div class="editorOLtoolsItemInactive"></div></td>
 		<td>Modifique as geometrias aplicando opera&ccedil;&otilde;es como uni&atilde;o, intersec&ccedil;&atilde;o, etc.</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td style=width:20px ><div class="editorOLselecaoItemInactive"></div></td>
 		<td>Clique sobre uma geometria para selecion&aacute;-la. Utilize a tecla 'shift' para adicionar ou remover geometrias de um conjunto selecionado.</td>
@@ -97,7 +97,7 @@ p,td
 	<tr>
 		<td style=width:20px ><div class="editorOLundoItemInactive"></div></td>
 		<td>Recupere a &uacute;ltima geometria apagada ou modificada.</td>
-	</tr>		
+	</tr>
 	<tr>
 		<td style=width:20px ><div class="editorOLsalvaItemInactive"></div></td>
 		<td>Converta para shapefile, salve ou obtenha as coordenadas das geometrias selecionadas.</td>
@@ -105,15 +105,15 @@ p,td
 	<tr>
 		<td style=width:20px ><div class="editorOLfrenteItemInactive"></div></td>
 		<td>Traz a figura selecionada para a frente das demais.</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td style=width:20px ><div class="editorOLpropriedadesItemInactive"></div></td>
 		<td>Defina as propriedades de edi&ccedil;&atilde;o, como a dist&acirc;ncia de aproxima&ccedil;&atilde;o e outros comportamentos das opera&ccedil;&otilde;es. Defina tamb&eacute;m o comportamento da ferramenta de edi&ccedil;&atilde;o, permitindo alterar uma figura ou rotacion&aacute;-la, mov&ecirc;-la ou redimensionar.</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td style=width:20px ><div class="editorOLajudaItemInactive"></div></td>
 		<td>Abre essa p&aacute;gina de ajuda.</td>
-	</tr>	
+	</tr>
 </table>
 </body>
 </html>

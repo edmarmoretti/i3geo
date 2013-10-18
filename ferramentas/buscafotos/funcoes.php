@@ -1,9 +1,9 @@
 <?php
 error_reporting(0);
-require_once("../../classesphp/pega_variaveis.php");
-require_once("../../pacotes/cpaint/cpaint2.inc.php");
-require_once("../../ms_configura.php");
-require_once("../../pacotes/phpflickr/phpFlickr.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");
+require_once(dirname(__FILE__)."/../../ms_configura.php");
+require_once(dirname(__FILE__)."/../../pacotes/phpflickr/phpFlickr.php");
 error_reporting(0);
 $cp = new cpaint();
 if($funcao == "listafotosflickr")

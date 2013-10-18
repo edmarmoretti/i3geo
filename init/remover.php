@@ -12,8 +12,8 @@ Remove a tela inicial de apresenta&ccedil;&atilde;o do i3Geo substituindo-a pela
 Ap&oacute;s remover, a tela inicial pode ser vista utilizando-se o endere&ccedil;o i3geo/init.
 <?php
 $locaplic = dirname(__FILE__)."/..";
-include_once("../admin/php/admin.php");
-include_once("../admin/php/conexao.php");
+include_once(dirname(__FILE__)."/../admin/php/admin.php");
+include_once(dirname(__FILE__)."/../admin/php/conexao.php");
 
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 	formularioLoginMaster("remover.php");

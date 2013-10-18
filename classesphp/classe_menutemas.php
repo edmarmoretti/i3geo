@@ -499,7 +499,7 @@ $fatorestrela - valor para normalizar o total de acessos com o valor da estrela
 */
 	function procurartemasestrela($nivel,$fatorestrela)
 	{
-		include_once(__DIR__."/../admin/php/classe_arvore.php");
+		include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
 		$temas = $arvore->procuraTemasEstrela($nivel,$fatorestrela,$this->perfil);
 		unset($arvore);
@@ -689,13 +689,13 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 	*/
 	function array_in_array($needle, $haystack)
 	{
-    	//Make sure $needle is an array for foreach
-    	if(!is_array($needle)) $needle = array($needle);
-    	//For each value in $needle, return TRUE if in $haystack
-    	foreach($needle as $pin)
-        	if(in_array($pin, $haystack)) return TRUE;
-    	//Return FALSE if none of the values from $needle are found in $haystack
-    	return FALSE;
+			//Make sure $needle is an array for foreach
+			if(!is_array($needle)) $needle = array($needle);
+			//For each value in $needle, return TRUE if in $haystack
+			foreach($needle as $pin)
+					if(in_array($pin, $haystack)) return TRUE;
+			//Return FALSE if none of the values from $needle are found in $haystack
+			return FALSE;
 	}
 	function ixml($no,$nome)
 	{

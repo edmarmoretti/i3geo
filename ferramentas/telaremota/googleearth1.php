@@ -1,5 +1,5 @@
 <?php
-include("../../ms_configura.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -72,8 +72,8 @@ function inicia(){
 	navm = false;
 	var app = navigator.appName.substring(0,1);
 	if (app==='N'){navn=true;}else{navm=true;}
-	
-	google.earth.createInstance("googleearthdiv", 
+
+	google.earth.createInstance("googleearthdiv",
 		function(objeto){
 			mapaRemoto = objeto;
 			mapaRemoto.getWindow().setVisibility(true);
@@ -89,7 +89,7 @@ function inicia(){
 			options.setGridVisibility(false);
 			remoto = criaLayer();
 			recuperaMapa();
-		}, 
+		},
 		function(){
 			alert("Falhou. Vc precisa do plugin instalado");
 		}
@@ -126,23 +126,23 @@ function zoom2ext(ext){
 	lng1 = (ret[2]*1);
 	lat1 = (ret[1]*1);
 	lat2 = (ret[3]*1);
-	camera.setLatitude((lat1 + lat2) / 2.0); 
-	camera.setLongitude((lng1 + lng2) / 2.0); 
-	camera.setHeading(0.0); 
-	camera.setTilt(0.0); 
+	camera.setLatitude((lat1 + lat2) / 2.0);
+	camera.setLongitude((lng1 + lng2) / 2.0);
+	camera.setHeading(0.0);
+	camera.setTilt(0.0);
 	// determine if the rectangle is portrait or landscape
-	dy = Math.max(lat1, lat2) - Math.min(lat1, lat2); 
-	dx = Math.max(lng1, lng2) - Math.min(lng1, lng2); 
+	dy = Math.max(lat1, lat2) - Math.min(lat1, lat2);
+	dx = Math.max(lng1, lng2) - Math.min(lng1, lng2);
 	// find the longest side
-	d = Math.max(dy, dx); 
+	d = Math.max(dy, dx);
 	// convert the longest side degrees to radians
-	d = d * Math.PI/180.0; 
+	d = d * Math.PI/180.0;
 	// find half the chord length
-	dist = r * Math.tan(d / 2); 
+	dist = r * Math.tan(d / 2);
 	// get the altitude using the chord length
-	alt = dist/(Math.tan(fov * Math.PI / 180.0)); 
-	camera.setAltitude(alt); 
-	mapaRemoto.getView().setAbstractView(camera);	
+	alt = dist/(Math.tan(fov * Math.PI / 180.0));
+	camera.setAltitude(alt);
+	mapaRemoto.getView().setAbstractView(camera);
 }
 function atualizaMapa(){
 	mapaRemoto.getFeatures().removeChild(mapaRemoto.getFeatures().getChildNodes().item(0));

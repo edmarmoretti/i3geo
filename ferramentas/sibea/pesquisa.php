@@ -6,7 +6,7 @@ Acessa os web services do MMA para recuperar dados sobre educadores ambientais.
 
 Por ser executado dentro do I3Geo, boa parte dos parâmetros s&atilde;o obtidos da vari&aacute;vel de se&ccedil;&atilde;o.
 
-Arquivos: 
+Arquivos:
 
 i3geo/ferramentas/sibea/pesquisa.htm
 i3geo/ferramentas/sibea/pesquisa.php
@@ -130,21 +130,21 @@ function adicionatema()
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
 	else
 	$soapclient = new nusoap_client($servico);
-	
+
 	if ($filtro == "tipoTitulacaoMaxima")
 	{
 		$resultado = $soapclient->call("sibeaTitulacaoMaxima",$valor);
-		$nometema = "Titula&ccedil;&atilde;o m&aacute;xima";		
+		$nometema = "Titula&ccedil;&atilde;o m&aacute;xima";
 	}
 	if ($filtro == "tipoFormacao")
 	{
 		$resultado = $soapclient->call("sibeaFormacao",$valor);
-		$nometema = "Forma&ccedil;&atilde;o";		
+		$nometema = "Forma&ccedil;&atilde;o";
 	}
 	if ($filtro == "tipoAreaFormacao")
 	{
 		$resultado = $soapclient->call("sibeaGrandeArea",$valor);
-		$nometema = "Grande &aacute;rea de forma&ccedil;&atilde;o";		
+		$nometema = "Grande &aacute;rea de forma&ccedil;&atilde;o";
 	}
 	//
 	//converte siafi-ibge
@@ -160,8 +160,8 @@ function adicionatema()
 		$cp->set_data("erro. Nada encontrado");
 		return;
 	}
-	include("../../classesphp/classe_mapa.php");
-	include("../../classesphp/funcoes_gerais.php");
+	include(dirname(__FILE__)."/../../classesphp/classe_mapa.php");
+	include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 	if ($listaIbge != '')
 	{
 		$retorno = "ok";
@@ -179,9 +179,9 @@ function adicionatema()
 		$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld);
 		$m->salva();
 	}
-	$cp->set_data($retorno);	
-	
-	
+	$cp->set_data($retorno);
+
+
 /*
 	$sql = "('".(str_replace(",","','",$listaIbge))."')";
 	$nomes = "";

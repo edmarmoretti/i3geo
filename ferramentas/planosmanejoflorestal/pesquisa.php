@@ -1,7 +1,7 @@
 <?php
-require_once("../../pacotes/cpaint/cpaint2.inc.php");
-require_once("../../classesphp/pega_variaveis.php");
-require_once("../../classesphp/carrega_ext.php");
+require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
@@ -9,7 +9,7 @@ foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
-include("../../pacotes/phpxbase/api_conversion.php");
+include(dirname(__FILE__)."/../../pacotes/phpxbase/api_conversion.php");
 $cp = new cpaint();
 $cp->register('pesquisa');
 $cp->start();
@@ -17,9 +17,9 @@ $cp->return_data();
 function pesquisa()
 {
 	global $cp,$map_file,$dir_tmp,$imgdir,$uf,$categoria,$ano,$situacao,$mes,$cnpj;
-	$parametros = "&uf=$uf&categoria=$categoria&ano=$ano&situacao=$situacao&mes=$mes&cnpj=$cnpj"; 
-  	$xml = simplexml_load_file("http://www.mma.gov.br/estruturas/sfb_pflorestal/xml/callWS_plano_manejoA.php?".$parametros);
-  	var_dump($xml);
+	$parametros = "&uf=$uf&categoria=$categoria&ano=$ano&situacao=$situacao&mes=$mes&cnpj=$cnpj";
+		$xml = simplexml_load_file("http://www.mma.gov.br/estruturas/sfb_pflorestal/xml/callWS_plano_manejoA.php?".$parametros);
+		var_dump($xml);
 	//echo "http://www.mma.gov.br/estruturas/sfb_pflorestal/xml/callWS_plano_manejoA.php?".$parametros;
 	if ($xml != FALSE)
 	{
@@ -73,7 +73,7 @@ function adicionatema($map_file,$dir_tmp,$imgdir,$nometemapontos,$itens,$valores
 	if(!function_exists(dbase_create))
 	{xbase_create($nomeshp.".dbf", $def);}
 	else
-	{dbase_create($nomeshp.".dbf", $def);}				
+	{dbase_create($nomeshp.".dbf", $def);}
 
 	$dbname = $nomeshp.".dbf";
 	$db=xbase_open($dbname,2);

@@ -60,7 +60,7 @@ map_file - endere&ccedil;o, no servidor, do mapfile atual, exemplo: c:/ms4w/tmp/
 mapext - extens&atilde;o geogr&aacute;fica do mapa atual, exemplo: -76.5125927 -39.3925675209 -29.5851853 9.49014852081
 perfil - nome do perfil para controlar os temas que ser&atilde;o vis&iacute;veis na lista de temas.
 mapdir - localiza&ccedil;&atilde;o, no servidor, do diretório com o mapfile tempor&aacute;rio do mapa atual.
-imgdir - localiza&ccedil;&atilde;o, no servidor, das imagens tempor&aacute;rias do mapa atual. 
+imgdir - localiza&ccedil;&atilde;o, no servidor, das imagens tempor&aacute;rias do mapa atual.
 debug - (pode ser definido como "sim" indica se o erro_reporting deve ser definido como E_ALL
 */
 error_reporting(0);
@@ -80,7 +80,7 @@ if(isset($g_sid))
 	//guarda na section se o id tiver sido enviado epla URL
 	if(isset($atlasId))
 	{$_SESSION["atlasId"] = $atlasId;}
-	//	
+	//
 	foreach(array_keys($_SESSION) as $k)
 	{eval("\$".$k."='".$_SESSION[$k]."';");}
 	$postgis_mapa = $_SESSION["postgis_mapa"];
@@ -116,10 +116,7 @@ if ($map_file != "")
 }
 if(!isset($locaplic))
 {
-	if(file_exists("../ms_configura.php"))
-	{include("../ms_configura.php");}
-	else
-	{include("ms_configura.php");}
+	include(dirname(__FILE__)."/ms_configura.php");
 }
 include($locaplic."/admin/php/xml.php");
 $xml = simplexml_load_string(geraXmlAtlas($locaplic,$editores));
@@ -167,7 +164,7 @@ Esse programa &eacute; chamado diretamente, por exemplo, i3geo/classesphp/atlas_
 		//
 		$executa = "gravaId";
 		$temasa = "";
-		include_once("../ms_criamapa.php");
+		include_once(dirname(__FILE__)."/../ms_criamapa.php");
 		exit;
 	break;
 /*
@@ -219,6 +216,6 @@ function gravaid()
 		$l->setmetadata("ATLAS","nao");
 		$l->setmetadata("TIP","");
 	}
-	$m->save($tmpfname);		
+	$m->save($tmpfname);
 }
 ?>

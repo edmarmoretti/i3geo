@@ -1,7 +1,7 @@
 <?php
-require_once("../../classesphp/pega_variaveis.php");
-require_once("../../classesphp/funcoes_gerais.php");
-include_once ("../../classesphp/carrega_ext.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($g_sid))
@@ -22,7 +22,7 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 if (isset($_FILES['i3GEOaplicarsld']['name']))
 {
 	//$ndir = dirname($filen);
-	require_once ("../../ms_configura.php");
+	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	$mapa = ms_newMapObj($map_file);
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = dirname($map_file);
@@ -57,7 +57,7 @@ if (isset($_FILES['i3GEOaplicarsld']['name']))
 }
 else
 {
-	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";	
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
 }
 paraAguarde();
 function paraAguarde(){

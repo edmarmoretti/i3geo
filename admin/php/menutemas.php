@@ -1,6 +1,6 @@
 <?php
 /*
- Title: menutemas.php
+Title: menutemas.php
 
 Fun&ccedil;&otilde;es utilizadas nas opera&ccedil;&otilde;es de manuten&ccedil;&atilde;o de menus, grupo, subgrupos e temas
 
@@ -78,13 +78,13 @@ if($idioma == "")
 switch (strtoupper($funcao))
 {
 	/*
-	 Note:
+	Note:
 
 	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 
 		/*
-		 Valor: PEGAMENUS
+		Valor: PEGAMENUS
 
 		Lista de menus contendo todas as colunas
 
@@ -104,7 +104,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGAMENUS2
+		Valor: PEGAMENUS2
 
 		Lista de menus contendo apenas colunas selecionadas
 
@@ -131,7 +131,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGATAGS
+		Valor: PEGATAGS
 
 		Lista de tags
 
@@ -145,7 +145,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGATAGSPORMAPFILE
+		Valor: PEGATAGSPORMAPFILE
 
 		Lista de tags por mapfile
 
@@ -188,7 +188,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGAPERFIS
+		Valor: PEGAPERFIS
 
 		Lista de perfis
 
@@ -205,7 +205,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERAMENUS
+		Valor: ALTERAMENUS
 
 		Altera os dados de um menu
 
@@ -244,7 +244,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGAGRUPOS
+		Valor: PEGAGRUPOS
 
 		Lista de grupos com todas as colunas
 
@@ -264,7 +264,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGAGRUPOS2
+		Valor: PEGAGRUPOS2
 
 		Lista de grupos contendo as colunas principais
 
@@ -282,7 +282,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERAGRUPOS
+		Valor: ALTERAGRUPOS
 
 		Altera os dados de um grupo
 
@@ -315,7 +315,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGASUBGRUPOS
+		Valor: PEGASUBGRUPOS
 
 		Lista de subgrupos com todas as colunas
 
@@ -334,7 +334,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGASUBGRUPOS2
+		Valor: PEGASUBGRUPOS2
 
 		Lista de grupos contendo as colunas principais
 
@@ -352,7 +352,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERASUBGRUPOS
+		Valor: ALTERASUBGRUPOS
 
 		Altera os dados de um subgrupo
 
@@ -385,7 +385,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGATEMAS
+		Valor: PEGATEMAS
 
 		Lista de temas com todas as colunas
 
@@ -399,7 +399,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGATEMAPORMAPFILE
+		Valor: PEGATEMAPORMAPFILE
 
 		Lista os dados de um tema procurando registros com base no nome do mapfile
 
@@ -433,7 +433,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGATEMAS2
+		Valor: PEGATEMAS2
 
 		Lista de temas com as colunas principais
 
@@ -446,7 +446,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ATUALIZAMINIATURA
+		Valor: ATUALIZAMINIATURA
 
 		Atualiza as imagens das miniaturas de um tema
 
@@ -459,7 +459,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERATEMAS
+		Valor: ALTERATEMAS
 
 		Altera os dados de um tema
 
@@ -505,7 +505,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERATAGS
+		Valor: ALTERATAGS
 
 		Altera os dados de um tag
 
@@ -526,7 +526,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERAPERFIS
+		Valor: ALTERAPERFIS
 
 		Altera os dados de um perfil
 
@@ -613,7 +613,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: VERIFICAORFAOS
+		Valor: VERIFICAORFAOS
 
 		Verifica se existem temas sem o correspondente mapfile
 
@@ -726,7 +726,7 @@ function excluiTagTemas($id)
 	}
 }
 /*
- Pega a lista de temas
+Pega a lista de temas
 
 Parameters:
 
@@ -829,7 +829,7 @@ function pegaTemas2()
 	}
 }
 /*
- Altera o registro de um menu. Se id for vazio acrescenta o registro
+Altera o registro de um menu. Se id for vazio acrescenta o registro
 */
 function alteraMenus()
 {
@@ -859,7 +859,7 @@ function alteraMenus()
 			$id = $id->fetchAll();
 			$id = $id[0]['id_menu'];
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_menus SET nome_menu = '' WHERE id_menu = $id AND nome_menu = '$id_temp'");
-			$retorna = $id;			
+			$retorna = $id;
 		}
 		$dbhw = null;
 		$dbh = null;
@@ -1022,7 +1022,7 @@ function alteraTags()
 	}
 }
 /*
- Altera o registro de um grupo. Se id for vazio acrescenta o registro
+Altera o registro de um grupo. Se id for vazio acrescenta o registro
 */
 function alteraGrupos()
 {
@@ -1056,7 +1056,7 @@ function alteraGrupos()
 	}
 }
 /*
- Altera o registro de um sub-grupo. Se id for vazio acrescenta o registro
+Altera o registro de um sub-grupo. Se id for vazio acrescenta o registro
 */
 function alteraSubGrupos()
 {
@@ -1087,7 +1087,7 @@ function alteraSubGrupos()
 	}
 }
 /*
- Registra um mapfile na tabela de temas
+Registra um mapfile na tabela de temas
 */
 function registraTema()
 {
@@ -1112,7 +1112,7 @@ function registraTema()
 	}
 }
 /*
- Altera o registro de um tema. Se id for vazio acrescenta o registro
+Altera o registro de um tema. Se id for vazio acrescenta o registro
 */
 function alteraTemas()
 {
@@ -1208,7 +1208,7 @@ function alteraTemas()
 	}
 }
 /*
- Retorna a lista de mapfiles do diretorio i3geo/temas
+Retorna a lista de mapfiles do diretorio i3geo/temas
 
 */
 function listaMapsTemas()
@@ -1313,7 +1313,7 @@ function listaMapsTemas()
 	return $lista;
 }
 /*
- Retorna a lista de temas sem mapfiles
+Retorna a lista de temas sem mapfiles
 
 */
 function verificaOrfaos()
@@ -1404,8 +1404,8 @@ function removeCabecalho($arq,$symbolset=true)
 function atualizaMiniatura(){
 	global $tema,$locaplic;
 	$tipo = "foo";
-	include_once("../../classesphp/funcoes_gerais.php");
-	require("../../geraminiatura.php");
+	include_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+	require(dirname(__FILE__)."/../../geraminiatura.php");
 	verificaMiniatura($tema,"todos",true);
 	return "ok";
 }

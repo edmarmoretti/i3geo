@@ -1,5 +1,5 @@
 <?php
-require_once("../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($g_sid))
@@ -13,7 +13,7 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 //
 //se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
 //
-include_once ("../../classesphp/carrega_ext.php");
+include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 //
 //carrega o phpmapscript
 //
@@ -28,7 +28,7 @@ if (array_search( "MapScript", $exts) != TRUE)
 	else
 	{dl('php_mapscript.so');}
 }
-require("../../classesphp/funcoes_gerais.php");
+require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 error_reporting(0);
 $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
@@ -59,7 +59,7 @@ foreach ($temas as $tema)
 				$classe->set("name","classeNula");
 			}
 		}
-	}	
+	}
 }
 $map->save($temp);
 removeLinha("classeNula",$temp);

@@ -11,7 +11,7 @@ $cache_expire = 1;
 header("Pragma: public");
 header("Cache-Control: max-age=".$cache_expire);
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$cache_expire) . ' GMT');
-include("../ms_configura.php");
+include(dirname(__FILE__)."/../ms_configura.php");
 ?>
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="dicionario.js"></script>

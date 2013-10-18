@@ -1278,7 +1278,7 @@ function autoClassesLayer()
 		$layertemp = $mapageral->getlayer($i);
 		$layertemp->set("status",MS_DELETE);
 	}
-	
+
 	$mapatemp = ms_newMapObj($mapfile);
 	$numlayers = $mapatemp->numlayers;
 	for ($i=0;$i < $numlayers;$i++)

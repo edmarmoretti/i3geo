@@ -55,7 +55,7 @@ function gravaCacheWMS($servico)
 {
 	global $dir_tmp;
 	if($dir_tmp == "")
-	{include("../ms_configura.php");}
+	{include(dirname(__FILE__)."/../ms_configura.php");}
 	error_reporting(0);
 	try{
 		$teste = explode("=",$servico);
@@ -333,9 +333,9 @@ function temaswms()
 	# Test that the capabilites file has successfully downloaded.
 	#
 	//$wms_service_request = "c://temp//teste.xml";
-	include_once("../admin/php/admin.php");
+	include_once(dirname(__FILE__)."/../admin/php/admin.php");
 
-	include_once("../admin/php/webservices.php");
+	include_once(dirname(__FILE__)."/../admin/php/webservices.php");
 
 	//error_reporting(0);
 	if($wms_service_request == "erro") {
@@ -474,8 +474,8 @@ function listaLayersWMS()
 	}
 	//para o caso do sistema de metadados estatisticos
 	$wms_service_request = gravaCacheWMS($servico);
-	include_once("../admin/php/admin.php");
-	include_once("../admin/php/webservices.php");
+	include_once(dirname(__FILE__)."/../admin/php/admin.php");
+	include_once(dirname(__FILE__)."/../admin/php/webservices.php");
 	error_reporting(0);
 	if($tipo_ws != "WMSMETAESTAT" && $nivel < 2){
 		if($wms_service_request == "erro") {

@@ -1,5 +1,5 @@
 <?php
-require('../../pacotes/fpdf/fpdf.php');
+require(dirname(__FILE__).'/../../pacotes/fpdf/fpdf.php');
 include("geraimagens.php");
 $pdf=new FPDF("L","mm","A4");
 $pdf->Open();

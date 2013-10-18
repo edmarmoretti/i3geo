@@ -2841,10 +2841,7 @@ class Metaestat{
 		}
 		//para manipular dbf
 		if($dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
-			else
-			{include_once "../pacotes/phpxbase/api_conversion.php";}
+			include_once (dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php");
 			$db = xbase_create($nomeshp.".dbf", $def);
 		}
 		else

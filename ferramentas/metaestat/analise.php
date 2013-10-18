@@ -206,7 +206,7 @@ function mapaDeCalor($map_file,$tema){
 	$mapa->save($map_file);
 	$meta = new Metaestat();
 	$medidavariavel = $meta->listaMedidaVariavel("",$layer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"));
-	include_once("../../classesphp/classe_analise.php");
+	include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 	$m = new Analise($map_file,$tema,$locaplic,$ext);
 	$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,50,"densidade","243,217,173","255,0,0","",0,true,"",2,$medidavariavel["colunavalor"]);
 	$m->salva();
@@ -348,7 +348,7 @@ function classes2circulos($map_file,$tema,$tipo){
 		$mapa->save($nometemp);
 		//$mapatemp = ms_newMapObj($nometemp);
 		$medidavariavel = $meta->listaMedidaVariavel("",$layer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"));
-		include_once("../../classesphp/classe_alteraclasse.php");
+		include_once(dirname(__FILE__)."/../../classesphp/classe_alteraclasse.php");
 		$m = new Alteraclasse($nometemp,$layer->name,"","");
 		$valores = $m->pegaValores($m->mapa,$m->layer,$medidavariavel["colunavalor"],true,0);
 		$min = min($valores);

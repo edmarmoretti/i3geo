@@ -35,9 +35,9 @@ Return:
 {json} - lista com o resultado
 */
 //set_time_limit(600);
-require_once("../../pacotes/cpaint/cpaint2.inc.php");
-require_once("../../classesphp/pega_variaveis.php");
-require_once("../../classesphp/carrega_ext.php");
+require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
 $e = explode(" ",$ret);
 $url = "http://ws.geonames.org/weatherJSON?lang=pt&north=".$e[3]."&south=".$e[1]."&east=".$e[2]."&west=".$e[0]."&maxRows=10";

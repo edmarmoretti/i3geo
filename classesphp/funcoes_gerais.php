@@ -991,12 +991,12 @@ function buscaRapida($servico,$palavra)
 	//error_reporting(0);
 	if(!function_exists('preg_match'))
 	{
-		include_once('../pacotes/SOAPdepreciado/nusoap.php');
+		include_once(dirname(__FILE__).'/../pacotes/SOAPdepreciado/nusoap.php');
 		new Xsoapclient($servico."?wsdl","wsdl");
 	}
 	else
 	{
-		include_once('../pacotes/SOAP/nusoap.php');
+		include_once(dirname(__FILE__).'/../pacotes/SOAP/nusoap.php');
 		$soapclient = new nusoap_client($servico);
 	}
 //echo $soapclient->getDebug();
@@ -1382,7 +1382,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		include_once($locaplic."/pacotes/phpxbase/api_conversion.php");
 	}
 	else{
-		include_once "../pacotes/phpxbase/api_conversion.php";
+		include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 	}
 	$map = @ms_newMapObj($map_file);
 	$layer = $map->getlayerbyname($tema);
@@ -1572,7 +1572,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		include($locaplic."/ms_configura.php");
 	}
 	else{
-		include("../ms_configura.php");
+		include(dirname(__FILE__)."/../ms_configura.php");
 	}
 	$versao = versao();
 	$versao = $versao["principal"];
@@ -1836,10 +1836,7 @@ function verificaDBF($arq){
 	if(function_exists("dbase_open"))
 		$db = dbase_open($arq, 0);
 	else{
-		if(file_exists("../../pacotes/phpxbase/api_conversion.php"))
-		{include_once("../../pacotes/phpxbase/api_conversion.php");}
-		else
-		{include_once "../pacotes/phpxbase/api_conversion.php";}
+		include_once (dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php");
 		$db = xbase_open($arq, 0);
 	}
 	//nas vers&otilde;es novas do PHP open retorna vazio, n&atilde;o d&aacute; pra verificar
@@ -1998,15 +1995,7 @@ function autoClasses(&$nlayer,$mapa,$locaplic=null)
 {
 	$postgis_mapa = "";
 	$substituicon = "nao";
-	if(!isset($locaplic))
-	{
-		if(file_exists("ms_configura.php"))
-		include("ms_configura.php");
-		else
-		include("../ms_configura.php");
-	}
-	else
-	{include_once("$locaplic/ms_configura.php");}
+	include(dirname(__FILE__)."/../ms_configura.php");
 	if ($nlayer->connectiontype == MS_POSTGIS)
 	{
 		if ($nlayer->connection == " ")
@@ -2266,10 +2255,11 @@ function cpjson($obj){
 		echojson(array2json($obj));
 	}
 	else{
-		include_once("../pacotes/cpaint/cpaint2.inc.php");
+		include_once(dirname(__FILE__)."/../pacotes/cpaint/cpaint2.inc.php");
 		$cp = new cpaint();
 		$cp->set_data($obj);
 		$cp->return_data();
+		exit;
 	}
 }
 /*

@@ -15,7 +15,9 @@ echo
 /*
  * new OpenLayers.Layer.WMS('2013 - Agricultura Irrigada', 'http://www.geoservicos.inde.gov.br/geoserver/wms', {layers: 'MPOG:Agricultura_Irrigada', format: 'image/png', transparent: true}, {isBaseLayer: false, visibility: false, group: 'Planejamento/Planejamento/2013 - Agricultura Irrigada', metadataURL: 'http://www.metadados.inde.gov.br/geonetwork/srv/br/metadata.show.embedded?uuid=045663f7-5691-447a-8d06-ab692522328c', legendURL: 'http://www.geoservicos.inde.gov.br/geoserver/wms?service=WMS&version=1.1.0&request=GetLegendGraphic&layer=MPOG:Agricultura_Irrigada&format=image/png',kmlURL: 'http://www.geoservicos.inde.gov.br/geoserver/wms?service=WMS&version=1.1.0&request=GetMap&layers=MPOG:Agricultura_Irrigada&width=1024&height=768&bbox=-74,-34,-29,6&format=application/vnd.google-earth.kmz+xml',sldtema: '','maxExtent': new OpenLayers.Bounds(-55.389,-22.229,-37.808,-2.922), isBaseGroup: false, displayInLayerSwitcher: false, removable: false, groupOfKeeper: 'MP/2013 - Agricultura Irrigada', groupOfTheme: 'Planejamento/Planejamento/2013 - Agricultura Irrigada'}),
  */
-include("../../ms_configura.php");
+
+include(dirname(__FILE__)."/../../ms_configura.php");
+include($locaplic."/classesphp/funcoes_gerais.php");
 $agora = intval(time() / 1000);
 $arq = $dir_tmp."/inde$agora.html";
 if(!file_exists($arq)){
@@ -111,6 +113,7 @@ for ($i=0;$i<$n;$i++){
 		//$novalinha[] = "[".trim($linha,",")."]";
 	}
 }
+
 //separa os grupos
 //echo "<pre>";
 //var_dump($grupos);exit;

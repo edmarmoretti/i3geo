@@ -63,13 +63,13 @@ function formularioInsere()
 function listaComentarios()
 {
 	$locaplic = "../..";
-	include("../../admin/php/conexao.php");
+	include(dirname(__FILE__)."/../../admin/php/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}
 	$data = gmdate("d-m-Y\TH:i:s\Z");
 	$id_tema = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_temas where codigo_tema = '".$_SESSION["tema"]."' ",PDO::FETCH_ASSOC);
-    $id_tema = $id_tema->fetchAll();
+		$id_tema = $id_tema->fetchAll();
 	$id_tema = $id_tema[0]["id_tema"];
 	$lista = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_comentarios where id_tema = $id_tema ",PDO::FETCH_ASSOC);
 	$lista = $lista->fetchAll();
@@ -86,8 +86,8 @@ function listaComentarios()
 		echo "</tr>";
 	}
 	echo "</table><hr>";
-   	$dbhw = null;
-   	$dbh = null;
+		$dbhw = null;
+		$dbh = null;
 	echo "<p><a href='../../admin/rsscomentariostemas.php'><img src='../../imagens/rss.gif' style='border:0px solid gray;' > todos os coment&aacute;rios</a>";
 	echo " <a href='../../admin/rsscomentariostemas.php?id_tema=".$id_tema."'><img src='../../imagens/rss.gif' style='border:0px solid gray;' > coment&aacute;rios para o tema</a></p>";
 
@@ -95,18 +95,18 @@ function listaComentarios()
 function gravaComentario()
 {
 	//necess&aacute;rio para os includes do admin.php
-	include_once("../../admin/php/conexao.php");
+	include_once(dirname(__FILE__)."/../../admin/php/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}
 	$data = gmdate("d-m-Y\TH:i:s\Z");
 	$id_tema = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_temas where codigo_tema = '".$_SESSION["tema"]."' ",PDO::FETCH_ASSOC);
-    $id_tema = $id_tema->fetchAll();
+		$id_tema = $id_tema->fetchAll();
 	$id_tema = $id_tema[0]["id_tema"];
 	$q = "INSERT INTO ".$esquemaadmin."i3geoadmin_comentarios (comentario,data,openidnome,openidimagem,openidservico,openidusuario,openidurl,id_tema) VALUES ('".converte($_POST["novocomentario"])."','".$data."','".$_SESSION["openidnome"]."','".$_SESSION["openidimagem"]."','".$_SESSION["openidservico"]."','".$_SESSION["openidusuario"]."','".$_SESSION["openidurl"]."','".$id_tema."')";
 	$dbhw->query($q);
-   	$dbhw = null;
-   	$dbh = null;
+		$dbhw = null;
+		$dbh = null;
 }
 function converte($texto){
 	global $convUTF;

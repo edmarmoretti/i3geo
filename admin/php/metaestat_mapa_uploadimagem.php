@@ -19,7 +19,7 @@ error_reporting(0);
 <p>
 <?php
 if (isset($_FILES['uploadimagem']['name'])){
-	require_once ("../../ms_configura.php");
+	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$arq = $locaplic.$metaestatTemplates."/logos/".$_FILES['uploadimagem']['name'];
 	//verifica nomes

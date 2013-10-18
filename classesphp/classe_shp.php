@@ -125,8 +125,8 @@ function: salva
 
 Salva o mapfile atual
 */
- 	function salva()
- 	{
+	function salva()
+	{
 		if (connection_aborted()){
 			exit();
 		}
@@ -164,10 +164,7 @@ Nome do tema criado.
 			$tipol = MS_SHP_POINT;
 		}
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
-			else
-			{include_once "../pacotes/phpxbase/api_conversion.php";}
+			include_once (dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php");
 			$db = xbase_create($nomeshp.".dbf", $def);
 			xbase_close($db);
 		}
@@ -215,12 +212,7 @@ $projecao - código epsg da proje&ccedil;&atilde;o das coordenadas
 	{
 		if(!$this->layer){return "erro";}
 		if($this->dbaseExiste == false){
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php")){
-				include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-			}
-			else{
-				include_once "../pacotes/phpxbase/api_conversion.php";
-			}
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
 
 		$xy = explode(" ",$xy);
@@ -489,8 +481,8 @@ $para - linha|poligono
 		$tipos = MS_SHAPE_LINE;
 		if ($para == "poligono")
 		{
-	 		$tipol = MS_SHP_POLYGON;
-	 		$tipos = MS_SHAPE_POLYGON;
+			$tipol = MS_SHP_POLYGON;
+			$tipos = MS_SHAPE_POLYGON;
 		}
 		$novonomelayer = nomeRandomico();
 		$nomeshp = $diretorio."/".$novonomelayer;
@@ -505,10 +497,7 @@ $para - linha|poligono
 		//para manipular dbf
 		if($this->dbaseExiste == false)
 		{
-			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
-			else
-			{include_once "../pacotes/phpxbase/api_conversion.php";}
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 			$db = xbase_create($nomeshp.".dbf", $def);
 		}
 		else

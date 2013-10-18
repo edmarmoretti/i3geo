@@ -1,9 +1,9 @@
 <?php
 $usuarioGeonames = "i3geo";
 //set_time_limit(600);
-require_once("../../pacotes/cpaint/cpaint2.inc.php");
-require_once("../../classesphp/pega_variaveis.php");
-require_once("../../classesphp/carrega_ext.php");
+require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
 $cp = new cpaint();
 $cp->register('listaartigos');

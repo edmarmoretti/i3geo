@@ -1,7 +1,7 @@
 <?php
-require_once("../../classesphp/pega_variaveis.php");
-require_once("../../classesphp/funcoes_gerais.php");
-include_once ("../../classesphp/carrega_ext.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 session_name("i3GeoPHP");
 if (isset($g_sid))
 {session_id($g_sid);}
@@ -29,7 +29,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 	if( (ereg('[^a-zA-Z0-9\.]',$Arquivo)) || (!ereg('\.map$',$Arquivo)) )
 	{$statusNome = 0;}
 	if($statusNome != 1)
-	{echo "<p class='paragrafo' >Arquivo inv&aacute;lido.!";paraAguarde();exit;}	
+	{echo "<p class='paragrafo' >Arquivo inv&aacute;lido.!";paraAguarde();exit;}
 	*/
 	$nome = basename($Arquivo);
 	$arqtemp = $dirmap."/".$Arquivo;
@@ -80,7 +80,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 		echo "<p class='paragrafo' >Ok. redesenhando.";
 		echo "<script>window.parent.i3GEO.atualiza();</script>";
 		echo "<script>window.parent.i3GEO.navega.zoomExt(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,'nenhum','".$extatual."');</script>";
-		
+
 	}
 	else
 	{echo "<p class='paragrafo' >Erro ao enviar o arquivo.";}

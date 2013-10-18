@@ -1,7 +1,7 @@
 <?php
-require_once("../../classesphp/pega_variaveis.php");
-require_once("../../classesphp/funcoes_gerais.php");
-include_once ("../../classesphp/carrega_ext.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 session_name("i3GeoPHP");
 if (isset($g_sid))
 {session_id($g_sid);}
@@ -22,7 +22,7 @@ if (ob_get_level() == 0) ob_start();
 if (isset($_FILES['i3GEOuploaddbffile']['name']))
 {
 	//$ndir = dirname($filen);
-	require_once ("../../ms_configura.php");
+	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	$mapa = ms_newMapObj($map_file);
 	echo "<p class='paragrafo'>Carregando o arquivo...</p>";
 	ob_flush();
@@ -50,8 +50,8 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 			if($i3GEOuploaddbftipoarquivo != "dbf"){
 				if($i3GEOuploaddbftipoarquivo == "csvpv"){$separador = ";";}
 				if($i3GEOuploaddbftipoarquivo == "csvv"){$separador = ",";}
-				include_once "../../pacotes/phpxbase/api_conversion.php";
-				include_once("../../pacotes/parsecsv/parsecsv.lib.php");
+				include_once dirname(__FILE__)."/../../pacotes/phpxbase/api_conversion.php";
+				include_once(dirname(__FILE__)."/../../pacotes/parsecsv/parsecsv.lib.php");
 				$csv = new parseCSV();
 				$csv->delimiter = $separador;
 				$dados = $csv->parse($dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
@@ -113,7 +113,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 			}
 			else
 			{
-				require_once("../../pacotes/phpxbase/api_conversion.php");
+				require_once(dirname(__FILE__)."/../../pacotes/phpxbase/api_conversion.php");
 				echo "<p class='paragrafo'>Lendo arquivo ".$dirmap."/".$_FILES['i3GEOuploaddbffile']['name']."</p>";
 				$dbf = xbase_open($dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
 				$records = xbase_numrecords($dbf);

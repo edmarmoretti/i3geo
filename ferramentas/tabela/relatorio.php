@@ -3,14 +3,14 @@ session_name("i3GeoPHP");
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
-include("../../classesphp/pega_variaveis.php");
+include(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
 $postgis_mapa = $_SESSION["postgis_mapa"];
-include("../../classesphp/carrega_ext.php");
-include("../../classesphp/funcoes_gerais.php");
+include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
+include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
 substituiCon($map_file,$postgis_mapa);

@@ -3,7 +3,7 @@ body
 {margin:20px;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;width:300px}
 A
 {text-align:left;font-family: Verdana, Arial, Helvetica, sans-serif;color: #2F4632;}
-A:hover 
+A:hover
 {color: #4142ff;font-weight: normal;font-family: Verdana, Arial, Helvetica, sans-serif;}
 </style>
 <body>
@@ -29,7 +29,7 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-require_once("../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($g_sid))
@@ -44,7 +44,7 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 //
 //se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
 //
-include_once ("../../classesphp/carrega_ext.php");
+include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 //
 //carrega o phpmapscript
 //
@@ -59,7 +59,7 @@ if (array_search( "MapScript", $exts) != TRUE)
 	else
 	{dl('php_mapscript.so');}
 }
-require("../../classesphp/funcoes_gerais.php");
+require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 error_reporting(0);
 $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
@@ -99,7 +99,7 @@ foreach ($temas as $tema)
 				$classe->set("name","classeNula");
 			}
 		}
-	}	
+	}
 }
 $map->save($temp);
 removeLinha("classeNula",$temp);

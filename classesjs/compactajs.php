@@ -35,8 +35,8 @@ i3geo/classesjs/compactajs.php
 //compacta os arquivos do richdraw
 //
 $locaplic = dirname(__FILE__)."/..";
-include_once("../admin/php/admin.php");
-include_once("../admin/php/conexao.php");
+include_once(dirname(__FILE__)."/../admin/php/admin.php");
+include_once(dirname(__FILE__)."/../admin/php/conexao.php");
 
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 	formularioLoginMaster("compactajs.php");
@@ -307,7 +307,7 @@ function packer($src,$out,$tipo="None")
 {
 	if(file_exists($out))
 	{unlink($out);}
-	require_once '../pacotes/packer/class.JavaScriptPacker.php';
+	require_once dirname(__FILE__).'/../pacotes/packer/class.JavaScriptPacker.php';
 	$script = file_get_contents($src);
 	$script = str_replace("if(typeof(console)","//if(typeof(console)",$script);
 	$t1 = microtime(true);

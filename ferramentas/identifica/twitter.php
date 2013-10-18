@@ -22,8 +22,8 @@ p {
 	}
 	$par = $_GET["x"].",".$_GET["y"];
 	echo "<p class=paragrafo >Raio de <input type=text size=4 value='$km' id=km onchange='recarrega($par,this.value)'> km</p>";
-	include("../../classesphp/carrega_ext.php");
-	include("../../ms_configura.php");
+	include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
+	include(dirname(__FILE__)."/../../ms_configura.php");
 	$s = PHP_SHLIB_SUFFIX;
 	if(!function_exists('curl_init'))
 	{

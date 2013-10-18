@@ -2,7 +2,7 @@
 //
 //escrito por Luis Henrique Weirich de Matos
 //
-require_once("../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($g_sid))
@@ -16,7 +16,7 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 //
 //se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
 //
-include_once ("../../classesphp/carrega_ext.php");
+include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 //
 //carrega o phpmapscript
 //
@@ -31,7 +31,7 @@ if (array_search( "MapScript", $exts) != TRUE)
 	else
 	{dl('php_mapscript.so');}
 }
-require("../../classesphp/funcoes_gerais.php");
+require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 $nomes = nomeRandomico();
 //
 //substitui a string de conex&atilde;o com o banco em cada layer se for necess&aacute;rio
@@ -110,7 +110,7 @@ $imgo->saveImage($nomer);
 $pathlegenda = $dir_tmp."/".basename($imgo->imageurl)."/".basename($nomer);
 $titulo = $_GET['titulo'];
 substituiCon($map_file,$postgis_mapa);
-require('../../pacotes/fpdf/fpdf.php');
+require(dirname(__FILE__).'/../../pacotes/fpdf/fpdf.php');
 $pdf = new FPDF("L","mm","A4");
 $pdf->SetAutoPageBreak(false);
 $pdf->SetDisplayMode( 70 , "single");

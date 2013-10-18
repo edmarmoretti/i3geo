@@ -1,6 +1,6 @@
 <?php
-require_once("../../classesphp/funcoes_gerais.php");
-include_once ("../../classesphp/carrega_ext.php");
+require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($_POST["g_sid"]))
@@ -17,7 +17,7 @@ $map_file = $_SESSION["map_file"];
 <p>
 <?php
 error_reporting(0);
-require_once ("../../ms_configura.php");
+require_once (dirname(__FILE__)."/../../ms_configura.php");
 $dirmap = dirname($map_file);
 $arquivo = "";
 if(isset($_FILES['i3GEOimportarwmc']['name']) && !($_POST["i3GEOimportarwmcurl"]))

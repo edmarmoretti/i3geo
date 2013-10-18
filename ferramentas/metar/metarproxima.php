@@ -42,10 +42,10 @@ Return:
 */
 //set_time_limit(600);
 echo "<html><style>
-	P 
+	P
 	{padding-top:1px;COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 	</style>";
-require_once("../../classesphp/pega_variaveis.php");
+require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 error_reporting(0);
 $url = "http://ws.geonames.org/findNearByWeatherXML?lat=$y&lng=$x&lang=pt";
 
@@ -61,23 +61,23 @@ if($xml == true){
 		$r = $e->xpath('observation');
 		foreach($r as $t)
 		{$resultado .= "<p><b>".$t."</b>";}
-		
+
 		$r = $e->xpath('observationTime');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Data: </b>".$t;}
-		
+
 		$r = $e->xpath('stationName');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Esta&ccedil;&atilde;o: </b>".$t;}
-		
+
 		$r = $e->xpath('ICAO');
 		foreach($r as $t)
 		{$resultado .= "<p><b> ICAO: </b>".$t;}
-		
+
 		$r = $e->xpath('elevation');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Eleva&ccedil;&atilde;o: </b>".$t;}
-		
+
 		$r = $e->xpath('lat');
 		foreach($r as $t){
 			$resultado .= "<p><a title='Incluir no mapa' href='#' onmouseout='escondexy()' onmouseover='mostraxy()' onclick='insereponto()'><b> Latitude: </b>".$t;
@@ -88,39 +88,39 @@ if($xml == true){
 			$resultado .= "<b> Longitude: </b>".$t."</a>";
 			$x = $t;
 		}
-		
+
 		$r = $e->xpath('temperature');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Temperatura: </b>".$t." C";}
-		
+
 		$r = $e->xpath('dewPoint');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Ponto de orvalho: </b>".$t." C";}
-		
+
 		$r = $e->xpath('humidity');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Humidade: </b>".$t." %";}
-		
+
 		$r = $e->xpath('clouds');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Nuvens: </b>".$t;}
-		
+
 		$r = $e->xpath('weatherCondition');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Condi&ccedil;&atilde;o: </b>".$t;}
-		
+
 		$r = $e->xpath('hectoPascAltimeter');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Press&atilde;o: </b>".$t." hpa";}
-		
+
 		$r = $e->xpath('windDirection');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Dire&ccedil;&atilde;o do vento: </b>".$t;}
-		
+
 		$r = $e->xpath('windSpeed');
 		foreach($r as $t)
 		{$resultado .= "<p><b> Velocidade do vento: </b>".$t." mph<br>";}
-		
+
 		$resultado .= "<p><a href='$url' >Web Service</a><br>";
 		$resultado .= "<br><a href='http://weather.noaa.gov/' >Metar</a><br>";
 	}
@@ -154,7 +154,7 @@ echo $resultado;
 		box.style.zIndex = 5000
 	}
 	function insereponto(){
-		i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,x,y);		
+		i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,x,y);
 	}
 </script>
 </html>
