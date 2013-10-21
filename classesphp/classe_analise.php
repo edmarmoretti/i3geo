@@ -265,6 +265,7 @@ Include:
 		$myPalette=new palette(array($cori,$corf),($numclasses + 1));
 		//cria os parametros das classes
 		$cls = $this->classesRasterI($minmax[0],$minmax[1],$numclasses,$myPalette->colorRGB);
+
 		if (count($cls) != $numclasses){return("erro.");}
 		//adiciona o novo tema
 		if (file_exists($nomearq.".png")){
@@ -2847,6 +2848,7 @@ array(
 			$pararray[] = $buffer;
 		}
 		fclose($abre);
+
 		$xsize = $pararray[0];
 		$ysize = $pararray[1];
 		$xdim = $pararray[2];
