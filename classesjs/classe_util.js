@@ -977,7 +977,7 @@ i3GEO.util = {
 			wdocaiframe.style.width = "325px";
 			wdocaiframe.style.border = "0px solid white";
 		}
-		janela = new YAHOO.widget.ResizePanel(id, { height:"290px",modal:true, width: "350px", fixedcenter: true, constraintoviewport: true, visible: true, iframe:false} );
+		janela = new YAHOO.widget.Panel(id, { height:"290px",modal:true, width: "350px", fixedcenter: true, constraintoviewport: true, visible: true, iframe:false} );
 		YAHOO.i3GEO.janela.manager.register(janela);
 		janela.render();
 		$i(id+'_cabecalho').className = classe;

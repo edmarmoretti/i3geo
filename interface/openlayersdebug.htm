@@ -15,6 +15,57 @@
 	width:29px;
 	cursor:pointer;
 }
+.fundoRodape {
+		border: 0 solid #DFDFDF;
+		border-collapse: collapse;
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+		font-size: 12px;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		text-align: center;
+		background: gainsboro;
+}
+#escala td {
+	background: gainsboro;
+}
+#escala input {
+	background: gainsboro;
+	color: #426252;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	margin: 0;
+	border: 0px solid white;
+	box-shadow: none;
+}
+#localizarxygeoProj {
+	width: 100%;
+}
+#localizarxygeoProj td {
+	background: gainsboro;
+}
+#localizarxygeoProj input {
+	background: gainsboro;
+	color: #426252;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	margin: 0;
+	border: 0px solid white;
+	box-shadow: none;
+}
+#localizarxygeoProj span {
+	border: 0px solid white;
+}
+#localizarxygeoProj select {
+		border: 1px solid #B4B4B4;
+		font-size: 10px;
+		height: 16px;
+		left: 1px;
+		position: relative;
+		top: 1px;
+		width: 40px;
+}
+
 </style>
 </head>
 <body id="i3geo" style="background-color:white">
@@ -43,9 +94,9 @@
 	</tr>
 	<tr>
 		<td>
-			<table width=100% >
+			<table style="width:100%;height:28px" >
 				<tr>
-					<td class=tdbranca >
+					<td class=fundoRodape >
 						<!--
 						Nesse div s&atilde;o inclu&iacute;dos os &iacute;cones que permitem ao usu&aacute;rio modificar o visual de cores dos &iacute;cones
 						<div id=visual ></div>
@@ -55,24 +106,21 @@
 						<!-- aqui ser&aacute; inclu&iacute;do o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
 						<div id=tempoRedesenho style=z-index:100;position:absolute;top:0px;color:green;background-color:black;width:50px;display:none ></div>
 					</td>
-					<td class=tdbranca >
+					<td class=fundoRodape style=width:20% >
 						<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
 						<div id=escala style="margin:auto;text-align:right;" ></div>
 					</td>
-					<td class=tdbranca  >
+					<td class=fundoRodape  style=width:60% >
 						<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
 						<div id=localizarxy style="margin:auto;text-align:left;font-size:10px;display:inline-table"></div>
 					</td>
 					<!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->
-					<td class=tdbranca  >
+					<td class=fundoRodape style=width:20% >
 						<div id=seletorIdiomas ></div>
 					</td>
 				</tr>
 			</table>
 		</td>
-	</tr>
-	<tr style="border:0px">
-		<td id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td>
 	</tr>
 </table>
 <table id="i3GEOlogoMarca" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
@@ -203,7 +251,7 @@ i3GEO.configura.mapaRefDisplay = "none";
 //tipo de barra de bot&otilde;es
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
 //ajusta o deslocamento da barra de bot&otilde;es
-i3GEO.barraDeBotoes.OFFSET = -3;
+i3GEO.barraDeBotoes.OFFSET = 10;
 //ajusta a posi&ccedil;&atilde;o da barra de bot&otilde;es no IE
 //if(navm)
 //{i3GEO.barraDeBotoes.OFFSET = -45;}
