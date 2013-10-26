@@ -373,10 +373,10 @@
 }
 #menui3GeoMenuMarcador {
     background-image: url("../imagens/visual/default/sprite.png");
-    background-position: 2px -47px;
+    background-position: 0px -2226px;
     background-repeat: no-repeat;
-    height: 12px;
-    width: 65px;
+    height: 15px;
+    width: 57px;
 }
 /*bandeira do brasil*/
 #brasil {

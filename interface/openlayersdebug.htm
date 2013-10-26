@@ -4,81 +4,15 @@
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3GEO - OpenLayers</title>
-<style>
-.olControlEditingToolbar1 div {
-	background-image:url(../mashups/openlayers.png);
-	background-repeat:no-repeat;
-	float:right;
-	right: 0px;
-	height:29px;
-	margin:2px;
-	width:29px;
-	cursor:pointer;
-}
-.fundoRodape {
-		border: 0 solid #DFDFDF;
-		border-collapse: collapse;
-		font-family: Verdana,Arial,Helvetica,sans-serif;
-		font-size: 12px;
-		margin: 0;
-		padding: 0;
-		position: relative;
-		text-align: center;
-		background: gainsboro;
-}
-#escala td {
-	background: gainsboro;
-}
-#escala input {
-	background: gainsboro;
-	color: #426252;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size: 10px;
-	margin: 0;
-	border: 0px solid white;
-	box-shadow: none;
-}
-#localizarxygeoProj {
-	width: 100%;
-}
-#localizarxygeoProj td {
-	background: gainsboro;
-}
-#localizarxygeoProj input {
-	background: gainsboro;
-	color: #426252;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size: 10px;
-	margin: 0;
-	border: 0px solid white;
-	box-shadow: none;
-}
-#localizarxygeoProj span {
-	border: 0px solid white;
-}
-#localizarxygeoProj select {
-		border: 1px solid #B4B4B4;
-		font-size: 10px;
-		height: 16px;
-		left: 1px;
-		position: relative;
-		top: 1px;
-		width: 40px;
-}
-
-</style>
 </head>
-<body id="i3geo" style="background-color:white">
+<body id="i3geo" style='margin-left:7px;background:white;'>
 <!-- inclui o nome do usuario logado -->
 <div id="i3GEONomeLogin" style="position:absolute;left:10px;top:12px;font-size:11px;z-index:50000"></div>
 <table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
-	<tr style="border:0px">
-		<td id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
-	</tr>
 	<tr>
-		<td id="contemMenu" style="text-align:right;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
+		<td id="contemMenu" style="background:black;height:35px;text-align:right;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
 			<!--menu suspenso-->
-			<div id="menus" ></div>
+			<div id="menus" style="height:10px;"></div>
 		</td>
 	</tr>
 	<tr>
@@ -108,36 +42,48 @@
 					</td>
 					<td class=fundoRodape style=width:20% >
 						<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
-						<div id=escala style="margin:auto;text-align:right;" ></div>
+						<div id=escala style="margin:auto;text-align:right;left:15px;" ></div>
 					</td>
 					<td class=fundoRodape  style=width:60% >
 						<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
 						<div id=localizarxy style="margin:auto;text-align:left;font-size:10px;display:inline-table"></div>
 					</td>
 					<!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->
-					<td class=fundoRodape style=width:20% >
-						<div id=seletorIdiomas ></div>
+					<td class=fundoRodape style="width:20%;" >
+						<div id=seletorIdiomas style="right:15px;"></div>
 					</td>
 				</tr>
 			</table>
 		</td>
 	</tr>
 </table>
-<table id="i3GEOlogoMarca" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
-	<tr>
-		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3></td>
-	</tr>
-	<tr>
-		<td style="padding:10px;"><img style="width:560px;height:81px" alt="" src='../imagens/logo_inicio.png' ></td>
-	</tr>
-	<tr>
-		<td>
-			<!--
+	<table id="i3GEOlogoMarca"
+		style='margin: 0px auto; box-shadow: 0 1px 13px gray; border-radius: 5px;'>
+		<tr>
+			<td style=height:30px ><div id=versaoi3geo></div>
+				<h2
+					style="font-weight:normal;font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo
+					- Software livre para cria&ccedil;&atilde;o de mapas interativos e
+					geoprocessamento</h2>
+				<h3
+					style="font-weight:normal;font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado
+					no Mapserver, &eacute; licenciado sob GPL e integra o Portal do
+					Software P&uacute;blico Brasileiro</h3></td>
+		</tr>
+		<tr>
+			<td style="padding: 10px;"><img
+				style="width: 560px; height: 81px" alt=""
+				src='../imagens/logo_inicio.png'></td>
+		</tr>
+		<tr>
+			<td>
+				<!--
 			<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
 			-->
-		</td>
-	</tr>
-</table>
+			</td>
+		</tr>
+	</table>
+
 
 <div id="i3GEOguiaMovel" style="position:absolute;display:block;border:0px solid white;text-align:left;z-index:2000;background-color:none">
 	<img id="i3GEOguiaMovelPuxador" onclick='i3GEO.guias.guiaMovel.abreFecha()' style='z-index:2;border:solid 0px white;left:0px;position:absolute;top:0px' width='0px' src='../imagens/openbars.png' >
@@ -164,7 +110,142 @@
 <script src="../pacotes/openlayers/OpenLayers211.js.php"></script>
 <!-- <script src="../pacotes/openlayers/OpenLayers2131.js.php"></script> -->
 <!-- estilo necess&aacute;rio para a ferramenta de edi&ccedil;&atilde;o -->
+<style>
+.olControlEditingToolbar1 div {
+	background-image:url(../mashups/openlayers.png);
+	background-repeat:no-repeat;
+	float:right;
+	right: 0px;
+	height:29px;
+	margin:2px;
+	width:29px;
+	cursor:pointer;
+}
+.fundoRodape {
+		border: 0 solid #DFDFDF;
+		border-collapse: collapse;
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+		font-size: 12px;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		text-align: center;
+		background: black;
+}
+#seletorIdiomas {
+	float: right;
+}
+#escala {
+	float: left;
+}
+#escala td {
+	background: black;
+	float: left;
+}
+#escala span {
+	border: 0px solid white;
+}
+#escala input {
+	background: black;
+	color: white;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	margin: 0;
+	border: 0px solid white;
+	box-shadow: none;
+	text-align: right;
+}
+#localizarxygeoProj {
+	width: 100%;
+}
+#localizarxygeoProj td {
+	background: black;
+	color: white;
+}
+#localizarxygeoProj input {
+	background: black;
+	color: white;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	margin: 0;
+	border: 0px solid white;
+	box-shadow: none;
+}
+#localizarxygeoProj span {
+	border: 0px solid white;
+}
+#localizarxygeoProj select {
+		border: 1px solid #B4B4B4;
+		font-size: 10px;
+		height: 16px;
+		left: 1px;
+		position: relative;
+		top: 1px;
+		width: 40px;
+}
+.i3GeoMascaraDMS tr {
+	border: 0px solid white;
+}
+#euDock_euImage_2 {
+    background: black;
+    opacity: 1;
+}
+#euDock_euImage_3 {
+    background: black;
+    opacity: 1;
+}
+#euDock_euImage_4 {
+    background: black;
+    opacity: 1;
+}
+#menus .bd{
+	background: black;
+}
+yuimenubar yui-module yui-overlay visible{
+	background: black;
+}
+.yui-skin-sam .yuimenuitemlabel{
+	color: white;
+}
+.yuimenubaritem .yuimenubaritem-hassubmenu{
+	background:black;
+	color:white;
+}
 
+.yui-skin-sam .yuimenuitem-selected {
+    background: #707070;
+}
+
+.yui-skin-sam .yuimenubaritem-selected {
+    background: #707070;
+    color: white;
+}
+
+.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu {
+    background: #707070;
+    color: white;
+}
+.yui-skin-sam .yuimenubaritemlabel {
+	color:white;
+    margin: 8px 0;
+    background: black;
+    height:14px;
+}
+.yui-skin-sam .yuimenubaritemlabel-selected{
+    background: #707070;
+    color: white;
+}
+.yui-skin-sam .yuimenubaritemlabel .first-of-type {
+	color:white;
+    margin: 8px 0;
+}
+#menuajudaMenu{
+	color: white;
+}
+
+
+
+</style>
 <script>
 /*
 Interface Openlayers para debug
@@ -251,7 +332,7 @@ i3GEO.configura.mapaRefDisplay = "none";
 //tipo de barra de bot&otilde;es
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
 //ajusta o deslocamento da barra de bot&otilde;es
-i3GEO.barraDeBotoes.OFFSET = 10;
+i3GEO.barraDeBotoes.OFFSET = 11;
 //ajusta a posi&ccedil;&atilde;o da barra de bot&otilde;es no IE
 //if(navm)
 //{i3GEO.barraDeBotoes.OFFSET = -45;}
@@ -288,7 +369,7 @@ i3GEO.mapa.AUTORESIZE = true;
 i3GEO.guias.TIPO = "movel";
 //i3GEO.guias.guiaMovel.ABERTA = true;
 //posi&ccedil;&atilde;o da guia movel em rela&ccedil;&atilde;o ao topo do mapa. Se for igual a 0, o c&aacute;lculo ser&aacute; feito de forma autom&aacute;tica
-i3GEO.guias.guiaMovel.config.topGuiaMovel = 0;
+i3GEO.guias.guiaMovel.config.topGuiaMovel = 35;
 //
 //define quanto tempo &eacute; aguardado para considerar que o mouse est&aacute; parado sobre um lugar.
 //utilizado pela fun&ccedil;&atilde;o de identifica&ccedil;&atilde;o do tipo bal&atilde;o
