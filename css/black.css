@@ -1,0 +1,131 @@
+.olControlEditingToolbar1 div {
+	background-image:url(../mashups/openlayers.png);
+	background-repeat:no-repeat;
+	float:right;
+	right: 0px;
+	height:29px;
+	margin:2px;
+	width:29px;
+	cursor:pointer;
+}
+.fundoRodape {
+		border: 0 solid #DFDFDF;
+		border-collapse: collapse;
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+		font-size: 12px;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		text-align: center;
+		background: black;
+}
+#seletorIdiomas {
+	float: right;
+}
+#escala {
+	float: left;
+}
+#escala td {
+	background: black;
+	float: left;
+}
+#escala span {
+	border: 0px solid white;
+}
+#escala input {
+	background: black;
+	color: white;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	margin: 0;
+	border: 0px solid white;
+	box-shadow: none;
+	text-align: right;
+}
+#localizarxygeoProj {
+	width: 100%;
+}
+#localizarxygeoProj td {
+	background: black;
+	color: white;
+}
+#localizarxygeoProj input {
+	background: black;
+	color: white;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	margin: 0;
+	border: 0px solid white;
+	box-shadow: none;
+}
+#localizarxygeoProj span {
+	border: 0px solid white;
+}
+#localizarxygeoProj select {
+		border: 1px solid #B4B4B4;
+		font-size: 10px;
+		height: 16px;
+		left: 1px;
+		position: relative;
+		top: 1px;
+		width: 40px;
+}
+.i3GeoMascaraDMS tr {
+	border: 0px solid white;
+}
+#euDock_euImage_2 {
+    background: black;
+    opacity: 1;
+}
+#euDock_euImage_3 {
+    background: black;
+    opacity: 1;
+}
+#euDock_euImage_4 {
+    background: black;
+    opacity: 1;
+}
+#menus .bd{
+	background: black;
+}
+yuimenubar yui-module yui-overlay visible{
+	background: black;
+}
+.yui-skin-sam .yuimenuitemlabel{
+	color: white;
+}
+.yuimenubaritem .yuimenubaritem-hassubmenu{
+	background:black;
+	color:white;
+}
+
+.yui-skin-sam .yuimenuitem-selected {
+    background: #707070;
+}
+
+.yui-skin-sam .yuimenubaritem-selected {
+    background: #707070;
+    color: white;
+}
+
+.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu {
+    background: #707070;
+    color: white;
+}
+.yui-skin-sam .yuimenubaritemlabel {
+	color:white;
+    margin: 8px 0;
+    background: black;
+    height:14px;
+}
+.yui-skin-sam .yuimenubaritemlabel-selected{
+    background: #707070;
+    color: white;
+}
+.yui-skin-sam .yuimenubaritemlabel .first-of-type {
+	color:white;
+    margin: 8px 0;
+}
+#menuajudaMenu{
+	color: white;
+}
