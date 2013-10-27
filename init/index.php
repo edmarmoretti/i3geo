@@ -123,7 +123,7 @@ botoesIni.push({
 	"titulo":$trad(3,g_traducao_init)
 	},{
 	"img":"openlayers.png",
-	"href":"../interface/openlayers.htm",
+	"href":"../interface/black_ol.htm",
 	"titulo":$trad(4,g_traducao_init)
 	},{
 	"img":"openlayersdebug.png",
@@ -131,7 +131,7 @@ botoesIni.push({
 	"titulo":$trad(5,g_traducao_init)
 	},{
 		"img":"osm.png",
-		"href":"../interface/osm.htm",
+		"href":"../interface/black_osm.htm",
 		"titulo":$trad(23,g_traducao_init)
 	},{
 	"img":"mashup.png",
@@ -139,7 +139,7 @@ botoesIni.push({
 	"titulo":$trad(18,g_traducao_init)
 	},{
 	"img":"googlemaps.png",
-	"href":"../interface/googlemaps.phtml",
+	"href":"../interface/black_gm.phtml",
 	"titulo":$trad(6,g_traducao_init)
 	},{
 	"img":"googlemaps_noite.png",

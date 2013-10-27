@@ -430,7 +430,7 @@ A interface padr&atilde;o &eacute; utilizada quando n&atilde;o &eacute; definida
 Tipo:
 {string}
 */
-$interfacePadrao = "openlayers.htm";
+$interfacePadrao = "black_ol.htm";
 /*
 Variable: base
 

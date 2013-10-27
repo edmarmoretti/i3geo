@@ -1,3 +1,34 @@
+.i3GeoMascaraCoord {
+width: 100%;
+}
+.i3GeoMascaraCoord td {
+background: white;
+color: black;
+}
+.i3GeoMascaraCoord input {
+background: white;
+color: black;
+font-family: Verdana,Arial,Helvetica,sans-serif;
+font-size: 10px;
+margin: 0;
+border: 0px solid white;
+box-shadow: none;
+}
+.i3GeoMascaraCoord span {
+border: 0px solid white;
+}
+.i3GeoMascaraCoord select {
+border: 1px solid #B4B4B4;
+font-size: 10px;
+height: 16px;
+left: 1px;
+position: relative;
+top: 1px;
+width: 40px;
+}
+.i3GeoMascaraCoord tr {
+border: 0px solid white;
+}
 .toolTipBalaoTitulo{
 text-decoration:underline;
 text-align:left;
@@ -605,10 +636,10 @@ height: 15px;
 }
 #menui3GeoMenuMarcador {
 background-image: url("../imagens/visual/default/sprite.png");
-background-position: 2px -47px;
+background-position: 0px -2226px;
 background-repeat: no-repeat;
-height: 12px;
-width: 65px;
+height: 15px;
+width: 57px;
 }
 /*bandeira do brasil*/
 #brasil {
