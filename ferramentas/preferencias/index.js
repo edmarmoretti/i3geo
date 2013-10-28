@@ -41,36 +41,53 @@ Classe: i3GEOF.preferencias
 
 */
 i3GEOF.preferencias = {
-	lista:[
+	lista: function(){
+
+		var lista = [
 			{
-				titulo: "Barra de bot&otilde;es",
+				titulo: $trad(9,i3GEOF.preferencias.dicionario),
 				props: [
-						{
-							titulo: "N&uacute;mero m&aacute;ximo de bot&otilde;es",
-							tipo: "numero",
-							elemento: "i3GEO.barraDeBotoes.MAXBOTOES"
-						},{
-							titulo: "Mostra a barra",
-							tipo: "boolean",
-							elemento: "i3GEO.barraDeBotoes.ATIVA"
-						},{
-							titulo: "Deslocamento vertical",
-							tipo: "numero",
-							elemento: "i3GEO.barraDeBotoes.OFFSET"
-						},{
-							titulo: "Posi&ccedil;&atilde;o",
-							tipo: "select",
-							elemento: "i3GEO.barraDeBotoes.POSICAO",
-							opcoes: ["bottom","top"]
-						},{
-							titulo: "Bot&otilde;es",
-							tipo: "multiselect",
-							elemento: "i3GEO.barraDeBotoes.INCLUIBOTAO",
-							opcoes: i3GEO.barraDeBotoes.INCLUIBOTAO
-						}
+					{
+						titulo: $trad(4,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.barraDeBotoes.MAXBOTOES"
+					},{
+						titulo: $trad(5,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.barraDeBotoes.ATIVA"
+					},{
+						titulo: $trad(6,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.barraDeBotoes.OFFSET"
+					},{
+						titulo: $trad(7,i3GEOF.preferencias.dicionario),
+						tipo: "select",
+						elemento: "i3GEO.barraDeBotoes.POSICAO",
+						opcoes: ["bottom","top"]
+					},{
+						titulo: $trad(8,i3GEOF.preferencias.dicionario),
+						tipo: "multiselect",
+						elemento: "i3GEO.barraDeBotoes.INCLUIBOTAO",
+						opcoes: i3GEO.barraDeBotoes.INCLUIBOTAO
+					}
+				]
+			},{
+				titulo: $trad(10,i3GEOF.preferencias.dicionario),
+				props: [
+					{
+						titulo: $trad(11,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.BARRAPROGRESSO"
+					},{
+						titulo: $trad(12,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS"
+					}
 				]
 			}
-	],
+		];
+		return lista;
+	},
 	/*
 	Variavel: aguarde
 
@@ -136,17 +153,21 @@ i3GEOF.preferencias = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var lista = i3GEOF.preferencias.lista,
+		var lista = i3GEOF.preferencias.lista(),
 			n = lista.length,
 			i = 0,
-			ins = "",
+			ins = "<div id=i3GEOPreferenciasRaiz >",
 			nj = 0,
 			j = 0,
 			props,
 			estilo = "margin-left:10px;cursor:default;width:250px",
 			nk = 0,
 			k =0,
-			valores,nomes;
+			l=0,
+			numl=0,
+			ids = [],
+			valores,
+			nomes;
 		for(i=0;i<n;i++){
 			ins += "<p onclick='javascript:i3GEOF.preferencias.expande("+i+")' class=paragrafo style=cursor:pointer;color:navy ><b>"+lista[i].titulo+"</b><p>";
 			ins += "<div style=display:none id='listaPref"+i+"'>";
@@ -176,15 +197,22 @@ i3GEOF.preferencias = {
 				}
 				if(props[j].tipo === "multiselect"){
 					valores = i3GEO.util.listaChaves(props[j].opcoes);
-					nk = valores.length;
-					ins += "<select multiple size=5 id='"+props[j].elemento+"' style='"+estilo+"' >";
-					for(k=0;k<nk;k++){
-						ins += "<option value='"+valores[k]+"' >"+valores[k]+"</option>";
+					numl = valores.length;
+					for(l=0;l<numl;l++){
+						ids.push(props[j].elemento+"."+valores[l]);
 					}
-					ins += "</select><br><br>";
+					ins += i3GEO.util.checkCombo(
+						props[j].elemento,
+						valores,
+						valores,
+						estilo+";overflow:auto;height:50px;border:1px solid gray;background-color:white",
+						"",
+						ids
+					);
+					ins += "<br><br>";
 				}
 			}
-			ins += "</div>";
+			ins += "</div></div>";
 		}
 		return ins;
 	},
@@ -216,7 +244,7 @@ i3GEOF.preferencias = {
 		);
 		divid = janela[2].id;
 		var rodape = '' +
-			'<input id=i3GEOpreferenciasbotao1 size=20  type=button value="'+$trad(1,i3GEOF.preferencias.dicionario)+'" />' +
+			'<input id=i3GEOpreferenciasbotao1 size=20  type=button value="'+$trad(1,i3GEOF.preferencias.dicionario)+'" />&nbsp;&nbsp;&nbsp;' +
 			'<input id=i3GEOpreferenciasbotao2 size=20 type=button value="'+$trad(2,i3GEOF.preferencias.dicionario)+'" />' ;
 		janela[0].setFooter("<div style=background-color:#F2F2F2; >"+rodape+"</div>");
 
@@ -235,12 +263,59 @@ i3GEOF.preferencias = {
 		}
 	},
 	limpa: function(){
-
+		i3GEO.util.insereCookie("preferenciasDoI3Geo","",365);
+		$i("i3GEOF.preferencias_corpo").innerHTML = i3GEOF.preferencias.html();
+		i3GEO.janela.tempoMsg($trad(3,i3GEOF.preferencias.dicionario));
 	},
 	salva: function(){
-
+		var i = 0,
+			j = 0,
+			tipos = ["select","input"],
+			ntipos = tipos.length,
+			elem = [],
+			nelem,
+			pares = [],
+			raiz = $i("i3GEOPreferenciasRaiz");
+		for(i=0;i<ntipos;i++){
+			elem = raiz.getElementsByTagName(tipos[i]);
+			nelem = elem.length;
+			for(j=0;j<nelem;j++){
+				if(elem[j].value != ""){
+					if (elem[j].type === "checkbox"){
+						pares.push(elem[j].id+"|"+elem[j].checked);
+					}
+					else{
+						pares.push(elem[j].id+"|"+elem[j].value);
+					}
+				}
+			}
+		}
+		i3GEO.janela.tempoMsg($trad(3,i3GEOF.preferencias.dicionario));
+		i3GEO.util.insereCookie("preferenciasDoI3Geo",pares.join(":"),365);
 	},
 	carrega: function(){
-
+		var cookies = i3GEO.util.pegaCookie("preferenciasDoI3Geo"),
+			i,props,nprops,temp,elem;
+		if(cookies){
+			props = cookies.split(":");
+			nprops = props.length;
+			for(i=0;i<nprops;i++){
+				temp = props[i].split("|");
+				elem = $i(temp[0]);
+				if(elem){
+					if (elem.type === "checkbox"){
+						if(temp[1] == "true"){
+							elem.checked = true;
+						}
+						else{
+							elem.checked = false;
+						}
+					}
+					else{
+						elem.value = temp[1];
+					}
+				}
+			}
+		}
 	}
 };

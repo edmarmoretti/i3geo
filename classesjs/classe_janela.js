@@ -343,6 +343,7 @@ i3GEO.janela = {
 					i3GEO.janela.minimiza();
 				}, janela, true);
 			}
+			resize.getProxyEl().style.height = "0px";
 		}
 		if(nx !== "" && nx !== "center"){
 			janela.moveTo(nx,ny + 50);

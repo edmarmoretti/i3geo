@@ -1715,14 +1715,21 @@ i3GEO.util = {
 
 	funcaoclick {string} - string inserida no evento onclick
 
+	ids (opcional) array com os ids de cada checkbox
+
 	*/
-	checkCombo: function(id,nomes,valores,estilo,funcaoclick){
+	checkCombo: function(id,nomes,valores,estilo,funcaoclick,ids){
 		var i, combo = "",
 			n = valores.length;
 		if (n > 0){
 			combo = "<div style='"+estilo+"'><table class=lista3 id="+id+" >";
 			for (i=0;i<n;i++){
-				combo += "<tr><td><input onclick="+funcaoclick+" size=2 style='top:1px;cursor:pointer' type=checkbox value='"+valores[i]+"' /></td><td>"+nomes[i]+"</td>";
+				if(!ids){
+					combo += "<tr><td><input onclick="+funcaoclick+" size=2 style='top:1px;cursor:pointer' type=checkbox value='"+valores[i]+"' /></td><td>"+nomes[i]+"</td>";
+				}
+				else{
+					combo += "<tr><td><input id="+ids[i]+" onclick="+funcaoclick+" size=2 style='top:1px;cursor:pointer' type=checkbox value='"+valores[i]+"' /></td><td>"+nomes[i]+"</td>";
+				}
 			}
 			combo += "</table></div>";
 		}
