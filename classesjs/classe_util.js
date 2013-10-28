@@ -229,8 +229,7 @@ i3GEO.util = {
 		var keys,key = "";
 		keys = [];
 		for(key in obj){
-			if(obj[key])
-			{keys.push(key);}
+			keys.push(key);
 		}
 		return keys;
 	},

@@ -475,7 +475,8 @@ class Metaestat{
 		//sql para o mapserver
 		$sqlgeo = 	str_replace("__SQLDADOS__",$sqlDadosMedidaVariavel,$sqlIntermediario);
 		$colunasComGeo = $colunasSemGeo;
-		$colunasComGeo[] = "/*SG*/st_setsrid(".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo." /*SG*/";
+		//$colunasComGeo[] = "/*SG*/st_setsrid(".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo." /*SG*/";
+		$colunasComGeo[] = "/*SG*/".$colunageo." as ".$colunageo." /*SG*/";
 		$sqlgeo = str_replace("__COLUNASSEMGEO__",implode(",",$colunasComGeo),$sqlgeo);
 		$sqlgeo = $colunageo." from /*SE*/(".$sqlgeo.")/*SE*/ as foo using unique ".$dadosgeo["identificador"]." using srid=".$dadosgeo["srid"];
 

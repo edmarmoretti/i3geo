@@ -41,6 +41,36 @@ Classe: i3GEOF.preferencias
 
 */
 i3GEOF.preferencias = {
+	lista:[
+			{
+				titulo: "Barra de bot&otilde;es",
+				props: [
+						{
+							titulo: "N&uacute;mero m&aacute;ximo de bot&otilde;es",
+							tipo: "numero",
+							elemento: "i3GEO.barraDeBotoes.MAXBOTOES"
+						},{
+							titulo: "Mostra a barra",
+							tipo: "boolean",
+							elemento: "i3GEO.barraDeBotoes.ATIVA"
+						},{
+							titulo: "Deslocamento vertical",
+							tipo: "numero",
+							elemento: "i3GEO.barraDeBotoes.OFFSET"
+						},{
+							titulo: "Posi&ccedil;&atilde;o",
+							tipo: "select",
+							elemento: "i3GEO.barraDeBotoes.POSICAO",
+							opcoes: ["bottom","top"]
+						},{
+							titulo: "Bot&otilde;es",
+							tipo: "multiselect",
+							elemento: "i3GEO.barraDeBotoes.INCLUIBOTAO",
+							opcoes: i3GEO.barraDeBotoes.INCLUIBOTAO
+						}
+				]
+			}
+	],
 	/*
 	Variavel: aguarde
 
@@ -95,8 +125,6 @@ i3GEOF.preferencias = {
 			i3GEOF.preferencias.carrega();
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
-		if(i3GEO.Interface.ATUAL !== "padrao")
-		{i3GEO.janela.tempoMsg($trad(1,i3GEOF.preferencias.dicionario));}
 	},
 	/*
 	Function: html
@@ -108,7 +136,57 @@ i3GEOF.preferencias = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		return "";
+		var lista = i3GEOF.preferencias.lista,
+			n = lista.length,
+			i = 0,
+			ins = "",
+			nj = 0,
+			j = 0,
+			props,
+			estilo = "margin-left:10px;cursor:default;width:250px",
+			nk = 0,
+			k =0,
+			valores,nomes;
+		for(i=0;i<n;i++){
+			ins += "<p onclick='javascript:i3GEOF.preferencias.expande("+i+")' class=paragrafo style=cursor:pointer;color:navy ><b>"+lista[i].titulo+"</b><p>";
+			ins += "<div style=display:none id='listaPref"+i+"'>";
+			props = lista[i].props;
+			nj = props.length;
+			for(j=0;j<nj;j++){
+				ins += "<p class=paragrafo >"+props[j].titulo+"</p>";
+				if(props[j].tipo === "numero" || props[j].tipo === "texto"){
+					ins += "<input type=text value='' id='"+props[j].elemento+"' style='"+estilo+"' /><br><br>";
+				}
+				if(props[j].tipo === "boolean" || props[j].tipo === "select"){
+					if(props[j].tipo === "boolean"){
+						valores = [1,0];
+						nomes = ["true","false"];
+					}
+					else{
+						valores = props[j].opcoes;
+						nomes = props[j].opcoes;
+					}
+					nk = valores.length;
+					ins += "<select id='"+props[j].elemento+"' style='"+estilo+"' >";
+					ins += "<option value='' >---</option>";
+					for(k=0;k<nk;k++){
+						ins += "<option value='"+valores[k]+"' >"+nomes[k]+"</option>";
+					}
+					ins += "</select><br><br>";
+				}
+				if(props[j].tipo === "multiselect"){
+					valores = i3GEO.util.listaChaves(props[j].opcoes);
+					nk = valores.length;
+					ins += "<select multiple size=5 id='"+props[j].elemento+"' style='"+estilo+"' >";
+					for(k=0;k<nk;k++){
+						ins += "<option value='"+valores[k]+"' >"+valores[k]+"</option>";
+					}
+					ins += "</select><br><br>";
+				}
+			}
+			ins += "</div>";
+		}
+		return ins;
 	},
 	/*
 	Function: iniciaJanelaFlutuante
@@ -125,7 +203,7 @@ i3GEOF.preferencias = {
 		titulo = $trad("x86")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=3' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
-			"500px",
+			"300px",
 			"",
 			"",
 			"",
@@ -147,13 +225,22 @@ i3GEOF.preferencias = {
 		i3GEOF.preferencias.aguarde = $i("i3GEOF.preferencias_imagemCabecalho").style;
 		i3GEOF.preferencias.inicia(divid);
 	},
+	expande: function(id){
+		var s = $i("listaPref"+id).style;
+		if(s.display === "block"){
+			s.display = "none";
+		}
+		else{
+			s.display = "block";
+		}
+	},
 	limpa: function(){
-		
+
 	},
 	salva: function(){
-		
-	}
+
+	},
 	carrega: function(){
-		
+
 	}
 };

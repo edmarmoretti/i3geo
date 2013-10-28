@@ -179,11 +179,11 @@ botoesIni.push({
 	"titulo":$trad(14,g_traducao_init)
 	},{
 	"img":"accessories-dictionary.png",
-	"href":"../documentacao/manual-i3geo-4_7-pt.pdf",
+	"href":"../documentacao/manual-i3geo-5_0-pt.pdf",
 	"titulo":$trad(15,g_traducao_init)
 	},{
 	"img":"accessories-dictionary.png",
-	"href":"../documentacao/manual-admin-i3geo-4_7-pt.pdf",
+	"href":"../documentacao/manual-admin-i3geo-5_0-pt.pdf",
 	"titulo":$trad(21,g_traducao_init)
 	},{
 	"img":"accessories-dictionary.png",

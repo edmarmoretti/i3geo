@@ -12,5 +12,5 @@ i3GEOF.preferencias.dicionario = {
 			es:"",
 			it:""
 		}]
-		
+
 	};
