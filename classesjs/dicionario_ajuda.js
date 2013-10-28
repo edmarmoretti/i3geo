@@ -960,6 +960,14 @@ g_traducao_ajuda = {
 			pt:"Essa ferramenta apresenta os servi&ccedil;os WMS cadastrados no servidor da Infra-estrutura Nacional de Dados Espaciais do Brasil. O usu&aacute;rio pode escolher diferentes camadas para visualiza&ccedil;&atilde;o e consulta.",
 			complemento:"",
 			apijs: "i3GEO.arvoreDeTemas.dialogo.vinde()"
+		},
+		"115": {
+			titulo: "Prefer&ecirc;ncias",
+			diretorio:"i3geo/ferramentas/preferencias",
+			categoria:"1",
+			pt:"Guarda as prefer&ecirc;ncias do usu&aacute;rio em rela&ccedil;&atilde;o aos par&acirc;metros que controlam a interface do mapa",
+			complemento:"",
+			apijs: "i3GEO.mapa.dialogo.preferencias()"
 		}
 	}
 };

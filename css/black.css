@@ -149,4 +149,9 @@ Menu superior de opcoes
 #menuajudaMenu{
 	color: white;
 }
-
+.comboTemasCabecalho .yuimenuitemlabel{
+	color: black;
+}
+.comboTemasCabecalho .yuimenuitemlabel:visited{
+	color: black;
+}

@@ -2137,6 +2137,13 @@ pt:"Visualizador de WMS da INDE-Br",
 en:"",
 es:"",
 it:""
+}],
+"x86":[
+{
+pt:"Prefer&ecirc;ncias",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

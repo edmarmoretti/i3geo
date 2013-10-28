@@ -1008,6 +1008,7 @@ i3GEO.janela = {
 					botao = new YAHOO.widget.Button(idCombo, {
 						type: "menu",
 						menu: idCombo+"select"
+						//menuclassname: "yui-button-menu-i3geo"
 					});
 
 					if(i3GEO.temaAtivo != ""){
