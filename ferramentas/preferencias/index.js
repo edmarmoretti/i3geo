@@ -42,7 +42,6 @@ Classe: i3GEOF.preferencias
 */
 i3GEOF.preferencias = {
 	lista: function(){
-
 		var lista = [
 			{
 				titulo: $trad(9,i3GEOF.preferencias.dicionario),
@@ -82,6 +81,47 @@ i3GEOF.preferencias = {
 						titulo: $trad(12,i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS"
+					},{
+						titulo: $trad(13,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.EXPANDESOLEGENDA"
+					},{
+						titulo: $trad(14,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.PERMITEEXPANDIRTEMAS"
+					},{
+						titulo: $trad(15,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.EXPANDIDA"
+					},{
+						titulo: $trad(16,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.LEGENDAEXPANDIDA"
+					},{
+						titulo: $trad(17,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.OPCOESICONES"
+					},{
+						titulo: $trad(18,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.OPCOESTEMAS"
+					},{
+						titulo: $trad(19,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.OPCOESLEGENDA"
+					},{
+						titulo: $trad(20,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.AGUARDALEGENDA"
+					},{
+						titulo: $trad(21,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.ICONETEMA"
+					},{
+						titulo: $trad(22,i3GEOF.preferencias.dicionario),
+						tipo: "multiselect",
+						elemento: "i3GEO.arvoreDeCamadas.FUNCOES",
+						opcoes: i3GEO.arvoreDeCamadas.FUNCOES
 					}
 				]
 			}

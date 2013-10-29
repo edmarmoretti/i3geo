@@ -73,61 +73,61 @@ i3GEOF.preferencias.dicionario = {
 			it:""
 		}],
 		13: [{
-			pt:"",
+			pt:"Ao expandir um tema mostra apenas a legenda, sem as outras op&ccedil;&otilde;es",
 			en:"",
 			es:"",
 			it:""
 		}],
 		14: [{
-			pt:"",
+			pt:"Permite que as op&ccedil;&otilde;es abaixo dos n&oacute;s referentes a cada tema sejam mostradas",
 			en:"",
 			es:"",
 			it:""
 		}],
 		15: [{
-			pt:"",
+			pt:"A &aacute;rvore ser&aacute; montada de forma expandida ou n&atilde;o. Se true, os n&oacute;s do primeiro n&iacute;vel ser&atilde;o abertos na inicializa&ccedil;&atilde;o da &aacute;rvore",
 			en:"",
 			es:"",
 			it:""
 		}],
 		16: [{
-			pt:"",
+			pt:"A legenda da &aacute;rvore ser&aacute; montada de forma expandida ou n&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
 		17: [{
-			pt:"",
+			pt:"Inclui ou n&atilde;o os &iacute;cones de op&ccedil;&otilde;es em cada tema (farol, zoom para o tema, etc)",
 			en:"",
 			es:"",
 			it:""
 		}],
 		18: [{
-			pt:"",
+			pt:"Inclui ou n&atilde;o o n&oacute; com as op&ccedil;&otilde;es de manipula&ccedil;&atilde;o de cada tema",
 			en:"",
 			es:"",
 			it:""
 		}],
 		19: [{
-			pt:"",
+			pt:"Inclui ou n&atilde;o o n&oacute; para mostrar a legenda do tema",
 			en:"",
 			es:"",
 			it:""
 		}],
 		20: [{
-			pt:"",
+			pt:"Ativa a op&ccedil;&atilde;o de aguarde para mostrar a legenda de um tema quando o usu&aacute;rio estaciona o mouse sobre o nome de um tema",
 			en:"",
 			es:"",
 			it:""
 		}],
 		21: [{
-			pt:"",
+			pt:"Mostra ou n&atilde;o o &iacute;cone que repreenta o tema caso exista",
 			en:"",
 			es:"",
 			it:""
 		}],
 		22: [{
-			pt:"",
+			pt:"Indica&ccedil;&atilde;o de quais fun&ccedil;&otilde;es ser&atilde;o inclu&iacute;das em cada tema mostrado na &aacute;rvore quando o usu&aacute;rio aciona o item op&ccedil;&otilde;es",
 			en:"",
 			es:"",
 			it:""

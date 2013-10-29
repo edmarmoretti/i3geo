@@ -1381,7 +1381,14 @@ i3GEO.util = {
 			head.appendChild(script);
 		}
 		else{
-			if(ini !== ""){eval(ini);}
+			if(ini !== ""){
+				if(YAHOO.lang.isFunction(ini)){
+					ini.call();
+				}
+				else{
+					eval(ini);
+				}
+			}
 		}
 	},
 	/*
