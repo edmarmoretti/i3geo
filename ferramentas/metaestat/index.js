@@ -1372,7 +1372,9 @@ i3GEOF.metaestat = {
 					}
 					else{
 						val = i3GEO.util.valoresCheckCombo(c.id);
-						t.push(dados[i].coluna+' IN ("'+val.join('","')+'")');
+						if(val.length > 0){
+							t.push(dados[i].coluna+' IN ("'+val.join('","')+'")');
+						}
 					}
 				}
 			}
