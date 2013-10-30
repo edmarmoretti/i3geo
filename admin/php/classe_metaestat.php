@@ -443,7 +443,7 @@ class Metaestat{
 		//@TODO verificar tipos das colunas no join para tornar mais rapida a juncao
 		$sqlIntermediario = "SELECT (j.valorcalculado) AS ".$dados["colunavalor"].", __COLUNASSEMGEO__".
 		" FROM ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." AS regiao ".
-		" LEFT JOIN ( __SQLDADOS__ ) ".
+		" INNER JOIN ( __SQLDADOS__ ) ".
 		" AS j ON j.cod_regiao::text = regiao.".$dadosgeo["identificador"]."::text";
 
 		//inclui os sqls de regioes de niveis inferiores
@@ -459,7 +459,7 @@ class Metaestat{
 						$tempDadosRegiao = $this->listaTipoRegiao($idregiao);
 						$temp = "SELECT regiao.".$dadosColunas[$idregiao]["colunaligacao_regiaopai"]." AS cod_regiao,sum(j.valorcalculado) AS valorcalculado ".
 						"FROM ".$tempDadosRegiao["esquemadb"].".".$tempDadosRegiao["tabela"]." AS regiao ".
-						"LEFT JOIN ".
+						"INNER JOIN ".
 						"( __SQLDADOS__ )".
 						" AS j ON j.cod_regiao::text = regiao.".$tempDadosRegiao["identificador"]."::text GROUP BY regiao.".$dadosColunas[$idregiao]["colunaligacao_regiaopai"];
 						$sqlIntermediario = str_replace("__SQLDADOS__",$temp,$sqlIntermediario);
@@ -1244,7 +1244,7 @@ class Metaestat{
 				if($this->convUTF){
 					$nomemedida = utf8_encode($nomemedida);
 				}
-				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_medida_variavel SET codigo_unidade_medida = '$codigo_unidade_medida',codigo_tipo_periodo = '$codigo_tipo_periodo',codigo_tipo_regiao = '$codigo_tipo_regiao',codigo_estat_conexao = '$codigo_estat_conexao',esquemadb = '$esquemadb',tabela = '$tabela',colunavalor = '$colunavalor',colunaidgeo = '$colunaidgeo',colunaidunico = '$colunaidunico' ,filtro = '$filtro',nomemedida = '$nomemedida' WHERE id_medida_variavel = $id_medida_variavel");
+				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_medida_variavel SET codigo_unidade_medida = '$codigo_unidade_medida',codigo_tipo_periodo = '$codigo_tipo_periodo',codigo_tipo_regiao = '$codigo_tipo_regiao',codigo_estat_conexao = '$codigo_estat_conexao',esquemadb = '$esquemadb',tabela = '$tabela',colunavalor = '$colunavalor',colunaidgeo = '$colunaidgeo',colunaidunico = '$colunaidunico' ,filtro = '".$filtro."',nomemedida = '$nomemedida' WHERE id_medida_variavel = $id_medida_variavel");
 				$retorna = $id_medida_variavel;
 			}
 			else{
@@ -1758,8 +1758,9 @@ class Metaestat{
 		elseif($id_medida_variavel != "") {
 			$sql .= "WHERE i3geoestat_medida_variavel.id_medida_variavel = $id_medida_variavel ";
 		}
-		//echo $sql;exit;
-		return $this->execSQL($sql,$id_medida_variavel);
+		$res = $this->execSQL($sql,$id_medida_variavel);
+		$res = str_replace('"',"'",$res);
+		return $res;
 	}
 	/**
 	 * Lista as regioes vinculadas a uma medida de variavel

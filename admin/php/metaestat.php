@@ -351,6 +351,8 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "ALTERAMEDIDAVARIAVEL":
+		$filtro =  $_GET["filtro"];
+		$filtro = str_replace("'",'"',$filtro);
 		$m = new Metaestat();
 		$default = false;
 		//verifica se a criacao da medida esta sendo feita na tabela default
