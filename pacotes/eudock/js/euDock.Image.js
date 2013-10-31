@@ -90,46 +90,55 @@ if (!euEnv.imageBasePath)
 			this.setPosX   = function(x) {document.getElementById(this.id).style.left=x+'px';};
 			this.getPosY   = function() {return document.getElementById(this.id).style.top.replace(/[^0-9]/g,"");};
 			this.setPosY   = function(y) {
-				if(container.id === "euDock_0"){
+			if(container.id === "euDock_0"){
 					document.getElementById(this.id).style.top=(y - 10)+'px';
 				}
 				else{
 					document.getElementById(this.id).style.top= y + 'px';
 				}
 			};
-			this.getWidth  = function() {return document.getElementById(this.id).width;};
-			this.setWidth  = function(w){document.getElementById(this.id).width=Math.round(w);};
-			this.getHeight  = function() {return document.getElementById(this.id).height;};
-			this.setHeight = function(h){document.getElementById(this.id).height=Math.round(h);};
+				this.getWidth  = function() {
+					if(document.getElementById(this.id)){
+						return document.getElementById(this.id).width;
+					}
+				};
+				this.setWidth  = function(w){document.getElementById(this.id).width=Math.round(w);};
+				this.getHeight  = function() {
+					if(document.getElementById(this.id)){
+						return document.getElementById(this.id).height;
+					}
+				};
+				this.setHeight = function(h){document.getElementById(this.id).height=Math.round(h);};
 
-			this.hide = function(){document.getElementById(this.id).style.visibility='hidden';};
-			this.show = function(){document.getElementById(this.id).style.visibility='visible';};
+				this.hide = function(){document.getElementById(this.id).style.visibility='hidden';};
+				this.show = function(){document.getElementById(this.id).style.visibility='visible';};
 
-			this.setFading = function(fad){
-				fad=Math.round(fad);
-				if (fad<0)
-					fad=0;
-				if (fad>100)
-					fad=100;
-       			document.getElementById(this.id).style.opacity = (fad/100);
-       			document.getElementById(this.id).style.filter = "alpha(opacity="+(fad)+");";
-			};
-			//alert(id)
-			if(container.id === "euDock_0"){
-				var classe = "eudockImagemBottom";
-				//a barra fica no topo do mapa
-				if(i3GEO.barraDeBotoes.POSICAO === "top"){
-					classe = "eudockImagemTop";
+				this.setFading = function(fad){
+					fad=Math.round(fad);
+					if (fad<0)
+						fad=0;
+					if (fad>100)
+						fad=100;
+					document.getElementById(this.id).style.opacity = (fad/100);
+					document.getElementById(this.id).style.filter = "alpha(opacity="+(fad)+");";
+				};
+				//alert(id)
+				if(container.id === "euDock_0"){
+					var classe = "eudockImagemBottom";
+					//a barra fica no topo do mapa
+					if(i3GEO.barraDeBotoes.POSICAO === "top"){
+						classe = "eudockImagemTop";
+					}
+					this.container.innerHTML+="<img onLoad='"+onLoadFunc+";' id='"+this.id+"' src='"+args.image+"' style='position:absolute;visibility:hidden;' class='"+classe+"' >";
 				}
-				this.container.innerHTML+="<img onLoad='"+onLoadFunc+";' id='"+this.id+"' src='"+args.image+"' style='position:absolute;visibility:hidden;' class='"+classe+"' >";
-			}
-			else{
-				this.container.innerHTML+="<img onLoad='"+onLoadFunc+";' id='"+this.id+"' src='"+args.image+"' style='position:absolute;visibility:hidden;' class='noprint' >";
-			}
+				else{
+					this.container.innerHTML+="<img onLoad='"+onLoadFunc+";' id='"+this.id+"' src='"+args.image+"' style='position:absolute;visibility:hidden;' class='noprint' >";
+				}
 
-			this.destroy = function(){
-				this.container.removeChild(document.getElementById(this.id));
-			};
+				this.destroy = function(){
+					this.container.removeChild(document.getElementById(this.id));
+				};
+			
 		};
 /*
  ****************************************

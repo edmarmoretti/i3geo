@@ -215,7 +215,7 @@ i3GEO.util = {
 	/*
 	Function: listaChaves
 
-	Lista as chaves de um objeto.
+	Lista as chaves de um objeto que forem true.
 
 	Parametros:
 
@@ -226,6 +226,29 @@ i3GEO.util = {
 	(Array) - array com as chaves.
 	*/
 	listaChaves: function (obj) {
+		var keys,key = "";
+		keys = [];
+		for(key in obj){
+			if(obj[key]){
+				keys.push(key);
+			}
+		}
+		return keys;
+	},
+	/*
+	Function: listaTodasChaves
+
+	Lista as chaves de um objeto
+
+	Parametros:
+
+	obj - {Object}
+
+	Return:
+
+	(Array) - array com as chaves.
+	*/
+	listaTodasChaves: function (obj) {
 		var keys,key = "";
 		keys = [];
 		for(key in obj){

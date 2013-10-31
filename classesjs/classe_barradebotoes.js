@@ -386,7 +386,7 @@ i3GEO.barraDeBotoes = {
 		lentei: true,
 		confluence: true,
 		inseregrafico: true,
-		v3d: true
+		v3d: false
 	},
 	/*
 	Propriedade: ICONEBOTAO

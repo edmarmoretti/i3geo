@@ -236,7 +236,7 @@ i3GEOF.preferencias = {
 					ins += "</select><br><br>";
 				}
 				if(props[j].tipo === "multiselect"){
-					valores = i3GEO.util.listaChaves(props[j].opcoes);
+					valores = i3GEO.util.listaTodasChaves(props[j].opcoes);
 					numl = valores.length;
 					for(l=0;l<numl;l++){
 						ids.push(props[j].elemento+"."+valores[l]);
