@@ -178,7 +178,8 @@ if (ob_get_level() == 0) ob_start();
 			flush();
 			sleep(1);
 			if($_POST["incluiserialcsv"] == "on"){
-				$linhasql[] = "alter table ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." add gid serial CONSTRAINT gid_pkey PRIMARY KEY";
+				$linhasql[] = "alter table ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." add gid serial CONSTRAINT ".$_POST["tabelaDestinocsv"]."_gid_pkey PRIMARY KEY";
+				echo "<br>alter table ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." add gid serial CONSTRAINT ".$_POST["tabelaDestinocsv"]."_gid_pkey PRIMARY KEY";
 			}
 			foreach($sqltabela as $linha){
 				try {

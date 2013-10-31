@@ -204,7 +204,8 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	flush();
 	sleep(1);
 	if($_POST["incluiserialshp"] == "on"){
-		$linhas[] = "alter table ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." add gid serial CONSTRAINT gid_pkey PRIMARY KEY";
+		$linhas[] = "alter table ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." add gid serial CONSTRAINT ".$_POST["tabelaDestino"]."_gid_pkey PRIMARY KEY";
+		echo "<br>alter table ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." add gid serial CONSTRAINT ".$_POST["tabelaDestino"]."_gid_pkey PRIMARY KEY";
 	}
 
 	foreach($sqltabela as $linha){
