@@ -445,7 +445,6 @@ class Metaestat{
 		" FROM ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." AS regiao ".
 		" INNER JOIN ( __SQLDADOS__ ) ".
 		" AS j ON j.cod_regiao::text = regiao.".$dadosgeo["identificador"]."::text";
-
 		//inclui os sqls de regioes de niveis inferiores
 		if($agregaregiao == true){
 			$hierarquia = $this->regiaoFilhaAoPai($dados["codigo_tipo_regiao"],$codigo_tipo_regiao);
@@ -963,8 +962,8 @@ class Metaestat{
 		if($limite != ""){
 			$sqlf .= " limit ".$limite;
 		}
+		$sqlf = str_replace(",  FROM"," FROM",$sqlf);
 		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
-
 		if(!empty($metaVariavel["codigo_estat_conexao"])){
 			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
 			$dbhold = $this->dbh;
