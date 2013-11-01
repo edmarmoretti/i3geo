@@ -671,11 +671,14 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	$dbhw = null;
 	return $xml;
 }
+//mostra apenas os mapas que possuem outros_mapa definido, o que e tipico do sistema de metadados estatisticos
 function geraRSSmapas($locaplic)
 {
 	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$sql = "select '' as tipo_ws,linkdireto as link_ws, nome_mapa as nome_ws, '' as desc_ws, '' as autor_ws from ".$esquemaadmin."i3geoadmin_mapas WHERE linkdireto != ''";
+	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace("/admin/php/xml.php","",__FILE__)));
+	$sql = "select '' as tipo_ws,'".$url."/ms_criamapa.php?restauramapa='||id_mapa as link_ws, nome_mapa as nome_ws, '' as desc_ws, '' as autor_ws from ".$esquemaadmin."i3geoadmin_mapas WHERE publicado_mapa = 'sim' AND mapfile != ''";
+	//echo $sql;exit;
 	return geraXmlRSS($locaplic,$sql,"Mapas cadastrados");
 }
 
