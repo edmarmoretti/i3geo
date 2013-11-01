@@ -671,6 +671,14 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	$dbhw = null;
 	return $xml;
 }
+function geraRSSmapas($locaplic)
+{
+	global $esquemaadmin;
+	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+	$sql = "select '' as tipo_ws,linkdireto as link_ws, nome_mapa as nome_ws, '' as desc_ws, '' as autor_ws from ".$esquemaadmin."i3geoadmin_mapas WHERE linkdireto != ''";
+	return geraXmlRSS($locaplic,$sql,"Mapas cadastrados");
+}
+
 //
 //$id_menu = id do menu que ser&aacute; montado
 //$perfil = perfis separados por espa&ccedil;os

@@ -2,7 +2,7 @@
 /*
 Title: xmlmapas
 
-Monta um arquivo XML, no padr&atilde;o RSS, contendo a lista de links para outros mapas.
+Monta um arquivo XML contendo a lista de links para outros mapas.
 
 <http://localhost/i3geo/admin/xmlmapas.php>
 
