@@ -84,6 +84,7 @@ $funcoesEdicao = array(
 	"OBTEMDADOSTABELADB",
 	"INSERIRDADOS",
 	"MANTEMDADOSREGIAO",
+	"SALVAATRIBUTOSTIPOREGIAO",
 	"SALVAATRIBUTOSMEDIDAVARIAVEL",
 	"EXCLUIATRIBUTOSMEDIDAVARIAVEL",
 	"REGIAO2SHP"
@@ -1490,6 +1491,13 @@ switch (strtoupper($funcao))
 		retornaJSON($resultado);
 		exit;
 	break;
+	//utilizado na ferramenta de identificacao
+	case "SALVAATRIBUTOSTIPOREGIAO":
+		$m = new Metaestat();
+		$resultado = $m->mantemDadosRegiao($codigo_tipo_regiao,$identificador_regiao,$identificador_regiao,$valores,"","alterar");
+		retornaJSON($resultado);
+		exit;
+		break;
 	case "EXCLUIATRIBUTOSMEDIDAVARIAVEL":
 		$m = new Metaestat();
 		$resultado = $m->excluiAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$id);

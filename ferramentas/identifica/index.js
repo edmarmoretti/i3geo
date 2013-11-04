@@ -678,8 +678,11 @@ i3GEOF.identifica = {
 							tip = "&nbsp;&nbsp;";
 							textovalor = resultados[j][k].valor;
 							if(resultados[j][k].item === retorno[i].editavel && idreg != ""){
-								idsalva = "idsalva"+retorno[i].codigo_tipo_regiao+"_"+retorno[i].id_medida_variavel+"_"+idreg;
-								paramsalva = retorno[i].id_medida_variavel+","+idreg+",\""+retorno[i].editavel+"\","+retorno[i].codigo_tipo_regiao;
+								if(retorno[i].tiposalva == "regiao"){
+									retorno[i].id_medida_variavel = 0;
+								}
+								idsalva = "idsalva"+retorno[i].tiposalva+retorno[i].codigo_tipo_regiao+"_"+retorno[i].id_medida_variavel+"_"+idreg;
+								paramsalva = retorno[i].id_medida_variavel+","+idreg+",\""+retorno[i].editavel+"\","+retorno[i].codigo_tipo_regiao+",\"\",\""+retorno[i].tiposalva+"\"";
 								textovalor = "<br><img title='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' style='margin-right:2px;position:relative;top:3px;width:12px;'>" +
 									"<img onclick='i3GEOF.identifica.salvaDados("+paramsalva+")' title='Salvar' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/media-floppy.png' style='cursor:pointer;margin-right:2px;position:relative;top:3px;width:12px;'>" +
 									"<input id='"+idsalva+"' type=text value='"+textovalor+"' class=digitar style='widh:210px' />";
@@ -716,18 +719,25 @@ i3GEOF.identifica = {
 			$i("i3GEOidentificaocorrencia").innerHTML=res;
 		}
 	},
-	salvaDados: function(id_medida_variavel,idreg,coluna,codigo_tipo_regiao,tema){
+	salvaDados: function(id_medida_variavel,idreg,coluna,codigo_tipo_regiao,tema,tiposalva){
 		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=salvaAtributosMedidaVariavel",
-			idvalor = $i("idsalva"+codigo_tipo_regiao+"_"+id_medida_variavel+"_"+idreg),
+			idvalor = $i("idsalva"+tiposalva+codigo_tipo_regiao+"_"+id_medida_variavel+"_"+idreg),
 			temp = function(retorno){
 				i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
 				i3GEO.Interface.atualizaTema("",i3GEOF.identifica.tema);
 			};
+
 		if(idvalor){
 			i3GEO.janela.AGUARDEMODAL = true;
 			i3GEO.janela.abreAguarde("aguardeSalvaAtributos","Salvando...");
 			i3GEO.janela.AGUARDEMODAL = false;
-			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao=&id_medida_variavel="+id_medida_variavel+"&colunas="+coluna+"&valores="+idvalor.value+"&idsunicos="+idreg);
+			if(tiposalva === "regiao"){
+				p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=salvaAtributosTipoRegiao";
+				cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+idreg+"&colunas="+coluna+"&valores="+idvalor.value);
+			}
+			else{
+				cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao=&id_medida_variavel="+id_medida_variavel+"&colunas="+coluna+"&valores="+idvalor.value+"&idsunicos="+idreg);
+			}
 		}
 		else{
 			alert("ocorreu um erro");

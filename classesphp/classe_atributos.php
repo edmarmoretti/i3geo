@@ -1322,6 +1322,8 @@ class Atributos
 				$nometmp = $layer->getMetaData("ALTTEMA");
 			}
 			$nometmp = $this->converte($nometmp);
+			//identificador que marca o tipo de dados que podem ser salvos
+			$tiposalva = "";
 			//verifica se e editavel no metaestat
 			if($layer->getmetadata("METAESTATEDITAVEL") == "SIM"){
 				//verifica login
@@ -1343,6 +1345,7 @@ class Atributos
 							$editavel = "sim";
 						}
 						if($editavel == "sim"){
+							$editavel = "nao";
 							$id_medida_variavel = $layer->getMetaData("METAESTAT_ID_MEDIDA_VARIAVEL");
 							if($id_medida_variavel != ""){
 								include_once(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
@@ -1351,16 +1354,24 @@ class Atributos
 								$editavel = $medidaVariavel["colunavalor"];
 								$colunaidunico = $medidaVariavel["colunaidunico"];
 								$codigo_tipo_regiao = $medidaVariavel["codigo_tipo_regiao"];
+								$tiposalva = "medida_variavel";
 							}
-							else{
-								$editavel = "nao";
+							$codigo_tipo_regiao = $layer->getMetaData("METAESTAT_CODIGO_TIPO_REGIAO");
+							if($codigo_tipo_regiao != ""){
+								include_once(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
+								$m = new Metaestat();
+								$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
+								$editavel = $regiao["colunanomeregiao"];
+								$colunaidunico = $regiao["identificador"];
+								$codigo_tipo_regiao = $codigo_tipo_regiao;
+								$tiposalva = "regiao";
 							}
 						}
 					}
 				}
 
 			}
-			$final[] = array("nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel,"colunaidunico"=>$colunaidunico,"id_medida_variavel"=>$id_medida_variavel,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
+			$final[] = array("tiposalva"=>$tiposalva,"nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel,"colunaidunico"=>$colunaidunico,"id_medida_variavel"=>$id_medida_variavel,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
 		}
 		return $final;
 	}

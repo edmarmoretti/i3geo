@@ -821,6 +821,9 @@ class Metaestat{
 			$dados[] = '		CLASSE "SIM"';
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
+			if($meta["esquemadb"] == "i3geo_metaestat"){
+				$dados[] = '		METAESTATEDITAVEL "SIM"';
+			}
 			$dados[] = '		TIP "'.$meta["colunanomeregiao"].'"';
 			if(count($itens) == count($apelidos)){
 				$dados[] = '		ITENS "'.implode(",",$itens).'"';
