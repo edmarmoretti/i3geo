@@ -13,7 +13,10 @@
 			padding: 0 3px 5px 0;
 			text-align: left;
 		}
-
+		.ygtvlabel, .ygtvlabel:link {
+			position: relative;
+			top: -2px;
+		}
 	</style>
 	</head>
 	<body class=" yui-skin-sam" style="background-color:white;text-align:left;">
@@ -329,6 +332,8 @@
 		}
 	]}];
 	var tree = new YAHOO.widget.TreeView("arvore",propriedades);
+	//tree.subscribe("clickEvent",tree.onEventToggleHighlight);
+	//tree.setNodesProperty("expand",true);
 	tree.render();
 	</script>
 	</html>

@@ -361,7 +361,7 @@ i3GEO.util = {
 		try{
 			tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = false;
-			tempNode.enableHighlight = false;
+			tempNode.enableHighlight = true;
 		}
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
@@ -369,7 +369,7 @@ i3GEO.util = {
 		titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
 		d = {html:titulo};
 		tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
-		tempNode.enableHighlight = false;
+		tempNode.enableHighlight = true;
 		criaNo = function(obj,noDestino){
 			var trad,i,j,linha,conteudo,temaNode,c = obj.propriedades.length;
 			for (i=0, j=c; i<j; i++){

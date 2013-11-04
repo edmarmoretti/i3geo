@@ -1061,11 +1061,11 @@ i3GEO.arvoreDeCamadas = {
 			}
 		}
 		if(i3GEO.arvoreDeCamadas.OPCOESTEMAS === true){
-			opcoesNode = new YAHOO.widget.HTMLNode({html:$trad("t18a"),idopcoes:ltema.name,identifica:ltema.identifica,enableHighlight:false,expanded:false}, node);
+			opcoesNode = new YAHOO.widget.HTMLNode({html:$trad("t18a"),idopcoes:ltema.name,identifica:ltema.identifica,enableHighlight:true,expanded:false}, node);
 			opcoesNode.setDynamicLoad(i3GEO.arvoreDeCamadas.mostraOpcoes, 1);
 		}
 		if(i3GEO.arvoreDeCamadas.OPCOESLEGENDA === true && ltema.classe !== "NAO"){
-			opcoesNode = new YAHOO.widget.HTMLNode({html:$trad("p3"),idlegenda:ltema.name,enableHighlight:false,expanded:i3GEO.arvoreDeCamadas.LEGENDAEXPANDIDA}, node);
+			opcoesNode = new YAHOO.widget.HTMLNode({html:$trad("p3"),idlegenda:ltema.name,enableHighlight:true,expanded:i3GEO.arvoreDeCamadas.LEGENDAEXPANDIDA}, node);
 			opcoesNode.setDynamicLoad(i3GEO.arvoreDeCamadas.mostraLegenda, 1);
 		}
 		node.loadComplete();

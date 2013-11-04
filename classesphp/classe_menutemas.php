@@ -257,7 +257,8 @@ array
 				$k = $this->ixml($s,"LINKDIRETO");
 				$p = $this->ixml($s,"PUBLICADO");
 				$m = $this->ixml($s,"CONTEMMAPFILE");
-				$mapas[] =  array("PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m);
+				$id = $this->ixml($s,"ID_MAPA");
+				$mapas[] =  array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m);
 			}
 		}
 		return (array("mapas"=>$mapas));

@@ -81,7 +81,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 			$colunas[] = $c;
 		}
 	}
-	echo "<br>Numshapes: ". $numshapes;
+	echo "<br>Numshapes existentes no SHP: ". $numshapes;
 	$tipo = $shapefileObj->type;
 	echo "<br>Tipo: ". $tipo;
 	echo "<br>Colunas: ";
@@ -115,6 +115,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	ob_flush();
 	flush();
 	sleep(1);
+	
 	try {
 		$dbh = new PDO('pgsql:dbname='.$conexao["bancodedados"].';user='.$conexao["usuario"].';password='.$conexao["senha"].';host='.$conexao["host"].';port='.$conexao["porta"]);
 	} catch (PDOException $e) {
@@ -187,16 +188,32 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 		foreach($colunas as $coluna){
 			if($tipoColuna[$coluna] == "varchar"){
 				$texto = $s->getValue($layer,$coluna);
-				//echo mb_detect_encoding($texto);
-				$vs[] = "'".mb_convert_encoding($texto,$encodingdb,mb_detect_encoding($texto))."'";
+				//echo $i." - ".mb_detect_encoding($texto)."<br>";
+				$texto = str_replace("'","",$texto);
+				$enc = mb_detect_encoding($texto);
+				if(enc != ""){
+					$texto = "'".mb_convert_encoding($texto,$encodingdb,$enc)."'";
+				}
+				else{
+					$texto = "'".$texto."'";
+				}
+				if($texto == "''"){
+					$texto = 'null';
+				}
+				$vs[] = $texto;
 			}
 			else{
-				$vs[] = $s->getValue($layer,$coluna);
+				$valor = $s->getValue($layer,$coluna);
+				if(empty($valor) && $valor != 0){
+					$valor = 'null';
+				}
+				$vs[] = $valor;
 			}
 		}
 		$vs[] = "st_geomfromtext('".$s->toWkt()."','".$_POST["srid"]."')";
 		$linhas[] = $insert."VALUES(".implode(",",$vs).")";
 	}
+	//echo "<pre>".var_dump($linhas);exit;
 	$layer->close();
 	echo "<br>Incluindo dados";
 	echo "<script>window.scrollTo(0,10000);</script>";
@@ -217,11 +234,20 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	}
 	foreach($linhas as $linha){
 		try {
-			$dbh->query($linha);
+			$res = $dbh->query($linha);
+			if($res == false){
+				echo "<br><br><span style=color:red >Erro em: </span>".$linha;
+			}
 		} catch (PDOException $e) {
 			echo 'Erro: ' . $e->getMessage();
 		}
 	}
+	echo "<br>Registros existentes no SHP: ". $numshapes;
+	$sql = "select * from ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"];
+	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+	$r = $q->fetchAll();
+	echo "<br>Registros na tabela final: ". count($r);
+	echo "<br>Diferen&ccedil;as podem ocorrer em fun&ccedil;&atilde;o de caracteres acentuados n&atilde;o suportados pelo banco de dados";
 	echo "<br><b>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
 }
 else{

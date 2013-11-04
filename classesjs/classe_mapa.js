@@ -541,7 +541,7 @@ i3GEO.mapa = {
 				i3GEO.guias.CONFIGURA["mapas"].click.call(this,divid);
 			}
 			else{
-				window.open(i3GEO.configura.locaplic+"/admin/xmlmapas.php","_blank");
+				window.open(i3GEO.configura.locaplic+"/admin/rssmapas.php","_blank");
 			}
 		},
 		/*

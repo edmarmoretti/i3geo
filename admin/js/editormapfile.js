@@ -194,8 +194,7 @@ function ativaBotaoAdicionaMapfile(idBotao)
 		ins += "<input size=50 type=text id='EtituloES' value='' /></p>";
 		ins += "<p>Ingl&ecirc;s: (opcional)</p>";
 		ins += "<input size=50 type=text id='EtituloEN' value='' /></p>";
-		ins += "<p>Italiano: (opcional)</p>";
-		ins += "<input size=50 type=text id='EtituloIT' value='' /></p>";
+		ins += "<input size=50 type=hidden id='EtituloIT' value='' /></p>";
 		$i("editor_bd").innerHTML = ins;
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
@@ -256,6 +255,7 @@ function montaArvore()
 				var tempNode = new YAHOO.widget.TextNode(letraAtual, root, false);
 				tempNode.isLeaf = true;
 			}
+			tempNode.enableHighlight = false;
 			core_carregando("desativa");
 		}
 		buildTree();
@@ -296,6 +296,7 @@ function montaNosRaiz(redesenha)
 		}
 		var d = {html:conteudo,tipo:"mapfile",id_tema:$mapfiles[i].id_tema,id:$mapfiles[i].codigo,codigoMap:$mapfiles[i].codigo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,iconePlus);
+		tempNode.enableHighlight = false;
 		nos.push(tempNode);
 	}
 	if(redesenha=="sim")
@@ -322,10 +323,12 @@ function montaRaizTema(no,dados)
 		var d = {tipo:"etiqueta",etiquetaGrupousrTema:no.data.id_tema,html:"<i>Grupos de usu&aacute;rios que podem utilizar</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, true,true);
 		tempNodeR.isLeaf = false;
+		tempNodeR.enableHighlight = false;
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editorGrupousr('"+no.data.id_tema+"','"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>Adicionar um novo</i></span>";
 		var d = {html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	//adiciona a lista de grupos de usuarios no no
 	for (var i=0, j=dados.gruposusr.length; i<j; i++)
@@ -333,6 +336,7 @@ function montaRaizTema(no,dados)
 		tempNode = new YAHOO.widget.HTMLNode(montaNoGruposUsrTema(dados.gruposusr[i]), tempNodeR, false,true);
 		//tempNode.setDynamicLoad(loadLayerData, 0);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	//no que permite listar os layers de um mapfile
 	if(!tree.getNodeByProperty("etiquetaLayers",no.data.codigoMap))
@@ -340,11 +344,13 @@ function montaRaizTema(no,dados)
 		var d = {tipo:"etiqueta",etiquetaLayers:no.data.codigoMap,html:"<i>Layers</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, true,true);
 		tempNodeR.isLeaf = false;
+		tempNodeR.enableHighlight = false;
 
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionaNovoLayer('"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>Adicionar um novo</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	//adiciona a lista de layers no no
 	for (var i=0, j=dados.layers.length; i<j; i++)
@@ -352,6 +358,7 @@ function montaRaizTema(no,dados)
 		tempNode = new YAHOO.widget.HTMLNode(montaNoLayer(no.data.codigoMap,dados.layers[i]), tempNodeR, false,true);
 		tempNode.setDynamicLoad(loadLayerData, 0);
 		tempNode.isLeaf = false;
+		tempNode.enableHighlight = false;
 	}
 	tree.draw();
 }
@@ -424,6 +431,7 @@ function montaParametrosTemas(no,dados,redesenha)
 		var d = {tipo:"etiquetaTitulo",etiquetaTitulo:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	if(!tree.getNodeByProperty("etiquetaComport",id))
 	{
@@ -431,6 +439,7 @@ function montaParametrosTemas(no,dados,redesenha)
 		var d = {tipo:"etiquetaComport",etiquetaComport:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 
 	if(!tree.getNodeByProperty("etiquetaDispo",id))
@@ -439,6 +448,7 @@ function montaParametrosTemas(no,dados,redesenha)
 		var d = {tipo:"etiquetaDispo",etiquetaDispo:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 //rever
 	if(!tree.getNodeByProperty("etiquetaMetadados",id))
@@ -447,28 +457,33 @@ function montaParametrosTemas(no,dados,redesenha)
 		var d = {tipo:"etiquetaMetadados",etiquetaMetadados:id,html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	if(!tree.getNodeByProperty("etiquetaClasses",id))
 	{
 		var d = {id:id,codigoLayer:codigoLayer,tipo:"etiquetaClasses",etiquetaClasses:id,html:"<i>&nbsp;Classes</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
+		tempNodeR.enableHighlight = false;
 
 
 		conteudo = "<span style='cursor:pointer;' onclick=\"adicionaNovaClasse('"+codigoMap+"','"+codigoLayer+"')\" ><img  style='position:relative;top:2px' src=\"../imagens/05.png\" /> Adicionar uma classe</span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 
 		conteudo = "<span style='cursor:pointer;' onclick=\"classesAuto('"+codigoMap+"','"+codigoLayer+"')\" ><img style='position:relative;top:2px' src=\"../imagens/classificar.gif\" /> Criar classes automaticamente</span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 
 		conteudo = "<span style='cursor:pointer;' onclick=\"window.open('../../testamapfile.php?solegenda=sim&map="+no.data.codigoMap+"')\" > <img style='position:relative;top:2px' src=\"../imagens/41.png\" /> Testar</span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 
 	}
 
@@ -478,6 +493,7 @@ function montaParametrosTemas(no,dados,redesenha)
 		var tempNode = new YAHOO.widget.HTMLNode(d,tempNodeR, false,true);
 		tempNode.setDynamicLoad(loadClasseData, iconMode);
 		tempNode.isLeaf = false;
+		tempNode.enableHighlight = false;
 	}
 
 	tree.draw();
@@ -527,6 +543,7 @@ function montaParametrosClasses(no,dados,redesenha)
 		var d = {tipo:"etiquetaClasseGeral",etiquetaClasseGeral:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	if(!tree.getNodeByProperty("etiquetaClasseLabel",no.data.id))
 	{
@@ -534,23 +551,27 @@ function montaParametrosClasses(no,dados,redesenha)
 		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseLabel:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	if(!tree.getNodeByProperty("etiquetaEstilo",no.data.id))
 	{
 		var d = {tipo:"etiquetaEstilo",etiquetaEstilo:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:"<i>Estilos</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
+		tempNodeR.enableHighlight = false;
 
 		conteudo = "<span onclick=\"adicionaNovoEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /> Adicionar um novo</span>";
 		var d = {tipo:"etiquetaEstilo",etiquetaEstilo:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
 		var d = conteudoNoEstilo(codigoMap,codigoLayer,indiceClasse,dados[i].estilo);
 		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	tree.draw();
 }
@@ -732,6 +753,7 @@ function adicionaNovoLayer(codigoMap)
 					var tempNode = new YAHOO.widget.HTMLNode(montaNoLayer(codigoMap,dados.layers[0]), no, false,true);
 					tempNode.setDynamicLoad(loadLayerData, iconMode);
 					tempNode.isLeaf = false;
+					tempNode.enableHighlight = false;
 					tree.draw();
 					editorGeral(codigoMap,dados.layers[0]);
 					core_carregando("desativa");
@@ -775,6 +797,7 @@ function adicionaNovaClasse(codigoMap,codigoLayer,indiceClasse)
 					var tempNode = new YAHOO.widget.HTMLNode(d,no, false,true);
 					tempNode.setDynamicLoad(loadClasseData, iconMode);
 					tempNode.isLeaf = false;
+					tempNode.enableHighlight = false;
 					tree.draw();
 					core_carregando("desativa");
 				}
@@ -912,6 +935,7 @@ function adicionaNovoEstilo(codigoMap,codigoLayer,indiceClasse)
 					var d = conteudoNoEstilo(codigoMap,codigoLayer,indiceClasse,dados[0].estilo);
 					var tempNode = new YAHOO.widget.HTMLNode(d,no, false,true);
 					tempNode.isLeaf = true;
+					tempNode.enableHighlight = false;
 					tree.draw();
 					core_carregando("desativa");
 				}
@@ -1451,10 +1475,9 @@ function montaEditorDispo(dados)
 
 function montaEditorDados(dados)
 {
-	var limg = i3GEO.configura.locaplic+"/imagens/crialeg.jpg",
-		idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],
+	var idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],
 		idsMetaestat = ["connection","data","tileitem","tileindex","tipooriginal"],
-		limg=i3GEO.configura.locaplic+"/imagens/crialeg.jpg",
+		limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
 		param = {
 			"linhas":[
 			{ajuda:"Indica se as defini&ccedil;&otilde;es da camada est&atilde;o relacionadas ao sistema de metadados estat&iacute;sticos. Se estiver, alguns par&acirc;metros s&atilde;o obtidos de forma autom&aacute;tica, como a conex&atilde;o e o SQL de acesso aos dados.",
@@ -1472,7 +1495,8 @@ function montaEditorDados(dados)
 			titulo:"Connection ",id:"",value:"",tipo:"text",div:"<div id=cConnection ></div>"},
 
 			{ajuda:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name. Exemplo postgis: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291 . Exemplo shapefile: c://ms4w/Apache/htdocs/geodados/brasil/limitespol/localidades.shp",
-			titulo:"Data",id:"data",value:dados.data,tipo:"text"},
+			titulo:"Data",id:"data",value:dados.data,tipo:"textarea"},
+
 			{ajuda:"Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box",
 			titulo:"Type",id:"",value:dados.type,tipo:"text",div:"<div id=cType ></div>"},
 			{ajuda:"Ativa ou n&atilde;o a manuten&ccedil;&atilde;o de um cache para armazenar as imagens geradas para montar o mapa. Essa op&ccedil;&atilde;o afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache &eacute; mantido no diretório tempor&aacute;rio utilizado pelo i3Geo, na pasta chamada cache. Para cada camada &eacute; criada uma sub-pasta. Para limpar o cache, utilize a op&ccedil;&atilde;o existente junto ao nó principal desse mapfile",
@@ -1495,7 +1519,7 @@ function montaEditorDados(dados)
 	ins += "&nbsp;<input type=button title='Testar' value='Testar' id=testarEditor />";
 
 	if(dados.colunas != "" && dados.colunas != undefined){
-		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: ";
+		ins += "<p>O layer possui as seguintes colunas na tabela de atributos: ";
 		ins += dados.colunas+"</p><br>";
 	}
 	ins += core_geraLinhas(param);
@@ -2240,13 +2264,16 @@ function selConexaoBanco(eleValue){
 					i,temp,
 					valores = [],
 					textos = [],
-					selecionados = [];
+					selecionados = [],
+					funcaoFinal = function(){
+						alert("Complete com o valor da senha de acesso em 'password', exemplo: password=postgres");
+					}
 					for(i=0;i<n;i++){
 						temp = "password= user="+dados[i].usuario+" dbname="+dados[i].bancodedados+" host="+dados[i].host+" port="+dados[i].porta;
 						textos.push(dados[i].bancodedados);
 						valores.push(temp);
 					}
-					core_menuCheckBox(valores,textos,selecionados,$i(eleValue),"","","sim");
+					core_menuCheckBox(valores,textos,selecionados,$i(eleValue),"","","sim",funcaoFinal);
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
 			},

@@ -48,19 +48,19 @@ function ativaBotaoAdicionaGrupo(sUrl,idBotao){
 		core_carregando(" adicionando um novo registro");
 		var callback =
 		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					var j = YAHOO.lang.JSON.parse(o.responseText);
+				success:function(o)
+				{
+					try
+					{
+						var j = YAHOO.lang.JSON.parse(o.responseText);
 					adicionaNosGrupos(j,true);
 					editar("grupo",j[j.length-1].id_grupo);
-  					core_carregando("desativa");
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
+						core_carregando("desativa");
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};
@@ -107,13 +107,14 @@ function montaArvore(dados){
 			tree.setDynamicLoad(loadNodeData, 1);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
+			tempNode.enableHighlight = false;
 			tempNode.isLeaf = true;
 			core_carregando("desativa");
 		}
 		buildTree();
 	}();
-   	adicionaNosGrupos(dados);
-   	tree.draw();
+		adicionaNosGrupos(dados);
+		tree.draw();
 }
 function adicionaNosUsuarios(no,dados,redesenha)
 {
@@ -127,6 +128,7 @@ function adicionaNosUsuarios(no,dados,redesenha)
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	for (var i=0, j=dados.length; i<j; i++){
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('usuario','"+dados[i].id_grupo+"','"+dados[i].id_usuario+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
@@ -137,6 +139,7 @@ function adicionaNosUsuarios(no,dados,redesenha)
 		var d = {html:conteudo,id_nousuario:dados[i].id_usuario+"_"+dados[i].id_grupo,tipo:"usuario"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	if(redesenha){tree.draw();}
 }
@@ -150,7 +153,8 @@ function adicionaNosGrupos(dados,redesenha){
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir o grupo!!!</span>";}
 		var d = {html:conteudo,id_grupo:dados[i].id_grupo,tipo:"grupo"};
-		new YAHOO.widget.HTMLNode(d, root, false,true);
+		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+		tempNode.enableHighlight = false;
 	}
 	if(redesenha){tree.draw();}
 }
@@ -196,8 +200,8 @@ function editar(tipo,id){
 function montaDivGrupo(i){
 	var param = {
 		"linhas":[
-			  {titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
-			  {titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""}
+				{titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
+				{titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""}
 		]
 	};
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditorGrupo />";
@@ -270,32 +274,32 @@ function gravaDados(tipo,id){
 	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value);}
 
 	var callback = {
-  		success:function(o){
-  			try	{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else{
-  					if(tipo == "grupo"){
-  						var no = tree.getNodeByProperty("id_grupo",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome").value+" id:"+id;
+			success:function(o){
+				try	{
+					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						setTimeout("core_carregando('desativa')",3000);
+					}
+					else{
+						if(tipo == "grupo"){
+							var no = tree.getNodeByProperty("id_grupo",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome").value+" id:"+id;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
-  						no.html = no.getContentEl().innerHTML;
-  					}
-   					if(tipo == "usuario"){
-  						var no = tree.getNodeByProperty("id_grupo",id);
-  						adicionaNosUsuarios(no,YAHOO.lang.JSON.parse(o.responseText),true);
-  					}
-  					core_carregando("desativa");
-  				}
+							no.html = no.getContentEl().innerHTML;
+						}
+						if(tipo == "usuario"){
+							var no = tree.getNodeByProperty("id_grupo",id);
+							adicionaNosUsuarios(no,YAHOO.lang.JSON.parse(o.responseText),true);
+						}
+						core_carregando("desativa");
+					}
 				YAHOO.admin.container.panelEditor.destroy();
 				YAHOO.admin.container.panelEditor = null;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	if(prog && par){
 		core_carregando("ativa");

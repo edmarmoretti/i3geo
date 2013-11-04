@@ -50,19 +50,19 @@ function ativaBotaoAdicionaAtlas(sUrl,idBotao)
 		core_carregando(" adicionando um novo registro");
 		var callback =
 		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					var j = YAHOO.lang.JSON.parse(o.responseText);
+				success:function(o)
+				{
+					try
+					{
+						var j = YAHOO.lang.JSON.parse(o.responseText);
 					adicionaNosAtlas(j,true);
 					editar("atlas",j[j.length-1].id_atlas);
-  					core_carregando("desativa");
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
+						core_carregando("desativa");
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};
@@ -126,13 +126,14 @@ function montaArvore(dados)
 			tree.setDynamicLoad(loadNodeData, 1);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
+			tempNode.enableHighlight = false;
 			tempNode.isLeaf = true;
 			core_carregando("desativa");
 		}
 		buildTree();
 	}();
-   	adicionaNosAtlas(dados);
-   	tree.draw();
+		adicionaNosAtlas(dados);
+		tree.draw();
 }
 function testarMapfile(codigoMap)
 {
@@ -145,6 +146,7 @@ function adicionaNosTemas(no,dados,redesenha)
 		var conteudo = "<span onclick=\"adicionarTema('"+no.data.id_prancha+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:0px\" width='10px' heigth='10px' src=\"../imagens/05.png\" /><i>Adicionar novo tema:</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.enableHighlight = false;
 		tempNode.isLeaf = true;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
@@ -162,6 +164,7 @@ function adicionaNosTemas(no,dados,redesenha)
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir o tema!!!</span>";}
 		var d = {html:conteudo,id_tema:dados[i].id_tema,tipo:"tema"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.enableHighlight = false;
 		tempNode.isLeaf = true;
 	}
 	if(redesenha){tree.draw();}
@@ -210,6 +213,7 @@ function adicionaNosPranchas(no,dados,redesenha)
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionarPrancha('"+no.data.id_atlas+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar nova prancha</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.enableHighlight = false;
 		tempNode.isLeaf = true;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
@@ -224,6 +228,7 @@ function adicionaNosPranchas(no,dados,redesenha)
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir a prancha!!!</span>";}
 		var d = {html:conteudo,id_prancha:dados[i].id_prancha,tipo:"prancha"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.enableHighlight = false;
 		//tempNode.isLeaf = true;
 		tempNode.setDynamicLoad(loadTemasData, temaIconMode);
 	}
@@ -244,7 +249,8 @@ function adicionaNosAtlas(dados,redesenha)
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir o Atlas!!!</span>";}
 		var d = {html:conteudo,id_atlas:dados[i].id_atlas,tipo:"atlas"};
-		new YAHOO.widget.HTMLNode(d, root, false,true);
+		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+		tempNode.enableHighlight = false;
 	}
 	if(redesenha){tree.draw();}
 }
@@ -402,8 +408,8 @@ function sobeDesce(movimento,tipo,id)
 	{
 		success: function(oResponse)
 		{core_carregando("desativa");},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	if(movimenta)
 	{
@@ -466,8 +472,8 @@ function adicionarTema(id)
 			adicionaNosTemas(no,dados,true);
 			editar('tema',dados[dados.length-1].id_tema);
 		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -490,8 +496,8 @@ function adicionarPrancha(id)
 			adicionaNosPranchas(no,dados,true);
 			editar('prancha',dados[dados.length-1].id_prancha);
 		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -534,47 +540,47 @@ function gravaDados(tipo,id)
 
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  				{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else
-  				{
-  					if(tipo == "atlas")
-  					{
-  						var no = tree.getNodeByProperty("id_atlas",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_atlas").value;
+			success:function(o)
+			{
+				try
+				{
+					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+					{
+						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						setTimeout("core_carregando('desativa')",3000);
+					}
+					else
+					{
+						if(tipo == "atlas")
+						{
+							var no = tree.getNodeByProperty("id_atlas",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_atlas").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
-  						no.html = no.getContentEl().innerHTML;
-  					}
-  					if(tipo == "prancha")
-  					{
-  						var no = tree.getNodeByProperty("id_prancha",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_prancha").value;
+							no.html = no.getContentEl().innerHTML;
+						}
+						if(tipo == "prancha")
+						{
+							var no = tree.getNodeByProperty("id_prancha",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_prancha").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
-  						no.html = no.getContentEl().innerHTML;
-  					}
-  					if(tipo == "tema")
-  					{
-  						var no = tree.getNodeByProperty("id_tema",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Ecodigo_tema").value;
+							no.html = no.getContentEl().innerHTML;
+						}
+						if(tipo == "tema")
+						{
+							var no = tree.getNodeByProperty("id_tema",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Ecodigo_tema").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
-  						no.html = no.getContentEl().innerHTML;
-  					}
-  					core_carregando("desativa");
-  				}
+							no.html = no.getContentEl().innerHTML;
+						}
+						core_carregando("desativa");
+					}
 				YAHOO.admin.container.panelEditor.destroy();
 				YAHOO.admin.container.panelEditor = null;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	if(prog && par){
 		core_carregando("ativa");

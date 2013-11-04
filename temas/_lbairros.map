@@ -37,7 +37,6 @@ MAP
     NAME "_lbairros"
     STATUS DEFAULT
     TEMPLATE "none.htm"
-    TILEITEM "location"
     TYPE POLYGON
     UNITS METERS
     CLASS

@@ -108,26 +108,54 @@ if (ob_get_level() == 0) ob_start();
 			ob_flush();
 			flush();
 			sleep(1);
-			//gera o script para criar a tabela
+
+			try {
+				$dbh = new PDO('pgsql:dbname='.$conexao["bancodedados"].';user='.$conexao["usuario"].';password='.$conexao["senha"].';host='.$conexao["host"].';port='.$conexao["porta"]);
+			} catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+			}
+			//gera o script para criar a tabela e verifica se ja existe
+			$sql = "SELECT table_name FROM information_schema.tables where table_schema = '".$_POST["i3GEOuploadcsvesquema"]."' AND table_name = '".$_POST["tabelaDestinocsv"]."'";
+			$res = $dbh->query($sql,PDO::FETCH_ASSOC);
+			if(count($res->fetchAll())>0){
+				$tabelaExiste = true;
+			}
+			else{
+				$tabelaExiste = false;
+			}
 			$sqltabela = array();
-			$sql = "CREATE TABLE ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]."(";
-			$temp = array();
-			foreach($colunas as $coluna){
-				$temp[] = strtolower($coluna)." ".$tipoColuna[$coluna];
+			if($tabelaExiste == false && $_POST["tipoOperacao"] == "criar"){
+				$sql = "CREATE TABLE ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]."(";
+				$temp = array();
+				foreach($colunas as $coluna){
+					$temp[] = strtolower($coluna)." ".$tipoColuna[$coluna];
+				}
+				if($_POST["colunaxcsv"] != "" && $_POST["colunaycsv"] != ""){
+					$temp[] = "the_geom geometry";
+					$colunas[] = "the_geom";
+				}
+				$sql .= implode(",",$temp).") WITH(OIDS=FALSE)";
+				$sqltabela[] = $sql;
+				$sqltabela[] = "ALTER TABLE ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." OWNER TO ".$conexao["usuario"];
+				echo "<br>Sql tabela: <pre>";
+				var_dump($sqltabela);
+				echo "</pre>";
+				ob_flush();
+				flush();
+				sleep(1);
 			}
-			if($_POST["colunaxcsv"] != "" && $_POST["colunaycsv"] != ""){
-				$temp[] = "the_geom geometry";
-				$colunas[] = "the_geom";
+			if($tabelaExiste == true && $_POST["tipoOperacao"] == "criar"){
+				echo "<span style=color:red >A tabela existe. N&atilde;o pode ser criada.</span>";
+				exit;
 			}
-			$sql .= implode(",",$temp).") WITH(OIDS=FALSE)";
-			$sqltabela[] = $sql;
-			$sqltabela[] = "ALTER TABLE ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." OWNER TO ".$conexao["usuario"];
-			echo "<br>Sql tabela: <pre>";
-			var_dump($sqltabela);
-			echo "</pre>";
-			ob_flush();
-			flush();
-			sleep(1);
+			//se a tabela existe e e para remover os registros
+			if($tabelaExiste == true && $_POST["tipoOperacao"] == "apagar"){
+				$sqltabela[] = "delete from ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"];
+			}
+			if($tabelaExiste == true && $_POST["tipoOperacao"] == "apagar" && $_POST["i3GEOuploadcsvesquema"] != "i3geo_metaestat"){
+				echo "<span style=color:red >N&atilde;o &eacute; poss&iacute;vel executar essa opera&ccedil;&atilde;o nesse esquema.</span>";
+				exit;
+			}
 			//gera o script para inserir os dados
 			echo "<br>Preparando inclus&atilde;o de dados";
 			ob_flush();
@@ -143,10 +171,11 @@ if (ob_get_level() == 0) ob_start();
 				$vs = array();
 				for ($j=0; $j<$ncolunas;$j++){
 					if($tipoColuna[$colunas[$j]] == "varchar"){
-						$vs[] = "'".$s[$j]."'";
+						$texto = str_replace("'","",$s[$j]);
+						$vs[] = "'".$texto."'";
 					}
 					else{
-						if($s[$j] == ""){
+						if(empty($s[$j]) && $s[$j] != 0){
 							$vs[] = 'null';
 						}
 						else{
@@ -167,11 +196,7 @@ if (ob_get_level() == 0) ob_start();
 			}
 			echo "<pre>";
 			//var_dump($linhasql);exit;
-			try {
-				$dbh = new PDO('pgsql:dbname='.$conexao["bancodedados"].';user='.$conexao["usuario"].';password='.$conexao["senha"].';host='.$conexao["host"].';port='.$conexao["porta"]);
-			} catch (PDOException $e) {
-				echo 'Connection failed: ' . $e->getMessage();
-			}
+
 			echo "<br>Incluindo dados";
 			echo "<script>window.scrollTo(0,10000);</script>";
 			ob_flush();
@@ -190,11 +215,19 @@ if (ob_get_level() == 0) ob_start();
 			}
 			foreach($linhasql as $linha){
 				try {
-					$dbh->query($linha);
+					$res = $dbh->query($linha);
+					if($res == false){
+						echo "<br><br><span style=color:red >Erro em: </span>".$linha;
+					}
 				} catch (PDOException $e) {
 					echo 'Erro: ' . $e->getMessage();
 				}
 			}
+			echo "<br>Registros existentes no CSV: ". $nlinhas;
+			$sql = "select * from ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"];
+			$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+			$r = $q->fetchAll();
+			echo "<br>Registros na tabela final: ". count($r);
 			echo "<b><br>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
 		}
 		else{

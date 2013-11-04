@@ -527,9 +527,9 @@ i3GEOadmin.editor = {
 			'</select></p>' +
 			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
 			'<select id=i3GEOtipoOperacao name=tipoOperacao >' +
-			'<option value=criar >Criar a tabela nova e incluir registros do SHP</option>' +
+			'<option value=criar >Criar a tabela nova e incluir registros do CSV</option>' +
 			'<option value=incluir >Adicionar novos registros</option>' +
-			'<option value=apagar >Apagar dados atuais e incluir do SHP</option>' +
+			'<option value=apagar >Apagar dados atuais e incluir do CSV</option>' +
 			'</select></p>' +
 			'<p class="paragrafo" >C&oacute;digo da proje&ccedil;&atilde;o (SRID) Assegure-se que o shapefile esteja na proje&ccedil;&atilde;o geogr&aacute;fica se voc&ecirc; for usar com o sistema de metadados estat&iacute;sticos :<br><input class=digitar type="text" value="4326" size=20 id="srid" name="srid" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" ><input type="checkbox" id="incluiserialshp" name="incluiserialshp" style="cursor:pointer;position:relative;top:2px;">&nbsp;Inclui uma coluna gid do tipo serial e chave prim&aacute;ria com c&oacute;digo &uacute;nico</p>' +
@@ -584,6 +584,12 @@ i3GEOadmin.editor = {
 			var ins = '<fieldset><form id=i3GEOuploadcsvf target="i3GEOuploadcsviframe" action="../php/metaestat_uploadcsv_submit.php" method="post" ENCTYPE="multipart/form-data">' +
 			'<p class="paragrafo" >CSV (utilize ponto como separador de valores decimais ou a importa&ccedil;&atilde;o poder&aacute; n&atilde;o ocorrer): <br><input class=digitar type="file" size=22 name="i3GEOuploadcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >Nome da nova tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br><input class=digitar type="text" size=20 id="tabelaDestinocsv" name="tabelaDestinocsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
+			'<select id=i3GEOtipoOperacaocsv name=tipoOperacao >' +
+			'<option value=criar >Criar a tabela nova e incluir registros do SHP</option>' +
+			'<option value=incluir >Adicionar novos registros</option>' +
+			'<option value=apagar >Apagar dados atuais e incluir do SHP</option>' +
+			'</select></p>' +
 			'<p class="paragrafo" ><input type="checkbox" id="incluiserialcsv" name="incluiserialcsv" style="cursor:pointer;position:relative;top:2px;">&nbsp;Inclui uma coluna gid do tipo serial e chave prim&aacute;ria com c&oacute;digo &uacute;nico</p>' +
 			'<p class="paragrafo" >Opcional: coluna que cont&eacute;m as latitudes (Y) <input class=digitar type="text" size=8 id="colunaycsv" name="colunaycsv" style="top:0px;left:0px;cursor:pointer;"> coluna que cont&eacute;m as longitudes (X) <input class=digitar type="text" size=8 id="colunaxcsv" name="colunaxcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" ><input id=i3GEOuploadcsvsubmit type="button" value="Enviar" size=12 />' +

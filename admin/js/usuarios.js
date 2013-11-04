@@ -48,19 +48,19 @@ function ativaBotaoAdicionaUsuario(sUrl,idBotao){
 		core_carregando(" adicionando um novo registro");
 		var callback =
 		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					var j = YAHOO.lang.JSON.parse(o.responseText);
+				success:function(o)
+				{
+					try
+					{
+						var j = YAHOO.lang.JSON.parse(o.responseText);
 					adicionaNosUsuarios(j,true);
 					editar("usuarios",j[j.length-1].id_usuario);
-  					core_carregando("desativa");
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
+						core_carregando("desativa");
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};
@@ -117,12 +117,13 @@ function montaArvore(dados){
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
+			tempNode.enableHighlight = false;
 			core_carregando("desativa");
 		}
 		buildTree();
 	}();
-   	adicionaNosUsuarios(dados);
-   	tree.draw();
+		adicionaNosUsuarios(dados);
+		tree.draw();
 }
 /*
 Function: adicionaNosPapeis
@@ -145,6 +146,7 @@ function adicionaNosPapeis(no,dados,redesenha)
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
@@ -157,6 +159,7 @@ function adicionaNosPapeis(no,dados,redesenha)
 			var d = {html:conteudo,id_nopapel:dados[i].id_usuario+"_"+dados[i].id_papel,tipo:"papel"};
 			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 			tempNode.isLeaf = true;
+			tempNode.enableHighlight = false;
 		}
 	}
 	if(redesenha){tree.draw();}
@@ -172,7 +175,8 @@ function adicionaNosUsuarios(dados,redesenha){
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir o usu&aacute;rio!!!</span>";}
 		var d = {html:conteudo,id_usuario:dados[i].id_usuario,tipo:"usuario"};
-		new YAHOO.widget.HTMLNode(d, root, false,true);
+		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+		tempNode.enableHighlight = false;
 	}
 	if(redesenha){tree.draw();}
 }
@@ -224,12 +228,12 @@ function editar(tipo,id)
 function montaDivUsuario(i){
 	var param = {
 		"linhas":[
-			  {titulo:"Nome:",id:"Enome_usuario",size:"50",value:i.nome_usuario,tipo:"text",div:""},
-			  {titulo:"Login:",id:"Elogin",size:"50",value:i.login,tipo:"text",div:""},
-			  {ajuda:"Se o usu&aacute;rio j&aacute; existir, preencha para alterar a senha. Se for mantido em branco, o sistema gerar&aacute; uma senha aleat&oacute;ria no caso de novos usu&aacute;rios. Envie a senha por e-mail ap&oacute;s o cadastro.",titulo:"Nova senha:",id:"Esenha",size:"50",value:"",tipo:"text",div:""},
-			  {titulo:"E-mail:",id:"Eemail",size:"50",value:i.email,tipo:"text",div:""},
-			  {titulo:"Data de cadastro:",id:"Edata_cadastro",size:"50",value:i.data_cadastro,tipo:"text",div:""},
-			  {titulo:"Ativo:",id:"",size:"50",value:i.ativo,tipo:"text",div:"<div id=cAtivo ></div>"}
+				{titulo:"Nome:",id:"Enome_usuario",size:"50",value:i.nome_usuario,tipo:"text",div:""},
+				{titulo:"Login:",id:"Elogin",size:"50",value:i.login,tipo:"text",div:""},
+				{ajuda:"Se o usu&aacute;rio j&aacute; existir, preencha para alterar a senha. Se for mantido em branco, o sistema gerar&aacute; uma senha aleat&oacute;ria no caso de novos usu&aacute;rios. Envie a senha por e-mail ap&oacute;s o cadastro.",titulo:"Nova senha:",id:"Esenha",size:"50",value:"",tipo:"text",div:""},
+				{titulo:"E-mail:",id:"Eemail",size:"50",value:i.email,tipo:"text",div:""},
+				{titulo:"Data de cadastro:",id:"Edata_cadastro",size:"50",value:i.data_cadastro,tipo:"text",div:""},
+				{titulo:"Ativo:",id:"",size:"50",value:i.ativo,tipo:"text",div:"<div id=cAtivo ></div>"}
 		]
 	};
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditorUsuario />";
@@ -289,20 +293,20 @@ Enviar senha por email
 function emailsenha(id_usuario)
 {
 	var callback = {
-  		success:function(o){
-  			try	{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel enviar");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else{
-  					core_carregando("desativa");
-  				}
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			success:function(o){
+				try	{
+					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel enviar");
+						setTimeout("core_carregando('desativa')",3000);
+					}
+					else{
+						core_carregando("desativa");
+					}
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_carregando("ativa");
 	core_carregando("Enviando e-mail");
@@ -339,32 +343,32 @@ function gravaDados(tipo,id)
 	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value);}
 
 	var callback = {
-  		success:function(o){
-  			try	{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else{
-  					if(tipo == "usuario"){
-  						var no = tree.getNodeByProperty("id_usuario",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome_usuario").value+" "+document.getElementById("Elogin").value+" ativo: "+document.getElementById("Eativo").value;
+			success:function(o){
+				try	{
+					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						setTimeout("core_carregando('desativa')",3000);
+					}
+					else{
+						if(tipo == "usuario"){
+							var no = tree.getNodeByProperty("id_usuario",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome_usuario").value+" "+document.getElementById("Elogin").value+" ativo: "+document.getElementById("Eativo").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
-  						no.html = no.getContentEl().innerHTML;
-  					}
-   					if(tipo == "papel"){
-  						var no = tree.getNodeByProperty("id_usuario",id);
-  						adicionaNosPapeis(no,YAHOO.lang.JSON.parse(o.responseText),true);
-  					}
-  					core_carregando("desativa");
-  				}
+							no.html = no.getContentEl().innerHTML;
+						}
+						if(tipo == "papel"){
+							var no = tree.getNodeByProperty("id_usuario",id);
+							adicionaNosPapeis(no,YAHOO.lang.JSON.parse(o.responseText),true);
+						}
+						core_carregando("desativa");
+					}
 				YAHOO.admin.container.panelEditor.destroy();
 				YAHOO.admin.container.panelEditor = null;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	if(prog && par){
 		core_carregando("ativa");

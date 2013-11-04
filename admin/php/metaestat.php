@@ -587,6 +587,8 @@ switch (strtoupper($funcao))
 			$id_classe = $m->alteraClasseClassificacao($id_classificacao);
 		}
 		else{
+			$titulo = $_GET["titulo"];
+			$expressao = $_GET["expressao"];
 			$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,$tamanho,$simbolo,$overmelho,$overde,$oazul,$otamanho);
 		}
 		retornaJSON($m->listaClasseClassificacao($id_classificacao,$id_classe));

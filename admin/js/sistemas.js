@@ -52,17 +52,17 @@ function ativaBotaoAdicionaRaiz(sUrl,idBotao)
 		core_carregando(" adicionando um novo registro");
 		var callback =
 		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					adicionaNosRaiz(YAHOO.lang.JSON.parse(o.responseText),true);
-  					core_carregando("desativa");
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
+				success:function(o)
+				{
+					try
+					{
+						adicionaNosRaiz(YAHOO.lang.JSON.parse(o.responseText),true);
+						core_carregando("desativa");
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};
@@ -127,12 +127,13 @@ function montaArvore(dados)
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
+			tempNode.enableHighlight = false;
 			core_carregando("desativa");
 		}
 		buildTree();
 	}();
-   	adicionaNosRaiz(dados);
-   	tree.draw();
+		adicionaNosRaiz(dados);
+		tree.draw();
 }
 function adicionaNos(no,dados,redesenha)
 {
@@ -143,6 +144,7 @@ function adicionaNos(no,dados,redesenha)
 		var d = {html:conteudo,id_funcao:dados[i].id_funcao,tipo:"funcao"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	if(redesenha){tree.draw();}
 }
@@ -155,7 +157,8 @@ function adicionaNosRaiz(dados,redesenha)
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionarFuncao('"+dados[i].id_sistema+"')\" title='adiciona fun&ccedil;&atilde;o' src=\"../imagens/05.png\" />";
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('sistema','"+dados[i].id_sistema+"')\" title=editar src=\"../imagens/06.png\" /><b>&nbsp;<span>"+dados[i].nome_sistema+"</span>";
 		var d = {html:conteudo,id_sistema:dados[i].id_sistema,tipo:"sistema"};
-		new YAHOO.widget.HTMLNode(d, root, false,true);
+		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+		tempNode.enableHighlight = false;
 	}
 	if(redesenha){tree.draw();}
 }
@@ -312,8 +315,8 @@ function adicionarFuncao(id)
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 			adicionaNos(no,dados,true);
 		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 
 	core_makeRequest(sUrl,callback);
@@ -337,29 +340,29 @@ function gravaDadosFuncao(id)
 	var sUrl = "../php/sistemas.php?funcao=alterarFuncoes"+par;
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  				{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else
-  				{
-  					var no = tree.getNodeByProperty("id_funcao",id);
-  					no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome_funcao").value;
-  					no.html = no.getContentEl().innerHTML;
-  					core_carregando("desativa");
-  				}
+			success:function(o)
+			{
+				try
+				{
+					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+					{
+						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						setTimeout("core_carregando('desativa')",3000);
+					}
+					else
+					{
+						var no = tree.getNodeByProperty("id_funcao",id);
+						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome_funcao").value;
+						no.html = no.getContentEl().innerHTML;
+						core_carregando("desativa");
+					}
 				YAHOO.admin.container.panelEditor.destroy();
 				YAHOO.admin.container.panelEditor = null;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }
@@ -382,29 +385,29 @@ function gravaDadosSistema(id)
 	var sUrl = "../php/sistemas.php?funcao=alterarSistemas"+par;
 	var callback =
 	{
-  		success:function(o)
-  		{
-  			try
-  			{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  				{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else
-  				{
-  					var no = tree.getNodeByProperty("id_sistema",id);
-  					no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome_sistema").value;
-  					no.html = no.getContentEl().innerHTML;
-  					core_carregando("desativa");
-  				}
+			success:function(o)
+			{
+				try
+				{
+					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+					{
+						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						setTimeout("core_carregando('desativa')",3000);
+					}
+					else
+					{
+						var no = tree.getNodeByProperty("id_sistema",id);
+						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome_sistema").value;
+						no.html = no.getContentEl().innerHTML;
+						core_carregando("desativa");
+					}
 				YAHOO.admin.container.panelEditor.destroy();
 				YAHOO.admin.container.panelEditor = null;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(sUrl,callback);
 }

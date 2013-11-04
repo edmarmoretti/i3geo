@@ -970,8 +970,10 @@ record - objeto record (utilize "" para escapar)
 key - chave (nome do item) (utilize "" para escapar)
 
 unico - sim|nao indicando se apenas um pode ser escolhido
+
+funcaoFinal - (opcional) funcao que sera executada no final do processo
 */
-function core_menuCheckBox(valores,textos,selecionados,target,record,key,unico){
+function core_menuCheckBox(valores,textos,selecionados,target,record,key,unico,funcaoFinal){
 	if(!unico){
 		unico = "nao";
 	}
@@ -1000,6 +1002,9 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key,unico){
 		}
 		YAHOO.admin.container.panelCK.destroy();
 		YAHOO.admin.container.panelCK = null;
+		if(funcaoFinal){
+			funcaoFinal.call();
+		}
 	};
 	var novoel,ndiv,og_core,onde,ins,i,novoCK,ck,j;
 	if(!YAHOO.admin.container.panelCK){
@@ -1080,24 +1085,30 @@ function core_comboObjeto(obj,valor,texto,marcar,texto2)
 	var ins = "<option value='' ";
 	var v;
 	var t;
+	if(!marcar && marcar != ""){
+		marcar = 0;
+	}
 	ins += ">---</option>";
-	for (var k=0;k<obj.length;k++)
-	{
-		if(valor != "")
-		v = eval("obj[k]."+valor);
-		else
-		v = obj[k];
-		if(texto != "")
-		t = eval("obj[k]."+texto);
-		else
-		t = obj[k];
-
+	for (var k=0;k<obj.length;k++){
+		if(valor != ""){
+			v = obj[k][valor];
+		}
+		else{
+			v = obj[k];
+		}
+		if(texto != ""){
+			t = obj[k][texto];
+		}
+		else{
+			t = obj[k];
+		}
 		if(texto2){
 			t += " ("+eval("obj[k]."+texto2)+")";
 		}
-
 		ins += "<option value='"+v+"' ";
-		if (marcar && marcar == v){ins += "selected";}
+		if (marcar == v){
+			ins += "selected";
+		}
 		ins += " title='"+t+"'  >"+t+"</option>";
 	}
 	return(ins);
@@ -1122,48 +1133,55 @@ function core_geraLinhas(dados)
 
 		if(a.style.display == "block"){
 			a.style.display = "none";
-			i. src = "../../imagens/desce.gif";
+			i. src = "../../imagens/oxygen/16x16/help-about.png";
 		}
 		else{
 			a.style.display = "block";
-			i. src = "../../imagens/sobe.gif";
+			i. src = "../../imagens/oxygen/16x16/help-about.png";
 		}
 	};
-	do
-	{
+	do{
 		var p = dados.linhas[contaParam];
-		if(p.tipo == "text" || p.tipo == "cor")
-		{
-			if(!p.size){p.size = "50";}
-			if(p.ajuda)
-			{
+		if(p.tipo == "text" || p.tipo == "cor" || p.tipo == "textarea"){
+			if(!p.size){
+				p.size = "50";
+			}
+			if(p.ajuda){
 				var idajuda;
-				if(p.id !== "")
-				{idajuda = p.id + contaParam;}
+				if(p.id !== ""){
+					idajuda = p.id + contaParam;
+				}
 				else{
 					idajuda = "a"+parseInt(255*(Math.random()),10);
 				}
 				//var temp = "$i('"+idajuda+"_ajuda').style.display='block' "
-				resultado += "<p><div onclick='core_geralinhasEscondeAjuda(\""+idajuda+"\")' style=cursor:pointer title='ajuda' ><img id='"+idajuda+"_imgajuda' src='../../imagens/desce.gif' >&nbsp;<b>"+p.titulo+"</b></div>";
+				resultado += "<p><div onclick='core_geralinhasEscondeAjuda(\""+idajuda+"\")' style='margin-bottom:6px;cursor:pointer' title='ajuda' ><img style='position:relative;top:3px;' id='"+idajuda+"_imgajuda' src='../../imagens/oxygen/16x16/help-about.png' >&nbsp;<b>"+p.titulo+"</b></div>";
 				resultado += "<div id='"+idajuda+"_ajuda' style=display:none >"+p.ajuda+"</div>";
 			}
-			else
-			resultado += "<p><b>"+p.titulo+"</b><br>";
-			if(p.texto)
-			resultado += "<span style=color:gray >"+p.texto+"</span</p>";
-			if(p.id != "")
-			{
-				if(!p.value)
-				p.value = "";
-				resultado += "<input style=width:90%; type=text id="+p.id+" value=\""+p.value+"\" />";
-				if(p.tipo == "cor")
-				{
+			else{
+				resultado += "<p><div><b>"+p.titulo+"<br></b>";
+			}
+			if(p.texto){
+				resultado += "<br><span style=color:gray >"+p.texto+"</span>";
+			}
+			if(p.id != ""){
+				if(!p.value){
+					p.value = "";
+				}
+				if(p.tipo == "textarea"){
+					resultado += "<textarea style=width:90%; id="+p.id+"  >"+p.value+"</textarea>";
+				}
+				else{
+					resultado += "<input style=width:90%; type=text id="+p.id+" value=\""+p.value+"\" />";
+				}
+				if(p.tipo == "cor"){
 					resultado += "&nbsp;<img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\""+p.id+"\");' />";
 				}
-				resultado += "</p>";
 			}
-			if(p.div)
-			{resultado += p.div;}
+			if(p.div){
+				resultado += p.div;
+			}
+			resultado += "</div>";
 		}
 		contaParam++;
 	}

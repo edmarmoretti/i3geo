@@ -121,6 +121,7 @@ i3GEOadmin.variaveis = {
 					var root = tree.getRoot(),
 					tempNode = new YAHOO.widget.TextNode('', root, false);
 					tempNode.isLeaf = true;
+					tempNode.enableHighlight = false;
 					core_carregando("desativa");
 				}
 				buildTree();
@@ -139,7 +140,8 @@ i3GEOadmin.variaveis = {
 				else
 				{conteudo += "&nbsp;<span style=color:red >Edite para definir a vari&aacute;vel!!!</span>";}
 				d = {html:conteudo,codigo_variavel:dados[i].codigo_variavel,tipo:"variavel"};
-				new YAHOO.widget.HTMLNode(d, root, false,true);
+				var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+				tempNode.enableHighlight = false;
 			}
 			if(redesenha){tree.draw();}
 		}
@@ -239,6 +241,7 @@ i3GEOadmin.variaveis = {
 						true
 				);
 				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
 			}
 			for (i=0, j=dados.length; i<j; i++)	{
 				conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"i3GEOadmin.variaveis.excluir('medidaVariavel','"+dados[i].id_medida_variavel+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
@@ -252,26 +255,31 @@ i3GEOadmin.variaveis = {
 				d = {html:conteudo,id_medida_variavel:dados[i].id_medida_variavel,tipo:"medida"};
 				tempNode1 = new YAHOO.widget.HTMLNode(d, no, false,true);
 				tempNode1.isLeaf = false;
+				tempNode1.enableHighlight = false;
 				//tempNode1.setDynamicLoad(temp, 1);
 				conteudo = "&nbsp;Par&acirc;metros";
 				d = {html:conteudo,no_parametros:dados[i].id_medida_variavel};
 				tempNode2 = new YAHOO.widget.HTMLNode(d, tempNode1, false,true);
 				tempNode2.isLeaf = false;
+				tempNode2.enableHighlight = false;
 				tempNode2.setDynamicLoad(loadNodeData, 1);
 				conteudo = "&nbsp;Classifica&ccedil;&otilde;es";
 				d = {html:conteudo,no_classificacao:dados[i].id_medida_variavel};
 				tempNode3 = new YAHOO.widget.HTMLNode(d, tempNode1, false,true);
 				tempNode3.isLeaf = false;
+				tempNode3.enableHighlight = false;
 				tempNode3.setDynamicLoad(loadNodeDataClasses, 1);
 				conteudo = "&nbsp;Links";
 				d = {html:conteudo,no_link:dados[i].id_medida_variavel};
 				tempNode4 = new YAHOO.widget.HTMLNode(d, tempNode1, false,true);
 				tempNode4.isLeaf = false;
+				tempNode4.enableHighlight = false;
 				tempNode4.setDynamicLoad(loadNodeDataLinks, 1);
 				conteudo = "&nbsp;Fontes";
 				d = {html:conteudo,no_fonteinfo:dados[i].id_medida_variavel};
 				tempNode5 = new YAHOO.widget.HTMLNode(d, tempNode1, false,true);
 				tempNode5.isLeaf = false;
+				tempNode5.enableHighlight = false;
 				tempNode5.setDynamicLoad(loadNodeDataFonteinfo, 1);
 			}
 
@@ -292,7 +300,7 @@ i3GEOadmin.variaveis = {
 			core_makeRequest(sUrl,callback);
 		},
 		montaDiv: function(i){
-			var temp,ins = "",limg=i3GEO.configura.locaplic+"/imagens/crialeg.jpg",
+			var temp,ins = "",limg=i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
 				param = {
 					"linhas":[
 										{titulo:"Nome:",id:"Enomemedida",size:"50",value:i.nomemedida,tipo:"text",div:""},
@@ -398,6 +406,7 @@ i3GEOadmin.variaveis = {
 						true
 				);
 				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
 			}
 			for (i=0, j=dados.length; i<j; i++)	{
 				conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"i3GEOadmin.variaveis.excluir('classificacaoMedida','"+dados[i].id_classificacao+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
@@ -411,6 +420,7 @@ i3GEOadmin.variaveis = {
 				d = {html:conteudo,id_classificacao:dados[i].id_classificacao,tipo:"classificacao"};
 				tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 				tempNode.isLeaf = false;
+				tempNode.enableHighlight = false;
 				tempNode.setDynamicLoad(loadNodeData, 1);
 			}
 			if(redesenha){tree.draw();}
@@ -538,6 +548,7 @@ i3GEOadmin.variaveis = {
 						true
 				);
 				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
 			}
 			for (i=0, j=dados.length; i<j; i++)	{
 				conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"i3GEOadmin.variaveis.excluir('classeClassificacao','"+dados[i].id_classe+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
@@ -549,6 +560,7 @@ i3GEOadmin.variaveis = {
 				d = {html:conteudo,id_classe:dados[i].id_classe,tipo:"classeClassificacao"};
 				tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
 			}
 			if(redesenha){tree.draw();}
 		},
@@ -568,6 +580,10 @@ i3GEOadmin.variaveis = {
 		},
 		montaDiv: function(i){
 			var ins = "",
+				param,
+				reg = new RegExp('"', "g");;
+			//troca strings que nao funcionam ao salvar
+			i.expressao = i.expressao.replace(reg,"'");
 			param = {
 				"linhas":[
 									{titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
@@ -618,6 +634,7 @@ i3GEOadmin.variaveis = {
 						true
 				);
 				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
 			}
 			for (i=0, j=dados.length; i<j; i++)	{
 				conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"i3GEOadmin.variaveis.excluir('parametroMedida','"+dados[i].id_parametro_medida+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
@@ -629,6 +646,7 @@ i3GEOadmin.variaveis = {
 				d = {html:conteudo,id_parametro_medida:dados[i].id_parametro_medida,tipo:"parametro"};
 				tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
 			}
 			if(redesenha){tree.draw();}
 		},
@@ -649,7 +667,7 @@ i3GEOadmin.variaveis = {
 		},
 		montaDiv: function(i){
 			var ins = "",
-				limg=i3GEO.configura.locaplic+"/imagens/crialeg.jpg",
+				limg=i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
 				param = {
 					"linhas":[
 							{titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
@@ -693,6 +711,7 @@ i3GEOadmin.variaveis = {
 						true
 				);
 				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
 			}
 			for (i=0, j=dados.length; i<j; i++)	{
 				conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"i3GEOadmin.variaveis.excluir('linkMedida','"+dados[i].id_link+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
@@ -704,6 +723,7 @@ i3GEOadmin.variaveis = {
 				d = {html:conteudo,id_link:dados[i].id_link,tipo:"link"};
 				tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
 			}
 			if(redesenha){tree.draw();}
 		},
@@ -752,6 +772,7 @@ i3GEOadmin.variaveis = {
 						true
 				);
 				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
 			}
 			for (i=0, j=dados.length; i<j; i++)	{
 				conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"i3GEOadmin.variaveis.excluir('fonteinfo','"+dados[i].id_fonteinfo+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
@@ -764,6 +785,7 @@ i3GEOadmin.variaveis = {
 				d = {html:conteudo,id_medida_variavel_fonteinfo:no.data.no_fonteinfo,id_fonteinfo:dados[i].id_fonteinfo,tipo:"fonteinfo"};
 				tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
 			}
 			if(redesenha){tree.draw();}
 		},
@@ -1170,12 +1192,16 @@ i3GEOadmin.variaveis = {
 			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClassificacaoMedida";
 		}
 		if(tipo == "classeClassificacao"){
-			campos = new Array("titulo","azul","verde","vermelho","tamanho","simbolo","otamanho","overde","oazul","overmelho");
+			campos = new Array("azul","verde","vermelho","tamanho","simbolo","otamanho","overde","oazul","overmelho");
 			par = "&id_classe="+id;
 			//troca o < por | para evitar problemas de passagem de parametro
 			temp = $i("Eexpressao").value;
 			reg = new RegExp("<", "g");
 			temp = temp.replace(reg,'|');
+			reg = new RegExp("'", "g");
+			temp = temp.replace(reg,'##');
+			reg = new RegExp('"', "g");
+			temp = temp.replace(reg,'##');
 			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClasseClassificacao&expressao="+temp;
 		}
 		if(tipo == "linkMedida"){

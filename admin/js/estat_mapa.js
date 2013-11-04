@@ -119,6 +119,7 @@ function montaArvore(dados)
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
+			tempNode.enableHighlight = false;
 			core_carregando("desativa");
 		}
 		buildTree();
@@ -138,6 +139,7 @@ function adicionaNosTemas(no,dados,redesenha)
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
@@ -153,6 +155,7 @@ function adicionaNosTemas(no,dados,redesenha)
 		var d = {html:conteudo,id_mapa_tema:dados[i].id_mapa_tema,tipo:"tema"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	if(redesenha){tree.draw();}
 }
@@ -194,6 +197,7 @@ function adicionaNosGrupos(no,dados,redesenha)
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
@@ -206,6 +210,7 @@ function adicionaNosGrupos(no,dados,redesenha)
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir o grupo!!!</span>";}
 		var d = {html:conteudo,id_mapa_grupo:dados[i].id_mapa_grupo,tipo:"grupo"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.enableHighlight = false;
 		//tempNode.isLeaf = true;
 		tempNode.setDynamicLoad(loadTemasData, temaIconMode);
 	}
@@ -225,7 +230,8 @@ function adicionaNosMapa(dados,redesenha)
 		else
 		{conteudo += "&nbsp;id "+dados[i].id_mapa+" - <span style=color:red >Edite para definir o Mapa!!!</span>";}
 		var d = {html:conteudo,id_mapa:dados[i].id_mapa,tipo:"mapa"};
-		new YAHOO.widget.HTMLNode(d, root, false,true);
+		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+		tempNode.enableHighlight = false;
 	}
 	if(redesenha){tree.draw();}
 }
@@ -344,7 +350,7 @@ function montaDivGrupo(i)
 }
 function montaDivMapa(i)
 {
-	var limg=i3GEO.configura.locaplic+"/imagens/crialeg.jpg",
+	var limg=i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
 		param =
 		{
 			"linhas":[

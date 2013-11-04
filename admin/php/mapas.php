@@ -180,7 +180,6 @@ function salvaMapfile(){
 		$conteudo = fread ($handle, filesize ($arqmapfile));
 		fclose ($handle);
 		$conteudo = base64_encode($conteudo);
-
 		if($conteudo == false){
 			return array("id"=>"","status"=>"erro");
 		}
@@ -200,6 +199,7 @@ function salvaMapfile(){
 		else{
 			$id = $id_mapa;
 		}
+		//echo "UPDATE ".$esquemaadmin."i3geoadmin_mapas SET mapfile = '$conteudo', publicado_mapa = 'sim', nome_mapa = '$nome_mapa', outros_mapa = '&restauramapa=$id&interface=$url' WHERE id_mapa =".$id; exit;
 		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_mapas SET mapfile = '$conteudo', publicado_mapa = 'sim', nome_mapa = '$nome_mapa', outros_mapa = '&restauramapa=$id&interface=$url' WHERE id_mapa =".$id);
 		$retorna = $id;
 		$dbhw = null;

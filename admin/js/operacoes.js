@@ -48,19 +48,19 @@ function ativaBotaoAdicionaOperacao(sUrl,idBotao){
 		core_carregando(" adicionando um novo registro");
 		var callback =
 		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					var j = YAHOO.lang.JSON.parse(o.responseText);
+				success:function(o)
+				{
+					try
+					{
+						var j = YAHOO.lang.JSON.parse(o.responseText);
 					adicionaNosOperacoes(j,true);
 					editar("operacoes",j[j.length-1].id_operacao);
-  					core_carregando("desativa");
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
+						core_carregando("desativa");
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};
@@ -117,12 +117,13 @@ function montaArvore(dados){
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
+			tempNode.enableHighlight = false;
 			core_carregando("desativa");
 		}
 		buildTree();
 	}();
-   	adicionaNosOperacoes(dados);
-   	tree.draw();
+		adicionaNosOperacoes(dados);
+		tree.draw();
 }
 /*
 Function: adicionaNosPapeis
@@ -145,6 +146,7 @@ function adicionaNosPapeis(no,dados,redesenha)
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
@@ -156,6 +158,7 @@ function adicionaNosPapeis(no,dados,redesenha)
 		var d = {html:conteudo,id_nopapel:dados[i].id_operacao+"_"+dados[i].id_papel,tipo:"papel"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
 	}
 	if(redesenha){tree.draw();}
 }
@@ -168,7 +171,8 @@ function adicionaNosOperacoes(dados,redesenha){
 		else
 		{conteudo += "&nbsp;<span style=color:red >Edite para definir a opera&ccedil;&atilde;o!!!</span>";}
 		var d = {html:conteudo,id_operacao:dados[i].id_operacao,tipo:"operacao"};
-		new YAHOO.widget.HTMLNode(d, root, false,true);
+		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+		tempNode.enableHighlight = false;
 	}
 	if(redesenha){tree.draw();}
 }
@@ -288,32 +292,32 @@ function gravaDados(tipo,id)
 	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value);}
 
 	var callback = {
-  		success:function(o){
-  			try	{
-  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
-  					setTimeout("core_carregando('desativa')",3000);
-  				}
-  				else{
-  					if(tipo == "operacao"){
-  						var no = tree.getNodeByProperty("id_operacao",id);
-  						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Ecodigo").value;
+			success:function(o){
+				try	{
+					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
+						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						setTimeout("core_carregando('desativa')",3000);
+					}
+					else{
+						if(tipo == "operacao"){
+							var no = tree.getNodeByProperty("id_operacao",id);
+							no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Ecodigo").value;
 						no.getContentEl().getElementsByTagName("span")[0].style.color = "";
-  						no.html = no.getContentEl().innerHTML;
-  					}
-   					if(tipo == "papel"){
-  						var no = tree.getNodeByProperty("id_operacao",id);
-  						adicionaNosPapeis(no,YAHOO.lang.JSON.parse(o.responseText),true);
-  					}
-  					core_carregando("desativa");
-  				}
+							no.html = no.getContentEl().innerHTML;
+						}
+						if(tipo == "papel"){
+							var no = tree.getNodeByProperty("id_operacao",id);
+							adicionaNosPapeis(no,YAHOO.lang.JSON.parse(o.responseText),true);
+						}
+						core_carregando("desativa");
+					}
 				YAHOO.admin.container.panelEditor.destroy();
 				YAHOO.admin.container.panelEditor = null;
-  			}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
 	};
 	if(prog && par){
 		core_carregando("ativa");

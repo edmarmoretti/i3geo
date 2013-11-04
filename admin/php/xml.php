@@ -657,6 +657,7 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 			}
 			$xml .= " <LINKDIRETO>".$linkdireto."</LINKDIRETO>\n";
 			$xml .= " <PUBLICADO>".$row["publicado_mapa"]."</PUBLICADO>\n";
+			$xml .= " <ID_MAPA>".$row["id_mapa"]."</ID_MAPA>\n";
 			if($row["mapfile"] != ""){
 				$xml .= " <CONTEMMAPFILE>sim</CONTEMMAPFILE>\n";
 			}

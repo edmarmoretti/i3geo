@@ -1643,13 +1643,13 @@ i3GEO.php = {
 
 	Salva o mapfile atual no banco de dados de administracao
 	*/
-	salvaMapaBanco: function(funcao,titulo){
+	salvaMapaBanco: function(funcao,titulo,id_mapa){
 		var url = (window.location.href.split("?")[0]),
 			p = i3GEO.configura.locaplic+"/admin/php/mapas.php?";
 			par = "funcao=salvaMapfile" +
 			"&url=" + url.replace("#","") +
 			"&arqmapfile=" + i3GEO.parametros.mapfile +
-			"&nome_mapa=" + titulo;
+			"&nome_mapa=" + titulo+"&id_mapa="+id_mapa;
 		i3GEO.util.ajaxGet(p+par,funcao);
 	},
 	/*

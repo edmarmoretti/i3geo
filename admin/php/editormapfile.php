@@ -1196,6 +1196,7 @@ function criarNovoMap()
 		$dados[] = '        NAME ""';
 		$dados[] = '        STYLE';
 		$dados[] = '        	COLOR 0 0 0';
+		$dados[] = '        	SIZE 12';
 		$dados[] = '        END';
 		$dados[] = '    END';
 		$dados[] = "END";

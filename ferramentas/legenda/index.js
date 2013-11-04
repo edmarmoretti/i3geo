@@ -712,7 +712,7 @@ i3GEOF.legenda = {
 				cp,
 				temp,
 				expn,
-				re = new RegExp('"', "g");;
+				re = new RegExp('"', "g");
 			for (t=0;t<trs.length;t++){
 				if(trs[t].childNodes){
 					nn = trs[t].childNodes;

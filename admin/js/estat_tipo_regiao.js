@@ -291,7 +291,7 @@ function montaEditorAgregacoes(dados,id,recordid){
 	core_carregando("desativa");
 }
 function montaDiv(i){
-	var limg = "../../imagens/crialeg.jpg",
+	var limg = "../../imagens/ic_zoom.png",
 		param = {
 			"linhas":[
 			{titulo:"Nome:",id:"Enome_tipo_regiao",size:"50",value:i.nome_tipo_regiao,tipo:"text",div:""},
@@ -320,7 +320,7 @@ function montaDiv(i){
 	}
 }
 function montaDivAgregacoes(i){
-	var limg = i3GEO.configura.locaplic+"/imagens/crialeg.jpg",
+	var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
 		param = {
 			"linhas":[
 			{titulo:"C&oacute;digo do limite geogr&aacute;fico de n&iacute;vel superior: <img onclick='selListaRegioes(\"Ecodigo_tipo_regiao_pai\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecodigo_tipo_regiao_pai",size:"30",value:i.codigo_tipo_regiao_pai,tipo:"text",div:""},
