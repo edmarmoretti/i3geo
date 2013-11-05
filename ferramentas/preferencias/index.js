@@ -124,6 +124,36 @@ i3GEOF.preferencias = {
 						opcoes: i3GEO.arvoreDeCamadas.FUNCOES
 					}
 				]
+			},{
+				titulo: $trad(23,i3GEOF.preferencias.dicionario),
+				props: [
+					{
+						titulo: $trad(24,i3GEOF.preferencias.dicionario),
+						tipo: "multiselect",
+						elemento: "i3GEO.arvoreDeTemas.OPCOESADICIONAIS",
+						opcoes: i3GEO.arvoreDeTemas.OPCOESADICIONAIS
+					},{
+						titulo: $trad(25,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeTemas.INCLUISISTEMAS"
+					},{
+						titulo: $trad(26,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeTemas.INCLUIWMS"
+					},{
+						titulo: $trad(27,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeTemas.INCLUIINDIBR"
+					},{
+						titulo: $trad(28,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT"
+					},{
+						titulo: $trad(29,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeTemas.INCLUIESTRELAS"
+					}
+				]
 			}
 		];
 		return lista;
@@ -193,7 +223,8 @@ i3GEOF.preferencias = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var lista = i3GEOF.preferencias.lista(),
+		var temp,
+			lista = i3GEOF.preferencias.lista(),
 			n = lista.length,
 			i = 0,
 			ins = "<div id=i3GEOPreferenciasRaiz >",
@@ -206,13 +237,16 @@ i3GEOF.preferencias = {
 			l=0,
 			numl=0,
 			ids = [],
-			valores,
-			nomes;
+			valores = [],
+			nomes = [];
 		for(i=0;i<n;i++){
 			ins += "<p onclick='javascript:i3GEOF.preferencias.expande("+i+")' class=paragrafo style=cursor:pointer;color:navy ><b>"+lista[i].titulo+"</b><p>";
 			ins += "<div style=display:none id='listaPref"+i+"'>";
 			props = lista[i].props;
 			nj = props.length;
+			valores = [];
+			nomes = [];
+			ids = [];
 			for(j=0;j<nj;j++){
 				ins += "<p class=paragrafo >"+props[j].titulo+"</p>";
 				if(props[j].tipo === "numero" || props[j].tipo === "texto"){
@@ -237,14 +271,20 @@ i3GEOF.preferencias = {
 				}
 				if(props[j].tipo === "multiselect"){
 					valores = i3GEO.util.listaTodasChaves(props[j].opcoes);
+					var nvalores = [];
+					var nelementos;
 					numl = valores.length;
 					for(l=0;l<numl;l++){
-						ids.push(props[j].elemento+"."+valores[l]);
+						temp = props[j].opcoes[valores[l]];
+						if(temp === true || temp === false){
+							ids.push(props[j].elemento+"."+valores[l]);
+							nvalores.push(valores[l]);
+						}
 					}
 					ins += i3GEO.util.checkCombo(
 						props[j].elemento,
-						valores,
-						valores,
+						nvalores,
+						nvalores,
 						estilo+";overflow:auto;height:50px;border:1px solid gray;background-color:white",
 						"",
 						ids

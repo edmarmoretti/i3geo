@@ -133,48 +133,132 @@ i3GEOF.preferencias.dicionario = {
 			it:""
 		}],
 		23: [{
-			pt:"",
+			pt:"&Aacute;rvore de temas",
 			en:"",
 			es:"",
 			it:""
 		}],
 		24: [{
-			pt:"",
+			pt:"Botões",
 			en:"",
 			es:"",
 			it:""
 		}],
 		25: [{
-			pt:"",
+			pt:"Inclui a lista de sistemas adicionais que adicionam camadas",
 			en:"",
 			es:"",
 			it:""
 		}],
 		26: [{
-			pt:"",
+			pt:"Inclui a lista de WMS cadastrados",
 			en:"",
 			es:"",
 			it:""
 		}],
 		27: [{
-			pt:"",
+			pt:"Inclui a lista de WMS cadastrados na INDE Brasileira",
 			en:"",
 			es:"",
 			it:""
 		}],
 		28: [{
-			pt:"",
+			pt:"Inclui a lista de WMS originados do sistema de metadados estatísticos",
 			en:"",
 			es:"",
 			it:""
 		}],
 		29: [{
-			pt:"",
+			pt:"Inclui as estrelas que classificam os temas com base no volume de acessos",
 			en:"",
 			es:"",
 			it:""
 		}],
 		30: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		31: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		32: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		33: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		34: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		35: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		36: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		37: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		38: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		39: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		40: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		41: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		42: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		43: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		44: [{
 			pt:"",
 			en:"",
 			es:"",

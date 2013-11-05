@@ -119,7 +119,6 @@ i3GEO.arvoreDeTemas = {
 	{Object}
 	*/
 	OPCOESADICIONAIS: {
-		idonde: "",
 		incluiArvore: true,
 		uploaddbf: true,
 		uploadlocal: true,
@@ -147,7 +146,8 @@ i3GEO.arvoreDeTemas = {
 		googleearth: true,
 		carregaKml: true,
 		flutuante: true,
-		metaestat: true
+		metaestat: true,
+		idonde: ""
 	},
 	/*
 	Propriedade: FATORESTRELA
