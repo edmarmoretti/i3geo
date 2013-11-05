@@ -155,6 +155,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/button/button-min.js",
 "../pacotes/yui290/build/carousel/carousel_compacto.js",
 "../pacotes/yui290/build/json/json-min.js",
+"../pacotes/yui290/build/storage/storage-min.js",
 "../pacotes/yui290/build/resize/resize_compacto.js",
 "../pacotes/yui290/build/progressbar/progressbar_compacto.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js",

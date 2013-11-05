@@ -154,6 +154,55 @@ i3GEOF.preferencias = {
 						elemento: "i3GEO.arvoreDeTemas.INCLUIESTRELAS"
 					}
 				]
+			},{
+				titulo: $trad(30,i3GEOF.preferencias.dicionario),
+				props: [
+					{
+						titulo: $trad(31,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.configura.guardaExtensao"
+					},{
+						titulo: $trad(32,i3GEOF.preferencias.dicionario),
+						tipo: "select",
+						elemento: "i3GEO.configura.tipotip",
+						opcoes: ["completo","simples","balao"]
+					},{
+						titulo: $trad(33,i3GEOF.preferencias.dicionario),
+						tipo: "texto",
+						elemento: "i3GEO.configura.alturatip"
+					},{
+						titulo: $trad(34,i3GEOF.preferencias.dicionario),
+						tipo: "texto",
+						elemento: "i3GEO.configura.larguratip"
+					},{
+						titulo: $trad(35,i3GEOF.preferencias.dicionario),
+						tipo: "select",
+						elemento: "i3GEO.configura.mapaRefDisplay",
+						opcoes: ["block","none"]
+					},{
+						titulo: $trad(36,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.configura.diminuixN"
+					},{
+						titulo: $trad(37,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.configura.diminuiyN"
+					},{
+						titulo: $trad(38,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.configura.diminuixM"
+					},{
+						titulo: $trad(39,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.configura.diminuiyM"
+					},{
+						titulo: $trad(40,i3GEOF.preferencias.dicionario),
+						tipo: "select",
+						elemento: "i3GEO.coordenadas.padrao",
+						opcoes: ["geoProj","dd","policonicaSad69","utmSad69Proj","utmSirgas2000Proj"]
+					}
+
+				]
 			}
 		];
 		return lista;
@@ -343,7 +392,7 @@ i3GEOF.preferencias = {
 		}
 	},
 	limpa: function(){
-		i3GEO.util.insereCookie("preferenciasDoI3Geo","",365);
+		i3GEO.util.limpaDadosLocal("preferenciasDoI3Geo");
 		$i("i3GEOF.preferencias_corpo").innerHTML = i3GEOF.preferencias.html();
 		i3GEO.janela.tempoMsg($trad(3,i3GEOF.preferencias.dicionario));
 	},
@@ -355,7 +404,7 @@ i3GEOF.preferencias = {
 			elem = [],
 			nelem,
 			pares = [],
-			raiz = $i("i3GEOPreferenciasRaiz");
+			raiz = $i("i3GEOF.preferencias_corpo");
 		for(i=0;i<ntipos;i++){
 			elem = raiz.getElementsByTagName(tipos[i]);
 			nelem = elem.length;
@@ -371,10 +420,12 @@ i3GEOF.preferencias = {
 			}
 		}
 		i3GEO.janela.tempoMsg($trad(3,i3GEOF.preferencias.dicionario));
-		i3GEO.util.insereCookie("preferenciasDoI3Geo",pares.join(":"),365);
+		//i3GEO.util.insereCookie("preferenciasDoI3Geo",pares.join(":"),365);
+		i3GEO.util.limpaDadosLocal("preferenciasDoI3Geo");
+		i3GEO.util.gravaDadosLocal("preferenciasDoI3Geo",pares.join(":"));
 	},
 	carrega: function(){
-		var cookies = i3GEO.util.pegaCookie("preferenciasDoI3Geo"),
+		var cookies = i3GEO.util.pegaDadosLocal("preferenciasDoI3Geo"),
 			i,props,nprops,temp,elem;
 		if(cookies){
 			props = cookies.split(":");

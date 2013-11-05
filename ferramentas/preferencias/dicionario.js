@@ -175,67 +175,67 @@ i3GEOF.preferencias.dicionario = {
 			it:""
 		}],
 		30: [{
-			pt:"",
+			pt:"Mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
 		31: [{
-			pt:"",
+			pt:"Armazena a &uacute;ltima extens&atilde;o geogr&aacute;fica utilizada",
 			en:"",
 			es:"",
 			it:""
 		}],
 		32: [{
-			pt:"",
+			pt:"Estilo do bal&atilde;o de identifica&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
 		33: [{
-			pt:"",
+			pt:"Altura do bal&atilde;o de identifica&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
 		34: [{
-			pt:"",
+			pt:"Largura do bal&atilde;o de identifica&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
 		35: [{
-			pt:"",
+			pt:"Indica se o mapa de refer&ecirc;ncia dever&aacute; ser aberto quando o i3Geo for inicializado",
 			en:"",
 			es:"",
 			it:""
 		}],
 		36: [{
-			pt:"",
+			pt:"Diminui a largura do mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
 		37: [{
-			pt:"",
+			pt:"Diminui a altura do mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
 		38: [{
-			pt:"",
+			pt:"Diminui a largura do mapa (navevagador IE)",
 			en:"",
 			es:"",
 			it:""
 		}],
 		39: [{
-			pt:"",
+			pt:"Diminui a altura do mapa (navevagador IE)",
 			en:"",
 			es:"",
 			it:""
 		}],
 		40: [{
-			pt:"",
+			pt:"Tipo de coordenada mostrada no rodap&eacute;",
 			en:"",
 			es:"",
 			it:""

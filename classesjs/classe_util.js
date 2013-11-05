@@ -2830,10 +2830,10 @@ i3GEO.util = {
 	*/
 	pegaDadosLocal: function(item){
 		if(i3GEO.util.verifica_html5_storage() && localStorage[item]){
-			return localStorage[item].split("$");
+			return window.localStorage[item];
 		}
 		else{
-			return [];
+			return false;
 		}
 	},
 	/*
@@ -2847,7 +2847,7 @@ i3GEO.util = {
 	*/
 	limpaDadosLocal: function(item){
 		if(i3GEO.util.verifica_html5_storage() && localStorage[item]){
-			localStorage[item] = undefined;
+			window.localStorage.clear(item);
 		}
 	},
 	/*
@@ -2864,15 +2864,7 @@ i3GEO.util = {
 	*/
 	gravaDadosLocal: function(item,valor){
 		if(i3GEO.util.verifica_html5_storage()){
-			var itens = i3GEO.util.pegaDadosLocal(item);
-			if(itens){
-				itens.remove(valor);
-				itens.push(valor);
-				localStorage[item] = itens.join("$");
-			}
-			else{
-				localStorage[item] = valor;
-			}
+			window.localStorage[item] = valor;
 			return true;
 		}
 		else{

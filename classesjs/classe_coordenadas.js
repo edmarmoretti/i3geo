@@ -65,7 +65,9 @@ i3GEO.coordenadas = {
 	/*
 	Propriedade: padrao
 
-	Indica qual tipo de coordenada &eacute; mostrado como padr&atilde;o quando formato for igual a "bloco". Deve existir em i3GEO.coordenadas.config
+	Indica qual tipo de coordenada &eacute; mostrado como padr&atilde;o quando formato for igual a "bloco".
+
+	Deve existir em i3GEO.coordenadas.config
 
 	Default:
 	"geoProj"
