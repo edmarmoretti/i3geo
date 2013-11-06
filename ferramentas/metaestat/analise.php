@@ -692,10 +692,10 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formula
 	$colunasDados = array();
 	$itens = array($gid,"regiao");
 	$itensdesc = array("gid","Regiao");
-	$tabelaColuna = [];
+	$tabelaColuna = array();
 	for($i=0;$i<$n;$i++){
 		$colunasDados[] = "tabela".$i.".".$colunasValor[$i]." as valortema".$i;
-		$tabelaColuna[valortema.$i] = "tabela".$i.".".$colunasValor[$i];
+		$tabelaColuna["valortema".$i] = "tabela".$i.".".$colunasValor[$i];
 		$itens[] = "valortema".$i;
 		$itensdesc[] = $nomesLayers[$i];
 	}
