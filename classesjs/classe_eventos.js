@@ -211,8 +211,13 @@ i3GEO.eventos = {
 
 	Executa as fun&ccedil;&otilde;es armazenadas em MOUSEUP.
 	*/
-	mouseupMapa: function(){
-		i3GEO.eventos.executaEventos(this.MOUSEUP);
+	mouseupMapa: function(exy){
+		if(exy && exy.target && exy.target.style.zIndex == ""){
+			i3GEO.eventos.executaEventos(this.MOUSEUP);
+		}
+		if(!exy){
+			i3GEO.eventos.executaEventos(this.MOUSEUP);
+		}
 	},
 	/*
 	Function: mousecliqueMapa
@@ -253,7 +258,7 @@ i3GEO.eventos = {
 		/*
 		Executa os eventos definidos em MOUSECLIQUEPERM
 		*/
-		executa: function(){
+		executa: function(evt){
 			if(i3GEO.eventos.cliquePerm.ativo === true && i3GEO.eventos.cliquePerm.status === true){
 				i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSECLIQUEPERM);
 			}
@@ -506,12 +511,12 @@ i3GEO.eventos = {
 		};
 		docMapa.onclick = function(exy){
 			if(!i3GEO.eventos.botaoDireita(exy))
-			{i3GEO.eventos.mousecliqueMapa();}
+			{i3GEO.eventos.mousecliqueMapa(exy);}
 		};
 		docMapa.onmouseup = function(exy){
 			//if(typeof(console) !== 'undefined'){console.error("up");}
 			if(!i3GEO.eventos.botaoDireita(exy))
-			{i3GEO.eventos.mouseupMapa();}
+			{i3GEO.eventos.mouseupMapa(exy);}
 		};
 	},
 	/*

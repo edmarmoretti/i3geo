@@ -582,8 +582,12 @@ i3GEOadmin.editor = {
 		},
 		formulario: function(){
 			var ins = '<fieldset><form id=i3GEOuploadcsvf target="i3GEOuploadcsviframe" action="../php/metaestat_uploadcsv_submit.php" method="post" ENCTYPE="multipart/form-data">' +
-			'<p class="paragrafo" >CSV (utilize ponto como separador de valores decimais ou a importa&ccedil;&atilde;o poder&aacute; n&atilde;o ocorrer): <br><input class=digitar type="file" size=22 name="i3GEOuploadcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
-			'<p class="paragrafo" >Nome da nova tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br><input class=digitar type="text" size=20 id="tabelaDestinocsv" name="tabelaDestinocsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >CSV (utilize ponto como separador de valores decimais ou a importa&ccedil;&atilde;o poder&aacute; n&atilde;o ocorrer): <br><br><input class=digitar type="file" size=22 name="i3GEOuploadcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >Nome da nova tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br><input class=digitar type="text" size=20 id="tabelaDestinocsv" name="tabelaDestinocsv" style="top:0px;left:0px;cursor:pointer;">&nbsp;' +
+			'Ou escolha da lista: ' +
+			'<select onchange="javascript:$i(\'tabelaDestinocsv\').value = this.value;">' +
+			i3GEOadmin.editor.tabela.optionsTabela +
+			'</select></p>' +
 			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
 			'<select id=i3GEOtipoOperacaocsv name=tipoOperacao >' +
 			'<option value=criar >Criar a tabela nova e incluir registros do CSV</option>' +

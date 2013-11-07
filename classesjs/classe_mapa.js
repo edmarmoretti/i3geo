@@ -77,7 +77,6 @@ i3GEO.mapa = {
 		}
 		novoel.src = imagem;
 		novoel.id = "i3GEOdobraPagina";
-		YAHOO.util.Event.addListener(novoel, "click", YAHOO.util.Event.stopPropagation);
 		if(tipo === "googlemaps"){
 			novoel.onclick = function(evt){
 				i3GEO.Interface.atual2gm.inicia();
@@ -93,8 +92,9 @@ i3GEO.mapa = {
 		novoel.style.top = i3GEO.parametros.h - 35 + "px";
 		novoel.style.zIndex = "50000";
 		novoel.style.left = i3GEO.parametros.w - 35 + "px";
-		YAHOO.util.Event.addListener(novoel, "click", YAHOO.util.Event.stopPropagation);
 		$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
+		YAHOO.util.Event.addListener("i3GEOdobraPagina", "click", YAHOO.util.Event.stopPropagation);
+		YAHOO.util.Event.addListener("i3GEOdobraPagina", "click", YAHOO.util.Event.preventDefault);
 	},
 	/*
 	Reposiciona o icone do tipo "dobra de pagina"
@@ -856,7 +856,7 @@ i3GEO.mapa = {
 
 		Essa e a funcao padrao definida em i3GEO.configura
 		*/
-		verificaTipDefault: function(){
+		verificaTipDefault: function(e){
 			//evita clicar sobre a barra do googlemaps
 			//@FIXIT nada elegante
 			//console.warn(objposicaocursor.imgx)
@@ -871,7 +871,28 @@ i3GEO.mapa = {
 			if(i3GEO.Interface.ATUAL === "googleearth" && i3GEO.eventos.MOUSECLIQUE.length > 1){
 				return;
 			}
-			var ntemas,etiquetas,j,retorna;
+			var ntemas,etiquetas,j,retorna,targ;
+			
+			if (!e){
+				e = window.event;
+			}
+			try{
+				if (e.target){
+					targ = e.target;
+				}
+				else{
+					if (e.srcElement){
+						targ = e.srcElement;
+					}
+				}
+				if(targ.parentNode){
+					container = targ.parentNode.id;
+					alert(container);
+				}
+				
+			}
+			catch(erro){ targ = null;}
+			
 			ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
 			etiquetas = false;
 			for(j=0;j<ntemas;j += 1)

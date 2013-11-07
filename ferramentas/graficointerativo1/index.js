@@ -1247,7 +1247,7 @@ i3GEOF.graficointerativo1 = {
 				config.width = dados.resultset.length * temp.value;
 			}
 			else{
-				config.width = parseInt($i("i3GEOF.graficointerativo1_corpo").style.width,10) - 20;
+				config.width = parseInt($i("i3GEOF.graficointerativo1").style.width,10) - 20;
 			}
 			return config;
 		},
