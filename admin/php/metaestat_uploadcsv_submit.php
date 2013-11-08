@@ -114,6 +114,18 @@ if (ob_get_level() == 0) ob_start();
 			} catch (PDOException $e) {
 				echo 'Connection failed: ' . $e->getMessage();
 			}
+			//encoding do banco de dados
+			$sql = "SELECT pg_encoding_to_char(encoding) FROM pg_database WHERE datname = '".$conexao["bancodedados"]."'";
+			$res = $dbh->query($sql,PDO::FETCH_ASSOC);
+			$encodingdb = $res->fetchAll();
+			$encodingdb = $encodingdb[0];
+			$encodingdb = $encodingdb["pg_encoding_to_char"];
+			if($encodingdb == "UTF8"){
+				$encodingdb = "UTF-8";
+			}
+			if($encodingdb == "LATIN1"){
+				$encodingdb = "ISO-8859-1";
+			}
 			//gera o script para criar a tabela e verifica se ja existe
 			$sql = "SELECT table_name FROM information_schema.tables where table_schema = '".$_POST["i3GEOuploadcsvesquema"]."' AND table_name = '".$_POST["tabelaDestinocsv"]."'";
 			$res = $dbh->query($sql,PDO::FETCH_ASSOC);
@@ -171,28 +183,40 @@ if (ob_get_level() == 0) ob_start();
 				$vs = array();
 				for ($j=0; $j<$ncolunas;$j++){
 					if($tipoColuna[$colunas[$j]] == "varchar"){
-						$texto = str_replace("'","",$s[$j]);
-						$vs[] = "'".$texto."'";
-					}
-					else{
-						if(empty($s[$j]) && $s[$j] != 0){
-							$vs[] = 'null';
+						$texto = $s[$j];
+						$texto = str_replace("'","",$texto);
+						$enc = mb_detect_encoding($texto);
+						if(enc != ""){
+							$texto = "'".mb_convert_encoding($texto,$encodingdb,$enc)."'";
 						}
 						else{
-							$vs[] = $s[$j];
+							$texto = "'".$texto."'";
 						}
+						if($texto == "''"){
+							$texto = 'null';
+						}
+						$vs[] = $texto;
 					}
-					if($colunas[$j] == $_POST["colunaxcsv"]){
+					else{
+						$valor = $s[$j];
+						if($valor == ""){
+							$valor = "nulo";
+						}
+						$vs[] = $valor;
+					}
+					if(strtolower($colunas[$j]) == strtolower($_POST["colunaxcsv"])){
 						$valorX = $s[$j];
 					}
-					if($colunas[$j] == $_POST["colunaycsv"]){
+					if(strtolower($colunas[$j]) == strtolower($_POST["colunaycsv"])){
 						$valorY = $s[$j];
 					}
 				}
 				if($_POST["colunaxcsv"] != "" && $_POST["colunaycsv"] != ""){
 					$vs[] = "ST_PointFromText('POINT(". str_replace(",",".",$valorX)." ".str_replace(",",".",$valorY).")',4326)";
 				}
-				$linhasql[] = $insert."VALUES(".implode(",",$vs).")";
+				$str = implode(",",$vs);
+				$str = str_replace("nulo",'null',$str);
+				$linhasql[] = $insert."VALUES(".$str.")";
 			}
 			echo "<pre>";
 			//var_dump($linhasql);exit;

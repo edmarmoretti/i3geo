@@ -1620,11 +1620,15 @@ i3GEOF.metaestat = {
 			//insere uma opcao para ativar as opcoes adicionais que sao usadas quando o usuario quer
 			//usar dados ja existentes em um banco de dados
 			var temp,botoesdiv = $i("okcancel_checkbox"),
-				btn = document.createElement("div");
-			btn.innerHTML = "<br><input type=checkbox style='position:relative;top:3px;cursor:pointer;' onclick='javascript:$i(\"editorMedidaDefault\").style.display = \"block\";'/> Quero usar uma tabela j&aacute; existente ou alterar os par&acirc;metros adicionais";
+				btn = document.createElement("div"),
+				oclick = '$i(\"editorMedidaDefault\").style.display = \"block\";$i(\"Eesquemadb\").style.display = \"block\";$i(\"Etabela\").style.display = \"block\";';
+			btn.innerHTML = "<br><input type=checkbox style='position:relative;top:3px;cursor:pointer;' onclick='javascript:"+oclick+"'/> Quero usar uma tabela j&aacute; existente ou alterar os par&acirc;metros adicionais";
 			botoesdiv.appendChild(btn);
 
 			$i("editorMedidaDefault").style.display = "none";
+			$i("Eesquemadb").style.display = "none";
+			$i("Etabela").style.display = "none";
+
 			//passa o codigo da variavel
 			$i("Ecodigo_variavel").value = $i("i3geoCartoComboVariavelEditor").value;
 			//define os valores que sao padrao

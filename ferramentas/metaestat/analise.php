@@ -677,12 +677,12 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formula
 		//pega valores do primeiro layer para a tabela0
 		if($conta == 0){
 			$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");
-			$gid = $medidavariavel["colunaidunico"];
 		}
 		$conta++;
 	}
 	//coluna com a geometria
 	$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
+	$gid = $regiao["identificador"];
 	$n = count($sqls);
 
 	$cwhere = array();
@@ -691,7 +691,7 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formula
 	}
 	$colunasDados = array();
 	$itens = array($gid,"regiao");
-	$itensdesc = array("gid","Regiao");
+	$itensdesc = array("id","Regiao");
 	$tabelaColuna = array();
 	for($i=0;$i<$n;$i++){
 		$colunasDados[] = "tabela".$i.".".$colunasValor[$i]." as valortema".$i;
@@ -735,11 +735,11 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formula
 	$nlayer->setmetadata("tema",$nome);
 	$nlayer->setmetadata("METAESTAT_DERIVADO","sim");
 	$nlayer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL","");
-		$nlayer->setmetadata("TIP","");
-		$nlayer->setmetadata("arquivotemaoriginal","");
-		$nlayer->setmetadata("nomeoriginal","");
-		$nlayer->setmetadata("ITENS",implode(",",$itens));
-		$nlayer->setmetadata("ITENSDESC",implode(",",$itensdesc));
+	$nlayer->setmetadata("TIP","");
+	$nlayer->setmetadata("arquivotemaoriginal","");
+	$nlayer->setmetadata("nomeoriginal","");
+	$nlayer->setmetadata("ITENS",implode(",",$itens));
+	$nlayer->setmetadata("ITENSDESC",implode(",",$itensdesc));
 	$nclass = $nlayer->numclasses;
 	for($i=1;$i<$nclass;$i++){
 		$nlayer->getclass($i)->set("status",MS_DELETE);

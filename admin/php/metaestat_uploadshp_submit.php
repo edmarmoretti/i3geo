@@ -115,7 +115,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	ob_flush();
 	flush();
 	sleep(1);
-	
+
 	try {
 		$dbh = new PDO('pgsql:dbname='.$conexao["bancodedados"].';user='.$conexao["usuario"].';password='.$conexao["senha"].';host='.$conexao["host"].';port='.$conexao["porta"]);
 	} catch (PDOException $e) {
@@ -204,14 +204,16 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 			}
 			else{
 				$valor = $s->getValue($layer,$coluna);
-				if(empty($valor) && $valor != 0){
-					$valor = 'null';
+				if($valor = "" || (empty($valor) && $valor != 0){
+					$valor = 'nulo';
 				}
 				$vs[] = $valor;
 			}
 		}
 		$vs[] = "st_geomfromtext('".$s->toWkt()."','".$_POST["srid"]."')";
-		$linhas[] = $insert."VALUES(".implode(",",$vs).")";
+		$str = implode(",",$vs);
+		$str = str_replace("nulo",'null',$str);
+		$linhas[] = $insert."VALUES(".$str.")";
 	}
 	//echo "<pre>".var_dump($linhas);exit;
 	$layer->close();
