@@ -371,8 +371,7 @@ i3GEO.php = {
 	<LISTADRIVES>
 	*/
 	listadrives: function(funcao){
-		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
+		var p = i3GEO.configura.locaplic+"/ferramentas/navegarquivos/exec.php",
 			par = "funcao=listaDrives&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"listaDrives",funcao,par);
 	},
@@ -382,8 +381,7 @@ i3GEO.php = {
 	<LISTAARQUIVOS>
 	*/
 	listaarquivos: function(funcao,caminho){
-		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
+		var p = i3GEO.configura.locaplic+"/ferramentas/navegarquivos/exec.php",
 			par = "g_sid="+i3GEO.configura.sid+"&funcao=listaArquivos&diretorio="+caminho;
 		cpJSON.call(p,"listaArquivos",funcao,par);
 	},

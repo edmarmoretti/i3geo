@@ -737,7 +737,7 @@ i3GEO.arvoreDeTemas = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaDrives()");}
 		var retorno = function(retorno) {
 			try{
-				i3GEO.arvoreDeTemas.DRIVES = retorno.data[0];
+				i3GEO.arvoreDeTemas.DRIVES = retorno.data.drives;
 				if(i3GEO.arvoreDeTemas.DRIVES == "")
 				{return;}
 				if(funcao !== "")
@@ -1109,37 +1109,40 @@ i3GEO.arvoreDeTemas = {
 			{i3GEO.arvoreDeTemas.adicionaNoNavegacaoDir();}
 		}
 	},
-	adicionaNoNavegacaoDir: function(){
-		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir === true){
-			var temp = function(){
-				var drives,iglt,ig,drive,tempNode;
+	adicionaNoNavegacaoDir: function(drives,arvore){
+		var temp = function(){
+			var iglt,ig,drive,tempNode;
+			if(!drives){
 				drives = i3GEO.arvoreDeTemas.DRIVES;
-				if(drives == undefined || drives == "" || drives.length === 0){
-					i3GEO.arvoreDeTemas.ARVORE.draw();
-					return;
-				}
-				iglt = drives.length;
-				tempNode = new YAHOO.widget.HTMLNode(
-					{
-						html:"&nbsp;"+$trad("a6")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=32' >&nbsp;&nbsp;&nbsp;</a>",
-						enableHighlight:true,expanded:false
-					},
-					i3GEO.arvoreDeTemas.ARVORE.getRoot()
+			}
+			if(!arvore){
+				arvore = i3GEO.arvoreDeTemas.ARVORE;
+			}
+			if(drives == undefined || drives == "" || drives.length === 0){
+				arvore.draw();
+				return;
+			}
+			iglt = drives.length;
+			tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"&nbsp;"+$trad("a6")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=32' >&nbsp;&nbsp;&nbsp;</a>",
+					enableHighlight:true,expanded:false
+				},
+				arvore.getRoot()
+			);
+			ig=0;
+			do{
+				drive = new YAHOO.widget.HTMLNode(
+					{listaShp:true,listaImg:true,listaFig:false,html:drives[ig].nome,caminho:drives[ig].caminho,enableHighlight:true,expanded:false},
+					tempNode
 				);
-				ig=0;
-				do{
-					drive = new YAHOO.widget.HTMLNode(
-						{html:drives[ig].nome,caminho:drives[ig].caminho,enableHighlight:true,expanded:false},
-						tempNode
-					);
-					drive.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
-					ig+=1;
-				}
-				while(ig<iglt);
-				i3GEO.arvoreDeTemas.ARVORE.draw();
-			};
-			i3GEO.arvoreDeTemas.listaDrives(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,temp);
-		}
+				drive.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
+				ig+=1;
+			}
+			while(ig<iglt);
+			arvore.draw();
+		};
+		i3GEO.arvoreDeTemas.listaDrives(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,temp);
 	},
 	/*
 	Monta a lista de grupos de um no principal da arvore.
@@ -1344,21 +1347,30 @@ i3GEO.arvoreDeTemas = {
 	Parametro:
 
 	node {node} - no onde sera criada a lista
+
 	*/
 	montaDir: function(node){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaDir()");}
 		var montaLista = function(retorno)
 		{
-			var ig,conteudo,dirs,tempNode,arquivos;
+			var ig,conteudo,dirs,tempNode,arquivos,
+				funcaoClick = "i3GEO.util.adicionaSHP" ;
 			dirs = retorno.data.diretorios;
 			for (ig=0;ig<dirs.length;ig+=1)
 			{
+				if(node.data.funcaoClick){
+					funcaoClick = node.data.funcaoClick;
+				}
 				tempNode = new YAHOO.widget.HTMLNode(
 					{
 						html:dirs[ig],
 						caminho:node.data.caminho+"/"+dirs[ig],
 						expanded:false,
-						enableHighlight:false
+						enableHighlight:false,
+						listaImg: node.data.listaImg,
+						listaFig: node.data.listaFig,
+						listaShp: node.data.listaShp,
+						funcaoClick: funcaoClick
 					},
 					node
 				);
@@ -1368,9 +1380,15 @@ i3GEO.arvoreDeTemas = {
 			for (ig=0;ig<arquivos.length;ig+=1)
 			{
 				conteudo = arquivos[ig];
-				if(conteudo.search(".img") > 1 || conteudo.search(".tif") > 1 || conteudo.search(".TIF") > 1 || conteudo.search(".shp") > 1 || conteudo.search(".SHP") > 1)
+				if(node.data.funcaoClick){
+					funcaoClick = node.data.funcaoClick;
+				}
+				if((node.data.listaFig === true && (conteudo.search(".png") > 1 || conteudo.search(".jpg") > 1 || conteudo.search(".PNG") > 1 )) ||(node.data.listaImg === true && (conteudo.search(".img") > 1 || conteudo.search(".tif") > 1 || conteudo.search(".TIF") > 1 )) || (node.data.listaShp === true && (conteudo.search(".shp") > 1 || conteudo.search(".SHP") > 1)))
 				{
-					conteudo = "<a href='#' title='"+$trad("g2")+"' onclick='i3GEO.util.adicionaSHP(\""+node.data.caminho+"/"+conteudo+"\")' >"+conteudo+"</a>";
+					conteudo = "<a href='#' title='"+$trad("g2")+"' onclick='"+funcaoClick+"(\""+node.data.caminho+"/"+conteudo+"\")' >"+conteudo+"</a>";
+					if(retorno.data.urls && retorno.data.urls[ig] != ""){
+						conteudo += "&nbsp;<img src='"+i3GEO.configura.locaplic+"/.."+retorno.data.urls[ig]+"' style='width:30px'/>";
+					}
 					new YAHOO.widget.HTMLNode(
 						{isLeaf:true,enableHighlight:false,expanded:false,html:conteudo,caminho:node.data.caminho+"/"+conteudo},
 						node

@@ -581,31 +581,39 @@ i3GEOadmin.variaveis = {
 		montaDiv: function(i){
 			var ins = "",
 				param,
-				reg = new RegExp('"', "g");;
+				reg = new RegExp('"', "g"),
+				limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png";
 			//troca strings que nao funcionam ao salvar
 			i.expressao = i.expressao.replace(reg,"'");
 			param = {
 				"linhas":[
-									{titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
-									{titulo:"Express&atilde;o (no estilo Mapserver)<br> exemplo (([nu_farm_funcionando] > 0) and ([nu_farm_funcionando] < 5)):",id:"Eexpressao",size:"50",value:i.expressao,tipo:"text",div:""},
-									{titulo:"S&iacute;mbolo (pode ser utilizado uma imagem, exemplo: /var/www/i3geo/imagensteste.png) :",id:"Esimbolo",size:"10",value:i.simbolo,tipo:"text",div:""},
-									{titulo:"Tamanho do s&iacute;mbolo:",id:"Etamanho",size:"10",value:i.tamanho,tipo:"text",div:""},
-									{titulo:"Vermelho: <img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\"inputEventoCor\");' />",id:"Evermelho",size:"10",value:i.vermelho,tipo:"text",div:""},
-									{titulo:"Verde:",id:"Everde",size:"10",value:i.verde,tipo:"text",div:""},
-									{titulo:"Azul:",id:"Eazul",size:"10",value:i.azul,tipo:"text",div:""},
-									{titulo:"Contorno - tamanho do s&iacute;mbolo:",id:"Eotamanho",size:"10",value:i.otamanho,tipo:"text",div:""},
-									{titulo:"Contorno - Vermelho <img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\"inputEventoOutlineCor\");' />:",id:"Eovermelho",size:"10",value:i.overmelho,tipo:"text",div:""},
-									{titulo:"Contorno - Verde:",id:"Eoverde",size:"10",value:i.overde,tipo:"text",div:""},
-									{titulo:"Contorno - Azul:",id:"Eoazul",size:"10",value:i.oazul,tipo:"text",div:""}
+					{titulo:"T&iacute;tulo:",id:"Etitulo",size:"50",value:i.titulo,tipo:"text",div:""},
+					{titulo:"Express&atilde;o (no estilo Mapserver)<br> exemplo (([nu_farm_funcionando] > 0) and ([nu_farm_funcionando] < 5)):",id:"Eexpressao",size:"50",value:i.expressao,tipo:"text",div:""},
+
+					{titulo:"S&iacute;mbolo (pode ser utilizado uma imagem, exemplo: /var/www/i3geo/imagensteste.png) :",
+						id:"",size:"10",value:"",tipo:"text",div:"<div id=cSimbolo ></div>"},
+
+					{titulo:"Tamanho do s&iacute;mbolo:",id:"Etamanho",size:"10",value:i.tamanho,tipo:"text",div:""},
+					{titulo:"Vermelho: <img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\"inputEventoCor\");' />",id:"Evermelho",size:"10",value:i.vermelho,tipo:"text",div:""},
+					{titulo:"Verde:",id:"Everde",size:"10",value:i.verde,tipo:"text",div:""},
+					{titulo:"Azul:",id:"Eazul",size:"10",value:i.azul,tipo:"text",div:""},
+					{titulo:"Contorno - tamanho do s&iacute;mbolo:",id:"Eotamanho",size:"10",value:i.otamanho,tipo:"text",div:""},
+					{titulo:"Contorno - Vermelho <img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\"inputEventoOutlineCor\");' />:",id:"Eovermelho",size:"10",value:i.overmelho,tipo:"text",div:""},
+					{titulo:"Contorno - Verde:",id:"Eoverde",size:"10",value:i.overde,tipo:"text",div:""},
+					{titulo:"Contorno - Azul:",id:"Eoazul",size:"10",value:i.oazul,tipo:"text",div:""}
 				]
 			};
 			ins += core_geraLinhas(param);
 			//ins += "<br><br><br>";
 			//o input hidden recebe a cor da janela de selecao interativa e executa o preenchimento dos campos rgb
-
 			$i("editor_bd").innerHTML = ins+"<input type=hidden value='' id='inputEventoCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoCor\",\"E\")' />" +
 			"<input type=hidden value='' id='inputEventoOutlineCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoOutlineCor\",\"Eo\")' />";
 
+			if($i("cSimbolo")){
+				temp = '<input type=text size=10 value="'+i.simbolo+'" id="Esimbolo" style="width:90%;">' +
+					"<img onclick='i3GEOadmin.variaveis.selNavegador(\"Esimbolo\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+				$i("cSimbolo").innerHTML = temp;
+			}
 		},
 		preencheCores: function(id,prefixo){
 			var cor = $i(id).value.split(",");
@@ -1475,7 +1483,8 @@ i3GEOadmin.variaveis = {
 			return;
 		}
 		core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=colunasTabela&formato=json&codigo_estat_conexao="+eleCodigoConexao.value+"&nome_esquema="+eleNomeEsquema.value+"&nome_tabela="+eleNomeTabela.value,callback);
+	},
+	selNavegador: function(onde){
+		i3GEO.util.navegadorDir(onde,false,false,true);
 	}
-
-
 };

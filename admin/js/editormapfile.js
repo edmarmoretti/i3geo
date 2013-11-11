@@ -1495,7 +1495,7 @@ function montaEditorDados(dados)
 			titulo:"Connection ",id:"",value:"",tipo:"text",div:"<div id=cConnection ></div>"},
 
 			{ajuda:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name. Exemplo postgis: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291 . Exemplo shapefile: c://ms4w/Apache/htdocs/geodados/brasil/limitespol/localidades.shp",
-			titulo:"Data",id:"data",value:dados.data,tipo:"textarea"},
+			titulo:"Data",id:"",value:"",tipo:"textarea",div:"<div id=cData ></div>"},
 
 			{ajuda:"Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box",
 			titulo:"Type",id:"",value:dados.type,tipo:"text",div:"<div id=cType ></div>"},
@@ -1535,10 +1535,13 @@ function montaEditorDados(dados)
 		}
 		temp += '<input type="text" value="'+dados.connection+'" id="connection" style="width:90%;">';
 		temp += "<img onclick='selConexaoBanco(\"connection\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
-
 		$i("cConnection").innerHTML = temp;
 	}
-
+	if($i("cData")){
+		temp = '<textarea value="'+dados.data+'" id="data" style="width:90%;">'+dados.data+'</textarea>';
+		temp += "<img onclick='selNavegador(\"data\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		$i("cData").innerHTML = temp;
+	}
 	if($i("cMetaestat_id_medida_variavel")){
 		temp = '<input type="text" value="'+dados.metaestat_id_medida_variavel+'" id="metaestat_id_medida_variavel" style="width:90%;">';
 		temp += "<img onclick='selIdMedidaVariavel(\"metaestat_id_medida_variavel\",\"metaestat_id_medida_variavel\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
@@ -2281,5 +2284,13 @@ function selConexaoBanco(eleValue){
 			argument: { foo:"foo", bar:"bar" }
 	};
 	core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaConexao&formato=json",callback);
+}
+function selNavegador(onde){
+	if($i("connectiontype").value != 1){
+		alert("Opcao disponivel apenas para o tipo shape file");
+	}
+	else{
+		i3GEO.util.navegadorDir(onde,true,false,false);
+	}
 }
 //YAHOO.util.Event.addListener(window, "load", initMenu);

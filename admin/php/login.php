@@ -117,7 +117,7 @@ switch (strtoupper($funcao))
 		}
 	break;
 	/*
-	 Valor: VALIDAOPERACAOUSUARIO
+	Valor: VALIDAOPERACAOUSUARIO
 
 	Verifica se um usuario pode executar uma operacao
 
@@ -231,7 +231,7 @@ function verificaPapelSessao($id_papel){
 //
 function verificaOperacaoSessao($operacao){
 	$resultado = false;
-	//avalidacao consulta $_SESSION, que e definida no login
+	//a validacao consulta $_SESSION, que e definida no login
 	if(validaSessao()){
 		//verifica se e administrador, caso positivo, permite qq operacao
 		foreach($_SESSION["papeis"] as $p){

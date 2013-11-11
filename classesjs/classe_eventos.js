@@ -212,8 +212,14 @@ i3GEO.eventos = {
 	Executa as fun&ccedil;&otilde;es armazenadas em MOUSEUP.
 	*/
 	mouseupMapa: function(exy){
+		//console.error(exy.target.id);
+		//console.error(exy.target.style.zIndex);
+		//tenta evitar abrir o balao em objetos do openlayers ou googlemaps
 		if(exy && exy.target && exy.target.style.zIndex == ""){
-			i3GEO.eventos.executaEventos(this.MOUSEUP);
+			var parente = exy.target.parentNode;
+			if(parente.className === ""){
+				i3GEO.eventos.executaEventos(this.MOUSEUP);
+			}
 		}
 		if(!exy){
 			i3GEO.eventos.executaEventos(this.MOUSEUP);
@@ -343,7 +349,7 @@ i3GEO.eventos = {
 			objposicaocursor.refx: posicao x no mapa de refer&ecirc;ncia em pixels
 
 			objposicaocursor.refy: posicao x no mapa de refer&ecirc;ncia em pixels
-			
+
 	Parameters:
 
 	e {Event object} - objeto do tipo evento disparado sobre o objeto em foco

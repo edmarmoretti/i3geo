@@ -381,12 +381,15 @@ Parametro:
 
 $diretorio {string} - Raiz onde ser&aacute; feita a busca.
 
+$seguro - {boolean} lista apenas arquivos de dados geograficos e imagens
+
 Retorno:
 
 {array}
 */
-function listaArquivos($diretorio)
+function listaArquivos($diretorio,$seguro=false)
 {
+	$docroot = $_SERVER["DOCUMENT_ROOT"];
 	if (!is_dir($diretorio)){
 		$diretorio = "../".$diretorio;
 	}
@@ -394,21 +397,40 @@ function listaArquivos($diretorio)
 		$dirs = array();
 		$arqs = array();
 		$nomes = array();
+		$urls = array();
 		$d = dir($diretorio);
 		while (($nd = $d->read()) != FALSE)
 		{
-			if ($nd != "." && $nd != "..")
-			{
+			if ($nd != "." && $nd != ".."){
 				$ext = explode(".",$nd);
 				if (count($ext)>1){
-					$arqs[] = $nd;
-					$nomes[] = basename($nd);
+					if($seguro == true){
+						$buscar = $ext[1];
+						$permitido = array("png","PNG","jpg","JPG","tif","tiff","TIF","TIFF","shp","SHP","img");
+						if(in_array($buscar,$permitido)){
+							$arqs[] = $nd;
+							$nomes[] = basename($nd);
+							$url = "";
+
+							if(strpos($diretorio,$docroot) === true || strpos($diretorio,$docroot) === 0){
+								$url = str_replace($docroot,"",$diretorio."/".$nd);
+							}
+							$urls[] = $url;
+						}
+					}
+					else{
+						$arqs[] = $nd;
+						$nomes[] = basename($nd);
+						$urls = "";
+					}
 				}
-				if (count($ext)==1)
-				{$dirs[] = $nd;}
+				if (count($ext)==1){
+					$dirs[] = $nd;
+				}
 			}
 		}
-		return array("diretorios"=>$dirs,"arquivos"=>$arqs,"nomes"=>$nomes);
+		sort($dirs);
+		return array("diretorios"=>$dirs,"arquivos"=>$arqs,"nomes"=>$nomes,"urls"=>$urls);
 	}
 	else
 	{return "erro";}

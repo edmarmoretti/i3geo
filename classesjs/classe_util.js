@@ -2912,6 +2912,17 @@ i3GEO.util = {
 			}
 		}
 		return ext;
+	},
+	navegadorDir: function(obj,listaShp,listaImg,listaFig){
+		if(!obj){
+			listaShp = true;
+			listaImg = true;
+			listaFig = true;
+		}
+		var temp = function(){
+			i3GEOF.navegarquivos.iniciaDicionario(obj,listaShp,listaImg,listaFig);
+		};
+		i3GEO.util.dialogoFerramenta("i3GEO.util.navegadorDir()","navegarquivos","navegarquivos","index.js",temp);
 	}
 };
 //

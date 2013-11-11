@@ -2095,6 +2095,8 @@ Pega os códigos de proje&ccedil;&atilde;o EPSG.
 /*
 Valor: LISTADIRETORIOS
 
+Depreciado na V 5.0, use ferramentas/navegarquivos/exec.php
+
 Lista os diretórios de um diretório.
 
 */
@@ -2102,7 +2104,9 @@ Lista os diretórios de um diretório.
 		$retorno = listaDiretorios($diretorio);
 	break;
 /*
-Valor: LISTAARQUIVOS*
+Valor: LISTAARQUIVOS
+
+Depreciado na V 5.0, use ferramentas/navegarquivos/exec.php
 
 Lista os arquivos de um diretório.
 */

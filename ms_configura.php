@@ -238,6 +238,8 @@ $navegadoresLocais = "";
 
 Com a op&ccedil;&atilde;o ativa na interface do mapa, o ip do cliente &eacute; verificado e caso estiver registrado no array, a navega&ccedil;&atilde;o pelos diret&oacute;rios do servidor ser&aacute; permitida. Para mais detalhes, veja a ferramenta i3geo/ferramentas/navegacaodir
 
+Para efeito de compatibilidade, manteve-se a possibilidade de um array com multiplos arrays, mas apenas o primeiro e utilizado
+
 Tipo:
 {array}
 */
@@ -469,7 +471,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	$navegadoresLocais = array(
 		array(
-			"ip"=>"127.0.0.1",
 			"drives"=>array(
 				array("caminho"=>"c:","nome"=>"c:")
 			)
@@ -493,27 +494,9 @@ else //se for linux
 	}
 	$navegadoresLocais = array(
 		array(
-			"ip"=>"127.0.0.1",
 			"drives"=>array(
-				array("caminho"=>"/home","nome"=>"home"),
 				array("caminho"=>"/tmp","nome"=>"tmp"),
 				array("caminho"=>"/var/www","nome"=>"www")
-			)
-		),
-		array(
-			"ip"=>"::1",
-			"drives"=>array(
-					array("caminho"=>"/home","nome"=>"home"),
-					array("caminho"=>"/tmp","nome"=>"tmp"),
-					array("caminho"=>"/var/www","nome"=>"www")
-			)
-		),
-		array(
-			"ip"=>"localhost",
-			"drives"=>array(
-					array("caminho"=>"/home","nome"=>"home"),
-					array("caminho"=>"/tmp","nome"=>"tmp"),
-					array("caminho"=>"/var/www","nome"=>"www")
 			)
 		)
 	);

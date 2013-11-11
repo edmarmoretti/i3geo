@@ -259,7 +259,7 @@ i3GEO.janela = {
 		if(!modal || modal === "")
 		{modal = false;}
 		ifr = false;
-		if(i3GEO.Interface && i3GEO.Interface.ATUAL === "googleearth"){
+		if(i3GEO.Interface && i3GEO.Interface != undefined && i3GEO.Interface.ATUAL === "googleearth"){
 			i3GEO.janela.TRANSICAOSUAVE = false;
 			ifr = true;
 		}
@@ -359,7 +359,7 @@ i3GEO.janela = {
 		janela.bringToTop();
 
 		//ajusta estilos e outras caracter&iacute;sticas da janela criada
-		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface.ATUAL === "googleearth")
+		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface && i3GEO.Interface != undefined && i3GEO.Interface.ATUAL === "googleearth")
 		{janela.moveTo(0,0);}
 		if(ifr === true)
 		{janela.iframe.style.zIndex = 4;}
@@ -533,7 +533,7 @@ i3GEO.janela = {
 		{return;}
 		janela = YAHOO.i3GEO.janela.managerAguarde.find(id);
 		pos = [0,0];
-		if($i(i3GEO.Interface.IDCORPO))
+		if(i3GEO.Interface && $i(i3GEO.Interface.IDCORPO))
 		{pos = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));}
 		else if ($i("contemImg"))
 		{pos = YAHOO.util.Dom.getXY($i("contemImg"));}
@@ -550,7 +550,7 @@ i3GEO.janela = {
 		}
 		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "minima")
 		{janela.setHeader("<span><img id=aguardeGifAberto src='"+i3GEO.configura.locaplic+"/imagens/aguarde.gif' /></span>&nbsp;<span style=font-size:8px >"+YAHOO.i3GEO.janela.managerAguarde.overlays.length+"</span>");}
-		if(i3GEO.parametros.w > 0)
+		if(i3GEO.parametros && i3GEO.parametros.w > 0)
 		{janela.moveTo(pos[0] + (i3GEO.parametros.w / 2) - 120,pos[1]);}
 		else
 		{janela.moveTo(pos[0],pos[1]);}
@@ -596,7 +596,7 @@ i3GEO.janela = {
 		var pos,janela,attributes,anim,altura=40;
 		janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
 		pos = [0,0];
-		if($i(i3GEO.Interface.IDCORPO))
+		if(i3GEO.Interface && $i(i3GEO.Interface.IDCORPO))
 		{pos = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));}
 		else if ($i("contemImg"))
 		{pos = YAHOO.util.Dom.getXY($i("contemImg"));}
@@ -609,7 +609,7 @@ i3GEO.janela = {
 		altura = 70;
 		janela.body.style.padding="5px";
 		janela.body.style.backgroundColor="yellow";
-		if(i3GEO.Interface.ATUAL != "googleearth"){
+		if(i3GEO.Interface && i3GEO.Interface.ATUAL != "googleearth"){
 			janela.body.style.height="0px";
 		}
 		else{
@@ -623,12 +623,12 @@ i3GEO.janela = {
 			}
 		};
 
-		if(i3GEO.parametros.w > 0)
+		if(i3GEO.parametros && i3GEO.parametros.w > 0)
 		{janela.moveTo(pos[0] + (i3GEO.parametros.w / 2) - 120,pos[1]);}
 		else
 		{janela.moveTo(pos[0],pos[1]);}
 		janela.show();
-		if(i3GEO.Interface.ATUAL != "googleearth"){
+		if(i3GEO.Interface && i3GEO.Interface.ATUAL != "googleearth"){
 			attributes = {
 				height: { to: altura }
 			};
@@ -648,7 +648,7 @@ i3GEO.janela = {
 			function(){
 				var attributes,anim,
 					janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
-				if(i3GEO.Interface.ATUAL != "googleearth"){
+				if(i3GEO.Interface && i3GEO.Interface.ATUAL != "googleearth"){
 					if(janela){
 						janela.body.style.overflow = "hidden";
 						attributes = {
@@ -866,7 +866,7 @@ i3GEO.janela = {
 		i = $i("i3geo_rosa");
 		if(i)
 		{i.style.display="none";}
-		if ($i(i3GEO.Interface.IDCORPO))
+		if (i3GEO.Interface && $i(i3GEO.Interface.IDCORPO))
 		{$i("img").title = "";}
 		//insere div para tips
 		novoel = document.createElement("div");

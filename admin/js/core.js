@@ -1694,13 +1694,15 @@ function core_listaDeLetras(onde,nomeFuncao){
 		"../../pacotes/yui290/build/menu/menu-min.js",
 		"../../pacotes/yui290/build/editor/editor-min.js",
 		"../../pacotes/yui290/build/resize/resize-min.js",
+		"../../pacotes/cpaint/cpaint2.inc.compressed.js",
 		"../../classesjs/compactados/classe_util_compacto.js",
 		"../../classesjs/compactados/classe_login_compacto.js",
 		"../../classesjs/compactados/classe_janela_compacto.js",
+		"../../classesjs/compactados/classe_php_compacto.js",
 		"../../classesjs/compactados/dicionario_compacto.js",
 		"../../classesjs/compactados/classe_idioma_compacto.js",
 		"../../classesjs/compactados/classe_guias_compacto.js",
-		"../../pacotes/cpaint/cpaint2.inc.compressed.js"
+		"../../classesjs/compactados/classe_arvoredetemas_compacto.js"
 		);
 		//
 		//arquivos css
