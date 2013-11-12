@@ -1,5 +1,14 @@
 GUIA DE UPDATES
 
+
+-------------------------------------------------------------------------------------------------
+Para a versão 5.0
+
+- O usuário agora pode ver a pasta i3geo/aplicmap/dados e navegar pelos arquivos para adicionar camadas ao mapa
+Se você não quiser permitir isso, inclua na interface do seu mapa a variável javascript
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = false;
+
+
 -------------------------------------------------------------------------------------------------
 Para a versão 4.7
 

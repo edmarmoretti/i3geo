@@ -87,13 +87,27 @@ $funcoesEdicao = array(
 	"SALVAATRIBUTOSTIPOREGIAO",
 	"SALVAATRIBUTOSMEDIDAVARIAVEL",
 	"EXCLUIATRIBUTOSMEDIDAVARIAVEL",
-	"REGIAO2SHP"
+	"REGIAO2SHP",
+	"ESQUEMASCONEXAO",
+	"TABELASESQUEMA"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	//se a funcao esta no array eh feita a verificacao se o usuario esta logado e se ele esta em um grupo que
 	//permite o uso da operacao admin/metaestat/geral
 	if(verificaOperacaoSessao("admin/metaestat/geral") == false){
-		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+		//algumas funcoes possuem tratamento especial sem login
+		if(strtoupper($funcao) == "ESQUEMASCONEXAO"){
+			$esquema = array(array("oid"=>0,"esquema"=>"public"));
+			retornaJSON($esquema);exit;
+		}
+		if(strtoupper($funcao) == "TABELASESQUEMA"){
+			if($nome_esquema != "public"){
+				retornaJSON("Vc nao pode realizar essa operacao.");exit;
+			}
+		}
+		if(strtoupper($funcao) != "ESQUEMASCONEXAO" && strtoupper($funcao) != "TABELASESQUEMA"){
+			retornaJSON("Vc nao pode realizar essa operacao.");exit;
+		}
 	}
 }
 include(dirname(__FILE__)."/classe_metaestat.php");

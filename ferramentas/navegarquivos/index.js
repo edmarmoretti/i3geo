@@ -1,5 +1,5 @@
 /*
-Title: Navegador de arquivos
+Title: Navegador de tabelas no Postgis
 
 Licenca:
 
@@ -38,7 +38,6 @@ i3GEOF.navegarquivos = {
 	listaShp: true,
 	listaImg: true,
 	listaFig: true,
-	retornarPara: "",
 	/*
 	Variavel: aguarde
 
@@ -63,9 +62,6 @@ i3GEOF.navegarquivos = {
 			listaShp = true;
 			listaImg = true;
 			listaFig = true;
-		}
-		else{
-			i3GEOF.navegarquivos.retornarPara = obj;
 		}
 		i3GEOF.navegarquivos.retornarPara = obj;
 		i3GEOF.navegarquivos.listaShp = listaShp;

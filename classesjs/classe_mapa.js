@@ -871,8 +871,8 @@ i3GEO.mapa = {
 			if(i3GEO.Interface.ATUAL === "googleearth" && i3GEO.eventos.MOUSECLIQUE.length > 1){
 				return;
 			}
-			var ntemas,etiquetas,j,retorna,targ;
-			
+			var ntemas,etiquetas,j,retorna,targ = "";
+
 			if (!e){
 				e = window.event;
 			}
@@ -889,10 +889,10 @@ i3GEO.mapa = {
 					container = targ.parentNode.id;
 					alert(container);
 				}
-				
+
 			}
 			catch(erro){ targ = null;}
-			
+
 			ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
 			etiquetas = false;
 			for(j=0;j<ntemas;j += 1)

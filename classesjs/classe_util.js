@@ -2923,6 +2923,15 @@ i3GEO.util = {
 			i3GEOF.navegarquivos.iniciaDicionario(obj,listaShp,listaImg,listaFig);
 		};
 		i3GEO.util.dialogoFerramenta("i3GEO.util.navegadorDir()","navegarquivos","navegarquivos","index.js",temp);
+	},
+	navegadorPostgis: function(obj,conexao){
+		if(!obj){
+			conexao = "";
+		}
+		var temp = function(){
+			i3GEOF.navegapostgis.iniciaDicionario(obj,conexao);
+		};
+		i3GEO.util.dialogoFerramenta("i3GEO.util.navegadorPostgis()","navegapostgis","navegapostgis","index.js",temp);
 	}
 };
 //

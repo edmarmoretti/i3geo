@@ -2270,7 +2270,7 @@ function selConexaoBanco(eleValue){
 					selecionados = [],
 					funcaoFinal = function(){
 						alert("Complete com o valor da senha de acesso em 'password', exemplo: password=postgres");
-					}
+					};
 					for(i=0;i<n;i++){
 						temp = "password= user="+dados[i].usuario+" dbname="+dados[i].bancodedados+" host="+dados[i].host+" port="+dados[i].porta;
 						textos.push(dados[i].bancodedados);
@@ -2286,11 +2286,16 @@ function selConexaoBanco(eleValue){
 	core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaConexao&formato=json",callback);
 }
 function selNavegador(onde){
-	if($i("connectiontype").value != 1){
-		alert("Opcao disponivel apenas para o tipo shape file");
-	}
-	else{
+	switch(parseInt($i("connectiontype").value,10))
+	{
+	case 1:
 		i3GEO.util.navegadorDir(onde,true,false,false);
+		break;
+	case 6:
+		i3GEO.util.navegadorPostgis(onde);
+		break;
+	default:
+		alert("Opcao disponivel apenas para o tipo shape file");
 	}
 }
 //YAHOO.util.Event.addListener(window, "load", initMenu);

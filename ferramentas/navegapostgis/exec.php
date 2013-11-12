@@ -1,27 +1,11 @@
 <?php
 include_once(dirname(__FILE__)."/../../admin/php/login.php");
 $funcoesEdicao = array(
-		"LISTARQUIVOS",
-		"LISTADRIVES"
+		"LISTARQUIVOS"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/editormapfile") == false){
-		//se nao estiver logado permite acesso a pasta i3geo/aplicmap/dados
-		//localiza a pasta aplicmap/dados
-		$d = dirname(__FILE__); //precisa descer ainda
-		$d = dirname($d);
-		$d = dirname($d)."/aplicmap/dados"; //pasta permitida
-		if(strpos($diretorio,$d) === false){
-			if(strtoupper($funcao) == "LISTADRIVES"){
-				//lista a pasta default
-				$retorno = 	array(
-					"drives"=>array(
-						array("caminho"=>$d,"nome"=>"Dados")
-					)
-				);
-				cpjson($retorno);
-			}
-		}
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}
 }
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON

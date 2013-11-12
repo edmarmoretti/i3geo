@@ -130,7 +130,7 @@ i3GEO.arvoreDeTemas = {
 		conectargeojson: true,
 		nuvemTags: true,
 		nuvemTagsFlash: false,
-		navegacaoDir: false,
+		navegacaoDir: true,
 		incluibusca: true,
 		kml: true,
 		qrcode: true,

@@ -336,10 +336,8 @@ function selListaColunasRegiao(idEleValue,codigo_tipo_regiao){
 		dados = dadosAuxiliares.tipo_regiao,
 		n = dados.length,
 		i,
-		valores = [],
-		textos = [],
-		selecionados = eleValue.value,
-		regiao;
+		regiao = [],
+		callback;
 
 	if(!eleValue || codigo_tipo_regiao === ""){
 		return;
@@ -350,16 +348,15 @@ function selListaColunasRegiao(idEleValue,codigo_tipo_regiao){
 			regiao = dados[i];
 		}
 	}
-
 	callback = {
 			success:function(o){
 				try	{
 					var dados = YAHOO.lang.JSON.parse(o.responseText),
-					n = dados.length,
-					i,
-					valores = [],
-					textos = [],
-					selecionados = [eleValue.value];
+						n = dados.length,
+						i,
+						valores = [],
+						textos = [],
+						selecionados = [eleValue.value];
 					for(i=0;i<n;i++){
 						valores.push(dados[i]);
 						textos.push(dados[i]);
