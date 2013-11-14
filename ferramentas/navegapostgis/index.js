@@ -174,7 +174,7 @@ i3GEOF.navegapostgis = {
 			"",
 			titulo,
 			"i3GEOF.navegapostgis",
-			true,
+			false,
 			"hd",
 			cabecalho,
 			minimiza

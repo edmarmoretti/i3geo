@@ -1448,7 +1448,7 @@ i3GEO.arvoreDeTemas = {
 				{
 					conteudo = "<a href='#' title='"+$trad("g2")+"' onclick='"+funcaoClick+"(\""+node.data.caminho+"/"+conteudo+"\")' >"+conteudo+"</a>";
 					if(retorno.data.urls && retorno.data.urls[ig] != ""){
-						conteudo += "&nbsp;<img src='"+i3GEO.configura.locaplic+"/.."+retorno.data.urls[ig]+"' style='width:30px'/>";
+						conteudo += "&nbsp;<img src='"+i3GEO.configura.locaplic+"/.."+retorno.data.urls[ig]+"' style='height:20px;width:20px'/>";
 					}
 					new YAHOO.widget.HTMLNode(
 						{isLeaf:true,enableHighlight:false,expanded:false,html:conteudo,caminho:node.data.caminho+"/"+conteudo},

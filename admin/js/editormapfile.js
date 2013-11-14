@@ -1960,10 +1960,11 @@ function montaEditorClasseLabel(dados)
 }
 function montaEditorEstilo(dados)
 {
-	var param = {
+	var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png";
+		param = {
 		"linhas":[
 			{ajuda:"The symbol name or number to use for all features if attribute tables are not used. The number is the index of the symbol in the symbol file, starting at 1, the 5th symbol in the file is therefore symbol number 5. You can also give your symbols names using the NAME keyword in the symbol definition file, and use those to refer to them. Default is 0, which results in a single pixel, single width line, or solid polygon fill, depending on layer type.You can also specify a gif or png filename. The path is relative to the location of the mapfile.",
-			titulo:"Symbolname",id:"",value:dados.symbolname,tipo:"text",div:"<div id=cSymbolname ></div>"},
+			titulo:"Symbolname (pode ser utilizado uma imagem, exemplo: /var/www/i3geo/imagensteste.png) :",id:"",value:dados.symbolname,tipo:"text",div:"<div id=cSymbolname ></div>"},
 			{ajuda:"Color to use for drawing features.",
 			titulo:"Color",id:"color",value:dados.color,tipo:"cor"},
 			{ajuda:"Background-color to use for drawing features.",
@@ -1998,7 +1999,8 @@ function montaEditorEstilo(dados)
 	$i("editor_bd").innerHTML = ins;
 
 	temp = "<input type='text' value='"+dados.symbolname+"' id='symbolname' size='50'>";
-	temp += "<div id='listaSimbolos' style='overflow:auto;width:400px;height:50px;'></div>";
+	temp += "<img onclick='selNavegador(\"symbolname\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+	temp += "<div id='listaSimbolos' style='overflow:auto;width:350px;height:50px;'></div>";
 	$i("cSymbolname").innerHTML = temp;
 
 	var temp = function()
@@ -2029,6 +2031,7 @@ function montaEditorEstilo(dados)
 	};
 	core_makeRequest(sUrl,callback,'POST');
 }
+
 /*
 Function: salvarDadosEditor
 
@@ -2286,16 +2289,21 @@ function selConexaoBanco(eleValue){
 	core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaConexao&formato=json",callback);
 }
 function selNavegador(onde){
-	switch(parseInt($i("connectiontype").value,10))
-	{
-	case 1:
-		i3GEO.util.navegadorDir(onde,true,false,false);
-		break;
-	case 6:
-		i3GEO.util.navegadorPostgis(onde);
-		break;
-	default:
-		alert("Opcao disponivel apenas para o tipo shape file");
+	if($i("connectiontype")){
+		switch(parseInt($i("connectiontype").value,10))
+		{
+		case 1:
+			i3GEO.util.navegadorDir(onde,true,false,false);
+			break;
+		case 6:
+			i3GEO.util.navegadorPostgis(onde);
+			break;
+		default:
+			alert("Opcao disponivel apenas para o tipo shape file");
+		}
+	}
+	else{
+		i3GEO.util.navegadorDir(onde,false,false,true);
 	}
 }
 //YAHOO.util.Event.addListener(window, "load", initMenu);
