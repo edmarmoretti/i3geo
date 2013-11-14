@@ -241,7 +241,7 @@ i3GEOF.preferencias.dicionario = {
 			it:""
 		}],
 		41: [{
-			pt:"",
+			pt:"Inclu&iacute; na &aacute;rvore os limites e localidades cadastrados no sistema de metadados estat&iacute;sticos",
 			en:"",
 			es:"",
 			it:""

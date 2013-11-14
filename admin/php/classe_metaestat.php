@@ -771,38 +771,43 @@ class Metaestat{
 			$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 			$colunageo = $meta["colunageo"];
 			$srid = $meta["srid"];
-			//st_setsrid(".$colunageo.",".$srid.") as ".$colunageo
+			//pega as colunas menos as do tipo geometry
+			$colunastabela = $this->colunasTabela($meta["codigo_estat_conexao"],$meta["esquemadb"],$meta["tabela"],"geometry","!=");
+			//define as colunas que serão mostradas no sql
 			$vis = $meta["colunasvisiveis"];
-			if($vis == ""){
-				$vis = $meta["colunanomeregiao"];
-			}
-			$vis = str_replace(";",",",$vis);
-			$vis = str_replace(",,",",",$vis);
-			$vis = explode(",",$vis);
-			$itens = $vis;//array
-			$vis[] = "gid";
-			$vis = array_unique($vis);
-			$visiveis = array();
-			//verifica se as colunas existem mesmo
-			$colunastabela = $this->colunasTabela($meta["codigo_estat_conexao"],$meta["esquemadb"],$meta["tabela"]);
-			foreach($vis as $v){
-				if(in_array($v,$colunastabela)){
-					$visiveis[] = $v;
-				}
-			}
-			$vis = implode(",",$visiveis);
-			//apelidos
-			$apelidos = $meta["apelidos"];
-			if($apelidos == ""){
-				$apelidos = "Nome";
-			}
-			$apelidos = str_replace(";",",",$apelidos);
-			$apelidos = str_replace(",,",",",$apelidos);
-			$apelidos = mb_convert_encoding($apelidos,"ISO-8859-1",mb_detect_encoding($apelidos));
-			$apelidos = explode(",",$apelidos);
-			$apelidos = array_unique($apelidos);
 
-			$sqlf = $meta["colunageo"]." from (select st_setsrid(".$colunageo.",".$srid.") as $colunageo,$vis from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$srid;
+			if($vis != ""){
+				$vis = str_replace(";",",",$vis);
+				$vis = str_replace(",,",",",$vis);
+				$vis = explode(",",$vis);
+				$itens = $vis;//array
+				$vis[] = "gid";
+				$vis = array_unique($vis);
+				$visiveis = array();
+				//verifica se as colunas existem mesmo
+				foreach($vis as $v){
+					if(in_array($v,$colunastabela)){
+						$visiveis[] = $v;
+					}
+				}
+				$vis = implode(",",$visiveis);
+				//apelidos
+				$apelidos = $meta["apelidos"];
+				if($apelidos == ""){
+					$apelidos = "Nome";
+				}
+				$apelidos = str_replace(";",",",$apelidos);
+				$apelidos = str_replace(",,",",",$apelidos);
+				$apelidos = mb_convert_encoding($apelidos,"ISO-8859-1",mb_detect_encoding($apelidos));
+				$apelidos = explode(",",$apelidos);
+				$apelidos = array_unique($apelidos);
+			}
+			else{
+				$itens = array();
+				$apelidos = array();
+				$vis = implode($colunastabela,",");
+			}
+			$sqlf = $colunageo." from (select st_setsrid(".$colunageo.",".$srid.") as $colunageo,$vis from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$srid;
 			$sqlf = str_replace(",,",",",$sqlf);
 			$outlinecolor = str_replace(","," ",$outlinecolor);
 			$dados[] = "MAP";
@@ -2544,55 +2549,73 @@ class Metaestat{
 	 * @param nome da regiao
 	 * @param wkt
 	 * @param excluir|alterar tipo de operacao
+	 * @param nome da coluna que sera modificada
 	 * @return string
 	 */
-	function mantemDadosRegiao($codigo_tipo_regiao,$identificador,$identificadornovo,$nome,$wkt="",$tipo=""){
-		if($tipo != "excluir" && ($identificadornovo == "" || $nome == "")){
+	function mantemDadosRegiao($codigo_tipo_regiao,$identificador="",$identificadornovo="",$nome="",$wkt="",$tipo="",$colunas=""){
+		if($tipo != "" && $tipo != "excluir" && ($identificadornovo == "" || $nome == "")){
 			return array("erro");
+		}
+		if($colunas == ""){
+			$colunas = "colunanomeregiao";
 		}
 		//pega a tabela, esquema e conexao para acessar os dados da regiao
 		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
 		$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
 		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
-		//verifica se o registro com o valor do identificador novo ja existe
-		$novoexiste = false;
-		$sql = "select * from i3geo_metaestat.".$regiao["tabela"]." WHERE ".$regiao["identificador"]."::text = '$identificadornovo' ";
-		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
-		$r = $q->fetchAll();
-		if(count($r) > 0){
-			$novoexiste = true;
-		}
-		//verifica se o registro com o valor do identificador existe
-		$atualexiste = false;
+		//faz uma validacao para verificar se na tabela o identificador unico existe mais de uma vez
+		$atualexiste = 0;
 		if($identificador != ""){
 			$sql = "select * from i3geo_metaestat.".$regiao["tabela"]." WHERE ".$regiao["identificador"]."::text = '$identificador' ";
 			$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 			$r = $q->fetchAll();
+			$atualexiste = count($r);
+		}
+		//verifica se o registro com o valor do identificador novo ja existe
+		if($identificadornovo != ""){
+			$novoexiste = false;
+			$sql = "select * from i3geo_metaestat.".$regiao["tabela"]." WHERE ".$regiao["identificador"]."::text = '$identificadornovo' ";
+			$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+			$r = $q->fetchAll();
 			if(count($r) > 0){
-				$atualexiste = true;
+				$novoexiste = true;
 			}
 		}
-		if($tipo == "excluir"){
-			$dbh->query("DELETE from i3geo_metaestat.".$regiao["tabela"]." where ".$regiao["identificador"]."::text = '$identificador' ");
-			return array("ok");
+		else{
+			$novoexiste = true;
 		}
-		$nome = $this->converteTexto($nome);
+		//verifica se o registro com o valor do identificador existe
+		if($identificador != ""){
+			if($tipo == "excluir"){
+				$dbh->query("DELETE from i3geo_metaestat.".$regiao["tabela"]." where ".$regiao["identificador"]."::text = '$identificador' ");
+				return array("ok");
+			}
+		}
+		else{
+			$atualexiste = 0;
+		}
+		if($nome != ""){
+			$nome = $this->converteTexto($nome);
+		}
 		//aborta se ja existe o registro com valor igual ao identificador novo
 		//caso o identificador novo for diferente do identificador original, o que configura uma tentativa de alteracao no codigo
 		if($identificador != $identificadornovo && $novoexiste == true){
 			return array("Falhou: codigo ja existe");
 		}
-		if($atualexiste == false && $wkt == ""){
+		if($atualexiste == 0 && $wkt == ""){
 			return array("Falhou: nao pode inserir registro sem wkt");
 		}
 		//echo "UPDATE i3geo_metaestat.".$regiao["tabela"]." SET ".$regiao["identificador"]." = '$identificadornovo', ".$regiao["colunanomeregiao"]." = '$nome' WHERE ".$regiao["identificador"]." = '$identificador' ";
+		if($atualexiste > 1){
+			return array("Falhou: mais de um elemento com o mesmo codigo");
+		}
 		//faz o update
 		try {
 			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$dbh->beginTransaction();
-			//no caso de update
-			if($atualexiste == true){
-				$sql = "UPDATE i3geo_metaestat.".$regiao["tabela"]." SET ".$regiao["identificador"]." = '$identificadornovo', ".$regiao["colunanomeregiao"]." = '$nome' ";
+			//no caso de update de um registro ja existente
+			if($atualexiste == 1){
+				$sql = "UPDATE i3geo_metaestat.".$regiao["tabela"]." SET ".$colunas." = '$nome' ";
 				if($wkt != ""){
 					$sql .= ", ".$regiao["colunageo"]." = ST_GeomFromText('SRID=".$regiao["srid"].";$wkt')";
 					if($regiao["colunageo"] != $regiao["colunacentroide"]){
@@ -2601,9 +2624,12 @@ class Metaestat{
 				}
 				$sql .= " WHERE ".$regiao["identificador"]." = '$identificador' ";
 			}
-			//no caso de insert
+			//no caso de insert de uma nova geometria
 			else{
 				if($wkt != ""){
+					if($identificadornovo == ""){
+						$identificadornovo = 0;
+					}
 					if($regiao["colunageo"] != $regiao["colunacentroide"]){
 						$sql = "INSERT INTO i3geo_metaestat.".$regiao["tabela"]." (".$regiao["identificador"].",".$regiao["colunanomeregiao"].",".$regiao["colunageo"].",".$regiao["colunacentroide"].")";
 						$sql .= " VALUES ('$identificadornovo','$nome',ST_GeomFromText('SRID=".$regiao["srid"].";$wkt'),ST_centroid(ST_GeomFromText('SRID=".$regiao["srid"].";$wkt')))";
@@ -2614,6 +2640,7 @@ class Metaestat{
 					}
 				}
 			}
+			//echo $sql;exit;
 			$sth = $dbh->exec($sql);
 			$dbh->commit();
 

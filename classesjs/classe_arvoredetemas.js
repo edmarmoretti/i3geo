@@ -179,6 +179,15 @@ i3GEO.arvoreDeTemas = {
 	*/
 	INCLUIWMS: true,
 	/*
+	Propriedade: INCLUIREGIOES
+
+	Inclui na arvore a lista de de regioes cadatsradas no sistema de metadados estatisticos
+
+	Tipo:
+	{Boolean}
+	*/
+	INCLUIREGIOES: true,
+	/*
 	Propriedade: INCLUIINDIBR
 
 	Inclui na arvore a lista de servicos da INDE Br
@@ -195,7 +204,7 @@ i3GEO.arvoreDeTemas = {
 	Tipo:
 	{Boolean}
 	*/
-	INCLUIWMSMETAESTAT: false,
+	INCLUIWMSMETAESTAT: true,
 	/*
 	Propriedade: INCLUIESTRELAS
 
@@ -429,6 +438,37 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.php.listaRSSwsARRAY(monta,"WMS");
 	},
 	/*
+	Lista as regioes ou localidades cadastradas no METAESTAT
+	*/
+	listaRegioes: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaRegioes()");}
+		var monta = function(retorno){
+			var node,nraiz,i,html;
+			node = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idregioes","raiz");
+			nraiz = retorno.length;
+			for (i=0;i<nraiz; i += 1){
+				//nameInput he incluido como 'name' no objeto input para que a funcao de clique no input saiba
+				//que se trata de uma camada vinda do sistema metaestat
+				tema = {"nameInput":"regioesmetaestat","tid":"metaregiao_"+retorno[i].codigo_tipo_regiao,"nome":retorno[i].nome_tipo_regiao},
+				html = i3GEO.arvoreDeTemas.montaTextoTema("gray",tema),
+				new YAHOO.widget.HTMLNode(
+					{
+						isleaf:true,
+						html:html,
+						expanded:false,
+						enableHighlight:true,
+						tipoa_tema: "METAREGIAO",
+						codigo_tipo_regiao:retorno[i].codigo_tipo_regiao,
+						idtema: "metaregiao_"+retorno[i].codigo_tipo_regiao
+					},
+					node
+				);
+			}
+			node.loadComplete();
+		};
+		i3GEO.php.listaTipoRegiao(monta);
+	},
+	/*
 	Lista as variaveis cadastradas no sistema METAESTAT preenchendo
 	*/
 	listaVariaveisMetaestat: function(){
@@ -462,10 +502,18 @@ i3GEO.arvoreDeTemas = {
 			for(i=0;i<n;i++){
 				//nameInput he incluido como 'name' no objeto input para que a funcao de clique no input saiba
 				//que se trata de uma camada vinda do sistema metaestat
-				tema = {"nameInput":"metaestat","tid":retorno[i].id_medida_variavel,"nome":retorno[i].nomemedida},
+				tema = {"nameInput":"metaestat","id_medida_variavel":retorno[i].id_medida_variavel,"tid":"metaestat_"+retorno[i].id_medida_variavel,"nome":retorno[i].nomemedida},
 				html = i3GEO.arvoreDeTemas.montaTextoTema("gray",tema),
 				new YAHOO.widget.HTMLNode(
-					{isleaf:true,html:html,expanded:false,enableHighlight:true},
+					{
+						isleaf:true,
+						html:html,
+						expanded:false,
+						enableHighlight:true,
+						tipoa_tema:"META",
+						idtema: "metaestat_"+retorno[i].id_medida_variavel,
+						id_medida_variavel:retorno[i].id_medida_variavel
+					},
 					node
 				);
 			}
@@ -995,6 +1043,19 @@ i3GEO.arvoreDeTemas = {
 				root
 			);
 			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaWMS, 1);
+		}
+		//
+		//regioes
+		//
+		if(i3GEO.arvoreDeTemas.INCLUIREGIOES === true){
+			tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"<span style='position:relative;top:-2px;'><b>&nbsp;"+$trad("x87")+"</b></span>"+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=33' >&nbsp;&nbsp;&nbsp;</a>",
+					idregioes:"raiz",expanded:false,enableHighlight:true
+				},
+				root
+			);
+			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaRegioes, 1);
 		}
 		//
 		//wmsmetaestat
@@ -1839,7 +1900,6 @@ i3GEO.arvoreDeTemas = {
 	adicionaTemas: function(tsl){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.adicionaTemas()");}
 		var exec,
-			temp,
 			tempAdiciona = function(retorno){
 				i3GEO.atualiza();
 				//
@@ -1872,23 +1932,29 @@ i3GEO.arvoreDeTemas = {
 		{tsl = i3GEO.arvoreDeTemas.listaTemasAtivos();}
 		if(tsl.length > 0){
 			exec = function(tsl){
+				var no,p,funcao;
 				//verifica se o tema esta vinculado ao sistema de metadados estatisticos
 				if(i3GEO.arvoreDeTemas.ARVORE){
-					temp = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idtema",tsl[0]);
-					if(temp && temp.data.tipoa_tema === "META"){
-						//obtem os parametros do tema
-						temp = function(retorno){
-							var id = retorno.data[tsl[0]]["METAESTAT_ID_MEDIDA_VARIAVEL"];
-							i3GEO.util.dialogoFerramenta(
-								"i3GEO.mapa.dialogo.metaestat()",
-								"metaestat",
-								"metaestat",
-								"index.js",
-								"i3GEOF.metaestat.inicia('flutuanteSimples','',"+id+")"
-							);
-
+					no = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idtema",tsl[0]);
+					//refere-se a uma camada que advem do sistema de metadados estatisticos
+					if(no && no.data.tipoa_tema === "META"){
+						i3GEO.util.dialogoFerramenta(
+							"i3GEO.mapa.dialogo.metaestat()",
+							"metaestat",
+							"metaestat",
+							"index.js",
+							"i3GEOF.metaestat.inicia('flutuanteSimples','',"+no.data.id_medida_variavel+")"
+						);
+					}
+					else if(no && no.data.tipoa_tema === "METAREGIAO"){
+						p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=adicionaLimiteRegiao" +
+							"&codigo_tipo_regiao="+no.data.codigo_tipo_regiao+"&g_sid="+i3GEO.configura.sid;
+						funcao = function(){
+							//i3GEO.janela.fechaAguarde("aguardeMostraRegiao");
+							i3GEO.atualiza();
 						};
-						i3GEO.php.pegaMetaData(temp,tsl[0]);
+						//i3GEO.janela.abreAguarde("aguardeMostraRegiao","...");
+						cpJSON.call(p,"foo",funcao);
 					}
 					else{
 						i3GEO.php.adtema(tempAdiciona,tsl.toString());

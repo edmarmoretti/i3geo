@@ -152,6 +152,10 @@ i3GEOF.preferencias = {
 						titulo: $trad(29,i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeTemas.INCLUIESTRELAS"
+					},{
+						titulo: $trad(41,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeTemas.INCLUIREGIOES"
 					}
 				]
 			},{
@@ -321,7 +325,6 @@ i3GEOF.preferencias = {
 				if(props[j].tipo === "multiselect"){
 					valores = i3GEO.util.listaTodasChaves(props[j].opcoes);
 					var nvalores = [];
-					var nelementos;
 					numl = valores.length;
 					for(l=0;l<numl;l++){
 						temp = props[j].opcoes[valores[l]];

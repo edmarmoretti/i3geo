@@ -561,21 +561,21 @@ class Atributos
 		}
 		return($resultadoFinal);
 	}
-		/*
+	/*
 		function: buscaRegistros
 
-		Procura valores em uma tabela que aderem a uma palavra de busca.
+	Procura valores em uma tabela que aderem a uma palavra de busca.
 
-		parameters:
+	parameters:
 
-		$palavra - Palavra que ser&aacute; procurada.
+	$palavra - Palavra que ser&aacute; procurada.
 
-		$lista - Lista de busca no formato item;tema,item;tema.
+	$lista - Lista de busca no formato item;tema,item;tema.
 
-		$tipo - Tipo de busca exata|qualquer.
+	$tipo - Tipo de busca exata|qualquer.
 
-		$onde - Tipo de abrang&ecirc;ncia espacial (brasil ou mapa)
-		*/
+	$onde - Tipo de abrang&ecirc;ncia espacial (brasil ou mapa)
+	*/
 	function buscaRegistros($palavra,$lista,$tipo,$onde)
 	{
 		//error_reporting(0);
@@ -1195,72 +1195,59 @@ class Atributos
 		$xyarray = explode(",",$xy);
 		$resultados = array();
 		//pesquisa um tema
-		if ($opcao == "tema")
-		{
+		if ($opcao == "tema"){
 			$listatemas = array();
 			$vermultilayer = new vermultilayer();
 			$vermultilayer->verifica($this->arquivo,$this->nome);
-			if ($vermultilayer->resultado == 1) // o tema e multi layer
-			{$listatemp = $vermultilayer->temasvisiveis;
+			// o tema e multi layer
+			if ($vermultilayer->resultado == 1){
+				$listatemp = $vermultilayer->temasvisiveis;
 			}
-			else
-			{$listatemp[] = $this->nome;
+			else{
+				$listatemp[] = $this->nome;
 			}
-			foreach ($listatemp as $t)
-			{
+			foreach ($listatemp as $t){
 				$layerteste = $this->mapa->getlayerbyname($t);
 				$mclasse = strtoupper($layerteste->getmetadata("CLASSE"));
 				$mtema = strtoupper($layerteste->getmetadata("TEMA"));
 				$gr = $layerteste->group;
-				if ((!(($mclasse == "NAO") && ($mtema == "NAO"))) || ($gr != ""))
-				{
-					if (($layerteste->data != "") && ($layerteste->connectiontype != MS_WMS) || ($layerteste->tileindex != ""))
-					{
+				if ((!(($mclasse == "NAO") && ($mtema == "NAO"))) || ($gr != "")){
+					if (($layerteste->data != "") && ($layerteste->connectiontype != MS_WMS) || ($layerteste->tileindex != "")){
 						$listatemas[] = $t;
 					}
-					if($layerteste->connectiontype == MS_OGR)
-					{
+					if($layerteste->connectiontype == MS_OGR){
 						$listatemas[] = $t;
 					}
 				}
 			}
 			$layerteste = $this->layer;
-			if ($layerteste->connectiontype == MS_WMS)
-			{
+			if ($layerteste->connectiontype == MS_WMS){
 				$listatemas = array();
 				$listatemas[] = $this->nome;
 			}
-			foreach ($listatemas as $tema)
-			{
+			foreach ($listatemas as $tema){
 				$resultados[$tema] = $this->identificaQBP3($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext,$wkt);
 			}
 		}
 		//pesquisa todos os temas acrescentados no mapa
-		if ($opcao == "todos")
-		{
-			foreach ($listatemas as $tema)
-			{
+		if ($opcao == "todos"){
+			foreach ($listatemas as $tema){
 				$resultados[$tema] = $this->identificaQBP3($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext,$wkt);
 			}
 		}
 		//pesquisa apenas os temas visiveis
-		if ($opcao == "ligados" || $opcao == "lista")
-		{
-			if($opcao == "ligados")
-			{
+		if ($opcao == "ligados" || $opcao == "lista"){
+			if($opcao == "ligados"){
 				$novalista = array();
-				foreach ($listatemas as $tema)
-				{
+				foreach ($listatemas as $tema){
 					$l = $this->mapa->getlayerbyname($tema);
-					if($l->status == MS_DEFAULT)
-					{
+					if($l->status == MS_DEFAULT){
 						$novalista[] = $tema;
 					}
 					$listatemas = $novalista;
 				}
 			}
-			foreach ($listatemas as $tema)
-			{
+			foreach ($listatemas as $tema){
 				$l = $this->mapa->getlayerbyname($tema);
 				$resultados[$tema] = $this->identificaQBP3($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext,$wkt);
 			}
@@ -1361,7 +1348,7 @@ class Atributos
 								include_once(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
 								$m = new Metaestat();
 								$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
-								$editavel = $regiao["colunanomeregiao"];
+								$editavel = "todos";//$regiao["colunanomeregiao"];
 								$colunaidunico = $regiao["identificador"];
 								$codigo_tipo_regiao = $codigo_tipo_regiao;
 								$tiposalva = "regiao";
@@ -1549,7 +1536,8 @@ class Atributos
 		{
 			$its = $layer->getmetadata("ITENS"); // itens
 			if ($item != "") //utilizado pela funcao tip
-			{$its = $item;}
+			{$its = $item;
+			}
 			if ($its != "")
 			{
 				$descis = $layer->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens
@@ -1974,35 +1962,35 @@ class Atributos
 								$img = "<img src='".$locimg[$conta]."//".$shape->values[$itemimg[$conta]]."' //>";
 							}
 							else
-								if($itemimg[$conta] != "")
-								{
-									$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";
-								}
-								//indica se o item &eacute; tbm uma etiqueta
-								$etiqueta = "nao";
-								if(in_array($it,$tips))
-								{
-									$etiqueta = "sim";
-								}
-								if($wkt == "sim"){
-									$wkt = $shape->towkt();
-								}
-								$arraytemp = array(
-										"alias"=>$this->converte($itensdesc[$conta]),
-										"valor"=>$val,
-										"link"=>$link,
-										"img"=>$img,
-										"tip"=>$etiqueta,
-										"wkt"=>$wkt
-								);
-								if($etip==false)
-								{
-									$valori[] = $arraytemp;
-								}
-								else
-								{$valori[$it] = $arraytemp;
-								}
-								$conta = $conta + 1;
+							if($itemimg[$conta] != "")
+							{
+								$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";
+							}
+							//indica se o item &eacute; tbm uma etiqueta
+							$etiqueta = "nao";
+							if(in_array($it,$tips))
+							{
+								$etiqueta = "sim";
+							}
+							if($wkt == "sim"){
+								$wkt = $shape->towkt();
+							}
+							$arraytemp = array(
+									"alias"=>$this->converte($itensdesc[$conta]),
+									"valor"=>$val,
+									"link"=>$link,
+									"img"=>$img,
+									"tip"=>$etiqueta,
+									"wkt"=>$wkt
+							);
+							if($etip==false)
+							{
+								$valori[] = $arraytemp;
+							}
+							else
+							{$valori[$it] = $arraytemp;
+							}
+							$conta = $conta + 1;
 						}
 						$resultado[] = $valori;
 					}
@@ -2166,11 +2154,22 @@ class Atributos
 			$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo padr&atilde;o do servi&ccedil;o","link"=>$res2,"img"=>"");
 			return array($n);
 		}
-		$itens = $layer->getmetadata("ITENS"); // itens
-		$itensdesc = $layer->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens
-		$lks = $layer->getmetadata("ITENSLINK"); // link dos itens
-		$itemimg = $layer->getmetadata("ITEMIMG"); //indica um item que ser&aacute; utilizado para colocar um &iacute;cone
-		$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde est&atilde;o os &iacute;cones
+		//se o usuario estiver logado e o tema for editavel, a lista de itens
+		//nao usa os alias para permitir a edicao dos dados
+		if(!empty($_COOKIE["i3geocodigologin"]) && $layer->getmetadata("METAESTATEDITAVEL") == "SIM"){
+			$itens = "";
+			$itensdesc = "";
+			$lks = "";
+			$itemimg = "";
+			$locimg = "";
+		}
+		else{
+			$itens = $layer->getmetadata("ITENS"); // itens
+			$itensdesc = $layer->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens
+			$lks = $layer->getmetadata("ITENSLINK"); // link dos itens
+			$itemimg = $layer->getmetadata("ITEMIMG"); //indica um item que ser&aacute; utilizado para colocar um &iacute;cone
+			$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde est&atilde;o os &iacute;cones
+		}
 		$tips = $layer->getmetadata("TIP");
 		$itensLayer = pegaItens($layer,$mapa);
 		$nitens = count($itensLayer);
@@ -2269,7 +2268,6 @@ class Atributos
 			//$ident = @$layer->queryByPoint($pt, 1, -1);
 			//verifica se o layer e editavel no sistema METAESTAT
 			$editavel = "nao";
-
 			//
 			$sopen = $layer->open();
 			$res_count = $layer->getNumresults();
@@ -2360,11 +2358,11 @@ class Atributos
 						}
 						if($wkt == "sim"){
 							$arraytemp = array(
-								"alias"=>"wkt",
-								"valor"=>$shape->towkt(),
-								"link"=>"",
-								"img"=>"",
-								"tip"=>""
+									"alias"=>"wkt",
+									"valor"=>$shape->towkt(),
+									"link"=>"",
+									"img"=>"",
+									"tip"=>""
 							);
 							$valori[] = $arraytemp;
 						}

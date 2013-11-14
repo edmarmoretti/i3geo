@@ -1508,7 +1508,7 @@ switch (strtoupper($funcao))
 	//utilizado na ferramenta de identificacao
 	case "SALVAATRIBUTOSTIPOREGIAO":
 		$m = new Metaestat();
-		$resultado = $m->mantemDadosRegiao($codigo_tipo_regiao,$identificador_regiao,$identificador_regiao,$valores,"","alterar");
+		$resultado = $m->mantemDadosRegiao($codigo_tipo_regiao,$identificador_regiao,$identificador_regiao,$valores,"","alterar",$colunas);
 		retornaJSON($resultado);
 		exit;
 		break;

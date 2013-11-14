@@ -2144,6 +2144,13 @@ pt:"Prefer&ecirc;ncias",
 en:"",
 es:"",
 it:""
+}],
+"x87":[
+{
+pt:"Limites e localidades",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

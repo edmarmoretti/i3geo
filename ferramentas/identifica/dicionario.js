@@ -95,5 +95,41 @@ i3GEOF.identifica.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		17: [{
+			pt:"Nada encontrado",
+			en:"",
+			es:"",
+			it:""
+		}],
+		18: [{
+			pt:"Clique aqui para adicionar um ponto",
+			en:"",
+			es:"",
+			it:""
+		}],
+		19: [{
+			pt:"Apagar registro",
+			en:"",
+			es:"",
+			it:""
+		}],
+		20: [{
+			pt:"Remove o registro do banco de dados?",
+			en:"",
+			es:"",
+			it:""
+		}],
+		21: [{
+			pt:"Sim",
+			en:"",
+			es:"",
+			it:""
+		}],
+		22: [{
+			pt:"Cancela",
+			en:"",
+			es:"",
+			it:""
 		}]
 };
