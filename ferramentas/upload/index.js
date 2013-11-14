@@ -104,12 +104,15 @@ i3GEOF.upload = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">' +
+		var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
+			ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>';
-		if(i3GEO.parametros.editor === "sim")
-		{ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.upload.dicionario)+':<br><input class=digitar type="text" size=45 name="dirDestino" style="top:0px;left:0px;cursor:pointer;"></p>';}
+		if(i3GEO.parametros.editor === "sim"){
+			ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.upload.dicionario)+':<br><input class=digitar type="text" size=45 name="dirDestino" id="dirDestino" style="top:0px;left:0px;cursor:pointer;"></p>';
+			//ins += "<img onclick='i3GEOF.upload.selNavegador(\"dirDestino\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/></p>";
+		}
 		ins += '<p class="paragrafo" >'+$trad(2,i3GEOF.upload.dicionario)+': ' +
 		'	<select id=tipo name=tipo >' +
 		'	<option value="">'+$trad(3,i3GEOF.upload.dicionario)+'</option>' +
@@ -168,6 +171,9 @@ i3GEOF.upload = {
 		{return;}
 		i3GEOF.upload.aguarde.visibility="visible";
 		$i("i3GEOuploadf").submit();
+	},
+	selNavegador: function(onde){
+		i3GEO.util.navegadorDir(onde,false,false,false);
 	}
 };
 

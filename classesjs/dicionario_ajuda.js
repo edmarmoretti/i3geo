@@ -968,7 +968,16 @@ g_traducao_ajuda = {
 			pt:"Guarda as prefer&ecirc;ncias do usu&aacute;rio em rela&ccedil;&atilde;o aos par&acirc;metros que controlam a interface do mapa",
 			complemento:"",
 			apijs: "i3GEO.mapa.dialogo.preferencias()"
-		}
+		},
+		"116": {
+			titulo: "Upload se s&iacute;mbolo",
+			diretorio:"i3geo/ferramentas/uploadsimbolo",
+			categoria:"4",
+			pt:"Envia para o servidor um arquivo de imagem que poder&aacute; ser utilizado como s&iacute;mbolo nas legendas das camadas",
+			complemento:"",
+			//tela:"ferramentas/upload/exemplo.htm",
+			apijs:""
+		},
 	}
 };
 
