@@ -87,18 +87,18 @@ i3GEO.barraDeBotoes = {
 	*/
 	OFFSET: -205,
 	/*
-	 Propriedade: POSICAO
+	Propriedade: POSICAO
 
-	 Define o posicionamento da barra de bot&otilde;es do tipo olho de peixe
+	Define o posicionamento da barra de bot&otilde;es do tipo olho de peixe
 
-	 Valores:
-	 {"top","bottom"}
+	Valores:
+	{"top","bottom"}
 
-	 Tipo:
-	 {string}
+	Tipo:
+	{string}
 
-	 Default:
-	 {"bottom"}
+	Default:
+	{"bottom"}
 	*/
 	POSICAO: "bottom",
 	/*
@@ -839,7 +839,7 @@ i3GEO.barraDeBotoes = {
 			dock = new euDock(),
 			temp = "dockBg-r.png",
 			tempAjuda = "dockBg-l.png",
-			chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
+			chaves = i3GEO.util.listaTodasChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
 			n = chaves.length,
 			preload;
 		preload = new Image();

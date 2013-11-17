@@ -247,7 +247,7 @@ i3GEOF.preferencias.dicionario = {
 			it:""
 		}],
 		42: [{
-			pt:"",
+			pt:"C&oacute;digo",
 			en:"",
 			es:"",
 			it:""
