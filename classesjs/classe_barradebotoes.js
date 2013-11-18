@@ -839,7 +839,7 @@ i3GEO.barraDeBotoes = {
 			dock = new euDock(),
 			temp = "dockBg-r.png",
 			tempAjuda = "dockBg-l.png",
-			chaves = i3GEO.util.listaTodasChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
+			chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
 			n = chaves.length,
 			preload;
 		preload = new Image();

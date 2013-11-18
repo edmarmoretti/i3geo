@@ -454,9 +454,15 @@ i3GEO.mapa = {
 
 		ck - sim|nao - (opcional) inclui ou nao o checkbox que permitem desligar a camada
 		*/
-		libera: function(ck){
+		libera: function(ck,largura,altura,topo,esquerda){
 			if(!ck){
 				ck = "nao";
+			}
+			if(!largura){
+				largura = 302;
+			}
+			if(!altura){
+				altura = 300;
 			}
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.legendaHTML.libera()");}
 			var cabecalho,minimiza,janela;
@@ -467,8 +473,8 @@ i3GEO.mapa = {
 					i3GEO.janela.minimiza("wlegenda");
 				};
 				janela = i3GEO.janela.cria(
-						"302px",
-						"300px",
+						largura+"px",
+						altura+"px",
 						"",
 						"",
 						"",
@@ -489,6 +495,10 @@ i3GEO.mapa = {
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.mapa.legendaHTML.atualiza()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.mapa.legendaHTML.atualiza()");}
 			i3GEO.mapa.legendaHTML.atualiza();
+			if(topo && esquerda){
+				janela = YAHOO.i3GEO.janela.manager.find("wlegenda");
+				janela.moveTo(esquerda,topo);
+			}
 		}
 	},
 	/*

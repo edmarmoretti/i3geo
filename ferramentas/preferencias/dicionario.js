@@ -253,12 +253,300 @@ i3GEOF.preferencias.dicionario = {
 			it:""
 		}],
 		43: [{
-			pt:"",
+			pt:"Busca r&aacute;pida",
 			en:"",
 			es:"",
 			it:""
 		}],
 		44: [{
+			pt:"Utiliza o servi&ccedil;o externo de busca",
+			en:"",
+			es:"",
+			it:""
+		}],
+		45: [{
+			pt:"Busca nos temas existentes no mapa",
+			en:"",
+			es:"",
+			it:""
+		}],
+		46: [{
+			pt:"Busca no Google",
+			en:"",
+			es:"",
+			it:""
+		}],
+		47: [{
+			pt:"Menu suspenso",
+			en:"",
+			es:"",
+			it:""
+		}],
+		48: [{
+			pt:"Mostra o item login",
+			en:"",
+			es:"",
+			it:""
+		}],
+		49: [{
+			pt:"Mosta o item marcadores",
+			en:"",
+			es:"",
+			it:""
+		}],
+		50: [{
+			pt:"Deslocamento da esquerda, em pixels",
+			en:"",
+			es:"",
+			it:""
+		}],
+		51: [{
+			pt:"Guias laterais",
+			en:"",
+			es:"",
+			it:""
+		}],
+		52: [{
+			pt:"Guia que &eacute; iniciada aberta",
+			en:"",
+			es:"",
+			it:""
+		}],
+		53: [{
+			pt:"A guia m&oacute;vel iniciar&aacute; aberta",
+			en:"",
+			es:"",
+			it:""
+		}],
+		54: [{
+			pt:"&Iacute;cone da guia temas",
+			en:"",
+			es:"",
+			it:""
+		}],
+		55: [{
+			pt:"&Iacute;cone da guia adiciona",
+			en:"",
+			es:"",
+			it:""
+		}],
+		56: [{
+			pt:"&Iacute;cone da guia legenda",
+			en:"",
+			es:"",
+			it:""
+		}],
+		57: [{
+			pt:"&Iacute;cone da guia mapas",
+			en:"",
+			es:"",
+			it:""
+		}],
+		58: [{
+			pt:"Largura do puxador da guia m&oacute;vel",
+			en:"",
+			es:"",
+			it:""
+		}],
+		59: [{
+			pt:"Altura do puxador",
+			en:"",
+			es:"",
+			it:""
+		}],
+		60: [{
+			pt:"Altura da guia m&oacute;vel",
+			en:"",
+			es:"",
+			it:""
+		}],
+		61: [{
+			pt:"Largura da guia",
+			en:"",
+			es:"",
+			it:""
+		}],
+		62: [{
+			pt:"Deslocamento em relação ao topo",
+			en:"",
+			es:"",
+			it:""
+		}],
+		63: [{
+			pt:"Mostra o seletor de idiomas",
+			en:"",
+			es:"",
+			it:""
+		}],
+		64: [{
+			pt:"Janelas flutuantes",
+			en:"",
+			es:"",
+			it:""
+		}],
+		65: [{
+			pt:"Estilo aplicado ao corpo da janela",
+			en:"",
+			es:"",
+			it:""
+		}],
+		66: [{
+			pt:"Tipo de janela de aguarde",
+			en:"",
+			es:"",
+			it:""
+		}],
+		67: [{
+			pt:"A janela de aguarde bloqueia o mapa",
+			en:"",
+			es:"",
+			it:""
+		}],
+		68: [{
+			pt:"Janela transparente aoperder o foco do mouse",
+			en:"",
+			es:"",
+			it:""
+		}],
+		69: [{
+			pt:"Opacidade da janela",
+			en:"",
+			es:"",
+			it:""
+		}],
+		70: [{
+			pt:"Opacidade da janela de aguarde",
+			en:"",
+			es:"",
+			it:""
+		}],
+		71: [{
+			pt:"Mapa de refer&ecirc;ncia",
+			en:"",
+			es:"",
+			it:""
+		}],
+		72: [{
+			pt:"Fator multiplicador de zoom",
+			en:"",
+			es:"",
+			it:""
+		}],
+		73: [{
+			pt:"Inclui o seletor de tipo de mapa",
+			en:"",
+			es:"",
+			it:""
+		}],
+		74: [{
+			pt:"Tipo de mapa ao iniciar",
+			en:"",
+			es:"",
+			it:""
+		}],
+		75: [{
+			pt:"Permite fechar",
+			en:"",
+			es:"",
+			it:""
+		}],
+		76: [{
+			pt:"Permite deslocar",
+			en:"",
+			es:"",
+			it:""
+		}],
+		77: [{
+			pt:"Opacidade",
+			en:"",
+			es:"",
+			it:""
+		}],
+		78: [{
+			pt:"Dist&acirc;ncia do topo",
+			en:"",
+			es:"",
+			it:""
+		}],
+		79: [{
+			pt:"Dist&acirc;ncia da direita",
+			en:"",
+			es:"",
+			it:""
+		}],
+		80: [{
+			pt:"Inicializa&ccedil;&atilde;o de ferramentas",
+			en:"",
+			es:"",
+			it:""
+		}],
+		81: [{
+			pt:"Inicializa a janela com a legenda",
+			en:"",
+			es:"",
+			it:""
+		}],
+		82: [{
+			pt:"Largura",
+			en:"",
+			es:"",
+			it:""
+		}],
+		83: [{
+			pt:"Altura",
+			en:"",
+			es:"",
+			it:""
+		}],
+		84: [{
+			pt:"Posi&ccedil;&atilde;o no topo do mapa",
+			en:"",
+			es:"",
+			it:""
+		}],
+		85: [{
+			pt:"Posi&ccedil;&atilde;o &agrave; esquerda do mapa",
+			en:"",
+			es:"",
+			it:""
+		}],
+		86: [{
+			pt:"Localiza&ccedil;&atilde;o de lugares",
+			en:"",
+			es:"",
+			it:""
+		}],
+		87: [{
+			pt:"Cartogramas",
+			en:"",
+			es:"",
+			it:""
+		}],
+		88: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		89: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		90: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		91: [{
+			pt:"",
+			en:"",
+			es:"",
+			it:""
+		}],
+		92: [{
 			pt:"",
 			en:"",
 			es:"",

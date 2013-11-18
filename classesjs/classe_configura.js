@@ -48,6 +48,45 @@ if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
 i3GEO.configura = {
+	//
+	//ferramentas que serao inicializadas com o mapa
+	//
+	iniciaFerramentas: {
+		executa: function(){
+			var q = i3GEO.configura.iniciaFerramentas.quais,
+				i=0;
+			for(i in q){
+				if(q[i].ativa === true){
+					q[i].funcao.call();
+				}
+			}
+		},
+		"quais":{
+			legenda: {
+				ativa: false,
+				largura: 302,
+				altura: 300,
+				topo: 50,
+				esquerda: 100,
+				funcao:function(){
+					var q = i3GEO.configura.iniciaFerramentas.quais.legenda;
+					i3GEO.mapa.legendaHTML.libera("sim",q.largura,q.altura,q.topo,q.esquerda);
+				}
+			},
+			locregiao: {
+				ativa: false,
+				funcao:function(){
+					i3GEO.mapa.dialogo.locregiao();
+				}
+			},
+			metaestat: {
+				ativa: false,
+				funcao:function(){
+					i3GEO.mapa.dialogo.metaestat();
+				}
+			}
+		}
+	},
 	/*
 	Propriedade: guardaExtensao
 

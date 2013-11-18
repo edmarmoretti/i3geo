@@ -749,16 +749,13 @@ var i3GEO = {
 			temp,
 			pint;
 		if(cookies){
-			props = cookies.split(":");
+			props = cookies.split("::");
 			nprops = props.length;
 			for(i=0;i<nprops;i++){
 				try{
 					temp = props[i].split("|");
 					pint = parseInt(temp[1],10);
-					if(pint+"px" == temp[1] || (YAHOO.lang.isString(pint) && temp[1] != 'true' && temp[1] != 'false')){
-						eval(temp[0]+" = '"+temp[1]+"';");
-					}
-					else{
+					if(temp[1] === 'true' || temp[1] === 'false'){
 						if(temp[1] === 'true'){
 							temp[1] = true;
 						}
@@ -767,7 +764,15 @@ var i3GEO = {
 						}
 						eval(temp[0]+" = "+temp[1]+";");
 					}
-
+					else if(pint+"px" == temp[1]){
+						eval(temp[0]+" = '"+temp[1]+"';");
+					}
+					else if(YAHOO.lang.isNumber(pint)){
+						eval(temp[0]+" = "+temp[1]+";");
+					}
+					else{
+						eval(temp[0]+" = '"+temp[1]+"';");
+					}
 					//algumas propriedades usam cookies
 					if(temp[0] == "i3GEO.configura.mapaRefDisplay"){
 						i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay",temp[1]);

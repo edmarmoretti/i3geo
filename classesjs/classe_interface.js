@@ -752,6 +752,7 @@ i3GEO.Interface = {
 				if(i3GEO.finalizaAPI != "")
 				{eval(i3GEO.finalizaAPI);}
 			}
+			i3GEO.configura.iniciaFerramentas.executa();
 		},
 		aplicaOpacidade: function(opacidade,layer){
 			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
@@ -1751,6 +1752,7 @@ i3GEO.Interface = {
 					if(i3GEO.finalizaAPI != "")
 					{eval(i3GEO.finalizaAPI);}
 				}
+				i3GEO.configura.iniciaFerramentas.executa()
 			};
 			i3GEO.php.googlemaps(montaMapa);
 		},
@@ -2468,6 +2470,7 @@ i3GEO.Interface = {
 					if(i3GEO.finalizaAPI != "")
 					{eval(i3GEO.finalizaAPI);}
 				}
+				i3GEO.configura.iniciaFerramentas.executa();
 			};
 			i3GEO.php.googleearth(montaMapa);
 		},

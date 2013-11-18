@@ -44,6 +44,39 @@ i3GEOF.preferencias = {
 	lista: function(){
 		var lista = [
 			{
+				titulo: $trad(80,i3GEOF.preferencias.dicionario),
+				props: [
+					{
+						titulo: $trad(86,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.locregiao.ativa"
+					},{
+						titulo: $trad(87,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.metaestat.ativa"
+					},{
+						titulo: "<b>"+$trad(81,i3GEOF.preferencias.dicionario)+"</b>",
+						tipo: "boolean",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.ativa"
+					},{
+						titulo: $trad(82,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.largura"
+					},{
+						titulo: $trad(83,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.altura"
+					},{
+						titulo: $trad(84,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.topo"
+					},{
+						titulo: $trad(85,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.esquerda"
+					}
+				]
+			},{
 				titulo: $trad(9,i3GEOF.preferencias.dicionario),
 				props: [
 					{
@@ -159,9 +192,13 @@ i3GEOF.preferencias = {
 					}
 				]
 			},{
-				titulo: $trad(30,i3GEOF.preferencias.dicionario),
+				titulo: $trad(30,i3GEOF.preferencias.dicionario),//mapa
 				props: [
 					{
+						titulo: $trad(63,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.idioma.MOSTRASELETOR"
+					},{
 						titulo: $trad(31,i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.configura.guardaExtensao"
@@ -206,6 +243,154 @@ i3GEOF.preferencias = {
 						opcoes: ["geoProj","dd","policonicaSad69","utmSad69Proj","utmSirgas2000Proj"]
 					}
 
+				]
+			},{
+				titulo: $trad(43,i3GEOF.preferencias.dicionario), //busca rapida
+				props: [
+					{
+						titulo: $trad(44,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos"
+					},{
+						titulo: $trad(45,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa"
+					},{
+						titulo: $trad(46,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google"
+					}
+				]
+			},{
+				titulo: $trad(47,i3GEOF.preferencias.dicionario), //menu superior
+				props: [
+					{
+						titulo: $trad(48,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin"
+					},{
+						titulo: $trad(49,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.marcadores"
+					},{
+						titulo: $trad(50,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda"
+					}
+				]
+			},{
+				titulo: $trad(51,i3GEOF.preferencias.dicionario), //guias
+				props: [
+					{
+						titulo: $trad(52,i3GEOF.preferencias.dicionario),
+						tipo: "select",
+						elemento: "i3GEO.guias.ATUAL",
+						opcoes: ["temas","adiciona","legenda","mapas"]
+					},{
+						titulo: $trad(53,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.guias.guiaMovel.ABERTA"
+					},{
+						titulo: $trad(54,i3GEOF.preferencias.dicionario),
+						tipo: "texto",
+						elemento: "i3GEO.guias.CONFIGURA.temas.icone"
+					},{
+						titulo: $trad(55,i3GEOF.preferencias.dicionario),
+						tipo: "texto",
+						elemento: "i3GEO.guias.CONFIGURA.adiciona.icone"
+					},{
+						titulo: $trad(56,i3GEOF.preferencias.dicionario),
+						tipo: "texto",
+						elemento: "i3GEO.guias.CONFIGURA.legenda.icone"
+					},{
+						titulo: $trad(57,i3GEOF.preferencias.dicionario),
+						tipo: "texto",
+						elemento: "i3GEO.guias.CONFIGURA.mapas.icone"
+					},{
+						titulo: $trad(58,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.guias.guiaMovel.config.larguraPuxador"
+					},{
+						titulo: $trad(59,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.guias.guiaMovel.config.alturaPuxador"
+					},{
+						titulo: $trad(61,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.guias.guiaMovel.config.larguraGuiaMovel"
+					},{
+						titulo: $trad(62,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.guias.guiaMovel.config.topGuiaMovel"
+					}
+				]
+			},{
+				titulo: $trad(64,i3GEOF.preferencias.dicionario), //menu superior
+				props: [
+					{
+						titulo: $trad(65,i3GEOF.preferencias.dicionario),
+						tipo: "texto",
+						elemento: "i3GEO.janela.ESTILOBD"
+					},{
+						titulo: $trad(66,i3GEOF.preferencias.dicionario),
+						tipo: "select",
+						elemento: "i3GEO.janela.ESTILOAGUARDE",
+						opcoes: ["normal","reduzida","minima"]
+					},{
+						titulo: $trad(67,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.janela.AGUARDEMODAL"
+					},{
+						titulo: $trad(68,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.janela.TRANSICAOSUAVE"
+					},{
+						titulo: $trad(69,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.janela.OPACIDADE"
+					},{
+						titulo: $trad(70,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.janela.OPACIDADEAGUARDE"
+					}
+				]
+			},{
+				titulo: $trad(71,i3GEOF.preferencias.dicionario), //menu superior
+				props: [
+					{
+						titulo: $trad(72,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.maparef.fatorZoomDinamico"
+					},{
+						titulo: $trad(73,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.maparef.SELETORTIPO"
+					},{
+						titulo: $trad(74,i3GEOF.preferencias.dicionario),
+						tipo: "select",
+						elemento: "i3GEO.maparef.VALORSELETORTIPO",
+						opcoes: ["dinamico","fixo","mapa"]
+					},{
+						titulo: $trad(75,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.maparef.PERMITEFECHAR"
+					},{
+						titulo: $trad(76,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.maparef.PERMITEDESLOCAR"
+					},{
+						titulo: $trad(77,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.maparef.OPACIDADE"
+					},{
+						titulo: $trad(78,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.maparef.TOP"
+					},{
+						titulo: $trad(79,i3GEOF.preferencias.dicionario),
+						tipo: "numero",
+						elemento: "i3GEO.maparef.RIGHT"
+					}
 				]
 			}
 		];
@@ -305,7 +490,7 @@ i3GEOF.preferencias = {
 			nomes = [];
 			ids = [];
 			for(j=0;j<nj;j++){
-				ins += "<p class=paragrafo >"+props[j].titulo+"</p>";
+				ins += "<p class=paragrafo title='"+props[j].elemento+"'>"+props[j].titulo+"</p>";
 				if(props[j].tipo === "numero" || props[j].tipo === "texto"){
 					ins += "<input type=text value='' id='"+props[j].elemento+"' style='"+estilo+"' /><br><br>";
 				}
@@ -439,13 +624,13 @@ i3GEOF.preferencias = {
 		i3GEO.janela.tempoMsg($trad(3,i3GEOF.preferencias.dicionario));
 		//i3GEO.util.insereCookie("preferenciasDoI3Geo",pares.join(":"),365);
 		i3GEO.util.limpaDadosLocal("preferenciasDoI3Geo");
-		i3GEO.util.gravaDadosLocal("preferenciasDoI3Geo",pares.join(":"));
+		i3GEO.util.gravaDadosLocal("preferenciasDoI3Geo",pares.join("::"));
 	},
 	carregaCookies: function(){
 		var cookies = i3GEO.util.pegaDadosLocal("preferenciasDoI3Geo"),
 			i,props,nprops,temp,elem;
 		if(cookies){
-			props = cookies.split(":");
+			props = cookies.split("::");
 			nprops = props.length;
 			for(i=0;i<nprops;i++){
 				temp = props[i].split("|");
