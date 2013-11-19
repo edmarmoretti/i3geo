@@ -314,9 +314,11 @@ i3GEOF.editorlimites = {
 		 */
 		ativa: function(botao){
 			i3GEOF.editorlimites.mudaicone(botao);
-			i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
+
+			i3GEO.eventos.cliquePerm.desativa();
 			if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.editorlimites.capturaPoligonoTema.captura()") < 0)
 			{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.editorlimites.capturaPoligonoTema.captura()");}
+			i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 		},
 		desativa: function(){
 		},
@@ -346,6 +348,10 @@ i3GEOF.editorlimites = {
 						}
 						//obtem os dados buscando nos itens que vem da requisicao ao wms
 						temp = retorno.data[0].resultado[0];
+						if(temp === " "){
+							i3GEO.janela.tempoMsg("Nada encontrado");
+							return;
+						}
 						n = temp.length;
 						for(i=0;i<n;i++){
 							if(temp[i].alias == "wkt"){
@@ -511,9 +517,9 @@ i3GEOF.editorlimites = {
 		}
 		var pol;
 		if (Wkt.isArray(obj)) { // Distinguish multigeometries (Arrays) from objects
-				for (i in obj) {
-						if (obj.hasOwnProperty(i) && !Wkt.isArray(obj[i])) {
-							pol = new google.maps.Polygon({
+			for (i in obj) {
+			if (obj.hasOwnProperty(i) && !Wkt.isArray(obj[i])) {
+			pol = new google.maps.Polygon({
 				path: obj[i].getPath(),
 				map: i3GeoMap,
 				fillColor: '#ffff00',
@@ -546,6 +552,28 @@ i3GEOF.editorlimites = {
 				clickable: true,
 				zIndex: 1,
 				editable: true,
+				tema: tema,
+				colunaid: colunaid,
+				valorid: valorid,
+				colunanome: colunanome,
+				valornome: valornome
+			});
+			google.maps.event.addListener(pol, 'click', function() {
+				i3GEOF.editorlimites.setSelection(pol);
+			});
+			i3GEOF.editorlimites.shapes.push(pol);
+			return;
+		}
+		if (obj.type === 'marker'){
+			pol = new google.maps.Marker({
+				position: new google.maps.LatLng(obj.getPosition().ob,obj.getPosition().pb),
+				map: i3GeoMap,
+				fillColor: '#ffff00',
+				fillOpacity: .5,
+				strokeWeight: 2,
+				clickable: true,
+				zIndex: 1,
+				draggable: true,
 				tema: tema,
 				colunaid: colunaid,
 				valorid: valorid,

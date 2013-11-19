@@ -2264,6 +2264,7 @@ class Atributos
 			$layer->set("tolerance",$resolucao);
 			$ident = @$layer->queryByPoint($pt, 1, -1);
 		}
+
 		if ($ident == MS_SUCCESS){
 			//$ident = @$layer->queryByPoint($pt, 1, -1);
 			//verifica se o layer e editavel no sistema METAESTAT
@@ -2404,3 +2405,7 @@ class Atributos
 	}
 }
 ?>
+
+
+"funcao=identifica3&opcao=tema&xy=-51.047115325927734,0.05132674484407409&resolucao=1&g_sid=g7mjje3s6ongd1j5b3kg6qag37&ext=-51.202383041381836 -0.006952285749539264 -50.94780921936035 0.07767674927679344&listaDeTemas=&wkt=sim&tema=fff2a4fb9e4c237522d70e5b99f3c6ac"
+"funcao=identifica3&opcao=tema&xy=-51.04745864868164,0.05132674484407409&resolucao=1&g_sid=g7mjje3s6ongd1j5b3kg6qag37&ext=-51.202383041381836 -0.006952285749539264 -50.94780921936035 0.07767674927679344&listaDeTemas=&wkt=sim&tema=fff2a4fb9e4c237522d70e5b99f3c6ac"
