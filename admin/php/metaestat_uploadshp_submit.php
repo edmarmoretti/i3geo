@@ -204,7 +204,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 			}
 			else{
 				$valor = $s->getValue($layer,$coluna);
-				if($valor = "" || (empty($valor) && $valor != 0)){
+				if($valor == "" || (empty($valor) && $valor != 0)){
 					$valor = 'nulo';
 				}
 				$vs[] = $valor;

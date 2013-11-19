@@ -206,7 +206,13 @@ i3GEOF.editorlimites = {
 	 * @param objeto shape que sera marcado
 	 */
 	setSelection: function(shape){
-		shape.setEditable(!shape.editable);
+		if(shape.setEditable){
+			shape.setEditable(!shape.editable);
+		}
+		else{
+			shape.editable = true;
+			shape.setFlat(false);
+		}
 	},
 	/**
 	 * Marca todas as figuras como nao selecionadas
@@ -216,8 +222,29 @@ i3GEOF.editorlimites = {
 		var i,
 			n = i3GEOF.editorlimites.shapes.length;
 		for(i=0;i<n;i++){
-			if(i3GEOF.editorlimites.shapes[i] != ""){
+			if(i3GEOF.editorlimites.shapes[i] != "" && i3GEOF.editorlimites.shapes[i].setEditable){
 				i3GEOF.editorlimites.shapes[i].setEditable(false);
+			}
+			else if(i3GEOF.editorlimites.shapes[i] != ""){//caso for ponto
+				i3GEOF.editorlimites.shapes[i].editable = false;
+				i3GEOF.editorlimites.shapes[i].setFlat(true);
+			}
+		}
+	},
+	/**
+	 * Marca todas as figuras como selecionadas
+	 * As figuras existentes no mapa sao mantidas na variavel i3GEOF.editorlimites.shapes
+	 */
+	selectAll: function(){
+		var i,
+			n = i3GEOF.editorlimites.shapes.length;
+		for(i=0;i<n;i++){
+			if(i3GEOF.editorlimites.shapes[i] != "" && i3GEOF.editorlimites.shapes[i].setEditable){
+				i3GEOF.editorlimites.shapes[i].setEditable(true);
+			}
+			else if(i3GEOF.editorlimites.shapes[i] != ""){//caso for ponto
+				i3GEOF.editorlimites.shapes[i].editable = true;
+				i3GEOF.editorlimites.shapes[i].setFlat(false);
 			}
 		}
 	},
@@ -240,9 +267,15 @@ i3GEOF.editorlimites = {
 			}
 			if(x){
 				for(i=0;i<n;i++){
-					if(i3GEOF.editorlimites.shapes[i] != "" && i3GEOF.editorlimites.shapes[i].editable === true){
+					if(i3GEOF.editorlimites.shapes[i] != "" && i3GEOF.editorlimites.shapes[i].editable && i3GEOF.editorlimites.shapes[i].editable === true){
 						i3GEOF.editorlimites.shapes[i].setMap(null);
 						i3GEOF.editorlimites.shapes[i] = "";
+					}
+					else{ //caso for ponto
+						if(i3GEOF.editorlimites.shapes[i] != ""){
+							i3GEOF.editorlimites.shapes[i].setMap(null);
+							i3GEOF.editorlimites.shapes[i] = "";
+						}
 					}
 				}
 			}
@@ -314,7 +347,6 @@ i3GEOF.editorlimites = {
 		 */
 		ativa: function(botao){
 			i3GEOF.editorlimites.mudaicone(botao);
-
 			i3GEO.eventos.cliquePerm.desativa();
 			if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.editorlimites.capturaPoligonoTema.captura()") < 0)
 			{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.editorlimites.capturaPoligonoTema.captura()");}
@@ -330,7 +362,6 @@ i3GEOF.editorlimites = {
 		captura: function(){
 			var temp,tema="",regiao="",p,par,
 				aguarde = $i("janelaEditorLimites_imagemCabecalho");
-			i3GEOF.editorlimites.mudaicone();
 			if(!$i("i3geoCartoRegioesEditaveis")){
 				i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.editorlimites.capturaPoligonoTema.captura()");
 			}
@@ -352,6 +383,7 @@ i3GEOF.editorlimites = {
 							i3GEO.janela.tempoMsg("Nada encontrado");
 							return;
 						}
+						i3GEOF.editorlimites.mudaicone();
 						n = temp.length;
 						for(i=0;i<n;i++){
 							if(temp[i].alias == "wkt"){
@@ -391,7 +423,7 @@ i3GEOF.editorlimites = {
 					if(aguarde && aguarde.style.visibility == "hidden"){
 						aguarde.style.visibility = "visible";
 						p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php";
-						par = "funcao=identifica3&opcao=tema&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=1&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten+"&listaDeTemas=&wkt=sim&tema="+tema;
+						par = "funcao=identifica3&opcao=tema&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten+"&listaDeTemas=&wkt=sim&tema="+tema;
 						cpJSON.call(p,"identifica",temp,par);
 					}
 				}
@@ -492,6 +524,7 @@ i3GEOF.editorlimites = {
 	},
 	/**
 	 * Adiciona uma nova figura ao mapa (shape)
+	 * Pode ser poligono ou ponto
 	 * @param objeto shape (API do Google)
 	 * @param codigo do layer que sera vinculado ao shape
 	 * @param coluna do tema que contem os identificadores de cada um de seus elementos (registros)
@@ -565,6 +598,10 @@ i3GEOF.editorlimites = {
 			return;
 		}
 		if (obj.type === 'marker'){
+			i3GEOF.editorlimites.selectAll();
+			if(i3GEOF.editorlimites.shapes.length > 0){
+				i3GEOF.editorlimites.deleteSelectedShape(true);
+			}
 			pol = new google.maps.Marker({
 				position: new google.maps.LatLng(obj.getPosition().ob,obj.getPosition().pb),
 				map: i3GeoMap,
@@ -578,7 +615,9 @@ i3GEOF.editorlimites = {
 				colunaid: colunaid,
 				valorid: valorid,
 				colunanome: colunanome,
-				valornome: valornome
+				valornome: valornome,
+				flat: true,
+				editable: false
 			});
 			google.maps.event.addListener(pol, 'click', function() {
 				i3GEOF.editorlimites.setSelection(pol);
