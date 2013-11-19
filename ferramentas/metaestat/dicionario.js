@@ -106,21 +106,21 @@ it:""
 }],
 "15":[
 {
-pt:"Editar limite geogr&aacute;fico",
+pt:"Editar camada",
 en:"",
 es:"",
 it:""
 }],
 "16":[
 {
-pt:"Limite geogr&aacute;fico",
+pt:"Limite ou local geogr&aacute;fico",
 en:"",
 es:"",
 it:""
 }],
 "17":[
 {
-pt:"Escolha um tipo de limite geogr&aacute;fico (limites utilizados para representar os valores) e o tipo de classifica&ccedil;&atilde;o dos dados, depois escolha os valores para os par&acirc;metros , se houver. Para adicionar a camada ao mapa, clique no bot&atilde;o de adi&ccedil;&atilde;o e feche a janela para continuar usando o mapa.",
+pt:"Escolha um tipo de limite  ou local geogr&aacute;fico (limites utilizados para representar os valores) e o tipo de classifica&ccedil;&atilde;o dos dados, depois escolha os valores para os par&acirc;metros , se houver. Para adicionar a camada ao mapa, clique no bot&atilde;o de adi&ccedil;&atilde;o e feche a janela para continuar usando o mapa.",
 en:"",
 es:"",
 it:""

@@ -1639,6 +1639,7 @@ i3GEO.Interface = {
 		},
 		cria: function(w,h){
 			var i,f,ins;
+			google.maps.visualRefresh = true;
 			posfixo = "&nd=0";
 			i = $i(i3GEO.Interface.IDCORPO);
 			if(i){

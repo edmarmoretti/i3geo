@@ -1,34 +1,34 @@
 <?php
 /*
- Title: Editor de limites geograficos do sistema de metadados estatisticos
+Title: Editor de limites geograficos do sistema de metadados estatisticos
 
- Interface de mapa interativo com as opcoes de edicao vetorial dos limites das regioes cadastradas
+Interface de mapa interativo com as opcoes de edicao vetorial dos limites das regioes cadastradas
 
- Arquivo:
+Arquivo:
 
- i3geo/ferramentas/metaestat/editorlimites.php
+i3geo/ferramentas/metaestat/editorlimites.php
 
- Licenca:
+Licenca:
 
- GPL2
+GPL2
 
- i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
- Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
- Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com.br
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com.br
 
- Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
- e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
- GNU conforme publicada pela Free Software Foundation;
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+GNU conforme publicada pela Free Software Foundation;
 
- Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
- por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
- de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
- Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
- Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- GNU junto com este programa; se n&atilde;o, escreva para a
- Free Software Foundation, Inc., no endere&ccedil;o
- 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
  */
 error_reporting(0);
 include_once(dirname(__FILE__)."/../../ms_configura.php");
@@ -179,7 +179,7 @@ i3GEO.finalizaAPI = function(){
 	minimiza = function() {
 		i3GEO.janela.minimiza("janelaEditorLimites");
 	};
-	janela = i3GEO.janela.cria("260px", "100px", "", "", "",
+	janela = i3GEO.janela.cria("300px", "100px", "", "", "",
 		"Editor", "janelaEditorLimites", false, "hd",
 		cabecalho, minimiza);
 	$i("janelaEditorLimites_corpo").style.backgroundColor = "white";

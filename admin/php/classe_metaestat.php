@@ -2556,11 +2556,11 @@ class Metaestat{
 		if($tipo != "" && $tipo != "excluir" && ($identificadornovo == "" || $nome == "")){
 			return array("erro");
 		}
-		if($colunas == ""){
-			$colunas = "colunanomeregiao";
-		}
 		//pega a tabela, esquema e conexao para acessar os dados da regiao
 		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
+		if($colunas == ""){
+			$colunas = $regiao["colunanomeregiao"];
+		}
 		$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
 		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
 		//faz uma validacao para verificar se na tabela o identificador unico existe mais de uma vez

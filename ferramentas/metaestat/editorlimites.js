@@ -44,6 +44,14 @@ Classe: i3GEOF.editorlimites
 Fun&ccedil;&otilde;es de edi&ccedil;&atilde;o vetorial utilizadas pelo editor de regi&otilde;es do sistema METAESTAT
  */
 i3GEOF.editorlimites = {
+	iconePonto: function(sel){
+		if(sel){
+			return i3GEO.configura.locaplic+"/imagens/google/symbol_middot_y.png";
+		}
+		else{
+			return i3GEO.configura.locaplic+"/imagens/google/symbol_middot.png";
+		}
+	},
 	/**
 	 * Objeto DOM com a imagem de aguarde existente no cabecalho da janela
 	 *
@@ -113,7 +121,16 @@ i3GEOF.editorlimites = {
 				drawingModes: [google.maps.drawing.OverlayType.POLYGON,google.maps.drawing.OverlayType.MARKER,google.maps.drawing.OverlayType.POLYLINE]
 			},
 			markerOptions: {
-				icon: new google.maps.MarkerImage('http://www.example.com/icon.png')
+				icon: i3GEOF.editorlimites.iconePonto(),
+				clickable: true,
+				zIndex: 1,
+				draggable: true,
+				tema: "",
+				colunaid: "",
+				valorid: "",
+				colunanome: "",
+				valornome: "",
+				editable: false
 			},
 			polygonOptions: {
 				fillColor: '#ffff00',
@@ -132,7 +149,7 @@ i3GEOF.editorlimites = {
 		i3GEOF.editorlimites.drawingManager.setMap(i3GeoMap);
 		i3GEOF.editorlimites.drawingManager.setDrawingMode(null);
 		google.maps.event.addListener(i3GEOF.editorlimites.drawingManager, 'overlaycomplete', function(e) {
-			if (e.type != google.maps.drawing.OverlayType.MARKER) {
+			//if (e.type != google.maps.drawing.OverlayType.MARKER) {
 				i3GEOF.editorlimites.drawingManager.setDrawingMode(null);
 				i3GEOF.editorlimites.mudaicone();
 				var newShape = e.overlay;
@@ -147,7 +164,7 @@ i3GEOF.editorlimites = {
 				});
 				i3GEOF.editorlimites.setSelection(newShape);
 				i3GEOF.editorlimites.shapes.push(newShape);
-			}
+			//}
 		});
 		google.maps.event.addListener(
 			i3GEOF.editorlimites.drawingManager,
@@ -183,10 +200,11 @@ i3GEOF.editorlimites = {
 	html:function(){
 		var ins = '<div style=margin-left:5px >' +
 		'	<button title="Desenhar um polígono" onclick="i3GEOF.editorlimites.digitalizaPol(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon-create.png" /></button>' +
-		'	<button title="Capturar polígono de um tema" onclick="i3GEOF.editorlimites.capturaPoligonoTema.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-import.png" /></button>' +
+		'	<button title="Adicionar ponto" onclick="i3GEOF.editorlimites.digitalizaPt(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/point-create.png" /></button>' +
+		'	<button title="Capturar elemento de um tema" onclick="i3GEOF.editorlimites.capturaPoligonoTema.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-import.png" /></button>' +
 		'	<button title="Selecionar" onclick="i3GEOF.editorlimites.seleciona(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>' +
 		'	<button title="Remove selecionado (n&atilde;o apaga)" onclick="i3GEOF.editorlimites.deleteSelectedShape()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
-		'	<button title="Salvar limite" onclick="i3GEOF.editorlimites.salvaLimite.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/vector-save.png" /></button>' +
+		'	<button title="Salvar/excluir dados" onclick="i3GEOF.editorlimites.salvaLimite.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/vector-save.png" /></button>' +
 		'	<button title="Editar atributos" onclick="i3GEOF.editorlimites.editarAtributos.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/annotation-form.png" /></button>' +
 		'	<button title="Ajuda" onmousedown="i3GEOF.editorlimites.mudaicone()" onclick="i3GEOF.editorlimites.ajuda()" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/help-contents.png" /></button>' +
 		'	<br><div id="i3geoCartoRegioesEditaveisDiv" ><img style="display:block;z-index:2" src="'+i3GEO.configura.locaplic+'/imagens/aguarde.gif" /></div></div>'; //combo para escolher a regiao
@@ -211,7 +229,7 @@ i3GEOF.editorlimites = {
 		}
 		else{
 			shape.editable = true;
-			shape.setFlat(false);
+			shape.setIcon({url: i3GEOF.editorlimites.iconePonto(true)});
 		}
 	},
 	/**
@@ -227,7 +245,7 @@ i3GEOF.editorlimites = {
 			}
 			else if(i3GEOF.editorlimites.shapes[i] != ""){//caso for ponto
 				i3GEOF.editorlimites.shapes[i].editable = false;
-				i3GEOF.editorlimites.shapes[i].setFlat(true);
+				i3GEOF.editorlimites.shapes[i].setIcon({url: i3GEOF.editorlimites.iconePonto(false)});
 			}
 		}
 	},
@@ -244,7 +262,7 @@ i3GEOF.editorlimites = {
 			}
 			else if(i3GEOF.editorlimites.shapes[i] != ""){//caso for ponto
 				i3GEOF.editorlimites.shapes[i].editable = true;
-				i3GEOF.editorlimites.shapes[i].setFlat(false);
+				i3GEOF.editorlimites.shapes[i].setIcon({url: i3GEOF.editorlimites.iconePonto(true)});
 			}
 		}
 	},
@@ -512,6 +530,17 @@ i3GEOF.editorlimites = {
 		});
 	},
 	/**
+	 * Ativa a digitalizacao de ponto
+	 * @param objeto DOM que representa o botao que sera focado
+	 */
+	digitalizaPt: function(botao){
+		i3GEOF.editorlimites.mudaicone(botao);
+		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
+		i3GEOF.editorlimites.drawingManager.setOptions({
+			drawingMode: google.maps.drawing.OverlayType.MARKER
+		});
+	},
+	/**
 	 * Ativa a selecao de figuras
 	 * @param objeto DOM que representa o botao que sera focado
 	 */
@@ -605,9 +634,9 @@ i3GEOF.editorlimites = {
 			pol = new google.maps.Marker({
 				position: new google.maps.LatLng(obj.getPosition().ob,obj.getPosition().pb),
 				map: i3GeoMap,
-				fillColor: '#ffff00',
-				fillOpacity: .5,
-				strokeWeight: 2,
+				icon: {
+					url: i3GEOF.editorlimites.iconePonto(false)
+				},
 				clickable: true,
 				zIndex: 1,
 				draggable: true,
@@ -616,7 +645,6 @@ i3GEOF.editorlimites = {
 				valorid: valorid,
 				colunanome: colunanome,
 				valornome: valornome,
-				flat: true,
 				editable: false
 			});
 			google.maps.event.addListener(pol, 'click', function() {
@@ -694,7 +722,7 @@ i3GEOF.editorlimites = {
 				'<p class=paragrafo >Escolha a opera&ccedil;&atilde;o desejada:</p>' +
 				'<input id=i3GEOFmetaestati3GEOF.editorlimitesBotao1 type="button" value="Salvar tudo" />' +
 				'&nbsp;<input id=i3GEOFmetaestati3GEOF.editorlimitesBotao2 type="button" value="Salvar apenas os atributos" />' +
-				'<br><br><input id=i3GEOFmetaestati3GEOF.editorlimitesBotao3 type="button" value="Excluir pol&iacute;gono" />';
+				'<br><br><input id=i3GEOFmetaestati3GEOF.editorlimitesBotao3 type="button" value="Excluir" />';
 			return ins;
 		},
 		/**
@@ -709,7 +737,7 @@ i3GEOF.editorlimites = {
 			};
 			titulo = "Salva limite&nbsp;&nbsp;&nbsp;</a>";
 			janela = i3GEO.janela.cria(
-				"350px",
+				"300px",
 				"265px",
 				"",
 				"",
