@@ -128,6 +128,7 @@ packer("../pacotes/yui290/build/progressbar/progressbar-min.js","../pacotes/yui2
 packer("../pacotes/cpaint/cpaint2.inc.js","../pacotes/cpaint/cpaint2_compacto.inc.js","Normal");
 packer("../pacotes/balloon-tooltips/htdocs/js/balloon.config.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js","Normal");
 packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js","Normal");
+packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
 //packer("../pacotes/eudock/js/euDock.2.0.js","../pacotes/eudock/js/euDock.2.0_compacto.js","Normal");
 //packer("../pacotes/eudock/js/euDock.Image.js","../pacotes/eudock/js/euDock.Image_compacto.js","Normal");
 
@@ -187,6 +188,7 @@ $jsfiles = array(
 "compactados/classe_social_compacto.js",
 "compactados/classe_login_compacto.js",
 "compactados/classe_marcador_compacto.js",
+"compactados/base64_compacto.js",
 "../pacotes/eudock/js/euDock.2.0.js",
 "../pacotes/eudock/js/euDock.Image.js"
 );

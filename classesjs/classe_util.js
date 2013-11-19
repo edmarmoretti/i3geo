@@ -2913,6 +2913,21 @@ i3GEO.util = {
 		}
 		return ext;
 	},
+	/*
+	Function: navegadorDir
+
+	Abre o navegador de arquivos localizados no servidor
+
+	Parametro:
+
+	obj - objeto input que recebera de volta o valor do arquivo escolhido
+
+	listaShp {boolean} - considera os arquivos shapefile
+
+	listaImg {boolean} - considera os arquivos de imagem (geo)
+
+	listaFig {boolean} considera os arquivos de tipo figura (png e jpg)
+	 */
 	navegadorDir: function(obj,listaShp,listaImg,listaFig){
 		if(!obj){
 			listaShp = true;
@@ -2924,6 +2939,17 @@ i3GEO.util = {
 		};
 		i3GEO.util.dialogoFerramenta("i3GEO.util.navegadorDir()","navegarquivos","navegarquivos","index.js",temp);
 	},
+	/*
+	Function: navegadorPostgis
+
+	Abre o navegador de de tabelas existentes no banco de dados Postgis
+
+	Parametro:
+
+	obj - objeto input que recebera de volta o valor do arquivo escolhido
+
+	conexao {numerico} - codigo da conexao com o banco de dados cadastrado no sistema de metadados estatisticos
+	 */
 	navegadorPostgis: function(obj,conexao){
 		if(!obj){
 			conexao = "";
@@ -2932,6 +2958,38 @@ i3GEO.util = {
 			i3GEOF.navegapostgis.iniciaDicionario(obj,conexao);
 		};
 		i3GEO.util.dialogoFerramenta("i3GEO.util.navegadorPostgis()","navegapostgis","navegapostgis","index.js",temp);
+	},
+	/*
+	Function base64encode
+
+	Atalho para a funcao que codifica uma string em base64
+
+	Parametro:
+
+	str {string}
+
+	Retorno:
+
+	{base64}
+	 */
+	base64encode: function(str){
+		return base64encode(str);
+	},
+	/*
+	Function base64decode
+
+	Atalho para a funcao que decodifica uma string de base64
+
+	Parametro:
+
+	str {string}
+
+	Retorno:
+
+	{string}
+	 */
+	base64decode: function(str){
+		return base64decode(str);
 	}
 };
 //

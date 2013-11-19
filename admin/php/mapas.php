@@ -174,7 +174,7 @@ switch (strtoupper($funcao))
 	break;
 }
 function salvaMapfile(){
-	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa;
+	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa,$preferencias;
 	try{
 		$handle = fopen ($arqmapfile, 'r');
 		$conteudo = fread ($handle, filesize ($arqmapfile));
@@ -182,6 +182,9 @@ function salvaMapfile(){
 		$conteudo = base64_encode($conteudo);
 		if($conteudo == false){
 			return array("id"=>"","status"=>"erro");
+		}
+		if(isset($preferencias)){
+			$conteudo = "mapfile=$conteudo,preferencias=$preferencias";
 		}
 		require_once("conexao.php");
 		if($convUTF){

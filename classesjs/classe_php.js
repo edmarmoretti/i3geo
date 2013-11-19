@@ -1641,13 +1641,26 @@ i3GEO.php = {
 
 	Salva o mapfile atual no banco de dados de administracao
 	*/
-	salvaMapaBanco: function(funcao,titulo,id_mapa){
+	salvaMapaBanco: function(funcao,titulo,id_mapa,preferencias){
+		//pega as preferencias do usuario também
+		if(preferencias){
+			try{
+				preferencias = i3GEO.util.encodeBase64(i3GEO.util.pegaDadosLocal("preferenciasDoI3Geo"));
+			}
+			catch(e){
+				preferencias = "";
+			}
+		}
+		else{
+			preferencias = "";
+		}
 		var url = (window.location.href.split("?")[0]),
 			p = i3GEO.configura.locaplic+"/admin/php/mapas.php?";
 			par = "funcao=salvaMapfile" +
 			"&url=" + url.replace("#","") +
 			"&arqmapfile=" + i3GEO.parametros.mapfile +
-			"&nome_mapa=" + titulo+"&id_mapa="+id_mapa;
+			"&nome_mapa=" + titulo+"&id_mapa="+id_mapa +
+			"&preferenciasbase64=" + preferencias;
 		i3GEO.util.ajaxGet(p+par,funcao);
 	},
 	/*
