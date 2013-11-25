@@ -188,7 +188,6 @@ $jsfiles = array(
 "compactados/classe_social_compacto.js",
 "compactados/classe_login_compacto.js",
 "compactados/classe_marcador_compacto.js",
-"compactados/base64_compacto.js",
 "../pacotes/eudock/js/euDock.2.0.js",
 "../pacotes/eudock/js/euDock.Image.js"
 );

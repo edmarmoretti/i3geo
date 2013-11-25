@@ -149,10 +149,10 @@ i3GEOF.salvaMapa = {
 						}
 					}
 				};
-				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa,true);
+				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa,true,true);
 			};
-			texto = $trad(7,i3GEOF.salvaMapa.dicionario)+"<br><input id=salvamapaId  type=text /><br>";
-			i3GEO.janela.prompt(texto + "<br>"+$trad(8,i3GEOF.salvaMapa.dicionario),funcaoOK);
+			texto = $trad(7,i3GEOF.salvaMapa.dicionario)+"<br><input id=salvamapaId  type=text /><br><br>"+$trad(15,i3GEOF.salvaMapa.dicionario);
+			i3GEO.janela.prompt(texto + "<br><br>"+$trad(8,i3GEOF.salvaMapa.dicionario),funcaoOK);
 		}
 	},
 	/*

@@ -268,7 +268,7 @@ var i3GEO = {
 		{i3GEO.configura.sid = "";}
 		if(i3GEO.configura.sid === 'undefined')
 		{i3GEO.configura.sid = "";}
-		i3GEO.aplicaPreferencias();
+		i3GEO.mapa.aplicaPreferencias();
 		if(i3GEO.Interface.ALTTABLET != ""){
 			if(i3GEO.util.detectaMobile())
 			{return;}
@@ -308,10 +308,10 @@ var i3GEO = {
 		var montaMapa,mashup,tamanho;
 		if(typeof("i3GEOmantemCompatibilidade") === 'function')
 		{i3GEOmantemCompatibilidade();}
-		i3GEO.aplicaPreferencias();
+		i3GEO.mapa.aplicaPreferencias();
 		montaMapa = function(retorno){
 			try{
-				var temp,nomecookie = "i3geoUltimaExtensao";
+				var temp,nomecookie = "i3geoUltimaExtensao",preferencias="";
 				//verifica se existe bloqueio em funcao da senha no ms_configura.php
 				if(retorno.bloqueado){
 					alert(retorno.bloqueado);
@@ -338,6 +338,16 @@ var i3GEO = {
 						i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize*1;
 						i3GEO.parametros.w = i3GEO.parametros.w*1;
 						i3GEO.parametros.h = i3GEO.parametros.h*1;
+						//
+						//obtem os parametros que foram armazenados ao salvar o mapa
+						//caso o mapa atual tenha sido recuperado do banco de dados
+						//
+						if(retorno.data.customizacoesinit){
+							preferencias = YAHOO.lang.JSON.parse(retorno.data.customizacoesinit);
+							temp = i3GEO.util.base64decode(preferencias.preferenciasbase64);
+							i3GEO.mapa.aplicaPreferencias(temp);
+						}
+
 						if(i3GEO.Interface.ATUAL === "googleearth"){
 							i3GEO.configura.guardaExtensao = false;
 						}
@@ -374,6 +384,14 @@ var i3GEO = {
 						if($i("mst"))
 						{$i("mst").style.width=i3GEO.parametros.w + temp + "px";}
 						i3GEO.Interface.inicia();
+						//
+						//obtem os parametros que foram armazenados ao salvar o mapa
+						//caso o mapa atual tenha sido recuperado do banco de dados
+						//
+						if(retorno.data.customizacoesinit){
+							temp = i3GEO.util.base64decode(preferencias.geometriasbase64);
+							i3GEO.mapa.desCompactaLayerGrafico(temp);
+						}
 					}
 					else
 					{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
@@ -738,50 +756,6 @@ var i3GEO = {
 		}
 		else{
 			i3GEO.parametros.editor = "nao";
-		}
-	},
-	aplicaPreferencias: function(){
-		//aplica preferencias do usuario
-		var cookies = i3GEO.util.pegaDadosLocal("preferenciasDoI3Geo"),
-			props,
-			nprops,
-			i,
-			temp,
-			pint;
-		if(cookies){
-			props = cookies.split("::");
-			nprops = props.length;
-			for(i=0;i<nprops;i++){
-				try{
-					temp = props[i].split("|");
-					pint = parseInt(temp[1],10);
-					if(temp[1] === 'true' || temp[1] === 'false'){
-						if(temp[1] === 'true'){
-							temp[1] = true;
-						}
-						if(temp[1] === 'false'){
-							temp[1] = false;
-						}
-						eval(temp[0]+" = "+temp[1]+";");
-					}
-					else if(pint+"px" == temp[1]){
-						eval(temp[0]+" = '"+temp[1]+"';");
-					}
-					else if(YAHOO.lang.isNumber(pint)){
-						eval(temp[0]+" = "+temp[1]+";");
-					}
-					else{
-						eval(temp[0]+" = '"+temp[1]+"';");
-					}
-					//algumas propriedades usam cookies
-					if(temp[0] == "i3GEO.configura.mapaRefDisplay"){
-						i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay",temp[1]);
-					}
-				}
-				catch(e){
-					if(typeof(console) !== 'undefined'){console.warn(temp[0]+" = "+temp[1]+";");}
-				}
-			}
 		}
 	}
 };

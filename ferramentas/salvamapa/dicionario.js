@@ -83,5 +83,11 @@ i3GEOF.salvaMapa.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		15: [{
+			pt:"As prefer&ecirc;ncias definidas atualmente ser&atilde;o salvas tamb&eacute;m.",
+			en:"",
+			es:"",
+			it:""
 		}]
 };

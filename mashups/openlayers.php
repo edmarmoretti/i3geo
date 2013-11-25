@@ -10,21 +10,7 @@ error_reporting(0);
 //recupera um mapa salvo no banco de administracao
 //
 if(!empty($restauramapa)){
-	include(dirname(__FILE__)."/../admin/php/conexao.php");
-	if(!empty($esquemaadmin)){
-		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
-	}
-	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_mapas where id_mapa=$restauramapa ",PDO::FETCH_ASSOC);
-	$mapasalvo = $q->fetchAll();
-	$mapasalvo = $mapasalvo[0];
-	if(strtoupper($mapasalvo["publicado"]) != "NAO"){
-		$xbase = $dir_tmp."/".nomeRandomicoM().".map";
-		$baseh = fopen($xbase,'w');
-		$s = fwrite($baseh,base64_decode($mapasalvo["mapfile"]));
-		fclose($baseh);
-	}
-	$dbh = null;
-	$dbhw = null;
+	$xbase = restauraMapaAdmin($restauramapa,$dir_tmp);
 	$m = ms_newMapObj($xbase);
 	$w = $m->web;
 	$w->set("imagepath",dirname($w->imagepath)."/");

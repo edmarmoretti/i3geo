@@ -203,5 +203,11 @@ i3GEOF.inserexy.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		35: [{
+			pt:"Os pontos s&atilde;o armazenados temporariamente no servidor e s&atilde;o perdidos quando o mapa &eacute; fechado. Para reutilizar os dados criados fa&ccedil;a o download do arquivo shapefile.",
+			en:"",
+			es:"",
+			it:""
 		}]
 };

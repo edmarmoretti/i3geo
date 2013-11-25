@@ -2700,4 +2700,30 @@ function cloneInlineSymbol($layern,$nmapa,$mapa){
 		}
 	}
 }
+//
+//recupera um mapfile armazenado no banco de dados de administracao
+//ver admin/php/mapas.php salvaMapfile
+function restauraMapaAdmin($id_mapa,$dir_tmp){
+	include(dirname(__FILE__)."/../admin/php/conexao.php");
+	if(!empty($esquemaadmin)){
+		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
+	}
+	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_mapas where id_mapa=$id_mapa ",PDO::FETCH_ASSOC);
+	$mapasalvo = $q->fetchAll();
+	$mapasalvo = $mapasalvo[0];
+	$base = "";
+	if(strtoupper($mapasalvo["publicado"]) != "NAO"){
+		$base = $dir_tmp."/".nomeRandomico().".map";
+		$baseh = fopen($base,'w');
+		$registro = $mapasalvo["mapfile"];
+		//verifica se existem parametros junto com o registro
+		$registro = explode(",",$registro);
+		$mapfile = $registro[0];
+		$s = fwrite($baseh,base64_decode($mapfile));
+		fclose($baseh);
+	}
+	$dbh = null;
+	$dbhw = null;
+	return $base;
+}
 ?>

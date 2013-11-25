@@ -174,17 +174,31 @@ switch (strtoupper($funcao))
 	break;
 }
 function salvaMapfile(){
-	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa,$preferencias;
+	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa,$preferenciasbase64,$geometriasbase64;
+	//as preferencias sao criadas via javascript e guardadas junto com o mapa
 	try{
+		//
+		//as configuracoes especiais do mapa, definidas nas preferencias ou em ferramentas abertas quando o mapa e salvo,
+		//sao convertidas em base64 do lado do cliente
+		//esses dados sao entao armazenados como tags METADATA no mapfile
+		//quando o mapa e restaurado, esses valores sao recuperados
+		//a string que vai no metadata segue o padrao JSON
+		//o parser para reconstruir os valores e feito em javascript, no cliente
+		//
+		$customizacoesinit = array();
+		if(isset($preferenciasbase64) || isset($geometriasbase64)){
+			$customizacoesinit[] = '"preferenciasbase64":"'.$preferenciasbase64.'"';
+			$customizacoesinit[] = '"geometriasbase64":"'.$geometriasbase64.'"';
+			$m = ms_newMapObj($arqmapfile);
+			$m->setmetadata("CUSTOMIZACOESINIT",'{'.implode(",",$customizacoesinit).'}');
+			$m->save($arqmapfile);
+		}
 		$handle = fopen ($arqmapfile, 'r');
 		$conteudo = fread ($handle, filesize ($arqmapfile));
 		fclose ($handle);
 		$conteudo = base64_encode($conteudo);
 		if($conteudo == false){
 			return array("id"=>"","status"=>"erro");
-		}
-		if(isset($preferencias)){
-			$conteudo = "mapfile=$conteudo,preferencias=$preferencias";
 		}
 		require_once("conexao.php");
 		if($convUTF){

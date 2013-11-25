@@ -88,8 +88,12 @@ i3GEOF.inserexy = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.inserexy.html();
-			i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia1","i3GEOinserexyguia");
+			i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia0","i3GEOinserexyguia");
 			//eventos das guias
+			$i("i3GEOinserexyguia0").onclick = function(){
+				i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia0","i3GEOinserexyguia");
+				$i("i3GEOinserexyprojecao").style.display = "none";
+			};
 			$i("i3GEOinserexyguia1").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia1","i3GEOinserexyguia");
 				$i("i3GEOinserexyprojecao").style.display = "none";
@@ -175,6 +179,7 @@ i3GEOF.inserexy = {
 		var ins = '' +
 		'<div id=i3GEOinserexyguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
+		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia0" style="text-align:center;left:0px;" ><img style="height:14px" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/help-about.png"></div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia2" style="text-align:center;left:0px;" >Direc/dist</div></em></a></li>' +
 		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia3" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
@@ -188,12 +193,13 @@ i3GEOF.inserexy = {
 		'	<div id="i3GEOinserexylistaepsg" style="text-align:left;border:1px solid gray;width:300px;overflow:auto;height:60px;display:block;left:1px" >' +
 		'	</div>' +
 		'</div>' +
+		'<div class=guiaobj id="i3GEOinserexyguia0obj" style="left:1px;display:none;top:10px"><p class=paragrafo >'+$trad(35,i3GEOF.inserexy.dicionario)+'</p></div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia1obj" style="left:1px;display:none;top:10px">' +
 		'	<p class=paragrafo >'+$trad(7,i3GEOF.inserexy.dicionario)+':</p>' +
 		'	<div id=i3GEOinserexyshapefile style="left:0px;text-align:left;">' +
 		'	</div><br>' +
-	 	'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="'+$trad(8,i3GEOF.inserexy.dicionario)+'" />' +
-	 	'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="'+$trad(9,i3GEOF.inserexy.dicionario)+'" /></p>' +
+		'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="'+$trad(8,i3GEOF.inserexy.dicionario)+'" />' +
+		'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="'+$trad(9,i3GEOF.inserexy.dicionario)+'" /></p>' +
 
 		'	<div id=i3GEOinserexyopcitens style=display:none;left:0px;text-align:left; >' +
 		'		<p class=paragrafo >'+$trad(10,i3GEOF.inserexy.dicionario)+':</p>' +
@@ -351,13 +357,13 @@ i3GEOF.inserexy = {
 		i3GEO.util.comboTemas(
 			"i3GEOinserexytemasLocais",
 			function(retorno){
-		 		$i("i3GEOinserexyshapefile").innerHTML = retorno.dados;
-		 		if ($i("i3GEOinserexytemasLocais")){
-		 			$i("i3GEOinserexytemasLocais").onchange = function(){
-		 				i3GEO.mapa.ativaTema($i("i3GEOinserexytemasLocais").value);
-		 				i3GEOF.inserexy.listaItens();
-		 				i3GEOF.inserexy.listaPontos();
-		 			};
+				$i("i3GEOinserexyshapefile").innerHTML = retorno.dados;
+				if ($i("i3GEOinserexytemasLocais")){
+					$i("i3GEOinserexytemasLocais").onchange = function(){
+						i3GEO.mapa.ativaTema($i("i3GEOinserexytemasLocais").value);
+						i3GEOF.inserexy.listaItens();
+						i3GEOF.inserexy.listaPontos();
+					};
 				}
 				if(i3GEO.temaAtivo !== ""){
 					var temp = $i("i3GEOinserexytemasLocais");
@@ -450,8 +456,8 @@ i3GEOF.inserexy = {
 			"i3GEOinserexyItem",
 			$i("i3GEOinserexytemasLocais").value,
 			function(retorno){
-		 		$i("i3GEOinserexyshapefileitem").innerHTML = "<p class=paragrafo>"+retorno.dados+"</p>";
-		 		$i("i3GEOinserexyopcitens").style.display = "block";
+				$i("i3GEOinserexyshapefileitem").innerHTML = "<p class=paragrafo>"+retorno.dados+"</p>";
+				$i("i3GEOinserexyopcitens").style.display = "block";
 			},
 			"i3GEOinserexyshapefileitem"
 		);

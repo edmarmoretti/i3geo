@@ -217,7 +217,7 @@ i3GEO.eventos = {
 		//tenta evitar abrir o balao em objetos do openlayers ou googlemaps
 		if(exy && exy.target && exy.target.style.zIndex == ""){
 			var parente = exy.target.parentNode;
-			if(parente.className === ""){
+			if(parent && parente.className === ""){
 				i3GEO.eventos.executaEventos(this.MOUSEUP);
 			}
 		}

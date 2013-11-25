@@ -1614,7 +1614,9 @@ i3GEO.barraDeBotoes = {
 			]);
 			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edi&ccedil;&atilde;o",{styleMap:styleMap1,displayInLayerSwitcher:false,visibility:true});
 			i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);
-			i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
+			if(idjanela){
+				i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
+			}
 		}
 	}
 };

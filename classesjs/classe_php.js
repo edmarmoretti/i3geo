@@ -1641,11 +1641,11 @@ i3GEO.php = {
 
 	Salva o mapfile atual no banco de dados de administracao
 	*/
-	salvaMapaBanco: function(funcao,titulo,id_mapa,preferencias){
-		//pega as preferencias do usuario também
+	salvaMapaBanco: function(funcao,titulo,id_mapa,preferencias,geometrias){
+		//pega as preferencias do usuario tambem
 		if(preferencias){
 			try{
-				preferencias = i3GEO.util.encodeBase64(i3GEO.util.pegaDadosLocal("preferenciasDoI3Geo"));
+				preferencias = i3GEO.util.base64encode(i3GEO.util.pegaDadosLocal("preferenciasDoI3Geo"));
 			}
 			catch(e){
 				preferencias = "";
@@ -1654,14 +1654,32 @@ i3GEO.php = {
 		else{
 			preferencias = "";
 		}
+		//pega as geometrias no layer grafico
+		if(geometrias){
+			try{
+				geometrias = i3GEO.mapa.compactaLayerGrafico();
+				if(!geometrias){
+					geometrias = "";
+				}
+			}
+			catch(e){
+				geometrias = "";
+			}
+		}
+		else{
+			geometrias = "";
+		}
 		var url = (window.location.href.split("?")[0]),
 			p = i3GEO.configura.locaplic+"/admin/php/mapas.php?";
 			par = "funcao=salvaMapfile" +
 			"&url=" + url.replace("#","") +
 			"&arqmapfile=" + i3GEO.parametros.mapfile +
-			"&nome_mapa=" + titulo+"&id_mapa="+id_mapa +
-			"&preferenciasbase64=" + preferencias;
-		i3GEO.util.ajaxGet(p+par,funcao);
+			"&nome_mapa=" + titulo+"&id_mapa="+id_mapa;
+
+		cp = new cpaint();
+		cp.set_transfer_mode('POST');
+		cp.set_response_type("JSON");
+		cp.call(p+par,"foo",funcao,"&preferenciasbase64=" + preferencias + "&geometriasbase64=" + geometrias);
 	},
 	/*
 	Function: marcadores2shp

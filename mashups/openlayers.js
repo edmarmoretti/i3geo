@@ -112,6 +112,7 @@ i3GEO.editorOL = {
 	mapext: new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081),
 	mapa: "",
 	inicia: function(){
+		//ativabotoes e boolean
 		var single = false,
 			alayers = [],
 			fundo = (i3GEO.editorOL.fundo).split(","),
@@ -141,7 +142,9 @@ i3GEO.editorOL = {
 			i3GEO.editorOL.incluilayergrafico = true;
 		}
 		if(i3GEO.editorOL.incluilayergrafico === true){
-			i3GEO.editorOL.criaLayerGrafico();
+			if(!i3GEO.editorOL.layergrafico || i3GEO.editorOL.layergrafico != undefined){
+				i3GEO.editorOL.criaLayerGrafico();
+			}
 		}
 		else{
 			i3GEO.editorOL.layergrafico = "";
@@ -250,7 +253,8 @@ i3GEO.editorOL = {
 					strokeOpacity: "${opacidade}",
 					strokeColor: "rgb(${strokeColor})",
 					fillColor: "rgb(${fillColor})",
-					fillOpacity: "${opacidade}"
+					fillOpacity: "${opacidade}",
+					zIndex: 5000
 				}
 			},
 			style = new OpenLayers.Style(),
@@ -414,7 +418,12 @@ i3GEO.editorOL = {
 		{id = id.value;}
 		else
 		{id = i3GEO.temaAtivo;}
-		return i3GEO.editorOL.layersLigados()[id];
+		if(id == ""){
+			return [];
+		}
+		else{
+			return i3GEO.editorOL.layersLigados()[id];
+		}
 	},
 	listaItens: function(layer,idonde,idobj){
 			if(!layer){return;}
@@ -617,9 +626,9 @@ i3GEO.editorOL = {
 			ins += "<b>Atributos: "+i+"</b><br>";
 			var a = geos[i].attributes;
 			for(key in a){
-					 if(a[key]){
-						 ins += key+" = "+a[key]+"<br>";
-					 }
+					if(a[key]){
+						ins += key+" = "+a[key]+"<br>";
+					}
 			}
 		}
 		var w = window.open();
@@ -1247,24 +1256,24 @@ i3GEO.editorOL = {
 		{return;}
 		var SHADOW_Z_INDEX = 10,
 			MARKER_Z_INDEX = 11,
-						layer = new OpenLayers.Layer.Vector(
-								"pontos",
-								{
-										styleMap: new OpenLayers.StyleMap({
-												externalGraphic: i3GEO.editorOL.marca,
-												backgroundGraphic: "../pacotes/openlayers/img/marker_shadow.png",
-												backgroundXOffset: 0,
-												backgroundYOffset: -7,
-												graphicZIndex: MARKER_Z_INDEX,
-												backgroundGraphicZIndex: SHADOW_Z_INDEX,
-												pointRadius: 10
-										}),
-										isBaseLayer: false,
-										rendererOptions: {yOrdering: true},
-					displayInLayerSwitcher:true,
-					visibility:true
-								}
-						),
+			layer = new OpenLayers.Layer.Vector(
+					"pontos",
+					{
+							styleMap: new OpenLayers.StyleMap({
+									externalGraphic: i3GEO.editorOL.marca,
+									backgroundGraphic: "../pacotes/openlayers/img/marker_shadow.png",
+									backgroundXOffset: 0,
+									backgroundYOffset: -7,
+									graphicZIndex: MARKER_Z_INDEX,
+									backgroundGraphicZIndex: SHADOW_Z_INDEX,
+									pointRadius: 10
+							}),
+							isBaseLayer: false,
+							rendererOptions: {yOrdering: true},
+							displayInLayerSwitcher:true,
+							visibility:true
+					}
+			),
 			index,
 			x = [],
 			y = [],
@@ -1444,9 +1453,9 @@ i3GEO.editorOL = {
 			YAHOO.editorOL.listaGeometrias.panel.render(document.body);
 		}
 		var g,temp,
-		geos = i3GEO.editorOL.layergrafico.features,
-		n = geos.length,
-		ins = "<table class=lista4 >";
+			geos = i3GEO.editorOL.layergrafico.features,
+			n = geos.length,
+			ins = "<table class=lista4 >";
 		ins += "<tr><td><i>Geometrias</i></td><td><i>Op&ccedil;&otilde;es</i></td><td></td><td></td></tr>";
 
 		while(n > 0){
@@ -1670,6 +1679,14 @@ i3GEO.editorOL = {
 		}
 		catch(e)
 		{i3GEO.editorOL.restauraBackup();}
+	},
+	adicionaFeatureWkt: function(wkt,atributos){
+		var f,fwkt = new OpenLayers.Format.WKT();
+		f = fwkt.read(wkt);
+		f["attributes"] = atributos;
+		i3GEO.editorOL.layergrafico.addFeatures([f]);
+		if(document.getElementById("panellistagEditor"))
+		{i3GEO.editorOL.listaGeometrias();}
 	},
 	flashFeaturesI: function(index){
 		i3GEO.editorOL.flashFeatures([i3GEO.editorOL.layergrafico.features[index]],0);

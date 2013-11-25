@@ -178,24 +178,13 @@ if(empty($_SESSION["usuario"])){
 //
 //a vari&aacute;vel $base pode ser definida em ms_configura, mas a prefer&ecirc;ncia &eacute; pela defini&ccedil;&atilde;o j&aacute; existente
 //por isso, $base &eacute; guardada em uma vari&aacute;vel e retomada após o include de ms_configura.php
-//se restauramapa estiver definido, usa o mapfile guardado no banco como a base
+//se restauramapa estiver definido, usa o mapfile guardado no banco de  administracao como a base
 //
+if(!isset($dir_tmp)){
+	include_once (dirname(__FILE__)."/ms_configura.php");
+}
 if(!empty($restauramapa)){
-	include(dirname(__FILE__)."/admin/php/conexao.php");
-	if(!empty($esquemaadmin)){
-		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
-	}
-	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_mapas where id_mapa=$restauramapa ",PDO::FETCH_ASSOC);
-	$mapasalvo = $q->fetchAll();
-	$mapasalvo = $mapasalvo[0];
-	if(strtoupper($mapasalvo["publicado"]) != "NAO"){
-		$base = $dir_tmp."/".nomeRandomico().".map";
-		$baseh = fopen($base,'w');
-		$s = fwrite($baseh,base64_decode($mapasalvo["mapfile"]));
-		fclose($baseh);
-	}
-	$dbh = null;
-	$dbhw = null;
+	$base = restauraMapaAdmin($restauramapa,$dir_tmp);
 	$m = ms_newMapObj($base);
 	$w = $m->web;
 	$w->set("imagepath",dirname($w->imagepath)."/");
@@ -204,9 +193,6 @@ if(!empty($restauramapa)){
 }else{
 	if(isset($base)){
 		$tempBaseX = $base;
-	}
-	if(!isset($dir_tmp)){
-		include_once (dirname(__FILE__)."/ms_configura.php");
 	}
 	if(isset($tempBaseX) && $tempBaseX != ""){
 		$base = $tempBaseX;
