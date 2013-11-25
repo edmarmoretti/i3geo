@@ -752,7 +752,9 @@ i3GEO.Interface = {
 				if(i3GEO.finalizaAPI != "")
 				{eval(i3GEO.finalizaAPI);}
 			}
+			//verifica se nas preferencias existem ferramentas que devem ser abertas
 			i3GEO.configura.iniciaFerramentas.executa();
+			i3GEO.Interface.openlayers.sobeLayersGraficos();
 		},
 		aplicaOpacidade: function(opacidade,layer){
 			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
@@ -1177,6 +1179,7 @@ i3GEO.Interface = {
 				if(layer)
 				{i3geoOL.setLayerIndex(layer,maiorindice+i);}
 			}
+			i3GEO.Interface.openlayers.sobeLayersGraficos();
 		},
 		sobeDesceLayer:function(tema,tipo){
 			var layer = i3geoOL.getLayersByName(tema)[0],
@@ -1188,6 +1191,7 @@ i3GEO.Interface = {
 				else
 				{i3geoOL.setLayerIndex(layer,indice - 1);}
 			}
+			i3GEO.Interface.openlayers.sobeLayersGraficos();
 		},
 		ligaDesliga:function(obj){
 			var layers = i3geoOL.getLayersByName(obj.value),
@@ -1233,6 +1237,7 @@ i3GEO.Interface = {
 					}
 				}
 			}
+			i3GEO.Interface.openlayers.sobeLayersGraficos();
 		},
 		atualizaTema:function(retorno,tema){
 			var layer = i3geoOL.getLayersByName(tema)[0];

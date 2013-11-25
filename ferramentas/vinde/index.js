@@ -91,13 +91,18 @@ i3GEOF.vinde = {
 		}
 		var p = i3GEO.configura.locaplic+"/ferramentas/vinde/wmsindejson.php",
 			funcao = function(retorno){
-				if(iddiv && iddiv != ""){
-					$i(iddiv).innerHTML = i3GEOF.vinde.html();
+				try{
+					if(iddiv && iddiv != ""){
+						$i(iddiv).innerHTML = i3GEOF.vinde.html();
+					}
+					if($i("i3GEOF.vinde_imagemCabecalho")){
+						i3GEOF.vinde.aguarde.visibility = "hidden";
+					}
+					i3GEOF.vinde.arvore(retorno,arvore);
 				}
-				if($i("i3GEOF.vinde_imagemCabecalho")){
-					i3GEOF.vinde.aguarde.visibility = "hidden";
+				catch(e){
+					if(typeof(console) !== 'undefined'){console.info("Erro ao acessar a INDE");}
 				}
-				i3GEOF.vinde.arvore(retorno,arvore);
 			};
 		i3GEO.util.ajaxGet(p,funcao);
 	},

@@ -2790,7 +2790,7 @@ i3GEO.util = {
 		re = new RegExp("%3A", "g");
 		sUrl = sUrl.replace(re,':');
 		var falhou = function(e){
-				alert(e);
+				if(typeof(console) !== 'undefined'){console.info(e);}
 			},
 			callback = {
 					success:function(o){

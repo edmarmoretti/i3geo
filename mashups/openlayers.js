@@ -223,6 +223,7 @@ i3GEO.editorOL = {
 		else{
 			i3GEO.editorOL.mapa.zoomToMaxExtent();
 		}
+		i3GEO.Interface.openlayers.sobeLayersGraficos();
 	},
 	criaLayerGrafico: function(){
 		var	sketchSymbolizers = {
@@ -886,6 +887,7 @@ i3GEO.editorOL = {
 							i3GEO.editorOL.layergrafico.addFeatures([f]);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
+							i3GEO.Interface.openlayers.sobeLayersGraficos();
 						}
 					}
 				}
@@ -916,6 +918,7 @@ i3GEO.editorOL = {
 							i3GEO.editorOL.layergrafico.addFeatures([f]);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
+							i3GEO.Interface.openlayers.sobeLayersGraficos();
 						}
 					}
 				}
@@ -947,6 +950,7 @@ i3GEO.editorOL = {
 							i3GEO.editorOL.layergrafico.addFeatures([f]);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
+							i3GEO.Interface.openlayers.sobeLayersGraficos();
 						}
 					}
 				}
@@ -983,6 +987,7 @@ i3GEO.editorOL = {
 							};
 							if(texto && texto !== "")
 							{i3GEO.editorOL.layergrafico.addFeatures([label]);}
+							i3GEO.Interface.openlayers.sobeLayersGraficos();
 						}
 					}
 				}
