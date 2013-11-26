@@ -698,14 +698,16 @@ function montaDivGrupo(i)
 {
 	var ins = "<p>Escolha o grupo para esse n&iacute;vel:</p>";
 	ins += "<div id=comboGrupo >Buscando...</div>";
+	ins += "<p>Ou digite o nome de um novo grupo:</p>";
+	ins += "<input type=text id='EnomeNovoGrupo' value='' style='position:relative;width:200px;' />";
+
 	ins += "<p>Perfis que podem ver:</p>";
 	ins += "<input type=text id='En1_perfil' value='"+i.n1_perfil+"' style='position:relative;width:200px;float:left;' />";
 	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>";
-	ins += "<p style='width:200px;' >Publicado?<br><br>";
-	ins += "<select id='Epublicado' >";
+	ins += "<p style='width:200px;' >Publicado?";
+	ins += "<select id='Epublicado' style='left:5px;position:relative;'>";
 	ins += core_combosimnao(i.publicado);
 	ins += "</select>";
-	ins += "<br><br>";
 	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />";
 	return(ins);
 }
@@ -713,11 +715,14 @@ function montaDivSubGrupo(i)
 {
 	var ins = "<p>Escolha o sub-grupo para esse n&iacute;vel:</p>";
 	ins += "<div id=comboSubGrupo >Buscando...</div>";
+	ins += "<p>Ou digite o nome de um novo sub-grupo:</p>";
+	ins += "<input type=text id='EnomeNovoSubGrupo' value='' style='position:relative;width:200px;' />";
+
 	ins += "<p>Perfis que podem ver: </p>";
 	ins += "<input type=text id='En2_perfil' value='"+i.n2_perfil+"' style='position:relative;width:200px;float:left;' />";
 	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;' >Buscando...</div>";
-	ins += "<p style='width:200px;'>Publicado?<br><br>";
-	ins += "<select id='Epublicado' >";
+	ins += "<p style='width:200px;'>Publicado?";
+	ins += "<select id='Epublicado' style='left:5px;position:relative;'>";
 	ins += core_combosimnao(i.publicado);
 	ins += "</select>";
 	ins += "<br>";
@@ -778,13 +783,13 @@ function gravaDados(tipo,id)
 	var prog = null;
 	if(tipo == "grupo")
 	{
-		campos = new Array("id_grupo","n1_perfil","publicado","ordem");
+		campos = new Array("id_grupo","n1_perfil","publicado","ordem","nomeNovoGrupo");
 		par = "&id="+id;
 		prog = "../php/arvore.php?funcao=alterarGrupo&idioma="+idiomaSel();
 	}
 	if(tipo == "subgrupo")
 	{
-		campos = new Array("id_subgrupo","n2_perfil","publicado","ordem");
+		campos = new Array("id_subgrupo","n2_perfil","publicado","ordem","nomeNovoSubGrupo");
 		par = "&id="+id;
 		prog = "../php/arvore.php?funcao=alterarSubGrupo&idioma="+idiomaSel();
 	}
@@ -819,8 +824,15 @@ function gravaDados(tipo,id)
 					else
 					{
 						if(tipo == "grupo"){
-							var texto = document.getElementById("Eid_grupo");
-							texto = texto.options[texto.selectedIndex].text;
+							//verifica se o usuario escolheu um grupo ou digitou o nome de um novo
+							var novo = document.getElementById("EnomeNovoGrupo");
+							if(novo.value != ""){
+								var texto = novo.value;
+							}
+							else{
+								var texto = document.getElementById("Eid_grupo");
+								texto = texto.options[texto.selectedIndex].text;
+							}
 							var objpub = document.getElementById("Epublicado");
 							var publicado = objpub.options[objpub.selectedIndex].value;
 							var no = tree.getNodeByProperty("id_n1",id);
@@ -835,9 +847,15 @@ function gravaDados(tipo,id)
 						}
 						if(tipo == "subgrupo")
 						{
-							var texto = document.getElementById("Eid_subgrupo");
-							texto = texto.options[texto.selectedIndex].text;
-
+							//verifica se o usuario escolheu um subgrupo ou digitou o nome de um novo
+							var novo = document.getElementById("EnomeNovoSubGrupo");
+							if(novo.value != ""){
+								var texto = novo.value;
+							}
+							else{
+								var texto = document.getElementById("Eid_subgrupo");
+								texto = texto.options[texto.selectedIndex].text;
+							}
 							var objpub = document.getElementById("Epublicado");
 							var publicado = objpub.options[objpub.selectedIndex].value;
 

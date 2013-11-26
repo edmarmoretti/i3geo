@@ -1029,7 +1029,7 @@ function alteraGrupos()
 	global $nome_grupo,$desc_grupo,$id_grupo,$en,$es,$it,$esquemaadmin;
 	try
 	{
-		require_once("conexao.php");
+		require(dirname(__FILE__)."/conexao.php");
 		if($convUTF)
 		{
 			$nome_grupo = utf8_encode($nome_grupo);
@@ -1044,11 +1044,15 @@ function alteraGrupos()
 		}
 		else
 		{
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_grupos (nome_grupo, desc_grupo, en, es, it) VALUES ('', '','','','')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_grupos (nome_grupo, desc_grupo, en, es, it) VALUES ('$nome_grupo', '','','','')");
+			$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_grupos where nome_grupo = '$nome_grupo'";
+			$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+			$resultado = $q->fetchAll();
+			$id_grupo = $resultado[0]["id_grupo"];
 		}
 		$dbhw = null;
 		$dbh = null;
-		return "ok";
+		return $id_grupo;
 	}
 	catch (PDOException $e)
 	{
@@ -1062,7 +1066,7 @@ function alteraSubGrupos()
 {
 	global $nome_subgrupo,$desc_subgrupo,$id_subgrupo,$en,$es,$it,$esquemaadmin;
 	try{
-		require_once("conexao.php");
+		require(dirname(__FILE__)."/conexao.php");
 		if($convUTF){
 			$nome_subgrupo = utf8_encode($nome_subgrupo);
 			$desc_subgrupo = utf8_encode($desc_subgrupo);
@@ -1075,11 +1079,15 @@ function alteraSubGrupos()
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_subgrupos SET en = '$en', es = '$es', it = '$it', nome_subgrupo = '$nome_subgrupo', desc_subgrupo = '$desc_subgrupo' WHERE id_subgrupo = $id_subgrupo");
 		}
 		else{
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_subgrupos (nome_subgrupo, desc_subgrupo, en, es, it) VALUES ('', '','','','')");
+			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_subgrupos (nome_subgrupo, desc_subgrupo, en, es, it) VALUES ('$nome_subgrupo', '','','','')");
+			$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos where nome_subgrupo = '$nome_subgrupo'";
+			$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+			$resultado = $q->fetchAll();
+			$id_subgrupo = $resultado[0]["id_subgrupo"];
 		}
 		$dbhw = null;
 		$dbh = null;
-		return "ok";
+		return $id_subgrupo;
 	}
 	catch (PDOException $e)
 	{

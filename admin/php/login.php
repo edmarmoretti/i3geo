@@ -216,7 +216,6 @@ function recuperarSenha($usuario){
 //
 function verificaPapelSessao($id_papel){
 	$resultado = false;
-	//verifica se e administrador
 	if(validaSessao()){
 		foreach($_SESSION["papeis"] as $p){
 			if($p["id_papel"] == 1 || $p["id_papel"] == $id_papel){
@@ -283,7 +282,10 @@ function autenticaUsuario($usuario,$senha){
 		foreach($gr as $p){
 			$gruposusr[] = $p["id_grupo"];
 		}
-		$r = array("usuario"=>"master","papeis"=>$papeis,"operacoes"=>$operacoes,"gruposusr"=>$gruposusr);
+		$master = array();
+		$master["id_usuario"] = "master";
+		$master["nome_usuario"] = "master";
+		$r = array("usuario"=>$master,"papeis"=>$papeis,"operacoes"=>$operacoes,"gruposusr"=>$gruposusr);
 		return $r;
 	}
 	else{

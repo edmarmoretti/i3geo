@@ -1,6 +1,6 @@
 <?php
 /*
- Title: arvore.php
+Title: arvore.php
 
 Fun&ccedil;&otilde;es utilizadas pelo editor da &aacute;rvore de menus para processar os nós
 
@@ -74,12 +74,12 @@ error_reporting(0);
 switch (strtoupper($funcao))
 {
 	/*
-	 Note:
+	Note:
 
 	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 	/*
-	 Valor: PEGAGRUPOS
+	Valor: PEGAGRUPOS
 
 	Grupos de um menu
 
@@ -100,7 +100,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGASUBGRUPOS
+		Valor: PEGASUBGRUPOS
 
 		Subgrupos de um grupo
 
@@ -123,7 +123,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGATEMAS
+		Valor: PEGATEMAS
 
 		Temas de um subgrupo
 
@@ -144,7 +144,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGADADOSGRUPO
+		Valor: PEGADADOSGRUPO
 
 		Dados de um grupo
 
@@ -161,7 +161,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGADADOSSUBGRUPO
+		Valor: PEGADADOSSUBGRUPO
 
 		Dados de um subgrupo
 
@@ -178,7 +178,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGADADOSTEMA
+		Valor: PEGADADOSTEMA
 
 		Dados de um tema
 
@@ -195,7 +195,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: PEGADADOSRAIZ
+		Valor: PEGADADOSRAIZ
 
 		Dados dos temas registrados em uma raiz (grupo ou menu)
 
@@ -212,7 +212,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ADICIONARTEMARAIZ
+		Valor: ADICIONARTEMARAIZ
 
 		Adiciona tema na raiz de um nó menu
 
@@ -236,7 +236,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ADICIONARTEMARAIZGRUPO
+		Valor: ADICIONARTEMARAIZGRUPO
 
 		Adiciona tema na raiz de um nó grupo
 
@@ -264,7 +264,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ADICIONARGRUPO
+		Valor: ADICIONARGRUPO
 
 		Adiciona um novo grupo em um nó
 
@@ -278,12 +278,11 @@ switch (strtoupper($funcao))
 		*/
 	case "ADICIONARGRUPO":
 		$id_n1 = alteraN1();
-		if($idioma == "pt")
-		{
+		if($idioma == "pt"){
 			$coluna = "nome_grupo";
 		}
-		else
-		{$coluna = $idioma;
+		else{
+			$coluna = $idioma;
 		}
 		$grupos = pegaDados("select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,i3geoadmin_n1.publicado from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' and id_n1 = '$id_n1'");
 		$raiz = array();
@@ -291,7 +290,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ADICIONARSUBGRUPO
+		Valor: ADICIONARSUBGRUPO
 
 		Adiciona um novo subgrupo em um nó
 
@@ -318,7 +317,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ADICIONARTEMA
+		Valor: ADICIONARTEMA
 
 		Adiciona um novo tema em um nó de um subgrupo
 
@@ -345,7 +344,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERARGRUPO
+		Valor: ALTERARGRUPO
 
 		Altera o registro de um grupo
 
@@ -366,11 +365,18 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARGRUPO":
+		//verifica se um novo grupo deve ser adicionado no banco de dados
+		if(!empty($nomeNovoGrupo)){
+			include_once(dirname(__FILE__)."/menutemas.php");
+			$id_grupo = "";
+			$nome_grupo = $nomeNovoGrupo;
+			$id_grupo = alteraGrupos();
+		}
 		retornaJSON(alteraN1());
 		exit;
 		break;
 		/*
-		 Valor: ALTERARSUBGRUPO
+		Valor: ALTERARSUBGRUPO
 
 		Altera o registro de um subgrupo
 
@@ -391,11 +397,18 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ALTERARSUBGRUPO":
+		//verifica se um novo sub-grupo deve ser adicionado no banco de dados
+		if(!empty($nomeNovoSubGrupo)){
+			include_once(dirname(__FILE__)."/menutemas.php");
+			$id_subgrupo = "";
+			$nome_subgrupo = $nomeNovoSubGrupo;
+			$id_subgrupo = alteraSubGrupos();
+		}
 		retornaJSON(alteraN2());
 		exit;
 		break;
 		/*
-		 Valor: ALTERARTEMA
+		Valor: ALTERARTEMA
 
 		Altera o registro de um tema
 
@@ -420,7 +433,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: ALTERARRAIZ
+		Valor: ALTERARRAIZ
 
 		Altera o registro de um tema na raiz de um menu ou grupo
 
@@ -449,7 +462,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: MOVIMENTANO
+		Valor: MOVIMENTANO
 
 		Muda a ordem de um nó
 
@@ -471,7 +484,7 @@ switch (strtoupper($funcao))
 		exit;
 		break;
 		/*
-		 Valor: EXCLUIR
+		Valor: EXCLUIR
 
 		Exclui um registro
 
@@ -488,40 +501,40 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "EXCLUIR";
-	if($tabela == "i3geoadmin_raiz")
-	{
-		$coluna = "id_raiz";
-	}
-	if($tabela == "i3geoadmin_n3")
-	{
-		$coluna = "id_n3";
-	}
-	if($tabela == "i3geoadmin_n2")
-	{
-		$coluna = "id_n2";
-		$f = verificaFilhos();
-		if($f)
+		if($tabela == "i3geoadmin_raiz")
 		{
-			retornaJSON("erro");
-			exit;
+			$coluna = "id_raiz";
 		}
-	}
-	if($tabela == "i3geoadmin_n1")
-	{
-		$coluna = "id_n1";
-		$f = verificaFilhos();
-		if($f)
+		if($tabela == "i3geoadmin_n3")
 		{
-			retornaJSON("erro");
-			exit;
+			$coluna = "id_n3";
 		}
-	}
-	retornaJSON(exclui());
-	exit;
+		if($tabela == "i3geoadmin_n2")
+		{
+			$coluna = "id_n2";
+			$f = verificaFilhos();
+			if($f)
+			{
+				retornaJSON("erro");
+				exit;
+			}
+		}
+		if($tabela == "i3geoadmin_n1")
+		{
+			$coluna = "id_n1";
+			$f = verificaFilhos();
+			if($f)
+			{
+				retornaJSON("erro");
+				exit;
+			}
+		}
+		retornaJSON(exclui());
+		exit;
 	break;
 }
 /*
- Altera o registro de um n&iacute;vel 3 (temas)
+Altera o registro de um n&iacute;vel 3 (temas)
 */
 function alteraN3()
 {
@@ -557,14 +570,14 @@ function alteraN3()
 	}
 }
 /*
- Altera o registro de um n&iacute;vel 2
+Altera o registro de um n&iacute;vel 2
 */
 function alteraN2()
 {
 	global $publicado,$n2_perfil,$id,$id_subgrupo,$id_n1,$esquemaadmin;
 	try
 	{
-		require_once("conexao.php");
+		require("conexao.php");
 		if($id != "")
 		{
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n2 SET publicado='$publicado', id_subgrupo = '$id_subgrupo', n2_perfil = '$n2_perfil' WHERE id_n2 = $id");
@@ -593,14 +606,14 @@ function alteraN2()
 	}
 }
 /*
- Altera o registro de um n&iacute;vel 1 (grupos)
+Altera o registro de um n&iacute;vel 1 (grupos)
 */
 function alteraN1()
 {
 	global $publicado,$n1_perfil,$id_grupo,$id,$id_menu,$esquemaadmin;
 	try
 	{
-		require_once("conexao.php");
+		require("conexao.php");
 		if($id != "")
 		{
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n1 SET publicado = '$publicado', id_grupo = '$id_grupo', n1_perfil = '$n1_perfil' WHERE id_n1 = $id");
@@ -629,7 +642,7 @@ function alteraN1()
 	}
 }
 /*
- Altera o registro na raiz de um n&iacute;vel
+Altera o registro na raiz de um n&iacute;vel
 */
 function alterarRaiz()
 {
