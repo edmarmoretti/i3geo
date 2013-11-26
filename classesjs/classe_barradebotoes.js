@@ -1492,7 +1492,36 @@ i3GEO.barraDeBotoes = {
 			//if(navm)
 			//{alert("O editor n&atilde;o funciona corretamente nesse navegador.");}
 			i3GEO.eventos.cliquePerm.desativa();
-			i3GEO.barraDeBotoes.editor.carregaJs("janelaEditorVetorial");
+			if(i3GEO.Interface.ATUAL === "openlayers"){
+				i3GEO.barraDeBotoes.editor.carregaJs("janelaEditorVetorial");
+			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				i3GEO.barraDeBotoes.editor.carregaJsGm();
+			}
+		},
+		//carrega as opcoes de edicao se a interface for do googlemaps
+		carregaJsGm: function(){
+			var temp = function(){
+				var cabecalho, minimiza, janela;
+				cabecalho = function() {
+				};
+				minimiza = function() {
+					i3GEO.janela.minimiza("janelaEditorLimites");
+				};
+				janela = i3GEO.janela.cria("300px", "100px", "", "", "",
+					"Editor", "janelaEditorLimites", false, "hd",
+					cabecalho, minimiza);
+				$i("janelaEditorLimites_corpo").style.backgroundColor = "white";
+				i3GEOF.editorlimites.inicia("janelaEditorLimites_corpo");
+				i3GEOF.locregiao.iniciaJanelaFlutuante();
+				YAHOO.i3GEO.janela.manager.find("i3GEOF.locregiao").moveTo(100,40);
+			};
+			i3GEO.util.scriptTag(
+				i3GEO.configura.locaplic+"/ferramentas/metaestat/editorlimites_dependencias.php",
+				temp,
+				"editorlimites_dependencias.php",
+				true
+			);
 		},
 		carregaJs: function(idjanela){
 			if(!i3GEO.editorOL){

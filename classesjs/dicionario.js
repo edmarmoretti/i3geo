@@ -1614,7 +1614,7 @@ it:"Editar &aacute;rvore"
 }],
 "x10":[
 {
-pt:"Editar menus",
+pt:"Editar menus do cat&aacute;logo",
 en:"Edit menus",
 es:"Editar menus",
 it:"Editar menus"
@@ -2155,6 +2155,14 @@ it:""
 "x88":[
 {
 pt:"Prefer&ecirc;ncias",
+en:"",
+es:"",
+it:""
+}]
+,
+"x89":[
+{
+pt:"Editar cadastro",
 en:"",
 es:"",
 it:""

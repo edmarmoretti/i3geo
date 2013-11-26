@@ -18,7 +18,10 @@ i3GEO.editorOL = {
 		pointRadius: 4,
 		graphicName: "square",
 		fontSize: "12px",
-		fontColor: "0,0,0"
+		fontColor: "0,0,0",
+		externalGraphic: "",
+		graphicHeight: 25,
+		graphicWidth: 25
 	},
 	backup: new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false}),
 	nomeFuncaoSalvar: "i3GEO.editorOL.testeSalvar()",
@@ -242,7 +245,8 @@ i3GEO.editorOL = {
 					fontWeight: "normal",
 					labelAlign: "lb",
 					labelXOffset: "3",
-					labelYOffset: "3"
+					labelYOffset: "3",
+					externalGraphic: "${externalGraphic}"
 				},
 				"Line": {
 					strokeWidth: "${strokeWidth}",
@@ -905,7 +909,17 @@ i3GEO.editorOL = {
 					type: OpenLayers.Control.TYPE_TOOL,
 					callbacks:{
 						done: function(feature){
-							var f = new OpenLayers.Feature.Vector(feature);
+							if(i3GEO.editorOL.simbologia.externalGraphic != ""){
+								var style_mark = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
+								style_mark.externalGraphic = i3GEO.editorOL.simbologia.externalGraphic;
+								style_mark.graphicWidth = i3GEO.editorOL.simbologia.graphicWidth;
+								style_mark.graphicHeight = i3GEO.editorOL.simbologia.graphicHeight;
+								style_mark.fillOpacity = i3GEO.editorOL.simbologia.opacidade;
+								var f = new OpenLayers.Feature.Vector(feature,null,style_mark);
+							}
+							else{
+								var f = new OpenLayers.Feature.Vector(feature);
+							}
 							f["attributes"] = {
 								opacidade: i3GEO.editorOL.simbologia.opacidade,
 								texto: i3GEO.editorOL.simbologia.texto,
@@ -913,7 +927,10 @@ i3GEO.editorOL = {
 								strokeWidth: i3GEO.editorOL.simbologia.strokeWidth,
 								strokeColor: i3GEO.editorOL.simbologia.strokeColor,
 								pointRadius: i3GEO.editorOL.simbologia.pointRadius,
-								graphicName: i3GEO.editorOL.simbologia.graphicName
+								graphicName: i3GEO.editorOL.simbologia.graphicName,
+								externalGraphic: i3GEO.editorOL.simbologia.externalGraphic,
+								graphicHeight: i3GEO.editorOL.simbologia.graphicHeight,
+								graphicWidth: i3GEO.editorOL.simbologia.graphicWidth
 							};
 							i3GEO.editorOL.layergrafico.addFeatures([f]);
 							if(document.getElementById("panellistagEditor"))
@@ -1247,14 +1264,15 @@ i3GEO.editorOL = {
 		}
 	},
 	mudaSimbolo: function(estilo,id){
-		var valor = $i(id).value;
-		if(valor === "")
-		{return;}
-		if(estilo === "strokeWidth")
-		{i3GEO.editorOL.simbologia.strokeWidth = valor;return;}
-		if(estilo === "opacidade")
-		{i3GEO.editorOL.simbologia.opacidade = valor;return;}
+		var valor = $i(id).value,
+			geos = i3GEO.editorOL.layergrafico.selectedFeatures,
+			n = geos.length,
+			i;
 		i3GEO.editorOL.simbologia[estilo] = valor;
+		for(i=0;i<n;i++){
+			geos[i].attributes[estilo] = valor;
+			geos[i].style[estilo] = valor;
+		}
 	},
 	adicionaMarcas: function(){
 		if(i3GEO.editorOL.pontos.length === 0)
@@ -1381,6 +1399,12 @@ i3GEO.editorOL = {
 			'	<tr>' +
 			'		<td>Largura da linha/contorno</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeWidth\',\'i3GEOEditorOLlarguraLinha\')" type="text" style="cursor:text" id="i3GEOEditorOLlarguraLinha" size="2" value="'+i3GEO.editorOL.simbologia.strokeWidth+'" /></td><td></td>' +
 			'	</tr>' +
+			'	<tr>' +
+			'		<td>Url de uma figura</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'externalGraphic\',\'i3GEOEditorOLexternalGraphic\')" type="text" style="cursor:text" id="i3GEOEditorOLexternalGraphic" size="22" value="'+i3GEO.editorOL.simbologia.externalGraphic+'" /></td><td></td>' +
+			'	</tr>' +
+			'	<tr>' +
+			'		<td>Largura e altura</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'graphicWidth\',\'i3GEOEditorOLgraphicWidth\')" type="text" style="cursor:text" id="i3GEOEditorOLgraphicWidth" size="4" value="'+i3GEO.editorOL.simbologia.graphicWidth+'" />&nbsp;<input onchange="i3GEO.editorOL.mudaSimbolo(\'graphicHeight\',\'i3GEOEditorOLgraphicHeight\')" type="text" style="cursor:text" id="i3GEOEditorOLgraphicHeight" size="4" value="'+i3GEO.editorOL.simbologia.graphicHeight+'" /></td><td></td>' +
+			'	</tr>'
 			'</table>' +
 			'<br />' +
 			'<p class=paragrafo ><b>Ajusta nó em edi&ccedil;&atilde;o para o(a):</b></p>' +
@@ -1687,8 +1711,21 @@ i3GEO.editorOL = {
 	},
 	adicionaFeatureWkt: function(wkt,atributos){
 		var f,fwkt = new OpenLayers.Format.WKT();
-		f = fwkt.read(wkt);
-		f["attributes"] = atributos;
+
+		if(atributos.externalGraphic && atributos.externalGraphic != ""){
+			var style_mark = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
+			style_mark.externalGraphic = atributos.externalGraphic;
+			style_mark.graphicWidth = atributos.graphicWidth;
+			style_mark.graphicHeight = atributos.graphicHeight;
+			style_mark.fillOpacity = atributos.opacidade;
+			f = fwkt.read(wkt);
+			f["attributes"] = atributos;
+			f["style"] = style_mark;
+		}
+		else{
+			f = fwkt.read(wkt);
+			f["attributes"] = atributos;
+		}
 		i3GEO.editorOL.layergrafico.addFeatures([f]);
 		if(document.getElementById("panellistagEditor"))
 		{i3GEO.editorOL.listaGeometrias();}

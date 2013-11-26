@@ -145,7 +145,8 @@ i3GEO.guias = {
 				}
 				var pegaMapas = function(retorno){
 					var ins,mapa,ig1lt,ig1,nome,lkd,link,temp;
-					ins = "<br><div id='banners' style='overflow:auto;text-align:center'>";
+					ins = "<br><div id='banners' style='overflow:auto;text-align:center'>" +
+						"<a href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target=_blank >"+$trad("x89")+"</a><br>";
 					mapa = retorno.data.mapas;
 					ig1lt = mapa.length;
 					ig1=0;

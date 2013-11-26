@@ -138,11 +138,7 @@ include_once(dirname(__FILE__)."/../../ms_configura.php");
 </div>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing "></script>
 <script type="text/javascript" src="../../classesjs/i3geo.js"></script>
-<script src="../../pacotes/wicket/wicket.js" type="text/javascript"></script>
-<script src="../../pacotes/wicket/wicket-gmap3.js" type="text/javascript"></script>
-<script src="dicionario.js"></script>
-<script src="editorlimites.js"></script>
-<script src="locregiao.js"></script>
+<script src="editorlimites_dependencias.php"></script>
 <script type="text/javascript">
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.configura.mashuppar = "mapext=-76.5125927 -39.3925675209 -29.5851853 9.49014852081";
