@@ -1792,7 +1792,7 @@ class Metaestat{
 		return $regioes;
 	}
 	/**
-	 * Lista os dads de uma conexao ou de todas
+	 * Lista os dados de uma conexao ou de todas
 	 * @param id da conexao
 	 * @param boolean inclui na lista a senha ou nao
 	 */
@@ -1808,7 +1808,50 @@ class Metaestat{
 			$sql .= "WHERE codigo_estat_conexao = $codigo_estat_conexao ";
 		}
 		$sql .= "ORDER BY bancodedados,host,usuario";
-		return $this->execSQL($sql,$codigo_estat_conexao);
+		$res = $this->execSQL($sql,$codigo_estat_conexao);
+		//se achou e a requisico e para listar uma conexao, retorna o que for encontrado
+		$cres = count($res);
+		if($cres > 0 && $codigo_estat_conexao != "" && !empty($cres[0]["dbname"])){
+			return $res;
+		}
+		//caso contrario, e deve retornar todas as conexoes, inclui a fonte
+		if($codigo_estat_conexao == ""){
+			for($i=0; $i<$cres;$i++){
+				$res[$i]["fonte"] = "metaestat";
+			}
+		}
+		//obtem as conexoes definidas em ms_configgura.php
+		if(!isset($postgis_mapa)){
+			require(dirname(__FILE__)."/../../ms_configura.php");
+		}
+		if(!empty($postgis_mapa)){
+			foreach(array_keys($postgis_mapa) as $key){
+				$lista = explode(" ",$postgis_mapa[$key]);
+				$con = array();
+				foreach($lista as $l){
+					$teste = explode("=",$l);
+					$con[trim($teste[0])] = trim($teste[1]);
+				}
+				$c = array(
+					"codigo_estat_conexao" => $key,
+					"bancodedados" => $con["dbname"],
+					"host" => $con["host"],
+					"porta" => $con["port"],
+					"usuario" => $con["user"],
+					"fonte" => "ms_configura"
+				);
+				if($senha == true){
+					$c["senha"] = $con["password"];
+				}
+				$res[] = $c;
+				if($codigo_estat_conexao != "" && $codigo_estat_conexao == $key){
+					return $c;
+				}
+			}
+		}
+		//echo "<pre>";
+		//var_dump($res);exit;
+		return $res;
 	}
 	function listaParametroTempo2CampoData($id_medida_variavel,$prefixoAlias = ""){
 		//lista os parametros temporais

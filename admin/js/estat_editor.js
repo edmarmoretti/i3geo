@@ -29,7 +29,7 @@ i3GEOadmin.editor = {
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
 							temp = "<p>Escolha a conex&atilde;o com o banco: ";
 							temp += "<select id='i3GEOadmincodigo_estat_conexao' onchange='i3GEOadmin.editor.esquema.lista()'>";
-							temp += core_comboObjeto(dados,"codigo_estat_conexao","bancodedados","","usuario");
+							temp += core_comboObjeto(dados,"codigo_estat_conexao","bancodedados","","codigo_estat_conexao");
 							temp += "</select></p>";
 							$i(i3GEOadmin.editor.conexao.onde).innerHTML = temp;
 							core_carregando("desativa");

@@ -151,8 +151,9 @@ i3GEOF.salvaMapa = {
 				};
 				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa,true,true);
 			};
-			texto = $trad(7,i3GEOF.salvaMapa.dicionario)+"<br><input id=salvamapaId  type=text /><br><br>"+$trad(15,i3GEOF.salvaMapa.dicionario);
+			texto = $trad(7,i3GEOF.salvaMapa.dicionario)+"<br><div id=i3GEOFsalvamapaMapa  ></div><br><br>"+$trad(15,i3GEOF.salvaMapa.dicionario);
 			i3GEO.janela.prompt(texto + "<br><br>"+$trad(8,i3GEOF.salvaMapa.dicionario),funcaoOK);
+			i3GEOF.salvaMapa.comboMapas("i3GEOFsalvamapaMapa");
 		}
 	},
 	/*
@@ -202,5 +203,21 @@ i3GEOF.salvaMapa = {
 		divid = janela[2].id;
 		i3GEOF.salvaMapa.aguarde = $i("i3GEOF.salvaMapa_imagemCabecalho").style;
 		i3GEOF.salvaMapa.inicia(divid);
+	},
+	comboMapas: function(onde){
+		var	p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaMapas",
+			combo = function(retorno){
+				var n = retorno.length,
+					i,
+					ins = "" +
+					"<select id='i3GEOFsalvamapaMapa' >" +
+					"	<option value=''>---</option>";
+				for(i=0;i<n;i++){
+					ins += 	"<option value='"+retorno[i].id_mapa+"'>"+retorno[i].id_mapa+" - "+retorno[i].titulo+"</option>";
+				}
+				ins += "</select>";
+				$i(onde).innerHTML = ins;
+			};
+		i3GEO.util.ajaxGet(p,combo);		
 	}
 };

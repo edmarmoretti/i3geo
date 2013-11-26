@@ -5,7 +5,7 @@ i3GEOadmin.conexao = {
 	dados: "",
 	letra: "",
 	dataTable: null,
-	colunas: ["codigo_estat_conexao","bancodedados","host","porta","usuario","senha"],
+	colunas: ["codigo_estat_conexao","bancodedados","host","porta","usuario","senha","fonte"],
 	formatTexto: function(elCell, oRecord, oColumn, oData){
 		if(oData === ""){
 			oData = "<span style='color:gray' ></span>";
@@ -13,10 +13,14 @@ i3GEOadmin.conexao = {
 		elCell.innerHTML = "<pre ><p style=cursor:default >" + oData + "</pre>";
 	},
 	formatExclui: function(elCell, oRecord, oColumn){
-		elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
+		if(oRecord.getData("fonte") == "metaestat"){
+			elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
+		}
 	},
 	formatMais: function(elCell, oRecord, oColumn){
-		elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+		if(oRecord.getData("fonte") == "metaestat"){
+			elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+		}
 	},
 	formatSenha: function(elCell, oRecord, oColumn){
 		elCell.innerHTML = "A senha deve ser editada diretamente no banco de dados de administra&ccedil;&atilde;o. Veja o i3geo/ms_configura.php para saber qual &eacute; o banco.";
@@ -30,6 +34,7 @@ i3GEOadmin.conexao = {
 			{label:"Host",resizeable:true,key:"host", formatter:i3GEOadmin.conexao.formatTexto},
 			{label:"Porta",key:"porta",formatter:i3GEOadmin.conexao.formatTexto},
 			{label:"Usu&aacute;rio",key:"usuario",formatter:i3GEOadmin.conexao.formatTexto},
+			{label:"Fonte",key:"fonte",formatter:i3GEOadmin.conexao.formatTexto},
 			{label:"Senha",key:"senha",formatter:i3GEOadmin.conexao.formatSenha}
 		];
 	},
@@ -87,7 +92,11 @@ i3GEOadmin.conexao = {
 					YAHOO.conexao.panelCK = null;
 				}
 				if (column.key == 'excluir'){
-					i3GEOadmin.conexao.exclui(registro.getData('codigo_estat_conexao'),target);
+					if(registro.getData('fonte')){
+						alert("Nao pode ser editado. Veja em ms_configura.php");
+						return;
+					}
+					//i3GEOadmin.conexao.exclui(registro.getData('codigo_estat_conexao'),target);
 				}
 				if (column.key == 'mais'){
 					core_carregando("ativa");
