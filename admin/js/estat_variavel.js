@@ -426,19 +426,21 @@ i3GEOadmin.variaveis = {
 			if(redesenha){tree.draw();}
 		},
 		classesAuto: function(id_classificacao,id_medida_variavel){
-			core_montaEditor("","450px","200px","","Criar classes");
-			var ins = "<p class='paragrafo' >Utilize um dos m&eacute;todos abaixo para gerar as classes que ser&atilde;o utilizadas para representar os dados no cartograma</p>" +
-			"&nbsp;<input id=i3GEOFmetaestatEditorBotao8 type='button' value='Escolher cores' />" +
-			"<br><br>";
-			ins += "&nbsp;<input id=i3GEOFmetaestatEditorBotao6 type='button' value='Divis&atilde;o em quartis' />" +
-			"&nbsp;<input id=i3GEOFmetaestatEditorBotao7 type='button' value='5 intervalos iguais' />";
-			ins += '<input type=hidden  value="" id="listaColourRampEditor"  />'; //utilizado pelo seletor de colourramp;
+			core_montaEditor("","450px","230px","","Criar classes");
+			var ins = "" +
+				"<p class='paragrafo' >&nbsp;N&uacute;mero de intervalos de classes: <input type=text value=5 id=i3GEOFmetaestatEditorNumInt size=5 /></p>" +
+				"&nbsp;<input id=i3GEOFmetaestatEditorBotao8 type='button' value='Escolher cores' />" +
+				"<p class='paragrafo' >Utilize um dos m&eacute;todos abaixo para gerar as classes que ser&atilde;o utilizadas para representar os dados no cartograma</p>" +
+				"&nbsp;<input id=i3GEOFmetaestatEditorBotao6 type='button' value='Divis&atilde;o em quartis' />" +
+				"&nbsp;<input id=i3GEOFmetaestatEditorBotao7 type='button' value='Intervalos iguais' />" +
+				"&nbsp;<input id=i3GEOFmetaestatEditorBotaoQN type='button' value='Quebras naturais' />" +
+				'<input type=hidden  value="" id="listaColourRampEditor"  />'; //utilizado pelo seletor de colourramp;
 			$i("editor_bd").innerHTML = ins;
 			new YAHOO.widget.Button(
 					"i3GEOFmetaestatEditorBotao8",
 					{onclick:{fn:
 						function(){
-							i3GEO.util.abreColourRamp("","listaColourRampEditor",5);
+							i3GEO.util.abreColourRamp("","listaColourRampEditor",$i("i3GEOFmetaestatEditorNumInt").value);
 						}
 					}}
 			);
@@ -476,7 +478,36 @@ i3GEOadmin.variaveis = {
 				{onclick:{fn:
 					function(){
 						var cores = $i("listaColourRampEditor").value,
-							p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguais5&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel,
+							p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguais&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel+"&numintervalos="+$i("i3GEOFmetaestatEditorNumInt").value,
+							callback;
+						if(cores == ""){
+							alert("Escolha as cores primeiro");
+							return;
+						}
+						callback = {
+								success:function(o){
+									try	{
+										core_carregando("desativa");
+										var no = tree.getNodeByProperty("id_classificacao",id_classificacao);
+										tree.removeChildren(no) ;
+										no.expand();
+									}
+									catch(e){core_handleFailure(e,o.responseText);}
+								},
+								failure:core_handleFailure,
+								argument: { foo:"foo", bar:"bar" }
+						};
+						core_carregando("ativa");
+						core_makeRequest(p,callback);
+					}
+				}}
+			);
+			new YAHOO.widget.Button(
+					"i3GEOFmetaestatEditorBotaoQN",
+				{onclick:{fn:
+					function(){
+						var cores = $i("listaColourRampEditor").value,
+							p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=quebrasnaturais&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel+"&numintervalos="+$i("i3GEOFmetaestatEditorNumInt").value,
 							callback;
 						if(cores == ""){
 							alert("Escolha as cores primeiro");

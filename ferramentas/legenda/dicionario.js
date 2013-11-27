@@ -563,5 +563,11 @@ i3GEOF.legenda.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		95: [{
+			pt:"Quebras naturais",
+			en:"",
+			es:"",
+			it:""
 		}]
 };

@@ -211,23 +211,30 @@ i3GEOF.legenda = {
 				{onclick:{fn: i3GEOF.legenda.representacao}}
 			);
 			$i("i3GEOlegendabotao7-button").style.width = "200px";
+
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao8",
 				{onclick:{fn: i3GEOF.legenda.valorC}}
 			);
-			$i("i3GEOlegendabotao8-button").style.width = "200px";
+			$i("i3GEOlegendabotao8-button").style.width = "120px";
 
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao9",
 				{onclick:{fn: i3GEOF.legenda.valorQ}}
 			);
-			$i("i3GEOlegendabotao9-button").style.width = "200px";
+			$i("i3GEOlegendabotao9-button").style.width = "120px";
 
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotaoQuantil",
 				{onclick:{fn: i3GEOF.legenda.valorQu}}
 			);
-			$i("i3GEOlegendabotaoQuantil-button").style.width = "200px";
+			$i("i3GEOlegendabotaoQuantil-button").style.width = "120px";
+
+			new YAHOO.widget.Button(
+				"i3GEOlegendabotaoQN",
+				{onclick:{fn: i3GEOF.legenda.valorQN}}
+			);
+			$i("i3GEOlegendabotaoQN-button").style.width = "120px";
 
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao10",
@@ -235,6 +242,7 @@ i3GEOF.legenda = {
 			);
 			if(navm)
 			{$i("i3GEOlegendabotao10-button").style.width = "0px";}
+
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao17",
 				{onclick:{fn: i3GEOF.legenda.alteraGeometriaTema}}
@@ -401,6 +409,7 @@ i3GEOF.legenda = {
 		'	<p class=paragrafo >'+$trad(40,i3GEOF.legenda.dicionario)+':'+
 		$inputText("","","i3GEOlegendanclasses","",3,"5") +
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao8 size="25" type="button" value="'+$trad(41,i3GEOF.legenda.dicionario)+'">'+
+		'	&nbsp;<input id=i3GEOlegendabotaoQN size="25" type="button" value="'+$trad(95,i3GEOF.legenda.dicionario)+'">'+
 		'	&nbsp;<input id=i3GEOlegendabotaoQuantil size="25" type="button" value="Quantil">'+
 		'	<hr><p class=paragrafo >'+$trad(42,i3GEOF.legenda.dicionario)+'</p>'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao9 size="25" type="button" value="Quartis">'+
@@ -1132,6 +1141,36 @@ i3GEOF.legenda = {
 		}
 		catch(e){i3GEO.janela.tempoMsg("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
 	},
+	/*
+	Function: valorQN
+
+	Altera a legenda do tema por meio do calculo de quebras naturais
+
+	Veja:
+
+	<ALTERACLASSE>
+	*/
+	valorQN: function(){
+		try{
+			if(i3GEOF.legenda.aguarde.visibility === "visible")
+			{return;}
+			var item = $i("i3GEOlegendaSelItem").value,
+				nclasses = $i("i3GEOlegendanclasses").value,
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteraclasse&nclasses="+nclasses+"&tema="+i3GEOF.legenda.tema+"&item="+item+"&opcao=quebrasnaturais&ignorar="+$i("i3GEOlegendaignorar").value+"&ext="+i3GEO.parametros.mapexten,
+				cp = new cpaint(),
+				fim = function(){
+					i3GEOF.legenda.aposAlterarLegenda();
+					i3GEOF.legenda.aguarde.visibility = "hidden";
+				};
+			if (item == "")
+			{i3GEO.janela.tempoMsg($trad(81,i3GEOF.legenda.dicionario));return;}
+			i3GEOF.legenda.aguarde.visibility = "visible";
+			cp.set_response_type("JSON");
+			cp.call(p,"alteraclasse",fim);
+		}
+		catch(e){i3GEO.janela.tempoMsg("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
+	},
+
 	/*
 	Function: representacao
 

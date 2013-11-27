@@ -1114,6 +1114,8 @@ Altera uma classe de um tema, aplicando uma nova classifica&ccedil;&atilde;o ou 
 		{$retorno = $m->intervalosiguais($item,$nclasses,$ignorar);}
 		if ($opcao == "quantil")
 		{$retorno = $m->quantil($item,$nclasses,$ignorar);}
+		if ($opcao == "quebrasnaturais")
+		{$retorno = $m->quebrasnaturais($item,$nclasses,$ignorar);}
 		if ($opcao == "quartis")
 		{
 			if(!isset($tipoLegenda))

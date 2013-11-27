@@ -97,8 +97,8 @@ function: salva
 Salva o mapfile atual
 
 */
- 	function salva()
- 	{
+	function salva()
+	{
 		if (connection_aborted()){exit();}
 		$this->mapa->save($this->arquivo);
 	}
@@ -286,7 +286,7 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 		{return ("erro. Nenhum valor numerico no item");}
 	}
 	/*
-	 function: quantil
+	function: quantil
 
 	Cria classes em um objeto layer com intervalos baseados no calculo de quantil
 
@@ -355,6 +355,69 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 			return ("erro. Nenhum valor numerico no item");
 		}
 	}
+	/*
+	function: quebrasnaturais
+
+	Cria classes em um objeto layer com intervalos baseados no calculo de quebras naturais
+
+	Parametros:
+
+	$item - item da tabela de atributos
+
+	$nclasses - n&uacute;mero de classes
+
+	$ignorar - valor que ser&aacute; ignorado na listagem final
+	*/
+	function quebrasnaturais($item,$nclasses,$ignorar)
+	{
+		if(!$this->layer){return "erro";}
+		$valores = $this->pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
+		if (count($valores) > 0){
+			include(dirname(__FILE__)."/../pacotes/jenks-master/jenks.php");
+			$classBreaks = getJenksClasses($nclasses, $valores);
+			//echo "<pre>";var_dump($classBreaks);exit;
+			$numclassesatual = $this->layer->numclasses;
+			//apaga todas as classes existentes
+			$classetemp = $this->layer->getClass(0);
+			$estilotemp = $classetemp->getStyle(0);
+			for ($i=0; $i < $numclassesatual; ++$i){
+			$classe = $this->layer->getClass($i);
+			$classe->set("status",MS_DELETE);
+			}
+			//adiciona as classes novas
+			for ($i=0; $i < $nclasses; ++$i){
+			$expressao = "(([".$item."]>".$classBreaks[$i].")and([".$item."]<=".$classBreaks[$i + 1]."))";
+			$nomeclasse = "> ".$classBreaks[$i]." e <= que ".($classBreaks[$i + 1]);
+			if($i == 0){
+			$expressao = "([".$item."]<=".$classBreaks[$i + 1].")";
+			$nomeclasse = "<= que ".($classBreaks[$i + 1]);
+			}
+					if($i == ($nclasses - 1)){
+					$expressao = "([".$item."] >=".$classBreaks[$i].")";
+							$nomeclasse = ">= que ".($classBreaks[$i]);
+					}
+					$classe = ms_newClassObj($this->layer);
+					$novoestilo = ms_newStyleObj($classe);
+					if ($this->layer->type == 0){
+					$novoestilo->set("symbolname","ponto");
+					$novoestilo->set("size","6");
+					}
+					$ncor = $novoestilo->color;
+					$ncor->setrgb((mt_rand(0,255)),(mt_rand(0,255)),(mt_rand(0,255)));
+					$ncor = $novoestilo->outlinecolor;
+					$ncor->setrgb(255,255,255);
+					$classe->setexpression($expressao);
+					$classe->set("name",$nomeclasse);
+					//$classe->set("title",($this->layer->name)."+".$i);
+			}
+			$this->layer->setMetaData("cache","");
+			return ("ok");
+		}
+					else{
+			return ("erro. Nenhum valor numerico no item");
+		}
+	}
+
 /*
 function: quartis
 
@@ -378,10 +441,10 @@ Include:
 		$valores = $this->pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{
-  			if(file_exists($this->locaplic."/classe_estatistica.php"))
-  			include_once($this->locaplic."/classe_estatistica.php");
-  			else
-  			include_once("classe_estatistica.php");
+				if(file_exists($this->locaplic."/classe_estatistica.php"))
+				include_once($this->locaplic."/classe_estatistica.php");
+				else
+				include_once("classe_estatistica.php");
 			$estat = new estatistica();
 			$estat->calcula($valores);
 			$calc = $estat->resultado;

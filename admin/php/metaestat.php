@@ -499,6 +499,42 @@ switch (strtoupper($funcao))
 		if(empty($limite)){
 			$limite = 10000;
 		}
+		if($tipo == "quebrasnaturais"){
+			$m = new Metaestat();
+			$dados = $m->dadosMedidaVariavel($id_medida_variavel,"",0,"",$limite);
+			$metaVariavel = $m->listaMedidaVariavel("",$id_medida_variavel);
+			$colunavalor = $metaVariavel["colunavalor"];
+			$valores = array();
+
+			foreach($dados as $d){
+				if($d[$colunavalor]){
+					$valores[] = $d[$colunavalor];
+				}
+			}
+			include(dirname(__FILE__)."/../../pacotes/jenks-master/jenks.php");
+			$intervalos = getJenksClasses($numintervalos, $valores);
+			$m->excluirRegistro("i3geoestat_classes","id_classificacao",$id_classificacao);
+			for ($i=0; $i < $numintervalos; ++$i){
+				if ($i == $numintervalos - 1){
+					$expressao = "(([".$colunavalor."]>=".$intervalos[$i].")";
+					$titulo = ">= ".$intervalos[$i];
+				}
+				else{
+					$expressao = "(([".$colunavalor."]>=".$intervalos[$i].")and([".$colunavalor."]<".$intervalos[$i+1]."))";
+					$titulo = ">= ".$intervalos[$i]." e < que ".($intervalos[$i+1]);
+				}
+				$id_classe = $m->alteraClasseClassificacao($id_classificacao);
+				if(!empty($cores)){
+					$cor = explode(",",$cores[$i]);
+					$vermelho = $cor[0];
+					$verde = $cor[1];
+					$azul = $cor[2];
+				}
+				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","255","255","255","2");
+			}
+			retornaJSON("ok");
+			exit;
+		}
 		if($tipo == "quartil"){
 			$m = new Metaestat();
 			$dados = $m->sumarioMedidaVariavel($id_medida_variavel,"","",$limite);
@@ -521,8 +557,14 @@ switch (strtoupper($funcao))
 				}
 				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","255","255","255","2");
 			}
+			retornaJSON("ok");
+			exit;
 		}
-		if($tipo == "intiguais5"){
+		//para efeitos de compatibilidade com o nome de $tipo
+		if(empty($numintervalos) || $tipo == "intiguais5"){
+			$numintervalos = 5;
+		}
+		if($tipo == "intiguais5" || $tipo == "intiguais"){
 			$m = new Metaestat();
 			$dados = $m->sumarioMedidaVariavel($id_medida_variavel,"","",$limite);
 			if($dados == false){
@@ -532,12 +574,12 @@ switch (strtoupper($funcao))
 			$min = $dados["menor"];
 			$max = $dados["maior"];
 			$item = $dados["colunavalor"];
-			$intervalo = ($max - $min) / 5;
+			$intervalo = ($max - $min) / $numintervalos;
 			//adiciona as classes novas
 			$intatual = $min;
 			$m->excluirRegistro("i3geoestat_classes","id_classificacao",$id_classificacao);
-			for ($i=0; $i < 5; ++$i){
-				if ($i == 5 - 1){
+			for ($i=0; $i < $numintervalos; ++$i){
+				if ($i == $numintervalos - 1){
 					$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<=".($intatual+$intervalo)."))";
 				}
 				else{
@@ -554,18 +596,24 @@ switch (strtoupper($funcao))
 				}
 				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","255","255","255","2");
 			}
+			retornaJSON("ok");
+			exit;
 		}
 		//o menor e o maior valor sao enviados como parametro ($min e $max)
-		if($tipo == "intiguais5mm"){
+		//para efeitos de compatibilidade com o nome de $tipo
+		if(empty($numintervalos) || $tipo == "intiguais5mm"){
+			$numintervalos = 5;
+		}
+		if($tipo == "intiguais5mm" || $tipo == "intiguaismm"){
 			$m = new Metaestat();
 			$metaVariavel = $m->listaMedidaVariavel("",$id_medida_variavel);
 			$item = $metaVariavel["colunavalor"];
-			$intervalo = ($max - $min) / 5;
+			$intervalo = ($max - $min) / $numintervalos;
 			//adiciona as classes novas
 			$intatual = $min;
 			$m->excluirRegistro("i3geoestat_classes","id_classificacao",$id_classificacao);
-			for ($i=0; $i < 5; ++$i){
-				if ($i == 5 - 1){
+			for ($i=0; $i < $numintervalos; ++$i){
+				if ($i == $numintervalos - 1){
 					$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<=".($intatual+$intervalo)."))";
 				}
 				else{
@@ -582,6 +630,8 @@ switch (strtoupper($funcao))
 				}
 				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","255","255","255","2");
 			}
+			retornaJSON("ok");
+			exit;
 		}
 		retornaJSON("ok");
 		exit;

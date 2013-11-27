@@ -425,7 +425,10 @@ class Metaestat{
 			$sqlDadosMedidaVariavel = "SELECT $sqlWMST as dimtempo,".$dados["colunaidgeo"]." AS cod_regiao,".$dados["colunavalor"]." AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
 		}
 		if(!empty ($filtro)){
-			$sqlDadosMedidaVariavel .=	" WHERE ".$filtro;
+			$sqlDadosMedidaVariavel .=	" WHERE ".$filtro . "AND ".$dados["colunavalor"]." IS NOT NULL ";
+		}
+		else{
+			$sqlDadosMedidaVariavel .=	" WHERE ".$dados["colunavalor"]." IS NOT NULL ";
 		}
 		if($suportaWMST != true){
 			$sqlDadosMedidaVariavel .= " /*FA*//*FA*/ /*FAT*//*FAT*/ GROUP BY cod_regiao ";
