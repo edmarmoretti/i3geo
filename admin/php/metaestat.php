@@ -89,7 +89,8 @@ $funcoesEdicao = array(
 	"EXCLUIATRIBUTOSMEDIDAVARIAVEL",
 	"REGIAO2SHP",
 	"ESQUEMASCONEXAO",
-	"TABELASESQUEMA"
+	"TABELASESQUEMA",
+	"ALTERAESTILOSCLASSIFICACAO"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	//se a funcao esta no array eh feita a verificacao se o usuario esta logado e se ele esta em um grupo que
@@ -636,6 +637,38 @@ switch (strtoupper($funcao))
 		retornaJSON("ok");
 		exit;
 	break;
+	case "ALTERAESTILOSCLASSIFICACAO":
+		if($tipo == "tamanho"){
+			$m = new Metaestat();
+			$classes = $m->listaClasseClassificacao($id_classificacao);
+			$nclasses = count($classes);
+			$tamanhoini -= $aumentar;
+			for($i=0;$i<$nclasses;$i++){
+				$c = $classes[$i];
+				$m->alteraClasseClassificacao(
+					$id_classificacao,
+					$c["id_classe"],
+					$c["titulo"],
+					$c["expressao"],
+					$c["vermelho"],
+					$c["verde"],
+					$c["azul"],
+					$tamanhoini + $aumentar,
+					$c["simbolo"],
+					$c["overmelho"],
+					$c["overde"],
+					$c["oazul"],
+					$tamanhoini + $aumentar
+				);
+				$aumentar += $aumentar;
+			}
+			retornaJSON("ok");
+			exit;
+		}
+		retornaJSON("ok");
+		exit;
+	break;
+
 	/*
 	Valor: ALTERACLASSECLASSIFICACAO
 

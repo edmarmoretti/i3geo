@@ -434,8 +434,44 @@ i3GEOadmin.variaveis = {
 				"&nbsp;<input id=i3GEOFmetaestatEditorBotao6 type='button' value='Divis&atilde;o em quartis' />" +
 				"&nbsp;<input id=i3GEOFmetaestatEditorBotao7 type='button' value='Intervalos iguais' />" +
 				"&nbsp;<input id=i3GEOFmetaestatEditorBotaoQN type='button' value='Quebras naturais' />" +
+				"&nbsp;<p class=paragrafo >Opera&ccedil;&otilde;es de ajuste das classes</p>"+
+				"&nbsp;<input id=i3GEOFmetaestatEditorBotaoTAM type='button' value='Calcula tamanho' />" +
+				"<div style='left:140px;position:relative;top:-30px;width:250px;'>" +
+				"	&nbsp;Iniciar: <input alt='tamanho aplicado a primeira classe' type=text value=6 size=1 id='i3GEOFmetaestatEditorTamanho'/>" +
+				"	&nbsp;Aumentar: <input alt='valor que sera somado ao segundo em diante' type=text value=10 size=1 id='i3GEOFmetaestatEditorAumentar'/>" +
+				"</div>" +
 				'<input type=hidden  value="" id="listaColourRampEditor"  />'; //utilizado pelo seletor de colourramp;
 			$i("editor_bd").innerHTML = ins;
+			
+			
+			new YAHOO.widget.Button(
+					"i3GEOFmetaestatEditorBotaoTAM",
+					{onclick:{fn:
+						function(){
+							var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=ALTERAESTILOSCLASSIFICACAO&tipo=tamanho&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel,
+								tamanhoini = $i("i3GEOFmetaestatEditorTamanho").value,
+								aumentar = $i("i3GEOFmetaestatEditorAumentar").value,
+								callback;
+							callback = {
+									success:function(o){
+										try	{
+											core_carregando("desativa");
+											var no = tree.getNodeByProperty("id_classificacao",id_classificacao);
+											tree.removeChildren(no) ;
+											no.expand();
+										}
+										catch(e){core_handleFailure(e,o.responseText);}
+									},
+									failure:core_handleFailure,
+									argument: { foo:"foo", bar:"bar" }
+							};
+							core_carregando("ativa");
+							p += "&tamanhoini=" + tamanhoini +
+								"&aumentar=" + aumentar;
+							core_makeRequest(p,callback);							
+						}
+					}}
+			);
 			new YAHOO.widget.Button(
 					"i3GEOFmetaestatEditorBotao8",
 					{onclick:{fn:

@@ -1588,7 +1588,6 @@ class Metaestat{
 			$expressao = str_replace("''",'',$expressao);
 			$expressao = str_replace("##","'",$expressao);
 		}
-
 		$this->testaNumerico(array($id_classificacao,$id_classe));
 		try	{
 			if($id_classe != ""){
