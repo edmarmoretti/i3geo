@@ -1312,7 +1312,7 @@ class Atributos
 			//identificador que marca o tipo de dados que podem ser salvos
 			$tiposalva = "";
 			//verifica se e editavel no metaestat
-			if($layer->getmetadata("METAESTATEDITAVEL") == "SIM"){
+			if($layer->getmetadata("EDITAVEL") == "SIM"){
 				//verifica login
 				session_write_close();
 				session_name("i3GeoLogin");
@@ -1334,31 +1334,30 @@ class Atributos
 						if($editavel == "sim"){
 							$editavel = "nao";
 							$id_medida_variavel = $layer->getMetaData("METAESTAT_ID_MEDIDA_VARIAVEL");
+							$colunaidunico = $layer->getMetaData("COLUNAIDUNICO");
+							$codigo_tipo_regiao = $layer->getMetaData("METAESTAT_CODIGO_TIPO_REGIAO");
+
 							if($id_medida_variavel != ""){
 								include_once(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
 								$m = new Metaestat();
 								$medidaVariavel = $m->listaMedidaVariavel("",$id_medida_variavel);
 								$editavel = $medidaVariavel["colunavalor"];
-								$colunaidunico = $medidaVariavel["colunaidunico"];
-								$codigo_tipo_regiao = $medidaVariavel["codigo_tipo_regiao"];
 								$tiposalva = "medida_variavel";
 							}
-							$codigo_tipo_regiao = $layer->getMetaData("METAESTAT_CODIGO_TIPO_REGIAO");
+
 							if($codigo_tipo_regiao != ""){
 								include_once(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
 								$m = new Metaestat();
 								$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
-								$editavel = "todos";//$regiao["colunanomeregiao"];
-								$colunaidunico = $regiao["identificador"];
-								$codigo_tipo_regiao = $codigo_tipo_regiao;
+								//todas as colunas podem ser alteradas
+								$editavel = "todos";
 								$tiposalva = "regiao";
 							}
 						}
 					}
 				}
-
 			}
-			$final[] = array("tiposalva"=>$tiposalva,"nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel,"colunaidunico"=>$colunaidunico,"id_medida_variavel"=>$id_medida_variavel,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
+			$final[] = array("tema"=>$tema,"tiposalva"=>$tiposalva,"nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel,"colunaidunico"=>$colunaidunico,"id_medida_variavel"=>$id_medida_variavel,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
 		}
 		return $final;
 	}
@@ -2156,7 +2155,7 @@ class Atributos
 		}
 		//se o usuario estiver logado e o tema for editavel, a lista de itens
 		//nao usa os alias para permitir a edicao dos dados
-		if(!empty($_COOKIE["i3geocodigologin"]) && $layer->getmetadata("METAESTATEDITAVEL") == "SIM"){
+		if(!empty($_COOKIE["i3geocodigologin"]) && $layer->getmetadata("EDITAVEL") == "SIM"){
 			$itens = "";
 			$itensdesc = "";
 			$lks = "";

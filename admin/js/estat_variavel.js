@@ -425,10 +425,25 @@ i3GEOadmin.variaveis = {
 			}
 			if(redesenha){tree.draw();}
 		},
+		sturges: function(id_medida_variavel,objid){
+			var p = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=sumarioMedidaVariavel&formato=json&id_medida_variavel='+id_medida_variavel,
+				callback = {
+					success:function(o){
+						try	{
+							$i(objid).value = parseInt(YAHOO.lang.JSON.parse(o.responseText).sturges,10);
+						}
+						catch(e){core_handleFailure(e,o.responseText);}
+					},
+					failure:core_handleFailure,
+					argument: { foo:"foo", bar:"bar" }
+				};
+			core_makeRequest(p,callback);
+		},
 		classesAuto: function(id_classificacao,id_medida_variavel){
 			core_montaEditor("","450px","230px","","Criar classes");
 			var ins = "" +
-				"<p class='paragrafo' >&nbsp;N&uacute;mero de intervalos de classes: <input type=text value=5 id=i3GEOFmetaestatEditorNumInt size=5 /></p>" +
+				"<p class='paragrafo' >&nbsp;N&uacute;mero de intervalos de classes: <input type=text value=5 id=i3GEOFmetaestatEditorNumInt size=5 />" +
+				"<img src='../imagens/accessories-calculator.png' title='Calcular por Sturges' onclick='i3GEOadmin.variaveis.classificacao.sturges("+id_medida_variavel+",\"i3GEOFmetaestatEditorNumInt\")' style='position:relative;cursor:pointer;top:2px'> </p>" +
 				"&nbsp;<input id=i3GEOFmetaestatEditorBotao8 type='button' value='Escolher cores' />" +
 				"<p class='paragrafo' >Utilize um dos m&eacute;todos abaixo para gerar as classes que ser&atilde;o utilizadas para representar os dados no cartograma</p>" +
 				"&nbsp;<input id=i3GEOFmetaestatEditorBotao6 type='button' value='Divis&atilde;o em quartis' />" +

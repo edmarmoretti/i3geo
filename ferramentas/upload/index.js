@@ -1,5 +1,4 @@
 
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Upload de arquivo shapefile
 

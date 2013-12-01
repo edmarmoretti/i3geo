@@ -2726,4 +2726,23 @@ function restauraMapaAdmin($id_mapa,$dir_tmp){
 	$dbhw = null;
 	return $base;
 }
+//
+//converte uma string de conexao do mapserver em um array com os componentes da conexao
+//
+function stringCon2Array($stringCon){
+	$lista = explode(" ",$stringCon);
+	$con = array();
+	foreach($lista as $l){
+		$teste = explode("=",$l);
+		$con[trim($teste[0])] = trim($teste[1]);
+	}
+	$c = array(
+		"dbname" => $con["dbname"],
+		"host" => $con["host"],
+		"port" => $con["port"],
+		"user" => $con["user"],
+		"password" => $con["password"]
+	);
+	return $c;
+}
 ?>

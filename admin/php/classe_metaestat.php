@@ -661,7 +661,10 @@ class Metaestat{
 			$dados[] = '		METAESTAT_ID_MEDIDA_VARIAVEL "'.$id_medida_variavel.'"';
 			//marca se a tabela e editavel, verificando se esta no esquema padrao
 			if($meta["esquemadb"] == "i3geo_metaestat"){
-				$dados[] = '		METAESTATEDITAVEL "SIM"';
+				$dados[] = '		EDITAVEL "SIM"';
+				$dados[] = '		COLUNAIDUNICO "'.$meta["colunaidunico"].'"';
+				$dados[] = '		TABELAEDITAVEL "'.$meta["tabela"].'"';
+				$dados[] = '		ESQUEMATABELAEDITAVEL "'.$meta["esquemadb"].'"';
 			}
 			if(count($sql["alias"]) > 0){
 				$dados[] = '	ITENS "'.implode(",",$sql["colunas"]).'"';
@@ -830,7 +833,14 @@ class Metaestat{
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
 			if($meta["esquemadb"] == "i3geo_metaestat"){
-				$dados[] = '		METAESTATEDITAVEL "SIM"';
+				$colunaSerial = $this->listaTipoRegiaoSerial($codigo_tipo_regiao);
+				if(!empty($colunaSerial)){
+					$dados[] = '		EDITAVEL "SIM"';
+					$dados[] = '		COLUNAIDUNICO "'.$colunaSerial.'"';
+					$dados[] = '		TABELAEDITAVEL "'.$meta["tabela"].'"';
+					$dados[] = '		ESQUEMATABELAEDITAVEL "'.$meta["esquemadb"].'"';
+					$dados[] = '		COLUNAGEOMETRIA "'.$colunageo.'"';
+				}
 			}
 			$dados[] = '		TIP "'.$meta["colunanomeregiao"].'"';
 			if(count($itens) == count($apelidos)){
@@ -1051,6 +1061,7 @@ class Metaestat{
 			$min = "";
 			$max = "";
 			$quantidade = count($valores);
+			$sturges = 1 + (3.322 * (log10($quantidade)));
 			$quartis = array();
 			if($un["permitesoma"] == "1"){
 				$soma = array_sum($valores);
@@ -1102,7 +1113,8 @@ class Metaestat{
 						"histograma"=>$histograma,
 						"grupos"=>$agrupamento,
 						"unidademedida"=>$un,
-						"quartis"=>$quartis
+						"quartis"=>$quartis,
+						"sturges"=>$sturges
 					);
 		}
 		return false;
@@ -1982,6 +1994,20 @@ class Metaestat{
 		}
 		$sql .= "ORDER BY nome_tipo_regiao";
 		return $this->execSQL($sql,$codigo_tipo_regiao);
+	}
+	/**
+	 * Obtem de um tipo de regiao a coluna do tipo serial
+	 * @param codigo do tipo de regiao
+	 */
+	function listaTipoRegiaoSerial($codigo_tipo_regiao){
+		$sql = "select * from ".$this->esquemaadmin."i3geoestat_tipo_regiao WHERE codigo_tipo_regiao = $codigo_tipo_regiao ";
+		$regiao = $this->execSQL($sql,$codigo_tipo_regiao);
+		$nome_esquema = $regiao["esquemadb"];
+		$nome_tabela = $regiao["tabela"];
+		$sql = "SELECT a.attname as coluna FROM pg_class s JOIN pg_depend d ON d.objid = s.oid JOIN pg_class t ON d.objid = s.oid AND d.refobjid = t.oid JOIN pg_attribute a ON (d.refobjid, d.refobjsubid) = (a.attrelid, a.attnum) JOIN pg_namespace n ON n.oid = s.relnamespace WHERE s.relkind = 'S' AND n.nspname = '$nome_esquema' AND t.relname = '$nome_tabela'";
+		$colunas = $this->execSQLDB($regiao["codigo_estat_conexao"],$sql);
+		$colunas = $colunas[0];
+		return $colunas["coluna"];
 	}
 	/**
 	 * Lista os dados de agregacao de uma regiao pai

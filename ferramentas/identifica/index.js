@@ -678,7 +678,7 @@ i3GEOF.identifica = {
 						}
 						//opcao para apagar o registro
 						if(idreg != "" && retorno[i].editavel == "todos"){
-							res += "<a href='#' onclick='i3GEOF.identifica.apagaRegiao("+retorno[i].codigo_tipo_regiao+",\""+idreg+"\")' >"+$trad(19,i3GEOF.identifica.dicionario)+"</a><br>";
+							res += "<a href='#' onclick='i3GEOF.identifica.apagaRegiao(\""+retorno[i].tema+"\",\""+idreg+"\")' >"+$trad(19,i3GEOF.identifica.dicionario)+"</a><br>";
 						}
 						for(k=0;k<nitens;k++){
 							tip = "&nbsp;&nbsp;";
@@ -689,8 +689,8 @@ i3GEOF.identifica = {
 								if(retorno[i].tiposalva == "regiao"){
 									retorno[i].id_medida_variavel = 0;
 								}
-								idsalva = "idsalva"+resultados[j][k].item+retorno[i].tiposalva+retorno[i].codigo_tipo_regiao+"_"+retorno[i].id_medida_variavel+"_"+idreg;
-								paramsalva = retorno[i].id_medida_variavel+","+idreg+",\""+resultados[j][k].item+"\","+retorno[i].codigo_tipo_regiao+",\"\",\""+retorno[i].tiposalva+"\"";
+								idsalva = "idsalva"+retorno[i].tema+"_"+idreg+"_"+resultados[j][k].item+"_"+retorno[i].tiposalva;
+								paramsalva = "\""+retorno[i].tema+"\","+idreg+",\""+resultados[j][k].item+"\",\""+retorno[i].tiposalva+"\"";
 								textovalor = "<br><img title='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' style='margin-right:2px;position:relative;top:3px;width:12px;'>" +
 									"<img onclick='i3GEOF.identifica.salvaDados("+paramsalva+")' title='Salvar' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/media-floppy.png' style='cursor:pointer;margin-right:2px;position:relative;top:3px;width:12px;'>" +
 									"<input id='"+idsalva+"' type=text value='"+textovalor+"' class=digitar style='widh:210px' />";
@@ -725,7 +725,7 @@ i3GEOF.identifica = {
 					if(retorno[i].tiposalva == "regiao" && parseInt(camada.type,10) == 0){
 						//opcao para adicionar um ponto
 						res += $trad(17,i3GEOF.identifica.dicionario) +
-						"<br><a href='#' onclick='i3GEOF.identifica.adicionaPontoRegiao("+retorno[i].codigo_tipo_regiao+")' >"+$trad(18,i3GEOF.identifica.dicionario)+"</a>";
+						"<br><a href='#' onclick='i3GEOF.identifica.adicionaPontoRegiao(\""+i3GEO.temaAtivo+"\")' >"+$trad(18,i3GEOF.identifica.dicionario)+"</a>";
 					}
 					else{
 						res += $trad(17,i3GEOF.identifica.dicionario);
@@ -737,9 +737,9 @@ i3GEOF.identifica = {
 			$i("i3GEOidentificaocorrencia").innerHTML=res;
 		}
 	},
-	adicionaPontoRegiao: function(codigo_tipo_regiao){
+	adicionaPontoRegiao: function(tema){
 		//
-		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mantemDadosRegiao",
+		var p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=adicionaGeometria&g_sid="+i3GEO.configura.sid,
 			temp = function(retorno){
 				i3GEO.janela.fechaAguarde("aguardeSalvaPonto");
 				i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
@@ -748,26 +748,26 @@ i3GEOF.identifica = {
 		i3GEO.janela.AGUARDEMODAL = true;
 		i3GEO.janela.abreAguarde("aguardeSalvaPonto","Adicionando...");
 		i3GEO.janela.AGUARDEMODAL = false;
-		cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&wkt=POINT("+i3GEOF.identifica.x+" "+i3GEOF.identifica.y+")");
+		cpJSON.call(p,"foo",temp,"&tema="+tema+"&wkt=POINT("+i3GEOF.identifica.x+" "+i3GEOF.identifica.y+")");
 	},
-	apagaRegiao: function(codigo_tipo_regiao,idreg){
+	apagaRegiao: function(tema,idreg){
 		var excluir = function(){
-				var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mantemDadosRegiao&tipo=excluir",
+				var p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=excluiRegistro&g_sid="+i3GEO.configura.sid,
 					temp = function(){
-						i3GEO.janela.fechaAguarde("aguardeRmovendoPonto");
+						i3GEO.janela.fechaAguarde("aguardeRemovendo");
 						i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
 						i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);
 					};
 				i3GEO.janela.AGUARDEMODAL = true;
-				i3GEO.janela.abreAguarde("aguardeRmovendoPonto","Excluindo...");
+				i3GEO.janela.abreAguarde("aguardeRemovendo","Excluindo...");
 				i3GEO.janela.AGUARDEMODAL = false;
-				cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador="+idreg);
+				cpJSON.call(p,"foo",temp,"&tema="+tema+"&identificador="+idreg);
 			};
 		i3GEO.janela.confirma($trad(20,i3GEOF.identifica.dicionario),"",$trad(21,i3GEOF.identifica.dicionario),$trad(22,i3GEOF.identifica.dicionario),excluir);
 	},
-	salvaDados: function(id_medida_variavel,idreg,coluna,codigo_tipo_regiao,tema,tiposalva){
-		var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=salvaAtributosMedidaVariavel",
-			idvalor = $i("idsalva"+coluna+tiposalva+codigo_tipo_regiao+"_"+id_medida_variavel+"_"+idreg),
+	salvaDados: function(tema,idreg,coluna,tiposalva){
+		var p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=salvaRegistro&g_sid="+i3GEO.configura.sid,
+			idvalor = $i("idsalva"+tema+"_"+idreg+"_"+coluna+"_"+tiposalva),
 			temp = function(retorno){
 				i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
 				i3GEO.Interface.atualizaTema("",i3GEOF.identifica.tema);
@@ -777,13 +777,7 @@ i3GEOF.identifica = {
 			i3GEO.janela.AGUARDEMODAL = true;
 			i3GEO.janela.abreAguarde("aguardeSalvaAtributos","Salvando...");
 			i3GEO.janela.AGUARDEMODAL = false;
-			if(tiposalva === "regiao"){
-				p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=salvaAtributosTipoRegiao";
-				cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+idreg+"&colunas="+coluna+"&valores="+idvalor.value);
-			}
-			else{
-				cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao=&id_medida_variavel="+id_medida_variavel+"&colunas="+coluna+"&valores="+idvalor.value+"&idsunicos="+idreg);
-			}
+			cpJSON.call(p,"foo",temp,"&tema="+tema+"&coluna="+coluna+"&valor="+idvalor.value+"&identificador="+idreg);
 		}
 		else{
 			alert("ocorreu um erro");
