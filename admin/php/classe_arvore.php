@@ -1,6 +1,6 @@
 <?php
 /*
- Title: classe_arvore.php
+Title: classe_arvore.php
 
 Fun&ccedil;&otilde;es para montagem da &aacute;rvore de temas
 
@@ -31,7 +31,7 @@ Arquivo:
 i3geo/admin/php/classe_arvore.php
 */
 /*
- Classe: Arvore
+Classe: Arvore
 
 Classe utilizada para compor a &aacute;rvore de temas ou obter dados espec&iacute;ficos da &aacute;rvore.
 
@@ -55,7 +55,7 @@ class Arvore
 	//temas de um subgrupo
 	//public $sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
 	/*
-	 Function: __construct
+	Function: __construct
 
 	Cria um objeto Arvore
 
@@ -132,9 +132,9 @@ class Arvore
 		$this->dbhw = null;
 	}
 	/*
-	 Function: validaTemas
+	Function: validaTemas
 
-	 Remove de um array os temas que nao sao permitidos ao usuario atualmente logado
+	Remove de um array os temas que nao sao permitidos ao usuario atualmente logado
 	 */
 	function validaTemas($linhas,$id){
 		$res = array();
@@ -146,7 +146,7 @@ class Arvore
 		return $res;
 	}
 	/*
-	 Function: pegaListaDeMenus
+	Function: pegaListaDeMenus
 
 	Retorna a lista de menus
 
@@ -192,7 +192,7 @@ class Arvore
 		return $resultado;
 	}
 	/*
-	 Function: procuraTemas
+	Function: procuraTemas
 
 	Localiza temas conforme uma palavra de busca
 
@@ -339,7 +339,7 @@ class Arvore
 		return $final;
 	}
 	/*
-	 Function: procuraTemasEstrela
+	Function: procuraTemasEstrela
 
 	Localiza temas que t&ecirc;m um determinado n&uacute;mero (n&iacute;vel) de estrelas
 
@@ -463,7 +463,7 @@ class Arvore
 		return $final;
 	}
 	/*
-	 Function: pegaGruposMenu
+	Function: pegaGruposMenu
 
 	Retorna a lista de grupos de um menu
 
@@ -482,7 +482,7 @@ class Arvore
 		return array("raiz"=>$raiz,"grupos"=>$grupos);
 	}
 	/*
-	 Function: pegaSubgruposGrupo
+	Function: pegaSubgruposGrupo
 
 	Retorna a lista de subgrupos de um grupo
 
@@ -504,7 +504,26 @@ class Arvore
 		return array("raiz"=>$raiz,"subgrupos"=>$subgrupos);
 	}
 	/*
-	 Function: pegaTemasRaizGrupo
+	Function: pegaTemasRaizMenu
+
+	Retorna a lista de temas da raiz de um menu
+
+	Parametros:
+
+	id_menu {string}
+
+	Return:
+
+	{array}
+	*/
+	function pegaTemasRaizMenu($id_menu)
+	{
+		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 order by ordem");
+		$raiz = $this->validaTemas($raiz,"codigo_tema");
+		return $raiz;
+	}
+	/*
+	Function: pegaTemasRaizGrupo
 
 	Retorna a lista de temas da raiz de um grupo
 
@@ -525,7 +544,7 @@ class Arvore
 		return $raiz;
 	}
 	/*
-	 Function: pegaTema
+	Function: pegaTema
 
 	Retorna os dados de um tema
 
@@ -551,7 +570,7 @@ class Arvore
 		}
 	}
 	/*
-	 Function: pegaTemaPorCodigo
+	Function: pegaTemaPorCodigo
 
 	Retorna os dados de um tema buscando por codigo
 
@@ -577,7 +596,7 @@ class Arvore
 		}
 	}
 	/*
-	 Function: pegaTemasSubGrupo
+	Function: pegaTemasSubGrupo
 
 	Retorna os temas de um subgrupo
 
@@ -596,7 +615,18 @@ class Arvore
 		return $temas;
 	}
 	/*
-	 Function: formataGruposMenu
+	Function: formataMenus
+
+	Retorna os menus e temas na raiz de um menu, formatados no padr&atilde;o da &aacute;rvore
+
+	Return:
+
+	{array}
+	*/
+	function formataMenus(){
+	}
+	/*
+	Function: formataGruposMenu
 
 	Retorna os grupos e temas na raiz de um menu, formatados no padr&atilde;o da &aacute;rvore
 
@@ -689,7 +719,7 @@ class Arvore
 		return($grupos);
 	}
 	/*
-	 Function: formataSubgruposGrupo
+	Function: formataSubgruposGrupo
 
 	Retorna os subgrupos e temas na raiz de um grupo, formatados no padr&atilde;o da &aacute;rvore
 
@@ -751,7 +781,7 @@ class Arvore
 		return (array("subgrupo"=>$subgrupos,"temasgrupo"=>$temasraiz));
 	}
 	/*
-	 Function: formataTemasSubgrupo
+	Function: formataTemasSubgrupo
 
 	Retorna os temas de um subgrupo, formatados no padr&atilde;o da &aacute;rvore
 
@@ -781,7 +811,7 @@ class Arvore
 		return $temas;
 	}
 	/*
-	 Function: formataTema
+	Function: formataTema
 
 	Retorna os dados de um tema, formatados no padr&atilde;o da &aacute;rvore
 
@@ -827,7 +857,7 @@ class Arvore
 		return array("tipoa_tema"=>$recordset["tipoa_tema"],"publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc,"kmz"=>$kmz);
 	}
 	/*
-	 Function: execSQL
+	Function: execSQL
 
 	Executa um SQL no banco de administra&ccedil;&atilde;o
 
@@ -853,7 +883,7 @@ class Arvore
 		}
 	}
 	/*
-	 Verifica se uma string ocorre em um array
+	Verifica se uma string ocorre em um array
 	*/
 	function verificaOcorrencia($procurar,$em)
 	{

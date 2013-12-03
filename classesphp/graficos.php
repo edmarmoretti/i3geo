@@ -723,7 +723,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 					$v["centroide"] = "POINT(".$c->x." ".$c->y.")";
 				}
 				//pega a cor da classe onde cai o registro
-				if($nclasses > 0){
+				if($nclasses > 0 && $versao >= 6){
 					$classe = $layer->getclass($layer->getClassIndex($shape));
 					$cor = $classe->getstyle(0)->color;
 					$v["cores"] = $cor->red." ".$cor->green." ".$cor->blue;

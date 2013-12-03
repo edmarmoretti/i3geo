@@ -113,8 +113,16 @@ array
 		include_once($this->locaplic."/admin/php/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
 		$resultado = $arvore->pegaListaDeMenus($this->perfil);
+		$final = array();
+		//pega os temas na raiz
+		foreach($resultado as $r){
+			$temasR = $arvore->pegaTemasRaizMenu($r["idmenu"]);
+			$r["temas"] = $temasR;
+			$final[] = $r;
+		}
+
 		unset($arvore);
-		return ($resultado);
+		return ($final);
 	}
 /*
 function: pegaListaDeGrupos
