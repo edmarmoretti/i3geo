@@ -72,17 +72,20 @@ i3GEO.analise = {
 		*/
 		linhaDoTempo: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.linhaDoTempo()");}
-			i3GEO.janela.cria("450px","300px",i3GEO.configura.locaplic+"/ferramentas/linhadotempo/index.php","","","Linha do tempo <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=88' >&nbsp;&nbsp;&nbsp;</a>");
+			i3GEO.janela.cria("450px","350px",i3GEO.configura.locaplic+"/ferramentas/linhadotempo/index.php","","","Linha do tempo <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=88' >&nbsp;&nbsp;&nbsp;</a>");
 			atualizaLinhaDoTempo = function(){
-				var doc = "";
+				var doc = "", ifr = "";
 				try{
+					ifr = $i("wdocai");
 					if (navn){
-						if ($i("wdocai"))
-						{doc = $i("wdocai").contentDocument;}
+						if (ifr){
+							doc = ifr.contentDocument;
+						}
 					}
 					else{
-						if(document.frames("wdocai"))
-						{doc = document.frames("wdocai").document;}
+						if(document.frames("wdocai")){
+							doc = document.frames("wdocai").document;
+						}
 					}
 					doc.getElementById("tl") ? window.parent.wdocai.carregaDados() : i3GEO.eventos.NAVEGAMAPA.remove("atualizaLinhaDoTempo()");
 				}
@@ -93,6 +96,9 @@ i3GEO.analise = {
 			};
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaLinhaDoTempo()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("atualizaLinhaDoTempo()");}
+			var ifr = $i("wdocai");
+			//ifr.style.height = "75%";
+			ifr.style.width = "100%";
 		},
 		/*
 		Function: perfil

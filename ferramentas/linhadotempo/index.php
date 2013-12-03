@@ -15,9 +15,9 @@ Timeline_parameters='bundle=true';
 </style>
 </head>
 <body onload="inicializa()" onresize="onResize()">
-<div class=paragrafo id="combotemas" ></div>
+<div class=paragrafo id="combotemas" >Aguarde</div>
 <div class=paragrafo id="totaleventos" style="position:absolute;top:30px;left:200px;"></div>
-<div class=paragrafo id="tl" style="height: 220px; border: 1px solid #aaa;overflow-x:hidden; overflow-y:scroll"> </div>
+<div class=paragrafo id="tl" style="height: 85%;width:100%; border: 1px solid #aaa;overflow-x:hidden; overflow-y:scroll"> </div>
 
 <script>
 /*
@@ -115,7 +115,7 @@ Cria o objeto bandInfos com os parâmetros necess&aacute;rios para a cria&ccedil;
 */
 function bandas(){
 	tl_el = $i("tl");
-	tl_el.innerHTML = "<span style=color:red; >"+$trad("o1")+"</span>";
+	tl_el.innerHTML = "<span>"+$trad("o1")+"</span>";
 	var theme1 = Timeline.ClassicTheme.create();
 	theme1.event.bubble.width = 250;
 	if(navn){
@@ -167,14 +167,24 @@ Veja:
 */
 function carregaDados(){
 	//alert(window.parent.i3GEO.parametros.mapexten)
-	tl_el.innerHTML = "<span style=color:red; >"+$trad("o1")+"</span>";
+	tl_el.innerHTML = "<span>"+$trad("o1")+"</span>";
 	var retorna = function(retorno){
 		//eventSource1.clear();
-		$i("totaleventos").innerHTML = retorno.data.events.length+" eventos";
-		tl = Timeline.create(tl_el, bandInfos, Timeline.HORIZONTAL);
-		eventSource1.loadJSON(retorno.data, '.'); // The data was stored into the
-		tl.layout(); // display the Timeline
-		tl.getBand(0).scrollToCenter(Timeline.DateTime.parseGregorianDateTime(retorno.data.maiorano));
+		if(retorno && retorno.data && retorno.data.events){
+			if(retorno.data.events.length == 0){
+				tl_el.innerHTML = "<span>"+$trad("x42")+" "+$i("tema").value+"</span>";
+			}
+			else{
+				$i("totaleventos").innerHTML = retorno.data.events.length+" eventos";
+				tl = Timeline.create(tl_el, bandInfos, Timeline.HORIZONTAL);
+				eventSource1.loadJSON(retorno.data, '.'); // The data was stored into the
+				tl.layout(); // display the Timeline
+				tl.getBand(0).scrollToCenter(Timeline.DateTime.parseGregorianDateTime(retorno.data.maiorano));
+			}
+		}
+		else{
+			tl_el.innerHTML = "<span>"+$trad("x42")+" "+$i("tema").value+"</span>";
+		}
 	}
 	var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=dadosLinhaDoTempo&g_sid="+window.parent.i3GEO.configura.sid+"&tema="+$i("tema").value+"&ext="+window.parent.i3GEO.parametros.mapexten;
 	cpJSON.call(p,"void",retorna);
@@ -253,13 +263,13 @@ Function: onResize
 Modifica o tamanho da linha do tempo se a janela da ferramenta tiver seu tamanho modificado
 */
 function onResize() {
-     if (resizeTimerID == null) {
-         resizeTimerID = window.setTimeout(function() {
-             resizeTimerID = null;
-             tl.layout();
-         }, 500);
-     }
- }
+		if (resizeTimerID != undefined && resizeTimerID == null) {
+				resizeTimerID = window.setTimeout(function() {
+						resizeTimerID = null;
+						tl.layout();
+				}, 500);
+		}
+}
 </script>
 </body>
 
