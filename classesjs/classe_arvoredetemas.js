@@ -2018,6 +2018,7 @@ i3GEO.arvoreDeTemas = {
 				}
 			}
 			$i(idDestino).innerHTML = ins+"</select>";
+			return retorno.data;
 		};
 		i3GEO.php.pegalistademenus(combo);
 	},
@@ -2140,7 +2141,7 @@ i3GEO.arvoreDeTemas = {
 			if(typeof(retorno.data) !== 'undefined')
 			{retorno = retorno.data.temas;}
 			sg = retorno.length;
-			for (ig=0;ig<sg; ig+=1){
+			for (ig=0;ig<sg; ig++){
 				ins += "<option value="+retorno[ig].tid+" >"+retorno[ig].nome+"</option>";
 			}
 			$i(idDestino).innerHTML = ins+"</select>";

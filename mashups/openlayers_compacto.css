@@ -528,6 +528,18 @@ background-position:-725px 0;
 .olControlEditingToolbar1 .editorOLlistagItemActive {
 background-position:-725px -28px;
 }
+.olControlEditingToolbar1 .editorOLzoominItemActive {
+background-position:-754px -28px;
+}
+.olControlEditingToolbar1 .editorOLzoominItemInactive {
+background-position:-754px -0px;
+}
+.olControlEditingToolbar1 .editorOLzoomoutItemActive {
+background-position:-783px -28px;
+}
+.olControlEditingToolbar1 .editorOLzoomoutItemInactive {
+background-position:-783px -0px;
+}
 .olControlEditingToolbar1 {
 width:750px;
 float:right;

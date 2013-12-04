@@ -3086,6 +3086,8 @@ botoes: {
 'pan':true,
 'zoombox':true,
 'zoomtot':true,
+'zoomin': true,
+'zoomout': true,
 'legenda':true,
 'distancia':true,
 'area':true,
@@ -3239,7 +3241,9 @@ i3GEO.editorOL.mapa.zoomToExtent(i3GEO.editorOL.mapext);
 else{
 i3GEO.editorOL.mapa.zoomToMaxExtent();
 }
+if(i3GEO.Interface){
 i3GEO.Interface.openlayers.sobeLayersGraficos();
+}
 },
 criaLayerGrafico: function(){
 var	sketchSymbolizers = {
@@ -3739,6 +3743,26 @@ type: OpenLayers.Control.TYPE_BUTTON
 controles.push(button);
 adiciona = true;
 }
+if(botoes.zoomin===true){
+button = new OpenLayers.Control.Button({
+displayClass: "editorOLzoomin",
+trigger: function(){i3GEO.editorOL.mapa.zoomIn();},
+title: "aproxima",
+type: OpenLayers.Control.TYPE_BUTTON
+});
+controles.push(button);
+adiciona = true;
+}
+if(botoes.zoomout===true){
+button = new OpenLayers.Control.Button({
+displayClass: "editorOLzoomout",
+trigger: function(){i3GEO.editorOL.mapa.zoomOut();},
+title: "afasta",
+type: OpenLayers.Control.TYPE_BUTTON
+});
+controles.push(button);
+adiciona = true;
+}
 if(botoes.legenda===true){
 button = new OpenLayers.Control.Button({
 displayClass: "editorOLlegenda",
@@ -3899,7 +3923,9 @@ graphicName: i3GEO.editorOL.simbologia.graphicName
 i3GEO.editorOL.layergrafico.addFeatures([f]);
 if(document.getElementById("panellistagEditor"))
 {i3GEO.editorOL.listaGeometrias();}
+if(i3GEO.Interface){
 i3GEO.Interface.openlayers.sobeLayersGraficos();
+}
 }
 }
 }
@@ -3917,16 +3943,17 @@ title: "digitalizar ponto",
 type: OpenLayers.Control.TYPE_TOOL,
 callbacks:{
 done: function(feature){
+var f = [];
 if(i3GEO.editorOL.simbologia.externalGraphic != ""){
 var style_mark = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
 style_mark.externalGraphic = i3GEO.editorOL.simbologia.externalGraphic;
 style_mark.graphicWidth = i3GEO.editorOL.simbologia.graphicWidth;
 style_mark.graphicHeight = i3GEO.editorOL.simbologia.graphicHeight;
 style_mark.fillOpacity = i3GEO.editorOL.simbologia.opacidade;
-var f = new OpenLayers.Feature.Vector(feature,null,style_mark);
+f = new OpenLayers.Feature.Vector(feature,null,style_mark);
 }
 else{
-var f = new OpenLayers.Feature.Vector(feature);
+f = new OpenLayers.Feature.Vector(feature);
 }
 f["attributes"] = {
 opacidade: i3GEO.editorOL.simbologia.opacidade,
@@ -3943,7 +3970,9 @@ graphicWidth: i3GEO.editorOL.simbologia.graphicWidth
 i3GEO.editorOL.layergrafico.addFeatures([f]);
 if(document.getElementById("panellistagEditor"))
 {i3GEO.editorOL.listaGeometrias();}
+if(i3GEO.Interface){
 i3GEO.Interface.openlayers.sobeLayersGraficos();
+}
 }
 }
 }
@@ -3975,7 +4004,9 @@ graphicName: i3GEO.editorOL.simbologia.graphicName
 i3GEO.editorOL.layergrafico.addFeatures([f]);
 if(document.getElementById("panellistagEditor"))
 {i3GEO.editorOL.listaGeometrias();}
+if(i3GEO.Interface){
 i3GEO.Interface.openlayers.sobeLayersGraficos();
+}
 }
 }
 }
@@ -4012,7 +4043,9 @@ labelAlign: "rt"
 };
 if(texto && texto !== "")
 {i3GEO.editorOL.layergrafico.addFeatures([label]);}
+if(i3GEO.Interface){
 i3GEO.Interface.openlayers.sobeLayersGraficos();
+}
 }
 }
 }
@@ -4411,7 +4444,7 @@ ins += "" +
 '	</tr>' +
 '	<tr>' +
 '		<td>Largura e altura</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'graphicWidth\',\'i3GEOEditorOLgraphicWidth\')" type="text" style="cursor:text" id="i3GEOEditorOLgraphicWidth" size="4" value="'+i3GEO.editorOL.simbologia.graphicWidth+'" />&nbsp;<input onchange="i3GEO.editorOL.mudaSimbolo(\'graphicHeight\',\'i3GEOEditorOLgraphicHeight\')" type="text" style="cursor:text" id="i3GEOEditorOLgraphicHeight" size="4" value="'+i3GEO.editorOL.simbologia.graphicHeight+'" /></td><td></td>' +
-'	</tr>'
+'	</tr>' +
 '</table>' +
 '<br />' +
 '<p class=paragrafo ><b>Ajusta nó em edi&ccedil;&atilde;o para o(a):</b></p>' +

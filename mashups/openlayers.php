@@ -77,6 +77,10 @@ if(isset($botoes)){
 	{$objBotoes[] = "'zoombox':true";}
 	if(in_array("zoomtot",$botoes))
 	{$objBotoes[] = "'zoomtot':true";}
+	if(in_array("zoomout",$botoes))
+	{$objBotoes[] = "'zoomout':true";}
+	if(in_array("zoomin",$botoes))
+	{$objBotoes[] = "'zoomin':true";}
 	if(in_array("legenda",$botoes))
 	{$objBotoes[] = "'legenda':true";}
 	if(in_array("distancia",$botoes))
@@ -274,6 +278,8 @@ Par&acirc;metros:
 		pan
 		zoombox
 		zoomtot
+		zoomin
+		zoomout
 		distancia
 		area
 		identifica

@@ -154,6 +154,18 @@ background-position:-522px -28px;
 .olControlEditingToolbar1 .editorOLlistagItemActive {
 	background-position:-725px -28px;
 }
+.olControlEditingToolbar1 .editorOLzoominItemActive {
+	background-position:-754px -28px;
+}
+.olControlEditingToolbar1 .editorOLzoominItemInactive {
+	background-position:-754px -0px;
+}
+.olControlEditingToolbar1 .editorOLzoomoutItemActive {
+	background-position:-783px -28px;
+}
+.olControlEditingToolbar1 .editorOLzoomoutItemInactive {
+	background-position:-783px -0px;
+}
 .olControlEditingToolbar1 {
 	width:750px;
 	float:right;
@@ -163,7 +175,7 @@ background-position:-522px -28px;
 	background-image:url(openlayers.png);
 	background-repeat:no-repeat;
 	float:right;
-	right: 0px;	
+	right: 0px;
 	height:29px;
 	margin:2px;
 	width:29px;
@@ -177,7 +189,7 @@ background-position:-522px -28px;
 
 pre{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 9px;	
+	font-size: 9px;
 }
 .yui-skin-sam .container-close {
 	background:transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
@@ -192,10 +204,10 @@ pre{
 	filter:alpha(opacity=80);
 }
 .yui-skin-sam .yui-panel .hd {
-    background: url("../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 -200px transparent;
-    color: #000000;
-    font-size: 93%;
-    font-weight: bold;
-    line-height: 2;
-    padding: 0 10px;
+		background: url("../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 -200px transparent;
+		color: #000000;
+		font-size: 93%;
+		font-weight: bold;
+		line-height: 2;
+		padding: 0 10px;
 }
