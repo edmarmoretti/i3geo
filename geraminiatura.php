@@ -63,6 +63,8 @@ tipo - tipo de imagem que ser&aacute; gerada mini|grande|todos
 
 */
 
+
+
 //clearstatcache();
 error_reporting(0);
 //set_time_limit(300);
@@ -124,12 +126,17 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 	}
 	error_reporting(0);
 	$arqs = listaArquivos("temas");
-	ob_start();
-	foreach ($arqs["arquivos"] as $arq)
+	$arqs = $arqs["arquivos"];
+	sort($arqs);
+	//echo implode(" ,",$arqs["arquivos"]);
+	foreach ($arqs as $arq)
 	{
+		$arq = str_replace(" ","xxxx",$arq);
 		$temp = explode(".",$arq);
-		if($temp[(count($temp) - 1)] == "map")
+		
+		if(file_exists($locaplic.'/temas/'.$arq) && $temp[(count($temp) - 1)] == "map" && !(strpos($temp[0],"_") === 0) )
 		{
+			echo "<b>$arq</b><br>";
 			//if(file_exists($locaplic.'/temas/miniaturas/'.$arq.'.mini.png') == false)
 			//echo $locaplic.'/temas/miniaturas/'.$arq.'.mini.png<br>';
 			if($tipo == "mini" || $tipo == "todos")
@@ -137,10 +144,9 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 			if($tipo == "grande"  || $tipo == "todos")
 			{if(!file_exists($locaplic.'/temas/miniaturas/'.$arq.'.grande.png')){echo "<br>".$arq."<br>";verificaMiniatura($arq,"grande");}}
 		}
-		ob_end_flush();
 		ob_flush();
 		flush();
-		ob_start();
+		//sleep(1);
 	}
 }
 //
@@ -148,7 +154,7 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 //
 function verificaMiniatura($map,$tipo,$admin=false)
 {
-	global $locaplic,$versao,$base;
+	global $locaplic,$versao,$base,$postgis_mapa;
 	if($versao == ""){
 		$versao = versao();
 		$versao = $versao["principal"];
@@ -224,19 +230,28 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				}
 				$pegarext = $teman->name;
 			}
+
 			if (isset($postgis_mapa)){
 				if ($postgis_mapa != ""){
 					$numlayers = $mapa->numlayers;
-					for ($i=0;$i < $numlayers;++$i){
-						$layer = $mapa->getlayer($i);
-						if ($layer->connectiontype == MS_POSTGIS){
-							if ($layer->connection == " "){
-								$layer->set("connection",$postgis_mapa);
+					for ($i=0;$i < $numlayers;$i++){
+						$layern = $mapa->getlayer($i);
+						if (!empty($postgis_mapa)){
+							if ($layern->connectiontype == MS_POSTGIS){
+								$lcon = $layern->connection;
+								if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
+									if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
+									{$layern->set("connection",$postgis_mapa);}
+									else{
+										$layern->set("connection",$postgis_mapa[$lcon]);
+									}
+								}
 							}
 						}
 					}
 				}
 			}
+			
 			zoomTemaMiniatura($pegarext,$mapa);
 		}
 		if($extensao == ".gvp"){
@@ -272,6 +287,16 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			$urlG = $weboG->imageurl."/".$map;
 		}
 		if($tipo=="mini" || $tipo == "todos"){
+			if (!$objImagemM){
+				echo "Problemas ao gerar o mapa<br>";
+				$error = "";
+				$error = ms_GetErrorObj();
+				while($error && $error->code != MS_NOERR){
+					echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
+					$error = $error->next();
+				}
+				return;
+			}
 			if($objImagemM->imagepath == ""){
 				echo "Erro IMAGEPATH vazio";return;
 			}
@@ -279,6 +304,16 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			$objImagemM->saveImage($nomecM);
 		}
 		if($tipo=="grande" || $tipo == "todos"){
+			if (!$objImagemG){
+				echo "Problemas ao gerar o mapa<br>";
+				$error = "";
+				$error = ms_GetErrorObj();
+				while($error && $error->code != MS_NOERR){
+					echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
+					$error = $error->next();
+				}
+				return;
+			}
 			if($objImagemG->imagepath == ""){
 				echo "Erro IMAGEPATH vazio";return;
 			}
@@ -312,30 +347,26 @@ function zoomTemaMiniatura($nomelayer,&$mapa)
 	$layer = $mapa->getlayerbyname($nomelayer);
 	if($layer->data == "" && $layer->connection == "")
 	{return;}
-	if($layer->type > 2)
-	{return;}
 	$prjMapa = $mapa->getProjection();
 	$prjTema = $layer->getProjection();
 	$extatual = $mapa->extent;
 	$ret = $layer->getmetadata("extensao");
+	if($layer->type > 2 && $ret == "")
+	{return;}
 	$ct = $layer->connectiontype;
 	if(($ret == "") && ($ct != 1))
 	{return;}
-	if ($ret == "")
-	{
+	if ($ret == ""){
 		$ret = $layer->getextent();
-		if(!$ret){return;}
 		//reprojeta o retangulo
-		if (($prjTema != "") && ($prjMapa != $prjTema))
-		{
+		if (($prjTema != "") && ($prjMapa != $prjTema)){
 			$projInObj = ms_newprojectionobj($prjTema);
 			$projOutObj = ms_newprojectionobj($prjMapa);
 			$ret->project($projInObj, $projOutObj);
 		}
 		$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
 	}
-	else
-	{
+	else{
 		$ret = explode(" ",$ret);
 		$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
 	}
