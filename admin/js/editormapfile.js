@@ -20,7 +20,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cÃ³pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -278,7 +278,7 @@ function montaNosRaiz(redesenha)
 		}
 		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />";
 		if(iconePlus)
-		{conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma cópia' src=\"../imagens/clonar.png\" />";}
+		{conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma cÃ³pia' src=\"../imagens/clonar.png\" />";}
 		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o chache de imagens se houver' src=\"../imagens/limparcache.png\" />";
 		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />";
 		if(iconePlus){
@@ -714,7 +714,7 @@ function adicionaNovoMapfile()
 			{
 				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 				{
-					core_carregando("<span style=color:red >Código j&aacute; existe</span>");
+					core_carregando("<span style=color:red >CÃ³digo j&aacute; existe</span>");
 					setTimeout("core_carregando('desativa')",3000);
 				}
 				else
@@ -1331,7 +1331,7 @@ function montaEditorComport(dados)
 			titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},
 			{ajuda:"Indica se o tema ir&aacute; ser mostrado na ferramenta de identifica&ccedil;&atilde;o",
 			titulo:"Identifica (IDENTIFICA)",id:"",value:dados.identifica,tipo:"text",div:"<div id=cIdentifica ></div>"},
-			{ajuda:"Sets the opacity level (or the inability to see through the layer) of all classed pixels for a given layer. The value can either be an integer in the range (0-100) or the named symbol 'ALPHA'. A value of 100 is opaque and 0 is fully transparent. Implemented in MapServer 5.0, to replace the deprecated TRANSPARENCY parameter.The 'ALPHA' symbol directs the MapServer rendering code to honor the indexed or alpha transparency of pixmap symbols used to style a layer. This is only needed in the case of RGB output formats, and should be used only when necessary as it is expensive to render transparent pixmap symbols onto an RGB map image.",
+			{ajuda:"Define o n&iacute;vel de opacidade (ou a inabilidade de ver atrav&eacute;s da camada) de todos os pixeis classificados para uma dada camada. O valor pode ser um n&uacute;mero inteiro entre 0 e 100 ou o s&iacute;mbolo nomeado  ALPHA . Um valor de 100 &eacute; opaco e 0 &eacute; completamente transparente. O s&iacute;mbolo  ALPHA  direciona o MapServer para honrar a transpar&ecirc;ncia dos s&iacute;mbolos utilizados como pixmap no estilo de uma camada. Isso s&oacute; &eacute; necess&aacute;rio no caso de formatos de sa&iacute;da RGB, e deve ser usado somente quando necess&aacute;rio pois &eacute; dispendioso renderizar s&iacute;mbolos transparentes como pixmap em um mapa de imagem RGB.",
 			titulo:"Opacity",id:"opacity",value:dados.opacity,tipo:"text"},
 			{ajuda:"Indica se a extens&atilde;o geogr&aacute;fica do mapa deve ser alterada quando o tema for adicionado ao mapa",
 			titulo:"Aplica extensao (APLICAEXTENSAO)",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
@@ -1341,31 +1341,31 @@ function montaEditorComport(dados)
 			titulo:"Temporizador em segundos (METADATA: TEMPORIZADOR)",id:"temporizador",value:dados.temporizador,tipo:"text"},
 			{ajuda:"Indica se as classes ser&atilde;o mostradas ou n&atilde;o na legenda. Por padr&atilde;o &eacute; SIM. ",
 			titulo:"Classe (CLASSE)",id:"",value:dados.classe,tipo:"text",div:"<div id=cClasse ></div>"},
-			{ajuda:"URL de uma imagem que ser&aacute; utilizada em substitui&ccedil;&atilde;o à gera&ccedil;&atilde;o normal da legenda ",
+			{ajuda:"URL de uma imagem que ser&aacute; utilizada em substitui&ccedil;&atilde;o Ã  gera&ccedil;&atilde;o normal da legenda ",
 			titulo:"URL da legenda (opcional) (LEGENDAIMG)",id:"legendaimg",value:dados.legendaimg,tipo:"text"},
 			{ajuda:"Indica se o tema &eacute; mostrado no mapa mas n&atilde;o nas listas da legenda e na guia 'temas'",
 			titulo:"Escondido (ESCONDIDO)",id:"",value:dados.escondido,tipo:"text",div:"<div id=cEscondido ></div>"},
 			{ajuda:"Aplica efeitos de transi&ccedil;&atilde;o nas opera&ccedil;&otilde;es de zoom e pan na interface Openlayers",
 			titulo:"Efeitos de transi&ccedil;&atilde;o zoom (TRANSITIONEFFECT)",id:"",value:dados.transitioneffect,tipo:"text",div:"<div id=cTransitioneffect ></div>"},
-			{ajuda:"Sets the color index to treat as transparent for raster layers.",
+			{ajuda:"Define o padr&atilde;o de cores RGB para tratar como transparente em camadas raster.",
 			titulo:"Offsite (R,G,B) (utilize -1,-1,-1 para anular o valor)",id:"offsite",value:dados.offsite,tipo:"text"},
-			{ajuda:"Maximum scale at which this LAYER is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+			{ajuda:"Escala m&aacute;xima na qual o LAYER &eacute; desenhado. A escala &eacute; dada como o denominador da fra&ccedil;&atilde;o da escala. Por exemplo, para uma mapa na escala 1:24,000 use 24000.",
 			titulo:"Maxscale (utilize -1 para anular o valor)",id:"maxscale",value:dados.maxscale,tipo:"text"},
-			{ajuda:"Minimum scale at which this LAYER is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+			{ajuda:"Escala m&iacute;nima na qual o LAYER &eacute; desenhado. A escala &eacute; dada como o denominador da fra&ccedil;&atilde;o da escala. Por exemplo, para uma mapa na escala 1:24,000 use 24000.",
 			titulo:"Minscale (utilize -1 para anular o valor)",id:"minscale",value:dados.minscale,tipo:"text"},
-			{ajuda:"Item name in attribute table to use for class annotation (i.e. labeling).",
+			{ajuda:"Nome do item na tabela de atributos para utilizar como etiqueta (label).",
 			titulo:"Labelitem",id:"labelitem",value:dados.labelitem,tipo:"text"},
-			{ajuda:"Maximum scale at which this LAYER is labeled. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+			{ajuda:"Escala m&aacute;xima na qual a LABEL &eacute; desenhada. A escala &eacute; dada como o denominador da fra&ccedil;&atilde;o da escala. Por exemplo, para uma mapa na escala 1:24,000 use 24000.",
 			titulo:"Labelmaxscale (utilize -1 para anular o valor)",id:"labelmaxscale",value:dados.labelmaxscale,tipo:"text"},
-			{ajuda:"Minimum scale at which this LAYER is labeled. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+			{ajuda:"Escala m&iacute;nima na qual a LABEL &eacute; desenhada. A escala &eacute; dada como o denominador da fra&ccedil;&atilde;o da escala. Por exemplo, para uma mapa na escala 1:24,000 use 24000.",
 			titulo:"Labelminscale (utilize -1 para anular o valor)",id:"labelminscale",value:dados.labelminscale,tipo:"text"},
-			{ajuda:"The scale at which symbols and/or text appear full size. This allows for dynamic scaling of objects based on the scale of the map. If not set then this layer will always appear at the same size. Scaling only takes place within the limits of MINSIZE and MAXSIZE as described above. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+			{ajuda:"A escala na qual s&iacute;mbolos e/ou textos aparecem em tamanho total. Isso permite alterar dinamicamente a escala de objetos de acordo com a escala do mapa. Se n&atilde;o for definido, ent&atilde;o o objeto sempre aparecer&aacute; no mesmo tamanho. Essa opera&ccedil;&atilde;o s&oacute; ocorre dentro dos limites de MINSIZE e MAXSIZE como descrito acima. A escala &eacute; dada como o denominador da fra&ccedil;&atilde;o da escala. Por exemplo, para uma mapa na escala 1:24,000 use 24000.",
 			titulo:"Symbolscale (utilize -1 para anular o valor)",id:"symbolscale",value:dados.symbolscale,tipo:"text"},
-			{ajuda:"Sensitivity for point based queries (i.e. via mouse and/or map coordinates). Given in TOLERANCEUNITS. If the layer is a POINT or a LINE, the default is 3. For all other layer types, the default is 0. To restrict polygon searches so that the point must occur in the polygon set the tolerance to zero.",
+			{ajuda:"Sensibilidade para consultas baseadas em pontos (por exemplo, via mouse e/ou coordenadas do mapa). Dada em TOLERANCEUNITS. Se a camada for um ponto ou uma linha, o padr&atilde;o &eacute; 3. Para todos os outros tipos de camada, o padr&atilde;o &eacute; 0. Para restringir pesquisas por pol&iacute;gonos para que o ponto ocorra dentro do pol&iacute;gono defina a toler&acirc;ncia como 0.",
 			titulo:"Tolerance",id:"tolerance",value:dados.tolerance,tipo:"text"},
 			{ajuda:" ",
 			titulo:"Tolerance units",id:"",value:dados.toleranceunits,tipo:"text",div:"<div id=cToleranceunits ></div>"},
-			{ajuda:"Sets the unit of CLASS object SIZE values (default is pixels). Useful for simulating buffering",
+			{ajuda:"Define as unidades de valores do par&acirc;metro SIZE do objeto CLASS (padr&atilde;o &eacute; pixeis). &Uacute;til para simular um buffer.",
 			titulo:"Sizeunits",id:"",value:dados.sizeunits,tipo:"text",div:"<div id=cSizeunits ></div>"}
 		]
 	};
@@ -1442,9 +1442,9 @@ function montaEditorTitulo(dados)
 {
 	var param = {
 		"linhas":[
-			{ajuda:"Elemento 'NAME'. N&atilde;o confunda com o nome que aparece no mapa ou  na &aacute;rvore de temas. Normalmente o código recebe o mesmo nome do arquivo mapfile, sem a extens&atilde;o '.map'",
-			titulo:"Código do layer",id:"name",value:dados.name,tipo:"text"},
-			{ajuda:"Name of a group that this layer belongs to. The group name can then be reference as a regular layer name in the template files, allowing to do things like turning on and off a group of layers at once.",
+			{ajuda:"Elemento 'NAME'. N&atilde;o confunda com o nome que aparece no mapa ou  na &aacute;rvore de temas. Normalmente o cÃ³digo recebe o mesmo nome do arquivo mapfile, sem a extens&atilde;o '.map'",
+			titulo:"C&oacute;digo do layer",id:"name",value:dados.name,tipo:"text"},
+			{ajuda:"Nome do grupo a qual a camada pertence. O nome do grupo pode ser refer&ecirc;ncia como um nome regular de uma camada, permitindo fazer coisas como ligar e desligar um grupo de camadas de uma vez.",
 			titulo:"Group",id:"group",value:dados.group,tipo:"text"},
 			{ajuda:"Nome que ser&aacute; utilizado na legenda do mapa e na guia 'Temas'",
 			titulo:"T&iacute;tulo (METADATA: TEMA)",id:"tema",value:dados.tema,tipo:"text"},
@@ -1565,34 +1565,29 @@ function montaEditorDados(dados)
 			"linhas":[
 			{ajuda:"Indica se as defini&ccedil;&otilde;es da camada est&atilde;o relacionadas ao sistema de metadados estat&iacute;sticos. Se estiver, alguns par&acirc;metros s&atilde;o obtidos de forma autom&aacute;tica, como a conex&atilde;o e o SQL de acesso aos dados.",
 			titulo:"Esse mapfile est&aacute; integrado ao sistema de metadados estat&iacute;sticos?",id:"",value:dados.metaestat,tipo:"text",div:"<div id=cMetaestat ></div>"},
-
 			{ajuda:"ID da medida da vari&aacute;vel que relaciona a camada ao sistema de metadados estat&iacute;sticos. S&oacute; deve ser definido se o mapfile for integrado a esse sistema.",
-			titulo:"ID da variável no sistema de metadados estatísticos ",id:"",value:"",tipo:"text",div:"<div id=cMetaestat_id_medida_variavel ></div>"},
-
-			{ajuda:"Type of connection. Default is local.",
+			titulo:"ID da vari&aacute;vel no sistema de metadados estat&iacute;sticos ",id:"",value:"",tipo:"text",div:"<div id=cMetaestat_id_medida_variavel ></div>"},
+			{ajuda:"Tipo de conex&atilde;o. Padr&atilde;o &eacute; local.",
 			titulo:"Connectiontype",id:"",value:"",div:"<div id=cConnectiontype ></div>",tipo:"text"},
 			{ajuda:"Aplica a convers&atilde;o de caracteres nas ferramentas que obt&eacute;m os dados descritivos referentes aos elementos do LAYER. Em alguns casos, a convers&atilde;o pode provocar problemas de acentua&ccedil;&atilde;o. Se isso ocorrer, na ferramenta tabela por exemplo, experimente marcar essa op&ccedil;&atilde;o como 'nao'",
 			titulo:"Convers&atilde;o de caracteres (METADATA: CONVCARACTER)",id:"",value:dados.convcaracter,tipo:"text",div:"<div id=cConvcaracter ></div>"},
-
 			{ajuda:"Voc&ecirc; pode digitar apenas o 'alias' para esconder a string de conex&atilde;o. Database connection string to retrieve remote data.An SDE connection string consists of a hostname, instance name, database name, username and password separated by commas.A PostGIS connection string is basically a regular PostgreSQL connection string, it takes the form of 'user=nobody password=****** dbname=dbname host=localhost port=5432' An Oracle connection string: user/pass[@db] . Se vc tiver problemas com acentua&ccedil;&atilde;o, experimente algo como: user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'",
 			titulo:"Connection ",id:"",value:"",tipo:"text",div:"<div id=cConnection ></div>"},
-
-			{ajuda:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name. Exemplo postgis: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291 . Exemplo shapefile: c://ms4w/Apache/htdocs/geodados/brasil/limitespol/localidades.shp",
+			{ajuda:"Nome completo do arquivo de dado espacial a ser processado. N&atilde;o &eacute; necess&aacute;ria a extens&atilde;o do arquivo para shapefiles. Exemplo: c://ms4w/Apache/htdocs/geodados/brasil/limitespol/localidades.shp. Pode ser especificado relativo &agrave; op&ccedil;&atilde;o SHAPEPATH do objeto MAP. Se for uma camada SDE, deve ser inclu&iacute;do o nome da camada bem como da coluna de geometria, por exemplo, mylayer,shape,myversion. Se &eacute; uma camada PostGIS, o par&acirc;metro deve seguir a forma <columnname> from <tablename>, na qual columnname &eacute; o nome da coluna que cont&eacute;m a geometria e tablename &eacute; o nome da tabela cuja geometria ser&aacute; lida. Exemplo: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291. Para Oracle, use shape FROM table ou shape FROM (SELECT statement) ou at&eacute; express&otilde;es mais complexas. Note que, no entanto, h&aacute; impactos importantes de performance quando utilizadas subconsultas espaciais. Tente utilizar o objeto FILTER sempre que poss&iacute;vel. Voc&ecirc; tamb&eacute;m pode ver o SQL submetido ao for&ccedil;ar um erro, submetendo um par&acirc;metro DATA que voc&ecirc; sabe que n&atilde;o funcionar&aacute;, como uma nome de coluna errado.",
 			titulo:"Data",id:"",value:"",tipo:"textarea",div:"<div id=cData ></div>"},
-
-			{ajuda:"Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box",
+			{ajuda:"Especifica como o dado deve ser desenhado. N&atilde;o precisa ser do mesmo tipo do shapefile. Por exemplo, um shapefile de pol&iacute;gonos pode ser desenhado como pontos, mas um shape de pontos n&atilde;o pode ser desenhado como um pol&iacute;gono. Para diferenciar entre POLYGON e POLYLINE, simplesmente use ou omita o par&acirc;metro COLOR na classifica&ccedil;&atilde;o. Se voc&ecirc; utiliz&aacute;-lo, &eacute; um pol&iacute;gono com uma cor de preenchimento, sen&atilde;o, &eacute; uma polilinha cuja cor &eacute; definida em OUTLINECOLOR. Um c&iacute;rculo (circle) deve ser definido por um ret&acirc;ngulo de limites m&iacute;nimos. Isto &eacute;, dois pontos que definem o menor quadrado que pode cont&ecirc;-lo.",
 			titulo:"Type",id:"",value:dados.type,tipo:"text",div:"<div id=cType ></div>"},
-			{ajuda:"Ativa ou n&atilde;o a manuten&ccedil;&atilde;o de um cache para armazenar as imagens geradas para montar o mapa. Essa op&ccedil;&atilde;o afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache &eacute; mantido no diretório tempor&aacute;rio utilizado pelo i3Geo, na pasta chamada cache. Para cada camada &eacute; criada uma sub-pasta. Para limpar o cache, utilize a op&ccedil;&atilde;o existente junto ao nó principal desse mapfile",
+			{ajuda:"Ativa ou n&atilde;o a manuten&ccedil;&atilde;o de um cache para armazenar as imagens geradas para montar o mapa. Essa op&ccedil;&atilde;o afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache &eacute; mantido no diretÃ³rio tempor&aacute;rio utilizado pelo i3Geo, na pasta chamada cache. Para cada camada &eacute; criada uma sub-pasta. Para limpar o cache, utilize a op&ccedil;&atilde;o existente junto ao nÃ³ principal desse mapfile",
 			titulo:"Cache de mapas. Camadas WMS s&atilde;o acessadas diretamente do servidor de origem quando o cache estiver inativo. (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
 			{ajuda:"Proje&ccedil;&atilde;o",
 			titulo:"Projection",id:"projection",value:dados.projection,tipo:"text"},
-			{ajuda:"This parameter allows for data specific attribute filtering that is done at the same time spatial filtering is done, but before any CLASS expressions are evaluated. For OGR and shapefiles the string is simply a mapserver regular expression. For spatial databases the string is a SQL WHERE clause that is valid with respect to the underlying database.For example: FILTER type='road' and size <2",
+			{ajuda:"Este par&acirc;metro permite filtrar atributos espec&iacute;ficos ao mesmo tempo em que &eacute; feita uma filtragem espacial, mas antes de que qualquer express&atilde;o em CLASS seja contabilizada. Para OGR e shapefiles, a string &eacute; simplesmente uma express&atilde;o regular do MapServer. Por exemplo: FILTER type= road  and size &lt;2. Para bancos de dados espaciais &eacute; uma cl&aacute;usula SQL WHERE que &eacute; v&aacute;lida de acordo com o banco de dados subjacente. ",
 			titulo:"Filter",id:"filter",value:dados.filter,tipo:"text"},
-			{ajuda:"Item to use with simple FILTER expressions. OGR and shapefiles only.",
+			{ajuda:"Item a ser usado com simples express&otilde;es FILTER. Somente para OGR e shapefile.",
 			titulo:"Filteritem",id:"filteritem",value:dados.filteritem,tipo:"text"},
-			{ajuda:"Item that contains the location of an individual tile, default is 'location'.",
+			{ajuda:"Item que cont&eacute;m a localiza&ccedil;&atilde;o individual de um tile. Padr&atilde;o &eacute;  location .",
 			titulo:"tileitem",id:"tileitem",value:dados.tileitem,tipo:"text"},
-			{ajuda:"Name of the tileindex file or layer. A tileindex is similar to an ArcInfo library index. The tileindex contains polygon features for each tile. The item that contains the location of the tiled data is given using the TILEITEM parameter. When a file is used as the tileindex for shapefile or raster layers, the tileindex should be a shapefile. For CONNECTIONTYPE OGR layers, any OGR supported datasource can be a tileindex. Normally the location should contain the path to the tile file relative to the shapepath, not relative to the tileindex itself. If the DATA parameter contains a value then it is added to the end of the location. When a tileindex layer is used, it works similarly to directly referring to a file, but any supported feature source can be used (ie. postgres, oracle).NOTE: All files in the tileindex should have the same coordinate system, and for vector files the same set of attributes in the same order.",
+			{ajuda:"Nome do arquivo ou camada de tileindex. Um tileindex &eacute; semelhante a uma biblioteca de &iacute;ndices do ArcInfo. O tileindex cont&eacute;m fei&ccedil;&otilde;es de pol&iacute;gono para cada tile (ladrilho). O item que cont&eacute;m a localiza&ccedil;&atilde;o do dado ladrilhado &eacute; obtido utilizando o par&acirc;metro TILEITEM. Quando um arquivo &eacute; utilizado como o tileindex para camadas shapefiles ou raster, o tileindex pode ser um shapefile. Para camadas com CONNECTIONTYPE OGR, qualquer fonte de dados OGR suportada pode ser um tileindex. Normalmente a localiza&ccedil;&atilde;o deve conter o caminho do arquivo de tile relativo ao caminho do shape, e n&atilde;o relativo ao pr&oacute;prio tileindex. Se o par&acirc;metro DATA cont&eacute;m algum valor ent&atilde;o ele &eacute; adicionado ao fim da localiza&ccedil;&atilde;o. Quando uma camada de tileindex &eacute; utilizada, ela funciona de forma similar a referir-se diretamente a um arquivo, sendo que qualquer fonte de fei&ccedil;&atilde;o suportada pode ser usada (como PostgreSQL, Oracle etc.).",
 			titulo:"tileindex",id:"tileindex",value:dados.tileindex,tipo:"text"},
 			{ajuda:"Tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es mostradas da camada. &Eacute; importante definir esse par&acirc;metro para que as fun&ccedil;&otilde;es de gera&ccedil;&atilde;o de SLD funcionem corretamente.",
 			titulo:"Tipo de representa&ccedil;&atilde;o (tipooriginal) - para temas do tipo WMS",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipoOriginal ></div>"}
@@ -1778,7 +1773,7 @@ function montaEditorMetadados(dados)
 			titulo:"Linha do tempo: LTEMPOITEMLINK",id:"ltempoitemlink",value:dados.ltempoitemlink,tipo:"text"},
 			{ajuda:"Endere&ccedil;o da imagem do &iacute;cone que ir&aacute; representar o evento (opcional)",
 			titulo:"Linha do tempo: LTEMPOITEMICONE",id:"ltempoitemicone",value:dados.ltempoitemicone,tipo:"text"},
-			{ajuda:"Aplica convers&atilde;o do código de caracteres? Pode ser necess&aacute;rio para corrigir problemas de acentua&ccedil;&atilde;o",
+			{ajuda:"Aplica convers&atilde;o do cÃ³digo de caracteres? Pode ser necess&aacute;rio para corrigir problemas de acentua&ccedil;&atilde;o",
 			titulo:"Linha do tempo: LTEMPOCONVENCODE",id:"",value:dados.ltempoconvencode,tipo:"text",div:"<div id=cLtempoconvencode ></div>"},
 		]
 	};
@@ -1804,7 +1799,7 @@ function montaEditorMetadados(dados)
 			titulo:"Itens (ITENS)",id:"itens",value:dados.itens,tipo:"text"},
 			{ajuda:"Lista com os 'alias', ou apelidos, para os nomes das colunas listados no metadata 'itens'. Os alias devem ser separados por ',' e seguir a ordem definida em ITENS.",
 			titulo:"Nomes dos itens (ITENSDESC)",id:"itensdesc",value:dados.itensdesc,tipo:"text"},
-			{ajuda:"Lista de links que ser&atilde;o inclu&iacute;dos em cada resultado de busca da ferramenta de identifica&ccedil;&atilde;o. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item n&atilde;o tem link. Exemplo de uso para inclus&atilde;o de links para o site do IBGE quando um munic&iacute;pio &eacute; clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do munic&iacute;pio,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'<br>Podem ser inclu&iacute;dos comandos javascript, para isso utilize sempre aspas simples para fechar o link e acrescente o código javascript, exemplo:<br>ITENSLINK \",'../ferramentas/identifica/testelink.php?sid='+i3GEO.configura.sid\"",
+			{ajuda:"Lista de links que ser&atilde;o inclu&iacute;dos em cada resultado de busca da ferramenta de identifica&ccedil;&atilde;o. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item n&atilde;o tem link. Exemplo de uso para inclus&atilde;o de links para o site do IBGE quando um munic&iacute;pio &eacute; clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do munic&iacute;pio,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'<br>Podem ser inclu&iacute;dos comandos javascript, para isso utilize sempre aspas simples para fechar o link e acrescente o cÃ³digo javascript, exemplo:<br>ITENSLINK \",'../ferramentas/identifica/testelink.php?sid='+i3GEO.configura.sid\"",
 			titulo:"Links dos itens (ITENSLINK)",id:"itenslink",value:dados.itenslink,tipo:"text"},
 			{ajuda:"Template utilizado no gerador de KML para definir o conte&uacute;do dos bal&otilde;es de informa&ccedil;&atilde;o. O template utiliza o caractere '%' para iniciar e fechar o nome de uma coluna. O template pode usar tamb&eacute;m elementos HTML, por exemplo: <code>'<b>Nome do municipio</b>: %NOMEMUN%'</code>. Se o template n&atilde;o for especificado, o i3Geo ir&aacute; utilizar o metadata ITENS e ITENSDESC. Se esses n&atilde;o forem especificados, ser&aacute; utilizado o nome original da coluna.",
 			titulo:"KML template (DESCRIPTION_TEMPLATE)",id:"description_template",value:dados.description_template,tipo:"text"},
@@ -1815,7 +1810,7 @@ function montaEditorMetadados(dados)
 
 	var paramOWS = {
 		"linhas":[
-			{ajuda:"space-delimited list of EPSG projection codes supported by the remote server. You normally get this from the server’s capabilities output. This value should be upper case (EPSG:4236.....not epsg:4236) to avoid problems with case sensitive platforms. The value is used to set the SRS WMS URL parameter",
+			{ajuda:"space-delimited list of EPSG projection codes supported by the remote server. You normally get this from the serverÂ’s capabilities output. This value should be upper case (EPSG:4236.....not epsg:4236) to avoid problems with case sensitive platforms. The value is used to set the SRS WMS URL parameter",
 			titulo:"wms_srs",id:"wms_srs",value:dados.wms_srs,tipo:"text"},
 			{ajuda:"comma-separated list of layers to be fetched from the remote WMS server. This value is used to set the LAYERS and QUERY_LAYERS WMS URL parameters.",
 			titulo:"wms_name",id:"wms_name",value:dados.wms_name,tipo:"text"},
@@ -1911,15 +1906,15 @@ function montaEditorClasseGeral(dados)
 		titulo:"Name",id:"name",value:dados.name,tipo:"text"},
 		{ajuda:"Descri&ccedil;&atilde;o da classe (mostrada na legenda quando o mouse &eacute; sobreposto",
 		titulo:"Title",id:"title",value:dados.title,tipo:"text"},
-		{ajuda:"Sets the current display status of the class. Default turns the class on",
+		{ajuda:"Define o estado atual de exibi&ccedil;&atilde;o da classe. Default ativa a camada permanentemente.",
 		titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},
-		{ajuda:"Four types of expressions are now supported to define class membership. String comparisons, regular expressions, simple logical expressions, and string functions. If no expression is given, then all features are said to belong to this class.<br>String comparisons are case sensitive and are the fastest to evaluate. No special delimiters are necessary although string must be quoted if they contain special characters. (As a matter of good habit, it is recommended you quote all strings).<br>Regular expressions function just like previous versions of MapServer. However, you must now delimit a regular expression using /regex/. No quotes should be used.<br><br>Logical expressions allow you to build fairly complex tests based on one or more attributes and therefore are only available with shapefiles. Logical expressions are delimited by parentheses '(expression)'. Attribute names are delimited by square brackets '[ATTRIBUTE]'. These names are case sensitive and must match the items in the shapefile. For example: EXPRESSION ([POPULATION] > 50000 AND '[LANGUAGE]' eq 'FRENCH') ... The following logical operators are supported: =,>,<,<=,>=,=,or,and,lt,gt,ge,le,eq,ne. As you might expect this level of complexity is slower to process.<br>One string function exists: length(). This obviously computes the length of a string. An example follows:<br>EXPRESSION (length('[NAME_E]') < 8)<br>String comparisons and regular expressions work from the classitem defined at the layer level. You may mix expression types within the different classes of a layer",
+		{ajuda:"Quatro tipos de express&otilde;es s&atilde;o suportadas para definir as classes. Compara&ccedil;&atilde;o de strings, express&otilde;es regulares, express&otilde;es l&oacute;gicas simples e fun&ccedil;&otilde;es de string. Se nenhuma express&atilde;o &eacute; fornecida, ent&atilde;o todas as fei&ccedil;&otilde;es pertencem &agrave; classe em quest&atilde;o. Compara&ccedil;&atilde;o de strings s&atilde;o sens&iacute;veis a caracteres e s&atilde;o as mais r&aacute;pidas e se processar. N&atilde;o s&atilde;o necess&aacute;rios delimitadores especiais, mas &eacute; preciso citar entre aspas strings que contenham caracteres especiais. Como boas pr&aacute;ticas, &eacute; recomendado citar todas as strings. Express&otilde;es regulares s&atilde;o delimitadas utilizando barras (/regex/). N&atilde;o devem ser usadas aspas. O atributo a ser usado como compara&ccedil;&atilde;o &eacute; definido no par&acirc;metro CLASSITEM do n&iacute;vel do LAYER. Express&otilde;es l&oacute;gicas te permitem construir testes bastante complexos em um ou mais atributos e portanto s&oacute; s&atilde;o permitas com shapefiles. Express&otilde;es l&oacute;gicas s&atilde;o delimitadas com par&ecirc;nteses &#8220;(express&atilde;o)&#8221;. Nomes de atributos s&atilde;o delimitados por colchetes &#8220;[ATRIBUTO]&#8221;. Estes nomes s&atilde;o sens&iacute;veis a caracteres e devem concordar com os itens no shapefile. Por exemplo: EXPRESSION ([POPULATION] &gt; 50000 AND  [LANGUAGE]  eq  FRENCH ). Os seguintes operadores l&oacute;gicos s&atilde;o suportados: =, &gt;, &lt;, &lt;=, &gt;=, =, or, and, lt, gt, ge, le, eq, ne, in, ~, ~*. Este n&iacute;vel de complexidade &eacute; mais lento a se processar. Existe uma fun&ccedil;&atilde;o de string: lenght(). Ela computa o comprimento de uma string. Exemplo: EXPRESSION (length( [NAME_E] ) &lt; 8). Compara&ccedil;&atilde;o de strings e express&otilde;es regulares trabalham a partir do CLASSITEM definido no n&iacute;vel da LAYER. Voc&ecirc; pode combinar diferentes tipos de express&otilde;es juntamente com diferentes classes de uma camada. ",
 		titulo:"Expression",id:"expression",value:dados.expression,tipo:"text"},
-		{ajuda:"Full filename of the legend image for the CLASS. This image is used when building a legend (or requesting a legend icon via MapScript or the CGI application).",
+		{ajuda:"Nome completo do arquivo de imagem da legenda para a CLASS. Esta imagem &eacute; usada ao construir uma legenda (ou quando requisitando um &iacute;cone de legenda via MapScript ou uma aplica&ccedil;&atilde;o CGI).",
 		titulo:"Keyimage",id:"keyimage",value:dados.keyimage,tipo:"text"},
-		{ajuda:"Maximum scale at which this CLASS is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+		{ajuda:"Escala m&aacute;xima na qual a CLASS &eacute; desenhada. A escala &eacute; dada como o denominador da fra&ccedil;&atilde;o da escala. Por exemplo, para uma mapa na escala 1:24,000 use 24000.",
 		titulo:"Maxscale",id:"maxscale",value:dados.maxscale,tipo:"text"},
-		{ajuda:"Minimum scale at which this CLASS is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+		{ajuda:"Escala m&iacute;nima na qual a CLASS &eacute; desenhada. A escala &eacute; dada como o denominador da fra&ccedil;&atilde;o da escala. Por exemplo, para uma mapa na escala 1:24,000 use 24000.",
 		titulo:"Minscale",id:"minscale",value:dados.minscale,tipo:"text"}
 		]
 	};
@@ -2046,33 +2041,33 @@ function montaEditorEstilo(dados)
 	var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png";
 		param = {
 		"linhas":[
-			{ajuda:"The symbol name or number to use for all features if attribute tables are not used. The number is the index of the symbol in the symbol file, starting at 1, the 5th symbol in the file is therefore symbol number 5. You can also give your symbols names using the NAME keyword in the symbol definition file, and use those to refer to them. Default is 0, which results in a single pixel, single width line, or solid polygon fill, depending on layer type.You can also specify a gif or png filename. The path is relative to the location of the mapfile.",
+			{ajuda:"O s&iacute;mbolo a ser usado para representar as fei&ccedil;&otilde;es. Integer &eacute; o &iacute;ndice do s&iacute;mbolo no symbolset, come&ccedil;ando em 1 (o quinto s&iacute;mbolo &eacute; o s&iacute;mbolo 5). String &eacute; o nome do s&iacute;mbolo (como definido usando o par&acirc;metro SYMBOL NAME). Filename especifica o caminho para um arquivo contendo um s&iacute;mbolo. Por exemplo, um arquivo PNG. Especifique o caminho relativo ao diret&oacute;rio contendo o mapfile. URL especifica o endere&ccedil;o de um arquivo contendo um s&iacute;mbolo pixmap. Por exemplo, um arquivo PNG. Uma URL deve come&ccedil;ar com &#8220;http&#8221;. Exemplo: SYMBOL &#8220;http://myserver.org/path/to/file.png . [ATRIBUTO] permite representa&ccedil;&atilde;o individual de fei&ccedil;&otilde;es usando um atributo no conjunto de dados que especifica o nome do s&iacute;mbolo (como definido usando o par&acirc;metro SYMBOL NAME). S&atilde;o necess&aacute;rios os colchetes []. Se SYMBOL n&atilde;o for especificado, o comportamento depende do tipo de fei&ccedil;&atilde;o: Para pontos, nada ser&aacute; representado; Para linhas, SYMBOL s&oacute; &eacute; relevante se voc&ecirc; quer estilizar as linhas utilizando s&iacute;mbolos, ent&atilde;o a aus&ecirc;ncia de SYMBOL significa que voc&ecirc; ter&aacute; as linhas como especificadas utilizando os par&acirc;metros de representa&ccedil;&atilde;o de linhas (COLOR, WIDTH, PATTERN, LINECAP, etc.); Para pol&iacute;gonos, o interior dos pol&iacute;gonos ser&aacute; representado utilizando um preenchimento s&oacute;lido da cor especificada no par&acirc;metro COLOR.",
 			titulo:"Symbolname (pode ser utilizado uma imagem, exemplo: /var/www/i3geo/imagensteste.png) :",id:"",value:dados.symbolname,tipo:"text",div:"<div id=cSymbolname ></div>"},
-			{ajuda:"Color to use for drawing features.",
+			{ajuda:"Cor a ser utilizada para desenhar fei&ccedil;&otilde;es.",
 			titulo:"Color",id:"color",value:dados.color,tipo:"cor"},
-			{ajuda:"Background-color to use for drawing features.",
+			{ajuda:"Cor de fundo a ser utilizada para desenhar fei&ccedil;&otilde;es.",
 			titulo:"Backgroundcolor",id:"backgroundcolor",value:dados.backgroundcolor,tipo:"cor"},
-			{ajuda:"Height, in pixels, of the symbol/pattern to be used. Only useful with scalable symbols. Default is 1. For symbols of Type HATCH, the SIZE is the distance between hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
+			{ajuda:"Tamanho, em SIZEUNITS, do SYMBOL/PATTERN a ser usado. O valor padr&atilde;o depende do tipo do s&iacute;mbolo: para pixmap, o tamanho (em pixeis) do pixmap; para ellipse e vector, o valor m&aacute;ximo de y do par&acirc;metro SYMBOL POINTS; para hatch, 1,0; para truetype, 1,0. Quando a escala de s&iacute;mbolos &eacute; utilizada (SYMBOLSCALEDENOM &eacute; utilizado no n&iacute;vel da LAYER) o SIZE define o tamanho - de acordo com o SIZEUNITS da camada - do SYMBOL /PATTERN a ser usado na escala 1:SYMBOLSCALEDENOM. Para s&iacute;mbolos do tipo hatch, o tamanho &eacute; a dist&acirc;ncia de centro a centro entre as linhas. [ATRIBUTO] especifica um atributo a ser usado para usar como valor de tamanho. Os colchetes [] s&atilde;o necess&aacute;rios.",
 			titulo:"Size",id:"size",value:dados.size,tipo:"text"},
-			{ajuda:"Color to use for outlining polygons and certain marker symbols. Line symbols do not support outline colors.",
+			{ajuda:"Cor usada para contornar pol&iacute;gonos e alguns s&iacute;mbolos de marcadores (marker). N&atilde;o possui efeito para linhas. A largura do contorno pode ser especificada usando WIDTH. Se n&atilde;o for especificado nenhum WIDTH, ser&aacute; tra&ccedil;ado um contorno de 1 pixel de largura. Se h&aacute; algum s&iacute;mbolo definido em STYLE, ser&aacute; criado um contorno para este s&iacute;mbolo (somente ellipse, truetype e polygon vector ganhar&atilde;o um contorno). Se n&atilde;o houver s&iacute;mbolo definido em STYLE, o pol&iacute;gono ganhar&aacute; um contorno. [ATRIBUTO] especifica um atributo a ser usado para usar como valor de cor. Os colchetes [] s&atilde;o necess&aacute;rios.",
 			titulo:"Outlinecolor",id:"outlinecolor",value:dados.outlinecolor,tipo:"cor"},
-			{ajuda:"Width refers to the thickness of line work drawn, in pixels. Default is 1. For symbols of Type HATCH, the WIDTH is how thick the hatched lines are. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
+			{ajuda:"WIDTH se refere &agrave; espessura da linha desenhada, em pixeis. Padr&atilde;o &eacute; 1. Quando a escala de s&iacute;mbolos &eacute; utilizada (SYMBOLSCALEDENOM &eacute; utilizado no n&iacute;vel da LAYER) o WIDTH define a espessura da linha - de acordo com o SIZEUNITS da camada &#8211; em rela&ccedil;&atilde;o &agrave; escala 1:SYMBOLSCALEDENOM. Se utilizado com SYMBOL e OUTLINECOLOR, WIDTH define a espessura do contorno dos s&iacute;mbolos. Isto se aplica para os s&iacute;mbolos do tipo  ellipse, truetype e polygon vector. Para linhas, WIDTH especifica a espessura da linha. Para pol&iacute;gonos, se utilizado com OUTLINECOLOR, WIDTH especifica a espessura da linha do pol&iacute;gono. Para um s&iacute;mbolo do tipo hatch, WIDTH especifica a largura das linhas hachuradas. [ATRIBUTO] especifica o atributo a ser usado para valores de WIDTH. Os colchetes [] s&atilde;o necess&aacute;rios.",
 			titulo:"Width",id:"width",value:dados.width,tipo:"text"},
-			{ajuda:"Height, in pixels, of the symbol/pattern to be used. Only useful with scalable symbols. Default is 1. For symbols of Type HATCH, the SIZE is the distance between hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
+			{ajuda:"Tamanho m&iacute;nimo em pixeis para desenhar um s&iacute;mbolo. Padr&atilde;o &eacute; 0. S&oacute; &eacute; &uacute;til quando usada escala de s&iacute;mbolos. Para s&iacute;mbolos do tipo hatch, o tamanho &eacute; a dist&acirc;ncia entre linhas hachuradas.",
 			titulo:"Minsize",id:"minsize",value:dados.minsize,tipo:"text"},
-			{ajuda:"Maximum size in pixels to draw a symbol. Default is 50.",
+			{ajuda:"Tamanho m&aacute;ximo em pixeis para desenhar um s&iacute;mbolo. Padr&atilde;o &eacute; 500.",
 			titulo:"Maxsize",id:"maxsize",value:dados.maxsize,tipo:"text"},
-			{ajuda:"Offset values for shadows, hollow symbols, etc ...",
+			{ajuda:"Valor de deslocamento no eixo x para s&iacute;mbolos com sombras, vazios etc.",
 			titulo:"Offsetx",id:"offsetx",value:dados.offsetx,tipo:"text"},
-			{ajuda:"Offset values for shadows, hollow symbols, etc ...",
+			{ajuda:"Valor de deslocamento no eixo y para s&iacute;mbolos com sombras, vazios etc.",
 			titulo:"Offsety",id:"offsety",value:dados.offsety,tipo:"text"},
-			{ajuda:"Should TrueType fonts and Cartoline symbols be antialiased.",
+			{ajuda:"Ativa ou desativa o antialias para fontes truetype.",
 			titulo:"Antialias",id:"antialias",value:dados.antialias,tipo:"text"},
-			{ajuda:"Minimum width in pixels to draw the line work.",
+			{ajuda:"Tamanho m&iacute;nimo em pixeis para desenhar uma linha. Padr&atilde;o &eacute; 0.",
 			titulo:"Minwidth",id:"minwidth",value:dados.minwidth,tipo:"text"},
-			{ajuda:"Maximun width in pixels to draw the line work.",
+			{ajuda:"Tamanho m&aacute;ximo em pixeis para desenhar uma linha. Padr&atilde;o &eacute; 32.",
 			titulo:"Maxwidth",id:"maxwidth",value:dados.maxwidth,tipo:"text"},
-			{ajuda:"Angle, given in degrees, to draw the line work. Default is 0. For symbols of Type HATCH, this is the angle of the hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
+			{ajuda:"&Acirc;ngulo, em graus, para rotacionar um s&iacute;mbolo (sentido anti-hor&aacute;rio). Padr&atilde;o &eacute; 0 (sem rota&ccedil;&atilde;o). Para pontos, especifica a rota&ccedil;&atilde;o de um s&iacute;mbolo em rela&ccedil;&atilde;o a seu centro. Para linhas estilizadas, o comportamento depende do valor do elemento GAP. Para valores de GAP negativos, ele especifica o rotacionamento de um s&iacute;mbolo relativo &agrave; dire&ccedil;&atilde;o da linha. Um &acirc;ngulo de 0 significa que o eixo x do s&iacute;mbolo &eacute; orientado juntamente com a dire&ccedil;&atilde;o da linha. Se o valor do GAP for positivo, ele especifica o rotacionamento do s&iacute;mbolo em rela&ccedil;&atilde;o ao seu pr&oacute;prio centro.",
 			titulo:"Angle",id:"angle",value:dados.angle,tipo:"text"}
 		]
 	};

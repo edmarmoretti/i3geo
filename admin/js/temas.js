@@ -549,7 +549,7 @@ function pegaCaracteristicasGerais(codigoMap,codigoLayer)
 		ins += "</p></fieldset>";
 
 		ins += "<br><fieldset><legend>+- connectiontype</legend><div style=display:none >";
-		ins += "<p class=textoAjuda  style='background-color:rgb(250,250,250);' >Type of connection. Default is local.</b></p>";
+		ins += "<p class=textoAjuda  style='background-color:rgb(250,250,250);' >Tipo de conex&atilde;o. Padr&atilde;o &eacute; local.</b></p>";
 		ins += "<p><select onchange='this.style.color=\"blue\"' id='connectiontype_"+codigoLayer+"' >";
 		ins += comboObjeto(objcontype,"valor","texto",retorna.data.connectiontype);
 		ins += "</select>";
