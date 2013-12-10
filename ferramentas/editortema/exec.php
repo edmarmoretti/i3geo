@@ -73,12 +73,12 @@ switch (strtoupper($funcao))
 
 				$sth = $dbh->exec($sql);
 				$dbh->commit();
+				$retorno = "ok";
 			} catch (Exception $e) {
 				$dbh->rollBack();
 				$retorno = array("Falhou: " . $e->getMessage());
 			}
 		}
-		$retorno = "ok";
 	break;
 	case "EXCLUIREGISTRO":
 		$mapa = ms_newMapObj($map_file);

@@ -35,6 +35,8 @@ Classe: i3GEOF.navegapostgis
 i3GEOF.navegapostgis = {
 	//ao concluir, o nome do arquivo será retornado para esse objeto atribuindo o resultado ao atributo value
 	retornarPara: "",
+	//guarda o tipo de navegador
+	tipo: "sql",
 	/*
 	Variavel: aguarde
 
@@ -57,13 +59,25 @@ i3GEOF.navegapostgis = {
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
 
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
+
+	Parametro:
+
+	obj - objeto input que recebera de volta o valor do arquivo escolhido
+
+	conexao {numerico} - codigo da conexao com o banco de dados cadastrado no sistema de metadados estatisticos
+
+	tipo {string} - opcional. Tipo de retorno esquema|tabela|coluna|sql
 	*/
-	iniciaDicionario: function(obj,conexao){
+	iniciaDicionario: function(obj,conexao,tipo){
 		if(!obj || !conexao){
 			conexao = "";
 		}
+		if(!tipo){
+			tipo = "sql";
+		}
 		i3GEOF.navegapostgis.conexao = conexao;
 		i3GEOF.navegapostgis.retornarPara = obj;
+		i3GEOF.navegapostgis.tipo = tipo;
 		if(typeof(i3GEOF.navegapostgis.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
 				i3GEO.configura.locaplic+"/ferramentas/navegapostgis/dicionario.js",
@@ -86,17 +100,19 @@ i3GEOF.navegapostgis = {
 	*/
 	inicia: function(iddiv){
 		$i(iddiv).innerHTML = i3GEOF.navegapostgis.html();
-		new YAHOO.widget.Button(
-			"i3GEOFnavegapostgisAplicar",
-			{onclick:{fn: function(){
-				if($i(i3GEOF.navegapostgis.retornarPara)){
-					$i(i3GEOF.navegapostgis.retornarPara).value = $i("i3GEOFnavegapostgisSql").value;
-				}
-				i3GEOF.navegapostgis.ARVORE.destroy();
-				i3GEO.janela.destroi("i3GEOF.navegapostgis");
-				return null;
-			}}}
-		);
+		if($i("i3GEOFnavegapostgisAplicar")){
+			new YAHOO.widget.Button(
+				"i3GEOFnavegapostgisAplicar",
+				{onclick:{fn: function(){
+					if($i(i3GEOF.navegapostgis.retornarPara)){
+						$i(i3GEOF.navegapostgis.retornarPara).value = $i("i3GEOFnavegapostgisSql").value;
+					}
+					i3GEOF.navegapostgis.ARVORE.destroy();
+					i3GEO.janela.destroi("i3GEOF.navegapostgis");
+					return null;
+				}}}
+			);
+		}
 		var conexao = function(retorno){
 				var ins = "<select onchange='i3GEOF.navegapostgis.montaArvore(this.value)'>",
 					n = retorno.length,
@@ -111,12 +127,13 @@ i3GEOF.navegapostgis = {
 					i3GEOF.navegapostgis.montaArvore(i3GEOF.navegapostgis.conexao);
 				}
 			},
-			p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaConexao&formato=json",
-			botao = $i("i3GEOFnavegapostgisAplicar");
-		botao.style.position = "absolute";
-		botao.style.top = "230px";
-		botao.style.left = "70px";
-
+		p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaConexao&formato=json",
+		botao = $i("i3GEOFnavegapostgisAplicar");
+		if(botao){
+			botao.style.position = "absolute";
+			botao.style.top = "230px";
+			botao.style.left = "70px";
+		}
 		cpJSON.call(p,"foo",conexao);
 		/*
 		i3GEOF.navegapostgis.ARVORE = new YAHOO.widget.TreeView($i("i3GEOF.navegapostgis_corpo"));
@@ -148,9 +165,11 @@ i3GEOF.navegapostgis = {
 			"<div id=i3GEOFnavegapostgisColunas style='padding:2px;width: 230px;overflow: auto;height: 184px;border: 1px solid lightgray;position: absolute;left:223px;top: 0px;'> "+
 			"</div>" +
 			"<textarea id=i3GEOFnavegapostgisSql style='width: 233px;overflow: auto;height: 84px;border: 1px solid lightgray;position: absolute;left:223px;top: 190px;'> "+
-			"</textarea>" +
-			"<input style='position:absolute;top:235px;left:70px;' id=i3GEOFnavegapostgisAplicar type='button' value='"+$trad(10,i3GEOF.navegapostgis.dicionario)+"' />";
-			"</div>";
+			"</textarea>";
+		if(i3GEOF.navegapostgis.tipo == "sql"){
+			ins += "<input style='position:absolute;top:235px;left:70px;' id=i3GEOFnavegapostgisAplicar type='button' value='"+$trad(10,i3GEOF.navegapostgis.dicionario)+"' />";
+		}
+		ins += "</div>";
 		return ins;
 	},
 	/*
@@ -185,6 +204,12 @@ i3GEOF.navegapostgis = {
 		i3GEOF.navegapostgis.aguarde = $i("i3GEOF.navegapostgis_imagemCabecalho").style;
 		i3GEOF.navegapostgis.inicia(divid);
 	},
+	retornaValorClicado: function(obj){
+		i3GEOF.navegapostgis.retornarPara.value = obj.value;
+		i3GEOF.navegapostgis.ARVORE.destroy();
+		i3GEO.janela.destroi("i3GEOF.navegapostgis");
+		return null;
+	},
 	montaArvore: function(conexao){
 		if(conexao == ""){
 			return;
@@ -210,20 +235,29 @@ i3GEOF.navegapostgis = {
 		i3GEOF.navegapostgis.conexao = conexao;
 		var funcao = function(retorno){
 			i3GEOF.navegapostgis.aguarde.display = "none";
-			var n,i,no,tempNode;
+			var n,i,no,tempNode,esquema;
 			n = retorno.length;
 			tempNode = i3GEOF.navegapostgis.ARVORE.getRoot();
+			//quando o navegador e chamado apenas para escolha do esquema
+			//e mostrado um input radio
 			for(i=0;i<n;i++){
+				esquema = retorno[i].esquema;
+				if(i3GEOF.navegapostgis.tipo == "esquema"){
+					esquema = "<input onclick='i3GEOF.navegapostgis.retornaValorClicado(this)' type=radio style='cursor:pointer;' name='navegapostgisSelEsquema' value='"+esquema+"'/>"+
+					"<span style='position:relative;top:-3px;'>"+esquema+"</span>";
+				}
 				no = new YAHOO.widget.HTMLNode(
 					{
-						html:retorno[i].esquema,
+						html: esquema,
 						enableHighlight:true,
 						expanded:false,
 						esquema: retorno[i].esquema
 					},
 					tempNode
 				);
-				no.setDynamicLoad(i3GEOF.navegapostgis.listaTabelas, 1);
+				if(i3GEOF.navegapostgis.tipo == "sql" || i3GEOF.navegapostgis.tipo == "tabela" || i3GEOF.navegapostgis.tipo == "coluna"){
+					no.setDynamicLoad(i3GEOF.navegapostgis.listaTabelas, 1);
+				}
 			}
 			i3GEOF.navegapostgis.ARVORE.draw();
 
@@ -240,6 +274,10 @@ i3GEOF.navegapostgis = {
 				n = retorno.length;
 				for(i=0;i<n;i++){
 					conteudo = "<a href='#' onclick='i3GEOF.navegapostgis.listaColunas(\""+retorno[i].tabela+"\")' >"+retorno[i].tabela+"</a>";
+					if(i3GEOF.navegapostgis.tipo == "tabela"){
+						conteudo = "<input onclick='i3GEOF.navegapostgis.retornaValorClicado(this)' type=radio style='cursor:pointer;' name='navegapostgisSelTabela' value='"+retorno[i].tabela+"'/>"+
+						"<span style='position:relative;top:-3px;'>"+retorno[i].tabela+"</span>";
+					}
 					new YAHOO.widget.HTMLNode({
 							html:conteudo,
 							enableHighlight:false,
@@ -264,19 +302,30 @@ i3GEOF.navegapostgis = {
 					nome = $trad(4,i3GEOF.navegapostgis.dicionario),
 					mostra = $trad(6,i3GEOF.navegapostgis.dicionario);
 				n = retorno.length;
-				ins = "<table class=lista4 ><tr><td title='"+$trad(7,i3GEOF.navegapostgis.dicionario)+"'>"+gid+"</td><td title='"+$trad(8,i3GEOF.navegapostgis.dicionario)+"'>"+the_geom+"</td><td title='"+$trad(9,i3GEOF.navegapostgis.dicionario)+"'>"+mostra+"</td><td>"+nome+"</td></tr>";
-				for(i=0;i<n;i++){
-					gid = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=radio name='i3GEOFnavegapostgisGid' value='"+retorno[i].field+"' />";
-					if(retorno[i].type == "line" || retorno[i].type == "polygon" || retorno[i].type == "point" || retorno[i].type == "geometry"){
-						the_geom = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=radio name='i3GEOFnavegapostgisTheGeom' value='"+retorno[i].field+"' />";
+
+				if(i3GEOF.navegapostgis.tipo == "coluna"){
+					ins = "<p class=paragrafo>"+$trad(11,i3GEOF.navegapostgis.dicionario)+"</p><table class=lista4 ><tr><td></td><td></td></tr>";
+					for(i=0;i<n;i++){
+						gid = "<input onclick='i3GEOF.navegapostgis.retornaValorClicado(this)' type=radio style='cursor:pointer;' name='navegapostgisSelColuna' value='"+retorno[i].field+"'/>";
+						ins += "<tr><td>"+gid+"</td><td title='"+retorno[i].type+"' >"+retorno[i].field+"</td></tr>";
 					}
-					else{
-						the_geom = "";
-					}
-					mostra = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=checkbox name='i3GEOFnavegapostgisMostra' value='"+retorno[i].field+"' />";
-					ins += "<tr><td>"+gid+"</td><td>"+the_geom+"</td><td>"+mostra+"</td><td title='"+retorno[i].type+"' >"+retorno[i].field+"</td></tr>";
+					ins += "</table>";
 				}
-				ins += "</table>";
+				else{
+					ins = "<table class=lista4 ><tr><td title='"+$trad(7,i3GEOF.navegapostgis.dicionario)+"'>"+gid+"</td><td title='"+$trad(8,i3GEOF.navegapostgis.dicionario)+"'>"+the_geom+"</td><td title='"+$trad(9,i3GEOF.navegapostgis.dicionario)+"'>"+mostra+"</td><td>"+nome+"</td></tr>";
+					for(i=0;i<n;i++){
+						gid = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=radio name='i3GEOFnavegapostgisGid' value='"+retorno[i].field+"' />";
+						if(retorno[i].type == "line" || retorno[i].type == "polygon" || retorno[i].type == "point" || retorno[i].type == "geometry"){
+							the_geom = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=radio name='i3GEOFnavegapostgisTheGeom' value='"+retorno[i].field+"' />";
+						}
+						else{
+							the_geom = "";
+						}
+						mostra = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=checkbox name='i3GEOFnavegapostgisMostra' value='"+retorno[i].field+"' />";
+						ins += "<tr><td>"+gid+"</td><td>"+the_geom+"</td><td>"+mostra+"</td><td title='"+retorno[i].type+"' >"+retorno[i].field+"</td></tr>";
+					}
+					ins += "</table>";
+				}
 				$i("i3GEOFnavegapostgisColunas").innerHTML = ins;
 			},
 			p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=descreveColunasTabela&formato=json&nome_tabela="+tabela+"&nome_esquema="+i3GEOF.navegapostgis.esquema+"&codigo_estat_conexao="+i3GEOF.navegapostgis.conexao;

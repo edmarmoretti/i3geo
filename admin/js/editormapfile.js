@@ -433,6 +433,14 @@ function montaParametrosTemas(no,dados,redesenha)
 		tempNode.isLeaf = true;
 		tempNode.enableHighlight = false;
 	}
+	if(!tree.getNodeByProperty("etiquetaEditavel",id))
+	{
+		conteudo = "<span style=cursor:pointer; onclick=\"editorEditavel('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Edit&aacute;vel (define se o tema &eacute; edit&aacute;vel)</span>";
+		var d = {tipo:"etiquetaEditavel",etiquetaEditavel:id,html:conteudo};
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+		tempNode.enableHighlight = false;
+	}
 	if(!tree.getNodeByProperty("etiquetaComport",id))
 	{
 		conteudo = "<span style=cursor:pointer; onclick=\"editorComport('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Comportamento no mapa</span>";
@@ -1227,6 +1235,19 @@ function editorDispo(codigoMap,codigoLayer)
 	var sUrl = "../php/editormapfile.php?funcao=pegaDispo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDispo");
 }
+/*
+Function: editorEditavel
+
+Abre o editor que define se o tema e editavel ou nao
+
+<PEGAEDITAVEL>
+*/
+function editorEditavel(codigoMap,codigoLayer)
+{
+	core_montaEditor("","450px","450px","","Edi&ccedil;&atilde;o");
+	var sUrl = "../php/editormapfile.php?funcao=pegaEditavel&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEditavel");
+}
 //depreciado
 function editorConexao(codigoMap,codigoLayer)
 {editorDados(codigoMap,codigoLayer);}
@@ -1472,7 +1493,69 @@ function montaEditorDispo(dados)
 	{salvarDadosEditor('dispo',dados.codigoMap,dados.codigoLayer,false);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
-
+function montaEditorEditavel(dados)
+{
+	var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
+		param = {
+		"linhas":[
+			{ajuda:"Indica se o tema poder&aacute; ser utilizado nos editores vetoriais e de atributos",
+			titulo:"O tema pode ser editado? (METADATA: EDITAVEL)",id:"",value:dados.editavel,tipo:"text",div:"<div id=cEditavel ></div>"},
+			{ajuda:"Esquema do banco de dados onde est&aacute; a tabela que poder&aacute; ser editada",
+			titulo:"Esquema no banco de dados",id:"",value:"",tipo:"text",div:"<div id=cEsquematabelaeditavel ></div>" },
+			{ajuda:"Tabela do banco que poder&aacute; ser editada",
+			titulo:"Tabela no banco de dados",id:"",value:"",tipo:"text",div:"<div id=cTabelatabelaeditavel ></div>" },
+			{ajuda:"Coluna que identifica de forma &uacute;nica cada registro da tabela",
+			titulo:"Coluna com IDs &uacute;nicos",id:"",value:"",tipo:"text",div:"<div id=cColunatabelaeditavel ></div>" },
+			{ajuda:"Coluna que contem as geometrias da tabela",
+			titulo:"Coluna com geometria edit&aacute;vel",id:"",value:"",tipo:"text",div:"<div id=cColunageometriatabelaeditavel ></div>" }
+		]
+		},
+		ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	ins += core_geraLinhas(param);
+	ins += "<br><br><br>";
+	$i("editor_bd").innerHTML = ins;
+	if($i("cEditavel")){
+		temp = "<select id='editavel' >";
+		temp += core_combosimnao(dados.editavel);
+		temp += "</select>";
+		$i("cEditavel").innerHTML = temp;
+	}
+	if($i("cEsquematabelaeditavel")){
+		temp = '<input id="esquematabelaeditavel" style="width:90%;" value="'+dados.esquematabelaeditavel+'" />' +
+			"<img id='esquematabelaeditavelBusca' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		$i("cEsquematabelaeditavel").innerHTML = temp;
+	}
+	$i("esquematabelaeditavelBusca").onclick = function(){
+		i3GEO.util.navegadorPostgis($i("esquematabelaeditavel"),"","esquema");
+	};
+	if($i("cTabelatabelaeditavel")){
+		temp = '<input id="tabelaeditavel" style="width:90%;" value="'+dados.tabelaeditavel+'" />' +
+			"<img id='tabelatabelaeditavelBusca' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		$i("cTabelatabelaeditavel").innerHTML = temp;
+	}
+	$i("tabelatabelaeditavelBusca").onclick = function(){
+		i3GEO.util.navegadorPostgis($i("tabelaeditavel"),"","tabela");
+	};
+	if($i("cColunatabelaeditavel")){
+		temp = '<input id="colunaidunico" style="width:90%;" value="'+dados.colunaidunico+'" />' +
+			"<img id='colunatabelaeditavelBusca' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		$i("cColunatabelaeditavel").innerHTML = temp;
+	}
+	$i("colunatabelaeditavelBusca").onclick = function(){
+		i3GEO.util.navegadorPostgis($i("colunaidunico"),"","coluna");
+	};
+	if($i("cColunageometriatabelaeditavel")){
+		temp = '<input id="colunageometria" style="width:90%;" value="'+dados.colunageometria+'" />' +
+			"<img id='colunageometriatabelaeditavelBusca' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		$i("cColunageometriatabelaeditavel").innerHTML = temp;
+	}
+	$i("colunageometriatabelaeditavelBusca").onclick = function(){
+		i3GEO.util.navegadorPostgis($i("colunageometria"),"","coluna");
+	};
+	var temp = function()
+	{salvarDadosEditor('editavel',dados.codigoMap,dados.codigoLayer,false);};
+	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
+}
 function montaEditorDados(dados)
 {
 	var idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],
@@ -2068,6 +2151,12 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		prog = "../php/editormapfile.php?funcao=alterarDispo";
 	}
+	if(tipo == "editavel")
+	{
+		campos = new Array("editavel","esquematabelaeditavel","tabelaeditavel","colunaidunico","colunageometria");
+		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+		prog = "../php/editormapfile.php?funcao=alterarEditavel";
+	}
 	if(tipo == "titulo")
 	{
 		//
@@ -2167,6 +2256,8 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 							{montaEditorComport(YAHOO.lang.JSON.parse(o.responseText));}
 							if(tipo=="dispo")
 							{montaEditorDispo(YAHOO.lang.JSON.parse(o.responseText));}
+							if(tipo=="editavel")
+							{montaEditorEditavel(YAHOO.lang.JSON.parse(o.responseText));}
 							if(tipo=="titulo")
 							{montaEditorTitulo(YAHOO.lang.JSON.parse(o.responseText));}
 							if(tipo=="metadados")
@@ -2288,7 +2379,7 @@ function selConexaoBanco(eleValue){
 	};
 	core_makeRequest(i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaConexao&formato=json",callback);
 }
-function selNavegador(onde){
+function selNavegador(onde,tipo){
 	if($i("connectiontype")){
 		switch(parseInt($i("connectiontype").value,10))
 		{
@@ -2306,4 +2397,5 @@ function selNavegador(onde){
 		i3GEO.util.navegadorDir(onde,false,false,true);
 	}
 }
+
 //YAHOO.util.Event.addListener(window, "load", initMenu);

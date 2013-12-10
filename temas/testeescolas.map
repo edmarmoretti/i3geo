@@ -9,10 +9,15 @@ MAP
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	""
       "CLASSE"	"SIM"
+      "editavel"	"SIM"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "metaestat"	""
-      "TEMA"	"Teste de escolas"
+      "esquematabelaeditavel"	"i3geo_metaestat"
       "convcaracter"	""
+      "TEMA"	"Teste de escolas"
+      "COLUNAGEOMETRIA"	"the_geom"
+      "colunaidunico"	"gid"
+      "tabelaeditavel"	"escolas"
     END # METADATA
     NAME "testeescolas"
     STATUS OFF

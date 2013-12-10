@@ -987,6 +987,7 @@ class Mapa
 		if($incluitexto == "sim")
 		{
 			if($this->vi >= 60200){
+				$classe->addLabel(new labelObj());
 				$label = $classe->getLabel(0);
 			}
 			else{

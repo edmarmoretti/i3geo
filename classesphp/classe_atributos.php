@@ -1311,7 +1311,7 @@ class Atributos
 			$nometmp = $this->converte($nometmp);
 			//identificador que marca o tipo de dados que podem ser salvos
 			$tiposalva = "";
-			//verifica se e editavel no metaestat
+			//verifica se e editavel
 			if($layer->getmetadata("EDITAVEL") == "SIM"){
 				//verifica login
 				session_write_close();
@@ -1332,6 +1332,7 @@ class Atributos
 							$editavel = "sim";
 						}
 						if($editavel == "sim"){
+
 							$editavel = "nao";
 							$id_medida_variavel = $layer->getMetaData("METAESTAT_ID_MEDIDA_VARIAVEL");
 							$colunaidunico = $layer->getMetaData("COLUNAIDUNICO");
@@ -1344,12 +1345,16 @@ class Atributos
 								$editavel = $medidaVariavel["colunavalor"];
 								$tiposalva = "medida_variavel";
 							}
-
 							if($codigo_tipo_regiao != ""){
 								include_once(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
 								$m = new Metaestat();
 								$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
 								//todas as colunas podem ser alteradas
+								$editavel = "todos";
+								$tiposalva = "regiao";
+							}
+							//verifica se os parametros de edicao estao disponiveis, pois podem ter sido definidos pelo sistema de administracao
+							if($layer->getMetaData("ESQUEMATABELAEDITAVEL") != "" && $layer->getMetaData("TABELAEDITAVEL") != "" && $layer->getMetaData("COLUNAIDUNICO") != ""){
 								$editavel = "todos";
 								$tiposalva = "regiao";
 							}

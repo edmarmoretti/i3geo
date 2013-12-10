@@ -13,7 +13,7 @@ i3GEOF.navegapostgis.dicionario = {
 			it:""
 		}],
 		3: [{
-			pt:"Escolha a tabela em um dos esquemas abaixo: ",
+			pt:"Escolha a tabela ou um dos esquemas abaixo: ",
 			en:"",
 			es:"",
 			it:""
@@ -56,6 +56,12 @@ i3GEOF.navegapostgis.dicionario = {
 		}],
 		10: [{
 			pt:"Aplicar",
+			en:"",
+			es:"",
+			it:""
+		}],
+		11: [{
+			pt:"Escolha a coluna",
 			en:"",
 			es:"",
 			it:""

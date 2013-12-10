@@ -367,6 +367,7 @@ function iniciaMapa()
 	$res["logado"] = $logado;
 	//parametros de inicializacao armazenados com o mapa quando o usuario utiliza a opcao de salvar mapa no nbanco de dados
 	$customizacoesinit = $m->mapa->getmetadata("CUSTOMIZACOESINIT");
+	$res["editavel"] = $m->mapa->getmetadata("EDITAVEL");
 	$m->mapa->setmetadata("CUSTOMIZACOESINIT","");
 	$m->salva();
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));

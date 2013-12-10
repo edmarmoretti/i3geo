@@ -124,6 +124,7 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 			exit;
 		}
 	}
+	if (ob_get_level() == 0) ob_start();
 	error_reporting(0);
 	$arqs = listaArquivos("temas");
 	$arqs = $arqs["arquivos"];
@@ -148,6 +149,7 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 		flush();
 		//sleep(1);
 	}
+	ob_end_flush();
 }
 //
 //se tipo for igual a "admin", as imagens s&atilde;o gravadas em i3geo/temas/miniaturas

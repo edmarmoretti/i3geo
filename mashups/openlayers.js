@@ -599,21 +599,32 @@ i3GEO.editorOL = {
 		});
 	},
 	salvaGeometrias: function(){
-		var geos = i3GEO.editorOL.layergrafico.selectedFeatures;
-		var n = geos.length;
-		var ins = "";
+		var geos = i3GEO.editorOL.layergrafico.selectedFeatures,
+			n = geos.length,
+			janela,
+			ins = "";
 		if(n > 0){
-			try{
-				YAHOO.namespace("salvaGeometrias.container");
-				YAHOO.salvaGeometrias.container.panel = new YAHOO.widget.Panel("panelsalvageometrias", {zIndex:2000, iframe:false, width:"250px", visible:false, draggable:true, close:true } );
-				YAHOO.salvaGeometrias.container.panel.setHeader("Geometrias");
-				YAHOO.salvaGeometrias.container.panel.setBody("");
-				YAHOO.salvaGeometrias.container.panel.setFooter("");
-				YAHOO.salvaGeometrias.container.panel.render(document.body);
-				YAHOO.salvaGeometrias.container.panel.center();
+			if($i("panelsalvageometrias")){
+				YAHOO.salvaGeometrias.container.panel = YAHOO.i3GEO.janela.manager.find("panelsalvageometrias");
+				YAHOO.salvaGeometrias.container.panel.show();
+				YAHOO.salvaGeometrias.container.panel.bringToTop();
 			}
-			catch(e){}
-			YAHOO.salvaGeometrias.container.panel.show();
+			else{
+				try{
+					YAHOO.namespace("salvaGeometrias.container");
+					YAHOO.salvaGeometrias.container.panel = new YAHOO.widget.Panel("panelsalvageometrias", {zIndex:2000, iframe:false, width:"250px", visible:false, draggable:true, close:true } );
+					YAHOO.salvaGeometrias.container.panel.setHeader("Geometrias");
+					YAHOO.salvaGeometrias.container.panel.setBody("");
+					YAHOO.salvaGeometrias.container.panel.setFooter("");
+					YAHOO.salvaGeometrias.container.panel.render(document.body);
+					YAHOO.salvaGeometrias.container.panel.center();
+					if(YAHOO.i3GEO.janela){
+						YAHOO.i3GEO.janela.manager.register(YAHOO.salvaGeometrias.container.panel);
+					}
+					YAHOO.salvaGeometrias.container.panel.show();
+				}
+				catch(e){}
+			}
 			ins += "<p class=paragrafo >Foram encontrada(s) "+n+" geometria(s) selecionada(s) </p>";
 			ins += "<p class=paragrafo ><a href='#' onclick='i3GEO.editorOL.listaGeometriasSel()' >Listar</a>&nbsp;&nbsp;";
 			ins += "<a href='#' onclick='"+i3GEO.editorOL.nomeFuncaoSalvar+"' >Salvar</a>&nbsp;&nbsp;";

@@ -63,7 +63,8 @@ $funcoesEdicao = array(
 		"ALTERARGERAL",
 		"ALTERARCLASSEGERAL",
 		"ALTERARCLASSELABEL",
-		"DOWNLOADGVP"
+		"DOWNLOADGVP",
+		"ALTERAREDITAVEL"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/editormapfile") == false){
@@ -715,6 +716,15 @@ switch (strtoupper($funcao))
 	case "ALTERARCOMPORT":
 		alterarComport();
 		retornaJSON(pegaComport());
+		exit;
+		break;
+	case "PEGAEDITAVEL":
+		retornaJSON(pegaEditavel());
+		exit;
+		break;
+	case "ALTERAREDITAVEL":
+		alterarEditavel();
+		retornaJSON(pegaEditavel());
 		exit;
 		break;
 
@@ -1584,6 +1594,37 @@ function pegaDispo()
 	$dados["codigoLayer"] = $codigoLayer;
 	return $dados;
 }
+function pegaEditavel()
+{
+	global $codigoMap,$codigoLayer,$locaplic,$postgis_mapa;
+	$dados = array();
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoLayer);
+	$dados["editavel"] = $layer->getmetadata("EDITAVEL"); //SIM ou NAO
+	$dados["colunaidunico"] = $layer->getmetadata("COLUNAIDUNICO");
+	$dados["tabelaeditavel"] = $layer->getmetadata("TABELAEDITAVEL");
+	$dados["esquematabelaeditavel"] = $layer->getmetadata("ESQUEMATABELAEDITAVEL");
+	$dados["colunageometria"] = $layer->getmetadata("COLUNAGEOMETRIA");
+	$dados["codigoMap"] = $codigoMap;
+	$dados["codigoLayer"] = $codigoLayer;
+	return $dados;
+}
+function alterarEditavel()
+{
+	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic,$editavel,$colunaidunico,$tabelaeditavel,$esquematabelaeditavel,$colunageometria;
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoLayer);
+	$layer->setmetadata("EDITAVEL",$editavel);
+	$layer->setmetadata("COLUNAIDUNICO",$colunaidunico);
+	$layer->setmetadata("TABELAEDITAVEL",$tabelaeditavel);
+	$layer->setmetadata("ESQUEMATABELAEDITAVEL",$esquematabelaeditavel);
+	$layer->setmetadata("COLUNAGEOMETRIA",$colunageometria);
+	$mapa->save($mapfile);
+	removeCabecalho($mapfile);
+	return "ok";
+}
 function alterarDispo()
 {
 	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic,$download,$arquivodownload,$arquivokmz;
@@ -1920,10 +1961,17 @@ function pegaClasseLabel()
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$classe = $layer->getclass($indiceClasse);
+
 	$v = versao();
 	$vi = $v["inteiro"];
 	if($vi >= 60200){
-		$label = $classe->getLabel(0);
+		$nlabel = $classe->numlabels;
+		if($nlabels > 0){
+			$label = $classe->getLabel(0);
+		}
+		else{
+			$label = "";
+		}
 	}
 	else{
 		$label = $classe->label;
