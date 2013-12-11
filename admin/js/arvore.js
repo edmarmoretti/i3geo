@@ -814,6 +814,12 @@ function gravaDados(tipo,id)
 	{
 			success:function(o)
 			{
+				var novo = "",
+					texto = "",
+					objpub,
+					publicado,
+					no,
+					obje;
 				try
 				{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
@@ -825,17 +831,17 @@ function gravaDados(tipo,id)
 					{
 						if(tipo == "grupo"){
 							//verifica se o usuario escolheu um grupo ou digitou o nome de um novo
-							var novo = document.getElementById("EnomeNovoGrupo");
+							novo = document.getElementById("EnomeNovoGrupo"),
+							objpub = document.getElementById("Epublicado"),
+							publicado = objpub.options[objpub.selectedIndex].value;
 							if(novo.value != ""){
-								var texto = novo.value;
+								texto = novo.value;
 							}
 							else{
-								var texto = document.getElementById("Eid_grupo");
+								texto = document.getElementById("Eid_grupo");
 								texto = texto.options[texto.selectedIndex].text;
 							}
-							var objpub = document.getElementById("Epublicado");
-							var publicado = objpub.options[objpub.selectedIndex].value;
-							var no = tree.getNodeByProperty("id_n1",id);
+							no = tree.getNodeByProperty("id_n1",id);
 							no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 
 							if(publicado == "NAO")
@@ -848,18 +854,18 @@ function gravaDados(tipo,id)
 						if(tipo == "subgrupo")
 						{
 							//verifica se o usuario escolheu um subgrupo ou digitou o nome de um novo
-							var novo = document.getElementById("EnomeNovoSubGrupo");
+							novo = document.getElementById("EnomeNovoSubGrupo");
 							if(novo.value != ""){
-								var texto = novo.value;
+								texto = novo.value;
 							}
 							else{
-								var texto = document.getElementById("Eid_subgrupo");
+								texto = document.getElementById("Eid_subgrupo");
 								texto = texto.options[texto.selectedIndex].text;
 							}
-							var objpub = document.getElementById("Epublicado");
-							var publicado = objpub.options[objpub.selectedIndex].value;
+							objpub = document.getElementById("Epublicado");
+							publicado = objpub.options[objpub.selectedIndex].value;
 
-							var no = tree.getNodeByProperty("id_n2",id);
+							no = tree.getNodeByProperty("id_n2",id);
 							no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 
 							if(publicado == "NAO")
@@ -871,13 +877,13 @@ function gravaDados(tipo,id)
 						}
 						if(tipo == "tema")
 						{
-							var texto = document.getElementById("Eid_tema");
+							texto = document.getElementById("Eid_tema");
 							texto = texto.options[texto.selectedIndex].text;
 
-							var objpub = document.getElementById("Epublicado");
-							var publicado = objpub.options[objpub.selectedIndex].value;
+							objpub = document.getElementById("Epublicado");
+							publicado = objpub.options[objpub.selectedIndex].value;
 
-							var no = tree.getNodeByProperty("id_n3",id);
+							no = tree.getNodeByProperty("id_n3",id);
 
 							no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 
@@ -890,10 +896,10 @@ function gravaDados(tipo,id)
 						}
 					if(tipo == "raizmenu" || tipo == "raizgrupo")
 						{
-							var obje = document.getElementById("Eid_tema");
+							obje = document.getElementById("Eid_tema");
 							if(obje){
-								var texto = obje.options[obje.selectedIndex].text;
-								var no = tree.getNodeByProperty("id_raiz",id);
+								texto = obje.options[obje.selectedIndex].text;
+								no = tree.getNodeByProperty("id_raiz",id);
 								no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;
 								no.html = no.getContentEl().innerHTML;
 							}
