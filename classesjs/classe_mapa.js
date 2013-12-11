@@ -1044,7 +1044,6 @@ i3GEO.mapa = {
 		var geos = false,
 			geometrias = [],
 			g = [],
-			fwkt = new OpenLayers.Format.WKT(),
 			n = 0,
 			i;
 		if(i3GEO.editorOL && i3GEO.editorOL.layergrafico && i3GEO.editorOL.layergrafico.features){
@@ -1095,7 +1094,7 @@ i3GEO.mapa = {
 		var props,
 			nprops,
 			i,
-			temp,
+			temp = [],
 			pint;
 		if(!cookies){
 			cookies = i3GEO.util.pegaDadosLocal("preferenciasDoI3Geo");

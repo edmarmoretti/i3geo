@@ -1502,13 +1502,13 @@ i3GEO.barraDeBotoes = {
 		//carrega as opcoes de edicao se a interface for do googlemaps
 		carregaJsGm: function(){
 			var temp = function(){
-				var cabecalho, minimiza, janela;
+				var cabecalho, minimiza;
 				cabecalho = function() {
 				};
 				minimiza = function() {
 					i3GEO.janela.minimiza("janelaEditorLimites");
 				};
-				janela = i3GEO.janela.cria("300px", "100px", "", "", "",
+				i3GEO.janela.cria("300px", "100px", "", "", "",
 					"Editor", "janelaEditorLimites", false, "hd",
 					cabecalho, minimiza);
 				$i("janelaEditorLimites_corpo").style.backgroundColor = "white";
