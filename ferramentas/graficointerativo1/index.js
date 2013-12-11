@@ -644,7 +644,8 @@ i3GEOF.graficointerativo1 = {
 		 * <i3GEO.util.comboItens>
 		 */
 		comboItensSel : function() {
-			var tema = $i("i3GEOgraficointerativo1ComboTemasId").value;
+			var adicionaFilho = function(){},
+				tema = $i("i3GEOgraficointerativo1ComboTemasId").value;
 			i3GEO.util
 			.comboItens(
 					"i3GEOgraficointerativo1ComboXid",
@@ -681,7 +682,7 @@ i3GEOF.graficointerativo1 = {
 							$i("i3GEOgraficointerativo1ComboXid").style.width = "160px";
 							$i("i3GEOgraficointerativo1ComboYid").style.width = "160px";
 
-							var adicionaFilho = function() {
+							adicionaFilho = function() {
 								var no = document.createElement("div"),
 									id = "CorG"+parseInt(Math.random()*100000,10),
 									novoselect;
@@ -1242,7 +1243,7 @@ i3GEOF.graficointerativo1 = {
 			if($i("i3GEOgraficointerativo1TituloY").value != ""){
 				config.orthoAxisTitle = $i("i3GEOgraficointerativo1TituloY").value;
 			}
-			var temp = $i("i3GEOgraficointerativo1FatorTamanho");
+			temp = $i("i3GEOgraficointerativo1FatorTamanho");
 			if(temp && temp.value > 0){
 				config.width = dados.resultset.length * temp.value;
 			}

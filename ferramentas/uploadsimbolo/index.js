@@ -96,8 +96,7 @@ i3GEOF.uploadsimbolo = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
-			ins = '<form id=i3GEOuploadsimbolof target="i3GEOuploadsimboloiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadsimbolo/upload.php" method="post" ENCTYPE="multipart/form-data">' +
+		var ins = '<form id=i3GEOuploadsimbolof target="i3GEOuploadsimboloiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadsimbolo/upload.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<p class="paragrafo" >PNG/JPG: <br><input type="file" size=22 name="i3GEOuploadsimboloarq" style="top:0px;left:0px;cursor:pointer;"></p>';
 		if(i3GEO.parametros.editor === "sim"){
 			ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.uploadsimbolo.dicionario)+':<br><input class=digitar type="text" size=45 name="dirDestino" id="dirDestino" style="top:0px;left:0px;cursor:pointer;"></p>';

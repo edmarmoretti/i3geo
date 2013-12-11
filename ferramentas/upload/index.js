@@ -103,8 +103,7 @@ i3GEOF.upload = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
-			ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">' +
+		var ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>';

@@ -481,7 +481,7 @@ function adicionaMarcasMapa(coordenadas){
 	for(i=0;i<n;i++){
 		pt = coordenadas[i].split(" ");
 		point = new google.maps.LatLng(pt[1],pt[0]);
-		var marker = new google.maps.Marker({
+		marker = new google.maps.Marker({
 				position : point
 			});
 		//marker = new GMarker(point);

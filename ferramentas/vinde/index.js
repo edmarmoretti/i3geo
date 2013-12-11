@@ -107,7 +107,7 @@ i3GEOF.vinde = {
 		i3GEO.util.ajaxGet(p,funcao);
 	},
 	arvore: function(dados,arvore){
-		var root,tempNode,d,criaNo,criaNoArray,dados;
+		var root,tempNode,d,criaNo;
 		if(arvore == undefined ){
 			arvore = new YAHOO.widget.TreeView($i("i3GEOFvindeArvore"));
 		}
@@ -214,7 +214,7 @@ i3GEOF.vinde = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.vinde");
 		};
-		var janela,divid,temp,titulo;
+		var janela,divid,titulo;
 		//cria a janela flutuante
 		titulo = $trad(1,i3GEOF.vinde.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=114' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
