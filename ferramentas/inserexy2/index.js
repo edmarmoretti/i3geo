@@ -376,7 +376,7 @@ i3GEOF.inserexy = {
 			"i3GEOinserexyshapefile",
 			"",
 			false,
-			"editaveis"
+			"locais"
 		);
 	},
 	/*

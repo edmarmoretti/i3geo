@@ -313,6 +313,8 @@ i3GEO.php = {
 	},
 	/*
 	Function: listaTemasEditaveis
+	 
+	Lista os temas guardados na pasta temporaria (temas locais)
 
 	<LISTATEMASLOCAIS>
 	*/
@@ -325,7 +327,6 @@ i3GEO.php = {
 			par = "funcao=listatemaslocais&g_sid="+sid;
 		cpJSON.call(p,"listatemaslocais",funcao,par);
 	},
-
 	/*
 	Function: listaTemasComSel
 

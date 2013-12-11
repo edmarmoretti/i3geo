@@ -24,7 +24,7 @@ i3GEO.editorOL = {
 		graphicWidth: 25
 	},
 	backup: new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false}),
-	nomeFuncaoSalvar: "i3GEO.editorOL.testeSalvar()",
+	nomeFuncaoSalvar: "i3GEO.editorOL.salvaGeo()",
 	e_oce: new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI Ocean Basemap",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
@@ -657,6 +657,22 @@ i3GEO.editorOL = {
 	},
 	testeSalvar: function(){
 		alert("Funcao nao disponivel. Defina o nome da funcao em i3GEO.editorOL.nomeFuncaoSalvar ");
+	},
+	salvaGeo: function(){
+		i3GEO.editorOL.testeSalvar();
+		return;
+		//verifica se apenas uma geometria esta selecionada
+		//verifica se a geometria contem o atributo que indica a coluna ou codigo unico
+		var funcaoOK = function(){
+				
+				alert("oi");
+			},
+			funcaoCombo = function(obj){
+				$i("editorOLondeComboTemaEditavel").innerHTML = obj.dados;
+			},
+			texto = "Salvar no tema:<br><div id=editorOLondeComboTemaEditavel  ></div><br><br>";
+		i3GEO.janela.confirma(texto,300,"Salva","Cancela",funcaoOK);
+		i3GEO.util.comboTemas("editorOLcomboTemaEditavel",funcaoCombo,"editorOLondeComboTemaEditavel","",false,"editavel");		
 	},
 	criaBotoes: function(botoes){
 		var sketchSymbolizers = {

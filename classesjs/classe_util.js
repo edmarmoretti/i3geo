@@ -1656,8 +1656,12 @@ i3GEO.util = {
 			else
 			{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}
 		}
-		if(tipoCombo === "editaveis"){
+		if(tipoCombo === "locais"){
 			i3GEO.php.listaTemasEditaveis(monta,i3GEO.configura.locaplic,i3GEO.configura.sid);
+		}
+		if(tipoCombo === "editavel"){
+			temp = i3GEO.arvoreDeCamadas.filtraCamadas("editavel","SIM","igual",i3GEO.arvoreDeCamadas.CAMADAS);
+			monta(temp);
 		}
 		if(tipoCombo === "selecionados"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
