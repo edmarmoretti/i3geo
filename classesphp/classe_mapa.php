@@ -397,7 +397,10 @@ class Mapa
 						"permiteogc"=>($oLayer->getmetadata("permiteogc")),
 						"itembuscarapida"=>($oLayer->getmetadata("itembuscarapida")),
 						"usasld"=>$usasld,
-						"cache"=>$cache
+						"cache"=>$cache,
+						"editavel"=>($oLayer->getmetadata("EDITAVEL")),
+						"editavel"=>($oLayer->getmetadata("EDITAVEL")),
+						"colunaidunico"=>($oLayer->getmetadata("COLUNAIDUNICO"))
 				);
 			}
 		}

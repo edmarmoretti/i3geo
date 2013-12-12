@@ -1327,7 +1327,7 @@ function montaEditorComport(dados)
 {
 	var param = {
 		"linhas":[
-			{ajuda:"Sets the current status of the layer. Often modified by MapServer itself. Default turns the layer on permanently",
+			{ajuda:"Define o estado atual da camada. Geralmente modificado pelo pr&oacute;prio MapServer. Default ativa a camada permanentemente.",
 			titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},
 			{ajuda:"Indica se o tema ir&aacute; ser mostrado na ferramenta de identifica&ccedil;&atilde;o",
 			titulo:"Identifica (IDENTIFICA)",id:"",value:dados.identifica,tipo:"text",div:"<div id=cIdentifica ></div>"},

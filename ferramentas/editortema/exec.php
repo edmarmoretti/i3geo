@@ -29,6 +29,7 @@ include_once(dirname(__FILE__)."/../inicia.php");
 include_once(dirname(__FILE__)."/../../admin/php/login.php");
 $funcoesEdicao = array(
 		"ADICIONAGEOMETRIA",
+		"ATUALIZAGEOMETRIA",
 		"EXCLUIREGISTRO",
 		"SALVAREGISTRO"
 );
@@ -80,6 +81,42 @@ switch (strtoupper($funcao))
 			}
 		}
 	break;
+	case "ATUALIZAGEOMETRIA":
+		$mapa = ms_newMapObj($map_file);
+		$layer = $mapa->getlayerbyname($tema);
+		if(strtolower($layer->getmetadata("EDITAVEL")) != "sim"){
+			$retorno = "erro";
+		}
+		else{
+			$tabela = $layer->getmetadata("TABELAEDITAVEL");
+			$esquema = $layer->getmetadata("ESQUEMATABELAEDITAVEL");
+			$colunaidunico = $layer->getmetadata("COLUNAIDUNICO");
+			$colunageometria = $layer->getmetadata("COLUNAGEOMETRIA");
+			if($colunageometria == ""){
+				$retorno = "erro";
+			}
+			$c = stringCon2Array($layer->connection);
+			try {
+				$dbh = new PDO('pgsql:dbname='.$c["dbname"].';user='.$c["user"].';password='.$c["password"].';host='.$c["host"].';port='.$c["port"]);
+				//pega o SRID
+				$sql = "select ST_SRID($colunageometria) as srid from $esquema"."."."$tabela LIMIT 1";
+				//echo $sql;exit;
+				$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+				$r = $q->fetchAll();
+				$srid = $r[0]["srid"];
+
+				$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$dbh->beginTransaction();
+				$sql = "UPDATE ".$esquema.".".$tabela." SET ".$colunageometria." = (ST_GeomFromText('SRID=$srid;".$wkt."')) WHERE $colunaidunico = ".$idunico;
+				$sth = $dbh->exec($sql);
+				$dbh->commit();
+				$retorno = "ok";
+			} catch (Exception $e) {
+				$dbh->rollBack();
+				$retorno = array("Falhou: " . $e->getMessage());
+			}
+		}
+		break;
 	case "EXCLUIREGISTRO":
 		$mapa = ms_newMapObj($map_file);
 		$layer = $mapa->getlayerbyname($tema);

@@ -333,7 +333,6 @@ Par&acirc;metros:
 
 
 <script type="text/javascript" src="openlayers_compacto.js.php"></script>
-<script type="text/javascript" src="../classesjs/compactados/classe_util_compacto.js"></script>
 <link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
 
 

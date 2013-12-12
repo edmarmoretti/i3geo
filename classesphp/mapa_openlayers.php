@@ -88,11 +88,18 @@ if(isset($_GET["tms"])){
 }
 $map_fileX = $_SESSION["map_file"];
 //
+//verifica se o request e OGC
+if(!empty($_GET["request"])){
+	$_GET["REQUEST"] = $_GET["request"];
+}
+//
 //resolve o problema da sele&ccedil;&atilde;o na vers&atilde;o nova do mapserver
 //
 $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
-
+if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){
+	$_GET["DESLIGACACHE"] = "sim";
+}
 if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
 	carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"],$_SESSION["i3georendermode"]);
 }
@@ -151,17 +158,22 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 					$nomecache = $layerName;
 				}
 			}
-		}
-		if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
-			$l->setmetadata("gml_include_items","all");
-			$l->setmetadata("WMS_INCLUDE_ITEMS","all");
-			$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-			$l->setmetadata("ows_enable_request","*");
-			$l->set("dump",MS_TRUE);
-			$l->setmetadata("ows_srs","AUTO");
+			if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature" ){
+				$l->setmetadata("gml_include_items","all");
+				$l->set("template","none.htm");
+				$l->setmetadata("WMS_INCLUDE_ITEMS","all");
+				$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+				$l->setmetadata("ows_enable_request","*");
+				$l->set("dump",MS_TRUE);
+				$l->setmetadata("ows_srs","AUTO");
+				if(strtolower($_GET["REQUEST"]) == "getfeature"){
+					$_GET["TYPENAME"] = $l->name;
+				}
+			}
 		}
 	}
 }
+
 if (!function_exists('imagepng'))
 {$_GET["TIPOIMAGEM"] = "";}
 
@@ -175,19 +187,21 @@ elseif($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum")
 {$cache = false;}
 
 if($cache == true && $_GET["cache"] != "nao"){
-	//carregaCacheImagem($cachedir,$_GET["BBOX"],$nomecache,$map_fileX,$_GET["WIDTH"],$_GET["HEIGHT"]);
 	carregaCacheImagem($cachedir,$map,$_GET["tms"]);
 }
-$map_size = explode(" ",$_GET["map_size"]);
-$mapa->setsize($map_size[0],$map_size[1]);
+if(isset($_GET["map_size"])){
+	$map_size = explode(" ",$_GET["map_size"]);
+	$mapa->setsize($map_size[0],$map_size[1]);
+}
 if(isset($_GET["mapext"])){
 	$mapext = explode(" ",$_GET["mapext"]);
 	$mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 }
+
 //
 //qd a cahamda e para um WMS, redireciona para ogc.php
 //
-if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["request"] == "getfeature"){
+if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
 	$req = ms_newowsrequestobj();
 	$_GET = array_merge($_GET,$_POST);
 	foreach ($_GET as $k=>$v){

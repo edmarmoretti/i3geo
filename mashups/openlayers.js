@@ -289,15 +289,45 @@ i3GEO.editorOL = {
 		}
 		return ins;
 	},
+	//layers clonados sao copias WMS de layers TMS necessarios para realizar o getfeature
+	//sao criados quando o layer e adicionado
 	layersClonados: function(paramsLayers){
 		var layers = i3GEO.editorOL.mapa.layers,
 			nlayers = layers.length,i;
 		for(i=0;i<nlayers;i++){
-			if(layers[i].params.CLONETMS === paramsLayers){
+			if(layers[i].params && layers[i].params.CLONETMS === paramsLayers){
 				return(layers[i]);
 			}
 		}
 		return false;
+	},
+	layertms2wms: function(tms){
+		var layer = new OpenLayers.Layer.WMS(
+			tms.layername+"_clone",
+			tms.url.replace("&cache=sim","&DESLIGACACHE=sim"),
+				{
+					layers:tms.name,
+					transparent:true
+				},
+				{
+					gutter:0,
+					isBaseLayer:false,
+					displayInLayerSwitcher:false,
+					opacity: 1,
+					visibility:true,
+					singleTile: true
+				}
+			);
+		//i3GEO.editorOL.mapa.addLayer(layer);
+		return layer;
+	},
+	//remove o layer clonado com layertms2wms
+	removeClone: function(){
+		var nome = i3GEO.editorOL.layerAtivo().layername+"_clone",
+			busca = i3GEO.editorOL.mapa.getLayersByName(nome);
+		if(busca.length > 0){
+			i3GEO.editorOL.mapa.removeLayer(i3GEO.editorOL.mapa.getLayersByName(camada.name)[0],false);
+		}
 	},
 	coordenadas: function(){
 		//
@@ -366,11 +396,19 @@ i3GEO.editorOL = {
 	criaComboTemas: function(){
 		var layers = i3GEO.editorOL.layersLigados(),
 			nlayers = layers.length,
-			i,
-			combo = "<select id=i3GEOOLlistaTemasAtivos >";
+			i,nometema = "",temp,
+			combo = "<select id=i3GEOOLlistaTemasAtivos style=width:235px; >";
 		//i3GEO.editorOL.layergrafico.setLayerIndex(i3GEO.editorOL.getNumLayers() + 1);
 		for(i=0;i<nlayers;i++){
-			combo += "<option value='"+i+"' >"+layers[i].name+"</option>";
+			//pega o nome do tema
+			nometema = "";
+			if(i3GEO.arvoreDeCamadas && i3GEO.arvoreDeCamadas.CAMADAS){
+				temp = i3GEO.arvoreDeCamadas.pegaTema(layers[i].name,"","name");
+				if(temp != ""){
+					nometema = temp.tema+" - ";
+				}
+			}
+			combo += "<option value='"+i+"' >"+nometema + layers[i].name+"</option>";
 		}
 		combo += "</select>";
 		return combo;
@@ -416,6 +454,7 @@ i3GEO.editorOL = {
 		}
 		else{
 			YAHOO.temaativo.container.panel.show();
+			i3GEO.editorOL.atualizaJanelaAtivaTema();
 		}
 	},
 	ativaTema: function(id){
@@ -585,7 +624,8 @@ i3GEO.editorOL = {
 						strokeWidth: i3GEO.editorOL.simbologia.strokeWidth,
 						strokeColor: i3GEO.editorOL.simbologia.strokeColor,
 						pointRadius: i3GEO.editorOL.simbologia.pointRadius,
-						graphicName: i3GEO.editorOL.simbologia.graphicName
+						graphicName: i3GEO.editorOL.simbologia.graphicName,
+						registros: f["attributes"]
 					};
 				}
 				i3GEO.editorOL.layergrafico.addFeatures(gml);
@@ -601,7 +641,6 @@ i3GEO.editorOL = {
 	salvaGeometrias: function(){
 		var geos = i3GEO.editorOL.layergrafico.selectedFeatures,
 			n = geos.length,
-			janela,
 			ins = "";
 		if(n > 0){
 			if($i("panelsalvageometrias")){
@@ -638,20 +677,30 @@ i3GEO.editorOL = {
 		i3GEO.editorOL.processageo("converteSHP");
 	},
 	listaGeometriasSel: function(){
-		var geos = i3GEO.editorOL.layergrafico.selectedFeatures;
-		var n = geos.length;
-		var ins = "",i;
+		var geos = i3GEO.editorOL.layergrafico.selectedFeatures,
+			n = geos.length,
+			ins = "",i,a,w;
 		for(i=0;i<n;i++){
 			ins += "<b>Geometria: "+i+"</b><br>"+geos[i].geometry+"<br><br>";
 			ins += "<b>Atributos: "+i+"</b><br>";
-			var a = geos[i].attributes;
+			a = geos[i].attributes;
 			for(key in a){
+				if(a[key]){
+					ins += key+" = "+a[key]+"<br>";
+				}
+			}
+			//lista os registros se for fruto de uma captura
+			if(geos[i].attributes.registros){
+				ins += "<b>Registros: "+i+"</b><br>";
+				a = geos[i].attributes.registros;
+				for(key in a){
 					if(a[key]){
 						ins += key+" = "+a[key]+"<br>";
 					}
+				}
 			}
 		}
-		var w = window.open();
+		w = window.open();
 		w.document.write(ins);
 		w.document.close();
 	},
@@ -659,20 +708,62 @@ i3GEO.editorOL = {
 		alert("Funcao nao disponivel. Defina o nome da funcao em i3GEO.editorOL.nomeFuncaoSalvar ");
 	},
 	salvaGeo: function(){
-		i3GEO.editorOL.testeSalvar();
-		return;
-		//verifica se apenas uma geometria esta selecionada
-		//verifica se a geometria contem o atributo que indica a coluna ou codigo unico
-		var funcaoOK = function(){
-				
-				alert("oi");
+		//i3GEO.editorOL.testeSalvar();
+		//return;
+		var geos = i3GEO.editorOL.layergrafico.selectedFeatures,
+			n = geos.length,
+			funcaoOK = function(){
+				//verifica se a geometria contem o atributo que indica a coluna ou codigo unico
+				if(geos[0].geometry){
+					var registros = "",
+						valorunico = "",
+						nometema = $i("editorOLcomboTemaEditavel").value,
+						key,tema,redesenha,p;
+					if(nometema == ""){
+						return;
+					}
+					tema = i3GEO.arvoreDeCamadas.pegaTema(nometema,"","name");
+					//o tema contem o indicador de qual e a coluna que contem o identificador unico
+					if(geos[0].attributes.registros){
+						registros = geos[0].attributes.registros;
+						for(key in registros){
+							if(registros[key] && key == tema.colunaidunico){
+								valorunico = registros[key];
+							}
+						}
+					}
+					redesenha = function(retorno){
+						i3GEO.janela.fechaAguarde("aguardeSalvaPonto");
+						i3GEO.editorOL.layergrafico.removeFeatures(i3GEO.editorOL.layergrafico.selectedFeatures);
+						i3GEO.Interface.atualizaTema("",nometema);
+					};
+					i3GEO.janela.AGUARDEMODAL = true;
+					i3GEO.janela.abreAguarde("aguardeSalvaPonto","Adicionando...");
+					i3GEO.janela.AGUARDEMODAL = false;
+
+					//cria um novo registro
+					if(valorunico == ""){
+						p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=adicionaGeometria&g_sid="+i3GEO.configura.sid;
+						cpJSON.call(p,"foo",redesenha,"&tema="+nometema+"&wkt="+geos[0].geometry);
+					}
+					else{
+						//atualiza a geometria
+						p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=atualizaGeometria&g_sid="+i3GEO.configura.sid;
+						cpJSON.call(p,"foo",redesenha,"&idunico="+valorunico+"&tema="+nometema+"&wkt="+geos[0].geometry);
+					}
+				}
 			},
 			funcaoCombo = function(obj){
 				$i("editorOLondeComboTemaEditavel").innerHTML = obj.dados;
 			},
 			texto = "Salvar no tema:<br><div id=editorOLondeComboTemaEditavel  ></div><br><br>";
-		i3GEO.janela.confirma(texto,300,"Salva","Cancela",funcaoOK);
-		i3GEO.util.comboTemas("editorOLcomboTemaEditavel",funcaoCombo,"editorOLondeComboTemaEditavel","",false,"editavel");		
+		if(n != 1){
+			i3GEO.janela.tempoMsg("Selecione apenas uma figura");
+		}
+		else{
+			i3GEO.janela.confirma(texto,300,"Salva","Cancela",funcaoOK);
+			i3GEO.util.comboTemas("editorOLcomboTemaEditavel",funcaoCombo,"editorOLondeComboTemaEditavel","",false,"editavel");
+		}
 	},
 	criaBotoes: function(botoes){
 		var sketchSymbolizers = {
@@ -845,19 +936,12 @@ i3GEO.editorOL = {
 				displayClass: "editorOLidentifica",
 				eventListeners: {
 					getfeatureinfo: function(event) {
-						var ativo = [i3GEO.editorOL.layerAtivo()];
-						//se for TMS tem de pegar o clone wms
-						if(ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS"){
-							temp = i3GEO.editorOL.layersClonados(ativo[0].layername);
-							if(temp != ""){
-								temp.setVisibility(false);
-							}
-						}
 						var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy),
 							lonlattexto = "<hr>",
 							formata;
+
 						if(	botoes.linha === true || botoes.ponto === true || botoes.poligono === true || botoes.edita === true){
-							lonlattexto += "<pre><span style=color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
+							lonlattexto += "<pre><span style=font-size:12px;color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>edita geometria</span></pre><br>";
 						}
 						formata = function(texto){
 							var temp,
@@ -891,20 +975,17 @@ i3GEO.editorOL = {
 							"chicken",
 							i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy),
 							null,
-							lonlattexto+"<pre>"+formata(event.text)+"</pre>",
+							"<div style=text-align:left >"+lonlattexto+"<pre>"+formata(event.text)+"</pre></div>",
 							null,
 							true
 						));
+						i3GEO.editorOL.removeClone();
 					},
 					beforegetfeatureinfo: function(event){
 						var temp,ativo = [i3GEO.editorOL.layerAtivo()];
 						//se for TMS tem de pegar o clone wms
 						if(ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS"){
-							temp = i3GEO.editorOL.layersClonados(ativo[0].layername);
-							if(temp != ""){
-								temp.setVisibility(true);
-								ativo = [temp];
-							}
+							ativo = [i3GEO.editorOL.layertms2wms(ativo[0])];
 						}
 						event.object.layers = ativo;
 						botaoIdentifica.layers = ativo;

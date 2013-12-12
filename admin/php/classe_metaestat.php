@@ -94,7 +94,7 @@ class Metaestat{
 	 * @return string
 	 */
 	function nomeCache(){
-		return md5(implode("x",$_REQUEST));
+		return "AAAA".md5(implode("x",$_REQUEST));
 	}
 	/**
 	 * Cria um nome aleatorio
