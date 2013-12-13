@@ -302,22 +302,25 @@ i3GEO.editorOL = {
 		return false;
 	},
 	layertms2wms: function(tms){
-		var layer = new OpenLayers.Layer.WMS(
+		var layer,url;
+		url = tms.url.replace("&cache=sim","&DESLIGACACHE=sim");
+		url = url.replace("&Z=${z}&X=${x}&Y=${y}","");
+		layer = new OpenLayers.Layer.WMS(
 			tms.layername+"_clone",
-			tms.url.replace("&cache=sim","&DESLIGACACHE=sim"),
-				{
-					layers:tms.name,
-					transparent:true
-				},
-				{
-					gutter:0,
-					isBaseLayer:false,
-					displayInLayerSwitcher:false,
-					opacity: 1,
-					visibility:true,
-					singleTile: true
-				}
-			);
+			url,
+			{
+				layers:tms.name,
+				transparent:true
+			},
+			{
+				gutter:0,
+				isBaseLayer:false,
+				displayInLayerSwitcher:false,
+				opacity: 1,
+				visibility:true,
+				singleTile: true
+			}
+		);
 		//i3GEO.editorOL.mapa.addLayer(layer);
 		return layer;
 	},
@@ -589,9 +592,11 @@ i3GEO.editorOL = {
 		//if(i3GEO.editorOL.layergrafico !== ""){return;}
 		var layers = [i3GEO.editorOL.layerAtivo()],
 			xy = lonlat.split(","),
-			u = layers[0].url+"&request=getfeature&service=wfs&version=1.0.0";
+			u = layers[0].url+"&REQUEST=getfeature&service=wfs&version=1.0.0";
 			u += "&OUTPUTFORMAT=gml2&typename="+layers[0].params.LAYERS;
-
+			//remove parametros nao desejados
+			u = u.replace("&cache=sim","&DESLIGACACHE=sim");
+			u = u.replace("&Z=${z}&X=${x}&Y=${y}","");
 			//u += "&filter=<Filter><Intersects><PropertyName>Geometry</PropertyName><gml:Point><gml:coordinates>"+lonlat+"</gml:coordinates></gml:Point></Intersects></Filter>";
 
 		xy[0] = xy[0] * 1;
@@ -679,20 +684,21 @@ i3GEO.editorOL = {
 	listaGeometriasSel: function(){
 		var geos = i3GEO.editorOL.layergrafico.selectedFeatures,
 			n = geos.length,
-			ins = "",i,a,w;
+			ins = "",i,a,w,g;
 		for(i=0;i<n;i++){
-			ins += "<b>Geometria: "+i+"</b><br>"+geos[i].geometry+"<br><br>";
+			g = geos[i];
+			ins += "<b>Geometria: "+i+"</b><br>"+i3GEO.editorOL.google2wgs(g.geometry)+"<br><br>";
 			ins += "<b>Atributos: "+i+"</b><br>";
-			a = geos[i].attributes;
+			a = g.attributes;
 			for(key in a){
 				if(a[key]){
 					ins += key+" = "+a[key]+"<br>";
 				}
 			}
 			//lista os registros se for fruto de uma captura
-			if(geos[i].attributes.registros){
+			if(g.attributes.registros){
 				ins += "<b>Registros: "+i+"</b><br>";
-				a = geos[i].attributes.registros;
+				a = g.attributes.registros;
 				for(key in a){
 					if(a[key]){
 						ins += key+" = "+a[key]+"<br>";
@@ -718,7 +724,8 @@ i3GEO.editorOL = {
 					var registros = "",
 						valorunico = "",
 						nometema = $i("editorOLcomboTemaEditavel").value,
-						key,tema,redesenha,p;
+						key="",tema,redesenha,p,
+						g = i3GEO.editorOL.google2wgs(geos[0].geometry);
 					if(nometema == ""){
 						return;
 					}
@@ -744,12 +751,12 @@ i3GEO.editorOL = {
 					//cria um novo registro
 					if(valorunico == ""){
 						p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=adicionaGeometria&g_sid="+i3GEO.configura.sid;
-						cpJSON.call(p,"foo",redesenha,"&tema="+nometema+"&wkt="+geos[0].geometry);
+						cpJSON.call(p,"foo",redesenha,"&tema="+nometema+"&wkt="+g);
 					}
 					else{
 						//atualiza a geometria
 						p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=atualizaGeometria&g_sid="+i3GEO.configura.sid;
-						cpJSON.call(p,"foo",redesenha,"&idunico="+valorunico+"&tema="+nometema+"&wkt="+geos[0].geometry);
+						cpJSON.call(p,"foo",redesenha,"&idunico="+valorunico+"&tema="+nometema+"&wkt="+g);
 					}
 				}
 			},
@@ -939,7 +946,6 @@ i3GEO.editorOL = {
 						var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy),
 							lonlattexto = "<hr>",
 							formata;
-
 						if(	botoes.linha === true || botoes.ponto === true || botoes.poligono === true || botoes.edita === true){
 							lonlattexto += "<pre><span style=font-size:12px;color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>edita geometria</span></pre><br>";
 						}
@@ -982,9 +988,9 @@ i3GEO.editorOL = {
 						i3GEO.editorOL.removeClone();
 					},
 					beforegetfeatureinfo: function(event){
-						var temp,ativo = [i3GEO.editorOL.layerAtivo()];
+						var ativo = [i3GEO.editorOL.layerAtivo()];
 						//se for TMS tem de pegar o clone wms
-						if(ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS"){
+						if(ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS" || ativo[0].CLASS_NAME == "OpenLayers.Layer.OSM"){
 							ativo = [i3GEO.editorOL.layertms2wms(ativo[0])];
 						}
 						event.object.layers = ativo;
@@ -1397,7 +1403,7 @@ i3GEO.editorOL = {
 			}
 		});
 		//
-		//adiciona o painel ao mapa se alguma op��o foi inserida
+		//adiciona o painel ao mapa se alguma opcao foi inserida
 		//
 		if(adiciona === true){
 			i3GEOpanelEditor.addControls(controles);
@@ -1935,5 +1941,15 @@ i3GEO.editorOL = {
 	desativaRodaDoMouse: function(){
 		var controls = i3GEO.editorOL.mapa.getControlsByClass('OpenLayers.Control.Navigation');
 		for(var i = 0; i<controls.length; ++i){controls[i].disableZoomWheel();}
+	},
+	google2wgs: function(obj){
+		if(i3GEO.Interface.openlayers.googleLike === true){
+			var projWGS84 = new OpenLayers.Projection("EPSG:4326"),
+				proj900913 = new OpenLayers.Projection("EPSG:900913");
+			return obj.transform(proj900913, projWGS84);
+		}
+		else{
+			return obj;
+		}
 	}
 };

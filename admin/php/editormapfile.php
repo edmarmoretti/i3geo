@@ -1621,6 +1621,7 @@ function alterarEditavel()
 	$layer->setmetadata("TABELAEDITAVEL",$tabelaeditavel);
 	$layer->setmetadata("ESQUEMATABELAEDITAVEL",$esquematabelaeditavel);
 	$layer->setmetadata("COLUNAGEOMETRIA",$colunageometria);
+	$layer->setmetadata("cache","");
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";

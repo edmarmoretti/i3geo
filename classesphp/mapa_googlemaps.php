@@ -88,48 +88,56 @@ else{
 if(!isset($_SESSION["map_file"])){
 	exit;
 }
-//
+
 $map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 $cachedir = $_SESSION["cachedir"];
 $i3georendermode = $_SESSION["i3georendermode"];
-//
-//converte a requisi&ccedil;&atilde;o do tile em coordenadas geo
-//http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#tile_numbers_to_lon.2Flat_2
-//
-$x = $_GET["X"];
-$y = $_GET["Y"];
-$z = $_GET["Z"];
 
-$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
-$qy = file_exists($qyfile);
-
-if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
-	carregaCacheImagem();
+if(!empty($_GET["request"])){
+	$_GET["REQUEST"] = $_GET["request"];
 }
+if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){
+	$_GET["DESLIGACACHE"] = "sim";
+	$_GET["SRS"] = "EPSG:3857";
+}
+else{
+	//
+	//converte a requisi&ccedil;&atilde;o do tile em coordenadas geo
+	//http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#tile_numbers_to_lon.2Flat_2
+	//
+	$x = $_GET["X"];
+	$y = $_GET["Y"];
+	$z = $_GET["Z"];
 
-$n = pow(2,$z);
-$lon1 = $x / $n * 360.0 - 180.0;
-$lat2 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
-$x++;
-$y++;
-$lon2 = $x / $n * 360.0 - 180.0;
-$lat1 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
-$x--;
-$y--;
+	$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
+	$qy = file_exists($qyfile);
+	if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
+		carregaCacheImagem();
+	}
 
-$projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
-$projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+	$n = pow(2,$z);
+	$lon1 = $x / $n * 360.0 - 180.0;
+	$lat2 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
+	$x++;
+	$y++;
+	$lon2 = $x / $n * 360.0 - 180.0;
+	$lat1 = rad2deg(atan(sinh(pi() * (1 - 2 * $y / $n))));
+	$x--;
+	$y--;
 
-$poPoint1 = ms_newpointobj();
-$poPoint1->setXY($lon1, $lat1);
-$poPoint1->project($projInObj, $projOutObj);
-$poPoint2 = ms_newpointobj();
-$poPoint2->setXY($lon2, $lat2);
-$poPoint2->project($projInObj, $projOutObj);
-$_GET["BBOX"] = $poPoint1->x." ".$poPoint1->y." ".$poPoint2->x." ".$poPoint2->y;
-$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
+	$projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
+	$projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
 
+	$poPoint1 = ms_newpointobj();
+	$poPoint1->setXY($lon1, $lat1);
+	$poPoint1->project($projInObj, $projOutObj);
+	$poPoint2 = ms_newpointobj();
+	$poPoint2->setXY($lon2, $lat2);
+	$poPoint2->project($projInObj, $projOutObj);
+	$_GET["BBOX"] = $poPoint1->x." ".$poPoint1->y." ".$poPoint2->x." ".$poPoint2->y;
+	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
+}
 $mapa = ms_newMapObj($map_fileX);
 $ret = $mapa->extent;
 
@@ -175,6 +183,18 @@ if(!isset($_GET["telaR"])){
 			if(strtolower($l->getmetadata("cache")) == "sim"){
 				$cache = true;
 			}
+			if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature" ){
+				$l->setmetadata("gml_include_items","all");
+				$l->set("template","none.htm");
+				$l->setmetadata("WMS_INCLUDE_ITEMS","all");
+				$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+				$l->setmetadata("ows_enable_request","*");
+				$l->set("dump",MS_TRUE);
+				$l->setmetadata("ows_srs","AUTO");
+				if(strtolower($_GET["REQUEST"]) == "getfeature"){
+					$_GET["TYPENAME"] = $l->name;
+				}
+			}
 		}
 	}
 }
@@ -187,6 +207,39 @@ else{
 		{$l->setProjection("proj=latlong,a=6378137,b=6378137");}
 	}
 }
+
+//
+//qd a cahamda e para um WMS, redireciona para ogc.php
+//
+if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
+	//echo $_GET["mapext"];exit;
+	if($_GET["REQUEST"] == "GetFeatureInfo"){
+		$mapa->setsize(256,256);
+		$mapext = explode(",",$_GET["BBOX"]);
+		$mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
+	}
+	else{
+		$mapa->setExtent(-21309420.490489,-8061966.246171,21505099.28287,16906647.661876);
+	}
+	$req = ms_newowsrequestobj();
+	$_GET = array_merge($_GET,$_POST);
+	foreach ($_GET as $k=>$v){
+		$req->setParameter($k, $v);
+	}
+	$proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
+	$server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+	$or = $proto.$server.$_SERVER['PHP_SELF'];
+	$mapa->setmetadata("wfs_onlineresource",$or."?".$_SERVER["QUERY_STRING"]);
+
+	ms_ioinstallstdouttobuffer();
+	$mapa->owsdispatch($req);
+	$contenttype = ms_iostripstdoutbuffercontenttype();
+	header("Content-type: $contenttype");
+	ms_iogetStdoutBufferBytes();
+	ms_ioresethandlers();
+	exit;
+}
+
 if($_GET["layer"] == "")
 {$cache = true;}
 
