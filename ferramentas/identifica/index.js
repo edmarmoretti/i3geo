@@ -213,7 +213,7 @@ i3GEOF.identifica = {
 			}
 		}
 		catch(erro){}
-
+		//botao de redimensionar as partes da janela
 		var Dom = YAHOO.util.Dom,
 			col1 = null,
 			col2 = null;
@@ -371,6 +371,75 @@ i3GEOF.identifica = {
 		ins += '	</div>';
 		//ins += '</div>	';
 		return ins;
+	},
+	/*
+	Abre a janela flutuante para controlar o processo de reposicionar um ponto.
+	Ativada apenas quando o usuario puder editar um tema
+	*/
+	janelaMoverPonto: function(tema,idreg){
+		var minimiza,cabecalho,janela,divid,temp,titulo;
+		//cria a janela flutuante
+		titulo = $trad(23,i3GEOF.identifica.dicionario);
+		janela = i3GEO.janela.cria(
+			"250px",
+			"100px",
+			"",
+			"",
+			"",
+			titulo,
+			"i3GEOF.movePonto",
+			false,
+			"hd",
+			"",
+			""
+		);
+		divid = janela[2].id;
+		$i("i3GEOF.movePonto_corpo").style.backgroundColor = "white";
+		i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoIdentifica);
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.identifica.atualizaJanelaMoverPonto") < 0){
+			i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.identifica.atualizaJanelaMoverPonto()");
+		}
+		temp = function(){
+			if(i3GEO.eventos.MOUSECLIQUE.toString().search(i3GEO.configura.funcaoIdentifica) < 0)
+			{i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoIdentifica);}
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		$i("i3GEOF.movePonto_corpo").innerHTML = "" +
+			$trad(24,i3GEOF.identifica.dicionario) +
+			"<br><br><p class=paragrafo >" +
+			"X: <input type=text style=width:100px;cursor:text id=i3GEOF.movePontoX />&nbsp;" +
+			"Y: <input type=text style=width:100px;cursor:text id=i3GEOF.movePontoY /></p>" +
+			"<input type=buttom value='"+$trad(23,i3GEOF.identifica.dicionario)+"' id=i3GEOF.moveAplica />";
+
+		new YAHOO.widget.Button("i3GEOF.moveAplica",{
+			onclick:{
+				fn: function(){
+					var x = $i("i3GEOF.movePontoX").value,
+						y = $i("i3GEOF.movePontoY").value,
+						p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=atualizageometria&g_sid="+i3GEO.configura.sid,
+						temp = function(retorno){
+							i3GEO.janela.fechaAguarde("aguardeSalvaPonto");
+							i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
+							i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);
+						};
+					i3GEO.janela.AGUARDEMODAL = true;
+					i3GEO.janela.abreAguarde("aguardeSalvaPonto","Adicionando...");
+					i3GEO.janela.AGUARDEMODAL = false;
+					cpJSON.call(p,"foo",temp,"&idunico="+idreg+"&tema="+tema+"&wkt=POINT("+x+" "+y+")");
+				}
+			}
+		});
+	},
+	atualizaJanelaMoverPonto: function(){
+		if($i("i3GEOF.movePontoX")){
+			$i("i3GEOF.movePontoX").value = objposicaocursor.ddx;
+			$i("i3GEOF.movePontoY").value = objposicaocursor.ddy;
+		}
+		else{
+			if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.identifica.atualizaJanelaMoverPonto") > 0){
+				i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.identifica.atualizaJanelaMoverPonto()");
+			}
+		}
 	},
 	/*
 	Function: listaTemas
@@ -676,9 +745,10 @@ i3GEOF.identifica = {
 								idreg = resultados[j][k].valor;
 							}
 						}
-						//opcao para apagar o registro
+						//opcao para apagar e mover o registro
 						if(idreg != "" && retorno[i].editavel == "todos"){
-							res += "<a href='#' onclick='i3GEOF.identifica.apagaRegiao(\""+retorno[i].tema+"\",\""+idreg+"\")' >"+$trad(19,i3GEOF.identifica.dicionario)+"</a><br>";
+							res += "<a href='#' onclick='i3GEOF.identifica.apagaRegiao(\""+retorno[i].tema+"\",\""+idreg+"\")' >"+$trad(19,i3GEOF.identifica.dicionario)+"</a>" +
+									"&nbsp;<a href='#' onclick='i3GEOF.identifica.janelaMoverPonto(\""+retorno[i].tema+"\",\""+idreg+"\")' >"+$trad(23,i3GEOF.identifica.dicionario)+"</a><br>";
 						}
 						for(k=0;k<nitens;k++){
 							tip = "&nbsp;&nbsp;";

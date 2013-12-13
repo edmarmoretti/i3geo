@@ -131,5 +131,17 @@ i3GEOF.identifica.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		23: [{
+			pt:"Mover",
+			en:"",
+			es:"",
+			it:""
+		}],
+		24: [{
+			pt:"Clique no mapa para indicar a nova posi&ccedil;&atilde;o",
+			en:"",
+			es:"",
+			it:""
 		}]
 };
