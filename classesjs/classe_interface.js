@@ -541,6 +541,12 @@ i3GEO.Interface = {
 
 		*/
 		LAYERSADICIONAIS: [],
+		/*
+		Propriedade: LAYERFUNDO
+
+		Nome do layer do tipo baselayer que sera ativado
+		*/
+		LAYERFUNDO: "",
 		googleLike: false,
 		redesenha: function(){
 			//
@@ -669,7 +675,7 @@ i3GEO.Interface = {
 					layers = i3geoOL.getLayersBy("isBaseLayer",true);
 					layersn = layers.length;
 					for(i=0;i<layersn;i++){
-						texto = "<input type=radio style='"+estilo+"' onclick='i3GEO.Interface.openlayers.ativaFundo(this.value)' name=i3GEObaseLayer value='"+layers[i].id+"' />"+layers[i].name;
+						texto = "<input type=radio style='"+estilo+"' onclick='i3GEO.Interface.openlayers.ativaFundo(this.value)' name=i3GEObaseLayer value='"+layers[i].name+"' />"+layers[i].name;
 						temp.propriedades.push({ text: texto, url: ""});
 					}
 					i3GEO.util.arvore("<b>"+$trad("p16")+"</b>","listaLayersBase",temp);
@@ -1087,6 +1093,9 @@ i3GEO.Interface = {
 				temp.innerHTML = "<p class=paragrafo >"+i3GEO.parametros.copyright+"</p>";
 				$i(i3GEO.Interface.IDMAPA).appendChild(temp);
 			}
+			if(i3GEO.Interface.openlayers.LAYERFUNDO != ""){
+				i3GEO.Interface.openlayers.ativaFundo(i3GEO.Interface.openlayers.LAYERFUNDO);
+			}
 		},
 		sobeLayersGraficos: function(){
 			var nlayers = i3geoOL.getNumLayers(),
@@ -1217,10 +1226,19 @@ i3GEO.Interface = {
 				b.onerror = function(){i3GEO.mapa.legendaHTML.atualiza();};
 			}
 		},
-		ativaFundo: function(id){
-			i3geoOL.setBaseLayer(i3geoOL.getLayer(id));
-			i3GEO.Interface.openlayers.OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP+"px";
-			i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+"px";
+		ativaFundo: function(nome){
+			var temp = i3geoOL.getLayersBy("name",nome);
+			if(temp.length > 0){
+				i3geoOL.setBaseLayer(temp[0]);
+				if(i3GEO.Interface.openlayers.OLpanzoombar){
+					i3GEO.Interface.openlayers.OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP+"px";
+					i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT+"px";
+				}
+				i3GEO.Interface.openlayers.LAYERFUNDO = nome;
+			}
+			else{
+				i3GEO.Interface.openlayers.LAYERFUNDO = "";
+			}
 		},
 		atualizaMapa:function(){
 			var layers = i3geoOL.layers,

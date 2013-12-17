@@ -621,6 +621,18 @@ i3GEOF.preferencias = {
 				}
 			}
 		}
+		//parametros especiais que nao sao variaveis de controle
+		//
+		//camada de fundo na interface openlayers
+		if($i("listaLayersBase")){
+			elem = $i("listaLayersBase").getElementsByTagName("input");
+			nelem = elem.length;
+			for(i=0;i<nelem;i++){
+				if (elem[i].type == "radio" && elem[i].checked === true){
+					pares.push("i3GEO.Interface.openlayers.LAYERFUNDO"+"|"+elem[i].value);
+				}
+			}
+		}
 		i3GEO.janela.tempoMsg($trad(3,i3GEOF.preferencias.dicionario));
 		//i3GEO.util.insereCookie("preferenciasDoI3Geo",pares.join(":"),365);
 		i3GEO.util.limpaDadosLocal("preferenciasDoI3Geo");
