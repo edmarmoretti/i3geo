@@ -54,7 +54,7 @@ class Metaestat{
 	/**
 	 * Indica se e necessario converter para UTF strings obtidas do banco de administracao
 	 */
-	protected $convUTF;
+	public $convUTF;
 	/**
 	 * Pasta temporaria utilizada pelo mapserver
 	 */
@@ -513,7 +513,7 @@ class Metaestat{
 	 * @param chegar na regiao
 	 * @return array lista de ids de regioes sequenciais do filho ate chegar ao pai indicado
 	 */
-	function regiaoFilhaAoPai($codigo_tipo_regiao,$codigo_tipo_regiao_pai){
+	function regiaoFilhaAoPai($codigo_tipo_regiao,$codigo_tipo_regiao_pai=""){
 		//echo $codigo_tipo_regiao." ".$codigo_tipo_regiao_pai;
 		$pais = $this->listaAgregaRegiao($codigo_tipo_regiao);
 		$caminho = array($codigo_tipo_regiao);
@@ -530,11 +530,15 @@ class Metaestat{
 				return array("caminho"=>$caminho,"colunas"=>$colunas);
 			}
 			$testaPai = $this->regiaoFilhaAoPai($pai["codigo_tipo_regiao_pai"],$codigo_tipo_regiao_pai);
+			if(count($testaPai) == 0 && $codigo_tipo_regiao_pai == ""){
+				return array("caminho"=>$caminho,"colunas"=>$colunas);
+			}
 			if(count($testaPai) == 0){
 				$caminho = array();
 				$colunas = array();
 			}
 		}
+
 	}
 	/**
 	 * Cria um arquivo mapfile para uma medida de variavel

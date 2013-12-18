@@ -1,0 +1,51 @@
+Roteiro para instalação e configuração do SAIKU para uso com o i3Geo.
+
+Para mais informações veja em: http://docs.analytical-labs.com/
+
+- Faça o download do SAIKU Server no endereço: http://meteorite.bi/saiku/download
+
+- Descompacte os arquivos em uma pasta em seu servidor, podendo ser a mesma pasta onde se encontra a pasta i3geo (no Linux /var/www por exemplo)
+
+- Edite o arquivo saiku-server/tomcat/conf/server.xml para definir a porta utilizada pelo SAIKU
+
+	Procure por
+
+		<Connector port="9090" protocol="HTTP/1.1"
+
+	e modifique o valor da porta se achar necessário
+
+- Configure o arquivo de conexão com a fonte de dados
+
+	Copie o arquivo "i3geo" localizado em
+
+		/var/www/i3geo/ferramentas/saiku
+
+		(c:\\ms4w\Apache\htdocs\i3geo\ferramentas\saiku no Windows)
+
+	para a pasta:
+
+		saiku-server/tomcat/webapps/saiku/WEB-INF/classes/saiku-datasources
+
+	Esse arquivo indica qual a fonte de dados que será usada. Altere os valores conforme sua necessidade, por exemplo:
+
+	No lugar de localhost coloque o endereço do banco de dados Postgres
+
+	No lugar de i3geosaude coloque o nome do banco de dados onde estão as tabelas utilizadas pelo i3Geo
+
+	No lugar de http://localhost/i3geo/ferramentas/saiku/esquemaxml.php coloque o endereço (URL) completo do arquivo i3geo/ferramentas/saiku/esquemaxml.php
+
+	No lugar de postgres coloque os nomes de usuário e senha para conexão com o banco de dados
+
+- Inicialize o servidor para o SAIKU
+
+	Procure na pasta saiku-server o programa start-saiku.bat (para Windows) ou start-saiku.sh para Linux.
+
+	Execute esse programa. No caso do linux, digite no terminal:
+
+		./start-saiku.sh
+
+	Abra o navegador e digite:
+
+		http://localhost:9090/
+
+	Se tudo estiver ok, deve aparecer ua tela de login. Utilize admin como usuário e admin como senha
