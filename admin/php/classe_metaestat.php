@@ -514,32 +514,39 @@ class Metaestat{
 	 * @return array lista de ids de regioes sequenciais do filho ate chegar ao pai indicado
 	 */
 	function regiaoFilhaAoPai($codigo_tipo_regiao,$codigo_tipo_regiao_pai=""){
-		//echo $codigo_tipo_regiao." ".$codigo_tipo_regiao_pai;
 		$pais = $this->listaAgregaRegiao($codigo_tipo_regiao);
 		$caminho = array($codigo_tipo_regiao);
 		$colunas = array();
 		if(count($pais) == 0){
 			return $caminho;
 		}
-		$achou = false;
 		foreach($pais as $pai){
 			$caminho[] = $pai["codigo_tipo_regiao_pai"];
 			$colunas[$pai["codigo_tipo_regiao"]] = $pai;
 			if($pai["codigo_tipo_regiao_pai"] == $codigo_tipo_regiao_pai){
-				$achou = true;
 				return array("caminho"=>$caminho,"colunas"=>$colunas);
-			}
-			$testaPai = $this->regiaoFilhaAoPai($pai["codigo_tipo_regiao_pai"],$codigo_tipo_regiao_pai);
-			if(count($testaPai) == 0 && $codigo_tipo_regiao_pai == ""){
-				return array("caminho"=>$caminho,"colunas"=>$colunas);
-			}
-			if(count($testaPai) == 0){
-				$caminho = array();
-				$colunas = array();
 			}
 		}
-
 	}
+	function hierarquiaPath($node){
+		$query="select codigo_tipo_regiao as parent from ".$this->esquemaadmin."i3geoestat_agregaregiao WHERE codigo_tipo_regiao_pai = $node";
+		$result=$this->execSQL($query,"",false);
+		$row = $result[0];
+		// save the path in this array 
+		$path = array(); 
+		// only continue if this $node isn't the root node 
+		// (that's the node with no parent) 
+		if ($row['parent']!='') { 
+			// the last part of the path to $node, is the name 
+			// of the parent of $node 
+			$path[] = $row['parent']; 
+			// we should add the path to the parent of this node 
+			// to the path 
+			$path = array_merge($this->hierarquiaPath($row['parent']), $path); 
+		}
+		// return the path 
+		return $path; 
+	} 
 	/**
 	 * Cria um arquivo mapfile para uma medida de variavel
 	 * Inclui no arquivo o layer de acesso aos dados
@@ -2018,7 +2025,7 @@ class Metaestat{
 	 * @param codigo da regiao
 	 */
 	function listaHierarquiaRegioes($codigoregiaopai=""){
-		$sql = "select i3geoestat_agregaregiao.colunaligacao_regiaopai,i3geoestat_tipo_regiao.codigo_tipo_regiao,i3geoestat_tipo_regiao.nome_tipo_regiao from ".$this->esquemaadmin."i3geoestat_tipo_regiao ";
+		$sql = "select i3geoestat_agregaregiao.id_agregaregiao,i3geoestat_agregaregiao.colunaligacao_regiaopai,i3geoestat_tipo_regiao.codigo_tipo_regiao,i3geoestat_tipo_regiao.nome_tipo_regiao from ".$this->esquemaadmin."i3geoestat_tipo_regiao ";
 		$sql .= "LEFT JOIN ".$this->esquemaadmin."i3geoestat_agregaregiao ";
 		$sql .= "ON i3geoestat_tipo_regiao.codigo_tipo_regiao = i3geoestat_agregaregiao.codigo_tipo_regiao ";
 		if($codigoregiaopai != ""){
@@ -2083,13 +2090,15 @@ class Metaestat{
 	 * @param codigo do tipo de regiao
 	 * @param id da agregacao
 	 */
-	function listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao=""){
+	function listaAgregaRegiao($codigo_tipo_regiao="",$id_agregaregiao=""){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_agregaregiao ";
 		if($id_agregaregiao != ""){
 			$sql .= "WHERE id_agregaregiao = $id_agregaregiao ";
 		}
 		else{
-			$sql .= "WHERE codigo_tipo_regiao = $codigo_tipo_regiao";
+			if($codigo_tipo_regiao != ""){
+				$sql .= "WHERE codigo_tipo_regiao = $codigo_tipo_regiao";
+			}
 		}
 		$sql .= " ORDER BY colunaligacao_regiaopai";
 		//echo $sql;exit;

@@ -3,17 +3,12 @@ include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
 $m = new Metaestat();
 
 $regioes = $m->listaTipoRegiao();
-$hierarquia = array();
-//hierarquia de cada regiao
-foreach($regioes as $regiao){
-	$hregioes = $m->listaHierarquiaRegioes($regiao["codigo_tipo_regiao"]);
-	$hierarquias[$regiao["codigo_tipo_regiao"]] = $hregioes;
-}
-echo "<pre>";var_dump($hierarquias);exit;
 $xml = "<Schema name='i3Geo Metaestat'>";
 foreach($regioes as $regiao){
+	$caminho = $m->hierarquiaPath($regiao["codigo_tipo_regiao"]);
+	//
 	//verifica se a regiao tem hierarquia
-	if(count($hierarquias[$regiao["codigo_tipo_regiao"]]) == 0){
+	if(empty($caminho)){
 		$xml .= "
 			<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='".converte($regiao["nome_tipo_regiao"])."'>
 				<Hierarchy hasAll='true'  primaryKey='".$regiao["identificador"]."'>
@@ -24,27 +19,36 @@ foreach($regioes as $regiao){
 		";
 	}
 	else{
-		$caminho = $m->regiaoFilhaAoPai($regiao["codigo_tipo_regiao"]);
-		//echo "<pre>";var_dump($caminho);
 		$xml .= "
 			<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='".converte($regiao["nome_tipo_regiao"])."'>
 				<Hierarchy hasAll='true'  primaryKey='".$regiao["identificador"]."'>
 		";
 		//cria uma view juntando as tabelas da hierarquia de regioes
-		$ri = $regioes[$caminho[0]];
-		$sql = "SELECT * FROM {$ri['esquemadb']}.{$ri['tabela']} AS regiao ";
-		$nc = count($caminho) - 1;
-		for($i=0;$i<$nc;$i++){
-			$r = $regioes[$caminho[$i]];
-			$sql .= "INNER JOIN {$r['esquemadb']}.{$r['tabela']}
-				AS j$i ON j$i.{$r['identificador']}::text = regiao.{$regiao['identificador']}::text
-			";
+		$n = count($caminho);
+		$r = $m->listaTipoRegiao($caminho[0]);
+		$colunas = array();
+		$sql = "SELECT __COLUNAS__ FROM {$r['esquemadb']}.{$r['tabela']} AS regiao ";
+		$colunas[] = "regiao.".$r['identificador'];
+		$colunas[] = "regiao.".$r['colunanomeregiao'];
+		$tabelaAnt = "regiao";
+		if($n > 1){
+			for($i=1;$i<$n;$i++){
+				$r = $m->listaTipoRegiao($caminho[$i]);
+				$colunas[] = "j".$i.".".$r['colunanomeregiao'];
+				$colunas[] = "j".$i.".".$r['identificador'];
+				$sql .= "INNER JOIN {$r['esquemadb']}.{$r['tabela']}
+					AS j$i ON j$i.{$r['identificador']}::text = {$tabelaAnt}.{$r['identificador']}::text
+				";
+				$tabelaAnt = "j".$i;
+			}
 		}
-		$h = $hierarquias[$caminho[0]];
-		$h = $h[0];
 		$sql .= "INNER JOIN {$regiao['esquemadb']}.{$regiao['tabela']}
-			AS j ON j.{$regiao['identificador']}::text = regiao.{$h['colunaligacao_regiaopai']}::text
-		";
+					AS j$i ON j$i.{$regiao['identificador']}::text = {$tabelaAnt}.{$regiao['identificador']}::text
+				";
+		$colunas[] = "j".$i.".".$regiao['colunanomeregiao'];
+		$colunas[] = "j".$i.".".$regiao['identificador'];
+		$colunas = implode($colunas,",");
+		$sql = str_replace("__COLUNAS__",$colunas,$sql);
 		$xml .= "
 				<view><sql>$sql</sql></view>
 		";
