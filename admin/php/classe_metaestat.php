@@ -529,7 +529,7 @@ class Metaestat{
 		}
 	}
 	function hierarquiaPath($node){
-		$query="select codigo_tipo_regiao as parent from ".$this->esquemaadmin."i3geoestat_agregaregiao WHERE codigo_tipo_regiao_pai = $node";
+		$query="select codigo_tipo_regiao_pai as parent from ".$this->esquemaadmin."i3geoestat_agregaregiao WHERE codigo_tipo_regiao = $node";
 		$result=$this->execSQL($query,"",false);
 		$row = $result[0];
 		// save the path in this array 
@@ -544,7 +544,8 @@ class Metaestat{
 			// to the path 
 			$path = array_merge($this->hierarquiaPath($row['parent']), $path); 
 		}
-		// return the path 
+		// return the path
+		sort($path);
 		return $path; 
 	} 
 	/**

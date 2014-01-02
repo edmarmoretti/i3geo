@@ -4,13 +4,23 @@ $m = new Metaestat();
 
 $regioes = $m->listaTipoRegiao();
 $xml = "<Schema name='i3Geo Metaestat'>";
+/*
+echo "<pre>";
+foreach($regioes as $regiao){
+	echo $regiao["codigo_tipo_regiao"]."<br>";
+	$caminho = $m->hierarquiaPath($regiao["codigo_tipo_regiao"]);
+	var_dump($caminho);
+}
+exit;
+*/
 foreach($regioes as $regiao){
 	$caminho = $m->hierarquiaPath($regiao["codigo_tipo_regiao"]);
+	
 	//
 	//verifica se a regiao tem hierarquia
 	if(empty($caminho)){
 		$xml .= "
-			<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='".converte($regiao["nome_tipo_regiao"])."'>
+			<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='Onde: ".converte($regiao["nome_tipo_regiao"])."'>
 				<Hierarchy hasAll='true'  primaryKey='".$regiao["identificador"]."'>
 				<Table name='".$regiao["tabela"]."' schema='".$regiao["esquemadb"]."' />
 					<Level name='Nome - ".converte($regiao["nome_tipo_regiao"])."' column='".$regiao["colunanomeregiao"]."' uniqueMembers='true'/>
@@ -20,73 +30,141 @@ foreach($regioes as $regiao){
 	}
 	else{
 		$xml .= "
-			<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='".converte($regiao["nome_tipo_regiao"])."'>
-				<Hierarchy hasAll='true'  primaryKey='".$regiao["identificador"]."'>
+			<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='Onde: ".converte($regiao["nome_tipo_regiao"])."'>
+				<Hierarchy hasAll='true'  primaryKey='codigo'>
 		";
 		//cria uma view juntando as tabelas da hierarquia de regioes
 		$n = count($caminho);
-		$r = $m->listaTipoRegiao($caminho[0]);
 		$colunas = array();
-		$sql = "SELECT __COLUNAS__ FROM {$r['esquemadb']}.{$r['tabela']} AS regiao ";
-		$colunas[] = "regiao.".$r['identificador'];
-		$colunas[] = "regiao.".$r['colunanomeregiao'];
+		$niveis = array();
+		$sql = "SELECT __COLUNAS__ FROM {$regiao['esquemadb']}.{$regiao['tabela']} AS regiao ";
+		$colunas[] = "regiao.{$regiao['identificador']} AS codigo ";
+		$colunas[] = "regiao.{$regiao['colunanomeregiao']} AS nome";
 		$tabelaAnt = "regiao";
-		if($n > 1){
-			for($i=1;$i<$n;$i++){
-				$r = $m->listaTipoRegiao($caminho[$i]);
-				$colunas[] = "j".$i.".".$r['colunanomeregiao'];
-				$colunas[] = "j".$i.".".$r['identificador'];
-				$sql .= "INNER JOIN {$r['esquemadb']}.{$r['tabela']}
-					AS j$i ON j$i.{$r['identificador']}::text = {$tabelaAnt}.{$r['identificador']}::text
-				";
-				$tabelaAnt = "j".$i;
-			}
+		for($i=0;$i<$n;$i++){
+			$r = $m->listaTipoRegiao($caminho[$i]);
+			$colunas[] = "j$i.{$r['colunanomeregiao']} AS j$i{$r['colunanomeregiao']}";
+			$colunas[] = "j$i.{$r['identificador']}  AS j$i{$r['identificador']}";
+			$sql .= "INNER JOIN {$r['esquemadb']}.{$r['tabela']}
+				AS j$i ON j$i.{$r['identificador']}::text = {$tabelaAnt}.{$r['identificador']}::text
+			";
+			$tabelaAnt = "j".$i;
+			$niveis[] = "
+				<Level name='".converte($r["nome_tipo_regiao"])."'
+					column='j$i{$r['identificador']}' 
+					nameColumn='j$i{$r["colunanomeregiao"]}' uniqueMembers='false'/>
+			";
+
 		}
-		$sql .= "INNER JOIN {$regiao['esquemadb']}.{$regiao['tabela']}
-					AS j$i ON j$i.{$regiao['identificador']}::text = {$tabelaAnt}.{$regiao['identificador']}::text
-				";
-		$colunas[] = "j".$i.".".$regiao['colunanomeregiao'];
-		$colunas[] = "j".$i.".".$regiao['identificador'];
+		$niveis[] = "
+			<Level name='".converte($regiao["nome_tipo_regiao"])."'
+				column='codigo' 
+				nameColumn='nome' uniqueMembers='true'>
+		";
+		
+		//verifica outras colunas
+		$vis = $regiao['colunasvisiveis'];
+		if($vis != ""){
+			$vis = str_replace(";",",",$vis);
+			$vis = str_replace(",,",",",$vis);
+			$vis = explode(",",$vis);
+			foreach($vis as $v){
+				//if($v != $regiao['colunanomeregiao'] && $v != $regiao['identificador']){
+					$colunas[] = "regiao.".$v." as ".$v;
+				//}
+			}
+			$colunas = array_unique($colunas);
+		}
 		$colunas = implode($colunas,",");
 		$sql = str_replace("__COLUNAS__",$colunas,$sql);
 		$xml .= "
-				<view><sql>$sql</sql></view>
+				<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' ><SQL dialect='generic' >$sql</SQL></view>
 		";
-		//<Level name='Nome - ".converte($regiao["nome_tipo_regiao"])."' column='".$regiao["colunanomeregiao"]."' uniqueMembers='true'/>
+		$xml .= implode(" ",$niveis);
+		//verifica se existem propriedades (colunas adicionais)
+		if($vis != ""){
+			//apelidos
+			$apelidos = $regiao['apelidos'];
+			if($apelidos != ""){
+				$apelidos = str_replace(";",",",$apelidos);
+				$apelidos = str_replace(",,",",",$apelidos);
+				$apelidos = converte($apelidos);
+				$apelidos = explode(",",$apelidos);
+			}
+			else{
+				$apelidos = $vis;
+			}
+			$nvis = count($vis);
+			for($i = 0; $i < $nvis; $i++){
+				$xml .= "
+					<Property name='{$apelidos[$i]}' column='{$vis[$i]}'/>
+				";
+			}
+		} 
+		//fecha os elementos. LEVEL deve ser fechado pois o ultimo recebe as propriedades
 		$xml .= "
+				</Level>
 				</Hierarchy>
 			</Dimension>
 		";
 	}
 }
-
-$xml .= "
-	<Cube name='Vari&amp;aacute;veis'>";
+//junta as medidas conforme o nome da tabela utilizada
 $medidas = $m->listaMedidaVariavel();
-$tabela = "";
+$tbs = array();
+
 foreach($medidas as $medida){
-	$agregador = "sum";
-	if($medida["permitesoma"] == 0 && $medida["permitemedia"] == 1){
-		$agregador = "avg";
+	$k = $medida["esquemadb"].$medida["tabela"];
+	if(empty($tbs[$k])){
+		$tbs[$k] = array($medida);
 	}
-	if($medida["permitesoma"] == 0 && $medida["permitemedia"] == 0){
-		$agregador = "count";
+	else{
+		array_push($tbs[$k],$medida);
 	}
-	if($tabela != $medida["esquemadb"].".".$medida["tabela"]){
+}
+
+//monta os cubos para cada esquema.tabela diferente
+$VirtualCubeDimension = array();
+$VirtualCubeMeasure = array();
+foreach($tbs as $tb){
+	//cabecalho de cada cubo obtido da primeira medida
+	$c = $tb[0];
+	$VirtualCubeDimension[] = "
+		<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />
+	";
+	$xml .= "
+		<Cube name='{$c["esquemadb"]}{$c["tabela"]}'>";
+	$xml .= "
+		<Table name='".$c["tabela"]."' schema='".$c["esquemadb"]."' />
+		<DimensionUsage foreignKey='".$c["colunaidgeo"]."' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."'/>
+	";
+	//inclui cada elemento em medida
+	foreach($tb as $medida){
+		$agregador = "sum";
+		if($medida["permitesoma"] == 0 && $medida["permitemedia"] == 1){
+			$agregador = "avg";
+		}
+		if($medida["permitesoma"] == 0 && $medida["permitemedia"] == 0){
+			$agregador = "count";
+		}
 		$xml .= "
-			<Table name='".$medida["tabela"]."' schema='".$medida["esquemadb"]."' />
-			<DimensionUsage foreignKey='".$medida["colunaidgeo"]."' name='codigo_tipo_regiao_".$medida["codigo_tipo_regiao"]."' source='codigo_tipo_regiao_".$medida["codigo_tipo_regiao"]."'/>
+			<Measure name='id_medida_variavel_".$medida["id_medida_variavel"]."' caption='".converte($medida["nomemedida"])."' column='".$medida["colunavalor"]."' aggregator='".$agregador."' />
+		";
+		$VirtualCubeMeasure[] = "
+			<VirtualCubeMeasure cubeName='{$c["esquemadb"]}{$c["tabela"]}' name='[Measures].[id_medida_variavel_".$medida["id_medida_variavel"]."]'/>
 		";
 	}
 	$xml .= "
-		<Measure name='id_medida_variavel_".$medida["id_medida_variavel"]."' caption='".converte($medida["nomemedida"])."' column='".$medida["colunavalor"]."' aggregator='".$agregador."' />
-	";
-
-	$tabela = $medida["esquemadb"].".".$medida["tabela"];
+		</Cube>
+		";
 }
-$xml .= "
-	</Cube>
-	</Schema>";
+$xml .= '<VirtualCube name="i3Geo - Metaestat" >';
+$VirtualCubeDimension = array_unique($VirtualCubeDimension);
+$VirtualCubeMeasure = array_unique($VirtualCubeMeasure);
+$xml .= implode(" ",$VirtualCubeDimension);
+$xml .= implode(" ",$VirtualCubeMeasure);
+$xml .= '</VirtualCube>';
+$xml .= "</Schema>";
 error_reporting(0);
 ob_end_clean();
 echo header("Content-type: application/xml");
