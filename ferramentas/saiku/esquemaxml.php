@@ -13,9 +13,20 @@ foreach($regioes as $regiao){
 }
 exit;
 */
+
+//cria as dimensoes de tipo temporal
+$sqlAno = "select nu_ano from i3geo_metaestat.dim_tempo group by nu_ano order by nu_ano";
+$xml .= "
+	<Dimension name='Anual' type='TimeDimension' caption='Tempo: ano'>
+		<Hierarchy hasAll='true' primaryKey='nu_ano'>
+			<view alias='tempo_ano' ><SQL dialect='generic' >$sqlAno</SQL></view>
+			<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true'
+			levelType='TimeYears'/>
+		</Hierarchy>
+	</Dimension>
+";
 foreach($regioes as $regiao){
 	$caminho = $m->hierarquiaPath($regiao["codigo_tipo_regiao"]);
-	
 	//
 	//verifica se a regiao tem hierarquia
 	if(empty($caminho)){
@@ -138,6 +149,24 @@ foreach($tbs as $tb){
 		<Table name='".$c["tabela"]."' schema='".$c["esquemadb"]."' />
 		<DimensionUsage foreignKey='".$c["colunaidgeo"]."' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."'/>
 	";
+	//verifica as dimensoes do tipo tempo
+	$dimTempo = array();
+	foreach($tb as $medida){
+		$parametros = $m->listaParametro($medida["id_medida_variavel"],"","",$apenasTempo=true,$ordenaPeloPai=false);
+		foreach($parametros as $parametro){
+			if($parametro["tipo"] == 1){
+				$VirtualCubeDimension[] = "
+					<VirtualCubeDimension name='Anual' />
+				";
+				$dimTempo[] = "
+					<DimensionUsage foreignKey='".$parametro["coluna"]."' name='Anual_{$c["esquemadb"]}{$c["tabela"]}' source='Anual'/>
+				";
+			}
+		}
+		//echo "<pre>";var_dump($parametro);exit;
+	}
+	$xml .= implode(" ",array_unique($dimTempo));
+
 	//inclui cada elemento em medida
 	foreach($tb as $medida){
 		$agregador = "sum";
