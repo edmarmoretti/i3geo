@@ -16,12 +16,19 @@ exit;
 
 //cria as dimensoes de tipo temporal
 $sqlAno = "select nu_ano from i3geo_metaestat.dim_tempo group by nu_ano order by nu_ano";
+$sqlMes = "select nu_ano,nu_mes,ds_mes_abreviado as mes,nu_ano::text||'-'||nu_mes::text as nu_anomes from i3geo_metaestat.dim_tempo group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes";
 $xml .= "
-	<Dimension name='Anual' type='TimeDimension' caption='Tempo: ano'>
+	<Dimension name='Anual' type='TimeDimension' caption='Tempo: Anual'>
 		<Hierarchy hasAll='true' primaryKey='nu_ano'>
 			<view alias='tempo_ano' ><SQL dialect='generic' >$sqlAno</SQL></view>
-			<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true'
-			levelType='TimeYears'/>
+			<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true' levelType='TimeYears'/>
+		</Hierarchy>
+	</Dimension>
+	<Dimension name='Mensal' type='TimeDimension' caption='Tempo: Mensal'>
+		<Hierarchy hasAll='true' primaryKey='nu_anomes'>
+			<view alias='tempo_ano' ><SQL dialect='generic' >$sqlMes</SQL></view>
+			<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true' levelType='TimeYears'/>
+			<Level nameColumn='mes' name='Mes' column='nu_mes' type='Numeric' uniqueMembers='false' levelType='TimeMonths'/>
 		</Hierarchy>
 	</Dimension>
 ";
@@ -62,17 +69,17 @@ foreach($regioes as $regiao){
 			$tabelaAnt = "j".$i;
 			$niveis[] = "
 				<Level name='".converte($r["nome_tipo_regiao"])."'
-					column='j$i{$r['identificador']}' 
+					column='j$i{$r['identificador']}'
 					nameColumn='j$i{$r["colunanomeregiao"]}' uniqueMembers='false'/>
 			";
 
 		}
 		$niveis[] = "
 			<Level name='".converte($regiao["nome_tipo_regiao"])."'
-				column='codigo' 
+				column='codigo'
 				nameColumn='nome' uniqueMembers='true'>
 		";
-		
+
 		//verifica outras colunas
 		$vis = $regiao['colunasvisiveis'];
 		if($vis != ""){
@@ -111,7 +118,7 @@ foreach($regioes as $regiao){
 					<Property name='{$apelidos[$i]}' column='{$vis[$i]}'/>
 				";
 			}
-		} 
+		}
 		//fecha os elementos. LEVEL deve ser fechado pois o ultimo recebe as propriedades
 		$xml .= "
 				</Level>
@@ -143,28 +150,48 @@ foreach($tbs as $tb){
 	$VirtualCubeDimension[] = "
 		<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />
 	";
-	$xml .= "
-		<Cube name='{$c["esquemadb"]}{$c["tabela"]}'>";
-	$xml .= "
-		<Table name='".$c["tabela"]."' schema='".$c["esquemadb"]."' />
-		<DimensionUsage foreignKey='".$c["colunaidgeo"]."' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."'/>
-	";
 	//verifica as dimensoes do tipo tempo
 	$dimTempo = array();
 	foreach($tb as $medida){
 		$parametros = $m->listaParametro($medida["id_medida_variavel"],"","",$apenasTempo=true,$ordenaPeloPai=false);
+		$parComposto = array(); //guarda a composicao da chave que liga com a dimensao
 		foreach($parametros as $parametro){
 			if($parametro["tipo"] == 1){
-				$VirtualCubeDimension[] = "
-					<VirtualCubeDimension name='Anual' />
-				";
-				$dimTempo[] = "
-					<DimensionUsage foreignKey='".$parametro["coluna"]."' name='Anual_{$c["esquemadb"]}{$c["tabela"]}' source='Anual'/>
-				";
+				if(count($parametros) == 1){
+					$VirtualCubeDimension[] = "
+						<VirtualCubeDimension name='Anual' />
+					";
+					$dimTempo[] = "
+						<DimensionUsage foreignKey='".$parametro["coluna"]."' name='Anual' source='Anual'/>
+					";
+				}
+				$parComposto[] = $parametro["coluna"];
+			}
+			if($parametro["tipo"] == 2){
+				$parComposto[] = $parametro["coluna"];
+				if(count($parametros) == 2){
+					$VirtualCubeDimension[] = "
+						<VirtualCubeDimension name='Mensal' />
+					";
+					$dimTempo[] = "
+						<DimensionUsage foreignKey='".implode("_",$parComposto)."' name='Mensal' source='Mensal'/>
+					";
+				}
 			}
 		}
 		//echo "<pre>";var_dump($parametro);exit;
 	}
+	$xml .= "
+	<Cube name='{$c["esquemadb"]}{$c["tabela"]}'>";
+	$sql = "select * from {$c["esquemadb"]}.{$c["tabela"]}";
+	if(count($parComposto) > 0){
+		$sql = "select *,".implode("||'-'||",$parComposto)." as ".implode("_",$parComposto)." from {$c["esquemadb"]}.{$c["tabela"]}";
+	}
+	$xml .= "
+		<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
+			<DimensionUsage foreignKey='".$c["colunaidgeo"]."' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."'/>
+	";
+
 	$xml .= implode(" ",array_unique($dimTempo));
 
 	//inclui cada elemento em medida
