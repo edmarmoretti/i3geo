@@ -1,4 +1,5 @@
 <?php
+var_dump($_COOKIE);exit;
 include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
 $m = new Metaestat();
 

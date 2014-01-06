@@ -36,6 +36,11 @@ Para mais informações veja em: http://docs.analytical-labs.com/
 
 	No lugar de postgres coloque os nomes de usuário e senha para conexão com o banco de dados
 
+- Arquivos alterados
+
+	Alguns dos códigos do SAIKU originais foram alterados. As alterações estão na pasta i3geo/ferramentas/saiku/saiku-server
+	O conteúdo dessa pasta deve ser copiado para a pasta onde o saiku for instalado (saiku-server)
+
 - Inicialize o servidor para o SAIKU
 
 	Procure na pasta saiku-server o programa start-saiku.bat (para Windows) ou start-saiku.sh para Linux.
@@ -49,3 +54,5 @@ Para mais informações veja em: http://docs.analytical-labs.com/
 		http://localhost:9090/
 
 	Se tudo estiver ok, deve aparecer ua tela de login. Utilize admin como usuário e admin como senha
+
+
