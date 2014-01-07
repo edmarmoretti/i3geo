@@ -1360,7 +1360,7 @@ i3GEOF.metaestat = {
 				return "";
 			}
 			//se tiver parametro e todos estiverem vazios, aborta
-			var i,n,c,j,k,val,
+			var i,n,c,j,val,
 			t=[],
 			dados = i3GEOF.metaestat.parametros.dados;
 			n = dados.length;

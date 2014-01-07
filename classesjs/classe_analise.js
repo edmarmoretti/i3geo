@@ -50,6 +50,14 @@ i3GEO.analise = {
 	*/
 	dialogo:{
 		/*
+		Function: saiku
+
+		Abre a janela de dialogo da ferramenta SAIKU
+		*/
+		saiku: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.saiku()","saiku","saiku");
+		},
+		/*
 		Function: graficoInterativo
 
 		Abre a janela de dialogo da ferramenta graficointerativo versao flash

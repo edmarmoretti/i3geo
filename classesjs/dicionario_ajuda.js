@@ -978,6 +978,15 @@ g_traducao_ajuda = {
 			//tela:"ferramentas/upload/exemplo.htm",
 			apijs:""
 		},
+		"117": {
+			titulo: "SAIKU",
+			diretorio:"i3geo/ferramentas/saiku",
+			categoria:"5",
+			pt:"Abre o sistema Saiku que permite o cruzamento de vari&aacute;veis estat&iacute;sticas. O Saiku utiliza o sistema de metadados estat&iacute;sticos para gerar cubos tridimensionais que permitem ao cruzamento de dados tabulares, gera&ccedil;&atilde;o de gr&aacute;ficos e relat&oacute;rios. O usu&aacute;rio deve adicionar ao mapa pelo menos uma camada com localidades originadas do sistema de metadados. Os elementos dessa camada que estiverem selecionados ser&atilde;o utilizados como filtro no Saiku.",
+			complemento:"",
+			//tela:"ferramentas/upload/exemplo.htm",
+			apijs:""
+		}
 	}
 };
 
