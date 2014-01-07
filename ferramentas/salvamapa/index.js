@@ -131,7 +131,7 @@ i3GEOF.salvaMapa = {
 		else{
 			funcaoOK = function(){
 				var temp,
-					id_mapa = $i("salvamapaId").value,
+					id_mapa = $i("i3GEOFsalvamapaMapaId").value,
 					titulo = $i("i3GEOjanelaprompt").value;
 				if(titulo === ""){
 					return;
@@ -210,7 +210,7 @@ i3GEOF.salvaMapa = {
 				var n = retorno.length,
 					i,
 					ins = "" +
-					"<select id='i3GEOFsalvamapaMapa' >" +
+					"<select id='i3GEOFsalvamapaMapaId' >" +
 					"	<option value=''>---</option>";
 				for(i=0;i<n;i++){
 					ins += 	"<option value='"+retorno[i].id_mapa+"'>"+retorno[i].id_mapa+" - "+retorno[i].titulo+"</option>";
@@ -218,6 +218,6 @@ i3GEOF.salvaMapa = {
 				ins += "</select>";
 				$i(onde).innerHTML = ins;
 			};
-		i3GEO.util.ajaxGet(p,combo);		
+		i3GEO.util.ajaxGet(p,combo);
 	}
 };
