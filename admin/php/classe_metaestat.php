@@ -2596,12 +2596,13 @@ class Metaestat{
 					if($ihora != ""){
 						$hora = $linha[$ihora];
 					}
-					$linhas[] = "INSERT INTO i3geo_metaestat.".$medidavariavel["tabela"]." (id_medida_variavel,codigoregiao,".$medidavariavel["colunavalor"].",ano,mes,dia,hora) VALUES ('$id_medida_variavel','".$linha[$icodigoregiao]."','".$linha[$ivalor]."','".$ano."','".$mes."','".$dia."','".$hora."')";
+					$li = "INSERT INTO i3geo_metaestat.".$medidavariavel["tabela"]." (id_medida_variavel,codigoregiao,".$medidavariavel["colunavalor"].",ano,mes,dia,hora) VALUES ('$id_medida_variavel','".$linha[$icodigoregiao]."','".$linha[$ivalor]."','".$ano."','".$mes."','".$dia."','".$hora."')";
+					$linhas[] = str_replace("''",'null',$li);
 				}
 			}
 		}
 		fclose ($handle);
-		//var_dump($linhas);
+		//var_dump($linhas[0]);exit;
 		//pega a conexao
 		$c = $this->listaConexao($medidavariavel["codigo_estat_conexao"],true);
 		//gera o objeto pdo
