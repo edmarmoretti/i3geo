@@ -1,52 +1,91 @@
 <?php
+if(empty($_GET["g_sid"])){
+	echo "erro";
+	exit;
+}
+include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
-include(dirname(__FILE__)."/../../ms_configura.php");
-$nomeDatasource = $dir_tmp."/saiku-datasources/i3geo";
-//$saikuDatasourceString vem do ms_configura.php
+if(!isset($dir_tmp)){
+	include(dirname(__FILE__)."/../../ms_configura.php");
+}
+//pega o filtro da sessao PHP aberta pelo i3Geo
+session_name("i3GeoPHP");
+session_id($_GET["g_sid"]);
+session_start();
+//obtem os layers que sao do sistema metaestat, sao regioes e que possuem selecao
+$map_file = $_SESSION["map_file"];
+$nomeDatasource = $dir_tmp."/saiku-datasources/".nomeRandomico();
+$nomeXmlEsquema = dirname($map_file)."/".nomeRandomico().".xml";
+/*
+$saikuConfigDataSource vem do ms_configura.php
+
+Exemplo de arquivo de fonte:
+type=OLAP
+name=i3geo
+driver=mondrian.olap4j.MondrianOlap4jDriver
+location=jdbc:mondrian:Jdbc=jdbc:postgresql://localhost:5432/i3geosaude;Catalog=http://localhost/i3geo/ferramentas/saiku/esquemaxml.php;JdbcDrivers=org.postgresql.Driver;
+username=postgres
+password=postgres
+
+Array com os parametros definidos em ms_configura:
+
+$saikuConfigDataSource = array(
+	"type"=>"OLAP",
+	"name"=>"i3geo",
+	"driver"=>"mondrian.olap4j.MondrianOlap4jDriver",
+	"location"=>"jdbc:mondrian:Jdbc=jdbc:postgresql",
+	"serverdb"=>"localhost",
+	"port"=>"5432",
+	"database"=>"i3geosaude",
+	"JdbcDrivers"=>"org.postgresql.Driver",
+	"username"=>"postgres",
+	"password"=>"postgres"
+);
+*/
+$stringDatasource = "
+type={$saikuConfigDataSource["type"]}
+name={$saikuConfigDataSource["name"]}
+driver={$saikuConfigDataSource["driver"]}
+location={$saikuConfigDataSource["location"]}://{$saikuConfigDataSource["serverdb"]}:{$saikuConfigDataSource["port"]}/{$saikuConfigDataSource["database"]};Catalog={$nomeXmlEsquema};JdbcDrivers={$saikuConfigDataSource["JdbcDrivers"]};
+username={$saikuConfigDataSource["username"]}
+password={$saikuConfigDataSource["password"]}
+";
+//salva o arquivo com a fonte
+gravaDados(array($stringDatasource),$nomeDatasource);
 $m = new Metaestat();
 $selecaoRegiao = array();
-//pega o filtro da sessao PHP aberta pelo i3Geo
-if(!empty($_COOKIE["i3GeoPHP"])){
-	include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
-	session_name("i3GeoPHP");
-	session_id($_COOKIE["i3GeoPHP"]);
-	session_start();
-	//obtem os layers que sao do sistema metaestat, sao regioes e que possuem selecao
-	$map_file = $_SESSION["map_file"];
-	$mapa = ms_newMapObj($map_file);
-	$c = $mapa->numlayers;
-	for ($i=0;$i < $c;++$i){
-		$l = $mapa->getlayer($i);
-		$registros = array();
-		$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");
-		if($codigo_tipo_regiao != "" && $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL") == ""){
-			//verifica se tem selecao
-			$qyfile = dirname($map_file)."/".$l->name.".php";
-			if(file_exists($qyfile)){
-				//pega os registros
-				$shapes = retornaShapesSelecionados($l,$map_file,$mapa);
-				//pega o nome da coluna que identifica cada registro
-				$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
-				$item = $regiao["identificador"];
-				foreach($shapes as $shape){
-					$registros[] = $shape->values[$item];
-				}
-				$reg = $item." IN ('".implode("','",$registros)."') ";
-				$selecaoRegiao[$codigo_tipo_regiao] = array(
-						"item" => $item,
-						"sql" => $reg
-				);
+$mapa = ms_newMapObj($map_file);
+$c = $mapa->numlayers;
+for ($i=0;$i < $c;++$i){
+	$l = $mapa->getlayer($i);
+	$registros = array();
+	$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");
+	if($codigo_tipo_regiao != "" && $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL") == ""){
+		//verifica se tem selecao
+		$qyfile = dirname($map_file)."/".$l->name.".php";
+		if(file_exists($qyfile)){
+			//pega os registros
+			$shapes = retornaShapesSelecionados($l,$map_file,$mapa);
+			//pega o nome da coluna que identifica cada registro
+			$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
+			$item = $regiao["identificador"];
+			foreach($shapes as $shape){
+				$registros[] = $shape->values[$item];
 			}
-			else{
-				$selecaoRegiao[$codigo_tipo_regiao] = "";
-			}
+			$reg = $item." IN ('".implode("','",$registros)."') ";
+			$selecaoRegiao[$codigo_tipo_regiao] = array(
+					"item" => $item,
+					"sql" => $reg
+			);
+		}
+		else{
+			$selecaoRegiao[$codigo_tipo_regiao] = "";
 		}
 	}
-	$regiao = "";
-	$item = "";
-	$registros = "";
 }
-//echo "<pre>".var_dump($_SESSION);exit;
+$regiao = "";
+$item = "";
+$registros = "";
 
 $regioes = $m->listaTipoRegiao();
 $xml = "<Schema name='i3Geo Metaestat'>";
@@ -101,7 +140,6 @@ foreach($regioes as $regiao){
 			column='codigo'
 			nameColumn='nome' uniqueMembers='true'>
 	";
-
 	//verifica outras colunas
 	$vis = $regiao['colunasvisiveis'];
 	if($vis != ""){
@@ -250,13 +288,13 @@ $xml .= '</VirtualCube>';
 $xml .= "</Schema>";
 error_reporting(0);
 ob_end_clean();
-echo header("Content-type: application/xml");
-echo $xml;
-exit;
-function converte($texto)
-{
+
+gravaDados(array($xml),$nomeXmlEsquema);
+header("Location:".$saikuUrl);
+
+function converte($texto){
 	//$texto = str_replace("Í","&amp;iacute",$texto);
-$texto = str_replace("&","&amp;",htmlentities($texto));
+	$texto = str_replace("&","&amp;",htmlentities($texto));
 	return $texto;
 }
 ?>

@@ -102,8 +102,13 @@ i3GEOF.saiku = {
 	*/
 	html:function(){
 		var ins = "<p class=paragrafo >Saiku: <a href=http://meteorite.bi/saiku target=_blank >http://meteorite.bi/saiku</a></p>" +
-			"<p class=paragrafo >" + $trad(1,i3GEOF.saiku.dicionario) + "<p>" +
-			"<input id=i3GEOFsaikubotao1 size=20  type=button value='"+$trad(2,i3GEOF.saiku.dicionario)+"' />";
+			"<p class=paragrafo >" + $trad(1,i3GEOF.saiku.dicionario) + "<p>";
+		if(i3GEO.parametros.saikuUrl !== ""){
+			ins += "<input id=i3GEOFsaikubotao1 size=20  type=button value='"+$trad(2,i3GEOF.saiku.dicionario)+"' />";
+		}
+		else{
+			ins += "<p class=paragrafo style=color:red >" + $trad(3,i3GEOF.saiku.dicionario) + "<p>";
+		}
 
 		return ins;
 	},
@@ -140,6 +145,6 @@ i3GEOF.saiku = {
 		i3GEOF.saiku.inicia(divid);
 	},
 	aplicar: function(){
-		window.open("http://localhost:9090?"+i3GEO.configura.sid);
+		window.open(i3GEO.configura.locaplic+"/ferramentas/saiku/esquemaxml.php?g_sid="+i3GEO.configura.sid);
 	}
 };

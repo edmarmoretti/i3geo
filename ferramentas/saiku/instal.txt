@@ -31,7 +31,7 @@ Para mais informações veja em: http://docs.analytical-labs.com/
 	(/var/tmp/ms_tmp é a pasta temporária utilizada pelo i3Geo)
 
 	rm -R -f /var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/classes/saiku-datasources
-	ln -s /tmp/ms_tmp/saiku-datasources /var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/classes/saiku-datasources
+	ln -s /tmp/ms_tmp/saiku-datasources /var/www_geosaude_16/saiku-server/tomcat/webapps/saiku/WEB-INF/classes/saiku-datasources
 
 
 - Arquivos alterados

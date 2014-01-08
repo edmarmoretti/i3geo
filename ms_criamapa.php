@@ -229,6 +229,7 @@ else{
 	$mapext = str_replace(","," ",$mapext);
 	setcookie("i3geoUltimaExtensao", $mapext);
 }
+$saikuUrl_ = $saikuUrl;
 $cachedir_ = $cachedir;
 $dir_tmp_ = $dir_tmp;
 $emailInstituicao_ = $emailInstituicao;
@@ -326,6 +327,9 @@ $_SESSION["mapdir"] = $diretorios[1];
 $_SESSION["imgdir"] = $diretorios[2];
 $_SESSION["contadorsalva"] = 0;//essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
 $_SESSION["i3georendermode"] = $i3georendermode_;
+$_SESSION["saikuUrl"] = $saikuUrl_;
+
+
 //
 //pega todas as vari&aacute;veis da sess&atilde;o, mesmo as que foram definidas anteriormente
 //

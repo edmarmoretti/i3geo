@@ -60,7 +60,7 @@ array(array("usuario"=>"admin", "senha"=>"adminx"));
 */
 //@TODO v5 alterar a senha para admin
 $i3geomaster = array(
-		array("usuario"=>"admin", "senha"=>"admin")
+	array("usuario"=>"admin", "senha"=>"admin")
 );
 /*
 Variable: saikuUrl
@@ -70,6 +70,47 @@ URL para acessar o aplicativo SAIKU. Se nao estiver instalado, deixe em branco
 Para maiores informacoes sobre como instalar o SAIKU veja em http://localhost/i3geo/ferramentas/saiku/instal.txt
 */
 $saikuUrl = "http://localhost:9090";
+/*
+Variable: saikuConfigDataSource
+
+Parametros de configuracao da fonte de dados utilizada pelo applicativo SAIKU
+
+Indicam onde estao os dados utilizados pelo sistema de metadados estatisticos e que podem ser visualizados na forma
+de cubos OLAP
+
+Ajuste os parametros indicando:
+
+serverdb - endereco do servidor postgres
+port - porta de acesso ao servidor
+database - nome do database que contem as tabelas
+username - nome do usuario que pode acessar o database
+password - senha desse usuario
+
+Os parametros sao utilizados pelo programa definido em Catalog. Ese programa monta o arquivo de fonte de dados temorario
+e armazena em ms_tmp/saiku-datasources
+
+Esse arquivo contera uma string como esse exemplo:
+
+type=OLAP
+name=i3geo
+driver=mondrian.olap4j.MondrianOlap4jDriver
+location=jdbc:mondrian:Jdbc=jdbc:postgresql://localhost:5432/i3geosaude;Catalog=http://localhost/i3geo/ferramentas/saiku/esquemaxml.php;JdbcDrivers=org.postgresql.Driver;
+username=postgres
+password=postgres
+
+*/
+$saikuConfigDataSource = array(
+	"type"=>"OLAP",
+	"name"=>"i3geo",
+	"driver"=>"mondrian.olap4j.MondrianOlap4jDriver",
+	"location"=>"jdbc:mondrian:Jdbc=jdbc:postgresql",
+	"serverdb"=>"localhost",
+	"port"=>"5432",
+	"database"=>"i3geosaude",
+	"JdbcDrivers"=>"org.postgresql.Driver",
+	"username"=>"postgres",
+	"password"=>"postgres"
+);
 /*
 	Variable: i3georendermode
 

@@ -11,5 +11,11 @@ i3GEOF.saiku.dicionario = {
 		en:"",
 		es:"",
 		it:""
+	}],
+	3: [{
+		pt:"O servidor SAIKU n&atilde;o est&aacute; dispon&iacute;vel nessa instala&ccedil;&atilde;o do i3Geo",
+		en:"",
+		es:"",
+		it:""
 	}]
 };
