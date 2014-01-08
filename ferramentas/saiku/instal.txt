@@ -1,5 +1,7 @@
 Roteiro para instalação e configuração do SAIKU para uso com o i3Geo.
 
+O SAIKU só irá funcionar no Linux!!!
+
 Para mais informações veja em: http://docs.analytical-labs.com/
 
 - Faça o download do SAIKU Server no endereço: http://meteorite.bi/saiku/download
@@ -14,27 +16,23 @@ Para mais informações veja em: http://docs.analytical-labs.com/
 
 	e modifique o valor da porta se achar necessário
 
-- Configure o arquivo de conexão com a fonte de dados
+- Fontes de dados
 
-	Copie o arquivo "i3geo" localizado em
+	O i3Geo cria arquivos de fontes de dados em uma pasta temporária. Essa pasta é criada quando o i3Geo é inicializado.
+	(/tmp/ms_tmp/saikudatasources por padrão)
 
-		/var/www/i3geo/ferramentas/saiku
+	Para que o SAIKU veja essa pasta é necessário criar um link simbólico apnotando para ela
 
-		(c:\\ms4w\Apache\htdocs\i3geo\ferramentas\saiku no Windows)
+	Esse link deve ser criado na pasta /var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/classes
 
-	para a pasta:
+	Commando do Linux:
 
-		saiku-server/tomcat/webapps/saiku/WEB-INF/classes/saiku-datasources
+	(/var/www/saiku-server é a pasta onde vc inatalou o SAIKU)
+	(/var/tmp/ms_tmp é a pasta temporária utilizada pelo i3Geo)
 
-	Esse arquivo indica qual a fonte de dados que será usada. Altere os valores conforme sua necessidade, por exemplo:
+	rm -R -f /var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/classes/saiku-datasources
+	ln -s /tmp/ms_tmp/saiku-datasources /var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/classes/saiku-datasources
 
-	No lugar de localhost coloque o endereço do banco de dados Postgres
-
-	No lugar de i3geosaude coloque o nome do banco de dados onde estão as tabelas utilizadas pelo i3Geo
-
-	No lugar de http://localhost/i3geo/ferramentas/saiku/esquemaxml.php coloque o endereço (URL) completo do arquivo i3geo/ferramentas/saiku/esquemaxml.php
-
-	No lugar de postgres coloque os nomes de usuário e senha para conexão com o banco de dados
 
 - Arquivos alterados
 
@@ -53,6 +51,6 @@ Para mais informações veja em: http://docs.analytical-labs.com/
 
 		http://localhost:9090/
 
-	Se tudo estiver ok, deve aparecer ua tela de login. Utilize admin como usuário e admin como senha
+	Se tudo estiver ok, deve aparecer na tela de login. Utilize admin como usuário e admin como senha
 
 

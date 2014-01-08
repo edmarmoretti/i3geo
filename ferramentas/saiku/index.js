@@ -140,6 +140,6 @@ i3GEOF.saiku = {
 		i3GEOF.saiku.inicia(divid);
 	},
 	aplicar: function(){
-		window.open("http://localhost:9090");
+		window.open("http://localhost:9090?"+i3GEO.configura.sid);
 	}
 };

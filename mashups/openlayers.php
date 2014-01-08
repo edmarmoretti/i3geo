@@ -10,6 +10,7 @@ error_reporting(0);
 //recupera um mapa salvo no banco de administracao
 //
 if(!empty($restauramapa)){
+	include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 	$xbase = restauraMapaAdmin($restauramapa,$dir_tmp);
 	$m = ms_newMapObj($xbase);
 	$w = $m->web;

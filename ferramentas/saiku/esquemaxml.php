@@ -1,5 +1,8 @@
 <?php
 include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
+$nomeDatasource = $dir_tmp."/saiku-datasources/i3geo";
+//$saikuDatasourceString vem do ms_configura.php
 $m = new Metaestat();
 $selecaoRegiao = array();
 //pega o filtro da sessao PHP aberta pelo i3Geo
@@ -44,13 +47,14 @@ if(!empty($_COOKIE["i3GeoPHP"])){
 	$registros = "";
 }
 //echo "<pre>".var_dump($_SESSION);exit;
+
 $regioes = $m->listaTipoRegiao();
 $xml = "<Schema name='i3Geo Metaestat'>";
 //cria as dimensoes de tipo temporal
 $sqlAno = "select nu_ano from i3geo_metaestat.dim_tempo group by nu_ano order by nu_ano";
 $sqlMes = "select nu_ano,nu_mes,ds_mes_abreviado as mes,nu_ano::text||'-'||nu_mes::text as nu_anomes from i3geo_metaestat.dim_tempo group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes";
 $xml .= "
-	<Dimension name='Anual' type='TimeDimension' caption='Tempo: Anual'>
+	<Dimension name='Anual' type='TimeDimension' caption='$teste Tempo: Anual'>
 		<Hierarchy hasAll='true' primaryKey='nu_ano'>
 			<view alias='tempo_ano' ><SQL dialect='generic' >$sqlAno</SQL></view>
 			<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true' levelType='TimeYears'/>

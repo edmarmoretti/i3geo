@@ -101,19 +101,19 @@ include_once("classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
 $exts = get_loaded_extensions();
+if(!function_exists("ms_GetVersion"))
+{echo "<br><br><span style=color:red >PARECE QUE O MAPSERVER NAO ESTA INSTALADO!!!<br><br>";}
 echo "MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
 echo "Vers&atilde;o:<br>";
-echo ms_GetVersion();
+echo @ms_GetVersion();
 echo "<br><br>";
 var_dump (versao())."<br><br>";
-if(!function_exists("ms_GetVersion"))
-{echo "<span style=color:red >PARECE QUE O MAPSERVER NAO ESTA INSTALADO!!!<br><br>";}
+
 echo "<br>---<br>";
 
 if (get_cfg_var("safe_mode") == 1){
 	echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
 }
-
 //executa as opcoes linux definidas no formulario
 if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaPastaMstmp"] == "on"){
 	echo "<br>Criando a pasta $dir_tmp \n";
@@ -155,6 +155,9 @@ if(!empty($_POST["criaPastaMstmp"]) && $_POST["permPastaI3geo"] == "on"){
 		chmod($locaplic."/admin/admin.db",0777);
 		echo "...OK\n";
 	}
+}
+if(empty($saikuUrl)){
+	echo "<br>O aplicativo <b>SAIKU</b> n&atilde;o est&aacute; instalado. Se voc&ecirc; quiser instalar veja mais detalhes em <a href=ferramentas/saiku/instal.txt >i3geo/ferramentas/saiku/instal.txt</a><br>";
 }
 echo "<br><pre>Extens&otilde;es:<br>";
 if (!extension_loaded("curl")){

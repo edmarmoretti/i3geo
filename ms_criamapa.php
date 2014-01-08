@@ -1213,6 +1213,10 @@ function criaDirMapa($dir_tmp,$cachedir="")
 		$mapfile = $dir_tmp."/".$tmpdirname."/".$tmpdirname.".map";
 		$tmpimgname = "img".$tmpdirname;
 		@mkdir($dir_tmp."/comum",0777);
+		//utilizado para armazenar os arquivos de fonte de dados do SAIKU
+		@mkdir($dir_tmp."/saiku-datasources",0777);
+		chmod($dir_tmp."/saiku-datasources",0777);
+		//
 		if($cachedir == ""){
 			@mkdir($dir_tmp."/cache",0777);
 			chmod($dir_tmp."/cache",0777);

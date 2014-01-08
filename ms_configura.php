@@ -63,6 +63,14 @@ $i3geomaster = array(
 		array("usuario"=>"admin", "senha"=>"admin")
 );
 /*
+Variable: saikuUrl
+
+URL para acessar o aplicativo SAIKU. Se nao estiver instalado, deixe em branco
+
+Para maiores informacoes sobre como instalar o SAIKU veja em http://localhost/i3geo/ferramentas/saiku/instal.txt
+*/
+$saikuUrl = "http://localhost:9090";
+/*
 	Variable: i3georendermode
 
 	Opcoes que definem a rotina que sera utilizada para enviar ao navegador as imagens geradas de cada camada
