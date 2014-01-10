@@ -1,44 +1,53 @@
-Roteiro para instalação e configuração do SAIKU para uso com o i3Geo.
+Roteiro para instalação e configuração do SAIKU para uso com o i3Geo (testado no Ubuntu).
 
 Para mais informações veja em: http://docs.analytical-labs.com/
 
-- Faça o download do SAIKU Server no endereço: http://meteorite.bi/saiku/download
+Utilize uma das opções abaixo para instalar o servidor saiku-server
 
-- Descompacte os arquivos em uma pasta em seu servidor, podendo ser a mesma pasta onde se encontra a pasta i3geo (no Linux /var/www por exemplo)
+1) Download do software diretamente de http://meteorite.bi/saiku/download
 
-- Edite o arquivo saiku-server/tomcat/conf/server.xml para definir a porta utilizada pelo SAIKU
+		- Faça o download do SAIKU Server no endereço: http://meteorite.bi/saiku/download
 
-	Procure por
+		- Descompacte os arquivos em uma pasta em seu servidor, podendo ser a mesma pasta onde se encontra a pasta i3geo (no Linux /var/www por exemplo)
 
-		<Connector port="9090" protocol="HTTP/1.1"
+		- Edite o arquivo saiku-server/tomcat/conf/server.xml para definir a porta utilizada pelo SAIKU
 
-	e modifique o valor da porta se achar necessário
+			Procure por
 
-- Fontes de dados
+				<Connector port="9090" protocol="HTTP/1.1"
 
-	O i3Geo cria arquivos de fontes de dados em uma pasta temporária. Essa pasta é criada quando o i3Geo é inicializado.
-	(/tmp/ms_tmp/saiku-datasources por padrão)
+			e modifique o valor da porta se achar necessário
 
-	Para que o SAIKU veja essa pasta é necessário editar o arquivo
+		- Fontes de dados
 
-	/var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/saiku-beans.xml
+			O i3Geo cria arquivos de fontes de dados em uma pasta temporária. Essa pasta é criada quando o i3Geo é inicializado.
+			(/tmp/ms_tmp/saiku-datasources por padrão)
 
-	Procure pela linha:
+			Para que o SAIKU veja essa pasta é necessário editar o arquivo
 
-	<property name="path" value="res:saiku-datasources" />
+			/var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/saiku-beans.xml
 
-	Altere para:
+			Procure pela linha:
 
-	<property name="path" value="file:///tmp/ms_tmp/saiku-datasources/"/>
+			<property name="path" value="res:saiku-datasources" />
 
-- Arquivos alterados
+			Altere para:
 
-	Alguns dos códigos do SAIKU originais foram alterados. As alterações estão na pasta i3geo/ferramentas/saiku/saiku-server
-	O conteúdo dessa pasta deve ser copiado para a pasta onde o saiku for instalado (saiku-server)
+			<property name="path" value="file:///tmp/ms_tmp/saiku-datasources/"/>
 
-- Banco de dados
+		- Arquivos alterados
 
-- Inicialize o servidor para o SAIKU
+			Alguns dos códigos do SAIKU originais foram alterados. As alterações estão na pasta i3geo/ferramentas/saiku/saiku-server
+			O conteúdo dessa pasta deve ser copiado para a pasta onde o saiku for instalado (saiku-server)
+
+2) Download via SVN do saiku-server com as alterações já realizadas
+
+		Digite no terminal do sistema operacional:
+
+		svn checkout http://svn.softwarepublico.gov.br/svn/i3geo/subgrupos/i3geosaude/saiku-server /var/www/saiku-server
+
+
+Após a obtenção dos arquivos, inicialize o servidor
 
 	Procure na pasta saiku-server o programa start-saiku.bat (para Windows) ou start-saiku.sh para Linux.
 
@@ -50,6 +59,42 @@ Para mais informações veja em: http://docs.analytical-labs.com/
 
 		http://localhost:9090/
 
-	Se tudo estiver ok, deve aparecer na tela de login. Utilize admin como usuário e admin como senha
+	(Se aparecer a tela de login. Utilize admin como usuário e admin como senha)
+
+Ajustes nas variáveis de inicialização do i3geo/ms_configura.php
+
+	No arquivo i3geo/ms_configura.php existem duas variáveis que são utilizadas na integração com o SAIKU.
+
+	Edite esse arquivo caso seja necessário adaptar os parâmetros conforme suas necessidades.
+
+	Observe principalmente o endereço de acesso ao SAIKU e os parâmetros de conexão com o banco de dados e tabela com a dimensão temporal
+
+Banco de dados
+
+	O banco de dados PostgreSQL a ser utilizado pode ser qualquer um já existente e que esteja cadastrado como uma conexão no
+	sistema de metadados estatísticos.
+
+	Esse banco deve ter as funções Postgis e deve também conter a tabela com a dimensão tempo.
+
+	Essa tabela pode ser obtida fazendo-se o RESTORE do banco de dados default. Para obter o arquivo de backup utilize:
+
+	http://devel.gvsig.org/svn/i3geo/subgrupos/i3geosaude/databasei3geosaude.backup
+
+	Por padrão, esse banco de ve ser restaurado em um DATABASE chamado "i3geosaude" com usuário "postgres" e senha "postgres"
+
+	Se o banco de dados "i3geosaude" não for utilizado, apenas copie a tabela i3geo_metaestat.dim_tempo
+	para dentro do banco de dados que será utilizado
 
 
+
+Observação:
+
+Para testar o uso do SAIKU e aprender mais sobre sua instalação, dê preferência ao uso do arquivo de instalação do SVN
+e utilize o database i3geosaude.
+
+Após se assegurar que está tudo funcionando, faça os ajustes necessários.
+
+O banco de dados de administração do i3Geo, localizado em i3geo/admin/admin.db, contém as definições de variáveis que são compatíveis com
+o banco de dados i3geosaude, permitindo o teste do funcionamento do SAIKU.
+
+Para acionar o SAIKU utilize o menu suspenso do i3Geo (item Análise).

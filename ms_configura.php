@@ -92,12 +92,15 @@ e armazena em ms_tmp/saiku-datasources
 Esse arquivo contera uma string como esse exemplo:
 
 type=OLAP
-name=i3geo
 driver=mondrian.olap4j.MondrianOlap4jDriver
 location=jdbc:mondrian:Jdbc=jdbc:postgresql://localhost:5432/i3geosaude;Catalog=http://localhost/i3geo/ferramentas/saiku/esquemaxml.php;JdbcDrivers=org.postgresql.Driver;
 username=postgres
 password=postgres
 
+Note que o database possui o nome i3geosaude
+Se os seus dados estatisticos estiverem em outro banco altere esse valor
+
+Em tabelaDimensaoTempo utilize nome_do_esquema.nome_da_tabela
 */
 $saikuConfigDataSource = array(
 	"type"=>"OLAP",
@@ -108,7 +111,8 @@ $saikuConfigDataSource = array(
 	"database"=>"i3geosaude",
 	"JdbcDrivers"=>"org.postgresql.Driver",
 	"username"=>"postgres",
-	"password"=>"postgres"
+	"password"=>"postgres",
+	"tabelaDimensaoTempo"=>"i3geo_metaestat.dim_tempo"
 );
 /*
 	Variable: i3georendermode

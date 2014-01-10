@@ -91,8 +91,8 @@ $registros = "";
 $regioes = $m->listaTipoRegiao();
 $xml = "<Schema name='i3Geo Metaestat'>";
 //cria as dimensoes de tipo temporal
-$sqlAno = "select nu_ano from i3geo_metaestat.dim_tempo group by nu_ano order by nu_ano";
-$sqlMes = "select nu_ano::text,nu_mes::text,ds_mes_abreviado as mes,COALESCE (nu_ano::text||'-'||nu_mes::text,nu_ano::text) as nu_anomes from i3geo_metaestat.dim_tempo group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes";
+$sqlAno = "select nu_ano from ".$saikuConfigDataSource['tabelaDimensaoTempo']." group by nu_ano order by nu_ano";
+$sqlMes = "select nu_ano::text,nu_mes::text,ds_mes_abreviado as mes,COALESCE (nu_ano::text||'-'||nu_mes::text,nu_ano::text) as nu_anomes from ".$saikuConfigDataSource['tabelaDimensaoTempo']." group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes";
 $xml .= "
 	<Dimension name='Anual' type='TimeDimension' caption='Tempo: Anual'>
 		<Hierarchy hasAll='true' primaryKey='nu_ano'>
