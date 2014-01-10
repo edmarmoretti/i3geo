@@ -101,7 +101,6 @@ password=postgres
 */
 $saikuConfigDataSource = array(
 	"type"=>"OLAP",
-	"name"=>"i3geo",
 	"driver"=>"mondrian.olap4j.MondrianOlap4jDriver",
 	"location"=>"jdbc:mondrian:Jdbc=jdbc:postgresql",
 	"serverdb"=>"localhost",

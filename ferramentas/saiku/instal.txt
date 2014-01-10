@@ -1,7 +1,5 @@
 Roteiro para instalação e configuração do SAIKU para uso com o i3Geo.
 
-O SAIKU só irá funcionar no Linux!!!
-
 Para mais informações veja em: http://docs.analytical-labs.com/
 
 - Faça o download do SAIKU Server no endereço: http://meteorite.bi/saiku/download
@@ -19,25 +17,26 @@ Para mais informações veja em: http://docs.analytical-labs.com/
 - Fontes de dados
 
 	O i3Geo cria arquivos de fontes de dados em uma pasta temporária. Essa pasta é criada quando o i3Geo é inicializado.
-	(/tmp/ms_tmp/saikudatasources por padrão)
+	(/tmp/ms_tmp/saiku-datasources por padrão)
 
-	Para que o SAIKU veja essa pasta é necessário criar um link simbólico apnotando para ela
+	Para que o SAIKU veja essa pasta é necessário editar o arquivo
 
-	Esse link deve ser criado na pasta /var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/classes
+	/var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/saiku-beans.xml
 
-	Commando do Linux:
+	Procure pela linha:
 
-	(/var/www/saiku-server é a pasta onde vc inatalou o SAIKU)
-	(/var/tmp/ms_tmp é a pasta temporária utilizada pelo i3Geo)
+	<property name="path" value="res:saiku-datasources" />
 
-	rm -R -f /var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/classes/saiku-datasources
-	ln -s /tmp/ms_tmp/saiku-datasources /var/www_geosaude_16/saiku-server/tomcat/webapps/saiku/WEB-INF/classes/saiku-datasources
+	Altere para:
 
+	<property name="path" value="file:///tmp/ms_tmp/saiku-datasources/"/>
 
 - Arquivos alterados
 
 	Alguns dos códigos do SAIKU originais foram alterados. As alterações estão na pasta i3geo/ferramentas/saiku/saiku-server
 	O conteúdo dessa pasta deve ser copiado para a pasta onde o saiku for instalado (saiku-server)
+
+- Banco de dados
 
 - Inicialize o servidor para o SAIKU
 

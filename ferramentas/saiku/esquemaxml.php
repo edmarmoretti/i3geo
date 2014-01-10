@@ -14,8 +14,10 @@ session_id($_GET["g_sid"]);
 session_start();
 //obtem os layers que sao do sistema metaestat, sao regioes e que possuem selecao
 $map_file = $_SESSION["map_file"];
-$nomeDatasource = $dir_tmp."/saiku-datasources/".nomeRandomico();
-$nomeXmlEsquema = dirname($map_file)."/".nomeRandomico().".xml";
+$nomeConexao = nomeRandomico();
+$nomeDatasource = $dir_tmp."/saiku-datasources/".$nomeConexao;
+$urlXmlEsquema = $_SESSION["tmpurl"].basename(dirname($map_file))."/".$nomeConexao.".xml";
+$arquivoXmlEsquema = dirname($map_file)."/".$nomeConexao.".xml";
 /*
 $saikuConfigDataSource vem do ms_configura.php
 
@@ -31,7 +33,6 @@ Array com os parametros definidos em ms_configura:
 
 $saikuConfigDataSource = array(
 	"type"=>"OLAP",
-	"name"=>"i3geo",
 	"driver"=>"mondrian.olap4j.MondrianOlap4jDriver",
 	"location"=>"jdbc:mondrian:Jdbc=jdbc:postgresql",
 	"serverdb"=>"localhost",
@@ -44,9 +45,9 @@ $saikuConfigDataSource = array(
 */
 $stringDatasource = "
 type={$saikuConfigDataSource["type"]}
-name={$saikuConfigDataSource["name"]}
+name={$nomeConexao}
 driver={$saikuConfigDataSource["driver"]}
-location={$saikuConfigDataSource["location"]}://{$saikuConfigDataSource["serverdb"]}:{$saikuConfigDataSource["port"]}/{$saikuConfigDataSource["database"]};Catalog={$nomeXmlEsquema};JdbcDrivers={$saikuConfigDataSource["JdbcDrivers"]};
+location={$saikuConfigDataSource["location"]}://{$saikuConfigDataSource["serverdb"]}:{$saikuConfigDataSource["port"]}/{$saikuConfigDataSource["database"]};Catalog={$urlXmlEsquema};JdbcDrivers={$saikuConfigDataSource["JdbcDrivers"]};
 username={$saikuConfigDataSource["username"]}
 password={$saikuConfigDataSource["password"]}
 ";
@@ -91,9 +92,9 @@ $regioes = $m->listaTipoRegiao();
 $xml = "<Schema name='i3Geo Metaestat'>";
 //cria as dimensoes de tipo temporal
 $sqlAno = "select nu_ano from i3geo_metaestat.dim_tempo group by nu_ano order by nu_ano";
-$sqlMes = "select nu_ano,nu_mes,ds_mes_abreviado as mes,nu_ano::text||'-'||nu_mes::text as nu_anomes from i3geo_metaestat.dim_tempo group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes";
+$sqlMes = "select nu_ano::text,nu_mes::text,ds_mes_abreviado as mes,COALESCE (nu_ano::text||'-'||nu_mes::text,nu_ano::text) as nu_anomes from i3geo_metaestat.dim_tempo group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes";
 $xml .= "
-	<Dimension name='Anual' type='TimeDimension' caption='$teste Tempo: Anual'>
+	<Dimension name='Anual' type='TimeDimension' caption='Tempo: Anual'>
 		<Hierarchy hasAll='true' primaryKey='nu_ano'>
 			<view alias='tempo_ano' ><SQL dialect='generic' >$sqlAno</SQL></view>
 			<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true' levelType='TimeYears'/>
@@ -104,6 +105,13 @@ $xml .= "
 			<view alias='tempo_ano' ><SQL dialect='generic' >$sqlMes</SQL></view>
 			<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true' levelType='TimeYears'/>
 			<Level nameColumn='mes' name='Mes' column='nu_mes' type='Numeric' uniqueMembers='false' levelType='TimeMonths'/>
+		</Hierarchy>
+	</Dimension>
+	<Dimension name='Tempo' type='TimeDimension' caption='Tempo'>
+		<Hierarchy hasAll='true' primaryKey='nu_anomes'>
+			<view alias='tempo' ><SQL dialect='generic' >$sqlMes</SQL></view>
+			<Level name='Ano' column='nu_ano' type='String' uniqueMembers='true' levelType='TimeYears'/>
+			<Level nameColumn='mes' name='Mes' column='nu_mes' type='String' uniqueMembers='false' levelType='TimeMonths'/>
 		</Hierarchy>
 	</Dimension>
 ";
@@ -220,14 +228,19 @@ foreach($tbs as $tb){
 	foreach($tb as $medida){
 		$parametros = $m->listaParametro($medida["id_medida_variavel"],"","",$apenasTempo=true,$ordenaPeloPai=false);
 		$parComposto = array(); //guarda a composicao da chave que liga com a dimensao
+		$colunaAdicionais = array();
 		foreach($parametros as $parametro){
+			if($parametro["tipo"] < 5){
+				$parComposto[] = $parametro["coluna"];
+			}
+			/*
 			if($parametro["tipo"] == 1){
 				if(count($parametros) == 1){
 					$VirtualCubeDimension[] = "
 						<VirtualCubeDimension name='Anual' />
 					";
 					$dimTempo[] = "
-						<DimensionUsage foreignKey='".$parametro["coluna"]."' name='Anual' source='Anual'/>
+						<DimensionUsage foreignKey='".$parametro["coluna"]."_' name='Anual' source='Anual'/>
 					";
 				}
 				$parComposto[] = $parametro["coluna"];
@@ -239,18 +252,25 @@ foreach($tbs as $tb){
 						<VirtualCubeDimension name='Mensal' />
 					";
 					$dimTempo[] = "
-						<DimensionUsage foreignKey='".implode("_",$parComposto)."' name='Mensal' source='Mensal'/>
+						<DimensionUsage foreignKey='".implode("_",$parComposto)."_' name='Mensal' source='Mensal'/>
 					";
 				}
 			}
+			*/
 		}
+		$VirtualCubeDimension[] = "
+						<VirtualCubeDimension name='Tempo' />
+					";
+		$dimTempo[] = "
+						<DimensionUsage foreignKey='".implode("_",$parComposto)."_' name='Tempo' source='Tempo'/>
+					";
 		//echo "<pre>";var_dump($parametro);exit;
 	}
 	$xml .= "
 	<Cube cache='false' name='{$c["esquemadb"]}{$c["tabela"]}'>";
 	$sql = "select * from {$c["esquemadb"]}.{$c["tabela"]}";
 	if(count($parComposto) > 0){
-		$sql = "select *,".implode("||'-'||",$parComposto)." as ".implode("_",$parComposto)." from {$c["esquemadb"]}.{$c["tabela"]}";
+		$sql = "select *,".implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_ from {$c["esquemadb"]}.{$c["tabela"]}";
 	}
 	$xml .= "
 		<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
@@ -279,7 +299,7 @@ foreach($tbs as $tb){
 		</Cube>
 		";
 }
-$xml .= '<VirtualCube name="i3Geo - Metaestat" >';
+$xml .= '<VirtualCube name="Todas as medidas" >';
 $VirtualCubeDimension = array_unique($VirtualCubeDimension);
 $VirtualCubeMeasure = array_unique($VirtualCubeMeasure);
 $xml .= implode(" ",$VirtualCubeDimension);
@@ -289,11 +309,10 @@ $xml .= "</Schema>";
 error_reporting(0);
 ob_end_clean();
 
-gravaDados(array($xml),$nomeXmlEsquema);
-header("Location:".$saikuUrl);
+gravaDados(array($xml),$arquivoXmlEsquema);
+header("Location:".$saikuUrl."/?".$nomeConexao);
 
 function converte($texto){
-	//$texto = str_replace("Í","&amp;iacute",$texto);
 	$texto = str_replace("&","&amp;",htmlentities($texto));
 	return $texto;
 }

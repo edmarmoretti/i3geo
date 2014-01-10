@@ -203,7 +203,8 @@ i3GEO.configura = {
 			{ id:"omenudataAnalise16",text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" },
 			{ id:"omenudataAnalise17",text: $trad("t37b"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo1()" },
 			{ id:"omenudataAnalise19",text: $trad("t37b")+" (Flash)", url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" },
-			{ id:"omenudataAnalise18",text: $trad("d30"), url: "javascript:i3GEO.analise.dialogo.linhaDoTempo()" }
+			{ id:"omenudataAnalise18",text: $trad("d30"), url: "javascript:i3GEO.analise.dialogo.linhaDoTempo()" },
+			{ id:"omenudataAnalise20",text: "SAIKU - OLAP", url: "javascript:i3GEO.analise.dialogo.saiku()" }
 			],
 			"janelas": [
 			{ id:"omenudataJanelas1",text: $trad("u15"), url: "javascript:i3GEO.barraDeBotoes.reativa(0);i3GEO.barraDeBotoes.reativa(1)" },
