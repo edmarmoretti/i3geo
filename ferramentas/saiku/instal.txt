@@ -51,9 +51,9 @@ Após a obtenção dos arquivos, inicialize o servidor
 
 	Procure na pasta saiku-server o programa start-saiku.bat (para Windows) ou start-saiku.sh para Linux.
 
-	Execute esse programa. No caso do linux, digite no terminal:
+	Execute esse programa. No caso do linux, digite no terminal (importante: inicie como administrador):
 
-		./start-saiku.sh
+		sudo ./start-saiku.sh
 
 	Abra o navegador e digite:
 
