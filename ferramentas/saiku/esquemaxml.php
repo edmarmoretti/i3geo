@@ -115,16 +115,25 @@ $xml .= "
 		</Hierarchy>
 	</Dimension>
 ";
+//as dimensoes sao duplicadas
+//uma delas contem o geocodigo que permite a geracao do mapa
+$xml1 = "";
+$xml2 = "";
 foreach($regioes as $regiao){
 	$caminho = $m->hierarquiaPath($regiao["codigo_tipo_regiao"]);
-	$xml .= "
+	$xml1 .= "
 		<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='Onde:".converte($regiao["nome_tipo_regiao"])."'>
+			<Hierarchy hasAll='true'  primaryKey='codigo'>
+	";
+	$xml2 .= "
+		<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_geocod' caption='GeoCod:".converte($regiao["nome_tipo_regiao"])."'>
 			<Hierarchy hasAll='true'  primaryKey='codigo'>
 	";
 	//cria uma view juntando as tabelas da hierarquia de regioes
 	$n = count($caminho);
 	$colunas = array();
-	$niveis = array();
+	$niveis1 = array();
+	$niveis2 = array();
 	$sql = "SELECT __COLUNAS__ FROM {$regiao['esquemadb']}.{$regiao['tabela']} AS regiao ";
 	$colunas[] = "regiao.{$regiao['identificador']} AS codigo ";
 	$colunas[] = "regiao.{$regiao['colunanomeregiao']} AS nome";
@@ -137,16 +146,26 @@ foreach($regioes as $regiao){
 			AS j$i ON j$i.{$r['identificador']}::text = {$tabelaAnt}.{$r['identificador']}::text
 		";
 		$tabelaAnt = "j".$i;
-		$niveis[] = "
+		$niveis1[] = "
 			<Level name='".converte($r["nome_tipo_regiao"])."'
 				column='j$i{$r['identificador']}'
 				nameColumn='j$i{$r["colunanomeregiao"]}' uniqueMembers='false'/>
 		";
+		$niveis2[] = "
+			<Level name='".converte($r["nome_tipo_regiao"])." - GeoCod'
+				column='j$i{$r['identificador']}'
+				nameColumn='j$i{$r["identificador"]}' uniqueMembers='false'/>
+		";
 	}
-	$niveis[] = "
+	$niveis1[] = "
 		<Level name='".converte($regiao["nome_tipo_regiao"])."'
 			column='codigo'
-			nameColumn='nome' uniqueMembers='true'>
+			nameColumn='nome' uniqueMembers='true' />
+	";
+	$niveis2[] = "
+		<Level name='".converte($regiao["nome_tipo_regiao"])." - GeoCod'
+			column='codigo'
+			nameColumn='codigo' uniqueMembers='true' />
 	";
 	//verifica outras colunas
 	$vis = $regiao['colunasvisiveis'];
@@ -169,10 +188,15 @@ foreach($regioes as $regiao){
 		$sql .= " WHERE regiao.".$rs["sql"];
 	}
 
-	$xml .= "
+	$xml1 .= "
 			<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' ><SQL dialect='generic' >$sql</SQL></view>
 	";
-	$xml .= implode(" ",$niveis);
+	$xml2 .= "
+			<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_GeoCod' ><SQL dialect='generic' >$sql</SQL></view>
+	";
+	$xml1 .= implode(" ",$niveis1);
+	$xml2 .= implode(" ",$niveis2);
+	/*
 	//verifica se existem propriedades (colunas adicionais)
 	if($vis != ""){
 		//apelidos
@@ -193,13 +217,17 @@ foreach($regioes as $regiao){
 			";
 		}
 	}
-	//fecha os elementos. LEVEL deve ser fechado pois o ultimo recebe as propriedades
-	$xml .= "
-			</Level>
+	*/
+	$xml1 .= "
+			</Hierarchy>
+		</Dimension>
+	";
+	$xml2 .= "
 			</Hierarchy>
 		</Dimension>
 	";
 }
+$xml .= $xml1.$xml2;
 //junta as medidas conforme o nome da tabela utilizada
 $medidas = $m->listaMedidaVariavel();
 $tbs = array();
@@ -223,6 +251,9 @@ foreach($tbs as $tb){
 	$VirtualCubeDimension[] = "
 		<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />
 	";
+	$VirtualCubeDimension[] = "
+		<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />
+	";
 	//verifica as dimensoes do tipo tempo
 	$dimTempo = array();
 	foreach($tb as $medida){
@@ -233,30 +264,6 @@ foreach($tbs as $tb){
 			if($parametro["tipo"] < 5){
 				$parComposto[] = $parametro["coluna"];
 			}
-			/*
-			if($parametro["tipo"] == 1){
-				if(count($parametros) == 1){
-					$VirtualCubeDimension[] = "
-						<VirtualCubeDimension name='Anual' />
-					";
-					$dimTempo[] = "
-						<DimensionUsage foreignKey='".$parametro["coluna"]."_' name='Anual' source='Anual'/>
-					";
-				}
-				$parComposto[] = $parametro["coluna"];
-			}
-			if($parametro["tipo"] == 2){
-				$parComposto[] = $parametro["coluna"];
-				if(count($parametros) == 2){
-					$VirtualCubeDimension[] = "
-						<VirtualCubeDimension name='Mensal' />
-					";
-					$dimTempo[] = "
-						<DimensionUsage foreignKey='".implode("_",$parComposto)."_' name='Mensal' source='Mensal'/>
-					";
-				}
-			}
-			*/
 		}
 		$VirtualCubeDimension[] = "
 						<VirtualCubeDimension name='Tempo' />
@@ -264,7 +271,6 @@ foreach($tbs as $tb){
 		$dimTempo[] = "
 						<DimensionUsage foreignKey='".implode("_",$parComposto)."_' name='Tempo' source='Tempo'/>
 					";
-		//echo "<pre>";var_dump($parametro);exit;
 	}
 	$xml .= "
 	<Cube cache='false' name='{$c["esquemadb"]}{$c["tabela"]}'>";
@@ -275,6 +281,7 @@ foreach($tbs as $tb){
 	$xml .= "
 		<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
 			<DimensionUsage foreignKey='".$c["colunaidgeo"]."' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."'/>
+			<DimensionUsage foreignKey='".$c["colunaidgeo"]."' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."_geocod' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."_geocod'/>
 	";
 
 	$xml .= implode(" ",array_unique($dimTempo));

@@ -4606,10 +4606,10 @@ temp.onclick = function(){i3GEO.janela.minimiza("panelpropriedadesEditor");};
 }
 }
 YAHOO.editorOL.container.panel.show();
-if(i3GEO.configura)
-{$i("panelpropriedadesEditor").getElementsByTagName("div")[2].style.overflow = "auto";}
-else
-{$i("panelpropriedadesEditor").getElementsByTagName("div")[1].style.overflow = "auto";}
+temp = $i("panelpropriedadesEditor").getElementsByTagName("div")
+if(temp && temp[2]){
+temp[2].style.overflow = "auto";
+}
 },
 listaGeometrias: function(){
 if(!document.getElementById("panellistagEditor")){
