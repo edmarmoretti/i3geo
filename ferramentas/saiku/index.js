@@ -145,6 +145,6 @@ i3GEOF.saiku = {
 		i3GEOF.saiku.inicia(divid);
 	},
 	aplicar: function(){
-		window.open(i3GEO.configura.locaplic+"/ferramentas/saiku/esquemaxml.php?g_sid="+i3GEO.configura.sid);
+		window.open(i3GEO.configura.locaplic+"/ferramentas/saiku/esquemaxml.php?g_sid="+i3GEO.configura.sid+"&locaplic="+i3GEO.configura.locaplic);
 	}
 };

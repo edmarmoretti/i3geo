@@ -317,7 +317,7 @@ error_reporting(0);
 ob_end_clean();
 
 gravaDados(array($xml),$arquivoXmlEsquema);
-header("Location:".$saikuUrl."/?".$nomeConexao);
+header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]);
 
 function converte($texto){
 	$texto = str_replace("&","&amp;",htmlentities($texto));

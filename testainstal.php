@@ -101,19 +101,19 @@ include_once("classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
 $exts = get_loaded_extensions();
-if(!function_exists("ms_GetVersion"))
-{echo "<br><br><span style=color:red >PARECE QUE O MAPSERVER NAO ESTA INSTALADO!!!<br><br>";}
 echo "MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
 echo "Vers&atilde;o:<br>";
-echo @ms_GetVersion();
+echo ms_GetVersion();
 echo "<br><br>";
 var_dump (versao())."<br><br>";
-
+if(!function_exists("ms_GetVersion"))
+{echo "<span style=color:red >PARECE QUE O MAPSERVER NAO ESTA INSTALADO!!!<br><br>";}
 echo "<br>---<br>";
 
 if (get_cfg_var("safe_mode") == 1){
 	echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
 }
+
 //executa as opcoes linux definidas no formulario
 if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaPastaMstmp"] == "on"){
 	echo "<br>Criando a pasta $dir_tmp \n";
@@ -156,9 +156,6 @@ if(!empty($_POST["criaPastaMstmp"]) && $_POST["permPastaI3geo"] == "on"){
 		echo "...OK\n";
 	}
 }
-if(empty($saikuUrl)){
-	echo "<br>O aplicativo <b>SAIKU</b> n&atilde;o est&aacute; instalado. Se voc&ecirc; quiser instalar veja mais detalhes em <a href=ferramentas/saiku/instal.txt >i3geo/ferramentas/saiku/instal.txt</a><br>";
-}
 echo "<br><pre>Extens&otilde;es:<br>";
 if (!extension_loaded("curl")){
 	echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a curl que pode afetar algumas funcionalidades do i3Geo<br></span>";
@@ -188,7 +185,7 @@ echo "dir_tmp = $dir_tmp \n<br>";
 echo "locmapserv = $locmapserv \n";
 echo "\n<br>";
 echo "Este php est&aacute; em ".getcwd()."\n";
-echo "<br>O diretório de arquivos SESSION tempor&aacute;rio &eacute;: ".session_save_path()."<br>\n";
+echo "<br>O diretorio de arquivos SESSION tempor&aacute;rio &eacute;: ".session_save_path()."<br>\n";
 if($conexaoadmin == "" && file_exists($locaplic."/admin/admin.db")){
 	echo "<br>As permiss&otilde;es do banco de dados $locaplic/admin/admin.db s&atilde;o (se o arquivo estiver bloqueado, o sistema de administra&ccedil;&atilde;o n&atilde;o ir&aacute; funcionar):<br>";
 	echo permissoesarquivo($locaplic."/admin/admin.db")."<br>";
@@ -330,12 +327,34 @@ else
 		{$f = $locaplic."/aplicmap/geral1v".$versao.".map";}
 	}
 }
+
 $mapa = ms_newMapObj($f);
+
+for($i=0;$i<($mapa->numlayers);$i++)
+{
+	$layern = $mapa->getLayer($i);
+	if ($layern->connectiontype == MS_POSTGIS )
+	{$layern->set("status",MS_OFF);}
+}
+
 echo "<br>O arquivo mapfile de iniciliza&ccedil;&atilde;o &eacute;: $f<br>\n";
 echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no $f):</b>\n";
-$imgo = $mapa->draw();
+$imgo = @$mapa->draw();
 $nome = ($imgo->imagepath)."teste.png";
 echo "<p>Nome da imagem gerada: $nome </p>";
+
+if (!$imgo){
+	echo "Problemas ao gerar o mapa<br>";
+	$error = "";
+	$error = ms_GetErrorObj();
+	while($error && $error->code != MS_NOERR){
+		echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
+		$error = $error->next();
+	}
+}
+if($imgo->imagepath == "")
+{echo "Erro IMAGEPATH vazio";}
+
 $imgo->saveImage($nome);
 $nome = ($imgo->imageurl).basename($nome);
 echo "<p><img src=$nome /></p>";
@@ -358,10 +377,10 @@ while($error && $error->code != MS_NOERR)
 	$error = $error->next();
 }
 echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no estadosl.map ou estadoslwindows.map):</b>\n";
-echo "Um problema bastante comum &eacute; o n&atilde;o reconhecimento do diret&oacute;rio ms_tmp pelo Apache. \nO diretório ms_tmp &eacute; utilizado pelo Mapserver e pelo i3geo para armazenar dados tempor&aacute;rios. \n&Eacute; nesse diretório que ficam as imagens do mapa.\n";
-echo "Quando o Apache n&atilde;o consegue utilizar esse diret&oacute;rio, a imagem n&atilde;o ser&aacute; mostrada,\n apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do \nmapa est&atilde;o sendo criadas no ms_tmp após rodar o testainstal.php).\n";
+echo "Um problema bastante comum &eacute; o n&atilde;o reconhecimento do diret&oacute;rio ms_tmp pelo Apache. \nO diretorio ms_tmp &eacute; utilizado pelo Mapserver e pelo i3geo para armazenar dados tempor&aacute;rios. \n&Eacute; nesse diretorio que ficam as imagens do mapa.\n";
+echo "Quando o Apache n&atilde;o consegue utilizar esse diret&oacute;rio, a imagem n&atilde;o ser&aacute; mostrada,\n apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do \nmapa est&atilde;o sendo criadas no ms_tmp apos rodar o testainstal.php).\n";
 echo "Para solucionar esse problema, vc pode criar um link simb&oacute;lico (nos sistemas linux),\n no mesmo local onde est&aacute; instalado o i3geo, apontando para o local \nf&iacute;sico onde est&aacute; o ms_tmp.\n";
-echo "<b>O nome do link simbólico deve ser o mesmo que estiver definido em aplicmap/geral1.map ou geral1debian.map na linha IMAGEURL. Esse nome por default &eacute; definido como ms_tmp.\n";
+echo "<b>O nome do link simbolico deve ser o mesmo que estiver definido em aplicmap/geral1.map ou geral1debian.map na linha IMAGEURL. Esse nome por default &eacute; definido como ms_tmp.\n";
 echo "No wiki do portal do software p&uacute;blico vc poder&aacute; encontrar mais detalhes sobre isso.\n";
 
 for($i=0;$i<($maptemp->numlayers);$i++)
@@ -371,7 +390,20 @@ for($i=0;$i<($maptemp->numlayers);$i++)
 	{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
 	ms_newLayerObj($mapa, $layern);
 }
-$imgo = $mapa->draw();
+$imgo = @$mapa->draw();
+
+if (!$imgo){
+	echo "Problemas ao gerar o mapa<br>";
+	$error = "";
+	$error = ms_GetErrorObj();
+	while($error && $error->code != MS_NOERR){
+		echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
+		$error = $error->next();
+	}
+}
+if($imgo->imagepath == "")
+{echo "Erro IMAGEPATH vazio";}
+
 $nome = ($imgo->imagepath)."teste1.png";
 echo "<p>Nome da imagem gerada: $nome </p>";
 $imgo->saveImage($nome);
