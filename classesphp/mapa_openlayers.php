@@ -268,8 +268,8 @@ else{
 		}
 		$cor = $classe0->getstyle(0)->color;
 		$cor->setrgb($c->red,$c->green,$c->blue);
-		$cor = $classe0->getstyle(0)->outlinecolor;
-		$cor->setrgb($c->red,$c->green,$c->blue);
+		//$cor = $classe0->getstyle(0)->outlinecolor;
+		//$cor->setrgb($c->red,$c->green,$c->blue);
 		$status = $l->open();
 		$status = $l->whichShapes($mapa->extent);
 		while ($shape = $l->nextShape())
