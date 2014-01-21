@@ -185,15 +185,17 @@ if($temas != ""){
 					}
 				}
 				if($nomeMap != ""){
+					$layersNomes = array();
 					$layers = array();
 					$maptemp = @ms_newMapObj($nomeMap);
 					if($maptemp){
 						$nlayers = $maptemp->numlayers;
 						for($i=0;$i<($nlayers);++$i)	{
 							$layern = $maptemp->getLayer($i);
-							$layers[] = $layern->name;
+							$layersNomes[] = $layern->name;
+							$layers[] = $layern;
 						}
-						$nomeLayer = implode(",",$layers);
+						$nomeLayer = implode(",",$layersNomes);
 						$tituloLayer = $layern->getmetadata("tema");
 						$ebase = "false";
 						if(isset($fundo) && $fundo != ""){
@@ -212,7 +214,16 @@ if($temas != ""){
 							$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,singleTile:true,visibility:false,isBaseLayer:false})';
 						}
 						else{
-							$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+							//$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+							foreach($layers as $l){
+								$tituloLayer = $l->getmetadata("tema");
+								$nomeLayer = $l->name;
+								$visivel = "false";
+								if($l->status == MS_DEFAULT){
+									$visivel = "true";
+								}
+								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+							}
 						}
 						//var_dump($objOpenLayers);exit;
 					}
@@ -301,6 +312,7 @@ Par&acirc;metros:
 		ajuda
 		fecha
 		corta
+		legenda
 
 	Para ver a lista de códigos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos s&atilde;o mostrados em vermelho.

@@ -21,6 +21,7 @@ MAP
 	SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
 	SHAPEPATH "/var/www/geodados"
 	IMAGECOLOR 104 171 195
+	MAXSIZE 4096
 	#
 	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
 	#Esse tipo nao e adequado para imagens raster, mas o i3geo muda automaticamente

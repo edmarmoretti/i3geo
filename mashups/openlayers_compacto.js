@@ -3582,7 +3582,7 @@ catch(e){}
 //w.document.close();
 if(!document.getElementById("panellegendaeditorOL")){
 YAHOO.namespace("legendaeditorOL.container");
-YAHOO.legendaeditorOL.container.panel = new YAHOO.widget.Panel("panellegendaeditorOL", {zIndex:20000, iframe:true, width:"250px", visible:false, draggable:true, close:true } );
+YAHOO.legendaeditorOL.container.panel = new YAHOO.widget.Panel("panellegendaeditorOL", {zIndex:20000, iframe:true, width:"auto", visible:false, draggable:true, close:true } );
 YAHOO.legendaeditorOL.container.panel.setBody(ins);
 YAHOO.legendaeditorOL.container.panel.setHeader("Legenda");
 YAHOO.legendaeditorOL.container.panel.setFooter("");
@@ -3861,7 +3861,14 @@ adiciona = true;
 if(botoes.zoomtot===true){
 button = new OpenLayers.Control.Button({
 displayClass: "editorOLzoomtot",
-trigger: function(){i3GEO.editorOL.mapa.zoomToMaxExtent();},
+trigger: function(){
+if(i3GEO.editorOL.mapext && i3GEO.editorOL.mapext != ""){
+i3GEO.editorOL.mapa.zoomToExtent(i3GEO.editorOL.mapext);
+}
+else{
+i3GEO.editorOL.mapa.zoomToMaxExtent();
+}
+},
 title: "ajusta extensao",
 type: OpenLayers.Control.TYPE_BUTTON
 });
@@ -4606,7 +4613,7 @@ temp.onclick = function(){i3GEO.janela.minimiza("panelpropriedadesEditor");};
 }
 }
 YAHOO.editorOL.container.panel.show();
-temp = $i("panelpropriedadesEditor").getElementsByTagName("div")
+temp = $i("panelpropriedadesEditor").getElementsByTagName("div");
 if(temp && temp[2]){
 temp[2].style.overflow = "auto";
 }

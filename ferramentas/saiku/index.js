@@ -88,6 +88,10 @@ i3GEOF.saiku = {
 				"i3GEOFsaikubotao1",
 				{onclick:{fn: i3GEOF.saiku.aplicar}}
 			);
+			new YAHOO.widget.Button(
+				"i3GEOFsaikubotao2",
+				{onclick:{fn: i3GEOF.saiku.atualizaMapa}}
+			);
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -104,7 +108,8 @@ i3GEOF.saiku = {
 		var ins = "<p class=paragrafo >Saiku: <a href=http://meteorite.bi/saiku target=_blank >http://meteorite.bi/saiku</a></p>" +
 			"<p class=paragrafo >" + $trad(1,i3GEOF.saiku.dicionario) + "<p>";
 		if(i3GEO.parametros.saikuUrl !== ""){
-			ins += "<input id=i3GEOFsaikubotao1 size=20  type=button value='"+$trad(2,i3GEOF.saiku.dicionario)+"' />";
+			ins += "<input id=i3GEOFsaikubotao1 size=20  type=button value='"+$trad(2,i3GEOF.saiku.dicionario)+"' />" +
+				"<input id=i3GEOFsaikubotao2 size=20  type=button value='"+$trad(4,i3GEOF.saiku.dicionario)+"' />";
 		}
 		else{
 			ins += "<p class=paragrafo style=color:red >" + $trad(3,i3GEOF.saiku.dicionario) + "<p>";
@@ -126,7 +131,7 @@ i3GEOF.saiku = {
 		//cria a janela flutuante
 		titulo = "Saiku <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=117' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"300px",
+			"400px",
 			"200px",
 			"",
 			"",
@@ -145,6 +150,9 @@ i3GEOF.saiku = {
 		i3GEOF.saiku.inicia(divid);
 	},
 	aplicar: function(){
-		window.open(i3GEO.configura.locaplic+"/ferramentas/saiku/esquemaxml.php?g_sid="+i3GEO.configura.sid+"&locaplic="+i3GEO.configura.locaplic);
+		window.open(i3GEO.configura.locaplic+"/ferramentas/saiku/esquemaxml.php?g_sid="+i3GEO.configura.sid+"&locaplic="+i3GEO.configura.locaplic+"&mapext="+i3GEO.parametros.mapexten);
+	},
+	atualizaMapa: function(){
+		i3GEO.atualiza("");
 	}
 };

@@ -728,6 +728,7 @@ Include:
 		include_once($this->locaplic."/class.palette.php");
 		else
 		include_once("class.palette.php");
+
 		$cori = RGB2hex(explode(",",$cori));
 		$corf = RGB2hex(explode(",",$corf));
 		$numclasses = $this->layer->numclasses;

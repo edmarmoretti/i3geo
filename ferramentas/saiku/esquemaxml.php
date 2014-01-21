@@ -8,11 +8,11 @@ include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
 if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
 }
-//pega o filtro da sessao PHP aberta pelo i3Geo
+//pega a sessao PHP aberta pelo i3Geo
 session_name("i3GeoPHP");
 session_id($_GET["g_sid"]);
 session_start();
-//obtem os layers que sao do sistema metaestat, sao regioes e que possuem selecao
+
 $map_file = $_SESSION["map_file"];
 $nomeConexao = nomeRandomico();
 $nomeDatasource = $dir_tmp."/saiku-datasources/".$nomeConexao;
@@ -55,13 +55,15 @@ password={$saikuConfigDataSource["password"]}
 gravaDados(array($stringDatasource),$nomeDatasource);
 $m = new Metaestat();
 $selecaoRegiao = array();
+//obtem os layers que sao do sistema metaestat, sao regioes e que possuem selecao
 $mapa = ms_newMapObj($map_file);
 $c = $mapa->numlayers;
+$codigo_tipo_regiao = "";
 for ($i=0;$i < $c;++$i){
 	$l = $mapa->getlayer($i);
 	$registros = array();
-	$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");
-	if($codigo_tipo_regiao != "" && $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL") == ""){
+	if($l->status == MS_DEFAULT && $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO") != ""){
+		$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");
 		//verifica se tem selecao
 		$qyfile = dirname($map_file)."/".$l->name.".php";
 		if(file_exists($qyfile)){
@@ -83,6 +85,10 @@ for ($i=0;$i < $c;++$i){
 			$selecaoRegiao[$codigo_tipo_regiao] = "";
 		}
 	}
+}
+if($codigo_tipo_regiao == ""){
+	echo "Nenhum tema com limites ou localidades foi encontrado";
+	exit;
 }
 $regiao = "";
 $item = "";
@@ -317,7 +323,7 @@ error_reporting(0);
 ob_end_clean();
 
 gravaDados(array($xml),$arquivoXmlEsquema);
-header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]);
+header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]."&mapext=".$_GET["mapext"]);
 
 function converte($texto){
 	$texto = str_replace("&","&amp;",htmlentities($texto));
