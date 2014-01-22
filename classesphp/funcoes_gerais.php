@@ -1459,6 +1459,8 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$resultadoFinal = true;
 	}
 	else{
+		$shapesSel = retornaShapesSelecionados($layer,$map_file,$map);//
+		
 		$items = pegaItens($layer);
 		// cria o dbf
 		$def = array();
@@ -1479,29 +1481,17 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$dbname = $nomeshp.".dbf";
 		$reg = array();
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
-		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
-		$existesel = carregaquery2($map_file,$layer,$map);
-		if ($existesel == "nao")
-		{@$layer->queryByrect($map->extent);}
-		//pega cada registro
-		$res_count = $layer->getNumresults();
+		
+		$res_count = count($shapesSel);
+		
 		if ($res_count > 0){
-			$sopen = $layer->open();
-			if($sopen == MS_FAILURE){return "erro";}
-			for ($i = 0; $i < $res_count; ++$i)
-			{
-				if($versao == 6)
-				{$shape = $layer->getShape($layer->getResult($i));}
-				else{
-					$result = $layer->getResult($i);
-					$shp_index  = $result->shapeindex;
-					$shape = $layer->getfeature($shp_index,-1);
-				}
+			for ($i = 0; $i < $res_count; ++$i){
+				$shape = $shapesSel[$i];
 				foreach ($items as $ni)
 				{
 					$vreg = $shape->values[$ni];
 					if(strlen($vreg) > 255){
-					$vreg = substr($vreg,0,255);
+						$vreg = substr($vreg,0,255);
 					}
 					$reg[] = $vreg;
 				}
@@ -2365,7 +2355,6 @@ function carregaquery2($mapfile,&$objlayer,&$objmapa)
 		fclose ($handle);
 		$shp = unserialize($conteudo);
 		foreach ($shp as $indx){
-
 			$objmapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);
 		}
 		return "sim";
@@ -2456,14 +2445,18 @@ function retornaShapesMapext($objLayer,$objMapa){
 function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 	$shapes = array();
 	$qyfile = dirname($map_file)."/".$objLayer->name.".php";
+	
 	if(!file_exists($qyfile))
 	{return $shapes;}
+	
 	$handle = fopen ($qyfile, "r");
 	$conteudo = fread ($handle, filesize ($qyfile));
 	fclose ($handle);
 	$listaDeIndices = unserialize($conteudo);
+	//echo count($listaDeIndices);exit;
 	if(count($listaDeIndices) == 0)
 	{return $shapes;}
+	
 	$versao = versao();
 	$versao = $versao["principal"];
 	if ($objLayer->connectiontype != MS_POSTGIS){
@@ -2476,6 +2469,7 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 		$centroides = array();
 		$shapes = array();
 		//pega um shape especifico
+		
 		for ($i = 0; $i < $res_count; ++$i)
 		{
 			if($versao == 6)
@@ -2490,6 +2484,7 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 		$fechou = $objLayer->close();
 	}
 	else{
+		//var_dump($listaDeIndices);exit;
 		$rect = ms_newRectObj();
 		$rect->set("minx",-180);
 		$rect->set("miny",-90);
