@@ -22,6 +22,7 @@
 
 <!--  jQuery CSS -->
 <link rel="stylesheet" href="css/jquery/jquery-ui.css" type="text/css" media="all" />
+<link rel="stylesheet" href="js/jquery/jquery.colourPicker.css" type="text/css" media="all" />
 
 <link rel="stylesheet" href="js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="js/jquery/jquery.contextMenu.css" type="text/css" media="screen" />
@@ -56,6 +57,7 @@
 
 
 	<script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<script type="text/javascript" src="js/jquery/jquery.colourPicker.js"></script>
 
 
 	<!-- Backbone.js and deps -->
@@ -108,10 +110,6 @@
 
 	<!-- Saiku plugins -->
 
-
-	<!--
-				<script type="text/javascript" src="js/saiku/plugins/Chart/plugin.js" defer></script>
-				-->
 	<script type="text/javascript" src="js/saiku/plugins/Statistics/plugin.js" defer></script>
 	<script type="text/javascript" src="js/saiku/plugins/I18n/plugin.js" defer></script>
 	<script type="text/javascript" src="js/saiku/plugins/BIServer/plugin.js" defer></script>
@@ -125,28 +123,18 @@
 	<script type="text/javascript" src="js/saiku/plugins/CCC_Chart/jquery.tipsy.js"></script>
 	<script type="text/javascript" src="js/saiku/plugins/CCC_Chart/tipsy.js"></script>
 	<link type="text/css" href="js/saiku/plugins/CCC_Chart/tipsy.css" rel="stylesheet" />
-	<!-- FUTURE FILES FOR CHART EDITOR
-						<script type="text/javascript" src="js/saiku/plugins/CCC_Chart/cccProperties.js"></script>
-						<script type="text/javascript" src="js/saiku/plugins/CCC_Chart/cccCharts.js"></script>
-						<script type="text/javascript" src="js/saiku/plugins/CCC_Chart/ChartEditor.js"></script>
-						-->
 	<script type="text/javascript" src="js/saiku/plugins/CCC_Chart/plugin.js"></script>
 
 	<script type="text/javascript" src="js/ace/ace.js" charset="utf-8"></script>
 
-	<!--start js SaikuChartPlus-->
-	<script type="text/javascript" src="js/saiku/plugins/SaikuChartPlus/plugin.js" defer></script>
-	<!--<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-		google.load('visualization', '1.0', {'packages':['geochart','geomap']});
-</script>
--->
-	<!--end js SaikuChartPlus-->
+	<!--start js i3GeoMap-->
+	<script type="text/javascript" src="js/saiku/plugins/i3GeoMap/plugin.js" ></script>
+	<!--end js i3GeoMap-->
 
 	<!--  i3GEO obtem o parametro passado pela url e que contem o codigo da conexao que deve ser utilizada -->
 	<script>
-nomeConexao = window.location.search.replace("?","");
-</script>
+		nomeConexao = parametroUrl("nomeConexao");
+	</script>
 	<!-- Templates -->
 	<script type="text/x-jquery-tmpl" id="template-toolbar">
 						<ul>

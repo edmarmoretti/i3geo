@@ -87,8 +87,8 @@ for ($i=0;$i < $c;++$i){
 	}
 }
 if($codigo_tipo_regiao == ""){
-	echo "Nenhum tema com limites ou localidades foi encontrado";
-	exit;
+	//echo "Nenhum tema com limites ou localidades foi encontrado";
+	//exit;
 }
 $regiao = "";
 $item = "";
@@ -158,7 +158,7 @@ foreach($regioes as $regiao){
 				nameColumn='j$i{$r["colunanomeregiao"]}' uniqueMembers='false'/>
 		";
 		$niveis2[] = "
-			<Level name='".converte($r["nome_tipo_regiao"])." - GeoCod'
+			<Level name='".converte($r["nome_tipo_regiao"])." - GeoCod #{$caminho[$i]}'
 				column='j$i{$r['identificador']}'
 				nameColumn='j$i{$r["identificador"]}' uniqueMembers='false'/>
 		";
@@ -169,7 +169,7 @@ foreach($regioes as $regiao){
 			nameColumn='nome' uniqueMembers='true' />
 	";
 	$niveis2[] = "
-		<Level name='".converte($regiao["nome_tipo_regiao"])." - GeoCod'
+		<Level name='".converte($regiao["nome_tipo_regiao"])." - GeoCod #{$regiao["codigo_tipo_regiao"]}'
 			column='codigo'
 			nameColumn='codigo' uniqueMembers='true' />
 	";
@@ -327,6 +327,9 @@ header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["l
 
 function converte($texto){
 	$texto = str_replace("&","&amp;",htmlentities($texto));
+	//$texto = htmlentities($texto);
+	//$texto = mb_convert_encoding($texto, 'UTF-8', mb_detect_encoding($texto));
+	//$texto = utf8_encode($texto);
 	return $texto;
 }
 ?>

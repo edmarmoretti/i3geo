@@ -22,10 +22,14 @@ $opcoes = (array) json_decode($_POST["opcoes"],true);
 $metadados = (array) json_decode($_POST["metadados"],true);
 $nmetadados = count($metadados);
 //pega o id da regiao (busca pelo posfixo geocod)
-$codigo_tipo_regiao = $metadados[0]["identificador"];
-$codigo_tipo_regiao = explode("].[",$codigo_tipo_regiao);
-$codigo_tipo_regiao = str_replace(array("codigo_tipo_regiao_","[","_geocod"),"",$codigo_tipo_regiao[0]);
-
+$codigo_tipo_regiao = $metadados[0]["colName"];
+$codigo_tipo_regiao = explode("#",$codigo_tipo_regiao);
+$codigo_tipo_regiao = $codigo_tipo_regiao[1];
+/*
+echo "<pre>";
+var_dump($metadados);
+echo $codigo_tipo_regiao;exit;
+*/
 if(empty($codigo_tipo_regiao)){
 	echo "Nao foi possivel determinar o codigo da regiao ou localidade no sistema Metaestat";
 	exit;
@@ -47,7 +51,7 @@ $srid = $meta["srid"];
 $colunastabela = $m->colunasTabela($meta["codigo_estat_conexao"],$meta["esquemadb"],$meta["tabela"],"geometry","!=");
 $tipoLayer = "POLYGON";
 //define a coluna geo correta
-if($opcoes["tipo"] == "raiosProporcionais" || $opcoes["tipo"] == "circulosProporcionais"){
+if($opcoes["tipo"] == "mapaPizzas" || $opcoes["tipo"] == "mapaBarras" || $opcoes["tipo"] == "raiosProporcionais" || $opcoes["tipo"] == "circulosProporcionais"){
 	if($meta["colunacentroide"] != ""){
 		$colunageo = $meta["colunacentroide"];
 		$sqlColunaGeo = $meta["colunacentroide"];
@@ -56,6 +60,9 @@ if($opcoes["tipo"] == "raiosProporcionais" || $opcoes["tipo"] == "circulosPropor
 		$sqlColunaGeo = "st_centroid(".$meta["colunageo"].")";
 	}
 	$tipoLayer = "POINT";
+	if($opcoes["tipo"] == "mapaBarras" || $opcoes["tipo"] == "mapaPizzas"){
+		$tipoLayer = "CHART";
+	}
 }
 //var_dump($metadados);exit;
 //constroi um sql que retorna os dados na forma de uma tabela inline
@@ -115,19 +122,32 @@ $l[] = '		SAIKU "'.$opcoes["tipo"].'"';
 $l[] = '		TIP "'.$meta["colunanomeregiao"].','.implode(',',$nomesColunas).'"';
 $l[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
 $l[] = '	END	';
-$l = implode("",$l);
+
+$l = implode(PHP_EOL,$l);
+
 if($opcoes["tipo"] == "raiosProporcionais"){
-	$l .= implode(" ",raiosProporcionais(1,$nomesColunas[1]));
+	$l .= implode(PHP_EOL,raiosProporcionais(1,$nomesColunas[1]));
 }
 if($opcoes["tipo"] == "circulosProporcionais"){
 	$l .= '	OPACITY 50';
-	$l .= implode(" ",circulosProporcionais(1,$nomesColunas[1]));
+	$l .= implode(PHP_EOL,circulosProporcionais(1,$nomesColunas[1]));
 }
 if($opcoes["tipo"] == "coresChapadas"){
 	$l .= '	OPACITY 50';
-	$l .= implode(" ",coresChapadas(1,$nomesColunas[1]));
+	$l .= implode(PHP_EOL,coresChapadas(1,$nomesColunas[1]));
 }
-$l .= 'END';
+if($opcoes["tipo"] == "mapaBarras"){
+	$l .= PHP_EOL.' PROCESSING "CHART_SIZE='.$opcoes["size"].' '.$opcoes["size"].'"';
+	$l .= PHP_EOL.' PROCESSING "CHART_TYPE=bar"';
+	$l .= implode(PHP_EOL,mapaBarras($nomesColunas));
+}
+if($opcoes["tipo"] == "mapaPizzas"){
+	$l .= PHP_EOL.' PROCESSING "CHART_SIZE='.$opcoes["size"].' '.$opcoes["size"].'"';
+	$l .= PHP_EOL.' PROCESSING "CHART_TYPE=pie"';
+	$l .= implode(PHP_EOL,mapaBarras($nomesColunas));
+}
+$l .= PHP_EOL.'END';
+
 //echo $l;exit;
 $layer->updateFromString($l);
 
@@ -145,6 +165,28 @@ if($opcoes["tipo"] == "coresChapadas"){
 }
 
 header("Location:".$opcoes["locaplic"]."/mashups/openlayers.php?temas=".$map_file."&DESLIGACACHE=sim&botoes=legenda,pan,zoombox,zoomtot,zoomin,zoomout,distancia,area,identifica&controles=navigation,layerswitcher,scaleline,mouseposition,overviewmap,keyboarddefaults&tiles=false&mapext=".$opcoes["mapext"]);
+
+function mapaBarras($colunas){
+	global $opcoes;
+	//$opcoes["coreshex"] = array_reverse($opcoes["coreshex"]);
+	//$valores = retornaDadosColuna($coluna);
+	//$cortes = quartis($valores,$nomeColuna);
+	//var_dump($opcoes["coreshex"]);exit;
+	$nclasses = count($colunas);
+	$classes = array();
+	for($i=1;$i<$nclasses;$i++){
+		$classes[] = PHP_EOL.'CLASS';
+		$classes[] = '	NAME "'.$colunas[$i].'"';
+		$classes[] = '	STYLE';
+		$cor = $opcoes["outlinecolor"];
+		$classes[] = '		OUTLINECOLOR '.$cor["red"].' '.$cor["green"].' '.$cor["blue"];
+		$classes[] = '		SIZE ['.$colunas[$i].']';
+		$classes[] = '		COLOR '.$opcoes["cores"][$i-1];
+		$classes[] = '	END';
+		$classes[] = 'END	';
+	}
+	return $classes;
+}
 
 function coresChapadas($coluna,$nomeColuna){
 	global $opcoes;
@@ -250,5 +292,22 @@ function retornaDadosColuna($coluna){
 		$valores[] = $dado[$coluna];
 	}
 	return $valores;
+}
+function cHexToDec ($hexStr, $returnAsString = true, $seperator = ' ') {
+		$hexStr = preg_replace("/[^0-9A-Fa-f]/", '', $hexStr); // Gets a proper hex string
+		$rgbArray = array();
+		if (strlen($hexStr) == 6) { //If a proper hex code, convert using bitwise operation. No overhead... faster
+				$colorVal = hexdec($hexStr);
+				$rgbArray['red'] = 0xFF & ($colorVal >> 0x10);
+				$rgbArray['green'] = 0xFF & ($colorVal >> 0x8);
+				$rgbArray['blue'] = 0xFF & $colorVal;
+		} elseif (strlen($hexStr) == 3) { //if shorthand notation, need some string manipulations
+				$rgbArray['red'] = hexdec(str_repeat(substr($hexStr, 0, 1), 2));
+				$rgbArray['green'] = hexdec(str_repeat(substr($hexStr, 1, 1), 2));
+				$rgbArray['blue'] = hexdec(str_repeat(substr($hexStr, 2, 1), 2));
+		} else {
+				return false; //Invalid hex color code
+		}
+		return $returnAsString ? implode($seperator, $rgbArray) : $rgbArray; // returns the rgb string or the associative array
 }
 ?>

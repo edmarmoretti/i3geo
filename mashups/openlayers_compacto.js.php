@@ -3062,7 +3062,7 @@ ol_mma: new OpenLayers.Layer.WMS(
 "Base cartogr&aacute;fica",
 "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
 {layers:'baseraster',SRS:'EPSG:4618',FORMAT:'image/png'},
-{singleTile:true}
+{singleTile:false}
 ),
 ol_wms: new OpenLayers.Layer.WMS.Untiled(
 "OpenLayers WMS",
@@ -3195,7 +3195,7 @@ if(fundo[i] != ""){
 try{
 eval("i3GEO.editorOL."+fundo[i]+".transitionEffect = 'resize';");
 eval("i3GEO.editorOL."+fundo[i]+".setVisibility(false);");
-eval("i3GEO.editorOL."+fundo[i]+".singleTile = single;");
+eval("i3GEO.editorOL."+fundo[i]+".singleTile = false;");
 eval("alayers.push(i3GEO.editorOL."+fundo[i]+");");
 }
 catch(e){
@@ -3571,9 +3571,11 @@ nlayers = layers.length,
 ins = "",i;
 for(i=0;i<nlayers;i++){
 try{
+if(layers[i].isBaseLayer === false){
 var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
 url = url.replace("LAYERS","LAYER");
-ins += "<img src='"+url+"' /><br>";
+ins += layers[i].name+"<br><img src='"+url+"' /><br>";
+}
 }
 catch(e){}
 }

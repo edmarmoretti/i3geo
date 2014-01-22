@@ -1,8 +1,8 @@
-$i = function(id)
-{return document.getElementById(id);};
 //seta as vari&aacute;veis navn e navm
 navn = false;
 navm = false;
+$i = function(id)
+{return document.getElementById(id);};
 app = navigator.appName.substring(0,1);
 if (app==='N'){navn=true;}else{navm=true;}
 
@@ -47,7 +47,7 @@ i3GEO.editorOL = {
 		"Base cartogr&aacute;fica",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
 		{layers:'baseraster',SRS:'EPSG:4618',FORMAT:'image/png'},
-		{singleTile:true}
+		{singleTile:false}
 	),
 	ol_wms: new OpenLayers.Layer.WMS.Untiled(
 		"OpenLayers WMS",
@@ -180,7 +180,7 @@ i3GEO.editorOL = {
 					try{
 						eval("i3GEO.editorOL."+fundo[i]+".transitionEffect = 'resize';");
 						eval("i3GEO.editorOL."+fundo[i]+".setVisibility(false);");
-						eval("i3GEO.editorOL."+fundo[i]+".singleTile = single;");
+						eval("i3GEO.editorOL."+fundo[i]+".singleTile = false;");
 						eval("alayers.push(i3GEO.editorOL."+fundo[i]+");");
 					}
 					catch(e){
@@ -559,9 +559,11 @@ i3GEO.editorOL = {
 			ins = "",i;
 		for(i=0;i<nlayers;i++){
 			try{
-				var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
-				url = url.replace("LAYERS","LAYER");
-				ins += "<img src='"+url+"' /><br>";
+				if(layers[i].isBaseLayer === false){
+					var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
+					url = url.replace("LAYERS","LAYER");
+					ins += layers[i].name+"<br><img src='"+url+"' /><br>";
+				}
 			}
 			catch(e){}
 		}
