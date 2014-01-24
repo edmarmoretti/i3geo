@@ -205,7 +205,7 @@ i3GEOF.salvaMapa = {
 		i3GEOF.salvaMapa.inicia(divid);
 	},
 	comboMapas: function(onde){
-		var	p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaMapas",
+		var	p = i3GEO.configura.locaplic+"/admin/php/mapas.php?funcao=pegaMapas",
 			combo = function(retorno){
 				var n = retorno.length,
 					i,
@@ -213,7 +213,7 @@ i3GEOF.salvaMapa = {
 					"<select id='i3GEOFsalvamapaMapaId' >" +
 					"	<option value=''>---</option>";
 				for(i=0;i<n;i++){
-					ins += 	"<option value='"+retorno[i].id_mapa+"'>"+retorno[i].id_mapa+" - "+retorno[i].titulo+"</option>";
+					ins += 	"<option value='"+retorno[i].id_mapa+"'>"+retorno[i].id_mapa+" - "+retorno[i].nome_mapa+"</option>";
 				}
 				ins += "</select>";
 				$i(onde).innerHTML = ins;

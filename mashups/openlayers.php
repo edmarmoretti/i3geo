@@ -26,7 +26,7 @@ if(!empty($restauramapa)){
 		$l->set("status",MS_DELETE);
 	}
 	$m->save($xbase);
-	$fundo = $xbase;
+	//$fundo = $xbase;
 	$temas = $xbase;
 }
 //

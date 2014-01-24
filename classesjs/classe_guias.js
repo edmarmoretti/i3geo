@@ -173,7 +173,7 @@ i3GEO.guias = {
 							else{
 								ins += "<div><p class=paragrafo style=text-align:center;cursor:pointer >" +
 									"<a href='"+link+"' style=text-align:center;text-decoration:none; >"+nome+" ("+temp.ID_MAPA+")</a>" +
-									"<br><a target=_blank href='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?"+temp.OUTROS+"' style=text-align:center;text-decoration:none;color:gray; >Preview</a>" +
+									"<br><a target=_blank href='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?"+temp.OUTROS+"&fundo=e_wsm' style=text-align:center;text-decoration:none;color:gray; >Preview</a>" +
 									"</p></div></div>";
 							}
 							ig1++;
