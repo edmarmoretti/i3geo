@@ -1579,7 +1579,7 @@ $nptx - N&uacute;mero de pontos em X (opcional)
 
 $npty - N&uacute;mero de pontos em Y (opcional)
 */
-	function gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
+	function gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty,$proj=false)
 	{
 		set_time_limit(180);
 		//para manipular dbf
@@ -1589,7 +1589,25 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
 		$this->mapa->preparequery();
-		$ext = $this->mapa->extent;
+		$r = $this->mapa->extent;
+		$ext = ms_newRectObj();
+		$ext->setextent($r->minx,$r->miny,$r->maxx,$r->maxy);
+		if($proj == true){
+			//caso precise projetar
+			$projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
+			$projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+
+			$ext->project($projInObj, $projOutObj);
+
+			$pt = ms_newpointobj();
+			$pt->setXY($px,$py);
+
+			$pt->project($projInObj, $projOutObj);
+
+			$px = $pt->x;
+			$py = $pt->y;
+		}
+
 		$fx = $ext->maxx;
 		$fy = $ext->miny;
 		//calcula a dist&acirc;ncia entre os pontos em dd
@@ -1617,57 +1635,30 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		else
 		$db=dbase_open($dbname,2);
 		$reg = array();
-		$w = $this->mapa->width;
-		$h = $this->mapa->height;
-		if ($h > $w)
+		$valorcoluna = $px;
+		for ($coluna = 0; $coluna < $nptx; $coluna++)
 		{
+			$x = $valorcoluna;
 			$valorlinha = $py;
 			for ($linha = 0; $linha < $npty; $linha++)
 			{
 				$y = $valorlinha;
-				$valorcoluna = $px;
-				for ($coluna = 0; $coluna < $nptx; $coluna++)
-				{
-					$x = $valorcoluna;
-					$valorcoluna = $valorcoluna + $xdd;
-					$poPoint = ms_newpointobj();
-					$poPoint->setXY($x,$y);
-					$novoshpf->addpoint($poPoint);
-					$reg[] = $x;
-					$reg[] = $y;
-					if($this->dbaseExiste == false)
-					xbase_add_record($db,$reg);
-					else
-					dbase_add_record($db,$reg);
-					$reg = array();
-				}
 				$valorlinha = $valorlinha - $ydd;
-			}
-		}
-		else
-		{
-			$valorcoluna = $px;
-			for ($coluna = 0; $coluna < $nptx; $coluna++)
-			{
-				$x = $valorcoluna;
-				$valorlinha = $py;
-				for ($linha = 0; $linha < $npty; $linha++)
-				{
-					$y = $valorlinha;
-					$valorlinha = $valorlinha - $ydd;
-					$poPoint = ms_newpointobj();
-					$poPoint->setXY($x,$y);
-					$novoshpf->addpoint($poPoint);
-					$reg[] = $x;
-					$reg[] = $y;
-					if($this->dbaseExiste == false)
-					xbase_add_record($db,$reg);
-					else
-					dbase_add_record($db,$reg);
-					$reg = array();
+				$poPoint = ms_newpointobj();
+				$poPoint->setXY($x,$y);
+				if($proj == true){
+					$poPoint->project($projOutObj,$projInObj);
 				}
-				$valorcoluna = $valorcoluna + $xdd;
+				$novoshpf->addpoint($poPoint);
+				$reg[] = $x;
+				$reg[] = $y;
+				if($this->dbaseExiste == false)
+				xbase_add_record($db,$reg);
+				else
+				dbase_add_record($db,$reg);
+				$reg = array();
 			}
+			$valorcoluna = $valorcoluna + $xdd;
 		}
 		if($this->dbaseExiste == false)
 		xbase_close($db);
@@ -1705,7 +1696,7 @@ $nptx - N&uacute;mero de pontos em X (opcional)
 
 $npty - N&uacute;mero de pontos em Y (opcional)
 */
-	function gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
+	function gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty,$proj=false)
 	{
 		set_time_limit(180);
 		//para manipular dbf
@@ -1716,7 +1707,24 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		$nomeshp = $this->diretorio."/".$nomegrade;
 		//pega a extens&atilde;o geogr&aacute;fica do mapa
 		$this->mapa->preparequery();
-		$ext = $this->mapa->extent;
+		$r = $this->mapa->extent;
+		$ext = ms_newRectObj();
+		$ext->setextent($r->minx,$r->miny,$r->maxx,$r->maxy);
+		if($proj == true){
+			//caso precise projetar
+			$projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
+			$projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+
+			$ext->project($projInObj, $projOutObj);
+
+			$pt = ms_newpointobj();
+			$pt->setXY($px,$py);
+
+			$pt->project($projInObj, $projOutObj);
+
+			$px = $pt->x;
+			$py = $pt->y;
+		}
 		$fx = $ext->maxx;
 		$fy = $ext->miny;
 		//calcula a dist&acirc;ncia entre os pontos em dd
@@ -1743,83 +1751,46 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		else
 		$db=dbase_open($dbname,2);
 		$reg = array();
-		$w = $this->mapa->width;
-		$h = $this->mapa->height;
-		if ($h > $w)
-		{
+		$valorcoluna = $px;
+		for ($coluna = 0; $coluna < $nptx; $coluna++){
+			$x = $valorcoluna;
 			$valorlinha = $py;
-			for ($linha = 0; $linha < $npty; $linha++)
-			{
+			for ($linha = 0; $linha < $npty; $linha++){
 				$y = $valorlinha;
-				$valorcoluna = $px;
-				for ($coluna = 0; $coluna < $nptx; $coluna++)
-				{
-					$x = $valorcoluna;
-					$valorcoluna = $valorcoluna + $xdd;
-					$poPoint1 = ms_newpointobj();
-					$poPoint2 = ms_newpointobj();
-					$poPoint3 = ms_newpointobj();
-					$poPoint4 = ms_newpointobj();
-					$poPoint1->setXY($x,$y);
-					$poPoint2->setXY(($x + $xdd),$y);
-					$poPoint3->setXY(($x + $xdd),($y - $ydd));
-					$poPoint4->setXY($x,($y - $ydd));
-					$linhas = ms_newLineObj();
-					$linhas->add($poPoint1);
-					$linhas->add($poPoint2);
-					$linhas->add($poPoint3);
-					$linhas->add($poPoint4);
-					$linhas->add($poPoint1);
-					$shapen = ms_newShapeObj(MS_SHP_POLYGON);
-					$shapen->add($linhas);
-					$novoshpf->addShape($shapen);
-					$reg[] = $linha."-".$coluna;
-					if($this->dbaseExiste == false)
-					xbase_add_record($db,$reg);
-					else
-					dbase_add_record($db,$reg);
-					$reg = array();
-				}
 				$valorlinha = $valorlinha - $ydd;
-			}
-		}
-		else
-		{
-			$valorcoluna = $px;
-			for ($coluna = 0; $coluna < $nptx; $coluna++)
-			{
-				$x = $valorcoluna;
-				$valorlinha = $py;
-				for ($linha = 0; $linha < $npty; $linha++)
-				{
-					$y = $valorlinha;
-					$valorlinha = $valorlinha - $ydd;
-					$poPoint1 = ms_newpointobj();
-					$poPoint2 = ms_newpointobj();
-					$poPoint3 = ms_newpointobj();
-					$poPoint4 = ms_newpointobj();
-					$poPoint1->setXY($x,$y);
-					$poPoint2->setXY(($x + $xdd),$y);
-					$poPoint3->setXY(($x + $xdd),($y - $ydd));
-					$poPoint4->setXY($x,($y - $ydd));
-					$linhas = ms_newLineObj();
-					$linhas->add($poPoint1);
-					$linhas->add($poPoint2);
-					$linhas->add($poPoint3);
-					$linhas->add($poPoint4);
-					$linhas->add($poPoint1);
-					$shapen = ms_newShapeObj(MS_SHP_POLYGON);
-					$shapen->add($linhas);
-					$novoshpf->addShape($shapen);
-					$reg[] = $linha."-".$coluna;
-					if($this->dbaseExiste == false)
-					xbase_add_record($db,$reg);
-					else
-					dbase_add_record($db,$reg);
-					$reg = array();
+				$poPoint1 = ms_newpointobj();
+				$poPoint2 = ms_newpointobj();
+				$poPoint3 = ms_newpointobj();
+				$poPoint4 = ms_newpointobj();
+				$poPoint1->setXY($x,$y);
+				$poPoint2->setXY(($x + $xdd),$y);
+				$poPoint3->setXY(($x + $xdd),($y - $ydd));
+				$poPoint4->setXY($x,($y - $ydd));
+
+				if($proj == true){
+					$poPoint1->project($projOutObj,$projInObj);
+					$poPoint2->project($projOutObj,$projInObj);
+					$poPoint3->project($projOutObj,$projInObj);
+					$poPoint4->project($projOutObj,$projInObj);
 				}
-			$valorcoluna = $valorcoluna + $xdd;
+
+				$linhas = ms_newLineObj();
+				$linhas->add($poPoint1);
+				$linhas->add($poPoint2);
+				$linhas->add($poPoint3);
+				$linhas->add($poPoint4);
+				$linhas->add($poPoint1);
+				$shapen = ms_newShapeObj(MS_SHP_POLYGON);
+				$shapen->add($linhas);
+				$novoshpf->addShape($shapen);
+				$reg[] = $linha."-".$coluna;
+				if($this->dbaseExiste == false)
+				xbase_add_record($db,$reg);
+				else
+				dbase_add_record($db,$reg);
+				$reg = array();
 			}
+		$valorcoluna = $valorcoluna + $xdd;
 		}
 		if($this->dbaseExiste == false)
 		xbase_close($db);
@@ -1835,31 +1806,34 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		{unlink ($this->qyfile);}
 		return("ok");
 	}
-/*
-function: gradeDeHex
+	/*
+	function: gradeDeHex
 
-Gera uma grade de pol&iacute;gonos hexagonais definido em d&eacute;cimos de grau.
+	Gera uma grade de pol&iacute;gonos hexagonais regulares definido em d&eacute;cimos de grau.
 
-Salva o mapa acrescentando um novo layer com a grade.
+	Salva o mapa acrescentando um novo layer com a grade.
 
-parameters:
-$xdd - Espa&ccedil;amento em x.
+	parameters:
 
-$ydd - Espa&ccedil;amento em y.
+	$dd - Comprimento dos lados (em metros se $proj=true)
 
-$px - X do primeiro ponto (superior esquerdo)
+	$px - X do primeiro ponto (superior esquerdo)
 
-$py - Y do primeiro ponto.
+	$py - Y do primeiro ponto.
 
-$locaplic - Endere&ccedil;o da aplica&ccedil;&atilde;o.
+	$locaplic - Endere&ccedil;o da aplica&ccedil;&atilde;o.
 
-$nptx - N&uacute;mero de pontos em X (opcional)
+	$nptx - N&uacute;mero de pontos em X (opcional)
 
-$npty - N&uacute;mero de pontos em Y (opcional)
-*/
-	function gradeDeHex($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
-	{
+	$npty - N&uacute;mero de pontos em Y (opcional)
+
+	$proj - A grade deve ser gerada em unidades metricas e projetada para geografica
+	*/
+	function gradeDeHex($dd,$px,$py,$locaplic,$nptx,$npty,$proj=false){
 		set_time_limit(180);
+		//http://gmc.yoyogames.com/index.php?showtopic=336183
+		$hh = (sin(deg2rad(30)) * $dd);
+		$rr = (cos(deg2rad(30)) * $dd);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
 			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
@@ -1868,18 +1842,37 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		$nomeshp = $this->diretorio."/".$nomegrade;
 		//pega a extens&atilde;o geogr&aacute;fica do mapa
 		$this->mapa->preparequery();
-		$ext = $this->mapa->extent;
+		$r = $this->mapa->extent;
+		$ext = ms_newRectObj();
+		$ext->setextent($r->minx,$r->miny,$r->maxx,$r->maxy);
+		if($proj == true){
+			//caso precise projetar
+			$projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
+			$projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+
+			$ext->project($projInObj, $projOutObj);
+
+			$pt = ms_newpointobj();
+			$pt->setXY($px,$py);
+
+			$pt->project($projInObj, $projOutObj);
+
+			$px = $pt->x;
+			$py = $pt->y;
+		}
+
 		$fx = $ext->maxx;
 		$fy = $ext->miny;
-		//calcula a dist&acirc;ncia entre os pontos em dd
+
+		//calcula a dist&acirc;ncia entre os pontos em dd se nao tiver sido especificada ou for 0
 		$distx = $fx - $px;
 		$disty = $fy - $py;
 		if ($distx < 0){$distx = $distx * -1;}
 		if ($disty < 0){$disty = $disty * -1;}
 		if ($nptx == "")
-		{$nptx = round(($distx / $xdd),0);}
+		{$nptx = round(($distx / $dd),0);}
 		if ($npty == "")
-		{$npty = round(($disty / $ydd),0);}
+		{$npty = round(($disty / $dd),0);}
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		$def = array();
@@ -1891,104 +1884,88 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
+			$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
+			$db=dbase_open($dbname,2);
 		$reg = array();
 		$w = $this->mapa->width;
 		$h = $this->mapa->height;
-		if ($h > $w)
-		{
+
+		$valorcoluna = $px;
+		$par = false;
+		for ($coluna = 0; $coluna < $nptx; $coluna++){
+			$x = $valorcoluna;
 			$valorlinha = $py;
-			for ($linha = 0; $linha < $npty; $linha++)
-			{
-				$y = $valorlinha;
-				$valorcoluna = $px;
-				for ($coluna = 0; $coluna < $nptx; $coluna++)
-				{
-					$x = $valorcoluna;
-					$valorcoluna = $valorcoluna + $xdd;
-					$poPoint1 = ms_newpointobj();
-					$poPoint2 = ms_newpointobj();
-					$poPoint3 = ms_newpointobj();
-					$poPoint4 = ms_newpointobj();
-					$poPoint1->setXY($x,$y);
-					$poPoint2->setXY(($x + $xdd),$y);
-					$poPoint3->setXY(($x + $xdd),($y - $ydd));
-					$poPoint4->setXY($x,($y - $ydd));
-					$linhas = ms_newLineObj();
-					$linhas->add($poPoint1);
-					$linhas->add($poPoint2);
-					$linhas->add($poPoint3);
-					$linhas->add($poPoint4);
-					$linhas->add($poPoint1);
-					$shapen = ms_newShapeObj(MS_SHP_POLYGON);
-					$shapen->add($linhas);
-					$novoshpf->addShape($shapen);
-					$reg[] = $linha."-".$coluna;
-					if($this->dbaseExiste == false)
-					xbase_add_record($db,$reg);
-					else
-					dbase_add_record($db,$reg);
-					$reg = array();
-				}
-				$valorlinha = $valorlinha - $ydd;
+
+			if ($par == true){
+				$valorlinha = $valorlinha - $rr;
+				$par = false;
 			}
-		}
-		else
-		{
-			$valorcoluna = $px;
-			for ($coluna = 0; $coluna < $nptx; $coluna++)
-			{
-				$x = $valorcoluna;
-				$valorlinha = $py;
+			else{
+				//$y = $y + $hh;
 				$par = true;
-				for ($linha = 0; $linha < $npty; $linha++)
-				{
-					$y = $valorlinha;
-					$valorlinha = $valorlinha - $ydd - ($ydd/2);
-					$poPoint1 = ms_newpointobj();
-					$poPoint2 = ms_newpointobj();
-					$poPoint3 = ms_newpointobj();
-					$poPoint4 = ms_newpointobj();
-					$poPoint5 = ms_newpointobj();
-					$poPoint6 = ms_newpointobj();
-					$poPoint1->setXY($x,$y);
-					$poPoint2->setXY(($x + ($xdd/2)),$y+($ydd/2));
-					$poPoint3->setXY($x + $xdd,$y);
-					$poPoint4->setXY($x + $xdd,$y - $ydd);
-					$poPoint5->setXY(($x + ($xdd/2)),$y - $ydd - ($ydd/2));
-					$poPoint6->setXY($x,$y - $ydd);
-					$linhas = ms_newLineObj();
-					$linhas->add($poPoint1);
-					$linhas->add($poPoint2);
-					$linhas->add($poPoint3);
-					$linhas->add($poPoint4);
-					$linhas->add($poPoint5);
-					$linhas->add($poPoint6);
-					$linhas->add($poPoint1);
-					$shapen = ms_newShapeObj(MS_SHP_POLYGON);
-					$shapen->add($linhas);
-					$novoshpf->addShape($shapen);
-					$reg[] = $linha."-".$coluna;
-					if($this->dbaseExiste == false)
-					xbase_add_record($db,$reg);
-					else
-					dbase_add_record($db,$reg);
-					$reg = array();
-					if ($par)
-					{$x=$x+($xdd/2);$par=false;}
-					else
-					{$x=$x-($xdd/2);$par=true;}
-				}
-				$valorcoluna = $valorcoluna + $xdd;
 			}
+
+			for ($linha = 0; $linha < $npty; $linha++){
+				$y = $valorlinha;
+				$valorlinha = $valorlinha - (2 * $rr);
+
+				$poPoint1 = ms_newpointobj();
+				$poPoint2 = ms_newpointobj();
+				$poPoint3 = ms_newpointobj();
+				$poPoint4 = ms_newpointobj();
+				$poPoint5 = ms_newpointobj();
+				$poPoint6 = ms_newpointobj();
+
+				//Point 0: $x, $y
+				//Point 1: x + s, y
+				//Point 2: x + s + h, y + r
+				//Point 3: x + s, y + r + r
+				//Point 4: x, y + r + r
+				//Point 5: x - h, y + r
+				$poPoint1->setXY($x,$y);
+				$poPoint2->setXY(($x + $dd),$y);
+				$poPoint3->setXY($x + $dd + $hh,$y - $rr);
+				$poPoint4->setXY($x + $dd, $y - $rr - $rr);
+				$poPoint5->setXY($x,$y - $rr - $rr);
+				$poPoint6->setXY($x - $hh,$y - $rr);
+
+				if($proj == true){
+					$poPoint1->project($projOutObj,$projInObj);
+					$poPoint2->project($projOutObj,$projInObj);
+					$poPoint3->project($projOutObj,$projInObj);
+					$poPoint4->project($projOutObj,$projInObj);
+					$poPoint5->project($projOutObj,$projInObj);
+					$poPoint6->project($projOutObj,$projInObj);
+				}
+
+
+				$linhas = ms_newLineObj();
+				$linhas->add($poPoint1);
+				$linhas->add($poPoint2);
+				$linhas->add($poPoint3);
+				$linhas->add($poPoint4);
+				$linhas->add($poPoint5);
+				$linhas->add($poPoint6);
+				$linhas->add($poPoint1);
+				$shapen = ms_newShapeObj(MS_SHP_POLYGON);
+				$shapen->add($linhas);
+				$novoshpf->addShape($shapen);
+				$reg[] = $linha."-".$coluna;
+				if($this->dbaseExiste == false)
+					xbase_add_record($db,$reg);
+				else
+					dbase_add_record($db,$reg);
+				$reg = array();
+			}
+			$valorcoluna = $valorcoluna + $dd + $hh;
 		}
 		if($this->dbaseExiste == false)
-		xbase_close($db);
+			xbase_close($db);
 		else
-		dbase_close($db);
+			dbase_close($db);
 		//adiciona o novo tema no mapa
+
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Grade (".$nomegrade.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
@@ -1997,6 +1974,7 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		if (file_exists($this->qyfile))
 		{unlink ($this->qyfile);}
 		return("ok");
+
 	}
 /*
 function: nptPol

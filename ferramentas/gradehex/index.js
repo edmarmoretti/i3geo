@@ -127,7 +127,7 @@ i3GEOF.gradeDeHex = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"150px",
+			"190px",
 			"",
 			"",
 			"",
@@ -156,18 +156,26 @@ i3GEOF.gradeDeHex = {
 		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.gradeDeHex.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.gradeDeHex.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.gradeDeHex.dicionario);
+		ins += "<p class='paragrafo'><input type=checkbox id=i3GEOgradedehexProj style='cursor:pointer;position:relative;top:2px;' />&nbsp;"+$trad(14,i3GEOF.gradeDeHex.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.gradeDeHex.t1()",ins,"i3GEOF.gradeDeHex.t0()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.gradeDeHex.dicionario);
-		ins += "<p class='paragrafo'>X: ";
-		ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxg' title='grau' type=text size=3 value='1'/>";
-		ins += $trad(6,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxm' title='minuto' type=text size=5 value='00'/>";
-		ins += $trad(7,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxs' title='segundo' type=text size=5 value='00.00'/>";
+		ins += "<p class='paragrafo'> ";
+		if($i("i3GEOgradedehexProj").checked){
+			ins += $trad(15,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxg' title='metros' type=text size=6 value='100000'/>";
+		}
+		else{
+			ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxg' title='grau' type=text size=3 value='1'/>";
+			ins += $trad(6,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxm' title='minuto' type=text size=5 value='00'/>";
+			ins += $trad(7,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxs' title='segundo' type=text size=5 value='00.00'/>";
+		}
+		/*
 		ins += "<p class='paragrafo'>Y: ";
 		ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexyg' title='grau' type=text size=3 value='1'/>";
 		ins += $trad(6,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexym' title='minuto' type=text size=5 value='00'/>";
 		ins += $trad(7,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexys' title='segundo' type=text size=5 value='00.00'/>";
+		*/
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t0()","i3GEOF.gradeDeHex.t2()",ins,"i3GEOF.gradeDeHex.t1()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
 	},
 	t2: function(){
@@ -217,14 +225,19 @@ i3GEOF.gradeDeHex = {
 			if(i3GEOF.gradeDeHex.aguarde.visibility === "visible")
 			{return;}
 			i3GEOF.gradeDeHex.aguarde.visibility = "visible";
-			var dx,dy,ix,iy,nptx,npty,fim,p,cp;
-			dx = i3GEO.calculo.dms2dd($i("i3GEOgradedehexxg").value,$i("i3GEOgradedehexxm").value,$i("i3GEOgradedehexxs").value);
-			dy = i3GEO.calculo.dms2dd($i("i3GEOgradedehexyg").value,$i("i3GEOgradedehexym").value,$i("i3GEOgradedehexys").value);
+			var dx,ix,iy,nptx,npty,fim,p,cp,proj = "nao";
+			if(!$i("i3GEOgradedehexProj").checked){
+				dx = i3GEO.calculo.dms2dd($i("i3GEOgradedehexxg").value,$i("i3GEOgradedehexxm").value,$i("i3GEOgradedehexxs").value);
+			}
+			else{
+				proj = "sim";
+				dx = $i("i3GEOgradedehexxg").value;
+			}
 			ix = i3GEO.calculo.dms2dd($i("i3GEOgradedehexixg").value,$i("i3GEOgradedehexixm").value,$i("i3GEOgradedehexixs").value);
 			iy = i3GEO.calculo.dms2dd($i("i3GEOgradedehexiyg").value,$i("i3GEOgradedehexiym").value,$i("i3GEOgradedehexiys").value);
 			nptx = $i("i3GEOgradedehexnptx").value;
 			npty = $i("i3GEOgradedehexnpty").value;
-			if ((dx == 0) || (dy == 0))
+			if ((dx == 0))
 			{i3GEO.janela.tempoMsg($trad(12,i3GEOF.gradeDeHex.dicionario));return;}
 			if ((nptx == 0) || (npty == 0))
 			{i3GEO.janela.tempoMsg($trad(13,i3GEOF.gradeDeHex.dicionario));return;}
@@ -238,7 +251,8 @@ i3GEOF.gradeDeHex = {
 				else
 				{i3GEO.atualiza();}
 			};
-			p = i3GEO.configura.locaplic+"/ferramentas/gradehex/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=gradedehex&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
+
+			p = i3GEO.configura.locaplic+"/ferramentas/gradehex/exec.php?g_sid="+i3GEO.configura.sid+"&proj="+proj+"&funcao=gradedehex&dd="+dx+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"gradeDeHex",fim);

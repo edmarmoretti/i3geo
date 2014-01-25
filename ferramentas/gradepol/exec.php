@@ -20,7 +20,13 @@ Salva o mapa acrescentando um novo layer com a grade.
 		copiaSeguranca($map_file);
 		if(!isset($tema)){$tema = "";}
 		$m = new Analise($map_file,$tema);
-		$retorno = $m->gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty);
+		if($proj == "sim"){
+			$proj = true;
+		}
+		else{
+			$proj = false;
+		}
+		$retorno = $m->gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty,$proj);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;

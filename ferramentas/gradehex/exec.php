@@ -20,7 +20,14 @@ Salva o mapa acrescentando um novo layer com a grade.
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		if(!isset($tema)){$tema = "";}
-		$retorno = $m->gradeDeHex($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty);
+
+		if($proj == "sim"){
+			$proj = true;
+		}
+		else{
+			$proj = false;
+		}
+		$retorno = $m->gradeDeHex($dd,$px,$py,$locaplic,$nptx,$npty,$proj);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;

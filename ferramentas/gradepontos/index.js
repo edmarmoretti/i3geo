@@ -127,7 +127,7 @@ i3GEOF.gradeDePontos = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"150px",
+			"190px",
 			"",
 			"",
 			"",
@@ -155,18 +155,25 @@ i3GEOF.gradeDePontos = {
 		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.gradeDePontos.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.gradeDePontos.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.gradeDePontos.dicionario);
+		ins += "<p class='paragrafo'><input type=checkbox id=i3GEOgradedepontosProj style='cursor:pointer;position:relative;top:2px;' />&nbsp;"+$trad(14,i3GEOF.gradeDeHex.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.gradeDePontos.t1()",ins,"i3GEOFgradeDePontost0","i3GEOgradedepontosresultado",true,"i3GEOF.gradeDePontos_rodape");
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.gradeDePontos.dicionario);
-		ins += "<p class='paragrafo'>X: ";
-		ins += $trad(5,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosxg' title='grau' type=text size=3 value='1'/>";
-		ins += $trad(6,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosxm' title='minuto' type=text size=5 value='00'/>";
-		ins += $trad(7,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosxs' title='segundo' type=text size=5 value='00.00'/>";
-		ins += "<p class='paragrafo'>Y: ";
-		ins += $trad(5,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosyg' title='grau' type=text size=3 value='1'/>";
-		ins += $trad(6,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosym' title='minuto' type=text size=5 value='00'/>";
-		ins += $trad(7,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosys' title='segundo' type=text size=5 value='00.00'/>";
+		if($i("i3GEOgradedepontosProj").checked){
+			ins += "<p class='paragrafo'>"+$trad(15,i3GEOF.gradeDePontos.dicionario)+" X:<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosxg' title='metros' type=text size=6 value='100000'/>";
+			ins += "<p class='paragrafo'>"+$trad(15,i3GEOF.gradeDePontos.dicionario)+" Y:<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosyg' title='metros' type=text size=6 value='100000'/>";
+		}
+		else{
+			ins += "<p class='paragrafo'>X: ";
+			ins += $trad(5,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosxg' title='grau' type=text size=3 value='1'/>";
+			ins += $trad(6,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosxm' title='minuto' type=text size=5 value='00'/>";
+			ins += $trad(7,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosxs' title='segundo' type=text size=5 value='00.00'/>";
+			ins += "<p class='paragrafo'>Y: ";
+			ins += $trad(5,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosyg' title='grau' type=text size=3 value='1'/>";
+			ins += $trad(6,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosym' title='minuto' type=text size=5 value='00'/>";
+			ins += $trad(7,i3GEOF.gradeDePontos.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosys' title='segundo' type=text size=5 value='00.00'/>";
+		}
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t0()","i3GEOF.gradeDePontos.t2()",ins,"i3GEOF.gradeDePontos.t1","i3GEOgradedepontosresultado",true,"i3GEOF.gradeDePontos_rodape");
 	},
 	t2: function(){
@@ -216,9 +223,16 @@ i3GEOF.gradeDePontos = {
 			if(i3GEOF.gradeDePontos.aguarde.visibility === "visible")
 			{return;}
 			i3GEOF.gradeDePontos.aguarde.visibility = "visible";
-			var dx,dy,ix,iy,nptx,npty,fim,p,cp;
-			dx = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosxg").value,$i("i3GEOgradedepontosxm").value,$i("i3GEOgradedepontosxs").value);
-			dy = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosyg").value,$i("i3GEOgradedepontosym").value,$i("i3GEOgradedepontosys").value);
+			var dx,dy,ix,iy,nptx,npty,fim,p,cp,proj="nao";
+			if(!$i("i3GEOgradedepontosProj").checked){
+				dx = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosxg").value,$i("i3GEOgradedepontosxm").value,$i("i3GEOgradedepontosxs").value);
+				dy = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosyg").value,$i("i3GEOgradedepontosym").value,$i("i3GEOgradedepontosys").value);
+			}
+			else{
+				proj = "sim";
+				dx = $i("i3GEOgradedepontosxg").value;
+				dy = $i("i3GEOgradedepontosyg").value;
+			}
 			ix = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosixg").value,$i("i3GEOgradedepontosixm").value,$i("i3GEOgradedepontosixs").value);
 			iy = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosiyg").value,$i("i3GEOgradedepontosiym").value,$i("i3GEOgradedepontosiys").value);
 			nptx = $i("i3GEOgradedepontosnptx").value;
@@ -237,7 +251,7 @@ i3GEOF.gradeDePontos = {
 				else
 				{i3GEO.atualiza("");}
 			};
-			p = i3GEO.configura.locaplic+"/ferramentas/gradepontos/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=gradedepontos&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
+			p = i3GEO.configura.locaplic+"/ferramentas/gradepontos/exec.php?g_sid="+i3GEO.configura.sid+"&proj="+proj+"&funcao=gradedepontos&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"gradeDePontos",fim);

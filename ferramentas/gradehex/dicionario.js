@@ -19,7 +19,7 @@ i3GEOF.gradeDeHex.dicionario = {
 			it:""
 		}],
 		4: [{
-			pt:"Espa&ccedil;amento da grade",
+			pt:"Tamanho dos lados",
 			en:"",
 			es:"",
 			it:""
@@ -74,6 +74,18 @@ i3GEOF.gradeDeHex.dicionario = {
 		}],
 		13: [{
 			pt:"N&uacute;mero de pontos n&atilde;o pode ser 0",
+			en:"",
+			es:"",
+			it:""
+		}],
+		14: [{
+			pt:"Utiliza a proje&ccedil;&atilde;o Mercator na geração da grade",
+			en:"",
+			es:"",
+			it:""
+		}],
+		15: [{
+			pt:"Metros",
 			en:"",
 			es:"",
 			it:""
