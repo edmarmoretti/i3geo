@@ -1751,18 +1751,24 @@ i3GEO.util = {
 
 	ids (opcional) array com os ids de cada checkbox
 
+	idschecked (opcional) array com os ids dos elementos marcados como selecionados
+
 	*/
-	checkCombo: function(id,nomes,valores,estilo,funcaoclick,ids){
-		var i, combo = "",
+	checkCombo: function(id,nomes,valores,estilo,funcaoclick,ids,idschecked){
+		var temp,i, combo = "",
 			n = valores.length;
 		if (n > 0){
 			combo = "<div style='"+estilo+"'><table class=lista3 id="+id+" >";
 			for (i=0;i<n;i++){
+				temp = "";
+				if(idschecked && idschecked[i]){
+					temp = "checked";
+				}
 				if(!ids){
-					combo += "<tr><td><input onclick="+funcaoclick+" size=2 style='top:1px;cursor:pointer' type=checkbox value='"+valores[i]+"' /></td><td>"+nomes[i]+"</td>";
+					combo += "<tr><td><input "+temp+" onclick="+funcaoclick+" size=2 style='top:1px;cursor:pointer' type=checkbox value='"+valores[i]+"' /></td><td>"+nomes[i]+"</td>";
 				}
 				else{
-					combo += "<tr><td><input id="+ids[i]+" onclick="+funcaoclick+" size=2 style='top:1px;cursor:pointer' type=checkbox value='"+valores[i]+"' /></td><td>"+nomes[i]+"</td>";
+					combo += "<tr><td><input "+temp+" id="+ids[i]+" onclick="+funcaoclick+" size=2 style='top:1px;cursor:pointer' type=checkbox value='"+valores[i]+"' /></td><td>"+nomes[i]+"</td>";
 				}
 			}
 			combo += "</table></div>";

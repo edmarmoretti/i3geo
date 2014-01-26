@@ -523,7 +523,7 @@ i3GEOF.preferencias.dicionario = {
 			it:""
 		}],
 		88: [{
-			pt:"",
+			pt:"Inicializa o mapa com as camadas existentes no mapa atual",
 			en:"",
 			es:"",
 			it:""

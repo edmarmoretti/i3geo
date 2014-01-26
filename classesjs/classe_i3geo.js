@@ -437,6 +437,14 @@ var i3GEO = {
 				i3GEO.inicia(retorno);
 			};
 			i3GEO.configura.mashuppar += "&interface="+i3GEO.Interface.ATUAL;
+			//acrescenta camadas iniciais
+			if(i3GEO.mapa.TEMASINICIAIS.length > 0){
+				i3GEO.configura.mashuppar += "&temasa="+i3GEO.mapa.TEMASINICIAIS;
+			}
+			if(i3GEO.mapa.TEMASINICIAISLIGADOS.length > 0){
+				i3GEO.configura.mashuppar += "&layers="+i3GEO.mapa.TEMASINICIAISLIGADOS;
+			}
+
 			i3GEO.php.criamapa(mashup,i3GEO.configura.mashuppar);
 		}
 		else{

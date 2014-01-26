@@ -44,7 +44,7 @@ MAP
 		END # METADATA
 
 		NAME "_llocali"
-		STATUS DEFAULT
+		STATUS OFF
 		TEMPLATE "none.htm"
 		TILEITEM "location"
 		TYPE POINT

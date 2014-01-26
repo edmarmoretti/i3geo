@@ -41,6 +41,38 @@ if(typeof(i3GEO) === 'undefined'){
 }
 i3GEO.mapa = {
 	/*
+	Propriedade: TEMASINICIAISLIGADOS
+
+	Lista indicando quais temas serao adicionados ao mapa na inicializacao
+
+	Esse valor e utilizado para completar a variavel mashuppar utilizada por i3GEO.
+
+	Os temas sao aqueles que aparecem em i3geo/temas
+
+	Type:
+	{string}
+
+	Default:
+	{}
+	*/
+	TEMASINICIAISLIGADOS: "",
+	/*
+	Propriedade: TEMASINICIAISLIGADOS
+
+	Lista indicando quais temas serao ligados na inicializacao
+
+	Esse valor e utilizado para completar a variavel mashuppar utilizada por i3GEO.
+
+	Os temas sao aqueles que aparecem em i3geo/temas
+
+	Type:
+	{string}
+
+	Default:
+	{}
+	*/
+	TEMASINICIAIS: "",
+	/*
 	Propriedade: AUTORESIZE
 
 	Indica se o tamanho do mapa sera ajustado toda vez que o navegador for redimensionado

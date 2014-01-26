@@ -44,7 +44,7 @@ i3GEOF.preferencias = {
 	lista: function(){
 		var lista = [
 			{
-				titulo: $trad(80,i3GEOF.preferencias.dicionario),
+				titulo: $trad(80,i3GEOF.preferencias.dicionario),//ferramentas ativas
 				props: [
 					{
 						titulo: $trad(86,i3GEOF.preferencias.dicionario),
@@ -77,7 +77,7 @@ i3GEOF.preferencias = {
 					}
 				]
 			},{
-				titulo: $trad(9,i3GEOF.preferencias.dicionario),
+				titulo: $trad(9,i3GEOF.preferencias.dicionario),//barra de botoes
 				props: [
 					{
 						titulo: $trad(4,i3GEOF.preferencias.dicionario),
@@ -194,7 +194,20 @@ i3GEOF.preferencias = {
 			},{
 				titulo: $trad(30,i3GEOF.preferencias.dicionario),//mapa
 				props: [
-					{
+					{//elemento input do tipo hidden com id igual ao valor de elemento
+						titulo: "",
+						tipo: "oculto",
+						elemento: "i3GEO.mapa.TEMASINICIAISLIGADOS"
+					},{
+						titulo: "",
+						tipo: "oculto",
+						elemento: "i3GEO.mapa.TEMASINICIAIS"
+					},{//combo que recebera funcao em onchange
+						titulo: $trad(88,i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "",
+						funcao: "i3GEOF.preferencias.listaTemasOriginais(this)" //essa funcao atualiza o input oculto i3GEO.mapa.TEMASINICIAISLIGADOS
+					},{
 						titulo: $trad(63,i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.idioma.MOSTRASELETOR"
@@ -355,7 +368,7 @@ i3GEOF.preferencias = {
 					}
 				]
 			},{
-				titulo: $trad(71,i3GEOF.preferencias.dicionario), //menu superior
+				titulo: $trad(71,i3GEOF.preferencias.dicionario),
 				props: [
 					{
 						titulo: $trad(72,i3GEOF.preferencias.dicionario),
@@ -490,47 +503,63 @@ i3GEOF.preferencias = {
 			nomes = [];
 			ids = [];
 			for(j=0;j<nj;j++){
-				ins += "<p class=paragrafo title='"+props[j].elemento+"'>"+props[j].titulo+"</p>";
-				if(props[j].tipo === "numero" || props[j].tipo === "texto"){
-					ins += "<input type=text value='' id='"+props[j].elemento+"' style='"+estilo+"' /><br><br>";
+				//cria um input do tipo hidden que pode ser executado por uma funcao
+				if(props[j].tipo === "oculto"){
+					ins += "<input type=hidden value='' id='"+props[j].elemento+"' />";
 				}
-				if(props[j].tipo === "boolean" || props[j].tipo === "select"){
-					if(props[j].tipo === "boolean"){
-						valores = [true,false];
-						nomes = ["true","false"];
+				else{
+					ins += "<p class=paragrafo title='"+props[j].elemento+"'>"+props[j].titulo+"</p>";
+
+					if(props[j].tipo === "numero" || props[j].tipo === "texto"){
+						ins += "<input type=text value='' id='"+props[j].elemento+"' style='"+estilo+"' /><br><br>";
 					}
-					else{
-						valores = props[j].opcoes;
-						nomes = props[j].opcoes;
-					}
-					nk = valores.length;
-					ins += "<select id='"+props[j].elemento+"' style='"+estilo+"' >";
-					ins += "<option value='' >---</option>";
-					for(k=0;k<nk;k++){
-						ins += "<option value="+valores[k]+" >"+nomes[k]+"</option>";
-					}
-					ins += "</select><br><br>";
-				}
-				if(props[j].tipo === "multiselect"){
-					valores = i3GEO.util.listaTodasChaves(props[j].opcoes);
-					var nvalores = [];
-					numl = valores.length;
-					for(l=0;l<numl;l++){
-						temp = props[j].opcoes[valores[l]];
-						if(temp === true || temp === false){
-							ids.push(props[j].elemento+"."+valores[l]);
-							nvalores.push(valores[l]);
+					if(props[j].tipo === "boolean" || props[j].tipo === "select"){
+						if(props[j].tipo === "boolean"){
+							valores = [true,false];
+							nomes = ["true","false"];
 						}
+						else{
+							valores = props[j].opcoes;
+							nomes = props[j].opcoes;
+						}
+						nk = valores.length;
+						temp = "";
+						if(props[j].funcao){
+							temp = "onchange="+props[j].funcao;
+						}
+						ins += "<select id='"+props[j].elemento+"' style='"+estilo+"' "+temp+">";
+						ins += "<option value='' >---</option>";
+						for(k=0;k<nk;k++){
+							ins += "<option value="+valores[k]+" >"+nomes[k]+"</option>";
+						}
+						ins += "</select><br><br>";
 					}
-					ins += i3GEO.util.checkCombo(
-						props[j].elemento,
-						nvalores,
-						nvalores,
-						estilo+";overflow:auto;height:50px;border:1px solid gray;background-color:white",
-						"",
-						ids
-					);
-					ins += "<br><br>";
+					if(props[j].tipo === "multiselect"){
+						valores = i3GEO.util.listaTodasChaves(props[j].opcoes);
+						var nvalores = [],
+							idschecked = [];
+						numl = valores.length;
+						for(l=0;l<numl;l++){
+							temp = props[j].opcoes[valores[l]];
+							if(temp === true || temp === false){
+								ids.push(props[j].elemento+"."+valores[l]);
+								nvalores.push(valores[l]);
+								if(temp === true){
+									idschecked.push(valores[l]);
+								}
+							}
+						}
+						ins += i3GEO.util.checkCombo(
+							props[j].elemento,
+							nvalores,
+							nvalores,
+							estilo+";overflow:auto;height:50px;border:1px solid gray;background-color:white",
+							"",
+							ids,
+							idschecked
+						);
+						ins += "<br><br>";
+					}
 				}
 			}
 			ins += "</div></div>";
@@ -605,7 +634,7 @@ i3GEOF.preferencias = {
 			elem = raiz.getElementsByTagName(tipos[i]);
 			nelem = elem.length;
 			for(j=0;j<nelem;j++){
-				if(elem[j].value != ""){
+				if(elem[j].value != "" && elem[j].id != ""){
 					if (elem[j].type === "checkbox"){
 						pares.push(elem[j].id+"|"+elem[j].checked);
 					}
@@ -722,5 +751,37 @@ i3GEOF.preferencias = {
 			}
 		}
 		$i("i3GEOpreferenciasCodigo").value = pares.join(";\n");
+	},
+	//lista os temas existentes no mapa e que podem ser utilizados na inicializacao
+	//define o valor das variaveis i3GEO.mapa.TEMASINICIAIS e TEMASINICIAISLIGADOS
+	listaTemasOriginais: function(obj){
+		var layers = $i("i3GEO.mapa.TEMASINICIAIS"),
+			l = 0,
+			t,
+			temp,
+			temas = [],
+			ligados = [],
+			lista = i3GEO.arvoreDeCamadas.filtraCamadas("nomeoriginal","","diferente",i3GEO.arvoreDeCamadas.CAMADAS);
+		if(obj.value == "false"){
+			layers.value = "";
+			$i("i3GEO.mapa.TEMASINICIAISLIGADOS").value = "";
+		}
+		else{
+			for(l in lista){
+				temp = lista[l].name;
+				if(temp != undefined && temp != ""){
+					temas.push(temp);
+					//verifica se esta ligado
+					t = i3GEO.arvoreDeCamadas.capturaCheckBox(temp);
+					if(t && t.checked == true){
+						ligados.push(temp);
+					}
+				}
+			}
+			if(layers){
+				layers.value = temas.join(",");
+				$i("i3GEO.mapa.TEMASINICIAISLIGADOS").value = ligados.join(",");
+			}
+		}
 	}
 };

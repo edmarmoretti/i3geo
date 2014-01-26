@@ -478,7 +478,7 @@ i3GEO.Interface = {
 		Default:
 		{false}
 		*/
-		TILES: false,
+		TILES: true,
 		/*
 		N&uacute;mero de TILES na &aacute;rea n&atilde;o vis&iacute;vel do mapa
 
