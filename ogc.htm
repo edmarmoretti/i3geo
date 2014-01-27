@@ -6,7 +6,7 @@
 <meta name="description" content="OGC">
 <meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia">
 <meta name="robots" content="index,follow">
-<script type="text/javascript" src="classesjs/i3geo.js"></script>
+<script type="text/javascript" src="classesjs/i3geonaocompacto.js"></script>
 <style>
 P
 {padding-top:12px;COLOR: #2F4632;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
@@ -79,13 +79,16 @@ function ogc_endereco(botao)
 	ins = "<H1>Endere&ccedil;o do web service:</H1>";
 	var re = new RegExp(".htm", "g");
 	var servico = window.location.href.replace(re,'.php?');
+	var s = "tema="+tema;
 	if(botao.name === "metaestat"){
-		servico += "id_medida_variavel="+tema;
+		s = "id_medida_variavel="+tema.split("_")[1];
 	}
-	else{
-		servico += "tema="+tema;
+	if(botao.name === "mapaCadastrado"){
+		s = "restauramapa="+tema.split("_")[1];
+		tema = "";
 	}
 
+	servico += s;
 	ins += "<p>"+servico;
 	ins += "<p>Bookmark: <span id=bm ></span>";
 	ins  += "<p><iframe src='http://www.facebook.com/plugins/like.php?href="+servico+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";
@@ -120,9 +123,12 @@ i3GEO.arvoreDeTemas.INCLUISISTEMAS = false;
 i3GEO.arvoreDeTemas.FILTRAOGC = true;
 i3GEO.arvoreDeTemas.INCLUIWMS = false;
 i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT = true;
+i3GEO.arvoreDeTemas.INCLUIREGIOES = false;
 i3GEO.arvoreDeTemas.INCLUIINDIBR = false;
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false;
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca = false;
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = false;
+i3GEO.arvoreDeTemas.INCLUIMAPASCADASTRADOS = true;
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","ogc_endereco\(this\)");
 </script>

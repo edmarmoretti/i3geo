@@ -49,6 +49,8 @@ format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application
 id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
 	nao deve ser utilizado junto com tema
 
+restauramapa - ID de um mapa salvo no sistema de administracao. O mapa e restaurado e tratado como WMS
+
 DESLIGACACHE (opcional) {sim|nao} - forca a nao usar o cache de imagens qd definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
 
 Exemplos:
@@ -70,6 +72,7 @@ $cache = true;
 require_once(dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
 include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
+include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 //define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
 if(isset($id_medida_variavel)){
 	$tema = "ogcmetaestat".$id_medida_variavel;
@@ -80,6 +83,32 @@ if(!isset($temas) && isset($tema)){
 	$temas = $tema;
 }
 //
+//recupera um mapa salvo no banco de administracao
+//
+if(!empty($restauramapa)){
+	$xbase = restauraMapaAdmin($restauramapa,$dir_tmp);
+	$m = ms_newMapObj($xbase);
+	$w = $m->web;
+	$w->set("imagepath",dirname($w->imagepath)."/");
+	$w->set("imageurl",dirname($w->imageurl)."/");
+	//apaga algumas camadas
+	$l = $m->getlayerbyname("rosadosventos");
+	if($l != ""){
+		$l->set("status",MS_DELETE);
+	}
+	$l = $m->getlayerbyname("copyright");
+	if($l != ""){
+		$l->set("status",MS_DELETE);
+	}
+	$m->save($xbase);
+	//$fundo = $xbase;
+	$temas = $xbase;
+	$_GET["tema"] = $temas;
+	$_GET["layers"] = "";
+	$l = $m->getlayer(0);
+	$_GET["LAYERS"] = $l->name;
+}
+//
 //para operar como o Geoserver
 //
 if(isset($format) && strtolower($format) == "application/openlayers"){
@@ -88,6 +117,7 @@ if(isset($format) && strtolower($format) == "application/openlayers"){
 		$layers = $temas;
 	}
 	$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers.php?temas=".$layers."&layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica";
+	//echo $urln;exit;
 	if(!headers_sent()){
 		header("Location:".$urln);
 	}
@@ -127,7 +157,6 @@ if(isset($lista) && $lista == "temaswfs"){
 //
 //cria o web service
 //
-include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 error_reporting(0);
 $versao = versao();
 $versao = $versao["principal"];
@@ -268,6 +297,7 @@ else{
 				if($temai3geo == false || empty($layers))
 				{
 					$ts = $nmap->getalllayernames();
+					$nmap->setmetadata("ows_enable_request","*");
 				}
 				else{
 					$ts = explode(",",str_replace(" ",",",$layers));
@@ -640,6 +670,7 @@ function ogc_imprimeAjuda(){
 	echo "no lugar do código pode ser especificado tamb&eacute;m um arquivo mapfile qualquer. Nesse caso, deve ser digitado o caminho completo no servidor<br><br>";
 	echo "Utilize o sistema de administra&ccedil;&atilde;o do i3Geo para configurar quais os temas da pasta i3geo/temas podem ser utilizados.";
 	echo "Utilize o parametro &intervalo=0,20 para definir o n&uacute;mero de temas desejado na fun&ccedil;&atilde;o getcapabilities.";
+	echo "Utilize o parametro restauramapa para indicar o ID de um mapa salvo no banco de dados de administra&ccedil;&atilde;o para utiliz&aacute;-lo como um WMS";
 }
 function ogc_imprimeListaDeTemas(){
 	global $urli3geo,$perfil,$locaplic;

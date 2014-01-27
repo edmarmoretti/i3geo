@@ -2158,11 +2158,17 @@ pt:"Prefer&ecirc;ncias",
 en:"",
 es:"",
 it:""
-}]
-,
+}],
 "x89":[
 {
 pt:"Editar cadastro",
+en:"",
+es:"",
+it:""
+}],
+"x90":[
+{
+pt:"Mapas cadastrados",
 en:"",
 es:"",
 it:""

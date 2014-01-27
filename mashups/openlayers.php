@@ -206,6 +206,8 @@ if($temas != ""){
 						$visivel = "false";
 						if(in_array($tema,$visiveis))
 						{$visivel = "true";}
+						//echo $visivel;exit;
+						//var_dump($visiveis);exit;
 						if($nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM"){
 							//nesse caso o layer e adicionado como TMS
 							//tms leva os parametros do TMS
@@ -219,7 +221,7 @@ if($temas != ""){
 								$tituloLayer = $l->getmetadata("tema");
 								$nomeLayer = $l->name;
 								$visivel = "false";
-								if($l->status == MS_DEFAULT){
+								if($l->status == MS_DEFAULT || $nlayers == 1){
 									$visivel = "true";
 								}
 								if($tituloLayer != ""){

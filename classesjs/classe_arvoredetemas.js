@@ -206,6 +206,15 @@ i3GEO.arvoreDeTemas = {
 	*/
 	INCLUIWMSMETAESTAT: true,
 	/*
+	Propriedade: INCLUIMAPASCADASTRADOS
+
+	Inclui na arvore a lista de mapas cadastrados do sistema de metadados estatisticos?
+
+	Tipo:
+	{Boolean}
+	*/
+	INCLUIMAPASCADASTRADOS: false,
+	/*
 	Propriedade: INCLUIESTRELAS
 
 	Inclui na arvore um no com a lista de temas classificados conforme o numero de estrelas que possui
@@ -467,6 +476,27 @@ i3GEO.arvoreDeTemas = {
 			node.loadComplete();
 		};
 		i3GEO.php.listaTipoRegiao(monta);
+	},
+	/*
+	Lista os mapas cadastrados
+	*/
+	listaMapasCadastrados: function(){
+		var monta = function(retorno){
+			var node,nraiz,i,html,tema;
+			retorno = retorno.data.mapas;
+			node = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idmapacadastrado","raiz");
+			nraiz = retorno.length;
+			for (i=0;i<nraiz; i += 1){
+				tema = {"nameInput":"mapaCadastrado","tid":"mapaCadastrado_"+retorno[i].ID_MAPA,"nome":retorno[i].NOME},
+				html = i3GEO.arvoreDeTemas.montaTextoTema("gray",tema),
+				new YAHOO.widget.HTMLNode(
+					{id_mapaCadastrado:retorno[i].ID_MAPA,html:html,expanded:false,enableHighlight:true},
+					node
+				);
+			}
+			node.loadComplete();
+		};
+		i3GEO.php.pegaMapas(monta);
 	},
 	/*
 	Lista as variaveis cadastradas no sistema METAESTAT preenchendo
@@ -1069,6 +1099,19 @@ i3GEO.arvoreDeTemas = {
 				root
 			);
 			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaVariaveisMetaestat, 1);
+		}
+		//
+		//mapas cadastrados
+		//
+		if(i3GEO.arvoreDeTemas.INCLUIMAPASCADASTRADOS === true){
+			tempNode = new YAHOO.widget.HTMLNode(
+				{
+					html:"<span style='position:relative;top:-2px;'><b>&nbsp;"+$trad("x90")+"</b></span>",
+					idmapacadastrado:"raiz",expanded:false,enableHighlight:true
+				},
+				root
+			);
+			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaMapasCadastrados, 1);
 		}
 		//
 		//estrelas
