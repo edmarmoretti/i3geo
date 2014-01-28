@@ -232,7 +232,12 @@ if(file_exists($nomeMapfileTmp) && $tipo == ""){
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
 else{
-	$oMap = ms_newMapobj($locaplic."/aplicmap/ogcwsv".$versao.".map");
+	if(empty($ogcwsmap)){
+		$oMap = ms_newMapobj($locaplic."/aplicmap/ogcwsv".$versao.".map");
+	}
+	else{
+		$oMap = ms_newMapobj($ogcwsmap);
+	}
 	$proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 	$server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 	$or = $proto.$server.$_SERVER['PHP_SELF'];

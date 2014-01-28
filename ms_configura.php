@@ -519,6 +519,24 @@ Tipo:
 {string}
 */
 $cachedir = "";
+/*
+Variable: ogcwsmap
+
+Nome (caminho completo) do arquivo mapfile que sera utilizado como base para a construcao dos servicos OGC
+
+Esse mapfile deve conter os parametros de OWS conforme o default
+
+Se for vazio sera utilizado o default, que depende da versao do mapserver instalado
+
+Os arquivos default ficam na pasta i3geo/aplicmap/ogcws*.map
+
+Uilize um desses para criar o seu proprio arquivo e customizar os parametros desejados
+
+Tipo:
+{string}
+*/
+$ogcwsmap = "";
+
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	$navegadoresLocais = array(
