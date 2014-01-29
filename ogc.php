@@ -624,6 +624,26 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 	if($req->getValueByName("FORMAT") == ""){
 		$req->setParameter("FORMAT","image/png");
 	}
+	
+	if($req->getValueByName("FORMAT") == "text/html"){
+		$req->setParameter("FORMAT","image/png");
+		$l = $oMap->getlayerbyname($req->getValueByName("LAYER"));
+		$l->set("status",MS_DEFAULT);
+		$l->set("minscaledenom",0);
+		$l->set("maxscaledenom",0);
+		$legenda = $oMap->legend;
+		$legenda->set("status",MS_DEFAULT);
+		$legenda->set("template",$locaplic."/aplicmap/legendaOgc.html");
+		
+		$tmparray["my_tag"] = "value_of_my_tag";
+		if($leg = @$oMap->processlegendtemplate($tmparray)){
+			if (function_exists("mb_convert_encoding")){
+				//$leg = mb_convert_encoding($leg,"UTF-8","ISO-8859-1");
+			}
+			echo $leg;exit;
+		}
+	}
+	
 }
 if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
 	$l = $oMap->getlayer(0);
