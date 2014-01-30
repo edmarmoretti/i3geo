@@ -87,14 +87,17 @@ for ($i=0;$i < $c;++$i){
 	}
 }
 if($codigo_tipo_regiao == ""){
-	//echo "Nenhum tema com limites ou localidades foi encontrado";
-	//exit;
+	$regioes = $m->listaTipoRegiao();
 }
+else{
+	$regioes[] = $m->listaTipoRegiao($codigo_tipo_regiao);
+}
+
 $regiao = "";
 $item = "";
 $registros = "";
 
-$regioes = $m->listaTipoRegiao();
+
 $xml = "<Schema name='i3Geo Metaestat'>";
 //cria as dimensoes de tipo temporal
 $sqlAno = "select nu_ano from ".$saikuConfigDataSource['tabelaDimensaoTempo']." group by nu_ano order by nu_ano";
@@ -239,12 +242,14 @@ $medidas = $m->listaMedidaVariavel();
 $tbs = array();
 
 foreach($medidas as $medida){
-	$k = $medida["esquemadb"].$medida["tabela"];
-	if(empty($tbs[$k])){
-		$tbs[$k] = array($medida);
-	}
-	else{
-		array_push($tbs[$k],$medida);
+	if($medida["codigo_tipo_regiao"] == $codigo_tipo_regiao){
+		$k = $medida["esquemadb"].$medida["tabela"];
+		if(empty($tbs[$k])){
+			$tbs[$k] = array($medida);
+		}
+		else{
+			array_push($tbs[$k],$medida);
+		}
 	}
 }
 

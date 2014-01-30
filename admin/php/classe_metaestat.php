@@ -532,22 +532,22 @@ class Metaestat{
 		$query="select codigo_tipo_regiao_pai as parent from ".$this->esquemaadmin."i3geoestat_agregaregiao WHERE codigo_tipo_regiao = $node";
 		$result=$this->execSQL($query,"",false);
 		$row = $result[0];
-		// save the path in this array 
-		$path = array(); 
-		// only continue if this $node isn't the root node 
-		// (that's the node with no parent) 
-		if ($row['parent']!='') { 
-			// the last part of the path to $node, is the name 
-			// of the parent of $node 
-			$path[] = $row['parent']; 
-			// we should add the path to the parent of this node 
-			// to the path 
-			$path = array_merge($this->hierarquiaPath($row['parent']), $path); 
+		// save the path in this array
+		$path = array();
+		// only continue if this $node isn't the root node
+		// (that's the node with no parent)
+		if ($row['parent']!='') {
+			// the last part of the path to $node, is the name
+			// of the parent of $node
+			$path[] = $row['parent'];
+			// we should add the path to the parent of this node
+			// to the path
+			$path = array_merge($this->hierarquiaPath($row['parent']), $path);
 		}
 		// return the path
 		sort($path);
-		return $path; 
-	} 
+		return $path;
+	}
 	/**
 	 * Cria um arquivo mapfile para uma medida de variavel
 	 * Inclui no arquivo o layer de acesso aos dados
@@ -799,7 +799,7 @@ class Metaestat{
 				$vis = str_replace(",,",",",$vis);
 				$vis = explode(",",$vis);
 				$itens = $vis;//array
-				$vis[] = "gid";
+				$vis[] = $meta["identificador"];
 				$vis = array_unique($vis);
 				$visiveis = array();
 				//verifica se as colunas existem mesmo
@@ -825,7 +825,7 @@ class Metaestat{
 				$apelidos = array();
 				$vis = implode($colunastabela,",");
 			}
-			$sqlf = $colunageo." from (select st_setsrid(".$colunageo.",".$srid.") as $colunageo,$vis from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique gid using srid=".$srid;
+			$sqlf = $colunageo." from (select st_setsrid(".$colunageo.",".$srid.") as $colunageo,$vis from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique ".$meta["identificador"]." using srid=".$srid;
 			$sqlf = str_replace(",,",",",$sqlf);
 			$outlinecolor = str_replace(","," ",$outlinecolor);
 			$dados[] = "MAP";
