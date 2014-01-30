@@ -44,7 +44,9 @@ legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
 
 perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
 
-format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para abrir o mashup do OpenLayers com as camadas definida em temas
+format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
+	abrir o mashup do OpenLayers com as camadas definida em temas.
+	Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
 
 id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
 	nao deve ser utilizado junto com tema
@@ -624,7 +626,7 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 	if($req->getValueByName("FORMAT") == ""){
 		$req->setParameter("FORMAT","image/png");
 	}
-	
+
 	if($req->getValueByName("FORMAT") == "text/html"){
 		$req->setParameter("FORMAT","image/png");
 		$l = $oMap->getlayerbyname($req->getValueByName("LAYER"));
@@ -634,7 +636,7 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 		$legenda = $oMap->legend;
 		$legenda->set("status",MS_DEFAULT);
 		$legenda->set("template",$locaplic."/aplicmap/legendaOgc.html");
-		
+
 		$tmparray["my_tag"] = "value_of_my_tag";
 		if($leg = @$oMap->processlegendtemplate($tmparray)){
 			if (function_exists("mb_convert_encoding")){
@@ -643,7 +645,7 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 			echo $leg;exit;
 		}
 	}
-	
+
 }
 if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
 	$l = $oMap->getlayer(0);

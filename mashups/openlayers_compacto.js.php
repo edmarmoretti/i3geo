@@ -3127,6 +3127,7 @@ tiles: true,
 incluilayergrafico: true,
 ativalayerswitcher: false,
 ativarodadomouse: true,
+legendahtml: false,
 numzoom: 12,
 maxext: "",
 mapext: new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081),
@@ -3154,6 +3155,12 @@ i3GEO.editorOL.ativarodadomouse = false;
 }
 if(i3GEO.editorOL.ativarodadomouse === "true"){
 i3GEO.editorOL.ativarodadomouse = true;
+}
+if(i3GEO.editorOL.legendahtml === "false"){
+i3GEO.editorOL.legendahtml = false;
+}
+if(i3GEO.editorOL.legendahtml === "true"){
+i3GEO.editorOL.legendahtml = true;
 }
 if(i3GEO.editorOL.incluilayergrafico === "false"){
 i3GEO.editorOL.incluilayergrafico = false;
@@ -3573,8 +3580,22 @@ for(i=0;i<nlayers;i++){
 try{
 if(layers[i].isBaseLayer === false){
 var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
+if(i3GEO.editorOL.legendahtml === true){
+url = url.replace("image%2Fpng","text/html");
+ins += layers[i].name+"<br><div id=legendaL_"+i+" ></div><br>";
+//necessario pq nao e sincrono
+eval ("var f = function(retorno){document.getElementById('legendaL_"+i+"').innerHTML = retorno.responseText;};");
+var config = {
+method: "GET",
+url: url,
+callback: f
+}
+OpenLayers.Request.issue(config);
+}
+else{
 url = url.replace("LAYERS","LAYER");
 ins += layers[i].name+"<br><img src='"+url+"' /><br>";
+}
 }
 }
 catch(e){}

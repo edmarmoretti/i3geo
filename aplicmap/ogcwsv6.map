@@ -84,7 +84,7 @@ MAXSIZE 10000
 	END
 
 	WEB
-		IMAGEPATH "/var/tmp/ms_tmp/"
+		IMAGEPATH "/tmp/ms_tmp/"
 		IMAGEURL "/ms_tmp/"
 		#nao coloque texto com acentuacao aqui
 		METADATA

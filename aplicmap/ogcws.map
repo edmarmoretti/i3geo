@@ -81,7 +81,7 @@ MAP
 	END
 
 	WEB
-		IMAGEPATH "/var/tmp/ms_tmp/"
+		IMAGEPATH "/tmp/ms_tmp/"
 		IMAGEURL "/ms_tmp/"
 		METADATA
 		#nao coloque texto com acentuacao aqui

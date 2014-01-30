@@ -8,6 +8,11 @@ Para a versão 5.0
 Se você não quiser permitir isso, inclua na interface do seu mapa a variável javascript
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = false;
 
+- Novas variáveis no i3geo/ms_configura.php:
+	$saikuUrl e $saikuConfigDataSource para controle da integração com o SAIKU
+
+	$ogcwsmap permite definir qual arquivo map será utilizado pelo gerador de serviços OGC
+
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.7

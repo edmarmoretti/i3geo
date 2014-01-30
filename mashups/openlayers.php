@@ -270,6 +270,7 @@ Par&acirc;metros:
 	incluilayergrafico (true|false) - indica se o layer que recebe elementos gr&aacute;ficos ser&aacute; adicionado ou n&atilde;o ao mapa
 	ativalayerswicther (true|false) - inicia o mapa com a caixa de escolha das camadas (layerSwitcher) aberta ou n&atilde;o. Por default, inicia fechada
 	ativarodadomouse (true|false) - ativa ou n&atilde;o o zoom com base na roda do mouse (default &eacute; true)
+	legendahtml (true|false) - ativa ou n&atilde;o (default &eacute; false) a gera&ccedil;&atilde;o de legenda do tipo HTML no lugar de imagem png. Legendas HTML podem ser modificadas com base em CSS. A legenda &eacute; constru&iacute;da com o template i3geo/aplicmap/legendaOgc.html.
 
 	fundo - lista com os nomes, separados por ',' dos layers que ser&atilde;o usados como fundo para o mapa. Se n&atilde;o for definido,
 			ser&aacute; usado o default. O primeiro da lista ser&aacute; o fundo ativo. Se na lista de temas de fundo estiver algum
@@ -435,6 +436,13 @@ i3GEO.editorOL.ativarodadomouse = "<?php
 	else
 	{echo "true";}
 ?>";
+
+i3GEO.editorOL.legendahtml = "<?php
+	if(isset($legendahtml)){echo $legendahtml;}
+	else
+	{echo "false";}
+?>";
+
 <?php
 if(isset($fundo) && $fundo != ""){
 	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";

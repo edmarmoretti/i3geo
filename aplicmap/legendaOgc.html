@@ -1,12 +1,18 @@
+[leg_layer_html opt_flag=1]
+<table style="border-spacing: 0;border-collapse: collapse;margin:0px;padding:0px;" class="tabelaItemLegenda">
+[/leg_layer_html]
+
 [leg_class_html]
 [if name=CLASSE oper=neq value=NAO]
-<table class="tabelaItemLegenda">
+
 <tr>
-	<td class="tabelaItemLegendaIcone" width=22 >
+	<td class="tabelaItemLegendaIcone" width=16  style="border-spacing: 0;border-collapse: collapse;margin:0px;padding:0px;" >
 		<img src="[leg_icon width=16 height=16 ]" />
 	</td>
-	<td style=font-size:12px class="tabelaItemLegendaNome" >
+	<td style="border-spacing: 0;border-collapse: collapse;margin:0px;padding:0px;font-size:11px;font-family: Verdana,Arial,Helvetica,sans-serif;" class="tabelaItemLegendaNome" >
 		<span  >[leg_class_name]</span>
 	</td>
 </tr>
-</table>[/if][/leg_class_html]
+[/if][/leg_class_html]
+</table>
+
