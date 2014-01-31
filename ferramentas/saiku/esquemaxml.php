@@ -61,6 +61,20 @@ $c = $mapa->numlayers;
 $codigo_tipo_regiao = "";
 for ($i=0;$i < $c;++$i){
 	$l = $mapa->getlayer($i);
+	//verifica o alias na conexao
+	if (!empty($postgis_mapa)){
+		if ($l->connectiontype == MS_POSTGIS){
+			$lcon = $l->connection;
+			if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
+				if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
+				{$l->set("connection",$postgis_mapa);}
+				else{
+					$l->set("connection",$postgis_mapa[$lcon]);
+				}
+			}
+		}
+	}	
+	//
 	$registros = array();
 	if($l->status == MS_DEFAULT && $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO") != ""){
 		$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");
@@ -80,6 +94,7 @@ for ($i=0;$i < $c;++$i){
 					"item" => $item,
 					"sql" => $reg
 			);
+			break; //mantem a primeira ocorrencia de regiao que possui selecao
 		}
 		else{
 			$selecaoRegiao[$codigo_tipo_regiao] = "";
@@ -90,14 +105,12 @@ if($codigo_tipo_regiao == ""){
 	$regioes = $m->listaTipoRegiao();
 }
 else{
-	$regioes[] = $m->listaTipoRegiao($codigo_tipo_regiao);
+	$regioes = array($m->listaTipoRegiao($codigo_tipo_regiao));
 }
-
 $regiao = "";
 $item = "";
 $registros = "";
-
-
+//echo "<pre>";var_dump($regioes);exit;
 $xml = "<Schema name='i3Geo Metaestat'>";
 //cria as dimensoes de tipo temporal
 $sqlAno = "select nu_ano from ".$saikuConfigDataSource['tabelaDimensaoTempo']." group by nu_ano order by nu_ano";
