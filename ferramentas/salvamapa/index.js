@@ -96,10 +96,6 @@ i3GEOF.salvaMapa = {
 		onde = $i(onde);
 		if(onde){
 			try{
-				var map_file = i3GEO.parametros.mapfile,
-					local = map_file.split("ms_tmp");
-				teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file;
-				local = i3GEO.util.protocolo()+"://"+window.location.host+"/ms_tmp"+local[1];
 				onde.innerHTML = "<a href='#' onclick='i3GEOF.salvaMapa.salvaMapaBanco()' >"+$trad(1,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
 					"<a href='#' onclick='i3GEO.mapa.dialogo.listaDeMapasBanco()'>"+$trad(2,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
 					"<a href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target='_blank' >"+$trad(3,i3GEOF.salvaMapa.dicionario)+"</a>";
@@ -111,12 +107,14 @@ i3GEOF.salvaMapa = {
 		onde = $i(onde);
 		if(onde){
 			try{
-				var teste,
-					map_file = i3GEO.parametros.mapfile,
+				var map_file = i3GEO.parametros.mapfile,
+					teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file,
 					local = map_file.split("ms_tmp");
-				teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file;
-				local = i3GEO.util.protocolo()+"://"+window.location.host+"/ms_tmp"+local[1];
-				onde.innerHTML = "<a href='"+local+"' target='_blank' >"+$trad(4,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					down = i3GEO.configura.locaplic+"/ferramentas/salvamapa/forcedownload.php?file="+map_file;
+				local = i3GEO.configura.locaplic+"/../ms_tmp"+local[1];
+				onde.innerHTML = "" +
+					"<a href='"+down+"' target='_blank' >"+$trad(4,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a href='"+local+"' target='_blank' >"+$trad(16,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
 					"<a href='"+teste+"' target='_blank' >"+$trad(5,i3GEOF.salvaMapa.dicionario)+"</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}

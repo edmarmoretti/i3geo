@@ -89,5 +89,11 @@ i3GEOF.salvaMapa.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		16: [{
+			pt:"Clique aqui para ver o arquivo",
+			en:"",
+			es:"",
+			it:""
 		}]
 };
