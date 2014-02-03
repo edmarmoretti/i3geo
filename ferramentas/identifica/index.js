@@ -377,10 +377,10 @@ i3GEOF.identifica = {
 	Ativada apenas quando o usuario puder editar um tema
 	*/
 	janelaMoverPonto: function(tema,idreg){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
+		var temp,titulo;
 		//cria a janela flutuante
 		titulo = $trad(23,i3GEOF.identifica.dicionario);
-		janela = i3GEO.janela.cria(
+		i3GEO.janela.cria(
 			"250px",
 			"100px",
 			"",
@@ -393,7 +393,6 @@ i3GEOF.identifica = {
 			"",
 			""
 		);
-		divid = janela[2].id;
 		$i("i3GEOF.movePonto_corpo").style.backgroundColor = "white";
 		i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoIdentifica);
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.identifica.atualizaJanelaMoverPonto") < 0){

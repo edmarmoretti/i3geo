@@ -175,7 +175,7 @@ i3GEOadmin.identifica = {
 			"linhas":[
 			{titulo:"Nome:",id:"Enome_i",size:"50",value:i.nome_i,tipo:"text",div:""},
 			{titulo:"Programa: o i3Geo ir&aacute; adicionar automaticamente os par&acirc;metros &x e &y no final do endere&ccedil;o",id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
-			{titulo:"Abrir como: escreva 'self' para abrir na mesma janela ou 'blank' para abrir em uma nova aba",id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
+			{titulo:"Abrir como: escreva 'target' para abrir em uma nova aba do navegador",id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
 			]
 		};
 		var ins = "";
