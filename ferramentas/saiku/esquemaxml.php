@@ -73,7 +73,7 @@ for ($i=0;$i < $c;++$i){
 				}
 			}
 		}
-	}	
+	}
 	//
 	$registros = array();
 	if($l->status == MS_DEFAULT && $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO") != ""){
@@ -113,6 +113,9 @@ $registros = "";
 //echo "<pre>";var_dump($regioes);exit;
 $xml = "<Schema name='i3Geo Metaestat'>";
 //cria as dimensoes de tipo temporal
+if(empty($saikuConfigDataSource['tabelaDimensaoTempo'])){
+	$saikuConfigDataSource['tabelaDimensaoTempo'] = "i3geo_metaestat.dim_tempo";
+}
 $sqlAno = "select nu_ano from ".$saikuConfigDataSource['tabelaDimensaoTempo']." group by nu_ano order by nu_ano";
 $sqlMes = "select nu_ano::text,nu_mes::text,ds_mes_abreviado as mes,COALESCE (nu_ano::text||'-'||nu_mes::text,nu_ano::text) as nu_anomes from ".$saikuConfigDataSource['tabelaDimensaoTempo']." group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes";
 $xml .= "
