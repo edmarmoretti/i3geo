@@ -493,6 +493,7 @@ function listaLayersWMS()
 	$handle = fopen ($wms_service_request, "r");
 	$wms_capabilities = fread ($handle, filesize ($wms_service_request));
 	fclose ($handle);
+
 	$dom = new DomDocument();
 	$dom->loadXML($wms_capabilities);
 	$xpath = new DOMXPath($dom);
@@ -505,6 +506,7 @@ function listaLayersWMS()
 		$layersanteriores = $xpath->query($q);
 		foreach ($layersanteriores as $layeranterior){
 			$r1 = pegaTag($layeranterior);
+			//echo "<pre>";var_dump($layeranterior);
 			if($r1["nome"] == $nomelayer || $r1["titulo"] == $nomelayer)
 			{
 				$layers = $xpath->query('Layer',$layeranterior);
@@ -528,15 +530,27 @@ function listaLayersWMS()
 		$q .= "/Layer";
 		$layers = $xpath->query($q);
 		$res = array();
-		foreach ($layers as $layer)
-		{
+		foreach ($layers as $layer){
 			$r = pegaTag($layer);
-			//echo $r["nome"]."\n";
-			if(!$r["nome"]){$r["nome"] = $r["titulo"];}
-			if(array_search("Style",$r["tags"]) || array_search("Layer",$r["tags"]))
-			{$res[] = array("nome"=>$r["nome"],"titulo"=>$r["titulo"],"estilos"=>$r["estilos"],"srs"=>wms_srs($dom),"formats"=>wms_formats($dom),"version"=>wms_version($dom),"formatsinfo"=>wms_formatsinfo($dom));}
+			//var_dump($r);
+			if(!$r["nome"]){
+				$r["nome"] = $r["titulo"];
+			}
+			if(array_search("Style",$r["tags"]) || array_search("Layer",$r["tags"])){
+				$res[] = array(
+						"nome"=>$r["nome"],
+						"titulo"=>$r["titulo"],
+						"estilos"=>$r["estilos"],
+						"srs"=>wms_srs($dom),
+						"formats"=>wms_formats($dom),
+						"version"=>wms_version($dom),
+						"formatsinfo"=>wms_formatsinfo($dom)
+
+				);
+			}
 		}
 	}
+	//exit;
 	return($res);
 }
 
@@ -571,9 +585,11 @@ function pegaTag($layer)
 {
 	error_reporting(0);
 	$noslayer = $layer->childNodes;
-	$resultado = array();
-	for ($i = 0; $i < $noslayer->length; ++$i)
-	{
+	$resultado = array(
+		"estiloas" => array(),
+		"tags" => array()
+	);
+	for ($i = 0; $i < $noslayer->length; ++$i){
 		$tnome = $noslayer->item($i)->tagName;
 		$tvalor = $noslayer->item($i)->nodeValue;
 		if($tnome){
@@ -584,8 +600,8 @@ function pegaTag($layer)
 			{$resultado["nome"] = $tvalor;}
 			if ($tnome == "Abstract")
 			{$resultado["resumo"] = $tvalor;}
-			
-			if ($tnome == "StyleXXXX"){
+
+			if ($tnome == "Style"){
 				$ss = $noslayer->item($i)->childNodes;
 				$ssl = $ss->length;
 				$n = "";
@@ -594,7 +610,7 @@ function pegaTag($layer)
 				{
 					$snome = $ss->item($s)->tagName;
 					$svalor = $ss->item($s)->nodeValue;
-					if($snome && $svalor)
+					if($snome)
 					{
 						if ($snome == "Title")
 						{$t=$svalor;}
