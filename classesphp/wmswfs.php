@@ -577,20 +577,24 @@ function pegaTag($layer)
 		$tnome = $noslayer->item($i)->tagName;
 		$tvalor = $noslayer->item($i)->nodeValue;
 		if($tnome){
+			//echo "<br>".$tnome;
 			if ($tnome == "Title")
 			{$resultado["titulo"] = $tvalor;}
 			if ($tnome == "Name")
 			{$resultado["nome"] = $tvalor;}
 			if ($tnome == "Abstract")
 			{$resultado["resumo"] = $tvalor;}
-			if ($tnome == "Style"){
+			
+			if ($tnome == "StyleXXXX"){
 				$ss = $noslayer->item($i)->childNodes;
 				$ssl = $ss->length;
+				$n = "";
+				$t = "";
 				for ($s = 0; $s < $ssl; $s++)
 				{
 					$snome = $ss->item($s)->tagName;
 					$svalor = $ss->item($s)->nodeValue;
-					if($snome)
+					if($snome && $svalor)
 					{
 						if ($snome == "Title")
 						{$t=$svalor;}
@@ -598,9 +602,13 @@ function pegaTag($layer)
 						{$n=$svalor;}
 					}
 				}
-				$resultado["estilos"][] = array("nome"=>$n,"titulo"=>$t);
+				//echo "<pre>";echo $n;
+				if($n != ""){
+					array_push($resultado["estilos"],array("nome"=>$n,"titulo"=>$t));
+				}
 			}
-			$resultado["tags"][] = $tnome;
+			array_push($resultado["tags"],$tnome);
+			//echo "<pre>";var_dump($resultado);
 		}
 	}
 	return $resultado;

@@ -1,4 +1,4 @@
-<?
+<?php
 
 
 function xml2html ( $str ) {
