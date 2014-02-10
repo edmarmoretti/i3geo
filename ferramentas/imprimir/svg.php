@@ -61,6 +61,7 @@ if (array_search( "MapScript", $exts) != TRUE)
 require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 error_reporting(0);
 $nomes = nomeRandomico();
+
 $map = ms_newMapObj($map_file);
 $temp = str_replace(".map","xxx.map",$map_file);
 $map->save($temp);
@@ -68,8 +69,10 @@ substituiCon($temp,$postgis_mapa);
 $map = ms_newMapObj($temp);
 if($interface == "googlemaps")
 {$map->setProjection("init=epsg:4618,a=6378137,b=6378137");}
-$eb = $map->scalebar;
+$v = versao();
+
 $leb = $eb->label;
+
 if($leb->type == "MS_BITMAP"){
 	$leb->set("type",MS_TRUETYPE);
 	$leb->set("font","Arial");
@@ -93,21 +96,28 @@ for ($i=0;$i < $numlayers;$i++)
 		$nclasses = $layer->numclasses;
 		if ($nclasses > 0)
 		{
-			for($i=0;$i<$nclasses;$i++)
+			for($j=0;$j<$nclasses;$j++)
 			{
-				$classe = $layer->getclass($i);
+				$classe = $layer->getclass($j);
 				$classe->set("name","classeNula");
 			}
 		}
 	}
+
 	$nclasses = $layer->numclasses;
-	if ($nclasses > 0)
-	{
-		for($i=0;$i<$nclasses;$i++)
-		{
-			$classe = $layer->getclass($i);
-			$leb = $classe->label;
-			if($leb->type == MS_BITMAP){
+	if ($nclasses > 0){
+		for($j=0;$j<$nclasses;$j++){
+			$classe = $layer->getclass($j);
+			$leb = false;
+			if($v["inteiro"] >= 60200){
+				if($classe->numlabels > 0){
+					$leb = $classe->getLabel(0);
+				}
+			}
+			else{
+				$leb = $classe->label;
+			}
+			if($leb != false && $leb->type == MS_BITMAP){
 				$leb->set("type",MS_TRUETYPE);
 				$leb->set("font","Arial");
 			}
