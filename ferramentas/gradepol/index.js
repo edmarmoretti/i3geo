@@ -155,7 +155,7 @@ i3GEOF.gradeDePoligonos = {
 		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.gradeDePoligonos.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.gradeDePoligonos.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.gradeDePoligonos.dicionario);
-		ins += "<p class='paragrafo'><input type=checkbox id=i3GEOgradedepoligonosProj style='cursor:pointer;position:relative;top:2px;' />&nbsp;"+$trad(14,i3GEOF.gradeDeHex.dicionario);
+		ins += "<p class='paragrafo'><input type=checkbox id=i3GEOgradedepoligonosProj style='cursor:pointer;position:relative;top:2px;' />&nbsp;"+$trad(14,i3GEOF.gradeDePoligonos.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.gradeDePoligonos.t1()",ins,"i3GEOF.gradeDePoligonos.t0","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 	},
 	t1: function(){
@@ -259,7 +259,7 @@ i3GEOF.gradeDePoligonos = {
 			cp.set_response_type("JSON");
 			cp.call(p,"gradeDePoligonos",fim);
 		}
-		catch(e){$i("i3GEOgradedepoligonosfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEOF.gradeDeHex.aguarde.visibility = "hidden";}
+		catch(e){$i("i3GEOgradedepoligonosfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEOF.gradeDePoligonos.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: capturaPonto

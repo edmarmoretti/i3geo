@@ -155,7 +155,7 @@ i3GEOF.gradeDePontos = {
 		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.gradeDePontos.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.gradeDePontos.dicionario);
 		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.gradeDePontos.dicionario);
-		ins += "<p class='paragrafo'><input type=checkbox id=i3GEOgradedepontosProj style='cursor:pointer;position:relative;top:2px;' />&nbsp;"+$trad(14,i3GEOF.gradeDeHex.dicionario);
+		ins += "<p class='paragrafo'><input type=checkbox id=i3GEOgradedepontosProj style='cursor:pointer;position:relative;top:2px;' />&nbsp;"+$trad(14,i3GEOF.gradeDePontos.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.gradeDePontos.t1()",ins,"i3GEOFgradeDePontost0","i3GEOgradedepontosresultado",true,"i3GEOF.gradeDePontos_rodape");
 	},
 	t1: function(){
