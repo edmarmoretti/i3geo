@@ -1,88 +1,80 @@
 MAP
-	FONTSET "../symbols/fontes.txt"
-	SYMBOLSET "../symbols/simbolosv6.sym"
-	LAYER
-		CONNECTION ""
-		DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
-		#FILTER (('[ESTADO]' = 'GO'))
-		METADATA
-			"METAESTAT_ID_MEDIDA_VARIAVEL"	""
-			"cache"	"nao"
-			"LTEMPOITEMIMAGEM"	""
-			"TIP"	"TIPO,ANOCRIA,NOMELOC"
-			"LTEMPOITEMDESCRICAO"	"TIPO"
-			"CLASSE"	"SIM"
-			"palletestep"	""
-			"LTEMPOITEMINICIO"	"ANOCRIA"
-			"temporizador"	""
-			"LTEMPOITEMTIP"	"ANOCRIA"
-			"permitekmz"	"sim"
-			"description_template"	""
-			"LTEMPOITEMTITULO"	"NOMELOC"
-			"iconetema"	""
-			"LTEMPOITEMLINK"	""
-			"METAESTAT_CODIGO_TIPO_REGIAO"	""
-			"palletefile"	""
-			"LTEMPOFORMATODATA"	"iso8601"
-			"permitedownload"	"sim"
-			"LTEMPOITEMICONE"	""
-			"permitecomentario"	""
-			"metaestat"	""
-			"download"	"SIM"
-			"itembuscarapida"	"NOMELOC"
-			"arquivokmz"	""
-			"arquivodownload"	""
-			"transitioneffect"	"NAO"
-			"permiteogc"	"sim"
-			"permitekml"	"sim"
-			"convcaracter"	""
-			"TEMA"	"Localidades (usar com timeline)"
-			"LTEMPOCONVENCODE"	"SIM"
-			"editorsql"	""
-			"legendaimg"	""
-			"LTEMPOITEMFIM"	""
-		END # METADATA
-
-		NAME "_llocali"
-		STATUS OFF
-		TEMPLATE "none.htm"
-		TILEITEM "location"
-		TYPE POINT
-		UNITS METERS
-		CLASS
-			NAME "Vila"
-			EXPRESSION ('[TIPO]'eq'Vila')
-			STYLE
-				ANGLE 0
-				COLOR 250 193 4
-				OFFSET 0 0
-				SIZE 20
-				SYMBOL "/var/www/i3geo/imagens/google/condominium.png"
-			END # STYLE
-		END # CLASS
-		CLASS
-			NAME "Cidade"
-			EXPRESSION ('[TIPO]'eq'Cidade')
-			STYLE
-				ANGLE 0
-				COLOR 62 9 41
-				OFFSET 0 0
-				SIZE 20
-				SYMBOL "/var/www/i3geo/imagens/google/condominium1.png"
-			END # STYLE
-		END # CLASS
-		CLASS
-			NAME "Capital"
-			EXPRESSION ('[TIPO]'eq'Capital')
-			STYLE
-				ANGLE 0
-				COLOR 112 203 244
-				OFFSET 0 0
-				SIZE 6
-				SYMBOL "vila"
-			END # STYLE
-		END # CLASS
-	END # LAYER
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION ""
+    DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "TIP"	"TIPO,ANOCRIA,NOMELOC"
+      "LTEMPOITEMIMAGEM"	""
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "LTEMPOITEMDESCRICAO"	"TIPO"
+      "LTEMPOITEMINICIO"	"ANOCRIA"
+      "palletestep"	""
+      "permitekmz"	"sim"
+      "LTEMPOITEMTIP"	"ANOCRIA"
+      "temporizador"	""
+      "iconetema"	""
+      "LTEMPOITEMTITULO"	"NOMELOC"
+      "description_template"	""
+      "LTEMPOITEMLINK"	""
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "palletefile"	""
+      "permitedownload"	"sim"
+      "LTEMPOFORMATODATA"	"iso8601"
+      "permitecomentario"	"SIM"
+      "LTEMPOITEMICONE"	""
+      "metaestat"	""
+      "download"	"SIM"
+      "itembuscarapida"	"NOMELOC"
+      "arquivodownload"	""
+      "arquivokmz"	""
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "transitioneffect"	"NAO"
+      "TEMA"	"Localidades (usar com timeline)"
+      "convcaracter"	""
+      "editorsql"	""
+      "LTEMPOCONVENCODE"	"SIM"
+      "LTEMPOITEMFIM"	""
+      "legendaimg"	""
+    END # METADATA
+    NAME "_llocali"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "Vila"
+      EXPRESSION ('[TIPO]'eq'Vila')
+      STYLE
+        COLOR 250 193 4
+        SIZE 20
+        SYMBOL "/var/www/i3geo/imagens/google/condominium.png"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cidade"
+      EXPRESSION ('[TIPO]'eq'Cidade')
+      STYLE
+        COLOR 62 9 41
+        SIZE 20
+        SYMBOL "/var/www/i3geo/imagens/google/condominium1.png"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Capital"
+      EXPRESSION ('[TIPO]'eq'Capital')
+      STYLE
+        COLOR 112 203 244
+        SIZE 6
+        SYMBOL "vila"
+      END # STYLE
+    END # CLASS
+  END # LAYER
 
 END # MAP
 

@@ -66,6 +66,7 @@ if(isset($fingerprint)){
 	}
 }
 $retorno = "";
+
 /**
  * A variavel $funcao define a rotina que sera executada
  * Cada rotina recebe parametros especificos
@@ -76,6 +77,9 @@ $retorno = "";
  * que passa a ser marcado com "sim"
  */
 switch (strtoupper($funcao)){
+	case "PEGAMETADADOSMAPFILE":
+		$retorno = analise_pegaMetadadosMafile($idtema);
+	break;
 	case "APLICAFILTROREGIAO":
 		$retorno = analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao);
 	break;
@@ -145,6 +149,21 @@ if (!connection_aborted()){
 }
 else
 {exit();}
+/**
+ * Obtem o id da medida da variavel armazenado em um mapfile da pasta i3geo/temas
+ * @param unknown $idtema
+ */
+function analise_pegaMetadadosMafile($idtema){
+	global $locaplic;
+	$id_medida_variavel = "";
+	if(file_exists($locaplic."/temas/".$idtema.".map")){
+		$map = ms_newMapObj($locaplic."/temas/".$idtema.".map");
+
+		$layer = $map->getlayer(0);
+		$id_medida_variavel = $layer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
+	}
+	return array("id_medida_variavel"=>$id_medida_variavel);
+}
 /**
  * Adiciona ao mapa atual um novo layer para a representacao de uma regiao
  * Se o layer ja existir, sera removido e criado outro

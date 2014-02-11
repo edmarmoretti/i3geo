@@ -985,7 +985,7 @@ i3GEO.arvoreDeTemas = {
 			{insp += "style='top:4px;'";}
 			insp += " src='"+i3GEO.util.$im("branco.gif")+"' onclick='i3GEO.arvoreDeTemas.buscaTema2(document.getElementById(\"i3geo_buscatema\").value)' /></td>";
 			insp += "</tr></table>&nbsp;";
-			
+
 			tempNode = new YAHOO.widget.HTMLNode(
 				{html:insp,enableHighlight:false,expanded:false,hasIcon:false},
 				root
@@ -1984,13 +1984,35 @@ i3GEO.arvoreDeTemas = {
 					no = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idtema",tsl[0]);
 					//refere-se a uma camada que advem do sistema de metadados estatisticos
 					if(no && no.data.tipoa_tema === "META"){
-						i3GEO.util.dialogoFerramenta(
-							"i3GEO.mapa.dialogo.metaestat()",
-							"metaestat",
-							"metaestat",
-							"index.js",
-							"i3GEOF.metaestat.inicia('flutuanteSimples','',"+no.data.id_medida_variavel+")"
-						);
+						//se o id_medida_variavel for vazio, e necessario obter o id guardado no mapfile
+						//isso ocorre pq alguns temas do catalogo podem ter sido inseridos
+						//como um mapfile normal que tem vinculo com o sistema de metadados
+						//
+						if(no.data.id_medida_variavel != undefined && no.data.id_medida_variavel != ""){
+							i3GEO.util.dialogoFerramenta(
+								"i3GEO.mapa.dialogo.metaestat()",
+								"metaestat",
+								"metaestat",
+								"index.js",
+								"i3GEOF.metaestat.inicia('flutuanteSimples','',"+no.data.id_medida_variavel+")"
+							);
+						}
+						else{
+							//faz uma chamada para obter o id_medida_variavel
+							p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=pegaMetadadosMapfile" +
+								"&idtema="+no.data.idtema+"&g_sid="+i3GEO.configura.sid;
+							funcao = function(retorno){
+								i3GEO.util.dialogoFerramenta(
+									"i3GEO.mapa.dialogo.metaestat()",
+									"metaestat",
+									"metaestat",
+									"index.js",
+									"i3GEOF.metaestat.inicia('flutuanteSimples','',"+retorno.data.id_medida_variavel+")"
+								);
+							};
+							cpJSON.call(p,"foo",funcao);
+
+						}
 					}
 					else if(no && no.data.tipoa_tema === "METAREGIAO"){
 						p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=adicionaLimiteRegiao" +

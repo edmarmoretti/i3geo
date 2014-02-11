@@ -6,30 +6,27 @@ MAP
     CONNECTIONTYPE POSTGIS
     DATA ""
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	"25"
       "cache"	""
       "CLASSE"	"SIM"
       "permitekmz"	"nao"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "permitedownload"	"sim"
-      "METAESTAT"	""
-      "permiteogc"	"sim"
+      "METAESTAT"	"SIM"
       "permitekml"	"sim"
-      "convcaracter"	""
+      "permiteogc"	"sim"
       "TEMA"	"_Teste de tema baseado no METAESTAT"
+      "convcaracter"	""
     END # METADATA
     NAME "_ltestemetaestat"
     STATUS OFF
     TEMPLATE "none.htm"
-    TILEITEM "location"
     TYPE POLYGON
     UNITS METERS
     CLASS
       NAME ""
       STYLE
-        ANGLE 0
         COLOR 0 0 0
-        OFFSET 0 0
       END # STYLE
     END # CLASS
   END # LAYER
