@@ -976,15 +976,18 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca === true){
 			insp = "<br><br><table><tr>" +
 			"<td><span style='font-size:12px'>&nbsp;"+$trad("a1")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=31' >&nbsp;&nbsp;&nbsp;&nbsp;</a></span></td>" +
-			"<td><input onclick='javascript:this.select();' class='digitar' type='text' id='i3geo_buscatema' style=width:112px; value=''  /></td>" +
+			"<td>" +
+			"<div><input onclick='javascript:this.select();' class='digitar' type='text' id='i3geo_buscatema' style=width:112px; value=''  /></div>" +
+			"</td>" +
 			"<td><img  class='tic' ";
 			if(navm){insp += "style='top:0px;'";}
 			else
 			{insp += "style='top:4px;'";}
 			insp += " src='"+i3GEO.util.$im("branco.gif")+"' onclick='i3GEO.arvoreDeTemas.buscaTema2(document.getElementById(\"i3geo_buscatema\").value)' /></td>";
 			insp += "</tr></table>&nbsp;";
+			
 			tempNode = new YAHOO.widget.HTMLNode(
-				{html:insp,enableHighlight:true,expanded:false,hasIcon:false},
+				{html:insp,enableHighlight:false,expanded:false,hasIcon:false},
 				root
 			);
 		}
