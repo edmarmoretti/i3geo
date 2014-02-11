@@ -170,11 +170,14 @@ i3GEOF.graficointerativo1 = {
 				i3GEOF.graficointerativo1.ativaNavegacao(true);
 			}
 			// eventos das guias
+
+			//tipos de graficos
 			$i("i3GEOgraficointerativo1guia1").onclick = function() {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativo1guia1",
 				"i3GEOgraficointerativo1guia");
 				$i("i3GEOgraficointerativo1Grafico").style.display = "none";
 			};
+			//dados para o grafico
 			$i("i3GEOgraficointerativo1guia2").onclick = function() {
 				if(i3GEOF.graficointerativo1.tipo === ""){
 					alert($trad(4, i3GEOF.graficointerativo1.dicionario));
@@ -184,11 +187,13 @@ i3GEOF.graficointerativo1 = {
 				i3GEOF.graficointerativo1.configuraDados();
 				$i("i3GEOgraficointerativo1Grafico").style.display = "none";
 			};
+			//propriedades adicionais
 			$i("i3GEOgraficointerativo1guia3").onclick = function() {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativo1guia3",
 				"i3GEOgraficointerativo1guia");
 				$i("i3GEOgraficointerativo1Grafico").style.display = "none";
 			};
+			//mostra o grafico
 			$i("i3GEOgraficointerativo1guia4").onclick = function() {
 				if(i3GEOF.graficointerativo1.tipo === ""){
 					alert($trad(4, i3GEOF.graficointerativo1.dicionario));
@@ -228,15 +233,15 @@ i3GEOF.graficointerativo1 = {
 					return;
 				}
 				var w,h,form = $i("i3GEOgraficointerativo1PNG"),
-					isvg = form.getElementsByTagName("input")[0],
-					svg = $i("i3GEOgraficointerativo1guia4objCanvas").firstChild;
+				isvg = form.getElementsByTagName("input")[0],
+				svg = $i("i3GEOgraficointerativo1guia4objCanvas").firstChild;
 				h = svg.getAttributeNS(null, 'height');
 				w = svg.getAttributeNS(null, 'width');
-					if (typeof XMLSerializer != "undefined"){
-							svg = (new XMLSerializer()).serializeToString(svg);
-					} else {
-							svg = svg.html();
-					}
+				if (typeof XMLSerializer != "undefined"){
+					svg = (new XMLSerializer()).serializeToString(svg);
+				} else {
+					svg = svg.html();
+				}
 				isvg.value = svg;
 				form.action = form.action+"?"+"w="+w+"&h="+h;
 				form.submit();
@@ -587,9 +592,10 @@ i3GEOF.graficointerativo1 = {
 			if(i3GEOF.graficointerativo1.tipo == "ponto_1"){
 				$i("i3GEOgraficointerativo1DadosPuros").checked = true;
 			}
-
-			if ($i("i3GEOgraficointerativo1Grafico").innerHTML === ""
-				|| $i("i3GEOgraficointerativo1tabeladados").innerHTML == "") {
+			else{
+				$i("i3GEOgraficointerativo1DadosPuros").checked = false;
+			}
+			if (!$i("i3GEOgraficointerativo1tabeladados") || $i("i3GEOgraficointerativo1tabeladados").innerHTML == "") {
 				$i("i3GEOgraficointerativo1guia2").onclick.call();
 			} else {
 				$i("i3GEOgraficointerativo1guia4").onclick.call();
@@ -597,8 +603,8 @@ i3GEOF.graficointerativo1 = {
 		},
 		alteraFatorPixel: function(tipo){
 			var delta = 20,
-				temp = $i("i3GEOgraficointerativo1FatorTamanho"),
-				v = parseInt(temp.value,10);
+			temp = $i("i3GEOgraficointerativo1FatorTamanho"),
+			v = parseInt(temp.value,10);
 			if(temp.value >= 0){
 				if(tipo === "mais"){
 					temp.value = v + delta;
@@ -649,7 +655,7 @@ i3GEOF.graficointerativo1 = {
 		 */
 		comboItensSel : function() {
 			var adicionaFilho = function(){},
-				tema = $i("i3GEOgraficointerativo1ComboTemasId").value;
+			tema = $i("i3GEOgraficointerativo1ComboTemasId").value;
 			i3GEO.util
 			.comboItens(
 					"i3GEOgraficointerativo1ComboXid",
@@ -688,20 +694,20 @@ i3GEOF.graficointerativo1 = {
 
 							adicionaFilho = function() {
 								var no = document.createElement("div"),
-									id = "CorG"+parseInt(Math.random()*100000,10),
-									novoselect;
+								id = "CorG"+parseInt(Math.random()*100000,10),
+								novoselect;
 								no.innerHTML = retorno.dados
-									+ "&nbsp;<input title='"
-									+ $trad(33,	i3GEOF.graficointerativo1.dicionario)
-									+ "' class=digitar type=text size=20 value='' />"
-									+ "&nbsp;<input id='"
-									+ id
-									+ "' class=digitar type=text size=8 value='' />"
-									+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:3px;cursor:pointer src='"
-									+ i3GEO.configura.locaplic
-									+ "/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\""
-									+ id
-									+ "\")' /><br>";
+								+ "&nbsp;<input title='"
+								+ $trad(33,	i3GEOF.graficointerativo1.dicionario)
+								+ "' class=digitar type=text size=20 value='' />"
+								+ "&nbsp;<input id='"
+								+ id
+								+ "' class=digitar type=text size=8 value='' />"
+								+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:3px;cursor:pointer src='"
+								+ i3GEO.configura.locaplic
+								+ "/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\""
+								+ id
+								+ "\")' /><br>";
 								novoselect = no.getElementsByTagName("select")[0];
 								novoselect.id = "";
 								novoselect.onchange = adicionaFilho;
@@ -752,7 +758,7 @@ i3GEOF.graficointerativo1 = {
 			+ i3GEO.configura.sid + "&funcao=graficoSelecao&tema=" + tema
 			+ "&itemclasses=" + x + "&itemvalores=" + y + "&exclui="
 			+ excluir + "&ext=" + i3GEO.parametros.mapexten;
-			
+
 			if ($i("i3GEOgraficointerativo1DadosPuros").checked) {
 				tipo = "nenhum";
 			} else {
@@ -921,12 +927,12 @@ i3GEOF.graficointerativo1 = {
 		 */
 		tabela2csv : function() {
 			var colunas = i3GEOF.graficointerativo1.nomesColunas(),
-				ncolunas = colunas[0].length,
-				inputs = $i("i3GEOgraficointerativo1Dados").getElementsByTagName("input"),
-				ninputs = inputs.length,
-				i,j,
-				temp,
-				csv = [];
+			ncolunas = colunas[0].length,
+			inputs = $i("i3GEOgraficointerativo1Dados").getElementsByTagName("input"),
+			ninputs = inputs.length,
+			i,j,
+			temp,
+			csv = [];
 
 			csv.push(colunas[0].join(";"));
 			for (i = 0; i < ninputs; i = (i + 1 + ncolunas)){
@@ -1340,15 +1346,9 @@ i3GEOF.graficointerativo1 = {
 			i3GEOF.graficointerativo1.aguarde.visibility = "hidden";
 		},
 		arvores : function(dados, maior, cores, legendaY, legendaX, tipo) {
-			// config =
-			// i3GEOF.graficointerativo1.configDefault(dados,maior,cores,legendaY,legendaX);
-			// config.rootCategoryLabel = legendaX;
+
 			config = {
 					canvas : "i3GEOgraficointerativo1guia4objCanvas",
-					width : dados.resultset.length
-					* $i("i3GEOgraficointerativo1FatorTamanho").value,
-					height : parseInt(
-							$i("i3GEOF.graficointerativo1_corpo").style.height, 10) - 80,
 							title : legendaY,
 							titleFont : 'italic 14px sans-serif',
 							selectable : true,
@@ -1376,24 +1376,20 @@ i3GEOF.graficointerativo1 = {
 					legendaY, legendaX);
 			var config = {
 					canvas : "i3GEOgraficointerativo1guia4objCanvas",
-					width : dados.resultset.length
-					* $i("i3GEOgraficointerativo1FatorTamanho").value,
-					height : parseInt(
-							$i("i3GEOF.graficointerativo1_corpo").style.height, 10) - 80,
-							animate : true,
-							selectable : true,
-							hoverable : true,
-							valuesVisible : true,
-							valuesLabelStyle : 'inside',
-							valuesMask : "{category}",
-							tooltipFormat : function(scene) {
-								var cat = this.scene.datum.atoms['category'].value, val = this.scene.datum.atoms['value'].value;
-								return "<span style=color:yellow >" + cat + "</span><br>"
-								+ format("#.###,", val);
-							},
-							extensionPoints : {
-								slice_strokeStyle : 'white'
-							}
+					animate : true,
+					selectable : true,
+					hoverable : true,
+					valuesVisible : true,
+					valuesLabelStyle : 'inside',
+					valuesMask : "{category}",
+					tooltipFormat : function(scene) {
+						var cat = this.scene.datum.atoms['category'].value, val = this.scene.datum.atoms['value'].value;
+						return "<span style=color:yellow >" + cat + "</span><br>"
+						+ format("#.###,", val);
+					},
+					extensionPoints : {
+						slice_strokeStyle : 'white'
+					}
 			};
 			if(cores != ""){
 				config.colors = cores;
@@ -1408,10 +1404,6 @@ i3GEOF.graficointerativo1 = {
 					legendaY, legendaX);
 			var config = {
 					canvas : "i3GEOgraficointerativo1guia4objCanvas",
-					width : dados.resultset.length
-					* $i("i3GEOgraficointerativo1FatorTamanho").value,
-					height : parseInt(
-							$i("i3GEOF.graficointerativo1_corpo").style.height, 10) - 80,
 							animate : true,
 							selectable : true,
 							hoverable : true,
