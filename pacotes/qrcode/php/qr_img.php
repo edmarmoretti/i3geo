@@ -69,6 +69,7 @@ $version_ul=40;              /* upper limit for version  */
 
 
 $qrcode_data_string=@$_GET["d"];
+$qrcode_data_string .= "&temasa=".$_GET["temasa"]."&layers=".$_GET["layers"];
 $qrcode_error_correct=@$_GET["e"];
 $qrcode_module_size=@$_GET["s"];
 $qrcode_version=@$_GET["v"];
