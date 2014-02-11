@@ -584,6 +584,10 @@ i3GEOF.graficointerativo1 = {
 		 */
 		ativaTipo : function(obj) {
 			i3GEOF.graficointerativo1.tipo = obj.value;
+			if(i3GEOF.graficointerativo1.tipo == "ponto_1"){
+				$i("i3GEOgraficointerativo1DadosPuros").checked = true;
+			}
+
 			if ($i("i3GEOgraficointerativo1Grafico").innerHTML === ""
 				|| $i("i3GEOgraficointerativo1tabeladados").innerHTML == "") {
 				$i("i3GEOgraficointerativo1guia2").onclick.call();
@@ -748,7 +752,7 @@ i3GEOF.graficointerativo1 = {
 			+ i3GEO.configura.sid + "&funcao=graficoSelecao&tema=" + tema
 			+ "&itemclasses=" + x + "&itemvalores=" + y + "&exclui="
 			+ excluir + "&ext=" + i3GEO.parametros.mapexten;
-
+			
 			if ($i("i3GEOgraficointerativo1DadosPuros").checked) {
 				tipo = "nenhum";
 			} else {
@@ -1399,7 +1403,7 @@ i3GEOF.graficointerativo1 = {
 			}).render();
 			i3GEOF.graficointerativo1.aguarde.visibility = "hidden";
 		},
-		pontos : function(dados, maior, cores, legendaY, legendaX, tipo) {
+		pontos: function(dados, maior, cores, legendaY, legendaX, tipo) {
 			config = i3GEOF.graficointerativo1.configDefault(dados, maior, cores,
 					legendaY, legendaX);
 			var config = {

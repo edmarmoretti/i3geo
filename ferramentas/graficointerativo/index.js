@@ -561,8 +561,12 @@ i3GEOF.graficointerativo = {
 			ordenax = "sim",
 			monta;
 
-		if($i("i3GEOgraficointerativoDadosPuros").checked)
-		{tipo = "nenhum";}
+		if(i3GEOF.graficointerativo.tipo == "scatter"){
+			$i("i3GEOgraficointerativoDadosPuros").checked = true;
+		}
+		if($i("i3GEOgraficointerativoDadosPuros").checked){
+			tipo = "nenhum";
+		}
 		else{
 			if(x === y)
 			{tipo = "conta";}
