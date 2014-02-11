@@ -277,26 +277,37 @@ else{
 		}
 		foreach ($tema as $tx){
 			$extensao = ".map";
-			//cria o mapfile com base no sistema de metadados estatisticos
-			if(isset($id_medida_variavel)){
-				$temai3geo = false;
-				include("admin/php/classe_metaestat.php");
-				$m = new Metaestat();
-				$m->nomecache = "ogcmetaestat".$id_medida_variavel;
-				$mapfileMetaestat = $m->mapfileMedidaVariavel($id_medida_variavel,"",1,"","","","","","",true);
-				$nmap = ms_newMapobj($mapfileMetaestat["mapfile"]);
-				$nmap->setmetadata("ows_enable_request","*");
-				$req->setParameter("LAYERS", "ogcmetaestat".$id_medida_variavel);
+			if($temai3geo == true && file_exists($locaplic."/temas/".$tx.".php")){
+				$extensao = ".php";
 			}
-			else{
-				if(file_exists($locaplic."/temas/".$tx.".php") && $temai3geo == true){
-					$extensao = ".php";
-				}
-				if(file_exists($locaplic."/temas/".$tx.".gvp") && $temai3geo == true){
-					$extensao = ".gvp";
-				}
+			if($temai3geo == true && file_exists($locaplic."/temas/".$tx.".gvp")){
+				$extensao = ".gvp";
 			}
 			if($extensao == ".map"){
+				//cria o mapfile com base no sistema de metadados estatisticos
+				//verifica se o id_medida_variavel existe no mapfile e nao foi passado como um parametro
+				if(!isset($id_medida_variavel)){
+					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
+					$l = $nmap->getlayer(0);
+					$teste = $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
+					if($teste != "" && $l->data == ""){
+						$id_medida_variavel = $teste;
+					}
+					$l->free();
+					$nmap->free();
+					unset($l);
+					unset($nmap);
+				}
+				if(isset($id_medida_variavel)){
+					$temai3geo = false;
+					include("admin/php/classe_metaestat.php");
+					$m = new Metaestat();
+					$m->nomecache = "ogcmetaestat".$id_medida_variavel;
+					$mapfileMetaestat = $m->mapfileMedidaVariavel($id_medida_variavel,"",1,"","","","","","",true);
+					$nmap = ms_newMapobj($mapfileMetaestat["mapfile"]);
+					$nmap->setmetadata("ows_enable_request","*");
+					$req->setParameter("LAYERS", "ogcmetaestat".$id_medida_variavel);
+				}
 				if($temai3geo == true){
 					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
 					$nmap->setmetadata("ows_enable_request","*");
