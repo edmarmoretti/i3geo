@@ -330,12 +330,12 @@ function gravaDados(tipo,id)
 	var par = null;
 	var prog = null;
 	if(tipo == "usuario"){
-		campos = new Array("nome_usuario","login","senha","data_cadastro","email","ativo");
+		campos = ["nome_usuario","login","senha","data_cadastro","email","ativo"];
 		par = "&id_usuario="+id;
 		prog = "../php/usuarios.php?funcao=alterarUsuarios";
 	}
 	if(tipo == "papel"){
-		campos = new Array("id_papel");
+		campos = ["id_papel"];
 		par = "&id_usuario="+id;
 		prog = "../php/usuarios.php?funcao=adicionaPapelUsuario";
 	}
