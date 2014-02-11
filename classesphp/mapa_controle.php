@@ -890,6 +890,16 @@ Gera os arquivos para download de um tema for&ccedil;ando um mapfile vazio.
 */
 	case "DOWNLOAD3":
 		//caso o tema tenha de vir do sistema de metadados estatisticos
+		
+		//pode ser uma regiao cadastrada no sistema de metadados
+		if(isset($codigo_tipo_regiao) && $codigo_tipo_regiao != ""){
+			include(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
+			$m = new Metaestat();
+			$m->nomecache = "ogcmetaestatreg".$codigo_tipo_regiao;
+			$tema = $m->mapfileTipoRegiao($codigo_tipo_regiao);
+			$tema = str_replace(".map","",$tema["mapfile"]);
+		}		
+		//pode ser uma medida de uma variavel
 		if(isset($id_medida_variavel) && $id_medida_variavel != ""){
 			include(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
 			$m = new Metaestat();

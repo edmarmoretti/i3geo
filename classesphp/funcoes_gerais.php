@@ -1421,7 +1421,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	else
 	{$novonomelayer = $tema;}
 
-
 	$novonomelayer = str_replace(".","-",$novonomelayer);
 	$nomeshp = $dir_tmp."/".$novonomelayer;
 
@@ -1460,7 +1459,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	}
 	else{
 		$shapesSel = retornaShapesSelecionados($layer,$map_file,$map);//
-		
 		$items = pegaItens($layer);
 		// cria o dbf
 		$def = array();
@@ -1483,7 +1481,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		
 		$res_count = count($shapesSel);
-		
 		if ($res_count > 0){
 			for ($i = 0; $i < $res_count; ++$i){
 				$shape = $shapesSel[$i];
@@ -1649,6 +1646,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		}
 		//se o layer n&atilde;o existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
 		if($teste == ""){
+			//tema pode ser o nome de um arquivo mapfile
 			if(file_exists($tema.".map")){
 				$maptemp = ms_newMapObj($tema.".map");
 				$tema = basename($tema);
@@ -1689,12 +1687,18 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			$map = $gm->addLayers($map,$gvsigview,$dataView["layerNames"]);
 			$temas = array_merge($temas,$gm->nomesLayersAdicionados);
 		}
-		//$temas = $gm->nomesLayersAdicionados;
 	}
 	//
 	//salva o mapfile com um outro nome para evitar que o mapa atual, se estiver aberto, seja modificado
 	//
-	$map_file = str_replace(".map","tmp.map",$map_file);
+	//verifica se tem query e copia o arquivo
+	$qyfile = str_replace(".map",".qy",$map_file);
+	$nr = nomerandomico(10);
+	$map_file = str_replace(".map",$nr."tmp.map",$map_file);
+	if(file_exists($qyfile)){
+		$nqyfile = str_replace(".map",".qy",$map_file);
+		copy($qyfile,$nqyfile);
+	}
 	$map->save($map_file);
 	substituiCon($map_file,$postgis_mapa);
 	//$map_file agora contem os LAYERS necess&aacute;rios
@@ -1782,6 +1786,25 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				}
 			}
 			else{ //se for vetorial, extrai o arquivo
+				//
+				//verifica se existe selecao, caso contrario, faz a selecao baseada na extensao
+				//do mapfile
+				//
+				include(dirname(__FILE__)."/../classesphp/classe_selecao.php");
+				$sel = New Selecao($map_file,$tema);
+				//carrega a query para ver se o layer possui selecao ou nao
+				$numSel = 0;
+				if(file_exists($sel->qyfile)){
+					$map->loadquery($sel->qyfile);
+					$numSel = $l->getNumresults();
+				}
+				//
+				//se nao existir selecao seleciona por box
+				//
+				if(!file_exists($sel->qyfile) || $numSel < 1){
+					$box = $rectextent->minx." ".$rectextent->miny." ".$rectextent->maxx." ".$rectextent->maxy;
+					$sel->selecaoBOX("novo",$box);
+				}
 				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand);
 				if($nomeshp == false){
 					return array("arquivos"=>"<span style=color:red >Ocorreu um erro, tente novamente","nreg"=>0);

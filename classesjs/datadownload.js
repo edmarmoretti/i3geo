@@ -279,10 +279,14 @@ function datadownload_download(obj)
 	YAHOO.datadownloadLista.panel.show();
 	//document.getElementById("corpo").innerHTML = "Aguarde. Gerando arquivos..."
 	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&tema="+obj.title;
-	//caso a camada venha do sistema de metadados estatisticos
+	//caso a camada venha do sistema de metadados estatisticos e seja uma variavel
 	if(obj.name && obj.name === "metaestat"){
 		p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&id_medida_variavel="+obj.title;
 	}
+	if(obj.name && obj.name === "regioesmetaestat"){
+		p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&codigo_tipo_regiao="+obj.title.replace("metaregiao_","");
+	}
+
 	temaEscolhidoDownload = obj.title;
 	var cp = new cpaint();
 	//cp.set_debug(2)

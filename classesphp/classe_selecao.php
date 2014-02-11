@@ -627,12 +627,12 @@ function: selecaoLimpa
 
 Limpa a sele&ccedil;&atilde;o do tema.
 */
-	function selecaoLimpa()
+	function selecaoLimpa($apagaQyfile=false)
 	{
 		//apaga o arquivo do i3geo com os ids selecionados
 		if(file_exists($this->qyfileTema))
 		{unlink($this->qyfileTema);}
-		if ($this->nome != "") //limpa de um tema
+		if ($this->nome != "" && $apagaQyfile == false) //limpa de um tema
 		{
 			if(!$this->layer){return "erro";}
 			if (file_exists($this->qyfile))
