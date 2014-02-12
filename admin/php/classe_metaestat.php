@@ -480,7 +480,7 @@ class Metaestat{
 		//$colunasComGeo[] = "/*SG*/st_setsrid(".$colunageo.",".$dadosgeo["srid"].") as ".$colunageo." /*SG*/";
 		$colunasComGeo[] = "/*SG*/".$colunageo." as ".$colunageo." /*SG*/";
 		$sqlgeo = str_replace("__COLUNASSEMGEO__",implode(",",$colunasComGeo),$sqlgeo);
-		$sqlgeo = $colunageo." from /*SE*/(".$sqlgeo.")/*SE*/ as foo using unique ".$dadosgeo["identificador"]." using srid=".$dadosgeo["srid"];
+		$sqlgeo = $colunageo." from /*SE*/(".$sqlgeo." /*FR*//*FR*/ )/*SE*/ as foo using unique ".$dadosgeo["identificador"]." using srid=".$dadosgeo["srid"];
 
 		//o SQL com os dados contem um filtro ou nao?
 		$contemfiltro = false;

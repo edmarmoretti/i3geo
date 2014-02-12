@@ -633,9 +633,9 @@ function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao
 			foreach($layersm as $l){
 				$data = $l->data;
 				//substitui os marcadores definidos na construcao do layer. Veja a classe metaestat
-				$s = explode("/*FA*/",$data);
+				$s = explode("/*FR*/",$data);
 				if(count($s) > 1){
-					$data = $s[0]."/*FA*//*FA*/".$s[2];
+					$data = $s[0]."/*FR*//*FR*/".$s[2];
 				}
 				$l->set("data",$data);
 			}
@@ -645,14 +645,14 @@ function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao
 			$regioesfilho = $m->listaHierarquiaRegioes($codigo_tipo_regiao);
 			foreach($regioesfilho as $r){
 				$regiao = $m->listaTipoRegiao($r["codigo_tipo_regiao"]);
-				$filtro = "g.".$r["colunaligacao_regiaopai"]."::text = '$codigo_regiao'";
+				$filtro = $r["colunaligacao_regiaopai"]."::text = '$codigo_regiao'";
 				$layers = analise_listaLayersRegiao($layersm,$r["codigo_tipo_regiao"]);
 				foreach($layers as $l){
 					$data = $l->data;
 					//substitui os marcadores definidos na construcao do layer. Veja a classe metaestat
-					$s = explode("/*FA*/",$data);
+					$s = explode("/*FR*/",$data);
 					if(count($s) > 1){
-						$data = $s[0]."/*FA*/ AND ".$filtro." /*FA*/".$s[2];
+						$data = $s[0]."/*FR*/ AND ".$filtro." /*FR*/".$s[2];
 					}
 					$l->set("data",$data);
 				}
