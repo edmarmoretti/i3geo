@@ -34,7 +34,7 @@ i3geo/admin/php/sqlite.php
 */
 if(!file_exists("../admin.db"))
 {
-	echo "O arquivo menutemas/admin.db n&atilde;o existe. Utilize i3geo/admin/criasqlite.php para criar o banco de dados SQLITE.";
+	echo "O arquivo menutemas/admin.db n&atilde;o existe. Utilize a op&ccedil;&atilde;o existente no menu de administra&ccedil;&atilde;o para criar o banco de dados SQLITE.";
 	exit;
 }
 echo "<pre>";

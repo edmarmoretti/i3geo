@@ -1542,7 +1542,7 @@ background: url(../pacotes/yui290/build/container/img/corner_resize.gif) left bo
 cursor: se-resize;
 }
 .yui-skin-sam .yui-panel .hd {
-background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+//background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
 color: #000000;
 font-size: 80%;
 font-weight: bold;
@@ -2229,7 +2229,7 @@ opacity:.80;
 filter:alpha(opacity=80);
 }
 .yui-skin-sam .yui-panel .hd {
-background: url("../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 -200px transparent;
+background: none; //url("../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 -200px transparent;
 color: #000000;
 font-size: 93%;
 font-weight: bold;

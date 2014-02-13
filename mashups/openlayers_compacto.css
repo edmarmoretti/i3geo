@@ -576,7 +576,7 @@ opacity:.80;
 filter:alpha(opacity=80);
 }
 .yui-skin-sam .yui-panel .hd {
-background: url("../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 -200px transparent;
+background: none; //url("../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 -200px transparent;
 color: #000000;
 font-size: 93%;
 font-weight: bold;
