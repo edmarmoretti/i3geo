@@ -31,7 +31,7 @@ body {
 .r {
 	border: 1px solid #F0F0F0;
 	border-radius: 5px 5px 5px 5px;
-	box-shadow: rgb(136, 136, 136) 0 8px 10px 0;
+	box-shadow: 1px 1px 1px 1px lightgray;
 	float: left;
 	height: 150px;
 	margin: 0px 25px 20px auto;
