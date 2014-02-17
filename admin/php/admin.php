@@ -190,11 +190,13 @@ Array originada de fetchAll
 function pegaDados($sql,$locaplic="")
 {
 	$resultado = array();
+	/*
 	if($locaplic == "")
 		include("conexao.php");
 	else
 		include("$locaplic/admin/php/conexao.php");
-
+	*/
+	include(dirname(__FILE__)."/conexao.php");
 	error_reporting(0);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 	if($q)
