@@ -286,15 +286,16 @@ else{
 			if($extensao == ".map"){
 				//cria o mapfile com base no sistema de metadados estatisticos
 				//verifica se o id_medida_variavel existe no mapfile e nao foi passado como um parametro
-				if(!isset($id_medida_variavel)){
+				if(!isset($id_medida_variavel) && $temai3geo == true){
 					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
 					$l = $nmap->getlayer(0);
 					$teste = $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
 					if($teste != "" && $l->data == ""){
 						$id_medida_variavel = $teste;
 					}
-					$l->free();
-					$nmap->free();
+					$l->free;
+					$nmap->free;
+					echo "oi";exit;
 					unset($l);
 					unset($nmap);
 				}
