@@ -75,7 +75,7 @@ i3GEO.maparef = {
 	Default:
 	{"dinamico"}
 	*/
-	VALORSELETORTIPO:"dinamico",
+	VALORSELETORTIPO:"mapa",
 	/*
 	Propriedade: PERMITEFECHAR
 

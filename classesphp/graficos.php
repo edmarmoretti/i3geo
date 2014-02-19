@@ -578,7 +578,6 @@ function dadosPerfilRelevo($pontos,$opcao,$amostragem,$item="",$map_file=""){
 	$result = curl_exec($curl);
 	curl_close ($curl);
 	$result = json_decode( $result, true );
-	$pontos = array();
 
 	if($opcao != "google"){
 		include_once("classe_atributos.php");

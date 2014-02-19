@@ -119,9 +119,8 @@ i3GEOF.perfil = {
 	html:function(){
 		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.perfil.dicionario);
 		ins += "<p class='paragrafo' ><input onclick='if(this.checked == true){$i(\"i3GEOFperfilTemasSel\").value = \"\";$i(\"i3GEOFperfilDivComboItens\").innerHTML = \"\";}' style=cursor:pointer checked type=radio name=i3GEOFperfilFonte id=i3GEOFperfilFonteGoogle /> Google";
-		ins += "<p class='paragrafo' >"+$trad(2,i3GEOF.perfil.dicionario)+" <div style=text-align:left; id=i3GEOFperfilTemas ></div>";
-		ins += "<div style=text-align:left; id=i3GEOFperfilDivComboItens ></div><br>";
-
+		ins += "<br><p class='paragrafo' >"+$trad(2,i3GEOF.perfil.dicionario)+" <div style=text-align:left; id=i3GEOFperfilTemas ></div>";
+		ins += "<br><div style=text-align:left; id=i3GEOFperfilDivComboItens ></div><br>";
 		ins += "<p class='paragrafo' ><input type=text id=i3GEOFperfilAmostragem value=20 size=3 /> "+$trad(3,i3GEOF.perfil.dicionario);
 		ins += "<br><br><input id=i3GEOperfilbotao1 type='buttom' value='"+$trad(4,i3GEOF.perfil.dicionario)+"' />";
 		ins += "<br><br><div style=text-align:left id=i3GEOperfilfim ></div>";
@@ -187,9 +186,9 @@ i3GEOF.perfil = {
 					if(retorno.data.status != "OK")
 					{$i("i3GEOperfilfim").innerHTML = $trad(5,i3GEOF.perfil.dicionario);return;}
 					i3GEOF.perfil.converteDados(retorno.data.results);
-					if(!$i("i3GEOF.graficointerativo_script")){
-						var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js";
-						i3GEO.util.scriptTag(js,"i3GEOF.perfil.iniciaGrafico()","i3GEOF.graficointerativo_script");
+					if(!$i("i3GEOF.graficointerativo1_script")){
+						var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo1/index.js";
+						i3GEO.util.scriptTag(js,"i3GEOF.perfil.iniciaGrafico()","i3GEOF.graficointerativo1_script");
 					}
 					else{
 						i3GEOF.perfil.iniciaGrafico();
@@ -225,9 +224,10 @@ i3GEOF.perfil = {
 	Inicializa o gr&aacute;fico de perfil definindo os parâmetros da ferramenta i3GEOF.graficointerativo
 	*/
 	iniciaGrafico: function(){
-		i3GEOF.graficointerativo.tipo = "line";
-		i3GEOF.graficointerativo.titulo = "Perfil";
-		i3GEOF.graficointerativo.criaJanelaFlutuante(i3GEOF.perfil.dadosGrafico);
+		i3GEOF.graficointerativo1.tipo = "linha_1";
+		i3GEOF.graficointerativo1.titulo = "Perfil";
+		i3GEOF.graficointerativo1.dados = i3GEOF.perfil.dadosGrafico;
+		i3GEOF.graficointerativo1.criaJanelaFlutuante();
 	},
 	/*
 	Function: listaPontos

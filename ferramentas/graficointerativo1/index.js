@@ -253,14 +253,13 @@ i3GEOF.graficointerativo1 = {
 					fn : i3GEOF.graficointerativo1.obterDados
 				}
 			});
-			if (i3GEOF.graficointerativo1.dados
-					&& i3GEOF.graficointerativo1.dados != "undefined") {
-				i3GEOF.graficointerativo1
-				.montaTabelaDados(i3GEOF.graficointerativo1.dados);
+			if (i3GEOF.graficointerativo1.dados && i3GEOF.graficointerativo1.dados != "undefined") {
+				i3GEOF.graficointerativo1.montaTabelaDados(i3GEOF.graficointerativo1.dados);
 				$i("i3GEOgraficointerativo1guia4").onclick.call();
 			}
-			i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativo1guia1",
-			"i3GEOgraficointerativo1guia");
+			else{
+				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativo1guia1","i3GEOgraficointerativo1guia");
+			}
 		},
 		/*
 		 * Function: html
@@ -588,7 +587,9 @@ i3GEOF.graficointerativo1 = {
 		 * Define a vari&aacute;vel com o tipo de gr&aacute;fico e mostra a guia 2
 		 */
 		ativaTipo : function(obj) {
-			i3GEOF.graficointerativo1.tipo = obj.value;
+			if(obj){
+				i3GEOF.graficointerativo1.tipo = obj.value;
+			}
 			if(i3GEOF.graficointerativo1.tipo == "ponto_1"){
 				$i("i3GEOgraficointerativo1DadosPuros").checked = true;
 			}
@@ -630,8 +631,7 @@ i3GEOF.graficointerativo1 = {
 					$i("i3GEOgraficointerativo1ComboXlinha").style.display = comboxlinha;
 					$i("i3GEOgraficointerativo1ComboYlinha").style.display = comboylinha;
 					$i("i3GEOgraficointerativo1AjudaPizza").style.display = ajudapizza;
-				} catch (e) {
-				}
+				} catch (e) {}
 			};
 			if (i3GEOF.graficointerativo1.tipo === "") {
 				i3GEO.janela.tempoMsg($trad(31,
@@ -811,8 +811,16 @@ i3GEOF.graficointerativo1 = {
 			colunas = [],
 			cores = [],
 			alias = [];
-			colunas.push(temp.getElementsByTagName("select")[0].value);
-			alias.push(temp.getElementsByTagName("input")[0].value);
+			if(temp.getElementsByTagName("select")[0]){
+				colunas.push(temp.getElementsByTagName("select")[0].value);
+				alias.push(temp.getElementsByTagName("input")[0].value);
+			}
+			else{
+				//caso os dados tenham sido definidos como parametros
+				colunas = ["-","-"];
+				alias = colunas;
+				cores = ["#29C152","#29C152"];
+			}
 			temp = $i("i3GEOgraficointerativo1ComboY");
 			temp = temp.getElementsByTagName("select");
 			n = temp.length;
