@@ -293,11 +293,7 @@ else{
 					if($teste != "" && $l->data == ""){
 						$id_medida_variavel = $teste;
 					}
-					$l->free;
-					$nmap->free;
-					echo "oi";exit;
-					unset($l);
-					unset($nmap);
+
 				}
 				if(isset($id_medida_variavel)){
 					$temai3geo = false;
