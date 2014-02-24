@@ -1957,6 +1957,7 @@ filter: alpha(opacity =     80);
 .yui-skin-sam .yui-panel .bd {
 text-align: left;
 font-size: 10px;
+background-color: white;
 }
 .yui-skin-sam .yui-simple-dialog .bd .yui-icon {
 background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;

@@ -277,18 +277,15 @@ Variable: navegadoresLocais
 Ip dos usuarios que podem navegar no servidor para acessar arquivos de dados geogr&aacute;ficos.
 
 O i3geo possibilita que os usu&aacute;rios acessem dados geogr&aacute;ficos no servidor diretamente, navegando pelo sistema de arquivos.
-Isso possibilita o acesso aos dados mesmo que n&atilde;o constem na &aacute;rvore de temas definida em menutemas/menutemas.xml
-Por seguran&ccedil;a, essa funcionalidade s&oacute; &eacute; ativada para n&uacute;meros IP espec&iacute;ficos, definidos nessa vari&aacute;vel.
+Isso possibilita o acesso aos dados mesmo que n&atilde;o constem na &aacute;rvore de temas
+Por seguran&ccedil;a, essa funcionalidade s&oacute; &eacute; ativada apenas quando o usuario estiver logado.
 
-Para cada IP registrado, deve-se definir os diret&oacute;rios que ser&atilde;o acess&iacute;veis, conforme mostrado abaixo.
+Caso o usu&aacute;rio n&atilde;o esteja logado, ser&aacute; mostrada para navegacao apenas a pasta i3geo/data
 
-A valida&ccedil;&atilde;o do IP &eacute; feita com javascript, na inicializa&ccedil;&atilde;o do mapa, a vari&aacute;vel javascript objmapa.navegacaoDir &eacute; definida como sim (caso $navegadoresLocais for diferente de "") ou nao.
-
-Se objmapa.navegacaoDir for igual a "sim", ou seja, $navegadoresLocais &eacute; diferente de "", na guia de adi&ccedil;&atilde;o de temas da interface HTML, ser&aacute; mostrada a op&ccedil;&atilde;o de navega&ccedil;&atilde;o. Portanto, se vc n&atilde;o quiser que essa op&ccedil;&atilde;o seja ativada, mantenha essa vari&aacute;vel igual a
+Se objmapa.navegacaoDir for igual a "sim", ou seja, $navegadoresLocais &eacute; diferente de "", na guia de adi&ccedil;&atilde;o de temas da interface HTML, ser&aacute; mostrada a op&ccedil;&atilde;o de navega&ccedil;&atilde;o. 
+Portanto, se vc n&atilde;o quiser que essa op&ccedil;&atilde;o seja ativada, mantenha essa vari&aacute;vel igual a
 
 $navegadoresLocais = "";
-
-Com a op&ccedil;&atilde;o ativa na interface do mapa, o ip do cliente &eacute; verificado e caso estiver registrado no array, a navega&ccedil;&atilde;o pelos diret&oacute;rios do servidor ser&aacute; permitida. Para mais detalhes, veja a ferramenta i3geo/ferramentas/navegacaodir
 
 Para efeito de compatibilidade, manteve-se a possibilidade de um array com multiplos arrays, mas apenas o primeiro e utilizado
 

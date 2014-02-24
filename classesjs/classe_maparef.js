@@ -195,8 +195,8 @@ i3GEO.maparef = {
 				ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" /></span>&nbsp;";
 				if(this.SELETORTIPO){
 					ins += "<select style='font-size:9px;' id='refDinamico' onchange='javascript:i3GEO.parametros.celularef=\"\";i3GEO.maparef.atualiza()'>";
-					ins += "<option value='mapa'  >mapa</option>";
-					ins += "<option value='dinamico' >dinâmico</option>";
+					ins += "<option value='mapa'  >mapa aual</option>";
+					ins += "<option value='dinamico' >Brasil</option>";
 					ins += "</select>";
 				}
 				ins += "</div>";

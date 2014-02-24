@@ -648,7 +648,7 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 		$tmparray["my_tag"] = "value_of_my_tag";
 		if($leg = @$oMap->processlegendtemplate($tmparray)){
 			if (function_exists("mb_convert_encoding")){
-				//$leg = mb_convert_encoding($leg,"UTF-8","ISO-8859-1");
+				$leg = mb_convert_encoding($leg,"UTF-8","ISO-8859-1");
 			}
 			echo $leg;exit;
 		}
