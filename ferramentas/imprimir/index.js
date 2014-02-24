@@ -169,7 +169,11 @@ i3GEOF.imprimir = {
 	tipoAbertura {string} - (opcional) se for "interna" abre em uma janela interna do mapa
 	*/
 	abreI: function(obj,tipoAbertura){
-		var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL+"&mapexten="+i3GEO.parametros.mapexten;
+		var interf = i3GEO.Interface.ATUAL;
+		if(i3GEO.Interface.openlayers.googleLike === true){
+			interf = "googlemaps";
+		}
+		var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid+"&interface="+interf+"&mapexten="+i3GEO.parametros.mapexten;
 		var id = "imprimir"+Math.random();
 		if(tipoAbertura){
 			i3GEO.janela.cria("350px","350px",url,"","","Arquivos",id);

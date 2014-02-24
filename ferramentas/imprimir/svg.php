@@ -68,7 +68,12 @@ $map->save($temp);
 substituiCon($temp,$postgis_mapa);
 $map = ms_newMapObj($temp);
 if($interface == "googlemaps")
-{$map->setProjection("init=epsg:4618,a=6378137,b=6378137");}
+{
+	$map->setProjection("init=epsg:4618,a=6378137,b=6378137");
+	$map->set("units",MS_METERS);
+	$map->preparequery();
+	$map->set("scaledenom",$map->scaledenom * 100000);
+}
 $v = versao();
 
 $leb = $eb->label;
