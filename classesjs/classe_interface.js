@@ -712,6 +712,12 @@ i3GEO.Interface = {
 				//&eacute; necess&aacute;rio ativar nesse momento pois a barra de botoes j&aacute; foi criada
 				if(i3GEO.Interface.TABLET === false)
 				{i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);}
+				/*
+				 * @TODO lente nao funciona no OSM
+				 */
+				if(i3GEO.Interface.openlayers.googleLike === true){
+					i3GEO.barraDeBotoes.INCLUIBOTAO.lentei = false;
+				}
 				i3GEO.Interface.ativaBotoes();
 				if(openlayers.GADGETS.PanZoomBar === true){
 					i3GEO.Interface.openlayers.OLpanzoombar = new OpenLayers.Control.PanZoomBar();
