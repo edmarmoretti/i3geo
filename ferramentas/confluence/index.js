@@ -192,6 +192,9 @@ i3GEOF.confluence = {
 	Indica a conflu&ecirc;ncia no mapa
 	*/
 	mostraxy: function(xy){
+		/*
+		 * @TODO nao funciona no OSM
+		 */
 		if(i3GEO.Interface.ATUAL === "googleearth" || i3GEO.Interface.openlayers.googleLike === true)
 		{return;}
 		var box = $i("pinconf"),
