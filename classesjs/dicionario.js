@@ -2172,6 +2172,13 @@ pt:"Mapas cadastrados",
 en:"",
 es:"",
 it:""
+}],
+"x91":[
+{
+pt:"Feche para parar. Desligue o tema para ver o efeito",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");
