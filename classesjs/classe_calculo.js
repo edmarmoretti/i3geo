@@ -118,7 +118,7 @@ i3GEO.calculo = {
 				return [(xy.x)+pos[0],(xy.y)+pos[1]];
 			}
 			if(arguments.length === 3){
-				ext = i3GEO.parametros.mapexten;
+				ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 				cellsize = i3GEO.parametros.pixelsize;
 			}
 			if(arguments.length === 4){

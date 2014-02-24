@@ -91,11 +91,11 @@ i3GEOF.confluence = {
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.confluence.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-   				confluenceDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.confluence.lista();});
-   				confluenceZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.confluence.lista();});
+					confluenceDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.confluence.lista();});
+					confluenceZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.confluence.lista();});
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
-   				confluenceDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.confluence.lista();});
+					confluenceDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.confluence.lista();});
 			}
 			i3GEOF.confluence.lista();
 		}
@@ -192,11 +192,13 @@ i3GEOF.confluence = {
 	Indica a conflu&ecirc;ncia no mapa
 	*/
 	mostraxy: function(xy){
-		if(i3GEO.Interface.ATUAL === "googleearth")
+		if(i3GEO.Interface.ATUAL === "googleearth" || i3GEO.Interface.openlayers.googleLike === true)
 		{return;}
+		var box = $i("pinconf"),
+			ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 		xy = xy.split(",");
-	 	xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
-		var box = $i("pinconf");
+		xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA),ext,i3GEO.parametros.pixelsize);
+
 		box.style.display = "block";
 		box.style.width = "27px";
 		box.style.height = "27px";
@@ -209,42 +211,46 @@ i3GEOF.confluence = {
 	Lista os pontos de conflu&ecirc;ncia
 	*/
 	lista: function(){
-		if(i3GEOF.confluence.aguarde.visibility === "visible")
-		{return;}
-		i3GEOF.confluence.aguarde.visibility = "visible";
-		var ins = "",i,j,ext,xini,yini,xfim,yfim,xs,dx,ys = [];
-		if(i3GEO.parametros.mapexten)
-		{ext = i3GEO.parametros.mapexten;}
-		else
-		{ext = "-49.1774741355 -16.379556709 -47.2737662565 -14.9806872512";} //apenas para exemplo
-		ext = ext.split(" ");
-		xini = parseInt(ext[0],10);
-		yini = parseInt(ext[1],10);
-		xfim = parseInt(ext[2],10);
-		yfim = parseInt(ext[3],10);
-		xs = [];
-		dx = xfim - xini;
-		if ((dx > 1) || (dx < -1)){
-			for (i=xini;i<xfim;i++){
-				xs.push(i);
+		try{
+			var ins = "",i,j,ext,xini,yini,xfim,yfim,xs,dx,ys = [];
+			if(i3GEO.parametros.mapexten){
+				ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 			}
-			ys = [];
-			for (i=yini;i<yfim;i++){
-				ys.push(i);
-			}
-		}
-		ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.confluence.dicionario)+"</p>";
-		if(xs.length === 0){
-			ins += "<br><br>"+$trad(2,i3GEOF.confluence.dicionario)+" <br><br>"+$trad(3,i3GEOF.confluence.dicionario);
-		}
-		else{
-			for (i=0;i<xs.length;i++){
-				for (j=0;j<ys.length;j++){
-					ins += "<br><a onmouseout='i3GEOF.confluence.escondexy()' onmouseover='i3GEOF.confluence.mostraxy(\""+ys[j]+","+xs[i]+"\")' href='http://www.confluence.org/confluence.php?lat="+ys[j]+"&lon="+xs[i]+" ' target=blank >Long. "+xs[i]+" Lat."+ys[j]+"</a><br>";
+			else{
+				ext = "-49.1774741355 -16.379556709 -47.2737662565 -14.9806872512";
+			} //apenas para exemplo
+			ext = ext.split(" ");
+			xini = parseInt(ext[0],10);
+			yini = parseInt(ext[1],10);
+			xfim = parseInt(ext[2],10);
+			yfim = parseInt(ext[3],10);
+			xs = [];
+			dx = xfim - xini;
+			if ((dx > 1) || (dx < -1)){
+				for (i=xini;i<xfim;i++){
+					xs.push(i);
+				}
+				ys = [];
+				for (i=yini;i<yfim;i++){
+					ys.push(i);
 				}
 			}
+			ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.confluence.dicionario)+"</p>";
+			if(xs.length === 0){
+				ins += "<br><br>"+$trad(2,i3GEOF.confluence.dicionario)+" <br><br>"+$trad(3,i3GEOF.confluence.dicionario);
+			}
+			else{
+				for (i=0;i<xs.length;i++){
+					for (j=0;j<ys.length;j++){
+						ins += "<br><a onmouseout='i3GEOF.confluence.escondexy()' onmouseover='i3GEOF.confluence.mostraxy(\""+ys[j]+","+xs[i]+"\")' href='http://www.confluence.org/confluence.php?lat="+ys[j]+"&lon="+xs[i]+" ' target=blank >Long. "+xs[i]+" Lat."+ys[j]+"</a><br>";
+					}
+				}
+			}
+			$i("i3GEOconfluenceLista").innerHTML = ins+"<br><br>";
+			i3GEOF.confluence.aguarde.visibility = "hidden";
 		}
-		$i("i3GEOconfluenceLista").innerHTML = ins+"<br><br>";
-		i3GEOF.confluence.aguarde.visibility = "hidden";
+		catch(e){
+			return true;
+		}
 	}
 };
