@@ -1136,11 +1136,13 @@ i3GEO.Interface = {
 			for(i=0;i<nlayers;i += 1){
 				if(layers[i].url){
 					url = layers[i].url;
-					reg = new RegExp(parametro+"([=])+([a-zA-Z0-9_]*)");
-					layers[i].url = url.replace(reg,"");
-					//eval("layers[i].mergeNewParams({"+parametro+":valor})");
-					layers[i].url = layers[i].url+"&"+parametro+"="+valor;
-					layers[i].redraw();
+					if(url.search("\\?") > 0){
+						reg = new RegExp(parametro+"([=])+([a-zA-Z0-9_]*)");
+						layers[i].url = url.replace(reg,"");
+						//eval("layers[i].mergeNewParams({"+parametro+":valor})");
+						layers[i].url = layers[i].url+"&"+parametro+"="+valor;
+						layers[i].redraw();
+					}
 				}
 			}
 		},
