@@ -550,8 +550,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 }
 else //se for linux
 {
-	//verifica se est&aacute; sendo utilizado o diret&oacute;rio "opt" ou "var"
-	$locaplic = dirname(__FILE__);
 	$dir_tmp = "/tmp/ms_tmp";
 	if(dirname($locaplic) == "/opt/www/html"){
 		$dir_tmp = "/var/tmp/ms_tmp";

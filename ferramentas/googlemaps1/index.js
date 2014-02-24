@@ -70,7 +70,7 @@ function inicializa(){
 			$i("boxg").style.zIndex = 0;
 		}
 
-		pol = i3GEO.parametros.mapexten;
+		pol = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 		ret = pol.split(" ");
 		pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
 		pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
@@ -102,7 +102,7 @@ function inicializa(){
 	});
 	google.maps.event.addListener(map, "mousemove", function(ponto) {
 		var teladms,temp,
-			mapexten = i3GEO.parametros.mapexten;
+			mapexten = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 		teladms = i3GEO.calculo.dd2dms(ponto.x,ponto.y);
 		window.parent.objposicaocursor = {
 			ddx: ponto.x,
@@ -239,11 +239,12 @@ Mostra, no mapa principal, um retângulo indicando a extens&atilde;o geogr&aacute
 */
 function ondegoogle(){
 	if(!i3GEO || !map.getBounds()){return;}
-	var bd = map.getBounds(),
+	var ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten),
+		bd = map.getBounds(),
 		so = bd.getSouthWest(),
 		ne = bd.getNorthEast(),
-		xyMin = i3GEO.calculo.dd2tela(so.lng(),so.lat(),$i(i3GEO.Interface.IDMAPA),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize),
-		xyMax = i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),$i(i3GEO.Interface.IDMAPA),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize),
+		xyMin = i3GEO.calculo.dd2tela(so.lng(),so.lat(),$i(i3GEO.Interface.IDMAPA),ext,i3GEO.parametros.pixelsize),
+		xyMax = i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),$i(i3GEO.Interface.IDMAPA),ext,i3GEO.parametros.pixelsize),
 		box = $i("boxg"),
 		w = xyMax[0]-xyMin[0],
 		h = xyMin[1]-xyMax[1];
@@ -276,7 +277,7 @@ function panTogoogle(){
 	if(!i3GEO){return;}
 	var b = $i("boxg");
 	b.style.display="block";
-	var pol = i3GEO.parametros.mapexten;
+	var pol = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 	var ret = pol.split(" ");
 	var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
 	var pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
@@ -477,14 +478,16 @@ Parametro:
 coordenadas {array} - array de pares separados por ' ' contendo x e y
 */
 function adicionaMarcasMapa(coordenadas){
-	var n = coordenadas.length,i,pt,point,marker;
-	for(i=0;i<n;i++){
-		pt = coordenadas[i].split(" ");
-		point = new google.maps.LatLng(pt[1],pt[0]);
-		marker = new google.maps.Marker({
-				position : point
-			});
-		//marker = new GMarker(point);
-		marker.setMap(map);
+	if(coordenadas){
+		var n = coordenadas.length,i,pt,point,marker;
+		for(i=0;i<n;i++){
+			pt = coordenadas[i].split(" ");
+			point = new google.maps.LatLng(pt[1],pt[0]);
+			marker = new google.maps.Marker({
+					position : point
+				});
+			//marker = new GMarker(point);
+			marker.setMap(map);
+		}
 	}
 }
