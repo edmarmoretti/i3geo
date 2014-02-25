@@ -643,10 +643,10 @@ function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao
 		else{
 			//pega as regioes que sao filhos de $codigo_tipo_regiao
 			$regioesfilho = $m->listaHierarquiaRegioes($codigo_tipo_regiao);
-			foreach($regioesfilho as $r){
-				$regiao = $m->listaTipoRegiao($r["codigo_tipo_regiao"]);
-				$filtro = $r["colunaligacao_regiaopai"]."::text = '$codigo_regiao'";
-				$layers = analise_listaLayersRegiao($layersm,$r["codigo_tipo_regiao"]);
+			if(count($regioesfilho) == 0){
+				$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
+				$filtro = $regiao["identificador"]."::text = '$codigo_regiao'";
+				$layers = analise_listaLayersRegiao($layersm,$codigo_tipo_regiao);
 				foreach($layers as $l){
 					$data = $l->data;
 					//substitui os marcadores definidos na construcao do layer. Veja a classe metaestat
@@ -655,6 +655,22 @@ function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao
 						$data = $s[0]."/*FR*/ AND ".$filtro." /*FR*/".$s[2];
 					}
 					$l->set("data",$data);
+				}				
+			}
+			else{
+				foreach($regioesfilho as $r){
+					$regiao = $m->listaTipoRegiao($r["codigo_tipo_regiao"]);
+					$filtro = $r["colunaligacao_regiaopai"]."::text = '$codigo_regiao'";
+					$layers = analise_listaLayersRegiao($layersm,$r["codigo_tipo_regiao"]);
+					foreach($layers as $l){
+						$data = $l->data;
+						//substitui os marcadores definidos na construcao do layer. Veja a classe metaestat
+						$s = explode("/*FR*/",$data);
+						if(count($s) > 1){
+							$data = $s[0]."/*FR*/ AND ".$filtro." /*FR*/".$s[2];
+						}
+						$l->set("data",$data);
+					}
 				}
 			}
 		}
