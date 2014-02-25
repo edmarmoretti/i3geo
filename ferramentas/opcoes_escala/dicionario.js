@@ -77,5 +77,11 @@ i3GEOF.opcoesEscala.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		14: [{
+			pt:"Inclui no corpo do mapa?",
+			en:"",
+			es:"",
+			it:""
 		}]
 };

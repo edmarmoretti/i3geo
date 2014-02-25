@@ -40,55 +40,55 @@ class Escala
 {
 	/*
 	Variavel: $mapa
-	
+
 	Objeto mapa
 	*/
 	protected $mapa;
 	/*
 	Variavel: $arquivo
-	
+
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
 	Variavel: $nomeImagem
-	
+
 	Nome da imagem criada
 	*/
 	protected $nomeImagem;
 
-	
+
 /*
 function: __construct
 
-Cria um objeto Escala 
+Cria um objeto Escala
 
 parameters:
-$map_file - Endere&ccedil;o do mapfile no servidor. 
+$map_file - Endere&ccedil;o do mapfile no servidor.
 */
 	function __construct($map_file,$nomeImagem="",$locaplic="")
 	{
-  		//error_reporting(0);
-  		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		include_once($locaplic."/funcoes_gerais.php");
-  		else
-  		include_once("funcoes_gerais.php");
-  		$this->locaplic = $locaplic;
-  		$this->mapa = ms_newMapObj($map_file);
-  		$this->arquivo = $map_file;
-  		if ($nomeImagem == "")
-  		{$this->nomeImagem = nomeRandomico();}
+			//error_reporting(0);
+			if(file_exists($locaplic."/funcoes_gerais.php"))
+			include_once($locaplic."/funcoes_gerais.php");
+			else
+			include_once("funcoes_gerais.php");
+			$this->locaplic = $locaplic;
+			$this->mapa = ms_newMapObj($map_file);
+			$this->arquivo = $map_file;
+			if ($nomeImagem == "")
+			{$this->nomeImagem = nomeRandomico();}
 	}
 /*
 function: salva
 
 Salva o mapfile atual
- 
-*/	
- 	function salva()
- 	{
-	  	if (connection_aborted()){exit();}
-	  	$this->mapa->save($this->arquivo);
+
+*/
+	function salva()
+	{
+			if (connection_aborted()){exit();}
+			$this->mapa->save($this->arquivo);
 	}
 
 /*
@@ -105,7 +105,7 @@ string com vari&aacute;veis javascript.
 	{
 		$objImagem = $this->mapa->drawscalebar();
 		if($objImagem->imagepath == "")
-		{echo "Erro IMAGEPATH vazio";exit;}		
+		{echo "Erro IMAGEPATH vazio";exit;}
 		$nomer = ($objImagem->imagepath)."sca".$this->nomeImagem.".png";
 		$objImagem->saveImage($nomer);
 		$nomer = ($objImagem->imageurl).basename($nomer);
@@ -128,7 +128,7 @@ string javascript com os parametros.
 		$bcor = $cor->red.",".$cor->green.",".$cor->blue;
 		$cor = $eb->outlinecolor;
 		$ocor = $cor->red.",".$cor->green.",".$cor->blue;
-		return("var w=".$eb->width.";var h=".$eb->height.";var estilo=".$eb->style.";var intervalos=".$eb->intervals.";var unidade=".$eb->units.";var cor='".$fcor."';var bcor='".$bcor."';var ocor='".$fcor."'");
+		return("var status = ".$eb->status.";var w=".$eb->width.";var h=".$eb->height.";var estilo=".$eb->style.";var intervalos=".$eb->intervals.";var unidade=".$eb->units.";var cor='".$fcor."';var bcor='".$bcor."';var ocor='".$fcor."'");
 	}
 /*
 function: mudaEscalaGrafica
@@ -152,7 +152,7 @@ $bcor - Cor do fundo RGB separado por v&iacute;rgulas.
 
 $ocor - Cor do contorno RGB separado por v&iacute;rgulas.
 */
-	function mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor)
+	function mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor,$status=3)
 	{
 		$eb = $this->mapa->scalebar;
 		$eb->set("width",$w);
@@ -173,8 +173,12 @@ $ocor - Cor do contorno RGB separado por v&iacute;rgulas.
 		//desabilita a escala
 		if ($estilo == 2)
 		{$eb->set("status",MS_OFF);}
-		else 
+		else
 		{$eb->set("status",MS_EMBED);}
+		if ($status == 3)
+		{$eb->set("status",MS_EMBED);} //MS_ON, MS_OFF, MS_EMBED
+		else
+		{$eb->set("status",MS_OFF);}
 		$this->salva();
 		return("ok");
 }

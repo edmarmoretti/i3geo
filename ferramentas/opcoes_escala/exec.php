@@ -17,7 +17,7 @@ Aplica novos par&acirc;metros na barra de escala atual.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_escala.php");
 		copiaSeguranca($map_file);
 		$m = new Escala($map_file);
-		$retorno = $m->mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor);
+		$retorno = $m->mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor,$status);
 		$_SESSION["contadorsalva"]++;
 	break;
 /*

@@ -112,6 +112,14 @@ i3GEOF.opcoesEscala = {
 	*/
 	html:function(){
 		var ins = '<table summary="" class=lista >' +
+			'<tr><td>'+$trad(14,i3GEOF.opcoesEscala.dicionario)+':</td><td>' +
+			'	<select id=i3GEOopcoesEscalastatus >' +
+			'		<option value=3 >'+$trad("x14")+'</option>' +
+			'		<option value=1 >'+$trad("x15")+'</option>' +
+			'		<option value=0 >---</option>' +
+			'	</select>' +
+			'<td></tr>' +
+			'<tr><td>&nbsp;</td><td></td></tr>' +
 			'<tr><td>Largura:</td><td>' +
 			$inputText("","","i3GEOopcoesEscalaw","",4,"") +
 			'</td></tr>' +
@@ -241,6 +249,7 @@ i3GEOF.opcoesEscala = {
 						eval(retorno.data);
 						$i("i3GEOopcoesEscalaw").value = w;
 						$i("i3GEOopcoesEscalah").value = h;
+						$i("i3GEOopcoesEscalastatus").value = status;
 						$i("i3GEOopcoesEscalaestilo").value = estilo;
 						$i("i3GEOopcoesEscalaintervalos").value = intervalos;
 						$i("i3GEOopcoesEscalaunidade").value = unidade;
@@ -267,6 +276,7 @@ i3GEOF.opcoesEscala = {
 		var par = "&w=" + $i("i3GEOopcoesEscalaw").value +
 		"&h=" + $i("i3GEOopcoesEscalah").value +
 		"&estilo=" + $i("i3GEOopcoesEscalaestilo").value +
+		"&status="+$i("i3GEOopcoesEscalastatus").value +
 		"&intervalos=" + $i("i3GEOopcoesEscalaintervalos").value +
 		"&unidade=" + $i("i3GEOopcoesEscalaunidade").value +
 		"&cor=" + $i("i3GEOopcoesEscalacor").value +
