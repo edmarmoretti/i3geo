@@ -161,156 +161,22 @@ MAP
 		IMAGEURL "/ms_tmp/"
 		TEMPLATE ""
 	END
-	
 
-	LAYER
+LAYER
 		DATA "/var/www/i3geo/aplicmap/dados/mundo"
-		GROUP "mundo"
-		METADATA
-			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda
-			"ITENS"	"FIPS_CNTRY,GMI_CNTRY,LONG_NAME,CNTRY_NAME" #itens que serao mostrados na opcao de identificacao
-			"ITENSDESC"	"FIPS,GMI,Nome,Wikipedia" #descricao dos nomes dos itens
-			"ITENSLINK" ",,,http://pt.wikipedia.org/wiki/[CNTRY_NAME]"
-			"TEMA"	"Países do mundo" #nome que sera mostrado na legenda
-			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
-			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
-			"cache" "sim"
-			"itembuscarapida" "LONG_NAME"
-		END
-		NAME "mundo"
+		NAME "mundot"
 		STATUS DEFAULT
 		TEMPLATE "none.htm"
 		TYPE POLYGON
 		CLASS
-			NAME "" #vazio indica que nao sera incluido o nome ao lado do simbolo
-			STYLE
-				COLOR 230 230 230
-				OUTLINECOLOR 255 255 255
-			END
-		END
-	END
-	#
-	#para mostrar o mapa do Brasil, remova os comentarios
-	#
-	#LAYER
-	#	DATA "/var/www/i3geo/aplicmap/dados/estados"
-	#	METADATA
-	#		"CLASSE"	"SIM"
-	#		"TEMA"	"Brasil"
-	#		"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
-	#		"IDENTIFICA" "nao"
-	#		"cache" "sim"
-	#		"EXTENSAO" "-97.911949 -39.413578 -8.185829 9.511159"
-	#	END
-	#	NAME "estados"
-	#	SIZEUNITS PIXELS
-	#	STATUS DEFAULT
-	#	TOLERANCE 0
-	#	TOLERANCEUNITS PIXELS
-	#	TRANSPARENCY 100
-	#	TYPE POLYGON
-	#	UNITS METERS
-	#	CLASS
-	#		NAME " "
-	#		STYLE
-	#			COLOR 232 220 201
-	#			MAXSIZE 100
-	#			MINSIZE 1
-	#			SIZE 1
-	#			SYMBOL 0
-	#		END
-	#	END
-	#END
-	#
-	#para mostrar os limites estaduais do Brasil, remova os comentarios
-	#
-	#LAYER
-	#  NAME estadosl # ok
-	#  TYPE line
-	#  STATUS DEFAULT
-	#  DATA "/var/www/i3geo/aplicmap/dados/estados"
-	#  TEMPLATE "estados.htm"
-	#  METADATA
-	#	  ITENS "ESTADO"
-	#	  ITENSDESC "Estado"
-	#  	  TEMA "Limite Estadual"
-	#	  ESCALA "250000"
-	#  	  CLASSE "SIM"
-	#	  cache "sim"
-	#  END
-	#  CLASS
-	#	  NAME " "
-	#	  STYLE
-	#		  WIDTH 2
-	#          COLOR 255 255 0
-	#          OUTLINECOLOR -1 -1 -1
-	#	  END
-	#	  STYLE
-	#          COLOR 0 0 0
-	#          OUTLINECOLOR -1 -1 -1
-	#	  END
-	#  END  # CLASS
-	#END  # LAYER
-
-
-	LAYER
-		METADATA
-			#"TEMA"	"NAO"
-			"ESCONDIDO" "SIM"
-			"cache" "sim"
-		END
-		NAME "copyright"
-		SIZEUNITS PIXELS
-		STATUS default
-		TOLERANCE 0
-		TOLERANCEUNITS PIXELS
-		TRANSFORM FALSE
-		TYPE ANNOTATION
-		UNITS METERS
-		CLASS
+			NAME ""
 			LABEL
-				SIZE TINY
-				TYPE BITMAP
-				BUFFER 0
-				COLOR 50 50 50
-				FORCE FALSE
-				MINDISTANCE -1
-				MINFEATURESIZE -1
-				OFFSET 0 0
-				PARTIALS TRUE
-				POSITION CC
-			END
+  COLOR  150 150 150
+  FONT "arial"
+  TYPE truetype
+  TEXT '[CNTRY_NAME]'
+  SIZE 10
+END
 		END
-		FEATURE
-			POINTS
-				10 5
-			END
-			TEXT "-    i3Geo"
-		END
-	END
-	LAYER
-		METADATA
-			"TEMA"	"Rosa dos ventos"
-			"IDENTIFICA" "nao"
-			"TABELA" "nao"
-
-		END
-		NAME "rosadosventos"
-		SIZEUNITS PIXELS
-		STATUS OFF
-		TOLERANCE 0
-		TOLERANCEUNITS PIXELS
-		TRANSFORM lr
-		TYPE POINT
-		UNITS pixels
-		CLASS
-			SYMBOL 'rosa200'
-			SIZE 90
-		END
-		FEATURE
-			POINTS
-				-70 -70
-			END
-		END
-	END
+	END	
 END

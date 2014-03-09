@@ -1,0 +1,26 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    DATA "/var/www/i3geo/aplicmap/dados/sc22/AEROPORTO_CAMPO_DE_POUSO.shp"
+    METADATA
+      "CLASSE"	"SIM"
+      "TEMA"	"Aeroportos SC22"
+    END
+    NAME "_cursoaeroporto"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 255 0 0
+        OUTLINECOLOR 0 0 0
+        SYMBOL 'ponto'
+        SIZE 15
+      END
+    END
+  END
+END
+

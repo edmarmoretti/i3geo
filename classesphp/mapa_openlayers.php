@@ -13,7 +13,7 @@ Precisa do codigo da "section" PHP aberta pelo i3Geo (veja ms_criamapa.php) ou o
 
 Parametros:
 
-g_sid {string} - código da "section" PHP
+g_sid {string} - cï¿½digo da "section" PHP
 
 telaR {string} - (opcional) utilizado para autorizar o uso do mapfile aberto (deve estar registrado em $fingerprint (vari&aacute;vel de se&ccedil;&atilde;o)
 
@@ -49,7 +49,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -87,6 +87,7 @@ if(isset($_GET["tms"])){
 	$_GET["BBOX"] = $lon1." ".$lat1." ".$lon2." ".$lat2;
 }
 $map_fileX = $_SESSION["map_file"];
+
 //
 //verifica se o request e OGC
 if(!empty($_GET["request"])){
@@ -116,6 +117,7 @@ if(isset($_GET["BBOX"])){
 	$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 }
 $_GET["TIPOIMAGEM"] = trim($_GET["TIPOIMAGEM"]);
+
 $mapa = ms_newMapObj($map_fileX);
 
 //
@@ -150,6 +152,7 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 				}
 			}
 		}
+
 		if($layerName == $_GET["layer"]){
 			if(strtolower($l->getmetadata("cache")) == "sim"){
 				$cache = true;
@@ -229,6 +232,7 @@ if(!isset($_GET["telaR"])){
 	$escala = $mapa->scalebar;
 	$escala->set("status",MS_OFF);
 }
+
 //
 //se o layer n&atilde;o for do tipo fundo
 //
@@ -281,6 +285,7 @@ else{
 	}
 	$cache = false;
 }
+
 //nao usa o cache pois e necessario processar a imagem com alguma rotina de filtro
 if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
 	if($img->imagepath == "")

@@ -29,10 +29,13 @@ body {
 		<div id=cabecalhoPrincipal></div>
 		<h1>Lista de templates para uso em aplica&ccedil;&otilde;es do sistema de metadados estat&iacute;sticos</h1>
 		<?php
-			$arqs = listaArquivos($locaplic.$metaestatTemplates)["arquivos"];
+			$arqs = listaArquivos($locaplic.$metaestatTemplates);
+			$arqs = $arqs["arquivos"];
 			foreach($arqs as $arq){
-				$nome = explode(".",$arq)[0];
-				$ext = explode(".",$arq)[1];
+				$nome = explode(".",$arq);
+				$nome = $nome[0];
+				$ext = explode(".",$arq);
+				$ext = $ext[1];
 				if($ext == "php"){
 					echo "<p>Nome do template: <i>$arq</i></p>";
 					$nomeimg = $locaplic.$metaestatTemplates."/".$nome.".png";
