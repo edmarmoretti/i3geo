@@ -60,5 +60,3 @@ psql -d i3geosaude -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"
 /usr/bin/pg_restore --host localhost --port 5432 --username "postgres" --dbname "i3geosaude" --no-password --schema-only --list "/tmp/databasei3geosaude.backup"
 
 /usr/bin/pg_restore --host localhost --port 5432 --username "postgres" --dbname "i3geosaude" --no-password --data-only --list "/tmp/databasei3geosaude.backup"
-
-exit
