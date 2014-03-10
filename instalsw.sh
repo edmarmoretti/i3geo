@@ -3,7 +3,7 @@ echo
 echo "instala as dependencias e i3geo em uma distribuicao nova"
 echo "nao rode em uma instalacao que ja contem o i3geo"
 echo "sudo ./instalasw.sh"
-echo "wget http://edmarmoretti.com.br/i3geo/instalsw.sh
+echo "wget http://edmarmoretti.com.br/i3geo/instalsw.sh"
 
 echo "==============================================================="
 
