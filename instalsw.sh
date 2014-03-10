@@ -19,6 +19,8 @@ apt-get --assume-yes install libapache2-mod-php5 php5 php5-json php5-common php5
 
 apt-get --assume-yes install subversion
 
+apt-get clean
+
 svn checkout "http://svn.softwarepublico.gov.br/svn/i3geo/subgrupos/i3geo" /var/www --username i3geosaude --password i3geosaude --non-interactive
 
 cd /tmp
