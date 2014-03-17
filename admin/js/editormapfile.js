@@ -278,7 +278,7 @@ function montaNosRaiz(redesenha)
 		}
 		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />";
 		if(iconePlus)
-		{conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma cópia' src=\"../imagens/clonar.png\" />";}
+		{conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma copia' src=\"../imagens/clonar.png\" />";}
 		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o chache de imagens se houver' src=\"../imagens/limparcache.png\" />";
 		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />";
 		if(iconePlus){
@@ -837,39 +837,43 @@ function classesAuto(codigoMap,codigoLayer)
 			core_carregando("ativa");
 			core_carregando(" gerando as classes");
 			var sUrl = "../php/editormapfile.php?funcao=autoClassesLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&itemExpressao="+itemExpressao+"&itemNome="+itemNome;
-			var callback2 =
-			{
-					success:function(o)
-					{
-						try
-						{
-						var dados = YAHOO.lang.JSON.parse(o.responseText);
-						var nos = tree.getNodesByProperty("classes",codigoMap+"_"+codigoLayer);
-						if(nos){
-							for (var i=0, j=nos.length; i<j; i++)
-							{tree.removeNode(nos[i],false);}
-						}
-						var no = tree.getNodeByProperty("etiquetaClasses",codigoMap+"_"+codigoLayer);
-						montaParametrosTemas(no,dados);
+			var callback2 = {
+					success:function(o) {
+						try {
+							var dados = YAHOO.lang.JSON.parse(o.responseText);
+							var nos = tree.getNodesByProperty("classes",codigoMap+"_"+codigoLayer);
+							if(nos){
+								//for (var i=0, j=nos.length; i<j; i++)
+								//{tree.removeNode(nos[i],false);}
+							}
+							//tree.draw();
+
+							var no = tree.getNodeByProperty("etiquetaClasses",codigoMap+"_"+codigoLayer);
+							nos.refresh();
+							//montaParametrosTemas(no,dados);
 							core_carregando("desativa");
-						YAHOO.admin.container.panelEditorAutoClasses.destroy();
-						YAHOO.admin.container.panelEditorAutoClasses = null;
+							YAHOO.admin.container.panelEditorAutoClasses.destroy();
+							YAHOO.admin.container.panelEditorAutoClasses = null;
+							//core_pegaMapfiles("montaArvore()");
 						}
-						catch(e){core_handleFailure(o,o.responseText);core_carregando("desativa");}
+						catch(e){
+							core_handleFailure(o,o.responseText);
+							core_carregando("desativa");
+							YAHOO.admin.container.panelEditorAutoClasses.destroy();
+							YAHOO.admin.container.panelEditorAutoClasses = null;
+						}
 					},
 					failure:core_handleFailure,
 					argument: { foo:"foo", bar:"bar" }
 			};
 			core_makeRequest(sUrl,callback2);
 		}
-		else
-		{
+		else{
 			YAHOO.admin.container.panelEditorAutoClasses.destroy();
 			YAHOO.admin.container.panelEditorAutoClasses = null;
 		}
 	};
-	if(!YAHOO.admin.container.panelEditorAutoClasses)
-	{
+	if(!YAHOO.admin.container.panelEditorAutoClasses){
 		var novoel = document.createElement("div");
 		novoel.id =  "janela_editor_auto";
 		var ins = '<div class="hd">Editor</div>';
@@ -884,14 +888,21 @@ function classesAuto(codigoMap,codigoLayer)
 		]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 		YAHOO.admin.container.panelEditorAutoClasses = new YAHOO.widget.Panel("janela_editor_auto", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		var fecha = function()
+		{
+			try{
+				YAHOO.admin.container.panelEditorAutoClasses.destroy();
+				YAHOO.admin.container.panelEditorAutoClasses = null;
+			}
+			catch(e){}
+		};
+		YAHOO.util.Event.addListener(YAHOO.admin.container.panelEditorAutoClasses.close, "click", fecha);		
+
 		YAHOO.admin.container.panelEditorAutoClasses.render();
 		var sUrl = "../php/editormapfile.php?funcao=pegaItensLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-		var callback =
-		{
-				success:function(o)
-				{
-					try
-					{
+		var callback = {
+				success:function(o)	{
+					try	{
 						var itens = core_comboObjeto(YAHOO.lang.JSON.parse(o.responseText).itens,"","","");
 						var ins = "<p>Item da tabela de atributos que ser&aacute; utilizado para compor a express&atilde;o de sele&ccedil;&atilde;o de cada classe</p>";
 						ins += "<select  id='itemExpressao' >";
@@ -2264,8 +2275,8 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 								if(d.name != codigoLayer)
 								{
 									core_pegaMapfiles("montaArvore()");
-								YAHOO.admin.container.panelEditor.destroy();
-								YAHOO.admin.container.panelEditor = null;
+									YAHOO.admin.container.panelEditor.destroy();
+									YAHOO.admin.container.panelEditor = null;
 								}
 							}
 							if(tipo=="classeGeral")
