@@ -21,7 +21,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -584,7 +584,7 @@ function: adicionaclasse
 
 Adiciona uma nova classe em um objeto layer
 
-A nova classe ser&aacute; uma cópia da classe 0.
+A nova classe ser&aacute; uma cï¿½pia da classe 0.
 */
 	function adicionaclasse()
 	{
@@ -755,24 +755,29 @@ function: inverteCoresClasses
 
 Inverte as cores da legenda de um tema.
 */
-	function inverteCoresClasses()
-	{
-		if(!$this->layer){return "erro";}
+	function inverteCoresClasses(){
+		if(!$this->layer){
+			return "erro";
+		}
 		$numclasses = $this->layer->numclasses;
-		for($i=0;$i<$numclasses;++$i)
-		{
+		$cor = array();
+		for($i=0;$i<$numclasses;++$i){
 			$classe = $this->layer->getclass($i);
 			$estilo = $classe->getstyle(0);
-			$cor[] = $estilo->color;
+			$c = $estilo->color;
+			$cor[] = array(
+				"r"=>($c->red),
+				"g"=>($c->green),
+				"b"=>($c->blue)
+			);
 		}
-		$c = 0;
-		for($i=($numclasses-1);$i>=0;$i--)
-		{
+		$cor = array_reverse($cor);
+		for($i=0;$i<$numclasses;++$i){
 			$classe = $this->layer->getclass($i);
+			$c = $cor[$i];
 			$estilo = $classe->getstyle(0);
 			$ncor = $estilo->color;
-			$ncor->setrgb($cor[$c]->red,$cor[$c]->green,$cor[$c]->blue);
-			$c++;
+			$ncor->setrgb($c["r"],$c["g"],$c["b"]);
 		}
 		$this->layer->setMetaData("cache","");
 		return("ok");
