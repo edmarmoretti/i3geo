@@ -519,7 +519,7 @@ i3GEO.arvoreDeTemas = {
 			node.loadComplete();
 		};
 		i3GEO.php.listaVariavel(monta);
-		//"codigo_variavel":"10","nome":"População residente","descricao":""
+		//"codigo_variavel":"10","nome":"Populaï¿½ï¿½o residente","descricao":""
 	},
 	/*
 	Lista as medidas de variaveis cadastradas no sistema METAESTAT
@@ -1494,7 +1494,7 @@ i3GEO.arvoreDeTemas = {
 				{
 					conteudo = "<a href='#' title='"+$trad("g2")+"' onclick='"+funcaoClick+"(\""+node.data.caminho+"/"+conteudo+"\")' >"+conteudo+"</a>";
 					if(retorno.data.urls && retorno.data.urls[ig] != ""){
-						conteudo += "&nbsp;<img src='"+i3GEO.configura.locaplic+"/.."+retorno.data.urls[ig]+"' style='height:20px;width:20px'/>";
+						//conteudo += "&nbsp;<img src='"+i3GEO.configura.locaplic+"/.."+retorno.data.urls[ig]+"' style='height:20px;width:20px'/>";
 					}
 					new YAHOO.widget.HTMLNode(
 						{isLeaf:true,enableHighlight:false,expanded:false,html:conteudo,caminho:node.data.caminho+"/"+conteudo},
