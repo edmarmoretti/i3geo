@@ -24,7 +24,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -109,7 +109,7 @@ Cria um objeto map e seta a variavel tema
 parameters:
 $map_file - Endere&ccedil;o do mapfile no servidor.
 
-$tema - nome do tema que ser&aacute; processado. (Pode ser uma lista separada por ',' mas só funciona nas fun&ccedil;&otilde;es que trabalham sobre os &iacute;ndices dos layers)
+$tema - nome do tema que ser&aacute; processado. (Pode ser uma lista separada por ',' mas sï¿½ funciona nas fun&ccedil;&otilde;es que trabalham sobre os &iacute;ndices dos layers)
 
 $locaplic - (opcional) endere&ccedil;o do i3geo
 
@@ -774,9 +774,9 @@ function: capturaGeometrias
 Captura as geometrias selecionadas e salva em um arquivo texto serializado (analise de geometrias).
 
 parameters:
-$dir_tmp - diretório tempor&aacute;rio do I3Geo
+$dir_tmp - diretï¿½rio tempor&aacute;rio do I3Geo
 
-$imgdir - diretório tempor&aacute;rio das imagens do mapa atual
+$imgdir - diretï¿½rio tempor&aacute;rio das imagens do mapa atual
 
 $nome - nome que ser&aacute; dado a geometria
 */
@@ -840,9 +840,9 @@ function: listaGeometrias
 Lista as geometrias arquivos com extens&atilde;o geo (an&aacute;lise de geometrias).
 
 parameters:
-$dir_tmp - diretório tempor&aacute;rio do I3Geo
+$dir_tmp - diretï¿½rio tempor&aacute;rio do I3Geo
 
-$imgdir - diretório tempor&aacute;rio das imagens do mapa atual
+$imgdir - diretï¿½rio tempor&aacute;rio das imagens do mapa atual
 */
 	function listaGeometrias($dir_tmp,$imgdir)
 	{
@@ -867,9 +867,9 @@ function: removerGeometrias
 Remove os arquivos correspondentes a determinadas geometrias (an&aacute;lise de geometrias).
 
 parameters:
-$dir_tmp - diretório tempor&aacute;rio do I3Geo
+$dir_tmp - diretï¿½rio tempor&aacute;rio do I3Geo
 
-$imgdir - diretório tempor&aacute;rio das imagens do mapa atual
+$imgdir - diretï¿½rio tempor&aacute;rio das imagens do mapa atual
 
 $lista - lista com os nomes dos arquivos
 */
@@ -939,7 +939,7 @@ Retorna o link para a fonte do tema.
 
 parameters:
 
-tema - código do tema
+tema - cï¿½digo do tema
 
 */
 	function fonteTema($tema)
@@ -1039,7 +1039,7 @@ Calcula a extens&atilde;o geogr&aacute;fica dos elementos selecionados de um tem
 /*
 function: sld
 
-Retorna o SLD correspondente à legenda do tema.
+Retorna o SLD correspondente ï¿½ legenda do tema.
 */
 	function sld()
 	{
@@ -1168,7 +1168,12 @@ Adiciona LABEL em uma classe de um tema
 	}
 	function removeLabel($iclasse){
 		$classe = $this->layer->getclass($iclasse);
-		$label = $classe->label;
+		if($this->vi >= 60200){
+			$label = $classe->getLabel(0);
+		}
+		else{
+			$label = $classe->label;
+		}
 		$label->set("type",MS_TRUETYPE);
 		$label->set("font","arial");
 		$label->set("size",0);
