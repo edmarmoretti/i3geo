@@ -80,6 +80,7 @@ Acrescenta a contagem de elementos em cada classe.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_legenda.php");
 		$m = new Legenda($map_file,$locaplic,$tema);
 		$r = $m->tabelaLegenda("sim");
+		$m->salva();
 		if (!$r){$r = "erro.Erro legenda nao disponivel";}
 		$retorno = $r;
 	break;

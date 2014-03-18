@@ -24,7 +24,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -167,14 +167,14 @@ Salva o mapfile atual
 */
 	function salva()
 	{
-			if (connection_aborted()){exit();}
-			$this->recalculaSLD();
+		if (connection_aborted()){exit();}
+		$this->recalculaSLD();
 		$this->mapa->save($this->arquivo);
 	}
 /*
 function: recalculaSLD
 
-Constrói o SLD que &eacute; aplicado ao metadata wms_sld_body. O SLD resultante &eacute; baseado nas defini&ccedil;&otilde;es das classes existentes no layer
+Constrï¿½i o SLD que &eacute; aplicado ao metadata wms_sld_body. O SLD resultante &eacute; baseado nas defini&ccedil;&otilde;es das classes existentes no layer
 */
 	function recalculaSLD(){
 		if($this->layer->classitem != "" && $this->layer->connectiontype == 7 && $this->layer->numclasses > 0){
@@ -300,8 +300,7 @@ array
 	function tabelaLegenda($totaliza="nao")
 	{
 		$linhas = array();
-		foreach ($this->visiveis as $l)
-		{
+		foreach ($this->visiveis as $l){
 			$layer = $this->mapa->getlayerbyname($l);
 			//verifica se &eacute; wms ou wfs
 			$c = $layer->connectiontype;
@@ -344,8 +343,7 @@ array
 			}
 			else
 			{
-				for ($c = 0;$c < $nc;$c++)
-				{
+				for ($c = 0;$c < $nc;$c++){
 					$classe = $layer->getclass($c);
 					$imgi = $classe->createlegendicon(30,15);
 					$classe->drawlegendicon(30,15,$imgi,5,5);
@@ -361,21 +359,18 @@ array
 					{$nomeexp = mb_convert_encoding($nomeexp,"UTF-8","ISO-8859-1");}
 					$linhas[] = array("tema"=>$l,"idclasse"=>$c,"nomeclasse"=>$nomeclasse,"expressao"=>$nomeexp,"imagem"=>$i,"proc"=>"");
 				}
-				if (($totaliza=="sim") && ($nc > 1))
-				{
+				if (($totaliza=="sim") && ($nc > 1)){
 					$layer->set("template","none.htm");
 					$sopen = $layer->open();
 					if($sopen == MS_FAILURE){return "erro";}
 					$itens = $layer->getitems();
 					$total = 0;
 					$nreg = array();
-					for ($c = 0;$c < $nc;$c++)
-					{
-						$exp = $linhas[$c]["expressao"];
-						if($exp !== "")
-						{
-							if($this->layer->connectiontype == MS_POSTGIS)
-							{
+					for ($c = 0;$c < $nc;$c++){
+						$exp = $linhas[$c];
+						$exp = $exp["expressao"];
+						if($exp !== ""){
+							if($this->layer->connectiontype == MS_POSTGIS){
 								$exp = str_replace("eq"," = ",$exp);
 								$exp = str_replace("ne"," != ",$exp);
 								$exp = str_replace("lt"," < ",$exp);
@@ -393,31 +388,35 @@ array
 							}
 							$teste = $layer->queryByAttributes($itens[0], $exp, 1);
 						}
-						else
-						{$teste = 0;}
-						if ($teste == 0)
-						{
+						else{
+							$teste = 0;
+						}
+						if ($teste == 0){
 							$n = $layer->getNumResults();
 							$nreg[] = $n;
 						}
-						else {$nreg[] = "erro";}
+						else {
+							$nreg[] = "erro";
+						}
 						$total = $total + $n;
 					}
 					$layer->close();
-					for ($c = 0;$c < $nc;$c++)
-					{
-						$linhas[$c]["nomeclasse"] = $linhas[$c]["nomeclasse"]." - n=".$nreg[$c]."(".(round(($nreg[$c] * 100 / $total)))."%)";
+					for ($c = 0;$c < $nc;$c++){
+						$classe = $layer->getclass($c);
+						$nome = $linhas[$c]["nomeclasse"]." - n=".$nreg[$c]."(".(round(($nreg[$c] * 100 / $total)))."%)";
+						$classe->set("name",$nome);
+						$linhas[$c]["nomeclasse"] = $nome;
 						$linhas[$c]["nreg"] = $nreg[$c];
 						$linhas[$c]["totalreg"] = $total;
 					}
 				}
-				if ($layer->type == MS_LAYER_RASTER && $nc == 1)
-				{
+				if ($layer->type == MS_LAYER_RASTER && $nc == 1){
 					$proc = "";
 					$linhas = array();
-					if($layer->num_processing > 0){$proc = $layer->getProcessing();}
-					if($layer->type == MS_LAYER_RASTER && $proc == "")
-					{
+					if($layer->num_processing > 0){
+						$proc = $layer->getProcessing();
+					}
+					if($layer->type == MS_LAYER_RASTER && $proc == ""){
 						$proc = array("RESAMPLE=NEAREST");
 					}
 					$linhas[] = array("tema"=>$l,"idclasse"=>"","nomeclasse"=>"","expressao"=>"","imagem"=>"","proc"=>$proc);
@@ -503,9 +502,9 @@ parameters:
 
 $tipo - Tipo de representa&ccedil;&atilde;o do s&iacute;mbolo, 0 pontos, 1 linhas e 2 pol&iacute;gonos.
 
-$dir_tmp - Diretório tempor&aacute;rio do mapserver.
+$dir_tmp - Diretï¿½rio tempor&aacute;rio do mapserver.
 
-$imgdir - Diretório tempor&aacute;rio das imagens.
+$imgdir - Diretï¿½rio tempor&aacute;rio das imagens.
 
 $onclick - Fun&ccedil;&atilde;o que ser&aacute; inclu&iacute;da no HTML no evento onclick sobre o s&iacute;mbolo
 
@@ -832,7 +831,7 @@ $width
 
 	$map_file {string} - arquivo map_file
 
-	$tema {string} - código do tema
+	$tema {string} - cï¿½digo do tema
 
 	$sld {string} - arquivo onde o sld ser&aacute; gravado
 	*/
