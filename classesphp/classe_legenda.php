@@ -174,7 +174,7 @@ Salva o mapfile atual
 /*
 function: recalculaSLD
 
-Constr�i o SLD que &eacute; aplicado ao metadata wms_sld_body. O SLD resultante &eacute; baseado nas defini&ccedil;&otilde;es das classes existentes no layer
+Constroi o SLD que &eacute; aplicado ao metadata wms_sld_body. O SLD resultante &eacute; baseado nas defini&ccedil;&otilde;es das classes existentes no layer
 */
 	function recalculaSLD(){
 		if($this->layer->classitem != "" && $this->layer->connectiontype == 7 && $this->layer->numclasses > 0){

@@ -47,7 +47,7 @@ i3GEOF.legenda = {
 	/*
 	Variavel: parDefault
 
-	Parâmetros padr&atilde;o utilizados para formatar os labels
+	Parï¿½metros padr&atilde;o utilizados para formatar os labels
 	*/
 	parDefault: "&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
 	/*
@@ -89,13 +89,13 @@ i3GEOF.legenda = {
 	/*
 	Variavel: estilo
 
-	Último estilo selecionado
+	ï¿½ltimo estilo selecionado
 	*/
 	estilo: "",
 	/*
 	Variavel: classe
 
-	Última classe selecionado
+	ï¿½ltima classe selecionado
 	*/
 	classe: "",
 	/*
@@ -435,7 +435,13 @@ i3GEOF.legenda = {
 		'		<p class=paragrafo style="font-size:10px;">'+$trad(53,i3GEOF.legenda.dicionario)+'<br></p>'+
 		'		<div id="i3GEOlegendacomboestilos" style="position:relative;top:0px;left:0px;text-align:left">'+
 		'		</div>'+
-		'		<br><p class=paragrafo style="font-size:10px" ><input id=i3GEOlegendabotao10 size="35" type="button" value="'+$trad(54,i3GEOF.legenda.dicionario)+'"></p>'+
+		"       <input id=i3GEOlegendabotao11 class=executar size=10 type=button value='"+$trad(49,i3GEOF.legenda.dicionario)+"' />" +
+		"       &nbsp;<input id=i3GEOlegendabotao12 class=executar size=14 type=button value='"+$trad(50,i3GEOF.legenda.dicionario)+"' />" +
+		"       &nbsp;<input id=i3GEOlegendabotao13 class=executar size=8 type=button value='"+$trad(65,i3GEOF.legenda.dicionario)+"' />" +
+		"       &nbsp;<input id=i3GEOlegendabotao14 class=executar size=8 type=button value='"+$trad(66,i3GEOF.legenda.dicionario)+"' />" +
+		'		<div id="i3GEOlegendaParametrosEstilos" style="position:relative;top:10px;left:0px;text-align:left">'+
+		'		</div>'+
+		'		<br><br><p class=paragrafo style="font-size:10px" ><input id=i3GEOlegendabotao10 size="35" type="button" value="'+$trad(54,i3GEOF.legenda.dicionario)+'"></p>'+
 		'		<div style="position:relative;top:0px;left:0px;text-align:left;" id="i3GEOlegendamostraEstilo">'+
 		'		</div>'+
 		'		<div style="position:relative;top:0px;left:0px;text-align:left;" id="i3GEOlegendasimbolos">'+
@@ -635,7 +641,7 @@ i3GEOF.legenda = {
 	/*
 	Function: aplicaColourRamp
 
-	Aplica às classes da legenda as cores escolhidas no seletor de cores
+	Aplica ï¿½s classes da legenda as cores escolhidas no seletor de cores
 	*/
 	aplicaColourRamp: function(){
 		if($i("listaColourRamp").value != ""){
@@ -1228,11 +1234,7 @@ i3GEOF.legenda = {
 					combo += sct;
 				}
 				combo += "</select>";
-				botoes = "<input id=i3GEOlegendabotao11 class=executar size=10 type=buttom value='"+$trad(49,i3GEOF.legenda.dicionario)+"' />";
-				botoes += "&nbsp;<input id=i3GEOlegendabotao12 class=executar size=14 type=buttom value='"+$trad(50,i3GEOF.legenda.dicionario)+"' />";
-				botoes += "&nbsp;<input id=i3GEOlegendabotao13 class=executar size=8 type=buttom value='"+$trad(65,i3GEOF.legenda.dicionario)+"' />";
-				botoes += "&nbsp;<input id=i3GEOlegendabotao14 class=executar size=8 type=buttom value='"+$trad(66,i3GEOF.legenda.dicionario)+"' />";
-				$i("i3GEOlegendacomboestilos").innerHTML = "<table class='lista5'><tr><td><span class=paragrafo >"+$trad(82,i3GEOF.legenda.dicionario)+":</span></td><td>"+combo+"</td><td>"+botoes+"</td></tr></table>&nbsp;(p&oacute;s adicionar ou excluir, aplique a altera&ccedil;&atilde;o)<br><br>";
+				$i("i3GEOlegendacomboestilos").innerHTML = "<table class='lista5'><tr><td><span class=paragrafo >"+$trad(82,i3GEOF.legenda.dicionario)+":</span></td><td>"+combo+"</td><td></td></tr></table>&nbsp;(ap&oacute;s adicionar ou excluir, aplique a altera&ccedil;&atilde;o)<br><br>";
 				new YAHOO.widget.Button(
 					"i3GEOlegendabotao11",{onclick:{fn: function(){
 						try{
@@ -1342,7 +1344,7 @@ i3GEOF.legenda = {
 			"<tr><td style='text-align:left;'>"+$trad(90,i3GEOF.legenda.dicionario)+":</td><td>"+
 			$inputText("","","i3GEOlegendasymbolname","",12,linha[5]) +
 			"</td><td></td></tr></table>";
-			$i("i3GEOlegendacomboestilos").innerHTML += d;
+			$i("i3GEOlegendaParametrosEstilos").innerHTML = d;
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&tipo="+tipoLayer+"&opcao=listaSimbolos&onclick=i3GEOF.legenda.aplicaSimbolo(this)";
 			cp = new cpaint();
 			cp.set_response_type("JSON");
