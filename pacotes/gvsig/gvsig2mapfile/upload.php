@@ -31,14 +31,16 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 		if(!file_exists($base))
 		{$base = $locaplic."/aplicmap/".$base;}
 	}
+	
 	$mapn = ms_newMapObj($base);
 
 	//echo "<p>Carregando o arquivo...</p>";
 	//verifica nomes
-	verificaNome($_FILES['i3GEOuploadfile']['name']);
+	$upl = $_FILES['i3GEOuploadfile'];
+	verificaNome($upl['name']);
 	//sobe arquivo
-	$Arquivo = $_FILES['i3GEOuploadfile']['tmp_name'];
-	$Arquivon = $dir_tmp."/".$_FILES['i3GEOuploadfile']['name'];
+	$Arquivo = $upl['tmp_name'];
+	$Arquivon = $dir_tmp."/".$upl['name'];
 	$status =  move_uploaded_file($Arquivo,$Arquivon);
 	if($status != 1)
 	{ob_clean();echo "Ocorreu um erro no envio do arquivo";exit;}

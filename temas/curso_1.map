@@ -8,22 +8,37 @@ MAP
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	""
       "CLASSE"	"SIM"
+      "olopacity"	""
+      "permitekmz"	""
+      "gmopacity"	""
+      "gmstatus"	""
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "arquivotemaoriginal"	""
+      "nomeoriginal"	""
+      "olstatus"	""
+      "permitedownload"	""
       "metaestat"	""
-      "TEMA"	"Teste do curso"
+      "permitekml"	""
+      "permiteogc"	""
       "convcaracter"	""
+      "TEMA"	"Teste do curso"
     END # METADATA
     NAME "curso_1"
-    STATUS OFF
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
     TEMPLATE "none.htm"
+    TILEITEM "location"
     TYPE POLYGON
     UNITS METERS
     CLASS
       NAME ""
       STYLE
-        COLOR 0 0 0
+        COLOR 0 255 0
+        OUTLINECOLOR 0 0 0
         SIZE 12
       END # STYLE
+      TITLE ""
     END # CLASS
   END # LAYER
 

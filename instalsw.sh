@@ -11,7 +11,7 @@ apt-get --assume-yes install apache2 apache2-doc apache2-utils
 
 apt-get --assume-yes install cgi-mapserver mapserver-bin
 
-apt-get --assume-yes install postgresql postgis postgresql-9.1-postgis
+apt-get --assume-yes install postgresql postgis postgresql-9.1-postgis pgadmin3
 
 apt-get --assume-yes install sqlite
 
@@ -41,28 +41,25 @@ ln -s /tmp/ms_tmp /var/www/ms_tmp
 
 chmod -R u=rw,g=rw,o=rw /var/www/ms_tmp
 
-su postgres
+su postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD 'postgres'\""
 
-psql
+su postgres -c "createdb i3geosaude"
 
-ALTER USER postgres WITH PASSWORD ‘postgres’; \q
+su postgres -c "createlang -d i3geosaude plpgsql"
 
-createdb -E UTF8 i3geosaude
+su postgres -c "psql -d i3geosaude -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql"
 
-createlang -d i3geosaude plpgsql
+su postgres -c "psql -d i3geosaude -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql"
 
-psql -d i3geosaude -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
+su postgres -c "psql -d i3geosaude -c 'GRANT ALL ON geometry_columns TO PUBLIC;'"
 
-psql -d i3geosaude -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql
+su postgres -c "psql -d i3geosaude -c 'GRANT ALL ON geography_columns TO PUBLIC;'"
 
-psql -d i3geosaude -c "GRANT ALL ON geometry_columns TO PUBLIC;"
+su postgres -c "psql -d i3geosaude -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'"
 
-psql -d i3geosaude -c "GRANT ALL ON geography_columns TO PUBLIC;"
+/usr/bin/pg_restore --host localhost --port 5432 --username "postgres" --dbname "i3geosaude" --no-password --schema-only --list "/var/www/databasei3geosaude.backup"
 
-psql -d i3geosaude -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"
+/usr/bin/pg_restore --host localhost --port 5432 --username "postgres" --dbname "i3geosaude" --no-password --data-only --list "/var/www/databasei3geosaude.backup"
 
-/usr/bin/pg_restore --host localhost --port 5432 --username "postgres" --dbname "i3geosaude" --no-password --schema-only --list "/tmp/temp/databasei3geosaude.backup"
-
-/usr/bin/pg_restore --host localhost --port 5432 --username "postgres" --dbname "i3geosaude" --no-password --data-only --list "/tmp/temp/databasei3geosaude.backup"
 
 rm -Rf /tmp/temp
