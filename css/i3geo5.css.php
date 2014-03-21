@@ -1870,6 +1870,15 @@ top: 5px;
 right: 0px;
 text-align:left;
 }
+.cabecalhoTemas {
+display: inline-block;
+overflow: hidden;
+white-space: nowrap;
+width: 10em;
+text-overflow: ellipsis;
+text-align: left;
+line-height: 8px;
+}
 .yui-panel-container .yui-resizepanel .bd {
 overflow: auto;
 background-color: #fff;

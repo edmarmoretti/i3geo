@@ -1,3 +1,13 @@
+.cabecalhoTemas {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 10em;
+    text-overflow: ellipsis;
+    text-align: left;
+    line-height: 8px;
+}
+
 .yui-panel-container .yui-resizepanel .bd {
 
 		overflow: auto;

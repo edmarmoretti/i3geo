@@ -218,7 +218,7 @@ i3GEO.janela = {
 
 	modal {Boolean} - (opcional) indica se a janela bloquear&aacute; as inferiores ou n&atilde;o. Por default &eacute; false
 
-	classe {String} - (opcional) classe CSS que ser&aacute; aplicada à barra de menu. Por default o valor &eacute; hd2. Na interface Google Earth, esse valor &eacute; sempre alterado para "hd".
+	classe {String} - (opcional) classe CSS que ser&aacute; aplicada ï¿½ barra de menu. Por default o valor &eacute; hd2. Na interface Google Earth, esse valor &eacute; sempre alterado para "hd".
 
 	funcaoCabecalho {function} - (opcional) funcao que ser&aacute; executada quando o usu&aacute;rio clicar no cabecalho
 
@@ -251,7 +251,7 @@ i3GEO.janela = {
 			for(i=0;i<this.ANTESCRIA.length;i++)
 			{eval(this.ANTESCRIA[i]);}
 		}
-		//define os parâmetros default
+		//define os parï¿½metros default
 		if(!classe || classe == "")
 		{classe = "hd";}
 		if(!id || id === "")
@@ -1014,9 +1014,12 @@ i3GEO.janela = {
 
 					if(i3GEO.temaAtivo != ""){
 						tema = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
-						botao.set("label", tema.tema+"&nbsp;&nbsp;");
+						botao.set("label", "<span class='cabecalhoTemas' >" + tema.tema + "</span>&nbsp;&nbsp;");
 					}
-					//botao.setStyle("width","150px");
+					else{
+						botao.set("label", "<span class='cabecalhoTemas' >" + $trad("x92") + "</span>&nbsp;&nbsp;");
+					}
+					//botao.setStyle("line-height","1.1");
 					//alert(botao.get("value"))
 					onButtonClick = function (p_sType, p_aArgs) {
 						//var oEvent = p_aArgs[0],	//	DOM event
@@ -1025,7 +1028,7 @@ i3GEO.janela = {
 						if (oMenuItem) {
 							if(oMenuItem.value != ""){
 								i3GEO.mapa.ativaTema(oMenuItem.value);
-								botao.set("label", oMenuItem.cfg.getProperty("text")+"&nbsp;&nbsp;");
+								botao.set("label", "<span class='cabecalhoTemas' >" + oMenuItem.cfg.getProperty("text") + "</span>&nbsp;&nbsp;");
 
 								if(i3GEOF[ferramenta]){
 									i3GEOF[ferramenta].tema = oMenuItem.value;

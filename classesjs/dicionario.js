@@ -5,7 +5,7 @@ g_traducao = {
 pt:"O i3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blank >aqui</a>. <b><a href='http://"+window.location.host+"/i3geo/mobile/qrcode.htm' target=blank >Qrcode mobile</a></b>",
 en:"I3geo is a open source software! <a href='http://mapas.mma.gov.br/download' target=blank >Click</a> to download.",
 es:"I3Geo es software libre!. <a href='http://mapas.mma.gov.br/download' target=blank > Descargar</a>",
-it:"I3geo è un software libero! <a href='http://mapas.mma.gov.br/download' target=blank >clicca qui </a> per il download."
+it:"I3geo ï¿½ un software libero! <a href='http://mapas.mma.gov.br/download' target=blank >clicca qui </a> per il download."
 }],
 //lista de propriedades do mapa
 "p2": [
@@ -90,7 +90,7 @@ it:"Temporizzazione"
 pt: "Propriedades",
 en:"Properties",
 es:"Propiedades",
-it:"Proprietà"
+it:"Proprietï¿½"
 }],
 "p14": [
 {
@@ -182,7 +182,7 @@ it:"Archivio"
 pt: "Propriedades",
 en:"Properties",
 es:"Propiedades",
-it:"Proprietà"
+it:"Proprietï¿½"
 }],
 //submenus
 "u1": [
@@ -471,7 +471,7 @@ it:"Abre a legenda do mapa"
 pt:"Clique para ligar ou desligar esse tema, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.",
 en:"Click to enable or disable this theme, showing it or not on the map. After changing the status of the theme, wait a few moments to get the map to be reloaded, or click the Apply button that will be display.",
 es:"Haga clic para activar o desactivar este tema, mostr&aacute;ndolo o no en el mapa. Despu&eacute;s de cambiar el estado del tema, espere algunos instantes para que el mapa sea recargado, o haga clic en el bot&oacute;n aplicar que se mostrar&aacute;.",
-it:"Fare clic per attivare o disattivare questo tema. Dopo aver modificato lo stato del tema, La mappa aggiornata sarà visualizzata dopo qualche istante. Per visualizzare subito cliccare su Applica"
+it:"Fare clic per attivare o disattivare questo tema. Dopo aver modificato lo stato del tema, La mappa aggiornata sarï¿½ visualizzata dopo qualche istante. Per visualizzare subito cliccare su Applica"
 }],
 "t3a":[
 {
@@ -542,21 +542,21 @@ it:"Trascina per modificare l'ordine"
 pt:"A escala do tema &eacute; compat&iacute;vel com a escala do mapa",
 en:"The scale of the theme is compatible with the scale of the map",
 es:"La escala del tema es compatible con la escala del mapa",
-it:"La scala del tema è compatibile con la scala della mappa"
+it:"La scala del tema ï¿½ compatibile con la scala della mappa"
 }],
 "t10":[
 {
 pt:"A escala do tema &eacute incompat&iacute;vel com a escala do mapa",
 en:"The scale of the theme is incompatible with the scale of the map",
 es:"La escala del tema es incompatible con la escala del mapa",
-it:"La scala del tema è incompatibile con la scala della mappa"
+it:"La scala del tema ï¿½ incompatibile con la scala della mappa"
 }],
 "t11":[
 {
 pt:"A escala do tema n&atilde;o &eacute conhecida",
 en:"The scale of the layer is unknown",
 es:"La escala del tema no es conocida",
-it: "La scala del tema non è conosciuta"
+it: "La scala del tema non ï¿½ conosciuta"
 }],
 "t12":[
 {
@@ -584,7 +584,7 @@ it:"Mettere sopra "
 pt:"Clique para subir esse tema na ordem de desenho",
 en:"Click to move up the layer in design order",
 es:"Haga clic para subir ese tema en la orden de dise&ntilde;o",
-it:"Clicca per sollevare questo tema nell’ordine di progettazione"
+it:"Clicca per sollevare questo tema nellï¿½ordine di progettazione"
 }],
 "t15":[
 {
@@ -598,7 +598,7 @@ it:"scendere"
 pt:"Clique para descer esse tema na ordem de desenho",
 en:"Click to move down the layer in design order",
 es:"Haga clic para bajar este tema en la orden de dise&ntilde;o",
-it:"Clicca per scendere questo tema nell’ordine di progettazione."
+it:"Clicca per scendere questo tema nellï¿½ordine di progettazione."
 }],
 "t17":[
 {
@@ -633,14 +633,14 @@ it:"Legenda"
 pt:"Altera a transpar&ecirc;ncia do tema, possibilitando que as camadas inferiores possam ser vistas.",
 en:"Change the layer transparency. It make possible to see inferior layers",
 es:"Altera la transparencia del tema, haciendo posible que las capas inferiores puedan verse",
-it:"Modifica la trasparenza del tema, consentendo che gli strati più bassi siano visti"
+it:"Modifica la trasparenza del tema, consentendo che gli strati piï¿½ bassi siano visti"
 }],
 "t20":[
 {
 pt:"Opacidade",
 en:"Opacity",
 es:"Opacidad",
-it:"Opacità"
+it:"Opacitï¿½"
 }],
 "t21a":[
 {
@@ -949,7 +949,7 @@ it:"Temi"
 pt:"Clique no box ao lado do tema para ligar ou desligar, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.",
 en:"Click to connect or disconnect this layer, showing it or not on the map. After changing the layer status, wait a few moments to be reloaded on the map, or click in the button Apply that will be shown.",
 es:"Haga clic para conectar o desconectar este tema, mostr&aacute;ndolo o no en el mapa. Despu&eacute;s de alterar el estado del tema, espere algunos instantes para que el mapa sea recargado, o haga clic en el bot&oacute;n aplicar que aparecer&aacute;",
-it:"Clicca sulla casella accanto al tema per attivare o disattivare, mostrandolo o meno sulla mappa. Dopo aver modificato lo stato del tema, attendere qualche istante per vedere ridisegnata la mappa, oppure fare clic sul pulsante Applica, che verrà visualizzato."
+it:"Clicca sulla casella accanto al tema per attivare o disattivare, mostrandolo o meno sulla mappa. Dopo aver modificato lo stato del tema, attendere qualche istante per vedere ridisegnata la mappa, oppure fare clic sul pulsante Applica, che verrï¿½ visualizzato."
 }],
 "a9":[
 {
@@ -1120,7 +1120,7 @@ it:"enquadramento inicial"
 pt:"Amplia o mapa - desloca o ponto clicado para centro da tela ou amplia a regi&atilde;o indicada por um ret&acirc;ngulo. Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa na &aacute;rea de zoom desejada.",
 en:"Extends the map - places the point where you clicked in the center of the screen or extends to the region indicated by a rectangle. Once activated, click and drag the mouse over the map in the desired zoom area",
 es:"Ampl&iacute;a el mapa - coloca el punto donde se hizo clic en el centro de la pantalla o ampl&iacute;a a la regi&oacute;n indicada con un rect&aacute;ngulo. Despu&eacute;s de activarla, haga clic y arrastre el rat&oacute;n sobre el mapa en el &aacute;rea de zoom deseada",
-it:"Ampliare la mappa - pone il punto cliccato nel centro dello schermo o ingrandisce la regione indicata con un rettangolo. Dopo aver attivata, cliccare e trascinare il mouse sopra la mappa nell’area di zoom desiderata."
+it:"Ampliare la mappa - pone il punto cliccato nel centro dello schermo o ingrandisce la regione indicata con un rettangolo. Dopo aver attivata, cliccare e trascinare il mouse sopra la mappa nellï¿½area di zoom desiderata."
 }],
 "d3t":[
 {
@@ -1351,21 +1351,21 @@ it:"reinicia"
 pt:"Mede a dist&acirc;ncia entre dois ou mais pontos clicados no mapa (menor dist&acirc;ncia). O c&aacute;lculo de dist&acirc;ncia &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
 en:"It measures the distance between two or more clicked points on the map (shortest distance). The calculation of distance is approximate and their accuracy depends on the scale of the map.",
 es:"Mide la distancia entre dos o m&aacute;s puntos marcados en el mapa (menor distancia). El c&aacute;lculo de distancia es aproximado y su precisi&oacute;n depende de la escala del mapa.",
-it:"Misura la distanza tra due o più punti cliccati sulla mappa (minore distanza). Il calcolo della distanza è approssimativo e la sua precisione dipende dalla scala della mappa."
+it:"Misura la distanza tra due o piï¿½ punti cliccati sulla mappa (minore distanza). Il calcolo della distanza ï¿½ approssimativo e la sua precisione dipende dalla scala della mappa."
 }],
 "d21t":[
 {
-pt:"distância",
+pt:"distï¿½ncia",
 en:"distance",
 es:"distancia",
-it:"distância"
+it:"distï¿½ncia"
 }],
 "d21a":[
 {
 pt:"Mede a &aacute;rea de um pol&iacute;gono desenhado na tela. O c&aacute;lculo de &aacute;rea &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
 en:"It measures the area of a polgono drawn on the screen. The calculation of area is approximate and their accuracy depends on the scale of the map.",
 es:"Mide el &aacute;rea de un pol&iacute;gono dibujado sobre la pantalla. El c&aacute;lculo del &aacute;rea es aproximado y su precisi&oacute;n depende de la escala del mapa.",
-it:"Misura l'area di un poligono tracciato sullo schermo. Il calcolo della superficie è approssimativo e la sua precisione dipende dalla scala della mappa."
+it:"Misura l'area di un poligono tracciato sullo schermo. Il calcolo della superficie ï¿½ approssimativo e la sua precisione dipende dalla scala della mappa."
 }],
 "d21at":[
 {
@@ -1379,7 +1379,7 @@ it:"&aacute;rea"
 pt:"Insere pontos no mapa em coordenadas geogr&aacute;ficas. Ospontos inclu&iacute;dos podem ser transformados em linhas ou pol&iacute;gonos. Os pontos s&atilde;o armazenados em um tema tempor&aacute;rio, podendo-se fazer o download do arquivo shapefile.",
 en:"Insert points on the map in geographical coordinates. The points included can be converted into lines or polygons. The points are stored in a temporary layer, and we can download it like shapefile.",
 es:"Inserte puntos en el mapa en coordenadas geogr&aacute;ficas. Los puntos incluidos pueden transformarse en l&iacute;neas o pol&iacute;gonos. Los puntos se almacenan en un tema temporal, pudiendo hacerse la descarga en formato de archivo shape.",
-it:"Inserire punti sulla mappa in coordinate geografiche. I punti inseriti possono essere trasformati in linee o poligoni. I punti vengono memorizzati in un tema temporaneo, con la possibilità di effettuare il download del file Shapefile."
+it:"Inserire punti sulla mappa in coordinate geografiche. I punti inseriti possono essere trasformati in linee o poligoni. I punti vengono memorizzati in un tema temporaneo, con la possibilitï¿½ di effettuare il download del file Shapefile."
 }],
 "d22t":[
 {
@@ -1714,7 +1714,7 @@ it:"Method to calculate distances"
 {
 pt:"Voce quer mesmo encerrar a sessao?",
 en:"Do you really want to logout?",
-es:"¿Realmente desea salir?",
+es:"ï¿½Realmente desea salir?",
 it:""
 }],
 "x27":[
@@ -1756,7 +1756,7 @@ it:""
 {
 pt:"Recuperar senha",
 en:"Send password",
-es:"Enviar la contraseña",
+es:"Enviar la contrasena",
 it:""
 }],
 "x33":[
@@ -2020,7 +2020,7 @@ it:""
 }],
 "x69":[
 {
-pt:"Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea que será aproximada",
+pt:"Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea que serï¿½ aproximada",
 en:"",
 es:"",
 it:""
@@ -2176,6 +2176,13 @@ it:""
 "x91":[
 {
 pt:"Feche para parar. Desligue o tema para ver o efeito",
+en:"",
+es:"",
+it:""
+}],
+"x92":[
+{
+pt:"Escolha uma camada",
 en:"",
 es:"",
 it:""
