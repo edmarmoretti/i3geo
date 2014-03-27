@@ -929,7 +929,7 @@ i3GEO.mapa = {
 				}
 				if(targ.parentNode){
 					container = targ.parentNode.id;
-					alert(container);
+					//alert(container);
 				}
 
 			}
