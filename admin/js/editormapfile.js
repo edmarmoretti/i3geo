@@ -1521,7 +1521,8 @@ function montaEditorEditavel(dados)
 			titulo:"Coluna com geometria edit&aacute;vel",id:"",value:"",tipo:"text",div:"<div id=cColunageometriatabelaeditavel ></div>" }
 		]
 		},
-		ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	ins += "<p>Obs.: Apenas temas baseados em Postgis podem ser editados</p>";
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
@@ -1618,7 +1619,7 @@ function montaEditorDados(dados)
 	if($i("cConnection")){
 		temp = "";
 		if(dados.postgis_mapa.length > 0){
-			temp += "<p class=paragrafo >Os seguintes 'alias' est&atilde;o definidos em ms_configura como nomes de conex&otilde;es: ";
+			temp += "<p class=paragrafo >Os seguintes 'alias' est&atilde;o definidos em ms_configura como nomes de conex&otilde;es e podem ser utilizados aqui no lugar da string completa: ";
 			temp += "<b>"+dados.postgis_mapa+"</b>. Para definir um novo, &eacute; necess&aacute;rio editar o arquivo i3geo/ms_configura.php, consulte o administrador do servidor";
 			temp += "</p>";
 		}
@@ -2181,8 +2182,10 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 		var valorTeste = $i("escala").value;
 		if(valorTeste != ""){
 			var teste1 = valorTeste * 1;
-			if(teste1 <= 0){}
-			{alert("Valor de escala incorreto");return;}
+			if(teste1 <= 0){
+				alert("Valor de escala incorreto");
+				return;
+			}
 		}
 
 		campos = new Array("name","tema","iconetema","mensagem","escala","extensao","group");

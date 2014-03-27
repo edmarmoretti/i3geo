@@ -1180,7 +1180,7 @@ function criarNovoMap()
 		$dados[] = "SYMBOLSET ../symbols/simbolosv6.sym";
 		$dados[] = 'FONTSET   "../symbols/fontes.txt"';
 		$dados[] = "LAYER";
-		$dados[] = "	NAME $codigo";
+		$dados[] = '	NAME "'.$codigo.'"';
 		$dados[] = '	TEMPLATE "none.htm"';
 		if(!empty($metaestat) && $metaestat == "SIM"){
 			$dados[] = '	CONNECTIONTYPE POSTGIS';
@@ -1372,6 +1372,7 @@ function pegaLayers()
 	global $codigoMap,$locaplic,$esquemaadmin;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	//echo $mapfile;exit;
 	$mapa = ms_newMapObj($mapfile);
 	$layers = $mapa->getalllayernames();
 	$dados["layers"] = $layers;

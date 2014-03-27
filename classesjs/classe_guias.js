@@ -166,7 +166,10 @@ i3GEO.guias = {
 							{link += "&"+temp.OUTROS;}
 							if (lkd !== "")
 							{link = lkd;}
-							ins += "<div style=background-color:white;padding:5px;margin:5px ><div style=text-align:center ><a href='"+link+"' style=text-align:center;text-decoration:none; ><img src='"+temp.IMAGEM+"'></a></div><br>";
+							ins += "<div style=background-color:white;padding:5px;margin:5px ><div style=text-align:center ><a href='"+link+"' style=text-align:center;text-decoration:none; >";
+							if(temp.IMAGEM && temp.IMAGEM != ""){
+								ins += "<img src='"+temp.IMAGEM+"'></a></div><br>";
+							}
 							if(temp.CONTEMMAPFILE == "nao"){
 								ins += "<div><p class=paragrafo style=text-align:center;cursor:pointer ><a href='"+link+"' style=text-align:center;text-decoration:none; >"+nome+" ("+temp.ID_MAPA+")</a></p></div></div>";
 							}

@@ -4,7 +4,7 @@
 /*
 Title: Editor de SQL
 
-Permite alterar os parâmetros de conex&atilde;o com banco de dados do tema.
+Permite alterar os parametros de conex&atilde;o com banco de dados do tema.
 
 Opera apenas em temas baseados em conex&otilde;es com bancos de dados.
 

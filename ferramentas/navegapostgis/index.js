@@ -353,9 +353,14 @@ i3GEOF.navegapostgis = {
 				colunas.push(inputs[i].value);
 			}
 		}
-		colunas.push(gid);
-		colunas.push(the_geom);
+		if(gid != ""){
+			colunas.push(gid);
+		}
+		if(the_geom != ""){
+			colunas.push(the_geom);
+		}
 		sql = the_geom+" from (select "+colunas.join(",")+" from "+i3GEOF.navegapostgis.esquema+"."+i3GEOF.navegapostgis.tabela+") as foo using unique "+gid+" using srid=4326";
+		sql = sql.replace(",,",",");
 		$i("i3GEOFnavegapostgisSql").value = sql;
 	}
 };
