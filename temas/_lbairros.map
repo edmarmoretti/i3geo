@@ -8,34 +8,34 @@ MAP
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "ID_MEDIDA_VARIAVEL"	""
-      "cache"	""
       "ltempoitemimagem"	""
-      "CLASSE"	"SIM"
+      "cache"	""
       "ltempoitemdescricao"	""
-      "palletestep"	""
+      "CLASSE"	"SIM"
       "ltempoiteminicio"	""
-      "permitekmz"	"nao"
+      "palletestep"	""
       "ltempoitemtip"	""
-      "description_template"	""
+      "permitekmz"	"nao"
       "ltempoitemtitulo"	""
-      "EDITAVEL"	"SIM"
+      "description_template"	""
       "ltempoitemlink"	""
+      "EDITAVEL"	"SIM"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "palletefile"	""
-      "permitedownload"	"sim"
       "ltempoformatodata"	""
+      "permitedownload"	"sim"
       "ltempoitemicone"	""
       "metaestat"	""
       "ESQUEMATABELAEDITAVEL"	"i3geo_metaestat"
       "itembuscarapida"	"no_bairro"
-      "permiteogc"	"sim"
       "permitekml"	"sim"
-      "TEMA"	"Bairros IBGE"
+      "permiteogc"	"sim"
       "convcaracter"	""
+      "TEMA"	"Bairros IBGE"
+      "COLUNAIDUNICO"	"gid"
       "COLUNAGEOMETRIA"	"the_geom"
-      "COLUNAIDUNICO"	"teste"
-      "editorsql"	""
       "ltempoconvencode"	""
+      "editorsql"	""
       "TABELAEDITAVEL"	"bairros"
       "ltempoitemfim"	""
     END # METADATA
@@ -48,12 +48,12 @@ MAP
     CLASS
       NAME ""
       STYLE
-        OUTLINECOLOR 255 0 0
-        SYMBOL "p0"
-      END # STYLE
-      STYLE
         COLOR 255 255 255
         OPACITY 20
+      END # STYLE
+      STYLE
+        OUTLINECOLOR 255 0 0
+        SYMBOL "p0"
       END # STYLE
     END # CLASS
   END # LAYER
