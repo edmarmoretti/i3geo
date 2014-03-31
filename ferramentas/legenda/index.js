@@ -89,13 +89,13 @@ i3GEOF.legenda = {
 	/*
 	Variavel: estilo
 
-	�ltimo estilo selecionado
+	Ultimo estilo selecionado
 	*/
 	estilo: "",
 	/*
 	Variavel: classe
 
-	�ltima classe selecionado
+	Ultima classe selecionado
 	*/
 	classe: "",
 	/*
@@ -993,13 +993,16 @@ i3GEOF.legenda = {
 			var p,cp;
 			i3GEOF.legenda.classe = id[1];
 			i3GEOF.legenda.estilo = 0;
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=pegaparametros&tema="+i3GEOF.legenda.tema+"&classe="+id[1];
-			cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"pegaParametrosMapa",i3GEOF.legenda.montaEditor);
+			i3GEOF.legenda.formEditorSimbolo();
 			i3GEOF.legenda.aguarde.visibility = "hidden";
 		}
 		catch(e){i3GEO.janela.tempoMsg("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
+	},
+	formEditorSimbolo: function(){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=pegaparametros&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe;
+		cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"pegaParametrosMapa",i3GEOF.legenda.montaEditor);		
 	},
 	/*
 	Function: simbU
@@ -1419,6 +1422,7 @@ i3GEOF.legenda = {
 			fim = function(){
 				i3GEOF.legenda.aposAlterarLegenda();
 				i3GEOF.legenda.aguarde.visibility = "hidden";
+				i3GEOF.legenda.reMontaEditor();
 			};
 			//cp.set_debug(2)
 			cp.set_response_type("JSON");

@@ -191,7 +191,7 @@ botoesIni.push({
 	"titulo":$trad(17,g_traducao_init)
 	},{
 	"img":"accessories-dictionary.png",
-	"href":"documentacao",
+	"href":"../documentacao",
 	"titulo":$trad(24,g_traducao_init)
 	},{
 	"img":"tools-report-bug.png",

@@ -763,7 +763,8 @@ function adicionaNovoLayer(codigoMap)
 					tempNode.isLeaf = false;
 					tempNode.enableHighlight = false;
 					tree.draw();
-					editorGeral(codigoMap,dados.layers[0]);
+					//editorGeral(codigoMap,dados.layers[0]);
+					editorTitulo(codigoMap,dados.layers[0])
 					core_carregando("desativa");
 				}
 			}
@@ -2267,8 +2268,13 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 							{montaEditorDispo(YAHOO.lang.JSON.parse(o.responseText));}
 							if(tipo=="editavel")
 							{montaEditorEditavel(YAHOO.lang.JSON.parse(o.responseText));}
-							if(tipo=="titulo")
-							{montaEditorTitulo(YAHOO.lang.JSON.parse(o.responseText));}
+							if(tipo=="titulo"){
+								//o codigo do layer pode ter sido alterado
+								var no = getNodeByProperty("id",codigoMap+"_"+codigoLayer);
+								tree.removeChildren(no) ;
+								no.expand();
+								montaEditorTitulo(YAHOO.lang.JSON.parse(o.responseText));
+							}
 							if(tipo=="metadados")
 							{montaEditorMetadados(YAHOO.lang.JSON.parse(o.responseText));}
 							if(tipo=="geral")

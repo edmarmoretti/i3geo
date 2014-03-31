@@ -1552,7 +1552,7 @@ function pegaTitulo()
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$dados["name"] = $layer->name;
-	$dados["tema"] = mb_convert_encoding($layer->getmetadata("tema"),"UTF-8","ISO-8859-1");//$layer->getmetadata("tema");
+	$dados["tema"] = mb_convert_encoding($layer->getmetadata("tema"),"UTF-8","ISO-8859-1");
 	$dados["iconetema"] = $layer->getmetadata("iconetema");
 	$dados["mensagem"] = mb_convert_encoding($layer->getmetadata("mensagem"),"UTF-8","ISO-8859-1");//$layer->getmetadata("mensagem");
 	$dados["escala"] = $layer->getmetadata("escala");
@@ -1560,6 +1560,7 @@ function pegaTitulo()
 	$dados["group"] = $layer->group;
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
+	
 	return $dados;
 }
 function alterarTitulo()
@@ -1568,15 +1569,15 @@ function alterarTitulo()
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
+	
 	$layer->set("name",$name);
 	$layer->setmetadata("tema",$tema);
 	$layer->setmetadata("iconetema",$iconetema);
 	$layer->setmetadata("mensagem",$mensagem);
 	$layer->setmetadata("escala",$escala);
 	$layer->setmetadata("extensao",$extensao);
-	//$e = explode(" ",$extensao);
-	//$layer->setExtent($e[0],$e[1],$e[2],$e[3]);
 	$layer->set("group",$group);
+	
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";
