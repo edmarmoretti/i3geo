@@ -75,6 +75,7 @@ Group: API  {
       File: Janelas  (classesjs/classe_janela.js)
       File: Mapa  (classesjs/classe_mapa.js)
       File: Mapa de refer&amp;ecirc;ncia  (classesjs/classe_maparef.js)
+      File: Marcador  (classesjs/classe_marcador.js)
       File: Navega&amp;ccedil;&amp;atilde;o sobre o mapa  (classesjs/classe_navega.js)
       File: PHP  (classesjs/classe_php.js)
       File: Social  (classesjs/classe_social.js)

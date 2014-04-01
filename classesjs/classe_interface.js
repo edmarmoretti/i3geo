@@ -516,7 +516,7 @@ i3GEO.Interface = {
 		{array}
 
 		Default:
-		{-0.001, -0.001, 0.001, 0.001]}
+		{-0.0003, -0.0003, 0.0003, 0.0003]}
 			 */
 			MINEXTENT: [-0.0003, -0.0003, 0.0003, 0.0003],
 			/*
@@ -605,15 +605,15 @@ i3GEO.Interface = {
 				if(i3GEO.Interface.TABLET === true){
 					i3GEO.Interface.openlayers.parametrosMap.theme = null;
 					i3GEO.Interface.openlayers.parametrosMap.controls = [
-																															new OpenLayers.Control.Attribution(),
-																															new OpenLayers.Control.TouchNavigation({
-																																dragPanOptions: {
-																																	interval: 100,
-																																	enableKinetic: true
-																																}
-																															}),
-																															new OpenLayers.Control.ZoomPanel()
-																															];
+					 new OpenLayers.Control.Attribution(),
+					 new OpenLayers.Control.TouchNavigation({
+						 dragPanOptions: {
+							 interval: 100,
+							 enableKinetic: true
+						 }
+					 }),
+					 new OpenLayers.Control.ZoomPanel()
+					 ];
 				}
 				else{
 					bb.INCLUIBOTAO.zoomli = true;
@@ -648,14 +648,15 @@ i3GEO.Interface = {
 				var montaMapa = function(){
 					var pz,temp,layers,i,texto,estilo,layersn,
 					openlayers = i3GEO.Interface.openlayers;
-					i3GEO.util.multiStep([
-																openlayers.registraEventos,
-																openlayers.zoom2ext
-																],[
-																	null,
-																	[i3GEO.parametros.mapexten]
-																	],
-																	function(){}
+					i3GEO.util.multiStep(
+						[
+							openlayers.registraEventos,
+							openlayers.zoom2ext
+						],[
+							null,
+							[i3GEO.parametros.mapexten]
+						],
+						function(){}
 					);
 					if(openlayers.GADGETS.PanZoom === true){
 						pz = new OpenLayers.Control.PanZoom();
@@ -731,26 +732,27 @@ i3GEO.Interface = {
 				if(i3GEO.arvoreDeCamadas.ATIVATEMA === ""){
 					i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);";
 				}
-				i3GEO.util.multiStep([
-															i3GEO.coordenadas.mostraCoordenadas,
-															montaMapa,
-															i3GEO.gadgets.mostraMenuSuspenso,
-															i3GEO.ajuda.ativaLetreiro,
-															i3GEO.idioma.mostraSeletor,
-															i3GEO.gadgets.mostraEscalaNumerica,
-															i3GEO.util.arvore,
-															i3GEO.gadgets.mostraMenuLista
-															],[
-																null,
-																null,
-																null,
-																[i3GEO.parametros.mensagens],
-																null,
-																null,
-																["<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa],
-																null
-																],
-																function(){}
+				i3GEO.util.multiStep(
+					[
+						i3GEO.coordenadas.mostraCoordenadas,
+						montaMapa,
+						i3GEO.gadgets.mostraMenuSuspenso,
+						i3GEO.ajuda.ativaLetreiro,
+						i3GEO.idioma.mostraSeletor,
+						i3GEO.gadgets.mostraEscalaNumerica,
+						i3GEO.util.arvore,
+						i3GEO.gadgets.mostraMenuLista
+					],[
+						 null,
+						 null,
+						 null,
+						 [i3GEO.parametros.mensagens],
+						 null,
+						 null,
+						 ["<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa],
+						 null
+					],
+					function(){}
 				);
 				i3GEO.arvoreDeCamadas.cria("",i3GEO.arvoreDeCamadas.CAMADAS,i3GEO.configura.sid,i3GEO.configura.locaplic);
 				if(i3GEO.arvoreDeCamadas.MOSTRALISTAKML === true)
@@ -1469,26 +1471,26 @@ i3GEO.Interface = {
 																				}
 																				],
 																				'Blue': [
-																								{
-																									featureType: 'all',
-																									elementType: 'geometry',
-																									stylers: [
-																														{hue: '#0000b0'},
-																														{invert_lightness: 'true'},
-																														{saturation: -30}
-																														]
-																								}
-																								],
-																								'Greyscale': [
-																															{
-																																featureType: 'all',
-																																stylers: [
-																																					{saturation: -100},
-																																					{gamma: 0.50}
-																																					]
-																															}
-																															],
-																															'No roads': [
+																								 {
+																									 featureType: 'all',
+																									 elementType: 'geometry',
+																									 stylers: [
+																														 {hue: '#0000b0'},
+																														 {invert_lightness: 'true'},
+																														 {saturation: -30}
+																														 ]
+																								 }
+																								 ],
+																								 'Greyscale': [
+																															 {
+																																 featureType: 'all',
+																																 stylers: [
+																																					 {saturation: -100},
+																																					 {gamma: 0.50}
+																																					 ]
+																															 }
+																															 ],
+																															 'No roads': [
 																																						{
 																																							featureType: 'road',
 																																							stylers: [
@@ -2358,13 +2360,13 @@ i3GEO.Interface = {
 				var i,i3GeoMap3d,texto;
 				i3GEO.configura.listaDePropriedadesDoMapa = {
 						"propriedades": [
-														{ text: "p2", url: "javascript:i3GEO.mapa.dialogo.tipoimagem()"},
-														{ text: "p3", url: "javascript:i3GEO.mapa.dialogo.opcoesLegenda()"},
-														{ text: "p4", url: "javascript:i3GEO.mapa.dialogo.opcoesEscala()"},
-														{ text: "p8", url: "javascript:i3GEO.mapa.dialogo.queryMap()"},
-														{ text: "p9", url: "javascript:i3GEO.mapa.dialogo.corFundo()"},
-														{ text: "p10", url: "javascript:i3GEO.mapa.dialogo.gradeCoord()"}
-														]
+														 { text: "p2", url: "javascript:i3GEO.mapa.dialogo.tipoimagem()"},
+														 { text: "p3", url: "javascript:i3GEO.mapa.dialogo.opcoesLegenda()"},
+														 { text: "p4", url: "javascript:i3GEO.mapa.dialogo.opcoesEscala()"},
+														 { text: "p8", url: "javascript:i3GEO.mapa.dialogo.queryMap()"},
+														 { text: "p9", url: "javascript:i3GEO.mapa.dialogo.corFundo()"},
+														 { text: "p10", url: "javascript:i3GEO.mapa.dialogo.gradeCoord()"}
+														 ]
 				};
 				texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
 				if(i3GEO.Interface.googleearth.GADGETS.setMouseNavigationEnabled === true)
