@@ -218,25 +218,21 @@ i3GEOF.identifica = {
 			col1 = null,
 			col2 = null;
 
-				col1 = Dom.get('i3GEOidentificatemaativo');
-				col2 = Dom.get('i3GEOidentificaocorrencia');
-				var resize = new YAHOO.util.Resize('i3GEOidentificatemaativo', {
-						handles: ['r'],
+		col1 = Dom.get('i3GEOidentificatemaativo');
+		col2 = Dom.get('i3GEOidentificaocorrencia');
+		var resize = new YAHOO.util.Resize('i3GEOidentificatemaativo', {
+			handles: ['r'],
 			maxWidth: 180
-				});
-				resize.on('resize', function(ev) {
-						Dom.setStyle(col1, 'height', '');
+		});
+		resize.on('resize', function(ev) {
+			Dom.setStyle(col1, 'height', '');
 			//150 &eacute; o tamanho inicial da parte esquerda, corresponde a 40%
 			var w1 = parseInt(col1.style.width);
 			var dif = parseInt((w1 * 40) / 150,10);
 			Dom.setStyle(col2, 'width', 40 - dif + 60 + '%');
 			Dom.setStyle(col2, 'left', w1 + 15 + 'px');
-			if(navm){
-				$i("yui-gen6").style.height = "250px";
-				$i("yui-gen6").style.width = "5px";
-			}
-				});
-				resize.resize(null, null, null, 0, 0, true);
+		});
+		resize.resize(null, null, null, 0, 0, true);
 	},
 	atualizaSistemas: function(){
 		if(i3GEOF.identifica.mostraSistemasAdicionais === true){

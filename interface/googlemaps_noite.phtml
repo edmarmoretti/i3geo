@@ -145,8 +145,12 @@ i3GEO.cria();
 i3GEO.configura.mapaRefDisplay = "none";
 //tipo de barra de bot&otilde;es
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
-//ajusta o deslocamento da barra de bot&otilde;es
-i3GEO.barraDeBotoes.OFFSET = -10;
+//ajusta o deslocamento da barra de botoes
+i3GEO.barraDeBotoes.OFFSET = 11;
+//ajusta a posicao da barra de botoes no IE
+if(navm){
+	i3GEO.barraDeBotoes.OFFSET = 5;
+}
 //i3GEO.barraDeBotoes.INCLUIBOTAO.barraedicao = false;
 //ajusta a posi&ccedil;&atilde;o da barra de bot&otilde;es no IE
 //if(navm)

@@ -215,14 +215,16 @@ i3GEO.eventos = {
 		//console.error(exy.target.id);
 		//console.error(exy.target.style.zIndex);
 		//tenta evitar abrir o balao em objetos do openlayers ou googlemaps
-		if(exy && exy.target && exy.target.style.zIndex == ""){
-			var parente = exy.target.parentNode;
-			if(parente && parente.className === ""){
-				i3GEO.eventos.executaEventos(this.MOUSEUP);
-			}
-		}
 		if(!exy){
 			i3GEO.eventos.executaEventos(this.MOUSEUP);
+		}
+		else{
+			if(exy.target && (exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)){
+				var parente = exy.target.parentNode;
+				if(parente && parente.className === ""){
+					i3GEO.eventos.executaEventos(this.MOUSEUP);
+				}
+			}
 		}
 	},
 	/*
@@ -562,14 +564,17 @@ i3GEO.eventos = {
 			iyg = "iyg";
 			iym = "iym";
 			iys = "iys";
-			if($i("wdocai"))
-			{doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
+			if($i("wdocai")){
+				doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			}
 		}
 		//
-		//algumas opera&ccedil;&otilde;es de an&aacute;lise podem precisar das coordenadas
-		//nesses casos, g_tipoacao &eacute; definida como "capturaponto"
+		//algumas operacoes de analise podem precisar das coordenadas
+		//nesses casos, g_tipoacao e definida como "capturaponto"
 		//
-		if (g_tipoacao !== "capturaponto"){return;}
+		if (g_tipoacao !== "capturaponto"){
+			return;
+		}
 		else{
 			try{
 				if(doc){

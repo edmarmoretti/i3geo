@@ -594,15 +594,17 @@ var i3GEO = {
 			catch(e){}
 			i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 			i3GEO.Interface.redesenha();
-			//caso esteja na fun&ccedil;&atilde;o de identifica&ccedil;&atilde;o
+			//caso esteja na funcao de identificacao
 			if($i("i3GEOidentificalistaTemas")){
 				g_tipoacao = "identifica";
 				g_operacao='identifica';
 			}
-			else
-			{g_operacao = "";}
-			if ($i("mensagemt"))
-			{$i("mensagemt").value = i3GEO.parametros.mapexten;}
+			else{
+				g_operacao = "";
+			}
+			if ($i("mensagemt")){
+				$i("mensagemt").value = i3GEO.parametros.mapexten;
+			}
 
 			i3GEO.eventos.navegaMapa();
 			i3GEO.ajuda.mostraJanela("Tempo de redesenho em segundos: "+retorno.data.variaveis.tempo,"");
