@@ -80,7 +80,7 @@ i3GEO.guias.ALTURACORPOGUIAS = 325;
 i3GEO.barraDeBotoes.AJUDA = false;
 i3GEO.barraDeBotoes.TIPOAJUDA = "";
 i3GEO.Interface.openlayers.GADGETS = {
-	PanZoomBar:true,
+	PanZoomBar:false,
 	PanZoom:false,
 	LayerSwitcher:true,
 	ScaleLine:true,
@@ -89,8 +89,23 @@ i3GEO.Interface.openlayers.GADGETS = {
 i3GEO.Interface.openlayers.TILES = true;
 
 i3GEO.cria();
-OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 
+i3GEO.mapa.TEMASINICIAIS = "_lbiomashp,_llocali";
+i3GEO.mapa.TEMASINICIAISLIGADOS = "_llocali";
+
+(function(){
+    var osm = new OpenLayers.Layer.OSM(
+        "Open Street Maps",
+        "http://tile.openstreetmap.org/${z}/${x}/${y}.png",
+        {
+            isBaseLayer:true,
+            visibility: true
+        }
+    );
+    i3GEO.Interface.openlayers.LAYERSADICIONAIS = [osm];
+})();
+OpenLayers.ImgPath = "../pacotes/openlayers/img/";
+i3GEO.Interface.openlayers.googleLike = true;
 i3GEO.inicia();
 </script>
 
