@@ -561,7 +561,7 @@ i3GEO.Interface = {
 				openlayers.sobeLayersGraficos();
 			},
 			cria: function(w,h){
-				var f,ins,
+				var f,ins,temp,j,r,
 				mi = i3GEO.Interface.openlayers.MINEXTENT,
 				ma = i3GEO.Interface.openlayers.MAXEXTENT,
 				i = $i(i3GEO.Interface.IDCORPO),
@@ -595,6 +595,21 @@ i3GEO.Interface = {
 				}
 				if(!i3GEO.Interface.openlayers.parametrosMap.maxResolution){
 					i3GEO.Interface.openlayers.parametrosMap.maxResolution = "auto";
+				}
+				//define as resolucoes
+				if(i3GEO.Interface.openlayers.parametrosMap.numZoomLevels){
+					if(i3GEO.Interface.openlayers.parametrosMap.minResolution == "auto"){
+						temp = 0.703125;
+					}
+					else{
+						temp = i3GEO.Interface.openlayers.parametrosMap.minResolution;
+					}
+					r = [temp];
+					for(j=0;j<(i3GEO.Interface.openlayers.parametrosMap.numZoomLevels - 1);j++){
+						temp = temp / 2;
+						r.push(temp);
+					}
+					i3GEO.Interface.openlayers.parametrosMap.resolutions = r;
 				}
 				if(!i3GEO.Interface.openlayers.parametrosMap.maxExtent){
 					i3GEO.Interface.openlayers.parametrosMap.maxExtent = new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3]);
