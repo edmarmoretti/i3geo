@@ -221,7 +221,7 @@ i3GEO.eventos = {
 		else{
 			if(exy.target && (exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)){
 				var parente = exy.target.parentNode;
-				if(parente && parente.className === "olLayerDiv olLayerGrid"){
+				if(parente && (parente.className === "olLayerDiv olLayerGrid" || (parente.childNodes && parente.childNodes[0].attributes[0].nodeValue === "olTileImage"))){
 					i3GEO.eventos.executaEventos(this.MOUSEUP);
 				}
 			}

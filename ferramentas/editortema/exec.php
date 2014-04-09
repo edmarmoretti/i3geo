@@ -68,6 +68,9 @@ switch (strtoupper($funcao))
 
 				$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$dbh->beginTransaction();
+				if($srid == ""){
+					$srid = "4326";
+				}
 
 				$sql = "INSERT INTO ".$esquema.".".$tabela." (".$colunageometria.")";
 				$sql .= " VALUES (ST_GeomFromText('SRID=$srid;".$wkt."'))";
