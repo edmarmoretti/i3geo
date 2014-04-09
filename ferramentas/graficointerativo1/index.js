@@ -275,23 +275,23 @@ i3GEOF.graficointerativo1 = {
 			var locaplic = i3GEO.configura.locaplic, ins = ''
 				+ '<div id=i3GEOgraficointerativo1guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">'
 				+ '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'
-				+ '		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'
+				+ '		<li><a  ><em><div id="i3GEOgraficointerativo1guia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'
 				+ $trad("p13")
 				+ '" src="'
 				+ i3GEO.configura.locaplic
 				+ '/imagens/visual/default/branco.gif"></div></em></a></li>'
-				+ '		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia1" style="text-align:center;left:0px;" >'
+				+ '		<li><a  ><em><div id="i3GEOgraficointerativo1guia1" style="text-align:center;left:0px;" >'
 				+ $trad(1, i3GEOF.graficointerativo1.dicionario)
 				+ '</div></em></a></li>'
-				+ '		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia2" style="text-align:center;left:0px;" >'
+				+ '		<li><a  ><em><div id="i3GEOgraficointerativo1guia2" style="text-align:center;left:0px;" >'
 				+ $trad(2, i3GEOF.graficointerativo1.dicionario)
 				+ '</div></em></a></li>'
-				+ '		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia4" style="text-align:center;left:0px;" >'
+				+ '		<li><a  ><em><div id="i3GEOgraficointerativo1guia4" style="text-align:center;left:0px;" >'
 				+ $trad(3, i3GEOF.graficointerativo1.dicionario)
 				+ '</div></em></a></li>'
-				+ '		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia5" style="text-align:center;left:0px;" >CSV'
+				+ '		<li><a  ><em><div id="i3GEOgraficointerativo1guia5" style="text-align:center;left:0px;" >CSV'
 				+ '</div></em></a></li>'
-				+ '		<li><a href="#ancora"><em><div id="i3GEOgraficointerativo1guia6" style="text-align:center;left:0px;" >PNG'
+				+ '		<li><a  ><em><div id="i3GEOgraficointerativo1guia6" style="text-align:center;left:0px;" >PNG'
 				+ '</div></em></a></li>'
 				+ '	</ul>'
 				+ '</div><br>'

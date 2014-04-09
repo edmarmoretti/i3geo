@@ -155,9 +155,9 @@ i3GEOF.selecao = {
 		var ins = '' +
 		'<div id=i3GEOselecaoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a href="#ancora"><em><div id="i3GEOselecaoguia1" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOselecaoguia2" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOselecaoguia3" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOselecaoguia1" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOselecaoguia2" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOselecaoguia3" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'<div class=guiaobj id="i3GEOselecaoguia1obj" style="left:1px;display:none;top:-5px">' +

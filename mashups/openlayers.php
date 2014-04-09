@@ -451,24 +451,15 @@ if(isset($fundo) && $fundo != ""){
 if(isset($controles)){
 	echo "i3GEO.editorOL.controles = [".implode(",",$objControles)."];";
 }
-$resolutions = "[0.703125,0.3515625,0.17578125,0.087890625,0.0439453125,0.02197265625,0.010986328125,0.0054931640625,0.00274658203125,0.001373291015625,0.0006866455078125,0.00034332275390625,0.000171661376953125,0.0000858306884765625,0.00004291534423828125,0.000021457672119140625,0.000010728836059570312,0.000005364418029785156,0.000002682209014892578]";
 if(isset($numzoomlevels)){
 	echo "i3GEO.editorOL.numzoom = ".$numzoomlevels.";";
-	$r = array(0.703125);
-	$n = 0.703125;
-	for($i=0;$i<$numzoomlevels;$i++){
-		$n = $n / 2;
-		$r[] = $n;
-	}
-	$resolutions = "[".implode(",",$r)."]"; 
 }
 if(isset($maxextent)){
 	$maxextent = str_replace(" ",",",$maxextent);
 	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(".$maxextent.");";
 }
-else{
-	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081);";
-}
+else
+{echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081);";}
 if(isset($mapext)){
 	$mapext = str_replace(" ",",",$mapext);
 	echo "i3GEO.editorOL.mapext = new OpenLayers.Bounds(".$mapext.");";
@@ -482,7 +473,7 @@ i3GEO.editorOL.mapa = new OpenLayers.Map(
 	{
 		autoUpdateSize: false,
 		controls:[],
-		resolutions: <?php echo $resolutions; ?>
+		resolutions: [0.703125,0.3515625,0.17578125,0.087890625,0.0439453125,0.02197265625,0.010986328125,0.0054931640625,0.00274658203125,0.001373291015625,0.0006866455078125,0.00034332275390625,0.000171661376953125,0.0000858306884765625,0.00004291534423828125,0.000021457672119140625,0.000010728836059570312,0.000005364418029785156,0.000002682209014892578]
 	}
 );
 i3GEO.editorOL.inicia();

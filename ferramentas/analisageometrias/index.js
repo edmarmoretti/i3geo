@@ -162,9 +162,9 @@ i3GEOF.analisaGeometrias = {
 		var ins = '';
 		ins += '<div id=i3GEOinseregraficoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOanalisageometrias1" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.analisaGeometrias.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOanalisageometrias2" style="text-align:center;left:0px;" >'+$trad(6,i3GEOF.analisaGeometrias.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOanalisageometrias3" style="text-align:center;left:0px;" >'+$trad(7,i3GEOF.analisaGeometrias.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOanalisageometrias1" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.analisaGeometrias.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOanalisageometrias2" style="text-align:center;left:0px;" >'+$trad(6,i3GEOF.analisaGeometrias.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOanalisageometrias3" style="text-align:center;left:0px;" >'+$trad(7,i3GEOF.analisaGeometrias.dicionario)+'</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div>';
 		ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';

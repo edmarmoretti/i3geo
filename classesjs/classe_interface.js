@@ -204,7 +204,8 @@ i3GEO.Interface = {
 		 */
 		STATUS: {
 			atualizando: [],
-			trocando: false
+			trocando: false,
+			pan: false
 		},
 		/*
 	Troca o renderizador do mapa passando a usar a API do Google Maps
@@ -252,7 +253,7 @@ i3GEO.Interface = {
 					{i3GEO.Interface.atual2ol.initemp();}
 				}
 				catch(e){
-					i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/openlayers/OpenLayers211.js.php","i3GEO.Interface.atual2ol.initemp()","",false);
+					i3GEO.util.scriptTag(i3GEO.configura.locaplic+"/pacotes/openlayers/OpenLayers2131.js.php","i3GEO.Interface.atual2ol.initemp()","",false);
 				}
 			},
 			initemp: function(){
@@ -713,8 +714,11 @@ i3GEO.Interface = {
 					//
 					if(i3GEO.Interface.TABLET === false){
 						i3GEO.Interface.openlayers.OLpan = new OpenLayers.Control.Navigation();
+						//@FIXME
+						//o programa OpenLayers precisou ser modificado pois isso nao funciona
 						//OpenLayers.Handler.MOD_SHIFT = OpenLayers.Handler.MOD_CTRL;
 						i3GEO.Interface.openlayers.OLzoom = new OpenLayers.Control.ZoomBox();
+						
 						i3GEO.Interface.openlayers.OLpanel = new OpenLayers.Control.Panel();
 						i3GEO.Interface.openlayers.OLpanel.addControls([i3GEO.Interface.openlayers.OLpan,i3GEO.Interface.openlayers.OLzoom]);
 						i3geoOL.addControl(i3GEO.Interface.openlayers.OLpanel);
@@ -993,8 +997,9 @@ i3GEO.Interface = {
 					//layer = new OpenLayers.Layer.WMS( "Nenhum", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:false,isBaseLayer:true, opacity: 1,visibility:false});
 					layer = new OpenLayers.Layer.Vector("Nenhum",{displayInLayerSwitcher:true,visibility:false,isBaseLayer:true,singleTile:true});
 					i3geoOL.addLayer(layer);
-					if($i(i3geoOL.id+"_events"))
-					{$i(i3geoOL.id+"_events").style.backgroundColor = "rgb("+i3GEO.parametros.cordefundo+")";}
+					if($i(i3geoOL.id+"_OpenLayers_ViewPort")){
+						$i(i3geoOL.id+"_OpenLayers_ViewPort").style.backgroundColor = "rgb("+i3GEO.parametros.cordefundo+")";
+					}
 				}
 				opcoes = {
 						gutter:0,
@@ -1283,7 +1288,7 @@ i3GEO.Interface = {
 				for(i=0;i<nlayers;i++){
 					if(layers[i].url){
 						layers[i].mergeNewParams({r:Math.random()});
-						layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&","");
+						layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&","&foo=");
 						layers[i].url = layers[i].url+"&&";
 						layers[i].url = layers[i].url.replace("&cache=sim","&cache=nao");
 						if(layers[i].visibility === true){
@@ -1298,7 +1303,7 @@ i3GEO.Interface = {
 				if(layer && layer != undefined){
 					if(layer.url){
 						layer.mergeNewParams({r:Math.random()});
-						layer.url = layer.url.replace("&&&&&&&&&&&&&&","");
+						layer.url = layer.url.replace("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&","&foo=");
 						layer.url = layer.url+"&&";
 						layer.url = layer.url.replace("&cache=sim","&cache=nao");
 						layer.redraw();
@@ -1320,8 +1325,9 @@ i3GEO.Interface = {
 					var point,p,lonlat,d,pos,projWGS84,proj900913;
 					p = e.xy;
 					lonlat = i3geoOL.getLonLatFromPixel(p);
-					if(!lonlat)
-					{return;}
+					if(!lonlat){
+						return;
+					}
 					if(i3GEO.Interface.openlayers.googleLike === true){
 						projWGS84 = new OpenLayers.Projection("EPSG:4326");
 						proj900913 = new OpenLayers.Projection("EPSG:900913");
@@ -1348,12 +1354,13 @@ i3GEO.Interface = {
 				//
 				//ativa os eventos espec&iacute;ficos do i3geo
 				//
-				i3GEO.eventos.ativa($i("openlayers"));
+				i3GEO.eventos.ativa($i(i3geoOL.id+"_OpenLayers_Container"));
 				//
 				//ativa os eventos controlados pela API do OL
 				//
 				i3geoOL.events.register("movestart",i3geoOL,function(e){
 					//if(typeof(console) !== 'undefined'){console.error("movestart");}
+					i3GEO.Interface.STATUS.pan = true;
 					var xy;
 					modoAtual = "move";
 					i3GEO.barraDeBotoes.BOTAOCLICADO = "pan";
@@ -1375,6 +1382,7 @@ i3GEO.Interface = {
 					i3GEO.eventos.cliquePerm.status = false;
 					//guarda a extensao geografica atual
 					i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
+					i3GEO.Interface.STATUS.pan = false;
 				});
 				i3geoOL.events.register("mousemove", i3geoOL, function(e){
 					if(modoAtual === "move"){

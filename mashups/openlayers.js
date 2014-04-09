@@ -49,7 +49,7 @@ i3GEO.editorOL = {
 		{layers:'baseraster',SRS:'EPSG:4618',FORMAT:'image/png'},
 		{singleTile:false}
 	),
-	ol_wms: new OpenLayers.Layer.WMS.Untiled(
+	ol_wms: new OpenLayers.Layer.WMS(
 		"OpenLayers WMS",
 		"http://labs.metacarta.com/wms/vmap0",
 		{layers: 'basic'}
@@ -275,14 +275,33 @@ i3GEO.editorOL = {
 				}
 			},
 			style = new OpenLayers.Style(),
-			styleMap1 = new OpenLayers.StyleMap({"default": style});
+			styleMap1 = new OpenLayers.StyleMap(
+				{
+					"default": style,
+					"vertex": {
+				        strokeOpacity: 1,
+				        strokeWidth: 1,
+				        fillColor: "white",
+				        fillOpacity: 0.45,
+				        pointRadius: 4
+				    }
+				},
+			    {
+			    	extendDefault: false
+			    }
+			),
+			renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
+		
 		style.addRules([
 			new OpenLayers.Rule({symbolizer: sketchSymbolizers})
 		]);
+        renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
 		i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edi&ccedil;&atilde;o",{
 				styleMap: styleMap1,
 				displayInLayerSwitcher:true,
-				visibility:true
+				visibility:true,
+				renderers: renderer,
+				vertexRenderIntent: "vertex"
 			}
 		);
 	},
@@ -629,8 +648,9 @@ i3GEO.editorOL = {
 		u += "&filter=<Filter><Intersects><PropertyName>Geometry</PropertyName><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:posList>"+poligono+"</gml:posList></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></Intersects></Filter>";
 
 		document.body.style.cursor="wait";
-		if(document.getElementById("i3geoMapa"))
-		{document.getElementById("i3geoMapa").style.cursor = "wait";}
+		if(document.getElementById("i3geoMapa")){
+			document.getElementById("i3geoMapa").style.cursor = "wait";
+		}
 		OpenLayers.Request.issue({
 			method: "GET",
 			url: u,
@@ -822,7 +842,21 @@ i3GEO.editorOL = {
 				}
 		},
 		style = new OpenLayers.Style(),
-		styleMap = new OpenLayers.StyleMap({"default": style}),
+		styleMap = new OpenLayers.StyleMap(
+			{
+				"default": style,
+				"vertex": {
+			        strokeOpacity: 1,
+			        strokeWidth: 1,
+			        fillColor: "white",
+			        fillOpacity: 0.45,
+			        pointRadius: 3
+			    }
+			},
+		    {
+		    	extendDefault: false
+		    }
+		),
 		adiciona = false,
 		button,
 		controles = [];
@@ -1024,6 +1058,7 @@ i3GEO.editorOL = {
 						if(ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS" || ativo[0].CLASS_NAME == "OpenLayers.Layer.OSM"){
 							ativo = [i3GEO.editorOL.layertms2wms(ativo[0])];
 						}
+						ativo[0].projection = new OpenLayers.Projection("EPSG:4326");
 						event.object.layers = ativo;
 						botaoIdentifica.layers = ativo;
 						botaoIdentifica.url = ativo[0].url;
@@ -1237,7 +1272,11 @@ i3GEO.editorOL = {
 					type: OpenLayers.Control.TYPE_TOOL,
 					clickout: true,
 					toggle: true,
-					mode: OpenLayers.Control.ModifyFeature.RESHAPE
+					mode: OpenLayers.Control.ModifyFeature.RESHAPE,
+					standalone: false,
+					createVertices: true,
+					styleMap: "default",
+            		vertexRenderIntent: "vertex"
 				}
 			);
 			controles.push(i3GEO.editorOL.ModifyFeature);

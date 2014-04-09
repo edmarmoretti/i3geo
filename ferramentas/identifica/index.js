@@ -333,11 +333,11 @@ i3GEOF.identifica = {
 		var ins = '';
 		ins += '<div id=i3GEOidentificaguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia2" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia4" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia5" style="text-align:center;left:0px;" >XY/buffer</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia3" style="text-align:center;left:0px;" >'+$trad(6,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOidentificaguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOidentificaguia2" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOidentificaguia4" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOidentificaguia5" style="text-align:center;left:0px;" >XY/buffer</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOidentificaguia3" style="text-align:center;left:0px;" >'+$trad(6,i3GEOF.identifica.dicionario)+'</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div>';
 		//ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';

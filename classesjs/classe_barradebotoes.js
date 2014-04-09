@@ -1636,12 +1636,34 @@ i3GEO.barraDeBotoes = {
 					}
 				},
 				style = new OpenLayers.Style(),
-				styleMap1 = new OpenLayers.StyleMap({"default": style});
+				styleMap1 = new OpenLayers.StyleMap(
+					{
+						"default": style,
+						"vertex": {
+					        strokeOpacity: 1,
+					        strokeWidth: 1,
+					        fillColor: "white",
+					        fillOpacity: 0.45,
+					        pointRadius: 4
+					    }
+					},
+				    {
+				    	extendDefault: false
+				    }
+				);
 
 			style.addRules([
 				new OpenLayers.Rule({symbolizer: sketchSymbolizers})
 			]);
-			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector("Edi&ccedil;&atilde;o",{styleMap:styleMap1,displayInLayerSwitcher:false,visibility:true});
+			i3GEO.editorOL.layergrafico = new OpenLayers.Layer.Vector(
+				"Edi&ccedil;&atilde;o",
+				{
+					styleMap:styleMap1,
+					displayInLayerSwitcher:false,
+					visibility:true,
+					vertexRenderIntent: "vertex"
+				}
+			);
 			i3GEO.editorOL.mapa.addLayers([i3GEO.editorOL.layergrafico]);
 			if(idjanela){
 				i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);

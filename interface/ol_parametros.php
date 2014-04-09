@@ -106,8 +106,8 @@
 	</div>
 </div>
 
-<script src="../classesjs/i3geo5.js"></script>
-<script src="../pacotes/openlayers/OpenLayers211.js.php"></script>
+<script src="../classesjs/i3geo6.js"></script>
+<script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
 <!-- estilo necess&aacute;rio para a ferramenta de edi&ccedil;&atilde;o -->
 <style>
 .olControlEditingToolbar1 div {

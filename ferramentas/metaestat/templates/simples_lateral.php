@@ -148,7 +148,7 @@ $dadosmapa = dadosmapa("../../../");
 
 <script src="../../../classesjs/i3geo.js"></script>
 <script src="../index.js"></script>
-<script src="../../../pacotes/openlayers/OpenLayers211.js.php"></script>
+<script src="../../../pacotes/openlayers/OpenLayers2131.js.php"></script>
 <script src="lib/configbasicoi3geo.js" ></script>
 <script src="../dicionario.js" ></script>
 <link rel="stylesheet" type="text/css" href="lib/default.css">

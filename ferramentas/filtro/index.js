@@ -148,9 +148,9 @@ i3GEOF.filtro = {
 		var ins = '' +
 		'<div id=i3GEOfiltroguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">'+
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'+
-		'		<li><a href="#ancora"><em><div id="i3GEOfiltroguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
-		'		<li><a href="#ancora"><em><div id="i3GEOfiltroguia2" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
-		'		<li><a href="#ancora"><em><div id="i3GEOfiltroguia3" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOfiltroguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOfiltroguia2" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOfiltroguia3" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
 		'	</ul>'+
 		'</div><br>'+
 		'<p class=paragrafo >'+

@@ -2020,7 +2020,7 @@ it:""
 }],
 "x69":[
 {
-pt:"Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea que ser� aproximada",
+pt:"Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea que ser&aacute; aproximada",
 en:"",
 es:"",
 it:""

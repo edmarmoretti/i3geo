@@ -41,7 +41,7 @@ $urllayer = "../../ogc.php?tema=".$novo_mapfile;
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<script type="text/javascript" src="../../pacotes/openlayers/OpenLayers211.js.php"></script>
+<script type="text/javascript" src="../../pacotes/openlayers/OpenLayers2131.js.php"></script>
 <style>
 .yui-skin-sam .container-minimiza {
 	background:transparent url(../../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;

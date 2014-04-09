@@ -70,7 +70,7 @@ $i = function(id)
 			}
 		}
 	}
-	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/i3geo5.css.php'></link>");
+	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/i3geo6.css.php'></link>");
 	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../pacotes/yui290/build/button/assets/skins/sam/button.css'></link>");
-	document.write("<script type='text/javascript' src='" + scriptLocation + "i3geo_tudo_compacto5.js.php'></script>");
+	document.write("<script type='text/javascript' src='" + scriptLocation + "i3geo_tudo_compacto6.js.php'></script>");
 })();

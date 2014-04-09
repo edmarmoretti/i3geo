@@ -236,11 +236,11 @@ i3GEOF.tabela = {
 		var ins = '';//<p class="paragrafo" >
 		ins += '<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad("p13")+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.tabela.dicionario)+'</div></em></a></li>';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia3" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.tabela.dicionario)+'</div></em></a></li>';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia4" style="text-align:center;left:0px;" >'+$trad("t37")+'</div></em></a></li>';
-		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia5" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.tabela.dicionario)+'</div></em></a></li>';
+		ins += '	<li><a  ><em><div id="i3GEOtabelaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad("p13")+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>';
+		ins += '	<li><a  ><em><div id="i3GEOtabelaguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.tabela.dicionario)+'</div></em></a></li>';
+		ins += '	<li><a  ><em><div id="i3GEOtabelaguia3" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.tabela.dicionario)+'</div></em></a></li>';
+		ins += '	<li><a  ><em><div id="i3GEOtabelaguia4" style="text-align:center;left:0px;" >'+$trad("t37")+'</div></em></a></li>';
+		ins += '	<li><a  ><em><div id="i3GEOtabelaguia5" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.tabela.dicionario)+'</div></em></a></li>';
 		ins += '</ul>';
 		ins += '</div><br>';
 		ins += '	<div id=i3GEOtabelaresultadotab style="background-color:#F2F2F2;position:relative;top:5px;left:0px"></div>';

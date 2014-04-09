@@ -170,9 +170,9 @@ i3GEOF.inseretxt = {
 		var ins = '' +
 		'<div id=i3GEOinseretxtguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad(2,i3GEOF.inseretxt.dicionario)+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinseretxtguia2" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinseretxtguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad(2,i3GEOF.inseretxt.dicionario)+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinseretxtguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinseretxtguia2" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia1obj" style="left:1px;display:none;">' +

@@ -113,14 +113,15 @@ i3GEOF.loginusuario = {
 		if(!usuario || usuario == "null"){
 			usuario = "";
 		}
-		ins = '<p class="paragrafo" >'+$trad("x30")+': <b><i>'+u+"</i></b>" +
+		ins = '<div style=width:90%;margin:auto; ><p class="paragrafo" >'+$trad("x30")+': <b><i>'+u+"</i></b>" +
 		'<p class="paragrafo" >'+$trad("x27")+':<br>' +
 		'<input id=i3geousuario type=text style="width:200px;" value="'+usuario+'"/>' +
 		'<p class="paragrafo" >'+$trad("x28")+':<br>' +
 		'<input id=i3geosenha type=password style="width:200px;" value=""/><br>' +
 		'<p class="paragrafo" ><input id=i3GEOFloginusuario size=20  type=button value="'+$trad("x29")+'" />&nbsp;<input id=i3GEOFlogoutusuario size=20  type=button value="Logout" />' +
 		'<p class="paragrafo" onclick="i3GEOF.loginusuario.recuperarSenha()" style="cursor:pointer;color:blue;">'+$trad("x32")+'</p>' +
-		'<p class="paragrafo" onclick="i3GEOF.loginusuario.alterarSenha()" style="cursor:pointer;color:blue;">'+$trad("x52")+'</p>';
+		'<p class="paragrafo" onclick="i3GEOF.loginusuario.alterarSenha()" style="cursor:pointer;color:blue;">'+$trad("x52")+'</p>' +
+		'</div>';
 		return ins;
 	},
 	/*
@@ -135,7 +136,7 @@ i3GEOF.loginusuario = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.loginusuario");
 		};
-		titulo = "Login &nbsp;&nbsp;&nbsp;";
+		titulo = "<img style='position:relative;top:5px;' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/dialog-password.png' >&nbsp;Login &nbsp;&nbsp;&nbsp;";
 		janela = i3GEO.janela.cria(
 			"270px",
 			"",

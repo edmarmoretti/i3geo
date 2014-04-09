@@ -113,8 +113,8 @@ i3GEOF.insereGrafico = {
 		var ins = '';
 		ins += '<div id=i3GEOinseregraficoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.insereGrafico.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia2" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.insereGrafico.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOinseregraficoguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.insereGrafico.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOinseregraficoguia2" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.insereGrafico.dicionario)+'</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div><br>';
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia1obj" style="left:1px;display:none;">';

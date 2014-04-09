@@ -339,12 +339,12 @@ i3GEOF.legenda = {
 		var ins = '' +
 		'<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">'+
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'+
-		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad(2,i3GEOF.legenda.dicionario)+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>'+
-		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
-		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia2" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
-		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia3" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
-		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia4" style="text-align:center;left:0px;" >'+$trad(6,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
-		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia5" style="text-align:center;left:0px;" >'+$trad(7,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad(2,i3GEOF.legenda.dicionario)+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia2" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia3" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia4" style="text-align:center;left:0px;" >'+$trad(6,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia5" style="text-align:center;left:0px;" >'+$trad(7,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
 		'	</ul>'+
 		'</div><br>'+
 		'<div id=i3GEOlegendaguia6obj style="width:99%;text-align:left;">'+

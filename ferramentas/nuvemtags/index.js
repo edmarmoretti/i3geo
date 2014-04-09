@@ -173,8 +173,8 @@ i3GEOF.nuvemtags = {
 		var ins = '' +
 		'<div id=i3GEOnuvemtagsguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a href="#ancora"><em><div id="i3GEOnuvemtagsguia1" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.nuvemtags.dicionario)+'</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOnuvemtagsguia2" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.nuvemtags.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOnuvemtagsguia1" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.nuvemtags.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOnuvemtagsguia2" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.nuvemtags.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'<div class=guiaobj id="i3GEOnuvemtagsguia1obj" style="left:1px;display:none;">' +

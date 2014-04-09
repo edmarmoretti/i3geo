@@ -15,6 +15,10 @@ quais cuidados vc deve tomar nos upgrades
 
 ---------
 
+Histórico das versões: http://svn.softwarepublico.gov.br/trac/i3geo/wiki/HistoricoVersoes
+
+---------
+
 Mantenha-se sempre atualizado utilizando o SVN
 
 Isso permite que eventuais bugs sejam rapidamente corrigidos

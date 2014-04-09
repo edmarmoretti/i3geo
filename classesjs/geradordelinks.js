@@ -67,7 +67,7 @@ Veja:
 	var allScriptTags = "";
 	var jsfiles = [];
 	//jsfiles[0] = "i3geo_tudo_compacto.js.php"
-	jsfiles[0] = "../pacotes/openlayers/OpenLayers211.js.php";
+	jsfiles[0] = "../pacotes/openlayers/OpenLayers2131.js.php";
 	for (var i = 0; i < jsfiles.length; i++)
 	{
 		var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";

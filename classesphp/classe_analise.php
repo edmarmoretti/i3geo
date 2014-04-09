@@ -661,12 +661,12 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'library(spatstat)';
 		$rcode[] = 'pt <- ppp(dadosx, dadosy, '.$dimx.','.$dimy.')';
 		$rcode[] = 'img <- distmap(pt)';
-		$rcode[] = 'cat(img$v,file="'.$arqpt.'img",fill=FALSE)';
 		$rcode[] = 'cat(img$xstep,file="'.$arqpt.'h",fill=TRUE)';
 		$rcode[] = 'cat(img$ystep,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$xrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$yrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$dim,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
+		$rcode[] = 'cat(img$v,file="'.$arqpt.'img",fill=FALSE)';
 		$r = $this->executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
@@ -709,6 +709,7 @@ $locaplic - Onde fica o I3Geo.
 			}
 		}
 		$rcode[] = 'library(deldir)';
+		
 		$rcode[] = 'pt <- deldir(dadosx, dadosy)';
 		$rcode[] = 'write.csv(pt$delsgs,file="'.$arqpt.'delsgs")';
 		$rcode[] = 'write.csv(pt$dirsgs,file="'.$arqpt.'dirsgs")';
@@ -2851,6 +2852,7 @@ array(
 				$celula = $celula + 1;
 			}
 		}
+
 		Imagepng($img,$nomearq.".png");
 		ImageDestroy($nomearq.".png");
 		$dadosw[] = trim($xsize);

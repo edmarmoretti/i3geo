@@ -221,7 +221,7 @@ i3GEO.eventos = {
 		else{
 			if(exy.target && (exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)){
 				var parente = exy.target.parentNode;
-				if(parente && parente.className === ""){
+				if(parente && parente.className === "olLayerDiv olLayerGrid"){
 					i3GEO.eventos.executaEventos(this.MOUSEUP);
 				}
 			}
@@ -302,6 +302,9 @@ i3GEO.eventos = {
 	eventos {array} - array com os nomes das fun&ccedil;&otilde;es
 	*/
 	executaEventos: function(eventos){
+		if(i3GEO.Interface.STATUS.pan === true){
+			return;
+		}
 		var f = 0;
 		try{
 			if (eventos.length > 0){
@@ -488,8 +491,9 @@ i3GEO.eventos = {
 				i3GEO.eventos.cliquePerm.status = true;
 				i3GEO.eventos.posicaoMouseMapa(exy);
 				try{
-					try
-					{clearTimeout(i3GEO.eventos.TIMERPARADO);}
+					try{
+						clearTimeout(i3GEO.eventos.TIMERPARADO);
+					}
 					catch(e){
 						if(typeof(console) !== 'undefined'){console.error(e);}
 					}
@@ -498,8 +502,9 @@ i3GEO.eventos = {
 				catch(e){
 					if(typeof(console) !== 'undefined'){console.error(e);}
 				}
-				try
-				{i3GEO.eventos.mousemoveMapa();}
+				try{
+					i3GEO.eventos.mousemoveMapa();
+				}
 				catch(e){
 					if(typeof(console) !== 'undefined'){console.error(e);}
 				}
@@ -507,24 +512,27 @@ i3GEO.eventos = {
 		};
 		docMapa.onmouseout = function(){
 			objposicaocursor.dentroDomapa = true;
-			try
-			{objmapaparado="parar";}
+			try{
+				objmapaparado="parar";
+			}
 			catch(e){
 				if(typeof(console) !== 'undefined'){console.error(e);}
 			}
 		};
 		docMapa.onmousedown = function(exy){
-			if(!i3GEO.eventos.botaoDireita(exy))
-			{i3GEO.eventos.mousedownMapa();}
+			if(!i3GEO.eventos.botaoDireita(exy)){
+				i3GEO.eventos.mousedownMapa();
+			}
 		};
 		docMapa.onclick = function(exy){
-			if(!i3GEO.eventos.botaoDireita(exy))
-			{i3GEO.eventos.mousecliqueMapa(exy);}
+			if(!i3GEO.eventos.botaoDireita(exy)){
+				i3GEO.eventos.mousecliqueMapa(exy);
+			}
 		};
 		docMapa.onmouseup = function(exy){
-			//if(typeof(console) !== 'undefined'){console.error("up");}
-			if(!i3GEO.eventos.botaoDireita(exy))
-			{i3GEO.eventos.mouseupMapa(exy);}
+			if(!i3GEO.eventos.botaoDireita(exy)){
+				i3GEO.eventos.mouseupMapa(exy);
+			}
 		};
 	},
 	/*

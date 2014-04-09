@@ -179,13 +179,13 @@ i3GEOF.inserexy = {
 		var ins = '' +
 		'<div id=i3GEOinserexyguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia0" style="text-align:center;left:0px;" ><img style="height:14px" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/help-about.png"></div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia2" style="text-align:center;left:0px;" >Direc/dist</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia3" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia4" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia5" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOinserexyguia6" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia0" style="text-align:center;left:0px;" ><img style="height:14px" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/help-about.png"></div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia2" style="text-align:center;left:0px;" >Direc/dist</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia3" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia4" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia5" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia6" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'<div id=i3GEOinserexyprojecao style="text-align:left;left:0px;display:none">' +

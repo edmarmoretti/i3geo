@@ -251,11 +251,11 @@ i3GEOF.graficointerativo = {
 		ins = '' +
 		'<div id=i3GEOgraficointerativoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad("p13")+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia1" style="text-align:center;left:0px;" >Tipo</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia2" style="text-align:center;left:0px;" >Dados</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia4" style="text-align:center;left:0px;" >Gr&aacute;fico</div></em></a></li>' +
-		'		<li><a href="#ancora"><em><div id="i3GEOgraficointerativoguia5" style="text-align:center;left:0px;" >CSV</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOgraficointerativoguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad("p13")+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOgraficointerativoguia1" style="text-align:center;left:0px;" >Tipo</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOgraficointerativoguia2" style="text-align:center;left:0px;" >Dados</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOgraficointerativoguia4" style="text-align:center;left:0px;" >Gr&aacute;fico</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOgraficointerativoguia5" style="text-align:center;left:0px;" >CSV</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia1obj" style="left:1px;display:none;">' +

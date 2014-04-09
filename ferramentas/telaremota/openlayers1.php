@@ -6,7 +6,7 @@
 <meta name="HandheldFriendly" content="yes" />
 <meta name="MobileOptimized" content="width" />
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../../pacotes/openlayers/OpenLayers211.js.php"></script>
+<script type="text/javascript" src="../../pacotes/openlayers/OpenLayers2131.js.php"></script>
 <script type="text/javascript" src="../../pacotes/cpaint/cpaint2_compacto.inc.js"></script>
 <link rel="stylesheet" href="../../mashups/openlayers_compacto.css" type="text/css" />
 <script type="text/javascript" src="../../pacotes/yui290/build/yahoo/yahoo-min.js"></script>

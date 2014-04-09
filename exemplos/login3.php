@@ -160,7 +160,7 @@ if(empty($_SESSION["usuario"]) || ($_SESSION["usuario"] != $_COOKIE["i3geousuari
 		</div>
 	</div>
 	<script src="../classesjs/i3geo.js"></script>
-	<script src="../pacotes/openlayers/OpenLayers211.js.php"></script>
+	<script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
 	<script>
 		i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo";
 		i3GEO.configura.autotamanho = false;
