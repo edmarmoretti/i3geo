@@ -3,13 +3,11 @@ i3GEOF.excluirarvore.dicionario = {
 1: [{
 pt:"Remover do mapa os marcados",
 en:"",
-es:"",
-it:""
+es:""
 }],
 2: [{
 pt:"Escolha uma camada pelo menos",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

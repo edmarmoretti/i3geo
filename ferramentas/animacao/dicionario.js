@@ -3,31 +3,26 @@ i3GEOF.animacao.dicionario = {
 1: [{
 pt:"inicia",
 en:"",
-es:"",
-it:""
+es:""
 }],
 2: [{
 pt:"rebobina",
 en:"",
-es:"",
-it:""
+es:""
 }],
 3: [{
 pt:"mais rapido",
 en:"",
-es:"",
-it:""
+es:""
 }],
 4: [{
 pt:"mais lento",
 en:"",
-es:"",
-it:""
+es:""
 }],
 5: [{
 pt:"Marque as camadas que ser&atilde;o inclu&iacute;das na anima&ccedil;&atilde;o e depois clique no bot&atilde;o <i>inicia</i>",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

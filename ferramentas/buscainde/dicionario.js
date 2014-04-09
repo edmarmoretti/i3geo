@@ -3,7 +3,6 @@ i3GEOF.buscainde.dicionario = {
 1: [{
 pt:"",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

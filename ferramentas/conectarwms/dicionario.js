@@ -3,31 +3,26 @@ i3GEOF.conectarwms.dicionario = {
 1: [{
 pt:"Oops! Ocorreu um erro",
 en:"",
-es:"",
-it:""
+es:""
 }],
 2: [{
 pt:"disponibilidade",
 en:"",
-es:"",
-it:""
+es:""
 }],
 3: [{
 pt:"acessos considerados",
 en:"",
-es:"",
-it:""
+es:""
 }],
 4: [{
 pt:"Servi&ccedil;o n&atilde;o definido",
 en:"",
-es:"",
-it:""
+es:""
 }],
 5: [{
 pt:"Ooops! Problemas ao acessar o servi&ccedil;o.",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

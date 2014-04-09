@@ -3,19 +3,16 @@ i3GEOF.etiqueta.dicionario = {
 1: [{
 pt:"Escolha um tema da lista",
 en:"",
-es:"",
-it:""
+es:""
 }],
 2: [{
 pt:"Escolha o item que ser&aacute; utilizado como fonte de dados para mostrar na etiqueta",
 en:"",
-es:"",
-it:""
+es:""
 }],
 3: [{
 pt:"Desativar todas as etiquetas",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

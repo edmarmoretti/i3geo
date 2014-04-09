@@ -3,19 +3,16 @@ i3GEOF.opcoesTempo.dicionario = {
 1: [{
 pt:"Tempo em segundos ap&oacute;s o qual o mapa ser&aacute; redesenhado automaticamente",
 en:"",
-es:"",
-it:""
+es:""
 }],
 2: [{
 pt:"Aplicar",
 en:"",
-es:"",
-it:""
+es:""
 }],
 3: [{
 pt:"Parar",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

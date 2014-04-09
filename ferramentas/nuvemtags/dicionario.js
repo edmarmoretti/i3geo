@@ -3,61 +3,51 @@ i3GEOF.nuvemtags.dicionario = {
 1: [{
 pt:"Escolha o RSS para cruzar com a lista de tags ou digite um novo valor",
 en:"",
-es:"",
-it:""
+es:""
 }],
 2: [{
 pt:"Cruzar",
 en:"",
-es:"",
-it:""
+es:""
 }],
 3: [{
 pt:"Digite um endereco RSS",
 en:"",
-es:"",
-it:""
+es:""
 }],
 4: [{
 pt:"Lista",
 en:"",
-es:"",
-it:""
+es:""
 }],
 5: [{
 pt:"Cruzamento",
 en:"",
-es:"",
-it:""
+es:""
 }],
 6: [{
 pt:"Clique na TAG para localizar temas relacionados. Os temas encontrados s&atilde;o mostrados na &aacute;rvore de temas",
 en:"",
-es:"",
-it:""
+es:""
 }],
 7: [{
 pt:"menos tags",
 en:"",
-es:"",
-it:""
+es:""
 }],
 8: [{
 pt:"mais tags",
 en:"",
-es:"",
-it:""
+es:""
 }],
 9: [{
 pt:"Nenhum tag encontrado",
 en:"",
-es:"",
-it:""
+es:""
 }],
 10: [{
 pt:"",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

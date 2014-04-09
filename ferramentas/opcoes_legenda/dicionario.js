@@ -3,115 +3,96 @@ i3GEOF.opcoesLegenda.dicionario = {
 1: [{
 pt:"Essa operacao afeta apenas a legenda utilizada na ferramenta de impressao do mapa",
 en:"",
-es:"",
-it:""
+es:""
 }],
 2: [{
 pt:"Inclui no corpo do mapa?",
 en:"",
-es:"",
-it:""
+es:""
 }],
 3: [{
 pt:"Cor do fundo",
 en:"",
-es:"",
-it:""
+es:""
 }],
 4: [{
 pt:"Contorno dos s&iacute;mbolos",
 en:"",
-es:"",
-it:""
+es:""
 }],
 5: [{
 pt:"Posi&ccedil;&atilde;o",
 en:"",
-es:"",
-it:""
+es:""
 }],
 6: [{
 pt:"sup. esquerdo",
 en:"",
-es:"",
-it:""
+es:""
 }],
 7: [{
 pt:"sup. centro",
 en:"",
-es:"",
-it:""
+es:""
 }],
 8: [{
 pt:"sup. direito",
 en:"",
-es:"",
-it:""
+es:""
 }],
 9: [{
 pt:"inf. esquerdo",
 en:"",
-es:"",
-it:""
+es:""
 }],
 10: [{
 pt:"inf. centro",
 en:"",
-es:"",
-it:""
+es:""
 }],
 11: [{
 pt:"inf. direito",
 en:"",
-es:"",
-it:""
+es:""
 }],
 12: [{
 pt:"Espa&ccedil;amento em Y",
 en:"",
-es:"",
-it:""
+es:""
 }],
 13: [{
 pt:"Espa&ccedil;amento em X",
 en:"",
-es:"",
-it:""
+es:""
 }],
 14: [{
 pt:"Tamanho do s&iacute;mb. Y",
 en:"",
-es:"",
-it:""
+es:""
 }],
 15: [{
 pt:"Tamanho do s&iacute;mb. X",
 en:"",
-es:"",
-it:""
+es:""
 }],
 16: [{
 pt:"Tamanho do texto",
 en:"",
-es:"",
-it:""
+es:""
 }],
 17: [{
 pt:"Fonte: (teste a fonte mais adequada para apresenta&ccedil;&atilde;o correta da acentua&ccedil;&atilde;o)",
 en:"",
-es:"",
-it:""
+es:""
 }],
 18: [{
 pt:"Aplicar",
 en:"",
-es:"",
-it:""
+es:""
 }],
 19: [{
 pt:"Testar",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

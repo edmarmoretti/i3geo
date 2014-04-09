@@ -3,13 +3,11 @@ i3GEOF.carouseltemas.dicionario = {
 1: [{
 pt:"Clique na imagem para adicionar o tema ao mapa",
 en:"",
-es:"",
-it:""
+es:""
 }],
 2: [{
 pt:"Miniaturas",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

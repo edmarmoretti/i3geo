@@ -3,7 +3,6 @@ i3GEOF.loginusuario.dicionario = {
 1: [{
 pt:"",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

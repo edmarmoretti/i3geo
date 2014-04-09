@@ -3,7 +3,6 @@ i3GEOF.vinde.dicionario = {
 1: [{
 pt:"INDE Brasil",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };

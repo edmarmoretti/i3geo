@@ -3,13 +3,11 @@ i3GEOF.importarwmc.dicionario = {
 1: [{
 pt:"Arquivo",
 en:"",
-es:"",
-it:""
+es:""
 }],
 2: [{
 pt:"Importar",
 en:"",
-es:"",
-it:""
+es:""
 }]
 };
