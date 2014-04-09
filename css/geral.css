@@ -134,6 +134,7 @@ select option:hover {
 	cursor:help;
 	position:relative;
 	top:2px;
+	font-size: 13px;
 }
 
 .executar
