@@ -2186,6 +2186,13 @@ pt:"Escolha uma camada",
 en:"",
 es:"",
 it:""
+}],
+"x93":[
+{
+pt:"Localiza&ccedil;&atilde;o do usu&aacute;rio",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

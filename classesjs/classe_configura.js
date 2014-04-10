@@ -244,6 +244,7 @@ i3GEO.configura = {
 			{ id:"omenudataFerramentas7a",text: $trad("x64a"), url: "javascript:i3GEO.mapa.dialogo.congelaMapa();"},
 			{ id:"omenudataFerramentas8a",text: $trad("p12"), url: "javascript:i3GEO.mapa.dialogo.autoredesenha()"},
 			{ id:"omenudataFerramentas9",text: $trad("x85"), url: "javascript:i3GEO.arvoreDeTemas.dialogo.vinde()"},
+			{ id:"omenudataFerramentas10",text: $trad("x93"), url: "javascript:i3GEO.mapa.dialogo.geolocal()"},
 			//temas
 			{ id:"omenudataFerramentas0b",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a7")+'</b></span>',url: "#"},
 			{ id:"omenudataFerramentas1b",text: $trad("t31"), url: "javascript:i3GEO.tema.dialogo.tabela()"},

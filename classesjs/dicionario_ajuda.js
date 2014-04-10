@@ -986,6 +986,15 @@ g_traducao_ajuda = {
 			complemento:"",
 			//tela:"ferramentas/upload/exemplo.htm",
 			apijs:""
+		},
+		"118": {
+			titulo: "Geolocation",
+			diretorio:"i3geo/ferramentas/geolocal",
+			categoria:"6",
+			pt:"Captura as coordenadas da posi&ccedil;&atilde;o atual do usu&aacute;rio. As coordenadas s&atilde;o capturadas individualmente ou por um intervalo de tempo. Os dados s&atilde;o mostrados em uma lista e no mapa.",
+			complemento:"",
+			//tela:"ferramentas/upload/exemplo.htm",
+			apijs:"i3GEO.mapa.dialogo.geolocal()"
 		}
 	}
 };

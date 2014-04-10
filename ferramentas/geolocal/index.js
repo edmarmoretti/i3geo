@@ -127,7 +127,7 @@ i3GEOF.geolocal = {
 			"<div style='height:130px;overflow:auto;top:10px;text-align:center;position:relative;cursor:pointer;padding:5px;' id='i3GEOFgeolocalListaDePontos' >" +
 			"</div>" +
 			"<br><div id='i3GEOFgeolocalNcoord' style='width: 30px; position: absolute;' ></div>" +
-			"<div style='position:relative;width: 130px;left: 40px;'>" + $trad(8,i3GEOF.geolocal.dicionario) + " " +
+			"<div style='position:relative;width: 150px;left: 40px;'>" + $trad(8,i3GEOF.geolocal.dicionario) + " " +
 			$inputText("","","i3GEOFgeolocalMaximo","",5,"") + "</div>";
 		return ins;
 	},
@@ -143,9 +143,9 @@ i3GEOF.geolocal = {
 			i3GEO.janela.minimiza("i3GEOF.geolocal");
 		};
 		//cria a janela flutuante
-		titulo = $trad(1,i3GEOF.geolocal.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=107' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad(1,i3GEOF.geolocal.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=118' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"250",
+			"270",
 			"200",
 			"",
 			"",

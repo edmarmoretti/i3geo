@@ -218,7 +218,7 @@ i3GEO.janela = {
 
 	modal {Boolean} - (opcional) indica se a janela bloquear&aacute; as inferiores ou n&atilde;o. Por default &eacute; false
 
-	classe {String} - (opcional) classe CSS que ser&aacute; aplicada � barra de menu. Por default o valor &eacute; hd2. Na interface Google Earth, esse valor &eacute; sempre alterado para "hd".
+	classe {String} - (opcional) classe CSS que ser&aacute; aplicada a barra de menu. Por default o valor &eacute; hd2. Na interface Google Earth, esse valor &eacute; sempre alterado para "hd".
 
 	funcaoCabecalho {function} - (opcional) funcao que ser&aacute; executada quando o usu&aacute;rio clicar no cabecalho
 
@@ -251,7 +251,7 @@ i3GEO.janela = {
 			for(i=0;i<this.ANTESCRIA.length;i++)
 			{eval(this.ANTESCRIA[i]);}
 		}
-		//define os par�metros default
+		//define os parametros default
 		if(!classe || classe == "")
 		{classe = "hd";}
 		if(!id || id === "")
@@ -332,7 +332,8 @@ i3GEO.janela = {
 				status: false,
 				proxy: true,
 				ghost: false,
-				animate: true
+				animate: false,
+				useShim: true
 			});
 			resize.on('resize', function(args) {
 						this.cfg.setProperty("height", args.height + "px");
