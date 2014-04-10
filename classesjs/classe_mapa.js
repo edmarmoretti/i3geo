@@ -561,6 +561,14 @@ i3GEO.mapa = {
 	*/
 	dialogo:{
 		/*
+		Function: geolocal
+
+		Abre a janela de dialogo da ferramenta de geolocalizacao do usuario
+		*/
+		geolocal: function(){
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.geolocal()","geolocal","geolocal");
+		},
+		/*
 		Function: listaDeMapasBanco
 
 		Lista os mapas cadastrados no sistema de administracao do i3geo

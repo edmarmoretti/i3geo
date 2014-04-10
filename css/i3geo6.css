@@ -130,6 +130,7 @@ text-decoration:none;
 cursor:help;
 position:relative;
 top:2px;
+font-size: 13px;
 }
 .executar
 {cursor:pointer;color:white;text-align:left;background-color:gray;background-image:URL('../imagens/tic.png');background-repeat:no-repeat;border-style:outset;background-position: right;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;}

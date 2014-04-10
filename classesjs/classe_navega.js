@@ -119,6 +119,21 @@ i3GEO.navega = {
 		i3GEO.navega.extensaoAnterior();
 	},
 	/*
+	Function: pan2ponto
+
+	Desloca o centro do mapa para um ponto. Utiliza as funcoes da API em uso para executar o pan
+
+	Parameters:
+	
+	x - longitude
+	
+	y - latitude
+	*/
+	pan2ponto: function(x,y){
+		i3GEO.Interface[i3GEO.Interface.ATUAL].pan2ponto(x,y);
+		i3GEO.Interface[i3GEO.Interface.ATUAL].recalcPar();
+	},
+	/*
 	Function: centroDoMapa
 
 	Obt&eacute;m as coordenadas geogr&aacute;ficas do centro do mapa

@@ -1,0 +1,38 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "password=postgres user=postgres dbname=i3geosaude host=localhost port=5432"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom from (select * from public.pontosdeonibus) as foo using unique gid using srid=4326"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "cache"	"NAO"
+      "CLASSE"	"SIM"
+      "EDITAVEL"	"SIM"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "metaestat"	""
+      "ESQUEMATABELAEDITAVEL"	"public"
+      "TEMA"	"Pontos de onibus"
+      "convcaracter"	""
+      "COLUNAIDUNICO"	"gid"
+      "COLUNAGEOMETRIA"	"the_geom"
+      "TABELAEDITAVEL"	"pontosdeonibus"
+    END # METADATA
+    NAME "pontosdeonibus"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 0 0 0
+        SIZE 12
+        SYMBOL "p0"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+
