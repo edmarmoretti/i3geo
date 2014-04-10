@@ -228,11 +228,12 @@ i3GEOF.geolocal = {
 			n = ps.length,
 			i,
 			ins = "",
-			res = ["<tr><td></td><td></td><td><b>Latitude</b></td><td><b>Longitude</b></td></tr>"];
+			res = ["<tr><td></td><td></td><td></td><td><b>Latitude</b></td><td><b>Longitude</b></td></tr>"];
 		for(i=(n-1);i>=0;i--){
 			ins = "<tr>" +
 				'<td><img title="' + $trad(4,i3GEOF.geolocal.dicionario) + '" src="'+i3GEO.configura.locaplic+'/imagens/x.gif" onclick="i3GEOF.geolocal.excluiLinha('+i+')" style="cursor:pointer"></td>' +
 				'<td><img onmouseout="i3GEOF.geolocal.escondexy()" onmouseover="i3GEOF.geolocal.mostraxy('+i+')" title="pan" src="'+i3GEO.configura.locaplic+'/imagens/o.gif" onclick="i3GEOF.geolocal.panLinha('+i+')" style="cursor:pointer"></td>' +
+				'<td><img title="info" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/help-about.png" onclick="i3GEOF.geolocal.info('+i+')" style="cursor:pointer"></td>' +
 				"<td>" + ps[i].coords.latitude + "</td><td>" + ps[i].coords.longitude + "</td></tr>";
 			res.push(ins);
 		}
@@ -253,6 +254,9 @@ i3GEOF.geolocal = {
 	panLinha: function(i){
 		var posicao = i3GEOF.geolocal.posicoes[i];
 		i3GEO.navega.pan2ponto(posicao.coords.longitude,posicao.coords.latitude);
+	},
+	info: function(i){
+		i3GEO.mapa.dialogo.cliqueIdentificaDefault(i3GEOF.geolocal.posicoes[i].coords.longitude,i3GEOF.geolocal.posicoes[i].coords.latitude);
 	},
 	mostraxy: function(i){
 		/*

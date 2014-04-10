@@ -109,8 +109,8 @@ i3GEOF.identifica = {
 	/*
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.identifica.iniciaDicionario();
+	criaJanelaFlutuante: function(x,y){
+		i3GEOF.identifica.iniciaDicionario(x,y);
 	},
 	/*
 	Function: iniciaDicionario
@@ -119,16 +119,30 @@ i3GEOF.identifica = {
 
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 	*/
-	iniciaDicionario: function(){
+	iniciaDicionario: function(x,y){
 		if(typeof(i3GEOF.identifica.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/identifica/dicionario.js",
-				"i3GEOF.identifica.iniciaJanelaFlutuante()",
-				"i3GEOF.identifica.dicionario_script"
-			);
+			if(x){
+				i3GEO.util.scriptTag(
+					i3GEO.configura.locaplic+"/ferramentas/identifica/dicionario.js",
+					"i3GEOF.identifica.iniciaJanelaFlutuante("+x+","+y+")",
+					"i3GEOF.identifica.dicionario_script"
+				);
+			}
+			else{
+				i3GEO.util.scriptTag(
+					i3GEO.configura.locaplic+"/ferramentas/identifica/dicionario.js",
+					"i3GEOF.identifica.iniciaJanelaFlutuante()",
+					"i3GEOF.identifica.dicionario_script"
+				);
+			}
 		}
 		else{
-			i3GEOF.identifica.iniciaJanelaFlutuante();
+			if(x){
+				i3GEOF.identifica.iniciaJanelaFlutuante(x,y);
+			}
+			else{
+				i3GEOF.identifica.iniciaJanelaFlutuante();
+			}
 		}
 	},
 	/*
@@ -250,7 +264,7 @@ i3GEOF.identifica = {
 
 	Cria a janela flutuante para controle da ferramenta.
 	*/
-	iniciaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(x,y){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
@@ -278,6 +292,10 @@ i3GEOF.identifica = {
 			minimiza
 		);
 		divid = janela[2].id;
+		if(x){
+			objposicaocursor.ddx = x;
+			objposicaocursor.ddy = y;
+		}
 		i3GEOF.identifica.inicia(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy,divid,true,true);
 		$i("i3GEOF.identifica_corpo").style.backgroundColor = "white";
 		if(i3GEO.Interface.ATUAL !== "googleearth"){
@@ -614,11 +632,20 @@ i3GEOF.identifica = {
 
 	<i3GEO.php.identifica3>
 	*/
-	buscaDadosTema: function(tema){
+	buscaDadosTema: function(tema,x,y){
 		var res,opcao,resolucao,listaDeTemas="",temp;
 		if(!$i("i3GEOidentificaocorrencia")){
-			i3GEOF.identifica.criaJanelaFlutuante();
+			if(x){
+				i3GEOF.identifica.criaJanelaFlutuante(x,y);
+			}
+			else{
+				i3GEOF.identifica.criaJanelaFlutuante();
+			}
 			return;
+		}
+		if(x){
+			i3GEOF.identifica.x = x;
+			i3GEOF.identifica.y = y;
 		}
 		try{
 			if(tema != ""){

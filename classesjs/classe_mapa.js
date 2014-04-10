@@ -869,8 +869,13 @@ i3GEO.mapa = {
 		Function: cliqueIdentificaDefault
 
 		Abre a janela de dialogo da ferramenta identifica
+		
+		Parameters:
+		 
+		x,y - opcional 
+		
 		*/
-		cliqueIdentificaDefault: function(e){
+		cliqueIdentificaDefault: function(x,y){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");}
 			//@FIXIT nada elegante
 			//evita clicar sobre a barra do googlemaps
@@ -890,14 +895,28 @@ i3GEO.mapa = {
 			}
 			if(typeof(i3GEOF.identifica) === 'undefined'){
 				//javascript que sera carregado
-				var js = i3GEO.configura.locaplic+"/ferramentas/identifica/index.js";
+				var js = i3GEO.configura.locaplic+"/ferramentas/identifica/index.js",
+					temp = function(){
+						if(x){
+							i3GEOF.identifica.criaJanelaFlutuante(x,y);				
+						}
+						else{
+							i3GEOF.identifica.criaJanelaFlutuante();
+						}
+					};
 				//carrega o script
-				i3GEO.util.scriptTag(js,"i3GEOF.identifica.criaJanelaFlutuante()","i3GEOF.identifica_script");
+				i3GEO.util.scriptTag(js,temp,"i3GEOF.identifica_script");
 			}
 			else{
-				i3GEOF.identifica.x = objposicaocursor.ddx;
-				i3GEOF.identifica.y = objposicaocursor.ddy;
-				i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);
+				if(x){
+					i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo,x,y);				
+				}
+				else{
+					i3GEOF.identifica.x = objposicaocursor.ddx;
+					i3GEOF.identifica.y = objposicaocursor.ddy;
+					i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);
+				}
+				
 				return;
 			}
 		},
