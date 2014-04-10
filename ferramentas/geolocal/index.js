@@ -243,6 +243,7 @@ i3GEOF.geolocal = {
 	},
 	limpa: function(){
 		i3GEOF.geolocal.posicoes = [];
+		i3GEOF.geolocal[i3GEO.Interface.ATUAL].removeLayer();
 		i3GEOF.geolocal.listaCoord();
 	},
 	excluiLinha: function(i){
@@ -317,7 +318,8 @@ i3GEOF.geolocal = {
 				i3GEOF.geolocal.wgs2google(point);
                 pointList.push(point);
                 pointFeature.push(new OpenLayers.Feature.Vector(point,null,style_blue));
-			}            
+			}
+			i3GEOF.geolocal.panLinha(n-1);
             var lineFeature = new OpenLayers.Feature.Vector(
                 new OpenLayers.Geometry.LineString(pointList),null,style_blue);
 
@@ -330,6 +332,47 @@ i3GEOF.geolocal = {
 		}
 	},
 	googlemaps: {
+		linhas: null,
+		marca: null,
+		desenha: function(){
+            var ps = i3GEOF.geolocal.posicoes,
+				n = ps.length,
+				i,
+				l,
+				pointFeature = [];
+			for(i=0;i<n;i++){
+				l = new google.maps.LatLng(ps[i].coords.latitude,ps[i].coords.longitude);
+				pointFeature.push(
+					l
+				);
+			}
+			i3GEOF.geolocal.googlemaps.removeLayer();
+			i3GEOF.geolocal.googlemaps.marca = new google.maps.Marker({
+				position: new google.maps.LatLng(ps[0].coords.latitude,ps[0].coords.longitude),
+				map: i3GeoMap
+			});
+			i3GEOF.geolocal.googlemaps.linhas = new google.maps.Polyline({
+				path: pointFeature,
+				geodesic: true,
+				strokeColor: 'blue',
+				strokeOpacity: 1.0,
+				strokeWeight: 2,
+				name: "Coordenadas"
+			});
+			i3GEOF.geolocal.googlemaps.linhas.setMap(i3GeoMap);
+			i3GEOF.geolocal.panLinha(n-1);
+		},
+		removeLayer: function(){
+			if(i3GEOF.geolocal.googlemaps.linhas){
+				i3GEOF.geolocal.googlemaps.linhas.setMap(null);
+			}
+			if(i3GEOF.geolocal.googlemaps.marca){
+				i3GEOF.geolocal.googlemaps.marca.setMap(null);
+			}
+		}
+	},
+	//@TODO implementar desenho dos pontos e linhas
+	googleearth: {
 		desenha: function(){
 		},
 		removeLayer: function(){
