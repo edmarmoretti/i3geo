@@ -1370,8 +1370,10 @@ i3GEO.Interface = {
 				i3geoOL.events.register("moveend",i3geoOL,function(e){
 					//if(typeof(console) !== 'undefined'){console.error("moveend");}
 					var xy;
+					
 					modoAtual = "";
 					i3GEO.Interface.openlayers.recalcPar();
+					i3GEO.Interface.STATUS.pan = false;
 					i3GEO.eventos.navegaMapa();
 					i3GEO.util.escondePin();
 					//
