@@ -256,7 +256,7 @@ i3GEOF.geolocal = {
 		var posicao = i3GEOF.geolocal.posicoes[i];
 		//@FIXME o pan nao funciona no OSM
 		if(posicao != undefined && i3GEO.Interface.openlayers.googleLike != true){
-			i3GEO.navega.pan2ponto((posicao.coords.longitude + (i / 10)),(posicao.coords.latitude));
+			i3GEO.navega.pan2ponto((posicao.coords.longitude),(posicao.coords.latitude));
 		}
 	},
 	info: function(i){
@@ -294,7 +294,7 @@ i3GEOF.geolocal = {
 			i,
 			pontos = [];
 		for(i=0;i < n;i++){
-			pontos.push((ps[i].coords.longitude + (i / 10)) + " " + ps[i].coords.latitude);
+			pontos.push((ps[i].coords.longitude) + " " + ps[i].coords.latitude);
 		}
 		return pontos;
 	},
@@ -356,7 +356,7 @@ i3GEOF.geolocal = {
             }
 			
 			for(i=0;i<n;i++){
-                point = new OpenLayers.Geometry.Point((ps[i].coords.longitude + (i / 10)),(ps[i].coords.latitude));
+                point = new OpenLayers.Geometry.Point((ps[i].coords.longitude),(ps[i].coords.latitude));
                 i3GEOF.geolocal.wgs2google(point);
 				pointList.push(point);
                 pointFeature.push(new OpenLayers.Feature.Vector(point,null,style_blue));
