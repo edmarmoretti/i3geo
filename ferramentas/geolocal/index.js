@@ -121,8 +121,9 @@ i3GEOF.geolocal = {
 		ins += "" +
 			'<button title="'+$trad(3,i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.capturaCoordenada()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/gps.png" /></button>' +
 			'<button title="'+$trad(4,i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.limpa()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/erase.png" /></button>' +
+			'<button title="'+$trad(9,i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.criaShp()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-gps-create.png" /></button>' +
 			'<img title="' + $trad(7,i3GEOF.geolocal.dicionario) + '" onclick="i3GEOF.geolocal.paraTempo()" style="left:10px;position:relative;" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/clock.png" >' +
-			'&nbsp;<form id="i3GEOFgeolocalFormTempo" style="left: 122px;position: absolute;top: 18px;width: 30px;">' +
+			'&nbsp;<form id="i3GEOFgeolocalFormTempo" style="left: 162px;position: absolute;top: 17px;width: 30px;">' +
 			$inputText("","","i3GEOFgeolocalTempo",$trad(6,i3GEOF.geolocal.dicionario),5,"0") + '</form>' +
 			"<div style='height:130px;overflow:auto;top:10px;text-align:center;position:relative;cursor:pointer;padding:5px;' id='i3GEOFgeolocalListaDePontos' >" +
 			"</div>" +
@@ -253,7 +254,10 @@ i3GEOF.geolocal = {
 	},
 	panLinha: function(i){
 		var posicao = i3GEOF.geolocal.posicoes[i];
-		i3GEO.navega.pan2ponto(posicao.coords.longitude,posicao.coords.latitude);
+		//@FIXME o pan nao funciona no OSM
+		if(posicao != undefined && i3GEO.Interface.openlayers.googleLike != true){
+			i3GEO.navega.pan2ponto((posicao.coords.longitude + (i / 10)),(posicao.coords.latitude));
+		}
 	},
 	info: function(i){
 		i3GEO.mapa.dialogo.cliqueIdentificaDefault(i3GEOF.geolocal.posicoes[i].coords.longitude,i3GEOF.geolocal.posicoes[i].coords.latitude);
@@ -284,6 +288,38 @@ i3GEOF.geolocal = {
 			box.style.left = "0px";
 		}
 	},
+	posicoes2pontos: function(){
+		var ps = i3GEOF.geolocal.posicoes,
+			n = ps.length,
+			i,
+			pontos = [];
+		for(i=0;i < n;i++){
+			pontos.push((ps[i].coords.longitude + (i / 10)) + " " + ps[i].coords.latitude);
+		}
+		return pontos;
+	},
+	criaShp: function(){
+		function ativanovotema(retorno){
+			var pontos = i3GEOF.geolocal.posicoes2pontos(),
+				temaNovo = retorno.data,
+				converteParaLinha = function(){
+					var cp = new cpaint();
+					cp.set_response_type("JSON");
+					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=sphPT2shp&para=linha&tema="+temaNovo;
+					cp.call(p,"sphPT2shp",i3GEO.atualiza);
+				};
+			var p = window.parent.i3GEO.configura.locaplic+"/ferramentas/inserexy2/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=insereSHP&tema="+retorno.data;
+			var cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.set_transfer_mode('POST');
+			cp.call(p,"insereSHP",converteParaLinha,"&xy="+pontos.join(" "));
+		}
+		var cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.set_transfer_mode("POST");
+		var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid;
+		cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio");		
+	},
 	openlayers: {
 		desenha: function(){
             // allow testing of specific renderers via "?renderer=Canvas", etc
@@ -294,6 +330,8 @@ i3GEOF.geolocal = {
             	ps = i3GEOF.geolocal.posicoes,
 				n = ps.length,
 				i,
+				point,
+				teste,
 				pointFeature = [],
 				pointList = [];
             
@@ -318,18 +356,19 @@ i3GEOF.geolocal = {
             }
 			
 			for(i=0;i<n;i++){
-                point = new OpenLayers.Geometry.Point(ps[i].coords.longitude,ps[i].coords.latitude);
-				i3GEOF.geolocal.wgs2google(point);
-                pointList.push(point);
+                point = new OpenLayers.Geometry.Point((ps[i].coords.longitude + (i / 10)),(ps[i].coords.latitude));
+                i3GEOF.geolocal.wgs2google(point);
+				pointList.push(point);
                 pointFeature.push(new OpenLayers.Feature.Vector(point,null,style_blue));
 			}
-			i3GEOF.geolocal.panLinha(n-1);
+			
             var lineFeature = new OpenLayers.Feature.Vector(
                 new OpenLayers.Geometry.LineString(pointList),null,style_blue);
 
             i3geoOL.addLayer(vectorLayer);
             vectorLayer.addFeatures([lineFeature]);
             vectorLayer.addFeatures(pointFeature);
+            i3GEOF.geolocal.panLinha(n-1);
 		},
 		removeLayer: function(){
 			i3geoOL.removeLayer(i3geoOL.getLayersByName("Coordenadas")[0],false);

@@ -39,5 +39,10 @@ es:""
 pt:"M&aacute;ximo de pontos",
 en:"",
 es:""
+}],
+9: [{
+pt:"Salva como Shapefile",
+en:"",
+es:""
 }]
 };

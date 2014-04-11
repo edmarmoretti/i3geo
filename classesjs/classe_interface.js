@@ -1434,6 +1434,9 @@ i3GEO.Interface = {
 						proj900913 = new OpenLayers.Projection("EPSG:900913");
 						point = new OpenLayers.LonLat(x, y);
 						metrica =  point.transform(projWGS84,proj900913);
+						if(x == metrica.lon){
+							return;
+						}
 						x = metrica.lon;
 						y = metrica.lat;
 					}
