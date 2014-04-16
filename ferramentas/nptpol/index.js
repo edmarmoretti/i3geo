@@ -204,6 +204,7 @@ i3GEOF.nptpol = {
 			{ext = i3GEO.Interface.googlemaps.bbox();}
 			else
 			{ext = i3GEO.parametros.mapexten;}
+			ext = i3GEO.util.extOSM2Geo(ext);
 			p = i3GEO.configura.locaplic+"/ferramentas/nptpol/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=nptPol&temaPt="+$i("i3GEOnptpolPontos").value+"&temaPo="+$i("i3GEOnptpolPoligonos").value+"&ext="+ext;
 			p += "&somaritem="+somaritem;
 			cp = new cpaint();
