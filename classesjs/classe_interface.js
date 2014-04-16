@@ -1288,8 +1288,12 @@ i3GEO.Interface = {
 				for(i=0;i<nlayers;i++){
 					if(layers[i].url){
 						layers[i].mergeNewParams({r:Math.random()});
-						layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&","&foo=");
-						layers[i].url = layers[i].url+"&&";
+						if(layers[i].url.search("?") >= 0){
+							layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&","&foo=");
+							layers[i].url = layers[i].url+"&&";
+						}
+						//cache e um parametro especifico do i3geo
+						//utilizado por mapa_openlayers.php e mapa_googlemaps.php
 						layers[i].url = layers[i].url.replace("&cache=sim","&cache=nao");
 						if(layers[i].visibility === true){
 							layers[i].redraw();
