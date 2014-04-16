@@ -136,12 +136,17 @@ $itens - array com os nomes originais das colunas
 return:
 {array}
 */
-	function criaDefDb($itens){
+	function criaDefDb($itens,$unico=true){
 		$c = 0;
 		$def = array();
 		foreach ($itens as $ni){
 			$ni = strtoupper($ni);
-			$def[] = array(substr($ni, 0, 8).$c,"C","254");
+			if($unico == true){
+				$def[] = array(substr($ni, 0, 8).$c,"C","254");
+			}
+			else{
+				$def[] = array($ni,"C","254");
+			}
 			$c = $c + 1;
 		}
 		return $def;
@@ -1020,7 +1025,7 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo.
 		$itemspt = pegaItens($layerPt);
 		//gera o novo arquivo shape file
 		// cria o dbf
-		$def = $this->criaDefDb($itemspt);
+		$def = $this->criaDefDb($itemspt,false);
 		//pega os itens dos temas poligonais
 		$layersPol = array();
 		$temas = explode(",",$temasPo);
