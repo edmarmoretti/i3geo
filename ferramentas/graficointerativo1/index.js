@@ -757,7 +757,7 @@ i3GEOF.graficointerativo1 = {
 			+ "/ferramentas/graficointerativo1/exec.php?g_sid="
 			+ i3GEO.configura.sid + "&funcao=graficoSelecao&tema=" + tema
 			+ "&itemclasses=" + x + "&itemvalores=" + y + "&exclui="
-			+ excluir + "&ext=" + i3GEO.parametros.mapexten;
+			+ excluir + "&ext=" + i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 
 			if ($i("i3GEOgraficointerativo1DadosPuros").checked) {
 				tipo = "nenhum";
