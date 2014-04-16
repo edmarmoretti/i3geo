@@ -459,11 +459,13 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 function dadosLinhaDoTempo($map_file,$tema,$ext="")
 {
 	$map = ms_newMapObj($map_file);
+	
 	if($ext && $ext != ""){
 		$e = explode(" ",$ext);
 		$extatual = $map->extent;
 		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 	}
+	
 	$layer = $map->getLayerByName($tema);
 	$selecionados = carregaquery2($map_file,$layer,$map);
 	if ($exclui == ""){$exclui = "nulo";}
