@@ -29,5 +29,10 @@ i3GEOF.opcoesTamanho.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		6: [{
+			pt:"Essa operacao afeta apenas a legenda utilizada na ferramenta de impressao do mapa",
+			en:"",
+			es:""
 		}]
 };
