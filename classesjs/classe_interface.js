@@ -1288,7 +1288,7 @@ i3GEO.Interface = {
 				for(i=0;i<nlayers;i++){
 					if(layers[i].url){
 						layers[i].mergeNewParams({r:Math.random()});
-						if(layers[i].url.search("?") >= 0){
+						if(layers[i].url.search("\\?") >= 0){
 							layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&","&foo=");
 							layers[i].url = layers[i].url+"&&";
 						}
