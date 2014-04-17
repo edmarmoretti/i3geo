@@ -173,7 +173,7 @@ i3GEOF.imprimir = {
 		if(i3GEO.Interface.openlayers.googleLike === true){
 			interf = "googlemaps";
 		}
-		var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid+"&interface="+interf+"&mapexten="+i3GEO.parametros.mapexten;
+		var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid+"&interface="+interf+"&mapexten="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 		var id = "imprimir"+Math.random();
 		if(tipoAbertura){
 			i3GEO.janela.cria("350px","350px",url,"","","Arquivos",id);

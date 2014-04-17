@@ -42,7 +42,7 @@ $map->save($temp);
 substituiCon($temp,$postgis_mapa);
 $map = ms_newMapObj($temp);
 
-if($interface == "googlemaps")
+if($map->getmetadata("interface") == "googlemaps")
 {
 	$map->setProjection("init=epsg:4618,a=6378137,b=6378137");
 	$map->set("units",MS_METERS);

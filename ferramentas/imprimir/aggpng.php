@@ -70,7 +70,7 @@ $of = $map->outputformat;
 $of->set("driver","AGG/PNG");
 $of->set("imagemode","RGB");
 $map = ms_newMapObj($temp);
-if($interface == "googlemaps")
+if($map->getmetadata("interface") == "googlemaps")
 {
 	$map->setProjection("init=epsg:4618,a=6378137,b=6378137");
 	$map->set("units",MS_METERS);
@@ -111,6 +111,7 @@ removeLinha("classeNula",$temp);
 $map = ms_newMapObj($temp);
 
 $o = $map->outputformat;
+
 if($mapexten != ""){
 	$ext = explode(" ",$mapexten);
 	$extatual = $map->extent;

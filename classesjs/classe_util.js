@@ -2221,7 +2221,8 @@ i3GEO.util = {
 		if(temp && mantem == false){
 			$i(container).removeChild(temp);
 		}
-		fundo = $i(container).style.backgroundColor;
+		fundo = "#F2F2F2"; //$i(container).style.backgroundColor;
+		$i(container).style.backgroundColor = "white";
 
 		botoes = "<table style='width:100%;background-color:"+fundo+";' ><tr style='width:100%'>";
 		if (anterior !== "")

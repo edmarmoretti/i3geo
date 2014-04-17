@@ -110,9 +110,9 @@ i3GEOF.opcoesTempo = {
 	html:function(){
 		var ins = '<table summary="" class=lista width="100%">' +
 		'<table summary="" class=lista > '+
-		'	<tr><td>'+$trad(1,i3GEOF.opcoesTempo.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOopcoesTempoT","",8,"") +
-		'</table><br>' +
+		'	<tr><td>'+$trad(1,i3GEOF.opcoesTempo.dicionario)+':<br><br>' +
+		$inputText("","","i3GEOopcoesTempoT","",8,"5") +
+		'</td><td></table><br>' +
 	  	'<p class=paragrafo ><input id=i3GEOopcoesTempobotao1 size=16  type=button value="'+$trad(2,i3GEOF.opcoesTempo.dicionario)+'"/>' +
 	  	'&nbsp;<input id=i3GEOopcoesTempobotao2 size=16 type=button value="'+$trad(3,i3GEOF.opcoesTempo.dicionario)+'"/>';
 		return ins;
