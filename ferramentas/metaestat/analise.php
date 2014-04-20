@@ -721,8 +721,10 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formula
 	$n = count($sqls);
 
 	$cwhere = array();
+	//$colunasWhere = array();
 	for($i=1;$i<$n;$i++){
-		$cwhere[] = "tabela0.".$colunasIdentificador[0]."::text = "."tabela".$i.".".$colunasIdentificador[$i]."::text";
+		$cwhere[] = "tabela0.".$gid."::text = "."tabela".$i.".".$gid."::text";
+		//$colunasWhere[] = 
 	}
 	$colunasDados = array();
 	$itens = array($gid,"regiao");
