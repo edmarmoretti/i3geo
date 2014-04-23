@@ -28,6 +28,10 @@ if(!empty($restauramapa)){
 	$m->save($xbase);
 	//$fundo = $xbase;
 	$temas = $xbase;
+	if (!isset($mapext)){
+		$mapext = $m->extent->minx." ".$m->extent->miny." ".$m->extent->maxx." ".$m->extent->maxy;
+	}
+	
 }
 //
 //imprime na tela a ajuda ao usu&aacute;rio
@@ -148,7 +152,6 @@ if($temas != ""){
 	{$visiveis = $temas;}
 	else{
 		$visiveis = str_replace(" ",",",$visiveis);
-		//$visiveis = strtolower($visiveis);
 		$visiveis = explode(",",$visiveis);
 	}
 	$objOpenLayers = array();
@@ -232,7 +235,6 @@ if($temas != ""){
 								}
 							}
 						}
-						//var_dump($objOpenLayers);exit;
 					}
 				}
 				else
@@ -322,8 +324,8 @@ Par&acirc;metros:
 		corta
 		legenda
 
-	Para ver a lista de códigos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
-	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos s&atilde;o mostrados em vermelho.
+	Para ver a lista de cï¿½digos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
+	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os cï¿½digos s&atilde;o mostrados em vermelho.
 
 	Exemplo:
 
