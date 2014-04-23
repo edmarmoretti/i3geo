@@ -57,7 +57,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -125,7 +125,7 @@ image_wms - tipo de imagem dispon&iacute;vel
 
 versao_wms - Vers&atilde;o do WMS (necess&aacute;rio quando da inclus&atilde;o de uma camada WMS diretamente pela URL)
 
-gvsiggvp - (depreciado na versão 4.7 - utilize o parametro temasa) endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
+gvsiggvp - (depreciado na vers&atilde;o 4.7 - utilize o parametro temasa) endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
 
 gvsigview - lista com nomes de views existentes no projeto gvSig separado por virgula. Se for vazio, serao adicionadas todas as views. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
 

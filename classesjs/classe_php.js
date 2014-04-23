@@ -5,7 +5,7 @@ i3GEO.php
 
 Chamadas em AJAX que executam programas no lado do servidor
 
-Muitos dos parâmetros exigidos pelos programas em PHP s&atilde;o obtidos da vari&aacute;vel
+Muitos dos parï¿½metros exigidos pelos programas em PHP s&atilde;o obtidos da vari&aacute;vel
 de se&ccedil;&atilde;o aberta no servidor quando o i3Geo &eacute; inicializado, &eacute; o caso por exemplo do nome
 do arquivo correspondente ao mapfile atualmente em uso
 
@@ -75,7 +75,7 @@ Return:
 
 	cpJSON.call(p,"teste",temp);
 
-	onde, p cont&eacute;m o nome do programa PHP e seus parâmetros
+	onde, p cont&eacute;m o nome do programa PHP e seus parï¿½metros
 	"teste" &eacute; o nome da fun&ccedil;&atilde;o PHP (no caso do i3Geo, isso n&atilde;o afeta em nada)
 	e temp &eacute; a fun&ccedil;&atilde;o que tratar&aacute; o retorno dos dados.
 
@@ -419,7 +419,7 @@ i3GEO.php = {
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
 			par = "&map_file=&funcao=pegaMapas&g_sid="+i3GEO.configura.sid;
-		cpJSON.call(p,"pegaSistemas",funcao,par);
+		cpJSON.call(p,"pegaMapas",funcao,par);
 	},
 	/*
 	Function: mudatamanho
@@ -612,9 +612,9 @@ i3GEO.php = {
 	/*
 	Function: mudaext
 
-	O parâmetro "atualiza" &eacute; do tipo booleano e indica se o redesenho do mapa ser&aacute; feito ou n&atilde;o.
+	O parï¿½metro "atualiza" &eacute; do tipo booleano e indica se o redesenho do mapa ser&aacute; feito ou n&atilde;o.
 
-	O parâmetro "geo" &eacute; do tipo booleano e indica se as coordenadas dever&atilde;o ser convertidas para geogr&aacute;ficas ao serem salvas no mapfile
+	O parï¿½metro "geo" &eacute; do tipo booleano e indica se as coordenadas dever&atilde;o ser convertidas para geogr&aacute;ficas ao serem salvas no mapfile
 
 	<MUDAEXT>
 	*/

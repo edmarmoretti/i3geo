@@ -139,17 +139,21 @@ i3GEO.guias = {
 			titulo:"Links",
 			id:"guia5",
 			idconteudo:"guia5obj",
+			mostraLink: function(id,url){
+				$i("i3geoMapasLink_"+id).innerHTML = "<a href='"+url+"' target=_blank >"+url+"</a>";
+			},
 			click: function(onde){
 				if(!onde){
 					onde = i3GEO.guias.CONFIGURA.mapas.idconteudo;
 				}
 				var pegaMapas = function(retorno){
-					var ins,mapa,ig1lt,ig1,nome,lkd,link,temp;
+					var ins,mapa,ig1lt,ig1,nome,lkd,link,temp,combo,urlinterface;
 					ins = "<br><div id='banners' style='overflow:auto;text-align:center'>" +
-						"<a href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target=_blank >"+$trad("x89")+"</a><br>";
+						"<a href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target=_blank >"+$trad("x89")+"</a><br><br>";
 					mapa = retorno.data.mapas;
 					ig1lt = mapa.length;
 					ig1=0;
+					urlinterface = window.location.origin+window.location.pathname;
 					if(ig1lt > 0){
 						do{
 							temp = mapa[ig1];
@@ -166,19 +170,38 @@ i3GEO.guias = {
 							{link += "&"+temp.OUTROS;}
 							if (lkd !== "")
 							{link = lkd;}
-							ins += "<div style=background-color:white;padding:5px;margin:5px ><div style=text-align:center ><a href='"+link+"' style=text-align:center;text-decoration:none; >";
+							ins += "<div style='width:170px;background-color:white;padding:5px;margin:auto;border: 1px solid #F0F0F0;border-radius: 5px;box-shadow: 1px 1px 1px 1px #D3D3D3;' >";
+							
 							if(temp.IMAGEM && temp.IMAGEM != ""){
-								ins += "<img src='"+temp.IMAGEM+"'></a></div><br>";
+								ins += "<div style=text-align:center ><a href='"+link+"' style=text-align:center;text-decoration:none; >" +
+									"<img src='"+temp.IMAGEM+"'></a></div><br>";
 							}
+							//verifica se o mapfile esta salvo no banco diretamente
 							if(temp.CONTEMMAPFILE == "nao"){
-								ins += "<div><p class=paragrafo style=text-align:center;cursor:pointer ><a href='"+link+"' style=text-align:center;text-decoration:none; >"+nome+" ("+temp.ID_MAPA+")</a></p></div></div>";
+								ins += "<div><p class=paragrafo style=text-align:center;cursor:pointer >" +
+									"<a href='"+link+"' style=text-align:center;text-decoration:none; >"+nome+" ("+temp.ID_MAPA+")</a></p></div>";
 							}
 							else{
-								ins += "<div><p class=paragrafo style=text-align:center;cursor:pointer >" +
+								//combo de opcoes para abrir os mapas salvos como mapfiles
+								combo = "<select style='width:150px;' onchange='i3GEO.guias.CONFIGURA.mapas.mostraLink("+ig1+",this.value)'>" +
+										"<option value=''>Links:</option>" +
+										"<option value='"+link+"'>Original</option>" +
+										"<option value='"+link+"&interface="+urlinterface+"'>"+urlinterface+"</option>" +
+										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"&fundo=e_wsm'>Openlayers 1</option>" +
+										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"&fundo='>Openlayers 2</option>" +
+										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Openlayers 3</option>" +
+										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"'>Openlayers 4</option>" +
+										"</select>";
+								ins += "<div>" +
+									"<p class=paragrafo style=text-align:center;cursor:pointer >" +
+									"<img style=text-align:center src='"+i3GEO.configura.locaplic+"/ferramentas/salvamapa/geraminiatura.php?w=100&h=67&restauramapa="+temp.ID_MAPA+"'><br><br>" +
 									"<a href='"+link+"' style=text-align:center;text-decoration:none; >"+nome+" ("+temp.ID_MAPA+")</a>" +
-									"<br><a target=_blank href='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?"+temp.OUTROS+"&fundo=e_wsm' style=text-align:center;text-decoration:none;color:gray; >Preview</a>" +
-									"</p></div></div>";
+									//"<br><a target=_blank href='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?"+temp.OUTROS+"&fundo=e_wsm' style=text-align:center;text-decoration:none;color:gray; >Preview</a>" +
+									"<br>"+combo +
+									"<br><div style='cursor:pointer;' id='i3geoMapasLink_"+ig1+"' ></div>" +
+									"</p></div>";
 							}
+							ins += "</div><br>";
 							ig1++;
 						}
 						while(ig1<ig1lt);
