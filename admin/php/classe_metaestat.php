@@ -503,7 +503,8 @@ class Metaestat{
 			"sqlmapserver"=>$sqlgeo,
 			"filtro"=>$contemfiltro,
 			"colunas"=>$colunasSemGeo,
-			"alias"=>$alias
+			"alias"=>$alias,
+			"srid"=>$dadosgeo["srid"]
 		);
 	}
 	/**

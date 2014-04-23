@@ -2161,17 +2161,15 @@ i3GEO.util = {
 		if (arguments.length === 2)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando...</span>";}
 		var monta = function(retorno){
-			var ins = [],
+			var c = "checked",
+				ins = [],
 				i,n,temp;
 			if (retorno.data !== undefined){
 				ins.push("<table class=lista2 >");
-				ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' name='"+prefixo+"EPSG' type=radio checked value='' /></td>");
-				ins.push("<td>"+retorno.data[0].nome+"</td></tr>");
-				ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' name='"+prefixo+"EPSG' type=radio value='' /></td>");
-				ins.push("<td>"+retorno.data[1].nome+"</td></tr>");
 				n = retorno.data.length;
-				for (i=2;i<n; i++){
-					ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' name='"+prefixo+"EPSG' type=radio value='"+retorno.data[i].codigo+"' /></td>");
+				for (i=0;i<n; i++){
+					ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' "+c+" name='"+prefixo+"EPSG' type=radio value='"+retorno.data[i].codigo+"' /></td>");
+					c = "";
 					ins.push("<td>"+retorno.data[i].nome+"</td></tr>");
 				}
 				ins.push("</table>");
@@ -2179,8 +2177,46 @@ i3GEO.util = {
 				temp = {dados:ins,tipo:"dados"};
 			}
 			else
-			{temp = {dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
+			{temp = {dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};}
 			funcao(temp);
+		};
+		i3GEO.php.listaEpsg(monta);
+	},
+	/*
+	Function: comboEpsg
+
+	Cria uma lista de codigos EPSG para o usuario escolher um deles.
+
+	Parametros:
+
+	idCombo - id que sera atribuido ao combo
+	
+	onde - id do elemento HTML que recebera o combo
+	
+	funcaoOnChange - nome da funcao que sera inserida em onChange
+	
+	valorDefault - valor default do combo
+	*/
+	comboEpsg: function (idCombo,onde,funcaoOnChange,valorDefault){
+		var onde = $i(onde);
+		onde.innerHTML="<span style=color:red;font-size:10px; >buscando...</span>";
+		var monta = function(retorno){
+			var ins = [],
+				i,n,temp;
+			if (retorno.data !== undefined){
+				n = retorno.data.length;
+				ins.push("<select id='"+idCombo+"' onChange='"+funcaoOnChange+"(this)' >");
+				for (i=0;i<n; i++){
+					ins.push("<option value='"+retorno.data[i].codigo+"'>"+retorno.data[i].nome+"</option>");
+				}
+				ins.push("</select>");
+				ins = ins.join('');
+				onde.innerHTML = ins;
+				$i(idCombo).value = valorDefault;
+			}
+			else{
+				onde.innerHTML = '<div class=erro >Ocorreu um erro</div>';
+			}
 		};
 		i3GEO.php.listaEpsg(monta);
 	},
