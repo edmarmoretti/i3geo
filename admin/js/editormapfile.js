@@ -764,7 +764,7 @@ function adicionaNovoLayer(codigoMap)
 					tempNode.enableHighlight = false;
 					tree.draw();
 					//editorGeral(codigoMap,dados.layers[0]);
-					editorTitulo(codigoMap,dados.layers[0])
+					editorTitulo(codigoMap,dados.layers[0]);
 					core_carregando("desativa");
 				}
 			}
@@ -841,15 +841,17 @@ function classesAuto(codigoMap,codigoLayer)
 			var callback2 = {
 					success:function(o) {
 						try {
-							var dados = YAHOO.lang.JSON.parse(o.responseText);
 							var nos = tree.getNodesByProperty("classes",codigoMap+"_"+codigoLayer);
+							/*
+							var dados = YAHOO.lang.JSON.parse(o.responseText);
+							
 							if(nos){
-								//for (var i=0, j=nos.length; i<j; i++)
-								//{tree.removeNode(nos[i],false);}
+								for (var i=0, j=nos.length; i<j; i++)
+								{tree.removeNode(nos[i],false);}
 							}
-							//tree.draw();
-
+							tree.draw();
 							var no = tree.getNodeByProperty("etiquetaClasses",codigoMap+"_"+codigoLayer);
+							*/
 							nos.refresh();
 							//montaParametrosTemas(no,dados);
 							core_carregando("desativa");
