@@ -2198,11 +2198,11 @@ i3GEO.util = {
 	valorDefault - valor default do combo
 	*/
 	comboEpsg: function (idCombo,onde,funcaoOnChange,valorDefault){
-		var onde = $i(onde);
+		onde = $i(onde);
 		onde.innerHTML="<span style=color:red;font-size:10px; >buscando...</span>";
 		var monta = function(retorno){
 			var ins = [],
-				i,n,temp;
+				i,n;
 			if (retorno.data !== undefined){
 				n = retorno.data.length;
 				ins.push("<select id='"+idCombo+"' onChange='"+funcaoOnChange+"(this)' >");
@@ -2854,7 +2854,7 @@ i3GEO.util = {
 		YAHOO.util.Connect.asyncRequest("GET", sUrl, callback);
 	},
 	/*
-	Verifica se a função html de armazenamento local esta disponivel no navegador
+	Verifica se a funï¿½ï¿½o html de armazenamento local esta disponivel no navegador
 	*/
 	verifica_html5_storage: function(){
 		if(typeof(Storage)!=="undefined"){
