@@ -1,9 +1,9 @@
-# Geogr&aacute;fica SAD69 GRS67 4291
-<4291> +proj=longlat +ellps=GRS67 +no_defs  no_defs   <>
-# Geogr&aacute;fica SAD69 aust_SA 4618 (mais recente)
-<4618> +proj=longlat +ellps=aust_SA +no_defs  <>
 # WGS 84
 <4326> +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs  no_defs <>
+# SIRGAS 2000
+<4674> +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs  <>
+# Geogr&aacute;fica SAD69 aust_SA 4618
+<4618> +proj=longlat +ellps=aust_SA +no_defs  <>
 # Corrego Alegre / UTM zone 21S
 <22521> +proj=utm +zone=21 +south +ellps=intl +towgs84=-206,172,-6,0,0,0,0 +units=m +no_defs  <>
 # Corrego Alegre / UTM zone 22S
