@@ -514,6 +514,14 @@ i3GEOadmin.editor = {
 				"i3GEOuploadsubmit",
 				{onclick:{fn: i3GEOadmin.editor.uploadshp.submit}}
 			);
+			i3GEO.util.comboEpsg("comboInSrid","selInSrid","i3GEOadmin.editor.uploadshp.mudaComboInSrid",4326);
+			i3GEO.util.comboEpsg("comboOutSrid","selOutSrid","i3GEOadmin.editor.uploadshp.mudaComboOutSrid",4326);
+		},
+		mudaComboInSrid: function(obj){
+			$i("insrid").value = obj.value;
+		},
+		mudaComboOutSrid: function(obj){
+			$i("outsrid").value = obj.value;
 		},
 		formulario: function(){
 			var ins = '<fieldset><form id=i3GEOuploadf target="i3GEOuploadiframe" action="../php/metaestat_uploadshp_submit.php" method="post" ENCTYPE="multipart/form-data">' +
@@ -531,7 +539,14 @@ i3GEOadmin.editor = {
 			'<option value=incluir >Adicionar novos registros</option>' +
 			'<option value=apagar >Apagar dados atuais e incluir do SHP</option>' +
 			'</select></p>' +
-			'<p class="paragrafo" >C&oacute;digo da proje&ccedil;&atilde;o (SRID) Assegure-se que o shapefile esteja na proje&ccedil;&atilde;o geogr&aacute;fica se voc&ecirc; for usar com o sistema de metadados estat&iacute;sticos :<br><input class=digitar type="text" value="4326" size=20 id="srid" name="srid" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			
+			'<p class="paragrafo" >Assegure-se que o shapefile esteja na proje&ccedil;&atilde;o geogr&aacute;fica se voc&ecirc; for usar com o sistema de metadados estat&iacute;sticos.</p>' +
+			
+			'<p class="paragrafo" >C&oacute;digo da proje&ccedil;&atilde;o (SRID) do arquivo</p>' +
+			'<p><div id=selInSrid ></div><input class=digitar type="text" value="4326" size=20 id="insrid" name="insrid" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >Projetar o arquivo para (deixe em branco caso n&atilde;o deva ser feita a proje&ccedil;&atilde;o dos dados):</p>' +
+			'<p><div id=selOutSrid ></div><input class=digitar type="text" value="" size=20 id="outsrid" name="outsrid" style="top:0px;left:0px;cursor:pointer;"></p>' +
+
 			'<p class="paragrafo" ><input type="checkbox" id="incluiserialshp" name="incluiserialshp" style="cursor:pointer;position:relative;top:2px;">&nbsp;Inclui uma coluna gid do tipo serial e chave prim&aacute;ria com c&oacute;digo &uacute;nico</p>' +
 			'<p class="paragrafo" ><input id=i3GEOuploadsubmit type="button" value="Enviar" size=12 />' +
 			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
@@ -556,7 +571,7 @@ i3GEOadmin.editor = {
 				alert("Digite o nome da tabela a ser criada");
 				return;
 			}
-			if($i("srid").value == ""){
+			if($i("insrid").value == ""){
 				alert("Digite o valor do SRID");
 				return;
 			}

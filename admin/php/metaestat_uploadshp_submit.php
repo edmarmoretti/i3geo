@@ -24,7 +24,7 @@ if($_POST["tabelaDestino"] == ""){
 	echo "Nome da tabela n&atilde;o definido";
 	exit;
 }
-if($_POST["srid"] == ""){
+if($_POST["insrid"] == ""){
 	echo "SRID n&atilde;o definido";
 	exit;
 }
@@ -210,11 +210,17 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 				$vs[] = $valor;
 			}
 		}
-		$vs[] = "st_geomfromtext('".$s->toWkt()."','".$_POST["srid"]."')";
+		if(($_POST["insrid"] == $_POST["outsrid"]) || $_POST["outsrid"] == ""){
+			$vs[] = "st_geomfromtext('".$s->toWkt()."','".$_POST["insrid"]."')";
+		}
+		else{
+			$vs[] = "st_transform(st_geomfromtext('".$s->toWkt()."','".$_POST["insrid"]."'),'".$_POST["outsrid"]."')";
+		}
 		$str = implode(",",$vs);
 		$str = str_replace("nulo",'null',$str);
 		$linhas[] = $insert."VALUES(".$str.")";
 	}
+	//echo $linhas[0];exit;
 	//echo "<pre>".var_dump($linhas);exit;
 	$layer->close();
 	echo "<br>Incluindo dados";
