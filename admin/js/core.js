@@ -20,7 +20,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -266,7 +266,7 @@ function core_arvore(titulo,onde,obj){
 /*
 Function: core_movimentaNo
 
-Movimenta um nó para cima ou para baixo na &aacute;rvore.
+Movimenta um nï¿½ para cima ou para baixo na &aacute;rvore.
 
 Essa fun&ccedil;&atilde;o utiliza uma &aacute;rvore que deve estar armazenada no objeto tree
 
@@ -565,7 +565,7 @@ Pega a lista de perfis
 
 Parameters:
 
-funcao - (opcional) string com o nome da funcao que ser&aacute; executada após a chamada ajax ter tido sucesso
+funcao - (opcional) string com o nome da funcao que ser&aacute; executada apï¿½s a chamada ajax ter tido sucesso
 
 Return
 
@@ -1080,7 +1080,7 @@ Function: core_comboObjeto
 
 Retorna os itens option de um combo baseado em um objeto json
 */
-function core_comboObjeto(obj,valor,texto,marcar,texto2)
+function core_comboObjeto(obj,valor,texto,marcar,texto2,texto3)
 {
 	var ins = "<option value='' ";
 	var v;
@@ -1104,6 +1104,9 @@ function core_comboObjeto(obj,valor,texto,marcar,texto2)
 		}
 		if(texto2){
 			t += " ("+eval("obj[k]."+texto2)+")";
+		}
+		if(texto3){
+			t += " ("+eval("obj[k]."+texto3)+")";
 		}
 		ins += "<option value='"+v+"' ";
 		if (marcar == v){
@@ -1303,7 +1306,7 @@ row - objeto row que foi clicado pelo usu&aacute;rio. Utilizado para se obter os
 
 sUrl - url do programa que ser&aacute; executado
 
-nomeFuncao - nome da funcao que sera executada após gravar os dados (opcional)
+nomeFuncao - nome da funcao que sera executada apï¿½s gravar os dados (opcional)
 */
 function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 {
@@ -1602,7 +1605,7 @@ function core_ativaforms(lista){
 	}
 }
 function core_listaDeLetras(onde,nomeFuncao){
-	//letraAtual guarda a última letra clicada
+	//letraAtual guarda a ï¿½ltima letra clicada
 	var o,i,ins= "<p><b>",
 		letras = ["Todos","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z","_","1","2","3","4","5","6","7","8","9"],
 		nletras = letras.length;

@@ -64,7 +64,7 @@ i3GEO.editorOL = {
 		"http://mapas.mma.gov.br/i3geo/ogc.php?tema=estadosl&",
 		{layers: "estadosl",FORMAT:'image/png'}
 	),
-	fundo: "e_oce,e_ims,e_wsm,ol_mma,ol_wms,top_wms,est_wms",
+	fundo: "e_ims,e_wsm,ol_mma,ol_wms,top_wms,est_wms,e_oce",
 	kml: [],
 	layersIniciais: [],
 	botoes: {

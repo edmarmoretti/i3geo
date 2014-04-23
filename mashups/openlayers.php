@@ -26,7 +26,6 @@ if(!empty($restauramapa)){
 		$l->set("status",MS_DELETE);
 	}
 	$m->save($xbase);
-	//$fundo = $xbase;
 	$temas = $xbase;
 	if (!isset($mapext)){
 		$mapext = $m->extent->minx." ".$m->extent->miny." ".$m->extent->maxx." ".$m->extent->maxy;
@@ -324,8 +323,8 @@ Par&acirc;metros:
 		corta
 		legenda
 
-	Para ver a lista de c�digos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
-	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os c�digos s&atilde;o mostrados em vermelho.
+	Para ver a lista de c&oacute;digos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
+	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os c&oacute;digos s&atilde;o mostrados em vermelho.
 
 	Exemplo:
 
