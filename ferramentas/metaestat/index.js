@@ -1360,7 +1360,7 @@ i3GEOF.metaestat = {
 				return "";
 			}
 			//se tiver parametro e todos estiverem vazios, aborta
-			var i,n,c,j,val,
+			var i,n,c,val,
 			t=[],
 			dados = i3GEOF.metaestat.parametros.dados;
 			n = dados.length;
@@ -1785,7 +1785,7 @@ i3GEOF.metaestat = {
 			i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = $i("i3geoCartoComboMedidaVariavelEditor").value;
 		},
 		/**
-		 * Calcula os intervalos de classe com base na técnica de quartis
+		 * Calcula os intervalos de classe com base na tï¿½cnica de quartis
 		 * Altera uma classificacao ja existente
 		 * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha
 		 * Executa admin/php/metaestat.php?funcao=calculaClassificacao&tipo=quartil
@@ -1815,7 +1815,7 @@ i3GEOF.metaestat = {
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
-		 * Calcula os intervalos de classe com base na técnica de intervalos iguais
+		 * Calcula os intervalos de classe com base na tï¿½cnica de intervalos iguais
 		 * Altera uma classificacao ja existente
 		 * O usuario deve definir o menor e o maior valor
 		 * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha
@@ -1845,7 +1845,7 @@ i3GEOF.metaestat = {
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
-		 * Calcula os intervalos de classe com base na técnica de intervalos iguais
+		 * Calcula os intervalos de classe com base na tï¿½cnica de intervalos iguais
 		 * Altera uma classificacao ja existente
 		 * O menor e maior valor sao calculados com base nos valores da medida da variavel
 		 * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha
