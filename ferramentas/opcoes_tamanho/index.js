@@ -182,7 +182,6 @@ i3GEOF.opcoesTamanho = {
 		i3GEOF.opcoesTamanho.aguarde.visibility = "visible";
 		var l = $i("i3GEOopcoesTamanhol").value,
 			a = $i("i3GEOopcoesTamanhoa").value,
-			calc = 5,
 			temp,
 			p,
 			cp;

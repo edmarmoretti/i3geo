@@ -1236,7 +1236,7 @@ i3GEOF.legenda = {
 			{return;}
 			i3GEOF.legenda.aguarde.visibility = "visible";
 			if (retorno.data != undefined){
-				var l,i,sct,combo,botoes,n;
+				var l,i,sct,combo,n;
 				retorno = retorno.data;
 				i3GEOF.legenda.estilos = retorno.split("|");
 				combo = "<select id='i3GEOlegendaestilos' onchange=i3GEOF.legenda.mostraEstilo(this.value)>";

@@ -597,7 +597,7 @@ i3GEO.editorOL = {
 							method: "GET",
 							url: url,
 							callback: f
-						}
+						};
 						OpenLayers.Request.issue(config);
 					}
 					else{
@@ -1624,10 +1624,10 @@ i3GEO.editorOL = {
 			'	</tr>' +
 			'</table>' +
 			'<br />' +
-			'<p class=paragrafo ><b>Ajusta nó em edi&ccedil;&atilde;o para o(a):</b></p>' +
+			'<p class=paragrafo ><b>Ajusta nï¿½ em edi&ccedil;&atilde;o para o(a):</b></p>' +
 			'<table class=lista7 >' +
 			'	<tr>' +
-			'		<td></td><td>nó</td><td></td><td>v&eacute;rtice</td><td></td><td>borda</td>' +
+			'		<td></td><td>nï¿½</td><td></td><td>v&eacute;rtice</td><td></td><td>borda</td>' +
 			'	</tr>' +
 			'	<tr>' +
 			'		<td><input style=cursor:pointer onclick="i3GEO.editorOL.snap()" type="checkbox" id="target_node" /></td><td><input onchange="i3GEO.editorOL.snap()" id="target_nodeTolerance" type="text" size="3" value=15 /></td>' +
