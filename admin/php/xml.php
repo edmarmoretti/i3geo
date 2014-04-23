@@ -24,7 +24,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -134,7 +134,7 @@ Parametros:
 
 locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
-id_n2 {string} - código do subgrupo do sistema de administra&ccedil;&atilde;o
+id_n2 {string} - cï¿½digo do subgrupo do sistema de administra&ccedil;&atilde;o
 
 Retorno:
 
@@ -160,9 +160,9 @@ Parametros:
 
 locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
-id {string} - código do nó
+id {string} - cï¿½digo do nï¿½
 
-nivel {string} - n&iacute;vel do nó
+nivel {string} - n&iacute;vel do nï¿½
 
 Retorno:
 
@@ -188,7 +188,7 @@ Parametros:
 
 locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
-id_n1 {string} - código do grupo do sistema de administra&ccedil;&atilde;o
+id_n1 {string} - cï¿½digo do grupo do sistema de administra&ccedil;&atilde;o
 
 Retorno:
 
@@ -678,7 +678,13 @@ function geraRSSmapas($locaplic)
 	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace("/admin/php/xml.php","",__FILE__)));
-	$sql = "select '' as tipo_ws,'".$url."/ms_criamapa.php?restauramapa='||id_mapa as link_ws, nome_mapa as nome_ws, '' as desc_ws, '' as autor_ws from ".$esquemaadmin."i3geoadmin_mapas WHERE publicado_mapa = 'sim' AND mapfile != ''";
+	$descricao = "'<![CDATA[Outros links<br>";
+	$descricao .= "<a href=$url/mashups/openlayers.php?restauramapa='||id_mapa||'&fundo=e_wsm >Openlayers 1</a><br><br>";
+	$descricao .= "<a href=$url/mashups/openlayers.php?restauramapa='||id_mapa||'&fundo= >Openlayers 2</a><br><br>";
+	$descricao .= "<a href=$url/mashups/openlayers.php?restauramapa='||id_mapa||'&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica >Openlayers 3</a><br><br>";
+	$descricao .= "<a href=$url/mashups/openlayers.php?restauramapa='||id_mapa||' >Openlayers 4</a><br><br>";
+	$descricao .= "<img src=$url/ferramentas/salvamapa/geraminiatura.php?w=300&h=300&restauramapa='||id_mapa||' >]]>'";
+	$sql = "select '' as tipo_ws,'".$url."/ms_criamapa.php?restauramapa='||id_mapa as link_ws, nome_mapa as nome_ws, ".$descricao." as desc_ws, '' as autor_ws from ".$esquemaadmin."i3geoadmin_mapas WHERE publicado_mapa = 'sim' AND mapfile != ''";
 	//echo $sql;exit;
 	return geraXmlRSS($locaplic,$sql,"Mapas cadastrados");
 }

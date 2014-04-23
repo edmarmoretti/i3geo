@@ -183,6 +183,7 @@ i3GEO.guias = {
 							}
 							else{
 								//combo de opcoes para abrir os mapas salvos como mapfiles
+								//esses links tambem sao colocados em admin/php/xml.php geraRSSmapas
 								combo = "<select style='width:150px;' onchange='i3GEO.guias.CONFIGURA.mapas.mostraLink("+ig1+",this.value)'>" +
 										"<option value=''>Links:</option>" +
 										"<option value='"+link+"'>Original</option>" +
