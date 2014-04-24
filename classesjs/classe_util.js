@@ -2940,7 +2940,7 @@ i3GEO.util = {
 		return ext;
 	},
 	/*
-	Function: extGeo2OSM
+	Function: extOSM2Geo
 
 	Converte string xmin ymin xmax ymax de geo para a projecao OSM
 	*/

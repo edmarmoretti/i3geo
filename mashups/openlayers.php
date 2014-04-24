@@ -459,8 +459,9 @@ if(isset($maxextent)){
 	$maxextent = str_replace(" ",",",$maxextent);
 	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(".$maxextent.");";
 }
-else
-{echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081);";}
+else{
+	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081);";
+}
 if(isset($mapext)){
 	$mapext = str_replace(" ",",",$mapext);
 	echo "i3GEO.editorOL.mapext = new OpenLayers.Bounds(".$mapext.");";
