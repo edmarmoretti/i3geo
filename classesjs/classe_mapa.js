@@ -597,7 +597,7 @@ i3GEO.mapa = {
 		/*
 		Function: congelaMapa
 
-		Congela a visão atual do mapa mostrando-o em uma janela flutuante
+		Congela a vis&atilde;o atual do mapa mostrando-o em uma janela flutuante
 		*/
 		congelaMapa: function(){
 			var url="",
@@ -608,7 +608,7 @@ i3GEO.mapa = {
 					i3GEO.janela.minimiza(idjanela);
 				};
 			if(i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps"){
-				url = i3GEO.configura.locaplic+"/ferramentas/congelamapa/openlayers.php?g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten;
+				url = i3GEO.configura.locaplic+"/ferramentas/congelamapa/openlayers.php?g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 				i3GEO.janela.cria(
 					"500px",
 					"350px",
