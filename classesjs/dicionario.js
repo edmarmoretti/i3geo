@@ -1355,7 +1355,7 @@ it:"Misura la distanza tra due o pi punti cliccati sulla mappa (minore distanza)
 }],
 "d21t":[
 {
-pt:"distncia",
+pt:"dist&acirc;ncia",
 en:"distance",
 es:"distancia",
 it:"distncia"

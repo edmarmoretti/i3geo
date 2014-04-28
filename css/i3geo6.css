@@ -115,6 +115,9 @@ td
 {background-color:white;border: 0px solid gray;padding: 0px;color:#2F4632;margin:0px;text-align: center;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 input
 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid gray;text-align: center;cursor: text;}
+input[type=checkbox]{
+border: 0px solid white;
+}
 select
 {box-shadow:1px 1px 3px 0 lightgray;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid rgb(230,230,230);text-align: left;cursor: pointer;}
 select option:hover {
@@ -1144,7 +1147,7 @@ cursor: pointer;
 width: 16px;
 }
 button {
-background: url(../imagens/tic2.png) 99% 50% no-repeat;
+//background: url(../imagens/tic2.png) 99% 50% no-repeat;
 }
 #encolheFerramentas {
 background-image: URL('../imagens/encolhe.png');
