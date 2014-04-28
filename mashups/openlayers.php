@@ -339,24 +339,8 @@ Par&acirc;metros:
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 
-<!--
-<link rel="stylesheet" type="text/css" href="../pacotes/yui290/build/fonts/fonts-min.css" />
-<link rel="stylesheet" type="text/css" href="../pacotes/yui290/build/container/assets/skins/sam/container.css" />
-<script type="text/javascript" src="../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="../pacotes/yui290/build/dragdrop/dragdrop-min.js"></script>
-<script type="text/javascript" src="../pacotes/yui290/build/container/container-min.js"></script>
-<script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
-<script type="text/javascript" src="../classesjs/compactados/classe_util_compacto.js"></script>
-<script type="text/javascript" src="../pacotes/openlayers/OpenLayers211.js"></script>
-<script type="text/javascript" src="openlayers.js"></script>
-<link rel="stylesheet" href="theme/default/style.css" type="text/css" />
-<link rel="stylesheet" href="openlayers.css" type="text/css" />
--->
-
-
 <script type="text/javascript" src="openlayers_compacto.js.php"></script>
 <link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
-
 
 <style>
 .yui-skin-sam .container-minimiza {
@@ -383,6 +367,8 @@ else
 ?>
 <div id=i3geoSelTemaAtivo style="height:15em;z-index:3000;display:none" class=" yui-skin-sam"></div>
 <script>
+OpenLayers.ImgPath = "../pacotes/openlayers/img/";
+OpenLayers.Lang.setCode("pt-BR");
 var m = document.getElementById("i3geoMapa");
 if(parseInt(m.style.width,10) === 0){
 	var t = i3GEO.util.tamanhoBrowser();

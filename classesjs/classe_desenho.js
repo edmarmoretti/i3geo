@@ -96,13 +96,99 @@ i3GEO.desenho = {
 	*/
 	estiloPadrao: "normal",
 	/*
+	Fun&ccedil;&otilde;es utilizadas quando o mapa baseia-se na interface OpenLayers
+	*/
+	openlayers: {
+		/*
+		 * Cria o layer onde os desenhos serao inseridos
+		 */
+		inicia: function(){
+			if(!i3GEO.desenho.layergrafico || i3GEO.desenho.layergrafico != undefined){
+				i3GEO.desenho.openlayers.criaLayerGrafico();
+			}
+		},
+		//i3GEO.editorOL.layergrafico
+		criaLayerGrafico: function(){
+			var	sketchSymbolizers = {
+					"Point": {
+						fillColor: "rgb(${fillColor})",
+						fillOpacity: "${opacidade}",
+						strokeWidth: "${strokeWidth}",
+						strokeOpacity: "${opacidade}",
+						strokeColor: "rgb(${strokeColor})",
+						label: "${texto}",
+						pointRadius: "${pointRadius}",
+						graphicName: "${graphicName}",
+						fontSize: "${fontSize}",
+						fontColor: "rgb(${fontColor})",
+						fontFamily: "Arial",
+						fontWeight: "normal",
+						labelAlign: "lb",
+						labelXOffset: "3",
+						labelYOffset: "3",
+						externalGraphic: "${externalGraphic}"
+					},
+					"Line": {
+						strokeWidth: "${strokeWidth}",
+						strokeOpacity: "${opacidade}",
+						strokeColor: "rgb(${strokeColor})"
+					},
+					"Polygon": {
+						strokeWidth: "${strokeWidth}",
+						strokeOpacity: "${opacidade}",
+						strokeColor: "rgb(${strokeColor})",
+						fillColor: "rgb(${fillColor})",
+						fillOpacity: "${opacidade}",
+						zIndex: 5000
+					}
+				},
+				style = new OpenLayers.Style(),
+				styleMap1 = new OpenLayers.StyleMap(
+					{
+						"default": style,
+						"vertex": {
+					        strokeOpacity: 1,
+					        strokeWidth: 1,
+					        fillColor: "white",
+					        fillOpacity: 0.45,
+					        pointRadius: 4
+					    }
+					},
+				    {
+				    	extendDefault: false
+				    }
+				),
+				renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
+			
+			style.addRules([
+				new OpenLayers.Rule({symbolizer: sketchSymbolizers})
+			]);
+	        renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
+			i3GEO.desenho.layergrafico = new OpenLayers.Layer.Vector("Edi&ccedil;&atilde;o",{
+					styleMap: styleMap1,
+					displayInLayerSwitcher:true,
+					visibility:true,
+					renderers: renderer,
+					vertexRenderIntent: "vertex"
+				}
+			);
+			//para efeitos de compatibilidade
+			if(i3GEO.editorOL.mapa){
+				i3GEO.editorOL.mapa.addLayers([i3GEO.desenho.layergrafico]);
+			}
+			else{
+				i3geoOL.addLayers([i3GEO.desenho.layergrafico]);
+			}
+		}
+	},
+	/*
 	Cria os elementos 'dom' necess&aacute;rios ao uso das fun&ccedil;&otilde;es de desenho sobre o mapa.
 
-	As ferramentas de c&aacute;lculo de distâncias e &aacute;reas utilizam esse container.
+	As ferramentas de c&aacute;lculo de dist&acirc;ncias e &aacute;reas utilizam esse container.
 
 	Richdraw &eacute; uma biblioteca utilizada pelo i3geo para abstrair as diferen&ccedil;as entre as linguagens svg e vml.
 
-	Essa abstra&ccedil;&atilde;o &eacute; necess&aacute;ria devido às diferen&ccedil;as entre os navegadores.
+	Essa abstra&ccedil;&atilde;o &eacute; necess&aacute;ria devido &agrave;s diferen&ccedil;as entre os navegadores.
 
 	O container &eacute; criado dentro de um DIV chamado "divGeometriasTemp"
 

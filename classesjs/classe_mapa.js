@@ -1105,8 +1105,8 @@ i3GEO.mapa = {
 			g = [],
 			n = 0,
 			i;
-		if(i3GEO.editorOL && i3GEO.editorOL.layergrafico && i3GEO.editorOL.layergrafico.features){
-			geos = i3GEO.editorOL.layergrafico.features;
+		if(i3GEO.editorOL && i3GEO.desenho.layergrafico && i3GEO.desenho.layergrafico.features){
+			geos = i3GEO.desenho.layergrafico.features;
 			n = geos.length;
 			for(i = 0;i < n; i++){
 				g = {
