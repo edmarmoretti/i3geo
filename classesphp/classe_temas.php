@@ -774,9 +774,9 @@ function: capturaGeometrias
 Captura as geometrias selecionadas e salva em um arquivo texto serializado (analise de geometrias).
 
 parameters:
-$dir_tmp - diret�rio tempor&aacute;rio do I3Geo
+$dir_tmp - diret&oacute;rio tempor&aacute;rio do I3Geo
 
-$imgdir - diret�rio tempor&aacute;rio das imagens do mapa atual
+$imgdir - diret&oacute;rio tempor&aacute;rio das imagens do mapa atual
 
 $nome - nome que ser&aacute; dado a geometria
 */
@@ -788,9 +788,10 @@ $nome - nome que ser&aacute; dado a geometria
 		$sb = $this->mapa->scalebar;
 		$sb->set("status",MS_OFF);
 		$items = pegaItens($this->layer);
-		$final["layer"] = pegaNome($this->layer);
+		$final["layer"] = pegaNome($this->layer,"UTF-8");
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$registros = array();
+		$i = 0;
 		foreach($shapes as $shape)
 		{
 			$valitem = array();
@@ -817,6 +818,7 @@ $nome - nome que ser&aacute; dado a geometria
 				$abriu = $this->layer->open();
 			}
 			else{return "erro";}
+			$i++;
 		}
 		$fechou = $this->layer->close();
 		if (count($registros) > 0)
@@ -840,9 +842,10 @@ function: listaGeometrias
 Lista as geometrias arquivos com extens&atilde;o geo (an&aacute;lise de geometrias).
 
 parameters:
-$dir_tmp - diret�rio tempor&aacute;rio do I3Geo
 
-$imgdir - diret�rio tempor&aacute;rio das imagens do mapa atual
+$dir_tmp - diret&oacute;rio tempor&aacute;rio do I3Geo
+
+$imgdir - diret&oacute;rio tempor&aacute;rio das imagens do mapa atual
 */
 	function listaGeometrias($dir_tmp,$imgdir)
 	{
@@ -853,10 +856,11 @@ $imgdir - diret�rio tempor&aacute;rio das imagens do mapa atual
 			$conteudo = fread ($handle, filesize ($arquivo));
 			fclose ($handle);
 			$final = unserialize($conteudo);
-			//var_dump($final);
+			//var_dump($final);exit;
 			$dados = array();
-			foreach ($final["dados"] as $d)
-			{$dados[] = array("id"=>($d["id"]),"valores"=>($d["valores"]),"imagem"=>($d["imagem"]));}
+			foreach ($final["dados"] as $d){
+				$dados[] = array("id"=>($d["id"]),"valores"=>($d["valores"]),"imagem"=>($d["imagem"]));
+			}
 			$resultado[] = array("arquivo"=>(basename($arquivo)),"layer"=>$final["layer"],"dados"=>$dados);
 		}
 		return($resultado);
@@ -867,9 +871,9 @@ function: removerGeometrias
 Remove os arquivos correspondentes a determinadas geometrias (an&aacute;lise de geometrias).
 
 parameters:
-$dir_tmp - diret�rio tempor&aacute;rio do I3Geo
+$dir_tmp - diret&oacute;rio tempor&aacute;rio do I3Geo
 
-$imgdir - diret�rio tempor&aacute;rio das imagens do mapa atual
+$imgdir - diret&oacute;rio tempor&aacute;rio das imagens do mapa atual
 
 $lista - lista com os nomes dos arquivos
 */
