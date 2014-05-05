@@ -1102,9 +1102,8 @@ i3GEO.mapa = {
 	compactaLayerGrafico: function(){
 		var geos = false,
 			geometrias = [],
-			g = [],
 			n = 0,
-			i;
+			i,g;
 		if(i3GEO.editorOL && i3GEO.desenho.layergrafico && i3GEO.desenho.layergrafico.features){
 			geos = i3GEO.desenho.layergrafico.features;
 			n = geos.length;

@@ -1691,7 +1691,7 @@ function montaEditorDados(dados)
 	$i("connectiontype").onchange = function(){
 		core_desativaforms(idsForms);
 		var valor = $i("connectiontype").value,
-			d = [];
+			d;
 		//["connection","data","tileitem","tileindex"]
 		if(valor == 0 || valor == 10)
 		{d = [];}
@@ -1710,7 +1710,7 @@ function montaEditorDados(dados)
 	$i("metaestat").onchange = function(){
 		core_desativaforms(idsMetaestat);
 		var valor = $i("metaestat").value,
-			d = [];
+			d;
 		if(valor === "SIM"){
 			d = ["metaestat_id_medida_variavel"];
 		}
@@ -1911,9 +1911,9 @@ function montaEditorClasseGeral(dados)
 {
 	var re = /C_/g;
 	dados.expression = dados.expression.replace(re,"]");
-	var re = /_C/g;
+	re = /_C/g;
 	dados.expression = dados.expression.replace(re,"[");
-	var re = /_A_/g;
+	re = /_A_/g;
 	dados.expression = dados.expression.replace(re,"'");
 	var param = {
 		"linhas":[

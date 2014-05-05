@@ -178,11 +178,12 @@ i3GEOadmin.conexao = {
 		}
 		var i,temp,
 			n = i3GEOadmin.conexao.dados.length,
-			novo = [];
+			novo;
 		if(letra == "Todos"){
 			novo = i3GEOadmin.conexao.dados;
 		}
 		else{
+			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.conexao.dados[i].bancodedados;
 				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){

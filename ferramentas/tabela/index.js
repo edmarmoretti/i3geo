@@ -495,7 +495,7 @@ i3GEOF.tabela = {
 		temp = function(retorno){
 			i3GEOF.tabela.aguarde.visibility = "hidden";
 			if (retorno.data !== undefined){
-				var ins = [],
+				var ins,
 					i,
 					vals,
 					cor,
@@ -644,7 +644,7 @@ i3GEOF.tabela = {
 	*/
 	montaTabela: function(retorno){
 		if (retorno.data !== undefined){
-			var ins = [],
+			var ins,
 				i,
 				vals,
 				cor,
@@ -1152,7 +1152,7 @@ i3GEOF.tabela = {
 	/*
 	Function: retornaPar
 
-	Monta os parâmetros adicionais de cada tipo de gr&aacute;fico
+	Monta os parï¿½metros adicionais de cada tipo de gr&aacute;fico
 	*/
 	retornaPar: function(id){
 		try{
@@ -1565,7 +1565,7 @@ i3GEOF.tabela = {
 	/*
 	Function: montaPar
 
-	Monta os parâmetros para um determinado tipo de gr&aacute;fico, que ser&atilde;o utilizados na chamada ajax de cria&ccedil;&atilde;o do gr&aacute;fico
+	Monta os parï¿½metros para um determinado tipo de gr&aacute;fico, que ser&atilde;o utilizados na chamada ajax de cria&ccedil;&atilde;o do gr&aacute;fico
 	*/
 	montapar: function(parametros){
 		try{

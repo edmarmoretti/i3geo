@@ -20,7 +20,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -174,7 +174,7 @@ i3GEOadmin.mapas = {
 	formulario: function(i){
 		var ins = "";
 
-		//ins += "<p>Mapfile (código do mapfile que ser&aacute; utilizado para criar a camada no i3geo):"
+		//ins += "<p>Mapfile (cï¿½digo do mapfile que ser&aacute; utilizado para criar a camada no i3geo):"
 		//ins += "<div id=comboMapfiles >Buscando...</div>";
 		ins += "<p>Ordem de apresenta&ccedil;&atilde;o do mapa:<br>";
 		ins += "<input size=10 type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></p>";
@@ -197,7 +197,7 @@ i3GEOadmin.mapas = {
 		ins += "<input size=35 type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></p>";
 		ins += "<img src='"+i.imagem_mapa+"' />";
 
-		ins += "<p>Temas que ser&atilde;o inclu&iacute;dos nesse mapa (utilize os códigos dos mapfiles mostrados na lista abaixo): </p>";
+		ins += "<p>Temas que ser&atilde;o inclu&iacute;dos nesse mapa (utilize os cï¿½digos dos mapfiles mostrados na lista abaixo): </p>";
 		ins += "<input size=35 type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></p>";
 		ins += "<div id=comboMapfiles >Buscando...</div>";
 
@@ -229,11 +229,12 @@ i3GEOadmin.mapas = {
 		}
 		var i,temp,
 			n = i3GEOadmin.mapas.dados.length,
-			novo = [];
+			novo;
 		if(letra == "Todos"){
 			novo = i3GEOadmin.mapas.dados;
 		}
 		else{
+			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.mapas.dados[i].nome_mapa;
 				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){

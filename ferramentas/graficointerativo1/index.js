@@ -4,7 +4,7 @@ Title: Gr&aacute;fico interativo 1
 Representa&ccedil;&atilde;o gr&aacute;fica de dados. O gr&aacute;fico &eacute; constru&iacute;do tendo como base os atributos de um tema e &eacute; modificado
 conforme o usu&aacute;rio navega pelo mapa. A renderiza&ccedil;&atilde;o do gr&aacute;fico &eacute; feito pelo navegador por meio do aplicativo openflashchart.
 Os dados que ser&atilde;o utilizados no gr&aacute;fico s&atilde;o baseados em um elemento TABLE. Esse elemento pode ser montado com base na tabela
-de atributos e editada pelo usu&aacute;rio. Os dados podem tamb&eacute;m ser inseridos como parâmetros na inicializa&ccedil;&atilde;o da ferramenta,
+de atributos e editada pelo usu&aacute;rio. Os dados podem tamb&eacute;m ser inseridos como parï¿½metros na inicializa&ccedil;&atilde;o da ferramenta,
 permitindo que o gr&aacute;fico seja utilizado por outras ferramentas.
 
 Veja:
@@ -107,7 +107,7 @@ i3GEOF.graficointerativo1 = {
 		/*
 		 * Propriedade: navegacao
 		 *
-		 * Ativa ou n&atilde;o a navega&ccedil;&atilde;o dinâmica do mapa
+		 * Ativa ou n&atilde;o a navega&ccedil;&atilde;o dinï¿½mica do mapa
 		 *
 		 * Type: {boolean}
 		 *
@@ -808,12 +808,13 @@ i3GEOF.graficointerativo1 = {
 			//pega os nomes das clunas
 			var i,n,p,
 			temp = $i("i3GEOgraficointerativo1ComboX"),
-			colunas = [],
-			cores = [],
-			alias = [];
+			colunas,
+			cores,
+			alias;
 			if(temp.getElementsByTagName("select")[0]){
-				colunas.push(temp.getElementsByTagName("select")[0].value);
-				alias.push(temp.getElementsByTagName("input")[0].value);
+				cores = [];
+				colunas = [temp.getElementsByTagName("select")[0].value];
+				alias = [temp.getElementsByTagName("input")[0].value];
 			}
 			else{
 				//caso os dados tenham sido definidos como parametros

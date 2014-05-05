@@ -162,11 +162,12 @@ i3GEOadmin.periodo = {
 		}
 		var i,temp,
 			n = i3GEOadmin.periodo.dados.length,
-			novo = [];
+			novo;
 		if(letra == "Todos"){
 			novo = i3GEOadmin.periodo.dados;
 		}
 		else{
+			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.periodo.dados[i].nome;
 				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){

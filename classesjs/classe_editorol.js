@@ -1060,9 +1060,9 @@ i3GEO.editorOL = {
 					type: OpenLayers.Control.TYPE_TOOL,
 					callbacks:{
 						done: function(feature){
-							var f = [];
+							var f,style_mark;
 							if(i3GEO.editorOL.simbologia.externalGraphic != ""){
-								var style_mark = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
+								style_mark = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
 								style_mark.externalGraphic = i3GEO.editorOL.simbologia.externalGraphic;
 								style_mark.graphicWidth = i3GEO.editorOL.simbologia.graphicWidth;
 								style_mark.graphicHeight = i3GEO.editorOL.simbologia.graphicHeight;

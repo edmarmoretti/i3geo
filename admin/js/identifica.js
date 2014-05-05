@@ -20,7 +20,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -207,11 +207,12 @@ i3GEOadmin.identifica = {
 		}
 		var i,temp,
 			n = i3GEOadmin.identifica.dados.length,
-			novo = [];
+			novo;
 		if(letra == "Todos"){
 			novo = i3GEOadmin.identifica.dados;
 		}
 		else{
+			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.identifica.dados[i].nome_i;
 				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){

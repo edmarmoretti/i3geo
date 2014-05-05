@@ -47,7 +47,7 @@ i3GEOF.legenda = {
 	/*
 	Variavel: parDefault
 
-	Par�metros padr&atilde;o utilizados para formatar os labels
+	Parametros padr&atilde;o utilizados para formatar os labels
 	*/
 	parDefault: "&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
 	/*
@@ -557,7 +557,7 @@ i3GEOF.legenda = {
 		i3GEOF.legenda.aviso = false;
 		try{
 			if (retorno.data != undefined){
-				var ins = [],
+				var ins,
 					i,
 					ajuda,
 					id,
@@ -565,7 +565,7 @@ i3GEOF.legenda = {
 					exp,
 					n;
 				if (retorno.data[0].proc === ""){
-					ins.push("<table class=lista4 id=i3GEOlegendalegenda ><tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/inverter.png' title='Inverter cores' onclick='i3GEOF.legenda.inverteCores()' style=cursor:pointer /></td><td style=background-color:white ><img src='"+i3GEO.configura.locaplic+"/imagens/tamanho.png' title='Calcula tamanho' onclick='i3GEOF.legenda.calculaTamanho()' style=cursor:pointer /></td><td style=background-color:yellow ></td><td style=background-color:yellow >nome</td><td style=background-color:yellow >express&atilde;o</td></tr>");
+					ins = ["<table class=lista4 id=i3GEOlegendalegenda ><tr><td><img src='"+i3GEO.configura.locaplic+"/imagens/inverter.png' title='Inverter cores' onclick='i3GEOF.legenda.inverteCores()' style=cursor:pointer /></td><td style=background-color:white ><img src='"+i3GEO.configura.locaplic+"/imagens/tamanho.png' title='Calcula tamanho' onclick='i3GEOF.legenda.calculaTamanho()' style=cursor:pointer /></td><td style=background-color:yellow ></td><td style=background-color:yellow >nome</td><td style=background-color:yellow >express&atilde;o</td></tr>"];
 					n = retorno.data.length;
 					for (i=0;i<n;i++){
 						id = retorno.data[i].tema+"-"+retorno.data[i].idclasse; //layer+indice da classe
@@ -994,7 +994,6 @@ i3GEOF.legenda = {
 			$i("i3GEOlegendaguia1obj").style.display="none";
 			$i("i3GEOlegendaguia3obj").style.display="block";
 			id = id.split("-");
-			var p,cp;
 			i3GEOF.legenda.classe = id[1];
 			i3GEOF.legenda.estilo = 0;
 			i3GEOF.legenda.formEditorSimbolo();

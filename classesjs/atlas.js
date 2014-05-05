@@ -118,10 +118,13 @@ function iniciaAtlas(combow,atlasId)
 					}
 					i = i + 1;
 				}
-				while(pranchas[i])
-				if (retorno.data.tipoguias == "combo"){ins += "</select>";}
-				else
-				{ins += "</ul>";}
+				while(pranchas[i]);
+				if (retorno.data.tipoguias == "combo"){
+					ins += "</select>";
+				}
+				else{
+					ins += "</ul>";
+				}
 				pai.innerHTML = ins;
 			}
 		}
@@ -197,7 +200,7 @@ function pegaListaDeAtlas()
 				}
 				i = i + 1;
 			}
-			while(listaAtlas[i])
+			while(listaAtlas[i]);
 			local.innerHTML = texto+"</table>";
 			document.getElementById("tituloinstituicao").innerHTML = retorno.data.tituloinstituicao;
 		};

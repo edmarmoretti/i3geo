@@ -1188,7 +1188,7 @@ function core_geraLinhas(dados)
 		}
 		contaParam++;
 	}
-	while(contaParam < nparam)
+	while(contaParam < nparam);
 	return(resultado);
 }
 /*

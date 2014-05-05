@@ -189,11 +189,12 @@ i3GEOadmin.umedida = {
 		}
 		var i,temp,
 			n = i3GEOadmin.umedida.dados.length,
-			novo = [];
+			novo;
 		if(letra == "Todos"){
 			novo = i3GEOadmin.umedida.dados;
 		}
 		else{
+			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.umedida.dados[i].nome;
 				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
