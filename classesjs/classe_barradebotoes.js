@@ -112,9 +112,9 @@ i3GEO.barraDeBotoes = {
 	{numeric}
 
 	Default:
-	{10}
+	{13}
 	*/
-	MAXBOTOES: 12,
+	MAXBOTOES: 13,
 	/*
 	Propriedade: AJUDA
 
@@ -372,9 +372,9 @@ i3GEO.barraDeBotoes = {
 		mede: true,
 		area: true,
 		selecao: true,
+		barraedicao: true,
 		imprimir: true,
 		google: true,
-		barraedicao: true,
 		referencia: true,
 		exten: true,
 		inserexy: true,

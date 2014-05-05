@@ -3,6 +3,17 @@ GUIA DE UPDATES e UPGRADES
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 
+- a função de cálculo de área em classes_calculo.js (i3GEO.calculo.area) agora recebe novos parâmetros
+
+- a biblioteca Richdraw foi removida em favor das bibliotecas de desenho nativas de cada API utilizada nos mapas
+
+- o código dos editores vetoriais para as interfaces Openlayers e Googlemaps foram movidos para a pasta i3geo/classesjs
+
+- foi aumentado o número de botões padrão da barra de botões para 13 se você quiser manter em 12, utilize em seu javascript:
+	i3GEO.barraDeBotoes.MAXBOTOES = 12;
+
+- a ordem dos botões na barra de botões foi alterada para mostrar primeiro o botão da barra de edição
+
 
 
 -------------------------------------------------------------------------------------------------
