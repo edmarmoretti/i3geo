@@ -258,7 +258,7 @@ i3GEO.analise = {
 						linhastemp: []
 				};
 				i3GEO.analise.medeDistancia.criaJanela();
-				i3GEO.analise.i3GEO.Interface["ATUAL"].inicia();
+				i3GEO.analise.medeDistancia[i3GEO.Interface["ATUAL"]].inicia();
 			},
 			/*
 		Cria a janela para mostrar os resultados da medicao
