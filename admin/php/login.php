@@ -25,7 +25,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c�pia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -135,6 +135,7 @@ switch (strtoupper($funcao))
 			$retorno = "sim";
 		}
 		else{
+			//echo "oi";exit;
 			if(verificaOperacaoSessao($operacao) == true){
 				$retorno = "sim";
 			}
@@ -229,6 +230,7 @@ function verificaPapelSessao($id_papel){
 //verifica se uma determinada operacao esta registrada na variavel SESSION
 //
 function verificaOperacaoSessao($operacao){
+
 	$resultado = false;
 	//a validacao consulta $_SESSION, que e definida no login
 	if(validaSessao()){
@@ -267,9 +269,8 @@ function autenticaUsuario($usuario,$senha){
 	//verifica se o usuario esta cadastrado no ms_configura.php em $i3geomaster
 	if(verificaMaster($usuario,$senha) == true){
 		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$locaplic);
-		$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papelusuario AS PU ON OP.id_papel = PU.id_papel	",$locaplic);
+		$op = pegadados("SELECT O.codigo FROM ".$esquemaadmin."i3geousr_operacoes AS O");
 		$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupousuario ");
-
 		$operacoes = array();
 		foreach($op as $o){
 			$operacoes[$o["codigo"]] = true;
