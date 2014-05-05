@@ -266,7 +266,9 @@ i3GEO.calculo = {
 
 	Parametros:
 
-	pontos {Array} - array com a lista de pontos pontos.xtela corresponde a um array com os valores de x e pontos.ytela aos valores de y
+	x {Array} - array com a lista de pontos x
+
+	y {Array} - array com a lista de pontos y
 
 	pixel {Numeric} - &aacute;rea de cada pixel no mapa
 
@@ -275,21 +277,23 @@ i3GEO.calculo = {
 	Type:
 	{Numeric}
 	*/
-	area: function(pontos,pixel){
+	area: function(x,y,pixel){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.area()");}
-		var $polygon_area,$i,$array_length;
+		var n = x.length,
+			$polygon_area,$i;
 		try{
-			if(pontos.xpt.length > 2){
-				$array_length = pontos.xpt.length;
-				pontos.xtela.push(pontos.xtela[0]);
-				pontos.ytela.push(pontos.ytela[0]);
+			if(n > 2){
+				x.push(x[0]);
+				y.push(y[0]);
 				$polygon_area = 0;
-				for ($i=0;$i < $array_length;$i+=1)
-				{$polygon_area += ((pontos.xtela[$i] * pontos.ytela[$i+1])-(pontos.ytela[$i] * pontos.xtela[$i+1]));}
+				for ($i=0;$i < n;$i+=1){
+					$polygon_area += ((x[$i] * y[$i+1])-(y[$i] * x[$i+1]));
+				}
 				$polygon_area = Math.abs($polygon_area) / 2;
 			}
-			else
-			{$polygon_area = 0;}
+			else{
+				$polygon_area = 0;
+			}
 			return $polygon_area*pixel;
 		}
 		catch(e){return (0);}
