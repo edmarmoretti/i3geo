@@ -866,7 +866,8 @@ i3GEO.analise = {
 											trecho = 0,
 											per = 0,
 											direcao = 0,
-											area = 0;
+											area = 0,
+											proj = new OpenLayers.Projection("EPSG:4326");
 											n = i3GEO.analise.medeArea.pontos.ypt.length;
 											if(n > 1){
 												x1 = i3GEO.analise.medeArea.pontos.xpt[n-1];
@@ -881,6 +882,7 @@ i3GEO.analise = {
 													y1 = temp[1];
 													x2 = temp[2];
 													y2 = temp[3];
+													proj = new OpenLayers.Projection("EPSG:900913");
 												}
 												trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);
 												direcao = i3GEO.calculo.direcao(x1,y1,x2,y2);
@@ -894,13 +896,9 @@ i3GEO.analise = {
 													temp = temp.split(" ");
 													x1 = temp[0];
 													y1 = temp[1];
-													x2 = temp[2];
-													y2 = temp[3];
 												}
 												per += i3GEO.calculo.distancia(x1,y1,x2,y2);
-												if(n > 2){
-													area = poligono.geometry.getGeodesicArea();
-												}
+												area = poligono.geometry.getGeodesicArea(proj);
 												i3GEO.analise.medeArea.openlayers.mostraParcial(trecho,per,area,direcao);
 											}
 										},
@@ -909,7 +907,8 @@ i3GEO.analise = {
 											//registra os pontos e calcula a distancia
 											per = 0,
 											trecho = 0,
-											area = 0;
+											area = 0,
+											proj = new OpenLayers.Projection("EPSG:4326");
 											i3GEO.analise.medeArea.pontos.xpt.push(point.x);
 											i3GEO.analise.medeArea.pontos.ypt.push(point.y);
 											n = i3GEO.analise.medeArea.pontos.ypt.length;
@@ -926,6 +925,7 @@ i3GEO.analise = {
 													y1 = temp[1];
 													x2 = temp[2];
 													y2 = temp[3];
+													proj = new OpenLayers.Projection("EPSG:900913");
 												}
 												trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);
 												i3GEO.analise.medeArea.pontos.dist.push(trecho);
@@ -939,8 +939,6 @@ i3GEO.analise = {
 													temp = temp.split(" ");
 													x1 = temp[0];
 													y1 = temp[1];
-													x2 = temp[2];
-													y2 = temp[3];
 												}
 												per += i3GEO.calculo.distancia(x1,y1,x2,y2);
 												//desenha ponto
@@ -966,7 +964,7 @@ i3GEO.analise = {
 												);
 												i3GEO.desenho.layergrafico.addFeatures([label]);
 												if(n > 2){
-													area = poligono.getGeodesicArea();
+													area = poligono.getGeodesicArea(proj);
 												}
 											}
 											i3GEO.analise.medeArea.openlayers.mostraTotal(per,area);
