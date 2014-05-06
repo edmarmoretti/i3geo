@@ -259,8 +259,8 @@ i3GEO.analise = {
 				i3GEO.analise.medeDistancia.criaJanela();
 				i3GEO.analise.medeDistancia[i3GEO.Interface["ATUAL"]].inicia();
 			},
-			/*
-		Cria a janela para mostrar os resultados da medicao
+			/**
+			 * Cria a janela para mostrar os resultados da medicao
 			 */
 			criaJanela: function(){
 				var novoel,ins,imagemxy,janela;
@@ -367,14 +367,14 @@ i3GEO.analise = {
 											var f = new OpenLayers.Feature.Vector(
 													feature,
 													{
-														strokeWidth: estilo.linewidth,
-														strokeColor: estilo.linecolor,
 														origem: "medeDistancia"
 													},
 													{
 														graphicName: "square",
 														pointRadius: 10,
-														graphicOpacity: 1
+														graphicOpacity: 1,
+														strokeWidth: estilo.linewidth,
+														strokeColor: estilo.linecolor
 													}
 											);
 											i3GEO.desenho.layergrafico.addFeatures([f]);
@@ -442,12 +442,12 @@ i3GEO.analise = {
 																	30
 															),
 															{
-																strokeWidth: 1,
 																origem: "medeDistanciaExcluir"
 															},
 															{
 																fill: false,
-																strokeColor: "#FFFFFF"
+																strokeColor: estilo.circcolor,
+																strokeWidth: 1
 															}
 													);
 													i3GEO.desenho.layergrafico.addFeatures([circ]);
@@ -468,7 +468,7 @@ i3GEO.analise = {
 																fillColor: "white",
 																label: trecho.toFixed(3),
 																labelAlign: "rb",
-																fontColor: "gray",
+																fontColor: estilo.textcolor,
 																fontSize: 12,
 																fontWeight: "bold"
 															}
@@ -715,7 +715,7 @@ i3GEO.analise = {
 			}
 		},
 		/*
-	Classe: i3GEO.analise.medeArea
+	i3GEO.analise.medeArea
 
 	Ativa e controla a opcao de medicao de area.
 
@@ -726,6 +726,10 @@ i3GEO.analise = {
 	Para mostrar o resultado do calculo, e incluido um div especifico.
 		 */
 		medeArea:{
+			/**
+			 * Armazena os pontos clicados para realizar os calculos
+			 */
+			pontos: {},
 			/*
 		Function: inicia
 
@@ -734,8 +738,9 @@ i3GEO.analise = {
 		Sao registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 			 */
 			inicia: function(){
-				if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeArea.inicia()");}
+				if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeDistancia.inicia()");}
 				i3GEO.eventos.cliquePerm.desativa();
+				//@TODO remover apos concluir a refatoracao do codigo
 				i3GEO.analise.pontosdistobj = {
 						xpt: [],
 						ypt: [],
@@ -748,6 +753,299 @@ i3GEO.analise = {
 						linhas: [],
 						linhastemp: []
 				};
+				i3GEO.analise.medeArea.criaJanela();
+				i3GEO.analise.medeArea[i3GEO.Interface["ATUAL"]].inicia();
+			},
+			/*
+		Cria a janela para mostrar os resultados da medicao
+			 */
+			criaJanela: function(){
+				var novoel,ins,imagemxy,janela;
+				if (!$i("mostraarea")){
+					novoel = document.createElement("div");
+					novoel.id = "mostraarea";
+					ins = '<div class="hd" >&Aacute;rea aproximada <a class=ajuda_usuario target=_blank href="'+i3GEO.configura.locaplic+'"/ajuda_usuario.php?idcategoria=6&idajuda=51" >&nbsp;&nbsp;&nbsp;</a></div>' +
+					'<div class="bd" style="text-align:left;padding:3px;font-size:10px" >' +
+					'Estilo: '+i3GEO.desenho.caixaEstilos()+'<br>' +
+					'<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo" ></div>' +
+					'<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo_parcial" ></div>' +
+					'</div>';
+					novoel.innerHTML = ins;
+					novoel.style.borderColor="gray";
+					document.body.appendChild(novoel);
+					janela = new YAHOO.widget.Panel("mostraarea", {width:"220px",fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+					YAHOO.i3GEO.janela.manager.register(janela);
+					janela.render();
+					YAHOO.util.Event.addListener(janela.close, "click", i3GEO.analise.medeArea.fechaJanela);
+				}
+				else{
+					janela = YAHOO.i3GEO.janela.manager.find("mostraarea");
+				}
+				janela.show();
+				imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+				janela.moveTo(imagemxy[0]+150,imagemxy[1]);
+			},
+			/*
+		Function: fechaJanela
+
+		Fecha a janela e os elementos graficos criados para a ferramenta de medicao
+			 */
+			fechaJanela: function(){
+				var janela;
+				i3GEO.eventos.cliquePerm.ativa();
+				//@TODO remover
+				if(i3GEO.Interface.ATUAL !== "openlayers"){
+					i3GEO.desenho.richdraw.fecha();
+					i3GEO.util.removeChild("pontosArea",document.body);
+					i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeArea.clique()");
+					i3GEO.eventos.MOUSEMOVE.remove("i3GEO.analise.medeArea.movimento()");
+					i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.analise.medeArea.fechaJanela()");
+					i3GEO.barraDeBotoes.ativaBotoes();
+				}
+				janela = YAHOO.i3GEO.janela.manager.find("mostraarea");
+				if(janela){
+					YAHOO.i3GEO.janela.manager.remove(janela);
+					janela.destroy();
+				}
+				i3GEO.barraDeBotoes.ativaIcone("pointer");
+				i3GEO.analise.medeArea[i3GEO.Interface["ATUAL"]].fechaJanela();
+			},
+			/**
+			 * Funcoes especificas da interface openlayers
+			 */
+			openlayers:{
+				/**
+				 * Inicializa o processo
+				 * Cria a variavel para guardar os pontos
+				 * Executa a funcao de inicializacao do desenho, que cria o layer para receber os graficos
+				 */
+				inicia: function(){
+					var poligono,
+					estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao],
+					controle = i3geoOL.getControlsBy("id","i3GeoMedeArea");
+					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
+					i3GEO.analise.medeArea.pontos = {
+							xpt: [],
+							ypt: [],
+							dist: []
+					};
+					if(controle.length === 0){
+						poligono = new OpenLayers.Control.DrawFeature(
+								i3GEO.desenho.layergrafico,
+								OpenLayers.Handler.Polygon,
+								{
+									autoActivate: true,
+									id: "i3GeoMedeArea",
+									type: OpenLayers.Control.TYPE_TOOL,
+									callbacks:{
+										done: function(feature){
+											var f = new OpenLayers.Feature.Vector(
+													feature,
+													{
+														origem: "medeArea"
+													},
+													{
+														graphicName: "square",
+														pointRadius: 10,
+														graphicOpacity: 1,
+														strokeWidth: estilo.linewidth,
+														strokeColor: estilo.linecolor,
+														fillColor: estilo.fillcolor,
+														fillOpacity: 0.3
+													}
+											);
+											i3GEO.desenho.layergrafico.addFeatures([f]);
+											if(i3GEO.Interface){
+												i3GEO.Interface.openlayers.sobeLayersGraficos();
+											}
+											i3GEO.analise.medeArea.openlayers.mostraParcial(0,0,0,0);
+											i3GEO.analise.medeArea.openlayers.inicia();
+										},
+										modify: function(point,poligono){
+											var n,x1,y1,x2,y2,
+											trecho = 0,
+											per = 0,
+											direcao = 0,
+											area = 0;
+											n = i3GEO.analise.medeArea.pontos.ypt.length;
+											if(n > 1){
+												x1 = i3GEO.analise.medeArea.pontos.xpt[n-1];
+												y1 = i3GEO.analise.medeArea.pontos.ypt[n-1];
+												x2 = point.x;
+												y2 = point.y;
+												//projeta
+												if(i3GEO.Interface.openlayers.googleLike){
+													temp = i3GEO.util.extOSM2Geo(x1+" "+y1+" "+x2+" "+y2);
+													temp = temp.split(" ");
+													x1 = temp[0];
+													y1 = temp[1];
+													x2 = temp[2];
+													y2 = temp[3];
+												}
+												trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);
+												direcao = i3GEO.calculo.direcao(x1,y1,x2,y2);
+												per = i3GEO.analise.medeArea.openlayers.somaDist();
+												//soma ate o primeiro ponto
+												x1 = i3GEO.analise.medeArea.pontos.xpt[0];
+												y1 = i3GEO.analise.medeArea.pontos.ypt[0];
+												//projeta
+												if(i3GEO.Interface.openlayers.googleLike){
+													temp = i3GEO.util.extOSM2Geo(x1+" "+y1+" "+x2+" "+y2);
+													temp = temp.split(" ");
+													x1 = temp[0];
+													y1 = temp[1];
+													x2 = temp[2];
+													y2 = temp[3];
+												}
+												per += i3GEO.calculo.distancia(x1,y1,x2,y2);
+												if(n > 2){
+													area = poligono.geometry.getGeodesicArea();
+												}
+												i3GEO.analise.medeArea.openlayers.mostraParcial(trecho,per,area,direcao);
+											}
+										},
+										point: function(point,poligono){
+											var n,x1,y1,x2,y2,temp,label,
+											//registra os pontos e calcula a distancia
+											per = 0,
+											trecho = 0,
+											area = 0;
+											i3GEO.analise.medeArea.pontos.xpt.push(point.x);
+											i3GEO.analise.medeArea.pontos.ypt.push(point.y);
+											n = i3GEO.analise.medeArea.pontos.ypt.length;
+											if(n > 1){
+												x1 = i3GEO.analise.medeArea.pontos.xpt[n-2];
+												y1 = i3GEO.analise.medeArea.pontos.ypt[n-2];
+												x2 = point.x;
+												y2 = point.y;
+												//projeta
+												if(i3GEO.Interface.openlayers.googleLike){
+													temp = i3GEO.util.extOSM2Geo(x1+" "+y1+" "+x2+" "+y2);
+													temp = temp.split(" ");
+													x1 = temp[0];
+													y1 = temp[1];
+													x2 = temp[2];
+													y2 = temp[3];
+												}
+												trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);
+												i3GEO.analise.medeArea.pontos.dist.push(trecho);
+												per = i3GEO.analise.medeArea.openlayers.somaDist();
+												//soma ate o primeiro ponto
+												x1 = i3GEO.analise.medeArea.pontos.xpt[0];
+												y1 = i3GEO.analise.medeArea.pontos.ypt[0];
+												//projeta
+												if(i3GEO.Interface.openlayers.googleLike){
+													temp = i3GEO.util.extOSM2Geo(x1+" "+y1+" "+x2+" "+y2);
+													temp = temp.split(" ");
+													x1 = temp[0];
+													y1 = temp[1];
+													x2 = temp[2];
+													y2 = temp[3];
+												}
+												per += i3GEO.calculo.distancia(x1,y1,x2,y2);
+												//desenha ponto
+												//if($i("parartextos") && $i("parartextos").checked === true ){
+												label = new OpenLayers.Feature.Vector(
+														new OpenLayers.Geometry.Point(point.x,point.y),
+														{
+															origem: "medeAreaExcluir"
+														},
+														{
+															graphicName: "square",
+															pointRadius: 3,
+															strokeColor: "black",
+															graphicOpacity: 1,
+															strokeWidth: 1,
+															fillColor: "white",
+															label: trecho.toFixed(3),
+															labelAlign: "rb",
+															fontColor: estilo.textcolor,
+															fontSize: 12,
+															fontWeight: "bold"
+														}
+												);
+												i3GEO.desenho.layergrafico.addFeatures([label]);
+												if(n > 2){
+													area = poligono.getGeodesicArea();
+												}
+											}
+											i3GEO.analise.medeArea.openlayers.mostraTotal(per,area);
+										}
+									}
+								}
+						);
+						i3geoOL.addControl(poligono);
+				}
+			},
+			/**
+			 * Soma os valores de distancia guardados em pontos.dist
+			 */
+			somaDist: function(){
+				var n,i,
+				total = 0;
+				n = i3GEO.analise.medeArea.pontos.dist.length;
+				for(i=0;i<n;i++){
+					total += i3GEO.analise.medeArea.pontos.dist[i];
+				}
+				return total;
+			},
+			/**
+			 * Fecha a janela que mostra os dados
+			 * Pergunta ao usuario se os graficos devem ser removidos
+			 * Os graficos sao marcados com o atributo "origem"
+			 * Os raios e pontos sao sempre removidos
+			 */
+			fechaJanela: function(){
+				var temp,
+				controle = i3geoOL.getControlsBy("id","i3GeoMedeArea"),
+				f = i3GEO.desenho.layergrafico.getFeaturesByAttribute("origem","medeArea");
+				if(controle.length > 0){
+					controle[0].deactivate();
+					i3geoOL.removeControl(controle[0]);
+				}
+				if(f && f.length > 0){
+					temp = window.confirm($trad("x94"));
+					if(temp){
+						i3GEO.desenho.layergrafico.destroyFeatures(f);
+					}
+				}
+				f = i3GEO.desenho.layergrafico.getFeaturesByAttribute("origem","medeAreaExcluir");
+				if(f && f.length > 0){
+					i3GEO.desenho.layergrafico.destroyFeatures(f);
+				}
+			},
+			/**
+			 * Mostra a totalizacao das linhas ja digitalizadas
+			 */
+			mostraTotal: function(per,area){
+				var mostra = $i("mostraarea_calculo"),
+				texto;
+				if (mostra){
+					texto = "<b>&Aacute;rea:</b> "+(area/1000000).toFixed(3)+" km2"+
+					"<br><b>&Aacute;rea:</b> "+(area/10000).toFixed(2)+" ha"+
+					"<br><b>per&iacute;metro:</b> "+(per).toFixed(2)+" km"+
+					"<br>"+$trad("x25")+": "+i3GEO.calculo.metododistancia;
+					mostra.innerHTML = texto;
+				}
+			},
+			/**
+			 * Mostra o valor do trecho entre o ultimo ponto clicado e a posicao do mouse
+			 */
+			mostraParcial: function(trecho,per,area,direcao){
+				var mostra = $i("mostraarea_calculo_parcial"),
+				texto;
+				if (mostra){
+					texto = "<b>&Aacute;rea:</b> "+(area/1000000).toFixed(3)+" km2"+
+					"<br><b>&Aacute;rea:</b> "+(area/10000).toFixed(2)+" ha"+
+					"<br><b>trecho:</b> "+trecho.toFixed(3)+" km"+
+					"<br><b>per&iacute;metro:</b> "+(per).toFixed(3)+" km" +
+					"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao.toFixed(4);
+					mostra.innerHTML = texto;
+				}
+			}
+		},
+		googlemaps: {
+			inicia: function(){
 				var x,y,ll1,ll2,d,
 				calculo = i3GEO.calculo,
 				montacontainer = function(){
@@ -785,123 +1083,123 @@ i3GEO.analise = {
 				}
 				else{i3GEO.desenho.richdraw.fecha();}
 			},
-			/*
-		Cria a janela para mostrar os resultados da medicao
-			 */
-			criaJanela: function(){
-				var novoel,ins,imagemxy,janela;
-				if (!$i("mostraarea")){
-					novoel = document.createElement("div");
-					novoel.id = "mostraarea";
-					ins = '<div class="hd" >&Aacute;rea aproximada <a class=ajuda_usuario target=_blank href="'+i3GEO.configura.locaplic+'"/ajuda_usuario.php?idcategoria=6&idajuda=51" >&nbsp;&nbsp;&nbsp;</a></div>' +
-					'<div class="bd" style="text-align:left;padding:3px;font-size:10px" >' +
-					'Estilo: '+i3GEO.desenho.caixaEstilos()+'<br>' +
-					'<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo" ></div>' +
-					'</div>';
-					novoel.innerHTML = ins;
-					novoel.style.borderColor="gray";
-					document.body.appendChild(novoel);
-					janela = new YAHOO.widget.Panel("mostraarea", {width:"220px",fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
-					YAHOO.i3GEO.janela.manager.register(janela);
-					janela.render();
-					YAHOO.util.Event.addListener(janela.close, "click", i3GEO.analise.medeArea.fechaJanela);
+			fechaJanela: function(){
+			}
+		},
+		googleearth: {
+			inicia: function(){
+				var x,y,ll1,ll2,d,
+				calculo = i3GEO.calculo,
+				montacontainer = function(){
+					var desenho = i3GEO.desenho;
+					$i("mostraarea_calculo").innerHTML = "Clique no mapa para desenhar o poligono. Clique duas vezes para concluir";
+					i3GEO.barraDeBotoes.ativaIcone("area");
+					g_tipoacao = "area";
+					desenho.criaContainerRichdraw();
+					desenho.richdraw.lineColor = "green";
+					desenho.richdraw.lineWidth = "2px";
+				};
+				i3GEO.analise.medeArea.criaJanela();
+				if (g_tipoacao !== "area"){
+					$i("mostraarea_calculo").innerHTML = "";
+					if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.analise.medeArea.clique()") < 0)
+					{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.analise.medeArea.clique()");}
+					if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.analise.medeArea.movimento()") < 0)
+					{i3GEO.eventos.MOUSEMOVE.push("i3GEO.analise.medeArea.movimento()");}
+					if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.analise.medeArea.fechaJanela()") < 0)
+					{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.analise.medeArea.fechaJanela()");}
+					//
+					//a API do Openlayers e GoogleMaps tem uma funcao propria de obtencao da resolucao de cada pixel
+					//essa funcao e embutida em i3GEO.calculo.tela2dd
+					//
+					if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
+						x = parseInt(i3GEO.parametros.w / 2,10);
+						y = parseInt(i3GEO.parametros.h / 2,10);
+						ll1 = calculo.tela2dd(x,y,"","");
+						ll2 = calculo.tela2dd(x + 1,y,"","");
+						d = calculo.distancia(ll1[0],ll1[1],ll2[0],ll2[1]);
+						d = d * 1000;
+						g_areapixel = d * d;
+						g_areapixel < 0 ? i3GEO.janela.tempoMsg("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.") : montacontainer();
+					}
+				}
+				else{i3GEO.desenho.richdraw.fecha();}
+			},
+			fechaJanela: function(){
+			}
+		},
+
+
+
+		////////////////////////////////////////////
+		/*
+		Adiciona uma marca na tela e realiza o calculo de distancia dos pontos inseridos
+		 */
+		clique: function(){
+			var n,m;
+			pontosdistobj = i3GEO.analise.pontosdistobj;
+			if (g_tipoacao === "area"){
+				n = pontosdistobj.xpt.length;
+				pontosdistobj.xpt[n] = objposicaocursor.ddx;
+				pontosdistobj.ypt[n] = objposicaocursor.ddy;
+				pontosdistobj.xtela[n] = objposicaocursor.telax;
+				pontosdistobj.ytela[n] = objposicaocursor.telay;
+				pontosdistobj.ximg[n] = objposicaocursor.imgx;
+				pontosdistobj.yimg[n] = objposicaocursor.imgy;
+				pontosdistobj.dist[n] = 0;
+				//inclui a linha para ligar com o ponto inicial
+				if (n === 0){
+					try	{
+						pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);
+					}
+					catch(e){
+						if(typeof(console) !== 'undefined'){console.error(e);}
+					}
 				}
 				else{
-					janela = YAHOO.i3GEO.janela.manager.find("mostraarea");
+					if(navm)
+					{i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1]),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n]),pontosdistobj.yimg[n]);}
+					//parece qe tem um problema de versao do ie aqui
+					//if(navm)
+					//{i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}
 				}
-				janela.show();
-				imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-				janela.moveTo(imagemxy[0]+150,imagemxy[1]);
-			},
-			/*
-		Function: fechaJanela
-
-		Fecha a janela e os elementos graficos criados para a ferramenta de medicao
-			 */
-			fechaJanela: function(){
-				var janela;
-				i3GEO.eventos.cliquePerm.ativa();
-				i3GEO.desenho.richdraw.fecha();
-				i3GEO.util.removeChild("pontosArea",document.body);
-				i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeArea.clique()");
-				i3GEO.eventos.MOUSEMOVE.remove("i3GEO.analise.medeArea.movimento()");
-				i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.analise.medeArea.fechaJanela()");
-				i3GEO.barraDeBotoes.ativaBotoes();
-				janela = YAHOO.i3GEO.janela.manager.find("mostraarea");
-				if(janela){
-					YAHOO.i3GEO.janela.manager.remove(janela);
-					janela.destroy();
+				try{
+					pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1);
 				}
-				i3GEO.barraDeBotoes.ativaIcone("pointer");
-			},
-			/*
-		Adiciona uma marca na tela e realiza o calculo de distancia dos pontos inseridos
-			 */
-			clique: function(){
-				var n,m;
-				pontosdistobj = i3GEO.analise.pontosdistobj;
-				if (g_tipoacao === "area"){
-					n = pontosdistobj.xpt.length;
-					pontosdistobj.xpt[n] = objposicaocursor.ddx;
-					pontosdistobj.ypt[n] = objposicaocursor.ddy;
-					pontosdistobj.xtela[n] = objposicaocursor.telax;
-					pontosdistobj.ytela[n] = objposicaocursor.telay;
-					pontosdistobj.ximg[n] = objposicaocursor.imgx;
-					pontosdistobj.yimg[n] = objposicaocursor.imgy;
-					pontosdistobj.dist[n] = 0;
-					//inclui a linha para ligar com o ponto inicial
-					if (n === 0){
-						try	{
-							pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);
-						}
-						catch(e){
-							if(typeof(console) !== 'undefined'){console.error(e);}
-						}
-					}
-					else{
-						if(navm)
-						{i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1]),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n]),pontosdistobj.yimg[n]);}
-						//parece qe tem um problema de versao do ie aqui
-						//if(navm)
-						//{i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}
-					}
-					try{
-						pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1);
-					}
-					catch(men){
-						if(typeof(console) !== 'undefined'){console.error(men);}
-					}
-					m = i3GEO.calculo.area(pontosdistobj.xtela,pontosdistobj.ytela,g_areapixel);
-					i3GEO.util.defineValor("mostraarea_calculo","innerHTML","<br>m2</b>= "+m.toFixed(2)+"<br><b>km2</b>= "+(m/1000000).toFixed(2)+"<br><b>ha</b>= "+(m/10000).toFixed(2));
-					if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
-						i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeArea.paraCalculo,"divGeometriasTemp","",i3GEO.configura.locaplic+"/imagens/estasel.png",6,6);
-						i3GEO.desenho.insereCirculo(objposicaocursor.imgx,objposicaocursor.imgy,3,"white");
-					}
-					if(i3GEO.Interface.ATUAL === "googleearth")
-					{i3GEO.util.insereMarca.cria(objposicaocursor.ddx,objposicaocursor.ddy,i3GEO.analise.medeArea.paraCalculo,"divGeometriasTemp","");}
+				catch(men){
+					if(typeof(console) !== 'undefined'){console.error(men);}
 				}
-			},
-			/*
+				m = i3GEO.calculo.area(pontosdistobj.xtela,pontosdistobj.ytela,g_areapixel);
+				i3GEO.util.defineValor("mostraarea_calculo","innerHTML","<br>m2</b>= "+m.toFixed(2)+"<br><b>km2</b>= "+(m/1000000).toFixed(2)+"<br><b>ha</b>= "+(m/10000).toFixed(2));
+				if(i3GEO.util.in_array(i3GEO.Interface.ATUAL,["openlayers","googlemaps"])){
+					i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeArea.paraCalculo,"divGeometriasTemp","",i3GEO.configura.locaplic+"/imagens/estasel.png",6,6);
+					i3GEO.desenho.insereCirculo(objposicaocursor.imgx,objposicaocursor.imgy,3,"white");
+				}
+				if(i3GEO.Interface.ATUAL === "googleearth")
+				{i3GEO.util.insereMarca.cria(objposicaocursor.ddx,objposicaocursor.ddy,i3GEO.analise.medeArea.paraCalculo,"divGeometriasTemp","");}
+			}
+		},
+		/*
 		Para o calculo de area e ativa o botao "pan"
-			 */
-			paraCalculo: function(){
-				var botaoPan = $i("pan");
-				g_tipoacao = "";
-				botaoPan ? botaoPan.onclick.call() : i3GEO.barraDeBotoes.ativaBotoes();
-			},
-			/*
+		 */
+		paraCalculo: function(){
+			var botaoPan = $i("pan");
+			g_tipoacao = "";
+			botaoPan ? botaoPan.onclick.call() : i3GEO.barraDeBotoes.ativaBotoes();
+		},
+		/*
 		Realiza o desenho do poligono conforme o usuario movimenta o mouse
-			 */
-			movimento: function(){
-				var n,
-				pontosdistobj = i3GEO.analise.pontosdistobj;
-				if (g_tipoacao === "area"){
-					n = pontosdistobj.xpt.length;
-					if (n > 0){
-						i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhastemp,1);
-						i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
-					}
+		 */
+		movimento: function(){
+			var n,
+			pontosdistobj = i3GEO.analise.pontosdistobj;
+			if (g_tipoacao === "area"){
+				n = pontosdistobj.xpt.length;
+				if (n > 0){
+					i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhastemp,1);
+					i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
 				}
 			}
 		}
+}
 };

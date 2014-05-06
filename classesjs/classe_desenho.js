@@ -62,32 +62,32 @@ i3GEO.desenho = {
 		 */
 		estilos: {
 			"normal":{
-				fillcolor: '255,0,0',
-				linecolor: '0,0,0',
+				fillcolor: '#ffffff',
+				linecolor: '#000000',
 				linewidth: '2',
-				circcolor: '255,255,255',
-				textcolor: '100,100,100'
+				circcolor: '#ffffff',
+				textcolor: '#787A78'
 			},
 			"palido":{
-				fillcolor: '100,100,100',
-				linecolor: '100,100,100',
+				fillcolor: '#B5A8A8',
+				linecolor: '#BAA4AE',
 				linewidth: '1',
-				circcolor: '100,100,100',
-				textcolor: '100,100,100'
+				circcolor: '#E0D7DC',
+				textcolor: '#787A78'
 			},
 			"vermelho":{
-				fillcolor: '100,100,100',
-				linecolor: '255,0,0',
+				fillcolor: '#E8ACAC',
+				linecolor: '#F50707',
 				linewidth: '1',
-				circcolor: '255,50,0',
-				textcolor: '200,200,200'
+				circcolor: '#F09EA6',
+				textcolor: '#787A78'
 			},
 			"verde":{
-				fillcolor: '100,100,100',
-				linecolor: '100,255,100',
+				fillcolor: '#3CCC2F',
+				linecolor: '#0C6642',
 				linewidth: '1',
-				circcolor: '0,255,0',
-				textcolor: '0,0,0'
+				circcolor: '#C7D9D2',
+				textcolor: '#787A78'
 			}
 		},
 		//@TODO remover apos refatorar codigo
