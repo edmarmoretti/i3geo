@@ -527,8 +527,8 @@ i3GEO.analise = {
 					var mostra = $i("mostradistancia_calculo"),
 					texto;
 					if (mostra){
-						texto = "<b>atual:</b> "+total.toFixed(3)+" km"+
-						"<br><b>atual:</b> "+(total*1000).toFixed(2)+" m"+
+						texto = "<b>"+$trad("x96")+":</b> "+total.toFixed(3)+" km"+
+						"<br><b>"+$trad("x96")+":</b> "+(total*1000).toFixed(2)+" m"+
 						"<br>"+$trad("x25")+": "+i3GEO.calculo.metododistancia;
 						mostra.innerHTML = texto;
 					}
@@ -540,8 +540,8 @@ i3GEO.analise = {
 					var mostra = $i("mostradistancia_calculo_movel"),
 					texto;
 					if (mostra){
-						texto = "<b>trecho:</b> "+trecho.toFixed(3)+" km"+
-						"<br><b>total:</b> "+(parcial + trecho).toFixed(3)+" km" +
+						texto = "<b>"+$trad("x95")+":</b> "+trecho.toFixed(3)+" km"+
+						"<br><b>"+$trad("x97")+":</b> "+(parcial + trecho).toFixed(3)+" km" +
 						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao.toFixed(4);
 						mostra.innerHTML = texto;
 					}
@@ -1019,9 +1019,9 @@ i3GEO.analise = {
 				var mostra = $i("mostraarea_calculo"),
 				texto;
 				if (mostra){
-					texto = "<b>&Aacute;rea:</b> "+(area/1000000).toFixed(3)+" km2"+
-					"<br><b>&Aacute;rea:</b> "+(area/10000).toFixed(2)+" ha"+
-					"<br><b>per&iacute;metro:</b> "+(per).toFixed(2)+" km"+
+					texto = "<b>"+$trad("d21at")+":</b> "+(area/1000000).toFixed(3)+" km2"+
+					"<br><b>"+$trad("d21at")+":</b> "+(area/10000).toFixed(2)+" ha"+
+					"<br><b>"+$trad("x98")+":</b> "+(per).toFixed(2)+" km"+
 					"<br>"+$trad("x25")+": "+i3GEO.calculo.metododistancia;
 					mostra.innerHTML = texto;
 				}
@@ -1033,10 +1033,10 @@ i3GEO.analise = {
 				var mostra = $i("mostraarea_calculo_parcial"),
 				texto;
 				if (mostra){
-					texto = "<b>&Aacute;rea:</b> "+(area/1000000).toFixed(3)+" km2"+
-					"<br><b>&Aacute;rea:</b> "+(area/10000).toFixed(2)+" ha"+
-					"<br><b>trecho:</b> "+trecho.toFixed(3)+" km"+
-					"<br><b>per&iacute;metro:</b> "+(per).toFixed(3)+" km" +
+					texto = "<b>"+$trad("d21at")+":</b> "+(area/1000000).toFixed(3)+" km2"+
+					"<br><b>"+$trad("d21at")+":</b> "+(area/10000).toFixed(2)+" ha"+
+					"<br><b>"+$trad("x95")+":</b> "+trecho.toFixed(3)+" km"+
+					"<br><b>"+$trad("x98")+":</b> "+(per).toFixed(3)+" km" +
 					"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao.toFixed(4);
 					mostra.innerHTML = texto;
 				}
