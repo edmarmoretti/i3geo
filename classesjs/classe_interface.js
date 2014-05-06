@@ -90,7 +90,7 @@ i3GEO.Interface = {
 		/*
 	Propriedade: BARRABOTOESTOP
 
-	Distância da barra de bot&otilde;es em rela&ccedil;&atilde;o ao topo do mapa.
+	Distï¿½ncia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao topo do mapa.
 
 	Tipo:
 	{number}
@@ -102,7 +102,7 @@ i3GEO.Interface = {
 		/*
 	Propriedade: BARRABOTOESLEFT
 
-	Distância da barra de bot&otilde;es em rela&ccedil;&atilde;o ao lado esquerdo do mapa.
+	Distï¿½ncia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao lado esquerdo do mapa.
 
 	Tipo:
 	{number}
@@ -114,7 +114,7 @@ i3GEO.Interface = {
 		/*
 	Propriedade: BARRADEZOOMTOP
 
-	Distância da barra de zoom em rela&ccedil;&atilde;o ao topo do mapa.
+	Distï¿½ncia da barra de zoom em rela&ccedil;&atilde;o ao topo do mapa.
 
 	Tipo:
 	{number}
@@ -126,7 +126,7 @@ i3GEO.Interface = {
 		/*
 	Propriedade: BARRADEZOOMLEFT
 
-	Distância da barra de zoom em rela&ccedil;&atilde;o ao lado esquerdo do mapa.
+	Distï¿½ncia da barra de zoom em rela&ccedil;&atilde;o ao lado esquerdo do mapa.
 
 	Tipo:
 	{number}
@@ -323,7 +323,7 @@ i3GEO.Interface = {
 
 	Parametros:
 
-	retorno {JSON} - objeto JSON com os parâmetros obtidos da fun&ccedil;&atilde;o PHP de redesenho do mapa. Quando igual a "", &eacute; feita apenas a atualiza&ccedil;&atilde;o da camada, sem que a &aacute;rvore de camadas seja atualizada.
+	retorno {JSON} - objeto JSON com os parï¿½metros obtidos da fun&ccedil;&atilde;o PHP de redesenho do mapa. Quando igual a "", &eacute; feita apenas a atualiza&ccedil;&atilde;o da camada, sem que a &aacute;rvore de camadas seja atualizada.
 
 	tema {string} - c&oacute;digo do tema
 		 */
@@ -409,7 +409,7 @@ i3GEO.Interface = {
 		/*
 	Function: alteraLayers
 
-	Altera todos os layers do mapa modificando um determinado parâmetro
+	Altera todos os layers do mapa modificando um determinado parï¿½metro
 		 */
 		alteraParametroLayers: function(parametro,valor){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.inicia()");}
@@ -447,7 +447,7 @@ i3GEO.Interface = {
 			/*
 		Propriedade: parametrosMap
 
-		Permite incluir parametros da API do OpenLayers não previstos no i3Geo. Veja em http://dev.openlayers.org/releases/OpenLayers-2.12/doc/apidocs/files/OpenLayers/Map-js.html
+		Permite incluir parametros da API do OpenLayers nao previstos no i3Geo. Veja em http://dev.openlayers.org/releases/OpenLayers-2.12/doc/apidocs/files/OpenLayers/Map-js.html
 
 		Exemplo i3GEO.Interface.openlayers.parametrosMap.scales = [50000000, 30000000, 10000000, 5000000];
 			 */
@@ -1242,7 +1242,7 @@ i3GEO.Interface = {
 				if(layers.length > 0){
 					layers[0].setVisibility(obj.checked);
 					if(obj.checked == true){
-						//foi necessário por causa de um bug no Firefox 27.0.1
+						//foi necessï¿½rio por causa de um bug no Firefox 27.0.1
 						/*
 						 * @TODO verificar se persiste o erro nas versoes do FF
 						 */
@@ -1656,14 +1656,14 @@ i3GEO.Interface = {
 			 */
 			ZOOMSCALE: [591657550,295828775,147914387,73957193,36978596,18489298,9244649,4622324,2311162,1155581,577790,288895,144447,72223,36111,18055,9027,4513,2256,1128],
 			/*
-		Parâmetros adicionais que s&atilde;o inseridos na URL que define cada layer
+		Parï¿½metros adicionais que s&atilde;o inseridos na URL que define cada layer
 
 		Tipo:
 		{string}
 			 */
 			PARAMETROSLAYER: "&TIPOIMAGEM="+i3GEO.configura.tipoimagem,
 			/*
-		String acrescentada à url de cada tile para garantir a remo&ccedil;&atilde;o do cache local
+		String acrescentada ï¿½ url de cada tile para garantir a remo&ccedil;&atilde;o do cache local
 
 		Type:
 		{string}
@@ -2295,14 +2295,14 @@ i3GEO.Interface = {
 			/*
 		Variable: PARAMETROSLAYER
 
-		Parâmetros adicionais que s&atilde;o inseridos na URL que define cada layer
+		Parï¿½metros adicionais que s&atilde;o inseridos na URL que define cada layer
 
 		Tipo:
 		{string}
 			 */
 			PARAMETROSLAYER: "&TIPOIMAGEM="+i3GEO.configura.tipoimagem,
 			/*
-		String acrescentada à url de cada tile para garantir a remo&ccedil;&atilde;o do cache local
+		String acrescentada ï¿½ url de cada tile para garantir a remo&ccedil;&atilde;o do cache local
 
 		Type:
 		{string}

@@ -54,12 +54,44 @@ i3GEO.desenho = {
 	{richdraw object}
 		 */
 		richdraw: "",
+		layergrafico: null,
 		/*
 	Propriedade: estilos
 
 	Estilos que podem ser utilizados para desenhar os elementos
 		 */
 		estilos: {
+			"normal":{
+				fillcolor: '255,0,0',
+				linecolor: '0,0,0',
+				linewidth: '2',
+				circcolor: '255,255,255',
+				textcolor: '100,100,100'
+			},
+			"palido":{
+				fillcolor: '100,100,100',
+				linecolor: '100,100,100',
+				linewidth: '1',
+				circcolor: '100,100,100',
+				textcolor: '100,100,100'
+			},
+			"vermelho":{
+				fillcolor: '100,100,100',
+				linecolor: '255,0,0',
+				linewidth: '1',
+				circcolor: '255,50,0',
+				textcolor: '200,200,200'
+			},
+			"verde":{
+				fillcolor: '100,100,100',
+				linecolor: '100,255,100',
+				linewidth: '1',
+				circcolor: '0,255,0',
+				textcolor: '0,0,0'
+			}
+		},
+		//@TODO remover apos refatorar codigo
+		estilosOld: {
 			"normal":{
 				fillcolor: 'red',
 				linecolor: 'black',
@@ -103,82 +135,81 @@ i3GEO.desenho = {
 			 * Cria o layer onde os desenhos serao inseridos
 			 */
 			inicia: function(){
-				if(!i3GEO.desenho.layergrafico || i3GEO.desenho.layergrafico != undefined){
+				if(!i3GEO.desenho.layergrafico){
 					i3GEO.desenho.openlayers.criaLayerGrafico();
 				}
 			},
 			//i3GEO.editorOL.layergrafico
 			criaLayerGrafico: function(){
-				var	sketchSymbolizers = {
-						"Point": {
-							fillColor: "rgb(${fillColor})",
-							fillOpacity: "${opacidade}",
-							strokeWidth: "${strokeWidth}",
-							strokeOpacity: "${opacidade}",
-							strokeColor: "rgb(${strokeColor})",
-							label: "${texto}",
-							pointRadius: "${pointRadius}",
-							graphicName: "${graphicName}",
-							fontSize: "${fontSize}",
-							fontColor: "rgb(${fontColor})",
-							fontFamily: "Arial",
-							fontWeight: "normal",
-							labelAlign: "lb",
-							labelXOffset: "3",
-							labelYOffset: "3",
-							externalGraphic: "${externalGraphic}"
-						},
-						"Line": {
-							strokeWidth: "${strokeWidth}",
-							strokeOpacity: "${opacidade}",
-							strokeColor: "rgb(${strokeColor})"
-						},
-						"Polygon": {
-							strokeWidth: "${strokeWidth}",
-							strokeOpacity: "${opacidade}",
-							strokeColor: "rgb(${strokeColor})",
-							fillColor: "rgb(${fillColor})",
-							fillOpacity: "${opacidade}",
-							zIndex: 5000
-						}
-				},
-				style = new OpenLayers.Style(),
-				styleMap1 = new OpenLayers.StyleMap(
-						{
-							"default": style,
-							"vertex": {
-								strokeOpacity: 1,
-								strokeWidth: 1,
-								fillColor: "white",
-								fillOpacity: 0.45,
-								pointRadius: 4
+				if(!i3GEO.desenho.layergrafico){
+					var	sketchSymbolizers = {
+							"Point": {
+								fillColor: "rgb(${fillColor})",
+								fillOpacity: "${opacidade}",
+								strokeWidth: "${strokeWidth}",
+								strokeOpacity: "${opacidade}",
+								strokeColor: "rgb(${strokeColor})",
+								label: "${texto}",
+								pointRadius: "${pointRadius}",
+								graphicName: "${graphicName}",
+								fontSize: "${fontSize}",
+								fontColor: "rgb(${fontColor})",
+								fontFamily: "Arial",
+								fontWeight: "normal",
+								labelAlign: "lb",
+								labelXOffset: "3",
+								labelYOffset: "3",
+								externalGraphic: "${externalGraphic}"
+							},
+							"Line": {
+								strokeWidth: "${strokeWidth}",
+								strokeOpacity: "${opacidade}",
+								strokeColor: "rgb(${strokeColor})"
+							},
+							"Polygon": {
+								strokeWidth: "${strokeWidth}",
+								strokeOpacity: "${opacidade}",
+								strokeColor: "rgb(${strokeColor})",
+								fillColor: "rgb(${fillColor})",
+								fillOpacity: "${opacidade}",
+								zIndex: 5000
 							}
-						},
-						{
-							extendDefault: false
-						}
-				),
-				renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
-
-				style.addRules(
-						[new OpenLayers.Rule({symbolizer: sketchSymbolizers})]
-				);
-				renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
-				i3GEO.desenho.layergrafico = new OpenLayers.Layer.Vector(
-						"Edi&ccedil;&atilde;o",{
-							styleMap: styleMap1,
-							displayInLayerSwitcher:true,
-							visibility:true,
-							renderers: renderer,
-							vertexRenderIntent: "vertex"
-						}
-				);
-				//para efeitos de compatibilidade
-				if(i3GEO.editorOL.mapa){
-					i3GEO.editorOL.mapa.addLayers([i3GEO.desenho.layergrafico]);
-				}
-				else{
-					i3geoOL.addLayers([i3GEO.desenho.layergrafico]);
+					},
+					style = new OpenLayers.Style(),
+					styleMap1 = new OpenLayers.StyleMap(
+							{
+								"default": style,
+								"vertex": {
+									strokeOpacity: 1,
+									strokeWidth: 1,
+									fillColor: "white",
+									fillOpacity: 0.45,
+									pointRadius: 4
+								}
+							},
+							{
+								extendDefault: false
+							}
+					);
+					style.addRules(
+							[new OpenLayers.Rule({symbolizer: sketchSymbolizers})]
+					);
+					i3GEO.desenho.layergrafico = new OpenLayers.Layer.Vector(
+							"Graf",
+							{
+								styleMap: styleMap1,
+								displayInLayerSwitcher:true,
+								visibility:true,
+								vertexRenderIntent: "vertex"
+							}
+					);
+					//para efeitos de compatibilidade
+					if(i3GEO.editorOL && i3GEO.editorOL.mapa){
+						i3GEO.editorOL.mapa.addLayers([i3GEO.desenho.layergrafico]);
+					}
+					else{
+						i3geoOL.addLayers([i3GEO.desenho.layergrafico]);
+					}
 				}
 			}
 		},
@@ -371,18 +402,24 @@ i3GEO.desenho = {
 		},
 		/*
 	Aplica um determinado padrao de estilos para os novos elementos que ser&atilde;o adicionados
+	
+	Para obter o estilo padrao, utilize i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao];
 
 	Parametro:
 
 	padrao {string} - nome do estilo
 		 */
 		definePadrao: function(padrao){
-			padrao = i3GEO.desenho.estilos[padrao];
-			i3GEO.desenho.richdraw.editCommand('fillcolor', padrao.fillcolor);
-			i3GEO.desenho.richdraw.editCommand('linecolor', padrao.linecolor);
-			i3GEO.desenho.richdraw.editCommand('linewidth', padrao.linewidth);
-			i3GEO.desenho.richdraw.editCommand('circcolor', padrao.circcolor);
-			i3GEO.desenho.richdraw.editCommand('textcolor', padrao.textcolor);
+			i3GEO.desenho.estiloPadrao = padrao;
+			//@TODO remover apos refatorar o codigo
+			padrao = i3GEO.desenho.estilosOld[padrao];
+			if(i3GEO.desenho.richdraw){
+				i3GEO.desenho.richdraw.editCommand('fillcolor', padrao.fillcolor);
+				i3GEO.desenho.richdraw.editCommand('linecolor', padrao.linecolor);
+				i3GEO.desenho.richdraw.editCommand('linewidth', padrao.linewidth);
+				i3GEO.desenho.richdraw.editCommand('circcolor', padrao.circcolor);
+				i3GEO.desenho.richdraw.editCommand('textcolor', padrao.textcolor);
+			}
 		},
 		/*
 	Cria uma caixa de sele&ccedil;&atilde;o para escolha do estilo a ser utilizado

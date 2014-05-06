@@ -2193,6 +2193,13 @@ pt:"Localiza&ccedil;&atilde;o do usu&aacute;rio",
 en:"",
 es:"",
 it:""
+}],
+"x94":[
+{
+pt:"Remove as figuras",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

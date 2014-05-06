@@ -162,7 +162,7 @@ i3GEO.editorOL = {
 			i3GEO.editorOL.incluilayergrafico = true;
 		}
 		if(i3GEO.editorOL.incluilayergrafico === true){
-			if(!i3GEO.desenho.layergrafico || i3GEO.desenho.layergrafico != undefined){
+			if(!i3GEO.desenho.layergrafico){
 				i3GEO.editorOL.criaLayerGrafico();
 			}
 		}
@@ -213,7 +213,7 @@ i3GEO.editorOL = {
 				i3GEO.editorOL.mapa.addLayer(i3GEO.editorOL.layersIniciais[i]);
 			}
 		}
-		if(i3GEO.desenho.layergrafico !== ""){
+		if(!i3GEO.desenho.layergrafico){
 			i3GEO.editorOL.mapa.addLayers([i3GEO.desenho.layergrafico]);
 		}
 		i3GEO.editorOL.adicionaKml();
@@ -791,16 +791,16 @@ i3GEO.editorOL = {
 			{
 				"default": style,
 				"vertex": {
-			        strokeOpacity: 1,
-			        strokeWidth: 1,
-			        fillColor: "white",
-			        fillOpacity: 0.45,
-			        pointRadius: 3
-			    }
+							strokeOpacity: 1,
+							strokeWidth: 1,
+							fillColor: "white",
+							fillOpacity: 0.45,
+							pointRadius: 3
+					}
 			},
-		    {
-		    	extendDefault: false
-		    }
+			{
+				extendDefault: false
+			}
 		),
 		adiciona = false,
 		button,
@@ -1221,7 +1221,7 @@ i3GEO.editorOL = {
 					standalone: false,
 					createVertices: true,
 					styleMap: "default",
-            		vertexRenderIntent: "vertex"
+					vertexRenderIntent: "vertex"
 				}
 			);
 			controles.push(i3GEO.editorOL.ModifyFeature);
@@ -1569,10 +1569,10 @@ i3GEO.editorOL = {
 			'	</tr>' +
 			'</table>' +
 			'<br />' +
-			'<p class=paragrafo ><b>Ajusta n� em edi&ccedil;&atilde;o para o(a):</b></p>' +
+			'<p class=paragrafo ><b>Ajusta n&oacute; em edi&ccedil;&atilde;o para o(a):</b></p>' +
 			'<table class=lista7 >' +
 			'	<tr>' +
-			'		<td></td><td>n�</td><td></td><td>v&eacute;rtice</td><td></td><td>borda</td>' +
+			'		<td></td><td>n&oacute</td><td></td><td>v&eacute;rtice</td><td></td><td>borda</td>' +
 			'	</tr>' +
 			'	<tr>' +
 			'		<td><input style=cursor:pointer onclick="i3GEO.editorOL.snap()" type="checkbox" id="target_node" /></td><td><input onchange="i3GEO.editorOL.snap()" id="target_nodeTolerance" type="text" size="3" value=15 /></td>' +

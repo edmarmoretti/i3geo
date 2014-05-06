@@ -1663,8 +1663,9 @@ i3GEO.barraDeBotoes = {
 				);
 				i3GEO.editorOL.mapa.addLayers([i3GEO.desenho.layergrafico]);
 				*/
-				i3GEO.desenho.openlayers.criaLayerGrafico();
-				
+				if(!i3GEO.desenho.layergrafico){
+					i3GEO.desenho.openlayers.criaLayerGrafico();
+				}
 				if(idjanela){
 					i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
 				}
