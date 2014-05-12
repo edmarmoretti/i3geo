@@ -142,5 +142,11 @@ es:""
 pt:"Documenta&ccedil;&atilde;o da API",
 en:"",
 es:""
+}],
+25: [
+{
+pt:"SAIKU - an&aacute;lise de dados estat&iacute;sticos",
+en:"",
+es:""
 }]
 };

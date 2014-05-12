@@ -170,6 +170,10 @@ botoesIni.push({
 	"href":"../kml.php",
 	"titulo":$trad(12,g_traducao_init)
 	},{
+	"img":"../imagens/saiku_free_small.png",
+	"href":"../ferramentas/saiku/esquemaxml.php",
+	"titulo":$trad(25,g_traducao_init)
+	},{
 	"img":"insert-link.png",
 	"href":"../geradordelinks.htm",
 	"titulo":$trad(13,g_traducao_init)

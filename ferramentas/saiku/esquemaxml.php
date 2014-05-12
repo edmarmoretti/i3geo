@@ -1,23 +1,30 @@
 <?php
-if(empty($_GET["g_sid"])){
-	echo "erro";
-	exit;
-}
+
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
 if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
 }
-//pega a sessao PHP aberta pelo i3Geo
+$nomeConexao = nomeRandomico();
+$nomeDatasource = $dir_tmp."/saiku-datasources/".$nomeConexao;
+
+//quando o saiku e iniciado de fora do i3geo, e necessario inicializar um mapfile para uso como base dos mapas
+if(empty($_GET["g_sid"])){
+	include(dirname(__FILE__)."/../../ms_criamapa.php");
+	//reinicia a url
+	$urln = "?g_sid=".session_id();
+	header("Location:".$urln);
+	exit;
+}
+
+//pega a sessao PHP aberta pelo i3Geo ou ms_criamapa.php
 session_name("i3GeoPHP");
 session_id($_GET["g_sid"]);
 session_start();
-
 $map_file = $_SESSION["map_file"];
-$nomeConexao = nomeRandomico();
-$nomeDatasource = $dir_tmp."/saiku-datasources/".$nomeConexao;
 $urlXmlEsquema = $_SESSION["tmpurl"].basename(dirname($map_file))."/".$nomeConexao.".xml";
 $arquivoXmlEsquema = dirname($map_file)."/".$nomeConexao.".xml";
+
 /*
 $saikuConfigDataSource vem do ms_configura.php
 
@@ -55,49 +62,51 @@ password={$saikuConfigDataSource["password"]}
 gravaDados(array($stringDatasource),$nomeDatasource);
 $m = new Metaestat();
 $selecaoRegiao = array();
-//obtem os layers que sao do sistema metaestat, sao regioes e que possuem selecao
-$mapa = ms_newMapObj($map_file);
-$c = $mapa->numlayers;
+//obtem do mapfile em uso os layers que sao do sistema metaestat, sao regioes e que possuem selecao
 $codigo_tipo_regiao = "";
-for ($i=0;$i < $c;++$i){
-	$l = $mapa->getlayer($i);
-	//verifica o alias na conexao
-	if (!empty($postgis_mapa)){
-		if ($l->connectiontype == MS_POSTGIS){
-			$lcon = $l->connection;
-			if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
-				if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
-				{$l->set("connection",$postgis_mapa);}
-				else{
-					$l->set("connection",$postgis_mapa[$lcon]);
+if($map_file != ""){
+	$mapa = ms_newMapObj($map_file);
+	$c = $mapa->numlayers;
+	for ($i=0;$i < $c;++$i){
+		$l = $mapa->getlayer($i);
+		//verifica o alias na conexao
+		if (!empty($postgis_mapa)){
+			if ($l->connectiontype == MS_POSTGIS){
+				$lcon = $l->connection;
+				if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
+					if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
+					{$l->set("connection",$postgis_mapa);}
+					else{
+						$l->set("connection",$postgis_mapa[$lcon]);
+					}
 				}
 			}
 		}
-	}
-	//
-	$registros = array();
-	if($l->status == MS_DEFAULT && $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO") != ""){
-		$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");
-		//verifica se tem selecao
-		$qyfile = dirname($map_file)."/".$l->name.".php";
-		if(file_exists($qyfile)){
-			//pega os registros
-			$shapes = retornaShapesSelecionados($l,$map_file,$mapa);
-			//pega o nome da coluna que identifica cada registro
-			$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
-			$item = $regiao["identificador"];
-			foreach($shapes as $shape){
-				$registros[] = $shape->values[$item];
+		//
+		$registros = array();
+		if($l->status == MS_DEFAULT && $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO") != ""){
+			//verifica se tem selecao
+			$qyfile = dirname($map_file)."/".$l->name.".php";
+			if(file_exists($qyfile)){
+				$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");
+				//pega os registros
+				$shapes = retornaShapesSelecionados($l,$map_file,$mapa);
+				//pega o nome da coluna que identifica cada registro
+				$regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
+				$item = $regiao["identificador"];
+				foreach($shapes as $shape){
+					$registros[] = $shape->values[$item];
+				}
+				$reg = $item." IN ('".implode("','",$registros)."') ";
+				$selecaoRegiao[$codigo_tipo_regiao] = array(
+						"item" => $item,
+						"sql" => $reg
+				);
+				break; //mantem a primeira ocorrencia de regiao que possui selecao
 			}
-			$reg = $item." IN ('".implode("','",$registros)."') ";
-			$selecaoRegiao[$codigo_tipo_regiao] = array(
-					"item" => $item,
-					"sql" => $reg
-			);
-			break; //mantem a primeira ocorrencia de regiao que possui selecao
-		}
-		else{
-			$selecaoRegiao[$codigo_tipo_regiao] = "";
+			else{
+				$selecaoRegiao[$codigo_tipo_regiao] = "";
+			}
 		}
 	}
 }
@@ -258,7 +267,7 @@ $medidas = $m->listaMedidaVariavel();
 $tbs = array();
 
 foreach($medidas as $medida){
-	if($medida["codigo_tipo_regiao"] == $codigo_tipo_regiao){
+	if($codigo_tipo_regiao == "" || $medida["codigo_tipo_regiao"] == $codigo_tipo_regiao){
 		$k = $medida["esquemadb"].$medida["tabela"];
 		if(empty($tbs[$k])){
 			$tbs[$k] = array($medida);
@@ -268,10 +277,10 @@ foreach($medidas as $medida){
 		}
 	}
 }
-
 //monta os cubos para cada esquema.tabela diferente
 $VirtualCubeDimension = array();
 $VirtualCubeMeasure = array();
+
 foreach($tbs as $tb){
 	//cabecalho de cada cubo obtido da primeira medida
 	$c = $tb[0];
@@ -344,6 +353,7 @@ error_reporting(0);
 ob_end_clean();
 
 gravaDados(array($xml),$arquivoXmlEsquema);
+
 header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]."&mapext=".$_GET["mapext"]);
 
 function converte($texto){
