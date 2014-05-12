@@ -8,7 +8,8 @@
 <body class="yui-skin-sam">
 </body>
 <script type="text/javascript" >
-var titulo=window.prompt("Digite o titulo do mapa:")
-window.location="a4lpaisagempdf.php?titulo="+titulo+"&interface="+window.opener.i3GEO.Interface.ATUAL+"&mapexten="+window.opener.i3GEO.parametros.mapexten
+var titulo=window.prompt("Digite o titulo do mapa:");
+var ext = window.opener.i3GEO.util.extOSM2Geo(window.opener.i3GEO.parametros.mapexten);
+window.location="a4lpaisagempdf.php?titulo="+titulo+"&interface="+window.opener.i3GEO.Interface.ATUAL+"&mapexten="+ext;
 </script>
 </html>

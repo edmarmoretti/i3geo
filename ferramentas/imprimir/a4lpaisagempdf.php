@@ -148,7 +148,7 @@ $pdf->SetFont('Arial','',9);
 //$pdf->Text(14,$nH+3,"Sistema de Refer&ecirc;ncia:  SAD69");
 $pdf->Image("../../imagens/i3geo1.jpg", 23, $nH+5, 25);
 $pdf->SetFont('Arial','',9);
-$textMsg = "Projeção Geográfica";
+$textMsg = "";
 $xMsg = 292/2 - $pdf->GetStringWidth($textMsg)/2;
 $pdf->Text($xMsg,$nH+28,$textMsg);
 $wLegendaMax = 63;
