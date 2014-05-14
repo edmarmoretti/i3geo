@@ -1494,28 +1494,36 @@ i3GEO.barraDeBotoes = {
 		},
 		//carrega as opcoes de edicao se a interface for do googlemaps
 		googlemaps: {
-			inicia: function(){
+			inicia: function(idjanela){
 				var temp = function(){
-					var cabecalho, minimiza;
+					var cabecalho, minimiza,
+						janela = YAHOO.i3GEO.janela.manager.find("i3GEOjanelaEditor");
+					if(janela){
+						janela.destroy();
+					}
 					cabecalho = function() {
 					};
 					minimiza = function() {
-						i3GEO.janela.minimiza("janelaEditorLimites");
+						i3GEO.janela.minimiza("i3GEOjanelaEditor");
 					};
 					i3GEO.janela.cria("300px", "100px", "", "", "",
-						"Editor", "janelaEditorLimites", false, "hd",
+						"Editor", "i3GEOjanelaEditor", false, "hd",
 						cabecalho, minimiza);
-					$i("janelaEditorLimites_corpo").style.backgroundColor = "white";
-					i3GEOF.editorlimites.inicia("janelaEditorLimites_corpo");
-					i3GEOF.locregiao.iniciaJanelaFlutuante();
-					YAHOO.i3GEO.janela.manager.find("i3GEOF.locregiao").moveTo(100,40);
+					$i("i3GEOjanelaEditor_corpo").style.backgroundColor = "white";
+					i3GEO.editorGM.inicia("i3GEOjanelaEditor_corpo");
 				};
-				i3GEO.util.scriptTag(
-					i3GEO.configura.locaplic+"/ferramentas/metaestat/editorlimites_dependencias.php",
-					temp,
-					"editorlimites_dependencias.php",
-					true
-				);
+				//@TODO incluir o js compactado ao inves do original
+				if(!i3GEO.editorGM){
+					i3GEO.util.scriptTag(
+						i3GEO.configura.locaplic+"/classesjs/classe_editorgm.js",
+						temp,
+						"editorgm.js",
+						true
+					);
+				}
+				else{
+					temp.call();
+				}
 			}
 		},
 		openlayers:{
@@ -1524,7 +1532,7 @@ i3GEO.barraDeBotoes = {
 					i3GEO.util.scriptTag(
 						i3GEO.configura.locaplic+"/classesjs/compactados/classe_editorol_compacto.js",
 						"i3GEO.barraDeBotoes.editor.openlayers.ativaPainel('"+idjanela+"')",
-						"openlayers.js",
+						"editorol.js",
 						true
 					);
 				}

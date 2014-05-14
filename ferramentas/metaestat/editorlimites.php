@@ -1,4 +1,5 @@
 <?php
+//@TODO atualizar a interface para black
 /*
 Title: Editor de limites geograficos do sistema de metadados estatisticos
 
@@ -179,7 +180,7 @@ i3GEO.finalizaAPI = function(){
 		"Editor", "janelaEditorLimites", false, "hd",
 		cabecalho, minimiza);
 	$i("janelaEditorLimites_corpo").style.backgroundColor = "white";
-	i3GEOF.editorlimites.inicia("janelaEditorLimites_corpo");
+	i3GEO.editorGM.inicia("janelaEditorLimites_corpo");
 	i3GEOF.locregiao.iniciaJanelaFlutuante();
 	YAHOO.i3GEO.janela.manager.find("i3GEOF.locregiao").moveTo(100,40);
 }

@@ -3,7 +3,7 @@ GUIA DE UPDATES e UPGRADES
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 
-- a função de cálculo de área em classes_calculo.js (i3GEO.calculo.area) agora recebe novos parâmetros
+- a biblioteca pacotes/wicket/wicket.js agora é carregada com i3geo.js
 
 - a biblioteca Richdraw foi removida em favor das bibliotecas de desenho nativas de cada API utilizada nos mapas
 

@@ -118,6 +118,7 @@ packer("classe_i3geo.js","compactados/classe_i3geo_compacto.js","Normal");
 packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal");
 packer("classe_social.js","compactados/classe_social_compacto.js","Normal");
 packer("classe_editorol.js","compactados/classe_editorol_compacto.js","Normal");
+packer("classe_editorgm.js","compactados/classe_editorgm_compacto.js","Normal");
 //packer("../ferramentas/funcoes.js","../ferramentas/funcoes_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container.js","../pacotes/yui290/build/container/container_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container_core.js","../pacotes/yui290/build/container/container_core_compacto.js","Normal");
@@ -162,6 +163,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/progressbar/progressbar_compacto.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js",
+"../pacotes/wicket/wicket.js",
 "compactados/classe_i3geo_compacto.js",
 "compactados/classe_util_compacto.js",
 "compactados/dicionario_compacto.js",
