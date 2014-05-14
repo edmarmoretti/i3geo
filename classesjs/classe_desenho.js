@@ -213,6 +213,10 @@ i3GEO.desenho = {
 				}
 			}
 		},
+		googlemaps: {
+			inicia: function(){
+			}
+		},
 		/*
 	Cria os elementos 'dom' necess&aacute;rios ao uso das fun&ccedil;&otilde;es de desenho sobre o mapa.
 
