@@ -5,7 +5,7 @@ i3GEO.configura
 
 Configura&ccedil;&atilde;o do i3geo
 
-Vc pode alterar com esta classe a maioria dos parâmetros que controlam
+Vc pode alterar com esta classe a maioria dos parï¿½metros que controlam
 o funcionamento do i3geo.
 
 Exemplo:
@@ -47,6 +47,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
+//@TODO o link para a arvore hiperbolica foi removido na versao 6.0. Excluir arquivos de forma definitiva na versao 6.1
 i3GEO.configura = {
 	//
 	//ferramentas que serao inicializadas com o mapa
@@ -120,7 +121,7 @@ i3GEO.configura = {
 	];
 
 	Onde "icone" indica se o &iacute;cone de ligar/desligar todos os temas do grupo ser&aacute; mostrado,
-	"dinamico" significa que o n&oacute; pode ser expandido ou n&atilde;o, e "expandido" significa que o n&oacute; inicia aberto se a &aacute;rvore for dinâmica
+	"dinamico" significa que o n&oacute; pode ser expandido ou n&atilde;o, e "expandido" significa que o n&oacute; inicia aberto se a &aacute;rvore for dinï¿½mica
 
 	Type:
 	{JSON}
@@ -132,7 +133,7 @@ i3GEO.configura = {
 	/*
 	Propriedade: oMenuData
 
-	Itens inclu&iacute;dos no menu suspenso. Define os parâmetros para o gadget menu suspenso
+	Itens inclu&iacute;dos no menu suspenso. Define os parï¿½metros para o gadget menu suspenso
 
 	Mais informa&ccedil;&otilde;es em <classe_gadgets.js> fun&ccedil;&atilde;o <mostraMenuSuspenso>
 
@@ -477,11 +478,11 @@ i3GEO.configura = {
 	/*
 	Propriedade: mashuppar
 
-	Define os parâmetros que devem ser aplicados no modo mashup
+	Define os parï¿½metros que devem ser aplicados no modo mashup
 
 	O modo mashup possibilita que o i3Geo seja embutido dentro de uma p&aacute;gina HTML. Nesse
 	caso, o mapa n&atilde;o &eacute; criado no modo convencional, que utiliza o programa i3geo/ms_criamapa.php
-	A variavel mashuppar deve conter os parâmetros que s&atilde;o utilizados pelo programa ms_criamapa
+	A variavel mashuppar deve conter os parï¿½metros que s&atilde;o utilizados pelo programa ms_criamapa
 
 	Exemplo:
 
@@ -1071,7 +1072,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//bot&atilde;o de medi&ccedil;&atilde;o de distâncias
+			//bot&atilde;o de medi&ccedil;&atilde;o de distï¿½ncias
 			iddiv:"mede",
 			tipo:"dinamico",
 			dica:$trad("d21"),

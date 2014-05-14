@@ -3,6 +3,8 @@ GUIA DE UPDATES e UPGRADES
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 
+- os links para a árvore hiperbólica foram removidos.
+
 - a biblioteca pacotes/wicket/wicket.js agora é carregada com i3geo.js
 
 - a biblioteca Richdraw foi removida em favor das bibliotecas de desenho nativas de cada API utilizada nos mapas
