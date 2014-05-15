@@ -317,7 +317,7 @@ i3GEO.analise = {
 				var janela;
 				i3GEO.eventos.cliquePerm.ativa();
 				//@TODO remover
-				if(i3GEO.Interface.ATUAL !== "openlayers" && i3GEO.Interface.ATUAL !== "googlemaps"){
+				if(i3GEO.Interface.ATUAL === "googleearth"){
 					i3GEO.Interface.ATUAL !== "googleearth" ? i3GEO.desenho.richdraw.fecha() : i3GEO.Interface.googleearth.removePlacemark("divGeometriasTemp");
 					i3GEO.util.removeChild("pontosins");
 					if($i("divGeometriasTemp"))
@@ -554,10 +554,11 @@ i3GEO.analise = {
 				 * Executa a funcao de inicializacao do desenho, que cria o layer para receber os graficos
 				 */
 				inicia: function(){
-					var linha,evtclick,evtmousemove,
+					var linha,
 						estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao];
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 					i3GeoMap.setOptions({disableDoubleClickZoom:true});
+					i3GeoMap.setOptions({draggableCursor:'crosshair'});
 					i3GEO.analise.medeDistancia.pontos = {
 							xpt: [],
 							ypt: [],
@@ -568,15 +569,56 @@ i3GEO.analise = {
 							polygon: null
 					};
 					var pontos = i3GEO.analise.medeDistancia.pontos;
-					evtclick = google.maps.event.addListener(i3GeoMap, "click", function(evt) {
+					i3GEO.analise.medeDistancia.googlemaps.evtclick = google.maps.event.addListener(i3GeoMap, "click", function(evt) {
+						var x1,x2,y1,y2,raio,trecho,total,n;
 						// When the map is clicked, pass the LatLng obect to the measureAdd function
 						pontos.mvcLine.push(evt.latLng);
 						pontos.xpt.push(evt.latLng.lng());
 						pontos.ypt.push(evt.latLng.lat());
+						n = pontos.xpt.length;
+						//desenha um circulo
+						if (pontos.mvcLine.getLength() > 1) {
+							if($i("pararraios") && $i("pararraios").checked === true ){
+								new google.maps.Circle({
+									map: i3GeoMap,
+									fillOpacity: 0,
+									clickable: false,
+									strokeColor: estilo.circcolor,
+									strokeOpacity: 1,
+									strokeWeight: estilo.linewidth,
+									center:evt.latLng,
+									radius: 50000
+								});
+							}
+							x1 = i3GEO.analise.medeDistancia.pontos.xpt[n-2];
+							y1 = i3GEO.analise.medeDistancia.pontos.ypt[n-2];
+							x2 = evt.latLng.lng();
+							y2 = evt.latLng.lat();
+							raio = google.maps.geometry.spherical.computeDistanceBetween(evt.latLng,new google.maps.LatLng(y1,x1))
+							trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);
+							i3GEO.analise.medeDistancia.pontos.dist.push(trecho);
+							total = i3GEO.analise.medeDistancia.googlemaps.somaDist();
+							i3GEO.analise.medeDistancia.googlemaps.mostraTotal(trecho,total);
+						}
+						//desenha uma marca no ponto
+						if($i("parartextos") && $i("parartextos").checked === true ){
+							new google.maps.Marker({
+								map: i3GeoMap,
+								fillOpacity: 0,
+								clickable: false,
+								position:evt.latLng,
+								icon: {
+									path: google.maps.SymbolPath.CIRCLE,
+									scale: 2.5,
+									strokeColor: "#ffffff"
+								}
+							});
+						}
+						pontos.ypt.push(evt.latLng.lat());
 						//mais um ponto para criar uma linha movel
 						pontos.mvcLine.push(evt.latLng);
 					});
-					evtmousemove = google.maps.event.addListener(i3GeoMap, "mousemove", function(evt) {
+					i3GEO.analise.medeDistancia.googlemaps.evtmousemove = google.maps.event.addListener(i3GeoMap, "mousemove", function(evt) {
 						// If there is more than one vertex on the line
 						if (pontos.mvcLine.getLength() > 1) {
 							// If the line hasn't been created yet
@@ -585,9 +627,9 @@ i3GEO.analise = {
 								pontos.line = new google.maps.Polyline({
 									map: i3GeoMap,
 									clickable: false,
-									strokeColor: "#FF0000",
+									strokeColor: estilo.linecolor,
 									strokeOpacity: 1,
-									strokeWeight: 3,
+									strokeWeight: estilo.linewidth,
 									path:pontos.mvcLine
 								});
 							}
@@ -595,9 +637,9 @@ i3GEO.analise = {
 							pontos.mvcLine.push(evt.latLng);
 						}
 					});
-					google.maps.event.addListener(i3GeoMap, "dblclick", function(evt) {
-						google.maps.event.removeListener(evtclick);
-						google.maps.event.removeListener(evtmousemove);
+					i3GEO.analise.medeDistancia.googlemaps.dblclick = google.maps.event.addListener(i3GeoMap, "dblclick", function(evt) {
+						//google.maps.event.removeListener(i3GEO.analise.medeDistancia.googlemaps.evtclick);
+						//google.maps.event.removeListener(i3GEO.analise.medeDistancia.googlemaps.evtmousemove);
 						i3GEO.analise.medeDistancia.googlemaps.inicia();
 					});
 
@@ -621,12 +663,16 @@ i3GEO.analise = {
 				 * Os raios e pontos sao sempre removidos
 				 */
 				fechaJanela: function(){
+					//google.maps.event.removeListener(i3GEO.analise.medeDistancia.googlemaps.evtclick);
+					//google.maps.event.removeListener(i3GEO.analise.medeDistancia.googlemaps.evtmousemove);
+					//google.maps.event.removeListener(i3GEO.analise.medeDistancia.googlemaps.dblclick);
 					i3GeoMap.setOptions({disableDoubleClickZoom:false});
+					i3GeoMap.setOptions({draggableCursor:""});
 					/*
 					var temp,
 					controle = i3geoOL.getControlsBy("id","i3GeoMedeDistancia"),
 					f = i3GEO.desenho.layergrafico.getFeaturesByAttribute("origem","medeDistancia");
-					
+
 					if(controle.length > 0){
 						controle[0].deactivate();
 						i3geoOL.removeControl(controle[0]);
@@ -641,7 +687,7 @@ i3GEO.analise = {
 					if(f && f.length > 0){
 						i3GEO.desenho.layergrafico.destroyFeatures(f);
 					}
-					*/
+					 */
 				},
 				/**
 				 * Mostra a totalizacao das linhas ja digitalizadas
