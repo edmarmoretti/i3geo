@@ -40,7 +40,7 @@ i3GEO.calculo = {
 
 	M&eacute;todo utilizado no c&aacute;lculo de distâncias
 
-	vicenty|vicenty
+	vicenty|haversine
 
 	Default:
 	{vicenty}

@@ -1,8 +1,7 @@
 <?php
-//@TODO atualizar a interface para black
 include_once("../ms_configura.php");
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
@@ -10,120 +9,127 @@ include_once("../ms_configura.php");
 <title>i3GEO - Google Maps</title>
 
 </head>
-<body id="i3geo" style="background-color:white">
-<!-- inclui o nome do usuario logado -->
-<div id="i3GEONomeLogin" style="position:absolute;left:10px;top:12px;font-size:11px;z-index:50000"></div>
-<table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
-	<tr style="border:0px">
-		<td id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
-	</tr>
-	<tr>
-		<td id="contemMenu" style="text-align:right;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
-			<!--menu suspenso-->
-			<div id="menus" ></div>
-		</td>
-	</tr>
-	<tr>
-		<td style="vertical-align:top;border-width:0px;">
-			<table width="100%" style="vertical-align:top;border-width:0px">
-				<tr>
-					<td  class=verdeclaro id=contemImg >
-						<div id=googlemapsdiv style="position:relative;background-image:url('../imagens/i3geo1bw.jpg');"></div>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table width=100% >
-				<tr>
-					<td class=tdbranca >
-						<!--
-						Nesse div s&atilde;o inclu&iacute;dos os &iacute;cones que permitem ao usu&aacute;rio modificar o visual de cores dos &iacute;cones
-						<div id=visual ></div>
-						-->
-						<!-- bot&atilde;o de compartilhamento em redes sociais -->
-						<div id=i3GEOcompartilhar style="text-align:left;border-top:1px solid rgb(250,250,250);padding-top:1px" ></div>
-						<!-- aqui ser&aacute; inclu&iacute;do o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
-						<div id=tempoRedesenho style=z-index:100;position:absolute;top:0px;color:green;background-color:black;width:50px;display:none ></div>
-					</td>
-					<td class=tdbranca >
-						<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
-						<div id=escala style="text-align:right;" ></div>
-					</td>
-					<td class=tdbranca  >
-						<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
-						<div id=localizarxy style="text-align:left;font-size:10px;display:inline-table"></div>
-					</td>
-					<!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->
-					<td class=tdbranca  >
-						<div id=seletorIdiomas ></div>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr style="border:0px">
-		<td id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td>
-	</tr>
-</table>
-<table id="i3GEOlogoMarca" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
-	<tr>
-		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3></td>
-	</tr>
-	<tr>
-		<td style="padding:10px;"><img style="width:560px;height:81px" alt="" src='../imagens/logo_inicio.png' ></td>
-	</tr>
-	<tr>
-		<td>
-			<!--
+<body id="i3geo" style='margin-left: 7px; background: white;'>
+	<!-- inclui o nome do usuario logado -->
+	<div id="i3GEONomeLogin" style="position: absolute; left: 10px; top: 12px; font-size: 11px; z-index: 50000"></div>
+	<table id='mst' summary="" style='display: none;' width=100% cellspacing='0'>
+		<tr>
+			<td id="contemMenu" style="background: black; height: 30px; text-align: right; border-width: 0pt 0pt 1px; border-color: rgb(240, 240, 240)">
+				<!--menu suspenso-->
+				<div id="menus" style="height: 0px;"></div>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: top; border-width: 0px;">
+				<table width="100%" style="vertical-align: top; border-width: 0px">
+					<tr>
+						<td class=verdeclaro id=contemImg>
+							<div id=googlemapsdiv style="position: relative; background-image: url('../imagens/i3geo1bw.jpg');"></div>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table style="width: 100%; height: 28px">
+					<tr>
+						<td class=fundoRodape style="width: 25%">
+							<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
+							<div id=escala style="margin: auto; text-align: right; left: 15px;"></div>
+						</td>
+						<td class=fundoRodape style="width: 5%"></td>
+						<td class=fundoRodape style="width: 40%">
+							<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
+							<div id=localizarxy style="margin: auto; text-align: left; font-size: 10px; display: inline-table"></div>
+						</td>
+						<td class=fundoRodape style="width: 20%">
+							<!-- bot&atilde;o de compartilhamento em redes sociais-->
+							<div id=i3GEOcompartilhar style="width: 170px; margin: auto; text-align: left; padding-top: 1px"></div> <!-- aqui ser&aacute; inclu&iacute;do o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
+							<div id=tempoRedesenho style="z-index: 100; position: absolute; top: 0px; color: green; background-color: black; width: 50px; display: none"></div>
+						</td>
+						<!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->
+						<td class=fundoRodape style="width: 10%;">
+							<div id=seletorIdiomas style="right: 15px;"></div>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<table id="i3GEOlogoMarca" style='margin: 0px auto; box-shadow: 0 1px 13px gray; border-radius: 5px;'>
+		<tr>
+			<td><div id=versaoi3geo></div>
+				<h2 style="font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2>
+				<h3 style="font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3></td>
+		</tr>
+		<tr>
+			<td style="padding: 10px;"><img style="width: 560px; height: 81px" alt="" src='../imagens/logo_inicio.png'></td>
+		</tr>
+		<tr>
+			<td>
+				<!--
 			<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
 			-->
-		</td>
-	</tr>
-</table>
+			</td>
+		</tr>
+	</table>
 
-<div id="i3GEOguiaMovel" style="position:absolute;display:block;border:0px solid white;text-align:left;z-index:1000;background-color:none">
-	<img id='i3GEOguiaMovelPuxador' onclick='i3GEO.guias.guiaMovel.abreFecha()' style='z-index:2;border:solid 0px white;left:0px;position:absolute;top:0px' width='0px' src='../imagens/openbars.png' >
-	<div id="i3GEOguiaMovelMolde" style="position:absolute;display:none;border:0px solid white;text-align:left;z-index:1000;background-color:gray">
-		<div id='i3GEOguiaMovelIcones' style='overflow:none;left:0px;display:none;position:absolute;top:0px;text-align:center;height:0px;width:0px;border:solid 0px white;background-color:white' ></div>
-		<div id='i3GEOguiaMovelConteudo' style='overflow:auto;display:none;position:absolute;border-color:gray;border-width:0px 0 0px 0px;left:0px;height:0px;background-color:white'>
-			<div id='guia1obj' style='display:none;' >
-				<!-- Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico -->
-				<div style='left:5px;top:10px;' id=buscaRapida ></div>
-				<!--	Esta div acrescenta a lista de propriedades do mapa -->
-				<div id=listaPropriedades style='top:15px;' ></div>
-				<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
-				<div id=listaLayersBase style='top:15px;'></div>
-				<!--	Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
-				<div id=listaTemas style='top:15px;'></div>
+	<div id="i3GEOguiaMovel" style="position: absolute; display: block; border: 0px solid white; text-align: left; z-index: 1000; background-color: none">
+		<img id='i3GEOguiaMovelPuxador' onclick='i3GEO.guias.guiaMovel.abreFecha()' style='z-index: 2; border: solid 0px white; left: 0px; position: absolute; top: 0px' width='0px' src='../imagens/openbars.png'>
+		<div id="i3GEOguiaMovelMolde" style="position: absolute; display: none; border: 0px solid white; text-align: left; z-index: 1000; background-color: gray">
+			<div id='i3GEOguiaMovelIcones' style='overflow: none; left: 0px; display: none; position: absolute; top: 0px; text-align: center; height: 0px; width: 0px; border: solid 0px white; background-color: white'></div>
+			<div id='i3GEOguiaMovelConteudo' style='overflow: auto; display: none; position: absolute; border-color: gray; border-width: 0px 0 0px 0px; left: 0px; height: 0px; background-color: white'>
+				<div id='guia1obj' style='display: none;'>
+					<!-- Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico -->
+					<div style='left: 5px; top: 10px;' id=buscaRapida></div>
+					<!--	Esta div acrescenta a lista de propriedades do mapa -->
+					<div id=listaPropriedades style='top: 15px;'></div>
+					<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
+					<div id=listaLayersBase style='top: 15px;'></div>
+					<!--	Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
+					<div id=listaTemas style='top: 15px;'></div>
+				</div>
+				<div id='guia2obj' style='display: none;'>
+					Aguarde...<img alt="" src="../imagens/branco.gif" width=248 />
+				</div>
+				<div id='guia4obj' style='display: none; text-align: left'>
+					<div id='legenda' style='text-align: left'></div>
+				</div>
+				<div id='guia5obj' style='display: none; text-align: left'>
+					<div id='banners' style='overflow: auto; text-align: left'>Aguarde...</div>
+				</div>
 			</div>
-			<div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
-			<div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
-			<div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
 		</div>
 	</div>
-</div>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing "></script>
-<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
-<script type="text/javascript">
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry"></script>
+	<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/black.css">
+	<script type="text/javascript">
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.Interface.ATUAL = "googlemaps";
 i3GEO.Interface.IDCORPO = "contemImg";
 i3GEO.configura.diminuixN = 20;
-//ativa ou desativa o balao de info ao clicar no mapa
-i3GEO.eventos.cliquePerm.ativo = true;
-//
-i3GEO.cria();
 
-/*
-	Inicializa o mapa
-*/
-//n&atilde;o mostra o mapa de refer&ecirc;ncia
+i3GEO.configura.oMenuData.submenus["interface"] = [
+	{ id:"omenudataInterface0a",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("d27")+'</b></span>',url: "#"},
+	{ id:"omenudataInterface2",text: "OpenLayers", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/black_ol.htm?'+i3GEO.configura.sid" },
+	{ id:"omenudataInterface2a",text: "OpenLayers OSM", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/black_osm.htm?'+i3GEO.configura.sid" },
+	{ id:"omenudataInterface4",text: "Google Maps", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/black_gm.phtml?'+i3GEO.configura.sid" },
+	{ id:"omenudataInterface5",text: "Google Earth", url: "javascript:window.location = i3GEO.configura.locaplic+'/interface/googleearth.phtml?'+i3GEO.configura.sid" },
+	{ id:"omenudataInterface0b",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"},
+	{ id:"omenudataInterface6",text: $trad("u21"), url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/geradordelinks.htm')" },
+	{ id:"omenudataInterface7",text: "Servi&ccedil;os WMS", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/ogc.htm')" },
+	{ id:"omenudataInterface9",text: "Download de dados", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/datadownload.htm')" },
+	{ id:"omenudataInterface11",text: $trad("p20"), url: "javascript:i3GEO.mapa.dialogo.telaRemota()" }
+];
+
+i3GEO.configura.autotamanho = false;
+i3GEO.Interface.openlayers.TILES = true;
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
+i3GEO.cria();
 i3GEO.configura.mapaRefDisplay = "none";
-//tipo de barra de bot&otilde;es
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
 //ajusta o deslocamento da barra de botoes
 i3GEO.barraDeBotoes.OFFSET = 11;
@@ -131,62 +137,32 @@ i3GEO.barraDeBotoes.OFFSET = 11;
 if(navm){
 	i3GEO.barraDeBotoes.OFFSET = 5;
 }
-//i3GEO.barraDeBotoes.INCLUIBOTAO.barraedicao = false;
-//ajusta a posi&ccedil;&atilde;o da barra de bot&otilde;es no IE
-//if(navm)
-//{i3GEO.barraDeBotoes.OFFSET = -45;}
-
-//n&uacute;mero m&aacute;ximo de bot&otilde;es na barra de bot&otilde;es inicial
-//i3GEO.barraDeBotoes.MAXBOTOES = 10;
-//remove itens dos menus que n&atilde;o s&atilde;o necess&aacute;rios, j&aacute; que est&atilde;o como &iacute;cones na barra de bot&otilde;es
 i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
-
-//barra de botoes normal. descomente para usar
-/*
-i3GEO.barraDeBotoes.TIPO = "yui";
-i3GEO.barraDeBotoes.AUTOALTURA = false;
-i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
-i3GEO.barraDeBotoes.PERMITEFECHAR = true;
-i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
-i3GEO.barraDeBotoes.AUTO = true;
-i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
-i3GEO.Interface.BARRABOTOESLEFT = 80;
-i3GEO.Interface.BARRABOTOESTOP = 20;
-*/
-i3GEO.idioma.IDSELETOR = "seletorIdiomas";
-i3GEO.Interface.ATIVAMENUCONTEXTO = true;
-i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
-
-//para evitar a entrada de coment&aacute;rios na &aacute;rvore de camadas, modifique a op&ccedil;&atilde;o de cada tema individualmente no sistema de administra&ccedil;&atilde;o
-i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentario = true;
-i3GEO.mapa.AUTORESIZE = true;
-i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
-i3GEO.guias.TIPO = "movel";
-//posi&ccedil;&atilde;o da guia movel em rela&ccedil;&atilde;o ao topo do mapa. Se for igual a 0, o c&aacute;lculo ser&aacute; feito de forma autom&aacute;tica
-i3GEO.guias.guiaMovel.config.topGuiaMovel = 0;
-
 i3GEO.ajuda.ATIVAJANELA = false;
-//
-//substitui a janela de alerta normal do navegador por uma janela estilizada. Pode ser comentado sem problemas.
-//
+i3GEO.idioma.IDSELETOR = "seletorIdiomas";
+i3GEO.Interface.ATIVAMENUCONTEXTO = false;
+i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
+i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
+i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
+i3GEO.mapa.AUTORESIZE = true;
+i3GEO.guias.TIPO = "movel";
+i3GEO.guias.guiaMovel.config.topGuiaMovel = 36;
 i3GEO.janela.ativaAlerta();
-//esconde a logomarca ao finalizar o mapa
-i3GEO.finaliza = function(){
-	$i("i3GEOlogoMarca").style.display = "none";
-	i3GEO.mapa.insereDobraPagina("openlayers","../imagens/dobraopenlayers.png");
-};
-//i3GEO.Interface.googlemaps.TIPOMAPA = "satellite";
-//
-//define a funcao que sera executada ao clicar no mapa
-//default (balao do tipo etiqueta)
-i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
-//alternativo (janela de identificacao
-//i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoIdentifica];
-//
-i3GEO.finalizaAPI = function(){
-};
 
+//i3GEO.Interface.googlemaps.TIPOMAPA = "satellite";
+
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
+i3GEO.janela.TRANSICAOSUAVE = true;
+
+i3GEO.finaliza = function(){
+	if($i("i3GEOlogoMarca")){
+		$i("i3GEOlogoMarca").style.display = "none";
+	}
+	i3GEO.mapa.insereDobraPagina("openlayers","../imagens/dobraopenlayers.png");
+}
+i3GEO.finalizaAPI = function(){
+}
 i3GEO.inicia();
 </script>
 </body>

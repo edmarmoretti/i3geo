@@ -2228,6 +2228,13 @@ pt:"per&iacute;metro",
 en:"",
 es:"",
 it:""
+}],
+"x99":[
+{
+pt:"C&aacute;lculo n&atilde;o pode ser realizado. Falta carregar a API de geometria do GM",
+en:"",
+es:"",
+it:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

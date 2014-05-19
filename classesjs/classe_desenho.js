@@ -214,7 +214,31 @@ i3GEO.desenho = {
 			}
 		},
 		googlemaps: {
+			/**
+			 * Array que guarda todos os objetos que estao atualmente no mapa
+			 * E atualizado toda vez que uma figura e acrescentada ou removida
+			 */
+			shapes: [],
 			inicia: function(){
+			},
+			getFeaturesByAttribute: function(atributo,valor){
+				var i,s = [],
+				n = i3GEO.desenho.googlemaps.shapes.length;
+				for(i=0;i<n;i++){
+					if(i3GEO.desenho.googlemaps.shapes[i] && i3GEO.desenho.googlemaps.shapes[i] != ""){
+						if(i3GEO.desenho.googlemaps.shapes[i][atributo] == valor){
+							s.push(i3GEO.desenho.googlemaps.shapes[i]);
+						}
+					}
+				}
+				return s;	
+			},
+			destroyFeatures: function(f){
+				var i,n = f.length;
+				for(i=0;i<n;i++){
+					f[i].setMap(null);
+					f[i] = "";
+				}
 			}
 		},
 		/*

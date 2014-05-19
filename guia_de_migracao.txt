@@ -3,6 +3,9 @@ GUIA DE UPDATES e UPGRADES
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 
+- nas interfaces que utilizam a API do google maps agora é necessário carregar a biblioteca geometry com o seguinte código:
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry"></script>
+
 - os links para a árvore hiperbólica foram removidos.
 
 - a biblioteca pacotes/wicket/wicket.js agora é carregada com i3geo.js

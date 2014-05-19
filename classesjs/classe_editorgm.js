@@ -63,11 +63,6 @@ i3GEO.editorGM = {
 	drawingManager: "",
 	selectedShape: null,
 	/**
-	 * Array que guarda todos os objetos que estao atualmente no mapa
-	 * E atualizado toda vez que uma figura e acrescentada ou removida
-	 */
-	shapes: [],
-	/**
 	 * guarda o mapeamento entre o codigo da regiao e o codigo do layer adicionado ao mapa
 	 */
 	regioestemas:{},
@@ -159,7 +154,7 @@ i3GEO.editorGM = {
 					i3GEO.editorGM.setSelection(newShape);
 				});
 				i3GEO.editorGM.setSelection(newShape);
-				i3GEO.editorGM.shapes.push(newShape);
+				i3GEO.desenho.googlemaps.shapes.push(newShape);
 			//}
 		});
 		google.maps.event.addListener(
@@ -230,35 +225,37 @@ i3GEO.editorGM = {
 	},
 	/**
 	 * Marca todas as figuras como nao selecionadas
-	 * As figuras existentes no mapa sao mantidas na variavel i3GEO.editorGM.shapes
+	 * As figuras existentes no mapa sao mantidas na variavel i3GEO.desenho.googlemaps.shapes
 	 */
 	clearSelection: function(){
 		var i,
-			n = i3GEO.editorGM.shapes.length;
+			n = i3GEO.desenho.googlemaps.shapes.length;
 		for(i=0;i<n;i++){
-			if(i3GEO.editorGM.shapes[i] != "" && i3GEO.editorGM.shapes[i].setEditable){
-				i3GEO.editorGM.shapes[i].setEditable(false);
+			if(i3GEO.desenho.googlemaps.shapes[i] != "" && i3GEO.desenho.googlemaps.shapes[i].setEditable){
+				i3GEO.desenho.googlemaps.shapes[i].setEditable(false);
 			}
-			else if(i3GEO.editorGM.shapes[i] != ""){//caso for ponto
-				i3GEO.editorGM.shapes[i].editable = false;
-				i3GEO.editorGM.shapes[i].setIcon({url: i3GEO.editorGM.iconePonto(false)});
+			else if(i3GEO.desenho.googlemaps.shapes[i] != ""){//caso for ponto
+				i3GEO.desenho.googlemaps.shapes[i].editable = false;
+				if(i3GEO.desenho.googlemaps.shapes[i].setIcon){
+					i3GEO.desenho.googlemaps.shapes[i].setIcon({url: i3GEO.editorGM.iconePonto(false)});
+				}
 			}
 		}
 	},
 	/**
 	 * Marca todas as figuras como selecionadas
-	 * As figuras existentes no mapa sao mantidas na variavel i3GEO.editorGM.shapes
+	 * As figuras existentes no mapa sao mantidas na variavel i3GEO.desenho.googlemaps.shapes
 	 */
 	selectAll: function(){
 		var i,
-			n = i3GEO.editorGM.shapes.length;
+			n = i3GEO.desenho.googlemaps.shapes.length;
 		for(i=0;i<n;i++){
-			if(i3GEO.editorGM.shapes[i] != "" && i3GEO.editorGM.shapes[i].setEditable){
-				i3GEO.editorGM.shapes[i].setEditable(true);
+			if(i3GEO.desenho.googlemaps.shapes[i] != "" && i3GEO.desenho.googlemaps.shapes[i].setEditable){
+				i3GEO.desenho.googlemaps.shapes[i].setEditable(true);
 			}
-			else if(i3GEO.editorGM.shapes[i] != ""){//caso for ponto
-				i3GEO.editorGM.shapes[i].editable = true;
-				i3GEO.editorGM.shapes[i].setIcon({url: i3GEO.editorGM.iconePonto(true)});
+			else if(i3GEO.desenho.googlemaps.shapes[i] != ""){//caso for ponto
+				i3GEO.desenho.googlemaps.shapes[i].editable = true;
+				i3GEO.desenho.googlemaps.shapes[i].setIcon({url: i3GEO.editorGM.iconePonto(true)});
 			}
 		}
 	},
@@ -271,7 +268,7 @@ i3GEO.editorGM = {
 			naoconfirma = false;
 		}
 		var i,
-		n = i3GEO.editorGM.shapes.length;
+		n = i3GEO.desenho.googlemaps.shapes.length;
 		if(n > 0){
 			if(naoconfirma === false){
 				var x = window.confirm("Remove as figuras selecionadas?");
@@ -281,15 +278,9 @@ i3GEO.editorGM = {
 			}
 			if(x){
 				for(i=0;i<n;i++){
-					if(i3GEO.editorGM.shapes[i] != "" && i3GEO.editorGM.shapes[i].editable && i3GEO.editorGM.shapes[i].editable === true){
-						i3GEO.editorGM.shapes[i].setMap(null);
-						i3GEO.editorGM.shapes[i] = "";
-					}
-					else{ //caso for ponto
-						if(i3GEO.editorGM.shapes[i] != ""){
-							i3GEO.editorGM.shapes[i].setMap(null);
-							i3GEO.editorGM.shapes[i] = "";
-						}
+					if(i3GEO.desenho.googlemaps.shapes[i] != "" && i3GEO.desenho.googlemaps.shapes[i].editable && i3GEO.desenho.googlemaps.shapes[i].editable === true){
+						i3GEO.desenho.googlemaps.shapes[i].setMap(null);
+						i3GEO.desenho.googlemaps.shapes[i] = "";
 					}
 				}
 			}
@@ -304,10 +295,10 @@ i3GEO.editorGM = {
 	 */
 	selectedShapes: function() {
 		var i,s = [],
-		n = i3GEO.editorGM.shapes.length;
+		n = i3GEO.desenho.googlemaps.shapes.length;
 		for(i=0;i<n;i++){
-			if(i3GEO.editorGM.shapes[i] != "" && i3GEO.editorGM.shapes[i].editable === true){
-				s.push(i3GEO.editorGM.shapes[i]);
+			if(i3GEO.desenho.googlemaps.shapes[i] != "" && i3GEO.desenho.googlemaps.shapes[i].editable === true){
+				s.push(i3GEO.desenho.googlemaps.shapes[i]);
 			}
 		}
 		return s;
@@ -319,17 +310,17 @@ i3GEO.editorGM = {
 	getCoordenadas: function(){
 		var coordenadas = [],
 			lista = [],
-			n = i3GEO.editorGM.shapes.length,
+			n = i3GEO.desenho.googlemaps.shapes.length,
 			tipo = "",
 			ps,nps,j,p,i,r = {};
 
 		for(i=0;i<n;i++){
 			coordenadas = [];
-			if(i3GEO.editorGM.shapes[i] != "" && i3GEO.editorGM.shapes[i].editable === true){
+			if(i3GEO.desenho.googlemaps.shapes[i] != "" && i3GEO.desenho.googlemaps.shapes[i].editable === true){
 				if(tipo == ""){
-					tipo = i3GEO.editorGM.shapes[i].type;
+					tipo = i3GEO.desenho.googlemaps.shapes[i].type;
 				}
-				ps = i3GEO.editorGM.shapes[i].getPath();
+				ps = i3GEO.desenho.googlemaps.shapes[i].getPath();
 				nps = ps.getLength();
 				for(j=0;j<nps;j++){
 					p = ps.getAt(j);
@@ -427,7 +418,7 @@ i3GEO.editorGM = {
 						}
 						obj = WicketWkt.toObject(i3GeoMap.defaults);
 						//obj.setMap(i3GeoMap); // Add it to the map
-						//i3GEO.editorGM.shapes.push(obj);
+						//i3GEO.desenho.googlemaps.shapes.push(obj);
 						i3GEO.editorGM.adicionaPoligonos(obj,tema,colunaid,valorid,colunanome,valornome);
 						i3GEO.eventos.MOUSECLIQUE = [];
 					};
@@ -595,7 +586,7 @@ i3GEO.editorGM = {
 			google.maps.event.addListener(pol, 'click', function() {
 				i3GEO.editorGM.setSelection(pol);
 			});
-			i3GEO.editorGM.shapes.push(pol);
+			i3GEO.desenho.googlemaps.shapes.push(pol);
 						}
 				}
 				return;
@@ -619,12 +610,12 @@ i3GEO.editorGM = {
 			google.maps.event.addListener(pol, 'click', function() {
 				i3GEO.editorGM.setSelection(pol);
 			});
-			i3GEO.editorGM.shapes.push(pol);
+			i3GEO.desenho.googlemaps.shapes.push(pol);
 			return;
 		}
 		if (obj.type === 'marker'){
 			i3GEO.editorGM.selectAll();
-			if(i3GEO.editorGM.shapes.length > 0){
+			if(i3GEO.desenho.googlemaps.shapes.length > 0){
 				i3GEO.editorGM.deleteSelectedShape(true);
 			}
 			pol = new google.maps.Marker({
@@ -646,7 +637,7 @@ i3GEO.editorGM = {
 			google.maps.event.addListener(pol, 'click', function() {
 				i3GEO.editorGM.setSelection(pol);
 			});
-			i3GEO.editorGM.shapes.push(pol);
+			i3GEO.desenho.googlemaps.shapes.push(pol);
 			return;
 		}
 	},
