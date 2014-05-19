@@ -536,7 +536,7 @@ en:"drag to change the order",
 es:"Arrastre para cambiar el orden",
 it:""
 }],
-
+ 
 "t9":[
 {
 pt:"A escala do tema &eacute; compat&iacute;vel com a escala do mapa",
@@ -1762,330 +1762,330 @@ it:""
 "x33":[
 {
 pt:"Escolha um tema da lista",
-en:"",
-es:"",
+en:"Choose a layer from the list",
+es:"Elegir un tema de la lista",
 it:""
 }],
 "x34":[
 {
 pt:"Lugar",
-en:"",
-es:"",
+en:"Place",
+es:"Lugar",
 it:""
 }],
 "x35":[
 {
 pt:"Escolha um tipo de busca nas propriedades",
-en:"",
-es:"",
+en:"Choose a search type in the properties",
+es:"Elija una forma de buscar en las propiedades",
 it:""
 }],
 "x36":[
 {
 pt:"Digite uma palavra para busca!",
-en:"",
-es:"",
+en:"Enter a keyword to search!",
+es:"Introduzca una palabra clave para buscar!",
 it:""
 }],
 "x37":[
 {
 pt:"Onde ser&aacute; feita a busca",
-en:"",
-es:"",
+en:"Where the search will be done",
+es:"Donde se hace la b&uacute;squeda",
 it:""
 }],
 "x38":[
 {
 pt:"Servi&ccedil;os de busca externos",
-en:"",
-es:"",
+en:"External searchs services",
+es:"Servicios de b&uacute;squeda externos",
 it:""
 }],
 "x39":[
 {
 pt:"Temas existentes no mapa",
-en:"",
-es:"",
+en:"Existing layers on the map",
+es:"Temas existentes en el mapa",
 it:""
 }],
 "x40":[
 {
 pt:"Apenas os temas especialmente configurados pelo administrador do i3Geo podem receber opera&ccedil;&otilde;es de busca",
-en:"",
-es:"",
+en:"Only the layers specially configarated by the i3Geo administrator can receive search operations",
+es:"S&oacute;lo los temas especialmente configurados por el administrador del i3Geo pueden recibir las operaciones de b&uacute;squeda",
 it:""
 }],
 "x41":[
 {
 pt:"Nada encontrado nos temas ou nenhum tema permite busca",
-en:"",
-es:"",
+en:"Nothing found in layers or none layer allows search",
+es:"No se encontr&oacute; nada en los temas o ning&uacute;no tema permite b&uacute;squeda",
 it:""
 }],
 "x42":[
 {
 pt:"Nada encontrado em ",
-en:"",
-es:"",
+en:"Nothing found at ",
+es:"No se encontr&oacute; nada en ",
 it:""
 }],
 "x43":[
 {
 pt:"Erro ao acessar o servi&ccedil;o",
-en:"",
-es:"",
+en:"Error accessing the service",
+es:"Error de acceso al servicio",
 it:""
 }],
 "x44":[
 {
 pt:"Nuvem Flash",
-en:"",
-es:"",
+en:"Cloud Flash",
+es:"Nube Flash",
 it:""
 }],
 "x45":[
 {
 pt:"Diret&oacute;rios",
-en:"",
-es:"",
+en:"Directories",
+es:"Directorios",
 it:""
 }],
 "x46":[
 {
 pt:"Conex&atilde;o WMS-T",
-en:"",
-es:"",
+en:"WMS-T connection",
+es:"Conexi&oacute;n WMS-T",
 it:""
 }],
 "x47":[
 {
 pt:"Conex&atilde;o GeoRSS",
-en:"",
-es:"",
+en:"GeoRSS connection",
+es:"Conexi&oacute;n WMS-T",
 it:""
 }],
 "x48":[
 {
 pt:"Rota",
-en:"",
-es:"",
+en:"Route",
+es:"Ruta",
 it:""
 }],
 "x49":[
 {
 pt:"Coordenadas aproximadas",
-en:"",
-es:"",
+en:"Approximate coordinates",
+es:"Coordenadas aproximadas",
 it:""
 }],
 "x50":[
 {
 pt:"Feche para parar",
-en:"",
-es:"",
+en:"Close to stop",
+es:"Cierre para parar",
 it:""
 }],
 "x51":[
 {
 pt:"Sele&ccedil;&atilde;o",
-en:"",
-es:"",
+en:"Selection",
+es:"Selecci&ocute;n",
 it:""
 }],
 "x52":[
 {
 pt:"Alterar senha",
-en:"",
-es:"",
+en:"Change password",
+es:"Cambiar contrase&nacute;a",
 it:""
 }],
 "x53":[
 {
 pt:"Upload de WMC",
-en:"",
-es:"",
+en:"WMC upload",
+es:"Subir WMC",
 it:""
 }],
 "x54":[
 {
 pt:"Perfil",
-en:"",
-es:"",
+en:"Profile",
+es:"Perfil",
 it:""
 }],
 "x55":[
 {
 pt:"Salva o tema",
-en:"",
-es:"",
+en:"Save layer",
+es:"Guarda el tema",
 it:""
 }],
 "x56":[
 {
 pt:"Topon&iacute;mia",
-en:"",
-es:"",
+en:"Toponymy",
+es:"Toponimia",
 it:""
 }],
 "x57":[
 {
 pt:"Cartogramas estat&iacute;sticos",
-en:"",
-es:"",
+en:"Statistical cartograms",
+es:"Cartogramas estad&iacute;sticos",
 it:""
 }],
 "x58":[
 {
 pt:"Continua",
-en:"",
-es:"",
+en:"Continue",
+es:"Seguir",
 it:""
 }],
 "x59":[
 {
 pt:"Localiza limite",
-en:"",
-es:"",
+en:"Locate limit",
+es:"Localiza l&iacute;mite",
 it:""
 }],
 "x60":[
 {
 pt:"Cartogramas",
-en:"",
-es:"",
+en:"Cartograms",
+es:"Cartogramas",
 it:""
 }],
 "x61":[
 {
 pt:"Filtra limite",
-en:"",
+en:"Filter limit",
 es:"",
 it:""
 }],
 "x62":[
 {
 pt:"Remover",
-en:"",
-es:"",
+en:"Remove",
+es:"Eliminar",
 it:""
 }],
 "x63":[
 {
 pt:"Para salvar as configura&ccedil;&otilde;es de uma camada,<br> utilize a op&ccedil;&atilde;o existente na &aacute;rvore de camadas no n&oacute; correspondente ao tema (basta expandir o tema para visualizar as op&ccedil;&otilde;es)<br><br>",
-en:"",
-es:"",
+en:"To save the settings for a layer, use the option available in the layers tree corresponding to the theme node (just expand the layer to view options)",
+es:"Para guardar la configuraci&oacute;n de un tema, utilice la opci&oacute;n disponible en la &aacute;rbol de temas en el nodo correspondiente a lo tema (s&oacute;lo ampliar el tema para ver las opciones)",
 it:""
 }],
 "x64a":[
 {
 pt:"Congela a vis&atilde;o atual",
-en:"",
-es:"",
+en:"Freezes the current view",
+es:"Congela la vista actual",
 it:""
 }],
 "x64":[
 {
-pt:"Item",
-en:"",
-es:"",
+pt:"&Iacute;tem",
+en:"Item",
+es:"&Iacute;tem",
 it:""
 }],
 "x65":[
 {
-pt:"Buscando itens...",
-en:"",
-es:"",
+pt:"Buscando &iacute;tens...",
+en:"Buscando &iacute;tens...",
+es:"Searching items...",
 it:""
 }],
 "x66":[
 {
 pt:"Ocorreu um erro",
-en:"",
-es:"",
+en:"An error ocurred",
+es:"Ha ocurrido un error",
 it:""
 }],
 "x67":[
 {
 pt:"Comunidade i3Geo",
-en:"",
-es:"",
+en:"i3Geo community",
+es:"Comunidad i3Geo",
 it:""
 }],
 "x68":[
 {
 pt:"Vers&atilde;o",
-en:"",
-es:"",
+en:"Version",
+es:"Versi&oacute;",
 it:""
 }],
 "x69":[
 {
 pt:"Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea que ser&aacute; aproximada",
-en:"",
-es:"",
+en:"Press the CTRL key along with the left mouse button and drag to define the area to be approximate",
+es:"Pulse la tecla CTRL junto con el bot&oacurte;n izquierdo del rat&oacurte;n y arrastre para definir el &aacurte;rea a ser aproximado",
 it:""
 }],
 "x70":[
 {
 pt:"Utilize os dedos em um movimento de pin&ccedil;a para definir a &aacute;rea que ser&aacute; aproximada ou afastada",
-en:"",
-es:"",
+en:"Use the fingers in a pincer movement to define the area to be zoomed in or out",
+es:"Utilice los dedos en un movimiento de pinzas para definir el &aacute;rea a ser aproximada o alejada",
 it:""
 }],
 "x71":[
 {
 pt:"Aplicativos estat&iacute;sticos cadastrados",
-en:"",
-es:"",
+en:"Registered statistical applications",
+es:"Aplicaciones estad&iacute;sticas registrados",
 it:""
 }],
 "x72":[
 {
 pt:"Lista de mapas cadastrados",
-en:"",
-es:"",
+en:"Registered map list",
+es:"Lista de los mapas registrados",
 it:""
 }],
 "x73":[
 {
-pt:"Direciona para a versao adaptada para dispositivos moveis?",
-en:"",
-es:"",
+pt:"Redirecionar para a vers&atilde;o adaptada para dispositivos m&oacute;veis?",
+en:"Redirect to mobile version?",
+es:"Redireccionar a una versi&oacute;n adaptada para dispositivos m&oacute;viles?",
 it:""
 }],
 "x74":[
 {
 pt:"Fecha",
 en:"Close",
-es:"",
+es:"Cierra",
 it:""
 }],
 "x75":[
 {
 pt:"Cancela",
 en:"Cancel",
-es:"",
+es:"Cancela",
 it:""
 }],
 "x76":[
 {
 pt:"O tema j&aacute;existe no mapa. Adiciona novamente?",
-en:"",
-es:"",
+en:"Layer already exists in the map. Add again?",
+es:"El tema ya existe en el mapa. Añade otra vez?",
 it:""
 }],
 "x77":[
 {
 pt:"Nome do novo marcador",
-en:"",
-es:"",
+en:"New bookmark name",
+es:"Nombre del nuevo marcador",
 it:""
 }],
 "x78":[
 {
 pt:"Copie os marcadores e cole em um editor para guard&aacute;-los",
-en:"",
-es:"",
+en:"Copy and paste the bookmarks in an editor to save",
+es:"Copie y pegue los marcadores en un editor para salvarlos",
 it:""
 }],
 "x79":[
@@ -2112,121 +2112,121 @@ it:""
 "x82":[
 {
 pt:"Marcar regi&atilde;o",
-en:"",
-es:"",
+en:"Mark region",
+es:"Marcar regi&oacute;",
 it:""
 }]
 ,
 "x83":[
 {
 pt:"Cole os marcadores para import&aacute;-los",
-en:"",
-es:"",
+en:"Paste the bookmarks to import",
+es:"Pegue los marcadores para importarlos",
 it:""
 }],
 "x84":[
 {
 pt:"Exportar SHP",
-en:"",
-es:"",
+en:"Export SHP",
+es:"Exportar SHP",
 it:""
 }],
 "x85":[
 {
 pt:"Visualizador de WMS da INDE-Br",
-en:"",
-es:"",
+en:"INDE-Br WMS viewer",
+es:"Visualizador de WMS de la INDE-Br",
 it:""
 }],
 "x86":[
 {
 pt:"Prefer&ecirc;ncias",
-en:"",
-es:"",
+en:"Preferences",
+es:"Preferencias",
 it:""
 }],
 "x87":[
 {
 pt:"Limites e localidades",
-en:"",
-es:"",
+en:"Limits and places",
+es:"L&iacute;mites y ubicaciones",
 it:""
 }],
 "x88":[
 {
 pt:"Prefer&ecirc;ncias",
-en:"",
-es:"",
+en:"Preferences",
+es:"Preferencias",
 it:""
 }],
 "x89":[
 {
 pt:"Editar cadastro",
-en:"",
-es:"",
+en:"Edit registry",
+es:"Editar registro",
 it:""
 }],
 "x90":[
 {
 pt:"Mapas cadastrados",
-en:"",
-es:"",
+en:"Registered maps",
+es:"Mapas registrados",
 it:""
 }],
 "x91":[
 {
 pt:"Feche para parar. Desligue o tema para ver o efeito",
-en:"",
-es:"",
+en:"Close to stop. Disable the layer to see the effect",
+es:"Cierre para detener. Desactive el tema para ver el efecto",
 it:""
 }],
 "x92":[
 {
 pt:"Escolha uma camada",
-en:"",
-es:"",
+en:"Select a layer",
+es:"Seleccione una capa",
 it:""
 }],
 "x93":[
 {
 pt:"Localiza&ccedil;&atilde;o do usu&aacute;rio",
-en:"",
-es:"",
+en:"User location",
+es:"Ubicación del usuario",
 it:""
 }],
 "x94":[
 {
 pt:"Remove as figuras",
-en:"",
-es:"",
+en:"Remove the pictures",
+es:"Retire las figuras",
 it:""
 }],
 "x95":[
 {
 pt:"trecho",
-en:"",
-es:"",
+en:"stretch",
+es:"tramo",
 it:""
 }],
 "x96":[
 {
 pt:"atual",
-en:"",
-es:"",
+en:"current",
+es:"corriente",
 it:""
 }],
 "x97":[
 {
 pt:"total",
-en:"",
-es:"",
+en:"total",
+es:"total",
 it:""
 }],
 "x98":[
 {
 pt:"per&iacute;metro",
-en:"",
-es:"",
+en:"perimeter",
+es:"per&iacute;metro",
 it:""
 }],
 "x99":[
