@@ -63,7 +63,6 @@
 	"classe_eventos.js",
 	"classe_arvoredetemas.js",
 	"classe_barradebotoes.js",
-	"../pacotes/richdraw/richdraw_tudo_compacto.js",
 	"classe_coordenadas.js",
 	"classe_gadgets.js",
 	"classe_login.js",

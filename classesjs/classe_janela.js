@@ -445,7 +445,7 @@ i3GEO.janela = {
 	},
 	/*
 	Aplica a op&ccedil;&atilde;o definida em ANTESFECHA e elimina alguns objetos que s&atilde;o comumente adicionados por algumas opera&ccedil;&otilde;es do i3geo
-	como richdraw, box, pin
+	como  box, pin
 
 	Parametros:
 

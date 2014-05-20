@@ -230,7 +230,7 @@ var i3GEO = {
 	Essa vari&aacute;vel &eacute; um contador utilizado para indicar quantos processos est&atilde;o ativos e que
 	ir&atilde;o executar o redesenho do mapa. O mapa s&oacute; &eacute; atualizado quando o contador for menor que 1.
 	Esse contador &eacute; utilizado no m&eacute;todo i3GEO.atualiza
-	O contador &eacute; necess&aacute;rio para evitar chamadas desnecess&aacute;rias a  fun&ccedil;&atilde;o de redesenho do mapa.
+	O contador &eacute; necess&aacute;rio para evitar chamadas desnecess&aacute;rias aï¿½ fun&ccedil;&atilde;o de redesenho do mapa.
 
 	Tipo:
 	{string}
@@ -376,7 +376,7 @@ var i3GEO = {
 						{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
 						//
 						//calcula (opcional) o tamanho correto da tabela onde fica o mapa
-						//se n&atilde;o for feito esse c&aacute;lculo, o mapa fica ajustado a  esquerda
+						//se n&atilde;o for feito esse c&aacute;lculo, o mapa fica ajustado aï¿½ esquerda
 						//
 						temp = 0;
 						if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width,10);}
@@ -576,8 +576,6 @@ var i3GEO = {
 			if(arguments.length === 0){return;}
 			i3GEO.mapa.verifica(retorno);
 			tempo = "";
-			if(i3GEO.desenho.richdraw)
-			{i3GEO.desenho.richdraw.clearWorkspace();}
 			mapscale = i3GEO.parametros.mapscale;
 			i3GEO.atualizaParametros(retorno.data.variaveis);
 

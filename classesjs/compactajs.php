@@ -32,7 +32,6 @@ i3geo/classesjs/compactajs.php
 
 */
 //
-//compacta os arquivos do richdraw
 //
 $locaplic = dirname(__FILE__)."/..";
 include_once(dirname(__FILE__)."/../admin/php/admin.php");
@@ -70,20 +69,6 @@ if (!file_exists("../mashups/teste.txt")){
 	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em mashups";exit;
 }
 echo "<pre>";
-packer("../pacotes/richdraw/richdraw.js","../pacotes/richdraw/richdraw_compacto.js","Normal");
-packer("../pacotes/richdraw/svgrenderer.js","../pacotes/richdraw/svgrenderer_compacto.js","Normal");
-packer("../pacotes/richdraw/vmlrenderer.js","../pacotes/richdraw/vmlrenderer_compacto.js","Normal");
-$s = inicia("../pacotes/richdraw/prototype.js");
-$abre = fopen("../pacotes/richdraw/prototype_compacto.js", "wt");
-$escreve = fwrite ($abre,$s);
-$fecha = fclose ($abre);
-$jsfiles = array(
-"../pacotes/richdraw/richdraw_compacto.js",
-"../pacotes/richdraw/svgrenderer_compacto.js",
-"../pacotes/richdraw/vmlrenderer_compacto.js"
-);
-$buffer = "";
-salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js");
 //
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
@@ -185,7 +170,6 @@ $jsfiles = array(
 "compactados/classe_eventos_compacto.js",
 "compactados/classe_arvoredetemas_compacto.js",
 "compactados/classe_barradebotoes_compacto.js",
-"../pacotes/richdraw/richdraw_tudo_compacto.js",
 "compactados/classe_coordenadas_compacto.js",
 "compactados/classe_gadgets_compacto.js",
 "compactados/classe_social_compacto.js",

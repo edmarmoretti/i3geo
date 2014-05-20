@@ -219,7 +219,10 @@ i3GEO.eventos = {
 			i3GEO.eventos.executaEventos(this.MOUSEUP);
 		}
 		else{
-			if(exy.target && (exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)){
+			if(i3GEO.Interface.ATUAL === "googlemaps" && exy.target && !exy.target.src){
+				i3GEO.eventos.executaEventos(this.MOUSEUP);
+			}
+			if(i3GEO.Interface.ATUAL === "openlayers" && exy.target && (exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)){
 				var parente = exy.target.parentNode;
 				if(parente && (parente.className === "olLayerDiv olLayerGrid" || (parente.childNodes && parente.childNodes[0].attributes[0].nodeValue === "olTileImage"))){
 					i3GEO.eventos.executaEventos(this.MOUSEUP);
@@ -365,8 +368,6 @@ i3GEO.eventos = {
 		//se a interface for googleearth, googlemaps ou openlayers, os eventos s&atilde;o controlados
 		//pelas respectivas apis
 		//caso contr&aacute;rio, o i3geo ir&aacute; controlar os c&aacute;lculos
-		//Entretanto, nas ferramentas que usam o richdraw (distância e &aacute;rea) o posicionamento
-		//deve ser controlado pelo i3geo
 		//
 		var teladd,teladms,
 			container = "",

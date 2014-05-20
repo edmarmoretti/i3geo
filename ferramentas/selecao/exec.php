@@ -107,7 +107,7 @@ Seleciona elementos utilizando um ret&acirc;ngulo.
 		foreach($temas as $tema)
 		{
 			$m = new Selecao($map_file,$tema,$ext);
-			$ok[] = $m->selecaoBOX($tipo,$ext);
+			$ok[] = $m->selecaoBOX($tipo,$box);
 		}
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();

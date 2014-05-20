@@ -2961,6 +2961,19 @@ i3GEO.util = {
 		return ext;
 	},
 	/*
+	Function: projOSM2Geo
+
+	Projeta um objeto OpenLayers de OSM para GEO
+	*/
+	projOSM2Geo: function(obj){
+		if(i3GEO.Interface.openlayers.googleLike === true){
+			projWGS84 = new OpenLayers.Projection("EPSG:4326");
+			proj900913 = new OpenLayers.Projection("EPSG:900913");
+			obj =  obj.transform(proj900913,projWGS84);
+		}
+		return obj;
+	},
+	/*
 	Function: navegadorDir
 
 	Abre o navegador de arquivos localizados no servidor
