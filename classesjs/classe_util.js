@@ -2921,7 +2921,7 @@ i3GEO.util = {
 	/*
 	Function: extGeo2OSM
 
-	Converte string xmin ymin xmax ymax de geo para a projecao OSM
+	Converte string 'xmin ymin xmax ymax' ou 'xmin ymin' de geo para a projecao OSM
 	*/
 	extGeo2OSM: function(ext){
 		if(i3GEO.Interface.openlayers.googleLike === true){
@@ -2932,9 +2932,11 @@ i3GEO.util = {
 				point = new OpenLayers.LonLat(temp[0], temp[1]);
 				metrica =  point.transform(projWGS84,proj900913);
 				ext = metrica.lon+" "+metrica.lat;
-				point = new OpenLayers.LonLat(temp[2], temp[3]);
-				metrica =  point.transform(projWGS84,proj900913);
-				ext += " "+metrica.lon+" "+metrica.lat;
+				if(temp.length > 2){
+					point = new OpenLayers.LonLat(temp[2], temp[3]);
+					metrica =  point.transform(projWGS84,proj900913);
+					ext += " "+metrica.lon+" "+metrica.lat;
+				}
 			}
 		}
 		return ext;
@@ -2942,7 +2944,7 @@ i3GEO.util = {
 	/*
 	Function: extOSM2Geo
 
-	Converte string xmin ymin xmax ymax de geo para a projecao OSM
+	Converte string 'xmin ymin xmax ymax' ou 'xmin ymin' de geo para a projecao OSM
 	*/
 	extOSM2Geo: function(ext){
 		if(i3GEO.Interface.openlayers.googleLike === true){
@@ -2953,9 +2955,11 @@ i3GEO.util = {
 				point = new OpenLayers.LonLat(temp[0], temp[1]);
 				metrica =  point.transform(proj900913,projWGS84);
 				ext = metrica.lon+" "+metrica.lat;
-				point = new OpenLayers.LonLat(temp[2], temp[3]);
-				metrica =  point.transform(proj900913,projWGS84);
-				ext += " "+metrica.lon+" "+metrica.lat;
+				if(temp.length > 2){
+					point = new OpenLayers.LonLat(temp[2], temp[3]);
+					metrica =  point.transform(proj900913,projWGS84);
+					ext += " "+metrica.lon+" "+metrica.lat;
+				}
 			}
 		}
 		return ext;

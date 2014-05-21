@@ -13,7 +13,7 @@ Precisa do codigo da "section" PHP aberta pelo i3Geo (veja ms_criamapa.php) ou o
 
 Parametros:
 
-g_sid {string} - c�digo da "section" PHP
+g_sid {string} - codigo da "section" PHP
 
 telaR {string} - (opcional) utilizado para autorizar o uso do mapfile aberto (deve estar registrado em $fingerprint (vari&aacute;vel de se&ccedil;&atilde;o)
 
@@ -49,7 +49,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c�pia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -60,12 +60,8 @@ i3geo/classesphp/mapa_openlayers.php
 
 */
 error_reporting(0);
-//para efeitos de compatibilidade
-if (!function_exists('ms_GetVersion')){
-	include_once ("carrega_ext.php");
-}
-//carrega dados da se&ccedil;&atilde;o, verifica seguran&ccedil;a
 inicializa();
+
 //
 //calcula a extensao geografica com base no x,y,z
 //nos casos do modo notile, a requisicao e feita como se fosse um wms
@@ -104,6 +100,7 @@ if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getf
 if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
 	carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"],$_SESSION["i3georendermode"]);
 }
+
 //
 //map_fileX e para o caso register_globals = On no PHP.INI
 
@@ -137,6 +134,13 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 				if(!function_exists("autoClasses"))
 				{include_once("funcoes_gerais.php");}
 				autoClasses($l,$mapa);
+			}
+			//
+			//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
+			//
+			$cortePixels = 0;
+			if ($l->getmetadata("cortepixels") != ""){
+				$cortePixels = $l->getmetadata("cortepixels");
 			}
 			$l->set("status",MS_DEFAULT);
 			$l->set("template","none.htm");
@@ -177,20 +181,23 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 	}
 }
 
-if (!function_exists('imagepng'))
-{$_GET["TIPOIMAGEM"] = "";}
+if (!function_exists('imagepng')){
+	$_GET["TIPOIMAGEM"] = "";
+}
 
-if($_GET["layer"] == "")
-{$cache = true;}
+if($_GET["layer"] == ""){
+	$cache = true;
+}
 
 if(($_GET == false) || ($qy) || (strtolower($_GET["DESLIGACACHE"]) == "sim")){
 	$cache = false;
 }
-elseif($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum")
-{$cache = false;}
+elseif($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
+	$cache = false;
+}
 
 if($cache == true && $_GET["cache"] != "nao"){
-	carregaCacheImagem($cachedir,$map,$_GET["tms"]);
+	carregaCacheImagem($cachedir,$_SESSION["map_file"],$_GET["tms"]);
 }
 if(isset($_GET["map_size"])){
 	$map_size = explode(" ",$_GET["map_size"]);
@@ -238,8 +245,27 @@ if(!isset($_GET["telaR"])){
 //
 if($_GET["tipolayer"] != "fundo")
 {$o->set("transparent",MS_TRUE);}
-if($qy != true)
-{$img = $mapa->draw();}
+
+//
+//se o layer foi marcado para corte altera os parametros para ampliar o mapa
+//antes de gerar a imagem
+//
+if($cortePixels > 0){
+	//$imagemBranco = $mapa->prepareImage();
+	$escalaInicial = $mapa->scaledenom;
+	$extensaoInicial = $mapa->extent;
+	$wh = 256+($cortePixels*2);
+	$mapa->setsize($wh,$wh);
+	$ponto = new pointObj();
+	$ponto->setxy(($wh/2),($wh/2));
+	$mapa->zoomScale($escalaInicial, $ponto, $wh, $wh, $extensaoInicial);
+}
+
+
+//se nao houver selecao
+if($qy != true){
+	$img = $mapa->draw();
+}
 else{
 	$handle = fopen ($qyfile, "r");
 	$conteudo = fread ($handle, filesize ($qyfile));
@@ -285,7 +311,6 @@ else{
 	}
 	$cache = false;
 }
-
 //nao usa o cache pois e necessario processar a imagem com alguma rotina de filtro
 if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
 	if($img->imagepath == "")
@@ -294,6 +319,14 @@ if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
 	$img->saveImage($nomer);
 	filtraImg($nomer,$_GET["TIPOIMAGEM"]);
 	$img = imagecreatefrompng($nomer);
+	//
+	//corta a imagem gerada para voltar ao tamanho normal
+	//
+	if($cortePixels > 0){
+		$imgc = imagecreate(256,256);
+		imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 255, 255 );
+		$img = $imgc;
+	}
 	imagealphablending($img, false);
 	imagesavealpha($img, true);
 	ob_clean();
@@ -356,7 +389,7 @@ else{
 	}
 }
 function salvaCacheImagem($cachedir,$map,$tms){
-	global $img;
+	global $img,$cortePixels,$cortePixels;
 	if($cachedir == ""){
 		$nome = dirname(dirname($map))."/cache".$tms;
 	}
@@ -367,6 +400,15 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		@mkdir(dirname($nome),0777,true);
 		chmod(dirname($nome),0777);
 		$img->saveImage($nome);
+		//
+		//corta a imagem gerada para voltar ao tamanho normal
+		//
+		if($cortePixels > 0){
+			$img = imagecreatefrompng($nome);
+			$imgc = imagecreate(256,256);
+			imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256 );
+			imagepng($imgc,$nome);
+		}
 		chmod($nome,0777);
 	}
 	return $nome;
@@ -448,10 +490,12 @@ function inicializa(){
 		if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) )
 		{ilegal();}
 	}
-	else
-	{exit;}
-	if(!isset($_SESSION["map_file"]))
-	{exit;}
+	else{
+		exit;
+	}
+	if(!isset($_SESSION["map_file"])){
+		exit;
+	}
 }
 function ilegal(){
 	$img = imagecreatefrompng("../imagens/ilegal.png");

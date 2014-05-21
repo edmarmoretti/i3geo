@@ -908,7 +908,7 @@ i3GEO.analise = {
 												y1 = i3GEO.analise.medeArea.pontos.ypt[0];
 												//projeta
 												if(i3GEO.Interface.openlayers.googleLike){
-													temp = i3GEO.util.extOSM2Geo(x1+" "+y1+" "+x2+" "+y2);
+													temp = i3GEO.util.extOSM2Geo(x1+" "+y1);
 													temp = temp.split(" ");
 													x1 = temp[0];
 													y1 = temp[1];
@@ -951,7 +951,7 @@ i3GEO.analise = {
 												y1 = i3GEO.analise.medeArea.pontos.ypt[0];
 												//projeta
 												if(i3GEO.Interface.openlayers.googleLike){
-													temp = i3GEO.util.extOSM2Geo(x1+" "+y1+" "+x2+" "+y2);
+													temp = i3GEO.util.extOSM2Geo(x1+" "+y1);
 													temp = temp.split(" ");
 													x1 = temp[0];
 													y1 = temp[1];
