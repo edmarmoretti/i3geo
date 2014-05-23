@@ -152,6 +152,13 @@ if(!isset($_GET["telaR"])){
 		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != ""){
 			$l->set("template","none.htm");
 			$l->set("status",MS_DEFAULT);
+			//
+			//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
+			//
+			$cortePixels = 0;
+			if ($l->getmetadata("cortepixels") != ""){
+				$cortePixels = $l->getmetadata("cortepixels");
+			}
 			//@TODO verificar se foi corrigido em versoes novas do mapserver
 			//corrige um bug do mapserver que nao calcula a escala direito
 			$l->set("maxscaledenom",$l->maxscaledenom * 100000);
@@ -271,6 +278,23 @@ if($_GET["tipolayer"] != "fundo")
 {$o->set("transparent",MS_TRUE);}
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {$o->setOption("QUANTIZE_FORCE","OFF");}
+
+//
+//se o layer foi marcado para corte altera os parametros para ampliar o mapa
+//antes de gerar a imagem
+//
+if($cortePixels > 0){
+	//$imagemBranco = $mapa->prepareImage();
+	$escalaInicial = $mapa->scaledenom;
+	$extensaoInicial = $mapa->extent;
+
+	$wh = 256+($cortePixels*2);
+	$mapa->setsize($wh,$wh);
+	$ponto = new pointObj();
+	$ponto->setxy(($wh/2),($wh/2));
+	$mapa->zoomScale($escalaInicial, $ponto, $wh, $wh, $extensaoInicial);
+}
+
 if($qy != true){
 	$img = $mapa->draw();
 }
@@ -402,7 +426,7 @@ else{
 }
 //$cachedir e definido no ms_configura.php
 function salvaCacheImagem(){
-	global $img,$cachedir,$x,$y,$z,$map_fileX;
+	global $img,$cachedir,$x,$y,$z,$map_fileX,$cortePixels;
 	$layer = $_GET["layer"];
 	if($layer == "")
 	{$layer = "fundo";}
@@ -413,6 +437,15 @@ function salvaCacheImagem(){
 	if(!file_exists($c."/$y.png")){
 		mkdir($cachedir."/googlemaps/$layer/$z/$x",0777,true);
 		$img->saveImage($c."/$y.png");
+		//
+		//corta a imagem gerada para voltar ao tamanho normal
+		//
+		if($cortePixels > 0){
+			$img = imagecreatefrompng($c."/$y.png");
+			$imgc = imagecreate(256,256);
+			imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256 );
+			imagepng($imgc,$nome);
+		}		
 		chmod($cachedir."/googlemaps/$layer/$z/$x",0777);
 		chmod($c."/$y.png",0777);
 	}

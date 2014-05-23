@@ -7,7 +7,7 @@ MAP
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	"SIM"
-      #"cortepixels" "50"
+      "cortepixels" "50"
       "LTEMPOITEMIMAGEM"	""
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "LTEMPOITEMDESCRICAO"	"TIPO"

@@ -90,7 +90,7 @@ if(!empty($_GET["request"])){
 	$_GET["REQUEST"] = $_GET["request"];
 }
 //
-//resolve o problema da sele&ccedil;&atilde;o na vers&atilde;o nova do mapserver
+//resolve o problema da selecao nas versoes mais recentes nova do mapserver
 //
 $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
@@ -103,7 +103,7 @@ if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
 
 //
 //map_fileX e para o caso register_globals = On no PHP.INI
-
+//
 if(isset($_GET["tipolayer"]) && $_GET["tipolayer"] == "fundo"){
 	$map_fileX = str_replace(".map","fundo.map",$map_fileX);
 }
@@ -241,7 +241,7 @@ if(!isset($_GET["telaR"])){
 }
 
 //
-//se o layer n&atilde;o for do tipo fundo
+//se o layer nao for do tipo fundo
 //
 if($_GET["tipolayer"] != "fundo")
 {$o->set("transparent",MS_TRUE);}
