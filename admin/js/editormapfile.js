@@ -1263,8 +1263,9 @@ function editorEditavel(codigoMap,codigoLayer)
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEditavel");
 }
 //depreciado
-function editorConexao(codigoMap,codigoLayer)
-{editorDados(codigoMap,codigoLayer);}
+function editorConexao(codigoMap,codigoLayer){
+	editorDados(codigoMap,codigoLayer);
+}
 /*
 Function: editorMetadados
 
@@ -1594,6 +1595,8 @@ function montaEditorDados(dados)
 			titulo:"Type",id:"",value:dados.type,tipo:"text",div:"<div id=cType ></div>"},
 			{ajuda:"Ativa ou n&atilde;o a manuten&ccedil;&atilde;o de um cache para armazenar as imagens geradas para montar o mapa. Essa op&ccedil;&atilde;o afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache &eacute; mantido no diretório tempor&aacute;rio utilizado pelo i3Geo, na pasta chamada cache. Para cada camada &eacute; criada uma sub-pasta. Para limpar o cache, utilize a op&ccedil;&atilde;o existente junto ao nó principal desse mapfile",
 			titulo:"Cache de mapas. Camadas WMS s&atilde;o acessadas diretamente do servidor de origem quando o cache estiver inativo. (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
+			{ajuda:"Ao desenhar a imagem de um TILE que comp&otilde;e o mapa, a imagem &eacute; extendida e depois cortada para o tamanho correto. Isso evita que s&iacute;mbolos apare&ccedil;am de forma parcial no mapa. Indicado para temas com representa&ccedil;&atilde;o pontual e que tamb&eacute;m utilizem cache, pois pode degradar a performance.",
+			titulo:"Extende e corta imagem em pixels (cortepixels)",id:"cortepixels",value:dados.cortepixels,tipo:"text"},
 			{ajuda:"Proje&ccedil;&atilde;o",
 			titulo:"Projection",id:"projection",value:dados.projection,tipo:"text"},
 			{ajuda:"Este par&acirc;metro permite filtrar atributos espec&iacute;ficos ao mesmo tempo em que &eacute; feita uma filtragem espacial, mas antes de que qualquer express&atilde;o em CLASS seja contabilizada. Para OGR e shapefiles, a string &eacute; simplesmente uma express&atilde;o regular do MapServer. Por exemplo: FILTER type= road  and size &lt;2. Para bancos de dados espaciais &eacute; uma cl&aacute;usula SQL WHERE que &eacute; v&aacute;lida de acordo com o banco de dados subjacente. ",
@@ -1640,8 +1643,6 @@ function montaEditorDados(dados)
 		temp += "<img onclick='selIdMedidaVariavel(\"metaestat_id_medida_variavel\",\"metaestat_id_medida_variavel\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
 		$i("cMetaestat_id_medida_variavel").innerHTML = temp;
 	}
-
-
 	if($i("cMetaestat")){
 		temp = "<select id='metaestat' >";
 		temp += core_combosimnao(dados.metaestat);
@@ -1662,7 +1663,6 @@ function montaEditorDados(dados)
 		temp += "</select>";
 		$i("cTipoOriginal").innerHTML = temp;
 	}
-
 	temp = "<select id='connectiontype' >";
 	temp += core_comboObjeto(objcontype,"valor","texto",dados.connectiontype);
 	temp += "</select>";
@@ -2197,7 +2197,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "conexao")
 	{
-		campos = new Array("metaestat_id_medida_variavel","metaestat","cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
+		campos = new Array("cortepixels","metaestat_id_medida_variavel","metaestat","cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		prog = "../php/editormapfile.php?funcao=alterarConexao";
 	}

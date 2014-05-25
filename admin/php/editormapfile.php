@@ -1654,6 +1654,10 @@ function pegaConexao()
 	$dados["tileindex"] = $layer->tileindex;
 	$dados["tileitem"] = $layer->tileitem;
 	$dados["cache"] = $layer->getmetadata("cache");
+	$dados["cortepixels"] = $layer->getmetadata("cortepixels");
+	if($dados["cortepixels"] == ""){
+		$dados["cortepixels"] = 0;
+	}
 	if($dados["tileindex"] == ""){
 		$dados["tileitem"] = "";
 	}
@@ -1691,7 +1695,7 @@ function pegaConexao()
 }
 function alterarConexao()
 {
-	global $esquemaadmin,$metaestat_id_medida_variavel,$metaestat,$convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
+	global $cortepixels,$esquemaadmin,$metaestat_id_medida_variavel,$metaestat,$convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
@@ -1741,6 +1745,11 @@ function alterarConexao()
 		$layer->setmetadata("tipooriginal",$tipooriginal);
 	}
 	$layer->setmetadata("cache",$cache);
+	if($cortepixels == ""){
+		$cortepixels = 0;
+	}
+	$layer->setmetadata("cortepixels",$cortepixels);
+	
 	$layer->setmetadata("convcaracter",$convcaracter);
 	if($testar == "true")
 	{
