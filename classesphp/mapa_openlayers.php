@@ -251,8 +251,8 @@ if($_GET["tipolayer"] != "fundo")
 //antes de gerar a imagem
 //
 if($cortePixels > 0){
-	$mapa->prepareImage();
-	echo $mapa->scaledenom;exit;
+	//$mapa->prepareImage();
+	//echo $mapa->scaledenom;exit;
 	$escalaInicial = $mapa->scaledenom;
 	$extensaoInicial = $mapa->extent;
 	$wh = 256+($cortePixels*2);
@@ -317,16 +317,14 @@ if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
 	{echo "Erro IMAGEPATH vazio";exit;}
 	$nomer = ($img->imagepath)."filtroimgtemp".nomeRand().".png";
 	$img->saveImage($nomer);
-	filtraImg($nomer,$_GET["TIPOIMAGEM"]);
-	$img = imagecreatefrompng($nomer);
 	//
 	//corta a imagem gerada para voltar ao tamanho normal
 	//
 	if($cortePixels > 0){
-		$imgc = imagecreate(256,256);
-		imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 255, 255 );
-		$img = $imgc;
+		cortaImagemDisco($nomer,$cortePixels,256);
 	}
+	filtraImg($nomer,$_GET["TIPOIMAGEM"]);
+	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
 	imagesavealpha($img, true);
 	ob_clean();
@@ -358,14 +356,24 @@ else{
 	}
 	else{
 		//cache inativo
-		if($img->imagepath == "")
-		{echo "Erro IMAGEPATH vazio";exit;}
-		if($_SESSION["i3georendermode"] == 0){
+		if($img->imagepath == ""){
+			echo "Erro IMAGEPATH vazio";exit;
+		}
+		//se for necessario cortar a imagem, $img->saveImage() nao funciona
+		if($_SESSION["i3georendermode"] == 0 || ($_SESSION["i3georendermode"] == 1 && $cortePixels > 0)){
 			$nomer = ($img->imagepath)."temp".nomeRand().".png";
 			$img->saveImage($nomer);
-			$img = imagecreatefrompng($nomer);
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
+			//
+			//corta a imagem gerada para voltar ao tamanho normal
+			//
+			if($cortePixels > 0){
+				$img = cortaImagemDisco($nomer,$cortePixels,256);
+			}
+			else{
+				$img = imagecreatefrompng($nomer);
+				imagealphablending($img, false);
+				imagesavealpha($img, true);
+			}
 			ob_clean();
 			echo header("Content-type: image/png \n\n");
 			imagepng($img);
@@ -380,6 +388,12 @@ else{
 		if($_SESSION["i3georendermode"] == 2){
 			$nomer = ($img->imagepath)."temp".nomeRand().".png";
 			$img->saveImage($nomer);
+			//
+			//corta a imagem gerada para voltar ao tamanho normal
+			//
+			if($cortePixels > 0){
+				$img = cortaImagemDisco($nomer,$cortePixels,256);
+			}
 			ob_clean();
 			header('Cache-Control: public, max-age=22222222');
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
@@ -404,15 +418,7 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		//corta a imagem gerada para voltar ao tamanho normal
 		//
 		if($cortePixels > 0){
-			$img = imagecreatefrompng($nome);
-			$imgc = imagecreate(256,256);
-			//@FIXME necessario, sem isso algumas imagens sao geradas de forma errada
-			imagesavealpha($imgc, true);
-			$color = imagecolorallocatealpha($imgc,0x00,0x00,0x00,127);
-			imagefill($imgc, 0, 0, $color);
-			
-			imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256 );
-			imagepng($imgc,$nome);
+			$img = cortaImagemDisco($nome,$cortePixels,256);
 		}
 		chmod($nome,0777);
 	}
@@ -510,5 +516,19 @@ function ilegal(){
 	echo header("Content-type: image/png \n\n");
 	imagepng($img);
 	exit;
+}
+/**
+ * Corta uma imagem existente em disco
+ */
+function cortaImagemDisco($arquivo,$cortePixels,$tamanhoFinal=256){
+	$img = imagecreatefrompng($arquivo);
+	$imgc = imagecreate($tamanhoFinal,$tamanhoFinal);
+	//@FIXME necessario, sem isso algumas imagens sao geradas de forma errada
+	imagesavealpha($imgc, true);
+	$color = imagecolorallocatealpha($imgc,0x00,0x00,0x00,127);
+	imagefill($imgc, 0, 0, $color);
+	imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , $tamanhoFinal, $tamanhoFinal );
+	imagepng($imgc,$arquivo);
+	return $imgc;
 }
 ?>

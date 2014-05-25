@@ -142,6 +142,7 @@ $mapa = ms_newMapObj($map_fileX);
 $ret = $mapa->extent;
 
 $cache = false;
+$cortePixels = 0;
 if(!isset($_GET["telaR"])){
 	//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
@@ -155,7 +156,6 @@ if(!isset($_GET["telaR"])){
 			//
 			//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
 			//
-			$cortePixels = 0;
 			if ($l->getmetadata("cortepixels") != ""){
 				$cortePixels = $l->getmetadata("cortepixels");
 			}
@@ -190,6 +190,12 @@ if(!isset($_GET["telaR"])){
 			if(strtolower($l->getmetadata("cache")) == "sim"){
 				$cache = true;
 			}
+			//
+			//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
+			//
+			if ($l->getmetadata("cortepixels") != ""){
+				$cortePixels = $l->getmetadata("cortepixels");
+			}
 			if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature" ){
 				$l->setmetadata("gml_include_items","all");
 				$l->set("template","none.htm");
@@ -210,11 +216,11 @@ else{
 	$numlayers = $mapa->numlayers;
 	for ($i=0;$i < $numlayers;++$i){
 		$l = $mapa->getlayer($i);
-		if($l->getProjection() == "" )
-		{$l->setProjection("proj=latlong,a=6378137,b=6378137");}
+		if($l->getProjection() == "" ){
+			$l->setProjection("proj=latlong,a=6378137,b=6378137");
+		}
 	}
 }
-
 //
 //qd a cahamda e para um WMS, redireciona para ogc.php
 //
@@ -247,14 +253,16 @@ if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
 	exit;
 }
 
-if($_GET["layer"] == "")
-{$cache = true;}
+if($_GET["layer"] == ""){
+	$cache = true;
+}
 
-if(($_GET == false) || ($qy) || (strtolower($_GET["DESLIGACACHE"]) == "sim"))
-{$cache = false;}
-elseif(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
-{$cache = false;}
-
+if(($_GET == false) || ($qy) || (strtolower($_GET["DESLIGACACHE"]) == "sim")){
+	$cache = false;
+}
+elseif(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum"){
+	$cache = false;
+}
 if($cache == true){
 	carregaCacheImagem();
 }
@@ -287,7 +295,6 @@ if($cortePixels > 0){
 	//$imagemBranco = $mapa->prepareImage();
 	$escalaInicial = $mapa->scaledenom;
 	$extensaoInicial = $mapa->extent;
-
 	$wh = 256+($cortePixels*2);
 	$mapa->setsize($wh,$wh);
 	$ponto = new pointObj();
@@ -360,10 +367,17 @@ if (!function_exists('imagepng')){
 	{$_GET["TIPOIMAGEM"] = "";}
 }
 if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum"){
-	if($img->imagepath == "")
-	{echo "Erro IMAGEPATH vazio";exit;}
+	if($img->imagepath == ""){
+		echo "Erro IMAGEPATH vazio";exit;
+	}
 	$nomer = ($img->imagepath)."filtroimgtemp".nomeRand().".png";
 	$img->saveImage($nomer);
+	//
+	//corta a imagem gerada para voltar ao tamanho normal
+	//
+	if($cortePixels > 0){
+		cortaImagemDisco($nomer,$cortePixels,256);
+	}
 	filtraImg($nomer,trim($_GET["TIPOIMAGEM"]));
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
@@ -376,31 +390,22 @@ else{
 	if($cache == true){
 		$nomer = salvaCacheImagem();
 		carregaCacheImagem();
-		/*
-		if($_SESSION["i3georendermode"] == 2){
-			ob_clean();
-			header('Cache-Control: public, max-age=22222222');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
-			header("X-Sendfile: $nomer");
-			header("Content-type: image/png");
-		}
-		else{
-			ob_clean();
-			header('Content-Length: '.filesize($nomer));
-			header('Content-Type: image/png');
-			header('Cache-Control: public, max-age=22222222');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
-			fpassthru(fopen($nomer, 'rb'));
-		}
-		*/
 	}
 	else{
-		if($_SESSION["i3georendermode"] == 0){
+		if($_SESSION["i3georendermode"] == 0 || ($_SESSION["i3georendermode"] == 1 && $cortePixels > 0)){
 			$nomer = ($img->imagepath)."temp".nomeRand().".png";
 			$img->saveImage($nomer);
-			$img = imagecreatefrompng($nomer);
-			imagealphablending($img, false);
-			imagesavealpha($img, true);
+			//
+			//corta a imagem gerada para voltar ao tamanho normal
+			//
+			if($cortePixels > 0){
+				$img = cortaImagemDisco($nomer,$cortePixels,256);
+			}
+			else{
+				$img = imagecreatefrompng($nomer);
+				imagealphablending($img, false);
+				imagesavealpha($img, true);
+			}
 			ob_clean();
 			echo header("Content-type: image/png \n\n");
 			imagepng($img);
@@ -415,6 +420,12 @@ else{
 		if($_SESSION["i3georendermode"] == 2){
 			$nomer = ($img->imagepath)."temp".nomeRand().".png";
 			$img->saveImage($nomer);
+			//
+			//corta a imagem gerada para voltar ao tamanho normal
+			//
+			if($cortePixels > 0){
+				$img = cortaImagemDisco($nomer,$cortePixels,256);
+			}
 			ob_clean();
 			header('Cache-Control: public, max-age=22222222');
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
@@ -441,15 +452,13 @@ function salvaCacheImagem(){
 		//corta a imagem gerada para voltar ao tamanho normal
 		//
 		if($cortePixels > 0){
-			$img = imagecreatefrompng($c."/$y.png");
-			$imgc = imagecreate(256,256);
-			imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256 );
-			imagepng($imgc,$nome);
-		}		
+			$img = cortaImagemDisco($c."/$y.png",$cortePixels,256);
+		}
+
 		chmod($cachedir."/googlemaps/$layer/$z/$x",0777);
 		chmod($c."/$y.png",0777);
 	}
-	return $nome;
+	return $c."/$y.png";
 }
 function carregaCacheImagem(){
 	global $img,$cachedir,$x,$y,$z,$map_fileX,$i3georendermode;
@@ -539,5 +548,19 @@ function versaoMS()
 	$v = explode(".",$v);
 	$versao["principal"] = $v[0];
 	return $versao;
+}
+/**
+ * Corta uma imagem existente em disco
+ */
+function cortaImagemDisco($arquivo,$cortePixels,$tamanhoFinal=256){
+	$img = imagecreatefrompng($arquivo);
+	$imgc = imagecreate($tamanhoFinal,$tamanhoFinal);
+	//@FIXME necessario, sem isso algumas imagens sao geradas de forma errada
+	imagesavealpha($imgc, true);
+	$color = imagecolorallocatealpha($imgc,0x00,0x00,0x00,127);
+	imagefill($imgc, 0, 0, $color);
+	imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , $tamanhoFinal, $tamanhoFinal );
+	imagepng($imgc,$arquivo);
+	return $imgc;
 }
 ?>
