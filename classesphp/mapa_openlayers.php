@@ -203,11 +203,11 @@ if(isset($_GET["map_size"])){
 	$map_size = explode(" ",$_GET["map_size"]);
 	$mapa->setsize($map_size[0],$map_size[1]);
 }
+
 if(isset($_GET["mapext"])){
 	$mapext = explode(" ",$_GET["mapext"]);
 	$mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 }
-
 //
 //qd a cahamda e para um WMS, redireciona para ogc.php
 //
@@ -251,7 +251,8 @@ if($_GET["tipolayer"] != "fundo")
 //antes de gerar a imagem
 //
 if($cortePixels > 0){
-	//$imagemBranco = $mapa->prepareImage();
+	$mapa->prepareImage();
+	echo $mapa->scaledenom;exit;
 	$escalaInicial = $mapa->scaledenom;
 	$extensaoInicial = $mapa->extent;
 	$wh = 256+($cortePixels*2);
@@ -260,7 +261,6 @@ if($cortePixels > 0){
 	$ponto->setxy(($wh/2),($wh/2));
 	$mapa->zoomScale($escalaInicial, $ponto, $wh, $wh, $extensaoInicial);
 }
-
 
 //se nao houver selecao
 if($qy != true){
@@ -389,7 +389,7 @@ else{
 	}
 }
 function salvaCacheImagem($cachedir,$map,$tms){
-	global $img,$cortePixels,$cortePixels;
+	global $img,$cortePixels;
 	if($cachedir == ""){
 		$nome = dirname(dirname($map))."/cache".$tms;
 	}
@@ -406,6 +406,11 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		if($cortePixels > 0){
 			$img = imagecreatefrompng($nome);
 			$imgc = imagecreate(256,256);
+			//@FIXME necessario, sem isso algumas imagens sao geradas de forma errada
+			imagesavealpha($imgc, true);
+			$color = imagecolorallocatealpha($imgc,0x00,0x00,0x00,127);
+			imagefill($imgc, 0, 0, $color);
+			
 			imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256 );
 			imagepng($imgc,$nome);
 		}

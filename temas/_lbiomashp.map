@@ -6,7 +6,7 @@ MAP
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	""
+      "cache"	"SIM"
       "CLASSE"	"SIM"
       "permitekmz"	"nao"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""

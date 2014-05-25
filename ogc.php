@@ -22,7 +22,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -230,6 +230,8 @@ if(isset($_GET["DESLIGACACHE"]) && $_GET["DESLIGACACHE"] == "sim"){
 $nomeMapfileTmp = $dir_tmp."/ogc_".md5($tema)."_".$agora.".map";
 $nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
 $nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
+//essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
+$cortePixels = 0;
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
@@ -269,7 +271,7 @@ else{
 		//para o caso do tema ser um arquivo mapfile existente em uma pasta qualquer
 		//$temai3geo = true indica que o layer ser&aacute; buscado na pasta i3geo/temas
 		$temai3geo = true;
-		//FIXME não aceita gvp quando o caminho é completo
+		//FIXME nao aceita gvp quando o caminho e completo
 		if(file_exists($_GET["tema"]) && !isset($id_medida_variavel)){
 			$nmap = ms_newMapobj($_GET["tema"]);
 			$temai3geo = false;
@@ -293,7 +295,6 @@ else{
 					if($teste != "" && $l->data == ""){
 						$id_medida_variavel = $teste;
 					}
-
 				}
 				if(isset($id_medida_variavel)){
 					$temai3geo = false;
@@ -351,8 +352,7 @@ else{
 						}
 						if($l->type == MS_LAYER_RASTER && $l->numclasses > 0){
 							$c = $l->getclass(0);
-							if($c->name == "")
-							{
+							if($c->name == ""){
 								$c->name = " ";
 							}
 						}
@@ -424,8 +424,7 @@ else{
 					}
 					if($l->type == MS_LAYER_RASTER && $l->numclasses > 0){
 						$c = $l->getclass(0);
-						if($c->name == "")
-						{
+						if($c->name == ""){
 							$c->name = " ";
 						}
 					}
@@ -435,6 +434,12 @@ else{
 						$extensao = $extensaoMap;
 					}
 					$l->setmetadata("wms_extent",$extensao);
+					//
+					//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
+					//
+					if ($l->getmetadata("cortepixels") != ""){
+						$cortePixels = $l->getmetadata("cortepixels");
+					}
 				}
 				$req->setParameter("LAYERS", implode(",",$layers));
 				$req->setParameter("STYLES", "");
@@ -486,8 +491,7 @@ else{
 								if (($conta >= $int[0]) && ($conta <= $int[1])){
 									$l = $nmap->getlayerbyname($t);
 									$extensao = $l->getmetadata("EXTENSAO");
-									if($extensao == "")
-									{
+									if($extensao == ""){
 										$extensao = $extensaoMap;
 									}
 									$l->setmetadata("wms_extent",$extensao);
@@ -512,8 +516,15 @@ else{
 										$l->setmetadata("wms_attribution_logourl_width","50");
 										$l->setmetadata("wms_attribution_logourl_href",$mini);
 									}
+									//
+									//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
+									//
+									if ($l->getmetadata("cortepixels") != ""){
+										$cortePixels = $l->getmetadata("cortepixels");
+									}
 									cloneInlineSymbol($l,$nmap,$oMap);
 									ms_newLayerObj($oMap, $l);
+
 								}
 							}
 						}
@@ -542,7 +553,7 @@ if(ob_get_contents ()){
 //verifica se a requisicao e do tipo TMS.
 //
 //
-//calcula a extensao geografica com base no x,y,z em requisições TMS
+//calcula a extensao geografica com base no x,y,z em requisisoes TMS
 //quando for do tipo tms $_GET["tms"] contem os parametros do tile
 //essa rotina faz um exit ao final
 //o cache tms so fucniona se houver apenas uma camada no mapa
@@ -563,11 +574,33 @@ if(isset($_GET["tms"])){
 	if($cache == true){
 		carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
 	}
+	$layer0 = $oMap->getlayer(0);
+	//
+	//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
+	//
+	if ($layer0->getmetadata("cortepixels") != ""){
+		$cortePixels = $layer0->getmetadata("cortepixels");
+	}
 	//se nao existir, salva a imagem
 	//echo $lon1." ".$lat1." ".$lon2." ".$lat2;exit;
-	$oMap->setExtent($lon1,$lat1,$lon2,$lat2);
 	$oMap->setsize(256,256);
-	$oMap->getlayer(0)->set("status",MS_DEFAULT);
+	$oMap->setExtent($lon1,$lat1,$lon2,$lat2);
+	
+	$layer0->set("status",MS_DEFAULT);
+	//
+	//se o layer foi marcado para corte altera os parametros para ampliar o mapa
+	//antes de gerar a imagem
+	//
+	if($cortePixels > 0){
+		//$oMap->prepareImage();
+		$escalaInicial = $oMap->scaledenom;
+		$extensaoInicial = $oMap->extent;
+		$wh = 256+($cortePixels*2);
+		$oMap->setsize($wh,$wh);
+		$ponto = new pointObj();
+		$ponto->setxy(($wh/2),($wh/2));
+		$oMap->zoomScale($escalaInicial, $ponto, $wh, $wh, $extensaoInicial);
+	}
 	$img = $oMap->draw();
 	if($img->imagepath == ""){
 		exit;
@@ -585,6 +618,12 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$y = $_GET["Y"];
 	$z = $_GET["Z"];
 	$layer0 = $oMap->getlayer(0);
+	//
+	//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
+	//
+	if ($layer0->getmetadata("cortepixels") != ""){
+		$cortePixels = $layer0->getmetadata("cortepixels");
+	}
 	if($cache == true){
 		carregaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
 	}
@@ -607,20 +646,30 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$poPoint2 = ms_newpointobj();
 	$poPoint2->setXY($lon2, $lat2);
 	$poPoint2->project($projInObj, $projOutObj);
-	$oMap->setExtent($poPoint1->x,$poPoint1->y,$poPoint2->x,$poPoint2->y);
 	$oMap->setsize(256,256);
+	$oMap->setExtent($poPoint1->x,$poPoint1->y,$poPoint2->x,$poPoint2->y);
+	
 	$oMap->getlayer(0)->set("status",MS_DEFAULT);
 	$oMap->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
 	$layer0->setProjection("proj=latlong,a=6378137,b=6378137");
-	//$oMap->save();
+	//
+	//se o layer foi marcado para corte altera os parametros para ampliar o mapa
+	//antes de gerar a imagem
+	//
+	if($cortePixels > 0){
+		//$oMap->prepareImage();
+		$escalaInicial = $oMap->scaledenom;
+		$extensaoInicial = $oMap->extent;
+		$wh = 256+($cortePixels*2);
+		$oMap->setsize($wh,$wh);
+		$ponto = new pointObj();
+		$ponto->setxy(($wh/2),($wh/2));
+		$oMap->zoomScale($escalaInicial, $ponto, $wh, $wh, $extensaoInicial);
+	}
 	$img = $oMap->draw();
 	if($img->imagepath == ""){
 		exit;
 	}
-	/**
-	 * @TODO ativar cache
-	 */
-
 	if($cache == true){
 		salvaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
 	}
@@ -701,8 +750,8 @@ function ogc_imprimeAjuda(){
 	echo "Para escolher um tema, utilize:<br>";
 	echo "ogc.php?lista=temas - para listar os temas dispon&iacute;veis<br>";
 	echo "Para usar esse web service, al&eacute;m dos par&acirc;metros normais, vc dever&aacute; incluir o par&acirc;metro &tema=,<br>";
-	echo "ou seja,http://[host]/i3geo/ogc.php?tema=[código do tema]<br>";
-	echo "no lugar do código pode ser especificado tamb&eacute;m um arquivo mapfile qualquer. Nesse caso, deve ser digitado o caminho completo no servidor<br><br>";
+	echo "ou seja,http://[host]/i3geo/ogc.php?tema=[c&oacute;digo do tema]<br>";
+	echo "no lugar do c&ocaute;digo pode ser especificado tamb&eacute;m um arquivo mapfile qualquer. Nesse caso, deve ser digitado o caminho completo no servidor<br><br>";
 	echo "Utilize o sistema de administra&ccedil;&atilde;o do i3Geo para configurar quais os temas da pasta i3geo/temas podem ser utilizados.";
 	echo "Utilize o parametro &intervalo=0,20 para definir o n&uacute;mero de temas desejado na fun&ccedil;&atilde;o getcapabilities.";
 	echo "Utilize o parametro restauramapa para indicar o ID de um mapa salvo no banco de dados de administra&ccedil;&atilde;o para utiliz&aacute;-lo como um WMS";
@@ -800,7 +849,7 @@ function carregaCacheImagem($cachedir,$map,$tms){
 	}
 }
 function salvaCacheImagem($cachedir,$map,$tms){
-	global $img,$dir_tmp;
+	global $img,$dir_tmp,$cortePixels;
 	if($cachedir == ""){
 		$nome = $dir_tmp."/cache".$tms;
 	}
@@ -810,8 +859,22 @@ function salvaCacheImagem($cachedir,$map,$tms){
 	@mkdir(dirname($nome),0777,true);
 	chmod(dirname($nome),0777);
 	$img->saveImage($nome);
-	chmod($nome,0777);
+	//
+	//corta a imagem gerada para voltar ao tamanho normal
+	//
+	if($cortePixels > 0){
+		$img = imagecreatefrompng($nome);
+		$imgc = imagecreate(256,256);
 
+		imagesavealpha($imgc, true);
+		// Fill the image with transparent color
+		$color = imagecolorallocatealpha($imgc,0x00,0x00,0x00,127);
+		imagefill($imgc, 0, 0, $color);
+		
+		imagecopy($imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256);
+		imagepng($imgc,$nome);
+	}
+	chmod($nome,0777);
 	header('Content-Length: '.filesize($nome));
 	header('Content-Type: image/png');
 	header('Cache-Control: max-age=3600, must-revalidate');
@@ -838,10 +901,29 @@ function nomeRand($n=10)
 	return $nomes;
 }
 function renderNocacheTms(){
-	global $img,$i3georendermode,$dir_tmp;
+	global $img,$i3georendermode,$dir_tmp,$cortePixels;
+	if($i3georendermode == 1 && $cortePixels == 0){
+		ob_clean();
+		header('Content-Type: image/png');
+		$img->saveImage();
+		exit;
+	}
+	if($i3georendermode == 1 && $cortePixels > 0){
+		$i3georendermode = 0;
+	}
+	$nomer = $dir_tmp."/temp".nomeRand().".png";
+	$img->saveImage($nomer);
+	//
+	//corta a imagem gerada para voltar ao tamanho normal
+	//
+	if($cortePixels > 0){
+		$img = imagecreatefrompng($nomer);
+		$imgc = imagecreate(256,256);
+		imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256 );
+		imagepng($imgc,$nomer);
+	}
 	if($i3georendermode == 0 || !isset($i3georendermode)){
-		$nomer = $dir_tmp."/temp".nomeRand().".png";
-		$img->saveImage($nomer);
+
 		header('Content-Length: '.filesize($nomer));
 		header('Content-Type: image/png');
 		header('Cache-Control: max-age=3600, must-revalidate');
@@ -849,14 +931,7 @@ function renderNocacheTms(){
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
 		fpassthru(fopen($nomer, 'rb'));
 	}
-	if($i3georendermode == 1){
-		ob_clean();
-		header('Content-Type: image/png');
-		$img->saveImage();
-	}
 	if($i3georendermode == 2){
-		$nomer = $dir_tmp."/temp".nomeRand().".png";
-		$img->saveImage($nomer);
 		ob_clean();
 		header('Cache-Control: public, max-age=22222222');
 		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
