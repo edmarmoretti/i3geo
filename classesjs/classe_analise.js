@@ -380,6 +380,8 @@ i3GEO.analise = {
 												trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);
 												parcial = i3GEO.analise.medeDistancia.openlayers.somaDist();
 												direcao = i3GEO.calculo.direcao(x1,y1,x2,y2);
+												direcao = i3GEO.calculo.dd2dms(direcao,direcao);
+												direcao = direcao[0];
 												i3GEO.analise.medeDistancia.openlayers.mostraParcial(trecho,parcial,direcao);
 											}
 										},
@@ -518,7 +520,7 @@ i3GEO.analise = {
 					if (mostra){
 						texto = "<b>"+$trad("x95")+":</b> "+trecho.toFixed(3)+" km"+
 						"<br><b>"+$trad("x97")+":</b> "+(parcial + trecho).toFixed(3)+" km" +
-						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao.toFixed(4);
+						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao;
 						mostra.innerHTML = texto;
 					}
 				}
@@ -649,6 +651,8 @@ i3GEO.analise = {
 							//raio = google.maps.geometry.spherical.computeDistanceBetween(evt.latLng,new google.maps.LatLng(y1,x1))
 							trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);							
 							direcao = i3GEO.calculo.direcao(x1,y1,x2,y2);
+							direcao = i3GEO.calculo.dd2dms(direcao,direcao);
+							direcao = direcao[0];
 							i3GEO.analise.medeDistancia.googlemaps.mostraParcial(trecho,parcial,direcao);
 						}
 					});
@@ -711,7 +715,7 @@ i3GEO.analise = {
 					if (mostra){
 						texto = "<b>"+$trad("x95")+":</b> "+trecho.toFixed(3)+" km"+
 						"<br><b>"+$trad("x97")+":</b> "+(parcial + trecho).toFixed(3)+" km" +
-						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao.toFixed(4);
+						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao;
 						mostra.innerHTML = texto;
 					}
 				}
@@ -800,18 +804,9 @@ i3GEO.analise = {
 				 * Os raios e pontos sao sempre removidos
 				 */
 				fechaJanela: function(){
-					i3GeoMap.setOptions({disableDoubleClickZoom:false});
-					i3GeoMap.setOptions({draggableCursor:undefined});
-					var f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem","medeDistancia");
-					if(f && f.length > 0){
-						temp = window.confirm($trad("x94"));
-						if(temp){
-							i3GEO.desenho.googlemaps.destroyFeatures(f);
-						}
-					}
-					f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem","medeDistanciaExcluir");
-					if(f && f.length > 0){
-						i3GEO.desenho.googlemaps.destroyFeatures(f);
+					temp = window.confirm($trad("x94"));
+					if(temp){
+						i3GEO.desenho.googleearth.removePlacemark("divGeometriasTemp");
 					}
 					i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeDistancia.googleearth.clique()");
 					i3GEO.eventos.MOUSEMOVE.remove("i3GEO.analise.medeDistancia.movimento.googleearth()");
@@ -839,7 +834,7 @@ i3GEO.analise = {
 					if (mostra){
 						texto = "<b>"+$trad("x95")+":</b> "+trecho.toFixed(3)+" km"+
 						"<br><b>"+$trad("x97")+":</b> "+(parcial + trecho).toFixed(3)+" km" +
-						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao.toFixed(4);
+						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao;
 						mostra.innerHTML = texto;
 					}
 				}
@@ -995,6 +990,8 @@ i3GEO.analise = {
 												}
 												trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);
 												direcao = i3GEO.calculo.direcao(x1,y1,x2,y2);
+												direcao = i3GEO.calculo.dd2dms(direcao,direcao);
+												direcao = direcao[0];
 												per = i3GEO.analise.medeArea.openlayers.somaDist();
 												//soma ate o primeiro ponto
 												x1 = i3GEO.analise.medeArea.pontos.xpt[0];
@@ -1146,7 +1143,7 @@ i3GEO.analise = {
 						"<br><b>"+$trad("d21at")+":</b> "+(area/10000).toFixed(2)+" ha"+
 						"<br><b>"+$trad("x95")+":</b> "+trecho.toFixed(3)+" km"+
 						"<br><b>"+$trad("x98")+":</b> "+(per).toFixed(3)+" km" +
-						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao.toFixed(4);
+						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao;
 						mostra.innerHTML = texto;
 					}
 				}
@@ -1256,6 +1253,8 @@ i3GEO.analise = {
 							y2 = evt.latLng.lat();
 							trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);
 							direcao = i3GEO.calculo.direcao(x1,y1,x2,y2);
+							direcao = i3GEO.calculo.dd2dms(direcao,direcao);
+							direcao = direcao[0];
 							area = google.maps.geometry.spherical.computeArea(pontos.mvcLine);
 							i3GEO.analise.medeArea.googlemaps.mostraParcial(trecho,per,area,direcao);
 						}
@@ -1326,7 +1325,7 @@ i3GEO.analise = {
 						"<br><b>"+$trad("d21at")+":</b> "+(area/10000).toFixed(2)+" ha"+
 						"<br><b>"+$trad("x95")+":</b> "+trecho.toFixed(3)+" km"+
 						"<br><b>"+$trad("x98")+":</b> "+(per).toFixed(3)+" km" +
-						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao.toFixed(4);
+						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao;
 						mostra.innerHTML = texto;
 					}
 				}
