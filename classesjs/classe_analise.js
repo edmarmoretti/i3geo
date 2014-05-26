@@ -386,7 +386,7 @@ i3GEO.analise = {
 											}
 										},
 										point: function(point){
-											var n,x1,y1,x2,y2,trecho,temp,circ,label,raio,
+											var n,x1,y1,x2,y2,trecho,temp,circ,label,raio,pontoRaio,
 											//registra os pontos e calcula a distancia
 											total = 0;
 											i3GEO.analise.medeDistancia.pontos.xpt.push(point.x);
@@ -398,6 +398,7 @@ i3GEO.analise = {
 												x2 = point.x;
 												y2 = point.y;
 												raio = point.distanceTo(new OpenLayers.Geometry.Point(x1,y1));
+												pontoRaio = new OpenLayers.Geometry.Point(x1,y1);
 												//projeta
 												if(i3GEO.Interface.openlayers.googleLike){
 													temp = i3GEO.util.extOSM2Geo(x1+" "+y1+" "+x2+" "+y2);
@@ -415,7 +416,7 @@ i3GEO.analise = {
 												if($i("pararraios") && $i("pararraios").checked === true ){
 													circ = new OpenLayers.Feature.Vector(
 															OpenLayers.Geometry.Polygon.createRegularPolygon(
-																	new OpenLayers.Geometry.Point(x1,y1),
+																	pontoRaio,
 																	raio,
 																	30
 															),
