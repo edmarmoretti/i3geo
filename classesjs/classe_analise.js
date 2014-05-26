@@ -743,7 +743,7 @@ i3GEO.analise = {
 				},
 				clique: function(){
 					var pontosdistobj = i3GEO.analise.medeDistancia.googleearth.pontosdistobj,
-					n,d,decimal,dd;
+					n,d,dd;
 					n = pontosdistobj.xpt.length;
 					pontosdistobj.xpt[n] = objposicaocursor.ddx;
 					pontosdistobj.ypt[n] = objposicaocursor.ddy;
@@ -754,12 +754,6 @@ i3GEO.analise = {
 					pontosdistobj.dist[n] = 0;
 					if (n > 0){
 						d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-						decimal = 0;
-						d = d + "";
-						d = d.split(".");
-						decimal = d[1].substr(0,5);
-						d = d[0]+"."+decimal;
-						d = d * 1;
 						pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 						if($i("pararraios") && $i("pararraios").checked === true ){
 							dd = Math.sqrt(((Math.pow((pontosdistobj.xpt[n] - pontosdistobj.xpt[n-1]),2)) + (Math.pow((pontosdistobj.ypt[n] - pontosdistobj.ypt[n-1]),2)) ));
@@ -773,7 +767,7 @@ i3GEO.analise = {
 					}
 				},
 				movimento: function(){
-					var n,d,r,decimal,da,
+					var n,d,r,da,
 						pontosdistobj = i3GEO.analise.medeDistancia.googleearth.pontosdistobj,
 						calculo = i3GEO.calculo;
 					n = pontosdistobj.xpt.length;
@@ -782,18 +776,8 @@ i3GEO.analise = {
 						r = calculo.direcao(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 						r = calculo.dd2dms(r,r);
 						r = r[0];
-
-						d = d + "";
-						d = d.split(".");
-						decimal = d[1].substr(0,5);
-						d = d[0]+"."+decimal;
 						d = d * 1;
 						da = d + pontosdistobj.dist[n-1];
-						da = da + "";
-						da = da.split(".");
-						decimal = da[1].substr(0,5);
-						da = da[0]+"."+decimal;
-						da = da * 1;
 						i3GEO.analise.medeDistancia.googleearth.mostraParcial(d,da,r);
 					}
 				},
