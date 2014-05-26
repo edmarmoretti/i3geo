@@ -1052,10 +1052,16 @@ i3GEO.Interface = {
 								}
 							}
 							else{
-								if(camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim" || camada.connectiontype === 10 || (camada.type === 0 && camada.cache === "nao") || camada.type === 8 )
-								{opcoes.singleTile = true;}
+								//verifica se havera apenas um tile
+								if(camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim" || camada.connectiontype === 10 || (camada.type === 0 && camada.cache === "nao") || camada.type === 8 ){
+									opcoes.singleTile = true;
+								}
 								else{
 									temp = camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);
+								}
+								//se for definido a expansao e corte da imagem, e necessario usar tile
+								if(camada.cortepixels && camada.cortepixels > 0){
+									opcoes.singleTile = false;
 								}
 								if(opcoes.singleTile === true && i3GEO.Interface.openlayers.googleLike === false){
 									layer = new OpenLayers.Layer.WMS(

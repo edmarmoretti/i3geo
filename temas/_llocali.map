@@ -8,7 +8,7 @@ MAP
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "LTEMPOITEMIMAGEM"	""
-      "cache"	"SIM"
+      
       "CLASSE"	"SIM"
       "LTEMPOITEMDESCRICAO"	"TIPO"
       "LTEMPOITEMINICIO"	"ANOCRIA"
@@ -37,6 +37,7 @@ MAP
       "TEMA"	"Localidades (usar com timeline)"
       "convcaracter"	""
       "cortepixels"	"40"
+      "cache"	"SIM"
       "editorsql"	""
       "LTEMPOCONVENCODE"	"SIM"
       "LTEMPOITEMFIM"	""

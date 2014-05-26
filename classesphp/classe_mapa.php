@@ -321,6 +321,10 @@ class Mapa
 				{
 					$cache = "sim";
 				}
+				$cortepixels = 0;
+				if($oLayer->getmetadata("cortepixels") != ""){
+					$cortepixels = $oLayer->getmetadata("cortepixels");
+				}
 				//
 				//verifica se o tema receber&aacute; efeito de transi&ccedil;&atilde;o de zoom
 				//
@@ -400,7 +404,8 @@ class Mapa
 						"cache"=>$cache,
 						"editavel"=>($oLayer->getmetadata("EDITAVEL")),
 						"editavel"=>($oLayer->getmetadata("EDITAVEL")),
-						"colunaidunico"=>($oLayer->getmetadata("COLUNAIDUNICO"))
+						"colunaidunico"=>($oLayer->getmetadata("COLUNAIDUNICO")),
+						"cortepixels"=>$cortepixels
 				);
 			}
 		}

@@ -48,21 +48,25 @@ else{
 		exit;
 	}
 }
+unlink("../classesjs/teste.txt");
 $f = @fopen("../classesjs/teste.txt",w);
 @fclose($f);
 if (!file_exists("../classesjs/teste.txt")){
 	echo "<span style='color:red'>N&atilde;o foi possivel escrever em classesjs";exit;
 }
+unlink("../css/teste.txt");
 $f = @fopen("../css/teste.txt",w);
 @fclose($f);
 if (!file_exists("../css/teste.txt")){
 	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em css";exit;
 }
+unlink("../pacotes/teste.txt");
 $f = @fopen("../pacotes/teste.txt",w);
 @fclose($f);
 if (!file_exists("../pacotes/teste.txt")){
 	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em pacotes";exit;
 }
+unlink("../mashups/teste.txt");
 $f = @fopen("../mashups/teste.txt",w);
 @fclose($f);
 if (!file_exists("../mashups/teste.txt")){
