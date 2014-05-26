@@ -243,19 +243,6 @@ i3GEO.analise = {
 			inicia: function(){
 				if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeDistancia.inicia()");}
 				i3GEO.eventos.cliquePerm.desativa();
-				//@TODO remover apos concluir a refatoracao do codigo
-				i3GEO.analise.pontosdistobj = {
-						xpt: [],
-						ypt: [],
-						dist: [],
-						distV: [],
-						xtela: [],
-						ytela: [],
-						ximg: [],
-						yimg: [],
-						linhas: [],
-						linhastemp: []
-				};
 				i3GEO.analise.medeDistancia.criaJanela();
 				i3GEO.analise.medeDistancia[i3GEO.Interface["ATUAL"]].inicia();
 			},
@@ -730,27 +717,133 @@ i3GEO.analise = {
 				}
 			},
 			googleearth:{
+				pontosdistobj: {
+					xpt: [],
+					ypt: [],
+					dist: [],
+					distV: [],
+					xtela: [],
+					ytela: [],
+					ximg: [],
+					yimg: [],
+					linhas: [],
+					linhastemp: []
+				},
 				inicia: function(){
-					if (g_tipoacao !== "mede"){
-						if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.analise.medeDistancia.clique()") < 0)
-						{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.analise.medeDistancia.clique()");}
-						if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.analise.medeDistancia.movimento()") < 0)
-						{i3GEO.eventos.MOUSEMOVE.push("i3GEO.analise.medeDistancia.movimento()");}
-						if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.analise.medeDistancia.fechaJanela()") < 0)
-						{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.analise.medeDistancia.fechaJanela()");}
-						$i("mostradistancia").style.display="block";
-						g_tipoacao = "mede";
-					}
-					else{
-						var Dom = YAHOO.util.Dom;
-						Dom.setStyle("mostradistancia","display","none");
-						Dom.setStyle("pontosins","display","none");
+					if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.analise.medeDistancia.googleearth.clique()") < 0)
+					{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.analise.medeDistancia.googleearth.clique()");}
+					if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.analise.medeDistancia.googleearth.movimento()") < 0)
+					{i3GEO.eventos.MOUSEMOVE.push("i3GEO.analise.medeDistancia.googleearth.movimento()");}
+					if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.analise.medeDistancia.fechaJanela()") < 0)
+					{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.analise.medeDistancia.fechaJanela()");}
+				},
+				clique: function(){
+					var pontosdistobj = i3GEO.analise.medeDistancia.googleearth.pontosdistobj,
+					n,d,decimal,dd;
+					n = pontosdistobj.xpt.length;
+					pontosdistobj.xpt[n] = objposicaocursor.ddx;
+					pontosdistobj.ypt[n] = objposicaocursor.ddy;
+					pontosdistobj.xtela[n] = objposicaocursor.telax;
+					pontosdistobj.ytela[n] = objposicaocursor.telay;
+					pontosdistobj.ximg[n] = objposicaocursor.imgx;
+					pontosdistobj.yimg[n] = objposicaocursor.imgy;
+					pontosdistobj.dist[n] = 0;
+					if (n > 0){
+						d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+						decimal = 0;
+						d = d + "";
+						d = d.split(".");
+						decimal = d[1].substr(0,5);
+						d = d[0]+"."+decimal;
+						d = d * 1;
+						pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
+						if($i("pararraios") && $i("pararraios").checked === true ){
+							dd = Math.sqrt(((Math.pow((pontosdistobj.xpt[n] - pontosdistobj.xpt[n-1]),2)) + (Math.pow((pontosdistobj.ypt[n] - pontosdistobj.ypt[n-1]),2)) ));
+							i3GEO.desenho.googleearth.insereCirculo(pontosdistobj.xpt[n],pontosdistobj.ypt[n],dd,"","divGeometriasTemp");
+						}
+						if($i("parartextos") && $i("parartextos").checked === true ){
+							i3GEO.desenho.googleearth.insereMarca(d+" km",objposicaocursor.ddx,objposicaocursor.ddy,"","divGeometriasTemp");
+						}
+						//cria a linha ligando os dois ultimos pontos
+						i3GEO.desenho.googleearth.insereLinha(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],pontosdistobj.xpt[n],pontosdistobj.ypt[n],"","divGeometriasTemp");
 					}
 				},
-				fechaJanela: function(){
+				movimento: function(){
+					var n,d,r,decimal,da,
+						pontosdistobj = i3GEO.analise.medeDistancia.googleearth.pontosdistobj,
+						calculo = i3GEO.calculo;
+					n = pontosdistobj.xpt.length;
+					if (n > 0){
+						d = calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+						r = calculo.direcao(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+						r = calculo.dd2dms(r,r);
+						r = r[0];
 
+						d = d + "";
+						d = d.split(".");
+						decimal = d[1].substr(0,5);
+						d = d[0]+"."+decimal;
+						d = d * 1;
+						da = d + pontosdistobj.dist[n-1];
+						da = da + "";
+						da = da.split(".");
+						decimal = da[1].substr(0,5);
+						da = da[0]+"."+decimal;
+						da = da * 1;
+						i3GEO.analise.medeDistancia.googleearth.mostraParcial(d,da,r);
+					}
+				},
+				/**
+				 * Fecha a janela que mostra os dados
+				 * Pergunta ao usuario se os graficos devem ser removidos
+				 * Os graficos sao marcados com o atributo "origem"
+				 * Os raios e pontos sao sempre removidos
+				 */
+				fechaJanela: function(){
+					i3GeoMap.setOptions({disableDoubleClickZoom:false});
+					i3GeoMap.setOptions({draggableCursor:undefined});
+					var f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem","medeDistancia");
+					if(f && f.length > 0){
+						temp = window.confirm($trad("x94"));
+						if(temp){
+							i3GEO.desenho.googlemaps.destroyFeatures(f);
+						}
+					}
+					f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem","medeDistanciaExcluir");
+					if(f && f.length > 0){
+						i3GEO.desenho.googlemaps.destroyFeatures(f);
+					}
+					i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeDistancia.googleearth.clique()");
+					i3GEO.eventos.MOUSEMOVE.remove("i3GEO.analise.medeDistancia.movimento.googleearth()");
+					i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.analise.medeDistancia.fechaJanela()");
+				},
+				/**
+				 * Mostra a totalizacao das linhas ja digitalizadas
+				 */
+				mostraTotal: function(trecho,total){
+					var mostra = $i("mostradistancia_calculo"),
+					texto;
+					if (mostra){
+						texto = "<b>"+$trad("x96")+":</b> "+total.toFixed(3)+" km"+
+						"<br><b>"+$trad("x96")+":</b> "+(total*1000).toFixed(2)+" m"+
+						"<br>"+$trad("x25")+": "+i3GEO.calculo.metododistancia;
+						mostra.innerHTML = texto;
+					}
+				},
+				/**
+				 * Mostra o valor do trecho entre o ultimo ponto clicado e a posicao do mouse
+				 */
+				mostraParcial: function(trecho,parcial,direcao){
+					var mostra = $i("mostradistancia_calculo_movel"),
+					texto;
+					if (mostra){
+						texto = "<b>"+$trad("x95")+":</b> "+trecho.toFixed(3)+" km"+
+						"<br><b>"+$trad("x97")+":</b> "+(parcial + trecho).toFixed(3)+" km" +
+						"<br><b>"+$trad("x23")+" (DMS):</b> "+direcao.toFixed(4);
+						mostra.innerHTML = texto;
+					}
 				}
-			},
+			}
 		},
 		/*
 	i3GEO.analise.medeArea

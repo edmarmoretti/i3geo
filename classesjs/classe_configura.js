@@ -1083,8 +1083,6 @@ i3GEO.configura = {
 					$i(i3GEO.Interface.IDMAPA).title = "";
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"distancia",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
-				g_tipoacao = "";
-				g_operacao="";
 				i3GEO.analise.medeDistancia.inicia();
 			}
 		},
@@ -1100,8 +1098,6 @@ i3GEO.configura = {
 					$i(i3GEO.Interface.IDMAPA).title = "";
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"area",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
-				g_tipoacao = "";
-				g_operacao="";
 				i3GEO.analise.medeArea.inicia();
 			}
 		},
@@ -1192,7 +1188,6 @@ i3GEO.configura = {
 						};
 						GEvent.addListener(directions, "error", temp);
 						directions.load("from: "+pontoRota1.lat()+","+pontoRota1.lng()+" to: "+pontoRota2.lat()+","+pontoRota2.lng());
-						//i3GeoMap.removeOverlay(directions)
 					}
 				};
 				rotaEvento = GEvent.addListener(i3GeoMap, "click", parametrosRota);

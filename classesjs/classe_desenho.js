@@ -1,19 +1,13 @@
 /*
-Title: Desenho de elementos gr&aacute;ficos
+Desenho de elementos gr&aacute;ficos
 
 i3GEO.desenho
 
-Controla as opera&ccedil;&otilde;es de desenho sobre o mapa
+Funcoes de uso geral para desenho de elementos graficos.
 
-Por desenho, entende-se elementos que s&atilde;o inclu&iacute;dos graficamente no mapa,
-como por exemplo, linhas, pontos, c&iacute;rculos, etc e que n&atilde;o comp&otilde;em layers
-com dados
+As funcoes dependem de cada interface em uso no mapa.
 
-As opera&ccedil;&otilde;es de desenho s&atilde;o baseadas na biblioteca Richdraw (i3geo/pacotes/richdraw)
-
-Link:
-
-http://starkravingfinkle.org/blog/2006/04/richdraw-simple-vmlsvg-editor/
+Aqui estao apenas as funcoes de uso compartilhado. Para mais informacoes veja as opcoes nos editores vetoriais.
 
 Arquivo:
 
@@ -45,15 +39,6 @@ if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
 i3GEO.desenho = {
-		/*
-	Variavel: richdraw
-
-	Objeto richdraw criado por criaContainerRichdraw
-
-	Tipo:
-	{richdraw object}
-		 */
-		richdraw: "",
 		layergrafico: null,
 		/*
 	Propriedade: estilos
@@ -241,212 +226,88 @@ i3GEO.desenho = {
 				}
 			}
 		},
-		/*
-	Cria os elementos 'dom' necess&aacute;rios ao uso das fun&ccedil;&otilde;es de desenho sobre o mapa.
-
-	As ferramentas de c&aacute;lculo de dist&acirc;ncias e &aacute;reas utilizam esse container.
-
-	Richdraw &eacute; uma biblioteca utilizada pelo i3geo para abstrair as diferen&ccedil;as entre as linguagens svg e vml.
-
-	Essa abstra&ccedil;&atilde;o &eacute; necess&aacute;ria devido &agrave;s diferen&ccedil;as entre os navegadores.
-
-	O container &eacute; criado dentro de um DIV chamado "divGeometriasTemp"
-
-	Essa fun&ccedil;&atilde;o cria tamb&eacute;m o objeto pontosdistobj que &eacute; utilizado para armazenar
-	os dados obtidos da movimenta&ccedil;&atilde;o do mouse sobre o mapa
-
-		 */
-		criaContainerRichdraw: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.desenho.criaContainerRichdraw()");}
-			i3GEO.analise.pontosdistobj = {
-					xpt: [],
-					ypt: [],
-					dist: [],
-					distV: [],
-					xtela: [],
-					ytela: [],
-					ximg: [],
-					yimg: [],
-					linhas: []
-			};
-			if(i3GEO.Interface.ATUAL === "googleearth")
-			{return;}
-			try{
-				var divgeo,renderer;
-				divgeo = i3GEO.desenho.criaDivContainer();
-				divgeo.innerHTML = "";
-				//
-				//cria o objeto renderer conforme o browser em uso
-				//esse objeto ser&aacute; utilizado nas fun&ccedil;&otilde;es de desenho
-				//mais detalhes, veja em pacotes/richdraw
-				//Conforme a resposta do navegador, utiliza-se a cria&ccedil;&atilde;o VML ou SVG
-				//
-				try{
-					renderer = new VMLRenderer();
-					i3GEO.desenho.richdraw = new RichDrawEditor(divgeo, renderer);
-				}
-				catch(erro){
-					renderer = new SVGRenderer();
-					i3GEO.desenho.richdraw = new RichDrawEditor(divgeo, renderer);
-					renderer.svgRoot.style.width = divgeo.style.width;
-					renderer.svgRoot.style.height = divgeo.style.height;
-				}
-				//
-				//defini&ccedil;&atilde;o dos s&iacute;mbolos default para os elementos gr&aacute;ficos
-				//
-				i3GEO.desenho.definePadrao(i3GEO.desenho.estiloPadrao);
-				i3GEO.desenho.richdraw.editCommand('mode', 'line');
-				divgeo.style.display="block";
-				//
-				//ap&oacute;s o container ser criado, &eacute; necess&aacute;rio que as fun&ccedil;&otilde;es
-				//de clique sobre o mapa sejam ativadas
-				//para funcionarem sobre o container
-				//
-				i3GEO.eventos.ativa(divgeo);
-				if($i("localizarxygeoProjxg")){
-					var temp = function(){
-						i3GEO.coordenadas.atualizaGeo(objposicaocursor.dmsx,objposicaocursor.dmsy,"localizarxygeoProj");
-					};
-					YAHOO.util.Event.addListener(divgeo,"mousemove", temp);
-				}
-			}
-			catch(men){alert("Erro ao tentar criar container richdraw "+men);}
-		},
-		/*
-	Cria o elemento DIV que ser&aacute; utilizado para renderizar os elementos gr&aacute;ficos.
-	Nesse DIV ser&atilde;o inclu&iacute;dos os elementos de desenho em SVG ou VML
-
-	O DIV recebe como ID "divGeometriasTemp"
-
-	Return:
-
-	DOM object
-		 */
-		criaDivContainer: function(){
-			desenhoUltimaLinha = "";
-			desenhoUltimaLinhaPol = "";
-			if (!$i("divGeometriasTemp")){
-				var pos,novoel,ne;
-				//
-				//pega a posi&ccedil;&atilde;o da imagem do mapa para posicionar corretamente o container
-				//
-				pos = [0,0];
-				pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-				//
-				//cria o container
-				//
-				novoel = document.createElement("div");
-				novoel.id = "divGeometriasTemp";
-				ne = novoel.style;
-				ne.cursor="crosshair";
-				ne.zIndex=0;
-				if(i3GEO.Interface.TABLET === true)
-				{ne.zIndex=5000;}
-				ne.position="absolute";
-				ne.width=i3GEO.parametros.w + "px";
-				ne.height=i3GEO.parametros.h + "px";
-				ne.border="0px solid black";
-				ne.display="none";
-				ne.top=pos[1] + "px";
-				ne.left=pos[0] + "px";
-				document.body.appendChild(novoel);
-			}
-			return ($i("divGeometriasTemp"));
-		},
-		/*
-	Desenha ou reposiciona elementos na tela usando a biblioteca richdraw
-
-	Parametros:
-
-	tipo {string} - resizelinha|resizePoligono|insereCirculo tipo de opera&ccedil;&atilde;o
-
-	objeto {object} - objeto gr&aacute;fico existente no container richdraw
-
-	n {numeric} - &iacute;ndice do elemento no array pontosdistobj
-
-	texto {string} - texto que ser&aacute; inserido no tipo "insereTexto"
-		 */
-		aplica: function(tipo,objeto,n,texto){
-			var dy,dx,w,c,
-			pontosdistobj = i3GEO.analise.pontosdistobj;
-			if(i3GEO.desenho.richdraw && $i(i3GEO.Interface.IDCORPO)){
-				//pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-				//
-				//faz o reposicionamento de linhas quando o mouse &eacute; movido e a linha est&aacute; ativa
-				//
-				if((tipo==="resizeLinha") || (tipo==="resizePoligono")){
-					try
-					{i3GEO.desenho.richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
-					catch(erro){
-						if(typeof(console) !== 'undefined'){console.error("i3GEO.desenho "+erro);}
+		googleearth:{
+			insereMarca: function(description,ddx,ddy,name,snippet){
+				if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.googleearth.insereMarca()");}
+				var placemark = i3GeoMap.createPlacemark(''),
+				point = i3GeoMap.createPoint('');
+				placemark.setName(name);
+				point.setLatitude(ddy);
+				point.setLongitude(ddx);
+				placemark.setGeometry(point);
+				if(description !== "")
+				{placemark.setDescription(description);}
+				placemark.setSnippet(snippet);
+				i3GeoMap.getFeatures().appendChild(placemark);
+			},
+			//
+			//c&oacute;digo obtido em http://code.google.com/intl/pt-BR/apis/earth/documentation/geometries.html
+			//
+			insereCirculo: function(centerLng,centerLat,radius,name,snippet){
+				function makeCircle(centerLat, centerLng, radius) {
+					var ring = i3GeoMap.createLinearRing(''),
+					steps = 25,
+					i,
+					pi2 = Math.PI * 2,
+					lat,
+					lng;
+					for (i = 0; i < steps; i++) {
+						lat = centerLat + radius * Math.cos(i / steps * pi2);
+						lng = centerLng + radius * Math.sin(i / steps * pi2);
+						ring.getCoordinates().pushLatLngAlt(lat, lng, 0);
 					}
+					return ring;
 				}
-				if(tipo==="insereCirculo"){
-					dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
-					dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
-					w = Math.sqrt(dx + dy);
-					c = "";
-					if(navn){
-						c = 'rgba(255,255,255,0';
-					}
-					if(chro){
-						c = "";
-					}
-					i3GEO.desenho.insereCirculo(pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,c);
-				}
-				if(tipo==="insereTexto"){
+				var polygonPlacemark = i3GeoMap.createPlacemark(''),
+				poly = i3GeoMap.createPolygon(''),
+				polyStyle;
+				poly.setAltitudeMode(i3GeoMap.ALTITUDE_RELATIVE_TO_GROUND);
+				polygonPlacemark.setGeometry(poly);
+				polygonPlacemark.getGeometry().setOuterBoundary(makeCircle(centerLat, centerLng, radius));
+				polygonPlacemark.setName(name);
+				polygonPlacemark.setSnippet(snippet);
+				polygonPlacemark.setStyleSelector(i3GeoMap.createStyle(''));
+				polyStyle = polygonPlacemark.getStyleSelector().getPolyStyle();
+				polyStyle.setFill(0);
+				i3GeoMap.getFeatures().appendChild(polygonPlacemark);
+			},
+			insereLinha: function(xi,yi,xf,yf,name,snippet){
+				var lineStringPlacemark = i3GeoMap.createPlacemark(''),
+				lineString,
+				lineStyle;
+				lineStringPlacemark.setName(name);
+				lineString = i3GeoMap.createLineString('');
+				lineString.setAltitudeMode(i3GeoMap.ALTITUDE_RELATIVE_TO_GROUND);
+				lineStringPlacemark.setGeometry(lineString);
+				lineString.getCoordinates().pushLatLngAlt(yi, xi, 0);
+				lineString.getCoordinates().pushLatLngAlt(yf, xf, 0);
+
+				lineStringPlacemark.setStyleSelector(i3GeoMap.createStyle(''));
+				lineStringPlacemark.setSnippet(snippet);
+				lineStyle = lineStringPlacemark.getStyleSelector().getLineStyle();
+				lineStyle.setWidth(3);
+
+				i3GeoMap.getFeatures().appendChild(lineStringPlacemark);
+			},
+			removePlacemark: function(nome){
+				var features = i3GeoMap.getFeatures(),
+				n = features.getChildNodes().getLength(),
+				i,
+				nfeatures = [];
+				for(i=0;i<n;i++){
 					try{
-						i3GEO.desenho.richdraw.renderer.create('text', '', i3GEO.desenho.richdraw.textColor, 1, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
+						if(features.getChildNodes().item(i).getName() === nome || features.getChildNodes().item(i).getDescription() === nome || features.getChildNodes().item(i).getSnippet() === nome){
+							//features.getChildNodes().item(i).setVisibility(false);
+							nfeatures.push(features.getChildNodes().item(i));
+							//features.removeChild(features.getChildNodes().item(i));
+						}
 					}
-					catch(men){
-						if(typeof(console) !== 'undefined'){console.error("i3GEO.desenho "+men);}
-					}
+					catch(e){}
 				}
-			}
-		},
-		/*
-	Insere um circulo no container de elementos gr&aacute;ficos
-
-	Parametros:
-
-	x {numerico} - posi&ccedil;&atilde;o do ponto em coordenadas de imagem
-
-	y {numerico} - posi&ccedil;&atilde;o do ponto em coordenadas de imagem
-
-	w {numerico} - raio do c&iacute;rculo em pixels
-
-	b {string} - cor do fundo
-		 */
-		insereCirculo: function(x,y,w,b){
-			if(!b){
-				b = "";
-			}
-			try{
-				i3GEO.desenho.richdraw.renderer.create('circ', b, i3GEO.desenho.richdraw.circColor, i3GEO.desenho.richdraw.lineWidth, x,y,w,w);
-			}
-			catch(men){
-				if(typeof(console) !== 'undefined'){console.error(men);}
-			}
-		},
-		/*
-	Aplica um determinado padrao de estilos para os novos elementos que ser&atilde;o adicionados
-	
-	Para obter o estilo padrao, utilize i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao];
-
-	Parametro:
-
-	padrao {string} - nome do estilo
-		 */
-		definePadrao: function(padrao){
-			i3GEO.desenho.estiloPadrao = padrao;
-			//@TODO remover apos refatorar o codigo
-			padrao = i3GEO.desenho.estilosOld[padrao];
-			if(i3GEO.desenho.richdraw){
-				i3GEO.desenho.richdraw.editCommand('fillcolor', padrao.fillcolor);
-				i3GEO.desenho.richdraw.editCommand('linecolor', padrao.linecolor);
-				i3GEO.desenho.richdraw.editCommand('linewidth', padrao.linewidth);
-				i3GEO.desenho.richdraw.editCommand('circcolor', padrao.circcolor);
-				i3GEO.desenho.richdraw.editCommand('textcolor', padrao.textcolor);
+				n = nfeatures.length;
+				for(i=0;i<n;i++){
+					features.removeChild(nfeatures[i]);
+				}
 			}
 		},
 		/*

@@ -19,6 +19,8 @@ Para a versão 6.0
 
 - a ordem dos botões na barra de botões foi alterada para mostrar primeiro o botão da barra de edição
 
+- as funções de desenho de elementos gráficos utilizados pela interface GoogleEarth foram movidos de classesjs/classe_interface.js para classe_desenho.js
+
 
 
 -------------------------------------------------------------------------------------------------

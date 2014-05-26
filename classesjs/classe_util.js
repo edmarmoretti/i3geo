@@ -862,7 +862,7 @@ i3GEO.util = {
 			if(!srci || srci === "")
 			{srci = i3GEO.configura.locaplic+"/imagens/dot2.gif";}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
-				i3GEO.Interface.googleearth.insereMarca(texto,xi,yi,container);
+				i3GEO.desenho.googleearth.insereMarca(texto,xi,yi,container);
 				return;
 			}
 			try{
