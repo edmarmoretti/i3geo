@@ -1,6 +1,6 @@
 <?php
 /*
-Title: classe_mapa.php
+ Title: classe_mapa.php
 
 Manipula&ccedil;&atilde;o do mapa. Altera tamanho, lista temas, etc.
 
@@ -21,7 +21,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -31,42 +31,42 @@ Arquivo:
 i3geo/classesphp/classe_mapa.php
 */
 /*
-Classe: Mapa
+ Classe: Mapa
 */
 class Mapa
 {
 	/*
-	Variavel: $mapa
+	 Variavel: $mapa
 
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
-	Variavel: $arquivo
+	 Variavel: $arquivo
 
 	Arquivo map file
 	*/
 	public $arquivo;
 	/*
-	Variavel: $layers
+	 Variavel: $layers
 
 	Objetos layers
 	*/
 	public $layers;
 	/*
-	Variavel: $qyfile
+	 Variavel: $qyfile
 
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
-	Variavel: $v
+	 Variavel: $v
 
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 	/*
-	Variavel: $vi
+	 Variavel: $vi
 
 	Vers&atilde;o atual do Mapserver (valor inteiro)
 
@@ -74,7 +74,7 @@ class Mapa
 	*/
 	public $vi;
 	/*
-	Function: __construct
+	 Function: __construct
 
 	Cria um objeto mapa
 
@@ -115,7 +115,7 @@ class Mapa
 		}
 	}
 	/*
-	Method: salva
+	 Method: salva
 
 	Salva o mapfile atual
 	*/
@@ -127,7 +127,7 @@ class Mapa
 		$this->mapa->save($this->arquivo);
 	}
 	/*
-	Method: listaTemasBuscaRapida
+	 Method: listaTemasBuscaRapida
 
 	Elabora uma lista de temas e seus respectivos itens para uso no m&eacute;todo buscaRegistros da classe classe_atributos
 
@@ -152,7 +152,7 @@ class Mapa
 		return implode(",",$lista);
 	}
 	/*
-	Method: mudaoutputformat
+	 Method: mudaoutputformat
 
 	Muda o OUTPUTFORMAT
 
@@ -169,7 +169,7 @@ class Mapa
 		return $this->mapa->selectOutputFormat($tipo);
 	}
 	/*
-	Method: pegaMensagens
+	 Method: pegaMensagens
 
 	Pega as mensagens do metadata "mensagem" existentes nos layers do mapa atual
 
@@ -195,7 +195,7 @@ class Mapa
 	}
 
 	/*
-	Method: gravaImagemCorpo (depreciado)
+	 Method: gravaImagemCorpo (depreciado)
 
 	Grava a imagem do mapa atual
 	*/
@@ -209,7 +209,7 @@ class Mapa
 		return ($nome);
 	}
 	/*
-	Method: parametrosTemas
+	 Method: parametrosTemas
 
 	Pega os parametros dos layers do mapa.
 
@@ -227,8 +227,49 @@ class Mapa
 		{
 			$l->set("template","none.htm");
 		}
-		foreach ($this->layers as $oLayer)
-		{
+		$chaves = array(
+				"name",
+				"nomeoriginal",
+				"status",
+				"tema",
+				"transparency",
+				"type",
+				"sel",
+				"nsel",
+				"escala",
+				"download",
+				"features",
+				"connectiontype",
+				"zoomtema",
+				"contextoescala",
+				"etiquetas",
+				"identifica",
+				"editorsql",
+				"linhadotempo",
+				"escondido",
+				"iconetema",
+				"classe",
+				"permitecomentario",
+				"exttema",
+				"aplicaextensao",
+				"transitioneffect",
+				"wmsurl",
+				"wmsname",
+				"wmsformat",
+				"wmssrs",
+				"wmstile",
+				"tiles",
+				"temporizador",
+				"permiteogc",
+				"itembuscarapida",
+				"usasld",
+				"cache",
+				"editavel",
+				"editavel",
+				"colunaidunico",
+				"cortepixels"
+		);
+		foreach ($this->layers as $oLayer){
 			$sel = "nao";
 			$nSel = 0;
 			$arqS = $dir."/".$oLayer->name.".php";
@@ -241,8 +282,7 @@ class Mapa
 				$nSel = count(unserialize($conteudo));
 			}
 			$escondido = $oLayer->getmetadata("escondido");
-			if($escondido == "")
-			{
+			if($escondido == ""){
 				$escondido = "nao";
 			}
 			if ( (strtoupper($oLayer->getmetadata("tema")) != "NAO") )
@@ -363,49 +403,92 @@ class Mapa
 					}
 				}
 				$tiles = "";
-				//if($oLayer->labelitem != "")
-				//{$tiles = "nao";}
+				//formatacao antiga, antes da versao 6.0
+				/*
+				 $temas[] = array(
+				 		"name"=>($oLayer->name),
+				 		"nomeoriginal"=>($oLayer->getmetadata("nomeoriginal")),
+				 		"status"=>($oLayer->status),
+				 		"tema"=>(mb_convert_encoding(($oLayer->getmetadata("tema")),"UTF-8","ISO-8859-1")),
+				 		"transparency"=>($oLayer->opacity),
+				 		"type"=>($oLayer->type),
+				 		"sel"=>$sel,
+				 		"nsel"=>$nSel,
+				 		"escala"=>$escala,
+				 		"download"=>$down,
+				 		"features"=>$f,
+				 		"connectiontype"=>$ct,
+				 		"zoomtema"=>$zoomtema,
+				 		"contextoescala"=>$contextoescala,
+				 		"etiquetas"=>($oLayer->getmetadata("TIP")),
+				 		"identifica"=>($oLayer->getmetadata("IDENTIFICA")),
+				 		"editorsql"=>$editorsql,
+				 		"linhadotempo"=>$ltempo,
+				 		"escondido"=>strtolower($escondido),
+				 		"iconetema"=>($oLayer->getmetadata("iconetema")),
+				 		"classe"=>($oLayer->getmetadata("classe")),
+				 		"permitecomentario"=>$permitecomentario,
+				 		"exttema"=>$exttema,
+				 		"aplicaextensao"=>$aplicaextensao,
+				 		"transitioneffect"=>$transitioneffect,
+				 		"wmsurl"=>$wmsurl,
+				 		"wmsname"=>$wmsname,
+				 		"wmsformat"=>$wmsformat,
+				 		"wmssrs"=>$wmssrs,
+				 		"wmstile"=>$wmstile,
+				 		"tiles"=>$tiles,
+				 		"temporizador"=>($oLayer->getmetadata("temporizador")),
+				 		"permiteogc"=>($oLayer->getmetadata("permiteogc")),
+				 		"itembuscarapida"=>($oLayer->getmetadata("itembuscarapida")),
+				 		"usasld"=>$usasld,
+				 		"cache"=>$cache,
+				 		"editavel"=>($oLayer->getmetadata("EDITAVEL")),
+				 		"editavel"=>($oLayer->getmetadata("EDITAVEL")),
+				 		"colunaidunico"=>($oLayer->getmetadata("COLUNAIDUNICO")),
+				 		"cortepixels"=>$cortepixels
+				 );
+				*/
 				$temas[] = array(
-						"name"=>($oLayer->name),
-						"nomeoriginal"=>($oLayer->getmetadata("nomeoriginal")),
-						"status"=>($oLayer->status),
-						"tema"=>(mb_convert_encoding(($oLayer->getmetadata("tema")),"UTF-8","ISO-8859-1")),
-						"transparency"=>($oLayer->opacity),
-						"type"=>($oLayer->type),
-						"sel"=>$sel,
-						"nsel"=>$nSel,
-						"escala"=>$escala,
-						"download"=>$down,
-						"features"=>$f,
-						"connectiontype"=>$ct,
-						"zoomtema"=>$zoomtema,
-						"contextoescala"=>$contextoescala,
-						"etiquetas"=>($oLayer->getmetadata("TIP")),
-						"identifica"=>($oLayer->getmetadata("IDENTIFICA")),
-						"editorsql"=>$editorsql,
-						"linhadotempo"=>$ltempo,
-						"escondido"=>strtolower($escondido),
-						"iconetema"=>($oLayer->getmetadata("iconetema")),
-						"classe"=>($oLayer->getmetadata("classe")),
-						"permitecomentario"=>$permitecomentario,
-						"exttema"=>$exttema,
-						"aplicaextensao"=>$aplicaextensao,
-						"transitioneffect"=>$transitioneffect,
-						"wmsurl"=>$wmsurl,
-						"wmsname"=>$wmsname,
-						"wmsformat"=>$wmsformat,
-						"wmssrs"=>$wmssrs,
-						"wmstile"=>$wmstile,
-						"tiles"=>$tiles,
-						"temporizador"=>($oLayer->getmetadata("temporizador")),
-						"permiteogc"=>($oLayer->getmetadata("permiteogc")),
-						"itembuscarapida"=>($oLayer->getmetadata("itembuscarapida")),
-						"usasld"=>$usasld,
-						"cache"=>$cache,
-						"editavel"=>($oLayer->getmetadata("EDITAVEL")),
-						"editavel"=>($oLayer->getmetadata("EDITAVEL")),
-						"colunaidunico"=>($oLayer->getmetadata("COLUNAIDUNICO")),
-						"cortepixels"=>$cortepixels
+						$oLayer->name,
+						$oLayer->getmetadata("nomeoriginal"),
+						$oLayer->status,
+						mb_convert_encoding(($oLayer->getmetadata("tema")),"UTF-8","ISO-8859-1"),
+						$oLayer->opacity,
+						$oLayer->type,
+						$sel,
+						$nSel,
+						$escala,
+						$down,
+						$f,
+						$ct,
+						$zoomtema,
+						$contextoescala,
+						$oLayer->getmetadata("TIP"),
+						$oLayer->getmetadata("IDENTIFICA"),
+						$editorsql,
+						$ltempo,
+						strtolower($escondido),
+						$oLayer->getmetadata("iconetema"),
+						$oLayer->getmetadata("classe"),
+						$permitecomentario,
+						$exttema,
+						$aplicaextensao,
+						$transitioneffect,
+						$wmsurl,
+						$wmsname,
+						$wmsformat,
+						$wmssrs,
+						$wmstile,
+						$tiles,
+						$oLayer->getmetadata("temporizador"),
+						$oLayer->getmetadata("permiteogc"),
+						$oLayer->getmetadata("itembuscarapida"),
+						$usasld,
+						$cache,
+						$oLayer->getmetadata("EDITAVEL"),
+						$oLayer->getmetadata("EDITAVEL"),
+						$oLayer->getmetadata("COLUNAIDUNICO"),
+						$cortepixels
 				);
 			}
 		}
@@ -413,10 +496,10 @@ class Mapa
 		//if (!$existesel && $qy)
 		//{unlink($this->qyfile);}
 		$temas = array_reverse($temas);
-		return $temas;
+		return array("chaves"=>$chaves,"valores"=>$temas);
 	}
 	/*
-	Method: redesenhaCorpo
+	 Method: redesenhaCorpo
 
 	Redesenha o mapa e retorna as vari&aacute;veis necess&aacute;rias para montar o mapa.
 
@@ -451,7 +534,7 @@ class Mapa
 		$legenda = $this->mapa->legend;
 		//
 		//prepara a legenda para incluir no mapa, preenchendo os nomes das classes que podem estar em branco
-		//isso ocorre quando o layer tem só uma classe
+		//isso ocorre quando o layer tem sï¿½ uma classe
 		//
 		if ($legenda->status == MS_EMBED)
 		{
@@ -586,7 +669,7 @@ class Mapa
 		return $res;
 	}
 	/*
-	Method: redesenhaEntorno (depreciado)
+	 Method: redesenhaEntorno (depreciado)
 
 	Redesenha o entorno do mapa (depreciado).
 
@@ -625,7 +708,7 @@ class Mapa
 		return "var imagens=['".$nomeL["url"]."','".$nomeO["url"]."','".$nomeN["url"]."','".$nomeS["url"]."'];";
 	}
 	/*
-	Method: ativalegenda
+	 Method: ativalegenda
 
 	Ativa/desativa legenda, incluindo ou n&atilde;o no corpo do mapa.
 	*/
@@ -636,7 +719,7 @@ class Mapa
 		return "ok";
 	}
 	/*
-	Method: ativalogo
+	 Method: ativalogo
 
 	Ativa/desativa logomarca.
 
@@ -655,12 +738,12 @@ class Mapa
 		return "ok";
 	}
 	/*
-	Method: listaTemasLocais
+	 Method: listaTemasLocais
 
 	Lista os temas locais de um mapa.
 
-	Lista os temas existentes no mapfile atual, que utilizam como fonte de dados shape file, e que est&atilde;o armazenados no diretório tempor&aacute;rio do mapa.
-	Os arquivos shape file existentes no diretório tempor&aacute;rio do mapa s&atilde;o pass&iacute;veis de edi&ccedil;&atilde;o.
+	Lista os temas existentes no mapfile atual, que utilizam como fonte de dados shape file, e que est&atilde;o armazenados no diretï¿½rio tempor&aacute;rio do mapa.
+	Os arquivos shape file existentes no diretï¿½rio tempor&aacute;rio do mapa s&atilde;o pass&iacute;veis de edi&ccedil;&atilde;o.
 	Obs.: Toda vez que um tema local &eacute; criado pelo I3Geo, o METADATA "TEMALOCAL" &eacute; marcado como "sim".
 
 	Parameter:
@@ -682,7 +765,7 @@ class Mapa
 		return $final;
 	}
 	/*
-	Method: listaTemas
+	 Method: listaTemas
 
 	Lista os temas de um mapa.
 
@@ -731,7 +814,7 @@ class Mapa
 		return $final;
 	}
 	/*
-	Method: listaTemasTipo
+	 Method: listaTemasTipo
 
 	Lista os temas, vis&iacute;veis, de um determinado tipo de fei&ccedil;&atilde;o de um mapa.
 
@@ -769,7 +852,7 @@ class Mapa
 			}
 		}
 		$final = array();
-		//substitui os tipos pelo código usado no mapserver
+		//substitui os tipos pelo cï¿½digo usado no mapserver
 		$tipo = str_ireplace("ponto","0",$tipo);
 		$tipo = str_ireplace("poligono","2",$tipo);
 		$tipo = str_ireplace("linha","1",$tipo);
@@ -796,7 +879,7 @@ class Mapa
 		return $final;
 	}
 	/*
-	Method: listaTemasComSel
+	 Method: listaTemasComSel
 
 	Lista os temas de um mapa que possuem elementos selecionados.
 
@@ -844,7 +927,7 @@ class Mapa
 		return $final;
 	}
 	/*
-	Method: mudaQS
+	 Method: mudaQS
 
 	Muda o tamanho do query map.
 
@@ -898,7 +981,7 @@ class Mapa
 		$fecha = fclose ($abre);
 	}
 	/*
-	Method: corQM
+	 Method: corQM
 
 	Muda a cor do query map.
 
@@ -925,7 +1008,7 @@ class Mapa
 		return ($retorno);
 	}
 	/*
-	Method: corfundo
+	 Method: corfundo
 
 	Muda a cor do fundo do mapa.
 
@@ -950,7 +1033,7 @@ class Mapa
 		return ($retorno);
 	}
 	/*
-	Method: gradeCoord
+	 Method: gradeCoord
 
 	Gera uma grade de coordenadas
 
@@ -1051,14 +1134,14 @@ class Mapa
 		return ("ok");
 	}
 	/*
-	Method: adicionaTema
+	 Method: adicionaTema
 
 	Acrescenta um novo tema em um arquivo map file.
 
-	O tema deve estar inclu&iacute;do em um arquivo .map localizado no diretório "temas".
+	O tema deve estar inclu&iacute;do em um arquivo .map localizado no diretï¿½rio "temas".
 	Ao ser adicionado, todos os layers do arquivo indicado ser&atilde;o acrescentados.
 	Os layers que formam grupos tamb&eacute;m s&atilde;o processados, tendo seus nomes alterados de acordo.
-	Cada novo layer receber&aacute; um novo nome, definido de forma aleatória.
+	Cada novo layer receber&aacute; um novo nome, definido de forma aleatï¿½ria.
 	Os nomes dos temas podem conter o caminho completo do mapfile.
 	O nome original do LAYER (NAME) sera armazenado no metadata nomeoriginal
 	O nome do tema (mapfile) original sera armazenado no metadata arquivotemaoriginal
@@ -1067,7 +1150,7 @@ class Mapa
 
 	$temas - string Lista separada por v&iacute;rgulas, dos arquivos que ser&atilde;o abertos para pegar os novos layers. N&atilde;o inclua a extens&atilde;o ".map".
 
-	$locaplic - string Diretório onde fica a aplica&ccedil;&atilde;o.
+	$locaplic - string Diretï¿½rio onde fica a aplica&ccedil;&atilde;o.
 
 	$random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 	*/
@@ -1192,7 +1275,7 @@ class Mapa
 						//
 						//verifica se &eacute; um WMS e se existem classes definidas
 						//se existirem as classes, &eacute; criado um SLD para ser aplicado ao layer
-						//O SLD só funciona se CLASSITEM estiver definido
+						//O SLD sï¿½ funciona se CLASSITEM estiver definido
 						//
 						if($nlayer->classitem != "" && $nlayer->connectiontype == 7 && $nlayer->numclasses > 0 && $nlayer->getmetadata("wms_sld_body") == ""){
 							$tipotemp = $nlayer->type;
@@ -1242,11 +1325,11 @@ class Mapa
 		return(true);
 	}
 	/*
-	Method: excluiTemas
+	 Method: excluiTemas
 
 	Exclui temas de um mapa.
 
-	O arquivo de sele&ccedil;&atilde;o (.qy) &eacute; apagado do diretório tempor&aacute;rio.
+	O arquivo de sele&ccedil;&atilde;o (.qy) &eacute; apagado do diretï¿½rio tempor&aacute;rio.
 
 	Parameter:
 
@@ -1288,7 +1371,7 @@ class Mapa
 		return("ok");
 	}
 	/*
-	Method: ligaDesligaTemas
+	 Method: ligaDesligaTemas
 
 	Liga desliga temas.
 
@@ -1382,7 +1465,7 @@ class Mapa
 		return("ok");
 	}
 	/*
-	Method: adicionatemawms
+	 Method: adicionatemawms
 
 	Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 
@@ -1393,12 +1476,12 @@ class Mapa
 	$nome - Nome do tema para a legenda.
 	$proj - Lista das proje&ccedil;&otilde;es suportadas separadas por v&iacute;rgula.
 	$formato - Lista dos formatos de imagem separadas por v&iacute;rgula.
-	$locaplic - Diretório onde fica a aplica&ccedil;&atilde;o.
+	$locaplic - Diretï¿½rio onde fica a aplica&ccedil;&atilde;o.
 	$tipo - Tipo de representa&ccedil;&atilde;o poligonal|linear|pontual.
 	$versao - Vers&atilde;o do getcapabilities
 	$nomecamada - nome da camada do WMS
-	$dir_tmp - diretório tempor&aacute;rio do I3Geo
-	$imgdir - diretório tempor&aacute;rio das imagens
+	$dir_tmp - diretï¿½rio tempor&aacute;rio do I3Geo
+	$imgdir - diretï¿½rio tempor&aacute;rio das imagens
 	$imgurl - url do imgdir
 	$tiporep - tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es do mapa. Quando definido, &eacute; criado um sld para ser aplicado ao layer. poligonal|linear|pontual
 	$suportasld - Suporta SLD sim|nao.
@@ -1542,11 +1625,11 @@ class Mapa
 		$this->salva();
 	}
 	/*
-	Method: converteWS
+	 Method: converteWS
 
 	Transforma o mapa atual em um web service.
 
-	O novo map file &eacute; armazenado no mesmo diretório do map file original.
+	O novo map file &eacute; armazenado no mesmo diretï¿½rio do map file original.
 
 	Parametros:
 
@@ -1563,7 +1646,7 @@ class Mapa
 		//$nomews = str_replace(".map","ws.map",$this->arquivo);
 		$nomeurl = "/ogc.php?tema=".$this->arquivo;
 		/*
-		$w = $this->mapa->web;
+		 $w = $this->mapa->web;
 		$w->set("template","");
 		//adiciona os parametros no nivel do mapa
 		$this->mapa->setmetadata("wms_title","I3Geo");
@@ -1595,11 +1678,11 @@ class Mapa
 		return($nomeurl);
 	}
 	/*
-	Method: converteWMC
+	 Method: converteWMC
 
 	Transforma o mapa atual em um Web Map Context.
 
-	O novo map file &eacute; armazenado no mesmo diretório do map file original.
+	O novo map file &eacute; armazenado no mesmo diretï¿½rio do map file original.
 
 	Parametros:
 
@@ -1682,14 +1765,14 @@ class Mapa
 		return($nomeurl."&service=WMS&request=GetContext&version=1.1.0");
 	}
 	/*
-	Method: adicionaTemaGeoJson
+	 Method: adicionaTemaGeoJson
 
 	Adiciona um canal GeoRSS como um tema no mapa.
 
 	Parametros:
 
 	$servico - Endere&ccedil;o (url)  do GeoJson.
-	$dir_tmp - Diretório onde o arquivo ser&aacute; criado.
+	$dir_tmp - Diretï¿½rio onde o arquivo ser&aacute; criado.
 	$locaplic - Localiza&ccedil;&atilde;o do I3geo
 
 	*/
@@ -1744,14 +1827,14 @@ class Mapa
 		return "ok";
 	}
 	/*
-	Method: adicionaTemaGeoRSS
+	 Method: adicionaTemaGeoRSS
 
 	Adiciona um canal GeoRSS como um tema no mapa.
 
 	Parametros:
 
 	$servico - Endere&ccedil;o (url) do RSS.
-	$dir_tmp - Diretório onde o arquivo ser&aacute; criado.
+	$dir_tmp - Diretï¿½rio onde o arquivo ser&aacute; criado.
 	$locaplic - Localiza&ccedil;&atilde;o do I3geo
 	$canal - Identificador do canal (ordem em que est&aacute; no RSS)
 	*/
@@ -1920,7 +2003,7 @@ class Mapa
 		return("erro");
 	}
 	/*
-	Method: adicionaTemaSHP
+	 Method: adicionaTemaSHP
 
 	Adiciona um tema a partir de um arquivo shape file armazenado no servidor de arquivos.
 
@@ -1933,8 +2016,8 @@ class Mapa
 		{
 			$s = ms_newShapefileObj($arq,-1);
 			/*
-			if($this->v == 6)
-			{$shape = $s->getshape(new resultObj(0));}
+			 if($this->v == 6)
+			 {$shape = $s->getshape(new resultObj(0));}
 			else
 			{$shape = $s->getshape(0);}
 			*/
@@ -1959,7 +2042,7 @@ class Mapa
 		return("ok");
 	}
 	/*
-	Method: adicionaTemaIMG
+	 Method: adicionaTemaIMG
 
 	Adiciona um tema a partir de um arquivo imagem armazenado no servidor de arquivos.
 
@@ -2032,7 +2115,7 @@ class Mapa
 		$fecha = fclose ($abre);
 	}
 	/*
-	Method: converteInterfacePara
+	 Method: converteInterfacePara
 
 	Converte o mapfile atual ajustando o funcionamento para uma interface espec&iacute;fica
 

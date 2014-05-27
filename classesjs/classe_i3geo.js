@@ -371,12 +371,13 @@ var i3GEO = {
 							i3GEO.login.anulaCookie;
 						}
 						//
-						i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
+						i3GEO.arvoreDeCamadas.registaCamadas(retorno.data.temas);
+						//
 						if(retorno.data.variaveis.navegacaoDir.toLowerCase() === "sim")
 						{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;}
 						//
 						//calcula (opcional) o tamanho correto da tabela onde fica o mapa
-						//se n&atilde;o for feito esse c&aacute;lculo, o mapa fica ajustado a� esquerda
+						//se n&atilde;o for feito esse c&aacute;lculo, o mapa fica ajustado a esquerda
 						//
 						temp = 0;
 						if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width,10);}
@@ -584,13 +585,14 @@ var i3GEO = {
 			//
 			//o try aqui &eacute; necess&aacute;rio pois na interface googlemaps os parametros retorno.data.variaveis n&atilde;o s&atilde;o gerados completamente
 			//
+			temp = i3GEO.arvoreDeCamadas.converteChaveValor2normal(retorno.data.temas);
 			try{
-				i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
+				i3GEO.arvoreDeCamadas.atualiza(temp);
 				if (i3GEO.parametros.mapscale !== mapscale)
 				{i3GEO.arvoreDeCamadas.atualizaFarol(i3GEO.parametros.mapscale);}
 			}
 			catch(e){}
-			i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
+			i3GEO.arvoreDeCamadas.registaCamadas(temp);
 			i3GEO.Interface.redesenha();
 			//caso esteja na funcao de identificacao
 			if($i("i3GEOidentificalistaTemas")){

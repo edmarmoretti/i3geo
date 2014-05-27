@@ -1309,7 +1309,8 @@ i3GEO.Interface = {
 				i3GEO.Interface.openlayers.sobeLayersGraficos();
 			},
 			atualizaTema:function(retorno,tema){
-				var layer = i3geoOL.getLayersByName(tema)[0];
+				var layer = i3geoOL.getLayersByName(tema)[0],
+					objtemas;
 				if(layer && layer != undefined){
 					if(layer.url){
 						layer.mergeNewParams({r:Math.random()});
@@ -1319,13 +1320,17 @@ i3GEO.Interface = {
 						layer.redraw();
 					}
 				}
-				if(retorno === "")
-				{return;}
+				if(retorno === ""){
+					return;
+				}
+				objtemas = i3GEO.arvoreDeCamadas.converteChaveValor2normal(retorno.data.temas);
 				i3GEO.Interface.openlayers.recalcPar();
-				try
-				{i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);}
-				catch(e)
-				{i3GEO.arvoreDeCamadas.atualiza();}
+				try{
+					i3GEO.arvoreDeCamadas.atualiza(objtemas);
+				}
+				catch(e){
+					i3GEO.arvoreDeCamadas.atualiza();
+				}
 				i3GEO.janela.fechaAguarde();
 			},
 			registraEventos: function(){
@@ -1680,17 +1685,22 @@ i3GEO.Interface = {
 				//n&atilde;o se atualiza um tema &uacute;nico, mas o mapa todo
 				//
 				//i3GEO.atualiza(retorno);
-				var indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema);
+				var indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema),
+					objtemas;
 				i3GeoMap.overlayMapTypes.removeAt(indice);
 				i3GEO.Interface.googlemaps.posfixo += 1;
 				i3GEO.Interface.googlemaps.insereLayer(tema,indice);
-				if(retorno === "")
-				{return;}
+				if(retorno === ""){
+					return;
+				}
+				objtemas = i3GEO.arvoreDeCamadas.converteChaveValor2normal(retorno.data.temas);
 				i3GEO.Interface.googlemaps.recalcPar();
-				try
-				{i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);}
-				catch(e)
-				{i3GEO.arvoreDeCamadas.atualiza();}
+				try{
+					i3GEO.arvoreDeCamadas.atualiza(objtemas);
+				}
+				catch(e){
+					i3GEO.arvoreDeCamadas.atualiza();
+				}
 				i3GEO.janela.fechaAguarde();
 			},
 			removeTodosLayers: function(){
@@ -2359,18 +2369,23 @@ i3GEO.Interface = {
 			},
 			atualizaTema:function(retorno,tema){
 				var layer = i3GEO.Interface.googleearth.retornaObjetoLayer(tema),
-				hr = layer.getLink().getHref();
+					hr = layer.getLink().getHref(),
+					objtemas;
 				//layer.getLink().setRefreshMode(2);
 				//layer.getLink().setRefreshInterval(1);
 				hr = hr.replace("&&&&&&&&&&&&&&&&&&&","");
 				layer.getLink().setHref(hr+"&");
-				if(retorno === "")
-				{return;}
+				if(retorno === ""){
+					return;
+				}
+				objtemas = i3GEO.arvoreDeCamadas.converteChaveValor2normal(retorno.data.temas);
 				i3GEO.Interface.googleearth.recalcPar();
-				try
-				{i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);}
-				catch(e)
-				{i3GEO.arvoreDeCamadas.atualiza();}
+				try{
+					i3GEO.arvoreDeCamadas.atualiza(objtemas);
+				}
+				catch(e){
+					i3GEO.arvoreDeCamadas.atualiza();
+				}
 				i3GEO.janela.fechaAguarde();
 			},
 			redesenha: function(){

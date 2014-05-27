@@ -160,7 +160,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Propriedade: REFRESH
 
-	Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite atualizar a árvore
+	Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite atualizar a ï¿½rvore
 
 	Default:
 	{true}
@@ -442,9 +442,9 @@ i3GEO.arvoreDeCamadas = {
 
 			escala: 0, //escala original dos dados
 
-			escondido: "nao", //indica se o tema &eacute; mostrado no mapa mas não nas listagens ou na legenda
+			escondido: "nao", //indica se o tema &eacute; mostrado no mapa mas nï¿½o nas listagens ou na legenda
 
-			etiquetas: "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME", //lista de itens que são mostrados no bal&atilde;o de identifica&ccedil;&atilde;o
+			etiquetas: "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME", //lista de itens que sï¿½o mostrados no bal&atilde;o de identifica&ccedil;&atilde;o
 
 			exttema: "", //extens&atilde;o geogr&aacute;fica da camada
 
@@ -472,7 +472,7 @@ i3GEO.arvoreDeCamadas = {
 
 			status: 2, //situa&ccedil;&atilde;o do item STATUS do mapfile
 
-			tema: "Países do mundo", //t&iacute;tulo atual do tema
+			tema: "Paï¿½ses do mundo", //t&iacute;tulo atual do tema
 
 			temporizador: "",//deve ou n&atilde;o ser atualizado de tempos em tempos
 
@@ -621,7 +621,7 @@ i3GEO.arvoreDeCamadas = {
 	Atualiza a &aacute;rvore de camadas.
 
 	Antes de executar a atualiza&ccedil;&atilde;o, essa fun&ccedil;&atilde;o verifica se &eacute; necess&aacute;rio faz&ecirc;-lo.
-	O objeto CAMADAS &eacute; comparado com o parâmetro "temas" para verificar se existem diferen&ccedil;as que
+	O objeto CAMADAS &eacute; comparado com o parametro "temas" para verificar se existem diferen&ccedil;as que
 	justifiquem a atualiza&ccedil;&atilde;o.
 
 	Parametro:
@@ -1245,7 +1245,7 @@ i3GEO.arvoreDeCamadas = {
 
 	Atualiza a legenda de um tema.
 
-	A legenda precisa ser atualizada emalgumas circunstâncias, como quando &eacute; feitoumzoom no mapa.
+	A legenda precisa ser atualizada emalgumas circunstï¿½ncias, como quando &eacute; feitoumzoom no mapa.
 
 	Parametro:
 
@@ -1632,6 +1632,10 @@ i3GEO.arvoreDeCamadas = {
 		if(!camadas || camadas == ""){
 			camadas = i3GEO.arvoreDeCamadas.CAMADAS;
 		}
+		else{
+			//converte o objeto camadas para a forma valida caso contenha a forma chave/valor, implementada na versao 6.0 do i3Geo
+			camadas = i3GEO.arvoreDeCamadas.converteChaveValor2normal(camadas);
+		}
 		if(!parametro){
 			parametro = "name";
 		}
@@ -1780,12 +1784,48 @@ i3GEO.arvoreDeCamadas = {
 		catch(e){return "";}
 		return temp;
 	},
+	/**
+	 * Converte um objeto com a lsita de camadas do formato chave/valor para o formato normal
+	 * O formato chave/valor foi introduzido na versao 6.0 do i3Geo e e fornecido como padrao
+	 * pelo servidor
+	 * O objeto i3GEO.arvoreDeCamadas.CAMADA utiliza o formato normal do tipo {chave: valor},{chave: valor}
+	 * Ja o objeto fornecido pelo servidor evita redundancias utilizando o formato {chaves:{},valores:{}}
+	 */
+	converteChaveValor2normal: function(obj){
+		if(obj.chaves){
+			var i,tema,j,t,
+				chaves = obj.chaves,
+				temas = obj.valores,
+				ntemas = temas.length,
+				nchaves = chaves.length,
+				novo = [];
+			for(i=0;i<ntemas;i++){
+				tema = temas[i];
+				t = {};
+				for(j=0;j<nchaves;j++){
+					t[chaves[j]] = tema[j];
+				}
+				novo.push(t);
+			}
+			return novo;
+		}
+		else{
+			return obj;
+		}
+	},
+	/*
+	 * Guarda um objeto contendo as definicoes das camadas conforme o padrao utilizado pela arvore de camadas
+	 */
+	registaCamadas: function(obj){
+		obj = i3GEO.arvoreDeCamadas.converteChaveValor2normal(obj);
+		i3GEO.arvoreDeCamadas.CAMADAS = obj;
+	},
 	/*
 	Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de manipula&ccedil;&atilde;o da &aacute;rvore
 	*/
 	dialogo: {
 		/*
-		Abre a janela de di&aacute;logo para o usu&aacute;rio escolher ou alterar o filtro aplicado à &aacute;rvore
+		Abre a janela de di&aacute;logo para o usu&aacute;rio escolher ou alterar o filtro aplicado ï¿½ &aacute;rvore
 		*/
 		filtro: function(){
 			i3GEO.util.dialogoFerramenta("i3GEO.arvoreDeCamadas.dialogo.filtro()","filtroarvore","filtroarvore");

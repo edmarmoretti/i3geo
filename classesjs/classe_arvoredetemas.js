@@ -628,7 +628,7 @@ i3GEO.arvoreDeTemas = {
 		"\"\"," +
 		"this.checked)";
 		html += "onclick='javascript:"+adiciona+"' " +
-		" type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"'  /></td><td style='padding-top:4px;vertical-align:top;text-align:left;padding-left:3px;color:"+cor+";' >";
+		" type='radio'  /></td><td style='padding-top:4px;vertical-align:top;text-align:left;padding-left:3px;color:"+cor+";' >";
 		if(link){
 			html += "<a href='"+link+"' target=_blank >"+layer+" - "+titulo + "</a>";
 		}
@@ -1543,6 +1543,10 @@ i3GEO.arvoreDeTemas = {
 		html += "</span></td>";
 		return(html);
 	},
+	/**
+	 * Funcao default que adiciona o tema ao mapa
+	 * Verifica se o tema ja existe ou nao e decide se deve desligar ou ligar
+	 */
 	verificaStatusTema: function(obj,tid){
 		//confirma se o tema existe no mapa
 		if(i3GEO.arvoreDeCamadas.pegaTema(tid) !== ""){
