@@ -382,6 +382,8 @@ i3GEO.arvoreDeCamadas = {
 		wms = true;
 
 		tme = true;
+		 
+		copia = true; //cria uma copia da camada
 
 	*/
 	FUNCOES: {
@@ -407,7 +409,8 @@ i3GEO.arvoreDeCamadas = {
 		comentar:true,
 		temporizador:true,
 		wms: true,
-		tme: true
+		tme: true,
+		copia: true
 	},
 	/*
 	Variavel: CAMADAS
@@ -1095,6 +1098,9 @@ i3GEO.arvoreDeCamadas = {
 		if(funcoes.mudanome === true){
 			tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t21a")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />"+$trad("t21")+" </span> <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=43' >&nbsp;&nbsp;&nbsp;</a>"+$inputText("","","nn"+ltema.name,"","10","")+"<img  class='tic' style='position:relative;top:3px;' onclick='i3GEO.tema.mudanome(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";
 			new YAHOO.widget.HTMLNode({expanded:false,enableHighlight:false,isLeaf:true,html:tnome}, node);
+		}
+		if(funcoes.copia === true){
+			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("x100"),$trad("x101"),'i3GEO.tema.copia(\"'+ltema.name+'\")',node);
 		}
 		if ((ltema.type < 3) && (ltema.connectiontype !== 7)){
 			if(funcoes.procurar === true)

@@ -266,16 +266,6 @@ i3GEO.arvoreDeTemas = {
 	*/
 	ATIVATEMA: "",
 	/*
-	Adiciona ao mapa o tema clicado imediatamente, sem a definicao de um temporizador ou necessidade de se clicar no botao "aplicar".
-
-	Tipo:
-	{boolean}
-
-	Default:
-	{false}
-	*/
-	ATIVATEMAIMEDIATO: true,
-	/*
 	Propriedade: IDSMENUS
 
 	Array com a lista de ids que serao considerados na montagem da arvore. Por default e vazio, o que significa que todos os menus serao considerados.
@@ -1535,7 +1525,7 @@ i3GEO.arvoreDeTemas = {
 			clique = "onclick=\""+i3GEO.arvoreDeTemas.ATIVATEMA+"\"";
 		}
 		else{
-			clique = "onclick='i3GEO.arvoreDeTemas.adicionaTemas([\""+tema.tid+"\"])'";
+			clique = "onclick='i3GEO.arvoreDeTemas.verificaStatusTema(this,\""+tema.tid+"\")'";
 		}
 		html += clique;
 		//se o icone nao for do tipo download, define os valores do input
@@ -1552,6 +1542,15 @@ i3GEO.arvoreDeTemas = {
 		html += tema.nome;
 		html += "</span></td>";
 		return(html);
+	},
+	verificaStatusTema: function(obj,tid){
+		//confirma se o tema existe no mapa
+		if(i3GEO.arvoreDeCamadas.pegaTema(tid) !== ""){
+			i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid,obj.checked);
+		}
+		else{
+			i3GEO.arvoreDeTemas.adicionaTemas([tid]);
+		}
 	},
 	/*
 	Monta o no com informacoes adicionais sobre o tema.

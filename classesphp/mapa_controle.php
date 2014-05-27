@@ -1067,6 +1067,22 @@ Altera a transpar&ecirc;ncia de um tema
 		redesenhaMapa();
 	break;
 /*
+Valor: COPIATEMA
+
+Cria uma copia de um tema
+
+<Temas->copia>
+*/
+	case "COPIATEMA":
+		include_once("classe_temas.php");
+		copiaSeguranca($map_file);
+		$m = new Temas($map_file,$tema);
+		$m->copiaTema();
+		$m->salva();
+		$_SESSION["contadorsalva"]++;
+		redesenhaMapa();
+	break;
+/*
 Valor: MUDANOME
 
 Altera o nome do tema

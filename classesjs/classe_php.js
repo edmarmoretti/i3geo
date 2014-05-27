@@ -5,7 +5,7 @@ i3GEO.php
 
 Chamadas em AJAX que executam programas no lado do servidor
 
-Muitos dos par�metros exigidos pelos programas em PHP s&atilde;o obtidos da vari&aacute;vel
+Muitos dos par�aetros exigidos pelos programas em PHP s&atilde;o obtidos da vari&aacute;vel
 de se&ccedil;&atilde;o aberta no servidor quando o i3Geo &eacute; inicializado, &eacute; o caso por exemplo do nome
 do arquivo correspondente ao mapfile atualmente em uso
 
@@ -932,6 +932,21 @@ i3GEO.php = {
 			};
 		i3GEO.janela.abreAguarde("mudatransp",$trad("o1"));
 		cpJSON.call(p,"mudatransp",retorno,par);
+	},
+	/*
+	Function: copiatema
+
+	<COPIATEMA>
+	*/
+	copiatema: function(funcao,tema){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
+			par = "funcao=copiatema&tema="+tema+"&g_sid="+i3GEO.configura.sid,
+			retorno = function(retorno){
+				i3GEO.janela.fechaAguarde("copiatema");
+				funcao.call(funcao,retorno);
+			};
+		i3GEO.janela.abreAguarde("copiatema",$trad("o1"));
+		cpJSON.call(p,"copiatema",retorno,par);
 	},
 	/*
 	Function: mudanome

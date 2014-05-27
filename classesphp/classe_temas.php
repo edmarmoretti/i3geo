@@ -24,7 +24,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c�pia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -614,6 +614,28 @@ $valor - Novo nome.
 		return ("ok");
 	}
 /*
+function: copiaTema
+
+Copia um tema
+
+*/
+	function copiaTema()
+	{
+		foreach ($this->grupo as $lg){
+			$ll = $this->mapa->getlayerbyname($lg);
+			$layer = ms_newLayerObj($this->mapa, $ll);
+			$layer->setmetadata("nomeoriginal","");
+			$meta = $layer->getmetadata("tema");
+			if (($meta != "") && ($meta != "NAO")){
+				$layer->setmetadata("tema","Copia de ".$meta);
+			}
+			$layer->setmetadata("cache","");
+			$novoname = "copia".nomerandomico();
+			$layer->set("name",$novoname);
+		}
+		return ("ok");
+	}
+/*
 function: insereFeature
 
 Insere elemento gr&aacute;fico em um tema.
@@ -943,7 +965,7 @@ Retorna o link para a fonte do tema.
 
 parameters:
 
-tema - c�digo do tema
+tema - codigo do tema
 
 */
 	function fonteTema($tema)
@@ -1043,7 +1065,7 @@ Calcula a extens&atilde;o geogr&aacute;fica dos elementos selecionados de um tem
 /*
 function: sld
 
-Retorna o SLD correspondente � legenda do tema.
+Retorna o SLD correspondente a legenda do tema.
 */
 	function sld()
 	{

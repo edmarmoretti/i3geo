@@ -2069,7 +2069,7 @@ it:""
 }],
 "x76":[
 {
-pt:"O tema j&aacute;existe no mapa. Adiciona novamente?",
+pt:"O tema j&aacute; existe no mapa. Adiciona novamente?",
 en:"Layer already exists in the map. Add again?",
 es:"El tema ya existe en el mapa. Añade otra vez?",
 it:""
@@ -2232,6 +2232,20 @@ it:""
 "x99":[
 {
 pt:"C&aacute;lculo n&atilde;o pode ser realizado. Falta carregar a API de geometria do GM",
+en:"",
+es:"",
+it:""
+}],
+"x100":[
+{
+pt:"Cria uma c&oacute;pia da camada",
+en:"",
+es:"",
+it:""
+}],
+"x101":[
+{
+pt:"C&oacute;pia",
 en:"",
 es:"",
 it:""

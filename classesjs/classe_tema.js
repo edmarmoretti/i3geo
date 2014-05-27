@@ -280,6 +280,18 @@ i3GEO.tema = {
 		{i3GEO.janela.tempoMsg($trad("x18"));}
 	},
 	/*
+	Function: copia
+
+	Adiciona ao mapa uma copia do tema
+
+	Parametros:
+
+	idtema - codigo do tema
+	*/
+	copia: function(idtema){
+		i3GEO.php.copiatema(i3GEO.atualiza,idtema);
+	},
+	/*
 	Function: mostralegendajanela
 
 	Mostra a legenda de um tema em uma janela flutuante especifica

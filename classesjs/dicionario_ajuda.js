@@ -995,6 +995,14 @@ g_traducao_ajuda = {
 			complemento:"",
 			//tela:"ferramentas/upload/exemplo.htm",
 			apijs:"i3GEO.mapa.dialogo.geolocal()"
+		},
+		"119": {
+			titulo: "Cria uma c&oacute;pia",
+			diretorio:"i3geo/classesjs/classe_camadas.js",
+			categoria:"5",
+			pt:"Cria uma c&oacute;pia de uma camada existente no mapa e adiciona com novo nome.",
+			complemento:"",
+			apijs:"i3GEO.tema.copia(idtema)"
 		}
 	}
 };
