@@ -2991,15 +2991,18 @@ i3GEO.util = {
 	listaImg {boolean} - considera os arquivos de imagem (geo)
 
 	listaFig {boolean} considera os arquivos de tipo figura (png e jpg)
+	 
+	retornaDir {boolean} insere um botao para retornar o nome da pasta
 	 */
-	navegadorDir: function(obj,listaShp,listaImg,listaFig){
+	navegadorDir: function(obj,listaShp,listaImg,listaFig,retornaDir){
 		if(!obj){
 			listaShp = true;
 			listaImg = true;
 			listaFig = true;
+			retornaDir = false;
 		}
 		var temp = function(){
-			i3GEOF.navegarquivos.iniciaDicionario(obj,listaShp,listaImg,listaFig);
+			i3GEOF.navegarquivos.iniciaDicionario(obj,listaShp,listaImg,listaFig,retornaDir);
 		};
 		i3GEO.util.dialogoFerramenta("i3GEO.util.navegadorDir()","navegarquivos","navegarquivos","index.js",temp);
 	},

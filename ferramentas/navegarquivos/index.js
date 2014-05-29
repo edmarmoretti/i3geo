@@ -38,6 +38,7 @@ i3GEOF.navegarquivos = {
 	listaShp: true,
 	listaImg: true,
 	listaFig: true,
+	retornaDir: false,
 	/*
 	Variavel: aguarde
 
@@ -57,16 +58,18 @@ i3GEOF.navegarquivos = {
 
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 	*/
-	iniciaDicionario: function(obj,listaShp,listaImg,listaFig){
+	iniciaDicionario: function(obj,listaShp,listaImg,listaFig,retornaDir){
 		if(!obj){
 			listaShp = true;
 			listaImg = true;
 			listaFig = true;
+			retornaDir = false;
 		}
 		i3GEOF.navegarquivos.retornarPara = obj;
 		i3GEOF.navegarquivos.listaShp = listaShp;
 		i3GEOF.navegarquivos.listaImg = listaImg;
 		i3GEOF.navegarquivos.listaFig = listaFig;
+		i3GEOF.navegarquivos.retornaDir = retornaDir;
 		if(typeof(i3GEOF.navegarquivos.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
 				i3GEO.configura.locaplic+"/ferramentas/navegarquivos/dicionario.js",
@@ -153,12 +156,12 @@ i3GEOF.navegarquivos = {
 		return null;
 	},
 	//parametros listaShp:true,listaImg:true,listaFig:true
-	adicionaNoNavegacaoDir: function(listaShp,listaImg,listaFig){
+	adicionaNoNavegacaoDir: function(listaShp,listaImg,listaFig,retornaDir){
 		if(i3GEO.arvoreDeTemas.LOCAPLIC == ""){
 			i3GEO.arvoreDeTemas.LOCAPLIC = i3GEO.configura.locaplic;
 		}
 		var temp = function(retorno){
-			var drives,iglt,ig,drive,tempNode;
+			var drives,iglt,ig,drive,tempNode,prefixo = "";
 			drives = i3GEO.arvoreDeTemas.DRIVES;
 			if(drives == undefined || drives == "" || drives.length === 0){
 				drives = retorno.data.drives;
@@ -173,6 +176,7 @@ i3GEOF.navegarquivos = {
 						listaShp:i3GEOF.navegarquivos.listaShp,
 						listaImg:i3GEOF.navegarquivos.listaImg,
 						listaFig:i3GEOF.navegarquivos.listaFig,
+						retornaDir: i3GEOF.navegarquivos.retornaDir,
 						html:drives[ig].nome,
 						caminho:drives[ig].caminho,
 						enableHighlight:true,

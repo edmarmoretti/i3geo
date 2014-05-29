@@ -1451,22 +1451,31 @@ i3GEO.arvoreDeTemas = {
 		var montaLista = function(retorno)
 		{
 			var ig,conteudo,dirs,tempNode,arquivos,
+				prefixo = "",
 				funcaoClick = "i3GEO.util.adicionaSHP" ;
 			dirs = retorno.data.diretorios;
+			if(!node.data.retornaDir){
+				node.data.retornaDir = false;
+			}
 			for (ig=0;ig<dirs.length;ig+=1)
 			{
 				if(node.data.funcaoClick){
 					funcaoClick = node.data.funcaoClick;
 				}
+				if(node.data.retornaDir  === true){
+					prefixo = "<input type=radio onclick='i3GEOF.navegarquivos.retorna(\""+node.data.caminho + "/" + dirs[ig]+"\")' />";
+				}
+
 				tempNode = new YAHOO.widget.HTMLNode(
 					{
-						html:dirs[ig],
-						caminho:node.data.caminho+"/"+dirs[ig],
-						expanded:false,
-						enableHighlight:false,
+						html: prefixo + dirs[ig],
+						caminho: node.data.caminho + "/" + dirs[ig],
+						expanded: false,
+						enableHighlight: false,
 						listaImg: node.data.listaImg,
 						listaFig: node.data.listaFig,
 						listaShp: node.data.listaShp,
+						retornaDir: node.data.retornaDir,
 						funcaoClick: funcaoClick
 					},
 					node
