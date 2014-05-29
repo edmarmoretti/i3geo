@@ -108,8 +108,10 @@ i3GEOF.upload = {
 		'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>';
 		if(i3GEO.parametros.editor === "sim"){
-			ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.upload.dicionario)+':<br><input class=digitar type="text" size=45 name="dirDestino" id="dirDestino" style="top:0px;left:0px;cursor:pointer;">';
-			ins += "&nbsp;<img onclick='i3GEO.util.navegadorDir(\"dirDestino\",false,false,false,true);' src='"+i3GEO.configura.locaplic+"/imagens/ic_zoom.png' style='cursor:pointer;position :relative;top:2px'/></p>";
+			ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.upload.dicionario)+':<br>' +
+			'<input class=digitar type="text" size=45 name="dirDestino" id="dirDestino" style="top:0px;left:0px;cursor:pointer;">' +
+			"&nbsp;<img onclick='i3GEO.util.navegadorDir(\"dirDestino\",false,false,false,true);' src='"+i3GEO.configura.locaplic+"/imagens/ic_zoom.png' style='cursor:pointer;position :relative;top:2px'/></p>" +
+			'<p class="paragrafo" ><input type=checkbox name=i3GEOuploadCriaMapfile id=i3GEOuploadCriaMapfile />&nbsp;'+$trad(10,i3GEOF.upload.dicionario);
 		}
 		ins += '<p class="paragrafo" >'+$trad(2,i3GEOF.upload.dicionario)+': ' +
 		'	<select id=tipo name=tipo >' +

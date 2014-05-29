@@ -20,6 +20,7 @@ if (ob_get_level() == 0) ob_start();
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
+<script src="../../classesjs/classe_util.js"></script>
 <title></title>
 </head>
 <body bgcolor="white" style="background-color:white;text-align:left;">
@@ -75,6 +76,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 
 	echo "<p class='paragrafo' >Arquivo enviado.</p>";
 	echo "<p class='paragrafo'>Nome: ".$dirmap."/".$nomePrefixo.".shp </p>";
+	//nesse caso o formulario de upload esta sendo executado de dentro de um mapa interativo, por isso o mapfile ja existe
 	if(isset($map_file)){
 		echo "<p class='paragrafo' >Adicionando tema...</p>";
 		ob_flush();
@@ -125,6 +127,36 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		//grava os templates de cada tema
 		echo "<b><p class='paragrafo' >Tema criado!!! Redesenhando o mapa.";
 		echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza()</script>";
+	}
+	elseif($i3GEOuploadCriaMapfile == "on"){
+	//verifica se o usuario marcou a opcao de cria mapfile
+	//nesse caso o aplicativo de upload esta sendo executado de dentro do sistema de administracao, e o mapfile devera
+	//ser criado e registrado no sistema
+		$nome = $nomePrefixo;
+		$codigo = $nomePrefixo;
+		$it = $nomePrefixo;
+		$en = $nomePrefixo;
+		$es = $nomePrefixo;
+		$sfileObj = ms_newShapefileObj($dirmap."/".$nomePrefixo.".shp", -1);
+		if(!isset($tipo) || $tipo == ""){
+			$tipo = $sfileObj->type;
+		}
+		if ($tipo == 1){
+			$tipoLayer = "point";
+		}
+		if ($tipo == 3){
+			$tipoLayer = "line";
+		}
+		if ($tipo == 5){
+			$tipoLayer = "polygon";
+		}
+		$funcao = "CRIARNOVOMAP";
+		$output = "retorno";
+		$data = $dirmap."/".$nomePrefixo.".shp";
+		include_once($locaplic."/admin/php/editormapfile.php");
+		echo "<b><p class='paragrafo' >Criado!!!<br>";
+		echo "Para editar clique: <a href='../../admin/html/editormapfile.html' target=_blank >".$nomePrefixo."</a>";
+		echo "<script>window.scrollTo(0,10000);i3GEO.util.insereCookie('I3GEOletraAdmin','".$nomePrefixo."');</script>";
 	}
 }
 else

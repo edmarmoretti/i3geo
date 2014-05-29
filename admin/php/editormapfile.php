@@ -23,7 +23,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -36,7 +36,7 @@ Parametros:
 
 O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&atilde;o ser&aacute; executada, por exemplo, editormapfile.php?funcao=pegaMapfiles
 
-Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
+Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
 include_once(dirname(__FILE__)."/login.php");
@@ -82,6 +82,13 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	}
 }
 error_reporting(0);
+//define o parametro de output do resultado da funcao
+//algumas funcoes podem ser inseridas com include em outros programas
+//nesse caso, defina output como "retorno"
+//caso contrario sera definido como json
+if(empty($output)){
+	$output = "json";
+}
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {
@@ -112,9 +119,14 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "CRIARNOVOMAP":
-		retornaJSON(criarNovoMap());
-		exit;
-		break;
+		$resultado = criarNovoMap();
+		if($output == "retorno"){
+			return $resultado;
+		}else{
+			retornaJSON($resultado);
+			exit;
+		}
+	break;
 
 	case "DOWNLOADGVP":
 		if(file_exists($locaplic."/temas/".$codigoMap.".gvp")){
@@ -219,7 +231,7 @@ switch (strtoupper($funcao))
 		/*
 		Valor: LIMPARCACHEMAPFILE
 
-		Apaga o diretório contendo o cache de um tema (mapfile)
+		Apaga o diretï¿½rio contendo o cache de um tema (mapfile)
 
 		Parametros:
 
@@ -256,7 +268,7 @@ switch (strtoupper($funcao))
 
 		Exclui um mapfile.
 
-		Só &eacute; poss&iacute;vel excluir se o mapfile n&atilde;o estiver vinculado a nenhum tema ou nó da &aacute;rvore de temas
+		Sï¿½ &eacute; poss&iacute;vel excluir se o mapfile n&atilde;o estiver vinculado a nenhum tema ou nï¿½ da &aacute;rvore de temas
 
 		Parametros:
 
@@ -310,7 +322,7 @@ switch (strtoupper($funcao))
 
 		maporigem {string} - nome completo do arquivo mapfile que contem o layer que ser&aacute; utilizado para alterar o original
 
-		nomelayer {string} - código do layer em mapfile que ser&aacute; utilizado para atualizar codigoMap
+		nomelayer {string} - cï¿½digo do layer em mapfile que ser&aacute; utilizado para atualizar codigoMap
 
 		Retorno:
 
@@ -344,7 +356,7 @@ switch (strtoupper($funcao))
 
 		Cria um novo layer em um mapfile
 
-		O novo layer receber&aacute; um nome aleatório, que pode ser modificado posteriormente. Por default, esse novo layer ser&aacute; do tipo linear
+		O novo layer receber&aacute; um nome aleatï¿½rio, que pode ser modificado posteriormente. Por default, esse novo layer ser&aacute; do tipo linear
 
 		Parametros:
 
@@ -1170,12 +1182,15 @@ function sobeDesce()
 	removeCabecalho($mapfile);
 	return "ok";
 }
+//essa funcao e usada tambem por i3geo/ferramentas/upload/upload.php
 function criarNovoMap()
 {
-	global $nome,$codigo,$locaplic,$it,$en,$es,$esquemaadmin,$metaestat;
+	global $nome,$codigo,$locaplic,$it,$en,$es,$esquemaadmin,$metaestat,$tipoLayer,$data;
 	$arq = $locaplic."/temas/".$codigo.".map";
-	if(!file_exists($arq))
-	{
+	if(!file_exists($arq)){
+		if(empty($tipoLayer)){
+			$tipoLayer = "line";
+		}
 		$dados[] = "MAP";
 		$dados[] = "SYMBOLSET ../symbols/simbolosv6.sym";
 		$dados[] = 'FONTSET   "../symbols/fontes.txt"';
@@ -1184,12 +1199,15 @@ function criarNovoMap()
 		$dados[] = '	TEMPLATE "none.htm"';
 		if(!empty($metaestat) && $metaestat == "SIM"){
 			$dados[] = '	CONNECTIONTYPE POSTGIS';
-			$dados[] = "	TYPE polygon";
+			$tipoLayer = "polygon";
+		}
+		$dados[] = "	TYPE ".$tipoLayer;
+		if(empty($data)){
+			$dados[] = '	DATA ""';
 		}
 		else{
-			$dados[] = "	TYPE line";
+			$dados[] = '	DATA "'.$data.'"';
 		}
-		$dados[] = '	DATA ""';
 		$dados[] = '	METADATA';
 		$dados[] = '		TEMA "'.$nome.'"';
 		$dados[] = '		CLASSE "SIM"';
@@ -1207,6 +1225,9 @@ function criarNovoMap()
 		$dados[] = '        STYLE';
 		$dados[] = '        	COLOR 0 0 0';
 		$dados[] = '        	SIZE 12';
+		if($tipoLayer == "point"){
+			$dados[] = "        	SYMBOL 'ponto'";
+		}
 		$dados[] = '        END';
 		$dados[] = '    END';
 		$dados[] = "END";

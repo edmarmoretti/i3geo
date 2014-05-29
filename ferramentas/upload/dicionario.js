@@ -1,7 +1,7 @@
 //+$trad(1,i3GEOF.upload.dicionario)+
 i3GEOF.upload.dicionario = {
 		1: [{
-			pt:"pasta no servidor onde os dados<br>ser&atilde;o armazenados (obrigat&oacute;rio)",
+			pt:"Pasta no servidor onde os dados ser&atilde;o armazenados (obrigat&oacute;rio se voc&ecirc; estiver utilizando o formul&aacute;rio dentro do sistema de administra&ccedil;&atilde;o)",
 			en:"",
 			es:"",
 			it:""
@@ -55,7 +55,7 @@ i3GEOF.upload.dicionario = {
 			it:""
 		}],
 		10: [{
-			pt:"",
+			pt:"Marque para criar o arquivo de configura&ccedil;&atilde;o (mapfile) e visualizar os dados no mapa interativo (voc&ecirc; poder&aacute; editar esse arquivo posteriormente no editor de mapfiles)",
 			en:"",
 			es:"",
 			it:""
