@@ -1,7 +1,7 @@
 //+$trad(1,i3GEOF.upload.dicionario)+
 i3GEOF.upload.dicionario = {
 		1: [{
-			pt:"pasta no servidor onde os dados<br>ser&atilde;o armazenados (opcional)",
+			pt:"pasta no servidor onde os dados<br>ser&atilde;o armazenados (obrigat&oacute;rio)",
 			en:"",
 			es:"",
 			it:""

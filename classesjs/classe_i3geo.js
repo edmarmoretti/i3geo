@@ -230,7 +230,7 @@ var i3GEO = {
 	Essa vari&aacute;vel &eacute; um contador utilizado para indicar quantos processos est&atilde;o ativos e que
 	ir&atilde;o executar o redesenho do mapa. O mapa s&oacute; &eacute; atualizado quando o contador for menor que 1.
 	Esse contador &eacute; utilizado no m&eacute;todo i3GEO.atualiza
-	O contador &eacute; necess&aacute;rio para evitar chamadas desnecess&aacute;rias a� fun&ccedil;&atilde;o de redesenho do mapa.
+	O contador &eacute; necess&aacute;rio para evitar chamadas desnecess&aacute;rias a fun&ccedil;&atilde;o de redesenho do mapa.
 
 	Tipo:
 	{string}

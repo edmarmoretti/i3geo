@@ -40,7 +40,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		$dirmap = $dirDestino;
 		include_once(dirname(__FILE__)."/../../admin/php/login.php");
 		if(verificaOperacaoSessao("admin/php/editortexto") == false){
-			echo "Vc nao pode realizar salvar os dados no servidor em uma pasta espec&iacute;fica";exit;
+			echo "Vc nao pode salvar os dados no servidor em uma pasta espec&iacute;fica";exit;
 		}
 		if(!file_exists($dirmap))
 		{echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor";paraAguarde();exit;}
@@ -60,7 +60,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shp");
 	if($status != 1)
-	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP. Pode ser uma limita&ccedil;&atilde;o quanto ao tamanho do arquivo.";paraAguarde();exit;}
+	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP. Pode ser uma limita&ccedil;&atilde;o quanto ao tamanho do arquivo ou permiss&atilde;o de escrita na pasta indicada.";paraAguarde();exit;}
 	$Arquivo = $_FILES['i3GEOuploadshx']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shx");
 	if($status != 1)
