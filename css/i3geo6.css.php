@@ -1,4 +1,10 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.i3GeoMascaraCoord {
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.subbloco{
+background-color: rgb(248,248,248);
+width: 90%;
+padding: 5px;
+margin: 7px;
+}
+.i3GeoMascaraCoord {
 width: 100%;
 }
 .i3GeoMascaraCoord td {

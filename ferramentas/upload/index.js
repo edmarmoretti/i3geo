@@ -104,16 +104,21 @@ i3GEOF.upload = {
 	*/
 	html:function(){
 		var ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">' +
+		'<fieldset class=subbloco >' +
 		'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>';
+		'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'</fieldset>';
 		if(i3GEO.parametros.editor === "sim"){
-			ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.upload.dicionario)+':<br>' +
+			ins += '<fieldset class=subbloco >' +
+			'<p class="paragrafo" >'+$trad(1,i3GEOF.upload.dicionario)+':<br>' +
 			'<input class=digitar type="text" size=45 name="dirDestino" id="dirDestino" style="top:0px;left:0px;cursor:pointer;">' +
 			"&nbsp;<img onclick='i3GEO.util.navegadorDir(\"dirDestino\",false,false,false,true);' src='"+i3GEO.configura.locaplic+"/imagens/ic_zoom.png' style='cursor:pointer;position :relative;top:2px'/></p>" +
-			'<p class="paragrafo" ><input type=checkbox name=i3GEOuploadCriaMapfile id=i3GEOuploadCriaMapfile />&nbsp;'+$trad(10,i3GEOF.upload.dicionario);
+			'<p class="paragrafo" ><input type=checkbox name=i3GEOuploadCriaMapfile id=i3GEOuploadCriaMapfile />&nbsp;'+$trad(10,i3GEOF.upload.dicionario) +
+			'</fieldset>';
 		}
-		ins += '<p class="paragrafo" >'+$trad(2,i3GEOF.upload.dicionario)+': ' +
+		ins += '<fieldset class=subbloco >' +
+		'<p class="paragrafo" >'+$trad(2,i3GEOF.upload.dicionario)+': ' +
 		'	<select id=tipo name=tipo >' +
 		'	<option value="">'+$trad(3,i3GEOF.upload.dicionario)+'</option>' +
 		'	<option value="1">'+$trad(4,i3GEOF.upload.dicionario)+'</option>' +
@@ -123,12 +128,16 @@ i3GEOF.upload = {
 		'</p>' +
 		'<p class=paragrafo >'+$trad(7,i3GEOF.upload.dicionario)+':</p>' +
 		'<div id=i3GEOuploadListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
-		'<br><p class="paragrafo" ><input id=i3GEOuploadbotao1 type="button" value="'+$trad(8,i3GEOF.upload.dicionario)+'" size=12 name="submit">' +
+		'</fieldset>' +
+		'<fieldset class=subbloco >' +
+		'<p class="paragrafo" ><input id=i3GEOuploadbotao1 type="button" value="'+$trad(8,i3GEOF.upload.dicionario)+'" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
 		'</form>' +
+		
 		"<p class='paragrafo' style=color:red >"+$trad(9,i3GEOF.upload.dicionario)+"</p>" +
-		'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>';
+		'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>' +
+		'</fieldset>';
 		return ins;
 	},
 	/*
@@ -144,7 +153,7 @@ i3GEOF.upload = {
 		};
 		titulo = $trad("a2")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"355px",
+			"400px",
 			"470px",
 			"",
 			"",
