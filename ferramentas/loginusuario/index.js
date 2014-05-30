@@ -136,7 +136,7 @@ i3GEOF.loginusuario = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.loginusuario");
 		};
-		titulo = "<img style='position:relative;top:5px;' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/dialog-password.png' >&nbsp;Login &nbsp;&nbsp;&nbsp;";
+		titulo = "<img style='position:relative;left:0px;top:5px;' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/dialog-password.png' >&nbsp;Login &nbsp;&nbsp;&nbsp;";
 		janela = i3GEO.janela.cria(
 			"270px",
 			"",

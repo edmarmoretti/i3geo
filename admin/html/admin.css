@@ -4,6 +4,14 @@
     padding: 5px;
     margin: 7px;
 }
+.i3GeoAguardeJanela{
+	height: 1px;
+	left: 0;
+	position: absolute;
+	top: 29px;
+	width: 100%;
+	z-index: 102;
+}
 .letras{
 	font-size: 1em;
 }

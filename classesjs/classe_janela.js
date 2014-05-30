@@ -276,7 +276,7 @@ i3GEO.janela = {
 		wlargurA = parseInt(wlargura,10)+temp+"px";
 		ins = '<div id="'+id+'_cabecalho" class="'+classe+'" >';
 		if(i3GEO.configura !== undefined)
-		{ins += "<img id='"+id+"_imagemCabecalho' style='z-index:102;position:absolute;left:3px;top:6px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";}
+		{ins += "<img id='"+id+"_imagemCabecalho' class='i3GeoAguardeJanela' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde2.gif\' />";}
 		ins += "<span style='font-size:10px;'>"+texto+"</span>";
 		if(funcaoMinimiza)
 		{ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza'></div>";}
