@@ -76,7 +76,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	$colunasTemp = $layer->getItems();
 	$colunas = array();
 	foreach($colunasTemp as $c){
-		//abaixo gid e forçado a entrar
+		//abaixo gid e forcado a entrar
 		if(!is_numeric($c) && strtolower($c) != "gid"){
 			$colunas[] = $c;
 		}
@@ -182,6 +182,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	ob_flush();
 	flush();
 	sleep(1);
+	$srid = 4326;
 	for ($i=0; $i<$numshapes;$i++){
 		$s = $layer->getShape(new resultObj($i));
 		$vs = array();
@@ -212,9 +213,11 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 		}
 		if(($_POST["insrid"] == $_POST["outsrid"]) || $_POST["outsrid"] == ""){
 			$vs[] = "st_geomfromtext('".$s->toWkt()."','".$_POST["insrid"]."')";
+			$srid = $_POST["insrid"];
 		}
 		else{
 			$vs[] = "st_transform(st_geomfromtext('".$s->toWkt()."','".$_POST["insrid"]."'),'".$_POST["outsrid"]."')";
+			$srid = $_POST["outsrid"];
 		}
 		$str = implode(",",$vs);
 		$str = str_replace("nulo",'null',$str);
@@ -228,7 +231,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	ob_flush();
 	flush();
 	sleep(1);
-	if($_POST["incluiserialshp"] == "on"){
+	if($_POST["incluiserialshp"] == "on" || $_POST["i3GEOuploadCriaMapfile"] == "on"){
 		$linhas[] = "alter table ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." add gid serial CONSTRAINT ".$_POST["tabelaDestino"]."_gid_pkey PRIMARY KEY";
 		echo "<br>alter table ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." add gid serial CONSTRAINT ".$_POST["tabelaDestino"]."_gid_pkey PRIMARY KEY";
 	}
@@ -257,6 +260,37 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	echo "<br>Registros na tabela final: ". count($r);
 	echo "<br>Diferen&ccedil;as podem ocorrer em fun&ccedil;&atilde;o de caracteres acentuados n&atilde;o suportados pelo banco de dados";
 	echo "<br><b>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
+	if($_POST["i3GEOuploadCriaMapfile"] == "on"){
+		//verifica se o usuario marcou a opcao de cria mapfile
+		//nesse caso o aplicativo de upload esta sendo executado de dentro do sistema de administracao, e o mapfile devera
+		//ser criado e registrado no sistema
+		$nome = $_POST["tabelaDestino"];
+		$codigo = $_POST["tabelaDestino"];
+		$it = $_POST["tabelaDestino"];
+		$en = $_POST["tabelaDestino"];
+		$es = $_POST["tabelaDestino"];
+		//descobre o tipo de geometria
+		$tipo = "select ST_Dimension(the_geom) as d from ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." limit 1";
+		$q = $dbh->query($tipo,PDO::FETCH_ASSOC);
+		$tipo = $q->fetchAll();
+		$tipo = $tipo[0]["d"];
+		$tipoLayer = "polygon";
+		if ($tipo == 0){
+			$tipoLayer = "point";
+		}
+		if ($tipo == 1){
+			$tipoLayer = "line";
+		}
+		$funcao = "CRIARNOVOMAP";
+		$output = "retorno";
+		$data = "the_geom from ($sql) as foo using unique gid using srid=$srid ";
+		$conexao = 'dbname='.$conexao["bancodedados"].' user='.$conexao["usuario"].' password='.$conexao["senha"].' host='.$conexao["host"].' port='.$conexao["porta"];
+		include_once("editormapfile.php");
+		echo "<b><p class='paragrafo' >Criado o mapfile!!!<br>";
+		echo "Para editar clique: <a href='../../admin/html/editormapfile.html' target=_blank >".$nome."</a>";
+		echo "<script>window.scrollTo(0,10000);i3GEO.util.insereCookie('I3GEOletraAdmin','".$nome."');</script>";
+	}
+	echo "<br><br>Fim";
 }
 else{
 	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";

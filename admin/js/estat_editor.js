@@ -521,6 +521,7 @@ i3GEOadmin.editor = {
 			);
 			i3GEO.util.comboEpsg("comboInSrid","selInSrid","i3GEOadmin.editor.uploadshp.mudaComboInSrid",4326);
 			i3GEO.util.comboEpsg("comboOutSrid","selOutSrid","i3GEOadmin.editor.uploadshp.mudaComboOutSrid",4326);
+			window.location.hash="i3GEOuploadshp";
 		},
 		mudaComboInSrid: function(obj){
 			$i("insrid").value = obj.value;
@@ -529,14 +530,16 @@ i3GEOadmin.editor = {
 			$i("outsrid").value = obj.value;
 		},
 		formulario: function(){
-			var ins = '<fieldset class=subbloco >' +
+			var ins = '' + 
 			'<form id=i3GEOuploadf target="i3GEOuploadiframe" action="../php/metaestat_uploadshp_submit.php" method="post" ENCTYPE="multipart/form-data">' +
+			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
-			'<p class="paragrafo" >Nome da tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br><input class=digitar type="text" size=20 id="tabelaDestino" name="tabelaDestino" style="top:0px;left:0px;cursor:pointer;"> ' +
+			'<p class="paragrafo" >Nome da tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br>' +
+			'<input class=digitar type="text" size=20 id="tabelaDestino" name="tabelaDestino" style="top:0px;left:0px;cursor:pointer;"> ' +
 			'Ou escolha da lista: ' +
 			'<select onchange="javascript:$i(\'tabelaDestino\').value = this.value;">' +
 			i3GEOadmin.editor.tabela.optionsTabela +
@@ -558,17 +561,18 @@ i3GEOadmin.editor = {
 			'<p><div id=selOutSrid ></div><input class=digitar type="text" value="" size=20 id="outsrid" name="outsrid" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
+			'<p class="paragrafo" ><input type=checkbox name=i3GEOuploadCriaMapfile id=i3GEOuploadCriaMapfile style="cursor:pointer;position:relative;top:2px;" />&nbsp;Marque para criar o arquivo de configura&ccedil;&atilde;o (mapfile) e visualizar os dados no mapa interativo (voc&ecirc; poder&aacute; editar esse arquivo posteriormente no editor de mapfiles)' +
 			'<p class="paragrafo" ><input type="checkbox" id="incluiserialshp" name="incluiserialshp" style="cursor:pointer;position:relative;top:2px;">&nbsp;Inclui uma coluna gid do tipo serial e chave prim&aacute;ria com c&oacute;digo &uacute;nico</p>' +
 			'<p class="paragrafo" ><input id=i3GEOuploadsubmit type="button" value="Enviar" size=12 />' +
 			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
 			'<input type="hidden" id="i3GEOuploadcodigoconexao" name="i3GEOuploadcodigoconexao" value="">' +
 			'<input type="hidden" id="i3GEOuploadesquema" name="i3GEOuploadesquema" value="">' +
-			'</form>' +
 			"<p class='paragrafo' style=color:red >N&atilde;o utilize '_' no nome do arquivo. Apenas letras e n&uacute;meros s&atilde;o aceitos!!!</p>" +
 			'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="400px"></iframe>' +
 			'<p class="paragrafo" >Ap&oacute;s terminar o processo, atualize essa p&aacute;gina para que a nova tabela criada apare&ccedil;a nas listas de sele&ccedil;&atilde;o.</p>' +
 			'<p class="paragrafo" >Utilize o <a href="./estat_tipo_regiao.html" >cadastro de regi&otilde;es</a> para registrar a tabela criada como uma nova unidade geogr&aacute;fica que poder&aacute; ser escolhida no processo de cria&ccedil;&atilde;o de vari&aacute;veis.</p>' +
-			'</fieldset>';
+			'</fieldset>' +
+			'</form>';
 			return ins;
 		},
 		submit: function(){

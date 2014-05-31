@@ -231,7 +231,7 @@ switch (strtoupper($funcao))
 		/*
 		Valor: LIMPARCACHEMAPFILE
 
-		Apaga o diret�rio contendo o cache de um tema (mapfile)
+		Apaga o diretorio contendo o cache de um tema (mapfile)
 
 		Parametros:
 
@@ -268,7 +268,7 @@ switch (strtoupper($funcao))
 
 		Exclui um mapfile.
 
-		S� &eacute; poss&iacute;vel excluir se o mapfile n&atilde;o estiver vinculado a nenhum tema ou n� da &aacute;rvore de temas
+		So &eacute; poss&iacute;vel excluir se o mapfile n&atilde;o estiver vinculado a nenhum tema ou no da &aacute;rvore de temas
 
 		Parametros:
 
@@ -1183,9 +1183,8 @@ function sobeDesce()
 	return "ok";
 }
 //essa funcao e usada tambem por i3geo/ferramentas/upload/upload.php
-function criarNovoMap()
-{
-	global $nome,$codigo,$locaplic,$it,$en,$es,$esquemaadmin,$metaestat,$tipoLayer,$data;
+function criarNovoMap(){
+	global $nome,$codigo,$locaplic,$it,$en,$es,$esquemaadmin,$metaestat,$tipoLayer,$data,$conexao;
 	$arq = $locaplic."/temas/".$codigo.".map";
 	if(!file_exists($arq)){
 		if(empty($tipoLayer)){
@@ -1200,6 +1199,10 @@ function criarNovoMap()
 		if(!empty($metaestat) && $metaestat == "SIM"){
 			$dados[] = '	CONNECTIONTYPE POSTGIS';
 			$tipoLayer = "polygon";
+		}
+		elseif(!empty($conexao)){
+			$dados[] = '	CONNECTIONTYPE POSTGIS';
+			$dados[] = '	CONNECTION "'.$conexao.'"';
 		}
 		$dados[] = "	TYPE ".$tipoLayer;
 		if(empty($data)){
@@ -1237,7 +1240,8 @@ function criarNovoMap()
 		{
 			fwrite($fp,$dado."\n");
 		}
-		require_once("conexao.php");
+		
+		include("conexao.php");
 		if($convUTF){
 			$nome = utf8_encode($nome);
 			$desc = utf8_encode($desc);
