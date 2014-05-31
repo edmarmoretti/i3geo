@@ -114,8 +114,8 @@ i3GEOF.uploaddbf = {
 		'</select></p> '+
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" >'+$trad(2,i3GEOF.uploaddbf.dicionario)+': <br><input class=digitar type="text" size=32 name="i3GEOuploaddbfnomex" style="top:0px;left:0px"></p>' +
-		'<p class="paragrafo" >'+$trad(3,i3GEOF.uploaddbf.dicionario)+': <br><input class=digitar type="text" size=32 name="i3GEOuploaddbfnomey" style="top:0px;left:0px"></p>' +
+		'<p class="paragrafo" >'+$trad(2,i3GEOF.uploaddbf.dicionario)+': <br><input type="text" size=32 name="i3GEOuploaddbfnomex" style="top:0px;left:0px"></p>' +
+		'<p class="paragrafo" >'+$trad(3,i3GEOF.uploaddbf.dicionario)+': <br><input type="text" size=32 name="i3GEOuploaddbfnomey" style="top:0px;left:0px"></p>' +
 		'<p class="paragrafo" >'+$trad(4,i3GEOF.uploaddbf.dicionario)+': <br><input type="file" size=10 name="i3GEOuploaddbffile" style="width:270px;top:0px;left:0px;cursor:pointer;"></p>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +

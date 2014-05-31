@@ -163,10 +163,15 @@ i3GEOadmin.editor = {
 							"<p class=paragrafo >Crie uma tabela no banco contendo limites ou localidades que poder&aacute; ser utilizada para espacializar os dados estat&iacute;sticos existentes em outras tabelas<br>" +
 							"<input type=button value='Upload Shapefile' id='i3GEOadmin_botaoupload' /></p>" +
 							"<div id='i3GEOadmin_formupload'></div>" +
+							"</fieldset>" +
+							"<fieldset>" +
 							"<p class=paragrafo >Crie uma tabela nova a partir de um arquivo CSV. Utilize essa op&ccedil;&atilde;o para armazenar no banco os dados que ser&atilde;o relacionados &agrave;s tabelas contendo limites ou localidades. Se no CSV existirem colunas com as coordenadas, a tabela criada poder&aacute; armazenar a geometria possibilitando seu uso como localidades. </p>" +
 							"<input type=button value='Upload CSV' id='i3GEOadmin_botaouploadcsv' /></p>" +
 							"<div id='i3GEOadmin_formuploadcsv'></div>" +
-							"<p class=paragrafo >Crie uma tabela vazia no banco de dados, definindo o nome e os tipos de colunas<br><input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' /></p>" +
+							"</fieldset>" +
+							"<fieldset>" +
+							"<p class=paragrafo >Crie uma tabela vazia no banco de dados, definindo o nome e os tipos de colunas<br>" +
+							"<input type=button value='Criar uma nova tabela' id='i3GEOadmintabelaCriar' /></p>" +
 							"</fieldset>";
 
 							temp += "<fieldset>" +
@@ -524,29 +529,35 @@ i3GEOadmin.editor = {
 			$i("outsrid").value = obj.value;
 		},
 		formulario: function(){
-			var ins = '<fieldset><form id=i3GEOuploadf target="i3GEOuploadiframe" action="../php/metaestat_uploadshp_submit.php" method="post" ENCTYPE="multipart/form-data">' +
-			'<p class="paragrafo" >shp: <br><input class=digitar type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
-			'<p class="paragrafo" >shx: <br><input class=digitar type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
-			'<p class="paragrafo" >dbf: <br><input class=digitar type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			var ins = '<fieldset class=subbloco >' +
+			'<form id=i3GEOuploadf target="i3GEOuploadiframe" action="../php/metaestat_uploadshp_submit.php" method="post" ENCTYPE="multipart/form-data">' +
+			'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'</fieldset>' +
+			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" >Nome da tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br><input class=digitar type="text" size=20 id="tabelaDestino" name="tabelaDestino" style="top:0px;left:0px;cursor:pointer;"> ' +
 			'Ou escolha da lista: ' +
 			'<select onchange="javascript:$i(\'tabelaDestino\').value = this.value;">' +
 			i3GEOadmin.editor.tabela.optionsTabela +
 			'</select></p>' +
+			'</fieldset>' +
+			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
 			'<select id=i3GEOtipoOperacao name=tipoOperacao >' +
 			'<option value=criar >Criar a tabela nova e incluir registros do SHP</option>' +
 			'<option value=incluir >Adicionar novos registros</option>' +
 			'<option value=apagar >Apagar dados atuais e incluir do SHP</option>' +
 			'</select></p>' +
-			
+			'</fieldset>' +
+			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" >Assegure-se que o shapefile esteja na proje&ccedil;&atilde;o geogr&aacute;fica se voc&ecirc; for usar com o sistema de metadados estat&iacute;sticos.</p>' +
-			
 			'<p class="paragrafo" >C&oacute;digo da proje&ccedil;&atilde;o (SRID) do arquivo</p>' +
 			'<p><div id=selInSrid ></div><input class=digitar type="text" value="4326" size=20 id="insrid" name="insrid" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >Projetar o arquivo para (deixe em branco caso n&atilde;o deva ser feita a proje&ccedil;&atilde;o dos dados):</p>' +
 			'<p><div id=selOutSrid ></div><input class=digitar type="text" value="" size=20 id="outsrid" name="outsrid" style="top:0px;left:0px;cursor:pointer;"></p>' +
-
+			'</fieldset>' +
+			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" ><input type="checkbox" id="incluiserialshp" name="incluiserialshp" style="cursor:pointer;position:relative;top:2px;">&nbsp;Inclui uma coluna gid do tipo serial e chave prim&aacute;ria com c&oacute;digo &uacute;nico</p>' +
 			'<p class="paragrafo" ><input id=i3GEOuploadsubmit type="button" value="Enviar" size=12 />' +
 			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
@@ -596,13 +607,16 @@ i3GEOadmin.editor = {
 			);
 		},
 		formulario: function(){
-			var ins = '<fieldset><form id=i3GEOuploadcsvf target="i3GEOuploadcsviframe" action="../php/metaestat_uploadcsv_submit.php" method="post" ENCTYPE="multipart/form-data">' +
-			'<p class="paragrafo" >CSV (N&atilde;o utilize separador de milhar e utilize ponto como separador de casas decimais ou a importa&ccedil;&atilde;o poder&aacute; n&atilde;o ocorrer): <br><br><input class=digitar type="file" size=22 name="i3GEOuploadcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			var ins = '<fieldset class=subbloco >' +
+			'<form id=i3GEOuploadcsvf target="i3GEOuploadcsviframe" action="../php/metaestat_uploadcsv_submit.php" method="post" ENCTYPE="multipart/form-data">' +
+			'<p class="paragrafo" >CSV (N&atilde;o utilize separador de milhar e utilize ponto como separador de casas decimais ou a importa&ccedil;&atilde;o poder&aacute; n&atilde;o ocorrer): <br><br><input type="file" size=22 name="i3GEOuploadcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >Nome da nova tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br><input class=digitar type="text" size=20 id="tabelaDestinocsv" name="tabelaDestinocsv" style="top:0px;left:0px;cursor:pointer;">&nbsp;' +
 			'Ou escolha da lista: ' +
 			'<select onchange="javascript:$i(\'tabelaDestinocsv\').value = this.value;">' +
 			i3GEOadmin.editor.tabela.optionsTabela +
 			'</select></p>' +
+			'</fieldset>' +
+			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
 			'<select id=i3GEOtipoOperacaocsv name=tipoOperacao >' +
 			'<option value=criar >Criar a tabela nova e incluir registros do CSV</option>' +
@@ -611,6 +625,8 @@ i3GEOadmin.editor = {
 			'</select></p>' +
 			'<p class="paragrafo" ><input type="checkbox" id="incluiserialcsv" name="incluiserialcsv" style="cursor:pointer;position:relative;top:2px;">&nbsp;Inclui uma coluna gid do tipo serial e chave prim&aacute;ria com c&oacute;digo &uacute;nico</p>' +
 			'<p class="paragrafo" >Opcional (utilize sempre coordenadas em d&eacute;cimos de grau no CSV): <br><br>coluna que cont&eacute;m as latitudes (Y) <input class=digitar type="text" size=8 id="colunaycsv" name="colunaycsv" style="top:0px;left:0px;cursor:pointer;"> coluna que cont&eacute;m as longitudes (X) <input class=digitar type="text" size=8 id="colunaxcsv" name="colunaxcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'</fieldset>' +
+			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" ><input id=i3GEOuploadcsvsubmit type="button" value="Enviar" size=12 />' +
 			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
 			'<input type="hidden" id="i3GEOuploadcsvcodigoconexao" name="i3GEOuploadcsvcodigoconexao" value="">' +

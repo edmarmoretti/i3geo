@@ -1,8 +1,8 @@
 .subbloco{
 	background-color: rgb(248,248,248);
 	width: 95%;
-    padding: 5px;
-    margin: 7px;
+	padding: 5px;
+	margin: 7px;
 }
 .i3GeoAguardeJanela{
 	height: 1px;
@@ -74,6 +74,7 @@ h1 {
 input {
 	cursor: pointer;
 }
+
 
 .lista td {
 	border: 1px solid rgb(140, 140, 140);
