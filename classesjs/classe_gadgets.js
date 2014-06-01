@@ -263,7 +263,7 @@ i3GEO.gadgets = {
 				ins = "<table style='width:120px;'><tr><td>"+i;
 				temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
 				temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';
-				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
+				ins += "</td></tr></table>";
 				onde.innerHTML = ins;
 				$i("i3GEOescalanumForm").onsubmit = function(){
 					i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,document.getElementById("i3geo_escalanum").value);

@@ -137,9 +137,6 @@ border: 0px solid white;
 background-color: none;
 background: none;
 }
-input[type=file][value=""]{
-background: red;
-}
 select
 {box-shadow:1px 1px 3px 0 lightgray;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid rgb(230,230,230);text-align: left;cursor: pointer;}
 select option:hover {
