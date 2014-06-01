@@ -41,6 +41,12 @@ Classe: i3GEOF.identifica
 */
 i3GEOF.identifica = {
 	/*
+	Variavel: aguarde
+
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
+	*/
+	aguarde: "",
+	/*
 	Propriedade: mostraLinkGeohack
 
 	Mostra ou n&atilde;o o link para abrir o site GeoHack.
@@ -298,6 +304,7 @@ i3GEOF.identifica = {
 		}
 		i3GEOF.identifica.inicia(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy,divid,true,true);
 		$i("i3GEOF.identifica_corpo").style.backgroundColor = "white";
+		i3GEOF.identifica.aguarde = $i("i3GEOF.identifica_imagemCabecalho").style;
 		if(i3GEO.Interface.ATUAL !== "googleearth"){
 			temp = function(){
 				//i3GEO.barraDeBotoes.ativaBotoes();
@@ -566,7 +573,7 @@ i3GEOF.identifica = {
 
 	O resultado &eacute; inserido no div com id "listaSistemas".
 
-	Cada sistema consiste em uma URL para a qual ser&atilde;o passados os parâmetros x e y.
+	Cada sistema consiste em uma URL para a qual ser&atilde;o passados os parï¿½metros x e y.
 
 	*/
 	montaListaSistemas: function(retorno){
@@ -729,27 +736,28 @@ i3GEOF.identifica = {
 	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica3>
 	*/
 	mostraDadosTema: function(retorno){
-		var camada,idreg,idsalva,paramsalva,i,res="",ntemas,resultados,nres,cor,j,nitens,k,atualN = "todas",inicio=0,numResultados = 0,tip,link,textovalor;
+		var filtro,camada,idreg,idsalva,paramsalva,i,res="",ntemas,resultados,nres,cor,j,nitens,k,atualN = "todas",inicio=0,numResultados = 0,tip,link,textovalor;
 
-		if($i("i3GEOFidentificaNocorrencias"))
-		{atualN = $i("i3GEOFidentificaNocorrencias").value;}
+		if($i("i3GEOFidentificaNocorrencias")){
+			atualN = $i("i3GEOFidentificaNocorrencias").value;
+		}
 		$i("i3GEOF.identifica_corpo").scrollTop = 0;
-		if(retorno == undefined || retorno == "")
-		{$i("i3GEOidentificaocorrencia").innerHTML=$trad(14,i3GEOF.identifica.dicionario);return;}
+		if(retorno == undefined || retorno == ""){
+			$i("i3GEOidentificaocorrencia").innerHTML=$trad(14,i3GEOF.identifica.dicionario);
+			return;
+		}
 		i = $i("i3GEOmarcaIdentifica");
-		if(i)
-		{i.style.display = "block";}
-		if (retorno !== undefined)
-		{
+		if(i){
+			i.style.display = "block";
+		}
+		if (retorno !== undefined){
 			$i("i3GEOidentificaocorrencia").innerHTML="";
 			ntemas = retorno.length;
-			for(i=0;i<ntemas;i++)
-			{
+			for(i=0;i<ntemas;i++){
 				resultados = retorno[i].resultado;
 				res += "<div style='padding-top:6px;left:2px;text-align:left;width:100%;' ><b>"+retorno[i].nome+"</b></div>";
 				//encontrou algo
-				if(resultados[0] !== " ")
-				{
+				if(resultados[0] !== " "){
 					nres = resultados.length;
 					numResultados = nres;
 					cor = "RGB(250,250,250)";
@@ -757,8 +765,7 @@ i3GEOF.identifica = {
 						nres = atualN*1;
 						inicio = atualN*1 - 1;
 					}
-					for(j=inicio;j<nres;j++)
-					{
+					for(j=inicio;j<nres;j++){
 						nitens = resultados[j].length;
 						//pega o valor do item que e o id unico no sistema METAESTAT
 						idreg = "";
@@ -788,13 +795,20 @@ i3GEOF.identifica = {
 									"<input id='"+idsalva+"' type=text value='"+textovalor+"' class=digitar style='widh:210px' />";
 							}
 							if(resultados[j][k].tip && resultados[j][k].tip.toLowerCase() == "sim"){
-								tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/tips.png' title='Etiqueta ativa' />";
+								tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/tips.png' title='"+$trad(25,i3GEOF.identifica.dicionario)+"' />";
 							}
 							else{
 								tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' title='' />";
 							}
-							if(resultados[j][k].link === "")
-							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+tip+resultados[j][k].alias+":&nbsp;"+textovalor+"</div>";}
+							filtro = "onclick=i3GEOF.identifica.filtrar('"+retorno[i].tema+"','"+resultados[j][k].item+"','"+resultados[j][k].valor+"')";
+							filtro = "<img "+filtro+" style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-filter.png' title='"+$trad(26,i3GEOF.identifica.dicionario)+"' />";
+							if(resultados[j][k].link === ""){
+								res +=  "<div style='width:100%;text-align:left;background-color:"+
+									cor+"' >"+
+									tip+
+									filtro+
+									resultados[j][k].alias+":&nbsp;"+textovalor+"</div>";
+							}
 							else{
 								try{
 									link = eval(resultados[j][k].link);
@@ -828,6 +842,21 @@ i3GEOF.identifica = {
 			{res = i3GEOF.identifica.montaOpcoesIdentificaOcorrencia(atualN,numResultados) + res;}
 			$i("i3GEOidentificaocorrencia").innerHTML=res;
 		}
+	},
+	filtrar: function(tema,item,valor){
+		if(i3GEOF.identifica.aguarde.visibility === "visible")
+		{return;}
+		i3GEOF.identifica.aguarde.visibility = "visible";
+		var filtro = "(|["+item+"]| = |"+valor+"|)",
+			temp = function(retorno){
+				i3GEOF.identifica.aguarde.visibility = "hidden";	
+				i3GEO.Interface.atualizaTema(retorno,tema);
+			},
+			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro",
+			cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.set_transfer_mode('POST');
+		cp.call(p,"insereFiltro",temp,"tema="+tema,"filtro="+i3GEO.util.base64encode(filtro));
 	},
 	adicionaPontoRegiao: function(tema){
 		//

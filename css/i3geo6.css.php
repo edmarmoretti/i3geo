@@ -1109,6 +1109,13 @@ background-position: 0px -2073px;
 width: 18px;
 height: 18px;
 }
+.i3geo_filtro {
+background-image: URL('../imagens/visual/default/sprite.png');
+background-repeat: no-repeat;
+background-position: 0px -2073px;
+width: 18px;
+height: 18px;
+}
 #abreJanelaLegenda {
 background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;

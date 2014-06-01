@@ -143,5 +143,17 @@ i3GEOF.identifica.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		25: [{
+			pt:"Etiqueta est&aacute; ativa",
+			en:"",
+			es:"",
+			it:""
+		}],
+		26: [{
+			pt:"Filtrar por valor",
+			en:"",
+			es:"",
+			it:""
 		}]
 };
