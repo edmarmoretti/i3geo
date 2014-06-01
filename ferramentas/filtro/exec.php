@@ -30,9 +30,8 @@ Inclui um filtro no tema.
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		if(!isset($testa)){$testa="";}
-		{$retorno = $m->insereFiltro($filtro,$testa);}
-		if(strtolower($testa) != "sim")
-		{
+		{$retorno = $m->insereFiltro($filtro,$testa,"sim");}
+		if(strtolower($testa) != "sim"){
 			$m->salva();
 			$_SESSION["contadorsalva"]++;
 			redesenhaMapa();

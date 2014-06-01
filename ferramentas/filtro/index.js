@@ -418,7 +418,7 @@ i3GEOF.filtro = {
 					}
 				}
 			}
-			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
+			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode('POST');
@@ -436,7 +436,7 @@ i3GEOF.filtro = {
 					i3GEOF.filtro.aguarde.visibility = "hidden";
 				};
 			}
-			cp.call(p,"insereFiltro",temp,"tema="+i3GEO.temaAtivo,"filtro="+filtro,"testa="+testa);
+			cp.call(p,"insereFiltro",temp,"tema="+i3GEO.temaAtivo,"filtro="+i3GEO.util.base64encode(filtro),"testa="+testa);
 		}
 		catch(e){
 			i3GEO.janela.tempoMsg("Erro: "+e);

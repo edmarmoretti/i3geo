@@ -493,16 +493,18 @@ $filtro - string com o filtro. As aspas simples devem ser substitu&iacute;das po
 
 $testa - Testa o filtro e retorna uma imagem.
 */
-	function insereFiltro($filtro,$testa="")
+	function insereFiltro($filtro,$testa="",$base64="nao")
 	{
+		if($base64 == "sim"){
+			$filtro = base64_decode($filtro);
+		}
 		foreach($this->indices as $indice){
 			$layer = $this->mapa->getlayer($indice);
 			if(!$layer){return "erro";}
 			$layer->setmetadata("cache","");
 			$fil = $layer->getFilterString();
 			$filtro = str_replace("|","'",$filtro);
-			if ($layer->connectiontype == MS_POSTGIS)
-			{
+			if ($layer->connectiontype == MS_POSTGIS){
 				$filtro = str_replace("'[","",$filtro);
 				$filtro = str_replace("[","",$filtro);
 				$filtro = str_replace("]'","",$filtro);
@@ -510,37 +512,20 @@ $testa - Testa o filtro e retorna uma imagem.
 				$filtro = str_replace("("," ",$filtro);
 				$filtro = str_replace(")"," ",$filtro);
 			}
-			if ($filtro == "")
-			{$layer->setfilter($filtro);}
-			else
-			{
+			if ($filtro == ""){
+				$layer->setfilter($filtro);
+			}
+			else{
 				$layer->setfilter($filtro);
 				$v = versao();
 				//corrige bug do mapserver
-				if (($v["completa"] == "4.10.0") && ($layer->connectiontype == MS_POSTGIS))
-				{$layer->setfilter("\"".$filtro."\"");}
-			}
-			if ($testa == "")
-			{
-				$layer->setMetaData("cache","");
-				/*
-				$img = $this->mapa->prepareimage();
-				if ($this->layer->draw($img) == 0)
-				{
-					$this->layer->setMetaData("cache","");
-					return ("ok");
+				if (($v["completa"] == "4.10.0") && ($layer->connectiontype == MS_POSTGIS)){
+					$layer->setfilter("\"".$filtro."\"");
 				}
-				else
-				{return ("erro. Problemas com o filtro."." ".$filtro);}
-				*/
 			}
-			/*
-			else
-			{
-				$i = gravaImagemMapa($this->mapa);
-				return ($i["url"]);
+			if ($testa == ""){
+				$layer->setMetaData("cache","");
 			}
-			*/
 		}
 		if ($testa != ""){
 			$i = gravaImagemMapa($this->mapa);
