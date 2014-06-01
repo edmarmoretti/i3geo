@@ -171,19 +171,25 @@ $ids - lista de ids, separados por v&iacute;rgula, que identificam as classes no
 $nomes - lista com os novos nomes
 
 $exps - lista com as novas express&otilde;es
+
+$base64 sim|nao indica se as strings estao codificadas em base64
 */
-	function alteraclasses($ids,$nomes,$exps)
+	function alteraclasses($ids,$nomes,$exps,$base64="nao")
 	{
+		if($base64 == "sim"){
+			$ids = base64_decode($ids);
+			$nomes = base64_decode($nomes);
+			$exps = base64_decode($exps);
+		}
 		//prepara os arrays com os valores
 		$ids = explode(";",$ids);
-		$nomes = mb_convert_encoding($nomes,"ISO-8859-1","UTF-8");
+		//$nomes = mb_convert_encoding($nomes,"ISO-8859-1","UTF-8");
 		$nomes = explode(";",$nomes);
-		$exps = mb_convert_encoding($exps,"ISO-8859-1","UTF-8");
+		//$exps = mb_convert_encoding($exps,"ISO-8859-1","UTF-8");
 		$exps = explode(";",$exps);
 		//pega os layers existentes no array ids e armazena no array t
 		$c = count($ids);
-		for ($i=0; $i < $c; ++$i)
-		{
+		for ($i=0; $i < $c; ++$i){
 			$tx = explode("-",$ids[$i]);
 			$t[] = $tx[0];
 		}

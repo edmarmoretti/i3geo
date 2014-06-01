@@ -28,7 +28,7 @@ cria o objeto cpaint->
 
 carrega as fun&ccedil;&otilde;es de uso mais comuns->
 
-faz uma cópia de seguran&ccedil;a do map_file->
+faz uma cï¿½pia de seguran&ccedil;a do map_file->
 
 roda a fun&ccedil;&atilde;o desejada->
 
@@ -52,7 +52,7 @@ de que seja &uacute;til,
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -86,16 +86,16 @@ cp.call(p,"lente",ajaxabrelente)
 
 Vari&aacute;veis de Se&ccedil;&atilde;o:
 
-dir_tmp - diretório, no servidor, tempor&aacute;rio utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
+dir_tmp - diretï¿½rio, no servidor, tempor&aacute;rio utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
 locmapserv - localiza&ccedil;&atilde;o, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
 locaplic - localiza&ccedil;&atilde;o, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
 R_path - localiza&ccedil;&atilde;o, no servidor, do execut&aacute;vel do pacote R, exemplo: c:/ms4w/apache/htdocs/i3geo/pacotes/r/win/bin/R.exe
 imgurl - url das imagens geradas pelo mapa, exemplo: http://localhost/ms_tmp/imgTVHbdijFMk/
-tmpurl - url do diretório tempor&aacute;rio, exemplo: http://localhost/ms_tmp/
+tmpurl - url do diretï¿½rio tempor&aacute;rio, exemplo: http://localhost/ms_tmp/
 map_file - endere&ccedil;o, no servidor, do mapfile atual, exemplo: c:/ms4w/tmp/ms_tmp/TVHbdijFMk/TVHbdijFMk.map
 mapext - extens&atilde;o geogr&aacute;fica do mapa atual, exemplo: -76.5125927 -39.3925675209 -29.5851853 9.49014852081
 perfil - nome do perfil para controlar os temas que ser&atilde;o vis&iacute;veis na lista de temas.
-mapdir - localiza&ccedil;&atilde;o, no servidor, do diretório com o mapfile tempor&aacute;rio do mapa atual.
+mapdir - localiza&ccedil;&atilde;o, no servidor, do diretï¿½rio com o mapfile tempor&aacute;rio do mapa atual.
 imgdir - localiza&ccedil;&atilde;o, no servidor, das imagens tempor&aacute;rias do mapa atual.
 debug - (pode ser definido como "sim" indica se o erro_reporting deve ser definido como E_ALL
 contadorsalva - indica quantas vezes o mapa j&aacute; foi salvo. Permite que uma aplica&ccedil;&atilde;o verifique se o mapa foi alterado ou n&atilde;o.
@@ -175,7 +175,7 @@ if($funcao == "criaMapa"){
 	$d = "";
 	include_once(dirname(__FILE__)."/../ms_configura.php");
 	//
-	//&eacute; necess&aacute;rio mudar o diretório em fun&ccedil;&atilde;o dos includes que s&atilde;o feitos pelo ms_criamapa.php
+	//&eacute; necess&aacute;rio mudar o diretï¿½rio em fun&ccedil;&atilde;o dos includes que s&atilde;o feitos pelo ms_criamapa.php
 	//
 	//chdir($locaplic);
 	$interfaceTemp = $interface;
@@ -192,7 +192,7 @@ if($funcao == "criaMapa"){
 }
 if (!isset($map_file))
 {
-	//nesse caso &eacute; necess&aacute;rio criar o diretório tempor&aacute;rio e iniciar o mapa
+	//nesse caso &eacute; necess&aacute;rio criar o diretï¿½rio tempor&aacute;rio e iniciar o mapa
 	//$cp->set_data(array("erro"=>"linkquebrado"));
 	//$cp->return_data();
 	//cpjson(array("erro"=>"linkquebrado"));
@@ -375,7 +375,7 @@ Valor: LISTAGEOMETRIAS
 
 Gera a lista de geometrias dispon&iacute;veis para o mapa atual.
 
-As geometrias s&atilde;o armazenadas no diretório tempor&aacute;rio do usu&aacute;rio, utilizando um formato próprio do I3Geo.
+As geometrias s&atilde;o armazenadas no diretï¿½rio tempor&aacute;rio do usu&aacute;rio, utilizando um formato prï¿½prio do I3Geo.
 
 <Temas->listaGeometrias>
 */
@@ -390,7 +390,7 @@ Valor: CAPTURAGEOMETRIAS
 
 Gera um arquivo de geometrias, no formato I3Geo, para um tema, considerando os elementos selecionados.
 
-As geometrias s&atilde;o armazenadas no diretório tempor&aacute;rio do usu&aacute;rio, utilizando um formato próprio do I3Geo.
+As geometrias s&atilde;o armazenadas no diretï¿½rio tempor&aacute;rio do usu&aacute;rio, utilizando um formato prï¿½prio do I3Geo.
 
 <Temas->capturaGeometrias>
 */
@@ -419,7 +419,7 @@ Pega as mensagens do metadata 'mensagem'.
 /*
 Valor: REINICIAMAPA
 
-Reinicia um mapa restaurando a cópia de seguran&ccedil;a.
+Reinicia um mapa restaurando a cï¿½pia de seguran&ccedil;a.
 */
 	case "REINICIAMAPA":
 		$qyfile = str_replace(".map",".qy",$map_file);
@@ -586,7 +586,7 @@ Lista os temas existentes em um mapa.
 /*
 Valor: LISTATEMASLOCAIS
 
-Lista os temas existentes no diretório tempor&aacute;rio do mapa atual.
+Lista os temas existentes no diretï¿½rio tempor&aacute;rio do mapa atual.
 
 <Mapa->listaTemasLocais>
 */
@@ -640,7 +640,7 @@ Valor: LIGATEMASBEACON
 
 Liga e desliga temas no mapa atual partindo de uma chamada via tag IMG
 
-Retorna um código de erro para indicar o fim do retorno.
+Retorna um cï¿½digo de erro para indicar o fim do retorno.
 
 Veja no livro "Javascript de Alto Desempenho", de Nicholas C. Zakas pg. 162
 
@@ -829,9 +829,9 @@ Altera o valor definido no elemento DATA de um LAYER.
 /*
 Valor: REMOVERGEOMETRIAS
 
-Remove geometrias do diretório tempor&aacute;rio.
+Remove geometrias do diretï¿½rio tempor&aacute;rio.
 
-As geometrias s&atilde;o armazenadas no diretório tempor&aacute;rio do usu&aacute;rio, utilizando um formato próprio do I3Geo.
+As geometrias s&atilde;o armazenadas no diretï¿½rio tempor&aacute;rio do usu&aacute;rio, utilizando um formato prï¿½prio do I3Geo.
 
 <Temas->removerGeometrias>
 */
@@ -1115,44 +1115,51 @@ Altera uma classe de um tema, aplicando uma nova classifica&ccedil;&atilde;o ou 
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema,"",$ext);
-		if ($opcao == "aplicacoresrgb")
-		{
+		if ($opcao == "aplicacoresrgb"){
 			$cores = str_replace("rgb","",$cores);
 			$cores = str_replace(")","",$cores);
 			$cores = str_replace("(","",$cores);
 			$retorno = $m->aplicacoresrgb(explode(";",$cores));
 		}
-		if ($opcao == "sobeclasse")
-		{$retorno = $m->sobeclasse($idclasse);}
-		if ($opcao == "desceclasse")
-		{$retorno = $m->desceclasse($idclasse);}
-		if ($opcao == "alteracor")
-		{$retorno = $m->alteracor($idclasse,$cor);}
-		if ($opcao == "adicionaopacidade")
-		{$retorno = $m->adicionaopacidade();}
-		if ($opcao == "alterageometria")
-		{$retorno = $m->alterageometria($tipo);}
-		if ($opcao == "adicionaclasse")
-		{$retorno = $m->adicionaclasse();}
-		if ($opcao == "valorunico")
-		{$retorno = $m->valorunico($item,$ignorar);}
-		if ($opcao == "intervalosiguais")
-		{$retorno = $m->intervalosiguais($item,$nclasses,$ignorar);}
-		if ($opcao == "quantil")
-		{$retorno = $m->quantil($item,$nclasses,$ignorar);}
-		if ($opcao == "quebrasnaturais")
-		{$retorno = $m->quebrasnaturais($item,$nclasses,$ignorar);}
-		if ($opcao == "quartis")
-		{
+		if ($opcao == "sobeclasse"){
+			$retorno = $m->sobeclasse($idclasse);
+		}
+		if ($opcao == "desceclasse"){
+			$retorno = $m->desceclasse($idclasse);
+		}
+		if ($opcao == "alteracor"){
+			$retorno = $m->alteracor($idclasse,$cor);
+		}
+		if ($opcao == "adicionaopacidade"){
+			$retorno = $m->adicionaopacidade();
+		}
+		if ($opcao == "alterageometria"){
+			$retorno = $m->alterageometria($tipo);
+		}
+		if ($opcao == "adicionaclasse"){
+			$retorno = $m->adicionaclasse();
+		}
+		if ($opcao == "valorunico"){
+			$retorno = $m->valorunico($item,$ignorar);
+		}
+		if ($opcao == "intervalosiguais"){
+			$retorno = $m->intervalosiguais($item,$nclasses,$ignorar);
+		}
+		if ($opcao == "quantil"){
+			$retorno = $m->quantil($item,$nclasses,$ignorar);
+		}
+		if ($opcao == "quebrasnaturais"){
+			$retorno = $m->quebrasnaturais($item,$nclasses,$ignorar);
+		}
+		if ($opcao == "quartis"){
 			if(!isset($tipoLegenda))
 			{$tipoLegenda = "";}
 			$retorno = $m->quartis($item,$ignorar,$tipoLegenda);
 		}
-		if ($opcao == "alteraclasses")
-		{
+		if ($opcao == "alteraclasses"){
 			//esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
 			//error_reporting(0);
-			alteraclassesPost($ids,$nomes,$exps);
+			alteraclassesPost($ids,$nomes,$exps,$base64);
 			restauraCon($map_file,$postgis_mapa);
 			cpjson("");
 		}
@@ -1210,7 +1217,7 @@ Altera as cores das classes de um tema conforme uma cor inicial e uma final.
 /*
 Valor: INVERTESTATUSCLASSE
 
-Altera o status de desenho de uma classe, tornando-a vi´sivel ou n&atilde;o.
+Altera o status de desenho de uma classe, tornando-a viï¿½sivel ou n&atilde;o.
 
 <Alteraclasse->statusClasse>
 */
@@ -2114,7 +2121,7 @@ Calcula a &aacute;rea de um pixel da imagem.
 /*
 Valor: LISTAEPSG
 
-Pega os códigos de proje&ccedil;&atilde;o EPSG.
+Pega os cï¿½digos de proje&ccedil;&atilde;o EPSG.
 
 */
 	case "LISTAEPSG":
@@ -2125,7 +2132,7 @@ Valor: LISTADIRETORIOS
 
 Depreciado na V 5.0, use ferramentas/navegarquivos/exec.php
 
-Lista os diretórios de um diretório.
+Lista os diretï¿½rios de um diretï¿½rio.
 
 */
 	case "LISTADIRETORIOS":
@@ -2136,7 +2143,7 @@ Valor: LISTAARQUIVOS
 
 Depreciado na V 5.0, use ferramentas/navegarquivos/exec.php
 
-Lista os arquivos de um diretório.
+Lista os arquivos de um diretï¿½rio.
 */
 	case "LISTAARQUIVOS":
 		$retorno = listaArquivos($diretorio);
@@ -2231,11 +2238,10 @@ Altera as classes de um tema aplicando novos par&acirc;metros como nome e expres
 Include:
 <classe_alteraclasse.php>
 */
-function alteraclassesPost($ids,$nomes,$exps)
-{
+function alteraclassesPost($ids,$nomes,$exps,$base64="nao"){
 	global $map_file,$tema;
 	$m = new Alteraclasse($map_file,$tema);
-	$m->alteraclasses($ids,$nomes,$exps);
+	$m->alteraclasses($ids,$nomes,$exps,$base64);
 	$m->salva();
 	$_SESSION["contadorsalva"]++;
 }
