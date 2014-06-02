@@ -83,7 +83,22 @@ i3GEO.analise = {
 			 */
 			linhaDoTempo: function(){
 				if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.linhaDoTempo()");}
-				i3GEO.janela.cria("450px","350px",i3GEO.configura.locaplic+"/ferramentas/linhadotempo/index.php","","","Linha do tempo <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=88' >&nbsp;&nbsp;&nbsp;</a>");
+				i3GEO.janela.cria(
+						"450px",
+						"350px",
+						i3GEO.configura.locaplic+"/ferramentas/linhadotempo/index.php",
+						"",
+						"",
+						"Linha do tempo <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=88' >&nbsp;&nbsp;&nbsp;</a>",
+						"i3GEOF.linhaDoTempo",
+						false,
+						"hd",
+						"",
+						"",
+						"",
+						true,
+						i3GEO.configura.locaplic+"/imagens/oxygen/16x16/clock.png"
+				);
 				atualizaLinhaDoTempo = function(){
 					var doc = "", ifr = "";
 					try{

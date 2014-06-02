@@ -127,7 +127,10 @@ i3GEOF.buscainde = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/edit-find.png"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.buscainde_corpo").style.backgroundColor = "white";

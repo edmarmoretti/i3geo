@@ -150,7 +150,10 @@ i3GEOF.carregakml = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/application-x-smb-workgroup.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.carregakml.aguarde = $i("i3GEOF.carregakml_imagemCabecalho").style;

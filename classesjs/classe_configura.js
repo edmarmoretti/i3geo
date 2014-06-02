@@ -732,7 +732,10 @@ i3GEO.configura = {
 						false,
 						"hd",
 						"",
-						""
+						"",
+						"",
+						true,
+						i3GEO.configura.locaplic+"/imagens/oxygen/16x16/edit-find.png"
 					);
 					$i("janelaBuscaRapida_corpo").style.backgroundColor = "white";
 					i3GEO.gadgets.mostraBuscaRapida(janela[2].id);

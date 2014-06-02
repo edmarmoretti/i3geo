@@ -141,7 +141,10 @@ i3GEOF.opcoesTempo = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/clock.png"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.opcoesTempo_corpo").style.backgroundColor = "white";

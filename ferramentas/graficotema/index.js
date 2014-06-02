@@ -193,7 +193,10 @@ i3GEOF.graficoTema = {
 			titulo,
 			"i3GEOF.graficoTema",
 			true,
-			"hd"
+			"hd",
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-statistics.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.graficoTema.aguarde = $i("i3GEOF.graficoTema_imagemCabecalho").style;
@@ -240,7 +243,7 @@ i3GEOF.graficoTema = {
 	/*
 	Function: pegaItensMarcados
 
-	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
+	Recupera os itens que foram marcados e monta uma lista para enviar como parï¿½metro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
 		var listadeitens = [],

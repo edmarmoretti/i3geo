@@ -295,7 +295,10 @@ i3GEOF.identifica = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/telepathy-kde.png"
 		);
 		divid = janela[2].id;
 		if(x){

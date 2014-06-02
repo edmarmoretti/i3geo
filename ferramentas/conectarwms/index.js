@@ -210,7 +210,7 @@ function clickGuia3()
 /*
 Function: registraws
 
-Armazena em vari&aacute;veis locais os parâmetros do WMS escolhido e ativa a guia 3, mostrando a lista de camadas dispon&iacute;veis
+Armazena em vari&aacute;veis locais os parï¿½metros do WMS escolhido e ativa a guia 3, mostrando a lista de camadas dispon&iacute;veis
 
 Parametros:
 
@@ -295,6 +295,21 @@ s {string} - src do iframe
 */
 function abrejanelaIframe(){
 	var s = g_locaplic+"/admin/html/webservices.html?tipo=wms";
-	var janelaeditor = window.parent.i3GEO.janela.cria("1000","500",s,parseInt(Math.random()*100,10),10,s,"janela"+window.parent.i3GEO.util.randomRGB(),false);
+	var janelaeditor = window.parent.i3GEO.janela.cria(
+			"1000",
+			"500",
+			s,
+			parseInt(Math.random()*100,10),
+			10,
+			s,
+			"janela"+window.parent.i3GEO.util.randomRGB(),
+			false,
+			"hd",
+			"",
+			"",
+			"",
+			true,
+			window.parent.i3GEO.configura.locaplic+"/imagens/oxygen/16x16/application-x-smb-workgroup.png"
+		);
 	YAHOO.util.Event.addListener(janelaeditor[0].close, "click", iniciaListaWS,janelaeditor[0].panel,{id:janelaeditor[0].id},true);
 }

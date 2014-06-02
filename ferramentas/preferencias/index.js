@@ -591,7 +591,10 @@ i3GEOF.preferencias = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/application-javascript.png"
 		);
 		divid = janela[2].id;
 		var rodape = '' +

@@ -228,7 +228,10 @@ i3GEOF.vinde = {
 			false,
 			"hd",
 			"",
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/application-x-smb-workgroup.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.vinde.janela = janela[0];

@@ -196,7 +196,12 @@ i3GEOF.salvaMapa = {
 			titulo,
 			"i3GEOF.salvaMapa",
 			false,
-			"hd"
+			"hd",
+			"",
+			"",
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/document-save.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.salvaMapa.aguarde = $i("i3GEOF.salvaMapa_imagemCabecalho").style;

@@ -205,7 +205,12 @@ i3GEOF.filtro = {
 			titulo,
 			"i3GEOF.filtro",
 			true,
-			"hd"
+			"hd",
+			"",
+			"",
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-filter.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.filtro.aguarde = $i("i3GEOF.filtro_imagemCabecalho").style;

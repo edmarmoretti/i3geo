@@ -152,7 +152,10 @@ i3GEOF.download = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/download.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.download.aguarde = $i("i3GEOF.download_imagemCabecalho").style;

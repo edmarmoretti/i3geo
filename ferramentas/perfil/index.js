@@ -46,7 +46,7 @@ i3GEOF.perfil = {
 	/*
 	Variavel: pontos
 
-	Objeto com a lista de pontos iniciais enviadas como parâmetro na inicializa&ccedil;&atilde;o da ferramenta
+	Objeto com a lista de pontos iniciais enviadas como parï¿½metro na inicializa&ccedil;&atilde;o da ferramenta
 	*/
 	pontos: "",
 	/*
@@ -159,7 +159,10 @@ i3GEOF.perfil = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.perfil.aguarde = $i("i3GEOF.perfil_imagemCabecalho").style;
@@ -221,7 +224,7 @@ i3GEOF.perfil = {
 	/*
 	Function: iniciaGrafico
 
-	Inicializa o gr&aacute;fico de perfil definindo os parâmetros da ferramenta i3GEOF.graficointerativo
+	Inicializa o gr&aacute;fico de perfil definindo os parï¿½metros da ferramenta i3GEOF.graficointerativo
 	*/
 	iniciaGrafico: function(){
 		i3GEOF.graficointerativo1.tipo = "linha_1";

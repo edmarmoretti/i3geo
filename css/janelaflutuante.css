@@ -1,53 +1,78 @@
 .cabecalhoTemas {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 10em;
-    text-overflow: ellipsis;
-    text-align: left;
-    line-height: 8px;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 10em;
+	text-overflow: ellipsis;
+	text-align: left;
+	line-height: 9px;
+}
+
+.comboTemasCabecalho {
+	z-index: 100;
+	position: absolute;
+	left: 22px;
+	top: 3px;
+}
+
+.i3GeoIconeJanela {
+	position: absolute;
+	left: 2px;
+	top: 5px;
+}
+
+.i3GeoAguardeJanela {
+	height: 2px;
+	left: 0;
+	position: absolute;
+	top: 29px;
+	width: 100%;
+	z-index: 102;
 }
 
 .yui-panel-container .yui-resizepanel .bd {
-
-		overflow: auto;
-		background-color: #fff;
-
+	overflow: auto;
+	background-color: #fff;
 }
+
 .yui-panel-container.hide-scrollbars .yui-resizepanel .bd {
-		overflow: hidden;
-}
-.yui-panel-container.show-scrollbars .yui-resizepanel .bd {
-		overflow: auto;
-}
-.yui-panel-container.show-scrollbars .underlay {
-		overflow: visible;
+	overflow: hidden;
 }
 
-.bd div{
-	text-align:left;
+.yui-panel-container.show-scrollbars .yui-resizepanel .bd {
+	overflow: auto;
 }
-.bd p{
-	text-align:left;
+
+.yui-panel-container.show-scrollbars .underlay {
+	overflow: visible;
+}
+
+.bd div {
+	text-align: left;
+}
+
+.bd p {
+	text-align: left;
 }
 
 .yui-resizepanel .resizehandle {
-
-		position: absolute;
-		width: 10px;
-		height: 10px;
-		right: 0;
-		bottom: 0;
-		margin: 0;
-		padding: 0;
-		z-index: 3000;
-		background: url(../pacotes/yui290/build/container/img/corner_resize.gif) left bottom no-repeat;
-		cursor: se-resize;
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+	z-index: 3000;
+	background: url(../pacotes/yui290/build/container/img/corner_resize.gif)
+		left bottom no-repeat;
+	cursor: se-resize;
 }
 
-
-.yui-skin-sam .yui-panel .hd {
-	//background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+.yui-skin-sam .yui-panel .hd { //
+	background: transparent
+		url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x
+		scroll 0 -200px;
 	color: #000000;
 	font-size: 80%;
 	font-weight: bold;
@@ -57,7 +82,9 @@
 }
 
 .yui-skin-sam .yui-panel .hd1 {
-	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+	background: transparent
+		url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x
+		scroll 0 -200px;
 	color: #000000;
 	font-size: 80%;
 	font-weight: bold;
@@ -67,7 +94,9 @@
 }
 
 .yui-skin-sam .yui-panel .hd2 {
-	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+	background: transparent
+		url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x
+		scroll 0 -200px;
 	color: #000000;
 	font-size: 80%;
 	font-weight: bold;
@@ -79,7 +108,9 @@
 }
 
 .yui-skin-sam .container-close {
-	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
+	background: transparent
+		url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat
+		scroll 0 -300px;
 	cursor: pointer;
 	height: 15px;
 	position: absolute;
@@ -92,7 +123,9 @@
 }
 
 .yui-skin-sam .container-minimiza {
-	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
+	background: transparent
+		url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat
+		scroll 0 -450px;
 	cursor: pointer;
 	height: 15px;
 	position: absolute;
@@ -111,13 +144,14 @@
 }
 
 .yui-skin-sam .yui-simple-dialog .bd .yui-icon {
-	background: transparent url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
+	background: transparent
+		url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat
+		scroll 0 0;
 	float: left;
 	height: 16px;
 	margin-right: 10px;
 	width: 16px;
 }
-
 
 .yui-resize .yui-resize-handle {
 	position: absolute;
@@ -130,9 +164,10 @@
 	width: 5px;
 }
 
-.yui-skin-sam .yui-panel{
+.yui-skin-sam .yui-panel {
 	border: 0px;
 }
+
 .yui-skin-sam .yui-panel-container.shadow .underlay {
 	bottom: 0;
 	box-shadow: 0 0 8px 1px black;
@@ -143,41 +178,49 @@
 	top: 0;
 	background-color: white;
 }
+
 .yui-skin-sam .yui-panel-container {
 	padding: 0 1px;
 	border-radius: 5px 5px 5px 5px;
 	border: 1px solid white;
 }
+
 .yui-skin-sam .yui-panel .hd {
 	border: 0px;
-
 }
+
 .yui-skin-sam .yui-panel .bd {
 	border: 0px;
 	box-shadow: 0 0 0px 0px black;
 }
+
 .yui-skin-sam .yui-panel .ft {
 	border: 0px;
 }
+
 .yui-skin-sam .yui-panel .bd .yui-navset {
-		background: none;
-		z-index: 1;
-		border-bottom: 2px solid lightgray;
+	background: none;
+	z-index: 1;
+	border-bottom: 2px solid lightgray;
 }
-.yui-skin-sam .bd .yui-navset .yui-nav a, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-nav a em, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,.yui-skin-sam .bd .yui-button, .yui-skin-sam .bd .yui-button button, .yui-skin-sam .bd .yui-button a, .yui-skin-sam .bd .yui-button .first-child{
+
+.yui-skin-sam .bd .yui-navset .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-nav a em,.yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,.yui-skin-sam .bd .yui-button,.yui-skin-sam .bd .yui-button button,.yui-skin-sam .bd .yui-button a,.yui-skin-sam .bd .yui-button .first-child
+	{
 	border-color: lightgray;
 }
+
 .yui-skin-sam .yui-resize .yui-resize-handle-br {
-		right:0;
-		bottom:0;
-		height: 8px;
-		width: 8px;
-		position:absolute;
+	right: 0;
+	bottom: 0;
+	height: 8px;
+	width: 8px;
+	position: absolute;
 }
+
 .yui-skin-sam .yui-resize .yui-resize-handle-b {
-		right:0;
-		bottom:0;
-		height: 8px;
-		width: 8px;
-		position:absolute;
+	right: 0;
+	bottom: 0;
+	height: 8px;
+	width: 8px;
+	position: absolute;
 }

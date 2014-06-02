@@ -142,7 +142,10 @@ i3GEOF.salvamapfile = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/document-save.png"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.salvamapfile_corpo").style.backgroundColor = "white";

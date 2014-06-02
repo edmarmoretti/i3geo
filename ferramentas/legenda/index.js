@@ -489,7 +489,10 @@ i3GEOF.legenda = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/format-list-unordered.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.legenda.aguarde = $i("i3GEOF.legenda_imagemCabecalho").style;

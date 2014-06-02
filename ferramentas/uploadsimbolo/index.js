@@ -133,7 +133,10 @@ i3GEOF.uploadsimbolo = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/svn-commit.png"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.uploadsimbolo_corpo").style.backgroundColor = "white";

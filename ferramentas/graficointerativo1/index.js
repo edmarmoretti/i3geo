@@ -487,8 +487,22 @@ i3GEOF.graficointerativo1 = {
 				+ " <a class=ajuda_usuario target=_blank href='"
 				+ i3GEO.configura.locaplic
 				+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
-			janela = i3GEO.janela.cria("480px", "450px", "", "", "", titulo,
-					"i3GEOF.graficointerativo1", false, "hd", cabecalho, minimiza, mudaTamanhoGrafico);
+			janela = i3GEO.janela.cria(
+					"480px",
+					"450px", 
+					"", 
+					"", 
+					"", 
+					titulo,
+					"i3GEOF.graficointerativo1", 
+					false, 
+					"hd", 
+					cabecalho, 
+					minimiza, 
+					mudaTamanhoGrafico,
+					true,
+					i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-statistics.png"
+				);
 			divid = janela[2].id;
 			i3GEOF.graficointerativo1.aguarde = $i("i3GEOF.graficointerativo1_imagemCabecalho").style;
 			$i("i3GEOF.graficointerativo1_corpo").style.backgroundColor = "white";

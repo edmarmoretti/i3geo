@@ -151,7 +151,10 @@ i3GEOF.uploadgpx = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/svn-commit.png"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.uploadgpx_corpo").style.backgroundColor = "white";

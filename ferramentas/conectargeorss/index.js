@@ -160,6 +160,21 @@ s {string} - src do iframe
 */
 function abrejanelaIframe(){
 	var s = window.parent.i3GEO.configura.locaplic+"/admin/html/webservices.html?tipo=GEORSS";
-	var janelaeditor = window.parent.i3GEO.janela.cria("700","500",s,parseInt(Math.random()*100,10),10,s,"janela"+window.parent.i3GEO.util.randomRGB(),false);
+	var janelaeditor = window.parent.i3GEO.janela.cria(
+			"700",
+			"500",
+			s,
+			parseInt(Math.random()*100,10),
+			10,
+			s,
+			"janela"+window.parent.i3GEO.util.randomRGB(),
+			false,
+			"hd",
+			"",
+			"",
+			"",
+			true,
+			g_locaplic+"/imagens/oxygen/16x16/application-x-smb-workgroup.png"
+		);
 	YAHOO.util.Event.addListener(janelaeditor[0].close, "click", iniciaListaGEORSS,janelaeditor[0].panel,{id:janelaeditor[0].id},true);
 }

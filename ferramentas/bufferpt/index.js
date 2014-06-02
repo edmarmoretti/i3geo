@@ -158,7 +158,10 @@ i3GEOF.bufferpt = {
 			false,
 			"hd",
 			cabecalho,
-			""
+			"",
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.bufferpt.aguarde = $i("i3GEOF.bufferpt_imagemCabecalho").style;

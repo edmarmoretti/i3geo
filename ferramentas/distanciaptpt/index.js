@@ -2,10 +2,10 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Distância entre pontos
+Title: Distï¿½ncia entre pontos
 
-Calcula a distância entre os pontos de um tema e os pontos de outro tema criando uma nova camada.
-Al&eacute;m da distância, podem ser escolhidos itens dos temas de origem e de destino que ir&atilde;o ser mantidos na nova camada.
+Calcula a distï¿½ncia entre os pontos de um tema e os pontos de outro tema criando uma nova camada.
+Al&eacute;m da distï¿½ncia, podem ser escolhidos itens dos temas de origem e de destino que ir&atilde;o ser mantidos na nova camada.
 
 Veja:
 
@@ -134,7 +134,8 @@ i3GEOF.distanciaptpt = {
 			cabecalho,
 			minimiza,
 			"",
-			false
+			false,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
 		);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.distanciaptpt_rodape style=background-color:#F2F2F2; ></div>");
@@ -188,7 +189,7 @@ i3GEOF.distanciaptpt = {
 	/*
 	Function: calcula
 
-	Executa a opera&ccedil;&atilde;o de c&aacute;lculo das distâncias
+	Executa a opera&ccedil;&atilde;o de c&aacute;lculo das distï¿½ncias
 
 	Veja:
 

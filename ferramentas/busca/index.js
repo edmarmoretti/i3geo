@@ -178,7 +178,10 @@ i3GEOF.busca = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/edit-find.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.busca.aguarde = $i("i3GEOF.busca_imagemCabecalho").style;

@@ -141,7 +141,10 @@ i3GEOF.saiku = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/acessories-calculator.png"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.saiku_corpo").style.backgroundColor = "white";
