@@ -189,6 +189,12 @@ td.ygtvcell {
 	min-height: 1em;
 	padding: 0 10px;
 }
+.yui-skin-sam .yui-button {
+	border-color: #D3D3D3;
+}
+.yui-skin-sam .yui-button .first-child {
+	border-color: #D3D3D3;
+}
 
 .ygtvcontent {
 	font-size: 12px;

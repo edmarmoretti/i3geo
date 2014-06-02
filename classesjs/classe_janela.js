@@ -227,15 +227,20 @@ i3GEO.janela = {
 	funcaoAposRedim {function} - (opcional) funcao que ser&aacute; executada para alterar o tamanho da janela
 
 	dimensionavel {boolean} - (opcional) a janela pode ser redimensionada ou nao pelo usuario
+	 
+	icone {string}
 
 	Return:
 
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
-	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza, funcaoAposRedim, dimensionavel){
+	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza, funcaoAposRedim, dimensionavel,icone){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
 		if(!dimensionavel){
-			dimensionavel == true;
+			dimensionavel = true;
+		}
+		if(!icone){
+			icone = "";
 		}
 		if($i(id)){
 			janela = YAHOO.i3GEO.janela.manager.find(id);
@@ -244,45 +249,58 @@ i3GEO.janela = {
 			return;
 		}
 		var i,wlargurA,ins,novoel,wdocaiframe,temp,fix,underlay,ifr,janela;
-		if(navm && !chro)
-		{this.TRANSICAOSUAVE = false;}
+		if(navm && !chro){
+			this.TRANSICAOSUAVE = false;
+		}
 		//executa as fun&ccedil;&otilde;es default de antes de qualquer cria&ccedil;&atilde;o de janela
 		if(this.ANTESCRIA){
 			for(i=0;i<this.ANTESCRIA.length;i++)
 			{eval(this.ANTESCRIA[i]);}
 		}
 		//define os parametros default
-		if(!classe || classe == "")
-		{classe = "hd";}
-		if(!id || id === "")
-		{id = "wdoca";}
-		if(!modal || modal === "")
-		{modal = false;}
+		if(!classe || classe == ""){
+			classe = "hd";
+		}
+		if(!id || id === ""){
+			id = "wdoca";
+		}
+		if(!modal || modal === ""){
+			modal = false;
+		}
 		ifr = false;
 		if(i3GEO.Interface && i3GEO.Interface != undefined && i3GEO.Interface.ATUAL === "googleearth"){
 			i3GEO.janela.TRANSICAOSUAVE = false;
 			ifr = true;
 		}
 		fix = "contained";
-		if(nx === "" || nx === "center")
-		{fix = true;}
+		if(nx === "" || nx === "center"){
+			fix = true;
+		}
 		//no IE, com CSS3, a sombra n&atilde;o funciona
-		if(modal === true)
-		{underlay = "none";}
-		else
-		{underlay = "shadow";}
+		if(modal === true){
+			underlay = "none";
+		}
+		else{
+			underlay = "shadow";
+		}
 		//cria as marca&ccedil;&otilde;es html para a janela
 		temp = navm ? 0:2;
 		wlargurA = parseInt(wlargura,10)+temp+"px";
 		ins = '<div id="'+id+'_cabecalho" class="'+classe+'" >';
-		if(i3GEO.configura !== undefined)
-		{ins += "<img id='"+id+"_imagemCabecalho' class='i3GeoAguardeJanela' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde2.gif\' />";}
+		if(i3GEO.configura !== undefined){
+			ins += "<img id='"+id+"_imagemCabecalho' class='i3GeoAguardeJanela' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde2.gif\' />";
+		}
+		if(icone != ""){
+			ins += "<img class='i3GeoIconeJanela' src='"+icone+"' >";
+		}
 		ins += "<span style='font-size:10px;'>"+texto+"</span>";
-		if(funcaoMinimiza)
-		{ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza'></div>";}
+		if(funcaoMinimiza){
+			ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza'></div>";
+		}
 		ins += '</div><div id="'+id+'_corpo" class="bd" style="'+this.ESTILOBD+'">';
-		if(wsrc !== "")
-		{ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';}
+		if(wsrc !== ""){
+			ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';
+		}
 		ins += '</div>';
 		ins += '<div class="ft"></div>';
 		novoel = document.createElement("div");
@@ -360,10 +378,12 @@ i3GEO.janela = {
 		janela.bringToTop();
 
 		//ajusta estilos e outras caracter&iacute;sticas da janela criada
-		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface && i3GEO.Interface != undefined && i3GEO.Interface.ATUAL === "googleearth")
-		{janela.moveTo(0,0);}
-		if(ifr === true)
-		{janela.iframe.style.zIndex = 4;}
+		if(navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface && i3GEO.Interface != undefined && i3GEO.Interface.ATUAL === "googleearth"){
+			janela.moveTo(0,0);
+		}
+		if(ifr === true){
+			janela.iframe.style.zIndex = 4;
+		}
 
 		YAHOO.util.Event.addListener($i(id+'_corpo'), "click", YAHOO.util.Event.stopPropagation);
 		//finaliza

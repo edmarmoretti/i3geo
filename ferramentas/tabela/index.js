@@ -360,7 +360,10 @@ i3GEOF.tabela = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-form-table.png"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.tabela_corpo").style.backgroundColor = "white";
