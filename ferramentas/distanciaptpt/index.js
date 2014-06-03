@@ -151,9 +151,10 @@ i3GEOF.distanciaptpt = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>" + $trad(1,i3GEOF.distanciaptpt.dicionario);
-		ins += "<p class='paragrafo'>" + $trad(2,i3GEOF.distanciaptpt.dicionario);
-		ins += "<p class='paragrafo'>" + $trad(3,i3GEOF.distanciaptpt.dicionario);
+		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/exemplo.png' />" +
+		"<p class='paragrafo'>" + $trad(1,i3GEOF.distanciaptpt.dicionario) +
+		"<p class='paragrafo'>" + $trad(2,i3GEOF.distanciaptpt.dicionario) +
+		"<p class='paragrafo'>" + $trad(3,i3GEOF.distanciaptpt.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.distanciaptpt.t1()",ins,"i3GEOFgradeDePontost0","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
 	},
 	t1: function(){

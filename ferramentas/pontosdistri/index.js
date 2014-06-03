@@ -260,8 +260,9 @@ i3GEOF.pontosDistri = {
 
 	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 	*/
-	corj: function(obj)
-	{i3GEO.util.abreCor("",obj);},
+	corj: function(obj){
+		i3GEO.util.abreCor("",obj);
+	},
 	/*
 	Function: verCores
 
