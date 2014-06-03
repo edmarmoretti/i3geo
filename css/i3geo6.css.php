@@ -4,6 +4,15 @@ width: 90%;
 padding: 5px;
 margin: 7px;
 }
+.i3GeoExemploImg{
+margin:6px;
+cursor:text;
+border: 0px solid gray;
+box-shadow: 1px 1px 1px 1px #D3D3D3;
+border-radius: 5px;
+float: left;
+width: 40px;
+}
 .i3GeoMascaraCoord {
 width: 100%;
 }
@@ -207,6 +216,10 @@ width: 100%;
 color: red;
 font-size: 11px;
 }
+label {
+margin-left: 5px;
+margin-right: 2px;
+}
 caption {
 font-size: 8px;
 padding-top: 0px;
@@ -289,7 +302,7 @@ font-size: 10px;
 color: #2F4632;
 background-color: #FFFFFF;
 padding: 0;
-border: 1px solid gray;
+border: 1px solid rgb(180, 180, 180);
 text-align: center;
 cursor: text;
 }
@@ -532,16 +545,17 @@ box-shadow: 1px 1px 3px 0px lightgray;
 margin: 0px;
 color: #426252;
 background-color: white;
-border: 1px solid rgb(180, 180, 180);
 height: 17px;
 font-size: 12px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.digitar input {
+border: 1px solid rgb(180, 180, 180);
 }
 .digitarOver {
 margin: 0px;
 color: #426252;
 background-color: #F6F6F6;
-border: 1px solid rgb(250, 250, 250);
 font-size: 10px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 box-shadow: 1px 1px 3px 0px #3CA5EB;
