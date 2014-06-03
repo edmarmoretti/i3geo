@@ -152,9 +152,10 @@ i3GEOF.pontoEmPoligono = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>"+$trad(1,i3GEOF.pontoEmPoligono.dicionario);
-		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.pontoEmPoligono.dicionario);
-		ins += "<p class='paragrafo'>"+$trad(3,i3GEOF.pontoEmPoligono.dicionario);
+		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/exemplo.png' />" +
+		"<p class='paragrafo'>"+$trad(1,i3GEOF.pontoEmPoligono.dicionario) +
+		"<p class='paragrafo'>"+$trad(2,i3GEOF.pontoEmPoligono.dicionario) +
+		"<p class='paragrafo'>"+$trad(3,i3GEOF.pontoEmPoligono.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.pontoEmPoligono.t1()",ins,"i3GEOFgradeDePontost0","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 	},
 	t1: function(){

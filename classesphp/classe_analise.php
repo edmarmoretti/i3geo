@@ -1,8 +1,8 @@
 <?php
 /*
-Title: classe_analise.php
+ Title: classe_analise.php
 
-Gera an&aacute;lises espaciais, como buffer, calculo de centróides, etc.
+Gera an&aacute;lises espaciais, como buffer, calculo de centrï¿½ides, etc.
 
 Licenca:
 
@@ -22,8 +22,8 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
+	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -32,110 +32,114 @@ Arquivo:
 i3geo/classesphp/classe_analise.php
 */
 /*
-Classe: Analise
+ Classe: Analise
 
 */
 class Analise
 {
 	/*
-	Variavel: $mapa
+	 Variavel: $mapa
 
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
-	Variavel: $arquivo
+	 Variavel: $arquivo
 
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
-	Variavel: $layer
+	 Variavel: $layer
 
 	Objeto layer
 	*/
 	protected $layer;
 	/*
-	Variavel: $nome
+	 Variavel: $nome
 
 	Nome do layer
 	*/
 	protected $nome;
 	/*
-	Variavel: $diretorio
+	 Variavel: $diretorio
 
-	Diretório do arquivo map_file
+	Diretï¿½rio do arquivo map_file
 	*/
 	protected $diretorio;
 	/*
-	Variavel: $qyfile
+	 Variavel: $qyfile
 
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
-	Variavel: $v
+	 Variavel: $v
 
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 	/*
-	Variavel: $dbaseExiste
+	 Variavel: $dbaseExiste
 
 	Indica se a biblioteca dbase est&aacute; carregada
 	*/
 	protected $dbaseExiste;
-/*
-Function: __construct
+	/*
+	 Function: __construct
 
-Cria um objeto Analise
+	Cria um objeto Analise
 
-parameters:
+	parameters:
 
-$map_file - Endere&ccedil;o do mapfile no servidor.
+	$map_file - Endere&ccedil;o do mapfile no servidor.
 
-$tema - Nome do tema que ser&aacute; processado
+	$tema - Nome do tema que ser&aacute; processado
 
-$ext - Extens&atilde;o geogr&aacute;fica do mapa
-*/
+	$ext - Extens&atilde;o geogr&aacute;fica do mapa
+	*/
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
-			//error_reporting(0);
+		//error_reporting(0);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
-			include_once(dirname(__FILE__)."/funcoes_gerais.php");
+		include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		if(empty($locaplic)){
 			$locaplic = dirname(__FILE__)."/..";
 		}
-			$this->v = versao();
+		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->dbaseExiste = false;
 		if(function_exists("dbase_create"))
-		{$this->dbaseExiste = true;}
-			$this->locaplic = $locaplic;
-			$this->mapa = ms_newMapObj($map_file);
-			$this->arquivo = $map_file;
-			if($tema != "" && @$this->mapa->getlayerbyname($tema))
-		{$this->layer = $this->mapa->getlayerbyname($tema);}
-			$this->nome = $tema;
-			$this->diretorio = dirname($this->arquivo);
+		{
+			$this->dbaseExiste = true;
+		}
+		$this->locaplic = $locaplic;
+		$this->mapa = ms_newMapObj($map_file);
+		$this->arquivo = $map_file;
+		if($tema != "" && @$this->mapa->getlayerbyname($tema))
+		{
+			$this->layer = $this->mapa->getlayerbyname($tema);
+		}
+		$this->nome = $tema;
+		$this->diretorio = dirname($this->arquivo);
 		if($ext && $ext != ""){
 			$e = explode(" ",$ext);
 			$extatual = $this->mapa->extent;
 			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 		}
 	}
-/*
-Method: criaDefDb
+	/*
+	 Method: criaDefDb
 
-Cria um array contendo as defini&ccedil;&otilde;es das colunas que ser&atilde;o criadas em uma tabela DBF conforme as exig&ecirc;ncias de arquivos dbf
+	Cria um array contendo as defini&ccedil;&otilde;es das colunas que ser&atilde;o criadas em uma tabela DBF conforme as exig&ecirc;ncias de arquivos dbf
 
-parameters:
+	parameters:
 
-$itens - array com os nomes originais das colunas
+	$itens - array com os nomes originais das colunas
 
-return:
-{array}
-*/
+	return:
+	{array}
+	*/
 	function criaDefDb($itens,$unico=true){
 		$c = 0;
 		$def = array();
@@ -151,71 +155,73 @@ return:
 		}
 		return $def;
 	}
-/*
-Method: truncaS
+	/*
+	 Method: truncaS
 
-Trunca o comprimento de uma string em 255 caracteres
+	Trunca o comprimento de uma string em 255 caracteres
 
-parameters:
+	parameters:
 
-$s - string
+	$s - string
 
-return
-{string}
-*/
+	return
+	{string}
+	*/
 	function truncaS($s){
 		if(strlen($s) > 255){
 			$s = substr($s,0,255);
 		}
 		return $s;
 	}
-/*
-Method: salva
+	/*
+	 Method: salva
 
-Salva o mapfile atual
-*/
+	Salva o mapfile atual
+	*/
 	function salva()
 	{
-			if (connection_aborted()){exit();}
-			$this->mapa->save($this->arquivo);
+		if (connection_aborted()){
+			exit();
+		}
+		$this->mapa->save($this->arquivo);
 	}
 
-/*
-function: analiseDistriPt
+	/*
+	 function: analiseDistriPt
 
-Gera an&aacute;lise de distribui&ccedil;&atilde;o de pontos.
+	Gera an&aacute;lise de distribui&ccedil;&atilde;o de pontos.
 
-Executa script R para gerar a imagem.
+	Executa script R para gerar a imagem.
 
-parameters:
+	parameters:
 
-$locaplic - Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o I3Geo
+	$locaplic - Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o I3Geo
 
-$dir_tmp - Diretório tempor&aacute;rio do mapserver
+	$dir_tmp - Diretï¿½rio tempor&aacute;rio do mapserver
 
-$R_path - Onde fica o R
+	$R_path - Onde fica o R
 
-$numclasses - N&uacute;mero de classes que ser&atilde;o representadas
+	$numclasses - N&uacute;mero de classes que ser&atilde;o representadas
 
-$tipo - Tipo de an&aacute;lise.
+	$tipo - Tipo de an&aacute;lise.
 
-$cori - Cor inicial em rgb.
+	$cori - Cor inicial em rgb.
 
-$corf - Cor final em rgb.
+	$corf - Cor final em rgb.
 
-$tmpurl - Url com o nome da imagem final (apenas para relatorio)
+	$tmpurl - Url com o nome da imagem final (apenas para relatorio)
 
-$sigma - desvio padr&atilde;o para a op&ccedil;&atilde;o kernel
+	$sigma - desvio padr&atilde;o para a op&ccedil;&atilde;o kernel
 
-$limitepontos - "TRUE"|"FALSE" limita o resultado ao limite geogr&aacute;fico dos pontos se "TRUE" ou ao limite do mapa se "FALSE"
+	$limitepontos - "TRUE"|"FALSE" limita o resultado ao limite geogr&aacute;fico dos pontos se "TRUE" ou ao limite do mapa se "FALSE"
 
-$extendelimite - extende o limite dos pontos em um determinado percentual em rela&ccedil;&atilde;o a &aacute;rea final de abrang&ecirc;ncia
+	$extendelimite - extende o limite dos pontos em um determinado percentual em rela&ccedil;&atilde;o a &aacute;rea final de abrang&ecirc;ncia
 
-$item - item contendo os pesos utilizado na operacao de calculo de densidade (opcional)
+	$item - item contendo os pesos utilizado na operacao de calculo de densidade (opcional)
 
-Include:
-<class.palette.php>
-*/
+	Include:
+	<class.palette.php>
+	*/
 	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma="",$limitepontos="TRUE",$tema2="",$extendelimite=5,$item="")
 	{
 		set_time_limit(120);
@@ -236,30 +242,30 @@ Include:
 		switch ($tipo){
 			//cluster espacial
 			case "cluster":
-			$this->mapaCluster($nomearq,$nomearq2,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
-			return "ok";
-			break;
-			//delaunay e voronoi
+				$this->mapaCluster($nomearq,$nomearq2,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
+				return "ok";
+				break;
+				//delaunay e voronoi
 			case "deldir":
 				//error_reporting(0);
 				$this->mapaDeldir($nomearq,$dir_tmp,$R_path,$locaplic);
 				$this->deldirDir2shp($nomearq."dirsgs",$dir_tmp,$locaplic);
 				$this->deldirDel2shp($nomearq."delsgs",$dir_tmp,$locaplic);
-			return "ok";
-			break;
+				return "ok";
+				break;
 			case "kernel":
 				$this->mapaKernel($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic,$sigma);
-			break;
+				break;
 			case "densidade":
 				$this->mapaDensidade($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic,$dimz);
-			break;
+				break;
 			case "distancia":
 				$this->mapaDistancia($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
-			break;
+				break;
 			case "relatorio":
 				$r = $this->mapaRelatorioAnaliseDist($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
 				return($tmpurl.basename($this->diretorio)."/".basename($nomearq).'.htm');
-			break;
+				break;
 		}
 		//cria a imagem
 		$minmax = $this->criaImagemR($nomearq);
@@ -271,7 +277,9 @@ Include:
 		//cria os parametros das classes
 		$cls = $this->classesRasterI($minmax[0],$minmax[1],$numclasses,$myPalette->colorRGB);
 
-		if (count($cls) != $numclasses){return("erro.");}
+		if (count($cls) != $numclasses){
+			return("erro.");
+		}
 		//adiciona o novo tema
 		if (file_exists($nomearq.".png")){
 			$novolayer = criaLayer($this->mapa,MS_LAYER_RASTER,MS_DEFAULT,($tipo." (".$this->nome.")"),$metaClasse="SIM");
@@ -314,42 +322,49 @@ Include:
 					$layerAbaixo = $this->mapa->getlayer($i);
 					$tipo = $layerAbaixo->type;
 					if (($tipo != 2) && ($tipo != 3))
-					{$nummove++;}
+					{
+						$nummove++;
+					}
 				}
 				if ($nummove > 2)
 				{
 					for ($i=0;$i<=($nummove - 3);++$i)
-					{$this->mapa->movelayerup($indicel);}
+					{
+						$this->mapa->movelayerup($indicel);
+					}
 				}
 			}
 		}
 		else
-		{return("erro");}
+		{return("erro");
+		}
 		if(file_exists($this->qyfile))
-		{unlink($this->qyfile);}
+		{
+			unlink($this->qyfile);
+		}
 		return($novolayer->name);
 	}
-/*
-function: mapaRelatorioAnaliseDist
+	/*
+	 function: mapaRelatorioAnaliseDist
 
-Gera um relatório da an&aacute;lise de distribui&ccedil;&atilde;o de pontos.
+	Gera um relatï¿½rio da an&aacute;lise de distribui&ccedil;&atilde;o de pontos.
 
-Executa script R para gerar relatório .
+	Executa script R para gerar relatï¿½rio .
 
-parameters:
+	parameters:
 
-$arqpt - Prefixo dos arquivos em disco com os pontos.
+	$arqpt - Prefixo dos arquivos em disco com os pontos.
 
-$dimx - Range em x no formato R c(-54,-53).
+	$dimx - Range em x no formato R c(-54,-53).
 
-$dimy - Range em y no formato R c(-25,-23).
+	$dimy - Range em y no formato R c(-25,-23).
 
-$dir_tmp - Diretório tempor&aacute;rio do mapserver.
+	$dir_tmp - Diretï¿½rio tempor&aacute;rio do mapserver.
 
-$R_path - Onde fica o R.
+	$R_path - Onde fica o R.
 
-$locaplic - Onde fica o I3Geo.
-*/
+	$locaplic - Onde fica o I3Geo.
+	*/
 	function mapaRelatorioAnaliseDist($arqpt,$dimx,$dimy,$dir_tmp,$R_path,$locaplic)
 	{
 		set_time_limit(180);
@@ -361,7 +376,7 @@ $locaplic - Onde fica o I3Geo.
 		{
 			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
 			if(file_exists($locaplic.'/pacotes/rlib/win'))
-			$rcode[] = $lib;
+				$rcode[] = $lib;
 			$tipoimg = "png";
 		}
 		else
@@ -455,29 +470,29 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'close(zz)';
 		$r = $this->executaR($rcode,$dir_tmp,$R_path);
 	}
-/*
-function: mapaCluster
+	/*
+	 function: mapaCluster
 
-Gera um mapa de cluster.
+	Gera um mapa de cluster.
 
-Executa script R para gerar os dados.
+	Executa script R para gerar os dados.
 
-parameters:
+	parameters:
 
-$arqpt - Prefixo dos arquivos em disco com os pontos.
+	$arqpt - Prefixo dos arquivos em disco com os pontos.
 
-$dimx - Range em x no formato R c(-54,-53).
+	$dimx - Range em x no formato R c(-54,-53).
 
-$dimy - Range em y no formato R c(-25,-23).
+	$dimy - Range em y no formato R c(-25,-23).
 
-$dir_tmp - Diretório tempor&aacute;rio do mapserver.
+	$dir_tmp - Diretorio tempor&aacute;rio do mapserver.
 
-$R_path - Onde fica o R.
+	$R_path - Onde fica o R.
 
-$locaplic - Onde fica o I3Geo.
+	$locaplic - Onde fica o I3Geo.
 
-$sigma - Bandwidth for kernel smoother in "smooth" option.
-*/
+	$sigma - Bandwidth for kernel smoother in "smooth" option.
+	*/
 	function mapaCluster($arqpt,$arqpt2,$dimx,$dimy,$dir_tmp,$R_path,$locaplic)
 	{
 		$gfile_name = nomeRandomico(20);
@@ -493,7 +508,7 @@ $sigma - Bandwidth for kernel smoother in "smooth" option.
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
 			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
 			if(file_exists($locaplic.'/pacotes/rlib/win'))
-			$rcode[] = $lib;
+				$rcode[] = $lib;
 		}
 		else{
 			if(file_exists($locaplic."/pacotes/rlib/linux")){
@@ -508,28 +523,28 @@ $sigma - Bandwidth for kernel smoother in "smooth" option.
 		return "ok";
 	}
 
-/*
-function: mapaKernel
+	/*
+	 function: mapaKernel
 
-Gera um mapa de kernel.
+	Gera um mapa de kernel.
 
-Executa script R para gerar a imagem.
+	Executa script R para gerar a imagem.
 
-parameters:
-$arqpt - Prefixo dos arquivos em disco com os pontos.
+	parameters:
+	$arqpt - Prefixo dos arquivos em disco com os pontos.
 
-$dimx - Range em x no formato R c(-54,-53).
+	$dimx - Range em x no formato R c(-54,-53).
 
-$dimy - Range em y no formato R c(-25,-23).
+	$dimy - Range em y no formato R c(-25,-23).
 
-$dir_tmp - Diretório tempor&aacute;rio do mapserver.
+	$dir_tmp - Diretï¿½rio tempor&aacute;rio do mapserver.
 
-$R_path - Onde fica o R.
+	$R_path - Onde fica o R.
 
-$locaplic - Onde fica o I3Geo.
+	$locaplic - Onde fica o I3Geo.
 
-$sigma - Bandwidth for kernel smoother in "smooth" option.
-*/
+	$sigma - Bandwidth for kernel smoother in "smooth" option.
+	*/
 	function mapaKernel($arqpt,$dimx,$dimy,$dir_tmp,$R_path,$locaplic,$sigma=""){
 		$gfile_name = nomeRandomico(20);
 		$graf = "png";
@@ -538,7 +553,7 @@ $sigma - Bandwidth for kernel smoother in "smooth" option.
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
 			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
 			if(file_exists($locaplic.'/pacotes/rlib/win'))
-			$rcode[] = $lib;
+				$rcode[] = $lib;
 			$tipoimg = "png";
 		}
 		else{
@@ -551,9 +566,12 @@ $sigma - Bandwidth for kernel smoother in "smooth" option.
 		$rcode[] = 'pt <- ppp(dadosx, dadosy, '.$dimx.','.$dimy.')';
 		$rcode[] = 'img <- ksmooth.ppp(pt';
 		if (is_numeric($sigma))
-		{$rcode[] = ',sigma='.$sigma.')';}
+		{
+			$rcode[] = ',sigma='.$sigma.')';
+		}
 		else
-		{$rcode[] = ')';}
+		{$rcode[] = ')';
+		}
 		$rcode[] = 'cat(img$v,file="'.$arqpt.'img",fill=FALSE)';
 		$rcode[] = 'cat(img$xstep,file="'.$arqpt.'h",fill=TRUE)';
 		$rcode[] = 'cat(img$ystep,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
@@ -564,28 +582,28 @@ $sigma - Bandwidth for kernel smoother in "smooth" option.
 		$r = $this->executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
-/*
-function: mapaDensidade
+	/*
+	 function: mapaDensidade
 
-Gera um mapa de densidade de pontos.
+	Gera um mapa de densidade de pontos.
 
-Executa script R para gerar a imagem.
+	Executa script R para gerar a imagem.
 
-parameters:
-$arqpt - Prefixo dos arquivos em disco com os pontos.
+	parameters:
+	$arqpt - Prefixo dos arquivos em disco com os pontos.
 
-$dimx - Range em x no formato R c(-54,-53).
+	$dimx - Range em x no formato R c(-54,-53).
 
-$dimy - Range em y no formato R c(-25,-23).
+	$dimy - Range em y no formato R c(-25,-23).
 
-$dir_tmp - Diretório tempor&aacute;rio do mapserver.
+	$dir_tmp - Diretï¿½rio tempor&aacute;rio do mapserver.
 
-$R_path - Onde fica o R.
+	$R_path - Onde fica o R.
 
-$locaplic - Onde fica o I3Geo.
+	$locaplic - Onde fica o I3Geo.
 
-$dimz - arquivo opcional com os valores de z
-*/
+	$dimz - arquivo opcional com os valores de z
+	*/
 	function mapaDensidade($arqpt,$dimx,$dimy,$dir_tmp,$R_path,$locaplic,$dimz=""){
 		$gfile_name = nomeRandomico(20);
 		$graf = "png";
@@ -595,7 +613,7 @@ $dimz - arquivo opcional com os valores de z
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
 			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
 			if(file_exists($locaplic.'/pacotes/rlib/win'))
-			$rcode[] = $lib;
+				$rcode[] = $lib;
 			$tipoimg = "png";
 		}
 		else{
@@ -621,27 +639,27 @@ $dimz - arquivo opcional com os valores de z
 		$r = $this->executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
-/*
-function: mapaDistancia
+	/*
+	 function: mapaDistancia
 
-Gera um mapa de distancia de pontos.
+	Gera um mapa de distancia de pontos.
 
-Executa script R para gerar a imagem.
+	Executa script R para gerar a imagem.
 
-parameters:
+	parameters:
 
-$arqpt - Prefixo dos arquivos em disco com os pontos.
+	$arqpt - Prefixo dos arquivos em disco com os pontos.
 
-$dimx - Range em x no formato R c(-54,-53).
+	$dimx - Range em x no formato R c(-54,-53).
 
-$dimy - Range em y no formato R c(-25,-23).
+	$dimy - Range em y no formato R c(-25,-23).
 
-$dir_tmp - Diretório tempor&aacute;rio do mapserver.
+	$dir_tmp - Diretorio tempor&aacute;rio do mapserver.
 
-$R_path - Onde fica o R.
+	$R_path - Onde fica o R.
 
-$locaplic - Onde fica o I3Geo.
-*/
+	$locaplic - Onde fica o I3Geo.
+	*/
 	function mapaDistancia($arqpt,$dimx,$dimy,$dir_tmp,$R_path,$locaplic)
 	{
 		$gfile_name = nomeRandomico(20);
@@ -652,7 +670,7 @@ $locaplic - Onde fica o I3Geo.
 		{
 			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
 			if(file_exists($locaplic.'/pacotes/rlib/win'))
-			$rcode[] = $lib;
+				$rcode[] = $lib;
 			$tipoimg = "png";
 		}
 		else
@@ -675,25 +693,25 @@ $locaplic - Onde fica o I3Geo.
 		$r = $this->executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
-/*
-function: mapaDeldir
+	/*
+	 function: mapaDeldir
 
-Calcula a triangula&ccedil;&atilde;o de Delaunay e diagrama de Voronoi.
+	Calcula a triangula&ccedil;&atilde;o de Delaunay e diagrama de Voronoi.
 
-Para funcionar, &eacute; necess&aacute;rio a instala&ccedil;&atilde;o da biblioteca deldir do R.
+	Para funcionar, &eacute; necess&aacute;rio a instala&ccedil;&atilde;o da biblioteca deldir do R.
 
-http://cran.r-project.org/web/packages/deldir
+	http://cran.r-project.org/web/packages/deldir
 
-parameters:
+	parameters:
 
-$arqpt - Prefixo dos arquivos em disco com os pontos.
+	$arqpt - Prefixo dos arquivos em disco com os pontos.
 
-$dir_tmp - Diretório tempor&aacute;rio do mapserver.
+	$dir_tmp - Diretï¿½rio tempor&aacute;rio do mapserver.
 
-$R_path - Onde fica o R.
+	$R_path - Onde fica o R.
 
-$locaplic - Onde fica o I3Geo.
-*/
+	$locaplic - Onde fica o I3Geo.
+	*/
 	function mapaDeldir($arqpt,$dir_tmp,$R_path,$locaplic)
 	{
 		$gfile_name = nomeRandomico(20);
@@ -703,7 +721,7 @@ $locaplic - Onde fica o I3Geo.
 		{
 			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
 			if(file_exists($locaplic.'/pacotes/rlib/win'))
-			$rcode[] = $lib;
+				$rcode[] = $lib;
 		}
 		else
 		{
@@ -714,28 +732,28 @@ $locaplic - Onde fica o I3Geo.
 			}
 		}
 		$rcode[] = 'library(deldir)';
-		
+
 		$rcode[] = 'pt <- deldir(dadosx, dadosy)';
 		$rcode[] = 'write.csv(pt$delsgs,file="'.$arqpt.'delsgs")';
 		$rcode[] = 'write.csv(pt$dirsgs,file="'.$arqpt.'dirsgs")';
 		$r = $this->executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
-/*
-function deldirDel2shp
+	/*
+	 function deldirDel2shp
 
-L&ecirc; um arquivo CSV gerado pelo software R com os dados referentes à triangula&ccedil;&atilde;o de Delaunay.
+	L&ecirc; um arquivo CSV gerado pelo software R com os dados referentes a triangula&ccedil;&atilde;o de Delaunay.
 
-O arquivo CSV &eacute; lido e convertido em um shape file que &eacute; ent&atilde;o adicionado ao mapa.
+	O arquivo CSV &eacute; lido e convertido em um shape file que &eacute; ent&atilde;o adicionado ao mapa.
 
-Parametros:
+	Parametros:
 
-$nomearq - nome do arquivo CSV
+	$nomearq - nome do arquivo CSV
 
-$dir_tmp - diretório tempor&aacute;rio do Mapserver
+	$dir_tmp - diretorio tempor&aacute;rio do Mapserver
 
-$locaplic - diretório da aplica&ccedil;&atilde;o i3geo
-*/
+	$locaplic - diretorio da aplica&ccedil;&atilde;o i3geo
+	*/
 	function deldirDel2shp($nomearq,$dir_tmp,$locaplic)
 	{
 		if (file_exists($nomearq))
@@ -756,9 +774,12 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 			$def[] = array("ind1","N","5","0");
 			$def[] = array("ind2","N","5","0");
 			if($this->dbaseExiste == false)
-			{$db = xbase_create($nomeshp.".dbf", $def);}
+			{
+				$db = xbase_create($nomeshp.".dbf", $def);
+			}
 			else
-			{$db = dbase_create($nomeshp.".dbf", $def);}
+			{$db = dbase_create($nomeshp.".dbf", $def);
+			}
 			$dbname = $nomeshp.".dbf";
 			//le o arquivo linha a linha, pulando a primeira
 			//acrescenta os pontos no shape file formando as linhas
@@ -789,15 +810,15 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 					$novoshpf->addShape($ShapeObj);
 					$registro = array($i1,$i2,$i3,$i4,$i5,$i6);
 					if($this->dbaseExiste == false)
-					xbase_add_record($db,$registro);
+						xbase_add_record($db,$registro);
 					else
-					dbase_add_record($db,$registro);
+						dbase_add_record($db,$registro);
 				}
 			}
 			if($this->dbaseExiste == false)
-			xbase_close($db);
+				xbase_close($db);
 			else
-			dbase_close($db);
+				dbase_close($db);
 			fclose($abre);
 			//adiciona no mapa atual o novo tema
 			$novolayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,("Delaunay (".$nomefinal.")"),$metaClasse="SIM");
@@ -812,21 +833,21 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 			$cor->setrgb(255,50,0);
 		}
 	}
-/*
-function deldirDir2shp
+	/*
+	 function deldirDir2shp
 
-L&ecirc; um arquivo CSV gerado pelo software R com os dados referentes ao diagrama de Voronoi.
+	L&ecirc; um arquivo CSV gerado pelo software R com os dados referentes ao diagrama de Voronoi.
 
-O arquivo CSV &eacute; lido e convertido em um shape file que &eacute; ent&atilde;o adicionado ao mapa.
+	O arquivo CSV &eacute; lido e convertido em um shape file que &eacute; ent&atilde;o adicionado ao mapa.
 
-Parametros:
+	Parametros:
 
-$nomearq - nome do arquivo CSV
+	$nomearq - nome do arquivo CSV
 
-$dir_tmp - diretório tempor&aacute;rio do Mapserver
+	$dir_tmp - diretorio tempor&aacute;rio do Mapserver
 
-$locaplic - diretório da aplica&ccedil;&atilde;o i3geo
-*/
+	$locaplic - diretorio da aplica&ccedil;&atilde;o i3geo
+	*/
 	function deldirDir2shp($nomearq,$dir_tmp,$locaplic)
 	{
 		if (file_exists($nomearq))
@@ -856,9 +877,12 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 			$def[] = array("b1","C","6");
 			$def[] = array("b2","C","6");
 			if($this->dbaseExiste == false)
-			{$dbLinhas = xbase_create($nomeshpLinhas.".dbf", $def);}
+			{
+				$dbLinhas = xbase_create($nomeshpLinhas.".dbf", $def);
+			}
 			else
-			{$dbLinhas = dbase_create($nomeshpLinhas.".dbf", $def);}
+			{$dbLinhas = dbase_create($nomeshpLinhas.".dbf", $def);
+			}
 			$dbnameLinhas = $nomeshpLinhas.".dbf";
 			//
 			// cria o dbf para o shapefile poligonal
@@ -866,12 +890,15 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 			$def = array();
 			$def[] = array("area","N","12","5");
 			if($this->dbaseExiste == false)
-			{$dbPoligonos = xbase_create($nomeshpPoligonos.".dbf", $def);}
+			{
+				$dbPoligonos = xbase_create($nomeshpPoligonos.".dbf", $def);
+			}
 			else
-			{$dbPoligonos = dbase_create($nomeshpPoligonos.".dbf", $def);}
+			{$dbPoligonos = dbase_create($nomeshpPoligonos.".dbf", $def);
+			}
 			$dbnamePoligonos = $nomeshpPoligonos.".dbf";
 			//
-			//constrói as linhas do diagrama
+			//constrï¿½i as linhas do diagrama
 			//
 			//le o arquivo linha a linha, pulando a primeira
 			//acrescenta os pontos no shape file formando as linhas
@@ -898,28 +925,32 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 					$poPoint2 = ms_newpointobj();
 					$poPoint2->setXY($i3, $i4);
 					if(trim($i[7]) == "TRUE")
-					{$borda[] = $poPoint1;}
+					{
+						$borda[] = $poPoint1;
+					}
 					if(trim($i[8]) == "TRUE")
-					{$borda[] = $poPoint2;}
+					{
+						$borda[] = $poPoint2;
+					}
 					$linha = ms_newLineObj();
 					$linha->add($poPoint1);
 					$linha->add($poPoint2);
 					if($poligonos[$i[5]])
-					$poligonos[$i[5]] = array_merge(array($linha),$poligonos[$i[5]]);
+						$poligonos[$i[5]] = array_merge(array($linha),$poligonos[$i[5]]);
 					else
-					$poligonos[$i[5]] = array($linha);
+						$poligonos[$i[5]] = array($linha);
 					if($poligonos[$i[6]])
-					$poligonos[$i[6]] = array_merge(array($linha),$poligonos[$i[6]]);
+						$poligonos[$i[6]] = array_merge(array($linha),$poligonos[$i[6]]);
 					else
-					$poligonos[$i[6]] = array($linha);
+						$poligonos[$i[6]] = array($linha);
 					$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
 					$ShapeObj->add($linha);
 					$novoshpLinhas->addShape($ShapeObj);
 					$registro = array($i1,$i2,$i3,$i4,$i5,$i6,$i[7],$i[8]);
 					if($this->dbaseExiste == false)
-					xbase_add_record($dbLinhas,$registro);
+						xbase_add_record($dbLinhas,$registro);
 					else
-					dbase_add_record($dbLinhas,$registro);
+						dbase_add_record($dbLinhas,$registro);
 				}
 			}
 			//
@@ -929,19 +960,21 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 			{
 				$ShapeObjp = ms_newShapeObj(MS_SHAPE_LINE);
 				foreach ($p as $o)
-				{$ShapeObjp->add($o);}
+				{
+					$ShapeObjp->add($o);
+				}
 				$ns = $ShapeObjp->convexhull();
 				$novoshpPoligonos->addShape($ns);
 				$registro = array($ns->getArea());
 				if($this->dbaseExiste == false)
-				xbase_add_record($dbPoligonos,$registro);
+					xbase_add_record($dbPoligonos,$registro);
 				else
-				dbase_add_record($dbPoligonos,$registro);
+					dbase_add_record($dbPoligonos,$registro);
 			}
 			if($this->dbaseExiste == false)
-			xbase_close($dbPoligonos);
+				xbase_close($dbPoligonos);
 			else
-			dbase_close($dbPoligonos);
+				dbase_close($dbPoligonos);
 			//
 			//adiciona o layer com os pol&iacute;gonos no mapa
 			//
@@ -968,14 +1001,14 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 				$novoshpLinhas->addShape($ShapeObj->convexhull());
 				$registro = array(0,0,0,0,0,0,0,0);
 				if($this->dbaseExiste == false)
-				xbase_add_record($dbLinhas,$registro);
+					xbase_add_record($dbLinhas,$registro);
 				else
-				dbase_add_record($dbLinhas,$registro);
+					dbase_add_record($dbLinhas,$registro);
 			}
 			if($this->dbaseExiste == false)
-			xbase_close($dbLinhas);
+				xbase_close($dbLinhas);
 			else
-			dbase_close($dbLinhas);
+				dbase_close($dbLinhas);
 			fclose($abre);
 			$novolayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,("Voronoi (".$nomeLinhas.")"),$metaClasse="SIM");
 			$novolayer->set("data",$nomeshpLinhas.".shp");
@@ -989,21 +1022,21 @@ $locaplic - diretório da aplica&ccedil;&atilde;o i3geo
 			$cor->setrgb(255,210,0);
 		}
 	}
-/*
-function: pontoEmPoligono
+	/*
+	 function: pontoEmPoligono
 
-Cruza um tema pontual com temas poligonais ou raster.
+	Cruza um tema pontual com temas poligonais ou raster.
 
-Salva o mapa acrescentando um novo layer com o resultado.
+	Salva o mapa acrescentando um novo layer com o resultado.
 
-parameters:
+	parameters:
 
-$temaPt - Tema de pontos que ser&aacute; utilizado.
+	$temaPt - Tema de pontos que ser&aacute; utilizado.
 
-$temaPo - Temas poligonais separados por virgula.
+	$temaPo - Temas poligonais separados por virgula.
 
-$locaplic - Localiza&ccedil;&atilde;o do I3geo.
-*/
+	$locaplic - Localiza&ccedil;&atilde;o do I3geo.
+	*/
 	function pontoEmPoligono($temaPt,$temasPo,$locaplic)
 	{
 		set_time_limit(3000);
@@ -1048,7 +1081,9 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo.
 			$layers[] = $layer;
 
 			if(!$items)
-			{return "erro ao obter a lista de itens do tema $layer->name";}
+			{
+				return "erro ao obter a lista de itens do tema $layer->name";
+			}
 			$listaItens[$layer->name] = $items;
 			foreach ($items as $ni)
 			{
@@ -1058,21 +1093,26 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo.
 			}
 		}
 		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
 		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
+			$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
+			$db=dbase_open($dbname,2);
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 		foreach($spts as $spt)
 		{
 			foreach ($itemspt as $ni)
-			{$reg[] = $this->truncaS($spt->values[$ni]);}
+			{
+				$reg[] = $this->truncaS($spt->values[$ni]);
+			}
 			$novoshpf->addShape($spt);
 			$lineo = $spt->line(0);
 			$pt = $lineo->point(0);
@@ -1087,11 +1127,15 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo.
 				if($ident == "MS_SUCCESS"){
 					$itens = $listaItens[$layer->name];
 					$sopen = $layer->open();
-					if($sopen == MS_FAILURE){return "erro";}
+					if($sopen == MS_FAILURE){
+						return "erro";
+					}
 					if ($layer->getResult(0) !== FALSE)
 					{
 						if($this->v == 6)
-						{$shape = $layer->getShape($layer->getResult(0));}
+						{
+							$shape = $layer->getShape($layer->getResult(0));
+						}
 						else{
 							$result = $layer->getResult(0);
 							$shp_index  = $result->shapeindex;
@@ -1101,33 +1145,39 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo.
 						{
 							$p = $this->truncaS($shape->values[$item]);
 							if(empty($p))
-							{$p = "-";}
+							{
+								$p = "-";
+							}
 							$reg[] = $p;
 						}
 					}
 					else
 					{
 						foreach ($itens as $item)
-						{$reg[] = "???";}
+						{
+							$reg[] = "???";
+						}
 					}
 				}
 				else
 				{
 					foreach ($itens as $item)
-					{$reg[] = "???";}
+					{
+						$reg[] = "???";
+					}
 				}
 				$layer->close();
 			}
 			if($this->dbaseExiste == false)
-			xbase_add_record($db,$reg);
+				xbase_add_record($db,$reg);
 			else
-			dbase_add_record($db,$reg);
+				dbase_add_record($db,$reg);
 			$reg = array();
 		}
 		if($this->dbaseExiste == false)
-		xbase_close($db);
+			xbase_close($db);
 		else
-		dbase_close($db);
+			dbase_close($db);
 		$novolayer = ms_newLayerObj($this->mapa, $layerPt);
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->set("name",$nomefinal);
@@ -1136,184 +1186,216 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo.
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("ITENS","");
 		$novolayer->setmetadata("ITENSDESC","");
+		$novolayer->setmetadata("CACHE","");
 		if(ms_GetVersionInt() > 50201)
-		{$novolayer->setconnectiontype(MS_SHAPEFILE);}
+		{
+			$novolayer->setconnectiontype(MS_SHAPEFILE);
+		}
 		else
-		{$novolayer->set("connectiontype",MS_SHAPEFILE);}
+		{$novolayer->set("connectiontype",MS_SHAPEFILE);
+		}
 		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
+		{
+			unlink ($this->qyfile);
+		}
 		return(implode(" ",$nomesitens));
 	}
-/*
-function: distanciaptpt
+	/*
+	 function: distanciaptpt
 
-Calcula a distancia entre um ponto de origem e os pontos em um tema.
+	Calcula a distancia entre um ponto de origem e os pontos em um tema.
 
-S&atilde;o considerados apenas os pontos dentro de um tema de overlay.
+	S&atilde;o considerados apenas os pontos dentro de um tema de overlay.
 
-parameters:
+	parameters:
 
-temaorigem - nome do layer com o ponto de origem
+	temaorigem - nome do layer com o ponto de origem
 
-temadestino - nome do tema com os pontos de destino
+	temadestino - nome do tema com os pontos de destino
 
-temaoverlay - tema que ser&aacute; utilizado para selecionar o tema de destino
+	temaoverlay - tema que ser&aacute; utilizado para selecionar o tema de destino
 
-locapli - endere&ccedil;o da aplica&ccedil;&atilde;o i3geo
+	locapli - endere&ccedil;o da aplica&ccedil;&atilde;o i3geo
 
-itemorigem - nome do item na tabela de atributos do tema de origem que ser&aacute; acrescentado ao tema que ser&aacute; criado
+	itemorigem - nome do item na tabela de atributos do tema de origem que ser&aacute; acrescentado ao tema que ser&aacute; criado
 
-itemdestino - nome do item na tabela de atributos do tema de origem que ser&aacute; acrescentado ao tema que ser&aacute; criado
+	itemdestino - nome do item na tabela de atributos do tema de origem que ser&aacute; acrescentado ao tema que ser&aacute; criado
 
-*/
-function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem="",$itemdestino="")
-{
-	//error_reporting(0);
-	set_time_limit(180);
-	//para manipular dbf
-	if($this->dbaseExiste == false){
-		include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
-	}
-	//define o nome do novo shapefile que ser&aacute; criado
-	$nomefinal = nomeRandomico();
-	$nomeshp = $this->diretorio."/".$nomefinal;
-
-	$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
-	if ($existesel == "nao")
-	{return "errox";}
-
-	$layerorigem = $this->mapa->getlayerbyname($temaorigem);
-	$layerdestino = $this->mapa->getlayerbyname($temadestino);
-	$layeroverlay = $this->mapa->getlayerbyname($temaoverlay);
-
-	$shapesorigem = retornaShapesSelecionados($layerorigem,$this->arquivo,$this->mapa);
-	if(count($shapesorigem) == 0){
-		return "erro";
-	}
-	$layeroverlay->set("tolerance",0);
-	$layerdestino->set("tolerance",0);
-	$layeroverlay->queryByrect($this->mapa->extent);
-	$layerdestino->queryByFeatures($layeroverlay->index);
-
-	$sopen = $layerdestino->open();
-	if($sopen == MS_FAILURE){return "erro";}
-	$res_count = $layerdestino->getNumresults();
-
-	for ($i = 0; $i < $res_count; ++$i)
+	*/
+	function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem="",$itemdestino="")
 	{
-		if($this->v == 6)
-		{$shapesdestino[] = $layerdestino->getShape($layerdestino->getResult($i));}
-		else{
-			$result = $layerdestino->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shapesdestino[] = $layerdestino->getshape(-1, $shp_index);
+		//error_reporting(0);
+		set_time_limit(180);
+		//para manipular dbf
+		if($this->dbaseExiste == false){
+			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
-	}
-	$layerdestino->close();
-	$rect = $this->mapa->extent;
-	$projInObj = $layerorigem->getProjection();
-	if ($projInObj == "")
-	{$projInObj = ms_newprojectionobj("proj=latlong");}
-	$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
-	$origemdestino = array();
-	if (count($shapesorigem)==0){return "erro";}
-	if (count($shapesdestino)==0){return "erro";}
-	$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_ARC);
-	// cria o dbf
-	$def[] = array("dist_m","N","10","2");
-	$def[] = array("origem","C","255");
-	$def[] = array("destino","C","255");
-	if($this->dbaseExiste == false)
-	{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
-	else
-	{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
-	//acrescenta os pontos no novo shapefile
-	$dbname = $nomeshp.".dbf";
-	if($this->dbaseExiste == false)
-	$db=xbase_open($dbname,2);
-	else
-	$db=dbase_open($dbname,2);
-	foreach ($shapesorigem as $sorigem)
-	{
-		if($itemorigem != "")
-		{$valororigem = $sorigem->values[$itemorigem];}
-		else
-		{$valororigem = "";}
-		foreach ($shapesdestino as $sdestino)
+		//define o nome do novo shapefile que ser&aacute; criado
+		$nomefinal = nomeRandomico();
+		$nomeshp = $this->diretorio."/".$nomefinal;
+
+		$existesel = carregaquery2($this->arquivo,$this->layer,$this->mapa);
+		if ($existesel == "nao")
 		{
-			$linha = ms_newLineObj();
-			$linha->add($sorigem->getCentroid());
-			$linha->add($sdestino->getCentroid());
-			if($itemdestino != "")
-			{$valordestino = $sdestino->values[$itemdestino];}
-			else
-			{$valordestino = "";}
-			$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
-			$ShapeObj->add($linha);
-			$novoshpf->addShape($ShapeObj);
-			$ShapeObj->project($projInObj, $projOutObj);
-			$distancia = $ShapeObj->getLength();
-			$registro = array($distancia,$valororigem,$valordestino);
-			if($this->dbaseExiste == false)
-			xbase_add_record($db,$registro);
-			else
-			dbase_add_record($db,$registro);
+			return "errox";
 		}
+
+		$layerorigem = $this->mapa->getlayerbyname($temaorigem);
+		$layerdestino = $this->mapa->getlayerbyname($temadestino);
+		$layeroverlay = $this->mapa->getlayerbyname($temaoverlay);
+
+		$shapesorigem = retornaShapesSelecionados($layerorigem,$this->arquivo,$this->mapa);
+		if(count($shapesorigem) == 0){
+			return "erro";
+		}
+		$layeroverlay->set("tolerance",0);
+		$layerdestino->set("tolerance",0);
+		$layeroverlay->queryByrect($this->mapa->extent);
+		$layerdestino->queryByFeatures($layeroverlay->index);
+
+		$sopen = $layerdestino->open();
+		if($sopen == MS_FAILURE){
+			return "erro";
+		}
+		$res_count = $layerdestino->getNumresults();
+
+		for ($i = 0; $i < $res_count; ++$i)
+		{
+			if($this->v == 6)
+			{
+				$shapesdestino[] = $layerdestino->getShape($layerdestino->getResult($i));
+			}
+			else{
+				$result = $layerdestino->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shapesdestino[] = $layerdestino->getshape(-1, $shp_index);
+			}
+		}
+		$layerdestino->close();
+		$rect = $this->mapa->extent;
+		$projInObj = $layerorigem->getProjection();
+		if ($projInObj == "")
+		{
+			$projInObj = ms_newprojectionobj("proj=latlong");
+		}
+		$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
+		$origemdestino = array();
+		if (count($shapesorigem)==0){
+			return "erro";
+		}
+		if (count($shapesdestino)==0){
+			return "erro";
+		}
+		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_ARC);
+		// cria o dbf
+		$def[] = array("dist_m","N","10","2");
+		$def[] = array("origem","C","255");
+		$def[] = array("destino","C","255");
+		if($this->dbaseExiste == false)
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
+		else
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
+		//acrescenta os pontos no novo shapefile
+		$dbname = $nomeshp.".dbf";
+		if($this->dbaseExiste == false)
+			$db=xbase_open($dbname,2);
+		else
+			$db=dbase_open($dbname,2);
+		foreach ($shapesorigem as $sorigem)
+		{
+			if($itemorigem != "")
+			{
+				$valororigem = $sorigem->values[$itemorigem];
+			}
+			else
+			{$valororigem = "";
+			}
+			foreach ($shapesdestino as $sdestino)
+			{
+				$linha = ms_newLineObj();
+				$linha->add($sorigem->getCentroid());
+				$linha->add($sdestino->getCentroid());
+				if($itemdestino != "")
+				{
+					$valordestino = $sdestino->values[$itemdestino];
+				}
+				else
+				{$valordestino = "";
+				}
+				$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
+				$ShapeObj->add($linha);
+				$novoshpf->addShape($ShapeObj);
+				$ShapeObj->project($projInObj, $projOutObj);
+				$distancia = $ShapeObj->getLength();
+				$registro = array($distancia,$valororigem,$valordestino);
+				if($this->dbaseExiste == false)
+					xbase_add_record($db,$registro);
+				else
+					dbase_add_record($db,$registro);
+			}
+		}
+		if($this->dbaseExiste == false)
+			xbase_close($db);
+		else
+			dbase_close($db);
+		//adiciona no mapa atual o novo tema
+		$novolayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,("Distancias (".$nomefinal.")"),$metaClasse="SIM");
+		$novolayer->set("data",$nomeshp.".shp");
+		$novolayer->setmetadata("DOWNLOAD","SIM");
+		$novolayer->set("template","none.htm");
+		$classe = $novolayer->getclass(0);
+		$estilo = $classe->getstyle(0);
+		$estilo->set("symbolname","linha");
+		$estilo->set("size",4);
+		$cor = $estilo->color;
+		$cor->setrgb(255,210,0);
+		//limpa selecao
+		if (file_exists($this->qyfile))
+		{
+			unlink ($this->qyfile);
+		}
+		return($nomeshp.".shp");
 	}
-	if($this->dbaseExiste == false)
-	xbase_close($db);
-	else
-	dbase_close($db);
-	//adiciona no mapa atual o novo tema
-	$novolayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,("Distancias (".$nomefinal.")"),$metaClasse="SIM");
-	$novolayer->set("data",$nomeshp.".shp");
-	$novolayer->setmetadata("DOWNLOAD","SIM");
-	$novolayer->set("template","none.htm");
-	$classe = $novolayer->getclass(0);
-	$estilo = $classe->getstyle(0);
-	$estilo->set("symbolname","linha");
-	$estilo->set("size",4);
-	$cor = $estilo->color;
-	$cor->setrgb(255,210,0);
-	//limpa selecao
-	if (file_exists($this->qyfile))
-	{unlink ($this->qyfile);}
-	return($nomeshp.".shp");
-}
-/*
-Function: criaBuffer
+	/*
+	 Function: criaBuffer
 
-Gera entorno (buffer) nos elementos selecionados de um tema.
+	Gera entorno (buffer) nos elementos selecionados de um tema.
 
-Salva o mapa acrescentando um novo layer com o buffer.
+	Salva o mapa acrescentando um novo layer com o buffer.
 
-Parametros:
+	Parametros:
 
-$distancia - Dist&acirc;ncia em metros.
+	$distancia - Dist&acirc;ncia em metros.
 
-$locaplic - Localiza&ccedil;&atilde;o do I3geo.
+	$locaplic - Localiza&ccedil;&atilde;o do I3geo.
 
-$unir - sim|nao indica se os elementos selecionados dever&atilde;o ser unidos em um só antes do buffer ser criado
+	$unir - sim|nao indica se os elementos selecionados dever&atilde;o ser unidos em um sï¿½ antes do buffer ser criado
 
-$wkt - (opcional) elemento no formato wkt para o qual o buffer ser&aacute; gerado. Só de ve ser definido se $this->nome for vazio, ou seja
-se o par&acirc;metro "tema" n&atilde;o tiver sido fornecido ao construtor da classe
+	$wkt - (opcional) elemento no formato wkt para o qual o buffer ser&aacute; gerado. Sï¿½ de ve ser definido se $this->nome for vazio, ou seja
+	se o par&acirc;metro "tema" n&atilde;o tiver sido fornecido ao construtor da classe
 
-$multiplicar - (opcional) multiplicar os valores por
+	$multiplicar - (opcional) multiplicar os valores por
 
-$itemdistancia - (opcional) coluna com os valores
+	$itemdistancia - (opcional) coluna com os valores
 
-return:
+	return:
 
-nome do layer criado com o buffer.
-*/
+	nome do layer criado com o buffer.
+	*/
 	function criaBuffer($distancia,$locaplic,$unir="nao",$wkt="",$multiplicar=1,$itemdistancia="")
 	{
 		set_time_limit(180);
 		error_reporting(0);
 		if($this->nome != "")
-		{$items = pegaItens($this->layer);}
+		{
+			$items = pegaItens($this->layer);
+		}
 		else
-		{$items = array();}
+		{$items = array();
+		}
 		//para manipular dbf
 		if($this->dbaseExiste == false){
 			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
@@ -1348,7 +1430,9 @@ nome do layer criado com o buffer.
 				$dd2->setXY(($poPoint->x) + ($distancia * $multiplicar), $poPoint->y);
 				$dd2->project($projOutObj,$projInObj);
 				$d = $dd1->distanceToPoint($dd2);
-				if ($distancia < 0){$d = $d * -1;}
+				if ($distancia < 0){
+					$d = $d * -1;
+				}
 				//calcula a distancia 29100
 				//gera o buffer
 				$buffers[] = $shape->buffer($d);
@@ -1359,7 +1443,9 @@ nome do layer criado com o buffer.
 		if($unir == "sim"){
 			$ns = $buffers[0];
 			for($s=1;$s < count($buffers);$s++)
-			{$ns = $ns->union($buffers[$s]);}
+			{
+				$ns = $ns->union($buffers[$s]);
+			}
 			$buffers = array($ns);
 			$shapes = array($shapes[0]);
 		}
@@ -1370,31 +1456,36 @@ nome do layer criado com o buffer.
 		$def = $this->criaDefDb($items);
 		$def[] = array("i3geo","C","254");
 		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
 		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
+			$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
+			$db=dbase_open($dbname,2);
 		for($i = 0;$i < count($buffers);++$i)
 		{
 			foreach ($items as $ni)
-			{$reg[] = $this->truncaS($shapes[$i]->values[$ni]);}
+			{
+				$reg[] = $this->truncaS($shapes[$i]->values[$ni]);
+			}
 			$reg[] = $i;
 			$novoshpf->addShape($buffers[$i]);
 			if($this->dbaseExiste == false)
-			xbase_add_record($db,$reg);
+				xbase_add_record($db,$reg);
 			else
-			dbase_add_record($db,$reg);
+				dbase_add_record($db,$reg);
 			$reg = array();
 		}
 		if($this->dbaseExiste == false)
-		xbase_close($db);
+			xbase_close($db);
 		else
-		dbase_close($db);
+			dbase_close($db);
 		//adiciona no mapa atual o novo tema
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Buffer (".$nomebuffer.")"),$metaClasse="SIM",false);
 		$novolayer->set("data",$nomeshp.".shp");
@@ -1410,20 +1501,22 @@ nome do layer criado com o buffer.
 		$coro->setrgb(255,0,0);
 		return($novolayer->name);
 	}
-/*
-function: centroMassa
+	/*
+	 function: centroMassa
 
-Calcula o centro m&eacute;dio.
+	Calcula o centro m&eacute;dio.
 
-Se "item" for diferente de vazio, calcula o centro m&eacute;dio ponderado baseado no item
+	Se "item" for diferente de vazio, calcula o centro m&eacute;dio ponderado baseado no item
 
-Parametros:
+	Parametros:
 
-$item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valores.
-*/
+	$item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valores.
+	*/
 	function centroMassa($item="")
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		set_time_limit(180);
 		//para manipular dbf
 		if($this->dbaseExiste == false){
@@ -1442,7 +1535,9 @@ $item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valore
 		$ys = 0;
 		foreach($lshapes as $shape){
 			if($item != "")
-			{$pondera = $shape->values[$item];}
+			{
+				$pondera = $shape->values[$item];
+			}
 			$pt = $shape->line(0)->point(0);
 			$xs += ($pt->x * $pondera);
 			$ys += ($pt->y * $pondera);
@@ -1453,15 +1548,18 @@ $item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valore
 		// cria o dbf
 		$def[] = array("id","C","254");
 		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
 		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
+			$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
+			$db=dbase_open($dbname,2);
 		$reg[] = "";
 		$res_count = count($lshapes);
 		$shp = ms_newShapeObj(MS_SHP_POINT);
@@ -1471,15 +1569,15 @@ $item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valore
 
 		$novoshpf->addShape($shp);
 		if($this->dbaseExiste == false)
-		xbase_add_record($db,$reg);
+			xbase_add_record($db,$reg);
 		else
-		dbase_add_record($db,$reg);
+			dbase_add_record($db,$reg);
 		if($this->dbaseExiste == false)
-		xbase_close($db);
+			xbase_close($db);
 		else
-		dbase_close($db);
+			dbase_close($db);
 		//adiciona no mapa atual o novo tema
-		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centróide (".$nomeCentro.")"),$metaClasse="SIM");
+		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centrï¿½ide (".$nomeCentro.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->set("template","none.htm");
@@ -1489,23 +1587,27 @@ $item {string} - (opcional) Item q ser&aacute; utilizado para ponderar os valore
 		$estilo->set("size","14");
 		//limpa selecao
 		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
+		{
+			unlink ($this->qyfile);
+		}
 		return("ok");
 	}
-/*
-function: criaCentroide
+	/*
+	 function: criaCentroide
 
-Gera centroide dos elementos selecionados de um tema.
+	Gera centroide dos elementos selecionados de um tema.
 
-Salva o mapa acrescentando um novo layer com os pontos.
+	Salva o mapa acrescentando um novo layer com os pontos.
 
-Parametros:
+	Parametros:
 
-$locaplic - Localiza&ccedil;&atilde;o do I3geo.
-*/
+	$locaplic - Localiza&ccedil;&atilde;o do I3geo.
+	*/
 	function criaCentroide($locaplic)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$items = pegaItens($this->layer);
 		set_time_limit(180);
 		//para manipular dbf
@@ -1528,63 +1630,70 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo.
 		// cria o dbf
 		$def = $this->criaDefDb($items);
 		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
 		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
+			$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
+			$db=dbase_open($dbname,2);
 		for($i = 0;$i < count($centroides);++$i)
 		{
 			foreach ($items as $ni)
-			{$reg[] = $this->truncaS($shapes[$i]->values[$ni]);}
+			{
+				$reg[] = $this->truncaS($shapes[$i]->values[$ni]);
+			}
 			$novoshpf->addShape($centroides[$i]);
 			if($this->dbaseExiste == false)
-			xbase_add_record($db,$reg);
+				xbase_add_record($db,$reg);
 			else
-			dbase_add_record($db,$reg);
+				dbase_add_record($db,$reg);
 			$reg = array();
 		}
 		if($this->dbaseExiste == false)
-		xbase_close($db);
+			xbase_close($db);
 		else
-		dbase_close($db);
+			dbase_close($db);
 		//adiciona no mapa atual o novo tema
-		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centróide (".$nomeCentroides.")"),$metaClasse="SIM");
+		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centrï¿½ide (".$nomeCentroides.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->set("template","none.htm");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		//limpa selecao
 		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
+		{
+			unlink ($this->qyfile);
+		}
 		return("ok");
 	}
 
-/*
-function: gradeDePontos
+	/*
+	 function: gradeDePontos
 
-Gera uma grade de pontos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
+	Gera uma grade de pontos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
 
-Salva o mapa acrescentando um novo layer com a grade de coordenadas.
+	Salva o mapa acrescentando um novo layer com a grade de coordenadas.
 
-$ddx - Espa&ccedil;amento em x.
+	$ddx - Espa&ccedil;amento em x.
 
-$ddy - Espa&ccedil;amento em y.
+	$ddy - Espa&ccedil;amento em y.
 
-$px - X do primeiro ponto (superior esquerdo)
+	$px - X do primeiro ponto (superior esquerdo)
 
-$py - Y do primeiro ponto.
+	$py - Y do primeiro ponto.
 
-$locaplic - Endere&ccedil;o da aplica&ccedil;&atilde;o.
+	$locaplic - Endere&ccedil;o da aplica&ccedil;&atilde;o.
 
-$nptx - N&uacute;mero de pontos em X (opcional)
+	$nptx - N&uacute;mero de pontos em X (opcional)
 
-$npty - N&uacute;mero de pontos em Y (opcional)
-*/
+	$npty - N&uacute;mero de pontos em Y (opcional)
+	*/
 	function gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty,$proj=false)
 	{
 		set_time_limit(180);
@@ -1619,27 +1728,38 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		//calcula a dist&acirc;ncia entre os pontos em dd
 		$distx = $fx - $px;
 		$disty = $fy - $py;
-		if ($distx < 0){$distx = $distx * -1;}
-		if ($disty < 0){$disty = $disty * -1;}
+		if ($distx < 0){
+			$distx = $distx * -1;
+		}
+		if ($disty < 0){
+			$disty = $disty * -1;
+		}
 		if ($nptx == "")
-		{$nptx = round(($distx / $xdd),0);}
+		{
+			$nptx = round(($distx / $xdd),0);
+		}
 		if ($npty == "")
-		{$npty = round(($disty / $ydd),0);}
+		{
+			$npty = round(($disty / $ydd),0);
+		}
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 		$def = array();
 		$def[] = array("x","C","20");
 		$def[] = array("y","C","20");
 		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
 		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
+			$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
+			$db=dbase_open($dbname,2);
 		$reg = array();
 		$valorcoluna = $px;
 		for ($coluna = 0; $coluna < $nptx; $coluna++)
@@ -1659,49 +1779,51 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 				$reg[] = $x;
 				$reg[] = $y;
 				if($this->dbaseExiste == false)
-				xbase_add_record($db,$reg);
+					xbase_add_record($db,$reg);
 				else
-				dbase_add_record($db,$reg);
+					dbase_add_record($db,$reg);
 				$reg = array();
 			}
 			$valorcoluna = $valorcoluna + $xdd;
 		}
 		if($this->dbaseExiste == false)
-		xbase_close($db);
+			xbase_close($db);
 		else
-		dbase_close($db);
+			dbase_close($db);
 		//adiciona o novo tema no mapa
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Grade (".$nomegrade.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
+		{
+			unlink ($this->qyfile);
+		}
 		return("ok");
 	}
-/*
-function: gradeDePol
+	/*
+	 function: gradeDePol
 
-Gera uma grade de pol&iacute;gonos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
+	Gera uma grade de pol&iacute;gonos com espa&ccedil;amento regular definido em d&eacute;cimos de grau.
 
-Salva o mapa acrescentando um novo layer com a grade.
+	Salva o mapa acrescentando um novo layer com a grade.
 
-parameters:
+	parameters:
 
-$xdd - Espa&ccedil;amento em x.
+	$xdd - Espa&ccedil;amento em x.
 
-$ydd - Espa&ccedil;amento em y.
+	$ydd - Espa&ccedil;amento em y.
 
-$x - X do primeiro ponto (superior esquerdo)
+	$x - X do primeiro ponto (superior esquerdo)
 
-$y - Y do primeiro ponto.
+	$y - Y do primeiro ponto.
 
-$locaplic - Endere&ccedil;o da aplica&ccedil;&atilde;o.
+	$locaplic - Endere&ccedil;o da aplica&ccedil;&atilde;o.
 
-$nptx - N&uacute;mero de pontos em X (opcional)
+	$nptx - N&uacute;mero de pontos em X (opcional)
 
-$npty - N&uacute;mero de pontos em Y (opcional)
-*/
+	$npty - N&uacute;mero de pontos em Y (opcional)
+	*/
 	function gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty,$proj=false)
 	{
 		set_time_limit(180);
@@ -1736,26 +1858,37 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		//calcula a dist&acirc;ncia entre os pontos em dd
 		$distx = $fx - $px;
 		$disty = $fy - $py;
-		if ($distx < 0){$distx = $distx * -1;}
-		if ($disty < 0){$disty = $disty * -1;}
+		if ($distx < 0){
+			$distx = $distx * -1;
+		}
+		if ($disty < 0){
+			$disty = $disty * -1;
+		}
 		if ($nptx == "")
-		{$nptx = round(($distx / $xdd),0);}
+		{
+			$nptx = round(($distx / $xdd),0);
+		}
 		if ($npty == "")
-		{$npty = round(($disty / $ydd),0);}
+		{
+			$npty = round(($disty / $ydd),0);
+		}
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		$def = array();
 		$def[] = array("id","C","20");
 		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
 		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
+			$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
+			$db=dbase_open($dbname,2);
 		$reg = array();
 		$valorcoluna = $px;
 		for ($coluna = 0; $coluna < $nptx; $coluna++){
@@ -1791,17 +1924,17 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 				$novoshpf->addShape($shapen);
 				$reg[] = $linha."-".$coluna;
 				if($this->dbaseExiste == false)
-				xbase_add_record($db,$reg);
+					xbase_add_record($db,$reg);
 				else
-				dbase_add_record($db,$reg);
+					dbase_add_record($db,$reg);
 				$reg = array();
 			}
-		$valorcoluna = $valorcoluna + $xdd;
+			$valorcoluna = $valorcoluna + $xdd;
 		}
 		if($this->dbaseExiste == false)
-		xbase_close($db);
+			xbase_close($db);
 		else
-		dbase_close($db);
+			dbase_close($db);
 		//adiciona o novo tema no mapa
 		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Grade (".$nomegrade.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
@@ -1809,11 +1942,13 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$novolayer->set("opacity","50");
 		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
+		{
+			unlink ($this->qyfile);
+		}
 		return("ok");
 	}
 	/*
-	function: gradeDeHex
+	 function: gradeDeHex
 
 	Gera uma grade de pol&iacute;gonos hexagonais regulares definido em d&eacute;cimos de grau.
 
@@ -1873,20 +2008,31 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		//calcula a dist&acirc;ncia entre os pontos em dd se nao tiver sido especificada ou for 0
 		$distx = $fx - $px;
 		$disty = $fy - $py;
-		if ($distx < 0){$distx = $distx * -1;}
-		if ($disty < 0){$disty = $disty * -1;}
+		if ($distx < 0){
+			$distx = $distx * -1;
+		}
+		if ($disty < 0){
+			$disty = $disty * -1;
+		}
 		if ($nptx == "")
-		{$nptx = round(($distx / $dd),0);}
+		{
+			$nptx = round(($distx / $dd),0);
+		}
 		if ($npty == "")
-		{$npty = round(($disty / $dd),0);}
+		{
+			$npty = round(($disty / $dd),0);
+		}
 		// cria o shapefile
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		$def = array();
 		$def[] = array("id","C","20");
 		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
 		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
@@ -1978,24 +2124,25 @@ $npty - N&uacute;mero de pontos em Y (opcional)
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$novolayer->set("opacity","50");
 		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
+		{
+			unlink ($this->qyfile);
+		}
 		return("ok");
-
 	}
-/*
-function: nptPol
+	/*
+	 function: nptPol
 
-Conta o n&uacute;mero de pontos em pol&iacute;gono cruzando dois temas.
+	Conta o n&uacute;mero de pontos em pol&iacute;gono cruzando dois temas.
 
-Salva o mapa acrescentando um novo layer com o resultado.
+	Salva o mapa acrescentando um novo layer com o resultado.
 
-parameters:
-$temaPt - Tema de pontos.
+	parameters:
+	$temaPt - Tema de pontos.
 
-$temaPo - Tema poligonal.
+	$temaPo - Tema poligonal.
 
-$locaplic - Localiza&ccedil;&atilde;o do I3geo
-*/
+	$locaplic - Localiza&ccedil;&atilde;o do I3geo
+	*/
 	function nptPol($temaPt,$temaPo,$locaplic,$somaritem="")
 	{
 		//error_reporting(0);
@@ -2093,19 +2240,23 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 		}
 		return("ok");
 	}
-/*
-Function: agrupaElementos
+	/*
+	 Function: agrupaElementos
 
-Agrupa elementos em um pol&iacute;gono.
+	Agrupa elementos em um pol&iacute;gono.
 
-Salva o mapa acrescentando um novo layer com o resultado.
-*/
+	Salva o mapa acrescentando um novo layer com o resultado.
+	*/
 	function agrupaElementos($item,$locaplic)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		set_time_limit(180);
 		//para manipular dbf
-		if(!isset($item)){$item="";}
+		if(!isset($item)){
+			$item="";
+		}
 		if($this->dbaseExiste == false){
 			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
@@ -2113,25 +2264,30 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$indices = array();
 		foreach($shapes as $shape){
 			if($item != "")
-			{$valor = $shape->values[$item];}
+			{
+				$valor = $shape->values[$item];
+			}
 			else
-			{$valor = "nenhum";}
+			{$valor = "nenhum";
+			}
 			if(!isset($indices[$valor])){
 				$indices[$valor] = array($shape);
 			}
 			else
-			$indices[$valor] = array_merge($indices[$valor],array($shape));
+				$indices[$valor] = array_merge($indices[$valor],array($shape));
 		}
 		$dissolve=array();
 		foreach($indices as $shapes)
 		{
 			foreach($shapes as $shape){
 				if($item != "")
-				$valor = $shape->values[$item];
+					$valor = $shape->values[$item];
 				else
-				$valor = "nenhum";
+					$valor = "nenhum";
 				if (!isset($dissolve[$valor]))
-				{$dissolve[$valor] = $shape;}
+				{
+					$dissolve[$valor] = $shape;
+				}
 				else
 				{
 					$tipo = $shape->type;
@@ -2160,31 +2316,36 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		// cria o dbf
 		$def = array();
-		if($item==""){$item="nenhum";}
+		if($item==""){
+			$item="nenhum";
+		}
 		$def[] = array($item,"C","254");
 		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
 		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
+			$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
+			$db=dbase_open($dbname,2);
 		$classes = array_keys($dissolve);
 		foreach ($classes as $classe)
 		{
 			$novoshpf->addShape($dissolve[$classe]->convexhull());
 			if($this->dbaseExiste == false)
-			xbase_add_record($db,array($classe));
+				xbase_add_record($db,array($classe));
 			else
-			dbase_add_record($db,array($classe));
+				dbase_add_record($db,array($classe));
 		}
 		if($this->dbaseExiste == false)
-		xbase_close($db);
+			xbase_close($db);
 		else
-		dbase_close($db);
+			dbase_close($db);
 		//
 		//adiciona o novo layer no mapa
 		//
@@ -2196,23 +2357,27 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		return("ok");
 	}
 
-/*
-function: dissolvePoligono
+	/*
+	 function: dissolvePoligono
 
-Dissolve as bordas entre pol&iacute;gonos com o mesmo atributo.
+	Dissolve as bordas entre pol&iacute;gonos com o mesmo atributo.
 
-Salva o mapa acrescentando um novo layer com o resultado.
+	Salva o mapa acrescentando um novo layer com o resultado.
 
-$item - item utilizado para agregar os pol&iacute;gonos
+	$item - item utilizado para agregar os pol&iacute;gonos
 
-$locaplic - Localiza&ccedil;&atilde;o do I3geo
-*/
+	$locaplic - Localiza&ccedil;&atilde;o do I3geo
+	*/
 	function dissolvePoligono($item,$locaplic)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		set_time_limit(180);
 		//para manipular dbf
-		if(!isset($item)){$item="";}
+		if(!isset($item)){
+			$item="";
+		}
 		if($this->dbaseExiste == false){
 			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 		}
@@ -2220,25 +2385,30 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 		$indices = array();
 		foreach($shapes as $shape){
 			if($item != "")
-			{$valor = $shape->values[$item];}
+			{
+				$valor = $shape->values[$item];
+			}
 			else
-			{$valor = "nenhum";}
+			{$valor = "nenhum";
+			}
 			if(!isset($indices[$valor])){
 				$indices[$valor] = array($shape);
 			}
 			else
-			$indices[$valor] = array_merge($indices[$valor],array($shape));
+				$indices[$valor] = array_merge($indices[$valor],array($shape));
 		}
 		$dissolve=array();
 		foreach($indices as $shapes)
 		{
 			foreach($shapes as $shape){
 				if($item != "")
-				$valor = $shape->values[$item];
+					$valor = $shape->values[$item];
 				else
-				$valor = "nenhum";
+					$valor = "nenhum";
 				if (!isset($dissolve[$valor]))
-				{$dissolve[$valor] = $shape;}
+				{
+					$dissolve[$valor] = $shape;
+				}
 				else
 				{
 					if($shape->type != MS_SHAPE_POLYGON)
@@ -2266,31 +2436,36 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		// cria o dbf
 		$def = array();
-		if($item==""){$item="nenhum";}
+		if($item==""){
+			$item="nenhum";
+		}
 		$def[] = array($item,"C","254");
 		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
 		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
+			$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
+			$db=dbase_open($dbname,2);
 		$classes = array_keys($dissolve);
 		foreach ($classes as $classe)
 		{
 			$novoshpf->addShape($dissolve[$classe]);
 			if($this->dbaseExiste == false)
-			xbase_add_record($db,array($classe));
+				xbase_add_record($db,array($classe));
 			else
-			dbase_add_record($db,array($classe));
+				dbase_add_record($db,array($classe));
 		}
 		if($this->dbaseExiste == false)
-		xbase_close($db);
+			xbase_close($db);
 		else
-		dbase_close($db);
+			dbase_close($db);
 		//
 		//adiciona o novo layer no mapa
 		//
@@ -2300,14 +2475,16 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		if (file_exists($this->qyfile))
-		{unlink ($this->qyfile);}
+		{
+			unlink ($this->qyfile);
+		}
 
 		return("ok");
 	}
 	/*
-	Function aplicaFuncaoListaWKT
+	 Function aplicaFuncaoListaWKT
 
-	Aplica uma fun&ccedil;&atilde;o do Mapserver à uma lista de geometrias no formato WKT
+	Aplica uma fun&ccedil;&atilde;o do Mapserver ï¿½ uma lista de geometrias no formato WKT
 
 	Parametros:
 
@@ -2315,9 +2492,9 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 
 	$operacao {String} - opera&ccedil;&atilde;o suportada pelo Mapserver, por exemplo, union, intersects, etc. converteSHP ir&aacute; converter as geometrias em um tema e adicion&aacute;-lo ao mapa
 
-	$dir_tmp - Diretório tempor&aacute;rio do mapserver. Utilizado apenas se $operacao = "converteSHP"
+	$dir_tmp - Diretï¿½rio tempor&aacute;rio do mapserver. Utilizado apenas se $operacao = "converteSHP"
 
-	$imgdir - Diretório das imagens do mapa atual. Utilizado apenas se $operacao = "converteSHP"
+	$imgdir - Diretï¿½rio das imagens do mapa atual. Utilizado apenas se $operacao = "converteSHP"
 
 	Return:
 
@@ -2353,20 +2530,20 @@ $locaplic - Localiza&ccedil;&atilde;o do I3geo
 			return $geoc->toWkt();
 		}
 	}
-/*
-function: funcoesGeometrias
+	/*
+	 function: funcoesGeometrias
 
-Fun&ccedil;&otilde;es de an&aacute;lise de geometrias da ferramenta Geometrias.
+	Fun&ccedil;&otilde;es de an&aacute;lise de geometrias da ferramenta Geometrias.
 
-parameters:
-$dir_tmp - Diretório tempor&aacute;rio do mapserver
+	parameters:
+	$dir_tmp - Diretï¿½rio tempor&aacute;rio do mapserver
 
-$imgdir - Diretório das imagens do mapa atual
+	$imgdir - Diretï¿½rio das imagens do mapa atual
 
-$lista - String com a lista de nomes dos arquivos serializados que cont&eacute;m as geometrias
+	$lista - String com a lista de nomes dos arquivos serializados que cont&eacute;m as geometrias
 
-$operacao - Tipo de an&aacute;lise.
-*/
+	$operacao - Tipo de an&aacute;lise.
+	*/
 	function funcoesGeometrias($dir_tmp,$imgdir,$lista,$operacao)
 	{
 		$lista = explode(",",$lista);
@@ -2424,21 +2601,21 @@ $operacao - Tipo de an&aacute;lise.
 		return($nomegeo);
 	}
 
-/*
-function: calculaGeometrias
+	/*
+	 function: calculaGeometrias
 
-Fun&ccedil;&otilde;es de c&aacute;lculo de geometrias da ferramenta Geometrias.
+	Fun&ccedil;&otilde;es de c&aacute;lculo de geometrias da ferramenta Geometrias.
 
-parameters:
+	parameters:
 
-$dir_tmp - Diretório tempor&aacute;rio do mapserver
+	$dir_tmp - Diretï¿½rio tempor&aacute;rio do mapserver
 
-$imgdir - Diretório das imagens do mapa atual
+	$imgdir - Diretï¿½rio das imagens do mapa atual
 
-$lista - Arquivos com as geometrias
+	$lista - Arquivos com as geometrias
 
-$operacao - Tipo de an&aacute;lise.
-*/
+	$operacao - Tipo de an&aacute;lise.
+	*/
 	function calculaGeometrias($dir_tmp,$imgdir,$lista,$operacao)
 	{
 		//error_reporting(0);
@@ -2451,9 +2628,11 @@ $operacao - Tipo de an&aacute;lise.
 			//verifica a vers&atilde;o do mapserver
 			//se for anterior a 5, utiliza a conex&atilde;o com o postgis para fazer o processamento dos daods
 			//
-						$v = versao();
+			$v = versao();
 			if (($v["principal"] < 5))
-			{return ("erro. E necessario uma vers&atilde;o maior que 5.0 do Mapserver.");}
+			{
+				return ("erro. E necessario uma vers&atilde;o maior que 5.0 do Mapserver.");
+			}
 			foreach ($geos["dados"] as &$geo)
 			{
 				$g = $geo["wkt"];
@@ -2469,7 +2648,7 @@ $operacao - Tipo de an&aacute;lise.
 						$shape = ms_shapeObjFromWkt($s);
 						$area = $shape->getLength();
 						$geo["valores"][] = array("item"=>"P_perim_metros","valor"=>$area);
-					break;
+						break;
 					case "area":
 						$shape = ms_shapeObjFromWkt($g);
 						$rect = $shape->bounds;
@@ -2480,30 +2659,30 @@ $operacao - Tipo de an&aacute;lise.
 						$shape = ms_shapeObjFromWkt($s);
 						$area = $shape->getArea();
 						$geo["valores"][] = array("item"=>"P_area_metros","valor"=>$area);
-					break;
+						break;
 					case "comprimento":
-					break;
+						break;
 				}
 			}
 			$this->serializeGeo($dir.$l,$geos);
 		}
 		return("ok");
 	}
-/*
-Function: incmapageometrias
+	/*
+	 Function: incmapageometrias
 
-Insere geometrias como tema no mapa.
+	Insere geometrias como tema no mapa.
 
-parameters:
+	parameters:
 
-$dir_tmp - Diretório tempor&aacute;rio do mapserver
+	$dir_tmp - Diretorio tempor&aacute;rio do mapserver
 
-$imgdir - Diretório das imagens do mapa atual
+	$imgdir - Diretorio das imagens do mapa atual
 
-$lista - Nomes, sem o caminho, dos arquivos com as geometrias, separados por v&iacute;rgula.
+	$lista - Nomes, sem o caminho, dos arquivos com as geometrias, separados por v&iacute;rgula.
 
-$tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|arraywkt. O default &eacute; stringArquivos
-*/
+	$tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|arraywkt. O default &eacute; stringArquivos
+	*/
 	function incmapageometrias($dir_tmp,$imgdir,$lista,$tipoLista="stringArquivos")
 	{
 		$dir = $dir_tmp."/".$imgdir."/";
@@ -2521,7 +2700,9 @@ $tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|ar
 					//echo $geo["wkt"]."<br>";
 					$shapes[] = ms_shapeObjFromWkt(str_replace("'","",$geo["wkt"]));
 					foreach ($geo["valores"] as $v)
-					{$valorestemp[] = $v["item"]."=".$v["valor"];}
+					{
+						$valorestemp[] = $v["item"]."=".$v["valor"];
+					}
 					$valoresoriginais[] = implode(" ",$valorestemp);
 				}
 			}
@@ -2545,11 +2726,17 @@ $tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|ar
 			$tituloTema = " marcadores";
 		}
 		//verifica o tipo
-		if (count($shapes) == 0){return("erro.");}
+		if (count($shapes) == 0){
+			return("erro.");
+		}
 		$tiposhape = $shapes[0]->type;
 		$tiposhapefile = MS_SHP_POLYGON;
-		if ($tiposhape == 0){$tiposhapefile = MS_SHP_MULTIPOINT;}
-		if ($tiposhape == 1){$tiposhapefile = MS_SHP_ARC;}
+		if ($tiposhape == 0){
+			$tiposhapefile = MS_SHP_MULTIPOINT;
+		}
+		if ($tiposhape == 1){
+			$tiposhapefile = MS_SHP_ARC;
+		}
 		//cria o shapefile
 		if($this->dbaseExiste == false){
 			include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
@@ -2561,31 +2748,34 @@ $tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|ar
 		$novoshpf = ms_newShapefileObj($nomeshp, $tiposhapefile);
 		$def[] = array("ID","C","250");
 		if($this->dbaseExiste == false)
-		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
+		{
+			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
+		}
 		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		if($this->dbaseExiste == false)
-		$db=xbase_open($dbname,2);
+			$db=xbase_open($dbname,2);
 		else
-		$db=dbase_open($dbname,2);
+			$db=dbase_open($dbname,2);
 		$conta = 0;
 		foreach ($shapes as $s)
 		{
 			$reg = array();
 			$reg[] = $valoresoriginais[$conta];
 			if($this->dbaseExiste == false)
-			xbase_add_record($db,$reg);
+				xbase_add_record($db,$reg);
 			else
-			dbase_add_record($db,$reg);
+				dbase_add_record($db,$reg);
 			$novoshpf->addshape($s);
 			$conta = $conta + 1;
 		}
 		if($this->dbaseExiste == false)
-		xbase_close($db);
+			xbase_close($db);
 		else
-		dbase_close($db);
+			dbase_close($db);
 		$l->set("opacity",80);
 		$l->setmetadata("tema",$novonomelayer.$tituloTema);
 		$l->setmetadata("TEMALOCAL","SIM");
@@ -2606,28 +2796,28 @@ $tipoLista - tipo de valores que s&atilde;o passados em $lista stringArquivos|ar
 		$this->salva();
 		return($novonomelayer);
 	}
-/*
-function: gravaCoordenadasPt
+	/*
+	 function: gravaCoordenadasPt
 
-L&ecirc; as coordenadas de um tema pontual e grava em arquivos.
+	L&ecirc; as coordenadas de um tema pontual e grava em arquivos.
 
-Essa fun&ccedil;&atilde;o &eacute; utilizada nas op&ccedil;&otilde;es que utilizam o R para c&aacute;lculos e necessitam ler as coordenadas dos pontos.
+	Essa fun&ccedil;&atilde;o &eacute; utilizada nas op&ccedil;&otilde;es que utilizam o R para c&aacute;lculos e necessitam ler as coordenadas dos pontos.
 
-Parametros:
+	Parametros:
 
-tema - nome do tema com os pontos
+	tema - nome do tema com os pontos
 
-limitepontos - FALSE para considerar a extens&atilde;o geogr&aacute;fica do mapa atual e TRUE para considerar como limite as ocorr&ecirc;ncias pontuais do tema
+	limitepontos - FALSE para considerar a extens&atilde;o geogr&aacute;fica do mapa atual e TRUE para considerar como limite as ocorr&ecirc;ncias pontuais do tema
 
-extendelimite - percentual utilizado para extender o limite da &aacute;rea resultante
+	extendelimite - percentual utilizado para extender o limite da &aacute;rea resultante
 
-item - item com os valors de peso (opcional)
+	item - item com os valors de peso (opcional)
 
-return:
+	return:
 
-array com as dimens&otilde;es em x e y e nome dos arquivos com x e y gerados.
-*/
-function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite,$item=""){
+	array com as dimens&otilde;es em x e y e nome dos arquivos com x e y gerados.
+	*/
+	function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite,$item=""){
 		$prjMapa = $this->mapa->getProjection();
 		$layerPt = $this->mapa->getlayerbyname($tema);
 		$prjTema = $layerPt->getProjection();
@@ -2704,15 +2894,15 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite,$item=""){
 		$dimx = "c(".$xi.",".$xf.")";
 		$dimy = "c(".$yi.",".$yf.")";
 		return array("dimx"=>$dimx,"dimy"=>$dimy,"arqx"=>($nomearq."x"),"arqy"=>($nomearq."y"),"arqz"=>($nomearq."z"),"prefixoarquivo"=>$nomearq);
-}
-/*
-function unserializeGeo
+	}
+	/*
+	 function unserializeGeo
 
-Deserializa um arquivo de geometrias.
+	Deserializa um arquivo de geometrias.
 
-Parametros:
-$arquivo - arquivo que ser&aacute; processado
-*/
+	Parametros:
+	$arquivo - arquivo que ser&aacute; processado
+	*/
 	public function unserializeGeo($arq)
 	{
 		$handle = fopen ($arq, "r");
@@ -2720,55 +2910,57 @@ $arquivo - arquivo que ser&aacute; processado
 		fclose ($handle);
 		return(unserialize($conteudo));
 	}
-/*
-function serializeGeo
+	/*
+	 function serializeGeo
 
-Deserializa um arquivo de geometrias.
+	Deserializa um arquivo de geometrias.
 
-Parametros:
-$arquivo - arquivo que ser&aacute; processado
+	Parametros:
+	$arquivo - arquivo que ser&aacute; processado
 
-$geos - array com os dados
-*/
+	$geos - array com os dados
+	*/
 	public function serializeGeo($arq,$geos)
 	{
 		if (file_exists($arq))
-		{unlink($arq);}
+		{
+			unlink($arq);
+		}
 		$fp = fopen($arq,"w");
 		$r = serialize($geos);
 		fwrite($fp,$r);
 		fclose($fp);
 	}
-/*
-Function: classesRasterI
+	/*
+	 Function: classesRasterI
 
-Gera par&acirc;metros para classifica&ccedil;&atilde;o de imagens.
+	Gera par&acirc;metros para classifica&ccedil;&atilde;o de imagens.
 
-Gera a express&atilde;o e as cores para uso em classes com intervalos iguais para representa&ccedil;&atilde;o de imagens raster.
+	Gera a express&atilde;o e as cores para uso em classes com intervalos iguais para representa&ccedil;&atilde;o de imagens raster.
 
-Parametros:
+	Parametros:
 
-$minvalor {numeric} - Menor valor existente na s&eacute;rie
+	$minvalor {numeric} - Menor valor existente na s&eacute;rie
 
-$maxvalor {numeric} - Maior valor
+	$maxvalor {numeric} - Maior valor
 
-$nclasses {numeric} - N&uacute;mero de classes
+	$nclasses {numeric} - N&uacute;mero de classes
 
-$cores {array} - Cores. Array de array de cores cores[0] = array(r,g,b)
+	$cores {array} - Cores. Array de array de cores cores[0] = array(r,g,b)
 
-Retorno:
+	Retorno:
 
-(start code)
-array(
+	(start code)
 	array(
-		"nomeclasse"=>,
-		"expressao"=>,
-		"cores"=>
+			array(
+					"nomeclasse"=>,
+					"expressao"=>,
+					"cores"=>
+			)
 	)
-)
-(end)
-*/
-//error_reporting(0);
+	(end)
+	*/
+	//error_reporting(0);
 	function classesRasterI($minvalor,$maxvalor,$nclasses,$cores)
 	{
 		$resultado = array();
@@ -2804,7 +2996,7 @@ array(
 		return($r_input);
 	}
 	/*
-	Function: criaImagemR
+	 Function: criaImagemR
 
 	Cria uma imagem png a partir de dados armazenados em disco.
 
@@ -2823,7 +3015,9 @@ array(
 	function criaImagemR($nomearq)
 	{
 		if (!file_exists($nomearq."img"))
-		{return "erro";}
+		{
+			return "erro";
+		}
 		//pega os parametros
 		$abre = fopen($nomearq."h", "r");
 		while (!feof($abre))

@@ -37,7 +37,7 @@ MAP
       "TEMA"	"Localidades (usar com timeline)"
       "convcaracter"	""
       "cortepixels"	"40"
-      "cache"	"SIM"
+      #"cache"	"SIM"
       "editorsql"	""
       "LTEMPOCONVENCODE"	"SIM"
       "LTEMPOITEMFIM"	""
