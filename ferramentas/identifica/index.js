@@ -216,9 +216,13 @@ i3GEOF.identifica = {
 						}
 					}
 				});
+				var temp = i3GEO.coordenadas.formato,
+					gh = i3GEO.coordenadas.geohash.encodeGeoHash(i3GEOF.identifica.y,i3GEOF.identifica.x);
 				i3GEO.coordenadas.formato = "lista";
 				i3GEO.coordenadas.mostraCoordenadas(false,"i3GEOidentificacoordtexto",i3GEOF.identifica.x,i3GEOF.identifica.y);
+				i3GEO.coordenadas.MODOTEXTO += "Geohash: <a href='http://geohash.org/"+gh+"' target=_blank >"+gh+"</a>";
 				$i("i3GEOidentificacoordtexto").innerHTML = i3GEO.coordenadas.MODOTEXTO+"</span>";
+				i3GEO.coordenadas.formato = temp;
 			};
 			i3GEOF.identifica.listaTemas("ligados");
 			//

@@ -185,26 +185,6 @@ i3GEO.gadgets = {
 		i3GEO.util.defineValor(id,"innerHTML",i3GEO.parametros.mensageminicia);
 	},
 	/*
-	mostraCoordenadasUTM (depreciado utilize i3GEO.coordenadas)
-	*/
-	mostraCoordenadasUTM: function(id){
-		try{
-			i3GEO.coordenadas.mostraCoordenadasUTM.idhtml = i3GEO.gadgets.mostraCoordenadasUTM.idhtml;
-		}
-		catch(e){}
-		i3GEO.coordenadas.mostraCoordenadasUTM(id);
-	},
-	/*
-	mostraCoordenadasGEO (depreciado utilize i3GEO.coordenadas)
-	*/
-	mostraCoordenadasGEO: function(id){
-		try{
-			i3GEO.coordenadas.mostraCoordenadasGEO.idhtml = i3GEO.gadgets.mostraCoordenadasGEO.idhtml;
-		}
-		catch(e){}
-		i3GEO.coordenadas.mostraCoordenadasGEO(id);
-	},
-	/*
 	Function: mostraInserirKml
 
 	Mostra no mapa a a op&ccedil;&atilde;o para inserir kml.
