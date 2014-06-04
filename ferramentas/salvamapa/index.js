@@ -121,7 +121,6 @@ i3GEOF.salvaMapa = {
 		}
 	},
 	salvaMapaBanco: function(){
-		//TODO melhorar essa interface
 		var texto,funcaoOK,login = i3GEO.login.verificaCookieLogin();
 		if(login === false){
 			i3GEO.login.dialogo.abreLogin();
@@ -147,9 +146,9 @@ i3GEOF.salvaMapa = {
 						}
 					}
 				};
-				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa,true,true);
+				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa,$i("i3GEOFsalvaPref").checked,true);
 			};
-			texto = $trad(7,i3GEOF.salvaMapa.dicionario)+"<br><div id=i3GEOFsalvamapaMapa  ></div><br><br>"+$trad(15,i3GEOF.salvaMapa.dicionario);
+			texto = $trad(7,i3GEOF.salvaMapa.dicionario)+"<br><div id=i3GEOFsalvamapaMapa  ></div><br><br><input style='position:relative;top:2px;' checked type=checkbox id=i3GEOFsalvaPref />"+$trad(15,i3GEOF.salvaMapa.dicionario);
 			i3GEO.janela.prompt(texto + "<br><br>"+$trad(8,i3GEOF.salvaMapa.dicionario),funcaoOK);
 			i3GEOF.salvaMapa.comboMapas("i3GEOFsalvamapaMapa");
 		}

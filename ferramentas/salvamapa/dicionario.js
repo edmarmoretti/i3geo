@@ -67,7 +67,7 @@ i3GEOF.salvaMapa.dicionario = {
 			it:""
 		}],
 		12: [{
-			pt:"fazendo o download. Isso permitir&aacute; que voc&ecirc; faça o upload desse mesmo arquivo, restaurando o mapa.",
+			pt:"fazendo o download. Isso permitir&aacute; que voc&ecirc; fa&ccedil;a o upload desse mesmo arquivo, restaurando o mapa.",
 			en:"",
 			es:"",
 			it:""
@@ -79,7 +79,7 @@ i3GEOF.salvaMapa.dicionario = {
 			it:""
 		}],
 		14: [{
-			pt:"Fa&ccedil;a login e cadastre o mapa atual no banco de dados existente no servidor web. Com isso o mapa ser&aacute; salvo de forma permanente e outros usu&aacute;rios poderão utiliz&aacute;-lo. Consulte o admnistrador do site que você está utilizando para saber mais sobre a pol&iacute;tica de uso do mapa que for salvo",
+			pt:"Fa&ccedil;a login e cadastre o mapa atual no banco de dados existente no servidor web. Com isso o mapa ser&aacute; salvo de forma permanente e outros usu&aacute;rios poderï¿½o utiliz&aacute;-lo. Consulte o admnistrador do site que vocï¿½ estï¿½ utilizando para saber mais sobre a pol&iacute;tica de uso do mapa que for salvo",
 			en:"",
 			es:"",
 			it:""
