@@ -149,8 +149,9 @@ i3GEOF.centromassa = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>"+$trad(1,i3GEOF.centromassa.dicionario)+"</p>";
-		ins += "<p class='paragrafo'>"+$trad(2,i3GEOF.centromassa.dicionario)+"</p>";
+		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/centromassa/exemplo.png' />" +
+		"<p class='paragrafo'>"+$trad(1,i3GEOF.centromassa.dicionario)+"</p>" +
+		"<p class='paragrafo'>"+$trad(2,i3GEOF.centromassa.dicionario)+"</p>";
 		i3GEO.util.proximoAnterior("","i3GEOF.centromassa.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
 	},
 	t1: function(){

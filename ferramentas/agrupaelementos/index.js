@@ -150,9 +150,10 @@ i3GEOF.agrupaElementos = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.agrupaElementos.dicionario);
-		ins += "<p class='paragrafo' >"+$trad(2,i3GEOF.agrupaElementos.dicionario);
-		ins += "<p class='paragrafo' >"+$trad(3,i3GEOF.agrupaElementos.dicionario);
+		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/exemplo.png' />" +
+			"<p class='paragrafo' >"+$trad(1,i3GEOF.agrupaElementos.dicionario) +
+			"<p class='paragrafo' >"+$trad(2,i3GEOF.agrupaElementos.dicionario) +
+			"<p class='paragrafo' >"+$trad(3,i3GEOF.agrupaElementos.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.agrupaElementos.t1()",ins,"i3GEOFgradeDePontost0","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
 	},
 	t1: function(){

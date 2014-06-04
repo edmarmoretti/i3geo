@@ -152,8 +152,9 @@ i3GEOF.buffer = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.buffer.dicionario);
-		ins += "<p class='paragrafo' >"+$trad(2,i3GEOF.buffer.dicionario);
+		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/buffer/exemplo.png' />" +
+			"<p class='paragrafo' >"+$trad(1,i3GEOF.buffer.dicionario) +
+			"<p class='paragrafo' >"+$trad(2,i3GEOF.buffer.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.buffer.t1()",ins,"i3GEOFgradeDePontost0","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
 	},
 	t1: function(){
