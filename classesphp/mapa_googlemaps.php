@@ -156,7 +156,7 @@ if(!isset($_GET["telaR"])){
 			//
 			//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
 			//
-			if ($l->getmetadata("cortepixels") != ""){
+			if ($l->getmetadata("cortepixels") != "" && $qy == false){
 				$cortePixels = $l->getmetadata("cortepixels");
 			}
 			//@TODO verificar se foi corrigido em versoes novas do mapserver
