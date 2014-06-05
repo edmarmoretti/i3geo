@@ -931,7 +931,7 @@ i3GEOF.selecao = {
 	Abre uma janela flutuante para criar gr&aacute;ficos
 	*/
 	grafico: function(){
-		i3GEO.analise.dialogo.graficoInterativo();
+		i3GEO.analise.dialogo.graficoInterativo1();
 	},
 	/*
 	Function: graficoPerfil
