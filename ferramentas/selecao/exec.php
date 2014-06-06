@@ -112,6 +112,24 @@ Seleciona elementos utilizando um ret&acirc;ngulo.
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
+	/*
+	 Valor: SELECAOWKT
+	
+	Seleciona elementos utilizando um wkt
+	
+	<Selecao->selecaoBOX>
+	*/
+	case "SELECAOWKT":
+		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
+		copiaSeguranca($map_file);
+		$temas = explode(",",$tema);
+		foreach($temas as $tema){
+			$m = new Selecao($map_file,$tema,$ext);
+			$ok[] = $m->selecaoPorPoligono($tipo,"","",$wkt);
+		}
+		$_SESSION["contadorsalva"]++;
+		redesenhaMapa();
+	break;
 /*
 Valor: SELECAOPT
 

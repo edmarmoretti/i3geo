@@ -79,7 +79,7 @@ i3GEOF.selecao.dicionario = {
 			it:""
 		}],
 		14: [{
-			pt:"Adicionar à sele&ccedil;&atilde;o",
+			pt:"Adicionar &agrave; sele&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
@@ -187,7 +187,7 @@ i3GEOF.selecao.dicionario = {
 			it:""
 		}],
 		32: [{
-			pt:"",
+			pt:"Utiliza uma figura j&aacute; desenhada no mapa",
 			en:"",
 			es:"",
 			it:""

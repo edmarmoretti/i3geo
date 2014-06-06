@@ -24,7 +24,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -160,7 +160,7 @@ $xs - lista de coordenadas x separadas por virgula
 
 $ys - lista de coordenadas y separadas por virgula
 */
-	function selecaoPorPoligono($tipo,$xs,$ys)
+	function selecaoPorPoligono($tipo,$xs="",$ys="",$wkt="")
 	{
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
@@ -178,31 +178,27 @@ $ys - lista de coordenadas y separadas por virgula
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
-		/*
-		$shp_atual = array();
-		for ($i = 0; $i < $res_count;++$i)
-		{
-			$rc = $this->layer->getResult($i);
-			$shp_atual[] = $rc->shapeindex;
-		}
-		$this->mapa->freequery($indxlayer);
-		*/
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
 
 		$shpi = array();
 		//transforma os pontos em shape
-		$s = ms_newShapeObj(MS_SHAPE_POLYGON);
-		$linha = ms_newLineObj();
-		$xs = explode(",",$xs);
-		$ys = explode(",",$ys);
-		for($i=0;$i<(count($xs));++$i)
-		{
-			$linha->addxy($xs[$i],$ys[$i]);
+		if($wkt != ""){
+			$s = ms_shapeObjFromWkt($wkt);
 		}
-		$linha->addxy($xs[0],$ys[0]);
-		$s->add($linha);
+		else{
+			$s = ms_newShapeObj(MS_SHAPE_POLYGON);
+			$linha = ms_newLineObj();
+			$xs = explode(",",$xs);
+			$ys = explode(",",$ys);
+			for($i=0;$i<(count($xs));++$i)
+			{
+				$linha->addxy($xs[$i],$ys[$i]);
+			}
+			$linha->addxy($xs[0],$ys[0]);
+			$s->add($linha);
+		}
 		$this->layer->querybyshape($s);
 		$res_count = $this->layer->getNumresults();
 		for ($i = 0; $i < $res_count; ++$i)
@@ -778,7 +774,7 @@ Exporta elementos selecionados de um tema em shape file e adiciona no mapa atual
 parameters:
 $locaplic - localiza&ccedil;&atilde;o do I3geo
 
-$dir_tmp - localiza&ccedil;&atilde;o do diretório tempor&aacute;rio
+$dir_tmp - localiza&ccedil;&atilde;o do diretï¿½rio tempor&aacute;rio
 */
 	function selecao2tema($locaplic,$dir_tmp)
 	{

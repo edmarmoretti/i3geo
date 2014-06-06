@@ -22,7 +22,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -135,7 +135,7 @@ Salva o mapfile atual
 /*
 function: criaSHPvazio
 
-Cria um shape file do tipo pontual vazio no diretório local
+Cria um shape file do tipo pontual vazio no diretï¿½rio local
 
 Parameter:
 
@@ -201,12 +201,12 @@ Nome do tema criado.
 /*
 function: insereSHP
 
-Insere um ponto em um shape file no diretório local
+Insere um ponto em um shape file no diretï¿½rio local
 
 parameters:
 $xy - X e y do novo ponto, separados por espa&ccedil;os. Pode ser mais de um ponto.
 
-$projecao - código epsg da proje&ccedil;&atilde;o das coordenadas
+$projecao - cï¿½digo epsg da proje&ccedil;&atilde;o das coordenadas
 */
 	function insereSHP($xy,$projecao,$item="",$valor="")
 	{
@@ -271,7 +271,7 @@ $projecao - código epsg da proje&ccedil;&atilde;o das coordenadas
 /*
 function: insereSHPgrafico
 
-Insere um ponto em um shape file, criado no diretório tempor&aacute;rio, e adiciona ao mapa
+Insere um ponto em um shape file, criado no diretï¿½rio tempor&aacute;rio, e adiciona ao mapa
 atual. O layer adicionado &eacute; representado como um s&iacute;mbolo, constru&iacute;do a partir de uma
 imagem tempor&aacute;ria representando o gr&aacute;fico criado.
 
