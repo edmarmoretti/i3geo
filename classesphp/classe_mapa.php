@@ -267,7 +267,6 @@ class Mapa
 				"usasld",
 				"cache",
 				"editavel",
-				"editavel",
 				"colunaidunico",
 				"cortepixels"
 		);
@@ -445,7 +444,6 @@ class Mapa
 				 		"usasld"=>$usasld,
 				 		"cache"=>$cache,
 				 		"editavel"=>($oLayer->getmetadata("EDITAVEL")),
-				 		"editavel"=>($oLayer->getmetadata("EDITAVEL")),
 				 		"colunaidunico"=>($oLayer->getmetadata("COLUNAIDUNICO")),
 				 		"cortepixels"=>$cortepixels
 				 );
@@ -487,7 +485,6 @@ class Mapa
 						$oLayer->getmetadata("itembuscarapida"),
 						$usasld,
 						$cache,
-						$oLayer->getmetadata("EDITAVEL"),
 						$oLayer->getmetadata("EDITAVEL"),
 						$oLayer->getmetadata("COLUNAIDUNICO"),
 						$cortepixels

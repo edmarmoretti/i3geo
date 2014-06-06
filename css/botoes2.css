@@ -308,10 +308,11 @@
 	background-position: 0px -672px;
 }
 
-.i3GEOfonteDados {
+.i3GEOiconeIdentifica {
 	background-image: URL('../imagens/visual/default/sprite2.png');
 	background-repeat: no-repeat;
-	background-position: 0px -696px;
+	width:	14px;
+	background-position: 0px -744px;
 }
 
 .ticDownload {

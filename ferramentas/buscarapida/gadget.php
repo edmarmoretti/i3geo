@@ -1,14 +1,14 @@
 <?php
 include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 if(!isset($palavra))
-{echo "Parâmetro &palavra= n&atilde;o foi definido. 'palavra' &eacute; a palavra que ser&aacute; buscada";}
+{echo "Par&acirc;metro &palavra= n&atilde;o foi definido. 'palavra' &eacute; a palavra que ser&aacute; buscada";}
 if(!isset($locaplic))
-{echo "<br>Parâmetro &locaplic= n&atilde;o foi definido. 'locaplic' indica onde o i3geo est&aacute; instalado";}
+{echo "<br>Par&acirc;metro &locaplic= n&atilde;o foi definido. 'locaplic' indica onde o i3geo est&aacute; instalado";}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 			<link rel="stylesheet" type="text/css" href="../../css/ferramentas.css"></link>
-			<link rel="stylesheet" type="text/css" href="../../css/botoes.css"></link>
+			<link rel="stylesheet" type="text/css" href="../../css/botoes2.css"></link>
 		<title></title>
 	</head>
 	<body class="yui-skin-sam;" style="overflow:auto;">

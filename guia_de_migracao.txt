@@ -29,6 +29,8 @@ para classe_desenho.js
 - alteração na estrutura do objeto que contém as informações sobre as camadas existentes no mapa. Esse objeto foi reduzido em 
 tamanho passando a usar uma lista de chaves e um array com os valores. Esse objeto é estruturado no servidor por classe_temas.php
 
+- remoção do arquivo css/botoes.css em favor de css/botoes2.css
+
 -------------------------------------------------------------------------------------------------
 Para a versão 5.0
 
