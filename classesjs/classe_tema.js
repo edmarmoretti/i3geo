@@ -77,11 +77,25 @@ i3GEO.tema = {
 	Parametros:
 
 	tema - codigo do tema
+	
+	popup {boolean}
 	*/
-	fonte: function(tema){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.fonte()");}
+	fonte: function(tema,popup){
 		i3GEO.mapa.ativaTema(tema);
-		window.open(i3GEO.configura.locaplic+"/admin/abrefontemapfile.php?tema="+tema);
+		if(!popup){
+			window.open(i3GEO.configura.locaplic+"/admin/abrefontemapfile.php?tema="+tema);
+		}
+		else{
+			i3GEO.janela.cria(
+					(i3GEO.parametros.w/2)+25+"px",
+					(i3GEO.parametros.h/2)+18+"px",
+					i3GEO.configura.locaplic+"/admin/abrefontemapfile.php?tema="+tema,
+					"",
+					"",
+					"Metadata",
+					"metadata"+tema
+				);
+		}
 	},
 	/*
 	Sobe um tema na ordem de desenho

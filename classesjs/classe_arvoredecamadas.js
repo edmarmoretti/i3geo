@@ -1389,7 +1389,7 @@ i3GEO.arvoreDeCamadas = {
 			}
 			//fonte
 			if(i3GEO.arvoreDeCamadas.FUNCOES.fonte === true && tema.features.toLowerCase() !== "sim" && tema.name != "mundo"){
-				html += "&nbsp;<img class='ajuda_usuario' style='top:-2px;' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("a9")+"' onclick='i3GEO.tema.fonte(\""+tema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("a9")+"','fonte')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
+				html += "&nbsp;<img class='ajuda_usuario' style='top:-2px;' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("a9")+"' onclick='i3GEO.tema.fonte(\""+tema.name+"\",true)' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("a9")+"','fonte')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
 			}
 			//manter a l&oacute;gica de exigir sim ao inv&eacute;s de vazio
 			if (tema.download.toLowerCase() === "sim" || tema.download === "" && tema.features.toLowerCase() !== "sim"){
