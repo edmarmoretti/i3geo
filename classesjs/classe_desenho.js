@@ -219,10 +219,12 @@ i3GEO.desenho = {
 				return s;	
 			},
 			destroyFeatures: function(f){
-				var i,n = f.length;
-				for(i=0;i<n;i++){
-					f[i].setMap(null);
-					f[i] = "";
+				if(f){
+					var i,n = f.length;
+					for(i=0;i<n;i++){
+						f[i].setMap(null);
+						f[i] = "";
+					}
 				}
 			}
 		},

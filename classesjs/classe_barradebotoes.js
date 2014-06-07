@@ -1496,26 +1496,36 @@ i3GEO.barraDeBotoes = {
 		googlemaps: {
 			inicia: function(idjanela){
 				var temp = function(){
-					var cabecalho, minimiza,
+					var cabecalho, minimiza,fecha,
 						janela = YAHOO.i3GEO.janela.manager.find("i3GEOjanelaEditor");
 					if(janela){
 						janela.destroy();
 					}
-					cabecalho = function() {
+					cabecalho = function(){
 					};
 					minimiza = function() {
 						i3GEO.janela.minimiza("i3GEOjanelaEditor");
 					};
-					i3GEO.janela.cria("300px", "100px", "", "", "",
+					janela = i3GEO.janela.cria("300px", "100px", "", "", "",
 						"Editor", "i3GEOjanelaEditor", false, "hd",
 						cabecalho, minimiza);
 					$i("i3GEOjanelaEditor_corpo").style.backgroundColor = "white";
 					i3GEO.editorGM.inicia("i3GEOjanelaEditor_corpo");
+					fecha = function(){
+						var temp = window.confirm("Remove a edicao?");
+						if(i3GEO.eventos){
+							i3GEO.eventos.cliquePerm.ativa();
+						}
+						if(temp === true){
+							i3GEO.desenho.googlemaps.destroyFeatures(i3GEO.desenho.googlemaps.shapes);
+						}
+					};
+					YAHOO.util.Event.addListener(janela[0].close, "click", fecha);
 				};
 				//@TODO incluir o js compactado ao inves do original
 				if(!i3GEO.editorGM){
 					i3GEO.util.scriptTag(
-						i3GEO.configura.locaplic+"/classesjs/classe_editorgm.js",
+						i3GEO.configura.locaplic+"/classesjs/compactados/classe_editorgm_compacto.js",
 						temp,
 						"editorgm.js",
 						true

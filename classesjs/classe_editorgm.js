@@ -190,7 +190,7 @@ i3GEO.editorGM = {
 		 */
 		html:function(){
 			var ins = '<div style=margin-left:5px >' +
-			'	<button title="Desenhar um pol�gono" onclick="i3GEO.editorGM.digitalizaPol(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon-create.png" /></button>' +
+			'	<button title="Desenhar um poligono" onclick="i3GEO.editorGM.digitalizaPol(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon-create.png" /></button>' +
 			'	<button title="Adicionar ponto" onclick="i3GEO.editorGM.digitalizaPt(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/point-create.png" /></button>' +
 			'	<button title="Capturar elemento de um tema" onclick="i3GEO.editorGM.capturaPoligonoTema.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-import.png" /></button>' +
 			'	<button title="Selecionar" onclick="i3GEO.editorGM.seleciona(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>' +
