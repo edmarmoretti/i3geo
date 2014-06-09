@@ -155,5 +155,11 @@ i3GEOF.identifica.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		27: [{
+			pt:"Remove filtro",
+			en:"",
+			es:"",
+			it:""
 		}]
 };

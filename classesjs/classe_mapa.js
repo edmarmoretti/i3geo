@@ -914,7 +914,7 @@ i3GEO.mapa = {
 				else{
 					i3GEOF.identifica.x = objposicaocursor.ddx;
 					i3GEOF.identifica.y = objposicaocursor.ddy;
-					i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);
+					i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy);
 				}
 				
 				return;
