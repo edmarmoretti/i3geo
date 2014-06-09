@@ -299,7 +299,7 @@ i3GEO.janela = {
 		}
 		ins += '</div><div id="'+id+'_corpo" class="bd" style="'+this.ESTILOBD+'">';
 		if(wsrc !== ""){
-			ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';
+			ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid;width:100%"></iframe>';
 		}
 		ins += '</div>';
 		ins += '<div class="ft"></div>';
@@ -320,7 +320,7 @@ i3GEO.janela = {
 		wdocaiframe = $i(id+"i");
 		if(wdocaiframe){
 			temp = wdocaiframe.style;
-			temp.width = parseInt(wlargura,10)-12 + "px";
+			//temp.width = parseInt(wlargura,10)-12 + "px";
 			temp.height = waltura;
 			temp.display = "block";
 			wdocaiframe.src = wsrc;
@@ -355,6 +355,9 @@ i3GEO.janela = {
 			});
 			resize.on('resize', function(args) {
 						this.cfg.setProperty("height", args.height + "px");
+						if($i(id+"i")){
+							$i(id+"i").style.height = args.height + "px";
+						}
 				}, janela, true);
 			if(funcaoAposRedim && funcaoAposRedim != ""){
 				resize.on('endResize', function(args) {
