@@ -229,12 +229,14 @@ i3GEO.janela = {
 	dimensionavel {boolean} - (opcional) a janela pode ser redimensionada ou nao pelo usuario
 	 
 	icone {string}
+	
+	funcaoDuplica {funcao} funcao executada quando o icone + for clicado
 
 	Return:
 
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
-	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza, funcaoAposRedim, dimensionavel,icone){
+	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza, funcaoAposRedim, dimensionavel,icone,funcaoDuplica){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
 		if(!dimensionavel){
 			dimensionavel = true;
@@ -294,6 +296,9 @@ i3GEO.janela = {
 			ins += "<img class='i3GeoIconeJanela' src='"+icone+"' >";
 		}
 		ins += "<span style='font-size:10px;'>"+texto+"</span>";
+		if(funcaoDuplica){
+			ins += "<div id='"+id+"_duplicaJanela' class='container-duplica'></div>";
+		}
 		if(funcaoMinimiza){
 			ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza'></div>";
 		}
@@ -390,6 +395,9 @@ i3GEO.janela = {
 
 		YAHOO.util.Event.addListener($i(id+'_corpo'), "click", YAHOO.util.Event.stopPropagation);
 		//finaliza
+		if(funcaoDuplica){
+			$i(id+'_duplicaJanela').onclick = funcaoDuplica;
+		}
 		if(funcaoCabecalho){
 			$i(id+'_cabecalho').onclick = funcaoCabecalho;
 		}

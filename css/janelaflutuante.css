@@ -137,6 +137,22 @@
 	filter: alpha(opacity =     80);
 }
 
+.yui-skin-sam .container-duplica {
+	background: transparent
+		url(../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat
+		scroll 0 -349px;
+	cursor: pointer;
+	height: 15px;
+	position: absolute;
+	right: 57px;
+	top: 3px;
+	width: 25px;
+	z-index: 2001;
+	opacity: .8;
+	filter: alpha(opacity =     80);
+}
+
+
 .yui-skin-sam .yui-panel .bd {
 	text-align: left;
 	font-size: 10px;
