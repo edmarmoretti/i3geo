@@ -29,7 +29,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -50,16 +50,16 @@ cp - o resultado da opera&ccedil;&atilde;o ser&aacute; retornado em um objeto CP
 
 Vari&aacute;veis de Se&ccedil;&atilde;o:
 
-dir_tmp - diretório, no servidor, tempor&aacute;rio utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
+dir_tmp - diretorio, no servidor, tempor&aacute;rio utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
 locmapserv - localiza&ccedil;&atilde;o, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
 locaplic - localiza&ccedil;&atilde;o, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
 R_path - localiza&ccedil;&atilde;o, no servidor, do execut&aacute;vel do pacote R, exemplo: c:/ms4w/apache/htdocs/i3geo/pacotes/r/win/bin/R.exe
 imgurl - url das imagens geradas pelo mapa, exemplo: http://localhost/ms_tmp/imgTVHbdijFMk/
-tmpurl - url do diretório tempor&aacute;rio, exemplo: http://localhost/ms_tmp/
+tmpurl - url do diretorio tempor&aacute;rio, exemplo: http://localhost/ms_tmp/
 map_file - endere&ccedil;o, no servidor, do mapfile atual, exemplo: c:/ms4w/tmp/ms_tmp/TVHbdijFMk/TVHbdijFMk.map
 mapext - extens&atilde;o geogr&aacute;fica do mapa atual, exemplo: -76.5125927 -39.3925675209 -29.5851853 9.49014852081
 perfil - nome do perfil para controlar os temas que ser&atilde;o vis&iacute;veis na lista de temas.
-mapdir - localiza&ccedil;&atilde;o, no servidor, do diretório com o mapfile tempor&aacute;rio do mapa atual.
+mapdir - localiza&ccedil;&atilde;o, no servidor, do diretorio com o mapfile tempor&aacute;rio do mapa atual.
 imgdir - localiza&ccedil;&atilde;o, no servidor, das imagens tempor&aacute;rias do mapa atual.
 debug - (pode ser definido como "sim" indica se o erro_reporting deve ser definido como E_ALL
 */
@@ -78,15 +78,18 @@ if(isset($g_sid))
 	session_id($g_sid);
 	session_start();
 	//guarda na section se o id tiver sido enviado epla URL
-	if(isset($atlasId))
-	{$_SESSION["atlasId"] = $atlasId;}
+	if(isset($atlasId)){
+		$_SESSION["atlasId"] = $atlasId;
+	}
 	//
-	foreach(array_keys($_SESSION) as $k)
-	{eval("\$".$k."='".$_SESSION[$k]."';");}
+	foreach(array_keys($_SESSION) as $k){
+		eval("\$".$k."='".$_SESSION[$k]."';");
+	}
 	$postgis_mapa = $_SESSION["postgis_mapa"];
 }
-if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas"))
-{$map_file = "";}
+if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas")){
+	$map_file = "";
+}
 //
 //ativa o php mapscript e as extens&otilde;es necess&aacute;rias
 //se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
@@ -96,15 +99,13 @@ include_once("funcoes_gerais.php");
 //
 //verifica se o usu&aacute;rio est&aacute; tentando utilizar um link que n&atilde;o funciona mais
 //
-if (!isset($map_file))
-{
+if (!isset($map_file)){
 	cpjson(array("erro"=>"linkquebrado"));
 	exit;
 }
 include_once("classe_vermultilayer.php");
 
-if ($map_file != "")
-{
+if ($map_file != ""){
 	//
 	//copia o map_file atual com outro nome para restaurar caso ocorra algum problema
 	//
@@ -114,12 +115,16 @@ if ($map_file != "")
 	//
 	substituiCon($map_file,$postgis_mapa);
 }
-if(!isset($locaplic))
-{
-	include(dirname(__FILE__)."/ms_configura.php");
+if(!isset($locaplic)){
+	include(dirname(__FILE__)."/../ms_configura.php");
 }
+
 include($locaplic."/admin/php/xml.php");
-$xml = simplexml_load_string(geraXmlAtlas($locaplic,$editores));
+
+$xml = geraXmlAtlas($locaplic,$editores);
+
+$xml = simplexml_load_string($xml);
+
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -154,8 +159,9 @@ Esse programa &eacute; chamado diretamente, por exemplo, i3geo/classesphp/atlas_
 		$base = $res["base"];
 		if ($interface == "")
 		{
-			echo "Erro. Nenhuma interface definida para esse Atlas";
-			exit;
+			$interface = "../interface/atlasdefault.htm";
+			//echo "Erro. Nenhuma interface definida para esse Atlas";
+			//exit;
 		}
 		if (!isset($caminho))
 		{$caminho = "../";}

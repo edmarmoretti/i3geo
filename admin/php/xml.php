@@ -24,7 +24,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c�pia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -37,12 +37,14 @@ i3geo/admin/php/xml.php
 //processa a vari&aacute;vel $esquemaadmin definida em ms_configura.php
 //essa vari&aacute;vel precisa ter um . no final quando n&atilde;o for vazia, evitando erros na inclus&atilde;o dentro dos SQLs
 //
+
 if (!isset($esquemaadmin)){
 	include_once(dirname(__FILE__)."/../../ms_configura.php");
 }
 if(!empty($esquemaadmin)){
 	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }
+
 /*
 Function: geraXmlSistemas (depreciado)
 
@@ -521,6 +523,7 @@ function geraXmlAtlas($locaplic,$editores)
 	error_reporting(0);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
+	
 	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
 	else

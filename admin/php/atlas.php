@@ -23,7 +23,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -36,7 +36,7 @@ Parametros:
 
 O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&atilde;o ser&aacute; executada, por exemplo, atlas.php?funcao=pegaAtlas
 
-Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
+Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
 include_once(dirname(__FILE__)."/login.php");
@@ -329,15 +329,15 @@ switch (strtoupper($funcao))
 		/*
 		 Valor: MOVIMENTANO
 
-		Muda a ordem de um nó
+		Muda a ordem de um nï¿½
 
 		Parametros:
 
-		tipo - tipo de nó tema|prancha|atlas
+		tipo - tipo de nï¿½ tema|prancha|atlas
 
 		movimento - sobe|desce
 
-		id- id do nó
+		id- id do nï¿½
 
 		Retorno:
 

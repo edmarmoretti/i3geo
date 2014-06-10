@@ -55,8 +55,8 @@ function iniciaAtlas(combow,atlasId)
 	var localTitulo, monta;
 	if(!combow)
 	{combow = 0;}
-	document.body.style.width = "100%";
-	document.body.style.height = parseInt(document.body.style.height)+20  + "px";
+	//document.body.style.width = "100%";
+	//document.body.style.height = parseInt(document.body.style.height)+20  + "px";
 	cpObjAtlas = new cpaint();
 	cpObjAtlas.set_async("true");
 	cpObjAtlas.set_response_type("JSON");
@@ -135,8 +135,9 @@ function iniciaAtlas(combow,atlasId)
 			{icone = retorno.data.icone;}
 			localTitulo.innerHTML = retorno.data.titulo;
 		}
-		if (retorno.data.link != "")
-		{wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");}
+		if (retorno.data.link != ""){
+			i3GEO.janela.cria(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");
+		}
 		if(retorno.data.pranchadefault != "")
 		{abrePrancha(retorno.data.pranchadefault);}
 		i3GEO.mapa.ajustaPosicao();
@@ -239,7 +240,7 @@ function abrePrancha(id)
 		i3GEO.janela.fechaAguarde("Atlas");
 		if(retorno.data.link != "")
 		{
-			wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");
+			i3GEO.janela.cria(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");
 		}
 		try{
 			if(i3GEO.Interface.ATUAL == "googlemaps")
