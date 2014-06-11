@@ -114,7 +114,10 @@ i3GEO.calculo = {
 			}
 			if(i3GEO.Interface.ATUAL === "openlayers" && docmapa.id !== "mapaReferencia"){
 				pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-				xy = i3geoOL.getViewPortPxFromLonLat(new OpenLayers.LonLat(vx,vy));
+				xy = i3GEO.util.extGeo2OSM(vx+" "+vy,true);
+				xy = i3geoOL.getLayerPxFromLonLat(new OpenLayers.LonLat(xy[0],xy[1]));
+				xy = i3geoOL.getViewPortPxFromLayerPx(xy);
+				//xy = i3geoOL.getPixelFromLonLat(new OpenLayers.LonLat(vx,vy));
 				return [(xy.x)+pos[0],(xy.y)+pos[1]];
 			}
 			if(arguments.length === 3){

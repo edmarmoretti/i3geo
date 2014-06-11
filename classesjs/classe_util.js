@@ -2940,7 +2940,7 @@ i3GEO.util = {
 
 	Converte string 'xmin ymin xmax ymax' ou 'xmin ymin' de geo para a projecao OSM
 	*/
-	extGeo2OSM: function(ext){
+	extGeo2OSM: function(ext,retornaArray){
 		if(i3GEO.Interface.openlayers.googleLike === true){
 			var metrica,point,proj900913,projWGS84,temp = ext.split(" ");
 			if(temp[0]*1 <= 180 && temp[0]*1 >= -180){
@@ -2956,14 +2956,19 @@ i3GEO.util = {
 				}
 			}
 		}
-		return ext;
+		if(retornaArray){
+			return ext.split(" ");
+		}
+		else{
+			return ext;
+		}
 	},
 	/*
 	Function: extOSM2Geo
 
 	Converte string 'xmin ymin xmax ymax' ou 'xmin ymin' de geo para a projecao OSM
 	*/
-	extOSM2Geo: function(ext){
+	extOSM2Geo: function(ext,retornaArray){
 		if(i3GEO.Interface.openlayers.googleLike === true){
 			var metrica,point,proj900913,projWGS84,temp = ext.split(" ");
 			if(temp[0]*1 >= 180 || temp[0]*1 <= -180){
@@ -2979,7 +2984,12 @@ i3GEO.util = {
 				}
 			}
 		}
-		return ext;
+		if(retornaArray){
+			return ext.split(" ");
+		}
+		else{
+			return ext;
+		}
 	},
 	/*
 	Function: projOSM2Geo
