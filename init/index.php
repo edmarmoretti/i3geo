@@ -188,6 +188,10 @@ botoesIni.push({
 	"href":"../geradordelinks.htm",
 	"titulo":$trad(13,g_traducao_init)
 	},{
+	"img":"atlas.png",
+	"href":"../atlas",
+	"titulo":$trad(27,g_traducao_init)
+	},{
 	"img":"folder-image.png",
 	"href":"../exemplos",
 	"titulo":$trad(14,g_traducao_init)
