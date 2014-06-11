@@ -792,15 +792,18 @@ class Metaestat{
 			$srid = $meta["srid"];
 			//pega as colunas menos as do tipo geometry
 			$colunastabela = $this->colunasTabela($meta["codigo_estat_conexao"],$meta["esquemadb"],$meta["tabela"],"geometry","!=");
-			//define as colunas que serão mostradas no sql
+			//define as colunas que serao mostradas no sql
 			$vis = $meta["colunasvisiveis"];
-
+			$colunaSerial = $this->listaTipoRegiaoSerial($codigo_tipo_regiao);
 			if($vis != ""){
 				$vis = str_replace(";",",",$vis);
 				$vis = str_replace(",,",",",$vis);
 				$vis = explode(",",$vis);
 				$itens = $vis;//array
 				$vis[] = $meta["identificador"];
+				if(!empty($colunaSerial)){
+					$vis[] = $colunaSerial;
+				}
 				$vis = array_unique($vis);
 				$visiveis = array();
 				//verifica se as colunas existem mesmo
@@ -819,11 +822,18 @@ class Metaestat{
 				$apelidos = str_replace(",,",",",$apelidos);
 				$apelidos = mb_convert_encoding($apelidos,"ISO-8859-1",mb_detect_encoding($apelidos));
 				$apelidos = explode(",",$apelidos);
+				if(!empty($colunaSerial)){
+					$apelidos[] = $colunaSerial." (serial)";
+				}
 				$apelidos = array_unique($apelidos);
 			}
 			else{
 				$itens = array();
 				$apelidos = array();
+				if(!empty($colunaSerial)){
+					$colunastabela[] = $colunastabela;
+					$colunastabela = array_unique($colunastabela);
+				}
 				$vis = implode($colunastabela,",");
 			}
 			$sqlf = $colunageo." from (select st_setsrid(".$colunageo.",".$srid.") as $colunageo,$vis from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique ".$meta["identificador"]." using srid=".$srid;
@@ -845,15 +855,12 @@ class Metaestat{
 			$dados[] = '		CLASSE "SIM"';
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
-			if($meta["esquemadb"] == "i3geo_metaestat"){
-				$colunaSerial = $this->listaTipoRegiaoSerial($codigo_tipo_regiao);
-				if(!empty($colunaSerial)){
-					$dados[] = '		EDITAVEL "SIM"';
-					$dados[] = '		COLUNAIDUNICO "'.$colunaSerial.'"';
-					$dados[] = '		TABELAEDITAVEL "'.$meta["tabela"].'"';
-					$dados[] = '		ESQUEMATABELAEDITAVEL "'.$meta["esquemadb"].'"';
-					$dados[] = '		COLUNAGEOMETRIA "'.$colunageo.'"';
-				}
+			if($meta["esquemadb"] == "i3geo_metaestat" && !empty($colunaSerial)){
+				$dados[] = '		EDITAVEL "SIM"';
+				$dados[] = '		COLUNAIDUNICO "'.$colunaSerial.'"';
+				$dados[] = '		TABELAEDITAVEL "'.$meta["tabela"].'"';
+				$dados[] = '		ESQUEMATABELAEDITAVEL "'.$meta["esquemadb"].'"';
+				$dados[] = '		COLUNAGEOMETRIA "'.$colunageo.'"';
 			}
 			$dados[] = '		TIP "'.$meta["colunanomeregiao"].'"';
 			if(count($itens) == count($apelidos)){
@@ -2276,7 +2283,7 @@ class Metaestat{
 	}
 	/**
 	 * Lista os metadados de uma coluna
-	 * Os metadados são obtidos do próprio PostgreSQL
+	 * Os metadados sï¿½o obtidos do prï¿½prio PostgreSQL
 	 * @param codigo da conexao
 	 * @param nome do esquema
 	 * @param nome da tabela
@@ -2504,7 +2511,7 @@ class Metaestat{
 		return false;
 	}
 	/**
-	 * Insere dados de um arquivo CSV em uma tabela no padrão usado pelo METAESTAT
+	 * Insere dados de um arquivo CSV em uma tabela no padrï¿½o usado pelo METAESTAT
 	 * O arquivo ja deve estar no servidor
 	 * A medida de variavel ja deve ter sido criada
 	 * A tabela deve ter a estrutura de colunas utilizada como padrao do METAESTAT

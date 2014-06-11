@@ -1274,7 +1274,7 @@ class Mapa
 						//
 						//verifica se &eacute; um WMS e se existem classes definidas
 						//se existirem as classes, &eacute; criado um SLD para ser aplicado ao layer
-						//O SLD s� funciona se CLASSITEM estiver definido
+						//O SLD so funciona se CLASSITEM estiver definido
 						//
 						if($nlayer->classitem != "" && $nlayer->connectiontype == 7 && $nlayer->numclasses > 0 && $nlayer->getmetadata("wms_sld_body") == ""){
 							$tipotemp = $nlayer->type;
