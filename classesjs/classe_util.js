@@ -684,6 +684,7 @@ i3GEO.util = {
 	array[top,left] - valores em pixel da posicao calculada da imagem
 	*/
 	posicionaImagemNoMapa: function(id,x,y){
+		//TODO permitir posicionar imagem usando lat long
 		if(typeof(console) !== 'undefined'){console.warn("i3GEO.util.posicionaImagemNoMapa()");}
 		var i,mx,my;
 		if(x && x != "")
@@ -709,8 +710,24 @@ i3GEO.util = {
 		var l,i;
 		l = i3GEO.util.PINS.length;
 		for (i=0; i<l; i++){
-			if($i(i3GEO.util.PINS[i]))
-			{$i(i3GEO.util.PINS[i]).style.display = "none";}
+			if($i(i3GEO.util.PINS[i])){
+				$i(i3GEO.util.PINS[i]).style.display = "none";
+			}
+		}
+	},
+	removePin: function(id){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.removePin()");}
+		var l,i,idpin;
+		l = i3GEO.util.PINS.length;
+		for (i=0; i<l; i++){
+			idpin = i3GEO.util.PINS[i];
+			if($i(idpin)){
+				if(!id || (id && id === idpin)){
+					$i(idpin).style.display = "none";
+					i3GEO.util.removeChild(idpin);
+					i3GEO.util.PINS.remove(i);
+				}
+			}
 		}
 	},
 	/*

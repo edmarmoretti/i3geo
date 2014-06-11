@@ -182,7 +182,7 @@ i3GEO.janela = {
 		//esconde o box de zoom e outros objetos tempor&aacute;rios se estiverem vis&iacute;veis
 		//
 		var iu = i3GEO.util;
-		iu.escondePin();
+		//iu.escondePin();
 		iu.escondeBox();
 	},
 	/*
@@ -488,7 +488,7 @@ i3GEO.janela = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.fecha()");}
 		var i,id;
 		//esconde elementos gr&aacute;ficos q a ferramenta pode ter aberto
-		i3GEO.util.escondePin();
+		//i3GEO.util.escondePin();
 		i3GEO.util.escondeBox();
 		//executa fun&ccedil;&otilde;es default
 		if(i3GEO.janela.ANTESFECHA){

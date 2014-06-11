@@ -199,19 +199,8 @@ i3GEOF.confluence = {
 		{return;}
 		var box = $i("pinconf"),
 			ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-		
-		//converte as coordenadas para geo se for o caso
-		/*
-		if(i3GEO.Interface.openlayers.googleLike === true){
-			var temp = xy.split(",");
-			temp = i3GEO.util.extOSM2Geo(temp[0]+" "+temp[1]+" "+temp[0]*1-1+" "+temp[1]*1+1);
-			temp = temp.split(" ");
-			xy = temp[0]+","+temp[1];
-		}
-		*/
 		xy = xy.split(",");
 		xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA),ext,i3GEO.parametros.pixelsize);
-
 		box.style.display = "block";
 		box.style.width = "27px";
 		box.style.height = "27px";

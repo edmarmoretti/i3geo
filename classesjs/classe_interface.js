@@ -90,7 +90,7 @@ i3GEO.Interface = {
 		/*
 	Propriedade: BARRABOTOESTOP
 
-	Dist�ncia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao topo do mapa.
+	Distancia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao topo do mapa.
 
 	Tipo:
 	{number}
@@ -102,7 +102,7 @@ i3GEO.Interface = {
 		/*
 	Propriedade: BARRABOTOESLEFT
 
-	Dist�ncia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao lado esquerdo do mapa.
+	Distancia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao lado esquerdo do mapa.
 
 	Tipo:
 	{number}
@@ -114,7 +114,7 @@ i3GEO.Interface = {
 		/*
 	Propriedade: BARRADEZOOMTOP
 
-	Dist�ncia da barra de zoom em rela&ccedil;&atilde;o ao topo do mapa.
+	Distancia da barra de zoom em rela&ccedil;&atilde;o ao topo do mapa.
 
 	Tipo:
 	{number}
@@ -126,7 +126,7 @@ i3GEO.Interface = {
 		/*
 	Propriedade: BARRADEZOOMLEFT
 
-	Dist�ncia da barra de zoom em rela&ccedil;&atilde;o ao lado esquerdo do mapa.
+	Distancia da barra de zoom em rela&ccedil;&atilde;o ao lado esquerdo do mapa.
 
 	Tipo:
 	{number}

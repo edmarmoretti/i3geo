@@ -161,5 +161,11 @@ i3GEOF.identifica.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		28: [{
+			pt:"Atualiza essa janela",
+			en:"",
+			es:"",
+			it:""
 		}]
 };
