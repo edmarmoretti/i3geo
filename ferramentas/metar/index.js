@@ -246,7 +246,7 @@ i3GEOF.metar = {
 		if(i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
 		i3GEO.util.criaPin("pinmetar",i3GEO.configura.locaplic+'/imagens/google/metar.png');
-		xy = i3GEO.calculo.dd2tela(x*1,y*1,$i(i3GEO.Interface.IDCORPO),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
+		xy = i3GEO.calculo.dd2tela(x*1,y*1,$i(i3GEO.Interface.IDCORPO));
 		var box = $i("pinmetar");
 		box.style.display = "block";
 		box.style.width = "27px";

@@ -310,7 +310,7 @@ i3GEOF.buscaFotos = {
 		if(i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
 		xy = xy.split(",");
-	 	xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
+	 	xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA));
 		var box = $i("pinfoto");
 		box.style.display = "block";
 		box.style.width = "27px";

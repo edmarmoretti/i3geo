@@ -266,13 +266,13 @@ i3GEOF.geolocal = {
 			/*
 			 * @TODO nao funciona no OSM
 			 */
-			if(i3GEO.Interface.ATUAL === "googleearth" || i3GEO.Interface.openlayers.googleLike === true)
+			if(i3GEO.Interface.ATUAL === "googleearth")
 			{return;}
 			var posicao = i3GEOF.geolocal.posicoes[i],
 			xy = [posicao.coords.longitude,posicao.coords.latitude],
-			box = $i("pingeolocal"),
-			ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-			xy = i3GEO.calculo.dd2tela(xy[0]*1,xy[1]*1,$i(i3GEO.Interface.IDMAPA),ext,i3GEO.parametros.pixelsize);
+			box = $i("pingeolocal");
+			
+			xy = i3GEO.calculo.dd2tela(xy[0]*1,xy[1]*1,$i(i3GEO.Interface.IDMAPA));
 
 			box.style.display = "block";
 			box.style.width = "27px";

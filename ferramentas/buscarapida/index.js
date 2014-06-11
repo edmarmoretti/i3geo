@@ -56,7 +56,7 @@ i3GEObuscaRapida = {
 
 	Endere&ccedil;o do servi&ccedil;o de busca que ser&aacute; utilizado para retornar a representa&ccedil;&atilde;o cartogr&aacute;fica do elemento encontrado.
 
-	Esse servi&ccedil;o deve ser um Web Service no padr&atilde;o OGC com o parâmetro adicional "gid" indicando o id do elemento que ser&aacute; mostrado na tela.
+	Esse servi&ccedil;o deve ser um Web Service no padr&atilde;o OGC com o parï¿½metro adicional "gid" indicando o id do elemento que ser&aacute; mostrado na tela.
 
 	Type:
 	{String}
@@ -74,7 +74,7 @@ i3GEObuscaRapida = {
 
 	Alterando-se essa op&ccedil;&atilde;o, pode-se executar o busca r&aacute;pida como um gadget.
 
-	Veja i3GEObuscaRapida.zoom para conhecer os parâmetros que essa fun&ccedil;&atilde;o ir&aacute; receber
+	Veja i3GEObuscaRapida.zoom para conhecer os parï¿½metros que essa fun&ccedil;&atilde;o ir&aacute; receber
 
 	Type:
 	{String}
@@ -335,7 +335,7 @@ i3GEObuscaRapida = {
 
 	Essa &eacute; a fun&ccedil;&atilde;o default utilizada pela ferramenta, podendo ser substitu&iacute;da por outra se desejado.
 
-	Al&eacute;m de enquadrar o mapa à uma extens&atilde;o geogr&aacute;fica espec&iacute;fica, uma nova camada &eacute; adicionada, mostrando o limite da ocorr&ecirc;ncia desejada.
+	Al&eacute;m de enquadrar o mapa ï¿½ uma extens&atilde;o geogr&aacute;fica espec&iacute;fica, uma nova camada &eacute; adicionada, mostrando o limite da ocorr&ecirc;ncia desejada.
 
 	Veja:
 
@@ -349,7 +349,7 @@ i3GEObuscaRapida = {
 
 	gid {String} - identificador que ser&aacute; utilizado no WMS para selecionar o elemento desejado
 
-	nm {String} - nome que ser&aacute; dado à acamada que ser&aacute; adicionada ao mapa
+	nm {String} - nome que ser&aacute; dado ï¿½ acamada que ser&aacute; adicionada ao mapa
 	*/
 	zoom: function(wkt,layer,gid,nm){
     	var adicionaCamada = function(layer,gid,nm,ext){
@@ -405,7 +405,7 @@ i3GEObuscaRapida = {
 	/*
 	Function: mostraxy
 
-	Mostra no mapa um retângulo representando a extens&atilde;o geogr&aacute;fica de uma ocorr&ecirc;ncia encontrada na busca
+	Mostra no mapa um retï¿½ngulo representando a extens&atilde;o geogr&aacute;fica de uma ocorr&ecirc;ncia encontrada na busca
 
 	Parameters:
 
@@ -434,8 +434,8 @@ i3GEObuscaRapida = {
 		var yMin = ext[1];
 		var yMax = ext[3];
 		var docmapa = window.parent.document.getElementById(window.parent.i3GEO.Interface.IDCORPO);
- 		var xyMin = window.parent.i3GEO.calculo.dd2tela(xMin,yMin,docmapa,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
- 		var xyMax = window.parent.i3GEO.calculo.dd2tela(xMax,yMax,docmapa,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
+ 		var xyMin = window.parent.i3GEO.calculo.dd2tela(xMin,yMin,docmapa);
+ 		var xyMax = window.parent.i3GEO.calculo.dd2tela(xMax,yMax,docmapa);
 
 		window.parent.i3GEO.util.criaBox("boxg");
 		var box = window.parent.$i("boxg");

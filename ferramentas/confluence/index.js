@@ -195,12 +195,11 @@ i3GEOF.confluence = {
 		/*
 		 * @TODO nao funciona no OSM
 		 */
-		if(i3GEO.Interface.ATUAL === "googleearth" || i3GEO.Interface.openlayers.googleLike === true)
+		if(i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
-		var box = $i("pinconf"),
-			ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+		var box = $i("pinconf");
 		xy = xy.split(",");
-		xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA),ext,i3GEO.parametros.pixelsize);
+		xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA));
 		box.style.display = "block";
 		box.style.width = "27px";
 		box.style.height = "27px";
