@@ -1,10 +1,18 @@
-
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Identifica
 
-Obt&eacute;m os atributos de um ou mais temas para uma coordenada.
+Obtem os atributos de um ou mais temas para uma coordenada.
 Abre uma janela com v&aacute;rias op&ccedil;&otilde;es e lista de temas dispon&iacute;veis no mapa atual.
+
+O evento de clique no mapa e ativado em i3geo/classesjs/classe_configura.js
+
+Varias janelas podem coexistir.
+
+A lista de ids das janelas abertas e mantido na variavel i3GEOF.identifica.janelas
+
+As propriedades de cada janela sao mantidas em um objeto indexado pelo id de cada janela e
+
+mantido em i3GEOF.identifica.propJanelas
 
 Veja:
 
@@ -310,6 +318,8 @@ i3GEOF.identifica = {
 				objposicaocursor.ddy = y;
 				i3GEOF.identifica.propJanelas[id].x = x;
 				i3GEOF.identifica.propJanelas[id].y = y;
+				i3GEOF.identifica.x = x;
+				i3GEOF.identifica.y = y;
 			}
 			//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 			cabecalho = function(){
@@ -349,17 +359,29 @@ i3GEOF.identifica = {
 			i3GEOF.identifica.inicia(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy,divid,true,true,id);
 			$i(id+"_corpo").style.backgroundColor = "white";
 			i3GEOF.identifica.aguarde = $i(id+"_imagemCabecalho").style;
-
 			if(i3GEO.Interface.ATUAL !== "googleearth"){
 				temp = function(){
 					i3GEOF.identifica.janelas.remove(id);
-					i3GEO.eventos.MOUSECLIQUE.remove(i3GEO.configura.funcaoIdentifica);
-					i3GEO.barraDeBotoes.ativaIcone(i3GEO.barraDeBotoes.BOTAOPADRAO);
+					i3GEOF.identifica.propJanelas[id] = null;
 					i3GEOF.identifica.limpaMarca();
-					if(i3GEO.eventos.NAVEGAMAPA.toString().search(id) > 0)
-					{i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.identifica.limpaMarca()");}
-					if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.identifica.listaTemas()") > 0)
-					{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.identifica.listaTemas()");}
+					if(i3GEOF.identifica.janelas.length === 0){
+						i3GEO.eventos.MOUSECLIQUE.remove(i3GEO.configura.funcaoIdentifica);
+						i3GEO.barraDeBotoes.ativaIcone(i3GEO.barraDeBotoes.BOTAOPADRAO);
+						if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.identifica.listaTemas()") >= 0){
+							i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.identifica.listaTemas()");
+						}
+						if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEOF.identifica.limpaMarca()") >= 0){
+							i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.identifica.limpaMarca()");
+						}
+						if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoIdentifica) >= 0){
+							i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoIdentifica);
+						}
+						if(i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoTip) < 0){
+							i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoTip);
+						}
+						//reativa o evento default
+						i3GEO.eventos.cliquePerm.ativa();
+					}
 				};
 				YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 			}
@@ -712,6 +734,11 @@ i3GEOF.identifica = {
 			else{
 				janelas = i3GEOF.identifica.janelas;
 			}
+			//guarda o valor de x y nas variaveis de uso global da ferramenta
+			if(x && x != ""){
+				i3GEOF.identifica.x = x;
+				i3GEOF.identifica.y = y;
+			}
 			n = janelas.length;
 			if(n == 0 || (idjanela && !$i(idjanela+"i3GEOidentificaocorrencia"))){
 				if(x && x != ""){
@@ -1012,9 +1039,8 @@ i3GEOF.identifica = {
 				var p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=excluiRegistro&g_sid="+i3GEO.configura.sid,
 				temp = function(){
 					i3GEO.janela.fechaAguarde("aguardeRemovendo");
-					i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
-					//TODO
-					i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);
+					i3GEO.Interface.atualizaTema("",tema);
+					i3GEOF.identifica.buscaDadosTema(tema);
 				};
 				i3GEO.janela.AGUARDEMODAL = true;
 				i3GEO.janela.abreAguarde("aguardeRemovendo","Excluindo...");

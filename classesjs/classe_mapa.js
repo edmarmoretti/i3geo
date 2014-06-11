@@ -892,19 +892,16 @@ i3GEO.mapa = {
 			if(i3GEO.Interface.ATUAL === "googleearth" && i3GEO.eventos.MOUSECLIQUE.length > 1){
 				return;
 			}
+			//javascript nao foi carregado
 			if(typeof(i3GEOF.identifica) === 'undefined'){
 				//javascript que sera carregado
 				var js = i3GEO.configura.locaplic+"/ferramentas/identifica/index.js",
 					temp = function(){
 						if(x){
 							i3GEOF.identifica.criaJanelaFlutuante(x,y);
-							i3GEOF.identifica.x = x;
-							i3GEOF.identifica.y = y;
 						}
 						else{
 							i3GEOF.identifica.criaJanelaFlutuante(objposicaocursor.ddx,objposicaocursor.ddy);
-							i3GEOF.identifica.x = objposicaocursor.ddx;
-							i3GEOF.identifica.y = objposicaocursor.ddy;
 						}
 					};
 				//carrega o script
@@ -913,12 +910,8 @@ i3GEO.mapa = {
 			else{
 				if(x){
 					i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo,x,y);
-					i3GEOF.identifica.x = x;
-					i3GEOF.identifica.y = y;
 				}
 				else{
-					i3GEOF.identifica.x = objposicaocursor.ddx;
-					i3GEOF.identifica.y = objposicaocursor.ddy;
 					i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy);
 				}
 				return;
