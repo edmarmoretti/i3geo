@@ -299,13 +299,18 @@ class gvsig2mapfile{
 					$cor = $estilo->outlinecolor;
 					$cor->setrgb($ncor[0],$ncor[1],$ncor[2]);
 				}
+
+				if($data["hasFill"] == "" && $data["hasOutline"] == ""){
+					$ncor = explode(",",$data["color"]);
+					$cor = $estilo->color;
+					$cor->setrgb($ncor[0],$ncor[1],$ncor[2]);
+				}
 			}
 			if($data["size"] != false)
 			{$estilo->set("size",$data["size"]);}
 			if($data["exp"] != false)
 			{$classe->setExpression($data["exp"]);}
 		}
-
 		return $oLayer;
 	}
 	function findAttribute($object, $attribute) {
