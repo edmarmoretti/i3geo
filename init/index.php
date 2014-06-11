@@ -41,16 +41,18 @@ body {
 	vertical-align: middle;
 	font-size: 0.4cm;
 	position: relative;
-	display:block;
-	text-align:center;
+	display: block;
+	text-align: center;
 	z-index: 2;
 }
-table{
+
+table {
 	width: 100%;
 }
+
 td {
 	font-size: 0.4cm;
-	text-align:center;
+	text-align: center;
 	height: 150px;
 }
 
@@ -59,57 +61,61 @@ h1 {
 	text-align: left;
 	margin: 25px;
 }
+
 #bandeiras {
 	width: 80px;
 	text-align: left;
-	position:absolute;
+	position: absolute;
 	left: 0.2cm;
-	z-index:10;
+	z-index: 10;
 }
+
 a {
 	margin: 0px auto;
-	text-decoration:none;
+	text-decoration: none;
 }
 </style>
 </head>
-<body class=" yui-skin-sam " >
+<body class=" yui-skin-sam ">
 
-<center>
-<div id="bandeiras"></div>
-<div class="bordaSuperior" style="z-index:1;">&nbsp;</div>
+	<center>
+		<div id="bandeiras"></div>
+		<div class="bordaSuperior" style="z-index: 1;">&nbsp;</div>
 
-<div class="mascaraPrincipal" style="max-width:718pt">
-<div id="conteudo" style="position:relative;top:-10px;margin: 0 0 0.2cm 0.2cm;">
-	<div style="margin-top:0px;">
-		<?php
-		if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
-			echo "<p style='font-size:14px;color:red;margin-top:20px;'><script>document.write($"."trad(19,g_traducao_init));</script>";
-		}
-		?>
-		<div id="botoes" ></div>
-	</div>
-	<div style="float:left" >
-			<a href="#" class="r" style="width: 230px; height: 380px"><table>
-				<tr>
-					<td>
-					<a class="twitter-timeline"  href="https://twitter.com/i3geo" data-widget-id="288061915689787392" width="220" height="350">Tweets @i3Geo</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-					</td>
-				</tr>
-			</table> </a>
-			<a href="#" class="r" style="width: 230px; height: 380px"><table>
-				<tr>
-					<td><a class="twitter-timeline"
-						href="https://twitter.com/search?q=@i3geo"
-						data-widget-id="288053202174222336" width="220" height="350">Tweets #i3Geo</a>
-						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-					</td>
-				</tr>
-			</table> </a>
-	</div>
-</div>
+		<div class="mascaraPrincipal" style="max-width: 718pt">
+			<div id="conteudo"
+				style="position: relative; top: -10px; margin: 0 0 0.2cm 0.2cm;">
+				<div style="margin-top: 0px;">
+					<?php
+					if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
+						echo "<p style='font-size:14px;color:red;margin-top:20px;'><script>document.write($"."trad(19,g_traducao_init));</script>";
+					}
+					?>
+					<div id="botoes"></div>
+				</div>
+				<div style="float: left">
+					<a href="#" class="r" style="width: 230px; height: 380px"><table>
+							<tr>
+								<td><a class="twitter-timeline" href="https://twitter.com/i3geo"
+									data-widget-id="288061915689787392" width="220" height="350">Tweets
+										@i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+								</td>
+							</tr>
+						</table> </a> <a href="#" class="r"
+						style="width: 230px; height: 380px"><table>
+							<tr>
+								<td><a class="twitter-timeline"
+									href="https://twitter.com/search?q=@i3geo"
+									data-widget-id="288053202174222336" width="220" height="350">Tweets
+										#i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+								</td>
+							</tr>
+						</table> </a>
+				</div>
+			</div>
 
-</div>
+		</div>
+
 </body>
 <script>
 botoesIni = [];
@@ -173,6 +179,10 @@ botoesIni.push({
 	"img":"../imagens/saiku_free_small.png",
 	"href":"../ferramentas/saiku/esquemaxml.php",
 	"titulo":$trad(25,g_traducao_init)
+	},{
+	"img":"../imagens/gvsig.jpg",
+	"href":"../pacotes/gvsig/gvsig2mapfile/upload.htm",
+	"titulo":$trad(26,g_traducao_init)
 	},{
 	"img":"insert-link.png",
 	"href":"../geradordelinks.htm",
