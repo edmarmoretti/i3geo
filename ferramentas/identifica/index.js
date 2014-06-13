@@ -54,12 +54,6 @@ i3GEOF.identifica = {
 		janelas: [],
 		propJanelas: {},
 		/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-		 */
-		aguarde: "",
-		/*
 	Propriedade: mostraLinkGeohack
 
 	Mostra ou n&atilde;o o link para abrir o site GeoHack.
@@ -358,7 +352,7 @@ i3GEOF.identifica = {
 			}
 			i3GEOF.identifica.inicia(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy,divid,true,true,id);
 			$i(id+"_corpo").style.backgroundColor = "white";
-			i3GEOF.identifica.aguarde = $i(id+"_imagemCabecalho").style;
+			i3GEOF.identifica.propJanelas[id].aguarde = $i(id+"_imagemCabecalho").style;
 			i3GEOF.identifica.propJanelas[id].atualiza = true;
 			temp = 'i3GEOF.identifica.propJanelas["'+id+'"].atualiza = this.checked';
 			janela[0].setFooter("<div style=background-color:#F2F2F2; ><input class='inputsb' style='cursor:pointer;position:relative;top:2px;' checked onclick='"+temp+"' type=checkbox />&nbsp;"+$trad(28,i3GEOF.identifica.dicionario)+"</div>");
@@ -920,7 +914,7 @@ i3GEOF.identifica = {
 					resultados = retorno[i].resultado;
 					res += "<div style='padding-top:6px;left:2px;text-align:left;width:100%;' ><b>" +
 					retorno[i].nome +
-					"<img onclick='i3GEOF.identifica.removeFiltro(\""+retorno[i].tema+"\")' style='margin-right:2px;position:relative;top:3px;width:10px;' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/remove-filter.png' title='"+$trad(27,i3GEOF.identifica.dicionario)+"' />" +
+					"<img onclick='i3GEOF.identifica.removeFiltro(\""+retorno[i].tema+"\",\""+idjanela+"\")' style='margin-right:2px;position:relative;top:3px;width:10px;' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/remove-filter.png' title='"+$trad(27,i3GEOF.identifica.dicionario)+"' />" +
 					"</b></div>";
 					//encontrou algo
 					if(resultados[0] !== " "){
@@ -966,7 +960,7 @@ i3GEOF.identifica = {
 								else{
 									tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' title='' />";
 								}
-								filtro = "onclick=i3GEOF.identifica.filtrar('"+retorno[i].tema+"','"+resultados[j][k].item+"','"+resultados[j][k].valor+"')";
+								filtro = "onclick=i3GEOF.identifica.filtrar('"+retorno[i].tema+"','"+resultados[j][k].item+"','"+resultados[j][k].valor+"','"+idjanela+"')";
 								filtro = "<img "+filtro+" style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-filter.png' title='"+$trad(26,i3GEOF.identifica.dicionario)+"' />";
 								if(resultados[j][k].link === ""){
 									res +=  "<div style='width:100%;text-align:left;background-color:"+
@@ -1010,13 +1004,13 @@ i3GEOF.identifica = {
 				$i(idjanela+"i3GEOidentificaocorrencia").innerHTML=res;
 			}
 		},
-		filtrar: function(tema,item,valor){
-			if(i3GEOF.identifica.aguarde.visibility === "visible")
+		filtrar: function(tema,item,valor,idjanela){
+			if(i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility === "visible")
 			{return;}
-			i3GEOF.identifica.aguarde.visibility = "visible";
+			i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility = "visible";
 			var filtro = "(|["+item+"]| = |"+valor+"|)",
 			temp = function(retorno){
-				i3GEOF.identifica.aguarde.visibility = "hidden";	
+				i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility = "hidden";	
 				i3GEO.Interface.atualizaTema(retorno,tema);
 			},
 			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro",
@@ -1025,12 +1019,12 @@ i3GEOF.identifica = {
 			cp.set_transfer_mode('POST');
 			cp.call(p,"insereFiltro",temp,"tema="+tema,"filtro="+i3GEO.util.base64encode(filtro));
 		},
-		removeFiltro: function(tema){
-			if(i3GEOF.identifica.aguarde.visibility === "visible")
+		removeFiltro: function(tema,idjanela){
+			if(i3GEOF.identifica.propJanelas[idjanela].visibility === "visible")
 			{return;}
-			i3GEOF.identifica.aguarde.visibility = "visible";
+			i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility = "visible";
 			var temp = function(retorno){
-				i3GEOF.identifica.aguarde.visibility = "hidden";	
+				i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility = "hidden";	
 				i3GEO.Interface.atualizaTema(retorno,tema);
 			},
 			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=nao&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro",

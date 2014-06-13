@@ -535,6 +535,7 @@ i3GEOF.graficointerativo1 = {
 					.push("i3GEOF.graficointerativo1.comboTemas()");
 				}
 			}
+			janela[0].bringToTop();
 		},
 		/*
 		 * Function: ativaFoco

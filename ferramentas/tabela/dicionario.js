@@ -201,7 +201,7 @@ i3GEOF.tabela.dicionario = {
 			es:""
 		}],
 		41: [{
-			pt:"Atualiza essa janela",
+			pt:"Atualiza a listagem ao navegar",
 			en:"",
 			es:"",
 			it:""
