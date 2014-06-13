@@ -53,6 +53,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 }
 #i3GEOcompartilhar {
 	border: 0px solid white;
+	z-index: 20000;
 }
 #i3GEOcompartilhar td {
 	background: black;

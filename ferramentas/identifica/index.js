@@ -388,9 +388,6 @@ i3GEOF.identifica = {
 				};
 				YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 			}
-			//if(i3GEO.eventos.NAVEGAMAPA.toString().search("cliqueIdentifica()") < 0){
-			//	i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.identifica.limpaMarca()");
-			//}
 			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.identifica.listaTemas()") < 0){
 				i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.identifica.listaTemas()");
 			}

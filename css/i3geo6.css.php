@@ -2152,9 +2152,12 @@ padding: 0 10px;
 }
 .yui-skin-sam .yui-button {
 border-color: #D3D3D3;
+border-radius: 7px;
+box-shadow: 0px 0px 4px 1px rgb(230,230,230);
 }
 .yui-skin-sam .yui-button .first-child {
 border-color: #D3D3D3;
+border-radius: 7px;
 }
 .ygtvcontent {
 font-size: 12px;
