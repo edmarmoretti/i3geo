@@ -611,8 +611,9 @@ i3GEOadmin.editor = {
 			);
 		},
 		formulario: function(){
-			var ins = '<fieldset class=subbloco >' +
+			var ins = '' +
 			'<form id=i3GEOuploadcsvf target="i3GEOuploadcsviframe" action="../php/metaestat_uploadcsv_submit.php" method="post" ENCTYPE="multipart/form-data">' +
+			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" >CSV (N&atilde;o utilize separador de milhar e utilize ponto como separador de casas decimais ou a importa&ccedil;&atilde;o poder&aacute; n&atilde;o ocorrer): <br><br><input type="file" size=22 name="i3GEOuploadcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >Nome da nova tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br><input class=digitar type="text" size=20 id="tabelaDestinocsv" name="tabelaDestinocsv" style="top:0px;left:0px;cursor:pointer;">&nbsp;' +
 			'Ou escolha da lista: ' +
@@ -632,14 +633,15 @@ i3GEOadmin.editor = {
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" ><input id=i3GEOuploadcsvsubmit type="button" value="Enviar" size=12 />' +
-			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
-			'<input type="hidden" id="i3GEOuploadcsvcodigoconexao" name="i3GEOuploadcsvcodigoconexao" value="">' +
-			'<input type="hidden" id="i3GEOuploadcsvesquema" name="i3GEOuploadcsvesquema" value="">' +
-			'</form>' +
+			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />' +
+			'<input type="hidden" id="i3GEOuploadcsvcodigoconexao" name="i3GEOuploadcsvcodigoconexao" value="" />' +
+			'<input type="hidden" id="i3GEOuploadcsvesquema" name="i3GEOuploadcsvesquema" value="" />' +
 			'<iframe name=i3GEOuploadcsviframe style="text-align:left;border:1px solid gray;" width="98%" height="400px"></iframe>' +
 			'<p class="paragrafo" >Ap&oacute;s terminar o processo, atualize essa p&aacute;gina para que a nova tabela criada apare&ccedil;a nas listas de sele&ccedil;&atilde;o.</p>' +
 			'<p class="paragrafo" >Utilize o <a href="./estat_tipo_regiao.html" >cadastro de regi&otilde;es</a> para registrar a tabela criada com latitude e longitude como uma nova unidade geogr&aacute;fica que poder&aacute; ser escolhida no processo de cria&ccedil;&atilde;o de vari&aacute;veis.</p>' +
-			'</fieldset>';
+			'</fieldset>'+
+			'</form>';
+
 			return ins;
 		},
 		submit: function(){
