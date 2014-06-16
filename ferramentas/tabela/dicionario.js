@@ -205,5 +205,47 @@ i3GEOF.tabela.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		42: [{
+			pt:"Gr&aacute;fico",
+			en:"",
+			es:"",
+			it:""
+		}],
+		43: [{
+			pt:"V&iacute;nculos entre as tabelas abertas",
+			en:"",
+			es:"",
+			it:""
+		}],
+		44: [{
+			pt:"V&iacute;nculos",
+			en:"",
+			es:"",
+			it:""
+		}],
+		45: [{
+			pt:"Escolha uma tabela",
+			en:"",
+			es:"",
+			it:""
+		}],
+		46: [{
+			pt:"Escolha uma segunda tabela",
+			en:"",
+			es:"",
+			it:""
+		}],
+		47: [{
+			pt:"Criar v&iacute;nculo",
+			en:"",
+			es:"",
+			it:""
+		}],
+		48: [{
+			pt:"Coluna",
+			en:"",
+			es:"",
+			it:""
 		}]
 };

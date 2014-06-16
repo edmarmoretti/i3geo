@@ -55,23 +55,23 @@ i3GEOF.preferencias = {
 						tipo: "boolean",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.metaestat.ativa"
 					},{
-						titulo: "<b>"+$trad(81,i3GEOF.preferencias.dicionario)+"</b>",
+						titulo: $trad(81,i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.ativa"
 					},{
-						titulo: $trad(82,i3GEOF.preferencias.dicionario),
+						titulo: "<span style=left:10px;position:relative; >"+$trad(82,i3GEOF.preferencias.dicionario)+"</span>",
 						tipo: "numero",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.largura"
 					},{
-						titulo: $trad(83,i3GEOF.preferencias.dicionario),
+						titulo: "<span style=left:10px;position:relative; >"+$trad(83,i3GEOF.preferencias.dicionario)+"</span>",
 						tipo: "numero",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.altura"
 					},{
-						titulo: $trad(84,i3GEOF.preferencias.dicionario),
+						titulo: "<span style=left:10px;position:relative; >"+$trad(84,i3GEOF.preferencias.dicionario)+"</span>",
 						tipo: "numero",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.topo"
 					},{
-						titulo: $trad(85,i3GEOF.preferencias.dicionario),
+						titulo: "<span style=left:10px;position:relative; >"+$trad(85,i3GEOF.preferencias.dicionario)+"</span>",
 						tipo: "numero",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.esquerda"
 					}
@@ -708,11 +708,13 @@ i3GEOF.preferencias = {
 			elem = raiz.getElementsByTagName(tipos[i]);
 			nelem = elem.length;
 			for(j=0;j<nelem;j++){
-				if (elem[j].type === "checkbox"){
-					eval("elem[j].checked = "+elem[j].id+";");
-				}
-				else{
-					eval("elem[j].value = "+elem[j].id+";");
+				if(elem[j].id){
+					if (elem[j].type === "checkbox"){
+						eval("elem[j].checked = "+elem[j].id+";");
+					}
+					else{
+						eval("elem[j].value = "+elem[j].id+";");
+					}
 				}
 			}
 		}

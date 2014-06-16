@@ -1003,10 +1003,17 @@ g_traducao_ajuda = {
 			pt:"Cria uma c&oacute;pia de uma camada existente no mapa e adiciona com novo nome.",
 			complemento:"",
 			apijs:"i3GEO.tema.copia(idtema)"
+		},
+		"120": {
+			titulo: "V&iacute;ncula dados entre tabelas",
+			diretorio:"i3geo/ferramentas/tabela/index.js",
+			categoria:"5",
+			pt:"Op&ccedil;&atilde;o utilizada na ferramenta tabela que pemrite vincular a listagem de registros entre tabelas que estejam em diferentes janelas flutuantes",
+			complemento:"",
+			apijs:""
 		}
 	}
 };
-
 g_traducao_ajuda_categorias = {
 	"1":{titulo:"Propriedades do mapa",observacao:"Funcionalidades que permitem alterar caracter&iacute;sticas gerais do mapa, como tamanho e filtro de cores."},
 	"2":{titulo:"Arquivos"},
