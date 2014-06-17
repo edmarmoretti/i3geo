@@ -243,7 +243,7 @@ i3GEOF.tabela.dicionario = {
 			it:""
 		}],
 		48: [{
-			pt:"Coluna",
+			pt:"Coluna de liga&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""

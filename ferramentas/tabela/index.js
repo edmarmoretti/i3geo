@@ -10,7 +10,6 @@ i3GEOF.tabela = {
 		 */
 		janelas: [],
 		propJanelas: {},
-		vinculos:{},
 		/*
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 		 */
@@ -214,7 +213,7 @@ i3GEOF.tabela = {
 			ins += '		</tr>';
 			ins += '		</table>';
 			ins += '		</div>';
-			
+
 			ins += '	<div id='+idjanela+'i3GEOtabelaguia1obj style="width:99%">';
 			ins += '		<div id='+idjanela+'i3GEOtabelacombot style="position:relative;top:5px;left:0px;display:none;">';
 			ins += '		</div>';
@@ -237,7 +236,7 @@ i3GEOF.tabela = {
 			ins += '		<div id='+idjanela+'i3GEOtabelaregistros style="position:relative;top:20px;left:0px;text-align:left;">';
 			ins += '		</div>';
 			ins += '	</div>';
-			
+
 			ins += '	<div id='+idjanela+'i3GEOtabelaguia3obj style="display:none;width:99%;left:0px" >';
 			ins += '		<p class="paragrafo" ><label>'+$trad(20,i3GEOF.tabela.dicionario)+':</label> <span id='+idjanela+'i3GEOtabelaitensGuia3 ></span>';
 			ins += '		<p class="paragrafo" ><label>'+$trad(21,i3GEOF.tabela.dicionario)+':</label>';
@@ -332,7 +331,7 @@ i3GEOF.tabela = {
 			i3GEOF.tabela.propJanelas[id].atualiza = true;
 			//indica se a janela sera atualizada na navegacao
 			temp = 'i3GEOF.tabela.propJanelas["'+id+'"].atualiza = this.checked';
-			janela[0].setFooter("<div style=background-color:#F2F2F2; ><input class='inputsb' style='cursor:pointer;position:relative;top:2px;' onclick='"+temp+"' type=checkbox />&nbsp;"+$trad(41,i3GEOF.tabela.dicionario)+"</div>");
+			janela[0].setFooter("<div style=background-color:#F2F2F2; ><input class='inputsb' style='cursor:pointer;position:relative;top:2px;' onclick='"+temp+"' type=checkbox />&nbsp;"+$trad(41,i3GEOF.tabela.dicionario)+" ("+id+")</div>");
 
 
 			i3GEOF.tabela.inicia(divid,id);
@@ -349,7 +348,7 @@ i3GEOF.tabela = {
 			if(i3GEO.Interface.ATUAL === "googleearth" && !tabelaDragend){
 				tabelaDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.tabela.atualizaListaDeRegistros();});
 			}
-			
+
 			temp = function(){
 				i3GEOF.tabela.janelas.remove(id);
 				i3GEOF.tabela.propJanelas[id] = null;
@@ -370,7 +369,7 @@ i3GEOF.tabela = {
 		},
 		atualizaCombosCabecalhos: function(){
 			var i,id,
-				n = i3GEOF.tabela.janelas.length;
+			n = i3GEOF.tabela.janelas.length;
 			for(i=0;i<n;i++){
 				id = i3GEOF.tabela.janelas[i];
 				i3GEO.janela.comboCabecalhoTemas(id+"i3GEOFtabelaComboCabeca",id+"i3GEOFtabelaComboCabecaSel","tabela","ligadosComTabela");
@@ -390,9 +389,10 @@ i3GEOF.tabela = {
 			i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
 		},
 		vinculos:{
+			ligacoes: [],
 			iniciaJanelaFlutuante: function(){
-				var minimiza,cabecalho,janela,divid,titulo;
-								//cria a janela flutuante
+				var janela,titulo;
+				//cria a janela flutuante
 				titulo = "&nbsp;&nbsp;&nbsp;"+$trad(44,i3GEOF.tabela.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=120' >&nbsp;&nbsp;&nbsp;</a>";
 				janela = i3GEO.janela.cria(
 						"300px",
@@ -438,15 +438,27 @@ i3GEOF.tabela = {
 				new YAHOO.widget.Button(
 						"i3GEOFTabelaVinculoBotaoCriar",
 						{onclick:{fn: function(){
-							
+							var t1 = $i("i3GEOFTabelaOpcoesAdicionaVinculoT1").value,
+							t2 = $i("i3GEOFTabelaOpcoesAdicionaVinculoT2").value,
+							c1 = $i("i3GEOFTabelaOpcoesAdicionaVinculoColunaT1").value,
+							c2 = $i("i3GEOFTabelaOpcoesAdicionaVinculoColunaT1").value;
+							if(t1 != "" && t2 != "" && c1 != "" && c2 != ""){
+								i3GEOF.tabela.vinculos.ligacoes.push({
+									"t1": t1,
+									"t2": t2,
+									"c1": c1,
+									"c2": c2
+								});
+							}
+							i3GEOF.tabela.vinculos.lista();
 						}}}
 				);
 				i3GEOF.tabela.vinculos.lista();
 			},
 			comboColunasT1: function(){
 				var colunas = i3GEOF.tabela.comboColunas(
-					$i("i3GEOFTabelaOpcoesAdicionaVinculoT1").value,
-					"i3GEOFTabelaOpcoesAdicionaVinculoColunaT1"
+						$i("i3GEOFTabelaOpcoesAdicionaVinculoT1").value,
+						"i3GEOFTabelaOpcoesAdicionaVinculoColunaT1"
 				),
 				ins = "";
 				ins = "	<p class=paragrafo >" + $trad(48,i3GEOF.tabela.dicionario) +  "<br>" + colunas;
@@ -454,16 +466,131 @@ i3GEOF.tabela = {
 			},
 			comboColunasT2: function(){
 				var colunas = i3GEOF.tabela.comboColunas(
-					$i("i3GEOFTabelaOpcoesAdicionaVinculoT2").value,
-					"i3GEOFTabelaOpcoesAdicionaVinculoColunaT2"
+						$i("i3GEOFTabelaOpcoesAdicionaVinculoT2").value,
+						"i3GEOFTabelaOpcoesAdicionaVinculoColunaT2"
 				),
 				ins = "";
 				ins = "	<p class=paragrafo >" + $trad(48,i3GEOF.tabela.dicionario) +  "<br>" + colunas;
 				$i("i3GEOFTabelaVinculoT2Colunas").innerHTML = ins;			
 			},
 			lista: function(){
-				$i("i3GEOFtabelaVinculosLista").innerHTML = "operacao em desenvolvimento";
-			}
+				var v = i3GEOF.tabela.vinculos.ligacoes,
+				n = v.length,
+				ins = "<p class=paragrafo ><b>" + $trad(44,i3GEOF.tabela.dicionario) + "</b></p>",
+				i;
+				for(i=0;i<n;i++){
+					ins += "<p class=paragrafo ><img style='cursor:pointer;float:left;' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/edit-delete.png' title='excluir' onclick='i3GEOF.tabela.vinculos.excluir(\""+i+"\")' />" + v[i].t1 + " " + v[i].c1 +" -> " + v[i].t2 + " " + v[i].c2 + "<p>";
+				}
+				$i("i3GEOFtabelaVinculosLista").innerHTML = ins;
+			},
+			excluir: function(i){
+				i3GEOF.tabela.vinculos.ligacoes.splice(parseInt(i,10),1);
+				i3GEOF.tabela.vinculos.lista();
+			},
+			atualizaVinculos: function(tabelaOrigem,registro,marcado){
+				var v = i3GEOF.tabela.vinculos.ligacoes,
+				n = v.length,
+				i,valor;
+				if(n > 0){
+					for(i=0;i<n;i++){
+						//verifica se o vinculo existe
+						if(v[i].t1 === tabelaOrigem){
+							//pega o valor do registro na tabela origem
+							valor = i3GEOF.tabela.vinculos.pegaValorRegistro(v[i].t1,v[i].c1,registro);
+							//marca o registro na tabela destino
+							i3GEOF.tabela.vinculos.registro(v[i].t2,v[i].c2,valor,marcado);
+						}
+						if(v[i].t2 === tabelaOrigem){
+							//pega o valor do registro na tabela origem
+							valor = i3GEOF.tabela.vinculos.pegaValorRegistro(v[i].t2,v[i].c2,registro);
+							//marca o registro na tabela destino
+							i3GEOF.tabela.vinculos.registro(v[i].t1,v[i].c1,valor,marcado);
+						}
+					}
+				}
+			},
+			//verifica qtas colunas devem ser puladas em cada linha
+			colunasVazias: function(idjanela){
+				var tabela = $i(idjanela+"i3GEOtabelatabelai"),
+				linhas = tabela.getElementsByTagName("tr"),
+				pular = 0,
+				colunas,n,i;
+				colunas = linhas[0].getElementsByTagName("td");
+				n = colunas.length;
+				for(i=0;i<n;i++){
+					if(colunas[i].innerHTML == ""){
+						pular++;
+					}
+				}
+				return pular;
+			},
+			//pega o indice de uma coluna em uma tabela buscando no cabecalho no valor de title em cada celula
+			indiceColuna: function(idjanela,t){
+				var tabela = $i(idjanela+"i3GEOtabelatabelai"),
+				linhas = tabela.getElementsByTagName("tr"),
+				linha = linhas[0],
+				colunas = linha.getElementsByTagName("td"),
+				indice = 0,
+				n = colunas.length,
+				i,s;
+				for(i=0;i<n;i++){
+					s = colunas[i].getElementsByTagName("span");
+					if(s && s[0] && s[0].title && s[0].title == t){
+						return i;
+					}
+				}
+				return indice;
+			},
+			//retorna o indice de uma coluna que contem a tag input na tabela com a lista de valores
+			indiceColunaInput: function(idjanela){
+				var tabela = $i(idjanela+"i3GEOtabelatabelai"),
+				linhas = tabela.getElementsByTagName("tr"),
+				linha = linhas[1],
+				colunas = linha.getElementsByTagName("td"),
+				indice = 0,
+				n = colunas.length,
+				i;
+				for(i=0;i<n;i++){
+					if(colunas[i].getElementsByTagName("input").length > 0){
+						return i;
+					}
+				}
+				return indice;
+			},
+			//pega o valor da coluna em uma tabela com a lista de valores com base no codigo do registro
+			pegaValorRegistro: function(idjanela,coluna,registro){
+				var tabela = $i(idjanela+"i3GEOtabelatabelai"),
+				linhas = tabela.getElementsByTagName("tr"),
+				n = linhas.length,
+				indiceColuna = i3GEOF.tabela.vinculos.indiceColuna(idjanela,coluna),
+				indiceColunaInput = i3GEOF.tabela.vinculos.indiceColunaInput(idjanela),
+				i,linha,colunas;
+				for(i=1;i<n;i++){
+					linha = linhas[i];
+					colunas = linha.getElementsByTagName("td");
+					if(colunas[indiceColunaInput].getElementsByTagName("input")[0].name == registro){
+						return colunas[indiceColuna].innerHTML;
+					}
+				}
+				return "";
+			},
+			registro: function(idjanela,coluna,valor,marcado){
+				var tabela = $i(idjanela+"i3GEOtabelatabelai"),
+				linhas = tabela.getElementsByTagName("tr"),
+				n = linhas.length,
+				indiceColuna = i3GEOF.tabela.vinculos.indiceColuna(idjanela,coluna),
+				indiceColunaInput = i3GEOF.tabela.vinculos.indiceColunaInput(idjanela),
+				i,linha,colunas,reg;
+				for(i=1;i<n;i++){
+					linha = linhas[i];
+					colunas = linha.getElementsByTagName("td");
+					if(colunas[indiceColuna].innerHTML == valor){
+						reg = colunas[indiceColunaInput].getElementsByTagName("input")[0];
+						reg.checked = marcado;
+						i3GEOF.tabela.propJanelas[idjanela].registros[reg.name] = marcado;
+					}
+				}
+			},
 		},
 		comboJanelas: function(idcombo,funcao,w){
 			var i,n = i3GEOF.tabela.janelas.length;
@@ -471,7 +598,7 @@ i3GEOF.tabela = {
 				funcao = "";
 			}
 			if(!w){
-				w = 270;
+				w = 260;
 			}
 			ins = "" +
 			"	<select style='width:" + w + "px;' id='" + idcombo + "' onchange='" + funcao + "'>" +
@@ -484,13 +611,13 @@ i3GEOF.tabela = {
 		},
 		comboColunas: function(idJanela,idcombo,funcao,w){
 			var i,
-				c = i3GEOF.tabela.propJanelas[idJanela].colunas,
-				n = c.itens.length;
+			c = i3GEOF.tabela.propJanelas[idJanela].colunas,
+			n = c.itens.length;
 			if(!funcao){
 				funcao = "";
 			}
 			if(!w){
-				w = 270;
+				w = 250;
 			}
 			ins = "" +
 			"	<select style='width:" + w + "px;' id='" + idcombo + "' onchange='" + funcao + "'>" +
@@ -502,167 +629,15 @@ i3GEOF.tabela = {
 			return ins;
 		},
 		/*
-	Function: novaJanela
-
-	Abre a tabela em uma nova janela que pode conviver com outras tabelas
-		 */
-		novaJanela: function(){
-			//TODO
-			if(typeof(i3GEO.vincularTabelas) === 'undefined'){
-				i3GEO.vincularTabelas = {};
-				i3GEO.vincularTabelas.janelas = [];
-				i3GEO.vincularTabelas.colunas = {};
-				i3GEO.vincularTabelas.colunasVazias = 3;
-				i3GEO.vincularTabelas.atualiza = function(idtabela,objinput){
-					var v = objinput.parentNode.parentNode.cloneNode(true),
-					onde = $i("selecao_"+idtabela),
-					ntab = i3GEO.vincularTabelas.janelas.length,
-					valorcel="",i,temp,n,tabtempid,c,tabcomp,linhas,j,valor;
-					n = onde.childNodes.length;
-					for(i=0;i<n;i++){
-						onde.removeChild(onde.firstChild);
-					}
-					//verifica se a coluna foi escolhida
-					if(i3GEO.vincularTabelas.colunas[idtabela] == undefined || i3GEO.vincularTabelas.colunas[idtabela] === ""){
-						i3GEO.janela.tempoMsg($trad(39,i3GEOF.tabela.dicionario));
-					}
-					else{
-						//onde.appendChild(v);
-						$i(idtabela+"_corpo").scrollTop = 0;
-						//pega o valor da celula escolhida
-						temp = v.getElementsByTagName("td");
-						c =  i3GEO.vincularTabelas.colunas[idtabela];
-						valorcel = temp[i3GEO.vincularTabelas.colunasVazias + c].innerHTML;
-						valorcel = valorcel.trim();
-						valorcel = valorcel.toLowerCase();
-						//loop pelas tabelas
-						for(i=0;i<ntab;i++){
-							//verifica se a tabela existe
-							tabtempid = i3GEO.vincularTabelas.janelas[i];
-							if($i(tabtempid+"_corpo") && tabtempid != idtabela){
-								onde = $i("selecao_"+tabtempid);
-								//verifica se tem coluna escolhida
-								c =  i3GEO.vincularTabelas.colunas[tabtempid];
-								if(c !== undefined && c !== ""){
-									//tabela com os dados da janela
-									tabcomp = $i(tabtempid+"_corpo").getElementsByTagName("table")[1];
-									//remove o conteudo do lugar onde o resultado sera mostrado
-									temp = $i(tabtempid+"_corpo").getElementsByTagName("table")[0];
-									n = temp.childNodes.length;
-									for(i=0;i<n;i++){
-										temp.removeChild(onde.firstChild);
-									}
-									//linhas da tabela
-									linhas = tabcomp.getElementsByTagName("tr");
-									//insere o cabecalho
-									v = linhas[0].cloneNode(true);
-									onde.appendChild(v);
-									n = linhas.length;
-									//loop nas linhas
-									for(j=0;j<n;j++){
-										valor = linhas[j].getElementsByTagName("td")[i3GEO.vincularTabelas.colunasVazias + c].innerHTML;
-										valor = valor.trim();
-										valor = valor.toLowerCase();
-										if(valorcel == valor){
-											v = linhas[j].cloneNode(true);
-											onde.appendChild(v);
-										}
-									}
-								}
-							}
-
-						}
-					}
-				};
-				i3GEO.janela.tempoMsg($trad(37,i3GEOF.tabela.dicionario));
-			}
-			var janela = "",
-			divid,
-			cabecalho = function(){},
-			id = YAHOO.util.Dom.generateId(),
-			minimiza = function(){
-				i3GEO.janela.minimiza(id);
-			},
-			titulo = "&nbsp;&nbsp;&nbsp;"+i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.tabela.propJanelas[idjanela].tema).tema;
-			janela = i3GEO.janela.cria(
-					"420px",
-					"200px",
-					"",
-					"",
-					"",
-					titulo,
-					id,
-					false,
-					"hd",
-					cabecalho,
-					minimiza
-			);
-			divid = janela[2].id;
-			i3GEO.vincularTabelas.janelas.push(id);
-			i3GEO.vincularTabelas.colunas[id] = "";
-			temp = function(retorno){
-				i3GEOF.tabela.propJanelas[idjanela].aguarde.visibility = "hidden";
-				if (retorno.data !== undefined){
-					var ins,
-					i,
-					vals,
-					cor,
-					j,
-					n,
-					imagem,
-					i3GEOtabelalegenda = true;
-					//cabecalho da tabela
-					ins = "<table class=lista4 style='width:100%' id='selecao_"+id+"'></table><br>";
-					ins += "<table class=lista8 style='width:100%'>";
-					ins += "<tr><td></td><td></td><td></td>";
-					n = retorno.data[0].itens.length;
-					for (i=0;i<n;i++){
-						ins += "<td style='background-color:yellow' ><input onclick='javascript:i3GEO.vincularTabelas.colunas[\""+id+"\"] = "+i+";' type=radio id=name='coluna_"+id+"_"+i+"' name='coluna_"+id+"' style='cursor:pointer;' /><br><b>"+retorno.data[0].alias[i]+"</b></td>";
-					}
-					ins += "</tr>";
-					cor = "linha";
-					n = retorno.data[1].registros.length;
-					for (i=0;i<n;i++){
-						ins += "<tr>";
-						ins += "<td><input type=radio onclick='javascript:i3GEO.vincularTabelas.atualiza(\""+id+"\",this)' name='linha_"+id+"' style='cursor:pointer;' /></td>";
-						ins += "<td>";
-						if(retorno.data[1].registros[i].ext && retorno.data[1].registros[i].ext != ""){
-							ins += "<img style=cursor:pointer onclick='i3GEO.navega.zoomExt(\"\",\"\",\"\",\""+retorno.data[1].registros[i].ext+"\")' src='"+i3GEO.configura.locaplic+"/imagens/o.gif' title='zoom' ids="+retorno.data[1].registros[i].indice+" />";
-						}
-						ins += "</td>";
-						if(i3GEOtabelalegenda == true){
-							imagem = retorno.data.legenda[retorno.data[1].registros[i].classe["indice"]];
-							ins += "<td><img title='"+retorno.data[1].registros[i].classe["nome"]+"' src='"+imagem+"' /></td>";
-						}
-						else{
-							ins += "<td></td>";
-						}
-						vals = retorno.data[1].registros[i].valores;
-						for (j=0;j<vals.length;j++){
-							ins += "<td class='"+cor+"'>"+vals[j].valor+"</td>";
-						}
-						if (cor === "linha"){
-							cor = "linha1";
-						}
-						else{
-							cor = "linha";
-						}
-					}
-					$i(divid).innerHTML = ins;
-				}
-			};
-			i3GEOF.tabela.pegaRegistros("brasil","tudo","sim",true,true,temp);
-		},
-		/*
 	Function: ativaAutoAtualiza
 
 	Ativa ou desativa a atualiza&ccedil;&atilde;o autom&aacute;tica da tabela quando o usu&aacute;rio navega no mapa
 		 */
 		atualizaListaDeRegistros:function(){
 			var i,
-				janelas = i3GEOF.tabela.janelas,
-				propJanelas = i3GEOF.tabela.propJanelas,
-				n = janelas.length;
+			janelas = i3GEOF.tabela.janelas,
+			propJanelas = i3GEOF.tabela.propJanelas,
+			n = janelas.length;
 			for(i=0;i<n;i++){
 				if(propJanelas[janelas[i]].atualiza === true){
 					i3GEOF.tabela.pegaRegistros(janelas[i]);
@@ -730,14 +705,14 @@ i3GEOF.tabela = {
 			ext = i3GEO.parametros.mapexten;
 			ext = i3GEO.util.extOSM2Geo(ext);
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+
-				"&funcao=listaregistros"+
-				"&inicio="+inicio+
-				"&fim="+fim+
-				"&tema="+i3GEOF.tabela.propJanelas[idjanela].tema+
-				"&tipo="+tiporeg+
-				"&tipolista="+tipolista+
-				"&ext="+ext+
-				"&dadosDaClasse="+dadosDaClasse;
+			"&funcao=listaregistros"+
+			"&inicio="+inicio+
+			"&fim="+fim+
+			"&tema="+i3GEOF.tabela.propJanelas[idjanela].tema+
+			"&tipo="+tiporeg+
+			"&tipolista="+tipolista+
+			"&ext="+ext+
+			"&dadosDaClasse="+dadosDaClasse;
 			cp.set_response_type("JSON");
 			cp.call(p,"listaRegistros",funcao);
 		},
@@ -747,7 +722,6 @@ i3GEOF.tabela = {
 	Monta a visualiza&ccedil;&atilde;o da tabela de atributos
 		 */
 		montaTabela: function(retorno,idjanela){
-			//TODO
 			if (retorno.data !== undefined){
 				var ins,
 				i,
@@ -763,12 +737,15 @@ i3GEOF.tabela = {
 				ins = "<table id="+idjanela+"i3GEOtabelatabelai class=lista8 >";
 				ins += "<tr><td style='background-color:yellow'></td><td style='background-color:yellow'></td><td style='background-color:yellow'></td><td style='background-color:yellow'></td>";
 				i3GEOF.tabela.propJanelas[idjanela].colunas = {
-					"itens": retorno.data[0].itens,
-					"alias": retorno.data[0].alias
+						"itens": retorno.data[0].itens,
+						"alias": retorno.data[0].alias
 				};
 				n = retorno.data[0].itens.length;
 				for (i=0;i<n;i++){
-					ins += "<td accessKey='"+(i * 1 + 4)+"' style='background-color:yellow' ><img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 4)+")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad("t12")+"' />&nbsp;<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 4)+")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='"+$trad(31,i3GEOF.tabela.dicionario)+"' /><br><span title='"+retorno.data[0].itens[i]+"'> <b>"+retorno.data[0].alias[i]+"</b></span></td>";
+					ins += "<td accessKey='"+(i * 1 + 4) +
+					"' style='background-color:yellow' >" +
+					"<img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"+(i * 1 + 4)+",\""+idjanela+"\")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad("t12")+"' />&nbsp;" +
+					"<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"+(i * 1 + 4)+",\""+idjanela+"\")' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='"+$trad(31,i3GEOF.tabela.dicionario)+"' /><br><span title='"+retorno.data[0].itens[i]+"'> <b>"+retorno.data[0].alias[i]+"</b></span></td>";
 				}
 				ins += "</tr>";
 				cor = "linha";
@@ -777,7 +754,7 @@ i3GEOF.tabela = {
 					$i(idjanela+"i3GEOtabelafim").value = n - 1;
 				}
 				for (i=0;i<n;i++){
-					ins += "<tr><td><img style=cursor:pointer onclick='i3GEOF.tabela.excluiLinha(this)' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad("t12")+"' /></td>";
+					ins += "<tr><td><img style=cursor:pointer onclick='i3GEOF.tabela.excluiLinha(this,\""+idjanela+"\")' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='"+$trad("t12")+"' /></td>";
 					ins += "<td>";
 					if(retorno.data[1].registros[i].ext && retorno.data[1].registros[i].ext != ""){
 						ins += "<img style=cursor:pointer onclick='i3GEOF.tabela.zoomExt(\""+retorno.data[1].registros[i].ext+"\",\""+idjanela+"\")' src='"+i3GEO.configura.locaplic+"/imagens/o.gif' title='zoom' ids="+retorno.data[1].registros[i].indice+" />";
@@ -871,8 +848,7 @@ i3GEOF.tabela = {
 
 	Exclui uma coluna da visualiza&ccedil;&atilde;o da tabela
 		 */
-		excluiColuna: function(coluna,cid){
-			//TODO
+		excluiColuna: function(coluna,cid,idjanela){
 			i3GEOF.tabela.propJanelas[idjanela].aguarde.visibility = "visible";
 			try{
 				var tabela = $i(idjanela+"i3GEOtabelatabelai"),
@@ -911,9 +887,10 @@ i3GEOF.tabela = {
 
 	Ordena uma coluna da tabela
 		 */
-		ordenaColuna: function(coluna,cid){
+		ordenaColuna: function(coluna,cid,idjanela){
+			i3GEOF.tabela.propJanelas[idjanela].aguarde.visibility = "visible";
 			try{
-				var tabela = $i("i3GEOtabelatabelai"),
+				var tabela = $i(idjanela+"i3GEOtabelatabelai"),
 				trs = tabela.getElementsByTagName("tr"),
 				ntrs = trs.length,
 				tds,
@@ -950,7 +927,7 @@ i3GEOF.tabela = {
 				}
 				//recosntroi a tabela
 				psortfim = psort.sort();
-				ins = "<table id=i3GEOtabelatabelai class=lista8 >";
+				ins = "<table id="+idjanela+"i3GEOtabelatabelai class=lista8 >";
 				npsortfim = psortfim.length;
 				for (p=0;p<npsortfim;p++)
 				{
@@ -958,9 +935,13 @@ i3GEOF.tabela = {
 					if (trs[e] !== undefined)
 					{ins += "<tr>" + trs[e].innerHTML + "</tr>";}
 				}
-				$i("i3GEOtabelaregistros").innerHTML = ins+"</table>";
+				$i(idjanela+"i3GEOtabelaregistros").innerHTML = ins+"</table>";
+				i3GEOF.tabela.propJanelas[idjanela].aguarde.visibility = "hidden";
 			}
-			catch(e){i3GEOF.tabela.aguarde.visibility = "hidden";if(typeof(console) !== 'undefined'){console.error(e);}}
+			catch(e){
+				i3GEOF.tabela.propJanelas[idjanela].aguarde.visibility = "hidden";
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 		},
 		excluiLinha: function(celula){
 			var p = celula.parentNode.parentNode;
@@ -982,6 +963,7 @@ i3GEOF.tabela = {
 		},
 		registraLinha: function(linha,idjanela){
 			i3GEOF.tabela.propJanelas[idjanela].registros[linha.name] = linha.checked;
+			i3GEOF.tabela.vinculos.atualizaVinculos(idjanela,linha.name,linha.checked);
 		},
 		/*
 	Function: listaMarcados
@@ -1087,7 +1069,7 @@ i3GEOF.tabela = {
 			if($i(idjanela+"i3GEOtabelaComboItensGuia3").value === ""){
 				i3GEO.janela.tempoMsg("Escolha um item!");
 				return;
-				}
+			}
 			if(i3GEOF.tabela.propJanelas[idjanela].aguarde.visibility === "visible")
 			{return;}
 			i3GEOF.tabela.propJanelas[idjanela].aguarde.visibility = "visible";
@@ -1120,11 +1102,11 @@ i3GEOF.tabela = {
 				if ($i(idjanela+"i3GEOtabelafiltro1").value !== "")
 				{exclui = $i("i3GEOtabelafiltro1").value;}
 				p = i3GEO.configura.locaplic+
-					"/ferramentas/tabela/exec.php?g_sid="+i3GEO.configura.sid+
-					"&funcao=estatistica&item="+$i(idjanela+"i3GEOtabelaComboItensGuia3").value+
-					"&tema="+i3GEOF.tabela.propJanelas[idjanela].tema+
-					"&exclui="+exclui+
-					"&ext="+i3GEO.parametros.mapexten;
+				"/ferramentas/tabela/exec.php?g_sid="+i3GEO.configura.sid+
+				"&funcao=estatistica&item="+$i(idjanela+"i3GEOtabelaComboItensGuia3").value+
+				"&tema="+i3GEOF.tabela.propJanelas[idjanela].tema+
+				"&exclui="+exclui+
+				"&ext="+i3GEO.parametros.mapexten;
 				cp.set_response_type("JSON");
 				cp.call(p,"estatDescritivas",monta);
 			}catch(e){
