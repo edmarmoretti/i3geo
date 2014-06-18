@@ -33,6 +33,12 @@ i3geo/classesjs/compactajs.php
 */
 //
 //
+	echo "<pre>Para usar o console do firebug utilize sempre sem {}\n";
+	echo "como no exemplo:\n";
+	echo "if (typeof (console) !== 'undefined')\n";
+	echo '		console.info("i3GEO.arvoreDeCamadas.atualiza()");';
+	echo "</pre>";
+
 $locaplic = dirname(__FILE__)."/..";
 include_once(dirname(__FILE__)."/../admin/php/admin.php");
 include_once(dirname(__FILE__)."/../admin/php/conexao.php");
@@ -303,7 +309,14 @@ function packer($src,$out,$tipo="None")
 	{unlink($out);}
 	require_once dirname(__FILE__).'/../pacotes/packer/class.JavaScriptPacker.php';
 	$script = file_get_contents($src);
+
 	$script = str_replace("if(typeof(console)","//if(typeof(console)",$script);
+	$script = str_replace("if (typeof (console)","//if(typeof(console)",$script);
+	$script = str_replace("if (typeof(console)","//if(typeof(console)",$script);
+	$script = str_replace("console.i","//console.i",$script);
+	$script = str_replace("console.w","//console.w",$script);
+	$script = str_replace("console.e","//console.e",$script);
+
 	$t1 = microtime(true);
 	$packer = new JavaScriptPacker($script, 0, true, false);
 	$packed = $packer->pack();

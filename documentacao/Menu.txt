@@ -61,15 +61,16 @@ Group: API  {
       File: An&amp;aacute;lise geogr&amp;aacute;fica  (classesjs/classe_analise.js)
       File: Barra de bot&amp;otilde;es  (classesjs/classe_barradebotoes.js)
       File: C&amp;aacute;lculos  (classesjs/classe_calculo.js)
+      File: classe_desenho.js  (classesjs/classe_desenho.js)
       File: Configura&amp;ccedil;&amp;otilde;es gerais  (classesjs/classe_configura.js)
       File: Controle de usu&amp;aacute;rio  (classesjs/classe_login.js)
       File: Coordenadas  (classesjs/classe_coordenadas.js)
-      File: Desenho de elementos gr&amp;aacute;ficos  (classesjs/classe_desenho.js)
       File: Eventos  (classesjs/classe_eventos.js)
       File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs/classe_gadgets.js)
       File: Gerador de links  (classesjs/geradordelinks.js)
       File: Guias  (classesjs/classe_guias.js)
       File: i3Geo  (classesjs/classe_i3geo.js)
+      File: i3GEO.editorGM  (classesjs/classe_editorgm.js)
       File: Idioma  (classesjs/classe_idioma.js)
       File: Interface  (classesjs/classe_interface.js)
       File: Janelas  (classesjs/classe_janela.js)
@@ -128,5 +129,7 @@ Group: Index  {
    Function Index: Functions
    Arquivo Index: Arquivos
    Classe Index: Classe
+   File Index: Files
+   Constant Index: Constants
    }  # Group: Index
 

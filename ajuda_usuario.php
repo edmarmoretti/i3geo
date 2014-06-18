@@ -8,7 +8,7 @@ Lista as principais funcionalidades do i3Geo. Em i3geo/classesjs/dicionario_ajud
 
 Os textos de ajuda ficam no javascript classesjs/dicionario_ajuda.js . Para mostrar uma funcionalidade, utilize por exemplo
 
-http://localhost/i3geo/ajuda_usuario.php?idajuda=1
+http://localhost/i3geo/ajuda_usuario.php?idcategoria=5&idajuda=39
 
 para obter o ID veja em dicionario_ajuda.js
 
