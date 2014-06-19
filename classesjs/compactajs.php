@@ -33,12 +33,6 @@ i3geo/classesjs/compactajs.php
 */
 //
 //
-	echo "<pre>Para usar o console do firebug utilize sempre sem {}\n";
-	echo "como no exemplo:\n";
-	echo "if (typeof (console) !== 'undefined')\n";
-	echo '		console.info("i3GEO.arvoreDeCamadas.atualiza()");';
-	echo "</pre>";
-
 $locaplic = dirname(__FILE__)."/..";
 include_once(dirname(__FILE__)."/../admin/php/admin.php");
 include_once(dirname(__FILE__)."/../admin/php/conexao.php");
@@ -54,6 +48,11 @@ else{
 		exit;
 	}
 }
+	echo "<pre>Para usar o console do firebug utilize sempre sem {}\n";
+	echo "como no exemplo:\n";
+	echo "if (typeof (console) !== 'undefined')\n";
+	echo '		console.info("i3GEO.arvoreDeCamadas.atualiza()");';
+	echo "</pre>";
 unlink("../classesjs/teste.txt");
 $f = @fopen("../classesjs/teste.txt",w);
 @fclose($f);

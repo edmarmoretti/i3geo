@@ -2,7 +2,7 @@ Format: 1.51
 
 
 Title: i3Geo
-SubTitle: Par&amp;acirc;metros de configura&amp;ccedil;&amp;atilde;o e customiza&amp;ccedil;&amp;atilde;o
+SubTitle: Par&acirc;metros de configura&ccedil;&atilde;o e customiza&ccedil;&atilde;o
 
 Footer: O i3Geo é Software Livre
 Timestamp: Gerado em day month, year
@@ -43,27 +43,27 @@ Don't Index: Properties
 # --------------------------------------------------------------------------
 
 
-Link: Portal do Software P&amp;uacute;blico Brasileiro  (http://www.softwarepublico.gov.br)
+Link: Portal do Software P&uacute;blico Brasileiro  (http://www.softwarepublico.gov.br)
 File: Inicializa o i3Geo via URL ms_criamapa.php  (ms_criamapa.php)
 File: Lista de funcionalidades  (ajuda_usuario.php)
 File: Gerador de miniaturas &lparen;thumbnails&rparen;  (geraminiatura.php)
-File: Cat&amp;aacute;logo de temas em KML  (kml.php)
-File: Gerador de servi&amp;ccedil;os OGC  (ogc.php)
-File: Vari&amp;aacute;veis de inicializa&amp;ccedil;&amp;atilde;o ms_configura.php  (ms_configura.php)
+File: Cat&aacute;logo de temas em KML  (kml.php)
+File: Gerador de servi&ccedil;os OGC  (ogc.php)
+File: Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php  (ms_configura.php)
 
 Group: API  {
 
    Group: Classesjs  {
 
-      File: &amp;Aacute;rvore de camadas  (classesjs/classe_arvoredecamadas.js)
-      File: &amp;Aacute;rvore de temas  (classesjs/classe_arvoredetemas.js)
+      File: &Aacute;rvore de camadas  (classesjs/classe_arvoredecamadas.js)
+      File: &Aacute;rvore de temas  (classesjs/classe_arvoredetemas.js)
       File: Ajuda  (classesjs/classe_ajuda.js)
-      File: An&amp;aacute;lise geogr&amp;aacute;fica  (classesjs/classe_analise.js)
-      File: Barra de bot&amp;otilde;es  (classesjs/classe_barradebotoes.js)
-      File: C&amp;aacute;lculos  (classesjs/classe_calculo.js)
+      File: An&aacute;lise geogr&aacute;fica  (classesjs/classe_analise.js)
+      File: Barra de bot&otilde;es  (classesjs/classe_barradebotoes.js)
+      File: C&aacute;lculos  (classesjs/classe_calculo.js)
       File: classe_desenho.js  (classesjs/classe_desenho.js)
-      File: Configura&amp;ccedil;&amp;otilde;es gerais  (classesjs/classe_configura.js)
-      File: Controle de usu&amp;aacute;rio  (classesjs/classe_login.js)
+      File: Configura&ccedil;&otilde;es gerais  (classesjs/classe_configura.js)
+      File: Controle de usu&aacute;rio  (classesjs/classe_login.js)
       File: Coordenadas  (classesjs/classe_coordenadas.js)
       File: Eventos  (classesjs/classe_eventos.js)
       File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs/classe_gadgets.js)
@@ -75,13 +75,13 @@ Group: API  {
       File: Interface  (classesjs/classe_interface.js)
       File: Janelas  (classesjs/classe_janela.js)
       File: Mapa  (classesjs/classe_mapa.js)
-      File: Mapa de refer&amp;ecirc;ncia  (classesjs/classe_maparef.js)
+      File: Mapa de refer&ecirc;ncia  (classesjs/classe_maparef.js)
       File: Marcador  (classesjs/classe_marcador.js)
-      File: Navega&amp;ccedil;&amp;atilde;o sobre o mapa  (classesjs/classe_navega.js)
+      File: Navega&ccedil;&atilde;o sobre o mapa  (classesjs/classe_navega.js)
       File: PHP  (classesjs/classe_php.js)
       File: Social  (classesjs/classe_social.js)
       File: Temas  (classesjs/classe_tema.js)
-      File: Utilit&amp;aacute;rios  (classesjs/classe_util.js)
+      File: Utilit&aacute;rios  (classesjs/classe_util.js)
       }  # Group: Classesjs
 
    }  # Group: API
@@ -90,35 +90,35 @@ Group: Diagramas e SQL  {
 
    Group: SQL  {
 
-      Link: tabelas do banco de dados de amdinistra&amp;ccedil;&amp;atilde; para o controle de usu&amp;aacute;rios  (../../admin/sql/cadastrodeusuarios.sql)
-      Link: tabelas do banco de dados de amdinistra&amp;ccedil;&amp;atilde; para o sistema de cartogramas estat&amp;iacute;sticos  (../../admin/sql/metaestat.sql)
-      Link: povoamento das tabelas do banco de dados de amdinistra&amp;ccedil;&amp;atilde; para o controle de usu&amp;aacute;rios  (../../admin/sql/usuarios_basededados.sql)
-      Link: povoamento das tabelas do banco de dados de amdinistra&amp;ccedil;&amp;atilde; para o sistema de cartogramas estat&amp;iacute;sticos  (../../admin/sql/metaestat_basededados.sql)
+      Link: tabelas do banco de dados de amdinistra&ccedil;&atilde; para o controle de usu&aacute;rios  (../../admin/sql/cadastrodeusuarios.sql)
+      Link: tabelas do banco de dados de amdinistra&ccedil;&atilde; para o sistema de cartogramas estat&iacute;sticos  (../../admin/sql/metaestat.sql)
+      Link: povoamento das tabelas do banco de dados de amdinistra&ccedil;&atilde; para o controle de usu&aacute;rios  (../../admin/sql/usuarios_basededados.sql)
+      Link: povoamento das tabelas do banco de dados de amdinistra&ccedil;&atilde; para o sistema de cartogramas estat&iacute;sticos  (../../admin/sql/metaestat_basededados.sql)
       }  # Group: SQL
 
    Group: Figuras  {
 
-      Link: banco de dados de administra&amp;ccedil;&amp;atilde;o  (../diagramas/mer_banco_de_dados_de_administracao.png)
-      Link: banco de dados de usu&amp;acute;rios - gerado com Eclipse + ERMaster  (../diagramas/cadastrodeusuarios)
-      Link: banco de dados de metadados estat&amp;iacute;sticos - gerado com Eclipse + ERMaster  (../diagramas/metaestat)
+      Link: banco de dados de administra&ccedil;&atilde;o  (../diagramas/mer_banco_de_dados_de_administracao.png)
+      Link: banco de dados de usu&acute;rios - gerado com Eclipse + ERMaster  (../diagramas/cadastrodeusuarios)
+      Link: banco de dados de metadados estat&iacute;sticos - gerado com Eclipse + ERMaster  (../diagramas/metaestat)
       Link: Arquitetura  (../diagramas/arquitetura.png)
       Link: Caso de uso geral  (../diagramas/caso_de_uso_geral.png)
       Link: Atividade abrir mapa interativo  (../diagramas/atividade_abrir_mapa_interativo.png)
-      Link: Atividade atualizar vers&amp;atilde;o  (../diagramas/atividade_atualizar_versao.png)
-      Link: Atividade gerar arquivo de uma nova vers&amp;atilde;o  (../diagramas/atividade_gerar_arquivo_nova_versao.png)
-      Link: Atividade gerar pacote de corre&amp;ccedil;&amp;otilde;es  (../diagramas/atividade_gerar_pacote_de_correcoes.png)
+      Link: Atividade atualizar vers&atilde;o  (../diagramas/atividade_atualizar_versao.png)
+      Link: Atividade gerar arquivo de uma nova vers&atilde;o  (../diagramas/atividade_gerar_arquivo_nova_versao.png)
+      Link: Atividade gerar pacote de corre&ccedil;&otilde;es  (../diagramas/atividade_gerar_pacote_de_correcoes.png)
       }  # Group: Figuras
 
    Group: Arquivos originais  {
 
       Link: Baixe o software DIA  (http://dia-installer.de/)
-      Link: MER do banco de dados de administra&amp;ccedil;&amp;atilde;o  (../diagramas/mer_banco_de_dados_de_administracao.dia)
+      Link: MER do banco de dados de administra&ccedil;&atilde;o  (../diagramas/mer_banco_de_dados_de_administracao.dia)
       Link: Arquitetura  (../diagramas/arquitetura.dia)
       Link: Caso de uso geral  (../diagramas/caso_de_uso_geral.dia)
       Link: Atividade abrir mapa interativo  (../diagramas/atividade_abrir_mapa_interativo.dia)
-      Link: Atividade atualizar vers&amp;atilde;o  (../diagramas/atividade_atualizar_versao.dia)
-      Link: Atividade gerar arquivo de uma nova vers&amp;atilde;o  (../diagramas/atividade_gerar_arquivo_nova_versao.dia)
-      Link: Atividade gerar pacote de corre&amp;ccedil;&amp;otilde;es  (../diagramas/atividade_gerar_pacote_de_correcoes.dia)
+      Link: Atividade atualizar vers&atilde;o  (../diagramas/atividade_atualizar_versao.dia)
+      Link: Atividade gerar arquivo de uma nova vers&atilde;o  (../diagramas/atividade_gerar_arquivo_nova_versao.dia)
+      Link: Atividade gerar pacote de corre&ccedil;&otilde;es  (../diagramas/atividade_gerar_pacote_de_correcoes.dia)
       }  # Group: Arquivos originais
 
    }  # Group: Diagramas e SQL
