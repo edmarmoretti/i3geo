@@ -24,7 +24,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -459,6 +459,7 @@ class Atributos
 			for ($i = $inicio; $i < $res_count; ++$i){
 				$valitem = array();
 				$shape = $shapes[$i];
+				$indx = $shape->index;
 				foreach ($items as $item){
 					$valori = trim($shape->values[$item]);
 					if($convC == true){
@@ -630,7 +631,7 @@ class Atributos
 			if ($filtro != ""){
 				$l->setfilter("");
 			}
-			$buscas = "&Aacute;&Atilde;Ó&Otilde;&Ocirc;&aacute;à&atilde;&acirc;óò&ocirc;&otilde;&uacute;û&iacute;&eacute;&ecirc;&ccedil;";
+			$buscas = "&Aacute;&Atilde;ï¿½&Otilde;&Ocirc;&aacute;ï¿½&atilde;&acirc;ï¿½ï¿½&ocirc;&otilde;&uacute;ï¿½&iacute;&eacute;&ecirc;&ccedil;";
 			$buscaUTF = $this->converte($buscas);
 			$trocas = "AAOOOaaaaoooouuieecAAOOOaaaaoooouuieec";
 			$buscas = $buscas.$buscaUTF;
@@ -991,7 +992,7 @@ class Atributos
 
 	$ext - (opcional) Extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao mapa antes da opera&ccedil;&atilde;o de query (xmin ymin xmax ymax)
 
-	$listaDeTemas - (opcional) Lista com os códigos dos temas que ser&atilde;o identificados - vale apenas se $opcao = lista
+	$listaDeTemas - (opcional) Lista com os cï¿½digos dos temas que ser&atilde;o identificados - vale apenas se $opcao = lista
 
 	$wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 	*/
@@ -1151,7 +1152,7 @@ class Atributos
 
 	$ext - (opcional) Extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao mapa antes da opera&ccedil;&atilde;o de query (xmin ymin xmax ymax)
 
-	$listaDeTemas - (opcional) Lista com os códigos dos temas que ser&atilde;o identificados - vale apenas se $opcao = lista
+	$listaDeTemas - (opcional) Lista com os cï¿½digos dos temas que ser&atilde;o identificados - vale apenas se $opcao = lista
 
 	$wkt - (opcional) {boolean} inclui ou n&atilde;o o valor do wkt da geometria
 	*/
