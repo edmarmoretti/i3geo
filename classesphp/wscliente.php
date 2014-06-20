@@ -25,7 +25,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -213,6 +213,9 @@ if ($funcao == "dadosws")
 {
 	$cp->register('dadosWS');
 	$cp->start();
+	if(ob_get_contents ()){
+		ob_end_clean();
+	}
 	$cp->return_data();
 	exit;
 }
@@ -285,6 +288,9 @@ if ($funcao == "parfuncoesws")
 {
 	$cp->register('parFuncoesws');
 	$cp->start();
+	if(ob_get_contents ()){
+		ob_end_clean();
+	}
 	$cp->return_data();
 	exit;
 }
@@ -364,6 +370,9 @@ if ($funcao == "listaRSSws")
 {
 	$cp->register('listaRSSws');
 	$cp->start();
+	if(ob_get_contents ()){
+		ob_end_clean();
+	}
 	$cp->return_data();
 	exit;
 }
@@ -371,6 +380,9 @@ if ($funcao == "listaRSSws2")
 {
 	$cp->register('listaRSSws2');
 	$cp->start();
+	if(ob_get_contents ()){
+		ob_end_clean();
+	}
 	$cp->return_data();
 	exit;
 }
@@ -378,6 +390,9 @@ if ($funcao == "listaRSSwsARRAY")
 {
 	$cp->register('listaRSSwsARRAY');
 	$cp->start();
+	if(ob_get_contents ()){
+		ob_end_clean();
+	}
 	$cp->return_data();
 	exit;
 }
