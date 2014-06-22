@@ -1,0 +1,49 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION ""
+    DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
+    METADATA
+      "TIP"	"TIPO,ANOCRIA,NOMELOC"
+      "CLASSE"	"SIM"
+      "TEMA"	"Localidades (usar com mapa de calor)"
+      "PLUGINI3GEO" '{plugin:"heatmap",parametros:{coluna:"",valor:1}}'
+    END # METADATA
+    NAME "_lmapadecalor"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "Vila"
+      EXPRESSION ('[TIPO]'eq'Vila')
+      STYLE
+        COLOR 250 193 4
+        SIZE 20
+        SYMBOL "/var/www/i3geo/imagens/google/condominium.png"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cidade"
+      EXPRESSION ('[TIPO]'eq'Cidade')
+      STYLE
+        COLOR 62 9 41
+        SIZE 20
+        SYMBOL "/var/www/i3geo/imagens/google/condominium1.png"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Capital"
+      EXPRESSION ('[TIPO]'eq'Capital')
+      STYLE
+        COLOR 112 203 244
+        SIZE 6
+        SYMBOL "vila"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

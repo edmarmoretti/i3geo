@@ -268,7 +268,8 @@ class Mapa
 				"cache",
 				"editavel",
 				"colunaidunico",
-				"cortepixels"
+				"cortepixels",
+				"plugini3geo"
 		);
 		foreach ($this->layers as $oLayer){
 			$sel = "nao";
@@ -404,6 +405,10 @@ class Mapa
 					}
 				}
 				$tiles = "";
+				$plugini3geo = "";
+				if($oLayer->getmetadata("PLUGINI3GEO") != ""){
+					$plugini3geo = base64_encode($oLayer->getmetadata("PLUGINI3GEO"));
+				}
 				//formatacao antiga, antes da versao 6.0
 				/*
 				 $temas[] = array(
@@ -445,7 +450,8 @@ class Mapa
 				 		"cache"=>$cache,
 				 		"editavel"=>($oLayer->getmetadata("EDITAVEL")),
 				 		"colunaidunico"=>($oLayer->getmetadata("COLUNAIDUNICO")),
-				 		"cortepixels"=>$cortepixels
+				 		"cortepixels"=>$cortepixels,
+				 		"plugini3geo"=>$plugini3geo
 				 );
 				*/
 				$temas[] = array(
@@ -487,7 +493,8 @@ class Mapa
 						$cache,
 						$oLayer->getmetadata("EDITAVEL"),
 						$oLayer->getmetadata("COLUNAIDUNICO"),
-						$cortepixels
+						$cortepixels,
+						$plugini3geo
 				);
 			}
 		}

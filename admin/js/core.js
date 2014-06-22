@@ -1175,7 +1175,7 @@ function core_geraLinhas(dados)
 					resultado += "<textarea style=width:90%; id="+p.id+"  >"+p.value+"</textarea>";
 				}
 				else{
-					resultado += "<input style=width:90%; type=text id="+p.id+" value=\""+p.value+"\" />";
+					resultado += "<input style=width:90%;font-size:1.26em; type=text id="+p.id+" value=\""+p.value+"\" />";
 				}
 				if(p.tipo == "cor"){
 					resultado += "&nbsp;<img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\""+p.id+"\");' />";

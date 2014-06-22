@@ -83,6 +83,7 @@ echo "<pre>";
 //gera um arquivo compactado para cada um
 //
 packer("../pacotes/mobileesp/mdetect.js","../pacotes/mobileesp/mdetect_compacto.js","None");
+packer("classe_marcador.js","compactados/classe_plugini3geo_compacto.js","Normal");
 packer("classe_marcador.js","compactados/classe_marcador_compacto.js","Normal");
 packer("classe_login.js","compactados/classe_login_compacto.js","Normal");
 packer("classe_arvoredecamadas.js","compactados/classe_arvoredecamadas_compacto.js","Normal");
@@ -184,6 +185,7 @@ $jsfiles = array(
 "compactados/classe_social_compacto.js",
 "compactados/classe_login_compacto.js",
 "compactados/classe_marcador_compacto.js",
+"compactados/classe_plugini3geo_compacto.js",
 "../pacotes/eudock/js/euDock.2.0.js",
 "../pacotes/eudock/js/euDock.Image.js"
 );

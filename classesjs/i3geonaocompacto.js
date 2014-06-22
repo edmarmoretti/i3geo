@@ -66,7 +66,8 @@
 	"classe_coordenadas.js",
 	"classe_gadgets.js",
 	"classe_login.js",
-	"classe_marcador.js"
+	"classe_marcador.js",
+	"classe_plugini3geo.js"
 	);
 	for (i = 0; i < jsfiles.length; i++)
 	{

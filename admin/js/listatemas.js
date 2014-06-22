@@ -67,20 +67,20 @@ function montaDivTemas(i)
 {
 	var param = {
 		"linhas":[
-		{titulo:"Nome que ser&aacute; mostrado na &aacute;rvore de menus (portugu&ecirc;s) - altera tamb&eacute;m o metadata TEMA, existente no mapfile, usado como t&iacute;tulo na &aacute;rvore de camadas:",id:"nome_tema",size:"40",value:i.nome_tema,tipo:"text",div:""},
-		{titulo:"Ingl&ecirc;s (opcional):",id:"en",size:"40",value:i.en,tipo:"text",div:""},
-		{titulo:"Espanhol (opcional):",id:"es",size:"40",value:i.es,tipo:"text",div:""},
-		{titulo:"Italiano (opcional):",id:"it",size:"40",value:i.it,tipo:"text",div:""}
+		{titulo:"Nome que ser&aacute; mostrado na &aacute;rvore de menus (portugu&ecirc;s) - altera tamb&eacute;m o metadata TEMA, existente no mapfile, usado como t&iacute;tulo na &aacute;rvore de camadas:",id:"nome_tema",size:"30",value:i.nome_tema,tipo:"text",div:""},
+		{titulo:"Ingl&ecirc;s (opcional):",id:"en",size:"30",value:i.en,tipo:"text",div:""},
+		{titulo:"Espanhol (opcional):",id:"es",size:"30",value:i.es,tipo:"text",div:""},
+		{titulo:"Italiano (opcional):",id:"it",size:"30",value:i.it,tipo:"text",div:""}
 		]
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
 	ins += "<p>Descri&ccedil;&atilde;o (opcional):<br>";
-	ins += "<input size=40 type=text id=desc_tema value='"+i.desc_tema+"' /></p>";
+	ins += "<input size=30 type=text id=desc_tema value='"+i.desc_tema+"' /></p>";
 	ins += "<p>Link para a fonte (opcional):<br>";
-	ins += "<input size=40 type=text id=link_tema value='"+i.link_tema+"' /></p>";
+	ins += "<input size=30 type=text id=link_tema value='"+i.link_tema+"' /></p>";
 	ins += "<p>Tags (separe com espa&ccedil;o). Voc&ecirc; pode digitar novos tags ou pegar da lista abaixo (opcional):";
-	ins += "<input type=text size=40 value='"+i.tags_tema+"' id='tags_tema' ><br>";
+	ins += "<input type=text size=30 value='"+i.tags_tema+"' id='tags_tema' ><br>";
 	ins += "<div id=comboTags >Buscando...</div>";
 	//tipoa_tema pode receber o valor META indicando que baseia-se no sistema de metadados estatisticos
 	//nesse caso, tipoa_tema e preenchido pelo editor de mapfile

@@ -504,10 +504,12 @@ var i3GEO = {
 	atualiza: function(retorno){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.atualiza()");}
 		var corpoMapa,erro,mapscale,temp;
-		if(i3GEO.contadorAtualiza > 1)
-		{i3GEO.contadorAtualiza--;return;}
-		if(i3GEO.contadorAtualiza > 0)
-		{i3GEO.contadorAtualiza--;}
+		if(i3GEO.contadorAtualiza > 1){
+			i3GEO.contadorAtualiza--;return;
+		}
+		if(i3GEO.contadorAtualiza > 0){
+			i3GEO.contadorAtualiza--;
+		}
 		i3GEO.contadorAtualiza++;
 		//
 		//funcao que pega os dados do mapa no servidor
@@ -549,8 +551,10 @@ var i3GEO = {
 				i3GEO.mapa.recupera.inicia();return;
 			}
 			else
-			if(retorno.data === "ok" || retorno.data === "")
-			{corpoMapa.call();return;}
+			if(retorno.data === "ok" || retorno.data === ""){
+				corpoMapa.call();
+				return;
+			}
 		}
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error("i3GEO.atualiza "+e);}
@@ -593,6 +597,7 @@ var i3GEO = {
 			}
 			catch(e){}
 			i3GEO.arvoreDeCamadas.registaCamadas(temp);
+			//nesse ponto o layer sera adicionado ao mapa
 			i3GEO.Interface.redesenha();
 			//caso esteja na funcao de identificacao
 			if($i("i3GEOidentificalistaTemas")){
