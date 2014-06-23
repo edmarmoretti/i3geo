@@ -1142,7 +1142,8 @@ i3GEO.Interface = {
 					// verifica se a camada contem um plugin do i3geo
 					// caso tenha, direciona para a classe_i3geoplugin
 					if (camada.plugini3geo != "") {
-						i3GEO.pluginI3geo.inicia(camada.plugini3geo.tipo,camada.plugini3geo.parametros);
+						i3GEO.pluginI3geo.inicia(camada);
+						continue;
 					} else {
 						if (camada.cache) {
 							urllayer = url + "&cache=" + camada.cache
@@ -1250,10 +1251,12 @@ i3GEO.Interface = {
 						} catch (e) {
 						}
 					}
-					if (camada.escondido.toLowerCase() === "sim") {
-						layer.transitionEffect = "null";
+					if (layer && layer != "") {
+						if (camada.escondido.toLowerCase() === "sim") {
+							layer.transitionEffect = "null";
+						}
+						i3geoOL.addLayer(layer);
 					}
-					i3geoOL.addLayer(layer);
 				} else {
 					layer = i3geoOL.getLayersByName(camada.name)[0];
 				}

@@ -407,7 +407,8 @@ class Mapa
 				$tiles = "";
 				$plugini3geo = "";
 				if($oLayer->getmetadata("PLUGINI3GEO") != ""){
-					$plugini3geo = base64_encode($oLayer->getmetadata("PLUGINI3GEO"));
+					$plugini3geo = $oLayer->getmetadata("PLUGINI3GEO");
+					$plugini3geo = json_decode($plugini3geo);
 				}
 				//formatacao antiga, antes da versao 6.0
 				/*

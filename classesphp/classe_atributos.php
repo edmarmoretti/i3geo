@@ -24,7 +24,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c�pia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -360,7 +360,7 @@ class Atributos
 
 	parameters:
 
-	$itemtema - Tema que ser&aacute; processado.
+	$itemtema - (opcional) se for definido, apenas um item sera retornado
 
 	$tipo - Tipo de abrang&ecirc;ncia espacial (brasil ou mapa).
 
@@ -561,6 +561,84 @@ class Atributos
 			$resultadoFinal[] = array("totalGeral"=>$totalGeral,"registros"=>$registros);
 		}
 		return($resultadoFinal);
+	}
+	/*
+	function: listaRegistrosXY
+	
+	Pega o XY de cada registro e valores de itens especificos
+	
+	parameters:
+	
+	$items - lista de itens separado por ","
+	
+	$tipo - Tipo de abrang&ecirc;ncia espacial (brasil ou mapa).
+	
+	$tipolista - Indica se ser&atilde;o mostrados todos os registros ou apenas os selecionados (tudo|selecionados)
+	
+	*/
+	function listaRegistrosXY($items,$tipo,$tipolista)
+	{
+		error_reporting(0);
+		if(!$this->layer){
+			return "erro";
+		}
+		$resultadoFinal = array();
+		if ((!isset($tipolista)) || ($tipolista=="")){
+			$tipolista = "tudo";
+		}
+		//se tipo for igual a brasil, define a extens&atilde;o geogr&aacute;fica total
+		if ($tipo == "brasil"){
+			$this->mapa = extPadrao($this->mapa);
+		}
+		$this->layer->set("template","none.htm");
+		$this->layer->setfilter("");
+		if ($this->layer->data == ""){
+			return "erro. O tema n&atilde;o tem tabela";
+		}
+		$items = str_replace(" ",",",$items);
+		$items = explode(",",$items);
+		$registros = array();
+		if ($tipolista == "selecionados"){
+			$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
+			$res_count = count($shapes);
+			for ($i = 0; $i < $res_count; ++$i){
+				$valitem = array();
+				$shape = $shapes[$i];
+				$indx = $shape->index;
+				foreach ($items as $item){
+					$valori = trim($shape->values[$item]);
+					$valitem[] = array("item"=>$item,"valor"=>$valori);
+				}
+				$c = $shape->getCentroid();
+				$registros[] = array("indice"=>$indx,"valores"=>$valitem,"x"=>$c->x,"y"=>$c->y);
+			}
+		}
+		if ($tipolista == "tudo"){
+			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS){
+				$res_count = $this->layer->getNumresults();
+				$sopen = $this->layer->open();
+				for ($i = 0; $i < $res_count; ++$i){
+					$valitem = array();
+					if($this->v == 6){
+						$shape = $this->layer->getShape($this->layer->getResult($i));
+						$indx = $shape->index;
+					}
+					else{
+						$result = $this->layer->getResult($i);
+						$indx  = $result->shapeindex;
+						$shape = $this->layer->getfeature($indx,-1);
+					}
+					foreach ($items as $item){
+						$valori = trim($shape->values[$item]);
+						$valitem[] = array("item"=>$item,"valor"=>$valori);
+					}
+					$c = $shape->getCentroid();
+					$registros[] = array("indice"=>$indx,"valores"=>$valitem,"x"=>$c->x,"y"=>$c->y);
+				}
+				$this->layer->close();
+			}
+		}
+		return($registros);
 	}
 	/*
 		function: buscaRegistros
