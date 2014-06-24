@@ -1,4 +1,12 @@
 <?php
+//quando o saiku e iniciado de fora do i3geo, e necessario inicializar um mapfile para uso como base dos mapas
+if(empty($_GET["g_sid"])){
+	include(dirname(__FILE__)."/../../ms_criamapa.php");
+	//reinicia a url
+	$urln = "?g_sid=".session_id()."&locaplic=".$_GET["locaplic"]."&mapext=".$mapext;
+	header("Location:".$urln);
+	exit;
+}
 
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
@@ -7,15 +15,6 @@ if(!isset($dir_tmp)){
 }
 $nomeConexao = nomeRandomico();
 $nomeDatasource = $dir_tmp."/saiku-datasources/".$nomeConexao;
-
-//quando o saiku e iniciado de fora do i3geo, e necessario inicializar um mapfile para uso como base dos mapas
-if(empty($_GET["g_sid"])){
-	include(dirname(__FILE__)."/../../ms_criamapa.php");
-	//reinicia a url
-	$urln = "?g_sid=".session_id();
-	header("Location:".$urln);
-	exit;
-}
 
 //pega a sessao PHP aberta pelo i3Geo ou ms_criamapa.php
 session_name("i3GeoPHP");

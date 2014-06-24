@@ -177,7 +177,7 @@ botoesIni.push({
 	"titulo":$trad(12,g_traducao_init)
 	},{
 	"img":"../imagens/saiku_free_small.png",
-	"href":"../ferramentas/saiku/esquemaxml.php",
+	"href":"../ferramentas/saiku/esquemaxml.php?locaplic="+window.location.href.replace("/init/index.php",""),
 	"titulo":$trad(25,g_traducao_init)
 	},{
 	"img":"../imagens/gvsig.jpg",

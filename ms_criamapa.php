@@ -446,6 +446,10 @@ if ((isset($mapext)) && ($mapext != ""))
 	if (count($newext) == 4)
 	{$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
 }
+else{
+	//algumas aplicacoes usam essa variavel (SAIKU)
+	$mapext = $ext->minx." ".$ext->miny." ".$ext->maxx." ".$ext->maxy;
+}
 /*
 Configura os endere&ccedil;os corretos no mapfile.
 
