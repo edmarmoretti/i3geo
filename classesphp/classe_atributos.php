@@ -564,17 +564,17 @@ class Atributos
 	}
 	/*
 	function: listaRegistrosXY
-	
+
 	Pega o XY de cada registro e valores de itens especificos
-	
+
 	parameters:
-	
+
 	$items - lista de itens separado por ","
-	
+
 	$tipo - Tipo de abrang&ecirc;ncia espacial (brasil ou mapa).
-	
+
 	$tipolista - Indica se ser&atilde;o mostrados todos os registros ou apenas os selecionados (tudo|selecionados)
-	
+
 	*/
 	function listaRegistrosXY($items,$tipo,$tipolista)
 	{

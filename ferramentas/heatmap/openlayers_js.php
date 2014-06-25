@@ -47,7 +47,8 @@ if (!connection_aborted()){
 echo $nomevariavel.' = ['.implode(",",$resultado).'];';
 if($carregajs === "sim"){
 	include_once($dir."/../../pacotes/heatmap/src/heatmap.js");
-	include_once($dir."/../../pacotes/heatmap/src/heatmap-openlayers-renderer.js");
+	//include_once($dir."/../../pacotes/heatmap/src/heatmap-openlayers-renderer.js");
+	include_once($dir."/../../pacotes/heatmap/src/heatmap-openlayers.js");
 }
 
 ?>
