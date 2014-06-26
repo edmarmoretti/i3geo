@@ -27,7 +27,8 @@ include_once($dir."/../../classesphp/classe_atributos.php");
 
 $m = new Atributos($map_file,$layer);
 $registros = $m->listaRegistrosXY($coluna, "brasil", "tudo");
-$n = count($registros);
+//TODO
+$n = 100;//count($registros);
 $resultado = array();
 if(empty($coluna)){
 	foreach($registros as $r){

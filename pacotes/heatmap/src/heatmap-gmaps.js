@@ -6,172 +6,171 @@
  * and the Beerware (http://en.wikipedia.org/wiki/Beerware) license.
  */
 
-//cria um layer idiota para poder calcular a projecao
+//i3GeoMapOverlay vem de i3GEO.Interface e e usado para calcular projecao
 //http://stackoverflow.com/questions/1538681/how-to-call-fromlatlngtodivpixel-in-google-maps-api-v3
-heatmapFooOverlay.prototype = new google.maps.OverlayView();
-heatmapFooOverlay.prototype.onAdd = function() { }
-heatmapFooOverlay.prototype.onRemove = function() { }
-heatmapFooOverlay.prototype.draw = function() { }
-function heatmapFooOverlay() { this.setMap(i3GeoMap); }
-var heatmapBarOverlay = new heatmapFooOverlay();
 
-
-function HeatmapOverlay(map, cfg){
-    var me = this;
-
-    me.heatmap = null;
-    me.conf = cfg;
-    me.latlngs = [];
-    me.bounds = null;
-    me.setMap(map);
-  google.maps.event.addListener(map, 'bounds_changed', function() { me.draw() });
+function HeatmapOverlay(map, name, cfg) {
+	var me = this;
+	me.name = name;
+	me.heatmap = null;
+	me.conf = cfg;
+	me.latlngs = [];
+	me.bounds = null;
+	me.setMap(map);
+	google.maps.event.addListener(map, 'bounds_changed', function() {
+		me.draw()
+	});
 }
 
 HeatmapOverlay.prototype = new google.maps.OverlayView();
 
-HeatmapOverlay.prototype.onAdd = function(){
+HeatmapOverlay.prototype.onAdd = function() {
 
-    var panes = this.getPanes(),
-        w = this.getMap().getDiv().clientWidth,
-        h = this.getMap().getDiv().clientHeight,
-	el = document.createElement("div");
+	var panes = this.getPanes(), w = this.getMap().getDiv().clientWidth, h = this
+			.getMap().getDiv().clientHeight, el = document.createElement("div");
 
-    el.style.cssText = "position:absolute;top:0;left:0;width:"+w+"px;height:"+h+"px;";
+	el.style.cssText = "position:absolute;top:0;left:0;width:" + w
+			+ "px;height:" + h + "px;";
 
-    this.conf.element = el;
-    panes.overlayLayer.appendChild(el);
+	this.conf.element = el;
+	panes.overlayLayer.appendChild(el);
 
-    this.heatmap = h337.create(this.conf);
+	this.heatmap = h337.create(this.conf);
 }
 
-HeatmapOverlay.prototype.onRemove = function(){
-    // Empty for now.
+HeatmapOverlay.prototype.onRemove = function() {
+	// Empty for now.
 }
 
-HeatmapOverlay.prototype.draw = function(){
+HeatmapOverlay.prototype.draw = function() {
 
-    var me = this,
-        overlayProjection = heatmapBarOverlay.getProjection(), //me.getProjection(),
-        currentBounds = me.map.getBounds();
+	var me = this, overlayProjection = i3GeoMapOverlay.getProjection(), // me.getProjection(),
+	currentBounds = me.map.getBounds();
 
-    if (currentBounds.equals(me.bounds)) {
-      return;
-    }
-    me.bounds = currentBounds;
+	if (currentBounds.equals(me.bounds)) {
+		return;
+	}
+	me.bounds = currentBounds;
 
-    var ne = overlayProjection.fromLatLngToDivPixel(currentBounds.getNorthEast()),
-        sw = overlayProjection.fromLatLngToDivPixel(currentBounds.getSouthWest()),
-        topY = ne.y,
-        leftX = sw.x,
-        h = sw.y - ne.y,
-        w = ne.x - sw.x;
+	var ne = overlayProjection.fromLatLngToDivPixel(currentBounds
+			.getNorthEast()), sw = overlayProjection
+			.fromLatLngToDivPixel(currentBounds.getSouthWest()), topY = ne.y, leftX = sw.x, h = sw.y
+			- ne.y, w = ne.x - sw.x;
 
-    me.conf.element.style.left = leftX + 'px';
-    me.conf.element.style.top = topY + 'px';
-    me.conf.element.style.width = w + 'px';
-    me.conf.element.style.height = h + 'px';
-    me.heatmap.store.get("heatmap").resize();
+	me.conf.element.style.left = leftX + 'px';
+	me.conf.element.style.top = topY + 'px';
+	me.conf.element.style.width = w + 'px';
+	me.conf.element.style.height = h + 'px';
+	me.heatmap.store.get("heatmap").resize();
 
-    if(this.latlngs.length > 0){
-    	this.heatmap.clear();
+	if (this.latlngs.length > 0) {
+		this.heatmap.clear();
 
-        var len = this.latlngs.length,
-            projection = heatmapBarOverlay.getProjection(); //this.getProjection();
-            d = {
-	        max: this.heatmap.store.max,
-	        data: []
-	    };
+		var len = this.latlngs.length, projection = i3GeoMapOverlay
+				.getProjection(); // this.getProjection();
+		d = {
+			max : this.heatmap.store.max,
+			data : []
+		};
 
-        while(len--){
-            var latlng = this.latlngs[len].latlng;
-	    if(!currentBounds.contains(latlng)) { continue; }
+		while (len--) {
+			var latlng = this.latlngs[len].latlng;
+			if (!currentBounds.contains(latlng)) {
+				continue;
+			}
 
-	    // DivPixel is pixel in overlay pixel coordinates... we need
-	    // to transform to screen coordinates so it'll match the canvas
-	    // which is continually repositioned to follow the screen.
-	    var divPixel = projection.fromLatLngToDivPixel(latlng),
-	        screenPixel = new google.maps.Point(divPixel.x - leftX, divPixel.y - topY);
+			// DivPixel is pixel in overlay pixel coordinates... we need
+			// to transform to screen coordinates so it'll match the canvas
+			// which is continually repositioned to follow the screen.
+			var divPixel = projection.fromLatLngToDivPixel(latlng), screenPixel = new google.maps.Point(
+					divPixel.x - leftX, divPixel.y - topY);
 
-	    var roundedPoint = this.pixelTransform(screenPixel);
+			var roundedPoint = this.pixelTransform(screenPixel);
 
-             d.data.push({
-	        x: roundedPoint.x,
-	        y: roundedPoint.y,
-	        count: this.latlngs[len].c
-	    });
-        }
-        this.heatmap.store.setDataSet(d);
-    }
-}
-
-HeatmapOverlay.prototype.pixelTransform = function(p){
-    var w = i3GEO.parametros.w,//this.heatmap.get("width"),
-        h = i3GEO.parametros.h; //this.heatmap.get("height");
-
-    while(p.x < 0){
-    	p.x+=w;
-    }
-
-    while(p.x > w){
-	p.x-=w;
-    }
-
-    while(p.y < 0){
-	p.y+=h;
-    }
-
-    while(p.y > h){
-	p.y-=h;
-    }
-
-    p.x = (p.x >> 0);
-    p.y = (p.y >> 0);
-
-    return p;
-}
-
-HeatmapOverlay.prototype.setDataSet = function(data){
-
-    var me = this,
-        currentBounds = me.map.getBounds(),
-        mapdata = {
-            max: data.max,
-            data: []
-        },
-        d = data.data,
-        dlen = d.length,
-        projection = heatmapBarOverlay.getProjection(),//me.getProjection(),
-        latlng, point;
-
-    me.latlngs = [];
-
-    while(dlen--){
-    	latlng = new google.maps.LatLng(d[dlen].lat, d[dlen].lng);
-
-        if(!currentBounds.contains(latlng)) {
-            continue;
-        }
-
-    	me.latlngs.push({latlng: latlng, c: d[dlen].count});
-    	point = me.pixelTransform(projection.fromLatLngToDivPixel(latlng));
-    	mapdata.data.push({x: point.x, y: point.y, count: d[dlen].count});
-    }
-    if(me.heatmap){
-		me.heatmap.clear();
-        me.heatmap.store.setDataSet(mapdata);
+			d.data.push({
+				x : roundedPoint.x,
+				y : roundedPoint.y,
+				count : this.latlngs[len].c
+			});
+		}
+		this.heatmap.store.setDataSet(d);
 	}
 }
 
-HeatmapOverlay.prototype.addDataPoint = function(lat, lng, count){
+HeatmapOverlay.prototype.pixelTransform = function(p) {
+	var w = i3GEO.parametros.w, // this.heatmap.get("width"),
+	h = i3GEO.parametros.h; // this.heatmap.get("height");
 
-    var projection = heatmapBarOverlay.getProjection(),//this.getProjection(),
-        latlng = new google.maps.LatLng(lat, lng),
-        point = this.pixelTransform(projection.fromLatLngToDivPixel(latlng));
+	while (p.x < 0) {
+		p.x += w;
+	}
 
-    this.heatmap.store.addDataPoint(point.x, point.y, count);
-    this.latlngs.push({ latlng: latlng, c: count });
+	while (p.x > w) {
+		p.x -= w;
+	}
+
+	while (p.y < 0) {
+		p.y += h;
+	}
+
+	while (p.y > h) {
+		p.y -= h;
+	}
+
+	p.x = (p.x >> 0);
+	p.y = (p.y >> 0);
+
+	return p;
 }
 
-HeatmapOverlay.prototype.toggle = function(){
-    this.heatmap.toggleDisplay();
+HeatmapOverlay.prototype.setDataSet = function(data) {
+
+	var me = this, currentBounds = me.map.getBounds(), mapdata = {
+		max : data.max,
+		data : []
+	}, d = data.data, dlen = d.length, projection = i3GeoMapOverlay
+			.getProjection(), // me.getProjection(),
+	latlng, point;
+
+	me.latlngs = [];
+
+	while (dlen--) {
+		latlng = new google.maps.LatLng(d[dlen].lat, d[dlen].lng);
+
+		if (!currentBounds.contains(latlng)) {
+			continue;
+		}
+
+		me.latlngs.push({
+			latlng : latlng,
+			c : d[dlen].count
+		});
+		point = me.pixelTransform(projection.fromLatLngToDivPixel(latlng));
+		mapdata.data.push({
+			x : point.x,
+			y : point.y,
+			count : d[dlen].count
+		});
+	}
+	if (me.heatmap) {
+		me.heatmap.clear();
+		me.heatmap.store.setDataSet(mapdata);
+	}
+}
+
+HeatmapOverlay.prototype.addDataPoint = function(lat, lng, count) {
+
+	var projection = i3GeoMapOverlay.getProjection(), // this.getProjection(),
+	latlng = new google.maps.LatLng(lat, lng), point = this
+			.pixelTransform(projection.fromLatLngToDivPixel(latlng));
+
+	this.heatmap.store.addDataPoint(point.x, point.y, count);
+	this.latlngs.push({
+		latlng : latlng,
+		c : count
+	});
+}
+
+HeatmapOverlay.prototype.toggle = function() {
+	this.heatmap.toggleDisplay();
 }

@@ -2134,9 +2134,9 @@ i3GEO.arvoreDeTemas = {
 	/**
 	 * Function: desativaCheckbox
 	 * 
-	 * Desmarca todos os checkbox dos temas marcados na arvore.
+	 * Desmarca todos os checkbox dos temas marcados na arvore
 	 */
-	desativaCheckbox : function() {
+	desativaCheckbox : function(valor) {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.arvoreDeTemas.desativaCheckbox()");
 
@@ -2149,6 +2149,26 @@ i3GEO.arvoreDeTemas = {
 			inputs[i].checked = false;
 			i += 1;
 		} while (i < n);
+	},
+	/**
+	 * Function: buscaCheckbox
+	 * 
+	 * Retorna um input com determinado value
+	 */
+	buscaCheckbox : function(valor) {
+		var o, inputs, n, i;
+		o = document.getElementById(i3GEO.arvoreDeTemas.ARVORE.id);
+		if(o){
+			inputs = o.getElementsByTagName("input");
+			n = inputs.length;
+			i = 0;
+			do {
+				if(inputs[i].value === valor){
+					return inputs[i];
+				}
+				i += 1;
+			} while (i < n);
+		}
 	},
 	/**
 	 * Lista os temas com checkbox marcados.

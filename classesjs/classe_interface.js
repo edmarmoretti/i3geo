@@ -361,6 +361,13 @@ i3GEO.Interface = {
 	 */
 	ligaDesliga : function(obj) {
 		i3GEO.Interface[i3GEO.Interface.ATUAL].ligaDesliga(obj);
+		//atualiza a arvore de temas se for o caso
+		if(obj.value && obj.value != ""){
+			var ck = i3GEO.arvoreDeTemas.buscaCheckbox(obj.value);
+			if(ck){
+				ck.checked = obj.checked;
+			}
+		}		
 	},
 	/*
 	 * Function: adicionaKml
@@ -1396,14 +1403,8 @@ i3GEO.Interface = {
 			var layers = i3geoOL.getLayersByName(obj.value), desligar = "", ligar = "", b;
 			if (layers.length > 0) {
 				layers[0].setVisibility(obj.checked);
-				if (obj.checked == true) {
-					// foi necess�rio por causa de um bug no Firefox 27.0.1
-					/*
-					 * @TODO verificar se persiste o erro nas versoes do FF
-					 */
-					if (navn) {
-						i3GEO.Interface.openlayers.atualizaTema("", obj.value);
-					}
+				if(obj.checked === true){
+					layers[0].div.style.display = "block";
 				}
 			}
 			if (obj.checked) {
@@ -2582,7 +2583,7 @@ i3GEO.Interface = {
 		 */
 		PARAMETROSLAYER : "&TIPOIMAGEM=" + i3GEO.configura.tipoimagem,
 		/*
-		 * String acrescentada � url de cada tile para garantir a
+		 * String acrescentada a url de cada tile para garantir a
 		 * remo&ccedil;&atilde;o do cache local
 		 *
 		 * Type: {string}

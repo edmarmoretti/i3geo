@@ -1201,6 +1201,18 @@ i3GEO.arvoreDeCamadas = {
 		// camadas", "i3geo");
 		var tnome, idtema = node.data.idopcoes, ltema = i3GEO.arvoreDeCamadas
 				.pegaTema(idtema), funcoes = i3GEO.arvoreDeCamadas.FUNCOES;
+		
+		
+		//
+		//ajusta as propriedades e funcoes caso a camada seja um plugin
+		//
+		ltema = i3GEO.pluginI3geo.aplicaPropriedades(ltema);
+		//inclui no objeto o parametro de verificacao
+		//e necessario clonar para nao alterar o original
+		funcoes = i3GEO.util.cloneObj(funcoes);
+		funcoes.plugini3geo = ltema.plugini3geo;
+		funcoes = i3GEO.pluginI3geo.aplicaPropriedades(funcoes);
+		
 		if (funcoes.opacidade === true) {
 			tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
 					+ $trad("t19")
@@ -1635,6 +1647,13 @@ i3GEO.arvoreDeCamadas = {
 			html += "&nbsp;<img style='" + estilo + "' src='" + tema.iconetema
 					+ "' />";
 		}
+		tema.AGUARDALEGENDA = i3GEO.arvoreDeCamadas.AGUARDALEGENDA;
+		//
+		//ajusta as propriedades conforme as caracteristicas de cada plugin
+		//verifica se o tema e do tipo plugin antes
+		//nao e necessario clonar
+		//
+		tema = i3GEO.pluginI3geo.aplicaPropriedades(tema);
 		//
 		// inclui icone indicando que o tema muda conforme a escala
 		//
@@ -1702,7 +1721,7 @@ i3GEO.arvoreDeCamadas = {
 		}
 		estilo = navm ? "cursor:move;vertical-align:35%;padding-top:0px;color:black;"
 				: "cursor:move;vertical-align:20%;color:black;";
-		if (i3GEO.arvoreDeCamadas.AGUARDALEGENDA) {
+		if (tema.AGUARDALEGENDA) {
 			html += "&nbsp;<span id='ArvoreTituloTema"
 					+ tema.name
 					+ "' style='position:relative;top:2px;"
