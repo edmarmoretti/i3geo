@@ -1,28 +1,28 @@
 /**
  * Title: pluginI3geo
- * 
+ *
  * i3GEO.pluginI3geo
- * 
+ *
  * Implementam os plugins do i3Geo que adicionam camadas especiais ao mapa,
  * normalmente dados vetoriais.
- * 
+ *
  * Arquivo:
- * 
+ *
  * i3geo/classesjs/classe_plugini3geo.js
- * 
+ *
  * Licen&ccedil;a:
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente
  * Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
  * e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
  * GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja
  * &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia
  * impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE
@@ -39,13 +39,13 @@ i3GEO.pluginI3geo = {
 		OBJETOS: {},
 		/**
 		 * Inicia a execucao de um plugin
-		 * 
+		 *
 		 * Camada e um objeto gerado pelo i3Geo quando uma camada e adicionada
 		 * ao mapa O objeto i3GEO.arvoreDeCamadas.CAMADAS guarda todas as
 		 * camadas adicionadas ao mapa Ao adicionar uma camada pelo catalogo, o
 		 * i3Geo verifica se a camada possui plugin e direciona para ca Os
 		 * plugins sao definidos como metadados em cada mapfile de cada tema
-		 * 
+		 *
 		 * Veja em i3geo/classesphp/classe_mapa.php funcao parametrostemas
 		 */
 		inicia : function(camada) {
@@ -61,16 +61,41 @@ i3GEO.pluginI3geo = {
 		ligaCamada : function(nomecamada) {
 			if(i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].ligaCamada){
 				i3GEO.pluginI3geo.OBJETOS[nomecamada].ligaCamada();
+				return true;
 			}
+			return false;
 		},
-		desLigaCamada : function(nomecamada) {
+		desligaCamada : function(nomecamada) {
 			if(i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].desLigaCamada){
 				i3GEO.pluginI3geo.OBJETOS[nomecamada].desLigaCamada();
+				return true;
 			}
+			return false;
+		},
+		removeCamada : function(nomecamada) {
+			if(i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada){
+				i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada();
+				delete(i3GEO.pluginI3geo.OBJETOS[nomecamada]);
+				return true;
+			}
+			return false;
+		},
+		atualizaCamada : function(nomecamada) {
+			if(i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada){
+				i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada();
+				return true;
+			}
+			return false;
+		},
+		existeObjeto : function(nomecamada) {
+			if(i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada){
+				return true;
+			}
+			return false;
 		},
 		/**
 		 * Aplica as propriedades em um objeto do tipo tema
-		 * 
+		 *
 		 * tema e fornecido por i3GEO.arvoreDeCamadas o ajuste das propriedades
 		 * e necessario para que as propriedades aparecam de forma correta na
 		 * arvore de camadas
@@ -83,36 +108,36 @@ i3GEO.pluginI3geo = {
 		},
 		/**
 		 * Function: heatmap
-		 * 
+		 *
 		 * Mapa de calor
-		 * 
+		 *
 		 * Gera um layer do tipo mapa de calor e adiciona ao mapa
-		 * 
+		 *
 		 * As depend&ecirc;ncias em javascript sao carregadas via script tag por
 		 * meio de ferramentas/heatmap/openlayers_js.php
-		 * 
+		 *
 		 * Esse programa tamb&eacute;m obt&eacute;m os dados necess&aacute;rios
 		 * ao plugin
-		 * 
+		 *
 		 * O layer existente no mapfile deve conter um metadata chamado
 		 * PLUGINI3GEO
-		 * 
+		 *
 		 * Esse matadado deve conter uma string que ser&aacute; transformada em
 		 * um objeto javascript para uso no plugin
-		 * 
+		 *
 		 * Exemplo:
-		 * 
+		 *
 		 * "PLUGINI3GEO" '{"plugin":"heatmap","parametros":{"coluna":"teste"}}'
-		 * 
+		 *
 		 * Coluna &eacute; a que cont&eacute;m os dados num&eacute;ricos que
 		 * definem a quantidade de uma medida em cada ponto e &eacute; usada
 		 * para gerar a representa&ccedil;&atilde;o. Se for vazia, considera-se
 		 * o valor como 1
-		 * 
+		 *
 		 * As cores das classes existentes no LAYER ser&atilde;o utilizadas para
 		 * calcular as cores do mapa de calor. Se n&atilde;o existirem classes,
 		 * ser&aacute; usado o default.
-		 * 
+		 *
 		 */
 		heatmap : {
 			googlemaps: {
@@ -134,29 +159,41 @@ i3GEO.pluginI3geo = {
 				},
 				inicia: function(camada){
 					var p = i3GEO.configura.locaplic
-					+ "/ferramentas/heatmap/googlemaps_js.php", carregaJs = "nao", crialayer;
+					+ "/ferramentas/heatmap/googlemaps_js.php", carregaJs = "nao", criaLayer;
 					criaLayer = function() {
 						var heatmap,pontos;
 						heatmap = new HeatmapOverlay(i3GeoMap, camada.name, {
 							"radius":15,
 							"visible":true,
 							"opacity":60,
-							"gradient": { 0.45: "rgb(0,0,255)", 0.55: "rgb(0,255,255)", 0.65: "rgb(0,255,0)", 0.95: "yellow", 1.0: "rgb(255,0,0)" },
+							"gradient": { "0.45": "rgb(0,0,255)", "0.55": "rgb(0,255,255)", "0.65": "rgb(0,255,0)", "0.95": "yellow", "1.0": "rgb(255,0,0)" },
 							"legend": {
 								"title": camada.tema,
 								"position": "bl",
 								"offset": [5,50]
 							}
 						});
-						i3GeoMap.overlayMapTypes.insertAt(0, heatmap);
+						//i3GeoMap.overlayMapTypes.insertAt(0, heatmap);
 						pontos={
 								max: 10,
 								data: heatmap_dados
 						};
 						i3GEO.janela.fechaAguarde("aguardePlugin");
 						heatmap.setDataSet(pontos);
-						heatmap_dados = null;
-						// i3GeoMap.setZoom(i3GeoMap.getZoom());
+						heatmap.ligaCamada = function(){
+							this.toggle();
+						};
+						heatmap.desLigaCamada = function(){
+							this.clear();
+							//this.toggle();
+						};
+						heatmap.removeCamada = function(){
+							this.destroy();
+						};
+						heatmap.atualizaCamada = function(){
+							this.draw();
+						};
+						i3GEO.pluginI3geo.OBJETOS[camada.name] = heatmap;
 					};
 					if (typeof (HeatmapOverlay) === 'undefined') {
 						carregaJs = "sim";
@@ -193,7 +230,7 @@ i3GEO.pluginI3geo = {
 				},
 				inicia: function(camada) {
 					var p = i3GEO.configura.locaplic
-					+ "/ferramentas/heatmap/openlayers_js.php", carregaJs = "nao", crialayer;
+					+ "/ferramentas/heatmap/openlayers_js.php", carregaJs = "nao", criaLayer;
 					criaLayer = function() {
 						var heatmap, transformedTestData = { max: 10 , data: [] },
 						data = heatmap_dados,
@@ -220,7 +257,7 @@ i3GEO.pluginI3geo = {
 								{
 									visible: true,
 									radius:10,
-									"gradient": { 0.45: "rgb(0,0,255)", 0.55: "rgb(0,255,255)", 0.65: "rgb(0,255,0)", 0.95: "yellow", 1.0: "rgb(255,0,0)" },
+									"gradient": { "0.45": "rgb(0,0,255)", "0.55": "rgb(0,255,255)", "0.65": "rgb(0,255,0)", "0.95": "yellow", "1.0": "rgb(255,0,0)" },
 									"legend": {
 										"title": camada.tema,
 										"position": "bl",
@@ -241,6 +278,13 @@ i3GEO.pluginI3geo = {
 							this.toggle();
 							this.updateLayer();
 						};
+						heatmap.removeCamada = function(){
+							this.destroy();
+						};
+						heatmap.atualizaCamada = function(){
+							this.updateLayer();
+						};
+
 						i3GEO.pluginI3geo.OBJETOS[camada.name] = heatmap;
 						i3geoOL.addLayer(heatmap);
 						heatmap.setDataSet(transformedTestData);
@@ -264,4 +308,4 @@ i3GEO.pluginI3geo = {
 				}
 			}
 		}
-}
+};

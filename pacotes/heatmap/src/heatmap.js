@@ -32,7 +32,7 @@
         this.set = function(key, value){
             _[key] = value;
         };
-    }
+    };
 
     store.prototype = {
         // function for adding datapoints to the store

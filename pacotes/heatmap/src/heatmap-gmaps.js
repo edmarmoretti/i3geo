@@ -18,7 +18,7 @@ function HeatmapOverlay(map, name, cfg) {
 	me.bounds = null;
 	me.setMap(map);
 	google.maps.event.addListener(map, 'bounds_changed', function() {
-		me.draw()
+		me.draw();
 	});
 }
 
@@ -36,11 +36,11 @@ HeatmapOverlay.prototype.onAdd = function() {
 	panes.overlayLayer.appendChild(el);
 
 	this.heatmap = h337.create(this.conf);
-}
+};
 
 HeatmapOverlay.prototype.onRemove = function() {
 	// Empty for now.
-}
+};
 
 HeatmapOverlay.prototype.draw = function() {
 
@@ -95,7 +95,7 @@ HeatmapOverlay.prototype.draw = function() {
 		}
 		this.heatmap.store.setDataSet(d);
 	}
-}
+};
 
 HeatmapOverlay.prototype.pixelTransform = function(p) {
 	var w = i3GEO.parametros.w, // this.heatmap.get("width"),
@@ -121,7 +121,7 @@ HeatmapOverlay.prototype.pixelTransform = function(p) {
 	p.y = (p.y >> 0);
 
 	return p;
-}
+};
 
 HeatmapOverlay.prototype.setDataSet = function(data) {
 
@@ -156,7 +156,7 @@ HeatmapOverlay.prototype.setDataSet = function(data) {
 		me.heatmap.clear();
 		me.heatmap.store.setDataSet(mapdata);
 	}
-}
+};
 
 HeatmapOverlay.prototype.addDataPoint = function(lat, lng, count) {
 
@@ -169,8 +169,16 @@ HeatmapOverlay.prototype.addDataPoint = function(lat, lng, count) {
 		latlng : latlng,
 		c : count
 	});
-}
-
+};
+HeatmapOverlay.prototype.destroy = function() {
+	var leg = this.heatmap.get("legend").getElement();
+	leg.parentNode.removeChild(leg);
+	this.heatmap.clear();
+	this.heatmap.cleanup();
+};
 HeatmapOverlay.prototype.toggle = function() {
 	this.heatmap.toggleDisplay();
-}
+};
+HeatmapOverlay.prototype.clear = function() {
+	this.heatmap.clear();
+};
