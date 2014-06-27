@@ -36,6 +36,7 @@ if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
 i3GEO.pluginI3geo = {
+		OBJETOS: {},
 		/**
 		 * Inicia a execucao de um plugin
 		 * 
@@ -56,6 +57,16 @@ i3GEO.pluginI3geo = {
 			// para
 			// cada interface
 			i3GEO.pluginI3geo[camada.plugini3geo.plugin][i3GEO.Interface.ATUAL].inicia(camada);
+		},
+		ligaCamada : function(nomecamada) {
+			if(i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].ligaCamada){
+				i3GEO.pluginI3geo.OBJETOS[nomecamada].ligaCamada();
+			}
+		},
+		desLigaCamada : function(nomecamada) {
+			if(i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].desLigaCamada){
+				i3GEO.pluginI3geo.OBJETOS[nomecamada].desLigaCamada();
+			}
 		},
 		/**
 		 * Aplica as propriedades em um objeto do tipo tema
@@ -106,6 +117,19 @@ i3GEO.pluginI3geo = {
 		heatmap : {
 			googlemaps: {
 				aplicaPropriedades: function(camada){
+					camada.sel = "nao";
+					camada.download = "nao";
+					camada.AGUARDALEGENDA = false;
+					camada.temporizador = "";
+					camada.copia = false;
+					camada.procurar = false;
+					camada.toponimia = false;
+					camada.etiquetas = false;
+					camada.tabela = false;
+					camada.grafico = false;
+					camada.destacar = false;
+					camada.wms = false;
+					camada.classe = "NAO";
 					return camada;
 				},
 				inicia: function(camada){
@@ -145,6 +169,11 @@ i3GEO.pluginI3geo = {
 					"i3GEO.pluginI3geo.heatmap_script");
 				}
 			},
+			//
+			//O script que adiciona a camada
+			//define os eventos visibilitychanged, moveend e removed
+			//A camada e adicionada como um objeto layer, permitindo que as funcoes do i3Geo operem normalmente, sem muitas modificacoes
+			//
 			openlayers : {
 				aplicaPropriedades: function(camada){
 					camada.sel = "nao";
@@ -204,6 +233,15 @@ i3GEO.pluginI3geo = {
 									projection: new OpenLayers.Projection("EPSG:4326")
 								}
 						);
+						heatmap.ligaCamada = function(){
+							this.toggle();
+							this.updateLayer();
+						};
+						heatmap.desLigaCamada = function(){
+							this.toggle();
+							this.updateLayer();
+						};
+						i3GEO.pluginI3geo.OBJETOS[camada.name] = heatmap;
 						i3geoOL.addLayer(heatmap);
 						heatmap.setDataSet(transformedTestData);
 						heatmap_dados = null;

@@ -49,7 +49,7 @@ OpenLayers.Layer.Heatmap = OpenLayers.Class(OpenLayers.Layer, {
 		// on zoomend and moveend we have to move the canvas element and redraw the datapoints with new positions
 		//map.events.register("zoomend", this, handler);
 		map.events.register("moveend", this, handler);
-		this.events.register("visibilitychanged", this,handler1);
+		//this.events.register("visibilitychanged", this,handler1);
 		map.events.register(
 				"removed",
 				this,

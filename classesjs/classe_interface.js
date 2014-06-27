@@ -1405,6 +1405,11 @@ i3GEO.Interface = {
 				layers[0].setVisibility(obj.checked);
 				if(obj.checked === true){
 					layers[0].div.style.display = "block";
+					i3GEO.pluginI3geo.ligaCamada(obj.value);
+				}
+				else{
+					layers[0].div.style.display = "none";
+					i3GEO.pluginI3geo.desLigaCamada(obj.value);
 				}
 			}
 			if (obj.checked) {
