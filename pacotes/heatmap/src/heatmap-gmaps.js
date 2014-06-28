@@ -17,7 +17,7 @@ function HeatmapOverlay(map, name, cfg) {
 	me.latlngs = [];
 	me.bounds = null;
 	me.setMap(map);
-	google.maps.event.addListener(map, 'bounds_changed', function() {
+	me.eventoDraw = google.maps.event.addListener(map, 'bounds_changed', function() {
 		me.draw();
 	});
 }
@@ -46,7 +46,10 @@ HeatmapOverlay.prototype.draw = function() {
 
 	var me = this, overlayProjection = i3GeoMapOverlay.getProjection(), // me.getProjection(),
 	currentBounds = me.map.getBounds();
-
+	var leg = this.heatmap.get("legend").getElement();
+	if(leg && leg.style && leg.style.display && leg.style.display === "none"){
+		return;
+	}
 	if (currentBounds.equals(me.bounds)) {
 		return;
 	}
@@ -159,7 +162,6 @@ HeatmapOverlay.prototype.setDataSet = function(data) {
 };
 
 HeatmapOverlay.prototype.addDataPoint = function(lat, lng, count) {
-
 	var projection = i3GeoMapOverlay.getProjection(), // this.getProjection(),
 	latlng = new google.maps.LatLng(lat, lng), point = this
 			.pixelTransform(projection.fromLatLngToDivPixel(latlng));
@@ -171,14 +173,35 @@ HeatmapOverlay.prototype.addDataPoint = function(lat, lng, count) {
 	});
 };
 HeatmapOverlay.prototype.destroy = function() {
-	var leg = this.heatmap.get("legend").getElement();
-	leg.parentNode.removeChild(leg);
 	this.heatmap.clear();
 	this.heatmap.cleanup();
+	var e = this.heatmap.get("element");
+	if(e){
+		e.parentNode.removeChild(e);
+	}
+	google.maps.event.removeListener(this.eventoDraw);
+	this.delete();
+	
 };
 HeatmapOverlay.prototype.toggle = function() {
+	var leg = this.heatmap.get("legend").getElement();
+	if(leg && leg.style && leg.style.display){
+		leg.style.display === "block";
+	}
 	this.heatmap.toggleDisplay();
 };
-HeatmapOverlay.prototype.clear = function() {
-	this.heatmap.clear();
+HeatmapOverlay.prototype.desliga = function() {
+	var leg = this.heatmap.get("legend").getElement();
+	if(leg){
+		leg.style.display = "none";
+	}
+	this.heatmap.toggleDisplay();
+};
+HeatmapOverlay.prototype.liga = function() {
+	this.heatmap.toggleDisplay();
+	var leg = this.heatmap.get("legend").getElement();
+	if(leg){
+		leg.style.display = "block";
+	}
+	this.draw();
 };
