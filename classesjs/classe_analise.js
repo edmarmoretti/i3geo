@@ -37,9 +37,6 @@ if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
 i3GEO.analise = {
-		//armazena os pontos coletados nas funcoes de medicao de area e distancia
-		//@TODO remover apos concluir a refatoracao do codigo
-		pontosdistobj: {},
 		/*
 	Classe: i3GEO.analise.dialogo
 
@@ -52,6 +49,14 @@ i3GEO.analise = {
 	i3GEO.analise.dialogo.buffer()
 		 */
 		dialogo:{
+			/*
+		Function: heatmap
+
+		Abre a janela de dialogo da ferramenta mapa de calor
+			 */
+			heatmap: function(){
+				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.heatmap()","heatmap","heatmap");
+			},
 			/*
 		Function: saiku
 
@@ -665,7 +670,7 @@ i3GEO.analise = {
 							x2 = evt.latLng.lng();
 							y2 = evt.latLng.lat();
 							//raio = google.maps.geometry.spherical.computeDistanceBetween(evt.latLng,new google.maps.LatLng(y1,x1))
-							trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);							
+							trecho = i3GEO.calculo.distancia(x1,y1,x2,y2);
 							direcao = i3GEO.calculo.direcao(x1,y1,x2,y2);
 							direcao = i3GEO.calculo.dd2dms(direcao,direcao);
 							direcao = direcao[0];

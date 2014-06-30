@@ -204,7 +204,8 @@ i3GEO.configura = {
 			{ id:"omenudataAnalise16",text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" },
 			{ id:"omenudataAnalise17",text: $trad("t37b"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo1()" },
 			{ id:"omenudataAnalise18",text: $trad("d30"), url: "javascript:i3GEO.analise.dialogo.linhaDoTempo()" },
-			{ id:"omenudataAnalise20",text: "SAIKU - OLAP", url: "javascript:i3GEO.analise.dialogo.saiku()" }
+			{ id:"omenudataAnalise20",text: "SAIKU - OLAP", url: "javascript:i3GEO.analise.dialogo.saiku()" },
+			{ id:"omenudataAnalise21",text: $trad("x102"), url: "javascript:i3GEO.analise.dialogo.heatmap()" }
 			],
 			"janelas": [
 			{ id:"omenudataJanelas1",text: $trad("u15"), url: "javascript:i3GEO.barraDeBotoes.reativa(0);i3GEO.barraDeBotoes.reativa(1)" },

@@ -536,7 +536,7 @@ en:"drag to change the order",
 es:"Arrastre para cambiar el orden",
 it:""
 }],
- 
+
 "t9":[
 {
 pt:"A escala do tema &eacute; compat&iacute;vel com a escala do mapa",
@@ -2249,6 +2249,12 @@ pt:"C&oacute;pia",
 en:"",
 es:"",
 it:""
+}],
+"x102": [
+{
+pt: "Mapa de calor",
+en:"Heatmap",
+es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

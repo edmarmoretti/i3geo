@@ -8,12 +8,13 @@ MAP
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "CLASSE"	"SIM"
       "TEMA"	"Localidades (usar com mapa de calor)"
-      "PLUGINI3GEO" '{"plugin":"heatmap","parametros":{"coluna":""}}' #se coluna for vazio, assume valor 1
+      "PLUGINI3GEO" '{"plugin":"heatmap","parametros":{"coluna":"","radius":15,"max":10}}' #se coluna for vazio, assume valor 1
     END # METADATA
     NAME "_lmapadecalor"
     STATUS OFF
     TEMPLATE "none.htm"
     TILEITEM "location"
+    OPACITY 100
     TYPE POINT
     UNITS METERS
     CLASS
