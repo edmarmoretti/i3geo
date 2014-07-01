@@ -22,7 +22,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -254,7 +254,7 @@ function nomeRandomico($n=10)
 /*
 Function: listaEpsg
 
-L&ecirc; o arquivo com os códigos de proje&ccedil;&atilde;o epsg e retorna um array com os dados.
+L&ecirc; o arquivo com os cï¿½digos de proje&ccedil;&atilde;o epsg e retorna um array com os dados.
 
 O arquivo lido &eacute; "../ferramentas/epsg.txt"
 
@@ -300,7 +300,7 @@ function listaEpsg()
 /*
 Function: copiaSeguranca
 
-Cria cópia de seguran&ccedil;a do map_file.
+Cria cï¿½pia de seguran&ccedil;a do map_file.
 
 Salva o mapfile atual incluindo no nome, a string "seguranca".
 
@@ -342,7 +342,7 @@ function copiaSeguranca($map_file)
 /*
 Function: listaDiretorios
 
-Retorna lista de diretórios.
+Retorna lista de diretï¿½rios.
 
 parameters:
 
@@ -471,7 +471,7 @@ Function: listaTrueType
 
 Lista as fontes true type.
 
-L&ecirc; o arquivo fontes.txt existente no diretório symbols da instala&ccedil;&atilde;o do I3Geo.
+L&ecirc; o arquivo fontes.txt existente no diretï¿½rio symbols da instala&ccedil;&atilde;o do I3Geo.
 O resultado &eacute; gravado em um arquivo tempor&aacute;rio para include, o que torna mais r&aacute;pida a carga futura.
 O arquivo para include armazena a vari&aacute;vel res que cont&eacute;m a lista de fontes separadas por v&iacute;rgula.
 
@@ -481,9 +481,9 @@ $cp {CAPAINT} - Objeto CPAINT.
 
 $locaplic {string} - Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o no servidor.
 
-$imgdir {string} - Diretório das imagens.
+$imgdir {string} - Diretï¿½rio das imagens.
 
-$dir_tmp {string} - Diretório tempor&aacute;rio.
+$dir_tmp {string} - Diretï¿½rio tempor&aacute;rio.
 
 Retorno:
 
@@ -788,7 +788,7 @@ Function: testaMapa
 
 Testa se um mapa est&aacute; &iacute;ntegro.
 
-Se o mapfile apresentar problemas, a cópia de seguran&ccedil;a &eacute; restaurada.
+Se o mapfile apresentar problemas, a copia de seguran&ccedil;a &eacute; restaurada.
 
 Parametro:
 
@@ -1252,7 +1252,7 @@ $servico - Endere&ccedil;o do RSS.
 
 $map_file - Nome do arquivo map file. Inclua o caminho completo no servidor.
 
-$dir_tmp - Diretório onde o arquivo ser&aacute; criado.
+$dir_tmp - Diretï¿½rio onde o arquivo ser&aacute; criado.
 
 $locaplic - Localiza&ccedil;&atilde;o do I3geo
 */
@@ -1280,7 +1280,7 @@ Parametros:
 
 $layer {objeto} - Objeto layer
 
-$enc {string} - Código de p&aacute;gina para convers&atilde;o de caracteres
+$enc {string} - Cï¿½digo de p&aacute;gina para convers&atilde;o de caracteres
 
 Retorno:
 
@@ -1385,9 +1385,9 @@ $tema {string} - Tema que ser&aacute; processado.
 
 $map_file {string} - Nome do arquivo map file. Inclua o caminho completo no servidor.
 
-$locaplic {string} - Diretório onde est&aacute; a aplica&ccedil;&atilde;o no servidor.
+$locaplic {string} - Diretï¿½rio onde est&aacute; a aplica&ccedil;&atilde;o no servidor.
 
-$dir_tmp {string} - Diretório tempor&aacute;rio
+$dir_tmp {string} - Diretï¿½rio tempor&aacute;rio
 
 $nomeRand {boleano} - Gera um nome randomico para o shapefile (TRUE) ou utiliza o nome do tema (FALSE)
 
@@ -1560,15 +1560,15 @@ $map_file {string} - Nome do arquivo map file. Inclua o caminho completo no serv
 
 $tema {string} - Tema que ser&aacute; processado.
 
-$locaplic {string} - Diretório da aplica&ccedil;&atilde;o.
+$locaplic {string} - Diretï¿½rio da aplica&ccedil;&atilde;o.
 
-$dir_tmp {string} - Diretório tempor&aacute;rio
+$dir_tmp {string} - Diretï¿½rio tempor&aacute;rio
 
 $postgis_mapa - variavel definida em ms_configura.php
 
 Retorno:
 
-{array} com o nome do diretório e nome do arquivo
+{array} com o nome do diretï¿½rio e nome do arquivo
 
 Include:
 <ms_configura.php>
@@ -1624,7 +1624,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	}
 	//
 	//verifica se o tema existe no mapfile
-	//se n&atilde;o existir, tenta inserir com base no mapfile existente no diretório temas
+	//se n&atilde;o existir, tenta inserir com base no mapfile existente no diretï¿½rio temas
 	//o tema pode existir se a fun&ccedil;&atilde;o estiver sendo chamada da &aacute;rvore de temas de um mapa j&aacute; aberto
 	//
 	$temasdir = $locaplic."/temas";
@@ -2211,7 +2211,7 @@ Retorno:
 */
 function removeAcentos($var)
 {
-	$a = array('À', '&Aacute;', '&Acirc;', '&Atilde;', 'Ä', 'Å', 'Æ',  '&Ccedil;', 'È', '&Eacute;', '&Ecirc;', 'Ë', 'Ì', '&Iacute;', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', '&Ocirc;', '&Otilde;', 'Ö', 'Ø', 'Ù', '&Uacute;', 'Û', 'Ü', 'Ý', 'ß', 'à', '&aacute;', '&acirc;', '&atilde;', 'ä', 'å', 'æ',  '&ccedil;', 'è', '&eacute;', '&ecirc;', 'ë', 'ì', '&iacute;', 'î', 'ï', 'ñ', 'ò', 'ó', '&ocirc;', '&otilde;', 'ö', 'ø', 'ù', '&uacute;', 'û', 'ü', 'ý', 'ÿ', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'Ð', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', '?', '?',   'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', '?', '?', 'L', 'l', 'N', 'n', 'N', 'n', 'N', 'n', '?', 'O', 'o', 'O', 'o', 'O', 'o', 'Œ', 'œ',   'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'Š', 'š', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Ÿ', 'Z', 'z', 'Z', 'z', 'Ž', 'ž', '?', 'ƒ', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', '?', '?', '?', '?', '?', '?');
+	$a = array('ï¿½', '&Aacute;', '&Acirc;', '&Atilde;', 'ï¿½', 'ï¿½', 'ï¿½',  '&Ccedil;', 'ï¿½', '&Eacute;', '&Ecirc;', 'ï¿½', 'ï¿½', '&Iacute;', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', '&Ocirc;', '&Otilde;', 'ï¿½', 'ï¿½', 'ï¿½', '&Uacute;', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', '&aacute;', '&acirc;', '&atilde;', 'ï¿½', 'ï¿½', 'ï¿½',  '&ccedil;', 'ï¿½', '&eacute;', '&ecirc;', 'ï¿½', 'ï¿½', '&iacute;', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', '&ocirc;', '&otilde;', 'ï¿½', 'ï¿½', 'ï¿½', '&uacute;', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'ï¿½', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', '?', '?',   'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', '?', '?', 'L', 'l', 'N', 'n', 'N', 'n', 'N', 'n', '?', 'O', 'o', 'O', 'o', 'O', 'o', 'ï¿½', 'ï¿½',   'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'ï¿½', 'ï¿½', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'ï¿½', 'Z', 'z', 'Z', 'z', 'ï¿½', 'ï¿½', '?', 'ï¿½', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', '?', '?', '?', '?', '?', '?');
 	$b = array('A', 'A', 'A', 'A', 'A', 'A', 'AE', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'D', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 's', 'a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'D', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'IJ', 'ij', 'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'N', 'n', 'N', 'n', 'N', 'n', 'n', 'O', 'o', 'O', 'o', 'O', 'o', 'OE', 'oe', 'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'S', 's', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Y', 'Z', 'z', 'Z', 'z', 'Z', 'z', 's', 'f', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'A', 'a', 'AE', 'ae', 'O', 'o');
 	return str_replace($a, $b, $var);
 }
@@ -2530,7 +2530,7 @@ Function: validaAcessoTemas
 
 Remocao dos layers com restricoes de acesso registradas no sistema de controle de usuarios
 
-Remove os layers indevidos (considerando o usuario logado) de um mapfile com opção de salvar ou nao o arquivo apos a remocao
+Remove os layers indevidos (considerando o usuario logado) de um mapfile com opï¿½ï¿½o de salvar ou nao o arquivo apos a remocao
 
 Parametros:
 

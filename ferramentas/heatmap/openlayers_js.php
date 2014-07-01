@@ -24,11 +24,9 @@ include_once($dir."/../inicia.php");
 //os dados sao devolvidos como uma variavel javascript
 //obtem os registros
 include_once($dir."/../../classesphp/classe_atributos.php");
-
 $m = new Atributos($map_file,$layer);
 $registros = $m->listaRegistrosXY($coluna, "brasil", "tudo");
-//TODO
-$n = 100;//count($registros);
+$n = count($registros);
 $resultado = array();
 if(empty($coluna)){
 	foreach($registros as $r){

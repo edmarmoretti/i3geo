@@ -1561,31 +1561,37 @@ i3GEO.util = {
 		return "#" + hex(rgb[0]) + hex(rgb[1]) + hex(rgb[2]);
 			 */
 		},
-		/*
-	Function: comboTemas
-
-	Cria um combo (caixa de selesao) com a lista de temas existentes no mapa e de determinado tipo
-
-	Parametros:
-
-	id {String} - id do elemento select que sera criado
-
-	funcao {Function} - funcao que sera executada ao terminar a montagem do combo. Essa funcao recebera
-		como parametros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
-		{dados:comboTemas,tipo:"dados"}
-		tipo sera uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
-
-	onde {String} - id do elemento HTML que recebera o combo. e utilizado apenas para inserir uma mensagem de aguarde.
-
-	nome {String} - valor que sera incluido no parametro "name" do elemento "select".
-
-	multiplo {Booleano} - indica se o combo permite selecoes multiplas
-
-	tipoCombo {String} - Tipo de temas que serao incluidos no combo ligados|selecionados|raster|pontosSelecionados|pontos|linhaDoTempo
-
-	estilo {string} - estilo (css) que sera aplicado ao combo
-
-	yui {boolean} - (opcional) indica se o combo sera montado com o estilo YUI (menu)
+		/**
+		 * Function: comboTemas
+		 * 
+		 * Cria um combo (caixa de selesao) com a lista de temas existentes no
+		 * mapa e de determinado tipo
+		 * 
+		 * Parametros:
+		 * 
+		 * id {String} - id do elemento select que sera criado
+		 * 
+		 * funcao {Function} - funcao que sera executada ao terminar a montagem
+		 * do combo. Essa funcao recebera como parametros um Array associativo
+		 * contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+		 * {dados:comboTemas,tipo:"dados"} tipo sera uma string que pode ser
+		 * "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		 * 
+		 * onde {String} - id do elemento HTML que recebera o combo. e utilizado
+		 * apenas para inserir uma mensagem de aguarde.
+		 * 
+		 * nome {String} - valor que sera incluido no parametro "name" do
+		 * elemento "select".
+		 * 
+		 * multiplo {Booleano} - indica se o combo permite selecoes multiplas
+		 * 
+		 * tipoCombo {String} - Tipo de temas que serao incluidos no combo
+		 * ligados|selecionados|raster|pontosSelecionados|pontos|linhaDoTempo
+		 * 
+		 * estilo {string} - estilo (css) que sera aplicado ao combo
+		 * 
+		 * yui {boolean} - (opcional) indica se o combo sera montado com o
+		 * estilo YUI (menu)
 		 */
 		comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo,estilo,yui){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboTemas()");}

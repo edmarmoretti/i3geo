@@ -587,8 +587,9 @@ i3GEO.janela = {
 			else
 			{janela.moveTo(pos[0],pos[1]);}
 			janela.show();
-			try{janela.header.style.height="20px";}
-			catch(e){}
+			if(janela.header){
+				janela.header.style.height = "20px";
+			}
 			temp = $i(id+"_c");
 			if(temp){
 				temp.style.backgroundColor = "";

@@ -7,32 +7,30 @@ $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
 /*
-Valor: CRIABUFFER
+Valor: CRIAHEATMAP
 
-Gera entorno (buffer) nos elementos selecionados de um tema.
-
-Salva o mapa acrescentando um novo layer com o buffer.
-
-<Analise->criaBuffer>
+Adiciona ao mapa uma nova camada para calculo do mapa de calor
 */
-	case "CRIABUFFER":
-		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->criaBuffer($distancia,$locaplic,$unir,$wkt,$multiplicar,$itemdistancia);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-		//limpa selecao
-		$qyfile = str_replace(".map",".qy",$map_file);
-		if (file_exists($qyfile))
-		{unlink ($qyfile);}
+	case "CRIAHEATMAP":
+		$nameLayer = "heatmap".nomeRandomico();
+		$map = ms_newMapObj($map_file);
+		$layer = $map->getlayerbyname($tema);
+		$novolayer = ms_newLayerObj($map, $layer);
+		$novolayer->setmetadata("tema",$titulo);
+		if($coluna == ""){
+			$coluna = $valorPonto;
+		}
+		$parametros = '{"plugin":"heatmap","parametros":{"opacity":"'.$opacidade.'","coluna":"'.$coluna.'","radius":"'.$raio.'","max":"'.$max.'"}}';
+		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
+		$novolayer->set("name",$nameLayer);
+		$map->save($map_file);
+		$retorno = $nameLayer;
 	break;
 }
 if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
-	restauraCon($map_file,$postgis_mapa);
 	cpjson($retorno);
 }
-else
-{exit();}
+else{
+	exit();
+}
 ?>

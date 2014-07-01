@@ -1148,7 +1148,7 @@ i3GEO.Interface = {
 						&& camada.name.toLowerCase() != "copyright") {
 					// verifica se a camada contem um plugin do i3geo
 					// caso tenha, direciona para a classe_i3geoplugin
-					if (camada.plugini3geo != "") {
+					if (camada.plugini3geo && camada.plugini3geo != "") {
 						i3GEO.pluginI3geo.inicia(camada);
 						continue;
 					} else {
@@ -2069,7 +2069,7 @@ i3GEO.Interface = {
 					if (camada.status != 0) {
 						// verifica se a camada contem um plugin do i3geo
 						// caso tenha, direciona para a classe_i3geoplugin
-						if (camada.plugini3geo != "") {
+						if (camada.plugini3geo && camada.plugini3geo != "") {
 							i3GEO.pluginI3geo.inicia(camada);
 							continue;
 						} else {

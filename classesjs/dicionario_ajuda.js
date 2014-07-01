@@ -1011,6 +1011,14 @@ g_traducao_ajuda = {
 			pt:"Op&ccedil;&atilde;o utilizada na ferramenta tabela que pemrite vincular a listagem de registros entre tabelas que estejam em diferentes janelas flutuantes. Ao abrir duas tabelas de atributos, a janela de v&iacute;nculos permite definir quais as tabelas ser&atilde;o vinculadas e quais as colunas de liga&ccedil;&atilde;o. Ao marcar um registro em uma tabela, os registros semelhantes s&atilde;o marcados nas tabelas vinculadas.",
 			complemento:"",
 			apijs:""
+		},
+		"121": {
+			titulo: "Mapa de calor",
+			diretorio:"i3geo/ferramentas/heatmap/index.js",
+			categoria:"3",
+			pt:"Obt&eacute;m os dados de um tema pontual, linear ou poligonal e calcula para toda a &aacute;rea vis&iacute;ve os prov&aacute;veis valores, o resultado &eacute; uma representa&ccedil;&atilde;o cont&iacute;nua dos valores em classes de cores. O c&aacute;lculo da camada &eacute; feita diretamente no navegador utilizando-se um programa em javascript.",
+			complemento:"",
+			apijs:"i3GEO.mapa.dialogo.heatmap()"
 		}
 	}
 };

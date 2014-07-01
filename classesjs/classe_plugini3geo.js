@@ -116,7 +116,7 @@ i3GEO.pluginI3geo = {
 	 * de camadas
 	 */
 	aplicaPropriedades : function(camada) {
-		if (camada.plugini3geo != "") {
+		if (camada.plugini3geo && camada.plugini3geo != "") {
 			camada = i3GEO.pluginI3geo[camada.plugini3geo.plugin][i3GEO.Interface.ATUAL].aplicaPropriedades(camada);
 		}
 		return camada;
