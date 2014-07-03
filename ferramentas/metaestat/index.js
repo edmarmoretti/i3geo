@@ -86,7 +86,7 @@ i3GEOF.metaestat = {
 	/**
 	 * ativa o modo de selecao de multiplos valores nos combos de parametros
 	 */
-	MULTIPARAMETROS: false,
+	MULTIPARAMETROS: true,
 	//para efeitos de compatibilidade com i3GEO.mapa.dialogo
 	criaJanelaFlutuante: function(){
 		i3GEOF.metaestat.inicia();

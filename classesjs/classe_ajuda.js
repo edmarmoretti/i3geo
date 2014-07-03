@@ -1,46 +1,46 @@
 /**
  * Title: Ajuda
- * 
+ *
  * i3GEO.ajuda
- * 
+ *
  * Manipula&ccedil;&atilde;o das mensagens de ajuda.
- * 
+ *
  * Permite definir a mensagem padr&atilde;o da janela de mensagens. Abrir a
  * janela e definir seu conte&uacute;do. Controla tamb&eacute;m o letreiro
  * m&oacute;vel que mostra mensagens especiais definidas em cada layer
  * adicionado ao mapa.
- * 
+ *
  * Exemplos:
- * 
+ *
  * Se vc n&atilde;o quiser que a janela de ajuda seja aberta, inclua em seu HTML
  * ou javascript
- * 
+ *
  * i3GEO.ajuda.ATIVAJANELA = false;
- * 
+ *
  * Para enviar uma mensagem para a janela (quando estiver aberta), utilize
- * 
+ *
  * i3GEO.ajuda.mostraJanela("texto");
- * 
+ *
  * Para enviar uma mensagem tempor&aacute;ria utilize:
- * 
- * 
+ *
+ *
  * Arquivo:
- * 
+ *
  * i3geo/classesjs/classe_ajuda.js
- * 
+ *
  * Licen&ccedil;a:
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente
  * Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
  * e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
  * GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja
  * &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia
  * impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE
@@ -56,73 +56,73 @@ if (typeof (i3GEO) === 'undefined') {
 i3GEO.ajuda = {
 	/**
 	 * Propriedade: ATIVAJANELA
-	 * 
+	 *
 	 * Define se a janela de mensagens pode ou n&atilde;o ser aberta.
-	 * 
+	 *
 	 * Tipo {Boolean} - true
 	 */
 	ATIVAJANELA : true,
 	/**
 	 * Propriedade: DIVAJUDA
-	 * 
+	 *
 	 * Nome do elemento HTML, do tipo DIV, que ir&aacute; conter os textos de
 	 * ajuda.
-	 * 
+	 *
 	 * Se esse DIV for encontrado no mapa, os textos ser&atilde;o mostrados em
 	 * seu interior.
-	 * 
+	 *
 	 * Tipo {String} - i3geo_ajuda
 	 */
 	DIVAJUDA : "i3geo_ajuda",
 	/**
 	 * Propriedade: DIVLETREIRO
-	 * 
+	 *
 	 * Id do elemento HTML onde ser&aacute; inclu&iacute;do o banner (letreiro)
 	 * de mensagens.
-	 * 
+	 *
 	 * Esse tipo de mensagem &eacute; obtida do METADATA "MENSAGEM" que pode ser
 	 * inclu&iacute;do em um layer.
-	 * 
+	 *
 	 * Tipo {String} - i3geo_letreir
 	 */
 	DIVLETREIRO : "i3geo_letreiro",
 	/**
 	 * Propriedade: MENSAGEMPADRAO
-	 * 
+	 *
 	 * Mensagem que ser&aacute; inclu&iacute;da ao iniciar a janela de mensagens
 	 * ou quando n&atilde;o houver mensagem definida para o elemento sobre o
 	 * qual o mouse estaciona.
-	 * 
+	 *
 	 * Tipo {String} - $trad("p1")
 	 */
 	MENSAGEMPADRAO : $trad("p1"),
 	/**
 	 * Propriedade: TRANSICAOSUAVE
-	 * 
+	 *
 	 * Altera a transpar&ecirc;ncia quando o mouse sobrep&otilde;e a janela e
 	 * quando sai
-	 * 
+	 *
 	 * Tipo {boolean} - true
 	 */
 	TRANSICAOSUAVE : true,
 	/**
 	 * Propriedade: OPACIDADE
-	 * 
+	 *
 	 * Valor da opacidade m&iacute;nima utilizada quando TRANSICAOSUAVE for
 	 * igual a true.
-	 * 
+	 *
 	 * Varia de 0 a 100
-	 * 
+	 *
 	 * Tipo {numeric} - 20
 	 */
 	OPACIDADE : 20,
 	/**
 	 * Function: abreDoc
-	 * 
+	 *
 	 * Abre a documentacao do i3geo em uma nova janela do navegador
-	 * 
+	 *
 	 * Parametro:
-	 * 
+	 *
 	 * url {string} - url que ser&aacute; adicionada a i3GEO.configura.locaplic
 	 */
 	abreDoc : function(url) {
@@ -134,9 +134,9 @@ i3GEO.ajuda = {
 	},
 	/**
 	 * Function: abreJanela
-	 * 
+	 *
 	 * Abre a janela flutuante para mostrar as mensagens de ajuda.
-	 * 
+	 *
 	 * Essa fun&ccedil;&atilde;o &eacute; executada na
 	 * inicializa&ccedil;&atilde;o do i3GEO
 	 */
@@ -196,18 +196,13 @@ i3GEO.ajuda = {
 				this.ativaCookie();
 
 			}
-		} catch (e) {
-			if (typeof (console) !== 'undefined') {
-				console.error("i3GEO.ajuda.abreJanela "
-						+ e);
-			}
-		}
+		} catch (e) {}
 	},
 	/**
 	 * Ativa o cookie g_janelaMen e inclui o valor "sim".
-	 * 
+	 *
 	 * Toda a vez que a janela &eacute; aberta, o cookie &eacute; ativado.
-	 * 
+	 *
 	 * Ativando-se o cookie, a janela de mensagens ser&aacute; aberta
 	 * automaticamente a pr&oacute;xima vez que o i3geo for iniciado
 	 */
@@ -222,14 +217,14 @@ i3GEO.ajuda = {
 	},
 	/**
 	 * Busca mensagens no metadata "MENSAGEM" existentes nos layers do mapa.
-	 * 
+	 *
 	 * Se existirem mensagens, as mesmas s&atilde;o inclu&iacute;das no
 	 * letreiro.
-	 * 
+	 *
 	 * O letreiro deve ser um elemento do tipo INPUT (text).
-	 * 
+	 *
 	 * Parametro:
-	 * 
+	 *
 	 * mensagem {String} - (opcional) texto que ser&aacute; mostrado no
 	 * letreiro. Se n&atilde;o for informado ser&aacute; utilizado a
 	 * vari&aacute;vel i3GEO.parametros.mensagens
@@ -279,9 +274,9 @@ i3GEO.ajuda = {
 	},
 	/**
 	 * Desativa o cookie g_janelaMen.
-	 * 
+	 *
 	 * Toda a vez que a janela &eacute; fechada, o cookie &eacute; desativado.
-	 * 
+	 *
 	 * Desativando-se o cookie, a janela de mensagens n&atilde;o ser&aacute;
 	 * aberta automaticamente a pr&oacute;xima vez que o i3geo for iniciado
 	 */
@@ -292,7 +287,7 @@ i3GEO.ajuda = {
 	},
 	/**
 	 * Function: fechaJanela.
-	 * 
+	 *
 	 * Fecha a janela de ajuda.
 	 */
 	fechaJanela : function() {
@@ -303,11 +298,11 @@ i3GEO.ajuda = {
 	},
 	/**
 	 * Function: mostraJanela
-	 * 
+	 *
 	 * Mostra um texto dentro da janela de mensagens padr&atilde;o.
-	 * 
+	 *
 	 * Parametro:
-	 * 
+	 *
 	 * texto {String} - texto a ser mostrado
 	 */
 	mostraJanela : function(texto) {
@@ -352,10 +347,10 @@ i3GEO.ajuda = {
 	},
 	/**
 	 * Function: mostraLetreiro
-	 * 
+	 *
 	 * Preenche o elemento INPUT com a mensagem de texto e faz a
 	 * movimenta&ccedil;&atilde;o das letras.
-	 * 
+	 *
 	 * O aparecimento das letras &eacute; controlado por um temporizador e as
 	 * mensagens s&atilde;o mostradas apenas duas vezes, desde o in&iacute;cio
 	 * do redesenho do mapa.
@@ -388,7 +383,7 @@ i3GEO.ajuda = {
 	},
 	/**
 	 * Function: redesSociais
-	 * 
+	 *
 	 * Abre uma janela com informa&ccedil;&otilde;es sobre a presen&ccedil;a do
 	 * i3Geo em redes sociais
 	 */

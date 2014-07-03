@@ -1,35 +1,35 @@
 /**
  * Title: heatmap
- * 
+ *
  * Gera um mapa de calor baseado em uma camada existente no mapa.
- * 
+ *
  * Mapas de calor s&atilde;o camadas que utilizam o plugin de camadas heatmap.
  * Veja em classesjs/classe_plugini3geo.js
- * 
+ *
  * A ferramenta altera o mapfile em uso clonando o mapfile escolhido e
  * adicionando os metadados necess&aacute;rios ao uso do heatmap
- * 
+ *
  * Veja:
- * 
+ *
  * <i3GEO.analise.dialogo.heatmap>
- * 
+ *
  * Arquivo:
- * 
+ *
  * i3geo/ferramentas/heatmap/index.js.php
- * 
+ *
  * Licenca:
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente
  * Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
  * e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
  * GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja
  * &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia
  * impl&iacute;cita de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA
@@ -45,7 +45,7 @@ if (typeof (i3GEOF) === 'undefined') {
 i3GEOF.heatmap = {
 	/**
 	 * Variavel: aguarde
-	 * 
+	 *
 	 * Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da
 	 * janela.
 	 */
@@ -59,10 +59,10 @@ i3GEOF.heatmap = {
 	},
 	/**
 	 * Function: iniciaDicionario
-	 * 
+	 *
 	 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a
 	 * ferramenta
-	 * 
+	 *
 	 * O Javascript &eacute; carregado com o id
 	 * i3GEOF.nomedaferramenta.dicionario_script
 	 */
@@ -79,11 +79,11 @@ i3GEOF.heatmap = {
 	},
 	/**
 	 * Function: inicia
-	 * 
+	 *
 	 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	 * 
+	 *
 	 * Parametro:
-	 * 
+	 *
 	 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da
 	 * ferramenta
 	 */
@@ -97,12 +97,12 @@ i3GEOF.heatmap = {
 	},
 	/**
 	 * Function: html
-	 * 
+	 *
 	 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das
 	 * op&ccedil;&otilde;es da ferramenta
-	 * 
+	 *
 	 * Retorno:
-	 * 
+	 *
 	 * String com o c&oacute;digo html
 	 */
 	html : function() {
@@ -115,7 +115,7 @@ i3GEOF.heatmap = {
 	},
 	/**
 	 * Function: iniciaJanelaFlutuante
-	 * 
+	 *
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante : function() {
@@ -124,7 +124,7 @@ i3GEOF.heatmap = {
 		titulo = $trad("x102")
 				+ " <a class=ajuda_usuario target=_blank href='"
 				+ i3GEO.configura.locaplic
-				+ "/ajuda_usuario.php?idcategoria=3&idajuda=24' >&nbsp;&nbsp;&nbsp;</a>";
+				+ "/ajuda_usuario.php?idcategoria=3&idajuda=121' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function() {
 		};
 		janela = i3GEO.janela.cria(
@@ -288,9 +288,9 @@ i3GEOF.heatmap = {
 	},
 	/**
 	 * Function: criaheatmap
-	 * 
+	 *
 	 * Executa a opera&ccedil;&atilde;o de gera&ccedil;&atilde;o do heatmap
-	 * 
+	 *
 	 */
 	criaheatmap : function() {
 		try {
@@ -345,11 +345,11 @@ i3GEOF.heatmap = {
 	},
 	/**
 	 * Function: comboTemasSel
-	 * 
+	 *
 	 * Cria um combo com a lista de temas
-	 * 
+	 *
 	 * Veja:
-	 * 
+	 *
 	 * <i3GEO.util.comboTemas>
 	 */
 	comboTemasSel : function() {
@@ -375,13 +375,13 @@ i3GEOF.heatmap = {
 	},
 	/**
 	 * Function: comboItens
-	 * 
+	 *
 	 * Cria um combo para escolha de um item do tema
-	 * 
+	 *
 	 * Veja:
-	 * 
+	 *
 	 * <i3GEO.util.comboItens>
-	 * 
+	 *
 	 */
 	comboItens : function() {
 		i3GEO.util.comboItens(

@@ -122,7 +122,7 @@ RSS
 function geraRSScomentariosTemas($locaplic,$id_tema="")
 {
 	global $esquemaadmin;
-	$sql = "select '' as tipo_ws, b.nome_tema||' '||a.data as nome_ws,a.openidnome||' '||a.openidurl||' &amp;lt;br&amp;gt;'||a.comentario as desc_ws, a.openidnome as autor_ws, b.link_tema as link_ws from ".$esquemaadmin."i3geoadmin_comentarios as a,".$esquemaadmin."i3geoadmin_temas as b where a.id_tema = b.id_tema ";
+	$sql = "select '' as tipo_ws, b.nome_tema||' '||a.data as nome_ws,a.openidnome||' '||a.openidurl||' &lt;br&gt;'||a.comentario as desc_ws, a.openidnome as autor_ws, b.link_tema as link_ws from ".$esquemaadmin."i3geoadmin_comentarios as a,".$esquemaadmin."i3geoadmin_temas as b where a.id_tema = b.id_tema ";
 	if($id_tema != "")
 	{$sql .= " and a.id_tema = $id_tema ";}
 	return geraXmlRSS($locaplic,$sql,"Lista de comentarios");
@@ -902,7 +902,7 @@ function array_in_array($needle, $haystack)
 }
 function xmlTexto_prepara($texto)
 {
-	return str_replace("&","&amp;",$texto);
+	return str_replace("&","&",$texto);
 }
 function entity_decode($texto)
 {

@@ -157,7 +157,7 @@ botoesIni.push({
 	"titulo":$trad(7,g_traducao_init)
 	},{
 	"img":"cartogramas.png",
-	"href":"../interface/carto_ol.htm",
+	"href":"../interface/black_carto_ol.htm",
 	"titulo":$trad(8,g_traducao_init)
 	},{
 	"img":"editor.png",

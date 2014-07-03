@@ -1275,8 +1275,14 @@ function core_pegaDados(mensagem,sUrl,funcaoRetorno)
 			{
 				try
 				{
-					if(funcaoRetorno != "")
-					{eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");}
+					if(funcaoRetorno != ""){
+						if(YAHOO.lang.isFunction(funcaoRetorno)){
+							funcaoRetorno.call("",YAHOO.lang.JSON.parse(o.responseText));
+						}
+						else{
+							eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");
+						}
+					}
 					core_carregando("desativa");
 				}
 				catch(e)

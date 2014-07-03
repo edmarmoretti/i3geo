@@ -152,8 +152,11 @@ $xml .= "
 //uma delas contem o geocodigo que permite a geracao do mapa
 $xml1 = "";
 $xml2 = "";
+$nomesDimensoesOnde = array();
 foreach($regioes as $regiao){
 	$caminho = $m->hierarquiaPath($regiao["codigo_tipo_regiao"]);
+	$nomesDimensoesOnde[] = "codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"];
+	$nomesDimensoesOnde[] = "codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_geocod";
 	$xml1 .= "
 		<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='Onde:".converte($regiao["nome_tipo_regiao"])."'>
 			<Hierarchy hasAll='true'  primaryKey='codigo'>
@@ -263,11 +266,13 @@ foreach($regioes as $regiao){
 $xml .= $xml1.$xml2;
 //junta as medidas conforme o nome da tabela utilizada
 $medidas = $m->listaMedidaVariavel();
+//var_dump($medidas);exit;
 $tbs = array();
-
+//echo $codigo_tipo_regiao;exit;
 foreach($medidas as $medida){
 	if($codigo_tipo_regiao == "" || $medida["codigo_tipo_regiao"] == $codigo_tipo_regiao){
 		$k = $medida["esquemadb"].$medida["tabela"];
+		//echo "<pre>".$k;
 		if(empty($tbs[$k])){
 			$tbs[$k] = array($medida);
 		}
@@ -279,7 +284,7 @@ foreach($medidas as $medida){
 //monta os cubos para cada esquema.tabela diferente
 $VirtualCubeDimension = array();
 $VirtualCubeMeasure = array();
-
+//echo "<pre>";var_dump($tbs)."<br>";exit;
 foreach($tbs as $tb){
 	//cabecalho de cada cubo obtido da primeira medida
 	$c = $tb[0];
@@ -290,36 +295,63 @@ foreach($tbs as $tb){
 		<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />
 	";
 	//verifica as dimensoes do tipo tempo
-	$dimTempo = array();
+	$dimEnsoes = array();
+	//echo "<pre>";var_dump($tb)."<br>";
 	foreach($tb as $medida){
-		$parametros = $m->listaParametro($medida["id_medida_variavel"],"","",$apenasTempo=true,$ordenaPeloPai=false);
+		//echo "<pre>";var_dump($medida)."<br>";
+		$parametros = $m->listaParametro($medida["id_medida_variavel"],"","",false,false);
+		
 		$parComposto = array(); //guarda a composicao da chave que liga com a dimensao
 		$colunaAdicionais = array();
+		//parametro do tipo tempo
+		if(count($parametros) > 0){
+			foreach($parametros as $parametro){
+				if($parametro["tipo"] < 5 && $parametro["tipo"] > 0){
+					$parComposto[] = $parametro["coluna"];
+				}
+			}
+			$VirtualCubeDimension[] = "
+							<VirtualCubeDimension name='Tempo' />
+						";
+			$dimEnsoes[] = "
+							<DimensionUsage foreignKey='".implode("_",$parComposto)."_' name='Tempo' source='Tempo'/>
+						";
+		}
+		//outros parametros
+		$outrosParametros = array();
+		//TODO criar as dimensoes aqui
 		foreach($parametros as $parametro){
-			if($parametro["tipo"] < 5){
-				$parComposto[] = $parametro["coluna"];
+			if($parametro["tipo"] > 5 || $parametro["tipo"] == 0){
+				//$outrosParametros[] = $parametro["coluna"];
+				//$VirtualCubeDimension[] = "<VirtualCubeDimension name='{$parametro["coluna"]}' />";
+				//$dimEnsoes[] = "<DimensionUsage foreignKey='{$parametro["coluna"]}_' name='{$parametro["coluna"]}' source='{$parametro["coluna"]}'/>";
 			}
 		}
-		$VirtualCubeDimension[] = "
-						<VirtualCubeDimension name='Tempo' />
-					";
-		$dimTempo[] = "
-						<DimensionUsage foreignKey='".implode("_",$parComposto)."_' name='Tempo' source='Tempo'/>
-					";
 	}
+	//exit;
 	$xml .= "
 	<Cube cache='false' name='{$c["esquemadb"]}{$c["tabela"]}'>";
-	$sql = "select * from {$c["esquemadb"]}.{$c["tabela"]}";
+	$incluirChaves = array("*");
+	
 	if(count($parComposto) > 0){
-		$sql = "select *,".implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_ from {$c["esquemadb"]}.{$c["tabela"]}";
+		//$sql = "select *,".implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_ from {$c["esquemadb"]}.{$c["tabela"]}";
+		$incluirChaves[] = implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_";
 	}
+	if(count($outrosParametros) > 0){
+		foreach($outrosParametros as $o){
+			$incluirChaves[] = $o."::text as ".$o."_";
+		}
+	}
+		
+	$sql = "select ".implode(",",$incluirChaves)." from {$c["esquemadb"]}.{$c["tabela"]}";
+	
 	$xml .= "
 		<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
 			<DimensionUsage foreignKey='".$c["colunaidgeo"]."' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."'/>
 			<DimensionUsage foreignKey='".$c["colunaidgeo"]."' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."_geocod' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."_geocod'/>
 	";
 
-	$xml .= implode(" ",array_unique($dimTempo));
+	$xml .= implode(" ",array_unique($dimEnsoes));
 
 	//inclui cada elemento em medida
 	foreach($tb as $medida){
@@ -341,6 +373,7 @@ foreach($tbs as $tb){
 		</Cube>
 		";
 }
+
 $xml .= '<VirtualCube name="Todas as medidas" >';
 $VirtualCubeDimension = array_unique($VirtualCubeDimension);
 $VirtualCubeMeasure = array_unique($VirtualCubeMeasure);
@@ -350,7 +383,7 @@ $xml .= '</VirtualCube>';
 $xml .= "</Schema>";
 error_reporting(0);
 ob_end_clean();
-
+//echo $xml;exit;
 gravaDados(array($xml),$arquivoXmlEsquema);
 
 header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]."&mapext=".$_GET["mapext"]);

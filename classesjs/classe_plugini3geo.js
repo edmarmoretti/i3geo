@@ -1,10 +1,10 @@
 /**
- * Title: pluginI3geo
+ * Title: PluginI3Geo
  *
  * i3GEO.pluginI3geo
  *
- * Implementam os plugins do i3Geo que adicionam camadas especiais ao mapa,
- * normalmente dados vetoriais.
+ * Implementa os plugins do i3Geo que adicionam camadas especiais ao mapa,
+ * normalmente dados vetoriais processados no navegador Web.
  *
  * Arquivo:
  *
@@ -38,6 +38,14 @@ if (typeof (i3GEO) === 'undefined') {
 i3GEO.pluginI3geo = {
 	OBJETOS : {},
 	/**
+	 * Lista de plugins
+	 *
+	 * Utilizado no editor de mapfiles do sistema de administracao
+	 */
+	PLUGINS : [
+		{"classe": "heatmap","nome": "Mapa de calor","editor":true}
+	],
+	/**
 	 * Inicia a execucao de um plugin
 	 *
 	 * Camada e um objeto gerado pelo i3Geo quando uma camada e adicionada ao
@@ -60,6 +68,15 @@ i3GEO.pluginI3geo = {
 		// para
 		// cada interface
 		i3GEO.pluginI3geo[camada.plugini3geo.plugin][i3GEO.Interface.ATUAL].inicia(camada);
+	},
+	/**
+	 * Retorna o HTML com o formulario para editar os parametros do plugin
+	 */
+	formAdmin : function (plugin,configString){
+		return i3GEO.pluginI3geo[plugin].formAdmin(configString);
+	},
+	linkAjuda : function (plugin){
+		return i3GEO.pluginI3geo[plugin].linkAjuda();
 	},
 	ligaCamada : function(nomecamada) {
 		if (typeof (console) !== 'undefined')
@@ -153,6 +170,31 @@ i3GEO.pluginI3geo = {
 	 *
 	 */
 	heatmap : {
+		linkAjuda: function(){
+			return i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=121";
+		},
+		formAdmin: function(config){
+			//{"plugin":"heatmap","parametros":{"coluna":"","radius":15,"max":10}}
+			var parametros,
+			ins = "",
+			configDefault = '{"plugin":"heatmap","parametros":{"coluna":"1","radius":15,"max":10}}';
+			if(config === ""){
+				config = configDefault;
+			}
+			config = YAHOO.lang.JSON.parse(config);
+			if(config.plugin != "heatmap"){
+				config = YAHOO.lang.JSON.parse(configDefault);
+			}
+			parametros = config.parametros;
+			ins += ""
+				+ "<p>Coluna que cont&eacute;m os dados ou valor num&eacute;rico para cada ponto:"
+				+ "<br><input name='coluna' type='text' value='" + parametros.coluna + "' size='30'></p>"
+				+ "<p>Raio de cada ponto em pixels:"
+				+ "<br><input name='radius' type='text' value='" + parametros.radius + "' size='30'></p>"
+				+ "<p>Valor m&aacute;ximo em cada ponto:"
+				+ "<br><input name='max' type='text' value='" + parametros.max + "' size='30'></p>";
+			return ins;
+		},
 		googlemaps : {
 			aplicaPropriedades : function(camada) {
 				camada.sel = "nao";

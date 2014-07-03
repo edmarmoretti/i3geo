@@ -5,11 +5,13 @@ MAP
     DATA "/var/www/i3geo/aplicmap/dados/sc22/AEROPORTO_CAMPO_DE_POUSO.shp"
     METADATA
       "CLASSE"	"SIM"
+      "PLUGINI3GEO"	'{"plugin":"","parametros":{"coluna":"1","radius":"15","max":"10"}}'
       "TEMA"	"Aeroportos SC22"
-    END
+    END # METADATA
     NAME "_cursoaeroporto"
     STATUS OFF
     TEMPLATE "none.htm"
+    TILEITEM "location"
     TYPE POINT
     UNITS METERS
     CLASS
@@ -17,10 +19,11 @@ MAP
       STYLE
         COLOR 255 0 0
         OUTLINECOLOR 0 0 0
-        SYMBOL 'ponto'
         SIZE 15
-      END
-    END
-  END
-END
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
 

@@ -79,6 +79,7 @@ Group: API  {
       File: Marcador  (classesjs/classe_marcador.js)
       File: Navega&ccedil;&atilde;o sobre o mapa  (classesjs/classe_navega.js)
       File: PHP  (classesjs/classe_php.js)
+      File: PluginI3Geo  (classesjs/classe_plugini3geo.js)
       File: Social  (classesjs/classe_social.js)
       File: Temas  (classesjs/classe_tema.js)
       File: Utilit&aacute;rios  (classesjs/classe_util.js)

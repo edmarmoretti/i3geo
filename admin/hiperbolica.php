@@ -11,7 +11,7 @@ Esse programa le o banco de administra&ccedil;&atilde;o e monta o XML contendo o
 A hierarquia dos n&iacute;veis &eacute; codificada com os elementos armazenados em "tipo".
 
 O elemento "familia" armazena dados que podem ser utilizados e fun&ccedil;&otilde;es javascript da &aacute;rvore. Por exemplo, quando o n&atilde;o
-for um tema, o código do tema &eacute; guardado nesse elemento.
+for um tema, o cï¿½digo do tema &eacute; guardado nesse elemento.
 
 Para ver o XML utilize <http://localhost/i3geo/admin/hiperbolica.php>
 
@@ -184,7 +184,7 @@ foreach ($tipos as $tipo)
 		$contador++;
 		$nome = html_entity_decode($w["nome_ws"]);
 		$nome = h_converteTexto($nome);
-		$link = str_replace("&","&amp;",$w["link_ws"]);
+		$link = str_replace("&","&",$w["link_ws"]);
 		if($nome != "")
 			$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$tipo["tipo_ws"].",".$link.'" />  '."\n";
 	}

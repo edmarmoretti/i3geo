@@ -38,9 +38,9 @@ if(typeof(i3GEO) === 'undefined'){
 i3GEO.social = {
 	curtirFacebook: function(url,tipo){
 		if(tipo === "comtotal")
-		{return "<iframe src='http://www.facebook.com/plugins/like.php?href="+url+"&amp;layout=button_count&amp;show_faces=false&amp;width=160&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:160px; height:21px;' allowTransparency='true'></iframe>";}
+		{return "<iframe src='http://www.facebook.com/plugins/like.php?href="+url+"&layout=button_count&show_faces=false&width=160&action=like&colorscheme=light&height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:160px; height:21px;' allowTransparency='true'></iframe>";}
 		if(tipo === "semtotal")
-		{return "<iframe src='http://www.facebook.com/plugins/like.php?href="+url+"&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";}
+		{return "<iframe src='http://www.facebook.com/plugins/like.php?href="+url+"&layout=button_count&show_faces=false&action=like&colorscheme=light&height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";}
 	},
 	publicarTwitter: function(url,tipo){
 		var re = new RegExp("=","g");

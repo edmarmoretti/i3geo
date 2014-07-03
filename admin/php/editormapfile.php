@@ -64,7 +64,10 @@ $funcoesEdicao = array(
 		"ALTERARCLASSEGERAL",
 		"ALTERARCLASSELABEL",
 		"DOWNLOADGVP",
-		"ALTERAREDITAVEL"
+		"ALTERAREDITAVEL",
+		"PEGAPLUGIN",
+		"GRAVAPLUGIN",
+		"REMOVEPLUGIN"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/editormapfile") == false){
@@ -127,7 +130,30 @@ switch (strtoupper($funcao))
 			exit;
 		}
 	break;
-
+	case "PEGAPLUGIN":
+		$mapfile = $locaplic."/temas/".$codigoMap.".map";
+		$mapa = ms_newMapObj($mapfile);
+		$layer = $mapa->getlayerbyname($codigoLayer);
+		retornaJSON($layer->getmetadata("PLUGINI3GEO"));
+	break;
+	case "GRAVAPLUGIN":
+		$mapfile = $locaplic."/temas/".$codigoMap.".map";
+		$mapa = ms_newMapObj($mapfile);
+		$layer = $mapa->getlayerbyname($codigoLayer);
+		$layer->setmetadata("PLUGINI3GEO",$plugin);
+		$mapa->save($mapfile);
+		removeCabecalho($mapfile);
+		retornaJSON("ok");
+	break;
+	case "REMOVEPLUGIN":
+		$mapfile = $locaplic."/temas/".$codigoMap.".map";
+		$mapa = ms_newMapObj($mapfile);
+		$layer = $mapa->getlayerbyname($codigoLayer);
+		$layer->setmetadata("PLUGINI3GEO","");
+		$mapa->save($mapfile);
+		removeCabecalho($mapfile);
+		retornaJSON("ok");
+		break;
 	case "DOWNLOADGVP":
 		if(file_exists($locaplic."/temas/".$codigoMap.".gvp")){
 			ob_end_clean();
@@ -1240,7 +1266,7 @@ function criarNovoMap(){
 		{
 			fwrite($fp,$dado."\n");
 		}
-		
+
 		include("conexao.php");
 		if($convUTF){
 			$nome = utf8_encode($nome);
@@ -1585,7 +1611,7 @@ function pegaTitulo()
 	$dados["group"] = $layer->group;
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
-	
+
 	return $dados;
 }
 function alterarTitulo()
@@ -1594,7 +1620,7 @@ function alterarTitulo()
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
-	
+
 	$layer->set("name",$name);
 	$layer->setmetadata("tema",$tema);
 	$layer->setmetadata("iconetema",$iconetema);
@@ -1602,7 +1628,7 @@ function alterarTitulo()
 	$layer->setmetadata("escala",$escala);
 	$layer->setmetadata("extensao",$extensao);
 	$layer->set("group",$group);
-	
+
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";
@@ -1774,7 +1800,7 @@ function alterarConexao()
 		$cortepixels = 0;
 	}
 	$layer->setmetadata("cortepixels",$cortepixels);
-	
+
 	$layer->setmetadata("convcaracter",$convcaracter);
 	if($testar == "true")
 	{
