@@ -247,6 +247,7 @@ array
 			include_once($this->locaplic."/admin/php/xml.php");
 			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic));
 		}
+		//print_r($this->xml);exit;
 		$mapas = array();
 		//pega os sistemas checando os perfis
 		foreach($this->xml->MAPA as $s)

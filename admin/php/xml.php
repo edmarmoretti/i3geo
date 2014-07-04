@@ -162,9 +162,9 @@ Parametros:
 
 locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 
-id {string} - c�digo do n�
+id {string} - codigo do no
 
-nivel {string} - n&iacute;vel do n�
+nivel {string} - n&iacute;vel do no
 
 Retorno:
 
@@ -503,7 +503,7 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 		$link = xmlTexto_prepara($row["link_ws"]);
 		if(stristr($link, 'http') === FALSE)
 		{$link = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["REQUEST_URI"])."/".$link;}
-		$xml .= "<link>".$link."</link>\n";
+		$xml .= "<link><![CDATA[".$link."]]></link>\n";
 		$xml .= "<pubDate/>\n";
 		$xml .= "<author>".xmlTexto_prepara($row["autor_ws"])."</author>\n";
 		$xml .= "<nacessos></nacessos>\n";
@@ -548,7 +548,7 @@ function geraXmlAtlas($locaplic,$editores)
 			$xml .= " <TITULO>".xmlTexto_prepara($row["titulo_atlas"])."</TITULO>\n";
 			$xml .= " <DESCRICAO>".xmlTexto_prepara($row["desc_atlas"])."</DESCRICAO>\n";
 			$xml .= " <ICONE>".$row["icone_atlas"]."</ICONE>\n";
-			$xml .= " <LINKMAISINFO>".xmlTexto_prepara($row["link_atlas"])."</LINKMAISINFO>\n";
+			$xml .= " <LINKMAISINFO><![CDATA[".xmlTexto_prepara($row["link_atlas"])."]]></LINKMAISINFO>\n";
 			$xml .= " <TEMPLATEHTML>".xmlTexto_prepara($row["template_atlas"])."</TEMPLATEHTML>\n";
 			$xml .= " <WABERTURA>".$row["w_atlas"]."</WABERTURA>\n";
 			$xml .= " <HABERTURA>".$row["h_atlas"]."</HABERTURA>\n";
@@ -652,13 +652,13 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 			$extensao = $row["ext_mapa"];
 			$xml .= " <EXTENSAO>".$extensao."</EXTENSAO>\n";
 			$outros = xmlTexto_prepara($row["outros_mapa"]);
-			$xml .= " <OUTROS>".$outros."</OUTROS>\n";
+			$xml .= " <OUTROS><![CDATA[".$outros."]]></OUTROS>\n";
 			$linkdireto = xmlTexto_prepara($row["linkdireto_mapa"]);
 			if(empty($linkdireto)){
 				$linkdireto = $url."/ms_criamapa.php?mapext=".$extensao."&perfil=".$perfil."&temasa=".$temas."&layers=".$ligados.$row["outros_mapa"];
 				$linkdireto = xmlTexto_prepara($linkdireto);
 			}
-			$xml .= " <LINKDIRETO>".$linkdireto."</LINKDIRETO>\n";
+			$xml .= " <LINKDIRETO><![CDATA[".$linkdireto."]]></LINKDIRETO>\n";
 			$xml .= " <PUBLICADO>".$row["publicado_mapa"]."</PUBLICADO>\n";
 			$xml .= " <ID_MAPA>".$row["id_mapa"]."</ID_MAPA>\n";
 			if($row["mapfile"] != ""){
@@ -810,7 +810,7 @@ function geraXmlMenutemas_notema($qtemas,$xml,$perfil)
 			$xml .= "<PERFIL>".$row["perfil"]."</PERFIL>\n";
 			$xml .= "<TNOME>".xmlTexto_prepara($row["nome_tema"])."</TNOME>\n";
 			$xml .= "<TDESC>".xmlTexto_prepara($row["desc_tema"])."</TDESC>\n";
-			$xml .= "<TLINK>".xmlTexto_prepara($row["link_tema"])."</TLINK>\n";
+			$xml .= "<TLINK><![CDATA[".xmlTexto_prepara($row["link_tema"])."]]></TLINK>\n";
 			$xml .= "<TIPOA>".$row["tipoa_tema"]."</TIPOA>\n";
 			$xml .= "<TAGS>".xmlTexto_prepara($row["tags_tema"])."</TAGS>\n";
 			$xml .= "<KML>".$row["kml_tema"]."</KML>\n";
@@ -837,7 +837,7 @@ function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
 		$xml .= "   <TITULO>".xmlTexto_prepara($row["titulo_prancha"])."</TITULO>\n";
 		$xml .= "   <DESCRICAO>".xmlTexto_prepara($row["desc_prancha"])."</DESCRICAO>\n";
 		$xml .= "   <ICONE>".$row["icone_prancha"]."</ICONE>\n";
-		$xml .= "   <LINKMAISINFO>".xmlTexto_prepara($row["link_prancha"])."</LINKMAISINFO>\n";
+		$xml .= "   <LINKMAISINFO><![CDATA[".xmlTexto_prepara($row["link_prancha"])."]]></LINKMAISINFO>\n";
 		$xml .= "   <WABERTURA>".$row["w_prancha"]."</WABERTURA>\n";
 		$xml .= "   <HABERTURA>".$row["h_prancha"]."</HABERTURA>\n";
 		$xml .= "   <MAPEXT>".$row["mapext_prancha"]."</MAPEXT>\n";
