@@ -1373,7 +1373,10 @@ i3GEO.util = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
 			if(!aguarde){aguarde = false;}
 			var head,script,
-			tipojanela = i3GEO.janela.ESTILOAGUARDE;
+			tipojanela = "";
+			if(i3GEO.janela){
+				tipojanela = i3GEO.janela.ESTILOAGUARDE;
+			}
 
 			if(!$i(id) || id === ""){
 				if(i3GEO.janela && aguarde === true){
@@ -1413,7 +1416,9 @@ i3GEO.util = {
 							}
 						};
 					}
-					i3GEO.janela.ESTILOAGUARDE = tipojanela;
+					if(i3GEO.janela){
+						i3GEO.janela.ESTILOAGUARDE = tipojanela;
+					}
 				}
 				script.src= js;
 				if(id !== "")
@@ -1563,33 +1568,33 @@ i3GEO.util = {
 		},
 		/**
 		 * Function: comboTemas
-		 * 
+		 *
 		 * Cria um combo (caixa de selesao) com a lista de temas existentes no
 		 * mapa e de determinado tipo
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * id {String} - id do elemento select que sera criado
-		 * 
+		 *
 		 * funcao {Function} - funcao que sera executada ao terminar a montagem
 		 * do combo. Essa funcao recebera como parametros um Array associativo
 		 * contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
 		 * {dados:comboTemas,tipo:"dados"} tipo sera uma string que pode ser
 		 * "dados"|"mensagem"|"erro" indicando o tipo de retorno.
-		 * 
+		 *
 		 * onde {String} - id do elemento HTML que recebera o combo. e utilizado
 		 * apenas para inserir uma mensagem de aguarde.
-		 * 
+		 *
 		 * nome {String} - valor que sera incluido no parametro "name" do
 		 * elemento "select".
-		 * 
+		 *
 		 * multiplo {Booleano} - indica se o combo permite selecoes multiplas
-		 * 
+		 *
 		 * tipoCombo {String} - Tipo de temas que serao incluidos no combo
 		 * ligados|selecionados|raster|pontosSelecionados|pontos|linhaDoTempo
-		 * 
+		 *
 		 * estilo {string} - estilo (css) que sera aplicado ao combo
-		 * 
+		 *
 		 * yui {boolean} - (opcional) indica se o combo sera montado com o
 		 * estilo YUI (menu)
 		 */
@@ -3184,18 +3189,18 @@ i3GEO.util = {
 		},
 		/**
 		 * Function: cloneObj
-		 * 
+		 *
 		 * Cria um clone de um objeto.
-		 * 
+		 *
 		 * Exemplo:
-		 * 
+		 *
 		 * cloneObj = i3GEO.util.cloneObj(origObj);
 		 */
 		cloneObj: function(obj) {
 			if(obj == null || typeof(obj) != 'object')
 				return obj;
 
-			var temp = new obj.constructor(); 
+			var temp = new obj.constructor();
 			for(var key in obj)
 				temp[key] = i3GEO.util.cloneObj(obj[key]);
 

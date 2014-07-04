@@ -60,9 +60,11 @@ i3GEO.pluginI3geo = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.pluginI3geo.inicia()");
 
-		i3GEO.janela.AGUARDEMODAL = true;
-		i3GEO.janela.abreAguarde("aguardePlugin", "Calculando...");
-		i3GEO.janela.AGUARDEMODAL = false;
+		if(i3GEO.janela){
+			i3GEO.janela.AGUARDEMODAL = true;
+			i3GEO.janela.abreAguarde("aguardePlugin", "Calculando...");
+			i3GEO.janela.AGUARDEMODAL = false;
+		}
 		// chama a funcao conforme o tipo de plugin e a interface atual
 		// para cada plugin deve haver um objeto com as funcoes especificas
 		// para
@@ -298,13 +300,18 @@ i3GEO.pluginI3geo = {
 				camada.classe = "NAO";
 				return camada;
 			},
-			inicia : function(camada) {
+			inicia : function(camada,objMapa) {
 				var p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php", carregaJs = "nao", criaLayer;
 				criaLayer = function() {
 					var heatmap, transformedTestData = {
 						max : camada.plugini3geo.parametros.max,
 						data : []
 					}, data = heatmap_dados, datalen = heatmap_dados.length, nudata = [];
+
+					//para uso com o mashup
+					if(!objMapa){
+						objMapa = i3geoOL;
+					}
 					// in order to use the OpenLayers Heatmap Layer we have
 					// to
 					// transform our data into
@@ -319,7 +326,7 @@ i3GEO.pluginI3geo = {
 					}
 					transformedTestData.data = nudata;
 					// create our heatmap layer
-					heatmap = new OpenLayers.Layer.Heatmap(camada.name, i3geoOL, i3geoOL.baseLayer, {
+					heatmap = new OpenLayers.Layer.Heatmap(camada.name, objMapa, objMapa.baseLayer, {
 						"visible" : true,
 						"opacity": camada.transparency,
 						"radius" : camada.plugini3geo.parametros.radius,
@@ -337,7 +344,8 @@ i3GEO.pluginI3geo = {
 						}
 					}, {
 						isBaseLayer : false,
-						projection : new OpenLayers.Projection("EPSG:4326")
+						projection : new OpenLayers.Projection("EPSG:4326"),
+						displayInLayerSwitcher : true
 					});
 					heatmap.ligaCamada = function() {
 						this.toggle();
@@ -355,13 +363,18 @@ i3GEO.pluginI3geo = {
 					};
 
 					i3GEO.pluginI3geo.OBJETOS[camada.name] = heatmap;
-					i3geoOL.addLayer(heatmap);
+					objMapa.addLayer(heatmap);
 					heatmap.setDataSet(transformedTestData);
 					heatmap_dados = null;
-					i3GEO.janela.fechaAguarde("aguardePlugin");
+					if(i3GEO.janela){
+						i3GEO.janela.fechaAguarde("aguardePlugin");
+					}
 				};
 				if (typeof (HeatmapOverlay) === 'undefined') {
 					carregaJs = "sim";
+				}
+				if(!i3GEO.configura || !i3GEO.configura.sid){
+					i3GEO.configura.sid = "";
 				}
 				p += "?carregajs=" + carregaJs + "&layer=" + camada.name + "&coluna=" + camada.plugini3geo.parametros.coluna + "&g_sid=" + i3GEO.configura.sid + "&nomevariavel=heatmap_dados";
 				i3GEO.util.scriptTag(p, criaLayer, "i3GEO.pluginI3geo.heatmap_script");

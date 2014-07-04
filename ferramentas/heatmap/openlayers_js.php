@@ -24,6 +24,43 @@ include_once($dir."/../inicia.php");
 //os dados sao devolvidos como uma variavel javascript
 //obtem os registros
 include_once($dir."/../../classesphp/classe_atributos.php");
+//o plugin pode ser chamado sem um mapfile criado
+//usando apenas o mapfile existente em i3geo/temas
+//nesse caso e necessario cirar um mapfile temporario
+if(empty($map_file) && file_exists($dir."/../../temas/{$layer}.map")){
+	$versao = versao();
+	$versao = $versao["principal"];
+	if(!isset($base) || $base == "")
+	{
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+		{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+		else
+		{
+			if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+				$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+			}
+			if($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+			}
+			if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+			}
+			if($base == "")
+			{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
+		}
+	}
+	$map_file = $dir_tmp."/".nomeRandomico().".map";
+
+	$mapa = ms_newMapObj($base);
+
+	$tempMapa = ms_newMapObj($dir."/../../temas/{$layer}.map");
+	$layern = $tempMapa->getlayer(0);
+	ms_newLayerObj($mapa, $layern);
+	$mapa->save($map_file);
+	if(!empty($postgis_mapa)){
+		substituiCon($map_file,$postgis_mapa);
+	}
+}
 $m = new Atributos($map_file,$layer);
 $registros = $m->listaRegistrosXY($coluna, "brasil", "tudo");
 $n = count($registros);

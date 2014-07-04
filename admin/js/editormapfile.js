@@ -610,7 +610,6 @@ function salvarDadosEditorPlugin(onde,plugin,codigoMap,codigoLayer){
 		n = campos.length,
 		par = [],
 		prog = "../php/editormapfile.php?funcao=gravaPlugin",
-		plugin = "",
 		i;
 
 	for(i=0; i<n; i++){

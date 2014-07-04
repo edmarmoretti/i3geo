@@ -163,7 +163,7 @@ function pegaPluginLayer(plugin,codigoMap,codigoLayer){
 	var sUrl = "../php/editormapfile.php?funcao=pegaPlugin&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	var montaEditorPlugin = function(retorno){
 		var ins = "<input type=button title='Salvar' value='Salvar' id=salvarPlugin />"
-			+ "<input type=button title='Removerluir' value='Remover' id=removerPlugin />";
+			+ "<input type=button title='Remover' value='Remover' id=removerPlugin />";
 		//pega os campos do formulario
 		ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
 		var ajuda = "<p>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
