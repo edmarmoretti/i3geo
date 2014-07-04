@@ -3,7 +3,7 @@
 if(empty($_GET["g_sid"])){
 	include(dirname(__FILE__)."/../../ms_criamapa.php");
 	//reinicia a url
-	$urln = "?g_sid=".session_id()."&locaplic=".$_GET["locaplic"]."&mapext=".$mapext;
+	$urln = "?g_sid=".session_id()."&locaplic=".$_GET["locaplic"]."&mapext=".$mapext."&origem=".$_GET["origem"];
 	header("Location:".$urln);
 	exit;
 }
@@ -386,7 +386,7 @@ ob_end_clean();
 //echo $xml;exit;
 gravaDados(array($xml),$arquivoXmlEsquema);
 
-header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]."&mapext=".$_GET["mapext"]);
+header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]."&mapext=".$_GET["mapext"]."&origem=".$_GET["origem"]);
 
 function converte($texto){
 	$texto = str_replace("&","&amp;",htmlentities($texto));

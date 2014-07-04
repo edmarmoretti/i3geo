@@ -56,9 +56,7 @@ if($opcoes["tipo"] == "mapaPizzas" || $opcoes["tipo"] == "mapaBarras" || $opcoes
 		$colunageo = $meta["colunacentroide"];
 		$sqlColunaGeo = $meta["colunacentroide"];
 	}
-	else{
-		$sqlColunaGeo = "st_centroid(".$meta["colunageo"].")";
-	}
+	$sqlColunaGeo = "st_centroid(".$colunageo.")";
 	$tipoLayer = "POINT";
 	if($opcoes["tipo"] == "mapaBarras" || $opcoes["tipo"] == "mapaPizzas"){
 		$tipoLayer = "CHART";
@@ -90,6 +88,15 @@ $sqldados = "
 	from ".$meta["esquemadb"].".".$meta["tabela"]." INNER JOIN
 	(values ".implode(",",$valores).') as dataset ("'.implode('","',$nomesColunas).'") ON geocodigo = '.$meta["identificador"];
 $sqlmapa = $colunageo." from ($sqldados) as foo using unique gid using srid=$srid";
+
+//para o tema com o outline caso o saiku tenha sido aberto de fora do i3Geo
+$sqldados1 = "
+select st_setsrid(".$meta["colunageo"].",".$srid.") as ".$meta["colunageo"].", ".implode(",",$colunastabela).",dataset.*
+from ".$meta["esquemadb"].".".$meta["tabela"]." INNER JOIN
+(values ".implode(",",$valores).') as dataset ("'.implode('","',$nomesColunas).'") ON geocodigo = '.$meta["identificador"];
+
+$sqlmapa1 = $meta["colunageo"]." from ($sqldados1) as foo using unique gid using srid=$srid";
+
 $mapa = ms_newMapObj($map_file);
 $nlayers = $mapa->numlayers;
 for($i=0;$i<$nlayers;$i++){
@@ -150,6 +157,33 @@ $l .= PHP_EOL.'END';
 
 //echo $l;exit;
 $layer->updateFromString($l);
+
+//inclui o layer com o contorno se for o caso
+if(empty($_GET["origem"]) && ($tipoLayer == "CHART" || $tipoLayer == "POINT")){
+	$layer = ms_newLayerObj($mapa);
+	$nomeLayer = nomeRandomico();
+	$l = array();
+	$l[] = "LAYER";
+	$l[] = '	NAME "'.$nomeLayer.'"';
+	$l[] = "	TYPE POLYGON";
+	$l[] = "	DATA '".$sqlmapa1."'";
+	$l[] = '	CONNECTION "'.$conexao.'"';
+	$l[] = '	CONNECTIONTYPE POSTGIS';
+	$l[] = '	TEMPLATE "none.htm"';
+	$l[] = '	STATUS DEFAULT';
+	$l[] = '	METADATA';
+	$l[] = '		TEMA "Limites"';
+	$l[] = '		CLASSE "SIM"';
+	$l[] = '		SAIKU "'.$opcoes["tipo"].'"';
+	$l[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
+	$l[] = '	END	';
+	$l[] = '	CLASS	';
+	$l[] = '	OUTLINECOLOR 255 255 255	';
+	$l[] = '	END	';
+	$l[] = 'END	';
+	$l = implode(PHP_EOL,$l);
+	$layer->updateFromString($l);
+}
 
 $mapa->save($map_file);
 

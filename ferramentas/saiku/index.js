@@ -154,7 +154,7 @@ i3GEOF.saiku = {
 	},
 	aplicar: function(){
 		var mapext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-		window.open(i3GEO.configura.locaplic+"/ferramentas/saiku/esquemaxml.php?g_sid="+i3GEO.configura.sid+"&locaplic="+i3GEO.configura.locaplic+"&mapext="+mapext);
+		window.open(i3GEO.configura.locaplic+"/ferramentas/saiku/esquemaxml.php?origem=i3geo&g_sid="+i3GEO.configura.sid+"&locaplic="+i3GEO.configura.locaplic+"&mapext="+mapext);
 	},
 	atualizaMapa: function(){
 		i3GEO.atualiza("");
