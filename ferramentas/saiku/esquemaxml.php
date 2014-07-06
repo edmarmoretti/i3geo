@@ -1,9 +1,10 @@
 <?php
+//utilize output=xml para debug
 //quando o saiku e iniciado de fora do i3geo, e necessario inicializar um mapfile para uso como base dos mapas
 if(empty($_GET["g_sid"])){
 	include(dirname(__FILE__)."/../../ms_criamapa.php");
 	//reinicia a url
-	$urln = "?g_sid=".session_id()."&locaplic=".$_GET["locaplic"]."&mapext=".$mapext."&origem=".$_GET["origem"];
+	$urln = "?g_sid=".session_id()."&locaplic=".$_GET["locaplic"]."&mapext=".$mapext."&origem=".$_GET["origem"]."&output=".$_GET["output"];
 	header("Location:".$urln);
 	exit;
 }
@@ -126,6 +127,7 @@ if(empty($saikuConfigDataSource['tabelaDimensaoTempo'])){
 }
 $sqlAno = "select nu_ano from ".$saikuConfigDataSource['tabelaDimensaoTempo']." group by nu_ano order by nu_ano";
 $sqlMes = "select nu_ano::text,nu_mes::text,ds_mes_abreviado as mes,COALESCE (nu_ano::text||'-'||nu_mes::text,nu_ano::text) as nu_anomes from ".$saikuConfigDataSource['tabelaDimensaoTempo']." group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes";
+//dimensoes temporais
 $xml .= "
 	<Dimension name='Anual' type='TimeDimension' caption='Tempo: Anual'>
 		<Hierarchy hasAll='true' primaryKey='nu_ano'>
@@ -148,6 +150,7 @@ $xml .= "
 		</Hierarchy>
 	</Dimension>
 ";
+//dimensoes geograficas
 //as dimensoes sao duplicadas
 //uma delas contem o geocodigo que permite a geracao do mapa
 $xml1 = "";
@@ -232,28 +235,6 @@ foreach($regioes as $regiao){
 	";
 	$xml1 .= implode(" ",$niveis1);
 	$xml2 .= implode(" ",$niveis2);
-	/*
-	//verifica se existem propriedades (colunas adicionais)
-	if($vis != ""){
-		//apelidos
-		$apelidos = $regiao['apelidos'];
-		if($apelidos != ""){
-			$apelidos = str_replace(";",",",$apelidos);
-			$apelidos = str_replace(",,",",",$apelidos);
-			$apelidos = converte($apelidos);
-			$apelidos = explode(",",$apelidos);
-		}
-		else{
-			$apelidos = $vis;
-		}
-		$nvis = count($vis);
-		for($i = 0; $i < $nvis; $i++){
-			$xml .= "
-				<Property name='{$apelidos[$i]}' column='{$vis[$i]}'/>
-			";
-		}
-	}
-	*/
 	$xml1 .= "
 			</Hierarchy>
 		</Dimension>
@@ -263,7 +244,41 @@ foreach($regioes as $regiao){
 		</Dimension>
 	";
 }
-$xml .= $xml1.$xml2;
+//outras dimensoes definidas nos parametros e que nao sejam do tipo tempo
+$parametros = $m->listaTodosParametros();
+$dimOutras = array();
+foreach($parametros as $p){
+	//apenas as nao tempo
+	if($p["tipo"] < 1 || $p["tipo"] > 5){
+		$k = $p["esquema"]."_".$p["tabela"]."_".$p["coluna"];
+		if(empty($tbs[$k])){
+			$dimOutras[$k] = $p;
+		}
+		else{
+			array_push($dimOutras[$k],$p);
+		}
+	}
+}
+$xml3 = "";
+foreach($dimOutras as $d){
+	$k = $p["esquemadb"]."_".$d["tabela"]."_".$d["coluna"];
+	$xml3 .= "
+		<Dimension name='".$k."' caption='".converte($d["nome"])."'>
+			<Hierarchy hasAll='true'  primaryKey='{$d["coluna"]}'>
+	";
+	//cria uma view juntando as tabelas da hierarquia de regioes
+	$colunas = "dim.{$d['coluna']}, ";
+	$colunas .= "dim.{$d['coluna']} AS nome";
+	$sql = "SELECT {$colunas} FROM ".$d['esquemadb'].".".$d['tabela']." as dim group by ".$d['coluna'];
+	$xml3 .= "<view alias='".$k."' ><SQL dialect='generic' >$sql</SQL></view>";
+	$xml3 .= "<Level name='".converte($d["nome"])."'
+			column='{$d['coluna']}'
+			nameColumn='nome' uniqueMembers='true' />
+	";
+	$xml3 .= "</Hierarchy>
+		</Dimension>";
+}
+$xml .= $xml1.$xml2.$xml3;
 //junta as medidas conforme o nome da tabela utilizada
 $medidas = $m->listaMedidaVariavel();
 //var_dump($medidas);exit;
@@ -300,7 +315,7 @@ foreach($tbs as $tb){
 	foreach($tb as $medida){
 		//echo "<pre>";var_dump($medida)."<br>";
 		$parametros = $m->listaParametro($medida["id_medida_variavel"],"","",false,false);
-		
+
 		$parComposto = array(); //guarda a composicao da chave que liga com a dimensao
 		$colunaAdicionais = array();
 		//parametro do tipo tempo
@@ -320,31 +335,32 @@ foreach($tbs as $tb){
 		//outros parametros
 		$outrosParametros = array();
 		//TODO criar as dimensoes aqui
+		//echo "<pre>";var_dump($parametros);
 		foreach($parametros as $parametro){
+			$k = $parametro["esquemadb"]."_".$parametro["tabela"]."_".$parametro["coluna"];
 			if($parametro["tipo"] > 5 || $parametro["tipo"] == 0){
-				//$outrosParametros[] = $parametro["coluna"];
-				//$VirtualCubeDimension[] = "<VirtualCubeDimension name='{$parametro["coluna"]}' />";
-				//$dimEnsoes[] = "<DimensionUsage foreignKey='{$parametro["coluna"]}_' name='{$parametro["coluna"]}' source='{$parametro["coluna"]}'/>";
+				$outrosParametros[] = $k;
+				$VirtualCubeDimension[] = "<VirtualCubeDimension name='{$k}' />";
+				$dimEnsoes[] = "<DimensionUsage foreignKey='{$parametro["coluna"]}' name='nome' source='{$k}'/>";
 			}
 		}
 	}
-	//exit;
 	$xml .= "
 	<Cube cache='false' name='{$c["esquemadb"]}{$c["tabela"]}'>";
 	$incluirChaves = array("*");
-	
+
 	if(count($parComposto) > 0){
 		//$sql = "select *,".implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_ from {$c["esquemadb"]}.{$c["tabela"]}";
 		$incluirChaves[] = implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_";
 	}
 	if(count($outrosParametros) > 0){
 		foreach($outrosParametros as $o){
-			$incluirChaves[] = $o."::text as ".$o."_";
+			//$incluirChaves[] = $o."::text as ".$o."_";
 		}
 	}
-		
+
 	$sql = "select ".implode(",",$incluirChaves)." from {$c["esquemadb"]}.{$c["tabela"]}";
-	
+
 	$xml .= "
 		<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
 			<DimensionUsage foreignKey='".$c["colunaidgeo"]."' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."'/>
@@ -373,7 +389,6 @@ foreach($tbs as $tb){
 		</Cube>
 		";
 }
-
 $xml .= '<VirtualCube name="Todas as medidas" >';
 $VirtualCubeDimension = array_unique($VirtualCubeDimension);
 $VirtualCubeMeasure = array_unique($VirtualCubeMeasure);
@@ -383,7 +398,11 @@ $xml .= '</VirtualCube>';
 $xml .= "</Schema>";
 error_reporting(0);
 ob_end_clean();
-//echo $xml;exit;
+
+if($_GET["output"] == "xml"){
+	echo header("Content-type: application/xml");
+	echo $xml;exit;
+}
 gravaDados(array($xml),$arquivoXmlEsquema);
 
 header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]."&mapext=".$_GET["mapext"]."&origem=".$_GET["origem"]);

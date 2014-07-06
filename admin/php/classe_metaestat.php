@@ -1940,7 +1940,7 @@ class Metaestat{
 				$sql .= "AND i3geoestat_parametro_medida.id_parametro_medida = $id_parametro_medida ";
 			}
 		}
-		else{
+		elseif ($id_parametro_medida != ""){
 			$sql .= "WHERE i3geoestat_parametro_medida.id_parametro_medida = $id_parametro_medida ";
 		}
 		if($id_pai != ""){
@@ -1955,6 +1955,17 @@ class Metaestat{
 		}
 		//echo $sql;exit;
 		return $this->execSQL($sql,$id_parametro_medida);
+	}
+	/**
+	 * Lista todos os parametros cadastrados
+	 */
+	function listaTodosParametros(){
+		$sql = "SELECT i3geoestat_parametro_medida.*,i3geoestat_medida_variavel.* ";
+		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_parametro_medida ";
+		$sql .= "INNER JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";
+		$sql .= "ON i3geoestat_parametro_medida.id_medida_variavel = i3geoestat_medida_variavel.id_medida_variavel ";
+		$sql .= " ORDER BY nome";
+		return $this->execSQL($sql);
 	}
 	/**
 	 * Lista os valores (unicos) que ocorrem em um parametro de uma medida de variavel
