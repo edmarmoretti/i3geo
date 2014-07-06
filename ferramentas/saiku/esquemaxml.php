@@ -116,6 +116,7 @@ if($codigo_tipo_regiao == ""){
 else{
 	$regioes = array($m->listaTipoRegiao($codigo_tipo_regiao));
 }
+//echo "<pre>";var_dump($regioes);exit;
 $regiao = "";
 $item = "";
 $registros = "";
@@ -155,11 +156,8 @@ $xml .= "
 //uma delas contem o geocodigo que permite a geracao do mapa
 $xml1 = "";
 $xml2 = "";
-$nomesDimensoesOnde = array();
 foreach($regioes as $regiao){
 	$caminho = $m->hierarquiaPath($regiao["codigo_tipo_regiao"]);
-	$nomesDimensoesOnde[] = "codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"];
-	$nomesDimensoesOnde[] = "codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_geocod";
 	$xml1 .= "
 		<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='Onde:".converte($regiao["nome_tipo_regiao"])."'>
 			<Hierarchy hasAll='true'  primaryKey='codigo'>
@@ -176,6 +174,7 @@ foreach($regioes as $regiao){
 	$sql = "SELECT __COLUNAS__ FROM {$regiao['esquemadb']}.{$regiao['tabela']} AS regiao ";
 	$colunas[] = "regiao.{$regiao['identificador']} AS codigo ";
 	$colunas[] = "regiao.{$regiao['colunanomeregiao']} AS nome";
+	//$colunas[] = "regiao".$regiao['identificador'];
 	$tabelaAnt = "regiao";
 	for($i=0;$i<$n;$i++){
 		$r = $m->listaTipoRegiao($caminho[$i]);
@@ -187,12 +186,12 @@ foreach($regioes as $regiao){
 		$tabelaAnt = "j".$i;
 		$niveis1[] = "
 			<Level name='".converte($r["nome_tipo_regiao"])."'
-				column='j$i{$r['identificador']}'
+				column='{$r['identificador']}'
 				nameColumn='j$i{$r["colunanomeregiao"]}' uniqueMembers='false'/>
 		";
 		$niveis2[] = "
 			<Level name='".converte($r["nome_tipo_regiao"])." - GeoCod #{$caminho[$i]}'
-				column='j$i{$r['identificador']}'
+				column='{$r['identificador']}'
 				nameColumn='j$i{$r["identificador"]}' uniqueMembers='false'/>
 		";
 	}
@@ -264,15 +263,15 @@ foreach($dimOutras as $d){
 	$k = $p["esquemadb"]."_".$d["tabela"]."_".$d["coluna"];
 	$xml3 .= "
 		<Dimension name='".$k."' caption='".converte($d["nome"])."'>
-			<Hierarchy hasAll='true'  primaryKey='{$d["coluna"]}'>
+			<Hierarchy hasAll='true'  primaryKey='codigo'>
 	";
 	//cria uma view juntando as tabelas da hierarquia de regioes
-	$colunas = "dim.{$d['coluna']}, ";
+	$colunas = "dim.{$d['coluna']} as codigo, ";
 	$colunas .= "dim.{$d['coluna']} AS nome";
-	$sql = "SELECT {$colunas} FROM ".$d['esquemadb'].".".$d['tabela']." as dim group by ".$d['coluna'];
+	$sql = "SELECT {$colunas} FROM ".$d['esquemadb'].".".$d['tabela']." as dim group by codigo";
 	$xml3 .= "<view alias='".$k."' ><SQL dialect='generic' >$sql</SQL></view>";
 	$xml3 .= "<Level name='".converte($d["nome"])."'
-			column='{$d['coluna']}'
+			column='codigo'
 			nameColumn='nome' uniqueMembers='true' />
 	";
 	$xml3 .= "</Hierarchy>
@@ -315,7 +314,6 @@ foreach($tbs as $tb){
 	foreach($tb as $medida){
 		//echo "<pre>";var_dump($medida)."<br>";
 		$parametros = $m->listaParametro($medida["id_medida_variavel"],"","",false,false);
-
 		$parComposto = array(); //guarda a composicao da chave que liga com a dimensao
 		$colunaAdicionais = array();
 		//parametro do tipo tempo
@@ -345,6 +343,7 @@ foreach($tbs as $tb){
 			}
 		}
 	}
+	//$dimEnsoes[] = '<DimensionUsage foreignKey="coduf" name="codigo_tipo_regiao_2" source="codigo_tipo_regiao_2"/>';
 	$xml .= "
 	<Cube cache='false' name='{$c["esquemadb"]}{$c["tabela"]}'>";
 	$incluirChaves = array("*");
