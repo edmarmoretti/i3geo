@@ -198,7 +198,8 @@ foreach($regioes as $regiao){
 	$niveis1[] = "
 		<Level name='".converte($regiao["nome_tipo_regiao"])."'
 			column='codigo'
-			nameColumn='nome' uniqueMembers='true' />
+			nameColumn='nome' uniqueMembers='true' >
+		</Level>
 	";
 	$niveis2[] = "
 		<Level name='".converte($regiao["nome_tipo_regiao"])." - GeoCod #{$regiao["codigo_tipo_regiao"]}'
