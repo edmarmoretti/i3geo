@@ -212,6 +212,10 @@ botoesIni.push({
 	"href":"../documentacao",
 	"titulo":$trad(24,g_traducao_init)
 	},{
+	"img":"accessories-dictionary.png",
+	"href":"http://moodle.gvsig-training.com/course/view.php?id=11",
+	"titulo":$trad(28,g_traducao_init)
+	},{
 	"img":"tools-report-bug.png",
 	"href":"http://svn.softwarepublico.gov.br/trac/i3geo",
 	"titulo":$trad(16,g_traducao_init)
