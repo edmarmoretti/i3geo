@@ -121,6 +121,7 @@ $regiao = "";
 $item = "";
 $registros = "";
 //echo "<pre>";var_dump($regioes);exit;
+
 $xml = "<Schema name='i3Geo Metaestat'>";
 //cria as dimensoes de tipo temporal
 if(empty($saikuConfigDataSource['tabelaDimensaoTempo'])){
@@ -410,8 +411,9 @@ header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["l
 function converte($texto){
 	$texto = str_replace("&","&amp;",htmlentities($texto));
 	//$texto = htmlentities($texto);
-	//$texto = mb_convert_encoding($texto, 'UTF-8', mb_detect_encoding($texto));
+	//$texto = mb_convert_encoding($texto, 'ISO-8859-1', "auto");
 	//$texto = utf8_encode($texto);
+	//$textox = mb_convert_encoding($texto, "UTF-8", mb_detect_encoding($texto, "UTF-8, ISO-8859-1, ISO-8859-15", true));
 	return $texto;
 }
 ?>

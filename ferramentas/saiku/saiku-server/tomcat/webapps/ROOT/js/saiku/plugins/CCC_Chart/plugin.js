@@ -626,7 +626,7 @@ $(this.el).prepend(" | chart process");
 														this.data.metadata.push({
 																colIndex: 0,
 																colType: "String",
-																colName: firstHeader.join('/')
+																colName: converteHtmlEntities(firstHeader.join('/'))
 														});
 														lowest_level = field - 1;
 												}
@@ -640,7 +640,7 @@ $(this.el).prepend(" | chart process");
 														this.data.metadata.push({
 																colIndex: field - lowest_level + 1,
 																colType: "Numeric",
-																colName: colheader.join('/')
+																colName: converteHtmlEntities(colheader.join('/'))
 														});
 
 														data_start = row+1;
@@ -702,4 +702,13 @@ $(this.el).prepend(" | chart process");
 		}
 });
 
-
+function converteHtmlEntities(texto){
+	var s = ["á","ã","à","é","í","ó","õ","ú","ç","Á","Ã","À","É","Í","Ó","Õ","Ú","Ç"],
+		e = ["&aacute;","&atilde;","&agrave;","&eacute;","&iacute;","&oacute;","&otilde;","&uacute;","&ccedil;","&Aacute;","&Atilde;","&Agrave;","&Eacute;","&Iacute;","&Oacute;","&Otilde;","&Uacute;","&Ccedil;"],
+		n = e.length,
+		i;
+	for(i=0;i<n;i++){
+		texto = texto.replace(e[i],s[i]);
+	}
+	return texto;
+}
