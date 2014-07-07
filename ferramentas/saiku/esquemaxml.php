@@ -155,6 +155,16 @@ $xml .= "
 //dimensoes geograficas
 //as dimensoes sao duplicadas
 //uma delas contem o geocodigo que permite a geracao do mapa
+
+//guarda as regioes filhas de uma determinada regiao (chave)
+$filhosDaRegiao = array();
+$VirtualCubeDimensionDaRegiao = array();
+$VirtualCubeMeasureDaRegiao = array();
+foreach($regioes as $regiao){
+	$filhosDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
+	$VirtualCubeDimensionDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
+	$VirtualCubeMeasureDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
+}
 $xml1 = "";
 $xml2 = "";
 foreach($regioes as $regiao){
@@ -177,8 +187,12 @@ foreach($regioes as $regiao){
 	$colunas[] = "regiao.{$regiao['colunanomeregiao']} AS nome";
 	//$colunas[] = "regiao".$regiao['identificador'];
 	$tabelaAnt = "regiao";
+
 	for($i=0;$i<$n;$i++){
 		$r = $m->listaTipoRegiao($caminho[$i]);
+
+		array_push($filhosDaRegiao[$caminho[$i]],$regiao["codigo_tipo_regiao"]);
+
 		$colunas[] = "j$i.{$r['colunanomeregiao']} AS j$i{$r['colunanomeregiao']}";
 		$colunas[] = "j$i.{$r['identificador']}  AS j$i{$r['identificador']}";
 		$sql .= "INNER JOIN {$r['esquemadb']}.{$r['tabela']}
@@ -245,6 +259,7 @@ foreach($regioes as $regiao){
 		</Dimension>
 	";
 }
+//echo "<pre>";var_dump($filhosDaRegiao);exit;
 //outras dimensoes definidas nos parametros e que nao sejam do tipo tempo
 $parametros = $m->listaTodosParametros();
 $dimOutras = array();
@@ -310,6 +325,14 @@ foreach($tbs as $tb){
 	$VirtualCubeDimension[] = "
 		<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />
 	";
+	array_push(
+		$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
+		"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
+	);
+	array_push(
+		$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
+		"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />"
+	);
 	//verifica as dimensoes do tipo tempo
 	$dimEnsoes = array();
 	//echo "<pre>";var_dump($tb)."<br>";
@@ -326,11 +349,13 @@ foreach($tbs as $tb){
 				}
 			}
 			$VirtualCubeDimension[] = "
-							<VirtualCubeDimension name='Tempo' />
-						";
-			$dimEnsoes[] = "
-							<DimensionUsage foreignKey='".implode("_",$parComposto)."_' name='Tempo' source='Tempo'/>
-						";
+				<VirtualCubeDimension name='Tempo' />
+			";
+			$u = "
+				<DimensionUsage foreignKey='".implode("_",$parComposto)."_' name='Tempo' source='Tempo'/>
+			";
+			$dimEnsoes[] = $u;
+			array_push($VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],"<VirtualCubeDimension name='Tempo' />");
 		}
 		//outros parametros
 		$outrosParametros = array();
@@ -341,13 +366,15 @@ foreach($tbs as $tb){
 			if($parametro["tipo"] > 5 || $parametro["tipo"] == 0){
 				$outrosParametros[] = $k;
 				$VirtualCubeDimension[] = "<VirtualCubeDimension name='{$k}' />";
-				$dimEnsoes[] = "<DimensionUsage foreignKey='{$parametro["coluna"]}' name='nome' source='{$k}'/>";
+				$u = "<DimensionUsage foreignKey='{$parametro["coluna"]}' name='nome' source='{$k}'/>";
+				$dimEnsoes[] = $u;
+				array_push($VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],"<VirtualCubeDimension name='{$k}' />");
 			}
 		}
 	}
 	//$dimEnsoes[] = '<DimensionUsage foreignKey="coduf" name="codigo_tipo_regiao_2" source="codigo_tipo_regiao_2"/>';
 	$xml .= "
-	<Cube cache='false' name='{$c["esquemadb"]}{$c["tabela"]}'>";
+	<Cube cache='false' name='Tabela: {$c["esquemadb"]}{$c["tabela"]}'>";
 	$incluirChaves = array("*");
 
 	if(count($parComposto) > 0){
@@ -382,9 +409,11 @@ foreach($tbs as $tb){
 		$xml .= "
 			<Measure name='id_medida_variavel_".$medida["id_medida_variavel"]."' caption='".converte($medida["nomemedida"])."' column='".$medida["colunavalor"]."' aggregator='".$agregador."' />
 		";
-		$VirtualCubeMeasure[] = "
-			<VirtualCubeMeasure cubeName='{$c["esquemadb"]}{$c["tabela"]}' name='[Measures].[id_medida_variavel_".$medida["id_medida_variavel"]."]'/>
+		$u = "
+			<VirtualCubeMeasure cubeName='Tabela: {$c["esquemadb"]}{$c["tabela"]}' name='[Measures].[id_medida_variavel_".$medida["id_medida_variavel"]."]'/>
 		";
+		$VirtualCubeMeasure[] = $u;
+		array_push($VirtualCubeMeasureDaRegiao[$c["codigo_tipo_regiao"]],$u);
 	}
 	$xml .= "
 		</Cube>
@@ -396,6 +425,18 @@ $VirtualCubeMeasure = array_unique($VirtualCubeMeasure);
 $xml .= implode(" ",$VirtualCubeDimension);
 $xml .= implode(" ",$VirtualCubeMeasure);
 $xml .= '</VirtualCube>';
+//
+//cubos por regiao
+//
+//$filhosDaRegiao = array();
+//$VirtualCubeDimensionDaRegiao = array();
+//$VirtualCubeMeasureDaRegiao = array();
+foreach($regioes as $regiao){
+	$xml .= '<VirtualCube name="'.converte($regiao["nome_tipo_regiao"]).'" >';
+	$xml .= implode(" ",array_unique($VirtualCubeDimensionDaRegiao[$regiao["codigo_tipo_regiao"]]));
+	$xml .= implode(" ",array_unique($VirtualCubeMeasureDaRegiao[$regiao["codigo_tipo_regiao"]]));
+	$xml .= '</VirtualCube>';
+}
 $xml .= "</Schema>";
 error_reporting(0);
 ob_end_clean();
