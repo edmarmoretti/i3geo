@@ -4,7 +4,7 @@
 //
 //utilize &xmlesquema=  caso o XML ja exista
 //
-//http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?output=&xmlesquema=http://localhost/testemondrian.xml
+//http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?output=&xmlesquema=http://localhost/i3geo/ferramentas/saiku/testemondrian.xml
 //
 //quando o saiku e iniciado de fora do i3geo, e necessario inicializar um mapfile para uso como base dos mapas
 if(empty($_GET["g_sid"])){
@@ -169,6 +169,10 @@ if(empty($_GET["xmlesquema"])){
 	</Hierarchy>
 	</Dimension>
 	";
+	//global
+	$medidas = $m->listaMedidaVariavel();
+
+	//echo "<pre>";var_dump($regioesTabela);exit;
 	//dimensoes geograficas
 	//as dimensoes sao duplicadas
 	//uma delas contem o geocodigo que permite a geracao do mapa
@@ -184,7 +188,7 @@ if(empty($_GET["xmlesquema"])){
 	}
 	$xml1 = "";
 	$xml2 = "";
-	
+
 	foreach($regioes as $regiao){
 		$sqls = array();
 		$xml1 .= "
@@ -231,7 +235,7 @@ if(empty($_GET["xmlesquema"])){
 				//descobre a coluna de ligacao da regiao
 				$agr = $m->listaAgregaRegiaoFilho($regiaoAtual['codigo_tipo_regiao'],$r['codigo_tipo_regiao']);
 
-				$sql .= " JOIN {$r['esquemadb']}.{$r['tabela']} as b$i ON 
+				$sql .= " JOIN {$r['esquemadb']}.{$r['tabela']} as b$i ON
 					a$j.{$agr['colunaligacao_regiaopai']}::text = b$i.{$r['identificador']}::text
 				";
 			}
@@ -257,6 +261,7 @@ if(empty($_GET["xmlesquema"])){
 			uniqueMembers='".$unico."' />
 			";
 			$unico = "false";
+
 			$regiaoAtual = $m->listaTipoRegiao($caminho[$j]);
 		}
 		//echo "<pre>";echo implode("UNION\n\n",$sqls);exit;
@@ -319,7 +324,7 @@ if(empty($_GET["xmlesquema"])){
 	}
 	$xml .= $xml1.$xml2.$xml3;
 	//junta as medidas conforme o nome da tabela utilizada
-	$medidas = $m->listaMedidaVariavel();
+
 	//var_dump($medidas);exit;
 	$tbs = array();
 	//echo $codigo_tipo_regiao;exit;
@@ -338,16 +343,18 @@ if(empty($_GET["xmlesquema"])){
 	//monta os cubos para cada esquema.tabela diferente
 	$VirtualCubeDimension = array();
 	$VirtualCubeMeasure = array();
-	//echo "<pre>";var_dump($tbs)."<br>";exit;
+
 	foreach($tbs as $tb){
 		//cabecalho de cada cubo obtido da primeira medida
 		$c = $tb[0];
+
 		$VirtualCubeDimension[] = "
 		<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />
 		";
 		$VirtualCubeDimension[] = "
 		<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />
 		";
+
 		array_push(
 				$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
 				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
@@ -395,8 +402,8 @@ if(empty($_GET["xmlesquema"])){
 			}
 		}
 		//$dimEnsoes[] = '<DimensionUsage foreignKey="coduf" name="codigo_tipo_regiao_2" source="codigo_tipo_regiao_2"/>';
-		$xml .= "
-		<Cube cache='false' name='Tabela: {$c["esquemadb"]}{$c["tabela"]}'>";
+
+		$xml .= "<Cube cache='false' name='Tabela: {$c["esquemadb"]}{$c["tabela"]}'>";
 		$incluirChaves = array("*");
 
 		if(count($parComposto) > 0){
@@ -410,11 +417,19 @@ if(empty($_GET["xmlesquema"])){
 		}
 
 		$sql = "select ".implode(",",$incluirChaves).",{$c["colunaidgeo"]}::text as codigodim from {$c["esquemadb"]}.{$c["tabela"]}";
+		//a tabela pode ter dimensoes em diferentes hierarquias
 		$xml .= "
 		<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
 		<DimensionUsage foreignKey='codigodim' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."'/>
 		<DimensionUsage foreignKey='codigodim' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."_geocod' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."_geocod'/>
 		";
+		//inclui as dimensoes filhas
+		foreach($filhosDaRegiao[$c["codigo_tipo_regiao"]] as $fr){
+			$xml .= "
+				<DimensionUsage foreignKey='codigodim' name='codigo_tipo_regiao_".$fr."' source='codigo_tipo_regiao_".$fr."'/>
+				<DimensionUsage foreignKey='codigodim' name='codigo_tipo_regiao_".$fr."_geocod' source='codigo_tipo_regiao_".$fr."_geocod'/>
+			";
+		}
 
 		$xml .= implode(" ",array_unique($dimEnsoes));
 
@@ -439,7 +454,9 @@ if(empty($_GET["xmlesquema"])){
 		$xml .= "
 		</Cube>
 		";
+
 	}
+
 	$xml .= '<VirtualCube name="Todas as medidas" >';
 	$VirtualCubeDimension = array_unique($VirtualCubeDimension);
 	$VirtualCubeMeasure = array_unique($VirtualCubeMeasure);
