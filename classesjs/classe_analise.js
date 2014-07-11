@@ -39,19 +39,19 @@ if (typeof (i3GEO) === 'undefined') {
 i3GEO.analise = {
 	/**
 	 * Classe: i3GEO.analise.dialogo
-	 * 
+	 *
 	 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de an&aacute;lise
-	 * 
+	 *
 	 * Exemplo:
-	 * 
+	 *
 	 * Para abrir a mensagem de di&aacute;logo de gera&ccedil;&atilde;o de buffer, utilize
-	 * 
+	 *
 	 * i3GEO.analise.dialogo.buffer()
 	 */
 	dialogo : {
 		/**
 		 * Function: heatmap
-		 * 
+		 *
 		 * Ferramenta mapa de calor
 		 */
 		heatmap : function() {
@@ -62,7 +62,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: saiku
-		 * 
+		 *
 		 * Ferramenta SAIKU
 		 */
 		saiku : function() {
@@ -72,7 +72,7 @@ i3GEO.analise = {
 				"saiku");
 		},
 		/**
-		 * 
+		 *
 		 * Ferramenta graficointerativo versao flash
 		 */
 		graficoInterativo : function() {
@@ -83,7 +83,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: graficoInterativo1
-		 * 
+		 *
 		 * Ferramenta gr&aacute;fico interativo
 		 */
 		graficoInterativo1 : function() {
@@ -94,7 +94,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: linhaDoTempo
-		 * 
+		 *
 		 * Ferramenta linha do tempo
 		 */
 		linhaDoTempo : function() {
@@ -117,35 +117,37 @@ i3GEO.analise = {
 				true,
 				i3GEO.configura.locaplic
 						+ "/imagens/oxygen/16x16/clock.png");
-			atualizaLinhaDoTempo = function() {
+			i3GEO.analise.atualizaLinhaDoTempo = function() {
 				var doc = "", ifr = "";
 				try {
-					ifr = $i("wdocai");
+					ifr = $i("i3GEOF.linhaDoTempoi");
 					if (navn) {
 						if (ifr) {
 							doc = ifr.contentDocument;
 						}
 					} else {
-						if (document.frames("wdocai")) {
-							doc = document.frames("wdocai").document;
+						if (document.frames("i3GEOF.linhaDoTempoi")) {
+							doc = document.frames("i3GEOF.linhaDoTempoi").document;
 						}
 					}
-					doc.getElementById("tl") ? window.parent.wdocai.carregaDados() : i3GEO.eventos.NAVEGAMAPA.remove("atualizaLinhaDoTempo()");
+					doc.getElementById("tl") ? window.parent["i3GEOF.linhaDoTempoi"].carregaDados() : i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.analise.atualizaLinhaDoTempo()");
 				} catch (e) {
-					i3GEO.eventos.NAVEGAMAPA.remove("atualizaLinhaDoTempo()");
+					i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.analise.atualizaLinhaDoTempo()");
 				}
 			};
 			if (i3GEO.eventos.NAVEGAMAPA.toString().search(
-				"atualizaLinhaDoTempo()") < 0) {
-				i3GEO.eventos.NAVEGAMAPA.push("atualizaLinhaDoTempo()");
+				"i3GEO.analise.atualizaLinhaDoTempo()") < 0) {
+				i3GEO.eventos.NAVEGAMAPA.push("i3GEO.analise.atualizaLinhaDoTempo()");
 			}
-			var ifr = $i("wdocai");
+			var ifr = $i("i3GEOF.linhaDoTempoi");
 			// ifr.style.height = "75%";
-			ifr.style.width = "100%";
+			if(ifr){
+				ifr.style.width = "100%";
+			}
 		},
 		/**
 		 * Function: perfil
-		 * 
+		 *
 		 * Ferramenta perfil
 		 */
 		perfil : function() {
@@ -156,7 +158,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: gradePontos
-		 * 
+		 *
 		 * Ferramenta grade de pontos
 		 */
 		gradePontos : function() {
@@ -167,7 +169,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: gradePol
-		 * 
+		 *
 		 * Ferramenta grade de pol&iacute;gonos
 		 */
 		gradePol : function() {
@@ -178,7 +180,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: gradeHex
-		 * 
+		 *
 		 * Ferramenta grade de hex&aacute;gonos
 		 */
 		gradeHex : function() {
@@ -189,7 +191,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: analisaGeometrias
-		 * 
+		 *
 		 * Ferramenta de an&aacute;lise de geometrias
 		 */
 		analisaGeometrias : function() {
@@ -200,7 +202,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: pontosdistri
-		 * 
+		 *
 		 * Ferramenta de c&aacute;lculo de distribui&ccedil;&atilde;o de pontos
 		 */
 		pontosdistri : function() {
@@ -211,7 +213,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: pontoempoligono
-		 * 
+		 *
 		 * Ferramenta ponto em pol&iacute;gono
 		 */
 		pontoempoligono : function() {
@@ -222,7 +224,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: centromassa
-		 * 
+		 *
 		 * Ferramenta centro m&eacute;dio
 		 */
 		centromassa : function() {
@@ -233,7 +235,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: nptPol
-		 * 
+		 *
 		 * Ferramenta n&uacute;mero de pontos em pol&iacute;gono
 		 */
 		nptPol : function() {
@@ -244,7 +246,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: buffer
-		 * 
+		 *
 		 * Ferramenta buffer
 		 */
 		buffer : function() {
@@ -255,7 +257,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: distanciaptpt
-		 * 
+		 *
 		 * Ferramenta dist&acirc;ncia entre pontos
 		 */
 		distanciaptpt : function() {
@@ -266,7 +268,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: centroide
-		 * 
+		 *
 		 * Ferramenta centr&oacute;ide
 		 */
 		centroide : function() {
@@ -277,7 +279,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: dissolve
-		 * 
+		 *
 		 * Ferramenta dissolve bordas comuns
 		 */
 		dissolve : function() {
@@ -288,7 +290,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: agrupaElementos
-		 * 
+		 *
 		 * Ferramenta agrupa elementos
 		 */
 		agrupaElementos : function() {
@@ -299,8 +301,8 @@ i3GEO.analise = {
 		}
 	},
 	/***************************************************************************
-	 * Class: medeDistancia 
-	 * 
+	 * Class: medeDistancia
+	 *
 	 * Ativa e controla a op&ccedil;&atilde;o de medi&ccedil;&atilde;o de
 	 * dist&acirc;ncias. A medida &eacute; feita quando o usu&aacute;rio clica no mapa com esta
 	 * op&ccedil;&atilde;o ativa. Quando o bot&atilde;o e acionado, abre-se a janela que mostra o
@@ -314,7 +316,7 @@ i3GEO.analise = {
 		pontos : {},
 		/***********************************************************************
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a opera&ccedil;&atilde;o de medi&ccedil;&atilde;o, abrindo a janela de resultados e
 		 * criando os componentes necess&aacute;rios. S&atilde;o registrados os eventos de
 		 * clique sobre o mapa e fechamento da janela de resultados
@@ -1139,14 +1141,14 @@ i3GEO.analise = {
 	},
 	/**
 	 * Class: medeArea
-	 * 
+	 *
 	 * Ativa e controla a op&atilde;o de medi&ccedil;&atilde;o de &aacute;rea.
-	 * 
+	 *
 	 * A medida &eacute; feita quando o usu&aacute;rio clica no mapa com esta op&ccedil;&atilde;o ativa
-	 * 
+	 *
 	 * Quando o bot&atilde;o &eacute; acionado, abre-se a janela que mostra o resultado da
 	 * medida, o &iacute;cone que segue o mouse &eacute; alterado.
-	 * 
+	 *
 	 * Para mostrar o resultado do cálculo, é incluido um div específico.
 	 */
 	medeArea : {
@@ -1156,10 +1158,10 @@ i3GEO.analise = {
 		pontos : {},
 		/**
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a opera&ccedil;&atilde;o de medi&ccedil;&atilde;o, abrindo a janela de resultados e
 		 * criando os componentes necess&aacute;rios
-		 * 
+		 *
 		 * S&atilde;o registrados os eventos de clique sobre o mapa e fechamento da
 		 * janela de resultados
 		 */
@@ -1218,7 +1220,7 @@ i3GEO.analise = {
 		},
 		/**
 		 * Function: fechaJanela
-		 * 
+		 *
 		 * Fecha a janela e os elementos graficos criados para a ferramenta de
 		 * medicao
 		 */
