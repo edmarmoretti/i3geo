@@ -4,82 +4,253 @@
 //
 //utilize &xmlesquema=  caso o XML ja exista
 //
-//http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?output=&xmlesquema=http://localhost/i3geo/ferramentas/saiku/testemondrian.xml
+//utilize $regiao para obter o xml de uma so regiao
+//
+/**
+http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?output=&xmlesquema=http://localhost/i3geo/ferramentas/saiku/testemondrian.xml&output=xml
+http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?xmlesquema=&output=xml&regiao=1
+*/
+
 //
 //quando o saiku e iniciado de fora do i3geo, e necessario inicializar um mapfile para uso como base dos mapas
-if(empty($_GET["g_sid"])){
-	include(dirname(__FILE__)."/../../ms_criamapa.php");
-	//reinicia a url
-	$urln = "?g_sid=".session_id()."&locaplic=".$_GET["locaplic"]."&mapext=".$mapext."&origem=".$_GET["origem"]."&output=".$_GET["output"]."&xmlesquema=".$_GET["xmlesquema"];
-	header("Location:".$urln);
-	exit;
-}
+//
+criaMapfileInicial();
 
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
 if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
 }
-$nomeConexao = nomeRandomico();
-$nomeDatasource = $dir_tmp."/saiku-datasources/".$nomeConexao;
 
-//pega a sessao PHP aberta pelo i3Geo ou ms_criamapa.php
-session_name("i3GeoPHP");
-session_id($_GET["g_sid"]);
-session_start();
+$urlXmlEsquema = "";
+$nomeConexao = criaConexaoEsquema();
+
 $map_file = $_SESSION["map_file"];
-if(empty($_GET["xmlesquema"])){
-	$urlXmlEsquema = $_SESSION["tmpurl"].basename(dirname($map_file))."/".$nomeConexao.".xml";
-}
-else{
-	$urlXmlEsquema = $_GET["xmlesquema"];
-}
+
 $arquivoXmlEsquema = dirname($map_file)."/".$nomeConexao.".xml";
 
-/*
- $saikuConfigDataSource vem do ms_configura.php
+gravaDataSource();
 
-Exemplo de arquivo de fonte:
-type=OLAP
-name=i3geo
-driver=mondrian.olap4j.MondrianOlap4jDriver
-location=jdbc:mondrian:Jdbc=jdbc:postgresql://localhost:5432/i3geosaude;Catalog=http://localhost/i3geo/ferramentas/saiku/esquemaxml.php;JdbcDrivers=org.postgresql.Driver;
-username=postgres
-password=postgres
+if(!empty($_GET["xmlesquema"])){
+	imprimeEsquema();
+}
 
-Array com os parametros definidos em ms_configura:
+$m = new Metaestat();
 
-$saikuConfigDataSource = array(
-		"type"=>"OLAP",
-		"driver"=>"mondrian.olap4j.MondrianOlap4jDriver",
-		"location"=>"jdbc:mondrian:Jdbc=jdbc:postgresql",
-		"serverdb"=>"localhost",
-		"port"=>"5432",
-		"database"=>"i3geosaude",
-		"JdbcDrivers"=>"org.postgresql.Driver",
-		"username"=>"postgres",
-		"password"=>"postgres"
-);
-*/
-$stringDatasource = "
-type={$saikuConfigDataSource["type"]}
-name={$nomeConexao}
-driver={$saikuConfigDataSource["driver"]}
-location={$saikuConfigDataSource["location"]}://{$saikuConfigDataSource["serverdb"]}:{$saikuConfigDataSource["port"]}/{$saikuConfigDataSource["database"]};Catalog={$urlXmlEsquema};JdbcDrivers={$saikuConfigDataSource["JdbcDrivers"]};
-username={$saikuConfigDataSource["username"]}
-password={$saikuConfigDataSource["password"]}
-";
-//salva o arquivo com a fonte
-gravaDados(array($stringDatasource),$nomeDatasource);
+//
+//obtem do mapfile em uso os layers que sao do sistema metaestat, sao regioes e que possuem selecao
+//
+if(empty($_GET["regiao"])){
+	$s = pegaSelecaoRegioes();
+	$selecaoRegiao = $s["selecaoRegiao"];
+	$codigo_tipo_regiao = $s["codigo_tipo_regiao"];
+}
+else{
+	$codigo_tipo_regiao = $_GET["regiao"];
+}
+//verifica se o cubo usa uma regiao especifica ou todas
+if($codigo_tipo_regiao == ""){
+	$regioes = $m->listaTipoRegiao();
+}
+else{
+	$regioes = array($m->listaTipoRegiao($codigo_tipo_regiao));
+}
+$s = "";
 
-if(empty($_GET["xmlesquema"])){
-	$m = new Metaestat();
+if(empty($saikuConfigDataSource['tabelaDimensaoTempo'])){
+	$saikuConfigDataSource['tabelaDimensaoTempo'] = "i3geo_metaestat.dim_tempo";
+}
 
-	//
-	//obtem do mapfile em uso os layers que sao do sistema metaestat, sao regioes e que possuem selecao
-	//
-	$selecaoRegiao = array();
+$medidas = $m->listaMedidaVariavel();
+
+//
+//formata o array de regioes colocando na chave o codigo da regiao
+//
+$chavesRegiao = array();
+$todasAsRegioes = $m->listaTipoRegiao();
+foreach($todasAsRegioes as $R){
+	$chavesRegiao[$R["codigo_tipo_regiao"]] = $R;
+}
+
+//inicia montagem do XML
+
+//
+//cria as dimensoes de tipo temporal
+//
+$xmlTempo = dimensoesTemporais();
+
+//
+//dimensoes geograficas
+//as dimensoes sao duplicadas
+//uma delas contem o geocodigo que permite a geracao do mapa
+//
+//guarda as regioes filhas de uma determinada regiao (chave)
+$filhosDaRegiao = array();
+$VirtualCubeDimensionDaRegiao = array();
+$VirtualCubeMeasureDaRegiao = array();
+
+$dimRegioes = dimensoesGeo();
+
+//var_dump(array_column($dimRegioes,"juncoes","codigo_tipo_regiao"));exit;
+
+$xmlRegioes = implode(" ",array_column($dimRegioes,"xml"));
+
+//
+//outras dimensoes definidas nos parametros e que nao sejam do tipo tempo
+//
+$xmlOutrasDim = dimensoesOutras();
+
+//
+//cria as dimensoes das medidas conforme o nome da tabela utilizada
+//
+$VirtualCubeDimension = array();
+$VirtualCubeMeasure = array();
+$xmlDimensoesTabelas = dimensoesTabelas();
+
+//
+//cubo geral, com todas as dimensoes e medidas
+//
+$xmlCuboTodas = cuboTodas();
+//
+//cubos por regiao
+//
+$xmlCuboRegioes = cuboRegioes();
+
+$xml = "<Schema name='i3Geo Metaestat'>";
+$xml .= $xmlTempo.$xmlRegioes.$xmlOutrasDim.$xmlDimensoesTabelas.$xmlCuboRegioes.$xmlCuboTodas;
+$xml .= "</Schema>";
+
+//xml pronto!!!!!
+
+error_reporting(0);
+ob_end_clean();
+//
+//grava os dados em um arquivo. O usuario pode evitar isso e imprimir direto na tela
+//usando output "xml"
+//
+if($_GET["output"] != "xml"){
+	gravaDados(array($xml),$arquivoXmlEsquema);
+}
+imprimeEsquema();
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+function caminhoRegiao($hs,$chavesRegiao,$h,$regiaoInicial,$caminho)
+{
+	foreach($hs as $n){
+		if($n["codigo_tipo_regiao"] == $regiaoInicial){
+			$caminho[] = array("a"=>$regiaoInicial,"join"=>$n["codigo_tipo_regiao_pai"],"ligacao"=>$n["colunaligacao_regiaopai"]);
+			$caminho = caminhoRegiao($hs,$chavesRegiao,$h, $n["codigo_tipo_regiao_pai"],$caminho);
+		}
+		else{
+			//$caminho = caminhoRegiao($hs,$chavesRegiao,$h, $n["codigo_tipo_regiao_pai"],$caminho);
+		}
+	}
+	return $caminho;
+}
+function converte($texto){
+	$texto = str_replace("&","&amp;",htmlentities($texto));
+	return $texto;
+}
+function imprimeEsquema(){
+	global $saikuUrl,$nomeConexao,$xml;
+	if($_GET["output"] == "xml"){
+		if(!empty($_GET["xmlesquema"])){
+			echo header("Content-type: application/xml");
+			header("Location:".$_GET["xmlesquema"]);
+		}
+		else{
+			imprimeXml($xml);
+		}
+	}
+	else{
+		header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]."&mapext=".$_GET["mapext"]."&origem=".$_GET["origem"]."&regiao=".$_GET["regiao"]);
+	}
+}
+function imprimeXml($xml){
+	echo header("Content-type: application/xml");
+	echo $xml;
+}
+function criaMapfileInicial(){
+	global $mapext;
+	if(empty($_GET["g_sid"])){
+		include(dirname(__FILE__)."/../../ms_configura.php");
+		$interface = "mashup";
+		include(dirname(__FILE__)."/../../ms_criamapa.php");
+
+		//reinicia a url
+		$urln = "?g_sid=".session_id()."&locaplic=".$_GET["locaplic"]."&mapext=".$mapext."&origem=".$_GET["origem"]."&output=".$_GET["output"]."&xmlesquema=".$_GET["xmlesquema"]."&regiao=".$_GET["regiao"];
+		header("Location:".$urln);
+		exit;
+	}
+}
+function criaConexaoEsquema(){
+	global $dir_tmp, $urlXmlEsquema;
+	$nomeConexao = nomeRandomico();
+	//pega a sessao PHP aberta pelo i3Geo ou ms_criamapa.php
+	session_name("i3GeoPHP");
+	session_id($_GET["g_sid"]);
+	session_start();
+	$map_file = $_SESSION["map_file"];
+	if(empty($_GET["xmlesquema"])){
+		$urlXmlEsquema = $_SESSION["tmpurl"].basename(dirname($map_file))."/".$nomeConexao.".xml";
+	}
+	else{
+		$urlXmlEsquema = $_GET["xmlesquema"];
+		//cria um nome de arquivo reaproveitável
+		$nomeConexao = md5($_GET["xmlesquema"]);
+	}
+	//$arquivoXmlEsquema = dirname($map_file)."/".$nomeConexao.".xml";
+	return $nomeConexao;
+}
+function gravaDataSource(){
+	/*
+	 $saikuConfigDataSource vem do ms_configura.php
+
+	Exemplo de arquivo de fonte:
+	type=OLAP
+	name=i3geo
+	driver=mondrian.olap4j.MondrianOlap4jDriver
+	location=jdbc:mondrian:Jdbc=jdbc:postgresql://localhost:5432/i3geosaude;Catalog=http://localhost/i3geo/ferramentas/saiku/esquemaxml.php;JdbcDrivers=org.postgresql.Driver;
+	username=postgres
+	password=postgres
+
+	Array com os parametros definidos em ms_configura:
+
+	$saikuConfigDataSource = array(
+			"type"=>"OLAP",
+			"driver"=>"mondrian.olap4j.MondrianOlap4jDriver",
+			"location"=>"jdbc:mondrian:Jdbc=jdbc:postgresql",
+			"serverdb"=>"localhost",
+			"port"=>"5432",
+			"database"=>"i3geosaude",
+			"JdbcDrivers"=>"org.postgresql.Driver",
+			"username"=>"postgres",
+			"password"=>"postgres"
+	);
+	*/
+	global $arquivoXmlEsquema,$saikuConfigDataSource,$nomeConexao,$urlXmlEsquema,$dir_tmp;
+	$nomeDatasource = $dir_tmp."/saiku-datasources/".$nomeConexao;
+	if(!file_exists($arquivoXmlEsquema)){
+		$stringDatasource = "
+		type={$saikuConfigDataSource["type"]}
+		name={$nomeConexao}
+		driver={$saikuConfigDataSource["driver"]}
+		location={$saikuConfigDataSource["location"]}://{$saikuConfigDataSource["serverdb"]}:{$saikuConfigDataSource["port"]}/{$saikuConfigDataSource["database"]};Catalog={$urlXmlEsquema};JdbcDrivers={$saikuConfigDataSource["JdbcDrivers"]};
+		username={$saikuConfigDataSource["username"]}
+		password={$saikuConfigDataSource["password"]}
+		";
+		//salva o arquivo com a fonte
+		gravaDados(array($stringDatasource),$nomeDatasource);
+	}
+}
+function pegaSelecaoRegioes(){
+	global $m,$map_file,$postgis_mapa;
 	$codigo_tipo_regiao = "";
+	$selecaoRegiao = array();
+	$regiao = "";
+	$item = "";
+	$registros = "";
 	if($map_file != ""){
 		$mapa = ms_newMapObj($map_file);
 		$c = $mapa->numlayers;
@@ -126,28 +297,18 @@ if(empty($_GET["xmlesquema"])){
 				}
 			}
 		}
+		return array(
+			"selecaoRegiao"=>$selecaoRegiao,
+			"codigo_tipo_regiao"=>$codigo_tipo_regiao
+		);
 	}
-	if($codigo_tipo_regiao == ""){
-		$regioes = $m->listaTipoRegiao();
-	}
-	else{
-		$regioes = array($m->listaTipoRegiao($codigo_tipo_regiao));
-	}
-	//echo "<pre>";var_dump($regioes);exit;
-	$regiao = "";
-	$item = "";
-	$registros = "";
-	//echo "<pre>";var_dump($regioes);exit;
-
-	$xml = "<Schema name='i3Geo Metaestat'>";
-	//cria as dimensoes de tipo temporal
-	if(empty($saikuConfigDataSource['tabelaDimensaoTempo'])){
-		$saikuConfigDataSource['tabelaDimensaoTempo'] = "i3geo_metaestat.dim_tempo";
-	}
+}
+function dimensoesTemporais(){
+	global $saikuConfigDataSource;
 	$sqlAno = "select nu_ano from ".$saikuConfigDataSource['tabelaDimensaoTempo']." group by nu_ano order by nu_ano";
 	$sqlMes = "select nu_ano::text,nu_mes::text,ds_mes_abreviado as mes,COALESCE (nu_ano::text||'-'||nu_mes::text,nu_ano::text) as nu_anomes from ".$saikuConfigDataSource['tabelaDimensaoTempo']." group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes";
 	//dimensoes temporais
-	$xml .= "
+	$xml = "
 	<Dimension name='Anual' type='TimeDimension' caption='Tempo: Anual'>
 	<Hierarchy hasAll='true' primaryKey='nu_ano'>
 	<view alias='tempo_ano' ><SQL dialect='generic' >$sqlAno</SQL></view>
@@ -169,113 +330,171 @@ if(empty($_GET["xmlesquema"])){
 	</Hierarchy>
 	</Dimension>
 	";
-	//global
-	$medidas = $m->listaMedidaVariavel();
+	return $xml;
+}
+function sqlDasRegioes($regiao,$caminho,$chavesRegiao){
+	$select = "SELECT tabela{$regiao["codigo_tipo_regiao"]}.{$regiao["identificador"]}::text as codigo, __COLUNAS__ FROM {$regiao['esquemadb']}.{$regiao['tabela']} as tabela{$regiao["codigo_tipo_regiao"]} \n";
+	$selectPrincipal = "";
+	$juncoes = "";
+	$colunas = array();
+	$nomesColunas = array();
+	$codRegioes = array();
+	$ncaminhos = count($caminho);
+	if($ncaminhos > 0){
+		foreach($caminho as $c){
+			$regiaoAnterior = $chavesRegiao[$c["a"]];
+			$tabelaAnterior = "tabela".$regiaoAnterior["codigo_tipo_regiao"];
+			$colunaLigacaoAnterior = $c["ligacao"];
 
-	//echo "<pre>";var_dump($regioesTabela);exit;
-	//dimensoes geograficas
-	//as dimensoes sao duplicadas
-	//uma delas contem o geocodigo que permite a geracao do mapa
+			$colunas[] = $tabelaAnterior.".".$regiaoAnterior["identificador"]. "::text AS codigo".$regiaoAnterior["codigo_tipo_regiao"];
+			$colunas[] = $tabelaAnterior.".".$regiaoAnterior["colunanomeregiao"]. "::text AS nome".$regiaoAnterior["codigo_tipo_regiao"];
 
-	//guarda as regioes filhas de uma determinada regiao (chave)
-	$filhosDaRegiao = array();
-	$VirtualCubeDimensionDaRegiao = array();
-	$VirtualCubeMeasureDaRegiao = array();
+			$regiaoJoin = $chavesRegiao[$c["join"]];
+			$tabelaAtual = "tabela".$regiaoJoin["codigo_tipo_regiao"];
+			$colunaLigacaoAtual = $regiaoJoin["identificador"];
+
+			$colunas[] = $tabelaAtual.".".$regiaoJoin["identificador"]. "::text AS codigo".$regiaoJoin["codigo_tipo_regiao"];
+			$colunas[] = $tabelaAtual.".".$regiaoJoin["colunanomeregiao"]. "::text AS nome".$regiaoJoin["codigo_tipo_regiao"];
+
+			$nomesColunas[] = " codigo".$regiaoJoin["codigo_tipo_regiao"];
+			$nomesColunas[] = " nome".$regiaoJoin["codigo_tipo_regiao"];
+
+			$juncoes .= " JOIN {$regiaoJoin['esquemadb']}.{$regiaoJoin['tabela']} as $tabelaAtual ON
+				$tabelaAtual.$colunaLigacaoAtual::text = $tabelaAnterior.$colunaLigacaoAnterior::text
+			";
+			$codRegioes[] = $regiaoJoin["codigo_tipo_regiao"];
+		}
+		$colunas = array_unique($colunas);
+	}
+	else{
+		$colunas[] = $regiao["identificador"]. "::text AS codigo".$regiao["codigo_tipo_regiao"];
+		$colunas[] = $regiao["colunanomeregiao"]. "::text AS nome".$regiao["codigo_tipo_regiao"];
+
+		$nomesColunas[] = " codigo".$regiao["codigo_tipo_regiao"];
+		$nomesColunas[] = " nome".$regiao["codigo_tipo_regiao"];
+
+		$codRegioes[] = $regiao["codigo_tipo_regiao"];
+	}
+	$mascara = $select;
+	$select = str_replace("__COLUNAS__",implode(",",$colunas),$select);
+	$selectPricipal = $select;
+	$select .= $juncoes;
+	return array("codRegioes"=>$codRegioes,"juncoes"=>$juncoes,"mascara"=>$mascara,"principal"=>$selectPricipal,"select"=>$select,"colunas"=>$colunas,"nomesColunas"=>$nomesColunas);
+}
+
+function dimensoesGeo(){
+	global $chavesRegiao, $m, $selecaoRegiao, $regioes, $filhosDaRegiao, $VirtualCubeDimensionDaRegiao, $VirtualCubeMeasureDaRegiao;
+	//essas variaveis sao globais e usadas em outras funcoes
 	foreach($regioes as $regiao){
 		$filhosDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
 		$VirtualCubeDimensionDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
 		$VirtualCubeMeasureDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
 	}
+	//xml normal
 	$xml1 = "";
+	//xml geocodigo
 	$xml2 = "";
-
-	foreach($regioes as $regiao){
+	//
+	//sera que e todas mesmo ou so a escolhida?????
+	//
+	$todasRegioes = $m->listaTipoRegiao();
+	$xmlRegioes = array();
+	foreach($todasRegioes as $regiao){
 		$sqls = array();
-		$xml1 .= "
-		<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='Onde:".converte($regiao["nome_tipo_regiao"])."'>
-		<Hierarchy hasAll='true'  primaryKey='codigo'>
+		$temp = converte($regiao["nome_tipo_regiao"]);
+		$xml1 = "
+			<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='Onde:".$temp."'>
+			<Hierarchy hasAll='true'  primaryKey='codigo{$regiao["codigo_tipo_regiao"]}'>
 		";
-		$xml2 .= "
-		<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_geocod' caption='GeoCod:".converte($regiao["nome_tipo_regiao"])."'>
-		<Hierarchy hasAll='true'  primaryKey='codigo'>
+		$xml2 = "
+			<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_geocod' caption='GeoCod:".$temp."'>
+			<Hierarchy hasAll='true'  primaryKey='codigo{$regiao["codigo_tipo_regiao"]}'>
 		";
+		//
 		//cria uma view juntando as tabelas da hierarquia de regioes
-		$caminho = $m->hierarquiaPath($regiao["codigo_tipo_regiao"]);
-		//$caminho[] = $regiao["codigo_tipo_regiao"];
-
-		$n = count($caminho);
-		$regiaoAtual = $regiao;
-		$niveis1 = array();
-		$niveis2 = array();
-		$unico = "true";
-		for($j=0;$j<=$n;$j++){
-			$colunas = array();
-			$sql = "SELECT __COLUNAS__ FROM {$regiaoAtual['esquemadb']}.{$regiaoAtual['tabela']} as a$j ";
-			$colunas[] = "a$j.{$regiaoAtual['identificador']}::text as codigo ";
-			//inclui campos vazios na sequencia de campos
-			for($k=0;$k<$j;$k++){
-				$colunas[] = "''";
-				$colunas[] = "''";
+		//
+		$hs = $m->listaHierarquia();
+		//$regiao["codigo_tipo_regiao"] = 2;
+		foreach($hs as $h){
+			if($h["codigo_tipo_regiao"] == $regiao["codigo_tipo_regiao"]){
+				$caminho = caminhoRegiao($hs,$chavesRegiao,$h,$regiao["codigo_tipo_regiao"]);
 			}
+		}
+		//
+		//sql da tabela principal da regiao
+		//
+		$dadosSelect = sqlDasRegioes($regiao,$caminho,$chavesRegiao);
+		//
+		//pega os dados das demais tabelas associadas, menos da primeira
+		//para unir os dados
+		//
+		$niveisXml1 = array();
+		$niveisXml2 = array();
 
-			$colunas[] = "a$j.{$regiaoAtual['identificador']}::text AS  {$regiaoAtual['identificador']} ";
-			$colunas[] = "a$j.{$regiaoAtual['colunanomeregiao']}::text AS {$regiaoAtual['colunanomeregiao']} ";
-
-			for($i=$j;$i<$n;$i++){
-				$r = $m->listaTipoRegiao($caminho[$i]);
-
-				if(count($colunas) > ($j + 4)){
-					$colunas[] = "''::text AS {$r['identificador']} ";
-					$colunas[] = "''::text AS {$r['colunanomeregiao']} ";
-				}
-				else{
-					$colunas[] = "b$i.{$r['identificador']}::text AS {$r['identificador']} ";
-					$colunas[] = "b$i.{$r['colunanomeregiao']}::text AS {$r['colunanomeregiao']} ";
-				}
-				//descobre a coluna de ligacao da regiao
-				$agr = $m->listaAgregaRegiaoFilho($regiaoAtual['codigo_tipo_regiao'],$r['codigo_tipo_regiao']);
-
-				$sql .= " JOIN {$r['esquemadb']}.{$r['tabela']} as b$i ON
-					a$j.{$agr['colunaligacao_regiaopai']}::text = b$i.{$r['identificador']}::text
-				";
-			}
-
-			$colunas = implode($colunas,",");
-			$sql = str_replace("__COLUNAS__",$colunas,$sql);
-			//inclui a selecao se houver
-			if(!empty($selecaoRegiao[$regiaoAtual["codigo_tipo_regiao"]])){
-				$rs = $selecaoRegiao[$regiaoAtual["codigo_tipo_regiao"]];
-			}
-			$pos = strpos($sql, "regiao.".$rs["item"]." ");
-			if($rs != "" || !$pos === false){
-				$sql .= " WHERE regiao.".$rs["sql"];
-			}
-			$sqls[] = $sql;
-
-			$niveis1[] = "
-			<Level name='".converte($regiaoAtual["nome_tipo_regiao"])."' column='".$regiaoAtual["colunanomeregiao"]."' nameColumn='".$regiaoAtual["colunanomeregiao"]."'
-			uniqueMembers='".$unico."' />
+		$temp = converte($regiao["nome_tipo_regiao"]);
+		$niveisXml1[] = "
+			<Level name='".$temp."' column='codigo{$regiao["codigo_tipo_regiao"]}' nameColumn='nome".$regiao["codigo_tipo_regiao"]."'
+			uniqueMembers='true' />
 			";
-			$niveis2[] = "
-			<Level name='".$regiaoAtual["nome_tipo_regiao"]." - GeoCod #".$regiaoAtual["codigo_tipo_regiao"]."' column='".$regiaoAtual["identificador"]."' nameColumn='".$regiaoAtual["colunanomeregiao"]."'
-			uniqueMembers='".$unico."' />
+		$niveisXml2[] = "
+				<Level name='".$temp." - GeoCod #".$regiao["codigo_tipo_regiao"]."' column='codigo{$regiao["codigo_tipo_regiao"]}' nameColumn='nome".$regiao["codigo_tipo_regiao"]."'
+				uniqueMembers='true' />
+			";
+		//juncoes
+		while($caminho){
+			$a = array_shift($caminho);
+			$u = sqlDasRegioes($chavesRegiao[$a["join"]],array(),$chavesRegiao);
+			//substitui as colunas para obter dados vazios
+			$colunasVazias = array();
+			foreach($dadosSelect["nomesColunas"] as $nomesPrincipais){
+				$colunasVazias[$nomesPrincipais] = "'' AS $nomesPrincipais";
+			}
+			$n = count($u["colunas"]);
+			for($q = 0; $q < $n; $q++){
+				$colunasVazias[$u["nomesColunas"][$q]] = $u["colunas"][$q];
+			}
+			//
+			//inclui as colunas da primeira tabela
+			//
+			$colunasPrimeiraTabela = "'' as codigo".$regiao["codigo_tipo_regiao"].","."'' as nome".$regiao["codigo_tipo_regiao"].",";
+
+			$mascara = str_replace("__COLUNAS__",$colunasPrimeiraTabela."__COLUNAS__",$u["mascara"]);
+
+			$u["select"] = str_replace("__COLUNAS__",implode(",",$colunasVazias),$mascara);
+
+			$temp = converte($chavesRegiao[$a["join"]]["nome_tipo_regiao"]);
+
+			$niveisXml1[] = "
+			<Level name='".$temp."' column='codigo{$a["join"]}' nameColumn='nome".$a["join"]."'
+			uniqueMembers='false' />
+			";
+			$niveisXml2[] = "
+			<Level name='".$temp." - GeoCod #".$a["join"]."' column='codigo{$a["join"]}' nameColumn='nome".$a["join"]."'
+			uniqueMembers='false' />
 			";
 			$unico = "false";
-
-			$regiaoAtual = $m->listaTipoRegiao($caminho[$j]);
 		}
-		//echo "<pre>";echo implode("UNION\n\n",$sqls);exit;
 
+		//inclui a selecao se houver
+		$sqlreg = "";
+		if(!empty($selecaoRegiao[$regiao["codigo_tipo_regiao"]])){
+			$rs = $selecaoRegiao[$regiao["codigo_tipo_regiao"]];
+			$sqlreg = " WHERE regiao.".$rs["sql"];
+		}
 		$xml1 .= "
-		<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' ><SQL dialect='generic' >".implode(" UNION ",$sqls)."</SQL></view>
+			<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' >
+					<SQL dialect='generic' >".$dadosSelect["select"]."</SQL>
+			</view>
 		";
 		$xml2 .= "
-		<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_GeoCod' ><SQL dialect='generic' >".implode(" UNION ",$sqls)."</SQL></view>
+			<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_GeoCod' >
+					<SQL dialect='generic' >".$dadosSelect["select"]."</SQL>
+			</view>
 		";
-		$niveis1 = array_reverse($niveis1);
-		$niveis2 = array_reverse($niveis2);
-		$xml1 .= implode(" ",$niveis1);
-		$xml2 .= implode(" ",$niveis2);
+		$niveisXml1 = array_reverse($niveisXml1);
+		$niveisXml2 = array_reverse($niveisXml2);
+		$xml1 .= implode(" ",$niveisXml1);
+		$xml2 .= implode(" ",$niveisXml2);
 		$xml1 .= "
 		</Hierarchy>
 		</Dimension>
@@ -284,11 +503,19 @@ if(empty($_GET["xmlesquema"])){
 		</Hierarchy>
 		</Dimension>
 		";
+		$xmlRegioes[$regiao["codigo_tipo_regiao"]] = array(
+				"xml" => $xml1.$xml2,
+				"juncoes" => $dadosSelect["juncoes"],
+				"codigo_tipo_regiao"=> $regiao["codigo_tipo_regiao"],
+				"colunas" => $dadosSelect["colunas"],
+				"nomesColunas"=> $dadosSelect["nomesColunas"],
+				"codRegioes"=>$dadosSelect["codRegioes"]
+		);
 	}
-	//echo header("Content-type: application/xml");
-	//echo $xml.$xml1.$xml2;exit;
-	//echo "<pre>";var_dump($filhosDaRegiao);exit;
-	//outras dimensoes definidas nos parametros e que nao sejam do tipo tempo
+	return $xmlRegioes;
+}
+function dimensoesOutras(){
+	global $m;
 	$parametros = $m->listaTodosParametros();
 	$dimOutras = array();
 	foreach($parametros as $p){
@@ -305,7 +532,7 @@ if(empty($_GET["xmlesquema"])){
 	}
 	$xml3 = "";
 	foreach($dimOutras as $d){
-		$k = $p["esquemadb"]."_".$d["tabela"]."_".$d["coluna"];
+		$k = $d["esquemadb"]."_".$d["tabela"]."_".$d["coluna"];
 		$xml3 .= "
 		<Dimension name='".$k."' caption='".converte($d["nome"])."'>
 		<Hierarchy hasAll='true'  primaryKey='codigo'>
@@ -322,16 +549,17 @@ if(empty($_GET["xmlesquema"])){
 		$xml3 .= "</Hierarchy>
 		</Dimension>";
 	}
-	$xml .= $xml1.$xml2.$xml3;
-	//junta as medidas conforme o nome da tabela utilizada
+	return $xml3;
+}
+function dimensoesTabelas(){
+	global $dimRegioes, $filhosDaRegiao, $m, $VirtualCubeDimension, $VirtualCubeMeasure, $chavesRegiao, $medidas, $codigo_tipo_regiao, $VirtualCubeDimensionDaRegiao, $VirtualCubeMeasureDaRegiao;
 
-	//var_dump($medidas);exit;
+	$xml = "";
 	$tbs = array();
-	//echo $codigo_tipo_regiao;exit;
 	foreach($medidas as $medida){
 		if($codigo_tipo_regiao == "" || $medida["codigo_tipo_regiao"] == $codigo_tipo_regiao){
 			$k = $medida["esquemadb"].$medida["tabela"];
-			//echo "<pre>".$k;
+
 			if(empty($tbs[$k])){
 				$tbs[$k] = array($medida);
 			}
@@ -341,13 +569,9 @@ if(empty($_GET["xmlesquema"])){
 		}
 	}
 	//monta os cubos para cada esquema.tabela diferente
-	$VirtualCubeDimension = array();
-	$VirtualCubeMeasure = array();
-
 	foreach($tbs as $tb){
 		//cabecalho de cada cubo obtido da primeira medida
 		$c = $tb[0];
-
 		$VirtualCubeDimension[] = "
 		<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />
 		";
@@ -356,18 +580,17 @@ if(empty($_GET["xmlesquema"])){
 		";
 
 		array_push(
-				$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
-				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
-				);
+		$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
+		"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
+		);
 		array_push(
-				$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
-				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />"
-				);
+		$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
+		"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />"
+		);
 		//verifica as dimensoes do tipo tempo
 		$dimEnsoes = array();
-		//echo "<pre>";var_dump($tb)."<br>";
+
 		foreach($tb as $medida){
-			//echo "<pre>";var_dump($medida)."<br>";
 			$parametros = $m->listaParametro($medida["id_medida_variavel"],"","",false,false);
 			$parComposto = array(); //guarda a composicao da chave que liga com a dimensao
 			$colunaAdicionais = array();
@@ -389,7 +612,7 @@ if(empty($_GET["xmlesquema"])){
 			}
 			//outros parametros
 			$outrosParametros = array();
-			//echo "<pre>";var_dump($parametros);
+
 			foreach($parametros as $parametro){
 				$k = $parametro["esquemadb"]."_".$parametro["tabela"]."_".$parametro["coluna"];
 				if($parametro["tipo"] > 5 || $parametro["tipo"] == 0){
@@ -404,8 +627,7 @@ if(empty($_GET["xmlesquema"])){
 		//$dimEnsoes[] = '<DimensionUsage foreignKey="coduf" name="codigo_tipo_regiao_2" source="codigo_tipo_regiao_2"/>';
 
 		$xml .= "<Cube cache='false' name='Tabela: {$c["esquemadb"]}{$c["tabela"]}'>";
-		$incluirChaves = array("*");
-
+		$incluirChaves = array("tabelamedida{$c["id_medida_variavel"]}.*");
 		if(count($parComposto) > 0){
 			//$sql = "select *,".implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_ from {$c["esquemadb"]}.{$c["tabela"]}";
 			$incluirChaves[] = implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_";
@@ -416,18 +638,39 @@ if(empty($_GET["xmlesquema"])){
 			}
 		}
 
-		$sql = "select ".implode(",",$incluirChaves).",{$c["colunaidgeo"]}::text as codigodim from {$c["esquemadb"]}.{$c["tabela"]}";
-		//a tabela pode ter dimensoes em diferentes hierarquias
-		$xml .= "
-		<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
-		<DimensionUsage foreignKey='codigodim' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."'/>
-		<DimensionUsage foreignKey='codigodim' name='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."_geocod' source='codigo_tipo_regiao_".$c["codigo_tipo_regiao"]."_geocod'/>
+
+		$r = $chavesRegiao[$c["codigo_tipo_regiao"]];
+		$sql = "
+			select ".implode(",",$incluirChaves).", tabelamedida{$c["id_medida_variavel"]}.{$c["colunaidgeo"]}::text as codigoreg
 		";
+		if(count($dimRegioes[$c["codigo_tipo_regiao"]]["colunas"]) > 0){
+			$sql .= ",".implode(",",$dimRegioes[$c["codigo_tipo_regiao"]]["colunas"]);
+		}
+
+		$sql .= "
+			from {$c["esquemadb"]}.{$c["tabela"]} as tabelamedida{$c["id_medida_variavel"]}
+			JOIN {$r["esquemadb"]}.{$r["tabela"]} as tabela{$r["codigo_tipo_regiao"]}
+			ON  tabela{$r["codigo_tipo_regiao"]}.{$r["identificador"]}::text = tabelamedida{$c["id_medida_variavel"]}.{$c["colunaidgeo"]}::text
+			";
+		$sql .= $dimRegioes[$c["codigo_tipo_regiao"]]["juncoes"];
+
+		$xml .= "
+			<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
+		";
+		//dimensoes vinculadas
+		$temp = $dimRegioes[$c["codigo_tipo_regiao"]]["codRegioes"];
+		$temp[] = $c["codigo_tipo_regiao"];
+		foreach($temp as $cod){
+			$xml .= "
+				<DimensionUsage foreignKey='codigo{$cod}' name='codigo_tipo_regiao_{$cod}' source='codigo_tipo_regiao_{$cod}'/>
+				<DimensionUsage foreignKey='codigo{$cod}' name='codigo_tipo_regiao_{$cod}_geocod' source='codigo_tipo_regiao_{$cod}_geocod'/>
+			";
+		}
 		//inclui as dimensoes filhas
 		foreach($filhosDaRegiao[$c["codigo_tipo_regiao"]] as $fr){
 			$xml .= "
-				<DimensionUsage foreignKey='codigodim' name='codigo_tipo_regiao_".$fr."' source='codigo_tipo_regiao_".$fr."'/>
-				<DimensionUsage foreignKey='codigodim' name='codigo_tipo_regiao_".$fr."_geocod' source='codigo_tipo_regiao_".$fr."_geocod'/>
+				<DimensionUsage foreignKey='codigoreg' name='codigo_tipo_regiao_".$fr."' source='codigo_tipo_regiao_".$fr."'/>
+				<DimensionUsage foreignKey='codigoreg' name='codigo_tipo_regiao_".$fr."_geocod' source='codigo_tipo_regiao_".$fr."_geocod'/>
 			";
 		}
 
@@ -454,60 +697,36 @@ if(empty($_GET["xmlesquema"])){
 		$xml .= "
 		</Cube>
 		";
-
 	}
-
-	$xml .= '<VirtualCube name="Todas as medidas" >';
+	return $xml;
+}
+function cuboTodas(){
+	global $VirtualCubeDimension, $VirtualCubeMeasure;
+	$xml = '<VirtualCube name="Todas as medidas" >';
 	$VirtualCubeDimension = array_unique($VirtualCubeDimension);
 	$VirtualCubeMeasure = array_unique($VirtualCubeMeasure);
 	$xml .= implode(" ",$VirtualCubeDimension);
 	$xml .= implode(" ",$VirtualCubeMeasure);
 	$xml .= '</VirtualCube>';
-	//
-	//cubos por regiao
-	//
-	//$filhosDaRegiao = array();
-	//$VirtualCubeDimensionDaRegiao = array();
-	//$VirtualCubeMeasureDaRegiao = array();
-
+	return $xml;
+}
+function cuboRegioes(){
+	global $regioes, $VirtualCubeDimensionDaRegiao, $VirtualCubeMeasureDaRegiao, $filhosDaRegiao;
+	$xml = "";
 	foreach($regioes as $regiao){
 		//inclui os parametros para a regiao de acordo com os filhos que possui
 		$d = $VirtualCubeDimensionDaRegiao[$regiao["codigo_tipo_regiao"]];
-		$m = $VirtualCubeMeasureDaRegiao[$regiao["codigo_tipo_regiao"]];
+		$mm = $VirtualCubeMeasureDaRegiao[$regiao["codigo_tipo_regiao"]];
 		foreach($filhosDaRegiao[$regiao["codigo_tipo_regiao"]] as $f){
-			//$d = array_merge($d,$VirtualCubeDimensionDaRegiao[$f]);
-			$m = array_merge($m,$VirtualCubeMeasureDaRegiao[$f]);
+			$mm = array_merge($mm,$VirtualCubeMeasureDaRegiao[$f]);
 		}
-		if(count(array_unique($m)) > 0){
+		if(count(array_unique($mm)) > 0){
 			$xml .= '<VirtualCube name="Regi&amp;atilde;o: '.converte($regiao["nome_tipo_regiao"]).'" >';
 			$xml .= implode(" ",array_unique($d));
-			$xml .= implode(" ",array_unique($m));
+			$xml .= implode(" ",array_unique($mm));
 			$xml .= '</VirtualCube>';
 		}
 	}
-	$xml .= "</Schema>";
-	error_reporting(0);
-	ob_end_clean();
-
-	if($_GET["output"] == "xml"){
-		echo header("Content-type: application/xml");
-		echo $xml;exit;
-	}
-	gravaDados(array($xml),$arquivoXmlEsquema);
-}
-if($_GET["output"] == "xml"){
-	echo header("Content-type: application/xml");
-	header("Location:".$_GET["xmlesquema"]);
-}
-else{
-	header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]."&mapext=".$_GET["mapext"]."&origem=".$_GET["origem"]);
-}
-function converte($texto){
-	$texto = str_replace("&","&amp;",htmlentities($texto));
-	//$texto = htmlentities($texto);
-	//$texto = mb_convert_encoding($texto, 'ISO-8859-1', "auto");
-	//$texto = utf8_encode($texto);
-	//$textox = mb_convert_encoding($texto, "UTF-8", mb_detect_encoding($texto, "UTF-8, ISO-8859-1, ISO-8859-15", true));
-	return $texto;
+	return $xml;
 }
 ?>

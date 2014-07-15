@@ -214,7 +214,7 @@ Cria os diretorios tempor&aacute;rios que ser&atilde;o utilizados pelo i3geo par
 $diretorios = criaDirMapa($dir_tmp,$cachedir);
 if(!$diretorios)
 {echo "<p style=color:red ><b>N&atilde;o foi poss&iacute;vel criar os diret&oacute;rios tempor&aacute;rios em $dir_tmp.</b></p>";exit;}
-criaIndex();
+criaIndex($dir_tmp,$diretorios);
 $tmpfname = $diretorios[0];
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 /*
@@ -328,7 +328,6 @@ $_SESSION["imgdir"] = $diretorios[2];
 $_SESSION["contadorsalva"] = 0;//essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
 $_SESSION["i3georendermode"] = $i3georendermode_;
 $_SESSION["saikuUrl"] = $saikuUrl_;
-
 
 //
 //pega todas as vari&aacute;veis da sess&atilde;o, mesmo as que foram definidas anteriormente
@@ -450,6 +449,7 @@ else{
 	//algumas aplicacoes usam essa variavel (SAIKU)
 	$mapext = $ext->minx." ".$ext->miny." ".$ext->maxx." ".$ext->maxy;
 }
+
 /*
 Configura os endere&ccedil;os corretos no mapfile.
 
@@ -490,20 +490,20 @@ if(isset($poligonos))
 if(isset($url_wms))
 {incluiTemaWms();}
 
-adaptaLayers();
+adaptaLayers($tmpfname,$versao);
 
 if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
 {require_once(dirname(__FILE__)."/ms_registraip.php");}
 //echo $tmpfname;exit;
 if ($interface != "mashup")
 {abreInterface($interface,$caminho,$tempo);}
+
 /*
 Adapta os dados de cada layer.
 
 Faz altera&ccedil;&otilde;es em cada layer caso sejam necess&aacute;rias.
 */
-function adaptaLayers(){
-	global $tmpfname,$versao;
+function adaptaLayers($tmpfname,$versao){
 	$mapa = ms_newMapObj($tmpfname);
 	$path = $mapa->shapepath;
 	$numlayers = $mapa->numlayers;
@@ -749,11 +749,10 @@ function incluiTemasIniciais(){
 	erroCriacao();
 }
 /*
-Cria os arquivos vazios index.htm e index.html nos diret�rios tempor&aacute;rios
+Cria os arquivos vazios index.htm e index.html nos diretorios tempor&aacute;rios
 */
-function criaIndex()
+function criaIndex($dir_tmp,$diretorios)
 {
-	global $dir_tmp,$diretorios;
 	if (!file_exists($dir_tmp."/index.htm"))
 	{
 		$f = fopen($dir_tmp."/index.htm","x");
@@ -771,7 +770,7 @@ function criaIndex()
 	}
 	if (!file_exists($dir_tmp."/index.htm"))
 	{
-		echo "Erro. N&atilde;o foi poss&iacute;vel gravar no diret�rio tempor&aacute;rio";
+		echo "Erro. N&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio";
 		exit;
 	}
 }

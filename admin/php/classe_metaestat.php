@@ -528,6 +528,7 @@ class Metaestat{
 				return array("caminho"=>$caminho,"colunas"=>$colunas);
 			}
 		}
+		return array("caminho"=>$caminho,"colunas"=>$colunas);
 	}
 	function hierarquiaPath($node){
 		$query="select codigo_tipo_regiao_pai as parent from ".$this->esquemaadmin."i3geoestat_agregaregiao WHERE codigo_tipo_regiao = $node";
@@ -2056,6 +2057,10 @@ class Metaestat{
 		}
 		return $this->execSQL($sql,"");
 	}
+	function listaHierarquia($codigoregiaopai=""){
+		$sql = "select * from ".$this->esquemaadmin."i3geoestat_agregaregiao order by codigo_tipo_regiao";
+		return $this->execSQL($sql,"");
+	}
 	/**
 	 * Lista os registros de um tipo de regiao
 	 * Se for definido o pai, lista os valores da regiao que e filha
@@ -2132,7 +2137,9 @@ class Metaestat{
 	function listaAgregaRegiaoFilho($codigo_tipo_regiao,$codigo_tipo_regiao_pai){
 		$sql = "select * from ".$this->esquemaadmin."i3geoestat_agregaregiao ";
 		$sql .= "WHERE codigo_tipo_regiao_pai = $codigo_tipo_regiao_pai ";
-		$sql .= "AND codigo_tipo_regiao = $codigo_tipo_regiao";
+		if($codigo_tipo_regiao != ""){
+			$sql .= "AND codigo_tipo_regiao = $codigo_tipo_regiao";
+		}
 		return $this->execSQL($sql,$codigo_tipo_regiao_pai);
 	}
 	/**
