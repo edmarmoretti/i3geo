@@ -1,4 +1,22 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<?php
+/**
+ * Cria as pastas temporarias que o i3Geo precisa, caso nao existam
+ */
+include(dirname(__FILE__)."/../ms_configura.php");
+if(!file_exists($dir_tmp)){
+	@mkdir ($dir_tmp,0777);
+}
+if(file_exists($dir_tmp)){
+	@mkdir($dir_tmp."/comum",0777);
+	@mkdir($dir_tmp."/saiku-datasources",0777);
+	chmod($dir_tmp."/saiku-datasources",0777);
+	@mkdir($dir_tmp."/cache",0777);
+	chmod($dir_tmp."/cache",0777);
+	@mkdir($dir_tmp."/cache/googlemaps",0777);
+	chmod($dir_tmp."/cache/googlemaps",0777);
+}
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <meta name="url" content="http://www.softwarepublico.gov.br" />
@@ -11,7 +29,6 @@ $cache_expire = 1;
 header("Pragma: public");
 header("Cache-Control: max-age=".$cache_expire);
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$cache_expire) . ' GMT');
-include(dirname(__FILE__)."/../ms_configura.php");
 ?>
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="dicionario.js"></script>
