@@ -5,7 +5,7 @@ i3GEO.configura
 
 Configura&ccedil;&atilde;o do i3geo
 
-Vc pode alterar com esta classe a maioria dos par�metros que controlam
+Vc pode alterar com esta classe a maioria dos par&acirc;metros que controlam
 o funcionamento do i3geo.
 
 Exemplo:
@@ -121,7 +121,7 @@ i3GEO.configura = {
 	];
 
 	Onde "icone" indica se o &iacute;cone de ligar/desligar todos os temas do grupo ser&aacute; mostrado,
-	"dinamico" significa que o n&oacute; pode ser expandido ou n&atilde;o, e "expandido" significa que o n&oacute; inicia aberto se a &aacute;rvore for din�mica
+	"dinamico" significa que o n&oacute; pode ser expandido ou n&atilde;o, e "expandido" significa que o n&oacute; inicia aberto se a &aacute;rvore for din&acirc;mica
 
 	Type:
 	{JSON}
@@ -133,7 +133,7 @@ i3GEO.configura = {
 	/*
 	Propriedade: oMenuData
 
-	Itens inclu&iacute;dos no menu suspenso. Define os par�metros para o gadget menu suspenso
+	Itens inclu&iacute;dos no menu suspenso. Define os par&acirc;metros para o gadget menu suspenso
 
 	Mais informa&ccedil;&otilde;es em <classe_gadgets.js> fun&ccedil;&atilde;o <mostraMenuSuspenso>
 
@@ -479,11 +479,11 @@ i3GEO.configura = {
 	/*
 	Propriedade: mashuppar
 
-	Define os par�metros que devem ser aplicados no modo mashup
+	Define os par&acirc;metros que devem ser aplicados no modo mashup
 
 	O modo mashup possibilita que o i3Geo seja embutido dentro de uma p&aacute;gina HTML. Nesse
 	caso, o mapa n&atilde;o &eacute; criado no modo convencional, que utiliza o programa i3geo/ms_criamapa.php
-	A variavel mashuppar deve conter os par�metros que s&atilde;o utilizados pelo programa ms_criamapa
+	A variavel mashuppar deve conter os par&acirc;metros que s&atilde;o utilizados pelo programa ms_criamapa
 
 	Exemplo:
 
@@ -1076,7 +1076,7 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//bot&atilde;o de medi&ccedil;&atilde;o de dist�ncias
+			//bot&atilde;o de medi&ccedil;&atilde;o de dist&acirc;ncias
 			iddiv:"mede",
 			tipo:"dinamico",
 			dica:$trad("d21"),

@@ -171,7 +171,7 @@ i3GEO.guias = {
 							if (lkd !== "")
 							{link = lkd;}
 							ins += "<div style='width:170px;background-color:white;padding:5px;margin:auto;border: 1px solid #F0F0F0;border-radius: 5px;box-shadow: 1px 1px 1px 1px #D3D3D3;' >";
-							
+
 							if(temp.IMAGEM && temp.IMAGEM != ""){
 								ins += "<div style=text-align:center ><a href='"+link+"' style=text-align:center;text-decoration:none; >" +
 									"<img src='"+temp.IMAGEM+"'></a></div><br>";
@@ -184,14 +184,14 @@ i3GEO.guias = {
 							else{
 								//combo de opcoes para abrir os mapas salvos como mapfiles
 								//esses links tambem sao colocados em admin/php/xml.php geraRSSmapas
-								combo = "<select style='width:150px;' onchange='i3GEO.guias.CONFIGURA.mapas.mostraLink("+ig1+",this.value)'>" +
-										"<option value=''>Links:</option>" +
-										"<option value='"+link+"'>Original</option>" +
-										"<option value='"+link+"&interface="+urlinterface+"'>"+urlinterface+"</option>" +
-										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"&fundo=e_wsm'>Openlayers 1</option>" +
-										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"&fundo='>Openlayers 2</option>" +
-										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Openlayers 3</option>" +
-										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"'>Openlayers 4</option>" +
+								combo = "<select style='width:170px;' onchange='i3GEO.guias.CONFIGURA.mapas.mostraLink("+ig1+",this.value)'>" +
+										"<option value=''>" + $trad("x103") + ":</option>" +
+										"<option value='"+link+"'>Como foi salvo</option>" +
+										"<option value='"+link+"&interface="+urlinterface+"'>Com a interface atual</option>" +
+										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"&fundo=e_wsm'>Openlayers com todos os botoes</option>" +
+										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"&fundo=est_wms'>Sem o fundo</option>" +
+										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com booes principais</option>" +
+										"<option value='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?restauramapa="+temp.ID_MAPA+"&botoes=legenda pan zoombox zoomtot zoomin zoomout'>Botoes de navegacao</option>" +
 										"</select>";
 								ins += "<div>" +
 									"<p class=paragrafo style=text-align:center;cursor:pointer >" +

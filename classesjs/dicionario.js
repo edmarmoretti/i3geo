@@ -1,3 +1,4 @@
+//utilize $trad("p1") para retornar o texto
 g_traducao = {
 //texto da janela de mensagens
 "p1": [
@@ -2254,6 +2255,12 @@ it:""
 {
 pt: "Mapa de calor",
 en:"Heatmap",
+es:""
+}],
+"x103": [
+{
+pt: "Links para abrir o mapa",
+en:"",
 es:""
 }]
 };

@@ -588,6 +588,8 @@ i3GEO.mapa = {
 					"hd"
 				);
 				divid = janela[2].id;
+				//a funcao que mostra a lista de mapas e a mesma que pode ser utilizada ao incluir a lista de mapas
+				//como uma guia
 				i3GEO.guias.CONFIGURA["mapas"].click.call(this,divid);
 			}
 			else{
