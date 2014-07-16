@@ -67,9 +67,9 @@ Arquivo: i3geo/ms_criamapa.php
 Par&acirc;metros:
 
 base - arquivo mapfile que servir&aacute; de base para a cria&ccedil;&atilde;o do mapa. Por default, s&atilde;o utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
-	Essa vari&aacute;vel pode ser definida em ms_configura tamb&eacute;m. Se n&atilde;o estiver definida em nenhum lugar, o i3Geo tentar&aacute; descobrir o arquivo adequado a ser utilizado. Voc&ecirc; pode utilizar essa op&ccedil;&atilde;o para abrir um mapa com as camadas que voc� quiser, mas para evitar redund&acirc;ncias, prefira o uso de &temasa
+	Essa vari&aacute;vel pode ser definida em ms_configura tamb&eacute;m. Se n&atilde;o estiver definida em nenhum lugar, o i3Geo tentar&aacute; descobrir o arquivo adequado a ser utilizado. Voc&ecirc; pode utilizar essa op&ccedil;&atilde;o para abrir um mapa com as camadas que voc&ecirc; quiser, mas para evitar redund&acirc;ncias, prefira o uso de &temasa
 
-temasa - lista, separada por espa&ccedil;os, com os nomes dos arquivos map ou gvsig que ser&atilde;o adicionados ao mapa. Se o arquivo n&atilde;o estiver no diret�rio i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo pode conter mais de um layer pois todos os existentes ser&atilde;o adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles s&atilde;o adicionados ao mapa com o status de desenho em OFF.
+temasa - lista, separada por espa&ccedil;os, com os nomes dos arquivos map ou gvsig que ser&atilde;o adicionados ao mapa. Se o arquivo n&atilde;o estiver no diret&oacute;rio i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo pode conter mais de um layer pois todos os existentes ser&atilde;o adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles s&atilde;o adicionados ao mapa com o status de desenho em OFF.
 
 layers - lista, separada por espa&ccedil;os, com os nomes dos layers que ser&atilde;o ligados. A lista deve conter os nomes dos layers e n&atilde;o os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers ser&atilde;o adicionados ao mapa. Para que esses dois layers fiquem vis&iacute;veis no mapa deve-se utilizar &layers=estradas ferrovias.
 
@@ -79,7 +79,7 @@ mapext - extensao geografica que ser&aacute; utilizada. Por padr&atilde;o, a ext
 
 executa - programa ou fun&ccedil;&atilde;o em php que ser&aacute; executado via include. O include &eacute; feito no final do processo de inicializa&ccedil;&atilde;o quando a vari&aacute;vel $tmpfname j&aacute; est&aacute; definida. Essa vari&aacute;vel guarda o nome do arquivo mapfile que ser&aacute; utilizado pelo i3geo.
 
-interface - nome da interface que ser&aacute; utilizada para abrir o mapa. As interfaces s&atilde;o arquivos HTML que podem estar no diret�rio aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alter&aacute;-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
+interface - nome da interface que ser&aacute; utilizada para abrir o mapa. As interfaces s&atilde;o arquivos HTML que podem estar no diret&oacute;rio aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alter&aacute;-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
 
 perfil - perfil utilizado para restringir os menus de temas. ms_criamapa.php?perfil=usu&aacute;rio1
 
@@ -148,7 +148,7 @@ if(!isset($funcao))
 Carrega as extens&otilde;es PHP
 
 Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o.
-A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela pr�pria inicializa&ccedil;&atilde;o do PHP.
+A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela pr&oacute;pria inicializa&ccedil;&atilde;o do PHP.
 */
 include_once (dirname(__FILE__)."/classesphp/carrega_ext.php");
 /*
@@ -278,7 +278,7 @@ else{
 Inicia a se&ccedil;&atilde;o
 
 O i3geo inicia uma se&ccedil;&atilde;o espec&iacute;fica no servidor, denominada i3GeoPHP.
-Se j&aacute; houver uma se&ccedil;&atilde;o aberta, em fun&ccedil;&atilde;o de outro browser estar ativo, cria uma nova. Faz a c�pia das vari&aacute;veis definidas para itens da se&ccedil;&atilde;o.
+Se j&aacute; houver uma se&ccedil;&atilde;o aberta, em fun&ccedil;&atilde;o de outro browser estar ativo, cria uma nova. Faz a c&oacute;pia das vari&aacute;veis definidas para itens da se&ccedil;&atilde;o.
 */
 session_name("i3GeoPHP");
 session_start();
@@ -453,7 +453,7 @@ else{
 /*
 Configura os endere&ccedil;os corretos no mapfile.
 
-Altera as propriedades imagepath e imageurl corrigindo os caminhos padr&atilde;o conforme o diret�rio criado para armazenar o mapa de trabalho.
+Altera as propriedades imagepath e imageurl corrigindo os caminhos padr&atilde;o conforme o diret&oacute;rio criado para armazenar o mapa de trabalho.
 */
 
 $w = $mapn->web;
@@ -1193,13 +1193,13 @@ function erroCriacao(){
 	ms_ResetErrorList();
 }
 /*
-Cria os diret�rios tempor&aacute;rios para a aplica&ccedil;&atilde;o.
+Cria os diret&oacute;rios tempor&aacute;rios para a aplica&ccedil;&atilde;o.
 
 Parametro:
 
-$dir_tmp {string} - Diret�rio tempor&aacute;rio (no servidor) utilizado pelo mapserver.
+$dir_tmp {string} - Diret&oacute;rio tempor&aacute;rio (no servidor) utilizado pelo mapserver.
 
-$$cachedir {string} - Diret�rio de cache tempor&aacute;rio definido no ms_configura.php
+$$cachedir {string} - Diret&oacute;rio de cache tempor&aacute;rio definido no ms_configura.php
 
 Retorno:
 

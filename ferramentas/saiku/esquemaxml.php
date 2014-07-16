@@ -437,7 +437,7 @@ function dimensoesGeo(){
 			uniqueMembers='true' />
 			";
 		$niveisXml2[] = "
-				<Level name='".$temp." - GeoCod #".$regiao["codigo_tipo_regiao"]."' column='codigo{$regiao["codigo_tipo_regiao"]}' nameColumn='nome".$regiao["codigo_tipo_regiao"]."'
+				<Level name='".$temp." - GeoCod #".$regiao["codigo_tipo_regiao"]."' column='codigo{$regiao["codigo_tipo_regiao"]}' nameColumn='codigo".$regiao["codigo_tipo_regiao"]."'
 				uniqueMembers='true' />
 			";
 		//juncoes
@@ -469,7 +469,7 @@ function dimensoesGeo(){
 			uniqueMembers='false' />
 			";
 			$niveisXml2[] = "
-			<Level name='".$temp." - GeoCod #".$a["join"]."' column='codigo{$a["join"]}' nameColumn='nome".$a["join"]."'
+			<Level name='".$temp." - GeoCod #".$a["join"]."' column='codigo{$a["join"]}' nameColumn='codigo".$a["join"]."'
 			uniqueMembers='false' />
 			";
 			$unico = "false";
@@ -479,16 +479,16 @@ function dimensoesGeo(){
 		$sqlreg = "";
 		if(!empty($selecaoRegiao[$regiao["codigo_tipo_regiao"]])){
 			$rs = $selecaoRegiao[$regiao["codigo_tipo_regiao"]];
-			$sqlreg = " WHERE regiao.".$rs["sql"];
+			$sqlreg = " WHERE tabela{$regiao["codigo_tipo_regiao"]}.".$rs["sql"];
 		}
 		$xml1 .= "
 			<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' >
-					<SQL dialect='generic' >".$dadosSelect["select"]."</SQL>
+					<SQL dialect='generic' >".$dadosSelect["select"].$sqlreg."</SQL>
 			</view>
 		";
 		$xml2 .= "
 			<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_GeoCod' >
-					<SQL dialect='generic' >".$dadosSelect["select"]."</SQL>
+					<SQL dialect='generic' >".$dadosSelect["select"].$sqlreg."</SQL>
 			</view>
 		";
 		$niveisXml1 = array_reverse($niveisXml1);
