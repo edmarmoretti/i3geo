@@ -1302,6 +1302,11 @@ class Mapa
 						cloneInlineSymbol($nlayer,$nmap,$this->mapa);
 						ms_newLayerObj($this->mapa, $nlayer);
 						$l = $this->mapa->getlayerbyname($nlayer->name);
+						if($this->mapa->getmetadata("interface") == "googlemaps"){
+							if(($l->opacity == 100 || $l->opacity == "") && ($l->type == 2 || $l->type == 3)){
+								$l->set("opacity",50);
+							}
+						}
 						//reposiciona o layer se for o caso
 						if ($l->group == ""){
 							$ltipo = $l->type;

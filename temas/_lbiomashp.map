@@ -22,7 +22,7 @@ MAP
     STATUS OFF
     TEMPLATE "none.htm"
     TILEITEM "location"
-    OPACITY 50
+    OPACITY 90
     TYPE POLYGON
     UNITS METERS
     CLASS
