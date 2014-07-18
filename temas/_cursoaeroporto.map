@@ -1,34 +1,3 @@
-<<<<<<< .mine
-MAP
-  FONTSET "../symbols/fontes.txt"
-  SYMBOLSET "../symbols/simbolosv6.sym"
-  LAYER
-    DATA "/var/www/i3geo/aplicmap/dados/sc22/AEROPORTO_CAMPO_DE_POUSO.shp"
-    METADATA
-      "CLASSE"	"SIM"
-      "PLUGINI3GEO"	'{"plugin":"heatmap","parametros":{"coluna":"1","radius":"15","max":"10"}}'
-      "TEMA"	"Aeroportos SC22"
-    END # METADATA
-    NAME "_cursoaeroporto"
-    STATUS OFF
-    TEMPLATE "none.htm"
-    TILEITEM "location"
-    TYPE POINT
-    UNITS METERS
-    CLASS
-      NAME ""
-      STYLE
-        COLOR 255 0 0
-        OUTLINECOLOR 0 0 0
-        SIZE 15
-        SYMBOL "ponto"
-      END # STYLE
-    END # CLASS
-  END # LAYER
-
-END # MAP
-
-=======
 MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
@@ -57,5 +26,3 @@ MAP
   END # LAYER
 
 END # MAP
-
->>>>>>> .r4835

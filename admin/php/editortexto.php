@@ -50,11 +50,15 @@ body {
 			$nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
 			chmod($nomeMapfileTmp,0777);
 			unlink($nomeMapfileTmp);
-			//echo $nomeMapfileTmp;exit;
 			//
 			if($_POST["tipo"] == "gravar"){
 				$fp = fopen($mapfile,"w");
-				fwrite($fp,$gravarTexto);
+				if($fp == false){
+					echo "<span style=color:red <b>N&atilde;o foi poss&iacute;vel salvar o arquivo. Verifique as permiss&otilde;es ou se h&aacute; algum erro no mapfile</b></span><br><br>";
+				}
+				else{
+					fwrite($fp,$gravarTexto);
+				}
 				fclose($fp);
 			}
 			echo 'RGB: <input type=text value="clique" size=10 id="corrgb" onclick="i3GEO.util.abreCor(\'\',\'corrgb\',\'rgbSep\')" /><br><br>';
@@ -64,17 +68,27 @@ body {
 			echo file_get_contents($mapfile);
 			echo "</TEXTAREA>";
 			$mapfile = str_replace("\\","/",$mapfile);
-			$mapa = ms_newMapObj($mapfile);
-			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=490&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
+
+			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=480&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
 			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
 
-
-			$n = $mapa->numlayers;
-			echo "<br><br>Colunas dos layers:<br><br>";
-			for($i=0;$i<$n;$i++){
-				$l = $mapa->getlayer($i);
-				echo $l->name.": ".(implode(",",pegaItens($l)))."<br><br>";
+			if(!@ms_newMapObj($mapfile)){
+				echo "<span style=color:red <b>N&atilde;o foi poss&iacute;vel criar o mapa. Verifique as permiss&otilde;es ou se h&aacute; algum erro no mapfile</b></span><br><br>";
+			}
+			else{
+				$mapa = ms_newMapObj($mapfile);
+				$n = $mapa->numlayers;
+				echo "<br><br>Colunas dos layers:<br><br>";
+				for($i=0;$i<$n;$i++){
+					if(@$mapa->getlayer($i)){
+						$l = $mapa->getlayer($i);
+						echo $l->name.": ".(implode(",",pegaItens($l)))."<br><br>";
+					}
+					else{
+						echo "<span style=color:red <b>N&atilde;o foi poss&iacute;vel criar o LAYER {$l->name}. Verifique as permiss&otilde;es ou se h&aacute; algum erro no mapfile</b></span><br><br>";
+					}
+				}
 			}
 			?>
 		</form>
