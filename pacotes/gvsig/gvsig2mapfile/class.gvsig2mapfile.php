@@ -1,7 +1,8 @@
 <?php
 /**
- * Manipula um arquivo GVP (projeto gvSIG) para construção de layers Mapserver
+ * Manipula um arquivo GVP (projeto gvSIG) para constru&ccedil;&atilde;o de layers Mapserver
  * @author Edmar Moretti
+ *
  * @license GPL2
  */
 class gvsig2mapfile{
@@ -17,7 +18,7 @@ class gvsig2mapfile{
 	function __construct($gvp)
 	{
 		if(!file_exists($gvp))
-		{throw new Exception("Arquivo $gvp não existe");}
+		{throw new Exception("Arquivo $gvp n&atilde;o existe");}
 		else{
 			$this->arquivoGvp = $gvp;
 			if(function_exists("dl")){
@@ -25,7 +26,7 @@ class gvsig2mapfile{
 				{dl( 'php_simplexml.'.PHP_SHLIB_SUFFIX );}
 			}
 			if (!function_exists('simplexml_load_file'))
-			{throw new Exception("Função PHP simplexml_load_file não existe");}
+			{throw new Exception("Fun&ccedil;&atilde;o PHP simplexml_load_file n&atilde;o existe");}
 			$this->xml = simplexml_load_file($gvp);
 		}
 	}
@@ -126,8 +127,8 @@ class gvsig2mapfile{
 		{$classes = $this->SingleSymbolLegend($result,$path1);}
 
 		//
-		//obtem a conexão
-		//a senha não pode ser obtida, então, é usado o mesmo nome de usuário em seu lugar. No i3Geo deve-se prever isso na variável de substituição de string.
+		//obtem a conexao
+		//a senha nao pode ser obtida, entao, he usado o mesmo nome de usuario em seu lugar. No i3Geo deve-se prever isso na variavel de substituicao de string.
 		$driverName = $this->getValue($path,"driverName");
 		if($driverName == "gvSIG shp driver"){
 			$data = (string) $this->getValue($path,"file");
@@ -261,6 +262,9 @@ class gvsig2mapfile{
 		{$oLayer->setConnectionType($dataLayer["connectiontype"]);}
 		if($dataLayer["connection"] != "")
 		{$oLayer->set("connection",$dataLayer["connection"]);}
+
+		if($dataLayer["proj"] != "")
+		{$oLayer->setProjection($dataLayer["proj"]);}
 		$oLayer->set("status",MS_DEFAULT);
 		if($dataLayer["visible"] == "false")
 		{$oLayer->set("status",MS_OFF);}

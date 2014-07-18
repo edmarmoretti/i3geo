@@ -6,8 +6,8 @@
 	$nomes = $gm->getViewsNames();
 	$view = $gm->getViewByName($nomes[0]);
 	$dataView = $gm->getViewData($nomes[0]);
-	echo "Extensão do mapa: ".(implode(",",$dataView["extent"]))."\n";
-	echo "Projeção do mapa: ".$dataView["proj"]."\n";
+	echo "Extens&atilde;o do mapa: ".(implode(",",$dataView["extent"]))."\n";
+	echo "Proje&ccedil;&atilde;o do mapa: ".$dataView["proj"]."\n";
 	echo "Camadas: ".(implode(",",$dataView["layerNames"]))."\n";
 	foreach($dataView["layerNames"] as $lname)
 	{var_dump($gm->getLayerData($nomes[0],$lname));}
