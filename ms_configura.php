@@ -274,20 +274,35 @@ $metaestatTemplates = "/ferramentas/metaestat/templates";
 /*
 Variable: navegadoresLocais
 
-Ip dos usuarios que podem navegar no servidor para acessar arquivos de dados geogr&aacute;ficos.
-
-O i3geo possibilita que os usu&aacute;rios acessem dados geogr&aacute;ficos no servidor diretamente, navegando pelo sistema de arquivos.
+O i3geo possibilita que os usu&aacute;rios acessem dados geogr&aacute;ficos no servidor diretamente, 
+navegando pelo sistema de arquivos.
 Isso possibilita o acesso aos dados mesmo que n&atilde;o constem na &aacute;rvore de temas
-Por seguran&ccedil;a, essa funcionalidade s&oacute; &eacute; ativada apenas quando o usuario estiver logado.
 
 Caso o usu&aacute;rio n&atilde;o esteja logado, ser&aacute; mostrada para navegacao apenas a pasta i3geo/data
 
-Se objmapa.navegacaoDir for igual a "sim", ou seja, $navegadoresLocais &eacute; diferente de "", na guia de adi&ccedil;&atilde;o de temas da interface HTML, ser&aacute; mostrada a op&ccedil;&atilde;o de navega&ccedil;&atilde;o. 
-Portanto, se vc n&atilde;o quiser que essa op&ccedil;&atilde;o seja ativada, mantenha essa vari&aacute;vel igual a
+Se do lado do cliente a variavel javascript for false e $navegadoresLocais for vazia a op&ccedil;&atilde;o nao ser&aacute; mostrada
+na &aacute;rvore
+
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = false; //inserir no HTML
+ 
+Portanto, se vc n&atilde;o quiser que essa op&ccedil;&atilde;o seja ativada, mesmo com o usu&aacute;rio logado
+mantenha essa vari&aacute;vel igual a
 
 $navegadoresLocais = "";
 
-Para efeito de compatibilidade, manteve-se a possibilidade de um array com multiplos arrays, mas apenas o primeiro e utilizado
+Para efeito de compatibilidade, manteve-se a possibilidade de um array com multiplos arrays, 
+mas apenas o primeiro e utilizado
+
+Exemplo:
+
+	$navegadoresLocais = array(
+		array(
+			"drives"=>array(
+				array("caminho"=>"/tmp","nome"=>"tmp"),
+				array("caminho"=>"/var/www","nome"=>"www")
+			)
+		)
+	);
 
 Tipo:
 {array}
