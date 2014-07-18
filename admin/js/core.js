@@ -1611,7 +1611,7 @@ function core_ativaforms(lista){
 	}
 }
 function core_listaDeLetras(onde,nomeFuncao){
-	//letraAtual guarda a �ltima letra clicada
+	//letraAtual guarda a ultima letra clicada
 	var o,i,ins= "<p><b>",
 		letras = ["Todos","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z","_","1","2","3","4","5","6","7","8","9"],
 		nletras = letras.length;
@@ -1630,16 +1630,18 @@ function core_listaDeLetras(onde,nomeFuncao){
 				+ letras[i] + "</span>&nbsp;";
 	}
 	ins += "</b></p>";
-	if(onde != ""){
+	if(onde && onde != ""){
 		o = document.getElementById(onde);
 		if(o){
 			o.innerHTML = "<fieldset style=padding:2px; class=letras ><form id=forminiciais ><p><b>Iniciais: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /> ou </form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></p></fieldset>";
-			document.getElementById("forminiciais").onsubmit = function(){
-				var v = document.getElementById("iniciaisLetras").value;
-				i3GEO.util.insereCookie("I3GEOletraAdmin", v);
-				eval(nomeFuncao+"('"+v+"');");
-				return false;
-			};
+			if(document.getElementById("forminiciais")){
+				document.getElementById("forminiciais").onsubmit = function(){
+					var v = document.getElementById("iniciaisLetras").value;
+					i3GEO.util.insereCookie("I3GEOletraAdmin", v);
+					eval(nomeFuncao+"('"+v+"');");
+					return false;
+				};
+			}
 			document.getElementById("_listaDeLetras").onclick = function(){
 				document.getElementById("iniciaisLetras").value = letraAtual;
 			};
