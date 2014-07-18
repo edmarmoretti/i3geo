@@ -3,6 +3,8 @@
  * Manipula um arquivo GVP (projeto gvSIG) para constru&ccedil;&atilde;o de layers Mapserver
  * @author Edmar Moretti
  *
+ *
+ *
  * @license GPL2
  */
 class gvsig2mapfile{
