@@ -98,17 +98,6 @@ i3GEOF.graficointerativo1 =
 		 */
 		dadospuros : false,
 		/**
-		 * Propriedade: navegacao
-		 * 
-		 * Ativa ou n&atilde;o a navega&ccedil;&atilde;o din&acirc;mica do mapa
-		 * 
-		 * Type: {boolean}
-		 * 
-		 * Default: {false}
-		 */
-		navegacao : false,
-
-		/**
 		 * Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 		 */
 		criaJanelaFlutuante : function(dados) {
@@ -129,8 +118,8 @@ i3GEOF.graficointerativo1 =
 				i3GEOF.graficointerativo1.dados = dados;
 			}
 			var temp = function() {
-				i3GEOF.graficointerativo1.ativaNavegacao();
 				i3GEOF.graficointerativo1.iniciaJanelaFlutuante(dados);
+				i3GEOF.graficointerativo1.ativaEventosNavegacao();
 			};
 			if (typeof (i3GEOF.graficointerativo1.dicionario) === 'undefined') {
 				i3GEO.util.scriptTag(
@@ -444,8 +433,9 @@ i3GEOF.graficointerativo1 =
 			i3GEOF.graficointerativo1.janelas.push(idjanela);
 			i3GEOF.graficointerativo1.propJanelas[idjanela] = {};
 			i3GEOF.graficointerativo1.propJanelas[idjanela].tema = i3GEO.temaAtivo;
-			i3GEOF.graficointerativo1.propJanelas[idjanela].atualiza = false;
+			i3GEOF.graficointerativo1.propJanelas[idjanela].atualiza = true;
 			i3GEOF.graficointerativo1.propJanelas[idjanela].dados = dados;
+
 			// guarda para esse grafico alguns valores default obtidos dos
 			// parametros gerais da ferramenta
 			i3GEOF.graficointerativo1.propJanelas[idjanela].acumula = i3GEOF.graficointerativo1.acumula;
@@ -502,32 +492,28 @@ i3GEOF.graficointerativo1 =
 			// indica se a janela sera atualizada na navegacao
 			temp = 'i3GEOF.graficointerativo1.propJanelas["' + idjanela + '"].atualiza = this.checked';
 			janela[0]
-				.setFooter("<div style=background-color:#F2F2F2; ><input class='inputsb' style='cursor:pointer;position:relative;top:2px;' onclick='"
+				.setFooter("<div style=background-color:#F2F2F2; ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
 					+ temp + "' type=checkbox />&nbsp;" + $trad(53, i3GEOF.graficointerativo1.dicionario) + " (" + idjanela + ")</div>");
 
 			i3GEOF.graficointerativo1.inicia(divid, idjanela);
 			if (i3GEO.Interface) {
-				temp =
-					function() {
-						if (i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth") {
-							i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo1.obterDados()");
+				temp = function() {
+					i3GEOF.graficointerativo1.janelas.remove(idjanela);
+					i3GEOF.graficointerativo1.propJanelas[idjanela] = null;
+					if (i3GEOF.graficointerativo1.janelas.length === 0) {
+						if (i3GEO.Interface.ATUAL === "openlayers") {
+							i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo1.atualizaListaDeRegistros()");
 						}
-						if (i3GEO.Interface.ATUAL == "googlemaps") {
+						if (i3GEO.Interface.ATUAL === "googlemaps") {
 							google.maps.event.removeListener(graficointerativo1Dragend);
 							google.maps.event.removeListener(graficointerativo1Zoomend);
 						}
 						if (i3GEO.Interface.ATUAL === "googleearth") {
 							google.earth.removeEventListener(graficointerativo1Dragend);
 						}
-						if (i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search(
-							"i3GEOF.graficointerativo1.comboTemas('" + idjanela + "')") > 0) {
-							i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.graficointerativo1.comboTemas('" + idjanela + "')");
-						}
-					};
+					}
+				};
 				YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-				if (i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.graficointerativo1.comboTemas('" + idjanela + "')") < 0) {
-					i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.graficointerativo1.comboTemas('" + idjanela + "')");
-				}
 			}
 			janela[0].bringToTop();
 		},
@@ -720,7 +706,6 @@ i3GEOF.graficointerativo1 =
 		 * <GRAFICOSELECAO>
 		 */
 		obterDados : function(idjanela) {
-			// TODO
 			if (!i3GEO.Interface) {
 				return;
 			}
@@ -1111,12 +1096,12 @@ i3GEOF.graficointerativo1 =
 		 * 
 		 * Ativa a atualiza&ccedil;&atilde;o autom&aacute;tica ao navegar no mapa
 		 */
-		ativaNavegacao : function() {
+		ativaEventosNavegacao : function() {
 			if (!i3GEO.Interface) {
 				return;
 			}
 			i3GEO.janela.tempoMsg($trad(37, i3GEOF.graficointerativo1.dicionario));
-			if (i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth") {
+			if (i3GEO.Interface.ATUAL === "openlayers") {
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.graficointerativo1.atualizaListaDeRegistros()");
 			}
 			if (i3GEO.Interface.ATUAL === "googlemaps") {
