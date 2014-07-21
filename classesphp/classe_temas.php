@@ -912,6 +912,7 @@ lista - lista de item e cores de cada parte do grafico
 		$nomer = nomeRandomico();
 		$novolayer->set("name",$nomer);
 		$novolayer->set("group","");
+		$novolayer->setmetadata("cache","nao");
 		$novolayer->set("type",MS_LAYER_CHART);
 		$novolayer->setprocessing("CHART_TYPE=$tipo");
 		$novolayer->setprocessing("CHART_SIZE=$tamanho");
