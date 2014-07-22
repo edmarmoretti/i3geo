@@ -252,11 +252,12 @@ i3GEOadmin.editor = {
 			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
 				return;
 			}
-			novaTabela = window.prompt("Novo nome:","");
+			novaTabela = window.prompt("Nome da tabela:","");
+			comentarioTabela = window.prompt("Comentario (opcional):","");
 			if (novaTabela!=null && novaTabela!=""){
 				if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) == false){
 					core_carregando("adicionando...");
-					core_makeRequest("../php/metaestat.php?funcao=criaTabelaDB&formato=json&nome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
+					core_makeRequest("../php/metaestat.php?funcao=criaTabelaDB&formato=json&comentario="+comentarioTabela+"&nome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
 				}
 				else{
 					alert("Tabela ja existe");
@@ -398,9 +399,11 @@ i3GEOadmin.editor = {
 					success:function(o){
 						try	{
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
-							temp = "<fieldset><p>Escolha uma coluna: ";
+							temp = "<fieldset>" ;
+							temp += "<p>Coment&aacute;rio registrado na tabela: "+dados["comentario"];
+							temp += "<p>Escolha uma coluna: ";
 							temp += "<select id='i3GEOadmincoluna' >";
-							temp += core_comboObjeto(dados,"","");
+							temp += core_comboObjeto(dados["colunas"],"","");
 							temp += "</select></p>";
 							temp += "" +
 									"<p class=paragrafo ><input type=button value='Adicionar uma nova coluna' id='i3GEOadmincolunaCriar' />" +
@@ -430,7 +433,7 @@ i3GEOadmin.editor = {
 				return;
 			}
 			core_carregando("adicionando...");
-			core_makeRequest("../php/metaestat.php?funcao=colunasTabela&formato=json&nome_tabela="+nome_tabela+"&nome_esquema="+nome_esquema+"&codigo_estat_conexao="+codigo_estat_conexao,callback);
+			core_makeRequest("../php/metaestat.php?funcao=infoTabela&formato=json&nome_tabela="+nome_tabela+"&nome_esquema="+nome_esquema+"&codigo_estat_conexao="+codigo_estat_conexao,callback);
 		},
 		criar: function(){
 			var callback = {
@@ -530,7 +533,7 @@ i3GEOadmin.editor = {
 			$i("outsrid").value = obj.value;
 		},
 		formulario: function(){
-			var ins = '' + 
+			var ins = '' +
 			'<form id=i3GEOuploadf target="i3GEOuploadiframe" action="../php/metaestat_uploadshp_submit.php" method="post" ENCTYPE="multipart/form-data">' +
 			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
@@ -546,6 +549,8 @@ i3GEOadmin.editor = {
 			'</select></p>' +
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
+			'<p class="paragrafo" >Coment&aacute;rio:</p>' +
+			'<textarea name="comentarioShp" rows="5" cols="70" ></textarea>' +
 			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
 			'<select id=i3GEOtipoOperacao name=tipoOperacao >' +
 			'<option value=criar >Criar a tabela nova e incluir registros do SHP</option>' +
@@ -622,6 +627,8 @@ i3GEOadmin.editor = {
 			'</select></p>' +
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
+			'<p class="paragrafo" >Coment&aacute;rio:</p>' +
+			'<textarea name="comentarioCsv" rows="5" cols="70" ></textarea>' +
 			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
 			'<select id=i3GEOtipoOperacaocsv name=tipoOperacao >' +
 			'<option value=criar >Criar a tabela nova e incluir registros do CSV</option>' +

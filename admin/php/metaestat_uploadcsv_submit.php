@@ -149,6 +149,11 @@ if (ob_get_level() == 0) ob_start();
 				$sql .= implode(",",$temp).") WITH(OIDS=FALSE)";
 				$sqltabela[] = $sql;
 				$sqltabela[] = "ALTER TABLE ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." OWNER TO ".$conexao["usuario"];
+				if(!empty($_POST["comentarioCsv"])){
+					$enc = mb_detect_encoding($texto);
+					$_POST["comentarioCsv"] = mb_convert_encoding($_POST["comentarioCsv"],$encodingdb,$enc);
+					$sqltabela[] = "COMMENT ON TABLE ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." IS '".$_POST["comentarioCsv"]."'";
+				}
 				echo "<br>Sql tabela: <pre>";
 				var_dump($sqltabela);
 				echo "</pre>";

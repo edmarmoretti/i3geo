@@ -2181,8 +2181,17 @@ class Metaestat{
 	 * @param nome da tabela
 	 * @return execSQLDB
 	 */
-	function criaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela){
-		return $this->execSQLDB($codigo_estat_conexao,"create table ".$nome_esquema.".".$nome_tabela." (gid serial, CONSTRAINT ".$nome_tabela."_pkey PRIMARY KEY (gid ))");
+	function criaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$comentario=""){
+
+		$res = $this->execSQLDB($codigo_estat_conexao,"create table ".$nome_esquema.".".$nome_tabela." (gid serial, CONSTRAINT ".$nome_tabela."_pkey PRIMARY KEY (gid ))");
+		//echo "COMMENT ON TABLE ".$nome_esquema.".".$nome_tabela." IS '".$comentario."'";exit;
+		if($comentario != ""){
+			if($this->convUTF){
+				$comentario = utf8_encode($comentario);
+			}
+			$com = $this->execSQLDB($codigo_estat_conexao,"COMMENT ON TABLE ".$nome_esquema.".".$nome_tabela." IS '".$comentario."'");
+		}
+		return $res;
 	}
 	/**
 	 * ALtera o nome de uma tabela
@@ -2229,7 +2238,7 @@ class Metaestat{
 		return $res;
 	}
 	/**
-	 * Lista as colunas de uma tabela e seus metadados
+	 * Lista as colunas de uma tabela
 	 * @param codigo da conexao
 	 * @param nome do esquema
 	 * @param nome da tabela
@@ -2247,6 +2256,29 @@ class Metaestat{
 			$colunas[] = $c["coluna"];
 		}
 		return $colunas;
+	}
+	/**
+	 * Lista o comentario de uma tabela
+	 * @param codigo da conexao
+	 * @param nome do esquema
+	 * @param nome da tabela
+	 * @return execSQLDB
+	 */
+	function comentarioTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
+		$colunas = array();
+		$sql = "SELECT  pg_catalog.obj_description(c.oid, 'pg_class') AS comments FROM pg_catalog.pg_class c LEFT JOIN pg_catalog.pg_namespace n ON (n.oid = c.relnamespace) WHERE n.nspname = '".$nome_esquema."' AND c.relname = '".$nome_tabela."'";
+		$res = $this->execSQLDB($codigo_estat_conexao,$sql);
+		if(count($res) > 0){
+			$res = $res[0];
+			$res = $res["comments"];
+		}
+		else{
+			$res = "";
+		}
+		if($res == null){
+			$res = "";
+		}
+		return $res;
 	}
 	/**
 	 * Cria uma coluna em uma tabela do banco
@@ -2301,7 +2333,7 @@ class Metaestat{
 	}
 	/**
 	 * Lista os metadados de uma coluna
-	 * Os metadados s�o obtidos do pr�prio PostgreSQL
+	 * Os metadados sao obtidos do proprio PostgreSQL
 	 * @param codigo da conexao
 	 * @param nome do esquema
 	 * @param nome da tabela

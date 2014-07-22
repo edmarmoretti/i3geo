@@ -90,7 +90,8 @@ $funcoesEdicao = array(
 	"REGIAO2SHP",
 	"ESQUEMASCONEXAO",
 	"TABELASESQUEMA",
-	"ALTERAESTILOSCLASSIFICACAO"
+	"ALTERAESTILOSCLASSIFICACAO",
+	"INFOTABELA"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	//se a funcao esta no array eh feita a verificacao se o usuario esta logado e se ele esta em um grupo que
@@ -1409,7 +1410,7 @@ switch (strtoupper($funcao))
 			retornaJSON("erro");
 			exit;
 		}
-		retornaJSON($m->criaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela));
+		retornaJSON($m->criaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$comentario));
 		exit;
 	break;
 	case "CRIAESQUEMADB":
@@ -1469,6 +1470,17 @@ switch (strtoupper($funcao))
 		}
 		exit;
 	break;
+	case "INFOTABELA":
+		$m = new Metaestat();
+		$colunas = $m->colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,"");
+		$comentario = $m->comentarioTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela);
+		if($formato == "json"){
+			retornaJSON(array(
+				"colunas"=>$colunas,
+				"comentario"=>$comentario
+			));
+		}
+		exit;
 	case "CRIACOLUNADB":
 		$m = new Metaestat();
 		if($nome_esquema != "i3geo_metaestat"){

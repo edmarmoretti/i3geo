@@ -156,6 +156,11 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 		$sqltabela[] = $sql;
 		$sqltabela[] = "ALTER TABLE ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." OWNER TO ".$conexao["usuario"];
 		$sqltabela[] = "CREATE INDEX ".$_POST["tabelaDestino"]."_indx_thegeom ON ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." USING gist (the_geom )";
+		if(!empty($_POST["comentarioShp"])){
+			$enc = mb_detect_encoding($texto);
+			$_POST["comentarioShp"] = mb_convert_encoding($_POST["comentarioShp"],$encodingdb,$enc);
+			$sqltabela[] = "COMMENT ON TABLE ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]." IS '".$_POST["comentarioShp"]."'";
+		}
 		echo "<br>Sql tabela: <pre>";
 		var_dump($sqltabela);
 		echo "</pre>";
