@@ -427,6 +427,7 @@ i3GEOF.graficointerativo1 =
 		 * dados {JSON} - dados para o gr&aacute;fico
 		 */
 		iniciaJanelaFlutuante : function(dados) {
+			var minimiza, cabecalho, janela, divid, temp, titulo, idjanela;
 			// id utilizado para diferenciar cada janela e seus respectivos
 			// componentes
 			idjanela = "graficoi" + parseInt(Math.random() * 1000000, 10);
@@ -445,7 +446,7 @@ i3GEOF.graficointerativo1 =
 			if (dados) {
 				i3GEOF.graficointerativo1.propJanelas[idjanela].dados = dados;
 			}
-			var minimiza, cabecalho, janela, divid, temp, titulo;
+			
 			// cria a janela flutuante
 			cabecalho = function() {
 				i3GEOF.graficointerativo1.ativaFoco(idjanela);
@@ -482,6 +483,7 @@ i3GEOF.graficointerativo1 =
 					true,
 					i3GEO.configura.locaplic + "/imagens/oxygen/16x16/view-statistics.png",
 					duplica);
+			
 			divid = janela[2].id;
 			i3GEOF.graficointerativo1.aguarde = $i(idjanela + "_imagemCabecalho").style;
 			$i(idjanela + "_corpo").style.backgroundColor = "white";
@@ -496,25 +498,44 @@ i3GEOF.graficointerativo1 =
 					+ temp + "' type=checkbox />&nbsp;" + $trad(53, i3GEOF.graficointerativo1.dicionario) + " (" + idjanela + ")</div>");
 
 			i3GEOF.graficointerativo1.inicia(divid, idjanela);
-			if (i3GEO.Interface) {
-				temp = function() {
-					i3GEOF.graficointerativo1.janelas.remove(idjanela);
-					i3GEOF.graficointerativo1.propJanelas[idjanela] = null;
-					if (i3GEOF.graficointerativo1.janelas.length === 0) {
-						if (i3GEO.Interface.ATUAL === "openlayers") {
-							i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo1.atualizaListaDeRegistros()");
-						}
-						if (i3GEO.Interface.ATUAL === "googlemaps") {
-							google.maps.event.removeListener(graficointerativo1Dragend);
-							google.maps.event.removeListener(graficointerativo1Zoomend);
-						}
-						if (i3GEO.Interface.ATUAL === "googleearth") {
-							google.earth.removeEventListener(graficointerativo1Dragend);
-						}
-					}
-				};
-				YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+
+			if (!i3GEO.Interface) {
+				return;
 			}
+			i3GEO.janela.tempoMsg($trad(37, i3GEOF.graficointerativo1.dicionario));
+			if (i3GEO.Interface.ATUAL === "openlayers") {
+				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.graficointerativo1.atualizaListaDeRegistros()");
+			}
+			if (i3GEO.Interface.ATUAL === "googlemaps") {
+				graficointerativo1Dragend = GEvent.addListener(i3GeoMap, "dragend", function() {
+					i3GEOF.graficointerativo1.atualizaListaDeRegistros();
+				});
+				graficointerativo1Zoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {
+					i3GEOF.graficointerativo1.atualizaListaDeRegistros();
+				});
+			}
+			if (i3GEO.Interface.ATUAL === "googleearth") {
+				graficointerativo1Dragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {
+					i3GEOF.graficointerativo1.atualizaListaDeRegistros();
+				});
+			}
+			temp = function() {
+				i3GEOF.graficointerativo1.janelas.remove(idjanela);
+				i3GEOF.graficointerativo1.propJanelas[idjanela] = null;
+				if (i3GEOF.graficointerativo1.janelas.length === 0) {
+					if (i3GEO.Interface.ATUAL === "openlayers") {
+						i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo1.atualizaListaDeRegistros()");
+					}
+					if (i3GEO.Interface.ATUAL === "googlemaps") {
+						google.maps.event.removeListener(graficointerativo1Dragend);
+						google.maps.event.removeListener(graficointerativo1Zoomend);
+					}
+					if (i3GEO.Interface.ATUAL === "googleearth") {
+						google.earth.removeEventListener(graficointerativo1Dragend);
+					}
+				}
+			};
+			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 			janela[0].bringToTop();
 		},
 		/**
@@ -714,7 +735,13 @@ i3GEOF.graficointerativo1 =
 			}
 			var tema, excluir, cp, tipo, ordenax, monta, p, x, y, i, n, temp;
 
-			tema = $i(idjanela + "i3GEOgraficointerativo1ComboTemasId").value;
+			tema = $i(idjanela + "i3GEOgraficointerativo1ComboTemasId");
+			if(!tema){
+				return;
+			}
+			else{
+				tema = tema.value;
+			}
 			excluir = $i(idjanela + "i3GEOgraficointerativo1excluir").value;
 			cp = new cpaint();
 			tipo = $i(idjanela + "i3GEOgraficointerativo1TipoAgregacao").value;
@@ -1090,34 +1117,6 @@ i3GEOF.graficointerativo1 =
 				}
 			}
 			tabela.innerHTML = ins;
-		},
-		/**
-		 * Function: ativaNavegacao
-		 * 
-		 * Ativa a atualiza&ccedil;&atilde;o autom&aacute;tica ao navegar no mapa
-		 */
-		ativaEventosNavegacao : function() {
-			if (!i3GEO.Interface) {
-				return;
-			}
-			i3GEO.janela.tempoMsg($trad(37, i3GEOF.graficointerativo1.dicionario));
-			if (i3GEO.Interface.ATUAL === "openlayers") {
-				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.graficointerativo1.atualizaListaDeRegistros()");
-			}
-			if (i3GEO.Interface.ATUAL === "googlemaps") {
-				graficointerativo1Dragend = GEvent.addListener(i3GeoMap, "dragend", function() {
-					i3GEOF.graficointerativo1.atualizaListaDeRegistros();
-				});
-				graficointerativo1Zoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {
-					i3GEOF.graficointerativo1.atualizaListaDeRegistros();
-				});
-			}
-			if (i3GEO.Interface.ATUAL === "googleearth") {
-				graficointerativo1Dragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {
-					i3GEOF.graficointerativo1.atualizaListaDeRegistros();
-				});
-			}
-
 		},
 		configDefault : function(idjanela, dados, maior, cores, legendaY, legendaX) {
 			var temp, config = {
