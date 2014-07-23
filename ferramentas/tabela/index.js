@@ -24,6 +24,7 @@ i3GEOF.tabela =
 		mustacheHash : function(idjanela) {
 			return {
 				"idjanela" : idjanela,
+				"idjanelaA" : '"'+idjanela+'"',
 				"locaplic" : i3GEO.configura.locaplic,
 				"propriedades" : $trad('p13'),
 				"registros" : $trad(3, i3GEOF.tabela.dicionario),
@@ -63,18 +64,18 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: iniciaDicionario (Depreciado na versao 6.0)
-		 * 
+		 *
 		 */
 		iniciaDicionario : function() {
 			i3GEOF.tabela.iniciaJanelaFlutuante();
 		},
 		/*
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv, idjanela) {
@@ -218,11 +219,11 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function(idjanela) {
@@ -231,7 +232,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: criaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function() {
@@ -345,7 +346,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: ativaFoco
-		 * 
+		 *
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function(id) {
@@ -581,7 +582,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: ativaAutoAtualiza
-		 * 
+		 *
 		 * Ativa ou desativa a atualiza&ccedil;&atilde;o autom&aacute;tica da tabela quando o usu&aacute;rio navega no mapa
 		 */
 		atualizaListaDeRegistros : function() {
@@ -594,11 +595,11 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: pegaRegistros
-		 * 
+		 *
 		 * Pega os registros da tabela de atributos do tema
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <LISTAREGISTROS>
 		 */
 		pegaRegistros : function(idjanela, tipolista, dadosDaClasse, inicio, fim, funcao) {
@@ -656,7 +657,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: montaTabela
-		 * 
+		 *
 		 * Monta a visualiza&ccedil;&atilde;o da tabela de atributos
 		 */
 		montaTabela : function(retorno, idjanela) {
@@ -740,7 +741,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: mais
-		 * 
+		 *
 		 * Avan&ccedil;a o contador de registros para a listagem
 		 */
 		mais : function(idjanela) {
@@ -754,7 +755,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: todos
-		 * 
+		 *
 		 * Avan&ccedil;a o contador de registros para o fim da listagem
 		 */
 		todos : function(idjanela) {
@@ -767,7 +768,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: menos
-		 * 
+		 *
 		 * Retrocede o contador de registros para a listagem
 		 */
 		menos : function(idjanela) {
@@ -785,7 +786,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: excluiColuna
-		 * 
+		 *
 		 * Exclui uma coluna da visualiza&ccedil;&atilde;o da tabela
 		 */
 		excluiColuna : function(coluna, cid, idjanela) {
@@ -820,7 +821,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: ordenaColuna
-		 * 
+		 *
 		 * Ordena uma coluna da tabela
 		 */
 		ordenaColuna : function(coluna, cid, idjanela) {
@@ -891,7 +892,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: listaMarcados
-		 * 
+		 *
 		 * Retorna um array com os &iacute;ndices dos registros que est&atilde;o marcados.
 		 */
 		listaMarcados : function(idjanela) {
@@ -905,11 +906,11 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: ativaSelecao
-		 * 
+		 *
 		 * Seleciona no mapa os elementos que estiverem marcados na guia 2
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <INCLUISEL>
 		 */
 		ativaSelecao : function(idjanela) {
@@ -932,7 +933,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: limpaSelecao
-		 * 
+		 *
 		 * Limpa a sele&ccedil;&atilde;o do tema da tabela
 		 */
 		limpaSelecao : function(idjanela) {
@@ -950,7 +951,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: criaNovoTema
-		 * 
+		 *
 		 * Cria um novo tema contendo a sele&ccedil;&atilde;o existente
 		 */
 		criaNovoTema : function(idjanela) {
@@ -966,7 +967,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: comboItens
-		 * 
+		 *
 		 * Cria um combo para selecionar um item do tema escolhido
 		 */
 		comboItensEstat : function(idjanela) {
@@ -1025,7 +1026,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: relatorioTabela
-		 * 
+		 *
 		 * Monta o relat&oacute;rio padr&atilde;o em uma nova janela
 		 */
 		relatorioTabela : function(idjanela) {
@@ -1064,7 +1065,7 @@ i3GEOF.tabela =
 		},
 		/*
 		 * Function: relatorioTexto
-		 * 
+		 *
 		 * Gera o relat&oacute;rio no formato CSV
 		 */
 		relatorioTexto : function() {

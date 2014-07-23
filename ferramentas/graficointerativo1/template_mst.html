@@ -1,0 +1,156 @@
+<div id='{{{idjanela}}}i3GEOgraficointerativo1guiasYUI' class='yui-navset' style='top: 0px; cursor: pointer; left: 0px;'>
+	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
+		<li><a><em><div id='{{{idjanela}}}i3GEOgraficointerativo1guia3' style='text-align: center; left: 0px;'>
+						<img class='ticPropriedades2' style='height: 14px' title='{{{prop}}}' src='{{{locaplic}}}/imagens/visual/default/branco.gif'>
+					</div></em></a></li>
+		<li><a><em><div id='{{{idjanela}}}i3GEOgraficointerativo1guia1' style='text-align: center; left: 0px;'>{{{tipo}}}</div></em></a></li>
+		<li><a><em><div id='{{{idjanela}}}i3GEOgraficointerativo1guia2' style='text-align: center; left: 0px;'>{{{dados}}}</div></em></a></li>
+		<li><a><em><div id='{{{idjanela}}}i3GEOgraficointerativo1guia4' style='text-align: center; left: 0px;'>{{{grafico}}}</div></em></a></li>
+		<li><a><em><div id='{{{idjanela}}}i3GEOgraficointerativo1guia5' style='text-align: center; left: 0px;'>CSV</div></em></a></li>
+		<li><a><em><div id='{{{idjanela}}}i3GEOgraficointerativo1guia6' style='text-align: center; left: 0px;'>PNG</div></em></a></li>
+	</ul>
+</div>
+<br>
+<div class=guiaobj id='{{{idjanela}}}i3GEOgraficointerativo1guia1obj' style='left: 1px; display: none;'>
+	<p class=paragrafo>{{{escolhatipo}}} :</p>
+	<table class=lista6>
+		<tr>
+			<td><img style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-pie-icon.png' /></td>
+			<td><input type=radio onclick='i3GEOF.graficointerativo1.ativaTipo(this,{{{idjanelaA}}})' value='pizza_1' name='tipoGrafico' style='border: 0px solid white; cursor: pointer'></td>
+			<td>{{{pizza2d}}}</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><img style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-area-stacked-icon.png' /></td>
+			<td><input type=radio onclick='i3GEOF.graficointerativo1.ativaTipo(this,{{{idjanelaA}}})' value='area_1' name='tipoGrafico' style='border: 0px solid white; cursor: pointer'></td>
+			<td>{{{areasimp}}}</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><img style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-scatter-icon.png' /></td>
+			<td><input type=radio onclick='i3GEOF.graficointerativo1.ativaTipo(this,{{{idjanelaA}}})' value='ponto_1' name='tipoGrafico' style='border: 0px solid white; cursor: pointer'></td>
+			<td>{{{distpt}}}</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><img style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-line-stacked-icon.png' /></td>
+			<td><input type=radio onclick='i3GEOF.graficointerativo1.ativaTipo(this,{{{idjanelaA}}})' value='linha_1' name='tipoGrafico' style='border: 0px solid white; cursor: pointer'></td>
+			<td>{{{linhassimp}}}</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><img style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-bar-icon-t.png' /></td>
+			<td><input type=radio onclick='i3GEOF.graficointerativo1.ativaTipo(this,{{{idjanelaA}}})' value='arvore_1' name='tipoGrafico' style='border: 0px solid white; cursor: pointer'></td>
+			<td>{{{arvore}}}</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><img style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png' /></td>
+			<td><input type=radio onclick='i3GEOF.graficointerativo1.ativaTipo(this,{{{idjanelaA}}})' value='bar_1' name='tipoGrafico' style='border: 0px solid white; cursor: pointer'></td>
+			<td>{{{barrasv}}}</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><img style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-bar-icon-h.png' /></td>
+			<td><input type=radio onclick='i3GEOF.graficointerativo1.ativaTipo(this,{{{idjanelaA}}})' value='bar_2' name='tipoGrafico' style='border: 0px solid white; cursor: pointer'></td>
+			<td>{{{barrash}}}</td>
+		</tr>
+	</table>
+</div>
+<div class=guiaobj id='{{{idjanela}}}i3GEOgraficointerativo1guia2obj' style='left: 1px; display: none; top: -5px'>
+	<p class=paragrafo>{{{configgr}}} :</p>
+	<p class=paragrafo>{{{tema}}} :</p>
+	<div class=paragrafo id='{{{idjanela}}}i3GEOgraficointerativo1ComboTemas'></div>
+	<p class=paragrafo>
+		{{{titulo}}} :<br> {{{i3GEOgraficointerativo1Titulo}}}
+	<p class=paragrafo>
+		{{{titux}}} :<br> {{{i3GEOgraficointerativo1TituloX}}}
+	<p class=paragrafo>
+		{{{tituy}}} :<br> {{{i3GEOgraficointerativo1TituloY}}}
+	<div class=paragrafo id=' {{{idjanela}}}i3GEOgraficointerativo1ComboXlinha'>
+		<p class=paragrafo>{{{itemcx}}} :</p>
+		<div class=paragrafo id='{{{idjanela}}}i3GEOgraficointerativo1ComboX'></div>
+	</div>
+	<div id='{{{idjanela}}}i3GEOgraficointerativo1ComboYlinha' style='display: block'>
+		<p class=paragrafo>{{{itemcy}}} :</p>
+		<div class=paragrafo id='{{{idjanela}}}i3GEOgraficointerativo1ComboY'></div>
+	</div>
+	<p class=paragrafo>{{{excluirval}}} : {{{i3GEOgraficointerativo1excluir}}}
+	<p class=paragrafo>
+		<input type=checkbox style='cursor: pointer; top: 3px; position: relative;' id='{{{idjanela}}}i3GEOgraficointerativo1CoresA' />
+		{{{geracor}}}
+	</p>
+	<p class=paragrafo>
+		<input id='{{{idjanela}}}i3GEOgraficointerativo1botao1' type='buttom' value='{{{obterdados}}}' />
+	</p>
+	<div id='{{{idjanela}}}i3GEOgraficointerativo1Dados'></div>
+	<div class=paragrafo id='{{{idjanela}}}i3GEOgraficointerativo1AjudaPizza'>{{{seescolher}}}</div>
+</div>
+<div class=guiaobj id='{{{idjanela}}}i3GEOgraficointerativo1guia3obj' style='left: 1px; display: none; top: -5px'>
+	<p class=paragrafo>
+		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOgraficointerativo1xInclinado' checked />
+		{{{inclinax}}}
+	</p>
+	<p class=paragrafo>
+		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOgraficointerativo1AdLinhas' checked />
+		{{{adlinbarras}}}
+	</p>
+	<p class=paragrafo>
+		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOgraficointerativo1Acumula' />
+		{{{utilizvalacum}}}
+	</p>
+	<p class=paragrafo>
+		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOgraficointerativo1Relativa' />
+		{{{utilizvalrelat}}} (%)
+	</p>
+	<p class=paragrafo>
+		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOgraficointerativo1OrdenaX' checked />
+		{{{ordenax}}}
+	</p>
+	<p class=paragrafo>
+		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOgraficointerativo1DadosPuros' />
+		{{{naoprocessa}}}
+	</p>
+	<p class=paragrafo>
+		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOFgraficointerativo1ativaStacked' />
+		{{{stacked}}}
+	</p>
+	<p class=paragrafo>
+		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOFgraficointerativo1ativaRowsInColumns' />
+		{{{linhasnascols}}}
+	</p>
+	<p class=paragrafo>
+		<select onchange='i3GEOF.graficointerativo1.obterDados()' id='{{{idjanela}}}i3GEOgraficointerativo1TipoAgregacao'><option value='soma'>{{{soma}}}</option>
+			<option value='media'>{{{media}}}</option>
+		</select>{{{tipoagregay}}}
+	</p>
+	<p class=paragrafo>
+		<input style='cursor: pointer; width: 50px;' value=0 type=text id='{{{idjanela}}}i3GEOgraficointerativo1FatorTamanho' />
+		{{{fatcalclarg}}}
+	</p>
+</div>
+<div class=guiaobj id='{{{idjanela}}}i3GEOgraficointerativo1guia4obj' style='left: 1px; display: none; top: -10px'>
+	<a style='position: absolute; left: 50px;' href='#' onclick='i3GEOF.graficointerativo1.novaJanela()'> {{{janelasep}}} </a>
+	<img onclick='i3GEOF.graficointerativo1.alteraFatorPixel(\'menos\',{{{idjanelaA}}})' style='position: absolute;' src='{{{locaplic}}}/imagens/player_volta.png' />
+	<img onclick='i3GEOF.graficointerativo1.alteraFatorPixel(\'mais\',{{{idjanelaA}}})' style='position: absolute; left: 20px;' src='{{{locaplic}}}/imagens/player_avanca.png' />
+	<div id='{{{idjanela}}}i3GEOgraficointerativo1guia4objCanvas' style='top: 15px;'></div>
+</div>
+<div class=guiaobj id='{{{idjanela}}}i3GEOgraficointerativo1guia5obj' style='font-size: 10px; left: 10px; display: none; top: -0px'></div>
+<div class=guiaobj id='{{{idjanela}}}i3GEOgraficointerativo1guia6obj' style='font-size: 10px; left: 10px; display: none; top: -0px'>
+	<form method=post action='{{{locaplic}}}/pacotes/svg2img.php' id='{{{idjanela}}}i3GEOgraficointerativo1PNG' target='_blank'>
+		<input type=hidden name='svg' value='' />
+	</form>
+</div>
+<div id='{{{idjanela}}}i3GEOgraficointerativo1Grafico' style='position: relative; top: -5px; display: none'></div>

@@ -389,7 +389,7 @@ i3GEOF.graficointerativo1.dicionario =
 		],
 		49 : [
 			{
-				pt : "As linhas  de dados ficam nas colunas",
+				pt : "As linhas de dados ficam nas colunas",
 				en : "",
 				es : "",
 				it : ""

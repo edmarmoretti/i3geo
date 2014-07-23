@@ -1,32 +1,32 @@
 /**
  * Title: Gr&aacute;fico interativo 1
- * 
+ *
  * Representa&ccedil;&atilde;o gr&aacute;fica de dados. O gr&aacute;fico &eacute; constru&iacute;do tendo como base os atributos de um tema
  * e &eacute; modificado conforme o usu&aacute;rio navega pelo mapa. A renderiza&ccedil;&atilde;o do gr&aacute;fico &eacute; feito pelo
  * navegador por meio do aplicativo openflashchart. Os dados que ser&atilde;o utilizados no gr&aacute;fico s&atilde;o baseados em um
  * elemento TABLE. Esse elemento pode ser montado com base na tabela de atributos e editada pelo usu&aacute;rio. Os dados podem
  * tamb&eacute;m ser inseridos como par&acirc;metros na inicializa&ccedil;&atilde;o da ferramenta, permitindo que o gr&aacute;fico seja
  * utilizado por outras ferramentas.
- * 
+ *
  * Veja:
- * 
+ *
  * <i3GEO.analise.dialogo.graficointerativo1>
- * 
+ *
  * Arquivo:
- * 
+ *
  * i3geo/ferramentas/graficointerativo1/index.js.php
- * 
+ *
  * Licenca:
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -38,7 +38,7 @@ if (typeof (i3GEOF) === 'undefined') {
 }
 /**
  * Classe: i3GEOF.graficointerativo1
- * 
+ *
  */
 i3GEOF.graficointerativo1 =
 	{
@@ -48,97 +48,128 @@ i3GEOF.graficointerativo1 =
 		janelas : [],
 		propJanelas : {},
 		/**
+		 * Template no formato mustache E preenchido na carga do javascript com o programa dependencias.php
+		 */
+		MUSTACHE : "",
+		/**
+		 * Susbtitutos para o template
+		 */
+		mustacheHash : function(idjanela) {
+			return {
+				"idjanela" : idjanela,
+				"idjanelaA" : '"'+idjanela+'"',
+				"locaplic" : i3GEO.configura.locaplic,
+				"prop": $trad("p13"),
+				"tipo": $trad(1, i3GEOF.graficointerativo1.dicionario),
+				"dados": $trad(2, i3GEOF.graficointerativo1.dicionario),
+				"grafico": $trad(3, i3GEOF.graficointerativo1.dicionario),
+				"escolhatipo": $trad(4, i3GEOF.graficointerativo1.dicionario),
+				"pizza2d": $trad(5, i3GEOF.graficointerativo1.dicionario),
+				"areasimp": $trad(6, i3GEOF.graficointerativo1.dicionario),
+				"distpt": $trad(7, i3GEOF.graficointerativo1.dicionario),
+				"linhassimp": $trad(8, i3GEOF.graficointerativo1.dicionario),
+				"arvore": $trad(9, i3GEOF.graficointerativo1.dicionario),
+				"barrasv": $trad(10, i3GEOF.graficointerativo1.dicionario),
+				"barrash": $trad(11, i3GEOF.graficointerativo1.dicionario),
+				"configgr": $trad(12, i3GEOF.graficointerativo1.dicionario),
+				"tema": $trad(13, i3GEOF.graficointerativo1.dicionario),
+				"titulo": $trad(50, i3GEOF.graficointerativo1.dicionario),
+				"titux": $trad(51, i3GEOF.graficointerativo1.dicionario),
+				"tituy":$trad(52, i3GEOF.graficointerativo1.dicionario),
+				"itemcx": $trad(14, i3GEOF.graficointerativo1.dicionario),
+				"itemcy": $trad(15, i3GEOF.graficointerativo1.dicionario),
+				"excluirval": $trad(16, i3GEOF.graficointerativo1.dicionario),
+				"geracor": $trad(17, i3GEOF.graficointerativo1.dicionario),
+				"obterdados": $trad(18, i3GEOF.graficointerativo1.dicionario),
+				"seescolher": $trad(19, i3GEOF.graficointerativo1.dicionario),
+				"inclinax": $trad(20, i3GEOF.graficointerativo1.dicionario),
+				"adlinbarras": $trad(21, i3GEOF.graficointerativo1.dicionario),
+				"utilizvalacum": $trad(22, i3GEOF.graficointerativo1.dicionario),
+				"utilizvalrelat": $trad(23, i3GEOF.graficointerativo1.dicionario),
+				"ordenax": $trad(24, i3GEOF.graficointerativo1.dicionario),
+				"naoprocessa": $trad(25, i3GEOF.graficointerativo1.dicionario),
+				"stacked": $trad(48, i3GEOF.graficointerativo1.dicionario),
+				"linhasnascols": $trad(49, i3GEOF.graficointerativo1.dicionario),
+				"media": $trad(27, i3GEOF.graficointerativo1.dicionario),
+				"tipoagregay": $trad(28, i3GEOF.graficointerativo1.dicionario),
+				"fatcalclarg": $trad(29, i3GEOF.graficointerativo1.dicionario),
+				"janelasep": $trad(30, i3GEOF.graficointerativo1.dicionario),
+				"soma": $trad(26, i3GEOF.graficointerativo1.dicionario),
+				"i3GEOgraficointerativo1Titulo": $inputText("", "", idjanela + "i3GEOgraficointerativo1Titulo", "", 40, ""),
+				"i3GEOgraficointerativo1TituloX": $inputText("", "", idjanela + "i3GEOgraficointerativo1TituloX", "", 40, ""),
+				"i3GEOgraficointerativo1TituloY": $inputText("", "", idjanela + "i3GEOgraficointerativo1TituloY", "", 40, ""),
+				"i3GEOgraficointerativo1excluir": $inputText("", "", idjanela + "i3GEOgraficointerativo1excluir", "", 3, "")
+			};
+		},
+		/**
 		 * Propriedade: dados
-		 * 
+		 *
 		 * Dados que serao utilizados. Pode ser passado como parametro.
-		 * 
+		 *
 		 * Default: {false}
 		 */
 		dados : false,
 		/**
 		 * Propriedade: titulo
-		 * 
+		 *
 		 * T&iacute;tulo do gr&aacute;fico. Se for vazio, ser&aacute; obtido do nome do tema selecionado
 		 */
 		titulo : "",
 		/**
 		 * Propriedade: tipo
-		 * 
+		 *
 		 * Tipo de gr&aacute;fico escolhido pelo usu&aacute;rio.
 		 */
 		tipo : "",
 		/**
 		 * Propriedade: acumula
-		 * 
+		 *
 		 * Acumula os valores ao gerar o gr&aacute;fico
-		 * 
+		 *
 		 * Type: {boolean}
-		 * 
+		 *
 		 * Default: {false}
 		 */
 		acumula : false,
 		/**
 		 * Propriedade: relativa
-		 * 
+		 *
 		 * Utiliza valores relativos ao criar o gr&aacute;fico
-		 * 
+		 *
 		 * Type: {boolean}
-		 * 
+		 *
 		 * Default: {false}
 		 */
 		relativa : false,
 		/**
 		 * Propriedade: dadospuros
-		 * 
+		 *
 		 * N&atilde;o faz nenhum tipo de processamento nos dados antes de gerar o gr&aacute;fico
-		 * 
+		 *
 		 * Type: {boolean}
-		 * 
+		 *
 		 * Default: {false}
 		 */
 		dadospuros : false,
 		/**
-		 * Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-		 */
-		criaJanelaFlutuante : function(dados) {
-			if (dados) {
-				i3GEOF.graficointerativo1.dados = dados;
-			}
-			i3GEOF.graficointerativo1.iniciaDicionario();
-		},
-		/**
 		 * Function: iniciaDicionario
-		 * 
+		 *
 		 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-		 * 
+		 *
 		 * O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 		 */
 		iniciaDicionario : function(dados) {
-			if (dados) {
-				i3GEOF.graficointerativo1.dados = dados;
-			}
-			var temp = function() {
-				i3GEOF.graficointerativo1.iniciaJanelaFlutuante(dados);
-				i3GEOF.graficointerativo1.ativaEventosNavegacao();
-			};
-			if (typeof (i3GEOF.graficointerativo1.dicionario) === 'undefined') {
-				i3GEO.util.scriptTag(
-					i3GEO.configura.locaplic + "/ferramentas/graficointerativo1/dependencias.php",
-					temp,
-					"i3GEOF.graficointerativo1.dicionario_script");
-			} else {
-				i3GEOF.graficointerativo1.iniciaJanelaFlutuante(dados);
-			}
+			i3GEOF.tabela.iniciaJanelaFlutuante(dados);
 		},
 		/**
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-		 * 
+		 *
 		 * dados {JSON} - dados para o gr&aacute;fico (opcional) exemplo
 		 * ["n;x","'Argentina';33796870","'Paraguay';4773464","'Brazil';151525400","'Chile';13772710"]
 		 */
@@ -240,190 +271,24 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function(idjanela) {
-			var locaplic = i3GEO.configura.locaplic, ins = '';
-			ins =
-				'<div id="'
-					+ idjanela
-					+ 'i3GEOgraficointerativo1guiasYUI" class="yui-navset" style="top:0px;cursor:pointer;left:0px;">'
-					+ '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'
-					+ '		<li><a  ><em><div id="'
-					+ idjanela
-					+ 'i3GEOgraficointerativo1guia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'
-					+ $trad("p13")
-					+ '" src="'
-					+ i3GEO.configura.locaplic
-					+ '/imagens/visual/default/branco.gif"></div></em></a></li>'
-					+ '		<li><a  ><em><div id="'
-					+ idjanela
-					+ 'i3GEOgraficointerativo1guia1" style="text-align:center;left:0px;" >'
-					+ $trad(1, i3GEOF.graficointerativo1.dicionario)
-					+ '</div></em></a></li>'
-					+ '		<li><a  ><em><div id="'
-					+ idjanela
-					+ 'i3GEOgraficointerativo1guia2" style="text-align:center;left:0px;" >'
-					+ $trad(2, i3GEOF.graficointerativo1.dicionario)
-					+ '</div></em></a></li>'
-					+ '		<li><a  ><em><div id="'
-					+ idjanela
-					+ 'i3GEOgraficointerativo1guia4" style="text-align:center;left:0px;" >'
-					+ $trad(3, i3GEOF.graficointerativo1.dicionario)
-					+ '</div></em></a></li>'
-					+ '		<li><a  ><em><div id="'
-					+ idjanela
-					+ 'i3GEOgraficointerativo1guia5" style="text-align:center;left:0px;" >CSV'
-					+ '</div></em></a></li>'
-					+ '		<li><a  ><em><div id="'
-					+ idjanela
-					+ 'i3GEOgraficointerativo1guia6" style="text-align:center;left:0px;" >PNG'
-					+ '</div></em></a></li>'
-					+ '	</ul>'
-					+ '</div><br>'
-					// tipos de grafico
-					+ '<div class=guiaobj id="'
-					+ idjanela
-					+ 'i3GEOgraficointerativo1guia1obj" style="left:1px;display:none;">'
-					+ '	<p class=paragrafo >'
-					+ $trad(4, i3GEOF.graficointerativo1.dicionario)
-					+ ': </p>'
-					+ '	<table class=lista6 >'
-					+ '		<tr><td><img style=cursor:text; src="'
-					+ locaplic
-					+ '/imagens/oxygen/22x22/Actions-office-chart-pie-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this,\''
-					+ idjanela
-					+ '\')" value="pizza_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'
-					+ $trad(5, i3GEOF.graficointerativo1.dicionario)
-					+ '</td></tr>'
-					+ '		<tr><td>&nbsp;</td></tr>'
-					+ '		<tr><td><img style=cursor:text; src="'
-					+ locaplic
-					+ '/imagens/oxygen/22x22/Actions-office-chart-area-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this,\''
-					+ idjanela
-					+ '\')" value="area_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'
-					+ $trad(6, i3GEOF.graficointerativo1.dicionario)
-					+ '</td></tr>'
-					+ '		<tr><td>&nbsp;</td></tr>'
-					+ '		<tr><td><img style=cursor:text; src="'
-					+ locaplic
-					+ '/imagens/oxygen/22x22/Actions-office-chart-scatter-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this,\''
-					+ idjanela
-					+ '\')" value="ponto_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'
-					+ $trad(7, i3GEOF.graficointerativo1.dicionario)
-					+ '</td></tr>'
-					+ '		<tr><td>&nbsp;</td></tr>'
-					+ '		<tr><td><img style=cursor:text; src="'
-					+ locaplic
-					+ '/imagens/oxygen/22x22/Actions-office-chart-line-stacked-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this,\''
-					+ idjanela
-					+ '\')" value="linha_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'
-					+ $trad(8, i3GEOF.graficointerativo1.dicionario)
-					+ '</td></tr>'
-					+ '		<tr><td>&nbsp;</td></tr>'
-					+ '		<tr><td><img style=cursor:text; src="'
-					+ locaplic
-					+ '/imagens/oxygen/22x22/Actions-office-chart-bar-icon-t.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this,\''
-					+ idjanela
-					+ '\')" value="arvore_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'
-					+ $trad(9, i3GEOF.graficointerativo1.dicionario)
-					+ '</td></tr>'
-					+ '		<tr><td>&nbsp;</td></tr>'
-					+ '		<tr><td><img style=cursor:text; src="'
-					+ locaplic
-					+ '/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this,\''
-					+ idjanela
-					+ '\')" value="bar_1" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'
-					+ $trad(10, i3GEOF.graficointerativo1.dicionario)
-					+ '</td></tr>'
-					+ '		<tr><td>&nbsp;</td></tr>'
-					+ '		<tr><td><img style=cursor:text; src="'
-					+ locaplic
-					+ '/imagens/oxygen/22x22/Actions-office-chart-bar-icon-h.png" /></td><td><input type=radio onclick="i3GEOF.graficointerativo1.ativaTipo(this,\''
-					+ idjanela + '\')" value="bar_2" name="tipoGrafico" style="border:0px solid white;cursor:pointer" > </td><td>'
-					+ $trad(11, i3GEOF.graficointerativo1.dicionario) + '</td></tr>' + '	</table>' + '</div> '
-					// obtencao dos dados e parametros
-					+ '<div class=guiaobj id="' + idjanela + 'i3GEOgraficointerativo1guia2obj" style="left:1px;display:none;top:-5px">'
-					+ '	<p class=paragrafo >' + $trad(12, i3GEOF.graficointerativo1.dicionario) + ': </p>' + '	<p class=paragrafo >'
-					+ $trad(13, i3GEOF.graficointerativo1.dicionario) + ':</p>' + '	<div class=paragrafo id="' + idjanela
-					+ 'i3GEOgraficointerativo1ComboTemas" ></div>' + '	<p class=paragrafo >'
-					+ $trad(50, i3GEOF.graficointerativo1.dicionario) + ':<br>'
-					+ $inputText("", "", idjanela + "i3GEOgraficointerativo1Titulo", "", 40, "") + '	<p class=paragrafo >'
-					+ $trad(51, i3GEOF.graficointerativo1.dicionario) + ':<br>'
-					+ $inputText("", "", idjanela + "i3GEOgraficointerativo1TituloX", "", 40, "") + '	<p class=paragrafo >'
-					+ $trad(52, i3GEOF.graficointerativo1.dicionario) + ':<br>'
-					+ $inputText("", "", idjanela + "i3GEOgraficointerativo1TituloY", "", 40, "") + '	<div class=paragrafo id="' + idjanela
-					+ 'i3GEOgraficointerativo1ComboXlinha" >' + '		<p class=paragrafo >' + $trad(14, i3GEOF.graficointerativo1.dicionario)
-					+ ':</p>' + '		<div class=paragrafo id="' + idjanela + 'i3GEOgraficointerativo1ComboX" ></div>' + '	</div>'
-					+ '	<div id="' + idjanela + 'i3GEOgraficointerativo1ComboYlinha" style=display:block >' + '		<p class=paragrafo >'
-					+ $trad(15, i3GEOF.graficointerativo1.dicionario) + ': </p>' + '		<div class=paragrafo id="' + idjanela
-					+ 'i3GEOgraficointerativo1ComboY" ></div>' + '	</div>' + '	<p class=paragrafo >'
-					+ $trad(16, i3GEOF.graficointerativo1.dicionario) + ': '
-					+ $inputText("", "", idjanela + "i3GEOgraficointerativo1excluir", "", 3, "")
-					+ '	<p class=paragrafo ><input type=checkbox style="cursor:pointer;top:3px;position:relative;" id="' + idjanela
-					+ 'i3GEOgraficointerativo1CoresA" /> ' + $trad(17, i3GEOF.graficointerativo1.dicionario) + '</p>'
-					+ '	<p class=paragrafo ><input id="' + idjanela + 'i3GEOgraficointerativo1botao1" type="buttom" value="'
-					+ $trad(18, i3GEOF.graficointerativo1.dicionario) + '" /></p>' + '	<div id="' + idjanela
-					+ 'i3GEOgraficointerativo1Dados" ></div>' + '	<div class=paragrafo id="' + idjanela
-					+ 'i3GEOgraficointerativo1AjudaPizza" >' + $trad(19, i3GEOF.graficointerativo1.dicionario) + '</div>' + '</div>'
-					// propriedades adicionais
-					+ '<div class=guiaobj id="' + idjanela + 'i3GEOgraficointerativo1guia3obj" style="left:1px;display:none;top:-5px">'
-					+ '	<p class=paragrafo ><input style=cursor:pointer type=checkbox id="' + idjanela
-					+ 'i3GEOgraficointerativo1xInclinado" checked /> ' + $trad(20, i3GEOF.graficointerativo1.dicionario) + '</p>'
-					+ '	<p class=paragrafo ><input style=cursor:pointer type=checkbox id="' + idjanela
-					+ 'i3GEOgraficointerativo1AdLinhas" checked /> ' + $trad(21, i3GEOF.graficointerativo1.dicionario) + '</p>'
-					+ '	<p class=paragrafo ><input style=cursor:pointer type=checkbox id="' + idjanela
-					+ 'i3GEOgraficointerativo1Acumula" /> ' + $trad(22, i3GEOF.graficointerativo1.dicionario) + '</p>'
-					+ '	<p class=paragrafo ><input style=cursor:pointer type=checkbox id="' + idjanela
-					+ 'i3GEOgraficointerativo1Relativa" /> ' + $trad(23, i3GEOF.graficointerativo1.dicionario) + ' (%)</p>'
-					+ '	<p class=paragrafo ><input style=cursor:pointer type=checkbox id="' + idjanela
-					+ 'i3GEOgraficointerativo1OrdenaX" checked /> ' + $trad(24, i3GEOF.graficointerativo1.dicionario) + '</p>'
-					+ '	<p class=paragrafo ><input style=cursor:pointer type=checkbox id="' + idjanela
-					+ 'i3GEOgraficointerativo1DadosPuros" /> ' + $trad(25, i3GEOF.graficointerativo1.dicionario) + '</p>' +
-
-					'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id="' + idjanela
-					+ 'i3GEOFgraficointerativo1ativaStacked" /> ' + $trad(48, i3GEOF.graficointerativo1.dicionario) + '</p>'
-					+ '	<p class=paragrafo ><input style=cursor:pointer type=checkbox id="' + idjanela
-					+ 'i3GEOFgraficointerativo1ativaRowsInColumns" /> ' + $trad(49, i3GEOF.graficointerativo1.dicionario) + '</p>'
-					+ '	<p class=paragrafo ><select onchange="i3GEOF.graficointerativo1.obterDados()" id="' + idjanela
-					+ 'i3GEOgraficointerativo1TipoAgregacao" ><option value="soma">' + $trad(26, i3GEOF.graficointerativo1.dicionario)
-					+ '</option><option value="media">' + $trad(27, i3GEOF.graficointerativo1.dicionario) + '</option></select> '
-					+ $trad(28, i3GEOF.graficointerativo1.dicionario) + '</p>'
-					+ '	<p class=paragrafo ><input style=cursor:pointer;width:50px; value=0 type=text id="' + idjanela
-					+ 'i3GEOgraficointerativo1FatorTamanho" /> ' + $trad(29, i3GEOF.graficointerativo1.dicionario) + '</p>' + '</div>'
-					// aqui vai o grafico
-					+ '<div class=guiaobj id="' + idjanela + 'i3GEOgraficointerativo1guia4obj" style="left:1px;display:none;top:-10px">'
-					+ '	<a style=position:absolute;left:50px; href="#" onclick="i3GEOF.graficointerativo1.novaJanela()" >'
-					+ $trad(30, i3GEOF.graficointerativo1.dicionario) + '</a>'
-					+ ' <img onclick="i3GEOF.graficointerativo1.alteraFatorPixel(\'menos\',\'' + idjanela
-					+ '\')" style=position:absolute; src="' + i3GEO.configura.locaplic + '/imagens/player_volta.png" />'
-					+ ' <img onclick="i3GEOF.graficointerativo1.alteraFatorPixel(\'mais\',\'' + idjanela
-					+ '\')" style=position:absolute;left:20px; src="' + i3GEO.configura.locaplic + '/imagens/player_avanca.png" />'
-					+ '	<div id="' + idjanela + 'i3GEOgraficointerativo1guia4objCanvas" style="top:15px;"></div>' + '</div>'
-					// csv
-					+ '<div class=guiaobj id="' + idjanela
-					+ 'i3GEOgraficointerativo1guia5obj" style="font-size:10px;left:10px;display:none;top:-0px">' + '</div>'
-					// png
-					+ '<div class=guiaobj id="' + idjanela
-					+ 'i3GEOgraficointerativo1guia6obj" style="font-size:10px;left:10px;display:none;top:-0px">'
-					+ ' <form method=post action="' + i3GEO.configura.locaplic + '/pacotes/svg2img.php" id="' + idjanela
-					+ 'i3GEOgraficointerativo1PNG" target="_blank" >' + ' <input type=hidden name="svg" value="" />' + ' </form>'
-					+ '</div>' + '<div id="' + idjanela
-					+ 'i3GEOgraficointerativo1Grafico" style="position:relative;top:-5px;display:none"></div>';
+			var ins = Mustache.render(i3GEOF.graficointerativo1.MUSTACHE, i3GEOF.graficointerativo1.mustacheHash(idjanela));
 			return ins;
 		},
 		/**
 		 * Function: iniciaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
-		 * 
+		 *
 		 * Parametro
-		 * 
+		 *
 		 * dados {JSON} - dados para o gr&aacute;fico
 		 */
 		iniciaJanelaFlutuante : function(dados) {
@@ -446,7 +311,7 @@ i3GEOF.graficointerativo1 =
 			if (dados) {
 				i3GEOF.graficointerativo1.propJanelas[idjanela].dados = dados;
 			}
-			
+
 			// cria a janela flutuante
 			cabecalho = function() {
 				i3GEOF.graficointerativo1.ativaFoco(idjanela);
@@ -483,7 +348,7 @@ i3GEOF.graficointerativo1 =
 					true,
 					i3GEO.configura.locaplic + "/imagens/oxygen/16x16/view-statistics.png",
 					duplica);
-			
+
 			divid = janela[2].id;
 			i3GEOF.graficointerativo1.aguarde = $i(idjanela + "_imagemCabecalho").style;
 			$i(idjanela + "_corpo").style.backgroundColor = "white";
@@ -540,7 +405,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: ativaFoco
-		 * 
+		 *
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function(idjanela) {
@@ -571,7 +436,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: comboTemas
-		 * 
+		 *
 		 * Monta o combo para escolha do tema que ser&aacute; utilizado no gr&aacute;fico
 		 */
 		comboTemas : function(idjanela) {
@@ -595,7 +460,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: ativaTipo
-		 * 
+		 *
 		 * Define a vari&aacute;vel com o tipo de gr&aacute;fico e mostra a guia2
 		 */
 		ativaTipo : function(obj, idjanela) {
@@ -629,7 +494,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: configuraDados
-		 * 
+		 *
 		 * Configura o formul&aacute;rio para obten&ccedil;&atilde;o dos dados para cada tipo de gr&aacute;fico
 		 */
 		configuraDados : function(idjanela) {
@@ -652,11 +517,11 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: comboItensSel
-		 * 
+		 *
 		 * Cria um combo para selecionar os itens do tema escolhido
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <i3GEO.util.comboItens>
 		 */
 		comboItensSel : function(idjanela) {
@@ -719,11 +584,11 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: obterDados
-		 * 
+		 *
 		 * Obt&eacute;m os dados que ser&atilde;o utilizados no gr&aacute;fico
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <GRAFICOSELECAO>
 		 */
 		obterDados : function(idjanela) {
@@ -855,11 +720,11 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: montaTabelaDados
-		 * 
+		 *
 		 * Monta a tabela com os dados que ser&atilde;o utilizados no gr&aacute;fico
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * retorno {JSON} - dados no formato JSON
 		 */
 		montaTabelaDados : function(idjanela, retorno) {
@@ -918,7 +783,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: tabela2csv
-		 * 
+		 *
 		 * Obt&eacute;m os dados da tabela em CSV
 		 */
 		tabela2csv : function(idjanela) {
@@ -937,7 +802,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: tabela2dados
-		 * 
+		 *
 		 * Obt&eacute;m os dados da tabela para compor o gr&aacute;fico
 		 */
 		tabela2dados : function(idjanela) {
@@ -1060,7 +925,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: excluilinha
-		 * 
+		 *
 		 * Exclui uma linha da tabela de dados
 		 */
 		excluilinha : function(celula) {
@@ -1072,7 +937,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: corj
-		 * 
+		 *
 		 * Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 		 */
 		corj : function(obj) {
@@ -1080,7 +945,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: ordenaColuna
-		 * 
+		 *
 		 * Ordena uma coluna da tabela
 		 */
 		ordenaColuna : function(coluna, cid) {

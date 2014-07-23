@@ -88,9 +88,12 @@ i3GEO.analise = {
 		 */
 		graficoInterativo1 : function() {
 			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.graficoInterativo1()",
+				"i3GEO.analise.dialogo.graficointerativo1()",
 				"graficointerativo1",
-				"graficointerativo1");
+				"graficointerativo1",
+				"dependencias.php",
+				"i3GEOF.graficointerativo1.iniciaJanelaFlutuante()"
+			);
 		},
 		/**
 		 * Function: linhaDoTempo
