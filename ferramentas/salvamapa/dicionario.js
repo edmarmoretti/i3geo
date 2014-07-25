@@ -49,7 +49,7 @@ i3GEOF.salvaMapa.dicionario = {
 			it:""
 		}],
 		9: [{
-			pt:"Salvando o mapa atual, voc&ecirc; poder&aacute; carreg&aacute;-lo novamente.",
+			pt:"Salvando o mapa atual, voc&ecirc; poder&aacute; carreg&aacute;-lo novamente. Gr&aacute;ficos e desenhos tamb&eacute;m s&atilde;o salvos.",
 			en:"",
 			es:"",
 			it:""

@@ -96,9 +96,9 @@ i3GEOF.salvaMapa = {
 		onde = $i(onde);
 		if(onde){
 			try{
-				onde.innerHTML = "<a href='#' onclick='i3GEOF.salvaMapa.salvaMapaBanco()' >"+$trad(1,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
-					"<a href='#' onclick='i3GEO.mapa.dialogo.listaDeMapasBanco()'>"+$trad(2,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
-					"<a href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target='_blank' >"+$trad(3,i3GEOF.salvaMapa.dicionario)+"</a>";
+				onde.innerHTML = "<a style='line-height:20px;font-size:12px;' href='#' onclick='i3GEOF.salvaMapa.salvaMapaBanco()' >"+$trad(1,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a style='line-height:20px;font-size:12px;' href='#' onclick='i3GEO.mapa.dialogo.listaDeMapasBanco()'>"+$trad(2,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a style='line-height:20px;font-size:12px;' href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target='_blank' >"+$trad(3,i3GEOF.salvaMapa.dicionario)+"</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		}
@@ -113,9 +113,9 @@ i3GEOF.salvaMapa = {
 					down = i3GEO.configura.locaplic+"/ferramentas/salvamapa/forcedownload.php?file="+map_file;
 				local = i3GEO.configura.locaplic+"/../ms_tmp"+local[1];
 				onde.innerHTML = "" +
-					"<a href='"+down+"' target='_blank' >"+$trad(4,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
-					"<a href='"+local+"' target='_blank' >"+$trad(16,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
-					"<a href='"+teste+"' target='_blank' >"+$trad(5,i3GEOF.salvaMapa.dicionario)+"</a>";
+					"<a style='line-height:20px;font-size:12px;' href='"+down+"' target='_blank' >"+$trad(4,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a style='line-height:20px;font-size:12px;' href='"+local+"' target='_blank' >"+$trad(16,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a style='line-height:20px;font-size:12px;' href='"+teste+"' target='_blank' >"+$trad(5,i3GEOF.salvaMapa.dicionario)+"</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		}
@@ -170,7 +170,7 @@ i3GEOF.salvaMapa = {
 			'	<p class="paragrafo" ><b>1- </b>'+$trad(11,i3GEOF.salvaMapa.dicionario) +
 				$trad(12,i3GEOF.salvaMapa.dicionario) +
 			'	<p class="paragrafo" >' + $trad(13,i3GEOF.salvaMapa.dicionario) +
-			'	<div id="i3GEOFsalvaMapaLocal"></div>' +
+			'	<div id="i3GEOFsalvaMapaLocal" ></div>' +
 			'</div>' +
 			'<div style=background-color:white;padding:5px;margin:5px >' +
 			'	<p class="paragrafo" ><b>2- </b>' + $trad(14,i3GEOF.salvaMapa.dicionario) +
