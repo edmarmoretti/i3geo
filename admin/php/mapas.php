@@ -23,7 +23,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -36,7 +36,7 @@ Parametros:
 
 O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&atilde;o ser&aacute; executada, por exemplo, mapas.php?funcao=pegamapas.
 
-Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
+Cada opera&ccedil;&atilde;o possu&iacute; seus pr&oacute;prios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
 
@@ -162,7 +162,7 @@ switch (strtoupper($funcao))
 
 	titulo {string} - titulo do mapa
 
-	mapfile {string} - mapfile na pasta temporária
+	mapfile {string} - mapfile na pasta tempor&aacute;ria
 
 	Retorno:
 
@@ -174,7 +174,7 @@ switch (strtoupper($funcao))
 	break;
 }
 function salvaMapfile(){
-	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa,$preferenciasbase64,$geometriasbase64;
+	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa,$preferenciasbase64,$geometriasbase64,$graficosbase64;
 	//as preferencias sao criadas via javascript e guardadas junto com o mapa
 	try{
 		//
@@ -186,9 +186,10 @@ function salvaMapfile(){
 		//o parser para reconstruir os valores e feito em javascript, no cliente
 		//
 		$customizacoesinit = array();
-		if(isset($preferenciasbase64) || isset($geometriasbase64)){
+		if(isset($preferenciasbase64) || isset($geometriasbase64) || isset($graficosbase64)){
 			$customizacoesinit[] = '"preferenciasbase64":"'.$preferenciasbase64.'"';
 			$customizacoesinit[] = '"geometriasbase64":"'.$geometriasbase64.'"';
+			$customizacoesinit[] = '"graficosbase64":"'.$graficosbase64.'"';
 			$m = ms_newMapObj($arqmapfile);
 			$m->setmetadata("CUSTOMIZACOESINIT",'{'.implode(",",$customizacoesinit).'}');
 			$m->save($arqmapfile);

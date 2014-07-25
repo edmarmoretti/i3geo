@@ -146,7 +146,7 @@ i3GEOF.salvaMapa = {
 						}
 					}
 				};
-				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa,$i("i3GEOFsalvaPref").checked,true);
+				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa,$i("i3GEOFsalvaPref").checked,true,true);
 			};
 			texto = $trad(7,i3GEOF.salvaMapa.dicionario)+"<br><div id=i3GEOFsalvamapaMapa  ></div><br><br><input style='position:relative;top:2px;' checked type=checkbox id=i3GEOFsalvaPref />"+$trad(15,i3GEOF.salvaMapa.dicionario);
 			i3GEO.janela.prompt(texto + "<br><br>"+$trad(8,i3GEOF.salvaMapa.dicionario),funcaoOK);

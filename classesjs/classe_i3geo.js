@@ -341,6 +341,7 @@ var i3GEO = {
 						//
 						//obtem os parametros que foram armazenados ao salvar o mapa
 						//caso o mapa atual tenha sido recuperado do banco de dados
+						//os parametros sao armazenados em base64 no objeto metadata do mapfile
 						//
 						if(retorno.data.customizacoesinit){
 							preferencias = YAHOO.lang.JSON.parse(retorno.data.customizacoesinit);
@@ -390,8 +391,15 @@ var i3GEO = {
 						//caso o mapa atual tenha sido recuperado do banco de dados
 						//
 						if(retorno.data.customizacoesinit){
-							temp = i3GEO.util.base64decode(preferencias.geometriasbase64);
-							i3GEO.mapa.desCompactaLayerGrafico(temp);
+							//recupera os layers graficos
+							if(preferencias.geometriasbase64 && preferencias.geometriasbase64 != ""){
+								temp = i3GEO.util.base64decode(preferencias.geometriasbase64);
+								i3GEO.mapa.desCompactaLayerGrafico(temp);
+							}
+							//recupera os graficos
+							if(preferencias.graficosbase64 && preferencias.graficosbase64 != ""){
+								i3GEO.mapa.restauraGraficos(preferencias.graficosbase64);
+							}
 						}
 					}
 					else

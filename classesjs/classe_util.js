@@ -2882,7 +2882,7 @@ i3GEO.util = {
 			YAHOO.util.Connect.asyncRequest("GET", sUrl, callback);
 		},
 		/*
-	Verifica se a fun��o html de armazenamento local esta disponivel no navegador
+	Verifica se a funcao html de armazenamento local esta disponivel no navegador
 		 */
 		verifica_html5_storage: function(){
 			if(typeof(Storage)!=="undefined"){
