@@ -47,6 +47,8 @@ perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o m
 format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
 	abrir o mashup do OpenLayers com as camadas definida em temas.
 	Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
+	
+OUTPUTFORMAT - em getfeature, aceita tamb&eacute;m shape-zip para download de shapefile
 
 id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
 	nao deve ser utilizado junto com tema
@@ -728,7 +730,7 @@ if((isset($legenda)) && (strtolower($legenda) == "sim")){
 if(isset($OUTPUTFORMAT)){
 	if(strtolower($OUTPUTFORMAT) == "shape-zip"){
 		$l = $oMap->getlayer(0);
-		$n = $l->name.time();
+		$n = $l->name;
 		$oMap->selectOutputFormat("shape-zip");
 		$oMap->outputformat->setOption("STORAGE", "memory");
 		$oMap->outputformat->setOption("FORM", "zip");

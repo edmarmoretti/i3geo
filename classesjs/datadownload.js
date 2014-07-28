@@ -5,7 +5,7 @@ Lista os temas configurados no menu de temas e que permitem download.
 
 Para utilizar esse sistema acesse http://localhost/i3geo/datadownload.htm
 
-Pode-se usar um parâmetro para abrir o aplicativo e imediatamente mostrar os arquivos para download, por exemplo
+Pode-se usar um parï¿½metro para abrir o aplicativo e imediatamente mostrar os arquivos para download, por exemplo
 
 datadownload.htm?bioma
 
@@ -242,13 +242,11 @@ function listaArquivos(dir)
 		if ((retorno.data != "erro") && (retorno.data != undefined))
 		{
 			ins += "<b>Diret&oacute;rios:</b><br><br>";
-			for (var ig=0;ig<retorno.data.diretorios.length; ig++)
-			{
+			for (var ig=0;ig<retorno.data.diretorios.length; ig++){
 				ins += "<span style=cursor:pointer onclick=listaArquivos('"+g_dirbase+d+"/"+retorno.data.diretorios[ig]+"') ><img src="+g_locaplic+"/imagens/folder-s.gif />"+retorno.data.diretorios[ig]+"</span><br><br>";
 			}
 			ins += "<b>Arquivos:</b><br><br>";
-			for (var ig=0;ig<retorno.data.arquivos.length; ig++)
-			{
+			for (var ig=0;ig<retorno.data.arquivos.length; ig++){
 				ins += "<a href='"+g_dirbaseDown+d+"/"+retorno.data.arquivos[ig]+"' target=new >"+retorno.data.arquivos[ig]+"</a><br><br>";
 			}
 			document.getElementById("corpo").innerHTML = ins;
@@ -268,15 +266,15 @@ function datadownload_download(obj)
 {
 	if(!$i("panellistaarquivos")){
 		YAHOO.namespace("datadownloadLista");
-		YAHOO.datadownloadLista.panel = new YAHOO.widget.Panel("panellistaarquivos", {zIndex:2000, iframe:false, width:"450px",align:"left", visible:false, draggable:true, close:true, modal:true } );
+		YAHOO.datadownloadLista.panel = new YAHOO.widget.Panel("panellistaarquivos", {fixedcenter:true,zIndex:2000, iframe:true, width:"450px",align:"left", visible:false, draggable:true, close:true, modal:true } );
 		YAHOO.datadownloadLista.panel.setHeader("Arquivos");
 		YAHOO.datadownloadLista.panel.setBody("");
 		YAHOO.datadownloadLista.panel.setFooter("");
 		YAHOO.datadownloadLista.panel.render(document.body);
-		YAHOO.datadownloadLista.panel.center();
 	};
 	YAHOO.datadownloadLista.panel.setBody($trad("d28"));
 	YAHOO.datadownloadLista.panel.show();
+	YAHOO.datadownloadLista.panel.cfg.setProperty("y", 100); 
 	//document.getElementById("corpo").innerHTML = "Aguarde. Gerando arquivos..."
 	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&tema="+obj.title;
 	//caso a camada venha do sistema de metadados estatisticos e seja uma variavel
@@ -313,6 +311,8 @@ function mostraDownload(retorno)
 			ins += "<a href='"+g_locaplic+"/classesphp/mapa_controle.php?funcao=TEMA2SLD&tema="+retorno.tema+"&map_file="+retorno.mapfile+"' target=blank >Arquivo de legenda SLD</a><br><br>";
 			ins += "Servi&ccedil;o OGC: "+g_locaplic+"/ogc.php?tema="+retorno.tema+"<br><br>";
 			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities' target=blank >OGC GetCapabilities</a><br><br>";
+			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WMS&VERSION=1.1.0&format=application/openlayers&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081' target=blank >Ver com OpenLayers</a><br><br>";
+			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WFS&VERSION=1.1.0&request=getfeature&OUTPUTFORMAT=shape-zip' target=blank >Download com WFS (arquivo compactado incluindo .prj)</a><br><br>";
 
 			for (var arq=0;arq<n;arq++)
 			{
