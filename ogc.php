@@ -223,6 +223,12 @@ if(isset($_GET["tms"])){
 if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$agora .= "google";
 }
+//
+//se o outputformat for definido, evita o cahce de arquivo
+//
+if(isset($_GET["OUTPUTFORMAT"])){
+	$_GET["DESLIGACACHE"] = "sim";
+}
 if(isset($_GET["DESLIGACACHE"]) && $_GET["DESLIGACACHE"] == "sim"){
 	$agora = time();
 	$cache = false;
@@ -503,7 +509,6 @@ else{
 									$l->set("dump",MS_TRUE);
 									$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 									$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-
 									if($l->getmetadata("ows_metadataurl_href") == ""){
 										$l->setmetadata("ows_metadataurl_href",$c["fonte"]);
 										$l->setmetadata("ows_metadataurl_type","TC211");
@@ -585,7 +590,7 @@ if(isset($_GET["tms"])){
 	//echo $lon1." ".$lat1." ".$lon2." ".$lat2;exit;
 	$oMap->setsize(256,256);
 	$oMap->setExtent($lon1,$lat1,$lon2,$lat2);
-	
+
 	$layer0->set("status",MS_DEFAULT);
 	//
 	//se o layer foi marcado para corte altera os parametros para ampliar o mapa
@@ -648,7 +653,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$poPoint2->project($projInObj, $projOutObj);
 	$oMap->setsize(256,256);
 	$oMap->setExtent($poPoint1->x,$poPoint1->y,$poPoint2->x,$poPoint2->y);
-	
+
 	$oMap->getlayer(0)->set("status",MS_DEFAULT);
 	$oMap->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
 	$layer0->setProjection("proj=latlong,a=6378137,b=6378137");
@@ -716,6 +721,24 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
 if((isset($legenda)) && (strtolower($legenda) == "sim")){
 	$leg = $oMap->legend;
 	$leg->set("status",MS_EMBED);
+}
+//
+//altera o outputformat
+//
+if(isset($OUTPUTFORMAT)){
+	if(strtolower($OUTPUTFORMAT) == "shape-zip"){
+		$l = $oMap->getlayer(0);
+		$n = $l->name.time();
+		$oMap->selectOutputFormat("shape-zip");
+		$oMap->outputformat->setOption("STORAGE", "memory");
+		$oMap->outputformat->setOption("FORM", "zip");
+		$oMap->outputformat->setOption("FILENAME", $n.".zip");
+		$l->setmetadata("wfs_getfeature_formatlist","shape-zip");
+		$oMap->save($nomeMapfileTmp);
+		if(strtolower($request) != "getcapabilities"){
+			header('Content-Disposition: attachment; filename='.$n.'.zip');
+		}
+	}
 }
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
@@ -870,7 +893,7 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		// Fill the image with transparent color
 		$color = imagecolorallocatealpha($imgc,0x00,0x00,0x00,127);
 		imagefill($imgc, 0, 0, $color);
-		
+
 		imagecopy($imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256);
 		imagepng($imgc,$nome);
 	}
