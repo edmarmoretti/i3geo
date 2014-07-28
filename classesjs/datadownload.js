@@ -312,8 +312,9 @@ function mostraDownload(retorno)
 			ins += "Servi&ccedil;o OGC: "+g_locaplic+"/ogc.php?tema="+retorno.tema+"<br><br>";
 			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities' target=blank >OGC GetCapabilities</a><br><br>";
 			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WMS&VERSION=1.1.0&format=application/openlayers&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081' target=blank >Ver com OpenLayers</a><br><br>";
-			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WFS&VERSION=1.1.0&request=getfeature&OUTPUTFORMAT=shape-zip' target=blank >Download com WFS (arquivo compactado incluindo .prj)</a><br><br>";
-
+			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WFS&VERSION=1.1.0&request=getfeature&OUTPUTFORMAT=shape-zip' target=blank >Download shapefile com WFS (arquivo compactado incluindo .prj)</a><br><br>";
+			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WFS&VERSION=1.1.0&request=getfeature&OUTPUTFORMAT=csv' target=blank >Download CSV com WFS (arquivo compactado)</a><br><br>";
+			
 			for (var arq=0;arq<n;arq++)
 			{
 				ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>";

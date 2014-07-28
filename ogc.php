@@ -48,7 +48,7 @@ format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application
 	abrir o mashup do OpenLayers com as camadas definida em temas.
 	Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
 	
-OUTPUTFORMAT - em getfeature, aceita tamb&eacute;m shape-zip para download de shapefile
+OUTPUTFORMAT - em getfeature, aceita tamb&eacute;m shape-zip para download de shapefile e csv para download de csv compactado
 
 id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
 	nao deve ser utilizado junto com tema
@@ -741,6 +741,19 @@ if(isset($OUTPUTFORMAT)){
 			header('Content-Disposition: attachment; filename='.$n.'.zip');
 		}
 	}
+	if(strtolower($OUTPUTFORMAT) == "csv"){
+		$l = $oMap->getlayer(0);
+		$n = $l->name."-csv";
+		$oMap->selectOutputFormat("csv");
+		$oMap->outputformat->setOption("STORAGE", "memory");
+		$oMap->outputformat->setOption("FILENAME", $n.".zip");
+		$oMap->outputformat->setOption("FORM", "zip");
+		$l->setmetadata("wfs_getfeature_formatlist","csv");
+		$oMap->save($nomeMapfileTmp);
+		if(strtolower($request) != "getcapabilities"){
+			header('Content-Disposition: attachment; filename='.$n.'.zip');
+		}
+	}
 }
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
@@ -748,9 +761,10 @@ $contenttype = ms_iostripstdoutbuffercontenttype();
 if(strtolower($request) == "getcapabilities"){
 	header('Content-Disposition: attachment; filename=getcapabilities.xml');
 }
-//header("Content-type: application/xml");
-header("Content-type: $contenttype");
 
+if(!isset($OUTPUTFORMAT)){
+	header("Content-type: $contenttype");
+}
 $buffer = ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
 //

@@ -94,7 +94,8 @@ function ogc_endereco(botao)
 	ins  += "<p><iframe src='http://www.facebook.com/plugins/like.php?href="+servico+"&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:100px; height:21px;' allowTransparency='true'></iframe>";
 	ins += "<p><a target=blank href='"+servico+"&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers="+tema+"' />testar getmap</a>";
 	ins += "<p><a target=blank href='"+servico+"&format=application/openlayers&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081' />visualizar com openLayers</a>";
-	ins += "<p><a target=blank href='"+servico+"&OUTPUTFORMAT=shape-zip&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"' />download via WFS</a>";
+	ins += "<p><a target=blank href='"+servico+"&OUTPUTFORMAT=shape-zip&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"' />download sahpefile via WFS</a>";
+	ins += "<p><a target=blank href='"+servico+"&OUTPUTFORMAT=csv&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"' />download CSV via WFS</a>";
 
 	if(!$i("panellistaarquivos")){
 		YAHOO.namespace("datadownloadLista");
@@ -104,6 +105,7 @@ function ogc_endereco(botao)
 		YAHOO.datadownloadLista.panel.setFooter("");
 		YAHOO.datadownloadLista.panel.render(document.body);
 		YAHOO.datadownloadLista.panel.center();
+		YAHOO.datadownloadLista.panel.cfg.setProperty("y", 100);
 	};
 	YAHOO.datadownloadLista.panel.setBody(ins);
 	YAHOO.datadownloadLista.panel.show();
