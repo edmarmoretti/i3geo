@@ -841,14 +841,26 @@ i3GEO.guias = {
 			var n = i3GEO.guias.guiaMovel.config.guias.icones.length,
 				i,
 				temp = i3GEO.guias.guiaMovel.config.guias,
-				ins = "";
+				ins = "",
+				ico;
 			if(i3GEO.guias.ORDEM !== "")
 			{temp.chaves = i3GEO.guias.ORDEM;}
 			for(i=0;i<n;i++){
-				if(temp.chaves[i])
-				{ins += "<button title='"+temp.titulos[i]+"' onmouseout='javascript:this.className = \"iconeGuiaMovel iconeGuiaMovelMouseOut\"' onmouseover='javascript:this.className = \"iconeGuiaMovel iconeGuiaMovelMouseOver\"' onclick='i3GEO.guias.guiaMovel.ativa(\""+temp.chaves[i]+"\")' class=iconeGuiaMovel ><img id='"+temp.ids[i]+"' src='"+i3GEO.configura.locaplic+"/"+temp.icones[i]+"' style='cursor:pointer;;' /></button>";}
+				if(temp.chaves[i]){
+					ico = "<button title='"+temp.titulos[i]+"' onmouseout='javascript:this.className = \"iconeGuiaMovel iconeGuiaMovelMouseOut\"' onmouseover='javascript:this.className = \"iconeGuiaMovel iconeGuiaMovelMouseOver\"' onclick='i3GEO.guias.guiaMovel.ativa(\""+temp.chaves[i]+"\")' class=iconeGuiaMovel ><img id='"+temp.ids[i]+"' src='"+i3GEO.configura.locaplic+"/"+temp.icones[i]+"' style='cursor:pointer;;' /></button>";
+					//verifica se existe um id na interface
+					//se existir, o icone e inserido nesse id
+					if(!$i("iconeGuia_"+temp.chaves[i])){
+						ins += ico;
+					}
+					else{
+						$i("iconeGuia_"+temp.chaves[i]).innerHTML = ico;
+					}
+				}
 			}
-			$i("i3GEOguiaMovelIcones").innerHTML = ins;
+			if($i("i3GEOguiaMovelIcones")){
+				$i("i3GEOguiaMovelIcones").innerHTML = ins;
+			}
 			i3GEO.guias.guiaMovel.desativaIcones();
 			if($i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id)){
 				$i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id).parentNode.style.backgroundColor = "#cedff2";
@@ -880,7 +892,8 @@ i3GEO.guias = {
 			i3GEO.guias.escondeGuias();
 			i3GEO.guias.mostra(chave);
 			i3GEO.guias.ATUAL = chave;
-			i3GEO.guias.guiaMovel.desativaIcones();
+			i3GEO.guias.guiaMovel.mostraIcones();
+			//i3GEO.guias.guiaMovel.desativaIcones();
 			if($i(i3GEO.guias.CONFIGURA[chave].id)){
 				$i(i3GEO.guias.CONFIGURA[chave].id).parentNode.style.backgroundColor = "#cedff2";
 				$i(i3GEO.guias.CONFIGURA[chave].id).parentNode.style.boxShadow = "none";
