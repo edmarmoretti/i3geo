@@ -697,7 +697,7 @@ g_traducao_ajuda = {
 			categoria:"3",
 			pt:"Gerador de representa&ccedil;&atilde;o gr&aacute;fica de dados tabulares. Abre uma janela flutuante onde o usu&aacute;rio pode escolher os dados e o tipo de gr&aacute;fico desejado. Os dados s&atilde;o baseados em um dos temas existentes no mapa.",
 			complemento:"Existem v&aacute;rias op&ccedil;&otilde;es de tratamento dos dados que permitem, por exemplo, mostrar os percentuais ou os dados brutos. Pode-se ainda ativar a navega&ccedil;&atilde;o din&acirc;mica, o que permite atualizar o gr&aacute;fico conforme &eacute; feita a navega&ccedil;&atilde;o sobre o mapa.",
-			apijs:"i3GEO.analise.dialogo.graficoInterativo()"
+			apijs:"i3GEO.analise.dialogo.graficoInterativo1()"
 		},
 		"85": {
 			titulo: "Miniaturas",

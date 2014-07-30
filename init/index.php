@@ -100,8 +100,7 @@ a {
 		<div class="bordaSuperior" style="z-index: 1;">&nbsp;</div>
 
 		<div class="mascaraPrincipal" style="max-width: 718pt">
-			<div id="conteudo"
-				style="position: relative; top: -10px; margin: 0 0 0.2cm 0.2cm;">
+			<div id="conteudo" style="position: relative; top: -10px; margin: 0 0 0.2cm 0.2cm;">
 				<div style="margin-top: 0px;">
 					<?php
 					if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
@@ -111,28 +110,24 @@ a {
 					<div id="botoes"></div>
 				</div>
 				<div style="float: left">
-					<a href="#" class="r" style="width: 230px; height: 380px"><table>
+					<div class="r" style="width: 230px; height: 380px"><table>
 							<tr>
-								<td><a class="twitter-timeline" href="https://twitter.com/i3geo"
-									data-widget-id="288061915689787392" width="220" height="350">Tweets
-										@i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+								<td><a class="twitter-timeline" href="https://twitter.com/i3geo" data-widget-id="288061915689787392" style="width:220px;height:350px">Tweets @i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 								</td>
 							</tr>
-						</table> </a> <a href="#" class="r"
-						style="width: 230px; height: 380px"><table>
+						</table> </div>
+
+						<div class="r" style="width: 230px; height: 380px"><table>
 							<tr>
-								<td><a class="twitter-timeline"
-									href="https://twitter.com/search?q=@i3geo"
-									data-widget-id="288053202174222336" width="220" height="350">Tweets
-										#i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+								<td><a class="twitter-timeline" href="https://twitter.com/search?q=@i3geo" data-widget-id="288053202174222336" style="width:220px;height:350px">Tweets #i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 								</td>
 							</tr>
-						</table> </a>
+						</table> </div>
 				</div>
 			</div>
 
 		</div>
-
+	</center>
 </body>
 <script>
 botoesIni = [];
@@ -245,10 +240,10 @@ i3GEO.idioma.IDSELETOR = "bandeiras";
 i3GEO.idioma.mostraSeletor();
 i3GEO.barraDeBotoes.ATIVA = false;
 function mostraBotoes(){
-	var ins = [],i,n = botoesIni.length,l,local = [],texto;
+	var ins = [],i,n = botoesIni.length,texto;
 	for(i=0;i<n;i++){
 		if(botoesIni[i].href === ""){
-			texto = '<span class="r"><table ><tr><td><img src="'+botoesIni[i].img+'" /><br>'+botoesIni[i].titulo+'</a></td></tr></table></span>'
+			texto = '<span class="r"><table ><tr><td><img src="'+botoesIni[i].img+'" /><br>'+botoesIni[i].titulo+'</a></td></tr></table></span>';
 		}
 		else{
 			texto = '<a target=_blank href="'+botoesIni[i].href+'" class="r"><table ><tr><td><img src="'+botoesIni[i].img+'" /><br>'+botoesIni[i].titulo+'</a></td></tr></table></a>';

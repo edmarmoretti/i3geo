@@ -8,7 +8,21 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 
 <title>i3GEO - OpenLayers</title>
-
+<script src="../classesjs/i3geo6.js"></script>
+<script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
+<!-- estilo necess&aacute;rio para a ferramenta de edi&ccedil;&atilde;o -->
+<style>
+.olControlEditingToolbar1 div {
+	background-image:url(../mashups/openlayers.png);
+	background-repeat:no-repeat;
+	float:right;
+	right: 0px;
+	height:29px;
+	margin:2px;
+	width:29px;
+	cursor:pointer;
+}
+</style>
 </head>
 <body id="i3geo" style="background-color:white">
 <!-- inclui o nome do usuario logado -->
@@ -106,21 +120,7 @@
 	</div>
 </div>
 
-<script src="../classesjs/i3geo6.js"></script>
-<script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
-<!-- estilo necess&aacute;rio para a ferramenta de edi&ccedil;&atilde;o -->
-<style>
-.olControlEditingToolbar1 div {
-	background-image:url(../mashups/openlayers.png);
-	background-repeat:no-repeat;
-	float:right;
-	right: 0px;
-	height:29px;
-	margin:2px;
-	width:29px;
-	cursor:pointer;
-}
-</style>
+
 <script>
 /*
 Interface Openlayers parametrizada
@@ -156,7 +156,7 @@ i3GEO.Interface.openlayers.GADGETS = {
 		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = true;
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 i3GEO.cria();
 i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
@@ -217,7 +217,7 @@ i3GEO.finaliza = function(){
 	if(parametrosURL.editorvetorial === true){
 		i3GEO.barraDeBotoes.editor.inicia();
 	}
-}
+};
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 i3GEO.configura.sid = "";

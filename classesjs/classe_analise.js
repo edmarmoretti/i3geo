@@ -76,10 +76,7 @@ i3GEO.analise = {
 		 * Ferramenta graficointerativo versao flash
 		 */
 		graficoInterativo : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.graficoInterativo()",
-				"graficointerativo",
-				"graficointerativo");
+			alert("depreciado. Use graficointerativo1");
 		},
 		/**
 		 * Function: graficoInterativo1
