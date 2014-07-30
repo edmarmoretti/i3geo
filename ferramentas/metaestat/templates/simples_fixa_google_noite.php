@@ -60,6 +60,12 @@ $dadosmapa = dadosmapa("../../../");
 	vertical-align: middle;
 }
 </style>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="../../../classesjs/i3geo.js"></script>
+	<script src="../index.js"></script>
+	<script src="lib/configgmi3geo.js"></script>
+	<script src="../dicionario.js"></script>
+	<link rel="stylesheet" type="text/css" href="lib/default.css">
 </head>
 <body id="i3geo">
 	<table width="100%" border="0" cellpadding="0" cellspacing="0"
@@ -99,8 +105,8 @@ $dadosmapa = dadosmapa("../../../");
 			<td class=tdbranca>
 				<table width=100%>
 					<tr>
-						
-						
+
+
 						<td class=tdbranca style="width: 20%;">
 							<div id=seletorIdiomas ></div>
 						</td>
@@ -155,12 +161,7 @@ $dadosmapa = dadosmapa("../../../");
 	<!-- utilizado pelo seletor de colourramp -->
 	<input type=hidden value="" id="listaColourRampAnaliseMetaestat"
 		onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	<script src="../../../classesjs/i3geo.js"></script>
-	<script src="../index.js"></script>
-	<script src="lib/configgmi3geo.js"></script>
-	<script src="../dicionario.js"></script>
-	<link rel="stylesheet" type="text/css" href="lib/default.css">
+
 	<script>
 i3GEO.barraDeBotoes.OFFSET = -10;
 i3GEO.barraDeBotoes.defBotao("localizar").funcaoonclick = function(){

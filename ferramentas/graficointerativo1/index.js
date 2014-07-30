@@ -1,37 +1,37 @@
 /**
  * Title: Gr&aacute;fico interativo 1
- * 
+ *
  * Representa&ccedil;&atilde;o gr&aacute;fica de dados. O gr&aacute;fico &eacute; constru&iacute;do tendo como base os atributos de um tema
  * e &eacute; modificado conforme o usu&aacute;rio navega pelo mapa. A renderiza&ccedil;&atilde;o do gr&aacute;fico &eacute; feito pelo
  * navegador por meio do aplicativo openflashchart. Os dados que ser&atilde;o utilizados no gr&aacute;fico s&atilde;o baseados em um
  * elemento TABLE. Esse elemento pode ser montado com base na tabela de atributos e editada pelo usu&aacute;rio. Os dados podem
  * tamb&eacute;m ser inseridos como par&acirc;metros na inicializa&ccedil;&atilde;o da ferramenta, permitindo que o gr&aacute;fico seja
  * utilizado por outras ferramentas.
- * 
+ *
  * Gr&aacute;ficos podem ser salvos no mapa. Veja a fun&ccedil;&atilde;o compactaConfig que gera uma string em base64 com as
  * configura&ccedil;&otilde;es em JSON de todos os gr&aacute;ficos abertos no mapa
- * 
+ *
  * Os gr&aacute;ficos podem ser restaurados usando-se a fun&ccedil;&atilde;o restauraGraficos
- * 
+ *
  * Veja:
- * 
+ *
  * <i3GEO.analise.dialogo.graficointerativo1>
- * 
+ *
  * Arquivo:
- * 
+ *
  * i3geo/ferramentas/graficointerativo1/index.js.php
- * 
+ *
  * Licenca:
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -43,7 +43,7 @@ if (typeof (i3GEOF) === 'undefined') {
 }
 /**
  * Classe: i3GEOF.graficointerativo1
- * 
+ *
  */
 i3GEOF.graficointerativo1 =
 	{
@@ -108,51 +108,51 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Propriedade: dados
-		 * 
+		 *
 		 * Dados que serao utilizados. Pode ser passado como parametro.
-		 * 
+		 *
 		 * Default: {false}
 		 */
 		dados : false,
 		/**
 		 * Propriedade: titulo
-		 * 
+		 *
 		 * T&iacute;tulo do gr&aacute;fico. Se for vazio, ser&aacute; obtido do nome do tema selecionado
 		 */
 		titulo : "",
 		/**
 		 * Propriedade: tipo
-		 * 
+		 *
 		 * Tipo de gr&aacute;fico escolhido pelo usu&aacute;rio.
 		 */
 		tipo : "",
 		/**
 		 * Propriedade: acumula
-		 * 
+		 *
 		 * Acumula os valores ao gerar o gr&aacute;fico
-		 * 
+		 *
 		 * Type: {boolean}
-		 * 
+		 *
 		 * Default: {false}
 		 */
 		acumula : false,
 		/**
 		 * Propriedade: relativa
-		 * 
+		 *
 		 * Utiliza valores relativos ao criar o gr&aacute;fico
-		 * 
+		 *
 		 * Type: {boolean}
-		 * 
+		 *
 		 * Default: {false}
 		 */
 		relativa : false,
 		/**
 		 * Propriedade: dadospuros
-		 * 
+		 *
 		 * N&atilde;o faz nenhum tipo de processamento nos dados antes de gerar o gr&aacute;fico
-		 * 
+		 *
 		 * Type: {boolean}
-		 * 
+		 *
 		 * Default: {false}
 		 */
 		dadospuros : false,
@@ -160,9 +160,9 @@ i3GEOF.graficointerativo1 =
 		h: "400px",
 		/**
 		 * iniciaDicionario (depreciado na versao 6.0)
-		 * 
+		 *
 		 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-		 * 
+		 *
 		 * O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 		 */
 		iniciaDicionario : function(parametros) {
@@ -171,25 +171,25 @@ i3GEOF.graficointerativo1 =
 		/**
 		 * Configura o grafico conforme um objeto contendo parametros e opcionalmente os dados Alguns parametros possuem definicoes padrao,
 		 * usadas quando o valor nao e passado
-		 * 
+		 *
 		 * Qualquer outro campo de formulario pode ter seu valor passado como parametro, desde que use o mesmo ID, excluindo-se do nome do
 		 * ID o prefixo (codigo da janela)
-		 * 
+		 *
 		 * parametros {objeto} com os seguintes elementos:
-		 * 
+		 *
 		 * idjanela - id do grafico. Usado como prefixo para inserir os identificadores dos elementos DOM que fazem parte da interface do
 		 * grafico. Se existir um elemento dom esse id, o grafico sera inserido nesse elemento
-		 * 
+		 *
 		 * tema - codigo do tema existente no mapa e que sera a fonte para os dados
-		 * 
+		 *
 		 * atualiza true|false - a janela sera atualizada na navegacao do mapa ou nao
-		 * 
+		 *
 		 * dados - dados que comporao o mapa. Caso nao existam, serao obtidos de tema
-		 * 
+		 *
 		 * acumula true|false - acumula os valores de cada elemento do grafico
-		 * 
+		 *
 		 * relativa true|false - utiliza valores relativos nos eixos
-		 * 
+		 *
 		 * dadospuros true|false - realiza ou nao processos de adequacao dos dados
 		 */
 		configura : function(parametros) {
@@ -230,6 +230,9 @@ i3GEOF.graficointerativo1 =
 			}
 			if (!parametros.h || parametros.h == undefined) {
 				i3GEOF.graficointerativo1.propJanelas[idjanela].h = i3GEOF.graficointerativo1.h;
+			}
+			if (!parametros.tipo || parametros.tipo == undefined) {
+				i3GEOF.graficointerativo1.propJanelas[idjanela].tipo = i3GEOF.graficointerativo1.tipo;
 			}
 			return idjanela;
 		},
@@ -325,7 +328,7 @@ i3GEOF.graficointerativo1 =
 		/**
 		 * Retorna um objeto contendo os valores de todos os parametros utilizados no grafico de tal forma que um grafico possa ser
 		 * renderizado novamente
-		 * 
+		 *
 		 * A funcao i3GEO.php.salvaMapaBanco utiliza retornaConfig e cria um objeto que ira armazenar os parametros de cada janela
 		 */
 		retornaConfig : function(idjanela) {
@@ -391,13 +394,13 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-		 * 
+		 *
 		 * dados {JSON} - dados para o gr&aacute;fico (opcional) exemplo
 		 * ["n;x","'Argentina';33796870","'Paraguay';4773464","'Brazil';151525400","'Chile';13772710"]
 		 */
@@ -413,9 +416,12 @@ i3GEOF.graficointerativo1 =
 			};
 			// dados para o grafico
 			$i(idjanela + "i3GEOgraficointerativo1guia2").onclick = function() {
-				if (i3GEOF.graficointerativo1.propJanelas[idjanela].tipo === "") {
+				if (i3GEOF.graficointerativo1.tipo == "" && i3GEOF.graficointerativo1.propJanelas[idjanela].tipo && i3GEOF.graficointerativo1.propJanelas[idjanela].tipo === "") {
 					alert($trad(4, i3GEOF.graficointerativo1.dicionario));
 					return;
+				}
+				if (i3GEOF.graficointerativo1.propJanelas[idjanela].tipo == undefined || i3GEOF.graficointerativo1.propJanelas[idjanela].tipo === "") {
+					i3GEOF.graficointerativo1.propJanelas[idjanela].tipo = i3GEOF.graficointerativo1.tipo;
 				}
 				i3GEO.guias.mostraGuiaFerramenta(idjanela + "i3GEOgraficointerativo1guia2", idjanela + "i3GEOgraficointerativo1guia");
 				i3GEOF.graficointerativo1.configuraDados(idjanela);
@@ -504,11 +510,11 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function(idjanela) {
@@ -517,15 +523,15 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: iniciaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * parametros {obj} - parametros para o gr&aacute;fico. Contem parametros utilizados para configurar o grafico e tambem pode conter
 		 * os dados. Para compatibilidade, se nao contiver o item com chave chamada dados, sera considerado como sendo um objeto com apenas
 		 * os dados estatisticos
-		 * 
+		 *
 		 */
 		iniciaJanelaFlutuante : function(parametros) {
 			var minimiza, cabecalho, janela, divid, temp, titulo, idjanela;
@@ -648,7 +654,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: ativaFoco
-		 * 
+		 *
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function(idjanela) {
@@ -679,7 +685,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: comboTemas
-		 * 
+		 *
 		 * Monta o combo para escolha do tema que ser&aacute; utilizado no gr&aacute;fico
 		 */
 		comboTemas : function(idjanela) {
@@ -706,7 +712,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: ativaTipo
-		 * 
+		 *
 		 * Define a vari&aacute;vel com o tipo de gr&aacute;fico e mostra a guia2
 		 */
 		ativaTipo : function(obj, idjanela) {
@@ -746,7 +752,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: configuraDados
-		 * 
+		 *
 		 * Configura o formul&aacute;rio para obten&ccedil;&atilde;o dos dados para cada tipo de gr&aacute;fico
 		 */
 		configuraDados : function(idjanela) {
@@ -769,11 +775,11 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: comboItensSel
-		 * 
+		 *
 		 * Cria um combo para selecionar os itens do tema escolhido
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <i3GEO.util.comboItens>
 		 */
 		comboItensSel : function(idjanela) {
@@ -792,7 +798,7 @@ i3GEOF.graficointerativo1 =
 						i3GEOF.graficointerativo1.propJanelas[idjanela].dadosComboItens = retorno;
 						//para escolher o item de Y
 						var temp = retorno.dados.replace(idjanela + "i3GEOgraficointerativo1ComboXid",idjanela + "i3GEOgraficointerativo1ComboYid");
-						
+
 						$i(idjanela + "i3GEOgraficointerativo1ComboY").innerHTML =
 							"<div>" + temp + "&nbsp;<input title='" + $trad(33, i3GEOF.graficointerativo1.dicionario)
 								+ "' class=digitar type=text size=20 id='" + idjanela
@@ -854,11 +860,11 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: obterDados
-		 * 
+		 *
 		 * Obt&eacute;m os dados que ser&atilde;o utilizados no gr&aacute;fico
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <GRAFICOSELECAO>
 		 */
 		obterDados : function(idjanela) {
@@ -994,11 +1000,11 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: montaTabelaDados
-		 * 
+		 *
 		 * Monta a tabela com os dados que ser&atilde;o utilizados no gr&aacute;fico
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * retorno {JSON} - dados no formato JSON
 		 */
 		montaTabelaDados : function(idjanela, retorno) {
@@ -1057,7 +1063,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: tabela2csv
-		 * 
+		 *
 		 * Obt&eacute;m os dados da tabela em CSV
 		 */
 		tabela2csv : function(idjanela) {
@@ -1076,7 +1082,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: tabela2dados
-		 * 
+		 *
 		 * Obt&eacute;m os dados da tabela para compor o gr&aacute;fico
 		 */
 		tabela2dados : function(idjanela) {
@@ -1199,7 +1205,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: excluilinha
-		 * 
+		 *
 		 * Exclui uma linha da tabela de dados
 		 */
 		excluilinha : function(celula) {
@@ -1211,7 +1217,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: corj
-		 * 
+		 *
 		 * Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 		 */
 		corj : function(obj) {
@@ -1219,7 +1225,7 @@ i3GEOF.graficointerativo1 =
 		},
 		/**
 		 * Function: ordenaColuna
-		 * 
+		 *
 		 * Ordena uma coluna da tabela
 		 */
 		ordenaColuna : function(coluna, cid) {

@@ -59,6 +59,12 @@ $dadosmapa = dadosmapa("../../../");
 	vertical-align: middle;
 }
 </style>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="../../../classesjs/i3geo.js"></script>
+<script src="../index.js"></script>
+<script src="lib/configgmi3geo.js" ></script>
+<script src="../dicionario.js" ></script>
+<link rel="stylesheet" type="text/css" href="lib/default.css">
 </head>
 <body id="i3geo" >
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="banner">
@@ -132,12 +138,7 @@ $dadosmapa = dadosmapa("../../../");
 </table>
 <!-- utilizado pelo seletor de colourramp -->
 <input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="../../../classesjs/i3geo.js"></script>
-<script src="../index.js"></script>
-<script src="lib/configgmi3geo.js" ></script>
-<script src="../dicionario.js" ></script>
-<link rel="stylesheet" type="text/css" href="lib/default.css">
+
 <script>
 //i3GEO.finalizaAPI = '$i("guia1obj").style.height = 20 + i3GEO.parametros.h+"px";';
 i3GEO.finalizaAPI = function(){

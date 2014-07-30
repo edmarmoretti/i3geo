@@ -59,6 +59,12 @@ $dadosmapa = dadosmapa("../../../");
 	vertical-align: middle;
 }
 </style>
+<script src="../../../classesjs/i3geo.js"></script>
+<script src="../index.js"></script>
+<script src="../../../pacotes/openlayers/OpenLayers2131.js.php"></script>
+<script src="lib/configbasicoi3geo.js" ></script>
+<script src="../dicionario.js" ></script>
+<link rel="stylesheet" type="text/css" href="lib/default.css">
 </head>
 <body id="i3geo" >
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="banner">
@@ -131,12 +137,7 @@ $dadosmapa = dadosmapa("../../../");
 <!-- utilizado pelo seletor de colourramp -->
 <input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />
 
-<script src="../../../classesjs/i3geo.js"></script>
-<script src="../index.js"></script>
-<script src="../../../pacotes/openlayers/OpenLayers2131.js.php"></script>
-<script src="lib/configbasicoi3geo.js" ></script>
-<script src="../dicionario.js" ></script>
-<link rel="stylesheet" type="text/css" href="lib/default.css">
+
 <script>
 i3GEO.finalizaAPI = '$i("guia1obj").style.height = 20 + i3GEO.parametros.h+"px";';
 i3GEO.barraDeBotoes.OFFSET = 7;

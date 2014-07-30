@@ -1019,7 +1019,7 @@ i3GEOF.legenda = {
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=pegaparametros&tema="+i3GEOF.legenda.tema+"&classe="+i3GEOF.legenda.classe,
 			cp = new cpaint();
 		cp.set_response_type("JSON");
-		cp.call(p,"pegaParametrosMapa",i3GEOF.legenda.montaEditor);		
+		cp.call(p,"pegaParametrosMapa",i3GEOF.legenda.montaEditor);
 	},
 	/*
 	Function: simbU
@@ -1073,7 +1073,7 @@ i3GEOF.legenda = {
 			else{
 				p += "&ext="+i3GEO.util.extOSM2Geo(i3GEO.parametros.extentTotal);
 			}
-			
+
 			if (item == "")
 			{i3GEO.janela.tempoMsg($trad(81,i3GEOF.legenda.dicionario));return;}
 			i3GEOF.legenda.aguarde.visibility = "visible";
@@ -1509,8 +1509,8 @@ i3GEOF.legenda = {
 					new YAHOO.widget.Button(
 						"i3GEOlegendaGraficoPizza",
 						{onclick:{fn: function(){
-								var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
-								i3GEO.util.scriptTag(js,"i3GEOF.legenda.iniciaGraficoPizza()","i3GEOF.graficointerativo_script");
+								var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo1/dependencias.php";
+								i3GEO.util.scriptTag(js,"i3GEOF.legenda.iniciaGraficoPizza()","i3GEOF.graficointerativo1_script");
 							}
 						}}
 					);
@@ -1531,8 +1531,8 @@ i3GEOF.legenda = {
 				"dados":i3GEOF.legenda.dadosGrafico
 			}
 		};
-		i3GEOF.graficointerativo.tipo = "pizza2d";
-		i3GEOF.graficointerativo.criaJanelaFlutuante(dados);
+		i3GEOF.graficointerativo1.tipo = "pizza_1";
+		i3GEOF.graficointerativo1.iniciaJanelaFlutuante(dados);
 	},
 	/*
 	Function: aplicaProcessos

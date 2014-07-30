@@ -32,7 +32,7 @@ var Chart = Backbone.View.extend({
 		hasProcessed: null,
 
 		getChartProperties: function(chartName) {
-				var self = this;
+				//var self = this;
 				var ret = [];
 				_.each(ChartProperties, function(property) {
 						if (property.ChartObject == chartName) {
@@ -217,7 +217,7 @@ var Chart = Backbone.View.extend({
 		},
 
 		export_button: function(event) {
-				var self = this;
+				//var self = this;
 				$target = $(event.target).hasClass('button') ? $(event.target) : $(event.target).parent();
 
 				var self = this;

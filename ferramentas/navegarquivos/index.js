@@ -31,7 +31,7 @@ Classe: i3GEOF.navegarquivos
 
 */
 i3GEOF.navegarquivos = {
-	//ao concluir, o nome do arquivo será retornado para esse objeto atribuindo o resultado ao atributo value
+	//ao concluir, o nome do arquivo serï¿½ retornado para esse objeto atribuindo o resultado ao atributo value
 	retornarPara: "",
 	//guarda o objeto TV
 	arvore: "",
@@ -161,7 +161,7 @@ i3GEOF.navegarquivos = {
 			i3GEO.arvoreDeTemas.LOCAPLIC = i3GEO.configura.locaplic;
 		}
 		var temp = function(retorno){
-			var drives,iglt,ig,drive,tempNode,prefixo = "";
+			var drives,iglt,ig,drive,tempNode;
 			drives = i3GEO.arvoreDeTemas.DRIVES;
 			if(drives == undefined || drives == "" || drives.length === 0){
 				drives = retorno.data.drives;
