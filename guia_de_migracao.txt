@@ -19,17 +19,20 @@ Para a versão 6.0
 
 - a ordem dos botões na barra de botões foi alterada para mostrar primeiro o botão da barra de edição
 
-- as funções de desenho de elementos gráficos utilizados pela interface GoogleEarth foram movidos de classesjs/classe_interface.js 
+- as funções de desenho de elementos gráficos utilizados pela interface GoogleEarth foram movidos de classesjs/classe_interface.js
 para classe_desenho.js
 
 - por default a árvore de temas agora é mostrada com checkbox ao invés de botão do tipo radio
 
 - a árvore de temas agora pode ser utilizada para ligar/desligar camadas já existentes no mapa
 
-- alteração na estrutura do objeto que contém as informações sobre as camadas existentes no mapa. Esse objeto foi reduzido em 
+- alteração na estrutura do objeto que contém as informações sobre as camadas existentes no mapa. Esse objeto foi reduzido em
 tamanho passando a usar uma lista de chaves e um array com os valores. Esse objeto é estruturado no servidor por classe_temas.php
 
 - remoção do arquivo css/botoes.css em favor de css/botoes2.css
+
+- as opções da guia móvel foram alteradas. Podem ser necessários ajustes nos estilos inline das interfaces em uso
+para posicionar corretamente os elementos dentro das guias
 
 -------------------------------------------------------------------------------------------------
 Para a versão 5.0
