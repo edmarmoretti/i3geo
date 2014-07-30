@@ -957,7 +957,7 @@ i3GEOF.graficointerativo = {
 	Ordena uma coluna da tabela
 	*/
 	ordenaColuna: function(coluna,cid){
-		try{
+
 			var tabela = $i("i3GEOgraficointerativoDados").getElementsByTagName("table")[0],
 				trs = tabela.getElementsByTagName("tr"),
 				ntrs = trs.length,
@@ -974,6 +974,7 @@ i3GEOF.graficointerativo = {
 
 			function sortNumber(a,b)
 			{return a - b;}
+
 			for (t=1;t<ntrs;t++)
 			{
 				temp = trs[t].childNodes[cid];
@@ -999,8 +1000,7 @@ i3GEOF.graficointerativo = {
 				{ins += "<tr>" + trs[e].innerHTML + "</tr>";}
 			}
 			tabela.innerHTML = ins;
-		}
-		catch(e){}
+
 	},
 	/*
 	Function: ativaNavegacao
@@ -1053,7 +1053,7 @@ if (!this.JSON1) {
                  f(this.getUTCSeconds())   + 'Z';
         };
         var escapeable = /["\\\x00-\x1f\x7f-\x9f]/g,
-            gap,
+            gap = 0,
             indent,
             meta = {    // table of character substitutions
                 '\b': '\\b',
@@ -1064,7 +1064,7 @@ if (!this.JSON1) {
                 '"' : '\\"',
                 '\\': '\\\\'
             },
-            rep;
+            rep = 0;
         function quote(string) {
             return escapeable.test(string) ?
                 '"' + string.replace(escapeable, function (a) {
