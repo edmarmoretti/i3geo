@@ -1074,7 +1074,7 @@ i3GEO.arvoreDeTemas = {
 		// opcao de busca de temas
 		root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
 		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca === true) {
-			insp = "<br><br><table><tr>"
+			insp = "<table><tr>"
 					+ "<td><span style='font-size:12px'>&nbsp;"
 					+ $trad("a1")
 					+ " <a class=ajuda_usuario target=_blank href='"

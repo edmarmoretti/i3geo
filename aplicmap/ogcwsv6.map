@@ -39,6 +39,15 @@ MAP
 		FORMATOPTION "STORAGE=memory"
 		#FORMATOPTION "FILENAME=result.csv"
 	END
+	
+	OUTPUTFORMAT
+		NAME "geojson"
+		DRIVER "OGR/GEOJSON"
+		#MIMETYPE "application/json; subtype=geojson"
+		FORMATOPTION "STORAGE=memory"
+		FORMATOPTION "FORM=SIMPLE"
+	END
+	
 	PROJECTION
 		"+proj=longlat +ellps=GRS67 +no_defs"
 	END

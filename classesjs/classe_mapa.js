@@ -150,7 +150,7 @@ i3GEO.mapa =
 					r = true;
 				}
 				if (r === false) {
-					return;
+					//return;
 				}
 				i3GEO.tamanhodoc = [
 					Dw,

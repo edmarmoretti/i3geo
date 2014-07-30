@@ -754,6 +754,14 @@ if(isset($OUTPUTFORMAT)){
 			header('Content-Disposition: attachment; filename='.$n.'.zip');
 		}
 	}
+	//FIXME envia uma linha estranha no header. Nao da pra usar
+	if(strtolower($OUTPUTFORMAT) == "geojson"){
+		$l = $oMap->getlayer(0);
+		$oMap->selectOutputFormat("geojson");
+		$l->setmetadata("wfs_getfeature_formatlist","geojson");
+		$oMap->save($nomeMapfileTmp);
+		header("Content-type: application/json; subtype=geojson");
+	}
 }
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
@@ -765,6 +773,7 @@ if(strtolower($request) == "getcapabilities"){
 if(!isset($OUTPUTFORMAT)){
 	header("Content-type: $contenttype");
 }
+
 $buffer = ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
 //
