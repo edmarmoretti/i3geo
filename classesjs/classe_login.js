@@ -129,10 +129,10 @@ i3GEO.login = {
 		}
 	},
 	anulaCookie: function(){
-		i3GEO.util.insereCookie("i3geocodigologin","",1);
-		i3GEO.util.insereCookie("i3geousuariologin","",1);
-		i3GEO.util.insereCookie("i3geousuarionome","",1);
-		i3GEO.util.insereCookie("i3GeoLogin","",1);
+		i3GEO.util.insereCookie("i3geocodigologin","",0);
+		i3GEO.util.insereCookie("i3geousuariologin","",0);
+		i3GEO.util.insereCookie("i3geousuarionome","",0);
+		i3GEO.util.insereCookie("i3GeoLogin","",0);
 	},
 	verificaCookieLogin: function(){
 		var a = i3GEO.util.pegaCookie("i3geocodigologin"),
