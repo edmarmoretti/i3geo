@@ -591,6 +591,7 @@ if(isset($_GET["tms"])){
 	//se nao existir, salva a imagem
 	//echo $lon1." ".$lat1." ".$lon2." ".$lat2;exit;
 	$oMap->setsize(256,256);
+
 	$oMap->setExtent($lon1,$lat1,$lon2,$lat2);
 
 	$layer0->set("status",MS_DEFAULT);
@@ -716,6 +717,12 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
 	if($req->getValueByName("TYPENAME") == "" || $req->getValueByName("TYPENAME") == "undefined"){
 		$req->setParameter("TYPENAME",$l->name);
 	}
+}
+if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo"){
+	$l = $oMap->getlayer(0);
+	$req->setParameter("LAYERS",$l->name);
+	$req->setParameter("QUERY_LAYERS",$l->name);
+	//echo "oi";exit;
 }
 //
 //altera os caminhos das imagens

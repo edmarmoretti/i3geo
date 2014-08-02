@@ -1,4 +1,4 @@
-if(typeof(i3GEO) === 'undefined'){
+if(!i3GEO || typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 	navn = false;
 	navm = false;
@@ -71,6 +71,11 @@ i3GEO.editorOL = {
 		"http://mapas.mma.gov.br/i3geo/ogc.php?tema=estadosl&",
 		{layers: "estadosl",FORMAT:'image/png'}
 	),
+	osm: new OpenLayers.Layer.OSM("OSM",
+		"http://tile.openstreetmap.org/${z}/${x}/${y}.png", {
+			isBaseLayer : true,
+			visibility : false
+		}),
 	fundo: "e_ims,e_wsm,ol_mma,ol_wms,top_wms,est_wms,e_oce",
 	kml: [],
 	layersIniciais: [],
@@ -121,6 +126,7 @@ i3GEO.editorOL = {
 	ativarodadomouse: true,
 	legendahtml: false,
 	numzoom: 12,
+	minresolution: 0.703125,
 	maxext: "",
 	mapext: new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081),
 	mapa: "",
@@ -403,7 +409,7 @@ i3GEO.editorOL = {
 			YAHOO.namespace("temaativo.container");
 			YAHOO.temaativo.container.panel = new YAHOO.widget.Panel("paneltemaativo", {zIndex:20000, iframe:true, width:"250px", visible:false, draggable:true, close:true } );
 			YAHOO.temaativo.container.panel.setBody("");
-			if(typeof i3GEO != undefined && i3GEO != "")
+			if(i3GEO && typeof i3GEO != undefined && i3GEO != "")
 			{YAHOO.temaativo.container.panel.setHeader("Tema ativo<div id='paneltemaativo_minimizaCabecalho' class='container-minimiza'></div>");}
 			else
 			{YAHOO.temaativo.container.panel.setHeader("Tema ativo");}
@@ -418,8 +424,8 @@ i3GEO.editorOL = {
 				if(i3GEO.eventos && i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.atualizaJanelaAtivaTema()") > 0)
 				{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEO.editorOL.atualizaJanelaAtivaTema()");}
 			});
-			if(typeof i3GEO != undefined && i3GEO != ""){
-				if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.atualizaJanelaAtivaTema()") < 0)
+			if(i3GEO && typeof i3GEO != undefined && i3GEO != ""){
+				if(i3GEO.eventos && i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.atualizaJanelaAtivaTema()") < 0)
 				{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEO.editorOL.atualizaJanelaAtivaTema()");}
 			}
 			temp = $i("paneltemaativo_minimizaCabecalho");
@@ -1600,7 +1606,7 @@ i3GEO.editorOL = {
 			'	</tr>' +
 			'</table>';
 			YAHOO.editorOL.container.panel.setBody(ins);
-			if(typeof i3GEO != undefined && i3GEO != "")
+			if(i3GEO && typeof i3GEO != undefined && i3GEO != "")
 			{YAHOO.editorOL.container.panel.setHeader("Propriedades<div id='panelpropriedadesEditor_minimizaCabecalho' class='container-minimiza'></div>");}
 			else
 			{YAHOO.editorOL.container.panel.setHeader("Propriedades");}
@@ -1625,7 +1631,7 @@ i3GEO.editorOL = {
 		if(!document.getElementById("panellistagEditor")){
 			YAHOO.namespace("editorOL.listaGeometrias");
 			YAHOO.editorOL.listaGeometrias.panel = new YAHOO.widget.Panel("panellistagEditor", {zIndex:20000, iframe:true, width:"320px", visible:false, draggable:true, close:true } );
-			if(typeof i3GEO != undefined && i3GEO != "")
+			if(i3GEO && typeof i3GEO != undefined && i3GEO != "")
 			{YAHOO.editorOL.listaGeometrias.panel.setHeader("Geometrias <div id='panellistagEditor_minimizaCabecalho' class='container-minimiza'></div>");}
 			else
 			{YAHOO.editorOL.listaGeometrias.panel.setHeader("Geometrias");}
@@ -1686,7 +1692,7 @@ i3GEO.editorOL = {
 			'<br><br><a class=paragrafo href=# onclick="i3GEO.desenho.layergrafico.destroyFeatures()" >Apaga tudo</a>';
 
 			YAHOO.editorOL.ferramentas.panel.setBody(ins);
-			if(typeof i3GEO != undefined && i3GEO != "")
+			if(i3GEO && typeof i3GEO != undefined && i3GEO != "")
 			{YAHOO.editorOL.ferramentas.panel.setHeader("Ferramentas <div id='panelferramentasEditor_minimizaCabecalho' class='container-minimiza'></div>");}
 			else
 			{YAHOO.editorOL.ferramentas.panel.setHeader("Ferramentas");}

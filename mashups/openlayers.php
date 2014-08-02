@@ -49,14 +49,13 @@ if(!empty($restauramapa)){
 //
 // imprime na tela a ajuda ao usu&aacute;rio
 //
-if(!isset($temas))
-{
+if(!isset($temas)){
 	ajuda();
 }
 // problema na vers&atilde;o 211 do OpenLayers. Tamanho em % n&atilde;o &eacute;
 // aceito
 // if(!isset($largura))
-// {$largura = 500;}
+	// {$largura = 500;}
 if(isset($largura) && !isset($altura)){
 	$altura = $largura;
 }
@@ -71,32 +70,26 @@ if(isset($controles)){
 	$controles = str_replace(" ",",",$controles);
 	$controles = strtolower($controles);
 	$controles = explode(",",$controles);
-	if(in_array("navigation",$controles))
-	{
+	if(in_array("navigation",$controles)){
 		$objControles[] = "new OpenLayers.Control.Navigation()";
 	}
-	if(in_array("panzoombar",$controles))
-	{
+	if(in_array("panzoombar",$controles)){
 		$objControles[] = "new OpenLayers.Control.PanZoomBar()";
 	}
-	if(in_array("layerswitcher",$controles))
-	{
+	if(in_array("layerswitcher",$controles)){
 		$objControles[] = "new OpenLayers.Control.LayerSwitcher({'ascending':false})";
 	}
-	if(in_array("scaleline",$controles))
-	{
+	if(in_array("scaleline",$controles)){
 		$objControles[] = "new OpenLayers.Control.ScaleLine()";
 	}
 	if(in_array("mouseposition",$controles))
 	{
 		$objControles[] = "new OpenLayers.Control.MousePosition({'separator':' '})";
 	}
-	if(in_array("overviewmap",$controles))
-	{
+	if(in_array("overviewmap",$controles)){
 		$objControles[] = "new OpenLayers.Control.OverviewMap()";
 	}
-	if(in_array("keyboarddefaults",$controles))
-	{
+	if(in_array("keyboarddefaults",$controles)){
 		$objControles[] = "new OpenLayers.Control.KeyboardDefaults()";
 	}
 }
@@ -108,104 +101,80 @@ if(isset($botoes)){
 	$botoes = str_replace(" ",",",$botoes);
 	$botoes = strtolower($botoes);
 	$botoes = explode(",",$botoes);
-	if(in_array("pan",$botoes))
-	{
+	if(in_array("pan",$botoes)){
 		$objBotoes[] = "'pan':true";
 	}
-	if(in_array("zoombox",$botoes))
-	{
+	if(in_array("zoombox",$botoes)){
 		$objBotoes[] = "'zoombox':true";
 	}
-	if(in_array("zoomtot",$botoes))
-	{
+	if(in_array("zoomtot",$botoes)){
 		$objBotoes[] = "'zoomtot':true";
 	}
-	if(in_array("zoomout",$botoes))
-	{
+	if(in_array("zoomout",$botoes)){
 		$objBotoes[] = "'zoomout':true";
 	}
 	if(in_array("zoomin",$botoes))
 	{
 		$objBotoes[] = "'zoomin':true";
 	}
-	if(in_array("legenda",$botoes))
-	{
+	if(in_array("legenda",$botoes)){
 		$objBotoes[] = "'legenda':true";
 	}
-	if(in_array("distancia",$botoes))
-	{
+	if(in_array("distancia",$botoes)){
 		$objBotoes[] = "'distancia':true";
 	}
-	if(in_array("area",$botoes))
-	{
+	if(in_array("area",$botoes)){
 		$objBotoes[] = "'area':true";
 	}
-	if(in_array("identifica",$botoes))
-	{
+	if(in_array("identifica",$botoes)){
 		$objBotoes[] = "'identifica':true";
 	}
-	if(in_array("linha",$botoes))
-	{
+	if(in_array("linha",$botoes)){
 		$objBotoes[] = "'linha':true";
 	}
-	if(in_array("ponto",$botoes))
-	{
+	if(in_array("ponto",$botoes)){
 		$objBotoes[] = "'ponto':true";
 	}
-	if(in_array("poligono",$botoes))
-	{
+	if(in_array("poligono",$botoes)){
 		$objBotoes[] = "'poligono':true";
 	}
-	if(in_array("edita",$botoes))
-	{
+	if(in_array("edita",$botoes)){
 		$objBotoes[] = "'edita':true";
 	}
-	if(in_array("listag",$botoes))
-	{
+	if(in_array("listag",$botoes)){
 		$objBotoes[] = "'listag':true";
 	}
-	if(in_array("corta",$botoes))
-	{
+	if(in_array("corta",$botoes)){
 		$objBotoes[] = "'corta':true";
 	}
-	if(in_array("apaga",$botoes))
-	{
+	if(in_array("apaga",$botoes)){
 		$objBotoes[] = "'apaga':true";
 	}
-	if(in_array("procura",$botoes))
-	{
+	if(in_array("procura",$botoes)){
 		$objBotoes[] = "'procura':true";
 	}
-	if(in_array("salva",$botoes))
-	{
+	if(in_array("salva",$botoes)){
 		$objBotoes[] = "'salva':true";
 	}
-	if(in_array("ajuda",$botoes))
-	{
+	if(in_array("ajuda",$botoes)){
 		$objBotoes[] = "'ajuda':true";
 	}
-	if(in_array("fecha",$botoes))
-	{
+	if(in_array("fecha",$botoes)){
 		$objBotoes[] = "'fecha':true";
 	}
-	if(in_array("tools",$botoes))
-	{
+	if(in_array("tools",$botoes)){
 		$objBotoes[] = "'tools':true";
 	}
-	if(in_array("undo",$botoes))
-	{
+	if(in_array("undo",$botoes)){
 		$objBotoes[] = "'undo':true";
 	}
-	if(in_array("propriedades",$botoes))
-	{
+	if(in_array("propriedades",$botoes)){
 		$objBotoes[] = "'propriedades':true";
 	}
-	if(in_array("frente",$botoes))
-	{
+	if(in_array("frente",$botoes)){
 		$objBotoes[] = "'frente':true";
 	}
-	if(in_array("texto",$botoes))
-	{
+	if(in_array("texto",$botoes)){
 		$objBotoes[] = "'texto':true";
 	}
 	$botoes = "{".implode(",",$objBotoes)."}";
@@ -231,8 +200,7 @@ if($temas != ""){
 	$temas = str_replace(" ",",",$temas);
 	// $temas = strtolower($temas);
 	$temas = explode(",",$temas);
-	if(!isset($visiveis))
-	{
+	if(!isset($visiveis)){
 		$visiveis = $temas;
 	}
 	else{
@@ -287,7 +255,7 @@ if($temas != ""){
 										"name"=>$layern->name,
 										"tema"=>$layern->getmetadata("tema"),
 										"plugin"=>$layern->getmetadata("PLUGINI3GEO")
-									);
+								);
 							}
 							else{
 								$layersNomes[] = $layern->name;
@@ -358,87 +326,88 @@ function nomeRandomicoM($n=10){
 }
 function ajuda(){
 	echo "
-			<pre><b>
-			Mashup OpenLayers
-			Par&acirc;metros:
-			restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
-			kml - lista de endere&ccedil;os (url) de um arquivos kml que ser&atilde;o adicionados ao mapa. Separado por ','
-			servidor - por default &eacute; ../ogc.php o que for&ccedil;a o uso do i3geo local. Esse &eacute; o programa que ser&aacute; utilizado em conjunto com a lista definida no par&acirc;metro 'temas'
-			temas - lista com os temas (mapfiles) do i3Geo que ser&atilde;o inclu&iacute;dos no mapa. Pode ser inclu&iacute;do um arquivo mapfile que esteja fora da pasta i3geo/temas. Nesse caso, deve-se definir o caminho completo do arquivo e tamb&eacute;m o par&acirc;metro &layers
-			visiveis - lista de temas (mesmos nomes do par&acirc;metro temas) que iniciar&atilde;o como vis&iacute;veis no mapa. Se n&atilde;o for definido, todos os temas ser&atilde;o vis&iacute;veis.
-			numzoomlevels - n&uacute;mero de n&iacute;veis de zoom, default=6
-			maxextent - extens&atilde;o geogr&aacute;fica m&aacute;xima do mapa (xmin,ymin,xmax,ymax)
-			mapext - extens&atilde;o geogr&aacute;fica inicial do mapa (xmin,ymin,xmax,ymax)
-			largura - lagura do mapa em pixels
-			altura - altura do mapa em pixels
-			pontos - lista de coordenadas x e y que ser&atilde;o inclu&iacute;das como marcas no mapa
-			marca - nome do arquivo que cont&eacute;m a imagem que ser&aacute; utilizada para mostrar as coordenadas
-			tiles (true|false) - indica se o modo tile ser&aacute; usado ou n&atilde;o (true por default). O modo tile pode tornar o mashup mais lento em algumas situa&ccedil;&otilde;es.
-			incluilayergrafico (true|false) - indica se o layer que recebe elementos gr&aacute;ficos ser&aacute; adicionado ou n&atilde;o ao mapa
-			ativalayerswicther (true|false) - inicia o mapa com a caixa de escolha das camadas (layerSwitcher) aberta ou n&atilde;o. Por default, inicia fechada
-			ativarodadomouse (true|false) - ativa ou n&atilde;o o zoom com base na roda do mouse (default &eacute; true)
-			legendahtml (true|false) - ativa ou n&atilde;o (default &eacute; false) a gera&ccedil;&atilde;o de legenda do tipo HTML no lugar de imagem png. Legendas HTML podem ser modificadas com base em CSS. A legenda &eacute; constru&iacute;da com o template i3geo/aplicmap/legendaOgc.html.
-			desligacache (sim|nao) - desativa o uso do cache de imagens em disco do lado do servidor, for&ccedil;ando a renderiza&ccedil;&atilde;o dos tiles de cada camada em cada requisi&ccedil;&atilde;o
-			nocache (sim) - evita o uso de imagens em cache existentes no navegador do usu&aacute;rio
+	<pre><b>
+	Mashup OpenLayers
+	Par&acirc;metros:
+	restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
+	kml - lista de endere&ccedil;os (url) de um arquivos kml que ser&atilde;o adicionados ao mapa. Separado por ','
+	servidor - por default &eacute; ../ogc.php o que for&ccedil;a o uso do i3geo local. Esse &eacute; o programa que ser&aacute; utilizado em conjunto com a lista definida no par&acirc;metro 'temas'
+	temas - lista com os temas (mapfiles) do i3Geo que ser&atilde;o inclu&iacute;dos no mapa. Pode ser inclu&iacute;do um arquivo mapfile que esteja fora da pasta i3geo/temas. Nesse caso, deve-se definir o caminho completo do arquivo e tamb&eacute;m o par&acirc;metro &layers
+	visiveis - lista de temas (mesmos nomes do par&acirc;metro temas) que iniciar&atilde;o como vis&iacute;veis no mapa. Se n&atilde;o for definido, todos os temas ser&atilde;o vis&iacute;veis.
+	numzoomlevels - n&uacute;mero de n&iacute;veis de zoom, default=12
+	minresolution - resolu&ccedil;&atilde;o m&iacute;nima. Utilizada para definir o primeiro n&iacute;vel de zoom. Default=0.703125
+	maxextent - extens&atilde;o geogr&aacute;fica m&aacute;xima do mapa (xmin,ymin,xmax,ymax)
+	mapext - extens&atilde;o geogr&aacute;fica inicial do mapa (xmin,ymin,xmax,ymax)
+	largura - lagura do mapa em pixels
+	altura - altura do mapa em pixels
+	pontos - lista de coordenadas x e y que ser&atilde;o inclu&iacute;das como marcas no mapa
+	marca - nome do arquivo que cont&eacute;m a imagem que ser&aacute; utilizada para mostrar as coordenadas
+	tiles (true|false) - indica se o modo tile ser&aacute; usado ou n&atilde;o (true por default). O modo tile pode tornar o mashup mais lento em algumas situa&ccedil;&otilde;es.
+	incluilayergrafico (true|false) - indica se o layer que recebe elementos gr&aacute;ficos ser&aacute; adicionado ou n&atilde;o ao mapa
+	ativalayerswicther (true|false) - inicia o mapa com a caixa de escolha das camadas (layerSwitcher) aberta ou n&atilde;o. Por default, inicia fechada
+	ativarodadomouse (true|false) - ativa ou n&atilde;o o zoom com base na roda do mouse (default &eacute; true)
+	legendahtml (true|false) - ativa ou n&atilde;o (default &eacute; false) a gera&ccedil;&atilde;o de legenda do tipo HTML no lugar de imagem png. Legendas HTML podem ser modificadas com base em CSS. A legenda &eacute; constru&iacute;da com o template i3geo/aplicmap/legendaOgc.html.
+	desligacache (sim|nao) - desativa o uso do cache de imagens em disco do lado do servidor, for&ccedil;ando a renderiza&ccedil;&atilde;o dos tiles de cada camada em cada requisi&ccedil;&atilde;o
+	nocache (sim) - evita o uso de imagens em cache existentes no navegador do usu&aacute;rio
 
-			fundo - lista com os nomes, separados por ',' dos layers que ser&atilde;o usados como fundo para o mapa. Se n&atilde;o for definido,
-			ser&aacute; usado o default. O primeiro da lista ser&aacute; o fundo ativo. Se na lista de temas de fundo estiver algum
-			tema incluido com o parametro 'temas', esses ser&atilde;o inclu&iacute;dos como temas de fundo.
-			Quando for vazio, o ultimo layer sera considerado como o layer de fundo
-			Os seguintes fundos podem usados nessa lista:
+	fundo - lista com os nomes, separados por ',' dos layers que ser&atilde;o usados como fundo para o mapa. Se n&atilde;o for definido,
+	ser&aacute; usado o default. O primeiro da lista ser&aacute; o fundo ativo. Se na lista de temas de fundo estiver algum
+	tema incluido com o parametro 'temas', esses ser&atilde;o inclu&iacute;dos como temas de fundo.
+	Quando for vazio, o ultimo layer sera considerado como o layer de fundo
+	Os seguintes fundos podem usados nessa lista:
 
-			e_oce - ESRI Ocean Basemap
-			e_ims - ESRI Imagery World 2D
-			e_wsm - ESRI World Street Map
-			ol_mma - base cartogr&aacute;fica do Brasil
-			ol_wms - base mundial da Meta Carta
-			top_wms - topon&iacute;mia do servidor do MMA usado no mapa de refer&ecirc;ncia
-			est_wms - estados do Brasil
+	e_oce - ESRI Ocean Basemap
+	e_ims - ESRI Imagery World 2D
+	e_wsm - ESRI World Street Map
+	ol_mma - base cartogr&aacute;fica do Brasil
+	ol_wms - base mundial da Meta Carta
+	top_wms - topon&iacute;mia do servidor do MMA usado no mapa de refer&ecirc;ncia
+	est_wms - estados do Brasil
 
-			controles - lista com os nomes dos controles que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os controles ser&atilde;o adicionados
-			navigation
-			panzoombar
-			layerswitcher
-			scaleline
-			mouseposition
-			overviewmap
-			keyboarddefaults
-			botoes - lista com os nomes dos botoes que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os bot&otilde;es ser&atilde;o adicionados
-			pan
-			zoombox
-			zoomtot
-			zoomin
-			zoomout
-			distancia
-			area
-			identifica
-			ponto
-			linha
-			poligono
-			texto
-			edita
-			listag (lista geometrias)
-			apaga
-			captura
-			procura
-			frente
-			propriedades
-			tools
-			undo
-			salva
-			ajuda
-			fecha
-			corta
-			legenda
+	controles - lista com os nomes dos controles que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os controles ser&atilde;o adicionados
+	navigation
+	panzoombar
+	layerswitcher
+	scaleline
+	mouseposition
+	overviewmap
+	keyboarddefaults
+	botoes - lista com os nomes dos botoes que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os bot&otilde;es ser&atilde;o adicionados
+	pan
+	zoombox
+	zoomtot
+	zoomin
+	zoomout
+	distancia
+	area
+	identifica
+	ponto
+	linha
+	poligono
+	texto
+	edita
+	listag (lista geometrias)
+	apaga
+	captura
+	procura
+	frente
+	propriedades
+	tools
+	undo
+	salva
+	ajuda
+	fecha
+	corta
+	legenda
 
-			Para ver a lista de c&oacute;digos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
-			<a href='../ogc.php?lista=temas' >lista de temas</a>. Os c&oacute;digos s&atilde;o mostrados em vermelho.
+	Para ver a lista de c&oacute;digos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
+	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os c&oacute;digos s&atilde;o mostrados em vermelho.
 
-			Exemplo:
+	Exemplo:
 
-			&lt;iframe height='400px' src='http://mapas.mma.gov.br/i3geo/mashups/openlayers.php?temas=bioma&amp;altura=350&amp;largura=350' style='border: 0px solid white;' width='400px'&gt;&lt;/iframe&gt;
+	&lt;iframe height='400px' src='http://mapas.mma.gov.br/i3geo/mashups/openlayers.php?temas=bioma&amp;altura=350&amp;largura=350' style='border: 0px solid white;' width='400px'&gt;&lt;/iframe&gt;
 
-			";
+	";
 	exit;
 }
 ?>
@@ -451,9 +420,9 @@ function ajuda(){
 <?php
 //carrega o script para layers do tipo plugin
 if(count($temasPluginI3Geo) > 0){
-		echo '<script type="text/javascript" src="../classesjs/classe_plugini3geo.js"></script>'."\n";
-	}
-	?>
+	echo '<script type="text/javascript" src="../classesjs/classe_plugini3geo.js"></script>'."\n";
+}
+?>
 <link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
 
 <style>
@@ -483,9 +452,7 @@ if(count($temasPluginI3Geo) > 0){
 	}
 
 	?>
-	<div id=i3geoSelTemaAtivo
-		style="height: 15em; z-index: 3000; display: none"
-		class=" yui-skin-sam"></div>
+	<div id=i3geoSelTemaAtivo style="height: 15em; z-index: 3000; display: none" class=" yui-skin-sam"></div>
 	<script>
 OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 OpenLayers.Lang.setCode("pt-BR");
@@ -561,6 +528,9 @@ if(isset($controles)){
 if(isset($numzoomlevels)){
 	echo "i3GEO.editorOL.numzoom = ".$numzoomlevels.";";
 }
+if(isset($minresolution)){
+	echo "i3GEO.editorOL.minresolution = ".$minresolution.";";
+}
 if(isset($maxextent)){
 	$maxextent = str_replace(" ",",",$maxextent);
 	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(".$maxextent.");\n";
@@ -576,12 +546,20 @@ if(empty($fundo)){
 	// echo "i3GEO.editorOL.mapa.allOverlays = true;";
 }
 ?>
+var temp = i3GEO.editorOL.minresolution,
+	r = [ i3GEO.editorOL.minresolution ];
+for (j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
+	temp = temp / 2;
+	r.push(temp);
+}
+
 i3GEO.editorOL.mapa = new OpenLayers.Map(
 	'i3geoMapa',
 	{
 		autoUpdateSize: false,
 		controls:[],
-		resolutions: [0.703125, 0.3515625, 0.17578125, 0.087890625, 0.0439453125, 0.02197265625, 0.010986328125, 0.0054931640625, 0.00274658203125, 0.001373291015625, 0.0006866455078125, 0.00034332275390625, 0.000171661376953125, 0.0000858306884765625, 0.00004291534423828125, 0.000021457672119140625, 0.000010728836059570312, 0.000005364418029785156, 0.000002682209014892578]
+		resolutions: r,
+		minResolution: i3GEO.editorOL.minresolution
 	}
 );
 i3GEO.editorOL.inicia();

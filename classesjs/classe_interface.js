@@ -685,8 +685,6 @@ i3GEO.Interface = {
 			}
 			if (i3GEO.Interface.openlayers.googleLike === true) {
 				i3GEO.Interface.openlayers.parametrosMap = {
-					// maxExtent: new
-					// OpenLayers.Bounds(-20037508.3427892,-20037508.3427892,20037508.3427892,20037508.3427892),
 					numZoomLevels : 18,
 					maxResolution : 156543.0339,
 					units : 'm',
@@ -695,18 +693,7 @@ i3GEO.Interface = {
 					controls : [],
 					fractionalZoom : false
 				};
-				// OpenLayers.Projection.addTransform("EPSG:4326", "EPSG:3857",
-				// OpenLayers.Layer.SphericalMercator.projectForward);
-				// OpenLayers.Projection.addTransform("EPSG:3857", "EPSG:4326",
-				// OpenLayers.Layer.SphericalMercator.projectInverse);
-				// OpenLayers.Projection.addTransform("EPSG:4326",
-				// "EPSG:900913",
-				// OpenLayers.Layer.SphericalMercator.projectForward);
-				// OpenLayers.Projection.addTransform("EPSG:900913",
-				// "EPSG:4326",
-				// OpenLayers.Layer.SphericalMercator.projectInverse);
 			}
-			;
 			i3geoOL = new OpenLayers.Map('openlayers',
 					i3GEO.Interface.openlayers.parametrosMap);
 		},
