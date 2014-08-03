@@ -252,6 +252,7 @@ $jsfiles = array(
 "../classesjs/compactados/classe_util_compacto.js",
 "../pacotes/openlayers/OpenLayers2131.js",
 "../classesjs/compactados/classe_desenho_compacto.js",
+"../classesjs/compactados/classe_janela_compacto.js",
 "../classesjs/compactados/classe_editorol_compacto.js"
 );
 $buffer = "";

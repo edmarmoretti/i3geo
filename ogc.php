@@ -164,6 +164,9 @@ if(isset($lista) && $lista == "temaswfs"){
 error_reporting(0);
 $versao = versao();
 $versao = $versao["principal"];
+if($_GET["SRS"] == "EPSG:900913"){
+	$_GET["SRS"] = "EPSG:3857";
+}
 $req = ms_newowsrequestobj();
 $tipo = "";
 $_GET = array_merge($_GET,$_POST);
@@ -691,15 +694,14 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 	if($req->getValueByName("FORMAT") == ""){
 		$req->setParameter("FORMAT","image/png");
 	}
-
+	$legenda = $oMap->legend;
+	$legenda->set("status",MS_DEFAULT);
+	$l->set("minscaledenom",0);
+	$l->set("maxscaledenom",0);
 	if($req->getValueByName("FORMAT") == "text/html"){
 		$req->setParameter("FORMAT","image/png");
 		$l = $oMap->getlayerbyname($req->getValueByName("LAYER"));
 		$l->set("status",MS_DEFAULT);
-		$l->set("minscaledenom",0);
-		$l->set("maxscaledenom",0);
-		$legenda = $oMap->legend;
-		$legenda->set("status",MS_DEFAULT);
 		$legenda->set("template",$locaplic."/aplicmap/legendaOgc.html");
 
 		$tmparray["my_tag"] = "value_of_my_tag";
@@ -717,12 +719,19 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
 	if($req->getValueByName("TYPENAME") == "" || $req->getValueByName("TYPENAME") == "undefined"){
 		$req->setParameter("TYPENAME",$l->name);
 	}
+
+	if(strtolower($req->getValueByName("SRS")) == "epsg:900913"){
+		$req->setParameter("SRS","EPSG:3857");
+	}
 }
 if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo"){
 	$l = $oMap->getlayer(0);
 	$req->setParameter("LAYERS",$l->name);
 	$req->setParameter("QUERY_LAYERS",$l->name);
-	//echo "oi";exit;
+	if(strtolower($req->getValueByName("SRS")) == "epsg:900913"){
+		$req->setParameter("SRS","EPSG:3857");
+		$_GET["SRS"] = "EPSG:3857";
+	}
 }
 //
 //altera os caminhos das imagens

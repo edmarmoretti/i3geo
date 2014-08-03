@@ -1,5 +1,7 @@
 if(!i3GEO || typeof(i3GEO) === 'undefined'){
-	var i3GEO = {};
+	var i3GEO = {
+	};
+	i3GEO.Interface = {};
 	navn = false;
 	navm = false;
 	$i = function(id){
@@ -249,7 +251,7 @@ i3GEO.editorOL = {
 		else{
 			i3GEO.editorOL.mapa.zoomToMaxExtent();
 		}
-		if(i3GEO.Interface){
+		if(i3GEO.Interface && i3GEO.Interface.openlayers && i3GEO.Interface.openlayers.sobeLayersGraficos){
 			i3GEO.Interface.openlayers.sobeLayersGraficos();
 		}
 	},
@@ -283,6 +285,7 @@ i3GEO.editorOL = {
 		var layer,url;
 		url = tms.url.replace("&cache=sim","&DESLIGACACHE=sim");
 		url = url.replace("&Z=${z}&X=${x}&Y=${y}","");
+		url = url.replace("Z=${z}&X=${x}&Y=${y}","");
 		layer = new OpenLayers.Layer.WMS(
 			tms.layername+"_clone",
 			url,
@@ -492,9 +495,10 @@ i3GEO.editorOL = {
 		document.body.style.cursor="wait";
 		document.getElementById("i3geoMapa").style.cursor = "wait";
 			var u = layer.url+"&request=getfeature&service=wfs&version=1.0.0";
+			u = u.replace("Z=${z}&X=${x}&Y=${y}","");
 			u += "&OUTPUTFORMAT=gml2&typename="+layer.params.LAYERS;
 			u += "&filter=<Filter><PropertyIsLike wildcard=* singleChar=. escape=! ><PropertyName>"+item+"</PropertyName><Literal>*"+palavra+"*</Literal></PropertyIsLike></Filter>";
-		document.body.style.cursor="wait";
+			document.body.style.cursor="wait";
 		document.getElementById("i3geoMapa").style.cursor = "wait";
 		document.getElementById(onde).innerHTML = "...";
 		OpenLayers.Request.issue({
@@ -553,7 +557,9 @@ i3GEO.editorOL = {
 					}
 					else{
 						url = url.replace("LAYERS","LAYER");
-						ins += layers[i].name+"<br><img src='"+url+"' /><br>";
+						url = url.replace("&Z=${z}&X=${x}&Y=${y}","");
+						url = url.replace("Z=${z}&X=${x}&Y=${y}","");
+						ins += layers[i].name+"<br><img src='"+url+"&SERVICE=wms' /><br>";
 					}
 				}
 			}
@@ -584,18 +590,20 @@ i3GEO.editorOL = {
 	},
 	captura: function(lonlat){
 		//if(i3GEO.desenho.layergrafico !== ""){return;}
-		var layers = [i3GEO.editorOL.layerAtivo()],
+		var d = 0.1,
+			layers = [i3GEO.editorOL.layerAtivo()],
 			xy = lonlat.split(","),
 			u = layers[0].url+"&REQUEST=getfeature&service=wfs&version=1.0.0";
 			u += "&OUTPUTFORMAT=gml2&typename="+layers[0].params.LAYERS;
 			//remove parametros nao desejados
 			u = u.replace("&cache=sim","&DESLIGACACHE=sim");
 			u = u.replace("&Z=${z}&X=${x}&Y=${y}","");
+			u = u.replace("Z=${z}&X=${x}&Y=${y}","");
 			//u += "&filter=<Filter><Intersects><PropertyName>Geometry</PropertyName><gml:Point><gml:coordinates>"+lonlat+"</gml:coordinates></gml:Point></Intersects></Filter>";
 
 		xy[0] = xy[0] * 1;
 		xy[1] = xy[1] * 1;
-		var poligono = (xy[0]-0.1)+","+(xy[1]+0.1) + " "+(xy[0]+0.1)+","+(xy[1]+0.1)+" " + (xy[0]+0.1)+","+(xy[1]-0.1)+" " + (xy[0]-0.1)+","+(xy[1]-0.1)+" "+(xy[0]-0.1)+","+(xy[1]+0.1);
+		var poligono = (xy[0] - d)+","+(xy[1] + d) + " "+(xy[0] + d)+","+(xy[1] + d)+" " + (xy[0] + d)+","+(xy[1] - d)+" " + (xy[0] - d)+","+(xy[1] - d)+" "+(xy[0] - d)+","+(xy[1] + d);
 		u += "&filter=<Filter><Intersects><PropertyName>Geometry</PropertyName><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:posList>"+poligono+"</gml:posList></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></Intersects></Filter>";
 
 		document.body.style.cursor="wait";
@@ -644,7 +652,9 @@ i3GEO.editorOL = {
 			ins = "";
 		if(n > 0){
 			if($i("panelsalvageometrias")){
-				YAHOO.salvaGeometrias.container.panel = YAHOO.i3GEO.janela.manager.find("panelsalvageometrias");
+				if(YAHOO.i3GEO){
+					YAHOO.salvaGeometrias.container.panel = YAHOO.i3GEO.janela.manager.find("panelsalvageometrias");
+				}
 				YAHOO.salvaGeometrias.container.panel.show();
 				YAHOO.salvaGeometrias.container.panel.bringToTop();
 			}
@@ -657,7 +667,7 @@ i3GEO.editorOL = {
 					YAHOO.salvaGeometrias.container.panel.setFooter("");
 					YAHOO.salvaGeometrias.container.panel.render(document.body);
 					YAHOO.salvaGeometrias.container.panel.center();
-					if(YAHOO.i3GEO.janela){
+					if(YAHOO.i3GEO && YAHOO.i3GEO.janela){
 						YAHOO.i3GEO.janela.manager.register(YAHOO.salvaGeometrias.container.panel);
 					}
 					YAHOO.salvaGeometrias.container.panel.show();
@@ -666,7 +676,9 @@ i3GEO.editorOL = {
 			}
 			ins += "<p class=paragrafo >Foram encontrada(s) "+n+" geometria(s) selecionada(s) </p>";
 			ins += "<p class=paragrafo ><a href='#' onclick='i3GEO.editorOL.listaGeometriasSel()' >Listar</a>&nbsp;&nbsp;";
-			ins += "<a href='#' onclick='"+i3GEO.editorOL.nomeFuncaoSalvar+"' >Salvar</a>&nbsp;&nbsp;";
+			if(i3GEO.arvoreDeCamadas){
+				ins += "<a href='#' onclick='"+i3GEO.editorOL.nomeFuncaoSalvar+"' >Salvar</a>&nbsp;&nbsp;";
+			}
 			ins += "<a href='#' onclick='i3GEO.editorOL.exportarSHP()' >Exportar (shapefile)</a></p>";
 			YAHOO.salvaGeometrias.container.panel.setBody(ins);
 		}
@@ -921,7 +933,7 @@ i3GEO.editorOL = {
 				"measure": function(event){
 						var units = event.units,
 							measure = event.measure;
-						alert("Dist&acirc;ncia: " + measure.toFixed(3) + " " + units);
+						alert("Distancia: " + measure.toFixed(3) + " " + units);
 				}
 			});
 			controles.push(button);
@@ -1006,7 +1018,7 @@ i3GEO.editorOL = {
 					beforegetfeatureinfo: function(event){
 						var ativo = [i3GEO.editorOL.layerAtivo()];
 						//se for TMS tem de pegar o clone wms
-						if(ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS" || ativo[0].CLASS_NAME == "OpenLayers.Layer.OSM"){
+						if(ativo[0].serviceVersion === "&tms=" || ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS" || ativo[0].CLASS_NAME == "OpenLayers.Layer.OSM"){
 							ativo = [i3GEO.editorOL.layertms2wms(ativo[0])];
 						}
 						ativo[0].projection = new OpenLayers.Projection("EPSG:4326");
@@ -1046,7 +1058,7 @@ i3GEO.editorOL = {
 							i3GEO.desenho.layergrafico.addFeatures([f]);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
-							if(i3GEO.Interface){
+							if(i3GEO.Interface && i3GEO.Interface.openlayers && i3GEO.Interface.openlayers.sobeLayersGraficos){
 								i3GEO.Interface.openlayers.sobeLayersGraficos();
 							}
 						}
@@ -1093,7 +1105,7 @@ i3GEO.editorOL = {
 							i3GEO.desenho.layergrafico.addFeatures([f]);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
-							if(i3GEO.Interface){
+							if(i3GEO.Interface && i3GEO.Interface.openlayers && i3GEO.Interface.openlayers.sobeLayersGraficos){
 								i3GEO.Interface.openlayers.sobeLayersGraficos();
 							}
 						}
@@ -1127,7 +1139,7 @@ i3GEO.editorOL = {
 							i3GEO.desenho.layergrafico.addFeatures([f]);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
-							if(i3GEO.Interface){
+							if(i3GEO.Interface && i3GEO.Interface.openlayers && i3GEO.Interface.openlayers.sobeLayersGraficos){
 								i3GEO.Interface.openlayers.sobeLayersGraficos();
 							}
 						}
@@ -1166,7 +1178,7 @@ i3GEO.editorOL = {
 							};
 							if(texto && texto !== "")
 							{i3GEO.desenho.layergrafico.addFeatures([label]);}
-							if(i3GEO.Interface){
+							if(i3GEO.Interface && i3GEO.Interface.openlayers && i3GEO.Interface.openlayers.sobeLayersGraficos){
 								i3GEO.Interface.openlayers.sobeLayersGraficos();
 							}
 						}
