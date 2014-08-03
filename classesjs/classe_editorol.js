@@ -251,9 +251,7 @@ i3GEO.editorOL = {
 		else{
 			i3GEO.editorOL.mapa.zoomToMaxExtent();
 		}
-		if(i3GEO.Interface && i3GEO.Interface.openlayers && i3GEO.Interface.openlayers.sobeLayersGraficos){
-			i3GEO.Interface.openlayers.sobeLayersGraficos();
-		}
+		i3GEO.editorOL.sobeLayersGraficos();
 	},
 	criaLayerGrafico: function(){
 		i3GEO.desenho.openlayers.criaLayerGrafico();
@@ -1058,9 +1056,7 @@ i3GEO.editorOL = {
 							i3GEO.desenho.layergrafico.addFeatures([f]);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
-							if(i3GEO.Interface && i3GEO.Interface.openlayers && i3GEO.Interface.openlayers.sobeLayersGraficos){
-								i3GEO.Interface.openlayers.sobeLayersGraficos();
-							}
+							i3GEO.editorOL.sobeLayersGraficos();
 						}
 					}
 				}
@@ -1105,9 +1101,7 @@ i3GEO.editorOL = {
 							i3GEO.desenho.layergrafico.addFeatures([f]);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
-							if(i3GEO.Interface && i3GEO.Interface.openlayers && i3GEO.Interface.openlayers.sobeLayersGraficos){
-								i3GEO.Interface.openlayers.sobeLayersGraficos();
-							}
+							i3GEO.editorOL.sobeLayersGraficos();
 						}
 					}
 				}
@@ -1139,9 +1133,7 @@ i3GEO.editorOL = {
 							i3GEO.desenho.layergrafico.addFeatures([f]);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
-							if(i3GEO.Interface && i3GEO.Interface.openlayers && i3GEO.Interface.openlayers.sobeLayersGraficos){
-								i3GEO.Interface.openlayers.sobeLayersGraficos();
-							}
+							i3GEO.editorOL.sobeLayersGraficos();
 						}
 					}
 				}
@@ -1178,9 +1170,7 @@ i3GEO.editorOL = {
 							};
 							if(texto && texto !== "")
 							{i3GEO.desenho.layergrafico.addFeatures([label]);}
-							if(i3GEO.Interface && i3GEO.Interface.openlayers && i3GEO.Interface.openlayers.sobeLayersGraficos){
-								i3GEO.Interface.openlayers.sobeLayersGraficos();
-							}
+							i3GEO.editorOL.sobeLayersGraficos();
 						}
 					}
 				}
@@ -1983,6 +1973,15 @@ i3GEO.editorOL = {
 		}
 		else{
 			return obj;
+		}
+	},
+	sobeLayersGraficos : function() {
+		var nlayers = i3GEO.editorOL.mapa.getNumLayers(), layers = i3GEO.editorOL.mapa.layers, i;
+		for (i = 0; i < nlayers; i++) {
+			if (layers[i].CLASS_NAME == "OpenLayers.Layer.Vector"
+					&& layers[i].name != "Nenhum") {
+				i3GEO.editorOL.mapa.raiseLayer(i3GEO.editorOL.mapa.layers[i], nlayers);
+			}
 		}
 	}
 };

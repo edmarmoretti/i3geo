@@ -719,7 +719,9 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
 	if($req->getValueByName("TYPENAME") == "" || $req->getValueByName("TYPENAME") == "undefined"){
 		$req->setParameter("TYPENAME",$l->name);
 	}
-
+	if($l->getProjection() == "" ){
+		$l->setProjection("proj=latlong,a=6378137,b=6378137");
+	}
 	if(strtolower($req->getValueByName("SRS")) == "epsg:900913"){
 		$req->setParameter("SRS","EPSG:3857");
 	}
