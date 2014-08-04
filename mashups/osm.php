@@ -289,7 +289,7 @@ if($temas != ""){
 								$tituloLayer = $l->getmetadata("tema");
 								$nomeLayer = $l->name;
 								$visivel = "false";
-								if($l->status == MS_DEFAULT || $nlayers == 1){
+								if($l->status == MS_DEFAULT || in_array($tema,$visiveis)){
 									$visivel = "true";
 								}
 								if($tituloLayer != ""){
@@ -397,18 +397,18 @@ function ajuda(){
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 
-<script type="text/javascript" src="openlayers_compacto.js.php"></script>
-<!-- para debug
+<!--<script type="text/javascript" src="openlayers_compacto.js.php"></script>-->
+<!-- para debug -->
 <script type="text/javascript" src="../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="../pacotes/yui290/build/dragdrop/dragdrop-min.js"></script>
 <script type="text/javascript" src="../pacotes/yui290/build/container/container-min.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
-<script type="text/javascript" src="../classesjs/compactados/classe_util_compacto.js"></script>
+<script type="text/javascript" src="../classesjs/classe_util.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_janela_compacto.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers2131.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_desenho_compacto.js"></script>
 <script type="text/javascript" src="../classesjs/classe_editorol.js"></script>
--->
+
 <?php
 //carrega o script para layers do tipo plugin
 if(count($temasPluginI3Geo) > 0){
@@ -532,16 +532,17 @@ if(isset($mapext)){
 }
 else{
 	echo "i3GEO.editorOL.mapext = new OpenLayers.Bounds('-15125970.651191 -5205055.877383 15125970.651191 5205055.877383');\n";
-}	
+}
 if(empty($fundo)){
 	// echo "i3GEO.editorOL.mapa.allOverlays = true;";
 }
 ?>
+i3GEO.Interface = {openlayers:{googleLike:true}};
 i3GEO.editorOL.fundo = "osm";
 
 var temp = i3GEO.editorOL.minresolution,
 r = [ i3GEO.editorOL.minresolution ];
-for (j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
+for (var j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
 	temp = temp / 2;
 	r.push(temp);
 }
@@ -562,7 +563,7 @@ i3GEO.editorOL.inicia();
 if(!i3GEO.configura){
 	i3GEO.configura = {"locaplic":  "../"};
 }
-i3GEO.Interface = {openlayers:{googleLike:true}};
+
 <?php
 //camadas plugin
 

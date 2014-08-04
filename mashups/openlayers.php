@@ -271,8 +271,7 @@ if($temas != ""){
 							}
 						}
 						$visivel = "false";
-						if(in_array($tema,$visiveis))
-						{
+						if(in_array($tema,$visiveis)){
 							$visivel = "true";
 						}
 						// echo $visivel;exit;
@@ -285,16 +284,11 @@ if($temas != ""){
 							$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,singleTile:true,visibility:false,isBaseLayer:false})';
 						}
 						else{
-							// $objOpenLayers[] = 'new OpenLayers.Layer.WMS(
-							// "'.$tituloLayer.'",
-							// "../ogc.php?tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent:
-							// "true", format:
-							// "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 							foreach($layers as $l){
 								$tituloLayer = $l->getmetadata("tema");
 								$nomeLayer = $l->name;
 								$visivel = "false";
-								if($l->status == MS_DEFAULT || $nlayers == 1){
+								if($l->status == MS_DEFAULT || in_array($tema,$visiveis)){
 									$visivel = "true";
 								}
 								if($tituloLayer != ""){

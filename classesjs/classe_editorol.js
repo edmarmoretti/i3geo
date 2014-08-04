@@ -1,3 +1,36 @@
+/*
+Title: Editor vetorial para OpenLayers
+
+i3GEO.editorOL
+
+Fun&ccedil;&otilde;es utilizadas pelo OpenLayers nas op&ccedil;&otilde;es de edi&ccedil;&atilde;o de dados vetoriais.
+&Eacute; utilizado tamb&eacute;m pelo mashup com navega&ccedil;&atilde;o via OpenLayers e com OSM.
+
+Arquivo: i3geo/classesjs/classe_editorol.js
+
+Licen&ccedil;a:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
+
+Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+GNU conforme publicada pela Free Software Foundation;
+
+Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+de COMERCIABILIDADE OU ADEQUACAtilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
+GNU junto com este programa; se n&atilde;o, escreva para a
+Free Software Foundation, Inc., no endere&ccedil;o
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+
 if(!i3GEO || typeof(i3GEO) === 'undefined'){
 	var i3GEO = {
 	};
@@ -246,7 +279,8 @@ i3GEO.editorOL = {
 			});
 		}
 		if(i3GEO.editorOL.mapext != ""){
-			i3GEO.editorOL.mapa.zoomToExtent(i3GEO.editorOL.mapext);
+			var m = i3GEO.util.extGeo2OSM(i3GEO.editorOL.mapext);
+			i3GEO.editorOL.mapa.zoomToExtent(m);
 		}
 		else{
 			i3GEO.editorOL.mapa.zoomToMaxExtent();
@@ -325,6 +359,7 @@ i3GEO.editorOL = {
 				{p = e.xy;}
 				//altera o indicador de localizacao
 				lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(p);
+				lonlat = i3GEO.util.projOSM2Geo(lonlat);
 				d = i3GEO.calculo.dd2dms(lonlat.lon,lonlat.lat);
 				try{
 					$i(idcoord[0].id).innerHTML = "Long: "+d[0]+"<br>Lat: "+d[1];
@@ -1447,7 +1482,8 @@ i3GEO.editorOL = {
 	adicionaMarcas: function(){
 		if(i3GEO.editorOL.pontos.length === 0)
 		{return;}
-		var SHADOW_Z_INDEX = 10,
+		var f,
+			SHADOW_Z_INDEX = 10,
 			MARKER_Z_INDEX = 11,
 			layer = new OpenLayers.Layer.Vector(
 					"pontos",
@@ -1476,10 +1512,13 @@ i3GEO.editorOL = {
 			y.push(i3GEO.editorOL.pontos[index+1]);
 		}
 		for (index = 0; index < x.length; index++) {
+			f = new OpenLayers.Geometry.Point(x[index], y[index]);
+			f = i3GEO.util.projGeo2OSM(f);
+			f = new OpenLayers.Feature.Vector(
+					f
+			);
 			features.push(
-				new OpenLayers.Feature.Vector(
-					new OpenLayers.Geometry.Point(x[index], y[index])
-				)
+				f
 			);
 		}
 		layer.addFeatures(features);
