@@ -397,8 +397,8 @@ function ajuda(){
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 
-<!--<script type="text/javascript" src="openlayers_compacto.js.php"></script>-->
-<!-- para debug -->
+<script type="text/javascript" src="openlayers_compacto.js.php"></script>
+<!-- para debug
 <script type="text/javascript" src="../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="../pacotes/yui290/build/dragdrop/dragdrop-min.js"></script>
 <script type="text/javascript" src="../pacotes/yui290/build/container/container-min.js"></script>
@@ -408,7 +408,7 @@ function ajuda(){
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers2131.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_desenho_compacto.js"></script>
 <script type="text/javascript" src="../classesjs/classe_editorol.js"></script>
-
+-->
 <?php
 //carrega o script para layers do tipo plugin
 if(count($temasPluginI3Geo) > 0){
