@@ -11,6 +11,9 @@ error_reporting(0);
 if(!empty($desligacache)){
 	$DESLIGACACHE = $desligacache;
 }
+if(empty($opacidade)){
+	$opacidade = 1;
+}
 //
 //verifica se em cada camada deve ser inserido um parametro aleatorio para evitar cache de imagem do lado do cliente
 //
@@ -277,9 +280,12 @@ if($temas != ""){
 						// echo $visivel;exit;
 						// var_dump($visiveis);exit;
 						if($nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM"){
+							if($layern->type != 2 && $layern->type != 3){
+								$opacidade = 1;
+							}
 							// nesse caso o layer e adicionado como TMS
 							// tms leva os parametros do TMS
-							$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'",{tileOrigin: new OpenLayers.LonLat(-180, -90),serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png"})';
+							$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'",{tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png"})';
 							// cria um clone WMS para efeitos de getfeatureinfo
 							$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,singleTile:true,visibility:false,isBaseLayer:false})';
 						}
@@ -291,11 +297,14 @@ if($temas != ""){
 								if($l->status == MS_DEFAULT || in_array($tema,$visiveis)){
 									$visivel = "true";
 								}
+								if($l->type != 2 && $l->type != 3){
+									$opacidade = 1;
+								}
 								if($tituloLayer != ""){
-									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 								}
 								else{
-									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 								}
 							}
 						}
@@ -324,6 +333,7 @@ function ajuda(){
 	Mashup OpenLayers
 	Par&acirc;metros:
 	restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
+	opacidade - opacidade (de 0 a 1) aplicada aos temas do tipo poligonal ou raster (default 1)
 	kml - lista de endere&ccedil;os (url) de um arquivos kml que ser&atilde;o adicionados ao mapa. Separado por ','
 	servidor - por default &eacute; ../ogc.php o que for&ccedil;a o uso do i3geo local. Esse &eacute; o programa que ser&aacute; utilizado em conjunto com a lista definida no par&acirc;metro 'temas'
 	temas - lista com os temas (mapfiles) do i3Geo que ser&atilde;o inclu&iacute;dos no mapa. Pode ser inclu&iacute;do um arquivo mapfile que esteja fora da pasta i3geo/temas. Nesse caso, deve-se definir o caminho completo do arquivo e tamb&eacute;m o par&acirc;metro &layers
@@ -540,9 +550,10 @@ if(empty($fundo)){
 	// echo "i3GEO.editorOL.mapa.allOverlays = true;";
 }
 ?>
+i3GEO.Interface = {openlayers:{googleLike:false}};
 var temp = i3GEO.editorOL.minresolution,
 	r = [ i3GEO.editorOL.minresolution ];
-for (j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
+for (var j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
 	temp = temp / 2;
 	r.push(temp);
 }
