@@ -1,8 +1,25 @@
 ﻿<?php
 /**
+ * Pagina inicial do i3Geo
+ * Voce pode utilizar o parametro customDir para indicar a pasta onde
+ * as interfaces de mapa estao. Nesse caso, os links utilizarao esse parametro
+ * Exemplo: localhost/i3geo/init/index.php?customDir=minhaPasta
+ *
+ * minhaPasta deve estar dentor da pasta i3geo.
+ *
+ * Se dentro da pasta $customDir existir um arquivo chamado index.php sera feito o include
+ * na pagina.
+ */
+/**
  * Cria as pastas temporarias que o i3Geo precisa, caso nao existam
  */
 include(dirname(__FILE__)."/../ms_configura.php");
+if(!empty($_GET["customDir"])){
+	$customDir = $_GET["customDir"];
+}
+else if(empty($customDir)){
+	$customDir = "interface";
+}
 if(!file_exists($dir_tmp)){
 	@mkdir ($dir_tmp,0777);
 }
@@ -14,6 +31,9 @@ if(file_exists($dir_tmp)){
 	chmod($dir_tmp."/cache",0777);
 	@mkdir($dir_tmp."/cache/googlemaps",0777);
 	chmod($dir_tmp."/cache/googlemaps",0777);
+}
+if(file_exists($locaplic."/".$customDir."/index.php")){
+	include($locaplic."/".$customDir."/index.php");
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -91,6 +111,7 @@ a {
 	margin: 0px auto;
 	text-decoration: none;
 }
+
 </style>
 </head>
 <body class=" yui-skin-sam ">
@@ -110,19 +131,23 @@ a {
 					<div id="botoes"></div>
 				</div>
 				<div style="float: left">
-					<div class="r" style="width: 230px; height: 380px"><table>
+					<div class="r" style="width: 230px; height: 380px">
+						<table>
 							<tr>
-								<td><a class="twitter-timeline" href="https://twitter.com/i3geo" data-widget-id="288061915689787392" style="width:220px;height:350px">Tweets @i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+								<td><a class="twitter-timeline" href="https://twitter.com/i3geo" data-widget-id="288061915689787392" style="width: 220px; height: 350px">Tweets @i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 								</td>
 							</tr>
-						</table> </div>
+						</table>
+					</div>
 
-						<div class="r" style="width: 230px; height: 380px"><table>
+					<div class="r" style="width: 230px; height: 380px">
+						<table>
 							<tr>
-								<td><a class="twitter-timeline" href="https://twitter.com/search?q=@i3geo" data-widget-id="288053202174222336" style="width:220px;height:350px">Tweets #i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+								<td><a class="twitter-timeline" href="https://twitter.com/search?q=@i3geo" data-widget-id="288053202174222336" style="width: 220px; height: 350px">Tweets #i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 								</td>
 							</tr>
-						</table> </div>
+						</table>
+					</div>
 				</div>
 			</div>
 
@@ -141,15 +166,15 @@ botoesIni.push({
 	"titulo":$trad(3,g_traducao_init)
 	},{
 	"img":"openlayers.png",
-	"href":"../interface/black_ol.htm",
+	"href":"../<?php echo $customDir; ?>/black_ol.htm",
 	"titulo":$trad(4,g_traducao_init)
 	},{
 	"img":"openlayersdebug.png",
-	"href":"../interface/openlayersdebug.htm",
+	"href":"../<?php echo $customDir; ?>/openlayersdebug.htm",
 	"titulo":$trad(5,g_traducao_init)
 	},{
 		"img":"osm.png",
-		"href":"../interface/black_osm.htm",
+		"href":"../<?php echo $customDir; ?>/black_osm.htm",
 		"titulo":$trad(23,g_traducao_init)
 	},{
 	"img":"mashup.png",
@@ -157,19 +182,19 @@ botoesIni.push({
 	"titulo":$trad(18,g_traducao_init)
 	},{
 	"img":"googlemaps.png",
-	"href":"../interface/black_gm.phtml",
+	"href":"../<?php echo $customDir; ?>/black_gm.phtml",
 	"titulo":$trad(6,g_traducao_init)
 	},{
 	"img":"googlemaps_noite.png",
-	"href":"../interface/googlemaps_noite.phtml",
+	"href":"../<?php echo $customDir; ?>/googlemaps_noite.phtml",
 	"titulo":$trad(22,g_traducao_init)
 	},{
 	"img":"googleearth.png",
-	"href":"../interface/googleearth.phtml",
+	"href":"../<?php echo $customDir; ?>/googleearth.phtml",
 	"titulo":$trad(7,g_traducao_init)
 	},{
 	"img":"cartogramas.png",
-	"href":"../interface/black_carto_ol.htm",
+	"href":"../<?php echo $customDir; ?>/black_carto_ol.htm",
 	"titulo":$trad(8,g_traducao_init)
 	},{
 	"img":"editor.png",

@@ -27,6 +27,16 @@ include_once($dir."/../../classesphp/classe_atributos.php");
 //o plugin pode ser chamado sem um mapfile criado
 //usando apenas o mapfile existente em i3geo/temas
 //nesse caso e necessario cirar um mapfile temporario
+
+//no caso do SAIKU, o nome do mapfile pode estar na sessao
+session_name("i3GeoPHP");
+session_start();
+if(!empty($_SESSION["map_file"])){
+	$mapateste = ms_newMapObj($_SESSION["map_file"]);
+	if($mapateste->getlayerbyname($layer) != ""){
+		$map_file = $_SESSION["map_file"];
+	}
+}
 if(empty($map_file) && file_exists($dir."/../../temas/{$layer}.map")){
 	$versao = versao();
 	$versao = $versao["principal"];

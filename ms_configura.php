@@ -220,7 +220,7 @@ $twitteroauth = array(
 
 	Mensagem de inicializa&ccedil;&atilde;o mostrada pelo programa ms_criamapa.php
 
-	&Eacute; obtida de um include para permitir a atualiza&ccedil;&atilde;o da vers&atilde;o nos pacotes de corre&ccedil;&atilde;o
+	Por default &eacute; obtida de um include para permitir a atualiza&ccedil;&atilde;o da vers&atilde;o nos pacotes de corre&ccedil;&atilde;o
 
 	Tipo:
 	{string}
@@ -274,7 +274,7 @@ $metaestatTemplates = "/ferramentas/metaestat/templates";
 /*
 Variable: navegadoresLocais
 
-O i3geo possibilita que os usu&aacute;rios acessem dados geogr&aacute;ficos no servidor diretamente, 
+O i3geo possibilita que os usu&aacute;rios acessem dados geogr&aacute;ficos no servidor diretamente,
 navegando pelo sistema de arquivos.
 Isso possibilita o acesso aos dados mesmo que n&atilde;o constem na &aacute;rvore de temas
 
@@ -284,13 +284,13 @@ Se do lado do cliente a variavel javascript for false e $navegadoresLocais for v
 na &aacute;rvore
 
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = false; //inserir no HTML
- 
+
 Portanto, se vc n&atilde;o quiser que essa op&ccedil;&atilde;o seja ativada, mesmo com o usu&aacute;rio logado
 mantenha essa vari&aacute;vel igual a
 
 $navegadoresLocais = "";
 
-Para efeito de compatibilidade, manteve-se a possibilidade de um array com multiplos arrays, 
+Para efeito de compatibilidade, manteve-se a possibilidade de um array com multiplos arrays,
 mas apenas o primeiro e utilizado
 
 Exemplo:
@@ -497,6 +497,19 @@ Tipo:
 {string}
 */
 $interfacePadrao = "black_ol.htm";
+/*
+Variable: customDir
+
+ Nome da pasta dentro de &quot;i3geo&quot; utilizada para armazenar os arquivos das interfaces de mapas interativos e outras
+ customiza&ccedil;&otilde;es espec&iacute;ficas de determinada instala&ccedil;&atilde;o. O valor padr&atilde;o &eacute; &quot;interface&quot;, ou seja, os arquivos ficam
+ na pasta i3geo/interface.
+
+ A p&aacute;gina inicial do i3Geo utiliza essa vari&aacute;vel para montar os links que abrem os mapas.
+
+Tipo:
+{string}
+*/
+$customDir = "interface";
 /*
 Variable: base
 

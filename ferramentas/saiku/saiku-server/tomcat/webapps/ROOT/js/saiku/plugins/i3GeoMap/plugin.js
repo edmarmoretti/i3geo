@@ -51,6 +51,7 @@ var i3GeoMap = Backbone.View.extend({
 						"&nbsp;<input type=button name=raiosProporcionais value='Raios proporcionais' />"+
 						"&nbsp;<input type=button name=circulosProporcionais value='C&iacute;rculos proporcionais' />"+
 						"&nbsp;<input type=button name=coresChapadas value='Cores' />"+
+						"&nbsp;<input type=button name=calor value='Calor' />"+
 						"&nbsp;<input type=button name=atualizarMapa value='Atualiza' />"+
 						"&nbsp;<input type=button name=fecharMapa value='Fechar' />"+
 					//"</ul>"+
@@ -323,6 +324,44 @@ var i3GeoMap = Backbone.View.extend({
 				title:    false
 		});
 	},
+	calor: function(s){
+		this.opcoes.size = 10;
+		$.fancybox("Raio de um ponto em pixels:<br><input type=text value='10' size=6 id='calorRaio' /><br>" +
+				"Valor m&aacute;ximo em cada ponto:<br><input type=text value='10' size=6 id='calorMax' /><br>" +
+				"<br>Coluna com os valores:<br>"+
+				"<select id='calorColuna' style='border:1px solid #BBBBBB;'>"+this.opcoesColunas()+"</select>" +
+				"<br><input type=button value='OK' id='calorOk' />" +
+				"&nbsp; <input type=button value='Cancela' id='calorCancela' />"
+				,
+				{
+					'autoDimensions'    : false,
+					'autoScale'         : false,
+					'height'            :  250,
+					'width'             :  350,
+					'transitionIn'      : 'none',
+					'transitionOut'     : 'none',
+					'showCloseButton'	: false,
+					'modal'				: false
+				}
+		);
+		document.getElementById("calorOk").onclick = function(){
+			s.opcoes.tipo = "calor";
+			//s.opcoes.size = document.getElementById("raiosProporcionaisSize").value;
+			s.opcoes.indicecoluna = [parseInt(document.getElementById("calorColuna").value,10)];
+			s.opcoes.raio = document.getElementById("calorRaio").value;
+			s.opcoes.max = document.getElementById("calorMax").value;
+			s.render();
+			$.fancybox.close();
+		};
+		document.getElementById("calorCancela").onclick = function(){
+			$.fancybox.close();
+			s.fecharMapa();
+		};
+		jQuery('select[name="colour"]').colourPicker({
+				ico:    'js/jquery/jquery.colourPicker.gif',
+				title:    false
+		});
+	},
 
 	opcoesColunas: function(){
 		var m = this.data.metadata,
@@ -476,6 +515,7 @@ var i3GeoMap = Backbone.View.extend({
 		//preenche os dados do formulario
 		this.opcoes.locaplic = parametroUrl("locaplic");
 		this.opcoes.mapext = parametroUrl("mapext");
+		//alert(JSON.stringify(this.opcoes))
 		document.getElementById("formi3GeoMapOpcoes").value = JSON.stringify(this.opcoes);
 		document.getElementById("formi3GeoMapdados").value = JSON.stringify(dados);
 		document.getElementById("formi3GeoMapmetadados").value = JSON.stringify(metadata);

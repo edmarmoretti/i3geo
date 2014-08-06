@@ -9,7 +9,6 @@ include_once(dirname(__FILE__)."/../../classesphp/classe_estatistica.php");
 if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
 }
-
 //pega o filtro da sessao PHP aberta pelo i3Geo
 session_name("i3GeoPHP");
 session_id($_POST["g_sid"]);
@@ -18,7 +17,6 @@ session_start();
 $map_file = $_SESSION["map_file"];
 $dados = (array) json_decode($_POST["dados"],true);
 $opcoes = (array) json_decode($_POST["opcoes"],true);
-
 $metadados = (array) json_decode($_POST["metadados"],true);
 $nmetadados = count($metadados);
 //pega o id da regiao (busca pelo posfixo geocod)
@@ -51,7 +49,7 @@ $srid = $meta["srid"];
 $colunastabela = $m->colunasTabela($meta["codigo_estat_conexao"],$meta["esquemadb"],$meta["tabela"],"geometry","!=");
 $tipoLayer = "POLYGON";
 //define a coluna geo correta
-if($opcoes["tipo"] == "mapaPizzas" || $opcoes["tipo"] == "mapaBarras" || $opcoes["tipo"] == "raiosProporcionais" || $opcoes["tipo"] == "circulosProporcionais"){
+if($opcoes["tipo"] == "calor" || $opcoes["tipo"] == "mapaPizzas" || $opcoes["tipo"] == "mapaBarras" || $opcoes["tipo"] == "raiosProporcionais" || $opcoes["tipo"] == "circulosProporcionais"){
 	if($meta["colunacentroide"] != ""){
 		$colunageo = $meta["colunacentroide"];
 		$sqlColunaGeo = $meta["colunacentroide"];
@@ -159,7 +157,7 @@ $l .= PHP_EOL.'END';
 $layer->updateFromString($l);
 
 //inclui o layer com o contorno se for o caso
-if(empty($_GET["origem"]) && ($tipoLayer == "CHART" || $tipoLayer == "POINT")){
+if($opcoes["tipo"] != "calor" && empty($_GET["origem"]) && ($tipoLayer == "CHART" || $tipoLayer == "POINT")){
 	$layer = ms_newLayerObj($mapa);
 	$nomeLayer = nomeRandomico();
 	$l = array();
@@ -197,7 +195,11 @@ if($opcoes["tipo"] == "coresChapadas"){
 	$retorno = $m->alteraCoresClasses($cori,$corf);
 	$m->salva();
 }
-
+if($opcoes["tipo"] == "calor"){
+	$parametros = '{"plugin":"heatmap","parametros":{"opacity":".8","coluna":"","radius":"'.$opcoes["raio"].'","max":"'.$opcoes["max"].'"}}';
+	$layer->setmetadata("PLUGINI3GEO",$parametros);
+	$mapa->save($map_file);
+}
 header("Location:".$opcoes["locaplic"]."/mashups/openlayers.php?temas=".$map_file."&DESLIGACACHE=sim&botoes=legenda,pan,zoombox,zoomtot,zoomin,zoomout,distancia,area,identifica&controles=navigation,layerswitcher,scaleline,mouseposition,overviewmap,keyboarddefaults&tiles=false&mapext=".$opcoes["mapext"]);
 
 function mapaBarras($colunas){
