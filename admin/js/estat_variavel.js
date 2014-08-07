@@ -457,8 +457,8 @@ i3GEOadmin.variaveis = {
 				"</div>" +
 				'<input type=hidden  value="" id="listaColourRampEditor"  />'; //utilizado pelo seletor de colourramp;
 			$i("editor_bd").innerHTML = ins;
-			
-			
+
+
 			new YAHOO.widget.Button(
 					"i3GEOFmetaestatEditorBotaoTAM",
 					{onclick:{fn:
@@ -483,7 +483,7 @@ i3GEOadmin.variaveis = {
 							core_carregando("ativa");
 							p += "&tamanhoini=" + tamanhoini +
 								"&aumentar=" + aumentar;
-							core_makeRequest(p,callback);							
+							core_makeRequest(p,callback);
 						}
 					}}
 			);
@@ -1282,7 +1282,7 @@ i3GEOadmin.variaveis = {
 			prog = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraClassificacaoMedida";
 		}
 		if(tipo == "classeClassificacao"){
-			campos = new Array("azul","verde","vermelho","tamanho","simbolo","otamanho","overde","oazul","overmelho");
+			campos = new Array("azul","verde","vermelho","tamanho","simbolo","otamanho","overde","oazul","overmelho","titulo");
 			par = "&id_classe="+id;
 			//troca o < por | para evitar problemas de passagem de parametro
 			temp = $i("Eexpressao").value;
