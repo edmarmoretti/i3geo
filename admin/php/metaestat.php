@@ -519,7 +519,7 @@ switch (strtoupper($funcao))
 			$m->excluirRegistro("i3geoestat_classes","id_classificacao",$id_classificacao);
 			for ($i=0; $i < $numintervalos; ++$i){
 				if ($i == $numintervalos - 1){
-					$expressao = "(([".$colunavalor."]>=".$intervalos[$i].")";
+					$expressao = "(([".$colunavalor."]>=".$intervalos[$i]."))";
 					$titulo = ">= ".$intervalos[$i];
 				}
 				else{
