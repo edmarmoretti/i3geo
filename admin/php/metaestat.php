@@ -499,11 +499,12 @@ switch (strtoupper($funcao))
 			$cores = explode(";",$cores);
 		}
 		if(empty($limite)){
-			$limite = 10000;
+			$limite = "";
 		}
+
 		if($tipo == "quebrasnaturais"){
 			$m = new Metaestat();
-			$dados = $m->dadosMedidaVariavel($id_medida_variavel,"",0,"",$limite);
+			$dados = $m->dadosMedidaVariavel($id_medida_variavel,"",0,"",$limite,true);
 			$metaVariavel = $m->listaMedidaVariavel("",$id_medida_variavel);
 			$colunavalor = $metaVariavel["colunavalor"];
 			$valores = array();
@@ -539,7 +540,7 @@ switch (strtoupper($funcao))
 		}
 		if($tipo == "quartil"){
 			$m = new Metaestat();
-			$dados = $m->sumarioMedidaVariavel($id_medida_variavel,"","",$limite);
+			$dados = $m->sumarioMedidaVariavel($id_medida_variavel,"","",$limite,true);
 			if($dados == false){
 				retornaJSON("erro");
 				exit;
@@ -568,7 +569,7 @@ switch (strtoupper($funcao))
 		}
 		if($tipo == "intiguais5" || $tipo == "intiguais"){
 			$m = new Metaestat();
-			$dados = $m->sumarioMedidaVariavel($id_medida_variavel,"","",$limite);
+			$dados = $m->sumarioMedidaVariavel($id_medida_variavel,"","",$limite,true);
 			if($dados == false){
 				retornaJSON("erro");
 				exit;

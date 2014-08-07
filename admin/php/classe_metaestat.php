@@ -292,9 +292,10 @@ class Metaestat{
 	 * @param coluna que sera usada para agrupar os dados
 	 * @param tipo de layer. Usado para escolher qual coluna com as geometrias sera incluida no sql
 	 * @param codigo do tipo de regiao. Se nao for definido, utiliza-se o default da variavel
+	 * @param le os dados diretamente da tabela sem nenhum tipo de agrupamento, seja por data ou outro parametro
 	 * @return array("sqlagrupamento"=>,"sql"=>,"sqlmapserver"=>,"filtro"=>,"colunas"=>,"alias"=>,"colunavalor"=>,"titulo"=>,"nomeregiao"=>)
 	 */
-	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = "",$suportaWMST = false,$filtro = ""){
+	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = "",$suportaWMST = false,$filtro = "",$direto=false){
 		/* Modelo de SQL
 			SELECT regiao.*,sum(j.valorcalculado) OVER (PARTITION BY regiao.co_municipio) AS valorcalculado
 			FROM i3geo_metaestat.municipios AS regiao
@@ -406,13 +407,13 @@ class Metaestat{
 		}
 		//verifica o tipo de calculo para agragacao de valores
 		$tipoconta = "";
-		if($dados["permitesoma"] == 1){
+		if($dados["permitesoma"] == 1 && $direto == false){
 			$tipoconta = "sum";
 			if($agregaregiao == true){
 				$titulo .= " - soma";
 			}
 		}
-		elseif($dados["permitemedia"] == 1){
+		elseif($dados["permitemedia"] == 1 && $direto == false){
 			$tipoconta = "avg";
 			if($agregaregiao == true){
 				$titulo .= " - media";
@@ -421,21 +422,21 @@ class Metaestat{
 
 		//obtem o SQL que faz o acesso aos dados da media da variavel
 		$sqlDadosMedidaVariavel = "SELECT ".$dados["colunaidgeo"]." AS cod_regiao,$tipoconta(".$dados["colunavalor"].") AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
-		if($suportaWMST == true){
+		if($suportaWMST == true && $direto == false){
 			$sqlDadosMedidaVariavel = "SELECT $sqlWMST as dimtempo,".$dados["colunaidgeo"]." AS cod_regiao,".$dados["colunavalor"]." AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
 		}
-		if(!empty ($filtro)){
+		if(!empty ($filtro) && $direto == false){
 			$sqlDadosMedidaVariavel .=	" WHERE ".$filtro . "AND ".$dados["colunavalor"]." IS NOT NULL ";
 		}
 		else{
 			$sqlDadosMedidaVariavel .=	" WHERE ".$dados["colunavalor"]." IS NOT NULL ";
 		}
-		if($suportaWMST != true){
+		if($suportaWMST != true && $direto == false){
 			$sqlDadosMedidaVariavel .= " /*FA*//*FA*/ /*FAT*//*FAT*/ GROUP BY cod_regiao ";
 		}
 		$sqlagrupamento = "";
 		//sql que retorna a lista de ocorrencias agrupados de uma coluna especifica
-		if(!empty($agruparpor)){
+		if(!empty($agruparpor) && $direto == false){
 			$sqlagrupamento = " SELECT $agruparpor FROM ".$dados["esquemadb"].".".$dados["tabela"];
 			if(!empty ($filtro)){
 				$sqlagrupamento .= " WHERE ".$filtro;
@@ -449,7 +450,7 @@ class Metaestat{
 		" INNER JOIN ( __SQLDADOS__ ) ".
 		" AS j ON j.cod_regiao::text = regiao.".$dadosgeo["identificador"]."::text";
 		//inclui os sqls de regioes de niveis inferiores
-		if($agregaregiao == true){
+		if($agregaregiao == true && $direto == false){
 			$hierarquia = $this->regiaoFilhaAoPai($dados["codigo_tipo_regiao"],$codigo_tipo_regiao);
 			$caminho = $hierarquia["caminho"];
 			$dadosColunas = $hierarquia["colunas"];
@@ -484,7 +485,7 @@ class Metaestat{
 
 		//o SQL com os dados contem um filtro ou nao?
 		$contemfiltro = false;
-		if(!empty($filtro)){
+		if(!empty($filtro) && $direto == false){
 			$contemfiltro = true;
 			$titulo .= " ".$filtro;
 		}
@@ -992,11 +993,12 @@ class Metaestat{
 	 * @param 0|1 mostra ou nao todas as colunas da tabela com os dados
 	 * @param coluna de agrupamento
 	 * @param limite do numero de registros
+	 * @param le os dados diretamente da tabela sem nenhum tipo de agrupamento, seja por data ou outro parametro
 	 * @return execSQL
 	 */
-	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = "",$limite=""){
+	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = "",$limite="",$direto=false){
 		set_time_limit(0);
-		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,"polygon","",false,$filtro);
+		$sql = $this->sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor,"polygon","",false,$filtro,$direto);
 		$sqlf = $sql["sqlmapserver"];
 		//remove marcadores geo
 		$sqlf = explode("/*SE*/",$sqlf);
@@ -1007,6 +1009,7 @@ class Metaestat{
 		}
 		$sqlf = str_replace(",  FROM"," FROM",$sqlf);
 		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
+		//echo $sqlf;exit;
 		if(!empty($metaVariavel["codigo_estat_conexao"])){
 			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
 			$dbhold = $this->dbh;
@@ -1044,14 +1047,16 @@ class Metaestat{
 	 * @param id da medida
 	 * @param filtro a ser concatenado ao sql
 	 * @param coluna de agrupamento
+	 * @param limite numero maximo de registros que serao lidos do banco
+	 * @param le os dados diretamente da tabela sem nenhum tipo de agrupamento, seja por data ou outro parametro
 	 * @return array("colunavalor"=>,"soma"=>,"media"=>,"menor"=>,"maior"=>,"quantidade"=>,"histograma"=>,"grupos"=>,"unidademedida"=>,"quartis"=>)
 	 */
-	function sumarioMedidaVariavel($id_medida_variavel,$filtro="",$agruparpor="",$limite=""){
+	function sumarioMedidaVariavel($id_medida_variavel,$filtro="",$agruparpor="",$limite="",$direto=false){
 		if(!empty($agruparpor)){
-			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,1,"",$limite);
+			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,1,"",$limite,$direto);
 		}
 		else{
-			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,0,"",$limite);
+			$dados = $this->dadosMedidaVariavel($id_medida_variavel,$filtro,0,"",$limite,$direto);
 		}
 		if($dados){
 			$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
