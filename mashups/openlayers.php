@@ -283,6 +283,14 @@ if($temas != ""){
 							if($layern->type != 2 && $layern->type != 3){
 								$opacidade = 1;
 							}
+							//
+							//verifica se deve aplicar filtro
+							//
+							$filtro = $_GET["map_layer_".$layern->name."_filter"];
+							if(!empty($filtro)){
+								$DESLIGACACHE = "sim";
+								$nocache = "map_layer_".$layern->name."_filter=".$filtro."&".$nocache;
+							}
 							// nesse caso o layer e adicionado como TMS
 							// tms leva os parametros do TMS
 							$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'",{tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png"})';
@@ -299,6 +307,14 @@ if($temas != ""){
 								}
 								if($l->type != 2 && $l->type != 3){
 									$opacidade = 1;
+								}
+								//
+								//verifica se deve aplicar filtro
+								//
+								$filtro = $_GET["map_layer_".$l->name."_filter"];
+								if(!empty($filtro)){
+									$DESLIGACACHE = "sim";
+									$nocache = "map_layer_".$l->name."_filter=".$filtro."&".$nocache;
 								}
 								if($tituloLayer != ""){
 									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
@@ -354,6 +370,16 @@ function ajuda(){
 	desligacache (sim|nao) - desativa o uso do cache de imagens em disco do lado do servidor, for&ccedil;ando a renderiza&ccedil;&atilde;o dos tiles de cada camada em cada requisi&ccedil;&atilde;o
 	nocache (sim) - evita o uso de imagens em cache existentes no navegador do usu&aacute;rio
 
+	Filtros
+	
+	filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
+
+	Exemplo de filtro
+
+	?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))
+
+	no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
+	
 	fundo - lista com os nomes, separados por ',' dos layers que ser&atilde;o usados como fundo para o mapa. Se n&atilde;o for definido,
 	ser&aacute; usado o default. O primeiro da lista ser&aacute; o fundo ativo. Se na lista de temas de fundo estiver algum
 	tema incluido com o parametro 'temas', esses ser&atilde;o inclu&iacute;dos como temas de fundo.

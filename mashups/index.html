@@ -60,6 +60,18 @@ body,td {
 				</p>
 			</fieldset>
 			<fieldset>
+				<p>Filtro - cada tema pode receber filtros seguindo-se a sintaxe &amp;map_layer_{codigo do tema}_filter=<br>
+				Em camadas com origem em arquivos shapefile o valor do filtro segue o padr&atilde;o (('[nome_da_coluna]'='valor_do_registro'))<br>
+				Camadas baseadas em Postgis seguem o padr&atilde;o nome_da_coluna=valor_do_registro.
+				</p>
+				<p class="m">
+					Windows: <a target=_blank href="http://localhost/i3geo/mashups/openlayers.php?map_layer__wbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&amp;temas=_wbiomashp&amp;layers=_wbiomashp">openlayers.php?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&amp;temas=_wbiomashp&amp;layers=_wbiomashp</a>
+				</p>
+				<p class="m">
+					Linux: <a target=_blank href="http://localhost/i3geo/mashups/openlayers.php?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&amp;temas=_lbiomashp&amp;layers=_lbiomashp">openlayers.php?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&amp;temas=_lbiomashp&amp;layers=_lbiomashp</a>
+				</p>
+			</fieldset>
+			<fieldset>
 				<p>Todas as op&ccedil;&otilde;es e um tema adicionado</p>
 				<p class="m">
 					Windows: <a target=_blank href="openlayers.php?temas=_wbiomashp&largura=800&altura=500">openlayers.php?temas=_wbiomashp&amp;largura=800&amp;altura=500</a>

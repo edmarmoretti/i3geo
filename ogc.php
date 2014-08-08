@@ -57,6 +57,14 @@ restauramapa - ID de um mapa salvo no sistema de administracao. O mapa e restaur
 
 DESLIGACACHE (opcional) {sim|nao} - forca a nao usar o cache de imagens qd definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
 
+filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
+
+  Exemplo de filtro
+
+  http://localhost/i3geo/ogc.php?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&tema=_lbiomashp&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=_lbiomashp
+
+  no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
+
 Exemplos:
 
 ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
@@ -230,8 +238,9 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 }
 //
 //se o outputformat for definido, evita o cahce de arquivo
+//o mesmo se existir filtro para o layer
 //
-if(isset($_GET["OUTPUTFORMAT"])){
+if(isset($_GET["OUTPUTFORMAT"]) || !empty($_GET["map_layer_".$tema."_filter"])){
 	$_GET["DESLIGACACHE"] = "sim";
 }
 if(isset($_GET["DESLIGACACHE"]) && $_GET["DESLIGACACHE"] == "sim"){
@@ -275,7 +284,6 @@ else{
 	$oMap->setmetadata("ows_enable_request","*");
 	$e = $oMap->extent;
 	$extensaoMap = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
-
 	//gera o mapa
 	if ($tipo == "" || $tipo == "metadados"){
 		$tema = explode(" ",$tema);
@@ -396,6 +404,16 @@ else{
 							$l->setprocessing("LABEL_NO_CLIP=True");
 							$l->setprocessing("POLYLINE_NO_CLIP=True");
 						}
+						//
+						//verifica se existem parametros de substituicao passados via url
+						//
+						$parametro = $_GET["map_layer_".$l->name."_filter"];
+						//echo $parametro;exit;
+						if(!empty($parametro)){
+							$l->setfilter($parametro);
+							$cache = false;
+						}
+
 						ms_newLayerObj($oMap, $l);
 						//$req->setParameter("LAYERS", "mundo");
 					}
@@ -488,6 +506,7 @@ else{
 		//echo "<pre>";
 		//var_dump($codigosTema);
 		//exit;
+
 		foreach($codigosTema as $c){
 			$codigoTema = $c["tema"];
 			if(file_exists($locaplic."/temas/".$codigoTema.".map")){

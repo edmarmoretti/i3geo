@@ -283,6 +283,14 @@ if($temas != ""){
 							if($layern->type != 2 && $layern->type != 3){
 								$opacidade = 1;
 							}
+							//
+							//verifica se deve aplicar filtro
+							//
+							$filtro = $_GET["map_layer_".$layern->name."_filter"];
+							if(!empty($filtro)){
+								$DESLIGACACHE = "sim";
+								$nocache = "map_layer_".$layern->name."_filter=".$filtro."&".$nocache;
+							}
 							// nesse caso o layer e adicionado como TMS
 							// tms leva os parametros do TMS
 							$objOpenLayers[] = 'new OpenLayers.Layer.XYZ("'.$tituloLayer.'", "../ogc.php?Z=${z}&X=${x}&Y=${y}&'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&SRS=EPSG:3857",
@@ -300,6 +308,14 @@ if($temas != ""){
 								}
 								if($l->type != 2 && $l->type != 3){
 									$opacidade = 1;
+								}
+								//
+								//verifica se deve aplicar filtro
+								//
+								$filtro = $_GET["map_layer_".$l->name."_filter"];
+								if(!empty($filtro)){
+									$DESLIGACACHE = "sim";
+									$nocache = "map_layer_".$l->name."_filter=".$filtro."&".$nocache;
 								}
 								if($tituloLayer != ""){
 									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
