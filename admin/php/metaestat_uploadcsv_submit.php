@@ -65,6 +65,8 @@ if (ob_get_level() == 0) ob_start();
 				$colunas = explode(",",$buffer);
 				$separador = ",";
 			}
+			echo "<p class='paragrafo' >Separador de colunas identificado: <b>".$separador."</b></p>";
+			echo "<p class='paragrafo' >Total de colunas: <b>".count($colunas)."</b></p>";
 			//var_dump($colunas);
 			fclose ($handle);
 			//le o csv em um array
@@ -79,14 +81,22 @@ if (ob_get_level() == 0) ob_start();
 					$buffer = str_replace("'",'',$buffer);
 					$buffer = str_replace("\n",'',$buffer);
 					$buffer = str_replace("\r",'',$buffer);
-					$temp = explode($separador,$buffer);
-					if(count($temp) == $ncolunas)
-						$linhas[] = $temp;
+					if($buffer != ""){
+						$temp = explode($separador,$buffer);
+						if(count($temp) == $ncolunas){
+							$linhas[] = $temp;
+						}
+						else{
+							echo "<p class='paragrafo' >A linha abaixo apresentou um erro - n&uacute;mero de colunas n&atilde;o bate com o cabe&ccedil;alho</p>";
+							var_dump($temp);
+							exit;
+						}
+					}
 				}
 			}
 			fclose ($handle);
 			//decobre o tipo de coluna
-			$testar = 10;
+			$testar = 500;
 			if(count($linhas) < $testar){
 				$testar = count($linhas);
 			}
@@ -126,6 +136,8 @@ if (ob_get_level() == 0) ob_start();
 			if($encodingdb == "LATIN1"){
 				$encodingdb = "ISO-8859-1";
 			}
+			echo "<p class='paragrafo' >Codifica&ccedil;&atilde;o do banco: <b>".$encodingdb."</b></p>";
+
 			//gera o script para criar a tabela e verifica se ja existe
 			$sql = "SELECT table_name FROM information_schema.tables where table_schema = '".$_POST["i3GEOuploadcsvesquema"]."' AND table_name = '".$_POST["tabelaDestinocsv"]."'";
 			$res = $dbh->query($sql,PDO::FETCH_ASSOC);
@@ -152,7 +164,7 @@ if (ob_get_level() == 0) ob_start();
 				if(!empty($_POST["comentarioCsv"])){
 					$enc = mb_detect_encoding($texto);
 					$_POST["comentarioCsv"] = mb_convert_encoding($_POST["comentarioCsv"],$encodingdb,$enc);
-					$sqltabela[] = "COMMENT ON TABLE ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." IS '".$_POST["comentarioCsv"]."'";
+					$sqltabela[] = "COMMENT ON TABLE ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"]." IS '".addcslashes($_POST["comentarioCsv"])."'";
 				}
 				echo "<br>Sql tabela: <pre>";
 				var_dump($sqltabela);
@@ -183,20 +195,19 @@ if (ob_get_level() == 0) ob_start();
 			$nlinhas = count($linhas);
 			$valorX = 0;
 			$valorY = 0;
+			$escapar = "',<,>,%,#,@,(,)";
 			for ($i=0; $i<$nlinhas;$i++){
 				$s = $linhas[$i];
+				$enc = mb_detect_encoding($s);
+				if($enc != ""){
+					$s = mb_convert_encoding($s,$encodingdb,$enc);
+				}
 				$vs = array();
 				for ($j=0; $j<$ncolunas;$j++){
 					if($tipoColuna[$colunas[$j]] == "varchar"){
 						$texto = $s[$j];
 						$texto = str_replace("'","",$texto);
-						$enc = mb_detect_encoding($texto);
-						if(enc != ""){
-							$texto = "'".mb_convert_encoding($texto,$encodingdb,$enc)."'";
-						}
-						else{
-							$texto = "'".$texto."'";
-						}
+						$texto = "'".addcslashes($texto,$escapar)."'";
 						if($texto == "''"){
 							$texto = 'null';
 						}

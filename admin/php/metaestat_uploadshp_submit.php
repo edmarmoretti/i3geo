@@ -92,11 +92,9 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	$sqinsert = array();
 	//verifica o tipo de coluna
 	$tipoColuna = array();
-	if($numshapes < 10){
-		$testar = $numshapes;
-	}
-	else{
-		$testar = 10;
+	$testar = $numshapes;
+	if($numshapes > 500){
+		$testar = 500;
 	}
 	foreach($colunas as $coluna){
 		$tipo = "numeric";
@@ -188,6 +186,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	flush();
 	sleep(1);
 	$srid = 4326;
+	$escapar = "'";
 	for ($i=0; $i<$numshapes;$i++){
 		$s = $layer->getShape(new resultObj($i));
 		$vs = array();
@@ -195,9 +194,10 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 			if($tipoColuna[$coluna] == "varchar"){
 				$texto = $s->getValue($layer,$coluna);
 				//echo $i." - ".mb_detect_encoding($texto)."<br>";
-				$texto = str_replace("'","",$texto);
+				//$texto = str_replace("'","",$texto);
 				$enc = mb_detect_encoding($texto);
-				if(enc != ""){
+				$texto = addcslashes($texto,$escapar);
+				if($enc != ""){
 					$texto = "'".mb_convert_encoding($texto,$encodingdb,$enc)."'";
 				}
 				else{
