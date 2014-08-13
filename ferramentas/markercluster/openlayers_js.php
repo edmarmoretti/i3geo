@@ -1,6 +1,6 @@
 <?php
 /**
-Obtem os dados para geracao de mapa de calor. Envia o codigo javascript necessario se for solicitado.
+Obtem os dados para geracao de mapa de markercluster. Envia o codigo javascript necessario se for solicitado.
 
 Parametros:
 
@@ -18,8 +18,12 @@ nomevariavel nome da variavel javascript que sera retornada com os valores
 $dir = dirname(__FILE__);
 //inicializa o programa verificando seguranca e pegando os parametros enviados pela URL e pela secao
 include_once($dir."/../inicia.php");
-include_once($dir."/funcoes.php");
 
+//pega os dados e formata como uma string no formato
+// [{"lat":"-21.7079984","lng":"-47.4913629","count":"1"}]
+//os dados sao devolvidos como uma variavel javascript
+//obtem os registros
+include_once($dir."/../../classesphp/classe_atributos.php");
 //o plugin pode ser chamado sem um mapfile criado
 //usando apenas o mapfile existente em i3geo/temas
 //nesse caso e necessario cirar um mapfile temporario
@@ -39,9 +43,6 @@ $resultado = heatmapDados($map_file);
 
 echo $nomevariavel.' = ['.implode(",",$resultado).'];';
 if($carregajs === "sim"){
-	include_once($dir."/../../pacotes/heatmap/src/heatmap.js");
-	//include_once($dir."/../../pacotes/heatmap/src/heatmap-openlayers-renderer.js");
-	include_once($dir."/../../pacotes/heatmap/src/heatmap-openlayers.js");
+	include_once($dir."/../../pacotes/markercluster/openlayers/AnimatedCluster.js");
 }
-
 ?>

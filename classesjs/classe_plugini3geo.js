@@ -43,7 +43,15 @@ i3GEO.pluginI3geo = {
 	 * Utilizado no editor de mapfiles do sistema de administracao
 	 */
 	PLUGINS : [
-		{"classe": "heatmap","nome": "Mapa de calor","editor":true}
+			{
+				"classe" : "heatmap",
+				"nome" : "Mapa de calor",
+				"editor" : true
+			}, {
+				"classe" : "markercluster",
+				"nome" : "Agrupamento de pontos (cluster)",
+				"editor" : true
+			}
 	],
 	/**
 	 * Inicia a execucao de um plugin
@@ -57,12 +65,11 @@ i3GEO.pluginI3geo = {
 	 * Veja em i3geo/classesphp/classe_mapa.php funcao parametrostemas
 	 */
 	inicia : function(camada) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.pluginI3geo.inicia()");
-
-		if(i3GEO.janela){
+		if (i3GEO.janela) {
 			i3GEO.janela.AGUARDEMODAL = true;
-			i3GEO.janela.abreAguarde("aguardePlugin", "Calculando...");
+			i3GEO.janela.abreAguarde(
+					"aguardePlugin",
+					"Calculando...");
 			i3GEO.janela.AGUARDEMODAL = false;
 		}
 		// chama a funcao conforme o tipo de plugin e a interface atual
@@ -74,37 +81,31 @@ i3GEO.pluginI3geo = {
 	/**
 	 * Retorna o HTML com o formulario para editar os parametros do plugin
 	 */
-	formAdmin : function (plugin,configString){
+	formAdmin : function(plugin, configString) {
 		return i3GEO.pluginI3geo[plugin].formAdmin(configString);
 	},
-	linkAjuda : function (plugin){
+	linkAjuda : function(plugin) {
 		return i3GEO.pluginI3geo[plugin].linkAjuda();
 	},
 	ligaCamada : function(nomecamada) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.pluginI3geo.ligaCamada('" + nomecamada + "')");
-
-		if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].ligaCamada) {
+		if (i3GEO.pluginI3geo.OBJETOS[nomecamada]
+				&& i3GEO.pluginI3geo.OBJETOS[nomecamada].ligaCamada) {
 			i3GEO.pluginI3geo.OBJETOS[nomecamada].ligaCamada();
 			return true;
 		}
 		return false;
 	},
 	desligaCamada : function(nomecamada) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.pluginI3geo.desligaCamada('" + nomecamada + "')");
-
-		if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].desLigaCamada) {
+		if (i3GEO.pluginI3geo.OBJETOS[nomecamada]
+				&& i3GEO.pluginI3geo.OBJETOS[nomecamada].desLigaCamada) {
 			i3GEO.pluginI3geo.OBJETOS[nomecamada].desLigaCamada();
 			return true;
 		}
 		return false;
 	},
 	removeCamada : function(nomecamada) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.pluginI3geo.removeCamada('" + nomecamada + "')");
-
-		if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada) {
+		if (i3GEO.pluginI3geo.OBJETOS[nomecamada]
+				&& i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada) {
 			i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada();
 			delete (i3GEO.pluginI3geo.OBJETOS[nomecamada]);
 			return true;
@@ -112,17 +113,16 @@ i3GEO.pluginI3geo = {
 		return false;
 	},
 	atualizaCamada : function(nomecamada) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.pluginI3geo.atualizaCamada('" + nomecamada + "')");
-
-		if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada) {
+		if (i3GEO.pluginI3geo.OBJETOS[nomecamada]
+				&& i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada) {
 			i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada();
 			return true;
 		}
 		return false;
 	},
 	existeObjeto : function(nomecamada) {
-		if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada) {
+		if (i3GEO.pluginI3geo.OBJETOS[nomecamada]
+				&& i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada) {
 			return true;
 		}
 		return false;
@@ -135,7 +135,8 @@ i3GEO.pluginI3geo = {
 	 * de camadas
 	 */
 	aplicaPropriedades : function(camada) {
-		if (camada.plugini3geo && camada.plugini3geo != "") {
+		if (camada.plugini3geo
+				&& camada.plugini3geo != "") {
 			camada = i3GEO.pluginI3geo[camada.plugini3geo.plugin][i3GEO.Interface.ATUAL].aplicaPropriedades(camada);
 		}
 		return camada;
@@ -148,7 +149,7 @@ i3GEO.pluginI3geo = {
 	 * Gera um layer do tipo mapa de calor e adiciona ao mapa
 	 *
 	 * As depend&ecirc;ncias em javascript sao carregadas via script tag por
-	 * meio de ferramentas/heatmap/openlayers_js.php
+	 * meio de ferramentas/heatmap
 	 *
 	 * Esse programa tamb&eacute;m obt&eacute;m os dados necess&aacute;rios ao
 	 * plugin
@@ -160,7 +161,8 @@ i3GEO.pluginI3geo = {
 	 *
 	 * Exemplo:
 	 *
-	 * "PLUGINI3GEO" '{"plugin":"heatmap","parametros":{"coluna":"teste","max":"10","radius":"15"}}'
+	 * "PLUGINI3GEO"
+	 * '{"plugin":"heatmap","parametros":{"coluna":"teste","max":"10","radius":"15"}}'
 	 *
 	 * Coluna &eacute; a que cont&eacute;m os dados num&eacute;ricos que definem
 	 * a quantidade de uma medida em cada ponto e &eacute; usada para gerar a
@@ -172,29 +174,34 @@ i3GEO.pluginI3geo = {
 	 *
 	 */
 	heatmap : {
-		linkAjuda: function(){
-			return i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=121";
+		linkAjuda : function() {
+			return i3GEO.configura.locaplic
+					+ "/ajuda_usuario.php?idcategoria=3&idajuda=121";
 		},
-		formAdmin: function(config){
-			//{"plugin":"heatmap","parametros":{"coluna":"","radius":15,"max":10}}
-			var parametros,
-			ins = "",
-			configDefault = '{"plugin":"heatmap","parametros":{"coluna":"1","radius":15,"max":10}}';
-			if(config === ""){
+		formAdmin : function(config) {
+			// {"plugin":"heatmap","parametros":{"coluna":"","radius":15,"max":10}}
+			var parametros, ins = "", configDefault = '{"plugin":"heatmap","parametros":{"coluna":"1","radius":15,"max":10}}';
+			if (config === "") {
 				config = configDefault;
 			}
 			config = YAHOO.lang.JSON.parse(config);
-			if(config.plugin != "heatmap"){
+			if (config.plugin != "heatmap") {
 				config = YAHOO.lang.JSON.parse(configDefault);
 			}
 			parametros = config.parametros;
 			ins += ""
-				+ "<p>Coluna que cont&eacute;m os dados ou valor num&eacute;rico para cada ponto:"
-				+ "<br><input name='coluna' type='text' value='" + parametros.coluna + "' size='30'></p>"
-				+ "<p>Raio de cada ponto em pixels:"
-				+ "<br><input name='radius' type='text' value='" + parametros.radius + "' size='30'></p>"
-				+ "<p>Valor m&aacute;ximo em cada ponto:"
-				+ "<br><input name='max' type='text' value='" + parametros.max + "' size='30'></p>";
+					+ "<p>Coluna que cont&eacute;m os dados ou valor num&eacute;rico para cada ponto:"
+					+ "<br><input name='coluna' type='text' value='"
+					+ parametros.coluna
+					+ "' size='30'></p>"
+					+ "<p>Raio de cada ponto em pixels:"
+					+ "<br><input name='radius' type='text' value='"
+					+ parametros.radius
+					+ "' size='30'></p>"
+					+ "<p>Valor m&aacute;ximo em cada ponto:"
+					+ "<br><input name='max' type='text' value='"
+					+ parametros.max
+					+ "' size='30'></p>";
 			return ins;
 		},
 		googlemaps : {
@@ -215,14 +222,15 @@ i3GEO.pluginI3geo = {
 				return camada;
 			},
 			inicia : function(camada) {
-				var p = i3GEO.configura.locaplic + "/ferramentas/heatmap/googlemaps_js.php", carregaJs = "nao", criaLayer;
+				var p = i3GEO.configura.locaplic
+						+ "/ferramentas/heatmap/googlemaps_js.php", carregaJs = "nao", criaLayer;
 				criaLayer = function() {
 					var heatmap, pontos;
 
 					heatmap = new HeatmapOverlay(i3GeoMap, camada.name, {
 						"radius" : camada.plugini3geo.parametros.radius,
 						"visible" : true,
-						"opacity": camada.transparency,
+						"opacity" : camada.transparency,
 						"gradient" : {
 							"0.45" : "rgb(0,0,255)",
 							"0.55" : "rgb(0,255,255)",
@@ -233,7 +241,9 @@ i3GEO.pluginI3geo = {
 						"legend" : {
 							"title" : camada.tema,
 							"position" : "bl",
-							"offset" : [ 5, 50 ]
+							"offset" : [
+									5, 50
+							]
 						}
 					});
 					// i3GeoMap.overlayMapTypes.insertAt(0, heatmap);
@@ -244,27 +254,15 @@ i3GEO.pluginI3geo = {
 					i3GEO.janela.fechaAguarde("aguardePlugin");
 					heatmap.setDataSet(pontos);
 					heatmap.ligaCamada = function() {
-						if (typeof (console) !== 'undefined')
-							console.info("i3GEO.pluginI3geo liga googlemaps");
-
 						this.liga();
 					};
 					heatmap.desLigaCamada = function() {
-						if (typeof (console) !== 'undefined')
-							console.info("i3GEO.pluginI3geo desliga googlemaps");
-
 						this.desliga();
 					};
 					heatmap.removeCamada = function() {
-						if (typeof (console) !== 'undefined')
-							console.info("i3GEO.pluginI3geo remove googlemaps");
-
 						this.destroy();
 					};
 					heatmap.atualizaCamada = function() {
-						if (typeof (console) !== 'undefined')
-							console.info("i3GEO.pluginI3geo atualiza googlemaps");
-
 						this.draw();
 					};
 					i3GEO.pluginI3geo.OBJETOS[camada.name] = heatmap;
@@ -273,8 +271,19 @@ i3GEO.pluginI3geo = {
 				if (typeof (HeatmapOverlay) === 'undefined') {
 					carregaJs = "sim";
 				}
-				p += "?carregajs=" + carregaJs + "&layer=" + camada.name + "&coluna=" + camada.plugini3geo.parametros.coluna + "&g_sid=" + i3GEO.configura.sid + "&nomevariavel=heatmap_dados";
-				i3GEO.util.scriptTag(p, criaLayer, "i3GEO.pluginI3geo.heatmap_script");
+				p += "?carregajs="
+						+ carregaJs
+						+ "&layer="
+						+ camada.name
+						+ "&coluna="
+						+ camada.plugini3geo.parametros.coluna
+						+ "&g_sid="
+						+ i3GEO.configura.sid
+						+ "&nomevariavel=heatmap_dados";
+				i3GEO.util.scriptTag(
+						p,
+						criaLayer,
+						"i3GEO.pluginI3geo.heatmap_script");
 			}
 		},
 		//
@@ -300,16 +309,17 @@ i3GEO.pluginI3geo = {
 				camada.classe = "NAO";
 				return camada;
 			},
-			inicia : function(camada,objMapa) {
-				var p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php", carregaJs = "nao", criaLayer;
+			inicia : function(camada, objMapa) {
+				var p = i3GEO.configura.locaplic
+						+ "/ferramentas/heatmap/openlayers_js.php", carregaJs = "nao", criaLayer;
 				criaLayer = function() {
 					var heatmap, transformedTestData = {
 						max : camada.plugini3geo.parametros.max,
 						data : []
 					}, data = heatmap_dados, datalen = heatmap_dados.length, nudata = [];
 
-					//para uso com o mashup
-					if(!objMapa){
+					// para uso com o mashup
+					if (!objMapa) {
 						objMapa = i3geoOL;
 					}
 					// in order to use the OpenLayers Heatmap Layer we have
@@ -328,7 +338,7 @@ i3GEO.pluginI3geo = {
 					// create our heatmap layer
 					heatmap = new OpenLayers.Layer.Heatmap(camada.name, objMapa, objMapa.baseLayer, {
 						"visible" : true,
-						"opacity": camada.transparency,
+						"opacity" : camada.transparency,
 						"radius" : camada.plugini3geo.parametros.radius,
 						"gradient" : {
 							"0.45" : "rgb(0,0,255)",
@@ -340,7 +350,9 @@ i3GEO.pluginI3geo = {
 						"legend" : {
 							"title" : camada.tema,
 							"position" : "bl",
-							"offset" : [ 5, 50 ]
+							"offset" : [
+									5, 50
+							]
 						}
 					}, {
 						isBaseLayer : false,
@@ -366,23 +378,157 @@ i3GEO.pluginI3geo = {
 					objMapa.addLayer(heatmap);
 					heatmap.setDataSet(transformedTestData);
 					heatmap_dados = null;
-					if(i3GEO.janela){
+					if (i3GEO.janela) {
 						i3GEO.janela.fechaAguarde("aguardePlugin");
 					}
 				};
 				if (typeof (HeatmapOverlay) === 'undefined') {
 					carregaJs = "sim";
 				}
-				if(!i3GEO.configura || !i3GEO.configura.sid){
+				if (!i3GEO.configura
+						|| !i3GEO.configura.sid) {
 					i3GEO.configura.sid = "";
 				}
-				p += "?carregajs=" + carregaJs + "&layer=" + camada.name + "&coluna=" + camada.plugini3geo.parametros.coluna + "&g_sid=" + i3GEO.configura.sid + "&nomevariavel=heatmap_dados";
-				i3GEO.util.scriptTag(p, criaLayer, "i3GEO.pluginI3geo.heatmap_script");
+				p += "?carregajs="
+						+ carregaJs
+						+ "&layer="
+						+ camada.name
+						+ "&coluna="
+						+ camada.plugini3geo.parametros.coluna
+						+ "&g_sid="
+						+ i3GEO.configura.sid
+						+ "&nomevariavel=heatmap_dados";
+				i3GEO.util.scriptTag(
+						p,
+						criaLayer,
+						"i3GEO.pluginI3geo.heatmap_script");
 			}
 		},
 		googleearth : {
 			inicia : function() {
 				alert("Plugin nao disponivel");
+			}
+		}
+	},
+	/**
+	 * Function: markercluster
+	 *
+	 * Markercluster
+	 *
+	 * Gera um layer que agrupa pontos conforme a dist&acirc;ncia entre eles e
+	 * insere um contador adiciona ao mapa
+	 *
+	 * As depend&ecirc;ncias em javascript sao carregadas via script tag por
+	 * meio de ferramentas/markercluster
+	 *
+	 * Esse programa tamb&eacute;m obt&eacute;m os dados necess&aacute;rios ao
+	 * plugin
+	 *
+	 * O layer existente no mapfile deve conter um metadata chamado PLUGINI3GEO
+	 *
+	 * Esse matadado deve conter uma string que ser&aacute; transformada em um
+	 * objeto javascript para uso no plugin
+	 *
+	 * Exemplo:
+	 *
+	 * "PLUGINI3GEO"
+	 * '{"plugin":"markercluster","parametros":{"coluna":"teste","gridSize":"50"}}'
+	 *
+	 * Coluna &eacute; a que cont&eacute;m os dados num&eacute;ricos que definem
+	 * a quantidade de uma medida em cada ponto e &eacute; usada para gerar a
+	 * representa&ccedil;&atilde;o. Se for vazia, considera-se o valor como 1
+	 *
+	 */
+	markercluster : {
+		linkAjuda : function() {
+			return i3GEO.configura.locaplic
+					+ "/ajuda_usuario.php?idcategoria=3&idajuda=121";
+		},
+		formAdmin : function(config) {
+			var parametros, ins = "", configDefault = '{"plugin":"markercluster","parametros":{"gridSize":50}}';
+			if (config === "") {
+				config = configDefault;
+			}
+			config = YAHOO.lang.JSON.parse(config);
+			if (config.plugin != "markercluster") {
+				config = YAHOO.lang.JSON.parse(configDefault);
+			}
+			parametros = config.parametros;
+			ins += ""
+					+ "<p>Dist&acirc;ncia m&aacute;xima entre ponto em pixels:"
+					+ "<br><input name='gridSize' type='text' value='"
+					+ parametros.gridSize
+					+ "' size='30'></p>";
+			return ins;
+		},
+		googlemaps : {
+			aplicaPropriedades : function(camada) {
+				camada.sel = "nao";
+				camada.download = "nao";
+				camada.AGUARDALEGENDA = false;
+				camada.temporizador = "";
+				camada.copia = false;
+				camada.procurar = false;
+				camada.toponimia = false;
+				camada.etiquetas = false;
+				camada.tabela = false;
+				camada.grafico = false;
+				camada.destacar = false;
+				camada.wms = false;
+				camada.classe = "NAO";
+				return camada;
+			},
+			inicia : function(camada) {
+				var p = i3GEO.configura.locaplic
+						+ "/ferramentas/markercluster/googlemaps_js.php", carregaJs = "nao", criaLayer;
+				criaLayer = function() {
+					var markercluster, marcas, latLng, marker, n, i;
+					n = markercluster_dados.lenght();
+					marcas = [];
+					for (i = 0; i < n; i++) {
+						latLng = new google.maps.LatLng(markercluster_dados[i].lat, markercluster_dados[i].long);
+						marker = new google.maps.Marker({
+							'position' : latLng
+						});
+						marcas.push(marker);
+					}
+					markercluster = new MarkerClusterer(i3GeoMap, marcas, {
+						"gridSize" : camada.plugini3geo.parametros.gridSize,
+						"visible" : true,
+						"opacity" : camada.transparency
+					});
+					i3GEO.janela.fechaAguarde("aguardePlugin");
+					markercluster.ligaCamada = function() {
+						this.liga();
+					};
+					markercluster.desLigaCamada = function() {
+						this.desliga();
+					};
+					markercluster.removeCamada = function() {
+						this.destroy();
+					};
+					markercluster.atualizaCamada = function() {
+						this.draw();
+					};
+					i3GEO.pluginI3geo.OBJETOS[camada.name] = markercluster;
+					markercluster_dados = null;
+				};
+				if (typeof (MarkerClusterer) === 'undefined') {
+					carregaJs = "sim";
+				}
+				p += "?carregajs="
+						+ carregaJs
+						+ "&layer="
+						+ camada.name
+						+ "&coluna="
+						+ camada.plugini3geo.parametros.coluna
+						+ "&g_sid="
+						+ i3GEO.configura.sid
+						+ "&nomevariavel=markercluster_dados";
+				i3GEO.util.scriptTag(
+						p,
+						criaLayer,
+						"i3GEO.pluginI3geo.markercluster_script");
 			}
 		}
 	}

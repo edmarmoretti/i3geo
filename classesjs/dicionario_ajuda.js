@@ -1019,6 +1019,14 @@ g_traducao_ajuda = {
 			pt:"Obt&eacute;m os dados de um tema pontual, linear ou poligonal e calcula para toda a &aacute;rea vis&iacute;ve os prov&aacute;veis valores, o resultado &eacute; uma representa&ccedil;&atilde;o cont&iacute;nua dos valores em classes de cores. O c&aacute;lculo da camada &eacute; feita diretamente no navegador utilizando-se um programa em javascript.",
 			complemento:"",
 			apijs:"i3GEO.mapa.dialogo.heatmap()"
+		},
+		"122": {
+			titulo: "MarkerCluster",
+			diretorio:"i3geo/ferramentas/markercluster/index.js",
+			categoria:"3",
+			pt:"Cria uma camada vetorial com pontos que s&atilde;o agrupados conforme a proximidade. Os pontos agrupados s&atilde;o representados com um s&iacute;mbolo especial e &eacute; mostrado um texto indicando o total de pontos.",
+			complemento:"",
+			apijs:"i3GEO.mapa.dialogo.markercluster()"
 		}
 	}
 };

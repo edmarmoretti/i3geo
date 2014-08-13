@@ -568,7 +568,7 @@ i3GEOadmin.editor = {
 			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" ><input type=checkbox name=i3GEOuploadCriaMapfile id=i3GEOuploadCriaMapfile style="cursor:pointer;position:relative;top:2px;" />&nbsp;Marque para criar o arquivo de configura&ccedil;&atilde;o (mapfile) e visualizar os dados no mapa interativo (voc&ecirc; poder&aacute; editar esse arquivo posteriormente no editor de mapfiles)' +
 			'<p class="paragrafo" ><input type="checkbox" id="incluiserialshp" name="incluiserialshp" style="cursor:pointer;position:relative;top:2px;">&nbsp;Inclui uma coluna gid do tipo serial e chave prim&aacute;ria com c&oacute;digo &uacute;nico</p>' +
-			'<p class="paragrafo" ><input id=i3GEOuploadsubmit type="button" value="Enviar" size=12 />' +
+			'<p class="paragrafo" ><input id=i3GEOuploadsubmit type="button" value="Enviar shapefile" size=12 />' +
 			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
 			'<input type="hidden" id="i3GEOuploadcodigoconexao" name="i3GEOuploadcodigoconexao" value="">' +
 			'<input type="hidden" id="i3GEOuploadesquema" name="i3GEOuploadesquema" value="">' +
@@ -639,7 +639,7 @@ i3GEOadmin.editor = {
 			'<p class="paragrafo" >Opcional (utilize sempre coordenadas em d&eacute;cimos de grau no CSV): <br><br>coluna que cont&eacute;m as latitudes (Y) <input class=digitar type="text" size=8 id="colunaycsv" name="colunaycsv" style="top:0px;left:0px;cursor:pointer;"> coluna que cont&eacute;m as longitudes (X) <input class=digitar type="text" size=8 id="colunaxcsv" name="colunaxcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
-			'<p class="paragrafo" ><input id=i3GEOuploadcsvsubmit type="button" value="Enviar" size=12 />' +
+			'<p class="paragrafo" ><input id=i3GEOuploadcsvsubmit type="button" value="Enviar CSV" size=12 />' +
 			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />' +
 			'<input type="hidden" id="i3GEOuploadcsvcodigoconexao" name="i3GEOuploadcsvcodigoconexao" value="" />' +
 			'<input type="hidden" id="i3GEOuploadcsvesquema" name="i3GEOuploadcsvesquema" value="" />' +
