@@ -8,7 +8,7 @@ MAP
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "CLASSE"	"SIM"
       "TEMA"	"Localidades (usar com mapa de calor)"
-      "PLUGINI3GEO" '{"plugin":"heatmap","parametros":{"coluna":"","radius":15,"max":10}}' #se coluna for vazio, assume valor 1
+      "PLUGINI3GEO" '{"plugin":"heatmap","parametros":{"tipoGradiente":"","coluna":"","radius":15,"max":10}}' #se coluna for vazio, assume valor 1
     END # METADATA
     NAME "_lmapadecalor"
     STATUS OFF
@@ -18,31 +18,24 @@ MAP
     TYPE POINT
     UNITS METERS
     CLASS
-      NAME "Vila"
-      EXPRESSION ('[TIPO]'eq'Vila')
-      STYLE
-        COLOR 250 193 4
-        SIZE 20
-        SYMBOL "/var/www/i3geo/imagens/google/condominium.png"
-      END # STYLE
+      NAME "0.45"
+      COLOR 0 0 255
     END # CLASS
     CLASS
-      NAME "Cidade"
-      EXPRESSION ('[TIPO]'eq'Cidade')
-      STYLE
-        COLOR 62 9 41
-        SIZE 20
-        SYMBOL "/var/www/i3geo/imagens/google/condominium1.png"
-      END # STYLE
+      NAME "0.55"
+      COLOR 0 255 255
     END # CLASS
     CLASS
-      NAME "Capital"
-      EXPRESSION ('[TIPO]'eq'Capital')
-      STYLE
-        COLOR 112 203 244
-        SIZE 6
-        SYMBOL "vila"
-      END # STYLE
+      NAME "0.65"
+      COLOR 0 255 0
+    END # CLASS
+    CLASS
+      NAME "0.95"
+      COLOR 255 255 0
+    END # CLASS
+    CLASS
+      NAME "1"
+      COLOR 255 0 0
     END # CLASS
   END # LAYER
 

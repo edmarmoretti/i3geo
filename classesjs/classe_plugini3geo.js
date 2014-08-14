@@ -180,7 +180,7 @@ i3GEO.pluginI3geo = {
 		},
 		formAdmin : function(config) {
 			// {"plugin":"heatmap","parametros":{"coluna":"","radius":15,"max":10}}
-			var parametros, ins = "", configDefault = '{"plugin":"heatmap","parametros":{"coluna":"1","radius":15,"max":10}}';
+			var parametros, ins = "", configDefault = '{"plugin":"heatmap","parametros":{"tipoGradiente": "default","coluna":"1","radius":15,"max":10}}';
 			if (config === "") {
 				config = configDefault;
 			}
@@ -201,7 +201,14 @@ i3GEO.pluginI3geo = {
 					+ "<p>Valor m&aacute;ximo em cada ponto:"
 					+ "<br><input name='max' type='text' value='"
 					+ parametros.max
-					+ "' size='30'></p>";
+					+ "' size='30'></p>"
+					+ "<p>Tipo de gradiente (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
+					+ "<br><input name='tipoGradiente' type='text' value='"
+					+ parametros.tipoGradiente
+					+ "' size='30'></p>"
+					+ "<p>Para definir os cortes no gradiente de cores utilize valores entre 0 e 1."
+					+ " As cores s&atilde;o definidas nas classes do LAYER, sendo que o nome define o valor superior do gradiente e COLOR define a cor."
+					+ " Veja o exemplo utilizado no tema _lmapadecalor.map</p>";
 			return ins;
 		},
 		googlemaps : {
@@ -231,13 +238,7 @@ i3GEO.pluginI3geo = {
 						"radius" : camada.plugini3geo.parametros.radius,
 						"visible" : true,
 						"opacity" : camada.transparency,
-						"gradient" : {
-							"0.45" : "rgb(0,0,255)",
-							"0.55" : "rgb(0,255,255)",
-							"0.65" : "rgb(0,255,0)",
-							"0.95" : "yellow",
-							"1.0" : "rgb(255,0,0)"
-						},
+						"gradient" : heatmap_config.gradient,
 						"legend" : {
 							"title" : camada.tema,
 							"position" : "bl",
@@ -277,9 +278,12 @@ i3GEO.pluginI3geo = {
 						+ camada.name
 						+ "&coluna="
 						+ camada.plugini3geo.parametros.coluna
+						+ "&tipoGradiente="
+						+ camada.plugini3geo.parametros.tipoGradiente
 						+ "&g_sid="
 						+ i3GEO.configura.sid
-						+ "&nomevariavel=heatmap_dados";
+						+ "&nomevariavel=heatmap_dados",
+						+ "&nomevariavelConfig=heatmap_config";
 				i3GEO.util.scriptTag(
 						p,
 						criaLayer,
@@ -340,13 +344,7 @@ i3GEO.pluginI3geo = {
 						"visible" : true,
 						"opacity" : camada.transparency,
 						"radius" : camada.plugini3geo.parametros.radius,
-						"gradient" : {
-							"0.45" : "rgb(0,0,255)",
-							"0.55" : "rgb(0,255,255)",
-							"0.65" : "rgb(0,255,0)",
-							"0.95" : "yellow",
-							"1.0" : "rgb(255,0,0)"
-						},
+						"gradient" : heatmap_config.gradient,
 						"legend" : {
 							"title" : camada.tema,
 							"position" : "bl",
@@ -395,9 +393,12 @@ i3GEO.pluginI3geo = {
 						+ camada.name
 						+ "&coluna="
 						+ camada.plugini3geo.parametros.coluna
+						+ "&tipoGradiente="
+						+ camada.plugini3geo.parametros.tipoGradiente
 						+ "&g_sid="
 						+ i3GEO.configura.sid
-						+ "&nomevariavel=heatmap_dados";
+						+ "&nomevariavel=heatmap_dados"
+						+ "&nomevariavelConfig=heatmap_config";
 				i3GEO.util.scriptTag(
 						p,
 						criaLayer,

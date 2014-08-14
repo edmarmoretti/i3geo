@@ -22,8 +22,11 @@ include_once($dir."/funcoes.php");
 
 $map_file = heatmapMapfile();
 $resultado = heatmapDados($map_file);
+$gradiente = heatmapGradiente($map_file,$layer,$tipoGradiente);
 
 echo $nomevariavel.' = ['.implode(",",$resultado).'];';
+echo $nomevariavelConfig.' = '.$gradiente.';';
+
 if($carregajs === "sim"){
 	include_once($dir."/../../pacotes/heatmap/src/heatmap.js");
 	//include_once($dir."/../../pacotes/heatmap/src/heatmap-openlayers-renderer.js");
