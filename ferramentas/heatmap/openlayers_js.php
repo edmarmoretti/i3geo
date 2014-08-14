@@ -24,8 +24,6 @@ include_once($dir."/funcoes.php");
 //o plugin pode ser chamado sem um mapfile criado
 //usando apenas o mapfile existente em i3geo/temas
 //nesse caso e necessario cirar um mapfile temporario
-
-//no caso do SAIKU, o nome do mapfile pode estar na sessao
 if($g_sid != ""){
 	session_name("i3GeoPHP");
 	session_id($g_sid);
@@ -38,7 +36,17 @@ if($g_sid != ""){
 	}
 }
 $map_file = heatmapMapfile();
-
+//no caso do SAIKU, o nome do mapfile pode estar na sessao
+if($map_file == ""){
+	session_name("i3GeoPHP");
+	session_start();
+	if(!empty($_SESSION["map_file"])){
+		$mapateste = ms_newMapObj($_SESSION["map_file"]);
+		if($mapateste->getlayerbyname($layer) != ""){
+			$map_file = $_SESSION["map_file"];
+		}
+	}
+}
 $resultado = heatmapDados($map_file);
 $gradiente = heatmapGradiente($map_file,$layer,$tipoGradiente);
 

@@ -196,7 +196,7 @@ if($opcoes["tipo"] == "coresChapadas"){
 	$m->salva();
 }
 if($opcoes["tipo"] == "calor"){
-	$parametros = '{"plugin":"heatmap","parametros":{"opacity":".8","coluna":"","radius":"'.$opcoes["raio"].'","max":"'.$opcoes["max"].'"}}';
+	$parametros = '{"plugin":"heatmap","parametros":{"tipoGradiente":"default","opacity":".8","coluna":"","radius":"'.$opcoes["raio"].'","max":"'.$opcoes["max"].'"}}';
 	$layer->setmetadata("PLUGINI3GEO",$parametros);
 	$mapa->save($map_file);
 }
