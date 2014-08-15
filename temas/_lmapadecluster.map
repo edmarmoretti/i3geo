@@ -1,0 +1,83 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION ""
+    DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "cache"	""
+      "TIP"	"TIPO,ANOCRIA,NOMELOC"
+      "ltempoitemimagem"	""
+      "CLASSE"	"SIM"
+      "ltempoitemdescricao"	""
+      "palletestep"	""
+      "ltempoiteminicio"	""
+      "permitekmz"	"nao"
+      "ltempoitemtip"	""
+      "temporizador"	""
+      "iconetema"	""
+      "description_template"	""
+      "ltempoitemtitulo"	""
+      "ltempoitemlink"	""
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "palletefile"	""
+      "permitedownload"	"sim"
+      "ltempoformatodata"	""
+      "ltempoitemicone"	""
+      "permitecomentario"	""
+      "metaestat"	""
+      "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"gridSize":"50"}}'
+      "itembuscarapida"	""
+      "arquivokmz"	""
+      "arquivodownload"	""
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "convcaracter"	""
+      "TEMA"	"Localidades (usar com mapa de cluster)"
+      "cortepixels"	"0"
+      "editorsql"	""
+      "ltempoconvencode"	""
+      "ltempoitemfim"	""
+      "legendaimg"	""
+    END # METADATA
+    NAME "_lmapadecluster"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "0.45"
+      STYLE
+        COLOR 0 0 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "0.55"
+      STYLE
+        COLOR 0 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "0.65"
+      STYLE
+        COLOR 0 255 0
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "0.95"
+      STYLE
+        COLOR 255 255 0
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "1"
+      STYLE
+        COLOR 255 0 0
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

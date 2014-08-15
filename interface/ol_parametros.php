@@ -58,7 +58,8 @@
 						<div id=visual ></div>
 						-->
 						<!-- bot&atilde;o de compartilhamento em redes sociais -->
-						<div id=i3GEOcompartilhar style="text-align:left;border-top:1px solid rgb(250,250,250);padding-top:1px" ></div>
+						<!--<div id=i3GEOcompartilhar style="width: 170px; margin: auto; text-align: left; padding-top: 1px"></div> -->
+
 						<!-- aqui ser&aacute; inclu&iacute;do o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
 						<div id=tempoRedesenho style=z-index:100;position:absolute;top:0px;color:green;background-color:black;width:50px;display:none ></div>
 					</td>

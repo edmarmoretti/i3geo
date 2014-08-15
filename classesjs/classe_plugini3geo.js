@@ -162,15 +162,15 @@ i3GEO.pluginI3geo = {
 	 * Exemplo:
 	 *
 	 * "PLUGINI3GEO"
-	 * '{"plugin":"heatmap","parametros":{"coluna":"teste","max":"10","radius":"15"}}'
+	 * '{"plugin":"heatmap","parametros":{"tipoGradiente": "default","coluna":"teste","max":"10","radius":"15"}}'
 	 *
 	 * Coluna &eacute; a que cont&eacute;m os dados num&eacute;ricos que definem
 	 * a quantidade de uma medida em cada ponto e &eacute; usada para gerar a
 	 * representa&ccedil;&atilde;o. Se for vazia, considera-se o valor como 1
 	 *
 	 * As cores das classes existentes no LAYER ser&atilde;o utilizadas para
-	 * calcular as cores do mapa de calor. Se n&atilde;o existirem classes,
-	 * ser&aacute; usado o default.
+	 * calcular as cores do mapa de calor. Se tipoGradiente for igual a "default" ser&aacute; utilizado
+	 * o gradiente padrão.
 	 *
 	 */
 	heatmap : {
@@ -484,32 +484,38 @@ i3GEO.pluginI3geo = {
 						+ "/ferramentas/markercluster/googlemaps_js.php", carregaJs = "nao", criaLayer;
 				criaLayer = function() {
 					var markercluster, marcas, latLng, marker, n, i;
-					n = markercluster_dados.lenght();
+					n = markercluster_dados.length;
 					marcas = [];
 					for (i = 0; i < n; i++) {
-						latLng = new google.maps.LatLng(markercluster_dados[i].lat, markercluster_dados[i].long);
+						latLng = new google.maps.LatLng(markercluster_dados[i].lat, markercluster_dados[i].lng);
 						marker = new google.maps.Marker({
 							'position' : latLng
 						});
 						marcas.push(marker);
 					}
 					markercluster = new MarkerClusterer(i3GeoMap, marcas, {
-						"gridSize" : camada.plugini3geo.parametros.gridSize,
+						"gridSize" : parseInt(camada.plugini3geo.parametros.gridSize,10),
 						"visible" : true,
-						"opacity" : camada.transparency
+						"opacity" : camada.transparency,
+						"name" : camada.name
 					});
 					i3GEO.janela.fechaAguarde("aguardePlugin");
+
 					markercluster.ligaCamada = function() {
-						this.liga();
+						i3GEO.pluginI3geo.OBJETOS[camada.name].ready_ = true;
+						i3GEO.pluginI3geo.OBJETOS[camada.name].redraw();
 					};
 					markercluster.desLigaCamada = function() {
-						this.desliga();
+						i3GEO.pluginI3geo.OBJETOS[camada.name].resetViewport(true);
+						i3GEO.pluginI3geo.OBJETOS[camada.name].ready_ = false;
 					};
 					markercluster.removeCamada = function() {
-						this.destroy();
+						i3GEO.pluginI3geo.OBJETOS[camada.name].clearMarkers();
+
 					};
 					markercluster.atualizaCamada = function() {
-						this.draw();
+						i3GEO.pluginI3geo.OBJETOS[camada.name].ready_ = true;
+						i3GEO.pluginI3geo.OBJETOS[camada.name].redraw();
 					};
 					i3GEO.pluginI3geo.OBJETOS[camada.name] = markercluster;
 					markercluster_dados = null;

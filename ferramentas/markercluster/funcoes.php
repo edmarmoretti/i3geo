@@ -1,5 +1,5 @@
 <?php
-function heatmapDados($map_file){
+function markerclusterDados($map_file){
 	global $dir,$layer,$coluna;
 	//pega os dados e formata como uma string no formato
 	// [{"lat":"-21.7079984","lng":"-47.4913629","count":"1"}]
@@ -26,15 +26,17 @@ function heatmapDados($map_file){
 	}
 	return $resultado;
 }
-function heatmapMapfile(){
-	global $map_file,$layer,$base,$locaplic,$dir_tmp,$postgis_mapa;
+function markerclusterMapfile(){
+	global $dir,$map_file,$layer,$base,$locaplic,$dir_tmp,$postgis_mapa;
 	if(empty($map_file) && file_exists($dir."/../../temas/{$layer}.map")){
 		$versao = versao();
 		$versao = $versao["principal"];
 		if(!isset($base) || $base == "")
 		{
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
+			{
+				$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+			}
 			else
 			{
 				if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
@@ -47,7 +49,9 @@ function heatmapMapfile(){
 					$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 				}
 				if($base == "")
-				{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
+				{
+					$base = $locaplic."/aplicmap/geral1v".$versao.".map";
+				}
 			}
 		}
 		$map_file = $dir_tmp."/".nomeRandomico().".map";

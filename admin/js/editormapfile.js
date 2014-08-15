@@ -710,7 +710,6 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 				return;
 			}
 		}
-
 		campos = new Array("name","tema","iconetema","mensagem","escala","extensao","group");
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		prog = "../php/editormapfile.php?funcao=alterarTitulo";
@@ -792,7 +791,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 							{montaEditorEditavel(YAHOO.lang.JSON.parse(o.responseText));}
 							if(tipo=="titulo"){
 								//o codigo do layer pode ter sido alterado
-								var no = getNodeByProperty("id",codigoMap+"_"+codigoLayer);
+								var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer);
 								tree.removeChildren(no) ;
 								no.expand();
 								montaEditorTitulo(YAHOO.lang.JSON.parse(o.responseText));

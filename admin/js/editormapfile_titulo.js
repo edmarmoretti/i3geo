@@ -38,6 +38,6 @@ function montaEditorTitulo(dados)
 	$i("editor_bd").innerHTML = ins;
 
 	var temp = function()
-	{salvarDadosEditor('titulo',dados.codigoMap,dados.codigoLayer,false);};
+	{salvarDadosEditor('titulo',dados.codigoMap,dados.codigoLayer);};
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }

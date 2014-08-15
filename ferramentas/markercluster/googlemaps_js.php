@@ -21,12 +21,11 @@ include_once($dir."/../inicia.php");
 
 include_once($dir."/funcoes.php");
 
-$map_file = heatmapMapfile();
-$resultado = heatmapDados($map_file);
+$map_file = markerclusterMapfile();
+$resultado = markerclusterDados($map_file);
 
 echo $nomevariavel.' = ['.implode(",",$resultado).'];';
 if($carregajs === "sim"){
-	include_once($dir."/../../pacotes/markercluster/google/markerclusterer_compiled.js");
+	include_once($dir."/../../pacotes/markercluster/google/markerclusterer.js");
 }
-
 ?>
