@@ -152,7 +152,7 @@ i3GEOF.cortina = {
 		var janela,divid,temp,titulo;
 		i3GEOF.cortina.tema = tema;
 		//cria a janela flutuante
-		titulo = $trad("t42")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=86' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad("t42")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=90' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"230px",
 			"60px",
