@@ -966,7 +966,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/preferencias",
 			categoria:"1",
 			pt:"Guarda as prefer&ecirc;ncias do usu&aacute;rio em rela&ccedil;&atilde;o aos par&acirc;metros que controlam a interface do mapa",
-			complemento:"",
+			complemento:"O usu&aacute;rio pode definir as prefer&ecirc;ncias para a interface do mapa, por exemplo, as configura&ccedil;&otilde;es iniciais de menu e ferramentas, temas que iniciam abertos, extens&atilde;o inicial do mapa etc. As informa&ccedil;&otilde;es de prefer&ecirc;ncias ficam armazenadas como cookies do navegador e podem ser restauradas para as configura&ccedil;&otilde;es iniciais por meio da bot&atilde;o ''Limpar'' ou pela limpeza dos cookies diretamente pelo navegador.",
 			apijs: "i3GEO.mapa.dialogo.preferencias()"
 		},
 		"116": {
@@ -1027,6 +1027,15 @@ g_traducao_ajuda = {
 			pt:"Cria uma camada vetorial com pontos que s&atilde;o agrupados conforme a proximidade. Os pontos agrupados s&atilde;o representados com um s&iacute;mbolo especial e &eacute; mostrado um texto indicando o total de pontos.",
 			complemento:"",
 			apijs:"i3GEO.mapa.dialogo.markercluster()"
+		},
+		"123": {
+			titulo: "Congela a vis&atilde;o atual",
+			diretorio:"",
+			categoria:"6",
+			pt:"Abre uma nova janela com a visualização atual do mapa, mantendo o nível de zoom e as camadas ativas.",
+			complemento:"Existem v&aacute;rias maneiras de fazer a sele&ccedil;&atilde;o: clicando-se sobre cada elemento, desenhando-se um ret&acirc;ngulo ou pol&iacute;gono no mapa, definindo-se uma express&atilde;o que ir&aacute; buscar os elementos aderentes (com base na tabela de atributos) ou cruzando-se um tema com outro. Tendo-se um conjunto j&aacute; definido, novos elementos podem ser acrescentados ou retirados da sele&ccedil;&atilde;o.",
+			//tela:"",
+			apijs:"i3GEO.mapa.dialogo.congelaMapa();"
 		}
 	}
 };
