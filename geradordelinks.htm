@@ -20,8 +20,8 @@ P
 </div>-->
 <div style=width:550px;position:relative;top:10px;left:10px;background-color:rgb(250,250,250) >
 	<div id=bandeiras style=width:80px ></div><b>Gerador de links do i3Geo</b><br>
-	<p class=paragrafo >Bookmark: <span id=bm1 ></span>
-	<p class=paragrafo ><div style=text-align:left id=curtir ></div>
+	<p class=paragrafo >Para ver os par&acirc;metros de inicializa&ccedil;&atilde;o com ms_configura basta digitar <a href="http://localhost/i3geo/ms_criamapa.php?ajuda" target=_blank >http://localhost/i3geo/ms_criamapa.php?ajuda</a></p>
+	
 	<p class=paragrafo >Aqui voc&ecirc; pode gerar links para abrir o i3Geo de forma personalizada.
 Os links podem ser inclu&iacute;dos em qualquer p&aacute;gina WEB, sendo poss&iacute;vel
 definir quais os temas ser&atilde;o mostrados e qual a extens&atilde;o geogr&aacute;fica do mapa.<br><br></p>
@@ -119,9 +119,6 @@ File: i3geo/geradordelinks.htm
 OpenLayers.ImgPath = "pacotes/openlayers/img/";
 var g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.configura.locaplic = g_locaplic;
-$i("bm1").innerHTML = i3GEO.social.bookmark(window.location.href);
-loc = window.location.href;
-i3GEO.social.compartilhar("curtir",loc,loc,"comtotal");
 
 var i3geo_gl_configura = new i3geo_gl_configura(
 	g_locaplic,

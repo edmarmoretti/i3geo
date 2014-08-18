@@ -130,7 +130,98 @@ gvsiggvp - (depreciado na vers&atilde;o 4.7 - utilize o parametro temasa) endere
 gvsigview - lista com nomes de views existentes no projeto gvSig separado por virgula. Se for vazio, serao adicionadas todas as views. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
 
 restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
+
+filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
+
+  Exemplo de filtro
+
+  http://localhost/i3geo/ms_criamapa.php?temasa=_lbiomashp&map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&tema=_lbiomashp&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=_lbiomashp
+
+  no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
 */
+
+if(isset($_GET["ajuda"])){
+	echo "<pre>";
+	echo"
+Par&acirc;metros:
+
+base - arquivo mapfile que servir&aacute; de base para a cria&ccedil;&atilde;o do mapa. Por default, s&atilde;o utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
+	Essa vari&aacute;vel pode ser definida em ms_configura tamb&eacute;m. Se n&atilde;o estiver definida em nenhum lugar, o i3Geo tentar&aacute; descobrir o arquivo adequado a ser utilizado. Voc&ecirc; pode utilizar essa op&ccedil;&atilde;o para abrir um mapa com as camadas que voc&ecirc; quiser, mas para evitar redund&acirc;ncias, prefira o uso de &temasa
+
+temasa - lista, separada por espa&ccedil;os, com os nomes dos arquivos map ou gvsig que ser&atilde;o adicionados ao mapa. Se o arquivo n&atilde;o estiver no diret&oacute;rio i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo pode conter mais de um layer pois todos os existentes ser&atilde;o adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles s&atilde;o adicionados ao mapa com o status de desenho em OFF.
+
+layers - lista, separada por espa&ccedil;os, com os nomes dos layers que ser&atilde;o ligados. A lista deve conter os nomes dos layers e n&atilde;o os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com 'temasa' um mapfile chamado 'transporte' que contenha os layers 'estradas' e 'ferrovias' os dois layers ser&atilde;o adicionados ao mapa. Para que esses dois layers fiquem vis&iacute;veis no mapa deve-se utilizar &layers=estradas ferrovias.
+
+desligar - lista com os nomes dos temas que ser&atilde;o for&ccedil;ados a inicializar desligados, ou seja, com STATUS OFF
+
+mapext - extensao geografica que ser&aacute; utilizada. Por padr&atilde;o, a extens&atilde;o geogr&aacute;fica &eacute; definida para abranger o Brasil todo. Para alterar o padr&atilde;o deve-se utilizar o par&acirc;metro mapext para especificar a nova abrang&ecirc;ncia. Essa abrang&ecirc;ncia deve ser definida em coordenadas no formato d&eacute;cimos de grau e na proje&ccedil;&atilde;o geogr&aacute;fica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores s&atilde;o xmin ymin xmax ymax
+
+executa - programa ou fun&ccedil;&atilde;o em php que ser&aacute; executado via include. O include &eacute; feito no final do processo de inicializa&ccedil;&atilde;o quando a vari&aacute;vel $tmpfname j&aacute; est&aacute; definida. Essa vari&aacute;vel guarda o nome do arquivo mapfile que ser&aacute; utilizado pelo i3geo.
+
+interface - nome da interface que ser&aacute; utilizada para abrir o mapa. As interfaces s&atilde;o arquivos HTML que podem estar no diret&oacute;rio aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alter&aacute;-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
+
+perfil - perfil utilizado para restringir os menus de temas. ms_criamapa.php?perfil=usu&aacute;rio1
+
+caminho - caminho relativo que indica o local onde a interface do mapa esta localizada.
+
+pontos - lista de coordenadas x e y que ser&atilde;o adicionadas como pontos no mapa.
+
+nometemapontos - nome do tema de pontos
+
+linhas - lista de coordenadas x e y que ser&atilde;o adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ',', por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
+
+nometemalinhas - nome do tema de linhas
+
+poligonos - lista de coordenadas x e y que ser&atilde;o adicionadas como pol&iacute;gonos no mapa. As coordenadas dos v&eacute;rtices de pol&iacute;gonos diferentes devem ser separadas por ','.
+
+nometemapoligonos - nome do tema de pol&iacute;gonos
+
+simbolo - nome do s&iacute;mbolo que ser&aacute; utilizado para desenhar os elementos inseridos (veja arquivo de s&iacute;mbolos em i3geo/symbols)
+
+corsimbolo - cor do s&iacute;mbolo definido em RGB separados por espa&ccedil;o ou v&iacute;rgula
+
+tamanhosimbolo - tamanho do s&iacute;mbolo em pixels
+
+wkt - insere elementos no mapa com coordenadas definidas em wkt
+
+nometemawkt - nome do tema em wkt
+
+idioma - idioma da interface (veja os idiomas dispon&iacute;veis em classe_idioma.js)
+
+kmlurl - url de um arquivo KML que ser&aacute; incluido no mapa. V&aacute;lido apenas na interface google maps
+
+url_wms - endere&ccedil;o de um WMS (ser&aacute; incluido como uma camada no mapa)
+
+layer_wms - nome do layer
+
+style_wms - estilo do layer
+
+nome_wms - nome da camada (titulo)
+
+srs_wms - c&oacute;digo da proje&ccedil;&atilde;o
+
+image_wms - tipo de imagem dispon&iacute;vel
+
+versao_wms - Vers&atilde;o do WMS (necess&aacute;rio quando da inclus&atilde;o de uma camada WMS diretamente pela URL)
+
+gvsiggvp - (depreciado na vers&atilde;o 4.7 - utilize o parametro temasa) endere&ccedil;o no servidor do arquivo de projeto gvSig (gvp) que ser&aacute; utilizado para construir o mapa (experimental)
+
+gvsigview - lista com nomes de views existentes no projeto gvSig separado por virgula. Se for vazio, serao adicionadas todas as views. Exemplo (http://localhost/i3geo/ms_criamapa.php?gvsiggvp=c:\temp\teste.gvp&gvsigview=Untitled - 0)
+
+restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
+
+filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
+
+  Exemplo de filtro
+
+  http://localhost/i3geo/ms_criamapa.php?temasa=_lbiomashp&map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&tema=_lbiomashp&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=_lbiomashp
+
+  no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
+	
+	";
+	exit;
+}
+
 
 //$_COOKIE = array();
 //
@@ -249,25 +340,33 @@ $expoeMapfile_ = $expoeMapfile;
 $googleApiKey_ = $googleApiKey;
 $mensagemInicia_ = $mensagemInicia;
 $interfacePadrao_ = $interfacePadrao;
-if(isset($interface))
-{$interface_ = $interface;}
-else{$interface_ = $interfacePadrao;}
-if(isset($kmlurl))
-{$kmlurl_ = $kmlurl;}
+if(isset($interface)){
+	$interface_ = $interface;
+}
+else{
+	$interface_ = $interfacePadrao;
+}
+if(isset($kmlurl)){
+	$kmlurl_ = $kmlurl;
+}
 //
 //se houver string de conex&atilde;o para substitui&ccedil;&atilde;o
 //o modo cgi n&atilde;o ir&aacute; funcionar
 //
-if($postgis_mapa != "")
-{$utilizacgi = "nao";}
-if(!isset($perfil))
-{$perfil="";}
+if($postgis_mapa != ""){
+	$utilizacgi = "nao";
+}
+if(!isset($perfil)){
+	$perfil="";
+}
 $perfil_ = $perfil;
 $utilizacgi_ = $utilizacgi;
-if ((isset($navegadoresLocais)) && ($navegadoresLocais != ""))
-{$navegadoresLocais_ = "sim";}
-else
-{$navegadoresLocais_ = "nao";}
+if ((isset($navegadoresLocais)) && ($navegadoresLocais != "")){
+	$navegadoresLocais_ = "sim";
+}
+else{
+	$navegadoresLocais_ = "nao";
+}
 if(empty($i3georendermode)){
 	$i3georendermode_ = 0;
 }
@@ -333,8 +432,9 @@ $_SESSION["saikuUrl"] = $saikuUrl_;
 //pega todas as vari&aacute;veis da sess&atilde;o, mesmo as que foram definidas anteriormente
 //
 
-foreach(array_keys($_SESSION) as $k)
-{eval("\$".$k."='".$_SESSION[$k]."';");}
+foreach(array_keys($_SESSION) as $k){
+	eval("\$".$k."='".$_SESSION[$k]."';");
+}
 $postgis_mapa = $postgis_mapa_;
 /*
 Define os arquivos .map
@@ -349,12 +449,11 @@ O arquivo &eacute; lido conforma a caracter&iacute;stica do sistema operacional.
 */
 $versao = versao();
 $versao = $versao["principal"];
-if(!isset($base) || $base == "")
-{
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";}
-	else
-	{
+if(!isset($base) || $base == ""){
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+		$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+	}
+	else{
 		if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 			$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 		}
@@ -375,13 +474,11 @@ Cria os objetos map que ser&atilde;o processados
 
 O arquivo definido em $base &eacute; lido como um objeto map. Esse objeto ser&aacute; processado para incluir novos layers e alterar outros par&acirc;metros definidos pelo usu&aacute;rio.
 */
-if (file_exists($base))
-{
+if (file_exists($base)){
 	$map = ms_newMapObj($base);
 	$mapn = ms_newMapObj($base);
 }
-else
-{
+else{
 	$map = ms_newMapObj($locaplic."/aplicmap/".$base.".map");
 	$mapn = ms_newMapObj($locaplic."/aplicmap/".$base.".map");
 }
@@ -397,53 +494,63 @@ Par&acirc;metros adicionais.
 
 Processa os par&acirc;metros para a inicializa&ccedil;&atilde;o verificando se foram passados pela URL ou n&atilde;o.
 */
-if (!isset($mapext))
-{$mapext = $map->extent->minx." ".$map->extent->miny." ".$map->extent->maxx." ".$map->extent->maxy;}
-if (!isset ($map_reference_image)) //arquivo com a imagem de refer&ecirc;ncia
-{$map_reference_image = $map->reference->image;}
-if (!isset ($map_reference_extent)) //extens&atilde;o geogr&aacute;fica da imagem do mapa de refer&ecirc;ncia
-{$map_reference_extent = $map->reference->extent->minx." ".$map->reference->extent->miny." ".$map->reference->extent->maxx." ".$map->reference->extent->maxy;}
+if (!isset($mapext)){
+	$mapext = $map->extent->minx." ".$map->extent->miny." ".$map->extent->maxx." ".$map->extent->maxy;
+}
+//arquivo com a imagem de refer&ecirc;ncia
+if (!isset ($map_reference_image)){
+	$map_reference_image = $map->reference->image;
+}
+//extens&atilde;o geogr&aacute;fica da imagem do mapa de refer&ecirc;ncia
+if (!isset ($map_reference_extent)){
+	$map_reference_extent = $map->reference->extent->minx." ".$map->reference->extent->miny." ".$map->reference->extent->maxx." ".$map->reference->extent->maxy;
+}
 if(!isset($interface)){
-	if(!isset($interfacePadrao))
-	{$interfacePadrao = "openlayers.htm";}
+	if(!isset($interfacePadrao)){
+		$interfacePadrao = "black_ol.htm";
+	}
 	$interface = $interfacePadrao;
 }
 
-if(isset($layers) && !isset($temasa))
-{$temasa = $layers;}
+if(isset($layers) && !isset($temasa)){
+	$temasa = $layers;
+}
 
 incluiTemasIniciais();
 
-if(isset($layers))
-{ligaTemas();}
-if(isset($desligar))
-{desligaTemasIniciais();}
-if (isset($map_reference_image))
-{$mapn->reference->set("image",$map_reference_image);}
+if(isset($layers)){
+	ligaTemas();
+}
+if(isset($desligar)){
+	desligaTemasIniciais();
+}
+if (isset($map_reference_image)){
+	$mapn->reference->set("image",$map_reference_image);
+}
 $extr = $mapn->reference->extent;
-if (isset($map_reference_extent))
-{
+if (isset($map_reference_extent)){
 	$temp = explode(" ",$map_reference_extent);
-	foreach ($temp as $t)
-	{
-		if ($t != "")
-		{$newext[] = $t;}
+	foreach ($temp as $t)	{
+		if ($t != ""){
+			$newext[] = $t;
+		}
 	}
-	if (count($newext) == 4)
-	{$extr->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
+	if (count($newext) == 4){
+		$extr->setextent($newext[0], $newext[1], $newext[2], $newext[3]);
+	}
 }
 $ext = $mapn->extent;
 $newext = array();
-if ((isset($mapext)) && ($mapext != ""))
-{
+if ((isset($mapext)) && ($mapext != "")){
 	$temp = explode(" ",$mapext);
-	foreach ($temp as $t)
-	{
-		if ($t != "")
-		{$newext[] = $t;}
+	foreach ($temp as $t)	{
+		if ($t != ""){
+			$newext[] = $t;
+		}
 	}
-	if (count($newext) == 4)
-	{$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
+	if (count($newext) == 4){
+		$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);
+	}
 }
 else{
 	//algumas aplicacoes usam essa variavel (SAIKU)
@@ -468,35 +575,43 @@ $_SESSION["imgurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atu
 $_SESSION["tmpurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual;
 $_SESSION["map_file"] = $tmpfname;
 $_SESSION["mapext"] = $mapext;
-if (isset($executa))
-{
-	if (file_exists($executa))
-	{include_once ($executa);}
-	if (function_exists($executa))
-	{eval($executa."();");}
+if (isset($executa)){
+	if (file_exists($executa)){
+		include_once ($executa);
+	}
+	if (function_exists($executa)){
+		eval($executa."();");
+	}
 }
-if(isset($wkt))
-{insereWKTUrl();}
+if(isset($wkt)){
+	insereWKTUrl();
+}
 
-if(isset($pontos))
-{inserePontosUrl();}
+if(isset($pontos)){
+	inserePontosUrl();
+}
 
-if(isset($linhas))
-{insereLinhasUrl();}
+if(isset($linhas)){
+	insereLinhasUrl();
+}
 
-if(isset($poligonos))
-{inserePoligonosUrl();}
+if(isset($poligonos)){
+	inserePoligonosUrl();
+}
 
-if(isset($url_wms))
-{incluiTemaWms();}
+if(isset($url_wms)){
+	incluiTemaWms();
+}
 
 adaptaLayers($tmpfname,$versao);
 
-if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
-{require_once(dirname(__FILE__)."/ms_registraip.php");}
+if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat")){
+	require_once(dirname(__FILE__)."/ms_registraip.php");
+}
 //echo $tmpfname;exit;
-if ($interface != "mashup")
-{abreInterface($interface,$caminho,$tempo);}
+if ($interface != "mashup"){
+	abreInterface($interface,$caminho,$tempo);
+}
 
 /*
 Adapta os dados de cada layer.
@@ -507,30 +622,39 @@ function adaptaLayers($tmpfname,$versao){
 	$mapa = ms_newMapObj($tmpfname);
 	$path = $mapa->shapepath;
 	$numlayers = $mapa->numlayers;
-	for($i=0;$i<$numlayers;++$i)
-	{
+	for($i=0;$i<$numlayers;++$i){
 		$layer = $mapa->getLayer($i);
 		$ok = true;
-		if ($layer->connection == "")
-		{
+		if ($layer->connection == ""){
 			$ok = false;
 			$d = $layer->data;
-			if((file_exists($d)) || (file_exists($d.".shp")))
-			{$ok = true;}
-			else
-			{
-				if((file_exists($path."/".$d)) || (file_exists($path."/".$d.".shp")))
-				{$ok = true;}
+			if((file_exists($d)) || (file_exists($d.".shp"))){
+				$ok = true;
+			}
+			else{
+				if((file_exists($path."/".$d)) || (file_exists($path."/".$d.".shp"))){
+					$ok = true;
+				}
 			}
 		}
-		if ($ok == false)
-		{$layer->set("status",MS_OFF);}
+		if ($ok == false){
+			$layer->set("status",MS_OFF);
+		}
 		//para impedir erros na legenda
-		if($layer->getmetadata("classe") == "")
-		{$layer->setmetadata("classe","");}
+		if($layer->getmetadata("classe") == ""){
+			$layer->setmetadata("classe","");
+		}
 		if($versao > 5){
 			$layer->setprocessing("LABEL_NO_CLIP=True");
 			$layer->setprocessing("POLYLINE_NO_CLIP=True");
+		}
+		//
+		//verifica se deve aplicar filtro
+		//
+		$filtro = $_GET["map_layer_".$layer->name."_filter"];
+		if(!empty($filtro)){
+			$layer->setmetadata("CACHE","nao");
+			$layer->setfilter($filtro);
 		}
 	}
 	$mapa->save($tmpfname);

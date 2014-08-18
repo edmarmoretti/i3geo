@@ -78,7 +78,7 @@ Veja:
 /* 
 Classe: i3geo_gl_configura
 
-Cria o objeto javascript com os parâmetros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o.
+Cria o objeto javascript com os parï¿½metros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o.
 
 Example:
 
@@ -115,31 +115,31 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	 */
 	this.link = link;
 	/*
-	Guarda o valor do parâmetro seltema
+	Guarda o valor do parï¿½metro seltema
 	*/
 	this.nomeseltema = nomeseltema;
 	/*
-	Guarda o valor do parâmetro loc_i3geo
+	Guarda o valor do parï¿½metro loc_i3geo
 	*/
 	this.loc_i3geo = loc_i3geo;
 	/*
-	Guarda o valor do parâmetro menu
+	Guarda o valor do parï¿½metro menu
 	*/
 	this.menu = menu;
 	/*
-	Guarda o valor do parâmetro grupo
+	Guarda o valor do parï¿½metro grupo
 	*/
 	this.grupo = grupo;
 	/*
-	Guarda o valor do parâmetro subgrupo
+	Guarda o valor do parï¿½metro subgrupo
 	*/
 	this.subgrupo = subgrupo;
 	/*
-	Guarda o valor do parâmetro tema
+	Guarda o valor do parï¿½metro tema
 	*/
 	this.tema = tema;
 	/*
-	Guarda o valor do parâmetro buscageo
+	Guarda o valor do parï¿½metro buscageo
 	*/
 	this.buscageo = buscageo;
 	/* 
@@ -200,7 +200,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	/*
 	Function: crialink
 
-	Pega os parâmetros especificados pelo usu&aacute;rio e monta o link para mostrar na tela.
+	Pega os parï¿½metros especificados pelo usu&aacute;rio e monta o link para mostrar na tela.
 	*/
 	this.crialink = function()
 	{
@@ -302,7 +302,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	/*
 	Function: preseltema
 
-	Compatibiliza a chamada da fun&ccedil;&atilde;o i3geo_combotemasMenu com a fun&ccedil;&atilde;o this.seltema em termos de n&uacute;mero de parâmetros
+	Compatibiliza a chamada da fun&ccedil;&atilde;o i3geo_combotemasMenu com a fun&ccedil;&atilde;o this.seltema em termos de n&uacute;mero de parï¿½metros
 	*/
 	this.preseltema = function(idgrupo,idsubgrupo,idtema)
 	{
@@ -435,7 +435,8 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$i("OpenLayers_Control_PanZoom_panleft").style.display="none"
 		$i("OpenLayers_Control_PanZoom_panright").style.display="none"
 		*/
-		$i("OpenLayers.Control.NavToolbar_36").style.display="none";
+		//TODO remover a barra
+		//$i("OpenLayers.Control.NavToolbar_36").style.display="none";
 		zb.div.style.left="0px";
 		$i3geo_gl.OL.capturageo = function()
 		{
@@ -462,7 +463,7 @@ Inicia a interface do gerador de links.
 
 Parameters:
 
-objeto_i3geo_gl_configura - objeto com os parâmentros de configura&ccedil;&atilde;o criado pela fun&ccedil;&atilde;o i3geo_gl_configura
+objeto_i3geo_gl_configura - objeto com os parï¿½mentros de configura&ccedil;&atilde;o criado pela fun&ccedil;&atilde;o i3geo_gl_configura
 */
 function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 {
