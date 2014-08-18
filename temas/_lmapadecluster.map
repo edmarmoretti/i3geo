@@ -27,7 +27,7 @@ MAP
       "ltempoitemicone"	""
       "permitecomentario"	""
       "metaestat"	""
-      "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"gridSize":"50"}}'
+      "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"tipoEstilos":"default","coluna":"","gridSize":"50"}}'
       "itembuscarapida"	""
       "arquivokmz"	""
       "arquivodownload"	""

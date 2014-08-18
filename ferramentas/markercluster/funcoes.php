@@ -68,4 +68,26 @@ function markerclusterMapfile(){
 	}
 	return $map_file;
 }
+function markerclusterEstilos($map_file,$layer,$tipoEstilos){
+	if($tipoEstilos == "default"){
+		$tipoEstilos = '[{url : i3GEO.configura.locaplic + "/imagens/google/m1",height : 53,width : 53},{url : i3GEO.configura.locaplic + "/imagens/google/m2",height : 56,width : 56},{url : i3GEO.configura.locaplic + "/imagens/google/m3",height : 66,width : 66},{url : i3GEO.configura.locaplic + "/imagens/google/m4",height : 78,width : 78},{url : i3GEO.configura.locaplic + "/imagens/google/m5",height : 90,width : 90}]';
+	}
+	else{
+		$gradiente = array();
+		$mapa = ms_newMapObj($map_file);
+		$l = $mapa->getlayerbyname($layer);
+		$nc = $l->numclasses;
+		for ($c = 0;$c < $nc;$c++){
+			$classe = $l->getclass($c);
+			$estilo = $classe->getstyle(0);
+			$nome = $classe->name;
+			$cor = $estilo->color;
+			$scor = "rgb(".$cor->red.",".$cor->green.",".$cor->blue.")";
+			$gradiente[$nome] = $scor;
+		}
+		//echo $map_file;exit;
+		$gradiente = json_encode(array("gradient"=>$gradiente));
+	}
+	return $tipoEstilos;
+}
 ?>

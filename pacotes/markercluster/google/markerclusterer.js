@@ -1082,8 +1082,8 @@ ClusterIcon.prototype.onAdd = function() {
   panes.overlayMouseTarget.appendChild(this.div_);
 
   var that = this;
-  google.maps.event.addDomListener(this.div_, 'click', function() {
-    that.triggerClusterClick();
+  google.maps.event.addDomListener(this.div_, 'click', function(evt) {
+	  that.triggerClusterClick();
   });
 };
 

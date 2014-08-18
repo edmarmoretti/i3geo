@@ -23,8 +23,11 @@ include_once($dir."/funcoes.php");
 
 $map_file = markerclusterMapfile();
 $resultado = markerclusterDados($map_file);
+$tipoEstilos = markerclusterEstilos($map_file,$layer,$tipoEstilos);
 
 echo $nomevariavel.' = ['.implode(",",$resultado).'];';
+echo $nomevariavelConfig.' = '.$tipoEstilos.';';
+
 if($carregajs === "sim"){
 	include_once($dir."/../../pacotes/markercluster/google/markerclusterer.js");
 }
