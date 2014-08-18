@@ -214,7 +214,7 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
 
   Exemplo de filtro
 
-  http://localhost/i3geo/ms_criamapa.php?temasa=_lbiomashp&map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&temasa=_lbiomashp
+  http://localhost/i3geo/ms_criamapa.php?layers=_lbiomashp&temasa=_lbiomashp&map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))
   
   no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
 	
