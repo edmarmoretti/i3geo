@@ -57,10 +57,15 @@ i3GEO.tema = {
 			g_operacao = "excluitema";
 			//remove o tema do DOM e seus filhos
 			try{
-				i3GEO.pluginI3geo.removeCamada(tema);
+				try{
+					i3GEO.pluginI3geo.removeCamada(tema);
+				}
+				catch(r){
+				}
 				var p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
-				do
-				{p.removeChild(p.childNodes[0]);}
+				do{
+					p.removeChild(p.childNodes[0]);
+				}
 				while
 					(p.childNodes.length > 0);
 				p.parentNode.removeChild(p);

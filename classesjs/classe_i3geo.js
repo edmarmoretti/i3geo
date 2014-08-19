@@ -701,12 +701,14 @@ var i3GEO = {
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
 		temp = $i("contemFerramentas");
-		if (temp && temp.style && temp.style.width)
-		{menos += parseInt($i("contemFerramentas").style.width,10);}
+		if (temp && temp.style && temp.style.width){
+			menos += parseInt($i("contemFerramentas").style.width,10);
+		}
 		temp = $i("ferramentas");
-		if (temp && temp.style && temp.style.width)
-		{menos += parseInt($i("ferramentas").style.width,10);}
-		document.body.style.width = "100%";
+		if (temp && temp.style && temp.style.width){
+			menos += parseInt($i("ferramentas").style.width,10);
+		}
+		document.body.style.width = "99%";
 		temp = i3GEO.util.tamanhoBrowser();
 		novow = temp[0];
 		novoh = temp[1];

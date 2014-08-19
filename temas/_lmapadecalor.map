@@ -14,7 +14,7 @@ MAP
     STATUS OFF
     TEMPLATE "none.htm"
     TILEITEM "location"
-    OPACITY 100
+    OPACITY 70
     TYPE POINT
     UNITS METERS
     CLASS

@@ -209,7 +209,7 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				inicia : function(camada) {
-					var p = i3GEO.configura.locaplic + "/ferramentas/heatmap/googlemaps_js.php", carregaJs = "nao", criaLayer;
+					var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic + "/ferramentas/heatmap/googlemaps_js.php", carregaJs = "nao", criaLayer;
 					criaLayer = function() {
 						var heatmap, pontos;
 
@@ -249,14 +249,19 @@ i3GEO.pluginI3geo =
 						i3GEO.pluginI3geo.OBJETOS[camada.name] = heatmap;
 						heatmap_dados = null;
 					};
-					if (typeof (HeatmapOverlay) === 'undefined') {
+					//se o script nao existir carrega o codigo e os dados
+					//caso contrario, carrega apenas os dados no script
+					if (!$i(nomeScript)) {
 						carregaJs = "sim";
+					}
+					else{
+						nomeScript = "";
 					}
 					p +=
 						"?carregajs=" + carregaJs + "&layer=" + camada.name + "&coluna=" + camada.plugini3geo.parametros.coluna
 							+ "&tipoGradiente=" + camada.plugini3geo.parametros.tipoGradiente + "&g_sid=" + i3GEO.configura.sid
 							+ "&nomevariavel=heatmap_dados&nomevariavelConfig=heatmap_config";
-					i3GEO.util.scriptTag(p, criaLayer, "i3GEO.pluginI3geo.heatmap_script");
+					i3GEO.util.scriptTag(p, criaLayer, nomeScript);
 				}
 			},
 			//
@@ -283,7 +288,7 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				inicia : function(camada, objMapa) {
-					var p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php", carregaJs = "nao", criaLayer;
+					var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php", carregaJs = "nao", criaLayer;
 					criaLayer = function() {
 						var heatmap, transformedTestData = {
 							max : camada.plugini3geo.parametros.max,
@@ -349,8 +354,13 @@ i3GEO.pluginI3geo =
 							i3GEO.janela.fechaAguarde("aguardePlugin");
 						}
 					};
-					if (typeof (HeatmapOverlay) === 'undefined') {
+					//se o script nao existir carrega o codigo e os dados
+					//caso contrario, carrega apenas os dados no script
+					if (!$i(nomeScript)) {
 						carregaJs = "sim";
+					}
+					else{
+						nomeScript = "";
 					}
 					if (!i3GEO.configura || !i3GEO.configura.sid) {
 						i3GEO.configura.sid = "";
@@ -359,7 +369,7 @@ i3GEO.pluginI3geo =
 						"?carregajs=" + carregaJs + "&layer=" + camada.name + "&coluna=" + camada.plugini3geo.parametros.coluna
 							+ "&tipoGradiente=" + camada.plugini3geo.parametros.tipoGradiente + "&g_sid=" + i3GEO.configura.sid
 							+ "&nomevariavel=heatmap_dados&nomevariavelConfig=heatmap_config";
-					i3GEO.util.scriptTag(p, criaLayer, "i3GEO.pluginI3geo.heatmap_script");
+					i3GEO.util.scriptTag(p, criaLayer, nomeScript);
 				}
 			},
 			googleearth : {
@@ -434,7 +444,7 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				inicia : function(camada) {
-					var p = i3GEO.configura.locaplic + "/ferramentas/markercluster/googlemaps_js.php", carregaJs = "nao", criaLayer;
+					var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic + "/ferramentas/markercluster/googlemaps_js.php", carregaJs = "nao", criaLayer;
 					criaLayer = function() {
 						var markercluster, marcas, latLng, marker, n, i;
 						n = markercluster_dados.length;
@@ -482,15 +492,20 @@ i3GEO.pluginI3geo =
 						i3GEO.pluginI3geo.OBJETOS[camada.name] = markercluster;
 						markercluster_dados = null;
 					};
-					if (typeof (MarkerClusterer) === 'undefined') {
+					//se o script nao existir carrega o codigo e os dados
+					//caso contrario, carrega apenas os dados no script
+					if (!$i(nomeScript)) {
 						carregaJs = "sim";
+					}
+					else{
+						nomeScript = "";
 					}
 					p +=
 						"?carregajs=" + carregaJs + "&layer=" + camada.name + "&coluna=" + camada.plugini3geo.parametros.coluna
 						+ "&g_sid=" + i3GEO.configura.sid
 						+ "&tipoEstilos=" + camada.plugini3geo.parametros.tipoEstilos
 						+ "&nomevariavel=markercluster_dados&nomevariavelConfig=markercluster_config";
-					i3GEO.util.scriptTag(p, criaLayer, "i3GEO.pluginI3geo.markercluster_script");
+					i3GEO.util.scriptTag(p, criaLayer, nomeScript);
 				}
 			}
 		}

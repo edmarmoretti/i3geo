@@ -63,6 +63,7 @@ MAP
       STYLE
         COLOR 62 9 41
         SIZE 20
+        OFFSET 0 -10
         SYMBOL "/var/www/i3geo/imagens/google/condominium1.png"
       END # STYLE
     END # CLASS
