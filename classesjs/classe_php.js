@@ -431,10 +431,8 @@ i3GEO.php = {
 		var p = i3GEO.configura.locaplic+"/ferramentas/opcoes_tamanho/exec.php",
 			par = "funcao=mudatamanho&altura="+altura+"&largura="+largura+"&g_sid="+i3GEO.configura.sid,
 			retorno = function(retorno){
-				i3GEO.janela.fechaAguarde("mudatamanho");
 				funcao.call(funcao,retorno);
 			};
-		i3GEO.janela.abreAguarde("mudatamanho",$trad("o1"));
 		cpJSON.call(p,"pegaSistemas",retorno,par);
 	},
 	/*

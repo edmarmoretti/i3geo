@@ -139,6 +139,7 @@ i3GEO.mapa =
 		 * e definido como um evento do elemento window
 		 */
 		ativaAutoResize : function() {
+			var ativo = true;
 			window.onresize = function() {
 				var Dw, Dh, r = false;
 				Dw = YAHOO.util.Dom.getViewportWidth();
@@ -156,20 +157,24 @@ i3GEO.mapa =
 					Dw,
 					Dh
 				];
-				setTimeout(function() {
-					i3GEO.reCalculaTamanho();
-					i3GEO.barraDeBotoes.recria("i3geo_barra2");
-					if (i3GEO.Interface.TABLET === true) {
-						i3GEO.guias.escondeGuias();
-						return;
-					}
-					if (i3GEO.guias.TIPO === "movel") {
-						i3GEO.guias.guiaMovel.reposiciona();
-					} else {
-						i3GEO.guias.ajustaAltura();
-					}
-					i3GEO.mapa.reposicionaDobraPagina();
-				}, 2000);
+				if(ativo === true){
+					setTimeout(function() {
+						i3GEO.reCalculaTamanho();
+						i3GEO.barraDeBotoes.recria("i3geo_barra2");
+						if (i3GEO.Interface.TABLET === true) {
+							i3GEO.guias.escondeGuias();
+							return;
+						}
+						if (i3GEO.guias.TIPO === "movel") {
+							i3GEO.guias.guiaMovel.reposiciona();
+						} else {
+							i3GEO.guias.ajustaAltura();
+						}
+						i3GEO.mapa.reposicionaDobraPagina();
+						ativo = true;
+					}, 2000);
+				}
+				ativo = false;
 			};
 		},
 		/*

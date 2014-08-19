@@ -61,7 +61,7 @@ i3GEO.pluginI3geo =
 		inicia : function(camada) {
 			if (i3GEO.janela) {
 				i3GEO.janela.AGUARDEMODAL = true;
-				i3GEO.janela.abreAguarde("aguardePlugin", "Calculando...");
+				i3GEO.janela.abreAguarde("aguardePlugin", "Plugin...");
 				i3GEO.janela.AGUARDEMODAL = false;
 			}
 			// chama a funcao conforme o tipo de plugin e a interface atual
@@ -255,7 +255,7 @@ i3GEO.pluginI3geo =
 					p +=
 						"?carregajs=" + carregaJs + "&layer=" + camada.name + "&coluna=" + camada.plugini3geo.parametros.coluna
 							+ "&tipoGradiente=" + camada.plugini3geo.parametros.tipoGradiente + "&g_sid=" + i3GEO.configura.sid
-							+ "&nomevariavel=heatmap_dados", +"&nomevariavelConfig=heatmap_config";
+							+ "&nomevariavel=heatmap_dados&nomevariavelConfig=heatmap_config";
 					i3GEO.util.scriptTag(p, criaLayer, "i3GEO.pluginI3geo.heatmap_script");
 				}
 			},
@@ -358,7 +358,7 @@ i3GEO.pluginI3geo =
 					p +=
 						"?carregajs=" + carregaJs + "&layer=" + camada.name + "&coluna=" + camada.plugini3geo.parametros.coluna
 							+ "&tipoGradiente=" + camada.plugini3geo.parametros.tipoGradiente + "&g_sid=" + i3GEO.configura.sid
-							+ "&nomevariavel=heatmap_dados" + "&nomevariavelConfig=heatmap_config";
+							+ "&nomevariavel=heatmap_dados&nomevariavelConfig=heatmap_config";
 					i3GEO.util.scriptTag(p, criaLayer, "i3GEO.pluginI3geo.heatmap_script");
 				}
 			},
@@ -455,33 +455,7 @@ i3GEO.pluginI3geo =
 							"visible" : true,
 							"opacity" : camada.transparency,
 							"name" : camada.name,
-							"styles" : [
-								{
-									url : i3GEO.configura.locaplic + "/imagens/google/m1",
-									height : 53,
-									width : 53
-								},
-								{
-									url : i3GEO.configura.locaplic + "/imagens/google/m2",
-									height : 56,
-									width : 56
-								},
-								{
-									url : i3GEO.configura.locaplic + "/imagens/google/m3",
-									height : 66,
-									width : 66
-								},
-								{
-									url : i3GEO.configura.locaplic + "/imagens/google/m4",
-									height : 78,
-									width : 78
-								},
-								{
-									url : i3GEO.configura.locaplic + "/imagens/google/m5",
-									height : 90,
-									width : 90
-								}
-							]
+							"styles" : markercluster_config.estilos
 						});
 						i3GEO.janela.fechaAguarde("aguardePlugin");
 						i3GEO.eventos.cliquePerm.ativo = false;

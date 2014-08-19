@@ -284,6 +284,7 @@ var i3GEO = {
 		//
 		tamanho = i3GEO.calculaTamanho();
 		i3GEO.Interface.cria(tamanho[0],tamanho[1]);
+
 	},
 	/*
 	Function: inicia
@@ -466,8 +467,6 @@ var i3GEO = {
 		}
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.janela.fechaAguarde()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.fechaAguarde()");}
-		if(i3GEO.mapa.AUTORESIZE === true)
-		{i3GEO.mapa.ativaAutoResize();}
 		//eval(i3GEO.finaliza);
 	},
 	/*
@@ -485,6 +484,8 @@ var i3GEO = {
 		}
 		if(i3GEO.guias.TIPO === "movel")
 		{i3GEO.guias.guiaMovel.inicia();}
+		if(i3GEO.mapa.AUTORESIZE === true)
+		{i3GEO.mapa.ativaAutoResize();}
 	},
 	/*
 	Function: atualiza
@@ -510,7 +511,6 @@ var i3GEO = {
 	dessa chamada &eacute; armazenada em i3GEO.parametros
 	*/
 	atualiza: function(retorno){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.atualiza()");}
 		var corpoMapa,erro,mapscale,temp;
 		if(i3GEO.contadorAtualiza > 1){
 			i3GEO.contadorAtualiza--;return;
@@ -565,7 +565,7 @@ var i3GEO = {
 			}
 		}
 		catch(e){
-			if(typeof(console) !== 'undefined'){console.error("i3GEO.atualiza "+e);}
+
 		}
 		erro = function(){
 			var c = confirm("Ocorreu um erro, quer tentar novamente?");
@@ -734,28 +734,32 @@ var i3GEO = {
 		if(temp){
 			temp.style.width="100%";
 		}
+
 		i3GEO.parametros.w = w;
 		i3GEO.parametros.h = h;
-		i3GEO.php.mudatamanho(i3GEO.atualiza,h,w);
-		switch(i3GEO.Interface.ATUAL)
-		{
-			case "googlemaps":
-				i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
-				break;
-			case "googleearth":
-				i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
-				break;
-			case "openlayers":
-				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
-				i3geoOL.updateSize();
-				break;
-		}
-		if(i3GEO.guias.TIPO === "sanfona"){
-			i3GEO.guias.ALTURACORPOGUIAS = h - (antigoh - i3GEO.guias.ALTURACORPOGUIAS);
-		}
-		else
-		{i3GEO.guias.ALTURACORPOGUIAS = h;}
-		return [w,h];
+		temp = function(){
+			switch(i3GEO.Interface.ATUAL)
+			{
+				case "googlemaps":
+					i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
+					break;
+				case "googleearth":
+					i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
+					break;
+				case "openlayers":
+					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
+					i3geoOL.updateSize();
+					break;
+			}
+			if(i3GEO.guias.TIPO === "sanfona"){
+				i3GEO.guias.ALTURACORPOGUIAS = h - (antigoh - i3GEO.guias.ALTURACORPOGUIAS);
+			}
+			else{
+				i3GEO.guias.ALTURACORPOGUIAS = h;
+			}
+			return [w,h];
+		};
+		i3GEO.php.mudatamanho(temp,h,w);
 	},
 	/*
 	Atualiza os valores da vari&aacute;vel i3GEO.parametros
