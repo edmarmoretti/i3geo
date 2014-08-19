@@ -70,23 +70,25 @@ function markerclusterMapfile(){
 }
 function markerclusterEstilos($map_file,$layer,$tipoEstilos){
 	if($tipoEstilos == "default"){
-		$tipoEstilos = '{"estilos":[{url : i3GEO.configura.locaplic + "/imagens/google/m1",height : 53,width : 53},{url : i3GEO.configura.locaplic + "/imagens/google/m2",height : 56,width : 56},{url : i3GEO.configura.locaplic + "/imagens/google/m3",height : 66,width : 66},{url : i3GEO.configura.locaplic + "/imagens/google/m4",height : 78,width : 78},{url : i3GEO.configura.locaplic + "/imagens/google/m5",height : 90,width : 90}]}';
+		$tipoEstilos = '{"ponto":{url : i3GEO.configura.locaplic + "/imagens/google/symbol_blank.png",height : 20,width : 20},"estilos":[{url : i3GEO.configura.locaplic + "/imagens/google/m1.png",height : 53,width : 53},{url : i3GEO.configura.locaplic + "/imagens/google/m2.png",height : 56,width : 56},{url : i3GEO.configura.locaplic + "/imagens/google/m3.png",height : 66,width : 66},{url : i3GEO.configura.locaplic + "/imagens/google/m4.png",height : 78,width : 78},{url : i3GEO.configura.locaplic + "/imagens/google/m5.png",height : 90,width : 90}]}';
 	}
 	else{
-		$gradiente = array();
+		$tipoEstilos = array();
 		$mapa = ms_newMapObj($map_file);
 		$l = $mapa->getlayerbyname($layer);
 		$nc = $l->numclasses;
-		for ($c = 0;$c < $nc;$c++){
+		// a primeira classe e o ponto que nao entra no cluster
+		for ($c = 1;$c < $nc;$c++){
 			$classe = $l->getclass($c);
 			$estilo = $classe->getstyle(0);
-			$nome = $classe->name;
-			$cor = $estilo->color;
-			$scor = "rgb(".$cor->red.",".$cor->green.",".$cor->blue.")";
-			$gradiente[$nome] = $scor;
+			$tipoEstilos[] = array("url"=>$estilo->symbol,"height"=>$estilo->size,"width"=>$estilo->size);
 		}
-		//echo $map_file;exit;
-		$gradiente = json_encode(array("gradient"=>$gradiente));
+		$classe = $l->getclass(0);
+		$estilo = $classe->getstyle(0);
+		$tipoEstilos = json_encode(array(
+				"ponto"=>array("url"=>$estilo->symbol,"height"=>$estilo->size,"width"=>$estilo->size),
+				"estilos"=>$tipoEstilos
+		));
 	}
 	return $tipoEstilos;
 }

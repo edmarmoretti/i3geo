@@ -27,7 +27,7 @@ MAP
       "ltempoitemicone"	""
       "permitecomentario"	""
       "metaestat"	""
-      "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"tipoEstilos":"default","coluna":"","gridSize":"50"}}'
+      "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"tipoEstilos":"default","gridSize":"50"}}'
       "itembuscarapida"	""
       "arquivokmz"	""
       "arquivodownload"	""
@@ -47,36 +47,41 @@ MAP
     TILEITEM "location"
     TYPE POINT
     UNITS METERS
+    #
+    #se vc quiser especificar o simbolo que achar melhor, crie classes com a URL do simbolo e o SIZE
+    #a primeira classe sera utilizada como o simbolo para pontos (fora do cluster) e as demais como o simbolo para os clusters
+    #vc pode criar quantos clusters quiser
+    #no METADATA PLUGINI3GEO voce deve colocar "tipoEstilos":"" no lugar de "tipoEstilos":"default"
+    #
     CLASS
-      NAME "0.45"
+      NAME "Ponto"
       STYLE
-        COLOR 0 0 255
+        SIZE 20
+        #SYMBOL "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/people35.png"
       END # STYLE
     END # CLASS
     CLASS
-      NAME "0.55"
+      NAME "Cluster 1"
       STYLE
-        COLOR 0 255 255
+        SIZE 35
+        #SYMBOL "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/people35.png"
       END # STYLE
     END # CLASS
     CLASS
-      NAME "0.65"
+      NAME "Cluster 2"
       STYLE
-        COLOR 0 255 0
+      	SIZE 45
+        #SYMBOL "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/people45.png"
       END # STYLE
     END # CLASS
-    CLASS
-      NAME "0.95"
+     CLASS
+      NAME "Cluster 3"
       STYLE
-        COLOR 255 255 0
+        SIZE 55
+        #SYMBOL "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/people55.png"
       END # STYLE
     END # CLASS
-    CLASS
-      NAME "1"
-      STYLE
-        COLOR 255 0 0
-      END # STYLE
-    END # CLASS
+
   END # LAYER
 
 END # MAP

@@ -8,7 +8,7 @@ MAP
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "CLASSE"	"SIM"
       "TEMA"	"Localidades (usar com mapa de calor)"
-      "PLUGINI3GEO" '{"plugin":"heatmap","parametros":{"tipoGradiente":"","coluna":"","radius":15,"max":10}}' #se coluna for vazio, assume valor 1
+      "PLUGINI3GEO" '{"plugin":"heatmap","parametros":{"tipoGradiente":"default","coluna":"","radius":15,"max":10}}' #se coluna for vazio, assume valor 1
     END # METADATA
     NAME "_lmapadecalor"
     STATUS OFF
@@ -17,6 +17,11 @@ MAP
     OPACITY 70
     TYPE POINT
     UNITS METERS
+    #
+    #voce pode definir os intervalos das classes do mapa entre 0 e 1
+    #para usar as classe altere o METADATA PLUGINI3GEO colocando "tipoGradiente":"" no lugar de "tipoGradiente":"default"
+    #nas classes o NAME corresponde ao limite superior da classe e COLOR indica a cor
+    #
     CLASS
       NAME "0.45"
       COLOR 0 0 255
