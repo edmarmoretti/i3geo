@@ -48,8 +48,8 @@ var i3GeoMap = Backbone.View.extend({
 					//"<ul class='connectable ui-sortable' style=''>"+
 						"<input type=button name=mapaBarras value='Barras' />"+
 						"<input type=button name=mapaPizzas value='Pizzas' />"+
-						"&nbsp;<input type=button name=raiosProporcionais value='Raios proporcionais' />"+
-						"&nbsp;<input type=button name=circulosProporcionais value='C&iacute;rculos proporcionais' />"+
+						"&nbsp;<input type=button name=raiosProporcionais value='Raios' />"+
+						"&nbsp;<input type=button name=circulosProporcionais value='C&iacute;rculos' />"+
 						"&nbsp;<input type=button name=coresChapadas value='Cores' />"+
 						"&nbsp;<input type=button name=calor value='Calor' />"+
 						"&nbsp;<input type=button name=atualizarMapa value='Atualiza' />"+
@@ -327,9 +327,12 @@ var i3GeoMap = Backbone.View.extend({
 	calor: function(s){
 		this.opcoes.size = 10;
 		$.fancybox("Raio de um ponto em pixels:<br><input type=text value='10' size=6 id='calorRaio' /><br>" +
-				"Valor m&aacute;ximo em cada ponto:<br><input type=text value='10' size=6 id='calorMax' /><br>" +
 				"<br>Coluna com os valores:<br>"+
-				"<select id='calorColuna' style='border:1px solid #BBBBBB;'>"+this.opcoesColunas()+"</select>" +
+				"<select id='calorColuna' style='border:1px solid #BBBBBB;'>" +
+				"<option value=''>---</option>" +
+				this.opcoesColunas() +
+				"</select>" +
+				"<br>Ou valor de cada ponto:<br><input type=text value='1' size=6 id='valorPonto' /><br>" +
 				"<br><input type=button value='OK' id='calorOk' />" +
 				"&nbsp; <input type=button value='Cancela' id='calorCancela' />"
 				,
@@ -346,10 +349,9 @@ var i3GeoMap = Backbone.View.extend({
 		);
 		document.getElementById("calorOk").onclick = function(){
 			s.opcoes.tipo = "calor";
-			//s.opcoes.size = document.getElementById("raiosProporcionaisSize").value;
+			s.opcoes.valorPonto = document.getElementById("valorPonto").value;
 			s.opcoes.indicecoluna = [parseInt(document.getElementById("calorColuna").value,10)];
 			s.opcoes.raio = document.getElementById("calorRaio").value;
-			s.opcoes.max = document.getElementById("calorMax").value;
 			s.render();
 			$.fancybox.close();
 		};

@@ -81,6 +81,12 @@ foreach($dados as $dado){
 	}
 	$valores[] = "(".implode(",",$linha).")";
 }
+//
+//o nome da coluna com os dados e acentuado em alguns casos
+//por isso, camadas baseadas em plugins precisam mudar isso
+if($opcoes["tipo"] == "calor" && count($nomesColunas) > 1){
+	$nomesColunas[count($nomesColunas) - 1] = "colunaCalor";
+}
 $sqldados = "
 	select st_setsrid(".$sqlColunaGeo.",".$srid.") as $colunageo, ".implode(",",$colunastabela).",dataset.*
 	from ".$meta["esquemadb"].".".$meta["tabela"]." INNER JOIN
@@ -106,6 +112,9 @@ for($i=0;$i<$nlayers;$i++){
 		if($ll->getmetadata("SAIKU") != ""){
 			$ll->set("status",MS_OFF);
 		}
+	}
+	if($ll->getmetadata("tema") == "Limites"){
+		$ll->set("status",MS_DELETE);
 	}
 }
 
@@ -196,8 +205,9 @@ if($opcoes["tipo"] == "coresChapadas"){
 	$m->salva();
 }
 if($opcoes["tipo"] == "calor"){
-	$parametros = '{"plugin":"heatmap","parametros":{"tipoGradiente":"default","opacity":".8","coluna":"","radius":"'.$opcoes["raio"].'","max":"'.$opcoes["max"].'"}}';
+	$parametros = '{"plugin":"heatmap","parametros":{"tipoGradiente":"default","opacity":".8","valorPonto":'.$opcoes["valorPonto"].',"coluna":"'.$nomesColunas[1].'","radius":"'.$opcoes["raio"].'"}}';
 	$layer->setmetadata("PLUGINI3GEO",$parametros);
+	$layer->setmetadata("SAIKU",$opcoes["tipo"]);
 	$mapa->save($map_file);
 }
 header("Location:".$opcoes["locaplic"]."/mashups/openlayers.php?temas=".$map_file."&DESLIGACACHE=sim&botoes=legenda,pan,zoombox,zoomtot,zoomin,zoomout,distancia,area,identifica&controles=navigation,layerswitcher,scaleline,mouseposition,overviewmap,keyboarddefaults&tiles=false&mapext=".$opcoes["mapext"]);

@@ -20,7 +20,7 @@ function heatmapDados($map_file){
 	}
 	else{
 		foreach($registros as $r){
-			$resultado[] = '{"lat":"'.$r["y"].'","lng":"'.$r["x"].'","count":"'.$r[$coluna].'"}';
+			$resultado[] = '{"lat":"'.$r["y"].'","lng":"'.$r["x"].'","count":"'.$r["valores"][0]["valor"].'"}';
 		}
 	}
 	if (!connection_aborted()){
