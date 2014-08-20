@@ -1,6 +1,6 @@
 <?php
 function heatmapDados($map_file){
-	global $dir,$layer,$coluna;
+	global $dir,$layer,$coluna,$valorPonto;
 	//pega os dados e formata como uma string no formato
 	// [{"lat":"-21.7079984","lng":"-47.4913629","count":"1"}]
 	//os dados sao devolvidos como uma variavel javascript
@@ -10,9 +10,12 @@ function heatmapDados($map_file){
 	$registros = $m->listaRegistrosXY($coluna, "brasil", "tudo");
 	$n = count($registros);
 	$resultado = array();
+	if(empty($valorPonto)){
+		$valorPonto = 1;
+	}
 	if(empty($coluna)){
 		foreach($registros as $r){
-			$resultado[] = '{"lat":"'.$r["y"].'","lng":"'.$r["x"].'","count":"1"}';
+			$resultado[] = '{"lat":"'.$r["y"].'","lng":"'.$r["x"].'","count":"'.$valorPonto.'"}';
 		}
 	}
 	else{

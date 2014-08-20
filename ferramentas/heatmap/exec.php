@@ -17,12 +17,12 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		$layer = $map->getlayerbyname($tema);
 		$novolayer = ms_newLayerObj($map, $layer);
 		$novolayer->setmetadata("tema",$titulo);
-		if($coluna == ""){
-			$coluna = $valorPonto;
-		}
-		$parametros = '{"plugin":"heatmap","parametros":{"opacity":"'.$opacidade.'","coluna":"'.$coluna.'","radius":"'.$raio.'","max":"'.$max.'"}}';
+		$parametros = '{"plugin":"heatmap","parametros":{"tipoGradiente":"default","valorPonto":"'.$valorPonto.'","coluna":"'.$coluna.'","radius":"'.$raio.'"}}';
 		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
 		$novolayer->set("name",$nameLayer);
+		if(!empty($opacidade)){
+			$novolayer->set("opacity",$opacidade);
+		}
 		$map->save($map_file);
 		$retorno = $nameLayer;
 	break;

@@ -159,7 +159,7 @@ i3GEO.pluginI3geo =
 			formAdmin : function(config) {
 				// {"plugin":"heatmap","parametros":{"coluna":"","radius":15,"max":10}}
 				var parametros, ins = "", configDefault =
-					'{"plugin":"heatmap","parametros":{"tipoGradiente": "default","coluna":"1","radius":15,"max":10}}';
+					'{"plugin":"heatmap","parametros":{"tipoGradiente": "default","valorPonto":1,"coluna":"","radius":15}}';
 				if (config === "") {
 					config = configDefault;
 				}
@@ -170,18 +170,22 @@ i3GEO.pluginI3geo =
 				parametros = config.parametros;
 				ins +=
 					""
-						+ "<p>Coluna que cont&eacute;m os dados ou valor num&eacute;rico para cada ponto:"
+						+ "<p>Coluna que cont&eacute;m os dados:"
 						+ "<br><input name='coluna' type='text' value='"
 						+ parametros.coluna
+						+ "' size='30'></p>"
+						+ "<p>Ou valor num&eacute;rico para cada ponto:"
+						+ "<br><input name='valorPonto' type='text' value='"
+						+ parametros.valorPonto
 						+ "' size='30'></p>"
 						+ "<p>Raio de cada ponto em pixels:"
 						+ "<br><input name='radius' type='text' value='"
 						+ parametros.radius
 						+ "' size='30'></p>"
-						+ "<p>Valor m&aacute;ximo em cada ponto:"
-						+ "<br><input name='max' type='text' value='"
-						+ parametros.max
-						+ "' size='30'></p>"
+						//+ "<p>Valor m&aacute;ximo em cada ponto:"
+						//+ "<br><input name='max' type='text' value='"
+						//+ parametros.max
+						//+ "' size='30'></p>"
 						+ "<p>Tipo de gradiente (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
 						+ "<br><input name='tipoGradiente' type='text' value='"
 						+ parametros.tipoGradiente
@@ -291,10 +295,10 @@ i3GEO.pluginI3geo =
 					var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php", carregaJs =
 						"nao", criaLayer;
 					criaLayer = function() {
-						var heatmap, transformedTestData = {
-							max : camada.plugini3geo.parametros.max,
+						var temp, heatmap, transformedTestData = {
+							max : 1,
 							data : []
-						}, data = heatmap_dados, datalen = heatmap_dados.length, nudata = [];
+						}, data = heatmap_dados, datalen = heatmap_dados.length, nudata = [], max = 0;
 
 						// para uso com o mashup
 						if (!objMapa) {
@@ -307,11 +311,14 @@ i3GEO.pluginI3geo =
 						// count:
 						// <count>},...]}
 						while (datalen--) {
+							temp = heatmap_dados[datalen].count;
 							nudata.push({
 								lonlat : new OpenLayers.LonLat(data[datalen].lng, heatmap_dados[datalen].lat),
-								count : heatmap_dados[datalen].count
+								count : temp
 							});
+							max = Math.max(max, temp);
 						}
+						transformedTestData.max = max;
 						transformedTestData.data = nudata;
 						// create our heatmap layer
 						heatmap = new OpenLayers.Layer.Heatmap(camada.name, objMapa, objMapa.baseLayer, {
@@ -568,7 +575,8 @@ i3GEO.pluginI3geo =
 								symbolizer : {
 									externalGraphic : markercluster_config.ponto.url,
 									graphicWidth : markercluster_config.ponto.width,
-									graphicHeight : markercluster_config.ponto.height
+									graphicHeight : markercluster_config.ponto.height,
+									graphicYOffset: (markercluster_config.ponto.height / 2) * -1
 								}
 							});
 							regras.push(regra);
