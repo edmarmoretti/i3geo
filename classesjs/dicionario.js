@@ -2262,6 +2262,12 @@ es:""
 pt: "Links para abrir o mapa",
 en:"",
 es:""
+}],
+"x104": [
+{
+pt: "Mapa de agrupamentos",
+en:"",
+es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

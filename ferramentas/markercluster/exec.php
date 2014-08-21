@@ -7,7 +7,7 @@ $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
 /*
-Valor: CRIAHEATMAP
+Valor: CRIAMARKERCLUSTER
 
 Adiciona ao mapa uma nova camada para calculo do mapa de calor
 */
@@ -17,10 +17,7 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		$layer = $map->getlayerbyname($tema);
 		$novolayer = ms_newLayerObj($map, $layer);
 		$novolayer->setmetadata("tema",$titulo);
-		if($coluna == ""){
-			$coluna = $valorPonto;
-		}
-		$parametros = '{"plugin":"markercluster","parametros":{"opacity":"'.$opacidade.'","gridSize":"'.$gridSize.'"}}';
+		$parametros = '{"plugin":"markercluster","parametros":{"tipoEstilos": "default","opacity":"'.$opacidade.'","gridSize":"'.$gridSize.'"}}';
 		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
 		$novolayer->set("name",$nameLayer);
 		$map->save($map_file);

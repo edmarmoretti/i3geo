@@ -50,6 +50,17 @@ i3GEO.analise = {
 	 */
 	dialogo : {
 		/**
+		 * Function: markercluster
+		 *
+		 * Ferramenta mapa agrupamento de pontos
+		 */
+		markercluster : function() {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.markercluster()",
+				"markercluster",
+				"markercluster");
+		},
+		/**
 		 * Function: heatmap
 		 *
 		 * Ferramenta mapa de calor

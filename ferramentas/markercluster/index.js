@@ -120,10 +120,10 @@ i3GEOF.markercluster = {
 	iniciaJanelaFlutuante : function() {
 		var janela, divid, temp, titulo;
 		// cria a janela flutuante
-		titulo = $trad("x102")
+		titulo = $trad("x104")
 				+ " <a class=ajuda_usuario target=_blank href='"
 				+ i3GEO.configura.locaplic
-				+ "/ajuda_usuario.php?idcategoria=3&idajuda=121' >&nbsp;&nbsp;&nbsp;</a>";
+				+ "/ajuda_usuario.php?idcategoria=3&idajuda=123' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function() {
 		};
 		janela = i3GEO.janela.cria(
@@ -206,15 +206,21 @@ i3GEOF.markercluster = {
 	t2 : function() {
 		var ins = "<p class='paragrafo'>"
 				+ $trad(
-						4,
+						12,
 						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterd' type=text size=10 value='1'/>";
+		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterTitulo' type=text size=20 value='Mapa de calor'/>";
 
 		ins += "<br><br><p class='paragrafo' >"
 				+ $trad(
-						10,
+						13,
 						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><div id=i3GEOmarkerclusterondeItens style='text-align:left;display:block' ></div> ";
+		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterRaio' type=text size=10 value='50'/>";
+
+		ins += "<br><br><p class='paragrafo' >"
+				+ $trad(
+						14,
+						i3GEOF.markercluster.dicionario);
+		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterOpacidade' type=text size=10 value='50'/>";
 
 		i3GEO.util.proximoAnterior(
 				"i3GEOF.markercluster.t1()",
@@ -229,41 +235,6 @@ i3GEOF.markercluster = {
 	t3 : function() {
 		var ins = "<p class='paragrafo'>"
 				+ $trad(
-						12,
-						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterTitulo' type=text size=20 value='Mapa de calor'/>";
-
-		ins += "<br><br><p class='paragrafo' >"
-				+ $trad(
-						13,
-						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterRaio' type=text size=10 value='15'/>";
-
-		ins += "<br><br><p class='paragrafo' >"
-				+ $trad(
-						14,
-						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterOpacidade' type=text size=10 value='50'/>";
-
-		ins += "<br><br><p class='paragrafo' >"
-				+ $trad(
-						15,
-						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterMax' type=text size=10 value='10'/>";
-
-		i3GEO.util.proximoAnterior(
-				"i3GEOF.markercluster.t2()",
-				"i3GEOF.markercluster.t4()",
-				ins,
-				"i3GEOF.markercluster.t3",
-				"i3GEOmarkerclusterresultado",
-				true,
-				"i3GEOF.markercluster_rodape");
-		i3GEOF.markercluster.comboItens();
-	},
-	t4 : function() {
-		var ins = "<p class='paragrafo'>"
-				+ $trad(
 						6,
 						i3GEOF.markercluster.dicionario);
 		ins += "<br><br><input id=i3GEOmarkerclusterbotao1 type='button' value='"
@@ -272,10 +243,10 @@ i3GEOF.markercluster = {
 						i3GEOF.markercluster.dicionario)
 				+ "' />";
 		i3GEO.util.proximoAnterior(
-				"i3GEOF.markercluster.t3()",
+				"i3GEOF.markercluster.t2()",
 				"",
 				ins,
-				"i3GEOF.markercluster.t4",
+				"i3GEOF.markercluster.t3",
 				"i3GEOmarkerclusterresultado",
 				true,
 				"i3GEOF.markercluster_rodape");
@@ -315,20 +286,12 @@ i3GEOF.markercluster = {
 					+ "&funcao=criamarkercluster"
 					+ "&tema="
 					+ $i("i3GEOmarkerclustertemasComSel").value
-					+ "&multiplicar="
-					+ $i("i3GEOmarkerclusterdfator").value
-					+ "&coluna="
-					+ $i("i3GEOmarkerclustertemasItem").value
-					+ "&valorPonto="
-					+ $i("i3GEOmarkerclusterd").value
 					+ "&titulo="
 					+ $i("i3GEOmarkerclusterTitulo").value
 					+ "&opacidade="
 					+ $i("i3GEOmarkerclusterOpacidade").value
-					+ "&max="
-					+ $i("i3GEOmarkerclusterRaio").value
-					+ "&raio="
-					+ $i("i3GEOmarkerclusterMax").value;
+					+ "&gridSize="
+					+ $i("i3GEOmarkerclusterRaio").value;
 
 			cp = new cpaint();
 			cp.set_response_type("JSON");
@@ -387,12 +350,7 @@ i3GEOF.markercluster = {
 				"i3GEOmarkerclustertemasItem",
 				$i("i3GEOmarkerclustertemasComSel").value,
 				function(retorno) {
-					$i("i3GEOmarkerclusterondeItens").innerHTML = retorno.dados
-							+ " "
-							+ $trad(
-									11,
-									i3GEOF.markercluster.dicionario)
-							+ " <input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterdfator' type=text size=10 value='1'/>";
+					$i("i3GEOmarkerclusterondeItens").innerHTML = retorno.dados;
 					$i("i3GEOmarkerclusterondeItens").style.display = "block";
 				},
 				"i3GEOmarkerclusterondeItens");
