@@ -45,19 +45,20 @@ i3GEOF.listamapas = {
 		if($i("i3GEOF.listamapas_corpo")){
 			return;
 		}
-		var minimiza,cabecalho,janela,divid;
+		var minimiza,cabecalho,janela,divid,titulo;
 		cabecalho = function(){
 		};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.listamapas");
 		};
+		titulo = "Mapas"+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=9&idajuda=125' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"350px",
 			"300px",
 			"",
 			"",
 			"",
-			"Mapas",
+			titulo,
 			"i3GEOF.listamapas",
 			false,
 			"hd",
