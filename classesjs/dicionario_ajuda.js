@@ -113,7 +113,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/convertekml",
 			categoria:"2",
 			pt:"Convertendo o mapa atual em KML &eacute; poss&iacute;vel utilizar outros softwares para visualizar o mesmo mapa visto no i3Geo. O resultado da convers&atilde;o &eacute; um endere&ccedil;o (url) tempor&aacute;rio, esse endere&ccedil;o deve ser inserido no software que se quer usar e que suporte KML. Para usar o KML no Google Earth, utilize a op&ccedil;&atilde;o desse softawre chamada 'adicionar link de rede'.",
-			complemento:"KML &eacute; um padr&atilde;o internacional e n&atilde;o espec&iacute;fico do i3Geo. Conforme as caracter&iacute;sticas de cada servidor onde o i3Geo estiver instalado, o KML poder&aacute; permanecer dispon&iacute;vel por per&iacute;odos de tempo vari&aacute;veis. O KML gerado pelo i3Geo n&atilde;o cont&eacute;m as coordenadas dos elementos de uma camada, mas sim um WMS embutido no KML. Essa estrutura limita o uso do KML mas permite uma maior performance no acesso aos dados. Mais informa&ccedil;&otilde;es em <a href='www.opengeospatial.org' >OGC.</a>",
+			complemento:"KML &eacute; um padr&atilde;o internacional e n&atilde;o espec&iacute;fico do i3Geo. Conforme as caracter&iacute;sticas de cada servidor onde o i3Geo estiver instalado, o KML poder&aacute; permanecer dispon&iacute;vel por per&iacute;odos de tempo vari&aacute;veis. O KML gerado pelo i3Geo n&atilde;o cont&eacute;m as coordenadas dos elementos de uma camada, mas sim um WMS embutido no KML. Essa estrutura limita o uso do KML mas permite uma maior performance no acesso aos dados. Mais informa&ccedil;&otilde;es em <a href='www.opengeospatial.org' target=blanck >OGC</a>.",
 			//tela:"",
 			apijs:"i3GEO.mapa.dialogo.convertekml()"
 		},
@@ -175,7 +175,7 @@ g_traducao_ajuda = {
 			titulo: "Distribui&ccedil;&atilde;o de pontos",
 			diretorio:"i3geo/ferramentas/pontosdistri",
 			categoria:"3",
-			pt:"Essa op&ccedil;&atilde;o disponibiliza v&aacute;rias ferramentas de an&aacute;lise de distribui&ccedil;&atilde;o de pontos, a maior parte baseia-se no software estat&iacute;stico < href='www.r-project.org' >R</a>. Algumas das an&aacute;lises geram como resultado imagens RASTER e outras temas lineares e poligonais. A op&ccedil;&atilde;o de relat&oacute;rio gera uma nova p&aacute;gina com v&aacute;rios &iacute;ndices calculados com o software R.",
+			pt:"Essa op&ccedil;&atilde;o disponibiliza v&aacute;rias ferramentas de an&aacute;lise de distribui&ccedil;&atilde;o de pontos, a maior parte baseia-se no software estat&iacute;stico <a href='www.r-project.org' target=blanck >R</a>. Algumas das an&aacute;lises geram como resultado imagens RASTER e outras temas lineares e poligonais. A op&ccedil;&atilde;o de relat&oacute;rio gera uma nova p&aacute;gina com v&aacute;rios &iacute;ndices calculados com o software R.",
 			complemento:"A imagem RASTER resultante utiliza a resolu&ccedil;&atilde;o (tamanho do pixel) compat&iacute;vel com a escala utilizada no mapa que est&aacute; sendo visto. A representa&ccedil;&atilde;o utiliza, por padr&atilde;o, tons de cinza. A altera&ccedil;&atilde;o nas cores utilizadas na representa&ccedil;&atilde;o podem melhorar de forma significativa a visualiza&ccedil;&atilde;o dos resultados. Utilize a op&ccedil;&atilde;o de edi&ccedil;&atilde;o da legenda do tema para fazer isso. As an&aacute;lises de distribui&ccedil;&atilde;o de pontos s&atilde;o realizadas com o software R. As an&aacute;lises de densidade de pontos, dist&acirc;ncia entre pontos e kernel, foram implantadas utilizando-se a biblioteca <a href='http://cran.r-project.org/web/packages/spatstat' target=blanck >SPATSTAT</a> do R. As an&aacute;lises de Delaunay e Voronoi utilizam a biblioteca <a href='http://cran.r-project.org/web/packages/deldir' target=blanck >DELDIR</a> e a an&aacute;lise de cluster espacial utiliza o <a href='http://cran.r-project.org/web/packages/spatclus' target=blanck >SPATCLUS</a>. As an&aacute;lises podem consumir muito tempo de processamento, portanto, tenha cuidado com o n&uacute;mero de pontos."
 		},
 		"21": {
@@ -214,7 +214,7 @@ g_traducao_ajuda = {
 			titulo: "Agrupa elementos",
 			diretorio:"i3geo/ferramentas/agrupaelementos",
 			categoria:"3",
-			pt:"Essa ferramenta transforma v&aacute;rios elementos selecionados de um tema em um s&oacute; criando pol&iacute;gonos agrupados. Para definir quais elementos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema. Os elementos que possu&iacute;rem o mesmo valor nesse item ser&atilde;o considerados no mesmo grupo e suas divisas eliminadas. Caso n&atilde; tenha sido escolhido nenhum item, todas os elementos ser&atilde;o agrupados em um s&oacute;.",
+			pt:"Essa ferramenta transforma v&aacute;rios elementos selecionados de um tema em um s&oacute; criando pol&iacute;gonos agrupados. Para definir quais elementos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema. Os elementos que possu&iacute;rem o mesmo valor nesse item ser&atilde;o considerados no mesmo grupo e suas divisas eliminadas. Caso n&atilde;o tenha sido escolhido nenhum item, todas os elementos ser&atilde;o agrupados em um s&oacute;.",
 			complemento:"O resultado final ser&aacute; um novo tema com pol&iacute;gonos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas o item escolhido.",
 			//tela:"ferramentas/agrupaelementos/exemplo.htm",
 			apijs:"i3GEO.analise.dialogo.agrupaElementos()"
@@ -260,7 +260,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/nuvemtags",
 			categoria:"4",
 			pt:"A nuvem de tags &eacute; uma forma de localizar camadas dispon&iacute;veis para ser vistas no mapa. A busca &eacute; feita por meio de tags ou palavras-chave. As tags s&atilde;o registradas pelo administrador do i3Geo para cada tema dispon&iacute;vel na &aacute;rvore de temas.",
-			complemento:"Ao escolher uma tag, &eacute; feita dos temas correspondentes e o resultado &eacute; adicionado &agrave; arvore de temas. Opcionalmente, o usu&aacute;rio pode escolher navegar na nuvem 'animada' que mostra as tags como um globo 3d.",
+			complemento:"Ao escolher uma tag, &eacute; realizada uma busca dos temas correspondentes e o resultado &eacute; adicionado &agrave; arvore de temas. Opcionalmente, o usu&aacute;rio pode escolher navegar na nuvem 'animada' que mostra as tags como um globo 3d.",
 			//tela:"ferramentas/nuvemtags/exemplo.htm",
 			apijs:"i3GEO.arvoreDeTemas.conectargeorss.nuvemTags()"
 		},
@@ -269,7 +269,7 @@ g_traducao_ajuda = {
 			diretorio:"classe_arvoredetemas.js",
 			categoria:"4",
 			pt:"Localiza temas dispon&iacute;veis nos menus da &aacute;rvore de adi&ccedil;&atilde;o de temas. Os temas localizados s&atilde;o inclu&iacute;dos em um novo n&oacute; da &aacute;rvore, possibilitando sua adi&ccedil;&atilde;o ao mapa.",
-			complemento:"Para procurar um tema, digite a palavra ou frase no campo de texto e clique no &iacute;cone existente no lado direito.",
+			complemento:"Para procurar um tema, digite a palavra ou frase no campo de texto e clique no &iacute;cone existente no lado direito. O resultado da busca aparecer&aacute; como um n&oacute; na &aacute;rvore de temas do cat&aacute;logo.",
 			apijs: "i3GEO.arvoreDeTemas.buscaTema(palavra)"
 		},
 		"32": {
@@ -300,8 +300,8 @@ g_traducao_ajuda = {
 			titulo: "Procurar ocorr&ecirc;ncias",
 			diretorio:"i3geo/ferramentas/busca",
 			categoria:"5",
-			pt:"Cada tema possu&iacute; um conjunto de dados descritivos associados aos elementos geogr&aacute;ficos (tabela de atributos). A op&ccedil;&atilde;o 'procurar' realiza uma pesquisa nesses atributos e localiza as correspond&ecirc;ncias. O resultado &eacute; mostrado em uma lista de elementos que permite destacar cada um deles.",
-			complemento:"Para fazer a busca deve-se selecionar em quais titens da tabela de atributos a mesma ser&aacute; feita, podendo-se escolher mais de um. A busca pode ser feita no mapa todo ou apenas na regi&atilde;o vis&iacute;vel do mapa.",
+			pt:"Cada tema possui um conjunto de dados descritivos associados aos elementos geogr&aacute;ficos (tabela de atributos). A op&ccedil;&atilde;o 'procurar' realiza uma pesquisa nesses atributos e localiza as correspond&ecirc;ncias. O resultado &eacute; mostrado em uma lista de elementos que permite destacar cada um deles.",
+			complemento:"Para fazer a busca deve-se selecionar em quais itens da tabela de atributos a mesma ser&aacute; feita, podendo-se escolher mais de um. A busca pode ser feita no mapa todo ou apenas na regi&atilde;o vis&iacute;vel do mapa.",
 			//tela:"ferramentas/busca/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.procuraratrib()"
 		},
@@ -309,8 +309,8 @@ g_traducao_ajuda = {
 			titulo: "Topon&iacute;mia",
 			diretorio:"i3geo/ferramentas/toponimia",
 			categoria:"5",
-			pt:"A topon&iacute;mia s&atilde;o os textos mostrados no mapa que identificam lugares ou elementos que constituem um tema. Os textos s&atilde;o baseados na tabela de atributos de cada tema, que cont&eacute;m os dados descritivos de cada elemento.",
-			complemento:"Ao inserir uma topon&iacute;mia, um novo tema &eacute; adicionado ao mapa, podendo ser exclu&iacute;do ou movimentado. Dessa forma &eacute; poss&iacute;vel incluir mais de um tema com a topon&iacute;mia. Ao inserir a topon&iacute;mia deve-se esco&ccedil;her o item da tabela de atributos e, caso necess&aacute;rio, pode-se modificar as op&ccedil;&otilde;es padr&atilde;o de simbologia utilizadas nos textos, como fonte, cor, m&aacute;scara, etc. &Eacute; poss&iacute;vel ainda testar as op&ccedil;&otilde;es antes de concluir a inclus&atilde;o da topon&iacute;mia.",
+			pt:"A topon&iacute;mia s&atilde;o os textos mostrados no mapa que identificam lugares ou elementos que constituem um tema. Os textos s&atilde;o baseados na tabela de atributos de cada tema, que cont&ecirc;m os dados descritivos de cada elemento.",
+			complemento:"Ao inserir uma topon&iacute;mia, um novo tema &eacute; adicionado ao mapa, podendo ser exclu&iacute;do ou movimentado. Dessa forma &eacute; poss&iacute;vel incluir mais de um tema com a topon&iacute;mia. Ao inserir a topon&iacute;mia deve-se escolher o item da tabela de atributos e, caso necess&aacute;rio, pode-se modificar as op&ccedil;&otilde;es padr&atilde;o de simbologia utilizadas nos textos, como fonte, cor, m&aacute;scara, etc. &Eacute; poss&iacute;vel ainda testar as op&ccedil;&otilde;es antes de concluir a inclus&atilde;o da topon&iacute;mia.",
 			//tela:"ferramentas/toponimia/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.toponimia()"
 		},
@@ -318,7 +318,7 @@ g_traducao_ajuda = {
 			titulo: "Etiquetas",
 			diretorio:"i3geo/ferramentas/etiqueta",
 			categoria:"5",
-			pt:"As etiquetas s&atilde;o textos descritivos mostrados no mapa quando o mouse &eacute; estacionado por alguns instantes sobre um elemento. Cada tema pode ter uma etiqueta ativa, sendo esta baseada em um item da tabela de atributos do tema.",
+			pt:"As etiquetas s&atilde;o textos descritivos mostrados no mapa quando o mouse &eacute; estacionado por alguns instantes sobre um elemento ou utilizando a ferramenta etiqueta presente na barra de bot&otilde;es. Cada tema pode ter uma etiqueta ativa, sendo esta baseada em um item da tabela de atributos do tema.",
 			complemento:"Para ver as etiquetas, ative a opera&ccedil;&atilde;o de identifica&ccedil;&atilde;o.",
 			//tela:"ferramentas/etiqueta/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.etiquetas()"
@@ -354,7 +354,7 @@ g_traducao_ajuda = {
 			titulo: "Editor de legenda",
 			diretorio:"i3geo/ferramentas/legenda",
 			categoria:"5",
-			pt:"A legenda de um tema consiste nas defini&ccedil;&otilde;es dos s&iacute;mbolos utilizados na representa&ccedil;&atilde;o de cada elemento. A l&eacute;m dos s&iacute;mbolos, uma das propriedades da legenda &eacute; o tipo de classifica&ccedil;&atilde;o utilizado na representa&ccedil;&atilde;o dos dados, por exemplo, pode-se mostrar todos os elementos com um &uacute;nico s&iacute;mbolo ou agrupar elementos e utilizar s&iacute;mbolos diferentes para cada grupo. No editor, a guia 'Classes' permite definir a classifica&ccedil;&atilde;o e na guia principal s&atilde;o mostrados os s&iacute;mbolos. Quando um s&iacute;mbolo &eacute; clicado, &eacute; ativada a guia que permite definir as caracter&iacute;sticas do s&iacute;mbolo.",
+			pt:"A legenda de um tema consiste nas defini&ccedil;&otilde;es dos s&iacute;mbolos utilizados na representa&ccedil;&atilde;o de cada elemento. Al&eacute;m dos s&iacute;mbolos, uma das propriedades da legenda &eacute; o tipo de classifica&ccedil;&atilde;o utilizado na representa&ccedil;&atilde;o dos dados, por exemplo, pode-se mostrar todos os elementos com um &uacute;nico s&iacute;mbolo ou agrupar elementos e utilizar s&iacute;mbolos diferentes para cada grupo. No editor, a guia 'Classes' permite definir a classifica&ccedil;&atilde;o e na guia principal s&atilde;o mostrados os s&iacute;mbolos. Quando um s&iacute;mbolo &eacute; clicado, &eacute; ativada a guia que permite definir as caracter&iacute;sticas do s&iacute;mbolo.",
 			complemento:"As classes s&atilde;o definidas por meio de express&otilde;es que definem um tipo de filtro que ser&aacute; usado para definir que elementos fazem parte de cada classe. O editor possui alguns m&eacute;todos para defini&ccedil;&atilde;o autom&aacute;tica das classes, mas pode-se incluir classes livremente digitando-se o filtro. Veja <a href='http://mapserver.org/mapfile/class.html' >como</a>.",
 			//tela:"ferramentas/legenda/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.editaLegenda()"
@@ -662,7 +662,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/inseregrafico",
 			categoria:"5",
 			pt:"Insere gr&aacute;ficos em um elemento de um tema de forma interativa.",
-			complemento:"",
+			complemento:"Para inserir gr&aacute;ficos no mapa, &eacute; necess&aacute;rio escolher os atributos do tema que ser&atilde;o considerados para a gera&ccedil;&atilde;o do gr&aacute;fico. Feito isso, clique sobre um elemento do tema utilizado e o gr&aacute;fico ser&aacute; inserido no mapa na forma de um novo tema.",
 			apijs:"i3GEO.mapa.dialogo.cliqueGrafico()"
 		},
 		"81": {
@@ -688,7 +688,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/inseretxt",
 			categoria:"5",
 			pt:"Insere textos em local do mapa de forma interativa.",
-			complemento:"",
+			complemento:"Voc&ecirc; pode inserir um texto espec&iacute;fico no mapa simplesmente digitando o texto na janela da ferramenta e clicando no local desejado no mapa, ou ainda utilizar os atributos de uma camada para capturar o texto da regi&atilde;o clicada.",
 			apijs:"i3GEO.mapa.dialogo.cliqueTexto()"
 		},
 		"84": {
@@ -744,7 +744,7 @@ g_traducao_ajuda = {
 		},
 		"90": {
 			titulo: "Cortina",
-			diretorio:"i3geo/ferramentas/outputformat",
+			diretorio:"i3geo/ferramentas/cortina",
 			categoria:"5",
 			pt:"Permite mostrar e esconder uma camada existente no mapa em um movimento cont&iacute;nuo. O efeito 'cortina' permite comparar um tema com outro.",
 			complemento:"",
@@ -760,7 +760,7 @@ g_traducao_ajuda = {
 			apijs:"i3GEO.tema.dialogo.aplicarsld()"
 		},
 		"92": {
-			titulo: "Aplicar SLD",
+			titulo: "Salvar o mapfile",
 			diretorio:"i3geo/ferramentas/salvamapfile",
 			categoria:"5",
 			pt:"Salva as defini&ccedil;&otilde;es da camada no arquivo mapfile de origem",
@@ -806,7 +806,7 @@ g_traducao_ajuda = {
 			titulo: "Filtro de camadas",
 			diretorio:"",
 			categoria:"7",
-			pt:"Filtra as camadas que s&atilde;o mostradas na &aacute;rvore de camadas conforme as caracter&iacute;sticas de cada uma",
+			pt:"Filtra as camadas que s&atilde;o mostradas na &aacute;rvore de camadas conforme as caracter&iacute;sticas de cada uma.",
 			complemento:"",
 			//tela:"",
 			apijs:"i3GEO.arvoreDeCamadas"
@@ -941,7 +941,7 @@ g_traducao_ajuda = {
 			titulo: "&Aacute;rvore de endere&ccedil;os WMS Metaestat",
 			diretorio:"classe_arvoredetemas.js",
 			categoria:"4",
-			pt:"Mostra os WMS cuja origem &eacute; o sistema de metadados estat&iacute;cos. Esse sistema apresenta cartogramas gerados de forma din&aacute;mica no padr&atilde;o WMS-Time",
+			pt:"Mostra os WMS cuja origem &eacute; o sistema de metadados estat&iacute;sticos. Esse sistema apresenta cartogramas gerados de forma din&acirc;mica no padr&atilde;o WMS-Time.",
 			complemento:"",
 			apijs: "i3GEO.arvoreDeTemas.listaWMSmetaestat(node)"
 		},
@@ -957,7 +957,7 @@ g_traducao_ajuda = {
 			titulo: "Visualizador INDE",
 			diretorio:"i3geo/ferramentas/vinde",
 			categoria:"7",
-			pt:"Essa ferramenta apresenta os servi&ccedil;os WMS cadastrados no servidor da Infra-estrutura Nacional de Dados Espaciais do Brasil. O usu&aacute;rio pode escolher diferentes camadas para visualiza&ccedil;&atilde;o e consulta.",
+			pt:"Essa ferramenta apresenta os servi&ccedil;os WMS cadastrados no servidor da Infraestrutura Nacional de Dados Espaciais do Brasil. O usu&aacute;rio pode escolher diferentes camadas para visualiza&ccedil;&atilde;o e consulta.",
 			complemento:"",
 			apijs: "i3GEO.arvoreDeTemas.dialogo.vinde()"
 		},
@@ -970,7 +970,7 @@ g_traducao_ajuda = {
 			apijs: "i3GEO.mapa.dialogo.preferencias()"
 		},
 		"116": {
-			titulo: "Upload se s&iacute;mbolo",
+			titulo: "Upload de s&iacute;mbolo",
 			diretorio:"i3geo/ferramentas/uploadsimbolo",
 			categoria:"4",
 			pt:"Envia para o servidor um arquivo de imagem que poder&aacute; ser utilizado como s&iacute;mbolo nas legendas das camadas",
@@ -983,7 +983,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/saiku",
 			categoria:"5",
 			pt:"Abre o sistema Saiku que permite o cruzamento de vari&aacute;veis estat&iacute;sticas. O Saiku utiliza o sistema de metadados estat&iacute;sticos para gerar cubos tridimensionais que permitem ao cruzamento de dados tabulares, gera&ccedil;&atilde;o de gr&aacute;ficos e relat&oacute;rios. O usu&aacute;rio deve adicionar ao mapa pelo menos uma camada com localidades originadas do sistema de metadados. Os elementos dessa camada que estiverem selecionados ser&atilde;o utilizados como filtro no Saiku.",
-			complemento:"",
+			complemento:"As vari&aacute;veis cruzadas no Saiku podem gerar artefatos como tabelas, gr&aacute;ficos, relat&oacute;rios e mapas que podem ser visualizados no i3Geo utilizando o bot&atilde;o 'Atualiza o mapa' presente na ferramenta de integra&ccedil;&atilde;o entre os sistemas.",
 			//tela:"ferramentas/upload/exemplo.htm",
 			apijs:""
 		},
@@ -1016,8 +1016,8 @@ g_traducao_ajuda = {
 			titulo: "Mapa de calor",
 			diretorio:"i3geo/ferramentas/heatmap/index.js",
 			categoria:"3",
-			pt:"Obt&eacute;m os dados de um tema pontual, linear ou poligonal e calcula para toda a &aacute;rea vis&iacute;ve os prov&aacute;veis valores, o resultado &eacute; uma representa&ccedil;&atilde;o cont&iacute;nua dos valores em classes de cores. O c&aacute;lculo da camada &eacute; feita diretamente no navegador utilizando-se um programa em javascript.",
-			complemento:"",
+			pt:"Obt&eacute;m os dados de um tema pontual, linear ou poligonal e calcula para toda a &aacute;rea vis&iacute;vel os prov&aacute;veis valores. O resultado &eacute; uma representa&ccedil;&atilde;o cont&iacute;nua dos valores em classes de cores. O c&aacute;lculo da camada &eacute; feito diretamente no navegador utilizando-se um programa em javascript.",
+			complemento:"A ferramenta adiciona um novo tema ao mapa contendo o mapa de calor e utiliza como refer&ecirc;ncia para a cria&ccedil;&atilde;o da legenda as classes da camada original. No caso de camadas lineares ou poligonais, ser&aacute; considerado o centroide de cada elemento.",
 			apijs:"i3GEO.mapa.dialogo.heatmap()"
 		},
 		"122": {
@@ -1030,12 +1030,27 @@ g_traducao_ajuda = {
 		},
 		"123": {
 			titulo: "Congela a vis&atilde;o atual",
-			diretorio:"",
+			diretorio:"i3geo/ferramentas/congelamapa/openlayers.php",
 			categoria:"6",
-			pt:"Abre uma nova janela com a visualização atual do mapa, mantendo o nível de zoom e as camadas ativas.",
-			complemento:"Existem v&aacute;rias maneiras de fazer a sele&ccedil;&atilde;o: clicando-se sobre cada elemento, desenhando-se um ret&acirc;ngulo ou pol&iacute;gono no mapa, definindo-se uma express&atilde;o que ir&aacute; buscar os elementos aderentes (com base na tabela de atributos) ou cruzando-se um tema com outro. Tendo-se um conjunto j&aacute; definido, novos elementos podem ser acrescentados ou retirados da sele&ccedil;&atilde;o.",
-			//tela:"",
+			pt:"Abre uma nova janela com a visualiza&ccedil;&atilde;o atual do mapa, mantendo o n&iacute;vel de zoom e as camadas ativas.",
+			complemento:"O mapa &eacute; mostrado na forma de uma imagem, ou seja, mant&eacute;m os elementos do mapa est&aacute;ticos mesmo que se desative as camadas ou altere a regi&atilde;o de visualiza&ccedil;&atilde;o do mapa original. Esta ferramenta &eacute; &uacute;til quando se deseja manter uma determinada regi&atilde;o do mapa sempre vis&iacute;vel enquanto se navega pelas demais regi&otilde;es do mesmo.",
 			apijs:"i3GEO.mapa.dialogo.congelaMapa();"
+		},
+		"124": {
+			titulo: "Cartogramas estat&iacute;sticos",
+			diretorio:"i3geo/ferramentas/metaestat/index.js",
+			categoria:"9",
+			pt:"A ferramenta Cartogramas Estat&iacute;sticos &eacute; utilizada como uma integra&ccedil;&atilde;o entre o mapa interativo e o sistema de metadados estat&iacute;sticos. Al&eacute;m de funcionar como um cat&aacute;logo de camadas oriundas do sistema de metadados estat&iacute;sticos, ela permite a cria&ccedil;&atilde;o, edi&ccedil;&atilde;o e an&aacute;lise de vari&aacute;veis sem a necessidade de acesso ao sistema de administra&ccedil;&atilde;o.",
+			complemento:"Voc&ecirc; pode construir um cartograma a partir da adi&ccedil;&atilde;o das vari&aacute;veis, medidas de vari&aacute;veis e par&acirc;metros constantes no sistema de metadados estat&iacute;sticos. Basta selecionar os componentes da camada e clicar em ''Adicionar camada ao mapa'.<p>O bot&atilde;o ''Edi&ccedil;&atilde;o'' abre o m&oacute;dulo ''Ajudante do editor'', que pode redirecionar o usu&aacute;rio para o ''Editor avan&ccedil;ado'' de vari&aacute;veis, diretamente no sistema de administra&ccedil;&atilde;o, para o ''Editor de limites'', onde o usu&aacute;rio pode editar os limites das camadas pertencentes ao cadastro de regi&otilde;es geogr&aacute;ficas, ou ainda acessar o gerenciador de banco de dados para a inclus&atilde;o de novos dados. Ainda por meio do ''Ajudante do editor'', o usu&aacute;rio pode editar vari&aacute;veis, medidas de vari&aacute;veis ou classifica&ccedil;&otilde;es, ou ainda criar novos elementos para a composi&ccedil;&atilde;o de uma camada no sistema de metadados estat&iacute;sticos.<p>O bot&atilde;o ''An&aacute;lise'' abre uma s&eacute;rie de ferramentas que podem ser utilizadas para uma configura&ccedil;&atilde;o e um exame mais aprofundado dos dados constantes nas vari&aacute;veis.",
+			apijs:"javascript:i3GEO.mapa.dialogo.metaestat();"
+		},
+		"125": {
+			titulo: "Aplicativos estat&iacute;sticos cadastrados",
+			diretorio:"i3geo/ferramentas/metaestat/listamapas.js",
+			categoria:"9",
+			pt:"Lista os mapas cadastrados pelo publicador de mapas do sistema de metadados estat&iacute;sticos, apresentando as diferentes op&ccedil;&otilde;es de interface para abri-los.",
+			complemento:"",
+			apijs:"javascript:i3GEO.mapa.dialogo.metaestatListaMapas();"
 		}
 	}
 };
@@ -1047,7 +1062,8 @@ g_traducao_ajuda_categorias = {
 	"5":{titulo:"Opera&ccedil;&otilde;es sobre um tema",observacao:"Uma das caracter&iacute;sticas do i3Geo &eacute; a possibilidade de modifica&ccedil;&atilde;o das camadas vistas no mapa. As op&ccedil;&otilde;es que permitem isso s&atilde;o mostradas normalmente na lista de camadas dispon&iacute;veis no mapa atual. Essa lista &eacute; mostrada como uma &aacute;rvore hier&aacute;rquica sendo que cada camada &eacute; um dos n&oacute;s. Expandindo-se esse n&oacute;, tem-se acesso &agrave;s opera&ccedil;&otilde;es."},
 	"6":{titulo:"Opera&ccedil;&otilde;es sobre o mapa"},
 	"7":{titulo:"Navega&ccedil;&atilde;o",observacao:"As fun&ccedil;&otilde;es de navega&ccedil;&atilde;o permitem alterar a escala do mapa e modificar a abrang&ecirc;ncia espacial. Esse tipo de mudan&ccedil;a, principalmente de escala, afeta o contexto do mapa, modificando seu comportamento. Algumas camadas podem ser sens&iacute;veis &agrave; escala, mostrando ou n&atilde;o determinados elementos. Quando uma camada possuir muitos elementos, &eacute; aconselh&aacute;vel seu desligamento at&eacute; que a regi&atilde;o desejada seja encontrada. Algumas interfaces possuem mecanismos distintos de navega&ccedil;&atilde;o, como Google e openLayers. A lista abaixo contempla apenas a interface padr&atilde;o."},
-	"8":{titulo:"Pesquisa"}
+	"8":{titulo:"Pesquisa"},
+	"9":{titulo:"Metadados estat&iacute;sticos",observacao:""}
 };
 //inserir os aplicativos adicionais
 /*
