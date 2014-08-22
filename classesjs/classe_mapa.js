@@ -595,14 +595,15 @@ i3GEO.mapa =
 			 */
 			congelaMapa : function() {
 				var url = "", idjanela = YAHOO.util.Dom.generateId(), cabecalho = function() {
-				}, minimiza = function() {
+				}, titulo, minimiza = function() {
 					i3GEO.janela.minimiza(idjanela);
 				};
 				if (i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps") {
 					url =
 						i3GEO.configura.locaplic + "/ferramentas/congelamapa/openlayers.php?g_sid=" + i3GEO.configura.sid + "&ext="
 							+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-					i3GEO.janela.cria("500px", "350px", url, "", "", $trad("x64"), idjanela, false, "hd", cabecalho, minimiza);
+					titulo = "Mapa"+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=123' >&nbsp;&nbsp;&nbsp;</a>";
+					i3GEO.janela.cria("500px", "350px", url, "", "", titulo, idjanela, false, "hd", cabecalho, minimiza);
 				}
 			},
 			/*
