@@ -2376,7 +2376,7 @@ i3GEOF.metaestat = {
 		 * Para capturar o objeto janela utilize janela = YAHOO.i3GEO.janela.manager.find("i3geoCartoParametros");
 		 */
 		abreJanela: function(){
-			var cabecalho,minimiza,imagemxy,janela,modal = false;
+			var cabecalho,minimiza,imagemxy,janela,modal,titulo = false;
 			if (!$i("i3geoCartoParametros")){
 				cabecalho = function(){
 				};
@@ -2386,13 +2386,14 @@ i3GEOF.metaestat = {
 				if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
 					modal = true;
 				}
+				titulo = $trad("x57")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=9&idajuda=124' >&nbsp;&nbsp;&nbsp;</a>";
 				janela = i3GEO.janela.cria(
 						i3GEOF.metaestat.LARGURA+10+"px",
 						i3GEOF.metaestat.ALTURA+"px",
 						"",
 						"",
 						"",
-						$trad("x57"),
+						titulo,
 						"i3geoCartoParametros",
 						modal,
 						"hd",
