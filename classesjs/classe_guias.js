@@ -365,10 +365,6 @@ i3GEO.guias = {
 	 * onde {String} - id do elemento que conter&aacute; as guias
 	 */
 	cria : function(onde) {
-
-		if (typeof (console) !== 'undefined') {
-			console.info("i3GEO.guias.cria()");
-		}
 		//
 		// obt&eacute;m outras guias que podem existir no mapa
 		//
@@ -592,12 +588,7 @@ i3GEO.guias = {
 					}
 				}
 			}
-		} catch (e) {
-			if (typeof (console) !== 'undefined') {
-				console.error("i3GEO.guias.cria "
-						+ e);
-			}
-		}
+		} catch (e) {}
 		if (i3GEO.guias.TIPO !== "tablet") {
 			i3GEO.guias.mostra(i3GEO.guias.ATUAL);
 			i3GEO.guias.ativa(i3GEO.guias.ATUAL);
@@ -609,9 +600,6 @@ i3GEO.guias = {
 	 * Ajusta a altura das guias conforme a altura da imagem do mapa
 	 */
 	ajustaAltura : function() {
-		if (typeof (console) !== 'undefined') {
-			console.info("i3GEO.guias.ajustaAltura()");
-		}
 		var guia, guias, nguias, temp, temps, n, i, g, altura = 0;
 		if (i3GEO.guias.ALTURACORPOGUIAS != 0) {
 			altura = i3GEO.guias.ALTURACORPOGUIAS;
@@ -694,9 +682,6 @@ i3GEO.guias = {
 	 * guia {String} - nome da guia
 	 */
 	mostra : function(guia) {
-		if (typeof (console) !== 'undefined') {
-			console.info("i3GEO.guias.mostra()");
-		}
 		var guias, nguias, g, temp, attributes, anim;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
@@ -783,28 +768,18 @@ i3GEO.guias = {
 	 * guia {String} - guia que ser&aacute; ativada
 	 */
 	ativa : function(guia) {
-		if (typeof (console) !== 'undefined') {
-			console.info("i3GEO.guias.ativa()");
-		}
 		try {
 			i3GEO.guias.ATUAL = guia;
 			if (i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click !== "") {
 				i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click.call();
 			}
-		} catch (e) {
-			if (typeof (console) !== 'undefined') {
-				console.error(e);
-			}
-		}
+		} catch (e) {}
 	},
 	/*
 	 * Libera as guias do local atual, colocando-as em uma janela flutuante
 	 * sobre o mapa.
 	 */
 	libera : function() {
-		if (typeof (console) !== 'undefined') {
-			console.info("i3GEO.guias.libera()");
-		}
 		if (!$i("conteudojanelaguias")) {
 			var i, w, pos, a, l, temp;
 			$i(i3GEO.Interface.IDCORPO).style.left = "0px";
@@ -943,9 +918,6 @@ i3GEO.guias = {
 	 *
 	 */
 	mostraGuiaFerramenta : function(guia, namespace) {
-		if (typeof (console) !== 'undefined') {
-			console.info("i3GEO.guias.mostraGuiaFerramenta()");
-		}
 		var g, Dom = YAHOO.util.Dom;
 		if (!namespace) {
 			namespace = "guia";

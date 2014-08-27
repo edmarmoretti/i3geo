@@ -186,7 +186,7 @@ $jsfiles = array(
 "compactados/classe_plugini3geo_compacto.js",
 "../pacotes/eudock/js/euDock.2.0.js",
 "../pacotes/eudock/js/euDock.Image.js",
-"compactados/mustache.js",
+"compactados/mustache.js"
 );
 
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
@@ -226,7 +226,7 @@ $cssfiles = array(
 "../css/ferramentas.css",
 "../pacotes/yui290/build/container/assets/skins/sam/container.css",
 "../pacotes/yui290/build/menu/assets/skins/sam/menu-skin.css",
-"../css/tabview.css",
+"../css/tabview.css"
 );
 $buffer = "";
 foreach ($cssfiles as $f)
@@ -261,7 +261,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/fonts/fonts-min.css",
 "../pacotes/yui290/build/container/assets/skins/sam/container.css",
 "../mashups/theme/default/style.css",
-"../mashups/openlayers.css",
+"../mashups/openlayers.css"
 );
 $buffer = "";
 salvatudojs($jsfiles,$buffer,"../mashups/openlayers_compacto.css","css");
