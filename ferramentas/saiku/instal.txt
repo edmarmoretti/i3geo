@@ -2,6 +2,17 @@ Roteiro para instalação e configuração do SAIKU para uso com o i3Geo (testado no
 
 Para mais informações veja em: http://docs.analytical-labs.com/
 
+Importante:
+
+Por questões de segurança, modifique o arquivo de configuração do Apache incluindo as seguintes diretivas:
+
+	<Directory /var/www/ms_tmp/saiku-datasources>
+		Order Deny,Allow
+		Deny from All
+	</Directory>
+
+No caso o texto "/var/www/ms_tmp" deve ser alterado para refletir as configurações do seu servidor, indicando corretamente a pasta temporária
+
 Utilize uma das opções abaixo para instalar o servidor saiku-server
 
 1) Download do software diretamente de http://meteorite.bi/saiku/download

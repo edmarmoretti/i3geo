@@ -27,7 +27,7 @@ $nomeConexao = criaConexaoEsquema();
 
 $map_file = $_SESSION["map_file"];
 
-$arquivoXmlEsquema = dirname($map_file)."/".$nomeConexao.".xml";
+$arquivoXmlEsquema = dirname($map_file)."/".str_replace(".txt","",$nomeConexao).".xml";
 
 gravaDataSource();
 
@@ -201,7 +201,7 @@ function criaConexaoEsquema(){
 		$nomeConexao = md5($_GET["xmlesquema"]);
 	}
 	//$arquivoXmlEsquema = dirname($map_file)."/".$nomeConexao.".xml";
-	return $nomeConexao;
+	return $nomeConexao.".txt";
 }
 function gravaDataSource(){
 	/*
