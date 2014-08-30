@@ -307,6 +307,7 @@ function mostraDownload(retorno)
 		else
 		{
 			ins = "<b>Links de acesso:</b><br><br>";
+			ins += "<a href='"+window.location.href.split("?")[0]+"?tema="+retorno.tema+"&temaDownload="+retorno.tema+"'>Link permanente de acesso<br><br>";
 			ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+retorno.mapfileurl+"' target=blank >Arquivo de configura&ccedil;&atilde;o Mapfile</a><br>";
 			ins += "<a href='"+g_locaplic+"/classesphp/mapa_controle.php?funcao=TEMA2SLD&tema="+retorno.tema+"&map_file="+retorno.mapfile+"' target=blank >Arquivo de legenda SLD</a><br><br>";
 			ins += "Servi&ccedil;o OGC: "+g_locaplic+"/ogc.php?tema="+retorno.tema+"<br><br>";
