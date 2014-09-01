@@ -119,7 +119,7 @@ a {
 		<div id="bandeiras"></div>
 		<div class="bordaSuperior" style="z-index: 1;">&nbsp;</div>
 
-		<div class="mascaraPrincipal" style="max-width: 718pt">
+		<div class="mascaraPrincipal" style="max-width: 718pt;">
 			<div id="conteudo" style="position: relative; top: -10px; margin: 0 0 0.2cm 0.2cm;">
 				<div style="margin-top: 0px;">
 					<?php
@@ -128,25 +128,39 @@ a {
 					}
 					?>
 					<div id="botoes"></div>
+
+					<a class="r"><table><tbody><tr><td>
+					<script type="text/javascript" src="http://www.openhub.net/p/150688/widgets/project_users.js?style=gray"></script>
+					</td></tr></tbody></table></a>
 				</div>
-
-
 				<div style="float: left">
-					<a href="#" class="r" style="width: 230px; height: 380px"><table>
+					<a href="#" class="r" style="width: 230px; height: 380px;">
+						<table>
 							<tr>
 								<td><a class="twitter-timeline" href="https://twitter.com/i3geo" data-widget-id="288061915689787392" width="220" height="350">Tweets @i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 								</td>
 							</tr>
-						</table> </a> <a href="#" class="r" style="width: 230px; height: 380px"><table>
+						</table>
+					</a> <a href="#" class="r" style="width: 230px; height: 380px;">
+						<table>
 							<tr>
 								<td><a class="twitter-timeline" href="https://twitter.com/search?q=@i3geo" data-widget-id="288053202174222336" width="220" height="350">Tweets #i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 								</td>
 							</tr>
-						</table> </a>
+						</table>
+					</a>
+					<a href="#" class="r" style="width: 345px; height: 220px;">
+						<table>
+							<tr>
+								<td>
+								<script type="text/javascript" src="http://www.openhub.net/p/150688/widgets/project_basic_stats.js"></script>
+								</td>
+							</tr>
+						</table>
+					</a>
 				</div>
-
 			</div>
-
+		</div>
 	</center>
 </body>
 <script>

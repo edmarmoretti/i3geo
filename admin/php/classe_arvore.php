@@ -21,7 +21,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -117,7 +117,7 @@ class Arvore
 		//
 		$this->editor = false;
 		$this->editor = $this->verificaOperacaoSessao("admin/php/classe_arvore/editor");
-		$this->pubsql = " (publicado != 'NAO' or publicado isnull) and ";
+		$this->pubsql = " (publicado != 'NAO' or publicado is null) and ";
 		if($this->editor){
 			$this->pubsql = "";
 		}
@@ -172,7 +172,7 @@ class Arvore
 			$sql = "SELECT publicado_menu,'' as perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus order by nome_menu";
 		}
 		else{
-			$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu";
+			$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu is null order by nome_menu";
 		}
 		$regs = $this->execSQL($sql);
 		$resultado = array();
@@ -923,18 +923,18 @@ class Arvore
 	 */
 	function removeAcentos($s)
 	{
-		$s = ereg_replace("[áàâã]","a",$s);
-		$s = ereg_replace("[ÁÀÂÃ]","A",$s);
-		$s = ereg_replace("[éèê]","e",$s);
-		$s = ereg_replace("[í]","i",$s);
-		$s = ereg_replace("[Í]","I",$s);
-		$s = ereg_replace("[ÊÈÊ]","E",$s);
-		$s = ereg_replace("[óòôõ]","o",$s);
-		$s = ereg_replace("[ÓÒÔÕ]","O",$s);
-		$s = ereg_replace("[úùû]","u",$s);
-		$s = ereg_replace("[ÚÙÛ]","U",$s);
-		$s = str_replace("ç","c",$s);
-		$s = str_replace("Ç","C",$s);
+		$s = ereg_replace("[ï¿½ï¿½ï¿½ï¿½]","a",$s);
+		$s = ereg_replace("[ï¿½ï¿½ï¿½ï¿½]","A",$s);
+		$s = ereg_replace("[ï¿½ï¿½ï¿½]","e",$s);
+		$s = ereg_replace("[ï¿½]","i",$s);
+		$s = ereg_replace("[ï¿½]","I",$s);
+		$s = ereg_replace("[ï¿½ï¿½ï¿½]","E",$s);
+		$s = ereg_replace("[ï¿½ï¿½ï¿½ï¿½]","o",$s);
+		$s = ereg_replace("[ï¿½ï¿½ï¿½ï¿½]","O",$s);
+		$s = ereg_replace("[ï¿½ï¿½ï¿½]","u",$s);
+		$s = ereg_replace("[ï¿½ï¿½ï¿½]","U",$s);
+		$s = str_replace("ï¿½","c",$s);
+		$s = str_replace("ï¿½","C",$s);
 		//$str = htmlentities($s);
 		$str = preg_replace("/(&)([a-z])([a-z]+;)/i", '$2', $s);
 		$str = preg_replace("/[^A-Z0-9]/i", ' ', $str);

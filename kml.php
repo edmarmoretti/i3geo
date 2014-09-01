@@ -23,7 +23,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -81,7 +81,7 @@ if($idioma == "pt")
 {$coluna = "nome_menu";}
 else
 {$coluna = $idioma;}
-$menus = pegaDados("SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from ".$esquemaadmin."i3geoadmin_menus where lower(publicado_menu) != 'nao' or publicado_menu isnull order by nome_menu ");
+$menus = pegaDados("SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from ".$esquemaadmin."i3geoadmin_menus where lower(publicado_menu) != 'nao' or publicado_menu is null order by nome_menu ");
 foreach($menus as $menu){
 	kml_cabecalho($menu["nome_menu"],$menu["desc_menu"]);
 	$id_menu = $menu["id_menu"];
@@ -90,7 +90,7 @@ foreach($menus as $menu){
 	{$coluna = "nome_tema";}
 	else
 	{$coluna = $idioma;}
-	$sql = "select id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,codigo_tema,kmz_tema FROM ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where (lower(i3geoadmin_temas.tipoa_tema) != 'wms' or i3geoadmin_temas.tipoa_tema isnull) and (lower(i3geoadmin_temas.kml_tema) != 'nao' or i3geoadmin_temas.kml_tema isnull) and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 and i3geoadmin_raiz.id_nivel = 0 order by ordem";
+	$sql = "select id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,codigo_tema,kmz_tema FROM ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where (lower(i3geoadmin_temas.tipoa_tema) != 'wms' or i3geoadmin_temas.tipoa_tema is null) and (lower(i3geoadmin_temas.kml_tema) != 'nao' or i3geoadmin_temas.kml_tema isnull) and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 and i3geoadmin_raiz.id_nivel = 0 order by ordem";
 	$temas = pegaDados($sql);
 	if(count($temas) > 0){
 		foreach ($temas as $tema)
@@ -102,7 +102,7 @@ foreach($menus as $menu){
 	else{
 		$coluna = $idioma;
 	}
-	$grupos = pegaDados("SELECT $coluna as nome_grupo,n1.id_n1,n1.id_grupo,gr.desc_grupo from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as gr where (lower(n1.publicado) != 'nao' or n1.publicado isnull) and n1.id_menu = '$id_menu' and n1.id_grupo = gr.id_grupo order by gr.nome_grupo");
+	$grupos = pegaDados("SELECT $coluna as nome_grupo,n1.id_n1,n1.id_grupo,gr.desc_grupo from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as gr where (lower(n1.publicado) != 'nao' or n1.publicado is null) and n1.id_menu = '$id_menu' and n1.id_grupo = gr.id_grupo order by gr.nome_grupo");
 	foreach($grupos as $grupo){
 		kml_cabecalho($grupo["nome_grupo"],$grupo["desc_grupo"]);
 		$id_grupo = $grupo["id_grupo"];
@@ -126,8 +126,8 @@ foreach($menus as $menu){
 		$sql = "select s.$coluna as nome_subgrupo,n2.id_n2 from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_n1 as n1, ".$esquemaadmin."i3geoadmin_subgrupos as s ";
 		$sql .= "where n1.id_grupo = '$id_grupo' and n2.id_subgrupo = s.id_subgrupo ";
 		$sql .= "and n2.id_n1 = n1.id_n1 ";
-		$sql .= "and (n1.n1_perfil = '' or n1.n1_perfil isnull) and (n2.n2_perfil = '' or n2.n2_perfil isnull) ";
-		$sql .= "and (lower(n2.publicado) != 'nao' or n2.publicado isnull) ";
+		$sql .= "and (n1.n1_perfil = '' or n1.n1_perfil is null) and (n2.n2_perfil = '' or n2.n2_perfil isnull) ";
+		$sql .= "and (lower(n2.publicado) != 'nao' or n2.publicado is null) ";
 		$sql .= "order by s.nome_subgrupo";
 		$subgrupos = pegaDados($sql);
 		if($idioma == "pt"){
@@ -141,10 +141,10 @@ foreach($menus as $menu){
 			$sql = "select t.codigo_tema,t.$coluna as nome_tema,t.link_tema, t.desc_tema, t.kmz_tema from ".$esquemaadmin."i3geoadmin_n3 as n3,".$esquemaadmin."i3geoadmin_temas as t where ";
 			$sql .= "n3.id_n2='$id_n2' ";
 			$sql .= "and n3.id_tema = t.id_tema ";
-			$sql .= "and (n3_perfil = '' or n3_perfil isnull) ";
-			$sql .= "and (lower(t.kml_tema) != 'nao' or t.kml_tema isnull)";
-			$sql .= "and (lower(t.tipoa_tema) != 'wms' or t.tipoa_tema isnull)";
-			$sql .= "and (lower(n3.publicado) != 'nao' or n3.publicado isnull) ";
+			$sql .= "and (n3_perfil = '' or n3_perfil is null) ";
+			$sql .= "and (lower(t.kml_tema) != 'nao' or t.kml_tema is null)";
+			$sql .= "and (lower(t.tipoa_tema) != 'wms' or t.tipoa_tema is null)";
+			$sql .= "and (lower(n3.publicado) != 'nao' or n3.publicado is null) ";
 			$temas = pegadados($sql);
 			kml_folder($subgrupo["nome_subgrupo"]);
 			if(count($temas) > 0){

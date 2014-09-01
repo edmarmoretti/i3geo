@@ -2174,7 +2174,7 @@ class Metaestat{
 	function tabelasEsquema($codigo_estat_conexao,$nome_esquema,$excluigeom=""){
 		$sql = "SELECT table_name as tabela FROM information_schema.tables where table_schema = '$nome_esquema'";
 		if(strtolower($excluigeom) == "sim"){
-			$sql = "SELECT c.table_name as tabela FROM information_schema.tables as c left join (SELECT distinct a.table_name FROM information_schema.tables as a left join information_schema.columns as b	on	a.table_name = b.table_name	where a.table_schema = '$nome_esquema' and	udt_name = 'geometry' ) as d on c.table_name = d.table_name where c.table_schema = '$nome_esquema' and d.table_name isnull";
+			$sql = "SELECT c.table_name as tabela FROM information_schema.tables as c left join (SELECT distinct a.table_name FROM information_schema.tables as a left join information_schema.columns as b	on	a.table_name = b.table_name	where a.table_schema = '$nome_esquema' and	udt_name = 'geometry' ) as d on c.table_name = d.table_name where c.table_schema = '$nome_esquema' and d.table_name is null";
 		}
 		return $this->execSQLDB($codigo_estat_conexao,$sql);
 	}
