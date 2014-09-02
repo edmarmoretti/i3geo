@@ -1020,6 +1020,34 @@ h1 {
 	border-bottom-color: transparent;
 }
 
+.styled-select {
+	width: 270px;
+	overflow: hidden;
+	background: #F8F8F8;
+	border: 1px solid #DDDDDD;
+	height: 22px;
+	border-radius: 2px;
+}
+
+.styled-select select {
+	width: 120%;
+	height: 22px;
+	border: 0;
+	box-shadow: none;
+	line-height: 1.5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 0.01px;
+	text-overflow: '';
+	appearance: none;
+  background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 80% 8px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 80% 8px;
+      background-size: 16px 144px;
+    }
+}
+
 /*hack opera */
 @media all and (-webkit-min-device-pixel-ratio:10000) , not all and
 	(-webkit-min-device-pixel-ratio:0) {

@@ -497,6 +497,7 @@ i3GEO.Interface = {
 		 * 30000000, 10000000, 5000000];
 		 */
 		parametrosMap : {
+			controls: [],
 			resolutions : [ 0.703125, 0.3515625, 0.17578125, 0.087890625,
 					0.0439453125, 0.02197265625, 0.010986328125,
 					0.0054931640625, 0.00274658203125, 0.001373291015625,
@@ -631,7 +632,7 @@ i3GEO.Interface = {
 				f.style.height = h + "px";
 			}
 			i3GEO.Interface.IDMAPA = "openlayers";
-			i3GEO.Interface.openlayers.parametrosMap.controls = [];
+			//i3GEO.Interface.openlayers.parametrosMap.controls = [];
 			i3GEO.Interface.openlayers.parametrosMap.fractionalZoom = false;
 			if (!i3GEO.Interface.openlayers.parametrosMap.minResolution) {
 				i3GEO.Interface.openlayers.parametrosMap.minResolution = "auto";
@@ -666,14 +667,15 @@ i3GEO.Interface = {
 			}
 			if (i3GEO.Interface.TABLET === true) {
 				i3GEO.Interface.openlayers.parametrosMap.theme = null;
-				i3GEO.Interface.openlayers.parametrosMap.controls = [
-						new OpenLayers.Control.Attribution(),
+				i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.Attribution());
+				i3GEO.Interface.openlayers.parametrosMap.controls.push(
 						new OpenLayers.Control.TouchNavigation({
 							dragPanOptions : {
 								interval : 100,
 								enableKinetic : true
 							}
-						}), new OpenLayers.Control.ZoomPanel() ];
+						}));
+				i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.ZoomPanel());
 			} else {
 				bb.INCLUIBOTAO.zoomli = true;
 				bb.INCLUIBOTAO.pan = true;
@@ -686,7 +688,6 @@ i3GEO.Interface = {
 					units : 'm',
 					projection : new OpenLayers.Projection("EPSG:3857"),
 					displayProjection : new OpenLayers.Projection("EPSG:4326"),
-					controls : [],
 					fractionalZoom : false
 				};
 			}
