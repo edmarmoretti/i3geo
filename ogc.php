@@ -801,6 +801,10 @@ if(isset($OUTPUTFORMAT)){
 	}
 }
 ms_ioinstallstdouttobuffer();
+//verifica parametro outputformat
+if(strtolower($req->getValueByName("REQUEST")) == "getmap" && $req->getValueByName("format") == ""){
+	$req->setParameter("format","image/png");
+}
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
 if(strtolower($request) == "getcapabilities"){
