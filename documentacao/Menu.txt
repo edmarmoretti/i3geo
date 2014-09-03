@@ -65,6 +65,7 @@ Group: API  {
       File: Configura&ccedil;&otilde;es gerais  (classesjs/classe_configura.js)
       File: Controle de usu&aacute;rio  (classesjs/classe_login.js)
       File: Coordenadas  (classesjs/classe_coordenadas.js)
+      File: Editor vetorial para OpenLayers  (classesjs/classe_editorol.js)
       File: Eventos  (classesjs/classe_eventos.js)
       File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs/classe_gadgets.js)
       File: Gerador de links  (classesjs/geradordelinks.js)

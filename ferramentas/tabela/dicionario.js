@@ -10,17 +10,17 @@ i3GEOF.tabela.dicionario = {
 			en:"",
 			es:""
 		}],
-		3: [{
+		"registros": [{
 			pt:"Registros",
 			en:"",
 			es:""
 		}],
-		4: [{
+		"estatisticas": [{
 			pt:"Estat&iacute;sticas",
 			en:"",
 			es:""
 		}],
-		5: [{
+		"relat": [{
 			pt:"Relat&oacute;rios",
 			en:"",
 			es:""
@@ -35,112 +35,112 @@ i3GEOF.tabela.dicionario = {
 			en:"",
 			es:""
 		}],
-		8: [{
+		"atuatab": [{
 			pt:"Mostrar na listagem apenas os selecionados",
 			en:"",
 			es:""
 		}],
-		9: [{
+		"colleg": [{
 			pt:"Mostrar coluna com a legenda da classe",
 			en:"",
 			es:""
 		}],
-		10: [{
+		"sellinhas": [{
 			pt:"Seleciona no mapa as linhas marcadas",
 			en:"",
 			es:""
 		}],
-		11: [{
+		"atvsel": [{
 			pt:"Ativa a sele&ccedil;&atilde;o",
 			en:"",
 			es:""
 		}],
-		12: [{
+		"limpselmap": [{
 			pt:"Limpa a sele&ccedil;&atilde;o do mapa",
 			en:"",
 			es:""
 		}],
-		13: [{
+		"limpsel": [{
 			pt:"Limpa a sele&ccedil;&atilde;o",
 			en:"",
 			es:""
 		}],
-		14: [{
+		"criatemasel": [{
 			pt:"Cria um novo tema no mapa contendo a sele&ccedil;&atilde;o",
 			en:"",
 			es:""
 		}],
-		15: [{
+		"criatema": [{
 			pt:"Cria um tema novo",
 			en:"",
 			es:""
 		}],
-		16: [{
+		"de": [{
 			pt:"de",
 			en:"",
 			es:""
 		}],
-		17: [{
+		"ate": [{
 			pt:"at&eacute;",
 			en:"",
 			es:""
 		}],
-		18: [{
+		"atuareg": [{
 			pt:"Atualiza a lista de registros",
 			en:"",
 			es:""
 		}],
-		19: [{
+		"listar": [{
 			pt:"Listar",
 			en:"",
 			es:""
 		}],
-		20: [{
+		"itemcalc": [{
 			pt:"Item para aplicar os c&aacute;lculos",
 			en:"",
 			es:""
 		}],
-		21: [{
+		"excluicalc": [{
 			pt:"Excluir dos c&aacute;lculos o valor",
 			en:"",
 			es:""
 		}],
-		22: [{
+		"calc": [{
 			pt:"Calcular",
 			en:"",
 			es:""
 		}],
-		23: [{
+		"paraqueas": [{
 			pt:"Para que as opera&ccedil;&otilde;es atuem apenas sobre os elementos selecionados ative a sele&ccedil;&atilde;o no mapa, para isso utilize, na guia <i>Registros</i> a op&ccedil;&atilde;o <i>Ativa a sele&ccedil;&atilde;o</i>",
 			en:"",
 			es:""
 		}],
-		24: [{
+		"itensrel": [{
 			pt:"Escolha os itens que dever&atilde;o constar no relat&oacute;rio. Voc&ecirc; pode alterar os nomes originais das colunas para melhorar o cabe&ccedil;alho do relat&oacute;rio e tamb&eacute;m definir a ordem das colunas no relat&oacute;rio",
 			en:"",
 			es:""
 		}],
-		25: [{
+		"itensagr": [{
 			pt:"Escolha o item que voc&ecirc; quer utilizar para agrupar valores (opcional)",
 			en:"",
 			es:""
 		}],
-		26: [{
+		"incarea": [{
 			pt:"Incluir c&aacute;lculo de &aacute;rea",
 			en:"",
 			es:""
 		}],
-		27: [{
+		"incestat": [{
 			pt:"Incluir c&aacute;lculo de estat&iacute;sticas",
 			en:"",
 			es:""
 		}],
-		28: [{
+		"excvalor": [{
 			pt:"Excluir das estat&iacute;sticas o valor",
 			en:"",
 			es:""
 		}],
-		29: [{
+		"relattext": [{
 			pt:"Relat&oacute;rio no formato texto",
 			en:"",
 			es:""
@@ -195,7 +195,7 @@ i3GEOF.tabela.dicionario = {
 			en:"",
 			es:""
 		}],
-		40: [{
+		"vertodos": [{
 			pt:"Ver todos",
 			en:"",
 			es:""
@@ -206,19 +206,19 @@ i3GEOF.tabela.dicionario = {
 			es:"",
 			it:""
 		}],
-		42: [{
+		"grafico": [{
 			pt:"Gr&aacute;fico",
 			en:"",
 			es:"",
 			it:""
 		}],
-		43: [{
+		"vinctab": [{
 			pt:"V&iacute;nculos entre as tabelas abertas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		44: [{
+		"vinculos": [{
 			pt:"V&iacute;nculos",
 			en:"",
 			es:"",

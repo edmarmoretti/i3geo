@@ -1,7 +1,7 @@
 //+$trad(1,i3GEOF.graficointerativo1.dicionario)+
 i3GEOF.graficointerativo1.dicionario =
 	{
-		1 : [
+		"tipo" : [
 			{
 				pt : "Tipo",
 				en : "",
@@ -9,7 +9,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		2 : [
+		"dados" : [
 			{
 				pt : "Dados",
 				en : "",
@@ -17,7 +17,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		3 : [
+		"grafico" : [
 			{
 				pt : "Gr&aacute;fico",
 				en : "",
@@ -25,7 +25,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		4 : [
+		"escolhatipo" : [
 			{
 				pt : "Escolha o tipo de gr&aacute;fico",
 				en : "",
@@ -33,7 +33,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		5 : [
+		"pizza2d" : [
 			{
 				pt : "pizza 2d",
 				en : "",
@@ -41,7 +41,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		6 : [
+		"areasimp" : [
 			{
 				pt : "&aacute;rea simples",
 				en : "",
@@ -49,7 +49,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		7 : [
+		"distpt" : [
 			{
 				pt : "distribui&ccedil;&atilde;o de pontos",
 				en : "",
@@ -57,7 +57,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		8 : [
+		"linhassimp" : [
 			{
 				pt : "linhas simples",
 				en : "",
@@ -65,7 +65,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		9 : [
+		"arvore" : [
 			{
 				pt : "&Aacute;rvore",
 				en : "",
@@ -73,7 +73,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		10 : [
+		"barrasv" : [
 			{
 				pt : "barras verticais",
 				en : "",
@@ -81,7 +81,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		11 : [
+		"barrash" : [
 			{
 				pt : "barras horizontais",
 				en : "",
@@ -89,7 +89,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		12 : [
+		"configgr" : [
 			{
 				pt : "Configura&ccedil;&atilde;o do gr&aacute;fico",
 				en : "",
@@ -97,7 +97,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		13 : [
+		"tema" : [
 			{
 				pt : "Tema",
 				en : "",
@@ -105,7 +105,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		14 : [
+		"itemcx" : [
 			{
 				pt : "Item com as classes ou eixo X",
 				en : "",
@@ -113,7 +113,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		15 : [
+		"itemcy" : [
 			{
 				pt : "Item(ns) com os valores ou eixo Y",
 				en : "",
@@ -121,7 +121,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		16 : [
+		"excluirval" : [
 			{
 				pt : "Excluir o seguinte valor",
 				en : "",
@@ -129,7 +129,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		17 : [
+		"geracor" : [
 			{
 				pt : "gera cores aleat&oacute;rias",
 				en : "",
@@ -137,7 +137,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		18 : [
+		"obterdados" : [
 			{
 				pt : "Obter dados",
 				en : "",
@@ -145,7 +145,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		19 : [
+		"seescolher" : [
 			{
 				pt : "Se vc escolher para X e Y o mesmo item, ser&aacute; considerada a frequ&ecirc;ncia das ocorr&ecirc;ncias para compor cada parte da pizza. Caso contr&aacute;rio, ser&aacute; feita a soma dos valores existentes em Y para cada ocorr&ecirc;ncia existente em X.",
 				en : "",
@@ -153,7 +153,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		20 : [
+		"inclinax" : [
 			{
 				pt : "Inclina os textos do eixo X",
 				en : "",
@@ -161,7 +161,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		21 : [
+		"adlinbarras" : [
 			{
 				pt : "Adiciona as linhas em gr&aacute;ficos de barras",
 				en : "",
@@ -169,7 +169,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		22 : [
+		"utilizvalacum" : [
 			{
 				pt : "Utiliza valores acumulados",
 				en : "",
@@ -179,7 +179,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		23 : [
+		"utilizvalrelat" : [
 			{
 				pt : "Utiliza valores relativos",
 				en : "",
@@ -187,7 +187,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		24 : [
+		"ordenax" : [
 			{
 				pt : "Ordena o eixo X",
 				en : "",
@@ -195,7 +195,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		25 : [
+		"naoprocessa" : [
 			{
 				pt : "N&atilde;o processa os valores ao obter os dados (mant&eacute;m os dados como est&atilde;o na tabela de atributos) - essa op&ccedil;&atilde;o &eacute; &uacute;til nos gr&aacute;ficos de distribui&ccedil;&atilde;o de pontos",
 				en : "",
@@ -203,7 +203,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		26 : [
+		"soma" : [
 			{
 				pt : "Soma",
 				en : "",
@@ -211,7 +211,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		27 : [
+		"media" : [
 			{
 				pt : "M&eacute;dia",
 				en : "",
@@ -219,7 +219,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		28 : [
+		"tipoagregay" : [
 			{
 				pt : "Tipo de agrega&ccedil;&atilde;o dos valores do eixo Y",
 				en : "",
@@ -227,7 +227,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		29 : [
+		"fatcalclarg" : [
 			{
 				pt : "Fator de c&aacute;lculo da largura do gr&aacute;fico. O n&uacute;mero de ocorr&ecirc;ncias ser&aacute; multiplicado por esse fator para calcular o tamanho final do gr&aacute;fico em pixels. Deixe como 0 para usar o c&aacute;lculo autom&aacute;tico.",
 				en : "",
@@ -235,7 +235,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		30 : [
+		"janelasep" : [
 			{
 				pt : "abrir em uma janela separada",
 				en : "",
@@ -379,7 +379,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		48 : [
+		"stacked" : [
 			{
 				pt : "Utiliza barras divididas entre os valores (stacked)",
 				en : "",
@@ -387,7 +387,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		49 : [
+		"linhasnascols" : [
 			{
 				pt : "As linhas de dados ficam nas colunas",
 				en : "",
@@ -395,7 +395,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		50 : [
+		"titulo" : [
 			{
 				pt : "T&iacute;tulo",
 				en : "",
@@ -403,7 +403,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		51 : [
+		"titux" : [
 			{
 				pt : "T&iacute;tulo do eixo X",
 				en : "",
@@ -411,7 +411,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		52 : [
+		"tituy" : [
 			{
 				pt : "T&iacute;tulo do eixo Y",
 				en : "",

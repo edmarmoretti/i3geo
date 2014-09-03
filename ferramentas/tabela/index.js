@@ -22,45 +22,16 @@ i3GEOF.tabela =
 		 * Susbtitutos para o template
 		 */
 		mustacheHash : function(idjanela) {
-			return {
-				"idjanela" : idjanela,
-				"idjanelaA" : '"'+idjanela+'"',
-				"locaplic" : i3GEO.configura.locaplic,
-				"propriedades" : $trad('p13'),
-				"registros" : $trad(3, i3GEOF.tabela.dicionario),
-				"estatisticas" : $trad(4, i3GEOF.tabela.dicionario),
-				"relat" : $trad(5, i3GEOF.tabela.dicionario),
-				"atuatab" : $trad(8, i3GEOF.tabela.dicionario),
-				"colleg" : $trad(9, i3GEOF.tabela.dicionario),
-				"sellinhas" : $trad(10, i3GEOF.tabela.dicionario),
-				"atvsel" : $trad(11, i3GEOF.tabela.dicionario),
-				"limpselmap" : $trad(12, i3GEOF.tabela.dicionario),
-				"limpsel" : $trad(13, i3GEOF.tabela.dicionario),
-				"criatemasel" : $trad(14, i3GEOF.tabela.dicionario),
-				"criatema" : $trad(15, i3GEOF.tabela.dicionario),
-				"grafico" : $trad(42, i3GEOF.tabela.dicionario),
-				"vinctab" : $trad(43, i3GEOF.tabela.dicionario),
-				"vinculos" : $trad(44, i3GEOF.tabela.dicionario),
-				"de" : $trad(16, i3GEOF.tabela.dicionario),
-				"ini" : $inputText("", "", idjanela + 'i3GEOtabelainicio', "", 5, "1"),
-				"ate" : $trad(17, i3GEOF.tabela.dicionario),
-				"fim" : $inputText("", "", idjanela + 'i3GEOtabelafim', "", 5, "20"),
-				"vertodos" : $trad(40, i3GEOF.tabela.dicionario),
-				"atuareg" : $trad(18, i3GEOF.tabela.dicionario),
-				"listar" : $trad(19, i3GEOF.tabela.dicionario),
-				"itemcalc" : $trad(20, i3GEOF.tabela.dicionario),
-				"excluicalc" : $trad(21, i3GEOF.tabela.dicionario),
-				"calc" : $trad(22, i3GEOF.tabela.dicionario),
-				"paraqueas" : $trad(23, i3GEOF.tabela.dicionario),
-				"itensrel" : $trad(24, i3GEOF.tabela.dicionario),
-				"itensagr" : $trad(25, i3GEOF.tabela.dicionario),
-				"incarea" : $trad(26, i3GEOF.tabela.dicionario),
-				"incestat" : $trad(27, i3GEOF.tabela.dicionario),
-				"excvalor" : $trad(28, i3GEOF.tabela.dicionario),
-				"excvalori" : $inputText("", "", idjanela + 'i3GEOtabelaexcestat', "", 10, ""),
-				"relattext" : $trad(29, i3GEOF.tabela.dicionario),
-				"filtro" : $inputText("", "", idjanela + 'i3GEOtabelafiltro1', "", 5, "")
-			};
+			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.tabela.dicionario);
+			dicionario["idjanela"] = idjanela;
+			dicionario["idjanelaA"] = '"'+idjanela+'"';
+			dicionario["locaplic"] = i3GEO.configura.locaplic;
+			dicionario["propriedades"] = $trad('p13');
+			dicionario["ini"] = $inputText("", "", idjanela + 'i3GEOtabelainicio', "", 5, "1");
+			dicionario["fim"] = $inputText("", "", idjanela + 'i3GEOtabelafim', "", 5, "20");
+			dicionario["excvalori"] = $inputText("", "", idjanela + 'i3GEOtabelaexcestat', "", 10, "");
+			dicionario["filtro"] = $inputText("", "", idjanela + 'i3GEOtabelafiltro1', "", 5, "");
+			return dicionario;
 		},
 		/*
 		 * Function: iniciaDicionario (Depreciado na versao 6.0)

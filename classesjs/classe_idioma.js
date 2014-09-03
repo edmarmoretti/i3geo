@@ -325,6 +325,27 @@ i3GEO.idioma = {
 			novoel.style.left = pos[0]+"px";
 			novoel.style.zIndex = 5000;
 		}
+	},
+	/*
+	Function: objetoIdioma
+
+	Retorna um objeto com os itens do dicionario para o idioma atual
+
+	Parametro:
+
+	dic - (opcional) objeto com o dicionario
+	*/
+	objetoIdioma: function(dic) {
+		if(!dic){
+			dic = i3GEO.idioma.DICIONARIO;
+		}
+		var novo = {}, k = 0;
+		for (k in dic){
+			if(dic.hasOwnProperty(k)){
+				novo[k] = i3GEO.idioma.traduzir(k,dic);
+			}
+		}
+		return novo;
 	}
 };
 /*

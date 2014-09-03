@@ -60,51 +60,16 @@ i3GEOF.graficointerativo1 =
 		 * Susbtitutos para o template
 		 */
 		mustacheHash : function(idjanela) {
-			return {
-				"idjanela" : idjanela,
-				"idjanelaA" : '"' + idjanela + '"',
-				"locaplic" : i3GEO.configura.locaplic,
-				"prop" : $trad("p13"),
-				"tipo" : $trad(1, i3GEOF.graficointerativo1.dicionario),
-				"dados" : $trad(2, i3GEOF.graficointerativo1.dicionario),
-				"grafico" : $trad(3, i3GEOF.graficointerativo1.dicionario),
-				"escolhatipo" : $trad(4, i3GEOF.graficointerativo1.dicionario),
-				"pizza2d" : $trad(5, i3GEOF.graficointerativo1.dicionario),
-				"areasimp" : $trad(6, i3GEOF.graficointerativo1.dicionario),
-				"distpt" : $trad(7, i3GEOF.graficointerativo1.dicionario),
-				"linhassimp" : $trad(8, i3GEOF.graficointerativo1.dicionario),
-				"arvore" : $trad(9, i3GEOF.graficointerativo1.dicionario),
-				"barrasv" : $trad(10, i3GEOF.graficointerativo1.dicionario),
-				"barrash" : $trad(11, i3GEOF.graficointerativo1.dicionario),
-				"configgr" : $trad(12, i3GEOF.graficointerativo1.dicionario),
-				"tema" : $trad(13, i3GEOF.graficointerativo1.dicionario),
-				"titulo" : $trad(50, i3GEOF.graficointerativo1.dicionario),
-				"titux" : $trad(51, i3GEOF.graficointerativo1.dicionario),
-				"tituy" : $trad(52, i3GEOF.graficointerativo1.dicionario),
-				"itemcx" : $trad(14, i3GEOF.graficointerativo1.dicionario),
-				"itemcy" : $trad(15, i3GEOF.graficointerativo1.dicionario),
-				"excluirval" : $trad(16, i3GEOF.graficointerativo1.dicionario),
-				"geracor" : $trad(17, i3GEOF.graficointerativo1.dicionario),
-				"obterdados" : $trad(18, i3GEOF.graficointerativo1.dicionario),
-				"seescolher" : $trad(19, i3GEOF.graficointerativo1.dicionario),
-				"inclinax" : $trad(20, i3GEOF.graficointerativo1.dicionario),
-				"adlinbarras" : $trad(21, i3GEOF.graficointerativo1.dicionario),
-				"utilizvalacum" : $trad(22, i3GEOF.graficointerativo1.dicionario),
-				"utilizvalrelat" : $trad(23, i3GEOF.graficointerativo1.dicionario),
-				"ordenax" : $trad(24, i3GEOF.graficointerativo1.dicionario),
-				"naoprocessa" : $trad(25, i3GEOF.graficointerativo1.dicionario),
-				"stacked" : $trad(48, i3GEOF.graficointerativo1.dicionario),
-				"linhasnascols" : $trad(49, i3GEOF.graficointerativo1.dicionario),
-				"media" : $trad(27, i3GEOF.graficointerativo1.dicionario),
-				"tipoagregay" : $trad(28, i3GEOF.graficointerativo1.dicionario),
-				"fatcalclarg" : $trad(29, i3GEOF.graficointerativo1.dicionario),
-				"janelasep" : $trad(30, i3GEOF.graficointerativo1.dicionario),
-				"soma" : $trad(26, i3GEOF.graficointerativo1.dicionario),
-				"i3GEOgraficointerativo1Titulo" : $inputText("", "", idjanela + "i3GEOgraficointerativo1Titulo", "", 40, ""),
-				"i3GEOgraficointerativo1TituloX" : $inputText("", "", idjanela + "i3GEOgraficointerativo1TituloX", "", 40, ""),
-				"i3GEOgraficointerativo1TituloY" : $inputText("", "", idjanela + "i3GEOgraficointerativo1TituloY", "", 40, ""),
-				"i3GEOgraficointerativo1excluir" : $inputText("", "", idjanela + "i3GEOgraficointerativo1excluir", "", 3, "")
-			};
+			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.graficointerativo1.dicionario);
+			dicionario["idjanela"] = idjanela;
+			dicionario["idjanelaA"] = '"'+idjanela+'"';
+			dicionario["locaplic"] = i3GEO.configura.locaplic;
+			dicionario["prop"] = $trad('p13');
+			dicionario["i3GEOgraficointerativo1Titulo"] = $inputText("", "", idjanela + "i3GEOgraficointerativo1Titulo", "", 40, "");
+			dicionario["i3GEOgraficointerativo1TituloX"] = $inputText("", "", idjanela + "i3GEOgraficointerativo1TituloX", "", 40, "");
+			dicionario["i3GEOgraficointerativo1TituloY"] = $inputText("", "", idjanela + "i3GEOgraficointerativo1TituloY", "", 40, "");
+			dicionario["i3GEOgraficointerativo1excluir"] = $inputText("", "", idjanela + "i3GEOgraficointerativo1excluir", "", 3, "");
+			return dicionario;
 		},
 		/**
 		 * Propriedade: dados
