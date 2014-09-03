@@ -463,7 +463,7 @@ i3GEO.Interface = {
 		if (i3GEO.Interface.STATUS.trocando === false) {
 			if (i3GEO.barraDeBotoes.TIPO === "olhodepeixe") {
 				i3GEO.barraDeBotoes.inicializaBarra();
-			} else {
+			} else if (i3GEO.barraDeBotoes.TIPO === "yui") {
 				i3GEO.Interface[i3GEO.Interface.ATUAL].ativaBotoes();
 			}
 		}

@@ -724,7 +724,7 @@
 	cursor: pointer;
 	margin-right: 3px;
 }
-/*marcador de lista das op��es do tema*/
+/*marcador de lista das opcoes do tema*/
 .ticOpcoesTemas {
 	background-image: URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
@@ -783,7 +783,7 @@
 	border: 1px solid #DCDCDC;
 }
 
-.zoomAnterior {
+.zoomAnterior  {
 	background-image: URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -1675px;
