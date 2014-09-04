@@ -5,7 +5,7 @@ include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas45.css">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas6.css">
 
 <script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=<?php echo $googleApiKey; ?>"></script>
 <script type="text/javascript">
