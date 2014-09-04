@@ -61,7 +61,7 @@ i3GEO.barraDeBotoes = {
 	Tipo de barra.
 
 	Por padr&atilde;o, utiliza a biblioteca YUI para construir a barra, opcionalmente pode-se utilizar o tipo "olho de peixe".
-	
+
 	O tipo emlinha insere os bot&otilde;es em um elemento html qualquer já existente na p&aacute;gina. Nesse caso a barra
 	n&atilde;o &eacute; iniciada automaticamente, sendo necess&aacute;rio usar a fun&ccedil;&atilde;o
 	i3GEO.barraDeBotoes.inicializaBarra("","",false,0,0,onde)
@@ -734,8 +734,9 @@ i3GEO.barraDeBotoes = {
 						if(l[b].iddiv == padrao)
 						{l[b].funcaoonclick();}
 					}
-					if(l[b].constroiconteudo)
-					{eval(l[b].constroiconteudo);}
+					if(l[b].constroiconteudo){
+						eval(l[b].constroiconteudo);
+					}
 				}
 				YAHOO.util.Event.addListener($i(l[b].iddiv), "click", YAHOO.util.Event.preventDefault);
 				YAHOO.util.Event.addListener($i(l[b].iddiv), "click", YAHOO.util.Event.stopPropagation);
@@ -743,8 +744,9 @@ i3GEO.barraDeBotoes = {
 			}
 			while (b--);
 		}
-		if(padrao === "")
-		{this.ativaIcone("");}
+		if(padrao === ""){
+			this.ativaIcone("");
+		}
 	},
 	/*
 	Function: execBotao
@@ -1010,29 +1012,41 @@ i3GEO.barraDeBotoes = {
 			i3GEO.barraDeBotoes.inicializaBarraOP();
 		}
 		else{
-			if(this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === false)
-			{this.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><img style='border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";}
-			if(this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === true)
-			{this.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><img style='margin:4px;border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";}
+			if(this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === false){
+				this.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><img style='border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";
+			}
+			if(this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === true){
+				this.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><img style='margin:4px;border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";
+			}
 			var ticone,tipo,mostra,i,temp,e,wj,recuo,novoel,alturadisponivel,n,chaves,
 				elementos = "",
 				numerobotoes = 0,
 				nelementos = 0,
 				Dom = YAHOO.util.Dom,
 				branco = i3GEO.configura.locaplic+'/imagens/branco.gif';
-			if(navm)
-			{i3GEO.barraDeBotoes.TRANSICAOSUAVE = false;}
+			if(navm){
+				i3GEO.barraDeBotoes.TRANSICAOSUAVE = false;
+			}
 			if(i3GEO.barraDeBotoes.TIPO === "emlinha"){
 				temp = "";
 				chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO);
 				n = chaves.length;
 				for(i=0;i<n;i+=1){
 					if(i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true){
-						temp += i3GEO.barraDeBotoes.TEMPLATEBOTAO.replace("$$",chaves[i]);
+						temp += "<img id='"+chaves[i]+"_iconeId' onclick='i3GEO.barraDeBotoes.execBotao(\""+chaves[i]+"\")' src='"+i3GEO.configura.locaplic+"/"+i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]+"' />";
 					}
 				}
 				$i(onde).innerHTML = temp;
-				i3GEO.barraDeBotoes.ativaBotoes();
+				for(i=0;i<n;i+=1){
+					temp = i3GEO.barraDeBotoes.defBotao(chaves[i]).titulo;
+					if(temp != ""){
+						new YAHOO.widget.Tooltip(chaves[i]+"_tip", {
+							context: chaves[i]+"_iconeId",
+							text: temp
+						});
+					}
+				}
+				//i3GEO.barraDeBotoes.ativaBotoes();
 			}
 			if(this.AUTO === true){
 				if(idconteudo === "barraDeBotoes1"){
@@ -1643,7 +1657,7 @@ i3GEO.barraDeBotoes = {
 					'undo':true,
 					'frente':true
 				};
-	
+
 				/*
 				var sketchSymbolizers = {
 						"Point": {
@@ -1692,7 +1706,7 @@ i3GEO.barraDeBotoes = {
 					    	extendDefault: false
 					    }
 					);
-	
+
 				style.addRules([
 					new OpenLayers.Rule({symbolizer: sketchSymbolizers})
 				]);

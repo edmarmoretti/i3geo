@@ -5,7 +5,7 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3GEO - OpenLayers</title>
 
-<script src="../classesjs/i3geonaocompacto.js"></script>
+<script src="../classesjs/i3geo.js"></script>
 <script src="../pacotes/openlayers/OpenLayers2131.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/black.css">
 </head>
@@ -127,6 +127,41 @@
 <script>
 
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+i3GEO.configura.diminuiyN = 120;
+i3GEO.configura.diminuiyM = 120;
+i3GEO.barraDeBotoes.INCLUIBOTAO = {
+	abreJanelaLegenda: false,
+	localizar: false,
+	zoomanterior: true,
+	zoomli: true,
+	zoomproximo: true,
+	zoomiauto: false,
+	zoomoauto: false,
+	pan: true,
+	zoomtot:true,
+	identifica: true,
+	identificaBalao: true,
+	mede: true,
+	area: true,
+	selecao: true,
+	barraedicao: false,
+	imprimir: false,
+	google: true,
+	referencia: false,
+	exten: false,
+	inserexy: false,
+	textofid: false,
+	reinicia: false,
+	buscafotos: false,
+	wiki: false,
+	metar: false,
+	lentei: false,
+	confluence: false,
+	inseregrafico: false,
+	v3d: false
+};
+
+
 i3GEO.configura.autotamanho = false;
 
 //tipo de barra de bot&otilde;es
@@ -153,23 +188,6 @@ i3GEO.Interface.openlayers.GADGETS = {
 		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = true;
-/*
-i3GEO.Interface.openlayers.parametrosMap.scales = [
-	105000000,50000000,21000000,10000000,5000000,1000000,500000,250000,100000,50000,25000,10000,5000,1000,100
-];
-i3GEO.Interface.openlayers.parametrosMap.numZoomLevels = 18;
-*/
-//
-//controla o tamanho da barra de zoom
-//
-//i3GEO.Interface.openlayers.MINEXTENT = [-0.001, -0.001, 0.001, 0.001]
-//
-//
-//desabilita o item que abre a interface "default" do menu suspenso
-//
-
-//i3GEO.Interface.openlayers.parametrosMap.numZoomLevels = 30;
-
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 
 /*

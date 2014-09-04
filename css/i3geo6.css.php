@@ -86,6 +86,9 @@ line-height: 15px;
 margin-bottom: 9px;
 text-align: left;
 }
+.paragrafo label {
+font-size: 14px;
+}
 .paragrafo input[type=checkbox] {
 position: relative;
 top: 2px;
@@ -922,11 +925,31 @@ line-height: 1.5;
 -moz-appearance: none;
 text-indent: 0.01px;
 text-overflow: '';
+font-size: 12px;
 appearance: none;
 background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 80% 8px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
 background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 80% 8px;
+background-size: 16px 144px;
+}
+}
+.styled-select input {
+width: 100%;
+height: 22px;
+border: 0;
+box-shadow: none;
+line-height: 1.5;
+-webkit-appearance: none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+font-size: 12px;
+appearance: none;
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
 background-size: 16px 144px;
 }
 }
@@ -2178,8 +2201,8 @@ padding: 0 10px;
 }
 .yui-skin-sam .yui-button {
 border-color: #D3D3D3;
-border-radius: 7px;
-box-shadow: 0px 0px 4px 1px rgb(230,230,230);
+border-radius: 6px;
+box-shadow: 0px 0px 0px 0px rgb(230,230,230);
 }
 .yui-skin-sam .yui-button .first-child {
 border-color: #D3D3D3;

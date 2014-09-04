@@ -15,11 +15,11 @@
 		<tr>
 			<td><input style='cursor: pointer; border: 0px solid white;' onclick='i3GEOF.tabela.pegaRegistros({{{idjanelaA}}})' type=checkbox id='{{{idjanela}}}
 				i3GEOtabelatipolista' /></td>
-			<td>{{{atuatab}}}</td>
+			<td><span class=paragrafo >{{{atuatab}}}</span></td>
 		</tr>
 		<tr>
 			<td><input style='cursor: pointer; border: 0px solid white;' onclick='i3GEOF.tabela.pegaRegistros({{{idjanelaA}}})' type=checkbox id='{{{idjanela}}}i3GEOtabelalegenda' /></td>
-			<td>{{{colleg}}}</td>
+			<td><span class=paragrafo >{{{colleg}}}</span></td>
 		</tr>
 	</table>
 </div>
@@ -44,7 +44,7 @@
 	<div id='{{{idjanela}}}i3GEOtabelaregistros' style='position: relative; top: 20px; left: 0px; text-align: left;'></div>
 </div>
 
-<div id='{{{idjanela}}}i3GEOtabelaguia3obj' style='display: none; width: 99%; left: 0px'>
+<div id='{{{idjanela}}}i3GEOtabelaguia3obj' style='display: none; width: 95%; left: 0px; padding:5px;'>
 	<p class='paragrafo'>
 		<label>{{{itemcalc}}}:</label> <div class=styled-select id='{{{idjanela}}}i3GEOtabelaitensGuia3'></div>
 		<br>
@@ -55,27 +55,36 @@
 		<input id='{{{idjanela}}}i3GEOtabelabotao4' size=30 type=button value='{{{calc}}}' />
 	<div id='{{{idjanela}}}i3GEOtabelaoperacoes' style='font-size: 12px; text-align: left; position: relative; top: 15px; left: 0px;'></div>
 	<br>
-	<div id='{{{idjanela}}}i3GEOtabelamen1' style='position: relative; top: 25px; left: 0px; width: 100%'>
+	<div id='{{{idjanela}}}i3GEOtabelamen1' >
 		<p class='paragrafo'>{{{paraqueas}}}
 	</div>
 </div>
-<div id='{{{idjanela}}}i3GEOtabelaguia5obj' style='width: 99%; display: none'>
+<div id='{{{idjanela}}}i3GEOtabelaguia5obj' style='width: 95%; display: none; padding-left:5px;'>
 	<p class='paragrafo'>{{{itensrel}}}:
 	<p class='paragrafo'>
 	<div id='{{{idjanela}}}i3GEOtabelaitensrelatorio' class=digitar style='text-align: left; overflow: auto; height: 100px'></div>
 	<br>
+
 	<p class='paragrafo'>{{{itensagr}}}:
 	<p class='paragrafo'>
-	<div id='{{{idjanela}}}i3GEOtabelaagrupamento' style='text-align: left;'></div>
+	<div id='{{{idjanela}}}i3GEOtabelaagrupamento' class=styled-select ></div>
+	<br>
+
+	<p class='paragrafo'>{{{excvalor}}} :
+	<p class='paragrafo'>
+	<div class=styled-select >
+		{{{excvalori}}}
+	</div>
+	<br>
 
 	<p class='paragrafo'>
-		<br>
 		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOtabelacalculaarea' />
 		{{{incarea}}}
-	<p class='paragrafo'>
+		&nbsp;&nbsp;
 		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOtabelacalculaestat' />
 		{{{incestat}}}
-	<p class='paragrafo'>{{{excvalor}}} : {{{excvalori}}}
+	<br>
+
 	<p class='paragrafo'>
 		<input id='{{{idjanela}}}i3GEOtabelabotao7' size=30 type=button value='{{{relat}}}' />
 		<input id='{{{idjanela}}}i3GEOtabelabotao5' size=25 type=button value='{{{relattext}}}' />
