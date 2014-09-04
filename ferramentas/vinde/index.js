@@ -157,7 +157,7 @@ i3GEOF.vinde = {
 										'',
 										temp[0],
 										epsg,
-										"mime",
+										"text/plain",
 										'1.1.1',
 										layer.format,
 										'black',
