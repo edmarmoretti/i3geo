@@ -282,6 +282,10 @@ else{
 	$oMap->setmetadata("wms_attribution_onlineresource",$proto.$server.dirname($_SERVER['PHP_SELF']));
 	$oMap->setmetadata("wms_attribution_title",$tituloInstituicao);
 	$oMap->setmetadata("ows_enable_request","*");
+	//parametro mandatario
+	if($oMap->getmetadata("wms_srs") == ""){
+		$oMap->setmetadata("wms_srs","EPSG:4326");
+	}
 	$e = $oMap->extent;
 	$extensaoMap = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
 	//gera o mapa

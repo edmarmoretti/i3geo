@@ -23,7 +23,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -37,7 +37,7 @@ Function: gravaCacheWMS
 
 L&ecirc; o getcapabilities de um WMS e salva em disco se o mesmo n&atilde;o tiver sido salvo antes
 
-O arquivo &eacute; gravado no diretório tempor&aacute;rio
+O arquivo &eacute; gravado no diretï¿½rio tempor&aacute;rio
 
 Parametros:
 
@@ -45,7 +45,7 @@ $servico {string} - endere&ccedil;o do WMS
 
 Global:
 
-$dir_tmp {string} - (opcional) endere&ccedil;o do diretório tempor&aacute;rio onde o cache ser&aacute; armazenado. Se n&atilde;o for definido, tenta obter das vari&aacute;veis de configura&ccedil;&atilde;o existentes em i3geo/ms_configura.php
+$dir_tmp {string} - (opcional) endere&ccedil;o do diretï¿½rio tempor&aacute;rio onde o cache ser&aacute; armazenado. Se n&atilde;o for definido, tenta obter das vari&aacute;veis de configura&ccedil;&atilde;o existentes em i3geo/ms_configura.php
 
 Return:
 
@@ -356,7 +356,6 @@ function temaswms()
 	$handle = fopen ($wms_service_request, "r");
 	$wms_capabilities = fread($handle, filesize($wms_service_request));
 	fclose ($handle);
-
 	$dom = new DomDocument();
 	$dom->loadXML($wms_capabilities);
 
@@ -460,7 +459,7 @@ $servico {string} - Endere&ccedil;o do web service.
 
 $nivel - n&iacute;vel do layer na hierarquia existente no getcapabilities
 
-$nomelayer - nome do layer que cont&eacute;m os próximos layers
+$nomelayer - nome do layer que cont&eacute;m os prï¿½ximos layers
 
 Retorno:
 
@@ -717,7 +716,7 @@ function xml2html ( $str )
 /*
 wms_descricao
 
-Retorna a descri&ccedil;&atilde;o de um servi&ccedil;o (nó).
+Retorna a descri&ccedil;&atilde;o de um servi&ccedil;o (nï¿½).
 */
 function wms_descricao ( $dom,$xp )
 {
@@ -751,7 +750,7 @@ function wms_descricaov ( $dom,$xp,$attrib )
 /*
 wms_descricaon
 
-Retorna a descri&ccedil;&atilde;o de um servi&ccedil;o (filho de um nó).
+Retorna a descri&ccedil;&atilde;o de um servi&ccedil;o (filho de um nï¿½).
 */
 function wms_descricaon ( $dom,$xp,$n ) {
 	$ctx = xpath_new_context($dom);

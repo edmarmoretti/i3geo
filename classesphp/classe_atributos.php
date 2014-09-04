@@ -2120,7 +2120,6 @@ class Atributos
 		else{
 			$mapa = ms_newMapObj($map_file);
 		}
-
 		if($ext != ""){
 			$extmapa = $mapa->extent;
 			$e = explode(" ",$ext);
@@ -2154,8 +2153,6 @@ class Atributos
 			$mapa = desligamargem($mapa);
 			$imgo = $mapa->draw();
 			$ptimg = xy2imagem($map_file,array($x,$y),$mapa);
-			//var_dump($ptimg);exit;
-
 			//$formatoinfo = "MIME";
 			$formatosinfo = $layer->getmetadata("formatosinfo");
 			if ($formatosinfo != ""){
@@ -2226,15 +2223,21 @@ class Atributos
 			if(count($n) == 0){
 				$formatoinfo = "MIME";
 			}
-			if(strtoupper($formatoinfo) == "TEXT/HTML"){
+			if(strtoupper($formatoinfo) == "TEXT/HTML" && $res != ""){
 				$n[] = array("alias"=>"","valor"=>"<iframe width=250px src='".$res."'></iframe>","link"=>"","img"=>"");
 			}
-			if(strtoupper($formatoinfo) == "MIME"){
+			if(strtoupper($formatoinfo) == "MIME" && $res2 != ""){
 				$n[] = array("alias"=>"","valor"=>"<iframe width=250px src='".$res2."'></iframe>","link"=>"","img"=>"");
 			}
-
-			$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo ".$formatoinfo,"link"=>$res,"img"=>"");
-			$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo padr&atilde;o do servi&ccedil;o","link"=>$res2,"img"=>"");
+			if($res != ""){
+				$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo ".$formatoinfo,"link"=>$res,"img"=>"");
+			}
+			if($res2 != ""){
+				$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo padr&atilde;o do servi&ccedil;o","link"=>$res2,"img"=>"");
+			}
+			if($res == "" && $res2 == ""){
+				$n[] = array("alias"=>"Ocorreu um erro","valor"=>"","link"=>"","img"=>"");
+			}
 			return array($n);
 		}
 		//se o usuario estiver logado e o tema for editavel, a lista de itens
