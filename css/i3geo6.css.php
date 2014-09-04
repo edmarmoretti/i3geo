@@ -904,6 +904,32 @@ border-left: none;
 border-top-color: transparent;
 border-bottom-color: transparent;
 }
+.styled-select {
+width: 270px;
+overflow: hidden;
+background: #F8F8F8;
+border: 1px solid #DDDDDD;
+height: 22px;
+border-radius: 2px;
+}
+.styled-select select {
+width: 120%;
+height: 22px;
+border: 0;
+box-shadow: none;
+line-height: 1.5;
+-webkit-appearance: none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+appearance: none;
+background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 80% 8px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 80% 8px;
+background-size: 16px 144px;
+}
+}
 /*hack opera */
 @media all and (-webkit-min-device-pixel-ratio:10000) , not all and
 (-webkit-min-device-pixel-ratio:0) {
@@ -1569,7 +1595,7 @@ height: 10px;
 cursor: pointer;
 margin-right: 3px;
 }
-/*marcador de lista das op��es do tema*/
+/*marcador de lista das opcoes do tema*/
 .ticOpcoesTemas {
 background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
@@ -1621,7 +1647,7 @@ background-position: 1px -1648px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
-.zoomAnterior {
+.zoomAnterior  {
 background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1675px;

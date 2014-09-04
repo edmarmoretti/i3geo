@@ -30,7 +30,7 @@ i3GEOF.tabela =
 			dicionario["ini"] = $inputText("", "", idjanela + 'i3GEOtabelainicio', "", 5, "1");
 			dicionario["fim"] = $inputText("", "", idjanela + 'i3GEOtabelafim', "", 5, "20");
 			dicionario["excvalori"] = $inputText("", "", idjanela + 'i3GEOtabelaexcestat', "", 10, "");
-			dicionario["filtro"] = $inputText("", "", idjanela + 'i3GEOtabelafiltro1', "", 5, "");
+			dicionario["filtro"] = "<input type=text id='" + idjanela + "i3GEOtabelafiltro1' value='' />";
 			return dicionario;
 		},
 		/*
