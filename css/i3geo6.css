@@ -87,7 +87,7 @@ margin-bottom: 9px;
 text-align: left;
 }
 .paragrafo label {
-font-size: 14px;
+font-size: 12px;
 }
 .paragrafo input[type=checkbox] {
 position: relative;

@@ -1018,7 +1018,7 @@ i3GEO.barraDeBotoes = {
 			if(this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === true){
 				this.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><img style='margin:4px;border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";
 			}
-			var ticone,tipo,mostra,i,temp,e,wj,recuo,novoel,alturadisponivel,n,chaves,
+			var novoel,ticone,tipo,mostra,i,temp,e,wj,recuo,novoel,alturadisponivel,n,chaves,
 				elementos = "",
 				numerobotoes = 0,
 				nelementos = 0,
@@ -1036,6 +1036,16 @@ i3GEO.barraDeBotoes = {
 						temp += "<img id='"+chaves[i]+"_iconeId' onclick='i3GEO.barraDeBotoes.execBotao(\""+chaves[i]+"\")' src='"+i3GEO.configura.locaplic+"/"+i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]+"' />";
 					}
 				}
+
+				//
+				//se o id indicado para incluir a barra nao existir, o div sera criado
+				//
+				if(!$i(onde)){
+					novoel = document.createElement("div");
+					novoel.id = onde;
+					$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
+				}
+				//
 				$i(onde).innerHTML = temp;
 				for(i=0;i<n;i+=1){
 					temp = i3GEO.barraDeBotoes.defBotao(chaves[i]).titulo;
