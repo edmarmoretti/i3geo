@@ -47,7 +47,7 @@ perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o m
 format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
 	abrir o mashup do OpenLayers com as camadas definida em temas.
 	Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
-	
+
 OUTPUTFORMAT - em getfeature, aceita tamb&eacute;m shape-zip para download de shapefile e csv para download de csv compactado
 
 id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
@@ -235,6 +235,12 @@ if(isset($_GET["tms"])){
 }
 if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$agora .= "google";
+}
+//
+//compatibiliza chamadas fora do padrao
+//
+if(isset($_GET["outputFormat"]) && $_GET["outputFormat"] != ""){
+	$_GET["OUTPUTFORMAT"] = $_GET["outputFormat"];
 }
 //
 //se o outputformat for definido, evita o cahce de arquivo
