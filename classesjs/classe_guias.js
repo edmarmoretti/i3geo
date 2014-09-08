@@ -611,8 +611,14 @@ i3GEO.guias = {
 			if (guia) {
 				guia.style.overflow = "auto";
 				if (this.TIPO === "guia") {
-					guia.style.height = altura
-							+ "px";
+					if (altura === 0) {
+						guia.style.height = i3GEO.parametros.h
+								+ "px";
+					} else {
+						guia.style.height = altura
+						+ "px";
+					}
+
 				}
 				if (this.TIPO === "sanfona") {
 					guia.style.height = altura

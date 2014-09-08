@@ -167,6 +167,7 @@ i3GEO.mapa =
 						}
 						if (i3GEO.guias.TIPO === "movel") {
 							i3GEO.guias.guiaMovel.reposiciona();
+							i3GEO.guias.guiaMovel.abreFecha("fecha");
 						} else {
 							i3GEO.guias.ajustaAltura();
 						}
