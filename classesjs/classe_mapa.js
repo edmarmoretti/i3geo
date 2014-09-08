@@ -116,11 +116,12 @@ i3GEO.mapa =
 			novoel.style.cursor = "pointer";
 			novoel.style.position = "absolute";
 			novoel.style.top = i3GEO.parametros.h - 35 + "px";
-			novoel.style.zIndex = "50000";
+			novoel.style.zIndex = "5000000";
 			novoel.style.left = i3GEO.parametros.w - 35 + "px";
 			$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
 			YAHOO.util.Event.addListener("i3GEOdobraPagina", "click", YAHOO.util.Event.stopPropagation);
 			YAHOO.util.Event.addListener("i3GEOdobraPagina", "click", YAHOO.util.Event.preventDefault);
+
 		},
 		/*
 		 * Reposiciona o icone do tipo "dobra de pagina"
@@ -172,6 +173,7 @@ i3GEO.mapa =
 							i3GEO.guias.ajustaAltura();
 						}
 						i3GEO.mapa.reposicionaDobraPagina();
+
 						ativo = true;
 					}, 2000);
 				}

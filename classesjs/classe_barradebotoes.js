@@ -1028,7 +1028,7 @@ i3GEO.barraDeBotoes = {
 				i3GEO.barraDeBotoes.TRANSICAOSUAVE = false;
 			}
 			if(i3GEO.barraDeBotoes.TIPO === "emlinha"){
-				temp = "";
+				temp = "<div id='"+onde+"_mascara'></div>";
 				chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO);
 				n = chaves.length;
 				for(i=0;i<n;i+=1){
@@ -1043,10 +1043,12 @@ i3GEO.barraDeBotoes = {
 				if(!$i(onde)){
 					novoel = document.createElement("div");
 					novoel.id = onde;
+					novoel.innerHTML = temp;
 					$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
 				}
-				//
-				$i(onde).innerHTML = temp;
+				else{
+					$i(onde).innerHTML = temp;
+				}
 				for(i=0;i<n;i+=1){
 					temp = i3GEO.barraDeBotoes.defBotao(chaves[i]).titulo;
 					if(temp != ""){
