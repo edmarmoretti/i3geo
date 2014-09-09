@@ -106,7 +106,7 @@ Ao definir background, o default e redefinido
 		opacity: 1;
 }
 #euDock_euImage_2 {
-	border: 0px solid lightgray;
+	border: 1px solid black;
 	border-radius: 35px 0 0 5px;
 	opacity: 1;
 	background: black;
@@ -114,14 +114,14 @@ Ao definir background, o default e redefinido
 }
 
 #euDock_euImage_3 {
-	border: 0px solid lightgray;
+	border: 1px solid black;
 	opacity: 1;
 	background: black;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='black', endColorstr='black',GradientType=0 );
 }
 
 #euDock_euImage_4 {
-	border: 0px solid lightgray;
+	border: 1px solid black;
 	border-radius: 0px 35 5 0px;
 	opacity: 1;
 	background: black;
