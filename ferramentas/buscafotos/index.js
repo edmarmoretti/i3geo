@@ -146,19 +146,19 @@ i3GEOF.buscaFotos = {
 		ins += '		<p class="paragrafo" >'+$trad(8,i3GEOF.buscaFotos.dicionario);
 		ins += $trad(9,i3GEOF.buscaFotos.dicionario);
 		ins += $trad(10,i3GEOF.buscaFotos.dicionario);
-		ins += '		<p class="paragrafo" >'+$trad(11,i3GEOF.buscaFotos.dicionario)+': <input onclick="javascript:this.select();" style="cursor:text" class=digitar type=text size=30 value="" id="i3GEObuscafotostexto" />';
-		ins += '		<p class="paragrafo" >'+$trad(12,i3GEOF.buscaFotos.dicionario)+': <input onclick="javascript:this.select();" style="cursor:text" class=digitar type=text size=10 value="2009" id="i3GEObuscafotosai" />';
-		ins += '		&nbsp;'+$trad(13,i3GEOF.buscaFotos.dicionario)+': <input onclick="javascript:this.select();" style="cursor:text" class=digitar type=text size=10 value="2009" id="i3GEObuscafotosaf" /><br><br>';
+		ins += '		<p class="paragrafo" >'+$trad(11,i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=30 value="" id="i3GEObuscafotostexto" /></div>';
+		ins += '		<br><p class="paragrafo" >'+$trad(12,i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=10 value="2009" id="i3GEObuscafotosai" /></div>';
+		ins += '		<br><p class="paragrafo" >'+$trad(13,i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=10 value="2009" id="i3GEObuscafotosaf" /></div><br><br>';
 		ins += '		<input  id=i3GEObuscafotosbotao1 size=20  type=button value="'+$trad(14,i3GEOF.buscaFotos.dicionario)+'" />';
 		ins += '	</div>';
 		ins += '	<div>';
-		ins += '	<p class="paragrafo" >'+$trad(15,i3GEOF.buscaFotos.dicionario)+':';
+		ins += '	<br><p class="paragrafo" >'+$trad(15,i3GEOF.buscaFotos.dicionario)+':';
 		ins += '	<input type=radio style="top:2px;background-color:#f2f2f2;none;border:0px solid white;cursor:pointer;position:relative;" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=flickr id=i3GEObuscafotosbuscaflickr  /><a href="http://www.flickr.com" target="_blank" >Flickr</a>';
 		ins += '	<input type=radio style="top:2px;background-color:#f2f2f2;border:0px solid white;cursor:pointer;position:relative;" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=panoramio id=i3GEObuscafotosbuscapanoramio /><a href="http://www.panoramio.com" target="_blank" >Panoramio</a>';
 		ins += '	<input type=radio style="top:2px;background-color:#f2f2f2;border:0px solid white;cursor:pointer;position:relative;" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=locr id=i3GEObuscafotosbuscalocr /><a href="http://www.locr.com" target="_blank" >Locr</a>';
 		ins += '	</div>';
 		ins += '	<div id="i3GEObuscafotospaginas" style="top:10px;"></div><br>';
-		ins += '	<div style="top:0px;left:5px;display:block;width:95%;overflow:auto"  id="i3GEObuscafotosresultadofotos" ></div>';
+		ins += '	<div style="top:0px;left:5px;display:block;width:95%;overflow:auto"  id="i3GEObuscafotosresultadofotos" ></div><br>';
 		ins += '</div>';
 		return ins;
 	},

@@ -165,31 +165,31 @@ i3GEOF.gradeDeHex = {
 		var ins = "<p class='paragrafo'><b>"+$trad(4,i3GEOF.gradeDeHex.dicionario)+"</b>";
 		ins += "<p class='paragrafo'> ";
 		if($i("i3GEOgradedehexProj").checked){
-			ins += "<label>"+$trad(15,i3GEOF.gradeDeHex.dicionario)+"</label><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxg' title='metros' type=text size=6 value='100000'/>";
+			ins += $trad(15,i3GEOF.gradeDeHex.dicionario);
+			ins += "<div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxg' title='metros' type=text value='100000'/></div>";
 		}
 		else{
-			ins += "<label>"+$trad(5,i3GEOF.gradeDeHex.dicionario)+"</label><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxg' title='grau' type=text size=3 value='1'/>";
-			ins += "<label>"+$trad(6,i3GEOF.gradeDeHex.dicionario)+"</label><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxm' title='minuto' type=text size=5 value='00'/>";
-			ins += "<label>"+$trad(7,i3GEOF.gradeDeHex.dicionario)+"</label><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxs' title='segundo' type=text size=5 value='00.00'/>";
+			ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+" - "+$trad(6,i3GEOF.gradeDeHex.dicionario)+" - "+$trad(7,i3GEOF.gradeDeHex.dicionario)+"</p>";
+			ins += "<div class=styled-select style='width:40px;float:left;' ><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexxg' title='grau' type=text value='1'/></div>";
+			ins += "<div class=styled-select style='width:40px;float:left;margin-left:10px;' ><input onclick='javascript:this.select();' id='i3GEOgradedehexxm' title='minuto' type=text value='00'/></div>";
+			ins += "<div class=styled-select style='width:60px;float:left;margin-left:10px;' ><input onclick='javascript:this.select();' id='i3GEOgradedehexxs' title='segundo' type=text value='00.00'/></div>";
 		}
-		/*
-		ins += "<p class='paragrafo'>Y: ";
-		ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexyg' title='grau' type=text size=3 value='1'/>";
-		ins += $trad(6,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexym' title='minuto' type=text size=5 value='00'/>";
-		ins += $trad(7,i3GEOF.gradeDeHex.dicionario)+"<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexys' title='segundo' type=text size=5 value='00.00'/>";
-		*/
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t0()","i3GEOF.gradeDeHex.t2()",ins,"i3GEOF.gradeDeHex.t1()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo'><b>"+$trad(8,i3GEOF.gradeDeHex.dicionario)+"</b>";
-		ins += "<p class='paragrafo'>X: ";
-		ins += "<label>"+$trad(5,i3GEOF.gradeDeHex.dicionario)+"</label><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixg' title='grau'  type=text size=3 value='-00'/>";
-		ins += "<label>"+$trad(6,i3GEOF.gradeDeHex.dicionario)+"</label><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixm' title='minuto'  type=text size=5 value='00'/>";
-		ins += "<label>"+$trad(7,i3GEOF.gradeDeHex.dicionario)+"</label><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixs' title='segundo'  type=text size=5 value='00.00'/>";
-		ins += "<p class='paragrafo'>Y: ";
-		ins += "<label>"+$trad(5,i3GEOF.gradeDeHex.dicionario)+"</label><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiyg' title='grau'  type=text size=3 value='-00'/>";
-		ins += "<label>"+$trad(6,i3GEOF.gradeDeHex.dicionario)+"</label><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiym' title='minuto'  type=text size=5 value='00'/>";
-		ins += "<label>"+$trad(7,i3GEOF.gradeDeHex.dicionario)+"</label><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiys' title='segundo'  type=text size=5 value='00.00'/>";
+		ins += "<p class='paragrafo'><b>X (long):</b> ";
+		ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+" - "+$trad(6,i3GEOF.gradeDeHex.dicionario)+" - "+$trad(7,i3GEOF.gradeDeHex.dicionario)+"</p>";
+		ins += "<div class=styled-select style='width:40px;float:left;' ><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixg' title='grau' type=text value='1'/></div>";
+		ins += "<div class=styled-select style='width:40px;float:left;margin-left:10px;margin-right:10px;' ><input onclick='javascript:this.select();' id='i3GEOgradedehexixm' title='minuto' type=text value='00'/></div>";
+		ins += "<div class=styled-select style='width:60px;margin-left:10px;' ><input onclick='javascript:this.select();' id='i3GEOgradedehexixs' title='segundo' type=text value='00.00'/></div></p>";
+
+		ins += "<br><p class='paragrafo'><b>Y (lat):</b> ";
+		ins += $trad(5,i3GEOF.gradeDeHex.dicionario)+" - "+$trad(6,i3GEOF.gradeDeHex.dicionario)+" - "+$trad(7,i3GEOF.gradeDeHex.dicionario)+"</p>";
+		ins += "<div class=styled-select style='width:40px;float:left;' ><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexiyg' title='grau' type=text value='1'/></div>";
+		ins += "<div class=styled-select style='width:40px;float:left;margin-left:10px;' ><input onclick='javascript:this.select();' id='i3GEOgradedehexiym' title='minuto' type=text value='00'/></div>";
+		ins += "<div class=styled-select style='width:60px;float:left;margin-left:10px;' ><input onclick='javascript:this.select();' id='i3GEOgradedehexiys' title='segundo' type=text value='00.00'/></div>";
+
 		g_tipoacao = "capturaponto";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t1()","i3GEOF.gradeDeHex.t3()",ins,"i3GEOF.gradeDeHex.t2()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
 		i3GEO.eventos.cliquePerm.desativa();
@@ -198,10 +198,10 @@ i3GEOF.gradeDeHex = {
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'><b>"+$trad(9,i3GEOF.gradeDeHex.dicionario)+"</b>";
-		ins += "<p class='paragrafo'><label>X: </label>";
-		ins += "<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexnptx' title='pontos em x'  type=text size=3 value='10'/>";
-		ins += "<p class='paragrafo'><label>Y: </label>";
-		ins += "<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexnpty' title='pontos em y'  type=text size=3 value='10'/>";
+		ins += "<p class='paragrafo'>X</p>";
+		ins += "<div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexnptx' title='pontos em x'  type=text value='10'/></div>";
+		ins += "<br><p class='paragrafo'>Y";
+		ins += "<div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexnpty' title='pontos em y'  type=text value='10'/></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t2()","i3GEOF.gradeDeHex.t4()",ins,"i3GEOF.gradeDeHex.t3()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
 	},
 	t4: function(){

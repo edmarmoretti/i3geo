@@ -51,7 +51,7 @@ en:"",
 es:""
 }],
 11: [{
-pt:"Multiplicar por:",
+pt:"Multiplicado por:",
 en:"",
 es:""
 }]

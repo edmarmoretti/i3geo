@@ -2341,6 +2341,11 @@ i3GEO.util = {
 				temp[i].style.display="none";
 			}
 			$i(idatual).style.display="block";
+			temp = $i(idatual).getElementsByTagName("div");
+			nids = temp.length;
+			for (i=0;i<nids;i++){
+				temp[i].style.display="block";
+			}
 		},
 		/*
 	Function: dialogoFerramenta

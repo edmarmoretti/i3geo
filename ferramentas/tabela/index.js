@@ -15,7 +15,7 @@ i3GEOF.tabela =
 		 */
 		propJanelas : {},
 		/**
-		 * Template no formato mustache E preenchido na carga do javascript com o programa dependencias.php
+		 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 		 */
 		MUSTACHE : "",
 		/**
@@ -29,8 +29,6 @@ i3GEOF.tabela =
 			dicionario["propriedades"] = $trad('p13');
 			dicionario["ini"] = $inputText("", "", idjanela + 'i3GEOtabelainicio', "", 5, "1");
 			dicionario["fim"] = $inputText("", "", idjanela + 'i3GEOtabelafim', "", 5, "20");
-			dicionario["excvalori"] = "<input type=text id='" + idjanela + "i3GEOtabelaexcestat' value='' />";
-			dicionario["filtro"] = "<input type=text id='" + idjanela + "i3GEOtabelafiltro1' value='' />";
 			return dicionario;
 		},
 		/*

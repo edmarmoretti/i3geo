@@ -165,10 +165,10 @@ i3GEOF.buffer = {
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.buffer.dicionario);
-		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEObufferd' type=text size=10 value='0'/>";
+		ins += "<br><div class=styled-select style='display:block' ><input onclick='javascript:this.select();' id='i3GEObufferd' type=text value='0'/></div>";
 
-		ins += "<br><br><p class='paragrafo' >"+$trad(10,i3GEOF.buffer.dicionario);
-		ins += "<br></p><div id=i3GEObufferondeItens style='text-align:left;display:block' ></div> ";
+		ins += "<br><p class='paragrafo' >"+$trad(10,i3GEOF.buffer.dicionario);
+		ins += "<br><div id=i3GEObufferondeItens style='text-align:left;display:block' ></div> ";
 
 		ins += "<br><p class='paragrafo'>"+$trad(5,i3GEOF.buffer.dicionario);
 		ins += "<br></p><select id=i3GEObufferunir ><option value=nao selected >"+$trad("x15")+"</option><option value=sim >"+$trad("x14")+"</option></select>";
@@ -274,7 +274,9 @@ i3GEOF.buffer = {
 			"i3GEObuffertemasItem",
 			$i("i3GEObuffertemasComSel").value,
 			function(retorno){
-				$i("i3GEObufferondeItens").innerHTML = retorno.dados + " " + $trad(11,i3GEOF.buffer.dicionario)+" <input onclick='javascript:this.select();' class=digitar id='i3GEObufferdfator' type=text size=10 value='1'/>";
+				$i("i3GEObufferondeItens").innerHTML = retorno.dados
+				+ "<br><br><p class=paragrafo >" + $trad(11,i3GEOF.buffer.dicionario)
+				+" <div class=styled-select><input onclick='javascript:this.select();' id='i3GEObufferdfator' type=text value='1'/></div>";
 				$i("i3GEObufferondeItens").style.display = "block";
 			},
 			"i3GEObufferondeItens"

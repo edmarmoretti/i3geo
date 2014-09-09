@@ -397,7 +397,7 @@ i3GEOF.analisaGeometrias = {
 			{
 				var ins,cor,temp,j,k,i;
 				ins = "<p class=paragrafo ><input id=i3GEOanalisageometriasbotao4 type=button size=20  value='"+$trad(31,i3GEOF.analisaGeometrias.dicionario)+"' />&nbsp;&nbsp;";
-				ins += "<input id=i3GEOanalisageometriasbotao5 type=i3GEOanalisageometriasbutton size=20  value='"+$trad(32,i3GEOF.analisaGeometrias.dicionario)+"' /><br><br>";
+				ins += "<input id=i3GEOanalisageometriasbotao5 type=button size=20  value='"+$trad(32,i3GEOF.analisaGeometrias.dicionario)+"' /><br><br>";
 				cor = "rgb(245,245,245)";
 				for (i=0;i<retorno.data.length; i++)
 				{

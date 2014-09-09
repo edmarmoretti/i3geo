@@ -15,7 +15,7 @@
  */
 include(dirname(__FILE__)."/../ms_configura.php");
 if(!empty($_GET["customDir"])){
-	$customDir = $_GET["customDir"];
+	$customDir = strip_tags($_GET["customDir"]);
 }
 else if(empty($customDir)){
 	$customDir = "interface";
