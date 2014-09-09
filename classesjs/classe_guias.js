@@ -1175,6 +1175,16 @@ i3GEO.guias = {
 			if ($i("i3GEOguiaMovelIcones")) {
 				$i("i3GEOguiaMovelIcones").innerHTML = ins;
 			}
+			for (i = 0; i < n; i++) {
+				ico = $i(temp.ids[i]);
+				if (ico) {
+					YAHOO.util.Dom.setStyle(
+						ico,
+						"padding",
+						"1px");	
+				}
+			}
+			
 			i3GEO.guias.guiaMovel.desativaIcones();
 			if (i3GEO.guias.ATUAL != "") {
 				ico = $i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id);
