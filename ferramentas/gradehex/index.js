@@ -198,6 +198,7 @@ i3GEOF.gradeDeHex = {
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'><b>"+$trad(9,i3GEOF.gradeDeHex.dicionario)+"</b>";
+
 		ins += "<p class='paragrafo'>X</p>";
 		ins += "<div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexnptx' title='pontos em x'  type=text value='10'/></div>";
 		ins += "<br><p class='paragrafo'>Y";

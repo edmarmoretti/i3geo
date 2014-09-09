@@ -79,7 +79,7 @@ i3GEOF.gradeDeHex.dicionario = {
 			it:""
 		}],
 		14: [{
-			pt:"Utiliza a proje&ccedil;&atilde;o Mercator na geração da grade",
+			pt:"Utiliza a proje&ccedil;&atilde;o Mercator na gera&ccedil;&atilde;o da grade",
 			en:"",
 			es:"",
 			it:""
