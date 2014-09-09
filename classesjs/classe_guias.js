@@ -1175,13 +1175,17 @@ i3GEO.guias = {
 			if ($i("i3GEOguiaMovelIcones")) {
 				$i("i3GEOguiaMovelIcones").innerHTML = ins;
 			}
+			ins = "1.2px";
+			if(navm){
+				ins = "2px";
+			}
 			for (i = 0; i < n; i++) {
 				ico = $i(temp.ids[i]);
 				if (ico) {
 					YAHOO.util.Dom.setStyle(
 						ico,
 						"padding",
-						"1px");	
+						ins);	
 				}
 			}
 			
