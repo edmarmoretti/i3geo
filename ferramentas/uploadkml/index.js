@@ -118,7 +118,7 @@ i3GEOF.uploadkml = {
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
 		'<p class=paragrafo >' + $trad(3,i3GEOF.uploadkml.dicionario) +
-		'<br><input type=text size=42 name=layerkml value=""/></p>' +
+		'</p><div class=styled-select ><input type=text size=42 name=layerkml value=""/></div>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
 		'<p class=paragrafo >' + $trad(4,i3GEOF.uploadkml.dicionario) + '</p>' +

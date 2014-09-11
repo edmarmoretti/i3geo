@@ -336,7 +336,9 @@ i3GEO.gadgets = {
 		{id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;}
 		i3GEO.gadgets.mostraBuscaRapida.id = id;
 		if($i(id)){
-			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >"+$inputText(id,"256","valorBuscaRapida"+id,$trad("x34"),"20",$trad("o2"))+"</form>";
+			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >" 
+			+ "<div class='styled-select' style='width:180px;'><input type=text value='' id='valorBuscaRapida"+id+"' /></div>";
+			+ "</form>";
 			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;&nbsp;</a></td><td>"+i+"</td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("p13")+"' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida"+id+" style='margin-right:5px;margin-left:5px;'/></td>";
 			ins += "<td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' id=i3GEObotaoBuscaRapida"+id+" /></td></tr></table>";

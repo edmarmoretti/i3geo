@@ -20,6 +20,7 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		$parametros = '{"plugin":"markercluster","parametros":{"tipoEstilos": "default","opacity":"'.$opacidade.'","gridSize":"'.$gridSize.'"}}';
 		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
 		$novolayer->set("name",$nameLayer);
+		$novolayer->set("group","");
 		$map->save($map_file);
 		$retorno = $nameLayer;
 	break;

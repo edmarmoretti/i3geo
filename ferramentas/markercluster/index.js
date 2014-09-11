@@ -208,7 +208,7 @@ i3GEOF.markercluster = {
 				+ $trad(
 						12,
 						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterTitulo' type=text value='Mapa de calor'/></div>";
+		ins += "<br></p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterTitulo' type=text value='Mapa de agrupamento'/></div>";
 
 		ins += "<br><p class='paragrafo' >"
 				+ $trad(

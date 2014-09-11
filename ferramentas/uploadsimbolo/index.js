@@ -99,10 +99,10 @@ i3GEOF.uploadsimbolo = {
 		var ins = '<form id=i3GEOuploadsimbolof target="i3GEOuploadsimboloiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadsimbolo/upload.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<p class="paragrafo" >PNG/JPG: <br><input type="file" size=22 name="i3GEOuploadsimboloarq" style="top:0px;left:0px;cursor:pointer;"></p>';
 		if(i3GEO.parametros.editor === "sim"){
-			ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.uploadsimbolo.dicionario)+':<br><input class=digitar type="text" size=45 name="dirDestino" id="dirDestino" style="top:0px;left:0px;cursor:pointer;"></p>';
+			ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.uploadsimbolo.dicionario)+':</p><div class=styled-select ><input class=digitar type="text" name="dirDestino" id="dirDestino" ></div>';
 			//ins += "<img onclick='i3GEOF.uploadsimbolo.selNavegador(\"dirDestino\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/></p>";
 		}
-		ins += '<p class="paragrafo" ><input id=i3GEOuploadsimbolobotao1 type="button" value="'+$trad(8,i3GEOF.uploadsimbolo.dicionario)+'" size=12 name="submit">' +
+		ins += '<br><p class="paragrafo" ><input id=i3GEOuploadsimbolobotao1 type="button" value="'+$trad(8,i3GEOF.uploadsimbolo.dicionario)+'" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
 		'</form>' +

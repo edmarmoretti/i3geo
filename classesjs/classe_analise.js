@@ -357,9 +357,9 @@ i3GEO.analise = {
 						+ '<td>'
 						+ '<input style="cursor:pointer" type="checkbox" id="parartextos" checked />'
 						+ '</td><td>Textos<td>'
-						+ '<td>&nbsp;Estilo:</td><td>'
+						+ '<td>&nbsp;Estilo:</td><td><div class=styled-select style="width:70px;">'
 						+ i3GEO.desenho.caixaEstilos()
-						+ '</td>'
+						+ '</div></td>'
 						+ '<td>&nbsp;<input id=i3GEObotaoPerfil size="22" type="button" value="perfil"></td>'
 						+ '</tr></table></span>'
 						+ '</div>'
@@ -1193,9 +1193,10 @@ i3GEO.analise = {
 						+ i3GEO.configura.locaplic
 						+ '"/ajuda_usuario.php?idcategoria=6&idajuda=51" >&nbsp;&nbsp;&nbsp;</a></div>'
 						+ '<div class="bd" style="text-align:left;padding:3px;font-size:10px" >'
-						+ 'Estilo: '
+						+ '<label class=paragrafo style="float:left;top:5px;position:relative;">Estilo:</label>'
+						+ '<div class=styled-select style="width:70px;">'
 						+ i3GEO.desenho.caixaEstilos()
-						+ '<br>'
+						+ '</div><br>'
 						+ '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo" ></div>'
 						+ '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo_parcial" ></div>'
 						+ '</div>';

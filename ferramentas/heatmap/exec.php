@@ -20,6 +20,7 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		$parametros = '{"plugin":"heatmap","parametros":{"tipoGradiente":"default","valorPonto":"'.$valorPonto.'","coluna":"'.$coluna.'","radius":"'.$raio.'"}}';
 		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
 		$novolayer->set("name",$nameLayer);
+		$novolayer->set("group","");
 		if(!empty($opacidade)){
 			$novolayer->set("opacity",$opacidade);
 		}

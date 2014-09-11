@@ -111,22 +111,23 @@ i3GEOF.upload = {
 		'</fieldset>';
 		if(i3GEO.parametros.editor === "sim"){
 			ins += '<fieldset class=subbloco >' +
-			'<p class="paragrafo" >'+$trad(1,i3GEOF.upload.dicionario)+':<br>' +
-			'<input class=digitar type="text" size=45 name="dirDestino" id="dirDestino" style="top:0px;left:0px;cursor:pointer;">' +
+			'<p class="paragrafo" >'+$trad(1,i3GEOF.upload.dicionario)+':</p>' +
+			'<div class=styled-select ><input class=digitar type="text" name="dirDestino" id="dirDestino" /></div>' +
 			"&nbsp;<img onclick='i3GEO.util.navegadorDir(\"dirDestino\",false,false,false,true);' src='"+i3GEO.configura.locaplic+"/imagens/ic_zoom.png' style='cursor:pointer;position :relative;top:2px'/></p>" +
 			'<p class="paragrafo" ><input type=checkbox name=i3GEOuploadCriaMapfile id=i3GEOuploadCriaMapfile />&nbsp;'+$trad(10,i3GEOF.upload.dicionario) +
 			'</fieldset>';
 		}
 		ins += '<fieldset class=subbloco >' +
-		'<p class="paragrafo" >'+$trad(2,i3GEOF.upload.dicionario)+': ' +
+		'<p class="paragrafo" >'+$trad(2,i3GEOF.upload.dicionario)+': </p>' +
+		'	<div class=styled-select >' +
 		'	<select id=tipo name=tipo >' +
 		'	<option value="">'+$trad(3,i3GEOF.upload.dicionario)+'</option>' +
 		'	<option value="1">'+$trad(4,i3GEOF.upload.dicionario)+'</option>' +
 		'	<option value="5">'+$trad(5,i3GEOF.upload.dicionario)+'</option>' +
 		'	<option value="3">'+$trad(6,i3GEOF.upload.dicionario)+'</option>' +
 		'	</select>' +
-		'</p>' +
-		'<p class=paragrafo >'+$trad(7,i3GEOF.upload.dicionario)+':</p>' +
+		'</div>' +
+		'<br><p class=paragrafo >'+$trad(7,i3GEOF.upload.dicionario)+':</p>' +
 		'<div id=i3GEOuploadListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +

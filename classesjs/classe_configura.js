@@ -731,7 +731,7 @@ i3GEO.configura = {
 				if(!$i("janelaBuscaRapida")){
 					var janela = i3GEO.janela.cria(
 						"258px",
-						"20px",
+						"30px",
 						"",
 						"",
 						"",

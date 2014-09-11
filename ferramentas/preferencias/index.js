@@ -486,7 +486,7 @@ i3GEOF.preferencias = {
 			nj = 0,
 			j = 0,
 			props,
-			estilo = "margin-left:10px;cursor:default;width:250px",
+			estilo = "margin-left:10px;cursor:default;",
 			nk = 0,
 			k =0,
 			l=0,
@@ -511,7 +511,7 @@ i3GEOF.preferencias = {
 					ins += "<p class=paragrafo title='"+props[j].elemento+"'>"+props[j].titulo+"</p>";
 
 					if(props[j].tipo === "numero" || props[j].tipo === "texto"){
-						ins += "<input type=text value='' id='"+props[j].elemento+"' style='"+estilo+"' /><br><br>";
+						ins += "<div class='styled-select' style='"+estilo+"' ><input type=text value='' id='"+props[j].elemento+"'  /></div><br>";
 					}
 					if(props[j].tipo === "boolean" || props[j].tipo === "select"){
 						if(props[j].tipo === "boolean"){
@@ -527,12 +527,12 @@ i3GEOF.preferencias = {
 						if(props[j].funcao){
 							temp = "onchange="+props[j].funcao;
 						}
-						ins += "<select id='"+props[j].elemento+"' style='"+estilo+"' "+temp+">";
+						ins += "<div class='styled-select' style='"+estilo+"'><select id='"+props[j].elemento+"'  "+temp+">";
 						ins += "<option value='' >---</option>";
 						for(k=0;k<nk;k++){
 							ins += "<option value="+valores[k]+" >"+nomes[k]+"</option>";
 						}
-						ins += "</select><br><br>";
+						ins += "</select></div><br>";
 					}
 					if(props[j].tipo === "multiselect"){
 						valores = i3GEO.util.listaTodasChaves(props[j].opcoes);
