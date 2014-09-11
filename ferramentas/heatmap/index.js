@@ -147,8 +147,8 @@ i3GEOF.heatmap =
 				"i3GEOF.heatmap_rodape");
 		},
 		t1 : function() {
-			var ins = "<p class='paragrafo'>" + $trad(3, i3GEOF.heatmap.dicionario) + ":";
-			ins += "<div id='i3GEOheatmapSelTemas' style='text-align:left;font-size:11px'></div>";
+			var ins = "<p class='paragrafo'>" + $trad(3, i3GEOF.heatmap.dicionario) + ":</p>";
+			ins += "<div id='i3GEOheatmapSelTemas' class='styled-select'></div>";
 			i3GEO.util.proximoAnterior(
 				"i3GEOF.heatmap.t0()",
 				"i3GEOF.heatmap.t2()",
@@ -160,11 +160,10 @@ i3GEOF.heatmap =
 			i3GEOF.heatmap.comboTemasSel();
 		},
 		t2 : function() {
-			var ins = "<p class='paragrafo'>" + $trad(4, i3GEOF.heatmap.dicionario);
-			ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOheatmapd' type=text size=10 value='1'/>";
-
-			ins += "<br><br><p class='paragrafo' >" + $trad(10, i3GEOF.heatmap.dicionario);
-			ins += "<br></p><div id=i3GEOheatmapondeItens style='text-align:left;display:block' ></div> ";
+			var ins = "<p class='paragrafo'>" + $trad(4, i3GEOF.heatmap.dicionario) + "</p>"
+			+ "<div class='styled-select'><input onclick='javascript:this.select();' id='i3GEOheatmapd' type='text' value='1'/></div><br>"
+			+ "<p class='paragrafo' >" + $trad(10, i3GEOF.heatmap.dicionario) + "</p>"
+			+ "<div class='styled-select' id='i3GEOheatmapondeItens' style='display:block' ></div> ";
 
 			i3GEO.util.proximoAnterior(
 				"i3GEOF.heatmap.t1()",
@@ -278,7 +277,7 @@ i3GEOF.heatmap =
 					$i("i3GEOheatmaptemasComSel").value = i3GEO.temaAtivo;
 					$i("i3GEOheatmaptemasComSel").onchange.call();
 				}
-			}, "i3GEOheatmapSelTemas", "", false, "ligados");
+			}, "i3GEOheatmapSelTemas", "", false, "ligados","display:block;");
 		},
 		/**
 		 * Function: comboItens

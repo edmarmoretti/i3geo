@@ -1,3 +1,4 @@
+<!-- Guias -->
 <div id='{{{idjanela}}}i3GEOgraficointerativo1guiasYUI' class='yui-navset' style='top: 0px; cursor: pointer; left: 0px;'>
 	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
 		<li>
@@ -45,8 +46,11 @@
 	</ul>
 </div>
 <br>
+<!-- Guia com a lista de tipos de graficos -->
 <div class='guiaobj' id='{{{idjanela}}}i3GEOgraficointerativo1guia1obj' style='left: 1px; display: none;'>
-	<p class='paragrafo'>{{{escolhatipo}}} :</p>
+	<p class='paragrafo'>
+		<b>{{{escolhatipo}}} :</b>
+	</p>
 	<table class='lista6'>
 		<tr>
 			<td>
@@ -131,8 +135,11 @@
 		</tr>
 	</table>
 </div>
+<!-- Dados para o grafico -->
 <div class='guiaobj' id='{{{idjanela}}}i3GEOgraficointerativo1guia2obj' style='left: 1px; display: none; top: -5px'>
-	<p class='paragrafo'>{{{configgr}}} :</p>
+	<p class='paragrafo'>
+		<b>{{{configgr}}}</b>
+	</p>
 	<p class='paragrafo'>{{{tema}}} :</p>
 	<div class='styled-select' id='{{{idjanela}}}i3GEOgraficointerativo1ComboTemas'></div>
 	<br>
@@ -162,7 +169,7 @@
 	</div>
 	<p class='paragrafo'>{{{excluirval}}} :
 	<div class='styled-select'>
-		<input style='cursor: pointer;' value='0' type='text' id='{{{idjanela}}}i3GEOgraficointerativo1excluir' />
+		<input style='cursor: pointer;' value='' type='text' id='{{{idjanela}}}i3GEOgraficointerativo1excluir' />
 	</div>
 	<br>
 	<p class='paragrafo'>
@@ -175,6 +182,7 @@
 	<div id='{{{idjanela}}}i3GEOgraficointerativo1Dados'></div>
 	<div class='paragrafo' id='{{{idjanela}}}i3GEOgraficointerativo1AjudaPizza'>{{{seescolher}}}</div>
 </div>
+<!-- Propriedades do grafico -->
 <div class='guiaobj' id='{{{idjanela}}}i3GEOgraficointerativo1guia3obj' style='left: 1px; display: none; top: -5px'>
 	<p class='paragrafo'>
 		<input style='cursor: pointer' type=checkbox id='{{{idjanela}}}i3GEOgraficointerativo1xInclinado' checked />
@@ -210,7 +218,8 @@
 	</p>
 	<p class='paragrafo'>{{{tipoagregay}}}</p>
 	<div class='styled-select'>
-		<select onchange='i3GEOF.graficointerativo1.obterDados()' id='{{{idjanela}}}i3GEOgraficointerativo1TipoAgregacao'><option value='soma'>{{{soma}}}</option>
+		<select onchange='i3GEOF.graficointerativo1.obterDados()' id='{{{idjanela}}}i3GEOgraficointerativo1TipoAgregacao'>
+			<option value='soma'>{{{soma}}}</option>
 			<option value='media'>{{{media}}}</option>
 		</select>
 	</div>
@@ -219,19 +228,21 @@
 	<div class='styled-select'>
 		<input style='cursor: pointer;' value='0' type='text' id='{{{idjanela}}}i3GEOgraficointerativo1FatorTamanho' />
 	</div>
-
-
 </div>
+<!-- Guia que mostra o Grafico -->
 <div class='guiaobj' id='{{{idjanela}}}i3GEOgraficointerativo1guia4obj' style='left: 1px; display: none; top: -10px'>
 	<a style='position: absolute; left: 50px;' href='#' onclick='i3GEOF.graficointerativo1.novaJanela()'> {{{janelasep}}} </a>
 	<img onclick='i3GEOF.graficointerativo1.alteraFatorPixelMenos({{{idjanelaA}}})' style='position: absolute;' src='{{{locaplic}}}/imagens/player_volta.png' />
 	<img onclick='i3GEOF.graficointerativo1.alteraFatorPixelMais({{{idjanelaA}}})' style='position: absolute; left: 20px;' src='{{{locaplic}}}/imagens/player_avanca.png' />
 	<div id='{{{idjanela}}}i3GEOgraficointerativo1guia4objCanvas' style='top: 15px;'></div>
 </div>
+<!--  CSV -->
 <div class='guiaobj' id='{{{idjanela}}}i3GEOgraficointerativo1guia5obj' style='font-size: 10px; left: 10px; display: none; top: -0px'></div>
+<!-- PNG -->
 <div class='guiaobj' id='{{{idjanela}}}i3GEOgraficointerativo1guia6obj' style='font-size: 10px; left: 10px; display: none; top: -0px'>
 	<form method=post action='{{{locaplic}}}/pacotes/svg2img.php' id='{{{idjanela}}}i3GEOgraficointerativo1PNG' target='_blank'>
 		<input type=hidden name='svg' value='' />
 	</form>
 </div>
+<!-- Div usado para renderizar o grafico -->
 <div id='{{{idjanela}}}i3GEOgraficointerativo1Grafico' style='position: relative; top: -5px; display: none'></div>
