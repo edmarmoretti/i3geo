@@ -171,7 +171,8 @@ i3GEOF.buffer = {
 		ins += "<br><div id=i3GEObufferondeItens style='text-align:left;display:block' ></div> ";
 
 		ins += "<br><p class='paragrafo'>"+$trad(5,i3GEOF.buffer.dicionario);
-		ins += "<br></p><select id=i3GEObufferunir ><option value=nao selected >"+$trad("x15")+"</option><option value=sim >"+$trad("x14")+"</option></select>";
+		ins += "<br></p><div class=styled-select ><select id=i3GEObufferunir ><option value=nao selected >"+$trad("x15")+"</option><option value=sim >"+$trad("x14")+"</option></select></div>";
+		ins += "<br><br>";
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t1()","i3GEOF.buffer.t3()",ins,"i3GEOF.buffer.t2","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
 		i3GEOF.buffer.comboItens();
 	},
@@ -274,9 +275,9 @@ i3GEOF.buffer = {
 			"i3GEObuffertemasItem",
 			$i("i3GEObuffertemasComSel").value,
 			function(retorno){
-				$i("i3GEObufferondeItens").innerHTML = retorno.dados
+				$i("i3GEObufferondeItens").innerHTML = "<div class=styled-select >" + retorno.dados + "</div>"
 				+ "<br><br><p class=paragrafo >" + $trad(11,i3GEOF.buffer.dicionario)
-				+" <div class=styled-select><input onclick='javascript:this.select();' id='i3GEObufferdfator' type=text value='1'/></div>";
+				+" <div class=styled-select ><input onclick='javascript:this.select();' id='i3GEObufferdfator' type=text value='1'/></div>";
 				$i("i3GEObufferondeItens").style.display = "block";
 			},
 			"i3GEObufferondeItens"

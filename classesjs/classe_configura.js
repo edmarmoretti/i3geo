@@ -202,9 +202,6 @@ i3GEO.configura = {
 			{ id:"omenudataNavegacao2",text: $trad("d15t"), url: "javascript:i3GEO.navega.dialogo.google()" },
 			{ id:"omenudataNavegacao3",text: $trad("d9t"), url: "javascript:i3GEO.maparef.inicia()" },
 			{ id:"omenudataNavegacao4",text: $trad("d8t"), url: "javascript:i3GEO.mapa.dialogo.mostraExten()" },
-
-
-
 			{ id:"omenudataAnalise12",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"},
 			{ id:"omenudataAnalise13",text: $trad("u6"), url: "javascript:i3GEO.analise.dialogo.analisaGeometrias()" },
 			{ id:"omenudataAnalise14",text: $trad("u10"), url: "javascript:i3GEO.analise.dialogo.buffer()" },

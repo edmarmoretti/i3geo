@@ -119,7 +119,7 @@ i3GEOF.insereGrafico = {
 		ins += '</div><br>';
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia1obj" style="left:1px;display:none;">';
 		ins += '		<p class="paragrafo">Escolha o tema com os dados:';
-		ins += '		<div id=i3GEOinseregraficotemasi style="display:block;position:relative;top:10px;left:0px;text-align:left;">'+$trad(3,i3GEOF.insereGrafico.dicionario)+'...';
+		ins += '		<div id=i3GEOinseregraficotemasi class=styled-select style="display:block;">'+$trad(3,i3GEOF.insereGrafico.dicionario)+'...';
 		ins += '		</div>';
 		ins += '		<div id=i3GEOinseregraficolistai class=digitar style="left:0px;top:20px;330px;height:80px;overflow:auto;display:block;">'+$trad(4,i3GEOF.insereGrafico.dicionario)+'</div>';
 		ins += '		<br><br><br>';
@@ -127,23 +127,18 @@ i3GEOF.insereGrafico = {
 		ins += '		<div id=i3GEOinseregraficomen1 style=top:10px;left:1px ><p class="paragrafo">'+$trad(5,i3GEOF.insereGrafico.dicionario)+'</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia2obj" style="left:1px;display:none;">';
-		ins += '		<table summary="" class=lista width="70%">';
-		ins += '		<tr>  ';
-		ins += '			<td>Tamanho do c&iacute;rculo:</td>';
-		ins += '			<td>';
-		ins += $inputText("","","i3GEOinseregraficow","",5,"50")+'</td>';
-		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
-		ins += '		<tr>';
-		ins += '			<td>'+$trad(6,i3GEOF.insereGrafico.dicionario)+':</td>';
-		ins += '			<td>';
-		ins += $inputText("","","i3GEOinseregraficoinclinacao","",4,"1.5")+'</td>';
-		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
-		ins += '		<tr>';
-		ins += '			<td>'+$trad(7,i3GEOF.insereGrafico.dicionario)+':</td>';
-		ins += '			<td>';
-		ins += $inputText("","","i3GEOinseregraficosombra","",4,"5")+'</td>';
-		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
-		ins += '		</table>';
+		ins += '		<p class=paragrafo >Tamanho do c&iacute;rculo:</p>';
+		ins += '		<div class=styled-select >';
+		ins += '		<input type=text value=50 id=i3GEOinseregraficow />';
+		ins += '		</div>';
+		ins += '		<br><p class=paragrafo >'+$trad(6,i3GEOF.insereGrafico.dicionario)+':</p>';
+		ins += '		<div class=styled-select >';
+		ins += '		<input type=text value=1.5 id=i3GEOinseregraficoinclinacao />';
+		ins += '		</div>';
+		ins += '		<br><p class=paragrafo >'+$trad(7,i3GEOF.insereGrafico.dicionario)+':</p>';
+		ins += '		<div class=styled-select >';
+		ins += '		<input type=text value=5 id=i3GEOinseregraficosombra />';
+		ins += '		</div>';
 		ins += '	</div>';
 		ins += '</div>	';
 		return ins;
@@ -220,7 +215,7 @@ i3GEOF.insereGrafico = {
 
 	Insere um grafico no mapa na posi&ccedil;&atilde;o clicada
 
-	O ponto &eacute; obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
+	O ponto &eacute; obtidos do objeto objposicaocursor e os demais parï¿½metros da janela interna aberta no iframe "wdocai"
 
 	Veja:
 
@@ -280,7 +275,8 @@ i3GEOF.insereGrafico = {
 			"i3GEOinseregraficotemasi",
 			"",
 			false,
-			"ligados"
+			"ligados",
+			"display:block"
 		);
 	},
 	/*
@@ -321,7 +317,7 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: pegaItensMarcados
 
-	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
+	Recupera os itens que foram marcados e monta uma lista para enviar como parï¿½metro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
 		var listadeitens = [],

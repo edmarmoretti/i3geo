@@ -192,7 +192,7 @@ i3GEOF.markercluster = {
 						3,
 						i3GEOF.markercluster.dicionario)
 				+ ":";
-		ins += "<div id='i3GEOmarkerclusterSelTemas' style='text-align:left;font-size:11px'></div>";
+		ins += "<div class=styled-select id='i3GEOmarkerclusterSelTemas' ></div>";
 		i3GEO.util.proximoAnterior(
 				"i3GEOF.markercluster.t0()",
 				"i3GEOF.markercluster.t2()",
@@ -208,19 +208,19 @@ i3GEOF.markercluster = {
 				+ $trad(
 						12,
 						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterTitulo' type=text size=20 value='Mapa de calor'/>";
+		ins += "<br></p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterTitulo' type=text value='Mapa de calor'/></div>";
 
-		ins += "<br><br><p class='paragrafo' >"
+		ins += "<br><p class='paragrafo' >"
 				+ $trad(
 						13,
 						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterRaio' type=text size=10 value='50'/>";
+		ins += "</p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterRaio' type=text value='50'/></div>";
 
-		ins += "<br><br><p class='paragrafo' >"
+		ins += "<br><p class='paragrafo' >"
 				+ $trad(
 						14,
 						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterOpacidade' type=text size=10 value='50'/>";
+		ins += "</p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterOpacidade' type=text value='50'/></div>";
 
 		i3GEO.util.proximoAnterior(
 				"i3GEOF.markercluster.t1()",
@@ -333,7 +333,8 @@ i3GEOF.markercluster = {
 				"i3GEOmarkerclusterSelTemas",
 				"",
 				false,
-				"ligados");
+				"ligados",
+				"display:block");
 	},
 	/**
 	 * Function: comboItens

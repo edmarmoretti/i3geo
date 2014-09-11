@@ -46,7 +46,7 @@ i3GEOF.perfil = {
 	/*
 	Variavel: pontos
 
-	Objeto com a lista de pontos iniciais enviadas como par�metro na inicializa&ccedil;&atilde;o da ferramenta
+	Objeto com a lista de pontos iniciais enviadas como parametro na inicializa&ccedil;&atilde;o da ferramenta
 	*/
 	pontos: "",
 	/*
@@ -119,10 +119,11 @@ i3GEOF.perfil = {
 	html:function(){
 		var ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.perfil.dicionario);
 		ins += "<p class='paragrafo' ><input onclick='if(this.checked == true){$i(\"i3GEOFperfilTemasSel\").value = \"\";$i(\"i3GEOFperfilDivComboItens\").innerHTML = \"\";}' style=cursor:pointer checked type=radio name=i3GEOFperfilFonte id=i3GEOFperfilFonteGoogle /> Google";
-		ins += "<br><p class='paragrafo' >"+$trad(2,i3GEOF.perfil.dicionario)+" <div style=text-align:left; id=i3GEOFperfilTemas ></div>";
-		ins += "<br><div style=text-align:left; id=i3GEOFperfilDivComboItens ></div><br>";
-		ins += "<p class='paragrafo' ><input type=text id=i3GEOFperfilAmostragem value=20 size=3 /> "+$trad(3,i3GEOF.perfil.dicionario);
-		ins += "<br><br><input id=i3GEOperfilbotao1 type='buttom' value='"+$trad(4,i3GEOF.perfil.dicionario)+"' />";
+		ins += "<br><p class='paragrafo' >"+$trad(2,i3GEOF.perfil.dicionario)+"</p> <div class=styled-select id=i3GEOFperfilTemas ></div>";
+		ins += "<br><div id=i3GEOFperfilDivComboItens ></div><br>";
+		ins += "<br><p class='paragrafo' >" + $trad(3,i3GEOF.perfil.dicionario) + "</p>";
+		ins += "<div class=styled-select ><input type=text id=i3GEOFperfilAmostragem value=20 /></div>";
+		ins += "<br><p class='paragrafo' ><input id=i3GEOperfilbotao1 type='buttom' value='"+$trad(4,i3GEOF.perfil.dicionario)+"' />";
 		ins += "<br><br><div style=text-align:left id=i3GEOperfilfim ></div>";
 		return ins;
 	},
@@ -150,7 +151,7 @@ i3GEOF.perfil = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"250px",
+			"290px",
 			"",
 			"",
 			"",
@@ -305,7 +306,7 @@ i3GEOF.perfil = {
 								"i3GEOFperfilComboItens",
 								i3GEO.temaAtivo,
 								function(retorno){
-									$i("i3GEOFperfilDivComboItens").innerHTML = "<p class=paragrafo >"+$trad(8,i3GEOF.perfil.dicionario)+" <br>"+retorno.dados+"</p>";
+									$i("i3GEOFperfilDivComboItens").innerHTML = "<p class=paragrafo >"+$trad(8,i3GEOF.perfil.dicionario)+"</p><div class=styled-select >"+retorno.dados+"</div>";
 								}
 							);
 						}
@@ -321,7 +322,8 @@ i3GEOF.perfil = {
 			"i3GEOFperfilTemas",
 			"",
 			false,
-			"ligados"
+			"ligados",
+			"display:block"
 		);
 	}
 };
