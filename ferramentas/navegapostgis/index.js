@@ -33,7 +33,7 @@ Classe: i3GEOF.navegapostgis
 
 */
 i3GEOF.navegapostgis = {
-	//ao concluir, o nome do arquivo será retornado para esse objeto atribuindo o resultado ao atributo value
+	//ao concluir, o nome do arquivo sera retornado para esse objeto atribuindo o resultado ao atributo value
 	retornarPara: "",
 	//guarda o tipo de navegador
 	tipo: "sql",
@@ -114,7 +114,7 @@ i3GEOF.navegapostgis = {
 			);
 		}
 		var conexao = function(retorno){
-				var ins = "<select onchange='i3GEOF.navegapostgis.montaArvore(this.value)'>",
+				var ins = "<select onchange='i3GEOF.navegapostgis.montaArvore(this.value)'><option value='' >---</option>",
 					n = retorno.length,
 					i = 0;
 				for (i=0;i<n; i++){
