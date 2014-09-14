@@ -1005,9 +1005,16 @@ i3GEO.barraDeBotoes = {
 		if(i3GEO.barraDeBotoes.ATIVA === false){
 			return;
 		}
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.inicializaBarra()");}
-		if (i3GEO.configura.map3d === "")
-		{i3GEO.barraDeBotoes.INCLUIBOTAO.v3d = false;}
+		var ticone,tipo,mostra,i,temp,e,wj,recuo,alturadisponivel,n,chaves,
+		elementos = "",
+		numerobotoes = 0,
+		nelementos = 0,
+		Dom = YAHOO.util.Dom,
+		branco = i3GEO.configura.locaplic+'/imagens/branco.gif',
+		novoel;
+		if (i3GEO.configura.map3d === ""){
+			i3GEO.barraDeBotoes.INCLUIBOTAO.v3d = false;
+		}
 		if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe"){
 			i3GEO.barraDeBotoes.inicializaBarraOP();
 		}
@@ -1018,12 +1025,7 @@ i3GEO.barraDeBotoes = {
 			if(this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === true){
 				this.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><img style='margin:4px;border:0px solid white;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";
 			}
-			var novoel,ticone,tipo,mostra,i,temp,e,wj,recuo,novoel,alturadisponivel,n,chaves,
-				elementos = "",
-				numerobotoes = 0,
-				nelementos = 0,
-				Dom = YAHOO.util.Dom,
-				branco = i3GEO.configura.locaplic+'/imagens/branco.gif';
+
 			if(navm){
 				i3GEO.barraDeBotoes.TRANSICAOSUAVE = false;
 			}
@@ -1036,7 +1038,6 @@ i3GEO.barraDeBotoes = {
 						temp += "<img id='"+chaves[i]+"_iconeId' onclick='i3GEO.barraDeBotoes.execBotao(\""+chaves[i]+"\")' src='"+i3GEO.configura.locaplic+"/"+i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]+"' />";
 					}
 				}
-
 				//
 				//se o id indicado para incluir a barra nao existir, o div sera criado
 				//

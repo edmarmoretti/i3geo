@@ -227,31 +227,34 @@ string com a legenda HTML
 			$this->layer->set("status",MS_DEFAULT);
 		}
 		$desligar = array();
-		$conta = 0;
-		$desligar = array();
 		for ($i=0;$i < $numlayers;++$i){
 			$la = $this->mapa->getlayer($i);
-			if (strtoupper($la->getmetadata("ESCONDIDO")) == "SIM")
-			{$la->set("status",MS_OFF);}
+			if (strtoupper($la->getmetadata("ESCONDIDO")) == "SIM"){
+				$la->set("status",MS_OFF);
+			}
+			$desligarLayer = array();
 			if($la->status == MS_DEFAULT){
 				$nc = $la->numclasses;
 				for ($c = 0;$c < $nc;$c++){
 					$classe = $la->getclass($c);
-					if($classe->status == MS_OFF)
-					{$desligar[] = $conta;}
-					$conta = $conta + 1;
+					if($classe->status == MS_OFF){
+						$desligarLayer[] = $c;
+					}
 				}
 				$la->set("minscaledenom",0);
 				$la->set("maxscaledenom",0);
 			}
+			$desligar[$la->name] = $desligarLayer;
 		}
 		$legenda = $this->mapa->legend;
 		$legenda->set("template",$this->templateleg);
 		$tmparray["my_tag"] = "value_of_my_tag";
-		if(!$l = @$this->mapa->processlegendtemplate($tmparray))
-		{return ("erro");}
-		if (function_exists("mb_convert_encoding"))
-		{$l = mb_convert_encoding($l,"UTF-8","ISO-8859-1");}
+		if(!$l = @$this->mapa->processlegendtemplate($tmparray)){
+			return ("erro");
+		}
+		if (function_exists("mb_convert_encoding")){
+			$l = mb_convert_encoding($l,"UTF-8","ISO-8859-1");
+		}
 		return (array("legenda"=>$l,"desativar"=>$desligar));
 	}
 /*

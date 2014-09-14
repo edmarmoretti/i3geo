@@ -28,7 +28,7 @@ cria o objeto cpaint->
 
 carrega as fun&ccedil;&otilde;es de uso mais comuns->
 
-faz uma c�pia de seguran&ccedil;a do map_file->
+faz uma c&oacute;pia de seguran&ccedil;a do map_file->
 
 roda a fun&ccedil;&atilde;o desejada->
 
@@ -2037,10 +2037,14 @@ Gera a legenda processando o template HTML.
 	case "CRIALEGENDAHTML":
 		include_once("classe_legenda.php");
 		//para efeitos de compatibilidade com vers&otilde;es anteriores
-		if(isset($template)){$templateLegenda = $template;}
+		if(isset($template)){
+			$templateLegenda = $template;
+		}
 		$m = new Legenda($map_file,$locaplic,$tema,$templateLegenda);
 		$r = $m->criaLegenda();
-		if(!$r){$r = "erro. Legenda nao disponivel";}
+		if(!$r){
+			$r = "erro. Legenda nao disponivel";
+		}
 		$retorno = $r;
 	break;
 /*

@@ -391,9 +391,12 @@ i3GEO.mapa =
 			atualiza : function() {
 				var idleg = $i("wlegenda_corpo"), temp =
 					function(retorno) {
-						var legenda = "", ins, re;
-						re = new RegExp("<img src='' />", "g");
+						var legenda = "", ins, re, desativar, tema = "", classe = "";
+						re = new RegExp();
 						if (retorno.data !== "erro" && retorno.data !== undefined) {
+							//troca os ids pois podem ja existir na arvore de camadas
+							re = new RegExp("legendack_", "g");
+							retorno.data.legenda = retorno.data.legenda.replace(re, "liblegendack_");
 							legenda =
 								"<div onclick='i3GEO.mapa.legendaHTML.mostraTodosOsTemas()' style=cursor:pointer;font-size:10px;text-align:left; >Mostra tudo</div><br>"
 									+ retorno.data.legenda;
@@ -405,12 +408,23 @@ i3GEO.mapa =
 									'<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -35px; top: -22px;">'
 										+ $trad("x11") + '</p></div>';
 							}
+							re = new RegExp("<img src='' />", "g");
 							legenda = legenda.replace(re, "");
 							ins += "<div id='corpoLegi' >" + legenda + "</div>";
 
 							idleg.innerHTML = legenda;
 						}
 						i3GEO.mapa.legendaHTML.escondeTemasMarcados();
+						//desmarca as classes desligadas
+						desativar = retorno.data.desativar;
+						for(tema in desativar){
+							for(classe in desativar[tema]){
+								ins = $i("liblegendack_"+tema+"_"+desativar[tema][classe]);
+								if(ins){
+									ins.checked = false;
+								}
+							}
+						}
 					};
 				if (idleg && idleg.style.display === "block") {
 					// para o caso da legenda ja estar aberta

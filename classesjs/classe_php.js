@@ -210,8 +210,9 @@ i3GEO.php = {
 			tema = "";
 			template = "legenda2.htm";
 		}
-		if(arguments.length === 2)
-		{template = "legenda2.htm";}
+		if(arguments.length === 2){
+			template = "legenda2.htm";
+		}
 		cpJSON.call(
 				i3GEO.configura.locaplic+"/classesphp/mapa_controle.php",
 				"criaLegendaHTML",

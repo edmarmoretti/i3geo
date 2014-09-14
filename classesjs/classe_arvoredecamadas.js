@@ -1467,8 +1467,8 @@ i3GEO.arvoreDeCamadas = {
 					i++;
 				} while (i < nelementos);
 			}
-			if (original.data.desativar) {
-				desativar = original.data.desativar;
+			if (original.data.desativar[idtema]) {
+				desativar = original.data.desativar[idtema];
 				nindices = desativar.length;
 				i = 0;
 				if (nindices > 0) {
@@ -1567,6 +1567,19 @@ i3GEO.arvoreDeCamadas = {
 		var temp = function(retorno) {
 			i3GEO.atualiza();
 			i3GEO.Interface.atualizaTema(retorno, leg.name);
+			//obtem o objeto checkbox
+			var ck = "";
+			//verifica se existe o checkbox da legenda mostrada em outra janela
+			//legendack_ e incluido via template da legenda
+			if(leg.id && leg.id === "legendack_"+leg.name+"_"+leg.value){
+				ck = $i("liblegendack_"+leg.name+"_"+leg.value);
+			}
+			else if(leg.id && leg.id === "liblegendack_"+leg.name+"_"+leg.value){
+				ck = $i("legendack_"+leg.name+"_"+leg.value);
+			}
+			if(ck && ck != ""){
+				ck.checked = leg.checked;
+			}
 		};
 		i3GEO.php.inverteStatusClasse(temp, leg.name, leg.value);
 	},
