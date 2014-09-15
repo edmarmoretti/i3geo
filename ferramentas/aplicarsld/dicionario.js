@@ -1,11 +1,11 @@
 //+$trad(1,i3GEOF.aplicarsld.dicionario)+
 i3GEOF.aplicarsld.dicionario = {
-1: [{
+'arquivo': [{
 pt:"Arquivo SLD",
 en:"",
 es:""
 }],
-2: [{
+'aplica': [{
 pt:"Aplicar",
 en:"",
 es:""
