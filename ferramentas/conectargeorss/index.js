@@ -67,7 +67,7 @@ function clickGuia2()
 {
 	mostraGuia("guia2");
 	$i("resultadoget").innerHTML = "";
-	if ($i("servico").value == ""){i3GEO.janela.tempoMsg($trad(1,i3GEOF.conectargeorss.dicionario));}
+	if ($i("servico").value == ""){i3GEO.janela.tempoMsg($trad('msgServico',i3GEOF.conectargeorss.dicionario));}
 	else
 	{
 		$i("guia2obj").style.display="block";
@@ -99,7 +99,7 @@ retorno {JSON} - retorno da fun&ccedil;&atilde;o clickGuia2
 */
 function listaCanais(retorno)
 {
-	var i,ins = $trad(2,i3GEOF.conectargeorss.dicionario)+"<br>";
+	var i,ins = $trad('selecionaItem',i3GEOF.conectargeorss.dicionario)+"<br>";
 	if (retorno.data != undefined)
 	{
 		retorno = retorno.data;
@@ -107,14 +107,14 @@ function listaCanais(retorno)
 		{
 			ins += "<p style=cursor:pointer onclick=adicionatema('"+i+"') ><input type=radio name=cn value=mapa >&nbsp;<b>"+retorno[i].title+ "</b></p>";
 			ins += "<br><a href="+retorno[i].link+" target=blank >"+retorno[i].link+"</a>";
-			ins += "<br><i>"+$trad(3,i3GEOF.conectargeorss.dicionario)+"</i> "+retorno[i].description;
-			ins += "<br><i>"+$trad(4,i3GEOF.conectargeorss.dicionario)+" </i>"+retorno[i].category;
+			ins += "<br><i>"+$trad('descricao',i3GEOF.conectargeorss.dicionario)+"</i> "+retorno[i].description;
+			ins += "<br><i>"+$trad('categoria',i3GEOF.conectargeorss.dicionario)+" </i>"+retorno[i].category;
 		}
 		$i("resultadoget").innerHTML = ins;
 	}
 	else
 	{
-		$i("resultadoget").innerHTML = "<p style=color:red >"+$trad(5,i3GEOF.conectargeorss.dicionario)+"<br>";
+		$i("resultadoget").innerHTML = "<p style=color:red >"+$trad('erro',i3GEOF.conectargeorss.dicionario)+"<br>";
 	}
 	aguarde("none");
 }

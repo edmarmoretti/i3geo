@@ -200,7 +200,7 @@ i3GEOF.analisaGeometrias = {
 		ins += '				<option value=union >'+$trad('uniao',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=intersection >'+$trad('interseccao',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=difference >'+$trad('diferenca',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '				<option value=symdifference >'+$trad('diferencaInversa,i3GEOF.analisaGeometrias.dicionario)+'</option>';
+		ins += '				<option value=symdifference >'+$trad('diferencaInversa',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=convexhull >'+$trad('convexo',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes type=button value="'+$trad(17,i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
 		ins += '			<p class=paragrafo >'+$trad('operacaoGeom3',i3GEOF.analisaGeometrias.dicionario)+':';

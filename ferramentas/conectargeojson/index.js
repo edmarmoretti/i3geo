@@ -85,7 +85,7 @@ i3GEOF.conectargeojson = {
 	*/
 	inicia: function(iddiv){
 		if(navm)
-		{i3GEO.janela.tempoMsg($trad(1,i3GEOF.conectargeojson.dicionario));}
+		{i3GEO.janela.tempoMsg($trad('msgNavegador',i3GEOF.conectargeojson.dicionario));}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.conectargeojson.html();
 			var monta = function(retorno){
@@ -119,7 +119,7 @@ i3GEOF.conectargeojson = {
 	*/
 	html:function(){
 		var ins = '' +
-		'<p class="paragrafo" >'+$trad(2,i3GEOF.conectargeojson.dicionario)+'<br><br>' +
+		'<p class="paragrafo" >'+$trad('insereEndereco',i3GEOF.conectargeojson.dicionario)+'<br><br>' +
 		$inputText("","","i3GEOconectargeojsonurl","",45,"") +
 		'<br><br>' +
 		'<div id="i3GEOconectargeojsonCombo" style="left:1px;display:block;width:315px;text-align:left;">' + $trad("o1") +
