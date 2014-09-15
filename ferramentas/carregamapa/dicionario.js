@@ -1,11 +1,11 @@
 //+$trad(1,i3GEOF.carregaMapa.dicionario)+
 i3GEOF.carregaMapa.dicionario = {
-1: [{
+'insereArquivo': [{
 pt:"Arquivo para upload:",
 en:"",
 es:""
 }],
-2: [{
+'carregaArquivo': [{
 pt:"Carregar arquivo",
 en:"",
 es:""

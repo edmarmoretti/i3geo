@@ -102,11 +102,11 @@ i3GEOF.carregaMapa = {
 	html:function(){
 		var ins = '';
 		ins += '<form id=i3GEOcarregamapaf target="i3GEOcarregamaiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/carregamapa/upload.php" method="post" ENCTYPE="multipart/form-data" >' +
-			'<p class="paragrafo" >'+$trad(1,i3GEOF.carregaMapa.dicionario)+
+			'<p class="paragrafo" >'+$trad('insereArquivo',i3GEOF.carregaMapa.dicionario)+
 			'<br><br>' +
 			'<p class="paragrafo" ><input type="file" name="i3GEOcarregamapafilemap" size="22" style="top:0px;left:0px;cursor:pointer;">' +
 			'<br><br>' +
-			'<p class="paragrafo" ><input id=i3GEOcarregamapabotao1 type="button" value="'+$trad(2,i3GEOF.carregaMapa.dicionario)+'" size=12 name="submit"><br>' +
+			'<p class="paragrafo" ><input id=i3GEOcarregamapabotao1 type="button" value="'+$trad('carregaArquivo',i3GEOF.carregaMapa.dicionario)+'" size=12 name="submit"><br>' +
 			'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 			'<input type="hidden" name="MAX_FILE_SIZE" value="100000" >' +
 			'</form>' +
