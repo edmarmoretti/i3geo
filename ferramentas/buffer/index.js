@@ -153,32 +153,32 @@ i3GEOF.buffer = {
 	t0: function()
 	{
 		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/buffer/exemplo.png' />" +
-			"<p class='paragrafo' >"+$trad(1,i3GEOF.buffer.dicionario) +
-			"<p class='paragrafo' >"+$trad(2,i3GEOF.buffer.dicionario);
+			"<p class='paragrafo' >"+$trad('descricao',i3GEOF.buffer.dicionario) +
+			"<p class='paragrafo' >"+$trad('descricao2',i3GEOF.buffer.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.buffer.t1()",ins,"i3GEOFgradeDePontost0","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo'>"+$trad(3,i3GEOF.buffer.dicionario)+":";
+		var ins = "<p class='paragrafo'>"+$trad('selecionaTema',i3GEOF.buffer.dicionario)+":";
 		ins += "<div id='i3GEObufferSelTemas' style='text-align:left;font-size:11px'></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t0()","i3GEOF.buffer.t2()",ins,"i3GEOF.buffer.t1","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
 		i3GEOF.buffer.comboTemasSel();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.buffer.dicionario);
+		var ins = "<p class='paragrafo'>"+$trad('entorno',i3GEOF.buffer.dicionario);
 		ins += "<br><div class=styled-select style='display:block' ><input onclick='javascript:this.select();' id='i3GEObufferd' type=text value='0'/></div>";
 
-		ins += "<br><p class='paragrafo' >"+$trad(10,i3GEOF.buffer.dicionario);
+		ins += "<br><p class='paragrafo' >"+$trad('entornoAtributo',i3GEOF.buffer.dicionario);
 		ins += "<br><div id=i3GEObufferondeItens style='text-align:left;display:block' ></div> ";
 
-		ins += "<br><p class='paragrafo'>"+$trad(5,i3GEOF.buffer.dicionario);
+		ins += "<br><p class='paragrafo'>"+$trad('agregaElementos',i3GEOF.buffer.dicionario);
 		ins += "<br></p><div class=styled-select ><select id=i3GEObufferunir ><option value=nao selected >"+$trad("x15")+"</option><option value=sim >"+$trad("x14")+"</option></select></div>";
 		ins += "<br><br>";
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t1()","i3GEOF.buffer.t3()",ins,"i3GEOF.buffer.t2","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
 		i3GEOF.buffer.comboItens();
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.buffer.dicionario);
-		ins += "<br><br><input id=i3GEObufferbotao1 type='button' value='"+$trad(7,i3GEOF.buffer.dicionario)+"' />";
+		var ins = "<p class='paragrafo'>"+$trad('adicionaTemaEntorno',i3GEOF.buffer.dicionario);
+		ins += "<br><br><input id=i3GEObufferbotao1 type='button' value='"+$trad('criaEntorno',i3GEOF.buffer.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t2()","",ins,"i3GEOF.buffer.t3","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
 		new YAHOO.widget.Button(
 			"i3GEObufferbotao1",
@@ -210,7 +210,7 @@ i3GEOF.buffer = {
 				fim = function(retorno){
 					i3GEOF.buffer.aguarde.visibility = "hidden";
 					if (retorno.data === undefined )
-					{$i("i3GEObufferfim").innerHTML = $trad(8,i3GEOF.buffer.dicionario);}
+					{$i("i3GEObufferfim").innerHTML = $trad('erroTempo',i3GEOF.buffer.dicionario);}
 					else
 					{i3GEO.atualiza();}
 				};
@@ -225,7 +225,7 @@ i3GEOF.buffer = {
 				cp.call(p,"criaBuffer",fim);
 			}
 			else
-			{i3GEO.janela.tempoMsg($trad(9,i3GEOF.buffer.dicionario));}
+			{i3GEO.janela.tempoMsg($trad('erroDistancia',i3GEOF.buffer.dicionario));}
 		}
 		catch(e){$i("i3GEObufferfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.buffer.aguarde.visibility = "hidden";}
 	},
@@ -276,7 +276,7 @@ i3GEOF.buffer = {
 			$i("i3GEObuffertemasComSel").value,
 			function(retorno){
 				$i("i3GEObufferondeItens").innerHTML = "<div class=styled-select >" + retorno.dados + "</div>"
-				+ "<br><br><p class=paragrafo >" + $trad(11,i3GEOF.buffer.dicionario)
+				+ "<br><br><p class=paragrafo >" + $trad('multiplica',i3GEOF.buffer.dicionario)
 				+" <div class=styled-select ><input onclick='javascript:this.select();' id='i3GEObufferdfator' type=text value='1'/></div>";
 				$i("i3GEObufferondeItens").style.display = "block";
 			},
