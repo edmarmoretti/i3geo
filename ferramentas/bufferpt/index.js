@@ -116,9 +116,9 @@ i3GEOF.bufferpt = {
 	*/
 	html:function(){
 		var ins = '' +
-		'<p class=paragrafo >'+$trad(1,i3GEOF.bufferpt.dicionario)+'</p>' +
+		'<p class=paragrafo >'+$trad('entorno',i3GEOF.bufferpt.dicionario)+'</p>' +
 		$inputText("","","i3GEOFbufferptDistancia","",10,0) +
-		'<br><br><p class=paragrafo ><input id=i3GEObufferptbotao1 size=16  type=button value="'+$trad(2,i3GEOF.bufferpt.dicionario)+'"/>';
+		'<br><br><p class=paragrafo ><input id=i3GEObufferptbotao1 size=16  type=button value="'+$trad('criaEntorno',i3GEOF.bufferpt.dicionario)+'"/>';
 		return ins;
 	},
 	/*
@@ -190,7 +190,7 @@ i3GEOF.bufferpt = {
 				fim = function(retorno){
 					i3GEOF.bufferpt.aguarde.visibility = "hidden";
 					if (retorno.data === undefined )
-					{i3GEO.janela.tempoMsg($trad(3,i3GEOF.bufferpt.dicionario));}
+					{i3GEO.janela.tempoMsg($trad('erroTempo',i3GEOF.bufferpt.dicionario));}
 					else
 					{i3GEO.atualiza();}
 				};
@@ -200,7 +200,7 @@ i3GEOF.bufferpt = {
 				cp.call(p,"criaBuffer",fim);
 			}
 			else
-			{i3GEO.janela.tempoMsg($trad(4,i3GEOF.bufferpt.dicionario));}
+			{i3GEO.janela.tempoMsg($trad('erroDistancia',i3GEOF.bufferpt.dicionario));}
 		}
 		catch(e){$i("i3GEObufferfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.bufferpt.aguarde.visibility = "hidden";}
 	}

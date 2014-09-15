@@ -1,21 +1,21 @@
 //+$trad(1,i3GEOF.bufferpt.dicionario)+
 i3GEOF.bufferpt.dicionario = {
-1: [{
+'entorno': [{
 pt:"Dist&acirc;ncia em metros ao redor do ponto",
 en:"",
 es:""
 }],
-2: [{
+'criaEntorno': [{
 pt:"Criar",
 en:"",
 es:""
 }],
-3: [{
+'erroTempo': [{
 pt:"Erro. A opera&ccedil;&atilde;o demorou muito.",
 en:"",
 es:""
 }],
-4: [{
+'erroDistancia': [{
 pt:"Dist&acirc;ncia inv&aacute;lida",
 en:"",
 es:""
