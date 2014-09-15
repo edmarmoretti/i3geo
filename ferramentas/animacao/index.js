@@ -104,14 +104,14 @@ i3GEOF.animacao = {
 		var ins = "";
 		ins += "" +
 			"<div style='text-align:center;position:relative;cursor:pointer'  >" +
-			"	<img title='"+$trad(1,i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_inicia.png' onclick='i3GEOF.animacao.dispara()' />&nbsp;" +
-			"	<img title='"+$trad(2,i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_para.png' onclick='i3GEOF.animacao.termina()' />&nbsp;" +
-			"	<img title='"+$trad(3,i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_avanca.png' onclick='i3GEOF.animacao.maisrapido()' />&nbsp;" +
-			"	<img title='"+$trad(4,i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_volta.png' onclick='i3GEOF.animacao.maislento()' />&nbsp;" +
+			"	<img title='"+$trad('inicia',i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_inicia.png' onclick='i3GEOF.animacao.dispara()' />&nbsp;" +
+			"	<img title='"+$trad('rebobina',i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_para.png' onclick='i3GEOF.animacao.termina()' />&nbsp;" +
+			"	<img title='"+$trad('rapido',i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_avanca.png' onclick='i3GEOF.animacao.maisrapido()' />&nbsp;" +
+			"	<img title='"+$trad('lento',i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_volta.png' onclick='i3GEOF.animacao.maislento()' />&nbsp;" +
 			"</div>" +
 			"<div id='i3GEOFanimacaoLista' ></div><br>" +
 			'<div id=i3GEOanimacaomen1 style="display:block;left:0px;">' +
-			'	<p class=paragrafo >'+$trad(5,i3GEOF.animacao.dicionario)+'</p>' +
+			'	<p class=paragrafo >'+$trad('ajuda',i3GEOF.animacao.dicionario)+'</p>' +
 			'</div>';
 		return ins;
 	},
