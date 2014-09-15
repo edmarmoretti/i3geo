@@ -371,7 +371,7 @@ function ajuda(){
 	nocache (sim) - evita o uso de imagens em cache existentes no navegador do usu&aacute;rio
 
 	Filtros
-	
+
 	filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
 
 	Exemplo de filtro
@@ -379,7 +379,7 @@ function ajuda(){
 	?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))
 
 	no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
-	
+
 	fundo - lista com os nomes, separados por ',' dos layers que ser&atilde;o usados como fundo para o mapa. Se n&atilde;o for definido,
 	ser&aacute; usado o default. O primeiro da lista ser&aacute; o fundo ativo. Se na lista de temas de fundo estiver algum
 	tema incluido com o parametro 'temas', esses ser&atilde;o inclu&iacute;dos como temas de fundo.
@@ -583,7 +583,7 @@ for (var j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
 	temp = temp / 2;
 	r.push(temp);
 }
-
+i3GEO.editorOL.incluilayergrafico = true;
 i3GEO.editorOL.mapa = new OpenLayers.Map(
 	'i3geoMapa',
 	{

@@ -254,7 +254,7 @@ i3GEO.editorOL = {
 				i3GEO.editorOL.mapa.addLayer(i3GEO.editorOL.layersIniciais[i]);
 			}
 		}
-		if(!i3GEO.desenho.layergrafico){
+		if(!i3GEO.desenho.layergrafico && i3GEO.editorOL.incluilayergrafico === true){
 			i3GEO.editorOL.mapa.addLayers([i3GEO.desenho.layergrafico]);
 		}
 		i3GEO.editorOL.adicionaKml();
@@ -623,6 +623,7 @@ i3GEO.editorOL = {
 	},
 	captura: function(lonlat){
 		//if(i3GEO.desenho.layergrafico !== ""){return;}
+
 		var d = 0.1,
 			layers = [i3GEO.editorOL.layerAtivo()],
 			xy = lonlat.split(","),

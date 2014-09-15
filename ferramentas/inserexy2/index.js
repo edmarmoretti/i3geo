@@ -196,17 +196,17 @@ i3GEOF.inserexy = {
 		'<div class=guiaobj id="i3GEOinserexyguia0obj" style="left:1px;display:none;top:10px"><p class=paragrafo >'+$trad(35,i3GEOF.inserexy.dicionario)+'</p></div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia1obj" style="left:1px;display:none;top:10px">' +
 		'	<p class=paragrafo >'+$trad(7,i3GEOF.inserexy.dicionario)+':</p>' +
-		'	<div id=i3GEOinserexyshapefile style="left:0px;text-align:left;">' +
+		'	<div class="styled-select" id=i3GEOinserexyshapefile >' +
 		'	</div><br>' +
 		'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="'+$trad(8,i3GEOF.inserexy.dicionario)+'" />' +
 		'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="'+$trad(9,i3GEOF.inserexy.dicionario)+'" /></p>' +
 
 		'	<div id=i3GEOinserexyopcitens style=display:none;left:0px;text-align:left; >' +
 		'		<p class=paragrafo >'+$trad(10,i3GEOF.inserexy.dicionario)+':</p>' +
-		'		<div id=i3GEOinserexyshapefileitem style="left:0px;text-align:left;">' +
+		'		<div class="styled-select" id=i3GEOinserexyshapefileitem >' +
 		'		</div>' +
-		'		<p class=paragrafo >Valor: '+
-		$inputText("","","i3GEOinserexyvalorItem","",20,"") +
+		'		<br><p class=paragrafo >Valor: </p>'+
+		'		<div class="styled-select" ><input type=text value="" id="i3GEOinserexyvalorItem" /></div>' +
 		'	<br></div>' +
 		'	<div id=i3GEOinserexymen1 style="display:block;left:0px;">' +
 		'		<p class=paragrafo >'+$trad(11,i3GEOF.inserexy.dicionario)+'</p>' +
@@ -376,7 +376,8 @@ i3GEOF.inserexy = {
 			"i3GEOinserexyshapefile",
 			"",
 			false,
-			"locais"
+			"locais",
+			"display:block"
 		);
 	},
 	/*
@@ -459,7 +460,8 @@ i3GEOF.inserexy = {
 				$i("i3GEOinserexyshapefileitem").innerHTML = "<p class=paragrafo>"+retorno.dados+"</p>";
 				$i("i3GEOinserexyopcitens").style.display = "block";
 			},
-			"i3GEOinserexyshapefileitem"
+			"i3GEOinserexyshapefileitem",
+			"display:block "
 		);
 	},
 	/*
@@ -475,7 +477,7 @@ i3GEOF.inserexy = {
 	/*
 	Function: inserirdd
 
-	Insere um ponto com base na dire&ccedil;&atilde;o e distância
+	Insere um ponto com base na dire&ccedil;&atilde;o e distï¿½ncia
 	*/
 	inserirdd: function(){
 		try{
