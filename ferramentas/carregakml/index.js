@@ -117,7 +117,7 @@ i3GEOF.carregakml = {
 	*/
 	html:function(){
 		var ins = '' +
-		'<p class="paragrafo" >'+$trad(1,i3GEOF.carregakml.dicionario)+':<br><br>' +
+		'<p class="paragrafo" >'+$trad('insereKml',i3GEOF.carregakml.dicionario)+':<br><br>' +
 		$inputText("","","i3GEOcarregakmlurl","",40,"") +
 		'<br><br>' +
 		'<div id="i3GEOcarregakmlCombo" style="left:1px;display:block;width:315px;text-align:left;">' + $trad("o1") +
