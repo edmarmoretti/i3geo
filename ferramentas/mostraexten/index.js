@@ -107,30 +107,30 @@ i3GEOF.mostraExten = {
 		var ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.mostraExten.dicionario)+':</p>' +
 		'<textarea id=i3GEOmostraExtenatual rows=3 cols=50 onclick="javascript:this.select();"></textarea>' +
 		'<p class="paragrafo" >	'+$trad(2,i3GEOF.mostraExten.dicionario)+':</p>' +
-		'	<table class=lista3 >' +
+		'	<table class=lista3 style="width:350px;">' +
 		'		<tr><td>'+$trad(3,i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
-		$inputText("","","i3GEOmostraExtenxg","",3,"-00") +
-		$inputText("","","i3GEOmostraExtenxm","",3,"00") +
-		$inputText("","","i3GEOmostraExtenxs","",3,"0.0") +
+		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenxg" value="-00"/></div>' +
+		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenxm" value="00"/></div>' +
+		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenxs" value="0.0"/></div>' +
 		'		</td></tr>' +
 		'		<tr><td>'+$trad(4,i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
-		$inputText("","","i3GEOmostraExtenyg","",3,"-00") +
-		$inputText("","","i3GEOmostraExtenym","",3,"00") +
-		$inputText("","","i3GEOmostraExtenys","",3,"0.0") +
+		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenyg" value="-00"/></div>' +
+		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenym" value="00"/></div>' +
+		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenys" value="0.0"/></div>' +
 		'		</td></tr>' +
 		'		<tr><td>'+$trad(5,i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
-		$inputText("","","i3GEOmostraExtenxxg","",3,"-00") +
-		$inputText("","","i3GEOmostraExtenxxm","",3,"00") +
-		$inputText("","","i3GEOmostraExtenxxs","",3,"0.0") +
+		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenxxg" value="-00"/></div>' +
+		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenxxm" value="00"/></div>' +
+		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenxxs" value="0.0"/></div>' +
 		'		</td></tr>' +
 		'		<tr><td>'+$trad(6,i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
-		$inputText("","","i3GEOmostraExtenyyg","",3,"-00") +
-		$inputText("","","i3GEOmostraExtenyym","",3,"00") +
-		$inputText("","","i3GEOmostraExtenyys","",3,"0.0") +
+		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenyyg" value="-00"/></div>' +
+		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenyym" value="00"/></div>' +
+		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenyys" value="0.0"/></div>' +
 		'		</td></tr></table>' +
 		'<br><p class="paragrafo" ><input id=i3GEOmostraExtenbotao1 type="button" size=14 value="'+$trad(7,i3GEOF.mostraExten.dicionario)+'"  /></p>';
 		return ins;

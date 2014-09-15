@@ -11,22 +11,22 @@ en:"",
 es:""
 }],
 3: [{
-pt:"Menor longitude (oeste)",
+pt:"Longitude oeste",
 en:"",
 es:""
 }],
 4: [{
-pt:"Menor latitude (sul)",
+pt:"Latitude sul",
 en:"",
 es:""
 }],
 5: [{
-pt:"Maior longitude (leste)",
+pt:"Longitude leste",
 en:"",
 es:""
 }],
 6: [{
-pt:"Maior latitude (norte)",
+pt:"Latitude norte",
 en:"",
 es:""
 }],
