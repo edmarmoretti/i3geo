@@ -103,7 +103,7 @@ i3GEOF.pontoEmPoligono = {
 	*/
 	html:function(){
 		var ins = '';
-		ins +=	'<div style="background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOpontoEmPoligonoresultado" >';
+		ins +=	'<div style="padding:5px;background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOpontoEmPoligonoresultado" >';
 		ins +=	'</div>';
 		ins +=	'<div style="top:10px;left:0px;display:block;width:98%;color:red" id="i3GEOpontoEmPoligonofim" >';
 		ins +=	'</div>';

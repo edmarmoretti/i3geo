@@ -106,7 +106,7 @@ i3GEOF.markercluster = {
 	 */
 	html : function() {
 		var ins = '';
-		ins += '<div style="background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOmarkerclusterresultado" >';
+		ins += '<div style="padding:5px;background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOmarkerclusterresultado" >';
 		ins += '</div>';
 		ins += '<div style="top:10px;left:0px;display:block;width:98%;color:red" id="i3GEOmarkerclusterfim" >';
 		ins += '</div>';

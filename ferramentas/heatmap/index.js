@@ -94,7 +94,7 @@ i3GEOF.heatmap =
 		 */
 		html : function() {
 			var ins = '';
-			ins += '<div style="background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOheatmapresultado" >';
+			ins += '<div style="padding:5px;background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOheatmapresultado" >';
 			ins += '</div>';
 			ins += '<div style="top:10px;left:0px;display:block;width:98%;color:red" id="i3GEOheatmapfim" >';
 			ins += '</div>';
