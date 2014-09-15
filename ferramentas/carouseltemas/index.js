@@ -162,7 +162,7 @@ i3GEOF.carouseltemas = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = "<div id=i3GEOcarouseltemasImagens ></div><p class=paragrafo style='width:180px' >"+$trad(1,i3GEOF.carouseltemas.dicionario);
+		var ins = "<div id=i3GEOcarouseltemasImagens ></div><p class=paragrafo style='width:180px' >"+$trad('adicionaTema',i3GEOF.carouseltemas.dicionario);
 		if(i3GEOF.carouseltemas.incluiAmpliacao === true)
 		{ins += "<div style='text-align:left;' id=i3GEOcarouseltemasImagemmaior ></div>";}
 		return ins;
@@ -179,7 +179,7 @@ i3GEOF.carouseltemas = {
 			i3GEO.janela.minimiza("i3GEOF.carouseltemas");
 		};
 		//cria a janela flutuante
-		titulo = $trad(2,i3GEOF.carouseltemas.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=85' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad('miniaturas',i3GEOF.carouseltemas.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=85' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"210px",
 			"380px",
