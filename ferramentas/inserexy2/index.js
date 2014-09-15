@@ -190,7 +190,7 @@ i3GEOF.inserexy = {
 		'</div><br>' +
 		'<div id=i3GEOinserexyprojecao style="text-align:left;left:0px;display:none">' +
 		'   <p class=paragrafo >'+$trad(6,i3GEOF.inserexy.dicionario)+':</p>' +
-		'	<div id="i3GEOinserexylistaepsg" style="text-align:left;border:1px solid gray;width:300px;overflow:auto;height:60px;display:block;left:1px" >' +
+		'	<div id="i3GEOinserexylistaepsg" style="text-align:left;border:1px solid gray;width:300px;overflow:auto;height:50px;display:block;left:5px" >' +
 		'	</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia0obj" style="left:1px;display:none;top:10px"><p class=paragrafo >'+$trad(35,i3GEOF.inserexy.dicionario)+'</p></div>' +
@@ -217,11 +217,16 @@ i3GEOF.inserexy = {
 
 		'<div class=guiaobj id="i3GEOinserexyguia2obj" style="left:1px;display:none;">' +
 		'	<p class=paragrafo >'+$trad(14,i3GEOF.inserexy.dicionario)+':</p>' +
-		$inputText("","","i3GEOinserexyxgdd","grau",3,"00") +
-		$inputText("","","i3GEOinserexyxmdd","minuto",3,"00") +
-		$inputText("","","i3GEOinserexyxsdd","segundo",3,"0.0") +
-		'	<br><br><p class=paragrafo >'+$trad(15,i3GEOF.inserexy.dicionario)+':</p>' +
-		$inputText("","","i3GEOinserexydistdd","km",5,"0.0") +
+		'<div class=styled-select style="width:40px;float:left;" >' +
+		'<input onclick="javascript:this.select();" class=digitar id="i3GEOinserexyxgdd" title="grau" type=text value="00"/></div>' +
+		'<div class=styled-select style="width:40px;float:left;margin-left:10px;margin-right:10px;" >' +
+		'<input onclick="javascript:this.select();" id="i3GEOinserexyxmdd" title="minuto" type=text value="00"/></div>' +
+		'<div class=styled-select style="width:60px;margin-left:10px;" >' +
+		'<input onclick="javascript:this.select();" id="i3GEOinserexyxsdd" title="segundo" type=text value="00.00"/></div>' +
+		'<br><br><p class=paragrafo >'+$trad(15,i3GEOF.inserexy.dicionario)+':</p>' +
+		'<div class=styled-select >' +
+		'<input onclick="javascript:this.select();" id="i3GEOinserexydistdd" title="km" type=text value="0.0"/>' +
+		'</div>' +
 		'	<div id=opcdd style="top:15px;left:0px">' +
 		'		<p class=paragrafo ><input id=i3GEOinserexybotaodd type="button" size=14 value="'+$trad(16,i3GEOF.inserexy.dicionario)+'"  /></p>' +
 		'	</div>' +
@@ -230,8 +235,8 @@ i3GEOF.inserexy = {
 		'		<p class=paragrafo >'+$trad(18,i3GEOF.inserexy.dicionario)+'</p>' +
 		'	</div>' +
 		'</div> '+
-		'<div class=guiaobj id="i3GEOinserexyguia3obj" style="left:1px;display:none;">' +
-		'	<div id=i3GEOinserexytipodig style="text-align:left;left:0px">' +
+		'<div class=guiaobj id="i3GEOinserexyguia3obj" style="display:none;">' +
+		'	<div id=i3GEOinserexytipodig style="text-align:left;left:0px;top:5px;">' +
 		'		<p class=paragrafo >'+$trad(19,i3GEOF.inserexy.dicionario)+':</p>' +
 		'		<table class=lista6 >' +
 		'		<tr>' +
@@ -243,21 +248,29 @@ i3GEOF.inserexy = {
 		'		</table><br>' +
 		'	</div>' +
 		'	<div id=i3GEOinserexydigmascara style="left:0px">' +
-		'		<p class=paragrafo >X:'+
-		$inputText("","","i3GEOinserexyxg","grau",3,"-00") +
-		$inputText("","","i3GEOinserexyxm","minuto",3,"00") +
-		$inputText("","","i3GEOinserexyxs","segundo",3,"0.0") +
-		'		</p><p class=paragrafo >Y:'+
-		$inputText("","","i3GEOinserexyyg","grau",3,"-00") +
-		$inputText("","","i3GEOinserexyym","minuto",3,"00") +
-		$inputText("","","i3GEOinserexyys","segundo",3,"0.0") +
-		'	</p></div>' +
+		'		<p class=paragrafo >X:</p>'+
+		'		<div class=styled-select style="width:40px;float:left;" >' +
+		'		<input onclick="javascript:this.select();" class=digitar id="i3GEOinserexyxg" title="grau" type=text value="00"/></div>' +
+		'		<div class=styled-select style="width:40px;float:left;margin-left:10px;margin-right:10px;" >' +
+		'		<input onclick="javascript:this.select();" id="i3GEOinserexyxm" title="minuto" type=text value="00"/></div>' +
+		'		<div class=styled-select style="width:60px;margin-left:10px;" >' +
+		'		<input onclick="javascript:this.select();" id="i3GEOinserexyxs" title="segundo" type=text value="00.00"/></div>' +
+		'		<br><p class=paragrafo >Y:</p>'+
+		'		<div class=styled-select style="width:40px;float:left;" >' +
+		'		<input onclick="javascript:this.select();" class=digitar id="i3GEOinserexyyg" title="grau" type=text value="00"/></div>' +
+		'		<div class=styled-select style="width:40px;float:left;margin-left:10px;margin-right:10px;" >' +
+		'		<input onclick="javascript:this.select();" id="i3GEOinserexyym" title="minuto" type=text value="00"/></div>' +
+		'		<div class=styled-select style="width:60px;margin-left:10px;" >' +
+		'		<input onclick="javascript:this.select();" id="i3GEOinserexyys" title="segundo" type=text value="00.00"/></div>' +
+		'	</div>' +
 		'	<div id=i3GEOinserexydigcampo style="display:none;left:0px">' +
-		'		<p class=paragrafo >X: '+
-		$inputText("","","i3GEOinserexylongitude","dms",16,"") +
-		'		</p><p class=paragrafo >Y: '+
-		$inputText("","","i3GEOinserexylatitude","dms",16,"") +
-		'	</p></div>' +
+		'		<p class=paragrafo >X:</p>'+
+		'		<div class=styled-select style="width:60px;margin-left:10px;" >' +
+		'		<input onclick="javascript:this.select();" id="i3GEOinserexylongitude" title="dms" type=text value=""/></div>' +
+		'		<br><p class=paragrafo >Y:</p>'+
+		'		<div class=styled-select style="width:60px;margin-left:10px;" >' +
+		'		<input onclick="javascript:this.select();" id="i3GEOinserexylatitude" title="dms" type=text value=""/></div>' +
+		'	</div>' +
 		'	<br><p class=paragrafo ><input id=i3GEOinserexybotao2 type="button" size=14 value="'+$trad(16,i3GEOF.inserexy.dicionario)+'"  />' +
 		'	<div id=i3GEOinserexymen2 style="left:0px;">' +
 		'		<p class=paragrafo >'+$trad(22,i3GEOF.inserexy.dicionario)+
@@ -268,7 +281,8 @@ i3GEOF.inserexy = {
 		'</div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia4obj" style="left:1px;display:none;">' +
 		'	<br><p class=paragrafo >'+$trad(26,i3GEOF.inserexy.dicionario)+':</p>' +
-		$inputText("","","i3GEOinserexycolar","pares",50,"") +
+		'	<div class=styled-select >' +
+		'	<input onclick="javascript:this.select();" id="i3GEOinserexycolar" title="pares de xy" type=text value=""/></div>' +
 		'	<br><br><p class=paragrafo ><input id=i3GEOinserexybotao6 type="button" size=14 value="'+$trad(16,i3GEOF.inserexy.dicionario)+'"  /></p>' +
 		'	<div id=i3GEOinserexymen3 style="display:block;left:0px;">' +
 		'		<p class=paragrafo >'+$trad(27,i3GEOF.inserexy.dicionario)+'<br> -54.23 -12.5 -50 -5.33<br>' +
@@ -302,7 +316,7 @@ i3GEOF.inserexy = {
 		titulo = $trad("d22t")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=83' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"500px",
-			"300px",
+			"310px",
 			"",
 			"",
 			"",

@@ -104,7 +104,7 @@ i3GEOF.mostraExten = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.mostraExten.dicionario)+':</p>' +
+		var ins = '<div style="padding:5px"><p class="paragrafo" >'+$trad(1,i3GEOF.mostraExten.dicionario)+':</p>' +
 		'<textarea id=i3GEOmostraExtenatual rows=3 cols=50 onclick="javascript:this.select();"></textarea>' +
 		'<p class="paragrafo" >	'+$trad(2,i3GEOF.mostraExten.dicionario)+':</p>' +
 		'	<table class=lista3 style="width:350px;">' +
@@ -132,7 +132,7 @@ i3GEOF.mostraExten = {
 		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenyym" value="00"/></div>' +
 		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenyys" value="0.0"/></div>' +
 		'		</td></tr></table>' +
-		'<br><p class="paragrafo" ><input id=i3GEOmostraExtenbotao1 type="button" size=14 value="'+$trad(7,i3GEOF.mostraExten.dicionario)+'"  /></p>';
+		'<br><p class="paragrafo" ><input id=i3GEOmostraExtenbotao1 type="button" size=14 value="'+$trad(7,i3GEOF.mostraExten.dicionario)+'"  /></p></div>';
 		return ins;
 	},
 	/*

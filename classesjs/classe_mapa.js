@@ -412,7 +412,7 @@ i3GEO.mapa =
 							legenda = legenda.replace(re, "");
 							ins += "<div id='corpoLegi' >" + legenda + "</div>";
 
-							idleg.innerHTML = legenda;
+							idleg.innerHTML = "<div style='padding:5px;' >"+ins+"</div>";
 						}
 						i3GEO.mapa.legendaHTML.escondeTemasMarcados();
 						//desmarca as classes desligadas
