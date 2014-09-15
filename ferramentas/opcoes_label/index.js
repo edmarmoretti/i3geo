@@ -95,117 +95,139 @@ i3GEOF.proplabel = {
 	String com o c&oacute;digo html
 	*/
 	html:function(conector){
-		var ins = '' +
-		'		<table summary="" class=lista width="98%">' +
-		'			<tr><td>'+$trad(2,i3GEOF.proplabel.dicionario)+':</td><td><span id="i3GEOproplabelDivListaFonte">'+$trad(1,i3GEOF.proplabel.dicionario)+'...</span></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(3,i3GEOF.proplabel.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOproplabeltamanho_i","",2,"8") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>';
+		var ins = '<div style="padding-left:5px;">' +
+		'<p class="paragrafo">' + $trad(2,i3GEOF.proplabel.dicionario) + ":</p>" + 
+		'<div class="styled-select" id="i3GEOproplabelDivListaFonte">' +
+		$trad(1,i3GEOF.proplabel.dicionario) +
+		'...</div>' +
+
+		'<br><p class="paragrafo">'+$trad(3,i3GEOF.proplabel.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="8" id="i3GEOproplabeltamanho_i" />' +
+		'</div>';
+
 		if(conector === true){
-			ins += '	<tr><td>'+$trad(4,i3GEOF.proplabel.dicionario)+':</td><td>' +
-			$inputText("","","i3GEOproplabeltamanho_c","",2,"2") +
-			'			</td></tr>' +
-			'			<tr><td>&nbsp;</td><td></td></tr>' +
-			'			<tr><td>'+$trad(5,i3GEOF.proplabel.dicionario)+':</td><td>'+
-			$inputText("","","i3GEOproplabelfrente_c","",11,"0 0 0") +
-			'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelfrente_c\')" /></td></tr>' +
-			'			<tr><td>&nbsp;</td><td></td></tr>';
+			ins += '<br><p class="paragrafo">'+$trad(4,i3GEOF.proplabel.dicionario)+':</p>' +
+			'<div class="styled-select" >' +
+			'<input type="text" value="2" id="i3GEOproplabeltamanho_c" />' +
+			'</div>' +
+			'<br><p class="paragrafo">'+$trad(5,i3GEOF.proplabel.dicionario)+':</p>' +
+			'<div class="styled-select" style="width:100px;float:left;">' +
+			'<input type="text" value="0 0 0" id="i3GEOproplabelfrente_c" />' +
+			'</div>' +
+			'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelfrente_c\')" /><br><br>';
 		}
-		ins += '	<tr><td>'+$trad(6,i3GEOF.proplabel.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOproplabelangulo_i","",4,"0") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr>' +
-		'				<td>'+$trad(7,i3GEOF.proplabel.dicionario)+':</td>' +
-		'				<td>x ' +
-		$inputText("","","i3GEOproplabeloffsetx_i","",2,"0") +
-		'					y ' +
-		$inputText("","","i3GEOproplabeloffsety_i","",2,"0") +
-		'				</td>' +
-		'			</tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(8,i3GEOF.proplabel.dicionario)+':</td><td>'+
-		$inputText("","","i3GEOproplabelfrente_i","",11,"0 0 0") +
-		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelfrente_i\')" /></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(9,i3GEOF.proplabel.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOproplabelmascara_i","",11,"") +
-		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelmascara_i\')" /></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr>' +
-		'				<td>'+$trad(10,i3GEOF.proplabel.dicionario)+':</td>' +
-		'				<td>' +
-		'					<select id=i3GEOproplabelposition_i >' +
-		'						<option value="MS_AUTO" >'+$trad(11,i3GEOF.proplabel.dicionario)+'</option>' +
-		'						<option value="MS_UL" >'+$trad(12,i3GEOF.proplabel.dicionario)+'</option>' +
-		'						<option value="MS_UC" >'+$trad(13,i3GEOF.proplabel.dicionario)+'</option>' +
-		'						<option value="MS_UR" selected >'+$trad(14,i3GEOF.proplabel.dicionario)+'</option>' +
-		'						<option value="MS_CL" >'+$trad(15,i3GEOF.proplabel.dicionario)+'</option>' +
-		'						<option value="MS_CC" >'+$trad(16,i3GEOF.proplabel.dicionario)+'</option>' +
-		'						<option value="MS_CR" >'+$trad(17,i3GEOF.proplabel.dicionario)+'</option>' +
-		'						<option value="MS_LL" >'+$trad(18,i3GEOF.proplabel.dicionario)+'</option>' +
-		'						<option value="MS_LC" >'+$trad(19,i3GEOF.proplabel.dicionario)+'inferior centro</option>' +
-		'						<option value="MS_LR" >'+$trad(20,i3GEOF.proplabel.dicionario)+'inferior direito</option>' +
-		'					</select>' +
-		'				</td>' +
-		'			</tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(21,i3GEOF.proplabel.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOproplabelfundoc_i","",9,"") +
-		'				<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelfundoc_i\')" /></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(22,i3GEOF.proplabel.dicionario)+':</td><td>'+
-		$inputText("","","i3GEOproplabelsombra_i","",9,"") +
-		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelsombra_i\')" /></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(23,i3GEOF.proplabel.dicionario)+':</td><td>x ' +
-		$inputText("","","i3GEOproplabelsombrax_i","",1,"1") +
-		'			 y' +
-		$inputText("","","i3GEOproplabelsombray_i","",1,"1") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(24,i3GEOF.proplabel.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOproplabelfrentes_i","",9,"") +
-		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelfrentes_i\')" /></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(25,i3GEOF.proplabel.dicionario)+':</td><td>x '+
-		$inputText("","","i3GEOproplabelfrentex_i","",1,"1") +
-		'			 y '+
-		$inputText("","","i3GEOproplabelfrentey_i","",1,"1") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(26,i3GEOF.proplabel.dicionario)+':</td>' +
-		'				<td>' +
-		'					<select id=i3GEOproplabelforce_i >' +
-		'						<option value="0" >'+$trad("x15")+'</option>' +
-		'						<option value="1" >'+$trad("x14")+'</option>' +
-		'					</select>' +
-		'				</td>' +
-		'			</tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(27,i3GEOF.proplabel.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOproplabelmindistance_i","",4,"auto") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(28,i3GEOF.proplabel.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOproplabelminfeaturesize_i","",4,"auto") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(29,i3GEOF.proplabel.dicionario)+':</td>' +
-		'				<td>' +
-		'					<select id=i3GEOproplabelpartials_i >' +
-		'						<option value="1" >'+$trad("x14")+'</option>' +
-		'						<option value="0" >'+$trad("x15")+'</option>' +
-		'					</select>' +
-		'				</td>' +
-		'			</tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(30,i3GEOF.proplabel.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOproplabelwrap_i","",5,"") +
-		'			</td></tr>' +
-		'		</table>';
+		ins += '<br><p class="paragrafo">'+$trad(6,i3GEOF.proplabel.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="0" id="i3GEOproplabelangulo_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(7,i3GEOF.proplabel.dicionario)+' X:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="0" id="i3GEOproplabeloffsetx_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(7,i3GEOF.proplabel.dicionario)+' Y:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="0" id="i3GEOproplabeloffsety_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(8,i3GEOF.proplabel.dicionario)+':</p>' +
+		'<div class="styled-select" style="width:100px;float:left;">' +
+		'<input type="text" value="0 0 0" id="i3GEOproplabelfrente_i" />' +
+		'</div>' +
+		'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelfrente_i\')" />' +
+
+		'<br><br><br><p class="paragrafo">'+$trad(9,i3GEOF.proplabel.dicionario)+':</p>' +
+		'<div class="styled-select" style="width:100px;float:left;">' +
+		'<input type="text" value="" id="i3GEOproplabelmascara_i" />' +
+		'</div>' +
+		'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelmascara_i\')" />' +
+
+		'<br><br><br><p class="paragrafo">'+$trad(10,i3GEOF.proplabel.dicionario)+':</p>' +
+		'<div class="styled-select" style="width:100px;">' +
+		'	<select id=i3GEOproplabelposition_i >' +
+		'		<option value="MS_AUTO" >'+$trad(11,i3GEOF.proplabel.dicionario)+'</option>' +
+		'		<option value="MS_UL" >'+$trad(12,i3GEOF.proplabel.dicionario)+'</option>' +
+		'		<option value="MS_UC" >'+$trad(13,i3GEOF.proplabel.dicionario)+'</option>' +
+		'		<option value="MS_UR" selected >'+$trad(14,i3GEOF.proplabel.dicionario)+'</option>' +
+		'		<option value="MS_CL" >'+$trad(15,i3GEOF.proplabel.dicionario)+'</option>' +
+		'		<option value="MS_CC" >'+$trad(16,i3GEOF.proplabel.dicionario)+'</option>' +
+		'		<option value="MS_CR" >'+$trad(17,i3GEOF.proplabel.dicionario)+'</option>' +
+		'		<option value="MS_LL" >'+$trad(18,i3GEOF.proplabel.dicionario)+'</option>' +
+		'		<option value="MS_LC" >'+$trad(19,i3GEOF.proplabel.dicionario)+'inferior centro</option>' +
+		'		<option value="MS_LR" >'+$trad(20,i3GEOF.proplabel.dicionario)+'inferior direito</option>' +
+		'	</select>' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(21,i3GEOF.proplabel.dicionario)+':</p>' +
+		'<div class="styled-select" style="width:100px;float:left;">' +
+		'<input type="text" value="" id="i3GEOproplabelfundoc_i" />' +
+		'</div>' +
+		'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelfundoc_i\')" />' +
+
+		'<br><br><br><p class="paragrafo">'+$trad(22,i3GEOF.proplabel.dicionario)+':</p>' +
+		'<div class="styled-select" style="width:100px;float:left;">' +
+		'<input type="text" value="" id="i3GEOproplabelsombra_i" />' +
+		'</div>' +
+		'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelsombra_i\')" />' +
+
+		'<br><br><br><p class="paragrafo">'+$trad(23,i3GEOF.proplabel.dicionario)+' X:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="1" id="i3GEOproplabelsombrax_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(23,i3GEOF.proplabel.dicionario)+' Y:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="1" id="i3GEOproplabelsombray_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(24,i3GEOF.proplabel.dicionario)+':</p>' +
+		'<div class="styled-select" style="width:100px;float:left;">' +
+		'<input type="text" value="" id="i3GEOproplabelfrentes_i" />' +
+		'</div>' +
+		'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOproplabelfrentes_i\')" />' +
+
+		'<br><br><br><p class="paragrafo">'+$trad(25,i3GEOF.proplabel.dicionario)+' X:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="1" id="i3GEOproplabelfrentex_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(25,i3GEOF.proplabel.dicionario)+' Y:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="1" id="i3GEOproplabelfrentey_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(26,i3GEOF.proplabel.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'	<select id=i3GEOproplabelforce_i >' +
+		'		<option value="0" >'+$trad("x15")+'</option>' +
+		'		<option value="1" >'+$trad("x14")+'</option>' +
+		'	</select>' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(27,i3GEOF.proplabel.dicionario)+' Y:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="auto" id="i3GEOproplabelmindistance_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(28,i3GEOF.proplabel.dicionario)+' Y:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="auto" id="i3GEOproplabelminfeaturesize_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(29,i3GEOF.proplabel.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'	<select id=i3GEOproplabelpartials_i >' +
+		'		<option value="1" >'+$trad("x14")+'</option>' +
+		'		<option value="0" >'+$trad("x15")+'</option>' +
+		'	</select>' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(30,i3GEOF.proplabel.dicionario)+' Y:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="" id="i3GEOproplabelwrap_i" />' +
+		'</div></div><br><br>';
 		return ins;
 	},
 	/*
@@ -258,7 +280,7 @@ i3GEOF.proplabel = {
 	/*
 	Function: pegaPar
 
-	Pega os parâmetros para montar a chamada ajax que cria ou testa a topon&iacute;mia
+	Pega os parametros para montar a chamada ajax que cria ou testa a topon&iacute;mia
 	*/
 	pegaPar: function(){
 		if($i("i3GEOproplabelfundoc_i").value === "")

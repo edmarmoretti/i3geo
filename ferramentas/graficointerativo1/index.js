@@ -761,34 +761,35 @@ i3GEOF.graficointerativo1 =
 						var temp = retorno.dados.replace(idjanela + "i3GEOgraficointerativo1ComboXid",idjanela + "i3GEOgraficointerativo1ComboYid");
 
 						$i(idjanela + "i3GEOgraficointerativo1ComboY").innerHTML =
-							"<div>" + temp + "&nbsp;<div class=styled-select style='width:145px;float: right;' ><input title='" + $trad(33, i3GEOF.graficointerativo1.dicionario)
+							"<div class=styled-select style='width:145px;float:left;'>" + temp + "&nbsp;</div><div class=styled-select style='width:145px;float: right;' ><input title='" + $trad(33, i3GEOF.graficointerativo1.dicionario)
 								+ "'  type=text id='" + idjanela
 								+ "i3GEOgraficointerativo1ComboYidTitulo' value='' /></div>" + "<div class='styled-select' style='width:80px;float: right;' ><input id='" + idjanela
 								+ "i3GEOgraficointerativo1ComboYidcor' title='cor' type='text' value='' /></div>"
 								+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:3px;cursor:pointer src='"
 								+ i3GEO.configura.locaplic + "/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\"" + idjanela
-								+ "i3GEOgraficointerativo1ComboYidcor\")' /></div>";
+								+ "i3GEOgraficointerativo1ComboYidcor\")' /><br>";
 
 						//$i(idjanela + "i3GEOgraficointerativo1ComboXid").id = idjanela + "i3GEOgraficointerativo1ComboYid";
 						//para escolher o item de X
 						$i(idjanela + "i3GEOgraficointerativo1ComboX").innerHTML =
-							"<div>" + retorno.dados + "&nbsp;<div class=styled-select style='width:240px;float: right;' ><input title='" + $trad(33, i3GEOF.graficointerativo1.dicionario)
+							"<div class=styled-select style='width:160px;'>" + retorno.dados + "&nbsp;<div class=styled-select style='width:240px;float: right;' ><input title='" + $trad(33, i3GEOF.graficointerativo1.dicionario)
 								+ "' type=text id='" + idjanela
 								+ "i3GEOgraficointerativo1ComboXidTitulo' value='' /></div></div>";
 
-						$i(idjanela + "i3GEOgraficointerativo1ComboXid").style.width = "160px";
+						//$i(idjanela + "i3GEOgraficointerativo1ComboXid").style.width = "160px";
 						if ($i(idjanela + "i3GEOgraficointerativo1ComboYid")) {
 							$i(idjanela + "i3GEOgraficointerativo1ComboYid").style.width = "160px";
 							adicionaFilho =
 								function() {
 									var no = document.createElement("div"), id = "CorG" + parseInt(Math.random() * 100000, 10), novoselect;
-									no.innerHTML =
-										retorno.dados + "<div class=styled-select style='width:145px;float: right;' ><input title='" + $trad(33, i3GEOF.graficointerativo1.dicionario)
-											+ "' type=text value='' /></div>" + "&nbsp;<div class=styled-select style='width:80px;float: right;' ><input id='" + id
-											+ "' type=text value='' title='cor' /></div>"
-											+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:3px;cursor:pointer src='"
-											+ i3GEO.configura.locaplic
-											+ "/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\"" + id + "\")' /><br>";
+									no.innerHTML = ""
+										+ retorno.dados 
+										+ "</div><div class=styled-select style='width:145px;float: right;' ><input title='" + $trad(33, i3GEOF.graficointerativo1.dicionario)
+										+ "' type=text value='' /></div>" + "&nbsp;<div class=styled-select style='width:80px;float: right;' ><input id='" + id
+										+ "' type=text value='' title='cor' /></div>"
+										+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:3px;cursor:pointer src='"
+										+ i3GEO.configura.locaplic
+										+ "/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\"" + id + "\")' /><br>";
 									novoselect = no.getElementsByTagName("select")[0];
 									novoselect.id = "";
 									novoselect.onchange = adicionaFilho;
