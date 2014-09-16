@@ -97,22 +97,22 @@ i3GEOF.filtroarvore = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<p class=paragrafo >'+$trad(1,i3GEOF.filtroarvore.dicionario)+'<br><br>' +
+		var ins = '<p class=paragrafo >'+$trad('selecionaFiltro',i3GEOF.filtroarvore.dicionario)+'<br><br>' +
 			'<select onchange="i3GEO.arvoreDeCamadas.ARVORE = null;i3GEO.arvoreDeCamadas.FILTRO = this.value;i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)">' +
 			'<option value="naofaznada">---</option>' +
-			'<option value="">'+$trad(2,i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="ligados">'+$trad(3,i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="desligados">'+$trad(4,i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="selecionados">'+$trad(5,i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="download">'+$trad(6,i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="wms">'+$trad(7,i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="raster">'+$trad(8,i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="toponimia">'+$trad(9,i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="">'+$trad('removeFiltro',i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="ligados">'+$trad('ligado',i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="desligados">'+$trad('desligado',i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="selecionados">'+$trad('comSelecao',i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="download">'+$trad('permiteDownload',i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="wms">'+$trad('wms',i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="raster">'+$trad('raster',i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="toponimia">'+$trad('apenasTexto',i3GEOF.filtroarvore.dicionario)+'</option>' +
 			'</select><br><br>' +
-			$trad(10,i3GEOF.filtroarvore.dicionario)+'<br><br>' +
+			$trad('operacao',i3GEOF.filtroarvore.dicionario)+'<br><br>' +
 			'<select onchange="i3GEOF.filtroarvore.lote(this)" >' +
 			'<option value="">---</option>' +
-			'<option value="excluir">'+$trad(11,i3GEOF.filtroarvore.dicionario)+'</option>' +
+			'<option value="excluir">'+$trad('exclui',i3GEOF.filtroarvore.dicionario)+'</option>' +
 			'</select>';
 		return ins;
 	},

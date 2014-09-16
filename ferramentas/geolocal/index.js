@@ -104,7 +104,7 @@ i3GEOF.geolocal = {
 				i3GEOF.geolocal.capturaCoordenada();
 			}
 			else{
-				$i(iddiv).innerHTML = $trad(2,i3GEOF.geolocal.dicionario);
+				$i(iddiv).innerHTML = $trad('msgNavegador',i3GEOF.geolocal.dicionario);
 			}
 		},
 		/*
@@ -119,16 +119,16 @@ i3GEOF.geolocal = {
 		html:function(){
 			var ins = "";
 			ins += "" +
-			'<button title="'+$trad(3,i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.capturaCoordenada()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/gps.png" /></button>' +
-			'<button title="'+$trad(4,i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.limpa()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/erase.png" /></button>' +
-			'<button title="'+$trad(9,i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.criaShp()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-gps-create.png" /></button>' +
-			'<img title="' + $trad(7,i3GEOF.geolocal.dicionario) + '" onclick="i3GEOF.geolocal.paraTempo()" style="left:10px;position:relative;" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/clock.png" >' +
+			'<button title="'+$trad('capturaCoord',i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.capturaCoordenada()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/gps.png" /></button>' +
+			'<button title="'+$trad('limpa',i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.limpa()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/erase.png" /></button>' +
+			'<button title="'+$trad('exclui',i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.criaShp()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-gps-create.png" /></button>' +
+			'<img title="' + $trad('paraCaptura',i3GEOF.geolocal.dicionario) + '" onclick="i3GEOF.geolocal.paraTempo()" style="left:10px;position:relative;" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/clock.png" >' +
 			'&nbsp;<form id="i3GEOFgeolocalFormTempo" style="left: 162px;position: absolute;top: 17px;width: 30px;">' +
-			$inputText("","","i3GEOFgeolocalTempo",$trad(6,i3GEOF.geolocal.dicionario),5,"0") + '</form>' +
+			$inputText("","","i3GEOFgeolocalTempo",$trad('intervalo',i3GEOF.geolocal.dicionario),5,"0") + '</form>' +
 			"<div style='height:130px;overflow:auto;top:10px;text-align:center;position:relative;cursor:pointer;padding:5px;' id='i3GEOFgeolocalListaDePontos' >" +
 			"</div>" +
 			"<br><div id='i3GEOFgeolocalNcoord' style='width: 30px; position: absolute;' ></div>" +
-			"<div style='position:relative;width: 150px;left: 40px;'>" + $trad(8,i3GEOF.geolocal.dicionario) + " " +
+			"<div style='position:relative;width: 150px;left: 40px;'>" + $trad('maximoPontos',i3GEOF.geolocal.dicionario) + " " +
 			$inputText("","","i3GEOFgeolocalMaximo","",5,"") + "</div>";
 			return ins;
 		},
@@ -144,7 +144,7 @@ i3GEOF.geolocal = {
 				i3GEO.janela.minimiza("i3GEOF.geolocal");
 			};
 			//cria a janela flutuante
-			titulo = $trad(1,i3GEOF.geolocal.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=118' >&nbsp;&nbsp;&nbsp;</a>";
+			titulo = $trad('localizaUsuario',i3GEOF.geolocal.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=118' >&nbsp;&nbsp;&nbsp;</a>";
 			janela = i3GEO.janela.cria(
 					"270",
 					"200",
@@ -232,7 +232,7 @@ i3GEOF.geolocal = {
 			res = ["<tr><td></td><td></td><td></td><td><b>Latitude</b></td><td><b>Longitude</b></td></tr>"];
 			for(i=(n-1);i>=0;i--){
 				ins = "<tr>" +
-				'<td><img title="' + $trad(4,i3GEOF.geolocal.dicionario) + '" src="'+i3GEO.configura.locaplic+'/imagens/x.gif" onclick="i3GEOF.geolocal.excluiLinha('+i+')" style="cursor:pointer"></td>' +
+				'<td><img title="' + $trad('limpa',i3GEOF.geolocal.dicionario) + '" src="'+i3GEO.configura.locaplic+'/imagens/x.gif" onclick="i3GEOF.geolocal.excluiLinha('+i+')" style="cursor:pointer"></td>' +
 				'<td><img onmouseout="i3GEOF.geolocal.escondexy()" onmouseover="i3GEOF.geolocal.mostraxy('+i+')" title="pan" src="'+i3GEO.configura.locaplic+'/imagens/o.gif" onclick="i3GEOF.geolocal.panLinha('+i+')" style="cursor:pointer"></td>' +
 				'<td><img title="info" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/help-about.png" onclick="i3GEOF.geolocal.info('+i+')" style="cursor:pointer"></td>' +
 				"<td>" + ps[i].coords.latitude + "</td><td>" + ps[i].coords.longitude + "</td></tr>";
@@ -271,7 +271,7 @@ i3GEOF.geolocal = {
 			var posicao = i3GEOF.geolocal.posicoes[i],
 			xy = [posicao.coords.longitude,posicao.coords.latitude],
 			box = $i("pingeolocal");
-			
+
 			xy = i3GEO.calculo.dd2tela(xy[0]*1,xy[1]*1,$i(i3GEO.Interface.IDMAPA));
 
 			box.style.display = "block";

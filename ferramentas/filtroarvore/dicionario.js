@@ -1,66 +1,66 @@
 //+$trad(1,i3GEOF.filtroarvore.dicionario)+
 i3GEOF.filtroarvore.dicionario = {
-		1: [{
+		'selecionaFiltro': [{
 			pt:"Escolha o tipo de filtro ou nenhum para n&atilde;o filtrar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		2: [{
+		'removeFiltro': [{
 			pt:"remover filtro",
 			en:"",
 			es:"",
 			it:""
 		}],
-		3: [{
+		'ligado': [{
 			pt:"ligados",
 			en:"",
 			es:"",
 			it:""
 		}],
-		4: [{
+		'desligado': [{
 			pt:"desligados",
 			en:"",
 			es:"",
 			it:""
 		}],
-		5: [{
+		'comSelecao': [{
 			pt:"com sele&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		6: [{
+		'permiteDownload': [{
 			pt:"permitem download",
 			en:"",
 			es:"",
 			it:""
 		}],
-		7: [{
+		'wms': [{
 			pt:"s&atilde;o do tipo WMS",
 			en:"",
 			es:"",
 			it:""
 		}],
-		8: [{
+		'raster': [{
 			pt:"s&atilde;o do tipo raster",
 			en:"",
 			es:"",
 			it:""
 		}],
-		9: [{
+		'apenasTexto': [{
 			pt:"contem apenas texto",
 			en:"",
 			es:"",
 			it:""
 		}],
-		10: [{
+		'operacao': [{
 			pt:"Opera&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		11: [{
+		'exclui': [{
 			pt:"excluir",
 			en:"",
 			es:"",
