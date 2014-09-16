@@ -106,7 +106,7 @@ i3GEOF.editorsql = {
 							i3GEO.temaAtivo,
 							$i("i3GEOeditorsqlItem").value,
 							function(retorno){
-								$i("i3GEOeditorsqlvalores").innerHTML = "<p class=paragrafo >"+$trad(1,i3GEOF.editorsql.dicionario)+"<br><br>"+retorno.dados+"</p>";
+								$i("i3GEOeditorsqlvalores").innerHTML = "<p class=paragrafo >"+$trad('valores',i3GEOF.editorsql.dicionario)+"<br><br>"+retorno.dados+"</p>";
 							},
 							"i3GEOeditorsqlvalores"
 						);
@@ -131,9 +131,9 @@ i3GEOF.editorsql = {
 	html:function(){
 		var ins = "<textarea rows='8' colums='20' cols='38' style='font-size:14px;width:500px;height:200px' id=i3GEOeditorsqlSQL ></textarea>" +
 			'<br><br><p class=paragrafo ><input size=20 id=i3GEOeditorsqlbotao1 type=button value="'+$trad("p14")+'"  />' +
-			' <input style="position:relative;cursor:pointer" type=checkbox id=i3GEOeditorsqlRemoveMeta /> '+$trad(4,i3GEOF.editorsql.dicionario) +
-			'<br><br><a class=paragrafo href="http://postgis.refractions.net/documentation/manual-1.4/ch07.html" target=_blank >'+$trad(2,i3GEOF.editorsql.dicionario)+'</a>' +
-			'<br><p class=paragrafo >'+$trad(3,i3GEOF.editorsql.dicionario)+':</p>' +
+			' <input style="position:relative;cursor:pointer" type=checkbox id=i3GEOeditorsqlRemoveMeta /> '+$trad('removeMetadados',i3GEOF.editorsql.dicionario) +
+			'<br><br><a class=paragrafo href="http://postgis.refractions.net/documentation/manual-1.4/ch07.html" target=_blank >'+$trad('manualSql',i3GEOF.editorsql.dicionario)+'</a>' +
+			'<br><p class=paragrafo >'+$trad('listaAtributos',i3GEOF.editorsql.dicionario)+':</p>' +
 			'<div class=paragrafo id=i3GEOeditorsqlDivItem ></div>' +
 			'<div class=paragrafo id=i3GEOeditorsqlvalores ></div>';
 		return ins;

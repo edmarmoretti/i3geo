@@ -1,114 +1,114 @@
 //+$trad(1,i3GEOF.filtro.dicionario)+
 i3GEOF.filtro.dicionario = {
-		1: [{
+		'constroi': [{
 			pt:"Construir",
 			en:"",
 			es:"",
 			it:""
 		}],
-		2: [{
+		'digita': [{
 			pt:"Digitar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		3: [{
+		'testa': [{
 			pt:"Testar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		4: [{
+		'inclui': [{
 			pt:"Incluir/aplicar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		5: [{
+		'remove': [{
 			pt:"Remover",
 			en:"",
 			es:"",
 			it:""
 		}],
-		6: [{
+		'item': [{
 			pt:"Item",
 			en:"",
 			es:"",
 			it:""
 		}],
-		7: [{
+		'operador': [{
 			pt:"Operador",
 			en:"",
 			es:"",
 			it:""
 		}],
-		8: [{
+		'valor': [{
 			pt:"Valor",
 			en:"",
 			es:"",
 			it:""
 		}],
-		9: [{
+		'conector': [{
 			pt:"Conector",
 			en:"",
 			es:"",
 			it:""
 		}],
-		10: [{
+		'ajuda': [{
 			pt:"O resultado da filtragem ser&aacute; mostrado no mapa. Certifique-se que o tema est&aacute; v&iacute;sivel. Antes de aplicar, vc pode testar o filtro definido. Na op&ccedil;&atilde;o IN separe os valores com v&iacute;rgula.",
 			en:"",
 			es:"",
 			it:""
 		}],
-		11: [{
+		'digitaFiltro': [{
 			pt:"Digite o filtro",
 			en:"",
 			es:"",
 			it:""
 		}],
-		12: [{
+		'mostraValor': [{
 			pt:"mostra valores",
 			en:"",
 			es:"",
 			it:""
 		}],
-		13: [{
+		'selecionaValor': [{
 			pt:"Escolha o valor",
 			en:"",
 			es:"",
 			it:""
 		}],
-		14: [{
+		'igual': [{
 			pt:"igual",
 			en:"",
 			es:"",
 			it:""
 		}],
-		15: [{
+		'menor': [{
 			pt:"menor",
 			en:"",
 			es:"",
 			it:""
 		}],
-		16: [{
+		'maior': [{
 			pt:"maior",
 			en:"",
 			es:"",
 			it:""
 		}],
-		17: [{
+		'e': [{
 			pt:"e",
 			en:"",
 			es:"",
 			it:""
 		}],
-		18: [{
+		'ou': [{
 			pt:"ou",
 			en:"",
 			es:"",
 			it:""
 		}],
-		19: [{
+		'nao': [{
 			pt:"n&atilde;o",
 			en:"",
 			es:"",

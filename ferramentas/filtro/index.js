@@ -148,23 +148,23 @@ i3GEOF.filtro = {
 		var ins = '' +
 		'<div id=i3GEOfiltroguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">'+
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'+
-		'		<li><a  ><em><div id="i3GEOfiltroguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
-		'		<li><a  ><em><div id="i3GEOfiltroguia2" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
-		'		<li><a  ><em><div id="i3GEOfiltroguia3" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOfiltroguia1" style="text-align:center;left:0px;" >'+$trad('constroi',i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOfiltroguia2" style="text-align:center;left:0px;" >'+$trad('digita',i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOfiltroguia3" style="text-align:center;left:0px;" >'+$trad('testa',i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
 		'	</ul>'+
 		'</div><br>'+
 		'<p class=paragrafo >'+
-		'	<input id=i3GEOfiltrobotao1 size=18  type="button" value="'+$trad(4,i3GEOF.filtro.dicionario)+'" />'+
-		'	<input id=i3GEOfiltrobotao2 size=18 type="button" value="'+$trad(5,i3GEOF.filtro.dicionario)+'" />'+
+		'	<input id=i3GEOfiltrobotao1 size=18  type="button" value="'+$trad('inclui',i3GEOF.filtro.dicionario)+'" />'+
+		'	<input id=i3GEOfiltrobotao2 size=18 type="button" value="'+$trad('remove',i3GEOF.filtro.dicionario)+'" />'+
 		'</p>'+
 		'<div class=guiaobj id="i3GEOfiltroguia1obj" style="left:1px;display:none;">'+
 		'	<div id=i3GEOfiltropar style="display:block;position:relative;top:5px;left:0px;">'+
 		'		<table summary="" id="i3GEOfiltroparametros" >'+
 		'			<tr><td></td><td></td>'+
-		'				<td style=background-color:yellow >'+$trad(6,i3GEOF.filtro.dicionario)+'</td>'+
-		'				<td style=background-color:yellow >'+$trad(7,i3GEOF.filtro.dicionario)+'</td>'+
-		'				<td style=background-color:yellow >'+$trad(8,i3GEOF.filtro.dicionario)+'</td>'+
-		'				<td style=background-color:yellow >'+$trad(9,i3GEOF.filtro.dicionario)+'</td>'+
+		'				<td style=background-color:yellow >'+$trad('item',i3GEOF.filtro.dicionario)+'</td>'+
+		'				<td style=background-color:yellow >'+$trad('operador',i3GEOF.filtro.dicionario)+'</td>'+
+		'				<td style=background-color:yellow >'+$trad('valor',i3GEOF.filtro.dicionario)+'</td>'+
+		'				<td style=background-color:yellow >'+$trad('conector',i3GEOF.filtro.dicionario)+'</td>'+
 		'			</tr>'+
 		'			<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>'+
 		'		</table>'+
@@ -173,10 +173,10 @@ i3GEOF.filtro = {
 		'	</div>'+
 		'	<div id=i3GEOfiltrovalores style="position:relative;top:5px;left:0px">'+
 		'	</div>'+
-		'	<div id=i3GEOfiltromen1 style=top:15px;left:0px; ><p class=paragrafo >'+$trad(10,i3GEOF.filtro.dicionario)+'</div>'+
+		'	<div id=i3GEOfiltromen1 style=top:15px;left:0px; ><p class=paragrafo >'+$trad('ajuda',i3GEOF.filtro.dicionario)+'</div>'+
 		'</div>'+
 		'<div class=guiaobj id="i3GEOfiltroguia2obj" style="left:1px;display:none;">'+
-		'	<p class=paragrafo >'+$trad(11,i3GEOF.filtro.dicionario)+':<br>'+
+		'	<p class=paragrafo >'+$trad('digitaFiltro',i3GEOF.filtro.dicionario)+':<br>'+
 		$inputText("","","i3GEOfiltrofiltro","",65,"") +
 		'</p></div>'+
 		'<div class=guiaobj id="i3GEOfiltroguia3obj" style="left:1px;display:none;">'+
@@ -248,7 +248,7 @@ i3GEOF.filtro = {
 
 			interrogacao = document.createElement("img");
 			interrogacao.src = i3GEO.configura.locaplic+'/imagens/interrogacao.gif';
-			interrogacao.title= $trad(12,i3GEOF.filtro.dicionario);
+			interrogacao.title= $trad('mostraValor',i3GEOF.filtro.dicionario);
 			interrogacao.style.cursor="pointer";
 			interrogacao.onclick = function(){
 				var obj,
@@ -260,7 +260,7 @@ i3GEOF.filtro = {
 					i3GEO.temaAtivo,
 					itemTema,
 					function(retorno){
-						$i("i3GEOfiltrovalores").innerHTML = "<br><p class=paragrafo >"+$trad(13,i3GEOF.filtro.dicionario)+":"+retorno.dados+"</p>";
+						$i("i3GEOfiltrovalores").innerHTML = "<br><p class=paragrafo >"+$trad('selecionaValor',i3GEOF.filtro.dicionario)+":"+retorno.dados+"</p>";
 						if ($i("i3GEOfiltrocbitens")){
 							$i("i3GEOfiltrocbitens").onchange = function()
 							{obj.value = this.value;};
@@ -271,19 +271,19 @@ i3GEOF.filtro = {
 			};
 
 			operador = "<select>";
-			operador += "<option value='='>"+$trad(14,i3GEOF.filtro.dicionario)+"</option>";
+			operador += "<option value='='>"+$trad('igual',i3GEOF.filtro.dicionario)+"</option>";
 			operador += "<option value='!='>dif</option>";
-			operador += "<option value='<'>"+$trad(15,i3GEOF.filtro.dicionario)+"</option>";
-			operador += "<option value='>'>"+$trad(16,i3GEOF.filtro.dicionario)+"</option>";
+			operador += "<option value='<'>"+$trad('menor',i3GEOF.filtro.dicionario)+"</option>";
+			operador += "<option value='>'>"+$trad('maior',i3GEOF.filtro.dicionario)+"</option>";
 			operador += "<option value='<='><=</option>";
 			operador += "<option value='>='>>=</option>";
 			operador += "<option value='in'>in</option>";
 			operador += "<option value='~='>regExp</option></select>";
 
 			conector = "<select>";
-			conector += "<option value='and'>"+$trad(17,i3GEOF.filtro.dicionario)+"</option>";
-			conector += "<option value='or'>"+$trad(18,i3GEOF.filtro.dicionario)+"</option>";
-			conector += "<option value='not'>"+$trad(19,i3GEOF.filtro.dicionario)+"</option></select>";
+			conector += "<option value='and'>"+$trad('e',i3GEOF.filtro.dicionario)+"</option>";
+			conector += "<option value='or'>"+$trad('ou',i3GEOF.filtro.dicionario)+"</option>";
+			conector += "<option value='not'>"+$trad('nao',i3GEOF.filtro.dicionario)+"</option></select>";
 
 			valor = document.createElement("input");
 			valor.type = "text";

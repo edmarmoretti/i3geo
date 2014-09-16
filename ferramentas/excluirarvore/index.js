@@ -123,7 +123,7 @@ i3GEOF.excluirarvore = {
 			n = camadas.length,
 			ins = "";
 
-		ins = "<p class=paragrafo ><input id=i3GEOexcluirbotao1 type='buttom' value='"+$trad(1,i3GEOF.excluirarvore.dicionario)+"' /></p>" +
+		ins = "<p class=paragrafo ><input id=i3GEOexcluirbotao1 type='buttom' value='"+$trad('removeMapa',i3GEOF.excluirarvore.dicionario)+"' /></p>" +
 			"<table id='i3GEOFexcluirarvoreLista' style='width:95%' class='lista8'>";
 		while(n > 0){
 			n -= 1;
@@ -199,7 +199,7 @@ i3GEOF.excluirarvore = {
 		if(lista.length > 0)
 		{i3GEO.php.excluitema(temp,lista);}
 		else{
-			i3GEO.janela.tempoMsg($trad(2,i3GEOF.excluirarvore.dicionario));
+			i3GEO.janela.tempoMsg($trad('selecionaCamada',i3GEOF.excluirarvore.dicionario));
 			i3GEOF.excluirarvore.aguarde.visibility = "hidden";
 		}
 	}

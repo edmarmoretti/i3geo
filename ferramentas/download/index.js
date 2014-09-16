@@ -93,7 +93,7 @@ i3GEOF.download = {
 	*/
 	html:function(divid,tema){
 		var cp,p,ins,mostraDownload;
-		ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.download.dicionario)+'</p>';
+		ins = '<p class="paragrafo" >'+$trad('download',i3GEOF.download.dicionario)+'</p>';
 		ins += '<p class="paragrafo" ><div id=i3GEOdownloadResultado ></div>';
 		$i(divid).innerHTML += ins;
 		mostraDownload = function(retorno){
@@ -104,14 +104,14 @@ i3GEOF.download = {
 				arqs = retorno.arquivos.split(",");
 				n = arqs.length;
 				if(retorno == "erro")
-				{ins = "<p style=color:red >"+$trad(2,i3GEOF.download.dicionario)+"<br>";}
+				{ins = "<p style=color:red >"+$trad('erroTema',i3GEOF.download.dicionario)+"<br>";}
 				else{
 					for (arq=0;arq<n;arq++){
 						ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>";
 					}
 				}
 				if(retorno.nreg)
-				{ins += "<br><br>"+$trad(3,i3GEOF.download.dicionario)+" ="+retorno.nreg;}
+				{ins += "<br><br>"+$trad('registros',i3GEOF.download.dicionario)+" ="+retorno.nreg;}
 			}
 			else
 			{ins = "<p style=color:red >"+$trad("x66")+"<br>";}
