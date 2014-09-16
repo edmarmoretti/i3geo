@@ -3,7 +3,7 @@
 /*
 Title: Wikip&eacute;dia
 
-Busca na Wikip&eacute;dia artigos relacionados à extens&atilde;o geogr&aacute;fica do mapa atual.
+Busca na Wikip&eacute;dia artigos relacionados ï¿½ extens&atilde;o geogr&aacute;fica do mapa atual.
 
 A busca utiliza um Web Service do site Geonames. Para utilizar esse servi&ccedil;o &eacute; necess&aacute;rio cadastrar um usu&aacute;rio.
 Por padr&atilde;o, o i3Geo utiliza o usu&aacute;rio "i3geo", que pode ter sua cota de acesso di&aacute;rio ultrapassada.
@@ -116,7 +116,7 @@ i3GEOF.wiki = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<div id=i3GEOwikiLista style=display:block;background-color:white;text-align:left; ></div>';
+		ins += '<div id=i3GEOwikiLista style=display:block;background-color:white;text-align:left;padding:5px; ></div>';
 		return ins;
 	},
 	/*

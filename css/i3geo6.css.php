@@ -708,7 +708,7 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 position: relative;
 display: block;
 font-size: 8px;
-padding: 1;
+padding: 1px 5px;
 font-weight: normal;
 top: 0px;
 width: 95%;

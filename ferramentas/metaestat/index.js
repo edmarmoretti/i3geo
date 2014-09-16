@@ -2376,7 +2376,7 @@ i3GEOF.metaestat = {
 		 * Para capturar o objeto janela utilize janela = YAHOO.i3GEO.janela.manager.find("i3geoCartoParametros");
 		 */
 		abreJanela: function(){
-			var cabecalho,minimiza,imagemxy,janela,modal,titulo = false;
+			var cabecalho,minimiza,imagemxy,janela,modal = false,titulo = false;
 			if (!$i("i3geoCartoParametros")){
 				cabecalho = function(){
 				};

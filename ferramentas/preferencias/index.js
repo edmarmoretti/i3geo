@@ -495,7 +495,7 @@ i3GEOF.preferencias = {
 			valores,
 			nomes;
 		for(i=0;i<n;i++){
-			ins += "<p onclick='javascript:i3GEOF.preferencias.expande("+i+")' class=paragrafo style=cursor:pointer;color:navy ><b>"+lista[i].titulo+"</b><p>";
+			ins += "<p onclick='javascript:i3GEOF.preferencias.expande("+i+")' class=paragrafo style=padding:5px;cursor:pointer;color:navy ><b>"+lista[i].titulo+"</b><p>";
 			ins += "<div style=display:none id='listaPref"+i+"'>";
 			props = lista[i].props;
 			nj = props.length;

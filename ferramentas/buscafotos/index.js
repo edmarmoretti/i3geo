@@ -128,7 +128,7 @@ i3GEOF.buscaFotos = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<div id=i3GEObuscafotosaviso style=display:block >';
+		ins += '<div id=i3GEObuscafotosaviso style="display:block;padding:5px;" >';
 		ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.buscaFotos.dicionario);
 		ins += '<p class="paragrafo" >'+$trad(2,i3GEOF.buscaFotos.dicionario);
 		ins += '<p class="paragrafo" >'+$trad(3,i3GEOF.buscaFotos.dicionario);
@@ -140,7 +140,7 @@ i3GEOF.buscaFotos = {
     		ins += '<p><input  id=i3GEObuscafotosbotao2 size=20  type=button value="'+$trad(6,i3GEOF.buscaFotos.dicionario)+'" />';
     	}
 		ins += '</div>';
-		ins += '<div id=i3GEObuscafotosbusca style=display:none >';
+		ins += '<div id=i3GEObuscafotosbusca style="display:none;padding:5px;" >';
 		ins += '	<div id="i3GEObuscafotosf" style="display:none">';
 		ins += '		<p class="paragrafo" ><i>'+$trad(7,i3GEOF.buscaFotos.dicionario)+'</i>';
 		ins += '		<p class="paragrafo" >'+$trad(8,i3GEOF.buscaFotos.dicionario);

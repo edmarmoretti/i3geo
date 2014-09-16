@@ -814,7 +814,7 @@ i3GEO.janela = {
 				          { text: resposta2,  handler:f2 }
 				          ],
 				          icon: YAHOO.widget.SimpleDialog.ICON_HELP,
-				          text: pergunta
+				          text: "<p class=paragrafo >"+pergunta
 			});
 			YAHOO.i3GEO.janela.managerAguarde.register(janela);
 			janela.setHeader(" ");
@@ -841,7 +841,7 @@ i3GEO.janela = {
 			if(!valorDefault){
 				valorDefault = "";
 			}
-			var i = "<br><input id='i3GEOjanelaprompt' type=text value='"+valorDefault+"' style='position:relative;top:5px;width:98%;cursor:text;' />";
+			var i = "<br><div class=styled-select ><input id='i3GEOjanelaprompt' type=text value='"+valorDefault+"' />";
 			i3GEO.janela.confirma(pergunta+i,"","","",funcaoOk);
 		},
 		/*

@@ -112,7 +112,7 @@ i3GEOF.confluence = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<div id=i3GEOconfluenceLista style=display:block;color:white ></div>';
+		ins += '<div id=i3GEOconfluenceLista style=display:block;color:white;padding:5px; ></div>';
 		return ins;
 	},
 	/*

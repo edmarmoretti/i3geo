@@ -117,7 +117,7 @@ i3GEOF.metar = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<div id=i3GEOmetarLista style=display:block;background-color:white;text-align:left; ></div>';
+		ins += '<div id=i3GEOmetarLista style=display:block;background-color:white;text-align:left;padding:5px; ></div>';
 		return ins;
 	},
 	/*

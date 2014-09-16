@@ -85,8 +85,8 @@ i3GEO.marcador = {
 			if(!c){
 				c = "";
 			}
-		texto = "<p class=paragrafo >"+$trad("x78")+"<br><br><input type=text value='"+
-			c +"' size=37 />";
+		texto = "<p class=paragrafo >"+$trad("x78")+"</p><div class=styled-select ><input type=text value='"+
+			c +"' onclick='javascript:this.select()'/></div>";
 		i3GEO.janela.mensagemSimples(texto,$trad("x79"));
 	},
 	exportaShp: function(){
@@ -180,7 +180,7 @@ i3GEO.marcador = {
 				temp = valores[i].split("|");
 				if(temp.length === 2){
 					itens.push(
-						{id:"omenudataMarcador"+i,text: "<img src='"+i3GEO.configura.locaplic+"/imagens/visual/default/branco.gif' class=x onclick='i3GEO.marcador.remove(\""+temp[0]+"\")' />&nbsp;<span style=color:blue>"+temp[0]+"</span>", url: "javascript:i3GEO.marcador.recuperaZoom('"+temp[0]+"')" }
+						{id:"omenudataMarcador"+i,text: "<img title='"+$trad("x62")+"' src='"+i3GEO.configura.locaplic+"/imagens/visual/default/branco.gif' class=x onclick='i3GEO.marcador.remove(\""+temp[0]+"\")' />&nbsp;<span style='color:blue;background-color:white;'>"+temp[0]+"</span>", url: "javascript:i3GEO.marcador.recuperaZoom('"+temp[0]+"')" }
 					);
 				}
 			}

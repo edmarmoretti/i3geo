@@ -222,7 +222,7 @@ i3GEOF.locregiao = {
 	 * @param codigo da regiao pai da regiao selecionada
 	 */
 	comboHierarquiaRegioesOnChange: function(combo,codigoregiaopai,codigo_tipo_regiao,valorregiaopai){
-		var onde = combo.parentNode.getElementsByTagName("div")[0];
+		var onde = combo.parentNode.parentNode.getElementsByTagName("div")[1];
 		i3GEOF.locregiao.PENULTIMO_CODIGO_REGIAO = i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO;
 		i3GEOF.locregiao.PENULTIMO_CODIGO_TIPO_REGIAO = i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO;
 		if(valorregiaopai){
@@ -266,19 +266,19 @@ i3GEOF.locregiao = {
 			ins = '',
 			i,n,icone;
 			if(i3GEOF.locregiao.ATIVAFILTRO === true){
-				icone = "<img title='Aplica filtro' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-filter.png' style='position:relative;cursor:pointer;top:3px;left:5px' onclick='i3GEOF.locregiao.aplicaFiltro(this.parentNode.firstChild.value,"+dados.regiaopai+")' />";
+				icone = "<img title='Aplica filtro' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-filter.png' style='position:relative;cursor:pointer;top:3px;left:5px' onclick='i3GEOF.locregiao.aplicaFiltro(this.parentNode.firstChild.firstChild.value,"+dados.regiaopai+")' />";
 			}
 			else{
-				icone = "<img title='Zoom para...' src='"+i3GEO.configura.locaplic+"/imagens/ic_zoom.png' style='position:relative;cursor:pointer;top:3px;left:5px' onclick='i3GEOF.locregiao.zoom(this.parentNode.firstChild.value)' />";
+				icone = "<img title='Zoom para...' src='"+i3GEO.configura.locaplic+"/imagens/ic_zoom.png' style='position:relative;cursor:pointer;top:3px;left:5px' onclick='i3GEOF.locregiao.zoom(this.parentNode.firstChild.firstChild.value)' />";
 			}
 			if(dados.valores == ""){
 				n = dados.regioes.length;
 				onc = 'i3GEOF.locregiao.comboHierarquiaRegioesOnChange(this,this.value)';
-				ins += "<select style='width:90%' onchange=\'"+onc+"\'><option value=''>---</option>";
+				ins += "<div class=styled-select style='width:180px;float:left;'><select onchange=\'"+onc+"\'><option value=''>---</option>";
 				for(i=0;i<n;i++){
 					ins += "<option value='"+dados.regioes[i].codigo_tipo_regiao+"'>"+dados.regioes[i].nome_tipo_regiao+"</option>";
 				}
-				ins += "</select><br><br><div class='paragrafo'></div>";
+				ins += "</select></div><br><br><div class='paragrafo'></div>";
 			}
 			else{
 				n = dados.valores.length;
@@ -288,11 +288,11 @@ i3GEOF.locregiao = {
 				else{
 					onc = 'i3GEOF.locregiao.zoom(this.value)';
 				}
-				ins += "<select style='width:90%' onchange=\'"+onc+"\'><option value=''>---</option>";
+				ins += "<div class=styled-select style='width:180px;float:left;'><select onchange=\'"+onc+"\'><option value=''>---</option>";
 				for(i=0;i<n;i++){
 					ins += "<option value='"+dados.valores[i].identificador_regiao+";"+dados.valores[i].ext+"'>"+dados.valores[i].nome_regiao+"</option>";
 				}
-				ins += "</select>"+icone+"<br><br><div class='paragrafo'></div>";
+				ins += "</select></div>"+icone+"<br><br><div class='paragrafo'></div>";
 			}
 			if(objonde){
 				objonde.innerHTML = ins;
