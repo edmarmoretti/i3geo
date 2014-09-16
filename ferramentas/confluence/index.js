@@ -236,9 +236,9 @@ i3GEOF.confluence = {
 					ys.push(i);
 				}
 			}
-			ins = "<p class='paragrafo' >"+$trad(1,i3GEOF.confluence.dicionario)+"</p>";
+			ins = "<p class='paragrafo' >"+$trad('ajuda',i3GEOF.confluence.dicionario)+"</p>";
 			if(xs.length === 0){
-				ins += "<br><br>"+$trad(2,i3GEOF.confluence.dicionario)+" <br><br>"+$trad(3,i3GEOF.confluence.dicionario);
+				ins += "<br><br>"+$trad('msgCoordenada',i3GEOF.confluence.dicionario)+" <br><br>"+$trad('msgZoom',i3GEOF.confluence.dicionario);
 			}
 			else{
 				for (i=0;i<xs.length;i++){
