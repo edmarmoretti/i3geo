@@ -155,7 +155,10 @@ i3GEOF.opacidademapa = {
 			false,
 			"hd",
 			"",
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic + "/imagens/oxygen/16x16/file-zoom-in.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.opacidademapa.janela = janela[0];

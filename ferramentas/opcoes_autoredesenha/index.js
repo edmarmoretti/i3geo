@@ -108,13 +108,14 @@ i3GEOF.opcoesTempo = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<table summary="" class=lista width="100%">' +
-		'<table summary="" class=lista > '+
-		'	<tr><td>'+$trad(1,i3GEOF.opcoesTempo.dicionario)+':<br><br>' +
-		$inputText("","","i3GEOopcoesTempoT","",8,"5") +
-		'</td><td></table><br>' +
-	  	'<p class=paragrafo ><input id=i3GEOopcoesTempobotao1 size=16  type=button value="'+$trad(2,i3GEOF.opcoesTempo.dicionario)+'"/>' +
-	  	'&nbsp;<input id=i3GEOopcoesTempobotao2 size=16 type=button value="'+$trad(3,i3GEOF.opcoesTempo.dicionario)+'"/>';
+		var ins = '<div style=padding-left:5px; >' +
+		'<p class=paragrafo >' +
+		$trad(1,i3GEOF.opcoesTempo.dicionario)+':</p>' +
+		'<div class=styled-select >' +
+		'<input type=text  value="5" id="i3GEOopcoesTempoT" />' +
+		'</div>' +
+	  	'<br><p class=paragrafo ><input id=i3GEOopcoesTempobotao1 size=16  type=button value="'+$trad(2,i3GEOF.opcoesTempo.dicionario)+'"/>' +
+	  	'&nbsp;<input id=i3GEOopcoesTempobotao2 size=16 type=button value="'+$trad(3,i3GEOF.opcoesTempo.dicionario)+'"/></div>';
 		return ins;
 	},
 	/*

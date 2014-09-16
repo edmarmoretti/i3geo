@@ -161,7 +161,10 @@ i3GEOF.mostraExten = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic + "/imagens/oxygen/16x16/internet-web-browser.png"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.mostraExten_corpo").style.backgroundColor = "white";
