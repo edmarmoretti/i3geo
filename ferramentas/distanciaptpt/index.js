@@ -152,35 +152,35 @@ i3GEOF.distanciaptpt = {
 	t0: function()
 	{
 		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/exemplo.png' />" +
-		"<p class='paragrafo'>" + $trad(1,i3GEOF.distanciaptpt.dicionario) +
-		"<p class='paragrafo'>" + $trad(2,i3GEOF.distanciaptpt.dicionario) +
-		"<p class='paragrafo'>" + $trad(3,i3GEOF.distanciaptpt.dicionario);
+		"<p class='paragrafo'>" + $trad('ajuda',i3GEOF.distanciaptpt.dicionario) +
+		"<p class='paragrafo'>" + $trad('ajuda2',i3GEOF.distanciaptpt.dicionario) +
+		"<p class='paragrafo'>" + $trad('ajuda3',i3GEOF.distanciaptpt.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.distanciaptpt.t1()",ins,"i3GEOFgradeDePontost0","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo' >" + $trad(4,i3GEOF.distanciaptpt.dicionario)+"<br>";
+		var ins = "<p class='paragrafo' >" + $trad('temaOrigem',i3GEOF.distanciaptpt.dicionario)+"<br>";
 		ins += "<div style='text-align:left;' id='i3GEOdistanciaptptSelTemasOrigem' ></div><br>";
-		ins += "<p class='paragrafo' >" + $trad(5,i3GEOF.distanciaptpt.dicionario)+"<br>";
+		ins += "<p class='paragrafo' >" + $trad('temaDestino',i3GEOF.distanciaptpt.dicionario)+"<br>";
 		ins += "<div style='text-align:left;' id='i3GEOdistanciaptptSelTemasDestino' ></div><br>";
-		ins += "<p class='paragrafo' >" + $trad(6,i3GEOF.distanciaptpt.dicionario)+"<br>";
+		ins += "<p class='paragrafo' >" + $trad('distMax',i3GEOF.distanciaptpt.dicionario)+"<br>";
 		ins += $inputText("","","i3GEOFdistanciaptptdistancia","",10,"100000");
 		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t0()","i3GEOF.distanciaptpt.t2()",ins,"i3GEOF.distanciaptpt.t1","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
 		i3GEOF.distanciaptpt.comboTemasOrigem();
 		i3GEOF.distanciaptpt.comboTemasDestino();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo' >" + $trad(7,i3GEOF.distanciaptpt.dicionario)+"</p>";
-		ins += "<p class='paragrafo' >" + $trad(8,i3GEOF.distanciaptpt.dicionario)+"</p>";
+		var ins = "<p class='paragrafo' >" + $trad('selecionaAtributos',i3GEOF.distanciaptpt.dicionario)+"</p>";
+		ins += "<p class='paragrafo' >" + $trad('atributoOrigem',i3GEOF.distanciaptpt.dicionario)+"</p>";
 		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaOrigem' >"+$trad("o1")+"</div>";
-		ins += "<br><p class='paragrafo' >" + $trad(9,i3GEOF.distanciaptpt.dicionario)+"</p>";
+		ins += "<br><p class='paragrafo' >" + $trad('atributoDestino',i3GEOF.distanciaptpt.dicionario)+"</p>";
 		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaDestino' >"+$trad("o1")+"</div>";
 		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t1()","i3GEOF.distanciaptpt.t3()",ins,"i3GEOF.distanciaptpt.t2","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
 		i3GEOF.distanciaptpt.comboItensOrigem();
 		i3GEOF.distanciaptpt.comboItensDestino();
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>" + $trad(10,i3GEOF.distanciaptpt.dicionario);
-		ins += "<br><br><input id=i3GEOdistanciaptptbotao1 type='buttom' value='"+$trad(11,i3GEOF.distanciaptpt.dicionario)+"' />";
+		var ins = "<p class='paragrafo'>" + $trad('msgTema',i3GEOF.distanciaptpt.dicionario);
+		ins += "<br><br><input id=i3GEOdistanciaptptbotao1 type='buttom' value='"+$trad('calcula',i3GEOF.distanciaptpt.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t2()","",ins,"i3GEOF.distanciaptpt.t3","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
 		new YAHOO.widget.Button(
 			"i3GEOdistanciaptptbotao1",
@@ -210,7 +210,7 @@ i3GEOF.distanciaptpt = {
 				i3GEOF.distanciaptpt.aguarde.visibility = "visible";
 				fim = function(retorno){
 					if (retorno.data==undefined )
-					{$i("i3GEOdistanciaptptfim").innerHTML = "<p class='paragrafo' >"+$trad(12,i3GEOF.distanciaptpt.dicionario);}
+					{$i("i3GEOdistanciaptptfim").innerHTML = "<p class='paragrafo' >"+$trad('erroTempo',i3GEOF.distanciaptpt.dicionario);}
 					else
 					{i3GEO.atualiza();}
 					i3GEOF.distanciaptpt.aguarde.visibility = "hidden";
@@ -221,7 +221,7 @@ i3GEOF.distanciaptpt = {
 				cp.call(p,"distanciaptpt",fim);
 			}
 			else
-			{$i("i3GEOdistanciaptptfim").innerHTML = $trad(13,i3GEOF.distanciaptpt.dicionario);}
+			{$i("i3GEOdistanciaptptfim").innerHTML = $trad('erroParametro',i3GEOF.distanciaptpt.dicionario);}
 		}
 		catch(e){$i("i3GEOdistanciaptptfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.distanciaptpt.aguarde.visibility = "hidden";}
 	},
