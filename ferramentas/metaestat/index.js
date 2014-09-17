@@ -2501,7 +2501,8 @@ i3GEOF.metaestat = {
 			if(!mostraIconeinfo || mostraIconeinfo === ""){
 				mostraIconeinfo = "sim";
 			}
-			ins = "<select id='"+idcombo+"' style='box-shadow:0 1px 5px gray;width:"+largura+"px' onchange='"+stronchange+"'><option value=''>---</option>";
+			ins = "<div class=styled-select style='width:"+largura+"px;float:left;' >";
+			ins += "<select style='height:22px;' id='"+idcombo+"' onchange='"+stronchange+"'><option value=''>---</option>";
 			for(i=0;i<n;i++){
 				if(dados[i].codigo_variavel === i3GEOF.metaestat.CODIGO_VARIAVEL){
 					selecionado = "SELECTED";
@@ -2511,7 +2512,7 @@ i3GEOF.metaestat = {
 				}
 				ins += "<option "+selecionado+" title='"+dados[i].descricao+"' value='"+dados[i].codigo_variavel+"'>"+dados[i].nome+"</option>";
 			}
-			ins += "</select>";
+			ins += "</select></div>";
 			if(mostraIconeinfo == "sim"){
 				ins += "<img src='"+i3GEO.configura.locaplic+"/imagens/ic_identifica.png' style='position:relative;cursor:pointer;left:5px;top:4px;' onclick='i3GEOF.metaestat.principal.maisInfo()' title='"+$trad(3,i3GEOF.metaestat.dicionario)+"'/>";
 			}
