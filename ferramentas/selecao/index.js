@@ -894,7 +894,7 @@ i3GEOF.selecao = {
 							"display:block"
 					);
 				};
-				operador = "<div class='styled-select' style='width:60px;'><select>";
+				operador = "<div class='styled-select' style='width:60px;margin-left:5px;'><select>";
 				operador += "<option value='='>=</option>";
 				operador += "<option value='!='> != </option>";
 				operador += "<option value='<'> < </option>";
@@ -904,7 +904,7 @@ i3GEOF.selecao = {
 				operador += "<option value='in'> in </option>";
 				operador += "<option value='~='> regExp </option></select></div>";
 
-				conector = "<div class='styled-select' style='width:60px;' ><select>";
+				conector = "<div class='styled-select' style='width:60px;margin-left:5px;' ><select>";
 				conector += "<option value='and'>and</option>";
 				conector += "<option value='or'>or</option>";
 				conector += "<option value='not'>not</option></select></div>";
@@ -912,6 +912,7 @@ i3GEOF.selecao = {
 				valor = document.createElement("div");
 				valor.className = 'styled-select';
 				valor.style.width = "100px";
+				valor.style.marginLeft="5px";
 				valor.innerHTML = "<input type=text value='' />";
 
 
@@ -929,7 +930,7 @@ i3GEOF.selecao = {
 						"none",
 						i3GEO.temaAtivo,
 						function(retorno){
-							ntd1.innerHTML = "<div class='styled-select' style='width:90px;' >" + retorno.dados + "</div>";
+							ntd1.innerHTML = "<div class='styled-select' style='width:90px;margin-left:5px;' >" + retorno.dados + "</div>";
 						}
 				);
 				ntr.appendChild(ntd1);
