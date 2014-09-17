@@ -1,60 +1,60 @@
 //+$trad(1,i3GEOF.inseretxt.dicionario)+
 i3GEOF.inseretxt.dicionario = {
-		1: [{
+		'msgAguarde': [{
 			pt:"Aguarde",
 			en:"",
 			es:"",
 			it:""
 		}],
-		2: [{
+		'propriedades': [{
 			pt:"Propriedades",
 			en:"",
 			es:"",
 			it:""
 		}],
-		3: [{
+		'digita': [{
 			pt:"Digitar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		4: [{
+		'captura': [{
 			pt:"Capturar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		5: [{
+		'insereTexto': [{
 			pt:"Texto que ser&aacute; inserido",
 			en:"",
 			es:"",
 			it:""
 		}],
-		6: [{
+		'insereConector': [{
 			pt:"&nbsp;Insere com conector",
 			en:"",
 			es:"",
 			it:""
 		}],
-		7: [{
+		'ajuda': [{
 			pt:"Digite o texto e clique no mapa no ponto de inclus&atilde;o. Para definir os par&acirc;metros de fonte, tamanho, etc, utilize a guia de propriedades. Se o texto contiver acentua&ccedil;&atilde;o, n&atilde;o use a fonte padr&atilde;o (bitmap). Ativando o conector, vc dever&aacute; clicar no ponto inicial e final.",
 			en:"",
 			es:"",
 			it:""
 		}],
-		8: [{
+		'selecionaTema': [{
 			pt:"Escolha o tema:",
 			en:"",
 			es:"",
 			it:""
 		}],
-		9: [{
+		'selecionaItem': [{
 			pt:"Escolha o item",
 			en:"",
 			es:"",
 			it:""
 		}],
-		10: [{
+		'ajuda2': [{
 			pt:"Ap&oacute;s escolher o tema e o item da tabela de atributos, clique no mapa no lugar desejado para incluir o texto.",
 			en:"",
 			es:"",
@@ -234,19 +234,19 @@ i3GEOF.inseretxt.dicionario = {
 			es:"",
 			it:""
 		}],
-		40: [{
+		'ativaGuia': [{
 			pt:"Ative a guia 1 ou 2 para definir o texto",
 			en:"",
 			es:"",
 			it:""
 		}],
-		41: [{
+		'msgNadaEncontrado': [{
 			pt:"Nada encontrado.",
 			en:"",
 			es:"",
 			it:""
 		}],
-		42: [{
+		'clicaFimConcetor': [{
 			pt:"Clique no fim do conector",
 			en:"",
 			es:"",

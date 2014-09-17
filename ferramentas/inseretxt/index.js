@@ -119,7 +119,7 @@ i3GEOF.inseretxt = {
 				 		$i("i3GEOinseretxtDivComboTemas").style.display = "block";
 				 		if ($i("i3GEOinseretxtComboTemas")){
 				 			$i("i3GEOinseretxtComboTemas").onchange = function(){
-				 				$i("i3GEOinseretxtDivComboItens").innerHTML = "<p class=paragrafo style=color:red >"+$trad(1,i3GEOF.inseretxt.dicionario)+"...</p>";
+				 				$i("i3GEOinseretxtDivComboItens").innerHTML = "<p class=paragrafo style=color:red >"+$trad('msgAguarde',i3GEOF.inseretxt.dicionario)+"...</p>";
 								i3GEO.mapa.ativaTema($i("i3GEOinseretxtComboTemas").value);
 				 				//combodeitens
 								i3GEO.util.comboItens(
@@ -174,32 +174,32 @@ i3GEOF.inseretxt = {
 		var ins = '' +
 		'<div id=i3GEOinseretxtguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a  ><em><div id="i3GEOinseretxtguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad(2,i3GEOF.inseretxt.dicionario)+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
-		'		<li><a  ><em><div id="i3GEOinseretxtguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
-		'		<li><a  ><em><div id="i3GEOinseretxtguia2" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinseretxtguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad('propriedades',i3GEOF.inseretxt.dicionario)+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinseretxtguia1" style="text-align:center;left:0px;" >'+$trad('digita',i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinseretxtguia2" style="text-align:center;left:0px;" >'+$trad('captura',i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia1obj" style="left:1px;display:none;">' +
-		'		<p class="paragrafo" >'+$trad(5,i3GEOF.inseretxt.dicionario)+':</p>' +
+		'		<p class="paragrafo" >'+$trad('insereTexto',i3GEOF.inseretxt.dicionario)+':</p>' +
 		'		<div class="styled-select" >' +
 		'		<input type="text" id="i3GEOinseretxttexto" value="" />' +
 		'		</div>' +
 		'		<br><p class="paragrafo" >' +
-		'		<input class=inputsb style=cursor:pointer type=checkbox id=i3GEOinseretxttextoconector >'+$trad(6,i3GEOF.inseretxt.dicionario) +
+		'		<input class=inputsb style=cursor:pointer type=checkbox id=i3GEOinseretxttextoconector >'+$trad('insereConector',i3GEOF.inseretxt.dicionario) +
 		'		</p><div id=i3GEOinseretxtmen1 style="text-align:left;" >'+
-		'			<p class="paragrafo" >'+$trad(7,i3GEOF.inseretxt.dicionario) +
+		'			<p class="paragrafo" >'+$trad('ajuda',i3GEOF.inseretxt.dicionario) +
 		'		</div>' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia2obj" style="left:1px;display:none;">' +
-		'		<p class=paragrafo >' + $trad(8,i3GEOF.inseretxt.dicionario) +
-		'		<div id=i3GEOinseretxtDivComboTemas class="styled-select" >'+$trad(1,i3GEOF.inseretxt.dicionario)+'...' +
+		'		<p class=paragrafo >' + $trad('selecionaTema',i3GEOF.inseretxt.dicionario) +
+		'		<div id=i3GEOinseretxtDivComboTemas class="styled-select" >'+$trad('msgAguarde',i3GEOF.inseretxt.dicionario)+'...' +
 		'		</div><br>' +
-		'		<p class=paragrafo >'+$trad(9,i3GEOF.inseretxt.dicionario)+':</p>' +
+		'		<p class=paragrafo >'+$trad('selecionaItem',i3GEOF.inseretxt.dicionario)+':</p>' +
 		'		<div id=i3GEOinseretxtDivComboItens class="styled-select">'+
 		'		</div>' +
 		'		<br><br>' +
 		'		<div id=i3GEOinseretxtmen2 style="text-align:left;" >' +
-		'			<p class=paragrafo >' + $trad(10,i3GEOF.inseretxt.dicionario) + '</p>' +
+		'			<p class=paragrafo >' + $trad('ajuda2',i3GEOF.inseretxt.dicionario) + '</p>' +
 		'		</div>' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia3obj" style="left:1px;display:none;">' +
@@ -299,7 +299,7 @@ i3GEOF.inseretxt = {
 			if(i3GEOF.inseretxt.aguarde.visibility === "visible")
 			{return;}
 			if($i("i3GEOinseretxtguia3obj").style.display === "block"){
-				i3GEO.janela.tempoMsg($trad(40,i3GEOF.inseretxt.dicionario));
+				i3GEO.janela.tempoMsg($trad('ativaGuia',i3GEOF.inseretxt.dicionario));
 				return;
 			}
 			i3GEOF.inseretxt.aguarde.visibility = "visible";
@@ -313,7 +313,7 @@ i3GEOF.inseretxt = {
 			else{
 				temp = function(retorno){
 					if(retorno.data[0] == " "){
-						i3GEO.janela.tempoMsg($trad(41,i3GEOF.inseretxt.dicionario));
+						i3GEO.janela.tempoMsg($trad('msgNadaEncontrado',i3GEOF.inseretxt.dicionario));
 						i3GEOF.inseretxt.aguarde.visibility = "hidden";
 						return;
 					}
@@ -343,7 +343,7 @@ i3GEOF.inseretxt = {
 					i3GEOF.inseretxt.contaPontos = 1;
 					i3GEOF.inseretxt.pontoi = objposicaocursor.ddx+" "+objposicaocursor.ddy;
 					i3GEOF.inseretxt.aguarde.visibility = "hidden";
-					i3GEO.janela.tempoMsg($trad(42,i3GEOF.inseretxt.dicionario));
+					i3GEO.janela.tempoMsg($trad('clicaFimConcetor',i3GEOF.inseretxt.dicionario));
 					return;
 				}
 				if(i3GEOF.inseretxt.contaPontos == 1){
