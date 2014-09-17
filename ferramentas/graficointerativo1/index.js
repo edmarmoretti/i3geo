@@ -378,7 +378,7 @@ i3GEOF.graficointerativo1 =
 			// dados para o grafico
 			$i(idjanela + "i3GEOgraficointerativo1guia2").onclick = function() {
 				if (i3GEOF.graficointerativo1.tipo == "" && i3GEOF.graficointerativo1.propJanelas[idjanela].tipo && i3GEOF.graficointerativo1.propJanelas[idjanela].tipo === "") {
-					alert($trad(4, i3GEOF.graficointerativo1.dicionario));
+					alert($trad("escolhatipo", i3GEOF.graficointerativo1.dicionario));
 					return;
 				}
 				if (i3GEOF.graficointerativo1.propJanelas[idjanela].tipo == undefined || i3GEOF.graficointerativo1.propJanelas[idjanela].tipo === "") {
@@ -396,7 +396,7 @@ i3GEOF.graficointerativo1 =
 			// mostra o grafico
 			$i(idjanela + "i3GEOgraficointerativo1guia4").onclick = function() {
 				if (i3GEOF.graficointerativo1.propJanelas[idjanela].tipo === "") {
-					alert($trad(4, i3GEOF.graficointerativo1.dicionario));
+					alert($trad("escolhatipo", i3GEOF.graficointerativo1.dicionario));
 					return;
 				}
 				if ($i(idjanela + "i3GEOgraficointerativo1Dados").innerHTML === "") {
@@ -413,7 +413,7 @@ i3GEOF.graficointerativo1 =
 			$i(idjanela + "i3GEOgraficointerativo1guia5").onclick =
 				function() {
 					if (i3GEOF.graficointerativo1.propJanelas[idjanela].tipo === "") {
-						alert($trad(4, i3GEOF.graficointerativo1.dicionario));
+						alert($trad("escolhatipo", i3GEOF.graficointerativo1.dicionario));
 						return;
 					}
 					if ($i(idjanela + "i3GEOgraficointerativo1Dados").innerHTML === "") {
@@ -427,7 +427,7 @@ i3GEOF.graficointerativo1 =
 			$i(idjanela + "i3GEOgraficointerativo1guia6").onclick =
 				function() {
 					if (i3GEOF.graficointerativo1.propJanelas[idjanela].tipo === "") {
-						alert($trad(4, i3GEOF.graficointerativo1.dicionario));
+						alert($trad("escolhatipo", i3GEOF.graficointerativo1.dicionario));
 						return;
 					}
 					if ($i(idjanela + "i3GEOgraficointerativo1Dados").innerHTML === "") {
@@ -562,7 +562,7 @@ i3GEOF.graficointerativo1 =
 				temp = 'i3GEOF.graficointerativo1.propJanelas["' + idjanela + '"].atualiza = this.checked';
 				janela[0]
 					.setFooter("<div style=background-color:#F2F2F2; ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
-						+ temp + "' type=checkbox />&nbsp;" + $trad(53, i3GEOF.graficointerativo1.dicionario) + " (" + idjanela + ")</div>");
+						+ temp + "' type=checkbox />&nbsp;" + $trad("atualizaNavegacao", i3GEOF.graficointerativo1.dicionario) + " (" + idjanela + ")</div>");
 
 				temp = function() {
 					i3GEOF.graficointerativo1.janelas.remove(idjanela);
@@ -595,7 +595,7 @@ i3GEOF.graficointerativo1 =
 
 			// eventos que ocorrem no mapa e afetam os graficos
 			if (i3GEO.Interface) {
-				i3GEO.janela.tempoMsg($trad(37, i3GEOF.graficointerativo1.dicionario));
+				i3GEO.janela.tempoMsg($trad('dadosRegiaoMostrada', i3GEOF.graficointerativo1.dicionario));
 				if (i3GEO.Interface.ATUAL === "openlayers"
 					&& i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEOF.graficointerativo1.atualizaListaDeRegistros()") < 0) {
 					i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.graficointerativo1.atualizaListaDeRegistros()");
@@ -726,7 +726,7 @@ i3GEOF.graficointerativo1 =
 				}
 			};
 			if (i3GEOF.graficointerativo1.propJanelas[idjanela].tipo === "") {
-				i3GEO.janela.tempoMsg($trad(31, i3GEOF.graficointerativo1.dicionario));
+				i3GEO.janela.tempoMsg($trad('selecionaTipoGrafico', i3GEOF.graficointerativo1.dicionario));
 				i3GEO.guias.mostraGuiaFerramenta(idjanela + "i3GEOgraficointerativo1guia1", idjanela + "i3GEOgraficointerativo1guia");
 				return;
 			}
@@ -751,9 +751,9 @@ i3GEOF.graficointerativo1 =
 				function(retorno) {
 					if (retorno.tipo === "erro") {
 						$i(idjanela + "i3GEOgraficointerativo1ComboX").innerHTML =
-							"<br><br><span style='color:red'>" + $trad(32, i3GEOF.graficointerativo1.dicionario) + "</span><br><br>";
+							"<br><br><span style='color:red'>" + $trad('erroTemaOrigem', i3GEOF.graficointerativo1.dicionario) + "</span><br><br>";
 						$i(idjanela + "i3GEOgraficointerativo1ComboY").innerHTML =
-							"<br><br><span style='color:red'>" + $trad(32, i3GEOF.graficointerativo1.dicionario) + "</span><br><br>";
+							"<br><br><span style='color:red'>" + $trad('erroTemaOrigem', i3GEOF.graficointerativo1.dicionario) + "</span><br><br>";
 					} else {
 						// guarda o valor para reuso
 						i3GEOF.graficointerativo1.propJanelas[idjanela].dadosComboItens = retorno;
@@ -761,7 +761,7 @@ i3GEOF.graficointerativo1 =
 						var temp = retorno.dados.replace(idjanela + "i3GEOgraficointerativo1ComboXid",idjanela + "i3GEOgraficointerativo1ComboYid");
 
 						$i(idjanela + "i3GEOgraficointerativo1ComboY").innerHTML =
-							"<div>" + temp + "&nbsp;<div class=styled-select style='width:145px;float: right;' ><input title='" + $trad(33, i3GEOF.graficointerativo1.dicionario)
+							"<div>" + temp + "&nbsp;<div class=styled-select style='width:145px;float: right;' ><input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
 								+ "'  type=text id='" + idjanela
 								+ "i3GEOgraficointerativo1ComboYidTitulo' value='' /></div>" + "<div class='styled-select' style='width:80px;float: right;' ><input id='" + idjanela
 								+ "i3GEOgraficointerativo1ComboYidcor' title='cor' type='text' value='' /></div>"
@@ -772,7 +772,7 @@ i3GEOF.graficointerativo1 =
 						//$i(idjanela + "i3GEOgraficointerativo1ComboXid").id = idjanela + "i3GEOgraficointerativo1ComboYid";
 						//para escolher o item de X
 						$i(idjanela + "i3GEOgraficointerativo1ComboX").innerHTML =
-							"<div class=styled-select style='width:160px;'>" + retorno.dados + "&nbsp;<div class=styled-select style='width:240px;float: right;' ><input title='" + $trad(33, i3GEOF.graficointerativo1.dicionario)
+							"<div class=styled-select style='width:160px;'>" + retorno.dados + "&nbsp;<div class=styled-select style='width:240px;float: right;' ><input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
 								+ "' type=text id='" + idjanela
 								+ "i3GEOgraficointerativo1ComboXidTitulo' value='' /></div></div>";
 
@@ -783,8 +783,8 @@ i3GEOF.graficointerativo1 =
 								function() {
 									var no = document.createElement("div"), id = "CorG" + parseInt(Math.random() * 100000, 10), novoselect;
 									no.innerHTML = ""
-										+ retorno.dados 
-										+ "<div class=styled-select style='width:145px;float: right;' ><input title='" + $trad(33, i3GEOF.graficointerativo1.dicionario)
+										+ retorno.dados
+										+ "<div class=styled-select style='width:145px;float: right;' ><input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
 										+ "' type=text value='' /></div>" + "&nbsp;<div class=styled-select style='width:80px;float: right;' ><input id='" + id
 										+ "' type=text value='' title='cor' /></div>"
 										+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:3px;cursor:pointer src='"
@@ -889,15 +889,15 @@ i3GEOF.graficointerativo1 =
 			}
 
 			if (tema === "") {
-				i3GEO.janela.tempoMsg($trad(34, i3GEOF.graficointerativo1.dicionario));
+				i3GEO.janela.tempoMsg($trad('selecionaTema', i3GEOF.graficointerativo1.dicionario));
 				return;
 			}
 			if (x === "") {
-				i3GEO.janela.tempoMsg($trad(35, i3GEOF.graficointerativo1.dicionario));
+				i3GEO.janela.tempoMsg($trad('selecionaItemX', i3GEOF.graficointerativo1.dicionario));
 				return;
 			}
 			if (y === "") {
-				i3GEO.janela.tempoMsg($trad(36, i3GEOF.graficointerativo1.dicionario));
+				i3GEO.janela.tempoMsg($trad('selecionaItemY', i3GEOF.graficointerativo1.dicionario));
 				return;
 			}
 			monta = function(retorno) {
@@ -977,7 +977,7 @@ i3GEOF.graficointerativo1 =
 			} else {
 				dados = retorno;
 			}
-			ins.push("<p class=paragrafo >" + $trad(38, i3GEOF.graficointerativo1.dicionario) + "</p><table class=lista4 id='" + idjanela
+			ins.push("<p class=paragrafo >" + $trad('tabelaGrafico', i3GEOF.graficointerativo1.dicionario) + "</p><table class=lista4 id='" + idjanela
 				+ "i3GEOgraficointerativo1tabeladados' ><tr><td></td>");
 			// pega os nomes das clunas
 			colunas = i3GEOF.graficointerativo1.nomesColunas(idjanela)[0];
@@ -987,7 +987,7 @@ i3GEOF.graficointerativo1 =
 					.push("<td style=background-color:yellow >&nbsp;<img style=cursor:pointer onclick='i3GEOF.graficointerativo1.ordenaColuna(this,1)' src='"
 						+ i3GEO.configura.locaplic + "/imagens/ordena1.gif' title='ordena' /> " + colunas[i] + "</td>");
 			}
-			ins.push("<td style=background-color:yellow >" + $trad(41, i3GEOF.graficointerativo1.dicionario) + "</td><td></td></tr>");
+			ins.push("<td style=background-color:yellow >" + $trad('cor', i3GEOF.graficointerativo1.dicionario) + "</td><td></td></tr>");
 			n = dados.length;
 			for (i = 1; i < n; i++) {
 				v = dados[i].split(";");
@@ -995,13 +995,13 @@ i3GEOF.graficointerativo1 =
 				id = idjanela + "i3GEOgraficointerativo1Dados" + i; // layer+indice da classe
 				ins.push("<tr><td>");
 				ins.push("<img style='cursor:pointer' onclick='i3GEOF.graficointerativo1.excluilinha(this)' src='"
-					+ i3GEO.configura.locaplic + "/imagens/x.gif' title='" + $trad(42, i3GEOF.graficointerativo1.dicionario) + "' /></td>");
+					+ i3GEO.configura.locaplic + "/imagens/x.gif' title='" + $trad('exclui', i3GEOF.graficointerativo1.dicionario) + "' /></td>");
 				ins.push("</td>");
 				for (j = 0; j < ncolunas; j++) {
 					v[j] = v[j].replace("'", "");
 					v[j] = v[j].replace("'", "");
 					ins.push("<td>");
-					ins.push($inputText("", "", id + colunas[j], $trad(43, i3GEOF.graficointerativo1.dicionario), 20, v[j], colunas[j]));
+					ins.push($inputText("", "", id + colunas[j], $trad('digitaNovoNome', i3GEOF.graficointerativo1.dicionario), 20, v[j], colunas[j]));
 					ins.push("</td>");
 				}
 
@@ -1015,7 +1015,7 @@ i3GEOF.graficointerativo1 =
 				if (v[ncolunas + 1]) {
 					cor = i3GEO.util.rgb2hex(v[ncolunas + 1]);
 				}
-				ins.push($inputText("", "", id + "_cor", "", 12, cor, $trad(41, i3GEOF.graficointerativo1.dicionario)));
+				ins.push($inputText("", "", id + "_cor", "", 12, cor, $trad('cor', i3GEOF.graficointerativo1.dicionario)));
 				ins.push("</td><td>");
 				ins.push("<img alt='aquarela.gif' style=cursor:pointer src='" + i3GEO.configura.locaplic
 					+ "/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\"" + id + "_cor\")' />");
@@ -1119,8 +1119,8 @@ i3GEOF.graficointerativo1 =
 			}
 			if (legendaX == legendaY && (legendaX != "" && legendaY != "")) {
 				menor = 0;
-				legendaX += " (" + $trad(45, i3GEOF.graficointerativo1.dicionario) + ")";
-				legendaY += " (" + $trad(46, i3GEOF.graficointerativo1.dicionario) + ")";
+				legendaX += " (" + $trad('casos', i3GEOF.graficointerativo1.dicionario) + ")";
+				legendaY += " (" + $trad('numeroCasos', i3GEOF.graficointerativo1.dicionario) + ")";
 			}
 
 			for (j = 0; j < ncolunas; j++) {
@@ -1163,7 +1163,7 @@ i3GEOF.graficointerativo1 =
 				i3GEOF.graficointerativo1.arvores(idjanela, dados, maior, cores, legendaY, legendaX);
 				break;
 			default:
-				// alert($trad(4, i3GEOF.graficointerativo1.dicionario));
+				// alert($trad("escolhatipo", i3GEOF.graficointerativo1.dicionario));
 			}
 		},
 		/**

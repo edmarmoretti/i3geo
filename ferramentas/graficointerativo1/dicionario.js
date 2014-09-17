@@ -243,7 +243,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		31 : [
+		'selecionaTipoGrafico' : [
 			{
 				pt : "Escolha um tipo de grafico",
 				en : "",
@@ -251,7 +251,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		32 : [
+		'erroTemaOrigem' : [
 			{
 				pt : "erro ao ler os itens do tema de origem",
 				en : "",
@@ -259,7 +259,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		33 : [
+		'digitaTituloLegenda' : [
 			{
 				pt : "Digite o t&iacute;tulo para legenda",
 				en : "",
@@ -267,7 +267,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		34 : [
+		'selecionaTema' : [
 			{
 				pt : "Escolha um tema",
 				en : "",
@@ -275,7 +275,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		35 : [
+		'selecionaItemX' : [
 			{
 				pt : "Escolha um item para X",
 				en : "",
@@ -283,7 +283,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		36 : [
+		'selecionaItemY' : [
 			{
 				pt : "Escolha um item para Y",
 				en : "",
@@ -291,7 +291,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		37 : [
+		'dadosRegiaoMostrada' : [
 			{
 				pt : "Os dados utilizados referem-se apenas &agrave; regi&atilde;o atual mostrada no mapa",
 				en : "",
@@ -299,7 +299,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		38 : [
+		'tabelaGrafico' : [
 			{
 				pt : "Tabela de dados para o gr&aacute;fico. Os valores podem ser editados",
 				en : "",
@@ -323,7 +323,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		41 : [
+		'cor' : [
 			{
 				pt : "cor",
 				en : "",
@@ -331,7 +331,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		42 : [
+		'exclui' : [
 			{
 				pt : "excluir",
 				en : "",
@@ -339,7 +339,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		43 : [
+		'digitaNovoNome' : [
 			{
 				pt : "digite o novo nome",
 				en : "",
@@ -355,7 +355,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		45 : [
+		'casos' : [
 			{
 				pt : "casos",
 				en : "",
@@ -363,7 +363,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		46 : [
+		'numeroCasos' : [
 			{
 				pt : "n. de casos",
 				en : "",
@@ -419,7 +419,7 @@ i3GEOF.graficointerativo1.dicionario =
 				it : ""
 			}
 		],
-		53 : [
+		"atualizaNavegacao" : [
 			{
 				pt : "Atualiza ao navegar",
 				en : "",
