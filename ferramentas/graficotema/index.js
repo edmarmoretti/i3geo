@@ -122,36 +122,36 @@ i3GEOF.graficoTema = {
 		var ins = '';
 		ins += '<div id=i3GEOgraficotemaguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a  ><em><div id="i3GEOgraficotemaguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.graficoTema.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a  ><em><div id="i3GEOgraficotemaguia2" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.graficoTema.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOgraficotemaguia1" style="text-align:center;left:0px;" >'+$trad('fonteDados',i3GEOF.graficoTema.dicionario)+'</div></em></a></li>';
+		ins += '		<li><a  ><em><div id="i3GEOgraficotemaguia2" style="text-align:center;left:0px;" >'+$trad('propriedades',i3GEOF.graficoTema.dicionario)+'</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div><br>';
 		ins += '	<div class=guiaobj id="i3GEOgraficotemaguia1obj" style="left:1px;90%;display:none;">';
 		ins += '			<div id=i3GEOgraficotemacombot style="display:none;position:relative;top:5px;left:0px;">';
 		ins += '			</div>';
-		ins += '			<p class="paragrafo" ><b>'+$trad(3,i3GEOF.graficoTema.dicionario)+'</b><br><br>';
-		ins += '			<div id=i3GEOgraficotemalistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;">'+$trad(4,i3GEOF.graficoTema.dicionario)+'</div>';
+		ins += '			<p class="paragrafo" ><b>'+$trad('selecionaItens',i3GEOF.graficoTema.dicionario)+'</b><br><br>';
+		ins += '			<div id=i3GEOgraficotemalistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;">'+$trad('selecionaTema',i3GEOF.graficoTema.dicionario)+'</div>';
 		ins += '			<br><br>';
-		ins += '			<p class="paragrafo" ><input id=i3GEOgraficotemabotao1 size=35  type=button value="'+$trad(5,i3GEOF.graficoTema.dicionario)+'" />';
-		ins += '		<div id=i3GEOgraficotemamen1 style=top:10px;left:1px ><p class="paragrafo">'+$trad(6,i3GEOF.graficoTema.dicionario)+'</div>';
+		ins += '			<p class="paragrafo" ><input id=i3GEOgraficotemabotao1 size=35  type=button value="'+$trad('criaGrafico',i3GEOF.graficoTema.dicionario)+'" />';
+		ins += '		<div id=i3GEOgraficotemamen1 style=top:10px;left:1px ><p class="paragrafo">'+$trad('compoeGrafico',i3GEOF.graficoTema.dicionario)+'</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOgraficotemaguia2obj" style="left:1px;display:none;">';
-		ins += '		<p class="paragrafo">'+$trad(7,i3GEOF.graficoTema.dicionario)+':</p>';
+		ins += '		<p class="paragrafo">'+$trad('tipo',i3GEOF.graficoTema.dicionario)+':</p>';
 		ins += '		<div class="styled-select" ><select id=i3GEOgraficotematipo >';
-		ins += '			<option value="PIE">'+$trad(8,i3GEOF.graficoTema.dicionario)+'</option>';
-		ins += '			<option value="BAR">'+$trad(9,i3GEOF.graficoTema.dicionario)+'</option>';
+		ins += '			<option value="PIE">'+$trad('pizza',i3GEOF.graficoTema.dicionario)+'</option>';
+		ins += '			<option value="BAR">'+$trad('barras',i3GEOF.graficoTema.dicionario)+'</option>';
 		ins += '		</select></div>';
 		ins += '		<br>';
-		ins += '		<p class="paragrafo">'+$trad(10,i3GEOF.graficoTema.dicionario)+':</p>';
+		ins += '		<p class="paragrafo">'+$trad('largura',i3GEOF.graficoTema.dicionario)+':</p>';
 		ins += '		<div class="styled-select" ><input type="text" id="i3GEOgraficotemalargura" value="50"/></div>';
 		ins += '		<br>';
-		ins += '		<p class="paragrafo">'+$trad(11,i3GEOF.graficoTema.dicionario)+':</p>';
+		ins += '		<p class="paragrafo">'+$trad('altura',i3GEOF.graficoTema.dicionario)+':</p>';
 		ins += '		<div class="styled-select" ><input type="text" id="i3GEOgraficotemaaltura" value="50"/></div>';
 		ins += '		<br>';
-		ins += '		<p class="paragrafo">'+$trad(12,i3GEOF.graficoTema.dicionario)+':</p>';
+		ins += '		<p class="paragrafo">'+$trad('deslocamentoFatias',i3GEOF.graficoTema.dicionario)+':</p>';
 		ins += '		<div class="styled-select" ><input type="text" id="i3GEOgraficotemaoffset" value="0"/></div>';
 		ins += '		<br>';
-		ins += '		<p class="paragrafo">'+$trad(13,i3GEOF.graficoTema.dicionario)+':</p>';
+		ins += '		<p class="paragrafo">'+$trad('corContorno',i3GEOF.graficoTema.dicionario)+':</p>';
 		ins += '		<div class="styled-select" ><input type="text" id="i3GEOgraficotemaoutlinecolor" value="0,0,0"/></div>';
 		ins += '	</div>';
 		ins += '</div>	';
@@ -275,7 +275,7 @@ i3GEOF.graficoTema = {
 				cp = new cpaint(),
 				p;
 			if(nlista < 2){
-				i3GEO.janela.tempoMsg($trad(14,i3GEOF.graficoTema.dicionario));
+				i3GEO.janela.tempoMsg($trad('msgSelecionaItens',i3GEOF.graficoTema.dicionario));
 				return;
 			}
 			if (tipo === "PIE"){tamanho = $i("i3GEOgraficotemalargura").value;}
