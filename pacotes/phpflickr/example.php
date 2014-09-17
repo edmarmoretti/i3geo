@@ -1,4 +1,5 @@
 <?
+exit;
 /* Last updated with phpFlickr 1.3.2
  *
  * This example file shows you how to call the 100 most recent public

@@ -1,4 +1,5 @@
 <?php
+exit;
 /**
  * This example shows several things:
  * - How a setup interface should look like.

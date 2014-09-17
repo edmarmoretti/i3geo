@@ -1,4 +1,5 @@
 <?php
+exit;
 /**
  * This example shows how to create a basic provider usin HTTP Authentication.
  * This is only an example. You shouldn't use it as-is in your code.

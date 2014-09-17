@@ -1,4 +1,5 @@
 <?php
+exit;
 /**
  * @file
  * User has successfully authenticated with Twitter. Access tokens saved to session and DB.
