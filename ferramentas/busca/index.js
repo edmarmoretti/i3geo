@@ -118,11 +118,12 @@ i3GEOF.busca = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '';
-		ins += '<p class="paragrafo" >';
-		ins += $inputText("","","i3GEObuscapalavra","",35,$trad('digita',i3GEOF.busca.dicionario));
-		ins += '<p class="paragrafo" ><input id=i3GEObuscabotao1 size=20  type=button value="'+$trad('procura',i3GEOF.busca.dicionario)+'" />';
-		ins += '<br><br><table summary="Lista de opcoes" class=lista3 width="250px">';
+		var ins = '<div style=margin-left:5px; >';
+		ins += '<div class=styled-select >';
+		ins += '<input type=text value="" title="'+$trad('digita',i3GEOF.busca.dicionario)+'" id="i3GEObuscapalavra" />';
+		ins += '</div>';
+		ins += '<br><p class="paragrafo" ><input id=i3GEObuscabotao1 size=20  type=button value="'+$trad('procura',i3GEOF.busca.dicionario)+'" />';
+		ins += '<br><table summary="Lista de opcoes" class=lista3 width="250px">';
 		ins += '	<tr>';
 		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscaqualquer name=i3GEObuscatipo checked /></td>';
 		ins += '		<td>'+$trad('busca',i3GEOF.busca.dicionario)+'</td>';
@@ -140,9 +141,9 @@ i3GEOF.busca = {
 		ins += '		<td>'+$trad('busca4',i3GEOF.busca.dicionario)+'</td>';
 		ins += '	</tr>';
 		ins += '</table>';
-		ins += '<p class="paragrafo" ><b>'+$trad('busca5',i3GEOF.busca.dicionario)+'</b>';
+		ins += '<br><p class="paragrafo" ><b>'+$trad('busca5',i3GEOF.busca.dicionario)+'</b>';
 		ins += '<div id=i3GEObuscalistai class=digitar style="text-align:left;width:250px;overflow:auto;height:115px">';
-		ins += '</div>';
+		ins += '</div></div>';
 		return ins;
 	},
 	/*
