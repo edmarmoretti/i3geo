@@ -99,7 +99,7 @@ i3GEOF.proplabel = {
 		'<p class="paragrafo">' + $trad(2,i3GEOF.proplabel.dicionario) + ":</p>" + 
 		'<div class="styled-select" id="i3GEOproplabelDivListaFonte">' +
 		$trad(1,i3GEOF.proplabel.dicionario) +
-		'...</div>' +
+		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad(3,i3GEOF.proplabel.dicionario)+':</p>' +
 		'<div class="styled-select" >' +
@@ -206,12 +206,12 @@ i3GEOF.proplabel = {
 		'	</select>' +
 		'</div>' +
 
-		'<br><p class="paragrafo">'+$trad(27,i3GEOF.proplabel.dicionario)+' Y:</p>' +
+		'<br><p class="paragrafo">'+$trad(27,i3GEOF.proplabel.dicionario)+':</p>' +
 		'<div class="styled-select" >' +
 		'<input type="text" value="auto" id="i3GEOproplabelmindistance_i" />' +
 		'</div>' +
 
-		'<br><p class="paragrafo">'+$trad(28,i3GEOF.proplabel.dicionario)+' Y:</p>' +
+		'<br><p class="paragrafo">'+$trad(28,i3GEOF.proplabel.dicionario)+':</p>' +
 		'<div class="styled-select" >' +
 		'<input type="text" value="auto" id="i3GEOproplabelminfeaturesize_i" />' +
 		'</div>' +
@@ -224,7 +224,7 @@ i3GEOF.proplabel = {
 		'	</select>' +
 		'</div>' +
 
-		'<br><p class="paragrafo">'+$trad(30,i3GEOF.proplabel.dicionario)+' Y:</p>' +
+		'<br><p class="paragrafo">'+$trad(30,i3GEOF.proplabel.dicionario)+':</p>' +
 		'<div class="styled-select" >' +
 		'<input type="text" value="" id="i3GEOproplabelwrap_i" />' +
 		'</div></div><br><br>';

@@ -122,7 +122,7 @@ i3GEOF.toponimia = {
 				"i3GEOtoponimiaListaItens",
 				i3GEO.temaAtivo,
 				function(retorno){
-					$i("i3GEOtoponimiaDivListaItens").innerHTML = '<p class="paragrafo" >'+retorno.dados;
+					$i("i3GEOtoponimiaDivListaItens").innerHTML = retorno.dados;
 					$i("i3GEOtoponimiaDivListaItens").style.display = "block";
 					$i("i3GEOtoponimiaListaItens").value = i3GEOF.toponimia.ATIVAITEM;
 				},
@@ -153,114 +153,132 @@ i3GEOF.toponimia = {
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia1obj" style="left:1px;90%;display:none;">' +
 		'			<p class="paragrafo" >'+$trad(4,i3GEOF.toponimia.dicionario)+'<br>' +
-		'			<div id=i3GEOtoponimiaDivListaItens ></div>' +
+		'			<div id=i3GEOtoponimiaDivListaItens class=styled-select ></div>' +
 		'			<br>' +
 		'			<p class="paragrafo" ><input style="cursor:pointer" type="checkbox" id="i3GEOtoponimianovotema" />&nbsp;'+$trad(5,i3GEOF.toponimia.dicionario) +
 		'			<br>' +
 		'			<p class="paragrafo" ><input id=i3GEOtoponimiabotao1 size=35  type=button value="'+$trad(6,i3GEOF.toponimia.dicionario)+'" />' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia2obj" style="left:1px;display:none;">' +
-		'		<table summary="" class=lista width="98%">' +
-		'			<tr><td>'+$trad(8,i3GEOF.toponimia.dicionario)+':</td><td><span id="i3GEOtoponimiaDivListaFonte">'+$trad(7,i3GEOF.toponimia.dicionario)+'...</span></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(9,i3GEOF.toponimia.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOtoponimiatamanho_i","",2,"8") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(10,i3GEOF.toponimia.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOtoponimiaangulo_i","",4,"0") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr>' +
-		'				<td>'+$trad(11,i3GEOF.toponimia.dicionario)+':</td>' +
-		'				<td>x ' +
-		$inputText("","","i3GEOtoponimiaoffsetx_i","",2,"0") +
-		'					y ' +
-		$inputText("","","i3GEOtoponimiaoffsety_i","",2,"0") +
-		'				</td>' +
-		'			</tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(12,i3GEOF.toponimia.dicionario)+':</td><td>'+
-		$inputText("","","i3GEOtoponimiafrente_i","",11,"0 0 0") +
-		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.toponimia.corj(\'i3GEOtoponimiafrente_i\')" /></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(13,i3GEOF.toponimia.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOtoponimiamascara_i","",11,"") +
-		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.toponimia.corj(\'i3GEOtoponimiamascara_i\')" /></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr>' +
-		'				<td>'+$trad(14,i3GEOF.toponimia.dicionario)+':</td>' +
-		'				<td>' +
-		'					<select id=i3GEOtoponimiaposition_i >' +
-		'						<option value="MS_AUTO" >auto</option>' +
-		'						<option value="MS_UL" >UL</option>' +
-		'						<option value="MS_UC" >UC</option>' +
-		'						<option value="MS_UR" >UR</option>' +
-		'						<option value="MS_CL" >CL</option>' +
-		'						<option value="MS_CC" >CC</option>' +
-		'						<option value="MS_CR" >CR</option>' +
-		'						<option value="MS_LL" >LL</option>' +
-		'						<option value="MS_LC" >LC</option>' +
-		'						<option value="MS_LR" >LR</option>' +
-		'					</select>' +
-		'				</td>' +
-		'			</tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(15,i3GEOF.toponimia.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOtoponimiafundoc_i","",9,"") +
-		'				<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.toponimia.corj(\'i3GEOtoponimiafundoc_i\')" /></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(16,i3GEOF.toponimia.dicionario)+':</td><td>'+
-		$inputText("","","i3GEOtoponimiasombra_i","",9,"") +
-		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.toponimia.corj(\'i3GEOtoponimiasombra_i\')" /></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(17,i3GEOF.toponimia.dicionario)+':</td><td>x ' +
-		$inputText("","","i3GEOtoponimiasombrax_i","",1,"1") +
-		'			 y' +
-		$inputText("","","i3GEOtoponimiasombray_i","",1,"1") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(18,i3GEOF.toponimia.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOtoponimiafrentes_i","",9,"") +
-		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.toponimia.corj(\'i3GEOtoponimiafrentes_i\')" /></td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(19,i3GEOF.toponimia.dicionario)+':</td><td>x '+
-		$inputText("","","i3GEOtoponimiafrentex_i","",1,"1") +
-		'			 y '+
-		$inputText("","","i3GEOtoponimiafrentey_i","",1,"1") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(20,i3GEOF.toponimia.dicionario)+':</td>' +
-		'				<td>' +
-		'					<select id=i3GEOtoponimiaforce_i >' +
-		'						<option value="0" >'+$trad("x15")+'</option>' +
-		'						<option value="1" >'+$trad("x14")+'</option>' +
-		'					</select>' +
-		'				</td>' +
-		'			</tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(21,i3GEOF.toponimia.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOtoponimiamindistance_i","",4,"auto") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(22,i3GEOF.toponimia.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOtoponimiaminfeaturesize_i","",4,"auto") +
-		'			</td></tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(23,i3GEOF.toponimia.dicionario)+':</td>' +
-		'				<td>' +
-		'					<select id=i3GEOtoponimiapartials_i >' +
-		'						<option value="0" >'+$trad("x15")+'</option>' +
-		'						<option value="1" >'+$trad("x14")+'</option>' +
-		'					</select>' +
-		'				</td>' +
-		'			</tr>' +
-		'			<tr><td>&nbsp;</td><td></td></tr>' +
-		'			<tr><td>'+$trad(24,i3GEOF.toponimia.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOtoponimiawrap_i","",5,"") +
-		'			</td></tr>' +
-		'		</table>' +
-		'	</div>' +
+
+		'<p class="paragrafo">'+$trad(8,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" id="i3GEOtoponimiaDivListaFonte">'+$trad(7,i3GEOF.toponimia.dicionario)+'...</div>' +
+
+		'<br><p class="paragrafo">'+$trad(9,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="8" id="i3GEOtoponimiatamanho_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(10,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="0" id="i3GEOtoponimiaangulo_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(11,i3GEOF.toponimia.dicionario)+' X:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="0" id="i3GEOtoponimiaoffsetx_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(11,i3GEOF.toponimia.dicionario)+' Y:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="0" id="i3GEOtoponimiaoffsety_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(12,i3GEOF.toponimia.dicionario)+':</p>'+
+		'<div class="styled-select" style="width:100px;float:left;">' +
+		'<input type="text" value="0 0 0" id="i3GEOtoponimiafrente_i" />' +
+		'</div>' +
+		'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOtoponimiafrente_i\')" />' +
+
+		'<br><br><br><p class="paragrafo">'+$trad(13,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" style="width:100px;float:left;">' +
+		'<input type="text" value="" id="i3GEOtoponimiamascara_i" />' +
+		'</div>' +
+		'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOtoponimiamascara_i\')" />' +
+
+		'<br><br><br><p class="paragrafo">'+$trad(14,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" style="width:100px;">' +
+		'	<select id=i3GEOtoponimiaposition_i >' +
+		'		<option value="MS_AUTO" >auto</option>' +
+		'		<option value="MS_UL" >UL</option>' +
+		'		<option value="MS_UC" >UC</option>' +
+		'		<option value="MS_UR" >UR</option>' +
+		'		<option value="MS_CL" >CL</option>' +
+		'		<option value="MS_CC" >CC</option>' +
+		'		<option value="MS_CR" >CR</option>' +
+		'		<option value="MS_LL" >LL</option>' +
+		'		<option value="MS_LC" >LC</option>' +
+		'		<option value="MS_LR" >LR</option>' +
+		'	</select>' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(15,i3GEOF.toponimia.dicionario)+':</td><td>' +
+		'<div class="styled-select" style="width:100px;float:left;">' +
+		'<input type="text" value="" id="i3GEOtoponimiafundoc_i" />' +
+		'</div>' +
+		'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOtoponimiafundoc_i\')" />' +
+
+		'<br><br><br><p class="paragrafo">'+$trad(16,i3GEOF.toponimia.dicionario)+':</td><td>' +
+		'<div class="styled-select" style="width:100px;float:left;">' +
+		'<input type="text" value="" id="i3GEOtoponimiasombra_i" />' +
+		'</div>' +
+		'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOtoponimiasombra_i\')" />' +
+
+		'<br><br><br><p class="paragrafo">'+$trad(17,i3GEOF.toponimia.dicionario)+' X:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="1" id="i3GEOtoponimiasombrax_i" />' +
+		'</div>' +
+		'<br><p class="paragrafo">'+$trad(17,i3GEOF.toponimia.dicionario)+' Y:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="1" id="i3GEOtoponimiasombray_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(18,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" style="width:100px;float:left;">' +
+		'<input type="text" value="" id="i3GEOtoponimiafrentes_i" />' +
+		'</div>' +
+		'<img alt="aquarela.gif" style="position:relative;left:5px;top:5px;cursor: pointer; float: none;" src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.proplabel.corj(\'i3GEOtoponimiafrentes_i\')" />' +
+
+		'<br><br><br><p class="paragrafo">'+$trad(19,i3GEOF.toponimia.dicionario)+' X:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="1" id="i3GEOtoponimiafrentex_i" />' +
+		'</div>' +
+		'<br><p class="paragrafo">'+$trad(19,i3GEOF.toponimia.dicionario)+' Y:</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="1" id="i3GEOtoponimiafrentey_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(20,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'	<select id=i3GEOtoponimiaforce_i >' +
+		'		<option value="0" >'+$trad("x15")+'</option>' +
+		'		<option value="1" >'+$trad("x14")+'</option>' +
+		'	</select>' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(21,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="auto" id="i3GEOtoponimiamindistance_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(22,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="auto" id="i3GEOtoponimiaminfeaturesize_i" />' +
+		'</div>' +
+
+		'<br><p class="paragrafo">'+$trad(23,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'	<select id=i3GEOtoponimiapartials_i >' +
+		'		<option value="1" >'+$trad("x14")+'</option>' +
+		'		<option value="0" >'+$trad("x15")+'</option>' +
+		'	</select>' +
+		'</div>' +
+		
+		'<br><p class="paragrafo">'+$trad(24,i3GEOF.toponimia.dicionario)+':</p>' +
+		'<div class="styled-select" >' +
+		'<input type="text" value="" id="i3GEOtoponimiawrap_i" />' +
+		'</div><br><br>';
+		'</div>' +
 		'	<div class=guiaobj id="i3GEOtoponimiaguia3obj" style="left:1px;90%;display:none;">' +
 		'		<div id=i3GEOtoponimiaTeste style="width:98%;top:15px;left:0px;" ></div>' +
 		'	</div>' +
