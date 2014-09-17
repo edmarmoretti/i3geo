@@ -122,14 +122,18 @@ i3GEOF.geolocal = {
 			'<button title="'+$trad('capturaCoord',i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.capturaCoordenada()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/gps.png" /></button>' +
 			'<button title="'+$trad('limpa',i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.limpa()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/erase.png" /></button>' +
 			'<button title="'+$trad('exclui',i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.criaShp()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-gps-create.png" /></button>' +
-			'<img title="' + $trad('paraCaptura',i3GEOF.geolocal.dicionario) + '" onclick="i3GEOF.geolocal.paraTempo()" style="left:10px;position:relative;" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/clock.png" >' +
-			'&nbsp;<form id="i3GEOFgeolocalFormTempo" style="left: 162px;position: absolute;top: 17px;width: 30px;">' +
-			$inputText("","","i3GEOFgeolocalTempo",$trad('intervalo',i3GEOF.geolocal.dicionario),5,"0") + '</form>' +
+			'<img title="' + $trad('paraCaptura',i3GEOF.geolocal.dicionario) + '" onclick="i3GEOF.geolocal.paraTempo()" style="top:-3px;left:10px;position:relative;" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/clock.png" >' +
+			'&nbsp;<form id="i3GEOFgeolocalFormTempo" style="left: 162px;position: absolute;top: 10px;width: 30px;">' +
+			'<div class=styled-select style="width:80px;">' +
+			'<input type="text" id="i3GEOFgeolocalTempo" title="'+$trad('intervalo',i3GEOF.geolocal.dicionario)+'" value="0" /></form>' +
+			'</div>' +
 			"<div style='height:130px;overflow:auto;top:10px;text-align:center;position:relative;cursor:pointer;padding:5px;' id='i3GEOFgeolocalListaDePontos' >" +
 			"</div>" +
 			"<br><div id='i3GEOFgeolocalNcoord' style='width: 30px; position: absolute;' ></div>" +
-			"<div style='position:relative;width: 150px;left: 40px;'>" + $trad('maximoPontos',i3GEOF.geolocal.dicionario) + " " +
-			$inputText("","","i3GEOFgeolocalMaximo","",5,"") + "</div>";
+			"<br><p class=paragrafo style='float:left;margin-right: 5px;top: 3px;position: relative;'>" + $trad('maximoPontos',i3GEOF.geolocal.dicionario) +
+			"<div class=styled-select style='position:relative;width: 60px;margin-left:5px;'>" +
+			'<input type="text" id="i3GEOFgeolocalMaximo" value="" />' +
+			"</div>";
 			return ins;
 		},
 		/*
@@ -147,7 +151,7 @@ i3GEOF.geolocal = {
 			titulo = $trad('localizaUsuario',i3GEOF.geolocal.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=118' >&nbsp;&nbsp;&nbsp;</a>";
 			janela = i3GEO.janela.cria(
 					"270",
-					"200",
+					"220",
 					"",
 					"",
 					"",
