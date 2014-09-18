@@ -185,7 +185,7 @@ i3GEOadmin.menus = {
 		var param = {
 				"linhas":[
 					{titulo:"Nome padr&atilde;o:",id:"Enome_menu",size:"50",value:i.nome_menu,tipo:"text",div:""},
-					{titulo:"Descri&ccedil;&atilde;ao (opcional):",id:"Edesc_menu",size:"50",value:i.desc_menu,tipo:"text",div:""},
+					{titulo:"Descri&ccedil;&atilde;o (opcional):",id:"Edesc_menu",size:"50",value:i.desc_menu,tipo:"text",div:""},
 					{titulo:"Nome em ingl&ecirc;s (opcional):",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
 					{titulo:"Espanhol (opcional):",id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
 					{titulo:"Italiano (opcional):",id:"Eit",size:"50",value:i.it,tipo:"text",div:""},

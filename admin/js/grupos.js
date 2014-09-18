@@ -208,7 +208,7 @@ i3GEOadmin.grupos = {
 		var param = {
 				"linhas":[
 					{titulo:"Nome padr&atilde;o:",id:"Enome_grupo",size:"50",value:i.nome_grupo,tipo:"text",div:""},
-					{titulo:"Descricao (opcional):",id:"Edesc_grupo",size:"50",value:i.desc_grupo,tipo:"text",div:""},
+					{titulo:"Descri&ccedil;&atilde;o (opcional):",id:"Edesc_grupo",size:"50",value:i.desc_grupo,tipo:"text",div:""},
 					{titulo:"Nome em ingl&ecirc;s (opcional):",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
 					{titulo:"Espanhol (opcional):",id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
 					{titulo:"Italiano (opcional):",id:"Eit",size:"50",value:i.it,tipo:"text",div:""}
