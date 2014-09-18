@@ -171,11 +171,11 @@ i3GEOF.markercluster = {
 				+ "/ferramentas/markercluster/exemplo.png' />"
 				+ "<p class='paragrafo' >"
 				+ $trad(
-						1,
+						'ajuda',
 						i3GEOF.markercluster.dicionario)
 				+ "<p class='paragrafo' >"
 				+ $trad(
-						2,
+						'ajuda2',
 						i3GEOF.markercluster.dicionario);
 		i3GEO.util.proximoAnterior(
 				"",
@@ -189,7 +189,7 @@ i3GEOF.markercluster = {
 	t1 : function() {
 		var ins = "<p class='paragrafo'>"
 				+ $trad(
-						3,
+						'selecionaTema',
 						i3GEOF.markercluster.dicionario)
 				+ ":";
 		ins += "<div class=styled-select id='i3GEOmarkerclusterSelTemas' ></div>";
@@ -206,19 +206,19 @@ i3GEOF.markercluster = {
 	t2 : function() {
 		var ins = "<p class='paragrafo'>"
 				+ $trad(
-						12,
+						'tituloNovaCamada',
 						i3GEOF.markercluster.dicionario);
 		ins += "<br></p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterTitulo' type=text value='Mapa de agrupamento'/></div>";
 
 		ins += "<br><p class='paragrafo' >"
 				+ $trad(
-						13,
+						'raio',
 						i3GEOF.markercluster.dicionario);
 		ins += "</p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterRaio' type=text value='50'/></div>";
 
 		ins += "<br><p class='paragrafo' >"
 				+ $trad(
-						14,
+						'opacidade',
 						i3GEOF.markercluster.dicionario);
 		ins += "</p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterOpacidade' type=text value='50'/></div>";
 
@@ -235,11 +235,11 @@ i3GEOF.markercluster = {
 	t3 : function() {
 		var ins = "<p class='paragrafo'>"
 				+ $trad(
-						6,
+						'adicionaTema',
 						i3GEOF.markercluster.dicionario);
 		ins += "<br><br><input id=i3GEOmarkerclusterbotao1 type='button' value='"
 				+ $trad(
-						7,
+						'criaCamada',
 						i3GEOF.markercluster.dicionario)
 				+ "' />";
 		i3GEO.util.proximoAnterior(
@@ -274,7 +274,7 @@ i3GEOF.markercluster = {
 				i3GEOF.markercluster.aguarde.visibility = "hidden";
 				if (retorno.data === undefined) {
 					$i("i3GEOmarkerclusterfim").innerHTML = $trad(
-							8,
+							'erroTempo',
 							i3GEOF.markercluster.dicionario);
 				} else {
 					i3GEO.atualiza();

@@ -1,16 +1,16 @@
 //+$trad(1,i3GEOF.markercluster.dicionario)+
 i3GEOF.markercluster.dicionario = {
-	1 : [{
+	'ajuda' : [ {
 		pt : "O agrupamento de pontos &eacute; feito conforme a proximidade entre as coordenadas originais e a escala do mapa, sendo o raio de busca definido em pixels. Cada cluster (grupo) receber&aacute; um s&iacute;mbolo e um n&uacute;mero indicando o total de pontos agrupados. Os pontos fora dos grupos s&atilde;o mostrados com um s&iacute;mbolo individual.",
 		en : "",
 		es : ""
 	} ],
-	2 : [{
+	'ajuda2' : [ {
 		pt : "A camada adicionada ao mapa &eacute; controlada por elementos inclu&iacute;dos no navegador web, por isso nem todas as funcionalidades do i3Geo ir&atilde;o operar corretamente na nova camada inserida no mapa.",
 		en : "",
 		es : ""
 	} ],
-	3 : [ {
+	'selecionaTema' : [ {
 		pt : "Tema, que ser&aacute; utilizado",
 		en : "",
 		es : ""
@@ -20,17 +20,17 @@ i3GEOF.markercluster.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	6 : [ {
+	'adicionaTema' : [ {
 		pt : "O tema calculado ser&aacute; adicionado ao mapa atual",
 		en : "",
 		es : ""
 	} ],
-	7 : [ {
+	'criaCamada' : [ {
 		pt : "Criar camada",
 		en : "",
 		es : ""
 	} ],
-	8 : [ {
+	'erroTempo' : [ {
 		pt : "Erro. A opera&ccedil;&atilde;o demorou muito",
 		en : "",
 		es : ""
@@ -45,17 +45,17 @@ i3GEOF.markercluster.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	12 : [ {
+	'tituloNovaCamada' : [ {
 		pt : "T&iacute;tulo da nova camada:",
 		en : "",
 		es : ""
 	} ],
-	13 : [ {
+	'raio' : [ {
 		pt : "Raio de um ponto em pixels:",
 		en : "",
 		es : ""
 	} ],
-	14 : [ {
+	'opacidade' : [ {
 		pt : "Opacidade:",
 		en : "",
 		es : ""
