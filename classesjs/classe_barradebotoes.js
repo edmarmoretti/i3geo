@@ -60,11 +60,15 @@ i3GEO.barraDeBotoes = {
 
 	Tipo de barra.
 
-	Por padr&atilde;o, utiliza a biblioteca YUI para construir a barra, opcionalmente pode-se utilizar o tipo "olho de peixe".
+	Por padr&atilde;o, utiliza a biblioteca YUI para construir a barra, opcionalmente pode-se utilizar outro tipo.
 
 	O tipo emlinha insere os bot&otilde;es em um elemento html qualquer já existente na p&aacute;gina. Nesse caso a barra
 	n&atilde;o &eacute; iniciada automaticamente, sendo necess&aacute;rio usar a fun&ccedil;&atilde;o
+
 	i3GEO.barraDeBotoes.inicializaBarra("","",false,0,0,onde)
+
+	Caso o par&acirc;metro &quot;onde&quot; seja omitido ou o o elemento HTML com esse ID n&atilde;o for encontrado, ser&aacute; criado um elemento do tipo DIV
+	no contexto do mapa
 
 	Tipo:
 	{string}
