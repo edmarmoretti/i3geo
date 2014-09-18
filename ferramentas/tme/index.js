@@ -46,7 +46,7 @@ i3GEOF.tme = {
 	//utilizado para definir o valor do combo i3GEOTMEregioes
 	ITEMNOMEREGIOES: "",
 	//opcional - nome do item da tabela de atributos que contem os dados dos elementos
-	//utilizado para definir item que iniciará marcado na lista de itens que indica a coluna que contem os dados
+	//utilizado para definir item que iniciara marcado na lista de itens que indica a coluna que contem os dados
 	ITEMDADOS: "",
 	/*
 	Variavel: tema
@@ -105,10 +105,14 @@ i3GEOF.tme = {
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.tme.html();
+			YAHOO.i3GEO.janela.manager.find("i3GEOF.tme").setFooter(
+				'<input class="paragrafo" id="i3GEOtmebotao1" type="button" value="'+$trad(1,i3GEOF.tme.dicionario)+'" style="cursor:pointer;color:blue"/>'
+			);
 			new YAHOO.widget.Button(
 				"i3GEOtmebotao1",
 				{onclick:{fn: i3GEOF.tme.ativa}}
 			);
+			$i("i3GEOtmebotao1-button").style.width = "350px";
 			i3GEO.util.comboItens(
 				"i3GEOTMEregioes",
 				i3GEOF.tme.tema,
@@ -141,17 +145,24 @@ i3GEOF.tme = {
 	html:function(){
 		var ins = '' +
 		'<div style="text-align:left;background:yellow;" id=i3GEOTMEresultado ></div>' +
-		'<input id=i3GEOtmebotao1 size=35  type=button value="'+$trad(1,i3GEOF.tme.dicionario)+'" /><br><br>' +
-		'<p class="paragrafo" >'+$trad(2,i3GEOF.tme.dicionario);
-		ins += $inputText("","","i3GEOTMEtitulo","",48,"") +
-		'<br><br>'+$trad(3,i3GEOF.tme.dicionario);
-		ins += $inputText("","","i3GEOTMEdesc","",48,"") +
-		'<br><br>'+$trad(4,i3GEOF.tme.dicionario);
-		ins += $inputText("","","i3GEOTMEbarSize","",20,"5000") +
-		'<br><br>'+$trad(5,i3GEOF.tme.dicionario);
-		ins += $inputText("","","i3GEOTMEmaxHeight","",20,"2000000") +
-		'<br><br>'+$trad(6,i3GEOF.tme.dicionario) +
-		'<div id="i3GEOTMEregioeslista" style="text-align:left;" ></div>' +
+		'<p class="paragrafo" >'+$trad(2,i3GEOF.tme.dicionario) +
+		'<div class=styled-select >' +
+		'<input type=text value="" id="i3GEOTMEtitulo" />' +
+		'</div>' +
+		'<br><p class="paragrafo" >'+$trad(3,i3GEOF.tme.dicionario) +
+		'<div class=styled-select >' +
+		'<input type=text value="" id="i3GEOTMEdesc" />' +
+		'</div>' +
+		'<br><p class="paragrafo" >'+$trad(4,i3GEOF.tme.dicionario) +
+		'<div class=styled-select >' +
+		'<input type=text value="5000" id="i3GEOTMEbarSize" />' +
+		'</div>' +
+		'<br><p class="paragrafo" >'+$trad(5,i3GEOF.tme.dicionario) +
+		'<div class=styled-select >' +
+		'<input type=text value="2000000" id="i3GEOTMEmaxHeight" />' +
+		'</div>' +
+		'<br><p class="paragrafo" >'+$trad(6,i3GEOF.tme.dicionario) +
+		'<div id="i3GEOTMEregioeslista" class=styled-select ></div>' +
 		'<p class="paragrafo" >' +
 		'<br>'+$trad(7,i3GEOF.tme.dicionario) +
 		'<div id=i3GEOtmelistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>' +
@@ -177,7 +188,7 @@ i3GEOF.tme = {
 			i3GEO.janela.minimiza("i3GEOF.tme");
 		};
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFtmeComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>tme</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=108' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div  id='i3GEOFtmeComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px> tme </span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=108' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
 			"320px",
@@ -189,7 +200,10 @@ i3GEOF.tme = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			i3GEO.configura.locaplic+"/imagens/3d.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.tme.aguarde = $i("i3GEOF.tme_imagemCabecalho").style;
@@ -242,7 +256,7 @@ i3GEOF.tme = {
 	/*
 	Function: pegaItensMarcados
 
-	Recupera os itens que foram marcados e monta uma lista para enviar como parâmetro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
+	Recupera os itens que foram marcados e monta uma lista para enviar como parï¿½metro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
 		var listadeitens = [],

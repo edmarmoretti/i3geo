@@ -2828,7 +2828,7 @@ i3GEO.arvoreDeTemas = {
 					"i3GEOFuploadarquivo", false, "hd", cabecalho, minimiza);
 			$i("i3GEOFuploadarquivo_corpo").style.backgroundColor = "white";
 			$i("i3GEOFuploadarquivo_corpo").style.overflow = "hidden";
-			ins = ""
+			ins = "<div style='margin-left:5px' >"
 					+ "	<p class=paragrafo style='width:90%' ><b>Tipo de arquivo</b><br><br>"
 					+ "	<table class=lista6 style=left:20px;position:relative >";
 			if (OPCOESADICIONAIS.uploadlocal === true) {
@@ -2850,7 +2850,7 @@ i3GEO.arvoreDeTemas = {
 						+ "			<td><input type=radio style=cursor:pointer name=i3GEOFtipoArquivo onclick='i3GEO.arvoreDeTemas.dialogo.uploadkml()' /></td>"
 						+ "			<td>KML ou KMZ</td>" + "		</tr>";
 			}
-			ins += "	</table>";
+			ins += "	</table></div>";
 			$i(janela[2].id).innerHTML = ins;
 			;
 		},
@@ -2888,7 +2888,7 @@ i3GEO.arvoreDeTemas = {
 									+ "/imagens/oxygen/16x16/application-x-smb-workgroup.png");
 			$i("i3GEOFconectaservico_corpo").style.backgroundColor = "white";
 			$i("i3GEOFconectaservico_corpo").style.overflow = "hidden";
-			ins = ""
+			ins = "<div style='margin-left:5px' >"
 					+ "	<p class=paragrafo style='width:90%' ><b>Tipo de conex&atilde;o</b><br><br>"
 					+ "	<table class=lista6 style=left:20px;position:relative >";
 
@@ -2917,7 +2917,7 @@ i3GEO.arvoreDeTemas = {
 						+ "			<td><input type=radio style=cursor:pointer name=i3GEOFtipoArquivoc onclick='i3GEO.arvoreDeTemas.dialogo.conectargeojson()' /></td>"
 						+ "			<td>GeoJson</td>" + "		</tr>";
 			}
-			ins += "	</table>";
+			ins += "	</table></div>";
 			$i(janela[2].id).innerHTML = ins;
 		},
 
