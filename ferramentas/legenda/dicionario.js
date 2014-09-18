@@ -1,12 +1,12 @@
 //+$trad(1,i3GEOF.legenda.dicionario)+
 i3GEOF.legenda.dicionario = {
-		1: [{
+		'ajuda': [{
 			pt:"Para acessar o editor, clique em um s&iacute;mbolo na guia <i>Legenda</i>",
 			en:"",
 			es:"",
 			it:""
 		}],
-		2: [{
+		'propriedades': [{
 			pt:"Propriedades",
 			en:"",
 			es:"",
@@ -24,253 +24,253 @@ i3GEOF.legenda.dicionario = {
 			es:"",
 			it:""
 		}],
-		5: [{
+		'editor': [{
 			pt:"Editor",
 			en:"",
 			es:"",
 			it:""
 		}],
-		6: [{
+		'graficos': [{
 			pt:"Gr&aacute;ficos",
 			en:"",
 			es:"",
 			it:""
 		}],
-		7: [{
+		'importaExportaSLD': [{
 			pt:"Importar/exportar SLD",
 			en:"",
 			es:"",
 			it:""
 		}],
-		8: [{
+		'mostraClassesLegenda': [{
 			pt:"Mostra as classes desse tema na legenda do mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		9: [{
+		'incluiNumeroOcorrencia': [{
 			pt:"Inclui n&uacute;mero de ocorr&ecirc;ncias",
 			en:"",
 			es:"",
 			it:""
 		}],
-		10: [{
+		'incluiNumeroOcorrencia2': [{
 			pt:"incluir o n&uacute;mero de ocorr&ecirc;ncias no nome de cada classe",
 			en:"",
 			es:"",
 			it:""
 		}],
-		11: [{
+		'aplicaOpacidadeVariavel': [{
 			pt:"Aplica opacidade vari&aacute;vel",
 			en:"",
 			es:"",
 			it:""
 		}],
-		12: [{
+		'aplicaOpacidade': [{
 			pt:"aplicar opacidade nas classes existente, variando de 10 at&eacute; 100",
 			en:"",
 			es:"",
 			it:""
 		}],
-		13: [{
+		'escolhePaletaCores': [{
 			pt:"Escolher paleta de cores",
 			en:"",
 			es:"",
 			it:""
 		}],
-		14: [{
+		'variaCoresExtremos': [{
 			pt:"escolher e aplicar as varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes",
 			en:"",
 			es:"",
 			it:""
 		}],
-		15: [{
+		'geraCores': [{
 			pt:"Gerar cores",
 			en:"",
 			es:"",
 			it:""
 		}],
-		16: [{
+		'ate': [{
 			pt:"at&eacute;",
 			en:"",
 			es:"",
 			it:""
 		}],
-		17: [{
+		'de': [{
 			pt:"de",
 			en:"",
 			es:"",
 			it:""
 		}],
-		18: [{
+		'aplica': [{
 			pt:"Aplicar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		19: [{
+		'aplicaVariaCores': [{
 			pt:"aplicar varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes",
 			en:"",
 			es:"",
 			it:""
 		}],
-		20: [{
+		'aplicaAlteracao': [{
 			pt:"Aplicar altera&ccedil;&otilde;es",
 			en:"",
 			es:"",
 			it:""
 		}],
-		21: [{
+		'adicionaClasse': [{
 			pt:"Adicionar classe",
 			en:"",
 			es:"",
 			it:""
 		}],
-		22: [{
+		'adicionaNovaClasse': [{
 			pt:"adicionar uma nova classe na legenda",
 			en:"",
 			es:"",
 			it:""
 		}],
-		23: [{
+		'clicaSimbolo': [{
 			pt:"Clique no s&iacute;mbolo da classe para alterar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		24: [{
+		'consideraElementosVisisveis': [{
 			pt:"marque para considerar apenas os elementos vis&iacute;veis na extens&atilde;o geogr&aacute;fica atual, caso contr&aacute;rio, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica inicial do mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		25: [{
+		'ignoraValores': [{
 			pt:"Ao gerar as classes, ignorar os valores (separe com v&iacute;rgula)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		26: [{
+		'transformaGeom': [{
 			pt:"Transforma a representa&ccedil;&atilde;o geom&eacute;trica dos elementos do tema. Ap&oacute;s alterar esse par&acirc;metro, pode ser necess&aacute;rio modificar as caracter&iacute;sticas do s&iacute;mbolo.",
 			en:"",
 			es:"",
 			it:""
 		}],
-		27: [{
+		'semTransformacao': [{
 			pt:"nenhuma transforma&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		28: [{
+		'centroide': [{
 			pt:"centr&oacute;ide",
 			en:"",
 			es:"",
 			it:""
 		}],
-		29: [{
+		'vertices': [{
 			pt:"v&eacute;rtices",
 			en:"",
 			es:"",
 			it:""
 		}],
-		30: [{
+		'verticeInicial': [{
 			pt:"v&eacute;rtice inicial",
 			en:"",
 			es:"",
 			it:""
 		}],
-		31: [{
+		'verticeFinal': [{
 			pt:"v&eacute;rtice final",
 			en:"",
 			es:"",
 			it:""
 		}],
-		32: [{
+		'alteraGeom': [{
 			pt:"Altera geometria",
 			en:"",
 			es:"",
 			it:""
 		}],
-		33: [{
+		'alteraTipoGeom': [{
 			pt:"Altera o tipo de representa&ccedil;&atilde;o do tema. Se for poligonal, passa para linear e vice-versa.",
 			en:"",
 			es:"",
 			it:""
 		}],
-		34: [{
+		'alteraTipo': [{
 			pt:"Altera tipo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		35: [{
+		'todosElementosUnicoSimbolo': [{
 			pt:"Todos os elementos ser&atilde;o desenhados com um &uacute;nico s&iacute;mbolo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		36: [{
+		'simboloUnico': [{
 			pt:"S&iacute;mbolo &uacute;nico",
 			en:"",
 			es:"",
 			it:""
 		}],
-		37: [{
+		'cadaOcorrenciaUnicoSimbolo': [{
 			pt:"Cada ocorr&ecirc;ncia de um valor para o item selecionado, ser&aacute; desenhado com o mesmo s&iacute;mbolo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		38: [{
+		'valorUnico': [{
 			pt:"Valor &uacute;nico",
 			en:"",
 			es:"",
 			it:""
 		}],
-		39: [{
+		'criaClassesItemNumerico': [{
 			pt:"Cria classes para um item num&eacute;rico utilizando um n&uacute;mero fixo de classes (o item utilizado &eacute; o mesmo indicado acima)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		40: [{
+		'numeroClasses': [{
 			pt:"N&uacute;mero de classes",
 			en:"",
 			es:"",
 			it:""
 		}],
-		41: [{
+		'intervalosIguais': [{
 			pt:"Intervalos iguais",
 			en:"",
 			es:"",
 			it:""
 		}],
-		42: [{
+		'criaQuartis': [{
 			pt:"Cria classes para um item num&eacute;rico utilizando os quartis (o item utilizado &eacute; o mesmo indicado acima)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		43: [{
+		'estiloNomeClasses': [{
 			pt:"Estilo dos nomes das classes",
 			en:"",
 			es:"",
 			it:""
 		}],
-		44: [{
+		'soValores': [{
 			pt:"s&oacute; os valores",
 			en:"",
 			es:"",
 			it:""
 		}],
-		45: [{
+		'quartilValores': [{
 			pt:"quartil e os valores",
 			en:"",
 			es:"",
 			it:""
 		}],
-		46: [{
+		'expressaoCompleta': [{
 			pt:"express&atilde;o completa",
 			en:"",
 			es:"",
@@ -282,289 +282,289 @@ i3GEOF.legenda.dicionario = {
 			es:"",
 			it:""
 		}],
-		48: [{
+		'itemComTexto': [{
 			pt:"Item com o texto",
 			en:"",
 			es:"",
 			it:""
 		}],
-		49: [{
+		'exclui': [{
 			pt:"excluir",
 			en:"",
 			es:"",
 			it:""
 		}],
-		50: [{
+		'adiciona': [{
 			pt:"adicionar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		51: [{
+		'propriedades2': [{
 			pt:"propriedades",
 			en:"",
 			es:"",
 			it:""
 		}],
-		52: [{
+		'estilos': [{
 			pt:"Estilos",
 			en:"",
 			es:"",
 			it:""
 		}],
-		53: [{
+		'ajudaEstilo': [{
 			pt:"Cada s&iacute;mbolo pode ser formado por um ou mais estilos. Utilize -1,-1,-1 para anular uma cor. A cor deve ser definida no formato vermelho,verde,azul. Para criar linhas tracejadas utilize o s&iacute;mbolo 0 ou vazio e digite um padr&atilde;o de repeti&ccedil;&atilde;o como por exemplo 2 10 2 10 ",
 			en:"",
 			es:"",
 			it:""
 		}],
-		54: [{
+		'aplicaAlteracoes': [{
 			pt:"Aplicar as altera&ccedil;&otilde;es",
 			en:"",
 			es:"",
 			it:""
 		}],
-		55: [{
+		'geraSLD': [{
 			pt:"Gera um arquivo XML, no padr&atilde;o SLD, contendo a legenda atual da camada. Para maiores informa&ccedil;&otilde;es, veja",
 			en:"",
 			es:"",
 			it:""
 		}],
-		56: [{
+		'ajudaSLD': [{
 			pt:"(O SLD s&oacute; &eacute; gerado ou aplicado corretamente em camadas que utilizam express&otilde;es simples e o elemento CLASSITEM)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		57: [{
+		'exportaSLD': [{
 			pt:"Exportar SLD",
 			en:"",
 			es:"",
 			it:""
 		}],
-		58: [{
-			pt:"Aplica um arquivo SLD à camada ativa",
+		'msgAplicaSLD': [{
+			pt:"Aplica um arquivo SLD &agrave; camada ativa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		59: [{
+		'aplicaSLD': [{
 			pt:"Aplicar SLD",
 			en:"",
 			es:"",
 			it:""
 		}],
-		60: [{
+		'temaInexistente': [{
 			pt:"O tema ja nao existe mais no mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		61: [{
+		'cliqueAltera': [{
 			pt:"clique para alterar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		62: [{
+		'cliqueExclui': [{
 			pt:"clique para excluir",
 			en:"",
 			es:"",
 			it:""
 		}],
-		63: [{
+		'digitaNovoNome': [{
 			pt:"digite o novo nome",
 			en:"",
 			es:"",
 			it:""
 		}],
-		64: [{
+		'digitaNovaExpressao': [{
 			pt:"digite a nova express&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		65: [{
+		'sobe': [{
 			pt:"sobe",
 			en:"",
 			es:"",
 			it:""
 		}],
-		66: [{
+		'desce': [{
 			pt:"desce",
 			en:"",
 			es:"",
 			it:""
 		}],
-		67: [{
+		'ajudaEscalaCores': [{
 			pt:"Para aplicar um ajuste entre 0 e 255 cores, utilize a op&ccedil;&atilde;o <i>Escala de Cores</i>.",
 			en:"",
 			es:"",
 			it:""
 		}],
-		68: [{
+		'msgEscalaCoresAuto': [{
 			pt:"O valor de SCALE= pode ser a palavra AUTO (SCALE=AUTO) ou um valor m&iacute;nimo e m&aacute;ximo (por exemplo SCALE=20,3000).",
 			en:"",
 			es:"",
 			it:""
 		}],
-		69: [{
+		'msgEscalaCoresIndividual': [{
 			pt:"Voc&ecirc; pode aplicar a escala em bandas individuais, para isso, utilize SCALE_n, por exemplo SCALE_1=AUTO SCALE_2=200,500.",
 			en:"",
 			es:"",
 			it:""
 		}],
-		70: [{
+		'msgBandas': [{
 			pt:"Para escolher quais bandas ser&atilde;o utilizadas e qual sua ordem, utilize a op&ccedil;&atilde;o BANDAS. Utilize, por exemplo, BANDS=1,2,3 BANDS=1 .",
 			en:"",
 			es:"",
 			it:""
 		}],
-		71: [{
+		'msgReamostragem': [{
 			pt:"Para alterar o modo de amostragem, utilize RESAMPLE com uma das op&ccedil;&otilde;es: AVERAGE,NEAREST ou BILINEAR.",
 			en:"",
 			es:"",
 			it:""
 		}],
-		72: [{
+		'adicionaProcesso': [{
 			pt:"Voc&ecirc; pode incluir processos na imagem para modificar as caracter&iacute;sticas de visualiza&ccedil;&atilde;o<br><br>Adicionar processo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		73: [{
+		'selecionaProcesso': [{
 			pt:"selecione o processo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		74: [{
+		'escalaCores': [{
 			pt:"Escala de cores",
 			en:"",
 			es:"",
 			it:""
 		}],
-		75: [{
+		'reamostragem': [{
 			pt:"Reamostragem",
 			en:"",
 			es:"",
 			it:""
 		}],
-		76: [{
+		'bandas': [{
 			pt:"Bandas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		77: [{
+		'aplicaProcesso': [{
 			pt:"aplicar processos",
 			en:"",
 			es:"",
 			it:""
 		}],
-		78: [{
+		'msgNaoEditaLegenda': [{
 			pt:"N&atilde;o &eacute; poss&iacute;vel editar a legenda desse tema",
 			en:"",
 			es:"",
 			it:""
 		}],
-		79: [{
+		'msgAplicaAlteracao': [{
 			pt:"Clique em <i>Aplicar</i> para que as altera&ccedil;&otilde;pes sejam salvas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		80: [{
+		'consideraElementosVisiveis': [{
 			pt:"A contagem considera apenas os elementos vis&iacute;veis na abrang&ecirc;ncia do mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		81: [{
+		'selecionaUmItem': [{
 			pt:"Selecione um item!",
 			en:"",
 			es:"",
 			it:""
 		}],
-		82: [{
+		'estiloEdicao': [{
 			pt:"Estilo em edi&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		83: [{
+		'corFundo': [{
 			pt:"Cor do fundo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		84: [{
+		'corFrente': [{
 			pt:"Cor da frente",
 			en:"",
 			es:"",
 			it:""
 		}],
-		85: [{
+		'tamanhoEspacamento': [{
 			pt:"Tamanho/espa&ccedil;amento",
 			en:"",
 			es:"",
 			it:""
 		}],
-		86: [{
+		'espessura': [{
 			pt:"Espessura",
 			en:"",
 			es:"",
 			it:""
 		}],
-		87: [{
+		'padraoRepeticao': [{
 			pt:"Padr&atilde;o de repeti&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		88: [{
+		'opacidade': [{
 			pt:"Opacidade",
 			en:"",
 			es:"",
 			it:""
 		}],
-		89: [{
+		'angulo': [{
 			pt:"&Acirc;ngulo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		90: [{
+		'simbolo': [{
 			pt:"S&iacute;mbolo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		91: [{
+		'listaSimbolo': [{
 			pt:"Lista de s&iacute;mbolos. Clique para selecionar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		92: [{
+		'graficoPizza': [{
 			pt:"Gr&aacute;fico de pizza",
 			en:"",
 			es:"",
 			it:""
 		}],
-		93: [{
+		'numeroOcorrenciasClasses': [{
 			pt:"N&uacute;mero de ocorr&ecirc;ncias em cada classe (n)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		94: [{
+		'msgNumeroClasses': [{
 			pt:"O tema deve conter pelo menos 2 classes",
 			en:"",
 			es:"",
 			it:""
 		}],
-		95: [{
+		'quebrasNaturais': [{
 			pt:"Quebras naturais",
 			en:"",
 			es:"",

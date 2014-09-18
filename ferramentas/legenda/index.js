@@ -150,7 +150,7 @@ i3GEOF.legenda = {
 			$i("i3GEOlegendaguia2").onclick = function()
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia2","i3GEOlegendaguia");};
 			$i("i3GEOlegendaguia3").onclick = function(){
-				i3GEO.janela.tempoMsg($trad(1,i3GEOF.legenda.dicionario));
+				i3GEO.janela.tempoMsg($trad('ajuda',i3GEOF.legenda.dicionario));
 			};
 			$i("i3GEOlegendaguia4").onclick = function(){
 				i3GEOF.legenda.mostraGrafico();
@@ -338,24 +338,24 @@ i3GEOF.legenda = {
 		var ins = '' +
 		'<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">'+
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'+
-		'		<li><a  ><em><div id="i3GEOlegendaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad(2,i3GEOF.legenda.dicionario)+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>'+
-		'		<li><a  ><em><div id="i3GEOlegendaguia1" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
-		'		<li><a  ><em><div id="i3GEOlegendaguia2" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
-		'		<li><a  ><em><div id="i3GEOlegendaguia3" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
-		'		<li><a  ><em><div id="i3GEOlegendaguia4" style="text-align:center;left:0px;" >'+$trad(6,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
-		'		<li><a  ><em><div id="i3GEOlegendaguia5" style="text-align:center;left:0px;" >'+$trad(7,i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad('propriedades',i3GEOF.legenda.dicionario)+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia1" style="text-align:center;left:0px;" >'+$trad('legenda',i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia2" style="text-align:center;left:0px;" >'+$trad('classes',i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia3" style="text-align:center;left:0px;" >'+$trad('editor',i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia4" style="text-align:center;left:0px;" >'+$trad('graficos',i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
+		'		<li><a  ><em><div id="i3GEOlegendaguia5" style="text-align:center;left:0px;" >'+$trad('importaExportaSLD',i3GEOF.legenda.dicionario)+'</div></em></a></li>'+
 		'	</ul>'+
 		'</div><br>'+
 		'<div id=i3GEOlegendaguia6obj style="width:99%;text-align:left;">'+
-		'	<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendamostra style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">'+$trad(8,i3GEOF.legenda.dicionario)+'</span></p>' +
-		'	<p class=paragrafo ><input id=i3GEOlegendabotao3 type="button" value="'+$trad(9,i3GEOF.legenda.dicionario)+'" title="'+$trad(10,i3GEOF.legenda.dicionario)+'"></p>' +
-		'	<p class=paragrafo ><input id=i3GEOlegendabotao15 type="button" value="'+$trad(11,i3GEOF.legenda.dicionario)+'" title="'+$trad(12,i3GEOF.legenda.dicionario)+'"></p>' +
-		'	<p class=paragrafo ><input id=i3GEOlegendabotaoRamp type="button" size=15 value="'+$trad(13,i3GEOF.legenda.dicionario)+'" title="'+$trad(14,i3GEOF.legenda.dicionario)+'"></p>' +
+		'	<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendamostra style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">'+$trad('mostraClassesLegenda',i3GEOF.legenda.dicionario)+'</span></p>' +
+		'	<p class=paragrafo ><input id=i3GEOlegendabotao3 type="button" value="'+$trad('incluiNumeroOcorrencia',i3GEOF.legenda.dicionario)+'" title="'+$trad('incluiNumeroOcorrencia2',i3GEOF.legenda.dicionario)+'"></p>' +
+		'	<p class=paragrafo ><input id=i3GEOlegendabotao15 type="button" value="'+$trad('aplicaOpacidadeVariavel',i3GEOF.legenda.dicionario)+'" title="'+$trad('aplicaOpacidade',i3GEOF.legenda.dicionario)+'"></p>' +
+		'	<p class=paragrafo ><input id=i3GEOlegendabotaoRamp type="button" size=15 value="'+$trad('escolhePaletaCores',i3GEOF.legenda.dicionario)+'" title="'+$trad('variaCoresExtremos',i3GEOF.legenda.dicionario)+'"></p>' +
 		'	<div style=margin-left:5px; >' +
-		'	<p class=paragrafo >'+$trad(15,i3GEOF.legenda.dicionario)+'</p>' +
+		'	<p class=paragrafo >'+$trad('geraCores',i3GEOF.legenda.dicionario)+'</p>' +
 		'	<table summary="" class=lista6 >' +
 		'		<tr>' +
-		'			<td>'+$trad(17,i3GEOF.legenda.dicionario)+':</td>' +
+		'			<td>'+$trad('ate',i3GEOF.legenda.dicionario)+':</td>' +
 		'			<td>' +
 		'			<div class=styled-select style="width:120px" >' +
 		'			<input type=text id="i3GEOlegendaacori" value="0,0,0"  />' +
@@ -363,7 +363,7 @@ i3GEOF.legenda = {
 		'			</td>' +
 		'			<td><img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.legenda.corj(\'i3GEOlegendaacori\')" /> ' +
 		'			</td>' +
-		'			<td>'+$trad(16,i3GEOF.legenda.dicionario)+':</td>' +
+		'			<td>'+$trad('de',i3GEOF.legenda.dicionario)+':</td>' +
 		'			<td>'+
 		'			<div class=styled-select style="width:120px" >' +
 		'			<input type=text id="i3GEOlegendaacorf" value="255,255,255"  />' +
@@ -371,7 +371,7 @@ i3GEOF.legenda = {
 		'			</td>' +
 		'			<td><img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.legenda.corj(\'i3GEOlegendaacorf\')" /> ' +
 		'			</td>' +
-		'			<td><input id=i3GEOlegendabotao4 type="button" size=15 value="'+$trad(18,i3GEOF.legenda.dicionario)+'" title="'+$trad(19,i3GEOF.legenda.dicionario)+'"></td>' +
+		'			<td><input id=i3GEOlegendabotao4 type="button" size=15 value="'+$trad('aplica',i3GEOF.legenda.dicionario)+'" title="'+$trad('aplicaVariaCores',i3GEOF.legenda.dicionario)+'"></td>' +
 		'		</tr>' +
 		'	</table>' +
 		'</div>' +
@@ -379,10 +379,10 @@ i3GEOF.legenda = {
 		'<div id=i3GEOlegendaguia1obj style="width:99%;text-align:left;">'+
 		'	<div style=margin-left:5px; >' +
 		'	<table summary="" class=lista5 ><tr>' +
-		'	<td><input id=i3GEOlegendabotao1 size="22" type="button" value="'+$trad(20,i3GEOF.legenda.dicionario)+'" ></td>'+
-		'	<td><input id=i3GEOlegendabotao2 size="22" type="button" value="'+$trad(21,i3GEOF.legenda.dicionario)+'" title="'+$trad(22,i3GEOF.legenda.dicionario)+'" ></td>' +
+		'	<td><input id=i3GEOlegendabotao1 size="22" type="button" value="'+$trad('aplicaAlteracao',i3GEOF.legenda.dicionario)+'" ></td>'+
+		'	<td><input id=i3GEOlegendabotao2 size="22" type="button" value="'+$trad('adicionaClasse',i3GEOF.legenda.dicionario)+'" title="'+$trad('adicionaNovaClasse',i3GEOF.legenda.dicionario)+'" ></td>' +
 		'	</tr></table><br>' +
-		'	<p class=paragrafo >'+$trad(23,i3GEOF.legenda.dicionario)+'</p>' +
+		'	<p class=paragrafo >'+$trad('clicaSimbolo',i3GEOF.legenda.dicionario)+'</p>' +
 		'	<div id="i3GEOlegendaresultado" style="text-align:left;width:100%;display:block;left:0px">' +
 		'	</div>'+
 		'</div>'+
@@ -390,73 +390,73 @@ i3GEOF.legenda = {
 		'<div id=i3GEOlegendaguia2obj style="width:99%;text-align:left;">'+
 		'	<div style=margin-left:5px; >' +
 		'	<div id=i3GEOFlegendaClassesOpcionais >' +
-		'		<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendaaplicaextent style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">'+$trad(24,i3GEOF.legenda.dicionario)+'</span></p>' +
-		'		<p class=paragrafo >'+$trad(25,i3GEOF.legenda.dicionario)+':'+
+		'		<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendaaplicaextent style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">'+$trad('consideraElementosVisisveis',i3GEOF.legenda.dicionario)+'</span></p>' +
+		'		<p class=paragrafo >'+$trad('ignoraValores',i3GEOF.legenda.dicionario)+':'+
 		'		<div class=styled-select >' +
 		'			<input type=text id="i3GEOlegendaignorar" value=""  />' +
 		'		</div>' +
-		'		<hr><p class=paragrafo >'+$trad(26,i3GEOF.legenda.dicionario)+'</p>'+
+		'		<hr><p class=paragrafo >'+$trad('transformaGeom',i3GEOF.legenda.dicionario)+'</p>'+
 		'		<div class=styled-select >' +
 		'		<select id=i3GEOlegentaTipoGeo >'+
-		'			<option value="">'+$trad(27,i3GEOF.legenda.dicionario)+'</option>'+
-		'			<option value="centroid">'+$trad(28,i3GEOF.legenda.dicionario)+'</option>'+
+		'			<option value="">'+$trad('semTransformacao',i3GEOF.legenda.dicionario)+'</option>'+
+		'			<option value="centroid">'+$trad('centroide',i3GEOF.legenda.dicionario)+'</option>'+
 		'			<option value="bbox">box</option>'+
-		'			<option value="vertices">'+$trad(29,i3GEOF.legenda.dicionario)+'</option>'+
-		'			<option value="start">'+$trad(30,i3GEOF.legenda.dicionario)+'</option>'+
-		'			<option value="end">'+$trad(31,i3GEOF.legenda.dicionario)+'</option>'+
+		'			<option value="vertices">'+$trad('vertices',i3GEOF.legenda.dicionario)+'</option>'+
+		'			<option value="start">'+$trad('verticeInicial',i3GEOF.legenda.dicionario)+'</option>'+
+		'			<option value="end">'+$trad('verticeFinal',i3GEOF.legenda.dicionario)+'</option>'+
 		'		</select>'+
 		'		</div>' +
 		'		<br><p class=paragrafo >' +
-		'		<input id=i3GEOlegendabotao17 size="35" type="button" value="'+$trad(32,i3GEOF.legenda.dicionario)+'"></p>'+
-		'		<hr><p class=paragrafo >'+$trad(33,i3GEOF.legenda.dicionario)+'</p>'+
-		'		<p class=paragrafo ><input id=i3GEOlegendabotao7 size="25" type="button" value="'+$trad(34,i3GEOF.legenda.dicionario)+'"></p>'+
+		'		<input id=i3GEOlegendabotao17 size="35" type="button" value="'+$trad('alteraGeom',i3GEOF.legenda.dicionario)+'"></p>'+
+		'		<hr><p class=paragrafo >'+$trad('alteraTipoGeom',i3GEOF.legenda.dicionario)+'</p>'+
+		'		<p class=paragrafo ><input id=i3GEOlegendabotao7 size="25" type="button" value="'+$trad('alteraTipo',i3GEOF.legenda.dicionario)+'"></p>'+
 		'	</div>' +
-		'	<hr><p class=paragrafo >'+$trad(35,i3GEOF.legenda.dicionario)+'</p>'+
-		'	<p class=paragrafo ><input id=i3GEOlegendabotao5 size="25" type="button" value="'+$trad(36,i3GEOF.legenda.dicionario)+'"></p>'+
-		'	<hr><p class=paragrafo >'+$trad(37,i3GEOF.legenda.dicionario)+'</p>'+
+		'	<hr><p class=paragrafo >'+$trad('todosElementosUnicoSimbolo',i3GEOF.legenda.dicionario)+'</p>'+
+		'	<p class=paragrafo ><input id=i3GEOlegendabotao5 size="25" type="button" value="'+$trad('simboloUnico',i3GEOF.legenda.dicionario)+'"></p>'+
+		'	<hr><p class=paragrafo >'+$trad('cadaOcorrenciaUnicoSimbolo',i3GEOF.legenda.dicionario)+'</p>'+
 		'	<div id="i3GEOlegendaitens" class=styled-select ></div><br>'+
-		'	<p class=paragrafo ><input id=i3GEOlegendabotao6 size="25" type="button" value="'+$trad(38,i3GEOF.legenda.dicionario)+'"></p>'+
-		'	<hr><p class=paragrafo >'+$trad(39,i3GEOF.legenda.dicionario)+'</p>'+
-		'	<p class=paragrafo >'+$trad(40,i3GEOF.legenda.dicionario)+':'+
+		'	<p class=paragrafo ><input id=i3GEOlegendabotao6 size="25" type="button" value="'+$trad('valorUnico',i3GEOF.legenda.dicionario)+'"></p>'+
+		'	<hr><p class=paragrafo >'+$trad('criaClassesItemNumerico',i3GEOF.legenda.dicionario)+'</p>'+
+		'	<p class=paragrafo >'+$trad('numeroClasses',i3GEOF.legenda.dicionario)+':'+
 		'	<div class=styled-select >' +
 		'		<input type=text id="i3GEOlegendanclasses" value="5"  />' +
 		'	</div>' +
-		'	<br><p class=paragrafo ><input id=i3GEOlegendabotao8 size="25" type="button" value="'+$trad(41,i3GEOF.legenda.dicionario)+'">'+
-		'	&nbsp;<input id=i3GEOlegendabotaoQN size="25" type="button" value="'+$trad(95,i3GEOF.legenda.dicionario)+'">'+
+		'	<br><p class=paragrafo ><input id=i3GEOlegendabotao8 size="25" type="button" value="'+$trad('intervalosIguais',i3GEOF.legenda.dicionario)+'">'+
+		'	&nbsp;<input id=i3GEOlegendabotaoQN size="25" type="button" value="'+$trad('quebrasNaturais',i3GEOF.legenda.dicionario)+'">'+
 		'	&nbsp;<input id=i3GEOlegendabotaoQuantil size="25" type="button" value="Quantil">'+
-		'	<hr><p class=paragrafo >'+$trad(42,i3GEOF.legenda.dicionario)+'</p>'+
+		'	<hr><p class=paragrafo >'+$trad('criaQuartis',i3GEOF.legenda.dicionario)+'</p>'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao9 size="25" type="button" value="Quartis">'+
-		'	<p class=paragrafo >'+$trad(43,i3GEOF.legenda.dicionario)+': ' +
+		'	<p class=paragrafo >'+$trad('estiloNomeClasses',i3GEOF.legenda.dicionario)+': ' +
 		'	<div class=styled-select >' +
 		'	<select id=estiloClassesQuartis >' +
-		'	<option value=minimo select >'+$trad(44,i3GEOF.legenda.dicionario)+'</option>' +
-		'	<option value=simples select >'+$trad(45,i3GEOF.legenda.dicionario)+'</option>' +
-		'	<option value=completo select >'+$trad(46,i3GEOF.legenda.dicionario)+'</option>' +
+		'	<option value=minimo select >'+$trad('soValores',i3GEOF.legenda.dicionario)+'</option>' +
+		'	<option value=simples select >'+$trad('quartilValores',i3GEOF.legenda.dicionario)+'</option>' +
+		'	<option value=completo select >'+$trad('expressaoCompleta',i3GEOF.legenda.dicionario)+'</option>' +
 		'	</select></div><br>' +
 		'</div>'+
 		'</div>'+
 		'<div id=i3GEOlegendaguia3obj style="width:99%;text-align:left;">'+
 		'	<fieldset style="padding:5px;margin:2px;">'+
-		'	<legend>'+$trad(47,i3GEOF.legenda.dicionario)+'</legend>'+
-		'		<p class=paragrafo >'+$trad(48,i3GEOF.legenda.dicionario)+': <div class=styled-select id=i3GEOlegendaitensLabel ></div></p>' +
+		'	<legend>'+$trad('etiquetasClasse',i3GEOF.legenda.dicionario)+'</legend>'+
+		'		<p class=paragrafo >'+$trad('itemComTexto',i3GEOF.legenda.dicionario)+': <div class=styled-select id=i3GEOlegendaitensLabel ></div></p>' +
 		'		<br><p class=paragrafo style="font-size:10px;">'+
-		'		<input id=i3GEOlegendabotaoExcluirLabel size=10 type=buttom value="'+$trad(49,i3GEOF.legenda.dicionario)+'" />' +
-		'		<input id=i3GEOlegendabotaoIncluirLabel size=10 type=buttom value="'+$trad(50,i3GEOF.legenda.dicionario)+'" />' +
-		'		<input id=i3GEOlegendabotaoPropriedadeLabel size=10 type=buttom value="'+$trad(51,i3GEOF.legenda.dicionario)+'" />' +
+		'		<input id=i3GEOlegendabotaoExcluirLabel size=10 type=buttom value="'+$trad('exclui',i3GEOF.legenda.dicionario)+'" />' +
+		'		<input id=i3GEOlegendabotaoIncluirLabel size=10 type=buttom value="'+$trad('adiciona',i3GEOF.legenda.dicionario)+'" />' +
+		'		<input id=i3GEOlegendabotaoPropriedadeLabel size=10 type=buttom value="'+$trad('propriedades2',i3GEOF.legenda.dicionario)+'" />' +
 		'		</p>' +
 		'	</fieldset><br>'+
 		'	<fieldset style="padding:5px;margin:2px;">'+
-		'	<legend>'+$trad(52,i3GEOF.legenda.dicionario)+'</legend>'+
-		'		<p class=paragrafo style="font-size:10px;">'+$trad(53,i3GEOF.legenda.dicionario)+''+
+		'	<legend>'+$trad('estilos',i3GEOF.legenda.dicionario)+'</legend>'+
+		'		<p class=paragrafo style="font-size:10px;">'+$trad('ajudaEstilo',i3GEOF.legenda.dicionario)+''+
 		'		<div id="i3GEOlegendacomboestilos" >'+
 		'		</div>'+
-		"       <br><input id=i3GEOlegendabotao11 class=executar size=10 type=button value='"+$trad(49,i3GEOF.legenda.dicionario)+"' />" +
-		"       &nbsp;<input id=i3GEOlegendabotao12 class=executar size=14 type=button value='"+$trad(50,i3GEOF.legenda.dicionario)+"' />" +
-		"       &nbsp;<input id=i3GEOlegendabotao13 class=executar size=8 type=button value='"+$trad(65,i3GEOF.legenda.dicionario)+"' />" +
-		"       &nbsp;<input id=i3GEOlegendabotao14 class=executar size=8 type=button value='"+$trad(66,i3GEOF.legenda.dicionario)+"' />" +
+		"       <br><input id=i3GEOlegendabotao11 class=executar size=10 type=button value='"+$trad('exclui',i3GEOF.legenda.dicionario)+"' />" +
+		"       &nbsp;<input id=i3GEOlegendabotao12 class=executar size=14 type=button value='"+$trad('adiciona',i3GEOF.legenda.dicionario)+"' />" +
+		"       &nbsp;<input id=i3GEOlegendabotao13 class=executar size=8 type=button value='"+$trad('sobe',i3GEOF.legenda.dicionario)+"' />" +
+		"       &nbsp;<input id=i3GEOlegendabotao14 class=executar size=8 type=button value='"+$trad('desce',i3GEOF.legenda.dicionario)+"' />" +
 		'		<div id="i3GEOlegendaParametrosEstilos" style="position:relative;top:10px;left:0px;text-align:left">'+
 		'		</div>'+
-		'		<br><br><p class=paragrafo style="font-size:10px" ><input id=i3GEOlegendabotao10 size="35" type="button" value="'+$trad(54,i3GEOF.legenda.dicionario)+'"></p>'+
+		'		<br><br><p class=paragrafo style="font-size:10px" ><input id=i3GEOlegendabotao10 size="35" type="button" value="'+$trad('aplicaAlteracoes',i3GEOF.legenda.dicionario)+'"></p>'+
 		'		<div style="position:relative;top:0px;left:0px;text-align:left;" id="i3GEOlegendamostraEstilo">'+
 		'		</div>'+
 		'		<div style="position:relative;top:0px;left:0px;text-align:left;" id="i3GEOlegendasimbolos">'+
@@ -466,10 +466,10 @@ i3GEOF.legenda = {
 		'<div id=i3GEOlegendaguia4obj style="width:99%;text-align:left;">'+
 		'</div>'+
 		'<div id=i3GEOlegendaguia5obj style="width:99%;text-align:left;">'+
-		'	<p class=paragrafo >'+$trad(55,i3GEOF.legenda.dicionario)+' <a href="http://mapserver.org/ogc/sld.html#sld" target=_blank >Mapserver SLD</a> '+$trad(56,i3GEOF.legenda.dicionario)+
-		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDe size="25" type="button" value="'+$trad(57,i3GEOF.legenda.dicionario)+'"></p>'+
-		'	<p class=paragrafo >'+$trad(58,i3GEOF.legenda.dicionario)+
-		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDi size="25" type="button" value="'+$trad(59,i3GEOF.legenda.dicionario)+'"></p>'+
+		'	<p class=paragrafo >'+$trad('geraSLD',i3GEOF.legenda.dicionario)+' <a href="http://mapserver.org/ogc/sld.html#sld" target=_blank >Mapserver SLD</a> '+$trad('ajudaSLD',i3GEOF.legenda.dicionario)+
+		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDe size="25" type="button" value="'+$trad('exportaSLD',i3GEOF.legenda.dicionario)+'"></p>'+
+		'	<p class=paragrafo >'+$trad('msgAplicaSLD',i3GEOF.legenda.dicionario)+
+		'	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDi size="25" type="button" value="'+$trad('aplicaSLD',i3GEOF.legenda.dicionario)+'"></p>'+
 		'</div>' +
 		'<input type=hidden  value="" id="listaColourRamp" onchange="javascript:i3GEOF.legenda.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
 		return ins;
@@ -527,7 +527,7 @@ i3GEOF.legenda = {
 	*/
 	ativaFoco: function(){
 		if(i3GEOF.legenda.tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda.tema) === "")
-		{i3GEO.janela.tempoMsg($trad(60,i3GEOF.legenda.dicionario));}
+		{i3GEO.janela.tempoMsg($trad('temaInexistente',i3GEOF.legenda.dicionario));}
 		var i = $i("i3GEOF.legenda_c").style;
 		i.zIndex = i3GEO.janela.ULTIMOZINDEX;
 		i3GEO.janela.ULTIMOZINDEX++;
@@ -589,16 +589,16 @@ i3GEOF.legenda = {
 						id = retorno.data[i].tema+"-"+retorno.data[i].idclasse; //layer+indice da classe
 						re = new RegExp("'", "g");
 						exp = (retorno.data[i].expressao).replace(re,'"');
-						ins.push("<tr><td><img style='cursor:pointer' title='"+$trad(62,i3GEOF.legenda.dicionario)+"' onclick='i3GEOF.legenda.excluilinhaf(this)' src='" + i3GEO.configura.locaplic + "/imagens/x.gif' title='excluir' /></td><td><img width='30px' height='15px' style='cursor:pointer' title='"+$trad(61,i3GEOF.legenda.dicionario)+"' src='"+retorno.data[i].imagem+"' onclick=i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_"+id+"') /></td>");
+						ins.push("<tr><td><img style='cursor:pointer' title='"+$trad('cliqueExclui',i3GEOF.legenda.dicionario)+"' onclick='i3GEOF.legenda.excluilinhaf(this)' src='" + i3GEO.configura.locaplic + "/imagens/x.gif' title='excluir' /></td><td><img width='30px' height='15px' style='cursor:pointer' title='"+$trad('cliqueAltera',i3GEOF.legenda.dicionario)+"' src='"+retorno.data[i].imagem+"' onclick=i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_"+id+"') /></td>");
 						ins.push("<td><img onclick=i3GEOF.legenda.modificaCor('"+retorno.data[i].idclasse+"') title='alterar a cor' style='cursor:pointer' src='" + i3GEO.configura.locaplic + "/imagens/aquarela.gif' /></td>");
 						ins.push("<td>");
-						ins.push($inputText("","","i3GEOlegendaid_"+id,$trad(63,i3GEOF.legenda.dicionario),20,retorno.data[i].nomeclasse,"nome","javascript:i3GEOF.legenda.aviso()"));
+						ins.push($inputText("","","i3GEOlegendaid_"+id,$trad('digitaNovoNome',i3GEOF.legenda.dicionario),20,retorno.data[i].nomeclasse,"nome","javascript:i3GEOF.legenda.aviso()"));
 						ins.push("</td><td>");
-						ins.push($inputText("","","i3GEOlegendaid_"+id,$trad(64,i3GEOF.legenda.dicionario),25,exp,"expressao","javascript:i3GEOF.legenda.aviso()"));
+						ins.push($inputText("","","i3GEOlegendaid_"+id,$trad('digitaNovaExpressao',i3GEOF.legenda.dicionario),25,exp,"expressao","javascript:i3GEOF.legenda.aviso()"));
 						ins.push("</td>");
 						if(n>1){
-							ins.push("<td><img src='"+i3GEO.configura.locaplic+"/imagens/sobe1.png' style=cursor:pointer title='"+$trad(65,i3GEOF.legenda.dicionario)+"' onclick=i3GEOF.legenda.sobelinhaf('"+retorno.data[i].idclasse+"') /></td>");
-							ins.push("<td><img src='"+i3GEO.configura.locaplic+"/imagens/desce1.png' style=cursor:pointer title='"+$trad(66,i3GEOF.legenda.dicionario)+"' onclick=i3GEOF.legenda.descelinhaf('"+retorno.data[i].idclasse+"') /></td>");
+							ins.push("<td><img src='"+i3GEO.configura.locaplic+"/imagens/sobe1.png' style=cursor:pointer title='"+$trad('sobe',i3GEOF.legenda.dicionario)+"' onclick=i3GEOF.legenda.sobelinhaf('"+retorno.data[i].idclasse+"') /></td>");
+							ins.push("<td><img src='"+i3GEO.configura.locaplic+"/imagens/desce1.png' style=cursor:pointer title='"+$trad('desce',i3GEOF.legenda.dicionario)+"' onclick=i3GEOF.legenda.descelinhaf('"+retorno.data[i].idclasse+"') /></td>");
 						}
 						ins.push("</tr>");
 					}
@@ -606,21 +606,21 @@ i3GEOF.legenda = {
 					$i("i3GEOlegendaresultado").innerHTML = ins.join("");
 				}
 				else{
-					ajuda = "<br><p class=paragrafo >"+$trad(67,i3GEOF.legenda.dicionario) +
-					"<p class=paragrafo >"+$trad(68,i3GEOF.legenda.dicionario) +
-					"<p class=paragrafo >"+$trad(69,i3GEOF.legenda.dicionario) +
-					"<p class=paragrafo >"+$trad(70,i3GEOF.legenda.dicionario) +
-					"<p class=paragrafo >"+$trad(71,i3GEOF.legenda.dicionario) ;
-					ins = "<p class=paragrafo >"+$trad(72,i3GEOF.legenda.dicionario)+":" +
+					ajuda = "<br><p class=paragrafo >"+$trad('ajudaEscalaCores',i3GEOF.legenda.dicionario) +
+					"<p class=paragrafo >"+$trad('msgEscalaCoresAuto',i3GEOF.legenda.dicionario) +
+					"<p class=paragrafo >"+$trad('msgEscalaCoresIndividual',i3GEOF.legenda.dicionario) +
+					"<p class=paragrafo >"+$trad('msgBandas',i3GEOF.legenda.dicionario) +
+					"<p class=paragrafo >"+$trad('msgReamostragem',i3GEOF.legenda.dicionario) ;
+					ins = "<p class=paragrafo >"+$trad('adicionaProcesso',i3GEOF.legenda.dicionario)+":" +
 					"<select onchange=i3GEOF.legenda.adicionaProcesso(this) >" +
-					"<option value='' >"+$trad(73,i3GEOF.legenda.dicionario)+"</option>" +
-					"<option value='SCALE=' >"+$trad(74,i3GEOF.legenda.dicionario)+"</option>" +
-					"<option value='RESAMPLE=' >"+$trad(75,i3GEOF.legenda.dicionario)+"</option>" +
-					"<option value='BANDS=' >"+$trad(76,i3GEOF.legenda.dicionario)+"</option>" +
+					"<option value='' >"+$trad('selecionaProcesso',i3GEOF.legenda.dicionario)+"</option>" +
+					"<option value='SCALE=' >"+$trad('escalaCores',i3GEOF.legenda.dicionario)+"</option>" +
+					"<option value='RESAMPLE=' >"+$trad('reamostragem',i3GEOF.legenda.dicionario)+"</option>" +
+					"<option value='BANDS=' >"+$trad('bandas',i3GEOF.legenda.dicionario)+"</option>" +
 					"<option value='COLOR_MATCH_THRESHOLD=' >Threshold</option>" +
 					"<option value='NODATA=' >Nodata</option>" +
 					"</select><br>" +
-					'<p class=paragrafo ><input id=i3GEOlegendabotao16 class="executar" size="22" type="buttom" value="'+$trad(77,i3GEOF.legenda.dicionario)+'">';
+					'<p class=paragrafo ><input id=i3GEOlegendabotao16 class="executar" size="22" type="buttom" value="'+$trad('aplicaProcesso',i3GEOF.legenda.dicionario)+'">';
 					if(retorno.data[0].proc == "")
 					{ins += "<div style=width:80% id=i3GEOlegendaprocessos ></div>";}
 					else{
@@ -641,7 +641,7 @@ i3GEOF.legenda = {
 			{$i("i3GEOlegendaresultado").innerHTML = "<p style=color:red >Erro<br>";}
 			i3GEOF.legenda.aguarde.visibility = "hidden";
 		}
-		catch(e){i3GEO.janela.tempoMsg($trad(78,i3GEOF.legenda.dicionario));i3GEOF.legenda.aguarde.visibility = "hidden";}
+		catch(e){i3GEO.janela.tempoMsg($trad('msgNaoEditaLegenda',i3GEOF.legenda.dicionario));i3GEOF.legenda.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: aviso
@@ -652,7 +652,7 @@ i3GEOF.legenda = {
 	*/
 	aviso: function(){
 		if(i3GEOF.legenda.aviso == true){
-			i3GEO.janela.tempoMsg($trad(79,i3GEOF.legenda.dicionario));
+			i3GEO.janela.tempoMsg($trad('msgAplicaAlteracao',i3GEOF.legenda.dicionario));
 			i3GEOF.legenda.aviso == false;
 		}
 	},
@@ -838,7 +838,7 @@ i3GEOF.legenda = {
 			cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"contagemclasse",i3GEOF.legenda.montaLegenda);
-		i3GEO.janela.tempoMsg($trad(80,i3GEOF.legenda.dicionario));
+		i3GEO.janela.tempoMsg($trad('consideraElementosVisiveis',i3GEOF.legenda.dicionario));
 	},
 	/*
 	Function: adicionaClasse
@@ -1091,7 +1091,7 @@ i3GEOF.legenda = {
 			}
 
 			if (item == "")
-			{i3GEO.janela.tempoMsg($trad(81,i3GEOF.legenda.dicionario));return;}
+			{i3GEO.janela.tempoMsg($trad('selecionaUmItem',i3GEOF.legenda.dicionario));return;}
 			i3GEOF.legenda.aguarde.visibility = "visible";
 			cp.set_response_type("JSON");
 			//window.parent.g_operacao = "outras"
@@ -1151,7 +1151,7 @@ i3GEOF.legenda = {
 					i3GEOF.legenda.aguarde.visibility = "hidden";
 				};
 			if (item == "")
-			{i3GEO.janela.tempoMsg($trad(81,i3GEOF.legenda.dicionario));return;}
+			{i3GEO.janela.tempoMsg($trad('selecionaUmItem',i3GEOF.legenda.dicionario));return;}
 			i3GEOF.legenda.aguarde.visibility = "visible";
 			cp.set_response_type("JSON");
 			cp.call(p,"alteraclasse",fim);
@@ -1181,7 +1181,7 @@ i3GEOF.legenda = {
 					i3GEOF.legenda.aguarde.visibility = "hidden";
 				};
 			if (item == "")
-			{i3GEO.janela.tempoMsg($trad(81,i3GEOF.legenda.dicionario));return;}
+			{i3GEO.janela.tempoMsg($trad('selecionaUmItem',i3GEOF.legenda.dicionario));return;}
 			i3GEOF.legenda.aguarde.visibility = "visible";
 			cp.set_response_type("JSON");
 			cp.call(p,"alteraclasse",fim);
@@ -1211,7 +1211,7 @@ i3GEOF.legenda = {
 					i3GEOF.legenda.aguarde.visibility = "hidden";
 				};
 			if (item == "")
-			{i3GEO.janela.tempoMsg($trad(81,i3GEOF.legenda.dicionario));return;}
+			{i3GEO.janela.tempoMsg($trad('selecionaUmItem',i3GEOF.legenda.dicionario));return;}
 			i3GEOF.legenda.aguarde.visibility = "visible";
 			cp.set_response_type("JSON");
 			cp.call(p,"alteraclasse",fim);
@@ -1276,7 +1276,7 @@ i3GEOF.legenda = {
 					combo += sct;
 				}
 				combo += "</select></div>";
-				$i("i3GEOlegendacomboestilos").innerHTML = "<table class='lista5'><tr><td><span class=paragrafo >"+$trad(82,i3GEOF.legenda.dicionario)+":</span></td><td>"+combo+"</td><td></td></tr></table>&nbsp;(ap&oacute;s adicionar ou excluir, aplique a altera&ccedil;&atilde;o)<br>";
+				$i("i3GEOlegendacomboestilos").innerHTML = "<table class='lista5'><tr><td><span class=paragrafo >"+$trad('estiloEdicao',i3GEOF.legenda.dicionario)+":</span></td><td>"+combo+"</td><td></td></tr></table>&nbsp;(ap&oacute;s adicionar ou excluir, aplique a altera&ccedil;&atilde;o)<br>";
 				new YAHOO.widget.Button(
 					"i3GEOlegendabotao11",{onclick:{fn: function(){
 						try{
@@ -1364,42 +1364,42 @@ i3GEOF.legenda = {
 			"<input type=text value='"+linha[2]+"' id='i3GEOlegendaoutlinecolor' />" +
 			"</div>" +
 			"</td><td><img style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/aquarela.gif' onclick=\"i3GEOF.legenda.corj('i3GEOlegendaoutlinecolor')\" /></td></tr>"+
-			"<tr><td style='text-align:left;'>"+$trad(83,i3GEOF.legenda.dicionario)+":</td><td>" +
+			"<tr><td style='text-align:left;'>"+$trad('corFundo',i3GEOF.legenda.dicionario)+":</td><td>" +
 			"<div class=styled-select >" +
 			"<input type=text value='"+linha[3]+"' id='i3GEOlegendabackgroundcolor' />" +
 			"</div>" +
 			"</td><td><img style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/aquarela.gif' onclick=\"i3GEOF.legenda.corj('i3GEOlegendabackgroundcolor')\" /></td></tr>"+
-			"<tr><td style='text-align:left;'>"+$trad(84,i3GEOF.legenda.dicionario)+":</td><td>"+
+			"<tr><td style='text-align:left;'>"+$trad('corFrente',i3GEOF.legenda.dicionario)+":</td><td>"+
 			"<div class=styled-select >" +
 			"<input type=text value='"+linha[4]+"' id='i3GEOlegendacolor' />" +
 			"</div>" +
 			"</td><td><img style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/aquarela.gif' onclick=\"i3GEOF.legenda.corj('i3GEOlegendacolor')\" /></td></tr>"+
-			"<tr><td style='text-align:left;'>"+$trad(85,i3GEOF.legenda.dicionario)+":</td><td>"+
+			"<tr><td style='text-align:left;'>"+$trad('tamanhoEspacamento',i3GEOF.legenda.dicionario)+":</td><td>"+
 			"<div class=styled-select >" +
 			"<input type=text value='"+linha[6]+"' id='i3GEOlegendasizes' />" +
 			"</div>" +
 			"</td><td></td></tr>" +
-			"<tr><td style='text-align:left;'>"+$trad(86,i3GEOF.legenda.dicionario)+":</td><td>"+
+			"<tr><td style='text-align:left;'>"+$trad('espessura',i3GEOF.legenda.dicionario)+":</td><td>"+
 			"<div class=styled-select >" +
 			"<input type=text value='"+linha[8]+"' id='i3GEOlegendawidth' />" +
 			"</div>" +
 			"</td><td></td></tr>" +
-			"<tr><td style='text-align:left;'>"+$trad(87,i3GEOF.legenda.dicionario)+":</td><td>"+
+			"<tr><td style='text-align:left;'>"+$trad('padraoRepeticao',i3GEOF.legenda.dicionario)+":</td><td>"+
 			"<div class=styled-select >" +
 			"<input type=text value='"+linha[9]+"' id='i3GEOlegendapattern' />" +
 			"</div>" +
 			"</td><td></td></tr>" +
-			"<tr><td style='text-align:left;'>"+$trad(88,i3GEOF.legenda.dicionario)+":</td><td>"+
+			"<tr><td style='text-align:left;'>"+$trad('opacidade',i3GEOF.legenda.dicionario)+":</td><td>"+
 			"<div class=styled-select >" +
 			"<input type=text value='"+linha[7]+"' id='i3GEOlegendaopacidade' />" +
 			"</div>" +
 			"</td><td></td></tr>" +
-			"<tr><td style='text-align:left;'>"+$trad(89,i3GEOF.legenda.dicionario)+":</td><td>"+
+			"<tr><td style='text-align:left;'>"+$trad('angulo',i3GEOF.legenda.dicionario)+":</td><td>"+
 			"<div class=styled-select >" +
 			"<input type=text value='"+linha[10]+"' id='i3GEOlegendaangulo' />" +
 			"</div>" +
 			"</td><td></td></tr>" +
-			"<tr><td style='text-align:left;'>"+$trad(90,i3GEOF.legenda.dicionario)+":</td><td>"+
+			"<tr><td style='text-align:left;'>"+$trad('simbolo',i3GEOF.legenda.dicionario)+":</td><td>"+
 			"<div class=styled-select >" +
 			"<input type=text value='"+linha[5]+"' id='i3GEOlegendasymbolname' />" +
 			"</div>" +
@@ -1423,7 +1423,7 @@ i3GEOF.legenda = {
 		try{
 			if (retorno.data != undefined){
 				retorno = retorno.data;
-				$i("i3GEOlegendasimbolos").innerHTML = "<br>"+$trad(91,i3GEOF.legenda.dicionario)+":<br><br>"+retorno;
+				$i("i3GEOlegendasimbolos").innerHTML = "<br>"+$trad('listaSimbolo',i3GEOF.legenda.dicionario)+":<br><br>"+retorno;
 			}
 			else
 			{$i("i3GEOlegendasimbolos").innerHTML = "<p style=color:red >Erro<br>";}
@@ -1513,12 +1513,12 @@ i3GEOF.legenda = {
 			var monta = function(retorno){
 					if (retorno.data && retorno.data[0].proc == ""){
 						var ins = [],i,re,t;
-						ins.push("<p class='paragrafo' ><input type=button value='"+$trad(92,i3GEOF.legenda.dicionario)+"' id=i3GEOlegendaGraficoPizza /></p>");
-						ins.push("<p class='paragrafo' >"+$trad(93,i3GEOF.legenda.dicionario)+"</p>");
+						ins.push("<p class='paragrafo' ><input type=button value='"+$trad('graficoPizza',i3GEOF.legenda.dicionario)+"' id=i3GEOlegendaGraficoPizza /></p>");
+						ins.push("<p class='paragrafo' >"+$trad('numeroOcorrenciasClasses',i3GEOF.legenda.dicionario)+"</p>");
 						ins.push("<table width=100% >");
 						i3GEOF.legenda.dadosGrafico = ["n;x"];
 						if(retorno.data.length < 2){
-							i3GEO.janela.tempoMsg($trad(94,i3GEOF.legenda.dicionario));
+							i3GEO.janela.tempoMsg($trad('msgNumeroClasses',i3GEOF.legenda.dicionario));
 							i3GEOF.legenda.aguarde.visibility = "hidden";
 							return;
 						}
