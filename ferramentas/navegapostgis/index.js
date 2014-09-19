@@ -139,7 +139,7 @@ i3GEOF.navegapostgis = {
 		i3GEOF.navegapostgis.ARVORE = new YAHOO.widget.TreeView($i("i3GEOF.navegapostgis_corpo"));
 		var root = i3GEOF.navegapostgis.ARVORE.getRoot();
 		new YAHOO.widget.HTMLNode(
-			{html:$trad(2,i3GEOF.navegapostgis.dicionario),enableHighlight:false,expanded:false,hasIcon:false},
+			{html:$trad('selecionaConexao',i3GEOF.navegapostgis.dicionario),enableHighlight:false,expanded:false,hasIcon:false},
 			root
 		);
 		i3GEOF.navegapostgis.ARVORE.draw();
@@ -157,7 +157,7 @@ i3GEOF.navegapostgis = {
 	*/
 	html:function(){
 		var ins = "" +
-			"<span class=paragrafo style=width:50px; >"+$trad(2,i3GEOF.navegapostgis.dicionario) + "</span>" +
+			"<span class=paragrafo style=width:50px; >"+$trad('selecionaConexao',i3GEOF.navegapostgis.dicionario) + "</span>" +
 			"<div class=paragrafo id=i3GEOFnavegapostgisConexao style='display:block;margin:5px;position:relative;left:125px;top:-22px;width:100px;' >" +
 			"</div>" +
 			"<div id='i3GEOFnavegapostgispar' style='padding:2px;position:relative;top:-15px;display:none;' ><div id=i3GEOFnavegapostgisArvore style='width: 215px;overflow: auto;height: 210px;border: 1px solid lightgray;position: absolute;top: 0px;'> "+
@@ -167,7 +167,7 @@ i3GEOF.navegapostgis = {
 			"<textarea id=i3GEOFnavegapostgisSql style='width: 233px;overflow: auto;height: 84px;border: 1px solid lightgray;position: absolute;left:223px;top: 190px;'> "+
 			"</textarea>";
 		if(i3GEOF.navegapostgis.tipo == "sql"){
-			ins += "<input style='position:absolute;top:235px;left:70px;' id=i3GEOFnavegapostgisAplicar type='button' value='"+$trad(10,i3GEOF.navegapostgis.dicionario)+"' />";
+			ins += "<input style='position:absolute;top:235px;left:70px;' id=i3GEOFnavegapostgisAplicar type='button' value='"+$trad('aplica',i3GEOF.navegapostgis.dicionario)+"' />";
 		}
 		ins += "</div>";
 		return ins;
@@ -184,7 +184,7 @@ i3GEOF.navegapostgis = {
 			i3GEO.janela.minimiza("i3GEOF.navegapostgis");
 		};
 		//cria a janela flutuante
-		titulo = $trad(1,i3GEOF.navegapostgis.dicionario);
+		titulo = $trad('conectaPostgis',i3GEOF.navegapostgis.dicionario);
 		janela = i3GEO.janela.cria(
 			"470px",
 			"315px",
@@ -220,7 +220,7 @@ i3GEOF.navegapostgis = {
 		var root = i3GEOF.navegapostgis.ARVORE.getRoot();
 		new YAHOO.widget.HTMLNode(
 			{
-				html:$trad(3,i3GEOF.navegapostgis.dicionario),
+				html:$trad('selecionaTabela',i3GEOF.navegapostgis.dicionario),
 				enableHighlight:false,
 				expanded:false,
 				hasIcon:false
@@ -299,12 +299,12 @@ i3GEOF.navegapostgis = {
 				var ins,n,i,
 					gid = "ID",
 					the_geom = "GEOM",
-					nome = $trad(4,i3GEOF.navegapostgis.dicionario),
-					mostra = $trad(6,i3GEOF.navegapostgis.dicionario);
+					nome = $trad('nome',i3GEOF.navegapostgis.dicionario),
+					mostra = $trad('mostra',i3GEOF.navegapostgis.dicionario);
 				n = retorno.length;
 
 				if(i3GEOF.navegapostgis.tipo == "coluna"){
-					ins = "<p class=paragrafo>"+$trad(11,i3GEOF.navegapostgis.dicionario)+"</p><table class=lista4 ><tr><td></td><td></td></tr>";
+					ins = "<p class=paragrafo>"+$trad('selecionaColuna',i3GEOF.navegapostgis.dicionario)+"</p><table class=lista4 ><tr><td></td><td></td></tr>";
 					for(i=0;i<n;i++){
 						gid = "<input onclick='i3GEOF.navegapostgis.retornaValorClicado(this)' type=radio style='cursor:pointer;' name='navegapostgisSelColuna' value='"+retorno[i].field+"'/>";
 						ins += "<tr><td>"+gid+"</td><td title='"+retorno[i].type+"' >"+retorno[i].field+"</td></tr>";
@@ -312,7 +312,7 @@ i3GEOF.navegapostgis = {
 					ins += "</table>";
 				}
 				else{
-					ins = "<table class=lista4 ><tr><td title='"+$trad(7,i3GEOF.navegapostgis.dicionario)+"'>"+gid+"</td><td title='"+$trad(8,i3GEOF.navegapostgis.dicionario)+"'>"+the_geom+"</td><td title='"+$trad(9,i3GEOF.navegapostgis.dicionario)+"'>"+mostra+"</td><td>"+nome+"</td></tr>";
+					ins = "<table class=lista4 ><tr><td title='"+$trad('selecionaID',i3GEOF.navegapostgis.dicionario)+"'>"+gid+"</td><td title='"+$trad('selecionaGeom',i3GEOF.navegapostgis.dicionario)+"'>"+the_geom+"</td><td title='"+$trad('mostraColuna',i3GEOF.navegapostgis.dicionario)+"'>"+mostra+"</td><td>"+nome+"</td></tr>";
 					for(i=0;i<n;i++){
 						gid = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=radio name='i3GEOFnavegapostgisGid' value='"+retorno[i].field+"' />";
 						if(retorno[i].type == "line" || retorno[i].type == "polygon" || retorno[i].type == "point" || retorno[i].type == "geometry"){

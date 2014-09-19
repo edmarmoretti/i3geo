@@ -104,35 +104,35 @@ i3GEOF.mostraExten = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<div style="padding:5px"><p class="paragrafo" >'+$trad(1,i3GEOF.mostraExten.dicionario)+':</p>' +
+		var ins = '<div style="padding:5px"><p class="paragrafo" >'+$trad('ajuda',i3GEOF.mostraExten.dicionario)+':</p>' +
 		'<textarea id=i3GEOmostraExtenatual rows=3 cols=50 onclick="javascript:this.select();"></textarea>' +
-		'<p class="paragrafo" >	'+$trad(2,i3GEOF.mostraExten.dicionario)+':</p>' +
+		'<p class="paragrafo" >	'+$trad('digitaCoord',i3GEOF.mostraExten.dicionario)+':</p>' +
 		'	<table class=lista3 style="width:350px;">' +
-		'		<tr><td>'+$trad(3,i3GEOF.mostraExten.dicionario)+':</td>' +
+		'		<tr><td>'+$trad('longW',i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
 		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenxg" value="-00"/></div>' +
 		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenxm" value="00"/></div>' +
 		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenxs" value="0.0"/></div>' +
 		'		</td></tr>' +
-		'		<tr><td>'+$trad(4,i3GEOF.mostraExten.dicionario)+':</td>' +
+		'		<tr><td>'+$trad('latS',i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
 		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenyg" value="-00"/></div>' +
 		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenym" value="00"/></div>' +
 		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenys" value="0.0"/></div>' +
 		'		</td></tr>' +
-		'		<tr><td>'+$trad(5,i3GEOF.mostraExten.dicionario)+':</td>' +
+		'		<tr><td>'+$trad('longE',i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
 		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenxxg" value="-00"/></div>' +
 		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenxxm" value="00"/></div>' +
 		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenxxs" value="0.0"/></div>' +
 		'		</td></tr>' +
-		'		<tr><td>'+$trad(6,i3GEOF.mostraExten.dicionario)+':</td>' +
+		'		<tr><td>'+$trad('latN',i3GEOF.mostraExten.dicionario)+':</td>' +
 		'		<td>' +
 		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenyyg" value="-00"/></div>' +
 		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenyym" value="00"/></div>' +
 		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenyys" value="0.0"/></div>' +
 		'		</td></tr></table>' +
-		'<br><p class="paragrafo" ><input id=i3GEOmostraExtenbotao1 type="button" size=14 value="'+$trad(7,i3GEOF.mostraExten.dicionario)+'"  /></p></div>';
+		'<br><p class="paragrafo" ><input id=i3GEOmostraExtenbotao1 type="button" size=14 value="'+$trad('aplica',i3GEOF.mostraExten.dicionario)+'"  /></p></div>';
 		return ins;
 	},
 	/*
@@ -205,9 +205,9 @@ i3GEOF.mostraExten = {
 			var y = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyg").value,$i("i3GEOmostraExtenym").value,$i("i3GEOmostraExtenys").value);
 			var yy = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyyg").value,$i("i3GEOmostraExtenyym").value,$i("i3GEOmostraExtenyys").value);
 			if ((x == xx) || (y == yy))
-			{i3GEO.janela.tempoMsg($trad(8,i3GEOF.mostraExten.dicionario));return;}
+			{i3GEO.janela.tempoMsg($trad('msgCoordValida',i3GEOF.mostraExten.dicionario));return;}
 			if ((x > xx) || (y > yy))
-			{i3GEO.janela.tempoMsg($trad(8,i3GEOF.mostraExten.dicionario));return;}
+			{i3GEO.janela.tempoMsg($trad('msgCoordValida',i3GEOF.mostraExten.dicionario));return;}
 			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,window.parent.i3GEO.parametros.tipoimagem,(x+" "+y+" "+xx+" "+yy));
 		}
 		catch(e){i3GEO.janela.tempoMsg(e+" Erro.");}
