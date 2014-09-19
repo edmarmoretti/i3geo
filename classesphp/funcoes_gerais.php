@@ -2566,6 +2566,7 @@ Lista os temas que possuem restricao de acesso para apenas alguns grupos de usua
 O retorno e um array com a chave sendo o codigo do tema e o valor um array com a lista de ids de grupos que podem acessar
 */
 function listaTemasRestritos(){
+	global $esquemaadmin;
 	include_once(dirname(__FILE__)."/../admin/php/admin.php");
 	error_reporting(0);
 	$res = pegaDados("select id_grupo,codigo_tema from ".$esquemaadmin."i3geousr_grupotema as gt,".$esquemaadmin."i3geoadmin_temas as te where gt.id_tema = te.id_tema");
