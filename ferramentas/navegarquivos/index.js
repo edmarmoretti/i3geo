@@ -94,7 +94,7 @@ i3GEOF.navegarquivos = {
 		i3GEOF.navegarquivos.ARVORE = new YAHOO.widget.TreeView($i("i3GEOF.navegarquivos_corpo"));
 		var root = i3GEOF.navegarquivos.ARVORE.getRoot();
 		new YAHOO.widget.HTMLNode(
-			{html:$trad(2,i3GEOF.navegarquivos.dicionario),enableHighlight:false,expanded:false,hasIcon:false},
+			{html:$trad('pastas',i3GEOF.navegarquivos.dicionario),enableHighlight:false,expanded:false,hasIcon:false},
 			root
 		);
 		i3GEOF.navegarquivos.ARVORE.draw();
@@ -124,7 +124,7 @@ i3GEOF.navegarquivos = {
 			i3GEO.janela.minimiza("i3GEOF.navegarquivos");
 		};
 		//cria a janela flutuante
-		titulo = $trad(1,i3GEOF.navegarquivos.dicionario);
+		titulo = $trad('arquivos',i3GEOF.navegarquivos.dicionario);
 		janela = i3GEO.janela.cria(
 			"400px",
 			"300px",
