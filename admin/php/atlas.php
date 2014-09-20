@@ -105,7 +105,7 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "PEGATEMAS":
-		retornaJSON(pegaDados("SELECT i3geoadmin_atlast.*,i3geoadmin_temas.nome_tema from ".$esquemaadmin."i3geoadmin_atlast LEFT JOIN i3geoadmin_temas ON ( i3geoadmin_atlast.codigo_tema =  i3geoadmin_temas.codigo_tema ) where id_prancha = '$id_prancha' order by ordem_tema"));
+		retornaJSON(pegaDados("SELECT i3geoadmin_atlast.*,i3geoadmin_temas.nome_tema from ".$esquemaadmin."i3geoadmin_atlast LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON ( i3geoadmin_atlast.codigo_tema =  i3geoadmin_temas.codigo_tema ) where id_prancha = '$id_prancha' order by ordem_tema"));
 		exit;
 		break;
 		/*

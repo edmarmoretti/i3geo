@@ -157,7 +157,7 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "PEGADADOSGRUPO":
-		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id"));
+		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id"));
 		exit;
 		break;
 		/*
@@ -174,7 +174,7 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "PEGADADOSSUBGRUPO":
-		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = $id"));
+		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = $id"));
 		exit;
 		break;
 		/*
@@ -191,7 +191,7 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "PEGADADOSTEMA":
-		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n3 = $id"));
+		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n3 = $id"));
 		exit;
 		break;
 		/*
@@ -208,7 +208,7 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "PEGADADOSRAIZ":
-		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_raiz.id_tema = i3geoadmin_temas.id_tema where id_raiz = $id"));
+		retornaJSON(pegaDados("select * from ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_raiz.id_tema = i3geoadmin_temas.id_tema where id_raiz = $id"));
 		exit;
 		break;
 		/*
@@ -231,7 +231,7 @@ switch (strtoupper($funcao))
 		else
 		{$coluna = $idioma;
 		}
-		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
+		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>array()));
 		exit;
 		break;
@@ -259,7 +259,7 @@ switch (strtoupper($funcao))
 		else
 		{$coluna = $idioma;
 		}
-		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
+		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>array()));
 		exit;
 		break;
@@ -284,7 +284,7 @@ switch (strtoupper($funcao))
 		else{
 			$coluna = $idioma;
 		}
-		$grupos = pegaDados("select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,i3geoadmin_n1.publicado from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' and id_n1 = '$id_n1'");
+		$grupos = pegaDados("select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,i3geoadmin_n1.publicado from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' and id_n1 = '$id_n1'");
 		$raiz = array();
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>$grupos));
 		exit;
@@ -311,7 +311,7 @@ switch (strtoupper($funcao))
 		else
 		{$coluna = $idioma;
 		}
-		$subgrupos = pegaDados("select i3geoadmin_subgrupos.$coluna as nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n2='$id_n2'");
+		$subgrupos = pegaDados("select i3geoadmin_subgrupos.$coluna as nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n2='$id_n2'");
 		$raiz = array();
 		retornaJSON(array("raiz"=>$raiz,"subgrupos"=>$subgrupos));
 		exit;
@@ -338,7 +338,7 @@ switch (strtoupper($funcao))
 		else
 		{$coluna = $idioma;
 		}
-		$temas = pegaDados("select i3geoadmin_temas.$coluna as nome_tema,i3geoadmin_n3.id_n3,i3geoadmin_n3.publicado from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n3='$id_n3'");
+		$temas = pegaDados("select i3geoadmin_temas.$coluna as nome_tema,i3geoadmin_n3.id_n3,i3geoadmin_n3.publicado from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n3='$id_n3'");
 		$raiz = array();
 		retornaJSON($temas);
 		exit;

@@ -41,7 +41,7 @@ td {
 		por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 		de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 		Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-		Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+		Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 			GNU junto com este programa; se n&atilde;o, escreva para a
 		Free Software Foundation, Inc., no endere&ccedil;o
 		59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -55,7 +55,7 @@ td {
 		$totaltemas = count(pegaDados("select * from ".$esquemaadmin."i3geoadmin_temas"));
 		$temasvalidos = pegaDados("select codigo_tema,nome_tema,download_tema,kml_tema,ogc_tema,link_tema,tags_tema from ".$esquemaadmin."i3geoadmin_temas where codigo_tema <> ''");
 		$temasassocsubgrupos = pegaDados("select id_tema from ".$esquemaadmin."i3geoadmin_n3 group by id_tema");
-		$nacessostema = pegaDados("select b.nome_tema,sum(a.nacessos) as soma,a.codigo_tema from ".$esquemaadmin."i3geoadmin_acessostema as a,i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema and a.nacessos > 0 group by a.codigo_tema,b.nome_tema");
+		$nacessostema = pegaDados("select b.nome_tema,sum(a.nacessos) as soma,a.codigo_tema from ".$esquemaadmin."i3geoadmin_acessostema as a,".$esquemaadmin."i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema and a.nacessos > 0 group by a.codigo_tema,b.nome_tema");
 		$ntags = pegaDados("select nome from ".$esquemaadmin."i3geoadmin_tags");
 		$totaltemasvalidos = count($temasvalidos);
 		$codigostemas = array();
@@ -124,8 +124,8 @@ td {
 		}
 		echo "<table>";
 		echo "<tr><td><b>N&uacute;mero total de temas cadastrados: </b></td><td>$totaltemas</td><td></td></tr>";
-		echo "<tr><td><b>N&uacute;mero total de temas v&aacute;lidos (código diferente de vazio): </b></td><td>$totaltemasvalidos</td><td></td></tr>";
-		echo "<tr><td><b>Temas v&aacute;lidos com códigos duplicados: </b></td><td>".count($temasmaisdeum)."</td><td></td></tr>";
+		echo "<tr><td><b>N&uacute;mero total de temas v&aacute;lidos (cï¿½digo diferente de vazio): </b></td><td>$totaltemasvalidos</td><td></td></tr>";
+		echo "<tr><td><b>Temas v&aacute;lidos com cï¿½digos duplicados: </b></td><td>".count($temasmaisdeum)."</td><td></td></tr>";
 		echo "<tr><td><b>Temas v&aacute;lidos com nomes duplicados: </b></td><td>".count($nomestemasmaisdeum)."</td><td></td></tr>";
 		echo "<tr><td><b>Temas associados a algum sub-grupo: </b></td><td>".count($temasassocsubgrupos)."</td><td></td></tr>";
 

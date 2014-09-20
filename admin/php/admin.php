@@ -4,7 +4,7 @@
 
 Fun&ccedil;&otilde;es utilizadas por outros programas do sistema de administra&ccedil;&atilde;o.
 
-No in&iacute;­cio do programa &eacute; feita a inclus&atilde;o do i3geo/ms_configura.php e i3geo/classesphp/funcoes_gerais.php
+No in&iacute;ï¿½cio do programa &eacute; feita a inclus&atilde;o do i3geo/ms_configura.php e i3geo/classesphp/funcoes_gerais.php
 
 Licenca:
 
@@ -23,7 +23,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -83,7 +83,7 @@ obj {array}
 
 Retorno:
 
-Imprime na sa&Atilde;­da a string JSON
+Imprime na sa&Atilde;ï¿½da a string JSON
 */
 function retornaJSON($obj)
 {
@@ -124,9 +124,9 @@ Verifica se o resultado de um SQL retorna mais de um registro
 
 Parametros:
 
-sql {string} - sql que ser&Atilde;¡ executado
+sql {string} - sql que ser&Atilde;ï¿½ executado
 
-dbh {PDO} - objeto PDO de conex&Atilde;£o com o banco
+dbh {PDO} - objeto PDO de conex&Atilde;ï¿½o com o banco
 
 Retorno:
 
@@ -143,9 +143,9 @@ function verificaDuplicados($sql,$dbh)
 /*
  Function: exclui
 
-Exlcui um registro de uma tabela do banco de dados de administra&Atilde;§&Atilde;£o
+Exlcui um registro de uma tabela do banco de dados de administra&Atilde;ï¿½&Atilde;ï¿½o
 
-Utiliza vari&Atilde;¡veis globais para fazer a consulta ao banco
+Utiliza vari&Atilde;ï¿½veis globais para fazer a consulta ao banco
 
 Globals:
 
@@ -179,9 +179,9 @@ Executa um sql de busca de dados
 
 Parametros:
 
-sql {string} - sql que ser&Atilde;¡ executado
+sql {string} - sql que ser&Atilde;ï¿½ executado
 
-locaplic {string} - endere&Atilde;§o do i3Geo no sistema de arquivos
+locaplic {string} - endere&Atilde;ï¿½o do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -219,11 +219,11 @@ function pegaDados($sql,$locaplic="")
 /*
  Function: verificaFilhos
 
-Verifica se o pai tem filhos nos componentes hier&Atilde;¡rquicos do banco de administra&Atilde;§&Atilde;£o
+Verifica se o pai tem filhos nos componentes hier&Atilde;ï¿½rquicos do banco de administra&Atilde;ï¿½&Atilde;ï¿½o
 
-Por exemplo, pode-se verificar se um grupo possu&Atilde;­ subgrupos, indicando-se como tabela i3geoadmin_grupos e o id do grupo
+Por exemplo, pode-se verificar se um grupo possu&Atilde;ï¿½ subgrupos, indicando-se como tabela i3geoadmin_grupos e o id do grupo
 
-Vari&Atilde;¡veis globais:
+Vari&Atilde;ï¿½veis globais:
 
 tabela {string} - tabela do banco de dados
 
@@ -327,13 +327,13 @@ function verificaFilhos()
 		}
 		if($tabela == "i3geoadmin_grupos")
 		{
-			$r = pegaDados("select n1.id_grupo from ".$esquemaadmin."i3geoadmin_n1 as n1, i3geoadmin_n2 as n2 where n1.id_n1 = n2.id_n1 and n1.id_grupo = '$id'");
+			$r = pegaDados("select n1.id_grupo from ".$esquemaadmin."i3geoadmin_n1 as n1, ".$esquemaadmin."i3geoadmin_n2 as n2 where n1.id_n1 = n2.id_n1 and n1.id_grupo = '$id'");
 			if(count($r) > 0)
 				$res = true;
 		}
 		if($tabela == "i3geoadmin_subgrupos")
 		{
-			$r = pegaDados("select n2.id_subgrupo from ".$esquemaadmin."i3geoadmin_n3 as n3, i3geoadmin_n2 as n2 where n2.id_n2 = n3.id_n3 and n2.id_subgrupo = '$id'");
+			$r = pegaDados("select n2.id_subgrupo from ".$esquemaadmin."i3geoadmin_n3 as n3, ".$esquemaadmin."i3geoadmin_n2 as n2 where n2.id_n2 = n3.id_n3 and n2.id_subgrupo = '$id'");
 			if(count($r) > 0)
 				$res = true;
 		}
@@ -392,7 +392,7 @@ function verificaFilhos()
 /*
  Function: resolveAcentos
 
-Converte uma string para uma codifica&Atilde;§&Atilde;£o de caracteres determinada
+Converte uma string para uma codifica&Atilde;ï¿½&Atilde;ï¿½o de caracteres determinada
 
 Parametros:
 
