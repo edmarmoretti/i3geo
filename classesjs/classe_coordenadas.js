@@ -401,7 +401,7 @@ i3GEO.coordenadas = {
 			onde = $i(onde),
 			temp = i3GEO.coordenadas.config[configProj],
 			codigo = "";
-			if(onde.style.display === "none"){
+			if(onde && onde.style.display === "none"){
 				return;
 			}
 			if(typeof(x) === 'undefined'){

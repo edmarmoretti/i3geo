@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>i3GEO - OpenLayers</title>
+<script src="../classesjs/i3geonaocompacto.js"></script>
+<script src="../pacotes/openlayers/OpenLayers2131.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/black.css">
+</head>
+<body style='margin-left:7px;background:white;'>
+
+<script>
+/************
+Executa a funcao i3GEO.mapa.aplicaPreferencias() que carrega variaveis armazenadas em cookies
+
+Procura pelo elemento DOM com ID = i3geo, caso nao for encontrado, define o BODY com ID = i3geo
+
+Define o elemento DOM com ID = i3geo para usar class = "yui-skin-sam"
+
+Verifica se i3GEO.configura.sid esta vazia ou nao (guarda o ID da SESSION PHP)
+	Se estiver vazia:
+		
+		Verifica as variaveis i3GEO.mapa.TEMASINICIAIS, i3GEO.mapa.TEMASINICIAISLIGADOS e i3GEO.configura.mashuppar
+		Essas variaveis sao utilizadas para compor os parametros que serao utilizados para criar a SESSION PHP e a area temporaria do mapa
+		
+		Executa a funcao i3GEO.php.criamapa() com os parametros obtidos e segue o fluxo abaixo. Essa funcao executa um programa PHP cujo retorno
+		e o ID da SESSION criada
+		
+		Define a variavel i3GEO.configura.sid que armazena o ID da SESSION PHP
+		
+	Se nao estiver vazia:
+		
+		Verifica se as variaveis i3GEO.parametros.w e i3GEO.parametros.h estao vazias, caso estejam, tenta calcular o tamanho que o mapa devera ter
+		
+		Executa a funcao de criacao do mapa i3GEO.php.inicia() usando i3GEO.parametros.w e i3GEO.parametros.h
+		
+	Verifica o resultado da criacao do mapa, executada via Ajax e caso nao encontre erro, executa as operacoes seguintes:
+		(Nesse momento ja deve existir no servidor, na pasta temporaria, uma pasta especifica para o mapa atual, que inclui um arquivo mapfile
+		com os parametros) 
+		
+		Obtem o objeto JSON retornado peo servidor
+		
+		Define a variaval que guarda os parametros do mapa obtidos do servidor com i3GEO.parametros = retorno.data.variaveis
+		
+		Verifica se o mapa criado no servidor possui elementos gravados (o mapa pode ter sido recuperado do banco de dados de administracao) e recupera
+		esses elementos (desenhos, ferramentas, etc). Esses elementos sao armazenados em bse64 no objeto JSON retorno.data.customizacoesinit.
+		
+		Verifica se existem dados que armazenam a extensao geografica da ultima navegacao do usuario em cookies
+		
+		Armazena em i3GEO.arvoreDeCamadas.CAMADAS um objeto com os parametros de cada layer existente no mapfile criado no servidor
+		
+		Executa as operacoes de inicializacao que sao comuns:
+		
+			Cria os componentes do mapa com as funcoes:
+				
+				i3GEO.gadgets.mostraBuscaRapida();
+				i3GEO.gadgets.mostraVersao();
+				i3GEO.gadgets.mostraEmail();
+				i3GEO.guias.cria();
+				
+			Cria ou ativa a barra de botoes
+			
+			Cria o menu suspenso
+			
+			Atualiza o valor do campo que mostra a escala do mapa
+			
+			Verifica se o mapa possui tmeporizador
+			
+			Mostra o nome do usuário caso esteja logado
+************/
+i3GEO.cria();
+i3GEO.inicia();
+</script>
+</body>
+</html>

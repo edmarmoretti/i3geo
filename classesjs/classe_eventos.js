@@ -484,6 +484,9 @@ i3GEO.eventos = {
 	*/
 	ativa: function(docMapa){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.ativa()");}
+		if(!docMapa){
+			return;
+		}
 		docMapa.onmouseover = function(){
 			objposicaocursor.dentroDomapa = true;
 			this.onmousemove=function(exy){

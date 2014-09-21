@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>i3GEO - OpenLayers</title>
+<script src="../classesjs/i3geonaocompacto.js"></script>
+<script src="../pacotes/openlayers/OpenLayers2131.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/black.css">
+</head>
+<body style='margin-left:7px;background:white;'>
+<div id=corpoMapa style="position:relative;background-image:url('../imagens/i3geo1bw.jpg');"></div>
+<script>
+/************
+Cria o mapa apenas com os componentes que sao default.
+
+No caso, nao existem DIV para inserir outros elementos.
+
+O mapa nao ocupa toda a pagina por causa das variaveis:
+
+i3GEO.configura.diminuixN
+i3GEO.configura.diminuiyN
+
+i3GEO.configura.diminuixM
+i3GEO.configura.diminuiyM
+
+Os controles especificos do OpenLayers sao:
+
+************/
+
+//i3GEO.configura.diminuiyN = 0
+i3GEO.cria();
+i3GEO.inicia();
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>i3GEO - OpenLayers</title>
+<script src="../classesjs/i3geonaocompacto.js"></script>
+<script src="../pacotes/openlayers/OpenLayers2131.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/black.css">
+</head>
+<body style='margin-left:7px;background:white;'>
+
+<script>
+/************
+Ajusta o cabecalho doctype se a variavel i3GEO.configura.ajustaDocType === true
+
+Verifica se o valor de SESSION foi passado via parametro na url e define a variavel i3GEO.configura.sid com esse valor
+
+Verifica se a variavel i3GEO.Interface.ALTTABLET esta definida, se estiver, verifica se o dispositivo e mobile e caso seja, altera a URL para abrir a interface mobile
+definida em i3GEO.Interface.ALTTABLET
+
+Tenta identificar o valor de i3GEO.configura.locaplic caso esteja definida como "". A identificacao e feita com base no nome do script carregado
+
+Descobre o tamanho da area de navegacao com i3GEO.calculaTamanho()
+
+Executa a funcao i3GEO.Interface.cria() passando os parametros de largura e altura
+
+Executa as operacoes de criacao que sao especificas da interface escolhida, utiliza a funcao:
+	i3GEO.Interface[i3GEO.Interface.ATUAL].cria(w, h);
+por default i3GEO.Interface.ATUAL = "openlayers"
+
+Procura pelo elemento DOM com ID definido em i3GEO.Interface.IDCORPO (por default e "corpoMapa")
+
+Define o valor da variavel i3GEO.Interface.IDMAPA que contera o ID do elemento DOM que sera utilizado como container para o mapa
+
+No caso da interface OpenLayers:
+	
+	Caso i3GEO.Interface.IDMAPA nao for definida ou caso o ID nao seja encontrado, cria um div com ID "openlayers" e insere no elemento DOM com
+	ID definido em i3GEO.Interface.IDCORPO
+	
+	Calcula varios parametros que sao armazenados na variavel i3GEO.Interface.openlayers.parametrosMap
+	Essa variavel e utilizada como parametro de inicializacao do mapa (ver API do OpenLayers)
+	
+	A variavel i3GEO.Interface.openlayers.googleLike quando true forca o uso da projecao Mercator
+	
+	Cria o objeto global Openlayers com:
+		
+		i3geoOL = new OpenLayers.Map('openlayers', i3GEO.Interface.openlayers.parametrosMap);
+	
+No caso da interface GoogleMaps:
+	
+	Caso i3GEO.Interface.IDMAPA nao for definida ou caso o ID nao seja encontrado, cria um div com ID "googlemapsdiv" e insere no elemento DOM com
+	ID definido em i3GEO.Interface.IDCORPO
+	
+	Cria o objeto global i3GeoMap mas ainda nao definido como um objeto do GoogleMaps.
+
+*************/
+i3GEO.cria();
+</script>
+</body>
+</html>
