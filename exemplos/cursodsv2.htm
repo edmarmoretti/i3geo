@@ -14,12 +14,14 @@
 /************
 Ajusta o cabecalho doctype se a variavel i3GEO.configura.ajustaDocType === true
 
-Verifica se o valor de SESSION foi passado via parametro na url e define a variavel i3GEO.configura.sid com esse valor
+Verifica se o valor de SESSION foi passado via parametro na url e define a variavel i3GEO.configura.sid
+com esse valor
 
-Verifica se a variavel i3GEO.Interface.ALTTABLET esta definida, se estiver, verifica se o dispositivo e mobile e caso seja, altera a URL para abrir a interface mobile
-definida em i3GEO.Interface.ALTTABLET
+Verifica se a variavel i3GEO.Interface.ALTTABLET esta definida, se estiver, verifica se o dispositivo
+e mobile e caso seja, altera a URL para abrir a interface mobile definida em i3GEO.Interface.ALTTABLET
 
-Tenta identificar o valor de i3GEO.configura.locaplic caso esteja definida como "". A identificacao e feita com base no nome do script carregado
+Tenta identificar o valor de i3GEO.configura.locaplic caso esteja definida como "". A identificacao e
+feita com base no nome do script carregado
 
 Descobre o tamanho da area de navegacao com i3GEO.calculaTamanho()
 
@@ -31,12 +33,13 @@ por default i3GEO.Interface.ATUAL = "openlayers"
 
 Procura pelo elemento DOM com ID definido em i3GEO.Interface.IDCORPO (por default e "corpoMapa")
 
-Define o valor da variavel i3GEO.Interface.IDMAPA que contera o ID do elemento DOM que sera utilizado como container para o mapa
+Define o valor da variavel i3GEO.Interface.IDMAPA que contera o ID do elemento DOM que sera utilizado
+como container para o mapa
 
 No caso da interface OpenLayers:
 
-	Caso i3GEO.Interface.IDMAPA nao for definida ou caso o ID nao seja encontrado, cria um div com ID "openlayers" e insere no elemento DOM com
-	ID definido em i3GEO.Interface.IDCORPO
+	Caso i3GEO.Interface.IDMAPA nao for definida ou caso o ID nao seja encontrado, cria um div com ID
+	"openlayers" e insere no elemento DOM com ID definido em i3GEO.Interface.IDCORPO
 
 	Calcula varios parametros que sao armazenados na variavel i3GEO.Interface.openlayers.parametrosMap
 	Essa variavel e utilizada como parametro de inicializacao do mapa (ver API do OpenLayers)
@@ -49,8 +52,8 @@ No caso da interface OpenLayers:
 
 No caso da interface GoogleMaps:
 
-	Caso i3GEO.Interface.IDMAPA nao for definida ou caso o ID nao seja encontrado, cria um div com ID "googlemapsdiv" e insere no elemento DOM com
-	ID definido em i3GEO.Interface.IDCORPO
+	Caso i3GEO.Interface.IDMAPA nao for definida ou caso o ID nao seja encontrado, cria um div com
+	ID "googlemapsdiv" e insere no elemento DOM com ID definido em i3GEO.Interface.IDCORPO
 
 	Cria o objeto global i3GeoMap mas ainda nao definido como um objeto do GoogleMaps.
 
