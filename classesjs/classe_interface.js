@@ -1281,7 +1281,9 @@ i3GEO.Interface = {
 				temp.style.position = "absolute";
 				temp.innerHTML = "<p class=paragrafo >"
 						+ i3GEO.parametros.copyright + "</p>";
-				$i(i3GEO.Interface.IDMAPA).appendChild(temp);
+				if($i(i3GEO.Interface.IDMAPA)){
+					$i(i3GEO.Interface.IDMAPA).appendChild(temp);
+				}
 			}
 			if (i3GEO.Interface.openlayers.LAYERFUNDO != "") {
 				i3GEO.Interface.openlayers

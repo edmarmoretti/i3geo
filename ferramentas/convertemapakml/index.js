@@ -83,14 +83,14 @@ i3GEOF.converteMapaKml = {
 		var ins = "",lista,tema;
 		lista = i3GEO.arvoreDeCamadas.CAMADAS;
 		tema = lista[0].name;
-		ins = '<p class="paragrafo" >' + $trad('ajuda',i3GEOF.converteMapaKml.dicionario) +
+		ins = '<div style=margin-left:5px; ><p class="paragrafo" >' + $trad('ajuda',i3GEOF.converteMapaKml.dicionario) +
 		' como o <a href="http://earth.google.com/intl/pt/" target="_blank" > Google Earth</a>. ' + $trad('ajuda2',i3GEOF.converteMapaKml.dicionario) +
 		'<p class="paragrafo" ><a href="'+i3GEO.configura.locaplic+'/documentacao/ajuda/googleearth.htm" target="_blank" > Clique aqui</a> '+ $trad('ajuda3',i3GEOF.converteMapaKml.dicionario) +
 		'<p class="paragrafo" ><b>'+$trad('wms',i3GEOF.converteMapaKml.dicionario)+' </b></p>' +
 		'<p class="paragrafo" > <textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
 		i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+i3GEO.parametros.mapfile+'&typename='+tema+'&request=kml</textarea></p>';
 		ins += '<p class="paragrafo" >'+$trad('ajuda4',i3GEOF.converteMapaKml.dicionario) +
-		'<p class="paragrafo" ><textarea cols="55" rows="2" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/kml.php </textarea></p>';
+		'<p class="paragrafo" ><textarea cols="55" rows="2" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/kml.php </textarea></p></div>';
 		$i(divid).innerHTML += ins;
 	},
 	/*

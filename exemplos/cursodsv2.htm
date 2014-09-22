@@ -8,7 +8,7 @@
 <script src="../pacotes/openlayers/OpenLayers2131.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/black.css">
 </head>
-<body style='margin-left:7px;background:white;'>
+<body style='margin-left:7px;background:white;' class=yui-skin-sam >
 
 <script>
 /************
@@ -34,24 +34,24 @@ Procura pelo elemento DOM com ID definido em i3GEO.Interface.IDCORPO (por defaul
 Define o valor da variavel i3GEO.Interface.IDMAPA que contera o ID do elemento DOM que sera utilizado como container para o mapa
 
 No caso da interface OpenLayers:
-	
+
 	Caso i3GEO.Interface.IDMAPA nao for definida ou caso o ID nao seja encontrado, cria um div com ID "openlayers" e insere no elemento DOM com
 	ID definido em i3GEO.Interface.IDCORPO
-	
+
 	Calcula varios parametros que sao armazenados na variavel i3GEO.Interface.openlayers.parametrosMap
 	Essa variavel e utilizada como parametro de inicializacao do mapa (ver API do OpenLayers)
-	
+
 	A variavel i3GEO.Interface.openlayers.googleLike quando true forca o uso da projecao Mercator
-	
+
 	Cria o objeto global Openlayers com:
-		
+
 		i3geoOL = new OpenLayers.Map('openlayers', i3GEO.Interface.openlayers.parametrosMap);
-	
+
 No caso da interface GoogleMaps:
-	
+
 	Caso i3GEO.Interface.IDMAPA nao for definida ou caso o ID nao seja encontrado, cria um div com ID "googlemapsdiv" e insere no elemento DOM com
 	ID definido em i3GEO.Interface.IDCORPO
-	
+
 	Cria o objeto global i3GeoMap mas ainda nao definido como um objeto do GoogleMaps.
 
 *************/

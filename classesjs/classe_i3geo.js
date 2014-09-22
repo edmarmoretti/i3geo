@@ -274,14 +274,17 @@ var i3GEO = {
 		var tamanho, temp;
 
 		temp = window.location.href.split("?");
-		if (temp[1]) {
-			i3GEO.configura.sid = temp[1];
-			//
-			// O # precisa ser removido, caso contrario, a opcao de reload da
-			// pagina pelo browser as vezes nao funciona
-			//
-			if (i3GEO.configura.sid.split("#")[0]) {
-				i3GEO.configura.sid = i3GEO.configura.sid.split("#")[0];
+		if(temp[1]){
+			temp = temp[1].split("&");
+			if (temp[0] && temp[0] != "") {
+				i3GEO.configura.sid = temp[0];
+				//
+				// O # precisa ser removido, caso contrario, a opcao de reload da
+				// pagina pelo browser as vezes nao funciona
+				//
+				if (i3GEO.configura.sid.split("#")[0]) {
+					i3GEO.configura.sid = i3GEO.configura.sid.split("#")[0];
+				}
 			}
 		} else {
 			i3GEO.configura.sid = "";
