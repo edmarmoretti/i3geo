@@ -1245,13 +1245,11 @@ i3GEOF.graficointerativo1 =
 				baseAxisTitleFont : '9px sans-serif',
 				yAxisTickFormatter : function(valor) {
 					valor = valor + "";
-					valor = format("#.###,", valor);
-					return valor;
+					return format("#.###,", valor);
 				},
 				valueFormat : function(valor) {
 					valor = valor + "";
-					valor = format("#.###,", valor);
-					return valor;
+					return format("#.###,", valor);
 				},
 				valuesAnchor : 'top',
 				valuesVisible : false,
@@ -1438,13 +1436,11 @@ i3GEOF.graficointerativo1 =
 				baseAxisTitle : legendaX,
 				yAxisTickFormatter : function(valor) {
 					valor = valor + "";
-					valor = format("#.###,", valor);
-					return valor;
+					return format("#.###,", valor);
 				},
 				valueFormat : function(valor) {
 					valor = valor + "";
-					valor = format("#.###,", valor);
-					return valor;
+					return format("#.###,", valor);
 				},
 				tooltipFormat : function(scene) {
 					var cat = this.scene.datum.atoms['category'].value, val = this.scene.datum.atoms['value'].value;
