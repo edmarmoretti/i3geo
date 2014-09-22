@@ -270,85 +270,85 @@ i3GEOF.preferencias.dicionario = {
 			es:"",
 			it:""
 		}],
-		46: [{
+		'buscaGoogle': [{
 			pt:"Busca no Google",
 			en:"",
 			es:"",
 			it:""
 		}],
-		47: [{
+		'menuSuspenso': [{
 			pt:"Menu suspenso",
 			en:"",
 			es:"",
 			it:""
 		}],
-		48: [{
+		'mostraLogin': [{
 			pt:"Mostra o item login",
 			en:"",
 			es:"",
 			it:""
 		}],
-		49: [{
+		'mostraMarcadores': [{
 			pt:"Mosta o item marcadores",
 			en:"",
 			es:"",
 			it:""
 		}],
-		50: [{
+		'deslocamentoEsquerda': [{
 			pt:"Deslocamento da esquerda, em pixels",
 			en:"",
 			es:"",
 			it:""
 		}],
-		51: [{
+		'guiasLaterais': [{
 			pt:"Guias laterais",
 			en:"",
 			es:"",
 			it:""
 		}],
-		52: [{
+		'guiaIniciaAberta': [{
 			pt:"Guia que &eacute; iniciada aberta",
 			en:"",
 			es:"",
 			it:""
 		}],
-		53: [{
+		'guiaMovelIniciaAberta': [{
 			pt:"A guia m&oacute;vel iniciar&aacute; aberta",
 			en:"",
 			es:"",
 			it:""
 		}],
-		54: [{
+		'iconeGuiaTemas': [{
 			pt:"&Iacute;cone da guia temas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		55: [{
+		'iconeGuiaAdiciona': [{
 			pt:"&Iacute;cone da guia adiciona",
 			en:"",
 			es:"",
 			it:""
 		}],
-		56: [{
+		'iconeGuiaLegenda': [{
 			pt:"&Iacute;cone da guia legenda",
 			en:"",
 			es:"",
 			it:""
 		}],
-		57: [{
+		'iconeGuiaMapas': [{
 			pt:"&Iacute;cone da guia mapas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		58: [{
+		'larguraPuxadorGuiaMovel': [{
 			pt:"Largura do puxador da guia m&oacute;vel",
 			en:"",
 			es:"",
 			it:""
 		}],
-		59: [{
+		'alturaPuxador': [{
 			pt:"Altura do puxador",
 			en:"",
 			es:"",
@@ -360,13 +360,13 @@ i3GEOF.preferencias.dicionario = {
 			es:"",
 			it:""
 		}],
-		61: [{
+		'larguraGuia': [{
 			pt:"Largura da guia",
 			en:"",
 			es:"",
 			it:""
 		}],
-		62: [{
+		'deslocamentoTopo': [{
 			pt:"Deslocamento em rela&ccedil;&atilde;o ao topo",
 			en:"",
 			es:"",
@@ -378,25 +378,25 @@ i3GEOF.preferencias.dicionario = {
 			es:"",
 			it:""
 		}],
-		64: [{
+		'janelasFlutuantes': [{
 			pt:"Janelas flutuantes",
 			en:"",
 			es:"",
 			it:""
 		}],
-		65: [{
+		'estiloCorpoJanela': [{
 			pt:"Estilo aplicado ao corpo da janela",
 			en:"",
 			es:"",
 			it:""
 		}],
-		66: [{
+		'tipoJanelaAguarde': [{
 			pt:"Tipo de janela de aguarde",
 			en:"",
 			es:"",
 			it:""
 		}],
-		67: [{
+		'janelaAguardeBloqueiaMapa': [{
 			pt:"A janela de aguarde bloqueia o mapa",
 			en:"",
 			es:"",

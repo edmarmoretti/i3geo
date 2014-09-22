@@ -269,88 +269,88 @@ i3GEOF.preferencias = {
 						tipo: "boolean",
 						elemento: "i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa"
 					},{
-						titulo: $trad(46,i3GEOF.preferencias.dicionario),
+						titulo: $trad('buscaGoogle',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google"
 					}
 				]
 			},{
-				titulo: $trad(47,i3GEOF.preferencias.dicionario), //menu superior
+				titulo: $trad('menuSuspenso',i3GEOF.preferencias.dicionario), //menu superior
 				props: [
 					{
-						titulo: $trad(48,i3GEOF.preferencias.dicionario),
+						titulo: $trad('mostraLogin',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin"
 					},{
-						titulo: $trad(49,i3GEOF.preferencias.dicionario),
+						titulo: $trad('mostraMarcadores',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.marcadores"
 					},{
-						titulo: $trad(50,i3GEOF.preferencias.dicionario),
+						titulo: $trad('deslocamentoEsquerda',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda"
 					}
 				]
 			},{
-				titulo: $trad(51,i3GEOF.preferencias.dicionario), //guias
+				titulo: $trad('guiasLaterais',i3GEOF.preferencias.dicionario), //guias
 				props: [
 					{
-						titulo: $trad(52,i3GEOF.preferencias.dicionario),
+						titulo: $trad('guiaIniciaAberta',i3GEOF.preferencias.dicionario),
 						tipo: "select",
 						elemento: "i3GEO.guias.ATUAL",
 						opcoes: ["temas","adiciona","legenda","mapas"]
 					},{
-						titulo: $trad(53,i3GEOF.preferencias.dicionario),
+						titulo: $trad('guiaMovelIniciaAberta',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.guias.guiaMovel.ABERTA"
 					},{
-						titulo: $trad(54,i3GEOF.preferencias.dicionario),
+						titulo: $trad('iconeGuiaTemas',i3GEOF.preferencias.dicionario),
 						tipo: "texto",
 						elemento: "i3GEO.guias.CONFIGURA.temas.icone"
 					},{
-						titulo: $trad(55,i3GEOF.preferencias.dicionario),
+						titulo: $trad('iconeGuiaAdiciona',i3GEOF.preferencias.dicionario),
 						tipo: "texto",
 						elemento: "i3GEO.guias.CONFIGURA.adiciona.icone"
 					},{
-						titulo: $trad(56,i3GEOF.preferencias.dicionario),
+						titulo: $trad('iconeGuiaLegenda',i3GEOF.preferencias.dicionario),
 						tipo: "texto",
 						elemento: "i3GEO.guias.CONFIGURA.legenda.icone"
 					},{
-						titulo: $trad(57,i3GEOF.preferencias.dicionario),
+						titulo: $trad('iconeGuiaMapas',i3GEOF.preferencias.dicionario),
 						tipo: "texto",
 						elemento: "i3GEO.guias.CONFIGURA.mapas.icone"
 					},{
-						titulo: $trad(58,i3GEOF.preferencias.dicionario),
+						titulo: $trad('larguraPuxadorGuiaMovel',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.guias.guiaMovel.config.larguraPuxador"
 					},{
-						titulo: $trad(59,i3GEOF.preferencias.dicionario),
+						titulo: $trad('alturaPuxador',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.guias.guiaMovel.config.alturaPuxador"
 					},{
-						titulo: $trad(61,i3GEOF.preferencias.dicionario),
+						titulo: $trad('larguraGuia',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.guias.guiaMovel.config.larguraGuiaMovel"
 					},{
-						titulo: $trad(62,i3GEOF.preferencias.dicionario),
+						titulo: $trad('deslocamentoTopo',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.guias.guiaMovel.config.topGuiaMovel"
 					}
 				]
 			},{
-				titulo: $trad(64,i3GEOF.preferencias.dicionario), //menu superior
+				titulo: $trad('janelasFlutuantes',i3GEOF.preferencias.dicionario), //menu superior
 				props: [
 					{
-						titulo: $trad(65,i3GEOF.preferencias.dicionario),
+						titulo: $trad('estiloCorpoJanela',i3GEOF.preferencias.dicionario),
 						tipo: "texto",
 						elemento: "i3GEO.janela.ESTILOBD"
 					},{
-						titulo: $trad(66,i3GEOF.preferencias.dicionario),
+						titulo: $trad('tipoJanelaAguarde',i3GEOF.preferencias.dicionario),
 						tipo: "select",
 						elemento: "i3GEO.janela.ESTILOAGUARDE",
 						opcoes: ["normal","reduzida","minima"]
 					},{
-						titulo: $trad(67,i3GEOF.preferencias.dicionario),
+						titulo: $trad('janelaAguardeBloqueiaMapa',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.janela.AGUARDEMODAL"
 					},{
