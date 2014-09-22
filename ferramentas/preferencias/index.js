@@ -44,155 +44,155 @@ i3GEOF.preferencias = {
 	lista: function(){
 		var lista = [
 			{
-				titulo: $trad(80,i3GEOF.preferencias.dicionario),//ferramentas ativas
+				titulo: $trad('iniciaFerramentas',i3GEOF.preferencias.dicionario),//ferramentas ativas
 				props: [
 					{
-						titulo: $trad(86,i3GEOF.preferencias.dicionario),
+						titulo: $trad('localizaLugares',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.locregiao.ativa"
 					},{
-						titulo: $trad(87,i3GEOF.preferencias.dicionario),
+						titulo: $trad('cartogramas',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.metaestat.ativa"
 					},{
-						titulo: $trad(81,i3GEOF.preferencias.dicionario),
+						titulo: $trad('iniciaComLegenda',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.ativa"
 					},{
-						titulo: "<span style=left:10px;position:relative; >"+$trad(82,i3GEOF.preferencias.dicionario)+"</span>",
+						titulo: "<span style=left:10px;position:relative; >"+$trad('largura',i3GEOF.preferencias.dicionario)+"</span>",
 						tipo: "numero",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.largura"
 					},{
-						titulo: "<span style=left:10px;position:relative; >"+$trad(83,i3GEOF.preferencias.dicionario)+"</span>",
+						titulo: "<span style=left:10px;position:relative; >"+$trad('altura',i3GEOF.preferencias.dicionario)+"</span>",
 						tipo: "numero",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.altura"
 					},{
-						titulo: "<span style=left:10px;position:relative; >"+$trad(84,i3GEOF.preferencias.dicionario)+"</span>",
+						titulo: "<span style=left:10px;position:relative; >"+$trad('posicaoTopoMapa',i3GEOF.preferencias.dicionario)+"</span>",
 						tipo: "numero",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.topo"
 					},{
-						titulo: "<span style=left:10px;position:relative; >"+$trad(85,i3GEOF.preferencias.dicionario)+"</span>",
+						titulo: "<span style=left:10px;position:relative; >"+$trad('posicaoEsquerdaMapa',i3GEOF.preferencias.dicionario)+"</span>",
 						tipo: "numero",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.legenda.esquerda"
 					}
 				]
 			},{
-				titulo: $trad(9,i3GEOF.preferencias.dicionario),//barra de botoes
+				titulo: $trad('barraBotoes',i3GEOF.preferencias.dicionario),//barra de botoes
 				props: [
 					{
-						titulo: $trad(4,i3GEOF.preferencias.dicionario),
+						titulo: $trad('maxBotoes',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.barraDeBotoes.MAXBOTOES"
 					},{
-						titulo: $trad(5,i3GEOF.preferencias.dicionario),
+						titulo: $trad('mostraBarra',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.barraDeBotoes.ATIVA"
 					},{
-						titulo: $trad(6,i3GEOF.preferencias.dicionario),
+						titulo: $trad('deslocamentoVertical',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.barraDeBotoes.OFFSET"
 					},{
-						titulo: $trad(7,i3GEOF.preferencias.dicionario),
+						titulo: $trad('posicao',i3GEOF.preferencias.dicionario),
 						tipo: "select",
 						elemento: "i3GEO.barraDeBotoes.POSICAO",
 						opcoes: ["bottom","top"]
 					},{
-						titulo: $trad(8,i3GEOF.preferencias.dicionario),
+						titulo: $trad('botoes',i3GEOF.preferencias.dicionario),
 						tipo: "multiselect",
 						elemento: "i3GEO.barraDeBotoes.INCLUIBOTAO",
 						opcoes: i3GEO.barraDeBotoes.INCLUIBOTAO
 					}
 				]
 			},{
-				titulo: $trad(10,i3GEOF.preferencias.dicionario),
+				titulo: $trad('arvoreCamadas',i3GEOF.preferencias.dicionario),
 				props: [
 					{
-						titulo: $trad(11,i3GEOF.preferencias.dicionario),
+						titulo: $trad('mostraBarraProgresso',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.BARRAPROGRESSO"
 					},{
-						titulo: $trad(12,i3GEOF.preferencias.dicionario),
+						titulo: $trad('marcaTema',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS"
 					},{
-						titulo: $trad(13,i3GEOF.preferencias.dicionario),
+						titulo: $trad('mostraApenasLegenda',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.EXPANDESOLEGENDA"
 					},{
-						titulo: $trad(14,i3GEOF.preferencias.dicionario),
+						titulo: $trad('mostraOpcoesTema',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.PERMITEEXPANDIRTEMAS"
 					},{
-						titulo: $trad(15,i3GEOF.preferencias.dicionario),
+						titulo: $trad('expandeArvore',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.EXPANDIDA"
 					},{
-						titulo: $trad(16,i3GEOF.preferencias.dicionario),
+						titulo: $trad('expandeLegenda',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.LEGENDAEXPANDIDA"
 					},{
-						titulo: $trad(17,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiIconesOpcoesTema',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.OPCOESICONES"
 					},{
-						titulo: $trad(18,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiNoOpcoesTema',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.OPCOESTEMAS"
 					},{
-						titulo: $trad(19,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiNoLegendaTema',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.OPCOESLEGENDA"
 					},{
-						titulo: $trad(20,i3GEOF.preferencias.dicionario),
+						titulo: $trad('ativaAguardeLegenda',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.AGUARDALEGENDA"
 					},{
-						titulo: $trad(21,i3GEOF.preferencias.dicionario),
+						titulo: $trad('mostraIconeTema',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.ICONETEMA"
 					},{
-						titulo: $trad(22,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiFuncaoTema',i3GEOF.preferencias.dicionario),
 						tipo: "multiselect",
 						elemento: "i3GEO.arvoreDeCamadas.FUNCOES",
 						opcoes: i3GEO.arvoreDeCamadas.FUNCOES
 					}
 				]
 			},{
-				titulo: $trad(23,i3GEOF.preferencias.dicionario),
+				titulo: $trad('arvoreCamada',i3GEOF.preferencias.dicionario),
 				props: [
 					{
-						titulo: $trad(24,i3GEOF.preferencias.dicionario),
+						titulo: $trad('botoes2',i3GEOF.preferencias.dicionario),
 						tipo: "multiselect",
 						elemento: "i3GEO.arvoreDeTemas.OPCOESADICIONAIS",
 						opcoes: i3GEO.arvoreDeTemas.OPCOESADICIONAIS
 					},{
-						titulo: $trad(25,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiListaSistemasAdicionais',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeTemas.INCLUISISTEMAS"
 					},{
-						titulo: $trad(26,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiListaWMS',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeTemas.INCLUIWMS"
 					},{
-						titulo: $trad(27,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiListaWMSInde',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeTemas.INCLUIINDIBR"
 					},{
-						titulo: $trad(28,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiListaWMSMetaestat',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT"
 					},{
-						titulo: $trad(29,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiEstrelaAcessos',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeTemas.INCLUIESTRELAS"
 					},{
-						titulo: $trad(41,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiLimitesMetaestat',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeTemas.INCLUIREGIOES"
 					}
 				]
 			},{
-				titulo: $trad(30,i3GEOF.preferencias.dicionario),//mapa
+				titulo: $trad('mapa',i3GEOF.preferencias.dicionario),//mapa
 				props: [
 					{//elemento input do tipo hidden com id igual ao valor de elemento
 						titulo: "",
@@ -203,54 +203,54 @@ i3GEOF.preferencias = {
 						tipo: "oculto",
 						elemento: "i3GEO.mapa.TEMASINICIAIS"
 					},{//combo que recebera funcao em onchange
-						titulo: $trad(88,i3GEOF.preferencias.dicionario),
+						titulo: $trad('iniciaCamadasAtuais',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "",
 						funcao: "i3GEOF.preferencias.listaTemasOriginais(this)" //essa funcao atualiza o input oculto i3GEO.mapa.TEMASINICIAISLIGADOS
 					},{
-						titulo: $trad(63,i3GEOF.preferencias.dicionario),
+						titulo: $trad('mostraIdiomas',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.idioma.MOSTRASELETOR"
 					},{
-						titulo: $trad(31,i3GEOF.preferencias.dicionario),
+						titulo: $trad('guardaExtensaoGeog',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.configura.guardaExtensao"
 					},{
-						titulo: $trad(32,i3GEOF.preferencias.dicionario),
+						titulo: $trad('estiloBalaoIdentifica',i3GEOF.preferencias.dicionario),
 						tipo: "select",
 						elemento: "i3GEO.configura.tipotip",
 						opcoes: ["completo","simples","balao"]
 					},{
-						titulo: $trad(33,i3GEOF.preferencias.dicionario),
+						titulo: $trad('alturaBalaoIdentifica',i3GEOF.preferencias.dicionario),
 						tipo: "texto",
 						elemento: "i3GEO.configura.alturatip"
 					},{
-						titulo: $trad(34,i3GEOF.preferencias.dicionario),
+						titulo: $trad('larguraBalaoIdentifica',i3GEOF.preferencias.dicionario),
 						tipo: "texto",
 						elemento: "i3GEO.configura.larguratip"
 					},{
-						titulo: $trad(35,i3GEOF.preferencias.dicionario),
+						titulo: $trad('abreMapaReferencia',i3GEOF.preferencias.dicionario),
 						tipo: "select",
 						elemento: "i3GEO.configura.mapaRefDisplay",
 						opcoes: ["block","none"]
 					},{
-						titulo: $trad(36,i3GEOF.preferencias.dicionario),
+						titulo: $trad('diminuiLarguraMapa',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.configura.diminuixN"
 					},{
-						titulo: $trad(37,i3GEOF.preferencias.dicionario),
+						titulo: $trad('diminuiAlturaMapa',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.configura.diminuiyN"
 					},{
-						titulo: $trad(38,i3GEOF.preferencias.dicionario),
+						titulo: $trad('diminuiLarguraMapaIE',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.configura.diminuixM"
 					},{
-						titulo: $trad(39,i3GEOF.preferencias.dicionario),
+						titulo: $trad('diminuiAlturaMapaIE',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.configura.diminuiyM"
 					},{
-						titulo: $trad(40,i3GEOF.preferencias.dicionario),
+						titulo: $trad('tipoCoordRodape',i3GEOF.preferencias.dicionario),
 						tipo: "select",
 						elemento: "i3GEO.coordenadas.padrao",
 						opcoes: ["geoProj","dd","policonicaSad69","utmSad69Proj","utmSirgas2000Proj"]
@@ -258,14 +258,14 @@ i3GEOF.preferencias = {
 
 				]
 			},{
-				titulo: $trad(43,i3GEOF.preferencias.dicionario), //busca rapida
+				titulo: $trad('buscaRapida',i3GEOF.preferencias.dicionario), //busca rapida
 				props: [
 					{
-						titulo: $trad(44,i3GEOF.preferencias.dicionario),
+						titulo: $trad('utilizaServicoExternoBusca',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos"
 					},{
-						titulo: $trad(45,i3GEOF.preferencias.dicionario),
+						titulo: $trad('buscaTemasExsitentes',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa"
 					},{

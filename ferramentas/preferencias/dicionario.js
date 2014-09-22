@@ -18,229 +18,229 @@ i3GEOF.preferencias.dicionario = {
 			es:"",
 			it:""
 		}],
-		4: [{
+		'maxBotoes': [{
 			pt:"N&uacute;mero m&aacute;ximo de bot&otilde;es",
 			en:"",
 			es:"",
 			it:""
 		}],
-		5: [{
+		'mostraBarra': [{
 			pt:"Mostra a barra",
 			en:"",
 			es:"",
 			it:""
 		}],
-		6: [{
+		'deslocamentoVertical': [{
 			pt:"Deslocamento vertical",
 			en:"",
 			es:"",
 			it:""
 		}],
-		7: [{
+		'posicao': [{
 			pt:"Posi&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		8: [{
+		'botoes': [{
 			pt:"Bot&otilde;es",
 			en:"",
 			es:"",
 			it:""
 		}],
-		9: [{
+		'barraBotoes': [{
 			pt:"Barra de bot&otilde;es",
 			en:"",
 			es:"",
 			it:""
 		}],
-		10: [{
+		'arvoreCamadas': [{
 			pt:"&Aacute;rvore de camadas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		11: [{
+		'mostraBarraProgresso': [{
 			pt:"Mostra a barra de progresso ao redesenhar as camadas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		12: [{
+		'marcaTema': [{
 			pt:"Marca o tema quando estiver contido na &aacute;rea mostrada no mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		13: [{
+		'mostraApenasLegenda': [{
 			pt:"Ao expandir um tema mostra apenas a legenda, sem as outras op&ccedil;&otilde;es",
 			en:"",
 			es:"",
 			it:""
 		}],
-		14: [{
+		'mostraOpcoesTema': [{
 			pt:"Permite que as op&ccedil;&otilde;es abaixo dos n&oacute;s referentes a cada tema sejam mostradas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		15: [{
+		'expandeArvore': [{
 			pt:"A &aacute;rvore ser&aacute; montada de forma expandida ou n&atilde;o. Se true, os n&oacute;s do primeiro n&iacute;vel ser&atilde;o abertos na inicializa&ccedil;&atilde;o da &aacute;rvore",
 			en:"",
 			es:"",
 			it:""
 		}],
-		16: [{
+		'expandeLegenda': [{
 			pt:"A legenda da &aacute;rvore ser&aacute; montada de forma expandida ou n&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		17: [{
+		'incluiIconesOpcoesTema': [{
 			pt:"Inclui ou n&atilde;o os &iacute;cones de op&ccedil;&otilde;es em cada tema (farol, zoom para o tema, etc)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		18: [{
+		'incluiNoOpcoesTema': [{
 			pt:"Inclui ou n&atilde;o o n&oacute; com as op&ccedil;&otilde;es de manipula&ccedil;&atilde;o de cada tema",
 			en:"",
 			es:"",
 			it:""
 		}],
-		19: [{
+		'incluiNoLegendaTema': [{
 			pt:"Inclui ou n&atilde;o o n&oacute; para mostrar a legenda do tema",
 			en:"",
 			es:"",
 			it:""
 		}],
-		20: [{
+		'ativaAguardeLegenda': [{
 			pt:"Ativa a op&ccedil;&atilde;o de aguarde para mostrar a legenda de um tema quando o usu&aacute;rio estaciona o mouse sobre o nome de um tema",
 			en:"",
 			es:"",
 			it:""
 		}],
-		21: [{
+		'mostraIconeTema': [{
 			pt:"Mostra ou n&atilde;o o &iacute;cone que repreenta o tema caso exista",
 			en:"",
 			es:"",
 			it:""
 		}],
-		22: [{
+		'incluiFuncaoTema': [{
 			pt:"Indica&ccedil;&atilde;o de quais fun&ccedil;&otilde;es ser&atilde;o inclu&iacute;das em cada tema mostrado na &aacute;rvore quando o usu&aacute;rio aciona o item op&ccedil;&otilde;es",
 			en:"",
 			es:"",
 			it:""
 		}],
-		23: [{
+		'arvoreCamada': [{
 			pt:"&Aacute;rvore de temas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		24: [{
-			pt:"Botões",
+		'botoes2': [{
+			pt:"Bot&otilde;es",
 			en:"",
 			es:"",
 			it:""
 		}],
-		25: [{
+		'incluiListaSistemasAdicionais': [{
 			pt:"Inclui a lista de sistemas adicionais que adicionam camadas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		26: [{
+		'incluiListaWMS': [{
 			pt:"Inclui a lista de WMS cadastrados",
 			en:"",
 			es:"",
 			it:""
 		}],
-		27: [{
+		'incluiListaWMSInde': [{
 			pt:"Inclui a lista de WMS cadastrados na INDE Brasileira",
 			en:"",
 			es:"",
 			it:""
 		}],
-		28: [{
-			pt:"Inclui a lista de WMS originados do sistema de metadados estatísticos",
+		'incluiListaWMSMetaestat': [{
+			pt:"Inclui a lista de WMS originados do sistema de metadados estatï¿½sticos",
 			en:"",
 			es:"",
 			it:""
 		}],
-		29: [{
+		'incluiEstrelaAcessos': [{
 			pt:"Inclui as estrelas que classificam os temas com base no volume de acessos",
 			en:"",
 			es:"",
 			it:""
 		}],
-		30: [{
+		'mapa': [{
 			pt:"Mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		31: [{
+		'guardaExtensaoGeog': [{
 			pt:"Armazena a &uacute;ltima extens&atilde;o geogr&aacute;fica utilizada",
 			en:"",
 			es:"",
 			it:""
 		}],
-		32: [{
+		'estiloBalaoIdentifica': [{
 			pt:"Estilo do bal&atilde;o de identifica&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		33: [{
+		'alturaBalaoIdentifica': [{
 			pt:"Altura do bal&atilde;o de identifica&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		34: [{
+		'larguraBalaoIdentifica': [{
 			pt:"Largura do bal&atilde;o de identifica&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		35: [{
+		'abreMapaReferencia': [{
 			pt:"Indica se o mapa de refer&ecirc;ncia dever&aacute; ser aberto quando o i3Geo for inicializado",
 			en:"",
 			es:"",
 			it:""
 		}],
-		36: [{
+		'diminuiLarguraMapa': [{
 			pt:"Diminui a largura do mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		37: [{
+		'diminuiAlturaMapa': [{
 			pt:"Diminui a altura do mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		38: [{
+		'diminuiLarguraMapaIE': [{
 			pt:"Diminui a largura do mapa (navevagador IE)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		39: [{
+		'diminuiAlturaMapaIE': [{
 			pt:"Diminui a altura do mapa (navevagador IE)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		40: [{
+		'tipoCoordRodape': [{
 			pt:"Tipo de coordenada mostrada no rodap&eacute;",
 			en:"",
 			es:"",
 			it:""
 		}],
-		41: [{
+		'incluiLimitesMetaestat': [{
 			pt:"Inclu&iacute; na &aacute;rvore os limites e localidades cadastrados no sistema de metadados estat&iacute;sticos",
 			en:"",
 			es:"",
@@ -252,19 +252,19 @@ i3GEOF.preferencias.dicionario = {
 			es:"",
 			it:""
 		}],
-		43: [{
+		'buscaRapida': [{
 			pt:"Busca r&aacute;pida",
 			en:"",
 			es:"",
 			it:""
 		}],
-		44: [{
+		'utilizaServicoExternoBusca': [{
 			pt:"Utiliza o servi&ccedil;o externo de busca",
 			en:"",
 			es:"",
 			it:""
 		}],
-		45: [{
+		'buscaTemasExsitentes': [{
 			pt:"Busca nos temas existentes no mapa",
 			en:"",
 			es:"",
@@ -367,12 +367,12 @@ i3GEOF.preferencias.dicionario = {
 			it:""
 		}],
 		62: [{
-			pt:"Deslocamento em relação ao topo",
+			pt:"Deslocamento em rela&ccedil;&atilde;o ao topo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		63: [{
+		'mostraIdiomas': [{
 			pt:"Mostra o seletor de idiomas",
 			en:"",
 			es:"",
@@ -474,55 +474,55 @@ i3GEOF.preferencias.dicionario = {
 			es:"",
 			it:""
 		}],
-		80: [{
+		'iniciaFerramentas': [{
 			pt:"Inicializa&ccedil;&atilde;o de ferramentas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		81: [{
+		'iniciaComLegenda': [{
 			pt:"Inicializa a janela com a legenda",
 			en:"",
 			es:"",
 			it:""
 		}],
-		82: [{
+		'largura': [{
 			pt:"Largura",
 			en:"",
 			es:"",
 			it:""
 		}],
-		83: [{
+		'altura': [{
 			pt:"Altura",
 			en:"",
 			es:"",
 			it:""
 		}],
-		84: [{
+		'posicaoTopoMapa': [{
 			pt:"Posi&ccedil;&atilde;o no topo do mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		85: [{
+		'posicaoEsquerdaMapa': [{
 			pt:"Posi&ccedil;&atilde;o &agrave; esquerda do mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		86: [{
+		'localizaLugares': [{
 			pt:"Localiza&ccedil;&atilde;o de lugares",
 			en:"",
 			es:"",
 			it:""
 		}],
-		87: [{
+		'cartogramas': [{
 			pt:"Cartogramas",
 			en:"",
 			es:"",
 			it:""
 		}],
-		88: [{
+		'iniciaCamadasAtuais': [{
 			pt:"Inicializa o mapa com as camadas existentes no mapa atual",
 			en:"",
 			es:"",
