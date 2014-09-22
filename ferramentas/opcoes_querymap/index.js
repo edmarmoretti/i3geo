@@ -116,7 +116,7 @@ i3GEOF.opcoesQuery = {
 		var ins = $inputText("","","i3GEOopcoesQuerycor","",12,"") +
 		'<img alt="aquarela.gif" style=cursor:pointer '+
 		'src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesQuery.corj(\'i3GEOopcoesQuerycor\')" /> ' +
-		'<br><br><p class=paragrafo ><input size=20 id=i3GEOopcoesQuerybotao1 type=button value="'+$trad(1,i3GEOF.opcoesQuery.dicionario)+'"  />';
+		'<br><br><p class=paragrafo ><input size=20 id=i3GEOopcoesQuerybotao1 type=button value="'+$trad('aplica',i3GEOF.opcoesQuery.dicionario)+'"  />';
 		return ins;
 	},
 	/*
@@ -161,7 +161,7 @@ i3GEOF.opcoesQuery = {
 	/*
 	Function: executa
 
-	Aplica os parâmetros definidos
+	Aplica os parï¿½metros definidos
 
 	Veja:
 

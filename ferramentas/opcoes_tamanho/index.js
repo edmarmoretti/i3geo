@@ -102,7 +102,7 @@ i3GEOF.opcoesTamanho = {
 			box.style.height = i3GEO.parametros.h + "px";
 			box.style.display = "block";
 			box.style.zIndex = 2;
-			i3GEO.janela.tempoMsg($trad(6,i3GEOF.opcoesLegenda.dicionario));
+			i3GEO.janela.tempoMsg($trad('msg',i3GEOF.opcoesTamanho.dicionario));
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -118,16 +118,16 @@ i3GEOF.opcoesTamanho = {
 	html:function(){
 		var ins = '<table summary="" class=lista width="100%">' +
 		'<table summary="" class=lista > '+
-		'	<tr><td>'+$trad(1,i3GEOF.opcoesTamanho.dicionario)+':</td><td>' +
+		'	<tr><td>'+$trad('largura',i3GEOF.opcoesTamanho.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOopcoesTamanhol","",4,i3GEO.parametros.w) +
 		'	</td></tr><tr><td>&nbsp;</td><td></td></tr>'+
-		'	<tr><td>'+$trad(2,i3GEOF.opcoesTamanho.dicionario)+':</td><td>' +
+		'	<tr><td>'+$trad('altura',i3GEOF.opcoesTamanho.dicionario)+':</td><td>' +
 		$inputText("","","i3GEOopcoesTamanhoa","",4,i3GEO.parametros.h) +
 		'	</td></tr><tr><td>&nbsp;</td><td></td></tr>'+
 		'</table>' +
-		'<p class=paragrafo >'+$trad(3,i3GEOF.opcoesTamanho.dicionario)+'</p>' +
-		'<p class=paragrafo ><input id=i3GEOopcoesTamanhobotao2 size=16  type=button value="'+$trad(4,i3GEOF.opcoesTamanho.dicionario)+'"/>' +
-	  	'<input id=i3GEOopcoesTamanhobotao1 size=16  type=button value="'+$trad(5,i3GEOF.opcoesTamanho.dicionario)+'"/>';
+		'<p class=paragrafo >'+$trad('valor',i3GEOF.opcoesTamanho.dicionario)+'</p>' +
+		'<p class=paragrafo ><input id=i3GEOopcoesTamanhobotao2 size=16  type=button value="'+$trad('testa',i3GEOF.opcoesTamanho.dicionario)+'"/>' +
+	  	'<input id=i3GEOopcoesTamanhobotao1 size=16  type=button value="'+$trad('aplica',i3GEOF.opcoesTamanho.dicionario)+'"/>';
 		return ins;
 	},
 	/*

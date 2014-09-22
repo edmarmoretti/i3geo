@@ -100,7 +100,7 @@ i3GEOF.opcoesLegenda = {
 		}
 		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
 		if(i3GEO.Interface.ATUAL !== "padrao")
-		{i3GEO.janela.tempoMsg($trad(1,i3GEOF.opcoesLegenda.dicionario));}
+		{i3GEO.janela.tempoMsg($trad('msg',i3GEOF.opcoesLegenda.dicionario));}
 	},
 	/*
 	Function: html
@@ -113,7 +113,7 @@ i3GEOF.opcoesLegenda = {
 	*/
 	html:function(){
 		var ins = '<table summary="" class=lista >' +
-			'<tr><td>'+$trad(2,i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
+			'<tr><td>'+$trad('incluiNoMapa',i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
 			'	<select id=i3GEOopcoesLegendastatus >' +
 			'		<option value=3 >'+$trad("x14")+'</option>' +
 			'		<option value=1 >'+$trad("x15")+'</option>' +
@@ -121,53 +121,53 @@ i3GEOF.opcoesLegenda = {
 			'	</select>' +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad(3,i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
+			'<tr><td>'+$trad('corFundo',i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
 			$inputText("","","i3GEOopcoesLegendaimagecolor","",12,"") +
 			'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesLegenda.corj(\'i3GEOopcoesLegendaimagecolor\')" />' +
 			'</td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad(4,i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
+			'<tr><td>'+$trad('contornoSimbolos',i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
 			$inputText("","","i3GEOopcoesLegendaoutlinecolor","",12,"") +
 			'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesLegenda.corj(\'i3GEOopcoesLegendaoutlinecolor\')" />' +
 			'</td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad(5,i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
+			'<tr><td>'+$trad('posicao',i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
 			'	<select id=i3GEOopcoesLegendaposition >' +
-			'		<option value=101 >'+$trad(6,i3GEOF.opcoesLegenda.dicionario)+'</option>' +
-			'		<option value=107 >'+$trad(7,i3GEOF.opcoesLegenda.dicionario)+'</option>' +
-			'		<option value=103 selected >'+$trad(8,i3GEOF.opcoesLegenda.dicionario)+'</option>' +
-			'		<option value=104 >'+$trad(9,i3GEOF.opcoesLegenda.dicionario)+'</option>' +
-			'		<option value=108 >'+$trad(10,i3GEOF.opcoesLegenda.dicionario)+'</option>' +
-			'		<option value=102 >'+$trad(11,i3GEOF.opcoesLegenda.dicionario)+'</option>' +
+			'		<option value=101 >'+$trad('supEsquerdo',i3GEOF.opcoesLegenda.dicionario)+'</option>' +
+			'		<option value=107 >'+$trad('supCentro',i3GEOF.opcoesLegenda.dicionario)+'</option>' +
+			'		<option value=103 selected >'+$trad('supDireito',i3GEOF.opcoesLegenda.dicionario)+'</option>' +
+			'		<option value=104 >'+$trad('infEsquerdo',i3GEOF.opcoesLegenda.dicionario)+'</option>' +
+			'		<option value=108 >'+$trad('infCentro',i3GEOF.opcoesLegenda.dicionario)+'</option>' +
+			'		<option value=102 >'+$trad('infDireito',i3GEOF.opcoesLegenda.dicionario)+'</option>' +
 			'	</select>' +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad(12,i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
+			'<tr><td>'+$trad('espacamentoY',i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeyspacingy","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad(13,i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
+			'<tr><td>'+$trad('espacamentoX',i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeyspacingx","",4,"") +
 			'</td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad(14,i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
+			'<tr><td>'+$trad('tamanhoSimboloY',i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeysizey","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad(15,i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
+			'<tr><td>'+$trad('tamanhoSimboloX',i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeysizex","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad(16,i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
+			'<tr><td>'+$trad('tamanhoTexto',i3GEOF.opcoesLegenda.dicionario)+':</td><td>' +
 			$inputText("","","i3GEOopcoesLegendalabelsize","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad(17,i3GEOF.opcoesLegenda.dicionario)+'</td>' +
+			'<tr><td>'+$trad('fonte',i3GEOF.opcoesLegenda.dicionario)+'</td>' +
 			'	<td id=i3GEOopcoesLegendafontef >aguarde...</td>' +
 			'</tr></table><br>'+
 			'<p class=paragrafo >' +
-			'<input id=i3GEOopcoesLegendabotao1 size=20  type=button value="'+$trad(18,i3GEOF.opcoesLegenda.dicionario)+'" />' +
-			'<input id=i3GEOopcoesLegendabotao2 size=20 type=button value="'+$trad(19,i3GEOF.opcoesLegenda.dicionario)+'" />' +
+			'<input id=i3GEOopcoesLegendabotao1 size=20  type=button value="'+$trad('aplica',i3GEOF.opcoesLegenda.dicionario)+'" />' +
+			'<input id=i3GEOopcoesLegendabotao2 size=20 type=button value="'+$trad('testa',i3GEOF.opcoesLegenda.dicionario)+'" />' +
 			'</p><br><img alt="teste" src="" id=i3GEOopcoesLegendatesteLegenda style="display:none"/>';
 		return ins;
 	},
@@ -237,7 +237,7 @@ i3GEOF.opcoesLegenda = {
 	/*
 	Function: parametrosAtuais
 
-	Pega os parâmetros atuais da legenda
+	Pega os parï¿½metros atuais da legenda
 
 	Veja:
 
