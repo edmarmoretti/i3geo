@@ -153,20 +153,20 @@ i3GEOF.pontoEmPoligono = {
 	t0: function()
 	{
 		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/exemplo.png' />" +
-		"<p class='paragrafo'>"+$trad(1,i3GEOF.pontoEmPoligono.dicionario) +
-		"<p class='paragrafo'>"+$trad(2,i3GEOF.pontoEmPoligono.dicionario) +
-		"<p class='paragrafo'>"+$trad(3,i3GEOF.pontoEmPoligono.dicionario);
+		"<p class='paragrafo'>"+$trad('ajuda',i3GEOF.pontoEmPoligono.dicionario) +
+		"<p class='paragrafo'>"+$trad('ajuda2',i3GEOF.pontoEmPoligono.dicionario) +
+		"<p class='paragrafo'>"+$trad('ajuda3',i3GEOF.pontoEmPoligono.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.pontoEmPoligono.t1()",ins,"i3GEOFgradeDePontost0","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.pontoEmPoligono.dicionario);
+		var ins = "<p class='paragrafo'>"+$trad('selecionaTema',i3GEOF.pontoEmPoligono.dicionario);
 		ins += "<div id='i3GEOpontoEmPoligonoSelTemasPt' style='text-align:left;font-size:11px'></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t0()","i3GEOF.pontoEmPoligono.t2()",ins,"i3GEOF.pontoEmPoligono.t1","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 		i3GEOF.pontoEmPoligono.comboTemasSelPt();
 	},
 	t2: function(){
 		var erro = function(){
-			var ins = "<p class=i3GEO.janela.tempoMsga >"+$trad(5,i3GEOF.pontoEmPoligono.dicionario);
+			var ins = "<p class=i3GEO.janela.tempoMsga >"+$trad('msgSelecionaTema',i3GEOF.pontoEmPoligono.dicionario);
 			i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 		};
 		if($i("i3GEOpontoEmPoligonotemasComSelPt"))
@@ -175,7 +175,7 @@ i3GEOF.pontoEmPoligono = {
 			{erro.call();}
 			else
 			{
-				var ins = "<p class='paragrafo'>"+$trad(6,i3GEOF.pontoEmPoligono.dicionario);
+				var ins = "<p class='paragrafo'>"+$trad('SelecionaTemaCruzamento',i3GEOF.pontoEmPoligono.dicionario);
 				ins += "<div id='i3GEOpontoEmPoligonoSelTemasPo' style='text-align:left;font-size:11px'></div>";
 				i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t1()","i3GEOF.pontoEmPoligono.t3()",ins,"i3GEOF.pontoEmPoligono.t2","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 				i3GEOF.pontoEmPoligono.comboTemasSelPo();
@@ -185,7 +185,7 @@ i3GEOF.pontoEmPoligono = {
 		{erro.call();}
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>"+$trad(7,i3GEOF.pontoEmPoligono.dicionario);
+		var ins = "<p class='paragrafo'>"+$trad('adicionaTema',i3GEOF.pontoEmPoligono.dicionario);
 		ins += "<br><br><input id=i3GEOpontoEmPoligonobotao1 type='buttom' value='Cruzar' />";
 		i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t2()","",ins,"i3GEOF.pontoEmPoligono.t3","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 		new YAHOO.widget.Button(
@@ -218,7 +218,7 @@ i3GEOF.pontoEmPoligono = {
 				}
 			}
 			if (tsl == 0)
-			{i3GEO.janela.tempoMsg($trad(8,i3GEOF.pontoEmPoligono.dicionario));}
+			{i3GEO.janela.tempoMsg($trad('msgRasterPoligono',i3GEOF.pontoEmPoligono.dicionario));}
 			else
 			{
 				i3GEOF.pontoEmPoligono.aguarde.visibility = "visible";
@@ -228,7 +228,7 @@ i3GEOF.pontoEmPoligono = {
 					{i3GEO.janela.tempoMsg("Erro.");}
 					else{
 						i3GEO.atualiza();
-						i3GEO.janela.mensagemSimples(retorno.data,$trad(9,i3GEOF.pontoEmPoligono.dicionario));
+						i3GEO.janela.mensagemSimples(retorno.data,$trad('colunas',i3GEOF.pontoEmPoligono.dicionario));
 					}
 				};
 				p = i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pontoEmPoligono&temaPt="+temapt+"&temasPo="+tsl.join(",")+"&ext="+i3GEO.parametros.mapexten;
