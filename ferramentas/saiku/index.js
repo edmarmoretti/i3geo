@@ -106,13 +106,13 @@ i3GEOF.saiku = {
 	*/
 	html:function(){
 		var ins = "<p class=paragrafo >Saiku: <a href=http://meteorite.bi/saiku target=_blank >http://meteorite.bi/saiku</a></p>" +
-			"<p class=paragrafo >" + $trad(1,i3GEOF.saiku.dicionario) + "<p>";
+			"<p class=paragrafo >" + $trad('ajuda',i3GEOF.saiku.dicionario) + "<p>";
 		if(i3GEO.parametros.saikuUrl !== ""){
-			ins += "<input id=i3GEOFsaikubotao1 size=20  type=button value='"+$trad(2,i3GEOF.saiku.dicionario)+"' />" +
-				"<input id=i3GEOFsaikubotao2 size=20  type=button value='"+$trad(4,i3GEOF.saiku.dicionario)+"' />";
+			ins += "<input id=i3GEOFsaikubotao1 size=20  type=button value='"+$trad('abreSaikuNovaJanela',i3GEOF.saiku.dicionario)+"' />" +
+				"<input id=i3GEOFsaikubotao2 size=20  type=button value='"+$trad('atualizaMapa',i3GEOF.saiku.dicionario)+"' />";
 		}
 		else{
-			ins += "<p class=paragrafo style=color:red >" + $trad(3,i3GEOF.saiku.dicionario) + "<p>";
+			ins += "<p class=paragrafo style=color:red >" + $trad('servidorNaoDisponivel',i3GEOF.saiku.dicionario) + "<p>";
 		}
 
 		return ins;
