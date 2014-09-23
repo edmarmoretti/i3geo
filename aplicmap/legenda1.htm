@@ -1,0 +1,21 @@
+<!--
+[leg_layer_html opt_flag=1]
+<table class=legendatemas cellspacing=0 >
+	[if name=legendawms oper=isset ]
+	<tr>
+		<td style="text-align: left"><img src='[metadata name=legendawms]' /></td>
+	</tr>
+	[/if] [if name=legendaimg oper=isset ]
+	[if name=legendaimg oper=neq value="" ]
+	<tr>
+		<td style="text-align: left"><img src='[metadata name=legendaimg]' /></td>
+	</tr>
+	[/if]
+	[/if] [/leg_layer_html] [leg_class_html] [if name=CLASSE oper=neq value=NAO]
+	<tr>
+		<td style="text-align: left; width: 15px;"><img src=[leg_icon width=16 height=16 ] /></td>
+		<td style="text-align: left;><span style="font-size: 9px; position: relative; left: 2px;">[leg_class_name]</span></td>
+	</tr>
+	[/if] [/leg_class_html]
+</table>
+-->
