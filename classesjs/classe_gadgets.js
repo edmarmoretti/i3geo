@@ -89,18 +89,7 @@ i3GEO.gadgets = {
 		"mostraHistoricoZoom":
 
 		{idhtml:"historicozoom"},
-		//inclui op&ccedil;&atilde;o admin
-		try{
-			if(i3GEO.parametros.editor === "sim"){
-				i3GEO.configura.oMenuData.menu.push({nome:"Admin",id:"i3GeoAdmin"});
-				i3GEO.configura.oMenuData.submenus.i3GeoAdmin = [
-				{id:"omenudataAdmin1",text: "P&aacute;gina principal", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/index.html')" },
-				{id:"omenudataAdmin2",text: "Cat&aacute;logo", url: "javascript:var w = window.open(i3GEO.configura.locaplic+'/admin/html/arvore.html')" },
-				{id:"omenudataAdmin3",text: "Menus", url: "javascript:i3GEO.arvoreDeTemas.abrejanelaIframe('900','700','"+i3GEO.configura.locaplic+"/admin/html/menus.html\')"}
-				];
-			}
-		}
-		catch(e){}
+
 		"mostraMenuSuspenso":
 
 		{marcadores: true, permiteLogin: true,idhtml:"menus",deslocaEsquerda:0,finaliza:"",parametrosYUI={}},
@@ -336,7 +325,7 @@ i3GEO.gadgets = {
 		{id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;}
 		i3GEO.gadgets.mostraBuscaRapida.id = id;
 		if($i(id)){
-			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >" 
+			i = "<form id=i3GEObotaoFormBuscaRapida"+id+" >"
 			+ "<div class='styled-select' style='width:160px;'><input type=text value='' id='valorBuscaRapida"+id+"' /></div>";
 			+ "</form>";
 			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;&nbsp;</a></td><td>"+i+"</td>";
@@ -492,7 +481,7 @@ i3GEO.gadgets = {
 		if(!objid)
 		{return;}
 		//cria o menu se ainda n&atilde;o existir
-		if(objid && objid.innerHTML === ""){
+		if(objid && objid.innerHTML.trim() === ""){
 			try{
 				if(ms.marcadores === true){
 					//complementa o array com os dados para o menu de marcadores

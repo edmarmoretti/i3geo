@@ -9,35 +9,43 @@
 <link rel="stylesheet" type="text/css" href="../css/black.css">
 </head>
 <body style='margin-left:7px;background:white;' class=yui-skin-sam >
-<div style="top:50px;">
-	<div id="arvoreDeTemas" style="width:250px;height:400px;border:1px solid;float:left;overflow:auto;">
-
-	</div>
+<div id="menuSuspenso" style="width:700px;">
+</div>
+<div>
 	<div id=i3geo >
-		<div id=corpoMapa style="left:255px;width:700px;height:400px;background-image:url('../imagens/i3geo1bw.jpg');">
+		<div id=corpoMapa style="width:700px;height:400px;background-image:url('../imagens/i3geo1bw.jpg');">
 		</div>
 	</div>
 </div>
 <div id="logMapa" ></div>
+<style>
+#menuSuspenso .bd{
+	background: black;
+}
+</style>
 <script>
 /************
-Da mesma forma que a arvore de camadas, a arvore do catalogo de temas pode ser inserida em um local qualquer
+O menu suspenso e tambem um componente construido por meio do YUI2.
 
-Diferentes parametros controlam o conteudo da arvore.
+O objeto menu resultante e manipulado com YAHOO.widget.MenuManager
 
-Saiba mais em: http://localhost/i3geo/documentacao/files/classesjs/classe_arvoredetemas-js.html
+Para inserir no mapa basta indicar qual o elemento HTML de destino.
+
+Ao criar o menu, podem ser definidos alguns parametros, inclusive da propria API do YAHOO.
 
 ************/
 
 i3GEO.idioma.MOSTRASELETOR = false; //para nao mostrar as bandeiras de escolha do idioma
 
-i3GEO.finalizaAPI = function(){
-	i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca = false;
-	i3GEO.arvoreDeTemas.cria(
-			"",
-			"",
-			"arvoreDeTemas");
-};
+//parametros para o menu
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso = {
+		permiteLogin: false,
+		marcadores: true,
+		idhtml:"menuSuspenso",
+		deslocaEsquerda:0,
+		parametrosYUI: {iframe:false,autosubmenudisplay: false, showdelay: 200, hidedelay: 500, lazyload: false}
+	};
+
 i3GEO.cria();
 i3GEO.inicia();
 
