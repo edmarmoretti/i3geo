@@ -106,7 +106,7 @@ i3GEOF.tme = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.tme.html();
 			YAHOO.i3GEO.janela.manager.find("i3GEOF.tme").setFooter(
-				'<input class="paragrafo" id="i3GEOtmebotao1" type="button" value="'+$trad(1,i3GEOF.tme.dicionario)+'" style="cursor:pointer;color:blue"/>'
+				'<input class="paragrafo" id="i3GEOtmebotao1" type="button" value="'+$trad('geraKml',i3GEOF.tme.dicionario)+'" style="cursor:pointer;color:blue"/>'
 			);
 			new YAHOO.widget.Button(
 				"i3GEOtmebotao1",
@@ -145,26 +145,26 @@ i3GEOF.tme = {
 	html:function(){
 		var ins = '' +
 		'<div style="text-align:left;background:yellow;" id=i3GEOTMEresultado ></div>' +
-		'<p class="paragrafo" >'+$trad(2,i3GEOF.tme.dicionario) +
+		'<p class="paragrafo" >'+$trad('tituloMapa',i3GEOF.tme.dicionario) +
 		'<div class=styled-select >' +
 		'<input type=text value="" id="i3GEOTMEtitulo" />' +
 		'</div>' +
-		'<br><p class="paragrafo" >'+$trad(3,i3GEOF.tme.dicionario) +
+		'<br><p class="paragrafo" >'+$trad('descricaoMapa',i3GEOF.tme.dicionario) +
 		'<div class=styled-select >' +
 		'<input type=text value="" id="i3GEOTMEdesc" />' +
 		'</div>' +
-		'<br><p class="paragrafo" >'+$trad(4,i3GEOF.tme.dicionario) +
+		'<br><p class="paragrafo" >'+$trad('alturaMaxBarras',i3GEOF.tme.dicionario) +
 		'<div class=styled-select >' +
 		'<input type=text value="5000" id="i3GEOTMEbarSize" />' +
 		'</div>' +
-		'<br><p class="paragrafo" >'+$trad(5,i3GEOF.tme.dicionario) +
+		'<br><p class="paragrafo" >'+$trad('larguraMaxBarras',i3GEOF.tme.dicionario) +
 		'<div class=styled-select >' +
 		'<input type=text value="2000000" id="i3GEOTMEmaxHeight" />' +
 		'</div>' +
-		'<br><p class="paragrafo" >'+$trad(6,i3GEOF.tme.dicionario) +
+		'<br><p class="paragrafo" >'+$trad('colunaRegioes',i3GEOF.tme.dicionario) +
 		'<div id="i3GEOTMEregioeslista" class=styled-select ></div>' +
 		'<p class="paragrafo" >' +
-		'<br>'+$trad(7,i3GEOF.tme.dicionario) +
+		'<br>'+$trad('colunasDadosEstat',i3GEOF.tme.dicionario) +
 		'<div id=i3GEOtmelistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>' +
 		'<br>' +
 		'<div id=i3GEOtmemen1 style=top:15px;left:0px; ><p class=paragrafo >Ser&aacute; criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regi&otilde;es define o nome que ser&aacute; mostrado para cada elemento mapeado. Quando os nomes das colunas com os valores corresponderem a um determinado ano, ser&aacute; mostrado um bot&atilde;o do tipo slide no Google Earth, mas isso s&oacute; ocorre se o nome da coluna for o mesmo nome do ano, exemplo, para o ano de 1980 o nome da coluna dever&aacute; ser 1980</div>';
@@ -294,12 +294,12 @@ i3GEOF.tme = {
 			if(lista.length === 0)
 			{i3GEO.janela.tempoMsg("selecione um item");return;}
 			if(colunanomeregiao === 0)
-			{i3GEO.janela.tempoMsg($trad(8,i3GEOF.tme.dicionario));return;}
+			{i3GEO.janela.tempoMsg($trad('selecionaItemRegiao',i3GEOF.tme.dicionario));return;}
 			i3GEOF.tme.aguarde.visibility = "visible";
 			temp = function(retorno){
 				i3GEOF.tme.aguarde.visibility = "hidden";
-				var ins = "<p class=paragrafo >" + $trad(9,i3GEOF.tme.dicionario) +"<br><a href='"+retorno.data.url+"' target=new >"+retorno.data.url+"</a><br>";
-				ins += "<br>" + $trad(10,i3GEOF.tme.dicionario) +"<br><a href='"+i3GEO.configura.locaplic+"/ms_criamapa.php?interface=googleearth.phtml&kmlurl="+retorno.data.url+"' target='new' >interface Google Earth</a><br>";
+				var ins = "<p class=paragrafo >" + $trad('arquivoDownload',i3GEOF.tme.dicionario) +"<br><a href='"+retorno.data.url+"' target=new >"+retorno.data.url+"</a><br>";
+				ins += "<br>" + $trad('abreNoI3geo',i3GEOF.tme.dicionario) +"<br><a href='"+i3GEO.configura.locaplic+"/ms_criamapa.php?interface=googleearth.phtml&kmlurl="+retorno.data.url+"' target='new' >interface Google Earth</a><br>";
 				$i("i3GEOTMEresultado").innerHTML = ins;
 			};
 			p = i3GEO.configura.locaplic+"/pacotes/tme/TME_i3geo.php?maxHeight="+$i("i3GEOTMEmaxHeight").value+"&barSize="+$i("i3GEOTMEbarSize").value+"&sid="+i3GEO.configura.sid+"&nomelayer="+i3GEO.temaAtivo+"&colunasvalor="+lista.toString(",")+"&colunanomeregiao="+colunanomeregiao+"&titulo="+$i("i3GEOTMEtitulo").value+"&descricao="+$i("i3GEOTMEdesc").value;

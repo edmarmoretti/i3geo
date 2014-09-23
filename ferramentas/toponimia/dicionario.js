@@ -1,144 +1,144 @@
 //+$trad(1,i3GEOF.toponimia.dicionario)+
 i3GEOF.toponimia.dicionario = {
-		1: [{
+		'fonteDados': [{
 			pt:"Fonte dos dados",
 			en:"",
 			es:"",
 			it:""
 		}],
-		2: [{
+		'propriedades': [{
 			pt:"Propriedades",
 			en:"",
 			es:"",
 			it:""
 		}],
-		3: [{
+		'testa': [{
 			pt:"Testar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		4: [{
+		'selecionaItem': [{
 			pt:"Escolha o item que cont&eacute;m os textos que ser&atilde;o mostrados no mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		5: [{
+		'adicionaToponimia': [{
 			pt:"Adiciona a topon&iacute;mia no tema atual (deixe desmarcado para criar como uma nova camada)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		6: [{
+		'criaToponimia': [{
 			pt:"Criar topon&iacute;mia",
 			en:"",
 			es:"",
 			it:""
 		}],
-		7: [{
+		'aguarda': [{
 			pt:"Aguarde",
 			en:"",
 			es:"",
 			it:""
 		}],
-		8: [{
+		'fonte': [{
 			pt:"Fonte",
 			en:"",
 			es:"",
 			it:""
 		}],
-		9: [{
+		'tamanho': [{
 			pt:"Tamanho",
 			en:"",
 			es:"",
 			it:""
 		}],
-		10: [{
+		'angulo': [{
 			pt:"&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO ou FOLLOW (segue a linha), nesses casos, a fonte n&atilde;o pode ser do tipo bitmap)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		11: [{
+		'deslocamentoTexto': [{
 			pt:"Deslocamento do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		12: [{
+		'corTexto': [{
 			pt:"Cor do texto",
 			en:"",
 			es:"",
 			it:""
 		}],
-		13: [{
+		'corMascara': [{
 			pt:"Cor da m&aacute;scara de um pixel de entorno",
 			en:"",
 			es:"",
 			it:""
 		}],
-		14: [{
+		'posicionamento': [{
 			pt:"Posicionamento",
 			en:"",
 			es:"",
 			it:""
 		}],
-		15: [{
+		'corFundo': [{
 			pt:"Cor do fundo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		16: [{
+		'corSombraFundo': [{
 			pt:"Cor da sombra do fundo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		17: [{
+		'deslocamentoSombraFundo': [{
 			pt:"Deslocamento da sombra do fundo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		18: [{
+		'corSombra': [{
 			pt:"Cor da sombra",
 			en:"",
 			es:"",
 			it:""
 		}],
-		19: [{
+		'deslocamentoSombraFundo': [{
 			pt:"Deslocamento da sombra",
 			en:"",
 			es:"",
 			it:""
 		}],
-		20: [{
+		'forcaColisaoTextos': [{
 			pt:"For&ccedil;a colis&otilde;es entre textos?",
 			en:"",
 			es:"",
 			it:""
 		}],
-		21: [{
+		'distanciaMinTextos': [{
 			pt:"Dist&acirc;ncia m&iacute;nima entre textos duplicados (em pixel)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		22: [{
+		'tamanhoMinElementoCarto': [{
 			pt:"Tamanho m&iacute;nimo do elemento cartogr&aacute;fico(em pixel)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		23: [{
+		'textoUltrapassaMapa': [{
 			pt:"O texto pode ultrapassar o mapa?",
 			en:"",
 			es:"",
 			it:""
 		}],
-		24: [{
+		'caracterQuebraTexto': [{
 			pt:"Caractere usado para indicar uma quebra de texto",
 			en:"",
 			es:"",
