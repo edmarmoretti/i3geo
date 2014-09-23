@@ -82,8 +82,8 @@ i3GEOF.telaremota = {
 	*/
 	html:function(divid,tema){
 		var cp,p,ins;
-		ins = '<p class="paragrafo" >'+$trad(1,i3GEOF.telaremota.dicionario)+'</p>';
-		ins += '<p class="paragrafo" >'+$trad(2,i3GEOF.telaremota.dicionario)+'</p>';
+		ins = '<p class="paragrafo" >'+$trad('linkMapa',i3GEOF.telaremota.dicionario)+'</p>';
+		ins += '<p class="paragrafo" >'+$trad('naoFechaJanela',i3GEOF.telaremota.dicionario)+'</p>';
 		ins += '<p class="paragrafo" ><div id=i3GEOtelaremotaResultado style=text-align:left ></div>';
 		$i(divid).innerHTML += ins;
 		mostraLink = function(retorno){

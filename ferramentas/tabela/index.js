@@ -99,7 +99,7 @@ i3GEOF.tabela =
 							retorno) {
 							if (retorno.tipo === "erro") {
 								$i(idjanela + "i3GEOtabelaagrupamento").innerHTML =
-									"<br><br><span style='color:red'>" + $trad(2, i3GEOF.tabela.dicionario) + "</span><br><br>";
+									"<br><br><span style='color:red'>" + $trad('erroTemaOrigem', i3GEOF.tabela.dicionario) + "</span><br><br>";
 							} else {
 								$i(idjanela + "i3GEOtabelaagrupamento").innerHTML = retorno.dados;
 							}
@@ -207,7 +207,7 @@ i3GEOF.tabela =
 		iniciaJanelaFlutuante : function() {
 			var minimiza, cabecalho, janela, divid, temp, titulo, id;
 			id = "tabela" + parseInt(Math.random() * 1000000, 10);
-			// i3GEO.janela.tempoMsg($trad(38,i3GEOF.tabela.dicionario));
+			// i3GEO.janela.tempoMsg($trad('msgDadosRegiaoAtual',i3GEOF.tabela.dicionario));
 			i3GEOF.tabela.janelas.push(id);
 			i3GEOF.tabela.propJanelas[id] = {};
 			i3GEOF.tabela.propJanelas[id].colunas = {
@@ -261,7 +261,7 @@ i3GEOF.tabela =
 			temp = 'i3GEOF.tabela.propJanelas["' + id + '"].atualiza = this.checked';
 			janela[0]
 				.setFooter("<div style=background-color:#F2F2F2; ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
-					+ temp + "' type=checkbox />&nbsp;" + $trad(41, i3GEOF.tabela.dicionario) + " (" + id + ")</div>");
+					+ temp + "' type=checkbox />&nbsp;" + $trad('atualizaAoNavegar', i3GEOF.tabela.dicionario) + " (" + id + ")</div>");
 
 			i3GEOF.tabela.inicia(divid, id);
 			// inicia os eventos
@@ -320,7 +320,7 @@ i3GEOF.tabela =
 		 */
 		ativaFoco : function(id) {
 			if (i3GEOF.tabela.propJanelas[id].tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.tabela.propJanelas[id].tema) === "") {
-				i3GEO.janela.tempoMsg($trad(30, i3GEOF.tabela.dicionario));
+				i3GEO.janela.tempoMsg($trad('temaNaoExisteMais', i3GEOF.tabela.dicionario));
 			}
 			var i = $i(id + "_c").style;
 			i3GEO.janela.ULTIMOZINDEX++;
@@ -332,7 +332,7 @@ i3GEOF.tabela =
 				var janela, titulo;
 				// cria a janela flutuante
 				titulo =
-					"&nbsp;&nbsp;&nbsp;" + $trad(44, i3GEOF.tabela.dicionario) + " <a class=ajuda_usuario target=_blank href='"
+					"&nbsp;&nbsp;&nbsp;" + $trad("vinculos", i3GEOF.tabela.dicionario) + " <a class=ajuda_usuario target=_blank href='"
 						+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=120' >&nbsp;&nbsp;&nbsp;</a>";
 				janela =
 					i3GEO.janela.cria(
@@ -361,14 +361,14 @@ i3GEOF.tabela =
 			},
 			html : function() {
 				var ins =
-					"" + "	<fieldset class=subbloco >" + "		<p class=paragrafo >" + $trad(45, i3GEOF.tabela.dicionario) + "<br>"
+					"" + "	<fieldset class=subbloco >" + "		<p class=paragrafo >" + $trad('selecionaTabela', i3GEOF.tabela.dicionario) + "<br>"
 						+ i3GEOF.tabela.comboJanelas("i3GEOFTabelaOpcoesAdicionaVinculoT1", "i3GEOF.tabela.vinculos.comboColunasT1()")
 						+ "		<div id=i3GEOFTabelaVinculoT1Colunas style=position:relative;left:10px ></div>" + "		<p class=paragrafo >"
-						+ $trad(46, i3GEOF.tabela.dicionario) + "<br>"
+						+ $trad('selecionaSegundaTabela', i3GEOF.tabela.dicionario) + "<br>"
 						+ i3GEOF.tabela.comboJanelas("i3GEOFTabelaOpcoesAdicionaVinculoT2", "i3GEOF.tabela.vinculos.comboColunasT2()")
 						+ "		<div id=i3GEOFTabelaVinculoT2Colunas style=position:relative;left:10px ></div>"
 						+ "		<p class=paragrafo ><input id=i3GEOFTabelaVinculoBotaoCriar size=25 type=button value='"
-						+ $trad(47, i3GEOF.tabela.dicionario) + "' /></p>" + "	</fieldset>"
+						+ $trad('criaVinculo', i3GEOF.tabela.dicionario) + "' /></p>" + "	</fieldset>"
 						+ "	<fieldset class=subbloco id=i3GEOFtabelaVinculosLista >" + "	</fieldset>";
 				return ins;
 			},
@@ -402,7 +402,7 @@ i3GEOF.tabela =
 					i3GEOF.tabela
 						.comboColunas($i("i3GEOFTabelaOpcoesAdicionaVinculoT1").value, "i3GEOFTabelaOpcoesAdicionaVinculoColunaT1"), ins =
 					"";
-				ins = "	<p class=paragrafo >" + $trad(48, i3GEOF.tabela.dicionario) + "<br>" + colunas;
+				ins = "	<p class=paragrafo >" + $trad('colunaLigacao', i3GEOF.tabela.dicionario) + "<br>" + colunas;
 				$i("i3GEOFTabelaVinculoT1Colunas").innerHTML = ins;
 			},
 			comboColunasT2 : function() {
@@ -410,12 +410,12 @@ i3GEOF.tabela =
 					i3GEOF.tabela
 						.comboColunas($i("i3GEOFTabelaOpcoesAdicionaVinculoT2").value, "i3GEOFTabelaOpcoesAdicionaVinculoColunaT2"), ins =
 					"";
-				ins = "	<p class=paragrafo >" + $trad(48, i3GEOF.tabela.dicionario) + "<br>" + colunas;
+				ins = "	<p class=paragrafo >" + $trad('colunaLigacao', i3GEOF.tabela.dicionario) + "<br>" + colunas;
 				$i("i3GEOFTabelaVinculoT2Colunas").innerHTML = ins;
 			},
 			lista : function() {
 				var v = i3GEOF.tabela.vinculos.ligacoes, n = v.length, ins =
-					"<p class=paragrafo ><b>" + $trad(44, i3GEOF.tabela.dicionario) + "</b></p>", i;
+					"<p class=paragrafo ><b>" + $trad('vinculos', i3GEOF.tabela.dicionario) + "</b></p>", i;
 				for (i = 0; i < n; i++) {
 					ins +=
 						"<p class=paragrafo ><img style='cursor:pointer;float:left;' src='" + i3GEO.configura.locaplic
@@ -649,7 +649,7 @@ i3GEOF.tabela =
 							+ "\")' src='" + i3GEO.configura.locaplic + "/imagens/x.gif' title='" + $trad("t12") + "' />&nbsp;"
 							+ "<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this," + (i * 1 + 4) + ",\"" + idjanela
 							+ "\")' src='" + i3GEO.configura.locaplic + "/imagens/ordena1.gif' title='"
-							+ $trad(31, i3GEOF.tabela.dicionario) + "' /><br><span title='" + retorno.data[0].itens[i] + "'> <b>"
+							+ $trad('ordena', i3GEOF.tabela.dicionario) + "' /><br><span title='" + retorno.data[0].itens[i] + "'> <b>"
 							+ retorno.data[0].alias[i] + "</b></span></td>";
 				}
 				ins += "</tr>";
@@ -944,7 +944,7 @@ i3GEOF.tabela =
 			i3GEO.util.comboItens(idjanela + "i3GEOtabelaComboItensGuia3", tema, function(retorno) {
 				if (retorno.tipo === "erro") {
 					$i(idjanela + "i3GEOtabelaitensGuia3").innerHTML =
-						"<br><br><span style='color:red'>" + $trad(32, i3GEOF.tabela.dicionario) + "</span><br><br>";
+						"<br><br><span style='color:red'>" + $trad('erroTemaOrigem2', i3GEOF.tabela.dicionario) + "</span><br><br>";
 				} else {
 					$i(idjanela + "i3GEOtabelaitensGuia3").innerHTML = retorno.dados;
 				}
