@@ -68,6 +68,19 @@ i3GEO.arvoreDeCamadas = {
 	 * Tipo {string} - "listaTemas"
 	 */
 	IDHTML : "listaTemas",
+	// TODO remover em 6.1
+	/**
+	 * Propriedade: FINALIZA
+	 * 
+	 * Fun&ccedil;&atilde;o ou nome de uma fun&ccedil;&atilde;o que ser&aacute; executada ap&oacute;s a
+	 * &aacute;rvore ter sido montada A fun&ccedil;o permite ajustar a
+	 * &aacute;rvore conforme o programador desejar. &Eacute; executada apenas
+	 * na cria&ccedil;&atilde;o da &aacute;rvore
+	 * 
+	 * Tipo {string} - ""
+	 */
+	FINALIZA : "",
+	finaliza : "",
 	/**
 	 * Propriedade: ATIVATEMA
 	 * 
@@ -132,19 +145,6 @@ i3GEO.arvoreDeCamadas = {
 	 * Tipo {boolean} - false
 	 */
 	VERIFICAABRANGENCIATEMAS : false,
-	// TODO remover em 6.1
-	/**
-	 * Propriedade: FINALIZA
-	 * 
-	 * Nome de uma fun&ccedil;&atilde;o que ser&aacute; executada ap&oacute;s a
-	 * &aacute;rvore ter sido montada A fun&ccedil;o permite ajustar a
-	 * &aacute;rvore conforme o programador desejar. &Eacute; executada apenas
-	 * na cria&ccedil;&atilde;o da &aacute;rvore
-	 * 
-	 * Tipo {string} - ""
-	 */
-	FINALIZA : "",
-	finaliza : "",
 	/**
 	 * Propriedade: EXPANDESOLEGENDA
 	 * 
@@ -277,6 +277,14 @@ i3GEO.arvoreDeCamadas = {
 	 * Tipo - {Boolean} - true
 	 */
 	OPCOESLEGENDA : true,
+	/**
+	 * Propriedade: OPCOESARVORE
+	 * 
+	 * Inclui ou n&atilde;o as op&ccedil;&otilde;es de &iacute;cones mostradas na raiz da &aacute;vore
+	 * 
+	 * Tipo - {Boolean} - true
+	 */
+	OPCOESARVORE : true,
 	/**
 	 * Propriedade: AGUARDALEGENDA
 	 * 
@@ -519,7 +527,38 @@ i3GEO.arvoreDeCamadas = {
 			eval(i3GEO.arvoreDeCamadas.finaliza);
 		}
 		if (i3GEO.arvoreDeCamadas.FINALIZA !== "") {
-			eval(i3GEO.arvoreDeCamadas.FINALIZA);
+			if (YAHOO.lang.isFunction(i3GEO.arvoreDeCamadas.FINALIZA)) {
+				i3GEO.arvoreDeCamadas.FINALIZA.call();
+			} else {
+				if (i3GEO.arvoreDeCamadas.FINALIZA != "") {
+					eval(i3GEO.arvoreDeCamadas.FINALIZA);
+				}
+			}
+		}
+	},
+	/**
+	 * Function: inicia
+	 * 
+	 * Essa fun&ccedil;&atilde;o cria e inicializa a &aacute;rvore de camadas utilizando o objeto default que cont&eacute;m os par&acirc;metros de cada camada.
+	 * Faz o encadeamento das fun&ccedil;&otilde;es i3GEO.arvoreDeCamadas.cria e atualiza
+	 * 
+	 * i3GEO.arvoreDeCamadas.FINALIZA tamb&eacute;m &eacute; executado se existir
+	 * 
+	 * Parametros:
+	 * 
+	 * id {string} - id do elemento HTML onde a &aacute;rvore ser&aacute; inserida
+	*/
+	inicia : function(id){
+		i3GEO.arvoreDeCamadas.cria(id);
+		i3GEO.arvoreDeCamadas.atualiza();
+		if (i3GEO.arvoreDeCamadas.FINALIZA !== "") {
+			if (YAHOO.lang.isFunction(i3GEO.arvoreDeCamadas.FINALIZA)) {
+				i3GEO.arvoreDeCamadas.FINALIZA.call();
+			} else {
+				if (i3GEO.arvoreDeCamadas.FINALIZA != "") {
+					eval(i3GEO.arvoreDeCamadas.FINALIZA);
+				}
+			}
 		}
 	},
 	/**
@@ -601,12 +640,14 @@ i3GEO.arvoreDeCamadas = {
 			hasIcon : true,
 			enableHighlight : false
 		}, root);
-		new YAHOO.widget.HTMLNode({
-			expanded : false,
-			html : i3GEO.arvoreDeCamadas.montaOpcoesArvore(),
-			hasIcon : false,
-			enableHighlight : false
-		}, tempNode);
+		if(i3GEO.arvoreDeCamadas.OPCOESARVORE === true){
+			new YAHOO.widget.HTMLNode({
+				expanded : false,
+				html : i3GEO.arvoreDeCamadas.montaOpcoesArvore(),
+				hasIcon : false,
+				enableHighlight : false
+			}, tempNode);
+		}
 		//
 		// estilo usado no input qd existirem grupos
 		//
@@ -629,6 +670,7 @@ i3GEO.arvoreDeCamadas = {
 								expanded : this.EXPANDIDA,
 								html : textoTema,
 								id : ltema.name,
+								idlegenda : ltema.name,
 								tipo : "tema",
 								enableHighlight : false
 							}, tempNode);
@@ -1145,12 +1187,14 @@ i3GEO.arvoreDeCamadas = {
 						+ $trad("t18")
 						+ "','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
 			}
-			new YAHOO.widget.HTMLNode({
-				html : tnome,
-				enableHighlight : false,
-				isLeaf : true,
-				expanded : false
-			}, node);
+			if(tnome !== ""){
+				new YAHOO.widget.HTMLNode({
+					html : tnome,
+					enableHighlight : false,
+					isLeaf : true,
+					expanded : false
+				}, node);
+			}
 			if (funcoes.compartilhar === true
 					&& ltema.permitecomentario.toLowerCase() !== "nao") {
 				temp = i3GEO.configura.locaplic + "/ms_criamapa.php?layers="
