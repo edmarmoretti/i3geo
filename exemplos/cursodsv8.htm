@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>i3GEO - OpenLayers</title>
+<script src="../classesjs/i3geonaocompacto.js"></script>
+<script src="../pacotes/openlayers/OpenLayers2131.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/black.css">
+</head>
+<body style='margin-left:7px;background:white;' class=yui-skin-sam >
+<div style="top:50px;">
+<div id="arvoreDeCamadas" style="width:250px;height:400px;border:1px solid;float:left;">
+
+</div>
+<div id=i3geo >
+<div id=corpoMapa style="left:255px;width:700px;height:400px;background-image:url('../imagens/i3geo1bw.jpg');">
+</div>
+</div>
+</div>
+<div id="logMapa" ></div>
+<script>
+/************
+Alguns componentes sao normalmente inseridos nas guias laterais ou moveis. Esses
+componentes podem ser inseridos tambem em outros lugares.
+
+Como o i3Geo faz requisicoes assincronas, para iniciar esses componentes e necessario esperar o retorno
+dessas requisicoes.
+
+A funcao especial i3GEO.finalizaAPI e sempre executada apos essas requisicoes terminarem.
+
+A arvore de camadas tambem possui uma funcao semelhante, chamada i3GEO.arvoreDeCamadas.FINALIZA
+
+A arvore criada e um objeto do YAHOO e fica armazenada em i3GEO.arvoreDeCamadas.ARVORE
+
+************/
+
+i3GEO.idioma.MOSTRASELETOR = false; //para nao mostrar as bandeiras de escolha do idioma
+i3GEO.finalizaAPI = function(){
+	//cria a arvore apos o mapa ter terminado
+	$i("logMapa").innerHTML += "<p class=paragrafo >O mapa terminou...";
+	i3GEO.arvoreDeCamadas.inicia("arvoreDeCamadas");
+};
+i3GEO.arvoreDeCamadas.FINALIZA = function(){
+	//executado quando a arvore termina de ser criada
+	$i("logMapa").innerHTML += "<p class=paragrafo >A arvore terminou...";
+}
+i3GEO.cria();
+i3GEO.inicia();
+
+</script>
+</body>
+</html>
