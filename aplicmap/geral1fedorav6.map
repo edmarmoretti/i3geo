@@ -291,7 +291,7 @@ MAP
 			"TEMA"	"Rosa dos ventos"
 			"IDENTIFICA" "nao"
 			"TABELA" "nao"
-
+			"CLASSE"	"NAO"
 		END
 		NAME "rosadosventos"
 		SIZEUNITS PIXELS
