@@ -96,9 +96,9 @@ i3GEOF.salvaMapa = {
 		onde = $i(onde);
 		if(onde){
 			try{
-				onde.innerHTML = "<a style='line-height:20px;font-size:12px;' href='#' onclick='i3GEOF.salvaMapa.salvaMapaBanco()' >"+$trad(1,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
-					"<a style='line-height:20px;font-size:12px;' href='#' onclick='i3GEO.mapa.dialogo.listaDeMapasBanco()'>"+$trad(2,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
-					"<a style='line-height:20px;font-size:12px;' href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target='_blank' >"+$trad(3,i3GEOF.salvaMapa.dicionario)+"</a>";
+				onde.innerHTML = "<a style='line-height:20px;font-size:12px;' href='#' onclick='i3GEOF.salvaMapa.salvaMapaBanco()' >"+$trad('salvaMapa',i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a style='line-height:20px;font-size:12px;' href='#' onclick='i3GEO.mapa.dialogo.listaDeMapasBanco()'>"+$trad('listaMapas',i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a style='line-height:20px;font-size:12px;' href='"+i3GEO.configura.locaplic+"/admin/html/mapas.html' target='_blank' >"+$trad('editaListaMapas',i3GEOF.salvaMapa.dicionario)+"</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		}
@@ -113,9 +113,9 @@ i3GEOF.salvaMapa = {
 					down = i3GEO.configura.locaplic+"/ferramentas/salvamapa/forcedownload.php?file="+map_file;
 				local = i3GEO.configura.locaplic+"/../ms_tmp"+local[1];
 				onde.innerHTML = "" +
-					"<a style='line-height:20px;font-size:12px;' href='"+down+"' target='_blank' >"+$trad(4,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
-					"<a style='line-height:20px;font-size:12px;' href='"+local+"' target='_blank' >"+$trad(16,i3GEOF.salvaMapa.dicionario)+"</a><br>" +
-					"<a style='line-height:20px;font-size:12px;' href='"+teste+"' target='_blank' >"+$trad(5,i3GEOF.salvaMapa.dicionario)+"</a>";
+					"<a style='line-height:20px;font-size:12px;' href='"+down+"' target='_blank' >"+$trad('baixaArquivo',i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a style='line-height:20px;font-size:12px;' href='"+local+"' target='_blank' >"+$trad('veArquivo',i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a style='line-height:20px;font-size:12px;' href='"+teste+"' target='_blank' >"+$trad('testaArquivo',i3GEOF.salvaMapa.dicionario)+"</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		}
@@ -135,7 +135,7 @@ i3GEOF.salvaMapa = {
 				}
 				temp = function(retorno){
 					if(retorno.id && retorno.id != ""){
-						i3GEO.janela.tempoMsg($trad(6,i3GEOF.salvaMapa.dicionario));
+						i3GEO.janela.tempoMsg($trad('msgMapaSalvo',i3GEOF.salvaMapa.dicionario));
 					}
 					else{
 						if(retorno.status){
@@ -148,8 +148,8 @@ i3GEOF.salvaMapa = {
 				};
 				i3GEO.php.salvaMapaBanco(temp,titulo,id_mapa,$i("i3GEOFsalvaPref").checked,true,true);
 			};
-			texto = $trad(7,i3GEOF.salvaMapa.dicionario)+"<br><div id=i3GEOFsalvamapaMapa  ></div><br><br><input style='position:relative;top:2px;' checked type=checkbox id=i3GEOFsalvaPref />"+$trad(15,i3GEOF.salvaMapa.dicionario);
-			i3GEO.janela.prompt(texto + "<br><br>"+$trad(8,i3GEOF.salvaMapa.dicionario),funcaoOK);
+			texto = $trad('atualizaIdMapa',i3GEOF.salvaMapa.dicionario)+"<br><div id=i3GEOFsalvamapaMapa  ></div><br><br><input style='position:relative;top:2px;' checked type=checkbox id=i3GEOFsalvaPref />"+$trad('salvaPreferencias',i3GEOF.salvaMapa.dicionario);
+			i3GEO.janela.prompt(texto + "<br><br>"+$trad('tituloMapa',i3GEOF.salvaMapa.dicionario),funcaoOK);
 			i3GEOF.salvaMapa.comboMapas("i3GEOFsalvamapaMapa");
 		}
 	},
@@ -164,16 +164,16 @@ i3GEOF.salvaMapa = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<p class="paragrafo" >'+$trad(9,i3GEOF.salvaMapa.dicionario)+'</p>' +
-			'<p class="paragrafo" >'+$trad(10,i3GEOF.salvaMapa.dicionario)+'</p>' +
+		ins += '<p class="paragrafo" >'+$trad('ajuda',i3GEOF.salvaMapa.dicionario)+'</p>' +
+			'<p class="paragrafo" >'+$trad('ajuda2',i3GEOF.salvaMapa.dicionario)+'</p>' +
 			'<div style=background-color:white;padding:5px;margin:5px >' +
-			'	<p class="paragrafo" ><b>1- </b>'+$trad(11,i3GEOF.salvaMapa.dicionario) +
-				$trad(12,i3GEOF.salvaMapa.dicionario) +
-			'	<p class="paragrafo" >' + $trad(13,i3GEOF.salvaMapa.dicionario) +
+			'	<p class="paragrafo" ><b>1- </b>'+$trad('ajuda3',i3GEOF.salvaMapa.dicionario) +
+				$trad('ajuda4',i3GEOF.salvaMapa.dicionario) +
+			'	<p class="paragrafo" >' + $trad('salvaArquivo',i3GEOF.salvaMapa.dicionario) +
 			'	<div id="i3GEOFsalvaMapaLocal" ></div>' +
 			'</div>' +
 			'<div style=background-color:white;padding:5px;margin:5px >' +
-			'	<p class="paragrafo" ><b>2- </b>' + $trad(14,i3GEOF.salvaMapa.dicionario) +
+			'	<p class="paragrafo" ><b>2- </b>' + $trad('cadastraMapa',i3GEOF.salvaMapa.dicionario) +
 			'	<div id="i3GEOFsalvaMapaBanco"></div>' +
 			'</div><br>';
 		return ins;

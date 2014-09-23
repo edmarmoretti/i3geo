@@ -97,7 +97,7 @@ i3GEOF.selecao = {
 				$i("i3GEOselecaoguia2").onclick = function(){
 					if($i("i3GEOselecaotemasLigados")){
 						if($i("i3GEOselecaotemasLigados").value === "")
-						{i3GEO.janela.tempoMsg($trad(1,i3GEOF.selecao.dicionario));return;}
+						{i3GEO.janela.tempoMsg($trad('selecionaTema',i3GEOF.selecao.dicionario));return;}
 						i3GEO.mapa.ativaTema($i("i3GEOselecaotemasLigados").value);
 						i3GEO.guias.mostraGuiaFerramenta("i3GEOselecaoguia2","i3GEOselecaoguia");
 						try
@@ -157,54 +157,54 @@ i3GEOF.selecao = {
 			var ins = '' +
 			'<div id=i3GEOselecaoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 			'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-			'		<li><a  ><em><div id="i3GEOselecaoguia1" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
-			'		<li><a  ><em><div id="i3GEOselecaoguia2" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
-			'		<li><a  ><em><div id="i3GEOselecaoguia3" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
+			'		<li><a  ><em><div id="i3GEOselecaoguia1" style="text-align:center;left:0px;" >'+$trad('mapa',i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
+			'		<li><a  ><em><div id="i3GEOselecaoguia2" style="text-align:center;left:0px;" >'+$trad('atributos',i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
+			'		<li><a  ><em><div id="i3GEOselecaoguia3" style="text-align:center;left:0px;" >'+$trad('cruzamento',i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
 			'	</ul>' +
 			'</div><br>' +
 			'<div class=guiaobj id="i3GEOselecaoguia1obj" style="left:1px;display:none;top:-5px">' +
 			'	<p class=paragrafo style=font-size:0px; ><button title="Clique no mapa para selecionar" value="i3GEOselecaopt" onclick="i3GEOF.selecao.tiposel(this)"><img id=i3GEOselecaopt src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-one.png" /></button>';
 			if(i3GEO.Interface.ATUAL != "googleearth"){
-				ins += '	<button title="'+$trad(5,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaopoli"><img id=i3GEOselecaopoli src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-polygon.png" /></button>';
+				ins += '	<button title="'+$trad('desenhaPoligono',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaopoli"><img id=i3GEOselecaopoli src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-polygon.png" /></button>';
 			}
-			ins += '	<button title="'+$trad(6,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaoext" ><img id=i3GEOselecaoext src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" /></button>';
-			ins += '	<button title="'+$trad(32,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaofigura"><img id=i3GEOselecaoFigura src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>';
+			ins += '	<button title="'+$trad('selecionaVisivel',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaoext" ><img id=i3GEOselecaoext src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" /></button>';
+			ins += '	<button title="'+$trad('utilizaFiguraDesenhada',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaofigura"><img id=i3GEOselecaoFigura src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>';
 
 			if(i3GEO.Interface.ATUAL === "openlayers"){
-				ins += '	<button title="'+$trad(7,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaobox" ><img id=i3GEOselecaobox src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-rectangle.png" /></button>';
+				ins += '	<button title="'+$trad('selecionaRetangulo',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaobox" ><img id=i3GEOselecaobox src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-rectangle.png" /></button>';
 			}
-			ins += '	<button title="'+$trad(8,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.operacao(\'inverte\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selection-invert.png" /></button>' +
-			'	<button title="'+$trad(9,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.operacao(\'limpa\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
-			'	<button title="'+$trad(10,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.criatema()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" /></button>' +
-			'	<button title="'+$trad(11,i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.grafico()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" /></button>' +
-			'	<button title="'+$trad(12,i3GEOF.selecao.dicionario)+'"  onclick="i3GEOF.selecao.graficoPerfil()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/grafico-perfil.png" /></button>' +
+			ins += '	<button title="'+$trad('inverteSelecao',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.operacao(\'inverte\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selection-invert.png" /></button>' +
+			'	<button title="'+$trad('limpaSelecao',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.operacao(\'limpa\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
+			'	<button title="'+$trad('salvaSelecao',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.criatema()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" /></button>' +
+			'	<button title="'+$trad('grafico',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.grafico()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" /></button>' +
+			'	<button title="'+$trad('perfil',i3GEOF.selecao.dicionario)+'"  onclick="i3GEOF.selecao.graficoPerfil()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/grafico-perfil.png" /></button>' +
 			'	<div style=margin-left:8px;text-align:left;  >' +
 			'		<div class="styled-select">' +
-			'		<select title="'+$trad(13,i3GEOF.selecao.dicionario)+'" id=i3GEOselecaotipoOperacao >' +
-			'		<option value="adiciona" >'+$trad(14,i3GEOF.selecao.dicionario)+'</option>' +
-			'		<option value="novo" >'+$trad(15,i3GEOF.selecao.dicionario)+'</option>' +
-			'		<option value="retira" >'+$trad(16,i3GEOF.selecao.dicionario)+'</option>' +
+			'		<select title="'+$trad('tipoOperacao',i3GEOF.selecao.dicionario)+'" id=i3GEOselecaotipoOperacao >' +
+			'		<option value="adiciona" >'+$trad('adicionaASelecao',i3GEOF.selecao.dicionario)+'</option>' +
+			'		<option value="novo" >'+$trad('novaSelecao',i3GEOF.selecao.dicionario)+'</option>' +
+			'		<option value="retira" >'+$trad('retiraDaSelecao',i3GEOF.selecao.dicionario)+'</option>' +
 			'		</select></div>' +
 			'		<span id=i3GEOselecaoNsel class=paragrafo >0</span>' +
-			'		<br><p class=paragrafo >'+$trad(17,i3GEOF.selecao.dicionario)+'<div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
-			'		<br><p class=paragrafo >'+$trad(18,i3GEOF.selecao.dicionario) +
+			'		<br><p class=paragrafo >'+$trad('temas',i3GEOF.selecao.dicionario)+'<div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
+			'		<br><p class=paragrafo >'+$trad('distanciaSelecao',i3GEOF.selecao.dicionario) +
 			'		<div class="styled-select">' +
 			'		<input type=text id=i3GEOselecaotoleranciapt value=0 /></div>' +
 			'		<br><div id=i3GEOselecaomen1 style=left:0px;width:100%; >' +
-			'		<p class=paragrafo >'+$trad(19,i3GEOF.selecao.dicionario) +
+			'		<p class=paragrafo >'+$trad('ajuda',i3GEOF.selecao.dicionario) +
 			'		</p>' +
 			'		</div> '+
 			'	</div>' +
 			'</div>' +
 			'<div class=guiaobj id="i3GEOselecaoguia2obj" style="left:1px;display:none;">' +
-			'	<p class=paragrafo ><input id=i3GEOselecaobotao1 size=18  type="button" value="'+$trad(20,i3GEOF.selecao.dicionario)+'" /></p>'+
+			'	<p class=paragrafo ><input id=i3GEOselecaobotao1 size=18  type="button" value="'+$trad('seleciona',i3GEOF.selecao.dicionario)+'" /></p>'+
 			'	<table summary="" id="i3GEOselecaoparametros" style="width:380px" >'+
 			'		<tbody><tr><td></td><td></td>'+
-			'			<td style=background-color:yellow >'+$trad(21,i3GEOF.selecao.dicionario)+'</td>'+
-			'			<td style=background-color:yellow >'+$trad(22,i3GEOF.selecao.dicionario)+'</td>'+
-			'			<td style=background-color:yellow >'+$trad(23,i3GEOF.selecao.dicionario)+'</td>'+
+			'			<td style=background-color:yellow >'+$trad('item',i3GEOF.selecao.dicionario)+'</td>'+
+			'			<td style=background-color:yellow >'+$trad('operador',i3GEOF.selecao.dicionario)+'</td>'+
+			'			<td style=background-color:yellow >'+$trad('valor',i3GEOF.selecao.dicionario)+'</td>'+
 			'			<td style=background-color:yellow ></td>'+
-			'			<td style=background-color:yellow >'+$trad(24,i3GEOF.selecao.dicionario)+'</td>'+
+			'			<td style=background-color:yellow >'+$trad('conector',i3GEOF.selecao.dicionario)+'</td>'+
 			'		</tr>'+
 			'		<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr></tbody>'+
 			'	</table>'+
@@ -212,13 +212,13 @@ i3GEOF.selecao = {
 			'	</div>'+
 			'	<div id=i3GEOselecaovalores style="position:relative;top:5px;left:0px">'+
 			'	</div>'+
-			'	<div id=i3GEOselecaomen2 style=top:15px;left:0px; ><p class=paragrafo >'+$trad(25,i3GEOF.selecao.dicionario)+'</div>'+
+			'	<div id=i3GEOselecaomen2 style=top:15px;left:0px; ><p class=paragrafo >'+$trad('separaComVirgula',i3GEOF.selecao.dicionario)+'</div>'+
 			'</div> '+
 			'<div class=guiaobj id="i3GEOselecaoguia3obj" style="left:1px;display:none;">' +
-			'	<p class=paragrafo >'+$trad(26,i3GEOF.selecao.dicionario)+'</p>'+
+			'	<p class=paragrafo >'+$trad('temaSelecaoMapa',i3GEOF.selecao.dicionario)+'</p>'+
 			'	<div id="i3GEOselecaooverlay" class="styled-select" >' +
 			'	</div>' +
-			'	<br><p class=paragrafo ><input id=i3GEOselecaobotao2 size=10 type=button value="'+$trad(27,i3GEOF.selecao.dicionario)+'">' +
+			'	<br><p class=paragrafo ><input id=i3GEOselecaobotao2 size=10 type=button value="'+$trad('aplica',i3GEOF.selecao.dicionario)+'">' +
 			'</div>';
 			return ins;
 		},
@@ -304,7 +304,7 @@ i3GEOF.selecao = {
 							//verifica qts elementos selecionados
 							if(i3GEO.temaAtivo != ""){
 								nsel = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
-								$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel) + "<br>";
+								$i("i3GEOselecaoNsel").innerHTML = $trad('selecionados',i3GEOF.selecao.dicionario)+": "+(nsel.nsel) + "<br>";
 							}
 							$i("i3GEOselecaotemasLigados").onchange = function(){i3GEOF.selecao.pegaTemasSel();};
 						}
@@ -353,7 +353,7 @@ i3GEOF.selecao = {
 				i3GEO.mapa.ativaTema(selectedArray[0]);
 				if(i3GEO.temaAtivo != ""){
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
-					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel) + "<br>";
+					$i("i3GEOselecaoNsel").innerHTML = $trad('selecionados',i3GEOF.selecao.dicionario)+": "+(nsel.nsel) + "<br>";
 				}
 			}
 			return selectedArray.toString();
@@ -389,7 +389,7 @@ i3GEOF.selecao = {
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					//verifica qts elementos selecionados
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
+					$i("i3GEOselecaoNsel").innerHTML = $trad('selecionados',i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 				};
 				i3GEO.php.selecaopt(fim,tema,"",tipo,0);
 			}
@@ -418,7 +418,7 @@ i3GEOF.selecao = {
 					i3GEOF.selecao.aguarde.visibility = "hidden";
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
+					$i("i3GEOselecaoNsel").innerHTML = $trad('selecionados',i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 				},
 				tema = i3GEOF.selecao.pegaTemasSel();
 				if (obj.value == "i3GEOselecaoext"){
@@ -509,7 +509,7 @@ i3GEOF.selecao = {
 					var nsel;
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
+					$i("i3GEOselecaoNsel").innerHTML = $trad('selecionados',i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 				};
 				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 				i3GEO.eventos.cliquePerm.ativa();
@@ -581,7 +581,7 @@ i3GEOF.selecao = {
 					var nsel;
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
+					$i("i3GEOselecaoNsel").innerHTML = $trad('selecionados',i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 				};
 				i3GEO.eventos.cliquePerm.ativa();
 				i3GEO.php.selecaopt(retorna,tema,x+" "+y,tipo,tolerancia);
@@ -670,7 +670,7 @@ i3GEOF.selecao = {
 					var nsel;
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
+					$i("i3GEOselecaoNsel").innerHTML = $trad('selecionados',i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 				};
 				i3GEO.eventos.cliquePerm.ativa();
 				i3GEO.php.selecaoWkt(retorna,tema,tipo,wkt);
@@ -813,7 +813,7 @@ i3GEOF.selecao = {
 					i3GEO.janela.fechaAguarde("i3GEO.atualiza",$trad("o1"));
 					i3GEO.Interface.atualizaTema(retorno,tema);
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
+					$i("i3GEOselecaoNsel").innerHTML = $trad('selecionados',i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 				};
 				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 				i3GEO.eventos.cliquePerm.ativa();
@@ -883,7 +883,7 @@ i3GEOF.selecao = {
 							i3GEO.temaAtivo,
 							itemTema,
 							function(retorno){
-								$i("i3GEOselecaovalores").innerHTML = "<br><p class=paragrafo >" + $trad(30,i3GEOF.selecao.dicionario) + ":</p>"
+								$i("i3GEOselecaovalores").innerHTML = "<br><p class=paragrafo >" + $trad('selecionaValor',i3GEOF.selecao.dicionario) + ":</p>"
 									+ "<div class='styled-select'  >" + retorno.dados + "</div>";
 								if ($i("i3GEOselecaocbitens")){
 									$i("i3GEOselecaocbitens").onchange = function()
@@ -970,7 +970,7 @@ i3GEOF.selecao = {
 			if(i3GEOF.selecao.aguarde.visibility === "visible")
 			{return;}
 			if($i("i3GEOselecaotemasLigados").value === "")
-			{i3GEO.janela.tempoMsg($trad(1,i3GEOF.selecao.dicionario));return;}
+			{i3GEO.janela.tempoMsg($trad('selecionaTema',i3GEOF.selecao.dicionario));return;}
 			try{
 				i3GEOF.selecao.aguarde.visibility = "visible";
 				var filtro = "",
@@ -1030,7 +1030,7 @@ i3GEOF.selecao = {
 			if(i3GEOF.selecao.aguarde.visibility === "visible")
 			{return;}
 			if($i("i3GEOselecaotemasLigados").value === ""){
-				i3GEO.janela.tempoMsg($trad(1,i3GEOF.selecao.dicionario));
+				i3GEO.janela.tempoMsg($trad('selecionaTema',i3GEOF.selecao.dicionario));
 				i3GEOF.selecao.aguarde.visibility = "hidden";
 				return;
 			}
@@ -1043,7 +1043,7 @@ i3GEOF.selecao = {
 					i3GEOF.selecao.aguarde.visibility = "hidden";
 					i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 					nsel = i3GEO.arvoreDeCamadas.pegaTema(tema,retorno.data.temas);
-					$i("i3GEOselecaoNsel").innerHTML = $trad(28,i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
+					$i("i3GEOselecaoNsel").innerHTML = $trad('selecionados',i3GEOF.selecao.dicionario)+": "+(nsel.nsel);
 				};
 				i3GEO.php.selecaotema(temp,$i("i3GEOselecaoTemaoverlay").value,i3GEO.temaAtivo,$i("i3GEOselecaotipoOperacao").value);
 			}
@@ -1086,7 +1086,7 @@ i3GEOF.selecao = {
 							y.push(retorno.data[i].y);
 						}
 						if(x.length == 0)
-						{i3GEO.janela.tempoMsg($trad(31,i3GEOF.selecao.dicionario));return;}
+						{i3GEO.janela.tempoMsg($trad('msgNenhumPontoEncontrado',i3GEOF.selecao.dicionario));return;}
 						pontosdistobj = {
 								xpt: x,
 								ypt: y

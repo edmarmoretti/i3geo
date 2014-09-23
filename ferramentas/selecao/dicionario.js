@@ -1,168 +1,168 @@
 //+$trad(1,i3GEOF.selecao.dicionario)+
 i3GEOF.selecao.dicionario = {
-		1: [{
+		'selecionaTema': [{
 			pt:"Selecione um tema primeiro",
 			en:"",
 			es:"",
 			it:""
 		}],
-		2: [{
+		'mapa': [{
 			pt:"Mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		3: [{
+		'atributos': [{
 			pt:"Atributos",
 			en:"",
 			es:"",
 			it:""
 		}],
-		4: [{
+		'cruzamento': [{
 			pt:"Cruzamento",
 			en:"",
 			es:"",
 			it:""
 		}],
-		5: [{
+		'desenhaPoligono': [{
 			pt:"Desenhe um poligono no mapa para selecionar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		6: [{
+		'selecionaVisivel': [{
 			pt:"Seleciona o que estiver visivel no mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		7: [{
+		'selecionaRetangulo': [{
 			pt:"Desenhe um retangulo no mapa para selecionar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		8: [{
+		'inverteSelecao': [{
 			pt:"Inverte a selecao",
 			en:"",
 			es:"",
 			it:""
 		}],
-		9: [{
+		'limpaSelecao': [{
 			pt:"Limpa a selecao",
 			en:"",
 			es:"",
 			it:""
 		}],
-		10: [{
+		'salvaSelecao': [{
 			pt:"Salva a selecao como um novo tema",
 			en:"",
 			es:"",
 			it:""
 		}],
-		11: [{
+		'grafico': [{
 			pt:"Grafico",
 			en:"",
 			es:"",
 			it:""
 		}],
-		12: [{
+		'perfil': [{
 			pt:"Perfil",
 			en:"",
 			es:"",
 			it:""
 		}],
-		13: [{
+		'tipoOperacao': [{
 			pt:"Tipo de operacao",
 			en:"",
 			es:"",
 			it:""
 		}],
-		14: [{
+		'adicionaASelecao': [{
 			pt:"Adicionar &agrave; sele&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		15: [{
+		'novaSelecao': [{
 			pt:"Nova sele&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		16: [{
+		'retiraDaSelecao': [{
 			pt:"Retirar da sele&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		17: [{
+		'temas': [{
 			pt:"Temas:",
 			en:"",
 			es:"",
 			it:""
 		}],
-		18: [{
+		'distanciaSelecao': [{
 			pt:"Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):",
 			en:"",
 			es:"",
 			it:""
 		}],
-		19: [{
+		'ajuda': [{
 			pt:"Escolha o(s) tema(s) alvo(s) e o tipo de opera&ccedil;&atilde;o. Depois, clique no mapa sobre o elemento desejado.",
 			en:"",
 			es:"",
 			it:""
 		}],
-		20: [{
+		'seleciona': [{
 			pt:"Selecionar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		21: [{
+		'item': [{
 			pt:"Item",
 			en:"",
 			es:"",
 			it:""
 		}],
-		22: [{
+		'operador': [{
 			pt:"Operador",
 			en:"",
 			es:"",
 			it:""
 		}],
-		23: [{
+		'valor': [{
 			pt:"Valor",
 			en:"",
 			es:"",
 			it:""
 		}],
-		24: [{
+		'conector': [{
 			pt:"Conector",
 			en:"",
 			es:"",
 			it:""
 		}],
-		25: [{
+		'separaComVirgula': [{
 			pt:"Na op&ccedil;&atilde;o IN separe os valores com v&iacute;rgula.",
 			en:"",
 			es:"",
 			it:""
 		}],
-		26: [{
+		'temaSelecaoMapa': [{
 			pt:"Tema que ser&aacute; utilizado para selecionar o tema definido na guia Mapa (esse tema deve ser do tipo pontual ou poligonal e deve possuir elementos j&aacute; selecionados):",
 			en:"",
 			es:"",
 			it:""
 		}],
-		27: [{
+		'aplica': [{
 			pt:"Aplicar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		28: [{
+		'selecionados': [{
 			pt:"Selecionados",
 			en:"",
 			es:"",
@@ -174,19 +174,19 @@ i3GEOF.selecao.dicionario = {
 			es:"",
 			it:""
 		}],
-		30: [{
+		'selecionaValor': [{
 			pt:"Escolha o valor",
 			en:"",
 			es:"",
 			it:""
 		}],
-		31: [{
+		'msgNenhumPontoEncontrado': [{
 			pt:"Nenhum ponto encontrado",
 			en:"",
 			es:"",
 			it:""
 		}],
-		32: [{
+		'utilizaFiguraDesenhada': [{
 			pt:"Utiliza uma figura j&aacute; desenhada no mapa",
 			en:"",
 			es:"",
