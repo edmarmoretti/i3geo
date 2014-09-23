@@ -354,53 +354,53 @@ i3GEOF.preferencias = {
 						tipo: "boolean",
 						elemento: "i3GEO.janela.AGUARDEMODAL"
 					},{
-						titulo: $trad(68,i3GEOF.preferencias.dicionario),
+						titulo: $trad('janelaTransparenteFocoMouse',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.janela.TRANSICAOSUAVE"
 					},{
-						titulo: $trad(69,i3GEOF.preferencias.dicionario),
+						titulo: $trad('opacidadeJanela',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.janela.OPACIDADE"
 					},{
-						titulo: $trad(70,i3GEOF.preferencias.dicionario),
+						titulo: $trad('opacidadeJanelaMouse',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.janela.OPACIDADEAGUARDE"
 					}
 				]
 			},{
-				titulo: $trad(71,i3GEOF.preferencias.dicionario),
+				titulo: $trad('mapaReferencia',i3GEOF.preferencias.dicionario),
 				props: [
 					{
-						titulo: $trad(72,i3GEOF.preferencias.dicionario),
+						titulo: $trad('multiplicadorZoom',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.maparef.fatorZoomDinamico"
 					},{
-						titulo: $trad(73,i3GEOF.preferencias.dicionario),
+						titulo: $trad('incluiSeletorTipoMapa',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.maparef.SELETORTIPO"
 					},{
-						titulo: $trad(74,i3GEOF.preferencias.dicionario),
+						titulo: $trad('tipoMapaInicia',i3GEOF.preferencias.dicionario),
 						tipo: "select",
 						elemento: "i3GEO.maparef.VALORSELETORTIPO",
 						opcoes: ["dinamico","fixo","mapa"]
 					},{
-						titulo: $trad(75,i3GEOF.preferencias.dicionario),
+						titulo: $trad('permiteFechar',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.maparef.PERMITEFECHAR"
 					},{
-						titulo: $trad(76,i3GEOF.preferencias.dicionario),
+						titulo: $trad('permiteDeslocar',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.maparef.PERMITEDESLOCAR"
 					},{
-						titulo: $trad(77,i3GEOF.preferencias.dicionario),
+						titulo: $trad('opacidade',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.maparef.OPACIDADE"
 					},{
-						titulo: $trad(78,i3GEOF.preferencias.dicionario),
+						titulo: $trad('distanciaTopo',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.maparef.TOP"
 					},{
-						titulo: $trad(79,i3GEOF.preferencias.dicionario),
+						titulo: $trad('distanciaDireita',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.maparef.RIGHT"
 					}
@@ -598,9 +598,9 @@ i3GEOF.preferencias = {
 		);
 		divid = janela[2].id;
 		var rodape = '' +
-			'<input id=i3GEOpreferenciasbotao1 size=20  type=button value="'+$trad(1,i3GEOF.preferencias.dicionario)+'" />&nbsp;&nbsp;&nbsp;' +
-			'<input id=i3GEOpreferenciasbotao2 size=20 type=button value="'+$trad(2,i3GEOF.preferencias.dicionario)+'" />&nbsp;&nbsp;&nbsp;' +
-			'<input id=i3GEOpreferenciasbotao3 size=20 type=button value="'+$trad(42,i3GEOF.preferencias.dicionario)+'" />' ;
+			'<input id=i3GEOpreferenciasbotao1 size=20  type=button value="'+$trad('limpa',i3GEOF.preferencias.dicionario)+'" />&nbsp;&nbsp;&nbsp;' +
+			'<input id=i3GEOpreferenciasbotao2 size=20 type=button value="'+$trad('aplica',i3GEOF.preferencias.dicionario)+'" />&nbsp;&nbsp;&nbsp;' +
+			'<input id=i3GEOpreferenciasbotao3 size=20 type=button value="'+$trad('codigo',i3GEOF.preferencias.dicionario)+'" />' ;
 
 		janela[0].setFooter("<div style=background-color:#F2F2F2; >"+rodape+"</div>");
 
@@ -621,7 +621,7 @@ i3GEOF.preferencias = {
 	limpa: function(){
 		i3GEO.util.limpaDadosLocal("preferenciasDoI3Geo");
 		$i("i3GEOF.preferencias_corpo").innerHTML = i3GEOF.preferencias.html();
-		i3GEO.janela.tempoMsg($trad(3,i3GEOF.preferencias.dicionario));
+		i3GEO.janela.tempoMsg($trad('msgAplicaAlteracao',i3GEOF.preferencias.dicionario));
 	},
 	salva: function(){
 		var i = 0,
@@ -665,7 +665,7 @@ i3GEOF.preferencias = {
 				}
 			}
 		}
-		i3GEO.janela.tempoMsg($trad(3,i3GEOF.preferencias.dicionario));
+		i3GEO.janela.tempoMsg($trad('msgAplicaAlteracao',i3GEOF.preferencias.dicionario));
 		//i3GEO.util.insereCookie("preferenciasDoI3Geo",pares.join(":"),365);
 		i3GEO.util.limpaDadosLocal("preferenciasDoI3Geo");
 		i3GEO.util.gravaDadosLocal("preferenciasDoI3Geo",pares.join("::"));

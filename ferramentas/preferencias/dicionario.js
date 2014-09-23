@@ -1,18 +1,18 @@
 //+$trad(1,i3GEOF.preferencias.dicionario)+
 i3GEOF.preferencias.dicionario = {
-		1: [{
+		'limpa': [{
 			pt:"Limpar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		2: [{
+		'aplica': [{
 			pt:"Aplicar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		3: [{
+		'msgAplicaAlteracao': [{
 			pt:"As altera&ccedil;&otilde;es ser&atilde;o aplicadas ao iniciar um novo mapa",
 			en:"",
 			es:"",
@@ -246,7 +246,7 @@ i3GEOF.preferencias.dicionario = {
 			es:"",
 			it:""
 		}],
-		42: [{
+		'codigo': [{
 			pt:"C&oacute;digo",
 			en:"",
 			es:"",
@@ -402,73 +402,73 @@ i3GEOF.preferencias.dicionario = {
 			es:"",
 			it:""
 		}],
-		68: [{
-			pt:"Janela transparente aoperder o foco do mouse",
+		'janelaTransparenteFocoMouse': [{
+			pt:"Janela transparente ao perder o foco do mouse",
 			en:"",
 			es:"",
 			it:""
 		}],
-		69: [{
+		'opacidadeJanela': [{
 			pt:"Opacidade da janela",
 			en:"",
 			es:"",
 			it:""
 		}],
-		70: [{
+		'opacidadeJanelaMouse': [{
 			pt:"Opacidade da janela de aguarde",
 			en:"",
 			es:"",
 			it:""
 		}],
-		71: [{
+		'mapaReferencia': [{
 			pt:"Mapa de refer&ecirc;ncia",
 			en:"",
 			es:"",
 			it:""
 		}],
-		72: [{
+		'multiplicadorZoom': [{
 			pt:"Fator multiplicador de zoom",
 			en:"",
 			es:"",
 			it:""
 		}],
-		73: [{
+		'incluiSeletorTipoMapa': [{
 			pt:"Inclui o seletor de tipo de mapa",
 			en:"",
 			es:"",
 			it:""
 		}],
-		74: [{
+		'tipoMapaInicia': [{
 			pt:"Tipo de mapa ao iniciar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		75: [{
+		'permiteFechar': [{
 			pt:"Permite fechar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		76: [{
+		'permiteDeslocar': [{
 			pt:"Permite deslocar",
 			en:"",
 			es:"",
 			it:""
 		}],
-		77: [{
+		'opacidade': [{
 			pt:"Opacidade",
 			en:"",
 			es:"",
 			it:""
 		}],
-		78: [{
+		'distanciaTopo': [{
 			pt:"Dist&acirc;ncia do topo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		79: [{
+		'distanciaDireita': [{
 			pt:"Dist&acirc;ncia da direita",
 			en:"",
 			es:"",
