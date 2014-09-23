@@ -1846,9 +1846,23 @@ i3GEO.arvoreDeTemas = {
 	 * ou nao e decide se deve desligar ou ligar
 	 */
 	verificaStatusTema : function(obj, tid) {
+		//i3GEO.mapa.ativaTema(tid)
 		// confirma se o tema existe no mapa
 		if (i3GEO.arvoreDeCamadas.pegaTema(tid) !== "") {
-			i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid, obj.checked);
+			if(i3GEO.arvoreDeCamadas.ARVORE){
+				i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid, obj.checked);
+			}
+			else{
+				var temp = function() {
+					i3GEO.php.corpo(i3GEO.atualiza, i3GEO.configura.tipoimagem);
+					i3GEO.janela.fechaAguarde("redesenha");
+				};
+				if (!obj.checked) {
+					i3GEO.php.ligatemas(temp, tid, "");
+				} else {
+					i3GEO.php.ligatemas(temp, "", tid);
+				}
+			}
 		} else {
 			i3GEO.arvoreDeTemas.adicionaTemas([ tid ]);
 		}
