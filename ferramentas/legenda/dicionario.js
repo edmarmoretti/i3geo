@@ -12,13 +12,13 @@ i3GEOF.legenda.dicionario = {
 			es:"",
 			it:""
 		}],
-		3: [{
+		"legenda": [{
 			pt:"Legenda",
 			en:"",
 			es:"",
 			it:""
 		}],
-		4: [{
+		"classes": [{
 			pt:"Classes",
 			en:"",
 			es:"",
