@@ -112,21 +112,21 @@ i3GEOF.uploadkml = {
 	html:function(){
 		var ins = '<form id=i3GEOuploadkmlf target="i3GEOuploadkmliframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadkml/upload.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" style=color:red >' + $trad(1,i3GEOF.uploadkml.dicionario) + '</p>' +
-		'<p class="paragrafo" > ' + $trad(2,i3GEOF.uploadkml.dicionario) +
+		'<p class="paragrafo" style=color:red >' + $trad('ajuda',i3GEOF.uploadkml.dicionario) + '</p>' +
+		'<p class="paragrafo" > ' + $trad('arquivoKml',i3GEOF.uploadkml.dicionario) +
 		'<br><input type="file" size=22 name="i3GEOuploadkml" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
-		'<p class=paragrafo >' + $trad(3,i3GEOF.uploadkml.dicionario) +
+		'<p class=paragrafo >' + $trad('nomeLayerKml',i3GEOF.uploadkml.dicionario) +
 		'</p><div class=styled-select ><input type=text size=42 name=layerkml value=""/></div>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
-		'<p class=paragrafo >' + $trad(4,i3GEOF.uploadkml.dicionario) + '</p>' +
+		'<p class=paragrafo >' + $trad('projecao',i3GEOF.uploadkml.dicionario) + '</p>' +
 		'<div id=i3GEOuploadkmlListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" ><input id=i3GEOuploadkmlbotao1 type="button" value="'+$trad(5,i3GEOF.uploadkml.dicionario)+'" size=12 name="submit">' +
-		'<br><p class="paragrafo" >' + $trad(6,i3GEOF.uploadkml.dicionario)+'</p>'+
+		'<p class="paragrafo" ><input id=i3GEOuploadkmlbotao1 type="button" value="'+$trad('criaCamada',i3GEOF.uploadkml.dicionario)+'" size=12 name="submit">' +
+		'<br><p class="paragrafo" >' + $trad('ajuda2',i3GEOF.uploadkml.dicionario)+'</p>'+
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
 		'</form>' +

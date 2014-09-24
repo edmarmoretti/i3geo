@@ -106,7 +106,7 @@ i3GEOF.uploaddbf = {
 	html:function(){
 		var ins = '<form id=i3GEOuploaddbff target="i3GEOuploaddbfiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploaddbf/upload.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" >'+$trad(1,i3GEOF.uploaddbf.dicionario)+': </p> '+
+		'<p class="paragrafo" >'+$trad('tipoArquivo',i3GEOF.uploaddbf.dicionario)+': </p> '+
 		'<div class=styled-select >' +
 		'<select name="i3GEOuploaddbftipoarquivo"> '+
 		'	<option value="dbf" select >dbf</option> '+
@@ -115,16 +115,16 @@ i3GEOF.uploaddbf = {
 		'</select></div> '+
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" >'+$trad(2,i3GEOF.uploaddbf.dicionario)+': </p><div class=styled-select ><input type="text" name="i3GEOuploaddbfnomex" ></div>' +
-		'<br><p class="paragrafo" >'+$trad(3,i3GEOF.uploaddbf.dicionario)+': </p><div class=styled-select ><input type="text" name="i3GEOuploaddbfnomey" ></div>' +
-		'<br><p class="paragrafo" >'+$trad(4,i3GEOF.uploaddbf.dicionario)+': <input type="file" size=10 name="i3GEOuploaddbffile" style="width:270px;top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p class="paragrafo" >'+$trad('colunaX',i3GEOF.uploaddbf.dicionario)+': </p><div class=styled-select ><input type="text" name="i3GEOuploaddbfnomex" ></div>' +
+		'<br><p class="paragrafo" >'+$trad('colunaY',i3GEOF.uploaddbf.dicionario)+': </p><div class=styled-select ><input type="text" name="i3GEOuploaddbfnomey" ></div>' +
+		'<br><p class="paragrafo" >'+$trad('arquivo',i3GEOF.uploaddbf.dicionario)+': <input type="file" size=10 name="i3GEOuploaddbffile" style="width:270px;top:0px;left:0px;cursor:pointer;"></p>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
-		'<p class=paragrafo >'+$trad(5,i3GEOF.uploaddbf.dicionario)+':</p>' +
+		'<p class=paragrafo >'+$trad('projecao',i3GEOF.uploaddbf.dicionario)+':</p>' +
 		'<div id=i3GEOuploaddbfListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" ><input id=i3GEOuploaddbfbotao1 type="button" value="'+$trad(6,i3GEOF.uploaddbf.dicionario)+'" size=12 name="submit">' +
+		'<p class="paragrafo" ><input id=i3GEOuploaddbfbotao1 type="button" value="'+$trad('criaCamada',i3GEOF.uploaddbf.dicionario)+'" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
 		'</form>' +

@@ -1,18 +1,18 @@
 //+$trad(1,i3GEOF.uploadgpx.dicionario)+
 i3GEOF.uploadgpx.dicionario = {
-		1: [{
+		'arquivoGpx': [{
 			pt:"Arquivo gpx:",
 			en:"",
 			es:"",
 			it:""
 		}],
-		2: [{
+		'projecao': [{
 			pt:"Proje&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		3: [{
+		'criaCamada': [{
 			pt:"Criar camada",
 			en:"",
 			es:"",

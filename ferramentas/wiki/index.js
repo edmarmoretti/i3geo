@@ -196,7 +196,7 @@ i3GEOF.wiki = {
 				$i("i3GEOwikiLista").innerHTML = "Erro.";
 				return;
 			}
-			$i("i3GEOwikiLista").innerHTML = retorno.data+$trad(1,i3GEOF.wiki.dicionario);
+			$i("i3GEOwikiLista").innerHTML = retorno.data+$trad('atualizaNavegacao',i3GEOF.wiki.dicionario);
 		};
 		cp = new cpaint();
 		cp.set_response_type("JSON");

@@ -1,36 +1,36 @@
 //+$trad(1,i3GEOF.uploaddbf.dicionario)+
 i3GEOF.uploaddbf.dicionario = {
-		1: [{
+		'tipoArquivo': [{
 			pt:"Tipo de arquivo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		2: [{
+		'colunaX': [{
 			pt:"nome da coluna x (long)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		3: [{
+		'colunaY': [{
 			pt:"nome da coluna y (lat)",
 			en:"",
 			es:"",
 			it:""
 		}],
-		4: [{
+		'arquivo': [{
 			pt:"arquivo",
 			en:"",
 			es:"",
 			it:""
 		}],
-		5: [{
+		'projecao': [{
 			pt:"Proje&ccedil;&atilde;o",
 			en:"",
 			es:"",
 			it:""
 		}],
-		6: [{
+		'criaCamada': [{
 			pt:"Criar camada",
 			en:"",
 			es:"",

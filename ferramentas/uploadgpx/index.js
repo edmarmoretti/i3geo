@@ -112,15 +112,15 @@ i3GEOF.uploadgpx = {
 	html:function(){
 		var ins = '<form id=i3GEOuploadgpxf target="i3GEOuploadgpxiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadgpx/upload.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" >' + $trad(1,i3GEOF.uploadgpx.dicionario) +
+		'<p class="paragrafo" >' + $trad('arquivoGpx',i3GEOF.uploadgpx.dicionario) +
 		'<br><br><input type="file" size=18 name="i3GEOuploadgpx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
-		'<p class=paragrafo >' + $trad(2,i3GEOF.uploadgpx.dicionario) + ':</p>' +
+		'<p class=paragrafo >' + $trad('projecao',i3GEOF.uploadgpx.dicionario) + ':</p>' +
 		'<div id=i3GEOuploadgpxListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" ><input id=i3GEOuploadgpxbotao1 type="button" value="'+$trad(3,i3GEOF.uploadgpx.dicionario)+'" size=12 name="submit">' +
+		'<p class="paragrafo" ><input id=i3GEOuploadgpxbotao1 type="button" value="'+$trad('criaCamada',i3GEOF.uploadgpx.dicionario)+'" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
 		'</form>' +

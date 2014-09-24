@@ -216,7 +216,7 @@ i3GEOF.vinde = {
 		};
 		var janela,divid,titulo;
 		//cria a janela flutuante
-		titulo = $trad(1,i3GEOF.vinde.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=114' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad('indeBrasil',i3GEOF.vinde.dicionario)+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=114' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"320px",
