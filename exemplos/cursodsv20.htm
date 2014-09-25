@@ -9,16 +9,16 @@
 <link rel="stylesheet" type="text/css" href="../css/black.css">
 </head>
 <body style='background:white;' class=yui-skin-sam >
+<div style="left:150px;top:100px">
+	<div id="menuSuspenso" style="width:750px;left:50px;">
+	</div>
 
-<div id="menuSuspenso" style="width:750px;">
-</div>
-
-<div >
 	<div id=i3geo >
-		<div id=corpoMapa style="top:1px;width:750px;height:400px;background-image:url('../imagens/i3geo1bw.jpg');">
+		<div id=corpoMapa style="width:750px;height:400px;background-image:url('../imagens/i3geo1bw.jpg');">
 		</div>
 	</div>
 </div>
+
 <style>
 #menuSuspenso .bd{
 	background: black;
@@ -26,15 +26,19 @@
 </style>
 <script>
 /************
-A barra de botoes inclui as principais funcionalidades que interagem diretamente com o mapa, exigindo cliques ou 
-outros movimentos do mouse
+A barra de botoes e controlada por diversos parametros.
 
-Um dos tipos de barra e a "olhodepeixe1" que usa o efeito de lente quando o usuario passa o mouse sobre o icone.
+A lista de botoes e definido no objeto:
 
-Quando i3GEO.barraDeBotoes.TIPO = "olhodepeixe1" a barra e construida sem a necessidade de inserir elementos 
-HTML especificos.
+	i3GEO.barraDeBotoes.INCLUIBOTAO
 
-A posicao da barra pode ser ajustada definindo-se um OFFSET em relacao ao topo da pagina
+Determinados parametros atuam sobre tipos diferentes de barras.
+
+Mais detalhes em:
+
+	http://localhost/i3geo/documentacao/files/classesjs/classe_barradebotoes-js.html
+
+Nesse exemplo um novo botao e adicionado a barra
 
 ************/
 i3GEO.idioma.MOSTRASELETOR = false; //para nao mostrar as bandeiras de escolha do idioma
@@ -75,9 +79,59 @@ i3GEO.configura.oMenuData = {
 };
 
 i3GEO.cria();
+//
 //parametros da barra de botoes
+//
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe1";
-i3GEO.barraDeBotoes.OFFSET = -400 + -24;
+//altera um dos icones de botoes ja existentes
+i3GEO.barraDeBotoes.ICONEBOTAO.abreJanelaLegenda = "/imagens/gisicons/legend-add.png";
+//adiciona um botao novo com suas funcoes especificas
+i3GEO.barraDeBotoes.adicionaBotao(
+	{
+		iddiv:"meubotao",
+		tipo:"",
+		dica:"Meu Bot&atilde;o",
+		titulo: "Meu Bot&atilde;o",
+		icone: "/imagens/oxygen/22x22/user-online.png",
+		funcaoonclick:function(){
+			alert("Meu novo botao com ID = meubotao");
+		}
+	}
+);
+//define quais os botoes serao mostrados
+i3GEO.barraDeBotoes.INCLUIBOTAO = {
+	meubotao : true, //botao novo
+	abreJanelaLegenda: true,
+	localizar: true,
+	zoomanterior: true,
+	zoomli: true,
+	zoomproximo: true,
+	zoomiauto: false,
+	zoomoauto: false,
+	pan: false,
+	zoomtot: false,
+	identifica: false,
+	identificaBalao: false,
+	mede: false,
+	area: false,
+	selecao: false,
+	barraedicao: false,
+	imprimir: false,
+	google: false,
+	referencia: false,
+	exten: false,
+	inserexy: false,
+	textofid: false,
+	reinicia: false,
+	buscafotos: false,
+	wiki: false,
+	metar: false,
+	lentei: false,
+	confluence: false,
+	inseregrafico: false,
+	v3d: false
+};
+
 i3GEO.inicia();
 
 </script>
