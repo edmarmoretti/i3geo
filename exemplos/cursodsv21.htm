@@ -47,22 +47,22 @@
 	border-radius: 4px;
 	overflow: hidden;
 }
+
+#barraDeIcones img {
+	margin-left: 10px;
+}
 </style>
 <script>
 /************
-A barra de botoes e controlada por diversos parametros.
+Para obter maior controle sobre a construcao da barra, utilize o tipo "emlinha".
 
-A lista de botoes e definido no objeto:
+Esse tipo apenas insere os icones e suas funcionalidades em um elemento DIV que contera
+um ID especifico.
 
-	i3GEO.barraDeBotoes.INCLUIBOTAO
+Com base nos estilos, pode-se entao customizar o layout e posicionamento da barra.
 
-Determinados parametros atuam sobre tipos diferentes de barras.
-
-Mais detalhes em:
-
-	http://localhost/i3geo/documentacao/files/classesjs/classe_barradebotoes-js.html
-
-Nesse exemplo um novo botao e adicionado a barra
+Como a barra em linha depende da criacao inicial do mapa, a funcao de criacao da barra
+deve ser chamada apos o mapa ter sido criado.
 
 ************/
 i3GEO.idioma.MOSTRASELETOR = false; //para nao mostrar as bandeiras de escolha do idioma
