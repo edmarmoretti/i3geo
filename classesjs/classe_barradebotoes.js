@@ -61,7 +61,7 @@ i3GEO.barraDeBotoes = {
 	Tipo de barra.
 
 	Por padr&atilde;o, utiliza a biblioteca YUI para construir a barra, opcionalmente pode-se utilizar outro tipo.
-	
+
 	Se for utilizado o padr&atilde;o YUI e os elementos para compor a barra n&atilde;o forem encontrados, a barra n&atilde;o ser&aacute; criada.
 
 	O tipo emlinha insere os bot&otilde;es em um elemento html qualquer j&aacute; existente na p&aacute;gina. Nesse caso a barra
@@ -69,9 +69,9 @@ i3GEO.barraDeBotoes = {
 
 		i3GEO.barraDeBotoes.inicializaBarra("","",false,0,0,onde)
 
-	Caso o par&acirc;metro &quot;onde&quot; seja omitido ou o o elemento HTML com esse ID n&atilde;o for encontrado, ser&aacute; 
+	Caso o par&acirc;metro &quot;onde&quot; seja omitido ou o o elemento HTML com esse ID n&atilde;o for encontrado, ser&aacute;
 	criado um elemento do tipo DIV no contexto do mapa.
-	
+
 	Se voc&ecirc; quer usar a barra do tipo olho de peixe e seu mapa tiver tamanho fixo, utilize o tipo &quot;olhodepeixe1&quot;
 
 	Tipo:
@@ -101,7 +101,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: POSICAO
 
-	Define o posicionamento da barra de bot&otilde;es do tipo olho de peixe
+	Define o posicionamento da barra de bot&otilde;es do tipo olhodepeixe
 
 	Valores:
 	{"top","bottom"}
@@ -116,7 +116,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: MAXBOTOES
 
-	N&uacute;mero de bot&otilde;es iniciais (v&aacute;lido apenas para o tipo olhodepeixe)
+	N&uacute;mero de bot&otilde;es iniciais (v&aacute;lido apenas para os tipos olho de peixe)
 
 	Se for 0, todos os bot&otilde;es ser&atilde;o mostrados
 
@@ -142,7 +142,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: ORIENTACAO
 
-	Orienta&ccedil;&atilde;o vertical ou horizontal da barra (n&atilde;o se aplica ao tipo olhodepeixe)
+	Orienta&ccedil;&atilde;o vertical ou horizontal da barra (n&atilde;o se aplica aos tipos olhos de peixe)
 
 	Tipo:
 	{string}
@@ -157,7 +157,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: HORIZONTALW
 
-	Largura da barra quando ORIENTACAO = "horizontal"
+	Largura da barra quando ORIENTACAO = "horizontal" (n&atilde;o se aplica aos tipos olhos de peixe)
 
 	Tipo:
 	{numeric}
@@ -184,7 +184,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: SOICONES
 
-	Esconde as bordas das barras e o fundo, mostrando apenas os &iacute;cones
+	Esconde as bordas das barras e o fundo, mostrando apenas os &iacute;cones (n&atilde;o se aplica aos tipos olhos de peixe)
 
 	Default:
 	{false}
@@ -207,7 +207,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: TRANSICAOSUAVE
 
-	Altera a transpar&ecirc;ncia das barras quando o mouse sobrep&otilde;e a barra e quando sai da barra
+	Altera a transpar&ecirc;ncia das barras quando o mouse sobrep&otilde;e a barra e quando sai da barra (n&atilde;o se aplica aos tipos olhos de peixe)
 
 	Tipo:
 	{boolean}
@@ -219,7 +219,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: OPACIDADE
 
-	Valor da opacidade min&iacute;ma utilizada quando TRANSICAOSUAVE for igual a true.
+	Valor da opacidade min&iacute;ma utilizada quando TRANSICAOSUAVE for igual a true. (n&atilde;o se aplica aos tipos olhos de peixe)
 
 	Varia de 0 a 100
 
@@ -566,6 +566,31 @@ i3GEO.barraDeBotoes = {
 	*/
 	BOTAOCLICADO: "",
 	/*
+	 Function: adicionaBotao
+
+	 Adiciona um novo botão nas definições da barra de botões
+
+	 O Objeto deve ser como no exemplo abaixo
+
+	 i3GEO.barraDeBotoes.adicionaBotao(
+		{
+			iddiv:"meubotao",
+			tipo:"",
+			dica:"Meu Bot&atilde;o",
+			titulo: "Meu Bot&atilde;o",
+			icone: "/imagens/oxygen/22x22/user-online.png",
+			funcaoonclick:function(){
+				alert("Meu novo botao com ID = meubotao");
+			}
+		}
+	);
+	 */
+	adicionaBotao: function(obj){
+		i3GEO.barraDeBotoes.LISTABOTOES.push(obj);
+		i3GEO.barraDeBotoes.ICONEBOTAO[obj.iddiv] = "/imagens/oxygen/22x22/user-online.png";
+		i3GEO.barraDeBotoes.INCLUIBOTAO[obj.iddiv] = true;
+	},
+	/*
 	Function: ativaPadrao
 
 	Ativa o bot&atilde;o definido como padr&atilde;o, executando a fun&ccedil;&atilde;o definida em onclick
@@ -825,7 +850,7 @@ i3GEO.barraDeBotoes = {
 	Inicializa a barra de bot&otilde;es quando for do tipo "olhodepeixe" ou "olhodepeixe1"
 
 	O objeto euEnv armazena todas as caracter&iacute;sticas da barra
-	
+
 	"olhodepeixe1" substitui a antiga "olhodepeixe" e nao precisa de ajustes de posicionamento
 
 	*/

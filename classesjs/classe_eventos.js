@@ -369,6 +369,7 @@ i3GEO.eventos = {
 		//pelas respectivas apis
 		//caso contr&aacute;rio, o i3geo ir&aacute; controlar os c&aacute;lculos
 		//
+		return;
 		var teladd,teladms,
 			container = "",
 			targ = "",

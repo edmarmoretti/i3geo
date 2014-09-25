@@ -1521,18 +1521,18 @@ i3GEO.Interface = {
 					lonlat = point.transform(proj900913, projWGS84);
 				}
 				d = i3GEO.calculo.dd2dms(lonlat.lon, lonlat.lat);
-				try {
-					objposicaocursor.ddx = lonlat.lon;
-					objposicaocursor.ddy = lonlat.lat;
-					objposicaocursor.dmsx = d[0];
-					objposicaocursor.dmsy = d[1];
-					objposicaocursor.imgx = p.x;
-					objposicaocursor.imgy = p.y;
-					pos = i3GEO.util
-							.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-					objposicaocursor.telax = p.x + pos[0];
-					objposicaocursor.telay = p.y + pos[1];
-				} catch (e) {
+					try {
+						objposicaocursor.ddx = lonlat.lon;
+						objposicaocursor.ddy = lonlat.lat;
+						objposicaocursor.dmsx = d[0];
+						objposicaocursor.dmsy = d[1];
+						objposicaocursor.imgx = p.x;
+						objposicaocursor.imgy = p.y;
+						pos = i3GEO.util
+								.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+						objposicaocursor.telax = p.x + pos[0];
+						objposicaocursor.telay = p.y + pos[1];
+					} catch (e) {
 				}
 			};
 			//
