@@ -31,7 +31,7 @@ i3GEOF.distanciaptpt.dicionario = {
 		it : ""
 	} ],
 	'distMax' : [ {
-		pt : "Dist�ncia (metros) m&aacute;xima que ser&aacute; considerada entre os pontos de origem e os pontos de destino:",
+		pt : "Dist&acirc;ncia (metros) m&aacute;xima que ser&aacute; considerada entre os pontos de origem e os pontos de destino:",
 		en : "",
 		es : "",
 		it : ""

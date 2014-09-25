@@ -230,7 +230,7 @@ i3GEOF.tabela =
 			// cria a janela flutuante
 			titulo =
 				"<div  id='" + id + "i3GEOFtabelaComboCabeca' class='comboTemasCabecalho'></div>&nbsp;&nbsp;&nbsp;"
-					+ $trad(1, i3GEOF.tabela.dicionario) + " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+					+ $trad('tabela', i3GEOF.tabela.dicionario) + " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
 			janela =
 				i3GEO.janela.cria(
