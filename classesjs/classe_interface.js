@@ -461,7 +461,7 @@ i3GEO.Interface = {
 	 */
 	ativaBotoes : function() {
 		if (i3GEO.Interface.STATUS.trocando === false) {
-			if (i3GEO.barraDeBotoes.TIPO === "olhodepeixe") {
+			if (i3GEO.barraDeBotoes.TIPO === "olhodepeixe" || i3GEO.barraDeBotoes.TIPO === "olhodepeixe1") {
 				i3GEO.barraDeBotoes.inicializaBarra();
 			} else if (i3GEO.barraDeBotoes.TIPO === "yui") {
 				i3GEO.Interface[i3GEO.Interface.ATUAL].ativaBotoes();

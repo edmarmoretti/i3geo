@@ -11,7 +11,7 @@ Exemplo:
 
 	Para alterar as op&ccedil;&otilde;es modifique as propriedades colocando um c&oacute;digo como o seguinte no javascript utilizado na interface de mapa que estiver sendo utilizada
 
-	i3GEO.barraDeBotoes.tipo = "olhodepeixe";
+	i3GEO.barraDeBotoes.tipo = "olhodepeixe1";
 
 Arquivo:
 
@@ -61,14 +61,18 @@ i3GEO.barraDeBotoes = {
 	Tipo de barra.
 
 	Por padr&atilde;o, utiliza a biblioteca YUI para construir a barra, opcionalmente pode-se utilizar outro tipo.
+	
+	Se for utilizado o padr&atilde;o YUI e os elementos para compor a barra n&atilde;o forem encontrados, a barra n&atilde;o ser&aacute; criada.
 
-	O tipo emlinha insere os bot&otilde;es em um elemento html qualquer já existente na p&aacute;gina. Nesse caso a barra
+	O tipo emlinha insere os bot&otilde;es em um elemento html qualquer j&aacute; existente na p&aacute;gina. Nesse caso a barra
 	n&atilde;o &eacute; iniciada automaticamente, sendo necess&aacute;rio usar a fun&ccedil;&atilde;o
 
-	i3GEO.barraDeBotoes.inicializaBarra("","",false,0,0,onde)
+		i3GEO.barraDeBotoes.inicializaBarra("","",false,0,0,onde)
 
-	Caso o par&acirc;metro &quot;onde&quot; seja omitido ou o o elemento HTML com esse ID n&atilde;o for encontrado, ser&aacute; criado um elemento do tipo DIV
-	no contexto do mapa
+	Caso o par&acirc;metro &quot;onde&quot; seja omitido ou o o elemento HTML com esse ID n&atilde;o for encontrado, ser&aacute; 
+	criado um elemento do tipo DIV no contexto do mapa.
+	
+	Se voc&ecirc; quer usar a barra do tipo olho de peixe e seu mapa tiver tamanho fixo, utilize o tipo &quot;olhodepeixe1&quot;
 
 	Tipo:
 	{string}
@@ -77,7 +81,7 @@ i3GEO.barraDeBotoes = {
 	{yui}
 
 	Valores:
-	{"yui","olhodepeixe","emlinha"}
+	{"yui","olhodepeixe","olhodepeixe1","emlinha"}
 	*/
 	TIPO: "yui",
 	/*
@@ -112,7 +116,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: MAXBOTOES
 
-	N&uacute;mero de bot&otilde;es iniciais (v&aacute;lido apenas para o tipo "olhodepeixe")
+	N&uacute;mero de bot&otilde;es iniciais (v&aacute;lido apenas para o tipo olhodepeixe)
 
 	Se for 0, todos os bot&otilde;es ser&atilde;o mostrados
 
@@ -138,7 +142,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: ORIENTACAO
 
-	Orienta&ccedil;&atilde;o vertical ou horizontal da barra (n&atilde;o se aplica ao tipo "olhodepeixe"
+	Orienta&ccedil;&atilde;o vertical ou horizontal da barra (n&atilde;o se aplica ao tipo olhodepeixe)
 
 	Tipo:
 	{string}
@@ -401,7 +405,7 @@ i3GEO.barraDeBotoes = {
 
 	&Iacute;cones utilizados em cada um dos bot&otilde;es da barra.
 
-	Esses &iacute;cones s&atilde;o utilizados apenas se i3GEO.barraDeBotoes.TIPO = "olhodepeixe". Para cada elemento existente em
+	Esses &iacute;cones s&atilde;o utilizados apenas se i3GEO.barraDeBotoes.TIPO = "olhodepeixe" e "olhodepeixe1". Para cada elemento existente em
 	i3GEO.barraDeBotoes.INCLUIBOTAO deve existir um elemento nesse objeto. A chave de cada elemento &eacute; a mesma do objeto INCLUIBOTAO.
 	O endere&ccedil;o da imagem ser&aacute; complementado pelo i3geo, adicionando no in&iacute;cio da string o valor da vari&aacute;vel i3GEO.configura.locaplic
 
@@ -818,12 +822,14 @@ i3GEO.barraDeBotoes = {
 	/*
 	Function: inicializaBarraOP
 
-	Inicializa a barra de bot&otilde;es quando for do tipo "olhodepeixe"
+	Inicializa a barra de bot&otilde;es quando for do tipo "olhodepeixe" ou "olhodepeixe1"
 
 	O objeto euEnv armazena todas as caracter&iacute;sticas da barra
+	
+	"olhodepeixe1" substitui a antiga "olhodepeixe" e nao precisa de ajustes de posicionamento
 
 	*/
-	inicializaBarraOP: function(){
+	inicializaBarraOP: function(onde){
 		if(i3GEO.barraDeBotoes.ATIVA === false || !$i(i3GEO.Interface.IDCORPO)){
 			return;
 		}
@@ -852,7 +858,7 @@ i3GEO.barraDeBotoes = {
 			dica,
 			titulo,
 			i,
-			dock = new euDock(),
+			dock = new euDock(onde),
 			temp = "dockBg-r.png",
 			tempAjuda = "dockBg-l.png",
 			chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
@@ -864,7 +870,12 @@ i3GEO.barraDeBotoes = {
 			dock.setObjectAlign(i3GEO.Interface.IDCORPO,euUP, (i3GEO.parametros.h)*1 + i3GEO.barraDeBotoes.OFFSET,euDOWN);
 		}
 		else{
-			dock.setObjectAlign(i3GEO.Interface.IDCORPO,euDOWN,(parseInt(document.body.style.height,10))*-1 + i3GEO.barraDeBotoes.OFFSET,euUP);
+			if(onde){
+				dock.setObjectAlign(i3GEO.Interface.IDCORPO,euDOWN,i3GEO.barraDeBotoes.OFFSET,euUP);
+			}
+			else{
+				dock.setObjectAlign(i3GEO.Interface.IDCORPO,euDOWN,(parseInt(document.body.style.height,10))*-1 + i3GEO.barraDeBotoes.OFFSET,euUP);
+			}
 		}
 		if(i3GEO.barraDeBotoes.MAXBOTOES >= chaves.length){
 			temp = "vazio.png";
@@ -1019,8 +1030,13 @@ i3GEO.barraDeBotoes = {
 		if (i3GEO.configura.map3d === ""){
 			i3GEO.barraDeBotoes.INCLUIBOTAO.v3d = false;
 		}
-		if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe"){
-			i3GEO.barraDeBotoes.inicializaBarraOP();
+		if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe" || i3GEO.barraDeBotoes.TIPO === "olhodepeixe1"){
+			if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe1" && $i(i3GEO.Interface.IDMAPA)){
+				i3GEO.barraDeBotoes.inicializaBarraOP($i(i3GEO.Interface.IDMAPA));
+			}
+			else{
+				i3GEO.barraDeBotoes.inicializaBarraOP();
+			}
 		}
 		else{
 			if(this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === false){
@@ -1519,7 +1535,7 @@ i3GEO.barraDeBotoes = {
 					balloonAjuda.cleanup();
 					balloonIsVisible = false;
 					//alert(mensagem);
-					if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe")
+					if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe" || i3GEO.barraDeBotoes.TIPO === "olhodepeixe1")
 					{balloonAjuda.showTooltip(objeto,mensagem,null,null,null,pos[0],pos[1]-40);}
 					else
 					{balloonAjuda.showTooltip(objeto,mensagem,null,null,null,pos[0]+12,pos[1]);}

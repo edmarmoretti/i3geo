@@ -8,16 +8,17 @@
 <script src="../pacotes/openlayers/OpenLayers2131.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/black.css">
 </head>
-<body style='margin-left:7px;background:white;' class=yui-skin-sam >
-<div id="menuSuspenso" style="width:700px;">
-</div>
-<div>
+<body style='background:white;' class=yui-skin-sam >
+<div style="left:150px;top:100px">
+	<div id="menuSuspenso" style="width:750px;left:50px;">
+	</div>
+	
 	<div id=i3geo >
-		<div id=corpoMapa style="top:1px;width:700px;height:400px;background-image:url('../imagens/i3geo1bw.jpg');">
+		<div id=corpoMapa style="width:750px;height:400px;background-image:url('../imagens/i3geo1bw.jpg');">
 		</div>
 	</div>
 </div>
-<div id="logMapa" ></div>
+
 <style>
 #menuSuspenso .bd{
 	background: black;
@@ -25,16 +26,17 @@
 </style>
 <script>
 /************
-Cada interface possui parametros especificos de configuracao.
+A barra de botoes inclui as principais funcionalidades que interagem diretamente com o mapa, exigindo cliques ou 
+outros movimentos do mouse
 
-No caso do OpenLayers, alguns dos componentes sao controlados pelo objeto
+Um dos tipos de barra e a "olhodepeixe1" que usa o efeito de lente quando o usuario passa o mouse sobre o icone.
 
-i3GEO.Interface.openlayers.GADGETS
+Quando i3GEO.barraDeBotoes.TIPO = "olhodepeixe1" a barra e construida sem a necessidade de inserir elementos 
+HTML especificos.
 
-Nesse exemplo, o mapa mostra apenas a barra de escala
+A posicao da barra pode ser ajustada definindo-se um OFFSET em relacao ao topo da pagina
 
 ************/
-
 i3GEO.idioma.MOSTRASELETOR = false; //para nao mostrar as bandeiras de escolha do idioma
 i3GEO.configura.mapaRefDisplay = "none";//nao mostra o mapa de referencia
 //parametros da interface OpenLayers
@@ -73,6 +75,8 @@ i3GEO.configura.oMenuData = {
 };
 
 i3GEO.cria();
+//parametros da barra de botoes
+i3GEO.barraDeBotoes.TIPO = "olhodepeixe1";
 i3GEO.inicia();
 
 </script>

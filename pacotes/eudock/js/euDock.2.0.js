@@ -216,14 +216,21 @@ var euOPAQUE      = 16;
  ******     (START)               *******
  ****************************************
  */
-		function euDock(){
+		function euDock(onde){
 			this.id = 'euDock_'+euEnv.Kost.next();
 			var novoel = document.createElement("div");
 			novoel.style.position = "absolute";
+			
 			novoel.innerHTML = "<div id='"+this.id+"_bar' style='z-index:1;position:absolute;border:0px solid black;'></div>" +
 								"<div onMouseOut='euEnv.euDockArray."+this.id+".mouseOut();' onMouseOver='euEnv.euDockArray."+this.id+".mouseOver();' id='"+this.id+"' style='z-index:1;position:absolute;border:0px solid black; cursor: pointer;'></div>";
-			document.body.appendChild(novoel);
 
+			if(onde){
+				novoel.style.zIndex = 100000;
+				onde.appendChild(novoel);
+			}
+			else{
+				document.body.appendChild(novoel);
+			}
 			this.div   =document.getElementById(this.id);
 			this.divBar=document.getElementById(this.id+"_bar");
 			this.iconsArray=new Array();
@@ -276,18 +283,25 @@ var euOPAQUE      = 16;
 			this.setObjectCoord = function(){
 				var tempx,tempy;
 				if (this.objectAlign==euDOWN){
-					tempx = euIdObjLeft(this.idObjectHook) + (this.idObjectHook.offsetWidth/2);
-					tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset
-					if(navm && !document.doctype || (navm && document.doctype && document.doctype.systemId == "")){
-						tempx = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA))[0] - (euIdObjLeft(this.idObjectHook) / 2);
+					if(onde){
+						tempx = (this.idObjectHook.offsetWidth/2);
+						tempy = 0;
 					}
-					//alert(tempx);
-					if(navm && i3GEO.util.versaoNavegador() === "IE8" && tempx < this.idObjectHook.offsetWidth){
-						tempx = i3GEO.parametros.w / 2;
-						if(i3GEO.guias.TIPO === "guia" || i3GEO.guias.TIPO === "sanfona" && $i("contemFerramentas")){
-							tempx += parseInt($i("contemFerramentas").style.width,10);
+					else{
+						tempx = euIdObjLeft(this.idObjectHook) + (this.idObjectHook.offsetWidth/2);
+						tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset
+						if(navm && !document.doctype || (navm && document.doctype && document.doctype.systemId == "")){
+							tempx = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA))[0] + (euIdObjLeft(this.idObjectHook) / 2);
+						}
+						//alert(tempx);
+						if(navm && i3GEO.util.versaoNavegador() === "IE8" && tempx < this.idObjectHook.offsetWidth){
+							tempx = i3GEO.parametros.w / 2;
+							if(i3GEO.guias.TIPO === "guia" || i3GEO.guias.TIPO === "sanfona" && $i("contemFerramentas")){
+								tempx += parseInt($i("contemFerramentas").style.width,10);
+							}
 						}
 					}
+
 					this.setCenterPos(
 						tempx,
 						tempy
