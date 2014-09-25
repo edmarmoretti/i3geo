@@ -1,6 +1,6 @@
 //+$trad(1,i3GEOF.gradeDePontos.dicionario)+
 i3GEOF.gradeDePontos.dicionario = {
-	'ajuda1' : [ {
+	'ajuda' : [ {
 		pt : "A grade &eacute; formada por pontos espa&ccedil;ados conforme os par&acirc;metros de x e y.",
 		en : "",
 		es : "",
@@ -79,7 +79,7 @@ i3GEOF.gradeDePontos.dicionario = {
 		it : ""
 	} ],
 	'projMercator' : [ {
-		pt : "Utiliza a proje&ccedil;&atilde;o Mercator na gera��o da grade",
+		pt : "Utiliza a proje&ccedil;&atilde;o Mercator na gera&ccedil;&atilde;o da grade",
 		en : "",
 		es : "",
 		it : ""
