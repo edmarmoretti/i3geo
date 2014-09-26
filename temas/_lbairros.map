@@ -2,7 +2,7 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
-    CONNECTION "user=postgres password=postgres dbname=i3geosaude host=localhost port=5432"
+    CONNECTION "i3geosaude"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom from (select * from i3geo_metaestat.bairros) as foo using unique gid using srid=4326"
     METADATA

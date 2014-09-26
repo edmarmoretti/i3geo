@@ -1739,6 +1739,7 @@ function pegaConexao()
 	$dados["metaestat_id_medida_variavel"] = $layer->getmetadata("metaestat_id_medida_variavel");
 
 	$dados["colunas"] = implode(",",pegaItens($layer));
+	
 	if($layer->connectiontype == 7 || $layer->connectiontype == 9){
 		$dados["tipooriginal"] = $layer->getmetadata("tipooriginal");
 	}
@@ -1841,7 +1842,17 @@ function pegaMetadados()
 	$dados["editorsql"] = $layer->getmetadata("editorsql");
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
+	$lcon = $layer->connection;
+	if ($layer->connectiontype == MS_POSTGIS){
+		if (in_array($lcon,array_keys($postgis_mapa)))
+		{
+			//echo $postgis_mapa[$lcon];exit;
+			$layer->set("connection",$postgis_mapa[$lcon]);
+		}
+	}
 	$dados["colunas"] = implode(" ,",pegaItens($layer));
+	$layer->set("connection",$lcon);
+
 	$dados["ltempoformatodata"] = $layer->getmetadata("ltempoformatodata");
 	$dados["ltempoiteminicio"] = $layer->getmetadata("ltempoiteminicio");
 	$dados["ltempoitemfim"] = $layer->getmetadata("ltempoitemfim");

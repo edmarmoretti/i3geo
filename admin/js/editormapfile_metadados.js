@@ -7,7 +7,7 @@ Abre o editor de metadados
 */
 function editorMetadados(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","500px","","Metadados");
+	core_montaEditor("","450px","500px","","Miscel&acirc;nea");
 	var sUrl = "../php/editormapfile.php?funcao=pegaMetadados&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorMetadados");
 }
@@ -129,7 +129,7 @@ function montaEditorMetadados(dados)
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
 	if(dados.colunas != "")
 	{
-		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: ";
+		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: <br>";
 		ins += dados.colunas+"</p>";
 	}
 	ins += core_geraLinhas(param);
