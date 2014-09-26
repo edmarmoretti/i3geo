@@ -202,13 +202,13 @@ i3GEOF.analisaGeometrias = {
 		ins += '				<option value=difference >'+$trad('diferenca',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=symdifference >'+$trad('diferencaInversa',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=convexhull >'+$trad('convexo',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes type=button value="'+$trad(17,i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
+		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
 		ins += '			<p class=paragrafo >'+$trad('operacaoGeom3',i3GEOF.analisaGeometrias.dicionario)+':';
 		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes1 style="position:relative;top:-3px;" >';
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=convexhull >'+$trad('convexo',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=boundary >'+$trad('entorno',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes1 type=button value="Aplicar"/></p>';
+		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes1 type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
 		ins += '		<div id=i3GEOanalisageometriasmen2 style="text-align:left;left:0px" >';
 		ins += '			<p class=paragrafo >'+$trad('ajuda3',i3GEOF.analisaGeometrias.dicionario);
 		ins += '			<p class=paragrafo >'+$trad('ajuda4',i3GEOF.analisaGeometrias.dicionario)+': <a href="http://www.opengeospatial.org/standards/sfs" target=blank >OGC</a>, <a href="http://postgis.refractions.net/docs/ch06.html" target=blank >PostGis, </a>e <a href="http://www.vividsolutions.com/jts/tests/index.html" target=blank >JTS</a>';
