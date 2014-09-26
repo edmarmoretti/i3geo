@@ -313,6 +313,9 @@ i3GEOF.navegapostgis = {
 				}
 				else{
 					ins = "<table class=lista4 ><tr><td title='"+$trad('selecionaID',i3GEOF.navegapostgis.dicionario)+"'>"+gid+"</td><td title='"+$trad('selecionaGeom',i3GEOF.navegapostgis.dicionario)+"'>"+the_geom+"</td><td title='"+$trad('mostraColuna',i3GEOF.navegapostgis.dicionario)+"'>"+mostra+"</td><td>"+nome+"</td></tr>";
+					mostra = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=checkbox name='i3GEOFnavegapostgisMostra' value='*' />";
+					ins += "<tr><td></td><td></td><td>"+mostra+"</td><td title='' >Todas</td></tr>";
+
 					for(i=0;i<n;i++){
 						gid = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=radio name='i3GEOFnavegapostgisGid' value='"+retorno[i].field+"' />";
 						if(retorno[i].type == "line" || retorno[i].type == "polygon" || retorno[i].type == "point" || retorno[i].type == "geometry"){
@@ -359,7 +362,15 @@ i3GEOF.navegapostgis = {
 		if(the_geom != ""){
 			colunas.push(the_geom);
 		}
-		sql = the_geom+" from (select "+colunas.join(",")+" from "+i3GEOF.navegapostgis.esquema+"."+i3GEOF.navegapostgis.tabela+") as foo using unique "+gid+" using srid=4326";
+		if(colunas[0] === "*"){
+			colunas = ["*"];
+		}
+		if(colunas.length === 1){
+			i = colunas[0];
+		}else{
+			i = colunas.join(",");
+		}
+		sql = the_geom+" from (select "+i+" from "+i3GEOF.navegapostgis.esquema+"."+i3GEOF.navegapostgis.tabela+") as foo using unique "+gid+" using srid=4326";
 		sql = sql.replace(",,",",");
 		$i("i3GEOFnavegapostgisSql").value = sql;
 	}
