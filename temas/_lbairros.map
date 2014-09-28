@@ -16,6 +16,8 @@ MAP
       "palletestep"	""
       "ltempoitemtip"	""
       "permitekmz"	"nao"
+      "temporizador"	""
+      "iconetema"	""
       "ltempoitemtitulo"	""
       "description_template"	""
       "ltempoitemlink"	""
@@ -25,36 +27,44 @@ MAP
       "ltempoformatodata"	""
       "permitedownload"	"sim"
       "ltempoitemicone"	""
+      "permitecomentario"	""
       "metaestat"	""
       "ESQUEMATABELAEDITAVEL"	"i3geo_metaestat"
+      "download"	"SIM"
       "itembuscarapida"	"no_bairro"
+      "arquivodownload"	""
+      "arquivokmz"	""
       "permitekml"	"sim"
       "permiteogc"	"sim"
       "convcaracter"	""
-      "TEMA"	"Bairros IBGE"
+      "TEMA"	"Bairros IBGE -"
       "COLUNAIDUNICO"	"gid"
       "COLUNAGEOMETRIA"	"the_geom"
+      "cortepixels"	"0"
       "ltempoconvencode"	""
       "editorsql"	""
       "TABELAEDITAVEL"	"bairros"
       "ltempoitemfim"	""
+      "legendaimg"	""
     END # METADATA
     NAME "_lbairros"
     STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"
+    OPACITY 90
     TYPE POLYGON
     UNITS METERS
     CLASS
       NAME ""
       STYLE
-        COLOR 255 255 255
+        COLOR "#ffffff33"
         OPACITY 20
       END # STYLE
       STYLE
         OUTLINECOLOR 255 0 0
         SYMBOL "p0"
       END # STYLE
+      TITLE ""
     END # CLASS
   END # LAYER
 

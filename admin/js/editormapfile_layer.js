@@ -101,7 +101,6 @@ function montaParametrosTemas(no,dados,redesenha)
 		tempNodeR.isLeaf = false;
 		tempNodeR.enableHighlight = false;
 
-
 		conteudo = "<span style='cursor:pointer;' onclick=\"adicionaNovaClasse('"+codigoMap+"','"+codigoLayer+"')\" ><img  style='position:relative;top:2px' src=\"../imagens/05.png\" /> Adicionar uma classe</span>";
 		d = {html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
@@ -159,7 +158,7 @@ function montaParametrosTemas(no,dados,redesenha)
  * @param codigoLayer
  */
 function pegaPluginLayer(plugin,codigoMap,codigoLayer){
-	core_montaEditor("","450px","500px","","Plugin");
+	core_montaEditor("","450px","500px","","Plugin",true,false,false);
 	var sUrl = "../php/editormapfile.php?funcao=pegaPlugin&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	var montaEditorPlugin = function(retorno){
 		var ins = "<input type=button title='Salvar' value='Salvar' id=salvarPlugin />"

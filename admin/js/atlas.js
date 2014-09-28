@@ -279,7 +279,7 @@ function editar(tipo,id)
 				if(tipo == "atlas")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('atlas','"+id+"')");
+					core_montaEditor("gravaDados('atlas','"+id+"')","","","","Atlas",true,true,false);
 					$i("editor_bd").innerHTML = montaDivAtlas(dados);
 					core_carregando("desativa");
 					core_comboPranchas("comboPranchaIni","Epranchadefault_atlas",dados.pranchadefault_atlas,"",id);
@@ -287,14 +287,14 @@ function editar(tipo,id)
 				if(tipo == "prancha")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('prancha','"+id+"')");
+					core_montaEditor("gravaDados('prancha','"+id+"')","","","","Prancha",true,true,false);
 					$i("editor_bd").innerHTML = montaDivPrancha(dados);
 					core_carregando("desativa");
 				}
 				if(tipo == "tema")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('tema','"+id+"')");
+					core_montaEditor("gravaDados('tema','"+id+"')","","","","Tema",true,true,false);
 					$i("editor_bd").innerHTML = montaDivTema(dados);
 					core_carregando("desativa");
 					core_comboMapfiles("comboTemaIni","Ecodigo_tema",dados.codigo_tema,"",true);

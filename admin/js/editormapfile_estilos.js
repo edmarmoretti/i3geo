@@ -12,7 +12,6 @@ Abre o editor de dados gerais de um estilo
 */
 function editorEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 {
-	core_montaEditor("","450px","500px","","Estilo");
 	var sUrl = "../php/editormapfile.php?funcao=pegaEstilo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEstilo");
 }
@@ -66,6 +65,11 @@ function excluirEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 }
 function montaEditorEstilo(dados)
 {
+	var temp = function(){
+		salvarDadosEditor('estilo',dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.indiceEstilo);
+	};
+	core_montaEditor(temp,"450px","650px","","Estilo",true,true,false);
+
 	var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png";
 		param = {
 		"linhas":[
@@ -99,7 +103,7 @@ function montaEditorEstilo(dados)
 			titulo:"Angle",id:"angle",value:dados.angle,tipo:"text"}
 		]
 	};
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	var ins = "";
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
@@ -108,10 +112,6 @@ function montaEditorEstilo(dados)
 	temp += "<img onclick='selNavegador(\"symbolname\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
 	temp += "<div id='listaSimbolos' style='overflow:auto;width:350px;height:50px;'></div>";
 	$i("cSymbolname").innerHTML = temp;
-
-	var temp = function()
-	{salvarDadosEditor('estilo',dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.indiceEstilo);};
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 
 	escolheSimbolo = function(nome){
 		$i("symbolname").value = nome;

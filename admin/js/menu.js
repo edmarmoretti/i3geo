@@ -150,33 +150,36 @@ i3GEOadmin.menus = {
 		core_carregando("desativa");
 	},
 	editor: function(dados,id,recordid){
-		function on_editorCheckBoxChange(p_oEvent){
-			if(p_oEvent.newValue.get("value") == "OK"){
-				i3GEOadmin.menus.salva(id,recordid);
-			}
-			YAHOO.menus.panelEditor2.destroy();
-			YAHOO.menus.panelEditor2 = null;
-		};
 		if(!$i("janela_editor2")){
 			var editorBotoes,ins,
 				novoel = document.createElement("div");
 			novoel.id =  "janela_editor2";
-			ins = '<div class="hd">Editor</div>';
+			ins = '<div class="hd"><input id=okcancel_checkbox_id2 type="buttom" value="Salva" /><span style="margin-left:10px;position:relative;top:-10px;">Menu</span></div>';
 			ins += "<div class='bd' style='height:354px;overflow:auto'>";
-			ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
+			ins += "<div id='editor_bd2'></div>";
 			ins += "<div id='letras_M'></div>";
 			novoel.innerHTML = ins;
 
 			document.body.appendChild(novoel);
-			editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
-			editorBotoes.addButtons([
-				{ label: "Salva", value: "OK", checked: false},
-				{ label: "Cancela", value: "CANCEL", checked: false }
-			]);
-			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-			YAHOO.menus.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:false,width:"480px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
+
+			new YAHOO.widget.Button(
+				"okcancel_checkbox_id2",
+				{onclick:{fn: function(){
+					i3GEOadmin.menus.salva(id,recordid);
+					YAHOO.menus.panelEditor2.destroy();
+					YAHOO.menus.panelEditor2 = null;
+				}}}
+			);
+
+			YAHOO.menus.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:true,width:"480px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
 			YAHOO.menus.panelEditor2.render();
 		}
+		var fecha = function(){
+			YAHOO.menus.panelEditor2.destroy();
+			YAHOO.menus.panelEditor2 = null;
+		};
+		YAHOO.util.Event.addListener(YAHOO.menus.panelEditor2.close, "click", fecha);
+
 		YAHOO.menus.panelEditor2.show();
 		$i("editor_bd2").innerHTML = i3GEOadmin.menus.formulario(dados[0]);
 		core_carregando("desativa");

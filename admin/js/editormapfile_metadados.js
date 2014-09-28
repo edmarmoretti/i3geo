@@ -5,14 +5,17 @@ Abre o editor de metadados
 
 <PEGAMETADADOS>
 */
-function editorMetadados(codigoMap,codigoLayer)
-{
-	core_montaEditor("","450px","500px","","Miscel&acirc;nea");
+function editorMetadados(codigoMap,codigoLayer){
+	//core_montaEditor("","450px","500px","","Miscel&acirc;nea");
 	var sUrl = "../php/editormapfile.php?funcao=pegaMetadados&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorMetadados");
 }
-function montaEditorMetadados(dados)
-{
+function montaEditorMetadados(dados){
+	//core_montaEditor("","450px","500px","","Miscel&acirc;nea");
+	var temp = function(){
+		salvarDadosEditor('metadados',dados.codigoMap,dados.codigoLayer);
+	};
+	core_montaEditor(temp,"450px","500px","","Miscel&acirc;nea",true,true,false);
 	var paramRaster = {
 		"linhas":[
 			{ajuda:"A palete &eacute; v&aacute;lida apenas para temas RASTER. Entre com o endere&ccedil;o do arquivo no servidor. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
@@ -126,7 +129,8 @@ function montaEditorMetadados(dados)
 			titulo:"&Eacute; do tipo TileCache (0 ou 1 indicam n&atilde;o ou sim) - wms_tile",id:"wms_tile",value:dados.wms_tile,tipo:"text"}
 		]
 	};
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	//var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	var ins = "";
 	if(dados.colunas != "")
 	{
 		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: <br>";
@@ -156,7 +160,4 @@ function montaEditorMetadados(dados)
 		temp += "</select>";
 		$i("cLtempoconvencode").innerHTML = temp;
 	}
-	var temp = function()
-	{salvarDadosEditor('metadados',dados.codigoMap,dados.codigoLayer);};
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }

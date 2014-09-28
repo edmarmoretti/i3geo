@@ -647,7 +647,7 @@ function editar(tipo,id)
 				if(tipo == "grupo")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('grupo','"+id+"')","400px","400px");
+					core_montaEditor("gravaDados('grupo','"+id+"')","400px","400px","","Grupo",true,true,false);
 					$i("editor_bd").innerHTML = montaDivGrupo(dados);
 					core_comboGrupos("comboGrupo","Eid_grupo",dados.id_grupo,"");
 					core_comboPerfis("comboPerfil","Eperfil_grupo","","registraPerfil(this.value,\"En1_perfil\")");
@@ -655,7 +655,7 @@ function editar(tipo,id)
 				if(tipo == "subgrupo")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('subgrupo','"+id+"')","400px","400px");
+					core_montaEditor("gravaDados('subgrupo','"+id+"')","400px","400px","","SubGrupo",true,true,false);
 					$i("editor_bd").innerHTML = montaDivSubGrupo(dados);
 					core_comboSubGrupos("comboSubGrupo","Eid_subgrupo",dados.id_subgrupo,"");
 					core_comboPerfis("comboPerfil","Eperfil_subgrupo","","registraPerfil(this.value,\"En2_perfil\")");
@@ -663,7 +663,7 @@ function editar(tipo,id)
 				if(tipo == "tema")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('tema','"+id+"')","400px","400px");
+					core_montaEditor("gravaDados('tema','"+id+"')","400px","400px","","Tema",true,true,false);
 					$i("editor_bd").innerHTML = montaDivTema(dados);
 					core_comboTemas("comboTema","Eid_tema",dados.id_tema,"");
 					core_comboPerfis("comboPerfil","Eperfil_tema","","registraPerfil(this.value,\"En3_perfil\")");
@@ -671,7 +671,7 @@ function editar(tipo,id)
 				if(tipo == "raizmenu" || tipo == "raizgrupo")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('"+tipo+"','"+id+"')");
+					core_montaEditor("gravaDados('"+tipo+"','"+id+"')","","","","Raiz",true,true,false);
 					$i("editor_bd").innerHTML = montaDivRaiz(dados);
 					core_comboTemas("comboTema","Eid_tema",dados.id_tema,"");
 					core_comboPerfis("comboPerfil","Eperfil","","registraPerfil(this.value,\"Eperfil\")");

@@ -195,14 +195,14 @@ function editar(tipo,id)
 				if(tipo == "operacao")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('operacao','"+id+"')");
+					core_montaEditor("gravaDados('operacao','"+id+"')","","","","Opera&ccedil;&atilde;o",true,true,false);
 					$i("editor_bd").innerHTML = montaDivOperacao(dados);
 					core_carregando("desativa");
 				}
 				if(tipo == "papel")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText);
-					core_montaEditor("gravaDados('papel','"+id+"')","250px","100px","","Papel");
+					core_montaEditor("gravaDados('papel','"+id+"')","250px","100px","","Papel",true,true,false);
 					$i("editor_bd").innerHTML = montaDivPapel(dados);
 					document.getElementById("Eid_papel").style.width = "200px";
 					core_carregando("desativa");

@@ -1487,57 +1487,81 @@ funcaoClose - nome da funcao que ser&aacute; executada quando a janela for fecha
 titulo - titulo da janela
 
 modal - boolean
+
+bsalva - boolean botao salvar
+
+bcancela - boolean botao cancelar
 */
-function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal)
+function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 {
-	if(arguments.length == 0)
-	{
+	if(!funcaoOK){
 		funcaoOK = "";
-		w = "400px";
-		h = "354px";
-		modal == true;
 	}
-	if(arguments.length < 2)
-	{
+	if(!w){
 		w = "400px";
+	}
+	if(!h){
 		h = "354px";
-		modal == true;
+	}
+	if(modal == undefined){
+		modal = false;
+	}
+	if(bsalva == undefined){
+		bsalva = true;
+	}
+	if(bcancela  == undefined){
+		bcancela = true;
 	}
 	if(!titulo){
 		titulo = "Editor";
-		modal == true;
 	}
 	if(!funcaoClose){
 		funcaoClose = "";
-		modal == true;
 	}
 	if(!$i("janela_editor"))
 	{
-		var novoel = document.createElement("div");
+		var ins = "", temp = "", lb,
+			salvai = "<input id=okcancel_checkboxOK type='buttom' value='Salva' />",
+			cancelai = "<input id=okcancel_checkboxCANCEL type='buttom' value='Cancela' />",
+			novoel = document.createElement("div");
 		novoel.id =  "janela_editor";
-		var ins = '<div class="hd">'+titulo+'</div>';
-		ins += "<div class='bd' style='height:"+h+";overflow:auto'>";
-		ins += "<div id='okcancel_checkbox'></div>";
-		ins += "<div id='editor_bd'></div>";
+		ins = '<div class="hd"><div id="okcancel_checkbox" ></div></div>' +
+			"<div class='bd' style='height:"+h+";overflow:auto'>" +
+			"<div id='editor_bd'></div>";
 		novoel.innerHTML = ins;
 		document.body.appendChild(novoel);
 		if(funcaoOK != "")
 		{
-			var lb = $i("okcancel_checkbox");
-			lb.innerHTML = "<input id=okcancel_checkboxOK type='buttom' value='Salva' /><input id=okcancel_checkboxCANCEL type='buttom' value='Cancela' />";
-			new YAHOO.widget.Button(
-				"okcancel_checkboxOK",
-				{onclick:{fn: function(){
-					eval(funcaoOK);
-				}}}
-			);
-			new YAHOO.widget.Button(
-				"okcancel_checkboxCANCEL",
-				{onclick:{fn: function(){
-					YAHOO.admin.container.panelEditor.destroy();
-					YAHOO.admin.container.panelEditor = null;
-				}}}
-			);
+			lb = $i("okcancel_checkbox");
+			if(bsalva === true){
+				temp += salvai;
+			}
+			if(bcancela === true){
+				temp += cancelai;
+			}
+			lb.innerHTML = temp + '<span style="margin-left:10px;position:relative;top:-10px;">'+titulo+'</span>';
+			if(bsalva === true){
+				new YAHOO.widget.Button(
+					"okcancel_checkboxOK",
+					{onclick:{fn: function(){
+						if(YAHOO.lang.isFunction(funcaoOK)){
+							funcaoOK.call();
+						}
+						else{
+							eval(funcaoOK);
+						}
+					}}}
+				);
+			}
+			if(bcancela === true){
+				new YAHOO.widget.Button(
+					"okcancel_checkboxCANCEL",
+					{onclick:{fn: function(){
+						YAHOO.admin.container.panelEditor.destroy();
+						YAHOO.admin.container.panelEditor = null;
+					}}}
+				);
+			}
 		}
 		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:"contained",close:true,width:w, overflow:"auto",modal: modal,visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor.render();
@@ -1545,7 +1569,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal)
 	else
 	{
 		if($i("editor_bd"))
-		{$i("editor_bd").innerHTML == "";}
+		{$i("editor_bd").innerHTML == "?";}
 	}
 	var fecha = function()
 	{
@@ -1555,8 +1579,12 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal)
 		}
 		catch(e){}
 		try{
-			if(funcaoClose != "")
-			{eval(funcaoClose+"()");}
+			if(YAHOO.lang.isFunction(funcaoClose)){
+				funcaoClose.call();
+			}
+			else if(funcaoClose != ""){
+				eval(funcaoClose+"()");
+			}
 		}
 		catch(e){};
 	};

@@ -7,13 +7,16 @@ Abre o editor dos labels de um layer
 */
 function editorClasseLabel(codigoMap,codigoLayer,indiceClasse)
 {
-	core_montaEditor("","450px","500px","","Label");
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseLabel&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseLabel");
 }
 
 function montaEditorClasseLabel(dados)
 {
+	var temp = function(){
+		salvarDadosEditor('classeLabel',dados.codigoMap,dados.codigoLayer,dados.indiceClasse);
+	};
+	core_montaEditor(temp,"450px","500px","","Label",true,true,false);
 	var param = {
 		"linhas":[
 		{ajuda:"Cor com a qual o texto ser&aacute; desenhado. [ATRIBUTO] especifica o nome do item na tabela de atributos para usar como valores de cor. Os colchetes [] s&atilde;o necess&aacute;rios. Por exemplo, se o DBF do seu shapefile tem um campo chamado &#8220;MYCOLOR&#8221; o objeto LABEL deve conter: LABEL &#8594; COLOR [MYCOLOR].",
@@ -72,11 +75,11 @@ function montaEditorClasseLabel(dados)
 		titulo:"Encoding",id:"encoding",value:dados.encoding,tipo:"text"}
 		]
 	};
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	var ins = "";
 	if(dados.colunas != "")
 	{
-		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: ";
-		ins += dados.colunas+"</p>";
+		//ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: ";
+		//ins += dados.colunas+"</p>";
 	}
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
@@ -106,8 +109,4 @@ function montaEditorClasseLabel(dados)
 	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.autoangle);
 	temp += "</select>";
 	$i("cAutoangle").innerHTML = temp;
-
-	var temp = function()
-	{salvarDadosEditor('classeLabel',dados.codigoMap,dados.codigoLayer,dados.indiceClasse);};
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }

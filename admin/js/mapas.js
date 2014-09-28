@@ -138,34 +138,41 @@ i3GEOadmin.mapas = {
 		core_carregando("desativa");
 	},
 	editor: function(dados,id,recordid){
-		function on_editorCheckBoxChange(p_oEvent){
-			if(p_oEvent.newValue.get("value") == "OK"){
-				i3GEOadmin.mapas.salva(id,recordid);
-			}
-			YAHOO.mapas.panelEditor2.destroy();
-			YAHOO.mapas.panelEditor2 = null;
-		};
 		if(!$i("janela_editor2")){
 			var editorBotoes,ins,
 				novoel = document.createElement("div");
 			novoel.id =  "janela_editor2";
-			ins = '<div class="hd">Editor</div>';
-			ins += "<div class='bd' style='height:354px;overflow:auto'>";
-			ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
-			ins += "<div id='letras_SG'></div>";
+			ins = '<div class="hd"><input id=okcancel_checkboxOK type="buttom" value="Salva" />' +
+				'<span style="margin-left:10px;position:relative;top:-10px;">Editor</div>' +
+				"<div class='bd' style='height:354px;overflow:auto'>" +
+				"<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>" +
+				"<div id='letras_SG'></div>";
 			novoel.innerHTML = ins;
 
 			document.body.appendChild(novoel);
-			editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
-			editorBotoes.addButtons([
-				{ label: "Salva", value: "OK", checked: false},
-				{ label: "Cancela", value: "CANCEL", checked: false }
-			]);
-			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-			YAHOO.mapas.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
+
+			new YAHOO.widget.Button(
+				"okcancel_checkboxOK",
+				{onclick:{fn: function(){
+					i3GEOadmin.mapas.salva(id,recordid);
+					YAHOO.mapas.panelEditor2.destroy();
+					YAHOO.mapas.panelEditor2 = null;
+				}}}
+			);
+			YAHOO.mapas.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:true,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
 			YAHOO.mapas.panelEditor2.render();
 		}
+
+		var fecha = function(){
+			try{
+				YAHOO.admin.container.panelEditor.destroy();
+				YAHOO.admin.container.panelEditor = null;
+			}
+			catch(e){}
+		};
+		YAHOO.util.Event.addListener(YAHOO.mapas.panelEditor2.close, "click", fecha);
 		YAHOO.mapas.panelEditor2.show();
+
 		$i("editor_bd2").innerHTML = i3GEOadmin.mapas.formulario(dados[0]);
 		core_comboMapfiles("comboMapfiles","Etemas_mapa","",'registraMapfile(this.value,\"Etemas_mapa\")');
 		core_comboPerfis("comboPerfis","Eperfil_mapa","","registraPerfil(this.value)");
@@ -174,8 +181,6 @@ i3GEOadmin.mapas = {
 	formulario: function(i){
 		var ins = "";
 
-		//ins += "<p>Mapfile (c�digo do mapfile que ser&aacute; utilizado para criar a camada no i3geo):"
-		//ins += "<div id=comboMapfiles >Buscando...</div>";
 		ins += "<p>Ordem de apresenta&ccedil;&atilde;o do mapa:<br>";
 		ins += "<input size=10 type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></p>";
 

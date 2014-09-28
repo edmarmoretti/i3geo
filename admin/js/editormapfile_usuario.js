@@ -37,18 +37,19 @@ function excluirGrupoUsrTema(id_tema,id_grupo,codigo_mapa){
 }
 function editorGrupousr(id_tema,codigo_mapa)
 {
-	core_montaEditor("","350px","200px","","Grupo usuario");
+	var temp = function(){
+		salvarDadosEditor('grupousr');
+	};
+	core_montaEditor(temp,"350px","200px","","Grupo usuario",true,true,false);
 	$i("editor_bd").innerHTML = "<input type=hidden value='"+codigo_mapa+"' id='Ecodigo_mapa_usr'/><input type=hidden value='"+id_tema+"' id='Eid_tema_usr'/>";
 	var sUrl = "../php/gruposusuarios.php?funcao=pegaGrupos";
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorGrupousr");
 }
 function montaEditorGrupousr(dados){
-	var temp = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	var temp = "";
 	temp += "<p>Escolha o grupo de usu&aacute;rios:</p><select id='Eid_grupousr' >";
 	temp += core_comboObjeto(dados,"id_grupo","nome");
 	temp += "</select>";
 	$i("editor_bd").innerHTML += temp;
-	var tempf = function()
-	{salvarDadosEditor('grupousr');};
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: tempf }});
+
 }

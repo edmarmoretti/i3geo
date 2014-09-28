@@ -11,13 +11,17 @@ Abre o editor de conex&atilde;o com a fonte dos dados de um layer
 */
 function editorDados(codigoMap,codigoLayer)
 {
-	core_montaEditor("","500px","650px","","Conex&atilde;o");
 	var sUrl = "../php/editormapfile.php?funcao=pegaConexao&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDados");
 }
 
 function montaEditorDados(dados)
 {
+	var temp = function(){
+		salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false);
+	};
+	core_montaEditor(temp,"500px","650px","","Conex&atilde;o",true,true,false);
+
 	var idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],
 		idsMetaestat = ["connection","data","tileitem","tileindex","tipooriginal"],
 		limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
@@ -55,8 +59,7 @@ function montaEditorDados(dados)
 			titulo:"Tipo de representa&ccedil;&atilde;o (tipooriginal) - para temas do tipo WMS",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipoOriginal ></div>"}
 			]
 		};
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
-	ins += "&nbsp;<input type=button title='Testar' value='Testar' id=testarEditor />";
+	var ins = "";
 
 	if(dados.colunas != "" && dados.colunas != undefined){
 		ins += "<p>O layer possui as seguintes colunas na tabela de atributos: ";
@@ -124,37 +127,29 @@ function montaEditorDados(dados)
 		$i("cConvcaracter").innerHTML = temp;
 	}
 
-	var temp = function()
-	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false);};
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
-
-	var temp = function()
-	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,"","",true);};
-	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
-
 	$i("connectiontype").onchange = function(){
+		var dados = [],valor = $i("connectiontype").value;
 		core_desativaforms(idsForms);
-		var valor = $i("connectiontype").value,
-			d;
 		//["connection","data","tileitem","tileindex"]
 		if(valor == 0 || valor == 10)
-		{d = [];}
+		{dados = [];}
 		if(valor == 1 || valor == 12)
-		{d = ["data","type"];}
+		{dados = ["data","type"];}
 		if(valor == 2)
-		{d = ["tileitem","tileindex","type"];}
+		{dados = ["tileitem","tileindex","type"];}
 		if(valor == 3 || valor == 4 || valor == 6 || valor == 8 || valor == 13)
-		{d = idsForms;}
+		{dados = idsForms;}
 		if(valor == 5)
-		{d = ["connection","tileitem","tileindex","type"];}
+		{dados = ["connection","tileitem","tileindex","type"];}
 		if(valor == 7 || valor == 9)
-		{d = ["connection","type","tipooriginal"];}
-		core_ativaforms(d);
+		{dados = ["connection","type","tipooriginal"];}
+
+		core_ativaforms(dados);
 	};
 	$i("metaestat").onchange = function(){
 		core_desativaforms(idsMetaestat);
 		var valor = $i("metaestat").value,
-			d;
+			d = [];
 		if(valor === "SIM"){
 			d = ["metaestat_id_medida_variavel"];
 		}

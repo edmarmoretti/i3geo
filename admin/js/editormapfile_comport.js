@@ -11,12 +11,15 @@ Abre o editor das op&ccedil;&otilde;es que controlam o comportamento do layer no
 */
 function editorComport(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px","","Comportamento");
 	var sUrl = "../php/editormapfile.php?funcao=pegaComport&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorComport");
 }
 function montaEditorComport(dados)
 {
+	var temp = function(){
+		salvarDadosEditor('comport',dados.codigoMap,dados.codigoLayer,false);
+	};
+	core_montaEditor(temp,"450px","650px","","Comportamento",true,true,false);
 	var param = {
 		"linhas":[
 			{ajuda:"Define o estado atual da camada. Geralmente modificado pelo pr&oacute;prio MapServer. Default ativa a camada permanentemente.",
@@ -61,7 +64,7 @@ function montaEditorComport(dados)
 			titulo:"Sizeunits",id:"",value:dados.sizeunits,tipo:"text",div:"<div id=cSizeunits ></div>"}
 		]
 	};
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	var ins = "";
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
@@ -115,9 +118,5 @@ function montaEditorComport(dados)
 	temp += core_comboObjeto(objmapunits,"valor","texto",dados.toleranceunits);
 	temp += "</select>";
 	$i("cToleranceunits").innerHTML = temp;
-
-	var temp = function()
-	{salvarDadosEditor('comport',dados.codigoMap,dados.codigoLayer,false);};
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
 

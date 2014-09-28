@@ -4,9 +4,24 @@ MAP
   LAYER
     DATA "/var/www/i3geo/aplicmap/dados/sc22/AEROPORTO_CAMPO_DE_POUSO.shp"
     METADATA
+      "ltempoitemimagem"	""
+      "ltempoitemdescricao"	""
       "CLASSE"	"SIM"
+      "ltempoiteminicio"	""
+      "palletestep"	""
+      "ltempoitemtip"	""
+      "ltempoitemtitulo"	""
+      "description_template"	""
+      "ltempoitemlink"	""
+      "palletefile"	""
+      "ltempoformatodata"	""
+      "ltempoitemicone"	""
       "PLUGINI3GEO"	""
+      "itembuscarapida"	""
       "TEMA"	"Aeroportos SC22"
+      "ltempoconvencode"	""
+      "editorsql"	""
+      "ltempoitemfim"	""
     END # METADATA
     NAME "_cursoaeroporto"
     STATUS OFF
@@ -26,3 +41,4 @@ MAP
   END # LAYER
 
 END # MAP
+

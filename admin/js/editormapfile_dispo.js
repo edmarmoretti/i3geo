@@ -7,12 +7,15 @@ Abre o editor que define a disponibilidade dos dados
 */
 function editorDispo(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px","","Disponibilidade");
 	var sUrl = "../php/editormapfile.php?funcao=pegaDispo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorDispo");
 }
 function montaEditorDispo(dados)
 {
+	var temp = function(){
+		salvarDadosEditor('dispo',dados.codigoMap,dados.codigoLayer,false);
+	};
+	core_montaEditor(temp,"450px","650px","","Disponibilidade",true,true,false);
 	var param = {
 		"linhas":[
 			{ajuda:"Indica se o usu&aacute;rio pode fazer download do tema. Se sim, o &iacute;cone de download ser&aacute; mostrado na &aacute;rvore de camadas dispon&iacute;veis no mapa.",
@@ -23,7 +26,7 @@ function montaEditorDispo(dados)
 			titulo:"Arquivo KML ou KMZ (ARQUIVOKMZ)",id:"arquivokmz",value:dados.arquivokmz,tipo:"text"}
 		]
 	};
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	var ins = "";
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
@@ -33,7 +36,4 @@ function montaEditorDispo(dados)
 		temp += "</select>";
 		$i("cDownload").innerHTML = temp;
 	}
-	var temp = function()
-	{salvarDadosEditor('dispo',dados.codigoMap,dados.codigoLayer,false);};
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }

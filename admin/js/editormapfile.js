@@ -180,7 +180,7 @@ function ativaBotaoAdicionaMapfile(idBotao)
 {
 	var adiciona = function()
 	{
-		core_montaEditor("adicionaNovoMapfile()","450px","660px","","","Mapfile");
+		core_montaEditor("adicionaNovoMapfile()","450px","660px","","Mapfile",true,true,false);
 		ins = "<p><b>Nome do novo arquivo mapfile (sem .map) </b>n&atilde;o utilize caracteres acentuados ou espa&ccedil;os em branco</p>";
 		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>";
 		ins += "<p><b>Esse mapfile baseia-se no sistema de metadados estat&iacute;sticos?</b> Caso escolha sim, a conex&atilde;o com o banco e o sql de acesso aos dados ser&atilde;o constru&iacute;dos de forma din&acirc;mica</p>";
@@ -767,59 +767,82 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do layer= "+codigoLayer);
 	var sUrl = prog+par;
-	var callback =
-	{
-			success:function(o)
-			{
-				try
-				{
-					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-					{
+	var callback = {
+			success:function(o)	{
+				try{
+					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
 						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel salvar.</span>");
 						setTimeout("core_carregando('desativa')",3000);
 					}
-					else
-					{
+					else{
 						if(testar == false){
-							if(tipo=="conexao")
-							{montaEditorDados(YAHOO.lang.JSON.parse(o.responseText));}
-							if(tipo=="comport")
-							{montaEditorComport(YAHOO.lang.JSON.parse(o.responseText));}
-							if(tipo=="dispo")
-							{montaEditorDispo(YAHOO.lang.JSON.parse(o.responseText));}
-							if(tipo=="editavel")
-							{montaEditorEditavel(YAHOO.lang.JSON.parse(o.responseText));}
+							if(tipo=="conexao"){
+								//montaEditorDados(YAHOO.lang.JSON.parse(o.responseText));
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
+							}
+							if(tipo=="comport"){
+								//montaEditorComport(YAHOO.lang.JSON.parse(o.responseText));
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
+							}
+							if(tipo=="dispo"){
+								//montaEditorDispo(YAHOO.lang.JSON.parse(o.responseText));
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
+							}
+							if(tipo=="editavel"){
+								//montaEditorEditavel(YAHOO.lang.JSON.parse(o.responseText));
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
+							}
 							if(tipo=="titulo"){
 								//o codigo do layer pode ter sido alterado
 								var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer);
 								tree.removeChildren(no) ;
 								no.expand();
-								montaEditorTitulo(YAHOO.lang.JSON.parse(o.responseText));
+								//montaEditorTitulo(YAHOO.lang.JSON.parse(o.responseText));
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
 							}
-							if(tipo=="metadados")
-							{montaEditorMetadados(YAHOO.lang.JSON.parse(o.responseText));}
-							if(tipo=="geral")
-							{
+							if(tipo=="metadados"){
+								//montaEditorMetadados(YAHOO.lang.JSON.parse(o.responseText));
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
+							}
+							if(tipo=="geral"){
 								var d = YAHOO.lang.JSON.parse(o.responseText);
 								montaEditorGeral(d);
-								if(d.name != codigoLayer)
-								{
+								if(d.name != codigoLayer){
 									core_pegaMapfiles("montaArvore()");
 									YAHOO.admin.container.panelEditor.destroy();
 									YAHOO.admin.container.panelEditor = null;
 								}
 							}
-							if(tipo=="classeGeral")
-							{montaEditorClasseGeral(YAHOO.lang.JSON.parse(o.responseText));}
-							if(tipo=="classeLabel")
-							{montaEditorClasseLabel(YAHOO.lang.JSON.parse(o.responseText));}
-							if(tipo=="estilo")
-							{montaEditorEstilo(YAHOO.lang.JSON.parse(o.responseText));}
-
+							if(tipo=="classeGeral"){
+								var dados = YAHOO.lang.JSON.parse(o.responseText);
+								var no = tree.getNodeByProperty("id",dados.codigoMap+"_"+dados.codigoLayer+"_"+dados.indiceClasse);
+								var d = conteudoNoClasse(dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.name);
+								no.setHtml(d);
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
+							}
+							if(tipo=="classeLabel"){
+								//montaEditorClasseLabel(YAHOO.lang.JSON.parse(o.responseText));
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
+							}
+							if(tipo=="estilo"){
+								//montaEditorEstilo(YAHOO.lang.JSON.parse(o.responseText));
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
+							}
 							if(tipo =="grupousr"){
 								var no = tree.getNodeByProperty("id",$i("Ecodigo_mapa_usr").value);
 								tree.removeChildren(no) ;
 								no.expand();
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
 							}
 						}
 						else{

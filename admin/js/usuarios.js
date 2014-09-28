@@ -199,14 +199,13 @@ function editar(tipo,id)
 				if(tipo == "usuario")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("","450px","380px","","Usu&aacute;rio");
 					montaDivUsuario(dados);
 					core_carregando("desativa");
 				}
 				if(tipo == "papel")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText);
-					core_montaEditor("gravaDados('papel','"+id+"')","250px","100px");
+					core_montaEditor("gravaDados('papel','"+id+"')","250px","100px","","Papel",true,true,false);
 					$i("editor_bd").innerHTML = montaDivPapel(dados);
 					document.getElementById("Eid_papel").style.width = "200px";
 					core_carregando("desativa");
@@ -226,6 +225,10 @@ function editar(tipo,id)
 	{core_makeRequest(sUrl,callback);}
 }
 function montaDivUsuario(i){
+	var temp = function(){
+		gravaDados('usuario',i.id_usuario);
+	};
+	core_montaEditor(temp,"450px","380px","","Usu&aacute;rio",true,true,false);
 	var param = {
 		"linhas":[
 				{titulo:"Nome:",id:"Enome_usuario",size:"50",value:i.nome_usuario,tipo:"text",div:""},
@@ -236,7 +239,7 @@ function montaDivUsuario(i){
 				{titulo:"Ativo:",id:"",size:"50",value:i.ativo,tipo:"text",div:"<div id=cAtivo ></div>"}
 		]
 	};
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditorUsuario />";
+	var ins = "";
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
@@ -248,9 +251,6 @@ function montaDivUsuario(i){
 		$i("cAtivo").innerHTML = temp;
 		$i("Eativo").value = i.ativo;
 	}
-	var temp = function()
-	{gravaDados('usuario',i.id_usuario);};
-	new YAHOO.widget.Button("salvarEditorUsuario",{ onclick: { fn: temp }});
 }
 function montaDivPapel(dados){
 	var ins = "<p><select id='Eid_papel' >";

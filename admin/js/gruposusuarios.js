@@ -172,13 +172,12 @@ function editar(tipo,id){
 			try			{
 				if(tipo == "grupo")				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("","450px","280px","","Grupo");
 					montaDivGrupo(dados);
 					core_carregando("desativa");
 				}
 				if(tipo == "usuario")				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText);
-					core_montaEditor("gravaDados('usuario','"+id+"')","250px","100px");
+					core_montaEditor("gravaDados('usuario','"+id+"')","250px","100px","","Usu&aacute;rio",true,true,false);
 					$i("editor_bd").innerHTML = montaDivUsuario(dados);
 					document.getElementById("Eid_usuario").style.width = "200px";
 					core_carregando("desativa");
@@ -198,19 +197,20 @@ function editar(tipo,id){
 	{core_makeRequest(sUrl,callback);}
 }
 function montaDivGrupo(i){
+	var temp = function(){
+		gravaDados('grupo',i.id_grupo);
+	};
+	core_montaEditor(temp,"450px","280px","","Grupo",true,true,false);
 	var param = {
 		"linhas":[
 				{titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
 				{titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""}
 		]
 	};
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditorGrupo />";
+	var ins = "";
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
-	var temp = function()
-	{gravaDados('grupo',i.id_grupo);};
-	new YAHOO.widget.Button("salvarEditorGrupo",{ onclick: { fn: temp }});
 }
 function montaDivUsuario(dados){
 	var ins = "<p><select id='Eid_usuario' >";

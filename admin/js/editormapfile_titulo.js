@@ -8,12 +8,16 @@ Abre o editor de t&iacute;tulo e descri&ccedil;&atilde;o
 */
 function editorTitulo(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","650px","","T&iacute;tulo");
 	var sUrl = "../php/editormapfile.php?funcao=pegaTitulo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorTitulo");
 }
 function montaEditorTitulo(dados)
 {
+	var temp = function(){
+		salvarDadosEditor('titulo',dados.codigoMap,dados.codigoLayer);
+	};
+	core_montaEditor(temp,"450px","650px","","T&iacute;tulo",true,true,false);
+
 	var param = {
 		"linhas":[
 			{ajuda:"Elemento 'NAME'. N&atilde;o confunda com o nome que aparece no mapa ou  na &aacute;rvore de temas. Normalmente o código recebe o mesmo nome do arquivo mapfile, sem a extens&atilde;o '.map'",
@@ -32,12 +36,9 @@ function montaEditorTitulo(dados)
 			titulo:"Mensagem (MENSAGEM)",id:"mensagem",value:dados.mensagem,tipo:"text"}
 		]
 	};
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	var ins = "";
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
 
-	var temp = function()
-	{salvarDadosEditor('titulo',dados.codigoMap,dados.codigoLayer);};
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }

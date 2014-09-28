@@ -218,14 +218,14 @@ function editar(tipo,id)
 }
 function montaEditorSistemas(dados,id)
 {
-	core_montaEditor("gravaDadosSistema('"+id+"')");
+	core_montaEditor("gravaDadosSistema('"+id+"')","","","","Sistema",true,true,false);
 	$i("editor_bd").innerHTML = montaDivSistemas(dados);
 	core_carregando("desativa");
 	core_comboPerfis("comboPerfis","selPerfil","","registraPerfil(this.value,\"Eperfil_sistema\")");
 }
 function montaEditorFuncoes(dados,id)
 {
-	core_montaEditor("gravaDadosFuncao('"+id+"')");
+	core_montaEditor("gravaDadosFuncao('"+id+"')","","","","Fun&ccedil;&atilde;o",true,true,false);
 	$i("editor_bd").innerHTML = montaDivFuncoes(dados);
 	core_carregando("desativa");
 	core_comboPerfis("comboPerfis","selPerfil","","registraPerfil(this.value,\"Eperfil_funcao\")");

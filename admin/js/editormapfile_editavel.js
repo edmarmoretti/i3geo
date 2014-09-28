@@ -7,12 +7,16 @@ Abre o editor que define se o tema e editavel ou nao
 */
 function editorEditavel(codigoMap,codigoLayer)
 {
-	core_montaEditor("","450px","450px","","Edi&ccedil;&atilde;o");
 	var sUrl = "../php/editormapfile.php?funcao=pegaEditavel&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEditavel");
 }
 function montaEditorEditavel(dados)
 {
+	var temp = function(){
+		salvarDadosEditor('editavel',dados.codigoMap,dados.codigoLayer,false);
+	};
+	core_montaEditor(temp,"450px","450px","","Edi&ccedil;&atilde;o",true,true,false);
+
 	var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
 		param = {
 		"linhas":[
@@ -28,7 +32,7 @@ function montaEditorEditavel(dados)
 			titulo:"Coluna com geometria edit&aacute;vel",id:"",value:"",tipo:"text",div:"<div id=cColunageometriatabelaeditavel ></div>" }
 		]
 		},
-	ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	ins = "";
 	ins += "<p>Obs.: Apenas temas baseados em Postgis podem ser editados</p>";
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
@@ -71,7 +75,4 @@ function montaEditorEditavel(dados)
 	$i("colunageometriatabelaeditavelBusca").onclick = function(){
 		i3GEO.util.navegadorPostgis($i("colunageometria"),"","coluna");
 	};
-	var temp = function()
-	{salvarDadosEditor('editavel',dados.codigoMap,dados.codigoLayer,false);};
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }

@@ -70,7 +70,7 @@ i3GEOadmin.variaveis = {
 							try	{
 								core_carregando("desativa");
 								var j = YAHOO.lang.JSON.parse(o.responseText);
-								core_montaEditor("","650px","500px","","Relat&oacute;rio");
+								core_montaEditor("","650px","500px","","Relat&oacute;rio",true,true,false);
 								$i("editor_bd").innerHTML = j;
 							}
 							catch(e){core_handleFailure(e,o.responseText);}
@@ -440,7 +440,7 @@ i3GEOadmin.variaveis = {
 			core_makeRequest(p,callback);
 		},
 		classesAuto: function(id_classificacao,id_medida_variavel){
-			core_montaEditor("","450px","230px","","Criar classes");
+			core_montaEditor("","450px","230px","","Criar classes",false,false,false);
 			var ins = "" +
 				"<p class='paragrafo' >&nbsp;N&uacute;mero de intervalos de classes: <input type=text value=5 id=i3GEOFmetaestatEditorNumInt size=5 />" +
 				"<img src='../imagens/accessories-calculator.png' title='Calcular por Sturges' onclick='i3GEOadmin.variaveis.classificacao.sturges("+id_medida_variavel+",\"i3GEOFmetaestatEditorNumInt\")' style='position:relative;cursor:pointer;top:2px'> </p>" +
@@ -917,27 +917,27 @@ i3GEOadmin.variaveis = {
 	},
 	editarMontaFormulario: function(dados,tipo,id){
 		if(tipo == "variavel"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('variavel','"+id+"')","450px","200px","","Editor de vari&aacute;vel",true);
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('variavel','"+id+"')","450px","200px","","Editor de vari&aacute;vel",true,true,false);
 			i3GEOadmin.variaveis.montaDivVariavel(dados);
 		}
 		if(tipo == "medidaVariavel"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('medidaVariavel','"+id+"')","450px","200px","","Editor de medidas",true);
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('medidaVariavel','"+id+"')","450px","200px","","Editor de medidas",true,true,false);
 			i3GEOadmin.variaveis.medidas.montaDiv(dados);
 		}
 		if(tipo == "parametroMedida"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('parametroMedida','"+id+"')","450px","200px","","Editor de par&acirc;metros",true);
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('parametroMedida','"+id+"')","450px","200px","","Editor de par&acirc;metros",true,true,false);
 			i3GEOadmin.variaveis.parametro.montaDiv(dados);
 		}
 		if(tipo == "classificacaoMedida"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('classificacaoMedida','"+id+"')","450px","200px","","Editor de classifica&ccedil;&atilde;o",true);
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('classificacaoMedida','"+id+"')","450px","200px","","Editor de classifica&ccedil;&atilde;o",true,true,false);
 			i3GEOadmin.variaveis.classificacao.montaDiv(dados);
 		}
 		if(tipo == "classeClassificacao"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('classeClassificacao','"+id+"')","450px","200px","","Editor de classe",true);
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('classeClassificacao','"+id+"')","450px","200px","","Editor de classe",true,true,false);
 			i3GEOadmin.variaveis.classes.montaDiv(dados);
 		}
 		if(tipo == "linkMedida"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('linkMedida','"+id+"')","450px","200px","","Editor de links",true);
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('linkMedida','"+id+"')","450px","200px","","Editor de links",true,true,false);
 			i3GEOadmin.variaveis.link.montaDiv(dados);
 		}
 	},
@@ -979,7 +979,7 @@ i3GEOadmin.variaveis = {
 			sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaLinkMedida&id_link="+id;
 		}
 		if(tipo == "fonteinfo"){
-			core_montaEditor("i3GEOadmin.variaveis.gravaDados('fonteinfo','"+id+"')","450px","200px","","Editor de fontes");
+			core_montaEditor("i3GEOadmin.variaveis.gravaDados('fonteinfo','"+id+"')","450px","200px","","Editor de fontes",true,true,false);
 			i3GEOadmin.variaveis.fonte.montaDiv();
 			core_carregando("desativa");
 		}
@@ -1004,7 +1004,7 @@ i3GEOadmin.variaveis = {
 						if(tipo == "medidaVariavel"){
 							var ins = "",
 							dados = YAHOO.lang.JSON.parse(o.responseText);
-							core_montaEditor("","480px","300px","","Testes",false);
+							core_montaEditor("","480px","300px","","Testes",false,false,false);
 							ins = "<p><b>Select simples:</b> "+dados.sql;
 							ins += "<p><b>Mapserver:</b> "+dados.sqlmapserver;
 							ins += "<p><b>&Uacute;ltima URL:</b><div id='ultimaUrl'></div> ";

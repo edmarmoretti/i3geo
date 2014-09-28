@@ -10,7 +10,6 @@ Abre o editor de dados gerais de uma classe
 */
 function editorClasseGeral(codigoMap,codigoLayer,indiceClasse)
 {
-	core_montaEditor("","450px","500px","","Classe");
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseGeral");
 }
@@ -285,6 +284,11 @@ function excluirClasse(codigoMap,codigoLayer,indiceClasse)
 }
 function montaEditorClasseGeral(dados)
 {
+	var temp = function(){
+		salvarDadosEditor('classeGeral',dados.codigoMap,dados.codigoLayer,dados.indiceClasse);
+	};
+	core_montaEditor(temp,"450px","500px","","Classe",true,true,false);
+
 	var re = /C_/g;
 	dados.expression = dados.expression.replace(re,"]");
 	re = /_C/g;
@@ -309,7 +313,7 @@ function montaEditorClasseGeral(dados)
 		titulo:"Minscale",id:"minscale",value:dados.minscale,tipo:"text"}
 		]
 	};
-	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
+	var ins = "";
 	if(dados.colunas != "")
 	{
 		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: ";
@@ -323,9 +327,5 @@ function montaEditorClasseGeral(dados)
 	temp += core_comboObjeto(objstatus,"valor","texto",dados.status);
 	temp += "</select>";
 	$i("cStatus").innerHTML = temp;
-
-	var temp = function()
-	{salvarDadosEditor('classeGeral',dados.codigoMap,dados.codigoLayer,dados.indiceClasse);};
-	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
 
