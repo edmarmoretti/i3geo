@@ -20,18 +20,18 @@ i3GEOF.atalhosedicao =
 	},
 	/*
 	 * Function: iniciaDicionario (Depreciado na versao 6.0)
-	 * 
+	 *
 	 */
 	iniciaDicionario : function() {
 		i3GEOF.atalhosedicao.iniciaJanelaFlutuante();
 	},
 	/*
 	 * Function: inicia
-	 * 
+	 *
 	 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	 * 
+	 *
 	 * Parametro:
-	 * 
+	 *
 	 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	 */
 	inicia : function(iddiv, idjanela) {
@@ -41,7 +41,7 @@ i3GEOF.atalhosedicao =
 			"atalhosedicao",
 		"ligadosComTabela");
 		$i(iddiv).innerHTML = i3GEOF.atalhosedicao.html(idjanela);
-		
+
 		new YAHOO.widget.Button("i3GEOFatalhosedicaoLegenda", {
 			onclick : {
 				fn : function() {
@@ -50,23 +50,69 @@ i3GEOF.atalhosedicao =
 			}
 		});
 		$i("i3GEOFatalhosedicaoLegenda-button").style.width = "200px";
-		
+
 		new YAHOO.widget.Button("i3GEOFatalhosedicaoSalva", {
 			onclick : {
 				fn : function() {
-					i3GEO.tema.dialogo.salvaMapfile(i3GEO.mapa.temaAtivo);
+					i3GEO.tema.dialogo.salvaMapfile(i3GEO.temaAtivo);
 				}
 			}
 		});
 		$i("i3GEOFatalhosedicaoSalva-button").style.width = "200px";
+
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoTabela", {
+			onclick : {
+				fn : function() {
+					i3GEO.tema.dialogo.tabela();
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoTabela-button").style.width = "200px";
+
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoTexto", {
+			onclick : {
+				fn : function() {
+					i3GEO.tema.dialogo.toponimia();
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoTexto-button").style.width = "200px";
+
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoEtiqueta", {
+			onclick : {
+				fn : function() {
+					i3GEO.tema.dialogo.etiquetas();
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoEtiqueta-button").style.width = "200px";
+
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoFiltro", {
+			onclick : {
+				fn : function() {
+					i3GEO.tema.dialogo.filtro();
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoFiltro-button").style.width = "200px";
+
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoOpacidadeB", {
+			onclick : {
+				fn : function() {
+					var valor = $i("i3GEOFatalhosedicaoOpacidade").value;
+					i3GEO.tema.mudatransp(i3GEO.temaAtivo,valor);
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoOpacidadeB-button").style.width = "50px";
 	},
 	/*
 	 * Function: html
-	 * 
+	 *
 	 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	 * 
+	 *
 	 * Retorno:
-	 * 
+	 *
 	 * String com o c&oacute;digo html
 	 */
 	html : function(idjanela) {
@@ -75,7 +121,7 @@ i3GEOF.atalhosedicao =
 	},
 	/*
 	 * Function: criaJanelaFlutuante
-	 * 
+	 *
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante : function() {

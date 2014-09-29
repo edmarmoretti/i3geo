@@ -13,11 +13,52 @@ i3GEOF.atalhosedicao.dicionario = {
 			en : "",
 			es : ""
 		}
-	]
-	,
+	],
 	'salva' : [
 		{
 			pt : "Salva mapfile",
+			en : "",
+			es : ""
+		}
+	],
+	'tabela' : [
+		{
+			pt : "Tabela de atributos",
+			en : "",
+			es : ""
+		}
+	],
+	'texto' : [
+		{
+			pt : "Textos (topon&iacute;mia)",
+			en : "",
+			es : ""
+		}
+	],
+	'etiqueta' : [
+		{
+			pt : "Etiquetas de identifica&ccedil;&atilde;o",
+			en : "",
+			es : ""
+		}
+	],
+	'filtro' : [
+		{
+			pt : "Filtro de atributos",
+			en : "",
+			es : ""
+		}
+	],
+	'opacidade' : [
+		{
+			pt : "Opacidade (0 a 100)",
+			en : "",
+			es : ""
+		}
+	],
+	'aplicar' : [
+		{
+			pt : "Aplicar",
 			en : "",
 			es : ""
 		}

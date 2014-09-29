@@ -212,14 +212,16 @@ i3GEO.tema = {
 
 	idtema - codigo do tema
 		 */
-		mudatransp: function(idtema){
+		mudatransp: function(idtema,valor){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudatransp()");}
 			i3GEO.mapa.ativaTema(idtema);
 			g_operacao = "transparencia";
-			var valor = "";
 			//o campo input com o valor possui o prefixo 'tr' seguido pelo codigo do tema
-			if ($i("tr"+idtema))
-			{valor = $i("tr"+idtema).value;}
+			if(!valor){
+				if ($i("tr"+idtema)){
+					valor = $i("tr"+idtema).value;
+				}
+			}
 			if (valor !== ""){
 				i3GEO.php.mudatransp(
 						function(retorno){
