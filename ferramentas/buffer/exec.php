@@ -21,7 +21,7 @@ Salva o mapa acrescentando um novo layer com o buffer.
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->criaBuffer($distancia,$locaplic,$unir,$wkt,$multiplicar,$itemdistancia);
 		$m->salva();
-		$_SESSION["contadorsalva"]++;
+		//$_SESSION["contadorsalva"]++;
 		//limpa selecao
 		$qyfile = str_replace(".map",".qy",$map_file);
 		if (file_exists($qyfile))
