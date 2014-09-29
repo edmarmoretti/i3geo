@@ -174,7 +174,7 @@ i3GEOadmin.grupos = {
 	},
 	editor: function(dados,id,recordid){
 		if(!$i("janela_editor2")){
-			var editorBotoes,ins,
+			var ins,
 				novoel = document.createElement("div");
 			novoel.id =  "janela_editor2";
 			ins = '<div class="hd"><input id=okcancel_checkbox_id2 type="buttom" value="Salva" /><span style="margin-left:10px;position:relative;top:-10px;">Grupo</span></div>';

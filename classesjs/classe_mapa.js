@@ -580,6 +580,10 @@ i3GEO.mapa =
 		 * Abre as telas de dialogo das opcoes de manipulacao do mapa atual
 		 */
 		dialogo : {
+			atalhosedicao: function(idtema){
+				i3GEO.mapa.ativaTema(idtema);
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.atalhosedicao()","atalhosedicao","atalhosedicao","dependencias.php","i3GEOF.atalhosedicao.iniciaJanelaFlutuante()");
+			},
 			/*
 			 * Function: geolocal
 			 *

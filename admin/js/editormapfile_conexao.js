@@ -22,7 +22,7 @@ function montaEditorDados(dados)
 	};
 	core_montaEditor(temp,"500px","650px","","Conex&atilde;o",true,true,false);
 
-	var idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],
+	var d = [],valor = "",idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],
 		idsMetaestat = ["connection","data","tileitem","tileindex","tipooriginal"],
 		limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
 		param = {
@@ -128,27 +128,27 @@ function montaEditorDados(dados)
 	}
 
 	$i("connectiontype").onchange = function(){
-		var dados = [],valor = $i("connectiontype").value;
+		d = [],valor = $i("connectiontype").value;
 		core_desativaforms(idsForms);
 		//["connection","data","tileitem","tileindex"]
 		if(valor == 0 || valor == 10)
-		{dados = [];}
+		{d = [];}
 		if(valor == 1 || valor == 12)
-		{dados = ["data","type"];}
+		{d = ["data","type"];}
 		if(valor == 2)
-		{dados = ["tileitem","tileindex","type"];}
+		{d = ["tileitem","tileindex","type"];}
 		if(valor == 3 || valor == 4 || valor == 6 || valor == 8 || valor == 13)
-		{dados = idsForms;}
+		{d = idsForms;}
 		if(valor == 5)
-		{dados = ["connection","tileitem","tileindex","type"];}
+		{d = ["connection","tileitem","tileindex","type"];}
 		if(valor == 7 || valor == 9)
-		{dados = ["connection","type","tipooriginal"];}
+		{d = ["connection","type","tipooriginal"];}
 
-		core_ativaforms(dados);
+		core_ativaforms(d);
 	};
 	$i("metaestat").onchange = function(){
 		core_desativaforms(idsMetaestat);
-		var valor = $i("metaestat").value,
+		valor = $i("metaestat").value,
 			d = [];
 		if(valor === "SIM"){
 			d = ["metaestat_id_medida_variavel"];

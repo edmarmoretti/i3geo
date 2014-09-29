@@ -139,7 +139,7 @@ i3GEOadmin.mapas = {
 	},
 	editor: function(dados,id,recordid){
 		if(!$i("janela_editor2")){
-			var editorBotoes,ins,
+			var ins,
 				novoel = document.createElement("div");
 			novoel.id =  "janela_editor2";
 			ins = '<div class="hd"><input id=okcancel_checkboxOK type="buttom" value="Salva" />' +

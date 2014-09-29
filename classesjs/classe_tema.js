@@ -487,7 +487,7 @@ i3GEO.tema = {
 			 */
 			salvaMapfile: function(idtema){
 				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.salvamapfile()","salvamapfile","salvamapfile");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.salvaMapfile()","salvamapfile","salvamapfile");
 			},
 			/*
 		Function: graficotema
