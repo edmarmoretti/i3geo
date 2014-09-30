@@ -1294,7 +1294,7 @@ function criarNovoLayer()
 }
 function autoClassesLayer()
 {
-	global $codigoMap,$codigoLayer,$itemExpressao,$itemNome,$locaplic,$dir_tmp;
+	global $codigoMap,$codigoLayer,$itemExpressao,$itemNome,$locaplic,$dir_tmp,$postgis_mapa;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	include_once("$locaplic/classesphp/classe_alteraclasse.php");
 	error_reporting(0);
@@ -1343,9 +1343,15 @@ function autoClassesLayer()
 
 	$mapatemp = ms_newMapObj($mapfile);
 	$numlayers = $mapatemp->numlayers;
-	for ($i=0;$i < $numlayers;$i++)
-	{
+	for ($i=0;$i < $numlayers;$i++){
 		$layertemp = $mapatemp->getlayer($i);
+		//troca string de conexao com alias
+		$lcon = $layertemp->connection;
+		if ($layertemp->connectiontype == MS_POSTGIS){
+			if (in_array($lcon,array_keys($postgis_mapa))){
+				$layertemp->set("connection",$postgis_mapa[$lcon]);
+			}
+		}
 		ms_newLayerObj($mapageral, $layertemp);
 	}
 	$mapageral->save($nometemp);
@@ -1353,6 +1359,16 @@ function autoClassesLayer()
 	$m->valorunico($itemExpressao,"",$itemNome);
 	$m->salva();
 	$mapatemp = ms_newMapObj($nometemp);
+	
+	$numlayers = $mapatemp->numlayers;
+	for ($i=0;$i < $numlayers;$i++){
+		$layertemp = $mapatemp->getlayer($i);
+		//troca string de conexao com alias
+		if ($layertemp->connectiontype == MS_POSTGIS){
+			$layertemp->set("connection",$lcon);
+		}
+	}
+	
 	$mapatemp->save($mapfile);
 	removeCabecalho($mapfile);
 }
@@ -1754,6 +1770,9 @@ function pegaConexao()
 function alterarConexao()
 {
 	global $cortepixels,$esquemaadmin,$metaestat_id_medida_variavel,$metaestat,$convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
+	if($data != ""){
+		$data =  base64_decode($data);
+	}
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);

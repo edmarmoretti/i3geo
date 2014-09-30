@@ -6,7 +6,7 @@ MAP
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	"SIM"
+      "cache"	""
       "CLASSE"	"SIM"
       "permitekmz"	"nao"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
@@ -32,15 +32,15 @@ MAP
       NAME "CAATINGA"
       EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
       STYLE
-        COLOR 0 255 0
-        OUTLINECOLOR 255 255 0
+        COLOR 217 75 52
+        OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS
     CLASS
       NAME "PAMPA"
       EXPRESSION ('[CD_LEGENDA]'eq'PAMPA')
       STYLE
-        COLOR 114 23 92
+        COLOR 23 54 35
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS
@@ -48,7 +48,7 @@ MAP
       NAME "CERRADO"
       EXPRESSION ('[CD_LEGENDA]'eq'CERRADO')
       STYLE
-        COLOR 168 160 140
+        COLOR 81 69 221
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS
@@ -56,7 +56,7 @@ MAP
       NAME "PANTANAL"
       EXPRESSION ('[CD_LEGENDA]'eq'PANTANAL')
       STYLE
-        COLOR 214 46 232
+        COLOR 230 185 232
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS
@@ -64,7 +64,7 @@ MAP
       NAME "AMAZONIA"
       EXPRESSION ('[CD_LEGENDA]'eq'AMAZONIA')
       STYLE
-        COLOR 155 180 157
+        COLOR 160 216 6
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS
@@ -72,7 +72,7 @@ MAP
       NAME "MATA ATLANTICA"
       EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLANTICA')
       STYLE
-        COLOR 161 186 110
+        COLOR 121 70 8
         OUTLINECOLOR 255 255 255
       END # STYLE
     END # CLASS

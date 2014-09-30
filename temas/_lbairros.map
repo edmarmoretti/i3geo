@@ -1,10 +1,10 @@
 MAP
-  FONTSET "../symbols/fontes.txt"
-  SYMBOLSET "../symbols/simbolos.sym"
+  FONTSET "/var/www/i3geo/symbols/fontes.txt"
+  SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
   LAYER
     CONNECTION "i3geosaude"
     CONNECTIONTYPE POSTGIS
-    DATA "the_geom from (select * from i3geo_metaestat.bairros) as foo using unique gid using srid=4326"
+    DATA "the_geom from (select * from i3geo_metaestat.bairros where no_distr in ('POSSE','BELO HORIZONTE')) as foo using unique gid using srid=4326"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "ID_MEDIDA_VARIAVEL"	""
@@ -55,16 +55,2380 @@ MAP
     TYPE POLYGON
     UNITS METERS
     CLASS
-      NAME ""
+      NAME "Setor Buenos Aires"
+      EXPRESSION ('[no_bairro]'eq'Setor Buenos Aires')
       STYLE
-        COLOR "#ffffff33"
-        OPACITY 20
+        COLOR 38 23 73
+        OUTLINECOLOR 255 255 255
       END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Nova Gameleira 3ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Nova Gameleira 3ª Seção')
       STYLE
-        OUTLINECOLOR 255 0 0
-        SYMBOL "p0"
+        COLOR 179 133 113
+        OUTLINECOLOR 255 255 255
       END # STYLE
-      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Mala e Cuia"
+      EXPRESSION ('[no_bairro]'eq'Mala e Cuia')
+      STYLE
+        COLOR 198 194 217
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Conjunto São Francisco de Assis"
+      EXPRESSION ('[no_bairro]'eq'Conjunto São Francisco de Assis')
+      STYLE
+        COLOR 83 149 186
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Paquetá"
+      EXPRESSION ('[no_bairro]'eq'Vila Paquetá')
+      STYLE
+        COLOR 71 229 2
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Conjunto Lagoa"
+      EXPRESSION ('[no_bairro]'eq'Conjunto Lagoa')
+      STYLE
+        COLOR 99 44 116
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Barroca"
+      EXPRESSION ('[no_bairro]'eq'Barroca')
+      STYLE
+        COLOR 32 37 99
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São José"
+      EXPRESSION ('[no_bairro]'eq'São José')
+      STYLE
+        COLOR 107 203 238
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Nova Paraíso"
+      EXPRESSION ('[no_bairro]'eq'Vila Nova Paraíso')
+      STYLE
+        COLOR 151 189 67
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Custodinha"
+      EXPRESSION ('[no_bairro]'eq'Custodinha')
+      STYLE
+        COLOR 2 112 197
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Nova Gameleira 2ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Nova Gameleira 2ª Seção')
+      STYLE
+        COLOR 2 101 73
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Grota"
+      EXPRESSION ('[no_bairro]'eq'Grota')
+      STYLE
+        COLOR 219 11 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Barão Homem de Melo 3ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Barão Homem de Melo 3ª Seção')
+      STYLE
+        COLOR 12 79 150
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Camponesa 1ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Camponesa 1ª Seção')
+      STYLE
+        COLOR 123 42 49
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Santo Antônio Barroquinha"
+      EXPRESSION ('[no_bairro]'eq'Vila Santo Antônio Barroquinha')
+      STYLE
+        COLOR 127 161 234
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Camponesa 2ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Camponesa 2ª Seção')
+      STYLE
+        COLOR 67 38 93
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Aeroporto"
+      EXPRESSION ('[no_bairro]'eq'Vila Aeroporto')
+      STYLE
+        COLOR 169 156 106
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Novo Ouro Preto"
+      EXPRESSION ('[no_bairro]'eq'Novo Ouro Preto')
+      STYLE
+        COLOR 216 254 43
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Aeroporto Jaraguá"
+      EXPRESSION ('[no_bairro]'eq'Vila Aeroporto Jaraguá')
+      STYLE
+        COLOR 88 110 79
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cônego Pinheiro 2ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Cônego Pinheiro 2ª Seção')
+      STYLE
+        COLOR 136 5 151
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila São Geraldo"
+      EXPRESSION ('[no_bairro]'eq'Vila São Geraldo')
+      STYLE
+        COLOR 146 177 182
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila da Ária"
+      EXPRESSION ('[no_bairro]'eq'Vila da Ária')
+      STYLE
+        COLOR 235 246 97
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Havaí"
+      EXPRESSION ('[no_bairro]'eq'Vila Havaí')
+      STYLE
+        COLOR 225 173 104
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cônego Pinheiro 1ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Cônego Pinheiro 1ª Seção')
+      STYLE
+        COLOR 207 2 114
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila União"
+      EXPRESSION ('[no_bairro]'eq'Vila União')
+      STYLE
+        COLOR 41 18 112
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Madre Gertrudes 2ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Madre Gertrudes 2ª Seção')
+      STYLE
+        COLOR 253 99 19
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Buraco Quente"
+      EXPRESSION ('[no_bairro]'eq'Buraco Quente')
+      STYLE
+        COLOR 198 133 244
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santo Agostinho"
+      EXPRESSION ('[no_bairro]'eq'Santo Agostinho')
+      STYLE
+        COLOR 63 105 88
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Vicente"
+      EXPRESSION ('[no_bairro]'eq'São Vicente')
+      STYLE
+        COLOR 25 122 53
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Esplanada"
+      EXPRESSION ('[no_bairro]'eq'Esplanada')
+      STYLE
+        COLOR 48 120 171
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Minas Brasil"
+      EXPRESSION ('[no_bairro]'eq'Minas Brasil')
+      STYLE
+        COLOR 142 134 142
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Monsenhor Messias"
+      EXPRESSION ('[no_bairro]'eq'Monsenhor Messias')
+      STYLE
+        COLOR 47 32 142
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Silveira"
+      EXPRESSION ('[no_bairro]'eq'Silveira')
+      STYLE
+        COLOR 191 153 118
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Boa Viagem"
+      EXPRESSION ('[no_bairro]'eq'Boa Viagem')
+      STYLE
+        COLOR 153 152 216
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cidade Nova"
+      EXPRESSION ('[no_bairro]'eq'Cidade Nova')
+      STYLE
+        COLOR 102 148 241
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Centro"
+      EXPRESSION ('[no_bairro]'eq'Centro')
+      STYLE
+        COLOR 107 104 182
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Floresta"
+      EXPRESSION ('[no_bairro]'eq'Floresta')
+      STYLE
+        COLOR 109 196 21
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nossa Senhora da Aparecida"
+      EXPRESSION ('[no_bairro]'eq'Nossa Senhora da Aparecida')
+      STYLE
+        COLOR 53 109 9
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Comiteco"
+      EXPRESSION ('[no_bairro]'eq'Comiteco')
+      STYLE
+        COLOR 48 32 15
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Lúcia"
+      EXPRESSION ('[no_bairro]'eq'Santa Lúcia')
+      STYLE
+        COLOR 170 52 52
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Serra"
+      EXPRESSION ('[no_bairro]'eq'Serra')
+      STYLE
+        COLOR 220 254 148
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Mangabeiras"
+      EXPRESSION ('[no_bairro]'eq'Mangabeiras')
+      STYLE
+        COLOR 37 37 128
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cruzeiro"
+      EXPRESSION ('[no_bairro]'eq'Cruzeiro')
+      STYLE
+        COLOR 128 236 230
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Paris"
+      EXPRESSION ('[no_bairro]'eq'Vila Paris')
+      STYLE
+        COLOR 13 44 169
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Pompéia"
+      EXPRESSION ('[no_bairro]'eq'Pompéia')
+      STYLE
+        COLOR 116 118 165
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Belvedere"
+      EXPRESSION ('[no_bairro]'eq'Belvedere')
+      STYLE
+        COLOR 112 178 196
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Sagrada Família"
+      EXPRESSION ('[no_bairro]'eq'Sagrada Família')
+      STYLE
+        COLOR 106 237 212
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Inês"
+      EXPRESSION ('[no_bairro]'eq'Santa Inês')
+      STYLE
+        COLOR 188 203 211
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Boa Vista"
+      EXPRESSION ('[no_bairro]'eq'Boa Vista')
+      STYLE
+        COLOR 1 241 155
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Geraldo"
+      EXPRESSION ('[no_bairro]'eq'São Geraldo')
+      STYLE
+        COLOR 33 184 63
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Mariano de Abreu"
+      EXPRESSION ('[no_bairro]'eq'Mariano de Abreu')
+      STYLE
+        COLOR 124 91 136
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Ipiranga"
+      EXPRESSION ('[no_bairro]'eq'Ipiranga')
+      STYLE
+        COLOR 229 244 135
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Padre Eustáquio"
+      EXPRESSION ('[no_bairro]'eq'Padre Eustáquio')
+      STYLE
+        COLOR 234 246 12
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Jardim Montanhês"
+      EXPRESSION ('[no_bairro]'eq'Jardim Montanhês')
+      STYLE
+        COLOR 172 215 76
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Caiçara - Adelaide"
+      EXPRESSION ('[no_bairro]'eq'Caiçara - Adelaide')
+      STYLE
+        COLOR 203 201 30
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Carmo"
+      EXPRESSION ('[no_bairro]'eq'Carmo')
+      STYLE
+        COLOR 15 211 170
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nossa Senhora da Conceição"
+      EXPRESSION ('[no_bairro]'eq'Nossa Senhora da Conceição')
+      STYLE
+        COLOR 103 101 3
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Efigênia"
+      EXPRESSION ('[no_bairro]'eq'Santa Efigênia')
+      STYLE
+        COLOR 32 33 240
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vera Cruz"
+      EXPRESSION ('[no_bairro]'eq'Vera Cruz')
+      STYLE
+        COLOR 230 130 253
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Anchieta"
+      EXPRESSION ('[no_bairro]'eq'Anchieta')
+      STYLE
+        COLOR 189 42 1
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Pedro"
+      EXPRESSION ('[no_bairro]'eq'São Pedro')
+      STYLE
+        COLOR 42 118 12
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Ápia"
+      EXPRESSION ('[no_bairro]'eq'Ápia')
+      STYLE
+        COLOR 74 117 18
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Conjunto Celso Machado"
+      EXPRESSION ('[no_bairro]'eq'Conjunto Celso Machado')
+      STYLE
+        COLOR 10 194 44
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Funcionários"
+      EXPRESSION ('[no_bairro]'eq'Funcionários')
+      STYLE
+        COLOR 99 2 67
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Savassi"
+      EXPRESSION ('[no_bairro]'eq'Savassi')
+      STYLE
+        COLOR 231 246 105
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Lucas"
+      EXPRESSION ('[no_bairro]'eq'São Lucas')
+      STYLE
+        COLOR 203 188 49
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nossa Senhora de Fátima"
+      EXPRESSION ('[no_bairro]'eq'Nossa Senhora de Fátima')
+      STYLE
+        COLOR 142 22 94
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Lourdes"
+      EXPRESSION ('[no_bairro]'eq'Lourdes')
+      STYLE
+        COLOR 250 215 225
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Paraíso"
+      EXPRESSION ('[no_bairro]'eq'Vila Paraíso')
+      STYLE
+        COLOR 184 203 38
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santana do Cafezal"
+      EXPRESSION ('[no_bairro]'eq'Santana do Cafezal')
+      STYLE
+        COLOR 180 106 162
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Marçola"
+      EXPRESSION ('[no_bairro]'eq'Marçola')
+      STYLE
+        COLOR 112 222 203
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Acaba Mundo"
+      EXPRESSION ('[no_bairro]'eq'Acaba Mundo')
+      STYLE
+        COLOR 21 85 242
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila São Paulo"
+      EXPRESSION ('[no_bairro]'eq'Vila São Paulo')
+      STYLE
+        COLOR 107 22 199
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santo Antônio"
+      EXPRESSION ('[no_bairro]'eq'Santo Antônio')
+      STYLE
+        COLOR 161 154 93
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Conjunto Santa Maria"
+      EXPRESSION ('[no_bairro]'eq'Conjunto Santa Maria')
+      STYLE
+        COLOR 221 171 149
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Sion"
+      EXPRESSION ('[no_bairro]'eq'Sion')
+      STYLE
+        COLOR 201 174 225
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Barro Preto"
+      EXPRESSION ('[no_bairro]'eq'Barro Preto')
+      STYLE
+        COLOR 113 212 178
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cidade Jardim"
+      EXPRESSION ('[no_bairro]'eq'Cidade Jardim')
+      STYLE
+        COLOR 36 100 121
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Rita de Cássia"
+      EXPRESSION ('[no_bairro]'eq'Santa Rita de Cássia')
+      STYLE
+        COLOR 11 197 228
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Isabel"
+      EXPRESSION ('[no_bairro]'eq'Santa Isabel')
+      STYLE
+        COLOR 130 48 103
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Fumec"
+      EXPRESSION ('[no_bairro]'eq'Vila Fumec')
+      STYLE
+        COLOR 56 215 131
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Barragem Santa Lúcia"
+      EXPRESSION ('[no_bairro]'eq'Vila Barragem Santa Lúcia')
+      STYLE
+        COLOR 241 49 231
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Estrela"
+      EXPRESSION ('[no_bairro]'eq'Estrela')
+      STYLE
+        COLOR 29 23 104
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Pindura Saia"
+      EXPRESSION ('[no_bairro]'eq'Pindura Saia')
+      STYLE
+        COLOR 212 143 125
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Nossa Senhora do Rosário"
+      EXPRESSION ('[no_bairro]'eq'Vila Nossa Senhora do Rosário')
+      STYLE
+        COLOR 88 70 203
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "João Alfredo"
+      EXPRESSION ('[no_bairro]'eq'João Alfredo')
+      STYLE
+        COLOR 94 164 246
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Bento"
+      EXPRESSION ('[no_bairro]'eq'São Bento')
+      STYLE
+        COLOR 6 116 139
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Coração de Jesus"
+      EXPRESSION ('[no_bairro]'eq'Coração de Jesus')
+      STYLE
+        COLOR 170 193 131
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Luxemburgo"
+      EXPRESSION ('[no_bairro]'eq'Luxemburgo')
+      STYLE
+        COLOR 96 83 143
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Monte São José"
+      EXPRESSION ('[no_bairro]'eq'Monte São José')
+      STYLE
+        COLOR 97 118 225
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Bandeirantes"
+      EXPRESSION ('[no_bairro]'eq'Vila Bandeirantes')
+      STYLE
+        COLOR 74 175 250
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Horto"
+      EXPRESSION ('[no_bairro]'eq'Horto')
+      STYLE
+        COLOR 137 133 111
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Conjunto Califórnia I"
+      EXPRESSION ('[no_bairro]'eq'Conjunto Califórnia I')
+      STYLE
+        COLOR 91 188 92
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Horto Florestal"
+      EXPRESSION ('[no_bairro]'eq'Horto Florestal')
+      STYLE
+        COLOR 209 224 126
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Pirineus"
+      EXPRESSION ('[no_bairro]'eq'Pirineus')
+      STYLE
+        COLOR 82 193 242
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Alto Vera Cruz"
+      EXPRESSION ('[no_bairro]'eq'Alto Vera Cruz')
+      STYLE
+        COLOR 244 101 30
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Saudade"
+      EXPRESSION ('[no_bairro]'eq'Saudade')
+      STYLE
+        COLOR 228 160 233
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Taquaril"
+      EXPRESSION ('[no_bairro]'eq'Taquaril')
+      STYLE
+        COLOR 212 151 90
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Caetano Furquim"
+      EXPRESSION ('[no_bairro]'eq'Caetano Furquim')
+      STYLE
+        COLOR 21 208 172
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Delta"
+      EXPRESSION ('[no_bairro]'eq'Delta')
+      STYLE
+        COLOR 192 88 246
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Casa Branca"
+      EXPRESSION ('[no_bairro]'eq'Casa Branca')
+      STYLE
+        COLOR 15 239 2
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Paraíso"
+      EXPRESSION ('[no_bairro]'eq'Paraíso')
+      STYLE
+        COLOR 89 39 73
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Alto Barroca"
+      EXPRESSION ('[no_bairro]'eq'Alto Barroca')
+      STYLE
+        COLOR 216 208 183
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Inestan"
+      EXPRESSION ('[no_bairro]'eq'Vila Inestan')
+      STYLE
+        COLOR 149 47 75
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Jonas Veiga"
+      EXPRESSION ('[no_bairro]'eq'Jonas Veiga')
+      STYLE
+        COLOR 159 60 44
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Tereza"
+      EXPRESSION ('[no_bairro]'eq'Santa Tereza')
+      STYLE
+        COLOR 224 185 197
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Marmiteiros"
+      EXPRESSION ('[no_bairro]'eq'Marmiteiros')
+      STYLE
+        COLOR 44 196 252
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nova Vista"
+      EXPRESSION ('[no_bairro]'eq'Nova Vista')
+      STYLE
+        COLOR 233 240 252
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Boa Vista"
+      EXPRESSION ('[no_bairro]'eq'Vila Boa Vista')
+      STYLE
+        COLOR 112 204 91
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Ipiranga"
+      EXPRESSION ('[no_bairro]'eq'Vila Ipiranga')
+      STYLE
+        COLOR 59 229 139
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Granja de Freitas"
+      EXPRESSION ('[no_bairro]'eq'Granja de Freitas')
+      STYLE
+        COLOR 61 121 18
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila do Pombal"
+      EXPRESSION ('[no_bairro]'eq'Vila do Pombal')
+      STYLE
+        COLOR 76 77 88
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Colégio Batista"
+      EXPRESSION ('[no_bairro]'eq'Colégio Batista')
+      STYLE
+        COLOR 232 225 169
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Baleia"
+      EXPRESSION ('[no_bairro]'eq'Baleia')
+      STYLE
+        COLOR 67 109 184
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Fazendinha"
+      EXPRESSION ('[no_bairro]'eq'Fazendinha')
+      STYLE
+        COLOR 29 124 104
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Novo São Lucas"
+      EXPRESSION ('[no_bairro]'eq'Vila Novo São Lucas')
+      STYLE
+        COLOR 110 219 79
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Novo São Lucas"
+      EXPRESSION ('[no_bairro]'eq'Novo São Lucas')
+      STYLE
+        COLOR 103 117 203
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "João Pinheiro"
+      EXPRESSION ('[no_bairro]'eq'João Pinheiro')
+      STYLE
+        COLOR 55 22 212
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Senhor dos Passos"
+      EXPRESSION ('[no_bairro]'eq'Senhor dos Passos')
+      STYLE
+        COLOR 253 51 133
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Glória"
+      EXPRESSION ('[no_bairro]'eq'Glória')
+      STYLE
+        COLOR 225 70 18
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cidade Jardim Taquaril"
+      EXPRESSION ('[no_bairro]'eq'Cidade Jardim Taquaril')
+      STYLE
+        COLOR 50 209 24
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Alto dos Pinheiros"
+      EXPRESSION ('[no_bairro]'eq'Alto dos Pinheiros')
+      STYLE
+        COLOR 48 3 205
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Coração Eucarístico"
+      EXPRESSION ('[no_bairro]'eq'Coração Eucarístico')
+      STYLE
+        COLOR 54 244 47
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Conjunto Taquaril"
+      EXPRESSION ('[no_bairro]'eq'Conjunto Taquaril')
+      STYLE
+        COLOR 2 222 1
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila São Rafael"
+      EXPRESSION ('[no_bairro]'eq'Vila São Rafael')
+      STYLE
+        COLOR 110 86 143
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Dom Bosco"
+      EXPRESSION ('[no_bairro]'eq'Dom Bosco')
+      STYLE
+        COLOR 72 17 104
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Califórnia"
+      EXPRESSION ('[no_bairro]'eq'Califórnia')
+      STYLE
+        COLOR 209 64 21
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Real 2ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Real 2ª Seção')
+      STYLE
+        COLOR 57 90 58
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Salvador"
+      EXPRESSION ('[no_bairro]'eq'São Salvador')
+      STYLE
+        COLOR 246 83 49
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Tiradentes"
+      EXPRESSION ('[no_bairro]'eq'Tiradentes')
+      STYLE
+        COLOR 30 163 110
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Alípio de Melo"
+      EXPRESSION ('[no_bairro]'eq'Alípio de Melo')
+      STYLE
+        COLOR 181 64 98
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Real 1ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Real 1ª Seção')
+      STYLE
+        COLOR 23 5 81
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Paquetá"
+      EXPRESSION ('[no_bairro]'eq'Paquetá')
+      STYLE
+        COLOR 126 252 135
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Serrano"
+      EXPRESSION ('[no_bairro]'eq'Serrano')
+      STYLE
+        COLOR 226 221 54
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Calafate"
+      EXPRESSION ('[no_bairro]'eq'Vila Calafate')
+      STYLE
+        COLOR 228 68 160
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Campos UFMG"
+      EXPRESSION ('[no_bairro]'eq'Campos UFMG')
+      STYLE
+        COLOR 218 111 5
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila de Sá"
+      EXPRESSION ('[no_bairro]'eq'Vila de Sá')
+      STYLE
+        COLOR 20 7 15
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Ouro Preto"
+      EXPRESSION ('[no_bairro]'eq'Ouro Preto')
+      STYLE
+        COLOR 119 250 215
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Nova Cachoeirinha 3ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Nova Cachoeirinha 3ª Seção')
+      STYLE
+        COLOR 5 9 242
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Palmares"
+      EXPRESSION ('[no_bairro]'eq'Palmares')
+      STYLE
+        COLOR 32 92 41
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Graça"
+      EXPRESSION ('[no_bairro]'eq'Graça')
+      STYLE
+        COLOR 11 78 107
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Canadá"
+      EXPRESSION ('[no_bairro]'eq'Canadá')
+      STYLE
+        COLOR 104 5 63
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Santa Rosa"
+      EXPRESSION ('[no_bairro]'eq'Vila Santa Rosa')
+      STYLE
+        COLOR 238 145 60
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Concórdia"
+      EXPRESSION ('[no_bairro]'eq'Concórdia')
+      STYLE
+        COLOR 79 100 167
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nossa Senhora do Rosário"
+      EXPRESSION ('[no_bairro]'eq'Nossa Senhora do Rosário')
+      STYLE
+        COLOR 167 73 167
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Renascença"
+      EXPRESSION ('[no_bairro]'eq'Renascença')
+      STYLE
+        COLOR 94 68 236
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Cruz"
+      EXPRESSION ('[no_bairro]'eq'Santa Cruz')
+      STYLE
+        COLOR 190 117 227
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nova Floresta"
+      EXPRESSION ('[no_bairro]'eq'Nova Floresta')
+      STYLE
+        COLOR 14 242 59
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cachoeirinha"
+      EXPRESSION ('[no_bairro]'eq'Cachoeirinha')
+      STYLE
+        COLOR 46 138 238
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila da Paz"
+      EXPRESSION ('[no_bairro]'eq'Vila da Paz')
+      STYLE
+        COLOR 156 149 11
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Cristóvão"
+      EXPRESSION ('[no_bairro]'eq'São Cristóvão')
+      STYLE
+        COLOR 155 61 99
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "União"
+      EXPRESSION ('[no_bairro]'eq'União')
+      STYLE
+        COLOR 126 110 138
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Paulo"
+      EXPRESSION ('[no_bairro]'eq'São Paulo')
+      STYLE
+        COLOR 219 210 238
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Conjunto Novo Dom Bosco"
+      EXPRESSION ('[no_bairro]'eq'Conjunto Novo Dom Bosco')
+      STYLE
+        COLOR 7 210 28
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Conjunto Jardim Filadélfia"
+      EXPRESSION ('[no_bairro]'eq'Conjunto Jardim Filadélfia')
+      STYLE
+        COLOR 216 120 68
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Jardim Montanhes"
+      EXPRESSION ('[no_bairro]'eq'Vila Jardim Montanhes')
+      STYLE
+        COLOR 143 40 228
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Dom Joaquim"
+      EXPRESSION ('[no_bairro]'eq'Dom Joaquim')
+      STYLE
+        COLOR 140 86 197
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Lagoinha"
+      EXPRESSION ('[no_bairro]'eq'Lagoinha')
+      STYLE
+        COLOR 227 230 109
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Penha"
+      EXPRESSION ('[no_bairro]'eq'Penha')
+      STYLE
+        COLOR 237 4 48
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Coqueiros"
+      EXPRESSION ('[no_bairro]'eq'Coqueiros')
+      STYLE
+        COLOR 161 50 116
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Confisco"
+      EXPRESSION ('[no_bairro]'eq'Confisco')
+      STYLE
+        COLOR 171 71 124
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Maria Virgínia"
+      EXPRESSION ('[no_bairro]'eq'Maria Virgínia')
+      STYLE
+        COLOR 226 108 105
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Sebastião"
+      EXPRESSION ('[no_bairro]'eq'São Sebastião')
+      STYLE
+        COLOR 248 139 106
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Andiroba"
+      EXPRESSION ('[no_bairro]'eq'Andiroba')
+      STYLE
+        COLOR 89 157 93
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Fernão Dias"
+      EXPRESSION ('[no_bairro]'eq'Fernão Dias')
+      STYLE
+        COLOR 251 224 94
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Lorena"
+      EXPRESSION ('[no_bairro]'eq'Lorena')
+      STYLE
+        COLOR 239 126 37
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Puc"
+      EXPRESSION ('[no_bairro]'eq'Vila Puc')
+      STYLE
+        COLOR 215 51 52
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Oeste"
+      EXPRESSION ('[no_bairro]'eq'Vila Oeste')
+      STYLE
+        COLOR 187 53 70
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Maravilha"
+      EXPRESSION ('[no_bairro]'eq'Maravilha')
+      STYLE
+        COLOR 39 31 227
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Dom Cabral"
+      EXPRESSION ('[no_bairro]'eq'Dom Cabral')
+      STYLE
+        COLOR 69 101 41
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Trinta e Um de Março"
+      EXPRESSION ('[no_bairro]'eq'Vila Trinta e Um de Março')
+      STYLE
+        COLOR 101 236 183
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Inconfidência"
+      EXPRESSION ('[no_bairro]'eq'Inconfidência')
+      STYLE
+        COLOR 168 100 22
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Jardim São José"
+      EXPRESSION ('[no_bairro]'eq'Jardim São José')
+      STYLE
+        COLOR 22 134 182
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Alto Caiçaras"
+      EXPRESSION ('[no_bairro]'eq'Alto Caiçaras')
+      STYLE
+        COLOR 52 99 136
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Vista Alegre"
+      EXPRESSION ('[no_bairro]'eq'Vila Vista Alegre')
+      STYLE
+        COLOR 185 127 81
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Caiçaras"
+      EXPRESSION ('[no_bairro]'eq'Caiçaras')
+      STYLE
+        COLOR 236 191 143
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Álvaro Camargos"
+      EXPRESSION ('[no_bairro]'eq'Álvaro Camargos')
+      STYLE
+        COLOR 61 162 91
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Novo Glória"
+      EXPRESSION ('[no_bairro]'eq'Novo Glória')
+      STYLE
+        COLOR 252 163 211
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Jardim São José"
+      EXPRESSION ('[no_bairro]'eq'Vila Jardim São José')
+      STYLE
+        COLOR 188 178 244
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Palmeiras"
+      EXPRESSION ('[no_bairro]'eq'Palmeiras')
+      STYLE
+        COLOR 87 0 83
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Carlos Prates"
+      EXPRESSION ('[no_bairro]'eq'Carlos Prates')
+      STYLE
+        COLOR 122 145 206
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Aparecida 7ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Aparecida 7ª Seção')
+      STYLE
+        COLOR 61 4 225
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Califórnia"
+      EXPRESSION ('[no_bairro]'eq'Vila Califórnia')
+      STYLE
+        COLOR 12 82 67
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nova Cachoeirinha"
+      EXPRESSION ('[no_bairro]'eq'Nova Cachoeirinha')
+      STYLE
+        COLOR 253 135 222
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Ermelinda"
+      EXPRESSION ('[no_bairro]'eq'Ermelinda')
+      STYLE
+        COLOR 180 97 191
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Nova Cachoeirinha 2ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Nova Cachoeirinha 2ª Seção')
+      STYLE
+        COLOR 253 49 20
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Betânia"
+      EXPRESSION ('[no_bairro]'eq'Vila Betânia')
+      STYLE
+        COLOR 188 4 221
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Bairro das Indústrias II"
+      EXPRESSION ('[no_bairro]'eq'Bairro das Indústrias II')
+      STYLE
+        COLOR 110 172 207
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Nova Cachoeirinha 1ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Nova Cachoeirinha 1ª Seção')
+      STYLE
+        COLOR 181 25 28
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vista Alegre"
+      EXPRESSION ('[no_bairro]'eq'Vista Alegre')
+      STYLE
+        COLOR 3 216 1
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Embaúbas"
+      EXPRESSION ('[no_bairro]'eq'Embaúbas')
+      STYLE
+        COLOR 249 221 86
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Sumaré"
+      EXPRESSION ('[no_bairro]'eq'Sumaré')
+      STYLE
+        COLOR 213 50 245
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nova Gameleira"
+      EXPRESSION ('[no_bairro]'eq'Nova Gameleira')
+      STYLE
+        COLOR 203 18 94
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila da Amizade"
+      EXPRESSION ('[no_bairro]'eq'Vila da Amizade')
+      STYLE
+        COLOR 51 115 53
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nova Suíça"
+      EXPRESSION ('[no_bairro]'eq'Nova Suíça')
+      STYLE
+        COLOR 165 123 77
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Jorge 1ª Seção"
+      EXPRESSION ('[no_bairro]'eq'São Jorge 1ª Seção')
+      STYLE
+        COLOR 183 248 243
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Jorge 3ª Seção"
+      EXPRESSION ('[no_bairro]'eq'São Jorge 3ª Seção')
+      STYLE
+        COLOR 225 159 187
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Prado"
+      EXPRESSION ('[no_bairro]'eq'Prado')
+      STYLE
+        COLOR 148 234 56
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Grajaú"
+      EXPRESSION ('[no_bairro]'eq'Grajaú')
+      STYLE
+        COLOR 22 74 137
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Urca"
+      EXPRESSION ('[no_bairro]'eq'Urca')
+      STYLE
+        COLOR 12 150 181
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Aparecida"
+      EXPRESSION ('[no_bairro]'eq'Aparecida')
+      STYLE
+        COLOR 81 44 93
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Bom Jesus"
+      EXPRESSION ('[no_bairro]'eq'Bom Jesus')
+      STYLE
+        COLOR 244 168 2
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nova Esperança"
+      EXPRESSION ('[no_bairro]'eq'Nova Esperança')
+      STYLE
+        COLOR 156 46 211
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santo André"
+      EXPRESSION ('[no_bairro]'eq'Santo André')
+      STYLE
+        COLOR 32 57 195
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Pedreira Padro Lopes"
+      EXPRESSION ('[no_bairro]'eq'Pedreira Padro Lopes')
+      STYLE
+        COLOR 60 171 133
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Oeste"
+      EXPRESSION ('[no_bairro]'eq'Oeste')
+      STYLE
+        COLOR 72 88 192
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Camargos"
+      EXPRESSION ('[no_bairro]'eq'Camargos')
+      STYLE
+        COLOR 22 246 95
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Maria"
+      EXPRESSION ('[no_bairro]'eq'Santa Maria')
+      STYLE
+        COLOR 174 180 90
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Conjunto Califórnia II"
+      EXPRESSION ('[no_bairro]'eq'Conjunto Califórnia II')
+      STYLE
+        COLOR 253 192 224
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Pindorama"
+      EXPRESSION ('[no_bairro]'eq'Pindorama')
+      STYLE
+        COLOR 245 135 227
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Coqueiral"
+      EXPRESSION ('[no_bairro]'eq'Vila Coqueiral')
+      STYLE
+        COLOR 6 197 49
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Buritis"
+      EXPRESSION ('[no_bairro]'eq'Buritis')
+      STYLE
+        COLOR 195 6 70
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Jardim Alvorada"
+      EXPRESSION ('[no_bairro]'eq'Jardim Alvorada')
+      STYLE
+        COLOR 236 54 9
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Jardim Alvorada"
+      EXPRESSION ('[no_bairro]'eq'Vila Jardim Alvorada')
+      STYLE
+        COLOR 219 101 95
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Antena Montanhês"
+      EXPRESSION ('[no_bairro]'eq'Vila Antena Montanhês')
+      STYLE
+        COLOR 71 28 81
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila das Oliveiras"
+      EXPRESSION ('[no_bairro]'eq'Vila das Oliveiras')
+      STYLE
+        COLOR 207 85 246
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Engenho Nogueira"
+      EXPRESSION ('[no_bairro]'eq'Engenho Nogueira')
+      STYLE
+        COLOR 33 240 248
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Sumaré"
+      EXPRESSION ('[no_bairro]'eq'Vila Sumaré')
+      STYLE
+        COLOR 47 196 186
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Maloca"
+      EXPRESSION ('[no_bairro]'eq'Vila Maloca')
+      STYLE
+        COLOR 69 136 140
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Bonfim"
+      EXPRESSION ('[no_bairro]'eq'Bonfim')
+      STYLE
+        COLOR 136 167 66
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Francisco das Chagas"
+      EXPRESSION ('[no_bairro]'eq'São Francisco das Chagas')
+      STYLE
+        COLOR 236 36 250
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cinquentenário"
+      EXPRESSION ('[no_bairro]'eq'Cinquentenário')
+      STYLE
+        COLOR 215 164 212
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Marajó"
+      EXPRESSION ('[no_bairro]'eq'Marajó')
+      STYLE
+        COLOR 84 8 127
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Santo Antônio"
+      EXPRESSION ('[no_bairro]'eq'Vila Santo Antônio')
+      STYLE
+        COLOR 43 240 70
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Estrela do Oriente"
+      EXPRESSION ('[no_bairro]'eq'Estrela do Oriente')
+      STYLE
+        COLOR 163 64 106
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Dona Clara"
+      EXPRESSION ('[no_bairro]'eq'Dona Clara')
+      STYLE
+        COLOR 144 144 187
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Copacabana"
+      EXPRESSION ('[no_bairro]'eq'Copacabana')
+      STYLE
+        COLOR 139 55 73
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Salgado Filho"
+      EXPRESSION ('[no_bairro]'eq'Salgado Filho')
+      STYLE
+        COLOR 39 182 10
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Ventosa"
+      EXPRESSION ('[no_bairro]'eq'Ventosa')
+      STYLE
+        COLOR 182 12 23
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Chácara Leonina"
+      EXPRESSION ('[no_bairro]'eq'Chácara Leonina')
+      STYLE
+        COLOR 169 227 46
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Barão Homem de Melo 2ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Barão Homem de Melo 2ª Seção')
+      STYLE
+        COLOR 45 40 5
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Suzana Segunda Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Suzana Segunda Seção')
+      STYLE
+        COLOR 174 63 212
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Betânia"
+      EXPRESSION ('[no_bairro]'eq'Betânia')
+      STYLE
+        COLOR 46 97 196
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nova Cintra"
+      EXPRESSION ('[no_bairro]'eq'Nova Cintra')
+      STYLE
+        COLOR 172 64 27
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Ambrosina"
+      EXPRESSION ('[no_bairro]'eq'Ambrosina')
+      STYLE
+        COLOR 5 134 183
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Havaí"
+      EXPRESSION ('[no_bairro]'eq'Havaí')
+      STYLE
+        COLOR 60 75 181
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Parque São José"
+      EXPRESSION ('[no_bairro]'eq'Parque São José')
+      STYLE
+        COLOR 252 92 7
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Barão Homem de Melo 1ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Barão Homem de Melo 1ª Seção')
+      STYLE
+        COLOR 153 233 44
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Sofia"
+      EXPRESSION ('[no_bairro]'eq'Santa Sofia')
+      STYLE
+        COLOR 133 223 12
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Jardim América"
+      EXPRESSION ('[no_bairro]'eq'Jardim América')
+      STYLE
+        COLOR 46 237 218
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Estoril"
+      EXPRESSION ('[no_bairro]'eq'Estoril')
+      STYLE
+        COLOR 33 180 222
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Leonina"
+      EXPRESSION ('[no_bairro]'eq'Leonina')
+      STYLE
+        COLOR 42 16 79
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Pantanal"
+      EXPRESSION ('[no_bairro]'eq'Pantanal')
+      STYLE
+        COLOR 14 16 73
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Engenho Nogueira"
+      EXPRESSION ('[no_bairro]'eq'Vila Engenho Nogueira')
+      STYLE
+        COLOR 179 90 114
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Alpes"
+      EXPRESSION ('[no_bairro]'eq'Alpes')
+      STYLE
+        COLOR 177 76 113
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Gutierrez"
+      EXPRESSION ('[no_bairro]'eq'Gutierrez')
+      STYLE
+        COLOR 36 59 63
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cabana do Pai Tomás"
+      EXPRESSION ('[no_bairro]'eq'Cabana do Pai Tomás')
+      STYLE
+        COLOR 48 152 194
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Gameleira"
+      EXPRESSION ('[no_bairro]'eq'Gameleira')
+      STYLE
+        COLOR 105 128 57
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Guaratã"
+      EXPRESSION ('[no_bairro]'eq'Guaratã')
+      STYLE
+        COLOR 134 71 119
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Olhos D'Água"
+      EXPRESSION ('[no_bairro]'eq'Olhos D'Água')
+      STYLE
+        COLOR 25 14 121
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Antena"
+      EXPRESSION ('[no_bairro]'eq'Vila Antena')
+      STYLE
+        COLOR 110 142 38
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Jorge 2ª Seção"
+      EXPRESSION ('[no_bairro]'eq'São Jorge 2ª Seção')
+      STYLE
+        COLOR 141 48 199
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Terezinha"
+      EXPRESSION ('[no_bairro]'eq'Santa Terezinha')
+      STYLE
+        COLOR 139 164 16
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila São Francisco"
+      EXPRESSION ('[no_bairro]'eq'Vila São Francisco')
+      STYLE
+        COLOR 195 42 110
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Madre Gertrudes"
+      EXPRESSION ('[no_bairro]'eq'Madre Gertrudes')
+      STYLE
+        COLOR 255 156 125
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Madre Gertrudes 1ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Madre Gertrudes 1ª Seção')
+      STYLE
+        COLOR 125 245 163
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Jardinópolis"
+      EXPRESSION ('[no_bairro]'eq'Jardinópolis')
+      STYLE
+        COLOR 92 238 154
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Nova Gameleira 1ª Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Nova Gameleira 1ª Seção')
+      STYLE
+        COLOR 145 153 90
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Calafate"
+      EXPRESSION ('[no_bairro]'eq'Calafate')
+      STYLE
+        COLOR 151 223 227
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nova Granada"
+      EXPRESSION ('[no_bairro]'eq'Nova Granada')
+      STYLE
+        COLOR 156 179 178
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Sport Club"
+      EXPRESSION ('[no_bairro]'eq'Sport Club')
+      STYLE
+        COLOR 192 83 237
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Virgínia"
+      EXPRESSION ('[no_bairro]'eq'Virgínia')
+      STYLE
+        COLOR 128 1 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Suzana Primeira Seção"
+      EXPRESSION ('[no_bairro]'eq'Vila Suzana Primeira Seção')
+      STYLE
+        COLOR 197 25 167
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Castelo"
+      EXPRESSION ('[no_bairro]'eq'Castelo')
+      STYLE
+        COLOR 144 132 48
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Luiz"
+      EXPRESSION ('[no_bairro]'eq'São Luiz')
+      STYLE
+        COLOR 237 123 32
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Aeroporto"
+      EXPRESSION ('[no_bairro]'eq'Aeroporto')
+      STYLE
+        COLOR 61 64 132
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila Rica"
+      EXPRESSION ('[no_bairro]'eq'Vila Rica')
+      STYLE
+        COLOR 47 190 242
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Liberdade"
+      EXPRESSION ('[no_bairro]'eq'Liberdade')
+      STYLE
+        COLOR 9 89 131
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Indaiá"
+      EXPRESSION ('[no_bairro]'eq'Indaiá')
+      STYLE
+        COLOR 123 151 110
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Santa Rosa"
+      EXPRESSION ('[no_bairro]'eq'Santa Rosa')
+      STYLE
+        COLOR 240 210 13
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Garças"
+      EXPRESSION ('[no_bairro]'eq'Garças')
+      STYLE
+        COLOR 4 88 98
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Bandeirantes"
+      EXPRESSION ('[no_bairro]'eq'Bandeirantes')
+      STYLE
+        COLOR 246 107 199
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Jaraguá"
+      EXPRESSION ('[no_bairro]'eq'Jaraguá')
+      STYLE
+        COLOR 179 13 243
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Braúnas"
+      EXPRESSION ('[no_bairro]'eq'Braúnas')
+      STYLE
+        COLOR 73 2 24
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Suzana"
+      EXPRESSION ('[no_bairro]'eq'Suzana')
+      STYLE
+        COLOR 19 101 239
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Nova Pampulha"
+      EXPRESSION ('[no_bairro]'eq'Nova Pampulha')
+      STYLE
+        COLOR 115 146 92
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "São Francisco"
+      EXPRESSION ('[no_bairro]'eq'São Francisco')
+      STYLE
+        COLOR 86 47 190
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Manacas"
+      EXPRESSION ('[no_bairro]'eq'Manacas')
+      STYLE
+        COLOR 193 125 147
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Itatiaia"
+      EXPRESSION ('[no_bairro]'eq'Itatiaia')
+      STYLE
+        COLOR 68 75 203
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Universitário"
+      EXPRESSION ('[no_bairro]'eq'Universitário')
+      STYLE
+        COLOR 228 250 157
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Trevo"
+      EXPRESSION ('[no_bairro]'eq'Trevo')
+      STYLE
+        COLOR 39 155 3
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Jardim Atlântico"
+      EXPRESSION ('[no_bairro]'eq'Jardim Atlântico')
+      STYLE
+        COLOR 48 92 110
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Xangri-lá"
+      EXPRESSION ('[no_bairro]'eq'Xangri-lá')
+      STYLE
+        COLOR 133 8 225
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Céu Azul"
+      EXPRESSION ('[no_bairro]'eq'Céu Azul')
+      STYLE
+        COLOR 139 7 117
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Lagoa da Pampulha"
+      EXPRESSION ('[no_bairro]'eq'Lagoa da Pampulha')
+      STYLE
+        COLOR 238 145 183
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Setor Augusto José Valente I"
+      EXPRESSION ('[no_bairro]'eq'Setor Augusto José Valente I')
+      STYLE
+        COLOR 18 95 123
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Setor Dom Prudêncio"
+      EXPRESSION ('[no_bairro]'eq'Setor Dom Prudêncio')
+      STYLE
+        COLOR 220 80 212
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Setor Vila Morena"
+      EXPRESSION ('[no_bairro]'eq'Setor Vila Morena')
+      STYLE
+        COLOR 110 190 225
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Setor Central"
+      EXPRESSION ('[no_bairro]'eq'Setor Central')
+      STYLE
+        COLOR 255 231 97
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Setor dos Funcionários"
+      EXPRESSION ('[no_bairro]'eq'Setor dos Funcionários')
+      STYLE
+        COLOR 221 142 43
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vila São José"
+      EXPRESSION ('[no_bairro]'eq'Vila São José')
+      STYLE
+        COLOR 7 131 64
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Vale do Amanhecer"
+      EXPRESSION ('[no_bairro]'eq'Vale do Amanhecer')
+      STYLE
+        COLOR 234 161 216
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Cafelândios"
+      EXPRESSION ('[no_bairro]'eq'Cafelândios')
+      STYLE
+        COLOR 30 235 20
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Setor Augusto José Valente II"
+      EXPRESSION ('[no_bairro]'eq'Setor Augusto José Valente II')
+      STYLE
+        COLOR 181 206 179
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Setor Santa Luzia"
+      EXPRESSION ('[no_bairro]'eq'Setor Santa Luzia')
+      STYLE
+        COLOR 221 188 220
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Setor Guarani"
+      EXPRESSION ('[no_bairro]'eq'Setor Guarani')
+      STYLE
+        COLOR 183 210 230
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "Setor Mãe Bela"
+      EXPRESSION ('[no_bairro]'eq'Setor Mãe Bela')
+      STYLE
+        COLOR 248 90 100
+        OUTLINECOLOR 255 255 255
+      END # STYLE
     END # CLASS
   END # LAYER
 

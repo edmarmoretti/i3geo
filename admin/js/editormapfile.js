@@ -716,9 +716,15 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "conexao")
 	{
-		campos = new Array("cortepixels","metaestat_id_medida_variavel","metaestat","cache","projection","type","connection","data","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
+		campos = new Array("cortepixels","metaestat_id_medida_variavel","metaestat","cache","projection","type","connection","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		prog = "../php/editormapfile.php?funcao=alterarConexao";
+		//codifica o valor de data
+		var temp = "";
+		if($i("data") && $i("data").value != ""){
+			temp = i3GEO.util.base64encode($i("data").value);
+		}
+		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&data="+temp;
 	}
 	if(tipo == "metadados")
 	{
