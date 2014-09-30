@@ -1485,7 +1485,7 @@ function listaClasses()
 	for($i=0;$i<$nclasses;++$i)
 	{
 		$classe = $layer->getclass($i);
-		$dados[] = array("indice"=>$i,"nome"=>(mb_convert_encoding($classe->name,"UTF-8","ISO-8859-1")));
+		$dados[] = array("indice"=>$i,"nome"=>base64_encode((mb_convert_encoding($classe->name,"UTF-8","ISO-8859-1"))));
 	}
 	return $dados;
 }
@@ -2008,14 +2008,14 @@ function pegaClasseGeral()
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$classe = $layer->getclass($indiceClasse);
-	$dados["name"] = $classe->name;
-	$dados["title"] = $classe->title;
+	$dados["name"] = base64_encode($classe->name);
+	$dados["title"] = base64_encode($classe->title);
 	$temp = $classe->getExpressionString();
-	$temp = str_replace("[","_C",$temp);
-	$temp = str_replace("]","C_",$temp);
-	$temp = str_replace("'","_A_",$temp);
+	//$temp = str_replace("[","_C",$temp);
+	//$temp = str_replace("]","C_",$temp);
+	//$temp = str_replace("'","_A_",$temp);
 	//substitui caracteres que d&atilde;o problemas
-	$dados["expression"] = $temp;
+	$dados["expression"] = base64_encode($temp);
 	$dados["keyimage"] = $classe->keyimage;
 	$dados["maxscale"] = $classe->maxscaledenom;
 	$dados["minscale"] = $classe->minscaledenom;
@@ -2038,12 +2038,9 @@ function alterarClasseGeral()
 		return "erro. Layer METAESTAT";
 	}
 	$classe = $layer->getclass($indiceClasse);
-	$classe->set("name",$name);
-	$classe->set("title",$title);
-	$temp = str_replace("_C","[",$expression);
-	$temp = str_replace("C_","]",$temp);
-	$temp = str_replace("_A_","'",$temp);
-	$classe->setexpression($temp);
+	$classe->set("name",base64_decode($name));
+	$classe->set("title",base64_decode($title));
+	$classe->setexpression(base64_decode($expression));
 	$classe->set("keyimage",$keyimage);
 	$classe->set("maxscaledenom",$maxscale);
 	$classe->set("minscaledenom",$minscale);

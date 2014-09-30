@@ -734,16 +734,11 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "classeGeral")
 	{
-		campos = new Array("status","minscale","maxscale","name","title","keyimage");
+		campos = new Array("status","minscale","maxscale","keyimage");
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
-		temp = $i("expression").value;
-		re = /]/g;
-		temp = temp.replace(re,"C_");
-		re = "[";
-		temp = temp.replace(re,"_C");
-		re = /'/g;
-		temp = temp.replace(re,"_A_");
-		par += "&expression="+temp;
+		par += "&expression="+i3GEO.util.base64encode($i("expression").value);
+		par += "&name="+i3GEO.util.base64encode($i("name").value);
+		par += "&title="+i3GEO.util.base64encode($i("title").value);
 		prog = "../php/editormapfile.php?funcao=alterarClasseGeral";
 	}
 	if(tipo == "classeLabel")

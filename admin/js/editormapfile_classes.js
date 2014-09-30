@@ -40,7 +40,7 @@ function loadClasseData(node, fnLoadComplete)
 function conteudoNoClasse(codigoMap,codigoLayer,indice,nome){
 	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','classe','"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=sobe src=\"../imagens/34.png\" />";
 	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','classe','"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=desce src=\"../imagens/33.png\" />";
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirClasse('"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+indice+" "+nome+"</span>";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirClasse('"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+indice+" "+i3GEO.util.base64decode(nome)+"</span>";
 	var d = {classes:codigoMap+"_"+codigoLayer,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+indice,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:indice};
 	return d;
 }
@@ -289,12 +289,10 @@ function montaEditorClasseGeral(dados)
 	};
 	core_montaEditor(temp,"450px","500px","","Classe",true,true,false);
 
-	var re = /C_/g;
-	dados.expression = dados.expression.replace(re,"]");
-	re = /_C/g;
-	dados.expression = dados.expression.replace(re,"[");
-	re = /_A_/g;
-	dados.expression = dados.expression.replace(re,"'");
+	dados.expression = i3GEO.util.base64decode(dados.expression);
+	dados.name = i3GEO.util.base64decode(dados.name);
+	dados.title = i3GEO.util.base64decode(dados.title);
+
 	var param = {
 		"linhas":[
 		{ajuda:"Nome da classe para ser mostrada na legenda",
