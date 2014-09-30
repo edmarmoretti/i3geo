@@ -478,7 +478,7 @@ i3GEO.calculo = {
 
 	Return:
 
-	Ângulo em d&eacute;cimos de grau
+	&acirc;nngulo em d&eacute;cimos de grau
 
 	Type:
 	{Numeric}
