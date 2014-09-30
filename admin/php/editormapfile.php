@@ -1389,10 +1389,16 @@ function criarNovoEstilo()
 }
 function pegaItensLayer()
 {
-	global $codigoMap,$locaplic,$codigoLayer;
+	global $codigoMap,$locaplic,$codigoLayer,$postgis_mapa;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
+	$lcon = $layer->connection;
+	if ($layer->connectiontype == MS_POSTGIS){
+		if (in_array($lcon,array_keys($postgis_mapa))){
+			$layer->set("connection",$postgis_mapa[$lcon]);
+		}
+	}
 	$layer->open();
 	$itens = $layer->getitems();
 	$layer->close();
