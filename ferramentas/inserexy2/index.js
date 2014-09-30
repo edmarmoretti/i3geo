@@ -180,70 +180,70 @@ i3GEOF.inserexy = {
 		'<div id=i3GEOinserexyguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
 		'		<li><a  ><em><div id="i3GEOinserexyguia0" style="text-align:center;left:0px;" ><img style="height:14px" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/help-about.png"></div></em></a></li>' +
-		'		<li><a  ><em><div id="i3GEOinserexyguia1" style="text-align:center;left:0px;" >'+$trad(1,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia1" style="text-align:center;left:0px;" >'+$trad('tema',i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
 		'		<li><a  ><em><div id="i3GEOinserexyguia2" style="text-align:center;left:0px;" >Direc/dist</div></em></a></li>' +
-		'		<li><a  ><em><div id="i3GEOinserexyguia3" style="text-align:center;left:0px;" >'+$trad(2,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
-		'		<li><a  ><em><div id="i3GEOinserexyguia4" style="text-align:center;left:0px;" >'+$trad(3,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
-		'		<li><a  ><em><div id="i3GEOinserexyguia5" style="text-align:center;left:0px;" >'+$trad(4,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
-		'		<li><a  ><em><div id="i3GEOinserexyguia6" style="text-align:center;left:0px;" >'+$trad(5,i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia3" style="text-align:center;left:0px;" >'+$trad('digita',i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia4" style="text-align:center;left:0px;" >'+$trad('cola',i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia5" style="text-align:center;left:0px;" >'+$trad('converte',i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
+		'		<li><a  ><em><div id="i3GEOinserexyguia6" style="text-align:center;left:0px;" >'+$trad('coord',i3GEOF.inserexy.dicionario)+'</div></em></a></li>' +
 		'	</ul>' +
 		'</div><br>' +
 		'<div id=i3GEOinserexyprojecao style="text-align:left;left:0px;display:none">' +
-		'   <p class=paragrafo >'+$trad(6,i3GEOF.inserexy.dicionario)+':</p>' +
+		'   <p class=paragrafo >'+$trad('projCoord',i3GEOF.inserexy.dicionario)+':</p>' +
 		'	<div id="i3GEOinserexylistaepsg" style="text-align:left;border:1px solid gray;width:300px;overflow:auto;height:50px;display:block;left:5px" >' +
 		'	</div>' +
 		'</div>' +
-		'<div class=guiaobj id="i3GEOinserexyguia0obj" style="left:1px;display:none;top:10px"><p class=paragrafo >'+$trad(35,i3GEOF.inserexy.dicionario)+'</p></div>' +
+		'<div class=guiaobj id="i3GEOinserexyguia0obj" style="left:1px;display:none;top:10px"><p class=paragrafo >'+$trad('ajuda',i3GEOF.inserexy.dicionario)+'</p></div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia1obj" style="left:1px;display:none;top:10px">' +
-		'	<p class=paragrafo >'+$trad(7,i3GEOF.inserexy.dicionario)+':</p>' +
+		'	<p class=paragrafo >'+$trad('selecionaTema',i3GEOF.inserexy.dicionario)+':</p>' +
 		'	<div class="styled-select" id=i3GEOinserexyshapefile >' +
 		'	</div><br>' +
-		'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="'+$trad(8,i3GEOF.inserexy.dicionario)+'" />' +
-		'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="'+$trad(9,i3GEOF.inserexy.dicionario)+'" /></p>' +
+		'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="'+$trad('criaTemaEditavel',i3GEOF.inserexy.dicionario)+'" />' +
+		'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="'+$trad('graficoPerfil',i3GEOF.inserexy.dicionario)+'" /></p>' +
 
 		'	<div id=i3GEOinserexyopcitens style=display:none;left:0px;text-align:left; >' +
-		'		<p class=paragrafo >'+$trad(10,i3GEOF.inserexy.dicionario)+':</p>' +
+		'		<p class=paragrafo >'+$trad('selecionaItem',i3GEOF.inserexy.dicionario)+':</p>' +
 		'		<div class="styled-select" id=i3GEOinserexyshapefileitem >' +
 		'		</div>' +
 		'		<br><p class=paragrafo >Valor: </p>'+
 		'		<div class="styled-select" ><input type=text value="" id="i3GEOinserexyvalorItem" /></div>' +
 		'	<br></div>' +
 		'	<div id=i3GEOinserexymen1 style="display:block;left:0px;">' +
-		'		<p class=paragrafo >'+$trad(11,i3GEOF.inserexy.dicionario)+'</p>' +
-		'		<p class=paragrafo >'+$trad(12,i3GEOF.inserexy.dicionario)+'</p>' +
-		'		<p class=paragrafo >'+$trad(13,i3GEOF.inserexy.dicionario)+'</p>' +
+		'		<p class=paragrafo >'+$trad('ajuda2',i3GEOF.inserexy.dicionario)+'</p>' +
+		'		<p class=paragrafo >'+$trad('ajuda3',i3GEOF.inserexy.dicionario)+'</p>' +
+		'		<p class=paragrafo >'+$trad('ajuda4',i3GEOF.inserexy.dicionario)+'</p>' +
 		'	</div>' +
 		'</div>' +
 
 		'<div class=guiaobj id="i3GEOinserexyguia2obj" style="left:1px;display:none;">' +
-		'	<p class=paragrafo >'+$trad(14,i3GEOF.inserexy.dicionario)+':</p>' +
+		'	<p class=paragrafo >'+$trad('direcao',i3GEOF.inserexy.dicionario)+':</p>' +
 		'<div class=styled-select style="width:40px;float:left;" >' +
 		'<input onclick="javascript:this.select();" class=digitar id="i3GEOinserexyxgdd" title="grau" type=text value="00"/></div>' +
 		'<div class=styled-select style="width:40px;float:left;margin-left:10px;margin-right:10px;" >' +
 		'<input onclick="javascript:this.select();" id="i3GEOinserexyxmdd" title="minuto" type=text value="00"/></div>' +
 		'<div class=styled-select style="width:60px;margin-left:10px;" >' +
 		'<input onclick="javascript:this.select();" id="i3GEOinserexyxsdd" title="segundo" type=text value="00.00"/></div>' +
-		'<br><br><p class=paragrafo >'+$trad(15,i3GEOF.inserexy.dicionario)+':</p>' +
+		'<br><br><p class=paragrafo >'+$trad('distancia',i3GEOF.inserexy.dicionario)+':</p>' +
 		'<div class=styled-select >' +
 		'<input onclick="javascript:this.select();" id="i3GEOinserexydistdd" title="km" type=text value="0.0"/>' +
 		'</div>' +
 		'	<div id=opcdd style="top:15px;left:0px">' +
-		'		<p class=paragrafo ><input id=i3GEOinserexybotaodd type="button" size=14 value="'+$trad(16,i3GEOF.inserexy.dicionario)+'"  /></p>' +
+		'		<p class=paragrafo ><input id=i3GEOinserexybotaodd type="button" size=14 value="'+$trad('insere',i3GEOF.inserexy.dicionario)+'"  /></p>' +
 		'	</div>' +
 		'	<div id=i3GEOinserexymendd style="position:relative;left:0px;top:20px">' +
-		'		<p class=paragrafo >'+$trad(17,i3GEOF.inserexy.dicionario)+'</p>' +
-		'		<p class=paragrafo >'+$trad(18,i3GEOF.inserexy.dicionario)+'</p>' +
+		'		<p class=paragrafo >'+$trad('ajuda5',i3GEOF.inserexy.dicionario)+'</p>' +
+		'		<p class=paragrafo >'+$trad('anguloDistancia',i3GEOF.inserexy.dicionario)+'</p>' +
 		'	</div>' +
 		'</div> '+
 		'<div class=guiaobj id="i3GEOinserexyguia3obj" style="display:none;">' +
 		'	<div id=i3GEOinserexytipodig style="text-align:left;left:0px;top:5px;">' +
-		'		<p class=paragrafo >'+$trad(19,i3GEOF.inserexy.dicionario)+':</p>' +
+		'		<p class=paragrafo >'+$trad('tipoEntrada',i3GEOF.inserexy.dicionario)+':</p>' +
 		'		<table class=lista6 >' +
 		'		<tr>' +
 		'			<td><input style="border:0px solid white;cursor:pointer" title="DMS" onclick="i3GEOF.inserexy.escolhedig(\'i3GEOinserexydigmascara\')" name=i3GEOinserexytipodig type=radio id="i3GEOinserexytipodigmascara" checked /></td>' +
-		'			<td>'+$trad(20,i3GEOF.inserexy.dicionario)+'</td>' +
+		'			<td>'+$trad('mascara',i3GEOF.inserexy.dicionario)+'</td>' +
 		'			<td><input style="border:0px solid white;cursor:pointer" title="DMS" onclick="i3GEOF.inserexy.escolhedig(\'i3GEOinserexydigcampo\')" name=i3GEOinserexytipodig type=radio id="i3GEOinserexytipodigcampo" /></td>' +
-		'			<td>'+$trad(21,i3GEOF.inserexy.dicionario)+'</td>' +
+		'			<td>'+$trad('campoUnico',i3GEOF.inserexy.dicionario)+'</td>' +
 		'		</tr>' +
 		'		</table><br>' +
 		'	</div>' +
@@ -271,27 +271,27 @@ i3GEOF.inserexy = {
 		'		<div class=styled-select style="width:60px;margin-left:10px;" >' +
 		'		<input onclick="javascript:this.select();" id="i3GEOinserexylatitude" title="dms" type=text value=""/></div>' +
 		'	</div>' +
-		'	<br><p class=paragrafo ><input id=i3GEOinserexybotao2 type="button" size=14 value="'+$trad(16,i3GEOF.inserexy.dicionario)+'"  />' +
+		'	<br><p class=paragrafo ><input id=i3GEOinserexybotao2 type="button" size=14 value="'+$trad('insere',i3GEOF.inserexy.dicionario)+'"  />' +
 		'	<div id=i3GEOinserexymen2 style="left:0px;">' +
-		'		<p class=paragrafo >'+$trad(22,i3GEOF.inserexy.dicionario)+
-		'		<p class=paragrafo >'+$trad(23,i3GEOF.inserexy.dicionario)+
-		'		<p class=paragrafo >'+$trad(24,i3GEOF.inserexy.dicionario)+
-		'		<p class=paragrafo >'+$trad(25,i3GEOF.inserexy.dicionario)+'<br><br><br>' +
+		'		<p class=paragrafo >'+$trad('ajuda6',i3GEOF.inserexy.dicionario)+
+		'		<p class=paragrafo >'+$trad('ajuda7',i3GEOF.inserexy.dicionario)+
+		'		<p class=paragrafo >'+$trad('ajuda8',i3GEOF.inserexy.dicionario)+
+		'		<p class=paragrafo >'+$trad('ajuda9',i3GEOF.inserexy.dicionario)+'<br><br><br>' +
 		'	</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia4obj" style="left:1px;display:none;">' +
-		'	<br><p class=paragrafo >'+$trad(26,i3GEOF.inserexy.dicionario)+':</p>' +
+		'	<br><p class=paragrafo >'+$trad('insereListaCoords',i3GEOF.inserexy.dicionario)+':</p>' +
 		'	<div class=styled-select >' +
 		'	<input onclick="javascript:this.select();" id="i3GEOinserexycolar" title="pares de xy" type=text value=""/></div>' +
-		'	<br><br><p class=paragrafo ><input id=i3GEOinserexybotao6 type="button" size=14 value="'+$trad(16,i3GEOF.inserexy.dicionario)+'"  /></p>' +
+		'	<br><br><p class=paragrafo ><input id=i3GEOinserexybotao6 type="button" size=14 value="'+$trad('insere',i3GEOF.inserexy.dicionario)+'"  /></p>' +
 		'	<div id=i3GEOinserexymen3 style="display:block;left:0px;">' +
-		'		<p class=paragrafo >'+$trad(27,i3GEOF.inserexy.dicionario)+'<br> -54.23 -12.5 -50 -5.33<br>' +
+		'		<p class=paragrafo >'+$trad('insereXY',i3GEOF.inserexy.dicionario)+'<br> -54.23 -12.5 -50 -5.33<br>' +
 		'	</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia5obj" style="left:1px;display:none;">' +
-		'	<p class=paragrafo ><input id=i3GEOinserexybotao3 type="button" size=25 value="'+$trad(28,i3GEOF.inserexy.dicionario)+'" /></p>' +
-		'	<p class=paragrafo ><input id=i3GEOinserexybotao4 type="button" size=25 value="'+$trad(29,i3GEOF.inserexy.dicionario)+'" /></p>' +
-		'	<p class=paragrafo ><input id=i3GEOinserexybotao5 type="button" size=25 value="'+$trad(30,i3GEOF.inserexy.dicionario)+'" /></p>' +
+		'	<p class=paragrafo ><input id=i3GEOinserexybotao3 type="button" size=25 value="'+$trad('listaWkt',i3GEOF.inserexy.dicionario)+'" /></p>' +
+		'	<p class=paragrafo ><input id=i3GEOinserexybotao4 type="button" size=25 value="'+$trad('criaTemaPoligono',i3GEOF.inserexy.dicionario)+'" /></p>' +
+		'	<p class=paragrafo ><input id=i3GEOinserexybotao5 type="button" size=25 value="'+$trad('criaTemaLinha',i3GEOF.inserexy.dicionario)+'" /></p>' +
 		'	<div id=i3GEOinserexywktres style="display:block;left:0px">' +
 		'	</div>'+
 		'</div>' +
@@ -429,7 +429,7 @@ i3GEOF.inserexy = {
 				i3GEOF.inserexy.aguarde.visibility = "hidden";
 			}
 		};
-		i3GEO.janela.prompt($trad(31,i3GEOF.inserexy.dicionario),funcaoOK,$trad(32,i3GEOF.inserexy.dicionario)+parseInt((Math.random() * 100),10));
+		i3GEO.janela.prompt($trad('tituloNovoTema',i3GEOF.inserexy.dicionario),funcaoOK,$trad('pontosInseridos',i3GEOF.inserexy.dicionario)+parseInt((Math.random() * 100),10));
 	},
 	/*
 	Function: listaPontos
@@ -638,7 +638,7 @@ i3GEOF.inserexy = {
 				valoritem = $i("i3GEOinserexyvalorItem").value;
 			}
 			if (tema === "")
-			{i3GEO.janela.tempoMsg($trad(33,i3GEOF.inserexy.dicionario));}
+			{i3GEO.janela.tempoMsg($trad('msgNenhumTemaDefinido',i3GEOF.inserexy.dicionario));}
 			else{
 				temp = function(retorno){
 					if(i3GEO.Interface.ATUAL === "padrao")
@@ -755,7 +755,7 @@ i3GEOF.inserexy = {
 				y.push(xy[1]);
 			}
 			if(x.length == 0)
-			{i3GEO.janela.tempoMsg($trad(34,i3GEOF.inserexy.dicionario));return;}
+			{i3GEO.janela.tempoMsg($trad('msgNenhumPontoEncontrado',i3GEOF.inserexy.dicionario));return;}
 			pontosdistobj = {
 				xpt: x,
 				ypt: y
