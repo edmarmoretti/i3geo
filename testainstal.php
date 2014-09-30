@@ -112,8 +112,11 @@ echo "<br>---<br>";
 
 if (get_cfg_var("safe_mode") == 1){
 	echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
+	echo "<br>---<br>";
 }
-
+echo "As seguintes letras devem aparecer corretamente acentuadas: Á«„‚·¡Û”";
+echo "<br>Caso contr&aacute;rio, certifique-se que o par&acirc;metro de configura&ccedil;&atilde;o do Apache <b>AddDefaultCharset</b> esteja desativado.";
+echo "<br>---<br>";
 //executa as opcoes linux definidas no formulario
 if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaPastaMstmp"] == "on"){
 	echo "<br>Criando a pasta $dir_tmp \n";

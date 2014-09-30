@@ -20,7 +20,8 @@ function montaEditorDados(dados)
 	var temp = function(){
 		salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false);
 	};
-	core_montaEditor(temp,"500px","650px","","Conex&atilde;o",true,true,false);
+	//nao use modal aqui!!!!
+	core_montaEditor(temp,"500px","650px","","Conex&atilde;o",false,true,false);
 
 	var d = [],valor = "",idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],
 		idsMetaestat = ["connection","data","tileitem","tileindex","tipooriginal"],
