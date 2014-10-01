@@ -1385,16 +1385,14 @@ class Analise
 
 	nome do layer criado com o buffer.
 	*/
-	function criaBuffer($distancia,$locaplic,$unir="nao",$wkt="",$multiplicar=1,$itemdistancia="")
-	{
+	function criaBuffer($distancia,$locaplic,$unir="nao",$wkt="",$multiplicar=1,$itemdistancia=""){
 		set_time_limit(180);
 		error_reporting(0);
-		if($this->nome != "")
-		{
+		if($this->nome != ""){
 			$items = pegaItens($this->layer);
 		}
-		else
-		{$items = array();
+		else{
+			$items = array();
 		}
 		//para manipular dbf
 		if($this->dbaseExiste == false){
@@ -1455,12 +1453,11 @@ class Analise
 		// cria o dbf
 		$def = $this->criaDefDb($items);
 		$def[] = array("i3geo","C","254");
-		if($this->dbaseExiste == false)
-		{
+		if($this->dbaseExiste == false){
 			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
 		}
-		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		else{
+			$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
 		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
@@ -1472,7 +1469,12 @@ class Analise
 		{
 			foreach ($items as $ni)
 			{
-				$reg[] = $this->truncaS($shapes[$i]->values[$ni]);
+				if(!empty($shapes[$i]->values[$ni])){
+					$reg[] = $this->truncaS($shapes[$i]->values[$ni]);
+				}
+				else{
+					$reg[] = "";
+				}
 			}
 			$reg[] = $i;
 			$novoshpf->addShape($buffers[$i]);
@@ -1480,6 +1482,7 @@ class Analise
 				xbase_add_record($db,$reg);
 			else
 				dbase_add_record($db,$reg);
+
 			$reg = array();
 		}
 		if($this->dbaseExiste == false)
