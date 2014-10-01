@@ -1359,7 +1359,7 @@ function autoClassesLayer()
 	$m->valorunico($itemExpressao,"",$itemNome);
 	$m->salva();
 	$mapatemp = ms_newMapObj($nometemp);
-	
+
 	$numlayers = $mapatemp->numlayers;
 	for ($i=0;$i < $numlayers;$i++){
 		$layertemp = $mapatemp->getlayer($i);
@@ -1368,7 +1368,7 @@ function autoClassesLayer()
 			$layertemp->set("connection",$lcon);
 		}
 	}
-	
+
 	$mapatemp->save($mapfile);
 	removeCabecalho($mapfile);
 }
@@ -1761,7 +1761,7 @@ function pegaConexao()
 	$dados["metaestat_id_medida_variavel"] = $layer->getmetadata("metaestat_id_medida_variavel");
 
 	$dados["colunas"] = implode(",",pegaItens($layer));
-	
+
 	if($layer->connectiontype == 7 || $layer->connectiontype == 9){
 		$dados["tipooriginal"] = $layer->getmetadata("tipooriginal");
 	}
@@ -1832,7 +1832,7 @@ function alterarConexao()
 		if($e->symbolname == "linha" || $e->symbolname == "ponto"){
 			$e->set("symbolname"," ");
 		}
-	}	
+	}
 	$layer->setfilter($filter);
 	$layer->set("filteritem",$filteritem);
 	if($layer->getprojection() == MS_TRUE)
@@ -1948,9 +1948,15 @@ function alterarMetadados()
 	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
 		return "erro. Layer METAESTAT";
 	}
+	$itens = str_replace(", ",",",$itens);
+	$itens = str_replace(" ,",",",$itens);
 	$layer->setmetadata("itens",$itens);
+	$itensdesc = str_replace(", ",",",$itensdesc);
+	$itensdesc = str_replace(" ,",",",$itensdesc);
 	$layer->setmetadata("itensdesc",$itensdesc);
 	$layer->setmetadata("itenslink",$itenslink);
+	$tip = str_replace(", ",",",$tip);
+	$tip = str_replace(" ,",",",$tip);
 	$layer->setmetadata("tip",$tip);
 	$layer->setmetadata("classesitem",$classesitem);
 	$layer->setmetadata("classesnome",$classesnome);
