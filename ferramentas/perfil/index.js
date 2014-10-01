@@ -100,10 +100,11 @@ i3GEOF.perfil = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.perfil.html();
 			i3GEOF.perfil.comboTemas();
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOperfilbotao1",
 				{onclick:{fn: i3GEOF.perfil.criaPerfil}}
 			);
+			b.addClass("rodar");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},

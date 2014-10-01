@@ -233,7 +233,7 @@ i3GEOF.markercluster = {
 		i3GEOF.markercluster.comboItens();
 	},
 	t3 : function() {
-		var ins = "<p class='paragrafo'>"
+		var b,ins = "<p class='paragrafo'>"
 				+ $trad(
 						'adicionaTema',
 						i3GEOF.markercluster.dicionario);
@@ -250,11 +250,12 @@ i3GEOF.markercluster = {
 				"i3GEOmarkerclusterresultado",
 				true,
 				"i3GEOF.markercluster_rodape");
-		new YAHOO.widget.Button("i3GEOmarkerclusterbotao1", {
+		b = new YAHOO.widget.Button("i3GEOmarkerclusterbotao1", {
 			onclick : {
 				fn : i3GEOF.markercluster.criamarkercluster
 			}
 		});
+		b.addClass("rodar");
 	},
 	/**
 	 * Function: criamarkercluster

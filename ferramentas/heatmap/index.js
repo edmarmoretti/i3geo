@@ -200,7 +200,7 @@ i3GEOF.heatmap =
 				"i3GEOF.heatmap_rodape");
 		},
 		t4 : function() {
-			var ins = "<p class='paragrafo'>" + $trad('adicionaTema', i3GEOF.heatmap.dicionario);
+			var b,ins = "<p class='paragrafo'>" + $trad('adicionaTema', i3GEOF.heatmap.dicionario);
 			ins += "<br><br><input id=i3GEOheatmapbotao1 type='button' value='" + $trad('criaCamada', i3GEOF.heatmap.dicionario) + "' />";
 			i3GEO.util.proximoAnterior(
 				"i3GEOF.heatmap.t3()",
@@ -210,11 +210,12 @@ i3GEOF.heatmap =
 				"i3GEOheatmapresultado",
 				true,
 				"i3GEOF.heatmap_rodape");
-			new YAHOO.widget.Button("i3GEOheatmapbotao1", {
+			b = new YAHOO.widget.Button("i3GEOheatmapbotao1", {
 				onclick : {
 					fn : i3GEOF.heatmap.criaheatmap
 				}
 			});
+			b.addClass("rodar");
 		},
 		/**
 		 * Function: criaheatmap

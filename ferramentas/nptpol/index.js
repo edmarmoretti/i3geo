@@ -120,7 +120,7 @@ i3GEOF.nptpol = {
 			i3GEO.janela.minimiza("i3GEOF.nptpol");
 		};
 		janela = i3GEO.janela.cria(
-			"400px",
+			"420px",
 			"150px",
 			"",
 			"",
@@ -169,13 +169,14 @@ i3GEOF.nptpol = {
 		i3GEOF.nptpol.comboTemasPoligonos();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo'>"+$trad('adicionaTema',i3GEOF.nptpol.dicionario);
+		var b,ins = "<p class='paragrafo'>"+$trad('adicionaTema',i3GEOF.nptpol.dicionario);
 		ins += "<br><br><input id=i3GEOnptpolbotao1 type='buttom' value='"+$trad('calcula',i3GEOF.nptpol.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t1()","",ins,"i3GEOF.nptpol.t2","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEOnptpolbotao1",
 			{onclick:{fn: i3GEOF.nptpol.calcula}}
 		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: calcula
