@@ -98,10 +98,11 @@ i3GEOF.bufferpt = {
 				"i3GEObufferptbotao2",
 				{onclick:{fn: i3GEOF.bufferpt.atualizaBox}}
 			);
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEObufferptbotao1",
 				{onclick:{fn: i3GEOF.bufferpt.executa}}
 			);
+			b.addClass("rodar");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -148,7 +149,7 @@ i3GEOF.bufferpt = {
 		//cria a janela flutuante
 		titulo = $trad("u10")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=24&idajuda=3' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"210px",
+			"290px",
 			"110px",
 			"",
 			"",

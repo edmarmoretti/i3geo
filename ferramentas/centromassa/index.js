@@ -163,13 +163,14 @@ i3GEOF.centromassa = {
 		i3GEOF.centromassa.comboTemasPontos();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo'>"+$trad('ajuda3',i3GEOF.centromassa.dicionario);
+		var b,ins = "<p class='paragrafo'>"+$trad('ajuda3',i3GEOF.centromassa.dicionario);
 		ins += "<br><br><input id=i3GEOcentromassabotao1 type='buttom' value='"+$trad('calcula',i3GEOF.centromassa.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t1()","",ins,"i3GEOF.centromassa.t2","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEOcentromassabotao1",
 			{onclick:{fn: i3GEOF.centromassa.calcula}}
 		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: calcula

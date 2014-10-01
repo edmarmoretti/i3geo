@@ -100,10 +100,11 @@ i3GEOF.busca = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.busca.html();
 			i3GEO.php.listaItensTema(i3GEOF.busca.montaListaItens,i3GEOF.busca.tema);
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEObuscabotao1",
 				{onclick:{fn: i3GEOF.busca.procurar}}
 			);
+			b.addClass("rodar");
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela");
 		}
 		catch(erro){alert(erro);}

@@ -160,13 +160,14 @@ i3GEOF.centroide = {
 		i3GEOF.centroide.comboTemasSel();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo'>"+$trad('ajuda2',i3GEOF.centroide.dicionario);
+		var b,ins = "<p class='paragrafo'>"+$trad('ajuda2',i3GEOF.centroide.dicionario);
 		ins += "<br><br><input id=i3GEOcentroidebotao1 type='buttom' value='"+$trad('criaCentroide',i3GEOF.centroide.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.centroide.t2()","",ins,"i3GEOF.centroide.t3","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEOcentroidebotao1",
 			{onclick:{fn: i3GEOF.centroide.criacentroide}}
 		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: criacentroide

@@ -228,9 +228,9 @@ i3GEOF.identifica = {
 				};
 				$i(idjanela+"i3GEOidentificaguia5").onclick = function(){
 					i3GEO.guias.mostraGuiaFerramenta(idjanela+"i3GEOidentificaguia5",idjanela+"i3GEOidentificaguia");
-					new YAHOO.widget.Button(idjanela+"i3GEOidentificabotao2",{
+					var temp, b = new YAHOO.widget.Button(idjanela+"i3GEOidentificabotao2",{
 						onclick:{
-							fn: function(idjanela){
+							fn: function(){
 								var js = i3GEO.configura.locaplic+"/ferramentas/bufferpt/index.js";
 								i3GEO.util.scriptTag(
 										js,
@@ -240,7 +240,8 @@ i3GEOF.identifica = {
 							}
 						}
 					});
-					var temp = i3GEO.coordenadas.formato,
+					b.addClass("rodar");
+					temp = i3GEO.coordenadas.formato,
 					gh = i3GEO.coordenadas.geohash.encodeGeoHash(
 							i3GEOF.identifica.propJanelas[idjanela].y,
 							i3GEOF.identifica.propJanelas[idjanela].x
@@ -458,7 +459,7 @@ i3GEOF.identifica = {
 			ins += '		<b>'+$trad('valorPonto',i3GEOF.identifica.dicionario)+'<br></b>';
 			ins += '		<div id='+idjanela+'i3GEOidentificacoord ></div><br>';
 			ins += '		<div id='+idjanela+'i3GEOidentificacoordtexto style=text-align:left ></div>';
-			ins += '		<br><br><input id='+idjanela+'i3GEOidentificabotao2 size=20  type=button value="'+$trad('criaBuffer',i3GEOF.identifica.dicionario)+'" />';
+			ins += '		<br><br><input id='+idjanela+'i3GEOidentificabotao2 size=20  type=button value="'+$trad('criaBuffer',i3GEOF.identifica.dicionario)+'" /><br>';
 			ins += '	</div>';
 			//ins += '</div>	';
 			return ins;
