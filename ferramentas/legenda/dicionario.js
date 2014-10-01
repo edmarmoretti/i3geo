@@ -276,7 +276,7 @@ i3GEOF.legenda.dicionario = {
 			es:"",
 			it:""
 		}],
-		47: [{
+		"etiquetasClasse": [{
 			pt:"Etiquetas da classe (labels)",
 			en:"",
 			es:"",
