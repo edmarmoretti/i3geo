@@ -81,6 +81,7 @@ i3GEOF.pontosDistri = {
 	*/
 	inicia: function(iddiv){
 		try{
+			var b;
 			$i(iddiv).innerHTML += i3GEOF.pontosDistri.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOpontosDistriguia1","i3GEOpontosDistriguia");
 			//eventos das guias
@@ -92,26 +93,31 @@ i3GEOF.pontosDistri = {
 				"i3GEOpontosDistribotao4",
 				{onclick:{fn: i3GEOF.pontosDistri.verCores}}
 			);
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOpontosDistribotao1",
 				{onclick:{fn: i3GEOF.pontosDistri.analiseDensidade}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOpontosDistribotao2",
 				{onclick:{fn: i3GEOF.pontosDistri.analiseDistancia}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOpontosDistribotao3",
 				{onclick:{fn: i3GEOF.pontosDistri.analiseRelatorio}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOpontosDistribotaokernel",
 				{onclick:{fn: i3GEOF.pontosDistri.analiseKernel}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOpontosDistribotaodeldir",
 				{onclick:{fn: i3GEOF.pontosDistri.analiseDeldir}}
 			);
+			b.addClass("rodar");
 			i3GEOF.pontosDistri.ativaFoco();
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
@@ -140,8 +146,8 @@ i3GEOF.pontosDistri = {
 		ins += i3GEO.util.comboSimNao("i3GEOpontosDistrilimitePontos","sim");
 		ins += '	<p class="paragrafo" >'+$trad('extendeAbrangencia',i3GEOF.pontosDistri.dicionario);
 		ins += $inputText("","","i3GEOpontosDistriextendelimite","",3,"10")+' %';
-		ins += '	<p class="paragrafo" ><input id="i3GEOpontosDistribotao1" size=35  type=button value="'+$trad('densidadePontos',i3GEOF.pontosDistri.dicionario)+'" />&nbsp;';
-		ins += '	<input id="i3GEOpontosDistribotao2" size=35  type=button value="'+$trad('distanciaPontos',i3GEOF.pontosDistri.dicionario)+'" /></p>';
+		ins += '	<p class="paragrafo" ><input id="i3GEOpontosDistribotao1" size=35  type=button value="'+$trad('densidadePontos',i3GEOF.pontosDistri.dicionario)+'" /></p>';
+		ins += '	<p class="paragrafo" ><input id="i3GEOpontosDistribotao2" size=35  type=button value="'+$trad('distanciaPontos',i3GEOF.pontosDistri.dicionario)+'" /></p>';
 		ins += '	<p class="paragrafo"><input id=i3GEOpontosDistribotaokernel size=35  type=button value="Kernel" />';
 		ins += '	&nbsp;'+$trad('desvioPadrao',i3GEOF.pontosDistri.dicionario)+': ';
 		ins += $inputText("","","i3GEOpontosDistrisigma","",3,"")+"</p>";

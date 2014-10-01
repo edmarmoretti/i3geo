@@ -108,10 +108,11 @@ i3GEOF.tme = {
 			YAHOO.i3GEO.janela.manager.find("i3GEOF.tme").setFooter(
 				'<input class="paragrafo" id="i3GEOtmebotao1" type="button" value="'+$trad('geraKml',i3GEOF.tme.dicionario)+'" style="cursor:pointer;color:blue"/>'
 			);
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOtmebotao1",
 				{onclick:{fn: i3GEOF.tme.ativa}}
 			);
+			b.addClass("rodar");
 			$i("i3GEOtmebotao1-button").style.width = "350px";
 			i3GEO.util.comboItens(
 				"i3GEOTMEregioes",
