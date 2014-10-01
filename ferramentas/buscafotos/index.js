@@ -129,30 +129,30 @@ i3GEOF.buscaFotos = {
 	html:function(){
 		var ins = '';
 		ins += '<div id=i3GEObuscafotosaviso style="display:block;padding:5px;" >';
-		ins += '<p class="paragrafo" >'+$trad(1,i3GEOF.buscaFotos.dicionario);
-		ins += '<p class="paragrafo" >'+$trad(2,i3GEOF.buscaFotos.dicionario);
-		ins += '<p class="paragrafo" >'+$trad(3,i3GEOF.buscaFotos.dicionario);
+		ins += '<p class="paragrafo" >'+$trad('ajuda',i3GEOF.buscaFotos.dicionario);
+		ins += '<p class="paragrafo" >'+$trad('ajuda2',i3GEOF.buscaFotos.dicionario);
+		ins += '<p class="paragrafo" >'+$trad('ajuda3',i3GEOF.buscaFotos.dicionario);
     	if(i3GEO.parametros.mapscale > 30000001){
-    		ins += '<p class="paragrafo" >'+$trad(4,i3GEOF.buscaFotos.dicionario);
-    		ins += '<p class="paragrafo" ><input id=i3GEObuscafotosbotao3 size=20  type=button value="'+$trad(5,i3GEOF.buscaFotos.dicionario)+'" />';
+    		ins += '<p class="paragrafo" >'+$trad('msgForaEscala',i3GEOF.buscaFotos.dicionario);
+    		ins += '<p class="paragrafo" ><input id=i3GEObuscafotosbotao3 size=20  type=button value="'+$trad('ajusta',i3GEOF.buscaFotos.dicionario)+'" />';
     	}
     	else{
-    		ins += '<p><input  id=i3GEObuscafotosbotao2 size=20  type=button value="'+$trad(6,i3GEOF.buscaFotos.dicionario)+'" />';
+    		ins += '<p><input  id=i3GEObuscafotosbotao2 size=20  type=button value="'+$trad('continua',i3GEOF.buscaFotos.dicionario)+'" />';
     	}
 		ins += '</div>';
 		ins += '<div id=i3GEObuscafotosbusca style="display:none;padding:5px;" >';
 		ins += '	<div id="i3GEObuscafotosf" style="display:none">';
-		ins += '		<p class="paragrafo" ><i>'+$trad(7,i3GEOF.buscaFotos.dicionario)+'</i>';
-		ins += '		<p class="paragrafo" >'+$trad(8,i3GEOF.buscaFotos.dicionario);
-		ins += $trad(9,i3GEOF.buscaFotos.dicionario);
-		ins += $trad(10,i3GEOF.buscaFotos.dicionario);
-		ins += '		<p class="paragrafo" >'+$trad(11,i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=30 value="" id="i3GEObuscafotostexto" /></div>';
-		ins += '		<br><p class="paragrafo" >'+$trad(12,i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=10 value="2009" id="i3GEObuscafotosai" /></div>';
-		ins += '		<br><p class="paragrafo" >'+$trad(13,i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=10 value="2009" id="i3GEObuscafotosaf" /></div><br><br>';
-		ins += '		<input  id=i3GEObuscafotosbotao1 size=20  type=button value="'+$trad(14,i3GEOF.buscaFotos.dicionario)+'" />';
+		ins += '		<p class="paragrafo" ><i>'+$trad('ajudaFlickr',i3GEOF.buscaFotos.dicionario)+'</i>';
+		ins += '		<p class="paragrafo" >'+$trad('opcoes',i3GEOF.buscaFotos.dicionario);
+		ins += $trad('maxRegistros',i3GEOF.buscaFotos.dicionario);
+		ins += $trad('ajudaAno',i3GEOF.buscaFotos.dicionario);
+		ins += '		<p class="paragrafo" >'+$trad('texto',i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=30 value="" id="i3GEObuscafotostexto" /></div>';
+		ins += '		<br><p class="paragrafo" >'+$trad('anoInicial',i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=10 value="2009" id="i3GEObuscafotosai" /></div>';
+		ins += '		<br><p class="paragrafo" >'+$trad('anoFinal',i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=10 value="2009" id="i3GEObuscafotosaf" /></div><br><br>';
+		ins += '		<input  id=i3GEObuscafotosbotao1 size=20  type=button value="'+$trad('procuraFotos',i3GEOF.buscaFotos.dicionario)+'" />';
 		ins += '	</div>';
 		ins += '	<div>';
-		ins += '	<br><p class="paragrafo" >'+$trad(15,i3GEOF.buscaFotos.dicionario)+':';
+		ins += '	<br><p class="paragrafo" >'+$trad('servidores',i3GEOF.buscaFotos.dicionario)+':';
 		ins += '	<input type=radio style="top:2px;background-color:#f2f2f2;none;border:0px solid white;cursor:pointer;position:relative;" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=flickr id=i3GEObuscafotosbuscaflickr  /><a href="http://www.flickr.com" target="_blank" >Flickr</a>';
 		ins += '	<input type=radio style="top:2px;background-color:#f2f2f2;border:0px solid white;cursor:pointer;position:relative;" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=panoramio id=i3GEObuscafotosbuscapanoramio /><a href="http://www.panoramio.com" target="_blank" >Panoramio</a>';
 		ins += '	<input type=radio style="top:2px;background-color:#f2f2f2;border:0px solid white;cursor:pointer;position:relative;" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=locr id=i3GEObuscafotosbuscalocr /><a href="http://www.locr.com" target="_blank" >Locr</a>';
@@ -251,7 +251,7 @@ i3GEOF.buscaFotos = {
 	*/
 	busca: function(pagina){
 		i3GEOF.buscaFotos.aguarde.visibility = "visible";
-		$i("i3GEObuscafotosresultadofotos").innerHTML = $trad(16,i3GEOF.buscaFotos.dicionario);
+		$i("i3GEObuscafotosresultadofotos").innerHTML = $trad('msgAguarde',i3GEOF.buscaFotos.dicionario);
 		$i("i3GEObuscafotospaginas").innerHTML = "";
 		var texto = $i("i3GEObuscafotostexto").value,
 			ai = $i("i3GEObuscafotosai").value,
@@ -326,15 +326,15 @@ i3GEOF.buscaFotos = {
 	listafotospanoramio: function(retorno){
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
 		if (retorno.data===undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = $trad(17,i3GEOF.buscaFotos.dicionario);return;}
+		{$i("i3GEObuscafotosresultadofotos").innerHTML = $trad('erroTempo',i3GEOF.buscaFotos.dicionario);return;}
 		eval("var data = "+retorno.data);
 		var ins = "",res,i,t,p;
 		if(!retorno.data)
-		{ins += "<br><span style=color:red>"+$trad(18,i3GEOF.buscaFotos.dicionario)+"</span><br><br>";return;}
+		{ins += "<br><span style=color:red>"+$trad('erroAcessoDados',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";return;}
 		res = data.count;
 		ins = "";
 		if (res === 1)
-		{ins += "<br><span style=color:red>"+$trad(19,i3GEOF.buscaFotos.dicionario)+"</span><br><br>";}
+		{ins += "<br><span style=color:red>"+$trad('erroNadaEncontrado',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";}
 		else
 		{
 			for (i=0;i<res;i++)	{
@@ -351,7 +351,7 @@ i3GEOF.buscaFotos = {
 		$i("i3GEObuscafotosresultadofotos").innerHTML = ins+"<br><br>";
 		p = parseInt($i("i3GEObuscafotospaginas").innerHTML,10);
 		if(res > 15){
-			ins = "<span onclick='i3GEOF.buscaFotos.busca(\""+p+"\")' style='cursor:pointer;text-decoration:underline' >"+$trad(20,i3GEOF.buscaFotos.dicionario)+"&nbsp;</span>";
+			ins = "<span onclick='i3GEOF.buscaFotos.busca(\""+p+"\")' style='cursor:pointer;text-decoration:underline' >"+$trad('maisFotos',i3GEOF.buscaFotos.dicionario)+"&nbsp;</span>";
 			$i("i3GEObuscafotospaginas").innerHTML = ins;
 		}
 		else
@@ -371,15 +371,15 @@ i3GEOF.buscaFotos = {
 			t,
 			p;
 		if (retorno.data===undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = $trad(17,i3GEOF.buscaFotos.dicionario);return;}
+		{$i("i3GEObuscafotosresultadofotos").innerHTML = $trad('erroTempo',i3GEOF.buscaFotos.dicionario);return;}
 		if((!retorno.data) || (retorno.data === ""))
-		{ins = "<br><span style=color:red>"+$trad(18,i3GEOF.buscaFotos.dicionario)+"</span><br><br>";$i("i3GEObuscafotosresultadofotos").innerHTML = ins;return;}
+		{ins = "<br><span style=color:red>"+$trad('erroAcessoDados',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";$i("i3GEObuscafotosresultadofotos").innerHTML = ins;return;}
 		data = retorno.data.photo;
 		res = data.length;
 		ins = "";
-		ins += "<span><b>"+$trad(21,i3GEOF.buscaFotos.dicionario)+":</span><br><br>";
+		ins += "<span><b>"+$trad('fotosEncontradas',i3GEOF.buscaFotos.dicionario)+":</span><br><br>";
 		if (res === 0)
-		{ins += "<br><span style=color:red>"+$trad(22,i3GEOF.buscaFotos.dicionario)+"</span><br><br>";}
+		{ins += "<br><span style=color:red>"+$trad('erroNadaEncontrado2',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";}
 		else
 		{
 			for (i=0;i<res;i++){
@@ -412,15 +412,15 @@ i3GEOF.buscaFotos = {
 			t,
 			p;
 		if (retorno.data === undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = $trad(17,i3GEOF.buscaFotos.dicionario);return;}
+		{$i("i3GEObuscafotosresultadofotos").innerHTML = $trad('erroTempo',i3GEOF.buscaFotos.dicionario);return;}
 		eval("var data = "+retorno.data);
 		if(!retorno.data)
-		{ins += "<br><span style=color:red>"+$trad(18,i3GEOF.buscaFotos.dicionario)+"</span><br><br>";return;}
+		{ins += "<br><span style=color:red>"+$trad('erroAcessoDados',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";return;}
 		res = data.photos.length;
 		ins = "";
 		ins += "<span><b>"+$trad(21,i3GEOF.buscaFotos.dicionario)+":</span><br><br>";
 		if (res === 0)
-		{ins += "<br><span style=color:red>"+$trad(19,i3GEOF.buscaFotos.dicionario)+"</span><br><br>";}
+		{ins += "<br><span style=color:red>"+$trad('erroNadaEncontrado',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";}
 		else{
 			for (i=0;i<res;i++){
 				if(data.photos[i]){
@@ -437,7 +437,7 @@ i3GEOF.buscaFotos = {
 		p = parseInt($i("i3GEObuscafotospaginas").innerHTML,10);
 		if(res > 15)
 		{
-			ins = "<span onclick='busca(\""+p+"\")' style='cursor:pointer;text-decoration:underline' >"+$trad(20,i3GEOF.buscaFotos.dicionario)+"&nbsp;</span>";
+			ins = "<span onclick='busca(\""+p+"\")' style='cursor:pointer;text-decoration:underline' >"+$trad('maisFotos',i3GEOF.buscaFotos.dicionario)+"&nbsp;</span>";
 			$i("i3GEObuscafotospaginas").innerHTML = ins;
 		}
 		else
