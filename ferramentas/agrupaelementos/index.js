@@ -170,13 +170,14 @@ i3GEOF.agrupaElementos = {
 		i3GEOF.agrupaElementos.comboItensSel();
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>"+$trad('adicionaAgrupamento',i3GEOF.agrupaElementos.dicionario);
+		var b,ins = "<p class='paragrafo'>"+$trad('adicionaAgrupamento',i3GEOF.agrupaElementos.dicionario);
 		ins += "<br><br><input id=i3GEOagrupaelementosbotao1 type='buttom' value='"+$trad('criaAgrupamento',i3GEOF.agrupaElementos.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t2()","",ins,"i3GEOF.agrupaElementos.t3","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEOagrupaelementosbotao1",
 			{onclick:{fn: i3GEOF.agrupaElementos.criaAgrupamento}}
 		);
+		b.addClass("aplicar");
 	},
 	/*
 	Function: criaAgrupamento

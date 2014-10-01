@@ -11,7 +11,6 @@ version: 2.2.2
     border-width:1px 0;
     border-style:solid;
     border-color:#999;
-    background:#ecece3 url('../imagens/visual/default/backgroundbotaoaplicar.png') left center;
     margin:auto .25em;
 }
 
@@ -31,7 +30,7 @@ version: 2.2.2
     border-width:0 2px;
     border-style:solid;
     border-color:#999;
-    
+
     margin:0 -1px;
 /*
     *position:relative;
@@ -63,7 +62,7 @@ version: 2.2.2
 .yuibutton a {
 
     text-decoration:none;
-    color:#000;           
+    color:#000;
 
 }
 
@@ -73,7 +72,7 @@ version: 2.2.2
     padding-right:20px;
     background-position:right center;
     background-repeat:no-repeat;
-    
+
 }
 
 .yuibutton.menubutton button {
@@ -103,7 +102,7 @@ version: 2.2.2
 
 }
 
-.yuibutton.focus button, 
+.yuibutton.focus button,
 .yuibutton.focus a {
 
     border-color:#cec1fc;
@@ -126,7 +125,7 @@ version: 2.2.2
 
 }
 
-.yuibutton.hover button, 
+.yuibutton.hover button,
 .yuibutton.hover a {
 
     border-color:#7099ce;
@@ -137,10 +136,10 @@ version: 2.2.2
 /* Active state */
 
 .yuibutton.active {
-    
+
     border-color:#7a8180;
     background-color:#333;
-    
+
 }
 
 .yuibutton.active .first-child {
@@ -149,7 +148,7 @@ version: 2.2.2
 
 }
 
-.yuibutton.active button, 
+.yuibutton.active button,
 .yuibutton.active a {
 
     border-color:#98a09f;
@@ -160,7 +159,7 @@ version: 2.2.2
 
     background-color:transparent;
     background-image:url(splitarrow_active.gif);
-    
+
 }
 
 
@@ -169,10 +168,10 @@ version: 2.2.2
 
 .yuibutton.radio.checked,
 .yuibutton.checkbox.checked {
-    
+
     border-color:#7a8180;
     background-color:#333;
-    
+
 }
 
 .yuibutton.radio.checked .first-child,
@@ -183,7 +182,7 @@ version: 2.2.2
 }
 
 .yuibutton.radio.checked button,
-.yuibutton.checkbox.checked button { 
+.yuibutton.checkbox.checked button {
 
     border-color:#98a09f;
 
@@ -194,12 +193,12 @@ version: 2.2.2
 /* Disabled state */
 
 .yuibutton.disabled {
-    
+
     border-color:#cbcdc5;
     background:#ecece3;
 
     filter:none;
-    
+
 }
 
 .yuibutton.disabled .first-child {
@@ -208,7 +207,7 @@ version: 2.2.2
 
 }
 
-.yuibutton.disabled button, 
+.yuibutton.disabled button,
 .yuibutton.disabled a {
 
     border-color:transparent;
