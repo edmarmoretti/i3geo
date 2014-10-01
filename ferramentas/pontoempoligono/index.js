@@ -185,13 +185,14 @@ i3GEOF.pontoEmPoligono = {
 		{erro.call();}
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>"+$trad('adicionaTema',i3GEOF.pontoEmPoligono.dicionario);
+		var b,ins = "<p class='paragrafo'>"+$trad('adicionaTema',i3GEOF.pontoEmPoligono.dicionario);
 		ins += "<br><br><input id=i3GEOpontoEmPoligonobotao1 type='buttom' value='Cruzar' />";
 		i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t2()","",ins,"i3GEOF.pontoEmPoligono.t3","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEOpontoEmPoligonobotao1",
 			{onclick:{fn: i3GEOF.pontoEmPoligono.executa}}
 		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: executa
