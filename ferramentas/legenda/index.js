@@ -239,8 +239,7 @@ i3GEOF.legenda = {
 				"i3GEOlegendabotao10",
 				{onclick:{fn: i3GEOF.legenda.aplicaEstilo}}
 			);
-			if(navm)
-			{$i("i3GEOlegendabotao10-button").style.width = "0px";}
+			$i("i3GEOlegendabotao10-button").style.width = "220px";
 
 			new YAHOO.widget.Button(
 				"i3GEOlegendabotao17",

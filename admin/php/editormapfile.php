@@ -1812,6 +1812,27 @@ function alterarConexao()
 	$layer->set("tileitem",$tileitem);
 	$layer->set("tileindex",$tileindex);
 	$layer->set("type",$type);
+	if($type == 0){
+		$c = $layer->getClass(0);
+		$e = $c->getStyle(0);
+		if($e->symbolname == ""){
+			$e->set("symbolname","ponto");
+		}
+	}
+	if($type == 1){
+		$c = $layer->getClass(0);
+		$e = $c->getStyle(0);
+		if($e->symbolname == "" || $e->symbolname == "ponto"){
+			$e->set("symbolname","linha");
+		}
+	}
+	if($type == 2){
+		$c = $layer->getClass(0);
+		$e = $c->getStyle(0);
+		if($e->symbolname == "linha" || $e->symbolname == "ponto"){
+			$e->set("symbolname"," ");
+		}
+	}	
 	$layer->setfilter($filter);
 	$layer->set("filteritem",$filteritem);
 	if($layer->getprojection() == MS_TRUE)
