@@ -120,7 +120,7 @@ i3GEOF.buffer = {
 		titulo = $trad("u10")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=24' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
 		janela = i3GEO.janela.cria(
-			"400px",
+			"420px",
 			"200px",
 			"",
 			"",
@@ -177,13 +177,14 @@ i3GEOF.buffer = {
 		i3GEOF.buffer.comboItens();
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>"+$trad('adicionaTemaEntorno',i3GEOF.buffer.dicionario);
+		var b,ins = "<p class='paragrafo'>"+$trad('adicionaTemaEntorno',i3GEOF.buffer.dicionario);
 		ins += "<br><br><input id=i3GEObufferbotao1 type='button' value='"+$trad('criaEntorno',i3GEOF.buffer.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t2()","",ins,"i3GEOF.buffer.t3","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEObufferbotao1",
 			{onclick:{fn: i3GEOF.buffer.criaBuffer}}
 		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: criaBuffer
