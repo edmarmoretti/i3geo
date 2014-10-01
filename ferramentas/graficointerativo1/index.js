@@ -366,6 +366,7 @@ i3GEOF.graficointerativo1 =
 		 * ["n;x","'Argentina';33796870","'Paraguay';4773464","'Brazil';151525400","'Chile';13772710"]
 		 */
 		inicia : function(iddiv, idjanela) {
+			var t,b;
 			$i(iddiv).innerHTML += i3GEOF.graficointerativo1.html(idjanela);
 			$i(idjanela + "i3GEOgraficointerativo1Acumula").checked = i3GEOF.graficointerativo1.propJanelas[idjanela].acumula;
 			$i(idjanela + "i3GEOgraficointerativo1Relativa").checked = i3GEOF.graficointerativo1.propJanelas[idjanela].relativa;
@@ -403,7 +404,7 @@ i3GEOF.graficointerativo1 =
 					return;
 				}
 				i3GEO.guias.mostraGuiaFerramenta(idjanela + "i3GEOgraficointerativo1guia4", idjanela + "i3GEOgraficointerativo1guia");
-				var t = $i(idjanela + "i3GEOgraficointerativo1Grafico");
+				t = $i(idjanela + "i3GEOgraficointerativo1Grafico");
 				t.style.display = "block";
 				t.style.position = "relative";
 				t.style.top = "-5px";
@@ -448,13 +449,14 @@ i3GEOF.graficointerativo1 =
 				};
 			i3GEOF.graficointerativo1.ativaFoco(idjanela);
 			i3GEOF.graficointerativo1.comboTemas(idjanela);
-			new YAHOO.widget.Button(idjanela + "i3GEOgraficointerativo1botao1", {
+			b = new YAHOO.widget.Button(idjanela + "i3GEOgraficointerativo1botao1", {
 				onclick : {
 					fn : function() {
 						i3GEOF.graficointerativo1.obterDados(idjanela);
 					}
 				}
 			});
+			b.addClass("rodar");
 			if (i3GEOF.graficointerativo1.propJanelas[idjanela].dados != "") {
 				i3GEOF.graficointerativo1.montaTabelaDados(idjanela, i3GEOF.graficointerativo1.propJanelas[idjanela].dados);
 				$i(idjanela + "i3GEOgraficointerativo1guia4").onclick.call();

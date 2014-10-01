@@ -97,10 +97,11 @@ i3GEOF.graficoTema = {
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficotemaguia1","i3GEOgraficotemaguia");};
 			$i("i3GEOgraficotemaguia2").onclick = function()
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficotemaguia2","i3GEOgraficotemaguia");};
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOgraficotemabotao1",
 				{onclick:{fn: i3GEOF.graficoTema.criaNovoTema}}
 			);
+			b.addClass("rodar");
 			i3GEO.util.mensagemAjuda("i3GEOgraficotemamen1",$i("i3GEOgraficotemamen1").innerHTML);
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de escolha

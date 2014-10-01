@@ -179,13 +179,14 @@ i3GEOF.distanciaptpt = {
 		i3GEOF.distanciaptpt.comboItensDestino();
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>" + $trad('msgTema',i3GEOF.distanciaptpt.dicionario);
+		var b,ins = "<p class='paragrafo'>" + $trad('msgTema',i3GEOF.distanciaptpt.dicionario);
 		ins += "<br><br><input id=i3GEOdistanciaptptbotao1 type='buttom' value='"+$trad('calcula',i3GEOF.distanciaptpt.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t2()","",ins,"i3GEOF.distanciaptpt.t3","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEOdistanciaptptbotao1",
 			{onclick:{fn: i3GEOF.distanciaptpt.calcula}}
 		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: calcula

@@ -167,13 +167,14 @@ i3GEOF.dissolve = {
 		i3GEOF.dissolve.comboItem();
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.dissolve.dicionario);
+		var b,ins = "<p class='paragrafo'>"+$trad(4,i3GEOF.dissolve.dicionario);
 		ins += "<br><br><input id=i3GEOdissolvebotao1 type='buttom' value='"+$trad(5,i3GEOF.dissolve.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.dissolve.t2()","",ins,"i3GEOF.dissolve.t3","i3GEOdissolveresultado",true,"i3GEOF.dissolve_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEOdissolvebotao1",
 			{onclick:{fn: i3GEOF.dissolve.criadissolve}}
 		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: criadissolve

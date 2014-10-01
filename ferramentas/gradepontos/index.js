@@ -210,13 +210,14 @@ i3GEOF.gradeDePontos = {
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t2()","i3GEOF.gradeDePontos.t4()",ins,"i3GEOF.gradeDePontos.t3","i3GEOgradedepontosresultado",true,"i3GEOF.gradeDePontos_rodape");
 	},
 	t4: function(){
-		var ins = "<p class='paragrafo'><b>"+$trad('adicionaTema',i3GEOF.gradeDePontos.dicionario)+"</b>";
+		var b,ins = "<p class='paragrafo'><b>"+$trad('adicionaTema',i3GEOF.gradeDePontos.dicionario)+"</b>";
 		ins += "<p class='paragrafo'><input id=i3GEOgradedepontosbotao1 size=18 class=executar type='button' value='"+$trad('criaGrade',i3GEOF.gradeDePontos.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t3()","",ins,"i3GEOF.gradeDePontos.t4","i3GEOgradedepontosresultado",true,"i3GEOF.gradeDePontos_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEOgradedepontosbotao1",
 			{onclick:{fn: i3GEOF.gradeDePontos.criaGrade}}
 		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: criaGrade

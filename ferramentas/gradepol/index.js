@@ -212,14 +212,15 @@ i3GEOF.gradeDePoligonos = {
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t2()","i3GEOF.gradeDePoligonos.t4()",ins,"i3GEOF.gradeDePoligonos.t3","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 	},
 	t4: function(){
-		var ins = "<p class='paragrafo'><b>"+$trad('adicionaTema',i3GEOF.gradeDePoligonos.dicionario)+"</b>";
+		var b,ins = "<p class='paragrafo'><b>"+$trad('adicionaTema',i3GEOF.gradeDePoligonos.dicionario)+"</b>";
 		ins += "<p class='paragrafo'><input id=i3GEOgradedepoligonosbotao1 size=18 class=executar type='button' value='"+$trad('criaGrade',i3GEOF.gradeDePoligonos.dicionario)+"' />";
 
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t3()","",ins,"i3GEOF.gradeDePoligonos.t4","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEOgradedepoligonosbotao1",
 			{onclick:{fn: i3GEOF.gradeDePoligonos.criaGrade}}
 		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: criaGrade

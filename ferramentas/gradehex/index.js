@@ -206,13 +206,14 @@ i3GEOF.gradeDeHex = {
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t2()","i3GEOF.gradeDeHex.t4()",ins,"i3GEOF.gradeDeHex.t3()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
 	},
 	t4: function(){
-		var ins = "<p class='paragrafo'><b>"+$trad('adicionaTema',i3GEOF.gradeDeHex.dicionario)+"</b>";
+		var b,ins = "<p class='paragrafo'><b>"+$trad('adicionaTema',i3GEOF.gradeDeHex.dicionario)+"</b>";
 		ins += "<p class='paragrafo'><input id=i3GEOgradedehexbotao1 size=18 class=executar type='button' value='"+$trad('criaGrade',i3GEOF.gradeDeHex.dicionario)+"' />";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t3()","",ins,"i3GEOF.gradeDeHex.t4()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
-		new YAHOO.widget.Button(
+		b = new YAHOO.widget.Button(
 			"i3GEOgradedehexbotao1",
 			{onclick:{fn: i3GEOF.gradeDeHex.criaGrade}}
 		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: criaGrade
