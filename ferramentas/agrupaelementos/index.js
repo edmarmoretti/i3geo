@@ -177,7 +177,7 @@ i3GEOF.agrupaElementos = {
 			"i3GEOagrupaelementosbotao1",
 			{onclick:{fn: i3GEOF.agrupaElementos.criaAgrupamento}}
 		);
-		b.addClass("aplicar");
+		b.addClass("rodar");
 	},
 	/*
 	Function: criaAgrupamento

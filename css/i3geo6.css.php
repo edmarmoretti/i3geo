@@ -2224,7 +2224,7 @@ font-weight: normal;
 padding: 0 0px;
 text-decoration: none;
 }
-.aplicar .first-child button {
+.rodar .first-child button {
 backgroud-color: red;
 background: url(../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
 width: 250px;
