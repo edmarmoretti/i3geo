@@ -786,6 +786,12 @@ hideAllTooltips = function() {
 					      balloonIsVisible    = false;
 	balloonIsSticky     = false;
 	currentBalloonClass = null;
+	var bubble = document.getElementById('visibleBalloonElement');
+	var close  = document.getElementById('closeButton');
+	var cont   = document.getElementById('balloonPreloadContainer');
+	if (bubble) { document.body.removeChild(bubble) } 
+	if (close)  { document.body.removeChild(close)  }
+	if (cont)   { document.body.removeChild(cont)   }
 };
 
 

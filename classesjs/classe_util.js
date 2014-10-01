@@ -628,6 +628,10 @@ i3GEO.util = {
 	h {String} - (opcional) altura da imagem
 
 	mouseover - funcao que sera executada no evento mouseover
+	
+	Retorno:
+	
+	array [boolean,obj] - indica se foi criado ou se ja existia | objeto criado
 		 */
 		criaPin: function(id,imagem,w,h,mouseover){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.criaPin()");}
@@ -643,7 +647,8 @@ i3GEO.util = {
 			if(arguments.length < 4 || h === ""){
 				h = 25;
 			}
-			if (!$i(id)){
+			var p = $i(id);
+			if (!p){
 				var novoel = document.createElement("img");
 				novoel.style.zIndex=10000;
 				novoel.style.position="absolute";
@@ -653,6 +658,7 @@ i3GEO.util = {
 				novoel.style.left="0px";
 				novoel.src = imagem;
 				novoel.id = id;
+				novoel.style.display = "block";
 				if(id === "boxpin"){
 					novoel.onmouseover = function(){
 						$i("boxpin").style.display="none";
@@ -663,8 +669,10 @@ i3GEO.util = {
 				}
 				document.body.appendChild(novoel);
 				i3GEO.util.PINS.push(id);
+				return [true,novoel];
 			}
-			$i(id).style.display = "block";
+			p.style.display = "block";
+			return [false,p];
 		},
 		/*
 	Function: posicionaImagemNoMapa

@@ -1086,8 +1086,14 @@ i3GEO.mapa =
 										i3GEO.Interface.googleearth.balao(res, objposicaocursor.ddx, objposicaocursor.ddy);
 										i3GEO.Interface.googleearth.aguarde.visibility = "hidden";
 									} else {
-										i3GEO.util.criaPin('marcaIdentifica', configura.locaplic + "/imagens/grabber.gif", "12px", "12px");
+										hideAllTooltips();
+										if(balloonIsVisible && balloonIsVisible === true){
+											return;
+										}
+										temp = i3GEO.util.criaPin('marcaIdentifica', configura.locaplic + "/imagens/grabber.gif", "12px", "12px");
+										i3GEO.janela.TIPS.remove("marcaIdentifica");
 										i3GEO.janela.TIPS.push('marcaIdentifica');
+
 										pos = i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
 										balloon = new Balloon();
 										BalloonConfig(balloon, 'GBox');
@@ -1095,11 +1101,11 @@ i3GEO.mapa =
 										res =
 											"<div style=text-align:left;overflow:auto;height:" + configura.alturatip + ";width:"
 												+ configura.larguratip + "; >" + res + "</div>";
-										temp = $i('marcaIdentifica');
-										if (temp) {
-											balloon.showTooltip(temp, res, null, null, null, pos[1], pos[0]);
+
+										if (temp[1]) {
+											balloon.showTooltip(temp[1], res, null, null, null, pos[1], pos[0]);
 											balloon.addCloseButton();
-											temp.onclick = function(e) {
+											temp[1].onclick = function(e) {
 												if (!e) {
 													e = window.event;
 												}
