@@ -87,10 +87,11 @@ i3GEOF.uploadkml = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.uploadkml.html();
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOuploadkmlbotao1",
 				{onclick:{fn: i3GEOF.uploadkml.submete}}
 			);
+			b.addClass("rodar");
 			i3GEO.util.radioEpsg(
 				function(retorno)
 				{$i("i3GEOuploadkmlListaepsg").innerHTML = retorno.dados;},
@@ -125,7 +126,7 @@ i3GEOF.uploadkml = {
 		'<div id=i3GEOuploadkmlListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
 		'</fieldset>' +
 		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" ><input id=i3GEOuploadkmlbotao1 type="button" value="'+$trad('criaCamada',i3GEOF.uploadkml.dicionario)+'" size=12 name="submit">' +
+		'<p class="paragrafo" ><input id=i3GEOuploadkmlbotao1 type="button" value="'+$trad('criaCamada',i3GEOF.uploadkml.dicionario)+'" name="submit"></p>' +
 		'<br><p class="paragrafo" >' + $trad('ajuda2',i3GEOF.uploadkml.dicionario)+'</p>'+
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +

@@ -86,7 +86,7 @@ i3GEOF.carregakml = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML = i3GEOF.carregakml.html();
-			var monta = function(retorno){
+			var b, monta = function(retorno){
 				var raiz,nraiz,i,combo;
 				raiz = retorno.data.canais;
 				nraiz = raiz.length;
@@ -99,10 +99,11 @@ i3GEOF.carregakml = {
 				$i("i3GEOcarregakmlCombo").innerHTML = combo;
 			};
 			i3GEO.php.listaRSSwsARRAY(monta,"KML");
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOcarregakmlbotao1",
 				{onclick:{fn: i3GEOF.carregakml.adiciona}}
 			);
+			b.addClass("rodar");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},

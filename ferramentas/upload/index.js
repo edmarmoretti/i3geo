@@ -80,10 +80,11 @@ i3GEOF.upload = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.upload.html();
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOuploadbotao1",
 				{onclick:{fn: i3GEOF.upload.submete}}
 			);
+			b.addClass("rodar");
 			i3GEO.util.radioEpsg(
 				function(retorno)
 				{$i("i3GEOuploadListaepsg").innerHTML = retorno.dados;},

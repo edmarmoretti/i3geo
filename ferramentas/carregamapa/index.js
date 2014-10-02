@@ -83,10 +83,11 @@ i3GEOF.carregaMapa = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.carregaMapa.html();
 			document.body.scrollTop = document.documentElement.scrollTop = 0;
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOcarregamapabotao1",
 				{onclick:{fn: i3GEOF.carregaMapa.submete}}
 			);
+			b.addClass("rodar");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},

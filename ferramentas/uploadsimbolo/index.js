@@ -79,10 +79,11 @@ i3GEOF.uploadsimbolo = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.uploadsimbolo.html();
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOuploadsimbolobotao1",
 				{onclick:{fn: i3GEOF.uploadsimbolo.submete}}
 			);
+			b.addClass("upload");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},

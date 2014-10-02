@@ -87,10 +87,11 @@ i3GEOF.uploadgpx = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.uploadgpx.html();
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOuploadgpxbotao1",
 				{onclick:{fn: i3GEOF.uploadgpx.submete}}
 			);
+			b.addClass("rodar");
 			i3GEO.util.radioEpsg(
 				function(retorno)
 				{$i("i3GEOuploadgpxListaepsg").innerHTML = retorno.dados;},

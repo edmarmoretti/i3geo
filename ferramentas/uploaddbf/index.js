@@ -81,10 +81,11 @@ i3GEOF.uploaddbf = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.uploaddbf.html();
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOuploaddbfbotao1",
 				{onclick:{fn: i3GEOF.uploaddbf.submete}}
 			);
+			b.addClass("rodar");
 			i3GEO.util.radioEpsg(
 				function(retorno)
 				{$i("i3GEOuploaddbfListaepsg").innerHTML = retorno.dados;},
