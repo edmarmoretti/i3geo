@@ -84,7 +84,7 @@
 				"CREATE TABLE ".$esquemaadmin."i3geousr_grupos (id_grupo INTEGER PRIMARY KEY, nome TEXT, descricao TEXT)",
 				//tabelas do sistema metaestat
 				"create table ".$esquemaadmin."i3geoestat_conexao (codigo_estat_conexao INTEGER PRIMARY KEY,bancodedados text,host text,porta text,usuario text,senha text)",
-				"create table ".$esquemaadmin."i3geoestat_tipo_regiao(codigo_tipo_regiao INTEGER PRIMARY KEY,nome_tipo_regiao text,descricao_tipo_regiao text,codigo_estat_conexao integer,esquemadb text,tabela text,colunageo text,data text,identificador integer,colunanomeregiao text,srid text,colunacentroide text, colunasvisiveis text, apelidos text)",
+				"create table ".$esquemaadmin."i3geoestat_tipo_regiao(codigo_tipo_regiao INTEGER PRIMARY KEY,nome_tipo_regiao text,descricao_tipo_regiao text,codigo_estat_conexao integer,esquemadb text,tabela text,colunageo text,data text,identificador text,colunanomeregiao text,srid text,colunacentroide text, colunasvisiveis text, apelidos text)",
 				"create table ".$esquemaadmin."i3geoestat_agregaregiao(id_agregaregiao INTEGER PRIMARY KEY,codigo_tipo_regiao integer,codigo_tipo_regiao_pai integer,colunaligacao_regiaopai text)",
 				"create table ".$esquemaadmin."i3geoestat_tipo_periodo(codigo_tipo_periodo INTEGER PRIMARY KEY,nome text,descricao text)",
 				"create table ".$esquemaadmin."i3geoestat_unidade_medida(codigo_unidade_medida INTEGER PRIMARY KEY,nome text,sigla text,permitesoma integer default 0,permitemedia integer default 0)",

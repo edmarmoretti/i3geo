@@ -1496,6 +1496,7 @@ class Metaestat{
 					$apelidos = utf8_encode($apelidos);
 				}
 				//echo "UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid', colunasvisiveis = '$colunasvisiveis', apelidos = '$apelidos' WHERE codigo_tipo_regiao = $codigo_tipo_regiao";exit;
+				//exit;
 				$this->dbhw->query("UPDATE ".$this->esquemaadmin."i3geoestat_tipo_regiao SET codigo_estat_conexao = '$codigo_estat_conexao', colunacentroide = '$colunacentroide',nome_tipo_regiao = '$nome_tipo_regiao',descricao_tipo_regiao = '$descricao_tipo_regiao',esquemadb = '$esquemadb',tabela = '$tabela',colunageo = '$colunageo',data = '$data',identificador = '$identificador',colunanomeregiao = '$colunanomeregiao', srid = '$srid', colunasvisiveis = '$colunasvisiveis', apelidos = '$apelidos' WHERE codigo_tipo_regiao = $codigo_tipo_regiao");
 				$retorna = $codigo_tipo_regiao;
 			}
@@ -1835,8 +1836,9 @@ class Metaestat{
 	 * Lista os dados de uma conexao ou de todas
 	 * @param id da conexao
 	 * @param boolean inclui na lista a senha ou nao
+	 * @param boolean inclui as conexoes definidas em postgis_mapa (ms_configura.php)
 	 */
-	function listaConexao($codigo_estat_conexao="",$senha=false){
+	function listaConexao($codigo_estat_conexao="",$senha=false,$incluiPostgisMapa=true){
 		if($senha == true){
 			$colunas = "codigo_estat_conexao, bancodedados, host, porta, usuario, senha";
 		}
@@ -1861,31 +1863,33 @@ class Metaestat{
 			}
 		}
 		//obtem as conexoes definidas em ms_configgura.php
-		if(!isset($postgis_mapa)){
-			require(dirname(__FILE__)."/../../ms_configura.php");
-		}
-		if(!empty($postgis_mapa)){
-			foreach(array_keys($postgis_mapa) as $key){
-				$lista = explode(" ",$postgis_mapa[$key]);
-				$con = array();
-				foreach($lista as $l){
-					$teste = explode("=",$l);
-					$con[trim($teste[0])] = trim($teste[1]);
-				}
-				$c = array(
-					"codigo_estat_conexao" => $key,
-					"bancodedados" => $con["dbname"],
-					"host" => $con["host"],
-					"porta" => $con["port"],
-					"usuario" => $con["user"],
-					"fonte" => "ms_configura"
-				);
-				if($senha == true){
-					$c["senha"] = $con["password"];
-				}
-				$res[] = $c;
-				if($codigo_estat_conexao != "" && $codigo_estat_conexao == $key){
-					return $c;
+		if($incluiPostgisMapa == true){
+			if(!isset($postgis_mapa)){
+				require(dirname(__FILE__)."/../../ms_configura.php");
+			}
+			if(!empty($postgis_mapa)){
+				foreach(array_keys($postgis_mapa) as $key){
+					$lista = explode(" ",$postgis_mapa[$key]);
+					$con = array();
+					foreach($lista as $l){
+						$teste = explode("=",$l);
+						$con[trim($teste[0])] = trim($teste[1]);
+					}
+					$c = array(
+						"codigo_estat_conexao" => $key,
+						"bancodedados" => $con["dbname"],
+						"host" => $con["host"],
+						"porta" => $con["port"],
+						"usuario" => $con["user"],
+						"fonte" => "ms_configura"
+					);
+					if($senha == true){
+						$c["senha"] = $con["password"];
+					}
+					$res[] = $c;
+					if($codigo_estat_conexao != "" && $codigo_estat_conexao == $key){
+						return $c;
+					}
 				}
 			}
 		}

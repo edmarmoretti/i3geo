@@ -359,7 +359,7 @@ i3GEOadmin.variaveis = {
 			}
 			if($i("Ccodigo_estat_conexao")){
 				temp = "<select id='Ecodigo_estat_conexao' >";
-				temp += core_comboObjeto(i3GEOadmin.variaveis.dadosAuxiliares.conexao,"codigo_estat_conexao","bancodedados",i.codigo_estat_conexao);
+				temp += core_comboObjeto(i3GEOadmin.variaveis.dadosAuxiliares.conexaoregistrada,"codigo_estat_conexao","bancodedados",i.codigo_estat_conexao);
 				temp += "</select>";
 				$i("Ccodigo_estat_conexao").innerHTML = temp;
 			}

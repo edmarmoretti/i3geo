@@ -314,7 +314,7 @@ function montaDiv(i){
 	$i("editor_bd2").innerHTML = ins;
 	if($i("Ccodigo_estat_conexao")){
 		temp = "<select id='Ecodigo_estat_conexao' >";
-		temp += core_comboObjeto(dadosAuxiliares.conexao,"codigo_estat_conexao","bancodedados",i.codigo_estat_conexao);
+		temp += core_comboObjeto(dadosAuxiliares.conexaoregistrada,"codigo_estat_conexao","bancodedados",i.codigo_estat_conexao);
 		temp += "</select>";
 		$i("Ccodigo_estat_conexao").innerHTML = temp;
 	}

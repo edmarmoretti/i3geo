@@ -57,7 +57,7 @@ create table i3geoestat_tipo_regiao
 	-- data do mapeamento da região
 	data text,
 	-- id da tabela onde está a coluna com a geometria e que identifica a região de forma única
-	identificador integer,
+	identificador text,
 	-- coluna que contém o nome de cada região ou local
 	colunanomeregiao text,
 	-- código srid correspondente à projeção cartográfica da coluna com a geometria

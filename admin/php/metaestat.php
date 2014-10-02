@@ -1169,6 +1169,7 @@ switch (strtoupper($funcao))
 		$resultado["unidade_medida"] = $m->listaUnidadeMedida();
 		$resultado["tipo_regiao"] = $m->listaTipoRegiao();
 		$resultado["conexao"] = $m->listaConexao();
+		$resultado["conexaoregistrada"] = $m->listaConexao("",false,false);
 		$resultado["fonteinfo"] = $m->listaFonteinfo();
 		retornaJSON($resultado);
 	break;
