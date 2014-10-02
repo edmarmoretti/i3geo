@@ -488,6 +488,7 @@ class Atributos
 				$shp_atual[$i] = $shapes[$i];;
 			}
 			$chk = "";
+
 			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS){
 				$res_count = $this->layer->getNumresults();
 				$totalGeral = $res_count;

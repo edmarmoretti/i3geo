@@ -1479,7 +1479,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$dbname = $nomeshp.".dbf";
 		$reg = array();
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
-		
+
 		$res_count = count($shapesSel);
 		if ($res_count > 0){
 			for ($i = 0; $i < $res_count; ++$i){
@@ -2468,10 +2468,10 @@ function retornaShapesMapext($objLayer,$objMapa){
 function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 	$shapes = array();
 	$qyfile = dirname($map_file)."/".$objLayer->name.".php";
-	
+
 	if(!file_exists($qyfile))
 	{return $shapes;}
-	
+
 	$handle = fopen ($qyfile, "r");
 	$conteudo = fread ($handle, filesize ($qyfile));
 	fclose ($handle);
@@ -2479,12 +2479,14 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 	//echo count($listaDeIndices);exit;
 	if(count($listaDeIndices) == 0)
 	{return $shapes;}
-	
+
 	$versao = versao();
 	$versao = $versao["principal"];
+
 	if ($objLayer->connectiontype != MS_POSTGIS){
 		//pega os shapes selecionados
 		carregaquery2($map_file,$objLayer,$objMapa);
+
 		$sopen = $objLayer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$objLayer->open();
@@ -2492,7 +2494,7 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 		$centroides = array();
 		$shapes = array();
 		//pega um shape especifico
-		
+
 		for ($i = 0; $i < $res_count; ++$i)
 		{
 			if($versao == 6)
