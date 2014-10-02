@@ -118,14 +118,14 @@ i3GEOF.perfil = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = "<p class='paragrafo' >"+$trad('fonteDadosZ',i3GEOF.perfil.dicionario);
+		var ins = "<div style=margin-left:5px; ><p class='paragrafo' >"+$trad('fonteDadosZ',i3GEOF.perfil.dicionario);
 		ins += "<p class='paragrafo' ><input onclick='if(this.checked == true){$i(\"i3GEOFperfilTemasSel\").value = \"\";$i(\"i3GEOFperfilDivComboItens\").innerHTML = \"\";}' style=cursor:pointer checked type=radio name=i3GEOFperfilFonte id=i3GEOFperfilFonteGoogle /> Google";
 		ins += "<br><p class='paragrafo' >"+$trad('ouTemaMapa',i3GEOF.perfil.dicionario)+"</p> <div class=styled-select id=i3GEOFperfilTemas ></div>";
 		ins += "<br><div id=i3GEOFperfilDivComboItens ></div><br>";
 		ins += "<br><p class='paragrafo' >" + $trad('numeroPontosLinha',i3GEOF.perfil.dicionario) + "</p>";
 		ins += "<div class=styled-select ><input type=text id=i3GEOFperfilAmostragem value=20 /></div>";
 		ins += "<br><p class='paragrafo' ><input id=i3GEOperfilbotao1 type='buttom' value='"+$trad('criaGrafico',i3GEOF.perfil.dicionario)+"' />";
-		ins += "<br><br><div style=text-align:left id=i3GEOperfilfim ></div>";
+		ins += "<br><br><div style=text-align:left id=i3GEOperfilfim ></div></div>";
 		return ins;
 	},
 	/*
