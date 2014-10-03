@@ -1,0 +1,24 @@
+<button title='{{{capturaCoord}}}' onclick='i3GEOF.geolocal.capturaCoordenada()'>
+	<img src='{{{locaplic}}}/imagens/gisicons/gps.png' />
+</button>
+<button title='{{{limpa}}}' onclick='i3GEOF.geolocal.limpa()'>
+	<img src='{{{locaplic}}}/imagens/gisicons/erase.png' />
+</button>
+<button title='{{{exclui}}}' onclick='i3GEOF.geolocal.criaShp()'>
+	<img src='{{{locaplic}}}/imagens/gisicons/layer-gps-create.png' />
+</button>
+<img title='{{{paraCaptura}}}' onclick='i3GEOF.geolocal.paraTempo()' style='top: -3px; left: 10px; position: relative;' src='{{{locaplic}}}/imagens/oxygen/16x16/clock.png'>
+&nbsp;
+<form id='i3GEOFgeolocalFormTempo' style='left: 162px; position: absolute; top: 10px; width: 30px;'>
+	<div class='styled-select' style='width: 80px;'>
+		<input type='text' id='i3GEOFgeolocalTempo' title={{{intervalo}}} value='0' />
+</form>
+</div>
+<div style='height: 130px; overflow: auto; top: 10px; text-align: center; position: relative; cursor: pointer; padding: 5px;' id='i3GEOFgeolocalListaDePontos'></div>
+<br>
+<div id='i3GEOFgeolocalNcoord' style='width: 30px; position: absolute;'></div>
+<br>
+<p class='paragrafo' style='float: left; margin-right: 5px; top: 3px; position: relative;'>{{{maximoPontos}}}
+<div class='styled-select' style='position: relative; width: 60px; margin-left: 5px;'>
+	<input type='text' id='i3GEOFgeolocalMaximo' value='' />
+</div>

@@ -1,0 +1,17 @@
+<form id='i3GEOimportarwmcf' target='i3GEOimportarwmciframe' action='{{{locaplic}}}/ferramentas/importarwmc/upload.php' method='post' ENCTYPE='multipart/form-data'>
+	<p class='paragrafo'>
+		{{{arquivo}}}: <br>
+		<input type='file' size='18' name='i3GEOimportarwmc' style='top: 0px; left: 0px; cursor: pointer;'>
+	</p>
+	<p class='paragrafo'>Ou URL:</p>
+	<div class='styled-select'>
+		<input type='text' name='i3GEOimportarwmcurl' />
+	</div>
+	<br>
+	<p class='paragrafo'>
+		<input id='i3GEOimportarwmcbotao1' type='button' value='{{{importar}}}' size='12' name='submit'>
+		<input type='hidden' name='g_sid' value="'+i3GEO.configura.sid+'">
+		<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+</form>
+<br>
+<iframe name='i3GEOimportarwmciframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>

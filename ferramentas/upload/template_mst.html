@@ -1,0 +1,23 @@
+<fieldset class='subbloco'>
+	<p class='paragrafo'>{{{tipoGeom}}}:</p>
+	<div class='styled-select'>
+		<select id='tipo' name='tipo'>
+			<option value=''>{{{naoConhecido}}}</option>
+			<option value='1'>{{{pontual}}}</option>
+			<option value='5'>{{{poligonal}}}</option>
+			<option value='3'>{{{linear}}}</option>
+		</select>
+	</div>
+	<br>
+	<p class='paragrafo'>{{{projecao}}}:</p>
+	<div id='i3GEOuploadListaepsg' width='98%' style='text-align: left; border: 1px solid gray; left: 0px; overflow: auto; height: 60px'></div>
+</fieldset>
+<fieldset class='subbloco'>
+	<p class='paragrafo'>
+		<input id='i3GEOuploadbotao1' type='button' value='{{{envia}}}' size='12' name='submit'>
+		<input type='hidden' name='g_sid' value="'+i3GEO.configura.sid+'">
+		<input type='hidden' name='MAX_FILE_SIZE' value='1000000'>
+	</form>
+	<p class='paragrafo' style='color: red'>{{{ajudaCaracter}}}</p>
+	<iframe name='i3GEOuploadiframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
+</fieldset>

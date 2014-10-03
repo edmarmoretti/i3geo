@@ -1,0 +1,40 @@
+<form id='i3GEOuploaddbff' target='i3GEOuploaddbfiframe' action='{{{locaplic}}}/ferramentas/uploaddbf/upload.php' method='post' ENCTYPE='multipart/form-data'>
+	<fieldset class='subbloco'>
+		<p class='paragrafo'>{{{tipoArquivo}}}:</p>
+		<div class='styled-select'>
+			<select name='i3GEOuploaddbftipoarquivo'>
+				<option value='dbf' select>dbf</option>
+				<option value='csvpv'>csv ";"</option>
+				<option value='csvv'>csv ","</option>
+			</select>
+		</div>
+	</fieldset>
+	<fieldset class='subbloco'>
+		<p class='paragrafo'>{{{colunaX}}}:</p>
+		<div class='styled-select'>
+			<input type='text' name='i3GEOuploaddbfnomex'>
+		</div>
+		<br>
+		<p class='paragrafo'>{{{colunaY}}}:</p>
+		<div class='styled-select'>
+			<input type='text' name='i3GEOuploaddbfnomey'>
+		</div>
+		<br>
+		<p class='paragrafo'>
+			{{{arquivo}}}:
+			<input type='file' size='10' name='i3GEOuploaddbffile' style='width: 270px; top: 0px; left: 0px; cursor: pointer;'>
+		</p>
+	</fieldset>
+	<fieldset class='subbloco'>
+		<p class='paragrafo'>{{{projecao}}}:</p>
+		<div id='i3GEOuploaddbfListaepsg' width='98%' style='text-align: left; border: 1px solid gray; left: 0px; overflow: auto; height: 60px'></div>
+	</fieldset>
+	<fieldset class='subbloco'>
+		<p class='paragrafo'>
+			<input id='i3GEOuploaddbfbotao1' type='button' value='{{{criaCamada}}}' size='12' name='submit'>
+			<input type='hidden' name='g_sid' value="'+i3GEO.configura.sid+'">
+			<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+</form>
+<br>
+<iframe name='i3GEOuploaddbfiframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
+</fieldset>

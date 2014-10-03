@@ -1,0 +1,14 @@
+<form id='i3GEOcarregamapaf' target='i3GEOcarregamaiframe' action='{{{locaplic}}}/ferramentas/carregamapa/upload.php' method='post' ENCTYPE='multipart/form-data'>
+	<p class='paragrafo'>
+		{{{insereArquivo}}} <br> <br>
+	<p class='paragrafo'>
+		<input type='file' name='i3GEOcarregamapafilemap' size='22' style='top: 0px; left: 0px; cursor: pointer;'>
+		<br> <br>
+	<p class='paragrafo'>
+		<input id='i3GEOcarregamapabotao1' type='button' value='{{{carregaArquivo}}}' size='12' name='submit'>
+		<br>
+		<input type='hidden' name='g_sid' value='+i3GEO.configura.sid+'>
+		<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+</form>
+<br>
+<iframe name='i3GEOcarregamaiframe' width='98%' height='70px' style='text-align: left; border: 1px solid gray;'></iframe>

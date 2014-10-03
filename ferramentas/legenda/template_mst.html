@@ -1,0 +1,211 @@
+<div id='guiasYUI' class='yui-navset' style='top: 0px; cursor: pointer; left: 0px;'>
+	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
+		<li><a>
+				<em><div id='i3GEOlegendaguia6' style='text-align: center; left: 0px;'>
+						<img class='ticPropriedades2' style='height: 14px' title='{{{propriedades}}}' src='{{{locaplic}}}/imagens/visual/default/branco.gif'>
+					</div></em>
+			</a></li>
+		<li><a>
+				<em><div id='i3GEOlegendaguia1' style='text-align: center; left: 0px;'>{{{legenda}}}</div></em>
+			</a></li>
+		<li><a>
+				<em><div id='i3GEOlegendaguia2' style='text-align: center; left: 0px;'>{{{classes}}}</div></em>
+			</a></li>
+		<li><a>
+				<em><div id='i3GEOlegendaguia3' style='text-align: center; left: 0px;'>{{{editor}}}</div></em>
+			</a></li>
+		<li><a>
+				<em><div id='i3GEOlegendaguia4' style='text-align: center; left: 0px;'>{{{graficos}}}</div></em>
+			</a></li>
+		<li><a>
+				<em><div id='i3GEOlegendaguia5' style='text-align: center; left: 0px;'>{{{importaExportaSLD}}}</div></em>
+			</a></li>
+	</ul>
+</div>
+<br>
+<div id='i3GEOlegendaguia6obj' style='width: 99%; text-align: left;'>
+	<p class='paragrafo'>
+		&nbsp;
+		<input type='checkbox' onclick='' checked id='i3GEOFlegendamostra' style='cursor: pointer; border: 0px solid white;' />
+		<span style='cursor: pointer; position: relative; top: -2px;'>{{{mostraClassesLegenda}}}</span>
+	</p>
+	<p class='paragrafo'>
+		<input id='i3GEOlegendabotao3' type='button' value='{{{incluiNumeroOcorrencia}}}' title='{{{incluiNumeroOcorrencia2}}}'>
+	</p>
+	<p class='paragrafo'>
+		<input id='i3GEOlegendabotao15' type='button' value='{{{aplicaOpacidadeVariavel}}}' title='{{{aplicaOpacidade}}}'>
+	</p>
+	<p class='paragrafo'>
+		<input id='i3GEOlegendabotaoRamp' type='button' size='15' value='{{{escolhePaletaCores}}}' title='{{{variaCoresExtremos}}}'>
+	</p>
+	<div style='margin-left: 5px;'>
+		<p class='paragrafo'>{{{geraCores}}}</p>
+		<table summary='' class='lista6'>
+			<tr>
+				<td>{{{ate}}}:</td>
+				<td>
+					<div class='styled-select' style='width: 120px'>
+						<input type='text' id='i3GEOlegendaacori' value='0,0,0' />
+					</div>
+				</td>
+				<td>
+					<img alt='aquarela.gif' style='cursor: pointer' src='{{{locaplic}}}' onclick='i3GEOF.legenda.corj(\' i3GEOlegendaacori\')' />
+				</td>
+				<td>{{{de}}}:</td>
+				<td>
+					<div class='styled-select' style='width: 120px'>
+						<input type='text' id='i3GEOlegendaacorf' value='255,255,255' />
+					</div>
+				</td>
+				<td>
+					<img alt='aquarela.gif' style='cursor: pointer' src='{{{locaplic}}}' onclick='i3GEOF.legenda.corj(\' i3GEOlegendaacorf\')' />
+				</td>
+				<td>
+					<input id='i3GEOlegendabotao4' type='button' size='15' value='{{{aplica}}}' title='{{{aplicaVariaCores}}}'>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div id='i3GEOlegendaguia1obj' style='width: 99%; text-align: left;'>
+	<div style='margin-left: 5px;'>
+		<table summary='' class='lista5'>
+			<tr>
+				<td>
+					<input id='i3GEOlegendabotao1' size='22' type='button' value='{{{aplicaAlteracao}}}'>
+				</td>
+				<td>
+					<input id='i3GEOlegendabotao2' size='22' type='button' value='{{{adicionaClasse}}}' title='{{{adicionaNovaClasse}}}'>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<p class='paragrafo'>{{{clicaSimbolo}}}</p>
+		<div id='i3GEOlegendaresultado' style='text-align: left; width: 100%; display: block; left: 0px'></div>
+	</div>
+</div>
+<div id='i3GEOlegendaguia2obj' style='width: 99%; text-align: left;'>
+	<div style='margin-left: 5px;'>
+		<div id='i3GEOFlegendaClassesOpcionais'>
+			<p class='paragrafo'>
+				&nbsp;
+				<input type='checkbox' onclick='' checked id='i3GEOFlegendaaplicaextent' style='cursor: pointer; border: 0px solid white;' />
+				<span style='cursor: pointer; position: relative; top: -2px;'>{{{consideraElementosVisisveis}}}</span>
+			</p>
+			<p class='paragrafo'>{{{ignoraValores}}}:
+			<div class='styled-select'>
+				<input type='text' id='i3GEOlegendaignorar' value='' />
+			</div>
+			<hr>
+			<p class='paragrafo'>{{{transformaGeom}}}</p>
+			<div class='styled-select'>
+				<select id='i3GEOlegentaTipoGeo'>
+					<option value=''>{{{semTransformacao}}}</option>
+					<option value='centroid'>{{{centroide}}}</option>
+					<option value='bbox'>box</option>
+					<option value='vertices'>{{{vertices}}}</option>
+					<option value='start'>{{{verticeInicial}}}</option>
+					<option value='end'>{{{verticeFinal}}}</option>
+				</select>
+			</div>
+			<br>
+			<p class='paragrafo'>
+				<input id='i3GEOlegendabotao17' size='35' type='button' value='{{{alteraGeom}}}'>
+			</p>
+			<hr>
+			<p class='paragrafo'>{{{alteraTipoGeom}}}</p>
+			<p class='paragrafo'>
+				<input id='i3GEOlegendabotao7' size='25' type='button' value='{{{alteraTipo}}}'>
+			</p>
+		</div>
+		<hr>
+		<p class='paragrafo'>{{{todosElementosUnicoSimbolo}}}</p>
+		<p class='paragrafo'>
+			<input id='i3GEOlegendabotao5' size='25' type='button' value='{{{simboloUnico}}}'>
+		</p>
+		<hr>
+		<p class='paragrafo'>{{{cadaOcorrenciaUnicoSimbolo}}}</p>
+		<div id='i3GEOlegendaitens' class='styled-select'></div>
+		<br>
+		<p class='paragrafo'>
+			<input id='i3GEOlegendabotao6' size='25' type='button' value='{{{valorUnico}}}'>
+		</p>
+		<hr>
+		<p class='paragrafo'>{{{criaClassesItemNumerico}}}</p>
+		<p class='paragrafo'>{{{numeroClasses}}}:
+		<div class='styled-select'>
+			<input type='text' id='i3GEOlegendanclasses' value='5' />
+		</div>
+		<br>
+		<p class='paragrafo'>
+			<input id='i3GEOlegendabotao8' size='25' type='button' value='{{{intervalosIguais}}}'>
+			&nbsp;
+			<input id='i3GEOlegendabotaoQN' size='25' type='button' value='{{{quebrasNaturais}}}'>
+			&nbsp;
+			<input id='i3GEOlegendabotaoQuantil' size='25' type='button' value='Quantil'>
+		<hr>
+		<p class='paragrafo'>{{{criaQuartis}}}</p>
+		<p class='paragrafo'>
+			<input id='i3GEOlegendabotao9' size='25' type='button' value='Quartis'>
+		<p class='paragrafo'>{{{estiloNomeClasses}}}:
+		<div class='styled-select'>
+			<select id='estiloClassesQuartis'>
+				<option value='minimo' select>{{{soValores}}}</option>
+				<option value='simples' select>{{{quartilValores}}}</option>
+				<option value='completo' select>{{{expressaoCompleta}}}</option>
+			</select>
+		</div>
+		<br>
+	</div>
+</div>
+<div id='i3GEOlegendaguia3obj' style='width: 99%; text-align: left;'>
+	<fieldset style='padding: 5px; margin: 2px;'>
+		<legend>{{{etiquetasClasse}}}</legend>
+		<p class='paragrafo'>{{{itemComTexto}}}:
+		<div class='styled-select' id='i3GEOlegendaitensLabel'></div>
+		</p>
+		<br>
+		<p class='paragrafo' style='font-size: 10px;'>
+			<input id='i3GEOlegendabotaoExcluirLabel' size='10' type='buttom' value='{{{exclui}}}' />
+			<input id='i3GEOlegendabotaoIncluirLabel' size='10' type='buttom' value='{{{adiciona}}}' />
+			<input id='i3GEOlegendabotaoPropriedadeLabel' size='10' type='buttom' value='{{{propriedades2}}}' />
+		</p>
+	</fieldset>
+	<br>
+	<fieldset style='padding: 5px; margin: 2px;'>
+		<legend>{{{estilos}}}</legend>
+		<p class='paragrafo' style='font-size: 10px;'>{{{ajudaEstilo}}}
+		<div id='i3GEOlegendacomboestilos'></div>
+		<br>
+		<input id='i3GEOlegendabotao11' class='executar' size='10' type='button' value='{{{exclui}}}' />
+		&nbsp;
+		<input id='i3GEOlegendabotao12' class='executar' size='14' type='button' value='{{{adiciona}}}' />
+		&nbsp;
+		<input id='i3GEOlegendabotao13' class='executar' size='8' type='button' value='{{{sobe}}}' />
+		&nbsp;
+		<input id='i3GEOlegendabotao14' class='executar' size='8' type='button' value='{{{desce}}}' />
+		<div id='i3GEOlegendaParametrosEstilos' style='position: relative; top: 10px; left: 0px; text-align: left'></div>
+		<br>
+		<br>
+		<p class='paragrafo' style='font-size: 10px'>
+			<input id='i3GEOlegendabotao10' size='35' type='button' value='{{{aplicaAlteracoes}}}'>
+		</p>
+		<div style='position: relative; top: 0px; left: 0px; text-align: left;' id='i3GEOlegendamostraEstilo'></div>
+		<div style='position: relative; top: 0px; left: 0px; text-align: left;' id='i3GEOlegendasimbolos'></div>
+	</fieldset>
+</div>
+<div id='i3GEOlegendaguia4obj' style='width: 99%; text-align: left;'></div>
+<div id='i3GEOlegendaguia5obj' style='width: 99%; text-align: left;'>
+	<p class='paragrafo'>
+		{{{geraSLD}}}
+		<a href='http://mapserver.org/ogc/sld.html#sld' target='_blank'>Mapserver SLD</a>
+		{{{ajudaSLD}}}
+	<p class='paragrafo'>
+		<input id='i3GEOlegendabotaoSLDe' size='25' type='button' value='{{{exportaSLD}}}'>
+	</p>
+	<p class='paragrafo'>{{{msgAplicaSLD',i3GEOF.legenda.dicionario)
+	<p class='paragrafo'>
+		<input id='i3GEOlegendabotaoSLDi' size='25' type='button' value='{{{aplicaSLD}}}'>
+	</p>
+</div>
+<input type='hidden' value='' id='listaColourRamp' onchange='javascript:i3GEOF.legenda.aplicaColourRamp()' />

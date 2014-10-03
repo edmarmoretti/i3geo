@@ -1,0 +1,54 @@
+<div id='i3GEOfiltroguiasYUI' class='yui-navset' style='top: 0px; cursor: pointer; left: 0px;'>
+	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
+		<li><a>
+				<em><div id='i3GEOfiltroguia1' style='text-align: center; left: 0px;">'+$trad('constroi',i3GEOF.filtro.dicionario)+'</div></em>
+			</a></li>
+		<li><a>
+				<em><div id='i3GEOfiltroguia2' style='text-align: center; left: 0px;'>{{{digita}}}</div></em>
+			</a></li>
+		<li><a>
+				<em><div id='i3GEOfiltroguia3' style='text-align: center; left: 0px;">{{{testa}}}</div></em>
+			</a></li>
+	</ul>
+</div>
+<br>
+<p class='paragrafo'>
+	<input id='i3GEOfiltrobotao1' size='18' type='button' value={{{inclui}}} />
+	<input id='i3GEOfiltrobotao2' size='18' type='button' value={{{remove}}} />
+</p>
+<div class='guiaobj' id='i3GEOfiltroguia1obj' style='left: 1px; display: block;'>
+	<div id='i3GEOfiltropar' style='display: block; position: relative; top: 5px; left: 0px;'>
+		<table summary='' id='i3GEOfiltroparametros' style='width: 380px'>
+			<tr>
+				<td></td>
+				<td></td>
+				<td style='background-color: yellow'>{{{item}}}</td>
+				<td style='background-color: yellow'>{{{operador}}}</td>
+				<td style='background-color: yellow'>{{{valor}}}</td>
+				<td style='background-color: yellow'></td>
+				<td style='background-color: yellow'>{{{conector}}}</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+	<div id='i3GEOfiltroresultado' style='position: relative; top: 5px; left: 0px'></div>
+	<div id='i3GEOfiltrovalores' style='position: relative; top: 5px; left: 0px'></div>
+	<div id='i3GEOfiltromen1' style='top: 15px; left: 0px;'>
+		<p class='paragrafo'>{{{ajuda}}}
+	</div>
+</div>
+<div class='guiaobj' id='i3GEOfiltroguia2obj' style='left: 1px; display: none;'>
+	<p class='paragrafo'>{{{digitaFiltro}}}:
+	<div class='styled-select'>
+		<input type='text' value='' id='i3GEOfiltrofiltro' />
+	</div>
+</div>
+<div class='guiaobj' id='i3GEOfiltroguia3obj' style='left: 1px; display: none;'></div>
