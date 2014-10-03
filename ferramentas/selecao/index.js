@@ -86,7 +86,7 @@ i3GEOF.selecao = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia: function(iddiv){
-			var i,n,ics;
+			var b,i,n,ics;
 			try{
 				$i(iddiv).innerHTML += i3GEOF.selecao.html();
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOselecaoguia1","i3GEOselecaoguia");
@@ -124,14 +124,16 @@ i3GEOF.selecao = {
 
 				i3GEO.util.mensagemAjuda("i3GEOselecaomen1",$i("i3GEOselecaomen1").innerHTML);
 				i3GEO.util.mensagemAjuda("i3GEOselecaomen2",$i("i3GEOselecaomen2").innerHTML);
-				new YAHOO.widget.Button(
+				b = new YAHOO.widget.Button(
 						"i3GEOselecaobotao1",
 						{onclick:{fn: i3GEOF.selecao.atributo}}
 				);
-				new YAHOO.widget.Button(
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button(
 						"i3GEOselecaobotao2",
 						{onclick:{fn: i3GEOF.selecao.aplicaselecaoTema}}
 				);
+				b.addClass("rodar");
 				i3GEOF.selecao.ativaFoco();
 				ics = $i("i3GEOselecaoguia1obj").getElementsByTagName("button");
 				n = ics.length;

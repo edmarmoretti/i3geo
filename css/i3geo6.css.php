@@ -2225,8 +2225,15 @@ padding: 0 0px;
 text-decoration: none;
 }
 .rodar .first-child button {
-backgroud-color: red;
 background: url(../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
+width: 250px;
+}
+.rodar150 .first-child button {
+background: url(../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
+width: 150px;
+}
+.enviar .first-child button {
+background: url(../imagens/oxygen/16x16/svn-commit.png) 5% 50% no-repeat;
 width: 250px;
 }
 div.olMap {

@@ -325,7 +325,10 @@ i3GEOF.inserexy = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			false,
+			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/edit-node.png"
 		);
 		divid = janela[2].id;
 		i3GEOF.inserexy.aguarde = $i("i3GEOF.inserexy_imagemCabecalho").style;

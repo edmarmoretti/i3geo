@@ -114,10 +114,11 @@ i3GEOF.locregiao = {
 		$i(divid).innerHTML = i3GEOF.locregiao.html();
 		i3GEOF.locregiao.comboHierarquiaRegioes($i("i3geoLocregiaoTipoRegiao"));
 		//ativa os botoes de filtro
-		new YAHOO.widget.Button(
+		var b = new YAHOO.widget.Button(
 			"i3geoLocregiaoFiltroRemove",
 			{onclick:{fn: function(){i3GEOF.locregiao.removeFiltro();}}}
 		);
+		b.addClass("rodar150");
 		if(i3GEOF.locregiao.ATIVAFILTRO === true){
 			$i("i3geoLocregiaoBotoesFiltro").style.display = "block";
 		}
