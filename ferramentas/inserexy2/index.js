@@ -87,6 +87,7 @@ i3GEOF.inserexy = {
 	*/
 	inicia: function(iddiv){
 		try{
+			var b;
 			$i(iddiv).innerHTML += i3GEOF.inserexy.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia0","i3GEOinserexyguia");
 			//eventos das guias
@@ -125,14 +126,16 @@ i3GEOF.inserexy = {
 				"i3GEOinserexybotaodd",
 				{onclick:{fn: i3GEOF.inserexy.inserirdd}}
 			);
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOinserexybotaocriatema",
 				{onclick:{fn: i3GEOF.inserexy.criatemaeditavel}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOinserexybotaoperfil",
 				{onclick:{fn: i3GEOF.inserexy.graficoPerfil}}
 			);
+			b.addClass("abrir");
 
 			new YAHOO.widget.Button(
 				"i3GEOinserexybotao2",
@@ -198,8 +201,8 @@ i3GEOF.inserexy = {
 		'	<p class=paragrafo >'+$trad('selecionaTema',i3GEOF.inserexy.dicionario)+':</p>' +
 		'	<div class="styled-select" id=i3GEOinserexyshapefile >' +
 		'	</div><br>' +
-		'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="'+$trad('criaTemaEditavel',i3GEOF.inserexy.dicionario)+'" />' +
-		'	<input id=i3GEOinserexybotaoperfil type="button" size=18 value="'+$trad('graficoPerfil',i3GEOF.inserexy.dicionario)+'" /></p>' +
+		'	<p class=paragrafo ><input id=i3GEOinserexybotaocriatema type="button" size=18 value="'+$trad('criaTemaEditavel',i3GEOF.inserexy.dicionario)+'" /></p>' +
+		'	<p class=paragrafo ><input id=i3GEOinserexybotaoperfil type="button" size=18 value="'+$trad('graficoPerfil',i3GEOF.inserexy.dicionario)+'" /></p>' +
 
 		'	<div id=i3GEOinserexyopcitens style=display:none;left:0px;text-align:left; >' +
 		'		<p class=paragrafo >'+$trad('selecionaItem',i3GEOF.inserexy.dicionario)+':</p>' +
