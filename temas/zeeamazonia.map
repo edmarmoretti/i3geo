@@ -1,0 +1,36 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "i3geosaude"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (select translate(criacao9,E'\\'',' -') as criacao9,gid,geom from ambiente.zee_amazonialegal ) as foo using unique gid using srid=4326
+
+
+"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "cache"	""
+      "CLASSE"	"SIM"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "metaestat"	""
+      "convcaracter"	""
+      "TEMA"	"ZEE da amazonia"
+      "cortepixels"	"0"
+    END # METADATA
+    NAME "zeeamazonia"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 0 0 0
+        SIZE 12
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

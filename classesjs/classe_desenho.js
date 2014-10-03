@@ -1,4 +1,6 @@
 /*
+Title: Desenho
+
 Desenho de elementos gr&aacute;ficos
 
 i3GEO.desenho
@@ -216,7 +218,7 @@ i3GEO.desenho = {
 						}
 					}
 				}
-				return s;	
+				return s;
 			},
 			destroyFeatures: function(f){
 				if(f){

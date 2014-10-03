@@ -54,9 +54,9 @@ i3GEO.Interface = {
 	 * Altera o posicionamento da barra de bot&otilde;es e comportamento das
 	 * guias. Veja o exemplo interface/openlayers_t.htm.
 	 *
-	 * Type: {boolean}
+	 * Tipo {boolean}
 	 *
-	 * Default: {false}
+	 * Default {false}
 	 */
 	TABLET : false,
 	/*
@@ -71,9 +71,9 @@ i3GEO.Interface = {
 	 * Para n&atilde;o aplicar a detec&ccedil;&atilde;o, use
 	 * i3GEO.Interface.ALTTABLET = ""
 	 *
-	 * Type: {string}
+	 * Tipo {string}
 	 *
-	 * Default: {""}
+	 * Default {""}
 	 */
 	ALTTABLET : "",
 	/*
@@ -84,9 +84,9 @@ i3GEO.Interface = {
 	 * afeta a interface padr&atilde;o, que utiliza a defini&ccedil;&atilde;o
 	 * que estiver ativa nos mapfiles de inicializa&ccedil;&atilde;o.
 	 *
-	 * Tipo: {MAPSERVER OUTPUTFORMAT}
+	 * Tipo {MAPSERVER OUTPUTFORMAT}
 	 *
-	 * Default: {"AGG_Q"}
+	 * Default {"AGG_Q"}
 	 */
 	OUTPUTFORMAT : "AGG_Q",
 	/*
@@ -95,9 +95,9 @@ i3GEO.Interface = {
 	 * Distancia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao topo do
 	 * mapa.
 	 *
-	 * Tipo: {number}
+	 * Tipo {number}
 	 *
-	 * Default: {12}
+	 * Default {12}
 	 */
 	BARRABOTOESTOP : 12,
 	/*
@@ -106,9 +106,9 @@ i3GEO.Interface = {
 	 * Distancia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao lado
 	 * esquerdo do mapa.
 	 *
-	 * Tipo: {number}
+	 * Tipo {number}
 	 *
-	 * Default: {3}
+	 * Default {3}
 	 */
 	BARRABOTOESLEFT : 3,
 	/*
@@ -120,9 +120,9 @@ i3GEO.Interface = {
 	 * Utilizado para ajustar a barra de zoom
 	 *
 	 *
-	 * Tipo: {number}
+	 * Tipo {number}
 	 *
-	 * Default: {50}
+	 * Default {50}
 	 */
 	BARRADEZOOMRIGHT : 0,
 	/*
@@ -130,9 +130,9 @@ i3GEO.Interface = {
 	 *
 	 * Distancia da barra de zoom em rela&ccedil;&atilde;o ao topo do mapa.
 	 *
-	 * Tipo: {number}
+	 * Tipo {number}
 	 *
-	 * Default: {12}
+	 * Default {12}
 	 */
 	BARRADEZOOMTOP : 20,
 	/*
@@ -141,9 +141,9 @@ i3GEO.Interface = {
 	 * Distancia da barra de zoom em rela&ccedil;&atilde;o ao lado esquerdo do
 	 * mapa.
 	 *
-	 * Tipo: {number}
+	 * Tipo {number}
 	 *
-	 * Default: {3}
+	 * Default {3}
 	 */
 	BARRADEZOOMLEFT : 10,
 	/*
@@ -164,11 +164,11 @@ i3GEO.Interface = {
 	 *
 	 * i3GEO.Interface.ATUAL = "<valor>"
 	 *
-	 * Tipo: {string}
+	 * Tipo {string}
 	 *
 	 * Valores: {openlayers|googlemaps|googleearth}
 	 *
-	 * Default: {"openlayers"}
+	 * Default {"openlayers"}
 	 */
 	ATUAL : "openlayers",
 	/*
@@ -176,17 +176,17 @@ i3GEO.Interface = {
 	 *
 	 * ID do elemento HTML que receber&aacute; o corpo do mapa
 	 *
-	 * Tipo: {string}
+	 * Tipo {string}
 	 *
-	 * Default: {"corpoMapa"}
+	 * Default {"corpoMapa"}
 	 */
 	IDCORPO : "corpoMapa",
 	/*
 	 * Indica se o menu de contexto deve ser ativado
 	 *
-	 * Tipo: {Boolean}
+	 * Tipo {Boolean}
 	 *
-	 * Default: {true}
+	 * Default {true}
 	 */
 	ATIVAMENUCONTEXTO : false,
 	/*
@@ -516,9 +516,9 @@ i3GEO.Interface = {
 		 * Permite destacar o nome do tema que est&aacute; em processo de
 		 * carregamento
 		 *
-		 * Tipo: {background style}
+		 * Tipo {background style}
 		 *
-		 * Default: {yellow}
+		 * Default {yellow}
 		 */
 		FUNDOTEMA : "yellow",
 		/*
@@ -527,18 +527,18 @@ i3GEO.Interface = {
 		 * Indica se ser&aacute; utilizado o modo de navega&ccedil;&atilde;o em
 		 * tiles
 		 *
-		 * Tipo: {boolean}
+		 * Tipo {boolean}
 		 *
-		 * Default: {false}
+		 * Default {false}
 		 */
 		TILES : true,
 		/*
 		 * N&uacute;mero de TILES na &aacute;rea n&atilde;o vis&iacute;vel do
 		 * mapa
 		 *
-		 * Tipo: {integer}
+		 * Tipo {integer}
 		 *
-		 * Default: {0}
+		 * Default {0}
 		 */
 		BUFFER : 0,
 		/*
@@ -547,7 +547,7 @@ i3GEO.Interface = {
 		 * Lista dos controles espec&iacute;ficos da API do OpenLayers que
 		 * ser&atilde;o inseridos ou n&atilde;o no mapa
 		 *
-		 * Tipo: {object}
+		 * Tipo {object}
 		 *
 		 * Default:
 		 * {PanZoomBar:true,LayerSwitcher:true,ScaleLine:true,OverviewMap:true}
@@ -564,9 +564,9 @@ i3GEO.Interface = {
 		 *
 		 * Menor extens&atilde;o geogr&aacute;fica que pode ser mostrada no mapa
 		 *
-		 * Tipo: {array}
+		 * Tipo {array}
 		 *
-		 * Default: {-0.0003, -0.0003, 0.0003, 0.0003]}
+		 * Default {-0.0003, -0.0003, 0.0003, 0.0003]}
 		 */
 		MINEXTENT : [ -0.0003, -0.0003, 0.0003, 0.0003 ],
 		/*
@@ -574,9 +574,9 @@ i3GEO.Interface = {
 		 *
 		 * Maior extens&atilde;o geogr&aacute;fica que pode ser mostrada no mapa
 		 *
-		 * Tipo: {array}
+		 * Tipo {array}
 		 *
-		 * Default: {[-180, -90, 180, 90]}
+		 * Default {[-180, -90, 180, 90]}
 		 */
 		MAXEXTENT : [ -180, -90, 180, 90 ],
 		/*
@@ -585,7 +585,7 @@ i3GEO.Interface = {
 		 * Array com objetos do tipo LAYER que ser&atilde;o adicionados
 		 * ap&oacute;s a crioa&ccedil;&atilde;o de todos os layers default.
 		 *
-		 * Tipo: {array}
+		 * Tipo {array}
 		 *
 		 */
 		LAYERSADICIONAIS : [],
@@ -1650,7 +1650,7 @@ i3GEO.Interface = {
 		 *
 		 * Fonte http://maps-api-tt.appspot.com/apilite/styled/styled.html
 		 *
-		 * Tipo: {objeto estilo do Google Maps}
+		 * Tipo {objeto estilo do Google Maps}
 		 */
 		ESTILOS : {
 			'Red' : [ {
@@ -1798,7 +1798,7 @@ i3GEO.Interface = {
 		 * Estilos pre-definidos Red, Countries, Night, Blue, Greyscale, No
 		 * roads, Mixed, Chilled
 		 *
-		 * Tipo: {string}
+		 * Tipo {string}
 		 *
 		 * Default: ""
 		 */
@@ -1815,7 +1815,7 @@ i3GEO.Interface = {
 		 *
 		 * https://developers.google.com/maps/documentation/javascript/reference#MapOptions
 		 *
-		 * Tipo: {MapOptions}
+		 * Tipo {MapOptions}
 		 */
 		MAPOPTIONS : {
 			scaleControl : true
@@ -1829,7 +1829,7 @@ i3GEO.Interface = {
 		 *
 		 * Default: 0.8
 		 *
-		 * Tipo: {Numeric}
+		 * Tipo {Numeric}
 		 */
 		OPACIDADE : 0.8,
 		/*
@@ -1840,7 +1840,7 @@ i3GEO.Interface = {
 		 *
 		 * Default: "roadmap"
 		 *
-		 * Tipo: {string - Google API constante
+		 * Tipo {string - Google API constante
 		 * "satellite"|"roadmap"|"hybrid"|"terrain"}
 		 */
 		TIPOMAPA : "terrain",
@@ -1850,7 +1850,7 @@ i3GEO.Interface = {
 		 * Array com a lista de escalas em cada nivel de zoom utilizado pelo
 		 * Google
 		 *
-		 * Tipo: {array}
+		 * Tipo {array}
 		 *
 		 */
 		ZOOMSCALE : [ 591657550, 295828775, 147914387, 73957193, 36978596,
@@ -1860,14 +1860,14 @@ i3GEO.Interface = {
 		 * Par�metros adicionais que s&atilde;o inseridos na URL que define cada
 		 * layer
 		 *
-		 * Tipo: {string}
+		 * Tipo {string}
 		 */
 		PARAMETROSLAYER : "&TIPOIMAGEM=" + i3GEO.configura.tipoimagem,
 		/*
 		 * String acrescentada a url de cada tile para garantir a
 		 * remo&ccedil;&atilde;o do cache local
 		 *
-		 * Type: {string}
+		 * Tipo {string}
 		 */
 		posfixo : 0,
 		atualizaTema : function(retorno, tema) {
@@ -2603,14 +2603,14 @@ i3GEO.Interface = {
 		 * Par�metros adicionais que s&atilde;o inseridos na URL que define cada
 		 * layer
 		 *
-		 * Tipo: {string}
+		 * Tipo {string}
 		 */
 		PARAMETROSLAYER : "&TIPOIMAGEM=" + i3GEO.configura.tipoimagem,
 		/*
 		 * String acrescentada a url de cada tile para garantir a
 		 * remo&ccedil;&atilde;o do cache local
 		 *
-		 * Type: {string}
+		 * Tipo {string}
 		 */
 		posfixo : "",
 		/*
@@ -2619,9 +2619,9 @@ i3GEO.Interface = {
 		 * Lista dos controles espec&iacute;ficos da API do Google Earth que
 		 * ser&atilde;o inseridos ou n&atilde;o no mapa
 		 *
-		 * Tipo: {object}
+		 * Tipo {object}
 		 *
-		 * Default: {}
+		 * Default {}
 		 */
 		GADGETS : {
 			setMouseNavigationEnabled : true,

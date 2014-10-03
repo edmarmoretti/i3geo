@@ -46,9 +46,9 @@ i3GEO.guias = {
 	 * O nome da guia &eacute; a definida na vari&aacute;vel
 	 * i3GEO.guias.CONFIGURA
 	 *
-	 * Tipo: {string}
+	 * Tipo {string}
 	 *
-	 * Default: {"temas"}
+	 * Default {"temas"}
 	 */
 	ATUAL : "temas",
 	/*
@@ -62,7 +62,7 @@ i3GEO.guias = {
 	 *
 	 * Mantenha como 0 para que o c&aacute;lculo seja autom&aacute;tico
 	 *
-	 * Tipo: {numeric}
+	 * Tipo {numeric}
 	 *
 	 * Default: 0
 	 */
@@ -88,7 +88,7 @@ i3GEO.guias = {
 	 * i3GEO.guias.mostra("legenda");//mostra a guia
 	 * i3GEO.mapa.legendaHTML.cria("guia4obj"); } }
 	 *
-	 * Tipo: {JSON}
+	 * Tipo {JSON}
 	 */
 	CONFIGURA : {
 		"temas" : {
@@ -314,9 +314,9 @@ i3GEO.guias = {
 	 *
 	 * i3GEO.guias.ORDEM = ["temas","adiciona","legenda"];
 	 *
-	 * Tipo: {array}
+	 * Tipo {array}
 	 *
-	 * Default: {""}
+	 * Default {""}
 	 */
 	ORDEM : "",
 	/*
@@ -329,9 +329,9 @@ i3GEO.guias = {
 	 * m&oacute;vel s&oacute; pode ser criada ap&oacute;s o posicionamento do
 	 * corpo do mapa
 	 *
-	 * Tipo: {string}
+	 * Tipo {string}
 	 *
-	 * Default: {"guia"}
+	 * Default {"guia"}
 	 *
 	 * Values: guia|sanfona|tablet|movel
 	 */
@@ -341,9 +341,9 @@ i3GEO.guias = {
 	 *
 	 * ID do elemento DOM, criado pelo YUI, onde ser&atilde;o inseridas as guias
 	 *
-	 * Tipo: {String}
+	 * Tipo {String}
 	 *
-	 * Default: {"guiasYUI"}
+	 * Default {"guiasYUI"}
 	 */
 	IDGUIAS : "guiasYUI",
 	/*
@@ -1185,10 +1185,10 @@ i3GEO.guias = {
 					YAHOO.util.Dom.setStyle(
 						ico,
 						"padding",
-						ins);	
+						ins);
 				}
 			}
-			
+
 			i3GEO.guias.guiaMovel.desativaIcones();
 			if (i3GEO.guias.ATUAL != "") {
 				ico = $i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id);
