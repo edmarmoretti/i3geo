@@ -569,5 +569,17 @@ i3GEOF.legenda.dicionario = {
 			en:"",
 			es:"",
 			it:""
+		}],
+		'minScale': [{
+			pt:"N&atilde;o desenha se escala for menor que",
+			en:"",
+			es:"",
+			it:""
+		}],
+		'maxScale': [{
+			pt:"N&atilde;o desenha se escala for maior que",
+			en:"",
+			es:"",
+			it:""
 		}]
 };

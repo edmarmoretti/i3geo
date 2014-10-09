@@ -342,7 +342,7 @@ array
 				}
 				else
 				{$imgLeg = $im;}
-				$linhas[] = array("tema"=>$l,"idclasse"=>"","nomeclasse"=>"","expressao"=>"","expressao"=>"","imagem"=>$imgLeg);
+				$linhas[] = array("tema"=>$l,"idclasse"=>"","nomeclasse"=>"","expressao"=>"","expressao"=>"","imagem"=>$imgLeg,"minScale"=>0,"maxScale"=>0);
 			}
 			else
 			{
@@ -360,7 +360,7 @@ array
 					$nomeexp = $classe->getExpressionString();
 					if (function_exists("mb_convert_encoding"))
 					{$nomeexp = mb_convert_encoding($nomeexp,"UTF-8","ISO-8859-1");}
-					$linhas[] = array("tema"=>$l,"idclasse"=>$c,"nomeclasse"=>$nomeclasse,"expressao"=>$nomeexp,"imagem"=>$i,"proc"=>"");
+					$linhas[] = array("tema"=>$l,"idclasse"=>$c,"nomeclasse"=>$nomeclasse,"expressao"=>$nomeexp,"imagem"=>$i,"proc"=>"","minScale"=>$classe->minscaledenom,"maxScale"=>$classe->maxscaledenom);
 				}
 				if (($totaliza=="sim") && ($nc > 1)){
 					$layer->set("template","none.htm");
@@ -422,7 +422,7 @@ array
 					if($layer->type == MS_LAYER_RASTER && $proc == ""){
 						$proc = array("RESAMPLE=NEAREST");
 					}
-					$linhas[] = array("tema"=>$l,"idclasse"=>"","nomeclasse"=>"","expressao"=>"","imagem"=>"","proc"=>$proc);
+					$linhas[] = array("tema"=>$l,"idclasse"=>"","nomeclasse"=>"","expressao"=>"","imagem"=>"","proc"=>$proc,"minScale"=>0,"maxScale"=>0);
 				}
 			}
 		}

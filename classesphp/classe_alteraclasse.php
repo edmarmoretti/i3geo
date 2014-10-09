@@ -173,8 +173,12 @@ $nomes - lista com os novos nomes
 $exps - lista com as novas express&otilde;es
 
 $base64 sim|nao indica se as strings estao codificadas em base64
+
+$minScales - lista com valores para minscaledenom
+
+$maxScales - lista com valores para maxscaledenom
 */
-	function alteraclasses($ids,$nomes,$exps,$base64="nao")
+	function alteraclasses($ids,$nomes,$exps,$base64="nao",$minScales="",$maxScales="")
 	{
 		if($base64 == "sim"){
 			$ids = base64_decode($ids);
@@ -183,6 +187,8 @@ $base64 sim|nao indica se as strings estao codificadas em base64
 		}
 		//prepara os arrays com os valores
 		$ids = explode(";",$ids);
+		$minScales = explode(";",$minScales);
+		$maxScales = explode(";",$maxScales);
 		//$nomes = mb_convert_encoding($nomes,"ISO-8859-1","UTF-8");
 		$nomes = explode(";",$nomes);
 		//$exps = mb_convert_encoding($exps,"ISO-8859-1","UTF-8");
@@ -196,8 +202,7 @@ $base64 sim|nao indica se as strings estao codificadas em base64
 		//elimina nomes de layers duplicados
 		$t = array_unique($t);
 		//elimina as classes existentes atualmente em cada layer
-		foreach ($t as $tema)
-		{
+		foreach ($t as $tema){
 			$layer = $this->mapa->getlayerbyname($tema);
 			$layer->setMetaData("cache","");
 			$nc = $layer->numclasses;
@@ -209,14 +214,12 @@ $base64 sim|nao indica se as strings estao codificadas em base64
 		}
 		//acrescenta as classes definidas
 		$c = count($ids);
-		for ($i=0; $i < $c; ++$i)
-		{
+		for ($i=0; $i < $c; ++$i){
 			$layerc = explode("-",$ids[$i]); //nome do layer &eacute; o indice 0 do array
 			$layer = $this->mapa->getlayerbyname($layerc[0]);
 			$layer->setMetaData("cache","");
 			$ncl = $layer->numclasses;
-			if ($layerc[1] < $ncl)
-			{
+			if ($layerc[1] < $ncl){
 				$classe = $layer->getclass($layerc[1]);
 				$classe->set("status",MS_DEFAULT);
 				$classe->set("name",$nomes[$i]);
@@ -226,6 +229,18 @@ $base64 sim|nao indica se as strings estao codificadas em base64
 				$e = str_replace("''","'",$e);
 				$e = str_replace("##","'",$e);
 				$classe->setexpression($e);
+				if($minScales[$i]){
+					if($minScales[$i] == 0 || $minScales[$i] == ""){
+						$minScales[$i] = -1;
+					}
+					$classe->set("minscaledenom",$minScales[$i]);
+				}
+				if($maxScales[$i]){
+					if($maxScales[$i] == 0 || $maxScales[$i] == ""){
+						$maxScales[$i] = -1;
+					}
+					$classe->set("maxscaledenom",$maxScales[$i]);
+				}
 			}
 		}
 	}

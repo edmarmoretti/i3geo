@@ -1159,7 +1159,7 @@ Altera uma classe de um tema, aplicando uma nova classifica&ccedil;&atilde;o ou 
 		if ($opcao == "alteraclasses"){
 			//esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
 			//error_reporting(0);
-			alteraclassesPost($ids,$nomes,$exps,$base64);
+			alteraclassesPost($ids,$nomes,$exps,$base64,$minScales,$maxScales);
 			restauraCon($map_file,$postgis_mapa);
 			cpjson("");
 		}
@@ -2242,10 +2242,10 @@ Altera as classes de um tema aplicando novos par&acirc;metros como nome e expres
 Include:
 <classe_alteraclasse.php>
 */
-function alteraclassesPost($ids,$nomes,$exps,$base64="nao"){
+function alteraclassesPost($ids,$nomes,$exps,$base64="nao",$minScales="",$maxScales=""){
 	global $map_file,$tema;
 	$m = new Alteraclasse($map_file,$tema);
-	$m->alteraclasses($ids,$nomes,$exps,$base64);
+	$m->alteraclasses($ids,$nomes,$exps,$base64,$minScales,$maxScales);
 	$m->salva();
 	$_SESSION["contadorsalva"]++;
 }
