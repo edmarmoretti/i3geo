@@ -2236,6 +2236,14 @@ width: 150px;
 background: url(../imagens/oxygen/16x16/svn-commit.png) 5% 50% no-repeat;
 width: 250px;
 }
+.abrir .first-child button {
+background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
+width: 250px;
+}
+.abrir150 .first-child button {
+background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
+width: 150px;
+}
 div.olMap {
 z-index: 0;
 padding: 0px!important;

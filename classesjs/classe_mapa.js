@@ -337,7 +337,9 @@ i3GEO.mapa =
 		 *
 		 * Controla a obtencao da legenda do mapa formatada em HTML.
 		 *
-		 * util para mostrar a legenda na tela
+		 * util para mostrar a legenda na tela em um div qualquer
+		 *
+		 * Por default, a legenda sera inserida no DIV com id = wlegenda_corpo
 		 */
 		legendaHTML : {
 			/**
@@ -399,7 +401,7 @@ i3GEO.mapa =
 							re = new RegExp("legendack_", "g");
 							retorno.data.legenda = retorno.data.legenda.replace(re, "liblegendack_");
 							legenda =
-								"<div onclick='i3GEO.mapa.legendaHTML.mostraTodosOsTemas()' style=cursor:pointer;font-size:10px;text-align:left; >Mostra tudo</div><br>"
+								"<div class=legendaMostraTodosTemas onclick='i3GEO.mapa.legendaHTML.mostraTodosOsTemas()' style=cursor:pointer;font-size:10px;text-align:left; >Mostra tudo</div><br>"
 									+ retorno.data.legenda;
 						}
 						if (legenda != "" && idleg) {
