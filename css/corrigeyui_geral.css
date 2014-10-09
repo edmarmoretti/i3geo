@@ -227,6 +227,11 @@ td.ygtvcell {
 	width: 150px;
 }
 
+.rodar100 .first-child button {
+	background: url(../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
+	width: 100px;
+}
+
 .enviar .first-child button {
 	background: url(../imagens/oxygen/16x16/svn-commit.png) 5% 50% no-repeat;
 	width: 250px;
@@ -242,3 +247,7 @@ td.ygtvcell {
 	width: 150px;
 }
 
+.abrir100 .first-child button {
+	background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
+	width: 100px;
+}

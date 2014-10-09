@@ -51,7 +51,7 @@ i3GEOF.tabela.dicionario = {
 		es : ""
 	} ],
 	"atvsel" : [ {
-		pt : "Ativa a sele&ccedil;&atilde;o",
+		pt : "Selecionar",
 		en : "",
 		es : ""
 	} ],
@@ -61,7 +61,7 @@ i3GEOF.tabela.dicionario = {
 		es : ""
 	} ],
 	"limpsel" : [ {
-		pt : "Limpa a sele&ccedil;&atilde;o",
+		pt : "Limpar",
 		en : "",
 		es : ""
 	} ],
@@ -71,7 +71,7 @@ i3GEOF.tabela.dicionario = {
 		es : ""
 	} ],
 	"criatema" : [ {
-		pt : "Cria um tema novo",
+		pt : "Criar tema",
 		en : "",
 		es : ""
 	} ],

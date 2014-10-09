@@ -48,7 +48,7 @@ i3GEOF.tabela =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv, idjanela) {
-			var onButtonClick = function(p_sType, p_aArgs, botao) {
+			var b,onButtonClick = function(p_sType, p_aArgs, botao) {
 				var oMenuItem = p_aArgs[1];
 				if (oMenuItem) {
 					if (oMenuItem.value != "") {
@@ -105,35 +105,39 @@ i3GEOF.tabela =
 							}
 						}, idjanela + "i3GEOtabelaagrupamento", "");
 					};
-				new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao2", {
+				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao2", {
 					onclick : {
 						fn : function() {
 							i3GEOF.tabela.ativaSelecao(idjanela);
 						}
 					}
 				});
-				new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao3", {
+				b.addClass("rodar100");
+				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao3", {
 					onclick : {
 						fn : function() {
 							i3GEOF.tabela.limpaSelecao(idjanela);
 						}
 					}
 				});
-				new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao6", {
+				b.addClass("rodar100");
+				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao6", {
 					onclick : {
 						fn : function() {
 							i3GEOF.tabela.criaNovoTema(idjanela);
 						}
 					}
 				});
-				new YAHOO.widget.Button(idjanela + "i3GEOtabelabotaoLista", {
+				b.addClass("rodar100");
+				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotaoLista", {
 					onclick : {
 						fn : function() {
 							i3GEOF.tabela.pegaRegistros(idjanela);
 						}
 					}
 				});
-				new YAHOO.widget.Button(idjanela + "i3GEOtabelaGraficoI", {
+				b.addClass("rodar100");
+				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelaGraficoI", {
 					onclick : {
 						fn : function() {
 							i3GEO.mapa.ativaTema(i3GEOF.tabela.propJanelas[idjanela].tema);
@@ -141,41 +145,46 @@ i3GEOF.tabela =
 						}
 					}
 				});
+				b.addClass("rodar100");
 				$i(idjanela + "i3GEOtabelabotaoLista-button").style.minHeight = "1em";
 				$i(idjanela + "i3GEOtabelabotaoLista-button").style.padding = "0px 15px";
 				$i(idjanela + "i3GEOtabelabotaoLista-button").style.lineHeight = "1.3";
 				$i(idjanela + "i3GEOtabelabotaoLista").style.position = "relative";
 				$i(idjanela + "i3GEOtabelabotaoLista").style.top = "2px";
 
-				new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao4", {
+				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao4", {
 					onclick : {
 						fn : function() {
 							i3GEOF.tabela.estatistica(idjanela);
 						}
 					}
 				});
+				b.addClass("abrir");
 
-				new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao7", {
+				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao7", {
 					onclick : {
 						fn : function() {
 							i3GEOF.tabela.relatorioTabela(idjanela);
 						}
 					}
 				});
-				new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao5", {
+				b.addClass("abrir");
+				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao5", {
 					onclick : {
 						fn : function() {
 							i3GEOF.tabela.relatorioTexto(idjanela);
 						}
 					}
 				});
-				new YAHOO.widget.Button(idjanela + "i3GEOtabelabotaoVinculos", {
+				b.addClass("abrir");
+				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotaoVinculos", {
 					onclick : {
 						fn : function() {
 							i3GEOF.tabela.vinculos.iniciaJanelaFlutuante();
 						}
 					}
 				});
+				b.addClass("abrir100");
 				i3GEO.util.mensagemAjuda(idjanela + "i3GEOtabelamen1", $i(idjanela + "i3GEOtabelamen1").innerHTML);
 
 				if (i3GEO.parametros.r.toLowerCase() !== "sim") {
@@ -234,7 +243,7 @@ i3GEOF.tabela =
 					+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
 			janela =
 				i3GEO.janela.cria(
-					"500px",
+					"550px",
 					"400px",
 					"",
 					"",

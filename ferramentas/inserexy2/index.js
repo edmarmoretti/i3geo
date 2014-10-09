@@ -122,10 +122,11 @@ i3GEOF.inserexy = {
 			i3GEO.util.mensagemAjuda("i3GEOinserexymen2",$i("i3GEOinserexymen2").innerHTML);
 			i3GEO.util.mensagemAjuda("i3GEOinserexymen3",$i("i3GEOinserexymen3").innerHTML);
 
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOinserexybotaodd",
 				{onclick:{fn: i3GEOF.inserexy.inserirdd}}
 			);
+			b.addClass("rodar");
 			b = new YAHOO.widget.Button(
 				"i3GEOinserexybotaocriatema",
 				{onclick:{fn: i3GEOF.inserexy.criatemaeditavel}}
@@ -137,26 +138,31 @@ i3GEOF.inserexy = {
 			);
 			b.addClass("abrir");
 
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOinserexybotao2",
 				{onclick:{fn: i3GEOF.inserexy.inserir}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOinserexybotao6",
 				{onclick:{fn: i3GEOF.inserexy.colar}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOinserexybotao3",
 				{onclick:{fn: i3GEOF.inserexy.wkt}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOinserexybotao4",
 				{onclick:{fn: i3GEOF.inserexy.criaPol}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOinserexybotao5",
 				{onclick:{fn: i3GEOF.inserexy.criaLin}}
 			);
+			b.addClass("rodar");
 			i3GEOF.inserexy.ativaFoco();
 			i3GEOF.inserexy.montaComboLocal();
 			i3GEO.util.radioEpsg(
