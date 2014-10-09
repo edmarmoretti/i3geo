@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>i3GEO - OpenLayers</title>
+<script src="../classesjs/i3geonaocompacto.js"></script>
+<script src="../pacotes/openlayers/OpenLayers2131.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/black.css">
+</head>
+<body style='background:white;' class=yui-skin-sam >
+<div style="left:5px;top:100px">
+	<div id="menuSuspenso" style="width:750px;left:50px;">
+	</div>
+
+	<div id=i3geo >
+		<div id=corpoMapa style="width:750px;height:400px;background-image:url('../imagens/i3geo1bw.jpg');">
+		</div>
+	</div>
+</div>
+<div id=barraDeIcones ></div>
+<style>
+#menuSuspenso .bd{
+	background: black;
+}
+#barraDeIcones {
+	border: 0px solid black;
+	border-radius: 4px;
+	height: 50px;
+	margin: auto;
+	padding: 1px;
+	position: relative;
+	top: 0px;
+	width: 510px;
+	z-index: 5000;
+	overflow: hidden;
+}
+
+#barraDeIcones_mascara {
+	z-index: -1;
+	opacity: 0.4;
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: none repeat scroll 0 0 black;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+#barraDeIcones img {
+	margin-left: 10px;
+}
+</style>
+<script>
+/************
+Nesse exemplo a barra de botoes e inserida em um DIV, posicionado fora do mapa.
+
+************/
+i3GEO.idioma.MOSTRASELETOR = false; //para nao mostrar as bandeiras de escolha do idioma
+i3GEO.configura.mapaRefDisplay = "none";//nao mostra o mapa de referencia
+//parametros da interface OpenLayers
+i3GEO.Interface.openlayers.GADGETS = {
+	PanZoomBar : false,
+	PanZoom : false,
+	LayerSwitcher : false,
+	ScaleLine : true,
+	OverviewMap : false
+};
+//parametros para o menu
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso = {
+		permiteLogin: true,
+		marcadores: true,
+		idhtml:"menuSuspenso",
+		deslocaEsquerda:0,
+		parametrosYUI: {iframe:false,autosubmenudisplay: false, showdelay: 200, hidedelay: 500, lazyload: false}
+	};
+
+i3GEO.configura.oMenuData = {
+	menu:[
+		{nome:$trad("s1"),id:"ajudaMenu"}
+	],
+	submenus:{
+		"ajudaMenu": [
+		{ id:"omenudataAjudamenu9",text: $trad("x68"), url: "javascript:i3GEO.janela.tempoMsg(i3GEO.parametros.mensageminicia)" },
+		{ id:"omenudataAjudamenu2",text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
+		{ id:"omenudataAjudamenu3",text: $trad("u4a"), url: "javascript:i3GEO.ajuda.abreDoc('/documentacao/manual-i3geo-6_0-pt.pdf')" },
+		{ id:"omenudataAjudamenu4",text: $trad("u4"), url: "http://www.softwarepublico.gov.br/dotlrn/clubs/i3geo/file-storage/index?folder%5fid=22667525", target:"_blank" },
+		{ id:"omenudataAjudamenu5",text: $trad("u5a"), url: "http://www.softwarepublico.gov.br", target:"_blank" },
+		{ id:"omenudataAjudamenu1",text: $trad("x67"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332", target:"_blank" },
+		{ id:"omenudataAjudamenu7",text: $trad("u5b"), url: "javascript:i3GEO.ajuda.abreDoc('/ajuda_usuario.php')"},
+		{ id:"omenudataAjudamenu8",text: $trad("u5c"), url: "javascript:i3GEO.ajuda.redesSociais()" }
+		]
+	}
+};
+
+i3GEO.cria();
+//
+//parametros da barra de botoes
+//
+i3GEO.barraDeBotoes.TIPO = "emlinha";
+//altera um dos icones de botoes ja existentes
+i3GEO.barraDeBotoes.ICONEBOTAO.abreJanelaLegenda = "/imagens/gisicons/legend-add.png";
+//adiciona um botao novo com suas funcoes especificas
+//aciona funcao ajax definida em i3GEO.php
+i3GEO.barraDeBotoes.adicionaBotao(
+	{
+		iddiv:"meubotao",
+		tipo:"",
+		dica:"Meu Bot&atilde;o",
+		titulo: "Meu Bot&atilde;o",
+		icone: "/imagens/oxygen/22x22/user-online.png",
+		funcaoonclick:function(){
+			var temp = function(retorno){
+				alert(retorno.data);
+			}
+			i3GEO.php.listaTemas(temp,"polygon");
+		}
+	}
+);
+//define quais os botoes serao mostrados
+i3GEO.barraDeBotoes.INCLUIBOTAO = {
+	meubotao : true, //botao novo
+	abreJanelaLegenda: true,
+	localizar: true,
+	zoomanterior: true,
+	zoomli: true,
+	zoomproximo: true,
+	zoomiauto: false,
+	zoomoauto: false,
+	pan: false,
+	zoomtot: false,
+	identifica: false,
+	identificaBalao: false,
+	mede: false,
+	area: false,
+	selecao: false,
+	barraedicao: false,
+	imprimir: false,
+	google: false,
+	referencia: false,
+	exten: false,
+	inserexy: false,
+	textofid: false,
+	reinicia: false,
+	buscafotos: false,
+	wiki: false,
+	metar: false,
+	lentei: false,
+	confluence: false,
+	inseregrafico: false,
+	v3d: false
+};
+i3GEO.finaliza = function(){
+	//cria o div com id "barraDeIcones" e insere a barra
+	//
+	i3GEO.barraDeBotoes.inicializaBarra("","",false,0,0,"barraDeIcones");
+};
+i3GEO.inicia();
+
+</script>
+</body>
+</html>
