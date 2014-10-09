@@ -454,6 +454,8 @@ i3GEO.mapa =
 			 *
 			 * O resultado e processado pela funcao passada como parametro
 			 *
+			 * O template utilizado para gerar a legenda &eacute; definido em i3GEO.configura.templateLegenda
+			 *
 			 * Parametro:
 			 *
 			 * funcao {function} - funcao que recebera o resultado da chamada AJAX. O objeto CPAINT e enviado como parametro.
