@@ -88,7 +88,7 @@ i3GEOF.analisaGeometrias = {
 	*/
 	inicia: function(iddiv){
 		try{
-			var temp,combot;
+			var b, combot;
 			$i(iddiv).innerHTML += i3GEOF.analisaGeometrias.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias1","i3GEOanalisageometrias");
 			//eventos das guias
@@ -103,33 +103,28 @@ i3GEOF.analisaGeometrias = {
 			};
 			$i("i3GEOanalisageometrias3").onclick = function()
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias3","i3GEOanalisageometrias");};
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOanalisageometriasbotao1",
 				{onclick:{fn: i3GEOF.analisaGeometrias.capturageo}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOanalisageometriasbotaocalculo",
 				{onclick:{fn: i3GEOF.analisaGeometrias.calculo}}
 			);
-			temp = $i("i3GEOanalisageometriasbotaocalculo-button").style;
-			temp.minHeight = "1.5em";
-			temp.padding = "0px 5px";
+			b.addClass("rodar150");
 
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOanalisageometriasbotaofuncoes",
 				{onclick:{fn: i3GEOF.analisaGeometrias.funcoes}}
 			);
-			temp = $i("i3GEOanalisageometriasbotaofuncoes-button").style;
-			temp.minHeight = "1.5em";
-			temp.padding = "0px 5px";
+			b.addClass("rodar150");
 
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOanalisageometriasbotaofuncoes1",
 				{onclick:{fn: i3GEOF.analisaGeometrias.funcoes1}}
 			);
-			temp = $i("i3GEOanalisageometriasbotaofuncoes1-button").style;
-			temp.minHeight = "1.5em";
-			temp.padding = "0px 5px";
+			b.addClass("rodar150");
 
 			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen1",$i("i3GEOanalisageometriasmen1").innerHTML);
 			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen2",$i("i3GEOanalisageometriasmen2").innerHTML);
@@ -137,7 +132,7 @@ i3GEOF.analisaGeometrias = {
 			g_tipoacao="";
 			g_operacao="";
 			i3GEOF.analisaGeometrias.ativaFoco();
-			combot = "<select style='font-size:11px' id='i3GEOanalisageometriastipoOperacao' onchange='i3GEOF.analisaGeometrias.operacao(this)' >";
+			combot = "<select style='font-size:11px;width:250px' id='i3GEOanalisageometriastipoOperacao' onchange='i3GEOF.analisaGeometrias.operacao(this)' >";
 			combot += "<option value='adiciona' >"+$trad('adiciona',i3GEOF.analisaGeometrias.dicionario)+"</option>";
 			combot += "<option value='retira' >"+$trad('retira',i3GEOF.analisaGeometrias.dicionario)+"</option>";
 			combot += "<option value='inverte' >"+$trad('inverte',i3GEOF.analisaGeometrias.dicionario)+"</option>";
@@ -189,26 +184,26 @@ i3GEOF.analisaGeometrias = {
 		ins += '	<div class=guiaobj id="i3GEOanalisageometrias3obj" style="left:1px;display:none;">';
 		ins += '			<p class=paragrafo ><input style="cursor:pointer;vertical-align:text-bottom" type=checkbox id=i3geoanalisageometriassemprecalcula /> '+$trad('recalculaGeom',i3GEOF.analisaGeometrias.dicionario);
 		ins += '			<p class=paragrafo >'+$trad('operacaoGeom',i3GEOF.analisaGeometrias.dicionario)+':';
-		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaocalculo style="position:relative;top:-3px;"  >';
+		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaocalculo style="width:150px;position:relative;top:-3px;"  >';
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=area >'+$trad('area',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=perimetro >'+$trad('perimetro',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '			</select><input id=i3GEOanalisageometriasbotaocalculo type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
+		ins += '			</select><br><br><input id=i3GEOanalisageometriasbotaocalculo type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
 		ins += '			<p class=paragrafo >'+$trad('perimetro',i3GEOF.analisaGeometrias.dicionario)+':';
-		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes style="position:relative;top:-3px;" >';
+		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes style="width:150px;position:relative;top:-3px;" >';
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=union >'+$trad('uniao',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=intersection >'+$trad('interseccao',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=difference >'+$trad('diferenca',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=symdifference >'+$trad('diferencaInversa',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=convexhull >'+$trad('convexo',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
+		ins += '			</select><br><br><input id=i3GEOanalisageometriasbotaofuncoes type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
 		ins += '			<p class=paragrafo >'+$trad('operacaoGeom3',i3GEOF.analisaGeometrias.dicionario)+':';
-		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes1 style="position:relative;top:-3px;" >';
+		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes1 style="width:150px;position:relative;top:-3px;" >';
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=convexhull >'+$trad('convexo',i3GEOF.analisaGeometrias.dicionario)+'</option>';
 		ins += '				<option value=boundary >'+$trad('entorno',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes1 type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
+		ins += '			</select><br><br><input id=i3GEOanalisageometriasbotaofuncoes1 type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
 		ins += '		<div id=i3GEOanalisageometriasmen2 style="text-align:left;left:0px" >';
 		ins += '			<p class=paragrafo >'+$trad('ajuda3',i3GEOF.analisaGeometrias.dicionario);
 		ins += '			<p class=paragrafo >'+$trad('ajuda4',i3GEOF.analisaGeometrias.dicionario)+': <a href="http://www.opengeospatial.org/standards/sfs" target=blank >OGC</a>, <a href="http://postgis.refractions.net/docs/ch06.html" target=blank >PostGis, </a>e <a href="http://www.vividsolutions.com/jts/tests/index.html" target=blank >JTS</a>';
@@ -336,7 +331,8 @@ i3GEOF.analisaGeometrias = {
 			"i3GEOanalisageometriastemas",
 			"",
 			false,
-			"ligados"
+			"ligados",
+			"font-size: 12px;width: 250px;"
 		);
 	},
 	/*

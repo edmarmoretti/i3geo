@@ -163,7 +163,8 @@ i3GEOF.distanciaptpt = {
 		ins += "<p class='paragrafo' >" + $trad('temaDestino',i3GEOF.distanciaptpt.dicionario)+"<br>";
 		ins += "<div style='text-align:left;' id='i3GEOdistanciaptptSelTemasDestino' ></div><br>";
 		ins += "<p class='paragrafo' >" + $trad('distMax',i3GEOF.distanciaptpt.dicionario)+"<br>";
-		ins += $inputText("","","i3GEOFdistanciaptptdistancia","",10,"100000");
+
+		ins += '<div class="styled-select" ><input type=text value=100000 id=i3GEOFdistanciaptptdistancia ></div>';
 		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t0()","i3GEOF.distanciaptpt.t2()",ins,"i3GEOF.distanciaptpt.t1","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
 		i3GEOF.distanciaptpt.comboTemasOrigem();
 		i3GEOF.distanciaptpt.comboTemasDestino();
