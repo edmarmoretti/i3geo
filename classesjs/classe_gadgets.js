@@ -507,14 +507,13 @@ i3GEO.gadgets = {
 					alinhamento = "left:"+ms.deslocaEsquerda*-1+"px;";
 				}
 				//ajusta a altura caso n&atilde;o tenha sido especificado no HTML
-				
-					if(!temp.style.height || parseInt(temp.style.height) === 0){
-						temp.style.height = "21px";
-					}
-					if(objid.style.height && objid.style.height === "0px"){
-						objid.style.height = "";
-					}
-				
+				if(temp && (!temp.style.height || parseInt(temp.style.height) === 0)){
+					temp.style.height = "30px";
+				}
+				if(objid.style.height && parseInt(objid.style.height,10) === 0){
+					objid.style.height = "30px";
+				}
+
 				ins += '<div class="bd" style="top:0px;'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:3;line-height:1.4" >' +
 					'<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
 				n = confm.menu.length;
