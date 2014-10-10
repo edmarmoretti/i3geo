@@ -1434,11 +1434,12 @@ i3GEO.barraDeBotoes = {
 			return;
 		}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.recria()");}
-		if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe"){
+		if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe" || i3GEO.barraDeBotoes.TIPO === "olhodepeixe1"){
 			euEnv.euDockArray = [];
 			euEnv.Kost.num = 0;
 			if($i("euDock_0_bar")){
-				document.body.removeChild($i("euDock_0_bar").parentNode);
+				//document.body.removeChild($i("euDock_0_bar").parentNode);
+				$i("euDock_0_bar").parentNode.parentNode.removeChild($i("euDock_0_bar").parentNode);
 			}
 			i3GEO.barraDeBotoes.inicializaBarra();
 			if($i("i3geoMarcaIcone"))

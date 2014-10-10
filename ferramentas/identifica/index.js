@@ -210,7 +210,7 @@ i3GEOF.identifica = {
 				};
 				$i(idjanela+"i3GEOidentificaguia4").onclick = function(){
 					i3GEO.guias.mostraGuiaFerramenta(idjanela+"i3GEOidentificaguia4",idjanela+"i3GEOidentificaguia");
-					new YAHOO.widget.Button(idjanela+"i3GEOidentificabotao1",{onclick:{fn: function(){
+					var b = new YAHOO.widget.Button(idjanela+"i3GEOidentificabotao1",{onclick:{fn: function(){
 						if(i3GEOF.identifica.propJanelas[idjanela].temaAtivo && i3GEOF.identifica.propJanelas[idjanela].temaAtivo !== ""){
 							var ltema = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.identifica.propJanelas[idjanela].temaAtivo);
 							if(ltema.identifica == "nao" || ltema.identifica == "NAO"){
@@ -225,6 +225,7 @@ i3GEOF.identifica = {
 							$i(idjanela+"i3GEOidentificaocorrencia").innerHTML = $trad('selecionaTema',i3GEOF.identifica.dicionario);
 						}
 					}}});
+					b.addClass("abrir");
 				};
 				$i(idjanela+"i3GEOidentificaguia5").onclick = function(){
 					i3GEO.guias.mostraGuiaFerramenta(idjanela+"i3GEOidentificaguia5",idjanela+"i3GEOidentificaguia");
