@@ -1,14 +1,19 @@
 <div id='i3GEOinseregraficoguiasYUI' class='yui-navset' style='top: 0px; cursor: pointer; left: 0px;'>
 	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
-		<li><a>
-				<em><div id='i3GEOanalisageometrias1' style='text-align: center; left: 0px;'>{{{captura}}}</div></em>
-			</a></li>
-		<li><a>
-				<em><div id='i3GEOanalisageometrias2' style='text-align: center; left: 0px;'>{{{lista}}}</div></em>
-			</a></li>
-		<li><a>
-				<em><div id='i3GEOanalisageometrias3' style='text-align: center; left: 0px;'>{{{analisa}}}</div></em>
-			</a></li>
+		<li>
+			<div id='i3GEOanalisageometrias1' style='text-align: center; left: 0px;'>
+				<a> <em>{{{captura}}}</em>
+				</a>
+			</div>
+		</li>
+		<li>
+			<a> <em><div id='i3GEOanalisageometrias2' style='text-align: center; left: 0px;'>{{{lista}}}</div></em>
+			</a>
+		</li>
+		<li>
+			<a> <em><div id='i3GEOanalisageometrias3' style='text-align: center; left: 0px;'>{{{analisa}}}</div></em>
+			</a>
+		</li>
 	</ul>
 </div>
 <div class='geralFerramentas' style='left: 0px; top: 0px; width: 98%; height: 86%;'>
@@ -46,39 +51,32 @@
 			</select>
 			<input id='i3GEOanalisageometriasbotaocalculo' type='button' value='{{{aplicar}}}' />
 		</p>
+		<p class='paragrafo'>{{{perimetro}}}:
 		<p class='paragrafo'>
-			{{{perimetro}}}:
-
-			<p class='paragrafo'>
 			<select id='i3GEOanalisageometriasselecaofuncoes' style='position: relative; top: -3px;'><option value='' selected>---</option>
-			<option value='union'>{{{uniao}}}</option>
-			<option value='intersection'>{{{interseccao}}}</option>
-			<option value='difference>'>{{{diferenca}}}</option>
-			<option value='symdifference'>{{{diferencaInversa}}}</option>
-			<option value='convexhull'>{{{convexo}}}</option>
+				<option value='union'>{{{uniao}}}</option>
+				<option value='intersection'>{{{interseccao}}}</option>
+				<option value='difference>'>{{{diferenca}}}</option>
+				<option value='symdifference'>{{{diferencaInversa}}}</option>
+				<option value='convexhull'>{{{convexo}}}</option>
 			</select>
 			<input id='i3GEOanalisageometriasbotaofuncoes' type='button' value='{{{aplicar}}}' />
 		</p>
 
-				<p class='paragrafo'>{{{operacaoGeom3}}}:
-				<p class='paragrafo'>
-					<select id='i3GEOanalisageometriasselecaofuncoes1' style='position: relative; top: -3px;'>
-						<option value='' selected>---</option>
-						<option value='convexhull'>{{{convexo}}}</option>
-						<option value='boundary'>{{{entorno}}}</option>
-					</select>
-					<input id='i3GEOanalisageometriasbotaofuncoes1' type='button' value='{{{aplicar}}}' />
-				</p>
-				<div id='i3GEOanalisageometriasmen2' style='text-align: left; left: 0px'>
-					<p class='paragrafo'>{{{ajuda3}}}
-					<p class='paragrafo'>
-						{{{ajuda4}}}:
-						<a href='http://www.opengeospatial.org/standards/sfs' target='blank'>OGC</a>
-						,
-						<a href='http://postgis.refractions.net/docs/ch06.html' target='blank'>PostGis, </a>
-						e
-						<a href='http://www.vividsolutions.com/jts/tests/index.html' target='blank'>JTS</a>
-					<p class='paragrafo'>{{{ajuda5}}}
-				</div>
+		<p class='paragrafo'>{{{operacaoGeom3}}}:
+		<p class='paragrafo'>
+			<select id='i3GEOanalisageometriasselecaofuncoes1' style='position: relative; top: -3px;'>
+				<option value='' selected>---</option>
+				<option value='convexhull'>{{{convexo}}}</option>
+				<option value='boundary'>{{{entorno}}}</option>
+			</select>
+			<input id='i3GEOanalisageometriasbotaofuncoes1' type='button' value='{{{aplicar}}}' />
+		</p>
+		<div id='i3GEOanalisageometriasmen2' style='text-align: left; left: 0px'>
+			<p class='paragrafo'>{{{ajuda3}}}
+			<p class='paragrafo'>
+				{{{ajuda4}}}: <a href='http://www.opengeospatial.org/standards/sfs' target='blank'>OGC</a> , <a href='http://postgis.refractions.net/docs/ch06.html' target='blank'>PostGis, </a> e <a href='http://www.vividsolutions.com/jts/tests/index.html' target='blank'>JTS</a>
+			<p class='paragrafo'>{{{ajuda5}}}
+		</div>
 	</div>
 </div>
