@@ -173,7 +173,7 @@ i3GEOF.graficoTema = {
 		titulo = "<div  id='i3GEOFgraficotemaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("t37a")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=40' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
-			"320px",
+			"330px",
 			"",
 			"",
 			"",
