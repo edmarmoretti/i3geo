@@ -90,14 +90,16 @@ i3GEOF.etiqueta = {
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.etiqueta.html();
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOetiquetabotao1",
 				{onclick:{fn: i3GEOF.etiqueta.ativa}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar150");
+			b = new YAHOO.widget.Button(
 				"i3GEOetiquetabotao2",
 				{onclick:{fn: i3GEOF.etiqueta.desativa}}
 			);
+			b.addClass("rodar150");
 			i3GEOF.etiqueta.ativaFoco();
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}

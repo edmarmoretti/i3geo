@@ -156,36 +156,32 @@ i3GEOF.legenda =
 				$i("i3GEOlegendaguia5").onclick = function() {
 					i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia5", "i3GEOlegendaguia");
 				};
-				new YAHOO.widget.Button("i3GEOlegendabotao1", {
+				var b = new YAHOO.widget.Button("i3GEOlegendabotao1", {
 					onclick : {
 						fn : i3GEOF.legenda.mudaLegenda
 					}
 				});
-				if (navm) {
-					$i("i3GEOlegendabotao1-button").style.width = "0px";
-				}
-				new YAHOO.widget.Button("i3GEOlegendabotao2", {
+				b.addClass("rodar150");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao2", {
 					onclick : {
 						fn : i3GEOF.legenda.adicionaClasse
 					}
 				});
-				// if(navm)
-				// {$i("i3GEOlegendabotao2-button").style.width = "0px";}
-
-				new YAHOO.widget.Button("i3GEOlegendabotao3", {
+				b.addClass("rodar150");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao3", {
 					onclick : {
 						fn : i3GEOF.legenda.adicionaConta
-					},
-					width : "100px"
+					}
 				});
-				$i("i3GEOlegendabotao3-button").style.width = "200px";
-				new YAHOO.widget.Button("i3GEOlegendabotao15", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao15", {
 					onclick : {
 						fn : i3GEOF.legenda.adicionaOpacidade
 					}
 				});
-				$i("i3GEOlegendabotao15-button").style.width = "200px";
-				new YAHOO.widget.Button("i3GEOlegendabotaoRamp", {
+				b.addClass("rodar");
+
+				b = new YAHOO.widget.Button("i3GEOlegendabotaoRamp", {
 					onclick : {
 						fn : function() {
 							var tabela = $i("i3GEOlegendalegenda");
@@ -195,73 +191,68 @@ i3GEOF.legenda =
 						}
 					}
 				});
-				$i("i3GEOlegendabotaoRamp-button").style.width = "200px";
-				new YAHOO.widget.Button("i3GEOlegendabotao4", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao4", {
 					onclick : {
 						fn : i3GEOF.legenda.paleta
 					}
 				});
-				new YAHOO.widget.Button("i3GEOlegendabotao5", {
+				b.addClass("rodar100");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao5", {
 					onclick : {
 						fn : i3GEOF.legenda.simbU
 					}
 				});
-				$i("i3GEOlegendabotao5-button").style.width = "200px";
-				new YAHOO.widget.Button("i3GEOlegendabotao6", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao6", {
 					onclick : {
 						fn : i3GEOF.legenda.valorU
 					}
 				});
-				$i("i3GEOlegendabotao6-button").style.width = "200px";
-				new YAHOO.widget.Button("i3GEOlegendabotao7", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao7", {
 					onclick : {
 						fn : i3GEOF.legenda.representacao
 					}
 				});
-				$i("i3GEOlegendabotao7-button").style.width = "200px";
-
-				new YAHOO.widget.Button("i3GEOlegendabotao8", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao8", {
 					onclick : {
 						fn : i3GEOF.legenda.valorC
 					}
 				});
-				$i("i3GEOlegendabotao8-button").style.width = "120px";
-
-				new YAHOO.widget.Button("i3GEOlegendabotao9", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao9", {
 					onclick : {
 						fn : i3GEOF.legenda.valorQ
 					}
 				});
-				$i("i3GEOlegendabotao9-button").style.width = "120px";
-
-				new YAHOO.widget.Button("i3GEOlegendabotaoQuantil", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotaoQuantil", {
 					onclick : {
 						fn : i3GEOF.legenda.valorQu
 					}
 				});
-				$i("i3GEOlegendabotaoQuantil-button").style.width = "120px";
-
-				new YAHOO.widget.Button("i3GEOlegendabotaoQN", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotaoQN", {
 					onclick : {
 						fn : i3GEOF.legenda.valorQN
 					}
 				});
-				$i("i3GEOlegendabotaoQN-button").style.width = "120px";
-
-				new YAHOO.widget.Button("i3GEOlegendabotao10", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao10", {
 					onclick : {
 						fn : i3GEOF.legenda.aplicaEstilo
 					}
 				});
-				$i("i3GEOlegendabotao10-button").style.width = "220px";
-
-				new YAHOO.widget.Button("i3GEOlegendabotao17", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotao17", {
 					onclick : {
 						fn : i3GEOF.legenda.alteraGeometriaTema
 					}
 				});
-				$i("i3GEOlegendabotao17-button").style.width = "200px";
-				new YAHOO.widget.Button("i3GEOlegendabotaoSLDe", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotaoSLDe", {
 					onclick : {
 						fn : function() {
 							window.open(i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?funcao=tema2sld&tema="
@@ -269,16 +260,17 @@ i3GEOF.legenda =
 						}
 					}
 				});
-				$i("i3GEOlegendabotaoSLDe-button").style.width = "200px";
-				new YAHOO.widget.Button("i3GEOlegendabotaoSLDi", {
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button("i3GEOlegendabotaoSLDi", {
 					onclick : {
 						fn : function() {
 							i3GEO.tema.dialogo.aplicarsld(i3GEOF.legenda.tema);
 						}
 					}
 				});
-				$i("i3GEOlegendabotaoSLDi-button").style.width = "200px";
-				new YAHOO.widget.Button("i3GEOlegendabotaoIncluirLabel", {
+				b.addClass("rodar");
+
+				b = new YAHOO.widget.Button("i3GEOlegendabotaoIncluirLabel", {
 					onclick : {
 						fn : function() {
 							var par, p, temp, cp;
@@ -304,7 +296,8 @@ i3GEOF.legenda =
 						}
 					}
 				});
-				new YAHOO.widget.Button("i3GEOlegendabotaoExcluirLabel", {
+				b.addClass("rodar100");
+				b = new YAHOO.widget.Button("i3GEOlegendabotaoExcluirLabel", {
 					onclick : {
 						fn : function() {
 							var p, temp, cp;
@@ -323,7 +316,8 @@ i3GEOF.legenda =
 						}
 					}
 				});
-				new YAHOO.widget.Button("i3GEOlegendabotaoPropriedadeLabel", {
+				b.addClass("rodar100");
+				b = new YAHOO.widget.Button("i3GEOlegendabotaoPropriedadeLabel", {
 					onclick : {
 						fn : function() {
 							i3GEO.util.scriptTag(
@@ -334,6 +328,7 @@ i3GEOF.legenda =
 						}
 					}
 				});
+				b.addClass("abrir100");
 				i3GEOF.legenda.ativaFoco();
 				i3GEOF.legenda.mostralegenda();
 				i3GEO.util.comboItens("i3GEOlegendaSelItem", i3GEOF.legenda.tema, function(retorno) {
@@ -748,7 +743,7 @@ i3GEOF.legenda =
 			i3GEOF.legenda.aviso = false;
 			try {
 				if (retorno.data != undefined) {
-					var ins, i, ajuda, id, re, exp, n;
+					var b, ins, i, ajuda, id, re, exp, n;
 					// se nao for do tipo raster
 					if (retorno.data[0].proc === "") {
 						ins =
@@ -869,11 +864,12 @@ i3GEOF.legenda =
 							ins += "</div>";
 						}
 						$i("i3GEOlegendaresultado").innerHTML = ins + ajuda;
-						new YAHOO.widget.Button("i3GEOlegendabotao16", {
+						b = new YAHOO.widget.Button("i3GEOlegendabotao16", {
 							onclick : {
 								fn : i3GEOF.legenda.aplicaProcessos
 							}
 						});
+						b.addClass("rodar");
 					}
 				} else {
 					$i("i3GEOlegendaresultado").innerHTML = "<p style=color:red >Erro<br>";
@@ -1549,7 +1545,7 @@ i3GEOF.legenda =
 				}
 				i3GEOF.legenda.aguarde.visibility = "visible";
 				if (retorno.data != undefined) {
-					var l, i, sct, combo, n;
+					var b, l, i, sct, combo, n;
 					retorno = retorno.data;
 					i3GEOF.legenda.estilos = retorno.split("|");
 					combo =
@@ -1565,7 +1561,7 @@ i3GEOF.legenda =
 						"<table class='lista5'><tr><td><span class=paragrafo >" + $trad('estiloEdicao', i3GEOF.legenda.dicionario)
 							+ ":</span></td><td>" + combo
 							+ "</td><td></td></tr></table>&nbsp;(ap&oacute;s adicionar ou excluir, aplique a altera&ccedil;&atilde;o)<br>";
-					new YAHOO.widget.Button("i3GEOlegendabotao11", {
+					b = new YAHOO.widget.Button("i3GEOlegendabotao11", {
 						onclick : {
 							fn : function() {
 								try {
@@ -1586,7 +1582,8 @@ i3GEOF.legenda =
 							}
 						}
 					});
-					new YAHOO.widget.Button("i3GEOlegendabotao12", {
+					b.addClass("rodar100");
+					b = new YAHOO.widget.Button("i3GEOlegendabotao12", {
 						onclick : {
 							fn : function() {
 								try {
@@ -1607,7 +1604,8 @@ i3GEOF.legenda =
 							}
 						}
 					});
-					new YAHOO.widget.Button("i3GEOlegendabotao13", {
+					b.addClass("rodar100");
+					b = new YAHOO.widget.Button("i3GEOlegendabotao13", {
 						onclick : {
 							fn : function() {
 								try {
@@ -1628,7 +1626,8 @@ i3GEOF.legenda =
 							}
 						}
 					});
-					new YAHOO.widget.Button("i3GEOlegendabotao14", {
+					b.addClass("rodar100");
+					b = new YAHOO.widget.Button("i3GEOlegendabotao14", {
 						onclick : {
 							fn : function() {
 								try {
@@ -1649,6 +1648,7 @@ i3GEOF.legenda =
 							}
 						}
 					});
+					b.addClass("rodar100");
 					i3GEOF.legenda.aguarde.visibility = "hidden";
 					i3GEOF.legenda.mostraEstilo(0);
 				} else {
@@ -1876,7 +1876,7 @@ i3GEOF.legenda =
 				var monta =
 					function(retorno) {
 						if (retorno.data && retorno.data[0].proc == "") {
-							var ins = [], i, re, t;
+							var b, ins = [], i, re, t;
 							ins.push("<p class='paragrafo' ><input type=button value='" + $trad('graficoPizza', i3GEOF.legenda.dicionario)
 								+ "' id=i3GEOlegendaGraficoPizza /></p>");
 							ins.push("<p class='paragrafo' >" + $trad('numeroOcorrenciasClasses', i3GEOF.legenda.dicionario) + "</p>");
@@ -1910,7 +1910,7 @@ i3GEOF.legenda =
 						}
 						i3GEOF.legenda.aguarde.visibility = "hidden";
 
-						new YAHOO.widget.Button("i3GEOlegendaGraficoPizza", {
+						b = new YAHOO.widget.Button("i3GEOlegendaGraficoPizza", {
 							onclick : {
 								fn : function() {
 									var js = i3GEO.configura.locaplic + "/ferramentas/graficointerativo1/dependencias.php";
@@ -1918,7 +1918,7 @@ i3GEOF.legenda =
 								}
 							}
 						});
-						$i("i3GEOlegendaGraficoPizza-button").style.width = "200px";
+						b.addClass("abrir");
 					}, p =
 					i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid=" + i3GEO.configura.sid
 						+ "&funcao=contagemclasse&tema=" + i3GEOF.legenda.tema, cp = new cpaint();

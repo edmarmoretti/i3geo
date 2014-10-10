@@ -11,7 +11,7 @@ i3GEOF.etiqueta.dicionario = {
 		es : ""
 	} ],
 	'desativaEtiquetas' : [ {
-		pt : "Desativar todas as etiquetas",
+		pt : "Desativar",
 		en : "",
 		es : ""
 	} ]

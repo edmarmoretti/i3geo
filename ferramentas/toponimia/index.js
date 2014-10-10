@@ -111,10 +111,11 @@ i3GEOF.toponimia = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOtoponimiaguia3","i3GEOtoponimiaguia");
 				i3GEOF.toponimia.testa();
 			};
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOtoponimiabotao1",
 				{onclick:{fn: i3GEOF.toponimia.cria}}
 			);
+			b.addClass("rodar");
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de escolha
 			//

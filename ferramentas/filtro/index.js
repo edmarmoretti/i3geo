@@ -113,14 +113,17 @@ i3GEOF.filtro = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia3","i3GEOfiltroguia");
 				i3GEOF.filtro.aplicaFiltro("sim");
 			};
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOfiltrobotao1",
 				{onclick:{fn: function(){i3GEOF.filtro.aplicaFiltro("nao");}}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar150");
+			b = new YAHOO.widget.Button(
 				"i3GEOfiltrobotao2",
 				{onclick:{fn: i3GEOF.filtro.limpaFiltro}}
 			);
+			b.addClass("rodar150");
+			
 			i3GEO.util.mensagemAjuda("i3GEOfiltromen1",$i("i3GEOfiltromen1").innerHTML);
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de cria&ccedil;&atilde;o do filtro
