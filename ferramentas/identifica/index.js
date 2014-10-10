@@ -449,7 +449,7 @@ i3GEOF.identifica = {
 			ins += '	</div>';
 			ins += '	<div class=guiaobj id="'+idjanela+'i3GEOidentificaguia3obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
 			ins += $trad('resolucaoBusca',i3GEOF.identifica.dicionario)+':<br><br>';
-			ins += '	<div class="styled-select" ><input type="text" value="5" id="'+idjanela+'"i3GEOidentificaresolucao" /></div>';
+			ins += '	<div class="styled-select" ><input type="text" value="12" id="'+idjanela+'i3GEOidentificaresolucao" /></div>';
 			//<input onclick="javascript:this.select();" type=text class=digitar value=5 id="i3GEOidentificaresolucao" size=2 />';
 			ins += '	<br><br></div>';
 			ins += '	<div class=guiaobj id="'+idjanela+'i3GEOidentificaguia4obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';

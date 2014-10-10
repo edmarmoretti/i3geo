@@ -81,6 +81,16 @@ i3GEO.mapa =
 		 */
 		AUTORESIZE : false,
 		/**
+		 * Propriedade: RESOLUCAOTIP
+		 *
+		 * Resolu&ccedil;&atilde;o de busca utilizada no bal&atilde;o de identifica&ccedil;&atilde;o
+		 *
+		 * Tipo {numeric}
+		 *
+		 * Default {12}
+		 */
+		RESOLUCAOTIP : 12,
+		/**
 		 * Armazena o nome dos objetos geoXml adicionados ao mapa pela API do google maps
 		 *
 		 * Tipo {Array}
@@ -1137,7 +1147,7 @@ i3GEO.mapa =
 					retorna,
 					objposicaocursor.ddx,
 					objposicaocursor.ddy,
-					"5",
+					i3GEO.mapa.RESOLUCAOTIP,
 					"tip",
 					i3GEO.configura.locaplic,
 					i3GEO.configura.sid,
