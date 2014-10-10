@@ -2539,11 +2539,11 @@ i3GEOF.metaestat = {
 		 * Define como funcao de onclick i3GEOF.metaestat.editor.inicia()
 		 */
 		botaoJanelaEditor: function(){
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 					"i3GEOcartoBotaoEditor",
 					{onclick:{fn: i3GEOF.metaestat.editor.inicia}}
 			);
-			$i("i3GEOcartoBotaoEditor-button").style.width = (i3GEOF.metaestat.LARGURA / 2) - 15 + "px";
+			b.addClass("abrir100");
 		},
 		/**
 		 * Formata o botao que adiciona uma nova camada ao mapa e define a funcao que sera executada
@@ -2559,10 +2559,11 @@ i3GEOF.metaestat = {
 				YAHOO.i3GEO.janela.manager.find("i3geoCartoParametros").setFooter('<input type="button" id="i3GEOcartoBotaoAdicionaCamada" value="'+$trad('adicionaCamada',i3GEOF.metaestat.dicionario)+'" class="paragrafo" style="width:200px;cursor:pointer;color:blue" />');
 			}
 			if(!$i("i3GEOcartoBotaoAdicionaCamada-button")){
-				new YAHOO.widget.Button(
+				b = new YAHOO.widget.Button(
 						"i3GEOcartoBotaoAdicionaCamada",
 						{onclick:{fn: i3GEOF.metaestat.comum.adicionaCamada}}
 				);
+				b.addClass("rodar");
 				$i("i3GEOcartoBotaoAdicionaCamada-button").style.width = largura + "px";
 			}
 		},
@@ -2572,11 +2573,11 @@ i3GEOF.metaestat = {
 		 * Define como funcao de onclick i3GEOF.metaestat.analise.inicia()
 		 */
 		botaoJanelaAnalise: function(){
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 					"i3GEOcartoBotaoAnalise",
 					{onclick:{fn: i3GEOF.metaestat.analise.inicia}}
 			);
-			$i("i3GEOcartoBotaoAnalise-button").style.width = (i3GEOF.metaestat.LARGURA / 2) - 15 + "px";
+			b.addClass("abrir100");
 		},
 		/**
 		 * Obtem a lista de variaveis cadastradas e monta as opcoes correspondentes
