@@ -511,7 +511,7 @@ i3GEO.gadgets = {
 					temp.style.height = "30px";
 				}
 				if(objid.style.height && parseInt(objid.style.height,10) === 0){
-					objid.style.height = "30px";
+					objid.style.height = "0px";
 				}
 
 				ins += '<div class="bd" style="top:0px;'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:3;line-height:1.4" >' +
