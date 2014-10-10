@@ -908,7 +908,7 @@ border-top-color: transparent;
 border-bottom-color: transparent;
 }
 .styled-select {
-width: 270px;
+width: 252px;
 overflow: hidden;
 background: #F8F8F8;
 border: 1px solid #DDDDDD;
@@ -2232,6 +2232,10 @@ width: 250px;
 background: url(../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
 width: 150px;
 }
+.rodar100 .first-child button {
+background: url(../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
+width: 100px;
+}
 .enviar .first-child button {
 background: url(../imagens/oxygen/16x16/svn-commit.png) 5% 50% no-repeat;
 width: 250px;
@@ -2243,6 +2247,10 @@ width: 250px;
 .abrir150 .first-child button {
 background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
 width: 150px;
+}
+.abrir100 .first-child button {
+background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
+width: 100px;
 }
 div.olMap {
 z-index: 0;
