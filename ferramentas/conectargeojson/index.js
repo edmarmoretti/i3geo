@@ -88,7 +88,7 @@ i3GEOF.conectargeojson = {
 		{i3GEO.janela.tempoMsg($trad('msgNavegador',i3GEOF.conectargeojson.dicionario));}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.conectargeojson.html();
-			var monta = function(retorno){
+			var b,monta = function(retorno){
 				var raiz,nraiz,i,combo;
 				raiz = retorno.data.canais;
 				nraiz = raiz.length;
@@ -101,10 +101,11 @@ i3GEOF.conectargeojson = {
 				$i("i3GEOconectargeojsonCombo").innerHTML = combo;
 			};
 			i3GEO.php.listaRSSwsARRAY(monta,"GEOJSON");
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOconectargeojsonbotao1",
 				{onclick:{fn: i3GEOF.conectargeojson.adiciona}}
 			);
+			b.addClass("rodar");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -120,7 +121,7 @@ i3GEOF.conectargeojson = {
 	html:function(){
 		var ins = '' +
 		'<p class="paragrafo" >'+$trad('insereEndereco',i3GEOF.conectargeojson.dicionario)+'<br><br>' +
-		$inputText("","","i3GEOconectargeojsonurl","",45,"") +
+		$inputText("","","i3GEOconectargeojsonurl","",40,"") +
 		'<br><br>' +
 		'<div id="i3GEOconectargeojsonCombo" style="left:1px;display:block;width:315px;text-align:left;">' + $trad("o1") +
 		'</div>' +
