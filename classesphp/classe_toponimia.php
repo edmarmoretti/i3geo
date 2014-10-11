@@ -301,6 +301,27 @@ $item Lista de Itens separados por v&iacute;rgula que ser&atilde;o utilizados.
 		$this->layer->setmetadata("TIP",$item);
 		return("ok");
 	}
+	/*
+	 function: pegaDadosEtiquetas
+
+	ativa a inclus&atilde;o de etiquetas em um tema
+
+	parameter:
+	$item Lista de Itens separados por v&iacute;rgula que ser&atilde;o utilizados.
+	*/
+	function pegaDadosEtiquetas()
+	{
+		if(!$this->layer){return "erro";}
+		$itens = $this->layer->getmetadata("ITENS");
+		$itensdesc = $this->layer->getmetadata("ITENSDESC");
+		$tips = $this->layer->getmetadata("TIP");
+		$res = array(
+				"itens"=>explode(",",$itens),
+				"itensdesc"=>explode(",",$itensdesc),
+				"tips"=>explode(",",$tips)
+		);
+		return($res);
+	}
 /*
 function: removeEtiquetas
 

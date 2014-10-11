@@ -36,7 +36,18 @@ Desativa as etiquetas de um tema.
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;
+/*
+ Valor: PEGADADOSETIQUETAS
 
+Obtém os dados sobre itens, itensdesc, etc
+
+<Toponimia->pegaDadosEtiquetas>
+*/
+	case "PEGADADOSETIQUETAS":
+		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
+		$m = new Toponimia($map_file,$tema);
+		$retorno = $m->pegaDadosEtiquetas();
+	break;
 }
 if (!connection_aborted()){
 	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")

@@ -143,7 +143,7 @@ i3GEOF.etiqueta = {
 		//cria a janela flutuante
 		titulo = "<div  id='i3GEOFetiquetaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("d7at")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"380px",
+			"450px",
 			"175px",
 			"",
 			"",
@@ -177,6 +177,21 @@ i3GEOF.etiqueta = {
 		if(i3GEO.temaAtivo != ""){
 			i3GEO.php.listaItensTema(i3GEOF.etiqueta.montaListaItens,i3GEO.temaAtivo);
 		}
+	},
+	pegaDadosEtiquetas: function(){
+		if(i3GEOF.etiqueta.aguarde.visibility === "visible")
+		{return;}
+		var cp = new cpaint(),
+			temp,
+			p;
+		i3GEOF.etiqueta.aguarde.visibility = "visible";
+		temp = function(retorno){
+			i3GEOF.etiqueta.aguarde.visibility = "hidden";
+
+		};
+		p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaDadosEtiquetas&tema="+i3GEO.temaAtivo;
+		cp.set_response_type("JSON");
+		cp.call(p,"etiqueta",temp);
 	},
 	/*
 	Function: montaListaItens
