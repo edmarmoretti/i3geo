@@ -17,7 +17,8 @@ Ativa as etiquetas de um tema.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
-		$retorno = $m->ativaEtiquetas($item);
+		$retorno = $m->ativaEtiquetas($tips);
+		$m->layer->setmetadata("ITENS",$itens);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;

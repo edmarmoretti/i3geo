@@ -58,7 +58,7 @@ class Toponimia
 
 	Objeto layer
 	*/
-	protected $layer;
+	public $layer;
 	/*
 	Variavel: $nome
 
@@ -313,12 +313,15 @@ $item Lista de Itens separados por v&iacute;rgula que ser&atilde;o utilizados.
 	{
 		if(!$this->layer){return "erro";}
 		$itens = $this->layer->getmetadata("ITENS");
+		$itens = explode(",",$itens);
 		$itensdesc = $this->layer->getmetadata("ITENSDESC");
+		$itensdesc = explode(",",$itensdesc);
 		$tips = $this->layer->getmetadata("TIP");
 		$res = array(
-				"itens"=>explode(",",$itens),
-				"itensdesc"=>explode(",",$itensdesc),
-				"tips"=>explode(",",$tips)
+				"itens"=>$itens,
+				"itensdesc"=>$itensdesc,
+				"tips"=>explode(",",$tips),
+				"comb"=>array_combine($itens,$itensdesc)
 		);
 		return($res);
 	}
