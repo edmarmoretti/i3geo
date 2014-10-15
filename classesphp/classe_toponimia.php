@@ -314,14 +314,18 @@ $item Lista de Itens separados por v&iacute;rgula que ser&atilde;o utilizados.
 		if(!$this->layer){return "erro";}
 		$itens = $this->layer->getmetadata("ITENS");
 		$itens = explode(",",$itens);
-		$itensdesc = $this->layer->getmetadata("ITENSDESC");
+		$itensdesc = mb_convert_encoding($this->layer->getmetadata("ITENSDESC"),"UTF-8","ISO-8859-1");
 		$itensdesc = explode(",",$itensdesc);
+		$itenslink = $this->layer->getmetadata("ITENSLINK");
+		$itenslink = explode(",",$itenslink);
+
 		$tips = $this->layer->getmetadata("TIP");
+
 		$res = array(
 				"itens"=>$itens,
-				"itensdesc"=>$itensdesc,
-				"tips"=>explode(",",$tips),
-				"comb"=>array_combine($itens,$itensdesc)
+				"itensdesc"=>array_combine($itens,$itensdesc),
+				"itenslink"=>array_combine($itens,$itenslink),
+				"tips"=>explode(",",$tips)
 		);
 		return($res);
 	}

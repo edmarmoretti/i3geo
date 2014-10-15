@@ -17,10 +17,14 @@ Ativa as etiquetas de um tema.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
-		$retorno = $m->ativaEtiquetas($tips);
+		$m->layer->setmetadata("IDENTIFICA","");
+		$m->layer->setmetadata("TIP",$tips);
 		$m->layer->setmetadata("ITENS",$itens);
+		$m->layer->setmetadata("ITENSDESC",base64_decode($itensdesc));
+		$m->layer->setmetadata("ITENSLINK",base64_decode($itenslink));
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
+		$retorno = "ok";
 	break;
 /*
 Valor: REMOVEETIQUETAS

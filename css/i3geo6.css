@@ -915,7 +915,15 @@ border: 1px solid #DDDDDD;
 height: 22px;
 border-radius: 2px;
 }
-.styled-select select {
+.styled-select150 {
+width: 150px;
+overflow: hidden;
+background: #F8F8F8;
+border: 1px solid #DDDDDD;
+height: 22px;
+border-radius: 2px;
+}
+.styled-select select, .styled-select150 select {
 width: 120%;
 height: 22px;
 border: 0;
@@ -934,7 +942,7 @@ background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll
 background-size: 16px 144px;
 }
 }
-.styled-select input {
+.styled-select input, .styled-select150 input {
 width: 100%;
 height: 22px;
 border: 0;
