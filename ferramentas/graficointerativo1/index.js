@@ -366,7 +366,7 @@ i3GEOF.graficointerativo1 =
 		 * ["n;x","'Argentina';33796870","'Paraguay';4773464","'Brazil';151525400","'Chile';13772710"]
 		 */
 		inicia : function(iddiv, idjanela) {
-			var t,b;
+			var b;
 			$i(iddiv).innerHTML += i3GEOF.graficointerativo1.html(idjanela);
 			$i(idjanela + "i3GEOgraficointerativo1Acumula").checked = i3GEOF.graficointerativo1.propJanelas[idjanela].acumula;
 			$i(idjanela + "i3GEOgraficointerativo1Relativa").checked = i3GEOF.graficointerativo1.propJanelas[idjanela].relativa;
@@ -396,6 +396,7 @@ i3GEOF.graficointerativo1 =
 			};
 			// mostra o grafico
 			$i(idjanela + "i3GEOgraficointerativo1guia4").onclick = function() {
+				var t;
 				if (i3GEOF.graficointerativo1.propJanelas[idjanela].tipo === "") {
 					alert($trad("escolhatipo", i3GEOF.graficointerativo1.dicionario));
 					return;
@@ -638,7 +639,7 @@ i3GEOF.graficointerativo1 =
 			minimiza = function() {
 				i3GEO.janela.minimiza(id);
 			};
-			titulo = "&nbsp;&nbsp;&nbsp;" + i3GEOF.graficointerativo1.propJanelas[idjanela].titulo;
+			titulo = "&nbsp;&nbsp;&nbsp;" + idjanela;
 			janela = i3GEO.janela.cria("380px", "280px", "", "", "", titulo, id, false, "hd", cabecalho, minimiza);
 			divid = janela[2].id;
 			$i(divid).style.marginTop = "0px";
