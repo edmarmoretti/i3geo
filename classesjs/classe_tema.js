@@ -621,7 +621,7 @@ i3GEO.tema = {
 			 */
 			aplicarsld: function(idtema){
 				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.aplicarsld()","aplicarsld","aplicarsld");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.aplicarsld()","aplicarsld","aplicarsld","dependencias.php","i3GEOF.aplicarsld.iniciaJanelaFlutuante()");
 			},
 			/*
 		Function: editorsql

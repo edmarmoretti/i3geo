@@ -54,6 +54,18 @@ i3GEOF.aplicarsld = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.aplicarsld.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.aplicarsld.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -101,14 +113,8 @@ i3GEOF.aplicarsld = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<form id=i3GEOaplicarsldf target="i3GEOaplicarsldiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/aplicarsld/upload.php?tema='+i3GEO.temaAtivo+'" method="post" ENCTYPE="multipart/form-data">' +
-		'<p class="paragrafo" >'+$trad('arquivo',i3GEOF.animacao.dicionario)+': <br><input type="file" size=18 name="i3GEOaplicarsld" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<br><p class="paragrafo" ><input id=i3GEOaplicarsldbotao1 type="button" value="'+$trad('aplica',i3GEOF.animacao.dicionario)+'" size=12 name="submit">' +
-		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
-		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
-		'</form>' +
-		'<br><iframe name=i3GEOaplicarsldiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.aplicarsld.MUSTACHE, i3GEOF.aplicarsld.mustacheHash());
 		return ins;
 	},
 	/*
