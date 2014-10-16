@@ -541,7 +541,7 @@ i3GEO.tema = {
 			 */
 			procuraratrib: function(idtema){
 				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.procuraratrib()","busca","busca");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.procuraratrib()","busca","busca","dependencias.php","i3GEOF.busca.iniciaJanelaFlutuante()");
 			},
 			/*
 		Function: tabela

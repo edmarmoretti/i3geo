@@ -63,6 +63,17 @@ i3GEOF.busca = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.busca.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.busca.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -118,33 +129,8 @@ i3GEOF.busca = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<div style=margin-left:5px; >';
-		ins += '<div class=styled-select >';
-		ins += '<input type=text value="" title="'+$trad('digita',i3GEOF.busca.dicionario)+'" id="i3GEObuscapalavra" />';
-		ins += '</div>';
-		ins += '<br><p class="paragrafo" ><input id=i3GEObuscabotao1 size=20  type=button value="'+$trad('procura',i3GEOF.busca.dicionario)+'" />';
-		ins += '<br><table summary="Lista de opcoes" class=lista3 width="250px">';
-		ins += '	<tr>';
-		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscaqualquer name=i3GEObuscatipo checked /></td>';
-		ins += '		<td>'+$trad('busca',i3GEOF.busca.dicionario)+'</td>';
-		ins += '	</tr>';
-		ins += '	<tr>';
-		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscaexata name=i3GEObuscatipo /></td>';
-		ins += '		<td>'+$trad('busca2',i3GEOF.busca.dicionario)+'</td>';
-		ins += '	</tr><tr><td></td><td>&nbsp;</td></tr>';
-		ins += '	<tr>';
-		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscamapa name=i3GEObuscaonde checked /></td>';
-		ins += '		<td>'+$trad('busca3',i3GEOF.busca.dicionario)+'</td>';
-		ins += '	</tr>';
-		ins += '	<tr>';
-		ins += '		<td><input style="cursor:pointer;border:0px solid white;" type=radio id=i3GEObuscaregiao name=i3GEObuscaonde /></td>';
-		ins += '		<td>'+$trad('busca4',i3GEOF.busca.dicionario)+'</td>';
-		ins += '	</tr>';
-		ins += '</table>';
-		ins += '<br><p class="paragrafo" ><b>'+$trad('busca5',i3GEOF.busca.dicionario)+'</b>';
-		ins += '<div id=i3GEObuscalistai class=digitar style="text-align:left;width:250px;overflow:auto;height:115px">';
-		ins += '</div></div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.busca.MUSTACHE, i3GEOF.busca.mustacheHash());
 		return ins;
 	},
 	/*
