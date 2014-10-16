@@ -305,10 +305,7 @@ i3GEO.analise = {
 		 * Ferramenta agrupa elementos
 		 */
 		agrupaElementos : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.agrupaElementos()",
-				"agrupaelementos",
-				"agrupaElementos");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.agrupaElementos()","agrupaelementos","agrupaElementos","dependencias.php","i3GEOF.agrupaElementos.iniciaJanelaFlutuante()");
 		}
 	},
 	/***************************************************************************
