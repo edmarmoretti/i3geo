@@ -836,7 +836,7 @@ class Metaestat{
 					$colunastabela[] = $colunastabela;
 					$colunastabela = array_unique($colunastabela);
 				}
-				$vis = implode($colunastabela,",");
+				$vis = implode(",",$colunastabela);
 			}
 			$sqlf = $colunageo." from (select st_setsrid(".$colunageo.",".$srid.") as $colunageo,$vis from ".$meta["esquemadb"].".".$meta["tabela"]." /*FW*//*FW*/) as foo using unique ".$meta["identificador"]." using srid=".$srid;
 			$sqlf = str_replace(",,",",",$sqlf);
