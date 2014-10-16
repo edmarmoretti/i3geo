@@ -58,6 +58,17 @@ i3GEOF.analisaGeometrias = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.analisaGeometrias.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.analisaGeometrias.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -153,65 +164,8 @@ i3GEOF.analisaGeometrias = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins += '<div id=i3GEOinseregraficoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
-		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a  ><em><div id="i3GEOanalisageometrias1" style="text-align:center;left:0px;" >'+$trad('captura',i3GEOF.analisaGeometrias.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a  ><em><div id="i3GEOanalisageometrias2" style="text-align:center;left:0px;" >'+$trad('lista',i3GEOF.analisaGeometrias.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a  ><em><div id="i3GEOanalisageometrias3" style="text-align:center;left:0px;" >'+$trad('analisa',i3GEOF.analisaGeometrias.dicionario)+'</div></em></a></li>';
-		ins += '	</ul>';
-		ins += '</div>';
-		ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
-		ins += '	<div class=guiaobj id="i3GEOanalisageometrias1obj" style="left:1px;90%;display:none;">';
-		ins += '		<p class=paragrafo >'+$trad('escolheTema',i3GEOF.analisaGeometrias.dicionario)+':';
-		ins += '		<div id="i3GEOanalisageometriastemas" style="width:90%;text-align:left;left:0px">';
-		ins += '		</div><br>';
-		ins += '		<p class=paragrafo >'+$trad('tipoSelecao',i3GEOF.analisaGeometrias.dicionario)+':';
-		ins += '		<div id="i3GEOanalisageometriasoperacao" style="width:90%;text-align:left;left:0px">';
-		ins += '		</div><br>';
-		ins += '		<p class=paragrafo ><input id=i3GEOanalisageometriasbotao1 size=45 type=button value="'+$trad('capturaGeom',i3GEOF.analisaGeometrias.dicionario)+'"/><br><br>';
-		ins += '		<div id=i3GEOanalisageometriasmen1 style="top:5px;left:0px"><p class=paragrafo >'+$trad('ajuda',i3GEOF.analisaGeometrias.dicionario);
-		ins += '		</div>';
-		ins += '	</div>';
-		ins += '	<div class=guiaobj id="i3GEOanalisageometrias2obj" style="left:1px;display:none;">';
-		ins += '		<div id=i3GEOanalisageometriaslistadegeometrias style="width:95%;text-align:left;left:0px;">';
-		ins += '		</div><br><br>';
-		ins += '		<div style="text-align:left;left:0px" id=i3GEOanalisageometriasmen3 >';
-		ins += '		<p class=paragrafo >'+$trad('ajuda2',i3GEOF.analisaGeometrias.dicionario);
-		ins += '		</div>';
-		ins += '	</div>';
-		ins += '	<div class=guiaobj id="i3GEOanalisageometrias3obj" style="left:1px;display:none;">';
-		ins += '			<p class=paragrafo ><input style="cursor:pointer;vertical-align:text-bottom" type=checkbox id=i3geoanalisageometriassemprecalcula /> '+$trad('recalculaGeom',i3GEOF.analisaGeometrias.dicionario);
-		ins += '			<p class=paragrafo >'+$trad('operacaoGeom',i3GEOF.analisaGeometrias.dicionario)+':';
-		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaocalculo style="width:150px;position:relative;top:-3px;"  >';
-		ins += '				<option value="" selected >---</option>';
-		ins += '				<option value=area >'+$trad('area',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '				<option value=perimetro >'+$trad('perimetro',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '			</select><br><br><input id=i3GEOanalisageometriasbotaocalculo type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
-		ins += '			<p class=paragrafo >'+$trad('perimetro',i3GEOF.analisaGeometrias.dicionario)+':';
-		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes style="width:150px;position:relative;top:-3px;" >';
-		ins += '				<option value="" selected >---</option>';
-		ins += '				<option value=union >'+$trad('uniao',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '				<option value=intersection >'+$trad('interseccao',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '				<option value=difference >'+$trad('diferenca',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '				<option value=symdifference >'+$trad('diferencaInversa',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '				<option value=convexhull >'+$trad('convexo',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '			</select><br><br><input id=i3GEOanalisageometriasbotaofuncoes type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
-		ins += '			<p class=paragrafo >'+$trad('operacaoGeom3',i3GEOF.analisaGeometrias.dicionario)+':';
-		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes1 style="width:150px;position:relative;top:-3px;" >';
-		ins += '				<option value="" selected >---</option>';
-		ins += '				<option value=convexhull >'+$trad('convexo',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '				<option value=boundary >'+$trad('entorno',i3GEOF.analisaGeometrias.dicionario)+'</option>';
-		ins += '			</select><br><br><input id=i3GEOanalisageometriasbotaofuncoes1 type=button value="'+$trad('aplicar',i3GEOF.analisaGeometrias.dicionario)+'"/></p>';
-		ins += '		<div id=i3GEOanalisageometriasmen2 style="text-align:left;left:0px" >';
-		ins += '			<p class=paragrafo >'+$trad('ajuda3',i3GEOF.analisaGeometrias.dicionario);
-		ins += '			<p class=paragrafo >'+$trad('ajuda4',i3GEOF.analisaGeometrias.dicionario)+': <a href="http://www.opengeospatial.org/standards/sfs" target=blank >OGC</a>, <a href="http://postgis.refractions.net/docs/ch06.html" target=blank >PostGis, </a>e <a href="http://www.vividsolutions.com/jts/tests/index.html" target=blank >JTS</a>';
-		ins += '			<p class=paragrafo >'+$trad('ajuda5',i3GEOF.analisaGeometrias.dicionario);
-		ins += '		</div>';
-		ins += '	</div>';
-
-		ins += '</div>	';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.analisaGeometrias.MUSTACHE, i3GEOF.analisaGeometrias.mustacheHash());
 		return ins;
 	},
 	/*
