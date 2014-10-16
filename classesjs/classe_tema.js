@@ -528,7 +528,7 @@ i3GEO.tema = {
 			 */
 			filtro: function(idtema){
 				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.filtro()","filtro","filtro");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.filtro()","filtro","filtro","dependencias.php","i3GEOF.filtro.iniciaJanelaFlutuante()");
 			},
 			/*
 		Function: procuraratrib

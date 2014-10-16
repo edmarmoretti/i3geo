@@ -58,6 +58,17 @@ i3GEOF.filtro = {
 	Armazena o combo com os itens do tema
 	*/
 	comboTemas: "",
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.filtro.dicionario);
+		return dicionario;
+	},
 	/*
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
@@ -123,7 +134,7 @@ i3GEOF.filtro = {
 				{onclick:{fn: i3GEOF.filtro.limpaFiltro}}
 			);
 			b.addClass("rodar150");
-			
+
 			i3GEO.util.mensagemAjuda("i3GEOfiltromen1",$i("i3GEOfiltromen1").innerHTML);
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de cria&ccedil;&atilde;o do filtro
@@ -149,45 +160,7 @@ i3GEOF.filtro = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '' +
-		'<div id=i3GEOfiltroguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">'+
-		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'+
-		'		<li><a  ><em><div id="i3GEOfiltroguia1" style="text-align:center;left:0px;" >'+$trad('constroi',i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
-		'		<li><a  ><em><div id="i3GEOfiltroguia2" style="text-align:center;left:0px;" >'+$trad('digita',i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
-		'		<li><a  ><em><div id="i3GEOfiltroguia3" style="text-align:center;left:0px;" >'+$trad('testa',i3GEOF.filtro.dicionario)+'</div></em></a></li>'+
-		'	</ul>'+
-		'</div><br>'+
-		'<p class=paragrafo >'+
-		'	<input id=i3GEOfiltrobotao1 size=18  type="button" value="'+$trad('inclui',i3GEOF.filtro.dicionario)+'" />'+
-		'	<input id=i3GEOfiltrobotao2 size=18 type="button" value="'+$trad('remove',i3GEOF.filtro.dicionario)+'" />'+
-		'</p>'+
-		'<div class=guiaobj id="i3GEOfiltroguia1obj" style="left:1px;display:block;">'+
-		'	<div id=i3GEOfiltropar style="display:block;position:relative;top:5px;left:0px;">'+
-		'		<table summary="" id="i3GEOfiltroparametros" style="width:380px">'+
-		'			<tr><td></td><td></td>'+
-		'				<td style=background-color:yellow >'+$trad('item',i3GEOF.filtro.dicionario)+'</td>'+
-		'				<td style=background-color:yellow >'+$trad('operador',i3GEOF.filtro.dicionario)+'</td>'+
-		'				<td style=background-color:yellow >'+$trad('valor',i3GEOF.filtro.dicionario)+'</td>'+
-		'				<td style=background-color:yellow ></td>'+
-		'				<td style=background-color:yellow >'+$trad('conector',i3GEOF.filtro.dicionario)+'</td>'+
-		'			</tr>'+
-		'			<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'+
-		'		</table>'+
-		'	</div>'+
-		'	<div id=i3GEOfiltroresultado style="position:relative;top:5px;left:0px">'+
-		'	</div>'+
-		'	<div id=i3GEOfiltrovalores style="position:relative;top:5px;left:0px">'+
-		'	</div>'+
-		'	<div id=i3GEOfiltromen1 style=top:15px;left:0px; ><p class=paragrafo >'+$trad('ajuda',i3GEOF.filtro.dicionario)+'</div>'+
-		'</div>'+
-		'<div class=guiaobj id="i3GEOfiltroguia2obj" style="left:1px;display:none;">'+
-		'	<p class=paragrafo >'+$trad('digitaFiltro',i3GEOF.filtro.dicionario)+':'+
-		'	<div class=styled-select >' +
-		'	<input type="text" value = "" id="i3GEOfiltrofiltro" />' +
-		'	</div>' +
-		'</div>'+
-		'<div class=guiaobj id="i3GEOfiltroguia3obj" style="left:1px;display:none;">'+
-		'</div>';
+		var ins = Mustache.render(i3GEOF.filtro.MUSTACHE, i3GEOF.filtro.mustacheHash());
 		return ins;
 	},
 	/*
