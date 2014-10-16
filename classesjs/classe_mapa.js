@@ -702,7 +702,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta que permite animar o mapa atual
 			 */
 			animacao : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.animacao()", "animacao", "animacao");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.animacao()","animacao","animacao","dependencias.php","i3GEOF.animacao.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: opacidade

@@ -56,6 +56,18 @@ i3GEOF.animacao = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.animacao.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.animacao.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -100,19 +112,8 @@ i3GEOF.animacao = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = "";
-		ins += "" +
-			"<div style='text-align:center;position:relative;cursor:pointer'  >" +
-			"	<img title='"+$trad('inicia',i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_inicia.png' onclick='i3GEOF.animacao.dispara()' />&nbsp;" +
-			"	<img title='"+$trad('rebobina',i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_para.png' onclick='i3GEOF.animacao.termina()' />&nbsp;" +
-			"	<img title='"+$trad('rapido',i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_avanca.png' onclick='i3GEOF.animacao.maisrapido()' />&nbsp;" +
-			"	<img title='"+$trad('lento',i3GEOF.animacao.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/player_volta.png' onclick='i3GEOF.animacao.maislento()' />&nbsp;" +
-			"</div>" +
-			"<div id='i3GEOFanimacaoLista' ></div><br>" +
-			'<div id=i3GEOanimacaomen1 style="display:block;left:0px;">' +
-			'	<p class=paragrafo >'+$trad('ajuda',i3GEOF.animacao.dicionario)+'</p>' +
-			'</div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.animacao.MUSTACHE, i3GEOF.animacao.mustacheHash());
 		return ins;
 	},
 	listaDeCamadas: function(camadas){
