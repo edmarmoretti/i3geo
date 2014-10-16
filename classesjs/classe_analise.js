@@ -259,10 +259,7 @@ i3GEO.analise = {
 		 * Ferramenta buffer
 		 */
 		buffer : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.buffer()",
-				"buffer",
-				"buffer");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.buffer()","buffer","buffer","dependencias.php","i3GEOF.buffer.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: distanciaptpt
