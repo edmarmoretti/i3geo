@@ -55,6 +55,22 @@ i3GEOF.conectargeojson = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.conectargeojson.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.conectargeojson.dicionario);
+		dicionario["conectaGeoJson"] = $inputText('','','i3GEOconectargeojsonurl','',45,'');
+		dicionario["aguarde"] = $trad("o1");
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["aplica"] = $trad("p14");
+		return dicionario;
+	},
+	/*
 	/*
 	Function: iniciaDicionario
 
@@ -118,14 +134,8 @@ i3GEOF.conectargeojson = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '' +
-		'<p class="paragrafo" >'+$trad('insereEndereco',i3GEOF.conectargeojson.dicionario)+'<br><br>' +
-		$inputText("","","i3GEOconectargeojsonurl","",40,"") +
-		'<br><br>' +
-		'<div id="i3GEOconectargeojsonCombo" style="left:1px;display:block;width:315px;text-align:left;">' + $trad("o1") +
-		'</div>' +
-		'<br><br><input id=i3GEOconectargeojsonbotao1 type="buttom" value="'+$trad("p14")+'" />';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.conectargeojson.MUSTACHE, i3GEOF.conectargeojson.mustacheHash());
 		return ins;
 	},
 	/*

@@ -3106,7 +3106,7 @@ i3GEO.arvoreDeTemas = {
 		 */
 		conectargeojson : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-					+ "/ferramentas/conectargeojson/index.js",
+					+ "/ferramentas/conectargeojson/dependencias.php",
 					"i3GEOF.conectargeojson.criaJanelaFlutuante()",
 					"i3GEOF.conectargeojson_script");
 		},
