@@ -661,6 +661,7 @@ i3GEOF.graficointerativo1 =
 				$i(idjanela + "i3GEOgraficointerativo1ComboTemas").style.display = "block";
 				if ($i(idjanela + "i3GEOgraficointerativo1ComboTemasId")) {
 					$i(idjanela + "i3GEOgraficointerativo1ComboTemasId").onchange = function() {
+						i3GEOF.graficointerativo1.propJanelas[idjanela].dadosComboItens = "";
 						var tema = $i(idjanela + "i3GEOgraficointerativo1ComboTemasId").value;
 						i3GEO.mapa.ativaTema(tema);
 						i3GEOF.graficointerativo1.propJanelas[idjanela].tema = tema;
