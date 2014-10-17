@@ -628,24 +628,27 @@ i3GEO.util = {
 	h {String} - (opcional) altura da imagem
 
 	mouseover - funcao que sera executada no evento mouseover
-	
+
 	Retorno:
-	
+
 	array [boolean,obj] - indica se foi criado ou se ja existia | objeto criado
 		 */
-		criaPin: function(id,imagem,w,h,mouseover){
+		criaPin: function(id,imagem,w,h,mouseover,onde){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.criaPin()");}
-			if(arguments.length < 1 || id === ""){
+			if(!id || id === ""){
 				id = "boxpin";
 			}
-			if(arguments.length < 2 || imagem === ""){
+			if(!imagem || imagem === ""){
 				imagem = i3GEO.configura.locaplic+'/imagens/marker.png';
 			}
-			if(arguments.length < 3 || w === ""){
+			if(!w || w === ""){
 				w = 21;
 			}
-			if(arguments.length < 4 || h === ""){
+			if(!h || h === ""){
 				h = 25;
+			}
+			if(!onde || onde === ""){
+				onde = document.body;
 			}
 			var p = $i(id);
 			if (!p){
@@ -667,7 +670,7 @@ i3GEO.util = {
 				else if(mouseover){
 					novoel.onmouseover = mouseover;
 				}
-				document.body.appendChild(novoel);
+				onde.appendChild(novoel);
 				i3GEO.util.PINS.push(id);
 				return [true,novoel];
 			}
@@ -693,18 +696,19 @@ i3GEO.util = {
 		 */
 		posicionaImagemNoMapa: function(id,x,y){
 			//TODO permitir posicionar imagem usando lat long
-			if(typeof(console) !== 'undefined'){console.warn("i3GEO.util.posicionaImagemNoMapa()");}
 			var i,mx,my;
-			if(x && x != "")
-			{objposicaocursor.telax = x;}
-			if(y && y != "")
-			{objposicaocursor.telay = y;}
+			if(!x){
+				x = objposicaocursor.telax;
+			}
+			if(!y){
+				y = objposicaocursor.telay;
+			}
 			i = $i(id);
 			mx = parseInt(i.style.width,10) / 2;
 			my = parseInt(i.style.height,10) / 2;
-			i.style.top = objposicaocursor.telay - my + "px";
-			i.style.left = objposicaocursor.telax - mx + "px";
-			return [objposicaocursor.telay - my,objposicaocursor.telax - mx];
+			i.style.top = y - my + "px";
+			i.style.left = x - mx + "px";
+			return [y - my,x - mx];
 		},
 		/*
 	Function: escondePin
@@ -2794,6 +2798,7 @@ i3GEO.util = {
 							'-//W3C//DTD XHTML 1.0 Transitional//EN',
 							'http://www.w3.org/TR/html4/loose.dtd'
 					);
+					//var newDoctype = document.implementation.createDocumentType('HTML');
 					if (document.doctype) {
 						document.doctype.parentNode.replaceChild(newDoctype, document.doctype);
 					}

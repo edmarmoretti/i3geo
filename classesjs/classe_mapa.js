@@ -1110,6 +1110,7 @@ i3GEO.mapa =
 										i3GEO.janela.TIPS.push('marcaIdentifica');
 
 										pos = i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
+
 										balloon = new Balloon();
 										BalloonConfig(balloon, 'GBox');
 										balloon.delayTime = 0;
