@@ -237,10 +237,7 @@ i3GEO.analise = {
 		 * Ferramenta centro m&eacute;dio
 		 */
 		centromassa : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.centromassa()",
-				"centromassa",
-				"centromassa");
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.centromassa()","centromassa","centromassa","dependencias.php","i3GEOF.centromassa.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: nptPol

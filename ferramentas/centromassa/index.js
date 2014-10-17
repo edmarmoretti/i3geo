@@ -54,6 +54,18 @@ i3GEOF.centromassa = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.centromassa.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.centromassa.dicionario);
+		return dicionario;
+	},
+	/*
 	/*
 	Function: iniciaDicionario
 
@@ -98,12 +110,8 @@ i3GEOF.centromassa = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins +=	'<div style="padding:5px;background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOcentromassaresultado" >';
-		ins +=	'</div>';
-		ins +=	'<div style="top:10px;left:0px;display:block;width:98%;color:red" id="i3GEOcentromassafim" >';
-		ins +=	'</div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.centromassa.MUSTACHE, i3GEOF.centromassa.mustacheHash());
 		return ins;
 	},
 	/*
