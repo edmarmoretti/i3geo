@@ -779,7 +779,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta carregamapa
 			 */
 			carregaMapa : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.carregaMapa()", "carregamapa", "carregaMapa");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.carregaMapa()","carregamapa","carregaMapa","dependencias.php","i3GEOF.carregaMapa.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: convertews

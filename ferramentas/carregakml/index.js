@@ -55,6 +55,20 @@ i3GEOF.carregakml = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.carregakml.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.carregakml.dicionario);
+		dicionario["nomeArquivo"] = $inputText('','','i3GEOcarregakmlurl','',40,'');
+		dicionario["digite"] = $trad("o1");
+		dicionario["botao"] = $trad("p14");
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -116,14 +130,8 @@ i3GEOF.carregakml = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '' +
-		'<p class="paragrafo" >'+$trad('insereKml',i3GEOF.carregakml.dicionario)+':<br><br>' +
-		$inputText("","","i3GEOcarregakmlurl","",30,"") +
-		'<br><br>' +
-		'<div id="i3GEOcarregakmlCombo" style="left:1px;display:block;width:315px;text-align:left;">' + $trad("o1") +
-		'</div>' +
-		'<br><br><input id=i3GEOcarregakmlbotao1 type="buttom" value="'+$trad("p14")+'" />';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.carregakml.MUSTACHE, i3GEOF.carregakml.mustacheHash());
 		return ins;
 	},
 	/*

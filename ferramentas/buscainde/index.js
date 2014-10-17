@@ -46,7 +46,7 @@ Classe: i3GEOF.buscainde
 i3GEOF.buscainde = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
@@ -56,13 +56,25 @@ i3GEOF.buscainde = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.buscainde.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.buscainde.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
-	
+
 	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-	
+
 	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/	
+	*/
 	iniciaDicionario: function(){
 		if(typeof(i3GEOF.buscainde.dicionario) === 'undefined'){
 			i3GEO.util.scriptTag(
@@ -74,14 +86,14 @@ i3GEOF.buscainde = {
 		else{
 			i3GEOF.buscainde.iniciaJanelaFlutuante();
 		}
-	},	
+	},
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -92,22 +104,22 @@ i3GEOF.buscainde = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<iframe style="width:99%;height:99%;border:0px" src="'+i3GEO.configura.locaplic+'/pacotes/cswclient/csw.html"></iframe>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.buscainde.MUSTACHE, i3GEOF.buscainde.mustacheHash());
 		return ins;
 	},
 	/*
 	Function: iniciaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
 		cabecalho = function(){};

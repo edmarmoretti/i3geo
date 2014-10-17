@@ -278,10 +278,7 @@ i3GEO.analise = {
 		 * Ferramenta centr&oacute;ide
 		 */
 		centroide : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.centroide()",
-				"centroide",
-				"centroide");
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.centroide()","centroide","centroide","dependencias.php","i3GEOF.centroide.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: dissolve

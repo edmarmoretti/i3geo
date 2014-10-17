@@ -63,6 +63,18 @@ i3GEOF.bufferpt = {
 	criaJanelaFlutuante: function(x,y){
 		i3GEOF.bufferpt.iniciaDicionario(x,y);
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.bufferpt.dicionario);
+		dicionario["distancia"] = $inputText('','','i3GEOFbufferptDistancia','',10,0);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -115,11 +127,8 @@ i3GEOF.bufferpt = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '' +
-		'<p class=paragrafo >'+$trad('entorno',i3GEOF.bufferpt.dicionario)+'</p>' +
-		$inputText("","","i3GEOFbufferptDistancia","",10,0) +
-		'<br><br><p class=paragrafo ><input id=i3GEObufferptbotao1 size=16  type=button value="'+$trad('criaEntorno',i3GEOF.bufferpt.dicionario)+'"/>';
+	html:function(idjanela) {
+		var ins = Mustache.render(i3GEOF.bufferpt.MUSTACHE, i3GEOF.bufferpt.mustacheHash(idjanela));
 		return ins;
 	},
 	/*

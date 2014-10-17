@@ -64,6 +64,7 @@ i3GEOF.aplicarsld = {
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.aplicarsld.dicionario);
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["temaAtivo"] = i3GEO.temaAtivo;
 		return dicionario;
 	},
 	/*
