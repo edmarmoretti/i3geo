@@ -708,10 +708,14 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 			if ($considera == "sim"){
 				//pega os valores dos itens do registro
 				foreach ($itens as $item){
+					$vitem = $shape->values[$item];
+					if (!mb_detect_encoding($vitem,"UTF-8",true)){
+						$vitem = mb_convert_encoding($vitem,"UTF-8","ISO-8859-1");
+					}
 					if($chaves == false)
-					{$v[] = $shape->values[$item];}
+					{$v[] = $vitem;}
 					else
-					{$v[$item] = $shape->values[$item];}
+					{$v[$item] = $vitem;}
 				}
 				//pega o centroide
 				if($centroide == true){
