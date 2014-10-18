@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>i3GEO - OpenLayers</title>
+<script src="../classesjs/i3geonaocompacto.js"></script>
+<script src="../pacotes/openlayers/OpenLayers2131.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/black.css">
+<style>
+#catalogo a, #catalogo div {
+	text-align:left;
+	font-size: 14px;
+	margin-top:15px;
+}
+</style>
+</head>
+<body style='margin-left:7px;background:white;' class=yui-skin-sam >
+<div style="top:50px;">
+	<div id="catalogo" style="width:250px;height:400px;border:1px solid;float:left;overflow:auto;text-align:left">
+
+	</div>
+	<div id=i3geo >
+		<div id=corpoMapa style="left:255px;width:700px;height:400px;background-image:url('../imagens/i3geo1bw.jpg');">
+		</div>
+	</div>
+</div>
+<div id="logMapa" ></div>
+
+<script>
+/************
+Esse exemplo mostra como acessar o catalogo de temas para montar uma forma de navegacao 
+
+customizada para incluir camadas ao mapa
+
+************/
+
+i3GEO.idioma.MOSTRASELETOR = false; //para nao mostrar as bandeiras de escolha do idioma
+i3GEO.configura.mapaRefDisplay = "none";//nao mostra o mapa de referencia
+i3GEO.cria();
+i3GEO.inicia();
+listaMenus();
+
+function listaMenus(){
+	var f = function(retorno) {
+		var s,r,c,i,cat = $i("catalogo"),t = "";
+		c = retorno.data.length;
+		for (i = 0;i < c; i++) {
+			r = retorno.data[i];
+			//if(r.publicado != "NAO"){
+				s = "<br><b>MENU </b><a href='#' onclick='listaGrupos("+r.idmenu+")'>"+r.nomemenu+"</a><br>";
+				s += montaTemasRaiz(r.temas);
+				s += "<div style='padding-left:5px;' id='menu_"+r.idmenu+"' ></div>";
+				t += s;
+			//}
+		}
+		cat.innerHTML = t;
+	};
+	i3GEO.php.pegalistademenus(f);
+}
+function listaGrupos(id_menu){
+	var f = function(retorno) {
+		var s, r,c, i, cat = $i("menu_"+id_menu), t = "";
+
+		c = retorno.data.grupos.length;
+		for (i = 0;i < c; i++) {
+			r = retorno.data.grupos[i];
+			s = "";
+			if(r.publicado != "NAO"){
+				if(r.nome){
+					s += "<br><b>GRUPO </b><a href='#' onclick='listaSubGrupos("+id_menu+","+r.id_n1+")'>"+r.nome+"</a>";
+				}
+				if(r.temasraiz){
+					s += montaTemasRaiz(r.temasraiz);
+				}
+				s += "<div style='padding-left:5px;' id='grupo_"+r.id_n1+"' ></div>";
+				t += s;
+			}
+		}
+		cat.innerHTML = t;
+	};
+	i3GEO.php.pegalistadegrupos(f, id_menu, "nao");
+}
+function listaSubGrupos(id_menu, id_grupo){
+	var f = function(retorno) {
+		if(retorno.data.subgrupo){
+			var s, r,c, i, cat = $i("grupo_"+id_grupo), t = "";
+			c = retorno.data.subgrupo.length;
+			for (i = 0;i < c; i++) {
+				r = retorno.data.subgrupo[i];
+				s = "";
+				if(r.publicado != "NAO"){
+					if(r.nome){
+						s += "<br><b>SUBGRUPO </b><a href='#' onclick='listaDeTemas("+id_menu+","+id_grupo+","+r.id_n2+")'>"+r.nome+"</a>";
+					}
+					s += "<div style='padding-left:5px;' id='subgrupo_"+r.id_n2+"' ></div>";
+					t += s;
+				}
+			}
+			cat.innerHTML = t;
+		}
+	};
+	i3GEO.php.pegalistadeSubgrupos(f, id_menu, id_grupo);
+}
+function listaDeTemas(id_menu, id_grupo, id_subgrupo){
+	var f = function(retorno) {
+		if(retorno.data.temas){
+			var ins = [], cat = $i("subgrupo_"+id_subgrupo);
+			ins = montaTemas(retorno.data.temas);
+			cat.innerHTML = ins;
+		}
+	};
+	i3GEO.php.pegalistadetemas(f, id_menu, id_grupo, id_subgrupo);
+}
+function montaTemas(temas){
+	var c,i,r, ins = [];
+	c = temas.length;
+	for (i = 0;i < c; i++) {
+		r = temas[i];
+		if(r.publicado != "NAO" && r.nome){
+			s = "<input type=checkbox onclick='i3GEO.arvoreDeTemas.verificaStatusTema(this,\""
+				+ r.tid + "\")' />"+r.nome+"<br><br>";
+			ins.push(s);
+		}
+	}
+	return ins.join("\n");
+}
+function montaTemasRaiz(temas){
+	var s,c,i,r,ins = [];
+	c = temas.length;
+	for (i = 0;i < c; i++) {
+		r = temas[i];
+		if(r.nome_tema){
+			s = "<br><input type=checkbox onclick='i3GEO.arvoreDeTemas.verificaStatusTema(this,\""
+				+ r.codigo_tema + "\")' />"+r.nome_tema;
+			ins.push(s);
+		}
+	}
+	return ins.join("\n");
+}
+</script>
+</body>
+</html>

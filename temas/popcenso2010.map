@@ -1,0 +1,74 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "user=postgres password=postgres dbname=sigeo host=localhost port=5432 options='-c client_encoding=LATIN1'"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (SELECT m.gid, m.nm_municip, m.sigla, m.codibge7, p.pop, m.geom FROM limites.municipios2010 as m, pop.popcenso as p
+where m.codibge7 = p.codibge7) as foo using unique gid using srid=4326"
+    METADATA
+      "itensdesc"	"Município,UF,População"
+      "itens"	"nm_municip,sigla,pop"
+      "TEMA"	"População Residente Censo 2010"
+      "convcaracter"	""
+      "cortepixels"	"0"
+      "ltempoconvencode"	""
+      "editorsql"	""
+      "ltempoitemfim"	""
+    END # METADATA
+    NAME "popcenso2010"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "<= 5231"
+      EXPRESSION ([pop]<=5231)
+      STYLE
+        ANGLE 0
+        COLOR 255 250 250
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 5231 e <= 10934"
+      EXPRESSION (([pop]>5231)and([pop]<=10934))
+      STYLE
+        ANGLE 0
+        COLOR 255 230 230
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 10934 e <= 23468.5"
+      EXPRESSION (([pop]>10934)and([pop]<=23468.5))
+      STYLE
+        ANGLE 0
+        COLOR 255 150 150
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 23468.5"
+      EXPRESSION ([pop]>23468.5)
+      STYLE
+        ANGLE 0
+        COLOR 255 0 0
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+
