@@ -720,6 +720,14 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 	if($req->getValueByName("LAYER") == ""){
 		$req->setParameter("LAYER",$l->name);
 	}
+	//muda o title se for vazio
+	$nclass = $l->numclasses;
+	for($i=0;$i<$nclass;$i++){
+		$classe = $l->getclass($i);
+		if($classe->title === ""){
+			$classe->title = $classe->name;
+		}
+	}
 	if($req->getValueByName("FORMAT") == ""){
 		$req->setParameter("FORMAT","image/png");
 	}

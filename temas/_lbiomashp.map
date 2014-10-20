@@ -67,10 +67,10 @@ MAP
         COLOR 151 214 202
         OUTLINECOLOR 255 255 255
       END # STYLE
-      TITLE ""
-    END # CLASS
+     END # CLASS
     CLASS
       NAME "MATA ATLANTICA"
+      TITLE "Mata Atlântica"
       EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLANTICA')
       STYLE
         COLOR 22 193 134
