@@ -567,7 +567,7 @@ i3GEO.tema = {
 			 */
 			etiquetas: function(idtema){
 				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.etiquetas()","etiqueta","etiqueta");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.etiquetas()","etiqueta","etiqueta","dependencias.php","i3GEOF.etiqueta.iniciaJanelaFlutuante()");
 			},
 			/*
 		Function: editaLegenda

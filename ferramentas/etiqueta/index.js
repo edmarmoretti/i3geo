@@ -54,6 +54,18 @@ i3GEOF.etiqueta = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.etiqueta.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.etiqueta.dicionario);
+		dicionario["aplica"] = $trad("p14");
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -113,14 +125,8 @@ i3GEOF.etiqueta = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins += '<p class="paragrafo" >'+$trad('selecionaItem',i3GEOF.etiqueta.dicionario)+':<br>';
-		ins += '<div id=i3GEOetiquetalistai class=digitar style="text-align:left;left:0px;top:0px;width;95%;height:150px;overflow:auto;display:block;"></div>';
-		ins += '<br>';
-		ins += '<p class="paragrafo" >';
-		ins += '<input id=i3GEOetiquetabotao1 size=35  type=button value="'+$trad("p14")+'" />';
-		ins += '<input id=i3GEOetiquetabotao2 size=35  type=button value="'+$trad('desativaEtiquetas',i3GEOF.etiqueta.dicionario)+'" />';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.etiqueta.MUSTACHE, i3GEOF.etiqueta.mustacheHash());
 		return ins;
 	},
 	/*
