@@ -662,7 +662,7 @@ Altera um mapfile conforme o editor espec&iacute;fico de uma caracter&iacute;sti
 */
 function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,testar)
 {
-	var campos = [], par = "", prog = "", temp, re;
+	var callback,sUrl,i,valor,teste1, valorTeste,campos = [], par = "", prog = "", temp;
 	if(arguments.length < 6){testar = false;}
 	if(tipo == "grupousr"){
 		campos = [];
@@ -692,9 +692,9 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 		//
 		//valida&ccedil;&atilde;o
 		//
-		var valorTeste = $i("extensao").value;
+		valorTeste = $i("extensao").value;
 		if(valorTeste != ""){
-			var teste1 = valorTeste.split(" ");
+			teste1 = valorTeste.split(" ");
 			if(teste1.length != 4)
 			{alert("Sao necessarios 4 valores em extensao");return;}
 			if(teste1[0]*1 > teste1[2]*1)
@@ -702,9 +702,9 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			if(teste1[1]*1 > teste1[3]*1)
 			{alert("ymin maior que ymax em extensao");return;}
 		}
-		var valorTeste = $i("escala").value;
+		valorTeste = $i("escala").value;
 		if(valorTeste != ""){
-			var teste1 = valorTeste * 1;
+			teste1 = valorTeste * 1;
 			if(teste1 <= 0){
 				alert("Valor de escala incorreto");
 				return;
@@ -720,7 +720,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		prog = "../php/editormapfile.php?funcao=alterarConexao";
 		//codifica o valor de data
-		var temp = "";
+		temp = "";
 		if($i("data") && $i("data").value != ""){
 			temp = i3GEO.util.base64encode($i("data").value);
 		}
@@ -755,9 +755,9 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	prog += "&testar="+testar;
 	try{
-		for (var i=0;i<campos.length;i++){
+		for (i=0;i<campos.length;i++){
 			if($i(campos[i])){
-				var valor = "";
+				valor = "";
 				if($i(campos[i]).disabled === false){
 					valor = $i(campos[i]).value;
 				}
@@ -767,8 +767,8 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}catch(e){alert(e);}
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do layer= "+codigoLayer);
-	var sUrl = prog+par;
-	var callback = {
+	sUrl = prog+par;
+	callback = {
 			success:function(o)	{
 				try{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{

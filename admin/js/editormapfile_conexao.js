@@ -17,13 +17,15 @@ function editorDados(codigoMap,codigoLayer)
 
 function montaEditorDados(dados)
 {
-	var temp = function(){
-		salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false);
-	};
 	//nao use modal aqui!!!!
-	core_montaEditor(temp,"500px","650px","","Conex&atilde;o",false,true,false);
+	core_montaEditor(
+		function(){
+			salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false);
+		},
+		"500px","650px","","Conex&atilde;o",false,true,false
+	);
 
-	var d = [],valor = "",idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],
+	var ins = "",idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],
 		idsMetaestat = ["connection","data","tileitem","tileindex","tipooriginal"],
 		limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
 		param = {
@@ -60,7 +62,6 @@ function montaEditorDados(dados)
 			titulo:"Tipo de representa&ccedil;&atilde;o (tipooriginal) - para temas do tipo WMS",id:"",value:dados.tipooriginal,tipo:"text",div:"<div id=cTipoOriginal ></div>"}
 			]
 		};
-	var ins = "";
 
 	if(dados.colunas != "" && dados.colunas != undefined){
 		ins += "<p>O layer possui as seguintes colunas na tabela de atributos: ";
@@ -149,8 +150,8 @@ function montaEditorDados(dados)
 	};
 	$i("metaestat").onchange = function(){
 		core_desativaforms(idsMetaestat);
-		valor = $i("metaestat").value,
-			d = [];
+		var valor = $i("metaestat").value,
+			d;
 		if(valor === "SIM"){
 			d = ["metaestat_id_medida_variavel"];
 		}
