@@ -605,7 +605,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta de geolocalizacao do usuario
 			 */
 			geolocal : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.geolocal()", "geolocal", "geolocal");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.geolocal()","geolocal","geolocal","dependencias.php","i3GEOF.geolocal.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: listaDeMapasBanco

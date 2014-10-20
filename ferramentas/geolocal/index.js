@@ -59,6 +59,18 @@ i3GEOF.geolocal = {
 		criaJanelaFlutuante: function(){
 			i3GEOF.geolocal.iniciaDicionario();
 		},
+		/**
+		 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+		 */
+		MUSTACHE : "",
+		/**
+		 * Susbtitutos para o template
+		 */
+		mustacheHash : function() {
+			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.geolocal.dicionario);
+			dicionario["locaplic"] = i3GEO.configura.locaplic;
+			return dicionario;
+		},
 		/*
 	Function: iniciaDicionario
 
@@ -116,24 +128,8 @@ i3GEOF.geolocal = {
 
 	String com o c&oacute;digo html
 		 */
-		html:function(){
-			var ins = "";
-			ins += "" +
-			'<button title="'+$trad('capturaCoord',i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.capturaCoordenada()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/gps.png" /></button>' +
-			'<button title="'+$trad('limpa',i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.limpa()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/erase.png" /></button>' +
-			'<button title="'+$trad('exclui',i3GEOF.geolocal.dicionario)+'" onclick="i3GEOF.geolocal.criaShp()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-gps-create.png" /></button>' +
-			'<img title="' + $trad('paraCaptura',i3GEOF.geolocal.dicionario) + '" onclick="i3GEOF.geolocal.paraTempo()" style="top:-3px;left:10px;position:relative;" src="'+i3GEO.configura.locaplic+'/imagens/oxygen/16x16/clock.png" >' +
-			'&nbsp;<form id="i3GEOFgeolocalFormTempo" style="left: 162px;position: absolute;top: 10px;width: 30px;">' +
-			'<div class=styled-select style="width:80px;">' +
-			'<input type="text" id="i3GEOFgeolocalTempo" title="'+$trad('intervalo',i3GEOF.geolocal.dicionario)+'" value="0" /></form>' +
-			'</div>' +
-			"<div style='height:130px;overflow:auto;top:10px;text-align:center;position:relative;cursor:pointer;padding:5px;' id='i3GEOFgeolocalListaDePontos' >" +
-			"</div>" +
-			"<br><div id='i3GEOFgeolocalNcoord' style='width: 30px; position: absolute;' ></div>" +
-			"<br><p class=paragrafo style='float:left;margin-right: 5px;top: 3px;position: relative;'>" + $trad('maximoPontos',i3GEOF.geolocal.dicionario) +
-			"<div class=styled-select style='position:relative;width: 60px;margin-left:5px;'>" +
-			'<input type="text" id="i3GEOFgeolocalMaximo" value="" />' +
-			"</div>";
+		html:function() {
+			var ins = Mustache.render(i3GEOF.geolocal.MUSTACHE, i3GEOF.geolocal.mustacheHash());
 			return ins;
 		},
 		/*
