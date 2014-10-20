@@ -53,6 +53,17 @@ i3GEOF.filtroarvore = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.filtroarvore.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.filtroarvore.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -96,24 +107,8 @@ i3GEOF.filtroarvore = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<p class=paragrafo >'+$trad('selecionaFiltro',i3GEOF.filtroarvore.dicionario)+'<br><br>' +
-			'<select onchange="i3GEO.arvoreDeCamadas.ARVORE = null;i3GEO.arvoreDeCamadas.FILTRO = this.value;i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)">' +
-			'<option value="naofaznada">---</option>' +
-			'<option value="">'+$trad('removeFiltro',i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="ligados">'+$trad('ligado',i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="desligados">'+$trad('desligado',i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="selecionados">'+$trad('comSelecao',i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="download">'+$trad('permiteDownload',i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="wms">'+$trad('wms',i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="raster">'+$trad('raster',i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'<option value="toponimia">'+$trad('apenasTexto',i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'</select><br><br>' +
-			$trad('operacao',i3GEOF.filtroarvore.dicionario)+'<br><br>' +
-			'<select onchange="i3GEOF.filtroarvore.lote(this)" >' +
-			'<option value="">---</option>' +
-			'<option value="excluir">'+$trad('exclui',i3GEOF.filtroarvore.dicionario)+'</option>' +
-			'</select>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.filtroarvore.MUSTACHE, i3GEOF.filtroarvore.mustacheHash());
 		return ins;
 	},
 	/*

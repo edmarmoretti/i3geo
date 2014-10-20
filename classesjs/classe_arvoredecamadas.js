@@ -2277,9 +2277,7 @@ i3GEO.arvoreDeCamadas = {
 		 * alterar o filtro aplicado a &aacute;rvore
 		 */
 		filtro : function() {
-			i3GEO.util.dialogoFerramenta(
-					"i3GEO.arvoreDeCamadas.dialogo.filtro()", "filtroarvore",
-					"filtroarvore");
+			i3GEO.util.dialogoFerramenta("i3GEO.arvoreDeCamadas.dialogo.filtro()","filtroarvore","filtroarvore","dependencias.php","i3GEOF.filtroarvore.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: dialogo.excluir Abre a janela de di&aacute;logo para o

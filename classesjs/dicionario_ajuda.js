@@ -809,7 +809,7 @@ g_traducao_ajuda = {
 			pt:"Filtra as camadas que s&atilde;o mostradas na &aacute;rvore de camadas conforme as caracter&iacute;sticas de cada uma.",
 			complemento:"",
 			//tela:"",
-			apijs:"i3GEO.arvoreDeCamadas"
+			apijs:"i3GEO.arvoreDeCamadas.dialogo.filtro"
 		},
 		"98": {
 			titulo: "Importar WMC",
