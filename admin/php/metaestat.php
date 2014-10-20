@@ -560,6 +560,7 @@ switch (strtoupper($funcao))
 				}
 				$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,"","","255","255","255","2");
 			}
+			exit;
 			retornaJSON("ok");
 			exit;
 		}

@@ -1,33 +1,21 @@
 MAP
-    FONTSET "../symbols/fontes.txt"
-    SYMBOLSET "../symbols/simbolos.sym"
-     
+SYMBOLSET ../symbols/simbolosv6.sym
+FONTSET   "../symbols/fontes.txt"
 LAYER
-    DATA "/var/www/50geotiff.tif"
-    METADATA
-      "cache"    ""
-      "classe"    "SIM"
-      "TEMALOCAL"    "NAO"
-      "DOWNLOAD"    "nao"
-      "tema"    "50geotiff"
-      "aplicaextensao"    ""
-    END # METADATA
-    NAME "teste"
-PROJECTION
-    "proj=merc"
-    "a=6378137"
-    "b=6378137"
-    "lat_ts=0.0"
-    "lon_0=0.0"
-    "x_0=0.0"
-    "y_0=0"
-    "k=1.0"
-    "units=m"
-  END # PROJECTION
-    
-    STATUS OFF
-    TEMPLATE "none.htm"
-    TYPE RASTER
- 
- END # LAYER
-END # Map File
+	NAME "teste"
+	TEMPLATE "none.htm"
+	TYPE line
+	DATA ""
+	METADATA
+		TEMA "Teste de localidades"
+		CLASSE "SIM"
+	END
+    CLASS
+        NAME ""
+        STYLE
+        	COLOR 0 0 0
+        	SIZE 12
+        END
+    END
+END
+END
