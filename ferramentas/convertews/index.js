@@ -55,6 +55,19 @@ i3GEOF.converteMapaWS = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.converteMapaWS.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.converteMapaWS.dicionario);
+		dicionario["nomewms"] = enderecowms;
+		dicionario["nomewmc"] = enderecowmc;
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -86,14 +99,7 @@ i3GEOF.converteMapaWS = {
 	*/
 	html:function(divid,enderecowms,enderecowmc){
 		try{
-			var ins = '<div style=margin-left:5px; ><p class="paragrafo" >'+$trad('ajudaDesktop',i3GEOF.converteMapaWS.dicionario)+' <a href="http://www.gvsig.gva.es/" target=blank > gvSig</a>' +
-			'<p class="paragrafo" >' + $trad('ajudaWms',i3GEOF.converteMapaWS.dicionario) +
-			'<p class="paragrafo" >' + $trad('ajudaWmc',i3GEOF.converteMapaWS.dicionario) + '<a href=\"'+enderecowmc+'\" target=_blank >'+$trad('wmc',i3GEOF.converteMapaWS.dicionario)+'</a>' +
-			'<p class="paragrafo" ><b>WMS: </b></p>' +
-			'<p class="paragrafo" > <textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
-			enderecowms + '</textarea></p>' +
-			'<p class="paragrafo" >' +
-			'<a href="' + enderecowms + '&request=getcapabilities&version=1.1.0&service=wms" target=blank >'+$trad('testa',i3GEOF.converteMapaWS.dicionario)+'<br></div>';
+			var ins = Mustache.render(i3GEOF.converteMapaWS.MUSTACHE, i3GEOF.converteMapaWS.mustacheHash());
 			$i(divid).innerHTML += ins;
 			i3GEOF.converteMapaWS.aguarde.visibility = "hidden";
 		}catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.converteMapaWS.aguarde.visibility = "hidden";}

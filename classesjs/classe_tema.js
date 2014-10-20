@@ -455,7 +455,7 @@ i3GEO.tema = {
 			 */
 			cortina: function(tema){
 				i3GEO.mapa.ativaTema(tema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.cortina()","cortina","cortina");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.cortina()","cortina","cortina","dependencias.php","i3GEOF.cortina.iniciaJanelaFlutuante()");
 			},
 			/*
 		Function: abreKml
@@ -634,7 +634,7 @@ i3GEO.tema = {
 			 */
 			editorsql: function(idtema){
 				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editorsql()","editorsql","editorsql");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editorsql()","editorsql","editorsql","dependencias.php","i3GEOF.editorsql.iniciaJanelaFlutuante()");
 			}
 		}
 };

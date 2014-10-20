@@ -72,6 +72,18 @@ i3GEOF.cortina = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.cortina.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.cortina.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -119,12 +131,8 @@ i3GEOF.cortina = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = "<div style=margin-left:5px ><div id='i3GEOcortinaTemasDiv' class=styled-select style=width:200px; ></div>";
-		ins += '<div id="slider-bg" class="yui-h-slider" style="background: url('+i3GEO.configura.locaplic+'/pacotes/yui290/build/slider/assets/bg-h.gif) no-repeat 5px 0;height: 28px;width: 210px;" tabindex="-1" title="Slider">' +
-			'<div id="slider-thumb" class="yui-slider-thumb"><img src="'+i3GEO.configura.locaplic+'/pacotes/yui290/build/slider/assets/thumb-n.gif"></div>' +
-			'</div></div>';
-
+	html:function() {
+		var ins = Mustache.render(i3GEOF.cortina.MUSTACHE, i3GEOF.cortina.mustacheHash());
 		return ins;
 	},
 	/*

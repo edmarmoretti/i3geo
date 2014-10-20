@@ -792,7 +792,7 @@ i3GEO.mapa =
 						.tempoMsg("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");
 					return;
 				}
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.convertews()", "convertews", "converteMapaWS");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.convertews()","convertews","converteMapaWS","dependencias.php","i3GEOF.converteMapaWS.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: convertekml
@@ -804,7 +804,7 @@ i3GEO.mapa =
 					alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");
 					return;
 				}
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.convertekml()", "convertemapakml", "converteMapaKml");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.convertekml()","convertemapakml","converteMapaKml","dependencias.php","i3GEOF.converteMapaKml.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: queryMap

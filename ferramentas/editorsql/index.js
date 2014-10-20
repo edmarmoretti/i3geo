@@ -58,6 +58,18 @@ i3GEOF.editorsql = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.editorsql.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.editorsql.dicionario);
+		dicionario["aguarde"] = $trad("p14");
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -128,14 +140,8 @@ i3GEOF.editorsql = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = "<textarea rows='8' colums='20' cols='38' style='font-size:14px;width:500px;height:200px' id=i3GEOeditorsqlSQL ></textarea>" +
-			'<br><br><p class=paragrafo ><input size=20 id=i3GEOeditorsqlbotao1 type=button value="'+$trad("p14")+'"  />' +
-			' <input style="position:relative;cursor:pointer" type=checkbox id=i3GEOeditorsqlRemoveMeta /> '+$trad('removeMetadados',i3GEOF.editorsql.dicionario) +
-			'<br><br><a class=paragrafo href="http://postgis.refractions.net/documentation/manual-1.4/ch07.html" target=_blank >'+$trad('manualSql',i3GEOF.editorsql.dicionario)+'</a>' +
-			'<br><p class=paragrafo >'+$trad('listaAtributos',i3GEOF.editorsql.dicionario)+':</p>' +
-			'<div class=paragrafo id=i3GEOeditorsqlDivItem ></div>' +
-			'<div class=paragrafo id=i3GEOeditorsqlvalores ></div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.editorsql.MUSTACHE, i3GEOF.editorsql.mustacheHash());
 		return ins;
 	},
 	/*

@@ -43,32 +43,24 @@ if(typeof(i3GEOF) === 'undefined'){
 Classe: i3GEOF.converteMapaKml
 */
 i3GEOF.converteMapaKml = {
-
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.converteMapaKml.iniciaDicionario();
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.converteMapaKml.dicionario),
+		lista,tema;
+		lista = i3GEO.arvoreDeCamadas.CAMADAS;
+		tema = lista[0].name;
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["parametrosMapfile"] = i3GEO.parametros.mapfile;
+		dicionario["tema"] = tema;
+		return dicionario;
 	},
-	/*
-	Function: iniciaDicionario
 
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.converteMapaKml.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/convertemapakml/dicionario.js",
-				"i3GEOF.converteMapaKml.iniciaJanelaFlutuante()",
-				"i3GEOF.converteMapaKml.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.converteMapaKml.iniciaJanelaFlutuante();
-		}
-	},
 	/*
 	Function: html
 
@@ -79,18 +71,8 @@ i3GEOF.converteMapaKml = {
 	divid {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 
 	*/
-	html:function(divid){
-		var ins = "",lista,tema;
-		lista = i3GEO.arvoreDeCamadas.CAMADAS;
-		tema = lista[0].name;
-		ins = '<div style=margin-left:5px; ><p class="paragrafo" >' + $trad('ajuda',i3GEOF.converteMapaKml.dicionario) +
-		' como o <a href="http://earth.google.com/intl/pt/" target="_blank" > Google Earth</a>. ' + $trad('ajuda2',i3GEOF.converteMapaKml.dicionario) +
-		'<p class="paragrafo" ><a href="'+i3GEO.configura.locaplic+'/documentacao/ajuda/googleearth.htm" target="_blank" > Clique aqui</a> '+ $trad('ajuda3',i3GEOF.converteMapaKml.dicionario) +
-		'<p class="paragrafo" ><b>'+$trad('wms',i3GEOF.converteMapaKml.dicionario)+' </b></p>' +
-		'<p class="paragrafo" > <textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
-		i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+i3GEO.parametros.mapfile+'&typename='+tema+'&request=kml</textarea></p>';
-		ins += '<p class="paragrafo" >'+$trad('ajuda4',i3GEOF.converteMapaKml.dicionario) +
-		'<p class="paragrafo" ><textarea cols="55" rows="2" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/kml.php </textarea></p></div>';
+	html:function(divid) {
+		var ins = Mustache.render(i3GEOF.converteMapaKml.MUSTACHE, i3GEOF.converteMapaKml.mustacheHash());
 		$i(divid).innerHTML += ins;
 	},
 	/*

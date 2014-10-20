@@ -55,6 +55,17 @@ i3GEOF.confluence = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.confluence.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.confluence.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -110,9 +121,8 @@ i3GEOF.confluence = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins += '<div id=i3GEOconfluenceLista style=display:block;color:white;padding:5px; ></div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.confluence.MUSTACHE, i3GEOF.confluence.mustacheHash());
 		return ins;
 	},
 	/*

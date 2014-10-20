@@ -264,10 +264,7 @@ i3GEO.analise = {
 		 * Ferramenta dist&acirc;ncia entre pontos
 		 */
 		distanciaptpt : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.distanciaptpt()",
-				"distanciaptpt",
-				"distanciaptpt");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.distanciaptpt()","distanciaptpt","distanciaptpt","dependencias.php","i3GEOF.distanciaptpt.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: centroide
@@ -283,10 +280,7 @@ i3GEO.analise = {
 		 * Ferramenta dissolve bordas comuns
 		 */
 		dissolve : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.dissolve()",
-				"dissolve",
-				"dissolve");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.dissolve()","dissolve","dissolve","dependencias.php","i3GEOF.dissolve.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: agrupaElementos

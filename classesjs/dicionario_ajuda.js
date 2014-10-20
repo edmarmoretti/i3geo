@@ -713,7 +713,7 @@ g_traducao_ajuda = {
 			categoria:"5",
 			pt:"Permite modificar o SQL utilizado para compor os dados referentes ao tema. Apenas temas baseados em bancos de dados podem utilizar essa fun&ccedil;&atilde;o, sendo que o administrador do i3Geo pode bloque&aacute;-la utilizando do sistema de administra&ccedil;&atilde;o. As fun&ccedil;&otilde;es SQL de modifica&ccedil;&atilde;o de dados n&atilde;o s&atilde;o suportadas (UPDATE, INSERT, DELETE, etc.)",
 			complemento:"O Mapserver utiliza uma express&atilde;o na linguagem SQL para definir os dados que ir&atilde;o compor um tema. A edi&ccedil;&atilde;o do SQL possibilita o uso de express&otilde;es customizadas, baseadas na sintaxe SQL que o banco de dados utilizado suportar. A janela de di&aacute;logo permite ainda listar as colunas dispon&iacute;veis bem como os dados de cada coluna, facilitando a defini&ccedil;&atilde;o do novo SQL.",
-			apijs:"i3GEO.arvoreDeTemas.dialogo.editorsql()"
+			apijs:"i3GEO.tema.dialogo.editorsql()"
 		},
 		"87": {
 			titulo: "Rede Metar",
