@@ -535,7 +535,7 @@ function dimensoesOutras(){
 		$k = $d["esquemadb"]."_".$d["tabela"]."_".$d["coluna"];
 		$xml3 .= "
 		<Dimension name='".$k."' caption='".converte($d["nome"])."'>
-		<Hierarchy hasAll='true'  primaryKey='codigo'>
+		<Hierarchy hasAll='false'  primaryKey='codigo'>
 		";
 		//cria uma view juntando as tabelas da hierarquia de regioes
 		$colunas = "dim.{$d['coluna']}::text as codigo, ";
@@ -544,7 +544,7 @@ function dimensoesOutras(){
 		$xml3 .= "<view alias='".$k."' ><SQL dialect='generic' >$sql</SQL></view>";
 		$xml3 .= "<Level name='".converte($d["nome"])."'
 		column='codigo'
-		nameColumn='nome' uniqueMembers='false' type='String' />
+		nameColumn='nome' uniqueMembers='true' />
 		";
 		$xml3 .= "</Hierarchy>
 		</Dimension>";
