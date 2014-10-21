@@ -544,7 +544,7 @@ function dimensoesOutras(){
 		$xml3 .= "<view alias='".$k."' ><SQL dialect='generic' >$sql</SQL></view>";
 		$xml3 .= "<Level name='".converte($d["nome"])."'
 		column='codigo'
-		nameColumn='nome' uniqueMembers='true' type='String' />
+		nameColumn='nome' uniqueMembers='false' type='String' />
 		";
 		$xml3 .= "</Hierarchy>
 		</Dimension>";
