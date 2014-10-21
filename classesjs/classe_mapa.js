@@ -843,7 +843,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta tipoimagem
 			 */
 			tipoimagem : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.tipoimagem()", "tipoimagem", "tipoimagem");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.tipoimagem()","tipoimagem","tipoimagem","dependencias.php","i3GEOF.tipoimagem.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: corFundo
