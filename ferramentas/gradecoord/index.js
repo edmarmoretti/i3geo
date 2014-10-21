@@ -76,6 +76,7 @@ i3GEOF.gradeCoord = {
 		dicionario["gradeCoordshadowsizex"] = $inputText('','','i3GEOgradeCoordshadowsizex','',3,'0');
 		dicionario["gradeCoordshadowsizey"] = $inputText('','','i3GEOgradeCoordshadowsizey','',3,'0');
 		dicionario["gradeCoordcortexto"] = $inputText('','','i3GEOgradeCoordcortexto','',11,'0,0,0');
+		dicionario["asp"] = '"';
 		return dicionario;
 	},
 	/*
