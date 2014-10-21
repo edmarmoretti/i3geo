@@ -961,7 +961,7 @@ background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97
 background-size: 16px 144px;
 }
 }
-.i3geoForm, .i3geoForm150 {
+.i3geoForm, .i3geoForm150, .i3geoForm100 {
 width: 252px;
 overflow: hidden;
 background: #F8F8F8;
@@ -972,6 +972,9 @@ border-radius: 2px;
 .i3geoForm150 {
 width: 150px;
 }
+.i3geoForm100 {
+width: 100px;
+}
 .i3geoFormIconeEdita {
 background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
 @media (-webkit-min-device-pixel-ratio: 2),
@@ -980,7 +983,7 @@ background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 10
 background-size: 16px 144px;
 }
 }
-.i3geoForm input, .i3geoForm150 input {
+.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
 width: 90%;
 height: 22px;
 border: 0;
@@ -992,6 +995,7 @@ text-indent: 0.01px;
 text-overflow: '';
 font-size: 12px;
 appearance: none;
+cursor: text;
 }
 /*hack opera */
 @media all and (-webkit-min-device-pixel-ratio:10000) , not all and
