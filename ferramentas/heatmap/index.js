@@ -161,7 +161,7 @@ i3GEOF.heatmap =
 		},
 		t2 : function() {
 			var ins = "<p class='paragrafo'>" + $trad('valorPonto', i3GEOF.heatmap.dicionario) + "</p>"
-			+ "<div class='styled-select'><input onclick='javascript:this.select();' id='i3GEOheatmapd' type='text' value='1'/></div><br>"
+			+ "<div class='i3geoForm i3geoFormIconeEdita'><input  id='i3GEOheatmapd' type='text' value='1'/></div><br>"
 			+ "<p class='paragrafo' >" + $trad('selecionaAtributo', i3GEOF.heatmap.dicionario) + "</p>"
 			+ "<div class='styled-select' id='i3GEOheatmapondeItens' style='display:block' ></div> ";
 
@@ -178,17 +178,17 @@ i3GEOF.heatmap =
 		t3 : function() {
 			var ins = "<p class='paragrafo'>" + $trad('tituloNovaCamada', i3GEOF.heatmap.dicionario);
 			ins +=
-				"<br></p><div class='styled-select'><input onclick='javascript:this.select();' class=digitar id='i3GEOheatmapTitulo' type=text value='Mapa de calor'/></div>";
+				"<br></p><div class='i3geoForm i3geoFormIconeEdita'><input id='i3GEOheatmapTitulo' type=text value='Mapa de calor'/></div>";
 
 			ins += "<br><br><p class='paragrafo' >" + $trad('valorRaio', i3GEOF.heatmap.dicionario);
-			ins += "<br></p><div class='styled-select'><input onclick='javascript:this.select();' class=digitar id='i3GEOheatmapRaio' type=text size=10 value='15'/></div>";
+			ins += "<br></p><div class='i3geoForm i3geoFormIconeEdita'><input id='i3GEOheatmapRaio' type=text size=10 value='15'/></div>";
 
 			ins += "<br><br><p class='paragrafo' >" + $trad('opacidade', i3GEOF.heatmap.dicionario);
 			ins +=
-				"<br></p><div class='styled-select'><input onclick='javascript:this.select();' class=digitar id='i3GEOheatmapOpacidade' type=text size=10 value='50'/></div>";
+				"<br></p><div class='i3geoForm i3geoFormIconeEdita'><input id='i3GEOheatmapOpacidade' type=text size=10 value='50'/></div>";
 
 			//ins += "<br><br><p class='paragrafo' >" + $trad('valorMaximoPonto', i3GEOF.heatmap.dicionario);
-			//ins += "<br></p><input onclick='javascript:this.select();' class=digitar id='i3GEOheatmapMax' type=text size=10 value='10'/>";
+			//ins += "<br></p><input  class=digitar id='i3GEOheatmapMax' type=text size=10 value='10'/>";
 
 			i3GEO.util.proximoAnterior(
 				"i3GEOF.heatmap.t2()",
@@ -300,7 +300,7 @@ i3GEOF.heatmap =
 							retorno.dados;
 								//+ " "
 								//+ $trad('multiplica', i3GEOF.heatmap.dicionario)
-								//+ " <input onclick='javascript:this.select();' class=digitar id='i3GEOheatmapdfator' type=text size=10 value='1'/>";
+								//+ " <input  class=digitar id='i3GEOheatmapdfator' type=text size=10 value='1'/>";
 						$i("i3GEOheatmapondeItens").style.display = "block";
 					},
 					"i3GEOheatmapondeItens");

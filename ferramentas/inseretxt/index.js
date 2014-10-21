@@ -181,7 +181,7 @@ i3GEOF.inseretxt = {
 		'</div><br>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia1obj" style="left:1px;display:none;">' +
 		'		<p class="paragrafo" >'+$trad('insereTexto',i3GEOF.inseretxt.dicionario)+':</p>' +
-		'		<div class="styled-select" >' +
+		'		<div class="i3geoForm i3geoFormIconeEdita" >' +
 		'		<input type="text" id="i3GEOinseretxttexto" value="" />' +
 		'		</div>' +
 		'		<br><p class="paragrafo" >' +

@@ -270,8 +270,7 @@ i3GEOF.filtro = {
 			conector += "<option value='not'>"+$trad('nao',i3GEOF.filtro.dicionario)+"</option></select></div>";
 
 			valor = document.createElement("div");
-			valor.className = 'styled-select';
-			valor.style.width = "100px";
+			valor.className = 'i3geoForm150 i3geoFormIconeEdita';
 			valor.style.marginLeft="5px";
 			valor.innerHTML = "<input type=text value='' />";
 

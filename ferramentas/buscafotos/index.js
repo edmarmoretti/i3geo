@@ -146,9 +146,9 @@ i3GEOF.buscaFotos = {
 		ins += '		<p class="paragrafo" >'+$trad('opcoes',i3GEOF.buscaFotos.dicionario);
 		ins += $trad('maxRegistros',i3GEOF.buscaFotos.dicionario);
 		ins += $trad('ajudaAno',i3GEOF.buscaFotos.dicionario);
-		ins += '		<p class="paragrafo" >'+$trad('texto',i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=30 value="" id="i3GEObuscafotostexto" /></div>';
-		ins += '		<br><p class="paragrafo" >'+$trad('anoInicial',i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=10 value="2009" id="i3GEObuscafotosai" /></div>';
-		ins += '		<br><p class="paragrafo" >'+$trad('anoFinal',i3GEOF.buscaFotos.dicionario)+': <br><div class=styled-select><input onclick="javascript:this.select();" style="cursor:text" type=text size=10 value="2009" id="i3GEObuscafotosaf" /></div><br><br>';
+		ins += '		<p class="paragrafo" >'+$trad('texto',i3GEOF.buscaFotos.dicionario)+': <br><div class="i3geoForm i3geoFormIconeEdita"><input type=text size=30 value="" id="i3GEObuscafotostexto" /></div>';
+		ins += '		<br><p class="paragrafo" >'+$trad('anoInicial',i3GEOF.buscaFotos.dicionario)+': <br><div class="i3geoForm i3geoFormIconeEdita"><input type=text size=10 value="2009" id="i3GEObuscafotosai" /></div>';
+		ins += '		<br><p class="paragrafo" >'+$trad('anoFinal',i3GEOF.buscaFotos.dicionario)+': <br><div class="i3geoForm i3geoFormIconeEdita"><input type=text size=10 value="2009" id="i3GEObuscafotosaf" /></div><br><br>';
 		ins += '		<input  id=i3GEObuscafotosbotao1 size=20  type=button value="'+$trad('procuraFotos',i3GEOF.buscaFotos.dicionario)+'" />';
 		ins += '	</div>';
 		ins += '	<div>';

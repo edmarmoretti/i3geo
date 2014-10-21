@@ -128,15 +128,15 @@ i3GEOF.insereGrafico = {
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia2obj" style="left:1px;display:none;">';
 		ins += '		<p class=paragrafo >Tamanho do c&iacute;rculo:</p>';
-		ins += '		<div class=styled-select >';
+		ins += '		<div class="i3geoForm i3geoFormIconeEdita" >';
 		ins += '		<input type=text value=50 id=i3GEOinseregraficow />';
 		ins += '		</div>';
 		ins += '		<br><p class=paragrafo >'+$trad('inclinacaoCirculo',i3GEOF.insereGrafico.dicionario)+':</p>';
-		ins += '		<div class=styled-select >';
+		ins += '		<div class="i3geoForm i3geoFormIconeEdita" >';
 		ins += '		<input type=text value=1.5 id=i3GEOinseregraficoinclinacao />';
 		ins += '		</div>';
 		ins += '		<br><p class=paragrafo >'+$trad('tamanhoSombra',i3GEOF.insereGrafico.dicionario)+':</p>';
-		ins += '		<div class=styled-select >';
+		ins += '		<div class="i3geoForm i3geoFormIconeEdita" >';
 		ins += '		<input type=text value=5 id=i3GEOinseregraficosombra />';
 		ins += '		</div>';
 		ins += '	</div>';
@@ -298,7 +298,7 @@ i3GEOF.insereGrafico = {
 			for (i=0;i<n; i++){
 				ins.push("<tr><td><input size=2 style='cursor:pointer' name="+retorno.data.valores[i].item+" type=checkbox id=i3GEOinseregrafico"+retorno.data.valores[i].item+" /></td>");
 				ins.push("<td>&nbsp;"+retorno.data.valores[i].item+"</td>");
-				ins.push("<td>&nbsp;<input onclick='javascript:this.select();' id=i3GEOinseregrafico"+retorno.data.valores[i].item+"cor type=text size=13 value="+i3GEO.util.randomRGB()+" /></td>");
+				ins.push("<td>&nbsp;<input  id=i3GEOinseregrafico"+retorno.data.valores[i].item+"cor type=text size=13 value="+i3GEO.util.randomRGB()+" /></td>");
 				ins.push("<td>&nbsp;<img style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/aquarela.gif' onclick=\"i3GEOF.insereGrafico.corj('i3GEOinseregrafico"+retorno.data.valores[i].item+"cor')\" /></td></tr>");
 			}
 			ins.push("</table>");

@@ -238,7 +238,7 @@ i3GEOF.etiqueta = {
 					else{
 						ck = "";
 					}
-					ins.push("<td><div class='styled-select150' ><input disabled style='cursor:pointer' type='text' value='"+ck+"' name='itensdesc' /></div></td>");
+					ins.push("<td><div class='i3geoForm150 i3geoFormIconeEdita' ><input disabled type='text' value='"+ck+"' name='itensdesc' /></div></td>");
 					//links
 					if(lista.itenslink[item]){
 						ck = lista.itenslink[item];
@@ -246,7 +246,7 @@ i3GEOF.etiqueta = {
 					else{
 						ck = "";
 					}
-					ins.push("<td><div class='styled-select150' ><input disabled style='cursor:pointer' type='text' value='"+ck+"' name='itenslink' /></div></td>");
+					ins.push("<td><div class='i3geoForm150 i3geoFormIconeEdita' ><input disabled type='text' value='"+ck+"' name='itenslink' /></div></td>");
 
 					ins.push("</tr>");
 				}

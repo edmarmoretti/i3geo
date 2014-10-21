@@ -100,7 +100,7 @@ i3GEOF.uploadsimbolo = {
 		var ins = '<form id=i3GEOuploadsimbolof target="i3GEOuploadsimboloiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadsimbolo/upload.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<p class="paragrafo" >PNG/JPG: <br><input type="file" size=22 name="i3GEOuploadsimboloarq" style="top:0px;left:0px;cursor:pointer;"></p>';
 		if(i3GEO.parametros.editor === "sim"){
-			ins += '<p class="paragrafo" >'+$trad('pastaArmazenamento',i3GEOF.uploadsimbolo.dicionario)+':</p><div class=styled-select ><input class=digitar type="text" name="dirDestino" id="dirDestino" ></div>';
+			ins += '<p class="paragrafo" >'+$trad('pastaArmazenamento',i3GEOF.uploadsimbolo.dicionario)+':</p><div class="i3geoForm i3geoFormIconeEdita" ><input class=digitar type="text" name="dirDestino" id="dirDestino" ></div>';
 			//ins += "<img onclick='i3GEOF.uploadsimbolo.selNavegador(\"dirDestino\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/></p>";
 		}
 		ins += '<br><p class="paragrafo" ><input id=i3GEOuploadsimbolobotao1 type="button" value="'+$trad('envia',i3GEOF.uploadsimbolo.dicionario)+'" size=12 name="submit">' +

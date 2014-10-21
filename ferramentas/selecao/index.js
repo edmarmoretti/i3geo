@@ -912,8 +912,7 @@ i3GEOF.selecao = {
 				conector += "<option value='not'>not</option></select></div>";
 
 				valor = document.createElement("div");
-				valor.className = 'styled-select';
-				valor.style.width = "100px";
+				valor.className = 'i3geoForm100 i3geoFormIconeEdita';
 				valor.style.marginLeft="5px";
 				valor.innerHTML = "<input type=text value='' />";
 

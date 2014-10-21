@@ -85,7 +85,7 @@ i3GEO.marcador = {
 			if(!c){
 				c = "";
 			}
-		texto = "<p class=paragrafo >"+$trad("x78")+"</p><div class=styled-select ><input type=text value='"+
+		texto = "<p class=paragrafo >"+$trad("x78")+"</p><div class='i3geoForm i3geoFormIconeEdita' ><input type=text value='"+
 			c +"' onclick='javascript:this.select()'/></div>";
 		i3GEO.janela.mensagemSimples(texto,$trad("x79"));
 	},

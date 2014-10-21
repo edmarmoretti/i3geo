@@ -113,7 +113,7 @@ i3GEOF.upload = {
 		if(i3GEO.parametros.editor === "sim"){
 			ins += '<fieldset class=subbloco >' +
 			'<p class="paragrafo" >'+$trad('pastaArmazenamento',i3GEOF.upload.dicionario)+':</p>' +
-			'<div class=styled-select ><input class=digitar type="text" name="dirDestino" id="dirDestino" /></div>' +
+			'<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" name="dirDestino" id="dirDestino" /></div>' +
 			"&nbsp;<img onclick='i3GEO.util.navegadorDir(\"dirDestino\",false,false,false,true);' src='"+i3GEO.configura.locaplic+"/imagens/ic_zoom.png' style='cursor:pointer;position :relative;top:2px'/></p>" +
 			'<p class="paragrafo" ><input type=checkbox name=i3GEOuploadCriaMapfile id=i3GEOuploadCriaMapfile />&nbsp;'+$trad('criaMapfile',i3GEOF.upload.dicionario) +
 			'</fieldset>';

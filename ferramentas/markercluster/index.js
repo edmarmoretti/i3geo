@@ -208,19 +208,19 @@ i3GEOF.markercluster = {
 				+ $trad(
 						'tituloNovaCamada',
 						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterTitulo' type=text value='Mapa de agrupamento'/></div>";
+		ins += "<br></p><div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOmarkerclusterTitulo' type=text value='Mapa de agrupamento'/></div>";
 
 		ins += "<br><p class='paragrafo' >"
 				+ $trad(
 						'raio',
 						i3GEOF.markercluster.dicionario);
-		ins += "</p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterRaio' type=text value='50'/></div>";
+		ins += "</p><div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOmarkerclusterRaio' type=text value='50'/></div>";
 
 		ins += "<br><p class='paragrafo' >"
 				+ $trad(
 						'opacidade',
 						i3GEOF.markercluster.dicionario);
-		ins += "</p><div class=styled-select ><input onclick='javascript:this.select();' class=digitar id='i3GEOmarkerclusterOpacidade' type=text value='50'/></div>";
+		ins += "</p><div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOmarkerclusterOpacidade' type=text value='50'/></div>";
 
 		i3GEO.util.proximoAnterior(
 				"i3GEOF.markercluster.t1()",

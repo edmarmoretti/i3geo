@@ -511,7 +511,7 @@ i3GEOF.preferencias = {
 					ins += "<p class=paragrafo title='"+props[j].elemento+"'>"+props[j].titulo+"</p>";
 
 					if(props[j].tipo === "numero" || props[j].tipo === "texto"){
-						ins += "<div class='styled-select' style='"+estilo+"' ><input type=text value='' id='"+props[j].elemento+"'  /></div><br>";
+						ins += "<div class='i3geoForm i3geoFormIconeEdita' style='"+estilo+"' ><input type=text value='' id='"+props[j].elemento+"'  /></div><br>";
 					}
 					if(props[j].tipo === "boolean" || props[j].tipo === "select"){
 						if(props[j].tipo === "boolean"){

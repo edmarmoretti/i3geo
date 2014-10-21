@@ -841,7 +841,7 @@ i3GEO.janela = {
 			if(!valorDefault){
 				valorDefault = "";
 			}
-			var i = "<br><div class=styled-select ><input id='i3GEOjanelaprompt' type=text value='"+valorDefault+"' />";
+			var i = "<br><div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOjanelaprompt' type=text value='"+valorDefault+"' />";
 			i3GEO.janela.confirma(pergunta+i,"","","",funcaoOk);
 		},
 		/*

@@ -181,7 +181,7 @@ i3GEOF.t3d = {
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo'>Diminuir o exagero vertical em:<br>";
-		ins += "<input onclick='javascript:this.select();' id=i3GEO3dfz size=2 class=digitar type=text value=10 /> x ";
+		ins += "<input  id=i3GEO3dfz size=2 class=digitar type=text value=10 /> x ";
 		ins += "<p class='paragrafo'>Escolha o tema (opcional) com os valores de Z (se existir no mapa):<br>";
 		ins += "<div id=i3GEO3ddest style=text-align:left ></div><br>";
 		ins += "<p class='paragrafo'><input id=i3GEO3dbotao1 size=20 type='buttom' value='Criar modelo 3d' />";

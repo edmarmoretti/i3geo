@@ -61,17 +61,17 @@ for(key in wms_configura){
 	ins += "<option value='"+key+"'>"+wms_configura[key].titulo+"</option>";
 }
 ins += "</select>";
-ins += "<p><input onclick='javascript:this.select();' type=text id=iServico style=width:95% />";
+ins += "<p><input  type=text id=iServico style=width:95% />";
 ins += "<p><TEXTAREA id='WMS_descricao' rows='3' style='width:95%' ></TEXTAREA></p>";
 ins += "<table style='text-align:left'>";
-ins += "<tr><td style='text-align:left'>"+$trad(2,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anoinicio size=4 />";
-ins += "<td style='text-align:left'>"+$trad(3,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anofim size=4 /></tr>";
+ins += "<tr><td style='text-align:left'>"+$trad(2,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='0' id=WMS_anoinicio size=4 />";
+ins += "<td style='text-align:left'>"+$trad(3,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='0' id=WMS_anofim size=4 /></tr>";
 
-ins += "<tr><td style='text-align:left'>"+$trad(4,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesinicio size=4 />";
-ins += "<td style='text-align:left'>"+$trad(5,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesfim size=4 /></tr>";
+ins += "<tr><td style='text-align:left'>"+$trad(4,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='nulo' id=WMS_mesinicio size=4 />";
+ins += "<td style='text-align:left'>"+$trad(5,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='nulo' id=WMS_mesfim size=4 /></tr>";
 
-ins += "<tr><td style='text-align:left'>"+$trad(6,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diainicio size=4 />";
-ins += "<td style='text-align:left'>"+$trad(7,i3GEOF.wmstime.dicionario)+" </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diafim size=4 /></tr>";
+ins += "<tr><td style='text-align:left'>"+$trad(6,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='nulo' id=WMS_diainicio size=4 />";
+ins += "<td style='text-align:left'>"+$trad(7,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='nulo' id=WMS_diafim size=4 /></tr>";
 
 ins += "</table>";
 //ins += "<div style='position:absolute;left:120px;top:180px'>"

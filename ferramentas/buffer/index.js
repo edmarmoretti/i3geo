@@ -172,7 +172,7 @@ i3GEOF.buffer = {
 	},
 	t2: function(){
 		var ins = "<p class='paragrafo'>"+$trad('entorno',i3GEOF.buffer.dicionario);
-		ins += "<br><div class=styled-select style='display:block' ><input onclick='javascript:this.select();' id='i3GEObufferd' type=text value='0'/></div>";
+		ins += "<br><div class='i3geoForm i3geoFormIconeEdita' style='display:block' ><input id='i3GEObufferd' type=text value='0'/></div>";
 
 		ins += "<br><p class='paragrafo' >"+$trad('entornoAtributo',i3GEOF.buffer.dicionario);
 		ins += "<br><div id=i3GEObufferondeItens style='text-align:left;display:block' ></div> ";
@@ -285,7 +285,7 @@ i3GEOF.buffer = {
 			function(retorno){
 				$i("i3GEObufferondeItens").innerHTML = "<div class=styled-select >" + retorno.dados + "</div>"
 				+ "<br><br><p class=paragrafo >" + $trad('multiplica',i3GEOF.buffer.dicionario)
-				+" <div class=styled-select ><input onclick='javascript:this.select();' id='i3GEObufferdfator' type=text value='1'/></div>";
+				+" <div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEObufferdfator' type=text value='1'/></div>";
 				$i("i3GEObufferondeItens").style.display = "block";
 			},
 			"i3GEObufferondeItens"

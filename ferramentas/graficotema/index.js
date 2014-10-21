@@ -144,16 +144,16 @@ i3GEOF.graficoTema = {
 		ins += '		</select></div>';
 		ins += '		<br>';
 		ins += '		<p class="paragrafo">'+$trad('largura',i3GEOF.graficoTema.dicionario)+':</p>';
-		ins += '		<div class="styled-select" ><input type="text" id="i3GEOgraficotemalargura" value="50"/></div>';
+		ins += '		<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" id="i3GEOgraficotemalargura" value="50"/></div>';
 		ins += '		<br>';
 		ins += '		<p class="paragrafo">'+$trad('altura',i3GEOF.graficoTema.dicionario)+':</p>';
-		ins += '		<div class="styled-select" ><input type="text" id="i3GEOgraficotemaaltura" value="50"/></div>';
+		ins += '		<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" id="i3GEOgraficotemaaltura" value="50"/></div>';
 		ins += '		<br>';
 		ins += '		<p class="paragrafo">'+$trad('deslocamentoFatias',i3GEOF.graficoTema.dicionario)+':</p>';
-		ins += '		<div class="styled-select" ><input type="text" id="i3GEOgraficotemaoffset" value="0"/></div>';
+		ins += '		<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" id="i3GEOgraficotemaoffset" value="0"/></div>';
 		ins += '		<br>';
 		ins += '		<p class="paragrafo">'+$trad('corContorno',i3GEOF.graficoTema.dicionario)+':</p>';
-		ins += '		<div class="styled-select" ><input type="text" id="i3GEOgraficotemaoutlinecolor" value="0,0,0"/></div>';
+		ins += '		<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" id="i3GEOgraficotemaoutlinecolor" value="0,0,0"/></div>';
 		ins += '	</div>';
 		ins += '</div>	';
 		return ins;
@@ -213,7 +213,7 @@ i3GEOF.graficoTema = {
 			for (i=0;i<n; i++){
 				ins.push("<tr><td><input size=2 style='cursor:pointer;border:0px solid white;' name="+retorno.data.valores[i].item+" type=checkbox id=i3GEOgraficotema"+retorno.data.valores[i].item+" /></td>");
 				ins.push("<td>&nbsp;"+retorno.data.valores[i].item+"</td>");
-				ins.push("<td>&nbsp;<input onclick='javascript:this.select();' id=i3GEOgraficotema"+retorno.data.valores[i].item+"cor type=text size=13 value="+i3GEO.util.randomRGB()+" /></td>");
+				ins.push("<td>&nbsp;<input  id=i3GEOgraficotema"+retorno.data.valores[i].item+"cor type=text size=13 value="+i3GEO.util.randomRGB()+" /></td>");
 				ins.push("<td>&nbsp;<img style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/aquarela.gif' onclick=\"i3GEOF.graficoTema.corj('i3GEOgraficotema"+retorno.data.valores[i].item+"cor')\" /></td></tr>");
 			}
 			ins.push("</table>");

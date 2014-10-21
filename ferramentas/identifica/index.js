@@ -449,7 +449,7 @@ i3GEOF.identifica = {
 			ins += '	</div>';
 			ins += '	<div class=guiaobj id="'+idjanela+'i3GEOidentificaguia3obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
 			ins += $trad('resolucaoBusca',i3GEOF.identifica.dicionario)+':<br><br>';
-			ins += '	<div class="styled-select" ><input type="text" value="12" id="'+idjanela+'i3GEOidentificaresolucao" /></div>';
+			ins += '	<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" value="12" id="'+idjanela+'i3GEOidentificaresolucao" /></div>';
 			//<input onclick="javascript:this.select();" type=text class=digitar value=5 id="i3GEOidentificaresolucao" size=2 />';
 			ins += '	<br><br></div>';
 			ins += '	<div class=guiaobj id="'+idjanela+'i3GEOidentificaguia4obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
@@ -502,9 +502,9 @@ i3GEOF.identifica = {
 			$i("i3GEOF.movePonto_corpo").innerHTML = "" +
 			$trad('cliqueNovaPosicao',i3GEOF.identifica.dicionario) +
 			"<br><br><p class=paragrafo >X: </p>" +
-			"<div class='styled-select' ><input type=text style=width:100px;cursor:text id=i3GEOF.movePontoX /></div>" +
+			"<div class='i3geoForm100 i3geoFormIconeEdita' ><input type=text id=i3GEOF.movePontoX /></div>" +
 			"<br><p class=paragrafo >Y: </p>" +
-			"<div class='styled-select' ><input type=text style=width:100px;cursor:text id=i3GEOF.movePontoY /></div>" +
+			"<div class='i3geoForm100 i3geoFormIconeEdita' ><input type=text id=i3GEOF.movePontoY /></div>" +
 			"<input type=buttom value='"+$trad('move',i3GEOF.identifica.dicionario)+"' id=i3GEOF.moveAplica />" +
 			"<input type=hidden value='"+tema+"' id=i3GEOF.moveAplicaTema />";
 

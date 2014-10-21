@@ -1674,7 +1674,7 @@ i3GEOF.legenda =
 				linha = linha.split("#");
 				tipoLayer = linha[0];
 				d =
-					"<table class=lista6 ><tr><td style='text-align:left;'>Cor do contorno:</td><td>" + "<div class=styled-select >"
+					"<table class=lista6 ><tr><td style='text-align:left;'>Cor do contorno:</td><td>" + "<div class='i3geoForm i3geoFormIconeEdita' >"
 						+ "<input type=text value='"
 						+ linha[2]
 						+ "' id='i3GEOlegendaoutlinecolor' />"
@@ -1685,7 +1685,7 @@ i3GEOF.legenda =
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('corFundo', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
-						+ "<div class=styled-select >"
+						+ "<div class='i3geoForm i3geoFormIconeEdita' >"
 						+ "<input type=text value='"
 						+ linha[3]
 						+ "' id='i3GEOlegendabackgroundcolor' />"
@@ -1696,7 +1696,7 @@ i3GEOF.legenda =
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('corFrente', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
-						+ "<div class=styled-select >"
+						+ "<div class='i3geoForm i3geoFormIconeEdita' >"
 						+ "<input type=text value='"
 						+ linha[4]
 						+ "' id='i3GEOlegendacolor' />"
@@ -1707,7 +1707,7 @@ i3GEOF.legenda =
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('tamanhoEspacamento', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
-						+ "<div class=styled-select >"
+						+ "<div class='i3geoForm i3geoFormIconeEdita' >"
 						+ "<input type=text value='"
 						+ linha[6]
 						+ "' id='i3GEOlegendasizes' />"
@@ -1716,7 +1716,7 @@ i3GEOF.legenda =
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('espessura', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
-						+ "<div class=styled-select >"
+						+ "<div class='i3geoForm i3geoFormIconeEdita' >"
 						+ "<input type=text value='"
 						+ linha[8]
 						+ "' id='i3GEOlegendawidth' />"
@@ -1725,7 +1725,7 @@ i3GEOF.legenda =
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('padraoRepeticao', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
-						+ "<div class=styled-select >"
+						+ "<div class='i3geoForm i3geoFormIconeEdita' >"
 						+ "<input type=text value='"
 						+ linha[9]
 						+ "' id='i3GEOlegendapattern' />"
@@ -1734,7 +1734,7 @@ i3GEOF.legenda =
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('opacidade', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
-						+ "<div class=styled-select >"
+						+ "<div class='i3geoForm i3geoFormIconeEdita' >"
 						+ "<input type=text value='"
 						+ linha[7]
 						+ "' id='i3GEOlegendaopacidade' />"
@@ -1743,7 +1743,7 @@ i3GEOF.legenda =
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('angulo', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
-						+ "<div class=styled-select >"
+						+ "<div class='i3geoForm i3geoFormIconeEdita' >"
 						+ "<input type=text value='"
 						+ linha[10]
 						+ "' id='i3GEOlegendaangulo' />"
@@ -1752,7 +1752,7 @@ i3GEOF.legenda =
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('simbolo', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
-						+ "<div class=styled-select >"
+						+ "<div class='i3geoForm i3geoFormIconeEdita' >"
 						+ "<input type=text value='"
 						+ linha[5]
 						+ "' id='i3GEOlegendasymbolname' />"
