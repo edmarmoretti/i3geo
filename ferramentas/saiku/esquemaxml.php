@@ -544,7 +544,7 @@ function dimensoesOutras(){
 		$xml3 .= "<view alias='".$k."' ><SQL dialect='generic' >$sql</SQL></view>";
 		$xml3 .= "<Level name='".converte($d["nome"])."'
 		column='codigo'
-		nameColumn='nome' uniqueMembers='true' />
+		nameColumn='nome' uniqueMembers='true' type='String' />
 		";
 		$xml3 .= "</Hierarchy>
 		</Dimension>";
@@ -618,7 +618,7 @@ function dimensoesTabelas(){
 				if($parametro["tipo"] > 5 || $parametro["tipo"] == 0){
 					$outrosParametros[] = $k;
 					$VirtualCubeDimension[] = "<VirtualCubeDimension name='{$k}' />";
-					$u = "<DimensionUsage type='String' foreignKey='".$parametro["coluna"]."' name='nome' source='{$k}'/>";
+					$u = "<DimensionUsage foreignKey='".$parametro["coluna"]."' name='nome' source='{$k}'/>";
 					$dimEnsoes[] = $u;
 					array_push($VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],"<VirtualCubeDimension name='{$k}' />");
 				}
