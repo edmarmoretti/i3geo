@@ -367,8 +367,8 @@ function sqlDasRegioes($regiao,$caminho,$chavesRegiao){
 		$colunas = array_unique($colunas);
 	}
 	else{
-		$colunas[] = $regiao["identificador"]. "::text AS codigo".$regiao["codigo_tipo_regiao"];
-		$colunas[] = $regiao["colunanomeregiao"]. "::text AS nome".$regiao["codigo_tipo_regiao"];
+		$colunas[] = "tabela".$regiao["codigo_tipo_regiao"].".".$regiao["identificador"]. "::text AS codigo".$regiao["codigo_tipo_regiao"];
+		$colunas[] = "tabela".$regiao["codigo_tipo_regiao"].".".$regiao["colunanomeregiao"]. "::text AS nome".$regiao["codigo_tipo_regiao"];
 
 		$nomesColunas[] = " codigo".$regiao["codigo_tipo_regiao"];
 		$nomesColunas[] = " nome".$regiao["codigo_tipo_regiao"];
