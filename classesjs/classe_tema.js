@@ -502,7 +502,7 @@ i3GEO.tema = {
 			 */
 			graficotema: function(idtema){
 				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.graficotema()","graficotema","graficoTema");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.graficotema()","graficotema","graficoTema","dependencias.php","i3GEOF.graficoTema.iniciaJanelaFlutuante()");
 			},
 			/*
 		Function: toponimia

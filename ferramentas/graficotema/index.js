@@ -55,6 +55,17 @@ i3GEOF.graficoTema = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.graficoTema.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.graficoTema.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -119,43 +130,8 @@ i3GEOF.graficoTema = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins += '<div id=i3GEOgraficotemaguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
-		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a  ><em><div id="i3GEOgraficotemaguia1" style="text-align:center;left:0px;" >'+$trad('fonteDados',i3GEOF.graficoTema.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a  ><em><div id="i3GEOgraficotemaguia2" style="text-align:center;left:0px;" >'+$trad('propriedades',i3GEOF.graficoTema.dicionario)+'</div></em></a></li>';
-		ins += '	</ul>';
-		ins += '</div><br>';
-		ins += '	<div class=guiaobj id="i3GEOgraficotemaguia1obj" style="left:1px;90%;display:none;">';
-		ins += '			<div id=i3GEOgraficotemacombot style="display:none;position:relative;top:5px;left:0px;">';
-		ins += '			</div>';
-		ins += '			<p class="paragrafo" ><b>'+$trad('selecionaItens',i3GEOF.graficoTema.dicionario)+'</b><br><br>';
-		ins += '			<div id=i3GEOgraficotemalistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;">'+$trad('selecionaTema',i3GEOF.graficoTema.dicionario)+'</div>';
-		ins += '			<br><br>';
-		ins += '			<p class="paragrafo" ><input id=i3GEOgraficotemabotao1 size=35  type=button value="'+$trad('criaGrafico',i3GEOF.graficoTema.dicionario)+'" />';
-		ins += '		<div id=i3GEOgraficotemamen1 style=top:10px;left:1px ><p class="paragrafo">'+$trad('compoeGrafico',i3GEOF.graficoTema.dicionario)+'</div>';
-		ins += '	</div>';
-		ins += '	<div class=guiaobj id="i3GEOgraficotemaguia2obj" style="left:1px;display:none;">';
-		ins += '		<p class="paragrafo">'+$trad('tipo',i3GEOF.graficoTema.dicionario)+':</p>';
-		ins += '		<div class="styled-select" ><select id=i3GEOgraficotematipo >';
-		ins += '			<option value="PIE">'+$trad('pizza',i3GEOF.graficoTema.dicionario)+'</option>';
-		ins += '			<option value="BAR">'+$trad('barras',i3GEOF.graficoTema.dicionario)+'</option>';
-		ins += '		</select></div>';
-		ins += '		<br>';
-		ins += '		<p class="paragrafo">'+$trad('largura',i3GEOF.graficoTema.dicionario)+':</p>';
-		ins += '		<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" id="i3GEOgraficotemalargura" value="50"/></div>';
-		ins += '		<br>';
-		ins += '		<p class="paragrafo">'+$trad('altura',i3GEOF.graficoTema.dicionario)+':</p>';
-		ins += '		<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" id="i3GEOgraficotemaaltura" value="50"/></div>';
-		ins += '		<br>';
-		ins += '		<p class="paragrafo">'+$trad('deslocamentoFatias',i3GEOF.graficoTema.dicionario)+':</p>';
-		ins += '		<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" id="i3GEOgraficotemaoffset" value="0"/></div>';
-		ins += '		<br>';
-		ins += '		<p class="paragrafo">'+$trad('corContorno',i3GEOF.graficoTema.dicionario)+':</p>';
-		ins += '		<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" id="i3GEOgraficotemaoutlinecolor" value="0,0,0"/></div>';
-		ins += '	</div>';
-		ins += '</div>	';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.graficoTema.MUSTACHE, i3GEOF.graficoTema.mustacheHash());
 		return ins;
 	},
 	/*
