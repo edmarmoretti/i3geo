@@ -540,7 +540,7 @@ function dimensoesOutras(){
 		//cria uma view juntando as tabelas da hierarquia de regioes
 		$colunas = "dim.{$d['coluna']}::text as codigo, ";
 		$colunas .= "dim.{$d['coluna']} AS nome";
-		$sql = "SELECT {$colunas} FROM ".$d['esquemadb'].".".$d['tabela']." as dim group by codigo";
+		$sql = "SELECT {$colunas} FROM ".$d['esquemadb'].".".$d['tabela']." as dim group by codigo,nome";
 		$xml3 .= "<view alias='".$k."' ><SQL dialect='generic' >$sql</SQL></view>";
 		$xml3 .= "<Level name='".converte($d["nome"])."'
 		column='codigo'
