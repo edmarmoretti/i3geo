@@ -618,7 +618,7 @@ function dimensoesTabelas(){
 				if($parametro["tipo"] > 5 || $parametro["tipo"] == 0){
 					$outrosParametros[] = $k;
 					$VirtualCubeDimension[] = "<VirtualCubeDimension name='{$k}' />";
-					$u = "<DimensionUsage foreignKey='codigo' name='nome' source='{$k}'/>";
+					$u = "<DimensionUsage foreignKey='".$parametro["coluna"]."' name='nome' source='{$k}'/>";
 					$dimEnsoes[] = $u;
 					array_push($VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],"<VirtualCubeDimension name='{$k}' />");
 				}
