@@ -1967,9 +1967,17 @@ i3GEO.util = {
 	nome {String} - valor que sera incluido no parametro "name" do elemento "select".
 
 	alias {string} sim|nao indica se para os nomes dos itens sera usado o alias (default= sim)
+	
+	estilo {string} - estilo CSS em linha
 		 */
-		comboItens: function(id,tema,funcao,onde,nome,alias){
+		comboItens: function(id,tema,funcao,onde,nome,alias,estilo){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboItens()");}
+			if(!estilo){
+				estilo = "";
+			}
+			else{
+				estilo = "style="+estilo;
+			}
 			if(!alias){
 				alias = "sim";
 			}
@@ -1983,7 +1991,7 @@ i3GEO.util = {
 				var ins,temp,i,nm;
 				if (retorno.data !== undefined){
 					ins = [];
-					ins.push("<select  id='"+id+"' name='"+nome+"'>");
+					ins.push("<select "+estilo+" id='"+id+"' name='"+nome+"'>");
 					ins.push("<option value='' >---</option>");
 					temp = retorno.data.valores.length;
 					for (i=0;i<temp; i++){

@@ -349,10 +349,10 @@ it:"Salva mappa"
 }],
 "u18": [
 {
-pt: "Carregar mapa",
-en:"Load map",
-es:"Cargar mapa",
-it:"Apri mappa"
+pt: "Carregar mapfile local",
+en:"Load mapfile",
+es:"Cargar mapfile",
+it:"Apri mapfile"
 }],
 "u19": [
 {

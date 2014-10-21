@@ -203,7 +203,7 @@ i3GEOF.graficointerativo1 =
 		 * sido renderizados
 		 */
 		aplicaConfig : function(idjanela) {
-			var config, i, atualizaConfigGr, n, c, objs;
+			var config, atualizaConfigGr, f, nomesIds;
 			config = i3GEOF.graficointerativo1.propJanelas[idjanela];
 			nomesIds = i3GEO.util.listaChaves(config);
 			atualizaConfigGr = function() {
@@ -233,31 +233,42 @@ i3GEOF.graficointerativo1 =
 				// quando o grafico esta sendo restaurado do mapa
 				if (config.valoresCombosItens && config.valoresCombosItens.selects.length > 0) {
 					n = config.valoresCombosItens.selects.length;
+
+					f = function(){
+						var i, c, objs;
+						atualizaConfigGr();
+						//cria as demais entradas de Y
+						for (i = 0; i < n; i++) {
+							// cria o combo, para cada combo sao adicionados um input para o nome e um input para a cor
+							$i(idjanela + "i3GEOgraficointerativo1ComboYid").onchange.call();
+						}
+						//
+						// restaura os valores dos inputs criados conforme os parametros que haviam sido salvos
+						//
+						c = $i(idjanela + "i3GEOgraficointerativo1ComboYlinha");
+						objs = c.getElementsByTagName("select");
+						for (i = 0; i < n; i++) {
+							objs[i].value = config.valoresCombosItens.selects[i];
+						}
+						objs = c.getElementsByTagName("input");
+						n = config.valoresCombosItens.inputs.length;
+						for (i = 0; i < n; i++) {
+							objs[i].value = config.valoresCombosItens.inputs[i];
+						}
+						atualizaConfigGr();
+						if (i3GEOF.graficointerativo1.propJanelas[idjanela].dados == "") {
+							i3GEOF.graficointerativo1.obterDados(idjanela);
+						}
+					};
 					//cria o combo para X e um combo para Y
-					i3GEOF.graficointerativo1.comboItensSel(idjanela);
-					//cria as demais entradas de Y
-					for (i = 0; i < n; i++) {
-						// cria o combo, para cada combo sao adicionados um input para o nome e um input para a cor
-						$i(idjanela + "i3GEOgraficointerativo1ComboYid").onchange.call();
-					}
-					//
-					// restaura os valores dos inputs criados conforme os parametros que haviam sido salvos
-					//
-					c = $i(idjanela + "i3GEOgraficointerativo1ComboYlinha");
-					objs = c.getElementsByTagName("select");
-					for (i = 0; i < n; i++) {
-						objs[i].value = config.valoresCombosItens.selects[i];
-					}
-					objs = c.getElementsByTagName("input");
-					n = config.valoresCombosItens.inputs.length;
-					for (i = 0; i < n; i++) {
-						objs[i].value = config.valoresCombosItens.inputs[i];
-					}
+					i3GEOF.graficointerativo1.comboItensSel(idjanela,f);
 				}
-				// atualiza novamente os campos criados
-				atualizaConfigGr();
-				if (i3GEOF.graficointerativo1.propJanelas[idjanela].dados == "") {
-					i3GEOF.graficointerativo1.obterDados(idjanela);
+				else{
+					// atualiza novamente os campos criados
+					atualizaConfigGr();
+					if (i3GEOF.graficointerativo1.propJanelas[idjanela].dados == "") {
+						i3GEOF.graficointerativo1.obterDados(idjanela);
+					}
 				}
 			}
 		},
@@ -747,7 +758,7 @@ i3GEOF.graficointerativo1 =
 		 *
 		 * <i3GEO.util.comboItens>
 		 */
-		comboItensSel : function(idjanela) {
+		comboItensSel : function(idjanela,funcaoFinaliza) {
 			var geraCombo = function() {
 			}, tema = $i(idjanela + "i3GEOgraficointerativo1ComboTemasId").value;
 
@@ -765,50 +776,54 @@ i3GEOF.graficointerativo1 =
 						var temp = retorno.dados.replace(idjanela + "i3GEOgraficointerativo1ComboXid",idjanela + "i3GEOgraficointerativo1ComboYid");
 
 						$i(idjanela + "i3GEOgraficointerativo1ComboY").innerHTML =
-							"<div>" + temp + "&nbsp;<div class='i3geoForm100 i3geoFormIconeEdita' style='float: right;' ><input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
+							"<div>" + temp + "&nbsp;<div class='i3geoForm100 i3geoFormIconeEdita' style='float: left;left:10px;' ><input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
 								+ "'  type=text id='" + idjanela
-								+ "i3GEOgraficointerativo1ComboYidTitulo' value='' /></div>" + "<div class='i3geoForm100 i3geoFormIconeEdita' style='float: right;' ><input id='" + idjanela
+								+ "i3GEOgraficointerativo1ComboYidTitulo' value='' /></div>" + "<div class='i3geoForm100 i3geoFormIconeEdita' style='float: left;left:15px;' ><input id='" + idjanela
 								+ "i3GEOgraficointerativo1ComboYidcor' title='cor' type='text' value='' /></div>"
-								+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:3px;cursor:pointer src='"
+								+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:15px;cursor:pointer src='"
 								+ i3GEO.configura.locaplic + "/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\"" + idjanela
 								+ "i3GEOgraficointerativo1ComboYidcor\")' /></div><br>";
 
 						//$i(idjanela + "i3GEOgraficointerativo1ComboXid").id = idjanela + "i3GEOgraficointerativo1ComboYid";
 						//para escolher o item de X
 						$i(idjanela + "i3GEOgraficointerativo1ComboX").innerHTML =
-							"<div class=styled-select style='width:160px;'>" + retorno.dados + "&nbsp;<div class='i3geoForm i3geoFormIconeEdita' style='width:240px;float: right;' ><input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
+							"<div class=styled-select >" + retorno.dados + "&nbsp;<div class='i3geoForm i3geoFormIconeEdita' style='width:240px;float: right;' ><input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
 								+ "' type=text id='" + idjanela
 								+ "i3GEOgraficointerativo1ComboXidTitulo' value='' /></div></div>";
 
 						//$i(idjanela + "i3GEOgraficointerativo1ComboXid").style.width = "160px";
 						if ($i(idjanela + "i3GEOgraficointerativo1ComboYid")) {
-							$i(idjanela + "i3GEOgraficointerativo1ComboYid").style.width = "160px";
+							//$i(idjanela + "i3GEOgraficointerativo1ComboYid").style.width = "160px";
 							adicionaFilho =
 								function() {
 									var no = document.createElement("div"), id = "CorG" + parseInt(Math.random() * 100000, 10), novoselect;
 									no.innerHTML = ""
 										+ retorno.dados
-										+ "<div class='i3geoForm i3geoFormIconeEdita' style='width:145px;float: right;' ><input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
-										+ "' type=text value='' /></div>" + "&nbsp;<div class='i3geoForm i3geoFormIconeEdita' style='width:80px;float: right;' ><input id='" + id
+										+ "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;left:10px;' >"
+										+ "<input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
+										+ "' type=text value='' /></div>" + "&nbsp;<div class='i3geoForm100 i3geoFormIconeEdita' style='float: left;left:15px;' ><input id='" + id
 										+ "' type=text value='' title='cor' /></div>"
-										+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:3px;cursor:pointer src='"
+										+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:15px;cursor:pointer src='"
 										+ i3GEO.configura.locaplic
 										+ "/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\"" + id + "\")' /><br>";
 									novoselect = no.getElementsByTagName("select")[0];
 									novoselect.id = "";
 									novoselect.onchange = adicionaFilho;
-									novoselect.style.width = "160px";
 									$i(idjanela + "i3GEOgraficointerativo1ComboY").appendChild(document.createElement("br"));
 									$i(idjanela + "i3GEOgraficointerativo1ComboY").appendChild(no);
 								};
 							$i(idjanela + "i3GEOgraficointerativo1ComboYid").onchange = adicionaFilho;
 						}
 					}
+					//executa uma funcao que foi enviada como parametros. Usado ao restaurar um grafico
+					if(funcaoFinaliza){
+						funcaoFinaliza.call();
+					}
 				};
 			//o primeiro combo gerado contem o id Xid
 			if (i3GEOF.graficointerativo1.propJanelas[idjanela].dadosComboItens == "") {
 				i3GEO.util.comboItens(idjanela + "i3GEOgraficointerativo1ComboXid", tema, geraCombo, idjanela
-					+ "i3GEOgraficointerativo1ComboX", "");
+					+ "i3GEOgraficointerativo1ComboX", "", "", "float:left;");
 			} else {
 				geraCombo(i3GEOF.graficointerativo1.propJanelas[idjanela].dadosComboItens);
 			}
