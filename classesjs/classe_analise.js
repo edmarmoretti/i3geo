@@ -195,10 +195,7 @@ i3GEO.analise = {
 		 * Ferramenta grade de hex&aacute;gonos
 		 */
 		gradeHex : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.gradeHex()",
-				"gradehex",
-				"gradeDeHex");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.gradeHex()","gradehex","gradeDeHex","dependencias.php","i3GEOF.gradeDeHex.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: analisaGeometrias

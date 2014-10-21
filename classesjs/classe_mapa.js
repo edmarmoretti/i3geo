@@ -875,7 +875,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta gradecoord
 			 */
 			gradeCoord : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.gradeCoord()", "gradecoord", "gradeCoord");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.gradeCoord()","gradecoord","gradeCoord","dependencias.php","i3GEOF.gradeCoord.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: cliqueTexto

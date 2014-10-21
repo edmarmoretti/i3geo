@@ -55,6 +55,29 @@ i3GEOF.gradeCoord = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.gradeCoord.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.gradeCoord.dicionario);
+		dicionario["gradeCoordIntervalo"] = $inputText('','','i3GEOgradeCoordintervalo','',4,'2');
+		dicionario["gradeCoordcorlinha"] = $inputText('','','i3GEOgradeCoordcorlinha','',11,'200,200,200');
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["nao"] = $trad("x15");
+		dicionario["gradeCoordlarguralinha"] = $inputText('','','i3GEOgradeCoordlarguralinha','',11,'1');
+		dicionario["sim"] = $trad("x14");
+		dicionario["gradeCoordtamanhotexto"] = $inputText('','','i3GEOgradeCoordtamanhotexto','',3,'10');
+		dicionario["gradeCoordmascara"] = $inputText('','','i3GEOgradeCoordmascara_i','',11,'-1,-1,-1');
+		dicionario["gradeCoordshadowcolor"] = $inputText('','','i3GEOgradeCoordshadowcolor','',11,'-1,-1,-1');
+		dicionario["gradeCoordshadowsizex"] = $inputText('','','i3GEOgradeCoordshadowsizex','',3,'0');
+		dicionario["gradeCoordshadowsizey"] = $inputText('','','i3GEOgradeCoordshadowsizey','',3,'0');
+		dicionario["gradeCoordcortexto"] = $inputText('','','i3GEOgradeCoordcortexto','',11,'0,0,0');
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -103,66 +126,8 @@ i3GEOF.gradeCoord = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<table summary="" class=lista >' +
-		'<tr><td>'+$trad('intervalo',i3GEOF.gradeCoord.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOgradeCoordintervalo","",4,"2") +
-		'</td></tr>' +
-		'<tr><td>&nbsp;</td><td></td></tr>' +
-		'<tr><td>'+$trad('cor',i3GEOF.gradeCoord.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOgradeCoordcorlinha","",11,"200,200,200") +
-		'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.gradeCoord.corj(\'i3GEOgradeCoordcorlinha\')" />' +
-		'</td></tr>' +
-		'<tr><td>&nbsp;</td><td></td></tr>' +
-		'<tr><td>'+$trad('largura',i3GEOF.gradeCoord.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOgradeCoordlarguralinha","",11,"1") +
-		'</td></tr>' +
-		'<tr><td>&nbsp;</td><td></td></tr>' +
-		'<tr><td>'+$trad('tipoLinha',i3GEOF.gradeCoord.dicionario)+':</td><td>' +
-		'	<select id=i3GEOgradeCoordtipolinha >' +
-		'		<option value="linha" >'+$trad('solido',i3GEOF.gradeCoord.dicionario)+'</option>' +
-		'		<option value="ferrovia-line2" >'+$trad('tracejado',i3GEOF.gradeCoord.dicionario)+'</option>' +
-		'	</select>' +
-		'</td></tr>' +
-		'<tr><td>&nbsp;</td><td></td></tr>' +
-		'<tr><td>Inclui textos:</td><td>' +
-		'	<select id=i3GEOgradeCoordincluitexto >' +
-		'		<option value="sim" >'+$trad("x14")+'</option>' +
-		'		<option value="nao" >'+$trad("x15")+'</option>' +
-		'	</select>' +
-		'</td></tr>' +
-		'<tr><td>&nbsp;</td><td></td></tr>' +
-		'<tr><td>'+$trad('tamanhoTexto',i3GEOF.gradeCoord.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOgradeCoordtamanhotexto","",3,"10") +
-		'</td></tr>' +
-		'<tr><td>&nbsp;</td><td></td></tr>' +
-		'<tr><td>'+$trad('fonteTexto',i3GEOF.gradeCoord.dicionario)+':</td>' +
-		'	<td id=i3GEOgradeCoordfontef ></td></tr>' +
-		'<tr><td>&nbsp;</td><td></td></tr>' +
-		'<tr>' +
-		'	<td>'+$trad('corMascara',i3GEOF.gradeCoord.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOgradeCoordmascara_i","",11,"-1,-1,-1") +
-		'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.gradeCoord.corj(\'i3GEOgradeCoordmascara_i\')" />' +
-		'	</td>' +
-		'</td></tr>' +
-		'<tr><td>&nbsp;</td><td></td></tr>' +
-		'<tr><td>'+$trad('corSombra',i3GEOF.gradeCoord.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOgradeCoordshadowcolor","",11,"-1,-1,-1") +
-		'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.gradeCoord.corj(\'i3GEOgradeCoordshadowcolor\')" />' +
-		'</td></tr>' +
-		'<tr><td>&nbsp;</td><td></td></tr>' +
-		'<tr>' +
-		'	<td>'+$trad('deslocamentoSombra',i3GEOF.gradeCoord.dicionario)+':</td><td>' +
-		'		x '+$inputText("","","i3GEOgradeCoordshadowsizex","",3,"0") +
-		'		<br>y '+$inputText("","","i3GEOgradeCoordshadowsizey","",3,"0") +
-		'</td></tr>' +
-		'<tr><td>&nbsp;</td><td></td></tr>' +
-		'<tr><td>'+$trad('corTexto',i3GEOF.gradeCoord.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOgradeCoordcortexto","",11,"0,0,0") +
-		'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.gradeCoord.corj(\'i3GEOgradeCoordcortexto\')" />' +
-		'</td></tr>' +
-		'</table><br>' +
-		'<p class=paragrafo ><input id=i3GEOgradeCoordbotao1 size=10  type=button value="'+$trad('criaGrade',i3GEOF.gradeCoord.dicionario)+'" />';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.gradeCoord.MUSTACHE, i3GEOF.gradeCoord.mustacheHash());
 		return ins;
 	},
 	/*
