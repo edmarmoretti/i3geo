@@ -74,6 +74,18 @@ i3GEOF.inseretxt = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.inseretxt.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.inseretxt.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -170,40 +182,8 @@ i3GEOF.inseretxt = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '' +
-		'<div id=i3GEOinseretxtguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
-		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a  ><em><div id="i3GEOinseretxtguia3" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'+$trad('propriedades',i3GEOF.inseretxt.dicionario)+'" src="'+i3GEO.configura.locaplic+'/imagens/visual/default/branco.gif"></div></em></a></li>' +
-		'		<li><a  ><em><div id="i3GEOinseretxtguia1" style="text-align:center;left:0px;" >'+$trad('digita',i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
-		'		<li><a  ><em><div id="i3GEOinseretxtguia2" style="text-align:center;left:0px;" >'+$trad('captura',i3GEOF.inseretxt.dicionario)+'</div></em></a></li>' +
-		'	</ul>' +
-		'</div><br>' +
-		'	<div class=guiaobj id="i3GEOinseretxtguia1obj" style="left:1px;display:none;">' +
-		'		<p class="paragrafo" >'+$trad('insereTexto',i3GEOF.inseretxt.dicionario)+':</p>' +
-		'		<div class="i3geoForm i3geoFormIconeEdita" >' +
-		'		<input type="text" id="i3GEOinseretxttexto" value="" />' +
-		'		</div>' +
-		'		<br><p class="paragrafo" >' +
-		'		<input class=inputsb style=cursor:pointer type=checkbox id=i3GEOinseretxttextoconector >'+$trad('insereConector',i3GEOF.inseretxt.dicionario) +
-		'		</p><div id=i3GEOinseretxtmen1 style="text-align:left;" >'+
-		'			<p class="paragrafo" >'+$trad('ajuda',i3GEOF.inseretxt.dicionario) +
-		'		</div>' +
-		'	</div>' +
-		'	<div class=guiaobj id="i3GEOinseretxtguia2obj" style="left:1px;display:none;">' +
-		'		<p class=paragrafo >' + $trad('selecionaTema',i3GEOF.inseretxt.dicionario) +
-		'		<div id=i3GEOinseretxtDivComboTemas class="styled-select" >'+$trad('msgAguarde',i3GEOF.inseretxt.dicionario)+'...' +
-		'		</div><br>' +
-		'		<p class=paragrafo >'+$trad('selecionaItem',i3GEOF.inseretxt.dicionario)+':</p>' +
-		'		<div id=i3GEOinseretxtDivComboItens class="styled-select">'+
-		'		</div>' +
-		'		<br><br>' +
-		'		<div id=i3GEOinseretxtmen2 style="text-align:left;" >' +
-		'			<p class=paragrafo >' + $trad('ajuda2',i3GEOF.inseretxt.dicionario) + '</p>' +
-		'		</div>' +
-		'	</div>' +
-		'	<div class=guiaobj id="i3GEOinseretxtguia3obj" style="left:1px;display:none;">' +
-		'	</div>	';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.inseretxt.MUSTACHE, i3GEOF.inseretxt.mustacheHash());
 		return ins;
 	},
 	/*

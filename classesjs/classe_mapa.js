@@ -883,7 +883,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta inseretxt
 			 */
 			cliqueTexto : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliqueTexto()", "inseretxt", "inseretxt");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliqueTexto()","inseretxt","inseretxt","dependencias.php","i3GEOF.inseretxt.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: selecao
