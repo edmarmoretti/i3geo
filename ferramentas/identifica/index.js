@@ -53,6 +53,18 @@ i3GEOF.identifica = {
 		 */
 		janelas: [],
 		propJanelas: {},
+		/**
+		 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+		 */
+		MUSTACHE : "",
+		/**
+		 * Susbtitutos para o template
+		 */
+		mustacheHash : function(idjanela) {
+			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.identifica.dicionario);
+			dicionario["idjanelaA"] = idjanela;
+			return dicionario;
+		},
 		/*
 	Propriedade: mostraLinkGeohack
 
@@ -426,43 +438,8 @@ i3GEOF.identifica = {
 
 	String com o c&oacute;digo html
 		 */
-		html:function(idjanela){
-			var ins = '';
-			ins += '<div id='+idjanela+'i3GEOidentificaguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
-			ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-			ins += '		<li><a  ><em><div id="'+idjanela+'i3GEOidentificaguia1" style="text-align:center;left:0px;" >'+$trad('temasVisiveis',i3GEOF.identifica.dicionario)+'</div></em></a></li>';
-			ins += '		<li><a  ><em><div id="'+idjanela+'i3GEOidentificaguia2" style="text-align:center;left:0px;" >'+$trad('todos',i3GEOF.identifica.dicionario)+'</div></em></a></li>';
-			ins += '		<li><a  ><em><div id="'+idjanela+'i3GEOidentificaguia4" style="text-align:center;left:0px;" >'+$trad('etiquetas',i3GEOF.identifica.dicionario)+'</div></em></a></li>';
-			ins += '		<li><a  ><em><div id="'+idjanela+'i3GEOidentificaguia5" style="text-align:center;left:0px;" >XY/buffer</div></em></a></li>';
-			ins += '		<li><a  ><em><div id="'+idjanela+'i3GEOidentificaguia3" style="text-align:center;left:0px;" >'+$trad('propriedades',i3GEOF.identifica.dicionario)+'</div></em></a></li>';
-			ins += '	</ul>';
-			ins += '</div>';
-			//ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
-			ins += '	<div class=guiaobj id="'+idjanela+'i3GEOidentificaguia1obj" style="left:1px;90%">';
-			ins += '		<div id="'+idjanela+'i3GEOidentificatemaativo" class="geralFerramentas" style="overflow: hidden;display:block;position:relative;top:-5px;left:0px;width:150px">';
-			ins += '			<div style="left:0px;width:150px;text-align:left;" id="'+idjanela+'i3GEOidentificalistaTemas" >'+$trad('msgAguarde',i3GEOF.identifica.dicionario)+'...</div>';
-			ins += '			<div style="left:0px;width:150px;text-align:left;" id="'+idjanela+'i3GEOidentificalistaSistemas" >'+$trad('msgAguarde',i3GEOF.identifica.dicionario)+'...</div>';
-			ins += '		</div>';
-			ins += '		<div id="'+idjanela+'i3GEOidentificaocorrencia" style="overflow: hidden;font-size: 10px;display:block;position:absolute;top:5px;left:165px;width:60%"></div>';
-			ins += '	</div>';
-			ins += '	<div class=guiaobj id="'+idjanela+'i3GEOidentificaguia2obj" style="left:1px">';
-			ins += '	</div>';
-			ins += '	<div class=guiaobj id="'+idjanela+'i3GEOidentificaguia3obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
-			ins += $trad('resolucaoBusca',i3GEOF.identifica.dicionario)+':<br><br>';
-			ins += '	<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" value="12" id="'+idjanela+'i3GEOidentificaresolucao" /></div>';
-			//<input onclick="javascript:this.select();" type=text class=digitar value=5 id="i3GEOidentificaresolucao" size=2 />';
-			ins += '	<br><br></div>';
-			ins += '	<div class=guiaobj id="'+idjanela+'i3GEOidentificaguia4obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
-			ins += $trad('mostraEtiquetas',i3GEOF.identifica.dicionario);
-			ins += '		<br><br><input id='+idjanela+'i3GEOidentificabotao1 size=20  type=button value="'+$trad('configuraEtiqueta',i3GEOF.identifica.dicionario)+'" />';
-			ins += '	</div>';
-			ins += '	<div class=guiaobj id="'+idjanela+'i3GEOidentificaguia5obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
-			ins += '		<b>'+$trad('valorPonto',i3GEOF.identifica.dicionario)+'<br></b>';
-			ins += '		<div id='+idjanela+'i3GEOidentificacoord ></div><br>';
-			ins += '		<div id='+idjanela+'i3GEOidentificacoordtexto style=text-align:left ></div>';
-			ins += '		<br><br><input id='+idjanela+'i3GEOidentificabotao2 size=20  type=button value="'+$trad('criaBuffer',i3GEOF.identifica.dicionario)+'" /><br>';
-			ins += '	</div>';
-			//ins += '</div>	';
+		html:function(idjanela) {
+			var ins = Mustache.render(i3GEOF.identifica.MUSTACHE, i3GEOF.identifica.mustacheHash(idjanela));
 			return ins;
 		},
 		/*
