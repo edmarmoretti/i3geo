@@ -644,7 +644,7 @@ function dimensoesTabelas(){
 			select ".implode(",",$incluirChaves).", tabelamedida{$c["id_medida_variavel"]}.{$c["colunaidgeo"]}::text as codigoreg
 		";
 		if(count($dimRegioes[$c["codigo_tipo_regiao"]]["colunas"]) > 0){
-			$sql .= ",tabela{$r["codigo_tipo_regiao"]}".implode(",tabela{$r["codigo_tipo_regiao"]}",$dimRegioes[$c["codigo_tipo_regiao"]]["colunas"]);
+			$sql .= ",tabela{$r["codigo_tipo_regiao"]}.".implode(",tabela{$r["codigo_tipo_regiao"]}.",$dimRegioes[$c["codigo_tipo_regiao"]]["colunas"]);
 		}
 
 		$sql .= "
