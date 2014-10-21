@@ -53,6 +53,17 @@ i3GEOF.insereGrafico = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.insereGrafico.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.insereGrafico.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -109,38 +120,8 @@ i3GEOF.insereGrafico = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins += '<div id=i3GEOinseregraficoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
-		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a  ><em><div id="i3GEOinseregraficoguia1" style="text-align:center;left:0px;" >'+$trad('fonteDados',i3GEOF.insereGrafico.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a  ><em><div id="i3GEOinseregraficoguia2" style="text-align:center;left:0px;" >'+$trad('propriedades',i3GEOF.insereGrafico.dicionario)+'</div></em></a></li>';
-		ins += '	</ul>';
-		ins += '</div><br>';
-		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia1obj" style="left:1px;display:none;">';
-		ins += '		<p class="paragrafo">Escolha o tema com os dados:';
-		ins += '		<div id=i3GEOinseregraficotemasi class=styled-select style="display:block;">'+$trad('msgAguarde',i3GEOF.insereGrafico.dicionario)+'...';
-		ins += '		</div>';
-		ins += '		<div id=i3GEOinseregraficolistai class=digitar style="left:0px;top:20px;330px;height:80px;overflow:auto;display:block;">'+$trad('selecionaTema',i3GEOF.insereGrafico.dicionario)+'</div>';
-		ins += '		<br><br><br>';
-		ins += '		<p class="paragrafo"><input id=i3GEOinseregraficobotao1 size=35  type=button value="mostrar legenda no mapa" />';
-		ins += '		<div id=i3GEOinseregraficomen1 style=top:10px;left:1px ><p class="paragrafo">'+$trad('selecionaItens',i3GEOF.insereGrafico.dicionario)+'</div>';
-		ins += '	</div>';
-		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia2obj" style="left:1px;display:none;">';
-		ins += '		<p class=paragrafo >Tamanho do c&iacute;rculo:</p>';
-		ins += '		<div class="i3geoForm i3geoFormIconeEdita" >';
-		ins += '		<input type=text value=50 id=i3GEOinseregraficow />';
-		ins += '		</div>';
-		ins += '		<br><p class=paragrafo >'+$trad('inclinacaoCirculo',i3GEOF.insereGrafico.dicionario)+':</p>';
-		ins += '		<div class="i3geoForm i3geoFormIconeEdita" >';
-		ins += '		<input type=text value=1.5 id=i3GEOinseregraficoinclinacao />';
-		ins += '		</div>';
-		ins += '		<br><p class=paragrafo >'+$trad('tamanhoSombra',i3GEOF.insereGrafico.dicionario)+':</p>';
-		ins += '		<div class="i3geoForm i3geoFormIconeEdita" >';
-		ins += '		<input type=text value=5 id=i3GEOinseregraficosombra />';
-		ins += '		</div>';
-		ins += '	</div>';
-		ins += '</div>	';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.insereGrafico.MUSTACHE, i3GEOF.insereGrafico.mustacheHash());
 		return ins;
 	},
 	/*
