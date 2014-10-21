@@ -56,6 +56,23 @@ i3GEOF.importarwmc = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.importarwmc.iniciaDicionario();
 	},
+	/**
+	 * Objeto com as propriedades de cada janela. A chave e o id da janela armazenado em i3GEO.tabela.janelas
+	 */
+	propJanelas : {},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.importarwmc.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["sid"] = i3GEO.configura.sid;
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -103,15 +120,8 @@ i3GEOF.importarwmc = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<form id=i3GEOimportarwmcf target="i3GEOimportarwmciframe" action="'+i3GEO.configura.locaplic+'/ferramentas/importarwmc/upload.php" method="post" ENCTYPE="multipart/form-data">' +
-		'<p class="paragrafo" >'+$trad('arquivo',i3GEOF.importarwmc.dicionario)+': <br><input type="file" size=18 name="i3GEOimportarwmc" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" >Ou URL: </p><div class="i3geoForm i3geoFormIconeEdita" ><input type="text" name="i3GEOimportarwmcurl" /></div>' +
-		'<br><p class="paragrafo" ><input id=i3GEOimportarwmcbotao1 type="button" value="'+$trad('importar',i3GEOF.importarwmc.dicionario)+'" size=12 name="submit">' +
-		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
-		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
-		'</form>' +
-		'<br><iframe name=i3GEOimportarwmciframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.importarwmc.MUSTACHE, i3GEOF.importarwmc.mustacheHash());
 		return ins;
 	},
 	/*

@@ -3026,7 +3026,7 @@ i3GEO.arvoreDeTemas = {
 		 */
 		importarwmc : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-					+ "/ferramentas/importarwmc/index.js",
+					+ "/ferramentas/importarwmc/dependencias.php",
 					"i3GEOF.importarwmc.criaJanelaFlutuante()",
 					"i3GEOF.importarwmc_script");
 		},
