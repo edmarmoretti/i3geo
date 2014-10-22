@@ -16,7 +16,7 @@ session_start();
 //obtem os layers que sao do sistema metaestat, sao regioes e que possuem selecao
 $map_file = $_SESSION["map_file"];
 //remove as camadas do SAIKU
-if($_POST["opcoes"] == ""){
+if($_POST["dados"] == ""){
 	$mapa = ms_newMapObj($map_file);
 	$nlayers = $mapa->numlayers;
 	for($i=0;$i<$nlayers;$i++){

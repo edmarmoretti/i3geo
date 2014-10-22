@@ -101,6 +101,9 @@ var i3GeoMap = Backbone.View.extend({
 	reiniciarMapa: function(){
 		document.getElementById('formi3GeoMapOpcoes').value = "reinicia";
 		document.getElementById('formi3GeoMapdados').value = "";
+		this.opcoes.locaplic = parametroUrl("locaplic");
+		this.opcoes.mapext = parametroUrl("mapext");
+		document.getElementById("formi3GeoMapOpcoes").value = JSON.stringify(this.opcoes);
 		document.getElementById('formi3GeoMap').submit();
 	},
 	show: function(event, ui) {
