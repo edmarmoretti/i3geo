@@ -71,6 +71,17 @@ i3GEOF.nuvemtags = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.nuvemtags.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.nuvemtags.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -169,18 +180,8 @@ i3GEOF.nuvemtags = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '' +
-		'<div id=i3GEOnuvemtagsguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
-		'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-		'		<li><a  ><em><div id="i3GEOnuvemtagsguia1" style="text-align:center;left:0px;" >'+$trad('lista',i3GEOF.nuvemtags.dicionario)+'</div></em></a></li>' +
-		'		<li><a  ><em><div id="i3GEOnuvemtagsguia2" style="text-align:center;left:0px;" >'+$trad('cruzamento',i3GEOF.nuvemtags.dicionario)+'</div></em></a></li>' +
-		'	</ul>' +
-		'</div><br>' +
-		'<div class=guiaobj id="i3GEOnuvemtagsguia1obj" style="left:1px;display:none;">' +
-		'</div> ' +
-		'<div class=guiaobj id="i3GEOnuvemtagsguia2obj" style="left:1px;display:none;top:-5px">' +
-		'</div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.nuvemtags.MUSTACHE, i3GEOF.nuvemtags.mustacheHash());
 		return ins;
 	},
 	/*

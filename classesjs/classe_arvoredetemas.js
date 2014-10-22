@@ -2990,7 +2990,7 @@ i3GEO.arvoreDeTemas = {
 		 */
 		nuvemTags : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-					+ "/ferramentas/nuvemtags/index.js",
+					+ "/ferramentas/nuvemtags/dependencias.php",
 					"i3GEOF.nuvemtags.criaJanelaFlutuante()",
 					"i3GEOF.nuvemtags_script");
 		},

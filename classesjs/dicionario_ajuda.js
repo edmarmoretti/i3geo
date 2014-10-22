@@ -262,7 +262,7 @@ g_traducao_ajuda = {
 			pt:"A nuvem de tags &eacute; uma forma de localizar camadas dispon&iacute;veis para ser vistas no mapa. A busca &eacute; feita por meio de tags ou palavras-chave. As tags s&atilde;o registradas pelo administrador do i3Geo para cada tema dispon&iacute;vel na &aacute;rvore de temas.",
 			complemento:"Ao escolher uma tag, &eacute; realizada uma busca dos temas correspondentes e o resultado &eacute; adicionado &agrave; arvore de temas. Opcionalmente, o usu&aacute;rio pode escolher navegar na nuvem 'animada' que mostra as tags como um globo 3d.",
 			//tela:"ferramentas/nuvemtags/exemplo.htm",
-			apijs:"i3GEO.arvoreDeTemas.conectargeorss.nuvemTags()"
+			apijs:"i3GEO.arvoreDeTemas.dialogo.nuvemTags()"
 		},
 		"31": {
 			titulo: "Procurar tema",
