@@ -899,7 +899,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta inserexy2
 			 */
 			cliquePonto : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliquePonto()", "inserexy2", "inserexy");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.cliquePonto()","inserexy2","inserexy","dependencias.php","i3GEOF.inserexy.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: cliqueGrafico
