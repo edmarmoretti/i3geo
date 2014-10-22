@@ -74,6 +74,17 @@ i3GEOF.mostraExten = {
 			i3GEOF.mostraExten.iniciaJanelaFlutuante();
 		}
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.mostraExten.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: inicia
 
@@ -104,36 +115,8 @@ i3GEOF.mostraExten = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<div style="padding:5px"><p class="paragrafo" >'+$trad('ajuda',i3GEOF.mostraExten.dicionario)+':</p>' +
-		'<textarea id=i3GEOmostraExtenatual rows=3 cols=50 onclick="javascript:this.select();"></textarea>' +
-		'<p class="paragrafo" >	'+$trad('digitaCoord',i3GEOF.mostraExten.dicionario)+':</p>' +
-		'	<table class=lista3 style="width:350px;">' +
-		'		<tr><td>'+$trad('longW',i3GEOF.mostraExten.dicionario)+':</td>' +
-		'		<td>' +
-		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenxg" value="-00"/></div>' +
-		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenxm" value="00"/></div>' +
-		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenxs" value="0.0"/></div>' +
-		'		</td></tr>' +
-		'		<tr><td>'+$trad('latS',i3GEOF.mostraExten.dicionario)+':</td>' +
-		'		<td>' +
-		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenyg" value="-00"/></div>' +
-		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenym" value="00"/></div>' +
-		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenys" value="0.0"/></div>' +
-		'		</td></tr>' +
-		'		<tr><td>'+$trad('longE',i3GEOF.mostraExten.dicionario)+':</td>' +
-		'		<td>' +
-		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenxxg" value="-00"/></div>' +
-		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenxxm" value="00"/></div>' +
-		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenxxs" value="0.0"/></div>' +
-		'		</td></tr>' +
-		'		<tr><td>'+$trad('latN',i3GEOF.mostraExten.dicionario)+':</td>' +
-		'		<td>' +
-		'<div class="styled-select" style="width:40px;float:left;" ><input type="text" id="i3GEOmostraExtenyyg" value="-00"/></div>' +
-		'<div class="styled-select" style="width:40px;float:left;margin-left:5px;margin-right:5px;" ><input type="text" id="i3GEOmostraExtenyym" value="00"/></div>' +
-		'<div class="styled-select" style="width:50px;margin-left:5px;" ><input type="text" id="i3GEOmostraExtenyys" value="0.0"/></div>' +
-		'		</td></tr></table>' +
-		'<br><p class="paragrafo" ><input id=i3GEOmostraExtenbotao1 type="button" size=14 value="'+$trad('aplica',i3GEOF.mostraExten.dicionario)+'"  /></p></div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.mostraExten.MUSTACHE, i3GEOF.mostraExten.mustacheHash());
 		return ins;
 	},
 	/*

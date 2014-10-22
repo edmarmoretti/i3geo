@@ -742,7 +742,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta que mostra a extensao geografica atual do mapa
 			 */
 			mostraExten : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.mostraExten()", "mostraexten", "mostraExten");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.mostraExten()","mostraexten","mostraExten","dependencias.php","i3GEOF.mostraExten.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: outputformat

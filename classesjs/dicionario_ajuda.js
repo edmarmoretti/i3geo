@@ -463,7 +463,7 @@ g_traducao_ajuda = {
 			pt:"A extens&atilde;o geogr&aacute;fica &eacute; a abrang&ecirc;ncia espacial do mapa definido por meio de uma lista de coordenadas em d&eacute;cimos de grau e na ordem menor longitude, menor latitude, maior longitude, maior latitude. A extens&atilde;o geogr&aacute;fica do mapa pode ser alterada digitando-se novas coordenadas por meio dessa ferramenta.",
 			complemento:"O resultado final do mapa quando se altera a extens&atilde;o pode n&atilde;o corresponder as espectativas, uma vez que o mapa &eacute; um ret&acirc;ngulo cujas propor&ccedil;&otilde;es podem n&atilde;o ser compat&iacute;veis com as coordenadas digitadas.",
 			//tela:"ferramentas/mostraexten/exemplo.htm",
-			apijs:"i3GEO.configura.funcoesBotoes"
+			apijs:"i3GEO.mapa.dialogo.mostraExten"
 		},
 		"56": {
 			titulo: "Deslocamento do mapa - PAN",
