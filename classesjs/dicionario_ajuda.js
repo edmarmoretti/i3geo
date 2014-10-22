@@ -721,7 +721,7 @@ g_traducao_ajuda = {
 			categoria:"8",
 			pt:"A rede <a href='http://weather.noaa.gov/' target='_blank' >metar</a> reune dados de esta&ccedil;&otilde;es meteorol&oacute;gicas espalhadas por toto o mundo. Essa ferramenta mostra as esta&ccedil;&otilde;es existentes na extens&atilde;o geogr&aacute;fica do mapa",
 			complemento:"Os dados da rede Metar s&atilde;o acessados indiretamente por meio dos Web Services do site Geonames.",
-			apijs:"i3GEO.configura"
+			apijs:"i3GEO.navega.dialogo.metar"
 			//tela:""
 		},
 		"88": {

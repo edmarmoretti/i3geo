@@ -60,6 +60,17 @@ i3GEOF.metar = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.metar.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.metar.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -115,9 +126,8 @@ i3GEOF.metar = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins += '<div id=i3GEOmetarLista style=display:block;background-color:white;text-align:left;padding:5px; ></div>';
+	html : function() {
+		var ins = Mustache.render(i3GEOF.metar.MUSTACHE, i3GEOF.metar.mustacheHash());
 		return ins;
 	},
 	/*

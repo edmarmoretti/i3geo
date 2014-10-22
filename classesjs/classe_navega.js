@@ -124,9 +124,9 @@ i3GEO.navega = {
 	Desloca o centro do mapa para um ponto. Utiliza as funcoes da API em uso para executar o pan
 
 	Parameters:
-	
+
 	x - longitude
-	
+
 	y - latitude
 	*/
 	pan2ponto: function(x,y){
@@ -435,7 +435,7 @@ i3GEO.navega = {
 	/*
 	Function: panFixo
 
-	Desloca o mapa para uma determinada dire&ccedil;&atilde;o com uma distância fixa.
+	Desloca o mapa para uma determinada dire&ccedil;&atilde;o com uma distï¿½ncia fixa.
 
 	Parametros:
 
@@ -1353,7 +1353,7 @@ i3GEO.navega = {
 		Abre a janela de di&aacute;logo da ferramenta metar permitindo a navega&ccedil;&atilde;o integrada com a rede de dados meteorol&oacute;gicos
 		*/
 		metar: function(){
-			i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.metar()","metar","metar");
+			i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.metar()","metar","metar","dependencias.php","i3GEOF.metar.iniciaJanelaFlutuante()");
 		},
 		/*
 		Function: buscaFotos
