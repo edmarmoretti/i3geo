@@ -88,6 +88,7 @@ $xmlTempo = dimensoesTemporais();
 $filhosDaRegiao = array();
 $VirtualCubeDimensionDaRegiao = array();
 $VirtualCubeMeasureDaRegiao = array();
+$nivelDaDimensao = array();
 
 $dimRegioes = dimensoesGeo();
 
@@ -197,7 +198,7 @@ function criaConexaoEsquema(){
 	}
 	else{
 		$urlXmlEsquema = $_GET["xmlesquema"];
-		//cria um nome de arquivo reaproveit√°vel
+		//cria um nome de arquivo reaproveit·vel
 		$nomeConexao = md5($_GET["xmlesquema"]);
 	}
 	//$arquivoXmlEsquema = dirname($map_file)."/".$nomeConexao.".xml";
@@ -434,11 +435,11 @@ function dimensoesGeo(){
 		$temp = converte($regiao["nome_tipo_regiao"]);
 		$niveisXml1[] = "
 			<Level name='".$temp."' column='codigo{$regiao["codigo_tipo_regiao"]}' nameColumn='nome".$regiao["codigo_tipo_regiao"]."'
-			uniqueMembers='true' />
+			uniqueMembers='false' />
 			";
 		$niveisXml2[] = "
 				<Level name='".$temp." - GeoCod #".$regiao["codigo_tipo_regiao"]."' column='codigo{$regiao["codigo_tipo_regiao"]}' nameColumn='codigo".$regiao["codigo_tipo_regiao"]."'
-				uniqueMembers='true' />
+				uniqueMembers='false' />
 			";
 		//juncoes
 		while($caminho){
@@ -515,7 +516,7 @@ function dimensoesGeo(){
 	return $xmlRegioes;
 }
 function dimensoesOutras(){
-	global $m;
+	global $m,$nivelDaDimensao;
 	$parametros = $m->listaTodosParametros();
 	$dimOutras = array();
 	foreach($parametros as $p){
@@ -535,7 +536,7 @@ function dimensoesOutras(){
 		$k = $d["esquemadb"]."_".$d["tabela"]."_".$d["coluna"];
 		$xml3 .= "
 		<Dimension name='".$k."' caption='".converte($d["nome"])."'>
-		<Hierarchy hasAll='false'  primaryKey='codigo'>
+		<Hierarchy hasAll='true'  primaryKey='codigo'>
 		";
 		//cria uma view juntando as tabelas da hierarquia de regioes
 		$colunas = "dim.{$d['coluna']}::text as codigo, ";
@@ -544,15 +545,16 @@ function dimensoesOutras(){
 		$xml3 .= "<view alias='".$k."' ><SQL dialect='generic' >$sql</SQL></view>";
 		$xml3 .= "<Level name='".converte($d["nome"])."'
 		column='codigo'
-		nameColumn='nome' uniqueMembers='true' />
+		nameColumn='nome' uniqueMembers='false' />
 		";
+		$nivelDaDimensao[$k] = converte($d["nome"]);
 		$xml3 .= "</Hierarchy>
 		</Dimension>";
 	}
 	return $xml3;
 }
 function dimensoesTabelas(){
-	global $dimRegioes, $filhosDaRegiao, $m, $VirtualCubeDimension, $VirtualCubeMeasure, $chavesRegiao, $medidas, $codigo_tipo_regiao, $VirtualCubeDimensionDaRegiao, $VirtualCubeMeasureDaRegiao;
+	global $nivelDaDimensao,$dimRegioes, $filhosDaRegiao, $m, $VirtualCubeDimension, $VirtualCubeMeasure, $chavesRegiao, $medidas, $codigo_tipo_regiao, $VirtualCubeDimensionDaRegiao, $VirtualCubeMeasureDaRegiao;
 
 	$xml = "";
 	$tbs = array();
@@ -623,6 +625,7 @@ function dimensoesTabelas(){
 					array_push($VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],"<VirtualCubeDimension name='{$k}' />");
 				}
 			}
+
 		}
 		//$dimEnsoes[] = '<DimensionUsage foreignKey="coduf" name="codigo_tipo_regiao_2" source="codigo_tipo_regiao_2"/>';
 
