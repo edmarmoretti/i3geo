@@ -758,7 +758,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta opcoes_autoredesenha
 			 */
 			autoredesenha : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.autoredesenha()", "opcoes_autoredesenha", "opcoesTempo");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.autoredesenha()","opcoes_autoredesenha","opcoesTempo","dependencias.php","i3GEOF.opcoesTempo.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: salvaMapa

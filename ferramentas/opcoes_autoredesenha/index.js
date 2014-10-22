@@ -56,6 +56,17 @@ i3GEOF.opcoesTempo = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.opcoesTempo.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.opcoesTempo.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -107,15 +118,8 @@ i3GEOF.opcoesTempo = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<div style=padding-left:5px; >' +
-		'<p class=paragrafo >' +
-		$trad('ajuda',i3GEOF.opcoesTempo.dicionario)+':</p>' +
-		'<div class=styled-select >' +
-		'<input type=text  value="5" id="i3GEOopcoesTempoT" />' +
-		'</div>' +
-	  	'<br><p class=paragrafo ><input id=i3GEOopcoesTempobotao1 size=16  type=button value="'+$trad('aplica',i3GEOF.opcoesTempo.dicionario)+'"/>' +
-	  	'&nbsp;<input id=i3GEOopcoesTempobotao2 size=16 type=button value="'+$trad('para',i3GEOF.opcoesTempo.dicionario)+'"/></div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.opcoesTempo.MUSTACHE, i3GEOF.opcoesTempo.mustacheHash());
 		return ins;
 	},
 	/*
