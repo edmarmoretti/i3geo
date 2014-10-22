@@ -53,7 +53,8 @@ var i3GeoMap = Backbone.View.extend({
 						"&nbsp;<input type=button name=coresChapadas value='Cores' />"+
 						"&nbsp;<input type=button name=calor value='Calor' />"+
 						"&nbsp;<input type=button name=atualizarMapa value='Atualiza' />"+
-						"&nbsp;<input type=button name=fecharMapa value='Fechar' />"+
+						"&nbsp;<input type=button name=reiniciarMapa value='Reinicia' />"+
+						"&nbsp;<input type=button name=fecharMapa value='Fecha' />"+
 					//"</ul>"+
 				"</div>"+
 			"</div>"+
@@ -95,6 +96,11 @@ var i3GeoMap = Backbone.View.extend({
 		this.workspace.table.render({ data: this.workspace.query.result.lastresult() });
 	},
 	atualizarMapa: function(){
+		document.getElementById('formi3GeoMap').submit();
+	},
+	reiniciarMapa: function(){
+		document.getElementById('formi3GeoMapOpcoes').value = "reinicia";
+		document.getElementById('formi3GeoMapdados').value = "";
 		document.getElementById('formi3GeoMap').submit();
 	},
 	show: function(event, ui) {
