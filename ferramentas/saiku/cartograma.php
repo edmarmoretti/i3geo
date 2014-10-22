@@ -16,6 +16,7 @@ session_start();
 //obtem os layers que sao do sistema metaestat, sao regioes e que possuem selecao
 $map_file = $_SESSION["map_file"];
 //remove as camadas do SAIKU
+$opcoes = (array) json_decode($_POST["opcoes"],true);
 if($_POST["dados"] == ""){
 	$mapa = ms_newMapObj($map_file);
 	$nlayers = $mapa->numlayers;
@@ -29,7 +30,6 @@ if($_POST["dados"] == ""){
 }
 else{
 	$dados = (array) json_decode($_POST["dados"],true);
-	$opcoes = (array) json_decode($_POST["opcoes"],true);
 	$metadados = (array) json_decode($_POST["metadados"],true);
 	$nmetadados = count($metadados);
 	//pega o id da regiao (busca pelo posfixo geocod)
