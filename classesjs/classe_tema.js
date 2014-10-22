@@ -580,7 +580,7 @@ i3GEO.tema = {
 			 */
 			editaLegenda: function(idtema){
 				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editaLegenda()","legenda","legenda");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editaLegenda()","legenda","legenda","dependencias.php","i3GEOF.legenda.iniciaJanelaFlutuante()");
 			},
 			/*
 		Function: download

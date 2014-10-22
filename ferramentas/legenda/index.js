@@ -44,53 +44,53 @@ i3GEOF.legenda =
 	{
 		/*
 		 * Variavel: parDefault
-		 * 
+		 *
 		 * Parametros padr&atilde;o utilizados para formatar os labels
 		 */
 		parDefault : "&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
 		/*
 		 * Variavel: aviso
-		 * 
+		 *
 		 * Indica que uma altera&ccedil;&atilde;o ainda n&atilde;o foi salva
-		 * 
+		 *
 		 * Type: {boolean}
 		 */
 		aviso : false,
 		/*
 		 * Variavel: tema
-		 * 
+		 *
 		 * Tema que ser&aacute; utilizado
-		 * 
+		 *
 		 * Type: {string}
 		 */
 		tema : i3GEO.temaAtivo,
 		/*
 		 * Variavel: dadosGrafico
-		 * 
+		 *
 		 * Dados utilizados no gr&aacute;fico no formato da ferramenta graficointerativo
 		 */
 		dadosGrafico : "",
 		/*
 		 * Variavel: aguarde
-		 * 
+		 *
 		 * Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 		 */
 		aguarde : "",
 		/*
 		 * Variavel: estilos
-		 * 
+		 *
 		 * Estilos existentes em um s&iacute;mbolo de uma classe
 		 */
 		estilos : "",
 		/*
 		 * Variavel: estilo
-		 * 
+		 *
 		 * Ultimo estilo selecionado
 		 */
 		estilo : "",
 		/*
 		 * Variavel: classe
-		 * 
+		 *
 		 * Ultima classe selecionado
 		 */
 		classe : "",
@@ -100,11 +100,24 @@ i3GEOF.legenda =
 		criaJanelaFlutuante : function() {
 			i3GEOF.legenda.iniciaDicionario();
 		},
+		/**
+		 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+		 */
+		MUSTACHE : "",
+		/**
+		 * Susbtitutos para o template
+		 */
+		mustacheHash : function() {
+			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.legenda.dicionario);
+			dicionario["locaplic"] = i3GEO.configura.locaplic;
+			dicionario["asp"] = '"';
+			return dicionario;
+		},
 		/*
 		 * Function: iniciaDicionario
-		 * 
+		 *
 		 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-		 * 
+		 *
 		 * O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 		 */
 		iniciaDicionario : function() {
@@ -119,11 +132,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
@@ -349,291 +362,20 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
-			var ins =
-				''
-					+ '<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">'
-					+ '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'
-					+ '		<li><a  ><em><div id="i3GEOlegendaguia6" style="text-align:center;left:0px;" ><img class="ticPropriedades2" style="height:14px" title="'
-					+ $trad('propriedades', i3GEOF.legenda.dicionario)
-					+ '" src="'
-					+ i3GEO.configura.locaplic
-					+ '/imagens/visual/default/branco.gif"></div></em></a></li>'
-					+ '		<li><a  ><em><div id="i3GEOlegendaguia1" style="text-align:center;left:0px;" >'
-					+ $trad('legenda', i3GEOF.legenda.dicionario)
-					+ '</div></em></a></li>'
-					+ '		<li><a  ><em><div id="i3GEOlegendaguia2" style="text-align:center;left:0px;" >'
-					+ $trad('classes', i3GEOF.legenda.dicionario)
-					+ '</div></em></a></li>'
-					+ '		<li><a  ><em><div id="i3GEOlegendaguia3" style="text-align:center;left:0px;" >'
-					+ $trad('editor', i3GEOF.legenda.dicionario)
-					+ '</div></em></a></li>'
-					+ '		<li><a  ><em><div id="i3GEOlegendaguia4" style="text-align:center;left:0px;" >'
-					+ $trad('graficos', i3GEOF.legenda.dicionario)
-					+ '</div></em></a></li>'
-					+ '		<li><a  ><em><div id="i3GEOlegendaguia5" style="text-align:center;left:0px;" >'
-					+ $trad('importaExportaSLD', i3GEOF.legenda.dicionario)
-					+ '</div></em></a></li>'
-					+ '	</ul>'
-					+ '</div><br>'
-					+ '<div id=i3GEOlegendaguia6obj style="width:99%;text-align:left;">'
-					+ '	<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendamostra style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">'
-					+ $trad('mostraClassesLegenda', i3GEOF.legenda.dicionario)
-					+ '</span></p>'
-					+ '	<p class=paragrafo ><input id=i3GEOlegendabotao3 type="button" value="'
-					+ $trad('incluiNumeroOcorrencia', i3GEOF.legenda.dicionario)
-					+ '" title="'
-					+ $trad('incluiNumeroOcorrencia2', i3GEOF.legenda.dicionario)
-					+ '"></p>'
-					+ '	<p class=paragrafo ><input id=i3GEOlegendabotao15 type="button" value="'
-					+ $trad('aplicaOpacidadeVariavel', i3GEOF.legenda.dicionario)
-					+ '" title="'
-					+ $trad('aplicaOpacidade', i3GEOF.legenda.dicionario)
-					+ '"></p>'
-					+ '	<p class=paragrafo ><input id=i3GEOlegendabotaoRamp type="button" size=15 value="'
-					+ $trad('escolhePaletaCores', i3GEOF.legenda.dicionario)
-					+ '" title="'
-					+ $trad('variaCoresExtremos', i3GEOF.legenda.dicionario)
-					+ '"></p>'
-					+ '	<div style=margin-left:5px; >'
-					+ '	<p class=paragrafo >'
-					+ $trad('geraCores', i3GEOF.legenda.dicionario)
-					+ '</p>'
-					+ '	<table summary="" class=lista6 >'
-					+ '		<tr>'
-					+ '			<td>'
-					+ $trad('ate', i3GEOF.legenda.dicionario)
-					+ ':</td>'
-					+ '			<td>'
-					+ '			<div class=styled-select style="width:120px" >'
-					+ '			<input type=text id="i3GEOlegendaacori" value="0,0,0"  />'
-					+ '			</div>'
-					+ '			</td>'
-					+ '			<td><img alt="aquarela.gif" style=cursor:pointer src="'
-					+ i3GEO.configura.locaplic
-					+ '/imagens/aquarela.gif" onclick="i3GEOF.legenda.corj(\'i3GEOlegendaacori\')" /> '
-					+ '			</td>'
-					+ '			<td>'
-					+ $trad('de', i3GEOF.legenda.dicionario)
-					+ ':</td>'
-					+ '			<td>'
-					+ '			<div class=styled-select style="width:120px" >'
-					+ '			<input type=text id="i3GEOlegendaacorf" value="255,255,255"  />'
-					+ '			</div>'
-					+ '			</td>'
-					+ '			<td><img alt="aquarela.gif" style=cursor:pointer src="'
-					+ i3GEO.configura.locaplic
-					+ '/imagens/aquarela.gif" onclick="i3GEOF.legenda.corj(\'i3GEOlegendaacorf\')" /> '
-					+ '			</td>'
-					+ '			<td><input id=i3GEOlegendabotao4 type="button" size=15 value="'
-					+ $trad('aplica', i3GEOF.legenda.dicionario)
-					+ '" title="'
-					+ $trad('aplicaVariaCores', i3GEOF.legenda.dicionario)
-					+ '"></td>'
-					+ '		</tr>'
-					+ '	</table>'
-					+ '</div>'
-					+ '</div>'
-					+ '<div id=i3GEOlegendaguia1obj style="width:99%;text-align:left;">'
-					+ '	<div style=margin-left:5px; >'
-					+ '	<table summary="" class=lista5 ><tr>'
-					+ '	<td><input id=i3GEOlegendabotao1 size="22" type="button" value="'
-					+ $trad('aplicaAlteracao', i3GEOF.legenda.dicionario)
-					+ '" ></td>'
-					+ '	<td><input id=i3GEOlegendabotao2 size="22" type="button" value="'
-					+ $trad('adicionaClasse', i3GEOF.legenda.dicionario)
-					+ '" title="'
-					+ $trad('adicionaNovaClasse', i3GEOF.legenda.dicionario)
-					+ '" ></td>'
-					+ '	</tr></table><br>'
-					+ '	<p class=paragrafo >'
-					+ $trad('clicaSimbolo', i3GEOF.legenda.dicionario)
-					+ '</p>'
-					+ '	<div id="i3GEOlegendaresultado" style="text-align:left;width:100%;display:block;left:0px">'
-					+ '	</div>'
-					+ '</div>'
-					+ '</div>'
-					+ '<div id=i3GEOlegendaguia2obj style="width:99%;text-align:left;">'
-					+ '	<div style=margin-left:5px; >'
-					+ '	<div id=i3GEOFlegendaClassesOpcionais >'
-					+ '		<p class=paragrafo >&nbsp;<input type=checkbox onclick="" checked id=i3GEOFlegendaaplicaextent style="cursor:pointer;border:0px solid white;" /> <span style="cursor:pointer;position:relative;top:-2px;">'
-					+ $trad('consideraElementosVisisveis', i3GEOF.legenda.dicionario)
-					+ '</span></p>'
-					+ '		<p class=paragrafo >'
-					+ $trad('ignoraValores', i3GEOF.legenda.dicionario)
-					+ ':'
-					+ '		<div class=styled-select >'
-					+ '			<input type=text id="i3GEOlegendaignorar" value=""  />'
-					+ '		</div>'
-					+ '		<hr><p class=paragrafo >'
-					+ $trad('transformaGeom', i3GEOF.legenda.dicionario)
-					+ '</p>'
-					+ '		<div class=styled-select >'
-					+ '		<select id=i3GEOlegentaTipoGeo >'
-					+ '			<option value="">'
-					+ $trad('semTransformacao', i3GEOF.legenda.dicionario)
-					+ '</option>'
-					+ '			<option value="centroid">'
-					+ $trad('centroide', i3GEOF.legenda.dicionario)
-					+ '</option>'
-					+ '			<option value="bbox">box</option>'
-					+ '			<option value="vertices">'
-					+ $trad('vertices', i3GEOF.legenda.dicionario)
-					+ '</option>'
-					+ '			<option value="start">'
-					+ $trad('verticeInicial', i3GEOF.legenda.dicionario)
-					+ '</option>'
-					+ '			<option value="end">'
-					+ $trad('verticeFinal', i3GEOF.legenda.dicionario)
-					+ '</option>'
-					+ '		</select>'
-					+ '		</div>'
-					+ '		<br><p class=paragrafo >'
-					+ '		<input id=i3GEOlegendabotao17 size="35" type="button" value="'
-					+ $trad('alteraGeom', i3GEOF.legenda.dicionario)
-					+ '"></p>'
-					+ '		<hr><p class=paragrafo >'
-					+ $trad('alteraTipoGeom', i3GEOF.legenda.dicionario)
-					+ '</p>'
-					+ '		<p class=paragrafo ><input id=i3GEOlegendabotao7 size="25" type="button" value="'
-					+ $trad('alteraTipo', i3GEOF.legenda.dicionario)
-					+ '"></p>'
-					+ '	</div>'
-					+ '	<hr><p class=paragrafo >'
-					+ $trad('todosElementosUnicoSimbolo', i3GEOF.legenda.dicionario)
-					+ '</p>'
-					+ '	<p class=paragrafo ><input id=i3GEOlegendabotao5 size="25" type="button" value="'
-					+ $trad('simboloUnico', i3GEOF.legenda.dicionario)
-					+ '"></p>'
-					+ '	<hr><p class=paragrafo >'
-					+ $trad('cadaOcorrenciaUnicoSimbolo', i3GEOF.legenda.dicionario)
-					+ '</p>'
-					+ '	<div id="i3GEOlegendaitens" class=styled-select ></div><br>'
-					+ '	<p class=paragrafo ><input id=i3GEOlegendabotao6 size="25" type="button" value="'
-					+ $trad('valorUnico', i3GEOF.legenda.dicionario)
-					+ '"></p>'
-					+ '	<hr><p class=paragrafo >'
-					+ $trad('criaClassesItemNumerico', i3GEOF.legenda.dicionario)
-					+ '</p>'
-					+ '	<p class=paragrafo >'
-					+ $trad('numeroClasses', i3GEOF.legenda.dicionario)
-					+ ':'
-					+ '	<div class=styled-select >'
-					+ '		<input type=text id="i3GEOlegendanclasses" value="5"  />'
-					+ '	</div>'
-					+ '	<br><p class=paragrafo ><input id=i3GEOlegendabotao8 size="25" type="button" value="'
-					+ $trad('intervalosIguais', i3GEOF.legenda.dicionario)
-					+ '">'
-					+ '	&nbsp;<input id=i3GEOlegendabotaoQN size="25" type="button" value="'
-					+ $trad('quebrasNaturais', i3GEOF.legenda.dicionario)
-					+ '">'
-					+ '	&nbsp;<input id=i3GEOlegendabotaoQuantil size="25" type="button" value="Quantil">'
-					+ '	<hr><p class=paragrafo >'
-					+ $trad('criaQuartis', i3GEOF.legenda.dicionario)
-					+ '</p>'
-					+ '	<p class=paragrafo ><input id=i3GEOlegendabotao9 size="25" type="button" value="Quartis">'
-					+ '	<p class=paragrafo >'
-					+ $trad('estiloNomeClasses', i3GEOF.legenda.dicionario)
-					+ ': '
-					+ '	<div class=styled-select >'
-					+ '	<select id=estiloClassesQuartis >'
-					+ '	<option value=minimo select >'
-					+ $trad('soValores', i3GEOF.legenda.dicionario)
-					+ '</option>'
-					+ '	<option value=simples select >'
-					+ $trad('quartilValores', i3GEOF.legenda.dicionario)
-					+ '</option>'
-					+ '	<option value=completo select >'
-					+ $trad('expressaoCompleta', i3GEOF.legenda.dicionario)
-					+ '</option>'
-					+ '	</select></div><br>'
-					+ '</div>'
-					+ '</div>'
-					+ '<div id=i3GEOlegendaguia3obj style="width:99%;text-align:left;">'
-					+ '	<fieldset style="padding:5px;margin:2px;">'
-					+ '	<legend>'
-					+ $trad('etiquetasClasse', i3GEOF.legenda.dicionario)
-					+ '</legend>'
-					+ '		<p class=paragrafo >'
-					+ $trad('itemComTexto', i3GEOF.legenda.dicionario)
-					+ ': <div class=styled-select id=i3GEOlegendaitensLabel ></div></p>'
-					+ '		<br><p class=paragrafo style="font-size:10px;">'
-					+ '		<input id=i3GEOlegendabotaoExcluirLabel size=10 type=buttom value="'
-					+ $trad('exclui', i3GEOF.legenda.dicionario)
-					+ '" />'
-					+ '		<input id=i3GEOlegendabotaoIncluirLabel size=10 type=buttom value="'
-					+ $trad('adiciona', i3GEOF.legenda.dicionario)
-					+ '" />'
-					+ '		<input id=i3GEOlegendabotaoPropriedadeLabel size=10 type=buttom value="'
-					+ $trad('propriedades2', i3GEOF.legenda.dicionario)
-					+ '" />'
-					+ '		</p>'
-					+ '	</fieldset><br>'
-					+ '	<fieldset style="padding:5px;margin:2px;">'
-					+ '	<legend>'
-					+ $trad('estilos', i3GEOF.legenda.dicionario)
-					+ '</legend>'
-					+ '		<p class=paragrafo style="font-size:10px;">'
-					+ $trad('ajudaEstilo', i3GEOF.legenda.dicionario)
-					+ ''
-					+ '		<div id="i3GEOlegendacomboestilos" >'
-					+ '		</div>'
-					+ "       <br><input id=i3GEOlegendabotao11 class=executar size=10 type=button value='"
-					+ $trad('exclui', i3GEOF.legenda.dicionario)
-					+ "' />"
-					+ "       &nbsp;<input id=i3GEOlegendabotao12 class=executar size=14 type=button value='"
-					+ $trad('adiciona', i3GEOF.legenda.dicionario)
-					+ "' />"
-					+ "       &nbsp;<input id=i3GEOlegendabotao13 class=executar size=8 type=button value='"
-					+ $trad('sobe', i3GEOF.legenda.dicionario)
-					+ "' />"
-					+ "       &nbsp;<input id=i3GEOlegendabotao14 class=executar size=8 type=button value='"
-					+ $trad('desce', i3GEOF.legenda.dicionario)
-					+ "' />"
-					+ '		<div id="i3GEOlegendaParametrosEstilos" style="position:relative;top:10px;left:0px;text-align:left">'
-					+ '		</div>'
-					+ '		<br><br><p class=paragrafo style="font-size:10px" ><input id=i3GEOlegendabotao10 size="35" type="button" value="'
-					+ $trad('aplicaAlteracoes', i3GEOF.legenda.dicionario)
-					+ '"></p>'
-					+ '		<div style="position:relative;top:0px;left:0px;text-align:left;" id="i3GEOlegendamostraEstilo">'
-					+ '		</div>'
-					+ '		<div style="position:relative;top:0px;left:0px;text-align:left;" id="i3GEOlegendasimbolos">'
-					+ '		</div>'
-					+ '	</fieldset>'
-					+ '</div>'
-					+ '<div id=i3GEOlegendaguia4obj style="width:99%;text-align:left;">'
-					+ '</div>'
-					+ '<div id=i3GEOlegendaguia5obj style="width:99%;text-align:left;">'
-					+ '	<p class=paragrafo >'
-					+ $trad('geraSLD', i3GEOF.legenda.dicionario)
-					+ ' <a href="http://mapserver.org/ogc/sld.html#sld" target=_blank >Mapserver SLD</a> '
-					+ $trad('ajudaSLD', i3GEOF.legenda.dicionario)
-					+ '	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDe size="25" type="button" value="'
-					+ $trad('exportaSLD', i3GEOF.legenda.dicionario)
-					+ '"></p>'
-					+ '	<p class=paragrafo >'
-					+ $trad('msgAplicaSLD', i3GEOF.legenda.dicionario)
-					+ '	<p class=paragrafo ><input id=i3GEOlegendabotaoSLDi size="25" type="button" value="'
-					+ $trad('aplicaSLD', i3GEOF.legenda.dicionario)
-					+ '"></p>'
-					+ '</div>'
-					+ '<input type=hidden  value="" id="listaColourRamp" onchange="javascript:i3GEOF.legenda.aplicaColourRamp()" />'; // utilizado
-			// pelo
-			// seletor
-			// de
-			// colourramp
+			var ins = Mustache.render(i3GEOF.legenda.MUSTACHE, i3GEOF.legenda.mustacheHash());
 			return ins;
 		},
 		/*
 		 * Function: iniciaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function() {
@@ -686,7 +428,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: ativaFoco
-		 * 
+		 *
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function() {
@@ -699,7 +441,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: aposAlterarLegenda
-		 * 
+		 *
 		 * Fun&ccedil;&atilde;o executada ap&oacute;s ocorrer alguma altera&ccedil;&atilde;o efetiva da legenda do mapa
 		 */
 		aposAlterarLegenda : function() {
@@ -710,11 +452,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: mostralegenda
-		 * 
+		 *
 		 * Pega os dados da legenda do mapa atual e mostra na tela
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <EDITALEGENDA>
 		 */
 		mostralegenda : function() {
@@ -732,11 +474,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: montaLegenda
-		 * 
+		 *
 		 * Formata a tabela de edi&ccedil;&atilde;o da legenda
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * retorno - objeto contendo os dados para formata&ccedil;&atilde;o da legenda
 		 */
 		montaLegenda : function(retorno) {
@@ -882,10 +624,10 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: aviso
-		 * 
+		 *
 		 * Mostra um i3GEO.janela.tempoMsga ao usu&aacute;rio quando um campo da tabela que cont&eacute;m os dados da legenda &eacute;
 		 * alterado
-		 * 
+		 *
 		 * O aviso &eacute; mostrado apenas uma vez
 		 */
 		aviso : function() {
@@ -896,7 +638,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: aplicaColourRamp
-		 * 
+		 *
 		 * Aplica nas classes da legenda as cores escolhidas no seletor de cores
 		 */
 		aplicaColourRamp : function() {
@@ -919,7 +661,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: corj
-		 * 
+		 *
 		 * Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 		 */
 		corj : function(obj) {
@@ -927,7 +669,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: modificaCor
-		 * 
+		 *
 		 * Modifica a cor de uma classe
 		 */
 		modificaCor : function(id) {
@@ -960,11 +702,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: mudaLegenda
-		 * 
+		 *
 		 * Altera a legenda conforme os valores existentes na tabela de propriedades (express&atilde;o e nome da classe)
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACLASSE>
 		 */
 		mudaLegenda : function() {
@@ -1030,11 +772,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: alteraGeometria
-		 * 
+		 *
 		 * Altera o tipo de representa&ccedil;&atilde;o geom&eacute;trica dos elementos de um layer
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACLASSE>
 		 */
 		alteraGeometriaTema : function() {
@@ -1056,11 +798,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: adicionaConta
-		 * 
+		 *
 		 * Adiciona ao nome de cada classe o n&uacute;mero de ocorr&ecirc;ncias em cada uma
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <CONTAGEMCLASSE>
 		 */
 		adicionaConta : function() {
@@ -1077,11 +819,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: adicionaClasse
-		 * 
+		 *
 		 * Adiciona uma nova classe ao tema
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACLASSE>
 		 */
 		adicionaClasse : function() {
@@ -1097,11 +839,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: adicionaOpacidade
-		 * 
+		 *
 		 * Adiciona opacidade vari&aacute;vel em cada classe
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACLASSE>
 		 */
 		adicionaOpacidade : function() {
@@ -1122,11 +864,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: paleta
-		 * 
+		 *
 		 * Gera as cores para as classes considerando um RGB inicial e um final
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACORESCLASSES>
 		 */
 		paleta : function() {
@@ -1151,11 +893,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: inverteCores
-		 * 
+		 *
 		 * Inverte as cores utilizadas nos s&iacute;mbolos das classes
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <INVERTECORESCLASSES>
 		 */
 		inverteCores : function() {
@@ -1180,11 +922,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: calculaTamanho
-		 * 
+		 *
 		 * Muda o s&iacute;mbolo de cada classe aplicando tamanhos diferentes e lineares
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <CALCULATAMANHOCLASSES>
 		 */
 		calculaTamanho : function() {
@@ -1209,7 +951,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: excluilinhaf
-		 * 
+		 *
 		 * Exclui uma linha da tabela de edi&ccedil;&atilde;o de classes da legendda
 		 */
 		excluilinhaf : function(celula) {
@@ -1222,7 +964,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: sobelinhaf
-		 * 
+		 *
 		 * Sobe uma linha na tabela de edi&ccedil;&atilde;o de classes da legendda
 		 */
 		sobelinhaf : function(idclasse) {
@@ -1242,7 +984,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: descelinhaf
-		 * 
+		 *
 		 * Desce uma linha na tabela de edi&ccedil;&atilde;o de classes da legendda
 		 */
 		descelinhaf : function(idclasse) {
@@ -1263,11 +1005,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: editaSimbolo
-		 * 
+		 *
 		 * Abre o editor de s&iacute;mbolos
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <EDITASIMBOLO>
 		 */
 		editaSimbolo : function(id) {
@@ -1294,11 +1036,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: simbU
-		 * 
+		 *
 		 * Altera a leganda do tema para o tipo s&iacute;mbolo &uacute;nico
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACLASSE>
 		 */
 		simbU : function() {
@@ -1323,11 +1065,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: valorU
-		 * 
+		 *
 		 * Altera a leganda do tema para o tipo valor &uacute;nico
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACLASSE>
 		 */
 		valorU : function() {
@@ -1363,11 +1105,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: valorC
-		 * 
+		 *
 		 * Altera a leganda do tema com um n&uacute;mero espec&iacute;fico de classes
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACLASSE>
 		 */
 		valorC : function() {
@@ -1398,11 +1140,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: valorQ
-		 * 
+		 *
 		 * Altera a leganda do tema claculando as classes pelo m&eacute;todo quartil
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACLASSE>
 		 */
 		valorQ : function() {
@@ -1431,11 +1173,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: valorQu
-		 * 
+		 *
 		 * Altera a leganda do tema por meio do calculo de quantis
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACLASSE>
 		 */
 		valorQu : function() {
@@ -1465,11 +1207,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: valorQN
-		 * 
+		 *
 		 * Altera a legenda do tema por meio do calculo de quebras naturais
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERACLASSE>
 		 */
 		valorQN : function() {
@@ -1501,13 +1243,13 @@ i3GEOF.legenda =
 
 		/*
 		 * Function: representacao
-		 * 
+		 *
 		 * Altera o tipo de representa&ccedil;&atilde;o do tema (linear ou poligonoal)
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ALTERAREPRESENTACAO>
-		 * 
+		 *
 		 */
 		representacao : function() {
 			try {
@@ -1530,7 +1272,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: montaEditor
-		 * 
+		 *
 		 * Monta o editor de s&iacute;mbolos quando o usu&aacute;rio clica em um s&iacute;mbolo na legenda
 		 */
 		montaEditor : function(retorno) {
@@ -1662,7 +1404,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: mostraEstilo
-		 * 
+		 *
 		 * Mostra as propriedades de um estilo de um s&iacute;mbolo
 		 */
 		mostraEstilo : function(e) {
@@ -1772,7 +1514,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: listaSimbolos
-		 * 
+		 *
 		 * Monta a lista de s&iacute;mbolos com imagem
 		 */
 		listaSimbolos : function(retorno) {
@@ -1793,7 +1535,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: aplicaSimbolo
-		 * 
+		 *
 		 * Muda o valor do campo com o c&oacute;digo do s&iacute;mbolo escolhido
 		 */
 		aplicaSimbolo : function(s) {
@@ -1801,11 +1543,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: aplicaEstilo
-		 * 
+		 *
 		 * Aplica ao estilo as propriedades definidas
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <EDITASIMBOLO>
 		 */
 		aplicaEstilo : function() {
@@ -1851,7 +1593,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: reMontaEditor
-		 * 
+		 *
 		 * Gera novamente o editor de s&iacute;mbolo ap&oacute;s ter sido feita alguma altera&ccedil;&atilde;o nos estilos
 		 */
 		reMontaEditor : function() {
@@ -1860,11 +1602,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: mostraGrafico
-		 * 
+		 *
 		 * Mostra um gr&aacute;fico com a contegem de elementos em caada classe
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <CONTAGEMCLASSE>
 		 */
 		mostraGrafico : function() {
@@ -1944,11 +1686,11 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: aplicaProcessos
-		 * 
+		 *
 		 * Aplica processos de ajuste em imagens de sat&eacute;lite
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <APLICAPROCESSOS>
 		 */
 		aplicaProcessos : function() {
@@ -1985,7 +1727,7 @@ i3GEOF.legenda =
 		},
 		/*
 		 * Function: adicionaProcesso
-		 * 
+		 *
 		 * Adiciona um novo processo na lista de processos
 		 */
 		adicionaProcesso : function(s) {
