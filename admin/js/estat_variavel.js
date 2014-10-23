@@ -1136,9 +1136,10 @@ i3GEOadmin.variaveis = {
 											}
 											//converte os dados para o padrao usado no grafico
 											abreDados = function(){
-												i3GEOF.graficointerativo1.dados = dados;
-												i3GEOF.graficointerativo1.tipo = "bar_1";
-												i3GEOF.graficointerativo1.montaTabelaDados = function(dados){
+												core_carregando("desativa");
+												
+												
+												i3GEOF.graficointerativo1.montaTabelaDados = function(idjanela,dados){
 													var i=0,
 													v,
 													ins,
@@ -1179,17 +1180,16 @@ i3GEOadmin.variaveis = {
 													ins.push("</table><br>");
 													//ins.push("<input type=hidden id=i3GEOgraficointerativoComboXid />");
 													//ins.push("<input type=hidden id=i3GEOgraficointerativoComboYid />");
-													$i("i3GEOgraficointerativo1Dados").innerHTML = ins.join("");
+													$i(idjanela + "i3GEOgraficointerativo1Dados").innerHTML = ins.join("");
 													if($i("agruparsql").value != ""){
 														//$i("i3GEOgraficointerativoComboXid").value = $i("agruparsql").value;
 														//$i("i3GEOgraficointerativoComboYid").value = "Soma";
 													}
 												};
-												i3GEOF.graficointerativo1.criaJanelaFlutuante();
-												core_carregando("desativa");
+												i3GEOF.graficointerativo1.iniciaJanelaFlutuante({"dados":dados,"tipo":"bar_1"});
 											};
 											i3GEO.util.scriptTag(
-													"../../ferramentas/graficointerativo1/index.js",
+													"../../ferramentas/graficointerativo1/dependencias.php",
 													"abreDados()",
 													"i3GEOF.graficointerativo1_script"
 											);
