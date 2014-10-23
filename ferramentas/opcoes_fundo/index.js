@@ -53,6 +53,20 @@ i3GEOF.opcoesFundo = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.opcoesFundo.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.opcoesFundo.dicionario);
+		dicionario["Fundocor"] = $inputText('','','i3GEOopcoesFundocor','',12,'');
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["asp"] = '"'
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -112,11 +126,8 @@ i3GEOF.opcoesFundo = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = $inputText("","","i3GEOopcoesFundocor","",12,"") +
-		'<img alt="aquarela.gif" style=cursor:pointer '+
-		'src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesFundo.corj(\'i3GEOopcoesFundocor\')" /> ' +
-		'<br><br><p class=paragrafo ><input size=20 id=i3GEOopcoesFundobotao1 type=button value="'+$trad('aplica',i3GEOF.opcoesFundo.dicionario)+'"  />';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.opcoesFundo.MUSTACHE, i3GEOF.opcoesFundo.mustacheHash());
 		return ins;
 	},
 	/*

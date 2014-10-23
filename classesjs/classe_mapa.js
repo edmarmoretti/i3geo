@@ -851,7 +851,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta opcoes_fundo
 			 */
 			corFundo : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.corFundo()", "opcoes_fundo", "opcoesFundo");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.corFundo()","opcoes_fundo","opcoesFundo","dependencias.php","i3GEOF.opcoesFundo.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: opcoesEscala
