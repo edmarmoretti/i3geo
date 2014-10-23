@@ -1269,6 +1269,9 @@ i3GEOF.graficointerativo1 =
 			tabela.innerHTML = ins;
 		},
 		configDefault : function(idjanela, dados, maior, cores, legendaY, legendaX) {
+			if($i(idjanela)){
+				$i(idjanela).style.visibility = "hidden";
+			}
 			var temp, config = {
 				canvas : idjanela + "i3GEOgraficointerativo1guia4objCanvas",
 				height : parseInt($i(idjanela + "_corpo").style.height, 10) - 80,
@@ -1333,7 +1336,7 @@ i3GEOF.graficointerativo1 =
 				config.orthoAxisTitle = $i(idjanela + "i3GEOgraficointerativo1TituloY").value;
 			}
 			temp = $i(idjanela + "i3GEOgraficointerativo1FatorTamanho");
-			if (temp && temp.value > 0) {
+			if (temp && temp.value > 0 && dados.resultset) {
 				config.width = dados.resultset.length * temp.value;
 			} else {
 				config.width = parseInt($i(idjanela).style.width, 10) - 20;
@@ -1350,7 +1353,7 @@ i3GEOF.graficointerativo1 =
 				config.extensionPoints.xAxisLabel_textBaseline = 'top';
 				config.extensionPoints.xAxisLabel_textAlign = 'right';
 			}
-			if (dados.resultset[0].length > 2) {
+			if (dados.resultset && dados.resultset[0] && dados.resultset[0].length > 2) {
 				config.stacked = $i(idjanela + "i3GEOFgraficointerativo1ativaStacked").checked;
 				config.legend = true;
 				ct = true;
@@ -1368,6 +1371,9 @@ i3GEOF.graficointerativo1 =
 				seriesInRows : sr
 			}).render();
 			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "hidden";
+			if($i(idjanela)){
+				$i(idjanela).style.visibility = "visible";
+			}
 		},
 		linhas : function(idjanela, dados, maior, cores, legendaY, legendaX, xInclinado, tipo) {
 			var ct = false, sr = false, config = i3GEOF.graficointerativo1.configDefault(idjanela, dados, maior, cores, legendaY, legendaX);
@@ -1378,7 +1384,7 @@ i3GEOF.graficointerativo1 =
 			}
 			config.dotsVisible = true;
 
-			if (dados.resultset[0].length > 2) {
+			if (dados.resultset && dados.resultset[0] && dados.resultset[0].length > 2) {
 				config.stacked = $i(idjanela + "i3GEOFgraficointerativo1ativaStacked").checked;
 				config.legend = true;
 				ct = true;
@@ -1390,6 +1396,9 @@ i3GEOF.graficointerativo1 =
 				seriesInRows : sr
 			}).render();
 			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "hidden";
+			if($i(idjanela)){
+				$i(idjanela).style.visibility = "visible";
+			}
 		},
 		areas : function(idjanela, dados, maior, cores, legendaY, legendaX, xInclinado, tipo) {
 			var ct = false, sr = false, config = i3GEOF.graficointerativo1.configDefault(idjanela, dados, maior, cores, legendaY, legendaX);
@@ -1401,7 +1410,7 @@ i3GEOF.graficointerativo1 =
 			config.dotsVisible = true;
 			config.areasVisible = true;
 
-			if (dados.resultset[0].length > 2) {
+			if (dados.resultset && dados.resultset[0] && dados.resultset[0].length > 2) {
 				config.stacked = $i(idjanela + "i3GEOFgraficointerativo1ativaStacked").checked;
 				config.legend = true;
 				ct = true;
@@ -1413,6 +1422,9 @@ i3GEOF.graficointerativo1 =
 				seriesInRows : sr
 			}).render();
 			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "hidden";
+			if($i(idjanela)){
+				$i(idjanela).style.visibility = "visible";
+			}
 		},
 		arvores : function(idjanela, dados, maior, cores, legendaY, legendaX, tipo) {
 
@@ -1438,6 +1450,9 @@ i3GEOF.graficointerativo1 =
 				crosstabMode : false
 			}).render();
 			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "hidden";
+			if($i(idjanela)){
+				$i(idjanela).style.visibility = "visible";
+			}
 		},
 		pizzas : function(idjanela, dados, maior, cores, legendaY, legendaX, tipo) {
 			config = i3GEOF.graficointerativo1.configDefault(idjanela, dados, maior, cores, legendaY, legendaX);
@@ -1464,6 +1479,9 @@ i3GEOF.graficointerativo1 =
 				crosstabMode : false
 			}).render();
 			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "hidden";
+			if($i(idjanela)){
+				$i(idjanela).style.visibility = "visible";
+			}
 		},
 		pontos : function(idjanela, dados, maior, cores, legendaY, legendaX, tipo) {
 			config = i3GEOF.graficointerativo1.configDefault(idjanela, dados, maior, cores, legendaY, legendaX);
@@ -1496,5 +1514,8 @@ i3GEOF.graficointerativo1 =
 				crosstabMode : false
 			}).render();
 			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "hidden";
+			if($i(idjanela)){
+				$i(idjanela).style.visibility = "visible";
+			}
 		}
 	};
