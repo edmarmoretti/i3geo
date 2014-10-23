@@ -3,8 +3,8 @@
 		<td>{{{incluiNoMapa}}}:</td>
 		<td>
 			<select id='i3GEOopcoesLegendastatus'>
-				<option value='3'>'+$trad("x14")+'</option>
-				<option value='1'>'+$trad("x15")+'</option>
+				<option value='3'>{{{sim}}}</option>
+				<option value='1'>{{{nao}}}</option>
 				<option value='0'>---</option>
 			</select>
 		<td>
@@ -16,8 +16,8 @@
 	<tr>
 		<td>{{{corFundo}}}:</td>
 		<td>
-			$inputText('','','i3GEOopcoesLegendaimagecolor','',12,'')
-			<img alt='aquarela.gif' style='cursor: pointer' src='{{{locaplic}}}/imagens/aquarela.gif' onclick="i3GEOF.opcoesLegenda.corj(\'i3GEOopcoesLegendaimagecolor\')" />
+			{{{imagecolor}}}
+			<img alt='aquarela.gif' style='cursor: pointer' src='{{{locaplic}}}/imagens/aquarela.gif' onclick='i3GEOF.opcoesLegenda.corj({{{asp}}}i3GEOopcoesLegendaimagecolor{{{asp}}})' />
 		</td>
 	</tr>
 	<tr>
@@ -27,8 +27,8 @@
 	<tr>
 		<td>{{{contornoSimbolos}}}:</td>
 		<td>
-			$inputText('','','i3GEOopcoesLegendaoutlinecolor','',12,'')
-			<img alt='aquarela.gif' style='cursor: pointer' src='{{{locaplic}}}/imagens/aquarela.gif' onclick="i3GEOF.opcoesLegenda.corj(\'i3GEOopcoesLegendaoutlinecolor\')" />
+			{{{outlinecolor}}}
+			<img alt='aquarela.gif' style='cursor: pointer' src='{{{locaplic}}}/imagens/aquarela.gif' onclick='i3GEOF.opcoesLegenda.corj({{{asp}}}i3GEOopcoesLegendaoutlinecolor{{{asp}}})' />
 		</td>
 	</tr>
 	<tr>
@@ -54,7 +54,7 @@
 	</tr>
 	<tr>
 		<td>{{{espacamentoY}}}:</td>
-		<td>$inputText('','','i3GEOopcoesLegendakeyspacingy','',4,'')
+		<td>{{{keyspacingy}}}
 		<td>
 	</tr>
 	<tr>
@@ -63,7 +63,7 @@
 	</tr>
 	<tr>
 		<td>{{{espacamentoX}}}:</td>
-		<td>$inputText('','','i3GEOopcoesLegendakeyspacingx','',4,'')</td>
+		<td>{{{keyspacingx}}}</td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
@@ -71,7 +71,7 @@
 	</tr>
 	<tr>
 		<td>{{{tamanhoSimboloY}}}:</td>
-		<td>$inputText('','','i3GEOopcoesLegendakeysizey','',4,'')
+		<td>{{{keysizey}}}
 		<td>
 	</tr>
 	<tr>
@@ -80,7 +80,7 @@
 	</tr>
 	<tr>
 		<td>{{{tamanhoSimboloX}}}:</td>
-		<td>$inputText('','','i3GEOopcoesLegendakeysizex','',4,'')
+		<td>{{{keysizex}}}
 		<td>
 	</tr>
 	<tr>
@@ -89,7 +89,7 @@
 	</tr>
 	<tr>
 		<td>{{{tamanhoTexto}}}:</td>
-		<td>$inputText('','','i3GEOopcoesLegendalabelsize','',4,'')
+		<td>{{{labelsize}}}
 		<td>
 	</tr>
 	<tr>

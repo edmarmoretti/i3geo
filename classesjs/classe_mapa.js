@@ -812,7 +812,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta opcoes_querymap
 			 */
 			queryMap : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.queryMap()", "opcoes_querymap", "opcoesQuery");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.queryMap()","opcoes_querymap","opcoesQuery","dependencias.php","i3GEOF.opcoesQuery.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: template
@@ -867,7 +867,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta opcoes_legenda
 			 */
 			opcoesLegenda : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opcoesLegenda()", "opcoes_legenda", "opcoesLegenda");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opcoesLegenda()","opcoes_legenda","opcoesLegenda","dependencias.php","i3GEOF.opcoesLegenda.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: gradeCoord

@@ -64,7 +64,7 @@ i3GEOF.opcoesFundo = {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.opcoesFundo.dicionario);
 		dicionario["Fundocor"] = $inputText('','','i3GEOopcoesFundocor','',12,'');
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		dicionario["asp"] = '"'
+		dicionario["asp"] = '"';
 		return dicionario;
 	},
 	/*

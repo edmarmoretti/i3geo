@@ -79,7 +79,7 @@ i3GEOF.gradeDePoligonos.dicionario = {
 		it : ""
 	} ],
 	'projMercator' : [ {
-		pt : "Utiliza a proje&ccedil;&atilde;o Mercator na gera��o da grade",
+		pt : "Utiliza a proje&ccedil;&atilde;o Mercator na gera&ccedil;&atilde;o da grade",
 		en : "",
 		es : "",
 		it : ""
