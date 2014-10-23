@@ -859,7 +859,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta opcoes_escala
 			 */
 			opcoesEscala : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opcoesEscala()", "opcoes_escala", "opcoesEscala");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opcoesEscala()","opcoes_escala","opcoesEscala","dependencias.php","i3GEOF.opcoesEscala.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: opcoesLegenda

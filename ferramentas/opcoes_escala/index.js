@@ -56,6 +56,27 @@ i3GEOF.opcoesEscala = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.opcoesEscala.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.opcoesEscala.dicionario);
+		dicionario["sim"] = $trad("x14");
+		dicionario["nao"] = $trad("x15");
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["Escalaw"] = $inputText('','','i3GEOopcoesEscalaw','',4,'');
+		dicionario["Escalah"] = $inputText('','','i3GEOopcoesEscalah','',4,'');
+		dicionario["Escalaintervalos"] = $inputText('','','i3GEOopcoesEscalaintervalos','',4,'');
+		dicionario["Escalacor"] = $inputText('','','i3GEOopcoesEscalacor','',12,'');
+		dicionario["Escalabcor"] = $inputText('','','i3GEOopcoesEscalabcor','',12,'');
+		dicionario["Escalaocor"] = $inputText('','','i3GEOopcoesEscalaocor','',12,'');
+		dicionario["asp"] = '"';
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -110,61 +131,8 @@ i3GEOF.opcoesEscala = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<table summary="" class=lista >' +
-			'<tr><td>'+$trad('incluiNoMapa',i3GEOF.opcoesEscala.dicionario)+':</td><td>' +
-			'	<select id=i3GEOopcoesEscalastatus >' +
-			'		<option value=3 >'+$trad("x14")+'</option>' +
-			'		<option value=1 >'+$trad("x15")+'</option>' +
-			'		<option value=0 >---</option>' +
-			'	</select>' +
-			'<td></tr>' +
-			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Largura:</td><td>' +
-			$inputText("","","i3GEOopcoesEscalaw","",4,"") +
-			'</td></tr>' +
-			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad('altura',i3GEOF.opcoesEscala.dicionario)+':</td><td>' +
-			$inputText("","","i3GEOopcoesEscalah","",4,"") +
-			'</td></tr>' +
-			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad('unidade',i3GEOF.opcoesEscala.dicionario)+':</td><td>' +
-			'	<select id=i3GEOopcoesEscalaunidade >' +
-			'		<option value=3 selected >Metros</option>' +
-			'		<option value=4 >Km</option>' +
-			'	</select>' +
-			'<td></tr>' +
-			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad('estilo',i3GEOF.opcoesEscala.dicionario)+':</td><td>' +
-			'	<select id=i3GEOopcoesEscalaestilo >' +
-			'		<option value=0 selected >'+$trad('bloco',i3GEOF.opcoesEscala.dicionario)+'</option>' +
-			'		<option value=1 >'+$trad('linear',i3GEOF.opcoesEscala.dicionario)+'</option>' +
-			'		<option value=2 >'+$trad('semBarra',i3GEOF.opcoesEscala.dicionario)+'</option>' +
-			'	</select>' +
-			'</td></tr>' +
-			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad('intervalos',i3GEOF.opcoesEscala.dicionario)+':</td><td>' +
-			$inputText("","","i3GEOopcoesEscalaintervalos","",4,"") +
-			'</td></tr>' +
-			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad('cor',i3GEOF.opcoesEscala.dicionario)+':</td><td>' +
-			$inputText("","","i3GEOopcoesEscalacor","",12,"") +
-			'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesEscala.corj(\'i3GEOopcoesEscalacor\')" />' +
-			'</td></tr>' +
-			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad('fundo',i3GEOF.opcoesEscala.dicionario)+':</td><td>' +
-			$inputText("","","i3GEOopcoesEscalabcor","",12,"") +
-			'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesEscala.corj(\'i3GEOopcoesEscalabcor\')" />' +
-			'</td></tr>' +
-			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>'+$trad('contorno',i3GEOF.opcoesEscala.dicionario)+':</td><td>' +
-			$inputText("","","i3GEOopcoesEscalaocor","",12,"") +
-			'<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesEscala.corj(\'i3GEOopcoesEscalaocor\')" />' +
-			'</td></tr></table><br>'+
-			'<p class=paragrafo >' +
-			'<input id=i3GEOopcoesEscalabotao1 size=20  type=button value="'+$trad('aplica',i3GEOF.opcoesEscala.dicionario)+'" />' +
-			'<input id=i3GEOopcoesEscalabotao2 size=20 type=button value="'+$trad('testa',i3GEOF.opcoesEscala.dicionario)+'" />' +
-			'</p><br><img src="" id=i3GEOopcoesEscalateste />';
+	html: function() {
+		var ins = Mustache.render(i3GEOF.opcoesEscala.MUSTACHE, i3GEOF.opcoesEscala.mustacheHash());
 		return ins;
 	},
 	/*
