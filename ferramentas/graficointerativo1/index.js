@@ -211,14 +211,17 @@ i3GEOF.graficointerativo1 =
 				n = nomesIds.length;
 				for (j = 0; j < n; j++) {
 					i = nomesIds[j];
-					o = $i(i);
-					//if(o && o.style)
-					//o.style.color = "red"
-					if (o && o.type) {
-						if (o.type.toLowerCase() === "radio" || o.type.toLowerCase() === "checkbox") {
-							o.checked = config[i];
-						} else {
-							o.value = config[i];
+					if(config[i]){
+						o = $i(i);
+						//if(o && o.style)
+						//o.style.color = "red"
+						if (o && o.type) {
+							if (o.type.toLowerCase() === "radio" || o.type.toLowerCase() === "checkbox") {
+								o.checked = config[i];
+							} else {
+								//alert(idjanela+" - "+config[i])
+								o.value = config[i];
+							}
 						}
 					}
 				}
@@ -231,6 +234,7 @@ i3GEOF.graficointerativo1 =
 				i3GEOF.graficointerativo1.comboTemas(idjanela);
 				// cria as entradas de parametros para o eixo y
 				// quando o grafico esta sendo restaurado do mapa
+				
 				if (config.valoresCombosItens && config.valoresCombosItens.selects.length > 0) {
 					n = config.valoresCombosItens.selects.length;
 
@@ -238,6 +242,7 @@ i3GEOF.graficointerativo1 =
 						var i, c, objs;
 						atualizaConfigGr();
 						//cria as demais entradas de Y
+						
 						for (i = 0; i < n; i++) {
 							// cria o combo, para cada combo sao adicionados um input para o nome e um input para a cor
 							$i(idjanela + "i3GEOgraficointerativo1ComboYid").onchange.call();
@@ -247,20 +252,25 @@ i3GEOF.graficointerativo1 =
 						//
 						c = $i(idjanela + "i3GEOgraficointerativo1ComboYlinha");
 						objs = c.getElementsByTagName("select");
+						
 						for (i = 0; i < n; i++) {
 							objs[i].value = config.valoresCombosItens.selects[i];
 						}
+						
 						objs = c.getElementsByTagName("input");
 						n = config.valoresCombosItens.inputs.length;
 						for (i = 0; i < n; i++) {
 							objs[i].value = config.valoresCombosItens.inputs[i];
 						}
 						atualizaConfigGr();
+						
 						if (i3GEOF.graficointerativo1.propJanelas[idjanela].dados == "") {
 							i3GEOF.graficointerativo1.obterDados(idjanela);
 						}
+						
 					};
 					//cria o combo para X e um combo para Y
+					
 					i3GEOF.graficointerativo1.comboItensSel(idjanela,f);
 				}
 				else{
@@ -475,6 +485,7 @@ i3GEOF.graficointerativo1 =
 			} else {
 				i3GEO.guias.mostraGuiaFerramenta(idjanela + "i3GEOgraficointerativo1guia1", idjanela + "i3GEOgraficointerativo1guia");
 			}
+			
 			//
 			// Apos todos os elementos HTML da ferramenta terem sido renderizados
 			// aplicam-se os parametros armazenados nas propriedades da janela atual
@@ -532,7 +543,7 @@ i3GEOF.graficointerativo1 =
 			// se existir um elemento HTML com o mesmo ID da janela, a renderizacao ocorrera
 			// nesse elemento, caso contrario, sera criada uma janela flutuante
 			//
-			if (!$i(idjanela)) {
+			if (!$i(idjanela) && !$i(idjanela+"_corpo")) {
 				// cria a janela flutuante
 				cabecalho = function() {
 					i3GEOF.graficointerativo1.ativaFoco(idjanela);
@@ -599,14 +610,23 @@ i3GEOF.graficointerativo1 =
 
 			} else {
 				// o grafico sera renderizado em $i(idjanela)
-				divid = idjanela;
+				temp = 'i3GEOF.graficointerativo1.propJanelas["' + idjanela + '"].atualiza = this.checked';
+				$i(idjanela+"_corpo").innerHTML = "<img src='../imagens/aguarde2.gif' style='visibility: hidden;' class='i3GeoAguardeJanela' id='"+idjanela+"_imagemCabecalho'>"
+						+ "<div style=background-color:#F2F2F2; >"
+						+ "<input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
+						+ temp 
+						+ "' type=checkbox />&nbsp;" 
+						+ $trad("atualizaNavegacao", i3GEOF.graficointerativo1.dicionario) + " (" + idjanela + ")</div>";
+
+				divid = idjanela+"_corpo";
 			}
-			i3GEOF.graficointerativo1.aguarde = $i(idjanela + "_imagemCabecalho").style;
-			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde = $i(idjanela + "_imagemCabecalho").style;
-			i3GEOF.graficointerativo1.propJanelas[idjanela].atualiza = true;
+			if($i(idjanela + "_imagemCabecalho")){
+				i3GEOF.graficointerativo1.aguarde = $i(idjanela + "_imagemCabecalho").style;
+				i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde = $i(idjanela + "_imagemCabecalho").style;
+				i3GEOF.graficointerativo1.propJanelas[idjanela].atualiza = true;
+			}
 
 			i3GEOF.graficointerativo1.inicia(divid, idjanela);
-
 			// eventos que ocorrem no mapa e afetam os graficos
 			if (i3GEO.Interface) {
 				i3GEO.janela.tempoMsg($trad('dadosRegiaoMostrada', i3GEOF.graficointerativo1.dicionario));
@@ -636,9 +656,12 @@ i3GEOF.graficointerativo1 =
 			if (i3GEO.Interface) {
 				i3GEO.barraDeBotoes.ativaIcone("graficointerativo1");
 			}
-			var i = $i(idjanela + "_c").style;
-			i3GEO.janela.ULTIMOZINDEX++;
-			i.zIndex = i3GEO.janela.ULTIMOZINDEX;
+			var i = $i(idjanela + "_c");
+			if(i){
+				i = i.style;
+				i3GEO.janela.ULTIMOZINDEX++;
+				i.zIndex = i3GEO.janela.ULTIMOZINDEX;
+			}
 		},
 		novaJanela : function(idjanela) {
 			var janela = "", divid, g, v, cabecalho, id, minimiza, titulo;
@@ -664,7 +687,7 @@ i3GEOF.graficointerativo1 =
 		 * Monta o combo para escolha do tema que ser&aacute; utilizado no gr&aacute;fico
 		 */
 		comboTemas : function(idjanela) {
-			if (!i3GEO.Interface) {
+			if (!i3GEO.Interface || !$i(idjanela + "i3GEOgraficointerativo1ComboTemas")) {
 				return;
 			}
 			i3GEO.util.comboTemas(idjanela + "i3GEOgraficointerativo1ComboTemasId", function(retorno) {
