@@ -3156,7 +3156,7 @@ i3GEO.arvoreDeTemas = {
 		 */
 		uploaddbf : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-					+ "/ferramentas/uploaddbf/index.js",
+					+ "/ferramentas/uploaddbf/dependencias.php",
 					"i3GEOF.uploaddbf.criaJanelaFlutuante()",
 					"i3GEOF.uploaddbf_script");
 		},
