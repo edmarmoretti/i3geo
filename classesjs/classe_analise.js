@@ -37,6 +37,13 @@ if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
 i3GEO.analise = {
+	/***********************************************************************
+	 * Armazena os pontos clicados da última linha
+	 */
+	pontos : {
+		xpt : [],
+		ypt : []
+	},
 	/**
 	 * Classe: i3GEO.analise.dialogo
 	 *
@@ -322,6 +329,10 @@ i3GEO.analise = {
 		 */
 		criaJanela : function() {
 			var novoel, ins, imagemxy, janela;
+			i3GEO.analise.pontos = {
+				xpt : [],
+				ypt : []
+			};
 			if (!$i("mostradistancia")) {
 				novoel = document.createElement("div");
 				novoel.id = "mostradistancia";
@@ -388,10 +399,13 @@ i3GEO.analise = {
 					onclick : {
 						fn : function() {
 							var js = i3GEO.configura.locaplic
-									+ "/ferramentas/perfil/dependencias.php";
+									+ "/ferramentas/perfil/dependencias.php",
+								temp = function(){
+									i3GEOF.perfil.iniciaJanelaFlutuante(i3GEO.analise.pontos);
+								};
 							i3GEO.util.scriptTag(
 								js,
-								"i3GEOF.perfil.criaJanelaFlutuante(i3GEO.analise.pontosdistobj)",
+								temp,
 								"i3GEOF.perfil_script");
 						}
 					}
@@ -412,6 +426,7 @@ i3GEO.analise = {
 			}
 			i3GEO.barraDeBotoes.ativaIcone("pointer");
 			i3GEO.analise.medeDistancia[i3GEO.Interface["ATUAL"]].fechaJanela();
+			i3GEO.analise.pontos = {};
 		},
 		/***********************************************************************
 		 * Funcoes especificas da interface openlayers
@@ -516,6 +531,8 @@ i3GEO.analise = {
 									total = 0;
 									i3GEO.analise.medeDistancia.pontos.xpt.push(point.x);
 									i3GEO.analise.medeDistancia.pontos.ypt.push(point.y);
+									i3GEO.analise.pontos.xpt.push(point.x);
+									i3GEO.analise.pontos.ypt.push(point.y);
 									n = i3GEO.analise.medeDistancia.pontos.ypt.length;
 									if (n > 1) {
 										x1 = i3GEO.analise.medeDistancia.pontos.xpt[n - 2];
@@ -749,6 +766,8 @@ i3GEO.analise = {
 						pontos.mvcLine.push(evt.latLng);
 						pontos.xpt.push(evt.latLng.lng());
 						pontos.ypt.push(evt.latLng.lat());
+						i3GEO.analise.pontos.xpt.push(evt.latLng.lng());
+						i3GEO.analise.pontos.ypt.push(evt.latLng.lat());
 						n = pontos.xpt.length;
 						// desenha um circulo
 						if (pontos.mvcLine.getLength() > 1) {

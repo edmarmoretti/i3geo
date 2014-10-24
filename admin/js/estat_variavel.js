@@ -1137,8 +1137,7 @@ i3GEOadmin.variaveis = {
 											//converte os dados para o padrao usado no grafico
 											abreDados = function(){
 												core_carregando("desativa");
-												
-												
+
 												i3GEOF.graficointerativo1.montaTabelaDados = function(idjanela,dados){
 													var i=0,
 													v,
