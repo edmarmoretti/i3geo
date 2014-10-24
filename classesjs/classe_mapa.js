@@ -750,7 +750,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta outputformat
 			 */
 			outputformat : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.outputformat()", "outputformat", "outputformat");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.outputformat()","outputformat","outputformat","dependencias.php","i3GEOF.outputformat.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: autoredesenha
@@ -835,7 +835,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta opcoes_tamanho
 			 */
 			tamanho : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.tamanho()", "opcoes_tamanho", "opcoesTamanho");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.tamanho()","opcoes_tamanho","opcoesTamanho","dependencias.php","i3GEOF.opcoesTamanho.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: tipoimagem

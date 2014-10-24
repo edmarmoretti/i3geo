@@ -54,6 +54,18 @@ i3GEOF.outputformat = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.outputformat.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.outputformat.dicionario);
+		dicionario["asp"] = '"';
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -98,21 +110,8 @@ i3GEOF.outputformat = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<p class=paragrafo >Escolha o tipo de imagem para a gera&ccedil;&atilde;o do mapa. Para mais detalhes veja <a href="http://mapserver.org/mapfile/outputformat.html" target=_blank >outputformat</a></p>' +
-			'<table class=lista4 width="250px">' +
-			'	<tr>' +
-			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'AGG_Q\')" style="cursor:pointer;border:0px solid white;" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
-			'		<td>png</td>' +
-			'		<td>Formato PNG com 256 cores gerado com a tecnologia AGG. Utilizado como default na vers&atilde;o 4.3 e posteriores do i3Geo</td>' +
-			'	</tr>' +
-			'	<tr>' +
-			'		<td><input onclick="i3GEOF.outputformat.aplicar(\'jpeg\')" style="cursor:pointer;border:0px solid white;" type=radio name=i3GEOoutputformattipo value=nenhum ></td>' +
-			'		<td>jpeg</td>' +
-			'		<td>Formato JPEG com 256 cores gerado com o driver GD</td>' +
-			'	</tr>' +
-
-			'</table>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.outputformat.MUSTACHE, i3GEOF.outputformat.mustacheHash());
 		return ins;
 	},
 	/*

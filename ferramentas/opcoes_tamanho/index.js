@@ -53,6 +53,19 @@ i3GEOF.opcoesTamanho = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.opcoesTamanho.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.opcoesTamanho.dicionario);
+		dicionario["Tamanhol"] = $inputText('','','i3GEOopcoesTamanhol','',4,i3GEO.parametros.w);
+		dicionario["Tamanhoa"] = $inputText('','','i3GEOopcoesTamanhoa','',4,i3GEO.parametros.h);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -115,19 +128,8 @@ i3GEOF.opcoesTamanho = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '<table summary="" class=lista width="100%">' +
-		'<table summary="" class=lista > '+
-		'	<tr><td>'+$trad('largura',i3GEOF.opcoesTamanho.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOopcoesTamanhol","",4,i3GEO.parametros.w) +
-		'	</td></tr><tr><td>&nbsp;</td><td></td></tr>'+
-		'	<tr><td>'+$trad('altura',i3GEOF.opcoesTamanho.dicionario)+':</td><td>' +
-		$inputText("","","i3GEOopcoesTamanhoa","",4,i3GEO.parametros.h) +
-		'	</td></tr><tr><td>&nbsp;</td><td></td></tr>'+
-		'</table>' +
-		'<p class=paragrafo >'+$trad('valor',i3GEOF.opcoesTamanho.dicionario)+'</p>' +
-		'<p class=paragrafo ><input id=i3GEOopcoesTamanhobotao2 size=16  type=button value="'+$trad('testa',i3GEOF.opcoesTamanho.dicionario)+'"/>' +
-	  	'<input id=i3GEOopcoesTamanhobotao1 size=16  type=button value="'+$trad('aplica',i3GEOF.opcoesTamanho.dicionario)+'"/>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.opcoesTamanho.MUSTACHE, i3GEOF.opcoesTamanho.mustacheHash());
 		return ins;
 	},
 	/*

@@ -244,7 +244,7 @@ i3GEOF.identifica = {
 					var temp, b = new YAHOO.widget.Button(idjanela+"i3GEOidentificabotao2",{
 						onclick:{
 							fn: function(){
-								var js = i3GEO.configura.locaplic+"/ferramentas/bufferpt/index.js";
+								var js = i3GEO.configura.locaplic+"/ferramentas/bufferpt/dependencias.php";
 								i3GEO.util.scriptTag(
 										js,
 										"i3GEOF.bufferpt.criaJanelaFlutuante("+i3GEOF.identifica.propJanelas[idjanela].x+","+i3GEOF.identifica.propJanelas[idjanela].y+")",
