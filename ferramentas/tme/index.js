@@ -69,6 +69,17 @@ i3GEOF.tme = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.tme.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.tme.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -143,32 +154,8 @@ i3GEOF.tme = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '' +
-		'<div style="text-align:left;background:yellow;" id=i3GEOTMEresultado ></div>' +
-		'<p class="paragrafo" >'+$trad('tituloMapa',i3GEOF.tme.dicionario) +
-		'<div class=styled-select >' +
-		'<input type=text value="" id="i3GEOTMEtitulo" />' +
-		'</div>' +
-		'<br><p class="paragrafo" >'+$trad('descricaoMapa',i3GEOF.tme.dicionario) +
-		'<div class=styled-select >' +
-		'<input type=text value="" id="i3GEOTMEdesc" />' +
-		'</div>' +
-		'<br><p class="paragrafo" >'+$trad('alturaMaxBarras',i3GEOF.tme.dicionario) +
-		'<div class=styled-select >' +
-		'<input type=text value="5000" id="i3GEOTMEbarSize" />' +
-		'</div>' +
-		'<br><p class="paragrafo" >'+$trad('larguraMaxBarras',i3GEOF.tme.dicionario) +
-		'<div class=styled-select >' +
-		'<input type=text value="2000000" id="i3GEOTMEmaxHeight" />' +
-		'</div>' +
-		'<br><p class="paragrafo" >'+$trad('colunaRegioes',i3GEOF.tme.dicionario) +
-		'<div id="i3GEOTMEregioeslista" class=styled-select ></div>' +
-		'<p class="paragrafo" >' +
-		'<br>'+$trad('colunasDadosEstat',i3GEOF.tme.dicionario) +
-		'<div id=i3GEOtmelistai class=digitar style="text-align:left;left:0px;top:0px;330px;height:80px;overflow:auto;display:block;"></div>' +
-		'<br>' +
-		'<div id=i3GEOtmemen1 style=top:15px;left:0px; ><p class=paragrafo >Ser&aacute; criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regi&otilde;es define o nome que ser&aacute; mostrado para cada elemento mapeado. Quando os nomes das colunas com os valores corresponderem a um determinado ano, ser&aacute; mostrado um bot&atilde;o do tipo slide no Google Earth, mas isso s&oacute; ocorre se o nome da coluna for o mesmo nome do ano, exemplo, para o ano de 1980 o nome da coluna dever&aacute; ser 1980</div>';
+	html: function() {
+		var ins = Mustache.render(i3GEOF.tme.MUSTACHE, i3GEOF.tme.mustacheHash());
 		return ins;
 	},
 	/*

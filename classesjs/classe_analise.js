@@ -388,7 +388,7 @@ i3GEO.analise = {
 					onclick : {
 						fn : function() {
 							var js = i3GEO.configura.locaplic
-									+ "/ferramentas/perfil/index.js";
+									+ "/ferramentas/perfil/dependencias.php";
 							i3GEO.util.scriptTag(
 								js,
 								"i3GEOF.perfil.criaJanelaFlutuante(i3GEO.analise.pontosdistobj)",

@@ -417,7 +417,7 @@ i3GEO.tema = {
 			 */
 			tme: function(tema){
 				i3GEO.mapa.ativaTema(tema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tme()","tme","tme");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tme()","tme","tme","dependencias.php","i3GEOF.tme.iniciaJanelaFlutuante()");
 			},
 			/*
 		Function: mostraWms
@@ -515,7 +515,7 @@ i3GEO.tema = {
 			 */
 			toponimia: function(idtema){
 				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia");
+				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia","dependencias.php","i3GEOF.toponimia.iniciaJanelaFlutuante()");
 			},
 			/*
 		Function: filtro

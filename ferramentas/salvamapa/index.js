@@ -50,6 +50,17 @@ i3GEOF.salvaMapa = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.salvaMapa.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.salvaMapa.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -162,20 +173,8 @@ i3GEOF.salvaMapa = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins += '<p class="paragrafo" >'+$trad('ajuda',i3GEOF.salvaMapa.dicionario)+'</p>' +
-			'<p class="paragrafo" >'+$trad('ajuda2',i3GEOF.salvaMapa.dicionario)+'</p>' +
-			'<div style=background-color:white;padding:5px;margin:5px >' +
-			'	<p class="paragrafo" ><b>1- </b>'+$trad('ajuda3',i3GEOF.salvaMapa.dicionario) +
-				$trad('ajuda4',i3GEOF.salvaMapa.dicionario) +
-			'	<p class="paragrafo" >' + $trad('salvaArquivo',i3GEOF.salvaMapa.dicionario) +
-			'	<div id="i3GEOFsalvaMapaLocal" ></div>' +
-			'</div>' +
-			'<div style=background-color:white;padding:5px;margin:5px >' +
-			'	<p class="paragrafo" ><b>2- </b>' + $trad('cadastraMapa',i3GEOF.salvaMapa.dicionario) +
-			'	<div id="i3GEOFsalvaMapaBanco"></div>' +
-			'</div><br>';
+	html: function() {
+		var ins = Mustache.render(i3GEOF.salvaMapa.MUSTACHE, i3GEOF.salvaMapa.mustacheHash());
 		return ins;
 	},
 	/*

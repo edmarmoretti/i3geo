@@ -771,7 +771,7 @@ i3GEO.mapa =
 						.tempoMsg("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");
 					return;
 				}
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.salvaMapa()", "salvamapa", "salvaMapa");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.salvaMapa()","salvamapa","salvaMapa","dependencias.php","i3GEOF.salvaMapa.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: carregaMapa

@@ -908,7 +908,7 @@ g_traducao_ajuda = {
 			pt:"Cria um arquivo no formato KML, representando os dados de uma coluna da tabela de atributos como elementos em 3d. Mais detalhes em http://thematicmapping.org/",
 			complemento:"",
 			//tela:"",
-			apijs:"i3GEO.mapa.dialogo.tme()"
+			apijs:"i3GEO.tema.dialogo.tme()"
 		},
 		"109": {
 			titulo: "Busca de metadados na INDE",
