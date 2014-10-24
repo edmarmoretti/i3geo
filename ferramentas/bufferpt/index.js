@@ -57,12 +57,6 @@ i3GEOF.bufferpt = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(x,y){
-		i3GEOF.bufferpt.iniciaDicionario(x,y);
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -73,26 +67,9 @@ i3GEOF.bufferpt = {
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.bufferpt.dicionario);
 		dicionario["distancia"] = $inputText('','','i3GEOFbufferptDistancia','',10,0);
+		dicionario["x"] = i3GEOF.bufferpt.x;
+		dicionario["y"] = i3GEOF.bufferpt.y;
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(x,y){
-		if(typeof(i3GEOF.bufferpt.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/bufferpt/dicionario.js",
-				"i3GEOF.bufferpt.iniciaJanelaFlutuante("+x+","+y+")",
-				"i3GEOF.bufferpt.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.bufferpt.iniciaJanelaFlutuante(x,y);
-		}
 	},
 	/*
 	Function: inicia
@@ -147,10 +124,12 @@ i3GEOF.bufferpt = {
 	*/
 	iniciaJanelaFlutuante: function(x,y){
 		var janela,divid,titulo,cabecalho,minimiza;
-		if(x)
-		{i3GEOF.bufferpt.x = x;}
-		if(y)
-		{i3GEOF.bufferpt.y = y;}
+		if(x){
+			i3GEOF.bufferpt.x = x;
+		}
+		if(y){
+			i3GEOF.bufferpt.y = y;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.bufferpt");

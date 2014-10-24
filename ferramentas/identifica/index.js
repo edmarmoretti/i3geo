@@ -247,7 +247,7 @@ i3GEOF.identifica = {
 								var js = i3GEO.configura.locaplic+"/ferramentas/bufferpt/dependencias.php";
 								i3GEO.util.scriptTag(
 										js,
-										"i3GEOF.bufferpt.criaJanelaFlutuante("+i3GEOF.identifica.propJanelas[idjanela].x+","+i3GEOF.identifica.propJanelas[idjanela].y+")",
+										"i3GEOF.bufferpt.iniciaJanelaFlutuante("+i3GEOF.identifica.propJanelas[idjanela].x+","+i3GEOF.identifica.propJanelas[idjanela].y+")",
 										"i3GEOF.bufferpt_script"
 								);
 							}

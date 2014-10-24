@@ -19,6 +19,9 @@ Salva o mapa acrescentando um novo layer com o buffer.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
+		if(empty($multiplicar)){
+			$multiplicar = 1;
+		}
 		$retorno = $m->criaBuffer($distancia,$locaplic,$unir,$wkt,$multiplicar,$itemdistancia);
 		$m->salva();
 		//$_SESSION["contadorsalva"]++;
