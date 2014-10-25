@@ -37,7 +37,7 @@ i3GEOF.atalhosedicao.dicionario = {
 	],
 	'etiqueta' : [
 		{
-			pt : "Etiquetas de identifica&ccedil;&atilde;o",
+			pt : "Etiquetas, busca rapida, alias",
 			en : "",
 			es : ""
 		}

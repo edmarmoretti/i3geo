@@ -325,7 +325,8 @@ $item Lista de Itens separados por v&iacute;rgula que ser&atilde;o utilizados.
 				"itens"=>$itens,
 				"itensdesc"=>array_combine($itens,$itensdesc),
 				"itenslink"=>array_combine($itens,$itenslink),
-				"tips"=>explode(",",$tips)
+				"tips"=>explode(",",$tips),
+				"itembuscarapida"=>$this->layer->getmetadata("itembuscarapida")
 		);
 		return($res);
 	}

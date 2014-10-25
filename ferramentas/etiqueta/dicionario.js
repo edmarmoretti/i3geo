@@ -6,7 +6,7 @@ i3GEOF.etiqueta.dicionario = {
 		es : ""
 	} ],
 	'selecionaItem' : [{
-		pt : "Escolha o item que ser&aacute; utilizado como fonte de dados para mostrar na etiqueta",
+		pt : "Ative ou desative os itens que ser&atilde;o mostrados na ferramenta tabela. Dos itens ativos, escolha quais ser&atilde;o usados na ferramenta de identifica&ccedil;&atilde;o simples (tip). Opcionalmente, indique os apelidos dos itens ativos e qual o item que ser&aacute; utilizado na ferramenta de busca r&aacute;pida. Links s&atilde;o opcionais e podem receber outros itens como par&acirc;metros de substitui&ccedil;&atilde;o, nesse caso, indique o item com [nomedoitem].",
 		en : "",
 		es : ""
 	} ],

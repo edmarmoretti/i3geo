@@ -6,22 +6,30 @@ MAP
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "TIP"	"TIPO,ANOCRIA,NOMELOC"
+      "TIP"	"TIPO,NOMELOC,ANOCRIA"
       "LTEMPOITEMIMAGEM"	""
-      
+      "cache"	""
       "CLASSE"	"SIM"
       "LTEMPOITEMDESCRICAO"	"TIPO"
+      "olopacity"	""
       "LTEMPOITEMINICIO"	"ANOCRIA"
       "palletestep"	""
       "permitekmz"	"sim"
       "LTEMPOITEMTIP"	"ANOCRIA"
       "temporizador"	""
+      "gmopacity"	""
+      "gmstatus"	""
+      "ITENSDESC"	"Município,TIPO,Localidade,ANOCRIA"
       "iconetema"	""
       "LTEMPOITEMTITULO"	"NOMELOC"
       "description_template"	""
+      "ITENSLINK"	",,,"
       "LTEMPOITEMLINK"	""
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "arquivotemaoriginal"	""
       "palletefile"	""
+      "nomeoriginal"	""
+      "olstatus"	""
       "permitedownload"	"sim"
       "LTEMPOFORMATODATA"	"iso8601"
       "permitecomentario"	"SIM"
@@ -29,6 +37,7 @@ MAP
       "metaestat"	""
       "download"	"SIM"
       "itembuscarapida"	"NOMELOC"
+      "ITENS"	"NOMEMUN,TIPO,NOMELOC,ANOCRIA"
       "arquivodownload"	""
       "arquivokmz"	""
       "permitekml"	"sim"
@@ -37,15 +46,21 @@ MAP
       "TEMA"	"Localidades (usar com timeline)"
       "convcaracter"	""
       "cortepixels"	"40"
-      #"cache"	"SIM"
       "editorsql"	""
       "LTEMPOCONVENCODE"	"SIM"
       "LTEMPOITEMFIM"	""
       "legendaimg"	""
     END # METADATA
     NAME "_llocali"
-    STATUS OFF
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
     TEMPLATE "none.htm"
+    TILEITEM "location"
     TYPE POINT
     UNITS METERS
     CLASS
@@ -56,16 +71,18 @@ MAP
         SIZE 20
         SYMBOL "/var/www/i3geo/imagens/google/condominium.png"
       END # STYLE
+      TITLE ""
     END # CLASS
     CLASS
       NAME "Cidade"
       EXPRESSION ('[TIPO]'eq'Cidade')
       STYLE
         COLOR 62 9 41
-        SIZE 20
         OFFSET 0 -10
+        SIZE 20
         SYMBOL "/var/www/i3geo/imagens/google/condominium1.png"
       END # STYLE
+      TITLE ""
     END # CLASS
     CLASS
       NAME "Capital"
@@ -75,6 +92,7 @@ MAP
         SIZE 6
         SYMBOL "vila"
       END # STYLE
+      TITLE ""
     END # CLASS
   END # LAYER
 
