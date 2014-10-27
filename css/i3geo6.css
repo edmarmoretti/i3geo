@@ -983,6 +983,15 @@ background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 10
 background-size: 16px 144px;
 }
 }
+.i3geoFormIconeAquarela {
+cursor: pointer;
+background: transparent url("../imagens/aquarela.gif") no-repeat scroll 100% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/aquarela.gif") no-repeat scroll 100% 5px;
+background-size: 16px 144px;
+}
+}
 .i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
 width: 90%;
 height: 22px;
@@ -996,6 +1005,9 @@ text-overflow: '';
 font-size: 12px;
 appearance: none;
 cursor: text;
+}
+.i3geoFormIconeAquarela input{
+width: 80%;
 }
 /*hack opera */
 @media all and (-webkit-min-device-pixel-ratio:10000) , not all and

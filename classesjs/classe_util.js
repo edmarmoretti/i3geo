@@ -1967,7 +1967,7 @@ i3GEO.util = {
 	nome {String} - valor que sera incluido no parametro "name" do elemento "select".
 
 	alias {string} sim|nao indica se para os nomes dos itens sera usado o alias (default= sim)
-	
+
 	estilo {string} - estilo CSS em linha
 		 */
 		comboItens: function(id,tema,funcao,onde,nome,alias,estilo){
@@ -3262,6 +3262,37 @@ i3GEO.util = {
 				temp[key] = i3GEO.util.cloneObj(obj[key]);
 
 			return temp;
+		},
+		/**
+		 * Function: aplicaAquarela
+		 *
+		 * Formata c&oacute;digo HTML para incluir um &iacute;cone para abrir o colorPicker
+		 *
+		 * Todos os elementos abaixo de 'onde' que contenham a classe css 'i3geoFormIconeAquarela'
+		 * ser&aatilde;o atingidas
+		 *
+		 * Exemplo:
+		 *
+		 *	<div id='foo'><div class='i3geoForm100 i3geoFormIconeAquarela' >
+		 *		<input type='text' id='i3GEOlegendaacori' value='0,0,0' />
+		 *	</div></div>
+		 *
+		 *	<script>i3GEO.util.aplicaAquarela("foo");</script>
+		 */
+		aplicaAquarela: function(onde){
+			var temp = function(obj){
+				YAHOO.util.Event.addListener(
+					obj,
+					"click",
+					function(){ i3GEO.util.abreCor("", obj.firstChild.id); }
+				);
+				YAHOO.util.Event.addListener(
+					obj.firstChild,
+					"click",
+					YAHOO.util.Event.stopPropagation
+				);
+			};
+			YAHOO.util.Dom.getElementsByClassName("i3geoFormIconeAquarela","div",onde,temp);
 		}
 };
 

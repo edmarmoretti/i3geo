@@ -154,6 +154,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/storage/storage-min.js",
 "../pacotes/yui290/build/resize/resize_compacto.js",
 "../pacotes/yui290/build/progressbar/progressbar_compacto.js",
+"../pacotes/yui290/build/selector/selector-min.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js",
 "../pacotes/wicket/wicket.js",

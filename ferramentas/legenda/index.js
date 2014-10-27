@@ -356,6 +356,7 @@ i3GEOF.legenda =
 				$i("i3GEOFlegendamostra").onclick = function() {
 					i3GEO.tema.invertestatuslegenda(i3GEOF.legenda.tema);
 				};
+				i3GEO.util.aplicaAquarela("i3GEOF.legenda_corpo");
 			} catch (erro) {
 				i3GEO.janela.tempoMsg(erro);
 			}
