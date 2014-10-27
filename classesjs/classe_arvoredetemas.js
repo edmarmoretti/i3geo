@@ -2978,7 +2978,7 @@ i3GEO.arvoreDeTemas = {
 		vinde : function() {
 			i3GEO.util
 					.scriptTag(i3GEO.configura.locaplic
-							+ "/ferramentas/vinde/index.js",
+							+ "/ferramentas/vinde/dependencias.php",
 							"i3GEOF.vinde.criaJanelaFlutuante()",
 							"i3GEOF.vinde_script");
 		},

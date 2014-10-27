@@ -59,6 +59,17 @@ i3GEOF.wiki = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.wiki.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.wiki.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -114,9 +125,8 @@ i3GEOF.wiki = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins += '<div id=i3GEOwikiLista style=display:block;background-color:white;text-align:left;padding:5px; ></div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.wiki.MUSTACHE, i3GEOF.wiki.mustacheHash());
 		return ins;
 	},
 	/*

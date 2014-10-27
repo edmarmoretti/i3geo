@@ -1345,7 +1345,7 @@ i3GEO.navega = {
 		Abre a janela de di&aacute;logo da ferramenta wiki permitindo a navega&ccedil;&atilde;o integrada com a Wikip&eacute;dia
 		*/
 		wiki: function(){
-			i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.wiki()","wiki","wiki");
+			i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.wiki()","wiki","wiki","dependencias.php","i3GEOF.wiki.iniciaJanelaFlutuante()");
 		},
 		/*
 		Function: metar

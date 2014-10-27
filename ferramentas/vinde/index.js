@@ -55,6 +55,17 @@ i3GEOF.vinde = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.vinde.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.vinde.dicionario);
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -189,8 +200,8 @@ i3GEOF.vinde = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = "<div id=i3GEOFvindeArvore ></div>";
+	html: function() {
+		var ins = Mustache.render(i3GEOF.vinde.MUSTACHE, i3GEOF.vinde.mustacheHash());
 		return ins;
 	},
 	/*
