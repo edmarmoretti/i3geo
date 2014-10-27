@@ -48,12 +48,6 @@ i3GEOF.centromassa = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.centromassa.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -63,27 +57,8 @@ i3GEOF.centromassa = {
 	 */
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.centromassa.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		return dicionario;
-	},
-	/*
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.centromassa.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/centromassa/dicionario.js",
-				"i3GEOF.centromassa.iniciaJanelaFlutuante()",
-				"i3GEOF.centromassa.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.centromassa.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
@@ -157,24 +132,16 @@ i3GEOF.centromassa = {
 	},
 	t0: function()
 	{
-		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/centromassa/exemplo.png' />" +
-		"<p class='paragrafo'>"+$trad('ajuda',i3GEOF.centromassa.dicionario)+"</p>" +
-		"<p class='paragrafo'>"+$trad('ajuda2',i3GEOF.centromassa.dicionario)+"</p>";
-		i3GEO.util.proximoAnterior("","i3GEOF.centromassa.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
+
+		i3GEO.util.proximoAnterior("","i3GEOF.centromassa.t1()","","i3GEOFgradeDePontost0","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo' >"+$trad('selecionaTema',i3GEOF.centromassa.dicionario)+"<br>";
-		ins += "<div style='text-align:left;' id='i3GEOcentromassaDivPontos' ></div><br>";
-		ins += "<p class='paragrafo' >"+$trad('selecionaItem',i3GEOF.centromassa.dicionario)+"<br>";
-		ins += "<div id=i3GEOondeItens style='text-align:left;display:block' ></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t0()","i3GEOF.centromassa.t2()",ins,"i3GEOF.centromassa.t1","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
+		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t0()","i3GEOF.centromassa.t2()","","i3GEOF.centromassa.t1","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
 		i3GEOF.centromassa.comboTemasPontos();
 	},
 	t2: function(){
-		var b,ins = "<p class='paragrafo'>"+$trad('ajuda3',i3GEOF.centromassa.dicionario);
-		ins += "<br><br><input id=i3GEOcentromassabotao1 type='buttom' value='"+$trad('calcula',i3GEOF.centromassa.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t1()","",ins,"i3GEOF.centromassa.t2","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
-		b = new YAHOO.widget.Button(
+		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t1()","","","i3GEOF.centromassa.t2","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
+		var b = new YAHOO.widget.Button(
 			"i3GEOcentromassabotao1",
 			{onclick:{fn: i3GEOF.centromassa.calcula}}
 		);
