@@ -49,12 +49,6 @@ i3GEOF.gradeCoord = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.gradeCoord.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -65,38 +59,15 @@ i3GEOF.gradeCoord = {
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.gradeCoord.dicionario);
 		dicionario["gradeCoordIntervalo"] = $inputText('','','i3GEOgradeCoordintervalo','',4,'2');
-		dicionario["gradeCoordcorlinha"] = $inputText('','','i3GEOgradeCoordcorlinha','',11,'200,200,200');
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["nao"] = $trad("x15");
-		dicionario["gradeCoordlarguralinha"] = $inputText('','','i3GEOgradeCoordlarguralinha','',11,'1');
 		dicionario["sim"] = $trad("x14");
 		dicionario["gradeCoordtamanhotexto"] = $inputText('','','i3GEOgradeCoordtamanhotexto','',3,'10');
 		dicionario["gradeCoordmascara"] = $inputText('','','i3GEOgradeCoordmascara_i','',11,'-1,-1,-1');
-		dicionario["gradeCoordshadowcolor"] = $inputText('','','i3GEOgradeCoordshadowcolor','',11,'-1,-1,-1');
 		dicionario["gradeCoordshadowsizex"] = $inputText('','','i3GEOgradeCoordshadowsizex','',3,'0');
 		dicionario["gradeCoordshadowsizey"] = $inputText('','','i3GEOgradeCoordshadowsizey','',3,'0');
-		dicionario["gradeCoordcortexto"] = $inputText('','','i3GEOgradeCoordcortexto','',11,'0,0,0');
 		dicionario["asp"] = '"';
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.gradeCoord.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/gradecoord/dicionario.js",
-				"i3GEOF.gradeCoord.iniciaJanelaFlutuante()",
-				"i3GEOF.gradeCoord.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.gradeCoord.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
@@ -115,6 +86,7 @@ i3GEOF.gradeCoord = {
 				"i3GEOgradeCoordbotao1",
 				{onclick:{fn: i3GEOF.gradeCoord.executa}}
 			);
+			i3GEO.util.aplicaAquarela("i3GEOF.gradeCoord_corpo");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},

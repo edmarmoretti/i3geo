@@ -338,11 +338,13 @@ i3GEOF.navegapostgis = {
 		//pega a lista de inputs
 		var inputs = $i("i3GEOFnavegapostgisColunas").getElementsByTagName("input"),
 			n = inputs.length,
-			i,sql,
+			i,
+			sql,
 			the_geom = "",
 			gid = "",
-			colunas = [];
+			colunas;
 
+		colunas = [];
 		for(i=0;i<n;i++){
 			if(inputs[i].name == "i3GEOFnavegapostgisGid" && inputs[i].checked == true){
 				gid = inputs[i].value;
