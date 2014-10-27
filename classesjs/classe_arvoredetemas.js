@@ -3175,7 +3175,7 @@ i3GEO.arvoreDeTemas = {
 		 */
 		uploadgpx : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-					+ "/ferramentas/uploadgpx/index.js",
+					+ "/ferramentas/uploadgpx/dependencias.php",
 					"i3GEOF.uploadgpx.criaJanelaFlutuante()",
 					"i3GEOF.uploadgpx_script");
 		},
