@@ -1394,36 +1394,31 @@ i3GEOF.legenda =
 				linha = linha.split("#");
 				tipoLayer = linha[0];
 				d =
-					"<table class=lista6 ><tr><td style='text-align:left;'>Cor do contorno:</td><td>" + "<div class='i3geoForm i3geoFormIconeEdita' >"
+					"<table class=lista6 ><tr><td style='text-align:left;'>Cor do contorno:</td><td>"
+					+ "<div class='i3geoForm100 i3geoFormIconeAquarela' >"
 						+ "<input type=text value='"
 						+ linha[2]
 						+ "' id='i3GEOlegendaoutlinecolor' />"
 						+ "</div>"
-						+ "</td><td><img style=cursor:pointer src='"
-						+ i3GEO.configura.locaplic
-						+ "/imagens/aquarela.gif' onclick=\"i3GEOF.legenda.corj('i3GEOlegendaoutlinecolor')\" /></td></tr>"
+						+ "</td></tr>"
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('corFundo', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
-						+ "<div class='i3geoForm i3geoFormIconeEdita' >"
+						+ "<div class='i3geoForm100 i3geoFormIconeAquarela' >"
 						+ "<input type=text value='"
 						+ linha[3]
 						+ "' id='i3GEOlegendabackgroundcolor' />"
 						+ "</div>"
-						+ "</td><td><img style=cursor:pointer src='"
-						+ i3GEO.configura.locaplic
-						+ "/imagens/aquarela.gif' onclick=\"i3GEOF.legenda.corj('i3GEOlegendabackgroundcolor')\" /></td></tr>"
+						+ "</td></tr>"
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('corFrente', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
-						+ "<div class='i3geoForm i3geoFormIconeEdita' >"
+						+ "<div class='i3geoForm100 i3geoFormIconeAquarela' >"
 						+ "<input type=text value='"
 						+ linha[4]
 						+ "' id='i3GEOlegendacolor' />"
 						+ "</div>"
-						+ "</td><td><img style=cursor:pointer src='"
-						+ i3GEO.configura.locaplic
-						+ "/imagens/aquarela.gif' onclick=\"i3GEOF.legenda.corj('i3GEOlegendacolor')\" /></td></tr>"
+						+ "</td></tr>"
 						+ "<tr><td style='text-align:left;'>"
 						+ $trad('tamanhoEspacamento', i3GEOF.legenda.dicionario)
 						+ ":</td><td>"
@@ -1478,6 +1473,7 @@ i3GEOF.legenda =
 						+ "' id='i3GEOlegendasymbolname' />"
 						+ "</div>" + "</td><td></td></tr></table>";
 				$i("i3GEOlegendaParametrosEstilos").innerHTML = d;
+				i3GEO.util.aplicaAquarela("i3GEOlegendaParametrosEstilos");
 				p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid + "&funcao=editasimbolo&tipo="
 						+ tipoLayer + "&opcao=listaSimbolos&onclick=i3GEOF.legenda.aplicaSimbolo(this)";

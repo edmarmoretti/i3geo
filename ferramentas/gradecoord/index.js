@@ -1,41 +1,3 @@
-
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-
-/*
-Title: Grade de coordenadas
-
-Cria um tema contendo a grade de coordenadas
-
-Veja:
-
-<i3GEO.mapa.dialogo.gradeCoord>
-
-Arquivo:
-
-i3geo/ferramentas/gradecoord/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
@@ -58,17 +20,9 @@ i3GEOF.gradeCoord = {
 	 */
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.gradeCoord.dicionario);
-		dicionario["gradeCoordIntervalo"] = $inputText('','','i3GEOgradeCoordintervalo','',4,'2');
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["nao"] = $trad("x15");
-		
 		dicionario["sim"] = $trad("x14");
-		dicionario["gradeCoordtamanhotexto"] = $inputText('','','i3GEOgradeCoordtamanhotexto','',3,'10');
-		dicionario["gradeCoordmascara"] = $inputText('','','i3GEOgradeCoordmascara_i','',11,'-1,-1,-1');
-		dicionario["gradeCoordshadowcolor"] = $inputText('','','i3GEOgradeCoordshadowcolor','',11,'-1,-1,-1');
-		dicionario["gradeCoordshadowsizex"] = $inputText('','','i3GEOgradeCoordshadowsizex','',3,'0');
-		dicionario["gradeCoordshadowsizey"] = $inputText('','','i3GEOgradeCoordshadowsizey','',3,'0');
-		dicionario["gradeCoordcortexto"] = $inputText('','','i3GEOgradeCoordcortexto','',11,'0,0,0');
 		dicionario["asp"] = '"';
 		return dicionario;
 	},
@@ -133,13 +87,6 @@ i3GEOF.gradeCoord = {
 		i3GEOF.gradeCoord.aguarde = $i("i3GEOF.gradeCoord_imagemCabecalho").style;
 		i3GEOF.gradeCoord.inicia(divid);
 	},
-	/*
-	Function: corj
-
-	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
-	*/
-	corj: function(obj)
-	{i3GEO.util.abreCor("",obj);},
 	/*
 	Function: executa
 
