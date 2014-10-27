@@ -61,14 +61,18 @@ i3GEOF.gradeCoord = {
 		dicionario["gradeCoordIntervalo"] = $inputText('','','i3GEOgradeCoordintervalo','',4,'2');
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["nao"] = $trad("x15");
+		
 		dicionario["sim"] = $trad("x14");
 		dicionario["gradeCoordtamanhotexto"] = $inputText('','','i3GEOgradeCoordtamanhotexto','',3,'10');
 		dicionario["gradeCoordmascara"] = $inputText('','','i3GEOgradeCoordmascara_i','',11,'-1,-1,-1');
+		dicionario["gradeCoordshadowcolor"] = $inputText('','','i3GEOgradeCoordshadowcolor','',11,'-1,-1,-1');
 		dicionario["gradeCoordshadowsizex"] = $inputText('','','i3GEOgradeCoordshadowsizex','',3,'0');
 		dicionario["gradeCoordshadowsizey"] = $inputText('','','i3GEOgradeCoordshadowsizey','',3,'0');
+		dicionario["gradeCoordcortexto"] = $inputText('','','i3GEOgradeCoordcortexto','',11,'0,0,0');
 		dicionario["asp"] = '"';
 		return dicionario;
 	},
+
 	/*
 	Function: inicia
 
@@ -82,10 +86,11 @@ i3GEOF.gradeCoord = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.gradeCoord.html();
 			i3GEO.util.comboFontes("i3GEOgradeCoordfonte","i3GEOgradeCoordfontef");
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOgradeCoordbotao1",
 				{onclick:{fn: i3GEOF.gradeCoord.executa}}
 			);
+			b.addClass("rodar");
 			i3GEO.util.aplicaAquarela("i3GEOF.gradeCoord_corpo");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
