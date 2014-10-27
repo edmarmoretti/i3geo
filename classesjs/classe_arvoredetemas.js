@@ -3186,7 +3186,7 @@ i3GEO.arvoreDeTemas = {
 		 */
 		uploadkml : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-					+ "/ferramentas/uploadkml/index.js",
+					+ "/ferramentas/uploadkml/dependencias.php",
 					"i3GEOF.uploadkml.criaJanelaFlutuante()",
 					"i3GEOF.uploadkml_script");
 		}
