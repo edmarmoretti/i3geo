@@ -1,41 +1,3 @@
-
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-
-/*
-Title: Legenda gr&aacute;fica do mapa
-
-Edita a legenda que &eacute; mostrada no corpo do mapa, controlando o tamanho, posi&ccedil;&atilde;o, fontes, etc.
-
-Veja:
-
-<i3GEO.mapa.dialogo.opcoesLegenda>
-
-Arquivo:
-
-i3geo/ferramentas/opcoes_legenda/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
@@ -50,12 +12,6 @@ i3GEOF.opcoesLegenda = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.opcoesLegenda.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -68,34 +24,8 @@ i3GEOF.opcoesLegenda = {
 		dicionario["sim"] = $trad("x14");
 		dicionario["nao"] = $trad("x15");
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		dicionario["imagecolor"] = $inputText('','','i3GEOopcoesLegendaimagecolor','',12,'');
 		dicionario["asp"] = '"';
-		dicionario["outlinecolor"] = $inputText('','','i3GEOopcoesLegendaoutlinecolor','',12,'');
-		dicionario["keyspacingy"] = $inputText('','','i3GEOopcoesLegendakeyspacingy','',4,'');
-		dicionario["keyspacingx"] = $inputText('','','i3GEOopcoesLegendakeyspacingx','',4,'');
-		dicionario["keysizey"] = $inputText('','','i3GEOopcoesLegendakeysizey','',4,'');
-		dicionario["keysizex"] = $inputText('','','i3GEOopcoesLegendakeysizex','',4,'');
-		dicionario["labelsize"] = $inputText('','','i3GEOopcoesLegendalabelsize','',4,'');
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.opcoesLegenda.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/dicionario.js",
-				"i3GEOF.opcoesLegenda.iniciaJanelaFlutuante()",
-				"i3GEOF.opcoesLegenda.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.opcoesLegenda.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
@@ -109,16 +39,19 @@ i3GEOF.opcoesLegenda = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML = i3GEOF.opcoesLegenda.html();
-			new YAHOO.widget.Button(
+			var b = new YAHOO.widget.Button(
 				"i3GEOopcoesLegendabotao1",
 				{onclick:{fn: i3GEOF.opcoesLegenda.executa}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar");
+			b = new YAHOO.widget.Button(
 				"i3GEOopcoesLegendabotao2",
 				{onclick:{fn: i3GEOF.opcoesLegenda.testa}}
 			);
+			b.addClass("rodar");
 			i3GEO.util.comboFontes("i3GEOopcoesLegendafonte","i3GEOopcoesLegendafontef");
 			i3GEOF.opcoesLegenda.parametrosAtuais();
+			i3GEO.util.aplicaAquarela("i3GEOF.opcoesLegenda_corpo");
 		}
 		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
 		if(i3GEO.Interface.ATUAL !== "padrao")
