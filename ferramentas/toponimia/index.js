@@ -1,42 +1,3 @@
-
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-
-/*
-Title: Topon&iacute;mia de um tema
-
-Ativa a apresenta&ccedil;&atilde;o da topon&iacute;mia de um tema.
-A topon&iacute;mia &eacute; definida em fun&ccedil;&atilde;o das colunas existentes na tabela de atributos.
-
-Veja:
-
-<i3GEO.tema.dialogo.toponimia>
-
-Arquivo:
-
-i3geo/ferramentas/toponimia/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
@@ -79,25 +40,6 @@ i3GEOF.toponimia = {
 		dicionario["sim"] = $trad("x14");
 		dicionario["nao"] = $trad("x15");
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.toponimia.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/toponimia/dicionario.js",
-				"i3GEOF.toponimia.iniciaJanelaFlutuante()",
-				"i3GEOF.toponimia.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.toponimia.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
@@ -146,6 +88,7 @@ i3GEOF.toponimia = {
 				""
 			);
 			i3GEO.util.comboFontes("i3GEOtoponimiaListaFonte","i3GEOtoponimiaDivListaFonte");
+			i3GEO.util.aplicaAquarela("i3GEOF.toponimia_corpo");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
