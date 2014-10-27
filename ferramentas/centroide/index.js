@@ -157,21 +157,15 @@ i3GEOF.centroide = {
 	},
 	t0: function()
 	{
-		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/centroide/exemplo.png' />" +
-			"<p class='paragrafo' >"+$trad('ajuda',i3GEOF.centroide.dicionario);
-		i3GEO.util.proximoAnterior("","i3GEOF.centroide.t1()",ins,"i3GEOFgradeDePontost0","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
+		i3GEO.util.proximoAnterior("","i3GEOF.centroide.t1()","","i3GEOFgradeDePontost0","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo'>"+$trad('selecionaTema',i3GEOF.centroide.dicionario);
-		ins += "<div id='i3GEOcentroideSelTemas' style='text-align:left;font-size:11px'></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.centroide.t0()","i3GEOF.centroide.t2()",ins,"i3GEOF.centroide.t1","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
+		i3GEO.util.proximoAnterior("i3GEOF.centroide.t0()","i3GEOF.centroide.t2()","","i3GEOF.centroide.t1","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
 		i3GEOF.centroide.comboTemasSel();
 	},
 	t2: function(){
-		var b,ins = "<p class='paragrafo'>"+$trad('ajuda2',i3GEOF.centroide.dicionario);
-		ins += "<br><br><input id=i3GEOcentroidebotao1 type='buttom' value='"+$trad('criaCentroide',i3GEOF.centroide.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.centroide.t2()","",ins,"i3GEOF.centroide.t3","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
-		b = new YAHOO.widget.Button(
+		i3GEO.util.proximoAnterior("i3GEOF.centroide.t2()","","","i3GEOF.centroide.t3","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
+		var b = new YAHOO.widget.Button(
 			"i3GEOcentroidebotao1",
 			{onclick:{fn: i3GEOF.centroide.criacentroide}}
 		);

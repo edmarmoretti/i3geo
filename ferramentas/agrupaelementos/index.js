@@ -49,12 +49,6 @@ i3GEOF.agrupaElementos = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.agrupaElementos.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -64,26 +58,8 @@ i3GEOF.agrupaElementos = {
 	 */
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.agrupaElementos.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.agrupaElementos.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/dicionario.js",
-				"i3GEOF.agrupaElementos.iniciaJanelaFlutuante()",
-				"i3GEOF.agrupaElementos.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.agrupaElementos.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
@@ -157,30 +133,20 @@ i3GEOF.agrupaElementos = {
 	},
 	t0: function()
 	{
-		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/exemplo.png' />" +
-			"<p class='paragrafo' >"+$trad('descricao',i3GEOF.agrupaElementos.dicionario) +
-			"<p class='paragrafo' >"+$trad('descricao2',i3GEOF.agrupaElementos.dicionario) +
-			"<p class='paragrafo' >"+$trad('descricao3',i3GEOF.agrupaElementos.dicionario);
-		i3GEO.util.proximoAnterior("","i3GEOF.agrupaElementos.t1()",ins,"i3GEOFgradeDePontost0","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
+		i3GEO.util.proximoAnterior("","i3GEOF.agrupaElementos.t1()","","i3GEOFgradeDePontost0","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo' >"+$trad('selecionaTema',i3GEOF.agrupaElementos.dicionario)+":<br>";
-		ins += "<div id='i3GEOagrupaelementosSelTemas' style='text-align:left;font-size:11px'></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t0()","i3GEOF.agrupaElementos.t2()",ins,"i3GEOF.agrupaElementos.t1","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
+		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t0()","i3GEOF.agrupaElementos.t2()","","i3GEOF.agrupaElementos.t1","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
 		i3GEOF.agrupaElementos.comboTemasSel();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo' >"+$trad('selecionaAtributo',i3GEOF.agrupaElementos.dicionario);
-		ins += "<div id='i3GEOagrupaelementosSelItens' style='text-align:left;font-size:11px;'></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t1()","i3GEOF.agrupaElementos.t3()",ins,"i3GEOF.agrupaElementos.t2","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
+		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t1()","i3GEOF.agrupaElementos.t3()","","i3GEOF.agrupaElementos.t2","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
 		$i("i3GEOagrupaelementosSelItens").style.display = "block";
 		i3GEOF.agrupaElementos.comboItensSel();
 	},
 	t3: function(){
-		var b,ins = "<p class='paragrafo'>"+$trad('adicionaAgrupamento',i3GEOF.agrupaElementos.dicionario);
-		ins += "<br><br><input id=i3GEOagrupaelementosbotao1 type='buttom' value='"+$trad('criaAgrupamento',i3GEOF.agrupaElementos.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t2()","",ins,"i3GEOF.agrupaElementos.t3","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
-		b = new YAHOO.widget.Button(
+		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t2()","","","i3GEOF.agrupaElementos.t3","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
+		var b = new YAHOO.widget.Button(
 			"i3GEOagrupaelementosbotao1",
 			{onclick:{fn: i3GEOF.agrupaElementos.criaAgrupamento}}
 		);

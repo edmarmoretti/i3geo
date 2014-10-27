@@ -985,7 +985,7 @@ background-size: 16px 144px;
 }
 .i3geoFormIconeAquarela {
 cursor: pointer;
-background: transparent url("../imagens/aquarela.gif") no-repeat scroll 100% 5px;
+background: transparent url("../imagens/aquarela.gif") no-repeat scroll 98% 5px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
 background: transparent url("../imagens/aquarela.gif") no-repeat scroll 100% 5px;
