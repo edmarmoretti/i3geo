@@ -97,13 +97,14 @@ i3GEOF.tipoimagem = {
 	*/
 	inicia: function(iddiv){
 		try{
-			var temp,f;
+			var temp,f,b;
 
 			$i(iddiv).innerHTML += i3GEOF.tipoimagem.html();
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOFtipoImagemListaDeFiltrosOk",
 				{onclick:{fn: i3GEOF.tipoimagem.aplicar}}
 			);
+			b.addClass("rodar");
 			temp = $i("i3GEOFtipoImagemListaDeFiltrosOk-button").style;
 			temp.minHeight = "1.5em";
 			temp.padding = "0px 5px";
@@ -177,8 +178,8 @@ i3GEOF.tipoimagem = {
 		{filtro = 'nenhum';}
 		i3GEO.configura.tipoimagem = filtro;
 		g_operacao = "outras";
-		//i3GEO.atualiza();
 		i3GEO.Interface.alteraParametroLayers("TIPOIMAGEM",filtro);
+		i3GEO.Interface.openlayers.atualizaMapa();
 	},
 	/*
 	Function: adicionar

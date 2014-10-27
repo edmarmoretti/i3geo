@@ -19,7 +19,7 @@ i3GEOF.opcoesTamanho.dicionario = {
 		it : ""
 	} ],
 	'testa' : [ {
-		pt : "Testa",
+		pt : "Testar",
 		en : "",
 		es : "",
 		it : ""

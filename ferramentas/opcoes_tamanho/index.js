@@ -62,8 +62,8 @@ i3GEOF.opcoesTamanho = {
 	 */
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.opcoesTamanho.dicionario);
-		dicionario["Tamanhol"] = $inputText('','','i3GEOopcoesTamanhol','',4,i3GEO.parametros.w);
-		dicionario["Tamanhoa"] = $inputText('','','i3GEOopcoesTamanhoa','',4,i3GEO.parametros.h);
+		dicionario["Tamanhol"] = i3GEO.parametros.w;
+		dicionario["Tamanhoa"] = i3GEO.parametros.h;
 		return dicionario;
 	},
 	/*
@@ -95,17 +95,19 @@ i3GEOF.opcoesTamanho = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		var box;
+		var b,box;
 		try{
 			$i(iddiv).innerHTML += i3GEOF.opcoesTamanho.html();
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOopcoesTamanhobotao2",
 				{onclick:{fn: i3GEOF.opcoesTamanho.atualizaBox}}
 			);
-			new YAHOO.widget.Button(
+			b.addClass("rodar150");
+			b = new YAHOO.widget.Button(
 				"i3GEOopcoesTamanhobotao1",
 				{onclick:{fn: i3GEOF.opcoesTamanho.executa}}
 			);
+			b.addClass("rodar150");
 			i3GEO.util.criaBox("boxg");
 			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
 			box = $i("boxg");
