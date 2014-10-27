@@ -3,7 +3,7 @@
 		<p class='paragrafo'>{{{tipoArquivo}}}:</p>
 		<div class='styled-select'>
 			<select name='i3GEOuploaddbftipoarquivo'>
-				<option value='dbf' select>dbf</option>
+				<option value='dbf' selected>dbf</option>
 				<option value='csvpv'>csv ";"</option>
 				<option value='csvv'>csv ","</option>
 			</select>
@@ -21,7 +21,8 @@
 		</div>
 		<br>
 		<p class='paragrafo'>
-			{{{arquivo}}}: <input type='file' size='10' name='i3GEOuploaddbffile' style='width: 270px; top: 0px; left: 0px; cursor: pointer;'>
+			{{{arquivo}}}:
+			<input type='file' size='10' name='i3GEOuploaddbffile' style='width: 270px; top: 0px; left: 0px; cursor: pointer;'>
 		</p>
 	</fieldset>
 	<fieldset class='subbloco'>
@@ -30,8 +31,13 @@
 	</fieldset>
 	<fieldset class='subbloco'>
 		<p class='paragrafo'>
-			<input id='i3GEOuploaddbfbotao1' type='button' value='{{{criaCamada}}}' size='12' name='submit'> <input type='hidden' name='g_sid' value={{{sid}}}> <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+			<input id='i3GEOuploaddbfbotao1' type='button' value='{{{criaCamada}}}' size='12' name='submit'>
+			<input type='hidden' name='g_sid' value={{{sid}}}>
+			<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+		</p>
+	</fieldset>
 </form>
 <br>
-<iframe name='i3GEOuploaddbfiframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
+<fieldset class='subbloco'>
+	<iframe name='i3GEOuploaddbfiframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
 </fieldset>

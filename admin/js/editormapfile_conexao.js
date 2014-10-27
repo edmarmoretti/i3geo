@@ -151,7 +151,7 @@ function montaEditorDados(dados)
 	$i("metaestat").onchange = function(){
 		core_desativaforms(idsMetaestat);
 		var valor = $i("metaestat").value,
-			d;
+			d = [];
 		if(valor === "SIM"){
 			d = ["metaestat_id_medida_variavel"];
 		}

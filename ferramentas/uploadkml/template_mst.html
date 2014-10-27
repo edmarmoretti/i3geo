@@ -2,7 +2,8 @@
 	<fieldset class='subbloco'>
 		<p class='paragrafo' style='color: red'>{{{ajuda}}}</p>
 		<p class='paragrafo'>
-			{{{arquivoKml}}} <br> <input type='file' size='22' name='i3GEOuploadkml' style='top: 0px; left: 0px; cursor: pointer;'>
+			{{{arquivoKml}}} <br>
+			<input type='file' size='22' name='i3GEOuploadkml' style='top: 0px; left: 0px; cursor: pointer;'>
 		</p>
 	</fieldset>
 	<fieldset class='subbloco'>
@@ -17,10 +18,14 @@
 	</fieldset>
 	<fieldset class='subbloco'>
 		<p class='paragrafo'>
-			<input id='i3GEOuploadkmlbotao1' type='button' value='{{{criaCamada}}}' size='12' name='submit'> <br>
+			<input id='i3GEOuploadkmlbotao1' type='button' value='{{{criaCamada}}}' size='12' name='submit'>
+			<br>
 		<p class='paragrafo'>{{{ajuda2}}}</p>
-		<input type='hidden' name='g_sid' value='{{{sid}}}'> <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+		<input type='hidden' name='g_sid' value='{{{sid}}}'>
+		<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+	</fieldset>
 </form>
 <br>
-<iframe name='i3GEOuploadkmliframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
+<fieldset class='subbloco'>
+	<iframe name='i3GEOuploadkmliframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
 </fieldset>

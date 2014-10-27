@@ -1,7 +1,8 @@
 <form id='i3GEOuploadgpxf' target='i3GEOuploadgpxiframe' action='{{{locaplic}}}/ferramentas/uploadgpx/upload.php' method='post' ENCTYPE='multipart/form-data'>
 	<fieldset class='subbloco'>
 		<p class='paragrafo'>
-			{{{arquivoGpx}}} <br> <br> <input type='file' size='18' name='i3GEOuploadgpx' style='top: 0px; left: 0px; cursor: pointer;'>
+			{{{arquivoGpx}}} <br> <br>
+			<input type='file' size='18' name='i3GEOuploadgpx' style='top: 0px; left: 0px; cursor: pointer;'>
 		</p>
 	</fieldset>
 	<fieldset class='subbloco'>
@@ -10,8 +11,13 @@
 	</fieldset>
 	<fieldset class='subbloco'>
 		<p class='paragrafo'>
-			<input id='i3GEOuploadgpxbotao1' type='button' value='{{{criaCamada}}}' size='12' name='submit'> <input type='hidden' name='g_sid' value='{{{sid}}}'> <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+			<input id='i3GEOuploadgpxbotao1' type='button' value='{{{criaCamada}}}' size='12' name='submit'>
+			<input type='hidden' name='g_sid' value='{{{sid}}}'>
+			<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+		</p>
+	</fieldset>
 </form>
 <br>
-<iframe name='i3GEOuploadgpxiframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
+<fieldset class='subbloco'>
+	<iframe name='i3GEOuploadgpxiframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
 </fieldset>
