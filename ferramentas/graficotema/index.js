@@ -189,11 +189,11 @@ i3GEOF.graficoTema = {
 			for (i=0;i<n; i++){
 				ins.push("<tr><td><input size=2 style='cursor:pointer;border:0px solid white;' name="+retorno.data.valores[i].item+" type=checkbox id=i3GEOgraficotema"+retorno.data.valores[i].item+" /></td>");
 				ins.push("<td>&nbsp;"+retorno.data.valores[i].item+"</td>");
-				ins.push("<td>&nbsp;<input  id=i3GEOgraficotema"+retorno.data.valores[i].item+"cor type=text size=13 value="+i3GEO.util.randomRGB()+" /></td>");
-				ins.push("<td>&nbsp;<img style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/aquarela.gif' onclick=\"i3GEOF.graficoTema.corj('i3GEOgraficotema"+retorno.data.valores[i].item+"cor')\" /></td></tr>");
+				ins.push("<td><div class='i3geoForm100 i3geoFormIconeAquarela' ><input  id=i3GEOgraficotema"+retorno.data.valores[i].item+"cor type=text size=13 value="+i3GEO.util.randomRGB()+" /></td></tr>");
 			}
 			ins.push("</table>");
 			$i("i3GEOgraficotemalistai").innerHTML = ins.join("");
+			i3GEO.util.aplicaAquarela("i3GEOgraficotemalistai");
 		}
 		catch(e)
 		{$i("i3GEOgraficotemalistai").innerHTML = "<p style=color:red >Erro<br>"+e;}

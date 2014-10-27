@@ -120,16 +120,6 @@ i3GEOF.graficointerativo1 =
 		w: "450px",
 		h: "400px",
 		/**
-		 * iniciaDicionario (depreciado na versao 6.0)
-		 *
-		 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-		 *
-		 * O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-		 */
-		iniciaDicionario : function(parametros) {
-			i3GEOF.tabela.iniciaJanelaFlutuante(parametros);
-		},
-		/**
 		 * Configura o grafico conforme um objeto contendo parametros e opcionalmente os dados Alguns parametros possuem definicoes padrao,
 		 * usadas quando o valor nao e passado
 		 *
@@ -801,22 +791,19 @@ i3GEOF.graficointerativo1 =
 						$i(idjanela + "i3GEOgraficointerativo1ComboY").innerHTML =
 							"<div>" + temp + "&nbsp;<div class='i3geoForm100 i3geoFormIconeEdita' style='float: left;left:10px;' ><input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
 								+ "'  type=text id='" + idjanela
-								+ "i3GEOgraficointerativo1ComboYidTitulo' value='' /></div>" + "<div class='i3geoForm100 i3geoFormIconeEdita' style='float: left;left:15px;' ><input id='" + idjanela
-								+ "i3GEOgraficointerativo1ComboYidcor' title='cor' type='text' value='' /></div>"
-								+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:15px;cursor:pointer src='"
-								+ i3GEO.configura.locaplic + "/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\"" + idjanela
-								+ "i3GEOgraficointerativo1ComboYidcor\")' /></div><br>";
+								+ "i3GEOgraficointerativo1ComboYidTitulo' value='' /></div>"
+								+ "<div class='i3geoForm100 i3geoFormIconeAquarela' style='float: left;left:15px;' ><input id='" + idjanela
+								+ "i3GEOgraficointerativo1ComboYidcor' title='cor' type='text' value='0,0,0' /></div>"
+								+ "</div><br>";
+						i3GEO.util.aplicaAquarela(idjanela + "i3GEOgraficointerativo1ComboY");
 
-						//$i(idjanela + "i3GEOgraficointerativo1ComboXid").id = idjanela + "i3GEOgraficointerativo1ComboYid";
 						//para escolher o item de X
 						$i(idjanela + "i3GEOgraficointerativo1ComboX").innerHTML =
 							"<div class=styled-select >" + retorno.dados + "&nbsp;<div class='i3geoForm i3geoFormIconeEdita' style='width:240px;float: right;' ><input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
 								+ "' type=text id='" + idjanela
 								+ "i3GEOgraficointerativo1ComboXidTitulo' value='' /></div></div>";
 
-						//$i(idjanela + "i3GEOgraficointerativo1ComboXid").style.width = "160px";
 						if ($i(idjanela + "i3GEOgraficointerativo1ComboYid")) {
-							//$i(idjanela + "i3GEOgraficointerativo1ComboYid").style.width = "160px";
 							adicionaFilho =
 								function() {
 									var no = document.createElement("div"), id = "CorG" + parseInt(Math.random() * 100000, 10), novoselect;
@@ -824,16 +811,15 @@ i3GEOF.graficointerativo1 =
 										+ retorno.dados
 										+ "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;left:10px;' >"
 										+ "<input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
-										+ "' type=text value='' /></div>" + "&nbsp;<div class='i3geoForm100 i3geoFormIconeEdita' style='float: left;left:15px;' ><input id='" + id
-										+ "' type=text value='' title='cor' /></div>"
-										+ "<img alt='aquarela.gif' style=position:relative;top:3px;left:15px;cursor:pointer src='"
-										+ i3GEO.configura.locaplic
-										+ "/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo1.corj(\"" + id + "\")' /><br>";
+										+ "' type=text value='' /></div>" 
+										+ "&nbsp;<div class='i3geoForm100 i3geoFormIconeAquarela' style='float: left;left:15px;' ><input id='" + id
+										+ "' type=text value='' title='cor' /></div><br>";
 									novoselect = no.getElementsByTagName("select")[0];
 									novoselect.id = "";
 									novoselect.onchange = adicionaFilho;
 									$i(idjanela + "i3GEOgraficointerativo1ComboY").appendChild(document.createElement("br"));
 									$i(idjanela + "i3GEOgraficointerativo1ComboY").appendChild(no);
+									i3GEO.util.aplicaAquarela(no.id);
 								};
 							$i(idjanela + "i3GEOgraficointerativo1ComboYid").onchange = adicionaFilho;
 						}

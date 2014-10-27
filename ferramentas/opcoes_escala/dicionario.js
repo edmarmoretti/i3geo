@@ -12,6 +12,12 @@ i3GEOF.opcoesEscala.dicionario = {
 			es:"",
 			it:""
 		}],
+		'largura': [{
+			pt:"Largura",
+			en:"",
+			es:"",
+			it:""
+		}],
 		'unidade': [{
 			pt:"Unidade",
 			en:"",
