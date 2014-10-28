@@ -1,21 +1,24 @@
-<p class='paragrafo'>
-	{{{selecionaFiltro}}}<br>
+<div style='margin-left: 5px;'>
+	<p class='paragrafo'>{{{selecionaFiltro}}}</p>
+	<div class=styled-select>
+		<select onchange='i3GEO.arvoreDeCamadas.ARVORE = null;i3GEO.arvoreDeCamadas.FILTRO = this.value;i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)'>
+			<option value='naofaznada'>---</option>
+			<option value=''>{{{removeFiltro}}}</option>
+			<option value='ligados'>{{{ligado}}}</option>
+			<option value='desligados'>{{{desligado}}}</option>
+			<option value='selecionados'>{{{comSelecao}}}</option>
+			<option value='download'>{{{permiteDownload}}}</option>
+			<option value='wms'>{{{wms}}}</option>
+			<option value='raster'>{{{raster}}}</option>
+			<option value='toponimia'>{{{apenasTexto}}}</option>
+		</select>
+	</div>
 	<br>
-	<select onchange='i3GEO.arvoreDeCamadas.ARVORE = null;i3GEO.arvoreDeCamadas.FILTRO = this.value;i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)'>
-		<option value='naofaznada'>---</option>
-		<option value=''>{{{removeFiltro}}}</option>
-		<option value='ligados'>{{{ligado}}}</option>
-		<option value='desligados'>{{{desligado}}}</option>
-		<option value='selecionados'>{{{comSelecao}}}</option>
-		<option value='download'>{{{permiteDownload}}}</option>
-		<option value='wms'>{{{wms}}}</option>
-		<option value='raster'>{{{raster}}}</option>
-		<option value='toponimia'>{{{apenasTexto}}}</option>
-	</select>
-	<br>
-	<br> {{{operacao}}}<br>
-	<br>
-	<select onchange='i3GEOF.filtroarvore.lote(this)'>
-		<option value=''>---</option>
-		<option value='excluir'>{{{exclui}}}</option>
-	</select>
+	<p class='paragrafo'>{{{operacao}}}</p>
+	<div class=styled-select>
+		<select onchange='i3GEOF.filtroarvore.lote(this)'>
+			<option value=''>---</option>
+			<option value='excluir'>{{{exclui}}}</option>
+		</select>
+	</div>
+</div>

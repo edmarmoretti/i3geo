@@ -114,7 +114,7 @@ i3GEOF.conectargeojson = {
 					combo += "<option value='"+raiz[i].link+"'>"+raiz[i].title+"</option>";
 				}
 				combo += "</select>";
-				$i("i3GEOconectargeojsonCombo").innerHTML = combo;
+				$i("i3GEOconectargeojsonCombo").innerHTML = "<div class=styled-select>"+combo+"</div>";
 			};
 			i3GEO.php.listaRSSwsARRAY(monta,"GEOJSON");
 			b = new YAHOO.widget.Button(

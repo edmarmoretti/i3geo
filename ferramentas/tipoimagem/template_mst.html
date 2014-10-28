@@ -1,101 +1,103 @@
-<p class='paragrafo'>{{{selecionaFiltro}}}</p>
-<div class='i3geoForm i3geoFormIconeEdita'>
-<input type='text' size='29' value='' id='i3GEOFtipoImagemListaDeFiltros' style='position: relative; top: -2px' />
+<div style='margin-left: 5px'>
+	<p class='paragrafo'>{{{selecionaFiltro}}}</p>
+	<div class='i3geoForm i3geoFormIconeEdita'>
+		<input type='text' size='29' value='' id='i3GEOFtipoImagemListaDeFiltros' style='position: relative; top: -2px' />
+	</div>
+	<br>
+	<p class='paragrafo'>
+		<input id='i3GEOFtipoImagemListaDeFiltrosOk' type='button' value='{{{aplica}}}' size='20' />
+	</p>
+	<br> <br>
+	<table class='lista6' style='width: 200px'>
+		<tr>
+			<td>
+				<input onclick='javascript:$i({{{asp}}}i3GEOFtipoImagemListaDeFiltros{{{asp}}}).value = {{{asp}}}{{{asp}}}' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='nenhum'>
+			</td>
+			<td>{{{nenhum}}}</td>
+			<td>
+				<img onclick='javascript:$i({{{asp}}}i3GEOFtipoImagemListaDeFiltros{{{asp}}}).value = {{{asp}}}{{{asp}}}' src='{{{locaplic}}}/imagens/filtro_nenhum.png' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}cinza{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='cinza'>
+			</td>
+			<td>{{{tonsCinza}}}</td>
+			<td>
+				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}cinza{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_cinza.png' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepiaclara{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='sepiaclara'>
+			</td>
+			<td>{{{sepiaClara}}}</td>
+			<td>
+				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepiaclara{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_sepiaclara.png' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepianormal{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='sepianormal'>
+			</td>
+			<td>{{{sepiaNormal}}}</td>
+			<td>
+				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepianormal{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_sepianormal.png' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}negativo{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='negativo'>
+			</td>
+			<td>{{{negativo}}}</td>
+			<td>
+				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}negativo{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_negativo.png' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}detectaBordas{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='detectaBordas'>
+			</td>
+			<td>{{{detectaBordas}}}</td>
+			<td>
+				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}detectaBordas{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_detectabordas.png' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}embassa{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='embassa'>
+			</td>
+			<td>emboss</td>
+			<td>
+				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}embassa{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_embassa.png' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}gaussian_blur{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='gaussian_blur'>
+			</td>
+			<td>gaussian blur</td>
+			<td>
+				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}gaussian_blur{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_gaussianblur.png' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}selective_blur{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='selective_blur'>
+			</td>
+			<td>selective blur</td>
+			<td>
+				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}selective_blur{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_selectiveblur.png' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}mean_removal{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='mean_removal'>
+			</td>
+			<td>mean removal</td>
+			<td>
+				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}mean_removal{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_meanremoval.png' />
+			</td>
+		</tr>
+	</table>
 </div>
-<br><p class='paragrafo'>
-<input id='i3GEOFtipoImagemListaDeFiltrosOk' type='button' value='{{{aplica}}}' size='20' />
-</p>
-<br>
-<br>
-<table class='lista6' style='width: 200px'>
-	<tr>
-		<td>
-			<input onclick='javascript:$i({{{asp}}}i3GEOFtipoImagemListaDeFiltros{{{asp}}}).value = {{{asp}}}{{{asp}}}' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='nenhum'>
-		</td>
-		<td>{{{nenhum}}}</td>
-		<td>
-			<img onclick='javascript:$i({{{asp}}}i3GEOFtipoImagemListaDeFiltros{{{asp}}}).value = {{{asp}}}{{{asp}}}' src='{{{locaplic}}}/imagens/filtro_nenhum.png' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}cinza{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='cinza'>
-		</td>
-		<td>{{{tonsCinza}}}</td>
-		<td>
-			<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}cinza{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_cinza.png' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepiaclara{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='sepiaclara'>
-		</td>
-		<td>{{{sepiaClara}}}</td>
-		<td>
-			<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepiaclara{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_sepiaclara.png' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepianormal{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='sepianormal'>
-		</td>
-		<td>{{{sepiaNormal}}}</td>
-		<td>
-			<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepianormal{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_sepianormal.png' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}negativo{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='negativo'>
-		</td>
-		<td>{{{negativo}}}</td>
-		<td>
-			<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}negativo{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_negativo.png' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}detectaBordas{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='detectaBordas'>
-		</td>
-		<td>{{{detectaBordas}}}</td>
-		<td>
-			<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}detectaBordas{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_detectabordas.png' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}embassa{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='embassa'>
-		</td>
-		<td>emboss</td>
-		<td>
-			<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}embassa{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_embassa.png' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}gaussian_blur{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='gaussian_blur'>
-		</td>
-		<td>gaussian blur</td>
-		<td>
-			<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}gaussian_blur{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_gaussianblur.png' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}selective_blur{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='selective_blur'>
-		</td>
-		<td>selective blur</td>
-		<td>
-			<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}selective_blur{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_selectiveblur.png' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}mean_removal{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='mean_removal'>
-		</td>
-		<td>mean removal</td>
-		<td>
-			<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}mean_removal{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_meanremoval.png' />
-		</td>
-	</tr>
-</table>

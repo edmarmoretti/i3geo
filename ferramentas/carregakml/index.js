@@ -110,7 +110,7 @@ i3GEOF.carregakml = {
 					combo += "<option value='"+raiz[i].link+"'>"+raiz[i].title+"</option>";
 				}
 				combo += "</select>";
-				$i("i3GEOcarregakmlCombo").innerHTML = combo;
+				$i("i3GEOcarregakmlCombo").innerHTML = "<div class=styled-select>"+combo+"</div>";
 			};
 			i3GEO.php.listaRSSwsARRAY(monta,"KML");
 			b = new YAHOO.widget.Button(

@@ -1,38 +1,3 @@
-
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-/*
-Title: Filtro da &aacute;rvore de camadas
-
-Veja:
-
-<i3GEO.arvoreDeCamadas.dialogo.filtro>
-
-Arquivo:
-
-i3geo/ferramentas/filtroarvore/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
@@ -47,12 +12,6 @@ i3GEOF.filtroarvore = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.filtroarvore.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -63,25 +22,6 @@ i3GEOF.filtroarvore = {
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.filtroarvore.dicionario);
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.filtroarvore.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/filtroarvore/dicionario.js",
-				"i3GEOF.filtroarvore.iniciaJanelaFlutuante()",
-				"i3GEOF.filtroarvore.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.filtroarvore.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
@@ -125,7 +65,7 @@ i3GEOF.filtroarvore = {
 		//cria a janela flutuante
 		titulo = $trad("t29")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=97' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"220px",
+			"260px",
 			"140px",
 			"",
 			"",

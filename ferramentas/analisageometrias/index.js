@@ -1,44 +1,3 @@
-
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-
-/*
-Title: An&aacute;lise de Geometrias
-
-Permite capturar geometrias de uma ou mais camadas e executar opera&ccedil;&otilde;es de an&aacute;lise.
-Ap&oacute;s o usu&aacute;rio selecionar elementos de um tema, a geometria pode ser capturada, ou seja, ela &eacute; armazenada no servidor para
-poder receber opera&ccedil;&otilde;es de an&aacute;lise. As opera&ccedil;&otilde;es envolvem c&aacute;lculos, como &aacute;rea e per&iacute;metro, al&eacute;m de processos de cruzamento
-entre geometrias. Ap&oacute;s realizar uma opera&ccedil;&atilde;o, o resultado &eacute; listado ou pode ser adicionado ao mapa como uma nova camada.
-
-As geometrias armazenadas ficam dispon&iacute;veis temporariamente, assim como o mapfile do mapa atual.
-
-Veja:
-
-<i3GEO.analise.dialogo.analisaGeometrias>
-
-Arquivo:
-
-i3geo/ferramentas/analisageometrias/index.js.php
-
-About: Licen&ccedil;a
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
@@ -52,12 +11,6 @@ i3GEOF.analisaGeometrias = {
 	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.analisaGeometrias.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -68,25 +21,6 @@ i3GEOF.analisaGeometrias = {
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.analisaGeometrias.dicionario);
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.analisaGeometrias.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/analisageometrias/dicionario.js",
-				"i3GEOF.analisaGeometrias.iniciaJanelaFlutuante()",
-				"i3GEOF.analisaGeometrias.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.analisaGeometrias.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
@@ -143,12 +77,12 @@ i3GEOF.analisaGeometrias = {
 			g_tipoacao="";
 			g_operacao="";
 			i3GEOF.analisaGeometrias.ativaFoco();
-			combot = "<select style='font-size:11px;width:250px' id='i3GEOanalisageometriastipoOperacao' onchange='i3GEOF.analisaGeometrias.operacao(this)' >";
+			combot = "<div class=styled-select><select id='i3GEOanalisageometriastipoOperacao' onchange='i3GEOF.analisaGeometrias.operacao(this)' >";
 			combot += "<option value='adiciona' >"+$trad('adiciona',i3GEOF.analisaGeometrias.dicionario)+"</option>";
 			combot += "<option value='retira' >"+$trad('retira',i3GEOF.analisaGeometrias.dicionario)+"</option>";
 			combot += "<option value='inverte' >"+$trad('inverte',i3GEOF.analisaGeometrias.dicionario)+"</option>";
 			combot += "<option value='limpa' >"+$trad('limpa',i3GEOF.analisaGeometrias.dicionario)+"</option>";
-			combot += "</select>";
+			combot += "</select></div>";
 			$i("i3GEOanalisageometriasoperacao").innerHTML = combot;
 			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			i3GEO.barraDeBotoes.ativaIcone("selecao");
@@ -271,7 +205,7 @@ i3GEOF.analisaGeometrias = {
 		i3GEO.util.comboTemas(
 			"i3GEOanalisageometriastemasLigados",
 			function(retorno){
-		 		$i("i3GEOanalisageometriastemas").innerHTML = retorno.dados;
+		 		$i("i3GEOanalisageometriastemas").innerHTML = "<div class=styled-select>"+retorno.dados+"</div>";
 		 		if ($i("i3GEOanalisageometriastemasLigados")){
 		 			$i("i3GEOanalisageometriastemasLigados").onchange = function(){
 		 				i3GEO.mapa.ativaTema($i("i3GEOanalisageometriastemasLigados").value);
@@ -286,7 +220,7 @@ i3GEOF.analisaGeometrias = {
 			"",
 			false,
 			"ligados",
-			"font-size: 12px;width: 250px;"
+			" "
 		);
 	},
 	/*
