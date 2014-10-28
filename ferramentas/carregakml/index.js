@@ -1,5 +1,3 @@
-
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Adiciona um tema ao mapa com base em um arquivo KML existente na Web
 

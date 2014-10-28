@@ -1,5 +1,3 @@
-
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: N&uacute;mero de pontos em pol&iacute;gonos
 

@@ -1,11 +1,8 @@
-
-/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-
 /*
-Title: Dist�ncia entre pontos
+Title: Dist&acirc;ncia entre pontos
 
-Calcula a dist�ncia entre os pontos de um tema e os pontos de outro tema criando uma nova camada.
-Al&eacute;m da dist�ncia, podem ser escolhidos itens dos temas de origem e de destino que ir&atilde;o ser mantidos na nova camada.
+Calcula a Dist&acirc;ncia entre os pontos de um tema e os pontos de outro tema criando uma nova camada.
+Al&eacute;m da Dist&acirc;ncia, podem ser escolhidos itens dos temas de origem e de destino que ir&atilde;o ser mantidos na nova camada.
 
 Veja:
 
