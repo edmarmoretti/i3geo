@@ -90,36 +90,45 @@ i3GEOF.download = {
 	tema {String} - c&oacute;digo do tema
 	*/
 	html:function(divid,tema){
-		var cp,p,ins,mostraDownload;
+		var cp,p,ins,mostraDownload,c;
 		ins = '<p class="paragrafo" >'+$trad('download',i3GEOF.download.dicionario)+'</p>';
 		ins += '<p class="paragrafo" ><div id=i3GEOdownloadResultado ></div>';
 		$i(divid).innerHTML += ins;
-		mostraDownload = function(retorno){
-			var ins = "",
-				arqs,n,arq;
-			if (retorno.data != undefined){
-				retorno = retorno.data;
-				arqs = retorno.arquivos.split(",");
-				n = arqs.length;
-				if(retorno == "erro")
-				{ins = "<p style=color:red >"+$trad('erroTema',i3GEOF.download.dicionario)+"<br>";}
-				else{
-					for (arq=0;arq<n;arq++){
-						ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>";
-					}
-				}
-				if(retorno.nreg)
-				{ins += "<br><br>"+$trad('registros',i3GEOF.download.dicionario)+" ="+retorno.nreg;}
-			}
-			else
-			{ins = "<p style=color:red >"+$trad("x66")+"<br>";}
-			$i("i3GEOdownloadResultado").innerHTML = ins;
+		c = i3GEO.arvoreDeCamadas.pegaTema(tema);
+		//wms
+		if(c.connectiontype === 7){
 			i3GEOF.download.aguarde.visibility = "hidden";
-		};
-		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=download2&tema="+tema;
-		cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"downloadTema",mostraDownload);
+			ins = c.wmsurl.replace("wms","wfs")+"&typeName="+c.wmsname+"&SERVICE=wfs&REQUEST=getFeature";
+			$i("i3GEOdownloadResultado").innerHTML = "<a target='_blank' href='"+ins+"' >"+ins+"</a>";
+		}
+		else{
+			mostraDownload = function(retorno){
+				var ins = "",
+					arqs,n,arq;
+				if (retorno.data != undefined){
+					retorno = retorno.data;
+					arqs = retorno.arquivos.split(",");
+					n = arqs.length;
+					if(retorno == "erro")
+					{ins = "<p style=color:red >"+$trad('erroTema',i3GEOF.download.dicionario)+"<br>";}
+					else{
+						for (arq=0;arq<n;arq++){
+							ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>";
+						}
+					}
+					if(retorno.nreg)
+					{ins += "<br><br>"+$trad('registros',i3GEOF.download.dicionario)+" ="+retorno.nreg;}
+				}
+				else
+				{ins = "<p style=color:red >"+$trad("x66")+"<br>";}
+				$i("i3GEOdownloadResultado").innerHTML = ins;
+				i3GEOF.download.aguarde.visibility = "hidden";
+			};
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=download2&tema="+tema;
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"downloadTema",mostraDownload);
+		}
 	},
 	/*
 	Function: iniciaJanelaFlutuante

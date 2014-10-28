@@ -2073,9 +2073,6 @@ i3GEO.arvoreDeCamadas = {
 	 * {objeto}
 	 */
 	pegaTema : function(valor, camadas, parametro) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.arvoreDeCamadas.pegaTema()");
-
 		var i;
 		if (!camadas || camadas == "") {
 			camadas = i3GEO.arvoreDeCamadas.CAMADAS;
