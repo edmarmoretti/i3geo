@@ -73,10 +73,7 @@ i3GEO.analise = {
 		 * Ferramenta mapa de calor
 		 */
 		heatmap : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.heatmap()",
-				"heatmap",
-				"heatmap");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.heatmap()","heatmap","heatmap","dependencias.php","i3GEOF.heatmap.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: saiku

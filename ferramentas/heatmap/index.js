@@ -50,6 +50,18 @@ i3GEOF.heatmap =
 			i3GEOF.heatmap.iniciaDicionario();
 		},
 		/**
+		 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+		 */
+		MUSTACHE : "",
+		/**
+		 * Susbtitutos para o template
+		 */
+		mustacheHash : function() {
+			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.heatmap.dicionario);
+			dicionario["locaplic"] = i3GEO.configura.locaplic;
+			return dicionario;
+		},
+		/**
 		 * Function: iniciaDicionario
 		 *
 		 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
@@ -93,11 +105,7 @@ i3GEOF.heatmap =
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
-			var ins = '';
-			ins += '<div style="padding:5px;background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOheatmapresultado" >';
-			ins += '</div>';
-			ins += '<div style="top:10px;left:0px;display:block;width:98%;color:red" id="i3GEOheatmapfim" >';
-			ins += '</div>';
+			var ins = Mustache.render(i3GEOF.heatmap.MUSTACHE, i3GEOF.heatmap.mustacheHash());
 			return ins;
 		},
 		/**
@@ -133,26 +141,20 @@ i3GEOF.heatmap =
 			}
 		},
 		t0 : function() {
-			var ins =
-				"<img class=i3GeoExemploImg src='" + i3GEO.configura.locaplic + "/ferramentas/heatmap/exemplo.png' />"
-					+ "<p class='paragrafo' >" + $trad('ajuda', i3GEOF.heatmap.dicionario) + "<p class='paragrafo' >"
-					+ $trad('ajuda2', i3GEOF.heatmap.dicionario);
 			i3GEO.util.proximoAnterior(
 				"",
 				"i3GEOF.heatmap.t1()",
-				ins,
+				"",
 				"i3GEOFgradeDePontost0",
 				"i3GEOheatmapresultado",
 				true,
 				"i3GEOF.heatmap_rodape");
 		},
 		t1 : function() {
-			var ins = "<p class='paragrafo'>" + $trad('selecionaTema', i3GEOF.heatmap.dicionario) + ":</p>";
-			ins += "<div id='i3GEOheatmapSelTemas' class='styled-select'></div>";
 			i3GEO.util.proximoAnterior(
 				"i3GEOF.heatmap.t0()",
 				"i3GEOF.heatmap.t2()",
-				ins,
+				"",
 				"i3GEOF.heatmap.t1",
 				"i3GEOheatmapresultado",
 				true,
@@ -160,15 +162,10 @@ i3GEOF.heatmap =
 			i3GEOF.heatmap.comboTemasSel();
 		},
 		t2 : function() {
-			var ins = "<p class='paragrafo'>" + $trad('valorPonto', i3GEOF.heatmap.dicionario) + "</p>"
-			+ "<div class='i3geoForm i3geoFormIconeEdita'><input  id='i3GEOheatmapd' type='text' value='1'/></div><br>"
-			+ "<p class='paragrafo' >" + $trad('selecionaAtributo', i3GEOF.heatmap.dicionario) + "</p>"
-			+ "<div class='styled-select' id='i3GEOheatmapondeItens' style='display:block' ></div> ";
-
 			i3GEO.util.proximoAnterior(
 				"i3GEOF.heatmap.t1()",
 				"i3GEOF.heatmap.t3()",
-				ins,
+				"",
 				"i3GEOF.heatmap.t2",
 				"i3GEOheatmapresultado",
 				true,
@@ -176,41 +173,25 @@ i3GEOF.heatmap =
 			i3GEOF.heatmap.comboItens();
 		},
 		t3 : function() {
-			var ins = "<p class='paragrafo'>" + $trad('tituloNovaCamada', i3GEOF.heatmap.dicionario);
-			ins +=
-				"<br></p><div class='i3geoForm i3geoFormIconeEdita'><input id='i3GEOheatmapTitulo' type=text value='Mapa de calor'/></div>";
-
-			ins += "<br><br><p class='paragrafo' >" + $trad('valorRaio', i3GEOF.heatmap.dicionario);
-			ins += "<br></p><div class='i3geoForm i3geoFormIconeEdita'><input id='i3GEOheatmapRaio' type=text size=10 value='15'/></div>";
-
-			ins += "<br><br><p class='paragrafo' >" + $trad('opacidade', i3GEOF.heatmap.dicionario);
-			ins +=
-				"<br></p><div class='i3geoForm i3geoFormIconeEdita'><input id='i3GEOheatmapOpacidade' type=text size=10 value='50'/></div>";
-
-			//ins += "<br><br><p class='paragrafo' >" + $trad('valorMaximoPonto', i3GEOF.heatmap.dicionario);
-			//ins += "<br></p><input  class=digitar id='i3GEOheatmapMax' type=text size=10 value='10'/>";
-
 			i3GEO.util.proximoAnterior(
 				"i3GEOF.heatmap.t2()",
 				"i3GEOF.heatmap.t4()",
-				ins,
+				"",
 				"i3GEOF.heatmap.t3",
 				"i3GEOheatmapresultado",
 				true,
 				"i3GEOF.heatmap_rodape");
 		},
 		t4 : function() {
-			var b,ins = "<p class='paragrafo'>" + $trad('adicionaTema', i3GEOF.heatmap.dicionario);
-			ins += "<br><br><input id=i3GEOheatmapbotao1 type='button' value='" + $trad('criaCamada', i3GEOF.heatmap.dicionario) + "' />";
 			i3GEO.util.proximoAnterior(
 				"i3GEOF.heatmap.t3()",
 				"",
-				ins,
+				"",
 				"i3GEOF.heatmap.t4",
 				"i3GEOheatmapresultado",
 				true,
 				"i3GEOF.heatmap_rodape");
-			b = new YAHOO.widget.Button("i3GEOheatmapbotao1", {
+			var b = new YAHOO.widget.Button("i3GEOheatmapbotao1", {
 				onclick : {
 					fn : i3GEOF.heatmap.criaheatmap
 				}
