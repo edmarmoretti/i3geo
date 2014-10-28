@@ -62,26 +62,9 @@ i3GEOF.distanciaptpt = {
 	 */
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.distanciaptpt.dicionario);
+		dicionario["aguarde"] = $trad("o1");
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.distanciaptpt.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/dicionario.js",
-				"i3GEOF.distanciaptpt.iniciaJanelaFlutuante()",
-				"i3GEOF.distanciaptpt.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.distanciaptpt.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
@@ -155,39 +138,21 @@ i3GEOF.distanciaptpt = {
 	},
 	t0: function()
 	{
-		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/exemplo.png' />" +
-		"<p class='paragrafo'>" + $trad('ajuda',i3GEOF.distanciaptpt.dicionario) +
-		"<p class='paragrafo'>" + $trad('ajuda2',i3GEOF.distanciaptpt.dicionario) +
-		"<p class='paragrafo'>" + $trad('ajuda3',i3GEOF.distanciaptpt.dicionario);
-		i3GEO.util.proximoAnterior("","i3GEOF.distanciaptpt.t1()",ins,"i3GEOFgradeDePontost0","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
+		i3GEO.util.proximoAnterior("","i3GEOF.distanciaptpt.t1()","","i3GEOFgradeDePontost0","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo' >" + $trad('temaOrigem',i3GEOF.distanciaptpt.dicionario)+"<br>";
-		ins += "<div style='text-align:left;' id='i3GEOdistanciaptptSelTemasOrigem' ></div><br>";
-		ins += "<p class='paragrafo' >" + $trad('temaDestino',i3GEOF.distanciaptpt.dicionario)+"<br>";
-		ins += "<div style='text-align:left;' id='i3GEOdistanciaptptSelTemasDestino' ></div><br>";
-		ins += "<p class='paragrafo' >" + $trad('distMax',i3GEOF.distanciaptpt.dicionario)+"<br>";
-
-		ins += '<div class="i3geoForm i3geoFormIconeEdita" ><input type=text value=100000 id=i3GEOFdistanciaptptdistancia ></div>';
-		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t0()","i3GEOF.distanciaptpt.t2()",ins,"i3GEOF.distanciaptpt.t1","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
+		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t0()","i3GEOF.distanciaptpt.t2()","","i3GEOF.distanciaptpt.t1","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
 		i3GEOF.distanciaptpt.comboTemasOrigem();
 		i3GEOF.distanciaptpt.comboTemasDestino();
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo' >" + $trad('selecionaAtributos',i3GEOF.distanciaptpt.dicionario)+"</p>";
-		ins += "<p class='paragrafo' >" + $trad('atributoOrigem',i3GEOF.distanciaptpt.dicionario)+"</p>";
-		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaOrigem' >"+$trad("o1")+"</div>";
-		ins += "<br><p class='paragrafo' >" + $trad('atributoDestino',i3GEOF.distanciaptpt.dicionario)+"</p>";
-		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaDestino' >"+$trad("o1")+"</div>";
-		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t1()","i3GEOF.distanciaptpt.t3()",ins,"i3GEOF.distanciaptpt.t2","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
+		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t1()","i3GEOF.distanciaptpt.t3()","","i3GEOF.distanciaptpt.t2","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
 		i3GEOF.distanciaptpt.comboItensOrigem();
 		i3GEOF.distanciaptpt.comboItensDestino();
 	},
 	t3: function(){
-		var b,ins = "<p class='paragrafo'>" + $trad('msgTema',i3GEOF.distanciaptpt.dicionario);
-		ins += "<br><br><input id=i3GEOdistanciaptptbotao1 type='buttom' value='"+$trad('calcula',i3GEOF.distanciaptpt.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t2()","",ins,"i3GEOF.distanciaptpt.t3","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
-		b = new YAHOO.widget.Button(
+		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t2()","","","i3GEOF.distanciaptpt.t3","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
+		var b = new YAHOO.widget.Button(
 			"i3GEOdistanciaptptbotao1",
 			{onclick:{fn: i3GEOF.distanciaptpt.calcula}}
 		);
