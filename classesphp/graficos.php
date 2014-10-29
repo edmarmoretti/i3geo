@@ -401,7 +401,9 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 		//agrupa se for o caso
 		$dados = agrupaValores($valores,0,1,$tipo);
 		foreach($valores as $valor){
-			$cores[$valor[0]] = $valor["cores"];
+			if(!empty($valor[0])){
+				$cores[$valor[0]] = $valor["cores"];
+			}
 		}
 		//calcula os parametros para o grafico
 		$nval = count($dados);
@@ -412,7 +414,7 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 		$nnval[] = "n;x";
 		if ($tipo != "xy"){
 			for ($i=0;$i < $nval; ++$i){
-				if ($dados[$tempm[$i]] > 0){
+				if ($tempm[$i] != "" && $dados[$tempm[$i]] > 0){
 					$pp = ($dados[$tempm[$i]] * 100) / $soma;
 					if ($percentual == "TRUE"){
 						$temp = "'".$tempm[$i]." (".round($pp,0)."%)';".$dados[$tempm[$i]];
@@ -429,6 +431,7 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 					$tempval[] = $temp;
 				}
 			}
+			$nval = count($tempval);
 		}
 		else{
 			foreach ($valores as $v){
@@ -459,13 +462,13 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 function dadosLinhaDoTempo($map_file,$tema,$ext="")
 {
 	$map = ms_newMapObj($map_file);
-	
+
 	if($ext && $ext != ""){
 		$e = explode(" ",$ext);
 		$extatual = $map->extent;
 		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 	}
-	
+
 	$layer = $map->getLayerByName($tema);
 	$selecionados = carregaquery2($map_file,$layer,$map);
 	if ($exclui == ""){$exclui = "nulo";}
@@ -685,6 +688,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 		$sopen = $layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $layer->getNumresults();
+		//echo $res_count;echo "\n";
 		for ($i=0;$i<$res_count;++$i){
 			if($versao == 6){
 				$shape = $layer->getShape($layer->getResult($i));
@@ -718,6 +722,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 					{$v[$item] = $vitem;}
 				}
 				//pega o centroide
+				//echo $i;echo "\n";
 				if($centroide == true){
 					$c = $shape->getCentroid();
 					if (($prjTema != "") && ($prjMapa != $prjTema)){
@@ -727,11 +732,15 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 					}
 					$v["centroide"] = "POINT(".$c->x." ".$c->y.")";
 				}
+				//echo $i;echo "---\n";
 				//pega a cor da classe onde cai o registro
 				if($nclasses > 0 && $versao >= 6){
-					$classe = $layer->getclass($layer->getClassIndex($shape));
-					$cor = $classe->getstyle(0)->color;
-					$v["cores"] = $cor->red." ".$cor->green." ".$cor->blue;
+					$cx = $layer->getClassIndex($shape);
+					if($cx > -1){
+						$classe = $layer->getclass($cx);
+						$cor = $classe->getstyle(0)->color;
+						$v["cores"] = $cor->red." ".$cor->green." ".$cor->blue;
+					}
 				}
 				if (count($v) == 1){
 					$valores[] = $v[0];
