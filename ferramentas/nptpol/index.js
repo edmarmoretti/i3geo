@@ -52,6 +52,18 @@ i3GEOF.nptpol = {
 	criaJanelaFlutuante: function(){
 		i3GEOF.nptpol.iniciaDicionario();
 	},
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.nptpol.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		return dicionario;
+	},
 	/*
 	Function: iniciaDicionario
 
@@ -96,12 +108,8 @@ i3GEOF.nptpol = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins +=	'<div style="padding:5px;background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOnptpolresultado" >';
-		ins +=	'</div>';
-		ins +=	'<div style="top:10px;left:0px;display:block;width:98%;color:red" id="i3GEOnptpolfim" >';
-		ins +=	'</div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.nptpol.MUSTACHE, i3GEOF.nptpol.mustacheHash());
 		return ins;
 	},
 	/*
@@ -147,30 +155,16 @@ i3GEOF.nptpol = {
 	},
 	t0: function()
 	{
-		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/nptpol/exemplo.png' />" +
-		"<p class='paragrafo'>"+$trad('ajuda',i3GEOF.nptpol.dicionario)+"</p>" +
-		"<p class='paragrafo'>"+$trad('ajuda2',i3GEOF.nptpol.dicionario)+"</p>" +
-		"<p class='paragrafo'>"+$trad('ajuda3',i3GEOF.nptpol.dicionario)+"</p>";
-		i3GEO.util.proximoAnterior("","i3GEOF.nptpol.t1()",ins,"i3GEOFgradeDePontost0","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
+		i3GEO.util.proximoAnterior("","i3GEOF.nptpol.t1()","","i3GEOFgradeDePontost0","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo' >"+$trad('selecionaTemaPonto',i3GEOF.nptpol.dicionario)+":<br>";
-		ins += "<div style='text-align:left;' id='i3GEOnptpolDivPontos' ></div><br>";
-
-		ins += "<p class='paragrafo' >"+$trad('selecionaItemSoma',i3GEOF.nptpol.dicionario)+":<br>";
-		ins += "<div id=i3GEOnptpolondeItens style='text-align:left;display:block' >-</div><br>";
-
-		ins += "<p class='paragrafo' >"+$trad('selecionaTemaPoligono',i3GEOF.nptpol.dicionario)+":<br>";
-		ins += "<div style='text-align:left;' id='i3GEOnptpolDivPoligonos' ></div>";
-		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t0()","i3GEOF.nptpol.t2()",ins,"i3GEOF.nptpol.t1","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
+		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t0()","i3GEOF.nptpol.t2()","","i3GEOF.nptpol.t1","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
 		i3GEOF.nptpol.comboTemasPontos();
 		i3GEOF.nptpol.comboTemasPoligonos();
 	},
 	t2: function(){
-		var b,ins = "<p class='paragrafo'>"+$trad('adicionaTema',i3GEOF.nptpol.dicionario);
-		ins += "<br><br><input id=i3GEOnptpolbotao1 type='buttom' value='"+$trad('calcula',i3GEOF.nptpol.dicionario)+"' />";
-		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t1()","",ins,"i3GEOF.nptpol.t2","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
-		b = new YAHOO.widget.Button(
+		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t1()","","","i3GEOF.nptpol.t2","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
+		var b = new YAHOO.widget.Button(
 			"i3GEOnptpolbotao1",
 			{onclick:{fn: i3GEOF.nptpol.calcula}}
 		);

@@ -238,7 +238,7 @@ i3GEO.analise = {
 		 * Ferramenta centro m&eacute;dio
 		 */
 		centromassa : function() {
-			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.centromassa()","centromassa","centromassa","dependencias.php","i3GEOF.centromassa.iniciaJanelaFlutuante()");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.centromassa()","centromassa","centromassa","dependencias.php","i3GEOF.centromassa.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: nptPol
@@ -246,10 +246,7 @@ i3GEO.analise = {
 		 * Ferramenta n&uacute;mero de pontos em pol&iacute;gono
 		 */
 		nptPol : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.nptPol()",
-				"nptpol",
-				"nptpol");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.nptPol()","nptpol","nptpol","dependencias.php","i3GEOF.nptpol.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: buffer
