@@ -216,10 +216,8 @@ i3GEO.analise = {
 		 * Ferramenta de c&aacute;lculo de distribui&ccedil;&atilde;o de pontos
 		 */
 		pontosdistri : function() {
-			i3GEO.parametros.r === "nao" ? i3GEO.janela.tempoMsg($trad("x22")) : i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.pontosdistri()",
-				"pontosdistri",
-				"pontosDistri");
+			i3GEO.parametros.r === "nao" ? i3GEO.janela.tempoMsg($trad("x22")) :
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontosdistri()","pontosdistri","pontosDistri","dependencias.php","i3GEOF.pontosDistri.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: pontoempoligono

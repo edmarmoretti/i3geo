@@ -11,6 +11,25 @@ i3GEOF.pontosDistri = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.pontosDistri.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["extendelimite"] = $inputText('','','i3GEOpontosDistriextendelimite','',3,'10')+' %';
+		dicionario["sigma"] = $inputText('','','i3GEOpontosDistrisigma','',3,'');
+		dicionario["numclasses"] = $inputText('','','i3GEOpontosDistrinumclasses','',4,'50');
+		dicionario["cori"] = $inputText('','','i3GEOpontosDistricori','',12,'0,0,0');
+		dicionario["corf"] = $inputText('','','i3GEOpontosDistricorf','',12,'255,255,255');
+		dicionario["asp"] = '"';
+		dicionario["limitePontos"] = i3GEO.util.comboSimNao('i3GEOpontosDistrilimitePontos','sim');
+		return dicionario;
+	},
 	/*
 	Function: inicia
 
@@ -72,60 +91,8 @@ i3GEOF.pontosDistri = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins += '<div class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
-		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a  ><em><div id="i3GEOpontosDistriguia1" style="text-align:center;left:0px;" >'+$trad('calculo',i3GEOF.pontosDistri.dicionario)+'</div></em></a></li>';
-		ins += '		<li><a  ><em><div id="i3GEOpontosDistriguia2" style="text-align:center;left:0px;" >'+$trad('propriedades',i3GEOF.pontosDistri.dicionario)+'</div></em></a></li>';
-		ins += '	</ul>';
-		ins += '</div><br>';
-		ins += '<div class="guiaobj" id="i3GEOpontosDistriguia1obj" style="left:1px;display:none;">';
-		ins += '	<p class="paragrafo" >'+$trad('selecionaTema',i3GEOF.pontosDistri.dicionario)+'</p>';
-		ins += '	<div id=i3GEOpontosDistriTemas ></div>';
-		ins += '	<p class="paragrafo">'+$trad('restringeAnalise',i3GEOF.pontosDistri.dicionario);
-		ins += i3GEO.util.comboSimNao("i3GEOpontosDistrilimitePontos","sim");
-		ins += '	<p class="paragrafo" >'+$trad('extendeAbrangencia',i3GEOF.pontosDistri.dicionario);
-		ins += $inputText("","","i3GEOpontosDistriextendelimite","",3,"10")+' %';
-		ins += '	<p class="paragrafo" ><input id="i3GEOpontosDistribotao1" size=35  type=button value="'+$trad('densidadePontos',i3GEOF.pontosDistri.dicionario)+'" /></p>';
-		ins += '	<p class="paragrafo" ><input id="i3GEOpontosDistribotao2" size=35  type=button value="'+$trad('distanciaPontos',i3GEOF.pontosDistri.dicionario)+'" /></p>';
-		ins += '	<p class="paragrafo"><input id=i3GEOpontosDistribotaokernel size=35  type=button value="Kernel" />';
-		ins += '	&nbsp;'+$trad('desvioPadrao',i3GEOF.pontosDistri.dicionario)+': ';
-		ins += $inputText("","","i3GEOpontosDistrisigma","",3,"")+"</p>";
-		ins += '	<p class="paragrafo"><input id=i3GEOpontosDistribotaodeldir size=35  type=button value="Delaunay/Voronoi" /></p>';
-		ins += '	<p class="paragrafo"><input id=i3GEOpontosDistribotao3 size=35  type=button value="'+$trad('relatorio',i3GEOF.pontosDistri.dicionario)+'" /></p>';
-		ins += '	<div id="i3GEOpontosDistriresultado" style="display:none;position:relative;top:10px;left:0px;"></div>';
-		ins += '	</div>';
-		ins += '	<input type=hidden id=i3GEOpontosDistrilistadeitens value="" />';
-		ins += '	<input type=hidden id=i3GEOpontosDistritema value="" />';
-		ins += '</div>';
-		ins += '<div class=guiaobj id="i3GEOpontosDistriguia2obj" style="left:1px;display:none;">';
-		ins += '		<p class="paragrafo" >'+$trad('opcoesCoresClasses',i3GEOF.pontosDistri.dicionario)+'</p><br>';
-		ins += '		<table summary="" class=lista2 style= >';
-		ins += '			<tr>';
-		ins += '				<td>'+$trad('numeroClasses',i3GEOF.pontosDistri.dicionario)+'</td>';
-		ins += '				<td>';
-		ins += $inputText("","","i3GEOpontosDistrinumclasses","",4,"50");
-		ins += 					'</td>';
-		ins += '			</tr>';
-		ins += '			<tr>';
-		ins += '				<td>'+$trad('corInicial',i3GEOF.pontosDistri.dicionario)+'</td>';
-		ins += '				<td>';
-		ins += $inputText("","","i3GEOpontosDistricori","",12,"0,0,0");
-		ins += '				<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.pontosDistri.corj(\'i3GEOpontosDistricori\')" /></td>';
-		ins += '			</tr>';
-		ins += '			<tr>';
-		ins += '				<td>'+$trad('corFinal',i3GEOF.pontosDistri.dicionario)+'</td>';
-		ins += '				<td>';
-		ins += $inputText("","","i3GEOpontosDistricorf","",12,"255,255,255");
-		ins += '				<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.pontosDistri.corj(\'i3GEOpontosDistricorf\')" /></td>';
-		ins += '			</tr>';
-		ins += '		</table>';
-		ins += '	<br><p class=paragrafo ><input id=i3GEOpontosDistribotao4 size=15  type=button value="'+$trad('verCor',i3GEOF.pontosDistri.dicionario)+'" />';
-		ins += '	<div id=i3GEOpontosDistrimostracores style="display:block;" ></div>';
-		ins += '</div>';
-		ins += '<div class=guiaobj id="i3GEOpontosDistriguia3obj" style="left:1px;display:none;">';
-		ins += '</div>';
+	html:function() {
+		var ins = Mustache.render(i3GEOF.pontosDistri.MUSTACHE, i3GEOF.pontosDistri.mustacheHash());
 		return ins;
 	},
 	/*
