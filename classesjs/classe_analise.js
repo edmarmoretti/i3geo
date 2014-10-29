@@ -246,7 +246,7 @@ i3GEO.analise = {
 		 * Ferramenta n&uacute;mero de pontos em pol&iacute;gono
 		 */
 		nptPol : function() {
-			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.nptPol()","nptpol","nptpol","dependencias.php","i3GEOF.nptpol.iniciaJanelaFlutuante()");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.nptpol()","nptpol","nptpol","dependencias.php","i3GEOF.nptpol.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: buffer
