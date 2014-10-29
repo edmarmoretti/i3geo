@@ -57,6 +57,18 @@ i3GEOF.markercluster = {
 		i3GEOF.markercluster.iniciaDicionario();
 	},
 	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.markercluster.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		return dicionario;
+	},
+	/**
 	 * Function: iniciaDicionario
 	 *
 	 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a
@@ -105,11 +117,7 @@ i3GEOF.markercluster = {
 	 * String com o c&oacute;digo html
 	 */
 	html : function() {
-		var ins = '';
-		ins += '<div style="padding:5px;background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOmarkerclusterresultado" >';
-		ins += '</div>';
-		ins += '<div style="top:10px;left:0px;display:block;width:98%;color:red" id="i3GEOmarkerclusterfim" >';
-		ins += '</div>';
+		var ins = Mustache.render(i3GEOF.markercluster.MUSTACHE, i3GEOF.markercluster.mustacheHash());
 		return ins;
 	},
 	/**
@@ -123,7 +131,7 @@ i3GEOF.markercluster = {
 		titulo = $trad("x104")
 				+ " <a class=ajuda_usuario target=_blank href='"
 				+ i3GEO.configura.locaplic
-				+ "/ajuda_usuario.php?idcategoria=3&idajuda=123' >&nbsp;&nbsp;&nbsp;</a>";
+				+ "/ajuda_usuario.php?idcategoria=3&idajuda=122' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function() {
 		};
 		janela = i3GEO.janela.cria(
@@ -166,37 +174,20 @@ i3GEOF.markercluster = {
 		}
 	},
 	t0 : function() {
-		var ins = "<img class=i3GeoExemploImg src='"
-				+ i3GEO.configura.locaplic
-				+ "/ferramentas/markercluster/exemplo.png' />"
-				+ "<p class='paragrafo' >"
-				+ $trad(
-						'ajuda',
-						i3GEOF.markercluster.dicionario)
-				+ "<p class='paragrafo' >"
-				+ $trad(
-						'ajuda2',
-						i3GEOF.markercluster.dicionario);
 		i3GEO.util.proximoAnterior(
 				"",
 				"i3GEOF.markercluster.t1()",
-				ins,
+				"",
 				"i3GEOFgradeDePontost0",
 				"i3GEOmarkerclusterresultado",
 				true,
 				"i3GEOF.markercluster_rodape");
 	},
 	t1 : function() {
-		var ins = "<p class='paragrafo'>"
-				+ $trad(
-						'selecionaTema',
-						i3GEOF.markercluster.dicionario)
-				+ ":";
-		ins += "<div class=styled-select id='i3GEOmarkerclusterSelTemas' ></div>";
 		i3GEO.util.proximoAnterior(
 				"i3GEOF.markercluster.t0()",
 				"i3GEOF.markercluster.t2()",
-				ins,
+				"",
 				"i3GEOF.markercluster.t1",
 				"i3GEOmarkerclusterresultado",
 				true,
@@ -204,28 +195,10 @@ i3GEOF.markercluster = {
 		i3GEOF.markercluster.comboTemasSel();
 	},
 	t2 : function() {
-		var ins = "<p class='paragrafo'>"
-				+ $trad(
-						'tituloNovaCamada',
-						i3GEOF.markercluster.dicionario);
-		ins += "<br></p><div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOmarkerclusterTitulo' type=text value='Mapa de agrupamento'/></div>";
-
-		ins += "<br><p class='paragrafo' >"
-				+ $trad(
-						'raio',
-						i3GEOF.markercluster.dicionario);
-		ins += "</p><div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOmarkerclusterRaio' type=text value='50'/></div>";
-
-		ins += "<br><p class='paragrafo' >"
-				+ $trad(
-						'opacidade',
-						i3GEOF.markercluster.dicionario);
-		ins += "</p><div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOmarkerclusterOpacidade' type=text value='50'/></div>";
-
 		i3GEO.util.proximoAnterior(
 				"i3GEOF.markercluster.t1()",
 				"i3GEOF.markercluster.t3()",
-				ins,
+				"",
 				"i3GEOF.markercluster.t2",
 				"i3GEOmarkerclusterresultado",
 				true,
@@ -233,24 +206,15 @@ i3GEOF.markercluster = {
 		i3GEOF.markercluster.comboItens();
 	},
 	t3 : function() {
-		var b,ins = "<p class='paragrafo'>"
-				+ $trad(
-						'adicionaTema',
-						i3GEOF.markercluster.dicionario);
-		ins += "<br><br><input id=i3GEOmarkerclusterbotao1 type='button' value='"
-				+ $trad(
-						'criaCamada',
-						i3GEOF.markercluster.dicionario)
-				+ "' />";
 		i3GEO.util.proximoAnterior(
 				"i3GEOF.markercluster.t2()",
 				"",
-				ins,
+				"",
 				"i3GEOF.markercluster.t3",
 				"i3GEOmarkerclusterresultado",
 				true,
 				"i3GEOF.markercluster_rodape");
-		b = new YAHOO.widget.Button("i3GEOmarkerclusterbotao1", {
+		var b = new YAHOO.widget.Button("i3GEOmarkerclusterbotao1", {
 			onclick : {
 				fn : i3GEOF.markercluster.criamarkercluster
 			}

@@ -62,10 +62,7 @@ i3GEO.analise = {
 		 * Ferramenta mapa agrupamento de pontos
 		 */
 		markercluster : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.markercluster()",
-				"markercluster",
-				"markercluster");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.markercluster()","markercluster","markercluster","dependencias.php","i3GEOF.markercluster.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: heatmap
