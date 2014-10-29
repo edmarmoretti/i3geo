@@ -291,7 +291,7 @@ i3GEOF.identifica = {
 				maxWidth: 180
 			});
 			resize.on('resize', function(ev) {
-				Dom.setStyle(col1, 'height', '');
+				//Dom.setStyle(col1, 'height', '');
 				//150 &eacute; o tamanho inicial da parte esquerda, corresponde a 40%
 				var w1 = parseInt(col1.style.width);
 				var dif = parseInt((w1 * 40) / 150,10);
@@ -365,7 +365,8 @@ i3GEOF.identifica = {
 				janela[0].moveTo(temp.x.value + (i3GEOF.identifica.janelas.length * 50),temp.y.value + (i3GEOF.identifica.janelas.length * 15));
 			}
 			i3GEOF.identifica.inicia(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy,divid,true,true,id);
-			$i(id+"_corpo").style.backgroundColor = "white";
+			janela[2].style.backgroundColor = "white";
+
 			i3GEOF.identifica.propJanelas[id].aguarde = $i(id+"_imagemCabecalho").style;
 			i3GEOF.identifica.propJanelas[id].atualiza = true;
 			temp = 'i3GEOF.identifica.propJanelas["'+id+'"].atualiza = this.checked';
