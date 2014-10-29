@@ -2073,7 +2073,7 @@ i3GEO.Interface =
 					i3GEO.gadgets.mostraMenuSuspenso();
 					g_operacao = "";
 					g_tipoacao = "";
-					if (i3GEO.Interface.STATUS.trocando === true) {
+					if (i3GEO.Interface.STATUS.trocando === true && $i(i3GEO.arvoreDeCamadas.IDHTML)) {
 						$i(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
 					}
 					if (i3GEO.Interface.STATUS.trocando === false) {
