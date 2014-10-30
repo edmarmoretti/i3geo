@@ -48,13 +48,6 @@ i3GEOF.editorsql = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.editorsql.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -66,25 +59,6 @@ i3GEOF.editorsql = {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.editorsql.dicionario);
 		dicionario["aguarde"] = $trad("p14");
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.editorsql.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/editorsql/dicionario.js",
-				"i3GEOF.editorsql.iniciaJanelaFlutuante()",
-				"i3GEOF.editorsql.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.editorsql.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia

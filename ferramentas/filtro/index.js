@@ -67,31 +67,6 @@ i3GEOF.filtro = {
 		return dicionario;
 	},
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.filtro.iniciaDicionario();
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.filtro.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/filtro/dicionario.js",
-				"i3GEOF.filtro.iniciaJanelaFlutuante()",
-				"i3GEOF.filtro.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.filtro.iniciaJanelaFlutuante();
-		}
-	},
-	/*
 	Function: inicia
 
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante

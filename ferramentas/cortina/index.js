@@ -63,12 +63,6 @@ i3GEOF.cortina = {
 	{YAHOO.panel}
 	*/
 	janela: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.cortina.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -80,25 +74,6 @@ i3GEOF.cortina = {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.cortina.dicionario);
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.cortina.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/cortina/dicionario.js",
-				"i3GEOF.cortina.iniciaJanelaFlutuante()",
-				"i3GEOF.cortina.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.cortina.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
