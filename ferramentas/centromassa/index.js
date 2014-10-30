@@ -221,7 +221,8 @@ i3GEOF.centromassa = {
 			"i3GEOcentromassaDivPontos",
 			"",
 			false,
-			"pontos"
+			"pontos",
+			" "
 		);
 	},
 	/*
