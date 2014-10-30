@@ -2944,7 +2944,7 @@ i3GEO.arvoreDeTemas = {
 		carregaKml : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
 					+ "/ferramentas/carregakml/dependencias.php",
-					"i3GEOF.carregakml.criaJanelaFlutuante()",
+					"i3GEOF.carregakml.iniciaJanelaFlutuante()",
 					"i3GEOF.carregakml_script");
 		},
 		/**
@@ -2967,7 +2967,7 @@ i3GEO.arvoreDeTemas = {
 		buscaInde : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
 					+ "/ferramentas/buscainde/dependencias.php",
-					"i3GEOF.buscainde.criaJanelaFlutuante()",
+					"i3GEOF.buscainde.iniciaJanelaFlutuante()",
 					"i3GEOF.buscainde_script");
 		},
 		/**
@@ -3107,7 +3107,7 @@ i3GEO.arvoreDeTemas = {
 		conectargeojson : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
 					+ "/ferramentas/conectargeojson/dependencias.php",
-					"i3GEOF.conectargeojson.criaJanelaFlutuante()",
+					"i3GEOF.conectargeojson.iniciaJanelaFlutuante()",
 					"i3GEOF.conectargeojson_script");
 		},
 		/**

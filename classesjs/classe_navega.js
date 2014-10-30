@@ -1397,7 +1397,7 @@ i3GEO.navega = {
 		Abre a janela de di&aacute;logo da ferramenta confluence permitindo a navega&ccedil;&atilde;o integrada com a localiza&ccedil;&atilde;o de conflu&ecirc;ncias
 		*/
 		confluence: function(){
-			i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.confluence()","confluence","confluence");
+			i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.confluence()","confluence","confluence","dependencias.php","i3GEOF.confluence.iniciaJanelaFlutuante()");
 		}
 	}
 };

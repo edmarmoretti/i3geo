@@ -56,12 +56,6 @@ i3GEOF.busca = {
 	C&oacute;digo do tema utilizado na busca
 	*/
 	tema: i3GEO.temaAtivo,
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.busca.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -72,25 +66,6 @@ i3GEOF.busca = {
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.busca.dicionario);
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.busca.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/busca/dicionario.js",
-				"i3GEOF.busca.iniciaJanelaFlutuante()",
-				"i3GEOF.busca.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.busca.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia

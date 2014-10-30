@@ -47,12 +47,6 @@ i3GEOF.buscainde = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.buscainde.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -64,25 +58,6 @@ i3GEOF.buscainde = {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.buscainde.dicionario);
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.buscainde.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/buscainde/dicionario.js",
-				"i3GEOF.buscainde.iniciaJanelaFlutuante()",
-				"i3GEOF.buscainde.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.buscainde.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia

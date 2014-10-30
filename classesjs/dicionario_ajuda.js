@@ -629,7 +629,7 @@ g_traducao_ajuda = {
 			categoria:"8",
 			pt:"O projeto 'Confluences' registra expedi&ccedil;&otilde;es aos lugares na terra cuja coordenada geogr&aacute;fica corresponde ao cruzamento de 1 grau por 1 grau. Essa ferramenta permite localizar as conflu&ecirc;ncias no mapa que est&aacute; sendo visto e abrir a p&aacute;gina correspondente.",
 			complemento:"O mapa deve estar pelo menos na escala 1:2.000.000 para que as conflu&ecirc;ncias sejam mostradas.",
-			apijs:"i3GEO.configura"
+			apijs:"i3GEO.navega.dialogo.confluence"
 			//tela:"ferramentas/confluence/exemplo.htm"
 		},
 		"76": {

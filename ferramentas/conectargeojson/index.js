@@ -47,12 +47,6 @@ i3GEOF.conectargeojson = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.conectargeojson.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -67,26 +61,6 @@ i3GEOF.conectargeojson = {
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["aplica"] = $trad("p14");
 		return dicionario;
-	},
-	/*
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.conectargeojson.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/conectargeojson/dicionario.js",
-				"i3GEOF.conectargeojson.iniciaJanelaFlutuante()",
-				"i3GEOF.conectargeojson.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.conectargeojson.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
