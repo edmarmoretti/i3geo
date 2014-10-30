@@ -1122,6 +1122,10 @@ button { //
 .i3GEOiconeInserexy {
 	background-image: URL('../imagens/oxygen/16x16/edit-node.png');
 }
+.i3GEOiconeCliqueTexto {
+	background-image: URL('../imagens/oxygen/16x16/preferences-desktop-font.png');
+}
+
 
 
 
