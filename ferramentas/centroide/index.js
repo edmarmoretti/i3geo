@@ -229,7 +229,8 @@ i3GEOF.centroide = {
 			"i3GEOcentroideSelTemas",
 			"",
 			false,
-			"selecionados"
+			"selecionados",
+			" "
 		);
 	}
 };
