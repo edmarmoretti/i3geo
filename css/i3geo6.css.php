@@ -983,6 +983,14 @@ background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 10
 background-size: 16px 144px;
 }
 }
+.i3geoFormSemIcone {
+background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
+background-size: 16px 144px;
+}
+}
 .i3geoFormIconeAquarela {
 cursor: pointer;
 background: transparent url("../imagens/aquarela.gif") no-repeat scroll 98% 5px;
@@ -1305,7 +1313,7 @@ background-position: 0px -672px;
 .i3GEOiconeIdentifica {
 background-image: URL('../imagens/visual/default/sprite2.png');
 background-repeat: no-repeat;
-width:	14px;
+width: 14px;
 background-position: 0px -744px;
 }
 .ticDownload {
@@ -1726,7 +1734,7 @@ background-position: 1px -1648px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
-.zoomAnterior  {
+.zoomAnterior {
 background-image: URL('../imagens/visual/default/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1675px;
@@ -1926,7 +1934,7 @@ background: -ms-linear-gradient(top, rgba(181, 189, 200, 1) 0%,
 rgba(130, 140, 149, 1) 36%, rgba(40, 52, 59, 1) 100%);
 background: linear-gradient(to bottom, rgba(181, 189, 200, 1) 0%,
 rgba(130, 140, 149, 1) 36%, rgba(40, 52, 59, 1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8',
+filter: progid:DXImageTransform.Microsoft.gradient(  startColorstr='#b5bdc8',
 endColorstr='#28343b', GradientType=0);
 }
 #euDock_euImage_3 {
@@ -1947,7 +1955,7 @@ background: -ms-linear-gradient(top, rgba(181, 189, 200, 1) 0%,
 rgba(130, 140, 149, 1) 36%, rgba(40, 52, 59, 1) 100%);
 background: linear-gradient(to bottom, rgba(181, 189, 200, 1) 0%,
 rgba(130, 140, 149, 1) 36%, rgba(40, 52, 59, 1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8',
+filter: progid:DXImageTransform.Microsoft.gradient(  startColorstr='#b5bdc8',
 endColorstr='#28343b', GradientType=0);
 }
 #euDock_euImage_4 {
@@ -1969,7 +1977,7 @@ background: -ms-linear-gradient(top, rgba(181, 189, 200, 1) 0%,
 rgba(130, 140, 149, 1) 36%, rgba(40, 52, 59, 1) 100%);
 background: linear-gradient(to bottom, rgba(181, 189, 200, 1) 0%,
 rgba(130, 140, 149, 1) 36%, rgba(40, 52, 59, 1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8',
+filter: progid:DXImageTransform.Microsoft.gradient(  startColorstr='#b5bdc8',
 endColorstr='#28343b', GradientType=0);
 }
 #euDock_0 img {
@@ -1985,6 +1993,17 @@ top: 33px;
 box-shadow: 0 10px 5px -10px gray;
 }
 .eudockImagemTop {
+}
+/* icones das ferramentas utilizado nas janelas flutuantes e menu suspenso */
+.i3GEOconeFerramenta {
+display: block;
+height: 16px;
+width: 16px;
+position: absolute;
+left: 2px;
+}
+.i3GEOiconeOpacidadeMapa {
+background-image: URL('../imagens/oxygen/16x16/file-zoom-in.png');
 }
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}

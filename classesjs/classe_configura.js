@@ -243,7 +243,7 @@ i3GEO.configura = {
 			{ id:"omenudataFerramentas5a",text: $trad("x59"), url: "javascript:i3GEO.mapa.dialogo.locregiao()"},
 			{ id:"omenudataFerramentas6a",text: $trad("x61"), url: "javascript:i3GEO.mapa.dialogo.filtraregiao()"},
 			{ id:"omenudataFerramentas4a",text: $trad("g1a"), url: "javascript:i3GEO.arvoreDeTemas.flutuante()"},
-			{ id:"omenudataFerramentas1a",text: $trad("t20"), url: "javascript:i3GEO.mapa.dialogo.opacidade()"},
+			{ id:"omenudataFerramentas1a",text: "<span class='i3GEOconeFerramenta i3GEOiconeOpacidadeMapa'></span>" + $trad("t20"), url: "javascript:i3GEO.mapa.dialogo.opacidade()"},
 			{ id:"omenudataFerramentas2a",text: $trad("p21"), url: "javascript:i3GEO.mapa.dialogo.animacao()"},
 			{ id:"omenudataFerramentas3a",text: $trad("d24t"), url: "javascript:i3GEO.mapa.dialogo.selecao();"},
 			{ id:"omenudataFerramentas7a",text: $trad("x64a"), url: "javascript:i3GEO.mapa.dialogo.congelaMapa();"},
