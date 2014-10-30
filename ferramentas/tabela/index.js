@@ -32,13 +32,6 @@ i3GEOF.tabela =
 			return dicionario;
 		},
 		/*
-		 * Function: iniciaDicionario (Depreciado na versao 6.0)
-		 *
-		 */
-		iniciaDicionario : function() {
-			i3GEOF.tabela.iniciaJanelaFlutuante();
-		},
-		/*
 		 * Function: inicia
 		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
