@@ -156,8 +156,8 @@ i3GEOF.pontoEmPoligono = {
 		i3GEO.util.proximoAnterior("","i3GEOF.pontoEmPoligono.t1()",ins,"i3GEOFgradeDePontost0","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 	},
 	t1: function(){
-		var ins = "<p class='paragrafo'>"+$trad('selecionaTemaPontos',i3GEOF.pontoEmPoligono.dicionario);
-		ins += "<div id='i3GEOpontoEmPoligonoSelTemasPt' style='text-align:left;font-size:11px'></div>";
+		var ins = "<p class='paragrafo'>"+$trad('selecionaTemaPontos',i3GEOF.pontoEmPoligono.dicionario) + "</p>";
+		ins += "<div id='i3GEOpontoEmPoligonoSelTemasPt' class='styled-select'></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.pontoEmPoligono.t0()","i3GEOF.pontoEmPoligono.t2()",ins,"i3GEOF.pontoEmPoligono.t1","i3GEOpontoEmPoligonoresultado",true,"i3GEOF.pontoEmPoligono_rodape");
 		i3GEOF.pontoEmPoligono.comboTemasSelPt();
 	},
@@ -265,7 +265,8 @@ i3GEOF.pontoEmPoligono = {
 			"i3GEOpontoEmPoligonoSelTemasPt",
 			"",
 			false,
-			"pontos"
+			"pontos",
+			" "
 		);
 	},
 	/*

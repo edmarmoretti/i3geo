@@ -49,10 +49,11 @@ i3GEOF.pontosDistri = {
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOpontosDistriguia1","i3GEOpontosDistriguia");};
 			$i("i3GEOpontosDistriguia2").onclick = function()
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOpontosDistriguia2","i3GEOpontosDistriguia");};
-			new YAHOO.widget.Button(
+			b = new YAHOO.widget.Button(
 				"i3GEOpontosDistribotao4",
 				{onclick:{fn: i3GEOF.pontosDistri.verCores}}
 			);
+			b.addClass("rodar");
 			b = new YAHOO.widget.Button(
 				"i3GEOpontosDistribotao1",
 				{onclick:{fn: i3GEOF.pontosDistri.analiseDensidade}}
@@ -163,7 +164,8 @@ i3GEOF.pontosDistri = {
 			"i3GEOpontosDistriTemas",
 			"",
 			false,
-			"selecionados"
+			"selecionados",
+			" "
 		);
 		var i = $i("i3GEOF.pontosDistri_c").style;
 		i.zIndex = i3GEO.janela.ULTIMOZINDEX;

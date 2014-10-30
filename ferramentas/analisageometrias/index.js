@@ -279,9 +279,9 @@ i3GEOF.analisaGeometrias = {
 		montalistageometrias = function(retorno){
 			if(retorno.data != "") //n&atilde;o comparar com !==
 			{
-				var ins,cor,temp,j,k,i;
-				ins = "<p class=paragrafo ><input id=i3GEOanalisageometriasbotao4 type=button size=20  value='"+$trad('exclui',i3GEOF.analisaGeometrias.dicionario)+"' />&nbsp;&nbsp;";
-				ins += "<input id=i3GEOanalisageometriasbotao5 type=button size=20  value='"+$trad('verMapa',i3GEOF.analisaGeometrias.dicionario)+"' /><br><br>";
+				var b,ins,cor,temp,j,k,i;
+				ins = "<p class=paragrafo ><input id=i3GEOanalisageometriasbotao4 type=button size=20  value='"+$trad('exclui',i3GEOF.analisaGeometrias.dicionario)+"' /></p>";
+				ins += "<p class=paragrafo ><input id=i3GEOanalisageometriasbotao5 type=button size=20  value='"+$trad('verMapa',i3GEOF.analisaGeometrias.dicionario)+"' /></p>";
 				cor = "rgb(245,245,245)";
 				for (i=0;i<retorno.data.length; i++)
 				{
@@ -306,14 +306,16 @@ i3GEOF.analisaGeometrias = {
 					else {cor = "rgb(245,245,245)";}
 				}
 				$i("i3GEOanalisageometriaslistadegeometrias").innerHTML = ins;
-				new YAHOO.widget.Button(
+				b = new YAHOO.widget.Button(
 					"i3GEOanalisageometriasbotao4",
 					{onclick:{fn: i3GEOF.analisaGeometrias.excluirGeo}}
 				);
-				new YAHOO.widget.Button(
+				b.addClass("rodar");
+				b = new YAHOO.widget.Button(
 					"i3GEOanalisageometriasbotao5",
 					{onclick:{fn: i3GEOF.analisaGeometrias.incluirNoMapa}}
 				);
+				b.addClass("rodar");
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			}
 			else{

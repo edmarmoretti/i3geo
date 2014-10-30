@@ -109,7 +109,7 @@ i3GEOF.distanciaptpt = {
 			i3GEO.janela.minimiza("i3GEOF.distanciaptpt");
 		};
 		janela = i3GEO.janela.cria(
-			"400px",
+			"410px",
 			"180px",
 			"",
 			"",
@@ -224,7 +224,8 @@ i3GEOF.distanciaptpt = {
 			"i3GEOdistanciaptptSelTemasOrigem",
 			"",
 			false,
-			"pontosSelecionados"
+			"pontosSelecionados",
+			" "
 		);
 	},
 	/*
@@ -255,7 +256,8 @@ i3GEOF.distanciaptpt = {
 			"i3GEOdistanciaptptSelTemasDestino",
 			"",
 			false,
-			"pontos"
+			"pontos",
+			" "
 		);
 	},
 	/*
