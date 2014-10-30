@@ -1116,6 +1116,10 @@ button { //
 .i3GEOiconeVinde {
 	background-image: URL('../imagens/oxygen/16x16/application-x-smb-workgroup.png');
 }
+.i3GEOiconeGeoLocal {
+	background-image: URL('../imagens/oxygen/16x16/pda.png');
+}
+
 
 
 
