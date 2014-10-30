@@ -638,7 +638,7 @@ i3GEO.mapa =
 					url =
 						i3GEO.configura.locaplic + "/ferramentas/congelamapa/openlayers.php?g_sid=" + i3GEO.configura.sid + "&ext="
 							+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-					titulo = "Mapa"+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=123' >&nbsp;&nbsp;&nbsp;</a>";
+					titulo = "<span class='i3GEOconeFerramenta i3GEOiconeCongela'></span>" + "Mapa"+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=123' >&nbsp;&nbsp;&nbsp;</a>";
 					i3GEO.janela.cria("500px", "350px", url, "", "", titulo, idjanela, false, "hd", cabecalho, minimiza);
 				}
 			},

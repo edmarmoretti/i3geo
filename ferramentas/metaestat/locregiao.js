@@ -160,7 +160,7 @@ i3GEOF.locregiao = {
 		else{
 			titulo = $trad("x59");
 		}
-		titulo += " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=111' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
+		titulo += "<span class='i3GEOconeFerramenta i3GEOiconeFiltro'></span>" + " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=111' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"215px",
 			"",

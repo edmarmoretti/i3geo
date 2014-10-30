@@ -114,7 +114,7 @@ i3GEOF.animacao = {
 			i3GEO.janela.minimiza("i3GEOF.animacao");
 		};
 		//cria a janela flutuante
-		titulo = $trad("p21")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=107' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeAnimacao'></span>" + $trad("p21")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=107' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"210px",
 			"80px",
@@ -128,8 +128,7 @@ i3GEOF.animacao = {
 			cabecalho,
 			minimiza,
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/clock.png"
+			true
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.animacao_corpo").style.backgroundColor = "white";

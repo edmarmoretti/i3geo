@@ -2002,8 +2002,29 @@ width: 16px;
 position: absolute;
 left: 2px;
 }
+.hd .i3GEOconeFerramenta{
+top: 5px;
+}
 .i3GEOiconeOpacidadeMapa {
-background-image: URL('../imagens/oxygen/16x16/file-zoom-in.png');
+background-image: URL('../imagens/oxygen/16x16/show-menu.png');
+}
+.i3GEOiconeAnimacao {
+background-image: URL('../imagens/oxygen/16x16/tool-animator.png');
+}
+.i3GEOiconeSelecao {
+background-image: URL('../imagens/oxygen/16x16/edit-select.png');
+}
+.i3GEOiconeCatalogo {
+background-image: URL('../imagens/oxygen/16x16/x-office-address-book.png');
+}
+.i3GEOiconeFiltro {
+background-image: URL('../imagens/oxygen/16x16/view-filter.png');
+}
+.i3GEOiconeBusca {
+background-image: URL('../imagens/oxygen/16x16/edit-find.png');
+}
+.i3GEOiconeCongela {
+background-image: URL('../imagens/oxygen/16x16/knotes.png');
 }
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}

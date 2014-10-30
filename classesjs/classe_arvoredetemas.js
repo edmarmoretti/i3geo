@@ -374,7 +374,7 @@ i3GEO.arvoreDeTemas = {
 			altura = 500;
 		}
 		janela = i3GEO.janela.cria("360px", altura + "px", "", "", "",
-				$trad("g1a"), "i3GEOFcatalogo", false, "hd", cabecalho,
+				"<span class='i3GEOconeFerramenta i3GEOiconeCatalogo'></span>" + $trad("g1a"), "i3GEOFcatalogo", false, "hd", cabecalho,
 				minimiza);
 		temp = function() {
 			delete (i3GEO.arvoreDeTemas.ARVORE);
