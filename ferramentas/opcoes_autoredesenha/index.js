@@ -134,7 +134,7 @@ i3GEOF.opcoesTempo = {
 			i3GEO.janela.minimiza("i3GEOF.opcoesTempo");
 		};
 		//cria a janela flutuante
-		titulo = $trad("p12")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=9' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeAutoredesenha'></span>" + $trad("p12")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=9' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"110px",
@@ -148,8 +148,7 @@ i3GEOF.opcoesTempo = {
 			cabecalho,
 			minimiza,
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/clock.png"
+			true
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.opcoesTempo_corpo").style.backgroundColor = "white";

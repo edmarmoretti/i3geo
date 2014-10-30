@@ -2026,6 +2026,12 @@ background-image: URL('../imagens/oxygen/16x16/edit-find.png');
 .i3GEOiconeCongela {
 background-image: URL('../imagens/oxygen/16x16/knotes.png');
 }
+.i3GEOiconeAutoredesenha {
+background-image: URL('../imagens/oxygen/16x16/user-away.png');
+}
+.i3GEOiconeVinde {
+background-image: URL('../imagens/oxygen/16x16/application-x-smb-workgroup.png');
+}
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}
 .toc {margin-left: 15px;}

@@ -1110,6 +1110,13 @@ button { //
 .i3GEOiconeCongela {
 	background-image: URL('../imagens/oxygen/16x16/knotes.png');
 }
+.i3GEOiconeAutoredesenha {
+	background-image: URL('../imagens/oxygen/16x16/user-away.png');
+}
+.i3GEOiconeVinde {
+	background-image: URL('../imagens/oxygen/16x16/application-x-smb-workgroup.png');
+}
+
 
 
 
