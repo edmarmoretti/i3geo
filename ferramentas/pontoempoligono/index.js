@@ -49,31 +49,6 @@ i3GEOF.pontoEmPoligono = {
 	*/
 	aguarde: "",
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.pontoEmPoligono.iniciaDicionario();
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.pontoEmPoligono.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/dicionario.js",
-				"i3GEOF.pontoEmPoligono.iniciaJanelaFlutuante()",
-				"i3GEOF.pontoEmPoligono.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.pontoEmPoligono.iniciaJanelaFlutuante();
-		}
-	},
-	/*
 	Function: inicia
 
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
