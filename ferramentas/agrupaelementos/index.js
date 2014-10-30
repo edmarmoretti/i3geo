@@ -216,7 +216,8 @@ i3GEOF.agrupaElementos = {
 			"i3GEOagrupaelementosSelTemas",
 			"",
 			false,
-			"selecionados"
+			"selecionados",
+			" "
 		);
 	},
 	/*
