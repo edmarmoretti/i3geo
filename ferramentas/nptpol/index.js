@@ -221,7 +221,8 @@ i3GEOF.nptpol = {
 			"i3GEOnptpolDivPontos",
 			"",
 			false,
-			"pontos"
+			"pontos",
+			" "
 		);
 	},
 	/*
@@ -251,7 +252,8 @@ i3GEOF.nptpol = {
 			"i3GEOnptpolDivPoligonos",
 			"",
 			false,
-			"poligonos"
+			"poligonos",
+			" "
 		);
 	},
 	/*
