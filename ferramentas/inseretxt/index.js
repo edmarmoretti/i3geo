@@ -65,13 +65,6 @@ i3GEOF.inseretxt = {
 	Par�metros padr&atilde;o utilizados para formatar o texto
 	*/
 	parDefault: "&inserefeature&&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
-
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.inseretxt.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -83,25 +76,6 @@ i3GEOF.inseretxt = {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.inseretxt.dicionario);
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.inseretxt.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/inseretxt/dicionario.js",
-				"i3GEOF.inseretxt.iniciaJanelaFlutuante()",
-				"i3GEOF.inseretxt.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.inseretxt.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia

@@ -2991,7 +2991,7 @@ i3GEO.arvoreDeTemas = {
 		nuvemTags : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
 					+ "/ferramentas/nuvemtags/dependencias.php",
-					"i3GEOF.nuvemtags.criaJanelaFlutuante()",
+					"i3GEOF.nuvemtags.iniciaJanelaFlutuante()",
 					"i3GEOF.nuvemtags_script");
 		},
 		/**
@@ -3027,7 +3027,7 @@ i3GEO.arvoreDeTemas = {
 		importarwmc : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
 					+ "/ferramentas/importarwmc/dependencias.php",
-					"i3GEOF.importarwmc.criaJanelaFlutuante()",
+					"i3GEOF.importarwmc.iniciaJanelaFlutuante()",
 					"i3GEOF.importarwmc_script");
 		},
 		/**

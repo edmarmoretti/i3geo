@@ -48,12 +48,6 @@ i3GEOF.importarwmc = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.importarwmc.iniciaDicionario();
-	},
 	/**
 	 * Objeto com as propriedades de cada janela. A chave e o id da janela armazenado em i3GEO.tabela.janelas
 	 */
@@ -70,25 +64,6 @@ i3GEOF.importarwmc = {
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["sid"] = i3GEO.configura.sid;
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.importarwmc.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/importarwmc/dicionario.js",
-				"i3GEOF.importarwmc.iniciaJanelaFlutuante()",
-				"i3GEOF.importarwmc.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.importarwmc.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia

@@ -50,13 +50,6 @@ i3GEOF.markercluster = {
 	 */
 	aguarde : "",
 	/**
-	 * Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o
-	 * tinha dicion&aacute;rio
-	 */
-	criaJanelaFlutuante : function() {
-		i3GEOF.markercluster.iniciaDicionario();
-	},
-	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
 	MUSTACHE : "",
@@ -67,26 +60,6 @@ i3GEOF.markercluster = {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.markercluster.dicionario);
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		return dicionario;
-	},
-	/**
-	 * Function: iniciaDicionario
-	 *
-	 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a
-	 * ferramenta
-	 *
-	 * O Javascript &eacute; carregado com o id
-	 * i3GEOF.nomedaferramenta.dicionario_script
-	 */
-	iniciaDicionario : function() {
-		if (typeof (i3GEOF.markercluster.dicionario) === 'undefined') {
-			i3GEO.util.scriptTag(
-					i3GEO.configura.locaplic
-							+ "/ferramentas/markercluster/dicionario.js",
-					"i3GEOF.markercluster.iniciaJanelaFlutuante()",
-					"i3GEOF.markercluster.dicionario_script");
-		} else {
-			i3GEOF.markercluster.iniciaJanelaFlutuante();
-		}
 	},
 	/**
 	 * Function: inicia

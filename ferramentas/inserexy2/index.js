@@ -48,12 +48,6 @@ i3GEOF.inserexy = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.inserexy.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -65,25 +59,6 @@ i3GEOF.inserexy = {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.inserexy.dicionario);
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.inserexy.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/inserexy2/dicionario.js",
-				"i3GEOF.inserexy.iniciaJanelaFlutuante()",
-				"i3GEOF.inserexy.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.inserexy.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
