@@ -21,11 +21,6 @@ i3GEOF.pontosDistri = {
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.pontosDistri.dicionario);
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		dicionario["extendelimite"] = $inputText('','','i3GEOpontosDistriextendelimite','',3,'10')+' %';
-		dicionario["sigma"] = $inputText('','','i3GEOpontosDistrisigma','',3,'');
-		dicionario["numclasses"] = $inputText('','','i3GEOpontosDistrinumclasses','',4,'50');
-		dicionario["cori"] = $inputText('','','i3GEOpontosDistricori','',12,'0,0,0');
-		dicionario["corf"] = $inputText('','','i3GEOpontosDistricorf','',12,'255,255,255');
 		dicionario["asp"] = '"';
 		dicionario["limitePontos"] = i3GEO.util.comboSimNao('i3GEOpontosDistrilimitePontos','sim');
 		return dicionario;
@@ -80,6 +75,7 @@ i3GEOF.pontosDistri = {
 			);
 			b.addClass("rodar");
 			i3GEOF.pontosDistri.ativaFoco();
+			i3GEO.util.aplicaAquarela("i3GEOF.pontosDistri");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -114,7 +110,7 @@ i3GEOF.pontosDistri = {
 		titulo = $trad("u14")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=20' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
-			"310px",
+			"330px",
 			"",
 			"",
 			"",

@@ -108,7 +108,7 @@ i3GEOF.nptpol = {
 		};
 		janela = i3GEO.janela.cria(
 			"420px",
-			"150px",
+			"180px",
 			"",
 			"",
 			"",

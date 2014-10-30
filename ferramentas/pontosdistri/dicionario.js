@@ -43,7 +43,7 @@ i3GEOF.pontosDistri.dicionario = {
 		it : ""
 	} ],
 	'desvioPadrao' : [ {
-		pt : "sigma",
+		pt : "sigma (para kernel)",
 		en : "",
 		es : "",
 		it : ""
