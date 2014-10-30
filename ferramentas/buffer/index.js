@@ -223,7 +223,8 @@ i3GEOF.buffer = {
 			"i3GEObufferSelTemas",
 			"",
 			false,
-			"selecionados"
+			"selecionados",
+			" "
 		);
 	},
 	/*

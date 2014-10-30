@@ -237,7 +237,8 @@ i3GEOF.dissolve = {
 			"i3GEOdissolveSelTemas",
 			"",
 			false,
-			"poligonosSelecionados"
+			"poligonosSelecionados",
+			" "
 		);
 	},
 	/*
