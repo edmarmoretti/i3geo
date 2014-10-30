@@ -1119,6 +1119,10 @@ button { //
 .i3GEOiconeGeoLocal {
 	background-image: URL('../imagens/oxygen/16x16/pda.png');
 }
+.i3GEOiconeInserexy {
+	background-image: URL('../imagens/oxygen/16x16/edit-node.png');
+}
+
 
 
 
