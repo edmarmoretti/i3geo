@@ -1037,8 +1037,8 @@ i3GEO.Interface =
 							targ = e.srcElement;
 						}
 						if (targ.id) {
-							temp = targ.id.split("_");
-							if (temp[0] === "OpenLayers.Geometry.Point") {
+							temp = targ.id.split("_Point");
+							if (temp[0] === "OpenLayers_Geometry") {
 								id = targ.id;
 								temp = i3geoOL.getLayer(this.id);
 								features = temp.features;

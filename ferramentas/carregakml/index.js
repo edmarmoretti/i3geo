@@ -56,7 +56,6 @@ i3GEOF.carregakml = {
 	 */
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.carregakml.dicionario);
-		dicionario["nomeArquivo"] = $inputText('','','i3GEOcarregakmlurl','',40,'');
 		dicionario["digite"] = $trad("o1");
 		dicionario["botao"] = $trad("p14");
 		return dicionario;
@@ -123,7 +122,7 @@ i3GEOF.carregakml = {
 		titulo = "Kml <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=105' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"320px",
-			"150px",
+			"160px",
 			"",
 			"",
 			"",
