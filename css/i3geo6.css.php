@@ -2053,6 +2053,35 @@ background-image: URL('../imagens/oxygen/16x16/feed-subscribe.png');
 .i3GEOiconeLegenda {
 background-image: URL('../imagens/oxygen/16x16/format-list-unordered.png');
 }
+.i3GEOiconeCortina {
+background-image: URL('../imagens/oxygen/16x16/kmix-master.png');
+}
+.i3GEOiconeGrTema {
+background-image: URL('../imagens/gisicons/layer-vector-chart-add.png');
+background-size: 16px;
+}
+.i3GEOiconeGrafico {
+background-image: URL('../imagens/oxygen/16x16/view-statistics.png');
+}
+.i3GEOiconeCartograma {
+background-image: URL('../imagens/gisicons/layer-vector-thematic-add.png');
+background-size: 16px;
+}
+.i3GEOiconeAplicStat {
+background-image: URL('../imagens/oxygen/16x16/text-mathml.png');
+}
+.i3GEOiconeTme {
+background-image: URL('../imagens/3d.png');
+background-size: 16px;
+}
+.i3GEOiconeAdd {
+background-image: URL('../imagens/gisicons/layer-add.png');
+background-size: 16px;
+}
+.i3GEOiconeImport {
+background-image: URL('../imagens/gisicons/layer-import.png');
+background-size: 16px;
+}
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}
 .toc {margin-left: 15px;}

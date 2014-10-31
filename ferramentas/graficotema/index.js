@@ -143,7 +143,7 @@ i3GEOF.graficoTema = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFgraficotemaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("t37a")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=40' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeGrTema'></span>" + "<div  id='i3GEOFgraficotemaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("t37a")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=40' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"330px",
@@ -157,8 +157,7 @@ i3GEOF.graficoTema = {
 			"",
 			"",
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-statistics.png"
+			true
 		);
 		divid = janela[2].id;
 		i3GEOF.graficoTema.aguarde = $i("i3GEOF.graficoTema_imagemCabecalho").style;

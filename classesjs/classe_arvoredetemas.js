@@ -2837,7 +2837,7 @@ i3GEO.arvoreDeTemas = {
 			minimiza = function() {
 				i3GEO.janela.minimiza("i3GEOFuploadarquivo");
 			};
-			titulo = "Upload de arquivo</a>";
+			titulo = "<span class='i3GEOconeFerramenta i3GEOiconeImport'></span>" + "Upload de arquivo";
 			janela = i3GEO.janela.cria("250px", "150px", "", "", "", titulo,
 					"i3GEOFuploadarquivo", false, "hd", cabecalho, minimiza);
 			$i("i3GEOFuploadarquivo_corpo").style.backgroundColor = "white";
@@ -2882,7 +2882,7 @@ i3GEO.arvoreDeTemas = {
 			minimiza = function() {
 				i3GEO.janela.minimiza("i3GEOFconectaservico");
 			};
-			titulo = "Conex&atilde;o com servi&ccedil;os</a>";
+			titulo = "<span class='i3GEOconeFerramenta i3GEOiconeAdd'></span>" + "Conex&atilde;o com servi&ccedil;os</a>";
 			janela = i3GEO.janela
 					.cria(
 							"260px",

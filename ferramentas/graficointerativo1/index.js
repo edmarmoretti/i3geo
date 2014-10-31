@@ -224,7 +224,7 @@ i3GEOF.graficointerativo1 =
 				i3GEOF.graficointerativo1.comboTemas(idjanela);
 				// cria as entradas de parametros para o eixo y
 				// quando o grafico esta sendo restaurado do mapa
-				
+
 				if (config.valoresCombosItens && config.valoresCombosItens.selects.length > 0) {
 					n = config.valoresCombosItens.selects.length;
 
@@ -232,7 +232,7 @@ i3GEOF.graficointerativo1 =
 						var i, c, objs;
 						atualizaConfigGr();
 						//cria as demais entradas de Y
-						
+
 						for (i = 0; i < n; i++) {
 							// cria o combo, para cada combo sao adicionados um input para o nome e um input para a cor
 							$i(idjanela + "i3GEOgraficointerativo1ComboYid").onchange.call();
@@ -242,25 +242,25 @@ i3GEOF.graficointerativo1 =
 						//
 						c = $i(idjanela + "i3GEOgraficointerativo1ComboYlinha");
 						objs = c.getElementsByTagName("select");
-						
+
 						for (i = 0; i < n; i++) {
 							objs[i].value = config.valoresCombosItens.selects[i];
 						}
-						
+
 						objs = c.getElementsByTagName("input");
 						n = config.valoresCombosItens.inputs.length;
 						for (i = 0; i < n; i++) {
 							objs[i].value = config.valoresCombosItens.inputs[i];
 						}
 						atualizaConfigGr();
-						
+
 						if (i3GEOF.graficointerativo1.propJanelas[idjanela].dados == "") {
 							i3GEOF.graficointerativo1.obterDados(idjanela);
 						}
-						
+
 					};
 					//cria o combo para X e um combo para Y
-					
+
 					i3GEOF.graficointerativo1.comboItensSel(idjanela,f);
 				}
 				else{
@@ -475,7 +475,7 @@ i3GEOF.graficointerativo1 =
 			} else {
 				i3GEO.guias.mostraGuiaFerramenta(idjanela + "i3GEOgraficointerativo1guia1", idjanela + "i3GEOgraficointerativo1guia");
 			}
-			
+
 			//
 			// Apos todos os elementos HTML da ferramenta terem sido renderizados
 			// aplicam-se os parametros armazenados nas propriedades da janela atual
@@ -551,7 +551,7 @@ i3GEOF.graficointerativo1 =
 					i3GEOF.graficointerativo1.iniciaJanelaFlutuante();
 				};
 				titulo =
-					"&nbsp;&nbsp;&nbsp;" + $trad("t37b") + " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+					"<span class='i3GEOconeFerramenta i3GEOiconeGrafico'></span>" + $trad("t37b") + " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
 				janela =
 					i3GEO.janela.cria(
@@ -568,7 +568,7 @@ i3GEOF.graficointerativo1 =
 						minimiza,
 						mudaTamanhoGrafico,
 						true,
-						i3GEO.configura.locaplic + "/imagens/oxygen/16x16/view-statistics.png",
+						"",
 						duplica);
 				divid = janela[2].id;
 				$i(idjanela + "_corpo").style.backgroundColor = "white";
@@ -604,8 +604,8 @@ i3GEOF.graficointerativo1 =
 				$i(idjanela+"_corpo").innerHTML = "<img src='../imagens/aguarde2.gif' style='visibility: hidden;' class='i3GeoAguardeJanela' id='"+idjanela+"_imagemCabecalho'>"
 						+ "<div style=background-color:#F2F2F2; >"
 						+ "<input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
-						+ temp 
-						+ "' type=checkbox />&nbsp;" 
+						+ temp
+						+ "' type=checkbox />&nbsp;"
 						+ $trad("atualizaNavegacao", i3GEOF.graficointerativo1.dicionario) + " (" + idjanela + ")</div>";
 
 				divid = idjanela+"_corpo";
@@ -811,7 +811,7 @@ i3GEOF.graficointerativo1 =
 										+ retorno.dados
 										+ "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;left:10px;' >"
 										+ "<input title='" + $trad('digitaTituloLegenda', i3GEOF.graficointerativo1.dicionario)
-										+ "' type=text value='' /></div>" 
+										+ "' type=text value='' /></div>"
 										+ "&nbsp;<div class='i3geoForm100 i3geoFormIconeAquarela' style='float: left;left:15px;' ><input id='" + id
 										+ "' type=text value='' title='cor' /></div><br>";
 									novoselect = no.getElementsByTagName("select")[0];

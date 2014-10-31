@@ -2389,7 +2389,7 @@ i3GEOF.metaestat = {
 				if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
 					modal = true;
 				}
-				titulo = $trad("x57")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=9&idajuda=124' >&nbsp;&nbsp;&nbsp;</a>";
+				titulo = "<span class='i3GEOconeFerramenta i3GEOiconeCartograma'></span>" + $trad("x57")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=9&idajuda=124' >&nbsp;&nbsp;&nbsp;</a>";
 				janela = i3GEO.janela.cria(
 						i3GEOF.metaestat.LARGURA+10+"px",
 						i3GEOF.metaestat.ALTURA+"px",
