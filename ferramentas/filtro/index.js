@@ -147,7 +147,7 @@ i3GEOF.filtro = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;&nbsp;&nbsp;"+$trad("t29")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeFiltro'></span>" + "<div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;&nbsp;&nbsp;"+$trad("t29")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"480px",
 			"250px",
@@ -161,8 +161,7 @@ i3GEOF.filtro = {
 			"",
 			"",
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-filter.png"
+			true
 		);
 		divid = janela[2].id;
 		i3GEOF.filtro.aguarde = $i("i3GEOF.filtro_imagemCabecalho").style;

@@ -127,7 +127,7 @@ i3GEOF.busca = {
 			i3GEO.janela.minimiza("i3GEOF.busca");
 		};
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFbuscaComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeBusca'></span>" + "<div  id='i3GEOFbuscaComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"290px",
 			"330px",
@@ -141,8 +141,7 @@ i3GEOF.busca = {
 			cabecalho,
 			minimiza,
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/edit-find.png"
+			true
 		);
 		divid = janela[2].id;
 		i3GEOF.busca.aguarde = $i("i3GEOF.busca_imagemCabecalho").style;

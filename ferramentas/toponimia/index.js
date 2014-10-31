@@ -118,7 +118,7 @@ i3GEOF.toponimia = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFtoponimiaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("x56")+"&nbsp;</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeToponimia'></span>" + "<div  id='i3GEOFtoponimiaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("x56")+"&nbsp;</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"390px",
 			"190px",
@@ -132,8 +132,7 @@ i3GEOF.toponimia = {
 			"",
 			"",
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/draw-text.png"
+			true
 		);
 		divid = janela[2].id;
 		i3GEOF.toponimia.aguarde = $i("i3GEOF.toponimia_imagemCabecalho").style;

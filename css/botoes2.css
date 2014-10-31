@@ -1125,9 +1125,18 @@ button { //
 .i3GEOiconeCliqueTexto {
 	background-image: URL('../imagens/oxygen/16x16/preferences-desktop-font.png');
 }
-
-
-
+.i3GEOiconeTabela {
+	background-image: URL('../imagens/oxygen/16x16/view-form-table.png');
+}
+.i3GEOiconeToponimia {
+	background-image: URL('../imagens/oxygen/16x16/draw-text.png');
+}
+.i3GEOiconeEtiqueta {
+	background-image: URL('../imagens/oxygen/16x16/feed-subscribe.png');
+}
+.i3GEOiconeLegenda {
+	background-image: URL('../imagens/oxygen/16x16/format-list-unordered.png');
+}
 
 
 

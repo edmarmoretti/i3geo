@@ -371,7 +371,7 @@ i3GEOF.legenda =
 			};
 			// cria a janela flutuante
 			titulo =
-				"<div  id='i3GEOFlegendaComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;&nbsp;&nbsp;" + $trad("t33")
+				"<span class='i3GEOconeFerramenta i3GEOiconeLegenda'></span>" + "<div  id='i3GEOFlegendaComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;&nbsp;&nbsp;" + $trad("t33")
 					+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>";
 			janela =
@@ -388,8 +388,8 @@ i3GEOF.legenda =
 					cabecalho,
 					minimiza,
 					"",
-					true,
-					i3GEO.configura.locaplic + "/imagens/oxygen/16x16/format-list-unordered.png");
+					true
+				);
 			divid = janela[2].id;
 			i3GEOF.legenda.aguarde = $i("i3GEOF.legenda_imagemCabecalho").style;
 			$i("i3GEOF.legenda_corpo").style.backgroundColor = "white";

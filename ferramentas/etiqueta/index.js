@@ -119,7 +119,7 @@ i3GEOF.etiqueta = {
 			i3GEO.janela.minimiza("i3GEOF.etiqueta");
 		};
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFetiquetaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("d7at")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeEtiqueta'></span>" + "<div  id='i3GEOFetiquetaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("d7at")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"510px",
 			"300px",
@@ -133,8 +133,7 @@ i3GEOF.etiqueta = {
 			cabecalho,
 			minimiza,
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/feed-subscribe.png"
+			true
 		);
 		divid = janela[2].id;
 		i3GEOF.etiqueta.aguarde = $i("i3GEOF.etiqueta_imagemCabecalho").style;

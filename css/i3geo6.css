@@ -2041,6 +2041,18 @@ background-image: URL('../imagens/oxygen/16x16/edit-node.png');
 .i3GEOiconeCliqueTexto {
 background-image: URL('../imagens/oxygen/16x16/preferences-desktop-font.png');
 }
+.i3GEOiconeTabela {
+background-image: URL('../imagens/oxygen/16x16/view-form-table.png');
+}
+.i3GEOiconeToponimia {
+background-image: URL('../imagens/oxygen/16x16/draw-text.png');
+}
+.i3GEOiconeEtiqueta {
+background-image: URL('../imagens/oxygen/16x16/feed-subscribe.png');
+}
+.i3GEOiconeLegenda {
+background-image: URL('../imagens/oxygen/16x16/format-list-unordered.png');
+}
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}
 .toc {margin-left: 15px;}
