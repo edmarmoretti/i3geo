@@ -132,7 +132,7 @@ i3GEOF.uploadgpx = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.uploadgpx");
 		};
-		titulo = "GPX <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=103' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeUpload'></span>" + "GPX <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=103' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"280px",
@@ -146,8 +146,7 @@ i3GEOF.uploadgpx = {
 			cabecalho,
 			minimiza,
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/svn-commit.png"
+			true
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.uploadgpx_corpo").style.backgroundColor = "white";

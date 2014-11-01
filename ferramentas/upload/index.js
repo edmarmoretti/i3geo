@@ -153,7 +153,7 @@ i3GEOF.upload = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.upload");
 		};
-		titulo = $trad("a2")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeUpload'></span>" + $trad("a2")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"470px",
@@ -167,8 +167,7 @@ i3GEOF.upload = {
 			cabecalho,
 			minimiza,
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/svn-commit.png"
+			true
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.upload_corpo").style.backgroundColor = "white";

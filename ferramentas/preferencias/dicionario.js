@@ -132,8 +132,8 @@ i3GEOF.preferencias.dicionario = {
 			es:"",
 			it:""
 		}],
-		'arvoreCamada': [{
-			pt:"&Aacute;rvore de temas",
+		'arvoreTemas': [{
+			pt:"&Aacute;rvore de temas do cat&aacute;logo",
 			en:"",
 			es:"",
 			it:""

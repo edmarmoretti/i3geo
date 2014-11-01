@@ -104,7 +104,7 @@ i3GEOF.preferencias = {
 					}
 				]
 			},{
-				titulo: $trad('arvoreCamadas',i3GEOF.preferencias.dicionario),
+				titulo: $trad('arvoreCamadas',i3GEOF.preferencias.dicionario),//arvore de camadas
 				props: [
 					{
 						titulo: $trad('mostraBarraProgresso',i3GEOF.preferencias.dicionario),
@@ -158,7 +158,7 @@ i3GEOF.preferencias = {
 					}
 				]
 			},{
-				titulo: $trad('arvoreCamada',i3GEOF.preferencias.dicionario),
+				titulo: $trad('arvoreTemas',i3GEOF.preferencias.dicionario), //catalogo
 				props: [
 					{
 						titulo: $trad('botoes2',i3GEOF.preferencias.dicionario),

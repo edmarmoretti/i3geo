@@ -1166,6 +1166,9 @@ button { //
 	background-image: URL('../imagens/gisicons/layer-import.png');
 	background-size: 16px;
 }
+.i3GEOiconeUpload {
+	background-image: URL('../imagens/oxygen/16x16/svn-commit.png');
+}
 
 
 

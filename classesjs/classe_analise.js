@@ -209,7 +209,6 @@ i3GEO.analise = {
 		analisaGeometrias : function() {
 			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tabela()","analisageometrias","analisaGeometrias","dependencias.php","i3GEOF.analisaGeometrias.iniciaJanelaFlutuante()");
 		},
-
 		/**
 		 * Function: pontosdistri
 		 *

@@ -126,7 +126,7 @@ i3GEOF.uploaddbf = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.uploaddbf");
 		};
-		titulo = $trad("a2b")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=26' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeUpload'></span>" + $trad("a2b")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=26' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"320px",
 			"390px",
@@ -140,8 +140,7 @@ i3GEOF.uploaddbf = {
 			cabecalho,
 			minimiza,
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/svn-commit.png"
+			true
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.uploaddbf_corpo").style.backgroundColor = "white";

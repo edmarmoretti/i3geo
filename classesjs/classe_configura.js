@@ -270,10 +270,10 @@ i3GEO.configura = {
 			{ id:"omenudataFerramentas3e",text: "<span class='i3GEOconeFerramenta i3GEOiconeTme'></span>" + $trad("t49"), url: "javascript:i3GEO.tema.dialogo.tme()"},
 			//conexoes
 			{ id:"omenudataFerramentas0c",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("a15")+'</b></span>',url: "#"},
-			{ id:"omenudataFerramentas1c",text: "<span class='i3GEOconeFerramenta i3GEOiconeAdd'></span>" + $trad("a16"), url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"},
+			{ id:"omenudataFerramentas14",text: "<span class='i3GEOconeFerramenta i3GEOiconeAdd'></span>" + $trad("conexaoServicoGeo"), url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"},
 			//upload
 			{ id:"omenudataFerramentas0d",text: '<span style=color:gray;text-decoration:underline; ><b>Upload</b></span>',url: "#"},
-			{ id:"omenudataFerramentas3d",text: "<span class='i3GEOconeFerramenta i3GEOiconeImport'></span>" + "Vetor (shp,dbf,csv,gpx,kml)", url: "javascript:i3GEO.arvoreDeTemas.dialogo.uploadarquivo()"}
+			{ id:"omenudataFerramentas13",text: "<span class='i3GEOconeFerramenta i3GEOiconeUpload'></span>" + $trad("uploadArquivoGeo"), url: "javascript:i3GEO.arvoreDeTemas.dialogo.uploadarquivo()"}
 			]
 		}
 	},

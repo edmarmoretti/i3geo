@@ -2082,6 +2082,9 @@ background-size: 16px;
 background-image: URL('../imagens/gisicons/layer-import.png');
 background-size: 16px;
 }
+.i3GEOiconeUpload {
+background-image: URL('../imagens/oxygen/16x16/svn-commit.png');
+}
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}
 .toc {margin-left: 15px;}

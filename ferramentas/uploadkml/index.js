@@ -129,7 +129,7 @@ i3GEOF.uploadkml = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.uploadkml");
 		};
-		titulo = "KML <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=104' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeUpload'></span>" + "KML <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=104' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"450px",
 			"390px",
@@ -143,8 +143,7 @@ i3GEOF.uploadkml = {
 			cabecalho,
 			minimiza,
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/svn-commit.png"
+			true
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.uploadkml_corpo").style.backgroundColor = "white";
