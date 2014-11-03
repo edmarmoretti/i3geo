@@ -153,7 +153,7 @@ function montaEditorDados(dados)
 		var valor = $i("metaestat").value,
 			d = [];
 		if(valor === "SIM"){
-			d = ["metaestat_id_medida_variavel"];
+			d.push("metaestat_id_medida_variavel");
 		}
 		else{
 			core_desativaforms(idsForms);

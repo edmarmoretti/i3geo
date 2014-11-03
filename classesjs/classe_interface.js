@@ -1018,6 +1018,7 @@ i3GEO.Interface =
 			},
 			insereLayerKml : function(id, url) {
 				var temp;
+				url = i3GEO.configura.locaplic + "/classesphp/proxy.php?url=" + url;
 				eval(id
 					+ " = new OpenLayers.Layer.Vector('"
 					+ id

@@ -1,0 +1,27 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    
+    METADATA
+      "CLASSE"	"SIM"
+      "PLUGINI3GEO"	'{"plugin":"layerkml","parametros":{"url":"http://dev.openlayers.org/examples/kml/sundials.kml"}}'
+      "TEMA"	"Teste de plugin KML"
+    END # METADATA
+    NAME "_lmapakml"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 0 0 0
+        SIZE 12
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+
