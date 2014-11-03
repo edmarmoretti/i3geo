@@ -426,5 +426,13 @@ i3GEOF.graficointerativo1.dicionario =
 				es : "",
 				it : ""
 			}
+		],
+		"idDoGrafico" : [
+			{
+				pt : "ID do gr&aacute;fico",
+				en : "",
+				es : "",
+				it : ""
+			}
 		]
 	};

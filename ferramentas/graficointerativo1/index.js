@@ -277,12 +277,13 @@ i3GEOF.graficointerativo1 =
 		 * utilizada para salvar as configuracoes no mapfile atual
 		 */
 		compactaConfig : function() {
-			var c, g, par, janelas, i, n;
+			var c, g, par, janelas, i, n, novoid;
 			par = [];
 			janelas = i3GEOF.graficointerativo1.janelas;
 			n = janelas.length;
 			for (i = 0; i < n; i++) {
-				c = i3GEOF.graficointerativo1.retornaConfig(janelas[i]);
+				novoid = window.prompt($trad('idDoGrafico',i3GEOF.salvaMapa.dicionario),janelas[i]);
+				c = i3GEOF.graficointerativo1.retornaConfig(janelas[i],novoid);
 				par.push(c);
 			}
 			g = YAHOO.lang.JSON.stringify(par);
@@ -303,20 +304,24 @@ i3GEOF.graficointerativo1 =
 		 *
 		 * A funcao i3GEO.php.salvaMapaBanco utiliza retornaConfig e cria um objeto que ira armazenar os parametros de cada janela
 		 */
-		retornaConfig : function(idjanela) {
+		retornaConfig : function(idjanela,novoid) {
 			// as chaves do objeto correspondem ao ID de cada elemento
-			var d, c, par, objs, obj = "", valoresCombosItens = {};
+			var tmpid,d, c, par, objs, obj = "", valoresCombosItens = {};
 			par = i3GEOF.graficointerativo1.propJanelas[idjanela];
 			c = $i(idjanela);
+			if(!novoid){
+				novoid = idjanela;
+			}
 			// pega todos os elementos do tipo input
 			objs = c.getElementsByTagName("input");
 			for (obj in objs) {
 				// nao inclui agora os dados e cores
 				if (objs[obj].id && objs[obj].id != "" && objs[obj].id.search(idjanela + "i3GEOgraficointerativo1Dados") < 0) {
+					tmpid = objs[obj].id.replace(idjanela,novoid);
 					if (objs[obj].type === "text") {
-						par[objs[obj].id] = objs[obj].value;
+						par[tmpid] = objs[obj].value;
 					} else {
-						par[objs[obj].id] = objs[obj].checked;
+						par[tmpid] = objs[obj].checked;
 					}
 				}
 			}
@@ -324,7 +329,8 @@ i3GEOF.graficointerativo1 =
 			objs = c.getElementsByTagName("select");
 			for (obj in objs) {
 				if (objs[obj].id && objs[obj].id != "") {
-					par[objs[obj].id] = objs[obj].value;
+					tmpid = objs[obj].id.replace(idjanela,novoid);
+					par[tmpid] = objs[obj].value;
 				}
 			}
 			// se a janela esta marcada para ser atualizada ao navegar, os dados nao devem ser incluidos
@@ -334,7 +340,8 @@ i3GEOF.graficointerativo1 =
 				objs = d.getElementsByTagName("input");
 				for (obj in objs) {
 					if (objs[obj].id) {
-						par[objs[obj].id] = objs[obj].value;
+						tmpid = objs[obj].id.replace(idjanela,novoid);
+						par[tmpid] = objs[obj].value;
 					}
 				}
 			} else {
@@ -359,7 +366,7 @@ i3GEOF.graficointerativo1 =
 				}
 			}
 			par["valoresCombosItens"] = valoresCombosItens;
-			par["idjanela"] = idjanela;
+			par["idjanela"] = novoid;
 			par["w"] = c.style.width;
 			par["h"] = c.style.height;
 			return par;
