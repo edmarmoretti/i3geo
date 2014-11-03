@@ -51,7 +51,7 @@ i3GEOF.uploadarquivos =
 				fn : function() {
 					i3GEO.util.scriptTag(i3GEO.configura.locaplic
 						+ "/ferramentas/uploaddbf/dependencias.php",
-						"i3GEOF.uploaddbf.criaJanelaFlutuante()",
+						"i3GEOF.uploaddbf.iniciaJanelaFlutuante()",
 						"i3GEOF.uploaddbf_script");
 				}
 			}
@@ -61,7 +61,7 @@ i3GEOF.uploadarquivos =
 				fn : function() {
 					i3GEO.util.scriptTag(i3GEO.configura.locaplic
 						+ "/ferramentas/uploadgpx/dependencias.php",
-						"i3GEOF.uploadgpx.criaJanelaFlutuante()",
+						"i3GEOF.uploadgpx.iniciaJanelaFlutuante()",
 						"i3GEOF.uploadgpx_script");
 				}
 			}
@@ -71,7 +71,7 @@ i3GEOF.uploadarquivos =
 				fn : function() {
 					i3GEO.util.scriptTag(i3GEO.configura.locaplic
 						+ "/ferramentas/uploadkml/dependencias.php",
-						"i3GEOF.uploadkml.criaJanelaFlutuante()",
+						"i3GEOF.uploadkml.iniciaJanelaFlutuante()",
 						"i3GEOF.uploadkml_script");
 				}
 			}

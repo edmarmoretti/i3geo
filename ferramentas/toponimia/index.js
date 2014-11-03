@@ -19,13 +19,6 @@ i3GEOF.toponimia = {
 	Sera marcado como selecionado no combo com a lista de itens
 	*/
 	ATIVAITEM: "",
-
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.toponimia.iniciaDicionario();
-	},
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */

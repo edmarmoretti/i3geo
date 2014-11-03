@@ -42,12 +42,6 @@ i3GEOF.uploaddbf = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.uploaddbf.iniciaDicionario();
-	},
 	/**
 	 * Susbtitutos para o template
 	 */
@@ -56,25 +50,6 @@ i3GEOF.uploaddbf = {
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["sid"] = i3GEO.configura.sid;
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.uploaddbf.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/uploaddbf/dicionario.js",
-				"i3GEOF.uploaddbf.iniciaJanelaFlutuante()",
-				"i3GEOF.uploaddbf.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.uploaddbf.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: inicia
