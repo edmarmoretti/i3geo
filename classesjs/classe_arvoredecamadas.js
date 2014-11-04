@@ -631,7 +631,7 @@ i3GEO.arvoreDeCamadas = {
 			buildTree();
 		})();
 		root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
-		titulo = "<table><tr><td><b>" + $trad("a7") + "</b></td><td>";
+		titulo = "<table><tr><td><b>" + $trad("t1") + "</b></td><td>";
 		// titulo += i3GEO.arvoreDeCamadas.montaOpcoesArvore();
 		titulo += "</td></tr></table>";
 		tempNode = new YAHOO.widget.HTMLNode({

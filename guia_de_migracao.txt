@@ -3,6 +3,9 @@ GUIA DE UPDATES e UPGRADES
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 
+- Foram incluídos subitens no menu suspenso para acomodar o grande número de opções. Os códigos locais que
+manipulam o menu suspenso devem ser revisados para verificar o funcionamento nessa nova condição.
+
 - Nova variável em ms_configura chamada $customDir que indica a pasta com as customizações dos mapas
 
 - nas interfaces que utilizam a API do google maps agora é necessário carregar a biblioteca geometry com o seguinte código:

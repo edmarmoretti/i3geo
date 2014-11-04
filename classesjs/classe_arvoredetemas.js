@@ -414,8 +414,9 @@ i3GEO.arvoreDeTemas = {
 					url : raiz[i].link,
 					nivel : 0,
 					expanded : false,
-					hasIcon : false,
-					enableHighlight : true
+					hasIcon : true,
+					enableHighlight : true,
+					className: "i3GeoFolder"
 				}, node);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
 			}
@@ -449,6 +450,7 @@ i3GEO.arvoreDeTemas = {
 							html : html,
 							expanded : false,
 							hasIcon : false,
+							className: "i3GeoFolder",
 							enableHighlight : true,
 							tipoa_tema : "METAREGIAO",
 							codigo_tipo_regiao : retorno[i].codigo_tipo_regiao,
@@ -508,8 +510,9 @@ i3GEO.arvoreDeTemas = {
 					codigo_variavel : retorno[i].codigo_variavel,
 					html : html,
 					expanded : false,
-					hasIcon : false,
-					enableHighlight : true
+					hasIcon : true,
+					enableHighlight : true,
+					className: "i3GeoFolder"
 				}, node);
 				tempNode.setDynamicLoad(
 						i3GEO.arvoreDeTemas.listaMedidasVariavel, 1);
@@ -1180,7 +1183,7 @@ i3GEO.arvoreDeTemas = {
 		//agrupamento de outras funcoes
 		if(i3GEO.arvoreDeTemas.INCLUISISTEMAS === true || i3GEO.arvoreDeTemas.INCLUIESTRELAS === true || i3GEO.arvoreDeTemas.INCLUIMAPASCADASTRADOS === true || i3GEO.arvoreDeTemas.INCLUIWMS === true || i3GEO.arvoreDeTemas.INCLUIREGIOES === true || i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT === true){
 			mais = new YAHOO.widget.HTMLNode({
-				html : "&nbsp;" + $trad("mais"),
+				html : $trad("mais"),
 				enableHighlight : false,
 				expanded : false,
 				idmais: "idmais",
@@ -1200,7 +1203,7 @@ i3GEO.arvoreDeTemas = {
 				}
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
-							html : "<span style='position:relative;'>&nbsp;OGC-WMS</span>"
+							html : "<span style='position:relative;'>OGC-WMS</span>"
 									+ " <a class=ajuda_usuario target=_blank href='"
 									+ i3GEO.configura.locaplic
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=33' >&nbsp;&nbsp;&nbsp;</a>"
@@ -1218,7 +1221,7 @@ i3GEO.arvoreDeTemas = {
 			if (i3GEO.arvoreDeTemas.INCLUIREGIOES === true) {
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
-							html : "<span style='position:relative;'>&nbsp;"
+							html : "<span style='position:relative;'>"
 									+ $trad("x87")
 									+ "</span>"
 									+ " <a class=ajuda_usuario target=_blank href='"
@@ -1237,7 +1240,7 @@ i3GEO.arvoreDeTemas = {
 			if (i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT === true) {
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
-							html : "<span style='position:relative;'>&nbsp;"
+							html : "<span style='position:relative;'>"
 									+ $trad("x57")
 									+ "</span>"
 									+ " <a class=ajuda_usuario target=_blank href='"
@@ -1256,7 +1259,7 @@ i3GEO.arvoreDeTemas = {
 			//
 			if (i3GEO.arvoreDeTemas.INCLUIMAPASCADASTRADOS === true) {
 				tempNode = new YAHOO.widget.HTMLNode({
-					html : "<span style='position:relative;'>&nbsp;"
+					html : "<span style='position:relative;'>"
 							+ $trad("x90") + "</span>",
 					idmapacadastrado : "raiz",
 					expanded : false,
@@ -1273,7 +1276,7 @@ i3GEO.arvoreDeTemas = {
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
 							expanded : false,
-							html : "<span style='position:relative;' >&nbsp;"
+							html : "<span style='position:relative;' >"
 									+ $trad("t46")
 									+ "</span> <a class=ajuda_usuario target=_blank href='"
 									+ i3GEO.configura.locaplic
@@ -1390,13 +1393,13 @@ i3GEO.arvoreDeTemas = {
 				dados[i].publicado = "sim";
 			}
 			if (dados[i].publicado.toLowerCase() !== "nao") {
-				conteudo = "&nbsp;<span style='position:relative;' title='"
+				conteudo = "<span style='position:relative;' title='"
 						+ (dados[i].desc)
 						+ "'>"
 						+ dados[i].nomemenu
 						+ "</span>" + editor;
 			} else {
-				conteudo = "&nbsp;<span title='nao publicado' style='color:red'>"
+				conteudo = "<span title='nao publicado' style='color:red'>"
 						+ dados[i].nomemenu + "</span>" + editor;
 			}
 			tempNode = new YAHOO.widget.HTMLNode({
@@ -1436,7 +1439,7 @@ i3GEO.arvoreDeTemas = {
 			iglt = drives.length;
 			tempNode = new YAHOO.widget.HTMLNode(
 					{
-						html : "&nbsp;"
+						html : ""
 								+ $trad("a6")
 								+ " <a class=ajuda_usuario target=_blank href='"
 								+ i3GEO.configura.locaplic

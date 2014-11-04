@@ -132,7 +132,7 @@ function montaParametrosTemas(no,dados,redesenha)
 
 	if(!tree.getNodeByProperty("pluginI3geo",id))
 	{
-		d = {id:id,codigoLayer:codigoLayer,tipo:"pluginI3geo",etiquetaPluginI3geo:id,html:"<i>&nbsp;Configurar Plugin</i>"};
+		d = {id:id,codigoLayer:codigoLayer,tipo:"pluginI3geo",etiquetaPluginI3geo:id,html:"<i>&nbsp;Plugin (s&oacute; &eacute; poss&iacute;vel ativar um plugin por LAYER)</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		tempNodeR.enableHighlight = false;

@@ -109,7 +109,7 @@ g_traducao = {
 }],
 "p16": [
 {
-	pt: "Camadas de fundo",
+	pt: "Fundo",
 	en:"Base layers",
 	es:"Capas Base",
 	it:"Base layers"

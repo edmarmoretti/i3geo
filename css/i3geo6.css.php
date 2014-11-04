@@ -2330,6 +2330,9 @@ width: 18px;
 width: 38px;
 background-image: url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite-folder.gif);
 }
+.i3GeoFolder .ygtvloading{
+width: 38px;
+}
 .ygtvhtml {
 text-align: left;
 }
