@@ -1,6 +1,6 @@
 //+$trad(1,i3GEOF.confluence.dicionario)+
 i3GEOF.confluence.dicionario = {
-	'ajuda' : [{
+	'ajuda' : [ {
 		pt : "Navegue pelo mapa para ver o resultado! Clique no link para abrir a p&aacute;gina sobre o ponto.",
 		en : "",
 		es : ""

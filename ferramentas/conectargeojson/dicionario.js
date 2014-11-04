@@ -1,6 +1,6 @@
 //+$trad(1,i3GEOF.conectargeojson.dicionario)+
 i3GEOF.conectargeojson.dicionario = {
-	'msgNavegador' : [{
+	'msgNavegador' : [ {
 		pt : "N&atilde;o funciona coretamente no Internet Explorer. Use o Firefox ou outro navegador",
 		en : "",
 		es : ""

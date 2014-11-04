@@ -1,6 +1,6 @@
 //+$trad(1,i3GEOF.centroide.dicionario)+
 i3GEOF.centroide.dicionario = {
-	'ajuda' : [{
+	'ajuda' : [ {
 		pt : "Calcula o centro de cada pol&iacute;gono gerado uma nova camada. O c&aacute;lculo baseia-se no pol&iacute;gono envolvente e podem ocorrer casos em que o ponto &eacute; posicionado fora do pol&iacute;gono fonte",
 		en : "",
 		es : ""

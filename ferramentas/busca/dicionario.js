@@ -3,97 +3,81 @@ i3GEOF.busca.dicionario = {
 	'digita' : [ {
 		pt : "digite aqui o texto...",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'procura' : [ {
 		pt : "Procurar",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'busca' : [ {
 		pt : "qualquer lugar do item, ou",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'busca2' : [ {
 		pt : "a frase exata",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'busca3' : [ {
 		pt : "procurar no mapa todo, ou",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'busca4' : [ {
 		pt : "na regi&atilde;o atual",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'busca5' : [ {
 		pt : "Buscar nos itens:",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'erroTema' : [ {
 		pt : "O tema ja nao existe mais no mapa",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'erro' : [ {
 		pt : "Ocorreu um erro",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'erroTema2' : [ {
 		pt : "O tema ja nao existe mais no mapa",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'selecionaItem' : [ {
 		pt : "Selecione um item",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'semRegistro' : [ {
 		pt : "Nenhum registro encontrado",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'localiza' : [ {
 		pt : "localiza",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	14 : [ {
 		pt : "",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	15 : [ {
 		pt : "",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	16 : [ {
 		pt : "",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ]
 };
