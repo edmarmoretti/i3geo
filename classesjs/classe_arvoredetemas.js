@@ -449,9 +449,9 @@ i3GEO.arvoreDeTemas = {
 							isleaf : true,
 							html : html,
 							expanded : false,
-							hasIcon : false,
+							hasIcon : true,
 							className: "i3GeoFolder",
-							enableHighlight : true,
+							enableHighlight : false,
 							tipoa_tema : "METAREGIAO",
 							codigo_tipo_regiao : retorno[i].codigo_tipo_regiao,
 							idtema : "metaregiao_"
@@ -482,7 +482,7 @@ i3GEO.arvoreDeTemas = {
 							id_mapaCadastrado : retorno[i].ID_MAPA,
 							html : html,
 							expanded : false,
-							hasIcon : false,
+							hasIcon : true,
 							enableHighlight : true
 						}, node);
 			}
@@ -546,7 +546,7 @@ i3GEO.arvoreDeTemas = {
 							isleaf : true,
 							html : html,
 							expanded : false,
-							hasIcon : false,
+							hasIcon : true,
 							enableHighlight : true,
 							tipoa_tema : "META",
 							idtema : "metaestat_"
@@ -589,7 +589,7 @@ i3GEO.arvoreDeTemas = {
 						layer : temp.nome,
 						enableHighlight : false,
 						expanded : false,
-						hasIcon : false
+						hasIcon : true
 					}, node);
 					if (!temp.estilos) {
 						tempNode.setDynamicLoad(
@@ -609,7 +609,7 @@ i3GEO.arvoreDeTemas = {
 												.toString(), cor),
 								enableHighlight : false,
 								expanded : false,
-								hasIcon : false
+								hasIcon : true
 							}, tempNode);
 							tempNode.isleaf = true;
 						}
@@ -925,7 +925,7 @@ i3GEO.arvoreDeTemas = {
 								tempNode = new YAHOO.widget.HTMLNode({
 									html : d,
 									expanded : false,
-									hasIcon : false,
+									hasIcon : true,
 									isLeaf : true,
 									enableHighlight : true
 								}, node);
@@ -953,7 +953,7 @@ i3GEO.arvoreDeTemas = {
 										html : "<span style='color:red'>Nada encontrado<br><br></span>",
 										isLeaf : true,
 										expanded : false,
-										hasIcon : false,
+										hasIcon : true,
 										enableHighlight : false
 									}, node);
 						}
@@ -1099,7 +1099,7 @@ i3GEO.arvoreDeTemas = {
 				html : insp,
 				enableHighlight : false,
 				expanded : false,
-				hasIcon : false
+				hasIcon : true
 			}, root);
 		}
 		// icones com as outras opcoes
@@ -1115,7 +1115,7 @@ i3GEO.arvoreDeTemas = {
 				isLeaf : true,
 				enableHighlight : true,
 				expanded : false,
-				hasIcon : false
+				hasIcon : true
 			}, root);
 		}
 		//
