@@ -145,6 +145,20 @@
 	width: 18px;
 }
 
+.i3GeoFolder .ygtvtp,
+.i3GeoFolder .ygtvtph,
+.i3GeoFolder .ygtvtm,
+.i3GeoFolder .ygtvtmh,
+.i3GeoFolder .ygtvlm,
+.i3GeoFolder .ygtvlmh,
+.i3GeoFolder .ygtvtm,
+.i3GeoFolder .ygtvtmh,
+.i3GeoFolder .ygtvlp,
+.i3GeoFolder .ygtvlph{
+	width: 38px;
+	background-image: url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite-folder.gif);
+}
+
 .ygtvhtml {
 	text-align: left;
 }

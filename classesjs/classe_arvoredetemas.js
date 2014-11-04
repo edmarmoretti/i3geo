@@ -414,6 +414,7 @@ i3GEO.arvoreDeTemas = {
 					url : raiz[i].link,
 					nivel : 0,
 					expanded : false,
+					hasIcon : false,
 					enableHighlight : true
 				}, node);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
@@ -447,6 +448,7 @@ i3GEO.arvoreDeTemas = {
 							isleaf : true,
 							html : html,
 							expanded : false,
+							hasIcon : false,
 							enableHighlight : true,
 							tipoa_tema : "METAREGIAO",
 							codigo_tipo_regiao : retorno[i].codigo_tipo_regiao,
@@ -478,6 +480,7 @@ i3GEO.arvoreDeTemas = {
 							id_mapaCadastrado : retorno[i].ID_MAPA,
 							html : html,
 							expanded : false,
+							hasIcon : false,
 							enableHighlight : true
 						}, node);
 			}
@@ -505,6 +508,7 @@ i3GEO.arvoreDeTemas = {
 					codigo_variavel : retorno[i].codigo_variavel,
 					html : html,
 					expanded : false,
+					hasIcon : false,
 					enableHighlight : true
 				}, node);
 				tempNode.setDynamicLoad(
@@ -539,6 +543,7 @@ i3GEO.arvoreDeTemas = {
 							isleaf : true,
 							html : html,
 							expanded : false,
+							hasIcon : false,
 							enableHighlight : true,
 							tipoa_tema : "META",
 							idtema : "metaestat_"
@@ -580,7 +585,8 @@ i3GEO.arvoreDeTemas = {
 						id_ws : "",
 						layer : temp.nome,
 						enableHighlight : false,
-						expanded : false
+						expanded : false,
+						hasIcon : false
 					}, node);
 					if (!temp.estilos) {
 						tempNode.setDynamicLoad(
@@ -599,7 +605,8 @@ i3GEO.arvoreDeTemas = {
 												.toString(), temp.formats
 												.toString(), cor),
 								enableHighlight : false,
-								expanded : false
+								expanded : false,
+								hasIcon : false
 							}, tempNode);
 							tempNode.isleaf = true;
 						}
@@ -915,6 +922,7 @@ i3GEO.arvoreDeTemas = {
 								tempNode = new YAHOO.widget.HTMLNode({
 									html : d,
 									expanded : false,
+									hasIcon : false,
 									isLeaf : true,
 									enableHighlight : true
 								}, node);
@@ -942,6 +950,7 @@ i3GEO.arvoreDeTemas = {
 										html : "<span style='color:red'>Nada encontrado<br><br></span>",
 										isLeaf : true,
 										expanded : false,
+										hasIcon : false,
 										enableHighlight : false
 									}, node);
 						}
@@ -1171,10 +1180,11 @@ i3GEO.arvoreDeTemas = {
 		//agrupamento de outras funcoes
 		if(i3GEO.arvoreDeTemas.INCLUISISTEMAS === true || i3GEO.arvoreDeTemas.INCLUIESTRELAS === true || i3GEO.arvoreDeTemas.INCLUIMAPASCADASTRADOS === true || i3GEO.arvoreDeTemas.INCLUIWMS === true || i3GEO.arvoreDeTemas.INCLUIREGIOES === true || i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT === true){
 			mais = new YAHOO.widget.HTMLNode({
-				html : "&nbsp;<b>" + $trad("mais") + "</b>",
+				html : "&nbsp;" + $trad("mais"),
 				enableHighlight : false,
 				expanded : false,
-				idmais: "idmais"
+				idmais: "idmais",
+				className: "i3GeoFolder"
 			}, root);
 			//
 			// wms
@@ -1190,13 +1200,14 @@ i3GEO.arvoreDeTemas = {
 				}
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
-							html : "<span style='position:relative;top:-2px;'><b>&nbsp;OGC-WMS</b></span>"
+							html : "<span style='position:relative;'>&nbsp;OGC-WMS</span>"
 									+ " <a class=ajuda_usuario target=_blank href='"
 									+ i3GEO.configura.locaplic
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=33' >&nbsp;&nbsp;&nbsp;</a>"
 									+ editor,
 							idwms : "raiz",
 							expanded : false,
+							className: "i3GeoFolder",
 							enableHighlight : true
 						}, mais);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaWMS, 1);
@@ -1207,14 +1218,15 @@ i3GEO.arvoreDeTemas = {
 			if (i3GEO.arvoreDeTemas.INCLUIREGIOES === true) {
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
-							html : "<span style='position:relative;top:-2px;'><b>&nbsp;"
+							html : "<span style='position:relative;'>&nbsp;"
 									+ $trad("x87")
-									+ "</b></span>"
+									+ "</span>"
 									+ " <a class=ajuda_usuario target=_blank href='"
 									+ i3GEO.configura.locaplic
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=33' >&nbsp;&nbsp;&nbsp;</a>",
 							idregioes : "raiz",
 							expanded : false,
+							className: "i3GeoFolder",
 							enableHighlight : true
 						}, mais);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaRegioes, 1);
@@ -1225,14 +1237,15 @@ i3GEO.arvoreDeTemas = {
 			if (i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT === true) {
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
-							html : "<span style='position:relative;top:-2px;'><b>&nbsp;"
+							html : "<span style='position:relative;'>&nbsp;"
 									+ $trad("x57")
-									+ "</b></span>"
+									+ "</span>"
 									+ " <a class=ajuda_usuario target=_blank href='"
 									+ i3GEO.configura.locaplic
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=112' >&nbsp;&nbsp;&nbsp;</a>",
 							idwmsmetaestat : "raiz",
 							expanded : false,
+							className: "i3GeoFolder",
 							enableHighlight : true
 						}, mais);
 				tempNode.setDynamicLoad(
@@ -1243,10 +1256,11 @@ i3GEO.arvoreDeTemas = {
 			//
 			if (i3GEO.arvoreDeTemas.INCLUIMAPASCADASTRADOS === true) {
 				tempNode = new YAHOO.widget.HTMLNode({
-					html : "<span style='position:relative;top:-2px;'><b>&nbsp;"
-							+ $trad("x90") + "</b></span>",
+					html : "<span style='position:relative;'>&nbsp;"
+							+ $trad("x90") + "</span>",
 					idmapacadastrado : "raiz",
 					expanded : false,
+					className: "i3GeoFolder",
 					enableHighlight : true
 				}, mais);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaMapasCadastrados,
@@ -1259,12 +1273,13 @@ i3GEO.arvoreDeTemas = {
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
 							expanded : false,
-							html : "<span style='position:relative;top:-2px;' ><b>&nbsp;"
+							html : "<span style='position:relative;' >&nbsp;"
 									+ $trad("t46")
-									+ "</b></span> <a class=ajuda_usuario target=_blank href='"
+									+ "</span> <a class=ajuda_usuario target=_blank href='"
 									+ i3GEO.configura.locaplic
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=95' >&nbsp;&nbsp;&nbsp;</a>",
-							enableHighlight : false
+							enableHighlight : false,
+							className: "i3GeoFolder"
 						}, mais);
 				ig = 5;
 				do {
@@ -1286,9 +1301,7 @@ i3GEO.arvoreDeTemas = {
 						iglt = sis.length;
 						tempNode = new YAHOO.widget.HTMLNode(
 								{
-									html : "<b>"
-											+ $trad("a11")
-											+ "</b>"
+									html : $trad("a11")
 											+ " <a class=ajuda_usuario target=_blank href='"
 											+ i3GEO.configura.locaplic
 											+ "/ajuda_usuario.php?idcategoria=4&idajuda=34' >&nbsp;&nbsp;&nbsp;</a>",
@@ -1377,20 +1390,21 @@ i3GEO.arvoreDeTemas = {
 				dados[i].publicado = "sim";
 			}
 			if (dados[i].publicado.toLowerCase() !== "nao") {
-				conteudo = "<b>&nbsp;<span style='position:relative;top:-2px;' title='"
+				conteudo = "&nbsp;<span style='position:relative;' title='"
 						+ (dados[i].desc)
 						+ "'>"
 						+ dados[i].nomemenu
 						+ "</span>" + editor;
 			} else {
-				conteudo = "<b>&nbsp;<span title='nao publicado' style='color:red'>"
+				conteudo = "&nbsp;<span title='nao publicado' style='color:red'>"
 						+ dados[i].nomemenu + "</span>" + editor;
 			}
 			tempNode = new YAHOO.widget.HTMLNode({
 				html : conteudo,
 				idmenu : dados[i].idmenu,
 				enableHighlight : true,
-				expanded : false
+				expanded : false,
+				className: "i3GeoFolder"
 			}, root);
 			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaGrupos, 1);
 			if (dados[i].status === "aberto") {
@@ -1428,7 +1442,8 @@ i3GEO.arvoreDeTemas = {
 								+ i3GEO.configura.locaplic
 								+ "/ajuda_usuario.php?idcategoria=4&idajuda=32' >&nbsp;&nbsp;&nbsp;</a>",
 						enableHighlight : true,
-						expanded : false
+						expanded : false,
+						className: "i3GeoFolder"
 					}, i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idmais","idmais")
 				);
 			ig = 0;
@@ -1440,7 +1455,8 @@ i3GEO.arvoreDeTemas = {
 					html : drives[ig].nome,
 					caminho : drives[ig].caminho,
 					enableHighlight : true,
-					expanded : false
+					expanded : false,
+					className: "i3GeoFolder"
 				}, tempNode);
 				drive.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
 				ig += 1;
@@ -1522,15 +1538,17 @@ i3GEO.arvoreDeTemas = {
 						}
 					}
 					d = {
-						html : "<span style='position:relative;top:-2px;'>"
+						html : "<span style='position:relative;'>"
 								+ grupos[i].nome + editor + "</span>",
 						idmenu : node.data.idmenu,
+						className: "i3GeoFolder",
 						idgrupo : i
 					};
 					if (grupos[i].id_n1) {
 						d = {
 							html : grupos[i].nome + editor,
 							idmenu : node.data.idmenu,
+							className: "i3GeoFolder",
 							idgrupo : grupos[i].id_n1
 						};
 					}
@@ -1630,10 +1648,11 @@ i3GEO.arvoreDeTemas = {
 						}
 					}
 					d = {
-						html : "<span style='position:relative;top:-2px;'>"
+						html : "<span style='position:relative;'>"
 								+ subgrupos[i].nome + editor + "</span>",
 						idmenu : node.data.idmenu,
 						idgrupo : node.data.idgrupo,
+						className: "i3GeoFolder",
 						idsubgrupo : i
 					};
 					if (subgrupos[i].id_n2) {
@@ -1641,7 +1660,8 @@ i3GEO.arvoreDeTemas = {
 							html : subgrupos[i].nome + editor,
 							idmenu : node.data.idmenu,
 							idgrupo : node.data.idgrupo,
-							idsubgrupo : subgrupos[i].id_n2
+							idsubgrupo : subgrupos[i].id_n2,
+							className: "i3GeoFolder"
 						};
 					}
 					tempNode = new YAHOO.widget.HTMLNode(d, node, false, true);
@@ -1747,7 +1767,8 @@ i3GEO.arvoreDeTemas = {
 					listaFig : node.data.listaFig,
 					listaShp : node.data.listaShp,
 					retornaDir : node.data.retornaDir,
-					funcaoClick : funcaoClick
+					funcaoClick : funcaoClick,
+					className: "i3GeoFolder"
 				}, node);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
 			}

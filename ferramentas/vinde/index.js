@@ -101,6 +101,7 @@ i3GEOF.vinde = {
 		try{
 			tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = false;
+			tempNode.className = "i3GeoFolder";
 			tempNode.enableHighlight = true;
 		}
 		catch(e){
