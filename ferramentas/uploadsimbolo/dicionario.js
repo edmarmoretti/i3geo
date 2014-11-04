@@ -3,25 +3,21 @@ i3GEOF.uploadsimbolo.dicionario = {
 	'pastaArmazenamento' : [ {
 		pt : "pasta no servidor onde os dados<br>ser&atilde;o armazenados (opcional)",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'envia' : [ {
 		pt : "Enviar",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'ajudaCaracter' : [ {
 		pt : "N&atilde;o utilize _ no nome do arquivo. Apenas letras e n&uacute;meros s&atilde;o aceitos!!!",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	10 : [ {
 		pt : "",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ]
 };

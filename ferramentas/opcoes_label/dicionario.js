@@ -3,187 +3,156 @@ i3GEOF.proplabel.dicionario = {
 	'msgAguarde' : [ {
 		pt : "Aguarde",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'fonte' : [ {
 		pt : "Fonte",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'tamanho' : [ {
 		pt : "Tamanho",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'larguraConector' : [ {
 		pt : "Largura do conector",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'corConector' : [ {
 		pt : "Cor do conector",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'angulo' : [ {
 		pt : "&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO ou FOLLOW (segue a linha), nesses casos, a fonte n&atilde;o pode ser do tipo bitmap)",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'deslocamento' : [ {
 		pt : "Deslocamento do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'corTexto' : [ {
 		pt : "Cor do texto",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'corMascara' : [ {
 		pt : "Cor da m&aacute;scara de um pixel de entorno",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'posicionamento' : [ {
 		pt : "Posicionamento",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'automatico' : [ {
 		pt : "autom&aacute;tico",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'superiorEsquerdo' : [ {
 		pt : "superior esquerdo",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'superiorCentro' : [ {
 		pt : "superior centro",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'superiorDireito' : [ {
 		pt : "superior direito",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'centroEsquerdo' : [ {
 		pt : "centro esquerdo",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'centro' : [ {
 		pt : "centro",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'centroDireito' : [ {
 		pt : "centro direito",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'inferiorEsquerdo' : [ {
 		pt : "inferior esquerdo",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'inferiorCentro' : [ {
 		pt : "inferior centro",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'inferiorDireito' : [ {
 		pt : "inferior direito",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'corFundo' : [ {
 		pt : "Cor do fundo",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'corSombraFundo' : [ {
 		pt : "Cor da sombra do fundo",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'deslocamentoSombraFundo' : [ {
 		pt : "Deslocamento da sombra do fundo",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'corTextoFundo' : [ {
 		pt : "Cor do texto de fundo (duplicado)",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'deslocamentoTextoFundo' : [ {
 		pt : "Deslocamento do texto de fundo (duplicado)",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'forcaColisaoTexto' : [ {
 		pt : "For&ccedil;a colis&otilde;es entre textos?",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'distanciaMinimaTextos' : [ {
 		pt : "Dist&acirc;ncia m&iacute;nima entre textos duplicados (em pixel)",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'tamanhoMinimoElemento' : [ {
 		pt : "Tamanho m&iacute;nimo do elemento cartogr&aacute;fico(em pixel)",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'textoUltrapassaMapa' : [ {
 		pt : "O texto pode ultrapassar o mapa?",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'caracterQuebraTexto' : [ {
 		pt : "Caractere usado para indicar uma quebra de texto",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'propriedadesTexto' : [ {
 		pt : "Propriedades do texto",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ]
 };

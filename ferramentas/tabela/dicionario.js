@@ -203,49 +203,41 @@ i3GEOF.tabela.dicionario = {
 	'atualizaAoNavegar' : [ {
 		pt : "Atualiza a listagem ao navegar",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	"grafico" : [ {
 		pt : "Gr&aacute;fico",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	"vinctab" : [ {
 		pt : "V&iacute;nculos entre as tabelas abertas",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	"vinculos" : [ {
 		pt : "V&iacute;nculos",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'selecionaTabela' : [ {
 		pt : "Escolha uma tabela",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'selecionaSegundaTabela' : [ {
 		pt : "Escolha uma segunda tabela",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'criaVinculo' : [ {
 		pt : "Criar v&iacute;nculo",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'colunaLigacao' : [ {
 		pt : "Coluna de liga&ccedil;&atilde;o",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ]
 };

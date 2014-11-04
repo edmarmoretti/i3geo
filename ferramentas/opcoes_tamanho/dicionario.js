@@ -3,32 +3,27 @@ i3GEOF.opcoesTamanho.dicionario = {
 	'largura' : [ {
 		pt : "Largura",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'altura' : [ {
 		pt : "Altura",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'valor' : [ {
 		pt : "Valores em pixels",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'testa' : [ {
 		pt : "Testar",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'aplica' : [ {
 		pt : "Aplicar",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'msg' : [ {
 		pt : "Essa operacao afeta apenas a legenda utilizada na ferramenta de impressao do mapa",

@@ -3,67 +3,56 @@ i3GEOF.navegapostgis.dicionario = {
 	'conectaPostgis' : [ {
 		pt : "Conectar com Postgis",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'selecionaConexao' : [ {
 		pt : "Escolha a conex&atilde;o: ",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'selecionaTabela' : [ {
 		pt : "Escolha a tabela ou um dos esquemas abaixo: ",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'nome' : [ {
 		pt : "NOME",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	5 : [ {
 		pt : "TIPO",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'mostra' : [ {
 		pt : "MOSTRA",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
-	'selecionaID': [ {
+	'selecionaID' : [ {
 		pt : "Coluna com o ID &uacute;nico de cada registro",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
-	'selecionaGeom': [ {
+	'selecionaGeom' : [ {
 		pt : "Coluna com a geometria",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'mostraColuna' : [ {
 		pt : "Mostra essa coluna nas listagens",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'aplica' : [ {
 		pt : "Aplicar",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ],
 	'selecionaColuna' : [ {
 		pt : "Escolha a coluna",
 		en : "",
-		es : "",
-		it : ""
+		es : ""
 	} ]
 };

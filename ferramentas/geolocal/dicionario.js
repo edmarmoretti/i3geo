@@ -5,7 +5,7 @@ i3GEOF.geolocal.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'msgNavegador' : [{
+	'msgNavegador' : [ {
 		pt : "Seu navegador n&atilde;o permite a localiza&ccedil;&atilde;o do usu&aacute;rio",
 		en : "",
 		es : ""
