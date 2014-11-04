@@ -1510,5 +1510,65 @@ i3GEOF.graficointerativo1 =
 			if($i(idjanela)){
 				$i(idjanela).style.visibility = "visible";
 			}
+		},
+		sobreposicao: {
+			/**
+			 * Parametros do grafico sobreposto
+			 * E armazenado quando a janela sobreposta e fechada
+			 * Utilizado para recalcular o grafico quando a janela sobreposta for fechada
+			 */
+			parametros: {},
+			/**
+			 * Remove uma sobreposicao e atualiza o grafico
+			 * "s" e o codigo da janela do grafico sobreposto
+			 */
+			remove: function(idjanela,s){
+
+			},
+			/**
+			 * Adiciona ao grafico uma nova sobreposicao
+			 */
+			adiciona: function(idjanela,s){
+
+			},
+			/**
+			 * HTML com o formulario para adicionar sobreposicoes
+			 */
+			html: function(idjanela){
+
+			},
+			/**
+			 * Aplica uma sobreposicao especifica a um grafico
+			 */
+			aplica: function(idjanela,s,grafico){
+
+			},
+			/**
+			 * Verifica todas as sobreposicoes e as aplica ao grafico
+			 * A aplicacao e feita sobre o objeto grafico antes de ser renderizado
+			 * Verifica se a janela com o grafico esta aberta ou se devem ser usados os parametros
+			 * guardados
+			 */
+			restaura: function(idjanela,grafico){
+
+			},
+			/**
+			 * Lista as janelas de graficos abertas
+			 */
+			combojanelas: function(idjanela){
+
+			},
+			/**
+			 * Verifica se o grafico dessa janela tem sobreposicao
+			 */
+			existe: function(idjanela){
+
+			},
+			/**
+			 * Guarda os parametros do grafico correspondente a uma sobreposicao
+			 */
+			guardaParametros: function(idjanela){
+
+			}
 		}
 	};
