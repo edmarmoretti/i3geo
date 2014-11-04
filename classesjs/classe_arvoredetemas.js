@@ -1099,9 +1099,18 @@ i3GEO.arvoreDeTemas = {
 				html : insp,
 				enableHighlight : false,
 				expanded : false,
-				hasIcon : true
+				hasIcon : false
 			}, root);
 		}
+		//titulo do catalogo
+		tempNode = new YAHOO.widget.HTMLNode(
+			{
+				html : "<b>" + $trad("g1a") + "</b>",
+				idmenu : "",
+				enableHighlight : false,
+				expanded : false,
+				hasIcon : false
+			}, root);
 		// icones com as outras opcoes
 		// conforme definido em i3GEO.arvoreDeTemas.OPCOESADICIONAIS
 		outrasOpcoes = i3GEO.arvoreDeTemas.outrasOpcoesHTML();
@@ -1165,7 +1174,8 @@ i3GEO.arvoreDeTemas = {
 								+ $trad("a13") + "</a>",
 						idmenu : "",
 						enableHighlight : false,
-						expanded : false
+						expanded : false,
+						hasIcon : true
 					}, root);
 		}
 		//
@@ -1174,10 +1184,11 @@ i3GEO.arvoreDeTemas = {
 		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.flutuante === true) {
 			tempNode = new YAHOO.widget.HTMLNode(
 					{
-						html : "<a href='#' onclick='i3GEO.arvoreDeTemas.flutuante()' >Abrir em janela flutuante</a>",
+						html : "<a href='#' onclick='i3GEO.arvoreDeTemas.flutuante()' >Abrir em janela flutuante</a><br>",
 						idmenu : "",
 						enableHighlight : false,
-						expanded : false
+						expanded : false,
+						hasIcon : true
 					}, root);
 		}
 		//agrupamento de outras funcoes
