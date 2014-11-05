@@ -48,30 +48,16 @@ i3GEOF.pontoEmPoligono = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.pontoEmPoligono.iniciaDicionario();
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.pontoEmPoligono.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/dicionario.js",
-				"i3GEOF.pontoEmPoligono.iniciaJanelaFlutuante()",
-				"i3GEOF.pontoEmPoligono.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.pontoEmPoligono.iniciaJanelaFlutuante();
-		}
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.pontoEmPoligono.dicionario);
+		return dicionario;
 	},
 	/*
 	Function: inicia
@@ -98,12 +84,8 @@ i3GEOF.pontoEmPoligono = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function(){
-		var ins = '';
-		ins +=	'<div style="padding:5px;background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOpontoEmPoligonoresultado" >';
-		ins +=	'</div>';
-		ins +=	'<div style="top:10px;left:0px;display:block;width:98%;color:red" id="i3GEOpontoEmPoligonofim" >';
-		ins +=	'</div>';
+	html: function() {
+		var ins = Mustache.render(i3GEOF.pontoEmPoligono.MUSTACHE, i3GEOF.pontoEmPoligono.mustacheHash());
 		return ins;
 	},
 	/*

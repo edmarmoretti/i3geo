@@ -224,10 +224,7 @@ i3GEO.analise = {
 		 * Ferramenta ponto em pol&iacute;gono
 		 */
 		pontoempoligono : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.analise.dialogo.pontoempoligono()",
-				"pontoempoligono",
-				"pontoEmPoligono");
+			i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontoempoligono()","pontoempoligono","pontoEmPoligono","dependencias.php","i3GEOF.pontoEmPoligono.iniciaJanelaFlutuante()");
 		},
 		/**
 		 * Function: centromassa
