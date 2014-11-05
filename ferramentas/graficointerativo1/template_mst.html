@@ -43,6 +43,13 @@
 				</a>
 			</div>
 		</li>
+		<li>
+			<div id='{{{idjanela}}}i3GEOgraficointerativo1guia7' style='text-align: center; left: 0px;'>
+				<a>
+					<em>{{{compor}}}</em>
+				</a>
+			</div>
+		</li>
 	</ul>
 </div>
 <br>
@@ -167,7 +174,9 @@
 		<p class='paragrafo'>{{{itemcy}}} :</p>
 		<div class='paragrafo' id='{{{idjanela}}}i3GEOgraficointerativo1ComboY'></div>
 	</div>
-	<br><br><p class='paragrafo'>{{{excluirval}}} :
+	<br>
+	<br>
+	<p class='paragrafo'>{{{excluirval}}} :
 	<div class='styled-select'>
 		<input style='cursor: pointer;' value='' type='text' id='{{{idjanela}}}i3GEOgraficointerativo1excluir' />
 	</div>
@@ -244,5 +253,14 @@
 		<input type=hidden name='svg' value='' />
 	</form>
 </div>
+<!-- Compor sobreposicoes -->
+<div class='guiaobj' id='{{{idjanela}}}i3GEOgraficointerativo1guia7obj' style='left: 1px; display: none; top: -5px'>
+	<p class='paragrafo'>{{{escolherGrafico}}}</p>
+	<div class='styled-select' id='{{{idjanela}}}ComboJanelasGr'></div>
+	<br>
+	<p class='paragrafo'>{{{GrComposicao}}}</p>
+	<div id='{{{idjanela}}}Composicoes'></div>
+</div>
+
 <!-- Div usado para renderizar o grafico -->
 <div id='{{{idjanela}}}i3GEOgraficointerativo1Grafico' style='position: relative; top: -5px; display: none'></div>

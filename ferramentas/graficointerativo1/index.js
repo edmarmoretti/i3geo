@@ -117,7 +117,7 @@ i3GEOF.graficointerativo1 =
 		 * Default: {false}
 		 */
 		dadospuros : false,
-		w: "450px",
+		w: "460px",
 		h: "400px",
 		/**
 		 * Configura o grafico conforme um objeto contendo parametros e opcionalmente os dados Alguns parametros possuem definicoes padrao,
@@ -184,6 +184,10 @@ i3GEOF.graficointerativo1 =
 			}
 			if (!parametros.tipo || parametros.tipo == undefined) {
 				i3GEOF.graficointerativo1.propJanelas[idjanela].tipo = i3GEOF.graficointerativo1.tipo;
+			}
+			//comp guarda a lista de diferentes graficos que formam composicoes
+			if (!parametros.comp || parametros.comp == undefined) {
+				i3GEOF.graficointerativo1.propJanelas[idjanela].comp = [];
 			}
 			return idjanela;
 		},
@@ -428,7 +432,7 @@ i3GEOF.graficointerativo1 =
 				t.style.position = "relative";
 				t.style.top = "-5px";
 				t.visibility = "visible";
-				i3GEOF.graficointerativo1.tabela2dados(idjanela);
+				i3GEOF.graficointerativo1.tabela2grafico(idjanela);
 			};
 			$i(idjanela + "i3GEOgraficointerativo1guia5").onclick =
 				function() {
@@ -466,6 +470,12 @@ i3GEOF.graficointerativo1 =
 					form.action = form.action + "?" + "w=" + w + "&h=" + h;
 					form.submit();
 				};
+			$i(idjanela + "i3GEOgraficointerativo1guia7").onclick =
+				function() {
+					i3GEOF.graficointerativo1.composicao.html(idjanela);
+					i3GEO.guias.mostraGuiaFerramenta(idjanela + "i3GEOgraficointerativo1guia7", idjanela + "i3GEOgraficointerativo1guia");
+				};
+
 			i3GEOF.graficointerativo1.ativaFoco(idjanela);
 			i3GEOF.graficointerativo1.comboTemas(idjanela);
 			b = new YAHOO.widget.Button(idjanela + "i3GEOgraficointerativo1botao1", {
@@ -551,7 +561,7 @@ i3GEOF.graficointerativo1 =
 				mudaTamanhoGrafico = function() {
 					var t = $i(idjanela + "i3GEOgraficointerativo1Grafico");
 					if (t.style.display === "block") {
-						i3GEOF.graficointerativo1.tabela2dados(idjanela);
+						i3GEOF.graficointerativo1.tabela2grafico(idjanela);
 					}
 				};
 				duplica = function() {
@@ -865,6 +875,8 @@ i3GEOF.graficointerativo1 =
 		 *
 		 * <GRAFICOSELECAO>
 		 */
+		contadorDados: 0,
+		janelasEsperando: [],
 		obterDados : function(idjanela) {
 			if (!i3GEO.Interface) {
 				return;
@@ -880,6 +892,7 @@ i3GEOF.graficointerativo1 =
 			} else {
 				tema = tema.value;
 			}
+			i3GEOF.graficointerativo1.contadorDados++;
 			excluir = $i(idjanela + "i3GEOgraficointerativo1excluir").value;
 			cp = new cpaint();
 			tipo = $i(idjanela + "i3GEOgraficointerativo1TipoAgregacao").value;
@@ -936,9 +949,19 @@ i3GEOF.graficointerativo1 =
 				return;
 			}
 			monta = function(retorno) {
+				//o contador e utilizado para disparar processos apenas quando todas as operacoes tiverem terminado
+				i3GEOF.graficointerativo1.contadorDados--;
 				i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "hidden";
 				i3GEOF.graficointerativo1.montaTabelaDados(idjanela, retorno);
-				$i(idjanela + "i3GEOgraficointerativo1guia4").onclick.call();
+				i3GEOF.graficointerativo1.janelasEsperando.push(idjanela);
+				if(i3GEOF.graficointerativo1.contadorDados === 0){
+					var n = i3GEOF.graficointerativo1.janelasEsperando.length,
+						i;
+					for(i=0;i<n;i++){
+						$i(i3GEOF.graficointerativo1.janelasEsperando[i] + "i3GEOgraficointerativo1guia4").onclick.call();
+					}
+					i3GEOF.graficointerativo1.janelasEsperando = [];
+				}
 			};
 			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "visible";
 			cp.set_response_type("JSON");
@@ -1078,24 +1101,22 @@ i3GEOF.graficointerativo1 =
 			}
 			return csv;
 		},
-		/**
-		 * Function: tabela2dados
-		 *
-		 * Obt&eacute;m os dados da tabela para compor o gr&aacute;fico
-		 */
-		tabela2dados : function(idjanela) {
+		tabela2grafico: function(idjanela){
 			if (i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility === "visible") {
 				return;
 			}
 			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "visible";
-			var colunas = i3GEOF.graficointerativo1.nomesColunas(idjanela), ncolunas = colunas[0].length, temp = 0, ultimo = 0, inputs =
-				$i(idjanela + "i3GEOgraficointerativo1Dados").getElementsByTagName("input"), ninputs = inputs.length, tipoColuna = "String", metadados =
-				[], i, j, acumulado = [], acum, cores = [], par = [], total = 0, menor = 0, maior = 0, legendaX = "", legendaY = "", dados =
-				{}, xInclinado = $i(idjanela + "i3GEOgraficointerativo1xInclinado").checked;
 
-			if (ninputs > 0) {
-				menor = inputs[1].value * 1;
-			}
+			var titulo = "",
+				menor = 0,
+				legendaX = "", 
+				legendaY = "", 
+				dados =	{}, 
+				xInclinado = false;
+			
+			var dados = i3GEOF.graficointerativo1.tabela2dados(idjanela);
+
+			xInclinado = $i(idjanela + "i3GEOgraficointerativo1xInclinado").checked;
 			if ($i(idjanela + "i3GEOgraficointerativo1ComboTemasId")) {
 				titulo =
 					$i(idjanela + "i3GEOgraficointerativo1ComboTemasId").options[$i(idjanela + "i3GEOgraficointerativo1ComboTemasId").options.selectedIndex].text;
@@ -1108,6 +1129,71 @@ i3GEOF.graficointerativo1 =
 			}
 			if ($i(idjanela + "i3GEOgraficointerativo1ComboYid")) {
 				legendaY = $i(idjanela + "i3GEOgraficointerativo1ComboYidTitulo").value;
+			}
+
+			if (legendaX == legendaY && (legendaX != "" && legendaY != "")) {
+				menor = 0;
+				legendaX += " (" + $trad('casos', i3GEOF.graficointerativo1.dicionario) + ")";
+				legendaY += " (" + $trad('numeroCasos', i3GEOF.graficointerativo1.dicionario) + ")";
+			}
+
+			switch (i3GEOF.graficointerativo1.propJanelas[idjanela].tipo) {
+			case "bar_1":
+				legendaX = "";
+				i3GEOF.graficointerativo1.barras(idjanela, dados["dados"], dados["maior"], dados["cores"], legendaY, legendaX, xInclinado, "vertical");
+				break;
+			case "bar_2":
+				legendaX = "";
+				i3GEOF.graficointerativo1.barras(idjanela, dados["dados"], dados["maior"], dados["cores"], legendaY, legendaX, xInclinado, "horizontal");
+				break;
+			case "linha_1":
+				legendaX = "";
+				i3GEOF.graficointerativo1.linhas(idjanela, dados["dados"], dados["maior"], dados["cores"], legendaY, legendaX, xInclinado);
+				break;
+			case "pizza_1":
+				legendaX = "";
+				i3GEOF.graficointerativo1.pizzas(idjanela, dados["dados"], dados["maior"], dados["cores"], legendaY, legendaX);
+				break;
+			case "ponto_1":
+				i3GEOF.graficointerativo1.pontos(idjanela, dados["dados"], dados["maior"], dados["cores"], legendaY, legendaX);
+				break;
+			case "area_1":
+				legendaX = "";
+				i3GEOF.graficointerativo1.areas(idjanela, dados["dados"], dados["maior"], dados["cores"], legendaY, legendaX, xInclinado);
+				break;
+			case "arvore_1":
+				i3GEOF.graficointerativo1.arvores(idjanela, dados["dados"], dados["maior"], dados["cores"], legendaY, legendaX);
+				break;
+			default:
+				// alert($trad("escolhatipo", i3GEOF.graficointerativo1.dicionario));
+			}
+		},
+		/**
+		 * Function: tabela2dados
+		 *
+		 * Obt&eacute;m os dados da tabela para compor o gr&aacute;fico
+		 */
+		tabela2dados : function(idjanela) {
+			var colunas = i3GEOF.graficointerativo1.nomesColunas(idjanela),
+			ncolunas = colunas[0].length,
+			temp = 0,
+			ultimo = 0,
+			inputs = $i(idjanela + "i3GEOgraficointerativo1Dados").getElementsByTagName("input"), 
+			ninputs = inputs.length, 
+			tipoColuna = "String", 
+			metadados =	[], 
+			i, 
+			j, 
+			acumulado = [], 
+			acum, 
+			cores = [], 
+			par = [], 
+			total = 0, 
+			menor = 0, 
+			maior = 0,  
+			dados =	{};
+			if (ninputs > 0) {
+				menor = inputs[1].value * 1;
 			}
 			if (ncolunas === 2) {
 				for (i = 0; i < ninputs; i = i + 3) {
@@ -1152,11 +1238,6 @@ i3GEOF.graficointerativo1 =
 				}
 				cores = colunas[2];
 			}
-			if (legendaX == legendaY && (legendaX != "" && legendaY != "")) {
-				menor = 0;
-				legendaX += " (" + $trad('casos', i3GEOF.graficointerativo1.dicionario) + ")";
-				legendaY += " (" + $trad('numeroCasos', i3GEOF.graficointerativo1.dicionario) + ")";
-			}
 
 			for (j = 0; j < ncolunas; j++) {
 				metadados.push({
@@ -1170,36 +1251,12 @@ i3GEOF.graficointerativo1 =
 				"resultset" : par,
 				"metadata" : metadados
 			};
-			switch (i3GEOF.graficointerativo1.propJanelas[idjanela].tipo) {
-			case "bar_1":
-				legendaX = "";
-				i3GEOF.graficointerativo1.barras(idjanela, dados, maior, cores, legendaY, legendaX, xInclinado, "vertical");
-				break;
-			case "bar_2":
-				legendaX = "";
-				i3GEOF.graficointerativo1.barras(idjanela, dados, maior, cores, legendaY, legendaX, xInclinado, "horizontal");
-				break;
-			case "linha_1":
-				legendaX = "";
-				i3GEOF.graficointerativo1.linhas(idjanela, dados, maior, cores, legendaY, legendaX, xInclinado);
-				break;
-			case "pizza_1":
-				legendaX = "";
-				i3GEOF.graficointerativo1.pizzas(idjanela, dados, maior, cores, legendaY, legendaX);
-				break;
-			case "ponto_1":
-				i3GEOF.graficointerativo1.pontos(idjanela, dados, maior, cores, legendaY, legendaX);
-				break;
-			case "area_1":
-				legendaX = "";
-				i3GEOF.graficointerativo1.areas(idjanela, dados, maior, cores, legendaY, legendaX, xInclinado);
-				break;
-			case "arvore_1":
-				i3GEOF.graficointerativo1.arvores(idjanela, dados, maior, cores, legendaY, legendaX);
-				break;
-			default:
-				// alert($trad("escolhatipo", i3GEOF.graficointerativo1.dicionario));
-			}
+			return {
+				"dados": dados,
+				"cores": cores,
+				"menor": menor,
+				"maior": maior
+			};
 		},
 		/**
 		 * Function: excluilinha
@@ -1337,7 +1394,7 @@ i3GEOF.graficointerativo1 =
 			return config;
 		},
 		barras : function(idjanela, dados, maior, cores, legendaY, legendaX, xInclinado, tipo) {
-			var ct = true, sr = false, config = i3GEOF.graficointerativo1.configDefault(idjanela, dados, maior, cores, legendaY, legendaX);
+			var contador = 0, ct = true, sr = false, config = i3GEOF.graficointerativo1.configDefault(idjanela, dados, maior, cores, legendaY, legendaX);
 			if (tipo === "horizontal") {
 				config.orientation = 'horizontal';
 			}
@@ -1346,18 +1403,24 @@ i3GEOF.graficointerativo1 =
 				config.extensionPoints.xAxisLabel_textBaseline = 'top';
 				config.extensionPoints.xAxisLabel_textAlign = 'right';
 			}
+			config.colors = cores;
+			//
+			//pega os parametros de graficos que fazem composicao com este
+			//
+			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
+			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
+			
 			if (dados.resultset && dados.resultset[0] && dados.resultset[0].length > 2) {
 				config.stacked = $i(idjanela + "i3GEOFgraficointerativo1ativaStacked").checked;
 				config.legend = true;
 				ct = true;
 				sr = $i(idjanela + "i3GEOFgraficointerativo1ativaRowsInColumns").checked;
-				config.colors = cores;
-			} else {
-				if (cores != "") {
-					config.extensionPoints.bar_fillStyle = function(d) {
-						return cores[this.index];
-					};
-				}
+
+			}
+			else if (cores != "") {
+				config.extensionPoints.bar_fillStyle = function(d) {
+					return config.colors[this.index];
+				};
 			}
 			new pvc.BarChart(config).setData(dados, {
 				crosstabMode : ct,
@@ -1384,6 +1447,12 @@ i3GEOF.graficointerativo1 =
 				sr = $i(idjanela + "i3GEOFgraficointerativo1ativaRowsInColumns").checked;
 				config.colors = cores;
 			}
+			//
+			//pega os parametros de graficos que fazem composicao com este
+			//
+			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
+			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
+
 			new pvc.LineChart(config).setData(dados, {
 				crosstabMode : ct,
 				seriesInRows : sr
@@ -1410,6 +1479,12 @@ i3GEOF.graficointerativo1 =
 				sr = $i(idjanela + "i3GEOFgraficointerativo1ativaRowsInColumns").checked;
 				config.colors = cores;
 			}
+			//
+			//pega os parametros de graficos que fazem composicao com este
+			//
+			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
+			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
+			
 			new pvc.LineChart(config).setData(dados, {
 				crosstabMode : ct,
 				seriesInRows : sr
@@ -1439,6 +1514,12 @@ i3GEOF.graficointerativo1 =
 			if (cores != "") {
 				config.colors = cores;
 			}
+			//
+			//pega os parametros de graficos que fazem composicao com este
+			//
+			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
+			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
+			
 			new pvc.TreemapChart(config).setData(dados, {
 				crosstabMode : false
 			}).render();
@@ -1468,6 +1549,12 @@ i3GEOF.graficointerativo1 =
 			if (cores != "") {
 				config.colors = cores;
 			}
+			//
+			//pega os parametros de graficos que fazem composicao com este
+			//
+			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
+			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
+			
 			new pvc.PieChart(config).setData(dados, {
 				crosstabMode : false
 			}).render();
@@ -1503,6 +1590,12 @@ i3GEOF.graficointerativo1 =
 			if (cores != "") {
 				config.colors = cores;
 			}
+			//
+			//pega os parametros de graficos que fazem composicao com este
+			//
+			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
+			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
+
 			new pvc.DotChart(config).setData(dados, {
 				crosstabMode : false
 			}).render();
@@ -1511,7 +1604,11 @@ i3GEOF.graficointerativo1 =
 				$i(idjanela).style.visibility = "visible";
 			}
 		},
-		sobreposicao: {
+		/**
+		 * Gerencia a sobreposicao de graficos em um unico
+		 * i3GEOF.graficointerativo1.propJanelas[idjanela].comp
+		 */
+		composicao: {
 			/**
 			 * Parametros do grafico sobreposto
 			 * E armazenado quando a janela sobreposta e fechada
@@ -1523,40 +1620,160 @@ i3GEOF.graficointerativo1 =
 			 * "s" e o codigo da janela do grafico sobreposto
 			 */
 			remove: function(idjanela,s){
-
+				var c = i3GEOF.graficointerativo1.propJanelas[idjanela].comp;
+				c.remove(s);
+				i3GEOF.graficointerativo1.composicao.listaComp(idjanela);
 			},
 			/**
 			 * Adiciona ao grafico uma nova sobreposicao
 			 */
 			adiciona: function(idjanela,s){
-
+				if(s === ""){
+					return;
+				}
+				var c = i3GEOF.graficointerativo1.propJanelas[idjanela].comp;
+				c.remove(s);
+				c.push(s);
+				i3GEOF.graficointerativo1.composicao.listaComp(idjanela);
 			},
 			/**
 			 * HTML com o formulario para adicionar sobreposicoes
 			 */
 			html: function(idjanela){
-
-			},
-			/**
-			 * Aplica uma sobreposicao especifica a um grafico
-			 */
-			aplica: function(idjanela,s,grafico){
-
+				i3GEOF.graficointerativo1.composicao.combojanelas(idjanela);
+				i3GEOF.graficointerativo1.composicao.listaComp(idjanela);
 			},
 			/**
 			 * Verifica todas as sobreposicoes e as aplica ao grafico
-			 * A aplicacao e feita sobre o objeto grafico antes de ser renderizado
+			 * A aplicacao e feita sobre o objeto de dados antes de ser renderizado
 			 * Verifica se a janela com o grafico esta aberta ou se devem ser usados os parametros
 			 * guardados
 			 */
-			restaura: function(idjanela,grafico){
-
+			incluiDados: function(idjanela,dados){
+				try{
+					var c = i3GEOF.graficointerativo1.propJanelas[idjanela].comp,
+						n = c.length,
+						i,
+						nmeta,
+						dadosNovos,
+						metaNovos,
+						rsNovos,
+						coresNovos,
+						rs,
+						nrs = [],
+						a = {},
+						b = {},
+						e = [],
+						d,
+						j,
+						nj;
+					if(n > 0){
+						for(i=0;i<n;i++){
+							//inclui os metadados do grafico que sera sobreposto nos metadados do grafico original
+							dadosNovos = i3GEOF.graficointerativo1.tabela2dados(c[i]);
+							metaNovos = dadosNovos.dados.metadata;
+							coresNovos = dadosNovos.cores;
+							nmeta = dados.metadata.length;
+							nj = metaNovos.length;
+							for(j = 0;j<nj;j++){
+								nmeta++;
+								dados.metadata.push({
+									"colIndex" : nmeta,
+									"colType" : metaNovos[j].colType,
+									"colName" : metaNovos[j].colName
+								})
+							}
+							//adiciona os dados
+							rs = dados.resultset;
+							nj = rs.length;
+							//hash contendo os valores originais
+							for(j=0;j<nj;j++){
+								a[rs[j][0]] =rs[j]; 
+							}
+							rsNovos = dadosNovos.dados.resultset;
+							nj = rsNovos.length;
+							//hash contendo os valores novos
+							for(j=0;j<nj;j++){
+								b[rsNovos[j][0]] =rsNovos[j]; 
+							}
+							//busca nos valores novos os dados com base na chave do hash original
+							for(d in a){
+								a[d].push(b[d][1]);
+								e.push(a[d]);
+							}
+							dados.resultset = e;
+						}
+					}
+					return dados;
+				}
+				catch(e){
+					return dados;
+				}
+			},
+			/**
+			 * Verifica todas as sobreposicoes e as aplica ao grafico
+			 * A aplicacao e feita sobre o objeto de configuracao antes de ser renderizado
+			 * Verifica se a janela com o grafico esta aberta ou se devem ser usados os parametros
+			 * guardados
+			 */
+			incluiConfig: function(idjanela,config){
+				try{
+					var c = i3GEOF.graficointerativo1.propJanelas[idjanela].comp,
+						n = c.length,
+						i,
+						nj,
+						j,
+						ncores = [];
+					if(n > 0){
+						for(i=0;i<n;i++){
+							//pega as cores
+							dadosNovos = i3GEOF.graficointerativo1.tabela2dados(c[i]);
+							coresNovos = dadosNovos.cores;
+							nj = coresNovos.length;
+							for(j=0;j<nj;j++){
+								ncores.push(coresNovos[j]);
+								ncores.push(config.colors[j]);
+							}
+						}
+						config.colors = ncores;
+					}
+					return config;
+				}
+				catch(e){
+					return config;
+				}
+			},
+			/**
+			 * Cria botoes para cada composicao de um grafico
+			 */
+			listaComp: function(idjanela){
+				var c = i3GEOF.graficointerativo1.propJanelas[idjanela].comp,
+					n = c.length,
+					ins = "",
+					i;
+				for( i = 0; i < n; i++){
+					ins += "<div class='i3geoForm150 i3geoFormSemIcone' style='float: left; margin-left: 5px; margin-top: 5px;' onclick='i3GEOF.graficointerativo1.composicao.remove(\"" + idjanela + "\",\"" + c[i] + "\")'>"
+						+ "<input type=text value='" + c[i] + "' /> X"
+						+ "</div>";
+				}
+				$i(idjanela + "Composicoes").innerHTML = ins;
 			},
 			/**
 			 * Lista as janelas de graficos abertas
 			 */
 			combojanelas: function(idjanela){
+				var n = i3GEOF.graficointerativo1.janelas.length,
+					ins = "",
+					i;
+				ins += "<select onchange='i3GEOF.graficointerativo1.composicao.adiciona(\"" + idjanela + "\",this.value)'>"
+					+ "<option value=''>---</option>";
 
+				for(i = 0; i < n; i++){
+					if(i3GEOF.graficointerativo1.janelas[i] != idjanela)
+					ins += "<option>" + i3GEOF.graficointerativo1.janelas[i] + "</option>";
+				}
+				ins += "</select>";
+				$i(idjanela + "ComboJanelasGr").innerHTML = ins;
 			},
 			/**
 			 * Verifica se o grafico dessa janela tem sobreposicao
