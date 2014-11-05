@@ -1681,7 +1681,7 @@ i3GEOF.graficointerativo1 =
 									dados.metadata.push({
 										"colIndex" : nmeta,
 										"colType" : metaNovos[j].colType,
-										"colName" : metaNovos[j].colName
+										"colName" : metaNovos[j].colName + " (" + c[i] + ")"
 									});
 								}
 							}
