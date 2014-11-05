@@ -2918,7 +2918,7 @@ i3GEO.arvoreDeTemas = {
 			i3GEO.util
 					.scriptTag(i3GEO.configura.locaplic
 							+ "/ferramentas/vinde/dependencias.php",
-							"i3GEOF.vinde.criaJanelaFlutuante()",
+							"i3GEOF.vinde.iniciaJanelaFlutuante()",
 							"i3GEOF.vinde_script");
 		},
 		/**
