@@ -1417,7 +1417,6 @@ i3GEOF.graficointerativo1 =
 				config.legend = true;
 				ct = true;
 				sr = $i(idjanela + "i3GEOFgraficointerativo1ativaRowsInColumns").checked;
-
 			}
 			else if (cores != "") {
 				config.extensionPoints.bar_fillStyle = function(d) {
@@ -1441,6 +1440,11 @@ i3GEOF.graficointerativo1 =
 				config.extensionPoints.xAxisLabel_textAlign = 'right';
 			}
 			config.dotsVisible = true;
+			//
+			//pega os parametros de graficos que fazem composicao com este
+			//
+			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
+			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
 
 			if (dados.resultset && dados.resultset[0] && dados.resultset[0].length > 2) {
 				config.stacked = $i(idjanela + "i3GEOFgraficointerativo1ativaStacked").checked;
@@ -1449,12 +1453,6 @@ i3GEOF.graficointerativo1 =
 				sr = $i(idjanela + "i3GEOFgraficointerativo1ativaRowsInColumns").checked;
 				config.colors = cores;
 			}
-			//
-			//pega os parametros de graficos que fazem composicao com este
-			//
-			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
-			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
-
 			new pvc.LineChart(config).setData(dados, {
 				crosstabMode : ct,
 				seriesInRows : sr
@@ -1473,6 +1471,11 @@ i3GEOF.graficointerativo1 =
 			}
 			config.dotsVisible = true;
 			config.areasVisible = true;
+			//
+			//pega os parametros de graficos que fazem composicao com este
+			//
+			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
+			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
 
 			if (dados.resultset && dados.resultset[0] && dados.resultset[0].length > 2) {
 				config.stacked = $i(idjanela + "i3GEOFgraficointerativo1ativaStacked").checked;
@@ -1481,11 +1484,6 @@ i3GEOF.graficointerativo1 =
 				sr = $i(idjanela + "i3GEOFgraficointerativo1ativaRowsInColumns").checked;
 				config.colors = cores;
 			}
-			//
-			//pega os parametros de graficos que fazem composicao com este
-			//
-			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
-			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
 
 			new pvc.LineChart(config).setData(dados, {
 				crosstabMode : ct,
@@ -1513,14 +1511,15 @@ i3GEOF.graficointerativo1 =
 					return "<span style=color:yellow >" + cat + "</span><br>" + format("#.###,", val);
 				}
 			};
-			if (cores != "") {
-				config.colors = cores;
-			}
 			//
 			//pega os parametros de graficos que fazem composicao com este
 			//
 			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
 			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
+
+			if (cores != "") {
+				config.colors = cores;
+			}
 
 			new pvc.TreemapChart(config).setData(dados, {
 				crosstabMode : false
@@ -1548,14 +1547,15 @@ i3GEOF.graficointerativo1 =
 					slice_strokeStyle : 'white'
 				}
 			};
-			if (cores != "") {
-				config.colors = cores;
-			}
 			//
 			//pega os parametros de graficos que fazem composicao com este
 			//
 			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
 			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
+
+			if (cores != "") {
+				config.colors = cores;
+			}
 
 			new pvc.PieChart(config).setData(dados, {
 				crosstabMode : false
@@ -1589,14 +1589,15 @@ i3GEOF.graficointerativo1 =
 					return "<span style=color:yellow >X: " + cat + "</span><br>Y: " + format("#.###,", val);
 				}
 			};
-			if (cores != "") {
-				config.colors = cores;
-			}
 			//
 			//pega os parametros de graficos que fazem composicao com este
 			//
 			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
 			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
+
+			if (cores != "") {
+				config.colors = cores;
+			}
 
 			new pvc.DotChart(config).setData(dados, {
 				crosstabMode : false
