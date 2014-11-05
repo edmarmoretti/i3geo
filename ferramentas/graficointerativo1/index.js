@@ -65,6 +65,7 @@ i3GEOF.graficointerativo1 =
 			dicionario["idjanelaA"] = '"'+idjanela+'"';
 			dicionario["locaplic"] = i3GEO.configura.locaplic;
 			dicionario["prop"] = $trad('p13');
+			dicionario["asp"] = '"';
 			return dicionario;
 		},
 		/**
@@ -737,7 +738,9 @@ i3GEOF.graficointerativo1 =
 			}
 		},
 		alteraFatorPixel : function(tipo, idjanela) {
-			var delta = 20, temp = $i(idjanela + "i3GEOgraficointerativo1FatorTamanho"), v = parseInt(temp.value, 10);
+			var delta = 20,
+				temp = $i(idjanela + "i3GEOgraficointerativo1FatorTamanho"),
+				v = parseInt(temp.value, 10);
 			if (temp.value >= 0) {
 				if (tipo === "mais") {
 					temp.value = v + delta;
@@ -750,10 +753,10 @@ i3GEOF.graficointerativo1 =
 			}
 			$i(idjanela + "i3GEOgraficointerativo1guia4").onclick.call();
 		},
-		alteraFatorPixelMenos : function(tipo, idjanela) {
+		alteraFatorPixelMenos : function(idjanela) {
 			i3GEOF.graficointerativo1.alteraFatorPixel("menos", idjanela);
 		},
-		alteraFatorPixelMais : function(tipo, idjanela) {
+		alteraFatorPixelMais : function(idjanela) {
 			i3GEOF.graficointerativo1.alteraFatorPixel("mais", idjanela);
 		},
 		/**
@@ -1107,16 +1110,15 @@ i3GEOF.graficointerativo1 =
 			}
 			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "visible";
 
-			var titulo = "",
-				menor = 0,
-				legendaX = "", 
-				legendaY = "", 
-				dados =	{}, 
+			var legendaX = "",
+				legendaY = "",
+				dados =	{},
 				xInclinado = false;
-			
-			var dados = i3GEOF.graficointerativo1.tabela2dados(idjanela);
+
+			dados = i3GEOF.graficointerativo1.tabela2dados(idjanela);
 
 			xInclinado = $i(idjanela + "i3GEOgraficointerativo1xInclinado").checked;
+			/*
 			if ($i(idjanela + "i3GEOgraficointerativo1ComboTemasId")) {
 				titulo =
 					$i(idjanela + "i3GEOgraficointerativo1ComboTemasId").options[$i(idjanela + "i3GEOgraficointerativo1ComboTemasId").options.selectedIndex].text;
@@ -1124,6 +1126,7 @@ i3GEOF.graficointerativo1 =
 			if (i3GEOF.graficointerativo1.titulo != "") {
 				titulo = i3GEOF.graficointerativo1.titulo;
 			}
+			*/
 			if ($i(idjanela + "i3GEOgraficointerativo1ComboXid")) {
 				legendaX = $i(idjanela + "i3GEOgraficointerativo1ComboXidTitulo").value;
 			}
@@ -1132,7 +1135,6 @@ i3GEOF.graficointerativo1 =
 			}
 
 			if (legendaX == legendaY && (legendaX != "" && legendaY != "")) {
-				menor = 0;
 				legendaX += " (" + $trad('casos', i3GEOF.graficointerativo1.dicionario) + ")";
 				legendaY += " (" + $trad('numeroCasos', i3GEOF.graficointerativo1.dicionario) + ")";
 			}
@@ -1178,19 +1180,19 @@ i3GEOF.graficointerativo1 =
 			ncolunas = colunas[0].length,
 			temp = 0,
 			ultimo = 0,
-			inputs = $i(idjanela + "i3GEOgraficointerativo1Dados").getElementsByTagName("input"), 
-			ninputs = inputs.length, 
-			tipoColuna = "String", 
-			metadados =	[], 
-			i, 
-			j, 
-			acumulado = [], 
-			acum, 
-			cores = [], 
-			par = [], 
-			total = 0, 
-			menor = 0, 
-			maior = 0,  
+			inputs = $i(idjanela + "i3GEOgraficointerativo1Dados").getElementsByTagName("input"),
+			ninputs = inputs.length,
+			tipoColuna = "String",
+			metadados =	[],
+			i,
+			j,
+			acumulado = [],
+			acum,
+			cores = [],
+			par = [],
+			total = 0,
+			menor = 0,
+			maior = 0,
 			dados =	{};
 			if (ninputs > 0) {
 				menor = inputs[1].value * 1;
@@ -1394,7 +1396,7 @@ i3GEOF.graficointerativo1 =
 			return config;
 		},
 		barras : function(idjanela, dados, maior, cores, legendaY, legendaX, xInclinado, tipo) {
-			var contador = 0, ct = true, sr = false, config = i3GEOF.graficointerativo1.configDefault(idjanela, dados, maior, cores, legendaY, legendaX);
+			var ct = true, sr = false, config = i3GEOF.graficointerativo1.configDefault(idjanela, dados, maior, cores, legendaY, legendaX);
 			if (tipo === "horizontal") {
 				config.orientation = 'horizontal';
 			}
@@ -1409,7 +1411,7 @@ i3GEOF.graficointerativo1 =
 			//
 			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
 			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
-			
+
 			if (dados.resultset && dados.resultset[0] && dados.resultset[0].length > 2) {
 				config.stacked = $i(idjanela + "i3GEOFgraficointerativo1ativaStacked").checked;
 				config.legend = true;
@@ -1484,7 +1486,7 @@ i3GEOF.graficointerativo1 =
 			//
 			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
 			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
-			
+
 			new pvc.LineChart(config).setData(dados, {
 				crosstabMode : ct,
 				seriesInRows : sr
@@ -1519,7 +1521,7 @@ i3GEOF.graficointerativo1 =
 			//
 			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
 			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
-			
+
 			new pvc.TreemapChart(config).setData(dados, {
 				crosstabMode : false
 			}).render();
@@ -1554,7 +1556,7 @@ i3GEOF.graficointerativo1 =
 			//
 			dados = i3GEOF.graficointerativo1.composicao.incluiDados(idjanela,dados);
 			config = i3GEOF.graficointerativo1.composicao.incluiConfig(idjanela,config);
-			
+
 			new pvc.PieChart(config).setData(dados, {
 				crosstabMode : false
 			}).render();
@@ -1658,13 +1660,11 @@ i3GEOF.graficointerativo1 =
 						dadosNovos,
 						metaNovos,
 						rsNovos,
-						coresNovos,
 						rs,
-						nrs = [],
 						a = {},
 						b = {},
 						e = [],
-						d,
+						d = "",
 						j,
 						nj;
 					if(n > 0){
@@ -1672,29 +1672,30 @@ i3GEOF.graficointerativo1 =
 							//inclui os metadados do grafico que sera sobreposto nos metadados do grafico original
 							dadosNovos = i3GEOF.graficointerativo1.tabela2dados(c[i]);
 							metaNovos = dadosNovos.dados.metadata;
-							coresNovos = dadosNovos.cores;
 							nmeta = dados.metadata.length;
 							nj = metaNovos.length;
 							for(j = 0;j<nj;j++){
-								nmeta++;
-								dados.metadata.push({
-									"colIndex" : nmeta,
-									"colType" : metaNovos[j].colType,
-									"colName" : metaNovos[j].colName
-								})
+								if(metaNovos[j].colName != ""){
+									nmeta++;
+									dados.metadata.push({
+										"colIndex" : nmeta,
+										"colType" : metaNovos[j].colType,
+										"colName" : metaNovos[j].colName
+									});
+								}
 							}
 							//adiciona os dados
 							rs = dados.resultset;
 							nj = rs.length;
 							//hash contendo os valores originais
 							for(j=0;j<nj;j++){
-								a[rs[j][0]] =rs[j]; 
+								a[rs[j][0]] =rs[j];
 							}
 							rsNovos = dadosNovos.dados.resultset;
 							nj = rsNovos.length;
 							//hash contendo os valores novos
 							for(j=0;j<nj;j++){
-								b[rsNovos[j][0]] =rsNovos[j]; 
+								b[rsNovos[j][0]] =rsNovos[j];
 							}
 							//busca nos valores novos os dados com base na chave do hash original
 							for(d in a){
