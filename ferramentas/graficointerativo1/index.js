@@ -1222,7 +1222,7 @@ i3GEOF.graficointerativo1 =
 						temp = (temp * 100) / total;
 					}
 					par.push([
-						inputs[i].value + " ",
+						inputs[i].value + "",
 						temp
 					]);
 				}
@@ -1339,6 +1339,33 @@ i3GEOF.graficointerativo1 =
 					var cat = this.scene.datum.atoms['category'].value, val = this.scene.datum.atoms['value'].value;
 					return "<span style=color:yellow >" + cat + "</span><br>" + format("#.###,", val);
 				},
+				clickAction : function(scene) {
+
+					var funcao1 = function(){
+						var filtro,coluna = $i(idjanela + "i3GEOgraficointerativo1ComboXid").value,
+							val = scene.atoms.category.value;
+						if (val*1){
+							filtro = "(["+coluna+"] = "+val+")";
+						}
+						else{
+							filtro = "(|["+coluna+"]| = |"+val.trim()+"|)";
+						}
+						i3GEOF.graficointerativo1.filtraCamada(idjanela,filtro);
+					};
+					var funcao2 = function(){
+						var filtro,coluna = scene.datum.atoms['series'].value,
+							val = scene.datum.atoms['value'].value;
+						if (val*1){
+							filtro = "(["+coluna+"] < "+val+")";
+						}
+						else{
+							filtro = "(|["+coluna+"]| < |"+val.trim()+"|)";
+						}
+						i3GEOF.graficointerativo1.filtraCamada(idjanela,filtro);
+					};
+					i3GEO.janela.confirma("Filtra a camada?",350,"Com base em X","Menor que Y",funcao1,funcao2);
+
+				},
 				baseAxisTitleFont : '9px sans-serif',
 				yAxisTickFormatter : function(valor) {
 					valor = valor + "";
@@ -1367,6 +1394,7 @@ i3GEOF.graficointerativo1 =
 				panelSizeRatio : 0.8,
 				orthoAxisLabelSpacingMin : 2,
 				selectable : false,
+				clickable : true,
 				extensionPoints : {
 					continuousAxisTicks_strokeStyle : 'gray',
 					axisGrid_strokeStyle : 'lightgray',
@@ -1788,6 +1816,33 @@ i3GEOF.graficointerativo1 =
 			 */
 			guardaParametros: function(idjanela){
 
+			}
+		},
+		filtraCamada: function(idjanela,filtro){
+			var p, cp, temp,tema = i3GEOF.graficointerativo1.propJanelas[idjanela].tema;
+			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.set_transfer_mode('POST');
+			temp = function(retorno){
+				i3GEO.Interface.atualizaTema(retorno,tema);
+			};
+			cp.call(p,"insereFiltro",temp,"tema="+tema,"filtro="+i3GEO.util.base64encode(filtro));
+		},
+		limparFiltros: function(){
+			var i, p, cp, temp,tema,
+				n = i3GEOF.graficointerativo1.janelas.length;
+			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.set_transfer_mode('POST');
+
+			for(i=0;i<n;i++){
+				tema = i3GEOF.graficointerativo1.propJanelas[i3GEOF.graficointerativo1.janelas[i]].tema;
+				temp = function(retorno){
+					i3GEO.Interface.atualizaTema(retorno,tema);
+				};
+				cp.call(p,"insereFiltro",temp,"tema="+tema,"filtro=");
 			}
 		}
 	};

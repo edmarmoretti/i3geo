@@ -761,7 +761,7 @@ i3GEO.janela = {
 	funcao2 {function} - (opcional) funcao do botao 2
 		 */
 		confirma: function(pergunta,w,resposta1,resposta2,funcao1,funcao2){
-			var f1,f2,janela = YAHOO.i3GEO.janela.managerAguarde.find("confirma");
+			var f1,f2,f3,janela = YAHOO.i3GEO.janela.managerAguarde.find("confirma");
 			if(!w || w == ""){
 				w = 300;
 			}
@@ -773,8 +773,8 @@ i3GEO.janela = {
 			}
 			else{
 				f1 = function(){
-					funcao1.call();
 					YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+					funcao1.call();
 				};
 			}
 			if(!funcao2 || funcao2 == ""){
@@ -789,6 +789,9 @@ i3GEO.janela = {
 					funcao2.call();
 				};
 			}
+			f3 = function(){
+				YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+			};
 			if(!resposta1 || resposta1 == ""){
 				resposta1 = $trad("x58");
 			}
@@ -810,6 +813,7 @@ i3GEO.janela = {
 				effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.25},
 				constraintoviewport: true,
 				buttons: [
+				          { text: $trad("x75"), handler:f3 },
 				          { text: resposta1, handler:f1 },
 				          { text: resposta2,  handler:f2 }
 				          ],

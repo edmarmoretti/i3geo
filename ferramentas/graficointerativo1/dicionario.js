@@ -208,7 +208,14 @@ i3GEOF.graficointerativo1.dicionario =
 		],
 		"janelasep" : [
 			{
-				pt : "abrir em uma janela separada",
+				pt : "janela separada",
+				en : "",
+				es : ""
+			}
+		],
+		"limparfiltros" : [
+			{
+				pt : "limpar filtros",
 				en : "",
 				es : ""
 			}
