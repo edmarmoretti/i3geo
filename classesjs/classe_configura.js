@@ -431,7 +431,6 @@ i3GEO.configura =
 					}
 				],
 				"interface" : [
-					/*
 					{
 						id : "omenudataInterface0a",
 						text : '<b>' + $trad("d27") + '</b>',
@@ -468,14 +467,13 @@ i3GEO.configura =
 							]
 						}
 					},
-					*/
-					//{
-						//id : "omenudataInterface0b",
-						//text : '<b>' + $trad("u27") + '</b>',
-						//submenu : {
-							//id : "subInt2",
-							//itemdata : [
-								//[
+					{
+						id : "omenudataInterface0b",
+						text : '<b>' + $trad("u27") + '</b>',
+						submenu : {
+							id : "subInt2",
+							itemdata : [
+								[
 									{
 										id : "omenudataInterface6",
 										text : $trad("u21"),
@@ -496,10 +494,10 @@ i3GEO.configura =
 										text : $trad("p20"),
 										url : "javascript:i3GEO.mapa.dialogo.telaRemota()"
 									}
-								//]
-							//]
-						//}
-					//}
+								]
+							]
+						}
+					}
 				],
 				"ferramentas" : [
 					// mapas
