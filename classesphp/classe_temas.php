@@ -127,7 +127,7 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 		$this->v = versao();
 		$this->vi = $this->v["inteiro"];
 		$this->v = $this->v["principal"];
-		
+
 			$this->locaplic = $locaplic;
 			if($map_file != "")
 		{
@@ -429,8 +429,7 @@ Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa
 		}
 		$prjMapa = "";
 		$prjTema = "";
-		if($this->layer->type != MS_LAYER_RASTER)
-		{
+		if($this->layer->type != MS_LAYER_RASTER){
 			$prjMapa = $this->mapa->getProjection();
 			$prjTema = $this->layer->getProjection();
 		}
@@ -440,10 +439,10 @@ Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa
 		//necess&aacute;rio para evitar que em qualquer redesenho do mapa, seja aplicado o zoom para o tema marcado com aplicaextensao
 		//
 		$this->layer->setmetadata("aplicaextensao","");
-		if($ret == "" && $this->layer->type == MS_LAYER_RASTER)
-		{$ret = "-75.233614607 -33.7515829981 -27.592958622 5.272156";}
-		if ($ret == "")
-		{
+		if($ret == "" && $this->layer->type == MS_LAYER_RASTER){
+			$ret = "-75.233614607 -33.7515829981 -27.592958622 5.272156";
+		}
+		if ($ret == ""){
 			$ret = $this->layer->getextent();
 			//reprojeta o retangulo
 			if (($prjTema != "") && ($prjMapa != $prjTema))
@@ -454,14 +453,14 @@ Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa
 			}
 			$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
 		}
-		else
-		{
+		else{
 			$ret = explode(" ",$ret);
 			$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
 			//echo "oi";exit;
 		}
-			if($this->mapa->getmetadata("interface") == "googlemaps")
-		{$this->mapa->setProjection($projO);}
+		if($this->mapa->getmetadata("interface") == "googlemaps"){
+			$this->mapa->setProjection($projO);
+		}
 		return("ok");
 	}
 /*

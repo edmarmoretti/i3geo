@@ -63,6 +63,7 @@ MAP
     TILEITEM "location"
     TYPE POINT
     UNITS METERS
+    #EXTENT -67.419006 -19.719276 -38.678772 -10.183143
     CLASS
       NAME "Vila"
       EXPRESSION ('[TIPO]'eq'Vila')
