@@ -435,9 +435,12 @@ function adicionaNovoMapfile()
 		en = $i("EtituloEN").value,
 		codigo = $i("Ecodigo").value,
 		metaestat = $i("Emetaestat").value;
-	if(codigo === "")
-	{alert("Digite o nome do arquivo");return;}
+	if(codigo === ""){
+		alert("Digite o nome do arquivo");return;
+	}
 	codigo = codigo.toLowerCase();
+	codigo = i3GEO.util.removeAcentos(codigo);
+	codigo = codigo.replace(" ","");
 	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo+"&it="+it+"&en="+en+"&es="+es+"&metaestat="+metaestat;
 	core_carregando("ativa");
 	core_carregando(" adicionando um novo mapfile");
