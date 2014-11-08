@@ -773,8 +773,8 @@ i3GEO.janela = {
 			}
 			else{
 				f1 = function(){
-					YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
 					funcao1.call();
+					YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
 				};
 			}
 			if(!funcao2 || funcao2 == ""){
@@ -785,8 +785,8 @@ i3GEO.janela = {
 			}
 			else{
 				f2 = function(){
-					YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
 					funcao2.call();
+					YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
 				};
 			}
 			f3 = function(){
