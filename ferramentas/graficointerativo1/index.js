@@ -1724,12 +1724,18 @@ i3GEOF.graficointerativo1 =
 							nj = rsNovos.length;
 							//hash contendo os valores novos
 							for(j=0;j<nj;j++){
-								b[rsNovos[j][0]] =rsNovos[j];
+								b[rsNovos[j][0]] = rsNovos[j];
 							}
 							//busca nos valores novos os dados com base na chave do hash original
 							for(d in a){
-								a[d].push(b[d][1]);
-								e.push(a[d]);
+								if(b[d]){
+									a[d].push(b[d][1]);
+									e.push(a[d]);
+								}
+								else{
+									a[d].push(0);
+									e.push(a[d]);
+								}
 							}
 							dados.resultset = e;
 						}
