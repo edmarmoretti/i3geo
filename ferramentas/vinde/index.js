@@ -133,8 +133,8 @@ i3GEOF.vinde = {
 					if(layer){
 						layer = layer[1];
 						//muda o tipo
-						tipo = i3GEO.arvoreDeTemas.TIPOBOTAO;
-						i3GEO.arvoreDeTemas.TIPOBOTAO = "checkbox";
+						//tipo = i3GEO.arvoreDeTemas.TIPOBOTAO;
+						//i3GEO.arvoreDeTemas.TIPOBOTAO = "checkbox";
 						//if (i3GEO.Interface.ATUAL !=  "openlayers" || i3GEO.Interface.openlayers.googleLike === true){
 						//	epsg = "EPSG:3857";
 						//}
@@ -150,7 +150,7 @@ i3GEOF.vinde = {
 										'black',
 										layer.metadataURL
 									);
-						i3GEO.arvoreDeTemas.TIPOBOTAO = tipo;
+						//i3GEO.arvoreDeTemas.TIPOBOTAO = tipo;
 					}
 					temaNode = new YAHOO.widget.HTMLNode({html:texto}, noDestino, false,true);
 					temaNode.enableHighlight = false;
