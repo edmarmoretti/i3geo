@@ -1119,7 +1119,7 @@ i3GEOadmin.variaveis = {
 								if($i("incluirtodascolunas").checked === true){
 									colunas = 1;
 								}
-								sUrl = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value;
+								sUrl = i3GEO.configura.locaplic+'/admin/php/metaestat.php?cachemapfile=nao&funcao=mapfileMedidaVariavel&formato=json&id_medida_variavel='+id+"&filtro="+$i("filtrosql").value+"&todasascolunas="+colunas+"&tipolayer="+$i("tipolayer").value+"&id_classificacao="+$i("classificacao").value+"&agruparpor="+$i("agruparsql").value;
 								core_carregando("ativa");
 								core_makeRequest(sUrl,callback);
 							};

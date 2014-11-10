@@ -663,7 +663,7 @@ switch (strtoupper($funcao))
 					$c["oazul"],
 					$tamanhoini + $aumentar
 				);
-				$aumentar += $aumentar;
+				$tamanhoini += $aumentar;
 			}
 			retornaJSON("ok");
 			exit;
@@ -1255,8 +1255,14 @@ switch (strtoupper($funcao))
 		if(!isset($opacidade)){
 			$opacidade = "";
 		}
+		if($cachemapfile === "nao"){
+			$cachemapfile = false;
+		}
+		else{
+			$cachemapfile = true;
+		}
 		if($formato == "json"){
-			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor,$codigo_tipo_regiao,$opacidade));
+			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor,$codigo_tipo_regiao,$opacidade,false,$cachemapfile));
 		}
 		exit;
 	break;

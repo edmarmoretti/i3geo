@@ -566,9 +566,11 @@ class Metaestat{
 	 * @param coluna que sera usada como agrupamento no sql
 	 * @param codigo do tipo de regiao cadastrada
 	 * @param valor de opacidade do layer
+	 * @param o layer deve suportar WMS-T ou nao
+	 * @param faz o cache do mapfile
 	 * @return array("mapfile"=>,"layer"=>,"titulolayer"=>)
 	 */
-	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao="",$opacidade="",$suportaWMST=false){
+	function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao="",$opacidade="",$suportaWMST=false,$cachemapfile=true){
 		//para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
 		//indicando onde deve comecar e terminar uma possivel clausula where
 		//ou com /*FA*//*FA*/
