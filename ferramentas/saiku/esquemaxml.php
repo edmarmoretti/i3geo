@@ -92,9 +92,11 @@ $nivelDaDimensao = array();
 
 $dimRegioes = dimensoesGeo();
 
-//var_dump(array_column($dimRegioes,"juncoes","codigo_tipo_regiao"));exit;
-
-$xmlRegioes = implode(" ",array_column($dimRegioes,"xml"));
+//so funciona no php 5.5
+//TODO quem sabe usar isso um dia
+//$xmlRegioes = implode(" ",array_column($dimRegioes,"xml"));
+$xmlRegioes = array_map(function($element){return $element['xml'];}, $dimRegioes);
+$xmlRegioes = implode(" ",$xmlRegioes);
 
 //
 //outras dimensoes definidas nos parametros e que nao sejam do tipo tempo
