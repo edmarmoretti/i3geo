@@ -112,7 +112,7 @@ i3GEOF.vinde = {
 		tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
 		tempNode.enableHighlight = true;
 		criaNo = function(obj,noDestino){
-			var chaves,i,n,texto,layer,temp,tipo, epsg = 'EPSG:4326';
+			var chaves,i,n,texto,layer,temp, epsg = 'EPSG:4326';
 			if(!YAHOO.lang.isString(obj)){
 				if(YAHOO.lang.isArray(obj)){
 					chaves = obj;
