@@ -83,7 +83,7 @@ i3GEOF.uploadsimbolo = {
 				"i3GEOuploadsimbolobotao1",
 				{onclick:{fn: i3GEOF.uploadsimbolo.submete}}
 			);
-			b.addClass("upload");
+			b.addClass("rodar");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
