@@ -124,12 +124,12 @@ td {
 		}
 		echo "<table>";
 		echo "<tr><td><b>N&uacute;mero total de temas cadastrados: </b></td><td>$totaltemas</td><td></td></tr>";
-		echo "<tr><td><b>N&uacute;mero total de temas v&aacute;lidos (c�digo diferente de vazio): </b></td><td>$totaltemasvalidos</td><td></td></tr>";
-		echo "<tr><td><b>Temas v&aacute;lidos com c�digos duplicados: </b></td><td>".count($temasmaisdeum)."</td><td></td></tr>";
+		echo "<tr><td><b>N&uacute;mero total de temas v&aacute;lidos (c&oacute;digo diferente de vazio): </b></td><td>$totaltemasvalidos</td><td></td></tr>";
+		echo "<tr><td><b>Temas v&aacute;lidos com c&oacute;digos duplicados: </b></td><td>".count($temasmaisdeum)."</td><td></td></tr>";
 		echo "<tr><td><b>Temas v&aacute;lidos com nomes duplicados: </b></td><td>".count($nomestemasmaisdeum)."</td><td></td></tr>";
 		echo "<tr><td><b>Temas associados a algum sub-grupo: </b></td><td>".count($temasassocsubgrupos)."</td><td></td></tr>";
-
-		echo "<tr><td>Dos temas v&aacute;lidos:</td><td>&nbsp;</td><td></td></tr>";
+		echo "<tr><td></td><td></td><td></td></tr>";
+		echo "<tr><td><b>Dos temas v&aacute;lidos:</b></td><td>&nbsp;</td><td></td></tr>";
 		echo "<tr><td><b>N&uacute;mero de temas sem link: </b></td><td>".$nsemlinktemas."</td><td>&nbsp;&nbsp;".round(($nsemlinktemas * 100) / $totaltemasvalidos,2) ." %</td></tr>";
 		echo "<tr><td><b>N&uacute;mero de temas sem tags: </b></td><td>".$nsemtagstemas."</td><td>&nbsp;&nbsp;".round(($nsemtagstemas * 100) / $totaltemasvalidos,2) ." %</td></tr>";
 		echo "<tr><td><b>N&uacute;mero de temas dispon&iacute;veis para download: </b></td><td>".$ndownloadtemas."</td><td>&nbsp;&nbsp;".round(($ndownloadtemas * 100) / $totaltemasvalidos,2) ." %</td></tr>";
