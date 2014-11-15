@@ -137,6 +137,7 @@ switch (strtoupper($funcao))
 		retornaJSON($layer->getmetadata("PLUGINI3GEO"));
 	break;
 	case "GRAVAPLUGIN":
+		//echo $plugin;exit;
 		$mapfile = $locaplic."/temas/".$codigoMap.".map";
 		$mapa = ms_newMapObj($mapfile);
 		$layer = $mapa->getlayerbyname($codigoLayer);
@@ -1485,7 +1486,8 @@ function listaClasses()
 	for($i=0;$i<$nclasses;++$i)
 	{
 		$classe = $layer->getclass($i);
-		$dados[] = array("indice"=>$i,"nome"=>base64_encode((mb_convert_encoding($classe->name,"UTF-8","ISO-8859-1"))));
+		$texto = $classe->name;
+		$dados[] = array("indice"=>$i,"nome"=>base64_encode($texto));
 	}
 	return $dados;
 }

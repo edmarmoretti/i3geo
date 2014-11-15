@@ -41,7 +41,7 @@ function conteudoNoClasse(codigoMap,codigoLayer,indice,nome){
 	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','classe','"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=sobe src=\"../imagens/34.png\" />";
 	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','classe','"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=desce src=\"../imagens/33.png\" />";
 	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirClasse('"+codigoMap+"','"+codigoLayer+"','"+indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+indice+" "+i3GEO.util.base64decode(nome)+"</span>";
-	var d = {classes:codigoMap+"_"+codigoLayer,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+indice,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:indice};
+	var d = {type:'html',classes:codigoMap+"_"+codigoLayer,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+indice,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:indice};
 	return d;
 }
 function montaParametrosClasses(no,dados,redesenha)
@@ -156,19 +156,25 @@ function classesAuto(codigoMap,codigoLayer)
 			var callback2 = {
 					success:function(o) {
 						try {
-							var nos = tree.getNodesByProperty("classes",codigoMap+"_"+codigoLayer);
-							/*
-							var dados = YAHOO.lang.JSON.parse(o.responseText);
-
+							var n,tempNode,d,i,nos = tree.getNodeByProperty("etiquetaClasses",codigoMap+"_"+codigoLayer);
 							if(nos){
-								for (var i=0, j=nos.length; i<j; i++)
-								{tree.removeNode(nos[i],false);}
+								n = nos.children.length;
+								for (i=3; i<n; i++){
+									tree.removeNode(nos.children[3],true);
+								}
 							}
-							tree.draw();
-							var no = tree.getNodeByProperty("etiquetaClasses",codigoMap+"_"+codigoLayer);
-							*/
+							//tree.draw();
+							var dados = YAHOO.lang.JSON.parse(o.responseText);
+							n = dados.length;
+							for (i=0; i < n; i++)	{
+								d = conteudoNoClasse(codigoMap,codigoLayer,dados[i].indice,dados[i].nome);
+								tempNode = new YAHOO.widget.HTMLNode(d,nos, false,true);
+								tempNode.setDynamicLoad(loadClasseData, iconMode);
+								tempNode.isLeaf = false;
+								tempNode.enableHighlight = false;
+							}
 							nos.refresh();
-							//montaParametrosTemas(no,dados);
+							tree.draw();
 							core_carregando("desativa");
 							YAHOO.admin.container.panelEditorAutoClasses.destroy();
 							YAHOO.admin.container.panelEditorAutoClasses = null;
