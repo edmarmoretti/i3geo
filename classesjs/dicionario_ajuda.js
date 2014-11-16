@@ -1051,6 +1051,14 @@ g_traducao_ajuda = {
 			pt:"Lista os mapas cadastrados pelo publicador de mapas do sistema de metadados estat&iacute;sticos, apresentando as diferentes op&ccedil;&otilde;es de interface para abri-los.",
 			complemento:"",
 			apijs:"javascript:i3GEO.mapa.dialogo.metaestatListaMapas();"
+		},
+		"126": {
+			titulo: "Layer KML (plugin)",
+			diretorio:"i3geo/classesjs/classe_plugin.js",
+			categoria:"4",
+			pt:"Plugin que permite configurar um mapfile contendo um layer cujos dados ser&atilde;o inseridos no mapa como uma camada em KML. O KML deve ser fornecido como uma url, podendo estar em qualquer servidor, local ou externo.",
+			complemento:"",
+			apijs:""
 		}
 	}
 };

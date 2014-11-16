@@ -407,6 +407,9 @@ class Mapa
 				$plugini3geo = "";
 				if($oLayer->getmetadata("PLUGINI3GEO") != ""){
 					$plugini3geo = $oLayer->getmetadata("PLUGINI3GEO");
+					if (!mb_detect_encoding($plugini3geo,"UTF-8",true)){
+						$plugini3geo = mb_convert_encoding($plugini3geo,"UTF-8","ISO-8859-1");
+					}
 					$plugini3geo = json_decode($plugini3geo);
 				}
 				//formatacao antiga, antes da versao 6.0
