@@ -117,6 +117,10 @@ i3GEOF.imprimir = {
 			'		<td>Agg/Png alta qualidade</td>' +
 			'	</tr>' +
 			'	<tr>' +
+			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this,"interna") type=radio value="jpeg.php" name=cmodelo /></td>' +
+			'		<td>JPEG</td>' +
+			'	</tr>' +
+			'	<tr>' +
 			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this,"interna") type=radio value="svg.php" name=cmodelo /></td>' +
 			'		<td>Svg - vetorial</td>' +
 			'	</tr>' +

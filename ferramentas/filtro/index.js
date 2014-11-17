@@ -233,6 +233,8 @@ i3GEOF.filtro = {
 			operador += "<option value='<='><=</option>";
 			operador += "<option value='>='>>=</option>";
 			operador += "<option value='in'>in</option>";
+			operador += "<option value='ilike'>like (Postgis)</option>";
+			operador += "<option value='not ilike'>not like (Postgis)</option>";
 			operador += "<option value='~='>regExp</option></select></div>";
 
 			conector = "&nbsp;<div class='styled-select' style='width:60px;margin-left:5px;position:relative;top:-7px;' ><select>";

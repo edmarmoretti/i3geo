@@ -46,7 +46,7 @@ i3GEOF.filtro.dicionario = {
 		es : ""
 	} ],
 	'ajuda' : [ {
-		pt : "O resultado da filtragem ser&aacute; mostrado no mapa. Certifique-se que o tema est&aacute; v&iacute;sivel. Antes de aplicar, vc pode testar o filtro definido. Na op&ccedil;&atilde;o IN separe os valores com v&iacute;rgula.",
+		pt : "O resultado da filtragem ser&aacute; mostrado no mapa. Certifique-se que o tema est&aacute; v&iacute;sivel. Antes de aplicar, vc pode testar o filtro definido. Na op&ccedil;&atilde;o IN separe os valores com v&iacute;rgula. Na op&ccedil;&atilde;o like, utilize o sinal de percentual antes e depois da string",
 		en : "",
 		es : ""
 	} ],
