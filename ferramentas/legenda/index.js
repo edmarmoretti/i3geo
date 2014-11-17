@@ -475,7 +475,12 @@ i3GEOF.legenda =
 									+ "<td style=background-color:white ><img src='"
 									+ i3GEO.configura.locaplic
 									+ "/imagens/tamanho.png' title='Calcula tamanho' onclick='i3GEOF.legenda.calculaTamanho()' style=cursor:pointer /></td>"
-									+ "<td style=background-color:yellow ></td>" + "<td style=background-color:yellow >nome</td>"
+									+ "<td></td>"
+									+ "<td style=background-color:yellow >"
+									+ "<img src='"
+									+ i3GEO.configura.locaplic
+									+ "/imagens/oxygen/16x16/draw-triangle.png' title='Ordenar' onclick='i3GEOF.legenda.ordenaClasses()' style=cursor:pointer />"
+									+ "<span style='vertical-align:super;margin-left:3px;'>nome</span></td>"
 									+ "<td style=background-color:yellow >express&atilde;o</td>"
 									+ "<td style=background-color:yellow >minScale</td>"
 									+ "<td style=background-color:yellow >maxScale</td>" + "</tr>"
@@ -922,6 +927,32 @@ i3GEOF.legenda =
 						+ "&funcao=calculaTamanhoClasses&tema=" + i3GEOF.legenda.tema;
 				cp.set_response_type("JSON");
 				cp.call(p, "calculaTamanhoClasses", retornapaleta);
+			} catch (e) {
+				i3GEO.janela.tempoMsg("Erro: " + e);
+				i3GEOF.legenda.aguarde.visibility = "hidden";
+			}
+		},
+		/*
+		 * Function: ordenaClasses
+		 *
+		 * Ordena as classes pelo nome
+		 *
+		 */
+		ordenaClasses : function() {
+			try {
+				if (i3GEOF.legenda.aguarde.visibility === "visible") {
+					return;
+				}
+				i3GEOF.legenda.aguarde.visibility = "visible";
+				var retornapaleta = function() {
+					i3GEOF.legenda.aposAlterarLegenda();
+					i3GEOF.legenda.aguarde.visibility = "hidden";
+					i3GEOF.legenda.mostralegenda();
+				}, cp = new cpaint(), p =
+					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid
+						+ "&funcao=ordenaClasses&tema=" + i3GEOF.legenda.tema;
+				cp.set_response_type("JSON");
+				cp.call(p, "foo", retornapaleta);
 			} catch (e) {
 				i3GEO.janela.tempoMsg("Erro: " + e);
 				i3GEOF.legenda.aguarde.visibility = "hidden";

@@ -1,6 +1,6 @@
 <?php
 /*
-Title: classe_alteraclasse.php
+ Title: classe_alteraclasse.php
 
 Manipula&ccedil;&atilde;o de classes e estilos de um layer
 
@@ -22,7 +22,7 @@ por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
+	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -31,7 +31,7 @@ Arquivo:
 i3geo/classesphp/classe_alteraclasse.php
 */
 /*
-Classe: Alteraclasse
+ Classe: Alteraclasse
 
 Opera&ccedil;&otilde;es que alteram as classes da legenda de um tema existente no mapa.
 As modifica&ccedil;&otilde;es permitem contruir novas legendas para cada tema.
@@ -39,40 +39,40 @@ As modifica&ccedil;&otilde;es permitem contruir novas legendas para cada tema.
 class Alteraclasse
 {
 	/*
-	Variavel: $mapa
+	 Variavel: $mapa
 
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
-	Variavel: $arquivo
+	 Variavel: $arquivo
 
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
-	Variavel: $layer
+	 Variavel: $layer
 
 	Objeto layer
 	*/
 	public $layer;
 	/*
-	Variavel: $nome
+	 Variavel: $nome
 
 	Nome do layer
 	*/
 	protected $nome;
-/*
-Function: __construct
+	/*
+	 Function: __construct
 
-Cria um objeto Alteraclasse
+	Cria um objeto Alteraclasse
 
-Parametros:
+	Parametros:
 
-$map_file - Endere&ccedil;o do mapfile no servidor.
+	$map_file - Endere&ccedil;o do mapfile no servidor.
 
-$tema - nome do tema
-*/
+	$tema - nome do tema
+	*/
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
 		//error_reporting(0);
@@ -91,29 +91,33 @@ $tema - nome do tema
 			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 		}
 	}
-/*
-function: salva
+	/*
+	 function: salva
 
-Salva o mapfile atual
+	Salva o mapfile atual
 
-*/
+	*/
 	function salva()
 	{
-		if (connection_aborted()){exit();}
+		if (connection_aborted()){
+			exit();
+		}
 		$this->mapa->save($this->arquivo);
 	}
-/*
-Function: aplicacoresrgb
+	/*
+	 Function: aplicacoresrgb
 
-Aplica cores nas classes atuais conforme uma lista de cores em RGB
+	Aplica cores nas classes atuais conforme uma lista de cores em RGB
 
-Parametro:
+	Parametro:
 
-cores {array} - array com a lista de valores RGB
-*/
+	cores {array} - array com a lista de valores RGB
+	*/
 	function aplicacoresrgb($cores)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$numclasses = $this->layer->numclasses;
 		if ($numclasses > 0)
 		{
@@ -132,15 +136,17 @@ cores {array} - array com a lista de valores RGB
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
-/*
-function: simbolounico
+	/*
+	 function: simbolounico
 
-Elimina as classes existentes em um objeto layer mantendo apenas a primeira classe.
-Todos os elementos passar&atilde;o a ser desenhados conforme essa primeira classe, uma vez que a express&atilde;o de defini&ccedil;&atilde;o da classe passa a ser vazia.
-*/
+	Elimina as classes existentes em um objeto layer mantendo apenas a primeira classe.
+	Todos os elementos passar&atilde;o a ser desenhados conforme essa primeira classe, uma vez que a express&atilde;o de defini&ccedil;&atilde;o da classe passa a ser vazia.
+	*/
 	function simbolounico()
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$numclasses = $this->layer->numclasses;
 		if ($numclasses > 0)
 		{
@@ -159,25 +165,25 @@ Todos os elementos passar&atilde;o a ser desenhados conforme essa primeira class
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
-/*
-function: alteraclasses
+	/*
+	 function: alteraclasses
 
-Altera as classes existentes em um objeto layer conforme a lista de &iacute;ndices, nomes e express&otilde;es definidas nos par&acirc;metros passados como argumentos.
+	Altera as classes existentes em um objeto layer conforme a lista de &iacute;ndices, nomes e express&otilde;es definidas nos par&acirc;metros passados como argumentos.
 
-Parametros:
+	Parametros:
 
-$ids - lista de ids, separados por v&iacute;rgula, que identificam as classes no layer
+	$ids - lista de ids, separados por v&iacute;rgula, que identificam as classes no layer
 
-$nomes - lista com os novos nomes
+	$nomes - lista com os novos nomes
 
-$exps - lista com as novas express&otilde;es
+	$exps - lista com as novas express&otilde;es
 
-$base64 sim|nao indica se as strings estao codificadas em base64
+	$base64 sim|nao indica se as strings estao codificadas em base64
 
-$minScales - lista com valores para minscaledenom
+	$minScales - lista com valores para minscaledenom
 
-$maxScales - lista com valores para maxscaledenom
-*/
+	$maxScales - lista com valores para maxscaledenom
+	*/
 	function alteraclasses($ids,$nomes,$exps,$base64="nao",$minScales="",$maxScales="")
 	{
 		if($base64 == "sim"){
@@ -244,22 +250,24 @@ $maxScales - lista com valores para maxscaledenom
 			}
 		}
 	}
-/*
-function: intervalosiguais
+	/*
+	 function: intervalosiguais
 
-Cria classes em um objeto layer com intervalos iguais baseando-se em um item num&eacute;rico na tabela de atributos com um n&uacute;mero de classes fixos.
+	Cria classes em um objeto layer com intervalos iguais baseando-se em um item num&eacute;rico na tabela de atributos com um n&uacute;mero de classes fixos.
 
-Parametros:
+	Parametros:
 
-$item - item da tabela de atributos
+	$item - item da tabela de atributos
 
-$nclasses - n&uacute;mero de classes
+	$nclasses - n&uacute;mero de classes
 
-$ignorar - valor que ser&aacute; ignorado na listagem final
-*/
+	$ignorar - valor que ser&aacute; ignorado na listagem final
+	*/
 	function intervalosiguais($item,$nclasses,$ignorar)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$valores = $this->pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{
@@ -281,9 +289,12 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 			for ($i=0; $i < $nclasses; ++$i)
 			{
 				if ($i == $nclasses - 1)
-				{$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<=".($intatual+$intervalo)."))";}
+				{
+					$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<=".($intatual+$intervalo)."))";
+				}
 				else
-				{$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<".($intatual+$intervalo)."))";}
+				{$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<".($intatual+$intervalo)."))";
+				}
 				$nomeclasse = ">= ".$intatual." e < que ".($intatual+$intervalo);
 				$intatual = $intatual + $intervalo;
 				$classe = ms_newClassObj($this->layer);
@@ -305,10 +316,11 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 			return ("ok");
 		}
 		else
-		{return ("erro. Nenhum valor numerico no item");}
+		{return ("erro. Nenhum valor numerico no item");
+		}
 	}
 	/*
-	function: quantil
+	 function: quantil
 
 	Cria classes em um objeto layer com intervalos baseados no calculo de quantil
 
@@ -322,7 +334,9 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 	*/
 	function quantil($item,$nclasses,$ignorar)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$valores = $this->pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0){
 			//rotina obtida do pacote TME
@@ -378,7 +392,7 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 		}
 	}
 	/*
-	function: quebrasnaturais
+	 function: quebrasnaturais
 
 	Cria classes em um objeto layer com intervalos baseados no calculo de quebras naturais
 
@@ -392,7 +406,9 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 	*/
 	function quebrasnaturais($item,$nclasses,$ignorar)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$valores = $this->pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0){
 			include(dirname(__FILE__)."/../pacotes/jenks-master/jenks.php");
@@ -403,69 +419,71 @@ $ignorar - valor que ser&aacute; ignorado na listagem final
 			$classetemp = $this->layer->getClass(0);
 			$estilotemp = $classetemp->getStyle(0);
 			for ($i=0; $i < $numclassesatual; ++$i){
-			$classe = $this->layer->getClass($i);
-			$classe->set("status",MS_DELETE);
+				$classe = $this->layer->getClass($i);
+				$classe->set("status",MS_DELETE);
 			}
 			//adiciona as classes novas
 			for ($i=0; $i < $nclasses; ++$i){
-			$expressao = "(([".$item."]>".$classBreaks[$i].")and([".$item."]<=".$classBreaks[$i + 1]."))";
-			$nomeclasse = "> ".$classBreaks[$i]." e <= que ".($classBreaks[$i + 1]);
-			if($i == 0){
-			$expressao = "([".$item."]<=".$classBreaks[$i + 1].")";
-			$nomeclasse = "<= que ".($classBreaks[$i + 1]);
-			}
-					if($i == ($nclasses - 1)){
+				$expressao = "(([".$item."]>".$classBreaks[$i].")and([".$item."]<=".$classBreaks[$i + 1]."))";
+				$nomeclasse = "> ".$classBreaks[$i]." e <= que ".($classBreaks[$i + 1]);
+				if($i == 0){
+					$expressao = "([".$item."]<=".$classBreaks[$i + 1].")";
+					$nomeclasse = "<= que ".($classBreaks[$i + 1]);
+				}
+				if($i == ($nclasses - 1)){
 					$expressao = "([".$item."] >=".$classBreaks[$i].")";
-							$nomeclasse = ">= que ".($classBreaks[$i]);
-					}
-					$classe = ms_newClassObj($this->layer);
-					$novoestilo = ms_newStyleObj($classe);
-					if ($this->layer->type == 0){
+					$nomeclasse = ">= que ".($classBreaks[$i]);
+				}
+				$classe = ms_newClassObj($this->layer);
+				$novoestilo = ms_newStyleObj($classe);
+				if ($this->layer->type == 0){
 					$novoestilo->set("symbolname","ponto");
 					$novoestilo->set("size","6");
-					}
-					$ncor = $novoestilo->color;
-					$ncor->setrgb((mt_rand(0,255)),(mt_rand(0,255)),(mt_rand(0,255)));
-					$ncor = $novoestilo->outlinecolor;
-					$ncor->setrgb(255,255,255);
-					$classe->setexpression($expressao);
-					$classe->set("name",$nomeclasse);
-					//$classe->set("title",($this->layer->name)."+".$i);
+				}
+				$ncor = $novoestilo->color;
+				$ncor->setrgb((mt_rand(0,255)),(mt_rand(0,255)),(mt_rand(0,255)));
+				$ncor = $novoestilo->outlinecolor;
+				$ncor->setrgb(255,255,255);
+				$classe->setexpression($expressao);
+				$classe->set("name",$nomeclasse);
+				//$classe->set("title",($this->layer->name)."+".$i);
 			}
 			$this->layer->setMetaData("cache","");
 			return ("ok");
 		}
-					else{
+		else{
 			return ("erro. Nenhum valor numerico no item");
 		}
 	}
 
-/*
-function: quartis
+	/*
+	 function: quartis
 
-Cria classes em um objeto layer com intervalos em quartis baseando-se em um item num&eacute;rico na tabela de atributos com um n&uacute;mero de classes fixos.
+	Cria classes em um objeto layer com intervalos em quartis baseando-se em um item num&eacute;rico na tabela de atributos com um n&uacute;mero de classes fixos.
 
-Parametros:
+	Parametros:
 
-$item - Item da tabela de atributos utilizado para gerar as classes.
+	$item - Item da tabela de atributos utilizado para gerar as classes.
 
-$ignorar - valor que ser&aacute; ignorado na listagem final
+	$ignorar - valor que ser&aacute; ignorado na listagem final
 
-$tipoLegenda - tipo de texto que ser&aacute; inclu&iacute;do no nome de cada classe completo|simples|minimo
+	$tipoLegenda - tipo de texto que ser&aacute; inclu&iacute;do no nome de cada classe completo|simples|minimo
 
-Include:
-<classe_estatistica.php>
-*/
+	Include:
+	<classe_estatistica.php>
+	*/
 	function quartis($item,$ignorar="",$tipoLegenda="minimo")
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 
 		$valores = $this->pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{
-				if(file_exists($this->locaplic."/classe_estatistica.php"))
+			if(file_exists($this->locaplic."/classe_estatistica.php"))
 				include_once($this->locaplic."/classe_estatistica.php");
-				else
+			else
 				include_once("classe_estatistica.php");
 			$estat = new estatistica();
 			$estat->calcula($valores);
@@ -503,11 +521,17 @@ Include:
 				}
 				$classe->setexpression($expressao[$i]);
 				if($tipoLegenda == "completo")
-				{$nomeClasse = "Quartil ".($i+1)." ".$expressao[$i];}
+				{
+					$nomeClasse = "Quartil ".($i+1)." ".$expressao[$i];
+				}
 				if($tipoLegenda == "simples")
-				{$nomeClasse = "Quartil ".($i+1)." ".$nomes[$i];}
+				{
+					$nomeClasse = "Quartil ".($i+1)." ".$nomes[$i];
+				}
 				if($tipoLegenda == "minimo" || $tipoLegenda == "")
-				{$nomeClasse = $nomes[$i];}
+				{
+					$nomeClasse = $nomes[$i];
+				}
 
 				$classe->set("name",$nomeClasse);
 				$ncor = $novoestilo->color;
@@ -519,34 +543,42 @@ Include:
 			return ("ok");
 		}
 		else
-		{return ("erro. Nenhum valor numerico no item");}
+		{return ("erro. Nenhum valor numerico no item");
+		}
 	}
-/*
-function: valorunico
+	/*
+	 function: valorunico
 
-Cria classes em um objeto layer baseando-se em um item na tabela de atributos.
+	Cria classes em um objeto layer baseando-se em um item na tabela de atributos.
 
-Para cada ocorr&ecirc;ncia de um valor &eacute; acrescentada uma classe.
+	Para cada ocorr&ecirc;ncia de um valor &eacute; acrescentada uma classe.
 
-Parametros:
+	Parametros:
 
-$item - Item da tabela de atributos utilizado para gerar as classes.
+	$item - Item da tabela de atributos utilizado para gerar as classes.
 
-$ignorar - valor que ser&aacute; ignorado na listagem final
+	$ignorar - valor que ser&aacute; ignorado na listagem final
 
-$itemNome - item que ser&aacute; usado para definir os nomes das classes (por default ser&aacute; igual a $item)
-*/
+	$itemNome - item que ser&aacute; usado para definir os nomes das classes (por default ser&aacute; igual a $item)
+	*/
 	function valorunico($item,$ignorar,$itemNome="")
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		if($itemNome == "" || $ignorar != "")
-		{$itemNome = $item;}
+		{
+			$itemNome = $item;
+		}
 		// pega valores
 		$vs = $this->pegaValores($this->mapa,$this->layer,$item,false,$ignorar);
 		if ($item == $itemNome)
-		{$ns = $vs;}
+		{
+			$ns = $vs;
+		}
 		else
-		{$ns = $this->pegaValores($this->mapa,$this->layer,$itemNome,false,$ignorar);}
+		{$ns = $this->pegaValores($this->mapa,$this->layer,$itemNome,false,$ignorar);
+		}
 		$lista = array();
 		for ($i = 0; $i < count($vs); ++$i){
 			$temp[$vs[$i]] = $ns[$i];
@@ -554,10 +586,14 @@ $itemNome - item que ser&aacute; usado para definir os nomes das classes (por de
 		$valores = array_keys($temp);
 		$nomes = array();
 		foreach($temp as $t)
-		{$nomes[] = $t;}
+		{
+			$nomes[] = $t;
+		}
 		$nclassexist = $this->layer->numclasses;
 		if ($nclassexist > count($valores))
-		{$nclassexist = count($valores);}
+		{
+			$nclassexist = count($valores);
+		}
 		if($this->layer->numclasses == 0)
 		{
 			$temp = ms_newClassObj($this->layer);
@@ -567,7 +603,9 @@ $itemNome - item que ser&aacute; usado para definir os nomes das classes (por de
 		$classes = array();
 		$classpadrao = $this->layer->getClass(0);
 		for ($i = 0; $i < $nclassexist; ++$i)
-		{$classes[$i] = $this->layer->getClass($i);}
+		{
+			$classes[$i] = $this->layer->getClass($i);
+		}
 		$c = $this->layer->numclasses;
 		for ($i = 0; $i < $c; ++$i) // apaga classes atuais
 		{
@@ -585,7 +623,8 @@ $itemNome - item que ser&aacute; usado para definir os nomes das classes (por de
 			$e = "('[".$item."]'eq'".$valores[$i]."')";
 			$ca = $classes[$i];
 			$ca->setexpression($e);
-			$ca->set("name",$nomes[$i]);
+			$texto = $nomes[$i];
+			$ca->set("name",$texto);
 			$estilo = $classes[$i]->getStyle(0);
 			$ncor = $estilo->color;
 			$ncor->setrgb((mt_rand(0,255)),(mt_rand(0,255)),(mt_rand(0,255)));
@@ -601,61 +640,69 @@ $itemNome - item que ser&aacute; usado para definir os nomes das classes (por de
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
-/*
-function: adicionaclasse
+	/*
+	 function: adicionaclasse
 
-Adiciona uma nova classe em um objeto layer
+	Adiciona uma nova classe em um objeto layer
 
-A nova classe ser&aacute; uma c�pia da classe 0.
-*/
+	A nova classe ser&aacute; uma c�pia da classe 0.
+	*/
 	function adicionaclasse()
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$classe = $this->layer->getclass(0);
 		$c = ms_newClassObj($this->layer, $classe);
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
-/*
-function: sobeclasse
+	/*
+	 function: sobeclasse
 
-Sobe uma classe na ordem de desenho
+	Sobe uma classe na ordem de desenho
 
-Parametro:
+	Parametro:
 
-$idclasse {numerico} - id da classe (&iacute;ndice)
-*/
+	$idclasse {numerico} - id da classe (&iacute;ndice)
+	*/
 	function sobeclasse($idclasse)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$this->layer->moveclassup($idclasse);
 		return("ok");
 	}
-/*
-function: desceclasse
+	/*
+	 function: desceclasse
 
-Desce uma classe na ordem de desenho
+	Desce uma classe na ordem de desenho
 
-Parametro:
+	Parametro:
 
-$idclasse {numerico} - id da classe (&iacute;ndice)
-*/
+	$idclasse {numerico} - id da classe (&iacute;ndice)
+	*/
 	function desceclasse($idclasse)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$this->layer->moveclassdown($idclasse);
 		return("ok");
 	}
-/*
-function: adicionaopacidade
+	/*
+	 function: adicionaopacidade
 
-Adiciona opacidade vari&aacute;vel de 0 a 100 conforme o n&uacute;mero de classes
+	Adiciona opacidade vari&aacute;vel de 0 a 100 conforme o n&uacute;mero de classes
 
-*/
+	*/
 	function adicionaopacidade()
 	{
 		//error_reporting(0);
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$numclasses = $this->layer->numclasses;
 		$n = intval(100 / $numclasses);
 		for($i=0;$i<$numclasses;++$i)
@@ -672,21 +719,23 @@ Adiciona opacidade vari&aacute;vel de 0 a 100 conforme o n&uacute;mero de classe
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
-/*
-function: alteracor
+	/*
+	 function: alteracor
 
-Aplica uma nova cor aos estilos de uma classe
+	Aplica uma nova cor aos estilos de uma classe
 
-Parametros:
+	Parametros:
 
-$idclasse {numerico} - id da classe (&iacute;ndice)
+	$idclasse {numerico} - id da classe (&iacute;ndice)
 
-$cor {string} - cor rgb
-*/
+	$cor {string} - cor rgb
+	*/
 	function alteracor($idclasse,$cor)
 	{
 		error_reporting(0);
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$numclasses = $this->layer->numclasses;
 		$cor = str_replace(" ",",",$cor);
 		$cor = explode(",",$cor);
@@ -701,19 +750,21 @@ $cor {string} - cor rgb
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
-/*
-function: alterageometria
+	/*
+	 function: alterageometria
 
-Altera a geometria de representa&ccedil;&atilde;o de todos os estilos de todas as classes de um layer
+	Altera a geometria de representa&ccedil;&atilde;o de todos os estilos de todas as classes de um layer
 
-Parametro:
+	Parametro:
 
-$tipo {string} - tipo de representa&ccedil;&atilde;o
-*/
+	$tipo {string} - tipo de representa&ccedil;&atilde;o
+	*/
 	function alterageometria($tipo)
 	{
 		error_reporting(0);
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$numclasses = $this->layer->numclasses;
 		for($i=0;$i<$numclasses;++$i)
 		{
@@ -729,27 +780,29 @@ $tipo {string} - tipo de representa&ccedil;&atilde;o
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
-/*
-function: alteraCoresClasses
+	/*
+	 function: alteraCoresClasses
 
-Altera as cores das classes existentes em um objeto layer gerando uma paleta de cores de acordo com um valor inicial e final.
+	Altera as cores das classes existentes em um objeto layer gerando uma paleta de cores de acordo com um valor inicial e final.
 
-Parametros:
+	Parametros:
 
-$cori - cor inicial.
+	$cori - cor inicial.
 
-$corf - cor final.
+	$corf - cor final.
 
-Include:
-<class.palette.php>
-*/
+	Include:
+	<class.palette.php>
+	*/
 	function alteraCoresClasses($cori,$corf)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		if(file_exists($this->locaplic."/class.palette.php"))
-		include_once($this->locaplic."/class.palette.php");
+			include_once($this->locaplic."/class.palette.php");
 		else
-		include_once("class.palette.php");
+			include_once("class.palette.php");
 
 		$cori = RGB2hex(explode(",",$cori));
 		$corf = RGB2hex(explode(",",$corf));
@@ -772,11 +825,11 @@ Include:
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
-/*
-function: inverteCoresClasses
+	/*
+	 function: inverteCoresClasses
 
-Inverte as cores da legenda de um tema.
-*/
+	Inverte as cores da legenda de um tema.
+	*/
 	function inverteCoresClasses(){
 		if(!$this->layer){
 			return "erro";
@@ -788,9 +841,9 @@ Inverte as cores da legenda de um tema.
 			$estilo = $classe->getstyle(0);
 			$c = $estilo->color;
 			$cor[] = array(
-				"r"=>($c->red),
-				"g"=>($c->green),
-				"b"=>($c->blue)
+					"r"=>($c->red),
+					"g"=>($c->green),
+					"b"=>($c->blue)
 			);
 		}
 		$cor = array_reverse($cor);
@@ -804,14 +857,16 @@ Inverte as cores da legenda de um tema.
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
-/*
-function: calculaTamanhoClasses
+	/*
+	 function: calculaTamanhoClasses
 
-Calcula o tamanho dos estilos das classes, alterando o tamanho do s&iacute;mbolo.
-*/
+	Calcula o tamanho dos estilos das classes, alterando o tamanho do s&iacute;mbolo.
+	*/
 	function calculaTamanhoClasses()
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$numclasses = $this->layer->numclasses;
 		for($i=0;$i<$numclasses;++$i)
 		{
@@ -821,32 +876,70 @@ Calcula o tamanho dos estilos das classes, alterando o tamanho do s&iacute;mbolo
 			if ($estilo->symbolname == "")
 			{
 				if ($this->layer->type == MS_LAYER_LINE)
-				{$estilo->set("symbolname","linha");}
+				{
+					$estilo->set("symbolname","linha");
+				}
 				if ($this->layer->type == MS_LAYER_POINT)
-				{$estilo->set("symbolname","ponto");}
+				{
+					$estilo->set("symbolname","ponto");
+				}
 				if ($this->layer->type == MS_LAYER_POLYGON)
-				{$estilo->set("symbolname","p4");}
+				{
+					$estilo->set("symbolname","p4");
+				}
 			}
 		}
 		$this->layer->setMetaData("cache","");
 		return("ok");
 	}
-/*
-function: statusClasse
+	/*
+	 function: ordenaClasses
 
-Inverte o status a uma classe desligando ou desligando, conforme o status atual.
+	Ordena as classes pelo nome
+	*/
+	function ordenaClasses()
+	{
+		if(!$this->layer){
+			return "erro";
+		}
+		$numclasses = $this->layer->numclasses;
+		if($numclasses == 1){
+			return("ok");
+		}
+		//pega o nome das classes
+		$nomes = array();
+		for($i=0;$i<$numclasses;$i++){
+			$classe = $this->layer->getclass($i);
+			$nomes[$classe->name] = $classe->convertToString();
+		}
+		ksort($nomes);
+		$indice = 0;
+		foreach($nomes as $n){
+			$classe = $this->layer->getclass($indice);
+			$classe->updatefromstring($n);
+			$indice++;
+		}
+		$this->layer->setMetaData("cache","");
+		return("ok");
+	}
+	/*
+	 function: statusClasse
 
-Parametros:
+	Inverte o status a uma classe desligando ou desligando, conforme o status atual.
 
-$classe - id da classe
+	Parametros:
 
-*/
+	$classe - id da classe
+
+	*/
 	function statusClasse($classe)
 	{
 		//
 		//na vers&atilde;o 6 do Mapserver as classes n&atilde;o obedecem o OFF ou ON em arquivos RASTER. Foi necess&aacute;rio contornar o problema usando um metadata
 		//
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$cl = $this->layer->getclass($classe);
 		$status = $cl->status;
 		echo $status;
@@ -868,7 +961,7 @@ $classe - id da classe
 		return("ok");
 	}
 	/*
-	Function: pegaValores
+	 Function: pegaValores
 
 	Pega os valores de um item de um tema.
 
