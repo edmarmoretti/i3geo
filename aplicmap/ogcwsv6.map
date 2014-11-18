@@ -39,7 +39,13 @@ MAP
 		FORMATOPTION "STORAGE=memory"
 		#FORMATOPTION "FILENAME=result.csv"
 	END
-	
+	OUTPUTFORMAT
+		NAME 'kml'
+		DRIVER 'OGR/KML'
+		MIMETYPE "application/vnd.google-earth.kml+xml"
+		#FORMATOPTION "STORAGE=memory"
+		#IMAGEMODE FEATURE
+	END	
 	OUTPUTFORMAT
 		NAME "geojson"
 		DRIVER "OGR/GEOJSON"
@@ -47,7 +53,7 @@ MAP
 		FORMATOPTION "STORAGE=memory"
 		FORMATOPTION "FORM=SIMPLE"
 	END
-	
+
 	PROJECTION
 		"+proj=longlat +ellps=GRS67 +no_defs"
 	END

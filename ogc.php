@@ -810,6 +810,16 @@ if(isset($OUTPUTFORMAT)){
 		}
 	}
 	//FIXME envia uma linha estranha no header. Nao da pra usar
+	if(strtolower($OUTPUTFORMAT) == "kml"){
+		$l = $oMap->getlayer(0);
+		$n = $l->name."-kml";
+		$oMap->selectOutputFormat("kml");
+		//$oMap->outputformat->setOption("STORAGE", "memory");
+		//$oMap->outputformat->setOption("FILENAME", $n.".kml");
+		$l->setmetadata("wfs_getfeature_formatlist","kml");
+		$oMap->save($nomeMapfileTmp);
+	}
+	//FIXME envia uma linha estranha no header. Nao da pra usar
 	if(strtolower($OUTPUTFORMAT) == "geojson"){
 		$l = $oMap->getlayer(0);
 		$oMap->selectOutputFormat("geojson");
