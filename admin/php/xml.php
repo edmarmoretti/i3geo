@@ -317,7 +317,11 @@ function geraXmlWMSmetaestat($locaplic)
 {
 	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace("/admin/php/xml.php","",__FILE__)));
+	$c = "/admin/php/xml.php";
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+		$c = "\admin\php\xml.php";
+	}
+	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace($c,"",__FILE__)));
 	$sql = "select DISTINCT b.id_medida_variavel as id_ws, 'WMSMETAESTAT' as tipo_ws,'".$url."/ogc.php?id_medida_variavel='||b.id_medida_variavel as link_ws,a.nome||' -> '||b.nomemedida as nome_ws,a.descricao as desc_ws, '' as autor_ws from i3geoestat_variavel as a ,i3geoestat_medida_variavel as b WHERE a.codigo_variavel = b.codigo_variavel ORDER BY a.nome";
 	return geraXmlRSS($locaplic,$sql,"Web services WMS-TIME OGC");
 }
@@ -623,7 +627,11 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	$q = $dbh->query($q);
 	$editor = "nao";//$editor = "nao";//verificaEditores($editores);
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace("/admin/php/xml.php","",__FILE__)));
+	$c = "/admin/php/xml.php";
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+		$c = "\admin\php\xml.php";
+	}
+	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace($c,"",__FILE__)));
 	foreach($q as $row)
 	{
 		$mostraMapa = false;
@@ -680,7 +688,11 @@ function geraRSSmapas($locaplic)
 {
 	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace("/admin/php/xml.php","",__FILE__)));
+	$c = "/admin/php/xml.php";
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+		$c = "\admin\php\xml.php";
+	}
+	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace($c,"",__FILE__)));
 	$descricao = "'<![CDATA[Outros links<br>";
 	$descricao .= "<a href=$url/mashups/openlayers.php?restauramapa='||id_mapa||'&fundo=e_wsm >Openlayers 1</a><br><br>";
 	$descricao .= "<a href=$url/mashups/openlayers.php?restauramapa='||id_mapa||'&fundo= >Openlayers 2</a><br><br>";

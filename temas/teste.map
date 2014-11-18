@@ -1,21 +1,33 @@
 MAP
-SYMBOLSET ../symbols/simbolosv6.sym
-FONTSET   "../symbols/fontes.txt"
-LAYER
-	NAME "teste"
-	TEMPLATE "none.htm"
-	TYPE line
-	DATA ""
-	METADATA
-		TEMA "Teste de localidades"
-		CLASSE "SIM"
-	END
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "user=postgres password=postgres dbname=sissgeo host=localhost port=5432 options='-c client_encoding=LATIN7'"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (select geom,cod_bioma,ds_sintese,ds_bioma,nom_bioma,gid from fisico.biomas) as foo using unique gid using srid=4326"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "cache"	""
+      "CLASSE"	"SIM"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "metaestat"	""
+      "TEMA"	"Teste de localidades"
+      "convcaracter"	""
+      "cortepixels"	"0"
+    END # METADATA
+    NAME "teste"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE POLYGON
+    UNITS METERS
     CLASS
-        NAME ""
-        STYLE
-        	COLOR 0 0 0
-        	SIZE 12
-        END
-    END
-END
-END
+      NAME ""
+      STYLE
+        COLOR 0 0 0
+        SIZE 12
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+
