@@ -623,7 +623,7 @@ class Alteraclasse
 			$e = "('[".$item."]'eq'".$valores[$i]."')";
 			$ca = $classes[$i];
 			$ca->setexpression($e);
-			$texto = $nomes[$i];
+			$texto = $this->converteTexto($nomes[$i]);
 			$ca->set("name",$texto);
 			$estilo = $classes[$i]->getStyle(0);
 			$ncor = $estilo->color;
@@ -1043,6 +1043,30 @@ class Alteraclasse
 		}
 		$layer->close();
 		return ($valitem);
+	}
+	/*
+	 Function: converteTexto
+
+	Converte uma string de ISO-8859-1 para UTF-8
+
+	Parametro:
+
+	$texto - string que ser&aacute; convertida
+
+	Return:
+
+	{string}
+	*/
+	function converteTexto($texto)
+	{
+		if (function_exists("mb_convert_encoding"))
+		{
+			if (!mb_detect_encoding($texto,"ISO-8859-1",true))
+			{
+				$texto = mb_convert_encoding($texto,"ISO-8859-1","UTF-8");
+			}
+		}
+		return $texto;
 	}
 }
 ?>

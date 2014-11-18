@@ -11,7 +11,7 @@ MAP
       "permitekmz"	"nao"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "permitedownload"	"sim"
-      "PLUGINI3GEO"	'{"plugin":"parametrossql","parametros":[{"titulo" : "Ano dos dados ç","chave" : "ANO_DADOS","tipo" : "select","valores" : "1970,1980,2000"},{"titulo" : "","chave" : "","tipo" : "","valores" : ""},{"titulo" : "","chave" : "","tipo" : "","valores" : ""},{}]}'
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","parametros":[{"titulo" : "Ano dos dados","chave" : "ANO_DADOS","tipo" : "select","valores" : "1970,1980,2000"},{"titulo" : "","chave" : "","tipo" : "","valores" : ""},{"titulo" : "","chave" : "","tipo" : "","valores" : ""},{"titulo" : "","chave" : "","tipo" : "","valores" : "undefined"}]}'
       "metaestat"	""
       "permiteogc"	"sim"
       "permitekml"	"sim"

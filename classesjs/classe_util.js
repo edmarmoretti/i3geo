@@ -1984,8 +1984,9 @@ i3GEO.util = {
 			if(!alias){
 				alias = "sim";
 			}
-			if (arguments.length > 3)
-			{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";}
+			if (arguments.length > 3 && $i(onde)){
+				$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";
+			}
 			if (arguments.length !== 5)
 			{nome = "";}
 

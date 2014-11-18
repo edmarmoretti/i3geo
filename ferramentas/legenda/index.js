@@ -321,11 +321,17 @@ i3GEOF.legenda =
 				b.addClass("abrir100");
 				i3GEOF.legenda.ativaFoco();
 				i3GEOF.legenda.mostralegenda();
-				i3GEO.util.comboItens("i3GEOlegendaSelItem", i3GEOF.legenda.tema, function(retorno) {
-					if ($i("i3GEOlegendaitens")) {
-						$i("i3GEOlegendaitens").innerHTML = retorno.dados;
+				i3GEO.util.comboItens("", i3GEOF.legenda.tema, function(retorno) {
+					if ($i("i3GEOlegendaitensValorUnico")) {
+						$i("i3GEOlegendaitensValorUnico").innerHTML = retorno.dados;
 					}
-				}, "i3GEOlegendaitens");
+					if ($i("i3GEOlegendaitensValorClass")) {
+						$i("i3GEOlegendaitensValorClass").innerHTML = retorno.dados;
+					}
+					if ($i("i3GEOlegendaitensValorQuartil")) {
+						$i("i3GEOlegendaitensValorQuartil").innerHTML = retorno.dados;
+					}
+				});
 				if (i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda.tema).classe
 					&& i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda.tema).classe.toLowerCase() == "nao") {
 					$i("i3GEOFlegendamostra").checked = false;
@@ -1086,7 +1092,7 @@ i3GEOF.legenda =
 				if (i3GEOF.legenda.aguarde.visibility === "visible") {
 					return;
 				}
-				var item = $i("i3GEOlegendaSelItem").value, p =
+				var item = $i("i3GEOlegendaitensValorUnico").getElementsByTagName("select")[0].value, p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid + "&funcao=alteraclasse&tema="
 						+ i3GEOF.legenda.tema + "&item=" + item + "&opcao=valorunico&ignorar=" + $i("i3GEOlegendaignorar").value, cp =
 					new cpaint(), fim = function() {
@@ -1126,7 +1132,7 @@ i3GEOF.legenda =
 				if (i3GEOF.legenda.aguarde.visibility === "visible") {
 					return;
 				}
-				var item = $i("i3GEOlegendaSelItem").value, nclasses = $i("i3GEOlegendanclasses").value, ext =
+				var item = $i("i3GEOlegendaitensValorClass").getElementsByTagName("select")[0].value, nclasses = $i("i3GEOlegendanclasses").value, ext =
 					i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten), p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid
 						+ "&funcao=alteraclasse&nclasses=" + nclasses + "&tema=" + i3GEOF.legenda.tema + "&item=" + item
@@ -1161,7 +1167,7 @@ i3GEOF.legenda =
 				if (i3GEOF.legenda.aguarde.visibility === "visible") {
 					return;
 				}
-				var item = $i("i3GEOlegendaSelItem").value, ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten), p =
+				var item = $i("i3GEOlegendaitensValorQuartil").getElementsByTagName("select")[0].value, ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten), p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid + "&funcao=alteraclasse&tema="
 						+ i3GEOF.legenda.tema + "&item=" + item + "&opcao=quartis&ignorar=" + $i("i3GEOlegendaignorar").value + "&ext="
 						+ ext + "&tipoLegenda=" + $i("estiloClassesQuartis").value, cp = new cpaint(), fim = function() {
@@ -1194,7 +1200,7 @@ i3GEOF.legenda =
 				if (i3GEOF.legenda.aguarde.visibility === "visible") {
 					return;
 				}
-				var item = $i("i3GEOlegendaSelItem").value, nclasses = $i("i3GEOlegendanclasses").value, ext =
+				var item = $i("i3GEOlegendaitensValorClass").getElementsByTagName("select")[0].value, nclasses = $i("i3GEOlegendanclasses").value, ext =
 					i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten), p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid
 						+ "&funcao=alteraclasse&nclasses=" + nclasses + "&tema=" + i3GEOF.legenda.tema + "&item=" + item
@@ -1228,7 +1234,7 @@ i3GEOF.legenda =
 				if (i3GEOF.legenda.aguarde.visibility === "visible") {
 					return;
 				}
-				var item = $i("i3GEOlegendaSelItem").value, nclasses = $i("i3GEOlegendanclasses").value, ext =
+				var item = $i("i3GEOlegendaitensValorClass").getElementsByTagName("select")[0].value, nclasses = $i("i3GEOlegendanclasses").value, ext =
 					i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten), p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid
 						+ "&funcao=alteraclasse&nclasses=" + nclasses + "&tema=" + i3GEOF.legenda.tema + "&item=" + item

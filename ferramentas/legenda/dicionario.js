@@ -191,7 +191,7 @@ i3GEOF.legenda.dicionario = {
 		es : ""
 	} ],
 	'criaClassesItemNumerico' : [ {
-		pt : "Cria classes para um item num&eacute;rico utilizando um n&uacute;mero fixo de classes (o item utilizado &eacute; o mesmo indicado acima)",
+		pt : "Cria classes para um item num&eacute;rico utilizando um n&uacute;mero fixo de classes",
 		en : "",
 		es : ""
 	} ],
@@ -206,7 +206,7 @@ i3GEOF.legenda.dicionario = {
 		es : ""
 	} ],
 	'criaQuartis' : [ {
-		pt : "Cria classes para um item num&eacute;rico utilizando os quartis (o item utilizado &eacute; o mesmo indicado acima)",
+		pt : "Cria classes para um item num&eacute;rico utilizando os quartis",
 		en : "",
 		es : ""
 	} ],
