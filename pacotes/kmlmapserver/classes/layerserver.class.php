@@ -961,9 +961,13 @@ class LayerServer {
 			if(file_exists(dirname(__FILE__)."/ms_configura.php")){
 				include(dirname(__FILE__)."/ms_configura.php");
 			}
-			else{
+			if(file_exists(dirname(__FILE__)."/../../ms_configura.php")){
 				include(dirname(__FILE__)."/../../ms_configura.php");
 			}
+			if(file_exists(dirname(__FILE__)."/../../../ms_configura.php")){
+				include(dirname(__FILE__)."/../../../ms_configura.php");
+			}
+			
 			if(!file_exists($this->map)){
 				$maptemp = ms_newMapObj($locaplic."/temas/".$this->map.".map");
 				//if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -1021,6 +1025,9 @@ class LayerServer {
 			}
 			else{
 				$this->map_object = ms_newMapObj($this->map);
+				//$w = $this->map_object->web;
+				//$w->set("template","none.htm");
+				
 				if(!$this->_zipped){
 					$this->map_object->setmetadata('wms_onlineresource',$servidor.":80".$locmapserv."?map=".$temp."&width=1500&height=1500&");
 					$this->map_object->setmetadata("ows_enable_request","*");
