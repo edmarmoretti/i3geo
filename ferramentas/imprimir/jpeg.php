@@ -66,10 +66,12 @@ $map = ms_newMapObj($map_file);
 $temp = str_replace(".map","xxx.map",$map_file);
 $map->save($temp);
 substituiCon($temp,$postgis_mapa);
+$map = ms_newMapObj($temp);
 $of = $map->outputformat;
 $of->set("driver","AGG/JPEG");
 $of->set("imagemode","RGB");
-$map = ms_newMapObj($temp);
+$of->set("mimetype","image/jpeg");
+$of->set("extension","jpg");
 if($map->getmetadata("interface") == "googlemaps")
 {
 	$map->setProjection("init=epsg:4618,a=6378137,b=6378137");
