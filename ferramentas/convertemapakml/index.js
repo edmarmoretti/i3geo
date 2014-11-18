@@ -55,7 +55,7 @@ i3GEOF.converteMapaKml = {
 		tema = lista[0].name;
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["parametrosMapfile"] = i3GEO.parametros.mapfile;
-		dicionario["tema"] = tema;
+		dicionario["tema"] = "";
 		return dicionario;
 	},
 
