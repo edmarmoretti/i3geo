@@ -473,7 +473,7 @@ i3GEOF.metaestat = {
 					}
 				}
 				if(lista.length == 0){
-					alert("Escolha uma camada");
+					alert("selecionaCamada");
 					return;
 				}
 				i3GEO.janela.abreAguarde("aguardeAnalise","Aguarde...");

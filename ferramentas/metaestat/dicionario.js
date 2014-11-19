@@ -95,5 +95,10 @@ i3GEOF.metaestat.dicionario = {
 		pt : "Propriedades da camada",
 		en : "",
 		es : ""
+	} ],
+	'selecionaCamada' : [ {
+		pt : "Escolha uma camada",
+		en : "",
+		es : ""
 	} ]
 };
