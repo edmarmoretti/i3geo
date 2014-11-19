@@ -761,7 +761,7 @@ i3GEO.janela = {
 	funcao2 {function} - (opcional) funcao do botao 2
 		 */
 		confirma: function(pergunta,w,resposta1,resposta2,funcao1,funcao2){
-			var f1,f2,f3,janela = YAHOO.i3GEO.janela.managerAguarde.find("confirma");
+			var b,f1,f2,f3,janela = YAHOO.i3GEO.janela.managerAguarde.find("confirma");
 			if(!w || w == ""){
 				w = 300;
 			}
@@ -795,11 +795,15 @@ i3GEO.janela = {
 			if(!resposta1 || resposta1 == ""){
 				resposta1 = $trad("x58");
 			}
-			if(!resposta2 || resposta2 == ""){
-				resposta2 = $trad("x75");
-			}
 			if(janela){
 				janela.destroy();
+			}
+			b = [
+		          { text: $trad("x75"), handler:f3 },
+		          { text: resposta1, handler:f1 }
+		          ];
+			if(resposta2 && resposta2 != ""){
+				b.push({ text: resposta2,  handler:f2 });
 			}
 			janela = new YAHOO.widget.SimpleDialog("confirma",{
 				width: w+"px",
@@ -812,13 +816,9 @@ i3GEO.janela = {
 				modal: false,
 				effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.25},
 				constraintoviewport: true,
-				buttons: [
-				          { text: $trad("x75"), handler:f3 },
-				          { text: resposta1, handler:f1 },
-				          { text: resposta2,  handler:f2 }
-				          ],
-				          icon: YAHOO.widget.SimpleDialog.ICON_HELP,
-				          text: "<p class=paragrafo >"+pergunta
+				buttons: b,
+				icon: YAHOO.widget.SimpleDialog.ICON_HELP,
+				text: "<p class=paragrafo >"+pergunta
 			});
 			YAHOO.i3GEO.janela.managerAguarde.register(janela);
 			janela.setHeader(" ");

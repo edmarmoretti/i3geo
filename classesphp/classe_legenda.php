@@ -856,5 +856,68 @@ $width
 		fputs( $fp, $sldf );
 		fclose($fp);
 	}
+	function aplicaTodasClasses($parametro,$valor)
+	{
+		if(!$this->layer){return "erro";}
+		$numc = $this->layer->numclasses;
+		for ($c = 0;$c < $numc;$c++){
+			$classe = $this->layer->getclass($c);
+			$estilo = $classe->getstyle(0);
+			switch ($parametro){
+				case "pattern":
+					if(!empty($pattern)){
+						$pattern = str_replace(","," ",$valor);
+						if ($this->v == 6){
+							$estilo->updatefromstring("STYLE PATTERN ".$valor." END");
+						}
+					}
+				continue;
+				case "symbolname":
+					if($symbolname == "" || $symbolname == "0"){
+						$classe->deletestyle($estilo);
+						$estilo = ms_newStyleObj($classe);
+					}
+					else{
+						if(is_numeric($valor)){
+							$estilo->set("symbol",$valor);
+						}
+						else{
+							$estilo->set("symbolname",$valor);
+						}
+					}
+				continue;
+				case "outlinecolor":
+					$cor = $estilo->outlinecolor;
+					$nc = explode(",",$valor);
+					$cor->setRGB($nc[0],$nc[1],$nc[2]);
+				continue;
+				case "backgroundcolor":
+					$cor = $estilo->backgroundcolor;
+					$nc = explode(",",$valor);
+					$cor->setRGB($nc[0],$nc[1],$nc[2]);
+				continue;
+				case "color":
+					$cor = $estilo->color;
+					$nc = explode(",",$valor);
+					$cor->setRGB($nc[0],$nc[1],$nc[2]);
+				continue;
+				case "size":
+					$estilo->set("size",$valor);
+				break;
+				case "width":
+					$estilo->set("width",$valor);
+				continue;
+				case "opacity":
+					$estilo->set("opacity",$valor);
+				continue;
+				case "angle":
+					$estilo->set("angle",$valor);
+				continue;
+			}
+		}
+		$this->layer->setMetaData("cache","");
+		return "ok";
+	}
+
 }
 ?>

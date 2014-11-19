@@ -84,7 +84,19 @@ Acrescenta a contagem de elementos em cada classe.
 		if (!$r){$r = "erro.Erro legenda nao disponivel";}
 		$retorno = $r;
 	break;
+	/*
+	 Valor: APLICATODASCLASSES
 
+	Aplica um parametro a todas as classes
+	*/
+	case "APLICATODASCLASSES":
+		include_once(dirname(__FILE__)."/../../classesphp/classe_legenda.php");
+		$m = new Legenda($map_file,$locaplic,$tema);
+		$r = $m->aplicaTodasClasses($parametro,$valor);
+		$m->salva();
+		if (!$r){$r = "erro.Erro legenda nao disponivel";}
+		$retorno = $r;
+	break;
 }
 if (!connection_aborted()){
 	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")

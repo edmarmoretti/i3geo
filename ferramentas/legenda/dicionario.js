@@ -484,5 +484,10 @@ i3GEOF.legenda.dicionario = {
 		pt : "N&atilde;o desenha se escala for maior que",
 		en : "",
 		es : ""
+	} ],
+	'aplicatodos' : [ {
+		pt : "Aplicar esse par&acirc;metro em todas as classes",
+		en : "",
+		es : ""
 	} ]
 };

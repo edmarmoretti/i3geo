@@ -233,7 +233,6 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 
 $buffer - Opcional
 */
-	//TODO
 	function selecaoTema($temao,$tipo,$buffer=0){
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
