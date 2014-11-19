@@ -405,7 +405,7 @@ var i3GEO = {
 								nomecookie = "i3geoUltimaExtensaoOSM";
 							}
 							temp = i3GEO.util.pegaCookie(nomecookie);
-							if (temp) {
+							if (temp && temp != "") {
 								temp = temp.replace(
 										/[\+]/g,
 										" ");

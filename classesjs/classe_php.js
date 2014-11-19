@@ -5,7 +5,7 @@ i3GEO.php
 
 Chamadas em AJAX que executam programas no lado do servidor
 
-Muitos dos par�aetros exigidos pelos programas em PHP s&atilde;o obtidos da vari&aacute;vel
+Muitos dos parametros exigidos pelos programas em PHP s&atilde;o obtidos da vari&aacute;vel
 de se&ccedil;&atilde;o aberta no servidor quando o i3Geo &eacute; inicializado, &eacute; o caso por exemplo do nome
 do arquivo correspondente ao mapfile atualmente em uso
 
@@ -314,7 +314,7 @@ i3GEO.php = {
 	},
 	/*
 	Function: listaTemasEditaveis
-	 
+
 	Lista os temas guardados na pasta temporaria (temas locais)
 
 	<LISTATEMASLOCAIS>
@@ -715,9 +715,9 @@ i3GEO.php = {
 
 	<SELECAOWKT>
 	*/
-	selecaoWkt: function(funcao,tema,tipo,wkt){
+	selecaoWkt: function(funcao,tema,tipo,wkt,buffer){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/ferramentas/selecao/exec.php?funcao=selecaowkt&g_sid="+i3GEO.configura.sid+"&tipo="+tipo+"&tema="+tema+"&ext="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten),
+		var p = i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php?funcao=selecaowkt&g_sid=" + i3GEO.configura.sid + "&tipo="+tipo + "&tema="+tema + "&ext="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten + "&buffer=" + buffer),
 			cp = new cpaint();
 		cp.set_transfer_mode('POST');
 		cp.set_response_type("JSON");
@@ -761,10 +761,10 @@ i3GEO.php = {
 
 	<SELECAOTEMA>
 	*/
-	selecaotema: function(funcao,temao,tema,tipo){
+	selecaotema: function(funcao,temao,tema,tipo,buffer){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/ferramentas/selecao/exec.php",
-			par = "g_sid="+i3GEO.configura.sid+"&funcao=selecaotema&temao="+temao+"&tema="+tema+"&tipo="+tipo+"&ext="+i3GEO.parametros.mapexten;
+			par = "g_sid="+i3GEO.configura.sid+"&funcao=selecaotema&temao="+temao+"&tema="+tema+"&tipo="+tipo+"&ext="+i3GEO.parametros.mapexten+"&buffer="+buffer;
 		cpJSON.call(p,"selecaotema",funcao,par);
 	},
 	/*
@@ -1718,7 +1718,8 @@ i3GEO.php = {
 			par = "funcao=salvaMapfile" +
 			"&url=" + url.replace("#","") +
 			"&arqmapfile=" + i3GEO.parametros.mapfile +
-			"&nome_mapa=" + titulo+"&id_mapa="+id_mapa;
+			"&nome_mapa=" + titulo+"&id_mapa="+id_mapa +
+			"&ext="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 
 		cp = new cpaint();
 		cp.set_transfer_mode('POST');

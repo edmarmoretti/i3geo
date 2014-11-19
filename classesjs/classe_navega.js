@@ -116,6 +116,7 @@ i3GEO.navega = {
 	},
 	extensaoProximo: function(){
 		i3GEO.navega.EXTENSOES.posicao--;
+		i3GEO.navega.EXTENSOES.posicao--;
 		i3GEO.navega.extensaoAnterior();
 	},
 	/*
@@ -174,6 +175,13 @@ i3GEO.navega = {
 			//FIXME ao passar sobre a marca de centro na operacao de pan dispara o evento que finaliza o pan
 			//YAHOO.util.Event.addListener($i("i3GeoCentroDoMapa"), "mouseover", function(){$i("i3GeoCentroDoMapa").style.display="none";});
 		}
+	},
+	removeCookieExtensao: function(){
+		var nomecookie = "i3geoUltimaExtensao";
+		if (i3GEO.Interface.openlayers.googleLike === true) {
+			nomecookie = "i3geoUltimaExtensaoOSM";
+		}
+		i3GEO.util.insereCookie(nomecookie,"");
 	},
 	/*
 	Function: zoomin

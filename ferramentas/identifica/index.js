@@ -939,6 +939,7 @@ i3GEOF.identifica = {
 							for(k=0;k<nitens;k++){
 								tip = "&nbsp;&nbsp;";
 								textovalor = resultados[j][k].valor;
+
 								//insere o input para edicao
 								//se for uma regiao cadastrada, todos os campos sao editaveis
 								if(idreg != "" && (resultados[j][k].item === retorno[i].editavel || retorno[i].editavel == "todos" )){

@@ -295,6 +295,7 @@ i3GEO.guias = {
 				}
 				i3GEO.guias.mostra("mapas");
 				i3GEO.php.pegaMapas(pegaMapas);
+				i3GEO.navega.removeCookieExtensao();
 			}
 		}
 	},

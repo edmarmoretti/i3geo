@@ -174,7 +174,7 @@ switch (strtoupper($funcao))
 	break;
 }
 function salvaMapfile(){
-	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa,$preferenciasbase64,$geometriasbase64,$graficosbase64;
+	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa,$preferenciasbase64,$geometriasbase64,$graficosbase64,$ext;
 	//as preferencias sao criadas via javascript e guardadas junto com o mapa
 	try{
 		//
@@ -192,6 +192,13 @@ function salvaMapfile(){
 			$customizacoesinit[] = '"graficosbase64":"'.$graficosbase64.'"';
 			$m = ms_newMapObj($arqmapfile);
 			$m->setmetadata("CUSTOMIZACOESINIT",'{'.implode(",",$customizacoesinit).'}');
+			$m->save($arqmapfile);
+		}
+		if($ext && $ext != ""){
+			$e = explode(" ",$ext);
+			$m = ms_newMapObj($arqmapfile);
+			$extatual = $m->extent;
+			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 			$m->save($arqmapfile);
 		}
 		$handle = fopen ($arqmapfile, 'r');

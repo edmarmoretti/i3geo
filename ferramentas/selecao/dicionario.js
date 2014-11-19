@@ -86,7 +86,7 @@ i3GEOF.selecao.dicionario = {
 		es : ""
 	} ],
 	'distanciaSelecao' : [ {
-		pt : "Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):",
+		pt : "Dist&acirc;ncia utilizada ao selecionar (em metros):",
 		en : "",
 		es : ""
 	} ],

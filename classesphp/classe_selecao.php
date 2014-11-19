@@ -159,8 +159,12 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 $xs - lista de coordenadas x separadas por virgula
 
 $ys - lista de coordenadas y separadas por virgula
+
+$wkt - string wkt opcional ao uso de xs e ys
+
+$buffer - buffer que será aplicado
 */
-	function selecaoPorPoligono($tipo,$xs="",$ys="",$wkt="")
+	function selecaoPorPoligono($tipo,$xs="",$ys="",$wkt="",$buffer=0)
 	{
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
@@ -199,6 +203,9 @@ $ys - lista de coordenadas y separadas por virgula
 			$linha->addxy($xs[0],$ys[0]);
 			$s->add($linha);
 		}
+		if($buffer > 0){
+			$s = $this->bufferShape($s,$buffer);
+		}
 		$this->layer->querybyshape($s);
 		$res_count = $this->layer->getNumresults();
 		for ($i = 0; $i < $res_count; ++$i)
@@ -223,8 +230,11 @@ parameters:
 $temao - Tema que ser&aacute; processado.
 
 $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
+
+$buffer - Opcional
 */
-	function selecaoTema($temao,$tipo){
+	//TODO
+	function selecaoTema($temao,$tipo,$buffer=0){
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
 		if ($tipo == "novo"){
@@ -274,9 +284,13 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 					$s  = $result->shapeindex;
 					$sh = $layero->getfeature($s,-1);
 				}
+				if($buffer > 0){
+					$sh = $this->bufferShape($sh,$buffer);
+				}
 				$tiposh = $sh->type;
-				if ($tiposh == 2)
-				{$ident = @$this->layer->querybyshape($sh);}
+				if ($tiposh == 2){
+					$ident = @$this->layer->querybyshape($sh);
+				}
 				if ($tiposh == 0)
 				{
 					$lin = $sh->line(0);
@@ -330,6 +344,9 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 				{$s = @$layero->getShape($layero->getResult($k));}
 				else
 				{$s = @$layero->getfeature($k,-1);}
+				if($buffer > 0){
+					$s = $this->bufferShape($s,$buffer);
+				}
 				if($s){
 					if ($s->type == 2)
 					{
@@ -949,6 +966,48 @@ $geos - array com os dados
 		$r = serialize($geos);
 		fwrite($fp,$r);
 		fclose($fp);
+	}
+	/*
+	function projetaDistancia
+
+	Projeta um valor de distancia em metros para dd
+
+	Parametros:
+
+	$shape - objeto usado para calcular o centro da projecao
+
+	$distancia - distancia em metros
+	*/
+	function projetaDistancia($shape,$distancia){
+		error_reporting(0);
+		$pt = $shape->getCentroid();
+		$projInObj = ms_newprojectionobj("proj=latlong");
+		$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$pt->x.",x_0=5000000,y_0=10000000");
+		$poPoint = ms_newpointobj();
+		$poPoint->setXY($pt->x, $pt->y);
+		$poPoint->project($projInObj, $projOutObj);
+		$dd2 = ms_newpointobj();
+		$dd2->setXY(($poPoint->x + $distancia), $poPoint->y);
+		$dd2->project($projOutObj,$projInObj);
+		$d = $pt->distanceToPoint($dd2);
+		if ($d < 0){$d = $d * -1;}
+		return $d;
+	}
+	/*
+	 function bufferShape
+
+	Buffer de um shape em metros
+
+	Parametros:
+
+	$shape - objeto usado para calcular o centro da projecao
+
+	$distancia - distancia em metros
+	*/
+	function bufferShape($shape,$distancia){
+		$d = $this->projetaDistancia($shape,$distancia);
+		$b = $shape->buffer($d);
+		return $b;
 	}
 }
 ?>

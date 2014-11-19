@@ -51,7 +51,7 @@ Sleciona elementos de um tema com base em outro tema.
 		$temas = explode(",",$tema);
 		foreach($temas as $tema){
 			$m = new Selecao($map_file,$tema);
-			$ok[] = $m->selecaoTema($temao,$tipo);
+			$ok[] = $m->selecaoTema($temao,$tipo,$buffer);
 		}
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -114,9 +114,9 @@ Seleciona elementos utilizando um ret&acirc;ngulo.
 	break;
 	/*
 	 Valor: SELECAOWKT
-	
+
 	Seleciona elementos utilizando um wkt
-	
+
 	<Selecao->selecaoBOX>
 	*/
 	case "SELECAOWKT":
@@ -125,7 +125,7 @@ Seleciona elementos utilizando um ret&acirc;ngulo.
 		$temas = explode(",",$tema);
 		foreach($temas as $tema){
 			$m = new Selecao($map_file,$tema,$ext);
-			$ok[] = $m->selecaoPorPoligono($tipo,"","",$wkt);
+			$ok[] = $m->selecaoPorPoligono($tipo,"","",$wkt,$buffer);
 		}
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -162,7 +162,7 @@ Sele&ccedil;&atilde;o por poligono (chamado via POST).
 		//esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
 		//por isso precisa ser executada com start
 		copiaSeguranca($map_file);
-		$retorno = selecaoPoli($xs,$ys,$tema,$tipo);
+		$retorno = selecaoPoli($xs,$ys,$tema,$tipo,$buffer);
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 		//restauraCon($map_file,$postgis_mapa);
@@ -196,7 +196,7 @@ Seleciona um tema por pol&iacute;gono baseado em uma lista de pontos.
 Include:
 <classe_selecao.php>
 */
-function selecaoPoli($xs,$ys,$tema,$tipo)
+function selecaoPoli($xs,$ys,$tema,$tipo,$buffer=0)
 {
 	global $map_file;
 	include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
@@ -204,7 +204,7 @@ function selecaoPoli($xs,$ys,$tema,$tipo)
 	foreach($temas as $tema)
 	{
 		$m = new Selecao($map_file,$tema);
-		$ok[] = $m->selecaoPorPoligono($tipo,$xs,$ys);
+		$ok[] = $m->selecaoPorPoligono($tipo,$xs,$ys,"",$buffer);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	}
