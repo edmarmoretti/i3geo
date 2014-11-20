@@ -1,52 +1,7 @@
 //+$trad(1,i3GEOF.imprimir.dicionario)+
 i3GEOF.imprimir.dicionario = {
-	1 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	2 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	3 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	4 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	5 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	6 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	7 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	8 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	9 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	10 : [ {
-		pt : "",
+	"escolha" : [ {
+		pt : "Escolha o modelo: (utilize as propriedades do mapa para compor a legenda e outros elementos do mapa)",
 		en : "",
 		es : ""
 	} ]

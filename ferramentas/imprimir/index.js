@@ -31,6 +31,18 @@ Classe: i3GEOF.imprimir
 
 */
 i3GEOF.imprimir = {
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.imprimir.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		return dicionario;
+	},
 	/*
 	Variavel: aguarde
 
@@ -74,6 +86,48 @@ i3GEOF.imprimir = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.imprimir.html();
+
+			new YAHOO.widget.Button("i3GEOFimprimirPdf", {
+				onclick : {
+					fn : function() {
+						var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/a4lpaisagempdf.htm";
+						i3GEOF.imprimir.abreI(url);
+					}
+				}
+			});
+			new YAHOO.widget.Button("i3GEOFimprimirTiff", {
+				onclick : {
+					fn : function() {
+						var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/geotif.php";
+						i3GEOF.imprimir.abreI(url,"interna");
+					}
+				}
+			});
+			new YAHOO.widget.Button("i3GEOFimprimirAgg", {
+				onclick : {
+					fn : function() {
+						var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/aggpng.php";
+						i3GEOF.imprimir.abreI(url,"interna");
+					}
+				}
+			});
+			new YAHOO.widget.Button("i3GEOFimprimirJpg", {
+				onclick : {
+					fn : function() {
+						var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/jpeg.php";
+						i3GEOF.imprimir.abreI(url,"interna");
+					}
+				}
+			});
+			new YAHOO.widget.Button("i3GEOFimprimirSvg", {
+				onclick : {
+					fn : function() {
+						var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/svg.php";
+						i3GEOF.imprimir.abreI(url,"interna");
+					}
+				}
+			});
+
 			var temp = function(retorno){
 				g_legendaHTML = retorno.data.legenda;
 			};
@@ -92,39 +146,7 @@ i3GEOF.imprimir = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<p class=paragrafo > Escolha o modelo: (utilize as propriedades do mapa para compor a legenda e outros elementos do mapa)</p>' +
-			'<table class=lista6 width="200px">';
-			if(i3GEO.Interface.ATUAL == "padrao"){
-			ins += '	<tr>' +
-			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4l.htm" name=cmodelo /></td>' +
-			'		<td>A4 paisagem</td>' +
-			'	</tr>' +
-			'	<tr>' +
-			'		<td ><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4p.htm" name=cmodelo  /></td>' +
-			'		<td >A4 retrato</td>' +
-			'	</tr>';
-			}
-			ins += '	<tr>' +
-			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4lpaisagempdf.htm" name=cmodelo /></td>' +
-			'		<td>A4 com margens pdf</td>' +
-			'	</tr>' +
-			'	<tr>' +
-			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this,"interna") type=radio value="geotif.php" name=cmodelo /></td>' +
-			'		<td>Geo Tiff</td>' +
-			'	</tr>' +
-			'	<tr>' +
-			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this,"interna") type=radio value="aggpng.php" name=cmodelo /></td>' +
-			'		<td>Agg/Png alta qualidade</td>' +
-			'	</tr>' +
-			'	<tr>' +
-			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this,"interna") type=radio value="jpeg.php" name=cmodelo /></td>' +
-			'		<td>JPEG</td>' +
-			'	</tr>' +
-			'	<tr>' +
-			'		<td><input style="border:0px solid white;cursor:pointer" onclick=i3GEOF.imprimir.abreI(this,"interna") type=radio value="svg.php" name=cmodelo /></td>' +
-			'		<td>Svg - vetorial</td>' +
-			'	</tr>' +
-			'</table>';
+		var ins = Mustache.render(i3GEOF.imprimir.MUSTACHE, i3GEOF.imprimir.mustacheHash());
 		return ins;
 	},
 	/*
@@ -142,7 +164,7 @@ i3GEOF.imprimir = {
 		titulo = $trad("d12")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=49' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"250px",
-			"180px",
+			"230px",
 			"",
 			"",
 			"",
@@ -170,12 +192,12 @@ i3GEOF.imprimir = {
 
 	tipoAbertura {string} - (opcional) se for "interna" abre em uma janela interna do mapa
 	*/
-	abreI: function(obj,tipoAbertura){
+	abreI: function(url,tipoAbertura){
 		var interf = i3GEO.Interface.ATUAL;
 		if(i3GEO.Interface.openlayers.googleLike === true){
 			interf = "googlemaps";
 		}
-		var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid+"&interface="+interf+"&mapexten="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+		url = url+"?g_sid="+i3GEO.configura.sid+"&interface="+interf+"&mapexten="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 		var id = "imprimir"+Math.random();
 		if(tipoAbertura){
 			i3GEO.janela.cria("350px","350px",url,"","","Arquivos",id);

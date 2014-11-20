@@ -19,13 +19,6 @@ i3GEOF.uploadarquivos =
 		return dicionario;
 	},
 	/*
-	 * Function: iniciaDicionario (Depreciado na versao 6.0)
-	 *
-	 */
-	iniciaDicionario : function() {
-		i3GEOF.uploadarquivos.iniciaJanelaFlutuante();
-	},
-	/*
 	 * Function: inicia
 	 *
 	 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante

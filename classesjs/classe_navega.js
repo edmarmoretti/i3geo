@@ -177,9 +177,9 @@ i3GEO.navega = {
 		}
 	},
 	removeCookieExtensao: function(){
-		var nomecookie = "i3geoUltimaExtensao";
+		var nomecookie = "i3geoOLUltimaExtensao";
 		if (i3GEO.Interface.openlayers.googleLike === true) {
-			nomecookie = "i3geoUltimaExtensaoOSM";
+			nomecookie = "i3geoUltima_ExtensaoOSM";
 		}
 		i3GEO.util.insereCookie(nomecookie,"");
 	},

@@ -734,7 +734,7 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta que permite imprimir o mapa atual
 			 */
 			imprimir : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.imprimir()", "imprimir", "imprimir");
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.imprimir()", "imprimir", "imprimir","dependencias.php","i3GEOF.imprimir.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: mostraExten

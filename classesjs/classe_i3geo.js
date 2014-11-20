@@ -347,7 +347,7 @@ var i3GEO = {
 		i3GEO.mapa.aplicaPreferencias();
 		montaMapa = function(retorno) {
 			try {
-				var temp, nomecookie = "i3geoUltimaExtensao", preferencias = "";
+				var temp, nomecookie = "i3geoOLUltimaExtensao", preferencias = "";
 				// verifica se existe bloqueio em funcao da senha no
 				// ms_configura.php
 				if (retorno.bloqueado) {
@@ -402,7 +402,7 @@ var i3GEO = {
 						// obtem o cookie com a ultima extensao geografica
 						if (i3GEO.configura.guardaExtensao === true) {
 							if (i3GEO.Interface.openlayers.googleLike === true) {
-								nomecookie = "i3geoUltimaExtensaoOSM";
+								nomecookie = "i3geoUltima_ExtensaoOSM";
 							}
 							temp = i3GEO.util.pegaCookie(nomecookie);
 							if (temp && temp != "") {
