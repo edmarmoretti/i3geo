@@ -1,76 +1,32 @@
 MAP
   FONTSET "/var/www/i3geo/symbols/fontes.txt"
   SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
-  LAYER
-    CONNECTION "i3geosaude"
+LAYER
+    CONNECTION "user=postgres password=postgres dbname=i3geosaude host=localhost port=5432 options='-c client_encoding=LATIN1'"
     CONNECTIONTYPE POSTGIS
-    DATA "the_geom from (select * from i3geo_metaestat.bairros ) as foo using unique gid using srid=4326"
+    DATA "the_geom from (select st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros /*FW*//*FW*/) as foo using unique co_bairro using srid=4326"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "ID_MEDIDA_VARIAVEL"	""
-      "ltempoitemimagem"	""
-      "cache"	""
-      "olopacity"	""
-      "ltempoitemdescricao"	""
+      "TIP"	"no_bairro"
       "CLASSE"	"SIM"
-      "ltempoiteminicio"	""
-      "palletestep"	""
-      "ltempoitemtip"	""
-      "permitekmz"	"nao"
-      "temporizador"	""
-      "gmopacity"	""
-      "gmstatus"	""
-      "iconetema"	""
-      "ltempoitemtitulo"	""
-      "description_template"	""
-      "ltempoitemlink"	""
-      "EDITAVEL"	"SIM"
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "arquivotemaoriginal"	""
-      "palletefile"	""
-      "olstatus"	""
-      "nomeoriginal"	""
-      "ltempoformatodata"	""
-      "permitedownload"	"sim"
-      "ltempoitemicone"	""
-      "permitecomentario"	""
-      "metaestat"	""
-      "ESQUEMATABELAEDITAVEL"	"i3geo_metaestat"
-      "download"	"SIM"
-      "itembuscarapida"	"no_bairro"
-      "arquivodownload"	""
-      "arquivokmz"	""
-      "CONEXAOORIGINAL"	"i3geosaude"
-      "permitekml"	"sim"
-      "permiteogc"	"sim"
-      "convcaracter"	""
-      "TEMA"	"Bairros IBGE -"
-      "COLUNAIDUNICO"	"gid"
-      "COLUNAGEOMETRIA"	"the_geom"
-      "cortepixels"	"0"
-      "ltempoconvencode"	""
-      "editorsql"	""
-      "TABELAEDITAVEL"	"bairros"
-      "ltempoitemfim"	""
-      "legendaimg"	""
+      "ITENSDESC"	"Código bairro,Nome,Distrito,Município"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	"1"
+      "METAESTAT"	"SIM"
+      "ITENS"	"co_bairro,no_bairro,no_distr,no_municip"
+      "TEMA"	"Bairro (IBGE)"
     END # METADATA
     NAME "_lbairros"
-    PROCESSING "LABEL_NO_CLIP=True"
-    PROCESSING "POLYLINE_NO_CLIP=True"
     STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"
-    OPACITY 90
     TYPE POLYGON
     UNITS METERS
     CLASS
-      NAME " "
+      NAME ""
       STYLE
-        OUTLINECOLOR 226 92 92
+        OUTLINECOLOR 255 100 0
       END # STYLE
-      TITLE ""
     END # CLASS
   END # LAYER
-
+ 
 END # MAP
 
