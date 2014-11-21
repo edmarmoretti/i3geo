@@ -939,7 +939,6 @@ i3GEOF.identifica = {
 							for(k=0;k<nitens;k++){
 								tip = "&nbsp;&nbsp;";
 								textovalor = resultados[j][k].valor;
-
 								//insere o input para edicao
 								//se for uma regiao cadastrada, todos os campos sao editaveis
 								if(idreg != "" && (resultados[j][k].item === retorno[i].editavel || retorno[i].editavel == "todos" )){
@@ -960,6 +959,18 @@ i3GEOF.identifica = {
 								}
 								filtro = "onclick=i3GEOF.identifica.filtrar('"+retorno[i].tema+"','"+resultados[j][k].item+"','"+resultados[j][k].valor+"','"+idjanela+"')";
 								filtro = "<img "+filtro+" style='margin-right:2px;position:relative;top:3px;width:12px;' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-filter.png' title='"+$trad('filtraValor',i3GEOF.identifica.dicionario)+"' />";
+								//verifica se o texto possui tags de abertura e fechamento html
+								try{
+									if(textovalor && (textovalor.search(">") >= 0 || textovalor.search("<") >= 0)){
+										filtro = "";
+									}
+									//o mesmo problema pode ocorrer em raster, que possuem o nome da classe como valor
+									if(resultados[j][k].alias.search(">") >= 0 || resultados[j][k].alias.search("<") >= 0){
+										filtro = "";
+									}
+								}
+								catch(e){}
+
 								if(resultados[j][k].link === ""){
 									res +=  "<div style='width:100%;text-align:left;background-color:"+
 									cor+"' >"+
