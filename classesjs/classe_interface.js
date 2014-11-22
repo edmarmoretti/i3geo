@@ -341,7 +341,7 @@ i3GEO.Interface =
 		 *
 		 * Parametros:
 		 *
-		 * retorno {JSON} - objeto JSON com os par�metros obtidos da
+		 * retorno {JSON} - objeto JSON com os parametros obtidos da
 		 * fun&ccedil;&atilde;o PHP de redesenho do mapa. Quando igual a "",
 		 * &eacute; feita apenas a atualiza&ccedil;&atilde;o da camada, sem que a
 		 * &aacute;rvore de camadas seja atualizada.
@@ -1915,7 +1915,7 @@ i3GEO.Interface =
 				1128
 			],
 			/*
-			 * Par�metros adicionais que s&atilde;o inseridos na URL que define cada
+			 * Parametros adicionais que s&atilde;o inseridos na URL que define cada
 			 * layer
 			 *
 			 * Tipo {string}
@@ -2601,7 +2601,7 @@ i3GEO.Interface =
 			/*
 			 * Variable: PARAMETROSLAYER
 			 *
-			 * Par�metros adicionais que s&atilde;o inseridos na URL que define cada
+			 * Parametros adicionais que s&atilde;o inseridos na URL que define cada
 			 * layer
 			 *
 			 * Tipo {string}

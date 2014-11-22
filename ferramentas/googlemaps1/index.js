@@ -235,7 +235,7 @@ function botaoRota(){
 /*
 Function: ondegoogle
 
-Mostra, no mapa principal, um retângulo indicando a extens&atilde;o geogr&aacute;fica do mapa mostrado na janela do GM
+Mostra, no mapa principal, um retangulo indicando a extens&atilde;o geogr&aacute;fica do mapa mostrado na janela do GM
 */
 function ondegoogle(){
 	if(!i3GEO || !map.getBounds()){return;}
@@ -347,7 +347,7 @@ function ativaI3geoRota(){
 /*
 Function: parametrosRota
 
-Obt&eacute;m os parâmetros para cria&ccedil;&atilde;o da rota, inclusive o ponto de destino
+Obt&eacute;m os parametros para cria&ccedil;&atilde;o da rota, inclusive o ponto de destino
 */
 function parametrosRota(overlay){
 	if(counterClick == 1){

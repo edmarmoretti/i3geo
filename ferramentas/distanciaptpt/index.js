@@ -155,7 +155,7 @@ i3GEOF.distanciaptpt = {
 	/*
 	Function: calcula
 
-	Executa a opera&ccedil;&atilde;o de c&aacute;lculo das dist�ncias
+	Executa a opera&ccedil;&atilde;o de c&aacute;lculo das distancias
 
 	Veja:
 

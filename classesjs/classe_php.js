@@ -75,7 +75,7 @@ Return:
 
 	cpJSON.call(p,"teste",temp);
 
-	onde, p cont&eacute;m o nome do programa PHP e seus par�metros
+	onde, p cont&eacute;m o nome do programa PHP e seus parametros
 	"teste" &eacute; o nome da fun&ccedil;&atilde;o PHP (no caso do i3Geo, isso n&atilde;o afeta em nada)
 	e temp &eacute; a fun&ccedil;&atilde;o que tratar&aacute; o retorno dos dados.
 
@@ -611,9 +611,9 @@ i3GEO.php = {
 	/*
 	Function: mudaext
 
-	O par�metro "atualiza" &eacute; do tipo booleano e indica se o redesenho do mapa ser&aacute; feito ou n&atilde;o.
+	O parametro "atualiza" &eacute; do tipo booleano e indica se o redesenho do mapa ser&aacute; feito ou n&atilde;o.
 
-	O par�metro "geo" &eacute; do tipo booleano e indica se as coordenadas dever&atilde;o ser convertidas para geogr&aacute;ficas ao serem salvas no mapfile
+	O parametro "geo" &eacute; do tipo booleano e indica se as coordenadas dever&atilde;o ser convertidas para geogr&aacute;ficas ao serem salvas no mapfile
 
 	<MUDAEXT>
 	*/

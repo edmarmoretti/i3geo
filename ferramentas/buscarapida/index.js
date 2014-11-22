@@ -56,7 +56,7 @@ i3GEObuscaRapida = {
 
 	Endere&ccedil;o do servi&ccedil;o de busca que ser&aacute; utilizado para retornar a representa&ccedil;&atilde;o cartogr&aacute;fica do elemento encontrado.
 
-	Esse servi&ccedil;o deve ser um Web Service no padr&atilde;o OGC com o par�metro adicional "gid" indicando o id do elemento que ser&aacute; mostrado na tela.
+	Esse servi&ccedil;o deve ser um Web Service no padr&atilde;o OGC com o parametro adicional "gid" indicando o id do elemento que ser&aacute; mostrado na tela.
 
 	Type:
 	{String}
@@ -74,7 +74,7 @@ i3GEObuscaRapida = {
 
 	Alterando-se essa op&ccedil;&atilde;o, pode-se executar o busca r&aacute;pida como um gadget.
 
-	Veja i3GEObuscaRapida.zoom para conhecer os par�metros que essa fun&ccedil;&atilde;o ir&aacute; receber
+	Veja i3GEObuscaRapida.zoom para conhecer os parametros que essa fun&ccedil;&atilde;o ir&aacute; receber
 
 	Type:
 	{String}
@@ -335,7 +335,7 @@ i3GEObuscaRapida = {
 
 	Essa &eacute; a fun&ccedil;&atilde;o default utilizada pela ferramenta, podendo ser substitu&iacute;da por outra se desejado.
 
-	Al&eacute;m de enquadrar o mapa � uma extens&atilde;o geogr&aacute;fica espec&iacute;fica, uma nova camada &eacute; adicionada, mostrando o limite da ocorr&ecirc;ncia desejada.
+	Al&eacute;m de enquadrar o mapa a uma extens&atilde;o geogr&aacute;fica espec&iacute;fica, uma nova camada &eacute; adicionada, mostrando o limite da ocorr&ecirc;ncia desejada.
 
 	Veja:
 
@@ -349,7 +349,7 @@ i3GEObuscaRapida = {
 
 	gid {String} - identificador que ser&aacute; utilizado no WMS para selecionar o elemento desejado
 
-	nm {String} - nome que ser&aacute; dado � acamada que ser&aacute; adicionada ao mapa
+	nm {String} - nome que ser&aacute; dado a camada que ser&aacute; adicionada ao mapa
 	*/
 	zoom: function(wkt,layer,gid,nm){
     	var adicionaCamada = function(layer,gid,nm,ext){
@@ -405,7 +405,7 @@ i3GEObuscaRapida = {
 	/*
 	Function: mostraxy
 
-	Mostra no mapa um ret�ngulo representando a extens&atilde;o geogr&aacute;fica de uma ocorr&ecirc;ncia encontrada na busca
+	Mostra no mapa um retangulo representando a extens&atilde;o geogr&aacute;fica de uma ocorr&ecirc;ncia encontrada na busca
 
 	Parameters:
 

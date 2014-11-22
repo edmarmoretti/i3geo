@@ -5,7 +5,7 @@ Lista os temas configurados no menu de temas e que permitem download.
 
 Para utilizar esse sistema acesse http://localhost/i3geo/datadownload.htm
 
-Pode-se usar um par�metro para abrir o aplicativo e imediatamente mostrar os arquivos para download, por exemplo
+Pode-se usar um parametro para abrir o aplicativo e imediatamente mostrar os arquivos para download, por exemplo
 
 datadownload.htm?bioma
 

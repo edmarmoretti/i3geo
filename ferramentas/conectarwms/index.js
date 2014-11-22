@@ -210,7 +210,7 @@ function clickGuia3()
 /*
 Function: registraws
 
-Armazena em vari&aacute;veis locais os par�metros do WMS escolhido e ativa a guia 3, mostrando a lista de camadas dispon&iacute;veis
+Armazena em vari&aacute;veis locais os parametros do WMS escolhido e ativa a guia 3, mostrando a lista de camadas dispon&iacute;veis
 
 Parametros:
 

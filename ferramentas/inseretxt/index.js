@@ -62,7 +62,7 @@ i3GEOF.inseretxt = {
 	/*
 	Variavel: parDefault
 
-	Par�metros padr&atilde;o utilizados para formatar o texto
+	parametros padr&atilde;o utilizados para formatar o texto
 	*/
 	parDefault: "&inserefeature&&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
 	/**

@@ -44,7 +44,7 @@ Pega um objeto do documento.
 
 Exemplo: $i("box1")
 
-Par�metros:
+Parametros:
 
 id - id do objeto
 

@@ -520,7 +520,6 @@ i3GEO.arvoreDeTemas = {
 			node.loadComplete();
 		};
 		i3GEO.php.listaVariavel(monta);
-		// "codigo_variavel":"10","nome":"Popula��o residente","descricao":""
 	},
 	/**
 	 * Lista as medidas de variaveis cadastradas no sistema METAESTAT

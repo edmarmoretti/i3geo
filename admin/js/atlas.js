@@ -20,7 +20,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -172,7 +172,7 @@ function adicionaNosTemas(no,dados,redesenha)
 /*
 Function: adicionaNosPranchas
 
-Mostra os nós de uma prancha
+Mostra os nos de uma prancha
 
 <PEGATEMAS>
 */
@@ -257,7 +257,7 @@ function adicionaNosAtlas(dados,redesenha)
 /*
 Function: editar
 
-Abre o editor de um nó
+Abre o editor de um no
 
 <PEGADADOSATLAS>
 
@@ -318,7 +318,7 @@ function editar(tipo,id)
 function montaDivTema(i)
 {
 	var ins = "";
-	ins += "<br>Código do tema:<br>";
+	ins += "<br>C&oacute;digo do tema:<br>";
 	ins += "<div id=comboTemaIni ></div>";
 
 	ins += "Ligado (ao abrir a prancha, esse tema estar&aacute; vis&iacute;vel)?<br>";

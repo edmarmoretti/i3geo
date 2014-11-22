@@ -109,7 +109,7 @@ i3GEOF.opcoesQuery = {
 	/*
 	Function: executa
 
-	Aplica os par�metros definidos
+	Aplica os parametros definidos
 
 	Veja:
 

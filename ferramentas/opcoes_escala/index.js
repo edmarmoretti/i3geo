@@ -111,7 +111,7 @@ i3GEOF.opcoesEscala = {
 	/*
 	Function: executa
 
-	Aplica os par�metros definidos
+	Aplica os parametros definidos
 
 	Veja:
 
@@ -135,7 +135,7 @@ i3GEOF.opcoesEscala = {
 	/*
 	Function: parametrosAtuais
 
-	Pega os par�metros atuais da barra de escala
+	Pega os parametros atuais da barra de escala
 
 	Veja:
 

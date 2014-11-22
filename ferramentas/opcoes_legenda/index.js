@@ -136,7 +136,7 @@ i3GEOF.opcoesLegenda = {
 	/*
 	Function: parametrosAtuais
 
-	Pega os par�metros atuais da legenda
+	Pega os parametros atuais da legenda
 
 	Veja:
 

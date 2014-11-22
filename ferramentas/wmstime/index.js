@@ -88,7 +88,7 @@ emPausa = true;
 /*
 Function: escolheuServico
 
-Monta a tela de par�metros ap&oacute;s um servi&ccedil;o ter sido escolhido
+Monta a tela de parametros ap&oacute;s um servi&ccedil;o ter sido escolhido
 
 Parametro:
 
@@ -225,7 +225,7 @@ function iniciaImagens(){
 /*
 function: criaImg
 
-Cria um elemento do tipo IMG com base no servi&ccedil;o escolhido e nos par�metros de tempo
+Cria um elemento do tipo IMG com base no servi&ccedil;o escolhido e nos parametros de tempo
 
 Parametros:
 

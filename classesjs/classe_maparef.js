@@ -43,7 +43,7 @@ i3GEO.maparef = {
 	/*
 	Propriedade: fatorZoomDinamico
 
-	Define o fator de zoom inicial do mapa de refer&ecirc;ncia quando o modo dinâmico for ativado
+	Define o fator de zoom inicial do mapa de refer&ecirc;ncia quando o modo dinamico for ativado
 
 	Tipo:
 	{numeric}
@@ -276,7 +276,7 @@ i3GEO.maparef = {
 
 	Se o modo cgi estiver ativado, o mapa de refer&ecirc;ncia &eacute; desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
 
-	No modo dinâmico, a imagem &eacute; gerada de forma diferenciada. Nesse caso, o modo cgi &eacute; desabilitado.
+	No modo dinamico, a imagem &eacute; gerada de forma diferenciada. Nesse caso, o modo cgi &eacute; desabilitado.
 
 	O atualizaReferencia &eacute; sempre chamado ap&oacute;s o mapa ser redesenhado.
 

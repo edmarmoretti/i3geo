@@ -568,7 +568,7 @@ i3GEO.barraDeBotoes = {
 	/*
 	 Function: adicionaBotao
 
-	 Adiciona um novo botão nas definições da barra de botões
+	 Adiciona um novo botao nas definicoes da barra de botoes
 
 	 O Objeto deve ser como no exemplo abaixo
 
@@ -1488,7 +1488,7 @@ i3GEO.barraDeBotoes = {
 
 	Parametro:
 
-	id {String} - id que identifica a barra. Corresponde ao parï¿½metro idconteudonovo da fun&ccedil;&atilde;o de inicializa&ccedil;&atilde;o das barras
+	id {String} - id que identifica a barra. Corresponde ao parametro idconteudonovo da fun&ccedil;&atilde;o de inicializa&ccedil;&atilde;o das barras
 	*/
 	fecha: function(id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.fecha()");}

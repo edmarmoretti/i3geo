@@ -169,7 +169,7 @@ i3GEOF.insereGrafico = {
 
 	Insere um grafico no mapa na posi&ccedil;&atilde;o clicada
 
-	O ponto &eacute; obtidos do objeto objposicaocursor e os demais par�metros da janela interna aberta no iframe "wdocai"
+	O ponto &eacute; obtidos do objeto objposicaocursor e os demais parametros da janela interna aberta no iframe "wdocai"
 
 	Veja:
 
@@ -271,7 +271,7 @@ i3GEOF.insereGrafico = {
 	/*
 	Function: pegaItensMarcados
 
-	Recupera os itens que foram marcados e monta uma lista para enviar como par�metro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
+	Recupera os itens que foram marcados e monta uma lista para enviar como parametro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
 	*/
 	pegaItensMarcados: function(){
 		var listadeitens = [],

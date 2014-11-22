@@ -20,7 +20,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c�pia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -266,7 +266,7 @@ function core_arvore(titulo,onde,obj){
 /*
 Function: core_movimentaNo
 
-Movimenta um n� para cima ou para baixo na &aacute;rvore.
+Movimenta um no para cima ou para baixo na &aacute;rvore.
 
 Essa fun&ccedil;&atilde;o utiliza uma &aacute;rvore que deve estar armazenada no objeto tree
 
@@ -565,7 +565,7 @@ Pega a lista de perfis
 
 Parameters:
 
-funcao - (opcional) string com o nome da funcao que ser&aacute; executada ap�s a chamada ajax ter tido sucesso
+funcao - (opcional) string com o nome da funcao que ser&aacute; executada apos a chamada ajax ter tido sucesso
 
 Return
 
@@ -1312,7 +1312,7 @@ row - objeto row que foi clicado pelo usu&aacute;rio. Utilizado para se obter os
 
 sUrl - url do programa que ser&aacute; executado
 
-nomeFuncao - nome da funcao que sera executada ap�s gravar os dados (opcional)
+nomeFuncao - nome da funcao que sera executada apos gravar os dados (opcional)
 */
 function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 {

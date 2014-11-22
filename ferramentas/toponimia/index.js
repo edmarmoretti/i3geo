@@ -147,7 +147,7 @@ i3GEOF.toponimia = {
 	/*
 	Function: pegaPar
 
-	Pega os par�metros para montar a chamada ajax que cria ou testa a topon&iacute;mia
+	Pega os parametros para montar a chamada ajax que cria ou testa a topon&iacute;mia
 	*/
 	pegaPar: function(){
 		var par = "",

@@ -202,7 +202,7 @@ i3GEOF.perfil = {
 	/*
 	Function: iniciaGrafico
 
-	Inicializa o gr&aacute;fico de perfil definindo os par�metros da ferramenta i3GEOF.graficointerativo
+	Inicializa o gr&aacute;fico de perfil definindo os parametros da ferramenta i3GEOF.graficointerativo
 	*/
 	iniciaGrafico: function(){
 		i3GEOF.graficointerativo1.iniciaJanelaFlutuante({"dados":i3GEOF.perfil.dadosGrafico,"tipo":"bar_1","titulo":"Perfil"});

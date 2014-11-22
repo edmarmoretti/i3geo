@@ -560,7 +560,7 @@ i3GEO.coordenadas = {
 
 	Parametro:
 
-	ativaMovimento {boolean} - (opcional) aplica ou n&atilde;o as fun&ccedil;&otilde;es ligadas � movimenta&ccedil;&atilde;o do mouse
+	ativaMovimento {boolean} - (opcional) aplica ou n&atilde;o as fun&ccedil;&otilde;es ligadas a movimenta&ccedil;&atilde;o do mouse
 
 	onde {string} - (opcional) id onde o resultado ser&aacute; mostrado (ir&aacute; ignorar os ids definidos em coordenadas.config)
 		 */

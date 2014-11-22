@@ -443,7 +443,7 @@ i3GEO.navega = {
 	/*
 	Function: panFixo
 
-	Desloca o mapa para uma determinada dire&ccedil;&atilde;o com uma dist�ncia fixa.
+	Desloca o mapa para uma determinada dire&ccedil;&atilde;o com uma distancia fixa.
 
 	Parametros:
 
@@ -857,7 +857,7 @@ i3GEO.navega = {
 				};
 				if((x1 === x2) || (y1 === y2))
 				{limpa.call();return;}
-				// se o retangulo for negativo pula essa parte para n� gerar erro
+				// se o retangulo for negativo pula essa parte para nao gerar erro
 				i3GEO.parametros.mapexten=v;
 				limpa.call();
 				i3GEO.eventos.MOUSEMOVE.remove("i3GEO.navega.zoomBox.desloca()");

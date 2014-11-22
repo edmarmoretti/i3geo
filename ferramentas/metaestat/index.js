@@ -1818,7 +1818,7 @@ i3GEOF.metaestat = {
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
-		 * Calcula os intervalos de classe com base na t�cnica de intervalos iguais
+		 * Calcula os intervalos de classe com base na tecnica de intervalos iguais
 		 * Altera uma classificacao ja existente
 		 * O usuario deve definir o menor e o maior valor
 		 * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha
@@ -1848,7 +1848,7 @@ i3GEOF.metaestat = {
 			i3GEO.util.ajaxGet(p,temp);
 		},
 		/**
-		 * Calcula os intervalos de classe com base na t�cnica de intervalos iguais
+		 * Calcula os intervalos de classe com base na tecnica de intervalos iguais
 		 * Altera uma classificacao ja existente
 		 * O menor e maior valor sao calculados com base nos valores da medida da variavel
 		 * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha

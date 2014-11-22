@@ -267,7 +267,10 @@ array
 				$p = $this->ixml($s,"PUBLICADO");
 				$m = $this->ixml($s,"CONTEMMAPFILE");
 				$id = $this->ixml($s,"ID_MAPA");
-				$mapas[] =  array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m);
+				echo $p;
+				if(strtoupper($p) != "NAO"){
+					$mapas[] =  array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m);
+				}
 			}
 		}
 		return (array("mapas"=>$mapas));

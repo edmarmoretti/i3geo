@@ -16,7 +16,7 @@ document.getElementById("escalanumerica").innerHTML = "1: "+window.opener.parent
 
 function processevent1(exy1)
 {
-	//detec�o do navegador
+	//detecao do navegador
 	navm = false; // IE
 	navn = false; // netscape
 	var app = navigator.appName.substring(0,1);

@@ -31,7 +31,7 @@ Classe: i3GEOF.navegarquivos
 
 */
 i3GEOF.navegarquivos = {
-	//ao concluir, o nome do arquivo ser� retornado para esse objeto atribuindo o resultado ao atributo value
+	//ao concluir, o nome do arquivo sera retornado para esse objeto atribuindo o resultado ao atributo value
 	retornarPara: "",
 	//guarda o objeto TV
 	arvore: "",

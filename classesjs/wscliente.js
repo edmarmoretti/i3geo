@@ -67,7 +67,7 @@ Veja:
 	document.write(allScriptTags);
 })();
 /*
-Cria o objeto javascript com os parâmetros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o dos elementos da interface.
+Cria o objeto javascript com os parametros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o dos elementos da interface.
 
 Example:
 
@@ -98,28 +98,28 @@ rsswms - array com a lista de endere&ccedil;os dos servi&ccedil;os RSS com a lis
 function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,rsswms)
 {
 	/*
-	Guarda o valor do parâmetro loc_i3geo
+	Guarda o valor do parametro loc_i3geo
 	*/
 	this.loc_i3geo = loc_i3geo;
 	/*
-	Guarda o valor do parâmetro corpo
+	Guarda o valor do parametro corpo
 	*/
 	this.corpo = corpo;
 	if(!$i("corpo")){alert("id "+corpo+" nao existe");}
 	/*
-	Guarda o valor do parâmetro enderecows
+	Guarda o valor do parametro enderecows
 	*/
 	this.enderecows = enderecows;
 	/*
-	Guarda o valor do parâmetro enderecowms
+	Guarda o valor do parametro enderecowms
 	*/
 	this.enderecowms = enderecowms;
 	/*
-	Guarda o valor do parâmetro rssws
+	Guarda o valor do parametro rssws
 	*/
 	this.rssws = rssws;
 	/*
-	Guarda o valor do parâmetro rsswms
+	Guarda o valor do parametro rsswms
 	*/
 	this.rsswms = rsswms;
 	/* 
@@ -196,7 +196,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 
 	Por padr&atilde;o, os conte&uacute;dos devem ser inclu&iacute;dos em DIVS com os seguintes ids- oquews oqueogc oquecarto
 
-	Parâmetros:
+	Parametros:
 
 	id - id do div com o conte&uacute;do que ser&aacute; ativado
 	*/
@@ -342,7 +342,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	/*
 	Executa ajax para buscar resultado do getcapabilities.
 
-	Parâmetros:
+	Parametros:
 
 	tipo - tipo de chamada WMS|WFS
 
@@ -508,9 +508,9 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		$i(this.corpo).innerHTML = "<p>Nenhum servi&ccedil;o foi escolhido.</p>";
 	};
 	/*
-	Lista os parâmetros de uma fun&ccedil;&atilde;o para o usu&aacute;rio digitar os valores.
+	Lista os parametros de uma fun&ccedil;&atilde;o para o usu&aacute;rio digitar os valores.
 
-	Parâmetros:
+	Parametros:
 
 	funcao - fun&ccedil;&atilde;o que ser&aacute; chamada
 
@@ -590,7 +590,7 @@ Inicia a interface do cliente de web services.
 
 Parametros:
 
-objeto_i3geo_wscliente_configura - objeto com os parâmentros de configura&ccedil;&atilde;o criado pela fun&ccedil;&atilde;o i3geo_gl_configura
+objeto_i3geo_wscliente_configura - objeto com os paramentros de configura&ccedil;&atilde;o criado pela fun&ccedil;&atilde;o i3geo_gl_configura
 */
 function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
 {

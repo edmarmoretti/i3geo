@@ -366,7 +366,7 @@ i3GEOF.inserexy = {
 	/*
 	Function: inserirdd
 
-	Insere um ponto com base na dire&ccedil;&atilde;o e dist�ncia
+	Insere um ponto com base na dire&ccedil;&atilde;o e distancia
 	*/
 	inserirdd: function(){
 		try{

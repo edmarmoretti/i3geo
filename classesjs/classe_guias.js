@@ -304,7 +304,7 @@ i3GEO.guias = {
 	 *
 	 * Ordem de inclus&atilde;o das guias no mapa. Essa op&ccedil;&atilde;o
 	 * &eacute; mais &uacute;til no caso do tipo sanfona, pois nesse caso, a
-	 * primeira guia &eacute; sempre a que fica ativa. Se esse par�metro for uma
+	 * primeira guia &eacute; sempre a que fica ativa. Se esse parametro for uma
 	 * string vazia, a ordem utilizada ser&aacute; a ordem existente em
 	 * i3GEO.guias.CONFIGURA.
 	 *
@@ -439,7 +439,7 @@ i3GEO.guias = {
 			nguias = guias.length;
 			//
 			// verifica o div que cont&eacute;m as guias caso n&atilde;o tenha
-			// sido passado como par�metro
+			// sido passado como parametro
 			//
 			if (arguments.length === 0) {
 				for (ng = 0; ng < nguias; ng++) {

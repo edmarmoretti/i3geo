@@ -136,7 +136,7 @@ i3GEOF.preferencias.dicionario = {
 		es : ""
 	} ],
 	'incluiListaWMSMetaestat' : [ {
-		pt : "Inclui a lista de WMS originados do sistema de metadados estat�sticos",
+		pt : "Inclui a lista de WMS originados do sistema de metadados estat&iacute;sticos",
 		en : "",
 		es : ""
 	} ],

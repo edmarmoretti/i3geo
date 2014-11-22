@@ -78,7 +78,7 @@ Veja:
 /* 
 Classe: i3geo_gl_configura
 
-Cria o objeto javascript com os par�metros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o.
+Cria o objeto javascript com os parametros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o.
 
 Example:
 
@@ -115,31 +115,31 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	 */
 	this.link = link;
 	/*
-	Guarda o valor do par�metro seltema
+	Guarda o valor do parametro seltema
 	*/
 	this.nomeseltema = nomeseltema;
 	/*
-	Guarda o valor do par�metro loc_i3geo
+	Guarda o valor do parametro loc_i3geo
 	*/
 	this.loc_i3geo = loc_i3geo;
 	/*
-	Guarda o valor do par�metro menu
+	Guarda o valor do parametro menu
 	*/
 	this.menu = menu;
 	/*
-	Guarda o valor do par�metro grupo
+	Guarda o valor do parametro grupo
 	*/
 	this.grupo = grupo;
 	/*
-	Guarda o valor do par�metro subgrupo
+	Guarda o valor do parametro subgrupo
 	*/
 	this.subgrupo = subgrupo;
 	/*
-	Guarda o valor do par�metro tema
+	Guarda o valor do parametro tema
 	*/
 	this.tema = tema;
 	/*
-	Guarda o valor do par�metro buscageo
+	Guarda o valor do parametro buscageo
 	*/
 	this.buscageo = buscageo;
 	/* 
@@ -200,7 +200,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	/*
 	Function: crialink
 
-	Pega os par�metros especificados pelo usu&aacute;rio e monta o link para mostrar na tela.
+	Pega os parametros especificados pelo usu&aacute;rio e monta o link para mostrar na tela.
 	*/
 	this.crialink = function()
 	{
@@ -302,7 +302,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	/*
 	Function: preseltema
 
-	Compatibiliza a chamada da fun&ccedil;&atilde;o i3geo_combotemasMenu com a fun&ccedil;&atilde;o this.seltema em termos de n&uacute;mero de par�metros
+	Compatibiliza a chamada da fun&ccedil;&atilde;o i3geo_combotemasMenu com a fun&ccedil;&atilde;o this.seltema em termos de n&uacute;mero de parametros
 	*/
 	this.preseltema = function(idgrupo,idsubgrupo,idtema)
 	{
@@ -463,7 +463,7 @@ Inicia a interface do gerador de links.
 
 Parameters:
 
-objeto_i3geo_gl_configura - objeto com os par�mentros de configura&ccedil;&atilde;o criado pela fun&ccedil;&atilde;o i3geo_gl_configura
+objeto_i3geo_gl_configura - objeto com os paramentros de configura&ccedil;&atilde;o criado pela fun&ccedil;&atilde;o i3geo_gl_configura
 */
 function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 {

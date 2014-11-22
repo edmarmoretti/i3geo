@@ -38,7 +38,7 @@ if (typeof (i3GEO) === 'undefined') {
 }
 i3GEO.analise = {
 	/***********************************************************************
-	 * Armazena os pontos clicados da �ltima linha
+	 * Armazena os pontos clicados da ultima linha
 	 */
 	pontos : {
 		xpt : [],
