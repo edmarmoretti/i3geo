@@ -438,7 +438,7 @@ class Atributos
 		else{
 			$alias = $items;
 		}
-		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
+		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa,true);
 		$res_count = count($shapes);
 		$resultadoFinal[] = array("totalSelecionados"=>$res_count,"itens"=>$items,"alias"=>$alias);
 		$registros = array();
@@ -451,6 +451,11 @@ class Atributos
 		}
 		if ($tipolista == "selecionados"){
 			$chk = "CHECKED";
+			//cria um novo array apenas para funcionar no contador
+			$s = array();
+			foreach($shapes as $shape){
+				$s[] = $shape;
+			}
 			if ($fim != ""){
 				if (($res_count >= $fim) && ($fim < $res_count)){
 					$res_count = $fim;
@@ -458,7 +463,7 @@ class Atributos
 			}
 			for ($i = $inicio; $i < $res_count; ++$i){
 				$valitem = array();
-				$shape = $shapes[$i];
+				$shape = $s[$i];
 				$indx = $shape->index;
 				foreach ($items as $item){
 					$valori = trim($shape->values[$item]);
@@ -483,12 +488,8 @@ class Atributos
 		}
 		if ($tipolista == "tudo"){
 			//ini_set('memory_limit', '500M');
-			$shp_atual = array();
-			for ($i = 0; $i < $res_count;++$i){
-				$shp_atual[$i] = $shapes[$i];;
-			}
+			$shp_atual = $shapes;
 			$chk = "";
-
 			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS){
 				$res_count = $this->layer->getNumresults();
 				$totalGeral = $res_count;

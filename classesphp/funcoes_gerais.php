@@ -2465,7 +2465,7 @@ function retornaShapesMapext($objLayer,$objMapa){
 	$objLayer->close();
 	return $shapes;
 }
-function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
+function retornaShapesSelecionados($objLayer,$map_file,$objMapa,$indexado=false){
 	$shapes = array();
 	$qyfile = dirname($map_file)."/".$objLayer->name.".php";
 
@@ -2497,14 +2497,21 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			if($versao == 6)
-			{$shape = $objLayer->getShape($objLayer->getResult($i));}
+			if($versao == 6){
+				$shape = $objLayer->getShape($objLayer->getResult($i));
+				$shp_index  = $shape->index;
+			}
 			else{
 				$result = $objLayer->getResult($i);
 				$shp_index  = $result->shapeindex;
 				$shape = $objLayer->getfeature($shp_index,-1);
 			}
-			$shapes[] = $shape;
+			if($indexado == true){
+				$shapes[$shp_index] = $shape;
+			}
+			else{
+				$shapes[] = $shape;
+			}
 		}
 		$fechou = $objLayer->close();
 	}
@@ -2520,7 +2527,12 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa){
 		while ($shape = $objLayer->nextShape())
 		{
 			if(in_array($shape->index,$listaDeIndices)){
-				$shapes[] = $shape;
+				if($indexado == true){
+					$shapes[$shape->index] = $shape;
+				}
+				else{
+					$shapes[] = $shape;
+				}
 			}
 		}
 		$objLayer->close();
