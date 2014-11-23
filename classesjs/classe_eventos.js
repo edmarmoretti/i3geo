@@ -65,6 +65,13 @@ objposicaocursor = {
 };
 i3GEO.eventos = {
 	/*
+	Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando uma operação de seleção e concluida.
+
+	Tipo:
+	{Array}
+	*/
+	SELECAO: [],
+	/*
 	Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando a &aacute;rvore de camadas for atualizada.
 
 	Tipo:
