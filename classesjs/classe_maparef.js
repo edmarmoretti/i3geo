@@ -147,7 +147,7 @@ i3GEO.maparef = {
 	Defaul:
 	{0}
 	*/
-	RIGHT:20,
+	RIGHT:50,
 	W: function(){
 		var w = parseInt(i3GEO.parametros.w,10)/5;
 		if(w < 150){

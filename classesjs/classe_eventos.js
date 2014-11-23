@@ -376,12 +376,13 @@ i3GEO.eventos = {
 		//pelas respectivas apis
 		//caso contr&aacute;rio, o i3geo ir&aacute; controlar os c&aacute;lculos
 		//
-		return;
 		var teladd,teladms,
 			container = "",
 			targ = "",
 			pos,mousex,mousey,xfig,yfig,xreffig,yreffig,xtela,ytela,c,ex,r;
-		if (!e){e = window.event;}
+		if (!e){
+			e = window.event;
+		}
 		try{
 			if (e.target)
 			{targ = e.target;}
@@ -392,35 +393,12 @@ i3GEO.eventos = {
 			{container = targ.parentNode.id;}
 		}
 		catch(erro){
-			if(typeof(console) !== 'undefined'){console.error(erro);}
-		}
-		if (container !== "divGeometriasTemp" && container !== "mapaReferencia"){
 			return;
 		}
-		//
-		//verifica sob qual objeto o mouse est&aacute; se movendo
-		//
-		if (e.target)
-		{targ = e.target;}
-		else if (e.srcElement) {targ = e.srcElement;}
-		if(targ.id === "" && $i(i3GEO.Interface.IDMAPA))
-		{targ = $i(i3GEO.Interface.IDMAPA);}
-		//
-		//se estiver no modo pan, o movimento deve ser obtido do elemento
-		//onde est&aacute; a imagem do mapa e n&atilde;o diretamente sobre o elemento 'img'
-		//se n&atilde;o for feito assim, o deslocamento do mapa n&atilde;o &eacute; capturado
-		//
-		try{
-			if(g_panM !== 'undefined' && g_panM === "sim")
-			{pos = i3GEO.util.pegaPosicaoObjeto(targ.parentNode);}
-			else
-			{pos = i3GEO.util.pegaPosicaoObjeto(targ);}
-			if(g_panM === "sim"){
-				pos[0] = pos[0] - i3GEO.parametros.w;
-				pos[1] = pos[1] - i3GEO.parametros.h;
-			}
+		if (container !== "mapaReferencia"){
+			return;
 		}
-		catch(m){pos = i3GEO.util.pegaPosicaoObjeto(targ);}
+		pos = i3GEO.util.pegaPosicaoObjeto(targ);
 		//
 		//pega a posicao correta do mouse
 		//
@@ -451,17 +429,8 @@ i3GEO.eventos = {
 		//
 		c = i3GEO.parametros.pixelsize;
 		ex = i3GEO.parametros.mapexten;
-		try{
-			if(targ.id === "imagemReferencia"){
-				c = i3GEO.parametros.celularef;
-				ex = i3GEO.parametros.extentref;
-				r = $i("i3geo_rosa");
-				if(r)
-				{r.style.display = "none";}
-			}
-		}
-		catch(e){i3GEO.parametros.celularef = 0;}
-		//if(typeof(console) !== 'undefined'){console.error(xfig);}
+		c = i3GEO.parametros.celularef;
+		ex = i3GEO.parametros.extentref;
 		teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex,targ.id);
 		teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
 
