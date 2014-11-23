@@ -711,10 +711,10 @@ class Atributos
 			if ($filtro != ""){
 				$l->setfilter("");
 			}
-			$buscas = "&Aacute;&Atilde;�&Otilde;&Ocirc;&aacute;�&atilde;&acirc;��&ocirc;&otilde;&uacute;�&iacute;&eacute;&ecirc;&ccedil;";
-			$buscaUTF = $this->converte($buscas);
-			$trocas = "AAOOOaaaaoooouuieecAAOOOaaaaoooouuieec";
-			$buscas = $buscas.$buscaUTF;
+			$b = "&Aacute;&Atilde;&Otilde;&Oacute;&Ocirc;&aacute;&atilde;&acirc;&agrave;&oacute;&otilde;&ocirc;&ograve;&uacute;&ucirc;&iacute;&ecirc;&eacute;&ccedil;";
+			
+			$trocas = "AAOOOaaaaoooouuieecAAOOOaaaaoooouuieecAAOOOaaaaoooouuieec";
+			$buscas = b.(html_entity_decode($b,ENT_NOQUOTES,'UTF8')).(html_entity_decode($b,ENT_NOQUOTES,'ISO8859-1'));
 			$sopen = $l->open();
 			if($sopen == MS_FAILURE){
 				return "erro";
