@@ -1178,7 +1178,10 @@ switch (strtoupper($funcao))
 			$retorno = $m->adicionaclasse();
 		}
 		if ($opcao == "valorunico"){
-			$retorno = $m->valorunico($item,$ignorar);
+			if(empty($itemNome)){
+				$itemNome = "";
+			}
+			$retorno = $m->valorunico($item,$ignorar,$itemNome);
 		}
 		if ($opcao == "intervalosiguais"){
 			$retorno = $m->intervalosiguais($item,$nclasses,$ignorar);

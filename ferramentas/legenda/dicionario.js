@@ -489,5 +489,10 @@ i3GEOF.legenda.dicionario = {
 		pt : "Aplicar esse par&acirc;metro em todas as classes",
 		en : "",
 		es : ""
+	} ],
+	'nomeClassesUnicoSimbolo' : [ {
+		pt : "(Opcional) Item que ser&aacute; utilizado para obter os nomes das classes",
+		en : "",
+		es : ""
 	} ]
 };

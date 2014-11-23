@@ -325,6 +325,9 @@ i3GEOF.legenda =
 					if ($i("i3GEOlegendaitensValorUnico")) {
 						$i("i3GEOlegendaitensValorUnico").innerHTML = retorno.dados;
 					}
+					if ($i("i3GEOlegendaClassesValorUnico")) {
+						$i("i3GEOlegendaClassesValorUnico").innerHTML = retorno.dados;
+					}
 					if ($i("i3GEOlegendaitensValorClass")) {
 						$i("i3GEOlegendaitensValorClass").innerHTML = retorno.dados;
 					}
@@ -1092,9 +1095,14 @@ i3GEOF.legenda =
 				if (i3GEOF.legenda.aguarde.visibility === "visible") {
 					return;
 				}
-				var item = $i("i3GEOlegendaitensValorUnico").getElementsByTagName("select")[0].value, p =
-					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid + "&funcao=alteraclasse&tema="
-						+ i3GEOF.legenda.tema + "&item=" + item + "&opcao=valorunico&ignorar=" + $i("i3GEOlegendaignorar").value, cp =
+				var item = $i("i3GEOlegendaitensValorUnico").getElementsByTagName("select")[0].value,
+					itemNome = $i("i3GEOlegendaClassesValorUnico").getElementsByTagName("select")[0].value,
+					p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid + "&funcao=alteraclasse&tema="
+						+ i3GEOF.legenda.tema
+						+ "&item=" + item
+						+ "&itemNome=" + itemNome
+						+ "&opcao=valorunico"
+						+ "&ignorar=" + $i("i3GEOlegendaignorar").value, cp =
 					new cpaint(), fim = function() {
 					i3GEOF.legenda.aposAlterarLegenda();
 					i3GEOF.legenda.aguarde.visibility = "hidden";

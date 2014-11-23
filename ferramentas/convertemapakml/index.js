@@ -49,10 +49,10 @@ i3GEOF.converteMapaKml = {
 	 * Susbtitutos para o template
 	 */
 	mustacheHash : function() {
-		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.converteMapaKml.dicionario),
-		lista,tema;
-		lista = i3GEO.arvoreDeCamadas.CAMADAS;
-		tema = lista[0].name;
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.converteMapaKml.dicionario);
+		//lista;
+		//lista = i3GEO.arvoreDeCamadas.CAMADAS;
+		//tema = lista[0].name;
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["parametrosMapfile"] = i3GEO.parametros.mapfile;
 		dicionario["tema"] = "";
