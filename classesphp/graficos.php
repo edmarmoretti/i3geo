@@ -578,8 +578,14 @@ function dadosPerfilRelevo($pontos,$opcao,$amostragem,$item="",$map_file=""){
 	$pontos = str_replace(" ",",",$pontos);
 	$urlGoogle .= $pontos."&samples=".$amostragem;
 	$curl = curl_init();
+	if(!isset($i3geo_proxy_server)){
+		include(dirname(__FILE__)."/../ms_configura.php");
+	}
 	curl_setopt ($curl, CURLOPT_URL, $urlGoogle);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
+		curl_setopt($curl, CURLOPT_PROXY, $i3geo_proxy_server);
+	}
 	$result = curl_exec($curl);
 	curl_close ($curl);
 	$result = json_decode( $result, true );

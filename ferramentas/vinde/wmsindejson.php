@@ -29,6 +29,9 @@ if(!file_exists($arq)){
 	curl_setopt($ch, CURLOPT_URL, "http://www.visualizador.inde.gov.br/");
 	curl_setopt($ch, CURLOPT_HEADER, 0);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
+		curl_setopt($ch, CURLOPT_PROXY, $i3geo_proxy_server);
+	}
 	$resultado = curl_exec($ch);
 	curl_close($ch);
 
