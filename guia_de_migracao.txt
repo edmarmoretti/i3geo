@@ -3,6 +3,8 @@ GUIA DE UPDATES e UPGRADES
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 
+- Inclusão da variável $i3geo_proxy_server no ms_configura.php
+
 - Foram incluídos subitens no menu suspenso para acomodar o grande número de opções. Os códigos locais que
 manipulam o menu suspenso devem ser revisados para verificar o funcionamento nessa nova condição.
 
