@@ -562,7 +562,25 @@ Tipo:
 {string}
 */
 $ogcwsmap = "";
+/*
+ Variable: $i3geo_proxy_server
 
+String com a definicao do servidor de proxy.
+
+O programa classesphp/proxy.php utiliza essa variavel para definir o proxy utilizado pela libcurl
+
+Como no caso: localhost/i3geo/classesphp/proxy.php?url=http://dev.openlayers.org/examples/kml/sundials.kml
+
+Exemplo:
+
+$i3geo_proxy_server = 'proxy:80';
+
+Tipo:
+{string}
+*/
+$i3geo_proxy_server = "";
+
+//valores de variaveis especificas para o sistema operacional em uso
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	$navegadoresLocais = array(

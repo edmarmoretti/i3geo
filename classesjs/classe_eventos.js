@@ -379,7 +379,7 @@ i3GEO.eventos = {
 		var teladd,teladms,
 			container = "",
 			targ = "",
-			pos,mousex,mousey,xfig,yfig,xreffig,yreffig,xtela,ytela,c,ex,r;
+			pos,mousex,mousey,xfig,yfig,xreffig,yreffig,xtela,ytela,c,ex;
 		if (!e){
 			e = window.event;
 		}
