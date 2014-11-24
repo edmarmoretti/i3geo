@@ -988,6 +988,12 @@ class Alteraclasse
 		$ignorararray = explode(",",$ignorar);
 		if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
 		{
+			if($layer->type == MS_LAYER_RASTER){
+				if($item == "pixel"){
+					$item = "value_0";
+				}
+			}
+
 			$sopen = $layer->open();
 			if($sopen == MS_FAILURE){
 				return "erro";
