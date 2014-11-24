@@ -136,7 +136,7 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
   Exemplo de filtro
 
   http://localhost/i3geo/ms_criamapa.php?temasa=_lbiomashp&map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&temasa=_lbiomashp
-  
+
   no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
 */
 
@@ -215,9 +215,9 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
   Exemplo de filtro
 
   http://localhost/i3geo/ms_criamapa.php?layers=_lbiomashp&temasa=_lbiomashp&map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))
-  
+
   no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
-	
+
 	";
 	exit;
 }
@@ -645,8 +645,14 @@ function adaptaLayers($tmpfname,$versao){
 			$layer->setmetadata("classe","");
 		}
 		if($versao > 5){
-			$layer->setprocessing("LABEL_NO_CLIP=True");
-			$layer->setprocessing("POLYLINE_NO_CLIP=True");
+			$pr = $layer->getProcessing();
+			if(!in_array("LABEL_NO_CLIP=True",$pr)){
+				$layer->setprocessing("LABEL_NO_CLIP=True");
+			}
+			if(!in_array("POLYLINE_NO_CLIP=True",$pr)){
+				$layer->setprocessing("POLYLINE_NO_CLIP=True");
+			}
+
 		}
 		//
 		//verifica se deve aplicar filtro

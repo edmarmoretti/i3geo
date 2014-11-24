@@ -411,9 +411,14 @@ else{
 						}
 						autoClasses($l,$oMap);
 						if($versao > 5){
-							$l->setprocessing("LABEL_NO_CLIP=True");
-							$l->setprocessing("POLYLINE_NO_CLIP=True");
-						}
+							$pr = $l->getProcessing();
+							if(!in_array("LABEL_NO_CLIP=True",$pr)){
+								$l->setprocessing("LABEL_NO_CLIP=True");
+							}
+							if(!in_array("POLYLINE_NO_CLIP=True",$pr)){
+								$l->setprocessing("POLYLINE_NO_CLIP=True");
+							}
+													}
 						//
 						//verifica se existem parametros de substituicao passados via url
 						//

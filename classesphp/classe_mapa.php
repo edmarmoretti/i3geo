@@ -1262,8 +1262,13 @@ class Mapa
 						$nlayer = $nmap->getlayerbyname($n);
 						//evita problemas no modo tile
 						if($this->v > 5){
-							$nlayer->setprocessing("LABEL_NO_CLIP=True");
-							$nlayer->setprocessing("POLYLINE_NO_CLIP=True");
+							$p = $nlayer->getProcessing();
+							if(!in_array("LABEL_NO_CLIP=True",$p)){
+								$nlayer->setprocessing("LABEL_NO_CLIP=True");
+							}
+							if(!in_array("POLYLINE_NO_CLIP=True",$p)){
+								$nlayer->setprocessing("POLYLINE_NO_CLIP=True");
+							}
 						}
 						//para impedir erros na legenda
 						if($nlayer->getmetadata("classe") == ""){
