@@ -595,6 +595,22 @@ i3GEO.mapa =
 		 * Abre as telas de dialogo das opcoes de manipulacao do mapa atual
 		 */
 		dialogo : {
+			/**
+			 * Function: wkt2layer
+			 *
+			 * Janela de conversao de wkt em layer.
+			 */
+			wkt2layer: function(wkt){
+				var temp = function(wkt){
+					i3GEOF.wkt2layer.iniciaJanelaFlutuante(wkt);
+				};
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.wkt2layer()","wkt2layer","wkt2layer","dependencias.php",temp);
+			},
+			/**
+			 * Function: atalhosedicao
+			 *
+			 * Janela com as principais opcoes de edicao de um layer. Utilizado pelo sistema de administracao.
+			 */
 			atalhosedicao: function(idtema){
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.atalhosedicao()","atalhosedicao","atalhosedicao","dependencias.php","i3GEOF.atalhosedicao.iniciaJanelaFlutuante()");

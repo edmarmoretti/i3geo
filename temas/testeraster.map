@@ -1,0 +1,78 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+
+#DATA "PG:host=localhost port=5432 dbname='siss' user='postgres' password='postgres' schema='public' table='modelagem' mode='2'"
+DATA "/var/www/rasters/modelagem_ED1_ok.tif"
+#PROCESSING "NODATA=0"
+PROCESSING "SCALE=AUTO"
+PROCESSING "LOAD_WHOLE_IMAGE=YES"
+PROCESSING "SCALE=0,100"
+  PROCESSING "SCALE_BUCKETS=10"
+
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "cache"	""
+      "CLASSE"	"SIM"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "metaestat"	""
+      "convcaracter"	""
+      "TEMA"	"Raster"
+      "cortepixels"	"0"
+    END # METADATA
+    NAME "testeraster"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE RASTER
+    UNITS METERS
+
+  CLASS
+      NAME ">= 1 e < que 20"
+      EXPRESSION (([pixel]>=1)and([pixel]<20))
+      STYLE
+        COLOR 32 92 148
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE "testeraster+0"
+    END # CLASS
+    CLASS
+      NAME ">= 20 e < que 40"
+      EXPRESSION (([pixel]>=20)and([pixel]<40))
+      STYLE
+        COLOR 187 188 5
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE "testeraster+1"
+    END # CLASS
+    CLASS
+      NAME ">= 40 e < que 60"
+      EXPRESSION (([pixel]>=40)and([pixel]<60))
+      STYLE
+        COLOR 242 92 238
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE "testeraster+2"
+    END # CLASS
+    CLASS
+      NAME ">= 60 e < que 80"
+      EXPRESSION (([pixel]>=60)and([pixel]<80))
+      STYLE
+        COLOR 36 224 102
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE "testeraster+3"
+    END # CLASS
+    CLASS
+      NAME ">= 80 e < que 100"
+      EXPRESSION (([pixel]>=80)and([pixel]<=100))
+      STYLE
+        COLOR 55 187 122
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE "testeraster+4"
+    END # CLASS
+
+  END # LAYER
+
+END # MAP

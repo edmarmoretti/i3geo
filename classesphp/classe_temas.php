@@ -673,8 +673,10 @@ $tamanho - Tamanho do texto.
 $fonte - Fonte
 
 $wrap - caractere que indica quebra de linha
+
+$wkt - boolean indicando se $xy e um WKT
 */
-	function insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap)
+	function insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap,$wkt=false)
 	{
 		//verifica se j'a existe um layer criado anteriormente com o mesmo nome e apaga se existir
 		if ($tipo == "limpaponto")
@@ -747,7 +749,6 @@ $wrap - caractere que indica quebra de linha
 				break;
 			}
 		}
-		$apt = explode(" ",$xy);
 		switch ($tipo)
 		{
 			case "ANNOTATION":
@@ -766,10 +767,17 @@ $wrap - caractere que indica quebra de linha
 				$shp = ms_newshapeobj(MS_SHAPE_POLYGON);
 			break;
 		}
-		$lin = ms_newlineobj();
-		for ($i = 0;$i < count($apt); $i = $i + 2)
-		{$lin->addxy($apt[$i],$apt[$i + 1]);}
-		$shp->add($lin);
+		if($wkt == false){
+			$apt = explode(" ",$xy);
+			$lin = ms_newlineobj();
+			for ($i = 0;$i < count($apt); $i = $i + 2){
+				$lin->addxy($apt[$i],$apt[$i + 1]);
+			}
+			$shp->add($lin);
+		}
+		else{
+			$shp = ms_shapeObjFromWkt($xy);
+		}
 		$pinlayer->addfeature($shp);
 		//$shp->free();
 		return("ok");
