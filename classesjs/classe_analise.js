@@ -343,6 +343,10 @@ i3GEO.analise =
 			 */
 			ultimoWkt: "",
 			/**
+			 * Armazena a ultima medida
+			 */
+			ultimaMedida: "",
+			/**
 			 * Function: inicia
 			 * 
 			 * Inicia a opera&ccedil;&atilde;o de medi&ccedil;&atilde;o, abrindo a janela de resultados e criando os componentes
@@ -427,7 +431,7 @@ i3GEO.analise =
 				new YAHOO.widget.Button("i3GEObotaoDistWkt", {
 					onclick : {
 						fn : function() {
-							i3GEO.mapa.dialogo.wkt2layer(i3GEO.analise.medeDistancia.ultimoWkt);
+							i3GEO.mapa.dialogo.wkt2layer(i3GEO.analise.medeDistancia.ultimoWkt,i3GEO.analise.medeDistancia.ultimaMedida);
 						}
 					}
 				});
@@ -483,7 +487,7 @@ i3GEO.analise =
 								type : OpenLayers.Control.TYPE_TOOL,
 								callbacks : {
 									done : function(feature) {
-										var f = new OpenLayers.Feature.Vector(feature, {
+										var t,f = new OpenLayers.Feature.Vector(feature, {
 											origem : "medeDistancia"
 										}, {
 											graphicName : "square",
@@ -500,6 +504,9 @@ i3GEO.analise =
 										}
 										i3GEO.analise.medeDistancia.openlayers.mostraParcial(0, 0, 0);
 										i3GEO.analise.medeDistancia.ultimoWkt = i3GEO.analise.medeDistancia.pontos2wkt();
+										t = i3GEO.analise.medeDistancia.openlayers.somaDist();
+										t = t.toFixed(3) + " km";
+										i3GEO.analise.medeDistancia.ultimaMedida = t;
 										i3GEO.analise.medeDistancia.openlayers.inicia();
 									},
 									modify : function(point) {
@@ -677,7 +684,7 @@ i3GEO.analise =
 					i3GeoMap.setOptions({
 						draggableCursor : 'crosshair'
 					});
-					var evtdblclick = null, evtclick = null, evtmousemove = null, pontos = {
+					var t,evtdblclick = null, evtclick = null, evtmousemove = null, pontos = {
 						xpt : [],
 						ypt : [],
 						dist : [],
@@ -697,12 +704,14 @@ i3GEO.analise =
 								shape.setEditable(!shape.editable);
 							}
 						});
+						i3GEO.analise.medeDistancia.ultimoWkt = i3GEO.analise.medeDistancia.pontos2wkt();
+						t = i3GEO.analise.medeDistancia.googlemaps.somaDist(pontos);
+						i3GEO.analise.medeDistancia.ultimaMedida = t.toFixed(3) + " km";
 						if (pontos) {
 							i3GEO.desenho.googlemaps.shapes.push(pontos.mvcLine);
 							i3GEO.desenho.googlemaps.shapes.push(pontos.line);
 							pontos = null;
 						}
-						i3GEO.analise.medeDistancia.ultimoWkt = i3GEO.analise.medeDistancia.pontos2wkt();
 					};
 					evtclick = google.maps.event.addListener(i3GeoMap, "click", function(evt) {
 						var x1, x2, y1, y2, trecho = 0, total, n, estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao];
@@ -1011,6 +1020,10 @@ i3GEO.analise =
 			 */
 			ultimoWkt: "",
 			/**
+			 * Armazena a ultima medida
+			 */
+			ultimaMedida: "",
+			/**
 			 * Function: inicia
 			 * 
 			 * Inicia a opera&ccedil;&atilde;o de medi&ccedil;&atilde;o, abrindo a janela de resultados e criando os componentes
@@ -1066,7 +1079,7 @@ i3GEO.analise =
 				new YAHOO.widget.Button("i3GEObotaoAreaWkt", {
 					onclick : {
 						fn : function() {
-							i3GEO.mapa.dialogo.wkt2layer(i3GEO.analise.medeArea.ultimoWkt);
+							i3GEO.mapa.dialogo.wkt2layer(i3GEO.analise.medeArea.ultimoWkt,i3GEO.analise.medeArea.ultimaMedida);
 						}
 					}
 				});
@@ -1123,7 +1136,7 @@ i3GEO.analise =
 								type : OpenLayers.Control.TYPE_TOOL,
 								callbacks : {
 									done : function(feature) {
-										var f = new OpenLayers.Feature.Vector(feature, {
+										var t,f = new OpenLayers.Feature.Vector(feature, {
 											origem : "medeArea"
 										}, {
 											graphicName : "square",
@@ -1295,6 +1308,7 @@ i3GEO.analise =
 								+ ":</b> " + (area / 10000).toFixed(2) + " ha" + "<br><b>" + $trad("x98") + ":</b> " + (per).toFixed(2)
 								+ " km" + "<br>" + $trad("x25") + ": " + i3GEO.calculo.metododistancia;
 						mostra.innerHTML = texto;
+						i3GEO.analise.medeArea.ultimaMedida = (area / 1000000).toFixed(3) + " km2";
 					}
 				},
 				/**
@@ -1485,6 +1499,7 @@ i3GEO.analise =
 								+ ":</b> " + (area / 10000).toFixed(2) + " ha" + "<br><b>" + $trad("x98") + ":</b> " + (per).toFixed(2)
 								+ " km" + "<br>" + $trad("x25") + ": " + i3GEO.calculo.metododistancia;
 						mostra.innerHTML = texto;
+						i3GEO.analise.medeArea.ultimaMedida = (area / 1000000).toFixed(3) + " km2";
 					}
 				},
 				/**

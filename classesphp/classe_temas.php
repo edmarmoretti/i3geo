@@ -741,8 +741,6 @@ $wkt - boolean indicando se $xy e um WKT
 				break;
 				case "ANNOTATION":
 					$c->set("status",MS_DELETE);
-					$novac = ms_newclassobj($pinlayer);
-					$this->adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position);
 					$pinlayer->setmetadata("TEMA",$texto);
 					$pinlayer->set("type",MS_LAYER_ANNOTATION);
 					$pinlayer->set("opacity","100");
@@ -753,9 +751,6 @@ $wkt - boolean indicando se $xy e um WKT
 		{
 			case "ANNOTATION":
 				$shp = ms_newshapeobj(MS_SHAPE_POINT);
-				$texto = str_replace("*","&",$texto);
-				$texto = str_replace("|",";",$texto);
-				$shp->set("text",$texto);
 			break;
 			case "POINT":
 				$shp = ms_newshapeobj(MS_SHAPE_POINT);
@@ -777,6 +772,19 @@ $wkt - boolean indicando se $xy e um WKT
 		}
 		else{
 			$shp = ms_shapeObjFromWkt($xy);
+		}
+		if($texto != ""){
+			$texto = str_replace("*","&",$texto);
+			$texto = str_replace("|",";",$texto);
+			$shp->set("text",$texto);
+			//caso nao seja do tipo annotation
+			if($pinlayer->numclasses == 1){
+				$novac = $pinlayer->getclass(0);
+			}
+			else{
+				$novac = ms_newclassobj($pinlayer);
+			}
+			$this->adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,$texto);
 		}
 		$pinlayer->addfeature($shp);
 		if($nomeTema != ""){
@@ -1139,7 +1147,7 @@ function: adicionaLabel
 
 Adiciona LABEL em uma classe de um tema
 */
-	function adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position){
+	function adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,$texto=""){
 		if($this->vi >= 60200){
 			$indiceLabel = $novac->addLabel(new labelObj());
 			$label = $novac->getLabel($indiceLabel);
@@ -1193,6 +1201,9 @@ Adiciona LABEL em uma classe de um tema
 		$label->set("partials",$partials);
 		$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
 		$label->set("position",$p[$position]);
+		if($texto != ""){
+			$label->setText($texto);
+		}
 		if ($this->layer)
 		{$this->layer->setMetaData("cache","");}
 	}

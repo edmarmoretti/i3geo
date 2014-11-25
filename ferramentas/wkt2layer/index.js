@@ -17,7 +17,7 @@ i3GEOF.wkt2layer =
 
 	parametros padr&atilde;o utilizados para formatar texto
 	*/
-	parDefault: "&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
+	parDefault: "position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=12&fonte=arial&fundo=off&sombra=off&outlinecolor=255,255,255&shadowcolor=off&wrap=",
 	/**
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
@@ -25,10 +25,11 @@ i3GEOF.wkt2layer =
 	/**
 	 * Susbtitutos para o template
 	 */
-	mustacheHash : function(wkt) {
+	mustacheHash : function(wkt,texto) {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.wkt2layer.dicionario);
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["wkt"] = wkt;
+		dicionario["valortexto"] = texto;
 		return dicionario;
 	},
 	/*
@@ -40,8 +41,8 @@ i3GEOF.wkt2layer =
 	 *
 	 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	 */
-	inicia : function(iddiv,wkt) {
-		$i(iddiv).innerHTML = i3GEOF.wkt2layer.html(wkt);
+	inicia : function(iddiv,wkt,texto) {
+		$i(iddiv).innerHTML = i3GEOF.wkt2layer.html(wkt,texto);
 		new YAHOO.widget.Button("i3GEOFwkt2layerShp", {
 			onclick : {
 				fn : function() {
@@ -78,8 +79,8 @@ i3GEOF.wkt2layer =
 	 *
 	 * String com o c&oacute;digo html
 	 */
-	html : function(wkt) {
-		var ins = Mustache.render(i3GEOF.wkt2layer.MUSTACHE, i3GEOF.wkt2layer.mustacheHash(wkt));
+	html : function(wkt,texto) {
+		var ins = Mustache.render(i3GEOF.wkt2layer.MUSTACHE, i3GEOF.wkt2layer.mustacheHash(wkt,texto));
 		return ins;
 	},
 	/*
@@ -87,7 +88,7 @@ i3GEOF.wkt2layer =
 	 *
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
-	iniciaJanelaFlutuante : function(wkt) {
+	iniciaJanelaFlutuante : function(wkt,texto) {
 		var minimiza, cabecalho, janela, divid, temp, titulo;
 
 		cabecalho = function() {
@@ -117,7 +118,7 @@ i3GEOF.wkt2layer =
 		janela[0].moveTo(150,150);
 		$i("i3GEOF.wkt2layer_corpo").style.backgroundColor = "white";
 		i3GEOF.wkt2layer.aguarde = $i("i3GEOF.wkt2layer_imagemCabecalho").style;
-		i3GEOF.wkt2layer.inicia(divid,wkt);
+		i3GEOF.wkt2layer.inicia(divid,wkt,texto);
 	},
 	pegaPar: function(){
 		var par,nometema,temp;
@@ -136,7 +137,14 @@ i3GEOF.wkt2layer =
 			temp = temp.split(".");
 			nometema = temp[1];
 		}
-		par += "&nometema=" + nometema;
+		if($i("i3GEOFwkt2layerTexto").value !== ""){
+			texto = $i("i3GEOFwkt2layerTexto").value;
+		}
+		else{
+			texto = "";
+		}
+		par += "&nometema=" + nometema
+			+ "&texto=" + texto;
 		return par;
 	},
 	/*

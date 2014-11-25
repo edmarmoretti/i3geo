@@ -24,5 +24,10 @@ i3GEOF.wkt2layer.dicionario = {
 		pt : "T&iacute;tulo do novo tema",
 		en : "",
 		es : ""
+	} ],
+	'texto' : [ {
+		pt : "Anota&ccedil;&atilde;o opcional",
+		en : "",
+		es : ""
 	} ]
 };

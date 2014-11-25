@@ -600,9 +600,9 @@ i3GEO.mapa =
 			 *
 			 * Janela de conversao de wkt em layer.
 			 */
-			wkt2layer: function(wkt){
+			wkt2layer: function(wkt,texto){
 				var temp = function(){
-					i3GEOF.wkt2layer.iniciaJanelaFlutuante(wkt);
+					i3GEOF.wkt2layer.iniciaJanelaFlutuante(wkt,texto);
 				};
 				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.wkt2layer()","wkt2layer","wkt2layer","dependencias.php",temp);
 			},
