@@ -782,7 +782,15 @@ $wkt - boolean indicando se $xy e um WKT
 		if($nomeTema != ""){
 			$pinlayer->setmetadata("tema",$nomeTema);
 		}
-		$pinlayer->setprojection($this->mapa->getProjection());
+		//verifica a projecao
+		$c = $shp->getCentroid();
+		$c = $c->x;
+		if($c > -181 && $c < 181){
+			$pinlayer->setprojection("proj=latlong,a=6378137,b=6378137");
+		}
+		else{
+			$pinlayer->setprojection($this->mapa->getProjection());
+		}
 		return("ok");
 	}
 /*

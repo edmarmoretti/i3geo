@@ -39,7 +39,17 @@ Insere elementos no mapa como um layer do tipo feature baseado em wkt
 		$nomeLayer = $m->aplicaFuncaoListaWKT(array($xy),"converteSHP",$dir_tmp,$imgdir);
 		$l = $m->mapa->getlayerbyname($nomeLayer);
 		$l->setmetadata("tema",$nometema);
-		$l->setprojection($m->mapa->getProjection());
+		//verifica projecao
+		//verifica a projecao
+		$shp = ms_shapeObjFromWkt($xy);
+		$c = $shp->getCentroid();
+		$c = $c->x;
+		if($c > -181 && $c < 181){
+			$l->setprojection("proj=latlong,a=6378137,b=6378137");
+		}
+		else{
+			$l->setprojection($this->mapa->getProjection());
+		}
 		$m->salva();
 		redesenhaMapa();
 	break;

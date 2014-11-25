@@ -2144,7 +2144,6 @@ i3GEO.Interface =
 					var i = i3GEO.Interface.googlemaps.criaImageMap(nomeLayer, cache);
 					i3GeoMap.overlayMapTypes.insertAt(indice, i);
 				}
-
 			},
 			registraEventos : function() {
 				var modoAtual = "";

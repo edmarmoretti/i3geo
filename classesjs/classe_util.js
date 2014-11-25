@@ -3068,14 +3068,14 @@ i3GEO.util = {
 
 		Projeta um objeto OpenLayers de GEO para OSM
 			 */
-			projGeo2OSM: function(obj){
-				if(i3GEO.Interface.openlayers.googleLike === true){
-					projWGS84 = new OpenLayers.Projection("EPSG:4326");
-					proj900913 = new OpenLayers.Projection("EPSG:900913");
-					obj =  obj.transform(projWGS84,proj900913);
-				}
-				return obj;
-			},
+		projGeo2OSM: function(obj){
+			if(i3GEO.Interface.openlayers.googleLike === true){
+				projWGS84 = new OpenLayers.Projection("EPSG:4326");
+				proj900913 = new OpenLayers.Projection("EPSG:900913");
+				obj =  obj.transform(projWGS84,proj900913);
+			}
+			return obj;
+		},
 		/*
 	Function: navegadorDir
 
