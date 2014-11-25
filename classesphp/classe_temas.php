@@ -676,7 +676,7 @@ $wrap - caractere que indica quebra de linha
 
 $wkt - boolean indicando se $xy e um WKT
 */
-	function insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap,$wkt=false)
+	function insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap,$wkt=false,$nomeTema="")
 	{
 		//verifica se j'a existe um layer criado anteriormente com o mesmo nome e apaga se existir
 		if ($tipo == "limpaponto")
@@ -712,7 +712,7 @@ $wkt - boolean indicando se $xy e um WKT
 					if ((!isset($marca)) || ($marca=="")){$marca="marca";}
 					if(!isset($tamanho)){$tamanho = 5;}
 					$e->set("size",$tamanho);
-					$e->set("symbolname",$marca);
+					$e->set("symbol",$marca);
 					corE($e,$cor,"color");
 					$pinlayer->setmetadata("tema","Pontos inseridos");
 					$pinlayer->set("type",MS_LAYER_POINT);
@@ -721,7 +721,7 @@ $wkt - boolean indicando se $xy e um WKT
 					if (!isset($marca) || $marca == ""){$marca="linha";}
 					if(!isset($tamanho)){$tamanho = 2;}
 					$e->set("size",$tamanho);
-					$e->set("symbolname",$marca);
+					$e->set("symbol",$marca);
 					if(isset($cor) && $cor != "")
 					{corE($e,$cor,"color");}
 					if(isset($texto) && $texto != "")
@@ -734,7 +734,7 @@ $wkt - boolean indicando se $xy e um WKT
 					if (!isset($marca)){$marca="p9";}
 					if(!isset($tamanho)){$tamanho = 5;}
 					$e->set("size",$tamanho);
-					$e->set("symbolname",$marca);
+					$e->set("symbol",$marca);
 					$pinlayer->setmetadata("tema","Poligonos inseridos");
 					$pinlayer->set("type",MS_LAYER_POLYGON);
 					$pinlayer->set("opacity","50");
@@ -779,7 +779,10 @@ $wkt - boolean indicando se $xy e um WKT
 			$shp = ms_shapeObjFromWkt($xy);
 		}
 		$pinlayer->addfeature($shp);
-		//$shp->free();
+		if($nomeTema != ""){
+			$pinlayer->setmetadata("tema",$nomeTema);
+		}
+		$pinlayer->setprojection($this->mapa->getProjection());
 		return("ok");
 	}
 /*

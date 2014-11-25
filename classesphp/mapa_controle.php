@@ -959,7 +959,10 @@ switch (strtoupper($funcao))
 		if(!isset($marca)){
 			$marca="";
 		}
-		$m->insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap);
+		if(!isset($wkt)){
+			$wkt = false;
+		}
+		$m->insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap,$wkt);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();

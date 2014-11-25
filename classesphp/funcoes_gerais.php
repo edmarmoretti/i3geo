@@ -1334,7 +1334,7 @@ function criaLayer($oMapa,$ms_tipo,$ms_status,$metaTema,$metaClasse="SIM",$repos
 	$l->set("status",$ms_status);
 	$l->set("template","none.htm");
 	//evita problemas no modo tile
-	if(versao > 5){
+	if($versao > 5){
 		$l->setprocessing("LABEL_NO_CLIP=True");
 		$l->setprocessing("POLYLINE_NO_CLIP=True");
 	}

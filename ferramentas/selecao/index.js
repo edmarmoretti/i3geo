@@ -635,7 +635,7 @@ i3GEOF.selecao = {
 					}
 				}
 			},
-			//@TODO nao funciona no googlemaps
+			//TODO nao funciona no googlemaps
 			googlemaps: {
 				inicia: function(){
 					var n,i,

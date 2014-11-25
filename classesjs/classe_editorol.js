@@ -711,9 +711,9 @@ i3GEO.editorOL = {
 			ins += "<p class=paragrafo >Foram encontrada(s) "+n+" geometria(s) selecionada(s) </p>";
 			ins += "<p class=paragrafo ><a href='#' onclick='i3GEO.editorOL.listaGeometriasSel()' >Listar</a>&nbsp;&nbsp;";
 			if(i3GEO.arvoreDeCamadas){
-				ins += "<a href='#' onclick='"+i3GEO.editorOL.nomeFuncaoSalvar+"' >Salvar</a>&nbsp;&nbsp;";
+				ins += "<a href='#' onclick='"+i3GEO.editorOL.nomeFuncaoSalvar+"' >Salvar dados</a>&nbsp;&nbsp;";
 			}
-			ins += "<a href='#' onclick='i3GEO.editorOL.exportarSHP()' >Exportar (shapefile)</a></p>";
+			ins += "<a href='#' onclick='i3GEO.editorOL.incorporar()' >Incorporar ao mapa</a></p>";
 			YAHOO.salvaGeometrias.container.panel.setBody(ins);
 		}
 		else
@@ -721,6 +721,9 @@ i3GEO.editorOL = {
 	},
 	exportarSHP: function(){
 		i3GEO.editorOL.processageo("converteSHP");
+	},
+	incorporar: function(){
+		i3GEO.editorOL.processageo("incorporar");
 	},
 	listaGeometriasSel: function(){
 		var geos = i3GEO.desenho.layergrafico.selectedFeatures,
@@ -746,6 +749,7 @@ i3GEO.editorOL = {
 					}
 				}
 			}
+			ins += "<br>";
 		}
 		w = window.open();
 		w.document.write(ins);
@@ -1800,6 +1804,21 @@ i3GEO.editorOL = {
 					i3GEO.janela.minimiza("paneltemaativo");
 				}
 			};
+			if(operacao === "incorporar"){
+				if(polis.length > 0){
+					temp = i3GEO.editorOL.merge(polis);
+				}
+				if(linhas.length > 0){
+					temp = i3GEO.editorOL.merge(linhas);
+				}
+				if(pontos.length > 0){
+					temp = i3GEO.editorOL.merge(pontos);
+				}
+				if(i3GEO.mapa){
+					i3GEO.mapa.dialogo.wkt2layer(temp);
+				}
+				return;
+			}
 			if(operacao === "union" && !i3GEO.php ){
 				if(polis.length > 0){
 					temp = i3GEO.editorOL.uniaojts(polis);
@@ -1810,7 +1829,7 @@ i3GEO.editorOL = {
 					i3GEO.editorOL.substituiFeaturesSel(temp);
 				}
 				if(pontos.length > 0){
-					temp = i3GEO.editorOL.uniaojts(p);
+					temp = i3GEO.editorOL.uniaojts(pontos);
 					i3GEO.editorOL.substituiFeaturesSel(temp);
 				}
 			}
@@ -1830,8 +1849,26 @@ i3GEO.editorOL = {
 			}
 			return;
 		}
-		else
-		{alert("Selecione pelo menos dois elementos");}
+		else{
+			alert("Selecione pelo menos dois elementos");
+		}
+	},
+	merge: function(geoms){
+		var n = geoms.length,
+		w = new Wkt.Wkt(),
+		g,
+		m,
+		i;
+		w.read(geoms[0].toString());
+		if(n > 1){
+			for(i=1;i < n;i++){
+				g = geoms[i].toString();
+				m = new Wkt.Wkt();
+				m.read(g);
+				w.merge(m);
+			}
+		}
+		return w.write();
 	},
 	uniaojts: function(geoms){
 		var n = geoms.length,
@@ -1859,8 +1896,9 @@ i3GEO.editorOL = {
 			i,temp;
 		for(i=0;i<n;i++){
 			temp = features[i].geometry;
-			if(temp.CLASS_NAME == tipo)
-			{lista.push(temp);}
+			if(temp.CLASS_NAME == tipo){
+				lista.push(temp);
+			}
 		}
 		return lista;
 	},

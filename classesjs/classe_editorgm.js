@@ -341,6 +341,23 @@ i3GEO.editorGM = {
 			wkt.fromObject(obj);
 			return wkt.write();
 		},
+		merge: function(geoms){
+			var n = geoms.length,
+			w = new Wkt.Wkt(),
+			g,
+			m,
+			i;
+			w.read(geoms[0].toString());
+			if(n > 1){
+				for(i=1;i < n;i++){
+					g = geoms[i].toString();
+					m = new Wkt.Wkt();
+					m.read(g);
+					w.merge(m);
+				}
+			}
+			return w.write();
+		},
 		/**
 		 * Funcoes que controlam o processo de obtencao das coordenadas de um componente de uma camada existente no mapa
 		 */
@@ -641,6 +658,7 @@ i3GEO.editorGM = {
 				return;
 			}
 		},
+		//TODO atualizar com a nova ferramenta wkt2layer
 		/**
 		 * Salva um poligono no banco de dados
 		 */
@@ -1140,6 +1158,7 @@ google.maps.Polygon.prototype.type = 'polygon';
 google.maps.Rectangle.prototype.type = 'rectangle';
 google.maps.Circle.prototype.type = 'circle';
 
+//TODO atualizar
 /**
  * An object of framework-dependent construction methods used to generate
  * objects belonging to the various geometry classes of the framework.

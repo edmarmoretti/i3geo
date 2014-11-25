@@ -19,5 +19,10 @@ i3GEOF.wkt2layer.dicionario = {
 		pt : "WKT vazio",
 		en : "",
 		es : ""
+	} ],
+	'nometema' : [ {
+		pt : "T&iacute;tulo do novo tema",
+		en : "",
+		es : ""
 	} ]
 };
