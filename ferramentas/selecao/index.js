@@ -489,7 +489,7 @@ i3GEOF.selecao = {
 								callbacks:{
 									done: function(feature){
 										i3GEOF.selecao.box.openlayers.removeControle();
-										var xminymin = i3geoOL.getLonLatFromPixel({
+										var g,estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao],f,xminymin = i3geoOL.getLonLatFromPixel({
 											x: feature.left,
 											y: feature.bottom
 										}),
@@ -502,6 +502,25 @@ i3GEOF.selecao = {
 												$i("i3GEOselecaotipoOperacao").value,
 												xminymin.lon+" "+xminymin.lat+" "+xmaxymax.lon+" "+xmaxymax.lat
 										);
+										//TODO
+										/*
+										g = new OpenLayers.Bounds(xminymin.lon,xminymin.lat,xmaxymax.lon,xmaxymax.lat);
+										f = new OpenLayers.Feature.Vector(g.toGeometry(), {
+											origem : "selecao"
+											}, {
+												graphicName : "square",
+												pointRadius : 10,
+												graphicOpacity : 1,
+												strokeWidth : 1,
+												strokeColor : estilo.linecolor,
+												fillColor : estilo.fillcolor,
+												fillOpacity : 0.3
+											});
+										i3GEO.desenho.layergrafico.addFeatures([f]);
+										if (i3GEO.Interface) {
+											i3GEO.Interface.openlayers.sobeLayersGraficos();
+										}
+										*/
 									}
 								}
 							});
