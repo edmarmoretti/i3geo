@@ -835,7 +835,7 @@ class Metaestat{
 				$itens = array();
 				$apelidos = array();
 				if(!empty($colunaSerial)){
-					$colunastabela[] = $colunastabela;
+					$colunastabela[] = $colunaSerial;
 					$colunastabela = array_unique($colunastabela);
 				}
 				$vis = implode(",",$colunastabela);
