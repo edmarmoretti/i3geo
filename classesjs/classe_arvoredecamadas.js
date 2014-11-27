@@ -1,8 +1,6 @@
 /**
  * Title: &Aacute;rvore de camadas
  *
- * Objeto: i3GEO.arvoreDeCamadas
- *
  * Monta a &aacute;rvore com os temas existentes no mapa atual. A &aacute;rvore
  * cont&eacute;m as op&ccedil;&otilde;es de ligar e desligar temas,
  * altera&ccedil;&atilde;o na ordem de desenho, links para acesso a
@@ -11,6 +9,10 @@
  * i3GEO.arvoreDeCamadas permite controlar quais as op&ccedil;&otilde;es que
  * ser&atilde;o mostradas na &aacute;rvore e seu comportamento em diferentes
  * situa&ccdil;&otilde;s.
+ *
+ * Objeto:
+ *
+ * i3GEO.arvoreDeCamadas
  *
  * Exemplo:
  *
@@ -24,8 +26,9 @@
  * Arquivo:
  *
  * i3geo/classesjs/classe_arvoredecamadas.js
- *
- * Licen&ccedil;a:
+ */
+
+/** Licen&ccedil;a
  *
  * GPL2
  *
@@ -57,7 +60,9 @@ i3GEO.arvoreDeCamadas = {
 	 * Objeto com a &aacute;rvore criada com YAHOO.widget.TreeView Pode ser
 	 * usado para receber m&eacute;todos da API do YAHOO
 	 *
-	 * Tipo {YAHOO.widget.TreeView}
+	 * Tipo:
+	 *
+	 * {YAHOO.widget.TreeView}
 	 */
 	ARVORE : null,
 	/**
@@ -65,7 +70,13 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Armazena o ID do elemento DOM onde a &aacute;rvore foi inserida.
 	 *
-	 * Tipo {string} - "listaTemas"
+	 * Tipo:
+	 *
+	 * {string}
+	 *
+	 * Default:
+	 *
+	 * "listaTemas"
 	 */
 	IDHTML : "listaTemas",
 	// TODO remover em 6.1
@@ -77,7 +88,13 @@ i3GEO.arvoreDeCamadas = {
 	 * permite ajustar a &aacute;rvore conforme o programador desejar. &Eacute;
 	 * executada apenas na cria&ccedil;&atilde;o da &aacute;rvore
 	 *
-	 * Tipo {string} - ""
+	 * Tipo:
+	 *
+	 * {string}
+	 *
+	 * Default:
+	 *
+	 * ""
 	 */
 	FINALIZA : "",
 	finaliza : "",
@@ -88,7 +105,13 @@ i3GEO.arvoreDeCamadas = {
 	 * onclick do elemento checkbox adicionado no in&iacute;cio do nome de um
 	 * camada
 	 *
-	 * Tipo {string} - ""
+	 * Tipo:
+	 *
+	 * {string}
+	 *
+	 * Default:
+	 *
+	 * ""
 	 */
 	ATIVATEMA : "",
 	/**
@@ -98,7 +121,13 @@ i3GEO.arvoreDeCamadas = {
 	 * O HTML deve ser armazenado em i3geo/aplicmap. Templates de legenda seguem
 	 * a sintaxe definida pelo software Mapserver
 	 *
-	 * Tipo {string} - legenda5.htm
+	 * Tipo:
+	 *
+	 * {string}
+	 *
+	 * Default:
+	 *
+	 * legenda5.htm
 	 */
 	TEMPLATELEGENDA : "legenda5.htm",
 	/**
@@ -109,7 +138,13 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Funciona apenas na interface Openlayers
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	BARRAPROGRESSO : true,
 	/**
@@ -120,7 +155,13 @@ i3GEO.arvoreDeCamadas = {
 	 * mapa, o usu&aacute;rio pode escolher um KML de uma lista
 	 * pr&eacute;-definida para ser adicionado
 	 *
-	 * Tipo {boolean} - false
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * false
 	 */
 	MOSTRALISTAKML : false,
 	/**
@@ -129,7 +170,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Filtro que ser&aacute; aplicado para restringir os tipos de camadas
 	 * mostradas na &aacute;rvore
 	 *
-	 * Tipo {ligados|desligados|selecionados|download|wms|raster|toponimia} - ""
+	 * Tipo:
+	 *
+	 * {ligados|desligados|selecionados|download|wms|raster|toponimia}
+	 *
+	 * Default:
+	 *
+	 * ""
 	 */
 	FILTRO : "",
 	/**
@@ -142,7 +189,13 @@ i3GEO.arvoreDeCamadas = {
 	 * extens&atilde;o geogr&aacute;fica registrada (veja o sistema de
 	 * administra&ccedil;&atilde;o)
 	 *
-	 * Tipo {boolean} - false
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * false
 	 */
 	VERIFICAABRANGENCIATEMAS : false,
 	/**
@@ -151,7 +204,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Ao expandir um tema mostra apenas a legenda, sem as outras
 	 * op&ccedil;&otilde;es
 	 *
-	 * Tipo {boolean} - false
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * false
 	 */
 	EXPANDESOLEGENDA : false,
 	/**
@@ -160,7 +219,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Permite que as op&ccedil;&otilde;es abaixo dos n&oacute;s referentes a
 	 * cada tema sejam mostradas
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	PERMITEEXPANDIRTEMAS : true,
 	/**
@@ -169,7 +234,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Ativa a op&ccedil;&atilde;o de arrastar um tema para alterar a ordem de
 	 * desenho das camadas
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	ARRASTARORDEM : true,
 	/**
@@ -178,7 +249,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite atualizar a
 	 * &acute;rvore
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	REFRESH : true,
 	/**
@@ -187,7 +264,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Ativa a op&ccedil;&atilde;o de arrastar um tema para a lixeria quando se
 	 * quer remov&ecirc;-lo do mapa.
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	ARRASTARLIXEIRA : true,
 	/**
@@ -196,7 +279,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite alterar a
 	 * transpar&ecirc;ncia das camadas existentes no mapa
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	ALTERAOPACIDADE : true,
 	/**
@@ -205,7 +294,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite gerar uma
 	 * anima&ccedil;&atilde;o do mapa, ligando e desligando camadas
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	ANIMAMAPA : true,
 	/**
@@ -213,7 +308,13 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Mostra os &iacute;cones de desligar/ligar todos os temas.
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	LIGARDESLIGARTODOS : true,
 	/**
@@ -221,7 +322,13 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Mostra o &iacute;cone para filtrar as camadas.
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	FILTRAR : true,
 	/**
@@ -229,7 +336,13 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Mostra o &iacute;cone para abrir a legenda do mapa.
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	ABRELEGENDA : true,
 	/**
@@ -239,7 +352,13 @@ i3GEO.arvoreDeCamadas = {
 	 * n&atilde;o. Se true, os n&oacute;s do primeiro n&iacute;vel ser&atilde;o
 	 * abertos na inicializa&ccedil;&atilde;o da &aacute;rvore.
 	 *
-	 * Tipo {boolean} - false
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * false
 	 */
 	EXPANDIDA : false,
 	/**
@@ -248,7 +367,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Indica se a legenda da &aacute;rvore ser&aacute; montada de forma
 	 * expandida ou n&atilde;o.
 	 *
-	 * Tipo - {boolean} - false
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * false
 	 */
 	LEGENDAEXPANDIDA : false,
 	/**
@@ -257,7 +382,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Inclui ou n&atilde;o os &iacute;cones de op&ccedil;&otilde;es em cada
 	 * tema (farol, zoom para o tema, etc)
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	OPCOESICONES : true,
 	/**
@@ -266,7 +397,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Inclui ou n&atilde;o o n&oacute; com as op&ccedil;&otilde;es de
 	 * manipula&ccedil;&atilde;o de cada tema.
 	 *
-	 * Tipo - {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	OPCOESTEMAS : true,
 	/**
@@ -274,7 +411,13 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Inclui ou n&atilde;o o n&oacute; para mostrar a legenda do tema.
 	 *
-	 * Tipo - {Boolean} - true
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	OPCOESLEGENDA : true,
 	/**
@@ -283,7 +426,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Inclui ou n&atilde;o as op&ccedil;&otilde;es de &iacute;cones mostradas
 	 * na raiz da &aacute;vore
 	 *
-	 * Tipo - {Boolean} - true
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	OPCOESARVORE : true,
 	/**
@@ -292,7 +441,13 @@ i3GEO.arvoreDeCamadas = {
 	 * Ativa a op&ccedil;&atilde;o de aguarde para mostrar a legenda de um tema
 	 * quando o usu&aacute;rio estaciona o mouse sobre o nome de um tema.
 	 *
-	 * Tipo - {booleano} - false
+	 * Tipo:
+	 *
+	 * {booleano}
+	 *
+	 * Default:
+	 *
+	 * false
 	 */
 	AGUARDALEGENDA : false,
 	/**
@@ -303,7 +458,13 @@ i3GEO.arvoreDeCamadas = {
 	 * O &iacute;cone &eacute; definido no METADATA ICONETEMA no mapfile
 	 * correspondente ao tema (veja o sistema de administra&ccedil;&atilde;o
 	 *
-	 * Tipo {boolean} - true
+	 * Tipo:
+	 *
+	 * {boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	ICONETEMA : true,
 	/**
@@ -429,7 +590,9 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * parametrosTemas
 	 *
-	 * Tipo - {objeto}
+	 * Tipo:
+	 *
+	 * {objeto}
 	 */
 	CAMADAS : "",
 	/**
@@ -438,7 +601,9 @@ i3GEO.arvoreDeCamadas = {
 	 * O mesmo que CAMADAS mas guarda de forma permanente as camadas que
 	 * iniciaram o mapa
 	 *
-	 * Tipo - objeto
+	 * Tipo:
+	 *
+	 * {objeto}
 	 */
 	CAMADASINICIAIS : "",
 	/**
@@ -458,20 +623,20 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametros:
 	 *
-	 * onde {string} - (opcional) ID do elemento DOM onde a &aacute;rvore
+	 * {string} - (opcional) ID do elemento DOM onde a &aacute;rvore
 	 * ser&aacute; inserida. Se for definido como "" o id ser&aacute; buscado da
 	 * vari&aacute;vel IDHTML.
 	 *
-	 * temas {objeto} - (opcional) Objeto com as camadas e propriedades. Se
+	 * {objeto} - (opcional) Objeto com as camadas e propriedades. Se
 	 * n&atilde;o for definido ou for vazio, ser&aacute; utilizado
 	 * i3GEO.arvoreDeCamadas.CAMADAS
 	 *
-	 * g_sid {string} - (opcional) C&oacute;digo da se&ccedil;&atilde;o PHP
+	 * {string} - (opcional) C&oacute;digo da se&ccedil;&atilde;o PHP
 	 * criada ao abrir o i3Geo
 	 *
-	 * g_locaplic {string} - (opcional)
+	 * {string} - (opcional)
 	 *
-	 * funcaoTema {string} - (opcional) Nome da fun&ccedil;&atilde;o que
+	 * {string} - (opcional) Nome da fun&ccedil;&atilde;o que
 	 * ser&aacute; incluida no evento disparado quando o usu&aacute;rio clicar
 	 * no checkbox de um tema
 	 */

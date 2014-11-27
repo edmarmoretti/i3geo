@@ -1,10 +1,12 @@
 /**
  * Title: &Aacute;rvore de temas
  *
- * Objeto: i3GEO.arvoreDeTemas
- *
  * Monta a &aacute;rvore com os temas dispon&iacute;veis para ser adicionados ao
  * mapa
+ *
+ * Objeto:
+ *
+ * i3GEO.arvoreDeTemas
  *
  * Exemplos:
  *
@@ -18,8 +20,9 @@
  * Arquivo:
  *
  * i3geo/classesjs/classe_arvoredetemas.js
- *
- * Licen&ccedil;a:
+ */
+
+ /** Licen&ccedil;a:
  *
  * GPL2
  *
@@ -51,7 +54,9 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Armazena o ID do elemento HTML onde a arvore sera incluida
 	 *
-	 * Tipo {String}
+	 * Tipo:
+	 *
+	 * {String}
 	 */
 	IDHTML : "arvoreAdicionaTema",
 	/**
@@ -59,7 +64,9 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Objeto com a arvore criada com YAHOO.widget.TreeView
 	 *
-	 * Tipo {YAHOO.widget.TreeView}
+	 * Tipo:
+	 *
+	 * {YAHOO.widget.TreeView}
 	 */
 	ARVORE : null,
 	/**
@@ -71,7 +78,9 @@ i3GEO.arvoreDeTemas = {
 	 * A divisao e utilizada para definir quantas estrelas serao mostradas na
 	 * arvore de opcoes adicionais.<b>
 	 *
-	 * Tipo {Numeric}
+	 * Tipo:
+	 *
+	 * {Numeric}
 	 */
 	FATORESTRELA : 10,
 	/**
@@ -142,7 +151,9 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * importarwmc - permite importar um arquivo do tipo map context
 	 *
-	 * Tipo {objeto}
+	 * Tipo:
+	 *
+	 * {objeto}
 	 */
 	OPCOESADICIONAIS : {
 		incluiArvore : true,
@@ -180,7 +191,13 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Inclui na &aacute;rvore a lista de sistemas adicionais definidos no i3geo?
 	 *
-	 * Tipo {Boolean}
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	INCLUISISTEMAS : true,
 	/**
@@ -188,7 +205,13 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Inclui na &aacute;rvore a lista de Web Services WMS cadastrados?
 	 *
-	 * Tipo {Boolean}
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	INCLUIWMS : true,
 	/**
@@ -197,7 +220,13 @@ i3GEO.arvoreDeTemas = {
 	 * Inclui na &aacute;rvore a lista de de regi&otilde;es cadatsradas no sistema de
 	 * metadados estat&iacute;sticos
 	 *
-	 * Tipo {Boolean}
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	INCLUIREGIOES : true,
 	/**
@@ -205,7 +234,13 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Inclui na &aacute;rvore a lista de servi&ccedil;os da INDE Br
 	 *
-	 * Tipo {Boolean}
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	INCLUIINDIBR : true,
 	/**
@@ -214,7 +249,13 @@ i3GEO.arvoreDeTemas = {
 	 * Inclui na &aacute;rvore a lista de Web Services WMS advindos do sistema de
 	 * metadados estat&iacute;sticos?
 	 *
-	 * Tipo {Boolean}
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	INCLUIWMSMETAESTAT : true,
 	/**
@@ -223,7 +264,13 @@ i3GEO.arvoreDeTemas = {
 	 * Inclui na &aacute;rvore a lista de mapas cadastrados do sistema de metadados
 	 * estat&iacute;sticos?
 	 *
-	 * Tipo {Boolean}
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	INCLUIMAPASCADASTRADOS : true,
 	/**
@@ -232,7 +279,13 @@ i3GEO.arvoreDeTemas = {
 	 * Inclui na &aacute;rvore um no com a lista de temas classificados conforme o
 	 * numero de estrelas que possui
 	 *
-	 * Tipo {Boolean}
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * true
 	 */
 	INCLUIESTRELAS : true,
 	/**
@@ -240,7 +293,13 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Mostra apenas os temas que permitem download
 	 *
-	 * Tipo {Boolean}
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * false
 	 */
 	FILTRADOWNLOAD : false,
 	/**
@@ -248,7 +307,13 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Mostra apenas os temas que permitem o uso de servi&ccedil;os OGC
 	 *
-	 * Tipo {Boolean}
+	 * Tipo:
+	 *
+	 * {Boolean}
+	 *
+	 * Default:
+	 *
+	 * false
 	 */
 	FILTRAOGC : false,
 	/**
@@ -256,7 +321,13 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Tipo de bot&atilde;o que sera usado para clicar no tema
 	 *
-	 * Tipo {checkbox|radio} - checkbox
+	 * Tipo:
+	 *
+	 * {checkbox|radio}
+	 *
+	 * Default:
+	 *
+	 * checkbox
 	 */
 	TIPOBOTAO : "checkbox",
 	/**
@@ -265,7 +336,13 @@ i3GEO.arvoreDeTemas = {
 	 * Nome da fun&ccedil;&atilde;o que ser&aacute; incluida no evento onclick do elemento checkbox
 	 * adicionado no in&iacute;cio do nome de um tema.
 	 *
-	 * Tipo {String}
+	 * Tipo:
+	 *
+	 * {String}
+	 *
+	 * Default:
+	 *
+	 * ""
 	 */
 	ATIVATEMA : "",
 	/**
@@ -275,7 +352,13 @@ i3GEO.arvoreDeTemas = {
 	 * considerados na montagem da &aacute;rvore. Por default &eacute; vazio, o que
 	 * significa que todos os menus serao considerados.
 	 *
-	 * Tipo {Array}
+	 * Tipo:
+	 *
+	 * {Array}
+	 *
+	 * Default:
+	 *
+	 * []
 	 */
 	IDSMENUS : [],
 	/**
@@ -290,14 +373,22 @@ i3GEO.arvoreDeTemas = {
 	 * i3GEO.guias.CONFIGURA, por exemplo i3GEO.arvoreDeTemas.RETORNAGUIA =
 	 * "temas"
 	 *
-	 * Tipo {String} - ""
+	 * Tipo:
+	 *
+	 * {String}
+	 *
+	 * Default:
+	 *
+	 * ""
 	 */
 	RETORNAGUIA : "",
 	/**
 	 * Objeto com a lista de drives no servidor que podem ser abertos na
 	 * opcao de navegacao pelos diretorios
 	 *
-	 * Tipo {objeto}
+	 * Tipo:
+	 *
+	 * {objeto}
 	 */
 	DRIVES : null,
 	/**
