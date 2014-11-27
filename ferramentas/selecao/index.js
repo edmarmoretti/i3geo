@@ -689,10 +689,27 @@ i3GEOF.selecao = {
 		 */
 		figura: {
 			openlayers: {
+				executa: function(feature){
+					i3GEOF.selecao.figura.openlayers.removeControle();
+					var wkt = i3GEO.util.projOSM2Geo(feature.geometry);
+					//var wkt = feature.geometry;
+					i3GEOF.selecao.figura.termina(
+							i3GEO.temaAtivo,
+							$i("i3GEOselecaotipoOperacao").value,
+							wkt
+					);
+				},
 				inicia: function(){
+					var ponto,f;
 					i3GEO.eventos.cliquePerm.desativa();
 					i3GEOF.selecao.figura.openlayers.removeControle();
-					var ponto = new OpenLayers.Control.SelectFeature(
+					//verifica se ja tem uma figura selecionada
+					f = i3GEO.desenho.layergrafico.selectedFeatures;
+					if(f && f.length > 0){
+						i3GEOF.selecao.figura.openlayers.executa(f[0]);
+						return;
+					}
+					ponto = new OpenLayers.Control.SelectFeature(
 							i3GEO.desenho.layergrafico,
 							{
 								clickout: true,
@@ -705,14 +722,7 @@ i3GEOF.selecao = {
 								id: "i3GEOFselecaoFigura",
 								type: OpenLayers.Control.TYPE_TOOL,
 								onSelect: function(feature){
-									i3GEOF.selecao.figura.openlayers.removeControle();
-									var wkt = i3GEO.util.projOSM2Geo(feature.geometry);
-									//var wkt = feature.geometry;
-									i3GEOF.selecao.figura.termina(
-											i3GEO.temaAtivo,
-											$i("i3GEOselecaotipoOperacao").value,
-											wkt
-									);
+									i3GEOF.selecao.figura.openlayers.executa(feature);
 								}
 							});
 					i3geoOL.addControl(ponto);
