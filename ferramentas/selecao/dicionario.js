@@ -160,13 +160,13 @@ i3GEOF.selecao.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	33 : [ {
-		pt : "",
+	'mantemfigura' : [ {
+		pt : "Mant&eacute;m no mapa as figuras desenhadas nos processos de sele&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
-	34 : [ {
-		pt : "",
+	'editor' : [ {
+		pt : "Abre o editor de figuras",
 		en : "",
 		es : ""
 	} ],
