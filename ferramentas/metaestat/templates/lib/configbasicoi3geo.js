@@ -33,7 +33,7 @@ i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = false;
 i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = false;
 i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
-i3GEO.arvoreDeCamadas.finaliza = "i3GEO.arvoreDeCamadas.ARVORE.collapseAll()";
+i3GEO.arvoreDeCamadas.FINALIZA = "i3GEO.arvoreDeCamadas.ARVORE.collapseAll()";
 i3GEO.mapa.AUTORESIZE = true;
 OpenLayers.ImgPath = "../../../pacotes/openlayers/img/";
 //
