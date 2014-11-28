@@ -184,10 +184,10 @@ i3GEOF.salvaMapa = {
 				var n = retorno.length,
 					i,
 					ins = "" +
-					"<select id='i3GEOFsalvamapaMapaId' >" +
+					"<select id='i3GEOFsalvamapaMapaId' onchange='$i(\"i3GEOjanelaprompt\").value = this.options[this.selectedIndex].text'>" +
 					"	<option value=''>---</option>";
 				for(i=0;i<n;i++){
-					ins += 	"<option value='"+retorno[i].id_mapa+"'>"+retorno[i].id_mapa+" - "+retorno[i].nome_mapa+"</option>";
+					ins += 	"<option value='"+retorno[i].id_mapa+"'>"+retorno[i].nome_mapa+"</option>";
 				}
 				ins += "</select>";
 				$i(onde).innerHTML = ins;

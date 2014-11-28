@@ -255,7 +255,9 @@ i3GEOF.graficointerativo1 =
 						objs = c.getElementsByTagName("input");
 						n = config.valoresCombosItens.inputs.length;
 						for (i = 0; i < n; i++) {
-							objs[i].value = config.valoresCombosItens.inputs[i];
+							if(objs[i]){
+								objs[i].value = config.valoresCombosItens.inputs[i];
+							}
 						}
 						atualizaConfigGr();
 
@@ -287,7 +289,7 @@ i3GEOF.graficointerativo1 =
 			janelas = i3GEOF.graficointerativo1.janelas;
 			n = janelas.length;
 			for (i = 0; i < n; i++) {
-				novoid = window.prompt($trad('idDoGrafico',i3GEOF.salvaMapa.dicionario),janelas[i]);
+				novoid = window.prompt($trad('idDoGrafico',i3GEOF.graficointerativo1.dicionario),janelas[i]);
 				c = i3GEOF.graficointerativo1.retornaConfig(janelas[i],novoid);
 				par.push(c);
 			}
@@ -366,9 +368,9 @@ i3GEOF.graficointerativo1 =
 			}
 			objs = d.getElementsByTagName("input");
 			for (obj in objs) {
-				if (objs[obj].value && objs[obj].value != "") {
+				//if (objs[obj].value && objs[obj].value != "") {
 					valoresCombosItens.inputs.push(objs[obj].value);
-				}
+				//}
 			}
 			par["valoresCombosItens"] = valoresCombosItens;
 			par["idjanela"] = novoid;

@@ -383,7 +383,7 @@ i3GEOF.graficointerativo1.dicionario =
 		],
 		"idDoGrafico" : [
 			{
-				pt : "ID do gr&aacute;fico",
+				pt : "Ientificador do grafico",
 				en : "",
 				es : ""
 			}
