@@ -342,11 +342,11 @@ i3GEO.analise =
 			/**
 			 * Armazena o WKT da ultima linha
 			 */
-			ultimoWkt: "",
+			ultimoWkt : "",
 			/**
 			 * Armazena a ultima medida
 			 */
-			ultimaMedida: "",
+			ultimaMedida : "",
 			/**
 			 * Function: inicia
 			 *
@@ -372,22 +372,16 @@ i3GEO.analise =
 					novoel.id = "mostradistancia";
 					ins =
 						'<div class="hd" style="font-size:11px">&nbsp;Dist&acirc;ncia aproximada <a class=ajuda_usuario target=_blank href="'
-							+ i3GEO.configura.locaplic
-							+ '/ajuda_usuario.php?idcategoria=6&idajuda=50" >&nbsp;&nbsp;&nbsp;</a></div>'
+							+ i3GEO.configura.locaplic + '/ajuda_usuario.php?idcategoria=6&idajuda=50" >&nbsp;&nbsp;&nbsp;</a></div>'
 							+ '<div class="bd" style="text-align:left;padding:3px;" >'
 							+ '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>'
 							+ '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo_movel" ></div>'
 							+ '<div style="text-align:left;font-size:10px" >'
-							+ '<span style="color:navy;cursor:pointer;text-align:left;" >'
-							+ '<table class=lista7 >'
-							+ '<tr>'
-							+ '<td><input style="cursor:pointer" type="checkbox" id="pararraios" checked /></td>'
-							+ '<td>Raios</td>'
-							+ '<td>&nbsp;</td>'
-							+ '<td><input style="cursor:pointer" type="checkbox" id="parartextos" checked /></td>'
-							+ '<td>Textos<td>'
-							+ '<td>&nbsp;Estilo:</td>'
-							+ '<td><div class=styled-select style="width:70px;">' + i3GEO.desenho.caixaEstilos() + '</div></td>'
+							+ '<span style="color:navy;cursor:pointer;text-align:left;" >' + '<table class=lista7 >' + '<tr>'
+							+ '<td><input style="cursor:pointer" type="checkbox" id="pararraios" checked /></td>' + '<td>Raios</td>'
+							+ '<td>&nbsp;</td>' + '<td><input style="cursor:pointer" type="checkbox" id="parartextos" checked /></td>'
+							+ '<td>Textos<td>' + '<td>&nbsp;Estilo:</td>' + '<td><div class=styled-select style="width:70px;">'
+							+ i3GEO.desenho.caixaEstilos() + '</div></td>'
 							+ '<td>&nbsp;<input id=i3GEObotaoPerfil size="22" type="button" value="perfil"></td>'
 							+ '<td>&nbsp;<input id=i3GEObotaoDistWkt size="22" type="button" value="incorporar"></td>'
 							+ '</tr></table></span>' + '</div>' + '</div>';
@@ -432,7 +426,7 @@ i3GEO.analise =
 				new YAHOO.widget.Button("i3GEObotaoDistWkt", {
 					onclick : {
 						fn : function() {
-							i3GEO.mapa.dialogo.wkt2layer(i3GEO.analise.medeDistancia.ultimoWkt,i3GEO.analise.medeDistancia.ultimaMedida);
+							i3GEO.mapa.dialogo.wkt2layer(i3GEO.analise.medeDistancia.ultimoWkt, i3GEO.analise.medeDistancia.ultimaMedida);
 						}
 					}
 				});
@@ -457,11 +451,11 @@ i3GEO.analise =
 			 * Converte a lista de pontos em WKT
 			 */
 			pontos2wkt : function() {
-				var pontos = [],x = i3GEO.analise.medeDistancia.pontos.xpt, y = i3GEO.analise.medeDistancia.pontos.ypt, n = x.length,i;
-				for (i=0;i<n;i++){
+				var pontos = [], x = i3GEO.analise.medeDistancia.pontos.xpt, y = i3GEO.analise.medeDistancia.pontos.ypt, n = x.length, i;
+				for (i = 0; i < n; i++) {
 					pontos.push(x[i] + " " + y[i]);
 				}
-				return 	"LINESTRING(" + pontos.join(",") + ")";
+				return "LINESTRING(" + pontos.join(",") + ")";
 			},
 			/**
 			 * Funcoes especificas da interface openlayers
@@ -488,7 +482,7 @@ i3GEO.analise =
 								type : OpenLayers.Control.TYPE_TOOL,
 								callbacks : {
 									done : function(feature) {
-										var t,f = new OpenLayers.Feature.Vector(feature, {
+										var t, f = new OpenLayers.Feature.Vector(feature, {
 											origem : "medeDistancia"
 										}, {
 											graphicName : "square",
@@ -685,7 +679,7 @@ i3GEO.analise =
 					i3GeoMap.setOptions({
 						draggableCursor : 'crosshair'
 					});
-					var t,evtdblclick = null, evtclick = null, evtmousemove = null, pontos = {
+					var t, evtdblclick = null, evtclick = null, evtmousemove = null, pontos = {
 						xpt : [],
 						ypt : [],
 						dist : [],
@@ -1019,11 +1013,11 @@ i3GEO.analise =
 			/**
 			 * Armazena o WKT da ultima linha
 			 */
-			ultimoWkt: "",
+			ultimoWkt : "",
 			/**
 			 * Armazena a ultima medida
 			 */
-			ultimaMedida: "",
+			ultimaMedida : "",
 			/**
 			 * Function: inicia
 			 *
@@ -1053,8 +1047,7 @@ i3GEO.analise =
 							//+ '<div class=styled-select style="width:70px;">' + i3GEO.desenho.caixaEstilos() + '</div><br>'
 							+ '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo" ></div>'
 							+ '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo_parcial" ></div>'
-							+ '<br><input id=i3GEObotaoAreaWkt size="22" type="button" value="incorporar">'
-							+ '</div>';
+							+ '<br><input id=i3GEObotaoAreaWkt size="22" type="button" value="incorporar">' + '</div>';
 					novoel.innerHTML = ins;
 					novoel.style.borderColor = "gray";
 					document.body.appendChild(novoel);
@@ -1080,7 +1073,7 @@ i3GEO.analise =
 				new YAHOO.widget.Button("i3GEObotaoAreaWkt", {
 					onclick : {
 						fn : function() {
-							i3GEO.mapa.dialogo.wkt2layer(i3GEO.analise.medeArea.ultimoWkt,i3GEO.analise.medeArea.ultimaMedida);
+							i3GEO.mapa.dialogo.wkt2layer(i3GEO.analise.medeArea.ultimoWkt, i3GEO.analise.medeArea.ultimaMedida);
 						}
 					}
 				});
@@ -1105,12 +1098,12 @@ i3GEO.analise =
 			 * Converte a lista de pontos em WKT
 			 */
 			pontos2wkt : function() {
-				var pontos = [],x = i3GEO.analise.medeArea.pontos.xpt, y = i3GEO.analise.medeArea.pontos.ypt, n = x.length,i;
-				for (i=0;i<n;i++){
+				var pontos = [], x = i3GEO.analise.medeArea.pontos.xpt, y = i3GEO.analise.medeArea.pontos.ypt, n = x.length, i;
+				for (i = 0; i < n; i++) {
 					pontos.push(x[i] + " " + y[i]);
 				}
 				pontos.push(x[0] + " " + y[0]);
-				return 	"POLYGON((" + pontos.join(",") + "))";
+				return "POLYGON((" + pontos.join(",") + "))";
 			},
 			/**
 			 * Funcoes especificas da interface openlayers
@@ -1143,11 +1136,11 @@ i3GEO.analise =
 											graphicName : "square",
 											pointRadius : 10,
 											graphicOpacity : 1,
-											fillColor: "white",
-											fillOpacity: 0.4,
-											strokeColor: "black",
-											strokeOpacity: 1,
-											strokeWidth: 2
+											fillColor : "white",
+											fillOpacity : 0.4,
+											strokeColor : "black",
+											strokeOpacity : 1,
+											strokeWidth : 2
 										});
 										i3GEO.desenho.layergrafico.addFeatures([
 											f
