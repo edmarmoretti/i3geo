@@ -394,45 +394,59 @@ i3GEO.arvoreDeTemas = {
 	/**
 	 * Objeto com a lista de sistemas existentes
 	 *
-	 * Tipo {objeto}
+	 * Tipo:
+	 *
+	 * {objeto}
 	 */
 	SISTEMAS : null,
 	/**
 	 * Armazena o objeto com a lista de menus resultante da funcao
 	 * listaMenus
 	 *
-	 * Tipo {objeto}
+	 * Tipo:
+	 *
+	 * {objeto}
 	 */
 	MENUS : null,
 	/**
 	 * Armazena o objeto com a ultima lista de grupos obtida
 	 *
-	 * Tipo {objeto}
+	 * Tipo:
+	 *
+	 * {objeto}
 	 */
 	GRUPOS : null,
 	/**
 	 * Armazena o objeto com a ultima lista de sub-grupos obtida
 	 *
-	 * Tipo {objeto}
+	 * Tipo:
+	 *
+	 * {objeto}
 	 */
 	SUBGRUPOS : null,
 	/**
 	 * Armazena o objeto com a ultima lista de temas obtida
 	 *
-	 * Tipo {objeto}
+	 * Tipo:
+	 *
+	 * {objeto}
 	 */
 	TEMAS : null,
 	/**
 	 * Endereco da aplicacao i3geo. Utilizado para definir o caminho para a
 	 * chamada em AJAX.
 	 *
-	 * Tipo {String}
+	 * Tipo:
+	 *
+	 * {String}
 	 */
 	LOCAPLIC : null,
 	/**
 	 * Codigo da secao aberta no servidor pelo i3Geo
 	 *
-	 * Tipo {String}
+	 * Tipo:
+	 *
+	 * {String}
 	 */
 	SID : null,
 	/**
@@ -760,12 +774,12 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
+	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
 	 * classesphp
 	 *
-	 * funcao - {String} nome da funcao que sera executada quando a lista for
+	 * {String} - nome da funcao que sera executada quando a lista for
 	 * recebida. Se for "", nao e chamada.
 	 */
 	listaMenus : function(g_sid, g_locaplic, funcao) {
@@ -803,14 +817,14 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
+	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
 	 * classesphp
 	 *
-	 * id_menu - {String} Id do menu que contem os grupos
+	 * {String} - Id do menu que contem os grupos
 	 *
-	 * funcao - {Function} funcao que sera executada quando a lista for
+	 * {Function} - funcao que sera executada quando a lista for
 	 * recebida. Se for "", nao e chamada.
 	 */
 	listaGrupos : function(g_sid, g_locaplic, id_menu, funcao) {
@@ -838,16 +852,16 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
+	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
 	 * classesphp
 	 *
-	 * id_menu - {String} Id do menu que contem os grupos
+	 * {String} - Id do menu que contem os grupos
 	 *
-	 * id_grupo - {String} Id do grupo que contem os sub-grupos
+	 * {String} - Id do grupo que contem os sub-grupos
 	 *
-	 * funcao - {Function} funcao que sera executada quando a lista for
+	 * {Function} - funcao que sera executada quando a lista for
 	 * recebida. Se for "", nao e chamada.
 	 */
 	listaSubGrupos : function(g_sid, g_locaplic, id_menu, id_grupo, funcao) {
@@ -871,18 +885,18 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
+	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
 	 * classesphp
 	 *
-	 * id_menu - {String} Id do menu que contem os grupos
+	 * {String} - Id do menu que contem os grupos
 	 *
-	 * id_grupo - {String} Id do grupo que contem os sub-grupos
+	 * {String} - Id do grupo que contem os sub-grupos
 	 *
-	 * id_subgrupo - {String} Id do sub-grupo que contem os temas
+	 * {String} - Id do sub-grupo que contem os temas
 	 *
-	 * funcao - {Function} funcao que sera executada quando a lista for
+	 * {Function} - funcao que sera executada quando a lista for
 	 * recebida. Se for "", nao e chamada.
 	 */
 	listaTemas : function(g_sid, g_locaplic, id_menu, id_grupo, id_subgrupo,
@@ -907,12 +921,12 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
+	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
 	 * classesphp
 	 *
-	 * funcao - {Function} funcao que sera executada quando a lista for
+	 * {Function} - funcao que sera executada quando a lista for
 	 * recebida. Se for "", nao e chamada.
 	 */
 	listaSistemas : function(g_sid, g_locaplic, funcao) {
@@ -935,12 +949,12 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
+	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
 	 * classesphp
 	 *
-	 * funcao - {Function} funcao que sera executada quando a lista for
+	 * {Function} - funcao que sera executada quando a lista for
 	 * recebida. Se for "", nao e chamada.
 	 */
 	listaDrives : function(g_sid, g_locaplic, funcao) {
@@ -968,7 +982,7 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * node {objeto} - no da arvore que foi expandido pelo usuario
+	 * {objeto} - no da arvore que foi expandido pelo usuario
 	 */
 	listaEstrelas : function(node) {
 		if (typeof (console) !== 'undefined')
@@ -1070,21 +1084,20 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * g_sid - {String} Codigo da secao PHP criada ao abrir o i3Geo
+	 * {String} Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * g_locaplic - {String} Endereco da aplicacao (i3geo) onde fica o diretorio
+	 * {String} Endereco da aplicacao (i3geo) onde fica o diretorio
 	 * classesphp
 	 *
-	 * idhtml - {String} Id do elemento onde a arvore sera inserida. Se for
+	 * {String} Id do elemento onde a arvore sera inserida. Se for
 	 * vazio, sera utilizado o ID definido em IDHTML
 	 *
-	 * funcaoTema - {String} (opcional) Nome da funcao que sera executada quando
-	 * o usuario clicar no checkbox de um tema
+	 * {String} (opcional) Nome da funcao que sera executada quando o usuario clicar no checkbox de um tema
 	 *
-	 * objOpcoes - {Object} (opcional) Objeto com as opcoes necessarias para
+	 * {Object} (opcional) Objeto com as opcoes necessarias para
 	 * criacao dos icones com as opcoes adicionais de adicao de temas
 	 *
-	 * tipoBotao - {String} (opcional) checkbox|radio|download tipo de botao que
+	 * {String} (opcional) checkbox|radio|download tipo de botao que
 	 * sera mostrado para o usuario escolher o tema
 	 */
 	cria : function(g_sid, g_locaplic, idhtml, funcaoTema, objOpcoes, tipoBotao) {
@@ -1840,8 +1853,7 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametro:
 	 *
-	 * node {node} - no onde sera criada a lista
-	 *
+	 * {node} - no onde sera criada a lista
 	 */
 	montaDir : function(node) {
 		if (typeof (console) !== 'undefined')
@@ -1918,9 +1930,9 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * cor - {String} - cor que sera utilizada no estilo "color"
+	 * {String} - cor que sera utilizada no estilo "color"
 	 *
-	 * tema - {Object} - objeto JSON com as propriedades do tema
+	 * {Object} - objeto com as propriedades do tema
 	 *
 	 * Return:
 	 *
@@ -1967,7 +1979,7 @@ i3GEO.arvoreDeTemas = {
 		html += "</span></td>";
 		return (html);
 	},
-	/***************************************************************************
+	/**
 	 * Funcao default que adiciona o tema ao mapa Verifica se o tema ja existe
 	 * ou nao e decide se deve desligar ou ligar
 	 */
@@ -1998,7 +2010,7 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametro:
 	 *
-	 * node - {Object} - objeto com o no que foi clicado
+	 * {Object} - objeto com o no que foi clicado
 	 */
 	propTemas : function(node) {
 		if (typeof (console) !== 'undefined')
@@ -2319,7 +2331,9 @@ i3GEO.arvoreDeTemas = {
 	/**
 	 * Lista os temas com checkbox marcados.
 	 *
-	 * Return: {Array} - array com os codigos dos temas
+	 * Return:
+	 * 
+	 * {Array} - array com os codigos dos temas
 	 */
 	listaTemasAtivos : function() {
 		if (typeof (console) !== 'undefined')
@@ -2347,7 +2361,7 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametro:
 	 *
-	 * palavra {String}
+	 * {String}
 	 */
 	buscaTema : function(palavra) {
 		if (palavra === "") {
@@ -2454,7 +2468,7 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametro:
 	 *
-	 * palavra {String}
+	 * {String}
 	 */
 	buscaTema2 : function(palavra) {
 		if (palavra === "") {
@@ -2578,7 +2592,7 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametro:
 	 *
-	 * tsl {array} - (opcional) codigo do tema que sera adicionado ao mapa. Se
+	 * {array} - (opcional) codigo do tema que sera adicionado ao mapa. Se
 	 * nao for especificado, a lista de codigos sera obtida da arvore de temas
 	 */
 	adicionaTemas : function(tsl) {
@@ -2708,18 +2722,18 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * locaplic {String} - endereco do i3geo
+	 * {String} - endereco do i3geo
 	 *
-	 * funcaoOnchange {String} - nome da funcao que sera executada quando o
+	 * {String} - nome da funcao que sera executada quando o
 	 * usuario escolhe um grupo
 	 *
-	 * idDestino {String} - id do elemento HTML que recebera o combo
+	 * {String} - id do elemento HTML que recebera o combo
 	 *
-	 * idCombo {String} - id do combo que sera criado
+	 * {String} - id do combo que sera criado
 	 *
-	 * largura {Numeric} - largura em pixels do combo
+	 * {inteiro} - largura em pixels do combo
 	 *
-	 * altura {Numeric} - altura do combo em linhas
+	 * {inteiro} - altura do combo em linhas
 	 */
 	comboMenus : function(locaplic, funcaoOnchange, idDestino, idCombo,
 			largura, altura) {
@@ -2763,20 +2777,20 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * locaplic {String} - endereco do i3geo
+	 * {String} - endereco do i3geo
 	 *
-	 * funcaoOnchange {String} - nome da funcao que sera executada quando o
+	 * {String} - nome da funcao que sera executada quando o
 	 * usuario escolhe um grupo
 	 *
-	 * idDestino {String} - id do elemento HTML que recebera o combo
+	 * {String} - id do elemento HTML que recebera o combo
 	 *
-	 * idCombo {String} - id do combo que sera criado
+	 * {String} - id do combo que sera criado
 	 *
-	 * largura {Numeric} - largura em pixels do combo
+	 * {inteiro} - largura em pixels do combo
 	 *
-	 * altura {Numeric} - altura do combo em linhas
+	 * {inteiro} - altura do combo em linhas
 	 *
-	 * id_menu {Numeric} - id do menu que sera utilizado para obter os dados
+	 * {inteiro} - id do menu que sera utilizado para obter os dados
 	 */
 	comboGruposMenu : function(locaplic, funcaoOnchange, idDestino, idCombo,
 			largura, altura, id_menu) {
@@ -2818,20 +2832,20 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * locaplic {String} - endereco do i3geo
+	 * {String} - endereco do i3geo
 	 *
-	 * funcaoOnchange {String} - nome da funcao que sera executada quando o
+	 * {String} - nome da funcao que sera executada quando o
 	 * usuario escolhe um grupo
 	 *
-	 * idDestino {String} - id do elemento HTML que recebera o combo
+	 * {String} - id do elemento HTML que recebera o combo
 	 *
-	 * idCombo {String} - id do combo que sera criado
+	 * {String} - id do combo que sera criado
 	 *
-	 * idGrupo {String} - identificador do grupo que sera pesquisado
+	 * {String} - identificador do grupo que sera pesquisado
 	 *
-	 * largura {Numeric} - largura em pixels do combo
+	 * {inteiro} - largura em pixels do combo
 	 *
-	 * altura {Numeric} - altura do combo em linhas
+	 * {inteiro} - altura do combo em linhas
 	 */
 	comboSubGruposMenu : function(locaplic, funcaoOnchange, idDestino, idCombo,
 			idGrupo, largura, altura) {
@@ -2871,26 +2885,26 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * locaplic {String} - endereco do i3geo
+	 * {string} - endereco do i3geo
 	 *
-	 * funcaoOnchange - nome da funcao que sera executada quando o usuario
+	 * {string} - nome da funcao que sera executada quando o usuario
 	 * escolhe um grupo
 	 *
-	 * idDestino - id do elemento HTML que recebera o combo
+	 * {string} - id do elemento HTML que recebera o combo
 	 *
-	 * idCombo - id do combo que sera criado
+	 * {string} - id do combo que sera criado
 	 *
-	 * idGrupo - identificador do grupo que sera pesquisado
+	 * {string} - identificador do grupo que sera pesquisado
 	 *
-	 * idSubGrupo - id do subgrupo
+	 * {string} - id do subgrupo
 	 *
-	 * largura - largura em pixels do combo
+	 * {inteiro} - largura em pixels do combo
 	 *
-	 * altura - altura do combo em linhas
+	 * {inteiro} - altura do combo em linhas
 	 *
-	 * id_menu - id do menu escolhido
+	 * {string} - id do menu escolhido
 	 *
-	 * temas - (opcional) objeto contendo a lista de temas
+	 * {objeto} - (opcional) objeto contendo a lista de temas
 	 */
 	comboTemasMenu : function(locaplic, funcaoOnchange, idDestino, idCombo,
 			idGrupo, idSubGrupo, largura, altura, id_menu, temas) {
@@ -3083,11 +3097,11 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametros:
 	 *
-	 * w {string} - largura
+	 * {string} - largura
 	 *
-	 * h {string} - altura
+	 * {string} - altura
 	 *
-	 * s {string} - src do iframe
+	 * {string} - src do iframe
 	 */
 	abrejanelaIframe : function(w, h, s) {
 		var i = parseInt(Math.random() * 100, 10), janelaeditor = i3GEO.janela

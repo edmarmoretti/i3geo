@@ -79,6 +79,36 @@ i3GEO.arvoreDeCamadas = {
 	 * "listaTemas"
 	 */
 	IDHTML : "listaTemas",
+	/**
+	 * Constant: CAMADASINICIAIS
+	 *
+	 * O mesmo que CAMADAS mas guarda de forma permanente as camadas que
+	 * iniciaram o mapa
+	 *
+	 * Tipo:
+	 *
+	 * {objeto}
+	 */
+	CAMADASINICIAIS : "",
+	/**
+	 * Variavel: CAMADAS
+	 *
+	 * Objeto com a lista de camadas existentes no mapa. &Eacute; definido na
+	 * inicializa&ccedil;&atilde;o ou no redesenho do mapa.
+	 *
+	 * Este objeto &eacute; constru&iacute;do nas opera&ccedil;&otilde;es em PHP
+	 * de inicializa&ccedil;&atilde;o ou redesenho do mapa e lista todos os
+	 * layers existentes no mapfile tempor&aacute;rio em uso.
+	 *
+	 * classesphp/classe_mapas.php
+	 *
+	 * parametrosTemas
+	 *
+	 * Tipo:
+	 *
+	 * {objeto}
+	 */
+	CAMADAS : "",
 	// TODO remover em 6.1
 	/**
 	 * Propriedade: FINALIZA
@@ -413,7 +443,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Tipo:
 	 *
-	 * {Boolean}
+	 * {boolean}
 	 *
 	 * Default:
 	 *
@@ -428,7 +458,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Tipo:
 	 *
-	 * {Boolean}
+	 * {boolean}
 	 *
 	 * Default:
 	 *
@@ -443,7 +473,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Tipo:
 	 *
-	 * {booleano}
+	 * {boolean}
 	 *
 	 * Default:
 	 *
@@ -577,36 +607,6 @@ i3GEO.arvoreDeCamadas = {
 		copia : true
 	},
 	/**
-	 * Variavel: CAMADAS
-	 *
-	 * Objeto com a lista de camadas existentes no mapa. &Eacute; definido na
-	 * inicializa&ccedil;&atilde;o ou no redesenho do mapa.
-	 *
-	 * Este objeto &eacute; constru&iacute;do nas opera&ccedil;&otilde;es em PHP
-	 * de inicializa&ccedil;&atilde;o ou redesenho do mapa e lista todos os
-	 * layers existentes no mapfile tempor&aacute;rio em uso.
-	 *
-	 * classesphp/classe_mapas.php
-	 *
-	 * parametrosTemas
-	 *
-	 * Tipo:
-	 *
-	 * {objeto}
-	 */
-	CAMADAS : "",
-	/**
-	 * Variavel: CAMADASINICIAIS
-	 *
-	 * O mesmo que CAMADAS mas guarda de forma permanente as camadas que
-	 * iniciaram o mapa
-	 *
-	 * Tipo:
-	 *
-	 * {objeto}
-	 */
-	CAMADASINICIAIS : "",
-	/**
 	 * C&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3Geo
 	 */
 	SID : null,
@@ -623,20 +623,20 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametros:
 	 *
-	 * {string} - (opcional) ID do elemento DOM onde a &aacute;rvore
+	 * string - (opcional) ID do elemento DOM onde a &aacute;rvore
 	 * ser&aacute; inserida. Se for definido como "" o id ser&aacute; buscado da
 	 * vari&aacute;vel IDHTML.
 	 *
-	 * {objeto} - (opcional) Objeto com as camadas e propriedades. Se
+	 * objeto - (opcional) Objeto com as camadas e propriedades. Se
 	 * n&atilde;o for definido ou for vazio, ser&aacute; utilizado
 	 * i3GEO.arvoreDeCamadas.CAMADAS
 	 *
-	 * {string} - (opcional) C&oacute;digo da se&ccedil;&atilde;o PHP
+	 * string - (opcional) C&oacute;digo da se&ccedil;&atilde;o PHP
 	 * criada ao abrir o i3Geo
 	 *
-	 * {string} - (opcional)
+	 * string - (opcional)
 	 *
-	 * {string} - (opcional) Nome da fun&ccedil;&atilde;o que
+	 * string - (opcional) Nome da fun&ccedil;&atilde;o que
 	 * ser&aacute; incluida no evento disparado quando o usu&aacute;rio clicar
 	 * no checkbox de um tema
 	 */
@@ -717,7 +717,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametros:
 	 *
-	 * id {string} - id do elemento HTML onde a &aacute;rvore ser&aacute;
+	 * string - id do elemento HTML onde a &aacute;rvore ser&aacute;
 	 * inserida
 	 */
 	inicia : function(id) {
@@ -745,10 +745,10 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametros:
 	 *
-	 * temas {objeto} - Objeto com a lista de camadas e propriedades (veja
+	 * {objeto} - Objeto com a lista de camadas e propriedades (veja
 	 * CAMADAS). Se n&atilde;o existir, a &aacute;rvore &eacute; redesenhada
 	 *
-	 * forca {boolean} - for&ccedil;a a atualiza&ccedil;&atilde;o da
+	 * {boolean} - for&ccedil;a a atualiza&ccedil;&atilde;o da
 	 * &aacute;rvore, sem verificar automaticamente se a
 	 * atualiza&ccedil;&atilde;o deve ou n&atilde;o ser feita
 	 */
@@ -1106,10 +1106,10 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametros:
 	 *
-	 * lista {string} - lista, separada por v&iacute;rgulas, dos c&oacute;digos
+	 * {string} - lista, separada por v&iacute;rgulas, dos c&oacute;digos
 	 * dos temas
 	 *
-	 * status {boolean} - marca ou desmarca
+	 * {boolean} - marca ou desmarca
 	 */
 	ligaDesligaTemas : function(lista, status) {
 		var c, n, i, aplica = false;
@@ -1349,7 +1349,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * node {YAHOO.widget.HTMLNode} - N&oacute; que foi clicado
+	 * {YAHOO.widget.HTMLNode} - N&oacute; que foi clicado
 	 */
 	montaOpcoes : function(node) {
 		if (typeof (console) !== 'undefined')
@@ -1498,7 +1498,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * node {YAHOO.widget.HTMLNode}
+	 * {YAHOO.widget.HTMLNode}
 	 */
 	mostraOpcoes : function(node) {
 		if (typeof (console) !== 'undefined')
@@ -1761,15 +1761,15 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametros:
 	 *
-	 * dica {String} - dica que ser&aacute; mostrada na janela de mensagens do
+	 * {String} - dica que ser&aacute; mostrada na janela de mensagens do
 	 * mapa quando o usu&aacute;rio sobrepoem o mouse
 	 *
-	 * titulo {String} - t&iacute;tulo que ser&aacute; mostrado no n&oacute;
+	 * {String} - t&iacute;tulo que ser&aacute; mostrado no n&oacute;
 	 *
-	 * onclick {String} - string que define o evento onclick sobre o
+	 * {String} - string que define o evento onclick sobre o
 	 * t&iacute;tulo da op&ccedil;&atilde;o
 	 *
-	 * node {String} - objeto node da &aacute;rvore (YUI) que receber&aacute; o
+	 * {String} - objeto node da &aacute;rvore (YUI) que receber&aacute; o
 	 * novo n&oacute;
 	 */
 	adicionaOpcaoTema : function(dica, titulo, onclick, node) {
@@ -1793,7 +1793,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * node - {YAHOO.widget.HTMLNode}
+	 * {YAHOO.widget.HTMLNode}
 	 */
 	mostraLegenda : function(node) {
 		if (typeof (console) !== 'undefined')
@@ -1916,7 +1916,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * idtema {String} - ID (name) do tema
+	 * {String} - ID (name) do tema
 	 */
 	atualizaLegenda : function(idtema) {
 		if (typeof (console) !== 'undefined')
@@ -1952,7 +1952,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * leg {Object input} - objeto do tipo INPUT com o id da classe e o id do
+	 * {Object input} - objeto do tipo INPUT com o id da classe e o id do
 	 * tema
 	 */
 	escolheCorClasse : function(leg) {
@@ -1992,7 +1992,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * leg {Object input} - objeto do tipo INPUT com o id da classe e o id do
+	 * {Object input} - objeto do tipo INPUT com o id da classe e o id do
 	 * tema
 	 */
 	inverteStatusClasse : function(leg) {
@@ -2041,11 +2041,11 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * tema - {Object} - objeto JSON com as propriedades do tema
+	 * {Object} - objeto JSON com as propriedades do tema
 	 *
 	 * Return:
 	 *
-	 * {String} - texto formatado
+	 * {string} - texto formatado
 	 */
 	montaTextoTema : function(tema) {
 		var ck, html, estilo, iu = i3GEO.util;
@@ -2250,7 +2250,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * mapscale {Numeric} - escala de compara&ccedil;&atilde;o com a escala de
+	 * {Numeric} - escala de compara&ccedil;&atilde;o com a escala de
 	 * cada tema
 	 */
 	atualizaFarol : function(mapscale) {
@@ -2293,7 +2293,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * tipo {normal|ligartodos|desligartodos} - tipo de opera&ccedil;&atilde;o A
+	 * {normal|ligartodos|desligartodos} - tipo de opera&ccedil;&atilde;o A
 	 * op&ccedil;&atilde;o 'normal' ir&aacute; desligar/ligar o que estiver
 	 * marcado
 	 */
@@ -2371,11 +2371,12 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * tipo {String} - mantem|marca|desmarca marca, desmarca ou mant&eacute;m o
+	 * {String} - mantem|marca|desmarca marca, desmarca ou mant&eacute;m o
 	 * checkbox ap&oacute;s identificar seu status atual
 	 *
-	 * Return: {Array} - array de arrays com os c&oacute;digos dos temas
-	 * [0]=ligados [1]=desligados [2]=todos na ordem encontrada
+	 * Return:
+	 * 
+	 * {Array} - array de arrays com os c&oacute;digos dos temas [0]=ligados [1]=desligados [2]=todos na ordem encontrada
 	 */
 	listaLigadosDesligados : function(tipo) {
 		if (!$i(i3GEO.arvoreDeCamadas.IDHTML)) {
@@ -2449,9 +2450,11 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * tema {String} - c&oacute;digo do tema ao qual o elemento se refere
+	 * {String} - c&oacute;digo do tema ao qual o elemento se refere
 	 *
-	 * Return: {Objeto} - objeto do tipo input checkbox
+	 * Return:
+	 * 
+	 * {Objeto DOM} - objeto do tipo checkbox
 	 */
 	capturaCheckBox : function(tema) {
 		if (typeof (console) !== 'undefined')
@@ -2490,13 +2493,13 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametros:
 	 *
-	 * novo {JSON} - objeto novo
+	 * {objeto} - objeto novo
 	 *
-	 * atual {JSON} - objeto atual
+	 * {objeto} - objeto atual
 	 *
 	 * Return:
 	 *
-	 * {Boolean}
+	 * {boolean}
 	 */
 	comparaTemas : function(novo, atual) {
 		if (typeof (console) !== 'undefined')
@@ -2534,12 +2537,12 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametro:
 	 *
-	 * valor {String} valor do parametro
+	 * {String} valor do parametro
 	 *
-	 * camadas {Objeto} - objeto com a lista de temas (escape com "" para usar o
+	 * {Objeto} - objeto com a lista de temas (escape com "" para usar o
 	 * default)
 	 *
-	 * parametro {string} - parametro que sera procurado
+	 * {string} - parametro que sera procurado
 	 *
 	 * Return:
 	 *
@@ -2573,14 +2576,14 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parameters:
 	 *
-	 * propriedade {string} - propriedade de CAMADAS que ser&aacute; filtrado
+	 * {string} - propriedade de CAMADAS que ser&aacute; filtrado
 	 *
-	 * valor - valor do filtro
+	 * {string} - valor do filtro
 	 *
-	 * operador {string} - operador entre propriedade e valor
+	 * {string} - operador entre propriedade e valor
 	 * igual|diferente|menor
 	 *
-	 * camadas {array} - array do tipo i3GEO.arvoreDeCamadas.CAMADAS
+	 * {objeto} - array do tipo i3GEO.arvoreDeCamadas.CAMADAS
 	 *
 	 * Return: {Array} - lista de camadas
 	 */
@@ -2624,11 +2627,11 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parameters:
 	 *
-	 * propriedade {string} - propriedade que ser&aacute; modificada
+	 * {string} - propriedade que ser&aacute; modificada
 	 *
-	 * valor - novo valor
+	 * {string} - novo valor
 	 *
-	 * camada {string} - c&oacute;digo da camada
+	 * {string} - c&oacute;digo da camada
 	 */
 	alteraPropCamadas : function(propriedade, valor, camada) {
 		if (typeof (console) !== 'undefined')
@@ -2687,7 +2690,7 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Return:
 	 *
-	 * {string} c&oacute;digo do tema ou ""
+	 * {string} - c&oacute;digo do tema ou ""
 	 */
 	verificaAplicaExtensao : function() {
 		if (typeof (console) !== 'undefined')

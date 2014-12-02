@@ -61,7 +61,13 @@ i3GEO.ajuda =
 		 *
 		 * Define se a janela de mensagens pode ou n&atilde;o ser aberta.
 		 *
-		 * Tipo {Boolean} - true
+		 * Tipo:
+		 * 
+		 * {Boolean}
+		 * 
+		 * Default:
+		 * 
+		 * true
 		 */
 		ATIVAJANELA : true,
 		/**
@@ -73,7 +79,13 @@ i3GEO.ajuda =
 		 * Se esse DIV for encontrado no mapa, os textos ser&atilde;o mostrados em
 		 * seu interior.
 		 *
-		 * Tipo {String} - i3geo_ajuda
+		 * Tipo:
+		 * 
+		 * {String}
+		 * 
+		 * Default:
+		 * 
+		 * i3geo_ajuda
 		 */
 		DIVAJUDA : "i3geo_ajuda",
 		/**
@@ -85,7 +97,13 @@ i3GEO.ajuda =
 		 * Esse tipo de mensagem &eacute; obtida do METADATA "MENSAGEM" que pode ser
 		 * inclu&iacute;do em um layer.
 		 *
-		 * Tipo {String} - i3geo_letreir
+		 * Tipo
+		 * 
+		 * {String}
+		 * 
+		 * Default:
+		 * 
+		 * i3geo_letreir
 		 */
 		DIVLETREIRO : "i3geo_letreiro",
 		/**
@@ -95,7 +113,13 @@ i3GEO.ajuda =
 		 * ou quando n&atilde;o houver mensagem definida para o elemento sobre o
 		 * qual o mouse estaciona.
 		 *
-		 * Tipo {String} - $trad("p1")
+		 * Tipo
+		 * 
+		 * {String}
+		 * 
+		 * Default:
+		 * 
+		 * $trad("p1")
 		 */
 		MENSAGEMPADRAO : $trad("p1"),
 		/**
@@ -104,7 +128,13 @@ i3GEO.ajuda =
 		 * Altera a transpar&ecirc;ncia quando o mouse sobrep&otilde;e a janela e
 		 * quando sai
 		 *
-		 * Tipo {boolean} - true
+		 * Tipo
+		 * 
+		 * {boolean}
+		 * 
+		 * Default:
+		 * 
+		 * true
 		 */
 		TRANSICAOSUAVE : true,
 		/**
@@ -115,7 +145,13 @@ i3GEO.ajuda =
 		 *
 		 * Varia de 0 a 100
 		 *
-		 * Tipo {numeric} - 20
+		 * Tipo
+		 * 
+		 * {numeric}
+		 * 
+		 * Default:
+		 * 
+		 * 20
 		 */
 		OPACIDADE : 20,
 		/**
@@ -125,7 +161,7 @@ i3GEO.ajuda =
 		 *
 		 * Parametro:
 		 *
-		 * url {string} - url que ser&aacute; adicionada a i3GEO.configura.locaplic
+		 * {string} - url que ser&aacute; adicionada a i3GEO.configura.locaplic
 		 */
 		abreDoc : function(url) {
 			if (!url) {
@@ -205,7 +241,7 @@ i3GEO.ajuda =
 		 *
 		 * Parametro:
 		 *
-		 * mensagem {String} - (opcional) texto que ser&aacute; mostrado no
+		 * {String} - (opcional) texto que ser&aacute; mostrado no
 		 * letreiro. Se n&atilde;o for informado ser&aacute; utilizado a
 		 * vari&aacute;vel i3GEO.parametros.mensagens
 		 */
@@ -277,7 +313,7 @@ i3GEO.ajuda =
 		 *
 		 * Parametro:
 		 *
-		 * texto {String} - texto a ser mostrado
+		 * {String} - texto a ser mostrado
 		 */
 		mostraJanela : function(texto) {
 			var j = $i(this.DIVAJUDA), k = $i("janelaMenTexto"), jm = $i("i3geo_janelaMensagens"), Dom = YAHOO.util.Dom, h =
