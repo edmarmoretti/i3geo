@@ -24,9 +24,9 @@
  * i3GEO.ajuda.mostraJanela("texto");
  *
  *
- * Arquivo:
+ * Veja:
  *
- * i3geo/classesjs/classe_ajuda.js
+ * <http://localhost/i3geo/classesjs/classe_ajuda.js>
  */
 
 /** Licen&ccedil;a:
@@ -62,11 +62,11 @@ i3GEO.ajuda =
 		 * Define se a janela de mensagens pode ou n&atilde;o ser aberta.
 		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {Boolean}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * true
 		 */
 		ATIVAJANELA : true,
@@ -80,11 +80,11 @@ i3GEO.ajuda =
 		 * seu interior.
 		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {String}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * i3geo_ajuda
 		 */
 		DIVAJUDA : "i3geo_ajuda",
@@ -98,11 +98,11 @@ i3GEO.ajuda =
 		 * inclu&iacute;do em um layer.
 		 *
 		 * Tipo
-		 * 
+		 *
 		 * {String}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * i3geo_letreir
 		 */
 		DIVLETREIRO : "i3geo_letreiro",
@@ -114,11 +114,11 @@ i3GEO.ajuda =
 		 * qual o mouse estaciona.
 		 *
 		 * Tipo
-		 * 
+		 *
 		 * {String}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * $trad("p1")
 		 */
 		MENSAGEMPADRAO : $trad("p1"),
@@ -129,11 +129,11 @@ i3GEO.ajuda =
 		 * quando sai
 		 *
 		 * Tipo
-		 * 
+		 *
 		 * {boolean}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * true
 		 */
 		TRANSICAOSUAVE : true,
@@ -146,11 +146,11 @@ i3GEO.ajuda =
 		 * Varia de 0 a 100
 		 *
 		 * Tipo
-		 * 
+		 *
 		 * {numeric}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * 20
 		 */
 		OPACIDADE : 20,

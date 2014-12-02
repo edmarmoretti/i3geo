@@ -10,7 +10,7 @@
  * ser&atilde;o mostradas na &aacute;rvore e seu comportamento em diferentes
  * situa&ccdil;&otilde;s.
  *
- * Objeto:
+ * Namespace:
  *
  * i3GEO.arvoreDeCamadas
  *
@@ -23,9 +23,9 @@
  * i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;
  *
  *
- * Arquivo:
+ * Veja:
  *
- * i3geo/classesjs/classe_arvoredecamadas.js
+ * <http://localhost/i3geo/classesjs/classe_arvoredecamadas.js>
  */
 
 /** Licen&ccedil;a
@@ -2375,7 +2375,7 @@ i3GEO.arvoreDeCamadas = {
 	 * checkbox ap&oacute;s identificar seu status atual
 	 *
 	 * Return:
-	 * 
+	 *
 	 * {Array} - array de arrays com os c&oacute;digos dos temas [0]=ligados [1]=desligados [2]=todos na ordem encontrada
 	 */
 	listaLigadosDesligados : function(tipo) {
@@ -2453,7 +2453,7 @@ i3GEO.arvoreDeCamadas = {
 	 * {String} - c&oacute;digo do tema ao qual o elemento se refere
 	 *
 	 * Return:
-	 * 
+	 *
 	 * {Objeto DOM} - objeto do tipo checkbox
 	 */
 	capturaCheckBox : function(tema) {
@@ -2745,11 +2745,15 @@ i3GEO.arvoreDeCamadas = {
 		i3GEO.arvoreDeCamadas.CAMADAS = obj;
 	},
 	/**
+	 * Namespace: i3GEO.arvoreDeCamadas.dialogo
+	 *
 	 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de
 	 * manipula&ccedil;&atilde;o da &aacute;rvore
 	 */
 	dialogo : {
 		/**
+		 * Function: filtro
+		 *
 		 * Abre a janela de di&aacute;logo para o usu&aacute;rio escolher ou
 		 * alterar o filtro aplicado a &aacute;rvore
 		 */
@@ -2762,7 +2766,9 @@ i3GEO.arvoreDeCamadas = {
 				"i3GEOF.filtroarvore.iniciaJanelaFlutuante()");
 		},
 		/**
-		 * Function: dialogo.excluir Abre a janela de di&aacute;logo para o
+		 * Function: excluir
+		 *
+		 * Abre a janela de di&aacute;logo para o
 		 * usu&aacute;rio escolher os temas que ser&atilde;o exclu&iacute;dos da
 		 * &aacute;rvore
 		 */

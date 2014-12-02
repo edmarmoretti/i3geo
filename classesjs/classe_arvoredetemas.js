@@ -4,7 +4,7 @@
  * Monta a &aacute;rvore com os temas dispon&iacute;veis para ser adicionados ao
  * mapa
  *
- * Objeto:
+ * Namespace:
  *
  * i3GEO.arvoreDeTemas
  *
@@ -17,9 +17,9 @@
  * i3GEO.arvoreDeTemas.INCLUISISTEMAS = false;
  *
  *
- * Arquivo:
+ * Veja:
  *
- * i3geo/classesjs/classe_arvoredetemas.js
+ * <http://localhost/i3geo/classesjs/classe_arvoredetemas.js>
  */
 
  /** Licen&ccedil;a:
@@ -2332,7 +2332,7 @@ i3GEO.arvoreDeTemas = {
 	 * Lista os temas com checkbox marcados.
 	 *
 	 * Return:
-	 * 
+	 *
 	 * {Array} - array com os codigos dos temas
 	 */
 	listaTemasAtivos : function() {
@@ -2958,6 +2958,32 @@ i3GEO.arvoreDeTemas = {
 		}
 	},
 	/**
+	 * Abre uma janela flutuante contendo um iframe
+	 *
+	 * Parametros:
+	 *
+	 * {string} - largura
+	 *
+	 * {string} - altura
+	 *
+	 * {string} - src do iframe
+	 */
+	abrejanelaIframe : function(w, h, s) {
+		var i = parseInt(Math.random() * 100, 10), janelaeditor = i3GEO.janela
+				.cria(w, h, s, i, 10, s, "janela" + i, false), wdocaiframe = "";
+		wdocaiframe = $i("janela" + i + "i");
+		if (wdocaiframe) {
+			wdocaiframe.style.width = "100%";
+			wdocaiframe.style.height = "100%";
+		}
+		YAHOO.util.Event.addListener(janelaeditor[0].close, "click",
+				i3GEO.arvoreDeTemas.atualiza, janelaeditor[0].panel, {
+					id : janelaeditor[0].id
+				}, true);
+	},
+	/**
+	 * Namespace: i3GEO.arvoreDeTemas.dialogo
+	 *
 	 * Abre as janelas de dialogo com as opcoes adicionais que permitem
 	 * acrescentar temas ao mapa
 	 *
@@ -3091,29 +3117,5 @@ i3GEO.arvoreDeTemas = {
 		downloadbase : function() {
 			window.open(i3GEO.configura.locaplic + "/datadownload.htm");
 		},
-	},
-	/**
-	 * Abre uma janela flutuante contendo um iframe
-	 *
-	 * Parametros:
-	 *
-	 * {string} - largura
-	 *
-	 * {string} - altura
-	 *
-	 * {string} - src do iframe
-	 */
-	abrejanelaIframe : function(w, h, s) {
-		var i = parseInt(Math.random() * 100, 10), janelaeditor = i3GEO.janela
-				.cria(w, h, s, i, 10, s, "janela" + i, false), wdocaiframe = "";
-		wdocaiframe = $i("janela" + i + "i");
-		if (wdocaiframe) {
-			wdocaiframe.style.width = "100%";
-			wdocaiframe.style.height = "100%";
-		}
-		YAHOO.util.Event.addListener(janelaeditor[0].close, "click",
-				i3GEO.arvoreDeTemas.atualiza, janelaeditor[0].panel, {
-					id : janelaeditor[0].id
-				}, true);
 	}
 };

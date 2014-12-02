@@ -1,30 +1,30 @@
 /**
  * Title: C&aacute;lculos
- * 
+ *
  * Utilit&aacute;rios para c&aacute;lculos.
- * 
- * Objeto:
- * 
+ *
+ * Namespace:
+ *
  * i3GEO.calculo
- * 
- * Arquivo:
- * 
- * i3geo/classesjs/classe_calculo.js
+ *
+ * Veja:
+ *
+ * <http://localhost/i3geo/classesjs/classe_calculo.js>
  */
 
 /**
- * 
+ *
  * Licen&ccedil;a
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -38,29 +38,29 @@ i3GEO.calculo =
 	{
 		/**
 		 * Propriedade: metododistancia
-		 * 
+		 *
 		 * M&eacute;todo utilizado no c&aacute;lculo de distâncias
-		 * 
+		 *
 		 * vicenty|haversine
-		 * 
+		 *
 		 * Default: {vicenty}
 		 */
 		metododistancia : "vicenty",
 		/**
 		 * Function: dms2dd
-		 * 
+		 *
 		 * Converte coordenadas formatadas em DMS para DD
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {Numeric} - grau (com sinal de - para sul e oeste)
-		 * 
+		 *
 		 * {Numeric} - minuto
-		 * 
+		 *
 		 * {Numeric} - segundo
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Numeric} - Coordenada em d&eacute;cimos de grau.
 		 */
 		dms2dd : function(cd, cm, cs) {
@@ -86,23 +86,23 @@ i3GEO.calculo =
 		},
 		/**
 		 * Function: dd2tela
-		 * 
+		 *
 		 * Converte coordenadas dd em coordenadas de tela.
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {Numeric} - coordenada x.
-		 * 
+		 *
 		 * {Numeric} - coordenada y.
-		 * 
+		 *
 		 * {objeto} - objeto DOM que cont&eacute;m o objeto imagem
-		 * 
+		 *
 		 * {String} - (opcional) extens&atilde;o geogr&aacute;fica (espa&ccedil;o como separador) xmin ymin xmax ymax
-		 * 
+		 *
 		 * {Numeric} - (opcional) tamanho no terreno em DD de cada pixel da imagem
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Array} - Array com o valor de x [0] e y [1]
 		 */
 		dd2tela : function(vx, vy, docmapa, ext, cellsize) {
@@ -154,17 +154,17 @@ i3GEO.calculo =
 		},
 		/**
 		 * Function: dd2dms
-		 * 
+		 *
 		 * Converte coordenadas de dd em dms.
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {Numeric} - coordenada x.
-		 * 
+		 *
 		 * {Numeric} - coordenada y.
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Array} - Array com o valor de x [0] e y [1] no formato dd mm ss
 		 */
 		dd2dms : function(x, y) {
@@ -216,24 +216,24 @@ i3GEO.calculo =
 		},
 		/**
 		 * Function: tela2dd
-		 * 
+		 *
 		 * Converte o x,y de unidades de tela para d&eacute;cimo de grau.
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {Numeric} - x em valores de imagem.
-		 * 
+		 *
 		 * {Numeric} - y em coordenadas de imagem.
-		 * 
+		 *
 		 * {Numeric} - tamanho no terreno do pixel da imagem em dd.
-		 * 
+		 *
 		 * {String} - extens&atilde;o geogr&aacute;fica do mapa.
-		 * 
+		 *
 		 * {string} - (opcional) id do objeto que originou o c&aacute;lculo (&eacute; usado para identificar se o c&aacute;lculo
 		 * est&aacute; sendo feito sobr o mapa de refer&ecirc;ncia ou n&atilde;o)
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Array} - Coordena em dd x[0] e y[1].
 		 */
 		tela2dd : function(xfign, yfign, g_celula, imgext, idorigem) {
@@ -283,26 +283,26 @@ i3GEO.calculo =
 		},
 		/**
 		 * Function area
-		 * 
+		 *
 		 * Calcula a &aacute;rea de um pol&iacute;gono.
-		 * 
+		 *
 		 * Os pontos s&atilde;o obtidos do objeto pontos
-		 * 
+		 *
 		 * Para o c&aacute;lculo da &aacute;rea, &eacute; feito o c&aacute;lculo do n&uacute;mero de pixel abrangido pelo pol&iacute;gono e
 		 * multiplicado pela resolu&ccedil;&atilde;o de cada pixel.
-		 * 
+		 *
 		 * Refer&ecirc;ncia - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {Array} - array com a lista de pontos x
-		 * 
+		 *
 		 * {Array} - array com a lista de pontos y
-		 * 
+		 *
 		 * {Numeric} - &aacute;rea de cada pixel no mapa
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Numeric}
 		 */
 		area : function(x, y, pixel) {
@@ -329,23 +329,23 @@ i3GEO.calculo =
 		},
 		/**
 		 * Function: distancia
-		 * 
+		 *
 		 * Calcula a distância em km entre dois pontos.
-		 * 
+		 *
 		 * O m&eacute;todo de c&aacute;lculo &eacute; definido na vari&aacute;vel i3GEO.calculo.metododistancia
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {Numeric} - x inicial.
-		 * 
+		 *
 		 * {Numeric} - y inicial
-		 * 
+		 *
 		 * {Numeric} - x final
-		 * 
+		 *
 		 * {Numeric} - y final
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Numeric}
 		 */
 		distancia : function(lon1, lat1, lon2, lat2) {
@@ -358,29 +358,29 @@ i3GEO.calculo =
 		},
 		/**
 		 * Function: distHaversine
-		 * 
+		 *
 		 * Calcula a distância em km entre dois pontos (m&eacute;todo Haversine).
-		 * 
+		 *
 		 * Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
-		 * 
+		 *
 		 * Em vers&otilde;es anteriores utilizava-se o c&aacute;lculo proposto em http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {Numeric} - x inicial.
-		 * 
+		 *
 		 * {Numeric} - y inicial
-		 * 
+		 *
 		 * {Numeric} - x final
-		 * 
+		 *
 		 * {Numeric} - y final
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Numeric}
 		 */
 		distHaversine : function(lon1, lat1, lon2, lat2) {
-			if (typeof (console) !== 'undefined') 
+			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.calculo.distancia()");
 
 			var dLat, dLon, a, c, d;
@@ -395,24 +395,24 @@ i3GEO.calculo =
 		},
 		/**
 		 * Function: distVincenty
-		 * 
+		 *
 		 * Given two objects representing points with geographic coordinates, this calculates the distance between those points on the
 		 * surface of an ellipsoid.
-		 * 
+		 *
 		 * Baseado em OpenLayers.Util.distVincenty
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {Numeric} - x inicial.
-		 * 
+		 *
 		 * {Numeric} - y inicial
-		 * 
+		 *
 		 * {Numeric} - x final
-		 * 
+		 *
 		 * {Numeric} - y final
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Numeric} - The distance (in km) between the two input points as measured on an ellipsoid. Note that the input point objects must
 		 * be in geographic coordinates (decimal degrees) and the return distance is in kilometers.
 		 */
@@ -472,23 +472,23 @@ i3GEO.calculo =
 		},
 		/**
 		 * Function: direcao
-		 * 
+		 *
 		 * Calcula a dire&ccedil;&atilde;o (0 a 360 graus) entre dois pontos.
-		 * 
+		 *
 		 * Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {Numeric} - x inicial.
-		 * 
+		 *
 		 * {Numeric} - y inicial
-		 * 
+		 *
 		 * {Numeric} - x final
-		 * 
+		 *
 		 * {Numeric} - y final
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Numeric} - &acirc;nngulo em d&eacute;cimos de grau
 		 */
 		direcao : function(lon1, lat1, lon2, lat2) {
@@ -508,28 +508,28 @@ i3GEO.calculo =
 		},
 		/**
 		 * Function: destinoDD
-		 * 
+		 *
 		 * Calcula as coordenadas de um novo ponto em fun&ccedil;&atilde;o da posi&ccedil;&atilde;o de um ponto de origem, distância e
 		 * dire&ccedil;&atilde;o
-		 * 
+		 *
 		 * O novo ponto &eacute; calculado em coordenadas geogr&aacute;ficas em DD
-		 * 
+		 *
 		 * Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {Numeric} - longitude (x) do ponto de origem
-		 * 
+		 *
 		 * {Numeric} - latitude do ponto de origem
-		 * 
+		 *
 		 * {Numeric} - distância em Km
-		 * 
+		 *
 		 * {Numeric} - ângulo desejado em d&eacute;cimos de grau (dire&ccedil;&atilde;o de 0 a 360)
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Array} - com a longitude e latitude em d&eacute;cimos de grau ([0] = longitude, [1] = latitude
-		 * 
+		 *
 		 */
 		destinoDD : function(lon, lat, d, direcao) {
 			if (typeof (console) !== 'undefined')
@@ -553,17 +553,17 @@ i3GEO.calculo =
 		},
 		/**
 		 * Calcula a extens&atilde;o geogr&aacute;fica de um retângulo desenhado sobre o mapa.
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {string} - id do elemento html com o retangulo
-		 * 
+		 *
 		 * {string} - extensao geografica do mapa onde est&aacute; o retangulo
-		 * 
+		 *
 		 * {inteiro} - tamanho do pixel do mapa em dd
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Array} - extens&atilde;o, xmin, ymin, xmax, ymax
 		 */
 		rect2ext : function(idrect, mapext, pixel) {
@@ -610,23 +610,23 @@ i3GEO.calculo =
 		},
 		/**
 		 * Function: ext2rect
-		 * 
+		 *
 		 * Calcula o posicionamento de um retângulo com base na extens&atilde;o geogr&aacute;fica.
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - id do elemento html com o retangulo, pode ser vazio
-		 * 
+		 *
 		 * {String} - extensao geografica do mapa onde est&aacute; o retangulo
-		 * 
+		 *
 		 * {String} - extensao geografica do retangulo
-		 * 
+		 *
 		 * {Number} - tamanho do pixel do mapa em dd
-		 * 
+		 *
 		 * {Objeto DOM} - objeto sob o qual o retângulo ser&aacute; posicionado
-		 * 
+		 *
 		 * Return:
-		 * 
+		 *
 		 * {Array} - width,heigth,top,left
 		 */
 		ext2rect : function(idrect, mapext, boxext, pixel, documento) {
