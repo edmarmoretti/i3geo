@@ -1,65 +1,96 @@
-/*
-Title: i3Geo
-
-A classe i3GEO possu&iacute; os m&eacute;todos de cria&ccedil;&atilde;o e atualiza&ccedil;&atilde;o do mapa. Todas as subclasses
-s&atilde;o baseadas em i3GEO, por exemplo, para criar uma janela flutuante sobre o mapa,
-utilize i3GEO.janela.cria()
-
-Para inicializar o mapa, utilize i3GEO.inicia() e para atualizar o mapa, utilize i3GEO.atualiza().
-Ap&oacute;s terminado o processo de inicializa&ccedil;&atilde;o, pode-se executar uma fun&ccedil;&atilde;o de ajuste. Essa fun&ccedil;&atilde;o
-deve ser definida em i3GEO.finaliza, por exemplo i3GEO.finaliza = "funcaoDeAjuste()" ou i3GEO.finaliza = function(){}
-
-Ao inicializar ou atualizar o i3Geo, &eacute; feita uma chamada em AJAX
-para a obten&ccedil;&atilde;o dos parametros necess&aacute;rios ao funcionamento do mapa. Esses parametros
-s&atilde;o armazenados na vari&aacute;vel i3GEO.parametros
-
-Nessa classe est&atilde;o dispon&iacute;veis vari&aacute;veis internas utilizadas em v&aacute;rias fun&ccedil;&otilde;es, como i3GEO.temaAtivo
-
-i3GEOF
-
-Esse objeto recebe os m&eacute;todos sob demanda por meio de inje&ccedil;&atilde;o de javascripts (script tag). &Eacute; utilizado pelas ferramentas existentes em i3geo/ferramentas.
-
-Cada javascript inserido na p&aacute;gina adiciona novos objetos, como por exemplo i3GEOF.buffer.
-
-
-Arquivo:
-
-i3geo/classesjs/classe_i3geo.js
-
-Licen&ccedil;a:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+/**
+ * Title: i3Geo
+ *
+ * A classe i3GEO possu&iacute; os m&eacute;todos de cria&ccedil;&atilde;o e
+ * atualiza&ccedil;&atilde;o do mapa. Todas as subclasses s&atilde;o baseadas em
+ * i3GEO, por exemplo, para criar uma janela flutuante sobre o mapa, utilize
+ * i3GEO.janela.cria()
+ *
+ * Para inicializar o mapa, utilize i3GEO.inicia() e para atualizar o mapa,
+ * utilize i3GEO.atualiza(). Ap&oacute;s terminado o processo de
+ * inicializa&ccedil;&atilde;o, pode-se executar uma fun&ccedil;&atilde;o de
+ * ajuste. Essa fun&ccedil;&atilde;o deve ser definida em i3GEO.finaliza, por
+ * exemplo i3GEO.finaliza = "funcaoDeAjuste()" ou i3GEO.finaliza = function(){}
+ *
+ * Ao inicializar ou atualizar o i3Geo, &eacute; feita uma chamada em AJAX para
+ * a obten&ccedil;&atilde;o dos parametros necess&aacute;rios ao funcionamento
+ * do mapa. Esses parametros s&atilde;o armazenados na vari&aacute;vel
+ * i3GEO.parametros
+ *
+ * Nessa classe est&atilde;o dispon&iacute;veis vari&aacute;veis internas
+ * utilizadas em v&aacute;rias fun&ccedil;&otilde;es, como i3GEO.temaAtivo
+ *
+ * Namespace:
+ *
+ * i3GEO
+ *
+ * Veja:
+ *
+ * <http://localhost/i3geo/classesjs/classe_i3geo.js>
+ */
+/**
+ * Licen&ccedil;a
+ *
+ * GPL2
+ *
+ * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+ *
+ * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente
+ * Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
+ *
+ * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+ * e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+ * GNU conforme publicada pela Free Software Foundation;
+ *
+ * Este programa &eacute; distribu&iacute;do na expectativa de que seja
+ * &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia
+ * impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE
+ * ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para
+ * mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da
+ * Licen&ccedil;a P&uacute;blica Geral do GNU junto com este programa; se
+ * n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o
+ * 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+ */
+/**
+ * Section: i3GEOF
+ *
+ * Esse objeto recebe os m&eacute;todos sob demanda por meio de
+ * inje&ccedil;&atilde;o de javascripts (script tag). &Eacute; utilizado pelas
+ * ferramentas existentes em i3geo/ferramentas.
+ *
+ * Cada javascript inserido na p&aacute;gina adiciona novos objetos, como por
+ * exemplo i3GEOF.buffer.
  */
 i3GEOF = [];
-/*
- * YAHOO.i3GEO
+/**
+ * Section: YAHOO.i3GEO
  *
  * Namespace da biblioteca YUI que &eacute; reutiliz&aacute;vel em v&aacute;rios
  * trechos de c&oacute;digo do i3Geo
  *
- * Type: {YAHOO.namespace}
+ * Type:
+ *
+ * {YAHOO.namespace}
  */
 YAHOO.namespace("i3GEO");
+/**
+ * Section: i3GEO
+ */
 var i3GEO = {
-	/*
+	/**
+	 * Constant: tamanhodoc
+	 * Largura e altura do navegador ap&oacute;s a inicializa&ccedil;&atilde;o
+	 * do mapa
+	 *
+	 * &Eacute; utilizado como um parametro para verificar se o mapa foi ou
+	 * n&atilde;o redimensionado pelo usu&aacute;rio de forma consistente
+	 *
+	 * Type:
+	 *
+	 * {array}
+	 */
+	tamanhodoc : [],
+	/**
 	 * Propriedade: parametros
 	 *
 	 * Parametros obtidos do mapa atual. Os parametros s&atilde;o fornecidos
@@ -68,7 +99,10 @@ var i3GEO = {
 	 *
 	 * Exemplos:
 	 *
-	 * alert(i3GEO.parametros.mapexten); i3GEO.parametros.mapscale = 25000;
+	 * (start code)
+	 * alert(i3GEO.parametros.mapexten);
+	 * i3GEO.parametros.mapscale = 25000;
+	 * (end)
 	 *
 	 * Parametros:
 	 *
@@ -182,7 +216,9 @@ var i3GEO = {
 		copyright : "",
 		editor : "nao"
 	},
-	/*
+	/**
+	 * Propriedade: scrollerWidth
+	 *
 	 * Largura da barra de rolagem do navegador. Se for igual a "", a largura
 	 * ser&aacute; calculada automaticamente.
 	 *
@@ -190,24 +226,37 @@ var i3GEO = {
 	 * mapa. Se vc n&atilde;o quer diminuir o tamanho do mapa, subtraindo a
 	 * largura da barra de rolagem, defina scrollerWidth = 0
 	 *
-	 * Tipo: {num&eacute;rico}
+	 * Tipo:
 	 *
-	 * Default: {""}
+	 * {num&eacute;rico}
 	 */
 	scrollerWidth : "",
-	/*
+	/**
 	 * Propriedade: finaliza
 	 *
 	 * Fun&ccedil;&atilde;o que ser&aacute; executada ap&oacute;s a
 	 * cria&ccedil;&atilde;o e posicionamento do mapa. Pode ser uma string
 	 * tamb&eacute;m, que ser&aacute; avaliada com "eval".
 	 *
-	 * Tipo: {string}
+	 * Exemplo:
 	 *
-	 * Default: {""}
+	 * (start code)
+	 *
+	 * 	i3GEO.finaliza = function() {
+	 * 		if ($i("i3GEOlogoMarca")) {
+	 * 			$i("i3GEOlogoMarca").style.display = "none";
+	 * 		}
+	 * 		i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
+	 * 	};
+	 *
+	 * (end)
+	 *
+	 * Tipo:
+	 *
+	 * {function}
 	 */
 	finaliza : "",
-	/*
+	/**
 	 * Propriedade: finalizaAPI
 	 *
 	 * Fun&ccedil;&atilde;o que ser&aacute; executada ap&oacute;s a API
@@ -215,22 +264,13 @@ var i3GEO = {
 	 * o mapa ter sido criado. Pode ser uma string tamb&eacute;m, que
 	 * ser&aacute; avaliada com "eval".
 	 *
-	 * Tipo: {string}
+	 * Tipo:
 	 *
-	 * Default: {""}
+	 * {function}
 	 */
 	finalizaAPI : "",
-	/*
-	 * Largura e altura do navegador ap&oacute;s a inicializa&ccedil;&atilde;o
-	 * do mapa
-	 *
-	 * &Eacute; utilizado como um parametro para verificar se o mapa foi ou
-	 * n&atilde;o redimensionado pelo usu&aacute;rio de forma consistente
-	 *
-	 * Type: {array}
-	 */
-	tamanhodoc : [],
-	/*
+
+	/**
 	 * Variavel: temaAtivo
 	 *
 	 * Indica o &uacute;ltimo tema que foi ativado no mapa
@@ -238,12 +278,12 @@ var i3GEO = {
 	 * Permite que ao se passar de uma ferramenta para outra, os menus reflitam
 	 * a &uacute;ltima escolha.
 	 *
-	 * Tipo: {string}
+	 * Tipo:
 	 *
-	 * Default: {""}
+	 * {string}
 	 */
 	temaAtivo : "",
-	/*
+	/**
 	 * Essa vari&aacute;vel &eacute; um contador utilizado para indicar quantos
 	 * processos est&atilde;o ativos e que ir&atilde;o executar o redesenho do
 	 * mapa. O mapa s&oacute; &eacute; atualizado quando o contador for menor
@@ -254,7 +294,7 @@ var i3GEO = {
 	 * Tipo: {string}
 	 */
 	contadorAtualiza : 0,
-	/*
+	/**
 	 * Function: cria
 	 *
 	 * Cria e configura a visualiza&ccedil;&atilde;o do mapa, definindo
@@ -264,8 +304,6 @@ var i3GEO = {
 	 * executado o programa <i3GEO.Interface.cria> que ir&aacute; realizar as
 	 * opera&ccedil;&otilde;es conforme a interface atualmente em uso. A
 	 * interface &eacute; definida em <i3GEO.Interface.ATUAL>
-	 *
-	 * Veja <i3GEO.Interface>
 	 */
 	cria : function() {
 		if (i3GEO.configura.ajustaDocType === true) {
@@ -274,12 +312,14 @@ var i3GEO = {
 		var tamanho, temp;
 
 		temp = window.location.href.split("?");
-		if(temp[1]){
+		if (temp[1]) {
 			temp = temp[1].split("&");
-			if (temp[0] && temp[0] != "") {
+			if (temp[0]
+				&& temp[0] != "") {
 				i3GEO.configura.sid = temp[0];
 				//
-				// O # precisa ser removido, caso contrario, a opcao de reload da
+				// O # precisa ser removido, caso contrario, a opcao de reload
+				// da
 				// pagina pelo browser as vezes nao funciona
 				//
 				if (i3GEO.configura.sid.split("#")[0]) {
@@ -303,7 +343,7 @@ var i3GEO = {
 		// i3geo
 		//
 		if (!i3GEO.configura.locaplic
-				|| i3GEO.configura.locaplic === "") {
+			|| i3GEO.configura.locaplic === "") {
 			i3GEO.util.localizai3GEO();
 		}
 		//
@@ -311,11 +351,11 @@ var i3GEO = {
 		//
 		tamanho = i3GEO.calculaTamanho();
 		i3GEO.Interface.cria(
-				tamanho[0],
-				tamanho[1]);
+			tamanho[0],
+			tamanho[1]);
 
 	},
-	/*
+	/**
 	 * Function: inicia
 	 *
 	 * Inicializa o mapa
@@ -366,10 +406,10 @@ var i3GEO = {
 					// i3GEO.janela.fechaAguarde("montaMapa");
 					document.body.style.backgroundColor = "white";
 					document.body.innerHTML = "<br>Para abrir o i3Geo utilize o link:<br><a href="
-							+ i3GEO.configura.locaplic
-							+ "/ms_criamapa.php >"
-							+ i3GEO.configura.locaplic
-							+ "/ms_criamapa.php</a>";
+						+ i3GEO.configura.locaplic
+						+ "/ms_criamapa.php >"
+						+ i3GEO.configura.locaplic
+						+ "/ms_criamapa.php</a>";
 					return ("linkquebrado");
 				} else {
 					if (retorno.data.variaveis) {
@@ -405,16 +445,17 @@ var i3GEO = {
 								nomecookie = "i3geoUltima_ExtensaoOSM";
 							}
 							temp = i3GEO.util.pegaCookie(nomecookie);
-							if (temp && temp != "") {
+							if (temp
+								&& temp != "") {
 								temp = temp.replace(
-										/[\+]/g,
-										" ");
+									/[\+]/g,
+									" ");
 								i3GEO.parametros.mapexten = temp;
 							}
 							i3GEO.eventos.NAVEGAMAPA.push(function() {
 								i3GEO.util.insereCookie(
-										nomecookie,
-										i3GEO.parametros.mapexten);
+									nomecookie,
+									i3GEO.parametros.mapexten);
 							});
 						}
 						// anula os cookies de login se for necessario
@@ -437,20 +478,20 @@ var i3GEO = {
 						temp = 0;
 						if ($i("contemFerramentas")) {
 							temp = temp
-									+ parseInt(
-											$i("contemFerramentas").style.width,
-											10);
+								+ parseInt(
+									$i("contemFerramentas").style.width,
+									10);
 						}
 						if ($i("ferramentas")) {
 							temp = temp
-									+ parseInt(
-											$i("ferramentas").style.width,
-											10);
+								+ parseInt(
+									$i("ferramentas").style.width,
+									10);
 						}
 						if ($i("mst")) {
 							$i("mst").style.width = i3GEO.parametros.w
-									+ temp
-									+ "px";
+								+ temp
+								+ "px";
 						}
 						i3GEO.Interface.inicia();
 						//
@@ -462,30 +503,30 @@ var i3GEO = {
 						if (retorno.data.customizacoesinit) {
 							// recupera os layers graficos
 							if (preferencias.geometriasbase64
-									&& preferencias.geometriasbase64 != "") {
+								&& preferencias.geometriasbase64 != "") {
 								temp = i3GEO.util.base64decode(preferencias.geometriasbase64);
 								i3GEO.mapa.desCompactaLayerGrafico(temp);
 							}
 							// recupera os graficos
 							if (preferencias.graficosbase64
-									&& preferencias.graficosbase64 != "") {
+								&& preferencias.graficosbase64 != "") {
 								i3GEO.mapa.restauraGraficos(preferencias.graficosbase64);
 							}
 						}
 					} else {
 						alert("Erro. Impossivel criar o mapa "
-								+ retorno.data);
+							+ retorno.data);
 						return;
 					}
 					//
 					// ativa a janela de mensagens se for o caso
 					//
 					if ($i("ajuda")) // para efeitos de compatibilidade com
-										// as vers&otilde;es anteriores a 4.1
+					// as vers&otilde;es anteriores a 4.1
 					{
 						i3GEO.ajuda.DIVAJUDA = "ajuda";
 					}
-					/*
+					/**
 					 * abreJM = "sim"; if(i3GEO.util.pegaCookie("botoesAjuda")){
 					 * abreJM = i3GEO.util.pegaCookie("botoesAjuda");
 					 * i3GEO.barraDeBotoes.AJUDA = (abreJM === "sim") ? true :
@@ -499,7 +540,8 @@ var i3GEO = {
 					}
 				}
 				i3GEO.aposIniciar();
-			} catch (e) {}
+			} catch (e) {
+			}
 		};
 		if (!$i("i3geo")) {
 			document.body.id = "i3geo";
@@ -523,40 +565,40 @@ var i3GEO = {
 				i3GEO.inicia(retorno);
 			};
 			i3GEO.configura.mashuppar += "&interface="
-					+ i3GEO.Interface.ATUAL;
+				+ i3GEO.Interface.ATUAL;
 			// acrescenta camadas iniciais
 			if (i3GEO.mapa.TEMASINICIAIS.length > 0) {
 				i3GEO.configura.mashuppar += "&temasa="
-						+ i3GEO.mapa.TEMASINICIAIS;
+					+ i3GEO.mapa.TEMASINICIAIS;
 			}
 			if (i3GEO.mapa.TEMASINICIAISLIGADOS.length > 0) {
 				i3GEO.configura.mashuppar += "&layers="
-						+ i3GEO.mapa.TEMASINICIAISLIGADOS;
+					+ i3GEO.mapa.TEMASINICIAISLIGADOS;
 			}
 
 			i3GEO.php.criamapa(
-					mashup,
-					i3GEO.configura.mashuppar);
+				mashup,
+				i3GEO.configura.mashuppar);
 		} else {
 			if (i3GEO.parametros.w === ""
-					|| i3GEO.parametros.h === "") {
+				|| i3GEO.parametros.h === "") {
 				tamanho = i3GEO.calculaTamanho();
 				i3GEO.parametros.w = tamanho[0];
 				i3GEO.parametros.h = tamanho[1];
 			}
 			i3GEO.php.inicia(
-					montaMapa,
-					i3GEO.configura.embedLegenda,
-					i3GEO.parametros.w,
-					i3GEO.parametros.h);
+				montaMapa,
+				i3GEO.configura.embedLegenda,
+				i3GEO.parametros.w,
+				i3GEO.parametros.h);
 		}
 		if (i3GEO.eventos.NAVEGAMAPA.toString().search(
-				"i3GEO.janela.fechaAguarde()") < 0) {
+			"i3GEO.janela.fechaAguarde()") < 0) {
 			i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.fechaAguarde()");
 		}
 		// eval(i3GEO.finaliza);
 	},
-	/*
+	/**
 	 * Executa opera&ccedil;&otilde;es ap&oacute;s o mapa ter sido posicionado
 	 * na tela
 	 *
@@ -580,7 +622,7 @@ var i3GEO = {
 			i3GEO.mapa.ativaAutoResize();
 		}
 	},
-	/*
+	/**
 	 * Function: atualiza
 	 *
 	 * Atualiza o mapa atual, altera a imagem do mapa os gadgets ativos e os
@@ -600,7 +642,7 @@ var i3GEO = {
 	 *
 	 * Parametro:
 	 *
-	 * retorno {String} - string com os parametros do novo mapa. Se retorno
+	 * {Objeto} - parametros do novo mapa. Se retorno
 	 * n&atilde;o for especificado ou se for vazio, ser&aacute; feita uma
 	 * chamada em ajax para sua obten&ccedil;&atilde;o. O resultado dessa
 	 * chamada &eacute; armazenada em i3GEO.parametros
@@ -623,8 +665,8 @@ var i3GEO = {
 				return;
 			}
 			i3GEO.php.corpo(
-					i3GEO.atualiza,
-					i3GEO.configura.tipoimagem);
+				i3GEO.atualiza,
+				i3GEO.configura.tipoimagem);
 		};
 		//
 		// se retorno n&atilde;o tiver sido definido, busca os dados no servidor
@@ -660,7 +702,7 @@ var i3GEO = {
 				i3GEO.mapa.recupera.inicia();
 				return;
 			} else if (retorno.data === "ok"
-					|| retorno.data === "") {
+				|| retorno.data === "") {
 				corpoMapa.call();
 				return;
 			}
@@ -680,8 +722,8 @@ var i3GEO = {
 		// atualiza as vari&aacute;veis
 		//
 		if (arguments.length === 0
-				|| retorno === ""
-				|| retorno.data.variaveis === undefined) {
+			|| retorno === ""
+			|| retorno.data.variaveis === undefined) {
 			erro.call();
 			return;
 		} else {
@@ -729,9 +771,9 @@ var i3GEO = {
 
 			i3GEO.eventos.navegaMapa();
 			i3GEO.ajuda.mostraJanela(
-					"Tempo de redesenho em segundos: "
-							+ retorno.data.variaveis.tempo,
-					"");
+				"Tempo de redesenho em segundos: "
+					+ retorno.data.variaveis.tempo,
+				"");
 			//
 			// verifica se deve ser feito o zoom em algum tema
 			//
@@ -741,7 +783,7 @@ var i3GEO = {
 			}
 		}
 	},
-	/*
+	/**
 	 * Calcula o tamanho do mapa atual e define alguns elementos HTML do mapa
 	 *
 	 * Return: {array} - [w,h]
@@ -753,69 +795,70 @@ var i3GEO = {
 		menos = 0;
 		temp = $i("contemFerramentas");
 		if (temp
-				&& temp.style
-				&& temp.style.width) {
+			&& temp.style
+			&& temp.style.width) {
 			menos += parseInt(
-					$i("contemFerramentas").style.width,
-					10);
+				$i("contemFerramentas").style.width,
+				10);
 		}
 		temp = $i("ferramentas");
 		if (temp
-				&& temp.style
-				&& temp.style.width) {
+			&& temp.style
+			&& temp.style.width) {
 			menos += parseInt(
-					$i("ferramentas").style.width,
-					10);
+				$i("ferramentas").style.width,
+				10);
 		}
 
 		if (i3GEO.configura.autotamanho === true) {
 			if (window.top === window.self) {// nao se aplica em iframe
 				window.resizeTo(
-						screen.availWidth,
-						screen.availHeight);
+					screen.availWidth,
+					screen.availHeight);
 				window.moveTo(
-						0,
-						0);
+					0,
+					0);
 			}
 		}
 		if (i3GEO.scrollerWidth === "") {
 			i3GEO.scrollerWidth = i3GEO.util.getScrollerWidth();
 		}
 		i3GEO.tamanhodoc = [
-				YAHOO.util.Dom.getViewportWidth(), YAHOO.util.Dom.getViewportHeight()
+			YAHOO.util.Dom.getViewportWidth(),
+			YAHOO.util.Dom.getViewportHeight()
 		];
 		Dw = YAHOO.util.Dom.getDocumentWidth();
 		Dh = YAHOO.util.Dom.getDocumentHeight();
 		novow = Dw
-				- i3GEO.scrollerWidth;
+			- i3GEO.scrollerWidth;
 		novoh = Dh;
 		document.body.style.width = novow
-				+ "px";
+			+ "px";
 		document.body.style.height = novoh
-				+ "px";
+			+ "px";
 
 		w = novow
-				- menos
-				- diminuix;
+			- menos
+			- diminuix;
 		h = novoh
-				- diminuiy;
+			- diminuiy;
 
 		temp = $i("corpoMapa");
 		if (temp) {
 			if (temp.style) {
 				if (temp.style.width) {
 					w = parseInt(
-							temp.style.width,
-							10);
+						temp.style.width,
+						10);
 					h = parseInt(
-							temp.style.width,
-							10);
+						temp.style.width,
+						10);
 					i3GEO.parametros.w = w;
 				}
 				if (temp.style.height) {
 					h = parseInt(
-							temp.style.height,
-							10);
+						temp.style.height,
+						10);
 					i3GEO.parametros.h = h;
 				}
 			}
@@ -823,15 +866,16 @@ var i3GEO = {
 		temp = $i("contemImg");
 		if (temp) {
 			temp.style.height = h
-					+ "px";
+				+ "px";
 			temp.style.width = w
-					+ "px";
+				+ "px";
 		}
 		return [
-				w, h
+			w,
+			h
 		];
 	},
-	/*
+	/**
 	 * Recalcula o tamanho do mapa com base nas configura&ccedil;&otilde;es do
 	 * navegador
 	 *
@@ -844,19 +888,19 @@ var i3GEO = {
 		menos = 0;
 		temp = $i("contemFerramentas");
 		if (temp
-				&& temp.style
-				&& temp.style.width) {
+			&& temp.style
+			&& temp.style.width) {
 			menos += parseInt(
-					$i("contemFerramentas").style.width,
-					10);
+				$i("contemFerramentas").style.width,
+				10);
 		}
 		temp = $i("ferramentas");
 		if (temp
-				&& temp.style
-				&& temp.style.width) {
+			&& temp.style
+			&& temp.style.width) {
 			menos += parseInt(
-					$i("ferramentas").style.width,
-					10);
+				$i("ferramentas").style.width,
+				10);
 		}
 		document.body.style.width = "99%";
 		temp = i3GEO.util.tamanhoBrowser();
@@ -865,40 +909,40 @@ var i3GEO = {
 		temp = (antigoh - (novoh - diminuiy));
 
 		document.body.style.height = novoh
-				+ "px";
+			+ "px";
 		w = novow
-				- menos
-				- diminuix;
+			- menos
+			- diminuix;
 		h = novoh
-				- diminuiy;
+			- diminuiy;
 
 		temp = $i(i3GEO.Interface.IDMAPA);
 		if (temp) {
 			temp.style.height = h
-					+ "px";
+				+ "px";
 			temp.style.width = w
-					+ "px";
+				+ "px";
 			YAHOO.util.Event.addListener(
-					temp,
-					"click",
-					YAHOO.util.Event.stopEvent);
+				temp,
+				"click",
+				YAHOO.util.Event.stopEvent);
 			YAHOO.util.Event.addFocusListener(
-					temp,
-					YAHOO.util.Event.preventDefault);
+				temp,
+				YAHOO.util.Event.preventDefault);
 		}
 		temp = $i(i3GEO.Interface.IDCORPO);
 		if (temp) {
 			temp.style.height = h
-					+ "px";
+				+ "px";
 			temp.style.width = w
-					+ "px";
+				+ "px";
 			YAHOO.util.Event.addListener(
-					temp,
-					"click",
-					YAHOO.util.Event.stopEvent);
+				temp,
+				"click",
+				YAHOO.util.Event.stopEvent);
 			YAHOO.util.Event.addFocusListener(
-					temp,
-					YAHOO.util.Event.preventDefault);
+				temp,
+				YAHOO.util.Event.preventDefault);
 		}
 		temp = $i("mst");
 		if (temp) {
@@ -919,12 +963,12 @@ var i3GEO = {
 				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
 				i3geoOL.updateSize();
 				i3GEO.Interface.openlayers.OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP
-						+ "px";
+					+ "px";
 
 				i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT
-						+ "px";
+					+ "px";
 				i3GEO.Interface.openlayers.OLpanzoombar.div.style.right = i3GEO.Interface.BARRADEZOOMRIGHT
-						+ "px";
+					+ "px";
 				if (i3GEO.Interface.BARRADEZOOMLEFT === 0) {
 					i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = null;
 				}
@@ -932,23 +976,25 @@ var i3GEO = {
 					i3GEO.Interface.openlayers.OLpanzoombar.div.style.right = null;
 				}
 				break;
-			};
+			}
+			;
 			if (i3GEO.guias.TIPO === "sanfona") {
 				i3GEO.guias.ALTURACORPOGUIAS = h
-						- (antigoh - i3GEO.guias.ALTURACORPOGUIAS);
+					- (antigoh - i3GEO.guias.ALTURACORPOGUIAS);
 			} else {
 				i3GEO.guias.ALTURACORPOGUIAS = h;
 			}
 			return [
-					w, h
+				w,
+				h
 			];
 		};
 		i3GEO.php.mudatamanho(
-				temp,
-				h,
-				w);
+			temp,
+			h,
+			w);
 	},
-	/*
+	/**
 	 * Atualiza os valores da vari&aacute;vel i3GEO.parametros
 	 *
 	 * Parametro:
