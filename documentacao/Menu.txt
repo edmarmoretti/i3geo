@@ -70,8 +70,6 @@ Group: API  {
       File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs/classe_gadgets.js)
       File: Guias  (classesjs/classe_guias.js)
       File: i3Geo  (classesjs/classe_i3geo.js)
-      File: i3GEO.editorGM  (classesjs/classe_editorgm.js)
-      File: i3geo_gl_configura  (classesjs/geradordelinks.js)
       File: Idioma  (classesjs/classe_idioma.js)
       File: Interface  (classesjs/classe_interface.js)
       File: Janelas  (classesjs/classe_janela.js)

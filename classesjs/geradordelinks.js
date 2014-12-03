@@ -5,7 +5,7 @@ Classe javascript da aplica&ccedil;&atilde;o de gera&ccedil;&atilde;o de links.
 
 L&ecirc; o conjunto de javascripts para o funcionamento da interface geradordelinks.htm
 
-Arquivo:
+Arquivo
 
 i3geo/classesjs/geradordelinks.js
 
@@ -19,7 +19,7 @@ i3geo/classesjs/compactados/funcoes_compacto.js
 
 As depend&ecirc;ncias s&atilde;o carregadas pelo pr&oacute;prio geradordelinks.js, n&atilde;o sendo necess&aacute;rio incluir no HTML.
 
-Licen&ccedil;a:
+Licen&ccedil;a
 
 GPL2
 
@@ -41,7 +41,7 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Veja:
+Veja
 
 <i3geo/geradordelinks.htm>
 
@@ -76,15 +76,15 @@ Veja:
 	document.write(allScriptTags);
 })();
 /*
-Classe: i3geo_gl_configura
+Classe i3geo_gl_configura
 
 Cria o objeto javascript com os parametros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o.
 
-Example:
+Example
 
 var i3geo_gl_configura = new i3geo_gl_configura("http://localhost/i3geo","estadosl","temasa","link")
 
-Parameters:
+Parameters
 
 loc_i3geo - endere&ccedil;o web onde est&aacute; instalado o i3geo.
 
@@ -143,13 +143,13 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.buscageo = buscageo;
 	/*
-	Function: seltema
+	Function seltema
 
 	Adiciona na lista de temas escolhidos pelo usu&aacute;rio um novo tema.
 
 	Ativada quando um grupo ou subgrupo &eacute; escolhido.
 
-	Parameters:
+	Parameters
 
 	idtema = identificador do tema conforme definido em menutemas/menutemas.xml
 	 */
@@ -198,7 +198,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		this.crialink();
 	};
 	/*
-	Function: crialink
+	Function crialink
 
 	Pega os parametros especificados pelo usu&aacute;rio e monta o link para mostrar na tela.
 	*/
@@ -248,11 +248,11 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$i($i3geo_gl.link).innerHTML = ins;
 	};
 	/*
-	Function: combogrupos
+	Function combogrupos
 
 	Chama a fun&ccedil;&atilde;o do i3geo que monta um combo com a lista de grupos de um menu do i3geo
 
-	Parameters:
+	Parameters
 
 	idMenu - id do menu que ser&aacute; pesquisado
 	*/
@@ -262,11 +262,11 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		i3GEO.arvoreDeTemas.comboGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combosubgrupos",$i3geo_gl.grupo,"","530","1",idMenu);
 	};
 	/*
-	Function: combosubgrupos
+	Function combosubgrupos
 
 	Chama a fun&ccedil;&atilde;o do i3geo que monta um combo com a lista de subgrupos de um grupo do menu do i3geo
 
-	Parameters:
+	Parameters
 
 	idGrupo - id do grupo que ser&aacute; pesquisado
 	*/
@@ -280,13 +280,13 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		i3GEO.arvoreDeTemas.comboSubGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combotemas",$i3geo_gl.subgrupo,"",idGrupo,"530","1");
 	};
 	/*
-	Function: combotemas
+	Function combotemas
 
 	Monta um combo com a lista de temas vinculados diretamente a um grupo.
 
 	Chamado pela fun&ccedil;&atilde;o combosubgrupos.
 
-	Parameters:
+	Parameters
 
 	idGrupo - id que identifica o grupo escolhido.
 
@@ -300,7 +300,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"530","5","",temas);
 	};
 	/*
-	Function: preseltema
+	Function preseltema
 
 	Compatibiliza a chamada da fun&ccedil;&atilde;o i3geo_combotemasMenu com a fun&ccedil;&atilde;o this.seltema em termos de n&uacute;mero de parametros
 	*/
@@ -309,11 +309,11 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$i3geo_gl.seltema(idtema);
 	};
 	/*
-	Function: preview
+	Function preview
 
 	Mostra um preview do tema clicado.
 
-	Parameters:
+	Parameters
 
 	e - elemento do DOM do objeto clicado.
 	*/
@@ -323,11 +323,11 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		window.open("testamapfile.php?map="+id+".map&tipo=grande");
 	};
 	/*
-	Function: descer
+	Function descer
 
 	Desce um tema na lista de temas selecionados.
 
-	Parameters:
+	Parameters
 
 	e - elemento do DOM do objeto clicado.
 	*/
@@ -340,11 +340,11 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$i3geo_gl.crialink();
 	};
 	/*
-	Function: subir
+	Function subir
 
 	Sobe um tema na lista de temas selecionados
 
-	Parameters:
+	Parameters
 
 	e - elemento do DOM.
 	*/
@@ -356,11 +356,11 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$i3geo_gl.crialink();
 	};
 	/*
-	Function: excluir
+	Function excluir
 
 	Exclui um tema da lista de temas selecionados
 
-	Parameters:
+	Parameters
 
 	e - elemento do DOM.
 	*/
@@ -371,7 +371,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$i3geo_gl.crialink();
 	};
 	/*
-	Function: buscageo_init
+	Function buscageo_init
 
 	Inicializa o OpenLayers para permitir ao usu&aacute;rio escolher a abrang&ecirc;ncia espacial do link.
 	*/
@@ -457,18 +457,18 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 }
 
 /*
-Function: i3geo_gl_inicia
+Function i3geo_gl_inicia
 
 Inicia a interface do gerador de links.
 
-Parameters:
+Parameters
 
 objeto_i3geo_gl_configura - objeto com os paramentros de configura&ccedil;&atilde;o criado pela fun&ccedil;&atilde;o i3geo_gl_configura
 */
 function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 {
 	/*
-	Propriedade: $i3geo_gl
+	Propriedade $i3geo_gl
 
 	Cont&eacute;m o objeto $i3geo_gl com todas as propriedades e fun&ccedil;&otilde;es de controle da interface
 	*/

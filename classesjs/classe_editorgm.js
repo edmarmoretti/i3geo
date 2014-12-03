@@ -36,7 +36,7 @@ if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};
 }
 /*
-Classe: i3GEO.editorGM
+Classe i3GEO.editorGM
 
 Fun&ccedil;&otilde;es de edi&ccedil;&atilde;o vetorial utilizadas pelo editor de regi&otilde;es do sistema METAESTAT
  */
