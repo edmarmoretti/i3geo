@@ -6,10 +6,6 @@
  * Veja tamb&eacute;m classe_interface.js (i3GEO.Interface) que possu&iacute; par&acirc;metros que permitem ajustar a posi&ccedil;&atilde;o
  * das barras no mapa
  *
- * Namespace:
- *
- * i3GEO.barraDeBotoes
- *
  * Exemplo:
  *
  * Para alterar as op&ccedil;&otilde;es modifique as propriedades colocando um c&oacute;digo como o seguinte no javascript utilizado na
@@ -43,6 +39,9 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
+/**
+ * Namespace: i3GEO.barraDeBotoes
+ */
 i3GEO.barraDeBotoes =
 {
 	/**

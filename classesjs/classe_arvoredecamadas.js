@@ -9,9 +9,9 @@
  * i3GEO.arvoreDeCamadas permite controlar quais as op&ccedil;&otilde;es que
  * ser&atilde;o mostradas na &aacute;rvore e seu comportamento em diferentes
  * situa&ccdil;&otilde;s.
- *
- * Namespace:
- *
+ * 
+ * Namespace: 
+ * 
  * i3GEO.arvoreDeCamadas
  *
  * Exemplo:
@@ -53,6 +53,7 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
+
 i3GEO.arvoreDeCamadas = {
 	/**
 	 * Constant: ARVORE
@@ -2745,7 +2746,7 @@ i3GEO.arvoreDeCamadas = {
 		i3GEO.arvoreDeCamadas.CAMADAS = obj;
 	},
 	/**
-	 * Namespace: i3GEO.arvoreDeCamadas.dialogo
+	 * Section: i3GEO.arvoreDeCamadas.dialogo
 	 *
 	 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de
 	 * manipula&ccedil;&atilde;o da &aacute;rvore

@@ -5,10 +5,6 @@
  *
  * Vc pode alterar com esta classe a maioria dos par&acirc;metros que controlam o funcionamento do i3geo.
  *
- * Namespace:
- *
- * i3GEO.configura
- *
  * Exemplo:
  *
  * i3GEO.configura.embedLegenda = "nao"
@@ -47,6 +43,9 @@ if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
 //TODO o link para a arvore hiperbolica foi removido na versao 6.0. Excluir arquivos de forma definitiva na versao 6.1
+/**
+ * Namespace: i3GEO.configura
+ */
 i3GEO.configura =
 	{
 		/**

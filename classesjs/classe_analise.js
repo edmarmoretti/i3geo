@@ -5,10 +5,6 @@
  *
  * Em i3GEO.analise.dialogo estao as funcoes de abertura dos dialogos
  *
- * Objeto:
- *
- * i3GEO.analise
- *
  * Exemplo:
  *
  * Para abrir a janela de di&aacute;logo da ferramenta de mapa de calor
@@ -42,6 +38,9 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
+/**
+ * Namespace: i3GEO.analise
+ */
 i3GEO.analise =
 	{
 		/**
