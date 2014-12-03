@@ -258,7 +258,7 @@ i3GEO.login = {
 		return obj;
 	},
 	/**
-	 * Namespace: i3GEO.login.dialogo
+	 * Section: i3GEO.login.dialogo
 	 *
 	 * Abre as telas de di&aacute;logo com o usu&aacute;rio
 	 *

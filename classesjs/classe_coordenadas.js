@@ -13,6 +13,10 @@
  * ou modificar as atuais, edit a vari&aacute;vel i3GEO.coordenadas.config e
  * defOrigem
  *
+ * Namespace:
+ *
+ * i3GEO.coordenadas
+ *
  * Veja:
  *
  * <http://localhost/i3geo/classesjs/classe_coordenadas.js>
@@ -44,9 +48,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-/**
- * Namespace: i3GEO.coordenadas
- */
 i3GEO.coordenadas =
 	{
 		/**
@@ -1101,9 +1102,9 @@ i3GEO.coordenadas =
 		// Distributed under the MIT License
 		//ver pacotes/geohash-js-master
 		/**
-		 * Namespace: i3GEO.coordenadas.geohash
+		 * Section: i3GEO.coordenadas.geohash
 		 *
-		 * Fun��es espec�ficas da biblioteca Geohash library for Javascript
+		 * Fun&ccedil;&otilde;es espec&iacute;ficas da biblioteca Geohash library for Javascript
 		 *
 		 * Veja:
 		 *

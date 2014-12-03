@@ -1,5 +1,5 @@
 /*
-Title: Gerador de links
+Gerador de links
 
 Classe javascript da aplica&ccedil;&atilde;o de gera&ccedil;&atilde;o de links.
 
@@ -75,7 +75,7 @@ Veja:
 	}
 	document.write(allScriptTags);
 })();
-/* 
+/*
 Classe: i3geo_gl_configura
 
 Cria o objeto javascript com os parametros de configura&ccedil;&atilde;o da api e com as fun&ccedil;&otilde;es de manipula&ccedil;&atilde;o.
@@ -106,11 +106,11 @@ menu - id do elemento HTML onde ser&aacute; incluido a lista de menus
 */
 function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tema,buscageo,menu)
 {
-	/* 
+	/*
 	Id do elemento HTML onde a lista de temas adicionados, ou seja, os que forem escolhidos pelo usu&aacute;rio, ser&aacute; inclu&iacute;da.
 	 */
 	this.temasa = temasa;
-	/* 
+	/*
 	Id do elemento HTML do tipo <a> onde ser&aacute; mostrado o link criado para o mapa.
 	 */
 	this.link = link;
@@ -142,7 +142,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	Guarda o valor do parametro buscageo
 	*/
 	this.buscageo = buscageo;
-	/* 
+	/*
 	Function: seltema
 
 	Adiciona na lista de temas escolhidos pelo usu&aacute;rio um novo tema.
@@ -375,7 +375,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 
 	Inicializa o OpenLayers para permitir ao usu&aacute;rio escolher a abrang&ecirc;ncia espacial do link.
 	*/
-	this.buscageo_init = function() 
+	this.buscageo_init = function()
 	{
 		var ins = "<div style=margin:10px;text-align:left; >";
 		ins += "<p class=paragrafo ><b>Utilize o mapa abaixo para definir as coordenadas geogr&aacute;ficas do seu mapa, ou digite os valores desejados (opcional):</b></p>";

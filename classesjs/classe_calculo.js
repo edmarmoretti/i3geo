@@ -3,6 +3,10 @@
  *
  * Utilit&aacute;rios para c&aacute;lculos.
  *
+ * Namespace:
+ *
+ * i3GEO.calculo
+ *
  * Veja:
  *
  * <http://localhost/i3geo/classesjs/classe_calculo.js>
@@ -30,9 +34,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-/**
- * Namespace: i3GEO.calculo
- */
 i3GEO.calculo =
 	{
 		/**

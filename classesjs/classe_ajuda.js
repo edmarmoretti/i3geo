@@ -8,6 +8,10 @@
  * m&oacute;vel que mostra mensagens especiais definidas em cada layer
  * adicionado ao mapa.
  *
+ * Namespace:
+ *
+ * i3GEO.ajuda
+ *
  * Exemplos:
  *
  * Se vc n&atilde;o quiser que a janela de ajuda seja aberta, inclua em seu HTML
@@ -50,9 +54,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-/**
- * Namespace: i3GEO.ajuda
- */
 i3GEO.ajuda =
 	{
 		/**

@@ -1,3 +1,4 @@
+//TODO documentar
 /*
 Editor vetorial de limites para a interface google maps
 

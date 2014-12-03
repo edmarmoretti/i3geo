@@ -5,6 +5,10 @@
  *
  * Em i3GEO.analise.dialogo estao as funcoes de abertura dos dialogos
  *
+ * Namespace:
+ *
+ * i3GEO.analise
+ *
  * Exemplo:
  *
  * Para abrir a janela de di&aacute;logo da ferramenta de mapa de calor
@@ -38,9 +42,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-/**
- * Namespace: i3GEO.analise
- */
 i3GEO.analise =
 	{
 		/**
@@ -331,7 +332,7 @@ i3GEO.analise =
 			}
 		},
 		/**
-		 * Class: medeDistancia
+		 * Section: medeDistancia
 		 *
 		 * Ativa e controla a op&ccedil;&atilde;o de medi&ccedil;&atilde;o de dist&acirc;ncias. A medida &eacute; feita quando o
 		 * usu&aacute;rio clica no mapa com esta op&ccedil;&atilde;o ativa. Quando o bot&atilde;o e acionado, abre-se a janela que mostra o
@@ -999,7 +1000,7 @@ i3GEO.analise =
 			}
 		},
 		/**
-		 * Class: medeArea
+		 * Section: medeArea
 		 *
 		 * Ativa e controla a op&atilde;o de medi&ccedil;&atilde;o de &aacute;rea.
 		 *

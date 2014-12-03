@@ -9,9 +9,9 @@
  * i3GEO.arvoreDeCamadas permite controlar quais as op&ccedil;&otilde;es que
  * ser&atilde;o mostradas na &aacute;rvore e seu comportamento em diferentes
  * situa&ccdil;&otilde;s.
- * 
- * Namespace: 
- * 
+ *
+ * Namespace:
+ *
  * i3GEO.arvoreDeCamadas
  *
  * Exemplo:
@@ -21,7 +21,6 @@
  * utilizado na interface de mapa que estiver sendo utilizada
  *
  * i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;
- *
  *
  * Veja:
  *

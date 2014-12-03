@@ -4,6 +4,10 @@
  * Monta a &aacute;rvore com os temas dispon&iacute;veis para ser adicionados ao
  * mapa
  *
+ * Namespace:
+ *
+ * i3GEO.arvoreDeTemas
+ *
  * Exemplos:
  *
  * Para alterar as op&ccedil;&otilde;es da &aacute;rvore, modifique as
@@ -44,9 +48,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-/**
- * Namespace: i3GEO.arvoreDeTemas
- */
 i3GEO.arvoreDeTemas = {
 	/**
 	 * Constant: IDHTML
@@ -2981,7 +2982,7 @@ i3GEO.arvoreDeTemas = {
 				}, true);
 	},
 	/**
-	 * Namespace: i3GEO.arvoreDeTemas.dialogo
+	 * Section: i3GEO.arvoreDeTemas.dialogo
 	 *
 	 * Abre as janelas de dialogo com as opcoes adicionais que permitem
 	 * acrescentar temas ao mapa

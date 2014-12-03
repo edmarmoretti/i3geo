@@ -10,6 +10,10 @@
  * Aqui estao apenas as funcoes de uso compartilhado. Para mais informacoes veja
  * as opcoes nos editores vetoriais espec&iacute;ficos de cada interface
  *
+ * Namespace:
+ *
+ * i3GEO.desenho
+ *
  * Veja:
  *
  * <http://localhost/i3geo/classesjs/classe_desenho.js>
@@ -17,16 +21,16 @@
  */
 /**
  * Licen&ccedil;a
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -36,29 +40,26 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-/**
- * Namespace: i3GEO.desenho
- */
 i3GEO.desenho =
 	{
 		/**
 		 * Constant: layergrafico
-		 * 
+		 *
 		 * Objeto LAYER para a interface OpenLayers criado com i3GEO.desenho.openlayers.criaLayerGrafico
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {OpenLayers.Layer.Vector}
-		 * 
+		 *
 		 */
 		layergrafico : null,
 		/**
 		 * Propriedade: estilos
-		 * 
+		 *
 		 * Estilos que podem ser utilizados para desenhar os elementos
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {objeto}
 		 */
 		estilos : {
@@ -124,7 +125,7 @@ i3GEO.desenho =
 		},
 		/**
 		 * Propriedade: estiloPadrao
-		 * 
+		 *
 		 * Estilo utilizado como padr&atilde;o
 		 */
 		estiloPadrao : "normal",
@@ -145,14 +146,14 @@ i3GEO.desenho =
 			return caixa;
 		},
 		/**
-		 * Namespace: i3GEO.desenho.openlayers
-		 * 
+		 * Section: i3GEO.desenho.openlayers
+		 *
 		 * Fun&ccedil;&otilde;es utilizadas quando o mapa baseia-se na interface OpenLayers
 		 */
 		openlayers : {
 			/**
 			 * Function: inicia
-			 * 
+			 *
 			 * Cria o layer onde os desenhos serao inseridos
 			 */
 			inicia : function() {
@@ -231,14 +232,14 @@ i3GEO.desenho =
 			}
 		},
 		/**
-		 * Namespace: i3GEO.desenho.googlemaps
-		 * 
+		 * Section: i3GEO.desenho.googlemaps
+		 *
 		 * Fun&ccedil;&otilde;es utilizadas quando o mapa baseia-se na interface GoogleMaps
 		 */
 		googlemaps : {
 			/**
 			 * Variavel: shapes
-			 * 
+			 *
 			 * Array que guarda todos os objetos que estao atualmente no mapa E atualizado toda vez que uma figura e acrescentada ou
 			 * removida
 			 */
@@ -247,11 +248,11 @@ i3GEO.desenho =
 			},
 			/**
 			 * Function: getFeaturesByAttribute
-			 * 
+			 *
 			 * Obt&eacute;m uma figura com base em um atributo
-			 * 
+			 *
 			 * {string}
-			 * 
+			 *
 			 * {string}
 			 */
 			getFeaturesByAttribute : function(atributo, valor) {
@@ -267,9 +268,9 @@ i3GEO.desenho =
 			},
 			/**
 			 * Function: destroyFeatures
-			 * 
+			 *
 			 * Destr�i as figuras
-			 * 
+			 *
 			 * {array} - lista de objetos
 			 */
 			destroyFeatures : function(f) {
@@ -283,8 +284,8 @@ i3GEO.desenho =
 			}
 		},
 		/**
-		 * Namespace: i3GEO.desenho.googleearth
-		 * 
+		 * Section: i3GEO.desenho.googleearth
+		 *
 		 * Fun&ccedil;&otilde;es utilizadas quando o mapa baseia-se na interface GoogleEarth
 		 */
 		googleearth : {
