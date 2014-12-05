@@ -373,7 +373,7 @@ function verifica($map,$solegenda){
 				echo "<br>".$dados."<br>";
 			}
 			if($map != "todos"){
-				echo "<br>Erros:<br>";
+				echo "<br>Erros ocorridos:<br>";
 				$error = "";
 				$error = ms_GetErrorObj();
 				while($error && $error->code != MS_NOERR){
