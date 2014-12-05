@@ -2053,6 +2053,16 @@ class Metaestat{
 		return $colunas["coluna"];
 	}
 	/**
+	 * Obtem de uma tabela a coluna do tipo serial
+	 * @param codigo do tipo de regiao
+	 */
+	function listaTabelaSerial($codigo_estat_conexao,$nome_esquema,$nome_tabela){
+		$sql = "SELECT a.attname as coluna FROM pg_class s JOIN pg_depend d ON d.objid = s.oid JOIN pg_class t ON d.objid = s.oid AND d.refobjid = t.oid JOIN pg_attribute a ON (d.refobjid, d.refobjsubid) = (a.attrelid, a.attnum) JOIN pg_namespace n ON n.oid = s.relnamespace WHERE s.relkind = 'S' AND n.nspname = '$nome_esquema' AND t.relname = '$nome_tabela'";
+		$colunas = $this->execSQLDB($codigo_estat_conexao,$sql);
+		$colunas = $colunas[0];
+		return $colunas["coluna"];
+	}
+	/**
 	 * Lista os dados de agregacao de uma regiao pai
 	 * @param codigo da regiao
 	 */

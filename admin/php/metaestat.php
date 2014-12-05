@@ -1545,7 +1545,19 @@ switch (strtoupper($funcao))
 	case "DESCREVECOLUNASTABELA":
 		$m = new Metaestat();
 		if($formato == "json"){
-			retornaJSON($m->descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela));
+			$c = $m->descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela);
+			$s = $m->listaTabelaSerial($codigo_estat_conexao,$nome_esquema,$nome_tabela);
+			for($i=0;$i<count($c);$i++){
+				if($c[$i]["field"] == $s){
+					$c[$i]["serial"] = true;	
+				}
+				else{
+					$c[$i]["serial"] = false;
+				}
+			}
+			retornaJSON($c);
+			
+			
 		}
 		exit;
 	break;

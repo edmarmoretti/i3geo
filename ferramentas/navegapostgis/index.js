@@ -297,6 +297,8 @@ i3GEOF.navegapostgis = {
 		i3GEOF.navegapostgis.tabela = tabela;
 		var funcao = function(retorno){
 				var ins,n,i,
+					ck = "",
+					gidok = false,
 					gid = "ID",
 					the_geom = "GEOM",
 					nome = $trad('nome',i3GEOF.navegapostgis.dicionario),
@@ -317,9 +319,16 @@ i3GEOF.navegapostgis = {
 					ins += "<tr><td></td><td></td><td>"+mostra+"</td><td title='' >Todas</td></tr>";
 
 					for(i=0;i<n;i++){
-						gid = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=radio name='i3GEOFnavegapostgisGid' value='"+retorno[i].field+"' />";
+						ck = "";
+						if(retorno[i].serial === true){
+							ck = "checked";
+							gidok = true;
+						}else if(retorno[i].notnull === true && gidok === false){
+							ck = "checked";
+						}
+						gid = "<input "+ ck +" onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=radio name='i3GEOFnavegapostgisGid' value='"+retorno[i].field+"' />";
 						if(retorno[i].type == "line" || retorno[i].type == "polygon" || retorno[i].type == "point" || retorno[i].type == "geometry"){
-							the_geom = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=radio name='i3GEOFnavegapostgisTheGeom' value='"+retorno[i].field+"' />";
+							the_geom = "<input checked onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=radio name='i3GEOFnavegapostgisTheGeom' value='"+retorno[i].field+"' />";
 						}
 						else{
 							the_geom = "";
@@ -330,6 +339,7 @@ i3GEOF.navegapostgis = {
 					ins += "</table>";
 				}
 				$i("i3GEOFnavegapostgisColunas").innerHTML = ins;
+				i3GEOF.navegapostgis.geraSql();
 			},
 			p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=descreveColunasTabela&formato=json&nome_tabela="+tabela+"&nome_esquema="+i3GEOF.navegapostgis.esquema+"&codigo_estat_conexao="+i3GEOF.navegapostgis.conexao;
 		cpJSON.call(p,"foo",funcao);
