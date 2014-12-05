@@ -623,22 +623,22 @@ i3GEO.arvoreDeCamadas = {
 	 *
 	 * Parametros:
 	 *
-	 * string - (opcional) ID do elemento DOM onde a &aacute;rvore
-	 * ser&aacute; inserida. Se for definido como "" o id ser&aacute; buscado da
+	 * {string} - (opcional) ID do elemento DOM onde a &aacute;rvore ser&aacute;
+	 * inserida. Se for definido como "" o id ser&aacute; buscado da
 	 * vari&aacute;vel IDHTML.
 	 *
-	 * objeto - (opcional) Objeto com as camadas e propriedades. Se
-	 * n&atilde;o for definido ou for vazio, ser&aacute; utilizado
+	 * {objeto} - (opcional) Objeto com as camadas e propriedades. Se n&atilde;o
+	 * for definido ou for vazio, ser&aacute; utilizado
 	 * i3GEO.arvoreDeCamadas.CAMADAS
 	 *
-	 * string - (opcional) C&oacute;digo da se&ccedil;&atilde;o PHP
-	 * criada ao abrir o i3Geo
+	 * {string} - (opcional) C&oacute;digo da se&ccedil;&atilde;o PHP criada ao
+	 * abrir o i3Geo
 	 *
-	 * string - (opcional)
+	 * {string} - (opcional) Endere&ccedil;o da aplica&ccedil;&atilde;o
 	 *
-	 * string - (opcional) Nome da fun&ccedil;&atilde;o que
-	 * ser&aacute; incluida no evento disparado quando o usu&aacute;rio clicar
-	 * no checkbox de um tema
+	 * {string} - (opcional) Nome da fun&ccedil;&atilde;o que ser&aacute;
+	 * incluida no evento disparado quando o usu&aacute;rio clicar no checkbox
+	 * de um tema
 	 */
 	cria : function(onde, temas, g_sid, g_locaplic, funcaoTema) {
 		if (typeof (console) !== 'undefined')
