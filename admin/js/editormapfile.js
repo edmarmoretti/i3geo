@@ -930,10 +930,17 @@ function selConexaoBanco(eleValue){
 					textos = [],
 					selecionados = [],
 					funcaoFinal = function(){
-						alert("Complete com o valor da senha de acesso em 'password', exemplo: password=postgres");
+						var c,m = prompt("Senha de acesso ao banco", "");
+						if (m != null) {
+							c = $i(eleValue);
+							c.value = c.value.replace("******",m);
+						}
+						else{
+							alert("Complete com o valor da senha de acesso em 'password', exemplo: password=postgres");
+						}
 					};
 					for(i=0;i<n;i++){
-						temp = "password= user="+dados[i].usuario+" dbname="+dados[i].bancodedados+" host="+dados[i].host+" port="+dados[i].porta;
+						temp = "password=****** user="+dados[i].usuario+" dbname="+dados[i].bancodedados+" host="+dados[i].host+" port="+dados[i].porta;
 						textos.push(dados[i].bancodedados);
 						valores.push(temp);
 					}
