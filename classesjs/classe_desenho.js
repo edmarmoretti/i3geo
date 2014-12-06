@@ -290,9 +290,9 @@ i3GEO.desenho =
 		 */
 		googleearth : {
 			insereMarca : function(description, ddx, ddy, name, snippet) {
-				if (typeof (console) !== 'undefined') {
+				if (typeof (console) !== 'undefined')
 					console.info("i3GEO.Interface.googleearth.insereMarca()");
-				}
+
 				var placemark = i3GeoMap.createPlacemark(''), point = i3GeoMap.createPoint('');
 				placemark.setName(name);
 				point.setLatitude(ddy);

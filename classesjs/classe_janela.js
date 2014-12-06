@@ -212,9 +212,9 @@ i3GEO.janela =
 		 * Executa fun&ccedil;&otilde;es default antes de abrir a janela
 		 */
 		prepara : function() {
-			if (typeof (console) !== 'undefined') {
+			if (typeof (console) !== 'undefined') 
 				console.info("i3GEO.janela.prepara()");
-			}
+
 			//
 			// esconde o box de zoom e outros objetos tempor&aacute;rios se
 			// estiverem vis&iacute;veis
@@ -293,9 +293,9 @@ i3GEO.janela =
 		 * cabecalho, elemento HTML com o corpo
 		 */
 		cria : function(wlargura, waltura, wsrc, nx, ny, texto, id, modal, classe, funcaoCabecalho, funcaoMinimiza, funcaoAposRedim, dimensionavel, icone, funcaoDuplica) {
-			if (typeof (console) !== 'undefined') {
+			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.janela.cria()");
-			}
+
 			if (!dimensionavel) {
 				dimensionavel = true;
 			}
@@ -677,9 +677,9 @@ i3GEO.janela =
 		 * args {objeto} - parametros do evento que fechou a janela
 		 */
 		fecha : function(event, args) {
-			if (typeof (console) !== 'undefined') {
+			if (typeof (console) !== 'undefined') 
 				console.info("i3GEO.janela.fecha()");
-			}
+
 			var i, id;
 			// esconde elementos gr&aacute;ficos q a ferramenta pode ter aberto
 			// i3GEO.util.escondePin();
@@ -736,9 +736,9 @@ i3GEO.janela =
 		 * {String} - (opcional) id que identifica a janela aberta
 		 */
 		alteraTamanho : function(w, h, id) {
-			if (typeof (console) !== 'undefined') {
+			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.janela.alteraTamanho()");
-			}
+
 			var i;
 			if (arguments.length === 3) {
 				i = $i(id);
@@ -764,11 +764,6 @@ i3GEO.janela =
 		 * {String} - texto da janela
 		 */
 		abreAguarde : function(id, texto) {
-			if (typeof (console) !== 'undefined') {
-				console.info("i3GEO.janela.abreAguarde("
-					+ id
-					+ ")");
-			}
 			var pos, temp, janela;
 			if (!id
 				|| id == undefined) {
@@ -1228,9 +1223,9 @@ i3GEO.janela =
 		 * ID do DIV criado
 		 */
 		tip : function(cabecalho) {
-			if (typeof (console) !== 'undefined') {
+			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.janela.tip()");
-			}
+
 			var Nid, i, novoel, res;
 			if (arguments.length === 0) {
 				cabecalho = "fixar";
@@ -1308,9 +1303,9 @@ i3GEO.janela =
 		 * exclu&iacute;dos
 		 */
 		excluiTips : function(tipo) {
-			if (typeof (console) !== 'undefined') {
+			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.janela.excluiTips()");
-			}
+
 			var ot, i;
 			if (arguments.length === 0) {
 				tipo = "todos";
