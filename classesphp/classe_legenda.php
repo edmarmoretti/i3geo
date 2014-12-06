@@ -252,9 +252,13 @@ string com a legenda HTML
 		if(!$l = @$this->mapa->processlegendtemplate($tmparray)){
 			return ("erro");
 		}
-		if (function_exists("mb_convert_encoding")){
-			$l = mb_convert_encoding($l,"UTF-8","ISO-8859-1");
+		//e necessario explodir as partes da legenda para converter os caracteres
+		$pedacos = explode("<tr>",$l);
+		$n = count($pedacos);
+		for($i=0;$i<$n;$i++){
+			$pedacos[$i] = $this->converte($pedacos[$i]);
 		}
+		$l = implode("<tr>",$pedacos);
 		return (array("legenda"=>$l,"desativar"=>$desligar));
 	}
 /*
@@ -355,11 +359,14 @@ array
 					$imgi->saveImage($nomer);
 					$i = ($imgi->imageurl).basename($nomer);
 					$nomeclasse = $classe->name;
-					if (function_exists("mb_convert_encoding"))
-					{$nomeclasse = mb_convert_encoding($nomeclasse,"UTF-8","ISO-8859-1");}
+					
+					//if (function_exists("mb_convert_encoding"))
+					//{$nomeclasse = mb_convert_encoding($nomeclasse,"UTF-8","ISO-8859-1");}
+					$nomeclasse = $this->converte($nomeclasse);
 					$nomeexp = $classe->getExpressionString();
 					if (function_exists("mb_convert_encoding"))
 					{$nomeexp = mb_convert_encoding($nomeexp,"UTF-8","ISO-8859-1");}
+					
 					$linhas[] = array("tema"=>$l,"idclasse"=>$c,"nomeclasse"=>$nomeclasse,"expressao"=>$nomeexp,"imagem"=>$i,"proc"=>"","minScale"=>$classe->minscaledenom,"maxScale"=>$classe->maxscaledenom);
 				}
 				if (($totaliza=="sim") && ($nc > 1)){
@@ -918,6 +925,16 @@ $width
 		$this->layer->setMetaData("cache","");
 		return "ok";
 	}
-
+	function converte($texto)
+	{
+		if (function_exists("mb_convert_encoding"))
+		{
+			if (!mb_detect_encoding($texto,"UTF-8",true))
+			{
+				$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
+			}
+		}
+		return $texto;
+	}
 }
 ?>

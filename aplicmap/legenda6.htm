@@ -1,10 +1,6 @@
 <!--
-
 [leg_layer_html opt_flag=1]
-
 	</div><div style='display:block;' id='legendaLayer_[leg_layer_name]' >
-
-	<table class=legendatemas cellspacing=0 width=248 >
 	[if name=TEMA oper=neq value=NAO]
 		<table [if name=CLASSE oper=eq value=NAO] style=display:none;  [/if] >
 			<tr><td style=text-align:left >
@@ -22,22 +18,18 @@
 [/leg_layer_html]
 
 [leg_class_html]
-
+<table style=margin-top:5px;position:relative;left:15px; >
 	[if name=CLASSE oper=neq value=NAO]
-		<table style=margin-top:5px;position:relative;left:15px; >
 			<tr>
 				<td style=width:20px;text-align:left; ><input type=checkbox CHECKED title=liga/desliga class=inputsb style='border: 0px solid red;cursor:pointer;opacity:0.3;' value=[leg_class_index] name=[leg_layer_name] id='legendack_[leg_layer_name]_[leg_class_index]' onclick='i3GEO.arvoreDeCamadas.inverteStatusClasse(this)' />
 				</td>
 				<td style=text-align:left >
 					<img src=[leg_icon  width=16 height=16 ] />
 				</td>
-				<td width=195 style=text-align:left; ><span style=font-size:9px;position:relative;left:2px; >[leg_class_name]</span></td>
+				<td style="text-align:left;width:195px" ><span style="font-size:9px;position:relative;left:2px;" >[leg_class_name]</span></td>
 			</tr>
-		</table>
 	[/if]
-	</table>
+</table>
 
 [/leg_class_html]
-
 -->
-

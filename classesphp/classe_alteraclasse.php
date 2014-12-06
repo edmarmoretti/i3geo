@@ -195,7 +195,7 @@ class Alteraclasse
 		$ids = explode(";",$ids);
 		$minScales = explode(";",$minScales);
 		$maxScales = explode(";",$maxScales);
-		//$nomes = mb_convert_encoding($nomes,"ISO-8859-1","UTF-8");
+		$nomes = $this->converteTexto($nomes);
 		$nomes = explode(";",$nomes);
 		//$exps = mb_convert_encoding($exps,"ISO-8859-1","UTF-8");
 		$exps = explode(";",$exps);
@@ -576,8 +576,8 @@ class Alteraclasse
 		{
 			$ns = $vs;
 		}
-		else
-		{$ns = $this->pegaValores($this->mapa,$this->layer,$itemNome,false,$ignorar);
+		else{
+			$ns = $this->pegaValores($this->mapa,$this->layer,$itemNome,false,$ignorar);
 		}
 		$lista = array();
 		for ($i = 0; $i < count($vs); ++$i){
@@ -1067,9 +1067,9 @@ class Alteraclasse
 	{
 		if (function_exists("mb_convert_encoding"))
 		{
-			if (!mb_detect_encoding($texto,"ISO-8859-1",true))
+			if (!mb_detect_encoding($texto,"UTF-8",true))
 			{
-				$texto = mb_convert_encoding($texto,"ISO-8859-1","UTF-8");
+				$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
 			}
 		}
 		return $texto;
