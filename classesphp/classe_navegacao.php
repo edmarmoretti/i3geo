@@ -6,6 +6,8 @@ Opera&ccedil;&otilde;es de navega&ccedil;&atilde;o que alteram a abrang&ecirc;nc
 
 Altera&ccedil;&atilde;o de escala, deslocamento, etc.
 
+Os par&acirc;metros locaplic e sid s&atilde;o geralmente opcionais. Quando for necess&aacute;rio escap&aacute;-los, utilize &quot;&quot;.
+
 Licenca:
 
 GPL2

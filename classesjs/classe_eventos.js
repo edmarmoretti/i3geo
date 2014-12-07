@@ -140,12 +140,8 @@ i3GEO.eventos =
 		 *
 		 * {Array}
 		 *
-		 * Default:
-		 *
-		 * ["i3GEO.navega.mostraRosaDosVentos()"]
 		 */
 		MOUSEPARADO : [
-			"i3GEO.navega.mostraRosaDosVentos()"
 		],
 		/**
 		 * Variavel: MOUSEMOVE

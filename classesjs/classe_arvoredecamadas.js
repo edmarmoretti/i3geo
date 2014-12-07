@@ -2103,17 +2103,11 @@ i3GEO.arvoreDeCamadas = {
 			+ "','ligadesliga')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" type='checkbox' name=\"layer\" value='"
 			+ tema.name
 			+ "' "
-			+ ck;
-		if (i3GEO.arvoreDeCamadas.ATIVATEMA !== "") {
-			html += "onclick=\""
-				+ i3GEO.arvoreDeCamadas.ATIVATEMA
-				+ "\"";
-		} else {
-			html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeCamadas.aplicaTemas\",\""
-				+ $trad("p14")
-				+ "\",\"i3geoBotaoAplicarCamadas\",this)'";
-		}
-		html += " />";
+			+ ck
+			+ "onclick=\""
+			+ i3GEO.arvoreDeCamadas.ATIVATEMA
+			+ "\""
+			+ " />";
 		//
 		// inclui icone do tema
 		//

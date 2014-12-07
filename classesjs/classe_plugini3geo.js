@@ -1,16 +1,20 @@
 /**
  * Title: PluginI3Geo
  *
- * i3GEO.pluginI3geo
- *
  * Implementa os plugins do i3Geo que adicionam camadas especiais ao mapa,
  * normalmente dados vetoriais processados no navegador Web.
  *
- * Arquivo:
+ * Namespace:
+ * 
+ * i3GEO.pluginI3geo
+ * 
+ * Veja:
  *
- * i3geo/classesjs/classe_plugini3geo.js
- *
- * Licen&ccedil;a:
+ * <http://localhost/i3geo/classesjs/classe_plugini3geo.js>
+ */
+
+/**
+ * Licen&ccedil;a
  *
  * GPL2
  *
@@ -47,8 +51,7 @@ i3GEO.pluginI3geo =
 			{
 				"classe" : "heatmap", // namespace da classe
 				"nome" : "Mapa de calor", // tituo do plugin
-				"editor" : true
-			// inclui no editor de mapfiles
+				"editor" : true // inclui no editor de mapfiles
 			},
 			{
 				"classe" : "markercluster",
@@ -155,7 +158,7 @@ i3GEO.pluginI3geo =
 			return camada;
 		},
 		/**
-		 * Function: heatmap
+		 * Section: i3GEO.pluginI3geo.heatmap
 		 *
 		 * Mapa de calor
 		 *
@@ -180,14 +183,14 @@ i3GEO.pluginI3geo =
 		 *
 		 * Coluna &eacute; a que cont&eacute;m os dados num&eacute;ricos que
 		 * definem a quantidade de uma medida em cada ponto e &eacute; usada
-		 * para gerar a representa&ccedil;&atilde;o. Se for vazia, considera-se
-		 * o valor como 1
+		 * para gerar a representa&ccedil;&atilde;o. Se for vazia, considera-se o valor como 1
 		 *
 		 * As cores das classes existentes no LAYER ser&atilde;o utilizadas para
 		 * calcular as cores do mapa de calor. Se tipoGradiente for igual a
 		 * "default" ser&aacute; utilizado o gradiente padrão.
 		 *
 		 */
+		//TODO verificar se a escolha de uma coluna funciona mesmo
 		heatmap : {
 			linkAjuda : function() {
 				return i3GEO.configura.locaplic
@@ -449,7 +452,7 @@ i3GEO.pluginI3geo =
 			}
 		},
 		/**
-		 * Function: markercluster
+		 * Section: i3GEO.pluginI3geo.markercluster
 		 *
 		 * Markercluster
 		 *
@@ -475,8 +478,7 @@ i3GEO.pluginI3geo =
 		 *
 		 * Coluna &eacute; a que cont&eacute;m os dados num&eacute;ricos que
 		 * definem a quantidade de uma medida em cada ponto e &eacute; usada
-		 * para gerar a representa&ccedil;&atilde;o. Se for vazia, considera-se
-		 * o valor como 1
+		 * para gerar a representa&ccedil;&atilde;o. Se for vazia, considera-se o valor como 1
 		 *
 		 */
 		markercluster : {
@@ -806,7 +808,7 @@ i3GEO.pluginI3geo =
 			}
 		},
 		/**
-		 * Function: layerkml
+		 * Section: i3GEO.pluginI3geo.layerkml
 		 *
 		 * Adiciona ao mapa uma camada vetorial baseada em um arquivo Kml
 		 *
@@ -994,7 +996,7 @@ i3GEO.pluginI3geo =
 			}
 		},
 		/**
-		 * Function: parametrossql
+		 * Section: i3GEO.pluginI3geo.parametrossql
 		 *
 		 * Adiciona ao mapa uma camada vetorial baseada em um arquivo mapfile
 		 * normal por&eacute;m permite substituir par&acirc;metros no item DATA
@@ -1018,6 +1020,7 @@ i3GEO.pluginI3geo =
 		 * '{"plugin":"parametrossql","parametros":{[{"titulo":"","tipo":"input|select","valores":[],"chave":""}]}}'
 		 *
 		 */
+		//TODO permitir que uma mesma camada seja adicionada ao mapa mais de uma vez
 		parametrossql : {
 			linkAjuda : function() {
 				// TODO

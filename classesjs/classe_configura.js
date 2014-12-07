@@ -1106,24 +1106,6 @@ i3GEO.configura =
 		 */
 		iniciaJanelaMensagens : false,
 		/**
-		 * Propriedade: mostraRosaDosVentos
-		 *
-		 * Mostra ou n&atilde;o a rosa dos ventos sob o mouse quando estiver parado.
-		 *
-		 * Tipo:
-		 *
-		 * {string}
-		 *
-		 * Valores:
-		 *
-		 * {sim|nao}
-		 *
-		 * Default:
-		 *
-		 * "nao"
-		 */
-		mostraRosaDosVentos : "nao",
-		/**
 		 * Propriedade: liberaGuias
 		 *
 		 * Indica se as guias ser&atilde;o montadas em uma janela flutuante sobre o mapa

@@ -130,5 +130,6 @@ Group: Index  {
    Arquivo Index: Arquivos
    Classe Index: Classe
    Constant Index: Constants
+   Variable Index: Variables
    }  # Group: Index
 
