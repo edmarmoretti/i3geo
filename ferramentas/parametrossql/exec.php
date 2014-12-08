@@ -24,15 +24,21 @@ Aplica a substituicao de chaves pelos valores enviados
 		$layer->set("data",$data);
 		$layer->set("status",MS_DEFAULT);
 		$layer->setmetadata("PLUGINI3GEO","");
-		if (connection_aborted()){exit();}
+		$layer->setmetadata("TEMA",$layer->getmetadata("TEMA")." - ".implode(",",$valores));
+		$layer->set("name","plugin".nomeRandomico());
+		if (connection_aborted()){
+			exit();
+		}
 		$salvo = $map->save($map_file);
 		$retorno = "ok";
 	break;
 	case "REMOVER":
 		$map = ms_newMapObj($map_file);
 		$layer = $map->getlayerbyname($tema);
-		$layer->set("status",MS_DELETE);
-		$salvo = $map->save($map_file);
+		if($layer != ""){
+			$layer->set("status",MS_DELETE);
+			$salvo = $map->save($map_file);
+		}
 		$retorno = "ok";
 	break;
 }

@@ -186,6 +186,7 @@ i3GEOF.parametrossql = {
 			valores.push(campos[i].value);
 		}
 		fim = function(){
+			i3GEO.janela.destroi("i3GEOF.parametrossql");
 			i3GEO.atualiza();
 		};
 		p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid

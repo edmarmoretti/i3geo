@@ -1929,7 +1929,7 @@ class Metaestat{
 			}
 			$data = implode("||",$data);
 			/**
-			 * @TODO falta a hora
+			 * TODO falta a hora
 			 */
 			return "to_date($data,'$tipodata')";
 		}
