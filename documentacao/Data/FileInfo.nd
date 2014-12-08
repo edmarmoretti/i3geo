@@ -1,97 +1,97 @@
 1.51
 JavaScript
-/var/www/i3geo/classesjs/i3geo.js	1416662506	0	/var/www/i3geo/classesjs/i3geo.js
-/var/www/i3geo/classesjs/classe_guias.js	1417812915	1	Guias
-/var/www/i3geo/classesjs/classe_interface.js	1417812915	1	Interface
-/var/www/i3geo/classesjs/teste.txt	1417964968	0	/var/www/i3geo/classesjs/teste.txt
-/var/www/i3geo/exemplos/googlemapssanfona.phtml	1399311506	0	/var/www/i3geo/exemplos/googlemapssanfona.phtml
-/var/www/i3geo/temas/teste.txt	1417301673	0	/var/www/i3geo/temas/teste.txt
-/var/www/i3geo/interface/black_editor.php	1415019623	0	/var/www/i3geo/interface/black_editor.php
-/var/www/i3geo/init/dicionario.js	1404767927	0	/var/www/i3geo/init/dicionario.js
-/var/www/i3geo/guia_de_migracao.txt	1416848207	0	/var/www/i3geo/guia_de_migracao.txt
-/var/www/i3geo/classesjs/i3geo_tudo_compacto6.js	1417964970	0	/var/www/i3geo/classesjs/i3geo_tudo_compacto6.js
-/var/www/i3geo/ms_registraip.php	1399311545	0	/var/www/i3geo/ms_registraip.php
-/var/www/i3geo/classesjs/redesenho.js	1411413757	0	/var/www/i3geo/classesjs/redesenho.js
-/var/www/i3geo/exemplos/vindegm.phtml	1415545109	0	/var/www/i3geo/exemplos/vindegm.phtml
-/var/www/i3geo/classesjs/wscliente.js	1416662578	0	/var/www/i3geo/classesjs/wscliente.js
-/var/www/i3geo/classesjs/i3geo5.js	1411413757	0	/var/www/i3geo/classesjs/i3geo5.js
-/var/www/i3geo/testamapfile.php	1417813178	0	/var/www/i3geo/testamapfile.php
-/var/www/i3geo/classesjs/classe_editorgm.js	1417812915	0	i3GEO.editorGM
-/var/www/i3geo/ajuda_usuario.php	1403143370	1	Lista de funcionalidades
-/var/www/i3geo/mashups/openlayers.js	1399311524	0	/var/www/i3geo/mashups/openlayers.js
-/var/www/i3geo/classesjs/classe_arvoredecamadas.js	1417963698	1	&Aacute;rvore de camadas
-/var/www/i3geo/classesjs/classe_janela.js	1417899222	1	Janelas
-/var/www/i3geo/classesjs/geradordelinks.js	1417812915	0	i3geo_gl_configura
-/var/www/i3geo/classesjs/compactajs.php	1414430315	0	/var/www/i3geo/classesjs/compactajs.php
-/var/www/i3geo/mashups/openlayers.js.php	1399311524	0	/var/www/i3geo/mashups/openlayers.js.php
-/var/www/i3geo/classesjs/classe_login.js	1417812915	1	Controle de usu&aacute;rio
-/var/www/i3geo/symbols/colourramp/geradat.php	1399311543	0	/var/www/i3geo/symbols/colourramp/geradat.php
-/var/www/i3geo/init/remover.php	1399311565	0	/var/www/i3geo/init/remover.php
-/var/www/i3geo/classesjs/classe_arvoredetemas.js	1417812915	1	&Aacute;rvore de temas
-/var/www/i3geo/classesjs/classe_gadgets.js	1417899424	1	Gadgets (objetos marginais do mapa)
-/var/www/i3geo/classesjs/classe_configura.js	1417916105	1	Configura&ccedil;&otilde;es gerais
-/var/www/i3geo/mashups/teste.txt	1417964968	0	/var/www/i3geo/mashups/teste.txt
-/var/www/i3geo/symbols/testepalete.txt	1399311543	0	/var/www/i3geo/symbols/testepalete.txt
-/var/www/i3geo/exemplos/googlemaps_calor.phtml	1403445057	0	/var/www/i3geo/exemplos/googlemaps_calor.phtml
-/var/www/i3geo/kml.php	1409602357	1	Cat&aacute;logo de temas em KML
-/var/www/i3geo/temas/_wtestephp.php	1399311524	0	/var/www/i3geo/temas/_wtestephp.php
-/var/www/i3geo/classesjs/dicionario.js	1415121208	0	/var/www/i3geo/classesjs/dicionario.js
-/var/www/i3geo/classesjs/classe_selecao.js	1411413757	0	/var/www/i3geo/classesjs/classe_selecao.js
-/var/www/i3geo/classesjs/dicionario_ajuda.js	1416185236	0	/var/www/i3geo/classesjs/dicionario_ajuda.js
-/var/www/i3geo/fontetema.php	1399311566	0	fontetema.php
-/var/www/i3geo/classesjs/atlas.js	1411413757	0	/var/www/i3geo/classesjs/atlas.js
-/var/www/i3geo/classesjs/classe_marcador.js	1417902508	1	Marcador
-/var/www/i3geo/interface/googlemapsdebug.phtml	1415019372	0	/var/www/i3geo/interface/googlemapsdebug.phtml
-/var/www/i3geo/exemplos/codemirror.php	1411414864	0	/var/www/i3geo/exemplos/codemirror.php
-/var/www/i3geo/ogc.php	1416848207	1	Gerador de servi&ccedil;os OGC
-/var/www/i3geo/classesjs/classe_calculo.js	1417812915	1	C&aacute;lculos
-/var/www/i3geo/classesjs/i3geonaocompacto.js	1415069605	0	/var/www/i3geo/classesjs/i3geonaocompacto.js
-/var/www/i3geo/classesjs/classe_editorol.js	1417812915	1	Editor vetorial para OpenLayers
-/var/www/i3geo/interface/ol_parametros.php	1412971956	0	/var/www/i3geo/interface/ol_parametros.php
-/var/www/i3geo/exemplos/farmaciaspopulares.js	1403488817	0	/var/www/i3geo/exemplos/farmaciaspopulares.js
-/var/www/i3geo/interface/googleearthdebug.phtml	1410665306	0	/var/www/i3geo/interface/googleearthdebug.phtml
-/var/www/i3geo/classesjs/i3geo_tudo_compacto5.js.php	1411413757	0	/var/www/i3geo/classesjs/i3geo_tudo_compacto5.js.php
-/var/www/i3geo/classesjs/classe_navega.js	1417918267	1	Navega&ccedil;&atilde;o sobre o mapa
-/var/www/i3geo/interface/black_gm.phtml	1415019609	0	/var/www/i3geo/interface/black_gm.phtml
-/var/www/i3geo/exemplos/atlas/i3geo.js	1408326416	0	/var/www/i3geo/exemplos/atlas/i3geo.js
-/var/www/i3geo/classesjs/classe_i3geo.js	1417812915	1	i3Geo
-/var/www/i3geo/classesjs/classe_desenho.js	1417899335	1	Desenho
-/var/www/i3geo/mashups/openlayers_compacto.js.php	1417964970	0	/var/www/i3geo/mashups/openlayers_compacto.js.php
-/var/www/i3geo/temas/_ltestephp.php	1399311524	0	/var/www/i3geo/temas/_ltestephp.php
-/var/www/i3geo/exemplos/executafuncao.php	1399311506	0	/var/www/i3geo/exemplos/executafuncao.php
-/var/www/i3geo/classesjs/i3geo_tudo_compacto5.js	1411413757	0	/var/www/i3geo/classesjs/i3geo_tudo_compacto5.js
-/var/www/i3geo/symbols/fontes.txt	1399311545	0	/var/www/i3geo/symbols/fontes.txt
-/var/www/i3geo/classesjs/classe_mapa.js	1417900393	1	Mapa
-/var/www/i3geo/classesjs/classe_barradebotoes.js	1417812915	1	Barra de bot&otilde;es
-/var/www/i3geo/licenca.txt	1399311566	0	/var/www/i3geo/licenca.txt
-/var/www/i3geo/mashups/openlayers_ajuda.php	1399311524	0	/var/www/i3geo/mashups/openlayers_ajuda.php
-/var/www/i3geo/ms_criamapa.php	1416848207	1	Inicializa o i3Geo via URL ms_criamapa.php
-/var/www/i3geo/classesjs/classe_plugini3geo.js	1417961609	1	PluginI3Geo
-/var/www/i3geo/leiame.txt	1399311566	0	/var/www/i3geo/leiame.txt
-/var/www/i3geo/mashups/openlayers_compacto.js	1417964970	0	/var/www/i3geo/mashups/openlayers_compacto.js
-/var/www/i3geo/classesjs/classe_social.js	1417961443	1	Social
-/var/www/i3geo/classesjs/classe_eventos.js	1417916086	1	Eventos
-/var/www/i3geo/mashups/openlayers.php	1410805386	0	/var/www/i3geo/mashups/openlayers.php
-/var/www/i3geo/classesjs/i3geo6.js	1414786479	0	/var/www/i3geo/classesjs/i3geo6.js
-/var/www/i3geo/interface/googleearth.phtml	1410665298	0	/var/www/i3geo/interface/googleearth.phtml
-/var/www/i3geo/classesjs/classe_analise.js	1417812915	1	An&aacute;lise geogr&aacute;fica
-/var/www/i3geo/classesjs/classe_coordenadas.js	1417812915	1	Coordenadas
-/var/www/i3geo/classesjs/classe_ajuda.js	1417812915	1	Ajuda
-/var/www/i3geo/testainstal.php	1412110691	0	/var/www/i3geo/testainstal.php
-/var/www/i3geo/classesjs/classe_idioma.js	1417812915	1	Idioma
-/var/www/i3geo/mashups/openlayers_compacto.css.php	1417964970	0	/var/www/i3geo/mashups/openlayers_compacto.css.php
-/var/www/i3geo/classesjs/classe_util.js	1417965166	1	Utilit&aacute;rios
-/var/www/i3geo/classesjs/classe_tema.js	1417962356	1	Temas
-/var/www/i3geo/classesjs/classe_php.js	1417920120	1	PHP
-/var/www/i3geo/exemplos/atlas/leiame.txt	1399311506	0	/var/www/i3geo/exemplos/atlas/leiame.txt
-/var/www/i3geo/interface/googlemaps_noite.phtml	1415019433	0	/var/www/i3geo/interface/googlemaps_noite.phtml
-/var/www/i3geo/exemplos/googlemapscomogc.php	1399311506	0	/var/www/i3geo/exemplos/googlemapscomogc.php
-/var/www/i3geo/classesjs/classe_maparef.js	1417918083	1	Mapa de refer&ecirc;ncia
-/var/www/i3geo/classesjs/i3geo_tudo_compacto6.js.php	1417964970	0	/var/www/i3geo/classesjs/i3geo_tudo_compacto6.js.php
-/var/www/i3geo/init/index.php	1416703886	0	/var/www/i3geo/init/index.php
-/var/www/i3geo/classesjs/datadownload.js	1416662441	0	/var/www/i3geo/classesjs/datadownload.js
-/var/www/i3geo/exemplos/login3.php	1399311506	0	/var/www/i3geo/exemplos/login3.php
-/var/www/i3geo/versao.php	1399311537	0	/var/www/i3geo/versao.php
-/var/www/i3geo/mashups/osm.php	1407447018	0	/var/www/i3geo/mashups/osm.php
-/var/www/i3geo/geraminiatura.php	1399311524	1	Gerador de miniaturas (thumbnails)
-/var/www/i3geo/ms_configura.php	1416848207	1	Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php
+/var/www/i3geo/geraminiatura.php	1397121435	1	Gerador de miniaturas (thumbnails)
+/var/www/i3geo/classesjs/i3geo_tudo_compacto6.js.php	1418037996	0	/var/www/i3geo/classesjs/i3geo_tudo_compacto6.js.php
+/var/www/i3geo/classesjs/i3geo_tudo_compacto5.js.php	1399292827	0	/var/www/i3geo/classesjs/i3geo_tudo_compacto5.js.php
+/var/www/i3geo/symbols/testepalete.txt	1397121508	0	/var/www/i3geo/symbols/testepalete.txt
+/var/www/i3geo/classesjs/i3geo.js	1416782118	0	/var/www/i3geo/classesjs/i3geo.js
+/var/www/i3geo/classesjs/classe_tema.js	1418035986	1	Temas
+/var/www/i3geo/classesjs/geradordelinks.js	1417614331	0	i3geo_gl_configura
+/var/www/i3geo/init/remover.php	1397121576	0	/var/www/i3geo/init/remover.php
+/var/www/i3geo/exemplos/googlemapssanfona.phtml	1397121408	0	/var/www/i3geo/exemplos/googlemapssanfona.phtml
+/var/www/i3geo/temas/_wtestephp.php	1397121435	0	/var/www/i3geo/temas/_wtestephp.php
+/var/www/i3geo/classesjs/i3geo6.js	1414676482	0	/var/www/i3geo/classesjs/i3geo6.js
+/var/www/i3geo/classesjs/classe_i3geo.js	1417612414	1	i3Geo
+/var/www/i3geo/leiame.txt	1397121585	0	/var/www/i3geo/leiame.txt
+/var/www/i3geo/classesjs/classe_editorgm.js	1417614377	0	i3GEO.editorGM
+/var/www/i3geo/mashups/openlayers.php	1410793888	0	/var/www/i3geo/mashups/openlayers.php
+/var/www/i3geo/classesjs/classe_social.js	1418035986	1	Social
+/var/www/i3geo/exemplos/googlemaps_calor.phtml	1403268092	0	/var/www/i3geo/exemplos/googlemaps_calor.phtml
+/var/www/i3geo/mashups/teste.txt	1418037992	0	/var/www/i3geo/mashups/teste.txt
+/var/www/i3geo/classesjs/classe_marcador.js	1418035986	1	Marcador
+/var/www/i3geo/versao.php	1397121457	0	/var/www/i3geo/versao.php
+/var/www/i3geo/exemplos/vindegm.phtml	1415617302	0	/var/www/i3geo/exemplos/vindegm.phtml
+/var/www/i3geo/classesjs/redesenho.js	1397121406	0	/var/www/i3geo/classesjs/redesenho.js
+/var/www/i3geo/classesjs/compactajs.php	1414417387	0	/var/www/i3geo/classesjs/compactajs.php
+/var/www/i3geo/mashups/openlayers_compacto.css.php	1418037997	0	/var/www/i3geo/mashups/openlayers_compacto.css.php
+/var/www/i3geo/mashups/openlayers.js.php	1397121435	0	/var/www/i3geo/mashups/openlayers.js.php
+/var/www/i3geo/mashups/openlayers_ajuda.php	1397121435	0	/var/www/i3geo/mashups/openlayers_ajuda.php
+/var/www/i3geo/interface/googlemaps_noite.phtml	1415102709	0	/var/www/i3geo/interface/googlemaps_noite.phtml
+/var/www/i3geo/interface/googleearth.phtml	1410781450	0	/var/www/i3geo/interface/googleearth.phtml
+/var/www/i3geo/exemplos/atlas/leiame.txt	1397121408	0	/var/www/i3geo/exemplos/atlas/leiame.txt
+/var/www/i3geo/classesjs/i3geonaocompacto.js	1414417305	0	/var/www/i3geo/classesjs/i3geonaocompacto.js
+/var/www/i3geo/guia_de_migracao.txt	1416835751	0	/var/www/i3geo/guia_de_migracao.txt
+/var/www/i3geo/symbols/colourramp/geradat.php	1397121508	0	/var/www/i3geo/symbols/colourramp/geradat.php
+/var/www/i3geo/exemplos/farmaciaspopulares.js	1403266018	0	/var/www/i3geo/exemplos/farmaciaspopulares.js
+/var/www/i3geo/classesjs/atlas.js	1402649187	0	/var/www/i3geo/classesjs/atlas.js
+/var/www/i3geo/classesjs/classe_coordenadas.js	1417605355	1	Coordenadas
+/var/www/i3geo/ajuda_usuario.php	1403120936	1	Lista de funcionalidades
+/var/www/i3geo/classesjs/classe_arvoredecamadas.js	1418035986	1	&Aacute;rvore de camadas
+/var/www/i3geo/classesjs/classe_selecao.js	1400693999	0	/var/www/i3geo/classesjs/classe_selecao.js
+/var/www/i3geo/classesjs/classe_eventos.js	1418035986	1	Eventos
+/var/www/i3geo/classesjs/classe_maparef.js	1418036534	1	Mapa de refer&ecirc;ncia
+/var/www/i3geo/exemplos/googlemapscomogc.php	1397121408	0	/var/www/i3geo/exemplos/googlemapscomogc.php
+/var/www/i3geo/classesjs/classe_arvoredetemas.js	1417605278	1	&Aacute;rvore de temas
+/var/www/i3geo/init/index.php	1410264085	0	/var/www/i3geo/init/index.php
+/var/www/i3geo/classesjs/classe_guias.js	1417610917	1	Guias
+/var/www/i3geo/testainstal.php	1412166037	0	/var/www/i3geo/testainstal.php
+/var/www/i3geo/classesjs/dicionario.js	1415103207	0	/var/www/i3geo/classesjs/dicionario.js
+/var/www/i3geo/classesjs/classe_interface.js	1417786577	1	Interface
+/var/www/i3geo/interface/ol_parametros.php	1410781450	0	/var/www/i3geo/interface/ol_parametros.php
+/var/www/i3geo/kml.php	1409574746	1	Cat&aacute;logo de temas em KML
+/var/www/i3geo/classesjs/datadownload.js	1416782118	0	/var/www/i3geo/classesjs/datadownload.js
+/var/www/i3geo/interface/black_gm.phtml	1415102709	0	/var/www/i3geo/interface/black_gm.phtml
+/var/www/i3geo/ms_criamapa.php	1416788267	1	Inicializa o i3Geo via URL ms_criamapa.php
+/var/www/i3geo/classesjs/classe_mapa.js	1418036472	1	Mapa
+/var/www/i3geo/mashups/openlayers.js	1399292828	0	/var/www/i3geo/mashups/openlayers.js
+/var/www/i3geo/classesjs/classe_plugini3geo.js	1418037973	1	PluginI3Geo
+/var/www/i3geo/mashups/osm.php	1407501752	0	/var/www/i3geo/mashups/osm.php
+/var/www/i3geo/ogc.php	1416788176	1	Gerador de servi&ccedil;os OGC
+/var/www/i3geo/interface/black_editor.php	1415102709	0	/var/www/i3geo/interface/black_editor.php
+/var/www/i3geo/classesjs/teste.txt	1418037992	0	/var/www/i3geo/classesjs/teste.txt
+/var/www/i3geo/mashups/openlayers_compacto.js	1418037997	0	/var/www/i3geo/mashups/openlayers_compacto.js
+/var/www/i3geo/testamapfile.php	1418035988	0	/var/www/i3geo/testamapfile.php
+/var/www/i3geo/classesjs/i3geo_tudo_compacto6.js	1418037996	0	/var/www/i3geo/classesjs/i3geo_tudo_compacto6.js
+/var/www/i3geo/mashups/openlayers_compacto.js.php	1418037997	0	/var/www/i3geo/mashups/openlayers_compacto.js.php
+/var/www/i3geo/classesjs/classe_gadgets.js	1418035986	1	Gadgets (objetos marginais do mapa)
+/var/www/i3geo/classesjs/i3geo_tudo_compacto5.js	1399292826	0	/var/www/i3geo/classesjs/i3geo_tudo_compacto5.js
+/var/www/i3geo/fontetema.php	1397121585	0	fontetema.php
+/var/www/i3geo/classesjs/classe_calculo.js	1417605428	1	C&aacute;lculos
+/var/www/i3geo/classesjs/classe_login.js	1417605837	1	Controle de usu&aacute;rio
+/var/www/i3geo/ms_registraip.php	1397121523	0	/var/www/i3geo/ms_registraip.php
+/var/www/i3geo/exemplos/login3.php	1397121408	0	/var/www/i3geo/exemplos/login3.php
+/var/www/i3geo/classesjs/wscliente.js	1416782118	0	/var/www/i3geo/classesjs/wscliente.js
+/var/www/i3geo/exemplos/codemirror.php	1411474951	0	/var/www/i3geo/exemplos/codemirror.php
+/var/www/i3geo/exemplos/executafuncao.php	1397121408	0	/var/www/i3geo/exemplos/executafuncao.php
+/var/www/i3geo/ms_configura.php	1416837328	1	Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php
+/var/www/i3geo/classesjs/classe_ajuda.js	1417605504	1	Ajuda
+/var/www/i3geo/classesjs/classe_editorol.js	1417528883	1	Editor vetorial para OpenLayers
+/var/www/i3geo/classesjs/dicionario_ajuda.js	1418036801	0	/var/www/i3geo/classesjs/dicionario_ajuda.js
+/var/www/i3geo/temas/_ltestephp.php	1397121435	0	/var/www/i3geo/temas/_ltestephp.php
+/var/www/i3geo/classesjs/classe_util.js	1418035986	1	Utilit&aacute;rios
+/var/www/i3geo/symbols/fontes.txt	1397121511	0	/var/www/i3geo/symbols/fontes.txt
+/var/www/i3geo/interface/googlemapsdebug.phtml	1415102709	0	/var/www/i3geo/interface/googlemapsdebug.phtml
+/var/www/i3geo/classesjs/classe_barradebotoes.js	1417605480	1	Barra de bot&otilde;es
+/var/www/i3geo/interface/googleearthdebug.phtml	1410781450	0	/var/www/i3geo/interface/googleearthdebug.phtml
+/var/www/i3geo/classesjs/classe_idioma.js	1417699488	1	Idioma
+/var/www/i3geo/exemplos/atlas/i3geo.js	1408450277	0	/var/www/i3geo/exemplos/atlas/i3geo.js
+/var/www/i3geo/classesjs/classe_configura.js	1418035986	1	Configura&ccedil;&otilde;es gerais
+/var/www/i3geo/classesjs/i3geo5.js	1399292827	0	/var/www/i3geo/classesjs/i3geo5.js
+/var/www/i3geo/licenca.txt	1397121585	0	/var/www/i3geo/licenca.txt
+/var/www/i3geo/classesjs/classe_navega.js	1418035986	1	Navega&ccedil;&atilde;o sobre o mapa
+/var/www/i3geo/classesjs/classe_janela.js	1418035986	1	Janelas
+/var/www/i3geo/classesjs/classe_analise.js	1417605556	1	An&aacute;lise geogr&aacute;fica
+/var/www/i3geo/classesjs/classe_php.js	1418035986	1	PHP
+/var/www/i3geo/temas/teste.txt	1416788312	0	/var/www/i3geo/temas/teste.txt
+/var/www/i3geo/init/dicionario.js	1404906689	0	/var/www/i3geo/init/dicionario.js
+/var/www/i3geo/classesjs/classe_desenho.js	1418035986	1	Desenho
