@@ -659,7 +659,6 @@ i3GEO.editorGM = {
 				return;
 			}
 		},
-		//TODO atualizar com a nova ferramenta wkt2layer
 		/**
 		 * Salva um poligono no banco de dados
 		 */
@@ -670,7 +669,11 @@ i3GEO.editorGM = {
 			 */
 			inicia: function(){
 				if(i3GEO.login.verificaCookieLogin() === false){
-					i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
+					i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar a op&ccedil;&atilde;o de salvar no banco de dados");
+					if(i3GEO.editorGM.selectedShapes().length > 0){
+						var temp = i3GEO.editorGM.toWKT(i3GEO.editorGM.selectedShapes()[0]);
+						i3GEO.mapa.dialogo.wkt2layer(temp);
+					}
 					return;
 				}
 				var s = i3GEO.editorGM.selectedShapes(),
