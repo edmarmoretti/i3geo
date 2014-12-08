@@ -5,9 +5,9 @@
  * normalmente dados vetoriais processados no navegador Web.
  *
  * Namespace:
- * 
+ *
  * i3GEO.pluginI3geo
- * 
+ *
  * Veja:
  *
  * <http://localhost/i3geo/classesjs/classe_plugini3geo.js>
@@ -1020,12 +1020,10 @@ i3GEO.pluginI3geo =
 		 * '{"plugin":"parametrossql","parametros":{[{"titulo":"","tipo":"input|select","valores":[],"chave":""}]}}'
 		 *
 		 */
-		//TODO permitir que uma mesma camada seja adicionada ao mapa mais de uma vez
 		parametrossql : {
 			linkAjuda : function() {
-				// TODO
 				return i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=3&idajuda=121";
+					+ "/ajuda_usuario.php?idcategoria=3&idajuda=127";
 			},
 			formAdmin : function(config) {
 				var n, i, parametros, ins = "", configDefault =

@@ -554,7 +554,7 @@ i3GEO.Interface = {
 		// {i3GEO.barraDeBotoes.recria("i3geo_barra2");}
 	},
 	/**
-	 * Section: OpenLayers
+	 * Section: i3GEO.Interface.OpenLayers
 	 *
 	 * Interface com motor de navega&ccedil;&atilde;o baseado na API OpenLayers
 	 *
@@ -2015,7 +2015,7 @@ i3GEO.Interface = {
 		}
 	},
 	/**
-	 * Section: Googlemaps
+	 * Section: i3GEO.Interface.Googlemaps
 	 *
 	 * Interface com motor de navega&ccedil;&atilde;o baseado na API Google Maps
 	 *
@@ -3210,7 +3210,7 @@ i3GEO.Interface = {
 		}
 	},
 	/**
-	 * Section: GoogleEarth
+	 * Section: i3GEO.Interface.GoogleEarth
 	 *
 	 * Interface com motor de navega&ccedil;&atilde;o baseado na API Google Earth
 	 *

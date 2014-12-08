@@ -1059,6 +1059,14 @@ g_traducao_ajuda = {
 			pt:"Plugin que permite configurar um mapfile contendo um layer cujos dados ser&atilde;o inseridos no mapa como uma camada em KML. O KML deve ser fornecido como uma url, podendo estar em qualquer servidor, local ou externo.",
 			complemento:"",
 			apijs:""
+		},
+		"127": {
+			titulo: "Layer parametrizado (plugin)",
+			diretorio:"i3geo/classesjs/classe_plugin.js",
+			categoria:"4",
+			pt:"Esse plugin permite que o item DATA, que define a fonte dos dados, seja parametrizado, utilizando-se palavras chave de substitui&ccedil;&atilde;o. Ao adicionar a camada ao mapa, um formul&aacute;rio &eacute; criado de forma autom&aacute;tica para que o usu&aacute;rio escolha os par&acirc;metros que ir&atilde;o definir a origem dos dados.",
+			complemento:"",
+			apijs:""
 		}
 	}
 };

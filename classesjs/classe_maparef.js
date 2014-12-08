@@ -1,32 +1,32 @@
 /**
  * Title: Mapa de refer&ecirc;ncia
- * 
+ *
  * Cria e processa o mapa de refer&ecirc;ncia
- * 
+ *
  * Namespace:
- * 
+ *
  * i3GEO.maparef
- * 
+ *
  * Exemplo:
- * 
+ *
  * i3Geo.maparef.inicia()
- * 
+ *
  * Veja:
  *
  * <http://localhost/i3geo/classesjs/classe_maparef.js>
  */
 /**
  * Licen&ccedil;a
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -40,135 +40,135 @@ i3GEO.maparef =
 	{
 		/**
 		 * Propriedade: fatorZoomDinamico
-		 * 
+		 *
 		 * Define o fator de zoom inicial do mapa de refer&ecirc;ncia quando o modo dinamico for ativado
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {numeric}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * -3
 		 */
 		fatorZoomDinamico : -3,
 		/**
 		 * Propriedade: SELETORTIPO
-		 * 
+		 *
 		 * Inclui ou n&atilde;o o seletor de tipo de mapa de refer&ecirc;ncia
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {Boolean}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * true
 		 */
 		SELETORTIPO : true,
 		/**
 		 * Propriedade: VALORSELETORTIPO
-		 * 
+		 *
 		 * Valor inicial do seletor de tipo. Permite definir qual o tipo de mapa de referencia
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {string}
-		 * 
+		 *
 		 * Valores:
-		 * 
+		 *
 		 * {mapa|dinamico}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * dinamico
 		 */
 		VALORSELETORTIPO : "mapa",
 		/**
 		 * Propriedade: PERMITEFECHAR
-		 * 
+		 *
 		 * Mostra o bot&atilde;o para fechar a janela ou n&atilde;o.
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {boolean}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * true
 		 */
 		PERMITEFECHAR : true,
 		/**
 		 * Propriedade: PERMITEDESLOCAR
-		 * 
+		 *
 		 * Permite deslocar janela ou n&atilde;o.
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {boolean}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * true
 		 */
 		PERMITEDESLOCAR : true,
 		/**
 		 * Propriedade: TRANSICAOSUAVE
-		 * 
+		 *
 		 * Altera a transpar&ecirc;ncia quando o mouse sobrep&otilde;e ao mapa de refer&ecirc;ncia e quando sai
-		 * 
+		 *
 		 * Essa op&ccedil;&atilde;o como true n&atilde;o funciona bem no IE
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {boolean}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * false
 		 */
 		TRANSICAOSUAVE : false,
 		/**
 		 * Propriedade: OPACIDADE
-		 * 
+		 *
 		 * Valor da transpar&ecirc;ncia m&iacute;nima utilizada quando TRANSICAOSUAVE for igual a true.
-		 * 
+		 *
 		 * Varia de 0 a 100
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {numeric}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * 65
 		 */
 		OPACIDADE : 65,
 		/**
 		 * Propriedade: TOP
-		 * 
+		 *
 		 * Posi&ccedil;&atilde;o da janela em rela&ccedil;&atilde;o ao topo do mapa
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {Numeric}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * 4
 		 */
 		TOP : 4,
 		/**
 		 * Propriedade: RIGHT
-		 * 
+		 *
 		 * Posi&ccedil;&atilde;o da janela em rela&ccedil;&atilde;o ao lado direito do mapa
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {Numeric}
-		 * 
+		 *
 		 * Defaul:
-		 * 
+		 *
 		 * 50
 		 */
 		RIGHT : 50,
@@ -189,7 +189,7 @@ i3GEO.maparef =
 		},
 		/**
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicializa o mapa de refer&ecirc;ncia
 		 */
 		inicia : function() {
@@ -323,16 +323,16 @@ i3GEO.maparef =
 		},
 		/**
 		 * Function: atualiza
-		 * 
+		 *
 		 * Atualiza o mapa de refer&ecirc;ncia.
-		 * 
+		 *
 		 * Se o modo cgi estiver ativado, o mapa de refer&ecirc;ncia &eacute; desenhado utilizando-se como src da imagem o programa cgi do
 		 * Mapserver.
-		 * 
+		 *
 		 * No modo dinamico, a imagem &eacute; gerada de forma diferenciada. Nesse caso, o modo cgi &eacute; desabilitado.
-		 * 
+		 *
 		 * O atualizaReferencia &eacute; sempre chamado ap&oacute;s o mapa ser redesenhado.
-		 * 
+		 *
 		 * Se houve altera&ccedil;&atilde;o na extens&atilde;o, &eacute; preciso refazer o mapa de refer&ecirc;ncia se n&atilde;o, a imagem
 		 * atual &eacute; armazenada no quado de anima&ccedil;&atilde;o
 		 */
@@ -343,7 +343,7 @@ i3GEO.maparef =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.maparef.atualiza()");
 
-			var tiporef, temp, re;
+			var tiporef, temp;
 			temp = $i("refDinamico") ? tiporef = $i("refDinamico").value : tiporef = "fixo";
 			if ($i("mapaReferencia")) {
 				temp = $i("maparefmaismenosZoom");
@@ -375,11 +375,11 @@ i3GEO.maparef =
 		},
 		/**
 		 * Substitu&iacute; a imagem do mapa de refer&ecirc;ncia pela &uacute;ltima gerada.
-		 * 
+		 *
 		 * Esta fun&ccedil;&atilde;o processa os dados de uma chamada AJAX para atualizar o mapa de refer&ecirc;ncia
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * retorno - string no formato "var refimagem='nome da imagem'".
 		 */
 		processaImagem : function(retorno) {
@@ -414,9 +414,9 @@ i3GEO.maparef =
 		},
 		/**
 		 * Atualiza o tamanho e a posi&ccedil;&atilde;o do box que indica a extens&atilde;o geogr&aacute;fica do mapa atual
-		 * 
+		 *
 		 * O box &eacute; um div com id = "boxref".
-		 * 
+		 *
 		 */
 		atualizaBox : function() {
 			var box = i3GEO.maparef.criaBox(), w;
