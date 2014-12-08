@@ -675,6 +675,7 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 			return false;
 		}
 	}
+	//TODO verificar a acentuacao das palavras nessa funcao
 	function removeAcentos($s)
 	{
 		$s = ereg_replace("[&aacute;à&acirc;&atilde;]","a",$s);

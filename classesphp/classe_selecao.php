@@ -790,7 +790,7 @@ Exporta elementos selecionados de um tema em shape file e adiciona no mapa atual
 parameters:
 $locaplic - localiza&ccedil;&atilde;o do I3geo
 
-$dir_tmp - localiza&ccedil;&atilde;o do diret�rio tempor&aacute;rio
+$dir_tmp - localiza&ccedil;&atilde;o do diret&oacute;rio tempor&aacute;rio
 */
 	function selecao2tema($locaplic,$dir_tmp)
 	{

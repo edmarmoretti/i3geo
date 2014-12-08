@@ -1794,8 +1794,17 @@ i3GEO.barraDeBotoes =
 			YAHOO.util.Dom.setStyle("divMensagemBarraDeBotoes", "display", "none");
 		}
 	},
-	//TODO falta documentar
+	/**
+	 * Section: i3GEO.barraDeBotoes.editor
+	 *
+	 * Editor vetorial
+	 */
 	editor : {
+		/**
+		 * Function: inicia
+		 *
+		 * Abre as op&ccedil;&otilde;es do editor conforme a interface em uso
+		 */
 		inicia : function() {
 			i3GEO.eventos.cliquePerm.desativa();
 			i3GEO.barraDeBotoes.editor[i3GEO.Interface.ATUAL].inicia("janelaEditorVetorial");
@@ -1936,4 +1945,3 @@ i3GEO.barraDeBotoes =
 		}
 	}
 };
-//YAHOO.log("carregou classe barradebotoes", "Classes i3geo");

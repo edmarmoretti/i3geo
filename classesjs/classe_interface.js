@@ -2510,9 +2510,6 @@ i3GEO.Interface = {
 					ret[3], ret[2]);
 				i3GeoMap.fitBounds(new google.maps.LatLngBounds(
 					sw, ne));
-				// FIXME Isso provoca um loop infinito e trava
-				// i3GeoMap.setZoom(i3GeoMap.getZoom()+1);
-
 				//
 				// carrega o javascript que permite fazer o zoom por box
 				//
@@ -2585,6 +2582,18 @@ i3GEO.Interface = {
 					}
 				}
 				i3GEO.configura.iniciaFerramentas.executa();
+				//ajusta a extensao geografica do mapa
+				google.maps.event.addListenerOnce(
+					i3GeoMap,
+					'idle',
+					function() {
+						var z = i3GeoMap.getZoom();
+						if (z != undefined) {
+							i3GeoMap.setZoom(parseInt(
+								z,
+								10) + 1);
+						}
+					});
 			};
 			i3GEO.php.googlemaps(montaMapa);
 		},

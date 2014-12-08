@@ -339,7 +339,6 @@ i3GEO.analise =
 		 * resultado da medida, o &iacute;cone que segue o mouse &eacute; alterado. Para mostrar o resultado do c&aacute;lculo, &eacute;
 		 * incluido um div espec&iacute;fico.
 		 */
-		// TODO converter em ferramenta?
 		medeDistancia : {
 			/**
 			 * Armazena os pontos clicados para realizar os calculos

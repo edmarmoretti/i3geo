@@ -429,14 +429,6 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		panel.div.style.top="-298px";
 		var zb = new OpenLayers.Control.PanZoomBar();
 		$i3geo_gl.OL.addControl(zb);
-		/*
-		$i("OpenLayers_Control_PanZoom_pandown").style.display="none"
-		$i("OpenLayers_Control_PanZoom_panup").style.display="none"
-		$i("OpenLayers_Control_PanZoom_panleft").style.display="none"
-		$i("OpenLayers_Control_PanZoom_panright").style.display="none"
-		*/
-		//TODO remover a barra
-		//$i("OpenLayers.Control.NavToolbar_36").style.display="none";
 		zb.div.style.left="0px";
 		$i3geo_gl.OL.capturageo = function()
 		{
@@ -447,12 +439,6 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 			$i("i3geo_gl_ymax").value = b.top;
 			$i3geo_gl.crialink();
 		};
-		/*
-		$inputText("paiXmin","","i3geo_gl_xmin","","","")
-		$inputText("paiXmax","","i3geo_gl_xmax","","","")
-		$inputText("paiYmin","","i3geo_gl_ymin","","","")
-		$inputText("paiYmax","","i3geo_gl_ymax","","","")
-		*/
 	};
 }
 

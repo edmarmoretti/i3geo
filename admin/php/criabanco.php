@@ -121,7 +121,7 @@
 					echo "<br>Arquivo admin/admin.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise";
 				}
 				else{
-					//@TODO v5.0 criar um arquivo sqlite vazio apenas com as tabelas
+					//TODO verificar ao fechar versao - caso tenha havido alteracoes no banco, gerar banco vazio
 					copy("../admin_vazio.db","../admin.db");
 					chmod("../admin.db",0777);
 					if(file_exists("../admin.db")){
@@ -131,23 +131,6 @@
 					else{
 						echo "erro";
 					}
-					//@FIXME a criacao do banco nao funciona no PHP (Linux)
-					/*
-					if(function_exists("sqlite_open")){
-						$banco = sqlite_open("../admin.db",0666);
-						$banco = null;
-						$dbhw = new PDO('sqlite:../admin.db');
-					}
-					elseif(in_array("sqlite3",$exts)){
-						$banco = new SQLite3("../admin.db",SQLITE3_OPEN_CREATE);
-						echo $banco;exit;
-						$banco->close();
-						$dbhw = new PDO('sqlite:../admin.db');
-					}
-					if(!function_exists("sqlite_open") && !in_array("sqlite3",$exts)){
-						echo "<br>A fun&ccedil;&atilde;o de cria&ccedil;&atilde;o do banco sqlite n&atilde;o existe no PHP. Vc pode usar o arquivo i3geo/admin/adminvazio.db e renome&aacute;-lo para admin.db.";
-					}
-					*/
 				}
 			}
 			else{

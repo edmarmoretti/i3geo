@@ -342,7 +342,7 @@ function copiaSeguranca($map_file)
 /*
 Function: listaDiretorios
 
-Retorna lista de diret�rios.
+Retorna lista de diret&oacute;rios.
 
 parameters:
 
@@ -471,7 +471,7 @@ Function: listaTrueType
 
 Lista as fontes true type.
 
-L&ecirc; o arquivo fontes.txt existente no diret�rio symbols da instala&ccedil;&atilde;o do I3Geo.
+L&ecirc; o arquivo fontes.txt existente no diret&oacute;rio symbols da instala&ccedil;&atilde;o do I3Geo.
 O resultado &eacute; gravado em um arquivo tempor&aacute;rio para include, o que torna mais r&aacute;pida a carga futura.
 O arquivo para include armazena a vari&aacute;vel res que cont&eacute;m a lista de fontes separadas por v&iacute;rgula.
 
@@ -481,9 +481,9 @@ $cp {CAPAINT} - Objeto CPAINT.
 
 $locaplic {string} - Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o no servidor.
 
-$imgdir {string} - Diret�rio das imagens.
+$imgdir {string} - Diret&oacute;rio das imagens.
 
-$dir_tmp {string} - Diret�rio tempor&aacute;rio.
+$dir_tmp {string} - Diret&oacute;rio tempor&aacute;rio.
 
 Retorno:
 
@@ -1252,7 +1252,7 @@ $servico - Endere&ccedil;o do RSS.
 
 $map_file - Nome do arquivo map file. Inclua o caminho completo no servidor.
 
-$dir_tmp - Diret�rio onde o arquivo ser&aacute; criado.
+$dir_tmp - Diret&oacute;rio onde o arquivo ser&aacute; criado.
 
 $locaplic - Localiza&ccedil;&atilde;o do I3geo
 */
@@ -1385,9 +1385,9 @@ $tema {string} - Tema que ser&aacute; processado.
 
 $map_file {string} - Nome do arquivo map file. Inclua o caminho completo no servidor.
 
-$locaplic {string} - Diret�rio onde est&aacute; a aplica&ccedil;&atilde;o no servidor.
+$locaplic {string} - Diret&oacute;rio onde est&aacute; a aplica&ccedil;&atilde;o no servidor.
 
-$dir_tmp {string} - Diret�rio tempor&aacute;rio
+$dir_tmp {string} - Diret&oacute;rio tempor&aacute;rio
 
 $nomeRand {boleano} - Gera um nome randomico para o shapefile (TRUE) ou utiliza o nome do tema (FALSE)
 
@@ -1560,15 +1560,15 @@ $map_file {string} - Nome do arquivo map file. Inclua o caminho completo no serv
 
 $tema {string} - Tema que ser&aacute; processado.
 
-$locaplic {string} - Diret�rio da aplica&ccedil;&atilde;o.
+$locaplic {string} - Diret&oacute;rio da aplica&ccedil;&atilde;o.
 
-$dir_tmp {string} - Diret�rio tempor&aacute;rio
+$dir_tmp {string} - Diret&oacute;rio tempor&aacute;rio
 
 $postgis_mapa - variavel definida em ms_configura.php
 
 Retorno:
 
-{array} com o nome do diret�rio e nome do arquivo
+{array} com o nome do diret&oacute;rio e nome do arquivo
 
 Include:
 <ms_configura.php>
@@ -1624,7 +1624,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	}
 	//
 	//verifica se o tema existe no mapfile
-	//se n&atilde;o existir, tenta inserir com base no mapfile existente no diret�rio temas
+	//se n&atilde;o existir, tenta inserir com base no mapfile existente no diret&oacute;rio temas
 	//o tema pode existir se a fun&ccedil;&atilde;o estiver sendo chamada da &aacute;rvore de temas de um mapa j&aacute; aberto
 	//
 	$temasdir = $locaplic."/temas";

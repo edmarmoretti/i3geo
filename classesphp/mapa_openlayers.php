@@ -523,7 +523,7 @@ function ilegal(){
 function cortaImagemDisco($arquivo,$cortePixels,$tamanhoFinal=256){
 	$img = imagecreatefrompng($arquivo);
 	$imgc = imagecreatetruecolor($tamanhoFinal,$tamanhoFinal);
-	//@FIXME necessario, sem isso algumas imagens sao geradas de forma errada
+	//necessario, sem isso algumas imagens sao geradas de forma errada
 	imagesavealpha($imgc, true);
 	$color = imagecolorallocatealpha($imgc,0x00,0x00,0x00,127);
 	imagefill($imgc, 0, 0, $color);

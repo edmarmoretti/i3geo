@@ -64,7 +64,7 @@ class Analise
 	/*
 	 Variavel: $diretorio
 
-	Diret�rio do arquivo map_file
+	Diret&oacute;rio do arquivo map_file
 	*/
 	protected $diretorio;
 	/*
@@ -197,7 +197,7 @@ class Analise
 
 	$locaplic - Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o I3Geo
 
-	$dir_tmp - Diret�rio tempor&aacute;rio do mapserver
+	$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver
 
 	$R_path - Onde fica o R
 
@@ -359,7 +359,7 @@ class Analise
 
 	$dimy - Range em y no formato R c(-25,-23).
 
-	$dir_tmp - Diret�rio tempor&aacute;rio do mapserver.
+	$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver.
 
 	$R_path - Onde fica o R.
 
@@ -537,7 +537,7 @@ class Analise
 
 	$dimy - Range em y no formato R c(-25,-23).
 
-	$dir_tmp - Diret�rio tempor&aacute;rio do mapserver.
+	$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver.
 
 	$R_path - Onde fica o R.
 
@@ -596,7 +596,7 @@ class Analise
 
 	$dimy - Range em y no formato R c(-25,-23).
 
-	$dir_tmp - Diret�rio tempor&aacute;rio do mapserver.
+	$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver.
 
 	$R_path - Onde fica o R.
 
@@ -706,7 +706,7 @@ class Analise
 
 	$arqpt - Prefixo dos arquivos em disco com os pontos.
 
-	$dir_tmp - Diret�rio tempor&aacute;rio do mapserver.
+	$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver.
 
 	$R_path - Onde fica o R.
 
@@ -2495,9 +2495,9 @@ class Analise
 
 	$operacao {String} - opera&ccedil;&atilde;o suportada pelo Mapserver, por exemplo, union, intersects, etc. converteSHP ir&aacute; converter as geometrias em um tema e adicion&aacute;-lo ao mapa
 
-	$dir_tmp - Diret�rio tempor&aacute;rio do mapserver. Utilizado apenas se $operacao = "converteSHP"
+	$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver. Utilizado apenas se $operacao = "converteSHP"
 
-	$imgdir - Diret�rio das imagens do mapa atual. Utilizado apenas se $operacao = "converteSHP"
+	$imgdir - Diret&oacute;rio das imagens do mapa atual. Utilizado apenas se $operacao = "converteSHP"
 
 	Return:
 
@@ -2539,9 +2539,9 @@ class Analise
 	Fun&ccedil;&otilde;es de an&aacute;lise de geometrias da ferramenta Geometrias.
 
 	parameters:
-	$dir_tmp - Diret�rio tempor&aacute;rio do mapserver
+	$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver
 
-	$imgdir - Diret�rio das imagens do mapa atual
+	$imgdir - Diret&oacute;rio das imagens do mapa atual
 
 	$lista - String com a lista de nomes dos arquivos serializados que cont&eacute;m as geometrias
 
@@ -2611,9 +2611,9 @@ class Analise
 
 	parameters:
 
-	$dir_tmp - Diret�rio tempor&aacute;rio do mapserver
+	$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver
 
-	$imgdir - Diret�rio das imagens do mapa atual
+	$imgdir - Diret&oacute;rio das imagens do mapa atual
 
 	$lista - Arquivos com as geometrias
 

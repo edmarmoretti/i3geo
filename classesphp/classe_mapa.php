@@ -751,8 +751,8 @@ class Mapa
 
 	Lista os temas locais de um mapa.
 
-	Lista os temas existentes no mapfile atual, que utilizam como fonte de dados shape file, e que est&atilde;o armazenados no diret�rio tempor&aacute;rio do mapa.
-	Os arquivos shape file existentes no diret�rio tempor&aacute;rio do mapa s&atilde;o pass&iacute;veis de edi&ccedil;&atilde;o.
+	Lista os temas existentes no mapfile atual, que utilizam como fonte de dados shape file, e que est&atilde;o armazenados no diret&oacute;rio tempor&aacute;rio do mapa.
+	Os arquivos shape file existentes no diret&oacute;rio tempor&aacute;rio do mapa s&atilde;o pass&iacute;veis de edi&ccedil;&atilde;o.
 	Obs.: Toda vez que um tema local &eacute; criado pelo I3Geo, o METADATA "TEMALOCAL" &eacute; marcado como "sim".
 
 	Parameter:
@@ -1147,7 +1147,7 @@ class Mapa
 
 	Acrescenta um novo tema em um arquivo map file.
 
-	O tema deve estar inclu&iacute;do em um arquivo .map localizado no diret�rio "temas".
+	O tema deve estar inclu&iacute;do em um arquivo .map localizado no diret&oacute;rio "temas".
 	Ao ser adicionado, todos os layers do arquivo indicado ser&atilde;o acrescentados.
 	Os layers que formam grupos tamb&eacute;m s&atilde;o processados, tendo seus nomes alterados de acordo.
 	Cada novo layer receber&aacute; um novo nome, definido de forma aleat�ria.
@@ -1159,7 +1159,7 @@ class Mapa
 
 	$temas - string Lista separada por v&iacute;rgulas, dos arquivos que ser&atilde;o abertos para pegar os novos layers. N&atilde;o inclua a extens&atilde;o ".map".
 
-	$locaplic - string Diret�rio onde fica a aplica&ccedil;&atilde;o.
+	$locaplic - string Diret&oacute;rio onde fica a aplica&ccedil;&atilde;o.
 
 	$random - indica se os nomes dos novos layers ser&atilde;o modificados ou nao
 	*/
@@ -1348,7 +1348,7 @@ class Mapa
 
 	Exclui temas de um mapa.
 
-	O arquivo de sele&ccedil;&atilde;o (.qy) &eacute; apagado do diret�rio tempor&aacute;rio.
+	O arquivo de sele&ccedil;&atilde;o (.qy) &eacute; apagado do diret&oacute;rio tempor&aacute;rio.
 
 	Parameter:
 
@@ -1495,12 +1495,12 @@ class Mapa
 	$nome - Nome do tema para a legenda.
 	$proj - Lista das proje&ccedil;&otilde;es suportadas separadas por v&iacute;rgula.
 	$formato - Lista dos formatos de imagem separadas por v&iacute;rgula.
-	$locaplic - Diret�rio onde fica a aplica&ccedil;&atilde;o.
+	$locaplic - Diret&oacute;rio onde fica a aplica&ccedil;&atilde;o.
 	$tipo - Tipo de representa&ccedil;&atilde;o poligonal|linear|pontual.
 	$versao - Vers&atilde;o do getcapabilities
 	$nomecamada - nome da camada do WMS
-	$dir_tmp - diret�rio tempor&aacute;rio do I3Geo
-	$imgdir - diret�rio tempor&aacute;rio das imagens
+	$dir_tmp - diret&oacute;rio tempor&aacute;rio do I3Geo
+	$imgdir - diret&oacute;rio tempor&aacute;rio das imagens
 	$imgurl - url do imgdir
 	$tiporep - tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es do mapa. Quando definido, &eacute; criado um sld para ser aplicado ao layer. poligonal|linear|pontual
 	$suportasld - Suporta SLD sim|nao.
@@ -1648,7 +1648,7 @@ class Mapa
 
 	Transforma o mapa atual em um web service.
 
-	O novo map file &eacute; armazenado no mesmo diret�rio do map file original.
+	O novo map file &eacute; armazenado no mesmo diret&oacute;rio do map file original.
 
 	Parametros:
 
@@ -1701,7 +1701,7 @@ class Mapa
 
 	Transforma o mapa atual em um Web Map Context.
 
-	O novo map file &eacute; armazenado no mesmo diret�rio do map file original.
+	O novo map file &eacute; armazenado no mesmo diret&oacute;rio do map file original.
 
 	Parametros:
 
@@ -1791,7 +1791,7 @@ class Mapa
 	Parametros:
 
 	$servico - Endere&ccedil;o (url)  do GeoJson.
-	$dir_tmp - Diret�rio onde o arquivo ser&aacute; criado.
+	$dir_tmp - Diret&oacute;rio onde o arquivo ser&aacute; criado.
 	$locaplic - Localiza&ccedil;&atilde;o do I3geo
 
 	*/
@@ -1853,7 +1853,7 @@ class Mapa
 	Parametros:
 
 	$servico - Endere&ccedil;o (url) do RSS.
-	$dir_tmp - Diret�rio onde o arquivo ser&aacute; criado.
+	$dir_tmp - Diret&oacute;rio onde o arquivo ser&aacute; criado.
 	$locaplic - Localiza&ccedil;&atilde;o do I3geo
 	$canal - Identificador do canal (ordem em que est&aacute; no RSS)
 	*/

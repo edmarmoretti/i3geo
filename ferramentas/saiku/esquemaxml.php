@@ -92,9 +92,6 @@ $nivelDaDimensao = array();
 
 $dimRegioes = dimensoesGeo();
 
-//so funciona no php 5.5
-//TODO quem sabe usar isso um dia
-//$xmlRegioes = implode(" ",array_column($dimRegioes,"xml"));
 $xmlRegioes = array_map(function($element){return $element['xml'];}, $dimRegioes);
 $xmlRegioes = implode(" ",$xmlRegioes);
 

@@ -86,16 +86,16 @@ cp.call(p,"lente",ajaxabrelente)
 
 Vari&aacute;veis de Se&ccedil;&atilde;o:
 
-dir_tmp - diret�rio, no servidor, tempor&aacute;rio utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
+dir_tmp - diret&oacute;rio, no servidor, tempor&aacute;rio utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
 locmapserv - localiza&ccedil;&atilde;o, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
 locaplic - localiza&ccedil;&atilde;o, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
 R_path - localiza&ccedil;&atilde;o, no servidor, do execut&aacute;vel do pacote R, exemplo: c:/ms4w/apache/htdocs/i3geo/pacotes/r/win/bin/R.exe
 imgurl - url das imagens geradas pelo mapa, exemplo: http://localhost/ms_tmp/imgTVHbdijFMk/
-tmpurl - url do diret�rio tempor&aacute;rio, exemplo: http://localhost/ms_tmp/
+tmpurl - url do diret&oacute;rio tempor&aacute;rio, exemplo: http://localhost/ms_tmp/
 map_file - endere&ccedil;o, no servidor, do mapfile atual, exemplo: c:/ms4w/tmp/ms_tmp/TVHbdijFMk/TVHbdijFMk.map
 mapext - extens&atilde;o geogr&aacute;fica do mapa atual, exemplo: -76.5125927 -39.3925675209 -29.5851853 9.49014852081
 perfil - nome do perfil para controlar os temas que ser&atilde;o vis&iacute;veis na lista de temas.
-mapdir - localiza&ccedil;&atilde;o, no servidor, do diret�rio com o mapfile tempor&aacute;rio do mapa atual.
+mapdir - localiza&ccedil;&atilde;o, no servidor, do diret&oacute;rio com o mapfile tempor&aacute;rio do mapa atual.
 imgdir - localiza&ccedil;&atilde;o, no servidor, das imagens tempor&aacute;rias do mapa atual.
 debug - (pode ser definido como "sim" indica se o erro_reporting deve ser definido como E_ALL
 		contadorsalva - indica quantas vezes o mapa j&aacute; foi salvo. Permite que uma aplica&ccedil;&atilde;o verifique se o mapa foi alterado ou n&atilde;o.
@@ -179,7 +179,7 @@ if($funcao == "criaMapa"){
 	$d = "";
 	include_once(dirname(__FILE__)."/../ms_configura.php");
 	//
-	//&eacute; necess&aacute;rio mudar o diret�rio em fun&ccedil;&atilde;o dos includes que s&atilde;o feitos pelo ms_criamapa.php
+	//&eacute; necess&aacute;rio mudar o diret&oacute;rio em fun&ccedil;&atilde;o dos includes que s&atilde;o feitos pelo ms_criamapa.php
 	//
 	//chdir($locaplic);
 	$interfaceTemp = $interface;
@@ -196,7 +196,7 @@ if($funcao == "criaMapa"){
 }
 if (!isset($map_file))
 {
-	//nesse caso &eacute; necess&aacute;rio criar o diret�rio tempor&aacute;rio e iniciar o mapa
+	//nesse caso &eacute; necess&aacute;rio criar o diret&oacute;rio tempor&aacute;rio e iniciar o mapa
 	//$cp->set_data(array("erro"=>"linkquebrado"));
 	//$cp->return_data();
 	//cpjson(array("erro"=>"linkquebrado"));
@@ -381,7 +381,7 @@ switch (strtoupper($funcao))
 
 		Gera a lista de geometrias dispon&iacute;veis para o mapa atual.
 
-		As geometrias s&atilde;o armazenadas no diret�rio tempor&aacute;rio do usu&aacute;rio, utilizando um formato pr�prio do I3Geo.
+		As geometrias s&atilde;o armazenadas no diret&oacute;rio tempor&aacute;rio do usu&aacute;rio, utilizando um formato pr�prio do I3Geo.
 
 		<Temas->listaGeometrias>
 		*/
@@ -398,7 +398,7 @@ switch (strtoupper($funcao))
 
 		Gera um arquivo de geometrias, no formato I3Geo, para um tema, considerando os elementos selecionados.
 
-		As geometrias s&atilde;o armazenadas no diret�rio tempor&aacute;rio do usu&aacute;rio, utilizando um formato pr�prio do I3Geo.
+		As geometrias s&atilde;o armazenadas no diret&oacute;rio tempor&aacute;rio do usu&aacute;rio, utilizando um formato pr�prio do I3Geo.
 
 		<Temas->capturaGeometrias>
 		*/
@@ -606,7 +606,7 @@ switch (strtoupper($funcao))
 		/*
 		 Valor: LISTATEMASLOCAIS
 
-		Lista os temas existentes no diret�rio tempor&aacute;rio do mapa atual.
+		Lista os temas existentes no diret&oacute;rio tempor&aacute;rio do mapa atual.
 
 		<Mapa->listaTemasLocais>
 		*/
@@ -863,9 +863,9 @@ switch (strtoupper($funcao))
 		/*
 		 Valor: REMOVERGEOMETRIAS
 
-		Remove geometrias do diret�rio tempor&aacute;rio.
+		Remove geometrias do diret&oacute;rio tempor&aacute;rio.
 
-		As geometrias s&atilde;o armazenadas no diret�rio tempor&aacute;rio do usu&aacute;rio, utilizando um formato pr�prio do I3Geo.
+		As geometrias s&atilde;o armazenadas no diret&oacute;rio tempor&aacute;rio do usu&aacute;rio, utilizando um formato pr�prio do I3Geo.
 
 		<Temas->removerGeometrias>
 		*/
@@ -2270,7 +2270,7 @@ switch (strtoupper($funcao))
 
 		Depreciado na V 5.0, use ferramentas/navegarquivos/exec.php
 
-		Lista os diret�rios de um diret�rio.
+		Lista os diret&oacute;rios de um diret&oacute;rio.
 
 		*/
 	case "LISTADIRETORIOS":
@@ -2281,13 +2281,13 @@ switch (strtoupper($funcao))
 
 		Depreciado na V 5.0, use ferramentas/navegarquivos/exec.php
 
-		Lista os arquivos de um diret�rio.
+		Lista os arquivos de um diret&oacute;rio.
 		*/
 	case "LISTAARQUIVOS":
 		$retorno = listaArquivos($diretorio);
 		break;
 		/*
-		 Valor: CHAVEGOOGLE
+		 Depreciado
 
 		Retorna o valor da chave registrada para a API do Google maps
 

@@ -196,10 +196,7 @@ if($conexaoadmin == "" && file_exists($locaplic."/admin/admin.db")){
 echo "<pre>";
 include_once("admin/php/conexao.php");
 echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
-/**
- *
- * TODO V5.0 verificar tabelas antes de fechar versao
- */
+//TODO Verificar ao fechar versao - verificar tabelas
 $tabelas = array(
 	"i3geoadmin_sistemasf"=>"abrir_funcao,h_funcao,id_funcao,id_sistema,nome_funcao,perfil_funcao,w_funcao",
 	"i3geoadmin_tags"=>"id_tag,nome",

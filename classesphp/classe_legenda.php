@@ -512,9 +512,9 @@ parameters:
 
 $tipo - Tipo de representa&ccedil;&atilde;o do s&iacute;mbolo, 0 pontos, 1 linhas e 2 pol&iacute;gonos.
 
-$dir_tmp - Diret�rio tempor&aacute;rio do mapserver.
+$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver.
 
-$imgdir - Diret�rio tempor&aacute;rio das imagens.
+$imgdir - Diret&oacute;rio tempor&aacute;rio das imagens.
 
 $onclick - Fun&ccedil;&atilde;o que ser&aacute; inclu&iacute;da no HTML no evento onclick sobre o s&iacute;mbolo
 

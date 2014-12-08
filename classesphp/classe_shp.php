@@ -135,7 +135,7 @@ Salva o mapfile atual
 /*
 function: criaSHPvazio
 
-Cria um shape file do tipo pontual vazio no diret�rio local
+Cria um shape file do tipo pontual vazio no diret&oacute;rio local
 
 Parameter:
 
@@ -201,7 +201,7 @@ Nome do tema criado.
 /*
 function: insereSHP
 
-Insere um ponto em um shape file no diret�rio local
+Insere um ponto em um shape file no diret&oacute;rio local
 
 parameters:
 $xy - X e y do novo ponto, separados por espa&ccedil;os. Pode ser mais de um ponto.
@@ -271,7 +271,7 @@ $projecao - c�digo epsg da proje&ccedil;&atilde;o das coordenadas
 /*
 function: insereSHPgrafico
 
-Insere um ponto em um shape file, criado no diret�rio tempor&aacute;rio, e adiciona ao mapa
+Insere um ponto em um shape file, criado no diret&oacute;rio tempor&aacute;rio, e adiciona ao mapa
 atual. O layer adicionado &eacute; representado como um s&iacute;mbolo, constru&iacute;do a partir de uma
 imagem tempor&aacute;ria representando o gr&aacute;fico criado.
 

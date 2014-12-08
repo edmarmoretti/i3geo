@@ -37,7 +37,7 @@ Function: gravaCacheWMS
 
 L&ecirc; o getcapabilities de um WMS e salva em disco se o mesmo n&atilde;o tiver sido salvo antes
 
-O arquivo &eacute; gravado no diret�rio tempor&aacute;rio
+O arquivo &eacute; gravado no diret&oacute;rio tempor&aacute;rio
 
 Parametros:
 
@@ -45,7 +45,7 @@ $servico {string} - endere&ccedil;o do WMS
 
 Global:
 
-$dir_tmp {string} - (opcional) endere&ccedil;o do diret�rio tempor&aacute;rio onde o cache ser&aacute; armazenado. Se n&atilde;o for definido, tenta obter das vari&aacute;veis de configura&ccedil;&atilde;o existentes em i3geo/ms_configura.php
+$dir_tmp {string} - (opcional) endere&ccedil;o do diret&oacute;rio tempor&aacute;rio onde o cache ser&aacute; armazenado. Se n&atilde;o for definido, tenta obter das vari&aacute;veis de configura&ccedil;&atilde;o existentes em i3geo/ms_configura.php
 
 Return:
 

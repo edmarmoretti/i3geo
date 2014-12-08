@@ -128,7 +128,7 @@ var Chart = Backbone.View.extend({
 										padding: '5px'
 								});
 				*/
-				/* XXX - enable again later
+				/* enable again later
 				$(this.nav).append('<div style="display:none;"> <div id="charteditor" class="chart_editor"></div></div>');
 
 				this.editor = new ChartEditor({  workspace : this.workspace,
@@ -527,7 +527,7 @@ this.call_time = undefined;
 								animate: animate
 				});
 
-				/* XXX - enable later
+				/* enable later
 				var start = new Date().getTime();
 				this.editor.chartDefinition = _.clone(this.cccOptions);
 				this.editor.set_chart("pvc." + this.cccOptions.type);

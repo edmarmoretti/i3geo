@@ -46,7 +46,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-//TODO o link para a arvore hiperbolica foi removido na versao 6.0. Excluir arquivos de forma definitiva na versao 6.1
 i3GEO.configura =
 	{
 		/**

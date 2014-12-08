@@ -332,7 +332,7 @@ function iniciaMapa()
 	{$res["mapfile"] = "";}
 	else
 	{$res["mapfile"] = $map_file;}
-	
+
 	$res["cgi"] = $locmapserv;
 	$res["extentTotal"] = $ext;
 	$res["mapimagem"] = $nomer;
@@ -372,7 +372,6 @@ function iniciaMapa()
 	//parametros de inicializacao armazenados com o mapa quando o usuario utiliza a opcao de salvar mapa no nbanco de dados
 	$customizacoesinit = $m->mapa->getmetadata("CUSTOMIZACOESINIT");
 	$res["editavel"] = $m->mapa->getmetadata("EDITAVEL");
-	//TODO desmarcar
 	$m->mapa->setmetadata("CUSTOMIZACOESINIT","");
 	$m->salva();
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));

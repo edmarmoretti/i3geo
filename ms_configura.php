@@ -58,7 +58,7 @@ Default:
 array(array("usuario"=>"admin", "senha"=>"adminx"));
 
 */
-//@TODO v5 alterar a senha para admin
+//TODO checar ao fechar versao - alterar a senha para admin
 $i3geomaster = array(
 	array("usuario"=>"admin", "senha"=>"admin")
 );
@@ -123,7 +123,6 @@ $saikuConfigDataSource = array(
 	1 - utiliza a funcao do Mapserver saveImage() para enviar a imagem ao navegador (e mais rapida, mas nao funciona em algumas versoes do Mapserver)
 	2 - utiliza X-Sendfile (mais rapido que as outras opcoes) mas exige modificacoes na instalacao do Apache. Veja em: https://tn123.org/mod_xsendfile/ e http://edmarmoretti.blogspot.com.br/
  */
-//@TODO documentar no manual de administracao
 $i3georendermode = 0;
 /*
 	Variavel: linkedinoauth (ainda n&atilde;o implementado)
@@ -257,6 +256,7 @@ $emailInstituicao = "geoprocessamento@mma.gov.br";
 	{string}
 */
 //TODO v5 remover
+//Verificar se o google earth nao precisa disso
 $googleApiKey = "ABQIAAAAKguAlmd-hSDulF2T_tfWMxT3OAK09d_ZSDyC36iPGlww-4j-9xSrR2ZZUxVeZC01q8anfe5ntl_U4w";
 /*
 Variable: metaestatTemplates
