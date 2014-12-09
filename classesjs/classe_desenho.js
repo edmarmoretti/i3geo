@@ -161,6 +161,23 @@ i3GEO.desenho =
 					i3GEO.desenho.openlayers.criaLayerGrafico();
 				}
 			},
+			addPin: function(x,y){
+				i3GEO.desenho.openlayers.inicia;
+				var point = new OpenLayers.Geometry.Point(x,y),
+					f = new OpenLayers.Feature.Vector(
+						point, {
+							origem : "pin"
+						},{
+								graphicWidth: 27,
+								graphicHeight: 27,
+								graphicXOffset: 13,
+								graphicYOffset: -13,
+								externalGraphic: i3GEO.configura.locaplic+"imagens/google/confluence.png"
+						});
+				i3GEO.desenho.layergrafico.addFeatures([
+					f
+				]);
+			},
 			criaLayerGrafico : function() {
 				if (!i3GEO.desenho.layergrafico) {
 					var sketchSymbolizers = {
@@ -269,7 +286,7 @@ i3GEO.desenho =
 			/**
 			 * Function: destroyFeatures
 			 *
-			 * Destr�i as figuras
+			 * Destroi as figuras
 			 *
 			 * {array} - lista de objetos
 			 */

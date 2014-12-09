@@ -190,7 +190,6 @@ i3GEO.pluginI3geo =
 		 * "default" ser&aacute; utilizado o gradiente padrão.
 		 *
 		 */
-		//TODO verificar se a escolha de uma coluna funciona mesmo
 		heatmap : {
 			linkAjuda : function() {
 				return i3GEO.configura.locaplic

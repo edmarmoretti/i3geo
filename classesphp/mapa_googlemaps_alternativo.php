@@ -139,7 +139,6 @@ if(!isset($_GET["telaR"])){
 		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != ""){
 			$l->set("template","none.htm");
 			$l->set("status",MS_DEFAULT);
-			//@TODO verificar se foi corrigido em versoes novas do mapserver
 			//corrige um bug do mapserver que nao calcula a escala direito
 			$l->set("maxscaledenom",$l->maxscaledenom * 100000);
 			$l->set("minscaledenom",$l->minscaledenom * 100000);
