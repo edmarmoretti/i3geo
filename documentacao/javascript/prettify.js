@@ -1,5 +1,5 @@
 
-// This code comes from the December 2009 release of Google Prettify, which is Copyright © 2006 Google Inc.
+// This code comes from the December 2009 release of Google Prettify, which is Copyright ï¿½ 2006 Google Inc.
 // Minor modifications are marked with "ND Change" comments.
 // As part of Natural Docs, this code is licensed under version 3 of the GNU Affero General Public License (AGPL.)
 // However, it may also be obtained separately under version 2.0 of the Apache License.
@@ -239,7 +239,7 @@ window['_pr_isIE6'] = function () {
   var pr_quot = /\"/g;
   /** like textToHtml but escapes double quotes to be attribute safe. */
   function attribToHtml(str) {
-    return str.replace(pr_amp, '&amp;')
+    return str.replace(pr_amp, '&')
         .replace(pr_lt, '&lt;')
         .replace(pr_gt, '&gt;')
         .replace(pr_quot, '&quot;');
@@ -247,7 +247,7 @@ window['_pr_isIE6'] = function () {
 
   /** escapest html special characters to html. */
   function textToHtml(str) {
-    return str.replace(pr_amp, '&amp;')
+    return str.replace(pr_amp, '&')
         .replace(pr_lt, '&lt;')
         .replace(pr_gt, '&gt;');
   }
@@ -257,7 +257,7 @@ window['_pr_isIE6'] = function () {
   var pr_gtEnt = /&gt;/g;
   var pr_aposEnt = /&apos;/g;
   var pr_quotEnt = /&quot;/g;
-  var pr_ampEnt = /&amp;/g;
+  var pr_ampEnt = /&/g;
   var pr_nbspEnt = /&nbsp;/g;
   /** unescapes html to plain text. */
   function htmlToText(html) {
