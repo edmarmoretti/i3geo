@@ -294,7 +294,7 @@ $shadow_height - Tamanho da sombra do gr&aacute;fico
 Include:
 <classe_atributos.php>, <graficopizza.php>
 */
-	function insereSHPgrafico($x,$y,$itens,$width,$inclinacao,$shadow_height)
+	function insereSHPgrafico($x,$y,$itens,$width,$inclinacao,$shadow_height,$ext="")
 	{
 		if(!isset($tipo)){$tipo = "pizza";}
 		//nome do novo tema
@@ -302,12 +302,12 @@ Include:
 		//pega os valores
 		include_once($this->locaplic."/classesphp/classe_atributos.php");
 		$m = new Atributos($this->arquivo,$this->tema);
-		//FIXME alterar para a nova funcao de identificacao
-		$shape = $m->identificaQBP($this->nome,$x,$y,$this->arquivo,0,"","shape");
+		$shape = $m->identificaQBP2($this->nome,$x,$y,$this->arquivo,0,"","shape",false,$ext);
 		if ((is_array($shape)) && ($shape[0] == " ")){
 			return("erro.Nenhum valor encontrado");
 		}
 		else{
+			$shape = $shape[0];
 			$itens = explode("*",$itens);
 			foreach ($itens as $i){
 				$ii = explode(",",$i);
@@ -317,6 +317,7 @@ Include:
 				$valor[] = $v;
 				$cor[] = $ii[1].",".$ii[2].",".$ii[3];
 			}
+
 			$data = implode("*",$valor);
 			$cores = implode("*",$cor);
 			if ($tipo == "pizza"){

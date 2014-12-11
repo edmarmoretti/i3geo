@@ -1,32 +1,32 @@
 /**
  * Title: PHP
- * 
+ *
  * Chamadas em AJAX que executam programas no lado do servidor
- * 
+ *
  * Muitos dos parametros exigidos pelos programas em PHP s&atilde;o obtidos da vari&aacute;vel de se&ccedil;&atilde;o aberta no servidor
  * quando o i3Geo &eacute; inicializado, &eacute; o caso por exemplo do nome do arquivo correspondente ao mapfile atualmente em uso
- * 
+ *
  * Quando classe_php.js &eacute; carregado, &eacute; criado o objeto cpJSON que necessita da biblioteca CPAINT. Esse objeto &eacute;
  * utilizado nas chamadas AJAX.
- * 
+ *
  * O objeto cpJSON possu&iacute; um m&eacute;todo .call que executa a opera&ccedil;&atilde;o AJAX. Esse m&eacute;todo utiliza basicamente
  * dois parametros, sendo o primeiro o endere&ccedil;o do programa PHP que ser&aacute; executado no servidor e o outro &eacute; o nome da
  * fun&ccedil;&atilde;o que ir&aacute; receber e processar os resultados do programa. Exemplo:
- * 
+ *
  * cpJSON.call(p,"",funcao);
- * 
+ *
  * "p" &eacute; a URL e funcao o nome da fun&ccedil;&atilde;o
- * 
+ *
  * Para compor "p" o i3geo utiliza normalmente a vari&aacute;vel i3GEO.configura.locaplic e i3GEO.configura.sid, por exemplo:
- * 
+ *
  * var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=insereSHPgrafico&g_sid="+i3GEO.configura.sid
- * 
+ *
  * Para mais detalhes sobre as fun&ccedil;&otilde;es, veja <mapa_controle.php>
- * 
+ *
  * Namespace:
- * 
+ *
  * i3GEO.php
- * 
+ *
  * Veja:
  *
  * <http://localhost/i3geo/classesjs/classe_php.js>
@@ -34,16 +34,16 @@
 
 /**
  * Licen&ccedil;a
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -55,25 +55,25 @@ if (typeof (i3GEO) === 'undefined') {
 }
 /**
  * Object: cpJSON
- * 
+ *
  * Objeto CPAINT (ver biblioteca CPAINT) utilizado nas chamadas AJAX ass&iacute;ncronas com retorno no formato JSON
- * 
+ *
  * Exemplo:
- * 
+ *
  * cpJSON.call()
- * 
+ *
  * Return:
- * 
+ *
  * O objeto CPAINT retorna os dados encapsulados em um objeto JSON. Os programas PHP que fazem uso dessa biblioteca (CPAINT) devem fazer o
  * include da mesma. Os dados de interesse retornados no objeto JSON, ficam embutidos na propriedade "data", por exemplo:
- * 
+ *
  * var temp = function(retorno){alert(retorno.data);}
- * 
+ *
  * cpJSON.call(p,"teste",temp);
- * 
+ *
  * onde, p cont&eacute;m o nome do programa PHP e seus parametros "teste" &eacute; o nome da fun&ccedil;&atilde;o PHP (no caso do i3Geo,
  * isso n&atilde;o afeta em nada) e temp &eacute; a fun&ccedil;&atilde;o que tratar&aacute; o retorno dos dados.
- * 
+ *
  */
 cpJSON = new cpaint();
 cpJSON.set_response_type("JSON");
@@ -83,7 +83,7 @@ i3GEO.php =
 	{
 		/**
 		 * Function: verifica
-		 * 
+		 *
 		 * Verifica se as vari&aacute;veis i3GEO.configura.locaplic e i3GEO.configura.sid existem
 		 */
 		verifica : function() {
@@ -96,14 +96,22 @@ i3GEO.php =
 		},
 		/**
 		 * Function: insereSHPgrafico
-		 * 
+		 *
 		 * Insere um gr&aacute;fico no mapa
 		 */
 		insereSHPgrafico : function(funcao, tema, x, y, itens, shadow_height, width, inclinacao) {
 			i3GEO.php.verifica();
-			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-				"funcao=insereSHPgrafico&tipo=pizza&tema=" + tema + "&x=" + x + "&y=" + y + "&itens=" + itens + "&shadow_height="
-					+ shadow_height + "&width=" + width + "&inclinacao=" + inclinacao + "&g_sid=" + i3GEO.configura.sid, retorno =
+			var p,par,ext,retorno;
+			ext = i3GEO.parametros.mapexten;
+			ext = i3GEO.util.extOSM2Geo(ext);
+			p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php";
+			par = "funcao=insereSHPgrafico&tipo=pizza&tema=" + tema + "&x=" + x + "&y=" + y + "&itens=" + itens + "&shadow_height="
+					+ shadow_height + "&width=" + width + "&inclinacao="
+					+ inclinacao
+					+ "&g_sid=" + i3GEO.configura.sid
+					+ "&ext=" + ext;
+
+			retorno =
 				function(retorno) {
 					i3GEO.janela.fechaAguarde("insereSHPgrafico");
 					funcao.call(funcao, retorno);
@@ -113,7 +121,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: insereSHP
-		 * 
+		 *
 		 * Insere um ponto em um shapefile
 		 */
 		insereSHP : function(funcao, tema, item, valoritem, xy, projecao) {
@@ -128,7 +136,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: pegaMensagens
-		 * 
+		 *
 		 * Pega as mensagens do metadata 'mensagem'
 		 */
 		pegaMensagens : function(funcao) {
@@ -138,7 +146,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: areaPixel
-		 * 
+		 *
 		 * Calcula a &aacute;rea de um pixel da imagem do mapa
 		 */
 		areaPixel : function(funcao, g_celula) {
@@ -149,7 +157,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: excluitema
-		 * 
+		 *
 		 * Exclui temas do mapa
 		 */
 		excluitema : function(funcao, temas) {
@@ -183,7 +191,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: reordenatemas
-		 * 
+		 *
 		 * Reordena os temas
 		 */
 		reordenatemas : function(funcao, lista) {
@@ -196,7 +204,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: criaLegendaHTML
-		 * 
+		 *
 		 * Obtem a legenda de um tema
 		 */
 		criaLegendaHTML : function(funcao, tema, template) {
@@ -216,7 +224,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: inverteStatusClasse
-		 * 
+		 *
 		 * Inverte o status de uma classe de um layer
 		 */
 		inverteStatusClasse : function(funcao, tema, classe) {
@@ -230,7 +238,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: ligatemas
-		 * 
+		 *
 		 * Liga e desliga uma lista de temas
 		 */
 		ligatemas : function(funcao, desligar, ligar, adicionar) {
@@ -249,7 +257,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: pegalistademenus
-		 * 
+		 *
 		 * Obtem a lista de menus
 		 */
 		pegalistademenus : function(funcao) {
@@ -260,7 +268,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: pegalistadegrupos
-		 * 
+		 *
 		 * Obtem a lista de grupos de um menu
 		 */
 		pegalistadegrupos : function(funcao, id_menu, listasgrupos) {
@@ -272,7 +280,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: pegalistadeSubgrupos
-		 * 
+		 *
 		 * Obtem a lista de subgrupos
 		 */
 		pegalistadeSubgrupos : function(funcao, id_menu, id_grupo) {
@@ -284,7 +292,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: pegalistadetemas
-		 * 
+		 *
 		 * Obtem a lista de temas de um item do catalogo
 		 */
 		pegalistadetemas : function(funcao, id_menu, id_grupo, id_subgrupo) {
@@ -296,7 +304,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: listaTemas
-		 * 
+		 *
 		 * Lista os temas existentes no mapa
 		 */
 		listaTemas : function(funcao, tipo, locaplic, sid) {
@@ -309,7 +317,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: listaTemasEditaveis
-		 * 
+		 *
 		 * Lista os temas guardados na pasta temporaria (temas locais)
 		 */
 		listaTemasEditaveis : function(funcao, locaplic, sid) {
@@ -322,7 +330,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: listaTemasComSel
-		 * 
+		 *
 		 * Lista os temas que possuem selecao
 		 */
 		listaTemasComSel : function(funcao, locaplic, sid) {
@@ -335,7 +343,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: listatemasTipo
-		 * 
+		 *
 		 * Lista os temas de um determinado tipo
 		 */
 		listatemasTipo : function(funcao, tipo, locaplic, sid) {
@@ -348,7 +356,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: pegaSistemas
-		 * 
+		 *
 		 * Pega a lista de sistemas de adicao de temas
 		 */
 		pegaSistemas : function(funcao) {
@@ -358,7 +366,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: listadrives
-		 * 
+		 *
 		 * Lista o drives que permitem navegacao
 		 */
 		listadrives : function(funcao) {
@@ -368,7 +376,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: listaarquivos
-		 * 
+		 *
 		 * Lista os arquivos no servidor em um determinado caminho
 		 */
 		listaarquivos : function(funcao, caminho) {
@@ -390,7 +398,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: desativacgi
-		 * 
+		 *
 		 * Desativa o uso do modo CGI
 		 */
 		desativacgi : function(funcao) {
@@ -400,7 +408,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: pegaMapas
-		 * 
+		 *
 		 * Pega a lista de mapas cadastrados
 		 */
 		pegaMapas : function(funcao) {
@@ -411,7 +419,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: mudatamanho
-		 * 
+		 *
 		 * Muda o tamanho do mapa
 		 */
 		mudatamanho : function(funcao, altura, largura) {
@@ -425,7 +433,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: ativalogo
-		 * 
+		 *
 		 * Ativa a logomarca
 		 */
 		ativalogo : function(funcao, altura, largura) {
@@ -438,7 +446,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: insereAnnotation
-		 * 
+		 *
 		 * Insere uma feature
 		 */
 		insereAnnotation : function(funcao, pin, xy, texto, position, partials, offsetx, offsety, minfeaturesize, mindistance, force,
@@ -457,7 +465,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: identificaunico
-		 * 
+		 *
 		 * Idetifica um onto em um unico tema
 		 */
 		identificaunico : function(funcao, xy, tema, item) {
@@ -469,7 +477,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: recuperamapa
-		 * 
+		 *
 		 * Recupera o mapa atual
 		 */
 		recuperamapa : function(funcao) {
@@ -482,7 +490,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: criaLegendaImagem
-		 * 
+		 *
 		 * Pega a legenda atual na forma de imagem
 		 */
 		criaLegendaImagem : function(funcao) {
@@ -493,7 +501,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: referenciadinamica
-		 * 
+		 *
 		 * Obtem a imagem do mapa de referencia
 		 */
 		referenciadinamica : function(funcao, zoom, tipo, w, h) {
@@ -514,7 +522,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: pan
-		 * 
+		 *
 		 * <PAN>
 		 */
 		pan : function(funcao, escala, tipo, x, y) {
@@ -525,7 +533,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: zoomponto
-		 * 
+		 *
 		 * Zoom para um ponto
 		 */
 		zoomponto : function(funcao, x, y, tamanho, simbolo, cor) {
@@ -554,7 +562,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: localizaIP
-		 * 
+		 *
 		 * Localiza por um IP
 		 */
 		localizaIP : function(funcao) {
@@ -564,9 +572,9 @@ i3GEO.php =
 		},
 		/**
 		 * Function: mudaext
-		 * 
+		 *
 		 * O parametro "atualiza" &eacute; do tipo booleano e indica se o redesenho do mapa ser&aacute; feito ou n&atilde;o.
-		 * 
+		 *
 		 * O parametro "geo" &eacute; do tipo booleano e indica se as coordenadas dever&atilde;o ser convertidas para geogr&aacute;ficas ao
 		 * serem salvas no mapfile
 		 */
@@ -616,7 +624,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: mudaescala
-		 * 
+		 *
 		 * Muda a escala do mapa
 		 */
 		mudaescala : function(funcao, escala) {
@@ -654,7 +662,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: selecaopt
-		 * 
+		 *
 		 * Seleciona por ponto
 		 */
 		selecaopt : function(funcao, tema, xy, tipo, tolerancia) {
@@ -666,7 +674,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: selecaoWkt
-		 * 
+		 *
 		 * Seleciona por WKT
 		 */
 		selecaoWkt : function(funcao, tema, tipo, wkt, buffer) {
@@ -680,7 +688,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: selecaobox
-		 * 
+		 *
 		 * Seleciona por box
 		 */
 		selecaobox : function(funcao, tema, tipo, box) {
@@ -692,7 +700,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: selecaoext
-		 * 
+		 *
 		 * Seleciona por extensao
 		 */
 		selecaoext : function(funcao, tema, tipo) {
@@ -704,7 +712,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: selecaoatrib2
-		 * 
+		 *
 		 * Seleciona por atributo
 		 */
 		selecaoatrib2 : function(funcao, tema, filtro, tipo) {
@@ -716,7 +724,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: selecaotema
-		 * 
+		 *
 		 * Seleciona por tema
 		 */
 		selecaotema : function(funcao, temao, tema, tipo, buffer) {
@@ -728,7 +736,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: sobetema
-		 * 
+		 *
 		 * Sobe um tema na hierarquia
 		 */
 		sobetema : function(funcao, tema) {
@@ -743,7 +751,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: descetema
-		 * 
+		 *
 		 * Desce um tema na hierarquia
 		 */
 		descetema : function(funcao, tema) {
@@ -758,7 +766,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: fontetema
-		 * 
+		 *
 		 * Obtem a fonte para o tema
 		 */
 		fontetema : function(funcao, tema) {
@@ -771,7 +779,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: zoomtema
-		 * 
+		 *
 		 * Zoom para um tema
 		 */
 		zoomtema : function(funcao, tema) {
@@ -799,7 +807,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: zoomsel
-		 * 
+		 *
 		 * Zoom para a selecao
 		 */
 		zoomsel : function(funcao, tema) {
@@ -827,7 +835,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: limpasel
-		 * 
+		 *
 		 * Limpa a selecao
 		 */
 		limpasel : function(funcao, tema) {
@@ -840,7 +848,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: invertestatuslegenda
-		 * 
+		 *
 		 * Liga desliga a legenda de um tema
 		 */
 		invertestatuslegenda : function(funcao, tema) {
@@ -853,7 +861,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: aplicaCorClasseTema
-		 * 
+		 *
 		 * Aplica uma cor a uma classe
 		 */
 		aplicaCorClasseTema : function(funcao, idtema, idclasse, rgb) {
@@ -867,7 +875,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: mudatransp
-		 * 
+		 *
 		 * Muda a transparencia de um tema
 		 */
 		mudatransp : function(funcao, tema, valor) {
@@ -880,7 +888,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: copiatema
-		 * 
+		 *
 		 * Copia um tema
 		 */
 		copiatema : function(funcao, tema) {
@@ -894,7 +902,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: mudanome
-		 * 
+		 *
 		 * Muda o nome de um tema
 		 */
 		mudanome : function(funcao, tema, valor) {
@@ -907,7 +915,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: adicionaTemaWMS
-		 * 
+		 *
 		 * Adiciona tema WMS
 		 */
 		adicionaTemaWMS : function(funcao, servico, tema, nome, proj, formato, versao, nomecamada, tiporep, suportasld, formatosinfo,
@@ -943,7 +951,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: adicionaTemaSHP
-		 * 
+		 *
 		 * Adiciona tema com base em um shapefile
 		 */
 		adicionaTemaSHP : function(funcao, path) {
@@ -956,7 +964,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: adicionaTemaIMG
-		 * 
+		 *
 		 * Adiciona tema com base em uma imagem
 		 */
 		adicionaTemaIMG : function(funcao, path) {
@@ -969,7 +977,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: identifica3
-		 * 
+		 *
 		 * Identifica um ponto no mapa
 		 */
 		identifica3 : function(funcao, x, y, resolucao, opcao, locaplic, sid, tema, ext, listaDeTemas) {
@@ -1002,7 +1010,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: reiniciaMapa
-		 * 
+		 *
 		 * Reinicia o mapa
 		 */
 		reiniciaMapa : function(funcao) {
@@ -1015,7 +1023,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: procurartemas2
-		 * 
+		 *
 		 * Busca um tema pelo nome
 		 */
 		procurartemas2 : function(funcao, procurar, locaplic) {
@@ -1035,7 +1043,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: procurartemasestrela
-		 * 
+		 *
 		 * Busca um tema pelo ranking
 		 */
 		procurartemasestrela : function(funcao, nivel, fatorestrela, locaplic) {
@@ -1056,7 +1064,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: adtema
-		 * 
+		 *
 		 * Adiciona tema(s) ao mapa pelo seu codigo
 		 */
 		adtema : function(funcao, temas, locaplic, sid) {
@@ -1075,7 +1083,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: escalagrafica
-		 * 
+		 *
 		 * Retorna a escala grafica
 		 */
 		escalagrafica : function(funcao) {
@@ -1085,7 +1093,7 @@ i3GEO.php =
 		},
 		/**
 		 * googlemaps
-		 * 
+		 *
 		 * Ativa a interface googlemaps
 		 */
 		googlemaps : function(funcao) {
@@ -1100,7 +1108,7 @@ i3GEO.php =
 		},
 		/**
 		 * googleearth
-		 * 
+		 *
 		 * Ativa a interface googleearth
 		 */
 		googleearth : function(funcao) {
@@ -1115,7 +1123,7 @@ i3GEO.php =
 		},
 		/**
 		 * openlayers
-		 * 
+		 *
 		 * Ativa a interface openlayers
 		 */
 		openlayers : function(funcao) {
@@ -1144,7 +1152,7 @@ i3GEO.php =
 		},
 		/**
 		 * converte2googlemaps
-		 * 
+		 *
 		 * <CONVERTE2GOOGLEMAPS>
 		 */
 		converte2googlemaps : function(funcao) {
@@ -1159,7 +1167,7 @@ i3GEO.php =
 		},
 		/**
 		 * converte2openlayers
-		 * 
+		 *
 		 * <CONVERTE2OPENLAYERS>
 		 */
 		converte2openlayers : function(funcao) {
@@ -1174,7 +1182,7 @@ i3GEO.php =
 		},
 		/**
 		 * criamapa
-		 * 
+		 *
 		 * <CRIAMAPA>
 		 */
 		criamapa : function(funcao, parametros) {
@@ -1190,7 +1198,7 @@ i3GEO.php =
 		},
 		/**
 		 * inicia
-		 * 
+		 *
 		 * <INICIA>
 		 */
 		inicia : function(funcao, embedLegenda, w, h) {
@@ -1215,7 +1223,7 @@ i3GEO.php =
 		},
 		/**
 		 * chaveGoogle
-		 * 
+		 *
 		 * <CHAVEGOOGLE>
 		 */
 		chaveGoogle : function(funcao) {
@@ -1225,7 +1233,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaRSSwsARRAY
-		 * 
+		 *
 		 * <LISTARSSWSARRAY>
 		 */
 		listaRSSwsARRAY : function(funcao, tipo) {
@@ -1236,7 +1244,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaLayersWMS
-		 * 
+		 *
 		 * <LISTALAYERSWMS>
 		 */
 		listaLayersWMS : function(funcao, servico, nivel, id_ws, nomelayer, tipo_ws) {
@@ -1247,7 +1255,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: buscaRapida
-		 * 
+		 *
 		 * Busca dados em um servico
 		 */
 		buscaRapida : function(funcao, locaplic, servico, palavra) {
@@ -1257,7 +1265,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: listaItensTema
-		 * 
+		 *
 		 * Lista as colunas de um tema
 		 */
 		listaItensTema : function(funcao, tema) {
@@ -1267,7 +1275,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: listaValoresItensTema
-		 * 
+		 *
 		 * Lista os valores de uma coluna
 		 */
 		listaValoresItensTema : function(funcao, tema, itemTema) {
@@ -1278,7 +1286,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: extRegistros
-		 * 
+		 *
 		 * Extensao geografica de um registro de um tema
 		 */
 		extRegistros : function(funcao, tema, reg) {
@@ -1288,7 +1296,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaFontesTexto
-		 * 
+		 *
 		 * <LISTATRUETYPE>
 		 */
 		listaFontesTexto : function(funcao) {
@@ -1298,7 +1306,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaEpsg
-		 * 
+		 *
 		 * <LISTAEPSG>
 		 */
 		listaEpsg : function(funcao) {
@@ -1308,7 +1316,7 @@ i3GEO.php =
 		},
 		/**
 		 * criatemasel
-		 * 
+		 *
 		 * <CRIATEMASEL>
 		 */
 		criatemaSel : function(funcao, tema) {
@@ -1324,7 +1332,7 @@ i3GEO.php =
 		},
 		/**
 		 * pegaData
-		 * 
+		 *
 		 * <PEGADATA>
 		 */
 		pegaData : function(funcao, tema) {
@@ -1335,7 +1343,7 @@ i3GEO.php =
 		},
 		/**
 		 * pegaMetaData
-		 * 
+		 *
 		 * <PEGAMETADATA>
 		 */
 		pegaMetaData : function(funcao, tema) {
@@ -1345,7 +1353,7 @@ i3GEO.php =
 		},
 		/**
 		 * alteraData
-		 * 
+		 *
 		 * <ALTERADATA>
 		 */
 		alteraData : function(funcao, tema, data, removemeta) {
@@ -1356,7 +1364,7 @@ i3GEO.php =
 		},
 		/**
 		 * dadosPerfilRelevo
-		 * 
+		 *
 		 * <DADOSPERFILRELEVO>
 		 */
 		dadosPerfilRelevo : function(funcao, opcao, pontos, amostragem, item) {
@@ -1370,7 +1378,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: funcoesGeometriasWkt
-		 * 
+		 *
 		 * Aplica uma operacao sobre uma geometria definida em WKT
 		 */
 		funcoesGeometriasWkt : function(funcao, listaWkt, operacao) {
@@ -1384,7 +1392,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaVariavel
-		 * 
+		 *
 		 * Obt&eacute;m a lista de vari&aacute;veis do sistema de metadados estat&iacute;sticos
 		 */
 		listaVariavel : function(funcao, filtro_esquema) {
@@ -1398,7 +1406,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaMedidaVariavel
-		 * 
+		 *
 		 * Obt&eacute;m a lista medidas de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
 		 */
 		listaMedidaVariavel : function(codigo_variavel, funcao) {
@@ -1409,7 +1417,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaParametrosMedidaVariavel
-		 * 
+		 *
 		 * Obt&eacute;m a lista de par&acirc;metros de uma medida de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
 		 */
 		listaParametrosMedidaVariavel : function(id_medida_variavel, funcao) {
@@ -1420,7 +1428,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaRegioesMedidaVariavel
-		 * 
+		 *
 		 * Obt&eacute;m a lista de regioes de uma medida de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
 		 */
 		listaRegioesMedidaVariavel : function(id_medida_variavel, funcao) {
@@ -1431,7 +1439,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaValoresParametroMedidaVariavel
-		 * 
+		 *
 		 * Obt&eacute;m a lista de valores de um par&acirc;metro de uma medida de uma vari&aacute;vel do sistema de metadados
 		 * estat&iacute;sticos
 		 */
@@ -1443,7 +1451,7 @@ i3GEO.php =
 		},
 		/**
 		 * relatorioVariavel
-		 * 
+		 *
 		 * Relatorio descritivo de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
 		 */
 		relatorioVariavel : function(codigo_variavel, funcao) {
@@ -1454,7 +1462,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaClassificacaoMedida
-		 * 
+		 *
 		 * Lista as classificacoes de uma medida de variavel do sistema de metadados estat&iacute;sticos
 		 */
 		listaClassificacaoMedida : function(id_medida_variavel, funcao) {
@@ -1465,7 +1473,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaClasseClassificacao
-		 * 
+		 *
 		 * Lista as classes de uma classificacao de uma medida de variavel do sistema de metadados estat&iacute;sticos
 		 */
 		listaClasseClassificacao : function(id_classificacao, funcao) {
@@ -1475,7 +1483,7 @@ i3GEO.php =
 		},
 		/**
 		 * mapfileMedidaVariavel
-		 * 
+		 *
 		 * Adiciona uma camada ao mapa baseado no sistema de metadados estat&iacute;sticos
 		 */
 		mapfileMedidaVariavel : function(funcao, id_medida_variavel, filtro, todasascolunas, tipolayer, titulolayer, id_classificacao,
@@ -1492,7 +1500,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaTipoRegiao
-		 * 
+		 *
 		 * Lista as regioes cadastradas no sistema de metadados estatisticos
 		 */
 		listaTipoRegiao : function(funcao, codigo_tipo_regiao) {
@@ -1506,7 +1514,7 @@ i3GEO.php =
 		},
 		/**
 		 * mapfileTipoRegiao
-		 * 
+		 *
 		 * Adiciona ao mapa camada baseada nas regioes cadastradas no sistema de metadados estatisticos
 		 */
 		mapfileTipoRegiao : function(funcao, codigo_tipo_regiao, outlinecolor, width, nomes) {
@@ -1527,7 +1535,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaHierarquiaRegioes
-		 * 
+		 *
 		 * Lista as regioes cadastradas no sistema de metadados estatisticos organizadas de forma hierarquica
 		 */
 		listaHierarquiaRegioes : function(funcao, codigo_tipo_regiao, codigoregiaopai, valorregiaopai) {
@@ -1548,7 +1556,7 @@ i3GEO.php =
 		},
 		/**
 		 * aplicaFiltroRegiao
-		 * 
+		 *
 		 * Aplica um filtro no SQL que define uma camada do sistema de metadados estatisticos para filtrar para uma regiao especifica
 		 */
 		aplicaFiltroRegiao : function(funcao, codigo_tipo_regiao, codigo_regiao) {
@@ -1560,7 +1568,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaCamadasMetaestat
-		 * 
+		 *
 		 * Lista as camadas existentes no mapa e que se referem ao sistema METAESTAT
 		 */
 		listaCamadasMetaestat : function(funcao) {
@@ -1570,7 +1578,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaGruposMapaMetaestat
-		 * 
+		 *
 		 * Lista os grupos cadastrados no sistema de publicacao de mapas do METAESTAT
 		 */
 		listaGruposMapaMetaestat : function(funcao, id_mapa) {
@@ -1579,7 +1587,7 @@ i3GEO.php =
 		},
 		/**
 		 * listaTemasMapaMetaestat
-		 * 
+		 *
 		 * Lista os temas cadastrados no sistema de publicacao de mapas do METAESTAT
 		 */
 		listaTemasMapaMetaestat : function(funcao, id_mapa_grupo) {
@@ -1588,7 +1596,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: salvaMapaBanco
-		 * 
+		 *
 		 * Salva o mapfile atual no banco de dados de administracao
 		 */
 		salvaMapaBanco : function(funcao, titulo, id_mapa, preferencias, geometrias, graficos) {
@@ -1642,7 +1650,7 @@ i3GEO.php =
 		},
 		/**
 		 * Function: marcadores2shp
-		 * 
+		 *
 		 * Converte os marcadores de lugar em uma camada shapefile
 		 */
 		marcadores2shp : function(funcao) {

@@ -712,7 +712,7 @@ class Atributos
 				$l->setfilter("");
 			}
 			$b = "&Aacute;&Atilde;&Otilde;&Oacute;&Ocirc;&aacute;&atilde;&acirc;&agrave;&oacute;&otilde;&ocirc;&ograve;&uacute;&ucirc;&iacute;&ecirc;&eacute;&ccedil;";
-			
+
 			$trocas = "AAOOOaaaaoooouuieecAAOOOaaaaoooouuieecAAOOOaaaaoooouuieec";
 			$buscas = b.(html_entity_decode($b,ENT_NOQUOTES,'UTF8')).(html_entity_decode($b,ENT_NOQUOTES,'ISO8859-1'));
 			$sopen = $l->open();
@@ -920,7 +920,7 @@ class Atributos
 		return(array("indices"=>$chaves,"variaveis"=>$indice,"valores"=>$resultado));
 	}
 	/*
-	function: identifica
+	identifica
 
 	Depreciado na vers&atilde;o 4.2 (utilize "identifica2")
 
@@ -2086,7 +2086,6 @@ class Atributos
 		else
 		{$resultado[] = " ";
 		}
-		//exit;
 		return $resultado;
 	}
 	/*

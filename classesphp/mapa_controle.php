@@ -1390,7 +1390,7 @@ switch (strtoupper($funcao))
 		include_once("classe_shp.php");
 		copiaSeguranca($map_file);
 		$m = new SHP($map_file,$tema,$locaplic);
-		$retorno = $m->insereSHPgrafico($x,$y,$itens,$width,$inclinacao,$shadow_height);
+		$retorno = $m->insereSHPgrafico($x,$y,$itens,$width,$inclinacao,$shadow_height,$ext);
 		$_SESSION["contadorsalva"]++;
 		break;
 		/*
