@@ -130,6 +130,23 @@ Array.prototype.remove = function(s) {
 	} catch (e) {
 	}
 };
+/**
+ * Function: Array.getUnique()
+ * 
+ * Extende os metodos de um objeto Array, retorna um array com valores unicos
+ * 
+ */
+Array.prototype.getUnique = function() {
+	var u = {}, a = [];
+	for (var i = 0, l = this.length; i < l; ++i) {
+		if (u.hasOwnProperty(this[i])) {
+			continue;
+		}
+		a.push(this[i]);
+		u[this[i]] = 1;
+	}
+	return a;
+};
 i3GEO.util =
 	{
 		/**
@@ -278,9 +295,7 @@ i3GEO.util =
 		 * 
 		 * g_listaPropriedades = {
 		 * 
-		 * "propriedades": [
-		 *  { text: "p2", url: "javascript:tipoimagem()" }
-		 *  ]}
+		 * "propriedades": [ { text: "p2", url: "javascript:tipoimagem()" } ]}
 		 * 
 		 */
 		arvore : function(titulo, onde, obj) {
@@ -553,7 +568,7 @@ i3GEO.util =
 			} catch (e) {
 			}
 		},
-		//TODO substituir por elementos em layers graficos
+		// TODO substituir por elementos em layers graficos
 		/**
 		 * Cria um elemento div na pagina atual.
 		 * 
@@ -598,7 +613,7 @@ i3GEO.util =
 				}
 			}
 		},
-		//TODO substituir por elementos no layer grafico
+		// TODO substituir por elementos no layer grafico
 		/**
 		 * Function: criaPin
 		 * 
@@ -874,8 +889,7 @@ i3GEO.util =
 		 * 
 		 * {String} - id do elemento que recebera os valores da cor selecionada
 		 * 
-		 * {String} - opcional pode ser definido como rgb,rgbSep (separado por espacos em branco) ou hex indicando o tipo de retorno da
-		 * cor
+		 * {String} - opcional pode ser definido como rgb,rgbSep (separado por espacos em branco) ou hex indicando o tipo de retorno da cor
 		 */
 		abreCor : function(janelaid, elemento, tipo) {
 			if (!i3GEO.configura) {
@@ -1407,8 +1421,7 @@ i3GEO.util =
 		 * 
 		 * {Booleano} - indica se o combo permite selecoes multiplas
 		 * 
-		 * {String} - Tipo de temas que serao incluidos no combo
-		 * ligados|selecionados|raster|pontosSelecionados|pontos|linhaDoTempo
+		 * {String} - Tipo de temas que serao incluidos no combo ligados|selecionados|raster|pontosSelecionados|pontos|linhaDoTempo
 		 * 
 		 * {string} - estilo (css) que sera aplicado ao combo
 		 * 
@@ -1785,9 +1798,9 @@ i3GEO.util =
 		 * 
 		 * {String} - codigo do tema (layer)
 		 * 
-		 * {Function} - funcao que sera executada ao terminar a montagem do combo. Essa funcao recebera como parametros um Array
-		 * associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.: {dados:comboTemas,tipo:"dados"} tipo sera uma string
-		 * que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		 * {Function} - funcao que sera executada ao terminar a montagem do combo. Essa funcao recebera como parametros um Array associativo
+		 * contendo os dados em HTML gerados e o tipo de resultado. P.ex.: {dados:comboTemas,tipo:"dados"} tipo sera uma string que pode ser
+		 * "dados"|"mensagem"|"erro" indicando o tipo de retorno.
 		 * 
 		 * {String} - id do elemento HTML que recebera o combo. e utilizado apenas para inserir uma mensagem de aguarde.
 		 * 
@@ -1862,9 +1875,9 @@ i3GEO.util =
 		 * 
 		 * {String} - nome do item
 		 * 
-		 * {Function} - funcao que sera executada ao terminar a montagem do combo. Essa funcao recebera como parametros um Array
-		 * associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.: {dados:comboTemas,tipo:"dados"} tipo sera uma string
-		 * que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		 * {Function} - funcao que sera executada ao terminar a montagem do combo. Essa funcao recebera como parametros um Array associativo
+		 * contendo os dados em HTML gerados e o tipo de resultado. P.ex.: {dados:comboTemas,tipo:"dados"} tipo sera uma string que pode ser
+		 * "dados"|"mensagem"|"erro" indicando o tipo de retorno.
 		 * 
 		 * {String} - id do elemento HTML que recebera o combo. e utilizado apenas para inserir uma mensagem de aguarde.
 		 */
@@ -2329,11 +2342,10 @@ i3GEO.util =
 		 * 
 		 * Parametros:
 		 * 
-		 * {String} - id do conteudo da janela flutuante que chamou a funcao. Pode ser "" caso o 'elemento' exista em
-		 * window.document
+		 * {String} - id do conteudo da janela flutuante que chamou a funcao. Pode ser "" caso o 'elemento' exista em window.document
 		 * 
-		 * {String} - id do elemento HTML (um input por exemplo) que recebera os valores da cor selecionada. O evento 'onchange'
-		 * desse elemento sera acionado quando o botao aplicar for clicado
+		 * {String} - id do elemento HTML (um input por exemplo) que recebera os valores da cor selecionada. O evento 'onchange' desse
+		 * elemento sera acionado quando o botao aplicar for clicado
 		 * 
 		 * {numerico} - numero de cores default ao abrir o seletor de cores
 		 */
@@ -2554,7 +2566,7 @@ i3GEO.util =
 		 * 
 		 * Calcula o tamanho da area util do navegador considerando-se as propriedades nativas do objeto window
 		 * 
-		 * Return: 
+		 * Return:
 		 * 
 		 * {[w,h]}
 		 */
@@ -3262,7 +3274,7 @@ i3GEO.util =
 		 * 
 		 * Insere ou remove pontos no mapa.
 		 */
-		//TODO inserir como elementos no layer grafico
+		// TODO inserir como elementos no layer grafico
 		insereMarca : {
 			/**
 			 * Tipo {Array}
@@ -3281,11 +3293,11 @@ i3GEO.util =
 			 * 
 			 * {Numeric} - coordenada y no mapa (imagem).
 			 * 
-			 * {String} - funcao que sera executada quando a marca for clicada, se for "", o container sera esvaziado ao ser
-			 * clicado na marca
+			 * {String} - funcao que sera executada quando a marca for clicada, se for "", o container sera esvaziado ao ser clicado na
+			 * marca
 			 * 
-			 * {String} - id do container que recebera os pontos. Se nao existir um elemento com esse ID, sera criado um novo DIV.
-			 * No caso da interface google Earth, e utilizado na definicao do nome da marca (setname).
+			 * {String} - id do container que recebera os pontos. Se nao existir um elemento com esse ID, sera criado um novo DIV. No caso
+			 * da interface google Earth, e utilizado na definicao do nome da marca (setname).
 			 * 
 			 * {String} - (apenas para interface Google Earth) nome que sera adicionado junto da marca
 			 * 

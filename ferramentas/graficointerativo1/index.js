@@ -48,6 +48,11 @@ if (typeof (i3GEOF) === 'undefined') {
 i3GEOF.graficointerativo1 =
 	{
 		/**
+		 * Controla se o evento de atualizacao da lista de registros esta ativo ou nao
+		 * E utilizado quando os graficos sao recuperados de um mapa que foi salvo
+		 */	
+		LISTAREGATIVO: true,
+		/**
 		 * Array com os ids das janelas ja criadas
 		 */
 		janelas : [],
@@ -232,12 +237,10 @@ i3GEOF.graficointerativo1 =
 
 				if (config.valoresCombosItens && config.valoresCombosItens.selects.length > 0) {
 					n = config.valoresCombosItens.selects.length;
-
 					f = function(){
 						var i, c, objs;
 						atualizaConfigGr();
 						//cria as demais entradas de Y
-
 						for (i = 0; i < n; i++) {
 							// cria o combo, para cada combo sao adicionados um input para o nome e um input para a cor
 							$i(idjanela + "i3GEOgraficointerativo1ComboYid").onchange.call();
@@ -251,7 +254,6 @@ i3GEOF.graficointerativo1 =
 						for (i = 0; i < n; i++) {
 							objs[i].value = config.valoresCombosItens.selects[i];
 						}
-
 						objs = c.getElementsByTagName("input");
 						n = config.valoresCombosItens.inputs.length;
 						for (i = 0; i < n; i++) {
@@ -267,7 +269,6 @@ i3GEOF.graficointerativo1 =
 
 					};
 					//cria o combo para X e um combo para Y
-
 					i3GEOF.graficointerativo1.comboItensSel(idjanela,f);
 				}
 				else{
@@ -297,8 +298,10 @@ i3GEOF.graficointerativo1 =
 			return i3GEO.util.base64encode(g);
 		},
 		restauraGraficos : function(par) {
+			i3GEOF.graficointerativo1.LISTAREGATIVO = false;
 			var n, i;
 			par = i3GEO.util.base64decode(par);
+			//alert(par)
 			par = YAHOO.lang.JSON.parse(par);
 			n = par.length;
 			for (i = 0; i < n; i++) {
@@ -366,6 +369,7 @@ i3GEOF.graficointerativo1 =
 					valoresCombosItens.selects.push(objs[obj].value);
 				}
 			}
+			valoresCombosItens.selects = valoresCombosItens.selects.getUnique();
 			objs = d.getElementsByTagName("input");
 			for (obj in objs) {
 				//if (objs[obj].value && objs[obj].value != "") {
@@ -863,11 +867,13 @@ i3GEOF.graficointerativo1 =
 		 * Atualiza as janelas obtendo os dados conforme a navegacao ocorre
 		 */
 		atualizaListaDeRegistros : function() {
-			var i, janelas = i3GEOF.graficointerativo1.janelas, propJanelas = i3GEOF.graficointerativo1.propJanelas, n = janelas.length;
-			for (i = 0; i < n; i++) {
-				if (propJanelas[janelas[i]].atualiza === true) {
-					i3GEOF.graficointerativo1.obterDados(janelas[i]);
-					i3GEOF.graficointerativo1.propJanelas[janelas[i]].aguarde.visibility = "hidden";
+			if(i3GEOF.graficointerativo1.LISTAREGATIVO === true){
+				var i, janelas = i3GEOF.graficointerativo1.janelas, propJanelas = i3GEOF.graficointerativo1.propJanelas, n = janelas.length;
+				for (i = 0; i < n; i++) {
+					if (propJanelas[janelas[i]].atualiza === true) {
+						i3GEOF.graficointerativo1.obterDados(janelas[i]);
+						i3GEOF.graficointerativo1.propJanelas[janelas[i]].aguarde.visibility = "hidden";
+					}
 				}
 			}
 		},
@@ -923,6 +929,7 @@ i3GEOF.graficointerativo1 =
 						y.push(temp[i].value);
 					}
 				}
+				//y = y.getUnique();
 				y = y.join(",");
 			}
 			p =
@@ -966,6 +973,7 @@ i3GEOF.graficointerativo1 =
 						$i(i3GEOF.graficointerativo1.janelasEsperando[i] + "i3GEOgraficointerativo1guia4").onclick.call();
 					}
 					i3GEOF.graficointerativo1.janelasEsperando = [];
+					i3GEOF.graficointerativo1.LISTAREGATIVO = true;
 				}
 			};
 			i3GEOF.graficointerativo1.propJanelas[idjanela].aguarde.visibility = "visible";
@@ -1042,7 +1050,7 @@ i3GEOF.graficointerativo1 =
 			}
 			ins.push("<p class=paragrafo >" + $trad('tabelaGrafico', i3GEOF.graficointerativo1.dicionario) + "</p><table class=lista4 id='" + idjanela
 				+ "i3GEOgraficointerativo1tabeladados' ><tr><td></td>");
-			// pega os nomes das clunas
+			// pega os nomes das colunas
 			colunas = i3GEOF.graficointerativo1.nomesColunas(idjanela)[0];
 			ncolunas = colunas.length;
 			for (i = 0; i < ncolunas; i++) {
