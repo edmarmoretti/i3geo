@@ -44,8 +44,8 @@ MAP
 		DRIVER 'OGR/KML'
 		MIMETYPE "application/vnd.google-earth.kml+xml"
 		#FORMATOPTION "STORAGE=memory"
-		#IMAGEMODE FEATURE
-	END	
+		IMAGEMODE FEATURE
+	END
 	OUTPUTFORMAT
 		NAME "geojson"
 		DRIVER "OGR/GEOJSON"

@@ -819,10 +819,12 @@ if(isset($OUTPUTFORMAT)){
 		$l = $oMap->getlayer(0);
 		$n = $l->name."-kml";
 		$oMap->selectOutputFormat("kml");
-		//$oMap->outputformat->setOption("STORAGE", "memory");
-		//$oMap->outputformat->setOption("FILENAME", $n.".kml");
+		$oMap->outputformat->setOption("STORAGE", "memory");
+		$oMap->outputformat->setOption("FILENAME", $n.".kml");
 		$l->setmetadata("wfs_getfeature_formatlist","kml");
 		$oMap->save($nomeMapfileTmp);
+		header('Content-Disposition: attachment; filename='.$n.'.kml');
+		header("Content-type: application/vnd.google-earth.kml+xml");
 	}
 	//FIXME envia uma linha estranha no header. Nao da pra usar
 	if(strtolower($OUTPUTFORMAT) == "geojson"){
