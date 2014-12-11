@@ -186,7 +186,7 @@ i3GEOF.legenda.dicionario = {
 		es : ""
 	} ],
 	'valorUnico' : [ {
-		pt : "Valor &uacute;nico",
+		pt : "Calcular valor &uacute;nico",
 		en : "",
 		es : ""
 	} ],
@@ -201,7 +201,7 @@ i3GEOF.legenda.dicionario = {
 		es : ""
 	} ],
 	'intervalosIguais' : [ {
-		pt : "Intervalos iguais",
+		pt : "Calcular intervalos iguais",
 		en : "",
 		es : ""
 	} ],
@@ -471,7 +471,17 @@ i3GEOF.legenda.dicionario = {
 		es : ""
 	} ],
 	'quebrasNaturais' : [ {
-		pt : "Quebras naturais",
+		pt : "Calcular quebras naturais",
+		en : "",
+		es : ""
+	} ],
+	'calcularQuartil' : [ {
+		pt : "Calcular quartis",
+		en : "",
+		es : ""
+	} ],
+	'calcularQuantil' : [ {
+		pt : "Calcular quantis",
 		en : "",
 		es : ""
 	} ],
