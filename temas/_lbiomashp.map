@@ -29,6 +29,7 @@ MAP
       "permiteogc"	"sim"
       "TEMA"	"Biomas shapefile (acentuação)"
       "convcaracter"	""
+      "permitekmz" "sim"
     END # METADATA
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"

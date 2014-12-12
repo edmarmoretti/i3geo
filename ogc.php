@@ -85,6 +85,26 @@ require_once(dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
 include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
+//para o caso da requisicao kml
+//FIXME envia uma linha estranha no header. Nao da pra usar
+if(strtolower($OUTPUTFORMAT) == "kml" || strtolower($OUTPUTFORMAT) == "kmz"){
+	//http://localhost/i3geo/pacotes/kmlmapserver/kmlservice.php?request=kmz&map=_lbiomashp&typename=_lbiomashp
+	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;
+	header("Location:".$urln);
+	exit;
+	/*
+		$l = $oMap->getlayer(0);
+	$n = $l->name."-kml";
+	$oMap->selectOutputFormat("kml");
+	$oMap->outputformat->setOption("STORAGE", "memory");
+	$oMap->outputformat->setOption("FILENAME", $n.".kml");
+	$l->setmetadata("wfs_getfeature_formatlist","kml");
+	$oMap->save($nomeMapfileTmp);
+	header('Content-Disposition: attachment; filename='.$n.'.kml');
+	header("Content-type: application/vnd.google-earth.kml+xml");
+	*/
+}
+
 //define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
 if(isset($id_medida_variavel)){
 	$tema = "ogcmetaestat".$id_medida_variavel;
@@ -813,18 +833,6 @@ if(isset($OUTPUTFORMAT)){
 		if(strtolower($request) != "getcapabilities"){
 			header('Content-Disposition: attachment; filename='.$n.'.zip');
 		}
-	}
-	//FIXME envia uma linha estranha no header. Nao da pra usar
-	if(strtolower($OUTPUTFORMAT) == "kml"){
-		$l = $oMap->getlayer(0);
-		$n = $l->name."-kml";
-		$oMap->selectOutputFormat("kml");
-		$oMap->outputformat->setOption("STORAGE", "memory");
-		$oMap->outputformat->setOption("FILENAME", $n.".kml");
-		$l->setmetadata("wfs_getfeature_formatlist","kml");
-		$oMap->save($nomeMapfileTmp);
-		header('Content-Disposition: attachment; filename='.$n.'.kml');
-		header("Content-type: application/vnd.google-earth.kml+xml");
 	}
 	//FIXME envia uma linha estranha no header. Nao da pra usar
 	if(strtolower($OUTPUTFORMAT) == "geojson"){
