@@ -600,12 +600,20 @@ i3GEO.janela =
 		 *
 		 * Parametro:
 		 *
-		 * id {string} - prefixo utilizado na composi&ccedil;&atilde;o do id da
+		 * {string} - prefixo utilizado na composi&ccedil;&atilde;o do id da
 		 * janela
+		 * 
+		 * {string} - (opcional) largura minima da janela
+		 * 
+		 * Return:
+		 * 
+		 * {min|max} indicativo se minimizou ou maximizou
 		 */
-		minimiza : function(id) {
+		minimiza : function(id,min) {
 			var temp = $i(id
-				+ "_corpo"), n, i, m = YAHOO.i3GEO.janela.manager.find(id);
+				+ "_corpo"), n, i, m = YAHOO.i3GEO.janela.manager.find(id),
+				c = $i(id),
+				t = "min";
 
 			if (temp) {
 				if (temp.style.display === "block") {
@@ -613,11 +621,17 @@ i3GEO.janela =
 					if (m) {
 						m.hideIframe;
 					}
+					m.winicial = c.style.width;
+					if(min){
+						c.style.width = min;
+					}
 				} else {
 					temp.style.display = "block";
 					if (m) {
 						m.showIframe;
 					}
+					c.style.width = m.winicial;
+					t = "max";
 				}
 			}
 			temp = $i(id
@@ -664,6 +678,7 @@ i3GEO.janela =
 				}
 
 			}
+			return t;
 		},
 		/**
 		 * Aplica a op&ccedil;&atilde;o definida em ANTESFECHA e elimina alguns
