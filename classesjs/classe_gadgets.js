@@ -641,8 +641,8 @@ i3GEO.gadgets = {
 			}
 			// inclui opcoes admin
 			try {
-				if (ms.permiteLogin != false
-					&& i3GEO.parametros.editor === "sim") {
+				if (ms.permiteLogin === true || (ms.permiteLogin != false
+					&& i3GEO.parametros.editor === "sim")) {
 					i3GEO.configura.oMenuData = i3GEO.login.adicionaMenuSuspenso(i3GEO.configura.oMenuData);
 				}
 			} catch (e) {
