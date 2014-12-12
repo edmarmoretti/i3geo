@@ -92,10 +92,18 @@ i3GEO.analise =
 			/**
 			 * Function: saiku
 			 *
-			 * Ferramenta SAIKU
+			 * Ferramenta SAIKU em nova aba do navegador
 			 */
 			saiku : function() {
 				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.saiku()", "saiku", "saiku");
+			},
+			/**
+			 * Function: saikuMapa
+			 *
+			 * Ferramenta SAIKU em uma janela interna
+			 */
+			saikuMapa : function() {
+				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.saiku()", "saiku", "saiku","index.js","i3GEOF.saiku.iniciaJanelaFlutuante2()");
 			},
 			/**
 			 *

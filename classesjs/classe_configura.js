@@ -320,8 +320,13 @@ i3GEO.configura =
 									},
 									{
 										id : "omenudataAnalise20",
-										text : "SAIKU - OLAP",
+										text : $trad("saikuAba"),
 										url : "javascript:i3GEO.analise.dialogo.saiku()"
+									},
+									{
+										id : "omenudataAnalise23",
+										text : $trad("saikuMapa"),
+										url : "javascript:i3GEO.analise.dialogo.saikuMapa()"
 									},
 									{
 										id : "omenudataAnalise21",

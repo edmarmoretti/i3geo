@@ -2292,6 +2292,18 @@ g_traducao = {
 	pt: "Conex&atilde;o com servi&ccedil;os geo",
 	en:"",
 	es:""
+}],
+"saikuAba": [
+{
+	pt: "SAIKU - OLAP (abrir em nova aba)",
+	en:"",
+	es:""
+}],
+"saikuMapa": [
+{
+	pt: "SAIKU - OLAP (abrir em janela interna)",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");
