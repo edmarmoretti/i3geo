@@ -86,7 +86,6 @@ include(dirname(__FILE__)."/ms_configura.php");
 include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 //para o caso da requisicao kml
-//FIXME envia uma linha estranha no header. Nao da pra usar
 if(strtolower($OUTPUTFORMAT) == "kml" || strtolower($OUTPUTFORMAT) == "kmz"){
 	//http://localhost/i3geo/pacotes/kmlmapserver/kmlservice.php?request=kmz&map=_lbiomashp&typename=_lbiomashp
 	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;

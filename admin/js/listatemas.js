@@ -2,8 +2,17 @@ function editorTemaMapfile(mapfile)
 {
 	core_pegaDados("buscando dados...","../php/menutemas.php?funcao=pegaTemaPorMapfile&codigo_tema="+mapfile,"montaEditorTema");
 }
-function montaEditorTema(dados)
-{
+function montaEditorTema(dados){
+	var temp = function(){
+		gravaDadosTema(dados[0].id_tema);
+	};
+	core_montaEditor(temp,"400px","400px","","Tema",true,true,false);
+	$i("editor_bd").innerHTML = montaDivTemas(dados[0]);
+	//
+	//preenche a div com a lista de tags
+	//
+	core_comboTags("comboTags","tags_tema","registraTagTema");
+	/*
 	function on_editorCheckBoxChange(p_oEvent)
 	{
 		var temp;
@@ -53,6 +62,7 @@ function montaEditorTema(dados)
 	//preenche a div com a lista de tags
 	//
 	core_comboTags("comboTags","tags_tema","registraTagTema");
+	*/
 }
 function registraTagTema(valor)
 {
@@ -99,15 +109,15 @@ function montaDivTemas(i)
 	ins += "<select  id='ogc_tema' >";
 	ins += core_combosimnao(i.ogc_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite o download na aplica&ccedil;&atilde;o datadownload.htm? (n&atilde; afeta temas do tipo gvSIG) (n&atilde;o afeta a permiss&atilde;o de download definida no item 'disponibilidade' existente em cada layer)<br>";
+	ins += "<p>Permite o download na aplica&ccedil;&atilde;o datadownload.htm? (n&atilde;o afeta temas do tipo gvSIG) (n&atilde;o afeta a permiss&atilde;o de download definida no item 'disponibilidade' existente em cada layer)<br>";
 	ins += "<select  id='download_tema' >";
 	ins += core_combosimnao(i.download_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite acesso via kml? (n&atilde; restringe em temas do tipo gvSIG)<br>";
+	ins += "<p>Permite acesso via kml? (n&atilde;o restringe em temas do tipo gvSIG)<br>";
 	ins += "<select  id='kml_tema' >";
 	ins += core_combosimnao(i.kml_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)? (n&atilde; restringe em temas do tipo gvSIG)<br>";
+	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)? (n&atilde;o restringe em temas do tipo gvSIG)<br>";
 	ins += "<select  id='kmz_tema' >";
 	ins += core_combosimnao(i.kmz_tema);
 	ins += "</select></p>";
@@ -188,8 +198,9 @@ function gravaDadosTema(id)
   					//myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
   					core_carregando("desativa");
   				}
-				YAHOO.admin.container.panelEditorTema.destroy();
-				YAHOO.admin.container.panelEditorTema = null;
+				YAHOO.admin.container.panelEditor.destroy();
+				YAHOO.admin.container.panelEditor = null;
+
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
   		},
