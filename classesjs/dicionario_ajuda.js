@@ -966,7 +966,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/preferencias",
 			categoria:"1",
 			pt:"Guarda as prefer&ecirc;ncias do usu&aacute;rio em rela&ccedil;&atilde;o aos par&acirc;metros que controlam a interface do mapa",
-			complemento:"O usu&aacute;rio pode definir as prefer&ecirc;ncias para a interface do mapa, por exemplo, as configura&ccedil;&otilde;es iniciais de menu e ferramentas, temas que iniciam abertos, extens&atilde;o inicial do mapa etc. As informa&ccedil;&otilde;es de prefer&ecirc;ncias ficam armazenadas como cookies do navegador e podem ser restauradas para as configura&ccedil;&otilde;es iniciais por meio da bot&atilde;o ''Limpar'' ou pela limpeza dos cookies diretamente pelo navegador.",
+			complemento:"O usu&aacute;rio pode definir as prefer&ecirc;ncias para a interface do mapa, por exemplo, as configura&ccedil;&otilde;es iniciais de menu e ferramentas, temas que iniciam abertos, extens&atilde;o inicial do mapa etc. As informa&ccedil;&otilde;es de prefer&ecirc;ncias ficam armazenadas como cookies do navegador e podem ser restauradas para as configura&ccedil;&otilde;es iniciais por meio da bot&atilde;o ''Limpar'' ou pela limpeza dos cookies diretamente pelo navegador. Para que as escolhas afetem de forma permanente o mapa, &eacute; necess&aacute;rio incluir o c&oacute;digo javascript diretamente no HTML da interface do mapa. A op&ccedil;&atilde;o 'c&oacute;digo' ir&aacute; mostrar esse c&oacute;digo",
 			apijs: "i3GEO.mapa.dialogo.preferencias()"
 		},
 		"116": {

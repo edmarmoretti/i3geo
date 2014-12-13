@@ -508,7 +508,10 @@ i3GEOF.preferencias = {
 					ins += "<input type=hidden value='' id='"+props[j].elemento+"' />";
 				}
 				else{
-					ins += "<p class=paragrafo title='"+props[j].elemento+"'>"+props[j].titulo+"</p>";
+					ins += "<p class=paragrafo >"+props[j].titulo
+					+ "<br>"
+					+ "<div style='color:gray;margin-bottom:5px'>" + props[j].elemento + "</div>"
+					+ "</p>";
 
 					if(props[j].tipo === "numero" || props[j].tipo === "texto"){
 						ins += "<div class='i3geoForm i3geoFormIconeEdita' style='"+estilo+"' ><input type=text value='' id='"+props[j].elemento+"'  /></div><br>";
@@ -756,6 +759,7 @@ i3GEOF.preferencias = {
 			}
 		}
 		$i("i3GEOpreferenciasCodigo").value = pares.join(";\n");
+		raiz.scrollTop = raiz.scrollHeight;
 	},
 	//lista os temas existentes no mapa e que podem ser utilizados na inicializacao
 	//define o valor das variaveis i3GEO.mapa.TEMASINICIAIS e TEMASINICIAISLIGADOS
