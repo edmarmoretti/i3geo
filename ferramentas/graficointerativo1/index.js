@@ -563,7 +563,14 @@ i3GEOF.graficointerativo1 =
 					i3GEOF.graficointerativo1.ativaFoco(idjanela);
 				};
 				minimiza = function() {
-					i3GEO.janela.minimiza(idjanela);
+					var t = i3GEO.janela.minimiza(idjanela,"120px");
+					if(t === "min"){
+						$i(idjanela + "I").style.display = "none";
+						$i("i3GEOFgraficoRodape" + idjanela).style.display = "none";
+					} else {
+						$i(idjanela + "I").style.display = "block";
+						$i("i3GEOFgraficoRodape" + idjanela).style.display = "block";
+					}
 				};
 				mudaTamanhoGrafico = function() {
 					var t = $i(idjanela + "i3GEOgraficointerativo1Grafico");
@@ -575,8 +582,12 @@ i3GEOF.graficointerativo1 =
 					i3GEOF.graficointerativo1.iniciaJanelaFlutuante();
 				};
 				titulo =
-					"<span class='i3GEOconeFerramenta i3GEOiconeGrafico'></span>" + $trad("t37b") + " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-						+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
+					"<span class='i3GEOconeFerramenta i3GEOiconeGrafico' title='"+$trad("t37b")+"'></span>"
+					+ "<div id='" + idjanela + "I' style='left:10px;'>"
+					+ "&nbsp;&nbsp;&nbsp;" + $trad("t37b")
+					+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+					+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a></div></div>";
+
 				janela =
 					i3GEO.janela.cria(
 						i3GEOF.graficointerativo1.propJanelas[idjanela].w,
@@ -600,7 +611,7 @@ i3GEOF.graficointerativo1 =
 				// indica se a janela sera atualizada na navegacao
 				temp = 'i3GEOF.graficointerativo1.propJanelas["' + idjanela + '"].atualiza = this.checked';
 				janela[0]
-					.setFooter("<div style=background-color:#F2F2F2; ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
+					.setFooter("<div id='i3GEOFgraficoRodape" + idjanela + "' style=background-color:#F2F2F2; ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
 						+ temp + "' type=checkbox />&nbsp;" + $trad("atualizaNavegacao", i3GEOF.graficointerativo1.dicionario) + " (" + idjanela + ")</div>");
 
 				temp = function() {

@@ -224,16 +224,26 @@ i3GEOF.tabela =
 				i3GEOF.tabela.ativaFoco(id);
 			};
 			minimiza = function() {
-				i3GEO.janela.minimiza(id);
+				var t = i3GEO.janela.minimiza(id,"120px");
+				if(t === "min"){
+					$i(id + "I").style.display = "none";
+					$i("i3GEOFtabelaRodape" + id).style.display = "none";
+				} else {
+					$i(id + "I").style.display = "block";
+					$i("i3GEOFtabelaRodape" + id).style.display = "block";
+				}
 			};
 			duplica = function() {
 				i3GEOF.tabela.iniciaJanelaFlutuante();
 			};
 			// cria a janela flutuante
 			titulo =
-				"<span class='i3GEOconeFerramenta i3GEOiconeTabela'></span>" + "<div  id='" + id + "i3GEOFtabelaComboCabeca' class='comboTemasCabecalho'></div>&nbsp;&nbsp;&nbsp;"
-					+ $trad('tabela', i3GEOF.tabela.dicionario) + " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";
+			"<span class='i3GEOconeFerramenta i3GEOiconeTabela' title='"+$trad('tabela', i3GEOF.tabela.dicionario)+"'></span>"
+			+ "<div id='" + id + "I' style='left:10px;'>"
+			+ "<div  id='" + id + "i3GEOFtabelaComboCabeca' class='comboTemasCabecalho' style='left:0px;'>   ------</div>&nbsp;&nbsp;&nbsp;" + $trad('tabela', i3GEOF.tabela.dicionario)
+			+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+			+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a></div></div>";
+
 			janela =
 				i3GEO.janela.cria(
 					"550px",
@@ -262,7 +272,7 @@ i3GEOF.tabela =
 			// indica se a janela sera atualizada na navegacao
 			temp = 'i3GEOF.tabela.propJanelas["' + id + '"].atualiza = this.checked';
 			janela[0]
-				.setFooter("<div style=background-color:#F2F2F2; ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
+				.setFooter("<div id='i3GEOFtabelaRodape" + id + "' style=background-color:#F2F2F2; ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
 					+ temp + "' type=checkbox />&nbsp;" + $trad('atualizaAoNavegar', i3GEOF.tabela.dicionario) + " (" + id + ")</div>");
 
 			i3GEOF.tabela.inicia(divid, id);

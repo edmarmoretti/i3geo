@@ -244,9 +244,19 @@ i3GEOF.selecao = {
 				i3GEOF.selecao.ativaFoco();
 			};
 			minimiza = function(){
-				i3GEO.janela.minimiza("i3GEOF.selecao");
+				var t = i3GEO.janela.minimiza("i3GEOF.selecao","100px");
+				if(t === "min"){
+					$i("i3GEOFSelecaoCabecalhoI").style.display = "none";
+				} else {
+					$i("i3GEOFSelecaoCabecalhoI").style.display = "block";
+				}
 			};
-			titulo = "<span class='i3GEOconeFerramenta i3GEOiconeSelecao'></span>" + $trad("x51")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>";
+			titulo = 
+				"<span class='i3GEOconeFerramenta i3GEOiconeSelecao' title='"+$trad("x51")+"'></span>"
+				+ "<div id='i3GEOFSelecaoCabecalhoI' style='left:10px;'>"
+				+ "&nbsp;&nbsp;&nbsp;" + $trad("x51")
+				+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+				+ "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a></div></div>";
 			janela = i3GEO.janela.cria(
 					"510px",
 					"210px",

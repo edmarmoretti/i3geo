@@ -376,13 +376,20 @@ i3GEOF.legenda =
 				i3GEOF.legenda.ativaFoco();
 			};
 			minimiza = function() {
-				i3GEO.janela.minimiza("i3GEOF.legenda");
+				var t = i3GEO.janela.minimiza("i3GEOF.legenda","100px");
+				if(t === "min"){
+					$i("i3GEOFlegendaCabecalhoI").style.display = "none";
+				} else {
+					$i("i3GEOFlegendaCabecalhoI").style.display = "block";
+				}
 			};
 			// cria a janela flutuante
 			titulo =
-				"<span class='i3GEOconeFerramenta i3GEOiconeLegenda'></span>" + "<div  id='i3GEOFlegendaComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;&nbsp;&nbsp;" + $trad("t33")
-					+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>";
+				"<span class='i3GEOconeFerramenta i3GEOiconeLegenda' title='"+$trad("t33")+"'></span>"
+				+ "<div id='i3GEOFlegendaCabecalhoI' style='left:10px;'>"
+				+ "<div  id='i3GEOFlegendaComboCabeca' class='comboTemasCabecalho' style='left:0px;'>   ------</div>&nbsp;&nbsp;&nbsp;" + $trad("t33")
+				+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+				+ "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a></div></div>";
 			janela =
 				i3GEO.janela.cria(
 					"490px",
