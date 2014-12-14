@@ -974,6 +974,27 @@ i3GEO.guias =
 		 * estilo alterado para none, tornando-se invis&iacute;veis
 		 *
 		 */
+		mostraGuiaFerramenta : function(guia, namespace) {
+			var g, Dom = YAHOO.util.Dom;
+			if (!namespace) {
+				namespace = "guia";
+			}
+			for (g = 0; g < 12; g++) {
+				Dom.setStyle(
+					namespace
+						+ g
+						+ "obj",
+					"display",
+					"none");
+			}
+			Dom.setStyle(
+				guia
+					+ "obj",
+				"display",
+				"block");
+		},
+		//TODO documentar
+		//TODO incluir nas ferramentas
 		ajustaGuiaFerramenta : function(idjanela,namespace){
 			var c = $i("i3GEOF.legenda_corpo"),
 				h,
@@ -996,30 +1017,6 @@ i3GEO.guias =
 					temp.style.overflow = "auto";
 				}
 			}
-		},
-		mostraGuiaFerramenta : function(guia, namespace) {
-			var g, Dom = YAHOO.util.Dom;
-			if (!namespace) {
-				namespace = "guia";
-			}
-			Dom.setStyle(
-				guia
-					+ "obj",
-				"overflow",
-				"auto");
-			for (g = 0; g < 12; g++) {
-				Dom.setStyle(
-					namespace
-						+ g
-						+ "obj",
-					"display",
-					"none");
-			}
-			Dom.setStyle(
-				guia
-					+ "obj",
-				"display",
-				"block");
 		},
 		/**
 		 * Section: guiaMovel
