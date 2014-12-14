@@ -149,7 +149,7 @@ i3GEOF.filtro = {
 		//cria a janela flutuante
 		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeFiltro'></span>" + "<div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;&nbsp;&nbsp;"+$trad("t29")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"480px",
+			"570px",
 			"250px",
 			"",
 			"",
@@ -225,7 +225,7 @@ i3GEOF.filtro = {
 					"display:block"
 				);
 			};
-			operador = "&nbsp;<div class='styled-select' style='width:60px;margin-left:5px;position:relative;top:-7px;'><select>";
+			operador = "&nbsp;<div class='styled-select' style='width:95px;margin-left:5px;position:relative;top:-7px;'><select>";
 			operador += "<option value='='>"+$trad('igual',i3GEOF.filtro.dicionario)+"</option>";
 			operador += "<option value='!='>dif</option>";
 			operador += "<option value='<'>"+$trad('menor',i3GEOF.filtro.dicionario)+"</option>";
@@ -237,7 +237,7 @@ i3GEOF.filtro = {
 			operador += "<option value='not ilike'>not like (Postgis)</option>";
 			operador += "<option value='~='>regExp</option></select></div>";
 
-			conector = "&nbsp;<div class='styled-select' style='width:60px;margin-left:5px;position:relative;top:-7px;' ><select>";
+			conector = "&nbsp;<div class='styled-select' style='width:95px;margin-left:5px;position:relative;top:-7px;' ><select>";
 			conector += "<option value='and'>"+$trad('e',i3GEOF.filtro.dicionario)+"</option>";
 			conector += "<option value='or'>"+$trad('ou',i3GEOF.filtro.dicionario)+"</option>";
 			conector += "<option value='not'>"+$trad('nao',i3GEOF.filtro.dicionario)+"</option></select></div>";
