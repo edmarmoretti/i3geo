@@ -346,6 +346,9 @@ i3GEOF.legenda =
 			} catch (erro) {
 				i3GEO.janela.tempoMsg(erro);
 			}
+			if(i3GEO.guias.ajustaGuiaFerramenta){
+				i3GEO.guias.ajustaGuiaFerramenta("i3GEOF.legenda","i3GEOlegenda");
+			}
 		},
 		/*
 		 * Function: html

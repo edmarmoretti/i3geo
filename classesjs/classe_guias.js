@@ -974,11 +974,39 @@ i3GEO.guias =
 		 * estilo alterado para none, tornando-se invis&iacute;veis
 		 *
 		 */
+		ajustaGuiaFerramenta : function(idjanela,namespace){
+			var c = $i("i3GEOF.legenda_corpo"),
+				h,
+				g,
+				temp;
+
+			c.style.overflow = "unset";
+			c.style.overflow = "none";
+
+			h = c.style.height;
+			h = parseInt(h,10) - 40 + "px";
+			for (g = 0; g < 12; g++) {
+				temp = $i(namespace
+					+ "guia"
+					+ g
+					+ "obj");
+				if(temp){
+					temp.style.height = h;
+					temp.style.width = "100%";
+					temp.style.overflow = "auto";
+				}
+			}
+		},
 		mostraGuiaFerramenta : function(guia, namespace) {
 			var g, Dom = YAHOO.util.Dom;
 			if (!namespace) {
 				namespace = "guia";
 			}
+			Dom.setStyle(
+				guia
+					+ "obj",
+				"overflow",
+				"auto");
 			for (g = 0; g < 12; g++) {
 				Dom.setStyle(
 					namespace
