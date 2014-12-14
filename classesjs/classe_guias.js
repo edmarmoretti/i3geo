@@ -993,10 +993,25 @@ i3GEO.guias =
 				"display",
 				"block");
 		},
-		//TODO documentar
+		/**
+		 * Function: ajustaGuiaFerramenta
+		 * 
+		 * Ajusta as guias de uma janela para que sempre fiquem no topo da janela, aplicando o overflow ao conte&uacute;do das guias
+		 * 
+		 * Deve ser utilizado pelas ferramentas ap&oacute;s a janela ter seu conte&uacute;do renderizado.
+		 * 
+		 * Veja como exemplo a ferramenta tabela
+		 * 
+		 * Paremeters:
+		 * 
+		 * {string} - id da janela
+		 * 
+		 * {string} - namespace da janela utilizado para definir os elementos DIV onde o conte&uacute;do &eacute; renderizado
+		 * 
+		 */
 		//TODO incluir nas ferramentas
 		ajustaGuiaFerramenta : function(idjanela,namespace){
-			var c = $i("i3GEOF.legenda_corpo"),
+			var c = $i(idjanela + "_corpo"),
 				h,
 				g,
 				temp;
