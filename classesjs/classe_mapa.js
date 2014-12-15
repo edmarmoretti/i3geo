@@ -9,8 +9,8 @@
  *
  * Namespace:
  *
- * i3GEO.mapa 
- * 
+ * i3GEO.mapa
+ *
  * Veja:
  *
  * <http://localhost/i3geo/classesjs/classe_mapa.js>
@@ -55,7 +55,7 @@ i3GEO.mapa =
 		 * Os temas sao aqueles que aparecem em i3geo/temas
 		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {string}
 		 */
 		TEMASINICIAISLIGADOS : "",
@@ -69,7 +69,7 @@ i3GEO.mapa =
 		 * Os temas sao aqueles que aparecem em i3geo/temas
 		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {string}
 		 */
 		TEMASINICIAIS : "",
@@ -79,11 +79,11 @@ i3GEO.mapa =
 		 * Indica se o tamanho do mapa sera ajustado toda vez que o navegador for redimensionado
 		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {boolean}
 		 *
 		 * Default:
-		 * 
+		 *
 		 * false
 		 */
 		AUTORESIZE : false,
@@ -93,11 +93,11 @@ i3GEO.mapa =
 		 * Resolu&ccedil;&atilde;o de busca utilizada no bal&atilde;o de identifica&ccedil;&atilde;o
 		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {numeric}
 		 *
 		 * Default:
-		 * 
+		 *
 		 * 12
 		 */
 		RESOLUCAOTIP : 12,
@@ -488,11 +488,11 @@ i3GEO.mapa =
 			 * Define se na legenda sera incluido o botao para liberar a legenda e inclui-la em uma janela flutuante
 			 *
 			 * Tipo:
-			 * 
+			 *
 			 * {boolean}
 			 *
 			 * Default:
-			 * 
+			 *
 			 * true
 			 */
 			incluiBotaoLibera : false,
@@ -657,13 +657,13 @@ i3GEO.mapa =
 			 * Parametros:
 			 *
 			 * {sim|nao} - (opcional) inclui ou nao o checkbox que permitem desligar a camada
-			 * 
+			 *
 			 * {numeric} - largura da janela
-			 * 
+			 *
 			 * {numeric} - altura
-			 * 
+			 *
 			 * {numeric} - posicao desde o topo
-			 * 
+			 *
 			 * {numeric} - posicao desde a esquerda
 			 */
 			libera : function(ck, largura, altura, topo, esquerda) {
@@ -676,13 +676,20 @@ i3GEO.mapa =
 				if (!altura) {
 					altura = 300;
 				}
-				var cabecalho, minimiza, janela;
+				var cabecalho, minimiza, janela, titulo;
 				if (!$i("wlegenda")) {
 					cabecalho = function() {
 					};
 					minimiza = function() {
-						i3GEO.janela.minimiza("wlegenda");
+						var t = i3GEO.janela.minimiza("wlegenda","100px");
+						if(t === "min"){
+							$i("legendaTituloI").style.display = "none";
+						} else {
+							$i("legendaTituloI").style.display = "block";
+						}
 					};
+					titulo = "<span class='i3GEOconeFerramenta i3GEOiconeLegenda' title='"+$trad("P3")+"'></span>" +
+					"<div id='legendaTituloI' style='display:block;' >"+$trad("p3")+"</div>";
 					janela =
 						i3GEO.janela.cria(
 							largura + "px",
@@ -690,7 +697,7 @@ i3GEO.mapa =
 							"",
 							"",
 							"",
-							$trad("p3"),
+							titulo,
 							"wlegenda",
 							false,
 							"hd",
@@ -722,11 +729,11 @@ i3GEO.mapa =
 			 * Function: wkt2layer
 			 *
 			 * Janela de conversao de wkt em layer
-			 * 
+			 *
 			 * Parametros:
-			 * 
+			 *
 			 * {string} - (opcional) WKT
-			 * 
+			 *
 			 * {texto} - (opcional) texto a ser incluido na feicao
 			 */
 			wkt2layer: function(wkt,texto){
@@ -739,9 +746,9 @@ i3GEO.mapa =
 			 * Function: atalhosedicao
 			 *
 			 * Janela com as principais opcoes de edicao de um layer. Utilizado pelo sistema de administracao
-			 * 
+			 *
 			 * Parametro:
-			 * 
+			 *
 			 * {string} - codigo do tema
 			 */
 			atalhosedicao: function(idtema){
@@ -1066,7 +1073,7 @@ i3GEO.mapa =
 			 * Parametros:
 			 *
 			 * {numerco} - (opcional) coordenada x
-			 * 
+			 *
 			 * {numerco} - (opcional) coordenada y
 			 *
 			 */
