@@ -4,7 +4,7 @@ FONTSET   "../symbols/fontes.txt"
 LAYER
       NAME "refdin"
       TYPE RASTER
-      STATUS default
+      STATUS DEFAULT
       CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseref.map&"
       #CONNECTION "http://labs.metacarta.com/wms/vmap0"
       CONNECTIONTYPE WMS
@@ -21,6 +21,25 @@ LAYER
       END
 	  TRANSPARENCY 100
 END
+#
+# se preferir usar esse LAYER, comente o anterior e descomente esse
+#
+#LAYER
+#	DATA "/var/www/i3geo/aplicmap/dados/mundo"
+#	NAME "refdin"
+#	STATUS DEFAULT
+#	TEMPLATE "none.htm"
+#	TYPE POLYGON
+#	UNITS METERS
+#	CLASS
+#		NAME "" #vazio indica que nao sera incluido o nome ao lado do simbolo
+#		STYLE
+#			COLOR 230 230 230
+#			OUTLINECOLOR 255 255 255
+#		END
+#	END
+#END
+
 LAYER
 	NAME "refdinrect"
 	TYPE line

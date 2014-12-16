@@ -3,6 +3,9 @@
  *
  * Cria e processa o mapa de refer&ecirc;ncia
  *
+ * Para modificar o mapa de refer&ecirc;ncia, quando a op&ccedil;&atilde;o for din&acirc;mica,
+ * edite o arquivo i3geo/aplicmap/referenciadinamica.map
+ *
  * Namespace:
  *
  * i3GEO.maparef
@@ -36,9 +39,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-//TODO incluir opcao para definir o que entra no combo de escolha.
-//TODO Incluir ajuda indicando onde alterar o mapa
-//TODO corrigir layout
 i3GEO.maparef =
 	{
 		/**
@@ -228,8 +228,8 @@ i3GEO.maparef =
 					if (this.SELETORTIPO) {
 						ins +=
 							"<select style='font-size:9px;' id='refDinamico' onchange='javascript:i3GEO.parametros.celularef=\"\";i3GEO.maparef.atualiza()'>";
-						ins += "<option value='mapa'  >mapa atual</option>";
-						ins += "<option value='dinamico' >Brasil</option>";
+						ins += "<option value='mapa'  >" + $trad("refMapaAtual") + "</option>";
+						ins += "<option value='dinamico' >" + $trad("refMapaDinamico") + "</option>";
 						ins += "</select>";
 					}
 					ins += "</div>";

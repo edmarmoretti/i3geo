@@ -2304,6 +2304,18 @@ g_traducao = {
 	pt: "SAIKU - OLAP (abrir em janela interna)",
 	en:"",
 	es:""
+}],
+"refMapaAtual": [
+{
+	pt: "Mapa atual",
+	en:"",
+	es:""
+}],
+"refMapaDinamico": [
+{
+	pt: "Mapa din&acirc;mico",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");
