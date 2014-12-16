@@ -159,12 +159,22 @@ i3GEOF.salvamapfile = {
 		if(i3GEOF.salvamapfile.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.salvamapfile.aguarde.visibility = "visible";
-		var temp = function(){
-				i3GEOF.salvamapfile.aguarde.visibility = "hidden";
-				$i("i3GEOsalvamapconcluido").style.display = "block";
-			},
-			p = i3GEO.configura.locaplic+"/admin/php/editormapfile.php?funcao=REFAZERLAYER&codigomap="+nome+"&maporigem="+mapfile+"&nomelayer="+nomelayer,
-			cp = new cpaint();
+		var p, tema, temp, cp;
+		temp = function(){
+			i3GEOF.salvamapfile.aguarde.visibility = "hidden";
+			$i("i3GEOsalvamapconcluido").style.display = "block";
+		};
+		//
+		//alguns parametros sao obtidos do valor armazenado no objeto CAMADAS
+		//esses parametros podem ter sido alterados por outra ferramenta
+		//
+		tema = i3GEO.arvoreDeCamadas.pegaTema(nome);
+		p = i3GEO.configura.locaplic+"/admin/php/editormapfile.php?funcao=REFAZERLAYER"
+			+ "&codigomap="+nome
+			+ "&maporigem=" + mapfile
+			+ "&nomelayer="+nomelayer
+			+ "&cache=" + tema.cache;
+		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"",temp);
 	}

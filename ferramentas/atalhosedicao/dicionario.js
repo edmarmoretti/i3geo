@@ -44,5 +44,10 @@ i3GEOF.atalhosedicao.dicionario = {
 		pt : "Aplicar",
 		en : "",
 		es : ""
+	} ],
+	'ativaCache' : [ {
+		pt : "Ativa o cache para melhorar a performance (durante a edi&ccedil;&atilde;o, desmarque essa op&ccedil;&atilde;o)",
+		en : "",
+		es : ""
 	} ]
 };

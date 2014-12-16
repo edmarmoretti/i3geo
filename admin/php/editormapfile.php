@@ -1130,8 +1130,11 @@ function clonarMapfile()
 }
 function refazerLayer()
 {
-	global $nomelayer, $codigomap, $maporigem, $locaplic;
+	global $nomelayer, $codigomap, $maporigem, $locaplic, $cache;
 	error_reporting(0);
+	if(empty($cache)){
+		$cache = "";
+	}
 	$mapa = ms_newMapObj($maporigem);
 	$arqtema = $locaplic."/temas/".$codigomap.".map";
 	$mapatema = ms_newMapObj($arqtema);
@@ -1148,7 +1151,7 @@ function refazerLayer()
 		$nl->setmetadata("olstatus","");
 		$nl->setmetadata("gmopacity","");
 		$nl->setmetadata("gmstatus","");
-		$nl->setmetadata("cache","");
+		$nl->setmetadata("cache",$cache);
 		$numclasses = $nl->numclasses;
 		if ($numclasses > 0)
 		{

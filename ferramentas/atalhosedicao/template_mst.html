@@ -1,40 +1,63 @@
 <style>
 .yui-button#i3GEOFatalhosedicaoSalva button {
-	background: url(../imagens/oxygen/16x16/document-save.png) 5% 50% no-repeat;
+	background: url(../imagens/oxygen/16x16/document-save.png) 5% 50%
+		no-repeat;
 }
+
 .yui-button#i3GEOFatalhosedicaoLegenda button {
-	background: url(../imagens/oxygen/16x16/format-list-unordered.png) 5% 50% no-repeat;
+	background: url(../imagens/oxygen/16x16/format-list-unordered.png) 5%
+		50% no-repeat;
 }
+
 .yui-button#i3GEOFatalhosedicaoTabela button {
-	background: url(../imagens/oxygen/16x16/view-form-table.png) 5% 50% no-repeat;
+	background: url(../imagens/oxygen/16x16/view-form-table.png) 5% 50%
+		no-repeat;
 }
+
 .yui-button#i3GEOFatalhosedicaoTexto button {
 	background: url(../imagens/oxygen/16x16/draw-text.png) 5% 50% no-repeat;
 }
+
 .yui-button#i3GEOFatalhosedicaoEtiqueta button {
-	background: url(../imagens/oxygen/16x16/feed-subscribe.png) 5% 50% no-repeat;
+	background: url(../imagens/oxygen/16x16/feed-subscribe.png) 5% 50%
+		no-repeat;
 }
+
 .yui-button#i3GEOFatalhosedicaoFiltro button {
-	background: url(../imagens/oxygen/16x16/view-filter.png) 5% 50% no-repeat;
+	background: url(../imagens/oxygen/16x16/view-filter.png) 5% 50%
+		no-repeat;
 }
 </style>
 <div style='margin-left: 5px'>
 	<p class='paragrafo'>{{{edicao}}}</p>
 	<p class='paragrafo'>
 		<input id='i3GEOFatalhosedicaoSalva' type='button' value='{{{salva}}}' />
+	</p>
 	<p class='paragrafo'>
 		<input id='i3GEOFatalhosedicaoLegenda' type='button' value='{{{legenda}}}' />
+	</p>
 	<p class='paragrafo'>
 		<input id='i3GEOFatalhosedicaoTabela' type='button' value='{{{tabela}}}' />
+	</p>
 	<p class='paragrafo'>
 		<input id='i3GEOFatalhosedicaoTexto' type='button' value='{{{texto}}}' />
+	</p>
 	<p class='paragrafo'>
 		<input id='i3GEOFatalhosedicaoEtiqueta' type='button' value='{{{etiqueta}}}' />
+	</p>
 	<p class='paragrafo'>
 		<input id='i3GEOFatalhosedicaoFiltro' type='button' value='{{{filtro}}}' />
-	<p class='paragrafo'>{{{opacidade}}}
+	</p>
+	<p class='paragrafo'>{{{opacidade}}}</p>
 	<div class='i3geoForm i3geoFormIconeEdita' style='width: 90px; float: left;'>
 		<input id='i3GEOFatalhosedicaoOpacidade' type='text' value='' />
 	</div>
 	<input id='i3GEOFatalhosedicaoOpacidadeB' type='button' value='{{{aplicar}}}' />
+	<br>
+	<br>
+	<!-- Opcoes que alteram os metadata do LAYER basta incluir em name o nome do metadata e indicar com true ou false se o valor e do tipo sim|nao. Se for false, o valor e obtido de value -->
+	<p class='paragrafo'>
+		<input id='i3GEOFatalhosedicaoCache' name='cache' onclick='i3GEOF.atalhosedicao.metadata(this,true)' style='cursor: pointer' type='checkbox' id='' />
+		<label>{{{ativaCache}}}</label>
+	</p>
 </div>

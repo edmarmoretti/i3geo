@@ -1227,8 +1227,10 @@ i3GEO.janela =
 
 										if (i3GEOF[ferramenta]) {
 											i3GEOF[ferramenta].tema = oMenuItem.value;
-											$i("i3GEOF." + ferramenta + "_corpo").innerHTML = "";
-											eval("i3GEOF." + ferramenta + ".inicia('i3GEOF." + ferramenta + "_corpo');");
+											if($i("i3GEOF." + ferramenta + "_corpo")){
+												$i("i3GEOF." + ferramenta + "_corpo").innerHTML = "";
+												eval("i3GEOF." + ferramenta + ".inicia('i3GEOF." + ferramenta + "_corpo');");
+											}
 										}
 									}
 								}
