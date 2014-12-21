@@ -46,10 +46,11 @@ navn = false; // netscape
 var app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
 i3GEO = window.parent.i3GEO;
+MARCA = false;
 $i = function(id){
 	return window.parent.document.getElementById(id);
 };
-box = window.parent.$i("boxpingoogle");
+//TODO converter box em elemento da api OpenLayers
 if(i3GEO){
 	i3GEO.util.criaBox("boxg");
 	$i("boxg").style.display = "none";
@@ -61,11 +62,10 @@ function inicializa(){
 		coordenadas = false,
 		pol,ret,pt1,pt2,centro;
 	if(i3GEO){
-		i3GEO.util.criaPin("boxpingoogle",i3GEO.configura.locaplic+'/imagens/dot1red.gif',"5px","5px");
-		box = $i("boxpingoogle");
 		m.style.width = (i3GEO.parametros.w / 2.5) - 20 + "px";
 		m.style.height = (i3GEO.parametros.h / 2.5) -20 + "px";
 		i3geoOverlay = false;
+
 		if($i("boxg")){
 			$i("boxg").style.zIndex = 0;
 		}
@@ -102,11 +102,13 @@ function inicializa(){
 	});
 	google.maps.event.addListener(map, "mousemove", function(ponto) {
 		var teladms,temp,
-			mapexten = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-		teladms = i3GEO.calculo.dd2dms(ponto.x,ponto.y);
+			mapexten = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten),
+			x = ponto.latLng.lng(),
+			y = ponto.latLng.lat();
+		teladms = i3GEO.calculo.dd2dms(x,y);
 		window.parent.objposicaocursor = {
-			ddx: ponto.x,
-			ddy: ponto.y,
+			ddx: x,
+			ddy: y,
 			dmsx: teladms[0],
 			dmsy: teladms[1],
 			imgx:0,
@@ -118,14 +120,13 @@ function inicializa(){
 		if(i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
 		temp = mapexten.split(" ");
-		//TODO usar desenho.addPin
-		if(ponto.x < temp[2] && ponto.y < temp[3]){
-			xy = i3GEO.calculo.dd2tela(ponto.x,ponto.y,$i(i3GEO.Interface.IDMAPA),mapexten,i3GEO.parametros.pixelsize);
-			box.style.display = "block";
-			box.style.width = "5px";
-			box.style.height = "5px";
-			box.style.top = (parseInt(xy[1],10) + 2.5) +"px";
-			box.style.left = (parseInt(xy[0],10) - 2.5) +"px";
+		if(x < temp[2] && y < temp[3]){
+			if(MARCA === false){
+				MARCA = i3GEO.desenho.addPin(x,y,"","",i3GEO.configura.locaplic+'/imagens/google/confluence.png',"googlemaps");
+			}
+			else{
+				i3GEO.desenho.movePin(MARCA,x,y);
+			}
 		}
 	});
 

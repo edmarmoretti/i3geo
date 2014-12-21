@@ -69,7 +69,7 @@ cpJSON = new cpaint();
 cpJSON.set_response_type("JSON");
 var tl;
 var eventSource1 = new Timeline.DefaultEventSource();
-
+MARCA = false;
 /*
 Function: inicializa
 
@@ -191,13 +191,14 @@ wkt {String} - coordenadas do evento no formato WKT
 */
 function tituloover(wkt){
 	//@FIXME nao funciona no OSM
-	if(window.parent.i3GEO.Interface.openlayers.googleLike === true){
+	var wi = window.parent;
+	if(wi.i3GEO.Interface.openlayers.googleLike === true){
 		return;
 	}
 	try{
-		if(!window.parent){return;}
-		if(!window.parent.i3GEO){return;}
-		if(!window.parent.i3GEO.calculo){return;}
+		if(!wi){return;}
+		if(!wi.i3GEO){return;}
+		if(!wi.i3GEO.calculo){return;}
 	}
 	catch(e){if(typeof(console) !== 'undefined'){console.error(e);};return;}
 
@@ -206,14 +207,14 @@ function tituloover(wkt){
 	wkt = wkt.split("(")[1].split(")")[0];
 	wkt = wkt.split(" ");
 
-	var ext = window.parent.i3GEO.util.extOSM2Geo(window.parent.i3GEO.parametros.mapexten);
-	var xy = window.parent.i3GEO.calculo.dd2tela(wkt[0],wkt[1],window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),ext,window.parent.i3GEO.parametros.pixelsize)
-
-	window.parent.i3GEO.util.criaPin('marcaIdentifica',window.parent.i3GEO.configura.locaplic+"/imagens/marker.png","21px","25px");
-	var i = window.parent.document.getElementById('marcaIdentifica')
-	i.style.top = xy[1]-25+"px";
-	i.style.left = xy[0]-10+"px";
-	i.style.display = "block"
+	if(wi.i3GEO.Interface.ATUAL === "googleearth")
+	{return;}
+	if(MARCA === false){
+		MARCA = wi.i3GEO.desenho.addPin(wkt[0],wkt[1],"","",wi.i3GEO.configura.locaplic+'/imagens/google/confluence.png',"linhadotempo");
+	}
+	else{
+		wi.i3GEO.desenho.movePin(MARCA,wkt[0],wkt[1]);
+	}
 }
 /*
 Function: tituloclique
@@ -251,7 +252,9 @@ Remove do mapa a marca de localiza&ccedil;&atilde;o do evento quando o usu&aacut
 
 */
 function tituloout(){
-	window.parent.i3GEO.util.escondePin();
+	var wi = window.parent;
+	wi.i3GEO.desenho.removePins("linhadotempo");
+	MARCA = false;
 }
 /*
 Function: onResize
