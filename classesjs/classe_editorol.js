@@ -251,7 +251,8 @@ i3GEO.editorOL = {
 		if(i3GEO.editorOL.layersIniciais !== ""){
 			n = i3GEO.editorOL.layersIniciais.length;
 			for(i=0;i<n;i++){
-				i3GEO.editorOL.layersIniciais[i].singleTile = single;
+				//singleTile deve ser definido em cada layer
+				//i3GEO.editorOL.layersIniciais[i].singleTile = single;
 				i3GEO.editorOL.mapa.addLayer(i3GEO.editorOL.layersIniciais[i]);
 			}
 		}

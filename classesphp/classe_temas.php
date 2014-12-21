@@ -712,7 +712,7 @@ $wkt - boolean indicando se $xy e um WKT
 					if ((!isset($marca)) || ($marca=="")){$marca="marca";}
 					if(!isset($tamanho)){$tamanho = 5;}
 					$e->set("size",$tamanho);
-					$e->set("symbol",$marca);
+					$e->set("symbolname",$marca);
 					corE($e,$cor,"color");
 					$pinlayer->setmetadata("tema","Pontos inseridos");
 					$pinlayer->set("type",MS_LAYER_POINT);

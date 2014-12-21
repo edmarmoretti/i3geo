@@ -51,6 +51,7 @@ i3GEOF.confluence = {
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
 	MUSTACHE : "",
+	MARCA: false,
 	/**
 	 * Susbtitutos para o template
 	 */
@@ -106,6 +107,7 @@ i3GEOF.confluence = {
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
+		i3GEOF.confluence.MARCA = false;
 		cabecalho = function(){
 			i3GEOF.confluence.ativaFoco();
 		};
@@ -131,6 +133,7 @@ i3GEOF.confluence = {
 		i3GEOF.confluence.aguarde = $i("i3GEOF.confluence_imagemCabecalho").style;
 		i3GEOF.confluence.inicia(divid);
 		temp = function(){
+			i3GEOF.confluence.escondexy();
 			if(i3GEO.Interface.ATUAL !== "googlemaps"){
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.confluence.lista()");
 			}
@@ -151,7 +154,6 @@ i3GEOF.confluence = {
 	*/
 	ativaFoco: function(){
 		g_operacao = "navega";
-		i3GEO.util.criaPin("pinconf",i3GEO.configura.locaplic+'/imagens/google/confluence.png');
 		var i = $i("i3GEOF.confluence_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
@@ -162,12 +164,8 @@ i3GEOF.confluence = {
 	Esconde a marca mostrada no mapa
 	*/
 	escondexy: function(){
-		if($i("pinconf")){
-			var box = $i("pinconf");
-			box.style.display = "none";
-			box.style.top = "0px";
-			box.style.left = "0px";
-		}
+		i3GEO.desenho.removePins("confluence");
+		i3GEOF.confluence.MARCA = false;
 	},
 	/*
 	Function: mostraxy
@@ -175,19 +173,15 @@ i3GEOF.confluence = {
 	Indica a conflu&ecirc;ncia no mapa
 	*/
 	mostraxy: function(xy){
-		/*
-		 * @TODO nao funciona no OSM
-		 */
 		if(i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
-		var box = $i("pinconf");
 		xy = xy.split(",");
-		xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA));
-		box.style.display = "block";
-		box.style.width = "27px";
-		box.style.height = "27px";
-		box.style.top = parseInt(xy[1],10) - 27 +"px";
-		box.style.left = parseInt(xy[0],10) - 13 +"px";
+		if(i3GEOF.confluence.MARCA === false){
+			i3GEOF.confluence.MARCA = i3GEO.desenho.addPin(xy[1]*1,xy[0]*1,"","",i3GEO.configura.locaplic+'/imagens/google/confluence.png',"confluence");
+		}
+		else{
+			i3GEO.desenho.movePin(i3GEOF.confluence.MARCA,xy[1]*1,xy[0]*1);
+		}
 	},
 	/*
 	Function: lista
@@ -226,7 +220,7 @@ i3GEOF.confluence = {
 			else{
 				for (i=0;i<xs.length;i++){
 					for (j=0;j<ys.length;j++){
-						ins += "<br><a onmouseout='i3GEOF.confluence.escondexy()' onmouseover='i3GEOF.confluence.mostraxy(\""+ys[j]+","+xs[i]+"\")' href='http://www.confluence.org/confluence.php?lat="+ys[j]+"&lon="+xs[i]+" ' target=blank >Long. "+xs[i]+" Lat."+ys[j]+"</a><br>";
+						ins += "<br><a onmouseover='i3GEOF.confluence.mostraxy(\""+ys[j]+","+xs[i]+"\")' href='http://www.confluence.org/confluence.php?lat="+ys[j]+"&lon="+xs[i]+" ' target=blank >Long. "+xs[i]+" Lat."+ys[j]+"</a><br>";
 					}
 				}
 			}

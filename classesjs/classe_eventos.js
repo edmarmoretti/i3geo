@@ -295,10 +295,10 @@ i3GEO.eventos =
 				if (i3GEO.Interface.ATUAL === "googlemaps" && exy.target && !exy.target.src) {
 					i3GEO.eventos.executaEventos(this.MOUSEUP);
 				}
-				if (i3GEO.Interface.ATUAL === "openlayers" && exy.target && (exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)) {
+				if (i3GEO.Interface.ATUAL === "openlayers" && exy.target && (i3GEO.desenho.layergrafico || exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)) {
 					var parente = exy.target.parentNode;
 					if (parente
-						&& (parente.className === "olLayerDiv olLayerGrid" || (parente.childNodes && parente.childNodes[0].attributes[0].nodeValue === "olTileImage"))) {
+						&& (parente.className === "olLayerDiv" || parente.className === "olLayerDiv olLayerGrid" || (parente.childNodes && parente.childNodes[0].attributes[0].nodeValue === "olTileImage"))) {
 						i3GEO.eventos.executaEventos(this.MOUSEUP);
 					}
 				}

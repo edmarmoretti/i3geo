@@ -118,6 +118,7 @@ function inicializa(){
 		if(i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
 		temp = mapexten.split(" ");
+		//TODO usar desenho.addPin
 		if(ponto.x < temp[2] && ponto.y < temp[3]){
 			xy = i3GEO.calculo.dd2tela(ponto.x,ponto.y,$i(i3GEO.Interface.IDMAPA),mapexten,i3GEO.parametros.pixelsize);
 			box.style.display = "block";

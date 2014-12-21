@@ -1255,6 +1255,7 @@ i3GEO.mapa =
 									$i(n).style.textAlign = "left";
 									$i(n).innerHTML += res;
 								} else {
+									//TODO usar a criacao de imagens i3GEO.desenho
 									if (i3GEO.Interface.ATUAL === "googleearth") {
 										i3GEO.Interface.googleearth.balao(res, objposicaocursor.ddx, objposicaocursor.ddy);
 										i3GEO.Interface.googleearth.aguarde.visibility = "hidden";
@@ -1286,7 +1287,6 @@ i3GEO.mapa =
 												document.body.removeChild(balloon.getEventTarget(e));
 												balloon.hideTooltip();
 											};
-
 										}
 									}
 								}

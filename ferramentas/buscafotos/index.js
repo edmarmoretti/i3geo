@@ -42,6 +42,7 @@ if(typeof(i3GEOF) === 'undefined'){
 Class: i3GEOF.buscaFotos
 */
 i3GEOF.buscaFotos = {
+	MARCA : false,
 	/*
 	Variavel: aguarde
 
@@ -196,6 +197,7 @@ i3GEOF.buscaFotos = {
 		i3GEOF.buscaFotos.aguarde = $i("i3GEOF.buscaFotos_imagemCabecalho").style;
 		i3GEOF.buscaFotos.inicia(divid);
 		temp = function(){
+			i3GEOF.buscaFotos.escondexy();
 			i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.buscaFotos.busca('1')");
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
@@ -207,7 +209,6 @@ i3GEOF.buscaFotos = {
 	*/
 	ativaFoco: function(){
 		g_operacao = "navega";
-		i3GEO.util.criaPin("pinfoto",i3GEO.configura.locaplic+'/imagens/google/foto.png');
 		if(!$i("i3GEOF.buscaFotos_c"))
 		{return;}
 		var i = $i("i3GEOF.buscaFotos_c").style;
@@ -292,12 +293,8 @@ i3GEOF.buscaFotos = {
 	Esconde a imagem de localiza&ccedil;&atilde;o da foto no mapa
 	*/
 	escondexy: function(){
-		if($i("pinfoto")){
-			var box = $i("pinfoto");
-			box.style.display = "none";
-			box.style.top = "0px";
-			box.style.left = "0px";
-		}
+		i3GEO.desenho.removePins("foto");
+		i3GEOF.buscaFotos.MARCA = false;
 	},
 	/*
 	Function: mostraxy
@@ -308,13 +305,12 @@ i3GEOF.buscaFotos = {
 		if(i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
 		xy = xy.split(",");
-	 	xy = i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,$i(i3GEO.Interface.IDMAPA));
-		var box = $i("pinfoto");
-		box.style.display = "block";
-		box.style.width = "27px";
-		box.style.height = "27px";
-		box.style.top = parseInt(xy[1],10) - 27 + "px";
-		box.style.left = parseInt(xy[0],10) - 13 +"px";
+		if(i3GEOF.buscaFotos.MARCA === false){
+			i3GEOF.buscaFotos.MARCA = i3GEO.desenho.addPin(xy[1]*1,xy[0]*1,"","",i3GEO.configura.locaplic+'/imagens/google/foto.png',"foto");
+		}
+		else{
+			i3GEO.desenho.movePin(i3GEOF.buscaFotos.MARCA,xy[1]*1,xy[0]*1);
+		}
 	},
 	/*
 	Function: listafotospanoramio

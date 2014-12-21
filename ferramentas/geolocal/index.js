@@ -143,8 +143,6 @@ i3GEOF.geolocal = {
 				i3GEOF.geolocal.paraTempo();
 			};
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-			i3GEO.util.criaPin("pingeolocal",i3GEO.configura.locaplic+'/imagens/google/confluence.png');
-			i3GEOF.geolocal.escondexy();
 		},
 		capturaCoordenada: function(){
 			if(i3GEOF.geolocal.aguarde.visibility == "visible"){
@@ -238,30 +236,13 @@ i3GEOF.geolocal = {
 			i3GEO.mapa.dialogo.cliqueIdentificaDefault(i3GEOF.geolocal.posicoes[i].coords.longitude,i3GEOF.geolocal.posicoes[i].coords.latitude);
 		},
 		mostraxy: function(i){
-			/*
-			 * @TODO nao funciona no OSM
-			 */
 			if(i3GEO.Interface.ATUAL === "googleearth")
 			{return;}
-			var posicao = i3GEOF.geolocal.posicoes[i],
-			xy = [posicao.coords.longitude,posicao.coords.latitude],
-			box = $i("pingeolocal");
-
-			xy = i3GEO.calculo.dd2tela(xy[0]*1,xy[1]*1,$i(i3GEO.Interface.IDMAPA));
-
-			box.style.display = "block";
-			box.style.width = "27px";
-			box.style.height = "27px";
-			box.style.top = parseInt(xy[1],10) - 27 +"px";
-			box.style.left = parseInt(xy[0],10) - 13 +"px";
+			var posicao = i3GEOF.geolocal.posicoes[i];
+			i3GEO.desenho.addPin(posicao.coords.longitude,posicao.coords.latitude,"","",i3GEO.configura.locaplic+'/imagens/google/confluence.png',"pingeolocal");
 		},
 		escondexy: function(){
-			if($i("pingeolocal")){
-				var box = $i("pingeolocal");
-				box.style.display = "none";
-				box.style.top = "0px";
-				box.style.left = "0px";
-			}
+			i3GEO.desenho.removePins("pingeolocal");
 		},
 		posicoes2pontos: function(){
 			var ps = i3GEOF.geolocal.posicoes,
