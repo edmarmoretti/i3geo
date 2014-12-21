@@ -149,7 +149,7 @@ function caminhoRegiao($hs,$chavesRegiao,$h,$regiaoInicial,$caminho)
 	return $caminho;
 }
 function converte($texto){
-	$texto = str_replace("&","&amp;",htmlentities($texto));
+	$texto = str_replace("&","&amp;",htmlentities($texto,ENT_NOQUOTES,mb_detect_encoding($texto)));
 	return $texto;
 }
 function imprimeEsquema(){
