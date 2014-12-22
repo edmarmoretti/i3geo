@@ -1599,7 +1599,7 @@ i3GEO.php =
 		 *
 		 * Salva o mapfile atual no banco de dados de administracao
 		 */
-		salvaMapaBanco : function(funcao, titulo, id_mapa, preferencias, geometrias, graficos) {
+		salvaMapaBanco : function(funcao, titulo, id_mapa, preferencias, geometrias, graficos, tabelas) {
 			// pega as preferencias do usuario tambem
 			if (preferencias) {
 				try {
@@ -1636,7 +1636,19 @@ i3GEO.php =
 			} else {
 				graficos = "";
 			}
-
+			// pega as ferramentas do tipo tabela
+			if (tabelas && i3GEOF && i3GEOF.tabela) {
+				try {
+					tabelas = i3GEOF.tabela.compactaConfig();
+					if (!tabelas) {
+						tabelas = "";
+					}
+				} catch (e) {
+					tabelas = "";
+				}
+			} else {
+				tabelas = "";
+			}
 			var url = (window.location.href.split("?")[0]), p = i3GEO.configura.locaplic + "/admin/php/mapas.php?";
 			par =
 				"funcao=salvaMapfile" + "&url=" + url.replace("#", "") + "&arqmapfile=" + i3GEO.parametros.mapfile + "&nome_mapa=" + titulo
@@ -1646,7 +1658,7 @@ i3GEO.php =
 			cp.set_transfer_mode('POST');
 			cp.set_response_type("JSON");
 			cp.call(p + par, "foo", funcao, "&preferenciasbase64=" + preferencias + "&geometriasbase64=" + geometrias + "&graficosbase64="
-				+ graficos);
+				+ graficos + "&tabelasbase64=" + tabelas);
 		},
 		/**
 		 * Function: marcadores2shp

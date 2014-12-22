@@ -512,6 +512,11 @@ var i3GEO = {
 								&& preferencias.graficosbase64 != "") {
 								i3GEO.mapa.restauraGraficos(preferencias.graficosbase64);
 							}
+							// recupera as tabelas
+							if (preferencias.tabelasbase64
+								&& preferencias.tabelasbase64 != "") {
+								i3GEO.mapa.restauraTabelas(preferencias.tabelasbase64);
+							}
 						}
 					} else {
 						alert("Erro. Impossivel criar o mapa "

@@ -317,6 +317,7 @@ i3GEOF.tabela =
 			};
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		},
+		//TODO listar mesmo os deligados
 		atualizaCombosCabecalhos : function() {
 			var i, id, n = i3GEOF.tabela.janelas.length;
 			for (i = 0; i < n; i++) {
@@ -326,6 +327,36 @@ i3GEOF.tabela =
 					id + "i3GEOFtabelaComboCabecaSel",
 					"tabela",
 					"ligadosComTabela");
+			}
+		},
+		/**
+		 * Obtem os parametros de cada janela e converte em base64. Cada janela e inserida como um item em um objeto A compactacao e
+		 * utilizada para salvar as configuracoes no mapfile atual
+		 */
+		compactaConfig : function() {
+			var c, g, par, janelas, i, n, novoid;
+			par = [];
+			janelas = i3GEOF.tabela.janelas;
+			n = janelas.length;
+			//TODO retornaConfig nao existe
+			for (i = 0; i < n; i++) {
+				novoid = window.prompt($trad('idDaTabela',i3GEOF.tabela.dicionario),janelas[i]);
+				c = i3GEOF.tabela.retornaConfig(janelas[i],novoid);
+				par.push(c);
+			}
+			g = YAHOO.lang.JSON.stringify(par);
+			return i3GEO.util.base64encode(g);
+		},
+		restauraTabelas : function(par) {
+			//TODO LISTAREGATIVO nao existe
+			i3GEOF.tabela.LISTAREGATIVO = false;
+			var n, i;
+			par = i3GEO.util.base64decode(par);
+			//alert(par)
+			par = YAHOO.lang.JSON.parse(par);
+			n = par.length;
+			for (i = 0; i < n; i++) {
+				i3GEOF.tabela.iniciaJanelaFlutuante(par[i]);
 			}
 		},
 		/*

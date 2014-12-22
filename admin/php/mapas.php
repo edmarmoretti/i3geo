@@ -174,7 +174,7 @@ switch (strtoupper($funcao))
 	break;
 }
 function salvaMapfile(){
-	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa,$preferenciasbase64,$geometriasbase64,$graficosbase64,$ext;
+	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa,$preferenciasbase64,$geometriasbase64,$graficosbase64,$tabelasbase64,$ext;
 	//as preferencias sao criadas via javascript e guardadas junto com o mapa
 	try{
 		//
@@ -186,10 +186,11 @@ function salvaMapfile(){
 		//o parser para reconstruir os valores e feito em javascript, no cliente
 		//
 		$customizacoesinit = array();
-		if(isset($preferenciasbase64) || isset($geometriasbase64) || isset($graficosbase64)){
+		if(isset($preferenciasbase64) || isset($geometriasbase64) || isset($graficosbase64) || isset($tabelasbase64)){
 			$customizacoesinit[] = '"preferenciasbase64":"'.$preferenciasbase64.'"';
 			$customizacoesinit[] = '"geometriasbase64":"'.$geometriasbase64.'"';
 			$customizacoesinit[] = '"graficosbase64":"'.$graficosbase64.'"';
+			$customizacoesinit[] = '"tabelasbase64":"'.$tabelasbase64.'"';
 			$m = ms_newMapObj($arqmapfile);
 			$m->setmetadata("CUSTOMIZACOESINIT",'{'.implode(",",$customizacoesinit).'}');
 			$m->save($arqmapfile);

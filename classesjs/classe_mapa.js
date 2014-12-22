@@ -432,6 +432,24 @@ i3GEO.mapa =
 					true);
 			}
 		},
+		/**
+		 * Function: restauraTabelas
+		 *
+		 * Descompacta tabelas salvos no mapa atual
+		 */
+		restauraTabelas : function(tabelas) {
+			// carrega o script do editor vetorial
+			if (graficos.length > 0) {
+				var inicia = function() {
+					i3GEOF.tabela.restauraTabelas(tabelas);
+				};
+				i3GEO.util.scriptTag(
+					i3GEO.configura.locaplic + "/ferramentas/tabela/dependencias.php",
+					inicia,
+					"tabela",
+					true);
+			}
+		},
 		//
 		// aplica as preferencias armazenadas localmente ou vindas de um mapa salvo no banco de dados
 		//

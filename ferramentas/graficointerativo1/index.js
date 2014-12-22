@@ -715,6 +715,7 @@ i3GEOF.graficointerativo1 =
 			if (!i3GEO.Interface || !$i(idjanela + "i3GEOgraficointerativo1ComboTemas")) {
 				return;
 			}
+			//TODO permitir listar nao ligados
 			i3GEO.util.comboTemas(idjanela + "i3GEOgraficointerativo1ComboTemasId", function(retorno) {
 				$i(idjanela + "i3GEOgraficointerativo1ComboTemas").innerHTML = retorno.dados;
 				$i(idjanela + "i3GEOgraficointerativo1ComboTemas").style.display = "block";
