@@ -47,6 +47,7 @@ var app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
 i3GEO = window.parent.i3GEO;
 MARCA = false;
+BOX = false;
 $i = function(id){
 	return window.parent.document.getElementById(id);
 };
@@ -65,19 +66,17 @@ function inicializa(){
 		m.style.width = (i3GEO.parametros.w / 2.5) - 20 + "px";
 		m.style.height = (i3GEO.parametros.h / 2.5) -20 + "px";
 		i3geoOverlay = false;
-
-		if($i("boxg")){
-			$i("boxg").style.zIndex = 0;
-		}
-
-		pol = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-		ret = pol.split(" ");
-		pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
-		pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
 		try{
 			coordenadas = i3GEO.navega.dialogo.google.coordenadas;
 		}
 		catch(e){}
+		if($i("boxg")){
+			$i("boxg").style.zIndex = 0;
+		}
+		pol = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+		ret = pol.split(" ");
+		pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
+		pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
 	}
 	else{
 		pt1 = -54;
@@ -129,51 +128,6 @@ function inicializa(){
 			}
 		}
 	});
-
-	/*
-	function botaoI3geo() {};
-	botaoI3geo.prototype = new GControl();
-	botaoI3geo.prototype.initialize = function(map) {
-		var container = document.createElement("div");
-		var i3geo = document.createElement("div");
-		this.setButtonStyle_(i3geo);
-		container.appendChild(i3geo);
-		i3geo.appendChild(document.createTextNode("i3Geo"));
-		google.maps.event.addDomListener(i3geo, "click", function() {
-			try
-			{map.removeOverlay(wmsmap);wmsmap = null;}
-			catch(x){
-				wmsmap = new google.maps.GroundOverlay(criaWMS(), map.getBounds());
-				map.addOverlay(wmsmap);
-				if(typeof(console) !== 'undefined'){console.error(x);}
-			}
-		});
-		var rota = document.createElement("div");
-		this.setButtonStyle_(rota);
-		container.appendChild(rota);
-		rota.appendChild(document.createTextNode("Rota"));
-		GEvent.addDomListener(rota, "click", function() {
-			ativaI3geoRota();
-		});
-		map.getContainer().appendChild(container);
-		return container;
-	};
-	botaoI3geo.prototype.getDefaultPosition = function() {
-		return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(50, 50));
-	};
-	botaoI3geo.prototype.setButtonStyle_ = function(button) {
-		button.style.textDecoration = "none";
-		button.style.color = "black";
-		button.style.backgroundColor = "white";
-		button.style.font = "small Arial";
-		button.style.border = "1px solid black";
-		button.style.padding = "1px";
-		button.style.marginBottom = "3px";
-		button.style.textAlign = "center";
-		button.style.width = "3em";
-		button.style.cursor = "pointer";
-	};
-	*/
 	if(i3GEO){
 		if(i3GEO.parametros.mapfile){
 			botaoI3geo();
@@ -241,24 +195,13 @@ Mostra, no mapa principal, um retangulo indicando a extens&atilde;o geogr&aacute
 */
 function ondegoogle(){
 	if(!i3GEO || !map.getBounds()){return;}
-	var ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten),
-		bd = map.getBounds(),
-		so = bd.getSouthWest(),
-		ne = bd.getNorthEast(),
-		xyMin = i3GEO.calculo.dd2tela(so.lng(),so.lat(),$i(i3GEO.Interface.IDMAPA),ext,i3GEO.parametros.pixelsize),
-		xyMax = i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),$i(i3GEO.Interface.IDMAPA),ext,i3GEO.parametros.pixelsize),
-		box = $i("boxg"),
-		w = xyMax[0]-xyMin[0],
-		h = xyMin[1]-xyMax[1];
-	if(box){
-		box.style.display = "none";
-		if(w < i3GEO.parametros.w || h < i3GEO.parametros.h){
-			box.style.width = w + "px";
-			box.style.height = h+3 + "px";
-			box.style.top = xyMax[1]+"px";
-			box.style.left = xyMin[0]+"px";
-			box.style.display="block";
-		}
+	var b = bbox();
+	b = b.split(" ");
+	if(BOX === false){
+		BOX = i3GEO.desenho.addBox(b[0], b[1], b[2], b[3], "boxOndeGoogle");
+	}
+	else{
+		BOX = i3GEO.desenho.moveBox(BOX,b[0], b[1], b[2], b[3]);
 	}
 }
 function moveMapa(bd){

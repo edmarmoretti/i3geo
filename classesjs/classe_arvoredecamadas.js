@@ -1033,7 +1033,7 @@ i3GEO.arvoreDeCamadas = {
 	 * {string} - html contendo os &iacute;cones
 	 */
 	montaOpcoesArvore : function() {
-		var ins = "", imb = i3GEO.util.$im("branco.gif"), estilo = function(i) {
+		var ins = "", imb = i3GEO.configura.locaplic + "/imagens/branco.gif", estilo = function(i) {
 			return " onmouseout='javascript:this.className = \""
 				+ i
 				+ " iconeMini iconeGuiaMovelMouseOut\";' onmouseover='javascript:this.className = \""
@@ -1357,7 +1357,7 @@ i3GEO.arvoreDeCamadas = {
 
 		// YAHOO.log("Montando as op&ccedil;&otilde;es da &aacute;rvore de
 		// camadas", "i3geo");
-		var opcoesNode, idtema, ltema, farol, mfarol, tnome = "", imb = i3GEO.util.$im("branco.gif"), funcoes = i3GEO.arvoreDeCamadas.FUNCOES;
+		var opcoesNode, idtema, ltema, farol, mfarol, tnome = "", imb = i3GEO.configura.locaplic + "/imagens/branco.gif", funcoes = i3GEO.arvoreDeCamadas.FUNCOES;
 		idtema = node.data.id;
 		ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		if (i3GEO.arvoreDeCamadas.OPCOESICONES === true) {
@@ -1383,7 +1383,7 @@ i3GEO.arvoreDeCamadas = {
 				tnome += "&nbsp;<img id='farol"
 					+ ltema.name
 					+ "' src='"
-					+ i3GEO.util.$im(farol)
+					+ i3GEO.configura.locaplic + "/imagens/" + farol
 					+ "' title='"
 					+ mfarol
 					+ "' />";
@@ -1538,7 +1538,7 @@ i3GEO.arvoreDeCamadas = {
 				+ "<img  class='tic' style='position:relative;top:1px;left:2px;' onclick='i3GEO.tema.mudatransp(\""
 				+ ltema.name
 				+ "\")' src='"
-				+ i3GEO.util.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ "' />";
 			new YAHOO.widget.HTMLNode(
 				{
@@ -1568,7 +1568,7 @@ i3GEO.arvoreDeCamadas = {
 				+ "<img  class='tic' style='position:relative;top:1px;left:2px;' onclick='i3GEO.tema.temporizador(\""
 				+ ltema.name
 				+ "\")' src='"
-				+ i3GEO.util.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ "' />";
 			new YAHOO.widget.HTMLNode(
 				{
@@ -1598,7 +1598,7 @@ i3GEO.arvoreDeCamadas = {
 				+ "<img  class='tic' style='position:relative;top:1px;left:2px;' onclick='i3GEO.tema.mudanome(\""
 				+ ltema.name
 				+ "\")' src='"
-				+ i3GEO.util.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ "' />";
 			new YAHOO.widget.HTMLNode(
 				{
@@ -2048,7 +2048,7 @@ i3GEO.arvoreDeCamadas = {
 	 * {string} - texto formatado
 	 */
 	montaTextoTema : function(tema) {
-		var ck, html, estilo, iu = i3GEO.util;
+		var ck, html, estilo;
 		if (tema.status * 1 === 2) {
 			ck = ' CHECKED ';
 		} else {
@@ -2134,7 +2134,7 @@ i3GEO.arvoreDeCamadas = {
 			html += "&nbsp;<img style='"
 				+ estilo
 				+ "' src="
-				+ iu.$im("contextoescala.png")
+				+ i3GEO.configura.locaplic + "/imagens/contextoescala.png"
 				+ " title='"
 				+ $trad("t36")
 				+ "' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
@@ -2145,7 +2145,7 @@ i3GEO.arvoreDeCamadas = {
 			html += "&nbsp;<img style='"
 				+ estilo
 				+ "' src="
-				+ iu.$im("estasel.png")
+				+ i3GEO.configura.locaplic + "/imagens/estasel.png"
 				+ " title='"
 				+ $trad("t4")
 				+ "' onclick='i3GEO.tema.limpasel(\""
@@ -2156,7 +2156,7 @@ i3GEO.arvoreDeCamadas = {
 			html += "&nbsp;<img style='"
 				+ estilo
 				+ "' src="
-				+ iu.$im("zoomsel.gif")
+				+ i3GEO.configura.locaplic + "/imagens/zoomsel.gif"
 				+ " title='"
 				+ $trad("t4a")
 				+ "' onclick='i3GEO.tema.zoomsel(\""
@@ -2170,7 +2170,7 @@ i3GEO.arvoreDeCamadas = {
 			&& tema.features.toLowerCase() !== "sim"
 			&& tema.name != "mundo") {
 			html += "&nbsp;<img class='ajuda_usuario' style='top:-2px;' src='"
-				+ i3GEO.util.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ "' title='"
 				+ $trad("a9")
 				+ "' onclick='i3GEO.tema.fonte(\""
@@ -2186,7 +2186,7 @@ i3GEO.arvoreDeCamadas = {
 			html += "&nbsp;<img style='"
 				+ estilo
 				+ "' src="
-				+ iu.$im("down1.gif")
+				+ i3GEO.configura.locaplic + "/imagens/down1.gif"
 				+ " title='download' onclick='i3GEO.tema.dialogo.download(\""
 				+ tema.name
 				+ "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"

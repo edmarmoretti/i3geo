@@ -1194,7 +1194,7 @@ i3GEO.arvoreDeTemas = {
 				insp += "style='top:4px;'";
 			}
 			insp += " src='"
-					+ i3GEO.util.$im("branco.gif")
+					+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 					+ "' onclick='i3GEO.arvoreDeTemas.buscaTema2(document.getElementById(\"i3geo_buscatema\").value)' /></td>";
 			insp += "</tr></table>&nbsp;";
 
@@ -1402,7 +1402,7 @@ i3GEO.arvoreDeTemas = {
 				do {
 					tempNode1 = new YAHOO.widget.HTMLNode({
 						expanded : false,
-						html : "<img src='" + $im("e" + ig + ".png") + "' />",
+						html : "<img src='" + i3GEO.configura.locaplic + "/imagens/e" + ig + ".png ' />",
 						enableHighlight : true,
 						nivel : ig
 					}, tempNode);
@@ -1948,7 +1948,7 @@ i3GEO.arvoreDeTemas = {
 					+ "' style='position:relative;top:3px;width:12px;height:12px;cursor:pointer;border:solid 0 white;' ";
 		} else {
 			html += "<img style='position:relative;top:3px;' title='"
-					+ tema.tid + "' src='" + $im("down1.gif") + "'";
+					+ tema.tid + "' src='" + i3GEO.configura.locaplic + "/imagens/down1.gif'";
 		}
 		// verifica se existe uma funcao alternativa de ativacao do tema
 		if (i3GEO.arvoreDeTemas.ATIVATEMA !== "") {
@@ -2127,8 +2127,8 @@ i3GEO.arvoreDeTemas = {
 			if (n >= 5) {
 				n = 5;
 			}
-			html = (n > 0) ? "<img src='" + i3GEO.util.$im("e" + n + ".png")
-					+ "'/>" : "<img src='" + i3GEO.util.$im("e0.png") + "'/>";
+			html = (n > 0) ? "<img src='" + i3GEO.configura.locaplic + "/imagens/e" + n + ".png"
+					+ "'/>" : "<img src='" + i3GEO.configura.locaplic + "/imagens/e0.png'/>";
 			new YAHOO.widget.HTMLNode({
 				isLeaf : true,
 				enableHighlight : false,
@@ -2160,7 +2160,7 @@ i3GEO.arvoreDeTemas = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.arvoreDeTemas.outrasOpcoesHTML()");
 
-		var ins = "", t = 0, imb = i3GEO.util.$im("branco.gif"), OPCOESADICIONAIS = i3GEO.arvoreDeTemas.OPCOESADICIONAIS, estilo = function(
+		var ins = "", t = 0, imb = i3GEO.configura.locaplic + "/imagens/branco.gif", OPCOESADICIONAIS = i3GEO.arvoreDeTemas.OPCOESADICIONAIS, estilo = function(
 				i) {
 			return " onmouseout='javascript:this.className = \""
 					+ i

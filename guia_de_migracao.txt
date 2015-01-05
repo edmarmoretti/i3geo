@@ -3,7 +3,16 @@ GUIA DE UPDATES e UPGRADES
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 
-- Inclusão da variável $i3geo_proxy_server no ms_configura.php
+
+- style.overflow passou a ser definido automaticamente como "hidden" para previnir problemas com as janelas de informação.
+Essa definição ocorre apenas quando o elemento body do HTML contiver o id definido como "i3geo" e quando seu estilo
+"overflow" não estiver previamente definido.
+
+- Remoção da biblioteca baloon-tooltips em prol das rotinas específicas de cada API para construção de janelas
+de informação
+
+- Inclusão da variável $i3geo_proxy_server no ms_configura.php para uso em algumas operações baseadas no acesso
+a outros servidores via Curl e OGC
 
 - Foram incluídos subitens no menu suspenso para acomodar o grande número de opções. Os códigos locais que
 manipulam o menu suspenso devem ser revisados para verificar o funcionamento nessa nova condição.

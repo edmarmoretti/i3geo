@@ -1089,6 +1089,14 @@ button { //
 	top: 5px;
 }
 
+.i3GEOiconeAberto {
+	background-image: URL('../imagens/oxygen/16x16/document-decrypt.png');
+	cursor: pointer;
+}
+.i3GEOiconeFechado {
+	background-image: URL('../imagens/oxygen/16x16/document-encrypt.png');
+	cursor: pointer;
+}
 .i3GEOiconeOpacidadeMapa {
 	background-image: URL('../imagens/oxygen/16x16/show-menu.png');
 }

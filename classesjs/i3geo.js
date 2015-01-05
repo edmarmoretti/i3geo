@@ -54,7 +54,6 @@ object - objeto javaScript
 */
 $i = function(id)
 {return document.getElementById(id);};
-
 (function(){
 	var scriptLocation = "";
 	var scripts = document.getElementsByTagName('script');

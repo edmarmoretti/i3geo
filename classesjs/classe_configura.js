@@ -684,13 +684,15 @@ i3GEO.configura =
 		 * Tipo de tip que &eacute; mostrado na fun&ccedil;&atilde;o de identifica&ccedil;&atilde;o quando o usu&aacute;rio estaciona o
 		 * mouse sobre o mapa
 		 *
+		 * Pode ser um id de um elemento existente no HTML
+		 *
 		 * Tipo:
 		 *
 		 * {string}
 		 *
 		 * Valores:
 		 *
-		 * completo|simples|balao
+		 * completo|simples|balao|id
 		 *
 		 * Default:
 		 *
@@ -784,7 +786,7 @@ i3GEO.configura =
 		 *
 		 * 11
 		 */
-		diminuixN : 0,
+		diminuixN : 00,
 		/**
 		 * Propriedade: diminuiyM
 		 *

@@ -981,6 +981,9 @@ i3GEO.php =
 		 * Identifica um ponto no mapa
 		 */
 		identifica3 : function(funcao, x, y, resolucao, opcao, locaplic, sid, tema, ext, listaDeTemas) {
+			if(x === null || y === null){
+				return;
+			}
 			if (arguments.length === 4) {
 				opcao = "tip";
 				locaplic = i3GEO.configura.locaplic;

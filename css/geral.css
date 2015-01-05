@@ -1,3 +1,14 @@
+.i3GEObalaoInfo {
+	position : absolute;
+	zIndex : 5000;
+	textAlign : left;
+	background : white;
+	-moz-opacity: 0.9;
+	opacity:.90;
+	filter: alpha(opacity=90);
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+}
 .subbloco {
 	background-color: rgb(248, 248, 248);
 	width: 90%;

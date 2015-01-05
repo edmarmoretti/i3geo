@@ -13,16 +13,16 @@
  */
 /**
  * Licen&ccedil;a
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -70,29 +70,29 @@ i3GEO.navega =
 		},
 		/**
 		 * Tempo em milisegundos que ser&aacute; esperado para executar uma opera&ccedil;&atilde;o de navega&ccedil;&atilde;o sobre o mapa.
-		 * 
+		 *
 		 * Controla o lapso de tempo utilizado para disparar as fun&ccedil;&otilde;es do tipo navega&ccedil;&atilde;o
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {Numeric}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * 600
 		 */
 		TEMPONAVEGAR : 600,
 		/**
 		 * Propriedade: FATORZOOM
-		 * 
+		 *
 		 * Valor utilizado nas opera&ccedil;&otilde;es de zoom in e out. Fator de zoom.
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {Numeric}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * 2
 		 */
 		FATORZOOM : 2,
@@ -143,13 +143,13 @@ i3GEO.navega =
 		},
 		/**
 		 * Function: pan2ponto
-		 * 
+		 *
 		 * Desloca o centro do mapa para um ponto. Utiliza as funcoes da API em uso para executar o pan
-		 * 
+		 *
 		 * Parameters:
-		 * 
+		 *
 		 * {numerico} - longitude
-		 * 
+		 *
 		 * {numerico} - latitude
 		 */
 		pan2ponto : function(x, y) {
@@ -158,11 +158,11 @@ i3GEO.navega =
 		},
 		/**
 		 * Function: centroDoMapa
-		 * 
+		 *
 		 * Obt&eacute;m as coordenadas geogr&aacute;ficas do centro do mapa
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * {array|false} - false se falhar ou [x,y] se n&atilde;o falhar
 		 */
 		centroDoMapa : function() {
@@ -223,13 +223,13 @@ i3GEO.navega =
 		},
 		/**
 		 * Function: zoomin
-		 * 
+		 *
 		 * Aproxima o mapa aplicando um fator de modifica&ccedil;&atilde;o da escala
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-		 * 
+		 *
 		 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
 		 */
 		zoomin : function(locaplic, sid) {
@@ -243,13 +243,13 @@ i3GEO.navega =
 		},
 		/**
 		 * Function: zoomout
-		 * 
+		 *
 		 * Afasta o mapa aplicando um fator de modifica&ccedil;&atilde;o da escala
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-		 * 
+		 *
 		 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
 		 */
 		zoomout : function(locaplic, sid) {
@@ -263,23 +263,23 @@ i3GEO.navega =
 		},
 		/**
 		 * Function: zoomponto
-		 * 
+		 *
 		 * Centraliza o mapa em um ponto e acrescenta o ponto como uma nova camada no mapa
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-		 * 
+		 *
 		 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-		 * 
+		 *
 		 * {Numeric} - coordenada em d&eacute;cimos de grau da longitude
-		 * 
+		 *
 		 * {Numeric} - coordenada em d&eacute;cimos de grau da latitude
-		 * 
+		 *
 		 * {Numeric} - opcional, tamanho do s&iacute;mbolo do ponto que ser&aacute; inserido no mapa
-		 * 
+		 *
 		 * {String} - opcional, nome do s&iacute;mbolo para o ponto
-		 * 
+		 *
 		 * {String} - opcional, cor em r g b (p.ex. "255 0 0")
 		 */
 		zoomponto : function(locaplic, sid, x, y, tamanho, simbolo, cor) {
@@ -311,17 +311,17 @@ i3GEO.navega =
 		},
 		/**
 		 * Function: zoompontoIMG
-		 * 
+		 *
 		 * Centraliza o mapa em um ponto de coordenadas medidas na imagem do mapa
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-		 * 
+		 *
 		 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-		 * 
+		 *
 		 * {Numeric} - coordenada x da imagem
-		 * 
+		 *
 		 * {Numeric} - coordenada y da imagem
 		 */
 		zoompontoIMG : function(locaplic, sid, x, y) {
@@ -338,25 +338,25 @@ i3GEO.navega =
 		},
 		/**
 		 * Function: xy2xy
-		 * 
+		 *
 		 * Desloca o mapa de um ponto de coordenadas xy para um segundo ponto
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-		 * 
+		 *
 		 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-		 * 
+		 *
 		 * {Numeric} - coordenada x inicial
-		 * 
+		 *
 		 * {Numeric} - coordenada y inicial
-		 * 
+		 *
 		 * {Numeric} - coordenada x final
-		 * 
+		 *
 		 * {Numeric} - coordenada y final
-		 * 
+		 *
 		 * {String} - extens&atilde;o geogr&aacute;fica do mapa
-		 * 
+		 *
 		 * {String} - tipo de imagem atual do mapa (sepia,nenhum,cinza)
 		 */
 		xy2xy : function(locaplic, sid, xi, yi, xf, yf, ext, tipoimagem) {
@@ -387,13 +387,13 @@ i3GEO.navega =
 		},
 		/**
 		 * Localiza as coordenadas baseadas no n&uacute;mero IP do usu&aacute;rio.
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-		 * 
+		 *
 		 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-		 * 
+		 *
 		 * {Function} - fun&ccedil;&atilde;o que ser&aacute; executada ao concluir a chamada AJAX. Essa fun&ccedil;&atilde;o receber&aacute;
 		 * o objeto JSON obtido.
 		 */
@@ -411,11 +411,11 @@ i3GEO.navega =
 		},
 		/**
 		 * Mostra no mapa um ponto baseado na localiza&ccedil;&atilde;o do usu&aacute;rio.
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-		 * 
+		 *
 		 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
 		 */
 		zoomIP : function(locaplic, sid) {
@@ -440,17 +440,17 @@ i3GEO.navega =
 		},
 		/**
 		 * Function: zoomExt
-		 * 
+		 *
 		 * Aplica uma nova extens&atilde;o geogr&aacute;fica ao mapa.
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-		 * 
+		 *
 		 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-		 * 
+		 *
 		 * {String} - Utlize "" para aplicar o default. Tipo de imagem que ser&aacute; retornada na imagem do mapa que ser&aacute; criada
-		 * 
+		 *
 		 * {String} - Extens&atilde;o geogr&aacute;fica no formato xmin ymin xmax ymax
 		 */
 		zoomExt : function(locaplic, sid, tipoimagem, ext) {
@@ -477,17 +477,17 @@ i3GEO.navega =
 		},
 		/**
 		 * Function: aplicaEscala
-		 * 
+		 *
 		 * Aplica ao mapa um novo valor de escala tendo como base o valor do denminador
-		 * 
+		 *
 		 * Utilize "" caso vc queira usar locaplic e sid default.
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX. Pode ser ""
-		 * 
+		 *
 		 * {String} - c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo. pode ser ""
-		 * 
+		 *
 		 * {Numeric} - denominador da escala
 		 */
 		aplicaEscala : function(locaplic, sid, escala) {
@@ -510,37 +510,37 @@ i3GEO.navega =
 		},
 		/**
 		 * Section: i3GEO.navega.autoRedesenho
-		 * 
+		 *
 		 * Controla o redesenho autom&aacute;tico do mapa por meio de um temporizador
 		 */
 		autoRedesenho : {
 			/**
 			 * Propriedade: INTERVALO
-			 * 
+			 *
 			 * Intervalo de tempo, em milisegundos, que ser&aacute; utilizado para disparar o desenho do mapa
-			 * 
+			 *
 			 * Tipo:
-			 * 
+			 *
 			 * {Integer}
-			 * 
+			 *
 			 * Default:
-			 * 
+			 *
 			 * 0
 			 */
 			INTERVALO : 0,
 			/**
 			 * Guarda o valor do ID do elemento HTML que receber&aacute; o contador de tempo
-			 * 
+			 *
 			 * Tipo: {String}
 			 */
 			ID : "tempoRedesenho",
 			/**
 			 * Function: ativa
-			 * 
+			 *
 			 * Ativa o auto-redesenho do mapa
-			 * 
+			 *
 			 * Parametros:
-			 * 
+			 *
 			 * {String} - id do elemento onde o contador de tempo ser&aacute; mostrado no mapa. Por default, utiliza "tempoRedesenho".
 			 */
 			ativa : function(id) {
@@ -565,7 +565,7 @@ i3GEO.navega =
 			},
 			/**
 			 * Function: desativa
-			 * 
+			 *
 			 * Desativa o auto-redesenho do mapa
 			 */
 			desativa : function() {
@@ -619,38 +619,38 @@ i3GEO.navega =
 		},
 		/**
 		 * Section: i3GEO.navega.lente
-		 * 
+		 *
 		 * Ativa e controla a lente de aumento.
-		 * 
+		 *
 		 * A lente de aumento &eacute; um box que pode ser ativado sobre o mapa mostrando uma imagem ampliada da regi&atilde;o onde
 		 * est&aacute; o mouse
 		 */
 		lente : {
 			/**
 			 * Propriedade: POSICAOX
-			 * 
+			 *
 			 * Define a posi&ccedil;&atilde;o em x da lente em rela&ccedil;&atilde;o ao corpo do mapa
-			 * 
+			 *
 			 * Tipo:
-			 * 
+			 *
 			 * {numeric}
-			 * 
+			 *
 			 * Default:
-			 * 
+			 *
 			 * 0
 			 */
 			POSICAOX : 0,
 			/**
 			 * Propriedade: POSICAOY
-			 * 
+			 *
 			 * Define a posi&ccedil;&atilde;o em y da lente em rela&ccedil;&atilde;o ao corpo do mapa
-			 * 
+			 *
 			 * Tipo:
-			 * 
+			 *
 			 * {numeric}
-			 * 
+			 *
 			 * Default:
-			 * 
+			 *
 			 * 0
 			 */
 			POSICAOY : 0,
@@ -660,7 +660,7 @@ i3GEO.navega =
 			ESTAATIVA : "nao",
 			/**
 			 * Function: inicia
-			 * 
+			 *
 			 * Ativa a lente de aumento criando os elementos gr&aacute;ficos necess&aacute;rios e ativando os eventos que controlam a
 			 * apresenta&ccedil;&atilde;o da lente
 			 */
@@ -745,7 +745,7 @@ i3GEO.navega =
 			},
 			/**
 			 * Function: desativa
-			 * 
+			 *
 			 * Desativa a lente aberta
 			 */
 			desativa : function() {
@@ -788,21 +788,21 @@ i3GEO.navega =
 		},
 		/**
 		 * Section: i3GEO.navega.destacaTema
-		 * 
+		 *
 		 * Destaca um tema mostrando-o sobre os outros em um box que segue o mouse
 		 */
 		destacaTema : {
 			/**
 			 * Propriedade: TAMANHO
-			 * 
+			 *
 			 * Tamanho do box
-			 * 
+			 *
 			 * Tipo:
-			 * 
+			 *
 			 * {Integer}
-			 * 
+			 *
 			 * Default:
-			 * 
+			 *
 			 * 75
 			 */
 			TAMANHO : 75,
@@ -816,11 +816,11 @@ i3GEO.navega =
 			TEMA : "",
 			/**
 			 * Function: inicia
-			 * 
+			 *
 			 * Inicia o destaque de um tema
-			 * 
+			 *
 			 * Parametros:
-			 * 
+			 *
 			 * {String} - c&oacute;digo do tema
 			 */
 			inicia : function(tema) {
@@ -862,7 +862,7 @@ i3GEO.navega =
 			},
 			/**
 			 * Atualiza o destaque
-			 * 
+			 *
 			 * &Eacute; definido para o evento de navega&ccedil;&atilde;o do mapa
 			 */
 			atualiza : function() {
@@ -894,7 +894,7 @@ i3GEO.navega =
 			},
 			/**
 			 * Function: desativa
-			 * 
+			 *
 			 * Desativa o destaque
 			 */
 			desativa : function() {
@@ -908,7 +908,7 @@ i3GEO.navega =
 			},
 			/**
 			 * Movimenta o destaque conforme o mouse move
-			 * 
+			 *
 			 * &Eacute; definido para o evento de deslocamento do mouse
 			 */
 			movimenta : function() {
@@ -926,13 +926,13 @@ i3GEO.navega =
 		},
 		/**
 		 * Section: i3GEO.navega.dialogo
-		 * 
+		 *
 		 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de navega&ccedil;&atilde;o no mapa atual
 		 */
 		dialogo : {
 			/**
 			 * Function: wiki
-			 * 
+			 *
 			 * Abre a janela de di&aacute;logo da ferramenta wiki permitindo a navega&ccedil;&atilde;o integrada com a Wikip&eacute;dia
 			 */
 			wiki : function() {
@@ -945,7 +945,7 @@ i3GEO.navega =
 			},
 			/**
 			 * Function: metar
-			 * 
+			 *
 			 * Abre a janela de di&aacute;logo da ferramenta metar permitindo a navega&ccedil;&atilde;o integrada com a rede de dados
 			 * meteorol&oacute;gicos
 			 */
@@ -959,7 +959,7 @@ i3GEO.navega =
 			},
 			/**
 			 * Function: buscaFotos
-			 * 
+			 *
 			 * Abre a janela de di&aacute;logo da ferramenta metar permitindo a navega&ccedil;&atilde;o integrada com servi&ccedil;os de
 			 * armazenamento de fotografias
 			 */
@@ -968,11 +968,11 @@ i3GEO.navega =
 			},
 			/**
 			 * Function: google
-			 * 
+			 *
 			 * Abre a janela de di&aacute;logo da ferramenta google permitindo a navega&ccedil;&atilde;o integrada com o GoogleMaps
-			 * 
+			 *
 			 * Parametros:
-			 * 
+			 *
 			 * {array} - array com os pares de coordenadas x,y que ser&atilde;o adicionados ao mapa do google (opcional)
 			 */
 			google : function(coordenadas) {
@@ -994,6 +994,7 @@ i3GEO.navega =
 					} catch (e) {
 						i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
 						i3GEO.desenho.removePins("googlemaps");
+						i3GEO.desenho.removePins("boxOndeGoogle");
 					}
 				};
 				if (i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") < 0) {
@@ -1002,7 +1003,7 @@ i3GEO.navega =
 			},
 			/**
 			 * Function: confluence
-			 * 
+			 *
 			 * Abre a janela de di&aacute;logo da ferramenta confluence permitindo a navega&ccedil;&atilde;o integrada com a
 			 * localiza&ccedil;&atilde;o de conflu&ecirc;ncias
 			 */

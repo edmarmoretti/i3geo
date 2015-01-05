@@ -221,10 +221,10 @@ i3GEO.maparef =
 					ins += '<span id=maparefmaismenosZoom style=display:none > ';
 					temp =
 						"javascript:if(i3GEO.maparef.fatorZoomDinamico == -1){i3GEO.maparef.fatorZoomDinamico = 1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico + 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
-					ins += "<img class=mais onclick='" + temp + "' src=" + i3GEO.util.$im("branco.gif") + " />";
+					ins += "<img class=mais onclick='" + temp + "' src=" + i3GEO.configura.locaplic + "/imagens/branco.gif />";
 					temp =
 						"javascript:if(i3GEO.maparef.fatorZoomDinamico == 1){i3GEO.maparef.fatorZoomDinamico = -1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
-					ins += "<img class=menos onclick='" + temp + "' src=" + i3GEO.util.$im("branco.gif") + " /></span>&nbsp;";
+					ins += "<img class=menos onclick='" + temp + "' src=" + i3GEO.configura.locaplic + "/imagens/branco.gif /></span>&nbsp;";
 					if (this.SELETORTIPO) {
 						ins +=
 							"<select style='font-size:9px;' id='refDinamico' onchange='javascript:i3GEO.parametros.celularef=\"\";i3GEO.maparef.atualiza()'>";

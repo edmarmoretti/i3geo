@@ -50,7 +50,7 @@ i3GEOF.graficointerativo1 =
 		/**
 		 * Controla se o evento de atualizacao da lista de registros esta ativo ou nao
 		 * E utilizado quando os graficos sao recuperados de um mapa que foi salvo
-		 */	
+		 */
 		LISTAREGATIVO: true,
 		/**
 		 * Array com os ids das janelas ja criadas
@@ -606,6 +606,14 @@ i3GEOF.graficointerativo1 =
 						"",
 						duplica);
 				divid = janela[2].id;
+				if (i3GEOF.graficointerativo1.janelas.length > 1) {
+					temp = janela[0].cfg.config;
+					janela[0].moveTo(
+						temp.x.value
+							+ (i3GEOF.graficointerativo1.janelas.length * 50),
+						temp.y.value
+							+ (i3GEOF.graficointerativo1.janelas.length * 15));
+				}
 				$i(idjanela + "_corpo").style.backgroundColor = "white";
 				$i(idjanela + "_corpo").style.overflow = "auto";
 				// indica se a janela sera atualizada na navegacao
@@ -715,7 +723,6 @@ i3GEOF.graficointerativo1 =
 			if (!i3GEO.Interface || !$i(idjanela + "i3GEOgraficointerativo1ComboTemas")) {
 				return;
 			}
-			//TODO permitir listar nao ligados
 			i3GEO.util.comboTemas(idjanela + "i3GEOgraficointerativo1ComboTemasId", function(retorno) {
 				$i(idjanela + "i3GEOgraficointerativo1ComboTemas").innerHTML = retorno.dados;
 				$i(idjanela + "i3GEOgraficointerativo1ComboTemas").style.display = "block";
@@ -733,7 +740,7 @@ i3GEOF.graficointerativo1 =
 					$i(idjanela + "i3GEOgraficointerativo1ComboTemasId").value = j.tema;
 					$i(idjanela + "i3GEOgraficointerativo1ComboTemasId").onchange.call();
 				}
-			}, idjanela + "i3GEOgraficointerativo1ComboTemas", "", false, "ligados","font-size: 12px;");
+			}, idjanela + "i3GEOgraficointerativo1ComboTemas", "", false, "","font-size: 12px;");
 		},
 		/**
 		 * Function: ativaTipo

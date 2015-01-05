@@ -47,7 +47,7 @@ echo "<html><style>
 	</style>";
 require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 error_reporting(0);
-$url = "http://ws.geonames.org/findNearByWeatherXML?lat=$y&lng=$x&lang=pt";
+$url = "http://ws.geonames.org/findNearByWeatherXML?username=i3geo&lat=$y&lng=$x&lang=pt";
 
 $xml = simplexml_load_file($url);
 

@@ -351,7 +351,7 @@ i3GEO.idioma = {
 			ins += '<img  style="'
 				+ w
 				+ 'padding:0 0px;top:-7px;padding-right:0px;border: 1px solid white;" src="'
-				+ iu.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ '" onclick="i3GEO.idioma.trocaIdioma(\''
 				+ temp
 				+ '\')" ';

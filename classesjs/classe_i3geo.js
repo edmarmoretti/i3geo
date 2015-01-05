@@ -551,7 +551,12 @@ var i3GEO = {
 		if (!$i("i3geo")) {
 			document.body.id = "i3geo";
 		}
-		$i("i3geo").className = "yui-skin-sam";
+		temp = $i("i3geo");
+		temp.className = "yui-skin-sam";
+		//previne que o tooltip balao crie barras de overflow
+		if(document.body.id === "i3geo" && temp.style && !temp.style.overflow && i3GEO.Interface.ATUAL === "openlayers"){
+			temp.style.overflow = "hidden";
+		}
 		//
 		// se i3GEO.configura.sid = "", o html foi aberto diretamente
 		// ent&atilde;o, &eacute; necess&aacute;rio criar os arquivos

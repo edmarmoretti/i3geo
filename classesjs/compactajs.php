@@ -123,8 +123,8 @@ packer("../pacotes/yui290/build/carousel/carousel-min.js","../pacotes/yui290/bui
 packer("../pacotes/yui290/build/resize/resize-min.js","../pacotes/yui290/build/resize/resize_compacto.js","Normal");
 packer("../pacotes/yui290/build/progressbar/progressbar-min.js","../pacotes/yui290/build/progressbar/progressbar_compacto.js","Normal");
 packer("../pacotes/cpaint/cpaint2.inc.js","../pacotes/cpaint/cpaint2_compacto.inc.js","Normal");
-packer("../pacotes/balloon-tooltips/htdocs/js/balloon.config.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js","Normal");
-packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js","Normal");
+//packer("../pacotes/balloon-tooltips/htdocs/js/balloon.config.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js","Normal");
+//packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js","Normal");
 packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
 packer("../pacotes/mustache.js-master/mustache.js","compactados/mustache.js","Normal");
 //
@@ -155,8 +155,8 @@ $jsfiles = array(
 "../pacotes/yui290/build/resize/resize_compacto.js",
 "../pacotes/yui290/build/progressbar/progressbar_compacto.js",
 "../pacotes/yui290/build/selector/selector-min.js",
-"../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js",
-"../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js",
+//"../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js",
+//"../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js",
 "../pacotes/wicket/wicket.js",
 "compactados/classe_i3geo_compacto.js",
 "compactados/classe_util_compacto.js",

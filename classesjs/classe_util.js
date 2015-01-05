@@ -568,11 +568,11 @@ i3GEO.util =
 			} catch (e) {
 			}
 		},
-		// TODO substituir por elementos em layers graficos
+		//TODO remover do codigo
 		/**
 		 * Cria um elemento div na pagina atual.
 		 *
-		 * Esse elemento pode ser utilizado para desenhar retangulos sobre o mapa
+		 * Esse elemento pode ser utilizado para desenhar retangulos sobre o mapa com base em coordenadas de tela
 		 *
 		 * Parametros:
 		 *
@@ -613,11 +613,12 @@ i3GEO.util =
 				}
 			}
 		},
-		// TODO substituir por elementos no layer grafico
 		/**
 		 * Function: criaPin
 		 *
-		 * Cria um elemento imagem na pagina atual.
+		 * Cria um elemento imagem com posi&ccedil;&atilde;o fixa na pagina atual.
+		 *
+		 * A imagem n&atilde;o &eacute; deslocada junto com o mapa
 		 *
 		 * Parametros:
 		 *
@@ -701,7 +702,6 @@ i3GEO.util =
 		 * array[top,left] - valores em pixel da posicao calculada da imagem
 		 */
 		posicionaImagemNoMapa : function(id, x, y) {
-			// TODO permitir posicionar imagem usando lat long
 			var i, mx, my;
 			if (!x) {
 				x = objposicaocursor.telax;
@@ -750,22 +750,10 @@ i3GEO.util =
 			}
 		},
 		/**
-		 * Function: $im ou nome curto $im
-		 *
-		 * Retorna o caminho correto de uma imagem.
-		 *
-		 * Exemplo: $im("imagem.png")
-		 *
-		 * Parametros:
-		 *
-		 * {String} - nome da imagem
-		 *
-		 * Retorno:
-		 *
-		 * string - caminho para a imagem
+		 * Depreciado na versao 6.0
 		 */
 		$im : function(g) {
-			return i3GEO.configura.locaplic + "/imagens/visual/default/" + g;
+			return i3GEO.configura.locaplic + "/imagens/" + g;
 		},
 		/**
 		 * Function $inputText ou nome curto $inputText
@@ -813,6 +801,7 @@ i3GEO.util =
 				+ titulo
 				+ "' type='text' size='" + digitos + "' class='digitar' value='" + valor + "' name='" + nome + "' /></span>";
 		},
+		//incluir no onmouseover dos itens com cores
 		$inputTextMudaCor : function(obj) {
 			var n = obj.value.split(" ");
 			obj.style.color = "rgb(" + n[0] + "," + n[1] + "," + n[2] + ")";
@@ -3270,121 +3259,13 @@ i3GEO.util =
 			YAHOO.util.Dom.getElementsByClassName("i3geoFormIconeAquarela", "div", onde, temp);
 		},
 		/**
-		 * Section: insereMarca
-		 *
-		 * Insere ou remove pontos no mapa.
+		 * Depreciado na versao 6.0
 		 */
-		// TODO inserir como elementos no layer grafico
 		insereMarca : {
-			/**
-			 * Tipo {Array}
-			 */
-			CONTAINER : [],
-			/**
-			 * Function: cria
-			 *
-			 * Insere um ponto no mapa
-			 *
-			 * Os pontos sao inseridos em um contaier de pontos e mostrados temporariamente
-			 *
-			 * Parametros:
-			 *
-			 * {Numeric} - coordenada x no mapa (imagem).
-			 *
-			 * {Numeric} - coordenada y no mapa (imagem).
-			 *
-			 * {String} - funcao que sera executada quando a marca for clicada, se for "", o container sera esvaziado ao ser clicado na
-			 * marca
-			 *
-			 * {String} - id do container que recebera os pontos. Se nao existir um elemento com esse ID, sera criado um novo DIV. No caso
-			 * da interface google Earth, e utilizado na definicao do nome da marca (setname).
-			 *
-			 * {String} - (apenas para interface Google Earth) nome que sera adicionado junto da marca
-			 *
-			 * {string} - (opcional) endereco da imagem (sera incluido em SRC do tag IMG)
-			 *
-			 * {numeric} - (opcional) largura
-			 *
-			 * {numeric} - (opcional) altura
-			 */
-			cria : function(xi, yi, funcaoOnclick, container, texto, srci, w, h) {
-				if (!w) {
-					w = 5;
-				}
-				if (!h) {
-					h = 5;
-				}
-				if (!srci || srci === "") {
-					srci = i3GEO.configura.locaplic + "/imagens/dot2.gif";
-				}
-				if (i3GEO.Interface.ATUAL === "googleearth") {
-					i3GEO.desenho.googleearth.insereMarca(texto, xi, yi, container);
-					return;
-				}
-				try {
-					var novoel, i, novoimg, temp;
-					if (i3GEO.util.insereMarca.CONTAINER.toString().search(container) < 0) {
-						i3GEO.util.insereMarca.CONTAINER.push(container);
-					}
-					// verifica se existe o container para os pontos
-					if (!$i(container)) {
-						novoel = document.createElement("div");
-						novoel.id = container;
-						i = novoel.style;
-						i.position = "absolute";
-						if ($i(i3GEO.Interface.IDCORPO)) {
-							i.top = parseInt($i(i3GEO.Interface.IDCORPO).style.top, 10) + "px";
-							i.left = parseInt($i(i3GEO.Interface.IDCORPO).style.left, 10) + "px";
-						} else {
-							i.top = parseInt($i(i3GEO.Interface.IDMAPA).style.top, 10) + "px";
-							i.left = parseInt($i(i3GEO.Interface.IDMAPA).style.left, 10) + "px";
-						}
-						document.body.appendChild(novoel);
-					}
-					container = $i(container);
-					novoel = document.createElement("div");
-					i = novoel.style;
-					i.position = "absolute";
-					i.zIndex = 2000;
-					i.top = (yi - (h / 2)) + "px";
-					i.left = (xi - (w / 2)) + "px";
-					i.width = w + "px";
-					i.height = h + "px";
-					novoimg = document.createElement("img");
-					if (funcaoOnclick !== "") {
-						novoimg.onclick = funcaoOnclick;
-					} else {
-						novoimg.onclick = function() {
-							i3GEO.util.insereMarca.limpa();
-						};
-					}
-					novoimg.src = srci;
-					temp = novoimg.style;
-					temp.width = w + "px";
-					temp.height = h + "px";
-					temp.zIndex = 2000;
-					novoel.appendChild(novoimg);
-					container.appendChild(novoel);
-					if (i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.util.insereMarca.limpa()") < 0) {
-						i3GEO.eventos.NAVEGAMAPA.push("i3GEO.util.insereMarca.limpa()");
-					}
-				} catch (e) {
-					i3GEO.janela.tempoMsg("Ocorreu um erro. inseremarca" + e);
-				}
+			cria : function() {
+				alert("i3GEO.util.insereMarca foi depreciado. Veja a classe i3GEO.desenho");
 			},
 			limpa : function() {
-				try {
-					var n, i;
-					n = i3GEO.util.insereMarca.CONTAINER.length;
-					for (i = 0; i < n; i++) {
-						if ($i(i3GEO.util.insereMarca.CONTAINER[i])) {
-							$i(i3GEO.util.insereMarca.CONTAINER[i]).innerHTML = "";
-						}
-					}
-					i3GEO.util.insereMarca.CONTAINER = [];
-					i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.util.insereMarca.limpa()");
-				} catch (e) {
-				}
 			}
 		}
 	};
@@ -3533,6 +3414,7 @@ try {
 
 // alias
 
+//depreciado na versao 6.0
 $im = function(g) {
 	return i3GEO.util.$im(g);
 };
@@ -3541,10 +3423,4 @@ $inputText = function(idPai, larguraIdPai, idInput, titulo, digitos, valor, nome
 		nome = "";
 	}
 	return i3GEO.util.$inputText(idPai, larguraIdPai, idInput, titulo, digitos, valor, nome, onch);
-};
-$top = function(id, valor) {
-	i3GEO.util.$top(id, valor);
-};
-$left = function(id, valor) {
-	i3GEO.util.$left(id, valor);
 };

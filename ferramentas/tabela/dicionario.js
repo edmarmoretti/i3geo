@@ -239,5 +239,10 @@ i3GEOF.tabela.dicionario = {
 		pt : "Coluna de liga&ccedil;&atilde;o",
 		en : "",
 		es : ""
+	} ],
+	'idDaTabela' : [ {
+		pt : "Identificador da tabela",
+		en : "",
+		es : ""
 	} ]
 };

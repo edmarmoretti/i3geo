@@ -168,8 +168,7 @@ i3GEO.editorOL = {
 	mapa: "",
 	inicia: function(){
 		//ativabotoes e boolean
-		var single = false,
-			alayers = [],
+		var alayers = [],
 			fundo = (i3GEO.editorOL.fundo).split(","),
 			nfundo = fundo.length,
 			ncontroles = i3GEO.editorOL.controles.length,

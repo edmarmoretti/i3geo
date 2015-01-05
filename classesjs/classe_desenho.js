@@ -148,14 +148,90 @@ i3GEO.desenho = {
 			}
 			caixa += "<option value='"
 				+ lista[i]
-			+ "'"
-			+ sel
-			+ ">"
-			+ lista[i]
-			+ "</option>";
+				+ "'"
+				+ sel
+				+ ">"
+				+ lista[i]
+				+ "</option>";
 		}
 		caixa += "</select>";
 		return caixa;
+	},
+	/**
+	 * Function: addBox
+	 *
+	 * Adiciona um retangulo
+	 *
+	 * Parameter:
+	 *
+	 * {numeric} - novo xmin
+	 *
+	 * {numeric} - novo ymin
+	 *
+	 * {numeric} - novo xmax
+	 *
+	 * {numeric} - novo ymax
+	 *
+	 * {string} - namespace que identifica o elemento grafico, permitindo busca
+	 *
+	 * {string} - cor do contorno
+	 *
+	 * {string} - expessura do contorno
+	 */
+	addBox : function(xmin, ymin, xmax, ymax, namespace, strokeColor, strokeWidth) {
+		if (i3GEO.Interface.ATUAL != "googleearth") {
+			return i3GEO.desenho[i3GEO.Interface.ATUAL].addBox(
+				xmin,
+				ymin,
+				xmax,
+				ymax,
+				namespace,
+				strokeColor,
+				strokeWidth);
+		} else {
+			return false;
+		}
+	},
+	/**
+	 * Function: moveBox
+	 *
+	 * Reposiciona um retangulo
+	 *
+	 * Parameter:
+	 *
+	 * {object} - box
+	 *
+	 * {numeric} - novo xmin
+	 *
+	 * {numeric} - novo ymin
+	 *
+	 * {numeric} - novo xmax
+	 *
+	 * {numeric} - novo ymax
+	 */
+	moveBox : function(box, xmin, ymin, xmax, ymax) {
+		if (i3GEO.Interface.ATUAL != "googleearth") {
+			return i3GEO.desenho[i3GEO.Interface.ATUAL].moveBox(
+				box,
+				xmin,
+				ymin,
+				xmax,
+				ymax);
+		} else {
+			return false;
+		}
+	},
+	/**
+	 * Function: removeBox
+	 *
+	 * Remove box do mapa (apenas alias para removePins)
+	 *
+	 * Parameter:
+	 *
+	 * {string} - namespace que identifica o grupo de marcas que serao removidas
+	 */
+	removeBox : function(namespace) {
+		i3GEO.desenho.removePins(namespace);
 	},
 	/**
 	 * Function: addPin
@@ -172,18 +248,30 @@ i3GEO.desenho = {
 	 *
 	 * {numeric} - altura da imagem
 	 *
-	 * {string} - namespace utilizado para agrupar a marca, permitindo sua remocao
+	 * {string} - namespace utilizado para agrupar a marca, permitindo sua
+	 * remocao
 	 *
 	 * {boolean} - posiciona a marca no centro do ponto
+	 *
+	 * {function} - fun&ccedil;&atilde;o disparada no evento onclick
 	 *
 	 * Return:
 	 *
 	 * {objeto}
 	 *
 	 */
-	addPin : function(x, y, w, h, imagem, namespace, centro) {
-		if(i3GEO.Interface.ATUAL != "googleearth"){
-			return i3GEO.desenho[i3GEO.Interface.ATUAL].addPin(x, y, w, h, imagem, namespace, centro);
+	addPin : function(x, y, w, h, imagem, namespace, centro, funcaoclick) {
+		if (i3GEO.Interface.ATUAL != "googleearth") {
+			return i3GEO.desenho[i3GEO.Interface.ATUAL].addPin(
+				x,
+				y,
+				w,
+				h,
+				imagem,
+				namespace,
+				centro);
+		} else {
+			return false;
 		}
 	},
 	/**
@@ -195,8 +283,8 @@ i3GEO.desenho = {
 	 *
 	 * {string} - namespace que identifica o grupo de marcas que serao removidas
 	 */
-	removePins : function(namespace){
-		if(i3GEO.Interface.ATUAL != "googleearth"){
+	removePins : function(namespace) {
+		if (i3GEO.Interface.ATUAL != "googleearth") {
 			i3GEO.desenho[i3GEO.Interface.ATUAL].removePins(namespace);
 		}
 	},
@@ -213,9 +301,12 @@ i3GEO.desenho = {
 	 *
 	 * {numeric} - novo y
 	 */
-	movePin : function(pin,x,y){
-		if(i3GEO.Interface.ATUAL != "googleearth"){
-			i3GEO.desenho[i3GEO.Interface.ATUAL].movePin(pin,x,y);
+	movePin : function(pin, x, y) {
+		if (i3GEO.Interface.ATUAL != "googleearth") {
+			i3GEO.desenho[i3GEO.Interface.ATUAL].movePin(
+				pin,
+				x,
+				y);
 		}
 	},
 	/**
@@ -235,38 +326,95 @@ i3GEO.desenho = {
 				i3GEO.desenho.openlayers.criaLayerGrafico();
 			}
 		},
+		addBox : function(xmin, ymin, xmax, ymax, namespace, strokeColor, strokeWidth) {
+			var bounds, f;
+			if (!namespace) {
+				namespace = "box";
+			}
+			if (!strokeColor) {
+				strokeColor = "#FF0000";
+			}
+			if (!strokeWidth) {
+				strokeWidth = 2;
+			}
+			i3GEO.desenho.openlayers.inicia();
+			bounds = OpenLayers.Bounds.fromArray([
+				xmin,
+				ymin,
+				xmax,
+				ymax
+			]);
+			bounds = bounds.toGeometry();
+			bounds = i3GEO.util.extGeo2OSM(bounds);
+			f = new OpenLayers.Feature.Vector(
+				bounds, {
+					origem : namespace
+				}, {
+					fill : false,
+					strokeColor : strokeColor,
+					strokeWidth : strokeWidth
+				});
+			i3GEO.desenho.layergrafico.addFeatures([
+				f
+			]);
+			return f;
+		},
+		moveBox : function(box, xmin, ymin, xmax, ymax) {
+			i3GEO.desenho.layergrafico.removeFeatures(box);
+			var namespace = box["attributes"].origem, strokeWidth = box["style"].strokeWidth, strokeColor = box["style"].strokeColor;
+			box = i3GEO.desenho.addBox(
+				xmin,
+				ymin,
+				xmax,
+				ymax,
+				namespace,
+				strokeColor,
+				strokeWidth);
+			return box;
+		},
 		addPin : function(x, y, w, h, imagem, namespace, centro, funcaoclick) {
 			if (!imagem
 				|| imagem === "") {
 				imagem = i3GEO.configura.locaplic
-				+ "/imagens/google/confluence.png";
+					+ "/imagens/google/confluence.png";
 			}
 			if (!namespace) {
 				namespace = "pin";
 			}
-			if(!w || w === ""){
+			if (!w
+				|| w === "") {
 				w = 27;
 			}
-			if(!h || h === ""){
+			if (!h
+				|| h === "") {
 				h = 27;
 			}
-			if(!funcaoclick){
-				funcaoclick = function(){
+			if (!funcaoclick) {
+				funcaoclick = function() {
 					i3GEO.desenho.openlayers.removePins(namespace);
 				};
 			}
-			if(!centro){
+			if (!centro) {
 				centro = false;
 			}
 			i3GEO.desenho.openlayers.inicia();
 			var point, f, ox, oy;
-			if(centro === true){
-				ox = parseInt(w / 2,10) * -1;
-				oy = parseInt(h / 2,10) * -1;
-			}
-			else{
-				ox = parseInt(w / 2,10) * -1;
-				oy = h * -1;
+			if (centro === true) {
+				ox = parseInt(
+					w / 2,
+					10)
+					* -1;
+				oy = parseInt(
+					h / 2,
+					10)
+					* -1;
+			} else {
+				ox = parseInt(
+					w / 2,
+					10)
+					* -1;
+				oy = h
+					* -1;
 			}
 			point = new OpenLayers.Geometry.Point(
 				x, y);
@@ -283,8 +431,8 @@ i3GEO.desenho = {
 					externalGraphic : imagem
 				});
 			i3GEO.desenho.layergrafico.addFeatures([
-			                                        f
-			                                        ]);
+				f
+			]);
 			return f;
 		},
 		removePins : function(namespace) {
@@ -301,8 +449,9 @@ i3GEO.desenho = {
 				}
 			}
 		},
-		movePin : function(pin,x,y){
-			var point = new OpenLayers.LonLat(x, y);
+		movePin : function(pin, x, y) {
+			var point = new OpenLayers.LonLat(
+				x, y);
 			point = i3GEO.util.extGeo2OSM(point);
 			pin.move(point);
 		},
@@ -354,37 +503,38 @@ i3GEO.desenho = {
 						extendDefault : false
 					});
 				style.addRules([
-				                new OpenLayers.Rule(
-				                	{
-				                		symbolizer : sketchSymbolizers
-				                	})
-				                ]);
+					new OpenLayers.Rule(
+						{
+							symbolizer : sketchSymbolizers
+						})
+				]);
 				i3GEO.desenho.layergrafico = new OpenLayers.Layer.Vector(
 					"Graf", {
 						styleMap : styleMap1,
 						displayInLayerSwitcher : true,
 						visibility : true,
 						vertexRenderIntent : "vertex",
-						eventListeners: {
-							featureclick: function(e) {
-								//log(e.object.name + " says: " + e.feature.id + " clicked.");
-						        if(e.feature.data.click){
-						        	e.feature.data.click.call();
-						        }
+						eventListeners : {
+							featureclick : function(e) {
+								// log(e.object.name + " says: " + e.feature.id
+								// + " clicked.");
+								if (e.feature.data.click) {
+									e.feature.data.click.call();
+								}
 								return false;
-						    }
+							}
 						}
 					});
 				// para efeitos de compatibilidade
 				if (i3GEO.editorOL
 					&& i3GEO.editorOL.mapa) {
 					i3GEO.editorOL.mapa.addLayers([
-					                               i3GEO.desenho.layergrafico
-					                               ]);
+						i3GEO.desenho.layergrafico
+					]);
 				} else {
 					i3geoOL.addLayers([
-					                   i3GEO.desenho.layergrafico
-					                   ]);
+						i3GEO.desenho.layergrafico
+					]);
 				}
 			}
 		}
@@ -405,47 +555,82 @@ i3GEO.desenho = {
 		shapes : [],
 		inicia : function() {
 		},
-		//TODO incluir onclick
+		addBox : function(xmin, ymin, xmax, ymax, namespace, strokeColor, strokeWidth) {
+			var f;
+			if (!namespace) {
+				namespace = "box";
+			}
+			if (!strokeColor) {
+				strokeColor = "#FF0000";
+			}
+			if (!strokeWidth) {
+				strokeWidth = 2;
+			}
+			i3GEO.desenho.googlemaps.inicia();
+			f = new google.maps.Rectangle(
+				{
+					origem : namespace,
+					strokeColor : strokeColor,
+					strokeWeight : strokeWidth,
+					fillOpacity: 0,
+					map : i3GeoMap,
+					bounds : new google.maps.LatLngBounds(
+						new google.maps.LatLng(
+							ymin, xmin), new google.maps.LatLng(
+							ymax, xmax))
+				});
+			i3GEO.desenho.googlemaps.shapes.push(f);
+			return f;
+		},
+		moveBox : function(box, xmin, ymin, xmax, ymax) {
+			box.setBounds(new google.maps.LatLngBounds(
+				new google.maps.LatLng(
+					ymin, xmin), new google.maps.LatLng(
+					ymax, xmax)));
+			return box;
+		},
 		addPin : function(x, y, w, h, imagem, namespace, centro, funcaoclick) {
 			if (!imagem
 				|| imagem === "") {
 				imagem = i3GEO.configura.locaplic
-				+ "/imagens/google/confluence.png";
+					+ "/imagens/google/confluence.png";
 			}
 			if (!namespace) {
 				namespace = "pin";
 			}
-			if(!w || w === ""){
+			if (!w
+				|| w === "") {
 				w = 27;
 			}
-			if(!h || h === ""){
+			if (!h
+				|| h === "") {
 				h = 27;
 			}
-			if(!funcaoclick){
-				funcaoclick = function(){
+			if (!funcaoclick) {
+				funcaoclick = function() {
 					i3GEO.desenho.googlemaps.removePins(namespace);
 				};
 			}
-			if(!centro){
+			if (!centro) {
 				centro = false;
 			}
 			i3GEO.desenho.googlemaps.inicia();
 			var point, f, icon;
-			if(centro === false){
+			if (centro === false) {
 				icon = {
 					url : imagem,
-					size: new google.maps.Size(w, h)
+					size : new google.maps.Size(
+						w, h)
 				};
-			}
-			else{
+			} else {
 				icon = {
 					url : imagem,
-					size: new google.maps.Size(w, h),
-					origin: new google.maps.Point(0,0),
+					size : new google.maps.Size(
+						w, h),
+					origin : new google.maps.Point(
+						0, 0),
 					anchor : new google.maps.Point(
-						w / 2,
-						h / 2
-					)
+						w / 2, h / 2)
 				};
 			}
 			point = new google.maps.LatLng(
@@ -473,7 +658,7 @@ i3GEO.desenho = {
 				i3GEO.desenho.googlemaps.destroyFeatures(f);
 			}
 		},
-		movePin : function(pin,x,y){
+		movePin : function(pin, x, y) {
 			var point = new google.maps.LatLng(
 				y, x);
 			pin.setPosition(point);
@@ -491,7 +676,7 @@ i3GEO.desenho = {
 			var i, s = [], n = i3GEO.desenho.googlemaps.shapes.length;
 			for (i = 0; i < n; i++) {
 				if (i3GEO.desenho.googlemaps.shapes[i]
-				&& i3GEO.desenho.googlemaps.shapes[i] != "") {
+					&& i3GEO.desenho.googlemaps.shapes[i] != "") {
 					if (i3GEO.desenho.googlemaps.shapes[i][atributo] == valor) {
 						s.push(i3GEO.desenho.googlemaps.shapes[i]);
 					}
@@ -548,15 +733,15 @@ i3GEO.desenho = {
 				var ring = i3GeoMap.createLinearRing(''), steps = 25, i, pi2 = Math.PI * 2, lat, lng;
 				for (i = 0; i < steps; i++) {
 					lat = centerLat
-					+ radius
-					* Math.cos(i
-						/ steps
-						* pi2);
+						+ radius
+						* Math.cos(i
+							/ steps
+							* pi2);
 					lng = centerLng
-					+ radius
-					* Math.sin(i
-						/ steps
-						* pi2);
+						+ radius
+						* Math.sin(i
+							/ steps
+							* pi2);
 					ring.getCoordinates().pushLatLngAlt(
 						lat,
 						lng,
@@ -611,8 +796,8 @@ i3GEO.desenho = {
 						i).getName() === nome
 						|| features.getChildNodes().item(
 							i).getDescription() === nome
-							|| features.getChildNodes().item(
-								i).getSnippet() === nome) {
+						|| features.getChildNodes().item(
+							i).getSnippet() === nome) {
 						// features.getChildNodes().item(i).setVisibility(false);
 						nfeatures.push(features.getChildNodes().item(
 							i));
@@ -628,4 +813,4 @@ i3GEO.desenho = {
 		}
 	}
 };
-//YAHOO.log("carregou classe desenho", "Classes i3geo");
+// YAHOO.log("carregou classe desenho", "Classes i3geo");

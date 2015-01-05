@@ -262,10 +262,7 @@ div.olControlSaveFeaturesItemInactive {
     font-size: 1px;
 }
 
-.olPopupCloseBox {
-  background: url("img/close.gif") no-repeat;
-  cursor: pointer;
-}
+
 
 .olFramedCloudPopupContent {
     padding: 5px;
@@ -513,4 +510,8 @@ a.olControlZoomOut {
 /* override any max-width image settings (e.g. bootstrap.css) */
 img.olTileImage {
     max-width: none;
+}
+.olPopupCloseBox {
+    background: url("img/edit-delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
 }

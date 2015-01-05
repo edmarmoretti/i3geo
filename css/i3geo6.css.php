@@ -1,4 +1,15 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.subbloco {
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.i3GEObalaoInfo {
+position : absolute;
+zIndex : 5000;
+textAlign : left;
+background : white;
+-moz-opacity: 0.9;
+opacity:.90;
+filter: alpha(opacity=90);
+filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+}
+.subbloco {
 background-color: rgb(248, 248, 248);
 width: 90%;
 padding: 5px;
@@ -2004,6 +2015,14 @@ left: 2px;
 }
 .hd .i3GEOconeFerramenta{
 top: 5px;
+}
+.i3GEOiconeAberto {
+background-image: URL('../imagens/oxygen/16x16/document-decrypt.png');
+cursor: pointer;
+}
+.i3GEOiconeFechado {
+background-image: URL('../imagens/oxygen/16x16/document-encrypt.png');
+cursor: pointer;
 }
 .i3GEOiconeOpacidadeMapa {
 background-image: URL('../imagens/oxygen/16x16/show-menu.png');

@@ -310,10 +310,9 @@ div.olControlMousePosition {
 }
 
 .olPopupCloseBox {
-  background: url("img/close.gif") no-repeat;
-  cursor: pointer;
+    background: url("img/edit-delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
 }
-
 .olFramedCloudPopupContent {
     padding: 5px;
     overflow: auto;

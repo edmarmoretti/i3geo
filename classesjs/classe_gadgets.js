@@ -217,7 +217,7 @@ i3GEO.gadgets = {
 					+ i;
 				temp = 'i3GEO.Interface.adicionaKml();';
 				ins += "</td><td><img src='"
-					+ i3GEO.util.$im("branco.gif")
+					+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 					+ "' class='tic' onclick='"
 					+ temp
 					+ "' /></td></tr></table>";
@@ -395,14 +395,14 @@ i3GEO.gadgets = {
 				+ i
 				+ "</td>";
 			ins += "<td><img src='"
-				+ i3GEO.util.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ "' title='"
 				+ $trad("p13")
 				+ "' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida"
 				+ id
 				+ " style='margin-right:5px;margin-left:5px;'/></td>";
 			ins += "<td><img src='"
-				+ i3GEO.util.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ "' class='tic' id=i3GEObotaoBuscaRapida"
 				+ id
 				+ " /></td></tr></table>";
@@ -516,11 +516,11 @@ i3GEO.gadgets = {
 				ins += "6px;'>";
 			}
 			ins += "<tr><td><img  id='i3geo_zoomanterior' class='zoomAnterior' title='anterior' src='"
-				+ i3GEO.util.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ "'  /></td>";
 			ins += "<td>&nbsp;</td>";
 			ins += "<td><img  id='i3geo_zoomproximo' class='zoomProximo' title='proximo' src='"
-				+ i3GEO.util.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ "'  /></td>";
 			ins += "</tr></table>";
 			$i(id).innerHTML = ins;

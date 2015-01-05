@@ -465,7 +465,7 @@ i3GEO.coordenadas =
 			ins += '<td><img class=tic title=zoom onclick="'
 				+ temp
 				+ '" src="'
-				+ i3GEO.util.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ '" /></td>'
 				+ "</tr></table>";
 			return ins;
@@ -628,7 +628,7 @@ i3GEO.coordenadas =
 				+ '<td><img class=tic title=zoom onclick="'
 				+ funcao
 				+ '" src="'
-				+ i3GEO.util.$im("branco.gif")
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ '" /></td>'
 				+ "</tr></table>";
 			return ins;

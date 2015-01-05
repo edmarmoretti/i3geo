@@ -44,7 +44,6 @@ if(typeof(i3GEOF) === 'undefined'){
 Classe: i3GEOF.metar
 
 */
-//TODO verificar se o serviço esta funcionando
 i3GEOF.metar = {
 	MARCA : false,
 	/*

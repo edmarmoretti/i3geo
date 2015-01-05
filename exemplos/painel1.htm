@@ -4,7 +4,7 @@
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3GEO - OpenLayers</title>
-<script src="../classesjs/i3geo.js"></script>
+<script src="../classesjs/i3geonaocompacto.js"></script>
 <script src="../pacotes/openlayers/OpenLayers2131.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/black.css">
 </head>
@@ -13,15 +13,18 @@
 </div>
 <div>
 	<div id=i3geo >
-		<div id=corpoMapa style="top:1px;width:700px;height:650px;background-image:url('../imagens/i3geo1bw.jpg');">
+		<div id=corpoMapa style="top:1px;width:700px;height:340px;background-image:url('../imagens/i3geo1bw.jpg');">
 		</div>
 	</div>
 </div>
-<div id="graficoi5004" style="top:20px;visibility: hidden;position:absolute;width:500px;left:720px;box-shadow:2px 1px 5px 1px lightgray;">
-	<div id="graficoi5004_corpo" style="overflow:auto;width:500px;height:300px;"></div>
+<div id="grafico1" style="top:20px;visibility: hidden;position:absolute;width:500px;left:720px;box-shadow:2px 1px 5px 1px lightgray;">
+	<div id="grafico1_corpo" style="overflow:auto;width:500px;height:300px;"></div>
 </div>
-<div id="graficoi446834" style="top:350px;visibility: hidden;position:absolute;width:500px;left:720px;box-shadow:2px 1px 5px 1px lightgray;">
-	<div id="graficoi446834_corpo" style="overflow:auto;width:500px;height:300px;"></div>
+<div id="grafico2" style="top:350px;visibility: hidden;position:absolute;width:500px;left:720px;box-shadow:2px 1px 5px 1px lightgray;">
+	<div id="grafico2_corpo" style="overflow:auto;width:500px;height:300px;"></div>
+</div>
+<div id="tabela1" style="top:385px;visibility: visible;position:absolute;width:700px;left:5px;box-shadow:2px 1px 5px 1px lightgray;">
+	<div id="tabela1_corpo" style="overflow:auto;width:700px;height:280px;"></div>
 </div>
 <style>
 #menuSuspenso .bd{
@@ -29,14 +32,13 @@
 }
 </style>
 <script>
-//(graficoi446834)
 /************
 
 Para testar utilize:
 http://localhost/i3geo/ms_criamapa.php?mapext=&perfil=&temasa=&layers=&restauramapa=8&interface=exemplos/painel1.htm
-	
+
 Para funcionar, depende do mapa 8, salvo com dois graficos
-	
+
 ************/
 
 i3GEO.idioma.MOSTRASELETOR = false; //para nao mostrar as bandeiras de escolha do idioma

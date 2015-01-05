@@ -40,7 +40,7 @@ require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
 $e = explode(" ",$ret);
-$url = "http://ws.geonames.org/weatherJSON?lang=pt&north=".$e[3]."&south=".$e[1]."&east=".$e[2]."&west=".$e[0]."&maxRows=10";
+$url = "http://ws.geonames.org/weatherJSON?username=i3geo&lang=pt&north=".$e[3]."&south=".$e[1]."&east=".$e[2]."&west=".$e[0]."&maxRows=10";
 $s = file($url);
 header("Content-type: text/ascii; charset=UTF-8");
 header('Expires: Fri, 14 Mar 1980 20:53:00 GMT');
