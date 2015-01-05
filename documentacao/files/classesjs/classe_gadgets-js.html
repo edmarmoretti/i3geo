@@ -13,51 +13,17 @@ if (browserType) {document.write("<div class=" + browserType + ">");if (browserV
 
 <div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Propriedades"></a>Propriedades</h3></div></div>
 
-<div class="CPropriedade"><div class=CTopic><h3 class=CTitle><a name="PARAMETROS"></a>PARAMETROS</h3><div class=CBody><p>Par&acirc;metros de inicializa&ccedil;&atilde;o dos gadgets.</p><p>Essa vari&aacute;vel define os parametros individuais de cada gadget e o ID do elemento HTML onde o gadget ser&aacute; inclu&iacute;do (parametro &ldquo;idhtml&rdquo;).</p><p>Cada tipo de gadget pode ter parametros espec&iacute;ficos, descritos a seguir.</p><h4 class=CHeading>Voc&ecirc; pode acessar os par&acirc;metros da seguinte forma</h4><p>i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400;</p><p>Para evitar o funcionamento de um gadget experimente utilizar</p><h4 class=CHeading>Exemplo</h4><p>i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml = &ldquo;&rdquo;;</p><h4 class=CHeading>Default</h4><blockquote><pre class="prettyprint">i3GEO.gadgets.PARAMETROS = {
-     &quot;mostraInserirKml&quot; : {
-         idhtml : &quot;inserirKml&quot;
-     },
-     &quot;mostraEscalaNumerica&quot; : {
-         idhtml : &quot;escala&quot;
-     },
-     &quot;mostraEscalaGrafica&quot; : {
-         idhtml : &quot;escalaGrafica&quot;
-     },
-     &quot;mostraBuscaRapida&quot; : {
-         idhtml : &quot;buscaRapida&quot;,
-         servicosexternos : true,
-         temasmapa : false,
-         google : true
-     },
-     &quot;mostraVisual&quot; : {
-         idhtml : &quot;&quot;
-     },
-     &quot;mostraHistoricoZoom&quot; : {
-         idhtml : &quot;historicozoom&quot;
-     },
-     &quot;mostraMenuSuspenso&quot; : {
-         permiteLogin : true,
-         marcadores : true,
-         idhtml : &quot;menus&quot;,
-         deslocaEsquerda : 0,
-         parametrosYUI : {
-             iframe : false,
-             autosubmenudisplay : false,
-             showdelay : 200,
-             hidedelay : 500,
-             lazyload : false
-         }
-     },
-     &quot;mostraMenuLista&quot; : {
-         idhtml : &quot;menuLista&quot;
-     },
-     &quot;mostraVersao&quot; : {
-         idhtml : &quot;versaoi3geo&quot;
-     },
-     &quot;mostraEmail&quot; : {
-         idhtml : &quot;emailInstituicao&quot;
-     }
-};</pre></blockquote></div></div></div>
+<div class="CPropriedade"><div class=CTopic><h3 class=CTitle><a name="PARAMETROS"></a>PARAMETROS</h3><div class=CBody><p>Par&acirc;metros de inicializa&ccedil;&atilde;o dos gadgets.</p><p>Essa vari&aacute;vel define os parametros individuais de cada gadget e o ID do elemento HTML onde o gadget ser&aacute; inclu&iacute;do (parametro &ldquo;idhtml&rdquo;).</p><p>Cada tipo de gadget pode ter parametros espec&iacute;ficos, descritos a seguir.</p><h4 class=CHeading>Voc&ecirc; pode acessar os par&acirc;metros da seguinte forma</h4><p>i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400;</p><p>Para evitar o funcionamento de um gadget experimente utilizar</p><h4 class=CHeading>Exemplo</h4><p>i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml = &ldquo;&rdquo;;</p><h4 class=CHeading>Default</h4><blockquote><pre class="prettyprint">i3GEO.gadgets.PARAMETROS = { &quot;mostraInserirKml&quot; : { idhtml : &quot;inserirKml&quot; },
+&quot;mostraEscalaNumerica&quot; : { idhtml : &quot;escala&quot; }, &quot;mostraEscalaGrafica&quot; : {
+idhtml : &quot;escalaGrafica&quot; }, &quot;mostraBuscaRapida&quot; : { idhtml :
+&quot;buscaRapida&quot;, servicosexternos : true, temasmapa : false, google : true },
+&quot;mostraVisual&quot; : { idhtml : &quot;&quot; }, &quot;mostraHistoricoZoom&quot; : { idhtml :
+&quot;historicozoom&quot; }, &quot;mostraMenuSuspenso&quot; : { permiteLogin : true,
+marcadores : true, idhtml : &quot;menus&quot;, deslocaEsquerda : 0, parametrosYUI : {
+iframe : false, autosubmenudisplay : false, showdelay : 200, hidedelay :
+500, lazyload : false } }, &quot;mostraMenuLista&quot; : { idhtml : &quot;menuLista&quot; },
+&quot;mostraVersao&quot; : { idhtml : &quot;versaoi3geo&quot; }, &quot;mostraEmail&quot; : { idhtml :
+&quot;emailInstituicao&quot; } };</pre></blockquote></div></div></div>
 
 <div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Functions"></a>Functions</h3></div></div>
 
@@ -65,21 +31,40 @@ if (browserType) {document.write("<div class=" + browserType + ">");if (browserV
 
 <div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraVersao"></a>mostraVersao</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraVersao : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra a vers&atilde;o atual do i3Geo armazenada na vari&aacute;vel i3GEO.parametros.mensageminicial</p><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</td></tr></table></div></div></div>
 
-<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraInserirKml"></a>mostraInserirKml</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraInserirKml : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra no mapa a a op&ccedil;&atilde;o para inserir kml.</p><p>Essa op&ccedil;&atilde;o s&oacute; funciona com a API do Google carregada</p><p>Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o id definido em i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml</p><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml</td></tr></table></div></div></div>
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraInserirKml"></a>mostraInserirKml</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraInserirKml : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra no mapa a a op&ccedil;&atilde;o para inserir kml.</p><p>Essa op&ccedil;&atilde;o s&oacute; funciona com a API do Google carregada</p><p>Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine</p><ul><li>elemento HTML existente no mapa que contenha o id definido em i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml</li></ul><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml</td></tr></table></div></div></div>
 
-<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraEscalaNumerica"></a>mostraEscalaNumerica</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraEscalaNumerica : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra no mapa a escala num&eacute;rica.</p><p>A escala num&eacute;rica pode ser alterada pelo usu&aacute;rio digitando-se a nova escala.</p><p>Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o id definido em i3GEO.gadgets.PARAMETROS</p><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</td></tr></table></div></div></div>
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraEscalaNumerica"></a>mostraEscalaNumerica</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraEscalaNumerica : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra no mapa a escala num&eacute;rica.</p><p>A escala num&eacute;rica pode ser alterada pelo usu&aacute;rio digitando-se a nova escala.</p><p>Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine</p><ul><li>elemento HTML existente no mapa que contenha o id definido em i3GEO.gadgets.PARAMETROS</li></ul><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</td></tr></table></div></div></div>
 
-<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraEscalaGrafica"></a>mostraEscalaGrafica</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraEscalaGrafica : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra no mapa a escala grafica como um elemento fora do mapa.</p><p>Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o id definido em i3GEO.gadgets.PARAMETROS(escala)</p><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</td></tr></table></div></div></div>
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraEscalaGrafica"></a>mostraEscalaGrafica</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraEscalaGrafica : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra no mapa a escala grafica como um elemento fora do mapa.</p><p>Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine</p><ul><li>elemento HTML existente no mapa que contenha o id definido em i3GEO.gadgets.PARAMETROS(escala)</li></ul><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</td></tr></table></div></div></div>
 
-<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraBuscaRapida"></a>mostraBuscaRapida</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraBuscaRapida : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra a op&ccedil;&atilde;o de busca r&aacute;pida de lugares por palavra digitada.</p><p>Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine o elemento HTML existente no mapa que contenha o id definido em i3GEO.gadgets.PARAMETROS (buscaRapida)</p><p>Onde a busca ser&aacute; feita &eacute; controlado pela vari&aacute;vel i3GEO.gadgets.PARAMETROS.mostraBuscaRapida</p><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</td></tr></table></div></div></div>
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraBuscaRapida"></a>mostraBuscaRapida</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraBuscaRapida : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra a op&ccedil;&atilde;o de busca r&aacute;pida de lugares por palavra digitada.</p><p>Se voc&ecirc; n&atilde;o quer essa fun&ccedil;&atilde;o no mapa, elimine</p><ul><li>elemento HTML existente no mapa que contenha o id definido em i3GEO.gadgets.PARAMETROS (buscaRapida)</li></ul><p>Onde a busca ser&aacute; feita &eacute; controlado pela vari&aacute;vel i3GEO.gadgets.PARAMETROS.mostraBuscaRapida</p><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</td></tr></table></div></div></div>
 
 <div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraHistoricoZoom"></a>mostraHistoricoZoom</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraHistoricoZoom : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra na barra de zoom os &iacute;cones que controlam a visualiza&ccedil;&atilde;o do hist&oacute;rico da navega&ccedil;&atilde;o sobre o mapa</p><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</td></tr></table></div></div></div>
 
 <div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraMenuSuspenso"></a>mostraMenuSuspenso</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraMenuSuspenso : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra o menu suspenso com op&ccedil;&otilde;es extras de an&aacute;lise, ajuda, etc</p><p>Paradefinir os &iacute;cones existentes nos elementos principais do menu, edite o arquivo i3geo/css/botoes2.css e acrescente o estilo desejado.&nbsp; Utilize # para se referenciar ao elemento, cujo identificador &eacute; composto por &ldquo;menu&rdquo;+chave, exemplo #menuinterface ou #menuajuda</p><p>O objeto YAHOO.widget.MenuBar resultante pode ser obtido na vari&aacute;vel i3GEOoMenuBar</p><p>i3GEOoMenuBar pode ser manipulado com os m&eacute;todos da biblioteca YUI</p><h4 class=CHeading>Exemplo</h4><blockquote><pre class="prettyprint">i3GEOoMenuBar.getMenuItem(&quot;omenudataInterface1&quot;).cfg.setProperty(&quot;text&quot;,
 &quot;zzzzzz&quot;);
 
-i3GEOoMenuBar.getMenuItem(&quot;omenudataInterface1&quot;).destroy();</pre></blockquote><p>Para executar uma opera&ccedil;&atilde;o ap&oacute;s o menu ser montado, utilize a propriedade i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza, por exemplo (a string &eacute; executada por meio da fun&ccedil;&atilde;o eval do javascript)</p><h4 class=CHeading>Exemplo</h4><blockquote><pre class="prettyprint">i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza =
- 'i3GEOoMenuBar.getMenuItem(&quot;omenudataInterface1&quot;).cfg.setProperty(&quot;text&quot;, &quot;&quot;);';</pre></blockquote><p>O conte&uacute;do do menu &eacute; baseado na vari&aacute;vel i3GEO.configura.oMenuData</p><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</td></tr></table></div></div></div>
+i3GEOoMenuBar.getMenuItem(&quot;omenudataInterface1&quot;).destroy(); (end)
+
+Para executar uma opera&ccedil;&atilde;o ap&oacute;s o menu ser montado,
+utilize a propriedade
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza, por exemplo (a
+string &eacute; executada por meio da fun&ccedil;&atilde;o eval do
+javascript)
+
+Exemplo:
+
+(start code) i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza =
+'i3GEOoMenuBar.getMenuItem(&quot;omenudataInterface1&quot;).cfg.setProperty(&quot;text&quot;,
+&quot;&quot;);'; (end)
+
+O conte&uacute;do do menu &eacute; baseado na vari&aacute;vel
+i3GEO.configura.oMenuData
+
+Parametro:
+
+{String} - id do elemento HTML que receber&aacute; o resultado. Esse id
+por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</pre></blockquote></div></div></div>
 
 <div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="mostraMenuLista"></a>mostraMenuLista</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class="Prototype"><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class="PBeforeParameters  prettyprint "nowrap>mostraMenuLista : function(</td><td class="PParameter  prettyprint " nowrap>id</td><td class="PAfterParameters  prettyprint "nowrap>)</td></tr></table></td></tr></table></blockquote><p>Mostra as op&ccedil;&otilde;es existentes no menu suspenso por&eacute;m na forma de uma lista de op&ccedil;&otilde;es</p><p>O conte&uacute;do do menu &eacute; baseado na vari&aacute;vel i3GEO.configura.oMenuData</p><h4 class=CHeading>Parametro</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>{String}</td><td class=CDLDescription>id do elemento HTML que receber&aacute; o resultado.&nbsp; Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS</td></tr></table></div></div></div>
 
