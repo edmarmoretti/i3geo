@@ -29,7 +29,7 @@
 <div id="i3GEONomeLogin" style="position:absolute;left:10px;top:12px;font-size:11px;z-index:50000"></div>
 <table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
 	<tr style="border:0px">
-		<td id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
+		<td id="barraSuperior" style="background-image:url('../imagens/cabeca.png');height:10px"></td>
 	</tr>
 	<tr>
 		<td id="contemMenu" style="text-align:right;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
@@ -80,7 +80,7 @@
 		</td>
 	</tr>
 	<tr style="border:0px">
-		<td id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td>
+		<td id="barraInferior" style="background-image:url('../imagens/rodape.png');height:10px"></td>
 	</tr>
 </table>
 <table id="i3GEOlogoMarca" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>

@@ -159,7 +159,7 @@ i3GEOF.selecao = {
 			var ins = '' +
 			'<div id=i3GEOselecaoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">' +
 			'	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">' +
-			'		<li><div id="i3GEOselecaoguia4" style="text-align: center; left: 0px;"><a><em><img class="ticPropriedades2" style="height: 14px" src="' + i3GEO.configura.locaplic + '/imagens/visual/default/branco.gif"></em></a></div></li>' +
+			'		<li><div id="i3GEOselecaoguia4" style="text-align: center; left: 0px;"><a><em><img class="ticPropriedades2" style="height: 14px" src="' + i3GEO.configura.locaplic + '/imagens/branco.gif"></em></a></div></li>' +
 			'		<li><a  ><em><div id="i3GEOselecaoguia1" style="text-align:center;left:0px;" >'+$trad('mapa',i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
 			'		<li><a  ><em><div id="i3GEOselecaoguia2" style="text-align:center;left:0px;" >'+$trad('atributos',i3GEOF.selecao.dicionario)+'</div></em></a></li>' +
 			'		<li><a  ><em><div id="i3GEOselecaoguia3" style="text-align:center;left:0px;" >'+$trad('cruzamento',i3GEOF.selecao.dicionario)+'</div></em></a></li>' +

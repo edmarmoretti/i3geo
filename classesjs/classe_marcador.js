@@ -172,7 +172,7 @@ i3GEO.marcador =
 						itens.push({
 							id : "omenudataMarcador" + i,
 							text : "<img title='" + $trad("x62") + "' src='" + i3GEO.configura.locaplic
-								+ "/imagens/visual/default/branco.gif' class=x onclick='i3GEO.marcador.remove(\"" + temp[0]
+								+ "/imagens/branco.gif' class=x onclick='i3GEO.marcador.remove(\"" + temp[0]
 								+ "\")' />&nbsp;<span style='color:blue;background-color:white;'>" + temp[0] + "</span>",
 							url : "javascript:i3GEO.marcador.recuperaZoom('" + temp[0] + "')"
 						});

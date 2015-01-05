@@ -2670,10 +2670,10 @@ i3GEOF.metaestat = {
 			}
 			ins += "</select></div>";
 			if(mostraIconeprop == "sim"){
-				ins += "<img class='ticPropriedades2' src='"+i3GEO.configura.locaplic+"/imagens/visual/default/branco.gif' style='height:14px;position:relative;cursor:pointer;left:5px;top:4px;' onclick='i3GEOF.metaestat.classes.inicia()' title='"+$trad('propriedadesCamada',i3GEOF.metaestat.dicionario)+"'/>";
+				ins += "<img class='ticPropriedades2' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' style='height:14px;position:relative;cursor:pointer;left:5px;top:4px;' onclick='i3GEOF.metaestat.classes.inicia()' title='"+$trad('propriedadesCamada',i3GEOF.metaestat.dicionario)+"'/>";
 			}
 			if(mostraIconedown == "sim"){
-				ins += "<img class='ticDownload' src='"+i3GEO.configura.locaplic+"/imagens/visual/default/branco.gif' style='position:relative;cursor:pointer;left:8px;top:5px;' onclick='i3GEOF.metaestat.principal.downloadMedida()' title='"+$trad("a3")+"'/>";
+				ins += "<img class='ticDownload' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' style='position:relative;cursor:pointer;left:8px;top:5px;' onclick='i3GEOF.metaestat.principal.downloadMedida()' title='"+$trad("a3")+"'/>";
 			}
 			return ins;
 		},
@@ -2783,8 +2783,8 @@ i3GEOF.metaestat = {
 					ins += "<option value='"+dados[i].id_medida_variavel+"'>"+dados[i].titulo+"</option>";
 				}
 				ins += "</select>";
-				ins += "<img class='ticPropriedades2' src='"+i3GEO.configura.locaplic+"/imagens/visual/default/branco.gif' style='height:14px;position:relative;cursor:pointer;left:5px;top:4px;' onclick='i3GEOF.metaestat.classes.inicia()' title='"+$trad('propriedadesCamada',i3GEOF.metaestat.dicionario)+"'/>";
-				ins += "<img class='ticDownload' src='"+i3GEO.configura.locaplic+"/imagens/visual/default/branco.gif' style='position:relative;cursor:pointer;left:8px;top:5px;' onclick='i3GEOF.metaestat.principal.downloadMedida()' title='"+$trad("a3")+"'/>";
+				ins += "<img class='ticPropriedades2' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' style='height:14px;position:relative;cursor:pointer;left:5px;top:4px;' onclick='i3GEOF.metaestat.classes.inicia()' title='"+$trad('propriedadesCamada',i3GEOF.metaestat.dicionario)+"'/>";
+				ins += "<img class='ticDownload' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' style='position:relative;cursor:pointer;left:8px;top:5px;' onclick='i3GEOF.metaestat.principal.downloadMedida()' title='"+$trad("a3")+"'/>";
 
 				$i(onde).innerHTML = ins;
 			};

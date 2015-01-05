@@ -41,7 +41,7 @@ if(empty($_SESSION["usuario"]) || ($_SESSION["usuario"] != $_COOKIE["i3geousuari
 		cellspacing='0'>
 		<tr style="border: 0px">
 			<td id="barraSuperior"
-				style="background-image: url('../imagens/visual/default/cabeca.png'); height: 10px"></td>
+				style="background-image: url('../imagens/cabeca.png'); height: 10px"></td>
 		</tr>
 		<tr>
 			<td id="contemMenu"
@@ -96,7 +96,7 @@ if(empty($_SESSION["usuario"]) || ($_SESSION["usuario"] != $_COOKIE["i3geousuari
 		</tr>
 		<tr style="border: 0px">
 			<td id="barraInferior"
-				style="background-image: url('../imagens/visual/default/rodape.png'); height: 10px"></td>
+				style="background-image: url('../imagens/rodape.png'); height: 10px"></td>
 		</tr>
 	</table>
 	<table id="i3GEOlogoMarca"

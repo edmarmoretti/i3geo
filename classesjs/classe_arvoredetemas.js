@@ -1273,7 +1273,7 @@ i3GEO.arvoreDeTemas = {
 								+ i3GEO.configura.locaplic
 								+ "/kml.php?tipoxml=kml' target=blank > <img src='"
 								+ i3GEO.configura.locaplic
-								+ "/imagens/visual/default/branco.gif' class='abregoogleearth'> "
+								+ "/imagens/branco.gif' class='abregoogleearth'> "
 								+ $trad("a13") + "</a>",
 						idmenu : "",
 						enableHighlight : false,

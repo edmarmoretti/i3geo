@@ -1160,231 +1160,231 @@ background-image: URL('../imagens/realca.gif');
 background-image: URL('../imagens/zoomlo.gif');
 }
 #imprimir {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px 0px;
 }
 #mede {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -24px;
 }
 #textofid {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -48px;
 }
 #inserexy {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -72px;
 }
 #selecao {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -96px;
 }
 #exten {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -120px;
 }
 #reinicia {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -144px;
 }
 #lentei {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -168px;
 }
 #identificaBalao {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -192px;
 cursor: pointer;
 }
 #zoomtot {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -216px;
 }
 #pan {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -240px;
 }
 #google {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -264px;
 }
 #referencia {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -288px;
 }
 #inseregrafico {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -312px;
 }
 #wiki {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -336px;
 }
 #scielo {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -360px;
 }
 #confluence {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -384px;
 }
 #v3d {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -408px;
 }
 #area {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -432px;
 }
 #identifica {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -456px;
 cursor: pointer;
 }
 #metar {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -480px;
 cursor: pointer;
 }
 #buscafotos {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -504px;
 cursor: pointer;
 }
 #rota {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -528px;
 }
 .abregoogleearth {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -576px;
 }
 .ticPropriedades2 {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: -5px -603px;
 height: 15px;
 width: 15px;
 }
 .carregarKml {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -624px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
 .buscaInde {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -700px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
 .iconeMetaestat {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -728px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
 #barraedicao {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -648px;
 }
 #localizar {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 background-position: 0px -672px;
 }
 .i3GEOiconeIdentifica {
-background-image: URL('../imagens/visual/default/sprite2.png');
+background-image: URL('../imagens/sprite2.png');
 background-repeat: no-repeat;
 width: 14px;
 background-position: 0px -744px;
 }
 .ticDownload {
-background-image: url("../imagens/visual/default/sprite.png");
+background-image: url("../imagens/sprite.png");
 background-position: 0 -1124px;
 background-repeat: no-repeat;
 height: 15px;
 width: 15px;
 }
 #ondeestou {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -475px;
 width: 20px;
 height: 10px;
 }
 #menuinterface {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -550px;
 width: 52px;
 height: 15px;
 }
 #menuajudaMenu {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -500px;
 width: 52px;
 height: 15px;
 }
 #menuanalise {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -525px;
 width: 52px;
 height: 15px;
 }
 #menujanelas {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -550px;
 width: 52px;
 height: 15px;
 }
 #menuferramentas {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -2157px;
 width: 65px;
 height: 15px;
 }
 #menuarquivos {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 3px -575px;
 width: 52px;
 height: 15px;
 }
 #menui3GeoMenuMarcador {
-background-image: url("../imagens/visual/default/sprite.png");
+background-image: url("../imagens/sprite.png");
 background-position: 0px -2226px;
 background-repeat: no-repeat;
 height: 15px;
@@ -1392,7 +1392,7 @@ width: 57px;
 }
 /*bandeira do brasil*/
 #brasil {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -600px;
 width: 20px;
@@ -1401,7 +1401,7 @@ cursor: pointer;
 }
 /*bandeira inglaterra*/
 #uk {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -625px;
 width: 20px;
@@ -1409,7 +1409,7 @@ height: 10px;
 cursor: pointer;
 }
 #espanhol {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1400px;
 width: 20px;
@@ -1417,7 +1417,7 @@ height: 10px;
 cursor: pointer;
 }
 #italiano {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1725px;
 width: 20px;
@@ -1426,7 +1426,7 @@ cursor: pointer;
 }
 /*icone de aplicar*/
 .tic {
-background-image: url(../imagens/visual/default/sprite.png);
+background-image: url(../imagens/sprite.png);
 background-position: 0px -650px;
 background-repeat: no-repeat;
 cursor: pointer;
@@ -1437,7 +1437,7 @@ box-shadow: 1px 1px 3px 0px lightgray;
 margin-left: 1px;
 }
 .x {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -675px;
 width: 9px;
@@ -1445,7 +1445,7 @@ height: 9px;
 cursor: pointer;
 }
 .sobe {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -700px;
 width: 9px;
@@ -1453,7 +1453,7 @@ height: 9px;
 cursor: pointer;
 }
 .desce {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -725px;
 width: 9px;
@@ -1461,7 +1461,7 @@ height: 9px;
 cursor: pointer;
 }
 .extent {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -750px;
 width: 9px;
@@ -1469,7 +1469,7 @@ height: 9px;
 cursor: pointer;
 }
 .menuarrow {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -775px;
 width: 16px;
@@ -1479,7 +1479,7 @@ left: 3px;
 top: 2px;
 }
 .mais {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -800px;
 width: 17px;
@@ -1487,7 +1487,7 @@ height: 9px;
 cursor: pointer;
 }
 .menos {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -825px;
 width: 17px;
@@ -1495,7 +1495,7 @@ height: 9px;
 cursor: pointer;
 }
 .ponto {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -850px;
 width: 17px;
@@ -1503,7 +1503,7 @@ height: 9px;
 cursor: pointer;
 }
 .quadro {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -875px;
 width: 13px;
@@ -1511,7 +1511,7 @@ height: 13px;
 cursor: pointer;
 }
 .quadro1 {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -900px;
 width: 13px;
@@ -1519,7 +1519,7 @@ height: 13px;
 cursor: pointer;
 }
 .slider {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -925px;
 width: 20px;
@@ -1530,7 +1530,7 @@ cursor: pointer;
 position: relative;
 top: -1px;
 width: 18px;
-background: url('../imagens/visual/default/sprite.png');
+background: url('../imagens/sprite.png');
 background-position: 0px -950px;
 height: 18px;
 }
@@ -1539,38 +1539,38 @@ cursor: pointer;
 position: relative;
 top: 2px;
 width: 18px;
-background: url('../imagens/visual/default/sprite.png');
+background: url('../imagens/sprite.png');
 background-position: 0px -975px;
 height: 18px;
 }
 #zoomli {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1000px;
 }
 .foldermapa1 {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1025px;
 width: 17px;
 height: 15px;
 }
 .foldermapa {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1050px;
 width: 17px;
 height: 15px;
 }
 #i3geo_lixeira {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1078px;
 width: 18px;
 height: 18px;
 }
 #i3geo_refresh {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2205px;
 width: 18px;
@@ -1578,35 +1578,35 @@ height: 18px;
 cursor: pointer;
 }
 .upload {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1099px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
 .download {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1124px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
 .conectarwms {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 1px -1149px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
 .conectargeorss {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 1px -1174px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
 .conectarservidor {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1200px;
 width: 14px;
@@ -1617,56 +1617,56 @@ border-top: 1px solid #F8F8F8;
 border-right: 1px solid #F8F8F8;
 }
 .folder {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1225px;
 width: 17px;
 height: 15px;
 }
 .rosanorte {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1250px;
 width: 14px;
 height: 14px;
 }
 .rosasul {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1275px;
 width: 14px;
 height: 14px;
 }
 .rosaleste {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1300px;
 width: 14px;
 height: 14px;
 }
 .rosaoeste {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1325px;
 width: 14px;
 height: 14px;
 }
 .rosamais {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1350px;
 width: 10px;
 height: 20px;
 }
 .rosamenos {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1375px;
 width: 10px;
 height: 20px;
 }
 #desceferramentas {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1450px;
 cursor: pointer;
@@ -1675,7 +1675,7 @@ height: 20px;
 margin: 2px;
 }
 #sobeferramentas {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1475px;
 cursor: pointer;
@@ -1685,7 +1685,7 @@ margin: 2px;
 }
 /*marcador de lista das propriedades do mapa*/
 .ticPropriedades {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1500px;
 width: 9px;
@@ -1695,7 +1695,7 @@ margin-right: 3px;
 }
 /*marcador de lista das opcoes do tema*/
 .ticOpcoesTemas {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1500px;
 width: 9px;
@@ -1704,49 +1704,49 @@ cursor: pointer;
 margin-right: 3px;
 }
 .uploaddbf {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 1px -1523px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
 .rosanordeste {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1550px;
 width: 14px;
 height: 14px;
 }
 .rosasudeste {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1575px;
 width: 14px;
 height: 14px;
 }
 .rosanoroeste {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1600px;
 width: 14px;
 height: 14px;
 }
 .rosasudoeste {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1625px;
 width: 14px;
 height: 14px;
 }
 .nuvemtags {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 1px -1648px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
 .zoomAnterior {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1675px;
 width: 10px;
@@ -1754,7 +1754,7 @@ height: 11px;
 cursor: pointer;
 }
 .zoomProximo {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1700px;
 width: 10px;
@@ -1762,7 +1762,7 @@ height: 11px;
 cursor: pointer;
 }
 .i3geo_refresh2 {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1749px;
 width: 18px;
@@ -1770,14 +1770,14 @@ height: 20px;
 cursor: pointer;
 }
 .conectarwmst {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 1px -1824px;
 width: 16px;
 border: 1px solid #DCDCDC;
 }
 .fonte {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1850px;
 width: 9px;
@@ -1785,19 +1785,19 @@ height: 9px;
 cursor: pointer;
 }
 #zoomiauto {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1875px;
 cursor: pointer;
 }
 #zoomoauto {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1900px;
 cursor: pointer;
 }
 #olhoAberto {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1925px;
 cursor: pointer;
@@ -1805,7 +1805,7 @@ width: 25px;
 height: 20px;
 }
 #olhoFechado {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1949px;
 width: 25px;
@@ -1813,7 +1813,7 @@ height: 20px;
 cursor: pointer;
 }
 .carouselTemas {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2000px;
 width: 16px;
@@ -1821,7 +1821,7 @@ border: 1px solid #DCDCDC;
 cursor: pointer;
 }
 .uploadgpx {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2052px;
 width: 16px;
@@ -1829,21 +1829,21 @@ border: 1px solid #DCDCDC;
 cursor: pointer;
 }
 #i3geo_filtro {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2073px;
 width: 18px;
 height: 18px;
 }
 .i3geo_filtro {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2073px;
 width: 18px;
 height: 18px;
 }
 #abreJanelaLegenda {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2100px;
 cursor: pointer;
@@ -1851,7 +1851,7 @@ width: 22px;
 height: 22px;
 }
 #soltaLeg {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2100px;
 cursor: pointer;
@@ -1859,7 +1859,7 @@ width: 22px;
 height: 22px;
 }
 #soltaLeg2 {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2125px;
 cursor: pointer;
@@ -1867,7 +1867,7 @@ width: 20px;
 height: 16px;
 }
 #soltaleg2 {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2123px;
 cursor: pointer;
@@ -1875,7 +1875,7 @@ width: 18px;
 height: 18px;
 }
 #opacidadeMapa {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2173px;
 cursor: pointer;
@@ -1883,7 +1883,7 @@ width: 18px;
 height: 18px;
 }
 #animaMapa {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2187px;
 cursor: pointer;
@@ -1891,7 +1891,7 @@ width: 18px;
 height: 18px;
 }
 .importarwmc {
-background-image: URL('../imagens/visual/default/sprite.png');
+background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2140px;
 border: 1px solid #DCDCDC;
