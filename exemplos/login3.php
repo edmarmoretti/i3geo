@@ -184,7 +184,7 @@ if(empty($_SESSION["usuario"]) || ($_SESSION["usuario"] != $_COOKIE["i3geousuari
 		i3GEO.barraDeBotoes.ATIVA = true;
 		i3GEO.ajuda.ATIVAJANELA = false;
 		i3GEO.idioma.IDSELETOR = "seletorIdiomas";
-		i3GEO.Interface.ATIVAMENUCONTEXTO = false;
+		
 		i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 		
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;

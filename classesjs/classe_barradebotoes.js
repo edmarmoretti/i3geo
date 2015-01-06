@@ -307,17 +307,7 @@ i3GEO.barraDeBotoes =
 	 */
 	PERMITEDESLOCAR : true,
 	/**
-	 * Propriedade: ATIVAMENUCONTEXTO
-	 *
-	 * Indica se o menu de contexto deve ser ativado
-	 *
-	 * Tipo:
-	 *
-	 * {Boolean}
-	 *
-	 * Default:
-	 *
-	 * {true}
+	 * ATIVAMENUCONTEXTO depreciado na versao 6.0
 	 */
 	ATIVAMENUCONTEXTO : false,
 	/**
@@ -1269,9 +1259,6 @@ i3GEO.barraDeBotoes =
 				};
 				document.body.appendChild(novoel);
 			}
-			if (this.ATIVAMENUCONTEXTO) {
-				i3GEO.util.mudaCursor(i3GEO.configura.cursores, "contexto", idconteudonovo, i3GEO.configura.locaplic);
-			}
 			// copia os botoes do HTML para a janela
 			ticone = 28;
 			alturadisponivel = i3GEO.parametros.h - i3GEO.Interface.BARRABOTOESTOP - ticone - 38 - 38;
@@ -1464,89 +1451,9 @@ i3GEO.barraDeBotoes =
 				if (i3GEO.Interface.TABLET === true) {
 					YAHOO.i3GEO.janela.botoes.moveTo((i3GEO.parametros.w / 2) - (i3GEO.barraDeBotoes.HORIZONTALW / 2), "");
 				}
-				//
-				// menu de contexto
-				//
-				if (this.ATIVAMENUCONTEXTO) {
-					this.ativaMenuContexto(idconteudonovo);
-				}
 				Dom.replaceClass(idconteudonovo + "_h", "hd2");
 			}
 		}
-	},
-	/**
-	 * Function: ativaMenuContexto (depreciado na vers&atilde;o 4.5)
-	 *
-	 * Ativa o menu de contexto acionado com o bot&atilde;o direito do mouse
-	 *
-	 * Parametro:
-	 *
-	 * {string} id da barra de bot&otilde;es onde o evento ser&aacute; ativado
-	 */
-	ativaMenuContexto : function(idbarra) {
-		if (i3GEO.barraDeBotoes.ATIVA === false) {
-			return;
-		}
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.barraDeBotoes.ativaMenuContexto()");
-
-		var oFieldContextMenuItemData, oFieldContextMenu, onFieldMenuRender;
-		function executar(a, b, c) {
-			eval(c);
-		}
-		oFieldContextMenuItemData =
-			[
-			 {
-				 text : "&nbsp;<span class='container-close'></span>"
-			 },
-			 {
-				 text : "Fechar barra",
-				 onclick : {
-					 fn : executar,
-					 obj : "i3GEO.barraDeBotoes.fecha('" + idbarra + "')"
-				 }
-			 },
-			 {
-				 text : "Barra normal",
-				 onclick : {
-					 fn : executar,
-					 obj : "i3GEO.barraDeBotoes.AUTOALTURA=false;i3GEO.barraDeBotoes.PERMITEFECHAR=true;i3GEO.barraDeBotoes.PERMITEDESLOCAR=true;i3GEO.barraDeBotoes.recria('"
-						 + idbarra + "')"
-				 }
-			 },
-			 {
-				 text : "Barra fixa",
-				 onclick : {
-					 fn : executar,
-					 obj : "i3GEO.barraDeBotoes.AUTOALTURA=true;i3GEO.barraDeBotoes.PERMITEFECHAR=false;i3GEO.barraDeBotoes.PERMITEDESLOCAR=false;i3GEO.barraDeBotoes.recria('"
-						 + idbarra + "')"
-				 }
-			 },
-			 {
-				 text : "Remove transi&ccedil;&atilde;o",
-				 onclick : {
-					 fn : executar,
-					 obj : "i3GEO.barraDeBotoes.TRANSICAOSUAVE=false;"
-				 }
-			 },
-			 {
-				 text : "Ativa transi&ccedil;&atilde;o",
-				 onclick : {
-					 fn : executar,
-					 obj : "i3GEO.barraDeBotoes.TRANSICAOSUAVE=true;"
-				 }
-			 }
-			 ];
-		oFieldContextMenu = new YAHOO.widget.ContextMenu("contexto_" + idbarra, {
-			trigger : idbarra,
-			itemdata : oFieldContextMenuItemData,
-			lazyload : true
-		});
-		onFieldMenuRender = function() {
-			var id = "contexto_" + idbarra;
-			$i(id).style.zIndex = 50000;
-		};
-		oFieldContextMenu.subscribe("render", onFieldMenuRender);
 	},
 	/**
 	 * Function: reativa

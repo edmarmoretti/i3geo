@@ -197,7 +197,7 @@ i3GEO.navega =
 				return false;
 			}
 		},
-		//TODO incluir como elemento grafico
+		//a marca e fixa no mapa quando ocorre o PAN
 		marcaCentroDoMapa : function(xy) {
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.navega.marcaCentroDoMapa()");

@@ -131,27 +131,24 @@ echo $resultado;
 ?>
 <script>
 	var i3GEO = window.parent.i3GEO;
+	var BOX = false;
 	var x = <?php echo $x;?>;
 	var y = <?php echo $y;?>;
 
 	$i = window.parent.$i
 	function escondexy(){
-		i3GEO.util.escondeBox();
+		i3GEO.desenho.removeBox("boxOndeMetar");
 	}
 	function mostraxy(){
 		if(i3GEO.Interface.ATUAL === "googleearth")
 		{return;}
-		i3GEO.util.criaBox("boxpin");
-		xy = i3GEO.calculo.dd2tela(x*1,y*1,$i(i3GEO.Interface.IDCORPO),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
-		var box = $i("boxpin");
-		box.style.display = "block";
-		box.style.width = "5px";
-		box.style.height = "5px";
-		box.style.top = parseInt(xy[1],10)-2+"px";
-		box.style.left = parseInt(xy[0],10)-2+"px";
-		box.style.position = "absolute";
-		box.style.border = "solid 2px red"
-		box.style.zIndex = 5000
+		var b = ext.split(" ");
+		if(BOX === false){
+			BOX = i3GEO.desenho.addBox(b[0], b[1], b[2], b[3], "boxOndeMetar");
+		}
+		else{
+			BOX = i3GEO.desenho.moveBox(BOX,b[0], b[1], b[2], b[3]);
+		}
 	}
 	function insereponto(){
 		i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,x,y);

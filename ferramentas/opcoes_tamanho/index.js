@@ -165,32 +165,9 @@ i3GEOF.opcoesTamanho = {
 		if ((l > 5) && (a > 5)){
 			i3GEO.parametros.w = l;
 			i3GEO.parametros.h = a;
-			/*
-			$i(i3GEO.Interface.IDMAPA).style.width= l+"px";
-			$i(i3GEO.Interface.IDMAPA).style.height= a+"px";
-			$i(i3GEO.Interface.IDCORPO).style.width= l+"px";
-			$i(i3GEO.Interface.IDCORPO).style.height= a+"px";
-			$i(i3GEO.Interface.IDCORPO).style.clip = 'rect('+0+" "+(l*1+2)+" "+(a*1+2)+" "+0+')';
-			if($i("ferramentas"))
-			{calc += parseInt($i("ferramentas").style.width,10);}
-			if ($i("contemFerramentas"))
-			{calc += parseInt($i("contemFerramentas").style.width,10);}
-			if($i("contemImg")){
-				$i("contemImg").style.height= a+"px";
-				$i("contemImg").style.width= l+"px";
-			}
-			*/
+
 			temp = function(){
-				//i3GEO.atualiza();
-				//i3GEO.guias.ALTURACORPOGUIAS = a;
 				i3GEOF.opcoesTamanho.aguarde.visibility = "hidden";
-				/*
-				if(i3GEO.guias.TIPO === "movel")
-				{i3GEO.guias.guiaMovel.reposiciona();}
-				else
-				{i3GEO.guias.ajustaAltura();}
-				i3GEO.mapa.reposicionaDobraPagina();
-				*/
 			};
 			p = i3GEO.configura.locaplic+"/ferramentas/opcoes_tamanho/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=mudatamanho&altura="+a+"&largura="+l;
 			cp = new cpaint();

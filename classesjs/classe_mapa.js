@@ -1649,10 +1649,6 @@ i3GEO.mapa =
 					if ($i(i3GEO.Interface.IDMAPA)) {
 						$i(i3GEO.Interface.IDMAPA).title = "";
 						temp = "identifica";
-						//TODO remover do codigo?
-						if (i3GEO.Interface.ATIVAMENUCONTEXTO) {
-							temp = "identifica_contexto";
-						}
 						i3GEO.util.mudaCursor(
 							configura.cursores,
 							temp,

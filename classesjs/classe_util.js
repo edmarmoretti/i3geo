@@ -568,7 +568,6 @@ i3GEO.util =
 			} catch (e) {
 			}
 		},
-		//TODO remover do codigo
 		/**
 		 * Cria um elemento div na pagina atual.
 		 *

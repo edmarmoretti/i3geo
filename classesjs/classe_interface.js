@@ -228,15 +228,7 @@ i3GEO.Interface = {
 	 */
 	IDCORPO : "corpoMapa",
 	/**
-	 * Indica se o menu de contexto deve ser ativado
-	 *
-	 * Tipo:
-	 *
-	 * {Boolean}
-	 *
-	 * Default:
-	 *
-	 * true
+	 * depreciado na versao 6.0
 	 */
 	ATIVAMENUCONTEXTO : false,
 	/**

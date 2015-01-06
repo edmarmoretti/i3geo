@@ -51,11 +51,6 @@ BOX = false;
 $i = function(id){
 	return window.parent.document.getElementById(id);
 };
-//TODO converter box em elemento da api OpenLayers
-if(i3GEO){
-	i3GEO.util.criaBox("boxg");
-	$i("boxg").style.display = "none";
-};
 function inicializa(){
 	counterClick = 0;
 	var m = document.getElementById("mapa"),
@@ -70,9 +65,6 @@ function inicializa(){
 			coordenadas = i3GEO.navega.dialogo.google.coordenadas;
 		}
 		catch(e){}
-		if($i("boxg")){
-			$i("boxg").style.zIndex = 0;
-		}
 		pol = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 		ret = pol.split(" ");
 		pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
@@ -220,8 +212,6 @@ Desloca o mapa principal conforme a extens&atilde;o geogr&aacute;fica do mapa do
 */
 function panTogoogle(){
 	if(!i3GEO){return;}
-	var b = $i("boxg");
-	b.style.display="block";
 	var pol = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 	var ret = pol.split(" ");
 	var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
