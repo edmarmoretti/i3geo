@@ -47,13 +47,45 @@ i3GEOF.preferencias = {
 				titulo: $trad('iniciaFerramentas',i3GEOF.preferencias.dicionario),//ferramentas ativas
 				props: [
 					{
+						titulo: $trad('cartogramas',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.metaestat.ativa"
+					},{
+						titulo: "<span style=left:10px;position:relative; >"+$trad('largura',i3GEOF.preferencias.dicionario)+"</span>",
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.metaestat.largura"
+					},{
+						titulo: "<span style=left:10px;position:relative; >"+$trad('altura',i3GEOF.preferencias.dicionario)+"</span>",
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.metaestat.altura"
+					},{
+						titulo: "<span style=left:10px;position:relative; >"+$trad('posicaoTopoMapa',i3GEOF.preferencias.dicionario)+"</span>",
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.metaestat.topo"
+					},{
+						titulo: "<span style=left:10px;position:relative; >"+$trad('posicaoEsquerdaMapa',i3GEOF.preferencias.dicionario)+"</span>",
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.metaestat.esquerda"
+					},{
 						titulo: $trad('localizaLugares',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.configura.iniciaFerramentas.quais.locregiao.ativa"
 					},{
-						titulo: $trad('cartogramas',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.configura.iniciaFerramentas.quais.metaestat.ativa"
+						titulo: "<span style=left:10px;position:relative; >"+$trad('largura',i3GEOF.preferencias.dicionario)+"</span>",
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.locregiao.largura"
+					},{
+						titulo: "<span style=left:10px;position:relative; >"+$trad('altura',i3GEOF.preferencias.dicionario)+"</span>",
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.locregiao.altura"
+					},{
+						titulo: "<span style=left:10px;position:relative; >"+$trad('posicaoTopoMapa',i3GEOF.preferencias.dicionario)+"</span>",
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.locregiao.topo"
+					},{
+						titulo: "<span style=left:10px;position:relative; >"+$trad('posicaoEsquerdaMapa',i3GEOF.preferencias.dicionario)+"</span>",
+						tipo: "numero",
+						elemento: "i3GEO.configura.iniciaFerramentas.quais.locregiao.esquerda"
 					},{
 						titulo: $trad('iniciaComLegenda',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",

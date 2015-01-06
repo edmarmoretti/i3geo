@@ -1714,6 +1714,8 @@ i3GEO.configura =
 		 * Cada ferramenta cont&eacute;m uma propriedade chamada &quot;ativa&quot; que indica se ser&aacute; inicializada ou n&atilde;o com o mapa
 		 *
 		 * A defini&ccedil;&atilde;o de ativa ou n&atilde;o pode ser feita com uso do menu de prefer&ecirc;ncias do i3Geo
+		 * 
+		 * Ao modificar os par&acirc;metros, atualize a ferramenta i3geo/ferramentas/preferencias
 		 *
 		 * Ferramentas dispon&iacute;veis:
 		 *
@@ -1748,18 +1750,26 @@ i3GEO.configura =
 						i3GEO.mapa.legendaHTML.libera("sim", q.largura, q.altura, q.topo, q.esquerda);
 					}
 				},
-				//TODO incluir parametros
 				locregiao : {
 					ativa : false,
+					largura : 215,
+					altura : "",
+					topo : 150,
+					esquerda : 150,
 					funcao : function() {
-						i3GEO.mapa.dialogo.locregiao();
+						var q = i3GEO.configura.iniciaFerramentas.quais.locregiao;
+						i3GEO.mapa.dialogo.locregiao(q.largura, q.altura, q.topo, q.esquerda);
 					}
 				},
-				//TODO incluir parametros
 				metaestat : {
 					ativa : false,
+					largura : 215,
+					altura : "",
+					topo : 150,
+					esquerda : 150,
 					funcao : function() {
-						i3GEO.mapa.dialogo.metaestat();
+						var q = i3GEO.configura.iniciaFerramentas.quais.metaestat;
+						i3GEO.mapa.dialogo.metaestat(q.largura, q.altura, q.topo, q.esquerda);
 					}
 				}
 			}

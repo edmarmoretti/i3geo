@@ -1010,10 +1010,11 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta de cartogramas
 			 * estatisticos METAESTAT
 			 */
-			metaestat : function() {
+			metaestat : function(largura, altura, topo, esquerda) {
 				var temp = function() {
 					i3GEOF.metaestat.MULTIPARAMETROS = true;
-					i3GEOF.metaestat.inicia();
+					//i3GEOF.metaestat.inicia(largura, altura, topo, esquerda);
+					i3GEOF.metaestat.comum.iniciaDicionario(null,largura, altura, topo, esquerda);
 				};
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.mapa.dialogo.metaestat()",
@@ -1052,12 +1053,16 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta de busca de regiao
 			 * cadastrada no METAESTAT
 			 */
-			locregiao : function() {
+			locregiao : function(largura, altura, topo, esquerda) {
+				var temp = function(){
+					i3GEOF.locregiao.iniciaDicionario(largura, altura, topo, esquerda);
+				};
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.mapa.dialogo.locregiao()",
 					"metaestat",
 					"locregiao",
-					"locregiao.js");
+					"locregiao.js",
+					temp);
 			},
 			/**
 			 * Function: filtraregiao

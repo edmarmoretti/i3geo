@@ -1204,16 +1204,19 @@ i3GEOF.metaestat = {
 		/**
 		 * Faz a carga do dicionario de traducao e na sequencia inicia a ferramenta com i3GEOF.metaestat.principal.inicia()
 		 */
-		iniciaDicionario: function(){
+		iniciaDicionario: function(iddiv,largura, altura, topo, esquerda){
 			if(typeof(i3GEOF.metaestat.dicionario) === 'undefined'){
+				var temp = function(){
+					i3GEOF.metaestat.principal.inicia(iddiv,largura, altura, topo, esquerda);
+				};
 				i3GEO.util.scriptTag(
 						i3GEO.configura.locaplic+"/ferramentas/metaestat/dicionario.js",
-						"i3GEOF.metaestat.principal.inicia()",
+						temp,
 						"i3GEOF.metaestat.dicionario_script"
 				);
 			}
 			else{
-				i3GEOF.metaestat.principal.inicia();
+				i3GEOF.metaestat.principal.inicia(iddiv,largura, altura, topo, esquerda);
 			}
 		},
 		/**
@@ -2331,7 +2334,7 @@ i3GEOF.metaestat = {
 		 * @param id do div onde os componentes serao inseridos. Se nao for definido, utiliza "i3geoCartoParametros_corpo"
 		 *
 		 */
-		inicia: function(iddiv){
+		inicia: function(iddiv, largura, altura, topo, esquerda){
 			if(!iddiv || !$i(iddiv)){
 				iddiv = "i3geoCartoParametros_corpo";
 			}
@@ -2378,8 +2381,20 @@ i3GEOF.metaestat = {
 		 *
 		 * Para capturar o objeto janela utilize janela = YAHOO.i3GEO.janela.manager.find("i3geoCartoParametros");
 		 */
-		abreJanela: function(){
+		abreJanela: function(largura, altura, topo, esquerda){
 			var cabecalho,minimiza,imagemxy,janela,modal = false,titulo = false;
+			if (largura) {
+				i3GEOF.metaestat.LARGURA = largura;
+			}
+			if (altura) {
+				i3GEOF.metaestat.ALTURA = altura;
+			}
+			if (esquerda) {
+				i3GEOF.metaestat.LEFT = esquerda;
+			}
+			if (topo) {
+				i3GEOF.metaestat.TOP = topo;
+			}
 			if (!$i("i3geoCartoParametros")){
 				cabecalho = function(){
 				};

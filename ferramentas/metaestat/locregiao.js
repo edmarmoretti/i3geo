@@ -127,25 +127,37 @@ i3GEOF.locregiao = {
 	 * Carrega o dicionario com a traducao
 	 * Executa i3GEOF.locregiao.iniciaJanelaFlutuante();
 	 */
-	iniciaDicionario: function(){
+	iniciaDicionario: function(largura, altura, topo, esquerda){
 		if(!i3GEOF.metaestat || typeof(i3GEOF.metaestat.dicionario) === 'undefined'){
+			var temp = function(){
+				i3GEOF.locregiao.iniciaJanelaFlutuante(null,largura, altura, topo, esquerda);
+			};
 			i3GEO.util.scriptTag(
 				i3GEO.configura.locaplic+"/ferramentas/metaestat/dicionario.js",
-				"i3GEOF.locregiao.iniciaJanelaFlutuante()",
+				temp,
 				"i3GEOF.metaestat.dicionario_script"
 			);
 		}
 		else{
-			i3GEOF.locregiao.iniciaJanelaFlutuante();
+			i3GEOF.locregiao.iniciaJanelaFlutuante(largura, altura, topo, esquerda);
 		}
 	},
 	/**
 	 * Abre a janela flutuante com o conteudo da ferramenta
 	 * Executa i3GEOF.locregiao.inicia
 	 */
-	iniciaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(largura, altura, topo, esquerda){
 		if($i("i3GEOF.locregiao_corpo")){
 			return;
+		}
+		if (!largura) {
+			largura = 215;
+		}
+		if (!altura) {
+			altura = "";
+		}
+		else{
+			altura += "px";
 		}
 		var minimiza,cabecalho,janela,divid,titulo;
 		cabecalho = function(){
@@ -162,8 +174,8 @@ i3GEOF.locregiao = {
 		}
 		titulo += "<span class='i3GEOconeFerramenta i3GEOiconeFiltro'></span>" + " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=111' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"215px",
-			"",
+			largura + "px",
+			altura,
 			"",
 			"",
 			"",
@@ -176,6 +188,13 @@ i3GEOF.locregiao = {
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.locregiao_corpo").style.backgroundColor = "white";
+		if (topo
+			&& esquerda) {
+			janela = YAHOO.i3GEO.janela.manager.find("i3GEOF.locregiao");
+			janela.moveTo(
+				esquerda,
+				topo);
+		}
 		i3GEOF.locregiao.inicia(divid);
 	},
 	/**
