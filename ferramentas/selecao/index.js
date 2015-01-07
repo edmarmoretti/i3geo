@@ -495,7 +495,6 @@ i3GEOF.selecao = {
 		Function: removeFiguras
 		Remove as figuras marcadas como origem igual a i3GEOFselecao
 		*/
-		//TODO incluir isso na classe desenho como uma funcao i3GEO.desenho.getFeaturesByAttribute
 		removeFiguras:{
 			openlayers: function(){
 				var temp, f = i3GEO.desenho.layergrafico.getFeaturesByAttribute("origem", "i3GEOFselecao");

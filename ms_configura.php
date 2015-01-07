@@ -58,7 +58,7 @@ Default:
 array(array("usuario"=>"admin", "senha"=>"adminx"));
 
 */
-//TODO checar ao fechar versao - alterar a senha para admin
+//TODO verificar ao fechar versao - alterar a senha para admin
 $i3geomaster = array(
 	array("usuario"=>"admin", "senha"=>"admin")
 );

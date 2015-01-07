@@ -1009,7 +1009,6 @@ i3GEO.guias =
 		 * {string} - namespace da janela utilizado para definir os elementos DIV onde o conte&uacute;do &eacute; renderizado
 		 * 
 		 */
-		//TODO incluir nas ferramentas
 		ajustaGuiaFerramenta : function(idjanela,namespace){
 			var c = $i(idjanela + "_corpo"),
 				h,
