@@ -251,13 +251,15 @@ i3GEO.ajuda =
 				if (arguments.length === 0) {
 					mensagem = i3GEO.parametros.mensagens;
 				}
-				if (i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.ajuda.ativaLetreiro()") < 0) {
-					i3GEO.eventos.NAVEGAMAPA.push("i3GEO.ajuda.ativaLetreiro()");
-				}
+				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.ajuda.ativaLetreiro()"]);
 				try {
 					clearTimeout(i3GEO.ajuda.tempoLetreiro);
 				} catch (e) {
 					i3GEO.ajuda.tempoLetreiro = "";
+				}
+				if (mensagem === ""){
+					i3GEO.eventos.removEventos("NAVEGAMAPA",["i3GEO.ajuda.ativaLetreiro()"]);
+					return;
 				}
 				l = $i(i3GEO.ajuda.DIVLETREIRO);
 				if (l.style.display === "none") {

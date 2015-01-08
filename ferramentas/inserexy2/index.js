@@ -207,13 +207,12 @@ i3GEOF.inserexy = {
 		$i("i3GEOF.inserexy_corpo").style.backgroundColor = "white";
 		i3GEOF.inserexy.inicia(divid);
 
-		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.inserexy.adicionaClique()") < 0)
-		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.inserexy.adicionaClique()");}
+		i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.inserexy.adicionaClique()"]);
 		i3GEO.eventos.cliquePerm.desativa();
 		temp = function(){
 			i3GEO.eventos.cliquePerm.ativa();
 			i3GEO.barraDeBotoes.ativaPadrao();
-			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.inserexy.adicionaClique()");
+			i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.inserexy.adicionaClique()"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);

@@ -28,49 +28,36 @@
  * <http://localhost/i3geo/classesjs/classe_eventos.js>
  */
 
-//TODO criar metodos para remover e adicionar eventos
-
  /**
- * Licen&ccedil;a
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
- * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
- * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
- * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o 59 Temple Street, Suite
- * 330, Boston, MA 02111-1307 USA.
- */
+	 * Licen&ccedil;a
+	 * 
+	 * GPL2
+	 * 
+	 * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+	 * 
+	 * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
+	 * 
+	 * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
+	 * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
+	 * 
+	 * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
+	 * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
+	 * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral
+	 * do GNU junto com este programa; se n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o 59 Temple Street,
+	 * Suite 330, Boston, MA 02111-1307 USA.
+	 */
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
 /**
  * Variavel: objposicaocursor
- *
+ * 
  * Utilizada como vari&aacute;vel global para armazenar a posi&ccedil;&atilde;o do mouse
- *
+ * 
  * (start code)
- *
- * objposicaocursor = {
- * 	ddx : "",
- * 	ddy : "",
- * 	dmsx : "",
- * 	dmsy : "",
- * 	telax : "",
- * 	telay : "",
- * 	imgx : "",
- * 	imgy : "",
- * 	refx : "",
- * 	refy : ""
- * };
- *
+ * 
+ * objposicaocursor = { ddx : "", ddy : "", dmsx : "", dmsy : "", telax : "", telay : "", imgx : "", imgy : "", refx : "", refy : "" };
+ * 
  * (end)
  */
 objposicaocursor = {
@@ -90,91 +77,91 @@ i3GEO.eventos =
 	{
 		/**
 		 * Variavel: SELECAO
-		 *
+		 * 
 		 * Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando uma operação de seleção e concluida.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
 		 */
 		SELECAO : [],
 		/**
 		 * Variavel: ATUALIZAARVORECAMADAS
-		 *
+		 * 
 		 * Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando a &aacute;rvore de camadas for atualizada.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
 		 */
 		ATUALIZAARVORECAMADAS : [],
 		/**
 		 * Variavel: ATIVATEMA
-		 *
+		 * 
 		 * Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando um tema da &aacute;rvore de camadas &eacute;
 		 * ativado.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
 		 */
 		ATIVATEMA : [],
 		/**
 		 * Variavel: NAVEGAMAPA
-		 *
+		 * 
 		 * Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando &eacute; feita uma opera&ccedil;&atilde;o de
 		 * navega&ccedil;&atilde;o sobre o mapa.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
 		 */
 		NAVEGAMAPA : [],
 		/**
 		 * Variavel: MOUSEPARADO
-		 *
+		 * 
 		 * Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio estaciona o mouse sobre o mapa por alguns
 		 * instantes.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
-		 *
+		 * 
 		 */
 		MOUSEPARADO : [
 		],
 		/**
 		 * Variavel: MOUSEMOVE
-		 *
+		 * 
 		 * Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio move o mouse sobre o mapa
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
 		 */
 		MOUSEMOVE : [],
 		/**
 		 * Variavel: MOUSEDOWN
-		 *
+		 * 
 		 * Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio pressiona o bot&atilde;o do mouse sobre o
 		 * mapa
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
 		 */
 		MOUSEDOWN : [],
 		/**
 		 * Variavel: MOUSEUP
-		 *
+		 * 
 		 * Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio solta o bot&atilde;o do mouse sobre o mapa
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {["i3GEO.eventos.cliquePerm.executa()"]}
 		 */
 		MOUSEUP : [
@@ -182,15 +169,15 @@ i3GEO.eventos =
 		],
 		/**
 		 * Variavel: MOUSECLIQUE
-		 *
+		 * 
 		 * Armazena as fun&ccedil;&otilde;es que ser&atilde;o executadas quando o usu&aacute;rio clica sobre o mapa
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {["i3GEO.eventos.cliqueCapturaPt()"]}
 		 */
 		MOUSECLIQUE : [
@@ -198,18 +185,18 @@ i3GEO.eventos =
 		],
 		/**
 		 * Variavel: MOUSECLIQUEPERM
-		 *
+		 * 
 		 * Armazena as fun&ccedil;&otilde;es permanentes que ser&atilde;o executadas quando o usu&aacute;rio clica sobre o mapa
-		 *
+		 * 
 		 * As opera&ccedil;&otilde;es definidas aqui normalmente n&atilde;o fazem verifica&ccedil;&atilde;o de status de outras ferramentas
 		 * e podem ser bloqueadas momentaneamente alterando-se i3GEO.eventos.cliquePerm.status
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * i3GEO.configura.funcaoTip
 		 */
 		MOUSECLIQUEPERM : [
@@ -217,19 +204,19 @@ i3GEO.eventos =
 		],
 		/**
 		 * Timer utilizado pelo contador do mouse parado
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Timeout}
 		 */
 		TIMERPARADO : "",
 		/**
 		 * Function: mouseParado
-		 *
+		 * 
 		 * Executa as fun&ccedil;&otilde;es definidas em MOUSEPARADO quando &eacute; detectado que o mouse est&aacute; estacionado.
-		 *
+		 * 
 		 * A execu&ccedil;&atilde;o desse evento &eacute; controlado por um timer definido no evento onmousemove (sobre o mapa).
-		 *
+		 * 
 		 */
 		mouseParado : function() {
 			try {
@@ -257,7 +244,7 @@ i3GEO.eventos =
 		},
 		/**
 		 * Function: navegaMapa
-		 *
+		 * 
 		 * Executa as fun&ccedil;&otilde;es armazenadas em NAVEGAMAPA, ou seja, opera&ccedil;&otilde;es executadas quando o mapa tem sua
 		 * extens&atilde;o geogr&aacute;fica alterada.
 		 */
@@ -266,7 +253,7 @@ i3GEO.eventos =
 		},
 		/**
 		 * Function: mousemoveMapa
-		 *
+		 * 
 		 * Executa as fun&ccedil;&otilde;es armazenadas em MOUSEMOVE.
 		 */
 		mousemoveMapa : function() {
@@ -274,7 +261,7 @@ i3GEO.eventos =
 		},
 		/**
 		 * Function: mousedownMapa
-		 *
+		 * 
 		 * Executa as fun&ccedil;&otilde;es armazenadas em MOUSEDOWN.
 		 */
 		mousedownMapa : function() {
@@ -282,7 +269,7 @@ i3GEO.eventos =
 		},
 		/**
 		 * Function: mouseupMapa
-		 *
+		 * 
 		 * Executa as fun&ccedil;&otilde;es armazenadas em MOUSEUP.
 		 */
 		mouseupMapa : function(exy) {
@@ -306,7 +293,7 @@ i3GEO.eventos =
 		},
 		/**
 		 * Function: mousecliqueMapa
-		 *
+		 * 
 		 * Executa as fun&ccedil;&otilde;es armazenadas em MOUSECLIQUE.
 		 */
 		mousecliqueMapa : function() {
@@ -314,9 +301,9 @@ i3GEO.eventos =
 		},
 		/**
 		 * Executa a pilha de nomes de funcoes ou funcoes armazenados em um array
-		 *
+		 * 
 		 * Parameter:
-		 *
+		 * 
 		 * eventos {array} - array com os nomes das fun&ccedil;&otilde;es
 		 */
 		executaEventos : function(eventos) {
@@ -347,34 +334,71 @@ i3GEO.eventos =
 			}
 		},
 		/**
+		 * Function: removeEventos
+		 * 
+		 * Remove uma lista de eventos registrados
+		 * 
+		 * Parameters:
+		 * 
+		 * {string} - tipo de evento (MOUSECLIQUE por exemplo)
+		 * 
+		 * {array} - lista dos nomes dos eventos registrados
+		 */
+		removeEventos : function(tipo,eventos){
+			var i,n = eventos.length;
+			for(i=0;i<n;i++){
+				i3GEO.eventos[tipo].remove(eventos[i]);
+			}
+			i3GEO.eventos[tipo] = i3GEO.eventos[tipo].getUnique();
+		},
+		//TODO inserir no codigo
+		/**
+		 * Function: adicionaEventos
+		 * 
+		 * Registra uma lista de eventos
+		 * 
+		 * Parameters:
+		 * 
+		 * {string} - tipo de evento (MOUSECLIQUE por exemplo)
+		 * 
+		 * {array} - lista dos nomes dos eventos
+		 */
+		adicionaEventos : function (tipo,eventos){
+			var i,n = eventos.length;
+			for(i=0;i<n;i++){
+				i3GEO.eventos[tipo].push(eventos[i]);
+			}
+			i3GEO.eventos[tipo] = i3GEO.eventos[tipo].getUnique();
+		},
+		/**
 		 * Captura a posi&ccedil;&atilde;o do mouse sobre um mapa. O c&aacute;lculo pode ser feito sobre o corpo do mapa principal ou sob o
 		 * corpo do mapa de refer&ecirc;ncia
-		 *
+		 * 
 		 * O resultado dos c&aacute;lculos s&atilde;o armazenados no objeto objposicaocursor esse objeto ter&aacute; as seguintes
 		 * propriedades:
-		 *
+		 * 
 		 * objposicaocursor.ddx valor de x em d&eacute;cimos de grau
-		 *
+		 * 
 		 * objposicaocursor.ddy valor de y em d&eacute;cimos de grau
-		 *
+		 * 
 		 * objposicaocursor.dmsx valor de x em dms
-		 *
+		 * 
 		 * objposicaocursor.dmsy valor de y em dms
-		 *
+		 * 
 		 * objposicaocursor.telax posicao x na tela em pixels
-		 *
+		 * 
 		 * objposicaocursor.telay posicao y na tela em pixels
-		 *
+		 * 
 		 * objposicaocursor.imgx posicao x no mapa em pixels
-		 *
+		 * 
 		 * objposicaocursor.imgy: posicao y no mapa em pixels
-		 *
+		 * 
 		 * objposicaocursor.refx: posicao x no mapa de refer&ecirc;ncia em pixels
-		 *
+		 * 
 		 * objposicaocursor.refy: posicao x no mapa de refer&ecirc;ncia em pixels
-		 *
+		 * 
 		 * Parameters:
-		 *
+		 * 
 		 * e {Event object} - objeto do tipo evento disparado sobre o objeto em foco
 		 */
 		posicaoMouseMapa : function(e) {
@@ -454,14 +478,14 @@ i3GEO.eventos =
 		},
 		/**
 		 * Ativa os eventos relacionados ao mapa (movimenta&ccedil;&atilde;o do mouse sobre o mapa)
-		 *
+		 * 
 		 * Define o que ser&aacute; executado quando o mouse &eacute; clicado ou movido sobre o mapa.
-		 *
+		 * 
 		 * Al&eacute;m das fun&ccedil;&otilde;es padr&atilde;o,s&atilde;o ativadas aquelas definidas nas vari&aacute;veis de
 		 * configura&ccedil;&atilde;o (veja classe_configura.js)
-		 *
+		 * 
 		 * Parametro:
-		 *
+		 * 
 		 * docMapa {DOM node} - objeto que ser&aacute; alvo da ativa&ccedil;&atilde;o dos cliques
 		 */
 		ativa : function(docMapa) {
@@ -515,11 +539,11 @@ i3GEO.eventos =
 		},
 		/**
 		 * Retorna true se o bot&atilde;o da direita foi utilizado no evento do mouse
-		 *
+		 * 
 		 * Parametro:
-		 *
+		 * 
 		 * exy - evento
-		 *
+		 * 
 		 * Return: {boolean}
 		 */
 		botaoDireita : function(exy) {
@@ -536,7 +560,7 @@ i3GEO.eventos =
 		},
 		/**
 		 * Captura um ponto na tela e retorna o resultado para a janela interna que estiver aberta.
-		 *
+		 * 
 		 * As coordenadas do ponto, em DMS, s&atilde;o repassadas para os campos do tipo input da janela interna que estiver aberta. A
 		 * janela aberta deve ter os seguintes elementos do tipo input (ids): ixg,ixm,ixs,iyg,iym,iys
 		 */
@@ -560,6 +584,7 @@ i3GEO.eventos =
 			// algumas operacoes de analise podem precisar das coordenadas
 			// nesses casos, g_tipoacao e definida como "capturaponto"
 			//
+			// TODO remover g_tipoacao
 			if (g_tipoacao !== "capturaponto") {
 				return;
 			} else {
@@ -591,39 +616,39 @@ i3GEO.eventos =
 		},
 		/**
 		 * Section: i3GEO.eventos.cliquePerm
-		 *
+		 * 
 		 * Executa as fun&ccedil;&otilde;es armazenadas em MOUSECLIQUEPERM
-		 *
+		 * 
 		 * i3GEO.eventos.cliquePerm.executa &eacute; definido como um evento de clique sobre o mapa
-		 *
+		 * 
 		 * Essas s&atilde;o opera&ccedil;&otilde;es que ocorrem de forma permanente sempre que o usu&aacute;rio clica no mapa. As
 		 * opera&ccedil;&otilde;es de clique devem alterar o status desse objeto para bloquear a execu&ccedil;&atilde;o quando for o caso
-		 *
+		 * 
 		 * Exemplo, pode ser necess&aacute;rio bloquear as fun&ccedil;&otilde;es permanentes quando o usu&aacute;rio clica no mapa para
 		 * calcular dist&acirc;ncias, para isso, altere i3GEO.eventos.cliquePerm.status = false e depois volte para true
 		 */
 		cliquePerm : {
 			/**
 			 * Propriedade: ativo
-			 *
+			 * 
 			 * Indica se as opera&ccedil;&otilde;es permanentes ser&atilde;o ou n&atilde;o executadas
-			 *
+			 * 
 			 * Essa propriedade bloqueia todas as opera&ccedil;&otilde;es mesmo que moment&acirc;neamente o status esteja true
-			 *
+			 * 
 			 * Type:
-			 *
+			 * 
 			 * {boolean}
-			 *
+			 * 
 			 * Default:
-			 *
+			 * 
 			 * true
 			 */
 			ativo : true,
 			/**
-			 *
+			 * 
 			 * Indica se as opera&ccedil;&otilde;es permanentes ser&atilde;o ou n&atilde;o executadas se 'ativo' estiver true. Status pode
 			 * ser moment&acirc;neo e controlado em tempo de execu&ccedil;&atilde;o
-			 *
+			 * 
 			 * Type: boolean
 			 */
 			status : true,
@@ -637,7 +662,7 @@ i3GEO.eventos =
 			},
 			/**
 			 * Function: ativa
-			 *
+			 * 
 			 * Ativa os cliques permanentes
 			 */
 			ativa : function() {
@@ -647,7 +672,7 @@ i3GEO.eventos =
 			},
 			/**
 			 * Function: desativa
-			 *
+			 * 
 			 * Desaativa momentaneamente os cliques permanentes
 			 */
 			desativa : function() {
