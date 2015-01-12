@@ -1058,10 +1058,7 @@ i3GEO.janela =
 			// registra a fun&ccedil;&atilde;o de elimina&ccedil;&atilde;o dos
 			// tips
 			//
-			if (i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.janela.excluiTips('todos')") < 0) {
-				i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.excluiTips('todos')");
-			}
-			//
+			i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.janela.excluiTips('todos')"]);
 			return (Nid);
 		},
 		/**
@@ -1217,8 +1214,6 @@ i3GEO.janela =
 				i3GEO.eventos.ATUALIZAARVORECAMADAS = [];
 			}
 			temp = "i3GEO.janela.comboCabecalhoTemas('" + idDiv + "','" + idCombo + "','" + ferramenta + "','" + tipo + "')";
-			if (i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search(temp) < 0) {
-				i3GEO.eventos.ATUALIZAARVORECAMADAS.push(temp);
-			}
+			i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",[temp]);
 		}
 	};

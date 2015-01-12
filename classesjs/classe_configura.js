@@ -1226,8 +1226,6 @@ i3GEO.configura =
 						}
 						if (i3GEO.Interface.ATUAL === "googlemaps") {
 							// alert("Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse");
-							g_tipoacao = 'pan';
-							g_operacao = 'navega';
 							i3GEO.barraDeBotoes.ativaIcone("pan");
 							i3GEO.barraDeBotoes.BOTAOPADRAO = "pan";
 							i3GeoMap.setOptions({
@@ -1270,8 +1268,6 @@ i3GEO.configura =
 					dica : $trad("d4"),
 					titulo : $trad("d4t"),
 					funcaoonclick : function() {
-						g_tipoacao = 'pan';
-						g_operacao = 'navega';
 						i3GEO.barraDeBotoes.ativaIcone("pan");
 						i3GEO.barraDeBotoes.BOTAOPADRAO = "pan";
 						if (i3GEO.Interface.ATUAL === "googlemaps") {
@@ -1341,12 +1337,8 @@ i3GEO.configura =
 							];
 						} else {
 							// desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
-							if (i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoTip) >= 0) {
-								i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoTip);
-							}
-							if (i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoIdentifica) < 0) {
-								i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoIdentifica);
-							}
+							i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoTip]);
+							i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoIdentifica]);
 						}
 					}
 				},
@@ -1376,12 +1368,8 @@ i3GEO.configura =
 							];
 						} else {
 							// desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
-							if (i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoIdentifica) >= 0) {
-								i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoIdentifica);
-							}
-							if (i3GEO.eventos.MOUSECLIQUEPERM.toString().search(i3GEO.configura.funcaoTip) < 0) {
-								i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoTip);
-							}
+							i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoIdentifica]);
+							i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoTip]);
 						}
 					}
 				},
@@ -1481,40 +1469,6 @@ i3GEO.configura =
 					dica : $trad("d16"),
 					titulo : $trad("d16t"),
 					funcaoonclick : function() {
-						scieloAtivo = false;// esta vari&aacute;vel &eacute; utilizada pela ferramenta durante a navega&ccedil;&atilde;o no
-						// mapa. Se estiver true significa que a ferramenta est&aacute; sendo atualizada durante um
-						// processo de navega&ccedil;&atilde;o no mapa
-						g_operacao = "navega";
-						i3GEO.janela.cria("450px", "190px", i3GEO.configura.locaplic + "/ferramentas/scielo/index.htm", "", "", "Scielo");
-						atualizascielo = function() {
-							var docel;
-							try {
-								docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-								if (docel.getElementById("resultadoscielo")) {
-									$i("wdocai").src = i3GEO.configura.locaplic + "/ferramentas/scielo/index.htm";
-								} else {
-									i3GEO.eventos.NAVEGAMAPA.remove("atualizascielo()");
-									if (i3GEO.Interface.ATUAL === "googlemaps") {
-										GEvent.removeListener(scieloDragend);
-										GEvent.removeListener(scieloZoomend);
-									}
-								}
-							} catch (e) {
-								scieloAtivo = false;
-								i3GEO.eventos.NAVEGAMAPA.remove("atualizascielo()");
-							}
-						};
-						if (i3GEO.eventos.NAVEGAMAPA.toString().search("atualizascielo()") < 0) {
-							i3GEO.eventos.NAVEGAMAPA.push("atualizascielo()");
-							if (i3GEO.Interface.ATUAL === "googlemaps") {
-								scieloDragend = GEvent.addListener(i3GeoMap, "dragend", function() {
-									atualizascielo();
-								});
-								scieloZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {
-									atualizascielo();
-								});
-							}
-						}
 					}
 				},
 				{
@@ -1614,7 +1568,6 @@ i3GEO.configura =
 					titulo : $trad("d22t"),
 					funcaoonclick : function() {
 						i3GEO.barraDeBotoes.ativaIcone("inserexy");
-						g_tipoacao = "";
 						i3GEO.mapa.dialogo.cliquePonto();
 					}
 				},
@@ -1624,7 +1577,6 @@ i3GEO.configura =
 					tipo : "dinamico",
 					dica : $trad("d23"),
 					funcaoonclick : function() {
-						g_tipoacao = "";
 						i3GEO.mapa.dialogo.cliqueGrafico();
 						i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 					}
@@ -1648,7 +1600,6 @@ i3GEO.configura =
 					titulo : $trad("d25t"),
 					funcaoonclick : function() {
 						i3GEO.barraDeBotoes.ativaIcone("textofid");
-						g_tipoacao = "";
 						i3GEO.mapa.dialogo.cliqueTexto();
 					}
 				},

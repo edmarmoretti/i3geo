@@ -2617,7 +2617,6 @@ i3GEO.arvoreDeTemas = {
 			try {
 				if ($i("i3GEOidentificalistaTemas")) {
 					i3GEOF.identifica.listaTemas();
-					g_tipoacao = "identifica";
 				}
 			} catch (r) {
 				if (typeof (console) !== 'undefined')

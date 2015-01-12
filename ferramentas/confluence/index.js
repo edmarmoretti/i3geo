@@ -135,7 +135,7 @@ i3GEOF.confluence = {
 		temp = function(){
 			i3GEOF.confluence.escondexy();
 			if(i3GEO.Interface.ATUAL !== "googlemaps"){
-				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.confluence.lista()");
+				i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.confluence.lista()"]);
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				google.maps.event.removeListener(confluenceDragend);
@@ -153,7 +153,6 @@ i3GEOF.confluence = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		g_operacao = "navega";
 		var i = $i("i3GEOF.confluence_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;

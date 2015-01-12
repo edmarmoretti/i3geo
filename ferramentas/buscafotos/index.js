@@ -198,7 +198,7 @@ i3GEOF.buscaFotos = {
 		i3GEOF.buscaFotos.inicia(divid);
 		temp = function(){
 			i3GEOF.buscaFotos.escondexy();
-			i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.buscaFotos.busca('1')");
+			i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.buscaFotos.busca('1')"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
@@ -208,7 +208,6 @@ i3GEOF.buscaFotos = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		g_operacao = "navega";
 		if(!$i("i3GEOF.buscaFotos_c"))
 		{return;}
 		var i = $i("i3GEOF.buscaFotos_c").style;

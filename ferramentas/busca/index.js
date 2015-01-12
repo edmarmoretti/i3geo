@@ -148,8 +148,7 @@ i3GEOF.busca = {
 		//i3GEOF.analisaGeometrias.aguarde.visibility = "visible";
 		i3GEOF.busca.inicia(divid);
 		temp = function(){
-			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela")') > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove('i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela")');}
+			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",['i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela")']);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},

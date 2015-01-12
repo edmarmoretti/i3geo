@@ -2663,8 +2663,6 @@ i3GEO.Interface = {
 					i3GEO.idioma.mostraSeletor();
 				}
 				i3GEO.gadgets.mostraMenuSuspenso();
-				g_operacao = "";
-				g_tipoacao = "";
 				if (i3GEO.Interface.STATUS.trocando === true
 					&& $i(i3GEO.arvoreDeCamadas.IDHTML)) {
 					$i(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
@@ -2790,8 +2788,6 @@ i3GEO.Interface = {
 				i3GeoMap,
 				"dragstart",
 				function() {
-					g_operacao = "";
-					g_tipoacao = "";
 					var xy;
 					modoAtual = "move";
 					xy = i3GEO.navega.centroDoMapa();
@@ -2836,8 +2832,6 @@ i3GEO.Interface = {
 				function() {
 					var xy;
 					i3GEO.Interface.googlemaps.recalcPar();
-					g_operacao = "";
-					g_tipoacao = "";
 					i3GEO.eventos.navegaMapa();
 					//
 					// permite que a coordenada do centro mapa seja mostrada

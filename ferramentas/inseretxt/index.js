@@ -190,13 +190,12 @@ i3GEOF.inseretxt = {
 		i3GEOF.inseretxt.aguarde = $i("i3GEOF.inseretxt_imagemCabecalho").style;
 		$i("i3GEOF.inseretxt_corpo").style.backgroundColor = "white";
 		i3GEOF.inseretxt.inicia(divid);
-		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.inseretxt.cria()") < 0)
-		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.inseretxt.cria()");}
+		i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.inseretxt.cria()"]);
 		i3GEO.eventos.cliquePerm.desativa();
 		temp = function(){
 			i3GEO.eventos.cliquePerm.ativa();
 			i3GEO.barraDeBotoes.ativaPadrao();
-			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.inseretxt.cria()");
+			i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.inseretxt.cria()"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
@@ -209,8 +208,6 @@ i3GEOF.inseretxt = {
 		i3GEO.eventos.cliquePerm.desativa();
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 		i3GEO.barraDeBotoes.ativaIcone("textofid");
-		g_tipoacao='';
-		g_operacao='';
 		if($i("img")){
 			$i("img").style.cursor="pointer";
 		}

@@ -15,19 +15,17 @@
  *
  * Para incluir uma fun&ccedil;&atilde;o em um determinado evento utilize
  *
- * if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.atualizaEscalaNumerica()") < 0)
- *
- * {i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.atualizaEscalaNumerica()");}
+ * i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.agrupaElementos.t0()"]);
  *
  * Para remover utilize
  *
- * i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.gadgets.atualizaEscalaNumerica()");
+ * i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.agrupaElementos.t0()"]);
  *
  * Veja:
  *
  * <http://localhost/i3geo/classesjs/classe_eventos.js>
  */
-
+//i3GEO.eventos.removeEventos("",[]);
  /**
 	 * Licen&ccedil;a
 	 * 
@@ -351,7 +349,6 @@ i3GEO.eventos =
 			}
 			i3GEO.eventos[tipo] = i3GEO.eventos[tipo].getUnique();
 		},
-		//TODO inserir no codigo
 		/**
 		 * Function: adicionaEventos
 		 * 
@@ -580,14 +577,6 @@ i3GEO.eventos =
 					doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 				}
 			}
-			//
-			// algumas operacoes de analise podem precisar das coordenadas
-			// nesses casos, g_tipoacao e definida como "capturaponto"
-			//
-			// TODO remover g_tipoacao
-			if (g_tipoacao !== "capturaponto") {
-				return;
-			} else {
 				try {
 					if (doc) {
 						x = objposicaocursor.dmsx.split(" ");
@@ -612,7 +601,6 @@ i3GEO.eventos =
 						}
 					}
 				} catch (m) {}
-			}
 		},
 		/**
 		 * Section: i3GEO.eventos.cliquePerm

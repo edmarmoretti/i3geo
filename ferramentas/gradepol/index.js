@@ -144,7 +144,7 @@ i3GEOF.gradeDePoligonos = {
 		i3GEOF.gradeDePoligonos.inicia(divid);
 		temp = function(){
 			i3GEO.eventos.cliquePerm.ativa();
-			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.gradeDePoligonos.capturaPonto()");
+			i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.gradeDePoligonos.capturaPonto()"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
@@ -194,13 +194,9 @@ i3GEOF.gradeDePoligonos = {
 		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepoligonosiym' title='minuto' type=text value='00'/></div>";
 		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepoligonosiys' title='segundo' type=text value='00.00'/></div>";
 
-		g_tipoacao = "capturaponto";
-
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t1()","i3GEOF.gradeDePoligonos.t3()",ins,"i3GEOF.gradeDePoligonos.t2","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 		i3GEO.eventos.cliquePerm.desativa();
-		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDePoligonos.capturaPonto()") < 0){
-			i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDePoligonos.capturaPonto()");
-		}
+		i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.gradeDePoligonos.capturaPonto()"]);
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'><b>"+$trad('numero',i3GEOF.gradeDePoligonos.dicionario)+"</b>";
@@ -276,8 +272,6 @@ i3GEOF.gradeDePoligonos = {
 	Captura um ponto no mapa e preenche os campos de coordenadas de in&iacute;cio da grade
 	*/
 	capturaPonto: function(){
-		var temp = g_tipoacao;
-		g_tipoacao = "capturaponto";
 		i3GEO.eventos.cliqueCapturaPt(
 			"i3GEOgradedepoligonosixg",
 			"i3GEOgradedepoligonosixm",
@@ -286,6 +280,5 @@ i3GEOF.gradeDePoligonos = {
 			"i3GEOgradedepoligonosiym",
 			"i3GEOgradedepoligonosiys"
 		);
-		g_tipoacao = temp;
 	}
 };

@@ -602,11 +602,7 @@ var i3GEO = {
 				i3GEO.parametros.w,
 				i3GEO.parametros.h);
 		}
-		if (i3GEO.eventos.NAVEGAMAPA.toString().search(
-			"i3GEO.janela.fechaAguarde()") < 0) {
-			i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.fechaAguarde()");
-		}
-		// eval(i3GEO.finaliza);
+		i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.janela.fechaAguarde()"]);
 	},
 	/**
 	 * Executa opera&ccedil;&otilde;es ap&oacute;s o mapa ter sido posicionado
@@ -768,13 +764,6 @@ var i3GEO = {
 			i3GEO.arvoreDeCamadas.registaCamadas(temp);
 			// nesse ponto o layer sera adicionado ao mapa
 			i3GEO.Interface.redesenha();
-			// caso esteja na funcao de identificacao
-			if ($i("i3GEOidentificalistaTemas")) {
-				g_tipoacao = "identifica";
-				g_operacao = 'identifica';
-			} else {
-				g_operacao = "";
-			}
 			if ($i("mensagemt")) {
 				$i("mensagemt").value = i3GEO.parametros.mapexten;
 			}

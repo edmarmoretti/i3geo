@@ -121,12 +121,10 @@ i3GEOF.centromassa = {
 		i3GEOF.centromassa.aguarde = $i("i3GEOF.centromassa_imagemCabecalho").style;
 		i3GEOF.centromassa.inicia(divid);
 		temp = function(){
-			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.centromassa.t0()") > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.centromassa.t0()");}
+			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.centromassa.t0()"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.centromassa.t0()") < 0)
-		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.centromassa.t0()");}
+		i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.centromassa.t0()"]);
 	},
 	t0: function()
 	{

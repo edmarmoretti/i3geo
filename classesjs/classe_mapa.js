@@ -630,10 +630,7 @@ i3GEO.mapa =
 					id = "";
 				}
 				i3GEO.mapa.legendaHTML.ID = id;
-				if (i3GEO.eventos.NAVEGAMAPA.toString().search(
-					"i3GEO.mapa.legendaHTML.atualiza()") < 0) {
-					i3GEO.eventos.NAVEGAMAPA.push("i3GEO.mapa.legendaHTML.atualiza()");
-				}
+				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.mapa.legendaHTML.atualiza()"]);
 				i3GEO.mapa.legendaHTML.atualiza();
 			},
 			/**
@@ -858,10 +855,7 @@ i3GEO.mapa =
 				}
 				$i("wlegenda_corpo").style.backgroundColor = "white";
 
-				if (i3GEO.eventos.NAVEGAMAPA.toString().search(
-					"i3GEO.mapa.legendaHTML.atualiza()") < 0) {
-					i3GEO.eventos.NAVEGAMAPA.push("i3GEO.mapa.legendaHTML.atualiza()");
-				}
+				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.mapa.legendaHTML.atualiza()"]);
 				i3GEO.mapa.legendaHTML.atualiza();
 				if (topo
 					&& esquerda) {
@@ -1430,7 +1424,7 @@ i3GEO.mapa =
 					&& i3GEO.eventos.cliquePerm.ativo === false) {
 					return;
 				}
-				i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");
+				i3GEO.eventos.removeEventos("MOUSEPARADO",["verificaTip()"]);
 				// na interface googleearth verifica se existe mais eventos no
 				// mouseclick
 				if (i3GEO.Interface.ATUAL === "googleearth"

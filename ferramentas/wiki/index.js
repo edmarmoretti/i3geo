@@ -136,7 +136,7 @@ i3GEOF.wiki = {
 		i3GEOF.wiki.inicia(divid);
 		temp = function(){
 			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
-				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.wiki.lista()");
+				i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.wiki.lista()"]);
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				google.maps.event.removeListener(wikiDragend);
@@ -154,7 +154,6 @@ i3GEOF.wiki = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		g_operacao = "navega";
 		var i = $i("i3GEOF.wiki_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;

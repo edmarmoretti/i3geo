@@ -122,12 +122,10 @@ i3GEOF.pontoEmPoligono = {
 		i3GEOF.pontoEmPoligono.aguarde = $i("i3GEOF.pontoEmPoligono_imagemCabecalho").style;
 		i3GEOF.pontoEmPoligono.inicia(divid);
 		temp = function(){
-			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.pontoEmPoligono.t0()") > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.pontoEmPoligono.t0()");}
+			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.pontoEmPoligono.t0()"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.pontoEmPoligono.t0()") < 0)
-		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.pontoEmPoligono.t0()");}
+		i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.pontoEmPoligono.t0()"]);
 	},
 	t0: function()
 	{

@@ -1017,10 +1017,8 @@ i3GEO.arvoreDeCamadas = {
 		//
 		i3GEO.mapa.ativaTema(i3GEO.temaAtivo);
 		i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas();
-		if (i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS === true
-			&& i3GEO.eventos.NAVEGAMAPA.toString().search(
-				"i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()") < 0) {
-			i3GEO.eventos.NAVEGAMAPA.push("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()");
+		if (i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS === true){
+			i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()"]);
 		}
 		i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);
 	},

@@ -122,12 +122,10 @@ i3GEOF.agrupaElementos = {
 		i3GEOF.agrupaElementos.aguarde = $i("i3GEOF.agrupaElementos_imagemCabecalho").style;
 		i3GEOF.agrupaElementos.inicia(divid);
 		temp = function(){
-			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.agrupaElementos.t0()") > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.agrupaElementos.t0()");}
+			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.agrupaElementos.t0()"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.agrupaElementos.t0()") < 0)
-		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.agrupaElementos.t0()");}
+		i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.agrupaElementos.t0()"]);
 	},
 	t0: function()
 	{

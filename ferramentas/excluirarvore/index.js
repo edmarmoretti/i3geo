@@ -98,7 +98,7 @@ i3GEOF.excluirarvore = {
 			);
 		}
 		catch(erro){
-			i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)");
+			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)"]);
 		}
 		while(n > 0){
 			n -= 1;
@@ -166,8 +166,7 @@ i3GEOF.excluirarvore = {
 			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)");}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)") < 0)
-		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)");}
+		i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)"]);
 		i3GEOF.excluirarvore.inicia(divid);
 	},
 	/*

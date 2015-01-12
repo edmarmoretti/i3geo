@@ -52,7 +52,6 @@ i3GEO.tema =
 		 * {string} - codigo do tema
 		 */
 		exclui : function(tema) {
-			g_operacao = "excluitema";
 			// remove o tema do DOM e seus filhos
 			try {
 				try {
@@ -176,7 +175,6 @@ i3GEO.tema =
 		 */
 		limpasel : function(tema) {
 			i3GEO.mapa.ativaTema(tema);
-			g_operacao = "limpasel";
 			i3GEO.php.limpasel(function(retorno) {
 				i3GEO.atualiza(retorno);
 				i3GEO.Interface.atualizaTema(retorno, tema);
@@ -195,7 +193,6 @@ i3GEO.tema =
 		 */
 		mudatransp : function(idtema, valor) {
 			i3GEO.mapa.ativaTema(idtema);
-			g_operacao = "transparencia";
 			// o campo input com o valor possui o prefixo 'tr' seguido pelo codigo do tema
 			if (!valor) {
 				if ($i("tr" + idtema)) {
@@ -223,7 +220,6 @@ i3GEO.tema =
 		invertestatuslegenda : function(idtema) {
 			i3GEO.janela.tempoMsg($trad("x17"));
 			i3GEO.mapa.ativaTema(idtema);
-			g_operacao = "transparencia";
 			i3GEO.php.invertestatuslegenda(function(retorno) {
 				i3GEO.atualiza(retorno);
 				i3GEO.arvoreDeCamadas.atualiza();
@@ -261,7 +257,6 @@ i3GEO.tema =
 		 */
 		mudanome : function(idtema) {
 			i3GEO.mapa.ativaTema(idtema);
-			g_operacao = "mudanome";
 			var valor = "";
 			if ($i("nn" + idtema)) {
 				valor = $i("nn" + idtema).value;

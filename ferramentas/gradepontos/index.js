@@ -143,7 +143,7 @@ i3GEOF.gradeDePontos = {
 		i3GEOF.gradeDePontos.aguarde = $i("i3GEOF.gradeDePontos_imagemCabecalho").style;
 		i3GEOF.gradeDePontos.inicia(divid);
 		temp = function(){
-			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.gradeDePontos.capturaPonto()");
+			i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.gradeDePontos.capturaPonto()"]);
 			i3GEO.eventos.cliquePerm.ativa();
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
@@ -194,11 +194,9 @@ i3GEOF.gradeDePontos = {
 		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepontosiym' title='minuto' type=text value='00'/></div>";
 		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepontosiys' title='segundo' type=text value='00.00'/></div>";
 
-		g_tipoacao = "capturaponto";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t1()","i3GEOF.gradeDePontos.t3()",ins,"i3GEOF.gradeDePontos.t2","i3GEOgradedepontosresultado",true,"i3GEOF.gradeDePontos_rodape");
 		i3GEO.eventos.cliquePerm.desativa();
-		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDePontos.capturaPonto()") < 0)
-		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDePontos.capturaPonto()");}
+		i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.gradeDePontos.capturaPonto()"]);
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'><b>"+$trad('numeroPontos',i3GEOF.gradeDePoligonos.dicionario)+"</b>";
@@ -274,8 +272,6 @@ i3GEOF.gradeDePontos = {
 	Captura um ponto no mapa e preenche os campos de coordenadas de in&iacute;cio da grade
 	*/
 	capturaPonto: function(){
-		var temp = g_tipoacao;
-		g_tipoacao = "capturaponto";
 		i3GEO.eventos.cliqueCapturaPt(
 			"i3GEOgradedepontosixg",
 			"i3GEOgradedepontosixm",
@@ -284,6 +280,5 @@ i3GEOF.gradeDePontos = {
 			"i3GEOgradedepontosiym",
 			"i3GEOgradedepontosiys"
 		);
-		g_tipoacao = temp;
 	}
 };

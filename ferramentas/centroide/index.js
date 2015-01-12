@@ -121,12 +121,10 @@ i3GEOF.centroide = {
 		i3GEOF.centroide.aguarde = $i("i3GEOF.centroide_imagemCabecalho").style;
 		i3GEOF.centroide.inicia(divid);
 		temp = function(){
-			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.centroide.t0()") > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.centroide.t0()");}
+			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.centroide.t0()"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.centroide.t0()") < 0)
-		{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.centroide.t0()");}
+		i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.centroide.t0()"]);
 	},
 	t0: function()
 	{

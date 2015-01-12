@@ -627,7 +627,7 @@ i3GEOF.graficointerativo1 =
 					i3GEOF.graficointerativo1.propJanelas[idjanela] = null;
 					if (i3GEOF.graficointerativo1.janelas.length === 0 && i3GEO.Interface) {
 						if (i3GEO.Interface.ATUAL === "openlayers") {
-							i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo1.atualizaListaDeRegistros()");
+							i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.graficointerativo1.atualizaListaDeRegistros()"]);
 						} else if (i3GEO.Interface.ATUAL === "googlemaps") {
 							google.maps.event.removeListener(graficointerativo1Dragend);
 							google.maps.event.removeListener(graficointerativo1Zoomend);

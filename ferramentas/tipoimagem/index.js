@@ -150,7 +150,6 @@ i3GEOF.tipoimagem = {
 		if(filtro == "")
 		{filtro = 'nenhum';}
 		i3GEO.configura.tipoimagem = filtro;
-		g_operacao = "outras";
 		i3GEO.Interface.alteraParametroLayers("TIPOIMAGEM",filtro);
 		i3GEO.Interface.openlayers.atualizaMapa();
 	},

@@ -141,12 +141,10 @@ i3GEOF.telaremota = {
 		i3GEOF.telaremota.html(divid,tema);
 		i3GEOF.telaremota.gravaExtent();
 		temp = function(){
-			if(i3GEO.eventos.NAVEGAMAPA.toString().search("gravaExtent()") > 0)
-			{i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.telaremota.gravaExtent()");}
+			i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.telaremota.gravaExtent()"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		if(i3GEO.eventos.NAVEGAMAPA.toString().search("gravaExtent()") < 0)
-		{i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.telaremota.gravaExtent()");}
+		i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEOF.telaremota.gravaExtent()"]);
 	},
 	/*
 	Function: gravaExtent

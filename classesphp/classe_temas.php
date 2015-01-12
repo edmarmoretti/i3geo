@@ -678,7 +678,7 @@ $wkt - boolean indicando se $xy e um WKT
 */
 	function insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap,$wkt=false,$nomeTema="")
 	{
-		//verifica se j'a existe um layer criado anteriormente com o mesmo nome e apaga se existir
+		//verifica se ja existe um layer criado anteriormente com o mesmo nome e apaga se existir
 		if ($tipo == "limpaponto")
 		{
 			if ($this->layer)
@@ -740,7 +740,7 @@ $wkt - boolean indicando se $xy e um WKT
 					$pinlayer->set("opacity","50");
 				break;
 				case "ANNOTATION":
-					$c->set("status",MS_DELETE);
+					//$c->set("status",MS_DELETE);
 					$pinlayer->setmetadata("TEMA",$texto);
 					$pinlayer->set("type",MS_LAYER_ANNOTATION);
 					$pinlayer->set("opacity","100");

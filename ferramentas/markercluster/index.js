@@ -131,20 +131,13 @@ i3GEOF.markercluster = {
 		i3GEOF.markercluster.aguarde = $i("i3GEOF.markercluster_imagemCabecalho").style;
 		i3GEOF.markercluster.inicia(divid);
 		temp = function() {
-			// i3GEO.janela.tempoMsg("oi");
-			if (i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search(
-					"i3GEOF.markercluster.t0()") > 0) {
-				i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.markercluster.t0()");
-			}
+			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.markercluster.t0()"]);
 		};
 		YAHOO.util.Event.addListener(
 				janela[0].close,
 				"click",
 				temp);
-		if (i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search(
-				"i3GEOF.markercluster.t0()") < 0) {
-			i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.markercluster.t0()");
-		}
+		i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.markercluster.t0()"]);
 	},
 	t0 : function() {
 		i3GEO.util.proximoAnterior(

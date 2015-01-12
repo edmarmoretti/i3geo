@@ -527,24 +527,11 @@ i3GEOF.identifica =
 					i3GEOF.identifica.janelas.remove(id);
 					i3GEOF.identifica.propJanelas[id] = null;
 					if (i3GEOF.identifica.janelas.length === 0) {
-						i3GEO.eventos.MOUSECLIQUE.remove(i3GEO.configura.funcaoIdentifica);
+						i3GEO.eventos.removeEventos("MOUSECLIQUE",[i3GEO.configura.funcaoIdentifica]);
 						i3GEO.barraDeBotoes.ativaIcone(i3GEO.barraDeBotoes.BOTAOPADRAO);
-						if (i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search(
-							"i3GEOF.identifica.listaTemas()") >= 0) {
-							i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.identifica.listaTemas()");
-						}
-						// if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEOF.identifica.limpaMarca()")
-						// >= 0){
-						// i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.identifica.limpaMarca()");
-						// }
-						if (i3GEO.eventos.MOUSECLIQUEPERM.toString().search(
-							i3GEO.configura.funcaoIdentifica) >= 0) {
-							i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoIdentifica);
-						}
-						if (i3GEO.eventos.MOUSECLIQUEPERM.toString().search(
-							i3GEO.configura.funcaoTip) < 0) {
-							i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoTip);
-						}
+						i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.identifica.listaTemas()"]);
+						i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoIdentifica]);
+						i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoTip]);
 						// reativa o evento default
 						i3GEO.eventos.cliquePerm.ativa();
 					}
@@ -554,10 +541,7 @@ i3GEOF.identifica =
 					"click",
 					temp);
 			}
-			if (i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search(
-				"i3GEOF.identifica.listaTemas()") < 0) {
-				i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEOF.identifica.listaTemas()");
-			}
+			i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.identifica.listaTemas()"]);
 		},
 		limpaMarca : function(id) {
 			i3GEO.desenho.removePins(id);
@@ -641,16 +625,10 @@ i3GEOF.identifica =
 				"",
 				"");
 			$i("i3GEOF.movePonto_corpo").style.backgroundColor = "white";
-			i3GEO.eventos.MOUSECLIQUEPERM.remove(i3GEO.configura.funcaoIdentifica);
-			if (i3GEO.eventos.MOUSECLIQUE.toString().search(
-				"i3GEOF.identifica.atualizaJanelaMoverPonto") < 0) {
-				i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.identifica.atualizaJanelaMoverPonto()");
-			}
+			i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoIdentifica]);
+			i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.identifica.atualizaJanelaMoverPonto()"]);
 			temp = function() {
-				if (i3GEO.eventos.MOUSECLIQUE.toString().search(
-					i3GEO.configura.funcaoIdentifica) < 0) {
-					i3GEO.eventos.MOUSECLIQUEPERM.push(i3GEO.configura.funcaoIdentifica);
-				}
+				i3GEO.eventos.adicionaEventos("MOUSECLIQUE",[i3GEO.configura.funcaoIdentifica]);
 			};
 			YAHOO.util.Event.addListener(
 				janela[0].close,
@@ -716,10 +694,7 @@ i3GEOF.identifica =
 				$i("i3GEOF.movePontoX").value = objposicaocursor.ddx;
 				$i("i3GEOF.movePontoY").value = objposicaocursor.ddy;
 			} else {
-				if (i3GEO.eventos.MOUSECLIQUE.toString().search(
-					"i3GEOF.identifica.atualizaJanelaMoverPonto") > 0) {
-					i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.identifica.atualizaJanelaMoverPonto()");
-				}
+				i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.identifica.atualizaJanelaMoverPonto()"]);
 			}
 		},
 		/*

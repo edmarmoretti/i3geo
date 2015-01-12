@@ -21,18 +21,18 @@
  */
 
 /**
- *
+ * 
  * Licen&ccedil;a
- *
+ * 
  * GPL2
- *
+ * 
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
+ * 
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
+ * 
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
+ * 
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -53,19 +53,19 @@ i3GEO.analise =
 		},
 		/**
 		 * Classe: i3GEO.analise.dialogo
-		 *
+		 * 
 		 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de an&aacute;lise
-		 *
+		 * 
 		 * Exemplo:
-		 *
+		 * 
 		 * Para abrir a mensagem de di&aacute;logo de gera&ccedil;&atilde;o de buffer, utilize
-		 *
+		 * 
 		 * i3GEO.analise.dialogo.buffer()
 		 */
 		dialogo : {
 			/**
 			 * Function: markercluster
-			 *
+			 * 
 			 * Ferramenta mapa agrupamento de pontos
 			 */
 			markercluster : function() {
@@ -78,7 +78,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: heatmap
-			 *
+			 * 
 			 * Ferramenta mapa de calor
 			 */
 			heatmap : function() {
@@ -91,7 +91,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: saiku
-			 *
+			 * 
 			 * Ferramenta SAIKU em nova aba do navegador
 			 */
 			saiku : function() {
@@ -99,14 +99,19 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: saikuMapa
-			 *
+			 * 
 			 * Ferramenta SAIKU em uma janela interna
 			 */
 			saikuMapa : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.saiku()", "saiku", "saiku","index.js","i3GEOF.saiku.iniciaJanelaFlutuante2()");
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.analise.dialogo.saiku()",
+					"saiku",
+					"saiku",
+					"index.js",
+					"i3GEOF.saiku.iniciaJanelaFlutuante2()");
 			},
 			/**
-			 *
+			 * 
 			 * Ferramenta graficointerativo versao flash
 			 */
 			graficoInterativo : function() {
@@ -114,7 +119,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: graficoInterativo1
-			 *
+			 * 
 			 * Ferramenta gr&aacute;fico interativo
 			 */
 			graficoInterativo1 : function() {
@@ -127,7 +132,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: linhaDoTempo
-			 *
+			 * 
 			 * Ferramenta linha do tempo
 			 */
 			linhaDoTempo : function() {
@@ -161,15 +166,14 @@ i3GEO.analise =
 									doc = document.frames("i3GEOF.linhaDoTempoi").document;
 								}
 							}
-							doc.getElementById("tl") ? window.parent["i3GEOF.linhaDoTempoi"].carregaDados() : i3GEO.eventos.NAVEGAMAPA
-								.remove("i3GEO.analise.atualizaLinhaDoTempo()");
+							doc.getElementById("tl") ? window.parent["i3GEOF.linhaDoTempoi"].carregaDados() : i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.analise.atualizaLinhaDoTempo()"]);
 						} catch (e) {
-							i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.analise.atualizaLinhaDoTempo()");
+							i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.analise.atualizaLinhaDoTempo()"]);
 						}
 					};
-				if (i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.analise.atualizaLinhaDoTempo()") < 0) {
-					i3GEO.eventos.NAVEGAMAPA.push("i3GEO.analise.atualizaLinhaDoTempo()");
-				}
+				i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
+					"i3GEO.analise.atualizaLinhaDoTempo()"
+				]);
 				var ifr = $i("i3GEOF.linhaDoTempoi");
 				// ifr.style.height = "75%";
 				if (ifr) {
@@ -178,7 +182,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: perfil
-			 *
+			 * 
 			 * Ferramenta perfil
 			 */
 			perfil : function() {
@@ -186,7 +190,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: gradePontos
-			 *
+			 * 
 			 * Ferramenta grade de pontos
 			 */
 			gradePontos : function() {
@@ -194,7 +198,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: gradePol
-			 *
+			 * 
 			 * Ferramenta grade de pol&iacute;gonos
 			 */
 			gradePol : function() {
@@ -202,7 +206,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: gradeHex
-			 *
+			 * 
 			 * Ferramenta grade de hex&aacute;gonos
 			 */
 			gradeHex : function() {
@@ -210,7 +214,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: analisaGeometrias
-			 *
+			 * 
 			 * Ferramenta de an&aacute;lise de geometrias
 			 */
 			analisaGeometrias : function() {
@@ -223,7 +227,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: pontosdistri
-			 *
+			 * 
 			 * Ferramenta de c&aacute;lculo de distribui&ccedil;&atilde;o de pontos
 			 */
 			pontosdistri : function() {
@@ -236,7 +240,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: pontoempoligono
-			 *
+			 * 
 			 * Ferramenta ponto em pol&iacute;gono
 			 */
 			pontoempoligono : function() {
@@ -249,7 +253,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: centromassa
-			 *
+			 * 
 			 * Ferramenta centro m&eacute;dio
 			 */
 			centromassa : function() {
@@ -262,7 +266,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: nptPol
-			 *
+			 * 
 			 * Ferramenta n&uacute;mero de pontos em pol&iacute;gono
 			 */
 			nptPol : function() {
@@ -275,7 +279,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: buffer
-			 *
+			 * 
 			 * Ferramenta buffer
 			 */
 			buffer : function() {
@@ -288,7 +292,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: distanciaptpt
-			 *
+			 * 
 			 * Ferramenta dist&acirc;ncia entre pontos
 			 */
 			distanciaptpt : function() {
@@ -301,7 +305,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: centroide
-			 *
+			 * 
 			 * Ferramenta centr&oacute;ide
 			 */
 			centroide : function() {
@@ -314,7 +318,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: dissolve
-			 *
+			 * 
 			 * Ferramenta dissolve bordas comuns
 			 */
 			dissolve : function() {
@@ -327,7 +331,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: agrupaElementos
-			 *
+			 * 
 			 * Ferramenta agrupa elementos
 			 */
 			agrupaElementos : function() {
@@ -341,7 +345,7 @@ i3GEO.analise =
 		},
 		/**
 		 * Section: medeDistancia
-		 *
+		 * 
 		 * Ativa e controla a op&ccedil;&atilde;o de medi&ccedil;&atilde;o de dist&acirc;ncias. A medida &eacute; feita quando o
 		 * usu&aacute;rio clica no mapa com esta op&ccedil;&atilde;o ativa. Quando o bot&atilde;o e acionado, abre-se a janela que mostra o
 		 * resultado da medida, o &iacute;cone que segue o mouse &eacute; alterado. Para mostrar o resultado do c&aacute;lculo, &eacute;
@@ -362,7 +366,7 @@ i3GEO.analise =
 			ultimaMedida : "",
 			/**
 			 * Function: inicia
-			 *
+			 * 
 			 * Inicia a opera&ccedil;&atilde;o de medi&ccedil;&atilde;o, abrindo a janela de resultados e criando os componentes
 			 * necess&aacute;rios. S&atilde;o registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 			 */
@@ -895,15 +899,15 @@ i3GEO.analise =
 					linhastemp : []
 				},
 				inicia : function() {
-					if (i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.analise.medeDistancia.googleearth.clique()") < 0) {
-						i3GEO.eventos.MOUSECLIQUE.push("i3GEO.analise.medeDistancia.googleearth.clique()");
-					}
-					if (i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.analise.medeDistancia.googleearth.movimento()") < 0) {
-						i3GEO.eventos.MOUSEMOVE.push("i3GEO.analise.medeDistancia.googleearth.movimento()");
-					}
-					if (i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.analise.medeDistancia.fechaJanela()") < 0) {
-						i3GEO.eventos.NAVEGAMAPA.push("i3GEO.analise.medeDistancia.fechaJanela()");
-					}
+					i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
+						"i3GEO.analise.medeDistancia.googleearth.clique()"
+					]);
+					i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
+						"i3GEO.analise.medeDistancia.googleearth.movimento()"
+					]);
+					i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
+						"i3GEO.analise.medeDistancia.fechaJanela()"
+					]);
 				},
 				clique : function() {
 					var pontosdistobj = i3GEO.analise.medeDistancia.googleearth.pontosdistobj, n, d, dd;
@@ -976,9 +980,9 @@ i3GEO.analise =
 					if (temp) {
 						i3GEO.desenho.googleearth.removePlacemark("divGeometriasTemp");
 					}
-					i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeDistancia.googleearth.clique()");
-					i3GEO.eventos.MOUSEMOVE.remove("i3GEO.analise.medeDistancia.movimento.googleearth()");
-					i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.analise.medeDistancia.fechaJanela()");
+					i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEO.analise.medeDistancia.googleearth.clique()"]);
+					i3GEO.eventos.removeEventos("MOUSEMOVE",["i3GEO.analise.medeDistancia.movimento.googleearth()"]);
+					i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.analise.medeDistancia.fechaJanela()"]);
 				},
 				/**
 				 * Mostra a totalizacao das linhas ja digitalizadas
@@ -1008,14 +1012,14 @@ i3GEO.analise =
 		},
 		/**
 		 * Section: medeArea
-		 *
+		 * 
 		 * Ativa e controla a op&atilde;o de medi&ccedil;&atilde;o de &aacute;rea.
-		 *
+		 * 
 		 * A medida &eacute; feita quando o usu&aacute;rio clica no mapa com esta op&ccedil;&atilde;o ativa
-		 *
+		 * 
 		 * Quando o bot&atilde;o &eacute; acionado, abre-se a janela que mostra o resultado da medida, o &iacute;cone que segue o mouse
 		 * &eacute; alterado.
-		 *
+		 * 
 		 * Para mostrar o resultado do cálculo, é incluido um div específico.
 		 */
 		medeArea : {
@@ -1033,10 +1037,10 @@ i3GEO.analise =
 			ultimaMedida : "",
 			/**
 			 * Function: inicia
-			 *
+			 * 
 			 * Inicia a opera&ccedil;&atilde;o de medi&ccedil;&atilde;o, abrindo a janela de resultados e criando os componentes
 			 * necess&aacute;rios
-			 *
+			 * 
 			 * S&atilde;o registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 			 */
 			inicia : function() {

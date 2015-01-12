@@ -127,10 +127,9 @@ i3GEOF.mostraExten = {
 		$i("i3GEOF.mostraExten_corpo").style.textAlign = "left";
 		i3GEOF.mostraExten.aguarde = $i("i3GEOF.mostraExten_imagemCabecalho").style;
 		i3GEOF.mostraExten.inicia(divid);
-		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEOF.mostraExten.ativaFoco()") < 0)
-		{i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.mostraExten.ativaFoco()");}
+		i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEOF.mostraExten.ativaFoco()"]);
 		temp = function(){
-			i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.mostraExten.ativaFoco()");
+			i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.mostraExten.ativaFoco()"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},

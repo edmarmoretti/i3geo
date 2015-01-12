@@ -529,7 +529,7 @@ i3GEOF.tabela =
 					i3GEOF.tabela.propJanelas[id] = null;
 					if (i3GEOF.tabela.janelas.length === 0) {
 						if (i3GEO.Interface.ATUAL === "openlayers") {
-							i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.tabela.atualizaListaDeRegistros()");
+							i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.tabela.atualizaListaDeRegistros()"]);
 						}
 						if (i3GEO.Interface.ATUAL === "googlemaps") {
 							google.maps.event.removeListener(tabelaDragend);
@@ -568,10 +568,7 @@ i3GEOF.tabela =
 				id);
 			// inicia os eventos
 			if (i3GEO.Interface.ATUAL === "openlayers") {
-				if (i3GEO.eventos.NAVEGAMAPA.toString().search(
-					'i3GEOF.tabela.atualizaListaDeRegistros()') < 0) {
-					i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.tabela.atualizaListaDeRegistros()");
-				}
+				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEOF.tabela.atualizaListaDeRegistros()"]);
 			}
 			if (i3GEO.Interface.ATUAL === "googlemaps"
 				&& !tabelaDragend) {

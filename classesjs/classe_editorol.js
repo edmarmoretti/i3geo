@@ -458,12 +458,14 @@ i3GEO.editorOL = {
 			YAHOO.util.Event.addListener(YAHOO.temaativo.container.panel.close, "click", function(){
 				i3GEOpanelEditor.deactivate();
 				i3GEOpanelEditor.activate();
-				if(i3GEO.eventos && i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.atualizaJanelaAtivaTema()") > 0)
-				{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEO.editorOL.atualizaJanelaAtivaTema()");}
+				if(i3GEO.eventos){
+					i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEO.editorOL.atualizaJanelaAtivaTema()"]);
+				}
 			});
 			if(i3GEO && typeof i3GEO != undefined && i3GEO != ""){
-				if(i3GEO.eventos && i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEO.editorOL.atualizaJanelaAtivaTema()") < 0)
-				{i3GEO.eventos.ATUALIZAARVORECAMADAS.push("i3GEO.editorOL.atualizaJanelaAtivaTema()");}
+				if(i3GEO.eventos){
+					i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEO.editorOL.atualizaJanelaAtivaTema()"]);
+				}
 			}
 			temp = $i("paneltemaativo_minimizaCabecalho");
 			if(temp){

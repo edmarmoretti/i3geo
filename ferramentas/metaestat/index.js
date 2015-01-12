@@ -312,8 +312,6 @@ i3GEOF.metaestat = {
 					$i("i3geoCartoAnaliseCamadasCombo").value = i3GEO.temaAtivo;
 				}
 				$i("i3geoCartoAnaliseCamadas").style.display = "block";
-				//if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search('i3GEOF.metaestat.analise.comboCamadas()') < 0)
-				//{i3GEO.eventos.ATUALIZAARVORECAMADAS.push('i3GEOF.metaestat.analise.comboCamadas()');}
 			};
 			i3GEO.php.listaCamadasMetaestat(temp);
 		},

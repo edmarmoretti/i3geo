@@ -690,12 +690,8 @@ i3GEO.navega =
 				$i("lente").style.display = "block";
 				i3GEO.navega.lente.ESTAATIVA = "sim";
 				i3GEO.navega.lente.atualiza();
-				if (i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.navega.lente.atualiza()") < 0) {
-					i3GEO.eventos.NAVEGAMAPA.push("i3GEO.navega.lente.atualiza()");
-				}
-				if (i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.navega.lente.movimenta()") < 0) {
-					i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.lente.movimenta()");
-				}
+				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.navega.lente.atualiza()"]);
+				i3GEO.eventos.adicionaEventos("MOUSEMOVE",["i3GEO.navega.lente.movimenta()"]);
 			},
 			/**
 			 * Atualiza a imagem da lente aberta
@@ -756,8 +752,8 @@ i3GEO.navega =
 				$i("boxlente").style.display = "none";
 				$i('boxlente').style.borderWidth = 0;
 				i3GEO.navega.lente.ESTAATIVA = "nao";
-				i3GEO.eventos.MOUSEMOVE.remove("i3GEO.navega.lente.movimenta()");
-				i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.navega.lente.atualiza()");
+				i3GEO.eventos.removeEventos("MOUSEMOVE",["i3GEO.navega.lente.movimenta()"]);
+				i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.navega.lente.atualiza()"]);
 			},
 			/**
 			 * Movimenta a imagem dentro da lente para refletir a posi&ccedil;&atilde;o do mouse
@@ -853,12 +849,8 @@ i3GEO.navega =
 				janela = i3GEO.janela.cria(160, 50, "", "center", "center", $trad("x50") + "&nbsp;&nbsp;", "ativadesativaDestaque");
 				$i(janela[2].id).innerHTML = $trad("x91");
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.navega.destacaTema.desativa);
-				if (i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.navega.destacaTema.atualiza()") < 0) {
-					i3GEO.eventos.NAVEGAMAPA.push("i3GEO.navega.destacaTema.atualiza()");
-				}
-				if (i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.navega.destacaTema.movimenta()") < 0) {
-					i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.destacaTema.movimenta()");
-				}
+				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.navega.destacaTema.atualiza()"]);
+				i3GEO.eventos.adicionaEventos("MOUSEMOVE",["i3GEO.navega.destacaTema.movimenta()"]);
 			},
 			/**
 			 * Atualiza o destaque
@@ -900,9 +892,9 @@ i3GEO.navega =
 			desativa : function() {
 				if (typeof (console) !== 'undefined')
 					console.info("i3GEO.navega.destacaTema.desativa()");
-
-				i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.navega.destacaTema.atualiza()");
-				i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.destacaTema.movimenta()");
+				
+				i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.navega.destacaTema.atualiza()"]);
+				i3GEO.eventos.removeEventos("MOUSEMOVE",["i3GEO.navega.destacaTema.movimenta()"]);
 				i3GEO.navega.destacaTema.ESTAATIVO = "nao";
 				document.body.removeChild($i("div_d"));
 			},
@@ -980,26 +972,22 @@ i3GEO.navega =
 				if (typeof (console) !== 'undefined')
 					console.info("i3GEO.navega.dialogo.google()");
 
-				if (i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") > 0) {
-					i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
-				}
-				g_operacao = "navega";
+				i3GEO.eventos.removeEventos("NAVEGAMAPA",["atualizagoogle()"]);
 				var idgoogle = "googlemaps" + Math.random();
 				i3GEO.janela.cria((i3GEO.parametros.w / 2.5) + 25 + "px", (i3GEO.parametros.h / 2.5) + 18 + "px", i3GEO.configura.locaplic
 					+ "/ferramentas/googlemaps1/index.php", "", "", "Google maps <a class=ajuda_usuario target=_blank href='"
 					+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>", idgoogle);
+				//TODO remover do escopo global
 				atualizagoogle = function() {
 					try {
 						parent.frames[idgoogle + "i"].panTogoogle();
 					} catch (e) {
-						i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
+						i3GEO.eventos.removeEventos("NAVEGAMAPA",["atualizagoogle()"]);
 						i3GEO.desenho.removePins("googlemaps");
 						i3GEO.desenho.removePins("boxOndeGoogle");
 					}
 				};
-				if (i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") < 0) {
-					i3GEO.eventos.NAVEGAMAPA.push("atualizagoogle()");
-				}
+				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["atualizagoogle()"]);
 			},
 			/**
 			 * Function: confluence

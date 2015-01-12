@@ -83,7 +83,7 @@ if (opera === true) {
 	navn = true;
 }
 /**
- * Nome da ultima operacao que foi executada.
+ * Nome da ultima operacao que foi executada. (depreciado)
  *
  * Dependendo do tipo de operacao sao aplicadas as atualizacoes necessarias aos componentes do mapa. Por exemplo, redesenha o corpo do mapa,
  * atualiza a lista de temas, etc.
@@ -92,7 +92,7 @@ if (opera === true) {
  */
 g_operacao = "";
 /**
- * Tipo de acao que esta sendo executada. Quando o usuario clica no mapa, essa variavel e pesquisada para definir o tipo de operacao que
+ * Depreciado - Tipo de acao que esta sendo executada. Quando o usuario clica no mapa, essa variavel e pesquisada para definir o tipo de operacao que
  * deve ser executada. E definida quando o usuario seleciona uma determinada ferramenta do i3Geo.
  */
 g_tipoacao = "zoomli";

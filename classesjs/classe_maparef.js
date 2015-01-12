@@ -315,9 +315,7 @@ i3GEO.maparef =
 					YAHOO.util.Event.addListener($i("imagemReferencia"), "mousemove", temp);
 				}
 			}
-			if (i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.maparef.atualiza()") < 0) {
-				i3GEO.eventos.NAVEGAMAPA.push("i3GEO.maparef.atualiza()");
-			}
+			i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.maparef.atualiza()"]);
 			this.atualiza(true);
 			$i("i3geo_winRef_h").className = "hd2";
 			if (navm) {
@@ -373,7 +371,7 @@ i3GEO.maparef =
 					}
 				}
 			} else {
-				i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.maparef.atualiza()");
+				i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.maparef.atualiza()"]);
 			}
 		},
 		/**

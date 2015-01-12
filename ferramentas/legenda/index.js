@@ -1129,7 +1129,6 @@ i3GEOF.legenda =
 				}
 				i3GEOF.legenda.aguarde.visibility = "visible";
 				cp.set_response_type("JSON");
-				// window.parent.g_operacao = "outras"
 				cp.call(p, "alteraclasse", fim);
 			} catch (e) {
 				i3GEO.janela.tempoMsg("Erro: " + e);

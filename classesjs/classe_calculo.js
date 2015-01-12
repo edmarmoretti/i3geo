@@ -182,7 +182,7 @@ i3GEO.calculo =
 				restos = mm - mx;
 				if (restos !== 0) {
 					s = restos * 60;
-					s = (s + "_").substring(0, 5);
+					s = (s + "").substring(0, 5);
 					sx = s;
 				}
 			} else {
@@ -202,7 +202,7 @@ i3GEO.calculo =
 				restos = mm - my;
 				if (restos !== 0) {
 					s = restos * 60;
-					s = (s + "_").substring(0, 5);
+					s = (s + "").substring(0, 5);
 					sy = s;
 				}
 			} else {

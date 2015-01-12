@@ -371,8 +371,7 @@ i3GEO.editorGM = {
 			ativa: function(botao){
 				i3GEO.editorGM.mudaicone(botao);
 				i3GEO.eventos.cliquePerm.desativa();
-				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.editorGM.capturaPoligonoTema.captura()") < 0)
-				{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.editorGM.capturaPoligonoTema.captura()");}
+				i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEO.editorGM.capturaPoligonoTema.captura()"]);
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 			},
 			desativa: function(){
@@ -386,7 +385,7 @@ i3GEO.editorGM = {
 				var temp,tema="",regiao="",p,par,
 				aguarde = $i("i3GEOjanelaEditor_imagemCabecalho");
 				if(!$i("i3geoCartoRegioesEditaveis")){
-					i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.editorGM.capturaPoligonoTema.captura()");
+					i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEO.editorGM.capturaPoligonoTema.captura()"]);
 				}
 				else{
 					temp = function(retorno){
@@ -846,8 +845,7 @@ i3GEO.editorGM = {
 					return;
 				}
 				i3GEO.editorGM.mudaicone(botao);
-				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.editorGM.editarAtributos.captura()") < 0)
-				{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.editorGM.editarAtributos.captura()");}
+				i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEO.editorGM.editarAtributos.captura()"]);
 				var janela = YAHOO.i3GEO.janela.manager.find("editaAtributos");
 				if(janela){
 					$i("editarAtributosForm").innerHTML = "";
