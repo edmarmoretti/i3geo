@@ -1016,7 +1016,7 @@ i3GEO.pluginI3geo =
 		 * Exemplo:
 		 *
 		 * "PLUGINI3GEO"
-		 * '{"plugin":"parametrossql","parametros":{[{"titulo":"","tipo":"input|select","valores":[],"chave":""}]}}'
+		 * '{"plugin":"parametrossql","parametros":{[{"titulo":"","tipo":"input|select","valores":[],"chave":"","php":""}]}}'
 		 *
 		 */
 		parametrossql : {
@@ -1026,7 +1026,7 @@ i3GEO.pluginI3geo =
 			},
 			formAdmin : function(config) {
 				var n, i, parametros, ins = "", configDefault =
-					'{"plugin":"parametrossql","parametros":[{"titulo":"","tipo":"input","valores":[],"chave":""},{"titulo":"","tipo":"input","valores":[],"chave":""},{"titulo":"","tipo":"input","valores":[],"chave":""},{"titulo":"","tipo":"input","valores":[],"chave":""}]}';
+					'{"plugin":"parametrossql","parametros":[{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""}]}';
 				if (config === "") {
 					config = configDefault;
 				}
@@ -1035,8 +1035,8 @@ i3GEO.pluginI3geo =
 					config = YAHOO.lang.JSON.parse(configDefault);
 				}
 				parametros = config.parametros;
-				n = parametros.length;
-				ins += "<table><tr><td>T&iacute;tulo</td><td>Chave</td><td>Tipo (input ou select)</td><td>Valores</td></tr>";
+				n = 4;
+				ins += "<table><tr><td>T&iacute;tulo</td><td>Chave</td><td>Tipo (input ou select)</td><td>Valores</td><td>PHP  que retorna os valores (opcional)</td></tr>";
 				for (i = 0; i < n; i++) {
 					ins += "<tr><td><input name='titulo' type=text size=20 value='"
 						+ parametros[i].titulo
@@ -1049,6 +1049,9 @@ i3GEO.pluginI3geo =
 						+ "' /></td> "
 						+ "<td><input name='valores' type=text size=20 value='"
 						+ parametros[i].valores
+						+ "' /></td> "
+						+ "<td><input name='prog' type=text size=20 value='"
+						+ parametros[i].prog
 						+ "' /></td></tr>";
 				}
 				ins +=
@@ -1057,14 +1060,16 @@ i3GEO.pluginI3geo =
 						+ "<br>O usu&aacute;rio ir&aacute; fornecer os valores que ser&atilde;o ent&atilde;o utilizados para substituir as chaves de forma din&acirc;mica"
 						+ "<br>Ser&aacute; mostrado ao usu&aacute;rio um formul&aacute;rio com op&ccedil;&otilde;es. Cada op&ccedil;&atilde;o conter&aacute; um t&iacute;tulo e um campo de formul&aacute;rio"
 						+ "<br>Cada campo de formul&aacute;rio pode ser dos tipos input (para digitar um valor) ou select (caixa de op&ccedil;&otilde;es)."
-						+ "<br>Em valores deve ser definida a lista ou o valor default que ser&aacute; mostrado. No caso de listas, utilize v&iacute;rgula para separar os valores.";
+						+ "<br>Em valores deve ser definida a lista ou o valor default que ser&aacute; mostrado. No caso de listas, utilize v&iacute;rgula para separar os valores."
+						+ "<br>Como opcional, pode ser definido o endere&ccedil;o de um programa PHP que retorna a lista de nomes e valores que ser&atilde;o utilizados para preencher "
+						+ "o campo de escolha. Para mais informa&ccedil;&otilde;es, veja o mapfile i3geo/temas/_llocaliphp.map. O caminho desse arquivo PHP &eacute; relativo &agrave; pasta i3geo.";
 				return ins;
 			},
 			// pega os valores do formulario quando e aberto no sistema de
 			// administracao
 			// ver i3geo/admin/editormapfile.js funcao salvarDadosEditorPlugin
 			parametrosFormAdmin : function(onde) {
-				var campo = 0,nlinhas = 4, ncampos = 4, campos = onde.getElementsByTagName("input"), par = [], temp = [], i, j;
+				var campo = 0,nlinhas = 4, ncampos = 5, campos = onde.getElementsByTagName("input"), par = [], temp = [], i, j;
 				for (j = 0; j < nlinhas; j++) {
 					temp = [];
 					for (i = 0; i < ncampos; i++) {
@@ -1094,6 +1099,7 @@ i3GEO.pluginI3geo =
 					iniciaform,
 					"parametrossql_script");
 			},
+			//@TODO permitir que os parametros sejam modificados mesmo depois de terem sido definidos
 			googlemaps : {
 				inicia : function(camada) {
 					i3GEO.pluginI3geo.parametrossql.inicia(camada);

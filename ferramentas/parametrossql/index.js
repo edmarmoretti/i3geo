@@ -35,6 +35,7 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Class: i3GEOF.parametrossql
 */
+//TODO incluir a substituicao de parametros tambem no FILTER
 i3GEOF.parametrossql = {
 	/*
 	Variavel: aguarde
@@ -77,6 +78,7 @@ i3GEOF.parametrossql = {
 		i3GEOF.parametrossql.tema = camada.name;
 		//i3GEOFparametrosSQLForm e definido no template mustache
 		$i("i3GEOFparametrosSQLForm").innerHTML = f;
+		i3GEOF.parametrossql.buscaSelect(camada);
 
 		b = new YAHOO.widget.Button(
 			"i3GEOFparametrosSqlAplicar",
@@ -151,24 +153,69 @@ i3GEOF.parametrossql = {
 			p = parametros[i];
 			if(p.tipo != "" && p.titulo){
 				ins += "<p class='paragrafo'>"+p.titulo+":</p>";
-				if(p.tipo === "input"){
-					ins += "<div class='i3geoForm i3geoFormIconeEdita'>"
-						+ "<input type='text' name='"+p.chave+"' value='"+p.valores+"' />"
-						+ "</div><br>";
-				}
-				if(p.tipo === "select"){
-					ins += "<div class='styled-select' >"
-						+ "<select name='"+p.chave+"' ><option value=''>---</option>";
-					l = p.valores.split(",");
-					nj = l.length;
-					for(j=0; j<nj; j++){
-						ins += "<option value='"+ l[j] +"'>"+ l[j] +"</option>";
+				//prog pode ser um php que precisa ser obtido via ajax
+				//nesse caso e inserido um div com um id para permitir o preenchimento posterior
+				if(p.prog === ""){
+					if(p.tipo === "input"){
+						ins += "<div class='i3geoForm i3geoFormIconeEdita'>"
+							+ "<input type='text' name='"+p.chave+"' value='"+p.valores+"' />"
+							+ "</div><br>";
 					}
-					ins += "</select></div><br>";
+					if(p.tipo === "select"){
+						ins += "<div class='styled-select' >"
+							+ "<select name='"+p.chave+"' ><option value=''>---</option>";
+						l = p.valores.split(",");
+						nj = l.length;
+						for(j=0; j<nj; j++){
+							ins += "<option value='"+ l[j] +"'>"+ l[j] +"</option>";
+						}
+						ins += "</select></div><br>";
+					}
+				}
+				else{
+					ins += "<div class='styled-select' id='i3GeoPlugin_"+p.chave+"' >Auarde...</div>";
 				}
 			}
 		}
 		return ins;
+	},
+	buscaSelect: function(camada){
+		var parametros = camada.plugini3geo.parametros,
+		n = parametros.length,
+		i,
+		ins = "",
+		p,
+		j,
+		nj,
+		l,
+		temp;
+		for(i=0; i<n; i++){
+			p = parametros[i];
+			if(p.prog != ""){
+				onde = $i('i3GeoPlugin_'+p.chave);
+				if (onde){
+					i3GEOF.parametrossql.ajaxSelect(onde,p);
+				}
+			}
+		}
+	},
+	ajaxSelect : function(onde,plugin){
+		var p,cp,temp;
+		temp = function(retorno){
+			var i,n,ins;
+			ins = "<select name='"+plugin.chave+"' ><option value=''>---</option>";
+			n = retorno.data.length;
+			for(i=0; i<n; i++){
+				ins += "<option value='"+ retorno.data[i].v +"'>"+ retorno.data[i].n +"</option>";
+			}
+			ins += "</select>";
+			onde.innerHTML = ins;
+		};
+		p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
+		+ "&funcao=INCLUDEPROG&prog="+ plugin.prog;
+		cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"foo",temp); 
 	},
 	aplicar: function(camada){
 		var fim,cp,p,onde = $i("i3GEOFparametrosSQLForm"),

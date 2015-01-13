@@ -614,16 +614,18 @@ function salvarDadosEditorPlugin(onde,plugin,codigoMap,codigoLayer){
 		par = [],
 		prog = "../php/editormapfile.php?funcao=gravaPlugin",
 		i;
-	if(!i3GEO.pluginI3geo[plugin].parametrosFormAdmin){
-		for(i=0; i<n; i++){
-			par.push('"'+campos[i].name+'":"'+campos[i].value+'"');
+	if(plugin != ""){
+		if(!i3GEO.pluginI3geo[plugin].parametrosFormAdmin){
+			for(i=0; i<n; i++){
+				par.push('"'+campos[i].name+'":"'+campos[i].value+'"');
+			}
+			if(plugin != ""){
+				plugin = '{"plugin":"'+plugin+'","parametros":{' + par.join(",") + '}}';
+			}
 		}
-		if(plugin != ""){
-			plugin = '{"plugin":"'+plugin+'","parametros":{' + par.join(",") + '}}';
+		else{
+			plugin = i3GEO.pluginI3geo[plugin].parametrosFormAdmin(onde);
 		}
-	}
-	else{
-		plugin = i3GEO.pluginI3geo[plugin].parametrosFormAdmin(onde);
 	}
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do layer= "+codigoLayer);

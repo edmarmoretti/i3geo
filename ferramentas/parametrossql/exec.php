@@ -15,6 +15,14 @@ Aplica a substituicao de chaves pelos valores enviados
 		$map = ms_newMapObj($map_file);
 		$layer = $map->getlayerbyname($tema);
 		$data = $layer->data;
+		//verifica se o layer ja teve os parametros substituidos anteriormente
+		//nesse caso, o data he obtido do metadata que guarda o valor original
+		if($layer->getmetadata("DATAORIGINAL") != ""){
+			$data = $layer->getmetadata("DATAORIGINAL");
+		}
+		else{
+			$layer->setmetadata("DATAORIGINAL",$data);
+		}
 		$chaves = explode(",",$chaves);
 		$valores = explode(",",$valores);
 		$n = count($chaves);
@@ -40,6 +48,11 @@ Aplica a substituicao de chaves pelos valores enviados
 			$salvo = $map->save($map_file);
 		}
 		$retorno = "ok";
+	break;
+	case "INCLUDEPROG":
+		if(file_exists($locaplic."/".$prog)){
+			include($locaplic."/".$prog);
+		}
 	break;
 }
 if (!connection_aborted()){
