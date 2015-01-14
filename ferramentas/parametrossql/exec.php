@@ -23,13 +23,26 @@ Aplica a substituicao de chaves pelos valores enviados
 		else{
 			$layer->setmetadata("DATAORIGINAL",$data);
 		}
+		$filtro = $layer->getFilterString();
+		if($layer->getmetadata("FILTROORIGINAL") != ""){
+			$filtro = $layer->getmetadata("FILTROORIGINAL");
+		}
+		else{
+			$layer->setmetadata("FILTROORIGINAL",$filtro);
+		}
 		$chaves = explode(",",$chaves);
 		$valores = explode(",",$valores);
 		$n = count($chaves);
 		for($i = 0; $i < $n; $i++){
 			$data = str_replace($chaves[$i],$valores[$i],$data);
+			if($filtro != ""){
+				$filtro = str_replace($chaves[$i],$valores[$i],$filtro);
+			}
 		}
-		$layer->set("data",$data);
+		if($filtro != ""){
+			$layer->setfilter(strip_tags(trim($filtro)));
+		}
+		$layer->set("data",strip_tags(trim($data)));
 		$layer->set("status",MS_DEFAULT);
 		$layer->setmetadata("PLUGINI3GEO","");
 		$layer->setmetadata("TEMA",$layer->getmetadata("TEMA")." - ".implode(",",$valores));

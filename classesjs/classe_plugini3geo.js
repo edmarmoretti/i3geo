@@ -1056,7 +1056,7 @@ i3GEO.pluginI3geo =
 				}
 				ins +=
 					"</table>"
-						+ "<p class='paragrafo'>As chaves s&atilde;o palavras que devem existir no SQL definido em DATA."
+						+ "<p class='paragrafo'>As chaves s&atilde;o palavras que devem existir no SQL definido em DATA e/ou no filtro (FILTER)."
 						+ "<br>O usu&aacute;rio ir&aacute; fornecer os valores que ser&atilde;o ent&atilde;o utilizados para substituir as chaves de forma din&acirc;mica"
 						+ "<br>Ser&aacute; mostrado ao usu&aacute;rio um formul&aacute;rio com op&ccedil;&otilde;es. Cada op&ccedil;&atilde;o conter&aacute; um t&iacute;tulo e um campo de formul&aacute;rio"
 						+ "<br>Cada campo de formul&aacute;rio pode ser dos tipos input (para digitar um valor) ou select (caixa de op&ccedil;&otilde;es)."

@@ -35,7 +35,7 @@ MAP
       "permitecomentario"	"SIM"
       "LTEMPOITEMICONE"	""
       "metaestat"	""
-      "PLUGINI3GEO"	'{"plugin":"parametrossql","parametros":[{"titulo" : "Ano de criação","chave" : "1980","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""}]}'
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","parametros":[{"titulo" : "Ano de criação","chave" : "1990","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""}]}'
       "download"	"SIM"
       "itembuscarapida"	"NOMELOC"
       "ITENS"	"NOMEMUN,TIPO,NOMELOC,ANOCRIA"
@@ -57,6 +57,7 @@ MAP
     TEMPLATE "none.htm"
     TILEITEM "location"
     TYPE POINT
+    FILTER (([ANOCRIA] = 1990))
     UNITS METERS
     CLASS
       NAME "Vila"

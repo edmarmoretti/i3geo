@@ -2433,40 +2433,40 @@ i3GEO.Interface = {
 		BALAOPROP : {
 			removeAoAdicionar : true,
 			classeCadeado : "i3GEOiconeAberto",
-			baloes : []
+			baloes : new google.maps.MVCArray()
 		},
 		removeBaloes : function(){
 			var p = i3GEO.Interface.googlemaps.BALAOPROP.baloes,
-				n = p.length,
+				n = p.getLength(),
 				i;
 			for(i = 0; i < n; i++){
-				p[i].close();
+				p.getAt(i).close();
 			}
-			p = [];
+			i3GEO.Interface.googlemaps.BALAOPROP.baloes.clear();
 		},
+		//TODO a inclusao do botao do cadeado nao funciona
 		balao : function(texto, x, y) {
-			var e, p, b;
+			var id, p, b;
 			if(x === null || y === null){
 				return;
 			}
-			e = YAHOO.util.Dom.generateId();
+			id = YAHOO.util.Dom.generateId();
 			p = i3GEO.Interface.googlemaps.BALAOPROP;
 			if(p.removeAoAdicionar === true){
 				i3GEO.Interface.googlemaps.removeBaloes();
 			}
-			b = new google.maps.InfoWindow(
+			b = i3GEO.Interface.googlemaps.BALAOPROP.baloes.push(new google.maps.InfoWindow(
 				{
-					content : "<div id='"+e+"' ></div>"+texto,
+					content : "<div id='"+id+"' ></div>"+texto,
 					position: new google.maps.LatLng(y, x),
 					pixelOffset : new google.maps.Size(0,-24)
-				});
-			b.open(
+				}));
+			i3GEO.Interface.googlemaps.BALAOPROP.baloes.getAt(b-1).open(
 				i3GeoMap
 			);
-			p.baloes.push(b);
-
-			google.maps.event.addListenerOnce(b,'domready',function(){
-				var p,c,a = $i(e);
+			/*
+			google.maps.event.addListenerOnce(i3GEO.Interface.googlemaps.BALAOPROP.baloes.getAt(b-1),'domready',function(){
+				var e,p,c,a = $i(id);
 				p = i3GEO.Interface.googlemaps.BALAOPROP;
 				c = a.parentNode.parentNode.parentNode.parentNode;
 				google.maps.event.addDomListener(a.parentNode.parentNode.parentNode, 'click',
@@ -2498,10 +2498,8 @@ i3GEO.Interface = {
 					return false;
 				};
 				c.appendChild(e);
-				//YAHOO.util.Event.addListener(c, "click", YAHOO.util.Event.stopPropagation);
-				//YAHOO.util.Event.addListener(c, "click", YAHOO.util.Event.preventDefault);
 			});
-
+			*/
 		},
 		atualizaTema : function(retorno, tema) {
 			//

@@ -10,8 +10,12 @@
  */
 $retorno = array(
 	array(
-		"n"=> "Ano de 1980",
-		"v" => "1980"
+		"n"=> "Ano de 1970",
+		"v" => "1970"
+	),
+	array(
+		"n" => "Ano de 1990",
+		"v" => "1990"
 	),
 	array(
 		"n" => "Ano de 1990",
