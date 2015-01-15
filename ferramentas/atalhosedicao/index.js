@@ -61,6 +61,8 @@ i3GEOF.atalhosedicao =
 		new YAHOO.widget.Button("i3GEOFatalhosedicaoSalva", {
 			onclick : {
 				fn : function() {
+					//obtem os parametros que devem ficar no objeto camada
+					i3GEOF.atalhosedicao.metadata($i("i3GEOFatalhosedicaoCache"),true);
 					i3GEO.tema.dialogo.salvaMapfile(i3GEOF.atalhosedicao.tema);
 				}
 			}
@@ -180,7 +182,10 @@ i3GEOF.atalhosedicao =
 	 * Aplica ao objeto CAMADAS o parametro definido
 	 * Esse parametro e usado na hora de salvar o mapa
 	 * Para isso, a funcao salvarmapfile deve ser preparada para obter o parametro
+	 * e enviar para a funcao php
 	 * veja em i3GEOF.salvamapfile.salva
+	 * 
+	 * conv indica se deve ser feita a conversao de checked para sim/nao
 	 */
 	metadata: function(obj,conv){
 		var valor,tema;
