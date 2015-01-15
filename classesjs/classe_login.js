@@ -40,6 +40,7 @@
 if (typeof (i3GEOF) === 'undefined') {
 	var i3GEOF = {};
 }
+//TODO não fazer logof quando o usuario nao puder usar a operacao
 i3GEO.login = {
 	/**
 	 * Propriedade: divnomelogin

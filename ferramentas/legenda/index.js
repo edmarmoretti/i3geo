@@ -1447,6 +1447,7 @@ i3GEOF.legenda =
 				linha = i3GEOF.legenda.estilos[i3GEOF.legenda.estilo];
 				linha = linha.split("#");
 				tipoLayer = linha[0];
+				//FIXME angulo aparece como undefined
 				d =
 					"<table class=lista6 >"
 					+ "<tr><td>"
@@ -1780,6 +1781,7 @@ i3GEOF.legenda =
 		adicionaProcesso : function(s) {
 			$i("i3GEOlegendaprocessos").innerHTML += $inputText("", "", "", "", 50, s.value);
 		},
+		//FIXME a aplicacao do simbolo nao funciona
 		aplicaTodasClasses : function(parametro,id){
 			var valor = $i(id).value;
 			i3GEO.janela.confirma(

@@ -736,7 +736,7 @@ i3GEOF.selecao = {
 					}
 				}
 			},
-			//TODO nao funciona no googlemaps
+			//FIXME nao funciona no googlemaps
 			googlemaps: {
 				inicia: function(){
 					var n,i,
@@ -1013,8 +1013,8 @@ i3GEOF.selecao = {
 				interrogacao.onclick = function(){
 					var obj = (this.parentNode.parentNode.getElementsByTagName("input"))[0],
 					itemTema = (this.parentNode.parentNode.getElementsByTagName("select"))[0].value;
-					//TODO ordenar a lista de valores e remover apostrofe
-					//TODO limpar lista ao selecionar um novo campo
+					//FIXME ordenar a lista de valores e remover apostrofe
+					//FIXME limpar lista ao selecionar um novo campo
 					i3GEO.util.comboValoresItem(
 							"i3GEOselecaocbitens",
 							i3GEO.temaAtivo,

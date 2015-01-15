@@ -1023,7 +1023,7 @@ i3GEO.editorGM = {
 				};
 				cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&id_medida_variavel="+id_medida_variavel+"&x="+i3GEO.editorGM.editarAtributos.x+"&y="+i3GEO.editorGM.editarAtributos.y);
 			},
-			//TODO redesenhar as camadas que sofrerem alteracoes em funcao do salvar ou excluir
+			//FIXME redesenhar as camadas que sofrerem alteracoes em funcao do salvar ou excluir
 			/**
 			 * Exclui o valor de uma medida de variavel para o componente de uma regiao
 			 */

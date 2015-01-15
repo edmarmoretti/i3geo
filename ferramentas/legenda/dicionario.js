@@ -446,7 +446,7 @@ i3GEOF.legenda.dicionario = {
 		es : ""
 	} ],
 	'simbolo' : [ {
-		pt : "S&iacute;mbolo",
+		pt : "S&iacute;mbolo<br>(Voc&ecirc; pode usar o caminho absoluto de uma imagem PNG existente no servidor)",
 		en : "",
 		es : ""
 	} ],

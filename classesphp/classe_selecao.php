@@ -494,7 +494,7 @@ $valor - Valor.
 	*/
 	function selecaoAtributos2($filtro,$tipo)
 	{
-		//TODO nao funciona com LATIN1 na string de conexao
+		//FIXME nao funciona com LATIN1 na string de conexao
 		$items = pegaItens($this->layer);
 		if ($tipo == "novo")
 		{
