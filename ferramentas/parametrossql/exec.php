@@ -40,9 +40,10 @@ Aplica a substituicao de chaves pelos valores enviados
 			}
 		}
 		if($filtro != ""){
-			$layer->setfilter(strip_tags(trim($filtro)));
+			$layer->setfilter($filtro);
 		}
-		$layer->set("data",strip_tags(trim($data)));
+		$data = str_replace("--","",$data);
+		$layer->set("data",$data);
 		$layer->set("status",MS_DEFAULT);
 		$layer->setmetadata("PLUGINI3GEO","");
 		$layer->setmetadata("TEMA",$layer->getmetadata("TEMA")." - ".implode(",",$valores));

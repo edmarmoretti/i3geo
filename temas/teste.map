@@ -1,70 +1,66 @@
-<<<<<<< .mine
 MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "i3geosaude"
+    CONNECTION "teste"
     CONNECTIONTYPE POSTGIS
-    DATA "geom from (select * from fisico.elem_fisiog_natural) as foo using unique gid using srid=4326"
+    DATA "geom from (select * from ambiente.queim2013 WHERE data >= 999 and data <= 20131231 ) as foo using unique gid using srid=4326"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	""
+      "cache"	"nao"
+      "tip"	"lat,lon,data,horagmt,satelite,municipio,uf,regiao,bioma"
+      "ltempoitemimagem"	""
       "CLASSE"	"SIM"
+      "olopacity"	""
+      "ltempoitemdescricao"	""
+      "palletestep"	""
+      "ltempoiteminicio"	""
+      "ltempoitemtip"	""
+      "gmopacity"	""
+      "gmstatus"	""
+      "itensdesc"	"Lat,Lon,Latgms,Longms,Data,Horagmt,Satelite,Municipio,UF,Regiao,Prec,Num dias sem chuva,Risco,Bioma"
+      "description_template"	""
+      "ltempoitemtitulo"	""
+      "ltempoitemlink"	""
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "arquivotemaoriginal"	""
+      "palletefile"	""
+      "nomeoriginal"	""
+      "olstatus"	""
+      "ltempoformatodata"	""
+      "ltempoitemicone"	""
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","parametros":[{"titulo" : "Início (mês/dia)","chave" : "999","tipo" : "input","valores" : "0101","prog" : ""},{"titulo" : "Fim (mês/dia)","chave" : "1231","tipo" : "input","valores" : "1231","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""}]}'
       "metaestat"	""
-      "TEMA"	"Teste de localidades"
+      "itembuscarapida"	""
+      "CONEXAOORIGINAL"	"sigeo"
+      "itens"	"lat,lon,latgms,longms,data,horagmt,satelite,municipio,uf,regiao,pais,prec,ndiasschuv,risco,bioma,wrs_tm"
       "convcaracter"	""
+      "TEMA"	"Focos de queimada 2013"
       "cortepixels"	"0"
+      "editorsql"	""
+      "ltempoconvencode"	""
+      "ltempoitemfim"	""
     END # METADATA
     NAME "teste"
-    STATUS OFF
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
     TEMPLATE "none.htm"
-    TYPE LINE
+    TILEITEM "location"
+    TYPE POINT
     UNITS METERS
     CLASS
       NAME ""
       STYLE
-        COLOR 0 0 0
-        SIZE 12
-        SYMBOL "linha"
+        ANGLE 0
+        COLOR 239 12 12
+        OFFSET 0 0
+        SIZE 6
+        SYMBOL "ponto"
       END # STYLE
+      TITLE ""
     END # CLASS
   END # LAYER
 
 END # MAP
 
-=======
-MAP
-  FONTSET "../symbols/fontes.txt"
-  SYMBOLSET "../symbols/simbolosv6.sym"
-  LAYER
-    CONNECTION "user=postgres password=postgres dbname=sissgeo host=localhost port=5432 options='-c client_encoding=LATIN7'"
-    CONNECTIONTYPE POSTGIS
-    DATA "geom from (select geom,cod_bioma,ds_sintese,ds_bioma,nom_bioma,gid from fisico.biomas) as foo using unique gid using srid=4326"
-    METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	""
-      "CLASSE"	"SIM"
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "metaestat"	""
-      "TEMA"	"Teste de localidades"
-      "convcaracter"	""
-      "cortepixels"	"0"
-    END # METADATA
-    NAME "teste"
-    STATUS OFF
-    TEMPLATE "none.htm"
-    TYPE POLYGON
-    UNITS METERS
-    CLASS
-      NAME ""
-      STYLE
-        COLOR 0 0 0
-        SIZE 12
-      END # STYLE
-    END # CLASS
-  END # LAYER
-
-END # MAP
-
->>>>>>> .r5411

@@ -415,8 +415,9 @@ $postgis_mapa = ""
 Tipo:
 {array ou  string}
 */
+//TODO verificar ao fechar versao
 $postgis_mapa = array(
-		"teste"=>"user=postgres password=postgres dbname=sissgeo host=localhost port=5432 options='-c client_encoding=LATIN1'",
+		"teste"=>"user=postgres password=postgres dbname=sigeo host=localhost port=5432",
 		"postgres"=>"user=postgres password=postgres dbname=postgres host=localhost port=5432",
 		"i3geosaude"=>"user=postgres password=postgres dbname=i3geosaude host=localhost port=5432 options='-c client_encoding=LATIN1'"
 );

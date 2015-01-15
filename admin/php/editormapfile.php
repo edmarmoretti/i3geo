@@ -1151,6 +1151,8 @@ function refazerLayer()
 		$nl->setmetadata("olstatus","");
 		$nl->setmetadata("gmopacity","");
 		$nl->setmetadata("gmstatus","");
+		$nl->setmetadata("FILTROORIGINAL","");
+		$nl->setmetadata("DATAORIGINAL","");
 		$nl->setmetadata("cache",$cache);
 		$numclasses = $nl->numclasses;
 		if ($numclasses > 0)
