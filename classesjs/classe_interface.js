@@ -2433,7 +2433,7 @@ i3GEO.Interface = {
 		BALAOPROP : {
 			removeAoAdicionar : true,
 			classeCadeado : "i3GEOiconeAberto",
-			baloes : new google.maps.MVCArray()
+			baloes : ""
 		},
 		removeBaloes : function(){
 			var p = i3GEO.Interface.googlemaps.BALAOPROP.baloes,
@@ -2451,7 +2451,11 @@ i3GEO.Interface = {
 				return;
 			}
 			id = YAHOO.util.Dom.generateId();
+			if(i3GEO.Interface.googlemaps.BALAOPROP.baloes === ""){
+				i3GEO.Interface.googlemaps.BALAOPROP.baloes = [new google.maps.MVCArray()];
+			}
 			p = i3GEO.Interface.googlemaps.BALAOPROP;
+			
 			if(p.removeAoAdicionar === true){
 				i3GEO.Interface.googlemaps.removeBaloes();
 			}

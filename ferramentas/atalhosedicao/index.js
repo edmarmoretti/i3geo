@@ -4,6 +4,7 @@ if (typeof (i3GEOF) === 'undefined') {
 /*
  * Classe: i3GEOF.atalhosedicao
  */
+//TODO verificar se o parametro cache esta funcionando
 i3GEOF.atalhosedicao =
 {
 	tema: "",
