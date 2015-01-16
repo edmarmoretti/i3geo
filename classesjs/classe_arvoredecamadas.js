@@ -52,6 +52,8 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
+//TODO incluir icone no lugar do checkbox
+//ver http://www.w3schools.com/css/css_pseudo_elements.asp
 
 i3GEO.arvoreDeCamadas = {
 	/**
