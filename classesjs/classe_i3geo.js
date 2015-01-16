@@ -1,3 +1,11 @@
+//TODO alterar a forma de estilizar as linhas de uma tabela usando estilos
+//table tr:nth-child(odd)	{
+//  background-color: #f1f1f1;
+//}
+//table tr:nth-child(even) {
+//  background-color: #ffffff;
+//}
+
 /**
  * Title: i3Geo
  *
