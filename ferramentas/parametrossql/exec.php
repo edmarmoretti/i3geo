@@ -30,13 +30,16 @@ Aplica a substituicao de chaves pelos valores enviados
 		else{
 			$layer->setmetadata("FILTROORIGINAL",$filtro);
 		}
+		$chaves = str_ireplace(array("and", "or", "select","from","where","update","delete","insert","--"),"",$chaves);
 		$chaves = explode(",",$chaves);
-		$valores = explode(",",$valores);
+		$valores = str_ireplace(array("and", "or", "select","from","where","update","delete","insert","--"),"",$valores);
+		$valores = explode(",",strip_tags($valores));
 		$n = count($chaves);
 		for($i = 0; $i < $n; $i++){
-			$data = str_replace($chaves[$i],$valores[$i],$data);
+			$v = $valores[$i];
+			$data = str_replace($chaves[$i],$v,$data);
 			if($filtro != ""){
-				$filtro = str_replace($chaves[$i],$valores[$i],$filtro);
+				$filtro = str_replace($chaves[$i],$v,$filtro);
 			}
 		}
 		if($filtro != ""){
