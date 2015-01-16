@@ -2098,9 +2098,10 @@ i3GEO.arvoreDeCamadas = {
 		estilo = navm ? "cursor:pointer;vertical-align:15%;" : "cursor:pointer;";
 		html += "<input class=inputsb style='"
 			+ estilo
-			+ "' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
-			+ $trad("t3")
-			+ "','ligadesliga')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" type='checkbox' name=\"layer\" value='"
+			//+ "' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
+			//+ $trad("t3")
+			//+ "','ligadesliga')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" 
+			+ "' type='checkbox' name=\"layer\" value='"
 			+ tema.name
 			+ "' "
 			+ ck
