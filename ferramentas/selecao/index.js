@@ -1013,7 +1013,6 @@ i3GEOF.selecao = {
 				interrogacao.onclick = function(){
 					var obj = (this.parentNode.parentNode.getElementsByTagName("input"))[0],
 					itemTema = (this.parentNode.parentNode.getElementsByTagName("select"))[0].value;
-					//FIXME ordenar a lista de valores e remover apostrofe
 					i3GEO.util.comboValoresItem(
 							"i3GEOselecaocbitens",
 							i3GEO.temaAtivo,
