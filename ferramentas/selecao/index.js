@@ -1014,7 +1014,6 @@ i3GEOF.selecao = {
 					var obj = (this.parentNode.parentNode.getElementsByTagName("input"))[0],
 					itemTema = (this.parentNode.parentNode.getElementsByTagName("select"))[0].value;
 					//FIXME ordenar a lista de valores e remover apostrofe
-					//FIXME limpar lista ao selecionar um novo campo
 					i3GEO.util.comboValoresItem(
 							"i3GEOselecaocbitens",
 							i3GEO.temaAtivo,
@@ -1023,8 +1022,9 @@ i3GEOF.selecao = {
 								$i("i3GEOselecaovalores").innerHTML = "<br><p class=paragrafo >" + $trad('selecionaValor',i3GEOF.selecao.dicionario) + ":</p>"
 									+ "<div class='styled-select'  >" + retorno.dados + "</div>";
 								if ($i("i3GEOselecaocbitens")){
-									$i("i3GEOselecaocbitens").onchange = function()
-									{obj.value = this.value;};
+									$i("i3GEOselecaocbitens").onchange = function(){
+										obj.value = this.value;
+									};
 								}
 							},
 							"i3GEOselecaovalores",
@@ -1065,10 +1065,13 @@ i3GEOF.selecao = {
 
 				ntd1 = document.createElement("td");
 				i3GEO.util.comboItens(
-						"none",
+						"i3GEOselecaoItensAtrib",
 						i3GEO.temaAtivo,
 						function(retorno){
 							ntd1.innerHTML = "<div class='styled-select' style='width:95px;margin-left:5px;' >" + retorno.dados + "</div>";
+							$i("i3GEOselecaoItensAtrib").onchange = function(){
+								$i("i3GEOselecaovalores").innerHTML = "";
+							}
 						}
 				);
 				ntr.appendChild(ntd1);
