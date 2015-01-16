@@ -1447,7 +1447,6 @@ i3GEOF.legenda =
 				linha = i3GEOF.legenda.estilos[i3GEOF.legenda.estilo];
 				linha = linha.split("#");
 				tipoLayer = linha[0];
-				//FIXME angulo aparece como undefined
 				d =
 					"<table class=lista6 >"
 					+ "<tr><td>"

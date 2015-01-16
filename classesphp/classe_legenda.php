@@ -623,6 +623,7 @@ string com o tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbo
 				$linha[] = $estilo->width;
 				$s = $estilo->symbol;
 				$linha[] = implode(" ",$s->getPatternArray);
+				$linha[] = $estilo->angle;
 			}
 			else{
 				$linha[] = "";
