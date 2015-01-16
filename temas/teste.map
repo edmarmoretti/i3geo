@@ -4,7 +4,7 @@ MAP
   LAYER
     CONNECTION "teste"
     CONNECTIONTYPE POSTGIS
-    DATA "geom from (select * from ambiente.queim2013 WHERE data >= 999 and data <= 20131231 ) as foo using unique gid using srid=4326"
+    DATA "geom from (select * from ambiente.queim2013 WHERE data >= 2013999 and data <= 20131231 ) as foo using unique gid using srid=4326"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	"nao"
