@@ -199,7 +199,7 @@ i3GEOF.gradeDePontos = {
 		i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.gradeDePontos.capturaPonto()"]);
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'><b>"+$trad('numeroPontos',i3GEOF.gradeDePoligonos.dicionario)+"</b>";
+		var ins = "<p class='paragrafo'><b>"+$trad('numeroPontos',i3GEOF.gradeDePontos.dicionario)+"</b>";
 		ins += "<p class='paragrafo'>X</p>";
 		ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOgradedepontosnptx' title='pontos em x'  type=text value='10'/></div>";
 		ins += "<br><p class='paragrafo'>Y";
