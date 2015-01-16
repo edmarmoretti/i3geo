@@ -2316,6 +2316,12 @@ g_traducao = {
 	pt: "Mapa din&acirc;mico",
 	en:"",
 	es:""
+}],
+"naoPermitido": [
+{
+	pt: "Operacao nao autorizada para esse usuario",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

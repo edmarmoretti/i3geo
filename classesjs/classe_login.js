@@ -40,7 +40,6 @@
 if (typeof (i3GEOF) === 'undefined') {
 	var i3GEOF = {};
 }
-//TODO não fazer logof quando o usuario nao puder usar a operacao
 i3GEO.login = {
 	/**
 	 * Propriedade: divnomelogin
@@ -155,6 +154,10 @@ i3GEO.login = {
 			locaplic = i3GEO.configura.locaplic;
 		}
 		temp = function(retorno) {
+			if (retorno.data == "naopermitido"){
+				alert($trad("naoPermitido"));
+				return false;
+			}
 			if (retorno.data == "sim") {
 				resultado = true;
 			} else {

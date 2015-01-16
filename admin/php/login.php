@@ -140,7 +140,8 @@ switch (strtoupper($funcao))
 				$retorno = "sim";
 			}
 			else{
-				logoutUsuario();
+				//logoutUsuario();
+				$retorno = "naopermitido";
 			}
 		}
 		cpjson($retorno);
