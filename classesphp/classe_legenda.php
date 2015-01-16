@@ -881,7 +881,7 @@ $width
 					}
 				continue;
 				case "symbolname":
-					if($symbolname == "" || $symbolname == "0"){
+					if($parametro == "" || $parametro == "0"){
 						$classe->deletestyle($estilo);
 						$estilo = ms_newStyleObj($classe);
 					}

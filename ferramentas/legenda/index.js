@@ -1780,7 +1780,6 @@ i3GEOF.legenda =
 		adicionaProcesso : function(s) {
 			$i("i3GEOlegendaprocessos").innerHTML += $inputText("", "", "", "", 50, s.value);
 		},
-		//FIXME a aplicacao do simbolo nao funciona
 		aplicaTodasClasses : function(parametro,id){
 			var valor = $i(id).value;
 			i3GEO.janela.confirma(
