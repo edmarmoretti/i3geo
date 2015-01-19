@@ -2088,7 +2088,11 @@ i3GEO.arvoreDeCamadas = {
 			}
 		}
 		//estilo = navm ? "text-align:left;font-size:11px;vertical-align:middle;display:table-cell;" : "text-align:left;font-size:11px;vertical-align:top;";
-		estilo = navm ? "i3GEOarvCamTemaIE" : "i3GEOarvCamTema";
+		estilo = "i3GEOarvCamTema";
+		//verifica se a versao do IE e menor que 9
+		if(navm && parseInt(YAHOO.env.ua.ie,10) < 9){
+			estilo = "i3GEOarvCamTemaIE";
+		}
 		//inicia o div
 		html = "<div onclick='i3GEO.mapa.ativaTema(\""
 			+ tema.name
