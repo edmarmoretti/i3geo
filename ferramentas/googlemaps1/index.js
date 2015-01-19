@@ -48,6 +48,7 @@ if (app=='N') navn=true; else navm=true;
 i3GEO = window.parent.i3GEO;
 MARCA = false;
 BOX = false;
+ATUALIZABOX = true;
 $i = function(id){
 	return window.parent.document.getElementById(id);
 };
@@ -88,6 +89,13 @@ function inicializa(){
 	});
 	google.maps.event.addListener(map, "bounds_changed", function() {
 		if(i3GEO){
+			//evita loop entre os eventos do i3geo e do googlemaps
+			if(ATUALIZABOX === true){
+				var bd = map.getBounds();
+				var centro = bd.getCenter();
+				i3GEO.Interface[i3GEO.Interface.ATUAL].pan2ponto(centro.lng(),centro.lat());
+			}
+			ATUALIZABOX = true;
 			ondegoogle();
 		}
 	});
@@ -121,9 +129,11 @@ function inicializa(){
 		}
 	});
 	if(i3GEO){
+		/*
 		if(i3GEO.parametros.mapfile){
 			botaoI3geo();
 		}
+		*/
 		ondegoogle(map);
 	}
 	botaoRota();
@@ -208,10 +218,11 @@ function moveMapa(bd){
 /*
 Function: panTogoogle
 
-Desloca o mapa principal conforme a extens&atilde;o geogr&aacute;fica do mapa do GM
+Desloca o mapa do google quando o mapa principal e deslocado
 */
 function panTogoogle(){
 	if(!i3GEO){return;}
+	ATUALIZABOX = false;
 	var pol = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 	var ret = pol.split(" ");
 	var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
@@ -310,7 +321,7 @@ function constroiRota(){
 			var place = response[0];
 			endereco2 = place.formatted_address;
 			endereco2 = i3GEO.janela.prompt(
-				"Endereco do final",
+				"Confirme o endereco do final",
 				function(){
 					montaRota();
 				},
@@ -327,7 +338,7 @@ function constroiRota(){
 			var place = response[0];
 			endereco1 = place.formatted_address;
 			endereco1 = i3GEO.janela.prompt(
-				"Endereco do inicio",
+				"Confirme o endereco do inicio",
 				function(){
 					geocoder.geocode(
 						{'location':pontoRota2},
