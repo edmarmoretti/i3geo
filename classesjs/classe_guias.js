@@ -1301,7 +1301,7 @@ i3GEO.guias =
 				}
 				ins = "1.2px";
 				if (navm) {
-					ins = "2px";
+					//ins = "2px";
 				}
 				for (i = 0; i < n; i++) {
 					ico = $i(temp.ids[i]);
@@ -1340,7 +1340,7 @@ i3GEO.guias =
 							ims[i],
 							"opacity",
 							0.7);
-						ims[i].style.boxShadow = "";
+						ims[i].style.boxShadow = "none";
 					}
 				}
 				// verifica se existem icones fora do container
@@ -1358,14 +1358,14 @@ i3GEO.guias =
 							ims[0].style.boxShadow = "none";
 							ims[0].style.margin = "0px";
 							ims[0].style.padding = "0px";
-							if (chro === true) {
+							if (navn === false) {
 								ims[0].style.padding = "1.7px";
 							}
 							ims[0].style.border = "1px solid gray";
 							if (i3GEO.guias.guiaMovel.config.posicao[1] === "l") {
-								ims[0].style.borderLeft = "0px solid white";
+								ims[0].style.borderLeft = "2px solid white";
 							} else {
-								ims[0].style.borderRight = "0px solid white";
+								ims[0].style.borderRight = "2px solid white";
 							}
 
 							YAHOO.util.Dom.setStyle(
