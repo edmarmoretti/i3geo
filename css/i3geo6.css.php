@@ -1,4 +1,15 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.i3GEObalaoInfo {
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.i3GEOarvCamTema {
+text-align:left;
+font-size:11px;
+vertical-align:top;
+}
+.i3GEOarvCamTemaIE {
+text-align:left;
+font-size:11px;
+vertical-align:middle;
+display:table-cell;
+}
+.i3GEObalaoInfo {
 position : absolute;
 zIndex : 5000;
 textAlign : left;
@@ -1914,6 +1925,7 @@ background-image: none;
 margin-left: 8px;
 border: solid 1px gray;
 box-shadow: 0px 1px 3px lightgray;
+cursor: pointer;
 }
 .iconeMini {
 border-radius: 5px 5px 5px 5px;

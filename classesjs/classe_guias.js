@@ -116,14 +116,14 @@ i3GEO.guias =
 		 */
 		CONFIGURA : {
 			"temas" : {
-				icone : "imagens/gisicons/show-layers.png",
+				icone : "imagens/layer.png",
 				titulo : $trad("g4a"),
 				id : "guia1",
 				idconteudo : "guia1obj",
 				click : ""
 			},
 			"adiciona" : {
-				icone : "imagens/gisicons/show-catalog.png",
+				icone : "imagens/catalogo.png",
 				titulo : $trad("g1a"),
 				id : "guia2",
 				idconteudo : "guia2obj",
@@ -152,7 +152,7 @@ i3GEO.guias =
 				}
 			},
 			"legenda" : {
-				icone : "imagens/gisicons/show-legend.png",
+				icone : "imagens/legenda.png",
 				titulo : $trad("g3"),
 				id : "guia4",
 				idconteudo : "guia4obj",
@@ -1195,7 +1195,7 @@ i3GEO.guias =
 					YAHOO.util.Dom.setStyle(
 						"i3GEOguiaMovelIcones",
 						"opacity",
-						0.90);
+						0.70);
 				}
 				temp = $i("i3GEOguiaMovelConteudo").style;
 				temp.left = "1px";
@@ -1216,7 +1216,7 @@ i3GEO.guias =
 				YAHOO.util.Dom.setStyle(
 					"i3GEOguiaMovelConteudo",
 					"opacity",
-					0.90);
+					0.70);
 
 				YAHOO.util.Dom.setStyle(
 					"i3GEOguiaMovelMolde",
@@ -1355,7 +1355,7 @@ i3GEO.guias =
 							"button");
 						if (ims.length > 0) {
 							ims[0].style.backgroundColor = "white";
-							ims[0].style.boxShadow = "";
+							ims[0].style.boxShadow = "none";
 							ims[0].style.margin = "0px";
 							ims[0].style.padding = "0px";
 							if (chro === true) {
@@ -1363,15 +1363,15 @@ i3GEO.guias =
 							}
 							ims[0].style.border = "1px solid gray";
 							if (i3GEO.guias.guiaMovel.config.posicao[1] === "l") {
-								ims[0].style.borderLeft = "2px solid white";
+								ims[0].style.borderLeft = "0px solid white";
 							} else {
-								ims[0].style.borderRight = "2px solid white";
+								ims[0].style.borderRight = "0px solid white";
 							}
 
 							YAHOO.util.Dom.setStyle(
 								ims[0],
 								"opacity",
-								0.6);
+								0.7);
 							ims[0].blur();
 						}
 					}

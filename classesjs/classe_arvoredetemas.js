@@ -3115,6 +3115,6 @@ i3GEO.arvoreDeTemas = {
 		 */
 		downloadbase : function() {
 			window.open(i3GEO.configura.locaplic + "/datadownload.htm");
-		},
+		}
 	}
 };

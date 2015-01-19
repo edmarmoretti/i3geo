@@ -338,6 +338,7 @@ i3GEO.tema =
 		 * 
 		 * {string} - id que identifica o tema no map file.
 		 */
+		//TODO remover eval
 		temporizador : function(idtema, tempo) {
 			if (!tempo) {
 				tempo = $i("temporizador" + idtema).value;

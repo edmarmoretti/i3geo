@@ -2087,12 +2087,14 @@ i3GEO.arvoreDeCamadas = {
 				return "";
 			}
 		}
-		estilo = navm ? "text-align:left;font-size:11px;vertical-align:middle;display:table-cell;" : "text-align:left;font-size:11px;vertical-align:top;";
-		html = "<p onclick='i3GEO.mapa.ativaTema(\""
+		//estilo = navm ? "text-align:left;font-size:11px;vertical-align:middle;display:table-cell;" : "text-align:left;font-size:11px;vertical-align:top;";
+		estilo = navm ? "i3GEOarvCamTemaIE" : "i3GEOarvCamTema";
+		//inicia o div
+		html = "<div onclick='i3GEO.mapa.ativaTema(\""
 			+ tema.name
 			+ "\")' id='arrastar_"
 			+ tema.name
-			+ "' style='"
+			+ "' class='"
 			+ estilo
 			+ "' >";
 		estilo = navm ? "cursor:pointer;vertical-align:15%;" : "cursor:pointer;";
@@ -2224,8 +2226,9 @@ i3GEO.arvoreDeCamadas = {
 				+ tema.tema
 				+ "</span>";
 		}
-		html += "</p>";
-
+		html += "</div>";
+		//adiciona o temporizador
+		//que redesenha o tema de tempos em tempos
 		if (i3GEO.tema.TEMPORIZADORESID[tema.name] == undefined
 			&& tema.temporizador != "") {
 			i3GEO.tema.temporizador(
