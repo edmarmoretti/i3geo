@@ -1195,7 +1195,7 @@ i3GEO.guias =
 					YAHOO.util.Dom.setStyle(
 						"i3GEOguiaMovelIcones",
 						"opacity",
-						0.70);
+						0.60);
 				}
 				temp = $i("i3GEOguiaMovelConteudo").style;
 				temp.left = "1px";
@@ -1339,7 +1339,7 @@ i3GEO.guias =
 						YAHOO.util.Dom.setStyle(
 							ims[i],
 							"opacity",
-							0.7);
+							0.6);
 						ims[i].style.boxShadow = "none";
 					}
 				}
@@ -1371,7 +1371,7 @@ i3GEO.guias =
 							YAHOO.util.Dom.setStyle(
 								ims[0],
 								"opacity",
-								0.7);
+								0.6);
 							ims[0].blur();
 						}
 					}

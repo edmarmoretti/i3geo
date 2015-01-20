@@ -1377,7 +1377,7 @@ i3GEOF.graficointerativo1 =
 							filtro = "(["+coluna+"] = "+val+")";
 						}
 						else{
-							filtro = "(|["+coluna+"]| = |"+val.trim()+"|)";
+							filtro = "(|["+coluna+"]| = |"+i3GEO.util.trim(val)+"|)";
 						}
 						i3GEOF.graficointerativo1.filtraCamada(idjanela,filtro);
 					};
@@ -1388,7 +1388,7 @@ i3GEOF.graficointerativo1 =
 							filtro = "(["+coluna+"] < "+val+")";
 						}
 						else{
-							filtro = "(|["+coluna+"]| < |"+val.trim()+"|)";
+							filtro = "(|["+coluna+"]| < |"+i3GEO.util.trim(val)+"|)";
 						}
 						i3GEOF.graficointerativo1.filtraCamada(idjanela,filtro);
 					};

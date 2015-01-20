@@ -162,6 +162,22 @@ i3GEO.util =
 		 */
 		BOXES : [],
 		/**
+		 * Function: trim
+		 *
+		 * Implementa o metodo trim para navegadores sem suporte a essa funcao
+		 *
+		 * Parametros:
+		 *
+		 * {String}
+		 *
+		 * Return:
+		 *
+		 * {String}
+		 */
+		trim : function(s){
+			return s.replace(/^\s+|\s+$/gm,'');
+		},
+		/**
 		 * Function: escapeURL
 		 *
 		 * Converte uma string em uma url valida

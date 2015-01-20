@@ -624,8 +624,7 @@ i3GEO.gadgets = {
 			return;
 		}
 		// cria o menu se ainda n&atilde;o existir
-		if (objid
-			&& objid.innerHTML.trim() === "") {
+		if (i3GEO.util.trim(objid.innerHTML) === "") {
 			try {
 				if (ms.marcadores === true) {
 					// complementa o array com os dados para o menu de
