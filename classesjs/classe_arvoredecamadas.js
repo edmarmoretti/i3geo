@@ -2101,10 +2101,8 @@ i3GEO.arvoreDeCamadas = {
 			+ "' class='"
 			+ estilo
 			+ "' >";
-		estilo = navm ? "cursor:pointer;vertical-align:15%;" : "cursor:pointer;";
-		html += "<input class=inputsb style='"
-			+ estilo
-			+ "' type='checkbox' name=\"layer\" value='"
+		//estilo = navm ? "cursor:pointer;vertical-align:15%;" : "cursor:pointer;";
+		html += "<input type='checkbox' name=\"layer\" value='"
 			+ tema.name
 			+ "' "
 			+ "id='"+tema.name+"ckbox'"
@@ -2174,7 +2172,7 @@ i3GEO.arvoreDeCamadas = {
 		if (i3GEO.arvoreDeCamadas.FUNCOES.fonte === true
 			&& tema.features.toLowerCase() !== "sim"
 			&& tema.name != "mundo") {
-			html += "&nbsp;<img class='ajuda_usuario' style='top:-2px;' src='"
+			html += "&nbsp;<img class='Fonte' src='"
 				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ "' title='"
 				+ $trad("a9")
@@ -2188,17 +2186,15 @@ i3GEO.arvoreDeCamadas = {
 		if (tema.download.toLowerCase() === "sim"
 			|| tema.download === ""
 			&& tema.features.toLowerCase() !== "sim") {
-			html += "&nbsp;<img style='"
-				+ estilo
-				+ "' src="
-				+ i3GEO.configura.locaplic + "/imagens/down1.gif"
+			html += "&nbsp;<img class='Download' src="
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
 				+ " title='download' onclick='i3GEO.tema.dialogo.download(\""
 				+ tema.name
 				+ "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
 				+ $trad("t6")
 				+ "','download')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
 		}
-		estilo = navm ? "cursor:move;vertical-align:35%;padding-top:0px;color:black;" : "cursor:move;vertical-align:20%;color:black;";
+		estilo = "";//navm ? "cursor:move;vertical-align:35%;padding-top:0px;color:black;" : "cursor:move;vertical-align:20%;color:black;";
 		if (tema.AGUARDALEGENDA) {
 			html += "&nbsp;<span id='ArvoreTituloTema"
 				+ tema.name

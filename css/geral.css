@@ -1,14 +1,43 @@
 .i3GEOarvCamTema {
-	text-align:left;
-	font-size:11px;
-	vertical-align:top;
+	font-size: 12px;
+	margin: auto;
+	text-align: left;
+	cursor: pointer;
+	top: 1px;
 }
+
 .i3GEOarvCamTemaIE {
-	text-align:left;
-	font-size:11px;
-	vertical-align:middle;
-	display:table-cell;
+	text-align: left;
+	font-size: 11px;
+	vertical-align: middle;
+	display: table-cell;
 }
+
+.i3GEOarvCamTema span, .i3GEOarvCamTemaIE span {
+	vertical-align: top;
+	cursor:move;
+}
+
+.i3GEOarvCamTema .Download, .i3GEOarvCamTemaIE .Download {
+	background-image: url("../imagens/oxygen/22x22/download.png");
+	width: 15px;
+	height: 15px;
+	background-size: 15px;
+	position: relative;
+	top: 1px;
+	margin-left: 2px;
+}
+
+.i3GEOarvCamTema .Fonte, .i3GEOarvCamTemaIE .Fonte {
+	background-image: url("../imagens/oxygen/22x22/help-contents.png");
+	width: 15px;
+	height: 15px;
+	background-size: 15px;
+	position: relative;
+	top: 1px;
+	margin-left: 2px;
+}
+
 
 .i3GEObalaoInfo {
 	position : absolute;
