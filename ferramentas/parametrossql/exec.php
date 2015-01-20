@@ -60,7 +60,6 @@ Aplica a substituicao de chaves pelos valores enviados
 			if($filtro != ""){
 				$layer->setfilter($filtro);
 			}
-			$data = str_replace("--","",$data);
 			$layer->set("data",$data);
 			$layer->set("status",MS_DEFAULT);
 			$layer->setmetadata("PLUGINI3GEO","");

@@ -94,21 +94,24 @@ i3GEOF.salvamapfile = {
 					var nome = retorno.data.nomeoriginal;
 					if(nome == ""){
 						$i(iddiv).innerHTML = "<p class=paragrafo >"+$trad('naoExisteMapfile',i3GEOF.salvamapfile.dicionario)+"<a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >link</a>";
+						return;
 					}
-					else{
-						var ins = "<p class=paragrafo >"+$trad('ajuda',i3GEOF.salvamapfile.dicionario) +
-						'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > '+$trad('concluido',i3GEOF.salvamapfile.dicionario)+'</span></p>' +
-						'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="'+$trad('salva',i3GEOF.salvamapfile.dicionario)+'"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="'+$trad('testa',i3GEOF.salvamapfile.dicionario)+'"  />';
-						$i(iddiv).innerHTML = ins;
-						new YAHOO.widget.Button(
-							"i3GEOsalvamapfilebotao1",
-							{onclick:{fn: function(){i3GEOF.salvamapfile.salva(nome,retorno.data.mapfile,retorno.data.nomelayer);}}}
-						);
-						new YAHOO.widget.Button(
-							"i3GEOsalvamapfilebotao2",
-							{onclick:{fn: function(){window.open(i3GEO.configura.locaplic+"/testamapfile.php?map="+nome);}}}
-						);
+					if(nome == undefined){
+						$i(iddiv).innerHTML = "<p class=paragrafo >"+$trad('naosalva',i3GEOF.salvamapfile.dicionario);
+						return;
 					}
+					var ins = "<p class=paragrafo >"+$trad('ajuda',i3GEOF.salvamapfile.dicionario) +
+					'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > '+$trad('concluido',i3GEOF.salvamapfile.dicionario)+'</span></p>' +
+					'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="'+$trad('salva',i3GEOF.salvamapfile.dicionario)+'"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="'+$trad('testa',i3GEOF.salvamapfile.dicionario)+'"  />';
+					$i(iddiv).innerHTML = ins;
+					new YAHOO.widget.Button(
+						"i3GEOsalvamapfilebotao1",
+						{onclick:{fn: function(){i3GEOF.salvamapfile.salva(nome,retorno.data.mapfile,retorno.data.nomelayer);}}}
+					);
+					new YAHOO.widget.Button(
+						"i3GEOsalvamapfilebotao2",
+						{onclick:{fn: function(){window.open(i3GEO.configura.locaplic+"/testamapfile.php?map="+nome);}}}
+					);
 				};
 			cp.set_response_type("JSON");
 			cp.call(p,"",retorno);

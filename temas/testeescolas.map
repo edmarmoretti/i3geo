@@ -7,10 +7,19 @@ MAP
     DATA "the_geom from (select cod_inep,nome,gid,the_geom from i3geo_metaestat.escolas) as foo using unique gid using srid=4326"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	""
+      "cache"	"nao"
       "CLASSE"	"SIM"
+      "olopacity"	""
+      "gmopacity"	""
+      "gmstatus"	""
       "editavel"	"SIM"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "arquivotemaoriginal"	""
+      "nomeoriginal"	""
+      "olstatus"	""
+      "FILTROORIGINAL"	""
+      "DATAORIGINAL"	""
+      "PLUGINI3GEO"	""
       "metaestat"	""
       "esquematabelaeditavel"	"i3geo_metaestat"
       "convcaracter"	""
@@ -20,7 +29,9 @@ MAP
       "tabelaeditavel"	"escolas"
     END # METADATA
     NAME "testeescolas"
-    STATUS OFF
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"
     TYPE POINT
@@ -32,6 +43,7 @@ MAP
         SIZE 20
         SYMBOL "/var/www/i3geo/symbols/images/school-2.png"
       END # STYLE
+      TITLE ""
     END # CLASS
   END # LAYER
 

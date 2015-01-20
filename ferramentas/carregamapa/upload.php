@@ -69,6 +69,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 			$layertemp->setmetadata("permiteogc","nao");
 			$layertemp->setmetadata("editorsql","nao");
 			$layertemp->setmetadata("EDITAVEL","nao");
+			$layertemp->setmetadata("PLUGINI3GEO","");
 			if ($testa == 1)
 			{
 				echo "<p class='paragrafo' >Problemas em ".($layer->name).". Removido.</p><br>";

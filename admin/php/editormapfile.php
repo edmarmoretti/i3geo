@@ -1142,9 +1142,11 @@ function refazerLayer()
 	$layernovo = @$mapa->getlayerbyname($nomelayer);
 	if($layeroriginal != "" && $layernovo != "")
 	{
+		$plugin = $layeroriginal->getmetadata("PLUGINI3GEO");
 		$layeroriginal->set("status",MS_DELETE);
 		$nl = ms_newLayerObj($mapatema,$layernovo);
 		$nl->set("name",$codigomap);
+		$nl->setmetadata("PLUGINI3GEO",$plugin);
 		$nl->setmetadata("nomeoriginal","");
 		$nl->setmetadata("arquivotemaoriginal","");
 		$nl->setmetadata("olopacity","");

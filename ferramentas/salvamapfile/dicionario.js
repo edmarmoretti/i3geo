@@ -24,5 +24,10 @@ i3GEOF.salvamapfile.dicionario = {
 		pt : "Testar",
 		en : "",
 		es : ""
+	} ],
+	'naosalva' : [ {
+		pt : "N&atilde;o &eacute; poss&iacute;vel salvar esse tipo de camada",
+		en : "",
+		es : ""
 	} ]
 };

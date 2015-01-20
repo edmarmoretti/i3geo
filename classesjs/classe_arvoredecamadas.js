@@ -2600,7 +2600,7 @@ i3GEO.arvoreDeCamadas = {
 						}
 					}
 					if (operador === "diferente") {
-						if (temp != valor) {
+						if (temp !== valor) {
 							resultado.push(ltema);
 						}
 					}
