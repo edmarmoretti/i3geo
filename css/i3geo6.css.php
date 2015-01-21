@@ -11,12 +11,14 @@ font-size: 11px;
 vertical-align: middle;
 display: table-cell;
 }
+.i3GEOarvCamTema input, .i3GEOarvCamTemaIE input {
+cursor: pointer;
+}
 .i3GEOarvCamTema span, .i3GEOarvCamTemaIE span {
 vertical-align: top;
 cursor:move;
 }
-.i3GEOarvCamTema .Download, .i3GEOarvCamTemaIE .Download {
-background-image: url("../imagens/oxygen/22x22/download.png");
+.i3GEOarvCamTema img, .i3GEOarvCamTemaIE img {
 width: 15px;
 height: 15px;
 background-size: 15px;
@@ -24,14 +26,21 @@ position: relative;
 top: 1px;
 margin-left: 2px;
 }
+.i3GEOarvCamTema .Download, .i3GEOarvCamTemaIE .Download {
+background-image: url("../imagens/oxygen/22x22/download.png");
+}
 .i3GEOarvCamTema .Fonte, .i3GEOarvCamTemaIE .Fonte {
 background-image: url("../imagens/oxygen/22x22/help-contents.png");
-width: 15px;
-height: 15px;
-background-size: 15px;
-position: relative;
-top: 1px;
-margin-left: 2px;
+}
+.i3GEOarvCamTema .Selecionado, .i3GEOarvCamTemaIE .Selecionado {
+background-image: url("../imagens/gisicons/select-cancel.png");
+}
+.i3GEOarvCamTema .ZoomSelecionado, .i3GEOarvCamTemaIE .ZoomSelecionado {
+background-image: url("../imagens/gisicons/zoom-selection.png");
+}
+.i3GEOarvCamTema .DependeEscala, .i3GEOarvCamTemaIE .DependeEscala {
+background-image: url("../imagens/oxygen/16x16/task-attempt.png");
+top: 0px;
 }
 .i3GEObalaoInfo {
 position : absolute;

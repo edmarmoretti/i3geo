@@ -156,6 +156,7 @@ if(!isset($_GET["telaR"])){
 			//
 			//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
 			//
+			$cortePixels = 0;
 			if ($l->getmetadata("cortepixels") != "" && $qy == false){
 				$cortePixels = $l->getmetadata("cortepixels");
 			}
@@ -193,7 +194,7 @@ if(!isset($_GET["telaR"])){
 			//
 			//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
 			//
-			if ($l->getmetadata("cortepixels") != ""){
+			if ($l->getmetadata("cortepixels") != ""  && $qy == false){
 				$cortePixels = $l->getmetadata("cortepixels");
 			}
 			if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature" ){

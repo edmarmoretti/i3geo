@@ -2114,12 +2114,9 @@ i3GEO.arvoreDeCamadas = {
 		//
 		// inclui icone do tema
 		//
-		estilo = navm ? "cursor:pointer;vertical-align:35%;padding-top:0px;" : "cursor:pointer;vertical-align:20%;position:relative;top:2px;";
 		if (tema.iconetema !== ""
 			&& i3GEO.arvoreDeCamadas.ICONETEMA === true) {
-			html += "&nbsp;<img style='"
-				+ estilo
-				+ "' src='"
+			html += "&nbsp;<img class='i3GEOiconeTema' src='"
 				+ tema.iconetema
 				+ "' />";
 		}
@@ -2134,33 +2131,27 @@ i3GEO.arvoreDeCamadas = {
 		// inclui icone indicando que o tema muda conforme a escala
 		//
 		if (tema.contextoescala.toLowerCase() === "sim") {
-			html += "&nbsp;<img style='"
-				+ estilo
-				+ "' src="
-				+ i3GEO.configura.locaplic + "/imagens/contextoescala.png"
-				+ " title='"
+			html += "&nbsp;<img class='DependeEscala' src='"
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
+				+ "' title='"
 				+ $trad("t36")
 				+ "' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
 				+ $trad("t36")
 				+ "','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
 		}
 		if (tema.sel.toLowerCase() === "sim") {
-			html += "&nbsp;<img style='"
-				+ estilo
-				+ "' src="
-				+ i3GEO.configura.locaplic + "/imagens/estasel.png"
-				+ " title='"
+			html += "&nbsp;<img class='Selecionado' src='"
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
+				+ "' title='"
 				+ $trad("t4")
 				+ "' onclick='i3GEO.tema.limpasel(\""
 				+ tema.name
 				+ "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
 				+ $trad("t5")
 				+ "','limpasel')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
-			html += "&nbsp;<img style='"
-				+ estilo
-				+ "' src="
-				+ i3GEO.configura.locaplic + "/imagens/zoomsel.gif"
-				+ " title='"
+			html += "&nbsp;<img class='ZoomSelecionado' src='"
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
+				+ "' title='"
 				+ $trad("t4a")
 				+ "' onclick='i3GEO.tema.zoomsel(\""
 				+ tema.name
