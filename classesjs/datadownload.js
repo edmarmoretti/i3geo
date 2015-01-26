@@ -47,12 +47,15 @@ loc = window.location.href;
 g_locaplic = loc.split("/datadownload.htm");
 g_locaplic = g_locaplic[0];
 
-temp = loc.split("?");
-if(temp[1])
-{temaDownload = temp[1];}
-else
-{temaDownload = "";}
-
+temp = loc.split("temaDownload=");
+if(temp[1]){
+	temaDownload = temp[1];
+	temaDownload = temaDownload.split("&");
+	temaDownload = temaDownload[0];
+}
+else{
+	temaDownload = "";
+}
 //
 //para efeitos de compatibilidade
 //
