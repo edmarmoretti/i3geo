@@ -2106,6 +2106,7 @@ i3GEOF.metaestat = {
 		 */
 		t4: function(){
 			//remove o conteudo anteriormente construido
+			//TODO melhorar a disposicao dos botoes
 			i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t4");
 			if($i("i3geoCartoComboMedidaVariavelEditor").value === ""){
 				i3GEO.janela.tempoMsg($trad('selecionaTipoClassificacao',i3GEOF.metaestat.dicionario));
@@ -2122,7 +2123,7 @@ i3GEOF.metaestat = {
 					if(soma == 1 || media == 1){
 						ins += "&nbsp;<input id=i3GEOFmetaestatEditorBotao6 type='button' value='"+$trad('quartis',i3GEOF.metaestat.dicionario1)+"' />" +
 						"&nbsp;<input id=i3GEOFmetaestatEditorBotao7 type='button' value='"+$trad('intervalosIguais',i3GEOF.metaestat.dicionario1)+"' />" +
-						"<div style='display:inline-block;position:relative;top:-10px;width:200px;' >&nbsp;intervalos: <input type=text value=5 id=i3GEOFmetaestatEditorNumInt size=5 /></div>";
+						"<div style='display:inline-block;position:relative;left:2px;top:2px;width:200px;' >&nbsp;intervalos: <input type=text value=5 id=i3GEOFmetaestatEditorNumInt size=5 /></div>";
 
 					}
 					ins += '<input type=hidden  value="" id="listaColourRampEditor"  />' + //utilizado pelo seletor de colourramp;
