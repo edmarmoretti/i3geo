@@ -76,6 +76,9 @@ function ogc_endereco(botao)
 {
 	botao.checked = false;
 	tema = botao.value;
+	if(tema === undefined){
+		tema = botao.title;
+	}
 	ins = "<H1>Endere&ccedil;o do web service:</H1>";
 	var re = new RegExp(".htm", "g");
 	var servico = window.location.href.replace(re,'.php?');
