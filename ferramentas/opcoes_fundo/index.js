@@ -77,6 +77,9 @@ i3GEOF.opcoesFundo = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
+		if ($i("i3GEOF.opcoesFundo")) {
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.opcoesFundo");

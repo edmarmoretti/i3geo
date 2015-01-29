@@ -155,7 +155,9 @@ i3GEOF.conectarservicos =
 	 */
 	iniciaJanelaFlutuante : function() {
 		var minimiza, cabecalho, janela, divid, temp, titulo;
-
+		if($i("i3GEOF.conectarservicos")){
+			return;
+		}
 		cabecalho = function() {
 		};
 		minimiza = function() {

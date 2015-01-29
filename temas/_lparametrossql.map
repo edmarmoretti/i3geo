@@ -2,68 +2,60 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "user=postgres password=postgres dbname=i3geosaude host=localhost port=5432"
+    CONNECTION "teste"
     CONNECTIONTYPE POSTGIS
-    DATA "the_geom from /*SE*/(SELECT (j.valorcalculado) AS pop_res_tot, co_municipio,no_cidade,co_uf,sg_uf,area_territorial,nu_ano_instalacao,/*SG*/the_geom as the_geom /*SG*/ FROM i3geo_metaestat.municipios AS regiao  INNER JOIN ( SELECT munic AS cod_regiao,sum(pop_res_tot) AS valorcalculado FROM ibge.populacao_residente WHERE ano IN ('ANO_DADOS')AND pop_res_tot IS NOT NULL  /*FA*//*FA*/ /*FAT*//*FAT*/ GROUP BY cod_regiao  )  AS j ON j.cod_regiao::text = regiao.co_municipio::text /*FR*//*FR*/ )/*SE*/ as foo using unique co_municipio using srid=4326"
+    DATA "geom from (select * from ambiente.queim2013 WHERE data >= 2013dimi and data <= 2013dfmf ) as foo using unique gid using srid=4326"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "ltempoitemimagem"	""
+      "tip"	"lat,lon,data,horagmt,satelite,municipio,uf,regiao,bioma"
+      "cache"	"nao"
+      "ltempoitemdescricao"	""
+      "olopacity"	""
       "CLASSE"	"SIM"
-      "permitekmz"	"nao"
+      "ltempoiteminicio"	""
+      "palletestep"	""
+      "ltempoitemtip"	""
+      "gmopacity"	""
+      "gmstatus"	""
+      "ltempoitemtitulo"	""
+      "description_template"	""
+      "itensdesc"	"Lat,Lon,Latgms,Longms,Data,Horagmt,Satelite,Municipio,UF,Regiao,Prec,Num dias sem chuva,Risco,Bioma"
+      "ltempoitemlink"	""
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "permitedownload"	"sim"
-      "PLUGINI3GEO"	'{"plugin":"parametrossql","parametros":[{"titulo" : "Ano dos dados","chave" : "ANO_DADOS","tipo" : "select","valores" : "1970,1980,2000"},{"titulo" : "","chave" : "","tipo" : "","valores" : ""},{"titulo" : "","chave" : "","tipo" : "","valores" : ""},{"titulo" : "","chave" : "","tipo" : "","valores" : "undefined"}]}'
+      "arquivotemaoriginal"	""
+      "palletefile"	""
+      "olstatus"	""
+      "nomeoriginal"	""
+      "ltempoformatodata"	""
+      "ltempoitemicone"	""
       "metaestat"	""
-      "permiteogc"	"sim"
-      "permitekml"	"sim"
-      "TEMA"	"Teste de plugin parametrossql"
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","parametros":[{"titulo" : "Dia inicial","chave" : "di","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""},{"titulo" : "Mês inicial","chave" : "mi","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""},{"titulo" : "Dia final","chave" : "df","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""},{"titulo" : "Mês final","chave" : "mf","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""}]}'
+      "itembuscarapida"	""
+      "itens"	"lat,lon,latgms,longms,data,horagmt,satelite,municipio,uf,regiao,pais,prec,ndiasschuv,risco,bioma,wrs_tm"
+      "TEMA"	"Focos de queimada 2013"
+      "convcaracter"	""
+      "cortepixels"	"0"
+      "ltempoconvencode"	""
+      "editorsql"	""
+      "ltempoitemfim"	""
     END # METADATA
     NAME "_lparametrossql"
     PROCESSING "LABEL_NO_CLIP=True"
     PROCESSING "POLYLINE_NO_CLIP=True"
-    STATUS OFF
+    STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"
-    TYPE POLYGON
+    TYPE POINT
     UNITS METERS
     CLASS
-      NAME "<= 6008"
-      EXPRESSION ([pop_res_tot]<=6008)
+      NAME ""
       STYLE
-        COLOR 255 255 199
-        OUTLINECOLOR 255 255 255
-        OUTLINEWIDTH 6
+        COLOR 239 12 12
         SIZE 6
+        SYMBOL "ponto"
       END # STYLE
-    END # CLASS
-    CLASS
-      NAME "> 6008 e <= 11531"
-      EXPRESSION (([pop_res_tot]>6008)and([pop_res_tot]<=11531))
-      STYLE
-        COLOR 235 235 210
-        OUTLINECOLOR 255 255 255
-        OUTLINEWIDTH 11
-        SIZE 11
-      END # STYLE
-    END # CLASS
-    CLASS
-      NAME "> 11531 e <= 22638"
-      EXPRESSION (([pop_res_tot]>11531)and([pop_res_tot]<=22638))
-      STYLE
-        COLOR 216 216 220
-        OUTLINECOLOR 255 255 255
-        OUTLINEWIDTH 16
-        SIZE 16
-      END # STYLE
-    END # CLASS
-    CLASS
-      NAME "> 22638"
-      EXPRESSION ([pop_res_tot]>22638)
-      STYLE
-        COLOR 196 196 230
-        OUTLINECOLOR 255 255 255
-        OUTLINEWIDTH 21
-        SIZE 21
-      END # STYLE
+      TITLE ""
     END # CLASS
   END # LAYER
 

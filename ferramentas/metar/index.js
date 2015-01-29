@@ -118,6 +118,9 @@ i3GEOF.metar =
 		 */
 		iniciaJanelaFlutuante : function() {
 			var minimiza, cabecalho, janela, divid, temp, titulo;
+			if ($i("i3GEOF.metar")) {
+				return;
+			}
 			// funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 			cabecalho = function() {
 				i3GEOF.metar.ativaFoco();

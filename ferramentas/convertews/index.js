@@ -121,6 +121,9 @@ i3GEOF.converteMapaWS = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo,p,cp;
+		if($i("i3GEOF.converteMapaWS")){
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.converteMapaWS");

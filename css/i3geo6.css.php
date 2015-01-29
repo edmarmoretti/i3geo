@@ -1,22 +1,69 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.i3GEOarvCamTema {
-font-size: 12px;
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.i3GEOarvCam .ygtvitem {
+text-align: left;
+margin-top: 3px;
+margin-bottom: 3px;
+}
+.i3GEOarvCam input[type=radio], .i3GEOarvCam input[type=checkbox] {
+display: none;
+}
+.i3GEOarvCam input[type=checkbox]+label:before {
+color: white;
+content: "";
+content: url("../imagens/gisicons/hide.png");
+line-height: 15px;
+text-align: center;
+top: 9px;
+position: relative;
+left: -5px;
+cursor : pointer;
+}
+.i3GEOarvCam input[type=checkbox]:checked+label:before {
+color: white;
+content: "";
+content: url("../imagens/gisicons/show.png");
+line-height: 15px;
+text-align: center;
+top: 9px;
+position: relative;
+left: -5px;
+cursor : pointer;
+}
+.i3GEOarvCam label {
+margin-left: 0px;
+cursor: move;
+}
+.i3GEOarvCamGrupo {
+font-size: 15px;
 margin: auto;
 text-align: left;
 cursor: pointer;
 top: 1px;
+font-weight : bold;
+}
+.i3GEOarvCamTema {
+font-size: 13px;
+margin: auto;
+text-align: left;
+cursor: pointer;
+top: 1px;
+font-weight : bold;
 }
 .i3GEOarvCamTemaIE {
 text-align: left;
-font-size: 11px;
+font-size: 13px;
 vertical-align: middle;
 display: table-cell;
+font-weight : bold;
+}
+.i3GEOarvCam .ygtvdepthcell {
+background : none;
 }
 .i3GEOarvCamTema input, .i3GEOarvCamTemaIE input {
 cursor: pointer;
 }
 .i3GEOarvCamTema span, .i3GEOarvCamTemaIE span {
 vertical-align: top;
-cursor:move;
+cursor: move;
 }
 .i3GEOarvCamTema img, .i3GEOarvCamTemaIE img {
 width: 15px;
@@ -26,21 +73,48 @@ position: relative;
 top: 1px;
 margin-left: 2px;
 }
-.i3GEOarvCamTema .Download, .i3GEOarvCamTemaIE .Download {
-background-image: url("../imagens/oxygen/22x22/download.png");
+.i3GEOarvCamTemaIco img, .i3GEOarvCamTemaIcoIE img {
+width: 15px;
+height: 15px;
+background-size: 15px;
+position: relative;
+top: -1px;
+margin-left: 3px;
 }
-.i3GEOarvCamTema .Fonte, .i3GEOarvCamTemaIE .Fonte {
-background-image: url("../imagens/oxygen/22x22/help-contents.png");
+.i3GEOarvCamTemaIco .Farol, .i3GEOarvCamTemaIcoIE .Farol {
+width: 11px;
+height: 11px;
 }
-.i3GEOarvCamTema .Selecionado, .i3GEOarvCamTemaIE .Selecionado {
+.i3GEOarvCamTemaIco .Ferramentas, .i3GEOarvCamTemaIcoIE .Ferramentas {
+background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
+}
+.i3GEOarvCamTemaIco .Download, .i3GEOarvCamTemaIcoIE .Download {
+background-image: url("../imagens/oxygen/16x16/download.png");
+}
+.i3GEOarvCamTemaIco .Fonte, .i3GEOarvCamTemaIcoIE .Fonte {
+background-image: url("../imagens/oxygen/16x16/help-about.png");
+}
+.i3GEOarvCamTemaIco .Selecionado, .i3GEOarvCamTemaIcoIE .Selecionado {
 background-image: url("../imagens/gisicons/select-cancel.png");
 }
-.i3GEOarvCamTema .ZoomSelecionado, .i3GEOarvCamTemaIE .ZoomSelecionado {
+.i3GEOarvCamTemaIco .ZoomSelecionado, .i3GEOarvCamTemaIE .ZoomSelecionado {
 background-image: url("../imagens/gisicons/zoom-selection.png");
 }
-.i3GEOarvCamTema .DependeEscala, .i3GEOarvCamTemaIE .DependeEscala {
+.i3GEOarvCamTemaIco .DependeEscala, .i3GEOarvCamTemaIcoIE .DependeEscala {
 background-image: url("../imagens/oxygen/16x16/task-attempt.png");
 top: 0px;
+}
+.i3GEOarvCamTemaIco .RemoveLayer, .i3GEOarvCamTemaIcoIE .RemoveLayer {
+background-image: url("../imagens/oxygen/16x16/draw-x.png");
+}
+.i3GEOarvCamTemaIco .SobeLayer, .i3GEOarvCamTemaIcoIE .SobeLayer {
+background-image: url("../imagens/oxygen/16x16/draw-triangle3.png");
+}
+.i3GEOarvCamTemaIco .DesceLayer, .i3GEOarvCamTemaIcoIE .DesceLayer {
+background-image: url("../imagens/oxygen/16x16/draw-triangle4.png");
+}
+.i3GEOarvCamTemaIco .ZoomLayer, .i3GEOarvCamTemaIcoIE .ZoomLayer {
+background-image: url("../imagens/gisicons/zoom-layer.png");
 }
 .i3GEObalaoInfo {
 position : absolute;
@@ -300,10 +374,12 @@ text-align: left;
 font-size: 11px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 color: #26298D;
+outline : none;
 }
 A:hover {
 color: #4142ff;
 font-family: Verdana, Arial, Helvetica, sans-serif;
+outline : none;
 }
 img {
 border: 0px solid #FFFFFF;
@@ -1952,7 +2028,7 @@ background-position: center;
 cursor: pointer;
 }
 .iconeGuiaMovel {
-padding: 2px;
+padding: 5px 0px;
 border-radius: 5px 5px 5px 5px;
 background-image: none;
 margin-left: 8px;

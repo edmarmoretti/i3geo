@@ -97,6 +97,9 @@ i3GEOF.uploaddbf = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
+		if ($i("i3GEOF.uploaddbf")) {
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.uploaddbf");

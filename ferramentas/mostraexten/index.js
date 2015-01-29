@@ -98,6 +98,9 @@ i3GEOF.mostraExten = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo,cabecalho,minimiza;
+		if ($i("i3GEOF.mostraExten")) {
+			return;
+		}
 		//cria a janela flutuante
 		cabecalho = function(){
 			i3GEOF.mostraExten.ativaFoco();

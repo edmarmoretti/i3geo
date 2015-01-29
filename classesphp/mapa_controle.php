@@ -839,9 +839,17 @@ switch (strtoupper($funcao))
 		<Temas->pegadata>
 		*/
 	case "PEGADATA":
-		include_once("classe_temas.php");
-		$m = new Temas($map_file,$tema);
-		$retorno = $m->pegadata();
+		//verifica login
+		session_write_close();
+		session_name("i3GeoLogin");
+		if($_SESSION["usuario"] == "" || ($_SESSION["usuario"] != $_COOKIE["i3geousuariologin"])){
+			$retorno = "login";
+		}
+		else{
+			include_once("classe_temas.php");
+			$m = new Temas($map_file,$tema);
+			$retorno = $m->pegadata();
+		}
 		break;
 		/*
 		 Valor: ALTERADATA
@@ -851,14 +859,21 @@ switch (strtoupper($funcao))
 		<Temas->alteradata>
 		*/
 	case "ALTERADATA":
-		include_once("classe_temas.php");
-		$m = new Temas($map_file,$tema);
-		$retorno = $m->alteradata($novodata,$removemeta);
-		if($retorno != "")
-		{
-			$m->salva();
+		//verifica login
+		session_write_close();
+		session_name("i3GeoLogin");
+		if($_SESSION["usuario"] == "" || ($_SESSION["usuario"] != $_COOKIE["i3geousuariologin"])){
+			$retorno = "login";
 		}
-		$_SESSION["contadorsalva"]++;
+		else{
+			include_once("classe_temas.php");
+			$m = new Temas($map_file,$tema);
+			$retorno = $m->alteradata($novodata,$removemeta);
+			if($retorno != ""){
+				$m->salva();
+			}
+			$_SESSION["contadorsalva"]++;
+		}
 		break;
 		/*
 		 Valor: REMOVERGEOMETRIAS

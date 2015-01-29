@@ -110,6 +110,9 @@ i3GEOF.wiki = {
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
+		if ($i("i3GEOF.wiki")) {
+			return;
+		}
 		cabecalho = function(){
 			i3GEOF.wiki.ativaFoco();
 		};

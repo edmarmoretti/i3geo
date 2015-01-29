@@ -609,6 +609,9 @@ i3GEOF.preferencias = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
+		if ($i("i3GEOF.preferencias")) {
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.preferencias");

@@ -239,6 +239,9 @@ i3GEOF.selecao = {
 		 */
 		iniciaJanelaFlutuante: function(){
 			var minimiza,cabecalho,janela,divid,temp,titulo;
+			if($i("i3GEOF.selecao")){
+				return;
+			}
 			//cria a janela flutuante
 			cabecalho = function(){
 				i3GEOF.selecao.ativaFoco();
@@ -489,11 +492,13 @@ i3GEOF.selecao = {
 		*/
 		removeFiguras:{
 			openlayers: function(){
-				var temp, f = i3GEO.desenho.layergrafico.getFeaturesByAttribute("origem", "i3GEOFselecao");
-				if(f && f.length > 0){
-					temp = window.confirm($trad("x94"));
-					if (temp) {
-						i3GEO.desenho.layergrafico.destroyFeatures(f);
+				if(i3GEO.desenho.layergrafico){
+					var temp, f = i3GEO.desenho.layergrafico.getFeaturesByAttribute("origem", "i3GEOFselecao");
+					if(f && f.length > 0){
+						temp = window.confirm($trad("x94"));
+						if (temp) {
+							i3GEO.desenho.layergrafico.destroyFeatures(f);
+						}
 					}
 				}
 			},

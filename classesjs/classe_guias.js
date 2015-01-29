@@ -1357,9 +1357,9 @@ i3GEO.guias =
 							ims[0].style.backgroundColor = "white";
 							ims[0].style.boxShadow = "none";
 							ims[0].style.margin = "0px";
-							ims[0].style.padding = "0px";
+							//ims[0].style.padding = "0px";
 							if (navn === false) {
-								ims[0].style.padding = "1.7px";
+								//ims[0].style.padding = "1.7px";
 							}
 							ims[0].style.border = "1px solid gray";
 							if (i3GEO.guias.guiaMovel.config.posicao[1] === "l") {

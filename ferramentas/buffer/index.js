@@ -98,6 +98,9 @@ i3GEOF.buffer = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo;
+		if($i("i3GEOF.buffer")){
+			return;
+		}
 		//cria a janela flutuante
 		titulo = $trad("u10")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=24' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};

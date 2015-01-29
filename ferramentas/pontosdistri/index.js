@@ -99,6 +99,9 @@ i3GEOF.pontosDistri = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if ($i("i3GEOF.pontosDistri")) {
+			return;
+		}
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
 			i3GEOF.pontosDistri.ativaFoco();

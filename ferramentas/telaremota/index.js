@@ -115,6 +115,9 @@ i3GEOF.telaremota = {
 	*/
 	iniciaJanelaFlutuante: function(tema){
 		var janela,divid,temp,titulo;
+		if ($i("i3GEOF.telaremota")) {
+			return;
+		}
 		if(arguments.length == 0)
 		{tema = i3GEO.temaAtivo;}
 		cabecalho = function(){};

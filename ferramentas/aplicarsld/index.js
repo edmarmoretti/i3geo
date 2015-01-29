@@ -98,6 +98,9 @@ i3GEOF.aplicarsld = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
+		if($i("i3GEOF.aplicarsld")){
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.aplicarsld");

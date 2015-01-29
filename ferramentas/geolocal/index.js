@@ -114,6 +114,9 @@ i3GEOF.geolocal = {
 		 */
 		iniciaJanelaFlutuante: function(){
 			var janela,divid,temp,titulo,cabecalho,minimiza;
+			if($i("i3GEOF.geolocal")){
+				return;
+			}
 			cabecalho = function(){};
 			minimiza = function(){
 				i3GEO.janela.minimiza("i3GEOF.geolocal");

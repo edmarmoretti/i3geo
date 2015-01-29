@@ -135,6 +135,9 @@ i3GEOF.opacidademapa = {
 	my {numero} - (opcional) posi&ccedil;&atilde;o em y para onde a janela ser&aacute; movida ap&oacute;s ser criada
 	*/
 	iniciaJanelaFlutuante: function(mx,my){
+		if ($i("i3GEOF.opacidademapa")) {
+			return;
+		}
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.opacidademapa");
 		};

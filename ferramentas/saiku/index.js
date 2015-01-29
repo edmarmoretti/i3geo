@@ -131,6 +131,9 @@ i3GEOF.saiku =
 		 */
 		iniciaJanelaFlutuante : function() {
 			var janela, divid, titulo, cabecalho, minimiza;
+			if ($i("i3GEOF.saiku")) {
+				return;
+			}
 			cabecalho = function() {
 			};
 			minimiza = function() {

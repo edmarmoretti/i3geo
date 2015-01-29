@@ -168,6 +168,9 @@ i3GEOF.buscaFotos = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if($i("i3GEOF.buscaFotos")){
+			return;
+		}
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
 			i3GEOF.buscaFotos.ativaFoco();

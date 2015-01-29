@@ -107,6 +107,9 @@ i3GEOF.converteKml = {
 	*/
 	iniciaJanelaFlutuante: function(tema,tipo){
 		var janela,divid,titulo;
+		if($i("i3GEOF.converteKml")){
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.converteKml");

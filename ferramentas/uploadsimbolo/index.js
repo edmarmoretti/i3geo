@@ -118,6 +118,9 @@ i3GEOF.uploadsimbolo = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
+		if ($i("i3GEOF.uploadsimbolo")) {
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.uploadsimbolo");

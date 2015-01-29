@@ -4,44 +4,44 @@ MAP
   LAYER
     CONNECTION "teste"
     CONNECTIONTYPE POSTGIS
-    DATA "geom from (select * from ambiente.queim2013 WHERE data >= 2013999 and data <= 20131231 ) as foo using unique gid using srid=4326"
+    DATA "geom from (select * from ambiente.queim2013 WHERE data >= 2013dimi and data <= 2013dfmf ) as foo using unique gid using srid=4326"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	"nao"
-      "tip"	"lat,lon,data,horagmt,satelite,municipio,uf,regiao,bioma"
       "ltempoitemimagem"	""
-      "CLASSE"	"SIM"
-      "olopacity"	""
+      "tip"	"lat,lon,data,horagmt,satelite,municipio,uf,regiao,bioma"
+      "cache"	"nao"
       "ltempoitemdescricao"	""
-      "palletestep"	""
+      "olopacity"	""
+      "CLASSE"	"SIM"
       "ltempoiteminicio"	""
+      "palletestep"	""
       "ltempoitemtip"	""
       "gmopacity"	""
       "gmstatus"	""
-      "itensdesc"	"Lat,Lon,Latgms,Longms,Data,Horagmt,Satelite,Municipio,UF,Regiao,Prec,Num dias sem chuva,Risco,Bioma"
-      "description_template"	""
       "ltempoitemtitulo"	""
+      "description_template"	""
+      "itensdesc"	"Lat,Lon,Latgms,Longms,Data,Horagmt,Satelite,Municipio,UF,Regiao,Prec,Num dias sem chuva,Risco,Bioma"
       "ltempoitemlink"	""
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "arquivotemaoriginal"	""
       "palletefile"	""
-      "nomeoriginal"	""
       "olstatus"	""
+      "nomeoriginal"	""
       "ltempoformatodata"	""
       "ltempoitemicone"	""
-      "PLUGINI3GEO"	'{"plugin":"parametrossql","parametros":[{"titulo" : "Início (mês/dia)","chave" : "999","tipo" : "input","valores" : "0101","prog" : ""},{"titulo" : "Fim (mês/dia)","chave" : "1231","tipo" : "input","valores" : "1231","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""}]}'
       "metaestat"	""
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","parametros":[{"titulo" : "Dia inicial","chave" : "di","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""},{"titulo" : "Mês inicial","chave" : "mi","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""},{"titulo" : "Dia final","chave" : "df","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""},{"titulo" : "Mês final","chave" : "mf","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""}]}'
       "itembuscarapida"	""
-      "CONEXAOORIGINAL"	"sigeo"
       "itens"	"lat,lon,latgms,longms,data,horagmt,satelite,municipio,uf,regiao,pais,prec,ndiasschuv,risco,bioma,wrs_tm"
-      "convcaracter"	""
+      "CONEXAOORIGINAL"	"sigeo"
       "TEMA"	"Focos de queimada 2013"
+      "convcaracter"	""
       "cortepixels"	"0"
-      "editorsql"	""
       "ltempoconvencode"	""
+      "editorsql"	""
       "ltempoitemfim"	""
     END # METADATA
-    NAME "teste"
+    NAME "testex"
     PROCESSING "LABEL_NO_CLIP=True"
     PROCESSING "POLYLINE_NO_CLIP=True"
     STATUS DEFAULT
@@ -52,9 +52,7 @@ MAP
     CLASS
       NAME ""
       STYLE
-        ANGLE 0
         COLOR 239 12 12
-        OFFSET 0 0
         SIZE 6
         SYMBOL "ponto"
       END # STYLE

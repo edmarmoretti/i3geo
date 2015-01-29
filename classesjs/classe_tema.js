@@ -255,11 +255,10 @@ i3GEO.tema =
 		 * 
 		 * {string} - codigo do tema
 		 */
-		mudanome : function(idtema) {
+		mudanome : function(idtema,valor) {
 			i3GEO.mapa.ativaTema(idtema);
-			var valor = "";
-			if ($i("nn" + idtema)) {
-				valor = $i("nn" + idtema).value;
+			if (!valor) {
+				return;
 			}
 			if (valor !== "") {
 				i3GEO.php.mudanome(i3GEO.atualiza, idtema, valor);
@@ -338,15 +337,34 @@ i3GEO.tema =
 		 * 
 		 * {string} - id que identifica o tema no map file.
 		 */
-		//TODO remover eval
 		temporizador : function(idtema, tempo) {
-			if (!tempo) {
-				tempo = $i("temporizador" + idtema).value;
+			var t;
+			if(!tempo){
+				if ($i("temporizador" + idtema)) {
+					tempo = $i("temporizador" + idtema).value;
+				}
+				else{
+					tempo = 0;
+				}
 			}
 			if (tempo != "" && parseInt(tempo, 10) > 0) {
-				eval('i3GEO.tema.TEMPORIZADORESID.' + idtema + ' = {tempo: ' + tempo + ',idtemporizador: setInterval(function(' + idtema
-					+ '){if(!$i("arrastar_' + idtema + '")){delete(i3GEO.tema.TEMPORIZADORESID.' + idtema
-					+ ');return;}i3GEO.Interface.atualizaTema("",idtema);},parseInt(' + tempo + ',10)*1000)};');
+				//eval('i3GEO.tema.TEMPORIZADORESID.' + idtema + ' = {tempo: ' + tempo + ',idtemporizador: setInterval(function(' + idtema
+				//	+ '){if(!$i("arrastar_' + idtema + '")){delete(i3GEO.tema.TEMPORIZADORESID.' + idtema
+				//	+ ');return;}i3GEO.Interface.atualizaTema("",idtema);},parseInt(' + tempo + ',10)*1000)};');
+				t = function(){
+					if(!$i("arrastar_" + idtema)){
+						delete(i3GEO.tema.TEMPORIZADORESID[idtema]);
+						return;
+					}
+					i3GEO.Interface.atualizaTema("",idtema);
+				};
+
+				i3GEO.tema.TEMPORIZADORESID[idtema] = {
+					tempo: tempo,
+					idtemporizador: setInterval(t,
+						parseInt(tempo,10)*1000
+					)
+				};
 			} else {
 				try {
 					window.clearInterval(i3GEO.tema.TEMPORIZADORESID[idtema].idtemporizador);
@@ -434,6 +452,25 @@ i3GEO.tema =
 					"cortina",
 					"dependencias.php",
 					"i3GEOF.cortina.iniciaJanelaFlutuante()");
+			},
+			/**
+			 * Function: atalhoscamada
+			 * 
+			 * Abre a janela de dialogo que abre os atalhos de configura&ccedil;&atilde;o de um tema (utilizad na &aacute;rvore de camadas)
+			 * 
+			 * Parametros:
+			 * 
+			 * {string} - codigo do tema escolhido
+			 * 
+			 */
+			atalhoscamada : function(tema) {
+				i3GEO.mapa.ativaTema(tema);
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.tema.dialogo.atalhoscamada()",
+					"atalhoscamada",
+					"atalhoscamada",
+					"dependencias.php",
+					"i3GEOF.atalhoscamada.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: abreKml

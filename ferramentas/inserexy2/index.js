@@ -179,6 +179,9 @@ i3GEOF.inserexy = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if ($i("i3GEOF.inserexy")) {
+			return;
+		}
 		//cria a janela flutuante
 		cabecalho = function(){
 			i3GEOF.inserexy.ativaFoco();

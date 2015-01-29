@@ -105,6 +105,9 @@ i3GEOF.insereGrafico = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if ($i("i3GEOF.insereGrafico")) {
+			return;
+		}
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
 			i3GEOF.insereGrafico.ativaFoco();

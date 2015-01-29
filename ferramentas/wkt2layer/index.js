@@ -91,10 +91,13 @@ i3GEOF.wkt2layer =
 	iniciaJanelaFlutuante : function(wkt,texto) {
 		var minimiza, cabecalho, janela, divid, temp, titulo;
 
+		if ($i("i3GEOF.wkt2layer")) {
+			return;
+		}
 		cabecalho = function() {
 		};
 		minimiza = function() {
-			i3GEO.janela.minimiza("i3GEOFwkt2layer");
+			i3GEO.janela.minimiza("i3GEOF.wkt2layer");
 		};
 		// cria a janela flutuante
 		titulo = $trad("wkt2layer",i3GEOF.wkt2layer.dicionario);

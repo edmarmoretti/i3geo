@@ -94,6 +94,9 @@ i3GEOF.outputformat = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
+		if ($i("i3GEOF.outputformat")) {
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.outputformat");

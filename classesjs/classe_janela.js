@@ -64,6 +64,8 @@ YAHOO.janelaDoca.xp.manager = new YAHOO.widget.OverlayManager();
  * {YAHOO.widget.OverlayManager}
  */
 YAHOO.i3GEO.janela.managerAguarde = new YAHOO.widget.OverlayManager();
+
+//TODO criar janela que permita inserir um link e salva-la junto com o mapa
 i3GEO.janela =
 	{
 		/**
@@ -275,13 +277,13 @@ i3GEO.janela =
 			if (!icone) {
 				icone = "";
 			}
+			var i, wlargurA, ins, novoel, wdocaiframe, temp, fix, underlay, ifr, janela;
 			if ($i(id)) {
 				janela = YAHOO.i3GEO.janela.manager.find(id);
 				janela.show();
 				janela.bringToTop();
 				return;
 			}
-			var i, wlargurA, ins, novoel, wdocaiframe, temp, fix, underlay, ifr, janela;
 			if (navm && !chro) {
 				this.TRANSICAOSUAVE = false;
 			}

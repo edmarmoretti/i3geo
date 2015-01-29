@@ -237,6 +237,9 @@ i3GEOF.proplabel = {
 	*/
 	iniciaJanelaFlutuante: function(conector){
 		var minimiza,cabecalho,janela,divid,titulo;
+		if ($i("i3GEOF.proplabel")) {
+			return;
+		}
 		//cria a janela flutuante
 		cabecalho = function(){
 			i3GEOF.proplabel.ativaFoco();

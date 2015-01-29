@@ -107,6 +107,9 @@ i3GEOF.analisaGeometrias = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if($i("i3GEOF.analisaGeometrias")){
+			return;
+		}
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		cabecalho = function(){
 			i3GEOF.analisaGeometrias.ativaFoco();

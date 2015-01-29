@@ -943,7 +943,9 @@ function selConexaoBanco(eleValue){
 					};
 					for(i=0;i<n;i++){
 						temp = "password=****** user="+dados[i].usuario+" dbname="+dados[i].bancodedados+" host="+dados[i].host+" port="+dados[i].porta;
-						textos.push(dados[i].bancodedados);
+						
+
+						textos.push("<b>"+dados[i].codigo_estat_conexao+"</b> (d: "+dados[i].bancodedados+" h: "+dados[i].host+" u: "+dados[i].usuario+")");
 						valores.push(temp);
 					}
 					core_menuCheckBox(valores,textos,selecionados,$i(eleValue),"","","sim",funcaoFinal);

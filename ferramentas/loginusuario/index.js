@@ -130,6 +130,9 @@ i3GEOF.loginusuario = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
+		if ($i("i3GEOF.loginusuario")) {
+			return;
+		}
 		//cria a janela flutuante
 		cabecalho = function(){};
 		minimiza = function(){

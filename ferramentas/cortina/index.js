@@ -121,6 +121,9 @@ i3GEOF.cortina = {
 	my {numero} - (opcional) posi&ccedil;&atilde;o em y para onde a janela ser&aacute; movida ap&oacute;s ser criada
 	*/
 	iniciaJanelaFlutuante: function(tema,mx,my){
+		if($i("i3GEOF.cortina")){
+			return;
+		}
 		if(tema == undefined)
 		{tema = i3GEO.temaAtivo;}
 		else

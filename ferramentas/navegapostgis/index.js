@@ -114,11 +114,11 @@ i3GEOF.navegapostgis = {
 			);
 		}
 		var conexao = function(retorno){
-				var ins = "<select onchange='i3GEOF.navegapostgis.montaArvore(this.value)'><option value='' >---</option>",
+				var ins = "<select style='width:200px;' onchange='i3GEOF.navegapostgis.montaArvore(this.value)'><option value='' >---</option>",
 					n = retorno.length,
 					i = 0;
 				for (i=0;i<n; i++){
-					ins += "<option value='"+retorno[i].codigo_estat_conexao+"' >"+retorno[i].bancodedados+"</option>";
+					ins += "<option value='"+retorno[i].codigo_estat_conexao+"' >Id: "+retorno[i].codigo_estat_conexao+" (d: "+retorno[i].bancodedados+" h: "+retorno[i].host+" u: "+retorno[i].usuario+")</option>";
 				}
 				ins += "</select>";
 				$i("i3GEOFnavegapostgisConexao").innerHTML = ins;
@@ -179,6 +179,9 @@ i3GEOF.navegapostgis = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo,cabecalho,minimiza;
+		if ($i("i3GEOF.navegapostgis")) {
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.navegapostgis");

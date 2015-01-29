@@ -148,6 +148,9 @@ i3GEOF.atalhosedicao =
 	iniciaJanelaFlutuante : function() {
 		var minimiza, cabecalho, janela, divid, temp, titulo;
 
+		if($i("i3GEOF.atalhosedicao")){
+			return;
+		}
 		cabecalho = function() {
 		};
 		minimiza = function() {

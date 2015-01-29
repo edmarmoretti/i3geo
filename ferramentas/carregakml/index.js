@@ -113,6 +113,9 @@ i3GEOF.carregakml = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
+		if($i("i3GEOF.carregakml")){
+			return;
+		}
 		//cria a janela flutuante
 		cabecalho = function(){
 		};

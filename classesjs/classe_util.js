@@ -1219,6 +1219,7 @@ i3GEO.util =
 		 * {boolean} - mostra ou nao a janela de aguarde
 		 */
 		scriptTag : function(js, ini, id, aguarde) {
+			/*
 			if (!aguarde) {
 				aguarde = false;
 			}
@@ -1226,12 +1227,14 @@ i3GEO.util =
 			if (i3GEO.janela) {
 				tipojanela = i3GEO.janela.ESTILOAGUARDE;
 			}
-
+			*/
 			if (!$i(id) || id === "") {
+				/*
 				if (i3GEO.janela && aguarde === true) {
 					i3GEO.janela.ESTILOAGUARDE = "reduzida";
 					i3GEO.janela.abreAguarde(id + "aguarde", "Carregando JS");
 				}
+				*/
 				head = document.getElementsByTagName('head')[0];
 				script = document.createElement('script');
 				script.type = 'text/javascript';
@@ -1239,9 +1242,11 @@ i3GEO.util =
 					if (navm) {
 						script.onreadystatechange = function() {
 							if (this.readyState === 'loaded' || this.readyState === 'complete') {
+								/*
 								if (i3GEO.janela) {
 									i3GEO.janela.fechaAguarde(id + "aguarde");
 								}
+								*/
 								if (YAHOO.lang.isFunction(ini)) {
 									ini.call();
 								} else {
@@ -1251,9 +1256,11 @@ i3GEO.util =
 						};
 					} else {
 						script.onload = function() {
+							/*
 							if (i3GEO.janela) {
 								i3GEO.janela.fechaAguarde(id + "aguarde");
 							}
+							*/
 							if (YAHOO.lang.isFunction(ini)) {
 								ini.call();
 							} else {
@@ -1261,9 +1268,11 @@ i3GEO.util =
 							}
 						};
 					}
+					/*
 					if (i3GEO.janela) {
 						i3GEO.janela.ESTILOAGUARDE = tipojanela;
 					}
+					*/
 				}
 				script.src = js;
 				if (id !== "") {
@@ -2266,8 +2275,8 @@ i3GEO.util =
 			}
 			var js = i3GEO.configura.locaplic + "/ferramentas/" + dir + "/" + nomejs;
 			if (!$i("i3GEOF." + nome + "_script")) {
-				i3GEO.janela.ESTILOAGUARDE = "reduzida";
-				i3GEO.janela.abreAguarde("i3GEOF." + nome + "_script" + "aguarde", "Carregando JS");
+				//i3GEO.janela.ESTILOAGUARDE = "reduzida";
+				//i3GEO.janela.abreAguarde("i3GEOF." + nome + "_script" + "aguarde", "Carregando JS");
 				i3GEO.util.scriptTag(js, nomefuncao, "i3GEOF." + nome + "_script");
 				/**
 				 * i3GEO.util.multiStep( [i3GEO.janela.abreAguarde,i3GEO.util.scriptTag], [["i3GEOF."+nome+"_script"+"aguarde","Carregando

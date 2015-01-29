@@ -104,6 +104,9 @@ i3GEOF.opcoesTempo = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo;
+		if ($i("i3GEOF.opcoesTempo")) {
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.opcoesTempo");

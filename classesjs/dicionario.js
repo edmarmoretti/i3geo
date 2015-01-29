@@ -643,20 +643,6 @@ g_traducao = {
 	es:"Opacidad",
 	it:"Opacit"
 }],
-"t21a":[
-{
-	pt:"Muda o nome atual do tema. Utilize para melhorar a legenda do mapa.",
-	en:"Rename layer. Use it for make a better legend of the map",
-	es:"Renombrar tema. Utilice para mejorar la leyenda del mapa.",
-	it:"Cambia il nome del tema corrente. Utilizzare per migliorare la legenda della mappa."
-}],
-"t21":[
-{
-	pt:"Novo nome:",
-	en:"New name",
-	es:"Nuevo nombre",
-	it:"Nuovo nome"
-}],
 "t22":[
 {
 	pt:"Localize elementos no tema com base em seus atributos descritivos.",
@@ -680,7 +666,7 @@ g_traducao = {
 }],
 "t25":[
 {
-	pt:"Texto (nomes ou valores)",
+	pt:"Etiquetas baseadas em atributos",
 	en:"Label...",
 	es:"Etiquetas..",
 	it:"Testo..."
@@ -845,13 +831,6 @@ g_traducao = {
 	en:"Most popular",
 	es:"Mas populares",
 	it:"Mais populares"
-}],
-"t47": [
-{
-	pt: "Intervalo em segundos ap&oacute;s o qual a camada ser&aacute; atualizada. Para ignorar, deixe em branco",
-	en:"Interval in seconds after which the layer will be updated. To ignore, leave blank",
-	es:"Intervalo en segundos despues del cual la capa ser&aacute; actualizada. Para ignorar, deje en blanco.",
-	it:"Intervalo em segundos ap&oacute;s o qual a camada ser&aacute; atualizada. Para ignorar, deixe em branco"
 }],
 "t48": [
 {
@@ -2233,13 +2212,6 @@ g_traducao = {
 "x99":[
 {
 	pt:"C&aacute;lculo n&atilde;o pode ser realizado. Falta carregar a API de geometria do GM",
-	en:"",
-	es:"",
-	it:""
-}],
-"x100":[
-{
-	pt:"Cria uma c&oacute;pia da camada",
 	en:"",
 	es:"",
 	it:""

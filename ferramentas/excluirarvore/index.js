@@ -138,6 +138,9 @@ i3GEOF.excluirarvore = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo,cabecalho,minimiza;
+		if($i("i3GEOF.excluirarvore")){
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.excluirarvore");

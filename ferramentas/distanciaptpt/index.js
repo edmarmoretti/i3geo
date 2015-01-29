@@ -96,6 +96,9 @@ i3GEOF.distanciaptpt = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if($i("i3GEOF.distanciaptpt")){
+			return;
+		}
 		//cria a janela flutuante
 		titulo = $trad("u11a")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=17' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};

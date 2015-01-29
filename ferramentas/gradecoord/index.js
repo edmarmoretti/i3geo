@@ -69,6 +69,9 @@ i3GEOF.gradeCoord = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,titulo;
+		if($i("i3GEOF.gradeCoord")){
+			return;
+		}
 		//cria a janela flutuante
 		titulo = $trad("ge6")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=7' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(

@@ -165,6 +165,9 @@ i3GEOF.inseretxt = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if ($i("i3GEOF.inseretxt")) {
+			return;
+		}
 		//cria a janela flutuante
 		cabecalho = function(){
 			i3GEOF.inseretxt.ativaFoco();

@@ -141,6 +141,9 @@ i3GEOF.download = {
 	*/
 	iniciaJanelaFlutuante: function(tema){
 		var janela,divid,titulo;
+		if($i("i3GEOF.download")){
+			return;
+		}
 		if(arguments.length == 0)
 		{tema = i3GEO.temaAtivo;}
 		cabecalho = function(){};

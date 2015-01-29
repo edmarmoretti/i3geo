@@ -100,6 +100,9 @@ i3GEOF.markercluster = {
 	 */
 	iniciaJanelaFlutuante : function() {
 		var janela, divid, temp, titulo;
+		if ($i("i3GEOF.markercluster")) {
+			return;
+		}
 		// cria a janela flutuante
 		titulo = $trad("x104")
 				+ " <a class=ajuda_usuario target=_blank href='"

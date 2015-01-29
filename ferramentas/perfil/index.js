@@ -117,6 +117,9 @@ i3GEOF.perfil = {
 	*/
 	iniciaJanelaFlutuante: function(pontos){
 		var minimiza,cabecalho,janela,divid,titulo;
+		if ($i("i3GEOF.perfil")) {
+			return;
+		}
 		if(pontos){
 			i3GEOF.perfil.pontos = pontos;
 		}

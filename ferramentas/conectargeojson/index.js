@@ -117,6 +117,9 @@ i3GEOF.conectargeojson = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,titulo;
+		if($i("i3GEOF.conectargeojson")){
+			return;
+		}
 		//cria a janela flutuante
 		cabecalho = function(){
 		};

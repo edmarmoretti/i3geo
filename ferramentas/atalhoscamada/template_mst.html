@@ -1,0 +1,105 @@
+<style>
+.yui-button#i3GEOFatalhoscamadaSalva button {
+	background: url(../imagens/oxygen/16x16/document-save.png) 5% 50%	no-repeat;
+}
+.yui-button#i3GEOFatalhoscamadaEditaLegenda button {
+	background: url(../imagens/oxygen/16x16/format-list-unordered.png) 5% 50% no-repeat;
+}
+.yui-button#i3GEOFatalhoscamadaTabela button {
+	background: url(../imagens/oxygen/16x16/view-form-table.png) 5% 50%	no-repeat;
+}
+.yui-button#i3GEOFatalhoscamadaTopo button {
+	background: url(../imagens/oxygen/16x16/draw-text.png) 5% 50% no-repeat;
+}
+.yui-button#i3GEOFatalhoscamadaEtiquetas button {
+	background: url(../imagens/oxygen/16x16/feed-subscribe.png) 5% 50% no-repeat;
+}
+.yui-button#i3GEOFatalhoscamadaFiltro button {
+	background: url(../imagens/oxygen/16x16/view-filter.png) 5% 50%	no-repeat;
+}
+.yui-button#i3GEOFatalhoscamadaProcurar button {
+	background: url(../imagens/oxygen/16x16/edit-find.png) 5% 50%	no-repeat;
+}
+.yui-button#i3GEOFatalhoscamadaGrafico button {
+	background: url("../imagens/gisicons/layer-vector-chart-add.png") 5% 50% no-repeat;
+}
+.yui-button#i3GEOFatalhoscamadaTme button {
+	background: url("../imagens/3d.png") 5% 50% no-repeat;
+}
+</style>
+<div style='margin-left: 5px'>
+	<div id='i3GEOFatalhoscamadaCompartilhar'></div>
+	<br>
+	<label class='paragrafo'>{{{opacidade}}}&nbsp;
+		<a class=ajuda_usuario target=_blank href='{{{locaplic}}}/ajuda_usuario.php?idcategoria=5&idajuda=42' >&nbsp;&nbsp;&nbsp;</a>
+	</label>
+	<div class='i3geoForm i3geoFormIconeEdita' >
+		<form onsubmit='i3GEOF.atalhoscamada.mudaOpacidade(this,{{{idjanelaA}}});return false;'>
+			<input type='text' value='' />
+		</form>
+	</div>
+	<br>
+	<label class='paragrafo'>{{{temporizador}}}&nbsp;
+		<a class=ajuda_usuario target=_blank href='{{{locaplic}}}/ajuda_usuario.php?idcategoria=5&idajuda=101' >&nbsp;&nbsp;&nbsp;</a>
+	</label>
+	<div class='i3geoForm i3geoFormIconeEdita' >
+		<form onsubmit='i3GEOF.atalhoscamada.temporizador(this,{{{idjanelaA}}});return false;'>
+			<input type='text' value='' />
+		</form>
+	</div>
+	<br>
+	<label class='paragrafo'>{{{mudanome}}}&nbsp;
+		<a class=ajuda_usuario target=_blank href='{{{locaplic}}}/ajuda_usuario.php?idcategoria=5&idajuda=43' >&nbsp;&nbsp;&nbsp;</a>
+	</label>
+	<div class='i3geoForm i3geoFormIconeEdita' >
+		<form onsubmit='i3GEOF.atalhoscamada.mudaNome(this,{{{idjanelaA}}});return false;'>
+			<input type='text' value='' />
+		</form>
+	</div>
+	<br>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaProcurar' type='button' value='{{{procurar}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaCopia' type='button' value='{{{copia}}}' />
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaTopo' type='button' value='{{{topo}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaEtiquetas' type='button' value='{{{etiquetas}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaFiltro' type='button' value='{{{filtro}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaTabela' type='button' value='{{{tabela}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaGrafico' type='button' value='{{{grafico}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaEditaLegenda' type='button' value='{{{editaLegenda}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaDestaca' type='button' value='{{{destaca}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaComentar' type='button' value='{{{comentar}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaWms' type='button' value='{{{wms}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaTme' type='button' value='{{{tme}}}' style='display:none;'/>
+	</p>	
+	<hr>
+	<p>Login:</p>
+	<br>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaSql' type='button' value='{{{sql}}}' style='display:none;'/>
+	</p>
+	<p class='paragrafo'>
+		<input id='{{{idjanela}}}i3GEOFatalhoscamadaSalva' type='button' value='{{{salvamapfile}}}' style='display:none;'/>
+	</p>
+</div>

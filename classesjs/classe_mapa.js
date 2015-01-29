@@ -937,6 +937,9 @@ i3GEO.mapa =
 			listaDeMapasBanco : function() {
 				if (i3GEO.guias.CONFIGURA["mapas"]) {
 					var janela, divid;
+					if($i("i3GEOFsalvaMapaLista")){
+						return;
+					}
 					janela = i3GEO.janela.cria(
 						"200px",
 						"450px",

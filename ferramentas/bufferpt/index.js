@@ -122,6 +122,9 @@ i3GEOF.bufferpt = {
 	*/
 	iniciaJanelaFlutuante: function(x,y){
 		var janela,divid,titulo,cabecalho,minimiza;
+		if($i("i3GEOF.bufferpt")){
+			return;
+		}
 		if(x){
 			i3GEOF.bufferpt.x = x;
 		}

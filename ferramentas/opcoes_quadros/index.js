@@ -102,6 +102,9 @@ i3GEOF.opcoesQuadros = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var janela,divid,titulo;
+		if ($i("i3GEOF.opcoesQuadros")) {
+			return;
+		}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.opcoesQuadros");

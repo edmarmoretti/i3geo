@@ -106,6 +106,9 @@ i3GEOF.confluence = {
 	*/
 	iniciaJanelaFlutuante: function(){
 		var minimiza,cabecalho,janela,divid,temp,titulo;
+		if($i("i3GEOF.confluence")){
+			return;
+		}
 		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 		i3GEOF.confluence.MARCA = false;
 		cabecalho = function(){
