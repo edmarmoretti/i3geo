@@ -2028,13 +2028,16 @@ background-position: center;
 cursor: pointer;
 }
 .iconeGuiaMovel {
-padding: 5px 0px;
+padding: 2px;
 border-radius: 5px 5px 5px 5px;
 background-image: none;
 margin-left: 8px;
 border: solid 1px gray;
 box-shadow: 0px 1px 3px lightgray;
 cursor: pointer;
+}
+#i3GEOguiaMovel .iconeGuiaMovel{
+padding: 3px 0px;
 }
 .iconeMini {
 border-radius: 5px 5px 5px 5px;
