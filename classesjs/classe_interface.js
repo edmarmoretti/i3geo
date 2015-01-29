@@ -1961,11 +1961,12 @@ i3GEO.Interface = {
 					// formul&aacute;rio de coordenadas
 					//
 					xy = i3GEO.navega.centroDoMapa();
-					i3GEO.coordenadas.mostraCoordenadas(
-						false,
-						"",
+					xy = i3GEO.calculo.dd2dms(xy[0],xy[1]);
+					i3GEO.coordenadas.atualizaGeo(
 						xy[0],
-						xy[1]);
+						xy[1],
+						"localizarxygeoProj");
+
 					i3GEO.eventos.cliquePerm.status = false;
 					// guarda a extensao geografica atual
 					i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
@@ -2810,11 +2811,11 @@ i3GEO.Interface = {
 					// formul&aacute;rio de coordenadas
 					//
 					xy = i3GEO.navega.centroDoMapa();
-					i3GEO.coordenadas.mostraCoordenadas(
-						false,
-						"",
+					xy = i3GEO.calculo.dd2dms(xy[0],xy[1]);
+					i3GEO.coordenadas.atualizaGeo(
 						xy[0],
-						xy[1]);
+						xy[1],
+						"localizarxygeoProj");
 					i3GEO.eventos.cliquePerm.status = false;
 					i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
 				});
@@ -2840,15 +2841,14 @@ i3GEO.Interface = {
 					// permite que a coordenada do centro mapa seja mostrada
 					// no formul&aacute;rio de coordenadas
 					//
+					/*
 					xy = i3GEO.navega.centroDoMapa();
 					i3GEO.coordenadas.mostraCoordenadas(
 						false,
 						"",
 						xy[0],
 						xy[1]);
-					// if($i("i3GEOprogressoDiv")){
-					// $i("i3GEOprogressoDiv").style.display = "block";
-					// }
+					*/
 				});
 			google.maps.event.addListener(
 				i3GeoMap,
