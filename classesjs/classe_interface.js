@@ -2464,6 +2464,7 @@ i3GEO.Interface = {
 				i3GeoMap
 			);
 			p.baloes.push(b);
+			//TODO incluir icone para abrir identifica completo
 			//FIXME resolver icone do cadeado
 			/*
 			google.maps.event.addListenerOnce(b,'domready',function(){
