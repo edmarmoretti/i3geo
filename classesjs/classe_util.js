@@ -1439,8 +1439,10 @@ i3GEO.util =
 		 * {string} - estilo (css) que sera aplicado ao combo
 		 *
 		 * {boolean} - (opcional) indica se o combo sera montado com o estilo YUI (menu)
+		 * 
+		 * {boolean} - (opcional) inclui um option vazio
 		 */
-		comboTemas : function(id, funcao, onde, nome, multiplo, tipoCombo, estilo, yui) {
+		comboTemas : function(id, funcao, onde, nome, multiplo, tipoCombo, estilo, yui, incluiVazio) {
 			if (onde && onde !== "") {
 				i3GEO.util.defineValor(onde, "innerHTML", "<span style=color:red;font-size:10px; >buscando temas...</span>");
 			}
@@ -1455,6 +1457,9 @@ i3GEO.util =
 			}
 			if (!yui) {
 				yui = false;
+			}
+			if (!incluiVazio) {
+				incluiVazio = false;
 			}
 			var monta, temp, temp1, temp2;
 			monta =
@@ -1478,7 +1483,7 @@ i3GEO.util =
 							} else {
 								comboTemas += "<select style='" + estilo + "' id='" + id + "' name='" + nome + "'>";
 							}
-							if (yui === false) {
+							if (yui === false || incluiVazio === true) {
 								comboTemas += "<option value=''>----</option>";
 							}
 							for (i = 0; i < n; i++) {

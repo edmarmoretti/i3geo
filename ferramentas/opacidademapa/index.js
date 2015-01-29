@@ -143,7 +143,7 @@ i3GEOF.opacidademapa = {
 		};
 		var janela,divid,titulo;
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeOpacidadeMapa'></span><div  id='i3GEOFopacidademapaComboCabeca' class='comboTemasCabecalho'>------</div>&nbsp;&nbsp;&nbsp;"+$trad("t20")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeOpacidadeMapa'></span><div  id='i3GEOFopacidademapaComboCabeca' class='comboTemasCabecalho'>------</div>&nbsp;&nbsp;&nbsp; <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"230px",
 			"40px",
@@ -180,7 +180,7 @@ i3GEOF.opacidademapa = {
 		i3GEOF.opacidademapa.slider = YAHOO.widget.Slider.getHorizSlider($i("slider-bg"),$i("slider-thumb"), 0, 200, 0);
 		i3GEOF.opacidademapa.slider.setValue(200,false);
 		i3GEOF.opacidademapa.slider.subscribe("change", function(offsetFromStart) {
-			i3GEO.Interface.aplicaOpacidade(offsetFromStart / 200,$i("i3GEOFopacidademapaComboCabecaSel").value);
+			i3GEO.Interface.aplicaOpacidade(offsetFromStart / 200,i3GEO.temaAtivo);
 		});
 		if(navm){
 			$i("slider-bg").style.left = "-100px";
