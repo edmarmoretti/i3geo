@@ -802,6 +802,7 @@ var i3GEO = {
 		menos = 0;
 		//se for mobile
 		if(i3GEO.Interface.ALTTABLET === "" && (YAHOO.env.ua.air + YAHOO.env.ua.android + YAHOO.env.ua.ios) != 0){
+			alert("Oi")
 			menos = 20;
 		}
 		temp = $i("contemFerramentas");
