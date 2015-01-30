@@ -533,6 +533,11 @@ i3GEO.eventos =
 					i3GEO.eventos.mouseupMapa(exy);
 				}
 			};
+			docMapa.ontouchend = function(exy) {
+				if (!i3GEO.eventos.botaoDireita(exy)) {
+					i3GEO.eventos.mouseupMapa(exy);
+				}
+			};
 		},
 		/**
 		 * Retorna true se o bot&atilde;o da direita foi utilizado no evento do mouse
