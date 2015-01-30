@@ -803,6 +803,7 @@ var i3GEO = {
 		//se for mobile
 		if(i3GEO.Interface.ALTTABLET === "" && DetectaMobile("DetectMobileLong") === true){
 			menos = 20;
+			i3GEO.configura.autotamanho = true;
 		}
 		temp = $i("contemFerramentas");
 		if (temp
@@ -881,6 +882,8 @@ var i3GEO = {
 			temp.style.width = w
 				+ "px";
 		}
+		i3GEO.parametros.w = w;
+		i3GEO.parametros.h = h;
 		return [
 			w,
 			h
