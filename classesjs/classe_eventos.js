@@ -534,7 +534,6 @@ i3GEO.eventos =
 				}
 			};
 			docMapa.ontouchend = function(exy) {
-				alert("oi")
 				if (!i3GEO.eventos.botaoDireita(exy)) {
 					i3GEO.eventos.mouseupMapa(exy);
 				}
@@ -650,6 +649,7 @@ i3GEO.eventos =
 			 * Executa os eventos definidos em MOUSECLIQUEPERM
 			 */
 			executa : function(evt) {
+				alert("Ois")
 				if (i3GEO.eventos.cliquePerm.ativo === true && i3GEO.eventos.cliquePerm.status === true) {
 					i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSECLIQUEPERM);
 				}
