@@ -534,6 +534,7 @@ i3GEO.eventos =
 				}
 			};
 			docMapa.ontouchend = function(exy) {
+				alert("oi")
 				if (!i3GEO.eventos.botaoDireita(exy)) {
 					i3GEO.eventos.mouseupMapa(exy);
 				}
