@@ -1892,7 +1892,13 @@ i3GEO.Interface = {
 			var calcCoord, modoAtual = "";
 			calcCoord = function(e) {
 				var point, p, lonlat, d, pos, projWGS84, proj900913;
-				p = e.xy;
+				if(e.xy){
+					p = e.xy;
+				}
+				//se touch
+				if(e.changedTouches){
+					p = new OpenLayers.Pixel(e.changedTouches[0].pageX,e.changedTouches[0].pageY);
+				}
 				lonlat = i3geoOL.getLonLatFromPixel(p);
 				if (!lonlat) {
 					return;
@@ -1974,6 +1980,15 @@ i3GEO.Interface = {
 				});
 			i3geoOL.events.register(
 				"mousemove",
+				i3geoOL,
+				function(e) {
+					if (modoAtual === "move") {
+						return;
+					}
+					calcCoord(e);
+				});
+			i3geoOL.events.register(
+				"touchend",
 				i3geoOL,
 				function(e) {
 					if (modoAtual === "move") {
