@@ -1891,13 +1891,14 @@ i3GEO.Interface = {
 			// movimentando o mapa
 			var calcCoord, modoAtual = "";
 			calcCoord = function(e) {
-				var point, p, lonlat, d, pos, projWGS84, proj900913;
+				var point, p, lonlat, d, pos = "", projWGS84, proj900913;
 				if(e.xy){
 					p = e.xy;
 				}
 				//se touch
 				if(e.changedTouches){
-					p = new OpenLayers.Pixel(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
+					pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+					p = new OpenLayers.Pixel(e.changedTouches[0].clientX + pos[0],e.changedTouches[0].clientY + pos[1]);
 				}
 				lonlat = i3geoOL.getLonLatFromPixel(p);
 				if (!lonlat) {
@@ -1924,7 +1925,9 @@ i3GEO.Interface = {
 					objposicaocursor.dmsy = d[1];
 					objposicaocursor.imgx = p.x;
 					objposicaocursor.imgy = p.y;
-					pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+					if(pos != ""){
+						pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+					}
 					objposicaocursor.telax = p.x
 						+ pos[0];
 					objposicaocursor.telay = p.y
