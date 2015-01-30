@@ -1486,6 +1486,12 @@ i3GEO.mapa =
 					&& i3GEO.eventos.cliquePerm.ativo === false) {
 					return;
 				}
+				if(i3GEO.eventos.cliquePerm.status === false){
+					return;
+				}
+				else{
+					i3GEO.eventos.cliquePerm.status = false;
+				}
 				// na interface googleearth verifica se existe mais eventos no
 				// mouseclick
 				if (i3GEO.Interface.ATUAL === "googleearth"
@@ -1528,6 +1534,7 @@ i3GEO.mapa =
 				}
 				retorna = function(retorno) {
 					var classeCor, temp, n, i, mostra, res, temas, ntemas, titulo, tips, j, ntips, ins, r, ds, nds, s, configura = i3GEO.configura, tipotip = configura.tipotip;
+					i3GEO.eventos.cliquePerm.status = true;
 					i = $i("i3geo_rosa");
 					if (i) {
 						i.style.display = "none";
@@ -1555,6 +1562,7 @@ i3GEO.mapa =
 							ntips = tips.length;
 							ins = "";
 							ds = temas[j].resultado.dados;
+							//TODO remover eval
 							if (ds !== " "
 								&& ds[0]
 								&& ds[0] != " ") {
