@@ -1899,6 +1899,7 @@ i3GEO.Interface = {
 				if(e.changedTouches){
 					pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 					p = new OpenLayers.Pixel(e.changedTouches[0].clientX - pos[0],e.changedTouches[0].clientY - pos[1]);
+					e = null;
 				}
 				lonlat = i3geoOL.getLonLatFromPixel(p);
 				if (!lonlat) {
