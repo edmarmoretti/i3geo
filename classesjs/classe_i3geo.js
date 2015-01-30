@@ -801,9 +801,8 @@ var i3GEO = {
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
 		//se for mobile
-		alert(YAHOO.env.ua.android)
-		if(i3GEO.Interface.ALTTABLET === "" && (YAHOO.env.ua.air + YAHOO.env.ua.android + YAHOO.env.ua.ios) != 0){
-			alert("Oi")
+		alert(YAHOO.env.ua.mobile)
+		if(i3GEO.Interface.ALTTABLET === "" && (YAHOO.env.ua.mobile + YAHOO.env.ua.air + YAHOO.env.ua.android + YAHOO.env.ua.ios) != 0){
 			menos = 20;
 		}
 		temp = $i("contemFerramentas");
