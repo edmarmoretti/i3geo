@@ -274,6 +274,7 @@ i3GEO.eventos =
 			// console.error(exy.target.id);
 			// console.error(exy.target.style.zIndex);
 			// tenta evitar abrir o balao em objetos do openlayers ou googlemaps
+			alert(exy)
 			if (!exy) {
 				i3GEO.eventos.executaEventos(this.MOUSEUP);
 			} else {
@@ -534,9 +535,13 @@ i3GEO.eventos =
 				}
 			};
 			docMapa.ontouchend = function(exy) {
-				if (!i3GEO.eventos.botaoDireita(exy)) {
+				if (i3GEO.eventos.cliquePerm.status === true) {
 					i3GEO.eventos.mouseupMapa(exy);
 				}
+				i3GEO.eventos.cliquePerm.status = true;
+			};
+			docMapa.ontouchmove = function(exy) {
+				i3GEO.eventos.cliquePerm.status = false;
 			};
 		},
 		/**
@@ -649,7 +654,6 @@ i3GEO.eventos =
 			 * Executa os eventos definidos em MOUSECLIQUEPERM
 			 */
 			executa : function(evt) {
-				alert("Ois")
 				if (i3GEO.eventos.cliquePerm.ativo === true && i3GEO.eventos.cliquePerm.status === true) {
 					i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSECLIQUEPERM);
 				}
