@@ -1897,7 +1897,7 @@ i3GEO.Interface = {
 				}
 				//se touch
 				if(e.changedTouches){
-					p = new OpenLayers.Pixel(e.changedTouches[0].pageX,e.changedTouches[0].pageY);
+					p = new OpenLayers.Pixel(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
 				}
 				lonlat = i3geoOL.getLonLatFromPixel(p);
 				if (!lonlat) {
