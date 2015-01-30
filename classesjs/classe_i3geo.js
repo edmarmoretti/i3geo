@@ -800,6 +800,10 @@ var i3GEO = {
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
+		//se for mobile
+		if(i3GEO.Interface.ALTTABLET === "" && (YAHOO.env.ua.air + YAHOO.env.ua.android + YAHOO.env.ua.ios) != 0){
+			menos = 20;
+		}
 		temp = $i("contemFerramentas");
 		if (temp
 			&& temp.style
