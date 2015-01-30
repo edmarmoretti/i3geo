@@ -274,7 +274,6 @@ i3GEO.eventos =
 			// console.error(exy.target.id);
 			// console.error(exy.target.style.zIndex);
 			// tenta evitar abrir o balao em objetos do openlayers ou googlemaps
-			alert(exy)
 			if (!exy) {
 				i3GEO.eventos.executaEventos(this.MOUSEUP);
 			} else {
