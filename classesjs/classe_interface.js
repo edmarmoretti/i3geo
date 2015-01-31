@@ -1908,7 +1908,6 @@ i3GEO.Interface = {
 					e = null;
 				}
 				lonlat = i3geoOL.getLonLatFromPixel(p);
-				alert("calcCoord "+lonlat.lon)
 				if (!lonlat) {
 					return;
 				}
