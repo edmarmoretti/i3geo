@@ -1535,6 +1535,7 @@ i3GEO.mapa =
 					i3GEO.Interface.googleearth.aguarde.visibility = "visible";
 				}
 				retorna = function(retorno) {
+					//TODO remover
 					alert("ok")
 					var classeCor, temp, n, i, mostra, res, temas, ntemas, titulo, tips, j, ntips, ins, r, ds, nds, s, configura = i3GEO.configura, tipotip = configura.tipotip;
 					i3GEO.eventos.cliquePerm.status = true;
@@ -1664,6 +1665,7 @@ i3GEO.mapa =
 							configura.locaplic);
 					}
 				};
+				//TODO remover
 				alert(objposicaocursor.ddx+" "+objposicaocursor.ddy)
 				i3GEO.php.identifica3(
 					retorna,
