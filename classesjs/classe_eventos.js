@@ -527,7 +527,6 @@ i3GEO.eventos =
 				i3GEO.eventos.mousecliqueMapa(exy);
 			};
 			docMapa.onmouseup = function(exy) {
-				alert("mouseup")
 				i3GEO.eventos.mouseupMapa(exy);
 			};
 			docMapa.ontouchend = function(exy) {
