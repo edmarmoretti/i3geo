@@ -1498,7 +1498,8 @@ i3GEO.mapa =
 					&& i3GEO.eventos.MOUSECLIQUE.length > 1) {
 					return;
 				}
-				var ntemas, etiquetas, j, retorna, targ = "";
+				var ntemas, etiquetas, j, retorna, targ = "",
+					x = objposicaocursor.ddx, y = objposicaocursor.ddy;
 
 				if (!e) {
 					e = window.event;
@@ -1638,8 +1639,8 @@ i3GEO.mapa =
 							if (tipotip === "balao") {
 								i3GEO.Interface[i3GEO.Interface.ATUAL].balao(
 									res,
-									objposicaocursor.ddx,
-									objposicaocursor.ddy);
+									x,
+									y);
 							} else {
 								// tipotip pode ser um elemento DOM
 								n = $i(tipotip);
@@ -1664,11 +1665,11 @@ i3GEO.mapa =
 							configura.locaplic);
 					}
 				};
-				alert("identifica "+objposicaocursor.ddx+" "+objposicaocursor.ddy)
+				//alert("identifica "+objposicaocursor.ddx+" "+objposicaocursor.ddy)
 				i3GEO.php.identifica3(
 					retorna,
-					objposicaocursor.ddx,
-					objposicaocursor.ddy,
+					x,
+					y,
 					i3GEO.mapa.RESOLUCAOTIP,
 					"tip",
 					i3GEO.configura.locaplic,
