@@ -1664,7 +1664,7 @@ i3GEO.mapa =
 							configura.locaplic);
 					}
 				};
-				//alert(objposicaocursor.ddx+" "+objposicaocursor.ddy)
+				alert("identifica "+objposicaocursor.ddx+" "+objposicaocursor.ddy)
 				i3GEO.php.identifica3(
 					retorna,
 					objposicaocursor.ddx,
