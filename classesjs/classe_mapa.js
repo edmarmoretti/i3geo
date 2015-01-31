@@ -1501,27 +1501,6 @@ i3GEO.mapa =
 				var ntemas, etiquetas, j, retorna, targ = "",
 					x = objposicaocursor.ddx, y = objposicaocursor.ddy;
 
-				if (!e) {
-					e = window.event;
-				}
-				/*
-				try {
-					if (e.target) {
-						targ = e.target;
-					} else {
-						if (e.srcElement) {
-							targ = e.srcElement;
-						}
-					}
-					if (targ.parentNode) {
-						container = targ.parentNode.id;
-					}
-
-				} catch (erro) {
-					targ = null;
-				}
-				*/
-
 				ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
 				etiquetas = false;
 				for (j = 0; j < ntemas; j += 1) {

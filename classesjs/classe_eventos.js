@@ -529,16 +529,6 @@ i3GEO.eventos =
 			docMapa.onmouseup = function(exy) {
 				i3GEO.eventos.mouseupMapa(exy);
 			};
-			docMapa.ontouchend = function(exy) {
-				if(i3GEO.Interface.ATUAL === "googlemaps"){
-					if (i3GEO.eventos.cliquePerm.status === true) {
-						//exy = exy.latLng;
-						alert(exy)
-						i3GEO.eventos.mouseupMapa(exy);
-					}
-					i3GEO.eventos.cliquePerm.status = true;
-				}
-			};
 			docMapa.ontouchmove = function(exy) {
 				i3GEO.eventos.cliquePerm.status = false;
 			};
