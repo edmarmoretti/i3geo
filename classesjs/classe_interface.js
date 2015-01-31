@@ -2915,7 +2915,22 @@ i3GEO.Interface = {
 						telay : tela.y
 							+ pos[1]
 					};
-				});
+				}
+			);
+			/*
+			google.maps.event.addListener(
+				i3GeoMap,
+				"touchend",
+				function(e) {
+					e.preventDefault();
+					//calcCoord(e);
+					if (i3GEO.eventos.cliquePerm.status === true) {
+						i3GEO.eventos.mouseupMapa(e);
+					}
+					i3GEO.eventos.cliquePerm.status = true;
+				}
+			);
+			*/
 		},
 		retornaIndiceLayer : function(nomeLayer) {
 			var i = false;

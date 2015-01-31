@@ -538,7 +538,9 @@ i3GEO.eventos =
 			};
 			*/
 			docMapa.ontouchmove = function(exy) {
-				i3GEO.eventos.cliquePerm.status = false;
+				if(i3GEO.Interface.ATUAL === "openlayers"){
+					i3GEO.eventos.cliquePerm.status = false;
+				}
 			};
 		},
 		/**
