@@ -394,20 +394,19 @@ i3GEO.analise =
 							+ '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>'
 							+ '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo_movel" ></div>'
 							+ '<div style="text-align:left;font-size:10px" >'
-							+ '<span style="color:navy;cursor:pointer;text-align:left;" >' + '<table class="lista7" style="width:400px">' + '<tr>'
+							+ '<span style="color:navy;cursor:pointer;text-align:left;" >' + '<table class="lista7" style="width:250px">' + '<tr>'
 							+ '<td><input style="cursor:pointer" type="checkbox" id="pararraios" checked /></td>' + '<td>Raios</td>'
 							+ '<td>&nbsp;</td>' + '<td><input style="cursor:pointer" type="checkbox" id="parartextos" checked /></td>'
 							+ '<td>Textos<td>' + '<td>&nbsp;Estilo:</td>' + '<td><div class=styled-select style="width:85px;">'
-							+ i3GEO.desenho.caixaEstilos() + '</div></td>'
-							+ '<td>&nbsp;<input id=i3GEObotaoPerfil size="22" type="button" value="perfil"></td>'
-							+ '<td>&nbsp;<input id=i3GEObotaoDistWkt size="22" type="button" value="incorporar"></td>'
-							+ '</tr></table></span>' + '</div>' + '</div>';
+							+ i3GEO.desenho.caixaEstilos() + '</div></td></tr>'
+							+ '<tr><td></td><td></td>'
+							+ '<td></td><td></td><td></td><td></td><td>&nbsp;<input id=i3GEObotaoPerfil size="22" type="button" value="perfil"></td><td>&nbsp;<input id=i3GEObotaoDistWkt size="22" type="button" value="incorporar"></td></tr></table></span>' + '</div>' + '</div>';
 					novoel.innerHTML = ins;
 					novoel.style.borderColor = "gray";
 					document.body.appendChild(novoel);
 					janela = new YAHOO.widget.Panel("mostradistancia", {
 						iframe : true,
-						width : "410px",
+						width : "255px",
 						fixedcenter : false,
 						constraintoviewport : true,
 						underlay : "none",

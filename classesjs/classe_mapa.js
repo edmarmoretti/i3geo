@@ -1503,6 +1503,7 @@ i3GEO.mapa =
 				if (!e) {
 					e = window.event;
 				}
+				/*
 				try {
 					if (e.target) {
 						targ = e.target;
@@ -1518,6 +1519,7 @@ i3GEO.mapa =
 				} catch (erro) {
 					targ = null;
 				}
+				*/
 
 				ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
 				etiquetas = false;
@@ -1535,12 +1537,7 @@ i3GEO.mapa =
 				retorna = function(retorno) {
 					var classeCor, temp, n, i, mostra, res, temas, ntemas, titulo, tips, j, ntips, ins, r, ds, nds, s, configura = i3GEO.configura, tipotip = configura.tipotip;
 					i3GEO.eventos.cliquePerm.status = true;
-					i = $i("i3geo_rosa");
-					if (i) {
-						i.style.display = "none";
-					}
 					mostra = false;
-					// try{
 					retorno = retorno.data;
 					if (retorno !== "") {
 						res = "";

@@ -1887,6 +1887,9 @@ i3GEO.Interface = {
 		 * Registra os eventos que capturam o posicionamento do mouse e outros
 		 */
 		registraEventos : function() {
+			//essa variavel guarda a posicao do mapa na tela
+			//e usada em vercoes com dispositivo touche para melhorar a performance
+			i3GEOtouchesPosMapa = "";
 			// vari&aacute;vel que indica se o usu&aacute;rio est&aacute;
 			// movimentando o mapa
 			var calcCoord, modoAtual = "";
@@ -1897,7 +1900,10 @@ i3GEO.Interface = {
 				}
 				//se touch
 				if(e.changedTouches){
-					pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+					if(i3GEOtouchesPosMapa === ""){
+						i3GEOtouchesPosMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+					}
+					pos = i3GEOtouchesPosMapa;
 					p = new OpenLayers.Pixel(e.changedTouches[0].clientX - pos[0],e.changedTouches[0].clientY - pos[1]);
 					e = null;
 				}

@@ -371,6 +371,8 @@ i3GEO.eventos =
 		 * Captura a posi&ccedil;&atilde;o do mouse sobre um mapa. O c&aacute;lculo pode ser feito sobre o corpo do mapa principal ou sob o
 		 * corpo do mapa de refer&ecirc;ncia
 		 * 
+		 * Utilizado apenas pelo mapa de referencia
+		 * 
 		 * O resultado dos c&aacute;lculos s&atilde;o armazenados no objeto objposicaocursor esse objeto ter&aacute; as seguintes
 		 * propriedades:
 		 * 
@@ -519,19 +521,13 @@ i3GEO.eventos =
 				} catch (e) {}
 			};
 			docMapa.onmousedown = function(exy) {
-				if (!i3GEO.eventos.botaoDireita(exy)) {
-					i3GEO.eventos.mousedownMapa();
-				}
+				i3GEO.eventos.mousedownMapa();
 			};
 			docMapa.onclick = function(exy) {
-				if (!i3GEO.eventos.botaoDireita(exy)) {
-					i3GEO.eventos.mousecliqueMapa(exy);
-				}
+				i3GEO.eventos.mousecliqueMapa(exy);
 			};
 			docMapa.onmouseup = function(exy) {
-				if (!i3GEO.eventos.botaoDireita(exy)) {
-					i3GEO.eventos.mouseupMapa(exy);
-				}
+				i3GEO.eventos.mouseupMapa(exy);
 			};
 			docMapa.ontouchend = function(exy) {
 				if (i3GEO.eventos.cliquePerm.status === true) {
