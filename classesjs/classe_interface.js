@@ -2012,9 +2012,6 @@ i3GEO.Interface = {
 				"touchend",
 				i3geoOL,
 				function(e) {
-					if (modoAtual === "move") {
-						return;
-					}
 					calcCoord(e);
 					e.preventDefault();
 				});
