@@ -2016,7 +2016,7 @@ i3GEO.Interface = {
 					calcCoord(e);
 					e.preventDefault();
 					if (i3GEO.eventos.cliquePerm.status === true) {
-						i3GEO.eventos.mouseupMapa(exy);
+						i3GEO.eventos.mouseupMapa(e);
 					}
 					i3GEO.eventos.cliquePerm.status = true;
 				});
