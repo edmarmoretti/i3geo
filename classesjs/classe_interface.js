@@ -2835,6 +2835,7 @@ i3GEO.Interface = {
 					modoAtual = "move";
 					xy = i3GEO.navega.centroDoMapa();
 					i3GEO.navega.marcaCentroDoMapa(xy);
+					i3GEO.eventos.cliquePerm.status = false;
 				});
 			google.maps.event.addListener(
 				i3GeoMap,
@@ -2917,11 +2918,12 @@ i3GEO.Interface = {
 					};
 				}
 			);
-			/*
+			
 			google.maps.event.addListener(
 				i3GeoMap,
 				"touchend",
 				function(e) {
+					alert("oi")
 					e.preventDefault();
 					//calcCoord(e);
 					if (i3GEO.eventos.cliquePerm.status === true) {
@@ -2930,7 +2932,7 @@ i3GEO.Interface = {
 					i3GEO.eventos.cliquePerm.status = true;
 				}
 			);
-			*/
+			
 		},
 		retornaIndiceLayer : function(nomeLayer) {
 			var i = false;
