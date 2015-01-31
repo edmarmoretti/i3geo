@@ -532,8 +532,8 @@ i3GEO.eventos =
 			docMapa.ontouchend = function(exy) {
 				if(i3GEO.Interface.ATUAL === "googlemaps"){
 					if (i3GEO.eventos.cliquePerm.status === true) {
-						exy = exy.latLng;
-						alert(exy.lng())
+						//exy = exy.latLng;
+						alert(exy)
 						i3GEO.eventos.mouseupMapa(exy);
 					}
 					i3GEO.eventos.cliquePerm.status = true;
