@@ -1096,10 +1096,18 @@ button { //
 .i3GEOiconeAberto {
 	background-image: URL('../imagens/oxygen/16x16/document-decrypt.png');
 	cursor: pointer;
+    margin-right: -3px;
+    padding: 3px;
+    background-repeat: no-repeat;
+    margin-top: 2px;
 }
 .i3GEOiconeFechado {
 	background-image: URL('../imagens/oxygen/16x16/document-encrypt.png');
 	cursor: pointer;
+    margin-right: -3px;
+    padding: 3px;
+    background-repeat: no-repeat;
+    margin-top: 2px;
 }
 .i3GEOiconeOpacidadeMapa {
 	background-image: URL('../imagens/oxygen/16x16/show-menu.png');

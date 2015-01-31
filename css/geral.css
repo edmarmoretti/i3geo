@@ -1,3 +1,12 @@
+.olPopupCloseBox {
+    background: url("img/edit-delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    padding: 3px;
+    background-position: 7px 0px;
+    margin-right: -5px;
+    margin-top: -5px;
+}
+
 .i3GEOarvCam .ygtvitem {
     text-align: left;
     margin-top: 3px;

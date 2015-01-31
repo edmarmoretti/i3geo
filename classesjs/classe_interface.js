@@ -2013,8 +2013,8 @@ i3GEO.Interface = {
 				"touchend",
 				i3geoOL,
 				function(e) {
-					calcCoord(e);
 					e.preventDefault();
+					calcCoord(e);
 					if (i3GEO.eventos.cliquePerm.status === true) {
 						i3GEO.eventos.mouseupMapa(e);
 					}
