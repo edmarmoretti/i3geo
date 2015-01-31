@@ -1954,7 +1954,10 @@ i3GEO.Interface = {
 				"movestart",
 				i3geoOL,
 				function(e) {
-					alert("movestart")
+					//alert("movestart")
+					if(e.changedTouches){
+						return;
+					}
 					i3GEO.Interface.STATUS.pan = true;
 					var xy;
 					modoAtual = "move";
@@ -1966,7 +1969,10 @@ i3GEO.Interface = {
 				"moveend",
 				i3geoOL,
 				function(e) {
-					alert("moveend")
+					//alert("moveend")
+					if(e.changedTouches){
+						return;
+					}
 					var xy;
 					modoAtual = "";
 					i3GEO.Interface.openlayers.recalcPar();
@@ -1993,7 +1999,10 @@ i3GEO.Interface = {
 				"mousemove",
 				i3geoOL,
 				function(e) {
-					alert("mousemove")
+					//alert("mousemove")
+					if(e.changedTouches){
+						return;
+					}
 					if (modoAtual === "move") {
 						return;
 					}
