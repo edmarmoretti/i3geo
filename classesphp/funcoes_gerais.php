@@ -2721,12 +2721,24 @@ function cloneInlineSymbol($layern,$nmapa,$mapa){
 				$estilo = $classe->getstyle($ei);
 				if($estilo->symbolname != ""){
 					$nomesimbolo = $estilo->symbolname;
-					$simbolo = new symbolObj($nmapa, $nomesimbolo);
-					$ipath = $simbolo->imagepath;
+					$simbolo = $nmapa->getSymbolObjectById($nmapa->getSymbolByName($nomesimbolo));
 					if($simbolo->inmapfile == MS_TRUE){
 						$simbolon = new symbolObj($mapa, $nomesimbolo);
 						$simbolon->set("inmapfile",MS_TRUE);
-						$simbolon->setImagePath($ipath);
+						$simbolon->setImagePath($simbolo->imagepath);
+						$simbolon->setPoints($simbolo->getPointsArray());
+						//$simbolon->setPattern($simbolo->getPatternArray());
+						$simbolon->set("type",$simbolo->type);
+						$simbolon->set("antialias",$simbolo->antialias);
+						$simbolon->set("character",$simbolo->character);
+						$simbolon->set("filled",$simbolo->filled);
+						//$simbolon->set("font",$simbolo->font);
+						//$simbolon->set("position",$simbolo->position);
+						$simbolon->set("sizex",$simbolo->sizex);
+						$simbolon->set("sizey",$simbolo->sizey);
+						$simbolon->set("transparent",$simbolo->transparent);
+						$simbolon->set("transparentcolor",$simbolo->transparentcolor);
+						//$simbolon->set("anchorpoint",$simbolo->anchorpoint);
 					}
 				}
 			}

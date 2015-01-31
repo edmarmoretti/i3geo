@@ -1,0 +1,49 @@
+MAP
+  FONTSET "/var/www/i3geo/symbols/fontes.txt"
+  SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
+  
+SYMBOL
+NAME 'arrow-end'
+TYPE vector
+FILLED true
+POINTS
+	0 0.4
+	3 0.4
+	3 0
+	5 0.8
+	3 1.6
+	3 1.2
+	0 1.2
+	0 0.4
+END # POINTS
+ANCHORPOINT 1 0.5
+END
+
+  LAYER
+    DATA "/var/www/i3geo/aplicmap/dados/sc22/RODOVIA_PAVIMENTADA.shp"
+    METADATA
+      "CLASSE"	"SIM"
+      "TEMA"	"Teste simbolo em linha"
+    END # METADATA
+    NAME "testeinlinesymbol"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE LINE
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 255 0 0
+        #OFFSET 1 0
+      END
+      STYLE
+        GEOMTRANSFORM "start"
+		COLOR 255 0 0
+		SIZE 6
+		ANGLE AUTO
+        SYMBOL "arrow-end"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+
