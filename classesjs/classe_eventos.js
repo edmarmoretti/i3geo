@@ -278,7 +278,6 @@ i3GEO.eventos =
 				i3GEO.eventos.executaEventos(this.MOUSEUP);
 			} else {
 				if (i3GEO.Interface.ATUAL === "googlemaps" && exy.target && !exy.target.src) {
-					alert("oi")
 					i3GEO.eventos.executaEventos(this.MOUSEUP);
 				}
 				if (i3GEO.Interface.ATUAL === "openlayers" && exy.target && (i3GEO.desenho.layergrafico || exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)) {
