@@ -278,6 +278,7 @@ i3GEO.eventos =
 				i3GEO.eventos.executaEventos(this.MOUSEUP);
 			} else {
 				if (i3GEO.Interface.ATUAL === "googlemaps" && exy.target && !exy.target.src) {
+					alert("oi")
 					i3GEO.eventos.executaEventos(this.MOUSEUP);
 				}
 				if (i3GEO.Interface.ATUAL === "openlayers" && exy.target && (i3GEO.desenho.layergrafico || exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)) {
@@ -527,8 +528,7 @@ i3GEO.eventos =
 				i3GEO.eventos.mousecliqueMapa(exy);
 			};
 			docMapa.onmouseup = function(exy) {
-				alert(i3GEO.eventos.cliquePerm.status);
-				alert(exy)
+				//funciona no googlemaps tbm
 				i3GEO.eventos.mouseupMapa(exy);
 			};
 			docMapa.ontouchmove = function(exy) {
