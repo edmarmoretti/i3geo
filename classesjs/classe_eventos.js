@@ -278,6 +278,18 @@ i3GEO.eventos =
 				i3GEO.eventos.executaEventos(this.MOUSEUP);
 			} else {
 				if (i3GEO.Interface.ATUAL === "googlemaps" && exy.target && !exy.target.src) {
+					//recalcula a posicao do mouse. Necessario em dispositivos touch
+					if(i3GEOtouchesPosMapa === ""){
+						i3GEOtouchesPosMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
+					}
+					pos = i3GEOtouchesPosMapa;
+					p = new google.maps.Point(e.clientX - pos[0],e.clientY - pos[1]);
+					e = null;
+					lonlat = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(p);
+					if(lonlat){
+						objposicaocursor.ddx = lonlat.lng();
+						objposicaocursor.ddy = lonlat.lat();
+					}
 					i3GEO.eventos.executaEventos(this.MOUSEUP);
 				}
 				if (i3GEO.Interface.ATUAL === "openlayers" && exy.target && (i3GEO.desenho.layergrafico || exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)) {
@@ -528,6 +540,7 @@ i3GEO.eventos =
 			};
 			docMapa.onmouseup = function(exy) {
 				//funciona no googlemaps tbm
+				i3GEO.eventos.cliquePerm.status = true;
 				i3GEO.eventos.mouseupMapa(exy);
 			};
 			docMapa.ontouchmove = function(exy) {

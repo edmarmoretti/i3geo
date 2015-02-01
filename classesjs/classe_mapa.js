@@ -1479,7 +1479,6 @@ i3GEO.mapa =
 				//evita clicar sobre a barra do googlemaps
 				//FIXIT nada elegante
 				//console.warn(objposicaocursor.imgx)
-				alert(objposicaocursor.ddx)
 				if (objposicaocursor.imgx < 70) {
 					return;
 				}
