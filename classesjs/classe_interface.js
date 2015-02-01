@@ -2942,7 +2942,7 @@ i3GEO.Interface = {
 						if(lonlat){
 							objposicaocursor.ddx = lonlat.lng();
 							objposicaocursor.ddy = lonlat.lat();
-							i3GEO.eventos.mouseupMapa();
+							i3GEO.eventos.mouseupMapa(e);
 						}
 					}
 					catch(erro){
