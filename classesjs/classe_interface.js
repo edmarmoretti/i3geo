@@ -2927,20 +2927,27 @@ i3GEO.Interface = {
 			);
 			//se touch
 			$i(i3GEO.Interface.IDMAPA).ontouchend = function(e) {
+				e.preventDefault();
 				var pos, p, lonlat;
 				if (i3GEO.eventos.cliquePerm.status === true) {
 					//recalcula a posicao do clique
-					if(i3GEOtouchesPosMapa === ""){
-						i3GEOtouchesPosMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
+					try{
+						if(i3GEOtouchesPosMapa === ""){
+							i3GEOtouchesPosMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
+						}
+						pos = i3GEOtouchesPosMapa;
+						p = new google.maps.Point(e.changedTouches[0].clientX - pos[0],e.changedTouches[0].clientY - pos[1]);
+						e = null;
+						lonlat = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(p);
+						if(lonlat){
+							objposicaocursor.ddx = lonlat.lng();
+							objposicaocursor.ddy = lonlat.lat();
+							i3GEO.eventos.mouseupMapa();
+						}
 					}
-					pos = i3GEOtouchesPosMapa;
-					p = new google.maps.Point(e.changedTouches[0].clientX - pos[0],e.changedTouches[0].clientY - pos[1]);
-					e = null;
-					lonlat = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(p);
-					alert(lonlat.lng())
-					objposicaocursor.ddx = lonlat.lng();
-					objposicaocursor.ddy = lonlat.lat();
-					i3GEO.eventos.mouseupMapa();
+					catch(erro){
+						i3GEO.eventos.cliquePerm.status = true;
+					}
 				}
 				i3GEO.eventos.cliquePerm.status = true;
 			};
