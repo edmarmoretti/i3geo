@@ -2926,6 +2926,7 @@ i3GEO.Interface = {
 				}
 			);
 			//se touch
+			/*
 			$i(i3GEO.Interface.IDMAPA).ontouchend = function(e) {
 				e.preventDefault();
 				var pos, p, lonlat;
@@ -2951,6 +2952,7 @@ i3GEO.Interface = {
 				}
 				i3GEO.eventos.cliquePerm.status = true;
 			};
+			*/
 		},
 		retornaIndiceLayer : function(nomeLayer) {
 			var i = false;
