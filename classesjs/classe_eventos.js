@@ -283,7 +283,7 @@ i3GEO.eventos =
 						i3GEOtouchesPosMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
 					}
 					pos = i3GEOtouchesPosMapa;
-					p = new google.maps.Point(e.clientX - pos[0],e.clientY - pos[1]);
+					p = new google.maps.Point(exy.clientX - pos[0],exy.clientY - pos[1]);
 					e = null;
 					lonlat = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(p);
 					if(lonlat){
