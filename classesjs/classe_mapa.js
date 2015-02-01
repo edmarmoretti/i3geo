@@ -105,7 +105,7 @@ i3GEO.mapa =
 		 *
 		 * 12
 		 */
-		RESOLUCAOTIP : 12,
+		RESOLUCAOTIP : 8,
 		/**
 		 * Armazena o nome dos objetos geoXml adicionados ao mapa pela API do
 		 * google maps
