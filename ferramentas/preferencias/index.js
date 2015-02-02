@@ -261,6 +261,10 @@ i3GEOF.preferencias = {
 						tipo: "texto",
 						elemento: "i3GEO.configura.larguratip"
 					},{
+						titulo: $trad('toleranciaIdentifica',i3GEOF.preferencias.dicionario),
+						tipo: "texto",
+						elemento: "i3GEO.mapa.RESOLUCAOTIP"
+					},{
 						titulo: $trad('abreMapaReferencia',i3GEOF.preferencias.dicionario),
 						tipo: "select",
 						elemento: "i3GEO.configura.mapaRefDisplay",
@@ -370,7 +374,7 @@ i3GEOF.preferencias = {
 					}
 				]
 			},{
-				titulo: $trad('janelasFlutuantes',i3GEOF.preferencias.dicionario), //menu superior
+				titulo: $trad('janelasFlutuantes',i3GEOF.preferencias.dicionario), //janela
 				props: [
 					{
 						titulo: $trad('estiloCorpoJanela',i3GEOF.preferencias.dicionario),

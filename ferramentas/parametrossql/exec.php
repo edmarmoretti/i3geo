@@ -35,9 +35,15 @@ Aplica a substituicao de chaves pelos valores enviados
 			//pega as chaves do proprio mapfile
 			$c = $layer->getmetadata("PLUGINI3GEO");
 			if($c == ""){
-				$retorno = "erro";
+				//tenta pegar os parametros do arquivo mapfile original
+				$map1 = ms_newMapObj($locaplic."/temas/".$nomeLayer.".map");
+				$layer1 = $map1->getlayerbyname($nomeLayer);
+				$c = $layer1->getmetadata("PLUGINI3GEO");
+				if($c == ""){
+					$retorno = "erro";
+				}
 			}
-			else{
+			if($c != ""){
 				$cs = json_decode($c,true);
 				$cs = $cs["parametros"];
 				$chaves = array();

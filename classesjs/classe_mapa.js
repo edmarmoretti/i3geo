@@ -62,7 +62,7 @@ i3GEO.mapa =
 		 */
 		TEMASINICIAISLIGADOS : "",
 		/**
-		 * Propriedade: TEMASINICIAISLIGADOS
+		 * Propriedade: TEMASINICIAIS
 		 *
 		 * Lista indicando quais temas serao ligados na inicializacao
 		 *
@@ -1479,6 +1479,8 @@ i3GEO.mapa =
 				//evita clicar sobre a barra do googlemaps
 				//FIXIT nada elegante
 				//console.warn(objposicaocursor.imgx)
+				//TODO incluir opcao de mais informacoes
+				//TODO incluir opcao para controlar tolerancia e outros parametros
 				if (objposicaocursor.imgx < 70) {
 					return;
 				}

@@ -170,6 +170,11 @@ i3GEOF.preferencias.dicionario = {
 		en : "",
 		es : ""
 	} ],
+	'toleranciaIdentifica' : [ {
+		pt : "Resolu&ccedil;&atilde;o de busca utilizada no bal&atilde;o de identifica&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
 	'abreMapaReferencia' : [ {
 		pt : "Indica se o mapa de refer&ecirc;ncia dever&aacute; ser aberto quando o i3Geo for inicializado",
 		en : "",
