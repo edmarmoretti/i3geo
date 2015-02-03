@@ -1492,6 +1492,7 @@ bsalva - boolean botao salvar
 
 bcancela - boolean botao cancelar
 */
+//TODO remover efeito de transparencia de todas as janelas
 function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 {
 	if(!funcaoOK){

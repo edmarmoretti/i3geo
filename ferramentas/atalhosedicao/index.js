@@ -4,7 +4,11 @@ if (typeof (i3GEOF) === 'undefined') {
 /*
  * Classe: i3GEOF.atalhosedicao
  */
-//TODO verificar se o parametro cache esta funcionando
+//TODO incluir minscale e maxscale
+//TODO incluir opcao para modificar o nome do layer
+//TODO bloquear fechamento da janela
+//TODO incluir opcao para incluir o link para a fonte
+//TODO criar nova opcao que permita editar um texto livre para a fonte e guarda-la no proprio mapfile
 i3GEOF.atalhosedicao =
 {
 	tema: "",

@@ -6,6 +6,8 @@ if(typeof(i3GEOF) === 'undefined'){
 Classe: i3GEOF.toponimia
 
 */
+//TODO incluir opcao para remover a toponimia de um LAYER
+//TODO incluir opcao de minscale e maxscale
 i3GEOF.toponimia = {
 	/*
 	Variavel: aguarde

@@ -41,6 +41,7 @@ i3geo/admin/js/arvore.js
 //obtem os parametros da url
 //
 YAHOO.namespace("admin.container");
+//TODO ao adicionar um item na arvore, nao mostrar o nome do mapfile, ou mostrar em todos os temas
 (function(){
 	$id_menu = "";
 	$id_grupo = "";

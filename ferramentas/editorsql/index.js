@@ -41,6 +41,9 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Classe: i3GEOF.editorsql
 */
+//TODO incluir como default a marcacao do checkbox de inclusao de todas as colunas e nao apenas geom e gid
+//TODO incluir opcao para listar uma amostra dos valores de uma coluna
+//TODO incluir editor de filtro
 i3GEOF.editorsql = {
 	/*
 	Variavel: aguarde
