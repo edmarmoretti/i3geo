@@ -162,9 +162,9 @@ i3GEOF.navegapostgis = {
 			"</div>" +
 			"<div id='i3GEOFnavegapostgispar' style='padding:2px;position:relative;top:-15px;display:none;' ><div id=i3GEOFnavegapostgisArvore style='width: 215px;overflow: auto;height: 210px;border: 1px solid lightgray;position: absolute;top: 0px;'> "+
 			"</div>" +
-			"<div id=i3GEOFnavegapostgisColunas style='padding:2px;width: 230px;overflow: auto;height: 184px;border: 1px solid lightgray;position: absolute;left:223px;top: 0px;'> "+
+			"<div id=i3GEOFnavegapostgisColunas style='padding:2px;width: 310px;overflow: auto;height: 184px;border: 1px solid lightgray;position: absolute;left:223px;top: 0px;'> "+
 			"</div>" +
-			"<textarea id=i3GEOFnavegapostgisSql style='width: 233px;overflow: auto;height: 84px;border: 1px solid lightgray;position: absolute;left:223px;top: 190px;'> "+
+			"<textarea id=i3GEOFnavegapostgisSql style='width: 313px;overflow: auto;height: 104px;border: 1px solid lightgray;position: absolute;left:223px;top: 190px;'> "+
 			"</textarea>";
 		if(i3GEOF.navegapostgis.tipo == "sql"){
 			ins += "<input style='position:absolute;top:235px;left:70px;' id=i3GEOFnavegapostgisAplicar type='button' value='"+$trad('aplica',i3GEOF.navegapostgis.dicionario)+"' />";
@@ -189,8 +189,8 @@ i3GEOF.navegapostgis = {
 		//cria a janela flutuante
 		titulo = $trad('conectaPostgis',i3GEOF.navegapostgis.dicionario);
 		janela = i3GEO.janela.cria(
-			"470px",
-			"315px",
+			"550px",
+			"335px",
 			"",
 			"",
 			"",
@@ -199,7 +199,12 @@ i3GEOF.navegapostgis = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			"",
+			"",
+			"",
+			"nao"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.navegapostgis_corpo").style.backgroundColor = "white";
@@ -318,7 +323,7 @@ i3GEOF.navegapostgis = {
 				}
 				else{
 					ins = "<table class=lista4 ><tr><td title='"+$trad('selecionaID',i3GEOF.navegapostgis.dicionario)+"'>"+gid+"</td><td title='"+$trad('selecionaGeom',i3GEOF.navegapostgis.dicionario)+"'>"+the_geom+"</td><td title='"+$trad('mostraColuna',i3GEOF.navegapostgis.dicionario)+"'>"+mostra+"</td><td>"+nome+"</td></tr>";
-					mostra = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=checkbox name='i3GEOFnavegapostgisMostra' value='*' />";
+					mostra = "<input onclick='i3GEOF.navegapostgis.geraSql()' style=cursor:pointer type=checkbox checked name='i3GEOFnavegapostgisMostra' value='*' />";
 					ins += "<tr><td></td><td></td><td>"+mostra+"</td><td title='' >Todas</td></tr>";
 
 					for(i=0;i<n;i++){
@@ -385,8 +390,11 @@ i3GEOF.navegapostgis = {
 		}else{
 			i = colunas.join(",");
 		}
-		sql = the_geom+" from (select "+i+" from "+i3GEOF.navegapostgis.esquema+"."+i3GEOF.navegapostgis.tabela+") as foo using unique "+gid+" using srid=4326";
+		sql = the_geom+" from (\n\n select "+i+" from "+i3GEOF.navegapostgis.esquema+"."+i3GEOF.navegapostgis.tabela+"\n\n) as foo using unique "+gid+" using srid=4326";
 		sql = sql.replace(",,",",");
+		if(gid === ""){
+			alert("Coluna com ID unico nao foi escolhida!");
+		}
 		$i("i3GEOFnavegapostgisSql").value = sql;
 	}
 };

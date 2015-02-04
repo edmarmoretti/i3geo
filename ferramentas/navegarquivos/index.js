@@ -139,7 +139,12 @@ i3GEOF.navegarquivos = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			"",
+			"",
+			"",
+			"nao"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.navegarquivos_corpo").style.backgroundColor = "white";

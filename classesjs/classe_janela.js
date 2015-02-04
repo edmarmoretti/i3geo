@@ -261,16 +261,21 @@ i3GEO.janela =
 		 * {string} - (opcional) icone que ser&aacute; mostrado no canto superior esquerdo da janela
 		 *
 		 * {funcao} - funcao executada quando o icone + for clicado
+		 * 
+		 * {sim|nao} - (opcional) indica se o efeito de transpar&ecirc;ncia nos eventos mouseover/out ser&aacute; aplicado
 		 *
 		 * Return:
 		 *
 		 * {Array} Array contendo objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 		 */
 		cria : function(wlargura, waltura, wsrc, nx, ny, texto, id, modal, classe, funcaoCabecalho, funcaoMinimiza, funcaoAposRedim,
-			dimensionavel, icone, funcaoDuplica) {
+			dimensionavel, icone, funcaoDuplica, transicao) {
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.janela.cria()");
 
+			if(!transicao){
+				transicao = "sim";
+			}
 			if (!dimensionavel) {
 				dimensionavel = true;
 			}
@@ -348,7 +353,7 @@ i3GEO.janela =
 			novoel.id = id;
 			novoel.style.display = "block";
 			novoel.innerHTML = ins;
-			if (this.TRANSICAOSUAVE) {
+			if (this.TRANSICAOSUAVE && transicao === "sim") {
 				novoel.onmouseover = function() {
 					YAHOO.util.Dom.setStyle(novoel, "opacity", 1);
 				};

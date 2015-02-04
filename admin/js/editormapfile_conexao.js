@@ -85,7 +85,7 @@ function montaEditorDados(dados)
 		$i("cConnection").innerHTML = temp;
 	}
 	if($i("cData")){
-		temp = '<textarea value="'+dados.data+'" id="data" style="width:90%;">'+dados.data+'</textarea>';
+		temp = '<textarea value="'+dados.data+'" id="data" style="height: 100px;width:90%;">'+dados.data+'</textarea>';
 		temp += "<img onclick='selNavegador(\"data\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
 		$i("cData").innerHTML = temp;
 	}

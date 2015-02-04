@@ -2,14 +2,18 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "teste"
+    CONNECTION "password=i3geosaude user=postgres dbname=i3geosaude host=localhost port=5432"
     CONNECTIONTYPE POSTGIS
-    DATA "geom from (select * from ambiente.queim2013 WHERE data >= 2013dimi and data <= 2013dfmf ) as foo using unique gid using srid=4326"
+    DATA "the_geom2 from (
+
+ select * from i3geo_metaestat.municipios
+
+) as foo using unique gid using srid=4326"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "ltempoitemimagem"	""
       "tip"	"lat,lon,data,horagmt,satelite,municipio,uf,regiao,bioma"
-      "cache"	"nao"
+      "cache"	"NAO"
       "ltempoitemdescricao"	""
       "olopacity"	""
       "CLASSE"	"SIM"
@@ -30,7 +34,6 @@ MAP
       "ltempoformatodata"	""
       "ltempoitemicone"	""
       "metaestat"	""
-      "PLUGINI3GEO"	'{"plugin":"parametrossql","parametros":[{"titulo" : "Dia inicial","chave" : "di","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""},{"titulo" : "Mês inicial","chave" : "mi","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""},{"titulo" : "Dia final","chave" : "df","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""},{"titulo" : "Mês final","chave" : "mf","tipo" : "select","valores" : "01,02,03,04,05","prog" : ""}]}'
       "itembuscarapida"	""
       "itens"	"lat,lon,latgms,longms,data,horagmt,satelite,municipio,uf,regiao,pais,prec,ndiasschuv,risco,bioma,wrs_tm"
       "CONEXAOORIGINAL"	"sigeo"
@@ -46,7 +49,6 @@ MAP
     PROCESSING "POLYLINE_NO_CLIP=True"
     STATUS DEFAULT
     TEMPLATE "none.htm"
-    TILEITEM "location"
     TYPE POINT
     UNITS METERS
     CLASS
