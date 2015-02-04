@@ -452,6 +452,12 @@ i3GEOF.inserexy = {
 	Define o tipo de entrada de coordenadas (dms ou dd)
 	*/
 	escolhedig: function(q){
+		if(q === 0){
+			q = "i3GEOinserexydigmascara";
+		}
+		else{
+			q = "i3GEOinserexydigcampo";
+		}
 		$i("i3GEOinserexydigmascara").style.display="none";
 		$i("i3GEOinserexydigcampo").style.display="none";
 		$i(q).style.display="block";
@@ -489,8 +495,7 @@ i3GEOF.inserexy = {
 	adiciona: function(xy,fonte){
 		if(i3GEOF.inserexy.aguarde.visibility === "visible")
 		{return;}
-		i3GEOF.inserexy.aguarde.visibility = "visible";
-		var tema = $i("i3GEOinserexytemasLocais").value,
+		var tema,
 			item = "",
 			valoritem = "",
 			temp,
@@ -498,7 +503,11 @@ i3GEOF.inserexy = {
 			i,
 			xyn,
 			projecao = i3GEOF.inserexy.pegaProjecao();
-
+		if(!$i("i3GEOinserexytemasLocais")){
+			tema = "";
+		}else{
+			tema = $i("i3GEOinserexytemasLocais").value;
+		}
 		xyn = xy.split(" ");
 		n = xyn.length;
 		temp = "";
@@ -510,8 +519,9 @@ i3GEOF.inserexy = {
 			item = $i("i3GEOinserexyItem").value;
 			valoritem = $i("i3GEOinserexyvalorItem").value;
 		}
-		if (tema === "")
-		{i3GEO.janela.tempoMsg($trad('msgNenhumTemaDefinido',i3GEOF.inserexy.dicionario));}
+		if (tema === ""){
+			i3GEO.janela.tempoMsg($trad('msgNenhumTemaDefinido',i3GEOF.inserexy.dicionario));
+		}
 		else{
 			temp = function(retorno){
 				if(i3GEO.Interface.ATUAL === "padrao")
@@ -522,6 +532,7 @@ i3GEOF.inserexy = {
 			if(fonte !== undefined){
 				projecao = "";
 			}
+			i3GEOF.inserexy.aguarde.visibility = "visible";
 			i3GEO.php.insereSHP(temp,tema,item,valoritem,xy,projecao);
 		}
 	},
