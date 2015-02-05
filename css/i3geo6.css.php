@@ -1046,6 +1046,15 @@ border-left: none;
 border-top-color: transparent;
 border-bottom-color: transparent;
 }
+.cabecalhoTemas {
+display: inline-block;
+line-height: 9px;
+overflow: hidden;
+text-align: left;
+text-overflow: ellipsis;
+white-space: nowrap;
+width: 10em;
+}
 .styled-select {
 width: 252px;
 overflow: hidden;
@@ -1063,7 +1072,7 @@ height: 22px;
 border-radius: 2px;
 }
 .styled-select select, .styled-select150 select {
-width: 120%;
+width: 100%;
 height: 22px;
 border: 0;
 box-shadow: none;
@@ -1071,13 +1080,13 @@ line-height: 1.5;
 -webkit-appearance: none;
 -moz-appearance: none;
 text-indent: 0.01px;
-text-overflow: '';
+text-overflow: 'ellipsis';
 font-size: 12px;
 appearance: none;
-background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 80% 8px;
+background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 8px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
-background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 80% 8px;
+background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 8px;
 background-size: 16px 144px;
 }
 }

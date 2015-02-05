@@ -1001,35 +1001,47 @@ i3GEO.janela =
 		 * Parametros:
 		 *
 		 * {String} - texto da mensagem
+		 * 
+		 * {String} - texto do cabecalho
+		 * 
+		 * {numeric} - (opcional) largura em pixel
+		 * 
+		 * {numeric} - (opcional) altura em pixel 
 		 */
-		mensagemSimples : function(texto, cabecalho) {
+		mensagemSimples : function(texto, cabecalho, largura, altura) {
 			var janela;
-			if ($i("mensagemSimples1")) {
-				janela = YAHOO.i3GEO.janela.manager.find("mensagemSimples1");
-			} else {
-				janela = new YAHOO.widget.SimpleDialog("mensagemSimples1", {
-					width : "300px",
-					fixedcenter : true,
-					visible : true,
-					draggable : true,
-					zIndex : 100000,
-					textAlign : "left",
-					close : true,
-					modal : false,
-					effect : {
-						effect : YAHOO.widget.ContainerEffect.FADE,
-						duration : 0.25
-					},
-					constraintoviewport : true,
-					text : ""
-				});
-				YAHOO.i3GEO.janela.manager.register(janela);
-				janela.setHeader(cabecalho);
-				janela.render(document.body);
+			if(!largura){
+				largura = 300;
 			}
+			if(!altura){
+				altura = 300;
+			}
+			janela = new YAHOO.widget.SimpleDialog(YAHOO.util.Dom.generateId(), {
+				width : parseInt(largura,10) + "px",
+				height : parseInt(altura,10) + "px",
+				fixedcenter : true,
+				visible : true,
+				draggable : true,
+				zIndex : 100000,
+				textAlign : "left",
+				close : true,
+				modal : false,
+				effect : {
+					effect : YAHOO.widget.ContainerEffect.FADE,
+					duration : 0.25
+				},
+				constraintoviewport : true,
+				text : ""
+			});
+			YAHOO.i3GEO.janela.manager.register(janela);
+			//$i(id + '_corpo').style.height = parseInt(waltura, 10) + "px";
+			janela.setHeader(cabecalho);
+			janela.render(document.body);
 			janela.setHeader(cabecalho);
 			janela.cfg.setProperty("text", texto);
+			janela.bringToTop();
 			janela.show();
+			return janela;
 		},
 		/**
 		 * Cria um DIV e posiciona sobre o mapa na posi&ccedil;&atilde;o do mouse.
