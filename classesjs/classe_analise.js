@@ -189,6 +189,14 @@ i3GEO.analise =
 				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.perfil()", "perfil", "perfil");
 			},
 			/**
+			 * Function: melhorcaminho
+			 * 
+			 * Ferramenta melhor caminho
+			 */
+			melhorcaminho : function() {
+				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.melhorcaminho()", "melhorcaminho", "melhorcaminho");
+			},
+			/**
 			 * Function: gradePontos
 			 * 
 			 * Ferramenta grade de pontos

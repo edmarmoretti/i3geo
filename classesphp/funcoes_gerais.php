@@ -2460,8 +2460,9 @@ function retornaShapesMapext($objLayer,$objMapa){
 	$shapes = array();
 	$status = $objLayer->open();
 	$status = $objLayer->whichShapes($objMapa->extent);
-	while ($shape = $objLayer->nextShape())
-	{$shapes[] = $shape;}
+	while ($shape = $objLayer->nextShape()){
+		$shapes[] = $shape;
+	}
 	$objLayer->close();
 	return $shapes;
 }

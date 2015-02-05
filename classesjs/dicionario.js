@@ -2294,6 +2294,12 @@ g_traducao = {
 	pt: "Operacao nao autorizada para esse usuario",
 	en:"",
 	es:""
+}],
+"melhorcaminho": [
+{
+	pt: "Melhor caminho (raster)",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

@@ -1585,6 +1585,17 @@ i3GEO.util =
 					i3GEO.janela.tempoMsg($trad("x13"));
 				}
 			}
+			if (tipoCombo === "naoraster") {
+				if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
+					temp = i3GEO.arvoreDeCamadas.filtraCamadas("type", 4, "diferente", i3GEO.arvoreDeCamadas.CAMADAS);
+					temp = i3GEO.arvoreDeCamadas.filtraCamadas("type", 5, "diferente", temp);
+					temp = i3GEO.arvoreDeCamadas.filtraCamadas("type", 6, "diferente", temp);
+					temp = i3GEO.arvoreDeCamadas.filtraCamadas("type", 7, "diferente", temp);
+					monta(i3GEO.arvoreDeCamadas.filtraCamadas("type", 8, "diferente", temp));
+				} else {
+					i3GEO.janela.tempoMsg($trad("x13"));
+				}
+			}
 			if (tipoCombo === "poligonosSelecionados") {
 				if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
 					temp = i3GEO.arvoreDeCamadas.filtraCamadas("type", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS);
