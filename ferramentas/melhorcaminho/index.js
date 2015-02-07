@@ -228,24 +228,48 @@ i3GEOF.melhorcaminho = {
 		$i("i3GEOmelhorcaminhoiys").value = dmsy[2];
 	},
 	t5: function(){
-		var ins = "<p class='paragrafo'><b>"+$trad('numero',i3GEOF.melhorcaminho.dicionario)+"</b>";
-		ins += "<p class='paragrafo'>X</p>";
-		ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOmelhorcaminhonptx' title='pontos em x'  type=text value='10'/></div>";
-		ins += "<br><p class='paragrafo'>Y";
-		ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOmelhorcaminhonpty' title='pontos em y'  type=text value='10'/></div>";
-
-		i3GEO.util.proximoAnterior("i3GEOF.melhorcaminho.t2()","i3GEOF.melhorcaminho.t4()",ins,"i3GEOF.melhorcaminho.t3","i3GEOmelhorcaminhoresultado",true,"i3GEOF.melhorcaminho_rodape");
+		var b, ins = "<p class='paragrafo'>"+$trad('lut',i3GEOF.melhorcaminho.dicionario);
+		ins += "<table><tr><td>"+$trad('maiorque',i3GEOF.melhorcaminho.dicionario)+"</td><td>"+$trad('menorque',i3GEOF.melhorcaminho.dicionario)+"</td><td>"+$trad('novovalor',i3GEOF.melhorcaminho.dicionario)+"</td><td></td></tr>";
+		ins += "<tr>"
+		ins += "<td><div class='i3geoForm100' style='float:left;' ><input id='i3GEOmelhorcaminhoLut1' type=text value=''/></div>&nbsp;</td>";
+		ins += "<td><div class='i3geoForm100' style='float:left;' ><input id='i3GEOmelhorcaminhoLut2' type=text value=''/></div>&nbsp;</td>";
+		ins += "<td><div class='i3geoForm100' style='float:left;' ><input id='i3GEOmelhorcaminhoLut3' type=text value=''/></div></td>";
+		ins += "<td><div><input id='i3GEOmelhorcaminhoLut4' type='button' value='&nbsp;' /></div></td>";
+		ins += "</tr></table>";
+		ins += "<br>";
+		ins += "<div id='i3GEOmelhorcaminhoLut' ></div>";
+		i3GEO.util.proximoAnterior("i3GEOF.melhorcaminho.t4()","i3GEOF.melhorcaminho.t6()",ins,"i3GEOF.melhorcaminho.t5","i3GEOmelhorcaminhoresultado",true,"i3GEOF.melhorcaminho_rodape");
+		b = new YAHOO.widget.Button(
+			"i3GEOmelhorcaminhoLut4",
+			{onclick:{fn: i3GEOF.melhorcaminho.adicionaLut}}
+		);
+		b.addClass("adicionar0");
 	},
 	t6: function(){
-		var b,ins = "<p class='paragrafo'><b>"+$trad('adicionaTema',i3GEOF.melhorcaminho.dicionario)+"</b>";
-		ins += "<p class='paragrafo'><input id=i3GEOmelhorcaminhobotao1 size=18 class=executar type='button' value='"+$trad('criaGrade',i3GEOF.melhorcaminho.dicionario)+"' />";
-
-		i3GEO.util.proximoAnterior("i3GEOF.melhorcaminho.t3()","",ins,"i3GEOF.melhorcaminho.t4","i3GEOmelhorcaminhoresultado",true,"i3GEOF.melhorcaminho_rodape");
+		var b,ins = "<p class='paragrafo'><b>"+$trad('fim',i3GEOF.melhorcaminho.dicionario)+"</b>";
+		ins += "<p class='paragrafo'><input id=i3GEOmelhorcaminhobotao1 size=18 class=executar type='button' value='"+$trad('executa',i3GEOF.melhorcaminho.dicionario)+"' />";
+		i3GEO.util.proximoAnterior("i3GEOF.melhorcaminho.t5()","",ins,"i3GEOF.melhorcaminho.t6","i3GEOmelhorcaminhoresultado",true,"i3GEOF.melhorcaminho_rodape");
 		b = new YAHOO.widget.Button(
 			"i3GEOmelhorcaminhobotao1",
-			{onclick:{fn: i3GEOF.melhorcaminho.criaGrade}}
+			{onclick:{fn: i3GEOF.melhorcaminho.executa}}
 		);
 		b.addClass("rodar");
+	},
+	adicionaLut: function(){
+		var v1, v2, v3, onde, novo, v, n;
+		v1 = $i("i3GEOmelhorcaminhoLut1").value;
+		v2 = $i("i3GEOmelhorcaminhoLut2").value;
+		v3 = $i("i3GEOmelhorcaminhoLut3").value;
+		v = ">= " + v1 + "e < " + v2 + " = " + v3;
+		n = v1 + "," + v2 + "," + v3;
+		onde = $i("i3GEOmelhorcaminhoLut");
+		novo = "<div class='i3geoForm150 i3geoFormTag' style='float:left;margin-left:2px;margin-top:2px;' onclick='i3GEOF.melhorcaminho.removeLut(this)'>"
+			+ "<input name='" + n +"'type=text value='" + v + "' />"
+			+ "</div>";
+		onde.innerHTML += novo;
+	},
+	removeLut: function(obj){
+		obj.parentNode.removeChild(obj);
 	},
 	comboTemasRaster: function(){
 		i3GEO.util.comboTemas(
@@ -315,66 +339,51 @@ i3GEOF.melhorcaminho = {
 		);
 	},
 	/*
-	Function: criaGrade
-
-	Cria a grade e adiciona um novo tema ao mapa
-
-	Veja:
-
-	<GRADEDEPOL>
+	Function: executa
 	*/
-	criaGrade: function(){
-		try{
-			if(i3GEOF.melhorcaminho.aguarde.visibility === "visible")
-			{return;}
-			i3GEOF.melhorcaminho.aguarde.visibility = "visible";
-			var dx,dy,ix,iy,nptx,npty,fim,p,cp,proj="nao";
-			if(!$i("i3GEOmelhorcaminhoProj").checked){
-				dx = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoxg").value,$i("i3GEOmelhorcaminhoxm").value,$i("i3GEOmelhorcaminhoxs").value);
-				dy = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoyg").value,$i("i3GEOmelhorcaminhoym").value,$i("i3GEOmelhorcaminhoys").value);
+	executa: function(){
+		if(i3GEOF.melhorcaminho.aguarde.visibility === "visible")
+		{return;}
+		var raster = "",ptax,ptbx,ptby,ptby,pta,ptb,lut=[],lutObjs,n,i;
+		//pega tema com raster
+		if($i("i3GEOmelhorcaminhoRaster")){
+			raster = $i("i3GEOmelhorcaminhoRaster").value;
+			if(raster === ""){
+				i3GEO.janela.tempoMsg($trad('mesf1',i3GEOF.melhorcaminho.dicionario));return;
 			}
-			else{
-				proj = "sim";
-				dx = $i("i3GEOmelhorcaminhoxg").value;
-				dy = $i("i3GEOmelhorcaminhoyg").value;
-			}
-			ix = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoixg").value,$i("i3GEOmelhorcaminhoixm").value,$i("i3GEOmelhorcaminhoixs").value);
-			iy = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoiyg").value,$i("i3GEOmelhorcaminhoiym").value,$i("i3GEOmelhorcaminhoiys").value);
-			nptx = $i("i3GEOmelhorcaminhonptx").value;
-			npty = $i("i3GEOmelhorcaminhonpty").value;
-			if ((dx == 0) || (dy == 0))
-			{i3GEO.janela.tempoMsg($trad('msg',i3GEOF.melhorcaminho.dicionario));return;}
-			if ((nptx == 0) || (npty == 0))
-			{i3GEO.janela.tempoMsg($trad('msg2',i3GEOF.melhorcaminho.dicionario));return;}
-			if (nptx * npty > 10000)
-			{i3GEO.janela.tempoMsg($trad('msg2',i3GEOF.melhorcaminho.dicionario));return;}
-			fim = function(retorno){
-				i3GEOF.melhorcaminho.aguarde.visibility = "hidden";
-				if (retorno.data == undefined )
-				{$i("i3GEOmelhorcaminhofim").innerHTML = "<p class='paragrafo'>Erro. ";}
-				else
-				{i3GEO.atualiza("");}
-			};
-			p = i3GEO.configura.locaplic+"/ferramentas/melhorcaminho/exec.php?g_sid="+i3GEO.configura.sid+"&proj="+proj+"&funcao=gradedepol&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
-			cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"melhorcaminho",fim);
 		}
-		catch(e){$i("i3GEOmelhorcaminhofim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEOF.melhorcaminho.aguarde.visibility = "hidden";}
-	},
-	/*
-	Function: capturaPonto
-
-	Captura um ponto no mapa e preenche os campos de coordenadas de in&iacute;cio da grade
-	*/
-	capturaPonto: function(){
-		i3GEO.eventos.cliqueCapturaPt(
-			"i3GEOmelhorcaminhoixg",
-			"i3GEOmelhorcaminhoixm",
-			"i3GEOmelhorcaminhoixs",
-			"i3GEOmelhorcaminhoiyg",
-			"i3GEOmelhorcaminhoiym",
-			"i3GEOmelhorcaminhoiys"
-		);
+		else{
+			//i3GEO.janela.tempoMsg($trad('mesf1',i3GEOF.melhorcaminho.dicionario));return;
+		}
+		//pega pontos A e B
+		try{
+			ptax = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoxg").value,$i("i3GEOmelhorcaminhoxm").value,$i("i3GEOmelhorcaminhoxs").value);
+			ptay = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoyg").value,$i("i3GEOmelhorcaminhoym").value,$i("i3GEOmelhorcaminhoys").value);
+			ptbx = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoixg").value,$i("i3GEOmelhorcaminhoixm").value,$i("i3GEOmelhorcaminhoixs").value);
+			ptby = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoiyg").value,$i("i3GEOmelhorcaminhoiym").value,$i("i3GEOmelhorcaminhoiys").value);
+			pta = ptax+","+ptay;
+			ptb = ptbx+","+ptby;
+		} catch(e){
+			i3GEO.janela.tempoMsg($trad('mesf2',i3GEOF.melhorcaminho.dicionario));return;
+		}
+		//pega lut
+		lutObjs = $i("i3GEOmelhorcaminhoLut").getElementsByTagName("input");
+		n = lutObjs.length;
+		for(i=0;i<n;i++){
+			lut.push(lutObjs[i].name);
+		}
+		lut = lut.join("|");
+		/*
+		i3GEOF.melhorcaminho.aguarde.visibility = "visible";
+		fim = function(retorno){
+			i3GEOF.melhorcaminho.aguarde.visibility = "hidden";
+			i3GEO.atualiza("");
+		};
+		p = i3GEO.configura.locaplic+"/ferramentas/melhorcaminho/exec.php?g_sid="+i3GEO.configura.sid+"&proj="+proj+"&funcao=gradedepol&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
+		cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"melhorcaminho",fim);
+		*/
+		alert("Tema: "+raster+"<br>A: "+pta+"<br>B: "+ptb+"<br>Lut: "+lut);
 	}
 };

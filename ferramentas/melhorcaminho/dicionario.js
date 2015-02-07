@@ -54,5 +54,45 @@ i3GEOF.melhorcaminho.dicionario = {
 		pt : "Ponto final (B). Voc&ecirc; pode clicar no mapa ou digitar novos valores",
 		en : "",
 		es : ""
+	} ],
+	'lut' : [ {
+		pt : "Voc&ecirc; pode reclassificar a imagem definindo novos valores para os pixels. Escolha os valores iniciais e finais do original e o novo valor. Podem ser definidos v&aacute;rios valores.",
+		en : "",
+		es : ""
+	} ],
+	'novovalor' : [ {
+		pt : "novo valor",
+		en : "",
+		es : ""
+	} ],
+	'menorque' : [ {
+		pt : "menor que",
+		en : "",
+		es : ""
+	} ],
+	'maiorque' : [ {
+		pt : "igual ou maior que",
+		en : "",
+		es : ""
+	} ],
+	'executa' : [ {
+		pt : "Calcular",
+		en : "",
+		es : ""
+	} ],
+	'fim' : [ {
+		pt : "Ap&oacute;s calcular o melhor tra&ccedil;ado, ser&aacute; adicionado ao mapa uma nova camada. O valor do custo calculado ser&aacute; inclu&iacute;do na tabela de atributos desse tema.",
+		en : "",
+		es : ""
+	} ],
+	'mesf1' : [ {
+		pt : "Escolha um tema com o mapa de custo",
+		en : "",
+		es : ""
+	} ],
+	'mesf2' : [ {
+		pt : "Erro ao calcular as coordenadas dos pontos A e B",
+		en : "",
+		es : ""
 	} ]
 };

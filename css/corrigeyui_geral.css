@@ -250,6 +250,18 @@ td.ygtvcell {
 	width: 100px;
 }
 
+.rodar0 .first-child button {
+	background: url("../imagens/oxygen/16x16/run-build.png") no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
+	width: 20px;
+	height: 20px;
+}
+
+.adicionar0 .first-child button {
+	background: url("../imagens/oxygen/16x16/list-add.png") no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
+	width: 20px;
+	height: 20px;
+}
+
 .enviar .first-child button {
 	background: url(../imagens/oxygen/16x16/svn-commit.png) 5% 50% no-repeat;
 	width: 250px;

@@ -1284,6 +1284,18 @@ h1 {
     }
 }
 
+.i3geoFormTag {
+  background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
+      background-size: 16px 144px;
+    }
+    border-radius: 8px;
+    background-color: #F0F0F0;
+    cursor: pointer;
+}
+
 .i3geoFormIconeAquarela {
   cursor: pointer;
   background: transparent url("../imagens/aquarela.gif") no-repeat scroll 98% 5px;
