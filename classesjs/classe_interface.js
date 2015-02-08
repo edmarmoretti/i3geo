@@ -2830,7 +2830,7 @@ i3GEO.Interface = {
 			//essa variavel guarda a posicao do mapa na tela
 			//e usada em vercoes com dispositivo touche para melhorar a performance
 			i3GEOtouchesPosMapa = "";
-			var modoAtual = "";
+			modoAtual = "";
 			google.maps.event.addListener(
 				i3GeoMap,
 				"dragstart",
@@ -2846,7 +2846,7 @@ i3GEO.Interface = {
 				"dragend",
 				function() {
 					var xy;
-					modoAtual = "";
+					//modoAtual = "";
 					i3GEO.Interface.googlemaps.recalcPar();
 					i3GEO.eventos.navegaMapa();
 					i3GEO.util.escondePin();
@@ -2860,7 +2860,7 @@ i3GEO.Interface = {
 						xy[0],
 						xy[1],
 						"localizarxygeoProj");
-					i3GEO.eventos.cliquePerm.status = false;
+					
 					i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
 				});
 			google.maps.event.addListener(

@@ -1139,6 +1139,17 @@ background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
 background-size: 16px 144px;
 }
 }
+.i3geoFormTag {
+background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
+background-size: 16px 144px;
+}
+border-radius: 8px;
+background-color: #F0F0F0;
+cursor: pointer;
+}
 .i3geoFormIconeAquarela {
 cursor: pointer;
 background: transparent url("../imagens/aquarela.gif") no-repeat scroll 98% 5px;
@@ -2574,6 +2585,16 @@ width: 150px;
 .rodar100 .first-child button {
 background: url(../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
 width: 100px;
+}
+.rodar0 .first-child button {
+background: url("../imagens/oxygen/16x16/run-build.png") no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
+width: 20px;
+height: 20px;
+}
+.adicionar0 .first-child button {
+background: url("../imagens/oxygen/16x16/list-add.png") no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
+width: 20px;
+height: 20px;
 }
 .enviar .first-child button {
 background: url(../imagens/oxygen/16x16/svn-commit.png) 5% 50% no-repeat;

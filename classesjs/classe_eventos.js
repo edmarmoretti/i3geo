@@ -539,6 +539,12 @@ i3GEO.eventos =
 				i3GEO.eventos.mousecliqueMapa(exy);
 			};
 			docMapa.onmouseup = function(exy) {
+				if (i3GEO.Interface.ATUAL === "googlemaps") {
+					if(modoAtual === "move"){
+						modoAtual = "";
+						return;
+					}
+				}
 				//funciona no googlemaps tbm
 				i3GEO.eventos.cliquePerm.status = true;
 				i3GEO.eventos.mouseupMapa(exy);
