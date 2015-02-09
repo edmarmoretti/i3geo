@@ -6,7 +6,6 @@ if(typeof(i3GEOF) === 'undefined'){
 Classe: i3GEOF.toponimia
 
 */
-//TODO incluir opcao para remover a toponimia de um LAYER
 //TODO incluir opcao de minscale e maxscale
 i3GEOF.toponimia = {
 	/*
@@ -67,7 +66,12 @@ i3GEOF.toponimia = {
 				"i3GEOtoponimiabotao1",
 				{onclick:{fn: i3GEOF.toponimia.cria}}
 			);
-			b.addClass("rodar");
+			b.addClass("rodar150");
+			var b = new YAHOO.widget.Button(
+				"i3GEOtoponimiabotao2",
+				{onclick:{fn: i3GEOF.toponimia.remove}}
+			);
+			b.addClass("rodar150");
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de escolha
 			//
@@ -222,6 +226,25 @@ i3GEOF.toponimia = {
 			cp.set_response_type("JSON");
 			cp.call(p,"criaToponimia",monta);
 		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.toponimia.aguarde.visibility = "hidden";}
+	},
+	remove: function(){
+		try{
+			if(i3GEOF.toponimia.aguarde.visibility === "visible")
+			{return;}
+			i3GEOF.toponimia.aguarde.visibility = "visible";
+			var monta = function(){
+					i3GEOF.toponimia.aguarde.visibility = "hidden";
+					i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
+				},
+				p = i3GEO.configura.locaplic+"/ferramentas/toponimia/exec.php?g_sid="+i3GEO.configura.sid+
+					"&funcao=removetoponimia&tema="+i3GEO.temaAtivo;
+
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"removeToponimia",monta);
+		}catch(e){
+			i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.toponimia.aguarde.visibility = "hidden";
+		}
 	},
 	/*
 	Function:

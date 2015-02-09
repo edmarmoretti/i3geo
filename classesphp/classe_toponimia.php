@@ -197,13 +197,13 @@ Retorno:
 				$novolayer->setmetadata("tema","texto de ".$nome);
 				$novolayer->setmetadata("tip","");
 				$novolayer->setmetadata("identifica","nao");
+				$novolayer->set("labelitem",$item);
 			}
 			else{
 				$nomer = $this->layer->name;
 				$novolayer = $this->mapa->getlayerbyname($nomer);
 			}
 			$novolayer->setmetadata("cache","");
-			$novolayer->set("labelitem",$item);
 			$this->layer = $novolayer;
 		}
 		else
@@ -215,7 +215,9 @@ Retorno:
 		for ($i=0; $i < $nclasses; ++$i){
 			$novac = $this->layer->getclass($i);
 			if($this->vi >= 60200){
-				$indiceLabel = $novac->addLabel(new labelObj());
+				//$indiceLabel = $novac->addLabel(new labelObj());
+				$s = "CLASS LABEL TEXT '[".$item."]' END END";
+				$novac->updateFromString($s);
 				$label = $novac->getLabel($indiceLabel);
 			}
 			else{
@@ -285,6 +287,29 @@ Retorno:
 		}
 		else
 		{return($nomer);}
+	}
+	function removeToponimia(){
+		$nclasses = $this->layer->numclasses;
+		for ($i=0; $i < $nclasses; ++$i){
+			$classe = $this->layer->getclass($i);
+			$nlabel = $classe->numlabels;
+			for($i=0;$i<$nlabel;$i++){
+				if($this->vi >= 60200){
+					$label = $classe->getLabel($i);
+				}
+				else{
+					$label = $classe->label;
+				}
+				$label->set("type",MS_TRUETYPE);
+				$label->set("font","arial");
+				$label->set("size",0);
+				$s = "CLASS LABEL TEXT '' END END";
+				$classe->updateFromString($s);
+			}
+		}
+		if ($this->layer){
+			$this->layer->setMetaData("cache","");
+		}
 	}
 	/*
 function: ativaEtiquetas

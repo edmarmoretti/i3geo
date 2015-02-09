@@ -504,5 +504,10 @@ i3GEOF.legenda.dicionario = {
 		pt : "(Opcional) Item que ser&aacute; utilizado para obter os nomes das classes",
 		en : "",
 		es : ""
+	} ],
+	'aplicar' : [ {
+		pt : "aplicar",
+		en : "",
+		es : ""
 	} ]
 };

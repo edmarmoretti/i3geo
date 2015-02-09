@@ -120,23 +120,8 @@ i3GEOF.toponimia.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	25 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	26 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	27 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	28 : [ {
-		pt : "",
+	'removeToponimia' : [ {
+		pt : "Remover",
 		en : "",
 		es : ""
 	} ]

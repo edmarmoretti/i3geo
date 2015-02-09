@@ -26,6 +26,15 @@ Cria um novo tema com a topon&iacute;mia do tema atual.
 		if ($tipo != "teste")
 		{$m->salva();$_SESSION["contadorsalva"]++;}
 	break;
+	case "REMOVETOPONIMIA":
+		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
+		copiaSeguranca($map_file);
+		$m = new Toponimia($map_file,$tema);
+		$tipo="";
+		$retorno = $m->removeToponimia();
+		$m->salva();
+		$_SESSION["contadorsalva"]++;
+		break;
 }
 if (!connection_aborted()){
 	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")

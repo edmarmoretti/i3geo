@@ -1161,6 +1161,11 @@ Adiciona LABEL em uma classe de um tema
 			$s = "CLASS LABEL WRAP '$wrap' END END";
 			$novac->updateFromString($s);
 		}
+		if($texto != ""){
+			$s = "CLASS LABEL TEXT '[".$texto."]' END END";
+			$novac->updateFromString($s);
+		}
+		
 		if($this->vi >= 60200){
 			$label = $novac->getLabel($indiceLabel);
 		}
@@ -1201,25 +1206,29 @@ Adiciona LABEL em uma classe de um tema
 		$label->set("partials",$partials);
 		$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
 		$label->set("position",$p[$position]);
-		if($texto != ""){
-			$label->setText($texto);
+		if ($this->layer){
+			$this->layer->setMetaData("cache","");
 		}
-		if ($this->layer)
-		{$this->layer->setMetaData("cache","");}
 	}
 	function removeLabel($iclasse){
 		$classe = $this->layer->getclass($iclasse);
-		if($this->vi >= 60200){
-			$label = $classe->getLabel(0);
+		$nlabel = $classe->numlabels;
+		for($i=0;$i<$nlabel;$i++){
+			if($this->vi >= 60200){
+				$label = $classe->getLabel($i);
+			}
+			else{
+				$label = $classe->label;
+			}
+			$label->set("type",MS_TRUETYPE);
+			$label->set("font","arial");
+			$label->set("size",0);
+			$s = "CLASS LABEL TEXT '' END END";
+			$classe->updateFromString($s);
 		}
-		else{
-			$label = $classe->label;
+		if ($this->layer){
+			$this->layer->setMetaData("cache","");
 		}
-		$label->set("type",MS_TRUETYPE);
-		$label->set("font","arial");
-		$label->set("size",0);
-		if ($this->layer)
-		{$this->layer->setMetaData("cache","");}
 	}
 }
 ?>
