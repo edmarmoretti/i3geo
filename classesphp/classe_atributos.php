@@ -1,6 +1,6 @@
 <?php
 /*
-Title: classe_atributos
+ Title: classe_atributos
 
 Processa a tabela de atributos de um tema.
 
@@ -34,55 +34,55 @@ Arquivo:
 i3geo/classesphp/classe_atributos.php
 */
 /*
-Classe: Atributos
+ Classe: Atributos
 
 */
 class Atributos
 {
 	/*
-	Variavel: $mapa
+	 Variavel: $mapa
 
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
-	Variavel: $arquivo
+	 Variavel: $arquivo
 
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
-	Variavel: $layer
+	 Variavel: $layer
 
 	Objeto layer
 	*/
 	protected $layer;
 	/*
-	Variavel: $nome
+	 Variavel: $nome
 
 	Nome do layer
 	*/
 	protected $nome;
 	/*
-	Variavel: $qyfile
+	 Variavel: $qyfile
 
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
 	/*
-	Variavel: $projO
+	 Variavel: $projO
 
 	Objeto projection original do mapa. Obtido apenas na interface Googlemaps
 	*/
 	public $projO;
 	/*
-	Variavel: $v
+	 Variavel: $v
 
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
 	/*
-	Function: __construct
+	 Function: __construct
 
 	Cria um objeto Atributos.
 
@@ -132,7 +132,7 @@ class Atributos
 		}
 	}
 	/*
-	function: salva
+	 function: salva
 
 	Salva o mapfile atual
 
@@ -150,7 +150,7 @@ class Atributos
 	}
 
 	/*
-	function: extensaoShape
+	 function: extensaoShape
 
 	Pega a extens&atilde;o geogr&aacute;fica de um objeto shape.
 
@@ -197,7 +197,7 @@ class Atributos
 		return $ext;
 	}
 	/*
-	function - extensaoRegistro
+	 function - extensaoRegistro
 
 	Pega a extens&atilde;o geogr&aacute;fica de um registro na tabela de atributos de um tema.
 
@@ -236,7 +236,7 @@ class Atributos
 		return($ext);
 	}
 	/*
-	function: listaItens
+	 function: listaItens
 
 	Lista os itens de um tema.
 	*/
@@ -301,7 +301,7 @@ class Atributos
 		return (array("valores"=>$lista,"temas"=>$l,"nomes"=>$nomestemas));
 	}
 	/*
-	function: itensTexto
+	 function: itensTexto
 
 	Pega todos os valores dos itens de uma tabela de um tema.
 
@@ -352,7 +352,7 @@ class Atributos
 		return(array("itens"=>implode(";",$items),"valores"=>$registros));
 	}
 	/*
-	function: listaRegistros
+	 function: listaRegistros
 
 	Pega todos os valores dos itens de uma tabela de um tema.
 
@@ -565,7 +565,7 @@ class Atributos
 		return($resultadoFinal);
 	}
 	/*
-	function: listaRegistrosXY
+	 function: listaRegistrosXY
 
 	Pega o XY de cada registro e valores de itens especificos
 
@@ -793,7 +793,7 @@ class Atributos
 				$resultado[] = array("tema"=>$tema,"resultado"=>$fr);
 			}
 			/*
-			$teste = $l->whichShapes($ret);
+			 $teste = $l->whichShapes($ret);
 			if($teste){
 			$fr = array();
 			while ($shape = $l->nextShape())
@@ -845,7 +845,7 @@ class Atributos
 		return($resultado);
 	}
 	/*
-	function: estatDescritivas
+	 function: estatDescritivas
 
 	Calcula estat&iacute;sticas b&aacute;sicas de uma tabela de um tema.
 
@@ -920,7 +920,7 @@ class Atributos
 		return(array("indices"=>$chaves,"variaveis"=>$indice,"valores"=>$resultado));
 	}
 	/*
-	identifica
+	 identifica
 
 	Depreciado na vers&atilde;o 4.2 (utilize "identifica2")
 
@@ -1056,7 +1056,7 @@ class Atributos
 		}
 	}
 	/*
-	function: identifica2
+	 function: identifica2
 
 	Depreciado na vers&atilde;o 4.7 (utilize "identifica3")
 
@@ -1218,7 +1218,7 @@ class Atributos
 		}
 	}
 	/*
-	function: identifica3
+	 function: identifica3
 
 	Identifica elementos no mapa.
 
@@ -1239,34 +1239,27 @@ class Atributos
 	function identifica3($opcao,$xy,$resolucao,$ext="",$listaDeTemas="",$wkt="nao")
 	{
 		if ($opcao != "tema" && $opcao != "tip"){
-			if($listaDeTemas != "")
-			{
+			if($listaDeTemas != ""){
 				$listaDeTemas = str_replace(" ",",",$listaDeTemas);
 				$temas = explode(",",$listaDeTemas);
 			}
-			else
-			{$temas = $this->mapa->getalllayernames();
+			else{
+				$temas = $this->mapa->getalllayernames();
 			}
-			foreach ($temas as $tem)
-			{
+			foreach ($temas as $tem){
 				$vermultilayer = new vermultilayer();
 				$vermultilayer->verifica($this->arquivo,$tem);
-				if ($vermultilayer->resultado == 1) // o tema e multi layer
-				{
-					foreach (($vermultilayer->temasvisiveis) as $tv)
-					{
+				if ($vermultilayer->resultado == 1) {
+					foreach (($vermultilayer->temasvisiveis) as $tv){
 						$l = $this->mapa->getlayerbyname($tv);
-						if ($l->getmetadata("identifica") != "nao")
-						{
+						if ($l->getmetadata("identifica") != "nao")	{
 							$listatemas[] = $tv;
 						}
 					}
 				}
-				else
-				{
+				else{
 					$l = $this->mapa->getlayerbyname($tem);
-					if (($l->getmetadata("escondido") == "") && ($l->getmetadata("identifica") != "nao"))
-					{
+					if (($l->getmetadata("escondido") == "") && ($l->getmetadata("identifica") != "nao")){
 						$listatemas[] = $tem;
 					}
 				}
@@ -1344,7 +1337,8 @@ class Atributos
 				$itemtip = $tl->getmetadata("TIP");
 				if ($itemtip != ""){
 					if ($tl->status == MS_DEFAULT || $listaDeTemas != ""){
-						$resultados[$tema] = array("tips"=>$itemtip,"dados"=>$this->identificaQBP3($tema,$xyarray[0],$xyarray[1],"",$resolucao,$itemtip,"",true,$ext,$wkt));
+						$r = $this->identificaQBP3($tema,$xyarray[0],$xyarray[1],"",$resolucao,$itemtip,"",true,$ext,$wkt);
+						$resultados[$tema] = array("todosItens"=>$r["itensLayer"],"tips"=>$itemtip,"dados"=>$r["resultado"]);
 						$ltemp[] = $tema;
 					}
 				}
@@ -1360,7 +1354,7 @@ class Atributos
 		}
 	}
 	/*
-	function: retornaI2
+	 function: retornaI2
 
 	Processa o resultado da identifica&ccedil;&atilde;o de um elemento compondo um array de strings formatadas.
 
@@ -1449,7 +1443,7 @@ class Atributos
 	}
 
 	/*
-	function: retornaI
+	 function: retornaI
 
 	Depreciado na vers&atilde;o 4.2
 
@@ -1497,7 +1491,7 @@ class Atributos
 		return $final;
 	}
 	/*
-	function: identificaQBP
+	 function: identificaQBP
 
 	Depreciado na vers&atilde;o 4.2
 
@@ -1720,7 +1714,7 @@ class Atributos
 		return $resultado;
 	}
 	/*
-	function: identificaQBP2
+	 function: identificaQBP2
 
 	Depreciado na vers&atilde;o 4.2
 
@@ -2047,35 +2041,35 @@ class Atributos
 								$img = "<img src='".$locimg[$conta]."//".$shape->values[$itemimg[$conta]]."' //>";
 							}
 							else
-							if($itemimg[$conta] != "")
-							{
-								$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";
-							}
-							//indica se o item &eacute; tbm uma etiqueta
-							$etiqueta = "nao";
-							if(in_array($it,$tips))
-							{
-								$etiqueta = "sim";
-							}
-							if($wkt == "sim"){
-								$wkt = $shape->towkt();
-							}
-							$arraytemp = array(
-									"alias"=>$this->converte($itensdesc[$conta]),
-									"valor"=>$val,
-									"link"=>$link,
-									"img"=>$img,
-									"tip"=>$etiqueta,
-									"wkt"=>$wkt
-							);
-							if($etip==false)
-							{
-								$valori[] = $arraytemp;
-							}
-							else
-							{$valori[$it] = $arraytemp;
-							}
-							$conta = $conta + 1;
+								if($itemimg[$conta] != "")
+								{
+									$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";
+								}
+								//indica se o item &eacute; tbm uma etiqueta
+								$etiqueta = "nao";
+								if(in_array($it,$tips))
+								{
+									$etiqueta = "sim";
+								}
+								if($wkt == "sim"){
+									$wkt = $shape->towkt();
+								}
+								$arraytemp = array(
+										"alias"=>$this->converte($itensdesc[$conta]),
+										"valor"=>$val,
+										"link"=>$link,
+										"img"=>$img,
+										"tip"=>$etiqueta,
+										"wkt"=>$wkt
+								);
+								if($etip==false)
+								{
+									$valori[] = $arraytemp;
+								}
+								else
+								{$valori[$it] = $arraytemp;
+								}
+								$conta = $conta + 1;
 						}
 						$resultado[] = $valori;
 					}
@@ -2089,7 +2083,7 @@ class Atributos
 		return $resultado;
 	}
 	/*
-	function: identificaQBP3
+	 function: identificaQBP3
 
 	Depreciado na vers&atilde;o 4.2
 
@@ -2307,7 +2301,8 @@ class Atributos
 			$lks = array();
 			$itemimg = array();
 			$locimg = array();
-			foreach($tips as $t){
+			//foreach($tips as $t){
+			foreach($itensLayer as $t){
 				$itens[] = $t;
 				if($temp[$t] != ""){
 					$itensdesc[] = $temp[$t];
@@ -2463,11 +2458,15 @@ class Atributos
 		else{
 			$resultado[] = " ";
 		}
-		//exit;
-		return $resultado;
+		if($etip == true){
+			return array("resultado"=>$resultado,"itensLayer"=>$itensLayer);
+		}
+		else{
+			return $resultado;
+		}
 	}
 	/*
-	Function: converte
+	 Function: converte
 
 	Converte uma string de ISO-8859-1 para UTF-8
 

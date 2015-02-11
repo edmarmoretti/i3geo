@@ -2300,6 +2300,12 @@ g_traducao = {
 	pt: "Melhor caminho (raster)",
 	en:"",
 	es:""
+}],
+"tolerancia": [
+{
+	pt: "Toler&acirc;ncia de busca (em pixels)",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

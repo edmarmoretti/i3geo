@@ -1,3 +1,4 @@
+/*
 .olPopupCloseBox {
 background: url("img/edit-delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 cursor: pointer;
@@ -5,6 +6,14 @@ padding: 3px;
 background-position: 7px 0px;
 margin-right: -5px;
 margin-top: -5px;
+}
+*/
+.olPopupCloseBox {
+margin-top: -2px;
+}
+.i3GEOCabecalhoInfoWindow {
+height:16px;
+top: -5px;
 }
 .i3GEOarvCam .ygtvitem {
 text-align: left;
@@ -2168,21 +2177,35 @@ left: 2px;
 .hd .i3GEOconeFerramenta{
 top: 5px;
 }
+.i3GEOiconeMais{
+background-image: url("../imagens/oxygen/16x16/draw-cross.png");
+width: 16px;
+height: 16px;
+float: left;
+cursor: pointer;
+}
+.i3GEOiconeFerramentas{
+background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
+width: 16px;
+height: 16px;
+float: left;
+cursor: pointer;
+}
 .i3GEOiconeAberto {
 background-image: URL('../imagens/oxygen/16x16/document-decrypt.png');
 cursor: pointer;
-margin-right: -3px;
-padding: 3px;
 background-repeat: no-repeat;
-margin-top: 2px;
+width: 16px;
+height: 16px;
+float: left;
 }
 .i3GEOiconeFechado {
 background-image: URL('../imagens/oxygen/16x16/document-encrypt.png');
 cursor: pointer;
-margin-right: -3px;
-padding: 3px;
 background-repeat: no-repeat;
-margin-top: 2px;
+width: 16px;
+height: 16px;
+float: left;
 }
 .i3GEOiconeOpacidadeMapa {
 background-image: URL('../imagens/oxygen/16x16/show-menu.png');
