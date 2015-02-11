@@ -318,36 +318,38 @@ i3GEO.gadgets = {
 	 * por default &eacute; obtido de i3GEO.gadgets.PARAMETROS
 	 */
 	mostraEscalaGrafica : function(id) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.gadgets.mostraEscalaGrafica()");
-
 		if (arguments.length === 0) {
 			id = i3GEO.gadgets.PARAMETROS.mostraEscalaGrafica.idhtml;
 		}
 		var e, temp, ins;
 		if ($i(id)) {
-			//TODO remover do escopo global
-			atualizaEscalaGrafica = function() {
-				e = $i("imagemEscalaGrafica");
-				if (!e) {
-					i3GEO.eventos.removeEventos("NAVEGAMAPA",["atualizaEscalaGrafica()"]);
-					return;
-				}
-				temp = function(retorno) {
-					eval(retorno.data);
-					$i("imagemEscalaGrafica").src = scaimagem;
-				};
-				i3GEO.php.escalagrafica(temp);
-			};
 			if (!$i("imagemEscalaGrafica")) {
 				ins = "<img class='menuarrow' src=\""
 					+ i3GEO.configura.locaplic
 					+ "/imagens/branco.gif\" title='op&ccedil;&otilde;es' onclick='i3GEO.mapa.dialogo.opcoesEscala()' style='cursor:pointer'/><img id=imagemEscalaGrafica src='' />";
 				$i(id).innerHTML = ins;
 			}
-			atualizaEscalaGrafica();
-			i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["atualizaEscalaGrafica()"]);
+			i3GEO.gadgets.atualizaEscalaGrafica();
+			i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.gadgets.atualizaEscalaGrafica()"]);
 		}
+	},
+	/**
+	 * Function: atualizaEscalaGrafica
+	 * 
+	 * Atualiza a escala gr&aacute;fica
+	 * 
+	 */
+	atualizaEscalaGrafica : function() {
+		var e = $i("imagemEscalaGrafica");
+		if (!e) {
+			i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.gadgets.atualizaEscalaGrafica()"]);
+			return;
+		}
+		temp = function(retorno) {
+			eval(retorno.data);
+			$i("imagemEscalaGrafica").src = scaimagem;
+		};
+		i3GEO.php.escalagrafica(temp);
 	},
 	/**
 	 * Function: mostraBuscaRapida

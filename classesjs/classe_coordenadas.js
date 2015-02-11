@@ -275,26 +275,47 @@ i3GEO.coordenadas =
 				if ($i(id)) {
 					if (!$i("coordgeotabela")) {
 						$i(id).innerHTML = i3GEO.coordenadas.criaMascaraDMS("coordgeotabela");
-						// TODO mover do escopo global
-						atualizaLocalizarGeo = function() {
-							var temp = $i("coordgeotabela");
-							if (temp && temp.style.display === "block") {
-								i3GEO.coordenadas.atualizaGeo(objposicaocursor.dmsx, objposicaocursor.dmsy, "coordgeotabela");
-							}
-						};
 						if (i3GEO.Interface.TABLET === true) {
 							i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
-								"atualizaLocalizarGeo()"
+								"i3GEO.coordenadas.atualizaLocalizarGeo()"
 							]);
 						} else {
 							i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
-								"atualizaLocalizarGeo()"
+								"i3GEO.coordenadas.atualizaLocalizarGeo()"
 							]);
 						}
 					}
 				}
 			} catch (e) {
 				i3GEO.janela.tempoMsg("mostraCoordenadasGeo: " + e.description);
+			}
+		},
+		/**
+		 * Function: atualizaLocalizarGeo
+		 * 
+		 * Atualiza os valores do componente que mostra as coordenadas do mouse em GEO
+		 * 
+		 * Parametros:
+		 * 
+		 * {string} - (opcional) id do componente. Se nao for definido assume como "coordgeotabela"
+		 * 
+		 * {string} - (opcional) se nao for definido sera utilizado objposicaocursor.dmsx
+		 * 
+		 * {string} - (opcional) se nao for definido sera utilizado objposicaocursor.dmsy
+		 */
+		atualizaLocalizarGeo : function(id, x, y) {
+			if(!id){
+				id = "coordgeotabela";
+			}
+			if (typeof (x) === 'undefined') {
+				x = objposicaocursor.dmsx;
+			}
+			if (typeof (y) === 'undefined') {
+				y = objposicaocursor.dmsy;
+			}
+			var temp = $i(id);
+			if (temp && temp.style.display === "block") {
+				i3GEO.coordenadas.atualizaGeo(x, y, id);
 			}
 		},
 		/**
@@ -678,35 +699,19 @@ i3GEO.coordenadas =
 				if (onde !== "" && $i(onde)) {
 					$i(onde).innerHTML = ins;
 				}
-				//
-				// aplica as fun&ccedil;&otilde;es de movimenta&ccedil;&atilde;o
-				// do mouse
-				//
-				atualizaLocalizarGeo = function(id, x, y) {
-					if (typeof (x) === 'undefined') {
-						x = objposicaocursor.dmsx;
-					}
-					if (typeof (y) === 'undefined') {
-						y = objposicaocursor.dmsy;
-					}
-					temp = $i(id);
-					if (temp && temp.style.display === "block") {
-						i3GEO.coordenadas.atualizaGeo(x, y, id);
-					}
-				};
 				for (i = 0; i < n; i += 1) {
 					temp = i3GEO.coordenadas.config[tipos[i]];
 					if (temp.ativo === true) {
 						if (temp.tipo === "geo") {
 							if (ativaMovimento === true) {
 								if (i3GEO.Interface.TABLET === true) {
-									i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["atualizaLocalizarGeo('" + onde + tipos[i] + "')"]);
+									i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEO.coordenadas.atualizaLocalizarGeo('" + onde + tipos[i] + "')"]);
 								} else {
-									i3GEO.eventos.adicionaEventos("MOUSEMOVE",["atualizaLocalizarGeo('" + onde + tipos[i] + "')"]);
+									i3GEO.eventos.adicionaEventos("MOUSEMOVE",["i3GEO.coordenadas.atualizaLocalizarGeo('" + onde + tipos[i] + "')"]);
 								}
 							}
 							if (typeof (x) !== 'undefined') {
-								atualizaLocalizarGeo(onde + tipos[i], i3GEO.calculo.dd2dms(x)[0], i3GEO.calculo.dd2dms(y)[0]);
+								i3GEO.coordenadas.atualizaLocalizarGeo(onde + tipos[i], i3GEO.calculo.dd2dms(x)[0], i3GEO.calculo.dd2dms(y)[0]);
 							}
 						} else {
 							nomeFunc = "i3GEO.coordenadas.atualizaProj4";
