@@ -110,44 +110,44 @@
 	top: -1px;
 	margin-left: 3px;
 }
-.i3GEOarvCamTemaIco .Farol, .i3GEOarvCamTemaIcoIE .Farol {
+.i3GEOarvCamTemaIco .arvCamFarol, .i3GEOarvCamTemaIcoIE .Farol {
 	width: 11px;
 	height: 11px;
 }
 
-.i3GEOarvCamTemaIco .Ferramentas, .i3GEOarvCamTemaIcoIE .Ferramentas {
+.i3GEOarvCamTemaIco .arvCamFerramentas, .i3GEOarvCamTemaIcoIE .Ferramentas {
 	background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
 }
 
-.i3GEOarvCamTemaIco .Download, .i3GEOarvCamTemaIcoIE .Download {
+.i3GEOarvCamTemaIco .arvCamDownload, .i3GEOarvCamTemaIcoIE .Download {
 	background-image: url("../imagens/oxygen/16x16/download.png");
 }
 
-.i3GEOarvCamTemaIco .Fonte, .i3GEOarvCamTemaIcoIE .Fonte {
+.i3GEOarvCamTemaIco .arvCamFonte, .i3GEOarvCamTemaIcoIE .Fonte {
 	background-image: url("../imagens/oxygen/16x16/help-about.png");
 }
 
-.i3GEOarvCamTemaIco .Selecionado, .i3GEOarvCamTemaIcoIE .Selecionado {
+.i3GEOarvCamTemaIco .arvCamSelecionado, .i3GEOarvCamTemaIcoIE .Selecionado {
 	background-image: url("../imagens/gisicons/select-cancel.png");
 }
 
-.i3GEOarvCamTemaIco .ZoomSelecionado, .i3GEOarvCamTemaIE .ZoomSelecionado {
+.i3GEOarvCamTemaIco .arvCamZoomSelecionado, .i3GEOarvCamTemaIE .ZoomSelecionado {
 	background-image: url("../imagens/gisicons/zoom-selection.png");
 }
-.i3GEOarvCamTemaIco .DependeEscala, .i3GEOarvCamTemaIcoIE .DependeEscala {
+.i3GEOarvCamTemaIco .arvCamDependeEscala, .i3GEOarvCamTemaIcoIE .DependeEscala {
 	background-image: url("../imagens/oxygen/16x16/task-attempt.png");
 	top: 0px;
 }
-.i3GEOarvCamTemaIco .RemoveLayer, .i3GEOarvCamTemaIcoIE .RemoveLayer {
+.i3GEOarvCamTemaIco .arvCamRemoveLayer, .i3GEOarvCamTemaIcoIE .RemoveLayer {
 	background-image: url("../imagens/oxygen/16x16/draw-x.png");
 }
-.i3GEOarvCamTemaIco .SobeLayer, .i3GEOarvCamTemaIcoIE .SobeLayer {
+.i3GEOarvCamTemaIco .arvCamSobeLayer, .i3GEOarvCamTemaIcoIE .SobeLayer {
 	background-image: url("../imagens/oxygen/16x16/draw-triangle3.png");
 }
-.i3GEOarvCamTemaIco .DesceLayer, .i3GEOarvCamTemaIcoIE .DesceLayer {
+.i3GEOarvCamTemaIco .arvCamDesceLayer, .i3GEOarvCamTemaIcoIE .DesceLayer {
 	background-image: url("../imagens/oxygen/16x16/draw-triangle4.png");
 }
-.i3GEOarvCamTemaIco .ZoomLayer, .i3GEOarvCamTemaIcoIE .ZoomLayer {
+.i3GEOarvCamTemaIco .arvCamZoomLayer, .i3GEOarvCamTemaIcoIE .ZoomLayer {
 	background-image: url("../imagens/gisicons/zoom-layer.png");
 }
 

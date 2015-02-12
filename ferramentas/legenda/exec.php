@@ -38,7 +38,7 @@ Adiciona LABEL em uma classe de um layer
 		else{
 			//$l->set("labelitem",$item);
 			$novac = $l->getclass($classe);
-			$m->adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,$item);
+			$m->adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,"[".$item."]");
 			$m->salva();
 			$retorno = "ok";
 		}

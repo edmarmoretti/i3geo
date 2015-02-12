@@ -784,7 +784,7 @@ $wkt - boolean indicando se $xy e um WKT
 			else{
 				$novac = ms_newclassobj($pinlayer);
 			}
-			$this->adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,$texto);
+			$this->adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,"");
 		}
 		$pinlayer->addfeature($shp);
 		if($nomeTema != ""){
@@ -1162,10 +1162,10 @@ Adiciona LABEL em uma classe de um tema
 			$novac->updateFromString($s);
 		}
 		if($texto != ""){
-			$s = "CLASS LABEL TEXT '[".$texto."]' END END";
+			$s = "CLASS LABEL TEXT '".$texto."' END END";
 			$novac->updateFromString($s);
 		}
-		
+
 		if($this->vi >= 60200){
 			$label = $novac->getLabel($indiceLabel);
 		}
