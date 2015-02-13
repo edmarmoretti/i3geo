@@ -119,6 +119,38 @@ i3GEO.arvoreDeCamadas =
 		FINALIZA : "",
 		finaliza : "",
 		/**
+		 * Propriedade: NOTEMA
+		 *
+		 * Objeto com os par&acirc;metros que s&atilde;o utilizados na &aacute;rvore de camadas para incluir os
+		 * n&oacute;s correspondentes a cada tema
+		 *
+		 * Esse objeto segue as defini&ccedil;&otilde;es da API da biblioteca YUI2
+		 *
+		 * http://yui.github.io/yui2/docs/yui_2.9.0_full/docs/YAHOO.widget.Node.html
+		 *
+		 */
+		NOTEMA : {
+			expanded : true,
+			hasIcon : false,
+			enableHighlight : false
+		},
+		/**
+		 * Propriedade: NOTEMAICON
+		 *
+		 * Objeto com os par&acirc;metros que s&atilde;o utilizados na &aacute;rvore de camadas para incluir os
+		 * n&oacute;s correspondentes aos &iacute;cones de op&ccedil;&otilde;es de cada tema
+		 *
+		 * Esse objeto segue as defini&ccedil;&otilde;es da API da biblioteca YUI2
+		 *
+		 * http://yui.github.io/yui2/docs/yui_2.9.0_full/docs/YAHOO.widget.Node.html
+		 *
+		 */
+		NOTEMAICONES : {
+			expanded : false,
+			hasIcon : true,
+			enableHighlight : false
+		},
+		/**
 		 * Propriedade: ATIVATEMA
 		 *
 		 * Nome da fun&ccedil;&atilde;o que ser&aacute; inclu&iacute;da no evento onclick do elemento checkbox adicionado no in&iacute;cio
@@ -771,23 +803,18 @@ i3GEO.arvoreDeCamadas =
 						if ((ltema.escondido).toLowerCase() !== "sim") {
 							textoTema = i3GEO.arvoreDeCamadas.montaTextoTema(ltema);
 							if (textoTema !== "") {
-								temaNode = new YAHOO.widget.HTMLNode({
-									expanded : true,
-									hasIcon : false,
-									html : textoTema,
-									idlegenda : ltema.name,
-									tipo : "tema",
-									enableHighlight : false
-								}, tempNode);
+								temp = i3GEO.arvoreDeCamadas.NOTEMA;
+								temp.html = textoTema;
+								temp.idlegenda = ltema.name;
+								temp.tipo = "tema";
+								temaNode = new YAHOO.widget.HTMLNode( temp, tempNode);
 								if (i3GEO.arvoreDeCamadas.OPCOESICONES === true) {
 									textoTema = i3GEO.arvoreDeCamadas.montaIconesTema(ltema);
-									temaNodeFilho = new YAHOO.widget.HTMLNode({
-										id : ltema.name,
-										expanded : false,
-										html : textoTema,
-										enableHighlight : false,
-										isLeaf : !this.PERMITEEXPANDIRTEMAS
-									}, temaNode);
+									temp = i3GEO.arvoreDeCamadas.NOTEMAICONES;
+									temp.id = ltema.name;
+									temp.html = textoTema;
+									temp.isLeaf = !i3GEO.arvoreDeCamadas.PERMITEEXPANDIRTEMAS;
+									temaNodeFilho = new YAHOO.widget.HTMLNode(temp, temaNode);
 								}
 								if (ltema.classe !== "NAO" && this.PERMITEEXPANDIRTEMAS) {
 									temaNodeFilho.setDynamicLoad(i3GEO.arvoreDeCamadas.mostraLegenda, 1);

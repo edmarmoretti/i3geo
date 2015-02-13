@@ -29,9 +29,9 @@ content: "";
 content: url("../imagens/gisicons/hide.png");
 line-height: 15px;
 text-align: center;
-top: 9px;
-position: relative;
-left: -5px;
+top: -1px;
+position: absolute;
+left: 1px;
 cursor : pointer;
 }
 .i3GEOarvCam input[type=checkbox]:checked+label:before {
@@ -40,13 +40,13 @@ content: "";
 content: url("../imagens/gisicons/show.png");
 line-height: 15px;
 text-align: center;
-top: 9px;
-position: relative;
-left: -5px;
+top: -1px;
+position: absolute;
+left: 1px;
 cursor : pointer;
 }
 .i3GEOarvCam label {
-margin-left: 0px;
+margin-left: 30px;
 cursor: move;
 }
 .i3GEOarvCamGrupo {
@@ -62,8 +62,7 @@ font-size: 13px;
 margin: auto;
 text-align: left;
 cursor: pointer;
-top: 1px;
-font-weight : bold;
+top: -2px;
 }
 .i3GEOarvCamTemaIE {
 text-align: left;
