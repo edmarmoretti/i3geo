@@ -1071,6 +1071,7 @@ background: #F8F8F8;
 border: 1px solid #DDDDDD;
 height: 22px;
 border-radius: 2px;
+text-overflow: ellipsis;
 }
 .styled-select150 {
 width: 150px;
@@ -1089,13 +1090,13 @@ line-height: 1.5;
 -webkit-appearance: none;
 -moz-appearance: none;
 text-indent: 0.01px;
-text-overflow: 'ellipsis';
+text-overflow: ellipsis;
 font-size: 12px;
 appearance: none;
-background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 8px;
+background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 6px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
-background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 8px;
+background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 6px;
 background-size: 16px 144px;
 }
 }

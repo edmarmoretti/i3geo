@@ -218,8 +218,11 @@ class Mapa
 
 	array("chaves"=>array(),"valores"=>array(array())))
 	*/
+	//TODO verificar fonte em cada tema
 	function parametrosTemas()
 	{
+		//obtem os dados sobre todos os temas no banco de dados de administracao
+
 		$temas = array();
 		$existesel = false;
 		$dir = dirname($this->arquivo);

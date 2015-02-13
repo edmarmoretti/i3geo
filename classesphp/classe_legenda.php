@@ -353,20 +353,20 @@ array
 				for ($c = 0;$c < $nc;$c++){
 					$classe = $layer->getclass($c);
 					$imgi = $classe->createlegendicon(30,15);
-					$classe->drawlegendicon(30,15,$imgi,5,5);
+					$classe->drawlegendicon(30,15,$imgi,0,0);
 					$nomes = nomeRandomico(12);
 					$nomer = ($imgi->imagepath)."icone".$nomes.".png";
 					$imgi->saveImage($nomer);
 					$i = ($imgi->imageurl).basename($nomer);
 					$nomeclasse = $classe->name;
-					
+
 					//if (function_exists("mb_convert_encoding"))
 					//{$nomeclasse = mb_convert_encoding($nomeclasse,"UTF-8","ISO-8859-1");}
 					$nomeclasse = $this->converte($nomeclasse);
 					$nomeexp = $classe->getExpressionString();
 					if (function_exists("mb_convert_encoding"))
 					{$nomeexp = mb_convert_encoding($nomeexp,"UTF-8","ISO-8859-1");}
-					
+
 					$linhas[] = array("tema"=>$l,"idclasse"=>$c,"nomeclasse"=>$nomeclasse,"expressao"=>$nomeexp,"imagem"=>$i,"proc"=>"","minScale"=>$classe->minscaledenom,"maxScale"=>$classe->maxscaledenom);
 				}
 				if (($totaliza=="sim") && ($nc > 1)){
