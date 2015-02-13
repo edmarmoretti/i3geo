@@ -29,7 +29,7 @@ Arquivo:
 
 i3geo/admin/js/editormapfile.js
 */
-
+//TODO reposicionar os botoes de salvar, voltar, etc
 contaN = 0;
 objcontype = [
 	{texto:"MS_INLINE",valor:"0"},
@@ -943,7 +943,7 @@ function selConexaoBanco(eleValue){
 					};
 					for(i=0;i<n;i++){
 						temp = "password=****** user="+dados[i].usuario+" dbname="+dados[i].bancodedados+" host="+dados[i].host+" port="+dados[i].porta;
-						
+
 
 						textos.push("<b>"+dados[i].codigo_estat_conexao+"</b> (d: "+dados[i].bancodedados+" h: "+dados[i].host+" u: "+dados[i].usuario+")");
 						valores.push(temp);
