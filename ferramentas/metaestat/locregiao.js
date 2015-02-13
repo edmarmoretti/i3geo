@@ -341,7 +341,7 @@ i3GEOF.locregiao = {
 		i3GEO.janela.AGUARDEMODAL = true;
 		i3GEO.janela.abreAguarde("aguardeFiltroRegiao","Filtrando...");
 		i3GEO.php.aplicaFiltroRegiao(temp,codigo_tipo_regiao,codigo_regiao);
-		i3GEO.janela.tempoMsg("O filtro &eacute; aplicado a todas as camadas oriundas do sistema de metadados estat&iacute;cos.");
+		i3GEO.janela.tempoMsg("O filtro &eacute; aplicado a todas as camadas oriundas do sistema de metadados estat&iacute;sticos.");
 	},
 	/**
 	 * Remove os filtros aplicados com aplicaFiltro
