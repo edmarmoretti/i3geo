@@ -87,13 +87,23 @@ i3GEO.tema =
 		 * 
 		 * {boolean} - abre em um popup
 		 */
-		fonte : function(tema, popup) {
+		fonte : function(tema, popup, link) {
 			i3GEO.mapa.ativaTema(tema);
+			if(!link){
+				link = i3GEO.configura.locaplic + "/admin/abrefontemapfile.php?tema=" + tema;
+			}
 			if (!popup) {
-				window.open(i3GEO.configura.locaplic + "/admin/abrefontemapfile.php?tema=" + tema);
+				window.open(link);
 			} else {
-				i3GEO.janela.cria((i3GEO.parametros.w / 2) + 25 + "px", (i3GEO.parametros.h / 2) + 18 + "px", i3GEO.configura.locaplic
-					+ "/admin/abrefontemapfile.php?tema=" + tema, "", "", "Metadata", "metadata" + tema);
+				i3GEO.janela.cria(
+					(i3GEO.parametros.w / 2) + 25 + "px", 
+					(i3GEO.parametros.h / 2) + 18 + "px", 
+					link,
+					"", 
+					"", 
+					"Metadata", 
+					"metadata" + tema
+				);
 			}
 		},
 		/**

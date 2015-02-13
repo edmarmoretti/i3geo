@@ -218,17 +218,15 @@ class Mapa
 
 	array("chaves"=>array(),"valores"=>array(array())))
 	*/
-	//TODO verificar fonte em cada tema
 	function parametrosTemas()
 	{
 		//obtem os dados sobre todos os temas no banco de dados de administracao
-
+		$dadosTemas = pegaDadosAdminKey("select codigo_tema,link_tema from __esq__i3geoadmin_temas","__esq__");
 		$temas = array();
 		$existesel = false;
 		$dir = dirname($this->arquivo);
 		//$qy = file_exists($this->qyfile);
-		foreach($this->layers as $l)
-		{
+		foreach($this->layers as $l){
 			$l->set("template","none.htm");
 		}
 		$chaves = array(
@@ -271,7 +269,8 @@ class Mapa
 				"editavel",
 				"colunaidunico",
 				"cortepixels",
-				"plugini3geo"
+				"plugini3geo",
+				"link_tema"
 		);
 		foreach ($this->layers as $oLayer){
 			$sel = "nao";
@@ -415,6 +414,19 @@ class Mapa
 					}
 					$plugini3geo = json_decode($plugini3geo);
 				}
+				//pega dados do banco
+				$link_tema = "";
+				$temp = $oLayer->getmetadata("nomeoriginal");
+				if($temp != "" && array_key_exists($temp,$dadosTemas)){
+					$link_tema = $dadosTemas[$temp];
+					$link_tema = $link_tema["link_tema"];
+				}
+				//aqui pega o valor link_tema em METADATA
+				//esse METADATA nao e definido pelo i3Geo e teria de ser incluido manualmente,
+				//por uma aplicacao por exemplo
+				if($link_tema == "" && $oLayer->getmetadata("link_tema") != ""){
+					$link_tema = $oLayer->getmetadata("link_tema");
+				}
 				//formatacao antiga, antes da versao 6.0
 				/*
 				 $temas[] = array(
@@ -500,7 +512,8 @@ class Mapa
 						$oLayer->getmetadata("EDITAVEL"),
 						$oLayer->getmetadata("COLUNAIDUNICO"),
 						$cortepixels,
-						$plugini3geo
+						$plugini3geo,
+						$link_tema
 				);
 			}
 		}

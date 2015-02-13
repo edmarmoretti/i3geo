@@ -1579,10 +1579,10 @@ i3GEO.arvoreDeCamadas =
 						+ "','zoomsel')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
 			}
 			// fonte
-			if (i3GEO.arvoreDeCamadas.FUNCOES.fonte === true && tema.features.toLowerCase() !== "sim" && tema.name != "mundo") {
+			if (tema.link_tema != "" && i3GEO.arvoreDeCamadas.FUNCOES.fonte === true && tema.features.toLowerCase() !== "sim" && tema.name != "mundo") {
 				html +=
 					"&nbsp;<img class='arvCamFonte' src='" + i3GEO.configura.locaplic + "/imagens/branco.gif" + "' title='" + $trad("a9")
-						+ "' onclick='i3GEO.tema.fonte(\"" + tema.name + "\",true)' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
+						+ "' onclick='i3GEO.tema.fonte(\"" + tema.name + "\",true,\"" + tema.link_tema + "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
 						+ $trad("a9") + "','fonte')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
 			}
 			// manter a l&oacute;gica de exigir sim ao inv&eacute;s de vazio

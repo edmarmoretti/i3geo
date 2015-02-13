@@ -2791,4 +2791,45 @@ function stringCon2Array($stringCon){
 	);
 	return $c;
 }
+/*
+Function: pegaDadosAdminKey
+
+Executa um sql de busca de dados no sistema de administracao do i3Geo
+
+O sql deve retornar valores unicos
+
+O resultado sera um array associativo, onde a prieira coluna do resultado sera a primeira coluna retornada
+
+exemplo
+
+pegaDadosAdmin("select * from __esq__.i3geoadmin_temas","__esq__")
+
+Parametros:
+
+sql {string} - sql que ser&Atilde;� executado
+
+subsEsquema {string} - sera substtuido em sql pelo esquema
+
+Retorno:
+
+Array originada de fetchAll
+*/
+function pegaDadosAdminKey($sql,$subsEsquema){
+	$resultado = array();
+	include(dirname(__FILE__)."/../admin/php/conexao.php");
+	$sql = str_replace($subsEsquema,$conexaoadmin,$sql);
+	error_reporting(0);
+	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+	if($q){
+		$resultado = $q->fetchAll( PDO::FETCH_GROUP| PDO::FETCH_UNIQUE);
+		$dbh = null;
+		$dbhw = null;
+		return $resultado;
+	}
+	else{
+		$dbh = null;
+		$dbhw = null;
+		return array();
+	}
+}
 ?>
