@@ -40,6 +40,7 @@ if (typeof (i3GEOF) === 'undefined') {
 /*
  * Classe: i3GEOF.legenda
  */
+//TODO incluir um construtor de expressao na legenda
 i3GEOF.legenda =
 	{
 		/*
