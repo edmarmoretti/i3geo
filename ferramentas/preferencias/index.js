@@ -147,6 +147,22 @@ i3GEOF.preferencias = {
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS"
 					},{
+						titulo: $trad('noTemasExpanded',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.NOTEMA.expanded"
+					},{
+						titulo: $trad('noTemasHasIcon',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.NOTEMA.hasIcon"
+					},{
+						titulo: $trad('noTemasIconesExpanded',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.NOTEMAICONES.expanded"
+					},{
+						titulo: $trad('noTemasIconesHasIcon',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.NOTEMAICONES.hasIcon"
+					},{
 						titulo: $trad('mostraApenasLegenda',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.EXPANDESOLEGENDA"

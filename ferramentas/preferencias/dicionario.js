@@ -445,23 +445,23 @@ i3GEOF.preferencias.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	89 : [ {
-		pt : "",
+	'noTemasIconesExpanded' : [ {
+		pt : "O n&oacute; de op&ccedil;&otilde;es cada tema &eacute; mostrado de forma expandida",
 		en : "",
 		es : ""
 	} ],
-	90 : [ {
-		pt : "",
+	'noTemasIconesHasIcon' : [ {
+		pt : "O n&oacute; de op&ccedil;&otilde;es cada tema possu&iacute; um &iacute;cone que permite expandir/contrair",
 		en : "",
 		es : ""
 	} ],
-	91 : [ {
-		pt : "",
+	'noTemasExpanded' : [ {
+		pt : "O n&oacute; de cada tema &eacute; mostrado de forma expandida",
 		en : "",
 		es : ""
 	} ],
-	92 : [ {
-		pt : "",
+	'noTemasHasIcon' : [ {
+		pt : "O n&oacute; de cada tema possu&iacute; um &iacute;cone que permite expandir/contrair",
 		en : "",
 		es : ""
 	} ]

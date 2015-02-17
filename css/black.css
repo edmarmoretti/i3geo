@@ -181,5 +181,29 @@ Menu superior de opcoes
 	color: black;
 }
 /*janelas flutuantes*/
+/*arvore de camadas*/
+.i3GEOarvCam .ygtvcell .ygtvlp, .i3GEOarvCam .ygtvlp {
+    background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8897px transparent;
+}
+.i3GEOarvCam .ygtvcell .ygtvlph, .i3GEOarvCam .ygtvlph {
+    background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8917px transparent;
+}
+.i3GEOarvCam .ygtvcell .ygtvlm, .i3GEOarvCam .ygtvlm {
+    background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8937px transparent;
+}
+.i3GEOarvCam .ygtvcell .ygtvlmh, .i3GEOarvCam .ygtvlmh {
+    background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8957px transparent;
+}
 
-
+.i3GEOarvCam .ygtvcell .ygtvtp, .i3GEOarvCam .ygtvtp {
+    background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8897px transparent;
+}
+.i3GEOarvCam .ygtvcell .ygtvtph, .i3GEOarvCam .ygtvtph {
+    background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8917px transparent;
+}
+.i3GEOarvCam .ygtvcell .ygtvtm, .i3GEOarvCam .ygtvtm {
+    background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8937px transparent;
+}
+.i3GEOarvCam .ygtvcell .ygtvtmh, .i3GEOarvCam .ygtvtmh {
+    background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8957px transparent;
+}
