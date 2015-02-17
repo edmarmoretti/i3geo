@@ -1,0 +1,87 @@
+para execução do script é necessário executar as seguintes linhas no terminal
+
+sudo apt-get install python-pip python-dev build-essential 
+sudo pip install --upgrade pip 
+sudo pip install gdal scikit-image pyyaml
+
+É necessário instalar tbm o YAML no PHP:
+
+sudo pecl install yaml
+
+Depois de instalado é necessário incluir no php.ini:
+
+extension=yaml.so
+
+e reiniciar o apache
+
+
+--------------------------------------------------------------------------------
+O script lê os parâmetros a partir de um arquivo yaml cujo nome é definido ao executar o programa
+
+Para executar o arquivo é necessário invocá-lo no terminal:
+
+./better_path.py /path/to/source.yaml
+
+
+--------------------------------------------------------------------------------
+Exemplo de arquivo YAML:
+
+cost_surface_path: /home/diego/Documentos/better_path/sources/cost_surfaces/MS_Custo_LT.tif
+pathresult: /home/diego/Documentos/better_path/p01
+processes:
+  p1:
+    calculation_type: best_path_lut
+    lut:
+    - {min: 0.33, max: 0.795255, nv: 0.31}
+    - {min: 0, max: 0.2, nv: 0.1}
+    file_prefix: custo1
+    start_coord: [-37.95350887511466, -11.943630837101258]
+    stop_coord: [-45.14970144166611, -12.302899835863277]
+  p2:
+    calculation_type: best_path_within_buffer
+    buffer_km: 10
+    file_prefix: custo2
+    start_coord: [-37.95350887511466, -11.943630837101258]
+    stop_coord: [-45.14970144166611, -12.302899835863277]
+  p3:
+    calculation_type: informed_path_cost
+    informed_path: /home/diego/Documentos/better_path/sources/user_lines/caminho_usuario.shp
+    file_prefix: custo3
+    start_coord: [-37.95350887511466, -11.943630837101258]
+    stop_coord: [-45.14970144166611, -12.302899835863277]
+  p4:
+    calculation_type: cartesian_straight_line_cost
+    file_prefix: custo4
+    start_coord: [-37.95350887511466, -11.943630837101258]
+    stop_coord: [-45.14970144166611, -12.302899835863277]
+  p5:
+    calculation_type: best_path
+    file_prefix: custo5
+    start_coord: [-37.95350887511466, -11.943630837101258]
+    stop_coord: [-45.14970144166611, -12.302899835863277]
+
+
+--------------------------------------------------------------------------------
+Descrição dos parâmetros:
+
+cost_surface_path: arquivo raster com o valor do custo em cada pixel
+pathresult: pasta onde serão guardados os resultados
+processes: lista de processos que serão executados
+
+	xxxx: nome do processo (apenas para referência do programa)
+	
+	calculation_type: tipo de cálculo que será executado no processo
+	file_prefix: prefixo que será usado nos arquivos resultantes do processo
+	lut: parâmetros de reclassificação indicando o range e o valor reclassificado
+	start_coord: ponto A
+	stop_coord: ponto B
+		ou
+	informed_path: arquivo shapefile com uma linha (opcional)
+	
+	buffer_km: buffer de entorno da linha reta entre A e B que será considerado no cálculo do caminho (opcional)
+	
+
+--------------------------------------------------------------------------------
+Resultado:
+
+Os arquivos shapefile e o arquivo result.yaml são gerados na pasta de destino especificada no arquivo de parâmetros

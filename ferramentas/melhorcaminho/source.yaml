@@ -1,0 +1,33 @@
+cost_surface_path: /var/www_geobahia_17/geodados/MS_Custo_LT.tif
+pathresult: /tmp/ms_tmp/p0
+processes:
+  p1:
+    calculation_type: best_path_lut
+    lut:
+    - {min: 0.33, max: 0.795255, nv: 0.31}
+    - {min: 0, max: 0.2, nv: 0.1}
+    file_prefix: custo1
+    start_coord: [-37.95350887511466, -11.943630837101258]
+    stop_coord: [-45.14970144166611, -12.302899835863277]
+  p2:
+    calculation_type: best_path_within_buffer
+    buffer_km: 10
+    file_prefix: custo2
+    start_coord: [-37.95350887511466, -11.943630837101258]
+    stop_coord: [-45.14970144166611, -12.302899835863277]
+  p3:
+    calculation_type: informed_path_cost
+    informed_path: /var/www_geobahia_17/caminho_usuario.shp
+    file_prefix: custo3
+    start_coord: [-37.95350887511466, -11.943630837101258]
+    stop_coord: [-45.14970144166611, -12.302899835863277]
+  p4:
+    calculation_type: cartesian_straight_line_cost
+    file_prefix: custo4
+    start_coord: [-37.95350887511466, -11.943630837101258]
+    stop_coord: [-45.14970144166611, -12.302899835863277]
+  p5:
+    calculation_type: best_path
+    file_prefix: custo5
+    start_coord: [-37.95350887511466, -11.943630837101258]
+    stop_coord: [-45.14970144166611, -12.302899835863277]
