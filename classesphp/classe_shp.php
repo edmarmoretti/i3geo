@@ -206,7 +206,7 @@ Insere um ponto em um shape file no diret&oacute;rio local
 parameters:
 $xy - X e y do novo ponto, separados por espa&ccedil;os. Pode ser mais de um ponto.
 
-$projecao - c�digo epsg da proje&ccedil;&atilde;o das coordenadas
+$projecao - codigo epsg da proje&ccedil;&atilde;o das coordenadas
 */
 	function insereSHP($xy,$projecao,$item="",$valor="")
 	{
@@ -469,6 +469,7 @@ function: shpPT2shp
 Cria um tema linear ou poligonal com base em pontos de um tema pontual.
 
 parameters:
+
 $locaplic - Localiza&ccedil;&atilde;o do I3geo
 
 $para - linha|poligono
