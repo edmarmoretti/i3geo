@@ -14,6 +14,9 @@ de informação
 - Inclusão da variável $i3geo_proxy_server no ms_configura.php para uso em algumas operações baseadas no acesso
 a outros servidores via Curl e OGC
 
+- Inclusão da variável $statusFerramentas no ms_configura para controlar o status de ferramentas que 
+dependem de configuração específica do servidor
+
 - Foram incluídos subitens no menu suspenso para acomodar o grande número de opções. Os códigos locais que
 manipulam o menu suspenso devem ser revisados para verificar o funcionamento nessa nova condição.
 
