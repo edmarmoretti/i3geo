@@ -127,8 +127,8 @@ i3GEOF.melhorcaminho = {
 			i3GEO.janela.minimiza("i3GEOF.melhorcaminho");
 		};
 		janela = i3GEO.janela.cria(
-			"400px",
-			"190px",
+			"430px",
+			"210px",
 			"",
 			"",
 			"",
@@ -175,7 +175,10 @@ i3GEOF.melhorcaminho = {
 		i3GEOF.melhorcaminho.comboTemas();
 	},
 	t3: function(){
-		var ins = "<p class='paragrafo'><b>"+$trad('pti',i3GEOF.melhorcaminho.dicionario)+"</b>";
+		var ins,
+			retorno = i3GEOF.melhorcaminho.COORDENADASTEMA;
+		
+		ins = "<p class='paragrafo'><b>"+$trad('pti',i3GEOF.melhorcaminho.dicionario)+"</b>";
 		ins += "<p class='paragrafo'>X (long): ";
 		ins += $trad('grau',i3GEOF.melhorcaminho.dicionario)+" - "+$trad('minuto',i3GEOF.melhorcaminho.dicionario)+" - "+$trad('segundo',i3GEOF.melhorcaminho.dicionario)+"</p>";
 		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input  id='i3GEOmelhorcaminhoxg' title='grau' type=text value='1'/></div>";
@@ -193,18 +196,22 @@ i3GEOF.melhorcaminho = {
 		i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.melhorcaminho.capturaPontoB()"]);
 		i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.melhorcaminho.capturaPontoA()"]);
 		//calcula as coordenadas em DD
-		dms = i3GEO.calculo.dd2dms(retorno.data.ax,retorno.data.ay);
-		dmsx = dms[0].split(" ");
-		dmsy = dms[1].split(" ");
-		$i("i3GEOmelhorcaminhoxg").value = dmsx[0];
-		$i("i3GEOmelhorcaminhoxm").value = dmsx[1];
-		$i("i3GEOmelhorcaminhoxs").value = dmsx[2];
-		$i("i3GEOmelhorcaminhoyg").value = dmsy[0];
-		$i("i3GEOmelhorcaminhoym").value = dmsy[1];
-		$i("i3GEOmelhorcaminhoys").value = dmsy[2];
+		if(retorno != ""){
+			dms = i3GEO.calculo.dd2dms(retorno.data.ax,retorno.data.ay);
+			dmsx = dms[0].split(" ");
+			dmsy = dms[1].split(" ");
+			$i("i3GEOmelhorcaminhoxg").value = dmsx[0];
+			$i("i3GEOmelhorcaminhoxm").value = dmsx[1];
+			$i("i3GEOmelhorcaminhoxs").value = dmsx[2];
+			$i("i3GEOmelhorcaminhoyg").value = dmsy[0];
+			$i("i3GEOmelhorcaminhoym").value = dmsy[1];
+			$i("i3GEOmelhorcaminhoys").value = dmsy[2];
+		}
 	},
 	t4: function(){
-		var ins = "<p class='paragrafo'><b>"+$trad('ptf',i3GEOF.melhorcaminho.dicionario)+"</b>";
+		var ins,
+			retorno = i3GEOF.melhorcaminho.COORDENADASTEMA;		
+		ins = "<p class='paragrafo'><b>"+$trad('ptf',i3GEOF.melhorcaminho.dicionario)+"</b>";
 		ins += "<p class='paragrafo'>X (long): ";
 		ins += $trad('grau',i3GEOF.melhorcaminho.dicionario)+" - "+$trad('minuto',i3GEOF.melhorcaminho.dicionario)+" - "+$trad('segundo',i3GEOF.melhorcaminho.dicionario)+"</p>";
 		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input id='i3GEOmelhorcaminhoixg' title='grau' type=text value='1'/></div>";
@@ -223,15 +230,17 @@ i3GEOF.melhorcaminho = {
 		i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.melhorcaminho.capturaPontoA()"]);
 		i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.melhorcaminho.capturaPontoB()"]);
 		//calcula as coordenadas em DD
-		dms = i3GEO.calculo.dd2dms(retorno.data.bx,retorno.data.by);
-		dmsx = dms[0].split(" ");
-		dmsy = dms[1].split(" ");
-		$i("i3GEOmelhorcaminhoixg").value = dmsx[0];
-		$i("i3GEOmelhorcaminhoixm").value = dmsx[1];
-		$i("i3GEOmelhorcaminhoixs").value = dmsx[2];
-		$i("i3GEOmelhorcaminhoiyg").value = dmsy[0];
-		$i("i3GEOmelhorcaminhoiym").value = dmsy[1];
-		$i("i3GEOmelhorcaminhoiys").value = dmsy[2];
+		if(retorno != ""){
+			dms = i3GEO.calculo.dd2dms(retorno.data.bx,retorno.data.by);
+			dmsx = dms[0].split(" ");
+			dmsy = dms[1].split(" ");
+			$i("i3GEOmelhorcaminhoixg").value = dmsx[0];
+			$i("i3GEOmelhorcaminhoixm").value = dmsx[1];
+			$i("i3GEOmelhorcaminhoixs").value = dmsx[2];
+			$i("i3GEOmelhorcaminhoiyg").value = dmsy[0];
+			$i("i3GEOmelhorcaminhoiym").value = dmsy[1];
+			$i("i3GEOmelhorcaminhoiys").value = dmsy[2];
+		}
 	},
 	t5: function(){
 		var b, ins = "<p class='paragrafo'>"+$trad('lut',i3GEOF.melhorcaminho.dicionario);
@@ -244,6 +253,8 @@ i3GEOF.melhorcaminho = {
 		ins += "</tr></table>";
 		ins += "<br>";
 		ins += "<div id='i3GEOmelhorcaminhoLut' ></div>";
+		ins += "<br><br>&nbsp;<p class='paragrafo'>"+$trad('buffer',i3GEOF.melhorcaminho.dicionario)+"<br><div class='i3geoForm i3geoFormIconeEdita'><input id='i3GEOmelhorcaminhoBuffer' type=text value='0' /></div>";
+
 		i3GEO.util.proximoAnterior("i3GEOF.melhorcaminho.t4()","i3GEOF.melhorcaminho.t6()",ins,"i3GEOF.melhorcaminho.t5","i3GEOmelhorcaminhoresultado",true,"i3GEOF.melhorcaminho_rodape");
 		b = new YAHOO.widget.Button(
 			"i3GEOmelhorcaminhoLut4",
@@ -267,7 +278,7 @@ i3GEOF.melhorcaminho = {
 		v1 = $i("i3GEOmelhorcaminhoLut1").value;
 		v2 = $i("i3GEOmelhorcaminhoLut2").value;
 		v3 = $i("i3GEOmelhorcaminhoLut3").value;
-		v = ">= " + v1 + "e < " + v2 + " = " + v3;
+		v = ">= " + v1 + "e <= " + v2 + " = " + v3;
 		n = v1 + "," + v2 + "," + v3;
 		onde = $i("i3GEOmelhorcaminhoLut");
 		novo = "<div class='i3geoForm150 i3geoFormTag' style='float:left;margin-left:2px;margin-top:2px;' onclick='i3GEOF.melhorcaminho.removeLut(this)'>"
@@ -319,7 +330,7 @@ i3GEOF.melhorcaminho = {
 		retorno = function(retorno) {
 			var dms,dmsx,dmsy;
 			i3GEO.janela.fechaAguarde("shape2pontos");
-			i3GEOF.melhorcaminho.COORDENADASTEMA = retorno.data;
+			i3GEOF.melhorcaminho.COORDENADASTEMA = retorno;
 			i3GEOF.melhorcaminho.t3();
 		};
 		i3GEO.janela.abreAguarde("shape2pontos", $trad("o1"));
@@ -388,7 +399,7 @@ i3GEOF.melhorcaminho = {
 			$i("i3GEOmelhorcaminhoresultadoFim").innerHTML = retorno.data;
 		};
 		p = i3GEO.configura.locaplic+"/ferramentas/melhorcaminho/exec.php?g_sid="+i3GEO.configura.sid
-		+"&funcao=melhorcaminho&pta="+pta+"&ptb="+ptb+"&lut="+lut+"&raster="+raster;
+		+"&funcao=melhorcaminho&pta="+pta+"&ptb="+ptb+"&lut="+lut+"&raster="+raster+"&buffer="+$i("i3GEOmelhorcaminhoBuffer").value;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"melhorcaminho",fim);

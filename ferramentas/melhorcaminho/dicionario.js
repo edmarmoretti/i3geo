@@ -21,7 +21,7 @@ i3GEOF.melhorcaminho.dicionario = {
 		es : ""
 	} ],
 	'temas' : [ {
-		pt : "Escolha o tema que ser&aacute; utilizado para obter o ponto inicial e final. No caso de tema pontual, ser&atilde;o considerados o primeiro e o &uacute;ltimo ponto. No caso de tema linear, ser&atilde;o considerados o primeiro e o &uacute;ltimo n&oacute;. No caso de tema poligonal, ser&atilde;o considerados o primeiro n&oacute; e o centr&oacute;ide. <br>Voc&ecirc; pode pular essa etapa caso queira escolher os pontos clicando no mapa.",
+		pt : "(Opcional) Escolha o tema que ser&aacute; utilizado para obter o ponto inicial e final. Ser&aacute; considerada a sele&ccedil;&atilde;o, se houver. No caso de tema pontual, ser&atilde;o considerados o primeiro e o &uacute;ltimo ponto. No caso de tema linear, ser&atilde;o considerados o primeiro e o &uacute;ltimo n&oacute;. No caso de tema poligonal, ser&atilde;o considerados o primeiro n&oacute; e o centr&oacute;ide. <br>Voc&ecirc; pode pular essa etapa caso queira escolher os pontos clicando no mapa.",
 		en : "",
 		es : ""
 	} ],
@@ -66,7 +66,7 @@ i3GEOF.melhorcaminho.dicionario = {
 		es : ""
 	} ],
 	'menorque' : [ {
-		pt : "menor que",
+		pt : "igual ou menor que",
 		en : "",
 		es : ""
 	} ],
@@ -92,6 +92,11 @@ i3GEOF.melhorcaminho.dicionario = {
 	} ],
 	'mesf2' : [ {
 		pt : "Erro ao calcular as coordenadas dos pontos A e B",
+		en : "",
+		es : ""
+	} ],
+	'buffer' : [ {
+		pt : "(Opcional) Valor em Km do entorno da linha reta entre A e B que ser&aacute; considerada como &aacute;rea onde o caminho poder&aacute; ser tra&ccedil;ado",
 		en : "",
 		es : ""
 	} ]
