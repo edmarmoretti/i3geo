@@ -1,0 +1,36 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    DATA "/var/www/dados_para_testes/geodados/MS_Custo_LT.tif"
+    METADATA
+      "cache"	"SIM"
+      "classe"	"NAO"
+      "permitekmz"	"nao"
+      "iconetema"	""
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "DOWNLOAD"	"sim"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "tema"	"Imagem TIF custo"
+    END # METADATA
+    NAME "_lcusto"
+    STATUS DEFAULT
+    TILEITEM "location"
+    TYPE RASTER
+    UNITS METERS
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    PROCESSING "SCALE=AUTO"
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 0 255 255
+        OUTLINECOLOR 0 0 0
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+
