@@ -101,7 +101,7 @@ switch (strtoupper($funcao))
 				$cor = $estilo->color;
 				$cor->setRGB(255,0,0);
 			}
-			if(file_exists($pathresult."/".$prefixo."_xxxcartesian_straight_line_cost.shp")){
+			if(file_exists($pathresult."/".$prefixo."_cartesian_straight_line_cost.shp")){
 				//cartesian_straight_line_cost
 				$retorno = $m->adicionaTemaSHP($pathresult."/".$prefixo."_cartesian_straight_line_cost.shp");
 				$layer = $m->mapa->getlayerbyname($prefixo."_cartesian_straight_line_cost.shp");

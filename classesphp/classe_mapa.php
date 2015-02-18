@@ -2057,8 +2057,7 @@ class Mapa
 			else
 			{$shape = $s->getshape(0);}
 			*/
-			//$shape = $s->getshape(0);
-			$shape = $s->getshape(new resultObj(0));
+			$shape = $s->getshape(0);
 			$t = $shape->type;
 			$tipo = MS_LAYER_POLYGON;
 			if ($t == 0)
