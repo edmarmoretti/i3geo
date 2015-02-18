@@ -168,6 +168,7 @@ i3GEOF.melhorcaminho = {
 		i3GEOF.melhorcaminho.comboTemasRaster();
 	},
 	t2: function(){
+		i3GEOF.melhorcaminho.COORDENADASTEMA = "";
 		var ins = "<p class='paragrafo'>"+$trad('temas',i3GEOF.melhorcaminho.dicionario) +" :<br>" +
 			"<div class='styled-select' id='i3GEOmelhorcaminhoDivTema'></div>" +
 			"<br>";	
@@ -278,7 +279,7 @@ i3GEOF.melhorcaminho = {
 		v1 = $i("i3GEOmelhorcaminhoLut1").value;
 		v2 = $i("i3GEOmelhorcaminhoLut2").value;
 		v3 = $i("i3GEOmelhorcaminhoLut3").value;
-		v = ">= " + v1 + "e <= " + v2 + " = " + v3;
+		v = ">= " + v1 + " e <= " + v2 + " = " + v3;
 		n = v1 + "," + v2 + "," + v3;
 		onde = $i("i3GEOmelhorcaminhoLut");
 		novo = "<div class='i3geoForm150 i3geoFormTag' style='float:left;margin-left:2px;margin-top:2px;' onclick='i3GEOF.melhorcaminho.removeLut(this)'>"
@@ -312,7 +313,12 @@ i3GEOF.melhorcaminho = {
 				if ($i("i3GEOmelhorcaminhoTema")){
 					$i("i3GEOmelhorcaminhoTema").onchange = function(){
 						//captura o ponto inicial e final
-						i3GEOF.melhorcaminho.shape2pontos($i("i3GEOmelhorcaminhoTema").value);
+						if($i("i3GEOmelhorcaminhoTema").value == ""){
+							i3GEOF.melhorcaminho.COORDENADASTEMA = "";
+						}
+						else{
+							i3GEOF.melhorcaminho.shape2pontos($i("i3GEOmelhorcaminhoTema").value);
+						}
 					};
 				}
 			},
@@ -337,6 +343,7 @@ i3GEOF.melhorcaminho = {
 		cpJSON.call(p, "foo", retorno, par);
 	},
 	capturaPontoA: function(){
+		i3GEOF.melhorcaminho.COORDENADASTEMA = "";
 		i3GEO.eventos.cliqueCapturaPt(
 			"i3GEOmelhorcaminhoxg",
 			"i3GEOmelhorcaminhoxm",
@@ -347,6 +354,7 @@ i3GEOF.melhorcaminho = {
 		);
 	},
 	capturaPontoB: function(){
+		i3GEOF.melhorcaminho.COORDENADASTEMA = "";
 		i3GEO.eventos.cliqueCapturaPt(
 			"i3GEOmelhorcaminhoixg",
 			"i3GEOmelhorcaminhoixm",
@@ -396,13 +404,58 @@ i3GEOF.melhorcaminho = {
 		fim = function(retorno){
 			i3GEOF.melhorcaminho.aguarde.visibility = "hidden";
 			i3GEO.atualiza("");
-			$i("i3GEOmelhorcaminhoresultadoFim").innerHTML = retorno.data;
+			//$i("i3GEOmelhorcaminhoresultadoFim").innerHTML = retorno.data;
+			i3GEOF.melhorcaminho.relatorio(retorno.data);
 		};
 		p = i3GEO.configura.locaplic+"/ferramentas/melhorcaminho/exec.php?g_sid="+i3GEO.configura.sid
-		+"&funcao=melhorcaminho&pta="+pta+"&ptb="+ptb+"&lut="+lut+"&raster="+raster+"&buffer="+$i("i3GEOmelhorcaminhoBuffer").value;
+			+"&funcao=melhorcaminho"
+			+"&pta="+pta
+			+"&ptb="+ptb
+			+"&lut="+lut
+			+"&raster="+raster
+			+"&buffer="+$i("i3GEOmelhorcaminhoBuffer").value
+			+"&temausuario="+$i("i3GEOmelhorcaminhoTema").value;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"melhorcaminho",fim);
 		//alert("Tema: "+raster+"<br>A: "+pta+"<br>B: "+ptb+"<br>Lut: "+lut);
+	},
+	relatorio : function(caminho){
+		fim = function(retorno){
+			i3GEOF.melhorcaminho.aguarde.visibility = "hidden";
+			var r = retorno.data,
+				chaves = i3GEO.util.listaChaves(r),
+				n = chaves.length,
+				ins = "<table class=lista4 ><tr><td>&nbsp;</td><td>Tipo</td><td>Custo</td></tr><tr>",
+				i;
+			for(i = 0; i < n; i++){
+				switch (chaves[i]) {
+					case "cartesian_straight_line_cost":
+						ins += "<td style='background-color:rgb(255,0,255);'>&nbsp;</td><td>Linha reta entre os pontos A e B</td>";
+						break;
+					case "best_path":
+						ins += "<td style='background-color:rgb(255,0,0);'>&nbsp;</td><td>Melhor caminho</td>";
+						break;
+					case "best_path_within_buffer":
+						ins += "<td style='background-color:rgb(255,255,0);'>&nbsp;</td><td>Melhor caminho dentro do buffer</td>";
+						break;
+					case "informed_path_cost":
+						ins += "<td>&nbsp;</td><td>Linha digitalizada</td>";
+						break;
+					case "best_path_lut":
+						ins += "<td style='background-color:rgb(0,255,255);'>&nbsp;</td><td>Melhor caminho com reclassifica&ccedil;&atilde;o dos pixels (o valor do custo &eacute; calculado sobre os valores originais, sem reclasifica&ccedil;&atilde;o)</td>";
+						break;
+				};
+				ins += "<td>"+(r[chaves[i]].toFixed(2)).replace(".",",")+"</td></tr>";
+			}
+			ins += "</table>";
+			i3GEO.janela.mensagemSimples(ins, $trad('relatoriofinal',i3GEOF.melhorcaminho.dicionario));
+		};
+		p = i3GEO.configura.locaplic+"/ferramentas/melhorcaminho/exec.php?g_sid="+i3GEO.configura.sid
+			+"&funcao=relatorio"
+			+"&caminho="+caminho;
+		cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"melhorcaminho",fim);		
 	}
 };

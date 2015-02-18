@@ -102,7 +102,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $saikuUrl,$emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	global $statusFerramentas,$saikuUrl,$emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
 	//
 	//verifica se algum tema e restrito a determinado usuario
 	//as funcoes de validacao encontram-se em funcoes_gerais.php
@@ -369,6 +369,7 @@ function iniciaMapa()
 	$res["copyright"] = $copyright;
 	$res["logado"] = $logado;
 	$res["saikuUrl"] = $saikuUrl;
+	$res["statusFerramentas"] = $statusFerramentas;
 	//parametros de inicializacao armazenados com o mapa quando o usuario utiliza a opcao de salvar mapa no nbanco de dados
 	$customizacoesinit = $m->mapa->getmetadata("CUSTOMIZACOESINIT");
 	$res["editavel"] = $m->mapa->getmetadata("EDITAVEL");

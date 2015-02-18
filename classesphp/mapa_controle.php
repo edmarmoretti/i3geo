@@ -130,7 +130,9 @@ if ($funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funca
 		if(!is_array($_SESSION[$k]))
 			eval("\$".$k."='".$_SESSION[$k]."';");
 	}
+	//sao arrays
 	$postgis_mapa = $_SESSION["postgis_mapa"];
+	$statusFerramentas = $_SESSION["statusFerramentas"];
 	if(isset($fingerprint))	{
 		//if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
 		$f = explode(",",$fingerprint);
@@ -257,6 +259,7 @@ switch (strtoupper($funcao))
 	*/
 	case "INICIA":
 		include_once("mapa_inicia.php");
+		//include(dirname(__FILE__)."/../ms_configura.php");
 		iniciaMapa();
 		break;
 		/*
@@ -2333,15 +2336,14 @@ switch (strtoupper($funcao))
 		break;
 
 }
-if (!connection_aborted())
-{
+if (!connection_aborted()){
 	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
 		restauraCon($map_file,$postgis_mapa);
 	//$cp->return_data();
 	cpjson($retorno);
 }
-else
-{exit();
+else{
+	exit();
 }
 /*
  Function: projetaExt

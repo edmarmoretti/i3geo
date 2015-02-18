@@ -104,6 +104,8 @@ var i3GEO = {
 	 * Parametros obtidos do mapa atual. Os parametros s&atilde;o fornecidos
 	 * pelos programas PHP de redesenho e cria&ccedil;&atilde;o do mapa e
 	 * atualizados sempre que o mapa &eacute; alterado.
+	 * 
+	 * Algumas dessas vari&aacute;veis s&atilde;o definidas em ms_configura.php
 	 *
 	 * Exemplos:
 	 *
@@ -192,6 +194,8 @@ var i3GEO = {
 	 *
 	 * copyright {String} - texto existente no Layer copyright do mapfile de
 	 * inicializa&ccedil;&atilde;o
+	 * 
+	 * statusFerramentas {array} - indicador de status de algumas ferramentas que dependem de configura&ccedil;&otilde;es no servidor
 	 */
 	parametros : {
 		mapexten : "",

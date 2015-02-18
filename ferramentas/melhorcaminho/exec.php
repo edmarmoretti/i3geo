@@ -46,12 +46,13 @@ switch (strtoupper($funcao))
 		$layer = $mapa->getlayerbyname($raster);
 		$cost_surface_path = $layer->data;
 		$prefixo = nomeRandomico(3);
+		//verifica se o mapa de custo existe
 		if(file_exists($cost_surface_path)){
 			$pathresult = $dir_tmp."/melhorcaminho_".nomeRandomico();
-			//$pta = explode(",",$pta);
-			//$ptb = explode(",",$ptb);
+			//cria a pasta onde os resultados serao armazenados
 			mkdir ($pathresult,0777);
 
+			//parametros para o calculo de melhor caminho e linha reta
 			$best = array(
 				"p1"=>	array(
 					"calculation_type" =>"best_path",
@@ -68,9 +69,9 @@ switch (strtoupper($funcao))
 						"stop_coord" => "[$ptb]"
 				)
 			);
-			
+			//guarda os processos que serao executados
 			$processos = array($best,$cart);
-			
+			//parametros para calculo do buffer
 			if($buffer > 0){
 				$buf = array(
 					"p3"=>	array(
@@ -83,7 +84,7 @@ switch (strtoupper($funcao))
 				);
 				$processos[] = $buf;
 			}
-			
+			//parametros para calculo com reclassificacao
 			if($lut != ""){
 				//pega os valores da lut
 				$lista = explode("|",$lut);
@@ -92,10 +93,16 @@ switch (strtoupper($funcao))
 					$v = explode(",",$li);
 					$novaLut[] = "- {min: $v[0], max: $v[1], nv: $v[2]}";
 				}
+				if(count($novaLut) == 1){
+					$novaLut = "\n".implode("",$novaLut);
+				}
+				else{
+					$novaLut = implode("\n",$novaLut);
+				}
 				$lut = array(
 					"p4"=>	array(
 							"calculation_type" =>"best_path_lut",
-							"lut" => implode("\n",$novaLut),
+							"lut" => $novaLut,
 							"file_prefix" => $prefixo,
 							"start_coord" => "[$pta]",
 							"stop_coord" => "[$ptb]"
@@ -103,7 +110,24 @@ switch (strtoupper($funcao))
 				);
 				$processos[] = $lut;
 			}
-			
+			//parametros para o calculo quando o usuario escolhe um layer que contem um shapefile
+			if($temausuario != ""){
+				//exporta o layer como um shapefile pois pode ser postgis
+				$shparq = downloadTema2($map_file,$temausuario,$locaplic,$dir_tmp,$postgis_mapa);
+				$shparq = explode(",",$shparq["arquivos"]);
+				$shparq = $dir_tmp."/".basename($shparq[0]);
+				$shp = array(
+						"p5"=>	array(
+								"calculation_type" =>"informed_path_cost",
+								"informed_path" => $shparq,
+								"file_prefix" => $prefixo,
+								"start_coord" => "[$pta]",
+								"stop_coord" => "[$ptb]"
+						)
+				);
+				$processos[] = $shp;				
+			}
+			//monta o array que sera utilizado para gerar o arquivo yaml que sera o input do programa python que faz o calculo
 			$a = array(
 				"cost_surface_path" => $cost_surface_path,
 				"pathresult" => $pathresult,
@@ -119,12 +143,14 @@ switch (strtoupper($funcao))
 			$yaml = str_replace('"',"",$yaml);
 			$yaml = trim($yaml)."\n";
 			$yaml = str_replace('|-',"",$yaml);
+			$yaml = str_replace('|2-',"",$yaml);
 			//salva o arquivo com os parametros
 			$fp = fopen($y,"w");
 			fwrite($fp,$yaml);
 			fclose($fp);
+			//executa os calculos
 			exec(dirname(__FILE__)."/better_path.py $y");
-			//adiciona o shapefile
+			//adiciona ao mapa atual os shapefiles criados
 			include_once("../../classesphp/classe_mapa.php");
 			$m = new Mapa($map_file);
 			if(file_exists($pathresult."/".$prefixo."_best_path.shp")){
@@ -143,7 +169,7 @@ switch (strtoupper($funcao))
 				//cartesian_straight_line_cost
 				$retorno = $m->adicionaTemaSHP($pathresult."/".$prefixo."_cartesian_straight_line_cost.shp");
 				$layer = $m->mapa->getlayerbyname($prefixo."_cartesian_straight_line_cost.shp");
-				$layer->setmetadata("TEMA","Caminho mais curto $prefixo");
+				$layer->setmetadata("TEMA","Linha reta entre os pontos A e B $prefixo");
 				$layer->setmetadata("DOWNLOAD","SIM");
 				$layer->setmetadata("TEMALOCAL","SIM");
 				$classe = $layer->getclass(0);
@@ -156,7 +182,7 @@ switch (strtoupper($funcao))
 				//best_path_within_buffer
 				$retorno = $m->adicionaTemaSHP($pathresult."/".$prefixo."_best_path_within_buffer.shp");
 				$layer = $m->mapa->getlayerbyname($prefixo."_best_path_within_buffer.shp");
-				$layer->setmetadata("TEMA","Caminho restrito ao buffer $prefixo");
+				$layer->setmetadata("TEMA","Melhor caminho dentro do buffer $prefixo");
 				$layer->setmetadata("DOWNLOAD","SIM");
 				$layer->setmetadata("TEMALOCAL","SIM");
 				$classe = $layer->getclass(0);
@@ -179,7 +205,7 @@ switch (strtoupper($funcao))
 				//cartesian_straight_line_cost
 				$retorno = $m->adicionaTemaSHP($pathresult."/".$prefixo."_best_path_lut.shp");
 				$layer = $m->mapa->getlayerbyname($prefixo."_best_path_lut.shp");
-				$layer->setmetadata("TEMA","Caminho mais curto reclassificado $prefixo");
+				$layer->setmetadata("TEMA","Melhor caminho com reclassifica&ccedil;&atilde;o dos pixels $prefixo");
 				$layer->setmetadata("DOWNLOAD","SIM");
 				$layer->setmetadata("TEMALOCAL","SIM");
 				$classe = $layer->getclass(0);
@@ -187,12 +213,21 @@ switch (strtoupper($funcao))
 				$cor = $estilo->color;
 				$cor->setRGB(0,255,255);
 			}
+			//salva o mapfile
 			$m->salva();
 		}
 		else{
 			$retorno = "<span style='color:red' >Erro. Arquivo raster n&atilde;o encontrado</span>";
 		}
-		$retorno = "";
+		$retorno = $pathresult;
+	break;
+	case "RELATORIO":
+		$yaml = yaml_parse_file($caminho."/result.yaml");
+		$resultados = $yaml["results"];
+		$retorno = array();
+		foreach($resultados as $r){
+			$retorno[$r["item"]] = $r["cost"];
+		}
 	break;
 }
 if (!connection_aborted()){

@@ -337,6 +337,11 @@ i3GEO.configura =
 										id : "omenudataAnalise22",
 										text : $trad("x104"),
 										url : "javascript:i3GEO.analise.dialogo.markercluster()"
+									},
+									{
+										id : "omenudataAnalise24",
+										text : $trad("melhorcaminho"),
+										url : "javascript:i3GEO.analise.dialogo.melhorcaminho()"
 									}
 								]
 							]

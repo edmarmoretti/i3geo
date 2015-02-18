@@ -164,6 +164,7 @@ i3GEOF.wkt2layer =
 		monta = function(){
 		 	i3GEOF.wkt2layer.aguarde.visibility = "hidden";
 		 	i3GEO.atualiza();
+		 	i3GEO.janela.tempoMsg($trad('fim',i3GEOF.wkt2layer.dicionario));
 		};
 		par = i3GEOF.wkt2layer.pegaPar();
 		wkt = $i("i3GEOFwkt2layerWkt").value;
@@ -188,6 +189,7 @@ i3GEOF.wkt2layer =
 		monta = function(){
 		 	i3GEOF.wkt2layer.aguarde.visibility = "hidden";
 		 	i3GEO.atualiza();
+		 	i3GEO.janela.tempoMsg($trad('fim',i3GEOF.wkt2layer.dicionario));
 		};
 		par = i3GEOF.wkt2layer.pegaPar();
 		wkt = $i("i3GEOFwkt2layerWkt").value;

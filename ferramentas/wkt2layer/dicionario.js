@@ -29,5 +29,10 @@ i3GEOF.wkt2layer.dicionario = {
 		pt : "Anota&ccedil;&atilde;o opcional",
 		en : "",
 		es : ""
+	} ],
+	'fim' : [ {
+		pt : "Conclu&iacute;do!!! A camada foi adicionada ao mapa.",
+		en : "",
+		es : ""
 	} ]
 };

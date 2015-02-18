@@ -373,6 +373,13 @@ if(empty($i3georendermode)){
 else{
 	$i3georendermode_ = $i3georendermode;
 }
+if(empty($statusFerramentas)){
+	$statusFerramentas_ = array();
+}
+else{
+	$statusFerramentas_ = $statusFerramentas;
+}
+
 /*
 Inicia a se&ccedil;&atilde;o
 
@@ -427,15 +434,15 @@ $_SESSION["imgdir"] = $diretorios[2];
 $_SESSION["contadorsalva"] = 0;//essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
 $_SESSION["i3georendermode"] = $i3georendermode_;
 $_SESSION["saikuUrl"] = $saikuUrl_;
-
 //
 //pega todas as vari&aacute;veis da sess&atilde;o, mesmo as que foram definidas anteriormente
 //
-
 foreach(array_keys($_SESSION) as $k){
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
+//sao arrays
 $postgis_mapa = $postgis_mapa_;
+$_SESSION["statusFerramentas"] = $statusFerramentas_;
 /*
 Define os arquivos .map
 

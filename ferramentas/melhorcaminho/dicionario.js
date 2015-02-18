@@ -99,5 +99,10 @@ i3GEOF.melhorcaminho.dicionario = {
 		pt : "(Opcional) Valor em Km do entorno da linha reta entre A e B que ser&aacute; considerada como &aacute;rea onde o caminho poder&aacute; ser tra&ccedil;ado",
 		en : "",
 		es : ""
+	} ],
+	'relatoriofinal' : [ {
+		pt : "Relat&oacute;rio de melhor caminho",
+		en : "",
+		es : ""
 	} ]
 };

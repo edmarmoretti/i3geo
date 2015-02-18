@@ -95,6 +95,10 @@ i3GEO.analise =
 			 * Ferramenta SAIKU em nova aba do navegador
 			 */
 			saiku : function() {
+				if(i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.saiku === false){
+					i3GEO.janela.tempoMsg($trad("naoInstalado"));
+					return;
+				}
 				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.saiku()", "saiku", "saiku");
 			},
 			/**
@@ -103,6 +107,10 @@ i3GEO.analise =
 			 * Ferramenta SAIKU em uma janela interna
 			 */
 			saikuMapa : function() {
+				if(i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.saiku === false){
+					i3GEO.janela.tempoMsg($trad("naoInstalado"));
+					return;
+				}
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.analise.dialogo.saiku()",
 					"saiku",
@@ -194,6 +202,10 @@ i3GEO.analise =
 			 * Ferramenta melhor caminho
 			 */
 			melhorcaminho : function() {
+				if(i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.melhorcaminho === false){
+					i3GEO.janela.tempoMsg($trad("naoInstalado"));
+					return;
+				}
 				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.melhorcaminho()", "melhorcaminho", "melhorcaminho");
 			},
 			/**

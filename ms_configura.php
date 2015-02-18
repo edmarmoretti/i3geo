@@ -63,6 +63,17 @@ $i3geomaster = array(
 	array("usuario"=>"admin", "senha"=>"admin")
 );
 /*
+Variable: $statusFerramentas
+
+Algumas das funcionalidades do mapa interativo dependem de configura&ccedil;&otilde;es espec&iacute;ficas do servidor.
+Esse array informa quais dessas ferramentas est&atilde;o corretamente configuradas.
+As que estiverem marcadas como false n&atilde;o ser&atilde;o mostradas na interface do mapa interativo
+ */
+$statusFerramentas = array(
+	"saiku"=>true,
+	"melhorcaminho"=>true
+);
+/*
 Variable: saikuUrl
 
 URL para acessar o aplicativo SAIKU. Se nao estiver instalado, deixe em branco

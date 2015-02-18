@@ -2306,6 +2306,12 @@ g_traducao = {
 	pt: "Toler&acirc;ncia de busca (em pixels)",
 	en:"",
 	es:""
+}],
+"naoInstalado": [
+{
+	pt: "Ferramenta n&atilde;o dispon&iacute;vel nessa instala&ccedil;&atilde;o do i3Geo",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");
