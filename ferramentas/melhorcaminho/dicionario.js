@@ -56,7 +56,7 @@ i3GEOF.melhorcaminho.dicionario = {
 		es : ""
 	} ],
 	'lut' : [ {
-		pt : "Voc&ecirc; pode reclassificar a imagem definindo novos valores para os pixels. Escolha os valores iniciais e finais do original e o novo valor. Podem ser definidos v&aacute;rios valores.",
+		pt : "Voc&ecirc; pode reclassificar a imagem definindo novos valores para os pixels. Escolha os valores iniciais e finais do original (intervalos fechados) e o novo valor. Podem ser definidos v&aacute;rios valores.",
 		en : "",
 		es : ""
 	} ],

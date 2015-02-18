@@ -29,6 +29,10 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
+//TODO incluir opcao de buffer
+//TODO incluir opcao de selecao de elementos
+//TODO calcular valor pelo shapefile
+//TODO gerar o relatorio
 
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
@@ -186,6 +190,7 @@ i3GEOF.melhorcaminho = {
 
 		i3GEO.util.proximoAnterior("i3GEOF.melhorcaminho.t2()","i3GEOF.melhorcaminho.t4()",ins,"i3GEOF.melhorcaminho.t3","i3GEOmelhorcaminhoresultado",true,"i3GEOF.melhorcaminho_rodape");
 		i3GEO.eventos.cliquePerm.desativa();
+		i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.melhorcaminho.capturaPontoB()"]);
 		i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.melhorcaminho.capturaPontoA()"]);
 		//calcula as coordenadas em DD
 		dms = i3GEO.calculo.dd2dms(retorno.data.ax,retorno.data.ay);
@@ -215,6 +220,7 @@ i3GEOF.melhorcaminho = {
 		i3GEO.util.proximoAnterior("i3GEOF.melhorcaminho.t3()","i3GEOF.melhorcaminho.t5()",ins,"i3GEOF.melhorcaminho.t4","i3GEOmelhorcaminhoresultado",true,"i3GEOF.melhorcaminho_rodape");
 
 		i3GEO.eventos.cliquePerm.desativa();
+		i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.melhorcaminho.capturaPontoA()"]);
 		i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.melhorcaminho.capturaPontoB()"]);
 		//calcula as coordenadas em DD
 		dms = i3GEO.calculo.dd2dms(retorno.data.bx,retorno.data.by);
@@ -248,6 +254,7 @@ i3GEOF.melhorcaminho = {
 	t6: function(){
 		var b,ins = "<p class='paragrafo'><b>"+$trad('fim',i3GEOF.melhorcaminho.dicionario)+"</b>";
 		ins += "<p class='paragrafo'><input id=i3GEOmelhorcaminhobotao1 size=18 class=executar type='button' value='"+$trad('executa',i3GEOF.melhorcaminho.dicionario)+"' />";
+		ins += "<br><br><div class=paragrafo id=i3GEOmelhorcaminhoresultadoFim ></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.melhorcaminho.t5()","",ins,"i3GEOF.melhorcaminho.t6","i3GEOmelhorcaminhoresultado",true,"i3GEOF.melhorcaminho_rodape");
 		b = new YAHOO.widget.Button(
 			"i3GEOmelhorcaminhobotao1",
@@ -361,8 +368,9 @@ i3GEOF.melhorcaminho = {
 			ptay = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoyg").value,$i("i3GEOmelhorcaminhoym").value,$i("i3GEOmelhorcaminhoys").value);
 			ptbx = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoixg").value,$i("i3GEOmelhorcaminhoixm").value,$i("i3GEOmelhorcaminhoixs").value);
 			ptby = i3GEO.calculo.dms2dd($i("i3GEOmelhorcaminhoiyg").value,$i("i3GEOmelhorcaminhoiym").value,$i("i3GEOmelhorcaminhoiys").value);
-			pta = ptax+","+ptay;
-			ptb = ptbx+","+ptby;
+			//nao tire o espaco apos a virgula
+			pta = ptax+", "+ptay;
+			ptb = ptbx+", "+ptby;
 		} catch(e){
 			i3GEO.janela.tempoMsg($trad('mesf2',i3GEOF.melhorcaminho.dicionario));return;
 		}
@@ -373,17 +381,17 @@ i3GEOF.melhorcaminho = {
 			lut.push(lutObjs[i].name);
 		}
 		lut = lut.join("|");
-		/*
 		i3GEOF.melhorcaminho.aguarde.visibility = "visible";
 		fim = function(retorno){
 			i3GEOF.melhorcaminho.aguarde.visibility = "hidden";
 			i3GEO.atualiza("");
+			$i("i3GEOmelhorcaminhoresultadoFim").innerHTML = retorno.data;
 		};
-		p = i3GEO.configura.locaplic+"/ferramentas/melhorcaminho/exec.php?g_sid="+i3GEO.configura.sid+"&proj="+proj+"&funcao=gradedepol&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
+		p = i3GEO.configura.locaplic+"/ferramentas/melhorcaminho/exec.php?g_sid="+i3GEO.configura.sid
+		+"&funcao=melhorcaminho&pta="+pta+"&ptb="+ptb+"&lut="+lut+"&raster="+raster;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"melhorcaminho",fim);
-		*/
-		alert("Tema: "+raster+"<br>A: "+pta+"<br>B: "+ptb+"<br>Lut: "+lut);
+		//alert("Tema: "+raster+"<br>A: "+pta+"<br>B: "+ptb+"<br>Lut: "+lut);
 	}
 };

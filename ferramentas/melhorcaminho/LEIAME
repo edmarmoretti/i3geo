@@ -1,24 +1,42 @@
-para execu√ß√£o do script √© necess√°rio executar as seguintes linhas no terminal
+para execuÁ„o do script È necess·rio executar as seguintes linhas no terminal
 
 sudo apt-get install python-pip python-dev build-essential 
 sudo pip install --upgrade pip 
 sudo pip install gdal scikit-image pyyaml
 
-√â necess√°rio instalar tbm o YAML no PHP:
+	Caso ocorra erro no pip experimente instalar com apt-get:
 
+	sudo apt-get install python-gdal
+	sudo apt-get install python-yaml
+	sudo apt-get install python-skimage
+
+	Caso ainda ocorram problemas, vocÍ pode fazer o download das extensıes e instalar com:
+
+	python setup.py install
+
+… necess·rio instalar tbm o YAML no PHP:
+
+sudo apt-get install libyaml-dev
+sudo apt-get install php-pear
 sudo pecl install yaml
 
-Depois de instalado √© necess√°rio incluir no php.ini:
+Depois de instalado È necess·rio incluir no php.ini:
 
+extension=yaml.so
+
+ou criar um arquivo ini especÌfico, dessa forma:
+
+cd /etc/php5/apache2/conf.d
+sudo vi yaml.ini
 extension=yaml.so
 
 e reiniciar o apache
 
 
 --------------------------------------------------------------------------------
-O script l√™ os par√¢metros a partir de um arquivo yaml cujo nome √© definido ao executar o programa
+O script lÍ os par‚metros a partir de um arquivo yaml cujo nome È definido ao executar o programa
 
-Para executar o arquivo √© necess√°rio invoc√°-lo no terminal:
+Para executar o arquivo È necess·rio invoc·-lo no terminal:
 
 ./better_path.py /path/to/source.yaml
 
@@ -62,26 +80,26 @@ processes:
 
 
 --------------------------------------------------------------------------------
-Descri√ß√£o dos par√¢metros:
+DescriÁ„o dos par‚metros:
 
 cost_surface_path: arquivo raster com o valor do custo em cada pixel
-pathresult: pasta onde ser√£o guardados os resultados
-processes: lista de processos que ser√£o executados
+pathresult: pasta onde ser„o guardados os resultados
+processes: lista de processos que ser„o executados
 
-	xxxx: nome do processo (apenas para refer√™ncia do programa)
+	xxxx: nome do processo (apenas para referÍncia do programa)
 	
-	calculation_type: tipo de c√°lculo que ser√° executado no processo
-	file_prefix: prefixo que ser√° usado nos arquivos resultantes do processo
-	lut: par√¢metros de reclassifica√ß√£o indicando o range e o valor reclassificado
+	calculation_type: tipo de c·lculo que ser· executado no processo
+	file_prefix: prefixo que ser· usado nos arquivos resultantes do processo
+	lut: par‚metros de reclassificaÁ„o indicando o range e o valor reclassificado
 	start_coord: ponto A
 	stop_coord: ponto B
 		ou
 	informed_path: arquivo shapefile com uma linha (opcional)
 	
-	buffer_km: buffer de entorno da linha reta entre A e B que ser√° considerado no c√°lculo do caminho (opcional)
+	buffer_km: buffer de entorno da linha reta entre A e B que ser· considerado no c·lculo do caminho (opcional)
 	
 
 --------------------------------------------------------------------------------
 Resultado:
 
-Os arquivos shapefile e o arquivo result.yaml s√£o gerados na pasta de destino especificada no arquivo de par√¢metros
+Os arquivos shapefile e o arquivo result.yaml s„o gerados na pasta de destino especificada no arquivo de par‚metros

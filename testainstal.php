@@ -86,23 +86,22 @@ catch(ee)
 		echo "<br><b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
 		include ("versao.php");
 		echo "<br><b>$mensagemInicia </b><br><br> \n";
+		echo "<br>Para mais informa&ccedil;&otilde;es sobre a instala&ccedil;&atilde;o de pacotes complementares, como o SAIKU e ferramentas que precisam de softwares espec&iacute;ficos, veja o link <a href='http://moodle.gvsig-training.com/course/view.php?id=11' >http://moodle.gvsig-training.com/course/view.php?id=11</a></b><br><br> \n";
 		//ip
 		$ip = "UNKNOWN";
 		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
 		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
 		else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
 		else $ip = "UNKNOWN";
-		echo "<br>Seu endere&ccedil;o IP: ".$ip."<br><br>\n";
-
-		echo "<br><br>PHP (a vers&atilde;o deve ser a 5x): ";
-		echo "<br>".phpversion()."<br>\n";
+		echo "<br>Seu endere&ccedil;o IP: ".$ip."<br>\n";
+		echo "<br>Sistema operacional: ".PHP_OS."<br>\n";
+		echo "<br>PHP (a vers&atilde;o deve ser a 5x): ".phpversion()."<br>\n";
 		include_once("classesphp/carrega_ext.php");
 		include_once("classesphp/funcoes_gerais.php");
 		$versao = versao();
 		$versao = $versao["principal"];
 		$exts = get_loaded_extensions();
-		echo "MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): <br>";
-		echo "Vers&atilde;o:<br>";
+		echo "<br>MapServer: <br>";
 		echo ms_GetVersion();
 		echo "<br><br>";
 		var_dump (versao())."<br><br>";
@@ -110,15 +109,11 @@ catch(ee)
 		{
 			echo "<span style=color:red >PARECE QUE O MAPSERVER NAO ESTA INSTALADO!!!<br><br>";
 		}
-		echo "<br>---<br>";
-
 		if (get_cfg_var("safe_mode") == 1){
 			echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
-			echo "<br>---<br>";
 		}
-		echo "As seguintes letras devem aparecer corretamente acentuadas: Á«„‚·¡Û”";
+		echo "<br><br>As seguintes letras devem aparecer corretamente acentuadas: Á«„‚·¡Û”";
 		echo "<br>Caso contr&aacute;rio, certifique-se que o par&acirc;metro de configura&ccedil;&atilde;o do Apache <b>AddDefaultCharset</b> esteja desativado.";
-		echo "<br>---<br>";
 		//executa as opcoes linux definidas no formulario
 		if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaPastaMstmp"] == "on"){
 			echo "<br>Criando a pasta $dir_tmp \n";
@@ -161,7 +156,7 @@ catch(ee)
 				echo "...OK\n";
 			}
 		}
-		echo "<br><pre>Extens&otilde;es:<br>";
+		echo "<br><br>Extens&otilde;es PHP:<br><pre>";
 		if (!extension_loaded("curl")){
 			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a curl que pode afetar algumas funcionalidades do i3Geo<br></span>";
 		}
