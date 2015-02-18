@@ -87,9 +87,9 @@ switch (strtoupper($funcao))
 			fclose($fp);
 			exec(dirname(__FILE__)."/better_path.py $y");
 			//adiciona o shapefile
+			include_once("../../classesphp/classe_mapa.php");
+			$m = new Mapa($map_file);
 			if(file_exists($pathresult."/".$prefixo."_best_path.shp")){
-				include_once("../../classesphp/classe_mapa.php");
-				$m = new Mapa($map_file);
 				//adiciona ao mapa best_path
 				$retorno = $m->adicionaTemaSHP($pathresult."/".$prefixo."_best_path.shp");
 				$layer = $m->mapa->getlayerbyname($prefixo."_best_path.shp");
@@ -100,6 +100,8 @@ switch (strtoupper($funcao))
 				$estilo = $classe->getstyle(0);
 				$cor = $estilo->color;
 				$cor->setRGB(255,0,0);
+			}
+			if(file_exists($pathresult."/".$prefixo."_xxxcartesian_straight_line_cost.shp")){
 				//cartesian_straight_line_cost
 				$retorno = $m->adicionaTemaSHP($pathresult."/".$prefixo."_cartesian_straight_line_cost.shp");
 				$layer = $m->mapa->getlayerbyname($prefixo."_cartesian_straight_line_cost.shp");
@@ -111,8 +113,8 @@ switch (strtoupper($funcao))
 				$cor = $estilo->color;
 				$cor->setRGB(255,0,255);
 				$estilo->set("width",2);
-				$m->salva();
 			}
+			$m->salva();
 		}
 		else{
 			$retorno = "<span style='color:red' >Erro. Arquivo raster n&atilde;o encontrado</span>";
