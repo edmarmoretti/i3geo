@@ -22,9 +22,17 @@ Cria um novo tema com a topon&iacute;mia do tema atual.
 		if(!isset($novotema))
 		{$novotema = "sim";}
 		$retorno = $m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema);
-		
-		if ($tipo != "teste")
-		{$m->salva();$_SESSION["contadorsalva"]++;}
+		if(empty($maxscale)){
+			$maxscale = -1;
+		}
+		if(empty($minscale)){
+			$minscale = -1;
+		}
+		$m->layer->set("labelmaxscaledenom",$maxscale);
+		$m->layer->set("labelminscaledenom",$minscale);
+		if ($tipo != "teste"){
+			$m->salva();$_SESSION["contadorsalva"]++;
+		}
 	break;
 	case "REMOVETOPONIMIA":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");

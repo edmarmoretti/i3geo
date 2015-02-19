@@ -119,14 +119,14 @@ i3GEOF.toponimia = {
 		//cria a janela flutuante
 		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeToponimia'></span>" + "<div  id='i3GEOFtoponimiaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("x56")+"&nbsp;</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"390px",
-			"190px",
+			"410px",
+			"260px",
 			"",
 			"",
 			"",
 			titulo,
 			"i3GEOF.toponimia",
-			true,
+			false,
 			"hd",
 			"",
 			"",
@@ -169,6 +169,12 @@ i3GEOF.toponimia = {
 		{$i("i3GEOtoponimiafrentes_i").value = "off";}
 		if($i("i3GEOtoponimianovotema").checked)
 		{novotema = "nao";}
+		if($i("i3GEOtoponimiaMinscale").value === ""){
+			$i("i3GEOtoponimiaMinscale").value = 0;
+		}
+		if($i("i3GEOtoponimiaMaxscale").value === ""){
+			$i("i3GEOtoponimiaMaxscale").value = 0;
+		}
 		par = "&position="+$i("i3GEOtoponimiaposition_i").value +
 			"&partials="+$i("i3GEOtoponimiapartials_i").value+
 			"&offsetx="+$i("i3GEOtoponimiaoffsetx_i").value+
@@ -191,6 +197,8 @@ i3GEOF.toponimia = {
 			"&item="+$i("i3GEOtoponimiaListaItens").value+
 			"&wrap="+$i("i3GEOtoponimiawrap_i").value+
 			"&tema="+i3GEO.temaAtivo+
+			"&minscale="+parseInt($i("i3GEOtoponimiaMinscale").value,10)+
+			"&maxscale="+parseInt($i("i3GEOtoponimiaMaxscale").value,10)+
 			"&novotema="+novotema;
 		return par;
 	},

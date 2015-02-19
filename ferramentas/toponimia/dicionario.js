@@ -124,5 +124,10 @@ i3GEOF.toponimia.dicionario = {
 		pt : "Remover",
 		en : "",
 		es : ""
+	} ],
+	'minmaxscale' : [ {
+		pt : "Denominador das Escalas (m&iacute;nima - m&aacute;xima) que restringem a apresenta&ccedil;&atilde;o",
+		en : "",
+		es : ""
 	} ]
 };
