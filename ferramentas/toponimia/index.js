@@ -6,7 +6,6 @@ if(typeof(i3GEOF) === 'undefined'){
 Classe: i3GEOF.toponimia
 
 */
-//XODO incluir opcao de minscale e maxscale
 i3GEOF.toponimia = {
 	/*
 	Variavel: aguarde

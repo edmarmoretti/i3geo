@@ -34,6 +34,7 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
+//XODO nova ferramenta para definir minscaledenom e maxscaledenom, GEOMTRANSFORM, SYMBOLSCALEDENOM, MINGEOWIDTH, MAXGEOWIDTH, 
 i3GEO.tema =
 	{
 		/**
