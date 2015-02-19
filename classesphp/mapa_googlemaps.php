@@ -160,7 +160,7 @@ if(!isset($_GET["telaR"])){
 			if ($l->getmetadata("cortepixels") != "" && $qy == false){
 				$cortePixels = $l->getmetadata("cortepixels");
 			}
-			//@TODO verificar se foi corrigido em versoes novas do mapserver
+			//FIXME verificar se foi corrigido em versoes novas do mapserver
 			//corrige um bug do mapserver que nao calcula a escala direito
 			$l->set("maxscaledenom",$l->maxscaledenom * 100000);
 			$l->set("minscaledenom",$l->minscaledenom * 100000);

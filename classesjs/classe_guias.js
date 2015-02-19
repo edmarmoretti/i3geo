@@ -1331,7 +1331,7 @@ i3GEO.guias =
 			desativaIcones : function(o) {
 				var ims, n, i;
 				if(!o){
-					o = 0.9
+					o = 0.9;
 				}
 				ims = $i("i3GEOguiaMovelIcones");
 				if (ims) {

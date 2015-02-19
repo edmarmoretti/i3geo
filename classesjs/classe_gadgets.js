@@ -321,7 +321,7 @@ i3GEO.gadgets = {
 		if (arguments.length === 0) {
 			id = i3GEO.gadgets.PARAMETROS.mostraEscalaGrafica.idhtml;
 		}
-		var e, temp, ins;
+		var ins;
 		if ($i(id)) {
 			if (!$i("imagemEscalaGrafica")) {
 				ins = "<img class='menuarrow' src=\""

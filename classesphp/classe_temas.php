@@ -1148,29 +1148,37 @@ function: adicionaLabel
 Adiciona LABEL em uma classe de um tema
 */
 	function adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,$texto=""){
-		if($this->vi >= 60200){
-			$indiceLabel = $novac->addLabel(new labelObj());
-			$label = $novac->getLabel($indiceLabel);
+		while($novac->numlabels > 0){
+			$novac->removeLabel(0);
 		}
-		else{
-			$label = $novac->label;
+		if($texto == ""){
+			if($this->vi >= 60200){
+				$indiceLabel = $novac->addLabel(new labelObj());
+				$label = $novac->getLabel($indiceLabel);
+			}
+			else{
+				$label = $novac->label;
+			}
 		}
-		if($wrap != "")
-		{
-			$label->set("maxlength",1);
-			$s = "CLASS LABEL WRAP '$wrap' END END";
-			$novac->updateFromString($s);
-		}
-		if($texto != ""){
-			$s = "CLASS LABEL TEXT '".$texto."' END END";
-			$novac->updateFromString($s);
+		elseif ($novac->numlabels == 0){
+			if($wrap != ""){
+				$s = "CLASS LABEL WRAP '$wrap' TEXT '".$texto."' END END";
+				$novac->updateFromString($s);
+			}
+			else{
+				$s = "CLASS LABEL TEXT '".$texto."' END END";
+				$novac->updateFromString($s);
+			}
 		}
 
 		if($this->vi >= 60200){
-			$label = $novac->getLabel($indiceLabel);
+			$label = $novac->getLabel(0);
 		}
 		else{
 			$label = $novac->label;
+		}
+		if($wrap != ""){
+			$label->set("maxlength",1);
 		}
 		if($fonte != "bitmap")
 		{
@@ -1212,6 +1220,10 @@ Adiciona LABEL em uma classe de um tema
 	}
 	function removeLabel($iclasse){
 		$classe = $this->layer->getclass($iclasse);
+		while($classe->numlabels > 0){
+			$classe->removeLabel(0);
+		}
+		/*
 		$nlabel = $classe->numlabels;
 		for($i=0;$i<$nlabel;$i++){
 			if($this->vi >= 60200){
@@ -1226,6 +1238,7 @@ Adiciona LABEL em uma classe de um tema
 			$s = "CLASS LABEL TEXT '' END END";
 			$classe->updateFromString($s);
 		}
+		*/
 		if ($this->layer){
 			$this->layer->setMetaData("cache","");
 		}

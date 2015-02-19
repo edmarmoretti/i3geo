@@ -189,7 +189,7 @@ i3GEO.login = {
 		// verifica no banoc de dados, o que considera qualquer mudanca no banco
 		// feita apos o usuario ter aberto a sessao
 		/**
-		 * TODO implementar funcao validaoperacaobanco
+		 * ZODO implementar funcao validaoperacaobanco
 		 */
 		if (tipo === "banco") {
 			p = locaplic

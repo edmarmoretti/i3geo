@@ -1075,7 +1075,7 @@ i3GEOF.selecao = {
 							ntd1.innerHTML = "<div class='styled-select' style='width:95px;margin-left:5px;' >" + retorno.dados + "</div>";
 							$i("i3GEOselecaoItensAtrib").onchange = function(){
 								$i("i3GEOselecaovalores").innerHTML = "";
-							}
+							};
 						}
 				);
 				ntr.appendChild(ntd1);

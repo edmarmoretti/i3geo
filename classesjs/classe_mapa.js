@@ -38,7 +38,7 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-//TODO incluir nova ferramenta para usar a opção de mascara do Mapserver
+//XODO incluir nova ferramenta para usar a opcao de mascara do Mapserver
 i3GEO.mapa =
 	{
 		/**
@@ -483,6 +483,8 @@ i3GEO.mapa =
 				}
 			}
 		},
+		//XODO quando aberta em janela flutuante, remover opcao de ligar/desligar camada e esconder a opcao de 'mostrar tudo'
+		//XODO incluir icone olho
 		/**
 		 * Section: i3GEO.mapa.legendaHTML
 		 *
@@ -1244,10 +1246,7 @@ i3GEO.mapa =
 			 */
 			verificaTipDefault : function(e) {
 				// evita clicar sobre a barra do googlemaps
-				// FIXIT nada elegante
-				// console.warn(objposicaocursor.imgx)
-				// TODO incluir opcao de mais informacoes
-				// TODO incluir opcao para controlar tolerancia e outros parametros
+				//FIXME nada elegante
 				if (objposicaocursor.imgx < 70) {
 					return;
 				}
@@ -1264,7 +1263,7 @@ i3GEO.mapa =
 				if (i3GEO.Interface.ATUAL === "googleearth" && i3GEO.eventos.MOUSECLIQUE.length > 1) {
 					return;
 				}
-				var ntemas, etiquetas, j, retorna, targ = "", x = objposicaocursor.ddx, y = objposicaocursor.ddy;
+				var ntemas, etiquetas, j, retorna, x = objposicaocursor.ddx, y = objposicaocursor.ddy;
 
 				ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
 				etiquetas = false;
@@ -1281,8 +1280,7 @@ i3GEO.mapa =
 				}
 				retorna =
 					function(retorno) {
-						// alert("ok")
-						var textoCompleto = "",textoSimples = "",textoTempCompleto = "",textoTempSimples = "",classeCor, temp, n, i, mostra, res, temas, ntemas, titulo, tips, j, ntips, ins, r, ds, nds, s, configura =
+						var textoCompleto = "",textoSimples = "",textoTempCompleto = "",textoTempSimples = "",classeCor, temp, n, mostra, res, temas, ntemas, titulo, tips, j, ntips, r, ds, nds, s, configura =
 							i3GEO.configura, tipotip = configura.tipotip;
 						i3GEO.eventos.cliquePerm.status = true;
 						mostra = false;

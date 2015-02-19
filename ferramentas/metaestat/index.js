@@ -2106,7 +2106,7 @@ i3GEOF.metaestat = {
 		 */
 		t4: function(){
 			//remove o conteudo anteriormente construido
-			//TODO melhorar a disposicao dos botoes
+			//ZODO melhorar a disposicao dos botoes
 			i3GEOF.metaestat.editor.removeEl("i3GEOF.metaestat.editor.t4");
 			if($i("i3geoCartoComboMedidaVariavelEditor").value === ""){
 				i3GEO.janela.tempoMsg($trad('selecionaTipoClassificacao',i3GEOF.metaestat.dicionario));

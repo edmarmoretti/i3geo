@@ -1339,7 +1339,7 @@ google.maps.Circle.prototype.type = 'circle';
 
            if (this.isRectangle) {
                return (function () {
-                   var bounds, v;
+                   var bounds, v=0;
 
                    bounds = new google.maps.LatLngBounds();
 
@@ -1396,7 +1396,7 @@ google.maps.Circle.prototype.type = 'circle';
     * @return          {Object}    A hash of the 'type' and 'components' thus derived, plus the WKT string of the feature.
     */
    Wkt.Wkt.prototype.deconstruct = function (obj, multiFlag) {
-       var features, i, j, multiFlag, verts, rings, sign, tmp, response, lat, lng;
+       var features, i, j, verts, rings, sign, tmp, response, lat, lng;
 
        // Shortcut to signed area function (determines clockwise vs counter-clock)
        if (google.maps.geometry) {
@@ -1466,7 +1466,7 @@ google.maps.Circle.prototype.type = 'circle';
 
            if (multiFlag === undefined) {
                multiFlag = (function () {
-                   var areas, i, l;
+                   var areas, l;
 
                    l = obj.getPaths().length;
                    if (l <= 1) { // Trivial; this is a single polygon
@@ -1779,7 +1779,7 @@ google.maps.Circle.prototype.type = 'circle';
        // google.maps.Data.MultiPolygon /////////////////////////////////////////////////////
        if (obj.constructor === google.maps.Data.MultiPolygon) {
 
-           var polygons = [];
+           var k = 0,polygons = [];
 
            //console.log('It is a google.maps.Data.MultiPolygon');
            for (k = 0; k < obj.getLength(); k += 1) { // For each multipolygon

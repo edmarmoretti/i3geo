@@ -1,4 +1,4 @@
-//TODO alterar a forma de estilizar as linhas de uma tabela usando estilos
+//ZODO alterar a forma de estilizar as linhas de uma tabela usando estilos
 //table tr:nth-child(odd)	{
 //  background-color: #f1f1f1;
 //}

@@ -177,7 +177,7 @@ i3GEOF.saiku =
 					$i("i3GEOFsaikubotao3").style.display = "block";
 				}
 			}, titulo =
-				"<div class='comboTemasCabecalho'><input id=i3GEOFsaikubotao3 type=button value='Atualiza o mapa' /></div>"
+				"<div class='comboTemasCabecalho'><input id=i3GEOFsaikubotao3 type=button value='Atualiza o mapa' /></div>";
 
 			i3GEO.janela.cria(
 				(i3GEO.parametros.w / 1.2) - 50 + "px",

@@ -48,6 +48,7 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
+//TODO incluir opcao para usar o modo notile no googlemaps e openlayers conforme for definido na configuracao do LAYER
 i3GEO.Interface =
 	{
 		/**
@@ -659,7 +660,7 @@ i3GEO.Interface =
 				classeCadeado : "i3GEOiconeAberto"
 			},
 			balao : function(texto, completo, x, y) {
-				var e, z, b,c,temp,
+				var e,b,c,temp,
 					p = i3GEO.Interface.openlayers.BALAOPROP;
 
 				//cabecalho de opcoes
@@ -1645,7 +1646,7 @@ i3GEO.Interface =
 				// movimentando o mapa
 				var calcCoord, modoAtual = "";
 				calcCoord = function(e) {
-					var point, p, lonlat, d, pos = "", projWGS84, proj900913;
+					var point, p = false, lonlat = false, d, pos = "", projWGS84, proj900913;
 					if (e.xy) {
 						p = e.xy;
 					}
@@ -1658,11 +1659,11 @@ i3GEO.Interface =
 						p = new OpenLayers.Pixel(e.changedTouches[0].clientX - pos[0], e.changedTouches[0].clientY - pos[1]);
 						e = null;
 					}
-					lonlat = i3geoOL.getLonLatFromPixel(p);
-					// alert("calcCoord "+objposicaocursor.ddx+" "+objposicaocursor.ddy)
-					if (!lonlat) {
+					if (p === false) {
 						return;
 					}
+					lonlat = i3geoOL.getLonLatFromPixel(p);
+
 					if (i3GEO.Interface.openlayers.googleLike === true) {
 						projWGS84 = new OpenLayers.Projection("EPSG:4326");
 						proj900913 = new OpenLayers.Projection("EPSG:900913");
@@ -2495,16 +2496,8 @@ i3GEO.Interface =
 					i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
 				});
 				google.maps.event.addListener(i3GeoMap, "bounds_changed", function() {
-					var xy;
 					i3GEO.Interface.googlemaps.recalcPar();
 					i3GEO.eventos.navegaMapa();
-					//
-					// permite que a coordenada do centro mapa seja mostrada
-					// no formul&aacute;rio de coordenadas
-					//
-					/*
-					 * xy = i3GEO.navega.centroDoMapa(); i3GEO.coordenadas.mostraCoordenadas( false, "", xy[0], xy[1]);
-					 */
 				});
 				google.maps.event.addListener(i3GeoMap, "mousemove", function(ponto) {
 					if (i3GEOtouchesPosMapa === "") {

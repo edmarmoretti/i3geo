@@ -171,7 +171,7 @@ function gravaDadosTema(id)
 		if($i(campos[i]+"_tema"))
 		par += "&"+campos[i]+"="+($i(campos[i]+"_tema").value);
 	}
-	var campos = new Array("en","es","it");
+	campos = new Array("en","es","it");
 	for (i=0;i<campos.length;i++)
 	{
 		if($i(campos[i]))

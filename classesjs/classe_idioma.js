@@ -337,7 +337,7 @@ i3GEO.idioma = {
 		//
 		// monta o elemento HTML com as bandeiras
 		//
-		var ins, n, w, i, pos, novoel, temp, iu = i3GEO.util;
+		var ins, n, w, i, pos, novoel, temp;
 		ins = "";
 		n = i3GEO.idioma.SELETORES.length;
 		if ($i("i3geo")

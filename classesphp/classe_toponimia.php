@@ -176,6 +176,7 @@ Retorno:
 	{
 		error_reporting(0);
 		if(!$this->layer){return "erro";}
+		$this->removeToponimia();
 		if (!isset($tipo)){$tipo = "";}
 		if ($item != "") //o layer nao tem tabela mas tem toponimia
 		{
@@ -292,6 +293,10 @@ Retorno:
 		$nclasses = $this->layer->numclasses;
 		for ($i=0; $i < $nclasses; ++$i){
 			$classe = $this->layer->getclass($i);
+			while($classe->numlabels > 0){
+				$classe->removeLabel(0);
+			}
+			/*
 			$nlabel = $classe->numlabels;
 			for($i=0;$i<$nlabel;$i++){
 				if($this->vi >= 60200){
@@ -306,6 +311,7 @@ Retorno:
 				$s = "CLASS LABEL TEXT '' END END";
 				$classe->updateFromString($s);
 			}
+			*/
 		}
 		if ($this->layer){
 			$this->layer->setMetaData("cache","");

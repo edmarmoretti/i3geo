@@ -1180,7 +1180,7 @@ i3GEO.janela =
 		 *
 		 * onButtonClick {function} - funcao que sera executada no evento onchange do combo a ser criado
 		 */
-		//TODO verificar as ferramentas que nao guardam o tema internamente e modificar essa situacao
+		//XODO verificar as ferramentas que nao guardam o tema internamente e modificar essa situacao
 		//TODO atualizar todos os combos quando a arvore de camadas e modificada
 		comboCabecalhoTemas : function(idDiv, idCombo, ferramenta, tipo, onButtonClick) {
 			var temp = $i(idDiv);

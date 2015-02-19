@@ -54,7 +54,7 @@ include("ms_configura.php");
 include("classesphp/funcoes_gerais.php");
 require_once("classesphp/pega_variaveis.php");
 include_once ("classesphp/carrega_ext.php");
-//TODO incluir teste da tabela de atributos
+//XODO incluir teste da tabela de atributos
 //
 //carrega o phpmapscript
 //

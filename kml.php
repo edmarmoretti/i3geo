@@ -38,7 +38,7 @@ tipoxml - (opcional) quando definido como "kml" ser&aacute; inserido o cabe&cced
 
 idioma - pt|en|es
 */
-//TODO incluir arquivo gvp
+//ZODO incluir arquivo gvp
 error_reporting(0);
 include_once ("classesphp/carrega_ext.php");
 include_once ("classesphp/classe_menutemas.php");

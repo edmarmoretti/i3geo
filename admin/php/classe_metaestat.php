@@ -444,7 +444,7 @@ class Metaestat{
 			$sqlagrupamento .= " /*FA*//*FA*/ /*FAT*//*FAT*/ GROUP BY ".$agruparpor." ORDER BY ".$agruparpor;
 		}
 		//SQL para a primeira regiao __SQLDADOS__ ira conter os sqls dos niveis inferiores da regiao se ouver
-		//@TODO ajustar tipos das colunas no join para tornar mais rapida a juncao
+		//ZODO ajustar tipos das colunas no join para tornar mais rapida a juncao
 		$sqlIntermediario = "SELECT (j.valorcalculado) AS ".$dados["colunavalor"].", __COLUNASSEMGEO__".
 		" FROM ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." AS regiao ".
 		" INNER JOIN ( __SQLDADOS__ ) ".
@@ -1929,7 +1929,7 @@ class Metaestat{
 			}
 			$data = implode("||",$data);
 			/**
-			 * TODO falta a hora
+			 * ZODO falta a hora
 			 */
 			return "to_date($data,'$tipodata')";
 		}
