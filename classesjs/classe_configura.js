@@ -581,6 +581,11 @@ i3GEO.configura =
 										id : "omenudataFerramentas9b",
 										text : "<span class='i3GEOconeFerramenta i3GEOiconeGrafico'></span>" + $trad("t37b"),
 										url : "javascript:i3GEO.analise.dialogo.graficoInterativo1()"
+									},
+									{
+										id : "omenudataFerramentasmmscale",
+										text : "<span class='i3GEOconeFerramenta i3GEOiconemmscale'></span>" + $trad("variaEscala"),
+										url : "javascript:i3GEO.tema.dialogo.mmscale()"
 									}
 								]
 							]

@@ -2312,6 +2312,12 @@ g_traducao = {
 	pt: "Ferramenta n&atilde;o dispon&iacute;vel nessa instala&ccedil;&atilde;o do i3Geo",
 	en:"",
 	es:""
+}],
+"variaEscala": [
+{
+	pt: "Depend&ecirc;ncia da escala",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

@@ -34,7 +34,7 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-//XODO nova ferramenta para definir minscaledenom e maxscaledenom, GEOMTRANSFORM, SYMBOLSCALEDENOM, MINGEOWIDTH, MAXGEOWIDTH, 
+//XODO nova ferramenta para definir GEOMTRANSFORM, SYMBOLSCALEDENOM 
 i3GEO.tema =
 	{
 		/**
@@ -463,6 +463,25 @@ i3GEO.tema =
 					"cortina",
 					"dependencias.php",
 					"i3GEOF.cortina.iniciaJanelaFlutuante()");
+			},
+			/**
+			 * Function: mmscale
+			 * 
+			 * Abre a janela de dialogo que permite definir o comportamento do mapa em fun&ccedil;&atilde;o da escala
+			 * 
+			 * Parametros:
+			 * 
+			 * {string} - codigo do tema escolhido
+			 * 
+			 */
+			mmscale : function(tema) {
+				i3GEO.mapa.ativaTema(tema);
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.tema.dialogo.mmscale()",
+					"mmscale",
+					"mmscale",
+					"dependencias.php",
+					"i3GEOF.mmscale.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: atalhoscamada

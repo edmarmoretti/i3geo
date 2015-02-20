@@ -1042,7 +1042,7 @@ g_traducao_ajuda = {
 			categoria:"9",
 			pt:"A ferramenta Cartogramas Estat&iacute;sticos &eacute; utilizada como uma integra&ccedil;&atilde;o entre o mapa interativo e o sistema de metadados estat&iacute;sticos. Al&eacute;m de funcionar como um cat&aacute;logo de camadas oriundas do sistema de metadados estat&iacute;sticos, ela permite a cria&ccedil;&atilde;o, edi&ccedil;&atilde;o e an&aacute;lise de vari&aacute;veis sem a necessidade de acesso ao sistema de administra&ccedil;&atilde;o.",
 			complemento:"Voc&ecirc; pode construir um cartograma a partir da adi&ccedil;&atilde;o das vari&aacute;veis, medidas de vari&aacute;veis e par&acirc;metros constantes no sistema de metadados estat&iacute;sticos. Basta selecionar os componentes da camada e clicar em ''Adicionar camada ao mapa'.<p>O bot&atilde;o ''Edi&ccedil;&atilde;o'' abre o m&oacute;dulo ''Ajudante do editor'', que pode redirecionar o usu&aacute;rio para o ''Editor avan&ccedil;ado'' de vari&aacute;veis, diretamente no sistema de administra&ccedil;&atilde;o, para o ''Editor de limites'', onde o usu&aacute;rio pode editar os limites das camadas pertencentes ao cadastro de regi&otilde;es geogr&aacute;ficas, ou ainda acessar o gerenciador de banco de dados para a inclus&atilde;o de novos dados. Ainda por meio do ''Ajudante do editor'', o usu&aacute;rio pode editar vari&aacute;veis, medidas de vari&aacute;veis ou classifica&ccedil;&otilde;es, ou ainda criar novos elementos para a composi&ccedil;&atilde;o de uma camada no sistema de metadados estat&iacute;sticos.<p>O bot&atilde;o ''An&aacute;lise'' abre uma s&eacute;rie de ferramentas que podem ser utilizadas para uma configura&ccedil;&atilde;o e um exame mais aprofundado dos dados constantes nas vari&aacute;veis.",
-			apijs:"javascript:i3GEO.mapa.dialogo.metaestat();"
+			apijs:"i3GEO.mapa.dialogo.metaestat();"
 		},
 		"125": {
 			titulo: "Aplicativos estat&iacute;sticos cadastrados",
@@ -1050,7 +1050,7 @@ g_traducao_ajuda = {
 			categoria:"9",
 			pt:"Lista os mapas cadastrados pelo publicador de mapas do sistema de metadados estat&iacute;sticos, apresentando as diferentes op&ccedil;&otilde;es de interface para abri-los.",
 			complemento:"",
-			apijs:"javascript:i3GEO.mapa.dialogo.metaestatListaMapas();"
+			apijs:"i3GEO.mapa.dialogo.metaestatListaMapas();"
 		},
 		"126": {
 			titulo: "Layer KML (plugin)",
@@ -1067,6 +1067,14 @@ g_traducao_ajuda = {
 			pt:"Esse plugin permite que o item DATA, que define a fonte dos dados, seja parametrizado, utilizando-se palavras chave de substitui&ccedil;&atilde;o. Ao adicionar a camada ao mapa, um formul&aacute;rio &eacute; criado de forma autom&aacute;tica para que o usu&aacute;rio escolha os par&acirc;metros que ir&atilde;o definir a origem dos dados.",
 			complemento:"",
 			apijs:""
+		},
+		"128": {
+			titulo: "Depend&ecirc;ncia da escala",
+			diretorio:"i3geo/ferramentas/mmscale.js",
+			categoria:"7",
+			pt:"Define par&acirc;metros que modificam o comportamento de uma camada em fun&ccedil;&atilde;o da escala do mapa ou da abrang&ecirc;ncia espacial.",
+			complemento:"",
+			apijs:"i3GEO.tema.dialogo.mmscale();"
 		}
 	}
 };

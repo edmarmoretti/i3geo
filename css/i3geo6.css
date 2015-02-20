@@ -2207,6 +2207,9 @@ width: 16px;
 height: 16px;
 float: left;
 }
+.i3GEOiconemmscale{
+background-image: URL('../imagens/oxygen/16x16/graphics-viewer-document.png');
+}
 .i3GEOiconeOpacidadeMapa {
 background-image: URL('../imagens/oxygen/16x16/show-menu.png');
 }
