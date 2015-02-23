@@ -4,7 +4,7 @@ if (typeof (i3GEOF) === 'undefined') {
 /*
  * Classe: i3GEOF.atalhoscamada
  */
-//TODO verificar se o parametro cache esta funcionando
+//XODO construir links com base no menu suspenso
 i3GEOF.atalhoscamada =
 {
 	/**

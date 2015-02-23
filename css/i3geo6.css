@@ -2207,6 +2207,10 @@ width: 16px;
 height: 16px;
 float: left;
 }
+.i3GEOiconeXis {
+background-image: url("../imagens/oxygen/16x16/edit-delete.png");
+cursor: pointer;
+}
 .i3GEOiconemmscale{
 background-image: URL('../imagens/oxygen/16x16/graphics-viewer-document.png');
 }

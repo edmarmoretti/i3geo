@@ -44,7 +44,7 @@ class Legenda
 
 	Objeto mapa
 	*/
-	protected $mapa;
+	public $mapa;
 	/*
 	Variavel: $arquivo
 
@@ -56,7 +56,7 @@ class Legenda
 
 	Objeto layer
 	*/
-	protected $layer;
+	public $layer;
 	/*
 	Variavel: $nome
 
@@ -600,7 +600,8 @@ parameters:
 $classe - &Iacute;ndice da classe.
 
 return:
-string com o tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size|
+string com o 
+tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size,symbolscaledenom,maxsize,minsize|
 */
 	function pegaParametros($classe)
 	{
@@ -629,9 +630,12 @@ string com o tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbo
 				$linha[] = "";
 				$linha[] = "";
 			}
+			$linha[] = $this->layer->symbolscaledenom;
+			$linha[] = $estilo->minsize;
+			$linha[] = $estilo->maxsize;
 			$linhas[] = $tipoLayer."#".implode("#",$linha);
 		}
-		//retorna tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size
+		//retorna tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size,symbolscaledenom
 		return implode("|",$linhas);
 	}
 /*
@@ -657,7 +661,7 @@ $size - Tamanho que ser&aacute; aplicado ao s&iacute;mbolo.
 
 $opacidade - Opacidade
 */
-	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle)
+	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle,$minsize=0,$maxsize=500)
 	{
 		if(!$this->layer){return "erro";}
 		if(!empty($pattern))
@@ -708,6 +712,8 @@ $opacidade - Opacidade
 		{
 			$estilo->set("angle",$angle);
 		}
+		$estilo->set("minsize",$minsize);
+		$estilo->set("maxsize",$maxsize);
 		if ($this->layer->getmetadata("sld") != "")
 		{
 			$sld = $this->layer->getmetadata("sld");

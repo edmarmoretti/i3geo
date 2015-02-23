@@ -2163,7 +2163,10 @@ switch (strtoupper($funcao))
 		}
 		if ($opcao == "aplica")
 		{
-			$retorno = $m->aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle);
+			$retorno = $m->aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle,$minsize,$maxsize);
+			if(!empty($symbolscale)){
+				$m->layer->set("symbolscaledenom",$symbolscale);
+			}
 			$m->salva();
 		}
 		if ($opcao == "listaSimbolos"){

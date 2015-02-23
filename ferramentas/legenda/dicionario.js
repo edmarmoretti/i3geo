@@ -509,5 +509,20 @@ i3GEOF.legenda.dicionario = {
 		pt : "aplicar",
 		en : "",
 		es : ""
+	} ],
+	'symbolscale' : [ {
+		pt : "Denominador da escala na qual o s&iacute;mbolo ser&aacute; apresentado com o tamanho definido. Esse par&acirc;metro funciona em conjunto com MAXSCALE e MINSCALE e &eacute; v&aacute;lido para a camada como um todo e n&atilde;o para cada estilo (afeta pontos)",
+		en : "",
+		es : ""
+	} ],
+	'minsize' : [ {
+		pt : "Menor tamanho (pixels), que os s&iacute;mbolos ser&atilde;o desenhados, quando a escala de desenho de s&iacute;mbolos estiver ativo",
+		en : "",
+		es : ""
+	} ],
+	'maxsize' : [ {
+		pt : "Maior tamanho (pixels), que os s&iacute;mbolos ser&atilde;o desenhados, quando a escala de desenho de s&iacute;mbolos estiver ativo",
+		en : "",
+		es : ""
 	} ]
 };

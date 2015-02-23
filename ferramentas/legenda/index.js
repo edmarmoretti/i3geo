@@ -41,8 +41,6 @@ if (typeof (i3GEOF) === 'undefined') {
  * Classe: i3GEOF.legenda
  */
 //XODO incluir um construtor de expressao na legenda
-//XODO incluir SYMBOLSCALEDENOM
-//XODO incluir link para ferramenta de definicao da escala
 i3GEOF.legenda =
 	{
 		/*
@@ -1532,6 +1530,39 @@ i3GEOF.legenda =
 					+ linha[10]
 					+ "' id='i3GEOlegendaangulo' />"
 					+ "</form></div>"
+					
+					+ "<br><img style='float:left;' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif'  />"
+					+ "<p class='paragrafo'>"
+					+ $trad('symbolscale', i3GEOF.legenda.dicionario)
+					+ ":</p>"
+					+ "<div class='i3geoForm i3geoFormIconeEdita' >"
+					+ "<form onsubmit='i3GEOF.legenda.aplicaEstilo();return false;'>"
+					+ "<input type=text value='"
+					+ linha[11]
+					+ "' id='i3GEOlegendasymbolscale' />"
+					+ "</form></div>"
+					
+					+ "<br><img style='float:left;' onclick='i3GEOF.legenda.aplicaTodasClasses(\"angle\",\"i3GEOlegendaangulo\")' title='"+$trad('aplicatodos', i3GEOF.legenda.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/tools-wizard.png'  />"
+					+ "<p class='paragrafo'>"
+					+ $trad('minsize', i3GEOF.legenda.dicionario)
+					+ ":</p>"
+					+ "<div class='i3geoForm i3geoFormIconeEdita' >"
+					+ "<form onsubmit='i3GEOF.legenda.aplicaEstilo();return false;'>"
+					+ "<input type=text value='"
+					+ linha[12]
+					+ "' id='i3GEOlegendaminsize' />"
+					+ "</form></div>"
+					
+					+ "<br><img style='float:left;' onclick='i3GEOF.legenda.aplicaTodasClasses(\"angle\",\"i3GEOlegendaangulo\")' title='"+$trad('aplicatodos', i3GEOF.legenda.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/tools-wizard.png'  />"
+					+ "<p class='paragrafo'>"
+					+ $trad('maxsize', i3GEOF.legenda.dicionario)
+					+ ":</p>"
+					+ "<div class='i3geoForm i3geoFormIconeEdita' >"
+					+ "<form onsubmit='i3GEOF.legenda.aplicaEstilo();return false;'>"
+					+ "<input type=text value='"
+					+ linha[13]
+					+ "' id='i3GEOlegendamaxsize' />"
+					+ "</form></div>"
 
 					+ "<br><img style='float:left;' onclick='i3GEOF.legenda.aplicaTodasClasses(\"symbolname\",\"i3GEOlegendasymbolname\")' title='"+$trad('aplicatodos', i3GEOF.legenda.dicionario)+"' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/tools-wizard.png'  />"
 					+ "<p class='paragrafo'>"
@@ -1602,11 +1633,28 @@ i3GEOF.legenda =
 					return;
 				}
 				i3GEOF.legenda.aguarde.visibility = "visible";
-				var outlinecolor = $i("i3GEOlegendaoutlinecolor").value, backgroundcolor = $i("i3GEOlegendabackgroundcolor").value, color =
-					$i("i3GEOlegendacolor").value, symbolname = $i("i3GEOlegendasymbolname").value, simbolos =
-					$i("i3GEOlegendasimbolos").getElementsByTagName("img"), valido = "nao", n = simbolos.length, size =
-					$i("i3GEOlegendasizes").value, width = $i("i3GEOlegendawidth").value, pattern = $i("i3GEOlegendapattern").value, opacidade =
-					$i("i3GEOlegendaopacidade").value, angle = $i("i3GEOlegendaangulo").value, i, p, cp, fim;
+				var i, p, cp, fim,
+					outlinecolor = $i("i3GEOlegendaoutlinecolor").value,
+					backgroundcolor = $i("i3GEOlegendabackgroundcolor").value,
+					color = $i("i3GEOlegendacolor").value, 
+					symbolname = $i("i3GEOlegendasymbolname").value, 
+					simbolos = $i("i3GEOlegendasimbolos").getElementsByTagName("img"), 
+					valido = "nao", 
+					n = simbolos.length, 
+					size = $i("i3GEOlegendasizes").value, 
+					width = $i("i3GEOlegendawidth").value, 
+					pattern = $i("i3GEOlegendapattern").value, 
+					opacidade = $i("i3GEOlegendaopacidade").value, 
+					angle = $i("i3GEOlegendaangulo").value,
+					symbolscale = $i("i3GEOlegendasymbolscale").value,
+					minsize = $i("i3GEOlegendaminsize").value,
+					maxsize = $i("i3GEOlegendamaxsize").value;
+				if(symbolscale != ""){
+					symbolscale = parseInt(symbolscale,10);
+				}
+				else{
+					symbolscale = -1;
+				}
 				for (i = 0; i < n; i++) {
 					if (simbolos[i].title == symbolname || symbolname == i) {
 						valido = "sim";
@@ -1619,10 +1667,21 @@ i3GEOF.legenda =
 				}
 				p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid
-						+ "&funcao=editasimbolo&opcao=aplica&tema=" + i3GEOF.legenda.tema + "&classe=" + i3GEOF.legenda.classe + "&estilo="
-						+ i3GEOF.legenda.estilo + "&outlinecolor=" + outlinecolor + "&backgroundcolor=" + backgroundcolor + "&color="
-						+ color + "&symbolname=" + symbolname + "&width=" + width + "&pattern=" + pattern + "&size=" + size + "&opacidade="
-						+ opacidade + "&angle=" + angle;
+						+ "&funcao=editasimbolo&opcao=aplica&tema=" + i3GEOF.legenda.tema 
+						+ "&classe=" + i3GEOF.legenda.classe 
+						+ "&estilo=" + i3GEOF.legenda.estilo 
+						+ "&outlinecolor=" + outlinecolor 
+						+ "&backgroundcolor=" + backgroundcolor 
+						+ "&color=" + color 
+						+ "&symbolname=" + symbolname 
+						+ "&width=" + width 
+						+ "&pattern=" + pattern 
+						+ "&size=" + size 
+						+ "&opacidade=" + opacidade 
+						+ "&angle=" + angle
+						+ "&symbolscale=" + symbolscale
+						+ "&minsize=" + minsize
+						+ "&maxsize=" + maxsize;
 				cp = new cpaint();
 				fim = function() {
 					i3GEOF.legenda.aposAlterarLegenda();
