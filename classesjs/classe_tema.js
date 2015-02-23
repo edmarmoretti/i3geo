@@ -34,7 +34,7 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-//XODO nova ferramenta para definir GEOMTRANSFORM, SYMBOLSCALEDENOM 
+//XODO nova ferramenta para definir GEOMTRANSFORM 
 i3GEO.tema =
 	{
 		/**

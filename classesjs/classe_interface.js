@@ -49,6 +49,7 @@ if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
 //TODO incluir opcao para usar o modo notile no googlemaps e openlayers conforme for definido na configuracao do LAYER
+//TODO integrar Cesium http://cesiumjs.org/2013/04/12/Cesium-up-and-running/
 i3GEO.Interface =
 	{
 		/**

@@ -266,7 +266,7 @@ i3GEOF.legenda.dicionario = {
 		es : ""
 	} ],
 	'aplicaAlteracoes' : [ {
-		pt : "Aplicar as altera&ccedil;&otilde;es",
+		pt : "Aplicar todas as altera&ccedil;&otilde;es",
 		en : "",
 		es : ""
 	} ],
@@ -421,7 +421,7 @@ i3GEOF.legenda.dicionario = {
 		es : ""
 	} ],
 	'tamanhoEspacamento' : [ {
-		pt : "Tamanho/espa&ccedil;amento",
+		pt : "Tamanho / espa&ccedil;amento",
 		en : "",
 		es : ""
 	} ],
@@ -446,7 +446,7 @@ i3GEOF.legenda.dicionario = {
 		es : ""
 	} ],
 	'simbolo' : [ {
-		pt : "S&iacute;mbolo<br>(Voc&ecirc; pode usar o caminho absoluto de uma imagem PNG existente no servidor)",
+		pt : "S&iacute;mbolo (Voc&ecirc; pode usar o caminho absoluto de uma imagem PNG existente no servidor ou clicar em um dos s&iacute;mbolos mostrados abaixo)",
 		en : "",
 		es : ""
 	} ],
