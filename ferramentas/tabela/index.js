@@ -1144,14 +1144,14 @@ i3GEOF.tabela =
 				for (i = 0; i < n; i++) {
 					ins += "<td accessKey='"
 						+ (i * 1 + 4)
-						+ "' style='background-color:yellow' >"
+						+ "' style='background-color:yellow;min-width:60px;' >"
 						+ "<img style=cursor:pointer onclick='i3GEOF.tabela.excluiColuna(this,"
 						+ (i * 1 + 4)
 						+ ",\""
 						+ idjanela
 						+ "\")' src='"
 						+ i3GEO.configura.locaplic
-						+ "/imagens/x.gif' title='"
+						+ "/imagens/oxygen/16x16/edit-delete.png' title='"
 						+ $trad("t12")
 						+ "' />&nbsp;"
 						+ "<img style=cursor:pointer onclick='i3GEOF.tabela.ordenaColuna(this,"
@@ -1160,7 +1160,7 @@ i3GEOF.tabela =
 						+ idjanela
 						+ "\")' src='"
 						+ i3GEO.configura.locaplic
-						+ "/imagens/ordena1.gif' title='"
+						+ "/imagens/oxygen/16x16/draw-triangle.png' title='"
 						+ $trad(
 							'ordena',
 							i3GEOF.tabela.dicionario)
@@ -1183,7 +1183,7 @@ i3GEOF.tabela =
 						+ idjanela
 						+ "\")' src='"
 						+ i3GEO.configura.locaplic
-						+ "/imagens/x.gif' title='"
+						+ "/imagens/oxygen/16x16/edit-delete.png' title='"
 						+ $trad("t12")
 						+ "' /></td>";
 					ins += "<td>";
@@ -1195,7 +1195,7 @@ i3GEOF.tabela =
 							+ idjanela
 							+ "\")' src='"
 							+ i3GEO.configura.locaplic
-							+ "/imagens/o.gif' title='zoom' ids="
+							+ "/imagens/oxygen/16x16/zoom-select.png' title='zoom' ids="
 							+ retorno.data[1].registros[i].indice
 							+ " />";
 					}
