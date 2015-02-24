@@ -29,7 +29,6 @@ Arquivo:
 
 i3geo/admin/js/editormapfile.js
 */
-//XODO reposicionar os botoes de salvar, voltar, etc
 contaN = 0;
 objcontype = [
 	{texto:"MS_INLINE",valor:"0"},

@@ -12,21 +12,20 @@ body {
 </style>
 <link rel="stylesheet" type="text/css" href="../html/admin.css">
 </head>
-<body class=" yui-skin-sam fundoPonto">
-	<div class="bordaSuperior">&nbsp;</div>
-	<div class="mascaraPrincipal" id="divGeral" style="width: 100%;max-width:95%">
-		<div id=cabecalhoPrincipal></div>
+<body class=" yui-skin-sam ">
+	<div class="" id="divGeral" style="width: 100%;">
 		<h1>Editor de mapfiles</h1>
-		<a href="http://mapserver.org/mapfile/index.html#mapfile"
-			target="_new">Documenta&ccedil;&atilde;o do Mapserver</a><br> <br> <a
-			href="../html/editormapfile.html" target="_self">Voltar</a><br> <br>
+		Mais detalhes sobre a edi&ccedil;&atilde;o de mapfiles: <a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new">Documenta&ccedil;&atilde;o do Mapserver</a>
+		<br><br>
+		<input type=button value="<--- Voltar" onclick="window.history.back()" />
+		<br> <br> Mapfile em edi&ccedil;&atilde;o:
+		<div id="comboMapfiles" style="width: 100%; max-width: 450px">Aguarde...</div>
+		<br><br>
 		<form style="width: 98%;" action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post>
-			<input type=submit value="Salvar (tamb&eacute;m atualiza o mapa)" /><input type=button value="Testar"
-				onclick="testar()" /><input type=button value="Testar no i3Geo"
-				onclick="abrirI3geo()" /> (Salve antes de testar)<br> <br>
-			<div id="letras" style="width: 100%;max-width:750px"></div>
-			<div id="comboMapfiles" style="width: 100%;max-width:450px">Aguarde...</div>
-			<br>
+			<input type=submit value="Salvar (tamb&eacute;m atualiza o mapa)" />
+			<input type=button value="Testar" onclick="testar()" />
+			<input type=button value="Testar no i3Geo" onclick="abrirI3geo()" />
+			(Salve antes de testar)<br> <br>
 			<?php
 			//evita erros removendo caracteres PHP
 			if(isset($_POST["texto"])){
@@ -61,16 +60,14 @@ body {
 				}
 				fclose($fp);
 			}
-			echo 'RGB: <input type=text value="clique" size=10 id="corrgb" onclick="i3GEO.util.abreCor(\'\',\'corrgb\',\'rgbSep\')" /><br><br>';
-			echo "<i>Voc&ecirc; pode usar s&iacute;mbolos em linha, veja exemplo no mapfile _llocali</i>";
-			echo "<br>Edite:<br>";
-			echo "<TEXTAREA name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
+			echo 'Ajudante de cores RGB: <input type=text value="clique" size=10 id="corrgb" onclick="i3GEO.util.abreCor(\'\',\'corrgb\',\'rgbSep\')" /><br><br>';
+			echo "<div style='width:2000px;' ><TEXTAREA name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
 			echo file_get_contents($mapfile);
 			echo "</TEXTAREA>";
 			$mapfile = str_replace("\\","/",$mapfile);
 
 			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=480&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
-			echo "</iframe>";
+			echo "</iframe></div>";
 			echo "<input type=hidden name=tipo value=gravar />";
 
 			if(!@ms_newMapObj($mapfile)){
@@ -99,7 +96,7 @@ body {
 i3GEO.configura = {locaplic: "../../"};
 
 ins = "<p><div id=filtroDeLetras ></div><br>";
-document.getElementById("letras").innerHTML = ins;
+//document.getElementById("letras").innerHTML = ins;
 core_listaDeLetras("filtroDeLetras","filtraLetra");
 if(i3GEO.util.pegaCookie("I3GEOletraAdmin")) {
 	letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
