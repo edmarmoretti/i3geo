@@ -147,11 +147,14 @@ i3GEOF.filtro = {
 	Function: iniciaJanelaFlutuante
 
 	Cria a janela flutuante para controle da ferramenta.
+
+	A opcao modoCalculadora (boolean) aplica o filtro em um elemento ID e nao aplica ao tema
+	Nesse modo e necessario indicar o id do elemento que recebera o filtro
 	*/
-	iniciaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(modoCalculadora,idRetorno){
 		var janela,divid,temp,titulo;
 		if($i("i3GEOF.filtro")){
-			i3GEOF.filtro.inicia("i3GEOF.tabela_corpo");
+			i3GEOF.filtro.inicia("i3GEOF.filtro_corpo");
 			return;
 		}
 		//cria a janela flutuante
@@ -174,7 +177,7 @@ i3GEOF.filtro = {
 		divid = janela[2].id;
 		i3GEOF.filtro.aguarde = $i("i3GEOF.filtro_imagemCabecalho").style;
 		$i("i3GEOF.filtro_corpo").style.backgroundColor = "white";
-		i3GEOF.filtro.inicia(divid);
+		i3GEOF.filtro.inicia(divid,modoCalculadora,idRetorno);
 		temp = function(){
 			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",['i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela")']);
 		};
