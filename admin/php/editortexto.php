@@ -1,16 +1,35 @@
+<?php 
+//XODO incluir combo para escolher o estilo
+//XODO incluir ajuda de comandos de teclado
+//XODO relace de sintaxe para mapfile
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <title>Editor texto</title>
+
+<script src="../../pacotes/codemirror/lib/codemirror.js"></script>
+<script src=../../pacotes/codemirror/mode/htmlmixed/htmlmixed.js></script>
+<link rel=stylesheet href="../../pacotes/codemirror/doc/docs.css">
+<link rel="stylesheet" href="../../pacotes/codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="../../pacotes/codemirror/theme/ambiance.css">
+<link rel="stylesheet" href="../../pacotes/codemirror/theme/cobalt.css">
+<link rel="stylesheet" href="../../pacotes/codemirror/theme/night.css">
+<link rel="stylesheet" href="../../pacotes/codemirror/theme/neo.css">
+<link rel="stylesheet" href="../../pacotes/codemirror/theme/elegant.css">
+<link rel="stylesheet" type="text/css" href="../html/admin.css">
 <style type="text/css">
 body {
 	margin: 20;
 	padding: 20;
 	font-size: 14px;
 }
+.CodeMirror {
+	height:500px;
+	float: left;
+	width: 500px;
 </style>
-<link rel="stylesheet" type="text/css" href="../html/admin.css">
 </head>
 <body class=" yui-skin-sam ">
 	<div class="" id="divGeral" style="width: 100%;">
@@ -21,7 +40,7 @@ body {
 		<br> <br> Mapfile em edi&ccedil;&atilde;o:
 		<div id="comboMapfiles" style="width: 100%; max-width: 450px">Aguarde...</div>
 		<br><br>
-		<form style="width: 98%;" action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post>
+		<form style="width: 98%;" onsubmit="atualizaTextArea()" action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post>
 			<input type=submit value="Salvar (tamb&eacute;m atualiza o mapa)" />
 			<input type=button value="Testar" onclick="testar()" />
 			<input type=button value="Testar no i3Geo" onclick="abrirI3geo()" />
@@ -60,13 +79,22 @@ body {
 				}
 				fclose($fp);
 			}
-			echo 'Ajudante de cores RGB: <input type=text value="clique" size=10 id="corrgb" onclick="i3GEO.util.abreCor(\'\',\'corrgb\',\'rgbSep\')" /><br><br>';
-			echo "<div style='width:2000px;' ><TEXTAREA name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
+			echo 'Ajudante de cores RGB: <input type=text value="clique" size=10 id="corrgb" onclick="i3GEO.util.abreCor(\'\',\'corrgb\',\'rgbSep\')" />';
+			?>
+			Estilo: <select onchange="mudaEstilo(this.value)">
+				<option value=elegant >Elegant</option>
+				<option value=ambiance >Ambiance</option>
+				<option value=cobalt >Cobalt</option>
+				<option value=night >Night</option>
+				<option value=neo >Neo</option>
+			</select>
+			<?php
+			echo "<div style='width:2000px;' ><TEXTAREA id=editor name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
 			echo file_get_contents($mapfile);
 			echo "</TEXTAREA>";
 			$mapfile = str_replace("\\","/",$mapfile);
 
-			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=480&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
+			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=480&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='left:10px;position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
 			echo "</iframe></div>";
 			echo "<input type=hidden name=tipo value=gravar />";
 
@@ -95,14 +123,31 @@ body {
 	<script>
 i3GEO.configura = {locaplic: "../../"};
 
+/*
 ins = "<p><div id=filtroDeLetras ></div><br>";
-//document.getElementById("letras").innerHTML = ins;
+document.getElementById("letras").innerHTML = ins;
 core_listaDeLetras("filtroDeLetras","filtraLetra");
 if(i3GEO.util.pegaCookie("I3GEOletraAdmin")) {
 	letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
 }
 else{
 	letraAtual = "";
+}
+*/
+
+var editorCM = CodeMirror.fromTextArea(document.getElementById("editor"), {
+	mode: 'text',
+	tabMode: 'indent',
+	lineNumbers: true,
+	theme: "elegant"
+});
+
+function mudaEstilo(novo){
+	editorCM.setOption('theme',novo)
+}
+
+function atualizaTextArea(){
+	document.getElementById("editor").value = editorCM.getValue();
 }
 function filtraLetra(letra) {
 	letraAtual = letra;
@@ -125,7 +170,7 @@ function comboMapfiles(){
 	$i("comboMapfiles").innerHTML = ins;
 	$i("selectComboMapfile").value = "<?php echo $_GET["mapfile"];?>";
 };
-core_pegaMapfiles("comboMapfiles()",letraAtual,"");
+core_pegaMapfiles("comboMapfiles()","","");
 function mudaMapfile(obj){
 	if(obj.value != ""){
 		window.location.href = "editortexto.php?mapfile="+obj.value;
