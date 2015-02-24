@@ -50,6 +50,14 @@ i3GEOF.filtro = {
 	*/
 	aguarde: "",
 	/*
+	 * Variavel: tema
+	 *
+	 * Tema que ser&aacute; utilizado
+	 *
+	 * Type: {string}
+	 */
+	tema : i3GEO.temaAtivo,
+	/*
 	Variavel: comboTemas
 
 	Armazena o combo com os itens do tema
@@ -77,7 +85,7 @@ i3GEOF.filtro = {
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela");
-		if(i3GEO.temaAtivo === ""){
+		if(i3GEOF.filtro.tema === ""){
 			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
 		}
@@ -113,7 +121,7 @@ i3GEOF.filtro = {
 			//
 			i3GEO.util.comboItens(
 				"none",
-				i3GEO.temaAtivo,
+				i3GEOF.filtro.tema,
 				function(retorno){
 					i3GEOF.filtro.comboTemas = retorno.dados;
 					i3GEOF.filtro.adicionaLinhaFiltro();
@@ -181,13 +189,13 @@ i3GEOF.filtro = {
 		var add,xis,interrogacao,operador,conector,valor,ntb,ntr,ntad,ntd,ntd1,ntd2,ntd3,ntd4,ntd5,tabela;
 		try{
 			add = document.createElement("img");
-			add.src = i3GEO.configura.locaplic+'/imagens/plus.gif';
+			add.src = i3GEO.configura.locaplic+'/imagens/oxygen/16x16/list-add.png';
 			add.style.cursor="pointer";
 			add.onclick = function()
 			{i3GEOF.filtro.adicionaLinhaFiltro();};
 
 			xis = document.createElement("img");
-			xis.src = i3GEO.configura.locaplic+'/imagens/x.gif';
+			xis.src = i3GEO.configura.locaplic+'/imagens/oxygen/16x16/edit-delete.png';
 			xis.style.cursor="pointer";
 			xis.onclick = function(){
 				var p = this.parentNode.parentNode.parentNode,
@@ -197,7 +205,7 @@ i3GEOF.filtro = {
 			};
 
 			interrogacao = document.createElement("img");
-			interrogacao.src = i3GEO.configura.locaplic+'/imagens/interrogacao.gif';
+			interrogacao.src = i3GEO.configura.locaplic+'/imagens/oxygen/16x16/format-line-spacing-normal.png';
 			interrogacao.title= $trad('mostraValor',i3GEOF.filtro.dicionario);
 			interrogacao.style.cursor="pointer";
 			interrogacao.style.marginLeft="5px";
@@ -208,7 +216,7 @@ i3GEOF.filtro = {
 				itemTema = (this.parentNode.parentNode.getElementsByTagName("select"))[0].value;
 				i3GEO.util.comboValoresItem(
 					"i3GEOfiltrocbitens",
-					i3GEO.temaAtivo,
+					i3GEOF.filtro.tema,
 					itemTema,
 					function(retorno){
 						$i("i3GEOfiltrovalores").innerHTML = "<br><p class=paragrafo >" +
@@ -291,7 +299,7 @@ i3GEOF.filtro = {
 	<PEGAFILTRO>
 	*/
 	pegaFiltro: function(){
-		var p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegafiltro&tema="+i3GEO.temaAtivo,
+		var p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegafiltro&tema="+i3GEOF.filtro.tema,
 			cp = new cpaint(),
 			temp = function(retorno){
 				if(retorno.data !== undefined)
@@ -314,13 +322,13 @@ i3GEOF.filtro = {
 			if(i3GEOF.filtro.aguarde.visibility === "visible")
 			{return;}
 			i3GEOF.filtro.aguarde.visibility = "visible";
-			var p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro&tema="+i3GEO.temaAtivo+"&filtro=",
+			var p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro&tema="+i3GEOF.filtro.tema+"&filtro=",
 				cp = new cpaint(),
 				temp = function(retorno){
 					i3GEOF.filtro.aguarde.visibility = "hidden";
 					if(i3GEO.Interface.ATUAL === "padrao")
 					{i3GEO.atualiza(retorno);}
-					i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
+					i3GEO.Interface.atualizaTema(retorno,i3GEOF.filtro.tema);
 				};
 			cp.set_response_type("JSON");
 			cp.call(p,"insereFiltro",temp);
@@ -348,7 +356,7 @@ i3GEOF.filtro = {
 		try{
 			i3GEOF.filtro.aguarde.visibility = "visible";
 			var filtro = "",
-				re,g,ipt,i,nos,s,itemsel,valor,operador,conector,p,cp,temp;
+				re,p,cp,temp;
 			if( ($i("i3GEOfiltrofiltro").value !== "") &&($i("i3GEOfiltroguia2obj").style.display === "block")){
 				filtro = $i("i3GEOfiltrofiltro").value;
 				re = new RegExp("'","g");
@@ -357,29 +365,9 @@ i3GEOF.filtro = {
 				filtro = filtro.replace(re,"");
 			}
 			else{
-				g = $i("i3GEOfiltroparametros");
-				ipt = g.getElementsByTagName("tr");
-				if (ipt.length > 1){
-					for (i=2;i<ipt.length; i++){
-						nos = ipt[i].childNodes;
-						s = nos[2].getElementsByTagName("select");
-						itemsel = s[0].value;
-						s = nos[3].getElementsByTagName("select");
-						operador = s[0].value;
-						s = nos[4].getElementsByTagName("input");
-						valor = s[0].value;
-						s = nos[6].getElementsByTagName("select");
-						conector = s[0].value;
-						if (valor*1)
-						{filtro = filtro + "(["+itemsel+"] "+operador+" "+valor+")";}
-						else
-						{filtro = filtro + "(|["+itemsel+"]| "+operador+" |"+valor+"|)";}
-						if ((i + 1) != ipt.length) //tem conector
-						{filtro = filtro + conector;}
-						else
-						{filtro = "("+filtro+")";}
-					}
-				}
+				filtro = i3GEOF.filtro.formataMapserver();
+				re = new RegExp("'","g");
+				filtro = filtro.replace(re,"|");
 			}
 			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
 			cp = new cpaint();
@@ -395,15 +383,46 @@ i3GEOF.filtro = {
 				temp = function(retorno){
 					if(i3GEO.Interface.ATUAL === "padrao")
 					{i3GEO.atualiza(retorno);}
-					i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
+					i3GEO.Interface.atualizaTema(retorno,i3GEOF.filtro.tema);
 					i3GEOF.filtro.aguarde.visibility = "hidden";
 				};
 			}
-			cp.call(p,"insereFiltro",temp,"tema="+i3GEO.temaAtivo,"filtro="+i3GEO.util.base64encode(filtro),"testa="+testa);
+			cp.call(p,"insereFiltro",temp,"tema="+i3GEOF.filtro.tema,"filtro="+i3GEO.util.base64encode(filtro),"testa="+testa);
 		}
 		catch(e){
 			i3GEO.janela.tempoMsg("Erro: "+e);
 			i3GEOF.filtro.aguarde.visibility = "hidden";
 		}
+	},
+	formataMapserver : function(){
+		var filtro = "",g,ipt,i,nos,s,itemsel,operador,valor;
+		g = $i("i3GEOfiltroparametros");
+		ipt = g.getElementsByTagName("tr");
+		if (ipt.length > 1){
+			for (i=2;i<ipt.length; i++){
+				nos = ipt[i].childNodes;
+				s = nos[2].getElementsByTagName("select");
+				itemsel = s[0].value;
+				s = nos[3].getElementsByTagName("select");
+				operador = s[0].value;
+				s = nos[4].getElementsByTagName("input");
+				valor = s[0].value;
+				s = nos[6].getElementsByTagName("select");
+				conector = s[0].value;
+				if (valor*1){
+					filtro = filtro + "(["+itemsel+"] "+operador+" "+valor+")";
+				}
+				else{
+					filtro = filtro + "('["+itemsel+"]' "+operador+" '"+valor+"')";
+				}
+				if ((i + 1) != ipt.length){
+					filtro = filtro + conector;
+				}
+				else{
+					filtro = "("+filtro+")";
+				}
+			}
+		}
+		return filtro;
 	}
 };
