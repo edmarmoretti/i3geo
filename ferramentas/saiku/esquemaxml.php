@@ -657,6 +657,10 @@ function dimensoesTabelas(){
 			ON  tabela{$r["codigo_tipo_regiao"]}.{$r["identificador"]}::text = tabelamedida{$c["id_medida_variavel"]}.{$c["colunaidgeo"]}::text
 			";
 		$sql .= $dimRegioes[$c["codigo_tipo_regiao"]]["juncoes"];
+		
+		if($c["filtro"] != ""){
+			$sql .= " WHERE ".str_replace('"',"'",$c["filtro"]);
+		}
 
 		$xml .= "
 			<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
