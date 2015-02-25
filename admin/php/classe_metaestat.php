@@ -296,31 +296,6 @@ class Metaestat{
 	 * @return array("sqlagrupamento"=>,"sql"=>,"sqlmapserver"=>,"filtro"=>,"colunas"=>,"alias"=>,"colunavalor"=>,"titulo"=>,"nomeregiao"=>)
 	 */
 	function sqlMedidaVariavel($id_medida_variavel,$todasascolunas,$agruparpor="",$tipolayer="polygon",$codigo_tipo_regiao = "",$suportaWMST = false,$filtro = "",$direto=false){
-		/* Modelo de SQL
-			SELECT regiao.*,sum(j.valorcalculado) OVER (PARTITION BY regiao.co_municipio) AS valorcalculado
-			FROM i3geo_metaestat.municipios AS regiao
-			INNER JOIN (
-				SELECT regiao.co_municipio AS cod_regiao,sum(j.valorcalculado) AS valorcalculado
-				FROM i3geo_metaestat.distritos_manaus AS regiao
-				LEFT JOIN
-				(
-					SELECT regiao.cod_dis AS cod_regiao,sum(j.valorcalculado) AS valorcalculado
-					FROM i3geo_metaestat.bairros_manaus AS regiao
-					LEFT JOIN
-					(
-						SELECT cod AS cod_regiao,sum(valor) AS valorCalculado
-						FROM i3geo_metaestat.obitos_maternos_manaus12
-						WHERE ano IN ('2012') AND cod_mes IN ('1','2')
-						GROUP BY cod_regiao
-					)
-					AS j ON j.cod_regiao = regiao.cod GROUP BY regiao.cod_dis
-				)
-				AS j ON j.cod_regiao = regiao.cod_dis GROUP BY regiao.co_municipio
-			)
-			AS j ON j.cod_regiao = regiao.co_municipio
-		 */
-
-
 		//
 		//o sql que faz acesso aos dados e marcado com /*SE*//*SE*/ na string que sera usada nos mapfiles
 		//a parte que contem referencias a coluna com a geometria e marcada com /*SG*//*SG*/
@@ -421,15 +396,22 @@ class Metaestat{
 		}
 
 		//obtem o SQL que faz o acesso aos dados da media da variavel
-		$sqlDadosMedidaVariavel = "SELECT ".$dados["colunaidgeo"]." AS cod_regiao,$tipoconta(".$dados["colunavalor"].") AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
-		if($suportaWMST == true && $direto == false){
-			$sqlDadosMedidaVariavel = "SELECT $sqlWMST as dimtempo,".$dados["colunaidgeo"]." AS cod_regiao,".$dados["colunavalor"]." AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
-		}
-		if(!empty ($filtro) && $direto == false){
-			$sqlDadosMedidaVariavel .=	" WHERE ".$filtro . "AND ".$dados["colunavalor"]." IS NOT NULL ";
+		if($dados["colunavalor"] == ""){
+			$nomevalorcalculado = "'1'::numeric";
 		}
 		else{
-			$sqlDadosMedidaVariavel .=	" WHERE ".$dados["colunavalor"]." IS NOT NULL ";
+			$nomevalorcalculado = $dados["colunavalor"];
+		}
+		
+		$sqlDadosMedidaVariavel = "SELECT ".$dados["colunaidgeo"]." AS cod_regiao,$tipoconta(".$nomevalorcalculado.") AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
+		if($suportaWMST == true && $direto == false){
+			$sqlDadosMedidaVariavel = "SELECT $sqlWMST as dimtempo,".$dados["colunaidgeo"]." AS cod_regiao,".$nomevalorcalculado." AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
+		}
+		if(!empty ($filtro) && $direto == false){
+			$sqlDadosMedidaVariavel .=	" WHERE ".$filtro . " AND ".$nomevalorcalculado." IS NOT NULL ";
+		}
+		else{
+			$sqlDadosMedidaVariavel .=	" WHERE ".$nomevalorcalculado." IS NOT NULL ";
 		}
 		if($suportaWMST != true && $direto == false){
 			$sqlDadosMedidaVariavel .= " /*FA*//*FA*/ /*FAT*//*FAT*/ GROUP BY cod_regiao ";
@@ -445,7 +427,14 @@ class Metaestat{
 		}
 		//SQL para a primeira regiao __SQLDADOS__ ira conter os sqls dos niveis inferiores da regiao se ouver
 		//ZODO ajustar tipos das colunas no join para tornar mais rapida a juncao
-		$sqlIntermediario = "SELECT (j.valorcalculado) AS ".$dados["colunavalor"].", __COLUNASSEMGEO__".
+		//no caso de ser um contador forcado
+		if($dados["colunavalor"] == ""){
+			$nomeColunaValor = "contagem";
+		}
+		else{
+			$nomeColunaValor = $dados["colunavalor"];
+		}
+		$sqlIntermediario = "SELECT (j.valorcalculado) AS ".$nomeColunaValor.", __COLUNASSEMGEO__".
 		" FROM ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." AS regiao ".
 		" INNER JOIN ( __SQLDADOS__ ) ".
 		" AS j ON j.cod_regiao::text = regiao.".$dadosgeo["identificador"]."::text";
@@ -460,7 +449,14 @@ class Metaestat{
 				foreach($caminho as $idregiao){
 					if($idregiao != $codigo_tipo_regiao){//a regiao pai ja esta no sql
 						$tempDadosRegiao = $this->listaTipoRegiao($idregiao);
-						$temp = "SELECT regiao.".$dadosColunas[$idregiao]["colunaligacao_regiaopai"]." AS cod_regiao,sum(j.valorcalculado) AS valorcalculado ".
+						//para contador forcado
+						if($dados["colunavalor"] == ""){
+							$nomevalorcalculado = "'1'::numeric";
+						}
+						else{
+							$nomevalorcalculado = "j.valorcalculado";
+						}
+						$temp = "SELECT regiao.".$dadosColunas[$idregiao]["colunaligacao_regiaopai"]." AS cod_regiao,sum(".$nomevalorcalculado.") AS valorcalculado ".
 						"FROM ".$tempDadosRegiao["esquemadb"].".".$tempDadosRegiao["tabela"]." AS regiao ".
 						"INNER JOIN ".
 						"( __SQLDADOS__ )".

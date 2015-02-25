@@ -630,6 +630,9 @@ function dimensoesTabelas(){
 
 		$xml .= "<Cube cache='false' name='Tabela: {$c["esquemadb"]}{$c["tabela"]}'>";
 		$incluirChaves = array("tabelamedida{$c["id_medida_variavel"]}.*");
+		if($c["colunavalor"] == ""){
+			$incluirChaves[] = "'1'::numeric as contagem";
+		}
 		if(count($parComposto) > 0){
 			//$sql = "select *,".implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_ from {$c["esquemadb"]}.{$c["tabela"]}";
 			$incluirChaves[] = implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_";
@@ -693,8 +696,14 @@ function dimensoesTabelas(){
 			if($medida["permitesoma"] == 0 && $medida["permitemedia"] == 0){
 				$agregador = "count";
 			}
+			if($medida["colunavalor"] == ""){
+				$nomeColunaValor = "contagem";
+			}
+			else{
+				$nomeColunaValor = $medida["colunavalor"];
+			}
 			$xml .= "
-			<Measure name='id_medida_variavel_".$medida["id_medida_variavel"]."' caption='".converte($medida["nomemedida"])."' column='".$medida["colunavalor"]."' aggregator='".$agregador."' />
+			<Measure name='id_medida_variavel_".$medida["id_medida_variavel"]."' caption='".converte($medida["nomemedida"])."' column='".$nomeColunaValor."' aggregator='".$agregador."' />
 			";
 			$u = "
 			<VirtualCubeMeasure cubeName='Tabela: {$c["esquemadb"]}{$c["tabela"]}' name='[Measures].[id_medida_variavel_".$medida["id_medida_variavel"]."]'/>
