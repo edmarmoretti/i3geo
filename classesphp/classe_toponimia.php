@@ -211,10 +211,10 @@ Retorno:
 			//$novac = $this->layer->getclass(0);
 			$nomer = $this->layer->name;
 		}
-		if(!$this->vi >= 60200){
+		if(!($this->vi >= 60200)){
 			$this->layer->set("labelitem",$item);
 		}
-		$this->layer->set("labelitem",$item);
+		$nclasses = $this->layer->numclasses;
 		for ($i=0; $i < $nclasses; ++$i){
 			$novac = $this->layer->getclass($i);
 			if($this->vi >= 60200){

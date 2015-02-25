@@ -61,16 +61,25 @@ i3GEOF.toponimia = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOtoponimiaguia3","i3GEOtoponimiaguia");
 				i3GEOF.toponimia.testa();
 			};
-			var b = new YAHOO.widget.Button(
+			var b,versao;
+			versao = i3GEO.parametros.versaomscompleta.split(".");
+			
+			b = new YAHOO.widget.Button(
 				"i3GEOtoponimiabotao1",
 				{onclick:{fn: i3GEOF.toponimia.cria}}
 			);
 			b.addClass("rodar150");
-			var b = new YAHOO.widget.Button(
-				"i3GEOtoponimiabotao2",
-				{onclick:{fn: i3GEOF.toponimia.remove}}
-			);
-			b.addClass("rodar150");
+			
+			if(parseInt(versao[0],10) <= 6 && parseInt(versao[1],10) == 0){
+				$i("i3GEOtoponimiabotao2").style.display = "none";
+			}
+			else{
+				b = new YAHOO.widget.Button(
+					"i3GEOtoponimiabotao2",
+					{onclick:{fn: i3GEOF.toponimia.remove}}
+				);
+				b.addClass("rodar150");
+			}
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de escolha
 			//

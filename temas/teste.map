@@ -2,29 +2,25 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "password=i3geosaude user=postgres dbname=i3geosaude host=localhost port=5432"
+    CONNECTION "sigeo"
     CONNECTIONTYPE POSTGIS
-    DATA "the_geom2 from (
-
- select * from i3geo_metaestat.municipios
-
-) as foo using unique gid using srid=4326"
+    DATA "geom from (select * from limites.tindi) as foo using unique gid using srid=4326"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "TIP"	"terrai_nom"
+      "cache"	"sim"
       "ltempoitemimagem"	""
-      "tip"	"lat,lon,data,horagmt,satelite,municipio,uf,regiao,bioma"
-      "cache"	"NAO"
-      "ltempoitemdescricao"	""
       "olopacity"	""
       "CLASSE"	"SIM"
-      "ltempoiteminicio"	""
+      "ltempoitemdescricao"	""
       "palletestep"	""
+      "ltempoiteminicio"	""
       "ltempoitemtip"	""
       "gmopacity"	""
       "gmstatus"	""
-      "ltempoitemtitulo"	""
+      "itensdesc"	"código,nome,etnia,município,fase,modalidade"
       "description_template"	""
-      "itensdesc"	"Lat,Lon,Latgms,Longms,Data,Horagmt,Satelite,Municipio,UF,Regiao,Prec,Num dias sem chuva,Risco,Bioma"
+      "ltempoitemtitulo"	""
       "ltempoitemlink"	""
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "arquivotemaoriginal"	""
@@ -35,32 +31,91 @@ MAP
       "ltempoitemicone"	""
       "metaestat"	""
       "itembuscarapida"	""
-      "itens"	"lat,lon,latgms,longms,data,horagmt,satelite,municipio,uf,regiao,pais,prec,ndiasschuv,risco,bioma,wrs_tm"
       "CONEXAOORIGINAL"	"sigeo"
-      "TEMA"	"Focos de queimada 2013"
+      "itens"	"terrai_cod,terrai_nom,etnia_nome,municipio_,fase_ti,modalidade"
+      "TEMA"	"Terras indígenas por fase de regularização"
       "convcaracter"	""
       "cortepixels"	"0"
-      "ltempoconvencode"	""
       "editorsql"	""
+      "ltempoconvencode"	""
       "ltempoitemfim"	""
     END # METADATA
-    NAME "testex"
+    NAME "tiregula"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
     PROCESSING "LABEL_NO_CLIP=True"
     PROCESSING "POLYLINE_NO_CLIP=True"
     STATUS DEFAULT
     TEMPLATE "none.htm"
-    TYPE POINT
+    TILEITEM "location"
+    TYPE POLYGON
     UNITS METERS
     CLASS
-      NAME ""
+      NAME "Declarada"
+      EXPRESSION ('[fase_ti]'eq'Declarada')
       STYLE
-        COLOR 239 12 12
-        SIZE 6
-        SYMBOL "ponto"
+        ANGLE 0
+        COLOR 198 105 222
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Regularizada"
+      EXPRESSION ('[fase_ti]'eq'Regularizada')
+      STYLE
+        ANGLE 0
+        COLOR 141 104 56
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Encaminhada RI"
+      EXPRESSION ('[fase_ti]'eq'Encaminhada RI')
+      STYLE
+        ANGLE 0
+        COLOR 80 222 151
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Homologada"
+      EXPRESSION ('[fase_ti]'eq'Homologada')
+      STYLE
+        ANGLE 0
+        COLOR 56 127 51
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Delimitada"
+      EXPRESSION ('[fase_ti]'eq'Delimitada')
+      STYLE
+        ANGLE 0
+        COLOR 154 239 245
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Em Estudo"
+      EXPRESSION ('[fase_ti]'eq'Em Estudo')
+      STYLE
+        ANGLE 0
+        COLOR 232 157 44
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
       END # STYLE
       TITLE ""
     END # CLASS
   END # LAYER
 
 END # MAP
-
