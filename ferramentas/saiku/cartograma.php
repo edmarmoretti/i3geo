@@ -76,13 +76,16 @@ else{
 	//var_dump($metadados);exit;
 	//constroi um sql que retorna os dados na forma de uma tabela inline
 	$nomesColunas = array();
+	$metadataItens = array();
 	$valores = array();
 	for($i=0;$i<$nmetadados;$i++){
 		if($metadados[$i]["colName"] != ""){
-			$nomesColunas[] = $metadados[$i]["colName"];
+			$nomesColunas[] = "coluna".$i;//$metadados[$i]["colName"];
+			$metadataItens[] = $metadados[$i]["colName"];
 		}
 	}
 	$nomesColunas[0] = "geocodigo";
+	$metadataItens[0] = "geocodigo";
 	$codigosRegioes = array();
 	//select * from (values (1000,2),(5,6)) as teste ("a","b") where
 
@@ -147,6 +150,8 @@ else{
 	$l[] = '		CLASSE "SIM"';
 	$l[] = '		SAIKU "'.$opcoes["tipo"].'"';
 	$l[] = '		TIP "'.$meta["colunanomeregiao"].','.implode(',',$nomesColunas).'"';
+	$l[] = '		ITENSDESC "'.$meta["colunanomeregiao"].','.implode(',',$metadataItens).'"';
+	$l[] = '		ITENS "'.$meta["colunanomeregiao"].','.implode(',',$nomesColunas).'"';
 	$l[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
 	$l[] = '	END	';
 
