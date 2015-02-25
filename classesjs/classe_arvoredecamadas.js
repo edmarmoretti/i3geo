@@ -48,7 +48,8 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-//TODO ncluir opcao para adicionar a arvore as camadas de fundo
+//TODO incluir opcao para adicionar a arvore as camadas de fundo
+//XODO incluir opcao para imprimir na arvore de camadas
 i3GEO.arvoreDeCamadas =
 	{
 		/**

@@ -39,6 +39,8 @@ if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
 //XODO incluir nova ferramenta para usar a opcao de mascara do Mapserver
+//XODO incluir opcao para gerar imagem via canvas apenas do corpo do mapa
+//XODO incluir opcao de imprimir no menu suspenso
 i3GEO.mapa =
 	{
 		/**
@@ -485,6 +487,8 @@ i3GEO.mapa =
 		},
 		//XODO quando aberta em janela flutuante, remover opcao de ligar/desligar camada e esconder a opcao de 'mostrar tudo'
 		//XODO incluir icone olho
+		//XODO quando em janela flutuante, incluir opcao para gerar imagem via canvas
+		//XODO quando em janela flutuante, incluir opcao para abrir em nova janela
 		/**
 		 * Section: i3GEO.mapa.legendaHTML
 		 *
