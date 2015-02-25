@@ -188,8 +188,7 @@ Retorno:
 				$novolayer->set("group","");
 				$novolayer->set("type",MS_LAYER_ANNOTATION);
 				$nclasses = $novolayer->numclasses;
-				for ($i=0; $i < $nclasses; ++$i)
-				{
+				for ($i=0; $i < $nclasses; ++$i){
 					$c = $novolayer->getclass($i);
 					$c->set("status",MS_DELETE);
 				}
@@ -212,7 +211,10 @@ Retorno:
 			//$novac = $this->layer->getclass(0);
 			$nomer = $this->layer->name;
 		}
-		$nclasses = $this->layer->numclasses;
+		if(!$this->vi >= 60200){
+			$this->layer->set("labelitem",$item);
+		}
+		$this->layer->set("labelitem",$item);
 		for ($i=0; $i < $nclasses; ++$i){
 			$novac = $this->layer->getclass($i);
 			if($this->vi >= 60200){
@@ -289,29 +291,16 @@ Retorno:
 		else
 		{return($nomer);}
 	}
+	//TODO nao funciona nas versoes antigas
 	function removeToponimia(){
 		$nclasses = $this->layer->numclasses;
-		for ($i=0; $i < $nclasses; ++$i){
-			$classe = $this->layer->getclass($i);
-			while($classe->numlabels > 0){
-				$classe->removeLabel(0);
-			}
-			/*
-			$nlabel = $classe->numlabels;
-			for($i=0;$i<$nlabel;$i++){
-				if($this->vi >= 60200){
-					$label = $classe->getLabel($i);
+		if($this->vi >= 60200){
+			for ($i=0; $i < $nclasses; ++$i){
+				$classe = $this->layer->getclass($i);
+				while($classe->numlabels > 0){
+					$classe->removeLabel(0);
 				}
-				else{
-					$label = $classe->label;
-				}
-				$label->set("type",MS_TRUETYPE);
-				$label->set("font","arial");
-				$label->set("size",0);
-				$s = "CLASS LABEL TEXT '' END END";
-				$classe->updateFromString($s);
 			}
-			*/
 		}
 		if ($this->layer){
 			$this->layer->setMetaData("cache","");
