@@ -316,10 +316,10 @@ i3GEOadmin.variaveis = {
 			ins += "<br><br><div id='editorMedidaDefault' >";
 			param = {
 				"linhas":[
-									{titulo:"Coluna com os valores: <img onclick='i3GEOadmin.variaveis.selColuna(\"Ecolunavalor\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunavalor",size:"50",value:i.colunavalor,tipo:"text",div:""},
+									{titulo:"Coluna com os valores (deixe vazio para considerar como 1): <img onclick='i3GEOadmin.variaveis.selColuna(\"Ecolunavalor\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunavalor",size:"50",value:i.colunavalor,tipo:"text",div:""},
 									{titulo:"Coluna de liga&ccedil;&atilde;o com a tabela GEO: <img onclick='i3GEOadmin.variaveis.selColuna(\"Ecolunaidgeo\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunaidgeo",size:"50",value:i.colunaidgeo,tipo:"text",div:""},
 									{titulo:"Coluna com os IDs &uacute;nicos que identificam cada registro da tabela com os valores: <img onclick='i3GEOadmin.variaveis.selColuna(\"Ecolunaidunico\",\"Ecodigo_estat_conexao\",\"Eesquemadb\",\"Etabela\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>",id:"Ecolunaidunico",size:"50",value:i.colunaidunico,tipo:"text",div:""},
-									{titulo:"Filtro adicional:",id:"Efiltro",size:"50",value:i.filtro,tipo:"text",div:""}
+									{titulo:'Filtro adicional (exemplo coluna = "Sim"):',id:"Efiltro",size:"50",value:i.filtro,tipo:"text",div:""}
 				]
 			};
 			ins += core_geraLinhas(param);
