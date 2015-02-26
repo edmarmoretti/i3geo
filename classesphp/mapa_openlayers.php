@@ -357,7 +357,7 @@ else{
 	else{
 		//cache inativo
 		if($img->imagepath == ""){
-			echo "Erro IMAGEPATH vazio";exit;
+			ilegal();
 		}
 		//se for necessario cortar a imagem, $img->saveImage() nao funciona
 		if($_SESSION["i3georendermode"] == 0 || ($_SESSION["i3georendermode"] == 1 && $cortePixels > 0)){
