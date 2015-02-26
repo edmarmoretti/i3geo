@@ -10,6 +10,9 @@ body {
 	margin:0;
 	padding:0;border:0px;
 }
+p{
+	text-align: left;
+}
 </style>
 </head>
 <body class="yui-skin-sam" >
@@ -26,9 +29,11 @@ body {
 				<a href="../../documentacao/ajuda/The_ArcIMS_OGC_WMS_Connector.pdf" target=blank >Veja como criar web services no ARCIMS</a>
 				<br><a href="../../documentacao/ajuda/ArcGIS9.x.html" target=blank >Veja como utilizar web services no ARCGIS</a><br>
 			</div>
-			<div id=opc1 style="text-align:left;top:5px;left:0px">
+			<div id=opc1 style="text-align:left;margin-top:15px;left:0px">
 				Digite o endere&ccedil;o do servi&ccedil;o ou escolha da lista abaixo. Utilize as guias acima para ver o resultado do acesso. Por padr&atilde;o, utiliza-se a vers&atilde;o 1.1.0 do GetCapabilities. Voc&ecirc; pode adicionar um outro, bastando incluir no endere&ccedil;o do servi&ccedil;o "&amp;version=1.3.0" por exemplo.<br>
-				<input  tabindex='0' class=digitar id=servico value="" size=45 />
+				<div class="styled-select" style="width: 350px;margin-top: 15px;">
+					<input  tabindex='0'  id=servico value="" size=45 />
+				</div>
 			</div>
 			<div id=RSSwms style="text-align:left;color:navy;cursor:pointer;"></div>
 		</div>

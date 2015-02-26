@@ -266,6 +266,9 @@ function seltema(tipo,tema,legenda,nometema,nomecamada,sldflag)
 		aguarde("block");
 		var tiporep = $i("tiporep").value;
 		var url = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid;
+		if($i("servico").value.split("?").length === 1){
+			$i("servico").value = $i("servico").value+"?";
+		}
 		var p = "&funcao=adicionatemawms&servico="+$i("servico").value+"&tema="+g_tema+"&nome="+g_nometema+"&proj="+$i("proj").value+"&formato="+$i("formatos").value+"&tipo="+g_tipo+"&versao="+$i("versao").value+"&nomecamada="+g_nomecamada+"&tiporep="+tiporep+"&suportasld="+g_sld+"&formatosinfo="+$i("formatosinfo").value;
 		if(g_tipows == "WMS-Tile"){
 			p += "&tile=1";

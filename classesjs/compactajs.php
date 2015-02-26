@@ -223,6 +223,7 @@ $buffer = "";
 salvatudojs($cssfiles,$buffer,"../css/i3geo6.css","css");
 //css das ferramentas
 $cssfiles = array(
+"../css/geral.css",
 "../css/button.css",
 "../css/ferramentas.css",
 "../pacotes/yui290/build/container/assets/skins/sam/container.css",
