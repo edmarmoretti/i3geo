@@ -396,6 +396,9 @@ else{
 	else{
 		if($_SESSION["i3georendermode"] == 0 || ($_SESSION["i3georendermode"] == 1 && $cortePixels > 0)){
 			$nomer = ($img->imagepath)."temp".nomeRand().".png";
+			if($img->imagepath == ""){
+				ilegal();
+			}
 			$img->saveImage($nomer);
 			//
 			//corta a imagem gerada para voltar ao tamanho normal
