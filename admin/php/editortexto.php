@@ -10,7 +10,7 @@
 <title>Editor texto</title>
 
 <script src="../../pacotes/codemirror/lib/codemirror.js"></script>
-<script src=../../pacotes/codemirror/mode/htmlmixed/htmlmixed.js></script>
+<script src="../../pacotes/codemirror/mode/shell/shell.js"></script>
 <link rel=stylesheet href="../../pacotes/codemirror/doc/docs.css">
 <link rel="stylesheet" href="../../pacotes/codemirror/lib/codemirror.css">
 <link rel="stylesheet" href="../../pacotes/codemirror/theme/ambiance.css">
@@ -21,27 +21,35 @@
 <link rel="stylesheet" type="text/css" href="../html/admin.css">
 <style type="text/css">
 body {
-	margin: 20;
-	padding: 20;
+	margin-left: 10px;
 	font-size: 14px;
+	margin: auto;
+    width: 1100px;
 }
 .CodeMirror {
 	height:500px;
 	float: left;
 	width: 500px;
+}
+#selectComboMapfile {
+	width:520px;
+	text-overflow: ellipsis;
+	font-size:	14px;
+}
+.cm-s-elegant span.cm-builtin{
+	color: red;
+}
 </style>
 </head>
 <body class=" yui-skin-sam ">
 	<div class="" id="divGeral" style="width: 100%;">
-		<h1>Editor de mapfiles</h1>
+		<div style="position: relative; float: left; height: 200px; width:500px;margin: 5px;">
+		<input type=button value="<--- Voltar" onclick="window.history.back()" />
+		<h2>Editor de mapfiles</h2>
 		Mais detalhes sobre a edi&ccedil;&atilde;o de mapfiles: <a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new">Documenta&ccedil;&atilde;o do Mapserver</a>
 		<br><br>
-		<input type=button value="<--- Voltar" onclick="window.history.back()" />
-		<br> <br> Mapfile em edi&ccedil;&atilde;o:
-		<div id="comboMapfiles" style="width: 100%; max-width: 450px">Aguarde...</div>
-		<br><br>
 		<form style="width: 98%;" onsubmit="atualizaTextArea()" action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post>
-			<input type=submit value="Salvar (tamb&eacute;m atualiza o mapa)" />
+			<input type=submit value="Salvar e atualizar o mapa" />
 			<input type=button value="Testar" onclick="testar()" />
 			<input type=button value="Testar no i3Geo" onclick="abrirI3geo()" />
 			(Salve antes de testar)<br> <br>
@@ -79,8 +87,8 @@ body {
 				}
 				fclose($fp);
 			}
-			echo 'Ajudante de cores RGB: <input type=text value="clique" size=10 id="corrgb" onclick="i3GEO.util.abreCor(\'\',\'corrgb\',\'rgbSep\')" />';
 			?>
+			<div style=float:left; >
 			Estilo: <select onchange="mudaEstilo(this.value)">
 				<option value=elegant >Elegant</option>
 				<option value=ambiance >Ambiance</option>
@@ -88,14 +96,30 @@ body {
 				<option value=night >Night</option>
 				<option value=neo >Neo</option>
 			</select>
+			<br><br>
+			<input type=button value="+ extender" onclick="editorCM.setSize('100%')" />
+			<input type=button value="- reduzir" onclick="editorCM.setSize('500px')" />
+			</div>
+			<TEXTAREA style='margin-left:35px;width:250px;height:55px;text-align:left;'>
+Ctrl+a - Seleciona tudo
+Ctrl+d - Apaga a linha
+Ctrl-z - Desfazer
+Ctrl-Up - Sobe
+Alt-left - Início da linha
+			</TEXTAREA>
+			</div>
+			<div style="position: relative; float: left; height: 200px; width:520px;margin: 5px;">
+			<h2>Mapfile em edi&ccedil;&atilde;o</h2>
+			<div id="comboMapfiles" >Aguarde...</div>
+			</div>
 			<?php
-			echo "<div style='width:2000px;' ><TEXTAREA id=editor name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
+			echo "<TEXTAREA id=editor name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
 			echo file_get_contents($mapfile);
 			echo "</TEXTAREA>";
 			$mapfile = str_replace("\\","/",$mapfile);
 
-			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=480&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='left:10px;position:relative;top:2px;overflow:hidden;width:500px;height:500px;border:1px solid gray;'>";
-			echo "</iframe></div>";
+			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=450&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='left:10px;position:relative;top:2px;overflow:hidden;width:525px;height:500px;border:1px solid gray;'>";
+			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
 
 			if(!@ms_newMapObj($mapfile)){
@@ -104,6 +128,7 @@ body {
 			else{
 				$mapa = ms_newMapObj($mapfile);
 				$n = $mapa->numlayers;
+				echo "<br>Ajudante de cores RGB: <input type=text value='clique' size=10 id='corrgb' onclick=\"i3GEO.util.abreCor('','corrgb','rgbSep')\" />";
 				echo "<br><br>Colunas dos layers:<br><br>";
 				for($i=0;$i<$n;$i++){
 					if(@$mapa->getlayer($i)){
@@ -136,7 +161,7 @@ else{
 */
 
 var editorCM = CodeMirror.fromTextArea(document.getElementById("editor"), {
-	mode: 'text',
+	mode: 'text/x-sh',
 	tabMode: 'indent',
 	lineNumbers: true,
 	theme: "elegant"
@@ -160,7 +185,7 @@ function filtraLetra(letra) {
 function comboMapfiles(){
 	var n = $mapfiles.length,
 		i,ins;
-	ins = "<select id='selectComboMapfile' onchange='mudaMapfile(this)'><option value=''>Edite outro mapfile</option>";
+	ins = "<select size=9 id='selectComboMapfile' onchange='mudaMapfile(this)'><option value=''>Edite outro mapfile</option>";
 	for(i=0;i<n;i++){
 		if($mapfiles[i].extensao === "map"){
 			ins += "<option value='"+$mapfiles[i].codigo+"'>"+$mapfiles[i].codigo+" - "+$mapfiles[i].nome+"</optiona>";
