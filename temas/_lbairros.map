@@ -1,18 +1,23 @@
 MAP
   FONTSET "/var/www/i3geo/symbols/fontes.txt"
   SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
-LAYER
+  LAYER
     CONNECTION "user=postgres password=postgres dbname=i3geosaude host=localhost port=5432 options='-c client_encoding=LATIN1'"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom from (select st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros /*FW*//*FW*/) as foo using unique co_bairro using srid=4326"
     METADATA
       "TIP"	"no_bairro"
+      "cache"	""
       "CLASSE"	"SIM"
       "ITENSDESC"	"Código bairro,Nome,Distrito,Município"
+      "EDITAVEL"	"SIM"
       "METAESTAT_CODIGO_TIPO_REGIAO"	"1"
-      "METAESTAT"	"SIM"
+      "ESQUEMATABELAEDITAVEL"	"i3geo_metaestat"
       "ITENS"	"co_bairro,no_bairro,no_distr,no_municip"
       "TEMA"	"Bairro (IBGE)"
+      "COLUNAIDUNICO"	"gid"
+      "COLUNAGEOMETRIA"	"the_geom"
+      "TABELAEDITAVEL"	"bairros"
     END # METADATA
     NAME "_lbairros"
     STATUS DEFAULT
@@ -27,6 +32,6 @@ LAYER
       END # STYLE
     END # CLASS
   END # LAYER
- 
+
 END # MAP
 

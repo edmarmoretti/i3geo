@@ -1026,7 +1026,7 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key,unico,f
 			{ label: "Fecha", value: "CANCEL", checked: false }
 		]);
 		og_core.on("checkedButtonChange", on_menuCheckBoxChange);
-		YAHOO.admin.container.panelCK = new YAHOO.widget.Panel("core_menuCK", { draggable:false,modal:true,zindex:"100",close:false,underlay:false,width:"200px", height:"158px",overflow:"auto", visible:false,constraintoviewport:false } );
+		YAHOO.admin.container.panelCK = new YAHOO.widget.Panel("core_menuCK", { draggable:false,modal:false,zindex:"100",close:false,underlay:false,width:"200px", height:"158px",overflow:"auto", visible:false,constraintoviewport:false } );
 		YAHOO.admin.container.panelCK.render();
 	}
 	onde = $i("core_menuCK_bd");

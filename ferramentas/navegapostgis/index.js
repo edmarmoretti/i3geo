@@ -392,9 +392,11 @@ i3GEOF.navegapostgis = {
 		}
 		sql = the_geom+" from (\n\n select "+i+" from "+i3GEOF.navegapostgis.esquema+"."+i3GEOF.navegapostgis.tabela+"\n\n) as foo using unique "+gid+" using srid=4326";
 		sql = sql.replace(",,",",");
-		if(gid === ""){
+		if(gid === "" && i3GEOF.navegapostgis.tipo === "sql"){
 			alert("Coluna com ID unico nao foi escolhida!");
 		}
-		$i("i3GEOFnavegapostgisSql").value = sql;
+		if(gi3GEOF.navegapostgis.tipo === "sql"){
+			$i("i3GEOFnavegapostgisSql").value = sql;
+		}
 	}
 };
