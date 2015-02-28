@@ -195,5 +195,12 @@ g_traducao_init =
 					en : "",
 					es : ""
 				}
+			],
+			29 : [
+				{
+					pt : "- Considere uma doa&ccedil;&atilde;o!",
+					en : "",
+					es : ""
+				}
 			]
 		};

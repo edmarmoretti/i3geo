@@ -62,8 +62,8 @@ body {
 	text-align: center;
 	font-size: 0.6cm;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	background-color: white;
-	background-image: url(../imagens/i3geo1bw.jpg);
+	background-color: rgb(250,250,250);
+	maergin: auto;
 }
 
 .r {
@@ -111,28 +111,34 @@ h1 {
 a {
 	margin: 0px auto;
 	text-decoration: none;
+	font-size: 14px;
+}
+.borda {
+    background-color: #990000;
+    padding: 5px 0px 5px 0px;
+    text-align: left;
+    width: 100%;
 }
 </style>
 </head>
 <body class=" yui-skin-sam ">
+		<div class="borda">
+			<div id="bandeiras"></div>
+			<div><a href="http://www.softwarepublico.gov.br" target="_blank" style="color:white;"><b>i3Geo</b></a></div>
+		</div>
 
-	<center>
-		<div id="bandeiras"></div>
-		<div class="bordaSuperior" style="z-index: 1;">&nbsp;</div>
-
-		<div class="mascaraPrincipal" style="max-width: 718pt;">
-			<div id="conteudo" style="position: relative; top: -10px; margin: 0 0 0.2cm 0.2cm;">
-				<div style="margin-top: 0px;">
+			<div id="conteudo" style="position: relative; top: -10px; margin:auto;max-width:1000px;left: 10px;">
+				<div style="margin-top: 5px;">
 					<?php
 					if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
 						echo "<p style='font-size:14px;color:red;margin-top:20px;'><script>document.write($"."trad(19,g_traducao_init));</script>";
 					}
 					?>
-					<div id="botoes"></div>
+					<div id="botoes" style=""></div>
 
-					<a class="r"><table><tbody><tr><td>
+					<div class="r"><table><tbody><tr><td>
 					<script type="text/javascript" src="http://www.openhub.net/p/150688/widgets/project_users.js?style=gray"></script>
-					</td></tr></tbody></table></a>
+					</td></tr></tbody></table></div>
 				</div>
 				<div style="float: left">
 					<a href="#" class="r" style="width: 230px; height: 380px;">
@@ -161,8 +167,7 @@ a {
 					</a>
 				</div>
 			</div>
-		</div>
-	</center>
+
 </body>
 <script>
 botoesIni = [];
@@ -225,7 +230,8 @@ botoesIni.push({
 	},{
 	"img":"../imagens/saiku_free_small.png",
 	"href":"../ferramentas/saiku/esquemaxml.php?locaplic="+window.location.href.replace("/init/index.php",""),
-	"titulo":$trad(25,g_traducao_init)
+	"titulo":$trad(25,g_traducao_init),
+	"subtitulo": " <a target=_blank src='https://medium.com/@Meteorite_BI/so-people-who-land-on-our-community-download-page-will-notice-a-subtle-difference-when-they-click-1b61aca316c5' >"+$trad(29,g_traducao_init)+"</a>",
 	},{
 	"img":"../imagens/gvsig.jpg",
 	"href":"../pacotes/gvsig/gvsig2mapfile/upload.htm",
@@ -277,12 +283,11 @@ i3GEO.barraDeBotoes.ATIVA = false;
 function mostraBotoes(){
 	var ins = [],i,n = botoesIni.length,texto;
 	for(i=0;i<n;i++){
-		if(botoesIni[i].href === ""){
-			texto = '<span class="r"><table ><tr><td><img src="'+botoesIni[i].img+'" /><br>'+botoesIni[i].titulo+'</a></td></tr></table></span>';
+		texto = '<div class="r" ><table ><tr><td><a target=_blank href="'+botoesIni[i].href+'" ><img src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';
+		if(botoesIni[i].subtitulo){
+			texto += botoesIni[i].subtitulo;
 		}
-		else{
-			texto = '<a target=_blank href="'+botoesIni[i].href+'" class="r"><table ><tr><td><img src="'+botoesIni[i].img+'" /><br>'+botoesIni[i].titulo+'</a></td></tr></table></a>';
-		}
+		texto += '</td></tr></table></div>';
 		ins.push(texto);
 	}
 	$i("botoes").innerHTML = ins.join("");
