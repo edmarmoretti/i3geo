@@ -454,6 +454,7 @@ i3GEO.mapa =
 			if (!cookies) {
 				cookies = i3GEO.util.pegaDadosLocal("preferenciasDoI3Geo");
 			}
+			//TODO remover eval
 			if (cookies) {
 				props = cookies.split("::");
 				nprops = props.length;
@@ -485,7 +486,7 @@ i3GEO.mapa =
 				}
 			}
 		},
-		//XODO quando em janela flutuante, incluir opcao para gerar imagem via canvas https://github.com/cburgmer/rasterizeHTML.js/wiki/Examples
+		//TODO incluir opcao para escolha do template da legenda
 		/**
 		 * Section: i3GEO.mapa.legendaHTML
 		 *
@@ -563,8 +564,9 @@ i3GEO.mapa =
 								"<div class='botoesLegendaFlutuante'>"
 								+ "<input type='button' value='" + $trad("mostraTodosLegenda") + "' id='legendaMostraTodos' />"
 								+ "<input type='button' value='" + $trad("mostraSoLegenda") + "' id='legendaMostraSo' />"
+								+ "<input type='button' value='PNG' id='legendaExpImagem' />"
 								+ "</div>"
-								+ retorno.data.legenda;
+								+ "<div id='i3GEOconteudoLegenda' class='i3GEOconteudoLegendaClass' style='width:100%;height:100%;'><div>" + retorno.data.legenda + "</div>";
 						}
 						if (legenda != "" && idleg) {
 							ins = "";
@@ -579,7 +581,7 @@ i3GEO.mapa =
 							ins += "<div id='corpoLegi' >" + legenda + "</div>";
 
 							idleg.innerHTML = "<div style='padding:5px;' >" + ins + "</div>";
-							//botao para mostrar todos
+							//botoes de funcoes especiais
 							if($i("legendaMostraTodos")){
 								b = new YAHOO.widget.Button(
 									"legendaMostraTodos", 
@@ -606,6 +608,16 @@ i3GEO.mapa =
 									}}}
 								);
 								b.addClass("legendaMostraSoTemas");
+								b = new YAHOO.widget.Button(
+									"legendaExpImagem", 
+									{onclick:{fn: function(){
+										var obj = $i("i3GEOconteudoLegenda");
+										obj.style.width = $i("wlegenda").style.width;
+										obj.style.height = $i("wlegenda_corpo").style.height;
+										i3GEO.mapa.dialogo.html2canvas(obj);
+									}}}
+								);
+								b.addClass("legendaExpImagemPng");
 							}
 						}
 						i3GEO.mapa.legendaHTML.escondeTemasMarcados();
@@ -628,7 +640,6 @@ i3GEO.mapa =
 							idleg.innerHTML = "";
 						}
 					}
-					idleg = $i("wlegenda_corpo");
 					i3GEO.mapa.legendaHTML.obtem(temp);
 				} else {
 					if (idleg) {
@@ -718,7 +729,7 @@ i3GEO.mapa =
 					ck = "nao";
 				}
 				if (!largura) {
-					largura = 302;
+					largura = 340;
 				}
 				if (!altura) {
 					altura = 300;
@@ -762,6 +773,12 @@ i3GEO.mapa =
 		 * Abre as telas de dialogo das opcoes de manipulacao do mapa atual
 		 */
 		dialogo : {
+			html2canvas : function(obj) {
+				var temp = function() {
+					i3GEOF.html2canvas.iniciaJanelaFlutuante(obj);
+				};
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.html2canvas()", "html2canvas", "html2canvas", "dependencias.php", temp);
+			},
 			/**
 			 * Function: wkt2layer
 			 *

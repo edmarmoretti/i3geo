@@ -8,6 +8,24 @@ margin-right: -5px;
 margin-top: -5px;
 }
 */
+.botoesLegendaFlutuante {
+font-size: 10px;
+}
+.legendaExpImagemPng .first-child button {
+background: url(../imagens/oxygen/16x16/image-x-generic.png) 5% 50% no-repeat;
+width: 100px;
+}
+.legendaMostraTodosTemas .first-child button {
+background: url(../imagens/oxygen/16x16/layer-visible-on.png) 5% 50% no-repeat;
+width: 100px;
+}
+.legendaMostraSoTemas .first-child button {
+background: url(../imagens/oxygen/16x16/layer-visible-off.png) 5% 50% no-repeat;
+width: 100px;
+}
+.i3GEOconteudoLegendaClass{
+font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 .olPopupCloseBox {
 margin-top: -2px;
 }
