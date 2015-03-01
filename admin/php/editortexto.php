@@ -1,7 +1,5 @@
 <?php 
-//XODO incluir combo para escolher o estilo
-//XODO incluir ajuda de comandos de teclado
-//XODO relace de sintaxe para mapfile
+//ZODO melhorar o realce de sintaxe para mapfile no codemirror
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>

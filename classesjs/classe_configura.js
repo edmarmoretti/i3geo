@@ -462,7 +462,7 @@ i3GEO.configura =
 						id : "omenudataFerramentas0a",
 						text : '<b>' + $trad("g4a") + '</b>',
 						submenu : {
-							id : "subFerr1",
+							id : "mapa",
 							itemdata : [
 								[
 									{
@@ -529,6 +529,11 @@ i3GEO.configura =
 										id : "omenudataImprimir",
 										text : "<span class='i3GEOconeFerramenta i3GEOiconeImprimir'></span>" + $trad("d12"),
 										url : "javascript:i3GEO.mapa.dialogo.imprimir()"
+									},
+									{
+										id : "omenudataFerramentas3e",
+										text : "<span class='i3GEOconeFerramenta i3GEOiconeTme'></span>" + $trad("t49"),
+										url : "javascript:i3GEO.tema.dialogo.tme()"
 									}
 								]
 							]
@@ -539,7 +544,7 @@ i3GEO.configura =
 						id : "omenudataFerramentas0b",
 						text : '<b>' + $trad("a7") + '</b>',
 						submenu : {
-							id : "subFerr2",
+							id : "camada",
 							itemdata : [
 								[
 									{
@@ -613,11 +618,6 @@ i3GEO.configura =
 										id : "omenudataFerramentas4e",
 										text : "<span class='i3GEOconeFerramenta i3GEOiconeAplicStat'></span>" + $trad("x71"),
 										url : "javascript:i3GEO.mapa.dialogo.metaestatListaMapas()"
-									},
-									{
-										id : "omenudataFerramentas3e",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeTme'></span>" + $trad("t49"),
-										url : "javascript:i3GEO.tema.dialogo.tme()"
 									}
 								]
 							]

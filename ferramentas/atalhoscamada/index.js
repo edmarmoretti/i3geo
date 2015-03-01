@@ -137,7 +137,6 @@ i3GEOF.atalhoscamada =
 			});
 			b.addClass("abrir");
 		}
-		
 		b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaCopia", {
 			onclick : {
 				fn : function() {
