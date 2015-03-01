@@ -83,39 +83,49 @@ i3GEOF.filtro = {
 
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
-	inicia: function(iddiv){
-		i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela");
-		if(i3GEOF.filtro.tema === ""){
-			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
-			return;
+	inicia: function(iddiv,modoCalculadora,idRetorno){
+		if(modoCalculadora === false){
+			i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela");
+			if(i3GEOF.filtro.tema === ""){
+				$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
+				return;
+			}
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.filtro.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia1","i3GEOfiltroguia");
-			//eventos das guias
-			$i("i3GEOfiltroguia1").onclick = function(){
-				i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia1","i3GEOfiltroguia");
-			};
-			$i("i3GEOfiltroguia2").onclick = function(){
-				i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia2","i3GEOfiltroguia");
-				i3GEOF.filtro.pegaFiltro();
-			};
-			$i("i3GEOfiltroguia3").onclick = function(){
-				i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia3","i3GEOfiltroguia");
-				i3GEOF.filtro.aplicaFiltro("sim");
-			};
+			if(modoCalculadora === false){
+				//eventos das guias
+				$i("i3GEOfiltroguia1").onclick = function(){
+					i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia1","i3GEOfiltroguia");
+				};
+				$i("i3GEOfiltroguia2").onclick = function(){
+					i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia2","i3GEOfiltroguia");
+					i3GEOF.filtro.pegaFiltro();
+				};
+				$i("i3GEOfiltroguia3").onclick = function(){
+					i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia3","i3GEOfiltroguia");
+					i3GEOF.filtro.aplicaFiltro("sim");
+				};
+				b = new YAHOO.widget.Button(
+					"i3GEOfiltrobotao2",
+					{onclick:{fn: i3GEOF.filtro.limpaFiltro}}
+				);
+				b.addClass("rodar150");
+
+				i3GEO.util.mensagemAjuda("i3GEOfiltromen1",$i("i3GEOfiltromen1").innerHTML);
+			}
+			else{
+				//esconde a opcao de escolher guia
+				$i("i3GEOfiltroguiasYUI").style.display = "none";
+				$i("i3GEOfiltromen1").style.display = "none";
+				$i("i3GEOfiltrobotao2").style.display = "none";
+			}
 			var b = new YAHOO.widget.Button(
 				"i3GEOfiltrobotao1",
-				{onclick:{fn: function(){i3GEOF.filtro.aplicaFiltro("nao");}}}
+				{onclick:{fn: function(){i3GEOF.filtro.aplicaFiltro("nao",modoCalculadora,idRetorno);}}}
 			);
 			b.addClass("rodar150");
-			b = new YAHOO.widget.Button(
-				"i3GEOfiltrobotao2",
-				{onclick:{fn: i3GEOF.filtro.limpaFiltro}}
-			);
-			b.addClass("rodar150");
-
-			i3GEO.util.mensagemAjuda("i3GEOfiltromen1",$i("i3GEOfiltromen1").innerHTML);
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de cria&ccedil;&atilde;o do filtro
 			//
@@ -152,13 +162,18 @@ i3GEOF.filtro = {
 	Nesse modo e necessario indicar o id do elemento que recebera o filtro
 	*/
 	iniciaJanelaFlutuante: function(modoCalculadora,idRetorno){
-		var janela,divid,temp,titulo;
+		var janela,divid,temp,titulo = "";
+		if(modoCalculadora === undefined){
+			modoCalculadora = false;
+		}
 		if($i("i3GEOF.filtro")){
 			i3GEOF.filtro.inicia("i3GEOF.filtro_corpo");
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeFiltro'></span>" + "<div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;&nbsp;&nbsp;"+$trad("t29")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
+		if(modoCalculadora === false){
+			titulo = "<span class='i3GEOconeFerramenta i3GEOiconeFiltro'></span>" + "<div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;&nbsp;&nbsp;"+$trad("t29")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>";
+		}
 		janela = i3GEO.janela.cria(
 			"570px",
 			"250px",
@@ -167,7 +182,7 @@ i3GEOF.filtro = {
 			"",
 			titulo,
 			"i3GEOF.filtro",
-			true,
+			false,
 			"hd",
 			"",
 			"",
@@ -178,10 +193,12 @@ i3GEOF.filtro = {
 		i3GEOF.filtro.aguarde = $i("i3GEOF.filtro_imagemCabecalho").style;
 		$i("i3GEOF.filtro_corpo").style.backgroundColor = "white";
 		i3GEOF.filtro.inicia(divid,modoCalculadora,idRetorno);
-		temp = function(){
-			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",['i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela")']);
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		if(modoCalculadora === false){
+			temp = function(){
+				i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",['i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela")']);
+			};
+			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		}
 	},
 	/*
 	Function: adicionaLinhaFiltro
@@ -351,7 +368,7 @@ i3GEOF.filtro = {
 
 	testa {String} - sim|nao indica a realiza&ccedil;&atilde;o de teste ou aplica&ccedil;&atilde;o final do filtro
 	*/
-	aplicaFiltro: function(testa){
+	aplicaFiltro: function(testa,modoCalculadora,idRetorno){
 		if(arguments.length === 0)
 		{testa = "nao";}
 		if(i3GEOF.filtro.aguarde.visibility === "visible")
@@ -372,25 +389,31 @@ i3GEOF.filtro = {
 				re = new RegExp("'","g");
 				filtro = filtro.replace(re,"|");
 			}
-			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
-			cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.set_transfer_mode('POST');
-			if (testa.toLowerCase() === "sim"){
-				temp = function(retorno){
-					$i("i3GEOfiltroguia3obj").innerHTML = "<img src="+retorno.data+" />";
-					i3GEOF.filtro.aguarde.visibility = "hidden";
-				};
+			if(modoCalculadora === true){
+				i3GEOF.filtro.aguarde.visibility = "hidden";
+				$i(idRetorno).value = i3GEOF.filtro.formataMapserver();
 			}
 			else{
-				temp = function(retorno){
-					if(i3GEO.Interface.ATUAL === "padrao")
-					{i3GEO.atualiza(retorno);}
-					i3GEO.Interface.atualizaTema(retorno,i3GEOF.filtro.tema);
-					i3GEOF.filtro.aguarde.visibility = "hidden";
-				};
+				p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
+				cp = new cpaint();
+				cp.set_response_type("JSON");
+				cp.set_transfer_mode('POST');
+				if (testa.toLowerCase() === "sim"){
+					temp = function(retorno){
+						$i("i3GEOfiltroguia3obj").innerHTML = "<img src="+retorno.data+" />";
+						i3GEOF.filtro.aguarde.visibility = "hidden";
+					};
+				}
+				else{
+					temp = function(retorno){
+						if(i3GEO.Interface.ATUAL === "padrao")
+						{i3GEO.atualiza(retorno);}
+						i3GEO.Interface.atualizaTema(retorno,i3GEOF.filtro.tema);
+						i3GEOF.filtro.aguarde.visibility = "hidden";
+					};
+				}
+				cp.call(p,"insereFiltro",temp,"tema="+i3GEOF.filtro.tema,"filtro="+i3GEO.util.base64encode(filtro),"testa="+testa);
 			}
-			cp.call(p,"insereFiltro",temp,"tema="+i3GEOF.filtro.tema,"filtro="+i3GEO.util.base64encode(filtro),"testa="+testa);
 		}
 		catch(e){
 			i3GEO.janela.tempoMsg("Erro: "+e);

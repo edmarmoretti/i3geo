@@ -524,5 +524,11 @@ i3GEOF.legenda.dicionario = {
 		pt : "Maior tamanho (pixels), que os s&iacute;mbolos ser&atilde;o desenhados, quando a escala de desenho de s&iacute;mbolos estiver ativo",
 		en : "",
 		es : ""
-	} ]
+	} ],
+	"editorExp": [
+	{
+		pt: "Editor de express&atilde;o",
+		en:"",
+		es:""
+	}]
 };

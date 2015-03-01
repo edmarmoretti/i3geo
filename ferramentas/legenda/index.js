@@ -40,7 +40,6 @@ if (typeof (i3GEOF) === 'undefined') {
 /*
  * Classe: i3GEOF.legenda
  */
-//XODO incluir um construtor de expressao na legenda
 i3GEOF.legenda =
 	{
 		/*
@@ -483,7 +482,7 @@ i3GEOF.legenda =
 			i3GEOF.legenda.aviso = false;
 			try {
 				if (retorno.data != undefined) {
-					var b, ins, i, ajuda, id, re, exp, n;
+					var b, ins, i, ajuda, id, re, exp, n, filtro;
 					// se nao for do tipo raster
 					if (retorno.data[0].proc === "") {
 						ins =
@@ -502,6 +501,7 @@ i3GEOF.legenda =
 									+ "/imagens/oxygen/16x16/draw-triangle.png' title='Ordenar' onclick='i3GEOF.legenda.ordenaClasses()' style=cursor:pointer />"
 									+ "<span style='vertical-align:super;margin-left:3px;'>nome</span></td>"
 									+ "<td style=background-color:yellow >express&atilde;o</td>"
+									+ "<td style=background-color:yellow ></td>"
 									+ "<td style=background-color:yellow >minScale</td>"
 									+ "<td style=background-color:yellow >maxScale</td>" + "</tr>"
 							];
@@ -535,17 +535,23 @@ i3GEOF.legenda =
 									"nome",
 									"javascript:i3GEOF.legenda.aviso()") + "</td>");
 
+							filtro = "<img title='" + $trad("editorExp",i3GEOF.legenda.dicionario) + "' src='" 
+								+ i3GEO.configura.locaplic + "/imagens/oxygen/16x16/tools-wizard.png' "
+								+ "onclick='i3GEOF.legenda.filtro(\"" + "i3GEOlegendaid_exp" + id + "\")'>";
+							
 							ins.push("<td>"
 								+ $inputText(
 									"",
 									"",
-									"i3GEOlegendaid_" + id,
+									"i3GEOlegendaid_exp" + id,
 									$trad('digitaNovaExpressao', i3GEOF.legenda.dicionario),
 									25,
 									exp,
 									"expressao",
 									"javascript:i3GEOF.legenda.aviso()") + "</td>");
 
+							ins.push("<td>" + filtro + "</td>");
+							
 							ins.push("<td>"
 								+ $inputText(
 									"",
@@ -624,6 +630,9 @@ i3GEOF.legenda =
 				i3GEO.janela.tempoMsg($trad('msgNaoEditaLegenda', i3GEOF.legenda.dicionario));
 				i3GEOF.legenda.aguarde.visibility = "hidden";
 			}
+		},
+		filtro : function (idRetorno){
+			i3GEO.tema.dialogo.filtro(i3GEOF.legenda.tema,true,idRetorno);
 		},
 		/*
 		 * Function: aviso
