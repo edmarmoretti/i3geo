@@ -524,6 +524,11 @@ i3GEO.configura =
 										id : "omenudataFerramentas12",
 										text : "<span class='i3GEOconeFerramenta i3GEOiconeCliqueTexto'></span>" + $trad("d25t"),
 										url : "javascript:i3GEO.mapa.dialogo.cliqueTexto()"
+									},
+									{
+										id : "omenudataImprimir",
+										text : "<span class='i3GEOconeFerramenta i3GEOiconeImprimir'></span>" + $trad("d12"),
+										url : "javascript:i3GEO.mapa.dialogo.imprimir()"
 									}
 								]
 							]

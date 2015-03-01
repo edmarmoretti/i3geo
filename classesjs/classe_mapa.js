@@ -38,9 +38,8 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-//XODO incluir nova ferramenta para usar a opcao de mascara do Mapserver
-//XODO incluir opcao para gerar imagem via canvas apenas do corpo do mapa
-//XODO incluir opcao de imprimir no menu suspenso
+//TODO incluir nova ferramenta para usar a opcao de mascara do Mapserver
+//TODO incluir opcao para gerar imagem via canvas apenas do corpo do mapa
 i3GEO.mapa =
 	{
 		/**

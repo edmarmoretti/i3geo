@@ -2268,6 +2268,9 @@ background-image: URL('../imagens/oxygen/16x16/edit-node.png');
 .i3GEOiconeCliqueTexto {
 background-image: URL('../imagens/oxygen/16x16/preferences-desktop-font.png');
 }
+.i3GEOiconeImprimir {
+background-image: URL('../imagens/oxygen/16x16/document-print.png');
+}
 .i3GEOiconeTabela {
 background-image: URL('../imagens/oxygen/16x16/view-form-table.png');
 }
