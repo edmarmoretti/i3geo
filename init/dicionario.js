@@ -170,7 +170,7 @@ g_traducao_init =
 			],
 			25 : [
 				{
-					pt : "SAIKU - an&aacute;lise de dados estat&iacute;sticos",
+					pt : "SAIKU - an&aacute;lise tabular",
 					en : "",
 					es : ""
 				}

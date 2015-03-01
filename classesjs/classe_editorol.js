@@ -1,4 +1,6 @@
 //TODO documentar
+//XODO permitir a edicao de atributos
+
 /*
 Title: Editor vetorial para OpenLayers
 
@@ -1414,7 +1416,7 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLfecha",
 				trigger: function(){
-					var temp = window.confirm("Remove a edicao?");
+					var temp = window.confirm($trad("x94"));
 					if(i3GEO.eventos){
 						i3GEO.eventos.cliquePerm.ativa();
 					}

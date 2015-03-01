@@ -1,4 +1,8 @@
 //TODO documentar
+//XODO permitir edicao de temas editaveis, nao apenas de regioes cadastradas
+//XODO permitir a edicao de dados fora do esquema metaestat
+
+
 /*
 Editor vetorial de limites para a interface google maps
 
@@ -31,6 +35,7 @@ GNU junto com este programa; se nao, escreva para a
 Free Software Foundation, Inc., no endereco
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
  */
+//
 
 if(typeof(i3GEO) === 'undefined'){
 	var i3GEO = {};

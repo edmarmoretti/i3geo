@@ -485,10 +485,7 @@ i3GEO.mapa =
 				}
 			}
 		},
-		//XODO quando aberta em janela flutuante, remover opcao de ligar/desligar camada e esconder a opcao de 'mostrar tudo'
-		//XODO incluir icone olho
-		//XODO quando em janela flutuante, incluir opcao para gerar imagem via canvas
-		//XODO quando em janela flutuante, incluir opcao para abrir em nova janela
+		//XODO quando em janela flutuante, incluir opcao para gerar imagem via canvas https://github.com/cburgmer/rasterizeHTML.js/wiki/Examples
 		/**
 		 * Section: i3GEO.mapa.legendaHTML
 		 *
@@ -555,7 +552,7 @@ i3GEO.mapa =
 			atualiza : function() {
 				var idleg = $i("wlegenda_corpo"), temp =
 					function(retorno) {
-						var legenda = "", ins, re, desativar, tema = "", classe = "";
+						var legenda = "", ins, re, desativar, tema = "", classe = "",b;
 						re = new RegExp();
 						if (retorno.data !== "erro" && retorno.data !== undefined) {
 							// troca os ids pois podem ja existir na arvore de
@@ -563,11 +560,15 @@ i3GEO.mapa =
 							re = new RegExp("legendack_", "g");
 							retorno.data.legenda = retorno.data.legenda.replace(re, "liblegendack_");
 							legenda =
-								"<div class=legendaMostraTodosTemas onclick='i3GEO.mapa.legendaHTML.mostraTodosOsTemas()' style=cursor:pointer;font-size:10px;text-align:left; >Mostra tudo</div><br>"
-									+ retorno.data.legenda;
+								"<div class='botoesLegendaFlutuante'>"
+								+ "<input type='button' value='" + $trad("mostraTodosLegenda") + "' id='legendaMostraTodos' />"
+								+ "<input type='button' value='" + $trad("mostraSoLegenda") + "' id='legendaMostraSo' />"
+								+ "</div>"
+								+ retorno.data.legenda;
 						}
 						if (legenda != "" && idleg) {
 							ins = "";
+							//mostra o icone que permite liberar a legenda (usado quando nao esta em uma janela flutuante)
 							if (i3GEO.mapa.legendaHTML.incluiBotaoLibera === true) {
 								ins +=
 									'<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -35px; top: -22px;">'
@@ -578,6 +579,34 @@ i3GEO.mapa =
 							ins += "<div id='corpoLegi' >" + legenda + "</div>";
 
 							idleg.innerHTML = "<div style='padding:5px;' >" + ins + "</div>";
+							//botao para mostrar todos
+							if($i("legendaMostraTodos")){
+								b = new YAHOO.widget.Button(
+									"legendaMostraTodos", 
+									{onclick:{fn: function(){
+										i3GEO.mapa.legendaHTML.mostraTodosOsTemas();
+									}}}
+								);
+								b.addClass("legendaMostraTodosTemas");
+								b = new YAHOO.widget.Button(
+									"legendaMostraSo", 
+									{onclick:{fn: function(){
+										var n,i,temp,
+											raiz = $i("corpoLegi").parentNode;
+										temp = raiz.getElementsByClassName("i3GEOLegendaExcluiTema");
+										n = temp.length;
+										for(i = 0;i < n; i++){
+											temp[i].style.display = "none";
+										}
+										temp = raiz.getElementsByTagName("input");
+										n = temp.length;
+										for(i = 0;i < n; i++){
+											temp[i].style.display = "none";
+										}
+									}}}
+								);
+								b.addClass("legendaMostraSoTemas");
+							}
 						}
 						i3GEO.mapa.legendaHTML.escondeTemasMarcados();
 						// desmarca as classes desligadas

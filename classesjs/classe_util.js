@@ -2529,7 +2529,7 @@ i3GEO.util =
 		 */
 		defineValor : function(id, prop, valor) {
 			try {
-				eval("$i('" + id + "')." + prop + "='" + valor + "';");
+				$i(id)[prop] = valor;
 			} catch (e) {
 			}
 		},

@@ -8,6 +8,18 @@
     margin-top: -5px;
 }
 */
+.botoesLegendaFlutuante {
+	font-size: 10px;
+}
+.legendaMostraTodosTemas .first-child button {
+	background: url(../imagens/oxygen/16x16/layer-visible-on.png) 5% 50% no-repeat;
+	width: 100px;
+}
+.legendaMostraSoTemas .first-child button {
+	background: url(../imagens/oxygen/16x16/layer-visible-off.png) 5% 50% no-repeat;
+	width: 100px;
+}
+
 .olPopupCloseBox {
 	margin-top: -2px;
 }

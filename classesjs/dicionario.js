@@ -2318,6 +2318,18 @@ g_traducao = {
 	pt: "Depend&ecirc;ncia da escala",
 	en:"",
 	es:""
+}],
+"mostraTodosLegenda": [
+{
+	pt: "mostra todos",
+	en:"",
+	es:""
+}],
+"mostraSoLegenda": [
+{
+	pt: "s&oacute; legenda",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

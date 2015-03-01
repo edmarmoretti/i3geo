@@ -1748,7 +1748,7 @@ i3GEO.barraDeBotoes =
 							$i("i3GEOjanelaEditor_corpo").style.backgroundColor = "white";
 							i3GEO.editorGM.inicia("i3GEOjanelaEditor_corpo");
 							fecha = function() {
-								var temp = window.confirm("Remove a edicao?");
+								var temp = window.confirm($trad("x94"));
 								if (i3GEO.eventos) {
 									i3GEO.eventos.cliquePerm.ativa();
 								}
