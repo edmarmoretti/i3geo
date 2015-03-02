@@ -41,8 +41,8 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Classe: i3GEOF.editorsql
 */
-//XODO incluir opcao para listar uma amostra dos valores de uma coluna
-//XODO incluir editor de filtro
+//TODO incluir opcao para listar uma amostra dos valores de uma coluna
+//TODO incluir editor de filtro
 i3GEOF.editorsql = {
 	/*
 	Variavel: aguarde

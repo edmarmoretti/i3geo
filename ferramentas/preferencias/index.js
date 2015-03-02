@@ -203,6 +203,34 @@ i3GEOF.preferencias = {
 						tipo: "multiselect",
 						elemento: "i3GEO.arvoreDeCamadas.FUNCOES",
 						opcoes: i3GEO.arvoreDeCamadas.FUNCOES
+					},{
+						titulo: $trad('permiteArrastar',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.ARRASTARORDEM"
+					},{
+						titulo: $trad('mostraIconeRefresh',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.REFRESH"
+					},{
+						titulo: $trad('permiteArrastarLixeira',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA"
+					},{
+						titulo: $trad('mostraIconeOpacidade',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.ALTERAOPACIDADE"
+					},{
+						titulo: $trad('mostraIconeImprimir',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.IMPRIMIR"
+					},{
+						titulo: $trad('mostraIconeAnima',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.ANIMAMAPA"
+					},{
+						titulo: $trad('mostraIconeLigar',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.LIGARDESLIGARTODOS"
 					}
 				]
 			},{

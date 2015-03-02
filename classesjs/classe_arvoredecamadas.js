@@ -48,8 +48,9 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-//TODO incluir opcao para adicionar a arvore as camadas de fundo
-//XODO incluir opcao para imprimir na arvore de camadas
+//XODO incluir opcao para adicionar a arvore as camadas de fundo
+//TODO incluir opcao para icone de imprimir na arvore de camadas
+//TODO incluir icone de ferramentas
 i3GEO.arvoreDeCamadas =
 	{
 		/**
@@ -327,6 +328,20 @@ i3GEO.arvoreDeCamadas =
 		 * true
 		 */
 		ALTERAOPACIDADE : true,
+		/**
+		 * Propriedade: IMPRIMIR
+		 *
+		 * Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite abrir a ferramenta de impress&atilde;o
+		 *
+		 * Tipo:
+		 *
+		 * {boolean}
+		 *
+		 * Default:
+		 *
+		 * true
+		 */
+		IMPRIMIR : true,
 		/**
 		 * Propriedade: ANIMAMAPA
 		 *
@@ -1016,6 +1031,11 @@ i3GEO.arvoreDeCamadas =
 				ins +=
 					"<img " + estilo("animaMapa") + " onclick='i3GEO.mapa.dialogo.animacao();' id='animaMapa' title='" + $trad("p21")
 						+ "' />";
+			}
+			if (this.IMPRIMIR === true) {
+				ins +=
+					"<img " + estilo("imprimirMapa") + " onclick='i3GEO.mapa.dialogo.imprimir();' id='imprimirMapa' title='"
+						+ $trad("d12") + "' />";
 			}
 			if (this.LIGARDESLIGARTODOS === true) {
 				ins +=
