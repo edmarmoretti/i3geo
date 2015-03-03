@@ -40,6 +40,7 @@ if (typeof (i3GEO) === 'undefined') {
 }
 //TODO incluir nova ferramenta para usar a opcao de mascara do Mapserver
 //TODO incluir opcao para gerar imagem via canvas apenas do corpo do mapa
+//TODO incluir as propriedades do mapa, mostrados na arvore de camadas, nas ferramentas que as usam
 i3GEO.mapa =
 	{
 		/**
@@ -772,6 +773,28 @@ i3GEO.mapa =
 		 * Abre as telas de dialogo das opcoes de manipulacao do mapa atual
 		 */
 		dialogo : {
+			/**
+			 * Function: ferramentas
+			 *
+			 * Abre a janela de di&aacute;logo com as ferramentas que atuam sobre o mapa
+			 */
+			ferramentas : function() {
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.arvoreDeCamadas.dialogo.ferramentas()",
+					"atalhosmapa",
+					"atalhosmapa",
+					"dependencias.php",
+					"i3GEOF.atalhosmapa.iniciaJanelaFlutuante()");
+			},
+			/**
+			 * Function: html2canvas
+			 * 
+			 * Abre uma janela com a conversão de um objeto HTML em PNG
+			 * 
+			 * Parametros:
+			 * 
+			 * {obj} - objeto dom contendo o html a ser convertido
+			 */
 			html2canvas : function(obj) {
 				var temp = function() {
 					i3GEOF.html2canvas.iniciaJanelaFlutuante(obj);

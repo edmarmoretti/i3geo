@@ -30,5 +30,5 @@ i3GEOF.atalhoscamada.dicionario = {
 			es : "",
 			it : ""
 		}
-	],
+	]
 };

@@ -2057,6 +2057,22 @@ cursor: pointer;
 width: 18px;
 height: 18px;
 }
+#imprimirMapa {
+background-image: URL('../imagens/sprite.png');
+background-repeat: no-repeat;
+background-position: 0px -2250px;
+cursor: pointer;
+width: 18px;
+height: 18px;
+}
+#ferramentasMapa {
+background-image: URL('../imagens/sprite.png');
+background-repeat: no-repeat;
+background-position: 0px -2272px;
+cursor: pointer;
+width: 18px;
+height: 18px;
+}
 #animaMapa {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;

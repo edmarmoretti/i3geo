@@ -499,5 +499,10 @@ i3GEOF.preferencias.dicionario = {
 		pt : "Mostra o &iacute;cone que permite ligar ou desligar todas as camadas",
 		en : "",
 		es : ""
+	} ],
+	'mostraIconeFerr' : [ {
+		pt : "Mostra o &iacute;cone que abre a janela com as v&aacute;rias ferramentas que atuam sobre o mapa",
+		en : "",
+		es : ""
 	} ]
 };

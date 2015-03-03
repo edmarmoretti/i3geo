@@ -231,6 +231,10 @@ i3GEOF.preferencias = {
 						titulo: $trad('mostraIconeLigar',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.LIGARDESLIGARTODOS"
+					},{
+						titulo: $trad('mostraIconeFerr',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.FERRAMENTAS"
 					}
 				]
 			},{

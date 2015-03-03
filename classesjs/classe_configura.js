@@ -458,6 +458,10 @@ i3GEO.configura =
 				],
 				"ferramentas" : [
 					// mapas
+					// apos modificar, veja se a ferramenta i3GEO.mapa.dialogo.ferramentas() vai funcionar
+					// essa ferramenta faz um parser das strings existentes em text e url
+					// text deve sempre ter a tag </span> e url deve sempre ter javascript:
+					//
 					{
 						id : "omenudataFerramentas0a",
 						text : '<b>' + $trad("g4a") + '</b>',
@@ -529,11 +533,6 @@ i3GEO.configura =
 										id : "omenudataImprimir",
 										text : "<span class='i3GEOconeFerramenta i3GEOiconeImprimir'></span>" + $trad("d12"),
 										url : "javascript:i3GEO.mapa.dialogo.imprimir()"
-									},
-									{
-										id : "omenudataFerramentas3e",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeTme'></span>" + $trad("t49"),
-										url : "javascript:i3GEO.tema.dialogo.tme()"
 									}
 								]
 							]
@@ -596,6 +595,11 @@ i3GEO.configura =
 										id : "omenudataFerramentasmmscale",
 										text : "<span class='i3GEOconeFerramenta i3GEOiconemmscale'></span>" + $trad("variaEscala"),
 										url : "javascript:i3GEO.tema.dialogo.mmscale()"
+									},
+									{
+										id : "omenudataFerramentas3e",
+										text : "<span class='i3GEOconeFerramenta i3GEOiconeTme'></span>" + $trad("t49"),
+										url : "javascript:i3GEO.tema.dialogo.tme()"
 									}
 								]
 							]

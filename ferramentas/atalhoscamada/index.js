@@ -4,7 +4,6 @@ if (typeof (i3GEOF) === 'undefined') {
 /*
  * Classe: i3GEOF.atalhoscamada
  */
-//XODO construir links com base no menu suspenso
 i3GEOF.atalhoscamada =
 {
 	/**

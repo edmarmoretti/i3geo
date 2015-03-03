@@ -327,7 +327,21 @@ i3GEO.arvoreDeCamadas =
 		 *
 		 * true
 		 */
-		ALTERAOPACIDADE : true,
+		ALTERAOPACIDADE : false,
+		/**
+		 * Propriedade: FERRAMENTAS
+		 *
+		 * Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite abrir os atalhos para as ferramentas que atuam sobre o mapa
+		 *
+		 * Tipo:
+		 *
+		 * {boolean}
+		 *
+		 * Default:
+		 *
+		 * true
+		 */
+		FERRAMENTAS : true,
 		/**
 		 * Propriedade: IMPRIMIR
 		 *
@@ -341,7 +355,7 @@ i3GEO.arvoreDeCamadas =
 		 *
 		 * true
 		 */
-		IMPRIMIR : true,
+		IMPRIMIR : false,
 		/**
 		 * Propriedade: ANIMAMAPA
 		 *
@@ -355,7 +369,7 @@ i3GEO.arvoreDeCamadas =
 		 *
 		 * true
 		 */
-		ANIMAMAPA : true,
+		ANIMAMAPA : false,
 		/**
 		 * Propriedade: LIGARDESLIGARTODOS
 		 *
@@ -1036,6 +1050,11 @@ i3GEO.arvoreDeCamadas =
 				ins +=
 					"<img " + estilo("imprimirMapa") + " onclick='i3GEO.mapa.dialogo.imprimir();' id='imprimirMapa' title='"
 						+ $trad("d12") + "' />";
+			}
+			if (this.FERRAMENTAS === true) {
+				ins +=
+					"<img " + estilo("ferramentasMapa") + " onclick='i3GEO.mapa.dialogo.ferramentas();' id='ferramentasMapa' title='"
+						+ $trad("u15a") + "' />";
 			}
 			if (this.LIGARDESLIGARTODOS === true) {
 				ins +=
