@@ -1300,7 +1300,7 @@ i3GEO.Interface =
 								// MS_LAYER_RASTER, MS_LAYER_ANNOTATION (deprecated
 								// since 6.2), MS_LAYER_QUERY, MS_LAYER_CIRCLE,
 								// MS_LAYER_TILEINDEX, MS_LAYER_CHART
-								temp = camada.type === 0 ? opcoes.gutter = 20 : opcoes.gutter = 0;
+								//temp = camada.type === 0 ? opcoes.gutter = 20 : opcoes.gutter = 0;
 								temp =
 									camada.transitioneffect === "nao" ? opcoes.transitionEffect = "null" : opcoes.transitionEffect =
 										"resize";
@@ -1340,8 +1340,9 @@ i3GEO.Interface =
 												!(i3GEO.Interface.openlayers.TILES);
 									}
 									// se for definido a expansao e corte da imagem,
+									//ou cache
 									// e necessario usar tile
-									if (camada.cortepixels && camada.cortepixels > 0) {
+									if (camada.cache === "sim" || (camada.cortepixels && camada.cortepixels > 0)) {
 										opcoes.singleTile = false;
 									}
 									if (opcoes.singleTile === true && i3GEO.Interface.openlayers.googleLike === false) {
