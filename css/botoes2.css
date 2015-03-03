@@ -1189,6 +1189,12 @@ button { //
 .i3GEOiconeImprimir {
 	background-image: URL('../imagens/oxygen/16x16/document-print.png');
 }
+.i3GEOiconeTipoImg {
+	background-image: URL('../imagens/oxygen/16x16/image-x-generic.png');
+}
+.i3GEOiconeColorchooser {
+	background-image: URL('../imagens/oxygen/16x16/kcolorchooser.png');
+}
 .i3GEOiconeTabela {
 	background-image: URL('../imagens/oxygen/16x16/view-form-table.png');
 }

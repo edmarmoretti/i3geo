@@ -272,6 +272,11 @@ td.ygtvcell {
 	width: 250px;
 }
 
+.abrir200 .first-child button {
+	background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
+	width: 200px;
+}
+
 .abrir150 .first-child button {
 	background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
 	width: 150px;

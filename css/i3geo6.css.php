@@ -2287,6 +2287,12 @@ background-image: URL('../imagens/oxygen/16x16/preferences-desktop-font.png');
 .i3GEOiconeImprimir {
 background-image: URL('../imagens/oxygen/16x16/document-print.png');
 }
+.i3GEOiconeTipoImg {
+background-image: URL('../imagens/oxygen/16x16/image-x-generic.png');
+}
+.i3GEOiconeColorchooser {
+background-image: URL('../imagens/oxygen/16x16/kcolorchooser.png');
+}
 .i3GEOiconeTabela {
 background-image: URL('../imagens/oxygen/16x16/view-form-table.png');
 }
@@ -2670,6 +2676,10 @@ width: 250px;
 .abrir .first-child button {
 background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
 width: 250px;
+}
+.abrir200 .first-child button {
+background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
+width: 200px;
 }
 .abrir150 .first-child button {
 background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;

@@ -127,7 +127,40 @@ i3GEOF.imprimir = {
 					}
 				}
 			});
-
+			//opcoes
+			var b = new YAHOO.widget.Button("i3GEOFimprimirLegenda", {
+				onclick : {
+					fn : function() {
+						i3GEO.mapa.dialogo.opcoesLegenda();
+					}
+				}
+			});
+			b.addClass("abrir200");
+			var b = new YAHOO.widget.Button("i3GEOFimprimirEscala", {
+				onclick : {
+					fn : function() {
+						i3GEO.mapa.dialogo.opcoesEscala();
+					}
+				}
+			});
+			b.addClass("abrir200");
+			var b = new YAHOO.widget.Button("i3GEOFimprimirTamanho", {
+				onclick : {
+					fn : function() {
+						i3GEO.mapa.dialogo.tamanho();
+					}
+				}
+			});
+			b.addClass("abrir200");
+			var b = new YAHOO.widget.Button("i3GEOFimprimirLogo", {
+				onclick : {
+					fn : function() {
+						i3GEO.mapa.dialogo.ativaLogo();
+					}
+				}
+			});
+			b.addClass("abrir200");
+			
 			var temp = function(retorno){
 				g_legendaHTML = retorno.data.legenda;
 			};

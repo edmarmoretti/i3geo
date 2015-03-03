@@ -134,6 +134,13 @@ i3GEOF.selecao = {
 						{onclick:{fn: i3GEOF.selecao.aplicaselecaoTema}}
 				);
 				b.addClass("rodar");
+
+				b = new YAHOO.widget.Button(
+					"i3GEOFSelecaoQuery",
+					{onclick:{fn: i3GEO.mapa.dialogo.queryMap}}
+				);
+				b.addClass("abrir");				
+
 				i3GEOF.selecao.ativaFoco();
 				ics = $i("i3GEOselecaoguia1obj").getElementsByTagName("button");
 				n = ics.length;
@@ -173,6 +180,7 @@ i3GEOF.selecao = {
 			'	<br><p class=paragrafo >'+$trad('distanciaSelecao',i3GEOF.selecao.dicionario) +
 			'	<div class="styled-select">' +
 			'		<input type=text id=i3GEOselecaotoleranciapt value=0 /></div>' +
+			'		<br><p class=paragrafo ><input id=i3GEOFSelecaoQuery type=button value="' + $trad("p8") + '" /></p>' +
 			'	<br><div id=i3GEOselecaomen1 style=left:0px;width:95%; >' +
 			'		<p class=paragrafo >'+$trad('ajuda',i3GEOF.selecao.dicionario) +
 			'	</p></div>' +

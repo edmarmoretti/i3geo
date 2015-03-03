@@ -131,6 +131,9 @@ i3GEOF.opcoesFundo = {
 					//layer.mergeNewParams({r:Math.random()});
 					if($i(i3geoOL.id+"_events"))
 					{$i(i3geoOL.id+"_events").style.backgroundColor = "rgb("+$i("i3GEOopcoesFundocor").value+")";}
+					if ($i(i3geoOL.id + "_OpenLayers_ViewPort")) {
+						$i(i3geoOL.id + "_OpenLayers_ViewPort").style.backgroundColor = "rgb("+$i("i3GEOopcoesFundocor").value+")";
+					}
 				}
 				i3GEO.atualiza();
 			},

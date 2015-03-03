@@ -40,7 +40,6 @@ if (typeof (i3GEO) === 'undefined') {
 }
 //TODO incluir nova ferramenta para usar a opcao de mascara do Mapserver
 //TODO incluir opcao para gerar imagem via canvas apenas do corpo do mapa
-//TODO incluir as propriedades do mapa, mostrados na arvore de camadas, nas ferramentas que as usam
 i3GEO.mapa =
 	{
 		/**
