@@ -675,6 +675,12 @@ i3GEO.configura =
 			}
 		},
 		/**
+		 * Propriedade oMenuDataOriginal
+		 *
+		 * Clone do objeto oMenuData. Utilizado para montar a ferramenta de propriedades do mapa
+		 */
+		oMenuDataOriginal : "",
+		/**
 		 * Propriedade: tipoimagem
 		 *
 		 * Indica o tipo de filtro de imagem que est&aacute; ativo. O filtro ativo &eacute; aplicado sobre a imagem toda a vez que o mapa
@@ -1702,7 +1708,7 @@ i3GEO.configura =
 		 * Cada ferramenta cont&eacute;m uma propriedade chamada &quot;ativa&quot; que indica se ser&aacute; inicializada ou n&atilde;o com o mapa
 		 *
 		 * A defini&ccedil;&atilde;o de ativa ou n&atilde;o pode ser feita com uso do menu de prefer&ecirc;ncias do i3Geo
-		 * 
+		 *
 		 * Ao modificar os par&acirc;metros, atualize a ferramenta i3geo/ferramentas/preferencias
 		 *
 		 * Ferramentas dispon&iacute;veis:
@@ -1763,4 +1769,8 @@ i3GEO.configura =
 			}
 		}
 	};
-// YAHOO.log("carregou classe configura", "Classes i3geo");
+//
+//faz o clone do menu original do i3Geo
+//o usuario pode ter modificado o menu original e o i3Geo pode precisar do original
+//
+i3GEO.configura.oMenuDataOriginal = i3GEO.util.cloneObj(i3GEO.configura.oMenuData);

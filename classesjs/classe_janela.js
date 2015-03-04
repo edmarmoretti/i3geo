@@ -261,7 +261,7 @@ i3GEO.janela =
 		 * {string} - (opcional) icone que ser&aacute; mostrado no canto superior esquerdo da janela
 		 *
 		 * {funcao} - funcao executada quando o icone + for clicado
-		 * 
+		 *
 		 * {sim|nao} - (opcional) indica se o efeito de transpar&ecirc;ncia nos eventos mouseover/out ser&aacute; aplicado
 		 *
 		 * Return:
@@ -563,7 +563,7 @@ i3GEO.janela =
 		 *
 		 * Parametros:
 		 *
-		 * event {objeto} - objeto YUI do evento que gerou o fechament da janela
+		 * event {objeto} - objeto YUI do evento que gerou o fechamento da janela
 		 *
 		 * args {objeto} - parametros do evento que fechou a janela
 		 */
@@ -1001,12 +1001,12 @@ i3GEO.janela =
 		 * Parametros:
 		 *
 		 * {String} - texto da mensagem
-		 * 
+		 *
 		 * {String} - texto do cabecalho
-		 * 
+		 *
 		 * {numeric} - (opcional) largura em pixel
-		 * 
-		 * {numeric} - (opcional) altura em pixel 
+		 *
+		 * {numeric} - (opcional) altura em pixel
 		 */
 		mensagemSimples : function(texto, cabecalho, largura, altura) {
 			var janela;

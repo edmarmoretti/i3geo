@@ -5,21 +5,21 @@
  * cont&eacute;m as op&ccedil;&otilde;es de ligar e desligar temas,
  * altera&ccedil;&atilde;o na ordem de desenho, links para acesso a
  * funcionalidades, etc.
- * 
+ *
  * Por padr&atilde;o, a &aacute;rvore &eacute; inserida no elemento HTML da interface do mapa cujo ID for igual a listaTemas
  *
  * i3GEO.arvoreDeCamadas permite controlar quais as op&ccedil;&otilde;es que
  * ser&atilde;o mostradas na &aacute;rvore e seu comportamento em diferentes
  * situa&ccdil;&otilde;s.
- * 
+ *
  * Alguns itens s&atilde;o inclu&iacute;dos caso sejam localizados na interface elementos html com os seguintes ID
- * 
+ *
  * listaLayersBase - lista os layers de fundo na interface OpenLayers
- * 
+ *
  * buscaRapida - formul&aacute;rio de busca de dados em camadas
- * 
+ *
  * listaPropriedades - conjunto de atalhos para ferramentas que controlam algumas caracter&iacute;sticas do mapa (na vers&atilde;o 6 do i3Geo esses atalhos constam em outros lugares, sendo desnecess&aacute;rio manter essa lista ativa na &aacute;rvore)
- * 
+ *
  *
  * Namespace:
  *
@@ -175,7 +175,7 @@ i3GEO.arvoreDeCamadas =
 		 *
 		 * Default:
 		 * true
-		 */		
+		 */
 		INCLUILFUNDO : true,
 		/**
 		 * Propriedade: ATIVATEMA
@@ -935,7 +935,7 @@ i3GEO.arvoreDeCamadas =
 								hasIcon : false
 							}, temaNode
 						);
-					}	
+					}
 				}
 			} else {
 				nk = temas.length;
@@ -1652,7 +1652,7 @@ i3GEO.arvoreDeCamadas =
 			// define o farol indicativo da compatibilidade de escala do mapa
 			// com a fonte do layer
 			//
-			if (funcoes.farolescala === true) {
+			if (funcoes.farolescala === true && tema.escala != 0) {
 				farol = "maisamarelo.png";
 				mfarol = "";
 				if (tema.escala * 1 < i3GEO.parametros.mapscale * 1) {

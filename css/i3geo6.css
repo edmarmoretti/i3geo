@@ -13,7 +13,7 @@ font-size: 10px;
 }
 .legendaExpImagemPng .first-child button {
 background: url(../imagens/oxygen/16x16/image-x-generic.png) 5% 50% no-repeat;
-width: 100px;
+width: 70px;
 }
 .legendaMostraTodosTemas .first-child button {
 background: url(../imagens/oxygen/16x16/layer-visible-on.png) 5% 50% no-repeat;
@@ -21,7 +21,7 @@ width: 100px;
 }
 .legendaMostraSoTemas .first-child button {
 background: url(../imagens/oxygen/16x16/layer-visible-off.png) 5% 50% no-repeat;
-width: 100px;
+width: 90px;
 }
 .i3GEOconteudoLegendaClass{
 font-family: Verdana, Arial, Helvetica, sans-serif;

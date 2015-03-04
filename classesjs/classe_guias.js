@@ -158,6 +158,7 @@ i3GEO.guias =
 				idconteudo : "guia4obj",
 				click : function() {
 					i3GEO.guias.mostra("legenda");
+					i3GEO.util.defineValor(i3GEO.mapa.legendaHTML.ID,"innerHTML", "");
 					i3GEO.mapa.legendaHTML.cria("guia4obj");
 				}
 			},
@@ -995,19 +996,19 @@ i3GEO.guias =
 		},
 		/**
 		 * Function: ajustaGuiaFerramenta
-		 * 
+		 *
 		 * Ajusta as guias de uma janela para que sempre fiquem no topo da janela, aplicando o overflow ao conte&uacute;do das guias
-		 * 
+		 *
 		 * Deve ser utilizado pelas ferramentas ap&oacute;s a janela ter seu conte&uacute;do renderizado.
-		 * 
+		 *
 		 * Veja como exemplo a ferramenta tabela
-		 * 
+		 *
 		 * Paremeters:
-		 * 
+		 *
 		 * {string} - id da janela
-		 * 
+		 *
 		 * {string} - namespace da janela utilizado para definir os elementos DIV onde o conte&uacute;do &eacute; renderizado
-		 * 
+		 *
 		 */
 		ajustaGuiaFerramenta : function(idjanela,namespace){
 			var c = $i(idjanela + "_corpo"),

@@ -583,14 +583,14 @@ i3GEO.mapa =
 							//botoes de funcoes especiais
 							if($i("legendaMostraTodos")){
 								b = new YAHOO.widget.Button(
-									"legendaMostraTodos", 
+									"legendaMostraTodos",
 									{onclick:{fn: function(){
 										i3GEO.mapa.legendaHTML.mostraTodosOsTemas();
 									}}}
 								);
 								b.addClass("legendaMostraTodosTemas");
 								b = new YAHOO.widget.Button(
-									"legendaMostraSo", 
+									"legendaMostraSo",
 									{onclick:{fn: function(){
 										var n,i,temp,
 											raiz = $i("corpoLegi").parentNode;
@@ -608,7 +608,7 @@ i3GEO.mapa =
 								);
 								b.addClass("legendaMostraSoTemas");
 								b = new YAHOO.widget.Button(
-									"legendaExpImagem", 
+									"legendaExpImagem",
 									{onclick:{fn: function(){
 										var obj = $i("i3GEOconteudoLegenda");
 										obj.style.width = $i("wlegenda").style.width;
@@ -734,28 +734,35 @@ i3GEO.mapa =
 					altura = 300;
 				}
 				var cabecalho, minimiza, janela, titulo;
-				if (!$i("wlegenda")) {
-					cabecalho = function() {
-					};
-					minimiza = function() {
-						var t = i3GEO.janela.minimiza("wlegenda", "100px");
-						if (t === "min") {
-							$i("legendaTituloI").style.display = "none";
-						} else {
-							$i("legendaTituloI").style.display = "block";
-						}
-					};
-					titulo =
-						"<span class='i3GEOconeFerramenta i3GEOiconeLegenda' title='" + $trad("P3") + "'></span>"
-							+ "<div id='legendaTituloI' style='display:block;' >" + $trad("p3") + "</div>";
-					janela =
-						i3GEO.janela.cria(largura + "px", altura + "px", "", "", "", titulo, "wlegenda", false, "hd", cabecalho, minimiza);
-				} else {
-					janela = YAHOO.i3GEO.janela.manager.find("wlegenda");
-					janela.show();
+				//
+				//remove se a legenda ja esta aberta em outro lugar
+				//
+				i3GEO.util.removeChild("corpoLegi");
+				i3GEO.util.defineValor(i3GEO.mapa.legendaHTML.ID,"innerHTML", "");
+				//
+				//remove a janela se ja existir
+				//
+				janela = YAHOO.i3GEO.janela.manager.find("wlegenda");
+				if(janela){
+					i3GEO.janela.destroi("wlegenda");
 				}
+				cabecalho = function() {
+				};
+				minimiza = function() {
+					var t = i3GEO.janela.minimiza("wlegenda", "100px");
+					if (t === "min") {
+						$i("legendaTituloI").style.display = "none";
+					} else {
+						$i("legendaTituloI").style.display = "block";
+					}
+				};
+				titulo =
+					"<span class='i3GEOconeFerramenta i3GEOiconeLegenda' title='" + $trad("P3") + "'></span>"
+						+ "<div id='legendaTituloI' style='display:block;' >" + $trad("p3") + "</div>";
+				janela =
+					i3GEO.janela.cria(largura + "px", altura + "px", "", "", "", titulo, "wlegenda", false, "hd", cabecalho, minimiza);
 				$i("wlegenda_corpo").style.backgroundColor = "white";
-
+				i3GEO.mapa.legendaHTML.ID = "wlegenda_corpo";
 				i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
 					"i3GEO.mapa.legendaHTML.atualiza()"
 				]);
@@ -787,11 +794,11 @@ i3GEO.mapa =
 			},
 			/**
 			 * Function: html2canvas
-			 * 
+			 *
 			 * Abre uma janela com a conversão de um objeto HTML em PNG
-			 * 
+			 *
 			 * Parametros:
-			 * 
+			 *
 			 * {obj} - objeto dom contendo o html a ser convertido
 			 */
 			html2canvas : function(obj) {
