@@ -5,10 +5,21 @@
  * cont&eacute;m as op&ccedil;&otilde;es de ligar e desligar temas,
  * altera&ccedil;&atilde;o na ordem de desenho, links para acesso a
  * funcionalidades, etc.
+ * 
+ * Por padr&atilde;o, a &aacute;rvore &eacute; inserida no elemento HTML da interface do mapa cujo ID for igual a listaTemas
  *
  * i3GEO.arvoreDeCamadas permite controlar quais as op&ccedil;&otilde;es que
  * ser&atilde;o mostradas na &aacute;rvore e seu comportamento em diferentes
  * situa&ccdil;&otilde;s.
+ * 
+ * Alguns itens s&atilde;o inclu&iacute;dos caso sejam localizados na interface elementos html com os seguintes ID
+ * 
+ * listaLayersBase - lista os layers de fundo na interface OpenLayers
+ * 
+ * buscaRapida - formul&aacute;rio de busca de dados em camadas
+ * 
+ * listaPropriedades - conjunto de atalhos para ferramentas que controlam algumas caracter&iacute;sticas do mapa (na vers&atilde;o 6 do i3Geo esses atalhos constam em outros lugares, sendo desnecess&aacute;rio manter essa lista ativa na &aacute;rvore)
+ * 
  *
  * Namespace:
  *
@@ -49,8 +60,6 @@ if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
 //XODO incluir opcao para adicionar a arvore as camadas de fundo
-//TODO incluir opcao para icone de imprimir na arvore de camadas
-//TODO incluir icone de ferramentas
 i3GEO.arvoreDeCamadas =
 	{
 		/**
@@ -153,6 +162,21 @@ i3GEO.arvoreDeCamadas =
 			hasIcon : true,
 			enableHighlight : false
 		},
+		/**
+		 * Propriedade: INCLUILFUNDO
+		 *
+		 * Inclui ou n&atilde;o na &aacute;rvore as camadas do tipo baselayer (layers de fundo). Afeta apenas os mapas baseados no OpenLayers.
+		 * Ser&aacute; considerado como false caso exista no mapa outro local marcado para receber a lista de layers de fundo, ou seja,
+		 * ser&aacute; sempre false caso o i3Geo localize algum elemento HTML com id &quot;listaLayersBase&quot;
+		 *
+		 * Tipo:
+		 *
+		 * {boolean}
+		 *
+		 * Default:
+		 * true
+		 */		
+		INCLUILFUNDO : true,
 		/**
 		 * Propriedade: ATIVATEMA
 		 *
@@ -441,6 +465,20 @@ i3GEO.arvoreDeCamadas =
 		 * false
 		 */
 		LEGENDAEXPANDIDA : false,
+		/**
+		 * Propriedade: MOSTRATITULO
+		 *
+		 * Indica se o t&iacute;tulo da &aacute;rvore ser&aacute; inclu&iacute;do ou n&atilde;o
+		 *
+		 * Tipo:
+		 *
+		 * {boolean}
+		 *
+		 * Default:
+		 *
+		 * false
+		 */
+		MOSTRATITULO : true,
 		/**
 		 * Propriedade: OPCOESICONES
 		 *
@@ -763,7 +801,7 @@ i3GEO.arvoreDeCamadas =
 				i3GEO.arvoreDeCamadas.CAMADAS = "";
 				forca = false;
 			}
-			var temp, newVal, root, tempNode, titulo, d, c, ltema, temaNode, temaNodeFilho = "", i, j, n, nk, k, noGrupo, incluidos = [], grupoNode =
+			var temp, newVal, root, tempNode, titulo = "", d, c, ltema, temaNode, temaNodeFilho = "", i, j, n, nk, k, noGrupo, incluidos = [], grupoNode =
 				"", grupoLayers = i3GEO.configura.grupoLayers, textoTema = "";
 			//
 			// essa verificacao &eacute; necessaria quando a arvore &eacute; criada
@@ -804,14 +842,14 @@ i3GEO.arvoreDeCamadas =
 				buildTree();
 			})();
 			root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
-			titulo = "<table><tr><td><b>" + $trad("t1") + "</b></td><td>";
-			// titulo += i3GEO.arvoreDeCamadas.montaOpcoesArvore();
-			titulo += "</td></tr></table>";
+			if(i3GEO.arvoreDeCamadas.MOSTRATITULO === true){
+				titulo = $trad("t1");
+			}
 			tempNode = new YAHOO.widget.HTMLNode({
 				expanded : true,
 				html : titulo,
-				hasIcon : true,
-				enableHighlight : false
+				hasIcon : i3GEO.arvoreDeCamadas.MOSTRATITULO,
+				enableHighlight : true
 			}, root);
 			if (i3GEO.arvoreDeCamadas.OPCOESARVORE === true) {
 				new YAHOO.widget.HTMLNode({
@@ -861,6 +899,43 @@ i3GEO.arvoreDeCamadas =
 						if (typeof (console) !== 'undefined')
 							console.error(e);
 					}
+				}
+				//
+				//inclui os nos correspondentes aos layers base na interface Openlayers
+				//
+				if(i3GEO.Interface.ATUAL === "openlayers" && i3GEO.arvoreDeCamadas.INCLUILFUNDO === true){
+					c = i3GEO.Interface.openlayers.LAYERSADICIONAIS;
+					n = c.length;
+					k = "i3GEOarvCamTema";
+					// verifica se a versao do IE e menor que 9
+					if (navm && parseInt(YAHOO.env.ua.ie, 10) < 9) {
+						k = "i3GEOarvCamTemaIE";
+					}
+					temaNode = new YAHOO.widget.HTMLNode(
+						{
+							html : $trad("p16"),
+							isLeaf : false,
+							hasIcon : true
+						}, root
+					);
+					for (i = 0; i < n; i++) {
+						temp =
+							"<div class='" + k + "' onclick='i3GEO.Interface.openlayers.ativaFundo(\"" + c[i].name + "\")'>"
+							+ "<input name=layer type=checkbox ";
+						if(c[i].visibility === true){
+							temp += " checked ";
+						}
+						temp += " value='" + c[i].name + "' id='CK" + c[i].id + "'/>"
+							+ " <label for='CK" + c[i].id + "'>" + c[i].name + "</label></div>";
+						new YAHOO.widget.HTMLNode(
+							{
+								html : temp,
+								tipo : "fundo",
+								isLeaf : true,
+								hasIcon : false
+							}, temaNode
+						);
+					}	
 				}
 			} else {
 				nk = temas.length;

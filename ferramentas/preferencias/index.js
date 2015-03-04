@@ -139,6 +139,10 @@ i3GEOF.preferencias = {
 				titulo: $trad('arvoreCamadas',i3GEOF.preferencias.dicionario),//arvore de camadas
 				props: [
 					{
+						titulo: $trad('mostraTitulo',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.MOSTRATITULO"
+					},{
 						titulo: $trad('mostraBarraProgresso',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.BARRAPROGRESSO"

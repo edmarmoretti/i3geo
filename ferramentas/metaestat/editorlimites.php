@@ -114,7 +114,6 @@ include_once(dirname(__FILE__)."/../../ms_configura.php");
 
 <div id="i3GEOguiaMovel" style="visibility:hidden;position:absolute;display:block;border:0px solid white;text-align:left;z-index:2000;background-color:none">
 	<div style="cursor:pointer;position:absolute;top:50%;margin-top: -65px;width:30px;z-index:5000; left:18px;">
-		<img src='../../imagens/openbars1.png' style="width: 48px; position: absolute; left: -16px; height: 418px; top: -160px;">
 		<div id="iconeGuia_temas" ></div>
 		<div id="iconeGuia_adiciona" style="margin-top:3px;" ></div>
 		<div id="iconeGuia_legenda" style="margin-top:3px;"></div>
@@ -131,10 +130,6 @@ include_once(dirname(__FILE__)."/../../ms_configura.php");
 			<div id='guia1obj' style='display:none;' >
 				<!-- Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico -->
 				<div style='left:5px;top:10px;width:150px;' id=buscaRapida ></div>
-				<!--	Esta div acrescenta a lista de propriedades do mapa -->
-				<div id=listaPropriedades style='top:15px;' ></div>
-				<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
-				<div id=listaLayersBase style='top:15px;'></div>
 				<!--	Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
 				<div id=listaTemas style='top:15px;'></div>
 			</div>
@@ -178,6 +173,7 @@ i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
 i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
 i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
+i3GEO.arvoreDeCamadas.MOSTRATITULO = false;
 i3GEO.mapa.AUTORESIZE = true;
 i3GEO.guias.TIPO = "movel";
 i3GEO.guias.guiaMovel.config.topGuiaMovel = 36;

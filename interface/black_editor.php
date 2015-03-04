@@ -99,12 +99,7 @@
 			<div id='guia1obj' style='display:none;' >
 				<!-- Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico -->
 				<div style='left:5px;top:10px;width:150px;' id=buscaRapida ></div>
-				<!--	Esta div acrescenta a lista de propriedades do mapa -->
-				<!--<div id=listaPropriedades style='top:15px;' ></div>-->
-				<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
-				<div id=listaLayersBase style='top:15px;'></div>
-				<!--	Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
-				<div id=listaTemas style='top:15px;'></div>
+			<div id=listaTemas style='top:15px;'></div>
 			</div>
 			<div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
 			<div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
@@ -153,6 +148,7 @@
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
 		i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
 		i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
+		i3GEO.arvoreDeCamadas.MOSTRATITULO = true;
 		i3GEO.mapa.AUTORESIZE = true;
 		i3GEO.guias.TIPO = "movel";
 		i3GEO.guias.guiaMovel.config.topGuiaMovel = 36;

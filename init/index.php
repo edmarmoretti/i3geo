@@ -134,6 +134,7 @@ a {
 						echo "<p style='font-size:14px;color:red;margin-top:20px;'><script>document.write($"."trad(19,g_traducao_init));</script>";
 					}
 					?>
+					<br>
 					<div id="botoes" style=""></div>
 
 					<div class="r"><table><tbody><tr><td>

@@ -504,5 +504,10 @@ i3GEOF.preferencias.dicionario = {
 		pt : "Mostra o &iacute;cone que abre a janela com as v&aacute;rias ferramentas que atuam sobre o mapa",
 		en : "",
 		es : ""
+	} ],
+	'mostraTitulo' : [ {
+		pt : "Mostra o t&iacute;tulo da &aacute;rvore no n&oacute; raiz",
+		en : "",
+		es : ""
 	} ]
 };

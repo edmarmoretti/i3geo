@@ -160,12 +160,12 @@
 			var aquarela = new OpenLayers.Layer.OSM("Aquarela",
 					"http://tile.stamen.com/watercolor/${z}/${x}/${y}.jpg", {
 						isBaseLayer : true,
-						visibility : true
+						visibility : false
 					});
 			var osm = new OpenLayers.Layer.OSM("OSM",
 					"http://tile.openstreetmap.org/${z}/${x}/${y}.png", {
 						isBaseLayer : true,
-						visibility : false
+						visibility : true
 					});
 			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ osm, aquarela ];
 		})();

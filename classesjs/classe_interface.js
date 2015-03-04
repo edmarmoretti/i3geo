@@ -852,7 +852,12 @@ i3GEO.Interface =
 						// insere a lista de layers de fundo
 						//
 						temp = $i("listaLayersBase");
-						if (temp) {
+						if (temp && i3GEO.arvoreDeCamadas.INCLUILFUNDO === false) {
+							//
+							// torna false a variavel que pode permitir que as camadas de fundo
+							// sejam inseridas na arvore de camadas
+							//
+							i3GEO.arvoreDeCamadas.INCLUILFUNDO = false;
 							estilo = "cursor:pointer;vertical-align:top;padding-top:5px;";
 							if (navm) {
 								estilo = "border:0px solid white;cursor:pointer;vertical-align:middle;padding-top:0px;";
@@ -874,7 +879,7 @@ i3GEO.Interface =
 							}
 							i3GEO.util.arvore("<b>" + $trad("p16") + "</b>", "listaLayersBase", temp);
 						} else {
-							if (openlayers.GADGETS.LayerSwitcher === true) {
+							if (openlayers.GADGETS.LayerSwitcher === true && i3GEO.arvoreDeCamadas.INCLUILFUNDO === false) {
 								i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
 							}
 						}
@@ -1566,7 +1571,7 @@ i3GEO.Interface =
 			 * Define um dos layers existentes no mapa como baselayer
 			 */
 			ativaFundo : function(nome) {
-				var temp = i3geoOL.getLayersBy("name", nome);
+				var t,temp = i3geoOL.getLayersBy("name", nome),layers,layersn,i,status;
 				if (temp.length > 0) {
 					i3geoOL.setBaseLayer(temp[0]);
 					if (i3GEO.Interface.openlayers.OLpanzoombar) {
@@ -1583,6 +1588,30 @@ i3GEO.Interface =
 					i3GEO.Interface.openlayers.LAYERFUNDO = nome;
 				} else {
 					i3GEO.Interface.openlayers.LAYERFUNDO = "";
+				}
+				//
+				//verifica se existe um checkbox com o id do tema
+				//se existir, altera o status do checkbox
+				//e processa a lista de layers de fundo
+				//
+				t = $i("CK"+temp[0].id);
+				if(t){
+					status = true;
+					if(t.checked === false){
+						status = false;
+					}
+					//desativa todos
+					//aqui sao considerados apenas os layers em layersadicionais, pois esses que foram inseridos na arvore
+					layers = i3GEO.Interface.openlayers.LAYERSADICIONAIS;
+					layersn = layers.length;
+					for (i = 0; i < layersn; i++) {
+						if(layers[i].name != nome){
+							layers[i].setVisibility(false);
+							$i("CK"+layers[i].id).checked = false;
+						}
+					}
+					temp[0].setVisibility(!status);
+					t.checked = !status;
 				}
 			},
 			/**
