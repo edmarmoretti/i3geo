@@ -854,13 +854,13 @@ i3GEO.barraDeBotoes =
 				return;
 			}
 			try {
-				if (botao.tipo === "dinamico" && x) {
-					i3GEO.util.criaPin("i3geoMarcaIcone", i3GEO.configura.locaplic + "/imagens/gisicons/eudock/sobe1.png", "10px", "10px");
+				if (x) {
+					i3GEO.util.criaPin("i3geoMarcaIcone", i3GEO.configura.locaplic + "/imagens/dot1cinza.gif", "38px", "4px");
 					temp = $i("i3geoMarcaIcone");
 					if (temp) {
 						temp.style.display = "block";
-						temp.style.top = posY + 30 + "px";
-						temp.style.left = posX + 14 + "px";
+						temp.style.top = posY + 28 + "px";
+						temp.style.left = posX + "px";
 					}
 				}
 				if (botao.funcaoonclick) {
@@ -907,8 +907,10 @@ i3GEO.barraDeBotoes =
 				return;
 			}
 			// isso veio do js do eudock
+			/*
 			if (document.onmousemove)
 				euEnv.onmousemoveBK = document.onmousemove;
+
 			document.onmousemove = on_MouseMove;
 
 			if (document.onmousedown)
@@ -918,9 +920,11 @@ i3GEO.barraDeBotoes =
 			if (document.onmouseup)
 				euEnv.onmouseupBK = document.onmouseup;
 			document.onmouseup = on_MouseUp;
+			*/
 
 			if (document.onclick)
 				euEnv.onclickBK = document.onclick;
+
 			document.onclick = on_MouseClick;
 			euDimensioni();
 			offsEut();
@@ -1005,6 +1009,12 @@ i3GEO.barraDeBotoes =
 			$i(euEnv.euDockArray.euDock_0.bar.elementsArray.left.id).onclick = function() {
 				i3GEO.ajuda.ATIVAJANELA = true;
 				i3GEO.ajuda.abreJanela();
+			};
+			$i("euDock_0").onmouseout = function(){
+				var temp = $i("i3geoMarcaIcone");
+				if(temp){
+					temp.style.display = "none";
+				}
 			};
 			$i(euEnv.euDockArray.euDock_0.bar.elementsArray.right.id).onclick =
 				function() {
@@ -1505,7 +1515,6 @@ i3GEO.barraDeBotoes =
 				euEnv.euDockArray = [];
 				euEnv.Kost.num = 0;
 				if ($i("euDock_0_bar")) {
-					// document.body.removeChild($i("euDock_0_bar").parentNode);
 					$i("euDock_0_bar").parentNode.parentNode.removeChild($i("euDock_0_bar").parentNode);
 				}
 				i3GEO.barraDeBotoes.inicializaBarra();

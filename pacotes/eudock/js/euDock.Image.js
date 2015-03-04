@@ -91,7 +91,7 @@ if (!euEnv.imageBasePath)
 			this.getPosY   = function() {return document.getElementById(this.id).style.top.replace(/[^0-9]/g,"");};
 			this.setPosY   = function(y) {
 			if(container.id === "euDock_0"){
-					document.getElementById(this.id).style.top=(y - 10)+'px';
+				document.getElementById(this.id).style.top=(y - 10)+'px';
 				}
 				else{
 					document.getElementById(this.id).style.top= y + 'px';
