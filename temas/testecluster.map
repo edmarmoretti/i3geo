@@ -1,0 +1,120 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "host=10.1.2.25 port=5432 dbname=dbspo user=luiscrneves password=130670"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (
+SELECT
+geom,
+'1'::text AS cores,
+dbacoes_saude.tb_cnes_estabelecimento.no_fantasia,
+dbacoes_saude.tb_cnes_estabelecimento.no_logradouro,
+dbacoes_saude.tb_cnes_estabelecimento.nu_endereco,
+dbacoes_saude.tb_cnes_estabelecimento.no_bairro,
+dbacoes_saude.tb_cnes_estabelecimento.nu_telefone,
+dbacoes_saude.tb_cnes_estabelecimento.co_cep,
+dbgeral.tb_ibge.uf,
+dbgeral.tb_ibge.cidade,
+dbacoes_saude.tb_ubs_det.ano_ubs_det,
+dbacoes_saude.tb_ubs_det.mes_ubs_det,
+dbgeral.tb_estab_geo.co_cnes as co_cnes
+FROM
+dbacoes_saude.tb_ubs_det
+LEFT JOIN dbgeral.tb_estab_geo ON dbacoes_saude.tb_ubs_det.co_cnes = dbgeral.tb_estab_geo.co_cnes
+LEFT JOIN dbacoes_saude.tb_cnes_estabelecimento ON dbacoes_saude.tb_cnes_estabelecimento.co_cnes = dbacoes_saude.tb_ubs_det.co_cnes
+LEFT JOIN dbgeral.tb_ibge ON dbacoes_saude.tb_cnes_estabelecimento.co_ibge = dbgeral.tb_ibge.ibge
+WHERE
+dbacoes_saude.tb_ubs_det.func_total = 'S' and dbacoes_saude.tb_ubs_det.ano_ubs_det=2014 and dbacoes_saude.tb_ubs_det.mes_ubs_det=12    
+    ) as foo using unique co_cnes using srid=4674"
+    METADATA
+      "CLASSE"	"SIM"
+      "permitekmz"	"nao"
+      "permitedownload"	"sim"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "TEMA"	"Cluster"
+      "IDENTIFICA"	"SIM"
+      #"cache" "sim"
+    END
+    NAME "testecluster"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE POINT
+    UNITS METERS
+    CLUSTER
+     MAXDISTANCE 20  # in pixels
+     REGION "rectangle"  # can be rectangle or ellipse
+     #GROUP (expression)  # an expression to create separate groups for each value
+     #FILTER (expression) # a logical expression to specify the grouping condition
+	END
+	#CLASSITEM "Cluster_FeatureCount"
+    CLASS
+      NAME "= 1"
+      EXPRESSION ([Cluster:FeatureCount] = 1)
+      STYLE
+        COLOR 200 200 200
+        OUTLINECOLOR 200 200 200
+        SIZE 10
+        SYMBOL "ponto"
+      END
+    END
+    CLASS
+      NAME "> 1"
+      LABEL
+        FONT "arial"
+        SIZE 8
+        OFFSET 0 0
+        POSITION CC
+        TEXT "[Cluster:FeatureCount]"
+        TYPE TRUETYPE
+      END # LABEL
+      EXPRESSION (([Cluster:FeatureCount] > 1) AND ([Cluster:FeatureCount] <= 500))
+      STYLE
+        COLOR 230 230 230
+        OUTLINECOLOR 200 200 200
+        SIZE 20
+        SYMBOL "ponto"
+      END
+    END
+    CLASS
+      NAME "> 1"
+      LABEL
+        FONT "arial"
+        SIZE 8
+        OFFSET 0 0
+        POSITION CC
+        TEXT "[Cluster:FeatureCount]"
+        TYPE TRUETYPE
+      END # LABEL
+      EXPRESSION (([Cluster:FeatureCount] > 500) AND ([Cluster:FeatureCount] <= 1000))
+      STYLE
+        COLOR 240 240 240
+        OUTLINECOLOR 200 200 200
+        SIZE 28
+        SYMBOL "ponto"
+      END
+    END
+    CLASS
+      NAME "> 1"
+      LABEL
+        FONT "arial"
+        SIZE 8
+        OFFSET 0 0
+        POSITION CC
+        TEXT "[Cluster:FeatureCount]"
+        TYPE TRUETYPE
+      END # LABEL
+      EXPRESSION ([Cluster:FeatureCount] > 1000)
+      STYLE
+        COLOR 250 250 250
+        OUTLINECOLOR 200 200 200
+        SIZE 32
+        SYMBOL "ponto"
+      END
+    END
+ 
+  END
+
+END
+

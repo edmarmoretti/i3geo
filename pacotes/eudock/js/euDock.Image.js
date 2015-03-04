@@ -113,16 +113,6 @@ if (!euEnv.imageBasePath)
 				this.hide = function(){document.getElementById(this.id).style.visibility='hidden';};
 				this.show = function(){document.getElementById(this.id).style.visibility='visible';};
 
-				this.setFading = function(fad){
-					fad=Math.round(fad);
-					if (fad<0)
-						fad=0;
-					if (fad>100)
-						fad=100;
-					document.getElementById(this.id).style.opacity = (fad/100);
-					document.getElementById(this.id).style.filter = "alpha(opacity="+(fad)+");";
-				};
-				//alert(id)
 				if(container.id === "euDock_0"){
 					var classe = "eudockImagemBottom";
 					//a barra fica no topo do mapa
@@ -211,15 +201,6 @@ if (!euEnv.imageBasePath)
 			this.hide = function(){document.getElementById(this.id).style.visibility='hidden';};
 			this.show = function(){document.getElementById(this.id).style.visibility='visible';if (this.width && this.height)this.setDim(this.width,this.height);};
 
-			this.setFading = function(fad){
-				fad=Math.round(fad);
-				if (fad<0)
-					fad=0;
-				if (fad>100)
-					fad=100;
-        			document.getElementById(this.id).style.opacity = (fad/100);
-        			document.getElementById(this.id).style.filter = "alpha(opacity="+(fad)+");";
-			};
 
 			this.container.innerHTML+="<div id='"+this.id+"' style='position:absolute;'></div>";
 			document.getElementById(this.id).innerHTML=	"<img src='"+euEnv.imageBasePath+"blank.gif' id='"+this.id+"_IMG' style=\"top:0px;left:0px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+args.image+"',sizingMethod='scale');position:absolute;\">";
@@ -286,7 +267,6 @@ if (!euEnv.imageBasePath)
 				this.setDim(this.width,this.height);
 			};
 
-			this.setFading = function(fad){};
 
 			this.container.innerHTML+="<img src='"+euEnv.imageBasePath+"blank.gif' id='"+this.id+"' style='position:absolute;visibility:hidden;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\""+args.image+"\",sizingMethod=\"scale\");' >";
 			this.container.innerHTML+="<img onLoad='"+onLoadFunc+";' id='"+this.id+"_IMG_BAK' src='"+args.image+"' style='position:absolute;visibility:hidden;'>";

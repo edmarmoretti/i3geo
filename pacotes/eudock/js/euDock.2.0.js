@@ -222,7 +222,7 @@ var euOPAQUE      = 16;
 			novoel.style.position = "absolute";
 			
 			novoel.innerHTML = "<div id='"+this.id+"_bar' style='z-index:1;position:absolute;border:0px solid black;'></div>" +
-								"<div onMouseOut='euEnv.euDockArray."+this.id+".mouseOut();' onMouseOver='euEnv.euDockArray."+this.id+".mouseOver();' id='"+this.id+"' style='z-index:1;position:absolute;border:0px solid black; cursor: pointer;'></div>";
+								"<div id='"+this.id+"' style='z-index:1;position:absolute;border:0px solid black; cursor: pointer;'></div>";
 
 			if(onde){
 				novoel.style.zIndex = 100000;
@@ -231,6 +231,7 @@ var euOPAQUE      = 16;
 			else{
 				document.body.appendChild(novoel);
 			}
+
 			this.div   =document.getElementById(this.id);
 			this.divBar=document.getElementById(this.id+"_bar");
 			this.iconsArray=new Array();
@@ -510,157 +511,25 @@ var euOPAQUE      = 16;
 			};
 
 			this.kernel = function(){
-				if (this.isInside)
-					return this.kernelMouseOver();
-				else
-					return this.kernelMouseOut();
 			};
 
 			this.kernelMouseOver = function(){
-				var ret=false;
-				var overI = -1;
-				var mouseRelX = this.getMouseRelativeX();
-				var mouseRelY = this.getMouseRelativeY();
-				var mediana;
-				var border;
-				var frameTo;
-				var venusWidth;
-				var venusHeight;
-				var overIcon;
-				var temp;
-				if (this.position==euUP || this.position==euDOWN || this.position==euHORIZONTAL){
-					venusWidth = this.getVenusWidth();
-					for (var i in this.iconsArray) if (this.iconsArray[i].id)
-						if (this.iconsArray[i].isInsideX(mouseRelX)){
-							overIcon=i;
-							border=this.iconsArray[i].getWidth()/2;
-							if (this.animaition==euICON){
-								mouseRelX  = this.iconsArray[i].posX+border;
-								border=0;
-							}
-							try{
-								temp = $i(this.iconsArray[i].elementsArray[0].id);
-								if(temp)
-								{i3GEO.barraDeBotoes.mostraJanela(temp,this.iconsArray[i].dica);}
-								//euDockMensagem é um div criado pelo i3Geo logo abaixo da barra de botões
-								$i("euDockMensagem").innerHTML = this.iconsArray[i].titulo;
-							}
-							catch(e){}
-						}
-					for (var i in this.iconsArray) if (this.iconsArray[i].id){
-						mediana = this.iconsArray[i].posX+this.iconsArray[i].getWidth()/2;
-						if (Math.abs(mediana-mouseRelX)<=border)
-							mediana=mouseRelX;
-						else if (mediana<mouseRelX)
-							mediana+=this.iconsArray[i].getWidth()/2;
-						else if (mediana>mouseRelX)
-							mediana-=this.iconsArray[i].getWidth()/2;
-						if (this.animaition==euICON  && Math.abs(i-overIcon)<=this.venusHillSize)
-							frameTo = this.venusHillTrans(1-Math.abs(i-overIcon)/this.venusHillSize);
-						else if (this.animaition==euMOUSE && Math.abs(mediana-mouseRelX)<=venusWidth)
-							frameTo = this.venusHillTrans(1-Math.abs(mediana-mouseRelX)/venusWidth);
-						else
-							frameTo = 0;
-
-						if (frameTo==0 || frameTo==1 || Math.abs(frameTo-this.iconsArray[i].frame)>0.01)
-							ret|=this.iconsArray[i].setFrameTo(frameTo);
-
-						if (this.animFading==euABSOLUTE)
-							if (this.iconsArray[i].isInsideX(mouseRelX))
-								ret|=this.iconsArray[i].setFadingTo(1);
-							else
-								ret|=this.iconsArray[i].setFadingTo(0);
-						else
-							ret|=this.iconsArray[i].setFadingTo(frameTo);
-
-					}
-				}else{
-					venusHeight = this.getVenusHeight();
-					for (var i in this.iconsArray) if (this.iconsArray[i].id)
-						if (this.iconsArray[i].isInsideY(mouseRelY)){
-							overIcon=i;
-							border=this.iconsArray[i].getHeight()/2;
-							if (this.animaition==euICON){
-								mouseRelY  = this.iconsArray[i].posY+border;
-								border=0;
-							}
-						}
-					for (var i in this.iconsArray) if (this.iconsArray[i].id){
-						mediana = this.iconsArray[i].posY+this.iconsArray[i].getHeight()/2;
-						if (Math.abs(mediana-mouseRelY)<=border)
-							mediana=mouseRelY;
-						else if (mediana<mouseRelY)
-							mediana+=this.iconsArray[i].getHeight()/2;
-						else if (mediana>mouseRelY)
-							mediana-=this.iconsArray[i].getHeight()/2;
-						if (this.animaition==euICON  && Math.abs(i-overIcon)<=this.venusHillSize)
-							frameTo = this.venusHillTrans(1-Math.abs(i-overIcon)/this.venusHillSize);
-						else if (this.animaition==euMOUSE && Math.abs(mediana-mouseRelY)<=venusHeight)
-							frameTo = this.venusHillTrans(1-Math.abs(mediana-mouseRelY)/venusHeight);
-						else
-							frameTo = 0;
-
-						if (frameTo==0 || frameTo==1 || Math.abs(frameTo-this.iconsArray[i].frame)>0.01)
-							ret|=this.iconsArray[i].setFrameTo(frameTo);
-
-						if (this.animFading==euABSOLUTE)
-							if (this.iconsArray[i].isInsideY(mouseRelY))
-								ret|=this.iconsArray[i].setFadingTo(1);
-							else
-								ret|=this.iconsArray[i].setFadingTo(0);
-						else
-							ret|=this.iconsArray[i].setFadingTo(frameTo);
-
-					}
-				}
-				if (ret)
-					this.updateDims();
-				return ret;
 			};
 
 			this.kernelMouseOut = function(){
-				//i3GEO.barraDeBotoes.mostraJanela("","");
-				var ret=false;
-				for (var i in this.iconsArray){
-					if (this.iconsArray[i].id)
-					ret|=this.iconsArray[i].setAllFrameTo(0);
-					if (ret){
-						this.updateDims();
-					}
-				}
-				return ret;
 			};
 
 			this.mouseOut = function(){
-				$i("euDockMensagem").innerHTML = "";
-				this.isInside=false;
-				euEnv.exeThreadWhiteLoop=5;
 			};
 
 			this.mouseOver = function(){
-				this.isInside=true;
-				euEnv.exeThreadWhiteLoop=5;
 			};
 
 			this.mouseMove = function(x,y){
-				var inside = isEuInside(this.div,x,y);
-				var ret = (this.mouseX!=x || this.mouseY!=y) && inside;
-
-				this.mouseX=x;
-				this.mouseY=y;
-
-
-				if (inside!=this.isInside){
-					this.isInside=inside;
-					ret=true;
-				}
-
-				for (var i in this.iconsArray) if (this.iconsArray[i].id)
-						ret|=this.iconsArray[i].isRunning();
-				return ret;
 			};
 
 			this.iconParams=new Array();
+
 			this.setAllFrameStep = function(step){
 				this.iconParams.frameStep=step;
 				for (var i in this.iconsArray) if (this.iconsArray[i].id)
@@ -668,20 +537,12 @@ var euOPAQUE      = 16;
 			};
 
 			this.setAllZoomFunc = function(func){
-				this.setAllZoomFuncW(func);
-				this.setAllZoomFuncH(func);
 			};
 
 			this.setAllZoomFuncW = function(func){
-				this.iconParams.zoomFuncW=func;
-				for (var i in this.iconsArray) if (this.iconsArray[i].id)
-					this.iconsArray[i].zoomFuncW=func;
 			};
 
 			this.setAllZoomFuncH = function(func){
-				this.iconParams.zoomFuncH=func;
-				for (var i in this.iconsArray) if (this.iconsArray[i].id)
-					this.iconsArray[i].zoomFuncH=func;
 			};
 
 			this.setBar = function(args){
@@ -693,8 +554,6 @@ var euOPAQUE      = 16;
 			};
 
 			this.addIcon = function(args,params){
-				//if(!id)
-				//{var id = 'euDock_icon_'+euEnv.Kost.next();}
 				var i,id = params.id;
 				var id = 'euDock_icon_'+euEnv.Kost.next();
 				euEnv.euDockArray[id] = new euDockIcon(id,this);
@@ -764,37 +623,10 @@ var euOPAQUE      = 16;
 			};
 
 			this.updateFading = function(){
-				if (!this.loaded)return;
-				var stato = this.fadingFrame*(this.elementsArray.length-1);
-				var prev  = Math.floor(stato);
-				var next  = Math.ceil( stato);
-				var fading=0;
-				for (var i=0;i<this.elementsArray.length;i++){
-					if (this.fadingType==euFIXED){
-						if (i==next)
-							fading=100-100*(i-stato);
-						else if (i<next)
-							fading=100;
-						else
-							fading=0;
-					}else{
-						if (i==next)
-							fading=100-100*(i-stato);
-						else if (i==prev){
-							if (this.fadingType==euTRANSPARENT)
-								fading=100-100*(stato-i);
-							else
-								fading=100;
-						}else
-							fading=0;
-					}
-					this.elementsArray[i].setFading(fading);
-				}
 			};
 
 			this.refresh = function(){
 				this.updateDims();
-				this.updateFading();
 			};
 
 			this.isAbsoluteInside = function(x,y){
@@ -854,50 +686,15 @@ var euOPAQUE      = 16;
 			this.getWidth  = function()  {
 				if (!this.loaded)return 0;
 				var calc = this.width*this.zoomFuncW(this.frame);
-				//calc -= 5;
-				if (calc < 38)
-				{calc = 38;}
-				return calc;
+				return 38;
 			};
 			this.getHeight = function()  {
 				if (!this.loaded)return 0;
-				var calc = this.height*this.zoomFuncH(this.frame);
-				//calc -= 5;
-				if (calc < 38)
-				{calc = 38;}
-				return calc;
+				return 38;
 			};
 
 			this.isRunning = function(){
 				return this.runningFrame || this.runningFading;
-			};
-
-			this.setAllFrameTo = function(to){
-				this.setFadingTo(to);
-				this.setFrameTo(to) ;
-				return this.isRunning();
-			};
-
-			this.setFadingTo = function(fadingTo){
-				if (this.fadingFrame==fadingTo)
-					this.runningFading = false;
-				else{
-					if (this.fadingFrame>fadingTo)
-						this.fadingFrame-=this.fadingStep;
-					else
-						this.fadingFrame+=this.fadingStep;
-
-					this.runningFading = true;
-
-					if (Math.abs(this.fadingFrame-fadingTo)<this.fadingStep)
-						this.fadingFrame=fadingTo;
-
-					if (this.fadingFrame<0)
-						this.fadingFrame = 0;
-					if (this.fadingFrame>1)
-						this.fadingFrame = 1;
-				}
-				return this.runningFading;
 			};
 
 			this.setFrameTo = function(frameTo){
@@ -947,16 +744,7 @@ var euOPAQUE      = 16;
 
 			this.mouseClick = function(x,y){
 				if (this.isAbsoluteInside(x,y)){
-					if (this.link)
-						if (this.target){
-							if (top.frames[this.target])
-								top.frames[this.target].location.href=this.link;
-							else
-								top.frames[this.target] = window.open(this.link,this.target,"");
-						}else
-							document.location.href=this.link;
-					else if (this.mouseInsideClick)
-						this.mouseInsideClick(x,y,this.id,this.getAbsolutePosX(),this.getAbsolutePosY());
+					this.mouseInsideClick(x,y,this.id,this.getAbsolutePosX(),this.getAbsolutePosY());
 				}
 			};
 
@@ -1078,66 +866,20 @@ var euOPAQUE      = 16;
  ****************************************
  */
 function euThread(){
-	euDimensioni();
-	offsEut();
-    euEnv.timeout=window.setTimeout("euThread();",euEnv.refreshTime);
-
-    euEnv.exeThread = false;
-    if (euEnv && euEnv.mouseMoved)
-		for (var i in euEnv.euDockArray)
-			if (euEnv.euDockArray[i].mouseMove)
-				euEnv.exeThread |= euEnv.euDockArray[i].mouseMove(euEnv.euScrOfX+euEnv.x,euEnv.euScrOfY+euEnv.y);
-	euEnv.mouseMoved=false;
-	if (euEnv.exeThread)
-		euEnv.exeThreadWhiteLoop=5;
-
-    if(euEnv.exeThreadWhiteLoop>0)
-    	euKernel();
-
-	for (var i in euEnv.euDockArray)
-		if (euEnv.euDockArray[i].riposition)
-			euEnv.euDockArray[i].riposition();
 };
 
 function euKernel(){
-	euEnv.exeThread = false;
-	for (var i in euEnv.euDockArray)
-		if (euEnv.euDockArray[i].kernel)
-			euEnv.exeThread |= euEnv.euDockArray[i].kernel();
-
-	if (euEnv.exeThread)
-		euEnv.exeThreadWhiteLoop=5;
-	else
-		euEnv.exeThreadWhiteLoop--;
 };
 
 function on_MouseMove(e) {
-	if (!e) var e = window.event;
-	euEnv.x = e.clientX;
-	euEnv.y = e.clientY;
-	euEnv.mouseMoved = true;
-	//if (euEnv.onmousemoveBK)
-		//return euEnv.onmousemoveBK(e);
 	return true;
 };
 
 function on_MouseDown(e) {
-	if (!e) var e = window.event;
-	for (var i in euEnv.euDockArray)
-		if (euEnv.euDockArray[i].mouseDown)
-			euEnv.exeThread |= euEnv.euDockArray[i].mouseDown(euEnv.euScrOfX+e.clientX,euEnv.euScrOfY+e.clientY);
-	//if (euEnv.onmousedownBK)
-		//return euEnv.onmousedownBK(e);
 	return true;
 };
 
 function on_MouseUp(e) {
-	if (!e) var e = window.event;
-	for (var i in euEnv.euDockArray)
-		if (euEnv.euDockArray[i].mouseUp)
-			euEnv.exeThread |= euEnv.euDockArray[i].mouseUp(euEnv.euScrOfX+e.clientX,euEnv.euScrOfY+e.clientY);
-	//if (euEnv.onmouseupBK)
-		//return euEnv.onmouseupBK(e);
 	return true;
 };
 
@@ -1146,32 +888,6 @@ function on_MouseClick(e) {
 	for (var i in euEnv.euDockArray)
 		if (euEnv.euDockArray[i].mouseClick)
 			euEnv.exeThread |= euEnv.euDockArray[i].mouseClick(euEnv.euScrOfX+e.clientX,euEnv.euScrOfY+e.clientY);
-	//if (euEnv.onclickBK)
-		//return euEnv.onclickBK(e);
 	return true;
 };
-//comentario adicionado por edmar moretti
-//a inicializacao foi incluida em classe_barradebotoes.js
-/*
 
-	if (document.onmousemove)
-		euEnv.onmousemoveBK = document.onmousemove;
-	document.onmousemove  = on_MouseMove;
-
-	if (document.onmousedown)
-		euEnv.onmousedownBK = document.onmousedown;
-	document.onmousedown  = on_MouseDown;
-
-	if (document.onmouseup)
-		euEnv.onmouseupBK = document.onmouseup;
-	document.onmouseup    = on_MouseUp;
-
-	if (document.onclick)
-		euEnv.onclickBK = document.onclick;
-	document.onclick      = on_MouseClick;
-
-	euDimensioni();
-	offsEut();
-	euThread();
-}
-*/
