@@ -848,12 +848,13 @@ i3GEO.barraDeBotoes =
 			if (i3GEO.barraDeBotoes.ATIVA === false) {
 				return;
 			}
-			var temp, botao = i3GEO.barraDeBotoes.defBotao(id);
+			var botao = i3GEO.barraDeBotoes.defBotao(id);
 			i3GEO.barraDeBotoes.BOTAOCLICADO = id;
 			if (botao === false) {
 				return;
 			}
 			try {
+				/*
 				if (x) {
 					i3GEO.util.criaPin("i3geoMarcaIcone", i3GEO.configura.locaplic + "/imagens/dot1cinza.gif", "38px", "4px");
 					temp = $i("i3geoMarcaIcone");
@@ -863,6 +864,7 @@ i3GEO.barraDeBotoes =
 						temp.style.left = posX + "px";
 					}
 				}
+				*/
 				if (botao.funcaoonclick) {
 					botao.funcaoonclick.call();
 				}
@@ -998,6 +1000,7 @@ i3GEO.barraDeBotoes =
 							}
 						}), {
 						mouseInsideClick : function(x, y, id, posX, posY) {
+							i3GEO.util.animaClique($i(euEnv.euDockArray[id].elementsArray[0].id));
 							i3GEO.barraDeBotoes.execBotao(euEnv.euDockArray[id].idBotao, x, y, posX, posY);
 						},
 						idBotao : chaves[i],
@@ -1010,19 +1013,21 @@ i3GEO.barraDeBotoes =
 				i3GEO.ajuda.ATIVAJANELA = true;
 				i3GEO.ajuda.abreJanela();
 			};
+			/*
 			$i("euDock_0").onmouseout = function(){
 				var temp = $i("i3geoMarcaIcone");
 				if(temp){
 					temp.style.display = "none";
 				}
 			};
+			*/
 			$i(euEnv.euDockArray.euDock_0.bar.elementsArray.right.id).onclick =
 				function() {
 					var dica, titulo, chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO), n = chaves.length, nb =
 						euEnv.euDockArray.euDock_0.iconsArray.length, i;
-					if ($i("i3geoMarcaIcone")) {
-						$i("i3geoMarcaIcone").style.display = "none";
-					}
+					//if ($i("i3geoMarcaIcone")) {
+					//	$i("i3geoMarcaIcone").style.display = "none";
+					//}
 					// a barra j&aacute; foi expandida
 					if (nb !== i3GEO.barraDeBotoes.MAXBOTOES) {
 						i3GEO.barraDeBotoes.recria();
@@ -1518,9 +1523,9 @@ i3GEO.barraDeBotoes =
 					$i("euDock_0_bar").parentNode.parentNode.removeChild($i("euDock_0_bar").parentNode);
 				}
 				i3GEO.barraDeBotoes.inicializaBarra();
-				if ($i("i3geoMarcaIcone")) {
-					$i("i3geoMarcaIcone").style.display = "none";
-				}
+				//if ($i("i3geoMarcaIcone")) {
+				//	$i("i3geoMarcaIcone").style.display = "none";
+				//}
 				return;
 			}
 			var i, n, temp, novoel, barraZoom, x, y, BARRAS = i3GEO.barraDeBotoes.BARRAS, iu = i3GEO.util;

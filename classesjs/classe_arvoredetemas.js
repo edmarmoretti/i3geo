@@ -2172,18 +2172,18 @@ i3GEO.arvoreDeTemas = {
 		if (OPCOESADICIONAIS.refresh === true) {
 			ins += "<td><img "
 					+ estilo("i3geo_refresh2")
-					+ " onclick='i3GEO.arvoreDeTemas.atualiza()' title='Refresh'/></td>";
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.atualiza()' title='Refresh'/></td>";
 			t += 20;
 		}
 		if (OPCOESADICIONAIS.uploadarquivo === true) {
 			ins += "<td><img "
 					+ estilo("conectarwms")
-					+ " onclick='i3GEO.arvoreDeTemas.dialogo.conectaservico()' title='"
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.conectaservico()' title='"
 					+ $trad("a15") + "'/></td>";
 			t += 20;
 			ins += "<td><img "
 					+ estilo("upload")
-					+ " onclick='i3GEO.arvoreDeTemas.dialogo.uploadarquivo()' title='"
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.uploadarquivo()' title='"
 					+ $trad("a14") + "'/></td>";
 			t += 20;
 		} else {
@@ -2241,47 +2241,47 @@ i3GEO.arvoreDeTemas = {
 		if (OPCOESADICIONAIS.downloadbase === true) {
 			ins += "<td><img "
 					+ estilo("download")
-					+ " onclick='i3GEO.arvoreDeTemas.dialogo.downloadbase()' title='"
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.downloadbase()' title='"
 					+ $trad("a3") + "'/></td>";
 			t += 20;
 		}
 		if (OPCOESADICIONAIS.importarwmc === true) {
 			ins += "<td><img "
 					+ estilo("importarwmc")
-					+ " onclick='i3GEO.arvoreDeTemas.dialogo.importarwmc()' title='"
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.importarwmc()' title='"
 					+ $trad("a3a") + "'/></td>";
 			t += 20;
 		}
 		if (OPCOESADICIONAIS.nuvemTags === true) {
 			ins += "<td><img "
 					+ estilo("nuvemtags")
-					+ " onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTags()' title='"
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.nuvemTags()' title='"
 					+ $trad("a5a") + "'/></td>";
 			t += 20;
 		}
 		if (OPCOESADICIONAIS.nuvemTagsFlash === true) {
 			ins += "<td><img "
 					+ estilo("nuvemtags")
-					+ " onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTagsFlash()' title='"
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.nuvemTagsFlash()' title='"
 					+ $trad("a5a") + "'/></td>";
 			t += 20;
 		}
 		if (OPCOESADICIONAIS.carousel === true) {
 			ins += "<td><img "
 					+ estilo("carouselTemas")
-					+ " onclick='i3GEO.arvoreDeTemas.dialogo.carouselTemas()' title='Miniaturas'/></td>";
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.carouselTemas()' title='Miniaturas'/></td>";
 			t += 20;
 		}
 		if (OPCOESADICIONAIS.inde === true) {
 			ins += "<td><img "
 					+ estilo("buscaInde")
-					+ " onclick='i3GEO.arvoreDeTemas.dialogo.buscaInde()' title='Pesquisa na INDE'/></td>";
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.buscaInde()' title='Pesquisa na INDE'/></td>";
 			t += 20;
 		}
 		if (OPCOESADICIONAIS.metaestat === true) {
 			ins += "<td><img "
 					+ estilo("iconeMetaestat")
-					+ " onclick='i3GEO.mapa.dialogo.metaestat()' title='Cartogramas estatisticos'/></td>";
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.mapa.dialogo.metaestat()' title='Cartogramas estatisticos'/></td>";
 			t += 20;
 		}
 		return ("<table width='" + t + "px' ><tr>" + ins + "</tr></table>");

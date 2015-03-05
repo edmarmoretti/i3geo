@@ -3311,6 +3311,21 @@ i3GEO.util =
 			},
 			limpa : function() {
 			}
+		},
+		/**
+		 * Function: animaCique
+		 * 
+		 * Aplica um efeito sobre um elemento quando e feito o clique
+		 * 
+		 * Parametres:
+		 * 
+		 * {objeto dom}
+		 */
+		animaClique : function (obj){
+			obj.style.visibility = "hidden";
+			setTimeout(function(){
+				obj.style.visibility = "visible";
+			},200);
 		}
 	};
 
