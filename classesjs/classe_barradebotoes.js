@@ -1010,8 +1010,9 @@ i3GEO.barraDeBotoes =
 				}
 			}
 			$i(euEnv.euDockArray.euDock_0.bar.elementsArray.left.id).onclick = function() {
-				i3GEO.ajuda.ATIVAJANELA = true;
-				i3GEO.ajuda.abreJanela();
+				//i3GEO.ajuda.ATIVAJANELA = true;
+				//i3GEO.ajuda.abreJanela();
+				i3GEO.barraDeBotoes.ajudaEmLista();
 			};
 			/*
 			$i("euDock_0").onmouseout = function(){
@@ -1706,6 +1707,24 @@ i3GEO.barraDeBotoes =
 			if ($i("divMensagemBarraDeBotoes")) {
 				YAHOO.util.Dom.setStyle("divMensagemBarraDeBotoes", "display", "none");
 			}
+		},
+		/**
+		 * Abre uma janela com a descricao de cada botao
+		 */
+		ajudaEmLista : function(){
+			var n,i, ins = "",b;
+			n = i3GEO.barraDeBotoes.LISTABOTOES.length;
+			ins += "<table class=lista8 >";
+			for(i = 0; i < n; i++){
+				b = i3GEO.barraDeBotoes.LISTABOTOES[i];
+				if(i3GEO.barraDeBotoes.INCLUIBOTAO[b.iddiv] === true){
+					if(b.dica != ""){
+						ins += "<tr><td><img src='" + i3GEO.configura.locaplic + "/" + i3GEO.barraDeBotoes.ICONEBOTAO[b.iddiv] + "' /></td><td>" + b.dica + "</td></tr>";
+					}
+				}
+			}
+			ins += "</table>";
+			i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>"+ins+"</div>","");
 		},
 		/**
 		 * Section: i3GEO.barraDeBotoes.editor

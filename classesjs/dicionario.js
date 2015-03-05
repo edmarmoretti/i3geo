@@ -1167,10 +1167,10 @@ g_traducao = {
 }],
 "d7a":[
 {
-	pt:"Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Ap&oacute;s ativada, pare o mouse por alguns instantes no ponto desejado ou clique sobre o mesmo.",
-	en:"Displays information about a point on the map. After activated, stop the mouse for a moment at the desired point or click on it.",
-	es:"Muestra informaci&oacute;n sobre un punto en el mapa. Despu&eacute;s de activarse, detenga el rat&oacute;n por un momento en el punto deseado o haga click en &eacute;l.",
-	it:"Mostra gli informazioni su un punto sulla mappa. Dopo averla attivata, fermare il mouse per qualche istante nel punto desiderato o fare clic su di esso."
+	pt:"Mostra informa&ccedil;&otilde;es resumidas sobre um ponto clicado no mapa. N&atilde;o &eacute; necess&aacute;rio clicar nesse &iacute;cone para ativar, basta clicar no mapa a qualquer tempo.",
+	en:"",
+	es:"",
+	it:""
 }],
 "d7at":[
 {
@@ -2334,6 +2334,12 @@ g_traducao = {
 "removerDoMapa": [
 {
 	pt: "Remove a camada do mapa?",
+	en:"",
+	es:""
+}],
+"dicaBuscaRapida": [
+{
+	pt: "Abre uma janela flutuante com op&ccedil;&otilde;es de busca de dados em servi&ccedil;os como o Google Maps ou nas camadas exsitentes no mapa",
 	en:"",
 	es:""
 }]

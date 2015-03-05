@@ -1230,7 +1230,7 @@ i3GEO.configura =
 					// Ativa o bot&atilde;o que realiza a opera&ccedil;&atilde;o de busca r&aacute;pida
 					iddiv : "localizar",
 					tipo : "",
-					dica : $trad("o2"),
+					dica : $trad("dicaBuscaRapida"),
 					titulo : $trad("o2"),
 					funcaoonclick : function() {
 						if (!$i("janelaBuscaRapida")) {

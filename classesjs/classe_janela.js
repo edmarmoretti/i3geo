@@ -1016,6 +1016,9 @@ i3GEO.janela =
 			if(!altura){
 				altura = 300;
 			}
+			if(!cabecalho){
+				cabecalho = "";
+			}
 			janela = new YAHOO.widget.SimpleDialog(YAHOO.util.Dom.generateId(), {
 				width : parseInt(largura,10) + "px",
 				height : parseInt(altura,10) + "px",
