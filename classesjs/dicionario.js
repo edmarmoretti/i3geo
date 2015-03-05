@@ -2330,6 +2330,12 @@ g_traducao = {
 	pt: "s&oacute; legenda",
 	en:"",
 	es:""
+}],
+"removerDoMapa": [
+{
+	pt: "Remove a camada do mapa?",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

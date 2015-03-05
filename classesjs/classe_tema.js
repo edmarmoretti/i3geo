@@ -51,8 +51,17 @@ i3GEO.tema =
 		 * Parametros:
 		 *
 		 * {string} - codigo do tema
+		 * 
+		 * {boolean} - confirma exclusao
 		 */
-		exclui : function(tema) {
+		exclui : function(tema,confirma) {
+			if(confirma && confirma === true){
+				i3GEO.janela.confirma($trad("removerDoMapa"), 300, $trad("x14"),
+					"", function() {
+						i3GEO.tema.exclui(tema);
+					});
+				return;
+			}
 			// remove o tema do DOM e seus filhos
 			try {
 				try {

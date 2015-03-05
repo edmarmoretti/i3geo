@@ -1680,7 +1680,7 @@ i3GEO.arvoreDeCamadas =
 			if (funcoes.excluir === true) {
 				html +=
 					"&nbsp;<img class='arvCamRemoveLayer' src='" + imb + "' title='" + $trad("t12") + "' onclick='i3GEO.util.animaClique(this);i3GEO.tema.exclui(\""
-						+ tema.name + "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t12a")
+						+ tema.name + "\",true)' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t12a")
 						+ "','exclui')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
 			}
 			if ((tema.zoomtema.toLowerCase() === "sim") && (funcoes.zoomtema === true)) {

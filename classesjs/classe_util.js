@@ -3325,7 +3325,7 @@ i3GEO.util =
 			obj.style.visibility = "hidden";
 			setTimeout(function(){
 				obj.style.visibility = "visible";
-			},200);
+			},50);
 		}
 	};
 
