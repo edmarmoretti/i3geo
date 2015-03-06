@@ -31,7 +31,7 @@
  * propriedades colocando um c&oacute;digo como o seguinte no javascript
  * utilizado na interface de mapa que estiver sendo utilizada
  *
- * i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;
+ * i3GEO.arvoreDeCamadas.INCLUILFUNDO = false;
  *
  * Veja:
  *
@@ -59,7 +59,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-//XODO incluir opcao para adicionar a arvore as camadas de fundo
 i3GEO.arvoreDeCamadas =
 	{
 		/**
@@ -113,7 +112,7 @@ i3GEO.arvoreDeCamadas =
 		 * {objeto}
 		 */
 		CAMADAS : "",
-		// TODO remover em 6.1
+		//TODO remover em 6.1
 		/**
 		 * Propriedade: FINALIZA
 		 *
@@ -311,129 +310,39 @@ i3GEO.arvoreDeCamadas =
 		 */
 		ARRASTARORDEM : true,
 		/**
-		 * Propriedade: REFRESH
-		 *
-		 * Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite atualizar a &acute;rvore
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
+		 * depreciado em 6.0
 		 */
 		REFRESH : true,
 		/**
-		 * Propriedade: ARRASTARLIXEIRA
-		 *
-		 * Ativa a op&ccedil;&atilde;o de arrastar um tema para a lixeria quando se quer remov&ecirc;-lo do mapa.
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
+		 * depreciado em 6.0
 		 */
 		ARRASTARLIXEIRA : true,
 		/**
-		 * Propriedade: ALTERAOPACIDADE
-		 *
-		 * Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite alterar a transpar&ecirc;ncia das camadas existentes no mapa
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
+		 * depreciado em 6.0
 		 */
 		ALTERAOPACIDADE : false,
 		/**
-		 * Propriedade: FERRAMENTAS
-		 *
-		 * Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite abrir os atalhos para as ferramentas que atuam sobre o mapa
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
+		 * depreciado em 6.0
 		 */
 		FERRAMENTAS : true,
 		/**
-		 * Propriedade: IMPRIMIR
-		 *
-		 * Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite abrir a ferramenta de impress&atilde;o
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
+		 * depreciado em 6.0
 		 */
 		IMPRIMIR : false,
 		/**
-		 * Propriedade: ANIMAMAPA
-		 *
-		 * Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite gerar uma anima&ccedil;&atilde;o do mapa, ligando e desligando camadas
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
+		 * depreciado em 6.0
 		 */
 		ANIMAMAPA : false,
 		/**
-		 * Propriedade: LIGARDESLIGARTODOS
-		 *
-		 * Mostra os &iacute;cones de desligar/ligar todos os temas.
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
+		 * depreciado em 6.0
 		 */
 		LIGARDESLIGARTODOS : true,
 		/**
-		 * Propriedade: FILTRAR
-		 *
-		 * Mostra o &iacute;cone para filtrar as camadas.
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
+		 * depreciado em 6.0
 		 */
 		FILTRAR : true,
 		/**
-		 * Propriedade: ABRELEGENDA
-		 *
-		 * Mostra o &iacute;cone para abrir a legenda do mapa.
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
+		 * depreciado em 6.0
 		 */
 		ABRELEGENDA : true,
 		/**
@@ -494,17 +403,7 @@ i3GEO.arvoreDeCamadas =
 		 */
 		OPCOESICONES : true,
 		/**
-		 * Propriedade: OPCOESTEMAS
-		 *
-		 * Inclui ou n&atilde;o o n&oacute; com as op&ccedil;&otilde;es de manipula&ccedil;&atilde;o de cada tema.
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
+		 * depreciado em 6.0
 		 */
 		OPCOESTEMAS : true,
 		/**
@@ -568,70 +467,7 @@ i3GEO.arvoreDeCamadas =
 		 */
 		ICONETEMA : true,
 		/**
-		 * Propriedade: FUNCOES
-		 *
-		 * Indica&ccedil;&atilde;o de quais fun&ccedil;&otilde;es ser&atilde;o inclu&iacute;das em cada tema mostrado na &aacute;rvore
-		 * quando o usu&aacute;rio aciona o item "op&ccedil;&otilde;es"
-		 *
-		 * Al&eacute;m de definir o item como false ou true, algumas fun&ccedil;&otilde;es apenas s&atilde;o mostradas em conformidade com o
-		 * tipo de camada. No sistema de administra&ccedil;&atilde;o, pode-se tamb&eacute;m controlar algumas das fun&ccedil;&otilde;es,
-		 * como por exemplo "sql", "wms" e "temporizador"
-		 *
-		 * Exemplo de como alterar um valor diretamente no javascript da interface do mapa
-		 *
-		 * i3GEO.arvoreDeCamadas.FUNCOES.excluir = false;
-		 *
-		 * i3GEO.arvoreDeCamadas.FUNCOES.farolescala = false;
-		 *
-		 * farolescala - mostra o &iacute;cone que indica se a escala atual do mapa &eacute; compat&iacute;vel com a escala da camada
-		 *
-		 * excluir - mostra o &iacute;cone que permite excluir uma camada da &aacute;rvore
-		 *
-		 * sobe - mostra o &iacute;cone para subir uma camada na ordem de camadas
-		 *
-		 * desce - mostra o &iacute;cone para descer uma camada na ordem de camadas
-		 *
-		 * fonte - mostra o &iacute;cone que abre a janela contendo a fonte da camada
-		 *
-		 * zoomtema - mostra o &iacute;cone que permite fazer o zoom para o tema
-		 *
-		 * compartilhar - mostra os bot&otilde;es de compartilhamento em redes sociais
-		 *
-		 * opacidade - ajuste de opacidade da camada
-		 *
-		 * mudanome - op&ccedil;&atilde;o para mudar o nome da camada
-		 *
-		 * procurar - abre a ferramenta de busca de dados
-		 *
-		 * toponimia - abre a ferramenta de inclus&atilde;o de laels nos elementos de uma camada
-		 *
-		 * etiquetas - abre a ferramenta que permite definir que colunas da tabela de atributos ser&atilde;o mostradas no bal&atilde;o de
-		 * identifica&ccedil;&atilde;o
-		 *
-		 * filtrar - abre a ferramenta que permite aplicar um filtro nos dados da camada
-		 *
-		 * tabela - abre a tabela de atributos
-		 *
-		 * grafico - ferramenta de cria&ccedil;&atilde;o de gr&aacute;ficos associados &agrave; tabela de atributos
-		 *
-		 * editorlegenda - ferramenta de edi&ccedil;&atilde;o das classes e simbologia da legenda
-		 *
-		 * destacar - abre um box que segue o mouse mostrando a camada mesmo que esteja desligada
-		 *
-		 * cortina - abre a ferramenta cortina
-		 *
-		 * sql - abre a ferramenta que permite editar o SQL de camadas baseadas no POSTGIS (apenas para editores)
-		 *
-		 * comentar - abre a ferramenta que permite incluir coment&aacute;rios sobre a camada no banco de administração
-		 *
-		 * temporizador - abre a ferramenta para controle do temporizador que for&ccedil;a o desenho da camada
-		 *
-		 * wms - mostra o endere&ccedil;o wms da camada
-		 *
-		 * tme - abre a ferramenta que gera um KML em 3d
-		 *
-		 * copia - faz uma c&oacute;pia da camada e insere no mapa
-		 *
+		 * depreciado em 6.0
 		 */
 		FUNCOES : {
 			farolescala : true,
@@ -667,6 +503,275 @@ i3GEO.arvoreDeCamadas =
 		 * Endere&ccedil;o da aplica&ccedil;&atilde;o i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 		 */
 		LOCAPLIC : null,
+		/**
+		 * Propriedade: CONFIGICONES
+		 * 
+		 * Define as configura&ccedil;&otilde;es dos &iacute;cones mostrados na raiz da &aacute;rvore e na raiz de cada tema
+		 * 
+		 * Cada &iacute;cone possu&iacute; um nome e propriedades, descritas a seguir, e que sao usadas no formato
+		 * 
+		 * i3GEO.arvoreDeCamadas.CONFIGICONES.refresh (onde refresh &eacute; o nome do &iacute;cone)
+		 * 
+		 * &Iacute;cones dispon&iacute;veis:
+		 * 
+		 * refresh - Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite atualizar a &acute;rvore
+		 * 
+		 * opacidade - Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite alterar a transpar&ecirc;ncia das camadas existentes no mapa
+		 * 
+		 * ferramentas - Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite abrir os atalhos para as ferramentas que atuam sobre o mapa
+		 * 
+		 * imprimir - Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite abrir a ferramenta de impress&atilde;o
+		 * 
+		 * animacao - Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite gerar uma anima&ccedil;&atilde;o do mapa, ligando e desligando camadas
+		 * 
+		 * olhoaberto
+		 * 
+		 * olhofechado
+		 * 
+		 * Propriedades de cada &iacute;cone:
+		 * 
+		 * tipo - arvore|tema
+		 * 
+		 * icone - caminho para a imagem relativo a localiza&ccedil;&atilde;o do i3Geo
+		 * 
+		 * classe - nome da classe CSS que define o estilo do &iacute;cone
+		 * 
+		 * funcao - string com a fun&ccedil;&atilde;o inserida em onclick
+		 * 
+		 * title - string inserida em title
+		 * 
+		 * dica - ajuda sobre como usar a ferramenta
+		 * 
+		 * id - id que ser&aacute; inserido no &iacute;cone
+		 * 
+		 * status - true|false ser&aacute; ou n&atilde;o inclu&#297;do na &aacute;rvore
+		 * 
+		 * flag - true|false indicador tempor&aacute;rio se o &iacute;cone deve ou n&atilde;o ser inserido (o flag muda durante a montagem dos icones dos temas)
+		 * 
+		 */
+		CONFIGICONES : {
+			"refresh" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "i3geo_refresh2",
+				funcao : "i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)",
+				title : "Refresh",
+				dica : $trad("refresh"),
+				id : "i3geo_refresh",
+				status : true
+			},
+			"lixeira" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "i3geo_lixeira",
+				funcao : "i3GEO.arvoreDeCamadas.dialogo.excluir()",
+				title : $trad("t2"),
+				dica : $trad("lixeira"),
+				id : "i3geo_lixeira",
+				status : true
+			},
+			"filtro" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "i3geo_filtro",
+				funcao : "i3GEO.arvoreDeCamadas.dialogo.filtro()",
+				title : $trad("t2a"),
+				dica : $trad("filtraCam"),
+				id : "i3geo_filtro",
+				status : true
+			},
+			"legenda" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "soltaleg2",
+				funcao : "i3GEO.mapa.legendaHTML.libera()",
+				title : $trad("t2b"),
+				dica : $trad("legenda"),
+				id : "soltaleg2",
+				status : true
+			},
+			"opacidade" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "opacidadeMapa",
+				funcao : "i3GEO.mapa.dialogo.opacidade()",
+				title : $trad("t20"),
+				dica : "",
+				id : "opacidadeMapa",
+				status : false
+			},
+			"animacao" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "animaMapa",
+				funcao : "i3GEO.mapa.dialogo.animacao()",
+				title : $trad("p21"),
+				dica : "",
+				id : "animaMapa",
+				status : false
+			},
+			"imprimir" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "imprimirMapa",
+				funcao : "i3GEO.mapa.dialogo.imprimir()",
+				title : $trad("d12"),
+				dica : "",
+				id : "imprimirMapa",
+				status : false
+			},
+			"ferramentas" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "ferramentasMapa",
+				funcao : "i3GEO.mapa.dialogo.ferramentas()",
+				title : $trad("u15a"),
+				dica : $trad("ferramMapa"),
+				id : "ferramentasMapa",
+				status : true
+			},
+			"ajuda" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "ajudaMapa",
+				funcao : "i3GEO.arvoreDeCamadas.ajudaEmLista()",
+				title : $trad("s1"),
+				dica : "",
+				id : "ajudaMapa",
+				status : true
+			},
+			"olhoaberto" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "olhoAberto",
+				funcao : "i3GEO.arvoreDeCamadas.aplicaTemas(\"ligartodos\")",
+				title : $trad("t3a"),
+				dica : $trad("t3a"),
+				id : "olhoAberto",
+				status : true
+			},
+			"olhofechado" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "olhoFechado",
+				funcao : "i3GEO.arvoreDeCamadas.aplicaTemas(\"desligartodos\")",
+				title : $trad("t3b"),
+				dica : $trad("t3b"),
+				id : "olhoFechado",
+				status : true
+			},
+			"ferramentasTema" : {
+				tipo : "tema",
+				icone : "imagens/oxygen/16x16/configure-shortcuts.png",
+				classe : "arvCamFerramentas",
+				funcao : "i3GEO.tema.dialogo.atalhoscamada",
+				title : $trad("u15a"),
+				dica : $trad("ferramCamadas"),
+				id : "",
+				status : true,
+				flag : true
+			},
+			"removerTema" : {
+				tipo : "tema",
+				icone : "imagens/oxygen/16x16/draw-x.png",
+				classe : "arvCamRemoveLayer",
+				funcao : "i3GEO.tema.exclui",
+				title : $trad("t12"),
+				dica : $trad("t12a"),
+				id : "",
+				status : true,
+				flag : true
+			},
+			"zoomtema" : {
+				tipo : "tema",
+				icone : "imagens/gisicons/zoom-layer.png",
+				classe : "arvCamZoomLayer",
+				funcao : "i3GEO.tema.zoom",
+				title : $trad("t17"),
+				dica : $trad("t18"),
+				id : "",
+				status : true,
+				flag : true
+			},
+			"sobe" : {
+				tipo : "tema",
+				icone : "imagens/oxygen/16x16/draw-triangle3.png",
+				classe : "arvCamSobeLayer",
+				funcao : "i3GEO.tema.sobe",
+				title : $trad("t13"),
+				dica : $trad("t14"),
+				id : "",
+				status : true,
+				flag : true
+			},
+			"desce" : {
+				tipo : "tema",
+				icone : "imagens/oxygen/16x16/draw-triangle4.png",
+				classe : "arvCamDesceLayer",
+				funcao : "i3GEO.tema.desce",
+				title : $trad("t15"),
+				dica : $trad("t16"),
+				id : "",
+				status : true,
+				flag : true
+			},
+			"contextoescala" : {
+				tipo : "tema",
+				icone : "imagens/oxygen/16x16/task-attempt.png",
+				classe : "arvCamDependeEscala",
+				funcao : "",
+				title : $trad("t36"),
+				dica : $trad("t36"),
+				id : "",
+				status : true,
+				flag : true
+			},
+			"selecionado" : {
+				tipo : "tema",
+				icone : "imagens/gisicons/select-cancel.png",
+				classe : "arvCamSelecionado",
+				funcao : "i3GEO.tema.limpasel",
+				title : $trad("t4"),
+				dica : $trad("t5"),
+				id : "",
+				status : true,
+				flag : true
+			},
+			"zoomsel" : {
+				tipo : "tema",
+				icone : "imagens/gisicons/zoom-selection.png",
+				classe : "arvCamZoomSelecionado",
+				funcao : "i3GEO.tema.zoomsel",
+				title : $trad("t4a"),
+				dica : $trad("t5"),
+				id : "",
+				status : true,
+				flag : true
+			},
+			"link" : {
+				tipo : "tema",
+				icone : "imagens/oxygen/16x16/help-about.png",
+				classe : "arvCamFonte",
+				funcao : "i3GEO.tema.fonte",
+				title : $trad("a9"),
+				dica : $trad("a9"),
+				id : "",
+				status : true,
+				flag : true
+			},
+			"download" : {
+				tipo : "tema",
+				icone : "imagens/oxygen/16x16/download.png",
+				classe : "arvCamDownload",
+				funcao : "i3GEO.tema.download",
+				title : "Download",
+				dica : $trad("t6"),
+				id : "",
+				status : true,
+				flag : true
+			}
+		},
+
 		/**
 		 * Function: cria
 		 *
@@ -1083,62 +1188,28 @@ i3GEO.arvoreDeCamadas =
 		 * {string} - html contendo os &iacute;cones
 		 */
 		montaOpcoesArvore : function() {
-			var ins = "", imb = i3GEO.configura.locaplic + "/imagens/branco.gif", estilo =
+			var n, i=null, c, ins = "", imb = i3GEO.configura.locaplic + "/imagens/branco.gif", estilo =
 				function(i) {
 					return " onmouseout='javascript:this.className = \"" + i
 						+ " iconeMini iconeGuiaMovelMouseOut\";' onmouseover='javascript:this.className = \"" + i
 						+ " iconeMini iconeGuiaMovelMouseOver\";' class='" + i + " iconeMini iconeGuiaMovelMouseOut' src='" + imb
 						+ "' style='cursor:pointer;text-align:left' ";
 				};
-			if (this.REFRESH === true) {
-				ins +=
-					"<img "
-						+ estilo("i3geo_refresh2")
-						+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)' title='Refresh' id='i3geo_refresh'/>";
-			}
-			if (this.ARRASTARLIXEIRA === true) {
-				ins +=
-					"<img " + estilo("i3geo_lixeira") + " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeCamadas.dialogo.excluir();' id='i3geo_lixeira' title='"
-						+ $trad("t2") + "' />";
-			}
-			if (this.FILTRAR === true) {
-				ins +=
-					"<img " + estilo("i3geo_filtro") + " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeCamadas.dialogo.filtro();' id='i3geo_filtro' title='"
-						+ $trad("t2a") + "' />";
-			}
-			if (this.ABRELEGENDA === true) {
-				ins +=
-					"<img " + estilo("soltaleg2") + " onclick='i3GEO.util.animaClique(this);i3GEO.mapa.legendaHTML.libera();' id='soltaleg2' title='" + $trad("t2b")
-						+ "' />";
-			}
-			if (this.ALTERAOPACIDADE === true) {
-				ins +=
-					"<img " + estilo("opacidadeMapa") + " onclick='i3GEO.util.animaClique(this);i3GEO.mapa.dialogo.opacidade();' id='opacidadeMapa' title='"
-						+ $trad("t20") + "' />";
-			}
-			if (this.ANIMAMAPA === true && (i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")) {
-				ins +=
-					"<img " + estilo("animaMapa") + " onclick='i3GEO.util.animaClique(this);i3GEO.mapa.dialogo.animacao();' id='animaMapa' title='" + $trad("p21")
-						+ "' />";
-			}
-			if (this.IMPRIMIR === true) {
-				ins +=
-					"<img " + estilo("imprimirMapa") + " onclick='i3GEO.util.animaClique(this);i3GEO.mapa.dialogo.imprimir();' id='imprimirMapa' title='"
-						+ $trad("d12") + "' />";
-			}
-			if (this.FERRAMENTAS === true) {
-				ins +=
-					"<img " + estilo("ferramentasMapa") + " onclick='i3GEO.util.animaClique(this);i3GEO.mapa.dialogo.ferramentas();' id='ferramentasMapa' title='"
-						+ $trad("u15a") + "' />";
-			}
-			if (this.LIGARDESLIGARTODOS === true) {
-				ins +=
-					"&nbsp;<img " + estilo("olhoAberto")
-						+ " onclick='i3GEO.arvoreDeCamadas.aplicaTemas(\"ligartodos\");' id='olhoAberto' title='" + $trad("t3a") + "' />";
-				ins +=
-					"&nbsp;<img " + estilo("olhoFechado")
-						+ " onclick='i3GEO.arvoreDeCamadas.aplicaTemas(\"desligartodos\");' id='olhoFechado' title='" + $trad("t3b")
-						+ "' />";
+			n = this.CONFIGICONES;
+			for (i in n){
+				c = n[i];
+				if(c.status === true && c.tipo === "arvore"){
+					ins +=
+						"<img "
+						+ estilo(c.classe)
+						+ " onclick='i3GEO.util.animaClique(this);" 
+						+ c.funcao 
+						+ "' title='" 
+						+ c.title 
+						+ "' id='" 
+						+ c.id 
+						+ "'/>";
+				}
 			}
 			return ins;
 		},
@@ -1550,35 +1621,37 @@ i3GEO.arvoreDeCamadas =
 		 * {string} - texto formatado
 		 */
 		montaTextoTema : function(tema) {
-			var ck, html, estilo;
+			var ck, html, estilo, f;
 			if (tema.status * 1 === 2) {
 				ck = ' CHECKED ';
 			} else {
 				ck = "";
 			}
 			//
-			// verifica se o filtro de camadas est&aacute; ativo
+			// verifica se o filtro de camadas esta ativo
+			// se nao passar no filtro, retorna vazio
 			//
-			if (this.FILTRO !== "") {
-				if (this.FILTRO === "desligados" && ck !== "") {
+			f = this.FILTRO;
+			if (f !== "") {
+				if (f === "desligados" && ck !== "") {
 					return "";
 				}
-				if (this.FILTRO === "ligados" && ck === "") {
+				if (f === "ligados" && ck === "") {
 					return "";
 				}
-				if (this.FILTRO === "selecionados" && tema.sel.toLowerCase() !== "sim") {
+				if (f === "selecionados" && tema.sel.toLowerCase() !== "sim") {
 					return "";
 				}
-				if (this.FILTRO === "download" && tema.download.toLowerCase() !== "sim") {
+				if (f === "download" && tema.download.toLowerCase() !== "sim") {
 					return "";
 				}
-				if (this.FILTRO === "wms" && tema.connectiontype * 1 !== 7) {
+				if (f === "wms" && tema.connectiontype * 1 !== 7) {
 					return "";
 				}
-				if (this.FILTRO === "raster" && tema.type * 1 !== 3) {
+				if (f === "raster" && tema.type * 1 !== 3) {
 					return "";
 				}
-				if (this.FILTRO === "toponimia" && tema.type * 1 !== 4) {
+				if (f === "toponimia" && tema.type * 1 !== 4) {
 					return "";
 				}
 			}
@@ -1607,19 +1680,18 @@ i3GEO.arvoreDeCamadas =
 			//
 			tema = i3GEO.pluginI3geo.aplicaPropriedades(tema);
 
-			estilo = "";// navm ? "cursor:move;vertical-align:35%;padding-top:0px;color:black;" :
-						// "cursor:move;vertical-align:20%;color:black;";
+			estilo = "";
 			if (tema.AGUARDALEGENDA) {
 				html +=
-					" id='ArvoreTituloTema" + tema.name + "' style='position:relative;top:2px;" + estilo
-						+ "' onclick=\"i3GEO.tema.mostralegendajanela('" + tema.name + "','" + tema.tema
+					" id='ArvoreTituloTema" + tema.name + "' style='position:relative;top:2px;'"
+						+ " onclick=\"i3GEO.tema.mostralegendajanela('" + tema.name + "','" + tema.tema
 						+ "','abrejanela');\" onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t7a")
 						+ "','');i3GEO.tema.mostralegendajanela('" + tema.name + "','" + tema.tema
 						+ "','ativatimer');\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('');i3GEO.tema.mostralegendajanela('"
 						+ tema.name + "','','desativatimer');\" >" + tema.tema;
 			} else {
 				html +=
-					" id='ArvoreTituloTema" + tema.name + "' style='" + estilo + "' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
+					" id='ArvoreTituloTema" + tema.name + "' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
 						+ $trad("t7") + "','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >" + tema.tema;
 			}
 			html += "</label></div>";
@@ -1631,8 +1703,7 @@ i3GEO.arvoreDeCamadas =
 			return (html);
 		},
 		montaIconesTema : function(tema) {
-			var html, estilo, farol, mfarol, imb = i3GEO.configura.locaplic + "/imagens/branco.gif", funcoes =
-				i3GEO.arvoreDeCamadas.FUNCOES;
+			var n, i = null, c, html, estilo, farol, mfarol, imb = i3GEO.configura.locaplic + "/imagens/branco.gif";
 
 			estilo = "i3GEOarvCamTemaIco";
 			// verifica se a versao do IE e menor que 9
@@ -1647,12 +1718,11 @@ i3GEO.arvoreDeCamadas =
 			// nao e necessario clonar
 			//
 			tema = i3GEO.pluginI3geo.aplicaPropriedades(tema);
-
 			//
 			// define o farol indicativo da compatibilidade de escala do mapa
 			// com a fonte do layer
 			//
-			if (funcoes.farolescala === true && tema.escala != 0) {
+			if (tema.escala != 0) {
 				farol = "maisamarelo.png";
 				mfarol = "";
 				if (tema.escala * 1 < i3GEO.parametros.mapscale * 1) {
@@ -1671,70 +1741,53 @@ i3GEO.arvoreDeCamadas =
 					"&nbsp;<img class='arvCamFarol' id='farol" + tema.name + "' src='" + i3GEO.configura.locaplic + "/imagens/" + farol
 						+ "' title='" + mfarol + "' />";
 			}
-			// icone que abre os atalhos de ferramentas
-			if (i3GEO.arvoreDeCamadas.OPCOESTEMAS === true) {
-				html +=
-					"&nbsp;<img class='arvCamFerramentas' src='" + imb + "' title='" + $trad("u15a")
-						+ "' onclick='i3GEO.util.animaClique(this);i3GEO.tema.dialogo.atalhoscamada(\"" + tema.name + "\")' />";
-			}
-			if (funcoes.excluir === true) {
-				html +=
-					"&nbsp;<img class='arvCamRemoveLayer' src='" + imb + "' title='" + $trad("t12") + "' onclick='i3GEO.util.animaClique(this);i3GEO.tema.exclui(\""
-						+ tema.name + "\",true)' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t12a")
-						+ "','exclui')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
-			}
-			if ((tema.zoomtema.toLowerCase() === "sim") && (funcoes.zoomtema === true)) {
-				html +=
-					"&nbsp;<img class='arvCamZoomLayer' src='" + imb + "' title='" + $trad("t17") + "' onclick='i3GEO.util.animaClique(this);i3GEO.tema.zoom(\"" + tema.name
-						+ "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t18")
-						+ "','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
-			}
-			if (funcoes.sobe === true) {
-				html +=
-					"&nbsp;<img class='arvCamSobeLayer' src='" + imb + "' title='" + $trad("t13") + "' onclick='i3GEO.util.animaClique(this);i3GEO.tema.sobe(\"" + tema.name
-						+ "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t14")
-						+ "','sobe')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
-			}
-			if (funcoes.desce === true) {
-				html +=
-					"&nbsp;<img class='arvCamDesceLayer' src='" + imb + "' title='" + $trad("t15") + "' onclick='i3GEO.util.animaClique(this);i3GEO.tema.desce(\"" + tema.name
-						+ "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t16")
-						+ "','desce')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
-			}
 			//
-			// inclui icone indicando que o tema muda conforme a escala
+			//modifica o flag dos icones conforme as caracteristicas do tema
 			//
+			this.CONFIGICONES.zoomtema.flag = false;
+			if (tema.zoomtema.toLowerCase() === "sim"){
+				this.CONFIGICONES.zoomtema.flag = true;
+			}
+			this.CONFIGICONES.contextoescala.flag = false;
 			if (tema.contextoescala.toLowerCase() === "sim") {
-				html +=
-					"&nbsp;<img class='arvCamDependeEscala' src='" + i3GEO.configura.locaplic + "/imagens/branco.gif" + "' title='"
-						+ $trad("t36") + "' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t36")
-						+ "','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
+				this.CONFIGICONES.contextoescala.flag = true;
 			}
+			this.CONFIGICONES.selecionado.flag = false;
+			this.CONFIGICONES.zoomsel.flag = false;
 			if (tema.sel.toLowerCase() === "sim") {
-				html +=
-					"&nbsp;<img class='arvCamSelecionado' src='" + i3GEO.configura.locaplic + "/imagens/branco.gif" + "' title='" + $trad("t4")
-						+ "' onclick='i3GEO.util.animaClique(this);i3GEO.tema.limpasel(\"" + tema.name + "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
-						+ $trad("t5") + "','limpasel')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
-				html +=
-					"&nbsp;<img class='arvCamZoomSelecionado' src='" + i3GEO.configura.locaplic + "/imagens/branco.gif" + "' title='"
-						+ $trad("t4a") + "' onclick='i3GEO.util.animaClique(this);i3GEO.tema.zoomsel(\"" + tema.name
-						+ "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t5")
-						+ "','zoomsel')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
+				this.CONFIGICONES.selecionado.flag = true;
+				this.CONFIGICONES.zoomsel.flag = true;
 			}
-			// fonte
-			if (tema.link_tema != "" && i3GEO.arvoreDeCamadas.FUNCOES.fonte === true && tema.features.toLowerCase() !== "sim" && tema.name != "mundo") {
-				html +=
-					"&nbsp;<img class='arvCamFonte' src='" + i3GEO.configura.locaplic + "/imagens/branco.gif" + "' title='" + $trad("a9")
-						+ "' onclick='i3GEO.util.animaClique(this);i3GEO.tema.fonte(\"" + tema.name + "\",true,\"" + tema.link_tema + "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
-						+ $trad("a9") + "','fonte')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
+			this.CONFIGICONES.link.flag = false;
+			if (tema.link_tema != "" && tema.features.toLowerCase() !== "sim" && tema.name != "mundo") {
+				this.CONFIGICONES.link.flag = true;
 			}
-			// manter a l&oacute;gica de exigir sim ao inv&eacute;s de vazio
+			this.CONFIGICONES.download.flag = false;
 			if (tema.download.toLowerCase() === "sim" || tema.download === "" && tema.features.toLowerCase() !== "sim") {
-				html +=
-					"&nbsp;<img class='arvCamDownload' src=" + i3GEO.configura.locaplic + "/imagens/branco.gif"
-						+ " title='download' onclick='i3GEO.util.animaClique(this);i3GEO.tema.dialogo.download(\"" + tema.name
-						+ "\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t6")
-						+ "','download')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";
+				this.CONFIGICONES.download.flag = true;
+			}
+			//
+			//monta os icones
+			//
+			n = this.CONFIGICONES;
+			for (i in n){
+				c = n[i];
+				if(c.status === true && c.tipo === "tema" && c.flag === true){
+					html +=
+						"<img "
+						+ "class='" 
+						+ c.classe
+						+ "' onclick='i3GEO.util.animaClique(this);" 
+						+ c.funcao 
+						+ "(\"" + tema.name + "\",true,\"" + tema.link_tema + "\")"
+						+ "' title='" 
+						+ c.title 
+						+ "' id='" 
+						+ c.id
+						+ "' src='"
+						+ imb
+						+ "'/>";
+				}
 			}
 			html += "</div>";
 			return (html);
@@ -2194,6 +2247,28 @@ i3GEO.arvoreDeCamadas =
 		registaCamadas : function(obj) {
 			obj = i3GEO.arvoreDeCamadas.converteChaveValor2normal(obj);
 			i3GEO.arvoreDeCamadas.CAMADAS = obj;
+		},
+		/**
+		 * Abre uma janela com a descricao de cada botao
+		 */
+		ajudaEmLista : function(){
+			var n,i = null, ins = "",b, imb = i3GEO.configura.locaplic + "/imagens/branco.gif", g;
+			n = i3GEO.arvoreDeCamadas.CONFIGICONES;
+			ins += "<table class=lista8 >";
+			for(i in n){
+				b = n[i];
+				if(b.dica != ""){
+					if(b.icone != ""){
+						g = "<img src='" + i3GEO.configura.locaplic + "/" + b.icone + "' />";
+					}
+					else{
+						g = "<img src='" + imb + "' class='" + b.classe + "'/>";
+					}
+					ins += "<tr><td>" + g + "</td><td>" + b.dica + "</td></tr>";
+				}
+			}
+			ins += "</table>";
+			i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>"+ins+"</div>","");
 		},
 		/**
 		 * Section: i3GEO.arvoreDeCamadas.dialogo

@@ -2342,6 +2342,42 @@ g_traducao = {
 	pt: "Abre uma janela flutuante com op&ccedil;&otilde;es de busca de dados em servi&ccedil;os como o Google Maps ou nas camadas exsitentes no mapa",
 	en:"",
 	es:""
+}],
+"refresh": [
+{
+	pt: "Refaz a &aacute;rvore, reconstruindo os &iacute;cones e lista de camadas",
+	en:"",
+	es:""
+}],
+"lixeira": [
+{
+	pt: "Clique para ver a lista de camadas em uma janela flutuante com op&ccedil;&atilde;o para remover um ou mais camadas do mapa. Arraste uma camada sobre esse &iacute;cone para remov&ecirc;-la individualmente",
+	en:"",
+	es:""
+}],
+"filtraCam": [
+{
+	pt: "Permite filtrar a lista de camadas mostradas na &aacute;rvore conforme propriedades espec&iacute;ficas de cada uma",
+	en:"",
+	es:""
+}],
+"legenda": [
+{
+	pt: "Abre a legenda do mapa em uma janela flutuante",
+	en:"",
+	es:""
+}],
+"ferramMapa": [
+{
+	pt: "Mostra a lista de ferramentas que atuam sobre o mapa",
+	en:"",
+	es:""
+}],
+"ferramCamadas": [
+{
+	pt: "Mostra a lista de ferramentas que atuam sobre camadas",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

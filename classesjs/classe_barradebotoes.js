@@ -457,6 +457,7 @@ i3GEO.barraDeBotoes =
 			inseregrafico : true,
 			v3d : false
 		},
+		//TODO colocar os icones como propriedade das definicoes do botao
 		/**
 		 * Propriedade: ICONEBOTAO
 		 *

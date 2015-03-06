@@ -45,6 +45,7 @@ i3GEOF.preferencias = {
 		var lista = [
 			{
 				titulo: $trad('iniciaFerramentas',i3GEOF.preferencias.dicionario),//ferramentas ativas
+				tipo: "ativas",
 				props: [
 					{
 						titulo: $trad('cartogramas',i3GEOF.preferencias.dicionario),
@@ -110,6 +111,7 @@ i3GEOF.preferencias = {
 				]
 			},{
 				titulo: $trad('barraBotoes',i3GEOF.preferencias.dicionario),//barra de botoes
+				tipo: "barraDeBotoes",
 				props: [
 					{
 						titulo: $trad('maxBotoes',i3GEOF.preferencias.dicionario),
@@ -137,6 +139,7 @@ i3GEOF.preferencias = {
 				]
 			},{
 				titulo: $trad('arvoreCamadas',i3GEOF.preferencias.dicionario),//arvore de camadas
+				tipo: "arvoreDeCamadas",
 				props: [
 					{
 						titulo: $trad('mostraTitulo',i3GEOF.preferencias.dicionario),
@@ -187,10 +190,6 @@ i3GEOF.preferencias = {
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.OPCOESICONES"
 					},{
-						titulo: $trad('incluiNoOpcoesTema',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.arvoreDeCamadas.OPCOESTEMAS"
-					},{
 						titulo: $trad('incluiNoLegendaTema',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.OPCOESLEGENDA"
@@ -203,46 +202,18 @@ i3GEOF.preferencias = {
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.ICONETEMA"
 					},{
-						titulo: $trad('incluiFuncaoTema',i3GEOF.preferencias.dicionario),
-						tipo: "multiselect",
-						elemento: "i3GEO.arvoreDeCamadas.FUNCOES",
-						opcoes: i3GEO.arvoreDeCamadas.FUNCOES
-					},{
 						titulo: $trad('permiteArrastar',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.ARRASTARORDEM"
 					},{
-						titulo: $trad('mostraIconeRefresh',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.arvoreDeCamadas.REFRESH"
-					},{
 						titulo: $trad('permiteArrastarLixeira',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA"
-					},{
-						titulo: $trad('mostraIconeOpacidade',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.arvoreDeCamadas.ALTERAOPACIDADE"
-					},{
-						titulo: $trad('mostraIconeImprimir',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.arvoreDeCamadas.IMPRIMIR"
-					},{
-						titulo: $trad('mostraIconeAnima',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.arvoreDeCamadas.ANIMAMAPA"
-					},{
-						titulo: $trad('mostraIconeLigar',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.arvoreDeCamadas.LIGARDESLIGARTODOS"
-					},{
-						titulo: $trad('mostraIconeFerr',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.arvoreDeCamadas.FERRAMENTAS"
 					}
 				]
 			},{
 				titulo: $trad('arvoreTemas',i3GEOF.preferencias.dicionario), //catalogo
+				tipo: "arvoreDeTemas",
 				props: [
 					{
 						titulo: $trad('botoes2',i3GEOF.preferencias.dicionario),
@@ -277,6 +248,7 @@ i3GEOF.preferencias = {
 				]
 			},{
 				titulo: $trad('mapa',i3GEOF.preferencias.dicionario),//mapa
+				tipo: "mapa",
 				props: [
 					{//elemento input do tipo hidden com id igual ao valor de elemento
 						titulo: "",
@@ -347,6 +319,7 @@ i3GEOF.preferencias = {
 				]
 			},{
 				titulo: $trad('buscaRapida',i3GEOF.preferencias.dicionario), //busca rapida
+				tipo: "buscaRapida",
 				props: [
 					{
 						titulo: $trad('utilizaServicoExternoBusca',i3GEOF.preferencias.dicionario),
@@ -364,6 +337,7 @@ i3GEOF.preferencias = {
 				]
 			},{
 				titulo: $trad('menuSuspenso',i3GEOF.preferencias.dicionario), //menu superior
+				tipo: "menu",
 				props: [
 					{
 						titulo: $trad('mostraLogin',i3GEOF.preferencias.dicionario),
@@ -381,6 +355,7 @@ i3GEOF.preferencias = {
 				]
 			},{
 				titulo: $trad('guiasLaterais',i3GEOF.preferencias.dicionario), //guias
+				tipo: "guias",
 				props: [
 					{
 						titulo: $trad('guiaIniciaAberta',i3GEOF.preferencias.dicionario),
@@ -427,6 +402,7 @@ i3GEOF.preferencias = {
 				]
 			},{
 				titulo: $trad('janelasFlutuantes',i3GEOF.preferencias.dicionario), //janela
+				tipo: "janela",
 				props: [
 					{
 						titulo: $trad('estiloCorpoJanela',i3GEOF.preferencias.dicionario),
@@ -457,6 +433,7 @@ i3GEOF.preferencias = {
 				]
 			},{
 				titulo: $trad('mapaReferencia',i3GEOF.preferencias.dicionario),
+				tipo: "mapaReferencia",
 				props: [
 					{
 						titulo: $trad('multiplicadorZoom',i3GEOF.preferencias.dicionario),
@@ -586,6 +563,12 @@ i3GEOF.preferencias = {
 			ins += "<p onclick='javascript:i3GEOF.preferencias.expande("+i+")' class=paragrafo style=padding:5px;cursor:pointer;color:navy ><b>"+lista[i].titulo+"</b><p>";
 			ins += "<div style=display:none id='listaPref"+i+"'>";
 			props = lista[i].props;
+			//
+			//adiciona entradas nas preferencias com base em objetos de configuracao
+			//
+			if(lista[i].tipo === "arvoreDeCamadas"){
+				props = i3GEOF.preferencias.arvoreDeCamadas(props);
+			}
 			nj = props.length;
 			valores = [];
 			nomes = [];
@@ -883,5 +866,29 @@ i3GEOF.preferencias = {
 				$i("i3GEO.mapa.TEMASINICIAISLIGADOS").value = ligados.join(",");
 			}
 		}
+	},
+	/**
+	 * Adiciona novas propriedades com base nos objetos de configuracao da arvore de camadas
+	 */
+	arvoreDeCamadas: function(props){
+		var i = null, n, o, t;
+		n = i3GEO.arvoreDeCamadas.CONFIGICONES;
+		for(i in n){
+			o = n[i];
+			t = o.title;
+			if(t === ""){
+				t = o.diva;
+			}
+			if(t != ""){
+				props.push(
+					{
+						titulo: o.title,
+						tipo: "boolean",
+						elemento: "i3GEO.arvoreDeCamadas.CONFIGICONES."+i+".status"
+					}
+				);
+			}
+		}
+		return props;
 	}
 };

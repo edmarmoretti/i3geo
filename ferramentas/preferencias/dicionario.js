@@ -470,43 +470,8 @@ i3GEOF.preferencias.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'mostraIconeRefresh' : [ {
-		pt : "Mostra o &iacute;cone de refresh",
-		en : "",
-		es : ""
-	} ],
-	'permiteArrastarLixeira' : [ {
-		pt : "Permite arrastar e soltar para remover uma camada do mapa",
-		en : "",
-		es : ""
-	} ],
-	'mostraIconeOpacidade' : [ {
-		pt : "Mostra o &iacute;cone que abre a ferramenta para modificar a opacidade do mapa",
-		en : "",
-		es : ""
-	} ],
-	'mostraIconeImprimir' : [ {
-		pt : "Mostra o &iacute;cone que abre a ferramenta para imprimir o mapa",
-		en : "",
-		es : ""
-	} ],
-	'mostraIconeAnima' : [ {
-		pt : "Mostra o &iacute;cone que abre a ferramenta de anima&ccedil;&atilde;o",
-		en : "",
-		es : ""
-	} ],
-	'mostraIconeLigar' : [ {
-		pt : "Mostra o &iacute;cone que permite ligar ou desligar todas as camadas",
-		en : "",
-		es : ""
-	} ],
-	'mostraIconeFerr' : [ {
-		pt : "Mostra o &iacute;cone que abre a janela com as v&aacute;rias ferramentas que atuam sobre o mapa",
-		en : "",
-		es : ""
-	} ],
 	'mostraTitulo' : [ {
-		pt : "Mostra o t&iacute;tulo da &aacute;rvore no n&oacute; raiz",
+		pt : "Mostra o t&iacute;tulo no n&oacute; raiz da &aacute;rvore",
 		en : "",
 		es : ""
 	} ]

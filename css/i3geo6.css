@@ -1737,14 +1737,14 @@ background-position: 0px -1050px;
 width: 17px;
 height: 15px;
 }
-#i3geo_lixeira {
+#i3geo_lixeira, .i3geo_lixeira {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1078px;
 width: 18px;
 height: 18px;
 }
-#i3geo_refresh {
+#i3geo_refresh, .i3geo_refresh {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2205px;
@@ -1971,7 +1971,7 @@ background-repeat: no-repeat;
 background-position: 0px -1900px;
 cursor: pointer;
 }
-#olhoAberto {
+#olhoAberto, .olhoAberto {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1925px;
@@ -1979,7 +1979,7 @@ cursor: pointer;
 width: 25px;
 height: 20px;
 }
-#olhoFechado {
+#olhoFechado, .olhoFechado {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -1949px;
@@ -2003,21 +2003,14 @@ width: 16px;
 border: 1px solid #DCDCDC;
 cursor: pointer;
 }
-#i3geo_filtro {
+#i3geo_filtro, .i3geo_filtro {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2073px;
 width: 18px;
 height: 18px;
 }
-.i3geo_filtro {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 0px -2073px;
-width: 18px;
-height: 18px;
-}
-#abreJanelaLegenda {
+#abreJanelaLegenda, .abreJanelaLegenda {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2100px;
@@ -2025,7 +2018,7 @@ cursor: pointer;
 width: 22px;
 height: 22px;
 }
-#soltaLeg {
+#soltaLeg, .soltaLeg {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2100px;
@@ -2033,7 +2026,7 @@ cursor: pointer;
 width: 22px;
 height: 22px;
 }
-#soltaLeg2 {
+#soltaLeg2, .soltaLeg2 {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2125px;
@@ -2041,7 +2034,7 @@ cursor: pointer;
 width: 20px;
 height: 16px;
 }
-#soltaleg2 {
+#soltaleg2, .soltaleg2 {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2123px;
@@ -2049,7 +2042,7 @@ cursor: pointer;
 width: 18px;
 height: 18px;
 }
-#opacidadeMapa {
+#opacidadeMapa, .opacidadeMapa {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2173px;
@@ -2057,7 +2050,7 @@ cursor: pointer;
 width: 18px;
 height: 18px;
 }
-#imprimirMapa {
+#imprimirMapa, .imprimirMapa {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2250px;
@@ -2065,7 +2058,15 @@ cursor: pointer;
 width: 18px;
 height: 18px;
 }
-#ferramentasMapa {
+#ajudaMapa, .ajudaMapa {
+background-image: URL('../imagens/sprite.png');
+background-repeat: no-repeat;
+background-position: 1px -500px;
+cursor: pointer;
+width: 18px;
+height: 18px;
+}
+#ferramentasMapa, .ferramentasMapa {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2272px;
@@ -2073,7 +2074,7 @@ cursor: pointer;
 width: 18px;
 height: 18px;
 }
-#animaMapa {
+#animaMapa, .animaMapa {
 background-image: URL('../imagens/sprite.png');
 background-repeat: no-repeat;
 background-position: 0px -2187px;
