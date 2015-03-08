@@ -48,13 +48,13 @@ map {string} - Nome do mapfile que ser&aacute; testado ou usado na gera&ccedil;&
 
 tipo {string} - (opcional) mini|grande Define o tamanho da imagem que ser&aacute; gerada. Se n&atilde;o for definido, ser&aacute; feito o teste do mapfile. Controla o tamanho da miniatura que dever&aacute; ser mostrada.
 */
+
 set_time_limit(300);
 ini_set('max_execution_time', 300);
 include("ms_configura.php");
 include("classesphp/funcoes_gerais.php");
 require_once("classesphp/pega_variaveis.php");
 include_once ("classesphp/carrega_ext.php");
-//XODO incluir teste da tabela de atributos
 //
 //carrega o phpmapscript
 //
@@ -73,6 +73,7 @@ $versao = $versao["principal"];
 ms_ResetErrorList();
 if(!isset($tipo))
 {$tipo = "";}
+$tempo = microtime(true);
 $arqs = listaArquivos("temas");
 sort($arqs["arquivos"]);
 
@@ -83,8 +84,12 @@ if ($tipo == "")
 	echo '<link rel="stylesheet" type="text/css" href="admin/html/admin.css">';
 	echo '<style>body {COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}</style>';
 
-	echo '</head><script>function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}</script>';
-	echo '<body class="fundoPonto"><center><div class="bordaSuperior"  >&nbsp;</div><div class="mascaraPrincipal" id="divGeral">';
+	echo '</head>';
+	echo '<script>';
+	echo 'function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}';
+	echo 'function rodaTabela(){window.location.href = window.location.href+"&tabela";}';
+	echo '</script>';
+	echo '<body><center><div class="bordaSuperior"  >&nbsp;</div><div class="mascaraPrincipal" id="divGeral">';
 	echo '<form action="testamapfile.php" method="post" id=f >';
 	echo 'Nome do arquivo map existente no diretório i3geo/temas. Exemplo para uso manual da URL: testamapfile.php?map=biomashp (utilize "testamapfile.php?map=todos" na URL para testar todos de uma só vez)<br><br>';
 	echo '<br>Mostra apenas a legenda? <input type=radio name=solegenda value=sim />sim <input type=radio name=solegenda value=nao CHECKED /> n&atilde;o<br>';
@@ -96,12 +101,12 @@ if ($tipo == "")
 		}
 	}
 	echo $combo."</select></form><br>";
+	echo '<br><input type=button value="Testa tabela" onclick="rodaTabela();" />';
 }
 if (isset($map) && $map != "")
 {
 	if(!isset($solegenda)){$solegenda = "nao";}
-	if ($map == "todos")
-	{
+	if ($map == "todos"){
 		$tipo = "todos";
 		$conta = 0;
 		echo "<br>N&uacute;mero de mapas = ".(count($arqs["arquivos"]))." Faltam= ".(count($arqs["arquivos"])-$iniciar-10)."<br>";
@@ -116,14 +121,15 @@ if (isset($map) && $map != "")
 		}
 		echo "<hr><br><br><a href='testamapfile.php?map=todos&iniciar=".($iniciar+10)."' >Próximos mapas</a>";
 	}
-	else
-	{verifica($map,$solegenda);}
+	else{
+		verifica($map,$solegenda,$tabela);
+	}
 }
 echo '</div>';
 echo '<script>if(screen.availWidth > 700){document.getElementById("divGeral").style.width = "700px";}</script>';
 echo '</body></html>';
-function verifica($map,$solegenda){
-	global $tipo,$locaplic,$postgis_mapa,$versao,$base,$dir_tmp;
+function verifica($map,$solegenda,$tabela){
+	global $tipo,$locaplic,$postgis_mapa,$versao,$base,$dir_tmp,$tempo;
 	$mapUrl = $map;
 	if ($tipo == "mini" && file_exists('temas/miniaturas/'.$map.".mini.png")){
 		Header("Content-type: image/png");
@@ -330,7 +336,7 @@ function verifica($map,$solegenda){
 			$sca->set("status",MS_OFF);
 		}
 		if ($tipo == "grande"){
-				$mapa->setsize(300,300);
+			$mapa->setsize(300,300);
 			$sca = $mapa->scalebar;
 			$sca->set("status",MS_OFF);
 		}
@@ -343,51 +349,99 @@ function verifica($map,$solegenda){
 
 		$mapa->save($destino);
 		//echo $destino;exit;
-		$mapa = ms_newMapObj($destino);
-		$objImagem = @$mapa->draw();
-		$objImagemLegenda = @$mapa->drawLegend();
-		if (!$objImagem){
-			echo "Problemas ao gerar o mapa<br>";
+
+		//testa a tabela de atributos
+		if(isset($tabela)){
+			include("classesphp/classe_atributos.php");
+			$t = new Atributos($destino,$map);
+			$r = $t->itensTexto();
+			$colunas = explode(";",$r["itens"]);
+			$ncolunas = count($colunas);
+			$registros = $r["valores"];
+			$nregistros = count($registros);
 			$error = "";
 			$error = ms_GetErrorObj();
+			echo "</div><div style='text-align:left;margin: auto;width:900px;overflow: auto;'>";
 			while($error && $error->code != MS_NOERR){
 				echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
 				$error = $error->next();
 			}
-			return;
-		}
-		if($objImagem->imagepath == "")
-		{echo "Erro IMAGEPATH vazio";}
-		$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
-		$objImagem->saveImage($nomec);
-		$nomer = ($objImagem->imageurl).basename($nomec);
-
-		$nomel = ($objImagemLegenda->imagepath).nomeRandomico()."testel.png";
-		$objImagemLegenda->saveImage($nomel);
-		$nomerl = ($objImagemLegenda->imageurl).basename($nomel);
-		if(($tipo == "") || ($tipo == "todos")){
-			if($solegenda == "nao")
-			{echo "<img src=".$nomer." /><br>";}
-			echo "<img src=".$nomerl." />";
-			if($tipo == "todos"){
-				echo "<br>".$dados."<br>";
+			echo "Registros em UTF8 s&atilde;o convertidos para ISO-8859-1<br>";
+			echo "Registros: ".$nregistros;"<br>";
+			echo "<br><b>Tempo leitura (s): ";
+			echo microtime(true) - $tempo;
+			echo "</b>";
+			echo "<table>";
+			echo "<tr>";
+			foreach($colunas as $co){
+				echo "<td><b>".$co."</b></td>";
 			}
-			if($map != "todos"){
-				echo "<br>Erros ocorridos:<br>";
+			echo "</tr>";
+			foreach($registros as $reg){
+				echo "<tr>";
+				$cc = explode(";",$reg);
+				foreach($cc as $c){
+					if (mb_detect_encoding($c,"UTF-8",true)){
+						$c = mb_convert_encoding($c,"ISO-8859-1","UTF-8");
+					}
+					echo "<td>".$c."</td>";
+				}
+				echo "</tr>";
+			}
+			echo "</table>";
+			echo "<br><b>Tempo total (montagem da tabela) (s): ";
+			echo microtime(true) - $tempo;
+			echo "</b>";
+		}
+		else{
+			$mapa = ms_newMapObj($destino);
+			$objImagem = @$mapa->draw();
+			$objImagemLegenda = @$mapa->drawLegend();
+			if (!$objImagem){
+				echo "Problemas ao gerar o mapa<br>";
 				$error = "";
 				$error = ms_GetErrorObj();
 				while($error && $error->code != MS_NOERR){
 					echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
 					$error = $error->next();
 				}
+				return;
 			}
-
+			if($objImagem->imagepath == "")
+			{echo "Erro IMAGEPATH vazio";}
+			$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
+			$objImagem->saveImage($nomec);
+			$nomer = ($objImagem->imageurl).basename($nomec);
+	
+			$nomel = ($objImagemLegenda->imagepath).nomeRandomico()."testel.png";
+			$objImagemLegenda->saveImage($nomel);
+			$nomerl = ($objImagemLegenda->imageurl).basename($nomel);
+			if(($tipo == "") || ($tipo == "todos")){
+				if($solegenda == "nao")
+				{echo "<img src=".$nomer." /><br>";}
+				echo "<img src=".$nomerl." />";
+				if($tipo == "todos"){
+					echo "<br>".$dados."<br>";
+				}
+				if($map != "todos"){
+					echo "<br><b>Tempo (s): ";
+					echo microtime(true) - $tempo;
+					echo "</b>";
+					echo "<br>Erros ocorridos:<br>";
+					$error = "";
+					$error = ms_GetErrorObj();
+					while($error && $error->code != MS_NOERR){
+						echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
+						$error = $error->next();
+					}
+				}
+	
+			}
+			else{
+				Header("Content-type: image/png");
+				ImagePng(ImageCreateFromPNG($nomec));
+			}
 		}
-		else{
-			Header("Content-type: image/png");
-			ImagePng(ImageCreateFromPNG($nomec));
-		}
-		//$objImagem->free();
 	}
 }
 function zoomTema($nomelayer,&$mapa){

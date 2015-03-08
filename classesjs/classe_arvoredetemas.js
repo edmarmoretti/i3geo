@@ -1195,7 +1195,7 @@ i3GEO.arvoreDeTemas = {
 			}
 			insp += " src='"
 					+ i3GEO.configura.locaplic + "/imagens/branco.gif"
-					+ "' onclick='i3GEO.arvoreDeTemas.buscaTema2(document.getElementById(\"i3geo_buscatema\").value)' /></td>";
+					+ "' onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.buscaTema2(document.getElementById(\"i3geo_buscatema\").value)' /></td>";
 			insp += "</tr></table>&nbsp;";
 
 			tempNode = new YAHOO.widget.HTMLNode({
@@ -2172,18 +2172,18 @@ i3GEO.arvoreDeTemas = {
 		if (OPCOESADICIONAIS.refresh === true) {
 			ins += "<td><img "
 					+ estilo("i3geo_refresh2")
-					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.atualiza()' title='Refresh'/></td>";
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.atualiza()' title='Refresh'/></td>";
 			t += 20;
 		}
 		if (OPCOESADICIONAIS.uploadarquivo === true) {
 			ins += "<td><img "
 					+ estilo("conectarwms")
-					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.conectaservico()' title='"
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.conectaservico()' title='"
 					+ $trad("a15") + "'/></td>";
 			t += 20;
 			ins += "<td><img "
 					+ estilo("upload")
-					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.uploadarquivo()' title='"
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.uploadarquivo()' title='"
 					+ $trad("a14") + "'/></td>";
 			t += 20;
 		} else {
