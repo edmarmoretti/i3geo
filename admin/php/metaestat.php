@@ -1549,15 +1549,15 @@ switch (strtoupper($funcao))
 			$s = $m->listaTabelaSerial($codigo_estat_conexao,$nome_esquema,$nome_tabela);
 			for($i=0;$i<count($c);$i++){
 				if($c[$i]["field"] == $s){
-					$c[$i]["serial"] = true;	
+					$c[$i]["serial"] = true;
 				}
 				else{
 					$c[$i]["serial"] = false;
 				}
 			}
 			retornaJSON($c);
-			
-			
+
+
 		}
 		exit;
 	break;
@@ -1608,6 +1608,36 @@ switch (strtoupper($funcao))
 			);
 		}
 		retornaJSON($resultado);
+		exit;
+	break;
+	case "LISTATODOSATRIBUTOSMEDIDAVARIAVELXY":
+		$lista = array();
+		$m = new Metaestat();
+		$regiao = $m->xy2regiao($codigo_tipo_regiao, $x, $y);
+		$identificador_regiao = $regiao["identificador_regiao"];
+		$variaveis = $m->listaVariavel();
+		$dadosVariavel = array();
+
+		foreach($variaveis as $variavel){
+			$medidas = $m->listaMedidaVariavel($variavel["codigo_variavel"]);
+			$valores = array();
+			foreach($medidas as $medida){
+				$dadosMedida = $m->listaAtributosMedidaVariavelRegiao($identificador_regiao,$medida["id_medida_variavel"]);
+				if($dadosMedida != ""){
+					$valores[] = array(
+						"medida" => $medida["nomemedida"],
+						"dados" => $dadosMedida
+					);
+				}
+			}
+			if(!empty($valores)){
+				$dadosVariavel[] = array(
+					"variavel" => $variavel["nome"],
+					"dados" => $valores
+				);
+			}
+		}
+		retornaJSON($dadosVariavel);
 		exit;
 	break;
 	case "SALVAATRIBUTOSMEDIDAVARIAVEL":

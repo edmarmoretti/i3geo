@@ -92,7 +92,7 @@ i3GEO.editorGM = {
 		inicia: function(iddiv){
 			var i,n,ics;
 			//mensagem
-			i3GEO.janela.tempoMsg("Aten&ccedil;&atilde;o: apenas tabelas no esquema i3geo_metaestat podem ser editadas.");
+			//i3GEO.janela.tempoMsg("Aten&ccedil;&atilde;o: apenas tabelas no esquema i3geo_metaestat podem ser editadas.");
 			i3GEO.editorGM.iddiv = iddiv;
 			$i(iddiv).innerHTML = i3GEO.editorGM.html();
 			ics = $i(iddiv).getElementsByTagName("button");
@@ -475,10 +475,10 @@ i3GEO.editorGM = {
 				ins += "<select onchange='i3GEO.editorGM.comboRegiaoEditavelOnchange(this)' id='i3geoCartoRegioesEditaveis' style='width:175px' ><option value=''>---</option>";
 				for(i=0;i<n;i++){
 					//so e possivel editar nesse esquema
-					if(dados[i].esquemadb == "i3geo_metaestat"){
+					//if(dados[i].esquemadb == "i3geo_metaestat"){
 						ins += "<option value='"+dados[i].codigo_tipo_regiao+"'>"+dados[i].nome_tipo_regiao+"</option>";
 						i3GEO.editorGM.descregioes["a_"+dados[i].codigo_tipo_regiao] = dados[i];
-					}
+					//}
 				}
 				ins += "</select>";
 				if(onde){

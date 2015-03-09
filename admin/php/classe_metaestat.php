@@ -402,7 +402,7 @@ class Metaestat{
 		else{
 			$nomevalorcalculado = $dados["colunavalor"];
 		}
-		
+
 		$sqlDadosMedidaVariavel = "SELECT ".$dados["colunaidgeo"]." AS cod_regiao,$tipoconta(".$nomevalorcalculado.") AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
 		if($suportaWMST == true && $direto == false){
 			$sqlDadosMedidaVariavel = "SELECT $sqlWMST as dimtempo,".$dados["colunaidgeo"]." AS cod_regiao,".$nomevalorcalculado." AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
@@ -2844,9 +2844,12 @@ class Metaestat{
 	function listaAtributosMedidaVariavelRegiao ($identificador_regiao,$id_medida_variavel){
 		$medida = $this->listaMedidaVariavel("",$id_medida_variavel);
 		$c = $this->listaConexao($medida["codigo_estat_conexao"],true);
-		//var_dump($c);exit;
+		if($medida["colunavalor"] == ""){
+			return "";
+		}
 		$dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
 		$colunassql[] = $medida["colunavalor"].",".$medida["colunaidunico"];
+
 		$alias[] = $medida["nomemedida"];
 		$colunas[] = $medida["colunavalor"];
 		$alias[] = "idunico";

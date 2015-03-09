@@ -139,7 +139,7 @@ i3GEOF.selecao = {
 					"i3GEOFSelecaoQuery",
 					{onclick:{fn: i3GEO.mapa.dialogo.queryMap}}
 				);
-				b.addClass("abrir");				
+				b.addClass("abrir");
 
 				i3GEOF.selecao.ativaFoco();
 				ics = $i("i3GEOselecaoguia1obj").getElementsByTagName("button");
@@ -186,22 +186,22 @@ i3GEOF.selecao = {
 			'	</p></div>' +
 			'</div>' +
 			'<div class=guiaobj id="i3GEOselecaoguia1obj" style="left:1px;display:none;top:-5px">' +
-			'	<p class=paragrafo style=font-size:0px; ><button title="Clique no mapa para selecionar" value="i3GEOselecaopt" onclick="i3GEOF.selecao.tiposel(this)"><img id=i3GEOselecaopt src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-one.png" /></button>';
+			'	<p class=paragrafo style=font-size:0px; ><button title="Clique no mapa para selecionar" value="i3GEOselecaopt" onclick="i3GEO.util.animaClique(this);i3GEOF.selecao.tiposel(this)"><img id=i3GEOselecaopt src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-one.png" /></button>';
 			if(i3GEO.Interface.ATUAL != "googleearth"){
-				ins += '	<button title="'+$trad('desenhaPoligono',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaopoli"><img id=i3GEOselecaopoli src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-polygon.png" /></button>';
+				ins += '	<button title="'+$trad('desenhaPoligono',i3GEOF.selecao.dicionario)+'" onclick="i3GEO.util.animaClique(this);i3GEOF.selecao.tiposel(this)" value="i3GEOselecaopoli"><img id=i3GEOselecaopoli src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-polygon.png" /></button>';
 			}
-			ins += '	<button title="'+$trad('selecionaVisivel',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaoext" ><img id=i3GEOselecaoext src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" /></button>';
-			ins += '	<button title="'+$trad('utilizaFiguraDesenhada',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaofigura"><img id=i3GEOselecaoFigura src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>';
+			ins += '	<button title="'+$trad('selecionaVisivel',i3GEOF.selecao.dicionario)+'" onclick="i3GEO.util.animaClique(this);i3GEOF.selecao.tiposel(this)" value="i3GEOselecaoext" ><img id=i3GEOselecaoext src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" /></button>';
+			ins += '	<button title="'+$trad('utilizaFiguraDesenhada',i3GEOF.selecao.dicionario)+'" onclick="i3GEO.util.animaClique(this);i3GEOF.selecao.tiposel(this)" value="i3GEOselecaofigura"><img id=i3GEOselecaoFigura src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>';
 
 			if(i3GEO.Interface.ATUAL === "openlayers"){
-				ins += '	<button title="'+$trad('selecionaRetangulo',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaobox" ><img id=i3GEOselecaobox src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-rectangle.png" /></button>';
+				ins += '	<button title="'+$trad('selecionaRetangulo',i3GEOF.selecao.dicionario)+'" onclick="i3GEO.util.animaClique(this);i3GEOF.selecao.tiposel(this)" value="i3GEOselecaobox" ><img id=i3GEOselecaobox src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select-rectangle.png" /></button>';
 			}
-			ins += '	<button title="'+$trad('inverteSelecao',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.operacao(\'inverte\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selection-invert.png" /></button>' +
-			'	<button title="'+$trad('limpaSelecao',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.operacao(\'limpa\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
-			'	<button title="'+$trad('salvaSelecao',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.criatema()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" /></button>' +
-			'	<button title="'+$trad('grafico',i3GEOF.selecao.dicionario)+'" onclick="i3GEOF.selecao.grafico()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" /></button>' +
-			'	<button title="'+$trad('perfil',i3GEOF.selecao.dicionario)+'"  onclick="i3GEOF.selecao.graficoPerfil()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/grafico-perfil.png" /></button>' +
-			'	<button title="'+$trad('editor',i3GEOF.selecao.dicionario)+'"  onclick="i3GEO.barraDeBotoes.editor.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/edit.png" /></button>' +
+			ins += '	<button title="'+$trad('inverteSelecao',i3GEOF.selecao.dicionario)+'" onclick="i3GEO.util.animaClique(this);i3GEOF.selecao.operacao(\'inverte\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selection-invert.png" /></button>' +
+			'	<button title="'+$trad('limpaSelecao',i3GEOF.selecao.dicionario)+'" onclick="i3GEO.util.animaClique(this);i3GEOF.selecao.operacao(\'limpa\')"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
+			'	<button title="'+$trad('salvaSelecao',i3GEOF.selecao.dicionario)+'" onclick="i3GEO.util.animaClique(this);i3GEOF.selecao.criatema()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" /></button>' +
+			'	<button title="'+$trad('grafico',i3GEOF.selecao.dicionario)+'" onclick="i3GEO.util.animaClique(this);i3GEOF.selecao.grafico()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" /></button>' +
+			'	<button title="'+$trad('perfil',i3GEOF.selecao.dicionario)+'"  onclick="i3GEO.util.animaClique(this);i3GEOF.selecao.graficoPerfil()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/grafico-perfil.png" /></button>' +
+			'	<button title="'+$trad('editor',i3GEOF.selecao.dicionario)+'"  onclick="i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.editor.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/edit.png" /></button>' +
 			'	<div style=margin-left:8px;text-align:left;  >' +
 			'		<div class="styled-select">' +
 			'		<select title="'+$trad('tipoOperacao',i3GEOF.selecao.dicionario)+'" id=i3GEOselecaotipoOperacao >' +
@@ -262,7 +262,7 @@ i3GEOF.selecao = {
 					$i("i3GEOFSelecaoCabecalhoI").style.display = "block";
 				}
 			};
-			titulo = 
+			titulo =
 				"<span class='i3GEOconeFerramenta i3GEOiconeSelecao' title='"+$trad("x51")+"'></span>"
 				+ "<div id='i3GEOFSelecaoCabecalhoI' style='left:10px;'>"
 				+ "&nbsp;&nbsp;&nbsp;" + $trad("x51")

@@ -289,7 +289,7 @@ i3GEOF.metaestat = {
 		/**
 		 * Monta um combo contendo a lista de camadas originadas do sistema de metadados estatisticos
 		 * A lista de camadas e obtida com i3GEO.php.listaCamadasMetaestat()
-		 * O ombo e utilizado para o usuario escolher qual a camada que sera alvo de determinado porcesso de analise
+		 * O combo e utilizado para o usuario escolher qual a camada que sera alvo de determinado porcesso de analise
 		 * O combo e inserido no elemento DOM com ID i3geoCartoAnaliseCamadas
 		 */
 		comboCamadas: function(){

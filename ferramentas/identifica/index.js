@@ -47,6 +47,8 @@ if (typeof (i3GEOF) === 'undefined') {
  * Classe: i3GEOF.identifica
  *
  */
+
+//TODO na listagem de atributos, incluir opcao para abrir os valores das variaveis associadas a uma regiao, quando codigo_tipo_regiao for diferente de null
 i3GEOF.identifica =
 	{
 		/**
@@ -1078,7 +1080,7 @@ i3GEOF.identifica =
 						idjanela);
 				}
 			};
-			// importante: os temas editaveis nao utilizam alias em sues nomes
+			// importante: os temas editaveis nao utilizam alias em seus nomes
 			// se o usuario estiver logado
 			i3GEO.php.identifica3(
 				temp,
@@ -1224,20 +1226,31 @@ i3GEOF.identifica =
 				ntemas = retorno.length;
 				for (i = 0; i < ntemas; i++) {
 					resultados = retorno[i].resultado;
+					//nome do tema e icone de remover filtro
 					res += "<div style='padding-top:6px;left:2px;text-align:left;width:100%;' ><b>"
 						+ retorno[i].nome
-						+ "<img onclick='i3GEOF.identifica.removeFiltro(\""
+						+ "<img onclick='i3GEO.util.animaClique(this);i3GEOF.identifica.removeFiltro(\""
 						+ retorno[i].tema
 						+ "\",\""
 						+ idjanela
-						+ "\")' style='margin-right:2px;position:relative;top:3px;width:10px;' src='"
+						+ "\")' style='margin-left:3px;position:relative;top:3px;width:12px;' src='"
 						+ i3GEO.configura.locaplic
 						+ "/imagens/oxygen/16x16/remove-filter.png' title='"
 						+ $trad(
 							'removeFiltro',
 							i3GEOF.identifica.dicionario)
 						+ "' />"
-						+ "</b></div>";
+						+ "</b>";
+					//icone que mostra as medidas das variaveis vinculadas a uma regiao, se for o caso
+					if(retorno[i].codigo_tipo_regiao && retorno[i].codigo_tipo_regiao != ""){
+						res += "<img onclick='i3GEO.util.animaClique(this);i3GEOF.identifica.listaVariaveis(\""
+						+ retorno[i].codigo_tipo_regiao
+						+ "\",\""+ idjanela +"\")' style='margin-left:3px;position:relative;top:3px;width:12px;' src='"
+						+ i3GEO.configura.locaplic
+						+ "/imagens/oxygen/16x16/list-add.png' />";
+
+					}
+					res += "</div>";
 					// encontrou algo
 					if (resultados[0] !== " ") {
 						nres = resultados.length;
@@ -1260,7 +1273,7 @@ i3GEOF.identifica =
 							// opcao para apagar e mover o registro
 							if (idreg != ""
 								&& retorno[i].editavel == "todos") {
-								res += "<a href='#' onclick='i3GEOF.identifica.apagaRegiao(\""
+								res += "<a href='#' onclick='i3GEO.util.animaClique(this);i3GEOF.identifica.apagaRegiao(\""
 									+ retorno[i].tema
 									+ "\",\""
 									+ idreg
@@ -1269,7 +1282,7 @@ i3GEOF.identifica =
 										'apagaRegistro',
 										i3GEOF.identifica.dicionario)
 									+ "</a>"
-									+ "&nbsp;<a href='#' onclick='i3GEOF.identifica.janelaMoverPonto(\""
+									+ "&nbsp;<a href='#' onclick='i3GEO.util.animaClique(this);i3GEOF.identifica.janelaMoverPonto(\""
 									+ retorno[i].tema
 									+ "\",\""
 									+ idreg
@@ -1310,7 +1323,7 @@ i3GEOF.identifica =
 									textovalor = "<br><img title='' src='"
 										+ i3GEO.configura.locaplic
 										+ "/imagens/branco.gif' style='margin-right:2px;position:relative;top:3px;width:12px;'>"
-										+ "<img onclick='i3GEOF.identifica.salvaDados("
+										+ "<img onclick='i3GEO.util.animaClique(this);i3GEOF.identifica.salvaDados("
 										+ paramsalva
 										+ ")' title='Salvar' src='"
 										+ i3GEO.configura.locaplic
@@ -1331,11 +1344,11 @@ i3GEOF.identifica =
 											i3GEOF.identifica.dicionario)
 										+ "' />";
 								} else {
-									tip = "<img style='margin-right:2px;position:relative;top:3px;width:12px;' src='"
+									tip = "<img style='margin-right:4px;position:relative;top:3px;width:12px;' src='"
 										+ i3GEO.configura.locaplic
 										+ "/imagens/branco.gif' title='' />";
 								}
-								filtro = "onclick=i3GEOF.identifica.filtrar('"
+								filtro = "onclick=\"i3GEO.util.animaClique(this);i3GEOF.identifica.filtrar('"
 									+ retorno[i].tema
 									+ "','"
 									+ resultados[j][k].item
@@ -1343,7 +1356,7 @@ i3GEOF.identifica =
 									+ resultados[j][k].valor
 									+ "','"
 									+ idjanela
-									+ "')";
+									+ "')\"";
 								filtro = "<img "
 									+ filtro
 									+ " style='margin-right:2px;position:relative;top:3px;width:12px;' src='"
@@ -1652,5 +1665,47 @@ i3GEOF.identifica =
 				ins = "";
 			}
 			return ins;
+		},
+		listaVariaveis : function(codigo_tipo_regiao,idjanela){
+			return;
+			var p, temp;
+			temp = function (retorno){
+				var ins = "", n, i, m, j, d, dd, nc, ic, ndd, idd;
+				n = retorno.length;
+
+				if(n > 0){
+					//cada variavel
+					for(i=0; i<n; i++){
+						d = retorno[i];
+						ins += "<b>" + d.variavel + "</b>";
+						m = d.dados.length;
+						//cada medida
+						for(j = 0; j<m; j++){
+							dd = d.dados;
+							ins += "<b>" + dd["medida"] + "</b>";
+							nc = dd["colunas"].length;
+							ins += "<table><tr>";
+							//cabecalho
+							for(ic=0; ic<nc; ic++){
+								ins += "<td>" + dd["colunas"][ic] + "</td>";
+							}
+							ins += "</tr>";
+							ndd = dd.length;
+							//cada valor
+							for(idd=0; idd<ndd;idd++){
+								ins += "<tr>";
+								for(ic=0; ic<nc; ic++){
+									ins += "<td>" + dd["dados"][idd][ic] + "</td>";
+								}
+								ins += "</tr>";
+							}
+							ins += "</table>";
+						}
+					}
+				}
+				i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>"+ins+"</div>", "");
+			};
+			p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=LISTATODOSATRIBUTOSMEDIDAVARIAVELXY",
+			cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&x="+i3GEOF.identifica.propJanelas[idjanela].x+"&y="+i3GEOF.identifica.propJanelas[idjanela].y);
 		}
 	};

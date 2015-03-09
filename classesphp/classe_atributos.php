@@ -1411,7 +1411,7 @@ class Atributos
 							$editavel = "nao";
 							$id_medida_variavel = $layer->getMetaData("METAESTAT_ID_MEDIDA_VARIAVEL");
 							$colunaidunico = $layer->getMetaData("COLUNAIDUNICO");
-							$codigo_tipo_regiao = $layer->getMetaData("METAESTAT_CODIGO_TIPO_REGIAO");
+
 
 							if($id_medida_variavel != ""){
 								include_once(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
@@ -1437,6 +1437,7 @@ class Atributos
 					}
 				}
 			}
+			$codigo_tipo_regiao = $layer->getMetaData("METAESTAT_CODIGO_TIPO_REGIAO");
 			$final[] = array("tema"=>$tema,"tiposalva"=>$tiposalva,"nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel,"colunaidunico"=>$colunaidunico,"id_medida_variavel"=>$id_medida_variavel,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
 		}
 		return $final;

@@ -4,15 +4,15 @@ MAP
   LAYER
     CONNECTION "user=postgres password=postgres dbname=i3geosaude host=localhost port=5432 options='-c client_encoding=LATIN1'"
     CONNECTIONTYPE POSTGIS
-    DATA "the_geom from (select st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from ibge.bairros /*FW*//*FW*/) as foo using unique co_bairro using srid=4326"
+    DATA "the_geom from (select gid, st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros /*FW*//*FW*/) as foo using unique co_bairro using srid=4326"
     METADATA
       "TIP"	"no_bairro"
       "cache"	""
       "CLASSE"	"SIM"
-      "ITENSDESC"	"Código bairro,Nome,Distrito,Município"
+      "ITENSDESC"	"id,Código bairro,Nome,Distrito,Município"
       "EDITAVEL"	"SIM"
       "ESQUEMATABELAEDITAVEL"	"ibge"
-      "ITENS"	"co_bairro,no_bairro,no_distr,no_municip"
+      "ITENS"	"gid,co_bairro,no_bairro,no_distr,no_municip"
       "TEMA"	"Bairro (IBGE)"
       "COLUNAIDUNICO"	"gid"
       "COLUNAGEOMETRIA"	"the_geom"

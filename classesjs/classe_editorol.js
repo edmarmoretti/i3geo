@@ -719,6 +719,7 @@ i3GEO.editorOL = {
 				ins += "<a href='#' onclick='"+i3GEO.editorOL.nomeFuncaoSalvar+"' >Salvar dados</a>&nbsp;&nbsp;";
 			}
 			ins += "<a href='#' onclick='i3GEO.editorOL.incorporar()' >Incorporar ao mapa</a></p>";
+			ins += "<p class=paragrafo>"+ $trad("ajudaEditorOlSalva") +"</p>";
 			YAHOO.salvaGeometrias.container.panel.setBody(ins);
 		}
 		else
