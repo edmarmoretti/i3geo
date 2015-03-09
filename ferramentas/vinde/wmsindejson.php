@@ -34,10 +34,11 @@ if(!file_exists($arq)){
 	}
 	$resultado = curl_exec($ch);
 	curl_close($ch);
-
-	$fp = fopen($arq,"w");
-	fwrite($fp,$resultado);
-	fclose($fp);
+	if($resultado != ""){
+		$fp = fopen($arq,"w");
+		fwrite($fp,$resultado);
+		fclose($fp);
+	}
 }
 else{
 	$resultado = file_get_contents($arq);

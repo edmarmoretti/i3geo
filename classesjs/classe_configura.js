@@ -649,6 +649,11 @@ i3GEO.configura =
 										id : "omenudataFerramentas14",
 										text : "<span class='i3GEOconeFerramenta i3GEOiconeAdd'></span>" + $trad("conexaoServicoGeo"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"
+									},
+									{
+										id : "omenudataFerramentas9i",
+										text : "<span class='i3GEOconeFerramenta i3GEOiconeVinde'></span>" + $trad("x85"),
+										url : "javascript:i3GEO.arvoreDeTemas.dialogo.vinde()"
 									}
 								]
 							]
