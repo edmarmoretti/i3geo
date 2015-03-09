@@ -1579,10 +1579,10 @@ i3GEO.Interface =
 						i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT + "px";
 						i3GEO.Interface.openlayers.OLpanzoombar.div.style.right = i3GEO.Interface.BARRADEZOOMRIGHT + "px";
 					}
-					if (i3GEO.Interface.BARRADEZOOMLEFT === 0) {
+					if (i3GEO.Interface.BARRADEZOOMLEFT === 0 && i3GEO.Interface.openlayers.OLpanzoombar) {
 						i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = null;
 					}
-					if (i3GEO.Interface.BARRADEZOOMRIGHT === 0) {
+					if (i3GEO.Interface.BARRADEZOOMRIGHT === 0 && i3GEO.Interface.openlayers.OLpanzoombar) {
 						i3GEO.Interface.openlayers.OLpanzoombar.div.style.right = null;
 					}
 					i3GEO.Interface.openlayers.LAYERFUNDO = nome;
