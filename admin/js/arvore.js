@@ -41,7 +41,7 @@ i3geo/admin/js/arvore.js
 //obtem os parametros da url
 //
 YAHOO.namespace("admin.container");
-//ZODO ao adicionar um item na arvore, nao mostrar o nome do mapfile, ou mostrar em todos os temas
+//TODO permitir escolher mais de um tema ao adicionar em um no da arvore
 (function(){
 	$id_menu = "";
 	$id_grupo = "";
@@ -352,7 +352,7 @@ function montaTemas(idmenu,no,dados,redesenha)
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
-		var conteudo = montaConteudoNo(dados[i].id_n3,dados[i].publicado,dados[i].nome_tema,"tema");
+		var conteudo = montaConteudoNo(dados[i].id_n3,dados[i].publicado,dados[i].nome_tema,"tema",dados[i].codigo_tema);
 		var d = {html:conteudo,id_n3:dados[i].id_n3,tipo:"tema"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
@@ -360,16 +360,18 @@ function montaTemas(idmenu,no,dados,redesenha)
 	}
 	if(redesenha){tree.draw();}
 }
-function montaConteudoNo(id,publicado,nome,tipo){
-	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','"+tipo+"','"+id+"')\" title=sobe src=\"../imagens/34.png\" />";
+function montaConteudoNo(id,publicado,nome,tipo,tema){
+	var complemento = "", cor = "", conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','"+tipo+"','"+id+"')\" title=sobe src=\"../imagens/34.png\" />";
 	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','"+tipo+"','"+id+"')\" title=desce src=\"../imagens/33.png\" />";
 	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('"+tipo+"','"+id+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
 	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('"+tipo+"','"+id+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;";
-	var cor = "";
 	if(publicado == "NAO")
 	{cor = "style='color:red'";}
+	if(tema && tema != undefined && tema != ""){
+		complemento = " tema: "+tema;
+	}
 	if(nome)
-	conteudo += "<span "+cor+" >"+nome+"<span style='color:gray'> id: "+id+"</span></span>";
+	conteudo += "<span "+cor+" >"+nome+"<span style='color:gray'> id: "+id+complemento+"</span></span>";
 	else
 	conteudo += "<span "+cor+" > ??? vc precisa editar esse n&oacute;</span>";
 	return conteudo;
@@ -426,7 +428,7 @@ function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 	}
 	for (var i=0, j=dados.raiz.length; i<j; i++)
 	{
-		var conteudo = montaConteudoNo(dados.raiz[i].id_raiz,"SIM",dados.raiz[i].nome_tema,"raizgrupo");
+		var conteudo = montaConteudoNo(dados.raiz[i].id_raiz,"SIM",dados.raiz[i].nome_tema,"raizgrupo",dados.raiz[i].codigo_tema);
 		var d = {html:conteudo,id_raiz:dados.raiz[i].id_raiz,tipo:"raizgrupo"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR,false,true);
 		tempNode.enableHighlight = false;
