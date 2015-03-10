@@ -1667,7 +1667,6 @@ i3GEOF.identifica =
 			return ins;
 		},
 		listaVariaveis : function(codigo_tipo_regiao,idjanela){
-			return;
 			var p, temp;
 			temp = function (retorno){
 				var ins = "", n, i, m, j, d, dd, nc, ic, ndd, idd;
@@ -1681,21 +1680,21 @@ i3GEOF.identifica =
 						m = d.dados.length;
 						//cada medida
 						for(j = 0; j<m; j++){
-							dd = d.dados;
-							ins += "<b>" + dd["medida"] + "</b>";
-							nc = dd["colunas"].length;
-							ins += "<table><tr>";
+							dd = d.dados[j];
+							//ins += " -> " + dd.medida;
+							nc = dd.dados.colunas.length;
+							ins += "<table class='lista4' ><tr>";
 							//cabecalho
 							for(ic=0; ic<nc; ic++){
-								ins += "<td>" + dd["colunas"][ic] + "</td>";
+								ins += "<td>" + dd.dados.aliascolunas[ic] + "</td>";
 							}
 							ins += "</tr>";
-							ndd = dd.length;
+							ndd = dd.dados.dados.length;
 							//cada valor
 							for(idd=0; idd<ndd;idd++){
 								ins += "<tr>";
 								for(ic=0; ic<nc; ic++){
-									ins += "<td>" + dd["dados"][idd][ic] + "</td>";
+									ins += "<td>" + dd.dados.dados[idd][dd.dados.colunas[ic]] + "</td>";
 								}
 								ins += "</tr>";
 							}
