@@ -2321,7 +2321,7 @@ g_traducao = {
 }],
 "mostraTodosLegenda": [
 {
-	pt: "mostra todos",
+	pt: "todos",
 	en:"",
 	es:""
 }],
