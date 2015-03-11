@@ -7,6 +7,7 @@ Classe: i3GEOF.toponimia
 
 */
 i3GEOF.toponimia = {
+	tema : i3GEO.temaAtivo,
 	/*
 	Variavel: aguarde
 
@@ -45,7 +46,7 @@ i3GEOF.toponimia = {
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela");
-		if(i3GEO.temaAtivo === ""){
+		if(i3GEOF.toponimia.tema === ""){
 			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
 		}
@@ -85,7 +86,7 @@ i3GEOF.toponimia = {
 			//
 			i3GEO.util.comboItens(
 				"i3GEOtoponimiaListaItens",
-				i3GEO.temaAtivo,
+				i3GEOF.toponimia.tema,
 				function(retorno){
 					$i("i3GEOtoponimiaDivListaItens").innerHTML = retorno.dados;
 					$i("i3GEOtoponimiaDivListaItens").style.display = "block";
@@ -120,7 +121,6 @@ i3GEOF.toponimia = {
 	iniciaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo;
 		if($i("i3GEOF.toponimia")){
-			i3GEOF.toponimia.tema = i3GEO.temaAtivo;
 			i3GEOF.toponimia.inicia("i3GEOF.toponimia_corpo");
 			return;
 		}
@@ -204,7 +204,7 @@ i3GEOF.toponimia = {
 			"&shadowcolor="+$i("i3GEOtoponimiafrentes_i").value+
 			"&item="+$i("i3GEOtoponimiaListaItens").value+
 			"&wrap="+$i("i3GEOtoponimiawrap_i").value+
-			"&tema="+i3GEO.temaAtivo+
+			"&tema="+i3GEOF.toponimia.tema+
 			"&minscale="+parseInt($i("i3GEOtoponimiaMinscale").value,10)+
 			"&maxscale="+parseInt($i("i3GEOtoponimiaMaxscale").value,10)+
 			"&novotema="+novotema;
@@ -227,7 +227,7 @@ i3GEOF.toponimia = {
 			var monta = function(){
 					i3GEOF.toponimia.aguarde.visibility = "hidden";
 					if($i("i3GEOtoponimianovotema").checked)
-					{i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);}
+					{i3GEO.Interface.atualizaTema("",i3GEOF.toponimia.tema);}
 					else
 					{i3GEO.atualiza();}
 				},
@@ -250,10 +250,10 @@ i3GEOF.toponimia = {
 			i3GEOF.toponimia.aguarde.visibility = "visible";
 			var monta = function(){
 					i3GEOF.toponimia.aguarde.visibility = "hidden";
-					i3GEO.Interface.atualizaTema("",i3GEO.temaAtivo);
+					i3GEO.Interface.atualizaTema("",i3GEOF.toponimia.tema);
 				},
 				p = i3GEO.configura.locaplic+"/ferramentas/toponimia/exec.php?g_sid="+i3GEO.configura.sid+
-					"&funcao=removetoponimia&tema="+i3GEO.temaAtivo;
+					"&funcao=removetoponimia&tema="+i3GEOF.toponimia.tema;
 
 			cp = new cpaint();
 			cp.set_response_type("JSON");

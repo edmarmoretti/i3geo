@@ -40,6 +40,7 @@ Classe: i3GEOF.graficoTema
 
 */
 i3GEOF.graficoTema = {
+	tema : i3GEO.temaAtivo,
 	/*
 	Variavel: aguarde
 
@@ -93,7 +94,7 @@ i3GEOF.graficoTema = {
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","graficoTema","ligadosComTabela");
-		if(i3GEO.temaAtivo === ""){
+		if(i3GEOF.graficoTema.tema === ""){
 			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
 		}
@@ -114,7 +115,7 @@ i3GEOF.graficoTema = {
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de escolha
 			//
-			i3GEO.php.listaItensTema(i3GEOF.graficoTema.montaListaItens,i3GEO.temaAtivo);
+			i3GEO.php.listaItensTema(i3GEOF.graficoTema.montaListaItens,i3GEOF.graficoTema.tema);
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -260,7 +261,7 @@ i3GEOF.graficoTema = {
 				i3GEOF.graficoTema.aguarde.visibility = "hidden";
 				i3GEO.atualiza(retorno);
 			};
-			p = i3GEO.configura.locaplic+"/ferramentas/graficotema/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficotema&tema="+i3GEO.temaAtivo+"&lista="+lista+"&tamanho="+tamanho+"&tipo="+tipo+"&outlinecolor="+outlinecolor+"&offset="+offset;
+			p = i3GEO.configura.locaplic+"/ferramentas/graficotema/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficotema&tema="+i3GEOF.graficoTema.tema+"&lista="+lista+"&tamanho="+tamanho+"&tipo="+tipo+"&outlinecolor="+outlinecolor+"&offset="+offset;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficotema",temp);
 		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.graficoTema.aguarde.visibility = "hidden";}

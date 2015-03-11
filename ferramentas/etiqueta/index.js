@@ -39,6 +39,7 @@ if(typeof(i3GEOF) === 'undefined'){
 Classe: i3GEOF.etiqueta
 */
 i3GEOF.etiqueta = {
+	tema : i3GEO.temaAtivo,
 	/*
 	Variavel: aguarde
 
@@ -68,8 +69,9 @@ i3GEOF.etiqueta = {
 	*/
 	inicia: function(iddiv){
 		i3GEO.janela.comboCabecalhoTemas("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela");
-		if(i3GEO.temaAtivo === ""){
-			$i(iddiv).innerHTML = "";//'<img src="../imagens/opcoes.gif" ><p style="position: relative; top: -35px; width: 180px; font-size: 15px; text-align: left; left: 35px;">'+$trad('selecionaTema',i3GEOF.etiqueta.dicionario)+'</p>';
+
+		if(i3GEOF.etiqueta.tema === ""){
+			$i(iddiv).innerHTML = "";
 			return;
 		}
 		try{
@@ -151,13 +153,13 @@ i3GEOF.etiqueta = {
 	*/
 	ativaFoco: function(){
 		if(i3GEO.temaAtivo != ""){
-			i3GEO.php.listaItensTema(i3GEOF.etiqueta.montaListaItens,i3GEO.temaAtivo);
+			i3GEO.php.listaItensTema(i3GEOF.etiqueta.montaListaItens,i3GEOF.etiqueta.tema);
 		}
 	},
 	pegaDadosEtiquetas: function(funcao){
 		var cp = new cpaint(),
 			p;
-		p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaDadosEtiquetas&tema="+i3GEO.temaAtivo;
+		p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaDadosEtiquetas&tema="+i3GEOF.etiqueta.tema;
 		cp.set_response_type("JSON");
 		cp.call(p,"etiqueta",funcao);
 	},
@@ -321,7 +323,7 @@ i3GEOF.etiqueta = {
 			p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="
 				+ i3GEO.configura.sid
 				+ "&funcao=ativaEtiquetas&tema="
-				+ i3GEO.temaAtivo
+				+ i3GEOF.etiqueta.tema
 				+ "&tips="+lista[0].toString(",")
 				+ "&itens="+lista[1].toString(",")
 				+ "&itensdesc="+i3GEO.util.base64encode(lista[2].toString(","))
@@ -353,7 +355,7 @@ i3GEOF.etiqueta = {
 				i3GEOF.etiqueta.aguarde.visibility = "hidden";
 				i3GEO.atualiza(retorno);
 			};
-			p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=removeEtiquetas&tema="+i3GEO.temaAtivo;
+			p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=removeEtiquetas&tema="+i3GEOF.etiqueta.tema;
 			cp.set_response_type("JSON");
 			cp.call(p,"etiqueta",temp);
 		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.etiqueta.aguarde.visibility = "hidden";}

@@ -90,7 +90,7 @@ i3GEOF.filtro = {
 		if(modoCalculadora === false){
 			i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela");
 			if(i3GEOF.filtro.tema === ""){
-				$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
+				$i(iddiv).innerHTML = "";
 				return;
 			}
 		}

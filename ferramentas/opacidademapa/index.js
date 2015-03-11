@@ -43,6 +43,7 @@ if(typeof(i3GEOF) === 'undefined'){
 Classe: i3GEOF.opacidademapa
 */
 i3GEOF.opacidademapa = {
+	tema : i3GEO.temaAtivo,
 	/*
 	Variavel: aguarde
 
@@ -180,7 +181,7 @@ i3GEOF.opacidademapa = {
 		i3GEOF.opacidademapa.slider = YAHOO.widget.Slider.getHorizSlider($i("slider-bg"),$i("slider-thumb"), 0, 200, 0);
 		i3GEOF.opacidademapa.slider.setValue(200,false);
 		i3GEOF.opacidademapa.slider.subscribe("change", function(offsetFromStart) {
-			i3GEO.Interface.aplicaOpacidade(offsetFromStart / 200,i3GEO.temaAtivo);
+			i3GEO.Interface.aplicaOpacidade(offsetFromStart / 200,i3GEOF.opacidademapa.tema);
 		});
 		if(navm){
 			$i("slider-bg").style.left = "-100px";
