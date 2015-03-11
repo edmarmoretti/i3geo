@@ -1107,6 +1107,7 @@ line-height: 1.5;
 -webkit-appearance: none;
 -moz-appearance: none;
 text-indent: 0.01px;
+white-space: nowrap;
 text-overflow: ellipsis;
 font-size: 12px;
 appearance: none;
