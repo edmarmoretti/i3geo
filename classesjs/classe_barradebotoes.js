@@ -1144,7 +1144,7 @@ i3GEO.barraDeBotoes =
 					for (i = 0; i < n; i += 1) {
 						if (i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true) {
 							temp +=
-								"<img id='" + chaves[i] + "_iconeId' onclick='i3GEO.barraDeBotoes.execBotao(\"" + chaves[i] + "\")' src='"
+								"<img id='" + chaves[i] + "_iconeId' onclick='i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.execBotao(\"" + chaves[i] + "\")' src='"
 									+ i3GEO.configura.locaplic + "/" + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]] + "' />";
 						}
 					}

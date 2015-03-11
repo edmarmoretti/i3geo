@@ -104,7 +104,7 @@ var i3GEO = {
 	 * Parametros obtidos do mapa atual. Os parametros s&atilde;o fornecidos
 	 * pelos programas PHP de redesenho e cria&ccedil;&atilde;o do mapa e
 	 * atualizados sempre que o mapa &eacute; alterado.
-	 * 
+	 *
 	 * Algumas dessas vari&aacute;veis s&atilde;o definidas em ms_configura.php
 	 *
 	 * Exemplos:
@@ -194,7 +194,7 @@ var i3GEO = {
 	 *
 	 * copyright {String} - texto existente no Layer copyright do mapfile de
 	 * inicializa&ccedil;&atilde;o
-	 * 
+	 *
 	 * statusFerramentas {array} - indicador de status de algumas ferramentas que dependem de configura&ccedil;&otilde;es no servidor
 	 */
 	parametros : {
@@ -984,18 +984,19 @@ var i3GEO = {
 			case "openlayers":
 				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
 				i3geoOL.updateSize();
-				i3GEO.Interface.openlayers.OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP
-					+ "px";
-
-				i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT
-					+ "px";
-				i3GEO.Interface.openlayers.OLpanzoombar.div.style.right = i3GEO.Interface.BARRADEZOOMRIGHT
-					+ "px";
-				if (i3GEO.Interface.BARRADEZOOMLEFT === 0) {
-					i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = null;
-				}
-				if (i3GEO.Interface.BARRADEZOOMRIGHT === 0) {
-					i3GEO.Interface.openlayers.OLpanzoombar.div.style.right = null;
+				if(i3GEO.Interface.openlayers.OLpanzoombar){
+					i3GEO.Interface.openlayers.OLpanzoombar.div.style.top = i3GEO.Interface.BARRADEZOOMTOP
+						+ "px";
+					i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = i3GEO.Interface.BARRADEZOOMLEFT
+						+ "px";
+					i3GEO.Interface.openlayers.OLpanzoombar.div.style.right = i3GEO.Interface.BARRADEZOOMRIGHT
+						+ "px";
+					if (i3GEO.Interface.BARRADEZOOMLEFT === 0) {
+						i3GEO.Interface.openlayers.OLpanzoombar.div.style.left = null;
+					}
+					if (i3GEO.Interface.BARRADEZOOMRIGHT === 0) {
+						i3GEO.Interface.openlayers.OLpanzoombar.div.style.right = null;
+					}
 				}
 				break;
 			}

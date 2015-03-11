@@ -1439,7 +1439,7 @@ i3GEO.util =
 		 * {string} - estilo (css) que sera aplicado ao combo
 		 *
 		 * {boolean} - (opcional) indica se o combo sera montado com o estilo YUI (menu)
-		 * 
+		 *
 		 * {boolean} - (opcional) inclui um option vazio
 		 */
 		comboTemas : function(id, funcao, onde, nome, multiplo, tipoCombo, estilo, yui, incluiVazio) {
@@ -3314,18 +3314,20 @@ i3GEO.util =
 		},
 		/**
 		 * Function: animaCique
-		 * 
+		 *
 		 * Aplica um efeito sobre um elemento quando e feito o clique
-		 * 
+		 *
 		 * Parametres:
-		 * 
+		 *
 		 * {objeto dom}
 		 */
 		animaClique : function (obj){
-			obj.style.visibility = "hidden";
-			setTimeout(function(){
-				obj.style.visibility = "visible";
-			},50);
+			if(obj){
+				obj.style.visibility = "hidden";
+				setTimeout(function(){
+					obj.style.visibility = "visible";
+				},50);
+			}
 		}
 	};
 

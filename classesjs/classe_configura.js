@@ -1215,6 +1215,9 @@ i3GEO.configura =
 					dica : $trad("d2"),
 					titulo : $trad("d2t"),
 					funcaoonclick : function() {
+						if (i3GEO.barraDeBotoes.TIPO === "emlinha"){
+							i3GEO.util.animaClique($i("zoomtot"));
+						}
 						if (i3GEO.Interface.ATUAL === "openlayers") {
 							i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.extentTotal);
 							return;
