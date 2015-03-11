@@ -84,6 +84,9 @@ i3GEOF.filtro = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv,modoCalculadora,idRetorno){
+		if(modoCalculadora === undefined){
+			modoCalculadora = false;
+		}
 		if(modoCalculadora === false){
 			i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela");
 			if(i3GEOF.filtro.tema === ""){
