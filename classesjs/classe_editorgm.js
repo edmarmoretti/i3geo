@@ -1,6 +1,5 @@
 //TODO documentar
 //XODO permitir edicao de temas editaveis, nao apenas de regioes cadastradas
-//XODO permitir a edicao de dados fora do esquema metaestat
 
 
 /*

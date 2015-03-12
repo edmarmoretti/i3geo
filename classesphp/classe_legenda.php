@@ -278,6 +278,16 @@ string de variaveis no formato javascript que permitem montar a legenda.
 					$classe = $layer->getclass(0);
 					if (($classe->name == "") || ($classe->name == " "))
 					{$classe->set("name",$layer->getmetadata("tema"));}
+					//corrige o titulo da legenda
+					if($layer->type != 3 && $layer->type != 4){
+						$nclass = $layer->numclasses;
+						for($j=0;$j<$nclass;$j++){
+							$classe = $layer->getclass($j);
+							if($classe->title === ""){
+								$classe->title = $classe->name;
+							}
+						}
+					}
 				}
 			}
 		}

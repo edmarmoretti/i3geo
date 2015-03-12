@@ -1,6 +1,4 @@
 //TODO documentar
-//XODO permitir a edicao de atributos
-
 /*
 Title: Editor vetorial para OpenLayers
 

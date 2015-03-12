@@ -109,6 +109,20 @@ $legenda = $map->legend;
 //$legenda->set("keysizey",20);
 //$label = $legenda->label;
 //$label->set("size",14);
+//corrige o titulo da legenda
+$numlayers = $map->numlayers;
+for ($j=0;$j < $numlayers;$j++){
+	$l = $map->getlayer($j);
+	if($l->type != 3 && $l->type != 4){
+		$nclass = $l->numclasses;
+		for($i=0;$i<$nclass;$i++){
+			$classe = $l->getclass($i);
+			if($classe->title === ""){
+				$classe->title = $classe->name;
+			}
+		}
+	}
+}
 $imgo = $map->drawlegend();
 $nomer = ($imgo->imagepath)."leg".$nomeImagem.".PNG";
 $imgo->saveImage($nomer);

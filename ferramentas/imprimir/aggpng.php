@@ -127,6 +127,20 @@ $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
 //legenda
+//corrige o titulo da legenda
+$numlayers = $map->numlayers;
+for ($j=0;$j < $numlayers;$j++){
+	$l = $map->getlayer($j);
+	if($l->type != 3 && $l->type != 4){
+		$nclass = $l->numclasses;
+		for($i=0;$i<$nclass;$i++){
+			$classe = $l->getclass($i);
+			if($classe->title === ""){
+				$classe->title = $classe->name;
+			}
+		}
+	}
+}
 $imgo = $map->drawlegend();
 $nomer = ($imgo->imagepath)."legenda".$nomes.".png";
 $imgo->saveImage($nomer);

@@ -78,7 +78,7 @@ MAP
       TITLE ""
     END # CLASS
     CLASS
-      NAME "AMAZÔNIA"
+      NAME "AMAZ�NIA"
       EXPRESSION ('[CD_LEGENDA]'eq'AMAZÔNIA')
       STYLE
         COLOR 102 177 195

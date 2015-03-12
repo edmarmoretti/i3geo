@@ -92,7 +92,7 @@ if ($tipo == "")
 	echo '<body><center><div class="bordaSuperior"  >&nbsp;</div><div class="mascaraPrincipal" id="divGeral">';
 	echo '<form action="testamapfile.php" method="post" id=f >';
 	echo 'Nome do arquivo map existente no diretório i3geo/temas. Exemplo para uso manual da URL: testamapfile.php?map=biomashp (utilize "testamapfile.php?map=todos" na URL para testar todos de uma só vez)<br><br>';
-	echo '<br>Mostra apenas a legenda? <input type=radio name=solegenda value=sim />sim <input type=radio name=solegenda value=nao CHECKED /> n&atilde;o<br>';
+	//echo '<br>Mostra apenas a legenda? <input type=radio name=solegenda value=sim />sim <input type=radio name=solegenda value=nao CHECKED /> n&atilde;o<br>';
 	$combo = "<br><select onchange='roda()' id=nomemap ><option value=''>Escolha o arquivo para testar</option>";
 	foreach ($arqs["arquivos"] as $arq){
 		$temp = explode(".",$arq);
@@ -396,6 +396,20 @@ function verifica($map,$solegenda,$tabela){
 		else{
 			$mapa = ms_newMapObj($destino);
 			$objImagem = @$mapa->draw();
+			//corrige o titulo da legenda
+			$numlayers = $mapa->numlayers;
+			for ($j=0;$j < $numlayers;$j++){
+				$l = $mapa->getlayer($j);
+				if($l->type != 3 && $l->type != 4){
+					$nclass = $l->numclasses;
+					for($i=0;$i<$nclass;$i++){
+						$classe = $l->getclass($i);
+						if($classe->title === ""){
+							$classe->title = $classe->name;
+						}
+					}
+				}
+			}
 			$objImagemLegenda = @$mapa->drawLegend();
 			if (!$objImagem){
 				echo "Problemas ao gerar o mapa<br>";
