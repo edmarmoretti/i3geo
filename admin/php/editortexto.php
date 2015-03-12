@@ -1,4 +1,4 @@
-<?php 
+<?php
 //ZODO melhorar o realce de sintaxe para mapfile no codemirror
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -8,7 +8,7 @@
 <title>Editor texto</title>
 
 <script src="../../pacotes/codemirror/lib/codemirror.js"></script>
-<script src="../../pacotes/codemirror/mode/shell/shell.js"></script>
+<script src="../../pacotes/codemirror/mode/scribe/scribe.js"></script>
 <link rel=stylesheet href="../../pacotes/codemirror/doc/docs.css">
 <link rel="stylesheet" href="../../pacotes/codemirror/lib/codemirror.css">
 <link rel="stylesheet" href="../../pacotes/codemirror/theme/ambiance.css">
@@ -36,6 +36,9 @@ body {
 }
 .cm-s-elegant span.cm-builtin{
 	color: red;
+}
+.cm-s-elegant span.cm-keyword.cm-block {
+	color: blue;
 }
 </style>
 </head>
@@ -159,7 +162,7 @@ else{
 */
 
 var editorCM = CodeMirror.fromTextArea(document.getElementById("editor"), {
-	mode: 'text/x-sh',
+	mode: 'scribe',
 	tabMode: 'indent',
 	lineNumbers: true,
 	theme: "elegant"
