@@ -2105,6 +2105,9 @@ i3GEO.arvoreDeCamadas =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.arvoreDeCamadas.filtraCamadas()");
 
+			if(!camadas){
+				camadas = i3GEO.arvoreDeCamadas.CAMADAS;
+			}
 			var resultado = [], i = 0, temp, nelementos = camadas.length, ltema;
 			if (nelementos > 0) {
 				do {
@@ -2112,18 +2115,18 @@ i3GEO.arvoreDeCamadas =
 					if (ltema.escondido.toLowerCase() !== "sim") {
 						temp = ltema[propriedade];
 						if (operador === "igual") {
-							if (temp == valor) // n&atilde;o usar === aqui
+							if (temp+"".toLowerCase() == valor+"".toLowerCase()) // n&atilde;o usar === aqui
 							{
 								resultado.push(ltema);
 							}
 						}
 						if (operador === "diferente") {
-							if (temp !== valor) {
+							if (temp+"".toLowerCase() !== valor+"".toLowerCase()) {
 								resultado.push(ltema);
 							}
 						}
 						if (operador === "menor") {
-							if (temp < valor) {
+							if (temp+"".toLowerCase() < valor+"".toLowerCase()) {
 								resultado.push(ltema);
 							}
 						}

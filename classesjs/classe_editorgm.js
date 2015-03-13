@@ -395,11 +395,19 @@ i3GEO.editorGM = {
 					temp = function(retorno){
 						var temp,n,i,WicketWkt,
 						wkt = "",
-						colunaid = i3GEO.editorGM.descregioes["a_"+regiao]["identificador"],
+						colunaid = "",
 						valorid = "",
-						colunanome = i3GEO.editorGM.descregioes["a_"+regiao]["colunanomeregiao"],
+						colunanome = "",
 						valornome = "",
 						aguarde = $i("i3GEOjanelaEditor_imagemCabecalho");
+						
+						if(i3GEO.editorGM.descregioes["a_"+regiao]["identificador"]){
+							colunaid = i3GEO.editorGM.descregioes["a_"+regiao]["identificador"];
+						}
+						if(i3GEO.editorGM.descregioes["a_"+regiao]["colunanomeregiao"]){
+							colunanome = i3GEO.editorGM.descregioes["a_"+regiao]["colunanomeregiao"];
+						}
+						
 						if(aguarde){
 							aguarde.style.visibility = "hidden";
 						}
@@ -475,9 +483,16 @@ i3GEO.editorGM = {
 				for(i=0;i<n;i++){
 					//so e possivel editar nesse esquema
 					//if(dados[i].esquemadb == "i3geo_metaestat"){
-						ins += "<option value='"+dados[i].codigo_tipo_regiao+"'>"+dados[i].nome_tipo_regiao+"</option>";
+						ins += "<option title='' value='"+dados[i].codigo_tipo_regiao+"'>"+dados[i].nome_tipo_regiao+"</option>";
 						i3GEO.editorGM.descregioes["a_"+dados[i].codigo_tipo_regiao] = dados[i];
 					//}
+				}
+				//inclui as camadas que sao editaveis e estao no mapa
+				dados = i3GEO.arvoreDeCamadas.filtraCamadas("editavel", "SIM", "igual");
+				n = dados.length;
+				for(i=0;i<n;i++){
+					ins += "<option title='layer' value='"+dados[i].name+"'>"+dados[i].tema+"</option>";
+					i3GEO.editorGM.descregioes["a_"+dados[i].name] = "";
 				}
 				ins += "</select>";
 				if(onde){
@@ -496,15 +511,22 @@ i3GEO.editorGM = {
 				return;
 			}
 			i3GEO.editorGM.editarAtributos.desativa();
-			var temp = function(retorno){
-				if(i3GEO.arvoreDeCamadas.pegaTema(retorno.layer) == ""){
-					i3GEO.php.adtema(i3GEO.atualiza,retorno.mapfile);
-					//guarda o codigo e relaciona com a regiao
-					i3GEO.editorGM.regioestemas["a"+$i("i3geoCartoRegioesEditaveis").value] = retorno.layer;
-					i3GEO.editorGM.temasregioes[retorno.layer] = $i("i3geoCartoRegioesEditaveis").value;
-				}
-			};
-			i3GEO.php.mapfileTipoRegiao(temp,combo.value);
+			//caso a camada escolhida seja uma camada normal, vinda de um mapfile
+			if(i3GEO.arvoreDeCamadas.pegaTema(combo.value) != ""){
+				i3GEO.editorGM.regioestemas["a"+combo.value] = combo.value;
+				i3GEO.editorGM.temasregioes[combo.value] = combo.value;
+			}
+			else{
+				var temp = function(retorno){
+					if(i3GEO.arvoreDeCamadas.pegaTema(retorno.layer) == ""){
+						i3GEO.php.adtema(i3GEO.atualiza,retorno.mapfile);
+						//guarda o codigo e relaciona com a regiao
+						i3GEO.editorGM.regioestemas["a"+combo.value] = retorno.layer;
+						i3GEO.editorGM.temasregioes[retorno.layer] = combo.value;
+					}
+				};
+				i3GEO.php.mapfileTipoRegiao(temp,combo.value);
+			}
 		},
 		/**
 		 * Altera as bordas dos icones e desativa eventos
@@ -938,6 +960,7 @@ i3GEO.editorGM = {
 							ins += "<option value='"+dados[i].id_medida_variavel+"'>"+dados[i].nomemedida+"</option>";
 						}
 					}
+
 					ins += "</select>";
 					$i("editarAtributosMedidasVariavel").innerHTML = ins;
 				};

@@ -13,7 +13,7 @@ MAP
       "EDITAVEL"	"SIM"
       "ESQUEMATABELAEDITAVEL"	"ibge"
       "ITENS"	"gid,co_bairro,no_bairro,no_distr,no_municip"
-      "TEMA"	"Bairro (IBGE)"
+      "TEMA"	"Bairro via mapfile"
       "COLUNAIDUNICO"	"gid"
       "COLUNAGEOMETRIA"	"the_geom"
       "TABELAEDITAVEL"	"bairros"

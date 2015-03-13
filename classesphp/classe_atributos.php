@@ -2347,7 +2347,6 @@ class Atributos
 			$layer->set("tolerance",$resolucao);
 			$ident = @$layer->queryByPoint($pt, 1, -1);
 		}
-
 		if ($ident == MS_SUCCESS){
 			//$ident = @$layer->queryByPoint($pt, 1, -1);
 			//verifica se o layer e editavel no sistema METAESTAT
@@ -2440,6 +2439,7 @@ class Atributos
 							}
 							$conta = $conta + 1;
 						}
+						
 						if($wkt == "sim"){
 							$arraytemp = array(
 									"alias"=>"wkt",
