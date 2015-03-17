@@ -1082,12 +1082,13 @@ class Mapa
 	*/
 	function gradeCoord($intervalo,$corlinha="200,200,200",$larguralinha=1,$tipolinha="linha",$tamanhotexto=MS_TINY,$fonte="bitmap",$cortexto="0,0,0",$incluitexto="sim",$mascara="-1,-1,-1",$shadowcolor="-1,-1,-1",$shadowsizex=0,$shadowsizey=0)
 	{
-		//echo $corlinha;
+		//echo $corlinha;exit;
 		//if (file_exists($this->qyfile))
 		//{unlink ($this->qyfile);}
 		//tem erro na vers&atilde;o 6 do Mapserver. J&aacute; abri um ticket no trac da OSGEO
 		$nlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Grade de coordenadas","SIM");
 		ms_newgridobj($nlayer);
+		
 		$nlayer->grid->set("labelformat", "DDMMSS");
 		$nlayer->grid->set("maxinterval", $intervalo);
 		$classe = $nlayer->getclass(0);
@@ -1098,27 +1099,30 @@ class Mapa
 		$estilo->set("size",$larguralinha);
 		$estilo->set("symbolname",$tipolinha);
 		$cor = $estilo->color;
-		$corlinha = explode(",",$corlinha);
-		$cor->setrgb($corlinha[0],$corlinha[1],$corlinha[2]);
-		if($incluitexto == "sim")
-		{
+		if($corlinha != ""){
+			$corlinha = explode(",",$corlinha);
+			$cor->setrgb($corlinha[0],$corlinha[1],$corlinha[2]);
+		}
+		if($incluitexto == "sim"){
 			if($this->vi >= 60200){
-				$classe->addLabel(new labelObj());
-				$label = $classe->getLabel(0);
+				//$classe->addLabel(new labelObj());
+				//$label = $classe->getLabel(0);
+				$s = "CLASS LABEL  END END";
+				$classe->updateFromString($s);
+				$label = $classe->getLabel($indiceLabel);
 			}
 			else{
 				$label = $classe->label;
 			}
+			
 			$label->set("size",$tamanhotexto);
 			$label->set("type",MS_BITMAP);
-			if ($fonte != "bitmap")
-			{
+			if ($fonte != "bitmap")	{
 				$label->set("type",MS_TRUETYPE);
 				$label->set("font",$fonte);
 				$label->set("size",$tamanhotexto);
 			}
-			else
-			{
+			else{
 				$label->set("type",MS_BITMAP);
 				$t = MS_TINY;
 				if ($tamanhotexto > 5 ){
@@ -1143,14 +1147,16 @@ class Mapa
 			$label->set("partials",MS_FALSE);
 			$label->set("position",MS_CC);
 			$corl = $label->color;
-			$cortexto = explode(",",$cortexto);
-			$corl->setrgb($cortexto[0],$cortexto[1],$cortexto[2]);
+			if($cortexto != ""){
+				$cortexto = explode(",",$cortexto);
+				$corl->setrgb($cortexto[0],$cortexto[1],$cortexto[2]);
+			}
 			$label->set("offsetx",0);
 			$label->set("offsety",0);
-			if($mascara != "")
+			if($mascara != ""){
 				corE($label,$mascara,"outlinecolor");
-			if($shadowcolor != "")
-			{
+			}
+			if($shadowcolor != ""){
 				corE($label,$shadowcolor,"shadowcolor");
 				$label->set("shadowsizex",$shadowsizex);
 				$label->set("shadowsizey",$shadowsizey);

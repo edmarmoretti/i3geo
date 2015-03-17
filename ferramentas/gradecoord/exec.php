@@ -6,29 +6,13 @@ include_once(dirname(__FILE__)."/../inicia.php");
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
-/*
-Section: Gr&aacute;ficos
-
-Cria&ccedil;&atilde;o de representa&ccedil;&otilde;es gr&aacute;ficas de dados estat&iacute;sticos.
-
-<graficos.php>
-*/
-/*
-Valor: GRAFICOSELECAO
-
-Pega os dados necess&aacute;rios para a gera&ccedil;&atilde;o dos gr&aacute;ficos da ferramenta sele&ccedil;&atilde;o
-
-<iniciaDadosGrafico>
-*/
-	case "GRAFICOSELECAO":
-		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
-		if(!isset($exclui))
-		{$exclui = "";}
-		if(!isset($tipo))
-		{$tipo = "nenhum";}
-		if(!isset($ordenax))
-		{$ordenax = "nao";}
-		$retorno = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,false,$ext,true,$ordenax);
+	case "GRADECOORD":
+		include_once("../../classesphp/classe_mapa.php");
+		copiaSeguranca($map_file);
+		$m = new Mapa($map_file);
+		$m->gradeCoord($intervalo,$corlinha,$larguralinha,$tipolinha,$tamanhotexto,$fonte,$cortexto,$incluitexto,$mascara,$shadowcolor,$shadowsizex,$shadowsizey);
+		$m->salva();
+		$retorno = "ok";
 	break;
 }
 if (!connection_aborted()){

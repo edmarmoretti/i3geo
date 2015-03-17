@@ -2294,6 +2294,9 @@ background-image: URL('../imagens/oxygen/16x16/image-x-generic.png');
 .i3GEOiconeColorchooser {
 background-image: URL('../imagens/oxygen/16x16/kcolorchooser.png');
 }
+.i3GEOiconeGraticule {
+background-image: URL('../imagens/gisicons/graticule.png');
+}
 .i3GEOiconeTabela {
 background-image: URL('../imagens/oxygen/16x16/view-form-table.png');
 }
