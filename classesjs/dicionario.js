@@ -2176,7 +2176,7 @@ g_traducao = {
 }],
 "x94":[
 {
-	pt:"Remove as figuras",
+	pt:"Remove as figuras da tela",
 	en:"Remove the pictures",
 	es:"Retire las figuras",
 	it:""

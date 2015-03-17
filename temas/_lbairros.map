@@ -11,7 +11,7 @@ MAP
       "CLASSE"	"SIM"
       "ITENSDESC"	"id,Código bairro,Nome,Distrito,Município"
       "EDITAVEL"	"SIM"
-      "ESQUEMATABELAEDITAVEL"	"ibge"
+      "ESQUEMATABELAEDITAVEL"	"i3geo_metaestat"
       "ITENS"	"gid,co_bairro,no_bairro,no_distr,no_municip"
       "TEMA"	"Bairro via mapfile"
       "COLUNAIDUNICO"	"gid"

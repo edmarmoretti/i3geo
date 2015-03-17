@@ -1,5 +1,4 @@
 ﻿<?php
-//ZODO criar com bootstrap
 /**
  * Pagina inicial do i3Geo
  * Voce pode utilizar o parametro customDir para indicar a pasta onde

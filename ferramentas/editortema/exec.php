@@ -140,14 +140,15 @@ switch (strtoupper($funcao))
 				$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$dbh->beginTransaction();
 				$sql = "DELETE from ".$esquema.".".$tabela." where ".$colunaidunico."::text = '$identificador' ";
+				//echo $sql;exit;
 				$sth = $dbh->exec($sql);
 				$dbh->commit();
+				$retorno = "ok";
 			} catch (Exception $e) {
 				$dbh->rollBack();
 				$retorno = array("Falhou: " . $e->getMessage());
 			}
 		}
-		$retorno = "ok";
 	break;
 	case "SALVAREGISTRO":
 		$mapa = ms_newMapObj($map_file);

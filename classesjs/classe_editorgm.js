@@ -1,7 +1,5 @@
 //TODO documentar
-//XODO permitir edicao de temas editaveis, nao apenas de regioes cadastradas
-
-
+//TODO traduzir
 /*
 Editor vetorial de limites para a interface google maps
 
@@ -269,6 +267,7 @@ i3GEO.editorGM = {
 		 * @param boolean indica se deve ser feita uma confirmacao ou nao antes de apagar
 		 */
 		deleteSelectedShape: function(naoconfirma) {
+			i3GEO.janela.tempoMsg("Para excluir o registro utilize a ferramenta de identificacao");
 			if(!naoconfirma){
 				naoconfirma = false;
 			}
@@ -400,14 +399,12 @@ i3GEO.editorGM = {
 						colunanome = "",
 						valornome = "",
 						aguarde = $i("i3GEOjanelaEditor_imagemCabecalho");
-						
 						if(i3GEO.editorGM.descregioes["a_"+regiao]["identificador"]){
 							colunaid = i3GEO.editorGM.descregioes["a_"+regiao]["identificador"];
 						}
 						if(i3GEO.editorGM.descregioes["a_"+regiao]["colunanomeregiao"]){
 							colunanome = i3GEO.editorGM.descregioes["a_"+regiao]["colunanomeregiao"];
 						}
-						
 						if(aguarde){
 							aguarde.style.visibility = "hidden";
 						}
@@ -481,18 +478,20 @@ i3GEO.editorGM = {
 				i;
 				ins += "<select onchange='i3GEO.editorGM.comboRegiaoEditavelOnchange(this)' id='i3geoCartoRegioesEditaveis' style='width:175px' ><option value=''>---</option>";
 				for(i=0;i<n;i++){
-					//so e possivel editar nesse esquema
-					//if(dados[i].esquemadb == "i3geo_metaestat"){
-						ins += "<option title='' value='"+dados[i].codigo_tipo_regiao+"'>"+dados[i].nome_tipo_regiao+"</option>";
-						i3GEO.editorGM.descregioes["a_"+dados[i].codigo_tipo_regiao] = dados[i];
-					//}
+					ins += "<option value='"+dados[i].codigo_tipo_regiao+"'>"+dados[i].nome_tipo_regiao+"</option>";
+					i3GEO.editorGM.descregioes["a_"+dados[i].codigo_tipo_regiao] = dados[i];
 				}
 				//inclui as camadas que sao editaveis e estao no mapa
 				dados = i3GEO.arvoreDeCamadas.filtraCamadas("editavel", "SIM", "igual");
 				n = dados.length;
 				for(i=0;i<n;i++){
-					ins += "<option title='layer' value='"+dados[i].name+"'>"+dados[i].tema+"</option>";
-					i3GEO.editorGM.descregioes["a_"+dados[i].name] = "";
+					//layer e usado aqui para identificar que a camada veio do mapa e nao do cadastro de regioes
+					if(!dados[i].codigo_tipo_regiao || dados[i].codigo_tipo_regiao === ""){
+						ins += "<option value='"+dados[i].name+"'>"+dados[i].tema+"</option>";
+						dados[i]["identificador"] = dados[i].colunaidunico;
+						dados[i]["colunanomeregiao"] = "";
+						i3GEO.editorGM.descregioes["a_"+dados[i].name] = dados[i];
+					}
 				}
 				ins += "</select>";
 				if(onde){
@@ -701,38 +700,62 @@ i3GEO.editorGM = {
 					}
 					return;
 				}
-				var s = i3GEO.editorGM.selectedShapes(),
-				n = s.length,
-				janela = YAHOO.i3GEO.janela.manager.find("salvaLimite");
+				var wkt,temp,
+					s = i3GEO.editorGM.selectedShapes(),
+					n = s.length,
+					janela = YAHOO.i3GEO.janela.manager.find("salvaLimite");
 				if(janela){
 					janela.destroy();
 				}
 				if(n == 1){
 					s = s[0];
-					i3GEO.editorGM.salvaLimite.criaJanelaFlutuante(i3GEO.editorGM.salvaLimite.html(
-							s.colunaid,
-							s.valorid,
-							s.colunanome,
-							s.valornome
-					));
-					new YAHOO.widget.Button(
-							"i3GEOFmetaestati3GEO.editorGMBotao1",
-							{onclick:{fn: function(){
-								i3GEO.editorGM.salvaLimite.gravaDados(true);
-							}}}
-					);
-					new YAHOO.widget.Button(
-							"i3GEOFmetaestati3GEO.editorGMBotao2",
-							{onclick:{fn: function(){
-								i3GEO.editorGM.salvaLimite.gravaDados(false);
-							}}}
-					);
-					new YAHOO.widget.Button(
-							"i3GEOFmetaestati3GEO.editorGMBotao3",
-							{onclick:{fn: function(){
-								i3GEO.editorGM.salvaLimite.excluiPoligono();
-							}}}
-					);
+					temp = function(retorno){
+						i3GEO.editorGM.deleteSelectedShape(true);
+						i3GEO.Interface.redesenha();
+					};
+					//verifica se e uma regiao cadastrada ou um tema comum editavel
+					if(i3GEO.editorGM.descregioes["a_"+$i("i3geoCartoRegioesEditaveis").value].tema != undefined){
+						wkt = i3GEO.editorGM.toWKT(i3GEO.editorGM.selectedShapes()[0]);
+						if(wkt && wkt != ""){
+							//cria um novo registro
+							if(s.valorid == ""){
+								p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=adicionaGeometria&g_sid="+i3GEO.configura.sid;
+								cpJSON.call(p,"foo",temp,"&tema="+$i("i3geoCartoRegioesEditaveis").value+"&wkt="+wkt);
+							}
+							else{
+								//atualiza a geometria
+								p = i3GEO.configura.locaplic+"/ferramentas/editortema/exec.php?funcao=atualizaGeometria&g_sid="+i3GEO.configura.sid;
+								cpJSON.call(p,"foo",temp,"&idunico="+s.valorid+"&tema="+$i("i3geoCartoRegioesEditaveis").value+"&wkt="+wkt);
+							}
+						}
+					}
+					else{
+						//formulario para o caso de ser um tema cadastrado como regiao no sistema metaestat
+						i3GEO.editorGM.salvaLimite.criaJanelaFlutuante(i3GEO.editorGM.salvaLimite.html(
+								s.colunaid,
+								s.valorid,
+								s.colunanome,
+								s.valornome
+						));
+						new YAHOO.widget.Button(
+								"i3GEOFmetaestati3GEO.editorGMBotao1",
+								{onclick:{fn: function(){
+									i3GEO.editorGM.salvaLimite.gravaDados(true);
+								}}}
+						);
+						new YAHOO.widget.Button(
+								"i3GEOFmetaestati3GEO.editorGMBotao2",
+								{onclick:{fn: function(){
+									i3GEO.editorGM.salvaLimite.gravaDados(false);
+								}}}
+						);
+						new YAHOO.widget.Button(
+								"i3GEOFmetaestati3GEO.editorGMBotao3",
+								{onclick:{fn: function(){
+									i3GEO.editorGM.salvaLimite.excluiPoligono();
+								}}}
+						);
+					}
 				}
 				else{
 					i3GEO.janela.tempoMsg("Selecione uma figura");
@@ -848,7 +871,12 @@ i3GEO.editorGM = {
 					i3GEO.Interface.redesenha();
 				},
 				p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mantemDadosRegiao&tipo=excluir";
-				cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador="+identificador);
+				if(identificador === ""){
+					i3GEO.janela.tempoMsg("&Eacute; necess&aacute;rio ter um c&oacute;digo para poder excluir");
+				}
+				else{
+					cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador="+identificador);
+				}
 			}
 		},
 		/**

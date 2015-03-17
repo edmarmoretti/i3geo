@@ -152,7 +152,6 @@ background-image: url("../imagens/gisicons/zoom-layer.png");
 }
 .i3GEObalaoInfo {
 position : absolute;
-zIndex : 5000;
 textAlign : left;
 background : white;
 -moz-opacity: 0.9;

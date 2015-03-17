@@ -1,5 +1,7 @@
 <?php
-//ZODO melhorar o realce de sintaxe para mapfile no codemirror
+//TODO verificar se e possivel usar menu de contexto
+//TODO incluir a lista de itens que podem ser usados em METADATA
+//TODO ao salvar um mapfile, atualizar o banco de dados conforme os metadados que o usuário pode ter modificado
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>

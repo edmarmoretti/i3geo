@@ -1,4 +1,5 @@
 //TODO documentar
+//TODO traduzir
 /*
 Title: Editor vetorial para OpenLayers
 
@@ -1353,6 +1354,7 @@ i3GEO.editorOL = {
 							i3GEO.desenho.layergrafico.removeFeatures(i3GEO.desenho.layergrafico.selectedFeatures);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
+							i3GEO.janela.tempoMsg("Para excluir o registro utilize a ferramenta de identificacao");
 						}
 					}
 					else

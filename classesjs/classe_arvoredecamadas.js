@@ -1287,6 +1287,7 @@ i3GEO.arvoreDeCamadas =
 					Dom.setStyle(dragEl, "color", Dom.getStyle(clickEl, "color"));
 					Dom.setStyle(dragEl, "backgroundColor", Dom.getStyle(clickEl, "backgroundColor"));
 					Dom.setStyle(dragEl, "border", "4px solid gray");
+					Dom.setStyle(dragEl, "padding", "5px");
 					Dom.setStyle(dragEl, "z-index", "5000");
 				},
 				endDrag : function(e) {
@@ -1346,6 +1347,7 @@ i3GEO.arvoreDeCamadas =
 										if (i3GEO.Interface.ATUAL === "openlayers") {
 											i3GEO.Interface.openlayers.ordenaLayers();
 										}
+										i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true);
 									};
 									i3GEO.php.reordenatemas(temp, lista);
 								} else {
@@ -1373,6 +1375,8 @@ i3GEO.arvoreDeCamadas =
 				onDragOver : function(e, id) {
 					var destEl;
 					destEl = YAHOO.util.Dom.get(id);
+					var dragEl = this.getDragEl();
+					Dom.setStyle(dragEl, "border", "4px solid red");
 					// We are only concerned with list items, we
 					// ignore the dragover
 					// notifications for the list.
@@ -1384,6 +1388,8 @@ i3GEO.arvoreDeCamadas =
 				},
 				onDragOut : function(e, id) {
 					$i(id).style.textDecoration = "none";
+					var dragEl = this.getDragEl();
+					Dom.setStyle(dragEl, "border", "4px solid gray");
 				}
 			});
 			Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);

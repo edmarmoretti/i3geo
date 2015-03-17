@@ -855,7 +855,7 @@ class Metaestat{
 			$dados[] = '		CLASSE "SIM"';
 			$dados[] = '		METAESTAT "SIM"';
 			$dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
-			if($meta["esquemadb"] == "i3geo_metaestat" && !empty($colunaSerial)){
+			if(!empty($colunaSerial)){
 				$dados[] = '		EDITAVEL "SIM"';
 				$dados[] = '		COLUNAIDUNICO "'.$colunaSerial.'"';
 				$dados[] = '		TABELAEDITAVEL "'.$meta["tabela"].'"';
