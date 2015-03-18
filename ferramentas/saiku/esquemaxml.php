@@ -630,8 +630,14 @@ function dimensoesTabelas(){
 
 		$xml .= "<Cube cache='false' name='Tabela: {$c["esquemadb"]}{$c["tabela"]}'>";
 		$incluirChaves = array("tabelamedida{$c["id_medida_variavel"]}.*");
-		if($c["colunavalor"] == ""){
-			$incluirChaves[] = "'1'::numeric as contagem";
+		//colunas quando o nome da coluna com os valores for vazia
+		foreach($tb as $mdd){
+			if($mdd["colunavalor"] == "" && $mdd["filtro"] == ""){
+				$incluirChaves[] = "'1'::numeric as contagem".$mdd["id_medida_variavel"];
+			}
+			if($mdd["colunavalor"] == "" && $mdd["filtro"] != ""){
+				$incluirChaves[] = "CASE WHEN {$mdd["filtro"]} THEN 1 ELSE 0 END as contagem".$mdd["id_medida_variavel"];
+			}
 		}
 		if(count($parComposto) > 0){
 			//$sql = "select *,".implode("||'-'||",$parComposto)."::text as ".implode("_",$parComposto)."_ from {$c["esquemadb"]}.{$c["tabela"]}";
@@ -660,9 +666,14 @@ function dimensoesTabelas(){
 			ON  tabela{$r["codigo_tipo_regiao"]}.{$r["identificador"]}::text = tabelamedida{$c["id_medida_variavel"]}.{$c["colunaidgeo"]}::text
 			";
 		$sql .= $dimRegioes[$c["codigo_tipo_regiao"]]["juncoes"];
-		
-		if($c["filtro"] != ""){
-			$sql .= " WHERE ".str_replace('"',"'",$c["filtro"]);
+		$f = array();
+		foreach($tb as $mdd){
+			if($medida["filtro"] != ""){
+				$f[] = str_replace('"',"'",$mdd["filtro"]);
+			}
+		}		
+		if(count($f) > 0){
+			$sql .= " WHERE ".implode(" OR ",$f);
 		}
 
 		$xml .= "
@@ -697,7 +708,7 @@ function dimensoesTabelas(){
 				$agregador = "count";
 			}
 			if($medida["colunavalor"] == ""){
-				$nomeColunaValor = "contagem";
+				$nomeColunaValor = "contagem".$medida["id_medida_variavel"];
 			}
 			else{
 				$nomeColunaValor = $medida["colunavalor"];
