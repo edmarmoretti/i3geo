@@ -636,6 +636,7 @@ function dimensoesTabelas(){
 				$incluirChaves[] = "'1'::numeric as contagem".$mdd["id_medida_variavel"];
 			}
 			if($mdd["colunavalor"] == "" && $mdd["filtro"] != ""){
+				$mdd["filtro"] = str_replace('"',"'",$mdd["filtro"]);
 				$incluirChaves[] = "CASE WHEN {$mdd["filtro"]} THEN 1 ELSE 0 END as contagem".$mdd["id_medida_variavel"];
 			}
 		}
@@ -648,8 +649,6 @@ function dimensoesTabelas(){
 				//$incluirChaves[] = $o."::text as ".$o."_";
 			}
 		}
-
-
 		$r = $chavesRegiao[$c["codigo_tipo_regiao"]];
 		$sql = "
 			select ".implode(",",$incluirChaves).", tabelamedida{$c["id_medida_variavel"]}.{$c["colunaidgeo"]}::text as codigoreg
@@ -657,7 +656,6 @@ function dimensoesTabelas(){
 		if(count($dimRegioes[$c["codigo_tipo_regiao"]]["colunas"]) > 0){
 			$sql .= ",".implode(",",$dimRegioes[$c["codigo_tipo_regiao"]]["colunas"]);
 			//$sql .= ",tabela{$r["codigo_tipo_regiao"]}.".implode(",tabela{$r["codigo_tipo_regiao"]}.",$dimRegioes[$c["codigo_tipo_regiao"]]["colunas"]);
-
 		}
 
 		$sql .= "
@@ -668,7 +666,7 @@ function dimensoesTabelas(){
 		$sql .= $dimRegioes[$c["codigo_tipo_regiao"]]["juncoes"];
 		$f = array();
 		foreach($tb as $mdd){
-			if($medida["filtro"] != ""){
+			if($mdd["filtro"] != ""){
 				$f[] = str_replace('"',"'",$mdd["filtro"]);
 			}
 		}		
