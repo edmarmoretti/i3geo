@@ -548,7 +548,9 @@ i3GEO.Interface =
 			/**
 			 * Propriedade: TILES
 			 *
-			 * Indica se ser&aacute; utilizado o modo de navega&ccedil;&atilde;o em tiles
+			 * Indica se ser&aacute; utilizado o modo de navega&ccedil;&atilde;o em tiles em todas as camadas do mapa
+			 * 
+			 * Ao bloquear o modo tile, o cache de imagens n&atilde;o poder&aacute; ser realizado
 			 *
 			 * Tipo:
 			 *
@@ -1344,10 +1346,13 @@ i3GEO.Interface =
 											camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile =
 												!(i3GEO.Interface.openlayers.TILES);
 									}
+									if (camada.tiles === "nao") {
+										opcoes.singleTile = true;
+									}
 									// se for definido a expansao e corte da imagem,
-									//ou cache
+									// ou cache
 									// e necessario usar tile
-									if (camada.cache === "sim" || (camada.cortepixels && camada.cortepixels > 0)) {
+									if (camada.tiles === "sim" || camada.cache === "sim" || (camada.cortepixels && camada.cortepixels > 0)) {
 										opcoes.singleTile = false;
 									}
 									if (opcoes.singleTile === true && i3GEO.Interface.openlayers.googleLike === false) {

@@ -405,7 +405,10 @@ class Mapa
 						$wmsurl = ($oLayer->connection);
 					}
 				}
-				$tiles = "";
+				//
+				//indica se a camada sera inserida no mapa como singletile ou nao
+				//
+				$tiles = strtolower($oLayer->getmetadata("TILES"));
 				$plugini3geo = "";
 				if($oLayer->getmetadata("PLUGINI3GEO") != ""){
 					$plugini3geo = $oLayer->getmetadata("PLUGINI3GEO");
