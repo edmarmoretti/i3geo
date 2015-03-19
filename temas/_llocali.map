@@ -8,7 +8,7 @@ MAP
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"TIPO,NOMELOC,ANOCRIA"
       "LTEMPOITEMIMAGEM"	""
-      "cache"	"nao"
+      #"cache"	"SIM"
       "CLASSE"	"SIM"
       "LTEMPOITEMDESCRICAO"	"TIPO"
       "olopacity"	""
@@ -25,6 +25,7 @@ MAP
       "description_template"	""
       "ITENSLINK"	",,,"
       "LTEMPOITEMLINK"	""
+      "TILES"	"NAO"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "arquivotemaoriginal"	""
       "palletefile"	""
@@ -48,7 +49,7 @@ MAP
       "transitioneffect"	"NAO"
       "TEMA"	"Localidades (usar com timeline) para teste"
       "convcaracter"	""
-      "cortepixels"	"40"
+      #"cortepixels"	"30"
       "editorsql"	""
       "LTEMPOCONVENCODE"	"SIM"
       "LTEMPOITEMFIM"	""
@@ -63,7 +64,6 @@ MAP
     PROCESSING "POLYLINE_NO_CLIP=True"
     STATUS DEFAULT
     TEMPLATE "none.htm"
-    TILEITEM "location"
     TYPE POINT
     UNITS METERS
     CLASS

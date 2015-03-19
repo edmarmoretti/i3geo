@@ -7,7 +7,7 @@ MAP
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"CD_LEGENDA"
-      "cache"	"sim"
+      #"cache"	"sim"
       "CLASSE"	"SIM"
       "olopacity"	""
       "permitekmz"	"nao"
@@ -30,6 +30,7 @@ MAP
       "convcaracter"	""
       "TEMA"	"Biomas shapefile (acentuação)"
       "ESCALA" "1000000"
+      "TILES"	"NAO"
     END # METADATA
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"

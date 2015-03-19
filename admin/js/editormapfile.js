@@ -724,7 +724,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "conexao")
 	{
-		campos = new Array("cortepixels","metaestat_id_medida_variavel","metaestat","cache","projection","type","connection","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
+		campos = new Array("tiles", "cortepixels","metaestat_id_medida_variavel","metaestat","cache","projection","type","connection","connectiontype","tileitem","tileindex","filteritem","filter","tipooriginal","convcaracter");
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		prog = "../php/editormapfile.php?funcao=alterarConexao";
 		//codifica o valor de data

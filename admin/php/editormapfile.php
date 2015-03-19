@@ -1736,6 +1736,7 @@ function pegaConexao()
 	$dados["tileindex"] = $layer->tileindex;
 	$dados["tileitem"] = $layer->tileitem;
 	$dados["cache"] = $layer->getmetadata("cache");
+	$dados["tiles"] = $layer->getmetadata("tiles");
 	$dados["cortepixels"] = $layer->getmetadata("cortepixels");
 	if($dados["cortepixels"] == ""){
 		$dados["cortepixels"] = 0;
@@ -1778,7 +1779,7 @@ function pegaConexao()
 }
 function alterarConexao()
 {
-	global $cortepixels,$esquemaadmin,$metaestat_id_medida_variavel,$metaestat,$convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
+	global $tiles,$cortepixels,$esquemaadmin,$metaestat_id_medida_variavel,$metaestat,$convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
 	if($data != ""){
 		$data =  base64_decode($data);
 	}
@@ -1852,6 +1853,7 @@ function alterarConexao()
 		$layer->setmetadata("tipooriginal",$tipooriginal);
 	}
 	$layer->setmetadata("cache",$cache);
+	$layer->setmetadata("tiles",$tiles);
 	if($cortepixels == ""){
 		$cortepixels = 0;
 	}

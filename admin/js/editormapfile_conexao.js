@@ -42,6 +42,9 @@ function montaEditorDados(dados)
 			titulo:"Cache de mapas (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
 			{ajuda:"Ao desenhar a imagem de um TILE que comp&otilde;e o mapa, a imagem &eacute; extendida e depois cortada para o tamanho correto. Isso evita que s&iacute;mbolos apare&ccedil;am de forma parcial no mapa. Indicado para temas com representa&ccedil;&atilde;o pontual e que tamb&eacute;m utilizem cache, pois pode degradar a performance.",
 			titulo:"Extende e corta imagem em pixels (cortepixels)",id:"cortepixels",value:dados.cortepixels,tipo:"text"},
+			
+			{ajuda:"A camada ser&aacute; desenhada em tiles (ladrilhos) de 256x256 pixels. O default &eacute; vazio, nesse caso a camada obedecer&aacute; a l&oacute;gica default de decis&atilde;o para definir se o modo tile ser&aacute; ou n&atilde;o aplicado (depender&aacute; do tipo de layer). Quando for 'nao', o modo tile n&atilde;o ser&aacute; aplicado. Quando 'sim' o modo tile &eacute; sempre aplicado. ",
+			titulo:"Utiliza o modo TILE (TILES)",id:"",value:dados.tiles,tipo:"text",div:"<div id=cTiles ></div>"},
 
 			{ajuda:"Indica se as defini&ccedil;&otilde;es da camada est&atilde;o relacionadas ao sistema de metadados estat&iacute;sticos. Se estiver, alguns par&acirc;metros s&atilde;o obtidos de forma autom&aacute;tica, como a conex&atilde;o e o SQL de acesso aos dados.",
 			titulo:"Esse mapfile est&aacute; integrado ao sistema de metadados estat&iacute;sticos?",id:"",value:dados.metaestat,tipo:"text",div:"<div id=cMetaestat ></div>"},
@@ -107,6 +110,12 @@ function montaEditorDados(dados)
 		temp += core_combosimnao(dados.cache);
 		temp += "</select>";
 		$i("cCache").innerHTML = temp;
+	}
+	if($i("cTiles")){
+		temp = "<select id='tiles' >";
+		temp += core_combosimnao(dados.tiles);
+		temp += "</select>";
+		$i("cTiles").innerHTML = temp;
 	}
 	if($i("cTipoOriginal")){
 		temp = "<select id='tipooriginal' >";

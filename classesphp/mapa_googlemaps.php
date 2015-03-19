@@ -101,7 +101,7 @@ if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getf
 	$_GET["DESLIGACACHE"] = "sim";
 	$_GET["SRS"] = "EPSG:3857";
 }
-else{
+elseif ($_GET["X"] != ""){
 	//
 	//converte a requisi&ccedil;&atilde;o do tile em coordenadas geo
 	//http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#tile_numbers_to_lon.2Flat_2
@@ -136,6 +136,11 @@ else{
 	$poPoint2->setXY($lon2, $lat2);
 	$poPoint2->project($projInObj, $projOutObj);
 	$_GET["BBOX"] = $poPoint1->x." ".$poPoint1->y." ".$poPoint2->x." ".$poPoint2->y;
+	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
+	$_GET["WIDTH"] = 256;
+	$_GET["HEIGHT"] = 256;
+}
+else{
 	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 }
 $mapa = ms_newMapObj($map_fileX);
@@ -265,10 +270,13 @@ if(($_GET == false) || ($qy) || (strtolower($_GET["DESLIGACACHE"]) == "sim")){
 elseif(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum"){
 	$cache = false;
 }
+if($_GET["WIDTH"] != 256){
+	$cache = false;
+}
 if($cache == true){
 	carregaCacheImagem();
 }
-$mapa->setsize(256,256);
+$mapa->setsize($_GET["WIDTH"],$_GET["HEIGHT"]);
 $mapext = explode(" ",$_GET["mapext"]);
 $mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 
@@ -318,8 +326,8 @@ else{
 		foreach ($shp as $indx)
 		{$mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 		$qm = $mapa->querymap;
-		$qm->set("width",255);
-		$qm->set("height",255);
+		$qm->set("width",$_GET["WIDTH"]);
+		$qm->set("height",$_GET["HEIGHT"]);
 		$img = $mapa->drawQuery();
 	}
 	else{

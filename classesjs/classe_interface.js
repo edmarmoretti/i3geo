@@ -1355,12 +1355,16 @@ i3GEO.Interface =
 									if (camada.tiles === "sim" || camada.cache === "sim" || (camada.cortepixels && camada.cortepixels > 0)) {
 										opcoes.singleTile = false;
 									}
-									if (opcoes.singleTile === true && i3GEO.Interface.openlayers.googleLike === false) {
+									if (opcoes.singleTile === true) {
+										if(i3GEO.Interface.openlayers.googleLike === true){
+											opcoes.projection = new OpenLayers.Projection("EPSG:3857");
+										}
 										layer = new OpenLayers.Layer.WMS(camada.name, urllayer, {
 											LAYERS : camada.name,
 											format : camada.wmsformat,
 											transparent : true
 										}, opcoes);
+										//layer.url = layer.url + "&SRS=EPSG:3857&CRS=EPSG:3857";
 										// layer = new
 										// OpenLayers.Layer.TileCache(camada.name,
 										// urllayer,{LAYERS:camada.name,map_imagetype:i3GEO.Interface.OUTPUTFORMAT},opcoes);
