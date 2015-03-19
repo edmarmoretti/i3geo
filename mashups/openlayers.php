@@ -277,8 +277,6 @@ if($temas != ""){
 						if(in_array($tema,$visiveis)){
 							$visivel = "true";
 						}
-						// echo $visivel;exit;
-						// var_dump($visiveis);exit;
 						if($nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM"){
 							if($layern->type != 2 && $layern->type != 3){
 								$opacidade = 1;
@@ -299,6 +297,7 @@ if($temas != ""){
 						}
 						else{
 							foreach($layers as $l){
+								$singleTile = true;
 								$tituloLayer = $l->getmetadata("tema");
 								$nomeLayer = $l->name;
 								$visivel = "false";
@@ -317,10 +316,10 @@ if($temas != ""){
 									$nocache = "map_layer_".$l->name."_filter=".$filtro."&".$nocache;
 								}
 								if($tituloLayer != ""){
-									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 								}
 								else{
-									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 								}
 							}
 						}

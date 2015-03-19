@@ -30,7 +30,7 @@ MAP
       "convcaracter"	""
       "TEMA"	"Biomas shapefile (acentuação)"
       "ESCALA" "1000000"
-      "TILES"	"NAO"
+      #"TILES"	"NAO"
     END # METADATA
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
