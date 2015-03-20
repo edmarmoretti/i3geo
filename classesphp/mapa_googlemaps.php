@@ -279,7 +279,6 @@ if($cache == true){
 $mapa->setsize($_GET["WIDTH"],$_GET["HEIGHT"]);
 $mapext = explode(" ",$_GET["mapext"]);
 $mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
-
 $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
 

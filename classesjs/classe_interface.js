@@ -2479,11 +2479,12 @@ i3GEO.Interface =
 				i3GEO.Interface.googlemaps.recalcPar();
 			},
 			criaImageMap : function(nomeLayer, cache) {
-				var i3GEOTileO = "", s;
+				var i3GEOTileO = "";
 				if (cache == "undefined" || cache == undefined) {
 					cache = "";
 				}
-				s =
+				/*
+				var s =
 					"i3GEOTileO = new google.maps.ImageMapType({ " + "getTileUrl: function(coord, zoom) {" + "	var url = '"
 						+ i3GEO.configura.locaplic + "/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid + "&cache=" + cache
 						+ "&Z=' + zoom + '&X=' + coord.x + '&Y=' + coord.y + '&layer=" + nomeLayer
@@ -2491,7 +2492,70 @@ i3GEO.Interface =
 						+ "	return url+'&nd='+i3GEO.Interface.googlemaps.posfixo; " + "}, " + "tileSize: new google.maps.Size(256, 256),"
 						+ "isPng: true," + "name: '" + nomeLayer + "'" + "});";
 				eval(s);
+				*/
+				
+				i3GEOTileO = new google.maps.ImageMapType({
+					getTileUrl: function(coord, zoom) {
+						var url = i3GEO.configura.locaplic + "/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid + "&cache=" + cache
+							+ "&Z=" + zoom + "&X=" + coord.x + "&Y=" + coord.y + "&layer=" + nomeLayer
+							+ i3GEO.Interface.googlemaps.PARAMETROSLAYER + '&r=' + Math.random();
+						return url+'&nd='+i3GEO.Interface.googlemaps.posfixo;
+					},
+					tileSize: new google.maps.Size(256, 256),
+					isPng: true,
+					name: nomeLayer
+				});
+				
+				/*
+				i3GEOTileO = new google.maps.ImageMapType({
+					getTileUrl: function(coord, zoom) {
+						var url = i3GEO.configura.locaplic + "/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid + "&cache=" + cache
+							+ "&BBOX=" + i3GEO.Interface.googlemaps.bbox2mercator(i3GEO.Interface.googlemaps.bbox())
+							+ "&HEIGHT=" + i3GEO.parametros.h
+							+ "&WIDTH=" + i3GEO.parametros.w
+							+ "&layer=" + nomeLayer
+							+ i3GEO.Interface.googlemaps.PARAMETROSLAYER + '&r=' + Math.random();
+						return url+'&nd='+i3GEO.Interface.googlemaps.posfixo;
+					},
+					tileSize: new google.maps.Size(i3GEO.parametros.w, i3GEO.parametros.h),
+					isPng: true,
+					name: nomeLayer,
+					projection : i3GeoMap.getProjection(),
+					b : i3GeoMap.getBounds()
+				});
+				
+				
+				google.maps.event.addListener(i3GEOTileO, 'tilesloaded', function() {
+					var l = i3GEO.Interface.googlemaps.retornaObjetoLayer(nomeLayer);
+					var currentBounds = i3GeoMap.getBounds();
+					if (currentBounds.equals(l.b)) {
+						return;
+					}
+					l.b = currentBounds;
+				});
+				*/
 				return i3GEOTileO;
+			},
+			bbox2mercator : function(bbox){
+				var c = bbox.split(" "),
+					p1,p2;
+				p1 = i3GEO.Interface.googlemaps.geo2mercator(c[0],c[1]);
+				p2 = i3GEO.Interface.googlemaps.geo2mercator(c[2],c[3]);
+				return p1.x+" "+p1.y+" "+p2.x+" "+p2.y;
+			},
+			geo2mercator : function(x,y){
+				var source = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+					dest = "+title= Google Mercator EPSG:900913 +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs",
+					p = new Proj4js.Point(parseInt(x,10), parseInt(y,10));
+				
+				Proj4js.defs["WGS84"] = source;
+				Proj4js.defs["EPSG:900913"] = dest;
+
+				source = new Proj4js.Proj('WGS84');    
+				dest = new Proj4js.Proj('EPSG:900913');
+				
+				Proj4js.transform(source, dest, p);
+				return p;
 			},
 			insereLayer : function(nomeLayer, indice, cache) {
 				if (i3GEO.pluginI3geo.existeObjeto(nomeLayer) === false) {

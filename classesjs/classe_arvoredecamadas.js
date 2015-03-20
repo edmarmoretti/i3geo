@@ -2175,9 +2175,6 @@ i3GEO.arvoreDeCamadas =
 		 * &eacute; mostrado na &aacute;rvore
 		 */
 		verificaAbrangenciaTemas : function() {
-			if (typeof (console) !== 'undefined')
-				console.info("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()");
-
 			if (i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS === false) {
 				return;
 			}
