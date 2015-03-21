@@ -38,7 +38,9 @@ i3GEO.navega =
 		 * Guarda as ultimas extensoes geograficas das operacoes de navegacao
 		 */
 		EXTENSOES : {
-			lista : [
+			lista : [],
+			redo : [],
+			listax : [
 				"",
 				"",
 				"",
@@ -105,6 +107,23 @@ i3GEO.navega =
 		 * Registra uma extensao na variavel EXTENSOES
 		 */
 		registraExt : function(ext) {
+			if (typeof (console) !== 'undefined')
+				console.warn("registraExt");
+			
+			var l = i3GEO.navega.EXTENSOES.lista,
+				n = l.length;
+			//precisa ter cuidado para nao registrar a mesma extensao atual
+			if (n > 10){
+				l.shift();
+			}
+			n = l.length;
+			if(n > 0){
+				if(l[n-1] === ext){
+					return;
+				}
+			}
+			l.push(ext);
+			/*
 			var n = i3GEO.navega.EXTENSOES.lista.length;
 			if (ext == "" || ext == i3GEO.navega.EXTENSOES.lista[n - 1]) {
 				i3GEO.navega.EXTENSOES.posicao = 0;
@@ -118,28 +137,39 @@ i3GEO.navega =
 				i3GEO.navega.EXTENSOES.emAcao = false;
 			}
 			i3GEO.navega.EXTENSOES.emAcao = false;
+			*/
 		},
 		extensaoAnterior : function() {
-			i3GEO.navega.EXTENSOES.emAcao = true;
-			var n = i3GEO.navega.EXTENSOES.lista.length, ext;
-			if (i3GEO.navega.EXTENSOES.posicao >= n) {
-				i3GEO.navega.EXTENSOES.posicao = 0;
-			}
-			ext = i3GEO.navega.EXTENSOES.lista[(n - 1) - i3GEO.navega.EXTENSOES.posicao];
-			if (ext == i3GEO.parametros.mapexten) {
-				ext = i3GEO.navega.EXTENSOES.lista[(n - 2) - i3GEO.navega.EXTENSOES.posicao];
-			}
-			i3GEO.navega.EXTENSOES.posicao++;
-			if (ext && ext != "") {
-				i3GEO.navega.zoomExt("", "", "", ext);
-			} else {
-				i3GEO.navega.EXTENSOES.posicao = 0;
+			var l = i3GEO.navega.EXTENSOES.lista,
+				r = i3GEO.navega.EXTENSOES.redo,
+				e;
+			if(l.length > 1){
+				e = l.pop();
+				i3GEO.navega.zoomExt("", "", "", l[l.length-1]);
+				if(r.length > 10){
+					r.pop();
+				}
+				if(r.length > 0 && r[r.length -1] === e){
+					return;
+				}
+				r.push(e);
 			}
 		},
 		extensaoProximo : function() {
-			i3GEO.navega.EXTENSOES.posicao--;
-			i3GEO.navega.EXTENSOES.posicao--;
-			i3GEO.navega.extensaoAnterior();
+			var l = i3GEO.navega.EXTENSOES.lista,
+			r = i3GEO.navega.EXTENSOES.redo,
+			e;
+			if(r.length > 1){
+				i3GEO.navega.zoomExt("", "", "", r[r.length-1]);
+				e = r.pop();
+				if(l.length > 10){
+					l.pop();
+				}
+				if(l.length > 0 && l[l.length -1] === e){
+					return;
+				}
+				l.push(e);
+			}
 		},
 		/**
 		 * Function: pan2ponto
