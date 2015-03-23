@@ -47,7 +47,7 @@ body {
 <body class=" yui-skin-sam ">
 	<div class="" id="divGeral" style="width: 100%;">
 		<div style="position: relative; float: left; height: 200px; width:500px;margin: 5px;">
-		<input type=button value="<--- Voltar" onclick="window.history.back()" />
+		<input type=button value="<--- Voltar" onclick="window.location.href='../html/editormapfile.html'" />
 		<h2>Editor de mapfiles</h2>
 		Mais detalhes sobre a edi&ccedil;&atilde;o de mapfiles: <a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new">Documenta&ccedil;&atilde;o do Mapserver</a>
 		<br><br>
