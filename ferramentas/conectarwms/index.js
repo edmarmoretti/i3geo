@@ -195,7 +195,9 @@ function clickGuia3()
 		{$i("listatemas").innerHTML = "erro";}
 	};
 	mostraGuia("guia3");
-	if ($i("servico").value == ""){i3GEO.janela.tempoMsg($trad('servico',i3GEOF.conectarwms.dicionario));}
+	if ($i("servico").value == ""){
+		i3GEO.janela.tempoMsg($trad('servico',i3GEOF.conectarwms.dicionario));
+	}
 	else
 	{
 		$i("listatemas").innerHTML = "";

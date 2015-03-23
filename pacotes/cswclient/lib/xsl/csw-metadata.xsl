@@ -405,37 +405,43 @@
 	<div class="captioneddiv">
 	<br></br>
 		<xsl:choose>
-		  <xsl:when test="@description = 'WMS'">
+		  <xsl:when test="@description = 'WMS'  and text() != ''">
 			<div class='paragrafo' style='cursor:pointer;'>
 				<xsl:attribute name="onclick">
-				csw_client.adicionaI3geo('<xsl:value-of select="."/>');
+				i3GEO.mapa.dialogo.listaLayersWms('<xsl:value-of select="."/>');
 				</xsl:attribute>
 				<img style="cursor:pointer;text-align:left" src="../imagens/branco.gif" class="conectarwms iconeMini iconeGuiaMovelMouseOut" />
 
 				<label style='top:-5px;position:relative'>Adiciona ao mapa</label>
 			</div>	
+
+		  </xsl:when>
+		  <xsl:when test="contains(@protocol,'get-map') and text() != ''">
+			<div class='paragrafo' style='cursor:pointer;'>
+				<xsl:attribute name="onclick">
+				i3GEO.mapa.dialogo.listaLayersWms('<xsl:value-of select="."/>');
+				</xsl:attribute>
+				<img style="cursor:pointer;text-align:left" src="../imagens/branco.gif" class="conectarwms iconeMini iconeGuiaMovelMouseOut" />
+				<label style='top:-5px;position:relative;cursor:pointer;'>Adiciona ao mapa</label>
+			</div>
+
+		  </xsl:when>
+
+		  <xsl:when test="(contains(@protocol,'download') or (contains(@protocol,'link'))) and text() != '' and contains(text(),'http')">
 			<a target='_blank'>
 				<xsl:attribute name="href">
+				<xsl:value-of select="."/>
+				</xsl:attribute>
+				<xsl:value-of select="." />
+			</a>
+		  </xsl:when>
+		  <xsl:when test="(contains(@protocol,'download') or (contains(@protocol,'link'))) and text() != '' and not(contains(text(),'http'))">
+			<a target='_blank'>
+				<xsl:attribute name="href">
+				http://
 				<xsl:value-of select="."/>
 				</xsl:attribute>
 				<xsl:value-of select="@description" />
-			</a>
-			
-		  </xsl:when>
-		  <xsl:when test="contains(@protocol,'get-map')">
-			<div class='paragrafo' style='cursor:pointer;'>
-				<xsl:attribute name="onclick">
-				csw_client.adicionaI3geo('<xsl:value-of select="."/>');
-				</xsl:attribute>
-				<img style="cursor:pointer;text-align:left" src="../imagens/branco.gif" class="conectarwms iconeMini iconeGuiaMovelMouseOut" />
-
-				<label style='top:-5px;position:relative;cursor:pointer;'>Adiciona ao mapa</label>
-			</div>
-			<a target='_blank'>
-				<xsl:attribute name="href">
-				<xsl:value-of select="."/>
-				</xsl:attribute>
-				<xsl:value-of select="@protocol" />
 			</a>
 		  </xsl:when>
 		</xsl:choose>

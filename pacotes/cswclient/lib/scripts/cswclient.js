@@ -33,7 +33,7 @@ CSWClient.prototype.abreINDE = function(id)
 }
 CSWClient.prototype.adicionaI3geo = function(wms)
 {
-   alert(wms);
+   i3GEO.mapa.dialogo.listaLayersWms(wms);
 }
 CSWClient.prototype.setCSWHost = function(host)
 {
