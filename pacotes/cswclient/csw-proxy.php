@@ -5,7 +5,7 @@
 // Author: Rob van Swol, NLR
 // October 15th, 2008
 //
-
+include(dirname(__FILE__)."/../../ms_configura.php");
 $logging = false;
 /* Optionally write all requests in a log file */
 if ($logging) {
@@ -62,6 +62,9 @@ if ($_POST['csw_request']) {
             
       curl_setopt ($session, CURLOPT_POST, true);
       curl_setopt ($session, CURLOPT_POSTFIELDS, $xmlpost);
+      if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
+      	curl_setopt($session, CURLOPT_PROXY, $i3geo_proxy_server);
+      }
       curl_setopt ($session, CURLOPT_HTTPHEADER, Array("Content-Type: application/xml"));
       //curl_setopt ($session, CURLOPT_SSL_VERIFYPEER, 0);
 	  if ($logging)
@@ -78,6 +81,9 @@ if ($_POST['csw_request']) {
 	}
         curl_setopt ($session, CURLOPT_POST, true);
         curl_setopt ($session, CURLOPT_POSTFIELDS, $_POST['csw_request']);
+        if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
+        	curl_setopt($session, CURLOPT_PROXY, $i3geo_proxy_server);
+        }
         curl_setopt ($session, CURLOPT_HTTPHEADER, Array("Content-Type: application/x-www-form-urlencoded"));
 		if ($logging)
           fwrite($fh, $timestamp.": POST> ".$_POST['csw_request']."\n"); 
@@ -86,6 +92,9 @@ if ($_POST['csw_request']) {
 } else if ($_GET['csw_request']) {
     curl_setopt ($session, CURLOPT_POST, true);
     curl_setopt ($session, CURLOPT_POSTFIELDS, $_GET['csw_request']);
+    if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
+    	curl_setopt($session, CURLOPT_PROXY, $i3geo_proxy_server);
+    }
     curl_setopt ($session, CURLOPT_HTTPHEADER, Array("Content-Type: application/x-www-form-urlencoded"));
 	if ($logging)
       fwrite($fh, $timestamp.": GET> ".$_GET['csw_request']."\n"); 

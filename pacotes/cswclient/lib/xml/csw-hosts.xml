@@ -1,9 +1,3 @@
 <select name="cswhosts">
-	<option value="http://geomatics.nlr.nl/excat/csw">eXcat@nlr</option>
-	<option value="http://dinolks03.nitg.tno.nl/excat/csw">eXcat@tno</option>
-	<option value="http://www.geodata.alterra.nl/excat/csw">eXcat@alterra</option>
-	<option value="http://geonovum.nitg.tno.nl:8080/geonetwork/srv/en/csw">Geonovum</option>
 	<option value="http://www.metadados.inde.gov.br/geonetwork/srv/br/csw">INDE-BR</option>
-	<option value="http://localhost:8080/geonetwork/srv/en/csw">teste</option>
-	<option value="http://mapas.mma.gov.br/geonetwork/srv/br/csw">INDE-MMA</option>
 </select>

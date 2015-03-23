@@ -262,6 +262,7 @@
 <xsl:template match="gmd:MD_Distribution">
 <div class="captioneddiv">
 <h3>Distribution info</h3>
+
 <table class="meta"><tr></tr>
     <xsl:for-each select="gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource">
   	    <xsl:choose>
@@ -315,6 +316,7 @@
 			      </td>
 			    </tr>
   		    </xsl:when>
+  		    
   		    <!--xsl:when test="linkage[text()]">
   			    <link type="url"><xsl:value-of select="linkage[text()]"/></link>
   		    </xsl:when-->
@@ -372,6 +374,7 @@
 </table>
 <xsl:apply-templates select="./ows:BoundingBox"/>
 <xsl:apply-templates select="./ows:WGS84BoundingBox"/>
+<xsl:apply-templates select="./dc:URI"/>
 </div>
 </xsl:template>
 
@@ -396,6 +399,33 @@
       </xsl:call-template>
 </table>
 </div>
+</xsl:template>
+
+<xsl:template match="dc:URI">
+	<div class="captioneddiv">
+	<br></br>
+        <xsl:choose>
+          <xsl:when test="@description = 'WMS'">
+			<a>
+				<xsl:attribute name="href">
+				<xsl:value-of select="."/>
+				</xsl:attribute>
+				<xsl:value-of select="@description" />
+			</a>
+          </xsl:when>
+          <xsl:otherwise>
+			<a>
+				<xsl:attribute name="href">
+				<xsl:value-of select="."/>
+				</xsl:attribute>
+				<xsl:value-of select="@description" />
+			</a>
+          </xsl:otherwise>
+        </xsl:choose>
+
+
+
+	</div>
 </xsl:template>
 <!-- End Metadata Dublin Core -->
 

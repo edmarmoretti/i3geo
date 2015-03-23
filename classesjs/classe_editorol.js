@@ -1,5 +1,9 @@
 //TODO documentar
 //TODO traduzir
+//TODO incluir opcao para selecionar todas as figuras
+//TODO incluir balao de informacoes como um elemento grafico de desenho
+//TODO uncluir caixas de texto
+
 /*
 Title: Editor vetorial para OpenLayers
 
@@ -32,6 +36,7 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
+
 
 if(!i3GEO || typeof(i3GEO) === 'undefined'){
 	var i3GEO = {

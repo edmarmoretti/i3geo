@@ -1,5 +1,9 @@
 //TODO documentar
 //TODO traduzir
+//TODO incluir opcao para selecionar todas as figuras
+//TODO incluir balao de informacoes como um elemento grafico de desenho
+//TODO uncluir caixas de texto
+
 /*
 Editor vetorial de limites para a interface google maps
 

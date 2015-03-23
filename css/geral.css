@@ -8,6 +8,14 @@
     margin-top: -5px;
 }
 */
+/*
+Utilizado na janela do buscador INDE
+*/
+.meta-param, .meta-value{
+	text-align: left;
+	font-size: 12px;
+	padding: 5px;
+}
 .botoesLegendaFlutuante {
 	font-size: 10px;
 }
