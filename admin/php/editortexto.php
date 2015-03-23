@@ -191,7 +191,7 @@ function comboMapfiles(){
 	ins = "<select size=9 id='selectComboMapfile' onchange='mudaMapfile(this)'><option value=''>Edite outro mapfile</option>";
 	for(i=0;i<n;i++){
 		if($mapfiles[i].extensao === "map"){
-			ins += "<option value='"+$mapfiles[i].codigo+"'>"+$mapfiles[i].codigo+" - "+$mapfiles[i].nome+"</optiona>";
+			ins += "<option title='"+$mapfiles[i].nome+"' value='"+$mapfiles[i].codigo+"'>"+$mapfiles[i].codigo+" - "+$mapfiles[i].nome+"</optiona>";
 		}
 	}
 	ins += "</select>";
