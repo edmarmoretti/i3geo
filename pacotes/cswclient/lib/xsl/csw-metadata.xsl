@@ -404,29 +404,46 @@
 <xsl:template match="dc:URI">
 	<div class="captioneddiv">
 	<br></br>
-        <xsl:choose>
-          <xsl:when test="@description = 'WMS'">
-			<a>
+		<xsl:choose>
+		  <xsl:when test="@description = 'WMS'">
+			<div class='paragrafo' style='cursor:pointer;'>
+				<xsl:attribute name="onclick">
+				csw_client.adicionaI3geo('<xsl:value-of select="."/>');
+				</xsl:attribute>
+				<img style="cursor:pointer;text-align:left" src="../imagens/branco.gif" class="conectarwms iconeMini iconeGuiaMovelMouseOut" />
+
+				<label style='top:-5px;position:relative'>Adiciona ao mapa</label>
+			</div>	
+			<a target='_blank'>
 				<xsl:attribute name="href">
 				<xsl:value-of select="."/>
 				</xsl:attribute>
 				<xsl:value-of select="@description" />
 			</a>
-          </xsl:when>
-          <xsl:otherwise>
-			<a>
+			
+		  </xsl:when>
+		  <xsl:when test="contains(@protocol,'get-map')">
+			<div class='paragrafo' style='cursor:pointer;'>
+				<xsl:attribute name="onclick">
+				csw_client.adicionaI3geo('<xsl:value-of select="."/>');
+				</xsl:attribute>
+				<img style="cursor:pointer;text-align:left" src="../imagens/branco.gif" class="conectarwms iconeMini iconeGuiaMovelMouseOut" />
+
+				<label style='top:-5px;position:relative;cursor:pointer;'>Adiciona ao mapa</label>
+			</div>
+			<a target='_blank'>
 				<xsl:attribute name="href">
 				<xsl:value-of select="."/>
 				</xsl:attribute>
-				<xsl:value-of select="@description" />
+				<xsl:value-of select="@protocol" />
 			</a>
-          </xsl:otherwise>
-        </xsl:choose>
-
-
+		  </xsl:when>
+		</xsl:choose>
 
 	</div>
+
 </xsl:template>
+
 <!-- End Metadata Dublin Core -->
 
 <!-- Start Utills -->

@@ -53,7 +53,6 @@ if ($_POST['csw_request']) {
 
    //if (substr($_POST['csw_request'],0,5) == "<?xml") {
    if (substr($_POST['csw_request'],0,1) == "<") {
-      
       // Is magic quotes on? 
       if (get_magic_quotes_gpc())
         $xmlpost = stripslashes($_POST['csw_request']);

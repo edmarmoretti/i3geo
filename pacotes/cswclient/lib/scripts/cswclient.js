@@ -31,6 +31,10 @@ CSWClient.prototype.abreINDE = function(id)
 {
    window.open("http://metadados.inde.gov.br/geonetwork/srv/por/main.home?uuid="+id,"new");
 }
+CSWClient.prototype.adicionaI3geo = function(wms)
+{
+   alert(wms);
+}
 CSWClient.prototype.setCSWHost = function(host)
 {
    this.cswhost = host;
