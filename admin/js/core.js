@@ -1541,7 +1541,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 			if(bcancela === true){
 				temp += cancelai;
 			}
-			lb.innerHTML = temp + '<span style="margin-left:10px;position:relative;top:-10px;">'+titulo+'</span>';
+			lb.innerHTML = temp + '<span style="margin-left:10px;position:relative;top:-5px">'+titulo+'</span>';
 			if(bsalva === true){
 				new YAHOO.widget.Button(
 					"okcancel_checkboxOK",
@@ -1554,6 +1554,11 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 						}
 					}}}
 				);
+				var temp = $i("okcancel_checkbox");
+				temp.style.top = "2px";
+				temp.style.position = "relative";
+				var temp = $i("okcancel_checkboxOK-button");
+				temp.style.height = "23px";
 			}
 			if(bcancela === true){
 				new YAHOO.widget.Button(
