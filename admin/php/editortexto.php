@@ -46,16 +46,19 @@ body {
 </head>
 <body class=" yui-skin-sam ">
 	<div class="" id="divGeral" style="width: 100%;">
-		<div style="position: relative; float: left; height: 200px; width:500px;margin: 5px;">
-		<input type=button value="<--- Voltar" onclick="window.location.href='../html/editormapfile.html'" />
-		<h2>Editor de mapfiles</h2>
+		<div id=cabecalhoPrincipal ></div>
+		<fieldset>
 		Mais detalhes sobre a edi&ccedil;&atilde;o de mapfiles: <a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new">Documenta&ccedil;&atilde;o do Mapserver</a>
 		<br><br>
 		<form style="width: 98%;" onsubmit="atualizaTextArea()" action="editortexto.php?mapfile=<?php echo $_GET["mapfile"];?>" method=post>
-			<input type=submit value="Salvar e atualizar o mapa" />
+			<input type=submit value="Salvar" />
 			<input type=button value="Testar" onclick="testar()" />
 			<input type=button value="Testar no i3Geo" onclick="abrirI3geo()" />
-			(Salve antes de testar)<br> <br>
+			(Salve antes de testar)
+		</fieldset>
+		<fieldset style="position: relative; float: left; width:500px;margin: 5px;padding:5px;">
+		<legend>Editor</legend>
+
 			<?php
 			//evita erros removendo caracteres PHP
 			if(isset($_POST["texto"])){
@@ -91,6 +94,8 @@ body {
 				fclose($fp);
 			}
 			?>
+
+			
 			<div style=float:left; >
 			Estilo: <select onchange="mudaEstilo(this.value)">
 				<option value=elegant >Elegant</option>
@@ -99,29 +104,35 @@ body {
 				<option value=night >Night</option>
 				<option value=neo >Neo</option>
 			</select>
-			<br><br>
-			<input type=button value="+ extender" onclick="editorCM.setSize('100%')" />
+			<input type=button value="+ extender" onclick="editorCM.setSize('1100px')" />
 			<input type=button value="- reduzir" onclick="editorCM.setSize('500px')" />
 			</div>
-			<TEXTAREA style='margin-left:35px;width:250px;height:55px;text-align:left;'>
-Ctrl+a - Seleciona tudo
-Ctrl+d - Apaga a linha
-Ctrl-z - Desfazer
-Ctrl-Up - Sobe
-Alt-left - Início da linha
-			</TEXTAREA>
-			</div>
-			<div style="position: relative; float: left; height: 200px; width:520px;margin: 5px;">
-			<h2>Mapfile em edi&ccedil;&atilde;o</h2>
-			<div id="comboMapfiles" >Aguarde...</div>
-			</div>
+
+			<br><br>
 			<?php
 			echo "<TEXTAREA id=editor name=texto cols=100 rows=20 style='width:500px;float:left;height:500px'>";
 			echo file_get_contents($mapfile);
 			echo "</TEXTAREA>";
+			?>
+			<br><br>
+
+Ctrl+a - Seleciona tudo<br>
+Ctrl+d - Apaga a linha<br>
+Ctrl-z - Desfazer<br>
+Ctrl-Up - Sobe<br>
+Alt-left - Início da linha<br>
+
+			
+			</fieldset>
+			
+			<fieldset style="position: relative; float: left; width:520px;margin: 5px;padding:10px;left:10px;">
+			<legend>Mapfile em edi&ccedil;&atilde;o</legend>
+			<div id=filtroDeLetras ></div>
+			<div id="comboMapfiles" >Aguarde...</div>
+			<?php
 			$mapfile = str_replace("\\","/",$mapfile);
 
-			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=450&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='left:10px;position:relative;top:2px;overflow:hidden;width:525px;height:500px;border:1px solid gray;'>";
+			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=450&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:525px;height:500px;border:1px solid gray;'>";
 			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
 
@@ -144,6 +155,7 @@ Alt-left - Início da linha
 				}
 			}
 			?>
+			</fieldset>
 		</form>
 	</div>
 	<script type="text/javascript" src="../js/core.js"></script>
@@ -162,7 +174,8 @@ else{
 	letraAtual = "";
 }
 */
-
+cabecalhoGeral("cabecalhoPrincipal","","../html/");
+core_listaDeLetras("filtroDeLetras","filtraLetra",true);
 var editorCM = CodeMirror.fromTextArea(document.getElementById("editor"), {
 	mode: 'scribe',
 	tabMode: 'indent',
@@ -188,7 +201,7 @@ function filtraLetra(letra) {
 function comboMapfiles(){
 	var n = $mapfiles.length,
 		i,ins;
-	ins = "<select size=9 id='selectComboMapfile' onchange='mudaMapfile(this)'><option value=''>Edite outro mapfile</option>";
+	ins = "<select size=8 id='selectComboMapfile' onchange='mudaMapfile(this)'><option value=''>Edite outro mapfile</option>";
 	for(i=0;i<n;i++){
 		if($mapfiles[i].extensao === "map"){
 			ins += "<option title='"+$mapfiles[i].nome+"' value='"+$mapfiles[i].codigo+"'>"+$mapfiles[i].codigo+" - "+$mapfiles[i].nome+"</optiona>";

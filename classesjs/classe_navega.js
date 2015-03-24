@@ -107,9 +107,6 @@ i3GEO.navega =
 		 * Registra uma extensao na variavel EXTENSOES
 		 */
 		registraExt : function(ext) {
-			if (typeof (console) !== 'undefined')
-				console.warn("registraExt");
-			
 			var l = i3GEO.navega.EXTENSOES.lista,
 				n = l.length;
 			//precisa ter cuidado para nao registrar a mesma extensao atual

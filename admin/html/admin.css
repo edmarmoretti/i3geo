@@ -27,12 +27,25 @@
 		background: url("../../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 0 #D8D8D8;
 		z-index: 3000;
 }
-.yui-skin-sam .yui-button button, .yui-skin-sam .yui-button a, .yui-skin-sam .yui-button a:visited{
-	font-size:1em;
+
+.yui-skin-sam .yui-button button,.yui-skin-sam .yui-button a {
+	color: #000000;
+	font-size: 95%;
+	line-height: 1.5;
+	min-height: 1em;
+	padding: 0 10px;
 }
 .yui-skin-sam .yui-button {
-	margin: 0.25em;
+	border-color: #D3D3D3;
+	border-radius: 6px;
+	box-shadow: 0px 0px 0px 0px rgb(230,230,230);
 }
+.yui-skin-sam .yui-button .first-child {
+	border-color: #D3D3D3;
+	border-radius: 7px;
+}
+
+
 .ajuda_usuario
 {
 background-image:url(../../imagens/external.png);

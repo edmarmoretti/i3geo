@@ -2,7 +2,7 @@
 //TODO traduzir
 //TODO incluir opcao para selecionar todas as figuras
 //TODO incluir balao de informacoes como um elemento grafico de desenho
-//TODO uncluir caixas de texto
+//TODO incluir caixas de texto
 
 /*
 Title: Editor vetorial para OpenLayers

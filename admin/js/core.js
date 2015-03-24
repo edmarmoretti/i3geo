@@ -162,16 +162,18 @@ function cabecalhoUsuarios(id,excluir){
 	//temp.style.border = "solid 1px gray";
 	//temp.style.padding = "10px";
 }
-function cabecalhoGeral(id,excluir){
+function cabecalhoGeral(id,excluir,prefixo){
+	if(!prefixo){
+		prefixo = "";
+	}
 	var i,n,temp,
 		ins = "<fieldset ><legend>Atalhos</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
-			{id:"principal",titulo:"In&iacute;cio",link:"../principal.html"},
-			{id:"menus",titulo:"Menus",link:"menus.html"},
-			{id:"arvore",titulo:"&Aacute;rvore de temas",link:"arvore.html"},
-			{id:"editormapfile",titulo:"Mapfiles",link:"editormapfile.html"},
-			{id:"atlas",titulo:"Atlas",link:"atlas.html"},
+			{id:"principal",titulo:"In&iacute;cio",link:prefixo+"../principal.html"},
+			{id:"menus",titulo:"Menus",link:prefixo+"menus.html"},
+			{id:"arvore",titulo:"&Aacute;rvore de temas",link:prefixo+"arvore.html"},
+			{id:"editormapfile",titulo:"Mapfiles",link:prefixo+"editormapfile.html"},
 			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;
@@ -1638,7 +1640,7 @@ function core_ativaforms(lista){
 		}
 	}
 }
-function core_listaDeLetras(onde,nomeFuncao){
+function core_listaDeLetras(onde,nomeFuncao,semLetras){
 	//letraAtual guarda a ultima letra clicada
 	var o,i,ins= "<p><b>",
 		letras = ["Todos","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z","_","1","2","3","4","5","6","7","8","9"],
@@ -1651,17 +1653,27 @@ function core_listaDeLetras(onde,nomeFuncao){
 	if(i3GEO.util.pegaCookie("I3GEOletraAdmin")) {
 		letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
 	}
-	for (i = 0; i < nletras; i++) {
-		ins += "<span onclick='"+nomeFuncao+"(\""
-				+ letras[i]
-				+ "\")' style='color:blue;cursor:pointer;padding:1px;border: 1px solid #C8C8FA'>"
-				+ letras[i] + "</span>&nbsp;";
+	if(!semLetras){
+		for (i = 0; i < nletras; i++) {
+			ins += "<span onclick='"+nomeFuncao+"(\""
+					+ letras[i]
+					+ "\")' style='color:blue;cursor:pointer;padding:1px;border: 1px solid #C8C8FA'>"
+					+ letras[i] + "</span>&nbsp;";
+		}
+		ins += "</b></p>";
 	}
-	ins += "</b></p>";
+	else{
+		ins = "";
+	}
 	if(onde && onde != ""){
 		o = document.getElementById(onde);
 		if(o){
-			o.innerHTML = "<fieldset style=padding:2px; class=letras ><form id=forminiciais ><p><b>Iniciais: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /> ou </form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></p></fieldset>";
+			if(!semLetras){
+				o.innerHTML = "<fieldset style=padding:2px; class=letras ><form id=forminiciais ><p><b>Iniciais: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /></form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></p></fieldset>";
+			}
+			else{
+				o.innerHTML = "<form id=forminiciais >Iniciais: <input name='' onchange='' value='' id=iniciaisLetras type=text style=width:40px;cursor:pointer /></form>";
+			}
 			if(document.getElementById("forminiciais")){
 				document.getElementById("forminiciais").onsubmit = function(){
 					var v = document.getElementById("iniciaisLetras").value;
@@ -1670,9 +1682,11 @@ function core_listaDeLetras(onde,nomeFuncao){
 					return false;
 				};
 			}
-			document.getElementById("_listaDeLetras").onclick = function(){
-				document.getElementById("iniciaisLetras").value = letraAtual;
-			};
+			if(!semLetras){
+				document.getElementById("_listaDeLetras").onclick = function(){
+					document.getElementById("iniciaisLetras").value = letraAtual;
+				};
+			}
 		}
 	}
 	else{
