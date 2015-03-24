@@ -1245,6 +1245,7 @@ function criarNovoMap(){
 		else{
 			$dados[] = '	DATA "'.$data.'"';
 		}
+		$dados[] = '	STATUS DEFAULT';
 		$dados[] = '	METADATA';
 		$dados[] = '		TEMA "'.$nome.'"';
 		$dados[] = '		CLASSE "SIM"';
