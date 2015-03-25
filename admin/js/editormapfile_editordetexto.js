@@ -14,7 +14,7 @@ function editorDeTexto(codigoMap)
 			core_montaEditor("","600px","800px","","Editor");
 			var ins = "<input type=button id=salvarTexto value='Salvar' />";
 			ins += "<textarea id='editorArea' rows='19' cols='70'>"+YAHOO.lang.JSON.parse(o.responseText)+"</textarea>";
-			var temp = function()
+			var botao, temp = function()
 			{
 				core_carregando("ativa");
 				core_carregando("salvando texto...");
@@ -36,7 +36,8 @@ function editorDeTexto(codigoMap)
 				core_makeRequest(sUrl,callback1,"GET");
 			};
 			$i("editor_bd").innerHTML = ins;
-			new YAHOO.widget.Button("salvarTexto",{ onclick: { fn: temp }});
+			botao = new YAHOO.widget.Button("salvarTexto",{ onclick: { fn: temp }});
+			botao.addClass("rodar");
 			core_carregando("desativa");
 		},
 		failure:core_handleFailure,

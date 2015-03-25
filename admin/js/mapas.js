@@ -139,7 +139,7 @@ i3GEOadmin.mapas = {
 	},
 	editor: function(dados,id,recordid){
 		if(!$i("janela_editor2")){
-			var ins,
+			var botao, ins,
 				novoel = document.createElement("div");
 			novoel.id =  "janela_editor2";
 			ins = '<div class="hd"><input id=okcancel_checkboxOK type="buttom" value="Salva" />' +
@@ -151,7 +151,7 @@ i3GEOadmin.mapas = {
 
 			document.body.appendChild(novoel);
 
-			new YAHOO.widget.Button(
+			botao = new YAHOO.widget.Button(
 				"okcancel_checkboxOK",
 				{onclick:{fn: function(){
 					i3GEOadmin.mapas.salva(id,recordid);
@@ -159,6 +159,7 @@ i3GEOadmin.mapas = {
 					YAHOO.mapas.panelEditor2 = null;
 				}}}
 			);
+			botao.addClass("rodar");
 			YAHOO.mapas.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:true,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
 			YAHOO.mapas.panelEditor2.render();
 		}

@@ -35,7 +35,7 @@ i3GEOadmin.variaveis = {
 		if(!$i(idBotao)){
 			return;
 		}
-		var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraVariavel",
+		var botao, sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=alteraVariavel",
 			adiciona = function(){
 				core_carregando("ativa");
 				core_carregando(" adicionando um novo registro");
@@ -55,13 +55,14 @@ i3GEOadmin.variaveis = {
 			core_makeRequest(sUrl,callback);
 		};
 		//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
-		new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+		botao = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+		botao.addClass("rodar");
 	},
 	ativaBotaoRelatorioCompleto: function(idBotao){
 		if(!$i(idBotao)){
 			return;
 		}
-		var sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=relatorioCompleto&dadosGerenciais=sim",
+		var botao, sUrl = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=relatorioCompleto&dadosGerenciais=sim",
 			adiciona = function(){
 				core_carregando("ativa");
 				core_carregando(" Aguarde");
@@ -80,7 +81,8 @@ i3GEOadmin.variaveis = {
 				};
 				core_makeRequest(sUrl,callback);
 			};
-		new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+		botao = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+		botao.addClass("rodar");
 	},
 	arvore:{
 		inicia:function(){
@@ -441,7 +443,7 @@ i3GEOadmin.variaveis = {
 		},
 		classesAuto: function(id_classificacao,id_medida_variavel){
 			core_montaEditor("","450px","230px","","Criar classes",false,false,false);
-			var ins = "" +
+			var botao, ins = "" +
 				"<p class='paragrafo' >&nbsp;N&uacute;mero de intervalos de classes: <input type=text value=5 id=i3GEOFmetaestatEditorNumInt size=5 />" +
 				"<img src='../imagens/accessories-calculator.png' title='Calcular por Sturges' onclick='i3GEOadmin.variaveis.classificacao.sturges("+id_medida_variavel+",\"i3GEOFmetaestatEditorNumInt\")' style='position:relative;cursor:pointer;top:2px'> </p>" +
 				"&nbsp;<input id=i3GEOFmetaestatEditorBotao8 type='button' value='Escolher cores' />" +
@@ -459,7 +461,7 @@ i3GEOadmin.variaveis = {
 			$i("editor_bd").innerHTML = ins;
 
 
-			new YAHOO.widget.Button(
+			botao = new YAHOO.widget.Button(
 					"i3GEOFmetaestatEditorBotaoTAM",
 					{onclick:{fn:
 						function(){
@@ -487,7 +489,8 @@ i3GEOadmin.variaveis = {
 						}
 					}}
 			);
-			new YAHOO.widget.Button(
+			botao.addClass("rodar");
+			botao = new YAHOO.widget.Button(
 					"i3GEOFmetaestatEditorBotao8",
 					{onclick:{fn:
 						function(){
@@ -495,7 +498,8 @@ i3GEOadmin.variaveis = {
 						}
 					}}
 			);
-			new YAHOO.widget.Button(
+			botao.addClass("rodar");
+			botao = new YAHOO.widget.Button(
 				"i3GEOFmetaestatEditorBotao6",
 				{onclick:{fn:
 					function(){
@@ -524,7 +528,8 @@ i3GEOadmin.variaveis = {
 					}
 				}}
 			);
-			new YAHOO.widget.Button(
+			botao.addClass("rodar");
+			botao = new YAHOO.widget.Button(
 					"i3GEOFmetaestatEditorBotao7",
 				{onclick:{fn:
 					function(){
@@ -553,7 +558,8 @@ i3GEOadmin.variaveis = {
 					}
 				}}
 			);
-			new YAHOO.widget.Button(
+			botao.addClass("rodar");
+			botao = new YAHOO.widget.Button(
 					"i3GEOFmetaestatEditorBotaoQN",
 				{onclick:{fn:
 					function(){
@@ -582,6 +588,7 @@ i3GEOadmin.variaveis = {
 					}
 				}}
 			);
+			botao.addClass("rodar");
 		},
 		adicionar: function(id_medida_variavel){
 			var no = tree.getNodeByProperty("no_classificacao",id_medida_variavel),
@@ -1002,7 +1009,7 @@ i3GEOadmin.variaveis = {
 				success:function(o) {
 					try	{
 						if(tipo == "medidaVariavel"){
-							var ins = "",
+							var botao, ins = "",
 							dados = YAHOO.lang.JSON.parse(o.responseText);
 							core_montaEditor("","480px","300px","","Testes",false,false,false);
 							ins = "<p><b>Select simples:</b> "+dados.sql;
@@ -1030,7 +1037,8 @@ i3GEOadmin.variaveis = {
 							ins += '  <input type=button id="kml3destat" value="Kml 3d" />';
 
 							$i("editor_bd").innerHTML = ins;
-							new YAHOO.widget.Button("sqljson");
+							botao = new YAHOO.widget.Button("sqljson");
+							botao.addClass("rodar");
 							document.getElementById("sqljson-button").onclick = function(){
 								var u,colunas = 0;
 								if($i("incluirtodascolunas").checked === true){
@@ -1040,7 +1048,8 @@ i3GEOadmin.variaveis = {
 								$i("ultimaUrl").innerHTML = u;
 								window.open(u);
 							};
-							new YAHOO.widget.Button("xmlestat");
+							botao = new YAHOO.widget.Button("xmlestat");
+							botao.addClass("rodar");
 							document.getElementById("xmlestat-button").onclick = function(){
 								var u,colunas = 0;
 								if($i("incluirtodascolunas").checked === true){
@@ -1050,19 +1059,22 @@ i3GEOadmin.variaveis = {
 								$i("ultimaUrl").innerHTML = u;
 								window.open(u);
 							};
-							new YAHOO.widget.Button("sumarioestat");
+							botao = new YAHOO.widget.Button("sumarioestat");
+							botao.addClass("rodar");
 							$i("sumarioestat-button").onclick = function(){
 								var u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=sumarioMedidaVariavel&formato=json&id_medida_variavel='+id+"&agruparpor="+$i("agruparsql").value+"&filtro="+$i("filtrosql").value;
 								$i("ultimaUrl").innerHTML = u;
 								window.open(u);
 							};
-							new YAHOO.widget.Button("sumarioxmlestat");
+							botao = new YAHOO.widget.Button("sumarioxmlestat");
+							botao.addClass("rodar");
 							$i("sumarioxmlestat-button").onclick = function(){
 								var u = i3GEO.configura.locaplic+'/admin/php/metaestat.php?funcao=sumarioMedidaVariavel&formato=xml&id_medida_variavel='+id+"&agruparpor="+$i("agruparsql").value+"&filtro="+$i("filtrosql").value;
 								$i("ultimaUrl").innerHTML = u;
 								window.open(u);
 							};
-							new YAHOO.widget.Button("mapfileestat");
+							botao = new YAHOO.widget.Button("mapfileestat");
+							botao.addClass("rodar");
 							$i("mapfileestat-button").onclick = function(){
 								var u,colunas = 0;
 								if($i("incluirtodascolunas").checked === true){
@@ -1072,7 +1084,8 @@ i3GEOadmin.variaveis = {
 								$i("ultimaUrl").innerHTML = u;
 								window.open(u);
 							};
-							new YAHOO.widget.Button("kmzestat");
+							botao = new YAHOO.widget.Button("kmzestat");
+							botao.addClass("rodar");
 							$i("kmzestat-button").onclick = function(){
 								var u,colunas = 0;
 								if($i("incluirtodascolunas").checked === true){
@@ -1082,7 +1095,8 @@ i3GEOadmin.variaveis = {
 								$i("ultimaUrl").innerHTML = u;
 								window.open(u);
 							};
-							new YAHOO.widget.Button("kmlestat");
+							botao = new YAHOO.widget.Button("kmlestat");
+							botao.addClass("rodar");
 							$i("kmlestat-button").onclick = function(){
 								var u,colunas = 0;
 								if($i("incluirtodascolunas").checked === true){
@@ -1092,7 +1106,8 @@ i3GEOadmin.variaveis = {
 								$i("ultimaUrl").innerHTML = u;
 								window.open(u);
 							};
-							new YAHOO.widget.Button("kml3destat");
+							botao = new YAHOO.widget.Button("kml3destat");
+							botao.addClass("rodar");
 							$i("kml3destat-button").onclick = function(){
 								var u,colunas = 0;
 								if($i("incluirtodascolunas").checked === true){
@@ -1102,7 +1117,8 @@ i3GEOadmin.variaveis = {
 								$i("ultimaUrl").innerHTML = u;
 								window.open(u);
 							};
-							new YAHOO.widget.Button("i3geoestat");
+							botao = new YAHOO.widget.Button("i3geoestat");
+							botao.addClass("rodar");
 							$i("i3geoestat-button").onclick = function(){
 								var u,sUrl,callback = 	{
 										success: function(oResponse){
@@ -1123,7 +1139,8 @@ i3GEOadmin.variaveis = {
 								core_carregando("ativa");
 								core_makeRequest(sUrl,callback);
 							};
-							new YAHOO.widget.Button("graficoestat");
+							botao = new YAHOO.widget.Button("graficoestat");
+							botao.addClass("rodar");
 							$i("graficoestat-button").onclick = function(){
 								var callback = 	{
 										success: function(oResponse){

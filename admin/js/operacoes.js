@@ -42,7 +42,7 @@ function initMenu(){
 	pegaOperacoes();
 }
 function ativaBotaoAdicionaOperacao(sUrl,idBotao){
-	var adiciona = function()
+	var botao, adiciona = function()
 	{
 		core_carregando("ativa");
 		core_carregando(" adicionando um novo registro");
@@ -65,7 +65,8 @@ function ativaBotaoAdicionaOperacao(sUrl,idBotao){
 		core_makeRequest(sUrl,callback);
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
-	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+	botao = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+	botao.addClass("rodar");
 }
 /*
 Function: pegaOperacoes

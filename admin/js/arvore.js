@@ -62,7 +62,7 @@ Function: initMenu
 Inicializa a arvore
 */
 function initMenu(){
-	var editorDeMenus = function()	{
+	var botao, editorDeMenus = function()	{
 			if($i("editor_bd")){return;}
 			core_montaEditor("","600px","500px","pegaMenus","Menu");
 			$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="letras_M" ></div><br><br><div id="tabela" style="left:-5px;"> </div>';
@@ -80,9 +80,12 @@ function initMenu(){
 			$i("editor_bd").innerHTML = '<p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo subgrupo" style="left:-5px;" /></p><br><br><div id="letras_SG" ></div><br><div id="tabela" style="left:-5px;"> </div>';
 			i3GEOadmin.subgrupos.inicia();
 		};
-	new YAHOO.widget.Button("botaoEditorMenu",{ onclick: { fn: editorDeMenus } });
-	new YAHOO.widget.Button("botaoEditorGrupo",{ onclick: { fn: editorDeGrupos } });
-	new YAHOO.widget.Button("botaoEditorSubGrupo",{ onclick: { fn: editorDeSubGrupos } });
+	botao = new YAHOO.widget.Button("botaoEditorMenu",{ onclick: { fn: editorDeMenus } });
+	botao.addClass("rodar");
+	botao = new YAHOO.widget.Button("botaoEditorGrupo",{ onclick: { fn: editorDeGrupos } });
+	botao.addClass("rodar");
+	botao = new YAHOO.widget.Button("botaoEditorSubGrupo",{ onclick: { fn: editorDeSubGrupos } });
+	botao.addClass("rodar");
 
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");

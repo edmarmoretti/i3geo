@@ -174,7 +174,7 @@ i3GEOadmin.grupos = {
 	},
 	editor: function(dados,id,recordid){
 		if(!$i("janela_editor2")){
-			var ins,
+			var botao,ins,
 				novoel = document.createElement("div");
 			novoel.id =  "janela_editor2";
 			ins = '<div class="hd"><input id=okcancel_checkbox_id2 type="buttom" value="Salva" /><span style="margin-left:10px;position:relative;top:-10px;">Grupo</span></div>';
@@ -185,7 +185,7 @@ i3GEOadmin.grupos = {
 
 			document.body.appendChild(novoel);
 
-			new YAHOO.widget.Button(
+			botao = new YAHOO.widget.Button(
 				"okcancel_checkbox_id2",
 				{onclick:{fn: function(){
 					i3GEOadmin.grupos.salva(id,recordid);
@@ -193,6 +193,7 @@ i3GEOadmin.grupos = {
 					YAHOO.grupos.panelEditor2 = null;
 				}}}
 			);
+			botao.addClass("rodar");
 
 			YAHOO.grupos.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:true,width:"460px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
 			YAHOO.grupos.panelEditor2.render();

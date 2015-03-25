@@ -3121,16 +3121,15 @@ background: url(../pacotes/yui290/build/container/img/corner_resize.gif)
 left bottom no-repeat;
 cursor: se-resize;
 }
-.yui-skin-sam .yui-panel .hd { //
-background: transparent
-url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x
-scroll 0 -200px;
+/*veja tambem openlayers.css*/
+.yui-skin-sam .yui-panel .hd {
+background: none;
+background-color: #F2F2F2;
 color: #000000;
-font-size: 80%;
+font-size: 93%;
 font-weight: bold;
 line-height: 2;
 padding: 0 10px;
-height: 30px;
 }
 .yui-skin-sam .yui-panel .hd1 {
 background: transparent
@@ -3477,7 +3476,7 @@ opacity:.80;
 filter:alpha(opacity=80);
 }
 .yui-skin-sam .yui-panel .hd {
-background: none; //url("../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 -200px transparent;
+background: none;
 background-color: #F2F2F2;
 color: #000000;
 font-size: 93%;

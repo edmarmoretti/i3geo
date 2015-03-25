@@ -27,25 +27,6 @@
 		background: url("../../pacotes/yui290/build/assets/skins/sam/sprite.png") repeat-x scroll 0 0 #D8D8D8;
 		z-index: 3000;
 }
-
-.yui-skin-sam .yui-button button,.yui-skin-sam .yui-button a {
-	color: #000000;
-	font-size: 95%;
-	line-height: 1.5;
-	min-height: 1em;
-	padding: 0 10px;
-}
-.yui-skin-sam .yui-button {
-	border-color: #D3D3D3;
-	border-radius: 6px;
-	box-shadow: 0px 0px 0px 0px rgb(230,230,230);
-}
-.yui-skin-sam .yui-button .first-child {
-	border-color: #D3D3D3;
-	border-radius: 7px;
-}
-
-
 .ajuda_usuario
 {
 background-image:url(../../imagens/external.png);
@@ -269,12 +250,80 @@ fieldset {
 	font-size: 10pt;
 }
 .yui-skin-sam .yui-panel .hd {
-background: none;
-background-color: #F2F2F2;
-color: #000000;
-font-size: 93%;
-font-weight: bold;
-line-height: 2;
-padding: 0 10px;
+	background: none;
+	background-color: #F2F2F2;
+	color: #000000;
+	font-size: 93%;
+	font-weight: bold;
+	line-height: 2;
+	padding: 0 10px;
+}
+
+.yui-skin-sam .yui-button button,.yui-skin-sam .yui-button a {
+	color: #000000;
+	font-size: 95%;
+	line-height: 2;
+	min-height: 1em;
+	padding: 0 10px;
+}
+.yui-skin-sam .yui-button {
+	border-color: #D3D3D3;
+	border-radius: 6px;
+	box-shadow: 0px 0px 0px 0px rgb(230,230,230);
+}
+.yui-skin-sam .yui-button .first-child {
+	border-color: #D3D3D3;
+	border-radius: 7px;
+}
+
+.abrir .first-child button {
+	background: url(../../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
+	width: 250px;
+}
+
+.abrir200 .first-child button {
+	background: url(../../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
+	width: 200px;
+}
+
+.abrir150 .first-child button {
+	background: url(../../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
+	width: 150px;
+}
+
+.abrir100 .first-child button {
+	background: url(../../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
+	width: 100px;
+}
+
+.rodar .first-child button {
+	background: url(../../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
+	padding: 0 5px 0 28px;
+}
+.rodar150 .first-child button {
+	background: url(../../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
+	width: 150px;
+}
+
+.rodar100 .first-child button {
+	background: url(../../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
+	width: 100px;
+}
+
+.rodar0 .first-child button {
+	background: url("../../imagens/oxygen/16x16/run-build.png") no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
+	width: 20px;
+	height: 20px;
+}
+
+.adicionar0 .first-child button {
+	background: url("../../imagens/oxygen/16x16/list-add.png") no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
+	width: 20px;
+	height: 20px;
+}
+
+.enviar .first-child button {
+	background: url(../../imagens/oxygen/16x16/svn-commit.png) 5% 50% no-repeat;
+	width: 250px;
 }
 

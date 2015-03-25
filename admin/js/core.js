@@ -66,20 +66,14 @@ Armazena o objeto com a lista de perfis
 */
 $perfis = "";
 function cabecalhoMetaestat(id,excluir){
-	var i,n,temp,
+	var botao,i,n,temp,
 		ins = "<fieldset><legend>Atalhos</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
 			{id:"principal",titulo:"In&iacute;cio",link:"../principal.html"},
 			{id:"arvore",titulo:"&Aacute;rvore completa",link:"estat_variavel.html"},
-			{id:"unidade_medida",titulo:"Unidades",link:"estat_unidade_medida.html"},
-			{id:"periodo_tempo",titulo:"Per&iacute;odos",link:"estat_tipo_periodo.html"},
 			{id:"conexao",titulo:"Conex&otilde;es",link:"estat_conexao.html"},
 			{id:"tipo_regiao",titulo:"Regi&otilde;es",link:"estat_tipo_regiao.html"},
-			{id:"fonteinfo",titulo:"Fonte",link:"estat_fonteinfo.html"},
-			{id:"editor",titulo:"Gerenciador BD/Upload",link:"estat_editor.html"},
-			//{id:"uploaddados",titulo:"Upload",link:"estat_uploaddados.html"},
-			{id:"mapa",titulo:"Publicador",link:"estat_mapa.html"},
 			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;
@@ -99,7 +93,8 @@ function cabecalhoMetaestat(id,excluir){
 		if(excluir === "principal" && botoes[i].link)
 		{botoes[i].link = "html/"+botoes[i].link;}
 		if(botoes[i].id !== excluir){
-			new YAHOO.widget.Button(botoes[i].id);
+			botao = new YAHOO.widget.Button(botoes[i].id);
+			botao.addClass("abrir150");
 			if(botoes[i].link){
 				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
 			}
@@ -113,12 +108,10 @@ function cabecalhoMetaestat(id,excluir){
 		i3GEO.login.recarrega = true;
 	}
 	catch(e){ }
-	//temp.style.border = "solid 1px gray";
-	//temp.style.padding = "10px";
 }
 
 function cabecalhoUsuarios(id,excluir){
-	var i,n,temp,
+	var botao,i,n,temp,
 		ins = "<fieldset ><legend>Atalhos</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
@@ -145,7 +138,8 @@ function cabecalhoUsuarios(id,excluir){
 		if(excluir === "principal" && botoes[i].link)
 		{botoes[i].link = "html/"+botoes[i].link;}
 		if(botoes[i].id !== excluir){
-			new YAHOO.widget.Button(botoes[i].id);
+			botao = new YAHOO.widget.Button(botoes[i].id);
+			botao.addClass("abrir150");
 			if(botoes[i].link){
 				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
 			}
@@ -166,7 +160,7 @@ function cabecalhoGeral(id,excluir,prefixo){
 	if(!prefixo){
 		prefixo = "";
 	}
-	var i,n,temp,
+	var botao,i,n,temp,
 		ins = "<fieldset ><legend>Atalhos</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
@@ -193,7 +187,8 @@ function cabecalhoGeral(id,excluir,prefixo){
 		if(excluir === "principal" && botoes[i].link)
 		{botoes[i].link = "html/"+botoes[i].link;}
 		if(botoes[i].id !== excluir){
-			new YAHOO.widget.Button(botoes[i].id);
+			botao = new YAHOO.widget.Button(botoes[i].id);
+			botao.addClass("abrir150");
 			if(botoes[i].link){
 				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
 			}
@@ -207,8 +202,6 @@ function cabecalhoGeral(id,excluir,prefixo){
 		i3GEO.login.recarrega = true;
 	}
 	catch(e){ }
-	//temp.style.border = "solid 1px gray";
-	//temp.style.padding = "10px";
 }
 /*
 Function: core_arvore
@@ -1218,7 +1211,7 @@ function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 	if(arguments.length < 3){
 		nomeFuncao = "";
 	}
-	var adicionalinha = function(){
+	var botao, adicionalinha = function(){
 		core_carregando("ativa");
 		core_carregando(" adicionando um novo registro");
 		var callback = {
@@ -1252,7 +1245,8 @@ function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 		core_makeRequest(sUrl,callback);
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
-	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adicionalinha } });
+	botao = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adicionalinha } });
+	botao.addClass("rodar");
 }
 /*
 Function: core_pegaDados

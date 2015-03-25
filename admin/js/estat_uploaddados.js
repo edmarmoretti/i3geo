@@ -57,7 +57,7 @@ i3GEOadmin.uploaddados = {
 		},
 		fimsubmit: function(){
 			core_carregando("desativa");
-			var ins = "";
+			var botao, ins = "";
 			ins += "<p class=paragrafo ><b>Abaixo voc&ecirc; deve definir quais colunas do arquivo que foi enviado corresponde &agrave;s colunas do banco de dados de destino</b></p>" +
 				"<p class=paragrafo >Cont&eacute;m os c&oacute;digos que identificam o limite geogr&aacute;fico, como o c&oacute;digo do munic&iacute;pio ou bairro</p>" +
 				i3GEOadmin.uploaddados.upload.comboColunas("i3geoupload_codigoregiao") +
@@ -78,11 +78,11 @@ i3GEOadmin.uploaddados = {
 				"<p class=paragrafo ><input type=button value='Concluir envio' id='i3geoupload_concluir' /></p>";
 
 			$i(i3GEOadmin.uploaddados.upload.onde).innerHTML = ins;
-			new YAHOO.widget.Button(
+			botao = new YAHOO.widget.Button(
 				"i3geoupload_concluir",
 				{onclick:{fn: i3GEOadmin.uploaddados.upload.concluir}}
 			);
-			$i("i3geoupload_concluir-button").style.width = i3GEOF.metaestat.LARGURA - 25 + "px";
+			botao.addClass("rodar");
 		},
 		verificaForm: function(){
 			var el = ["i3GEOadminEditorMedidas_combo","i3GEOadminEditorVariaveis_combo","i3geoupload_codigoregiao","i3geoupload_valor","i3geoupload_tipoinclusao"],

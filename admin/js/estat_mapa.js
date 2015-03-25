@@ -32,7 +32,7 @@ function initMenu() {
 	ativaBotaoAdiciona(
 		"../php/metaestat.php?funcao=alteraMapa",
 		"adiciona");
-	new YAHOO.widget.Button(
+	var botao = new YAHOO.widget.Button(
 		"upload", {
 			onclick : {
 				fn : function() {
@@ -41,6 +41,7 @@ function initMenu() {
 				}
 			}
 		});
+	botao.addClass("rodar");
 	core_carregando("ativa");
 	core_ativaPainelAjuda(
 		"ajuda",
@@ -51,7 +52,7 @@ function initMenu() {
 		"montaArvore");
 }
 function ativaBotaoAdiciona(sUrl, idBotao) {
-	var adiciona = function() {
+	var botao, adiciona = function() {
 		core_carregando("ativa");
 		core_carregando(" adicionando um novo registro");
 		var callback = {
@@ -83,12 +84,13 @@ function ativaBotaoAdiciona(sUrl, idBotao) {
 			sUrl,
 			callback);
 	};
-	new YAHOO.widget.Button(
+	botao = new YAHOO.widget.Button(
 		idBotao, {
 			onclick : {
 				fn : adiciona
 			}
 		});
+	botao.addClass("rodar");
 }
 function formUploadImagem() {
 	var ins = ''

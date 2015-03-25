@@ -153,16 +153,17 @@ function initMenu()
 }
 function ativaBotaoVerificarOrfaos(idBotao)
 {
-	var temp = function(){
+	var botao, temp = function(){
 		core_montaEditor("","450px","660px","","Verificar");
 		verificaOrfaos();
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
-	new YAHOO.widget.Button(idBotao,{ onclick: { fn: temp } });
+	botao = new YAHOO.widget.Button(idBotao,{ onclick: { fn: temp } });
+	botao.addClass("rodar");
 }
 function ativaBotaoUploadGvsig(idBotao)
 {
-	var temp = function(){
+	var botao,temp = function(){
 		var ins = '<form id=i3GEOuploadgvp target="i3GEOuploadgvpiframe" action="../php/uploadgvp.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<p class="paragrafo" >Arquivo gvp: <br><input type="file" size=20 name="i3GEOuploadgvp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" ><input id=i3GEOuploadgvpbotao1 type="submit" value="Enviar" size=12 name="submit">' +
@@ -173,11 +174,12 @@ function ativaBotaoUploadGvsig(idBotao)
 		$i("editor_bd").innerHTML = ins;
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
-	new YAHOO.widget.Button(idBotao,{ onclick: { fn: temp } });
+	botao = new YAHOO.widget.Button(idBotao,{ onclick: { fn: temp } });
+	botao.addClass("rodar");
 }
 function ativaBotaoAdicionaMapfile(idBotao)
 {
-	var adiciona = function()
+	var botao, adiciona = function()
 	{
 		core_montaEditor("adicionaNovoMapfile()","450px","660px","","Mapfile",true,true,false);
 		ins = "<p><b>Nome do novo arquivo mapfile (sem .map) </b>n&atilde;o utilize caracteres acentuados ou espa&ccedil;os em branco</p>";
@@ -197,7 +199,8 @@ function ativaBotaoAdicionaMapfile(idBotao)
 		$i("editor_bd").innerHTML = ins;
 	};
 	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
-	new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+	botao = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
+	botao.addClass("rodar");
 }
 /*
 Function: montaArvore

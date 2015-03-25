@@ -49,7 +49,7 @@ i3GEOadmin.editor = {
 			var callback = {
 					success:function(o){
 						try	{
-							var dados = YAHOO.lang.JSON.parse(o.responseText),
+							var botao, dados = YAHOO.lang.JSON.parse(o.responseText),
 							temp = "<fieldset><p>Escolha um esquema: " +
 							"<select id='i3GEOadminesquema' onchange='i3GEOadmin.editor.tabela.lista()'>" +
 							core_comboObjeto(dados,"esquema","esquema") +
@@ -64,14 +64,16 @@ i3GEOadmin.editor = {
 							}
 							core_carregando("desativa");
 							$i(i3GEOadmin.editor.tabela.onde).innerHTML = "";
-							new YAHOO.widget.Button(
+							botao = new YAHOO.widget.Button(
 								"i3GEOadminesquemaCriar",
 								{onclick:{fn: i3GEOadmin.editor.esquema.criar}}
 							);
-							new YAHOO.widget.Button(
+							botao.addClass("rodar");
+							botao = new YAHOO.widget.Button(
 								"i3GEOadminesquemaAlterarNome",
 								{onclick:{fn: i3GEOadmin.editor.esquema.alterarNome}}
 							);
+							botao.addClass("rodar");
 						}
 						catch(e){core_handleFailure(e,o.responseText);}
 					},
@@ -158,7 +160,7 @@ i3GEOadmin.editor = {
 			var callback = {
 					success:function(o){
 						try	{
-							var opt,dados = YAHOO.lang.JSON.parse(o.responseText),
+							var botao, opt,dados = YAHOO.lang.JSON.parse(o.responseText),
 							temp = "<fieldset>" +
 							"<p class=paragrafo >Crie uma tabela no banco contendo limites ou localidades que poder&aacute; ser utilizada para espacializar os dados estat&iacute;sticos existentes em outras tabelas<br>" +
 							"<input type=button value='Upload Shapefile' id='i3GEOadmin_botaoupload' /></p>" +
@@ -188,34 +190,41 @@ i3GEOadmin.editor = {
 							"</fieldset>";
 							$i(i3GEOadmin.editor.tabela.onde).innerHTML = temp;
 
-							new YAHOO.widget.Button(
+							botao = new YAHOO.widget.Button(
 								"i3GEOadmin_botaoupload",
 								{onclick:{fn: i3GEOadmin.editor.uploadshp.inicia}}
 							);
-							new YAHOO.widget.Button(
+							botao.addClass("rodar");
+							botao = new YAHOO.widget.Button(
 								"i3GEOadmin_botaouploadcsv",
 								{onclick:{fn: i3GEOadmin.editor.uploadcsv.inicia}}
 							);
-							new YAHOO.widget.Button(
+							botao.addClass("rodar");
+							botao = new YAHOO.widget.Button(
 								"i3GEOadmintabelaMostrar",
 								{onclick:{fn: i3GEOadmin.editor.tabela.mostrar}}
 							);
-							new YAHOO.widget.Button(
+							botao.addClass("rodar");
+							botao = new YAHOO.widget.Button(
 								"i3GEOadmintabelaCsv",
 								{onclick:{fn: i3GEOadmin.editor.tabela.csv}}
 							);
-							new YAHOO.widget.Button(
+							botao.addClass("rodar");
+							botao = new YAHOO.widget.Button(
 								"i3GEOadmintabelaCriar",
 								{onclick:{fn: i3GEOadmin.editor.tabela.criar}}
 							);
-							new YAHOO.widget.Button(
+							botao.addClass("rodar");
+							botao = new YAHOO.widget.Button(
 								"i3GEOadmintabelaAlterarNome",
 								{onclick:{fn: i3GEOadmin.editor.tabela.alterarNome }}
 							);
-							new YAHOO.widget.Button(
+							botao.addClass("rodar");
+							botao = new YAHOO.widget.Button(
 								"i3GEOadmintabelaCopiar",
 								{onclick:{fn: i3GEOadmin.editor.tabela.copiar }}
 							);
+							botao.addClass("rodar");
 							core_carregando("desativa");
 							$i(i3GEOadmin.editor.coluna.onde).innerHTML = "";
 						}
@@ -398,7 +407,7 @@ i3GEOadmin.editor = {
 			var callback = {
 					success:function(o){
 						try	{
-							var dados = YAHOO.lang.JSON.parse(o.responseText),
+							var botao, dados = YAHOO.lang.JSON.parse(o.responseText),
 							temp = "<fieldset>" ;
 							temp += "<p>Coment&aacute;rio registrado na tabela: "+dados["comentario"];
 							temp += "<p>Escolha uma coluna: ";
@@ -409,14 +418,16 @@ i3GEOadmin.editor = {
 									"<p class=paragrafo ><input type=button value='Adicionar uma nova coluna' id='i3GEOadmincolunaCriar' />" +
 									"<input type=button value='Alterar o nome atual' id='i3GEOadmincolunaAlterarNome' />";
 							$i(i3GEOadmin.editor.coluna.onde).innerHTML = temp+"</fieldset>";
-							new YAHOO.widget.Button(
+							botao = new YAHOO.widget.Button(
 								"i3GEOadmincolunaCriar",
 								{onclick:{fn: i3GEOadmin.editor.coluna.criar}}
 							);
-							new YAHOO.widget.Button(
+							botao.addClass("rodar");
+							botao = new YAHOO.widget.Button(
 								"i3GEOadmincolunaAlterarNome",
 								{onclick:{fn: i3GEOadmin.editor.coluna.alterarNome}}
 							);
+							botao.addClass("rodar");
 							core_carregando("desativa");
 						}
 						catch(e){core_handleFailure(e,o.responseText);}
@@ -512,16 +523,17 @@ i3GEOadmin.editor = {
 	uploadshp: {
 		inicia: function(){
 			i3GEOadmin.editor.esvaziaFormsUpload();
-			var onde = $i("i3GEOadmin_formupload");
+			var botao, onde = $i("i3GEOadmin_formupload");
 			if(onde.innerHTML != ""){
 				onde.innerHTML = "";
 				return;
 			}
 			$i("i3GEOadmin_formupload").innerHTML = i3GEOadmin.editor.uploadshp.formulario();
-			new YAHOO.widget.Button(
+			botao = new YAHOO.widget.Button(
 				"i3GEOuploadsubmit",
 				{onclick:{fn: i3GEOadmin.editor.uploadshp.submit}}
 			);
+			botao.addClass("rodar");
 			i3GEO.util.comboEpsg("comboInSrid","selInSrid","i3GEOadmin.editor.uploadshp.mudaComboInSrid",4326);
 			i3GEO.util.comboEpsg("comboOutSrid","selOutSrid","i3GEOadmin.editor.uploadshp.mudaComboOutSrid",4326);
 			window.location.hash="i3GEOuploadshp";
@@ -604,16 +616,17 @@ i3GEOadmin.editor = {
 	uploadcsv: {
 		inicia: function(){
 			i3GEOadmin.editor.esvaziaFormsUpload();
-			var onde = $i("i3GEOadmin_formuploadcsv");
+			var botao,onde = $i("i3GEOadmin_formuploadcsv");
 			if(onde.innerHTML != ""){
 				onde.innerHTML = "";
 				return;
 			}
 			$i("i3GEOadmin_formuploadcsv").innerHTML = i3GEOadmin.editor.uploadcsv.formulario();
-			new YAHOO.widget.Button(
+			botao = new YAHOO.widget.Button(
 				"i3GEOuploadcsvsubmit",
 				{onclick:{fn: i3GEOadmin.editor.uploadcsv.submit}}
 			);
+			botao.addClass("rodar");
 		},
 		formulario: function(){
 			var ins = '' +
