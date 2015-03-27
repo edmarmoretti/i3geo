@@ -331,10 +331,10 @@ i3GEO.coordenadas =
 		 * 
 		 * {number} - zona UTM
 		 */
-		geo2zonaUtm : function(long) {
-			long = (long * 1) + 180;
-			long = long / 6;
-			return parseInt(long, 10) + 1;
+		geo2zonaUtm : function(l) {
+			l = (l * 1) + 180;
+			l = l / 6;
+			return parseInt(l, 10) + 1;
 		},
 		/**
 		 * Function: criaMascaraDMS

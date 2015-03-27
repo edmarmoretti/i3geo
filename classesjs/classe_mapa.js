@@ -161,18 +161,9 @@ i3GEO.mapa =
 		ativaAutoResize : function() {
 			var ativo = true;
 			window.onresize = function() {
-				var Dw, Dh, r = false;
+				var Dw, Dh;
 				Dw = YAHOO.util.Dom.getViewportWidth();
 				Dh = YAHOO.util.Dom.getViewportHeight();
-				if (Math.abs(Dw - i3GEO.tamanhodoc[0]) > 50) {
-					r = true;
-				}
-				if (Math.abs(Dh - i3GEO.tamanhodoc[1]) > 50) {
-					r = true;
-				}
-				if (r === false) {
-					// return;
-				}
 				i3GEO.tamanhodoc = [
 					Dw,
 					Dh

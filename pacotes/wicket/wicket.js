@@ -1,23 +1,24 @@
-/** @license
- *
- *  Copyright (C) 2012 K. Arthur Endsley (kaendsle@mtu.edu)
- *  Michigan Tech Research Institute (MTRI)
- *  3600 Green Court, Suite 100, Ann Arbor, MI, 48105
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
+/** 
+ * @license
+*
+*  Copyright (C) 2012 K. Arthur Endsley (kaendsle@mtu.edu)
+*  Michigan Tech Research Institute (MTRI)
+*  3600 Green Court, Suite 100, Ann Arbor, MI, 48105
+*
+*  This program is free software: you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation, either version 3 of the License, or
+*  (at your option) any later version.
+*
+*  This program is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+*/
 
 (function (global) {
 	var beginsWith, endsWith, root, Wkt;
@@ -368,7 +369,7 @@
 	
 				return s;
 			}.call(this)).join('')
-		}
+		};
 	
 		// Wkt BOX type gets a special bbox property in GeoJSON
 		if (this.type.toLowerCase() === 'box') {
@@ -794,7 +795,7 @@
 					var split=ring[j].split(this.regExes.spaces);
 					if(split.length>2){
 						//remove the elements which are blanks
-						split = split.filter(function(n){ return n != "" });
+						split = split.filter(function(n){ return n != ""; });
 					}
 					if(split.length===2){
 						var x_cord=split[0];
@@ -865,4 +866,3 @@
 	
 	return this;
 }(this));
-

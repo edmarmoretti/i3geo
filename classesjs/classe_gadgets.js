@@ -384,8 +384,8 @@ i3GEO.gadgets = {
 				+ " >"
 				+ "<div class='styled-select' style='width:160px;'><input type=text value='' id='valorBuscaRapida"
 				+ id
-				+ "' /></div>";
-			+"</form>";
+				+ "' /></div>"
+				+ "</form>";
 			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"
 				+ i3GEO.configura.locaplic
 				+ "/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;&nbsp;</a></td><td>"

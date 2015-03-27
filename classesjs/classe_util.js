@@ -2027,7 +2027,7 @@ i3GEO.util =
 		 */
 		checkItensEditaveis : function(tema, funcao, onde, size, prefixo, ordenacao) {
 			if (!ordenacao || ordenacao == "") {
-				ordenacao == "nao";
+				ordenacao = "nao";
 			}
 			if (onde !== "") {
 				$i(onde).innerHTML = "<span style=color:red;font-size:10px; >" + $trad("x65") + "</span>";
@@ -2325,8 +2325,6 @@ i3GEO.util =
 			coordy = box1[1] * 1;
 			if (coordx >= box2[0] * 1 && coordx <= box2[2] * 1 && coordy >= box2[1] * 1 && coordy <= box2[3] * 1) {
 				return true;
-				coordx = box1[0] * 1;
-				coordy = box1[3] * 1;
 			}
 			if (coordx >= box2[0] * 1 && coordx <= box2[2] * 1 && coordy >= box2[1] * 1 && coordy <= box2[3] * 1) {
 				return true;
@@ -2349,8 +2347,6 @@ i3GEO.util =
 			coordy = box1[1] * 1;
 			if (coordx >= box2[0] * 1 && coordx <= box2[2] * 1 && coordy >= box2[1] * 1 && coordy <= box2[3] * 1) {
 				return true;
-				coordx = box1[0] * 1;
-				coordy = box1[3] * 1;
 			}
 			if (coordx >= box2[0] * 1 && coordx <= box2[2] * 1 && coordy >= box2[1] * 1 && coordy <= box2[3] * 1) {
 				return true;
@@ -2744,11 +2740,11 @@ i3GEO.util =
 		 *
 		 * {number} - numero de casas decimais
 		 */
-		decimalPlaces : function(float, length) {
-			var ret = "", str = float.toString(), array = str.split("."), i;
+		decimalPlaces : function(f, l) {
+			var ret = "", str = f.toString(), array = str.split("."), i;
 			if (array.length == 2) {
 				ret += array[0] + ".";
-				for (i = 0; i < length; i++) {
+				for (i = 0; i < l; i++) {
 					if (i >= array[1].length)
 						ret += '0';
 					else
@@ -2756,7 +2752,7 @@ i3GEO.util =
 				}
 			} else if (array.length == 1) {
 				ret += array[0] + ".";
-				for (i = 0; i < length; i++) {
+				for (i = 0; i < l; i++) {
 					ret += '0';
 				}
 			}

@@ -831,7 +831,7 @@ i3GEO.configura =
 		 *
 		 * 11
 		 */
-		diminuixN : 00,
+		diminuixN : 0,
 		/**
 		 * Propriedade: diminuiyM
 		 *

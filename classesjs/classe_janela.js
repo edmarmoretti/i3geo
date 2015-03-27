@@ -500,7 +500,7 @@ i3GEO.janela =
 				if (temp.style.display === "block") {
 					temp.style.display = "none";
 					if (m) {
-						m.hideIframe;
+						m.hideIframe();
 					}
 					m.winicial = c.style.width;
 					if (min) {
@@ -509,7 +509,7 @@ i3GEO.janela =
 				} else {
 					temp.style.display = "block";
 					if (m) {
-						m.showIframe;
+						m.showIframe();
 					}
 					c.style.width = m.winicial;
 					t = "max";
@@ -735,6 +735,9 @@ i3GEO.janela =
 		 * {segundos}
 		 */
 		tempoMsg : function(texto, tempo) {
+			if(!YAHOO.util.Easing){
+				return;
+			}
 			var pos, janela, attributes, anim, altura = 40;
 			janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
 			pos = [

@@ -1157,8 +1157,9 @@ i3GEO.Interface =
 			 * Insere no mapa um layer baseado em kml
 			 */
 			insereLayerKml : function(id, url) {
-				var temp;
+				var l,temp;
 				url = i3GEO.configura.locaplic + "/classesphp/proxy.php?url=" + url;
+				/*
 				eval(id
 					+ " = new OpenLayers.Layer.Vector('"
 					+ id
@@ -1166,6 +1167,29 @@ i3GEO.Interface =
 					+ url + "',format: new OpenLayers.Format.KML({extractStyles: true,extractAttributes: true,maxDepth: 5})})})");
 				eval("i3geoOL.addLayer(" + id + ");");
 				eval("temp = " + id + ".div;");
+				*/
+				l = new OpenLayers.Layer.Vector(id,
+					{
+						displayOutsideMaxExtent:true,
+						displayInLayerSwitcher:false,
+						visibility:true, 
+						strategies: [new OpenLayers.Strategy.Fixed()],
+						protocol: new OpenLayers.Protocol.HTTP(
+							{
+								url: url,
+								format: new OpenLayers.Format.KML(
+									{
+										extractStyles: true,
+										extractAttributes: true,
+										maxDepth: 5
+									}
+								)
+							}
+						)
+					}
+				);
+				i3geoOL.addLayer(l);
+				temp = l.div;
 				temp.onclick =
 					function(e) {
 						var targ = "", id, temp, features, n, i, j = "", html = "";
@@ -1206,12 +1230,14 @@ i3GEO.Interface =
 			},
 			ativaDesativaCamadaKml : function(obj, url) {
 				if (!obj.checked) {
-					eval(obj.value + ".setVisibility(false);");
+					//eval(obj.value + ".setVisibility(false);");
+					i3geoOL.getLayersByName(obj.value)[0].setVisibility(false);
 				} else {
 					if (!(i3geoOL.getLayersByName(obj.value)[0])) {
 						i3GEO.Interface.openlayers.insereLayerKml(obj.value, url);
 					} else {
-						eval(obj.value + ".setVisibility(true);");
+						//eval(obj.value + ".setVisibility(true);");
+						i3geoOL.getLayersByName(obj.value)[0].setVisibility(true);
 					}
 				}
 			},
@@ -1710,8 +1736,8 @@ i3GEO.Interface =
 						point = new OpenLayers.LonLat(lonlat.lon, lonlat.lat);
 						lonlat = point.transform(proj900913, projWGS84);
 					}
-					d = i3GEO.calculo.dd2dms(lonlat.lon, lonlat.lat);
 					try {
+						d = i3GEO.calculo.dd2dms(lonlat.lon, lonlat.lat);
 						objposicaocursor.ddx = lonlat.lon;
 						objposicaocursor.ddy = lonlat.lat;
 						objposicaocursor.dmsx = d[0];

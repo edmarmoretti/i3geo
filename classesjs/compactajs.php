@@ -114,7 +114,6 @@ packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal"
 packer("classe_social.js","compactados/classe_social_compacto.js","Normal");
 packer("classe_editorol.js","compactados/classe_editorol_compacto.js","Normal");
 packer("classe_editorgm.js","compactados/classe_editorgm_compacto.js","Normal");
-//packer("../ferramentas/funcoes.js","../ferramentas/funcoes_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container.js","../pacotes/yui290/build/container/container_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container_core.js","../pacotes/yui290/build/container/container_core_compacto.js","Normal");
 packer("../pacotes/yui290/build/utilities/utilities.js","../pacotes/yui290/build/utilities/utilities_compacto.js","Normal");
@@ -123,16 +122,19 @@ packer("../pacotes/yui290/build/carousel/carousel-min.js","../pacotes/yui290/bui
 packer("../pacotes/yui290/build/resize/resize-min.js","../pacotes/yui290/build/resize/resize_compacto.js","Normal");
 packer("../pacotes/yui290/build/progressbar/progressbar-min.js","../pacotes/yui290/build/progressbar/progressbar_compacto.js","Normal");
 packer("../pacotes/cpaint/cpaint2.inc.js","../pacotes/cpaint/cpaint2_compacto.inc.js","Normal");
-//packer("../pacotes/balloon-tooltips/htdocs/js/balloon.config.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js","Normal");
-//packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js","Normal");
 packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
 packer("../pacotes/mustache.js-master/mustache.js","compactados/mustache.js","Normal");
+packer("../pacotes/proj4js/lib/proj4js.js","compactados/proj4js.js","Normal");
+packer("../pacotes/wicket/wicket.js","compactados/wicket.js","Normal");
+packer("../pacotes/eudock/js/euDock.2.0.js","compactados/euDock.2.0.js","Normal");
+packer("../pacotes/eudock/js/euDock.Image.js","compactados/euDock.Image.js","Normal");
 //
 //gera um unico js para a inicializacao do I3Geo
 //
 $jsfiles = array(
 "../pacotes/mobileesp/mdetect_compacto.js",
-"../pacotes/proj4js/lib/proj4js-compressed.js",
+//"../pacotes/proj4js/lib/proj4js-compressed.js",
+"compactados/proj4js.js",
 "../pacotes/cpaint/cpaint2_compacto.inc.js",
 "../pacotes/yui290/build/yahoo/yahoo-min.js",
 "../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",
@@ -155,9 +157,8 @@ $jsfiles = array(
 "../pacotes/yui290/build/resize/resize_compacto.js",
 "../pacotes/yui290/build/progressbar/progressbar_compacto.js",
 "../pacotes/yui290/build/selector/selector-min.js",
-//"../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js",
-//"../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js",
-"../pacotes/wicket/wicket.js",
+//"../pacotes/wicket/wicket.js",
+"compactados/wicket.js",
 "compactados/classe_i3geo_compacto.js",
 "compactados/classe_util_compacto.js",
 "compactados/dicionario_compacto.js",
@@ -185,10 +186,14 @@ $jsfiles = array(
 "compactados/classe_login_compacto.js",
 "compactados/classe_marcador_compacto.js",
 "compactados/classe_plugini3geo_compacto.js",
-"../pacotes/eudock/js/euDock.2.0.js",
-"../pacotes/eudock/js/euDock.Image.js",
+//"../pacotes/eudock/js/euDock.2.0.js",
+"compactados/euDock.2.0.js",
+//"../pacotes/eudock/js/euDock.Image.js",
+"compactados/euDock.Image.js",
 "compactados/mustache.js"
 );
+
+$removeQuebra = array();
 
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
 salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto6.js","js");
@@ -331,6 +336,7 @@ function packer($src,$out,$tipo="None")
 }
 function salvatudojs($jsfiles,$buffer,$final,$tipo)
 {
+	global $removeQuebra;
 	//junta todos os js em um unico
 	if(file_exists($final))
 	{unlink($final);}
@@ -340,6 +346,9 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 	foreach ($jsfiles as $f)
 	{
 		echo $f;
+		if($tipo == "js"){
+			$buffer .= "//\n//".$f."\n";
+		}
 /*
 		$abre = fopen($f, "r");
 		while (!feof($abre))
@@ -353,8 +362,12 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 		$linhas = file($f);
 		foreach($linhas as $linha){
 			$linha = trim(preg_replace('#[\r\n]#', '', $linha));
-			if($linha != "")
-			{$buffer .= $linha."\n";}
+			if($linha != ""){
+				$buffer .= $linha;
+				if(!in_array($f,$removeQuebra)){
+					$buffer .= "\n";
+				}
+			}
 		}
 	}
 

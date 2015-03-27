@@ -1,8 +1,8 @@
 //TODO documentar
 //TODO traduzir
-//TODO incluir opcao para selecionar todas as figuras
 //TODO incluir balao de informacoes como um elemento grafico de desenho
 //TODO incluir caixas de texto
+//TODO incluir undo na edicao
 
 /*
 Title: Editor vetorial para OpenLayers
@@ -11,6 +11,10 @@ i3GEO.editorOL
 
 Fun&ccedil;&otilde;es utilizadas pelo OpenLayers nas op&ccedil;&otilde;es de edi&ccedil;&atilde;o de dados vetoriais.
 &Eacute; utilizado tamb&eacute;m pelo mashup com navega&ccedil;&atilde;o via OpenLayers e com OSM.
+
+Para adicionar novos botoes, modifique tamb&eacute;m i3GEO.editorOL.botoes existente em i3GEO.barraDeBotoes.openlayers.ativaPainel
+
+Mesmo em interfaces de debug, esse javascript s&oacute; &eacute; carregado depois de cmpactado
 
 Arquivo: i3geo/classesjs/classe_editorol.js
 
@@ -141,6 +145,7 @@ i3GEO.editorOL = {
 		'apaga':true,
 		'procura':true,
 		'selecao':true,
+		'selecaotudo':true,
 		'salva':true,
 		'ajuda':true,
 		'propriedades':true,
@@ -224,6 +229,7 @@ i3GEO.editorOL = {
 			i3GEO.editorOL.botoes.corta= false;
 			i3GEO.editorOL.botoes.apaga=false;
 			i3GEO.editorOL.botoes.selecao=false;
+			i3GEO.editorOL.botoes.selecaotudo=false;
 			i3GEO.editorOL.botoes.salva=false;
 			i3GEO.editorOL.botoes.propriedades=false;
 			i3GEO.editorOL.botoes.fecha=false;
@@ -232,7 +238,7 @@ i3GEO.editorOL = {
 			i3GEO.editorOL.botoes.frente=false;
 		}
 		if(i3GEO.editorOL.mapa === "")
-		{alert("O objeto i3GEO.editorOL.mapa precisa ser criado com new OpenLayers.Map()");return;}
+		{alert("O objeto i3GEO.editorOL.mapa nao existe. Precisa ser criado com new OpenLayers.Map()");return;}
 		for(i=0;i<ncontroles;i++){
 			i3GEO.editorOL.mapa.addControl(i3GEO.editorOL.controles[i]);
 		}
@@ -240,10 +246,16 @@ i3GEO.editorOL = {
 			for(i=nfundo-1;i>=0;i--){
 				if(fundo[i] != ""){
 					try{
+						i3GEO.editorOL[fundo[i]].transitionEffect = 'resize';
+						i3GEO.editorOL[fundo[i]].setVisibility(false);
+						i3GEO.editorOL[fundo[i]].singleTile = false;
+						alayers.push(i3GEO.editorOL[fundo[i]]);
+						/*
 						eval("i3GEO.editorOL."+fundo[i]+".transitionEffect = 'resize';");
 						eval("i3GEO.editorOL."+fundo[i]+".setVisibility(false);");
 						eval("i3GEO.editorOL."+fundo[i]+".singleTile = false;");
 						eval("alayers.push(i3GEO.editorOL."+fundo[i]+");");
+						*/
 					}
 					catch(e){
 						if(alayers[0])
@@ -1348,6 +1360,24 @@ i3GEO.editorOL = {
 			controles.push(i3GEO.editorOL.selbutton);
 			adiciona = true;
 		}
+		//botao de selecionar tudo
+		if(botoes.selecaotudo===true){
+			button = new OpenLayers.Control.Button({
+				displayClass: "editorOLselecaoTudo",
+				trigger: function(){
+					var fs = i3GEO.desenho.layergrafico.features,
+						n = fs.length,
+						i;
+					for(i = 0; i < n; i++){
+						i3GEO.editorOL.selbutton.select(fs[i]);
+					}
+				},
+				title: "seleciona tudo",
+				type: OpenLayers.Control.TYPE_BUTTON
+			});
+			controles.push(button);
+			adiciona = true;
+		}
 		if(botoes.apaga===true){
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLapaga",
@@ -1359,7 +1389,7 @@ i3GEO.editorOL = {
 							i3GEO.desenho.layergrafico.removeFeatures(i3GEO.desenho.layergrafico.selectedFeatures);
 							if(document.getElementById("panellistagEditor"))
 							{i3GEO.editorOL.listaGeometrias();}
-							i3GEO.janela.tempoMsg("Para excluir o registro utilize a ferramenta de identificacao");
+							i3GEO.janela.tempoMsg("Para excluir registros do banco de dados utilize a ferramenta de identificacao");
 						}
 					}
 					else
@@ -1915,11 +1945,11 @@ i3GEO.editorOL = {
 	},
 	guardaBackup: function(){
 		return;
-		if(!i3GEO.editorOL.backup)
-		{i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false});}
-		else
-		{i3GEO.editorOL.backup.removeFeatures(i3GEO.editorOL.backup.features);}
-		i3GEO.editorOL.backup.addFeatures(i3GEO.desenho.layergrafico.features);
+		//if(!i3GEO.editorOL.backup)
+		//{i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup",{displayInLayerSwitcher:false,visibility:false});}
+		//else
+		//{i3GEO.editorOL.backup.removeFeatures(i3GEO.editorOL.backup.features);}
+		//i3GEO.editorOL.backup.addFeatures(i3GEO.desenho.layergrafico.features);
 	},
 	unselTodos:function(){
 		var n,i;

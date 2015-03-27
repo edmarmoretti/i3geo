@@ -163,25 +163,20 @@ Alt-left - Início da linha<br>
 	<script>
 i3GEO.configura = {locaplic: "../../"};
 
-/*
-ins = "<p><div id=filtroDeLetras ></div><br>";
-document.getElementById("letras").innerHTML = ins;
-core_listaDeLetras("filtroDeLetras","filtraLetra");
-if(i3GEO.util.pegaCookie("I3GEOletraAdmin")) {
-	letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
-}
-else{
-	letraAtual = "";
-}
-*/
+
 cabecalhoGeral("cabecalhoPrincipal","","../html/");
 core_listaDeLetras("filtroDeLetras","filtraLetra",true);
+
 var editorCM = CodeMirror.fromTextArea(document.getElementById("editor"), {
 	mode: 'scribe',
 	tabMode: 'indent',
 	lineNumbers: true,
 	theme: "elegant"
 });
+
+function getSelectedRange() {
+	return { from: editorCM.getCursor(true), to: editorCM.getCursor(false) };
+}
 
 function mudaEstilo(novo){
 	editorCM.setOption('theme',novo)

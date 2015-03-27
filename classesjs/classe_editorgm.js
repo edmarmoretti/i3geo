@@ -3,6 +3,7 @@
 //TODO incluir opcao para selecionar todas as figuras
 //TODO incluir balao de informacoes como um elemento grafico de desenho
 //TODO incluir caixas de texto
+//TODO incluir undo na edicao
 
 /*
 Editor vetorial de limites para a interface google maps
@@ -201,6 +202,7 @@ i3GEO.editorGM = {
 			'	<button title="Adicionar ponto" onclick="i3GEO.editorGM.digitalizaPt(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/point-create.png" /></button>' +
 			'	<button title="Capturar elemento de um tema" onclick="i3GEO.editorGM.capturaPoligonoTema.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-import.png" /></button>' +
 			'	<button title="Selecionar" onclick="i3GEO.editorGM.seleciona(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>' +
+			'	<button title="Selecionar tudo" onclick="i3GEO.editorGM.selectAll(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selectall.png" /></button>' +
 			'	<button title="Remove selecionado (n&atilde;o apaga)" onclick="i3GEO.editorGM.deleteSelectedShape()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
 			'	<button title="Salvar/excluir dados" onclick="i3GEO.editorGM.salvaLimite.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/vector-save.png" /></button>' +
 			'	<button title="Editar atributos" onclick="i3GEO.editorGM.editarAtributos.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/annotation-form.png" /></button>' +
@@ -1068,7 +1070,7 @@ i3GEO.editorGM = {
 										'<input class=digitar id="" value="" name="'+atr.colunas[j]+'" /></p>';
 									}
 								}
-								ins + "<br></div>";
+								ins += "<br></div>";
 								novoel.innerHTML = ins;
 								$i("editarAtributosForm").appendChild(novoel);
 							}}}

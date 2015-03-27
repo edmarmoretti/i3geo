@@ -50,7 +50,7 @@ if (!euEnv)
 	var euEnv      = new Array();
 euEnv.Kost         = new Array();
 euEnv.Kost.num     = 0;
-euEnv.Kost.next    = function(){return this.num++;}
+euEnv.Kost.next    = function(){return this.num++;};
 euEnv.euDockArray  = new Array();
 euEnv.refreshTime  = 35;
 euEnv.exeThread          = true;
@@ -271,7 +271,7 @@ var euOPAQUE      = 16;
 				this.align    = euABSOLUTE;
 				this.position = pos;
 				this.setCenterPos(x,y);
-			}
+			};
 
 			this.setObjectAlign = function(idObj,align,offset,pos){
 				this.offset       = offset;
@@ -290,7 +290,7 @@ var euOPAQUE      = 16;
 					}
 					else{
 						tempx = euIdObjLeft(this.idObjectHook) + (this.idObjectHook.offsetWidth/2);
-						tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset
+						tempy = euIdObjTop(this.idObjectHook)  + this.idObjectHook.offsetHeight + this.offset;
 						if(navm && !document.doctype || (navm && document.doctype && document.doctype.systemId == "")){
 							tempx = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA))[0] + (euIdObjLeft(this.idObjectHook) / 2);
 						}
@@ -396,7 +396,7 @@ var euOPAQUE      = 16;
 						this.setBarPos(this.centerPosX-this.bar.getSize()/2,this.centerPosY-this.getHeight()/2);
 					}
 				}
-			}
+			};
 
 			this.riposition = function(){
 				if (this.align == euSCREEN)
@@ -462,9 +462,9 @@ var euOPAQUE      = 16;
 
 				if (this.bar){
 					if (this.position==euUP || this.position==euDOWN || this.position==euHORIZONTAL)
-						this.bar.setProperties(bakWidth,this.position)
+						this.bar.setProperties(bakWidth,this.position);
 					else
-						this.bar.setProperties(bakHeight,this.position)
+						this.bar.setProperties(bakHeight,this.position);
 					this.bar.refresh();
 				}
 
@@ -655,7 +655,7 @@ var euOPAQUE      = 16;
 				elem.loaded=true;
 				var ret=true;
 				for (var i in this.elementsArray) if (this.elementsArray[i].id)
-						ret&=this.elementsArray[i].loaded
+						ret&=this.elementsArray[i].loaded;
 				this.loaded=ret;
 				if (this.loaded){
 					this.parentDock.updateDims();
@@ -832,7 +832,7 @@ var euOPAQUE      = 16;
 				elem.loaded=true;
 				var ret=true;
 				for (var i in this.elementsArray) if (this.elementsArray[i].id)
-					ret&=this.elementsArray[i].loaded
+					ret&=this.elementsArray[i].loaded;
 				this.loaded=ret;
 				if (this.loaded){
 					this.parentDock.updateDims();
@@ -890,4 +890,3 @@ function on_MouseClick(e) {
 			euEnv.exeThread |= euEnv.euDockArray[i].mouseClick(euEnv.euScrOfX+e.clientX,euEnv.euScrOfY+e.clientY);
 	return true;
 };
-

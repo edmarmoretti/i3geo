@@ -756,7 +756,7 @@ i3GEO.arvoreDeTemas = {
 		} else {
 			html += layer + " - " + titulo;
 		}
-		"</td></span>";
+		html += "</td></span>";
 		return (html);
 	},
 	/**
@@ -786,7 +786,7 @@ i3GEO.arvoreDeTemas = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.arvoreDeTemas.listaMenus()");
 
-		var retorno = function(retorno) {
+		var r = function(retorno) {
 			var c, m, i, k, jj, j;
 			if (i3GEO.arvoreDeTemas.IDSMENUS.length === 0) {
 				i3GEO.arvoreDeTemas.MENUS = retorno.data;
@@ -802,11 +802,12 @@ i3GEO.arvoreDeTemas = {
 					}
 				}
 			}
+			//necessario usar arguments por causa do compactador de scripts
 			if (funcao !== "") {
-				eval(funcao + "(retorno)");
+				eval(funcao + "(arguments[0]);");
 			}
 		};
-		i3GEO.php.pegalistademenus(retorno);
+		i3GEO.php.pegalistademenus(r);
 	},
 	/**
 	 * Function: listaGrupos
@@ -1907,11 +1908,11 @@ i3GEO.arvoreDeTemas = {
 							+ "' onclick='" + funcaoClick + "(\""
 							+ node.data.caminho + "/" + conteudo + "\")' >"
 							+ conteudo + "</a>";
-					if (retorno.data.urls && retorno.data.urls[ig] != "") {
+					//if (retorno.data.urls && retorno.data.urls[ig] != "") {
 						// conteudo += "&nbsp;<img
 						// src='"+i3GEO.configura.locaplic+"/.."+retorno.data.urls[ig]+"'
 						// style='height:20px;width:20px'/>";
-					}
+					//}
 					new YAHOO.widget.HTMLNode({
 						isLeaf : true,
 						enableHighlight : false,

@@ -404,7 +404,7 @@ var i3GEO = {
 				// ms_configura.php
 				if (retorno.bloqueado) {
 					alert(retorno.bloqueado);
-					exit;
+					return;
 				}
 				if (retorno === "") {
 					alert("Ocorreu um erro no mapa - i3GEO.inicia.montaMapa");
@@ -473,7 +473,7 @@ var i3GEO = {
 						// anula os cookies de login se for necessario
 						// o servidor verifica se na sessao o login esta ativo
 						if (i3GEO.parametros.logado === "nao") {
-							i3GEO.login.anulaCookie;
+							i3GEO.login.anulaCookie();
 						}
 						//
 						i3GEO.arvoreDeCamadas.registaCamadas(retorno.data.temas);
@@ -581,7 +581,7 @@ var i3GEO = {
 				// ms_configura.php
 				if (retorno.bloqueado) {
 					alert(retorno.bloqueado);
-					exit;
+					return;
 				}
 				i3GEO.configura.sid = retorno.data;
 				i3GEO.inicia(retorno);

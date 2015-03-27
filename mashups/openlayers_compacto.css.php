@@ -540,6 +540,12 @@ background-position:-783px -28px;
 .olControlEditingToolbar1 .editorOLzoomoutItemInactive {
 background-position:-783px -0px;
 }
+.olControlEditingToolbar1 .editorOLselecaoTudoItemActive {
+background-position:-812px -28px;
+}
+.olControlEditingToolbar1 .editorOLselecaoTudoItemInactive {
+background-position:-812px -0px;
+}
 .olControlEditingToolbar1 {
 width:750px;
 float:right;
