@@ -20,26 +20,28 @@
 
 [leg_class_html]
 <table style=margin-top:5px;position:relative;left:22px; >
-	[if name=CLASSE oper=neq value=NAO]
-			<tr>
-				<td style=width:20px;text-align:left; ><input type=checkbox CHECKED title=liga/desliga class=inputsb style='border: 0px solid red;cursor:pointer;opacity:0.3;' value=[leg_class_index] name=[leg_layer_name] id='legendack_[leg_layer_name]_[leg_class_index]' onclick='i3GEO.arvoreDeCamadas.inverteStatusClasse(this)' />
-				</td>
-				<td style=text-align:left >
-					[if name=layer_type oper=eq value=0]
-					<img src=[leg_icon  width=30 height=30 ] />
-					[/if]
-					[if name=layer_type oper=eq value=1]
-					<img src=[leg_icon  width=30 height=16 ] />
-					[/if]
-					[if name=layer_type oper=eq value=2]
-					<img src=[leg_icon  width=30 height=16 ] />
-					[/if]
-					[if name=layer_type oper=eq value=3]
-					<img src=[leg_icon  width=30 height=16 ] />
-					[/if]
-				</td>
-				<td style="text-align:left;width:195px" ><span style="font-size:11px;position:relative;left:2px;" >[leg_class_name]</span></td>
-			</tr>
+	[if name=legendaimg oper=isnull ]
+		[if name=CLASSE oper=neq value=NAO]
+				<tr>
+					<td style=width:20px;text-align:left; ><input type=checkbox CHECKED title=liga/desliga class=inputsb style='border: 0px solid red;cursor:pointer;opacity:0.3;' value=[leg_class_index] name=[leg_layer_name] id='legendack_[leg_layer_name]_[leg_class_index]' onclick='i3GEO.arvoreDeCamadas.inverteStatusClasse(this)' />
+					</td>
+					<td style=text-align:left >
+						[if name=layer_type oper=eq value=0]
+						<img src=[leg_icon  width=30 height=30 ] />
+						[/if]
+						[if name=layer_type oper=eq value=1]
+						<img src=[leg_icon  width=30 height=16 ] />
+						[/if]
+						[if name=layer_type oper=eq value=2]
+						<img src=[leg_icon  width=30 height=16 ] />
+						[/if]
+						[if name=layer_type oper=eq value=3]
+						<img src=[leg_icon  width=30 height=16 ] />
+						[/if]
+					</td>
+					<td style="text-align:left;width:195px" ><span style="font-size:11px;position:relative;left:2px;" >[leg_class_name]</span></td>
+				</tr>
+		[/if]
 	[/if]
 </table>
 
