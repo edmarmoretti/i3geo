@@ -40,6 +40,7 @@ if (typeof (i3GEOF) === 'undefined') {
 /*
  * Classe: i3GEOF.legenda
  */
+//incuir opcao para inserir o nome de uma imagem da legenda
 i3GEOF.legenda =
 	{
 		/*

@@ -3,6 +3,7 @@
 //TODO incluir balao de informacoes como um elemento grafico de desenho
 //TODO incluir caixas de texto
 //TODO incluir undo na edicao
+//TODO ativar mensagens quando estiver no mashup
 
 /*
 Title: Editor vetorial para OpenLayers

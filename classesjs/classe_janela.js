@@ -420,8 +420,8 @@ i3GEO.janela =
 				});
 				resize.on('resize', function(args) {
 					this.cfg.setProperty("height", args.height + "px");
-					if ($i(id + "i")) {
-						$i(id + "i").style.height = args.height + "px";
+					if (wdocaiframe) {
+						wdocaiframe.style.height = args.height -50 + "px";
 					}
 				}, janela, true);
 				if (funcaoAposRedim && funcaoAposRedim != "") {

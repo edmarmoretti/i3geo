@@ -40,6 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 Classe: i3GEOF.buscainde
 
 */
+//TODO quando o layer estiver definido no endereco do servico, abrir direto a camada no mapa
 i3GEOF.buscainde = {
 	/*
 	Variavel: aguarde
