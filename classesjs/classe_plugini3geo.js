@@ -106,8 +106,13 @@ i3GEO.pluginI3geo =
 		 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
 		 * Esse icone e utilizado para reabrir o formulario de parametros
 		 */
-		iconeArvoreDeCamadas : function(nomecamada){
-			return i3GEO.pluginI3geo[plugin].iconeArvoreDeCamadas(nomecamada);
+		iconeArvoreDeCamadas : function(camada){
+			if (camada.plugini3geo && camada.plugini3geo != "") {
+				return i3GEO.pluginI3geo[plugin].iconeArvoreDeCamadas(camada.name);
+			}
+			else{
+				return false;
+			}
 		},
 		linkAjuda : function(plugin) {
 			return i3GEO.pluginI3geo[plugin].linkAjuda();

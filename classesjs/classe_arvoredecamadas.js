@@ -1709,7 +1709,7 @@ i3GEO.arvoreDeCamadas =
 			return (html);
 		},
 		montaIconesTema : function(tema) {
-			var n, i = null, c, html, estilo, farol, mfarol, imb = i3GEO.configura.locaplic + "/imagens/branco.gif";
+			var iconePlugin, n, i = null, c, html, estilo, farol, mfarol, imb = i3GEO.configura.locaplic + "/imagens/branco.gif";
 
 			estilo = "i3GEOarvCamTemaIco";
 			// verifica se a versao do IE e menor que 9
@@ -1794,6 +1794,11 @@ i3GEO.arvoreDeCamadas =
 						+ imb
 						+ "'/>";
 				}
+			}
+			//inclui o icone especifico quando o tema e baseado em algum plugin
+			iconePlugin = i3GEO.pluginI3geo.iconeArvoreDeCamadas(tema);
+			if(iconePlugin){
+				html += iconePlugin;
 			}
 			html += "</div>";
 			return (html);
