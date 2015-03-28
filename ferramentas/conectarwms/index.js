@@ -168,7 +168,7 @@ Veja:
 
 <TEMASWMS>
 */
-function clickGuia3()
+function clickGuia3(codLayer)
 {
 	var listatemas = function(retorno)
 	{
@@ -190,6 +190,8 @@ function clickGuia3()
 					$i("textoSLD").style.display = "block";
 				}
 			}
+			//ativa um layer caso tenha sido enviado como um parametro no inicio da ferramenta
+			ativaAutoLayer(codLayer);
 		}
 		else
 		{$i("listatemas").innerHTML = "erro";}
@@ -207,6 +209,20 @@ function clickGuia3()
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		cp.call(p,"temaswms",listatemas);
+	}
+}
+function ativaAutoLayer(codLayer){
+	if(codLayer && codLayer != ""){
+		var container = $i("listatemas"),
+			rs = container.getElementsByTagName("input"),
+			nrs = re.lenght,
+			i,r;
+		for(i = 0; i < nrs; i++){
+			r = rs[i];
+			if(r.type === "radio" && r.name === codLayer){
+				r.onclick.call();
+			}
+		}
 	}
 }
 /*

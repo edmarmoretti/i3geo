@@ -16,6 +16,8 @@ Aplica a substituicao de chaves pelos valores enviados
 		//pega o layer
 		$nomeLayer = "";
 		$c = $map->numlayers;
+		//obtem o layer existente no mapfile
+		//esse layer pode conter o nome no metadata nomeoriginal ou em NAME
 		for ($i=0;$i < $c;++$i){
 			$layer = $map->getlayer($i);
 			if($layer->name == $tema){
@@ -31,68 +33,69 @@ Aplica a substituicao de chaves pelos valores enviados
 		}
 		else{
 			$layer = $map->getlayerbyname($nomeLayer);
-			$data = $layer->data;
-			//pega as chaves do proprio mapfile
-			$c = $layer->getmetadata("PLUGINI3GEO");
-			if($c == ""){
-				//tenta pegar os parametros do arquivo mapfile original
-				$map1 = ms_newMapObj($locaplic."/temas/".$nomeLayer.".map");
-				$layer1 = $map1->getlayerbyname($nomeLayer);
-				$c = $layer1->getmetadata("PLUGINI3GEO");
-				if($c == ""){
-					$retorno = "erro";
-				}
+			//os parametros do plugin sao obtidos do mapfile original
+			//isso evita que o mapfile temporario contenha as informacoes
+			//sobre as variaveis de substituicao
+			if(file_exists($locaplic."/temas/".$nomeLayer.".map")){
+				$map1 = @ms_newMapObj($locaplic."/temas/".$nomeLayer.".map");
 			}
-			if($c != ""){
-				$cs = json_decode($c,true);
-				$cs = $cs["parametros"];
-				$chaves = array();
-				foreach($cs as $c){
-					$chaves[] = $c["chave"];
-				}
-				$chaves = implode(",",$chaves);
-				//verifica se o layer ja teve os parametros substituidos anteriormente
-				//nesse caso, o data he obtido do metadata que guarda o valor original
-				if($layer->getmetadata("DATAORIGINAL") != ""){
-					$data = $layer->getmetadata("DATAORIGINAL");
-				}
-				else{
-					$layer->setmetadata("DATAORIGINAL",$data);
-				}
-				$filtro = $layer->getFilterString();
-				if($layer->getmetadata("FILTROORIGINAL") != ""){
-					$filtro = $layer->getmetadata("FILTROORIGINAL");
-				}
-				else{
-					$layer->setmetadata("FILTROORIGINAL",$filtro);
-				}
-				$chaves = str_ireplace(array("and", "or", "select","from","where","update","delete","insert","--"),"",$chaves);
-				$chaves = explode(",",$chaves);
-				$valores = str_ireplace(array("and", "or", "select","from","where","update","delete","insert","--"),"",$valores);
-				$valores = explode(",",strip_tags($valores));
-				$n = count($chaves);
-				for($i = 0; $i < $n; $i++){
-					if($chaves[$i] != ""){
-						$v = $valores[$i];
-						$data = str_replace($chaves[$i],$v,$data);
-						if($filtro != ""){
-							$filtro = str_replace($chaves[$i],$v,$filtro);
+			elseif (file_exists($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map")){
+				$map1 = @ms_newMapObj($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map");
+			}
+			if($map1){
+				$layer1 = $map1->getlayerbyname($nomeLayer);
+				if($layer1 != ""){
+					$data = $layer1->data;
+					$c = $layer1->getmetadata("PLUGINI3GEO");
+					if($c == ""){
+						$retorno = "erro";
+					}
+					if($c != ""){
+						$cs = json_decode($c,true);
+						$cs = $cs["parametros"];
+						$chaves = array();
+						foreach($cs as $c){
+							$chaves[] = $c["chave"];
 						}
+						$chaves = implode(",",$chaves);
+						$filtro = $layer1->getFilterString();
+						if(!empty($valores)){
+							$chaves = str_ireplace(array("and", "or", "select","from","where","update","delete","insert","--"),"",$chaves);
+							$chaves = explode(",",$chaves);
+							$valores = str_ireplace(array("and", "or", "select","from","where","update","delete","insert","--"),"",$valores);
+							$valores = explode(",",strip_tags($valores));
+							$n = count($chaves);
+							for($i = 0; $i < $n; $i++){
+								if($chaves[$i] != ""){
+									$v = $valores[$i];
+									$data = str_replace($chaves[$i],$v,$data);
+									if($filtro != ""){
+										$filtro = str_replace($chaves[$i],$v,$filtro);
+									}
+								}
+							}
+							if($filtro != ""){
+								$layer->setfilter($filtro);
+							}
+							$layer->set("data",$data);
+						}
+						$layer->set("status",MS_DEFAULT);
+						$layer->setmetadata("PLUGINI3GEO",'{"plugin":"parametrossql","ativo":"sim","parametros":[{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""}');
+						$layer->setmetadata("TEMA",$layer->getmetadata("TEMA")." - ".implode(",",$valores));
+						$layer->set("name","plugin".nomeRandomico());
+						if (connection_aborted()){
+							exit();
+						}
+						$salvo = $map->save($map_file);
+						$retorno = "ok";
 					}
 				}
-				if($filtro != ""){
-					$layer->setfilter($filtro);
+				else{
+					$retorno = "layer $nomeLayer nao encontrado";
 				}
-				$layer->set("data",$data);
-				$layer->set("status",MS_DEFAULT);
-				$layer->setmetadata("PLUGINI3GEO","");
-				$layer->setmetadata("TEMA",$layer->getmetadata("TEMA")." - ".implode(",",$valores));
-				$layer->set("name","plugin".nomeRandomico());
-				if (connection_aborted()){
-					exit();
-				}
-				$salvo = $map->save($map_file);
-				$retorno = "ok";
+			}
+			else{
+				$retorno = "mapfile nao encontrado em temas";
 			}
 		}
 	break;

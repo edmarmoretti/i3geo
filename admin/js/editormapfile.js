@@ -278,20 +278,21 @@ function montaNosRaiz(redesenha)
 			iconePlus = false;
 			conteudo += "<b>("+$mapfiles[i].extensao+") </b>";
 		}
-		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />";
 		if(iconePlus)
-		{conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma copia' src=\"../imagens/clonar.png\" />";}
-		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o cache de imagens se houver' src=\"../imagens/limparcache.png\" />";
-		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />";
+		{conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma copia' src=\"../imagens/clonar.png\" />";}
+		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o cache de imagens se houver' src=\"../imagens/limparcache.png\" />";
+		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />";
 		if(iconePlus){
-			conteudo += "<a style='border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+$mapfiles[i].codigo+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/06.png\" /></a>";
+			conteudo += "<a style='margin-left:2px;border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+$mapfiles[i].codigo+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/06.png\" /></a>";
 		}
 		//opcao de download se for gvsig
 		if($mapfiles[i].extensao === "gvp"){
-			conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"downloadGvp('"+$mapfiles[i].codigo+"')\" title='download' src=\"../imagens/down1.gif\" />";
+			conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"downloadGvp('"+$mapfiles[i].codigo+"')\" title='download' src=\"../imagens/down1.gif\" />";
 		}
-		conteudo += "&nbsp;<img style=\"width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"','"+$mapfiles[i].extensao+"')\" title='testar!' src=\"../imagens/41.png\" />";
-		conteudo += "&nbsp;<img width=20px style=\"position:relative;cursor:pointer;top:2px\" onclick=\"javascript:window.open('../../interface/black_editor.php?&temaEdicao="+$mapfiles[i].codigo+"')\" title='abrir no i3Geo' src=\"../../imagens/i3geo2.jpg\" />";
+		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"','"+$mapfiles[i].extensao+"')\" title='testar!' src=\"../imagens/41.png\" />";
+		conteudo += "&nbsp;<img width=20px style=\"margin-left:2px;position:relative;cursor:pointer;top:2px\" onclick=\"javascript:window.open('../../interface/black_editor.php?&temaEdicao="+$mapfiles[i].codigo+"')\" title='editar no i3Geo' src=\"../imagens/i3geo2editor.jpg\" />";
+		conteudo += "&nbsp;<img width=20px style=\"margin-left:2px;position:relative;cursor:pointer;top:2px\" onclick=\"javascript:window.open('../../ms_criamapa.php?temasa="+$mapfiles[i].codigo+"&layers="+$mapfiles[i].codigo+"')\" title='testar no i3Geo' src=\"../imagens/i3geo2.jpg\" />";
 		conteudo += "<b>&nbsp;<span>"+$mapfiles[i].codigo+" <span style=color:gray id='idNome_"+$mapfiles[i].codigo+"'>"+$mapfiles[i].nome+"</span></span>";
 		if($mapfiles[i].imagem != "" && $i("mostraMini").checked == true){
 			conteudo += "</b><br><img src='../../temas/miniaturas/"+$mapfiles[i].imagem+"'/>";

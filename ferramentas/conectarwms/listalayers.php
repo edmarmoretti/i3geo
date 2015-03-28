@@ -1,4 +1,12 @@
+<?php 
+/**
+ * Este programa e utilizado pela ferramenta buscainde
+ * E uma copia da ferramenta conctarwms sem mostrar as guias de esolha de servico
+ * Isso pq o endereco do servico e um parametro obtido em $_GET["servico"]
+ */
+?>
 <html>
+
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas6.css">
@@ -43,11 +51,38 @@ p{
 		</div>
 	</div>
 <input type=hidden id=servico value="<?php echo $_GET["servico"];?>" />
+
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script type="text/javascript" src="index.js"></script>
+
 <script type="text/javascript" >
+//
+//tenta pegar o codigo do layer do endereco do servico
+//
+var buscarEm = ["LAYER","LAYERS","layer","layers","tema","typename","typeName"],
+	n = buscarEm.length,
+	i,s,partes,
+	b = [],
+	codLayer = "",
+	u = window.location.href;
+
+//acrescenta novas strings
+for(i = 0; i < n; i++){
+	b.push("&" + buscarEm[i] + "=");
+	b.push("?" + buscarEm[i] + "=");
+}
+n = b.length;
+//quebra as strings pra achar o padrao
+for(i = 0; i < n; i++){
+	s = b[i];
+	partes = u.split(s);
+	if(partes.length > 1){
+		partes = partes[1].split("&");
+		codLayer = partes[0];
+	}
+}
 g_locaplic = "../..";
-clickGuia3();
+clickGuia3(codLayer);
 </script>
 </body>
 </html>

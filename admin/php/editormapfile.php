@@ -137,7 +137,6 @@ switch (strtoupper($funcao))
 		retornaJSON($layer->getmetadata("PLUGINI3GEO"));
 	break;
 	case "GRAVAPLUGIN":
-		//echo $plugin;exit;
 		$mapfile = $locaplic."/temas/".$codigoMap.".map";
 		$mapa = ms_newMapObj($mapfile);
 		$layer = $mapa->getlayerbyname($codigoLayer);

@@ -106,6 +106,20 @@ i3GEOF.parametrossql = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/
 	iniciaJanelaFlutuante: function(camada){
+		//verifica se deve ser aberto o formulario
+		if(camada.plugini3geo.ativo != undefined && camada.plugini3geo.ativo === "nao"){
+			fim = function(){
+				i3GEO.atualiza();
+			};
+			p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
+				+ "&funcao=aplicar"
+				+ "&tema=" + camada.name
+				+ "&chaves=&valores=";
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"foo",fim);
+			return;
+		}
 		var minimiza,cabecalho,janela,divid,temp,titulo;
 		if($i("i3GEOF.parametrossql")){
 			i3GEOF.parametrossql.inicia("i3GEOF.parametrossql_corpo",camada);

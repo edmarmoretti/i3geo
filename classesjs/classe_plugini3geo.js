@@ -102,6 +102,13 @@ i3GEO.pluginI3geo =
 		formAdmin : function(plugin, configString) {
 			return i3GEO.pluginI3geo[plugin].formAdmin(configString);
 		},
+		/**
+		 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
+		 * Esse icone e utilizado para reabrir o formulario de parametros
+		 */
+		iconeArvoreDeCamadas : function(nomecamada){
+			return i3GEO.pluginI3geo[plugin].iconeArvoreDeCamadas(nomecamada);
+		},
 		linkAjuda : function(plugin) {
 			return i3GEO.pluginI3geo[plugin].linkAjuda();
 		},
@@ -233,6 +240,13 @@ i3GEO.pluginI3geo =
 					+ " As cores s&atilde;o definidas nas classes do LAYER, sendo que o nome define o valor superior do gradiente e COLOR define a cor."
 					+ " Veja o exemplo utilizado no tema _lmapadecalor.map</p>";
 				return ins;
+			},
+			/**
+			 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
+			 * Esse icone e utilizado para reabrir o formulario de parametros
+			 */
+			iconeArvoreDeCamadas : function(nomecamada){
+				return false;
 			},
 			googlemaps : {
 				aplicaPropriedades : function(camada) {
@@ -510,6 +524,13 @@ i3GEO.pluginI3geo =
 					+ "<p>Veja o exemplo utilizado no tema _lmapadecluster.map</p>";
 
 				return ins;
+			},
+			/**
+			 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
+			 * Esse icone e utilizado para reabrir o formulario de parametros
+			 */
+			iconeArvoreDeCamadas : function(nomecamada){
+				return false;
 			},
 			googlemaps : {
 				aplicaPropriedades : function(camada) {
@@ -853,6 +874,13 @@ i3GEO.pluginI3geo =
 					+ "<p>Veja o exemplo utilizado no tema _lmapakml.map</p>";
 				return ins;
 			},
+			/**
+			 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
+			 * Esse icone e utilizado para reabrir o formulario de parametros
+			 */
+			iconeArvoreDeCamadas : function(nomecamada){
+				return false;
+			},
 			googlemaps : {
 				aplicaPropriedades : function(camada) {
 					camada.sel = "nao";
@@ -996,6 +1024,8 @@ i3GEO.pluginI3geo =
 				}
 			}
 		},
+		//TODO incluir um marcador que indique se o formulario sera aberto ao adicionar a camada ou nao
+		//TODO apos adicionar a camada, incluir icone que permita modificar os parametros
 		/**
 		 * Section: i3GEO.pluginI3geo.parametrossql
 		 *
@@ -1018,8 +1048,9 @@ i3GEO.pluginI3geo =
 		 * Exemplo:
 		 *
 		 * "PLUGINI3GEO"
-		 * '{"plugin":"parametrossql","parametros":{[{"titulo":"","tipo":"input|select","valores":[],"chave":"","php":""}]}}'
+		 * '{"plugin":"parametrossql","parametros":{[{"titulo":"","tipo":"input|select","valores":[],"chave":"","prog":"","ativo":sim|nao}]}}'
 		 *
+		 * A op&ccedil;&atilde;o &quot;ativo&quot; indica se o formul&aacute;rio ser&aacute; aberto ou n&atilde;o quando a camada for adicionada ao mapa
 		 */
 		parametrossql : {
 			linkAjuda : function() {
@@ -1028,7 +1059,7 @@ i3GEO.pluginI3geo =
 			},
 			formAdmin : function(config) {
 				var n, i, parametros, ins = "", configDefault =
-					'{"plugin":"parametrossql","parametros":[{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""}]}';
+					'{"plugin":"parametrossql","ativo":"sim","parametros":[{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""}]}';
 				if (config === "") {
 					config = configDefault;
 				}
@@ -1038,7 +1069,18 @@ i3GEO.pluginI3geo =
 				}
 				parametros = config.parametros;
 				n = 4;
-				ins += "<table><tr><td>T&iacute;tulo</td><td>Chave</td><td>Tipo (input ou select)</td><td>Valores</td><td>PHP  que retorna os valores (opcional)</td></tr>";
+				if(config.ativo == undefined){
+					config.ativo = "sim";
+				}
+				ins += "<p class='paragrafo'>Abre o formul&aacute;rio quando a camada &eacute; adicionada ao mapa: (true ou false)</p>";
+				ins += "<select style='width:200px' id='parametrosSqlAtivo' ><option value='' ></option>";
+				if(config.ativo === "nao"){
+					ins += "<option value=sim >sim</option><option value=nao selected >nao</option></select>";
+				} else{
+					ins += "<option value=sim selected >sim</option><option value=nao >nao</option></select>";
+				}
+
+				ins += "<table><tr><td>T&iacute;tulo</td><td>Chave</td><td>Tipo (input ou select)</td><td>Valores</td><td>PHP que retorna os valores (opcional)</td></tr>";
 				for (i = 0; i < n; i++) {
 					ins += "<tr><td><input name='titulo' type=text size=20 value='"
 						+ parametros[i].titulo
@@ -1054,7 +1096,8 @@ i3GEO.pluginI3geo =
 						+ "' /></td> "
 						+ "<td><input name='prog' type=text size=20 value='"
 						+ parametros[i].prog
-						+ "' /></td></tr>";
+						+ "' /></td> "
+						+ "<td></tr>";
 				}
 				ins +=
 					"</table>"
@@ -1063,6 +1106,7 @@ i3GEO.pluginI3geo =
 						+ "<br>Ser&aacute; mostrado ao usu&aacute;rio um formul&aacute;rio com op&ccedil;&otilde;es. Cada op&ccedil;&atilde;o conter&aacute; um t&iacute;tulo e um campo de formul&aacute;rio"
 						+ "<br>Cada campo de formul&aacute;rio pode ser dos tipos input (para digitar um valor) ou select (caixa de op&ccedil;&otilde;es)."
 						+ "<br>Em valores deve ser definida a lista ou o valor default que ser&aacute; mostrado. No caso de listas, utilize v&iacute;rgula para separar os valores."
+						+ "<br>Em ativo, &eacute; indicado com sim ou nao se o formul&aacute;rio ser&aacute; aberto quando a camada for adicionada ao mapa."
 						+ "<br>Como opcional, pode ser definido o endere&ccedil;o de um programa PHP que retorna a lista de nomes e valores que ser&atilde;o utilizados para preencher "
 						+ "o campo de escolha. Para mais informa&ccedil;&otilde;es, veja o mapfile i3geo/temas/_llocaliphp.map. O caminho desse arquivo PHP &eacute; relativo &agrave; pasta i3geo.";
 				return ins;
@@ -1075,7 +1119,7 @@ i3GEO.pluginI3geo =
 				for (j = 0; j < nlinhas; j++) {
 					temp = [];
 					for (i = 0; i < ncampos; i++) {
-						if(campos[campo]){
+						if(campos[campo] && campos[campo].name != ""){
 							temp.push('"'+campos[campo].name
 								+ '" : "'
 								+ campos[campo].value
@@ -1087,9 +1131,16 @@ i3GEO.pluginI3geo =
 						+ temp.join(",")
 						+ "}");
 				}
-				return '{"plugin":"parametrossql","parametros":['
+				return '{"plugin":"parametrossql","ativo":"' + $i("parametrosSqlAtivo").value + '","parametros":['
 					+ par.join(",")
 					+ ']}';
+			},
+			/**
+			 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
+			 * Esse icone e utilizado para reabrir o formulario de parametros
+			 */
+			iconeArvoreDeCamadas : function(nomecamada){
+				return false;
 			},
 			inicia : function(camada) {
 				i3GEO.janela.fechaAguarde("aguardePlugin");
