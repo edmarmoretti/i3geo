@@ -428,7 +428,7 @@ i3GEOF.filtro = {
 		g = $i("i3GEOfiltroparametros");
 		ipt = g.getElementsByTagName("tr");
 		if (ipt.length > 1){
-			for (i=2;i<ipt.length; i++){
+			for (i=1;i<ipt.length; i++){
 				nos = ipt[i].childNodes;
 				s = nos[2].getElementsByTagName("select");
 				itemsel = s[0].value;
