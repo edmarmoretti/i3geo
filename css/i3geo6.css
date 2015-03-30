@@ -158,6 +158,9 @@ background-image: url("../imagens/oxygen/16x16/draw-triangle4.png");
 .i3GEOarvCamTemaIco .arvCamZoomLayer, .i3GEOarvCamTemaIcoIE .ZoomLayer {
 background-image: url("../imagens/gisicons/zoom-layer.png");
 }
+.i3GEOarvCamTemaIco .pluginParametrossql, .i3GEOarvCamTemaIcoIE .pluginParametrossql {
+background-image: url("../imagens/gisicons/settings.png");
+}
 .i3GEObalaoInfo {
 position : absolute;
 textAlign : left;

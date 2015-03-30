@@ -6,11 +6,45 @@ include_once(dirname(__FILE__)."/../inicia.php");
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
-/*
-Valor: APLICAR
+	/*
+	 Valor: PARAMETROSPLUGIN
 
-Aplica a substituicao de chaves pelos valores enviados
-*/
+	Obtem a string do plugin
+	*/
+	case "PARAMETROSPLUGIN":
+		$map = ms_newMapObj($map_file);
+		$layer = $map->getlayerbyname($name);
+		//os parametros do plugin sao obtidos do mapfile original
+		if (file_exists($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map")){
+			$map1 = @ms_newMapObj($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map");
+		}
+		if($map1){
+			$layer1 = $map1->getlayerbyname($layer->getmetadata("nomeoriginal"));
+			if($layer1 != ""){
+				$c = $layer1->getmetadata("PLUGINI3GEO");
+				if($c == ""){
+					$retorno = "erro";
+				}
+				else{
+					if (!mb_detect_encoding($c,"UTF-8",true)){
+						$c = utf8_encode($c);
+					}
+					$retorno = json_decode($c,true);
+				}
+			}
+			else{
+				$retorno = "layer nao encontrado em temas";
+			}
+		}
+		else{
+			$retorno = "Erro ao criar o mapa";
+		}
+		break;
+		/*
+		 Valor: APLICAR
+
+		Aplica a substituicao de chaves pelos valores enviados
+		*/
 	case "APLICAR":
 		$map = ms_newMapObj($map_file);
 		//pega o layer
@@ -80,7 +114,7 @@ Aplica a substituicao de chaves pelos valores enviados
 							$layer->set("data",$data);
 						}
 						$layer->set("status",MS_DEFAULT);
-						$layer->setmetadata("PLUGINI3GEO",'{"plugin":"parametrossql","ativo":"sim","parametros":[{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""}');
+						$layer->setmetadata("PLUGINI3GEO",'{"plugin":"parametrossql","ativo":"sim"}');
 						$layer->setmetadata("TEMA",$layer->getmetadata("TEMA")." - ".implode(",",$valores));
 						$layer->set("name","plugin".nomeRandomico());
 						if (connection_aborted()){
@@ -98,7 +132,7 @@ Aplica a substituicao de chaves pelos valores enviados
 				$retorno = "mapfile nao encontrado em temas";
 			}
 		}
-	break;
+		break;
 	case "REMOVER":
 		$map = ms_newMapObj($map_file);
 		$layer = $map->getlayerbyname($tema);
@@ -107,16 +141,22 @@ Aplica a substituicao de chaves pelos valores enviados
 			$salvo = $map->save($map_file);
 		}
 		$retorno = "ok";
-	break;
+		break;
+	/*
+	 * Retorna os valores obtidos de um programa PHP incluido nos parametros do plugin
+	 * Utilizado para pegar a lista de valores que sera apresentada ao usuario
+	 */
 	case "INCLUDEPROG":
 		if(file_exists($locaplic."/".$prog)){
 			include($locaplic."/".$prog);
 		}
-	break;
+		break;
 }
 if (!connection_aborted()){
 	cpjson($retorno);
 }
-else
-{exit();}
+else{
+	exit();
+}
+
 ?>

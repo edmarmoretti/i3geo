@@ -108,7 +108,7 @@ i3GEO.pluginI3geo =
 		 */
 		iconeArvoreDeCamadas : function(camada){
 			if (camada.plugini3geo && camada.plugini3geo != "") {
-				return i3GEO.pluginI3geo[plugin].iconeArvoreDeCamadas(camada.name);
+				return i3GEO.pluginI3geo[camada.plugini3geo.plugin].iconeArvoreDeCamadas(camada.name);
 			}
 			else{
 				return false;
@@ -1029,7 +1029,6 @@ i3GEO.pluginI3geo =
 				}
 			}
 		},
-		//TODO incluir um marcador que indique se o formulario sera aberto ao adicionar a camada ou nao
 		//TODO apos adicionar a camada, incluir icone que permita modificar os parametros
 		/**
 		 * Section: i3GEO.pluginI3geo.parametrossql
@@ -1145,7 +1144,29 @@ i3GEO.pluginI3geo =
 			 * Esse icone e utilizado para reabrir o formulario de parametros
 			 */
 			iconeArvoreDeCamadas : function(nomecamada){
-				return false;
+				var icone = "<img "
+				+ "class='pluginParametrossql'"
+				+ " onclick='i3GEO.util.animaClique(this);" 
+				+ "i3GEO.pluginI3geo.parametrossql.buscaParForm(\"" + nomecamada + "\")"
+				+ "' title='Variaveis'" 
+				+ "' src='"
+				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
+				+ "'/>";
+				return icone;
+			},
+			buscaParForm : function (nomecamada){
+				var p, cp, temp;
+				temp = function(retorno){
+					console.info(retorno.data);
+					//mudar ativo para sim
+					//rodar i3GEOF.parametrossql
+				};
+				//aqui e necessario buscar os parametros do plugin para poder abrir o formulario
+				p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
+				+ "&funcao=PARAMETROSPLUGIN&name="+ nomecamada;
+				cp = new cpaint();
+				cp.set_response_type("JSON");
+				cp.call(p,"foo",temp); 
 			},
 			inicia : function(camada) {
 				i3GEO.janela.fechaAguarde("aguardePlugin");

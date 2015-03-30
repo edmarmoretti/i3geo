@@ -1305,6 +1305,7 @@ class Mapa
 						$nNome = str_replace(".map","",basename($nomemap));
 						$nlayer->setmetadata("arquivotemaoriginal",$nNome);
 						$nlayer->setmetadata("nomeoriginal",$nlayer->name);
+						
 						$nlayer->set("name",$nomeunico[$n]);
 						//altera o nome do grupo se existir
 						if ($nlayer->group != " " && $nlayer->group != "" ){

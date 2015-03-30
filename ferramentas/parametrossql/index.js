@@ -118,40 +118,43 @@ i3GEOF.parametrossql = {
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"foo",fim);
-			return;
 		}
-		var minimiza,cabecalho,janela,divid,temp,titulo;
-		if($i("i3GEOF.parametrossql")){
-			i3GEOF.parametrossql.inicia("i3GEOF.parametrossql_corpo",camada);
-			return;
+		else{
+			if(camada.plugini3geo.parametros){
+				var minimiza,cabecalho,janela,divid,temp,titulo;
+				if($i("i3GEOF.parametrossql")){
+					i3GEOF.parametrossql.inicia("i3GEOF.parametrossql_corpo",camada);
+					return;
+				}
+				//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
+				cabecalho = function(){
+				};
+				minimiza = function(){
+					i3GEO.janela.minimiza("i3GEOF.parametrossql");
+				};
+				//cria a janela flutuante
+				titulo = "<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
+				janela = i3GEO.janela.cria(
+					"290px",
+					"330px",
+					"",
+					"",
+					"",
+					titulo,
+					"i3GEOF.parametrossql",
+					false,
+					"hd",
+					cabecalho,
+					minimiza,
+					"",
+					true
+				);
+				divid = janela[2].id;
+				i3GEOF.parametrossql.aguarde = $i("i3GEOF.parametrossql_imagemCabecalho").style;
+				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.parametrossql.cancela);
+				i3GEOF.parametrossql.inicia(divid,camada);
+			}
 		}
-		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
-		cabecalho = function(){
-		};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.parametrossql");
-		};
-		//cria a janela flutuante
-		titulo = "<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
-		janela = i3GEO.janela.cria(
-			"290px",
-			"330px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.parametrossql",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			true
-		);
-		divid = janela[2].id;
-		i3GEOF.parametrossql.aguarde = $i("i3GEOF.parametrossql_imagemCabecalho").style;
-		YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.parametrossql.cancela);
-		i3GEOF.parametrossql.inicia(divid,camada);
 	},
 	formulario: function(camada){
 		//sobre os parametros ver em classe_plugini3geo

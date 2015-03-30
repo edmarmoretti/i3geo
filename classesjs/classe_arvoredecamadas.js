@@ -984,6 +984,7 @@ i3GEO.arvoreDeCamadas =
 								temaNode = new YAHOO.widget.HTMLNode( temp, tempNode);
 								if (i3GEO.arvoreDeCamadas.OPCOESICONES === true) {
 									textoTema = i3GEO.arvoreDeCamadas.montaIconesTema(ltema);
+									//console.warn(tema.plugini3geo)
 									temp = i3GEO.arvoreDeCamadas.NOTEMAICONES;
 									temp.id = ltema.name;
 									temp.html = textoTema;
@@ -1796,9 +1797,11 @@ i3GEO.arvoreDeCamadas =
 				}
 			}
 			//inclui o icone especifico quando o tema e baseado em algum plugin
-			iconePlugin = i3GEO.pluginI3geo.iconeArvoreDeCamadas(tema);
-			if(iconePlugin){
-				html += iconePlugin;
+			if (tema.plugini3geo){
+				iconePlugin = i3GEO.pluginI3geo.iconeArvoreDeCamadas(tema);
+				if(iconePlugin){
+					html += iconePlugin;
+				}
 			}
 			html += "</div>";
 			return (html);
