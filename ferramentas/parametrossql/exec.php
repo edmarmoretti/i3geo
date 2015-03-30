@@ -12,11 +12,18 @@ switch (strtoupper($funcao))
 	Obtem a string do plugin
 	*/
 	case "PARAMETROSPLUGIN":
-		$map = ms_newMapObj($map_file);
-		$layer = $map->getlayerbyname($name);
-		//os parametros do plugin sao obtidos do mapfile original
-		if (file_exists($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map")){
-			$map1 = @ms_newMapObj($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map");
+		//no mashup o nome do tema e sempre o nome do mapfile
+		if (file_exists($locaplic."/temas/".$tema.".map")){
+			$map1 = @ms_newMapObj($locaplic."/temas/".$tema.".map");
+		}
+		else{
+			//nesse caso, o mapfile vem da secao php
+			$map = ms_newMapObj($map_file);
+			$layer = $map->getlayerbyname($name);
+			//os parametros do plugin sao obtidos do mapfile original
+			if (file_exists($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map")){
+				$map1 = @ms_newMapObj($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map");
+			}
 		}
 		if($map1){
 			$layer1 = $map1->getlayerbyname($layer->getmetadata("nomeoriginal"));

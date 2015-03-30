@@ -405,32 +405,34 @@ i3GEO.janela =
 					dragOnly : true,
 					keylisteners : null
 				});
-				var resize = new YAHOO.util.Resize(id, {
-					handles : [
-						'br'
-					],
-					autoRatio : false,
-					minWidth : 10,
-					minHeight : 10,
-					status : false,
-					proxy : true,
-					ghost : false,
-					animate : false,
-					useShim : true
-				});
-				resize.on('resize', function(args) {
-					this.cfg.setProperty("height", args.height + "px");
-					if (wdocaiframe) {
-						wdocaiframe.style.height = args.height -50 + "px";
-					}
-				}, janela, true);
-				if (funcaoAposRedim && funcaoAposRedim != "") {
-					resize.on('endResize', function(args) {
-						funcaoAposRedim.call();
-						i3GEO.janela.minimiza();
+				if(YAHOO.util.Resize){
+					var resize = new YAHOO.util.Resize(id, {
+						handles : [
+							'br'
+						],
+						autoRatio : false,
+						minWidth : 10,
+						minHeight : 10,
+						status : false,
+						proxy : true,
+						ghost : false,
+						animate : false,
+						useShim : true
+					});
+					resize.on('resize', function(args) {
+						this.cfg.setProperty("height", args.height + "px");
+						if (wdocaiframe) {
+							wdocaiframe.style.height = args.height -50 + "px";
+						}
 					}, janela, true);
+					if (funcaoAposRedim && funcaoAposRedim != "") {
+						resize.on('endResize', function(args) {
+							funcaoAposRedim.call();
+							i3GEO.janela.minimiza();
+						}, janela, true);
+					}
+					resize.getProxyEl().style.height = "0px";
 				}
-				resize.getProxyEl().style.height = "0px";
 			}
 			if (nx !== "" && nx !== "center") {
 				janela.moveTo(nx, ny + 50);

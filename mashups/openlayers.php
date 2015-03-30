@@ -23,10 +23,10 @@ if($nocache == "sim"){
 else{
 	$nocache = "";
 }
+$temasPluginI3Geo = array();
 //
 // recupera um mapa salvo no banco de administracao
 //
-$temasPluginI3Geo = array();
 if(!empty($restauramapa)){
 	include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 	$xbase = restauraMapaAdmin($restauramapa,$dir_tmp);
@@ -450,6 +450,7 @@ function ajuda(){
 //carrega o script para layers do tipo plugin
 if(count($temasPluginI3Geo) > 0){
 	echo '<script type="text/javascript" src="../classesjs/classe_plugini3geo.js"></script>'."\n";
+	echo '<script type="text/javascript" src="../pacotes/cpaint/cpaint2_compacto.inc.js"></script>'."\n";
 }
 ?>
 <link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
@@ -603,9 +604,16 @@ foreach ($temasPluginI3Geo as $t){
 	//cria um objeto javascript para iniciar o plugin
 	$camada = '{"tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].'}';
 	echo "var camada = $camada;\n";
-	echo "i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);\n";
+	//echo "i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);\n";
+	echo "adicionaPluginI3geo(camada);\n";
 }
 ?>
+function adicionaPluginI3geo(camada){
+	//TODO nao funciona
+	if(camada.plugini3geo.plugin != "parametrossql"){
+		i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);
+	}
+}
 </script>
 </body>
 </html>

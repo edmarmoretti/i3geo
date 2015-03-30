@@ -252,15 +252,36 @@ chmod("../css/i3geo_ferramentas6.css",0777);
 //compacta os codigos para o Mashup do OpenLayers
 //
 $jsfiles = array(
+"../pacotes/yui290/build/yahoo/yahoo-min.js",
 "../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",
+"../pacotes/yui290/build/dom/dom-min.js",
+"../pacotes/yui290/build/utilities/utilities_compacto.js",
+"../pacotes/yui290/build/container/container_core_compacto.js",
+"../pacotes/yui290/build/menu/menu-min.js",
+"../pacotes/yui290/build/logger/logger-min.js",
 "../pacotes/yui290/build/dragdrop/dragdrop-min.js",
-"../pacotes/yui290/build/container/container-min.js",
+"../pacotes/yui290/build/slider/slider-min.js",
+"../pacotes/yui290/build/animation/animation-min270.js",
+"../pacotes/yui290/build/container/container_compacto.js",
+"../pacotes/yui290/build/element/element-min.js",
+"../pacotes/yui290/build/tabview/tabview-min.js",
+"../pacotes/yui290/build/treeview/treeview_compacto.js",
+"../pacotes/yui290/build/button/button-min.js",
+"../pacotes/yui290/build/carousel/carousel_compacto.js",
+"../pacotes/yui290/build/json/json-min.js",
+"../pacotes/yui290/build/storage/storage-min.js",
+"../pacotes/yui290/build/resize/resize_compacto.js",
+"../pacotes/yui290/build/progressbar/progressbar_compacto.js",
+"../pacotes/yui290/build/selector/selector-min.js",
 "../classesjs/compactados/classe_calculo_compacto.js",
 "../classesjs/compactados/classe_util_compacto.js",
 "../pacotes/openlayers/OpenLayers2131.js",
 "../classesjs/compactados/classe_desenho_compacto.js",
 "../classesjs/compactados/classe_janela_compacto.js",
-"../classesjs/compactados/classe_editorol_compacto.js"
+"../classesjs/compactados/classe_editorol_compacto.js",
+"compactados/dicionario_compacto.js",
+"compactados/classe_idioma_compacto.js",
+"compactados/mustache.js"
 );
 $buffer = "";
 salvatudojs($jsfiles,$buffer,"../mashups/openlayers_compacto.js","js");
