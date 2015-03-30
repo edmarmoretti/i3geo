@@ -608,7 +608,7 @@ Copia um tema
 		foreach ($this->grupo as $lg){
 			$ll = $this->mapa->getlayerbyname($lg);
 			$layer = ms_newLayerObj($this->mapa, $ll);
-			$layer->setmetadata("nomeoriginal","");
+			$layer->setmetadata("nomeoriginal",$ll->getmetadata("nomeoriginal"));
 			$meta = $layer->getmetadata("tema");
 			if (($meta != "") && ($meta != "NAO")){
 				$layer->setmetadata("tema","Copia de ".$meta);

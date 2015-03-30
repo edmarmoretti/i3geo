@@ -1157,9 +1157,11 @@ i3GEO.pluginI3geo =
 			buscaParForm : function (nomecamada){
 				var p, cp, temp;
 				temp = function(retorno){
-					console.info(retorno.data);
-					//mudar ativo para sim
-					//rodar i3GEOF.parametrossql
+					retorno.data.ativo = "sim";
+					//pega o objeto camada
+					var camada = i3GEO.arvoreDeCamadas.pegaTema(nomecamada);
+					camada.plugini3geo = retorno.data;
+					i3GEO.pluginI3geo.parametrossql.inicia(camada);
 				};
 				//aqui e necessario buscar os parametros do plugin para poder abrir o formulario
 				p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid

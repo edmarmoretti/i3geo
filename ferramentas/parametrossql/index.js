@@ -252,6 +252,7 @@ i3GEOF.parametrossql = {
 		fim = function(){
 			i3GEO.janela.destroi("i3GEOF.parametrossql");
 			i3GEO.atualiza();
+			i3GEO.Interface.atualizaMapa();
 		};
 		p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
 			+ "&funcao=aplicar"
