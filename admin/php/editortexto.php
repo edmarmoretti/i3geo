@@ -89,13 +89,30 @@ body {
 					echo "<span style=color:red <b>N&atilde;o foi poss&iacute;vel salvar o arquivo. Verifique as permiss&otilde;es ou se h&aacute; algum erro no mapfile</b></span><br><br>";
 				}
 				else{
-					fwrite($fp,$gravarTexto);
+					//remove itens vazios
+					$novoTexto = array();
+					$testar = array("TEMPORIZADOR","PALLETESTEP","LTEMPOITEMIMAGEM","METAESTAT_ID_MEDIDA_VARIAVEL","GMOPACITY","GMSTATUS","ICONETEMA","LTEMPOITEMTITULO","DESCRIPTION_TEMPLATE","LTEMPOITEMLINK","TILES","METAESTAT_CODIGO_TIPO_REGIAO","ARQUIVOTEMAORIGINAL","PALLETEFILE","NOMEORIGINAL","OLSTATUS","PERMITEDOWNLOAD","LTEMPOFORMATODATA","FILTROORIGINAL","PERMITECOMENTARIO","LTEMPOITEMICONE","DATAORIGINAL","PLUGINI3GEO","METAESTAT","ITEMBUSCARAPIDA","ARQUIVODOWNLOAD","ARQUIVOKMZ","PERMITEKML","PERMITEOGC","CONVCARACTER","CORTEPIXELS","EDITORSQL","LTEMPOCONVENCODE","LTEMPOITEMFIM","OLOPACITY","LEGENDAWMS","LEGENDAIMG","KEYIMAGE","TILEINDEX","TILEITEM","SYMBOL","LABELITEM","FILTERITEM","GROUP","ENCODING","TIP","CLASSE","ITENSDESC","CLASSESNOME","ITENSLINK","ESCALA","CLASSESSIMBOLO","MENSAGEM","EXTENSAO","CLASSESITEM","ESCONDIDO","CLASSESCOR","DOWNLOAD","CLASSESTAMANHO","ITENS","TEMA","APLICAEXTENSAO","IDENTIFICA","TRANSITIONEFFECT");
+					foreach(preg_split('~[\r\n]+~', $gravarTexto) as $line){
+						$teste = strtoupper($line);
+						$teste = trim($teste);
+						$teste = str_replace(array(" ","'",'"'),"",$teste);
+						$teste = preg_replace('/[\n\r\t ]*/', '', $teste);
+						$passou = true;
+						foreach ($testar as $t)
+						{
+							if($teste == $t){
+								$passou = false;
+							}
+						}
+						if($passou == true){
+							$novoTexto[] = $line;
+						}
+					}
+					fwrite($fp,implode("\r\n",$novoTexto));
 				}
 				fclose($fp);
 			}
 			?>
-
-			
 			<div style=float:left; >
 			Estilo: <select onchange="mudaEstilo(this.value)">
 				<option value=elegant >Elegant</option>

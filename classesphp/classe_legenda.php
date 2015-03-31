@@ -240,6 +240,14 @@ string com a legenda HTML
 					if($classe->status == MS_OFF){
 						$desligarLayer[] = $c;
 					}
+					//remove o offset em simbolos do tipo imagem
+					if($classe->numstyles > 0){
+						$estilo = $classe->getstyle(0);
+						if($estilo->symbolname != "" && file_exists($estilo->symbolname)){
+							$estilo->set("offsetx",0);
+							$estilo->set("offsety",0);
+						}
+					}
 				}
 				$la->set("minscaledenom",0);
 				$la->set("maxscaledenom",0);

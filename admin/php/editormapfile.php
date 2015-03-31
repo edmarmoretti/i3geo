@@ -2323,6 +2323,7 @@ function removeCabecalho($arq,$symbolset=true)
 	}
 	$final = array_merge($cabeca,$final);
 	$handle = fopen($arq, "w+");
+	$testar = array("LEGENDAWMS","LEGENDAIMG","KEYIMAGE","TILEINDEX","TILEITEM","SYMBOL","LABELITEM","FILTERITEM","GROUP","ENCODING","TIP","CLASSE","ITENSDESC","CLASSESNOME","ITENSLINK","ESCALA","CLASSESSIMBOLO","MENSAGEM","EXTENSAO","CLASSESITEM","ESCONDIDO","CLASSESCOR","DOWNLOAD","CLASSESTAMANHO","ITENS","TEMA","APLICAEXTENSAO","IDENTIFICA","TRANSITIONEFFECT");
 	foreach ($final as $f)
 	{
 		//
@@ -2331,11 +2332,10 @@ function removeCabecalho($arq,$symbolset=true)
 		//
 		$teste = strtoupper($f);
 		$teste = trim($teste);
-		$teste = str_replace(" ","",$teste);
-		$teste = str_replace("'","",$teste);
-		$teste = str_replace('"',"",$teste);
+		$teste = str_replace(array(" ","'",'"'),"",$teste);
+		//$teste = str_replace("'","",$teste);
+		//$teste = str_replace('"',"",$teste);
 		$teste = preg_replace('/[\n\r\t ]*/', '', $teste);
-		$testar = array("KEYIMAGE","TILEINDEX","TILEITEM","SYMBOL","LABELITEM","FILTERITEM","GROUP","ENCODING","TIP","CLASSE","ITENSDESC","CLASSESNOME","ITENSLINK","ESCALA","CLASSESSIMBOLO","MENSAGEM","EXTENSAO","CLASSESITEM","ESCONDIDO","CLASSESCOR","DOWNLOAD","CLASSESTAMANHO","ITENS","TEMA","APLICAEXTENSAO","IDENTIFICA","TRANSITIONEFFECT");
 		$passou = true;
 		foreach ($testar as $t)
 		{
@@ -2343,8 +2343,9 @@ function removeCabecalho($arq,$symbolset=true)
 				$passou = false;
 			}
 		}
-		if($passou)
+		if($passou == true){
 			fwrite($handle,$f);
+		}
 	}
 	fclose($handle);
 	chmod($arq, 0666);

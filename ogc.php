@@ -760,11 +760,22 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 	$l->set("minscaledenom",0);
 	$l->set("maxscaledenom",0);
 	if($req->getValueByName("FORMAT") == "text/html"){
-		$req->setParameter("FORMAT","image/png");
+		//$req->setParameter("FORMAT","image/png");
 		$l = $oMap->getlayerbyname($req->getValueByName("LAYER"));
 		$l->set("status",MS_DEFAULT);
+		//remove offset de simbolos pontuais
+		$nclass = $l->numclasses;
+		for($cc = 0; $cc < $nclass; $cc++){
+			$classe  = $l->getclass($cc);
+			if($classe->numstyles > 0){
+				$estilo = $classe->getstyle(0);
+				if($estilo->symbolname != "" && file_exists($estilo->symbolname)){
+					$estilo->set("offsetx",0);
+					$estilo->set("offsety",0);
+				}
+			}
+		}
 		$legenda->set("template",$locaplic."/aplicmap/legendaOgc.html");
-
 		$tmparray["my_tag"] = "value_of_my_tag";
 		if($leg = @$oMap->processlegendtemplate($tmparray)){
 			if (function_exists("mb_convert_encoding")){

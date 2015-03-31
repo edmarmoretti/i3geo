@@ -15,18 +15,19 @@ switch (strtoupper($funcao))
 		//no mashup o nome do tema e sempre o nome do mapfile
 		if (file_exists($locaplic."/temas/".$tema.".map")){
 			$map1 = @ms_newMapObj($locaplic."/temas/".$tema.".map");
+			$layer1 = $map1->getlayerbyname($tema);
 		}
 		else{
 			//nesse caso, o mapfile vem da secao php
 			$map = ms_newMapObj($map_file);
-			$layer = $map->getlayerbyname($name);
+			$layer = $map->getlayerbyname($tema);
 			//os parametros do plugin sao obtidos do mapfile original
 			if (file_exists($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map")){
 				$map1 = @ms_newMapObj($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map");
+				$layer1 = $map1->getlayerbyname($layer->getmetadata("nomeoriginal"));
 			}
 		}
 		if($map1){
-			$layer1 = $map1->getlayerbyname($layer->getmetadata("nomeoriginal"));
 			if($layer1 != ""){
 				$c = $layer1->getmetadata("PLUGINI3GEO");
 				if($c == ""){
@@ -75,9 +76,9 @@ switch (strtoupper($funcao))
 					$chaves = implode(",",$chaves);
 					$filtro = $layer1->getFilterString();
 					if(!empty($valores)){
-						$chaves = str_ireplace(array("and", "or", "select","from","where","update","delete","insert","--"),"",$chaves);
+						$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$chaves);
 						$chaves = explode(",",$chaves);
-						$valores = str_ireplace(array("and", "or", "select","from","where","update","delete","insert","--"),"",$valores);
+						$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$valores);
 						$valores = explode(",",strip_tags($valores));
 						$n = count($chaves);
 						for($i = 0; $i < $n; $i++){

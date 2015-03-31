@@ -53,7 +53,8 @@ i3GEO.pluginI3geo =
 			{
 				"classe" : "heatmap", // namespace da classe
 				"nome" : "Mapa de calor", // tituo do plugin
-				"editor" : true // inclui no editor de mapfiles
+				"editor" : true
+			// inclui no editor de mapfiles
 			},
 			{
 				"classe" : "markercluster",
@@ -85,9 +86,7 @@ i3GEO.pluginI3geo =
 		inicia : function(camada) {
 			if (i3GEO.janela) {
 				i3GEO.janela.AGUARDEMODAL = true;
-				i3GEO.janela.abreAguarde(
-					"aguardePlugin",
-					"Plugin...");
+				i3GEO.janela.abreAguarde("aguardePlugin", "Plugin...");
 				i3GEO.janela.AGUARDEMODAL = false;
 			}
 			// chama a funcao conforme o tipo de plugin e a interface atual
@@ -106,11 +105,10 @@ i3GEO.pluginI3geo =
 		 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
 		 * Esse icone e utilizado para reabrir o formulario de parametros
 		 */
-		iconeArvoreDeCamadas : function(camada){
+		iconeArvoreDeCamadas : function(camada) {
 			if (camada.plugini3geo && camada.plugini3geo != "") {
 				return i3GEO.pluginI3geo[camada.plugini3geo.plugin].iconeArvoreDeCamadas(camada.name);
-			}
-			else{
+			} else {
 				return false;
 			}
 		},
@@ -118,24 +116,21 @@ i3GEO.pluginI3geo =
 			return i3GEO.pluginI3geo[plugin].linkAjuda();
 		},
 		ligaCamada : function(nomecamada) {
-			if (i3GEO.pluginI3geo.OBJETOS[nomecamada]
-				&& i3GEO.pluginI3geo.OBJETOS[nomecamada].ligaCamada) {
+			if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].ligaCamada) {
 				i3GEO.pluginI3geo.OBJETOS[nomecamada].ligaCamada();
 				return true;
 			}
 			return false;
 		},
 		desligaCamada : function(nomecamada) {
-			if (i3GEO.pluginI3geo.OBJETOS[nomecamada]
-				&& i3GEO.pluginI3geo.OBJETOS[nomecamada].desLigaCamada) {
+			if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].desLigaCamada) {
 				i3GEO.pluginI3geo.OBJETOS[nomecamada].desLigaCamada();
 				return true;
 			}
 			return false;
 		},
 		removeCamada : function(nomecamada) {
-			if (i3GEO.pluginI3geo.OBJETOS[nomecamada]
-				&& i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada) {
+			if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada) {
 				i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada();
 				delete (i3GEO.pluginI3geo.OBJETOS[nomecamada]);
 				return true;
@@ -143,16 +138,14 @@ i3GEO.pluginI3geo =
 			return false;
 		},
 		atualizaCamada : function(nomecamada) {
-			if (i3GEO.pluginI3geo.OBJETOS[nomecamada]
-				&& i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada) {
+			if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada) {
 				i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada();
 				return true;
 			}
 			return false;
 		},
 		existeObjeto : function(nomecamada) {
-			if (i3GEO.pluginI3geo.OBJETOS[nomecamada]
-				&& i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada) {
+			if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].atualizaCamada) {
 				return true;
 			}
 			return false;
@@ -165,11 +158,29 @@ i3GEO.pluginI3geo =
 		 * arvore de camadas
 		 */
 		aplicaPropriedades : function(camada) {
-			if (camada.plugini3geo
-				&& camada.plugini3geo != "") {
+			if (camada.plugini3geo && camada.plugini3geo != "") {
 				camada = i3GEO.pluginI3geo[camada.plugini3geo.plugin][i3GEO.Interface.ATUAL].aplicaPropriedades(camada);
 			}
 			return camada;
+		},
+		/**
+		 * Cria um layer conforme a API em uso no aplicativo mashup
+		 * 
+		 * Parametros
+		 * 
+		 * {string} - nome da interface em uso openlayers|googlemaps
+		 * 
+		 * {objeto} - objeto camada, conforme definido em i3GEO.arvoreDeCamadas.CAMADAS
+		 * 
+		 * {string} - codigo epsg que sera usado no WMS
+		 */
+		layerMashup : function(Interface, camada, epsg) {
+			if (camada.plugini3geo && camada.plugini3geo != "" && i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup) {
+				return i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup(camada,epsg);
+			}
+			else{
+				return false;
+			}
 		},
 		/**
 		 * Section: i3GEO.pluginI3geo.heatmap
@@ -206,12 +217,12 @@ i3GEO.pluginI3geo =
 		 */
 		heatmap : {
 			linkAjuda : function() {
-				return i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=3&idajuda=121";
+				return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=121";
 			},
 			formAdmin : function(config) {
 				// {"plugin":"heatmap","parametros":{"coluna":"","radius":15,"max":10}}
-				var parametros, ins = "", configDefault = '{"plugin":"heatmap","parametros":{"tipoGradiente": "default","valorPonto":1,"coluna":"","radius":15}}';
+				var parametros, ins = "", configDefault =
+					'{"plugin":"heatmap","parametros":{"tipoGradiente": "default","valorPonto":1,"coluna":"","radius":15}}';
 				if (config === "") {
 					config = configDefault;
 				}
@@ -220,37 +231,38 @@ i3GEO.pluginI3geo =
 					config = YAHOO.lang.JSON.parse(configDefault);
 				}
 				parametros = config.parametros;
-				ins += ""
-					+ "<p>Coluna que cont&eacute;m os dados:"
-					+ "<br><input name='coluna' type='text' value='"
-					+ parametros.coluna
-					+ "' size='30'></p>"
-					+ "<p>Ou valor num&eacute;rico para cada ponto:"
-					+ "<br><input name='valorPonto' type='text' value='"
-					+ parametros.valorPonto
-					+ "' size='30'></p>"
-					+ "<p>Raio de cada ponto em pixels:"
-					+ "<br><input name='radius' type='text' value='"
-					+ parametros.radius
-					+ "' size='30'></p>"
-					// + "<p>Valor m&aacute;ximo em cada ponto:"
-					// + "<br><input name='max' type='text' value='"
-					// + parametros.max
-					// + "' size='30'></p>"
-					+ "<p>Tipo de gradiente (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
-					+ "<br><input name='tipoGradiente' type='text' value='"
-					+ parametros.tipoGradiente
-					+ "' size='30'></p>"
-					+ "<p>Para definir os cortes no gradiente de cores utilize valores entre 0 e 1."
-					+ " As cores s&atilde;o definidas nas classes do LAYER, sendo que o nome define o valor superior do gradiente e COLOR define a cor."
-					+ " Veja o exemplo utilizado no tema _lmapadecalor.map</p>";
+				ins +=
+					""
+						+ "<p>Coluna que cont&eacute;m os dados:"
+						+ "<br><input name='coluna' type='text' value='"
+						+ parametros.coluna
+						+ "' size='30'></p>"
+						+ "<p>Ou valor num&eacute;rico para cada ponto:"
+						+ "<br><input name='valorPonto' type='text' value='"
+						+ parametros.valorPonto
+						+ "' size='30'></p>"
+						+ "<p>Raio de cada ponto em pixels:"
+						+ "<br><input name='radius' type='text' value='"
+						+ parametros.radius
+						+ "' size='30'></p>"
+						// + "<p>Valor m&aacute;ximo em cada ponto:"
+						// + "<br><input name='max' type='text' value='"
+						// + parametros.max
+						// + "' size='30'></p>"
+						+ "<p>Tipo de gradiente (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
+						+ "<br><input name='tipoGradiente' type='text' value='"
+						+ parametros.tipoGradiente
+						+ "' size='30'></p>"
+						+ "<p>Para definir os cortes no gradiente de cores utilize valores entre 0 e 1."
+						+ " As cores s&atilde;o definidas nas classes do LAYER, sendo que o nome define o valor superior do gradiente e COLOR define a cor."
+						+ " Veja o exemplo utilizado no tema _lmapadecalor.map</p>";
 				return ins;
 			},
 			/**
 			 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
 			 * Esse icone e utilizado para reabrir o formulario de parametros
 			 */
-			iconeArvoreDeCamadas : function(nomecamada){
+			iconeArvoreDeCamadas : function(nomecamada) {
 				return false;
 			},
 			googlemaps : {
@@ -271,26 +283,25 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				inicia : function(camada) {
-					var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic
-						+ "/ferramentas/heatmap/googlemaps_js.php", carregaJs = "nao", criaLayer;
+					var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic + "/ferramentas/heatmap/googlemaps_js.php", carregaJs =
+						"nao", criaLayer;
 					criaLayer = function() {
 						var heatmap, pontos;
 
-						heatmap = new HeatmapOverlay(
-							i3GeoMap, camada.name, {
-								"radius" : camada.plugini3geo.parametros.radius,
-								"visible" : true,
-								"opacity" : camada.transparency,
-								"gradient" : heatmap_config.gradient,
-								"legend" : {
-									"title" : camada.tema,
-									"position" : "bl",
-									"offset" : [
-										5,
-										50
-									]
-								}
-							});
+						heatmap = new HeatmapOverlay(i3GeoMap, camada.name, {
+							"radius" : camada.plugini3geo.parametros.radius,
+							"visible" : true,
+							"opacity" : camada.transparency,
+							"gradient" : heatmap_config.gradient,
+							"legend" : {
+								"title" : camada.tema,
+								"position" : "bl",
+								"offset" : [
+									5,
+									50
+								]
+							}
+						});
 						// i3GeoMap.overlayMapTypes.insertAt(0, heatmap);
 						pontos = {
 							max : camada.plugini3geo.parametros.max,
@@ -320,21 +331,11 @@ i3GEO.pluginI3geo =
 					} else {
 						nomeScript = "";
 					}
-					p += "?carregajs="
-						+ carregaJs
-						+ "&layer="
-						+ camada.name
-						+ "&coluna="
-						+ camada.plugini3geo.parametros.coluna
-						+ "&tipoGradiente="
-						+ camada.plugini3geo.parametros.tipoGradiente
-						+ "&g_sid="
-						+ i3GEO.configura.sid
-						+ "&nomevariavel=heatmap_dados&nomevariavelConfig=heatmap_config";
-					i3GEO.util.scriptTag(
-						p,
-						criaLayer,
-						nomeScript);
+					p +=
+						"?carregajs=" + carregaJs + "&layer=" + camada.name + "&coluna=" + camada.plugini3geo.parametros.coluna
+							+ "&tipoGradiente=" + camada.plugini3geo.parametros.tipoGradiente + "&g_sid=" + i3GEO.configura.sid
+							+ "&nomevariavel=heatmap_dados&nomevariavelConfig=heatmap_config";
+					i3GEO.util.scriptTag(p, criaLayer, nomeScript);
 				}
 			},
 			//
@@ -362,8 +363,8 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				inicia : function(camada, objMapa) {
-					var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic
-						+ "/ferramentas/heatmap/openlayers_js.php", carregaJs = "nao", criaLayer;
+					var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php", carregaJs =
+						"nao", criaLayer;
 					criaLayer = function() {
 						var temp, heatmap, transformedTestData = {
 							max : 1,
@@ -383,37 +384,32 @@ i3GEO.pluginI3geo =
 						while (datalen--) {
 							temp = heatmap_dados[datalen].count;
 							nudata.push({
-								lonlat : new OpenLayers.LonLat(
-									data[datalen].lng, heatmap_dados[datalen].lat),
+								lonlat : new OpenLayers.LonLat(data[datalen].lng, heatmap_dados[datalen].lat),
 								count : temp
 							});
-							max = Math.max(
-								max,
-								temp);
+							max = Math.max(max, temp);
 						}
 						transformedTestData.max = max;
 						transformedTestData.data = nudata;
 						// create our heatmap layer
-						heatmap = new OpenLayers.Layer.Heatmap(
-							camada.name, objMapa, objMapa.baseLayer, {
-								"visible" : true,
-								"opacity" : camada.transparency,
-								"radius" : camada.plugini3geo.parametros.radius,
-								"gradient" : heatmap_config.gradient,
-								"legend" : {
-									"title" : camada.tema,
-									"position" : "bl",
-									"offset" : [
-										5,
-										50
-									]
-								}
-							}, {
-								isBaseLayer : false,
-								projection : new OpenLayers.Projection(
-									"EPSG:4326"),
-								displayInLayerSwitcher : true
-							});
+						heatmap = new OpenLayers.Layer.Heatmap(camada.name, objMapa, objMapa.baseLayer, {
+							"visible" : true,
+							"opacity" : camada.transparency,
+							"radius" : camada.plugini3geo.parametros.radius,
+							"gradient" : heatmap_config.gradient,
+							"legend" : {
+								"title" : camada.tema,
+								"position" : "bl",
+								"offset" : [
+									5,
+									50
+								]
+							}
+						}, {
+							isBaseLayer : false,
+							projection : new OpenLayers.Projection("EPSG:4326"),
+							displayInLayerSwitcher : true
+						});
 						heatmap.ligaCamada = function() {
 							this.toggle();
 							this.updateLayer();
@@ -444,25 +440,14 @@ i3GEO.pluginI3geo =
 					} else {
 						nomeScript = "";
 					}
-					if (!i3GEO.configura
-						|| !i3GEO.configura.sid) {
+					if (!i3GEO.configura || !i3GEO.configura.sid) {
 						i3GEO.configura.sid = "";
 					}
-					p += "?carregajs="
-						+ carregaJs
-						+ "&layer="
-						+ camada.name
-						+ "&coluna="
-						+ camada.plugini3geo.parametros.coluna
-						+ "&tipoGradiente="
-						+ camada.plugini3geo.parametros.tipoGradiente
-						+ "&g_sid="
-						+ i3GEO.configura.sid
-						+ "&nomevariavel=heatmap_dados&nomevariavelConfig=heatmap_config";
-					i3GEO.util.scriptTag(
-						p,
-						criaLayer,
-						nomeScript);
+					p +=
+						"?carregajs=" + carregaJs + "&layer=" + camada.name + "&coluna=" + camada.plugini3geo.parametros.coluna
+							+ "&tipoGradiente=" + camada.plugini3geo.parametros.tipoGradiente + "&g_sid=" + i3GEO.configura.sid
+							+ "&nomevariavel=heatmap_dados&nomevariavelConfig=heatmap_config";
+					i3GEO.util.scriptTag(p, criaLayer, nomeScript);
 				}
 			},
 			googleearth : {
@@ -503,11 +488,11 @@ i3GEO.pluginI3geo =
 		 */
 		markercluster : {
 			linkAjuda : function() {
-				return i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=3&idajuda=121";
+				return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=121";
 			},
 			formAdmin : function(config) {
-				var parametros, ins = "", configDefault = '{"plugin":"markercluster","parametros":{"tipoEstilos": "default","gridSize":50}}';
+				var parametros, ins = "", configDefault =
+					'{"plugin":"markercluster","parametros":{"tipoEstilos": "default","gridSize":50}}';
 				if (config === "") {
 					config = configDefault;
 				}
@@ -516,17 +501,16 @@ i3GEO.pluginI3geo =
 					config = YAHOO.lang.JSON.parse(configDefault);
 				}
 				parametros = config.parametros;
-				ins += ""
-					+ "<p>Dist&acirc;ncia m&aacute;xima entre ponto em pixels:"
-					+ "<br><input name='gridSize' type='text' value='"
-					+ parametros.gridSize
-					+ "' size='30'></p>"
-					+ "<p>Tipo de estilos (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
-					+ "<br><input name='tipoEstilos' type='text' value='"
-					+ parametros.tipoEstilos
-					+ "' size='30'></p>"
-					+ "<p>Os s&iacute;mbolos utilizados podem ser customizados alterando-se as classes do Mapfile</p>"
-					+ "<p>Veja o exemplo utilizado no tema _lmapadecluster.map</p>";
+				ins +=
+					""
+						+ "<p>Dist&acirc;ncia m&aacute;xima entre ponto em pixels:"
+						+ "<br><input name='gridSize' type='text' value='"
+						+ parametros.gridSize
+						+ "' size='30'></p>"
+						+ "<p>Tipo de estilos (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
+						+ "<br><input name='tipoEstilos' type='text' value='" + parametros.tipoEstilos + "' size='30'></p>"
+						+ "<p>Os s&iacute;mbolos utilizados podem ser customizados alterando-se as classes do Mapfile</p>"
+						+ "<p>Veja o exemplo utilizado no tema _lmapadecluster.map</p>";
 
 				return ins;
 			},
@@ -534,7 +518,7 @@ i3GEO.pluginI3geo =
 			 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
 			 * Esse icone e utilizado para reabrir o formulario de parametros
 			 */
-			iconeArvoreDeCamadas : function(nomecamada){
+			iconeArvoreDeCamadas : function(nomecamada) {
 				return false;
 			},
 			googlemaps : {
@@ -555,36 +539,30 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				inicia : function(camada) {
-					var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic
-						+ "/ferramentas/markercluster/googlemaps_js.php", carregaJs = "nao", criaLayer;
+					var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic + "/ferramentas/markercluster/googlemaps_js.php", carregaJs =
+						"nao", criaLayer;
 					criaLayer = function() {
 						var markercluster, marcas, latLng, marker, n, i;
 						n = markercluster_dados.length;
 						marcas = [];
 						for (i = 0; i < n; i++) {
-							latLng = new google.maps.LatLng(
-								markercluster_dados[i].lat, markercluster_dados[i].lng);
-							marker = new google.maps.Marker(
-								{
-									'position' : latLng,
-									icon : {
-										url : markercluster_config.ponto.url,
-										scaledSize : new google.maps.Size(
-											markercluster_config.ponto.width, markercluster_config.ponto.height)
-									}
-								});
+							latLng = new google.maps.LatLng(markercluster_dados[i].lat, markercluster_dados[i].lng);
+							marker = new google.maps.Marker({
+								'position' : latLng,
+								icon : {
+									url : markercluster_config.ponto.url,
+									scaledSize : new google.maps.Size(markercluster_config.ponto.width, markercluster_config.ponto.height)
+								}
+							});
 							marcas.push(marker);
 						}
-						markercluster = new MarkerClusterer(
-							i3GeoMap, marcas, {
-								"gridSize" : parseInt(
-									camada.plugini3geo.parametros.gridSize,
-									10),
-								"visible" : true,
-								"opacity" : camada.transparency,
-								"name" : camada.name,
-								"styles" : markercluster_config.estilos
-							});
+						markercluster = new MarkerClusterer(i3GeoMap, marcas, {
+							"gridSize" : parseInt(camada.plugini3geo.parametros.gridSize, 10),
+							"visible" : true,
+							"opacity" : camada.transparency,
+							"name" : camada.name,
+							"styles" : markercluster_config.estilos
+						});
 						i3GEO.janela.fechaAguarde("aguardePlugin");
 						i3GEO.eventos.cliquePerm.ativo = false;
 
@@ -617,19 +595,11 @@ i3GEO.pluginI3geo =
 					} else {
 						nomeScript = "";
 					}
-					p += "?carregajs="
-						+ carregaJs
-						+ "&layer="
-						+ camada.name
-						+ "&g_sid="
-						+ i3GEO.configura.sid
-						+ "&tipoEstilos="
-						+ camada.plugini3geo.parametros.tipoEstilos
-						+ "&nomevariavel=markercluster_dados&nomevariavelConfig=markercluster_config";
-					i3GEO.util.scriptTag(
-						p,
-						criaLayer,
-						nomeScript);
+					p +=
+						"?carregajs=" + carregaJs + "&layer=" + camada.name + "&g_sid=" + i3GEO.configura.sid + "&tipoEstilos="
+							+ camada.plugini3geo.parametros.tipoEstilos
+							+ "&nomevariavel=markercluster_dados&nomevariavelConfig=markercluster_config";
+					i3GEO.util.scriptTag(p, criaLayer, nomeScript);
 				}
 			},
 			openlayers : {
@@ -650,70 +620,61 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				inicia : function(camada, objMapa) {
-					var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic
-						+ "/ferramentas/markercluster/openlayers_js.php", carregaJs = "nao", criaLayer;
-					criaLayer = function() {
-						var layerListeners, logMax, logMin, classes, min, max, markercluster, marcas, lonlat, n, i, style, nestilos, intervalo, regra, regras = [];
+					var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic + "/ferramentas/markercluster/openlayers_js.php", carregaJs =
+						"nao", criaLayer;
+					criaLayer =
+						function() {
+							var layerListeners, logMax, logMin, classes, min, max, markercluster, marcas, lonlat, n, i, style, nestilos, intervalo, regra, regras =
+								[];
 
-						nestilos = markercluster_config.estilos.length;
-						n = markercluster_dados.length;
+							nestilos = markercluster_config.estilos.length;
+							n = markercluster_dados.length;
 
-						classes = Array();
-						logMax = Math.log(n)
-							/ Math.LN10; // max decimal logarithm (or base
-						// 10)
-						logMin = Math.log(1)
-							/ Math.LN10;
-						intervalo = (logMax - logMin)
-							/ nestilos;
-						// we compute log bounds
-						for (i = 0; i < nestilos; i++) {
-							if (i == 0) {
-								classes[i] = logMin;
-							} else {
-								classes[i] = classes[i - 1]
-									+ intervalo;
+							classes = Array();
+							logMax = Math.log(n) / Math.LN10; // max decimal logarithm (or base
+							// 10)
+							logMin = Math.log(1) / Math.LN10;
+							intervalo = (logMax - logMin) / nestilos;
+							// we compute log bounds
+							for (i = 0; i < nestilos; i++) {
+								if (i == 0) {
+									classes[i] = logMin;
+								} else {
+									classes[i] = classes[i - 1] + intervalo;
+								}
 							}
-						}
-						// we compute antilog
-						classes = classes.map(function(x) {
-							return Math.pow(
-								10,
-								x);
-						});
-						// and we finally add max value
-						classes.push(n);
+							// we compute antilog
+							classes = classes.map(function(x) {
+								return Math.pow(10, x);
+							});
+							// and we finally add max value
+							classes.push(n);
 
-						// ponto sozinho
-						regra = new OpenLayers.Rule(
-							{
-								filter : new OpenLayers.Filter.Comparison(
-									{
-										type : OpenLayers.Filter.Comparison.LESS_THAN,
-										property : "count",
-										value : 2
-									}),
+							// ponto sozinho
+							regra = new OpenLayers.Rule({
+								filter : new OpenLayers.Filter.Comparison({
+									type : OpenLayers.Filter.Comparison.LESS_THAN,
+									property : "count",
+									value : 2
+								}),
 								symbolizer : {
 									externalGraphic : markercluster_config.ponto.url,
 									graphicWidth : markercluster_config.ponto.width,
 									graphicHeight : markercluster_config.ponto.height,
-									graphicYOffset : (markercluster_config.ponto.height / 2)
-										* -1
+									graphicYOffset : (markercluster_config.ponto.height / 2) * -1
 								}
 							});
-						regras.push(regra);
-						min = 2;
-						for (i = 0; i < nestilos; i++) {
-							max = classes[i + 1];
-							regra = new OpenLayers.Rule(
-								{
-									filter : new OpenLayers.Filter.Comparison(
-										{
-											type : OpenLayers.Filter.Comparison.BETWEEN,
-											property : "count",
-											lowerBoundary : min,
-											upperBoundary : max
-										}),
+							regras.push(regra);
+							min = 2;
+							for (i = 0; i < nestilos; i++) {
+								max = classes[i + 1];
+								regra = new OpenLayers.Rule({
+									filter : new OpenLayers.Filter.Comparison({
+										type : OpenLayers.Filter.Comparison.BETWEEN,
+										property : "count",
+										lowerBoundary : min,
+										upperBoundary : max
+									}),
 									symbolizer : {
 										externalGraphic : markercluster_config.estilos[i].url,
 										graphicWidth : markercluster_config.estilos[i].width,
@@ -725,92 +686,75 @@ i3GEO.pluginI3geo =
 										fontSize : "12px"
 									}
 								});
-							regras.push(regra);
-							min = max;
-						}
+								regras.push(regra);
+								min = max;
+							}
 
-						// Create a Style that uses the three previous rules
-						style = new OpenLayers.Style(
-							null, {
+							// Create a Style that uses the three previous rules
+							style = new OpenLayers.Style(null, {
 								rules : regras
 							});
-						// para uso com o mashup
-						if (!objMapa) {
-							objMapa = i3geoOL;
-						}
+							// para uso com o mashup
+							if (!objMapa) {
+								objMapa = i3geoOL;
+							}
 
-						layerListeners = {
-							featureclick : function(e) {
-								if (e.feature.cluster.length > 1) {
-									objMapa.setCenter(
-										[
+							layerListeners = {
+								featureclick : function(e) {
+									if (e.feature.cluster.length > 1) {
+										objMapa.setCenter([
 											e.feature.geometry.x,
 											e.feature.geometry.y
-										],
-										objMapa.getZoom() + 1,
-										false,
-										false);
-									// objMapa.zoomIn();
+										], objMapa.getZoom() + 1, false, false);
+										// objMapa.zoomIn();
+									}
+									return false;
 								}
-								return false;
-							}
-						};
+							};
 
-						markercluster = new OpenLayers.Layer.Vector(
-							camada.name, {
+							markercluster = new OpenLayers.Layer.Vector(camada.name, {
 								renderers : [
 									'Canvas',
 									'SVG'
 								],
 								strategies : [
-									new OpenLayers.Strategy.AnimatedCluster(
-										{
-											distance : parseInt(
-												camada.plugini3geo.parametros.gridSize,
-												10)
-										})
+									new OpenLayers.Strategy.AnimatedCluster({
+										distance : parseInt(camada.plugini3geo.parametros.gridSize, 10)
+									})
 								],
-								styleMap : new OpenLayers.StyleMap(
-									style),
+								styleMap : new OpenLayers.StyleMap(style),
 								eventListeners : layerListeners
 							});
-						objMapa.addLayer(markercluster);
+							objMapa.addLayer(markercluster);
 
-						marcas = [];
-						for (i = 0; i < n; i++) {
-							lonlat = new OpenLayers.LonLat(
-								markercluster_dados[i].lng, markercluster_dados[i].lat);
-							if (i3GEO.Interface.openlayers.googleLike === true) {
-								lonlat.transform(
-									new OpenLayers.Projection(
-										"EPSG:4326"),
-									new OpenLayers.Projection(
-										"EPSG:900913"));
+							marcas = [];
+							for (i = 0; i < n; i++) {
+								lonlat = new OpenLayers.LonLat(markercluster_dados[i].lng, markercluster_dados[i].lat);
+								if (i3GEO.Interface.openlayers.googleLike === true) {
+									lonlat.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+								}
+								marcas.push(new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat)));
 							}
-							marcas.push(new OpenLayers.Feature.Vector(
-								new OpenLayers.Geometry.Point(
-									lonlat.lon, lonlat.lat)));
-						}
-						markercluster.addFeatures(marcas);
+							markercluster.addFeatures(marcas);
 
-						i3GEO.janela.fechaAguarde("aguardePlugin");
-						i3GEO.eventos.cliquePerm.ativo = false;
+							i3GEO.janela.fechaAguarde("aguardePlugin");
+							i3GEO.eventos.cliquePerm.ativo = false;
 
-						markercluster.ligaCamada = function() {
-							i3GEO.eventos.cliquePerm.ativo = false;
+							markercluster.ligaCamada = function() {
+								i3GEO.eventos.cliquePerm.ativo = false;
+							};
+							markercluster.desLigaCamada = function() {
+								i3GEO.eventos.cliquePerm.ativo = true;
+							};
+							markercluster.removeCamada = function() {
+								i3GEO.eventos.cliquePerm.ativo = true;
+							};
+							markercluster.atualizaCamada = function() {
+								i3GEO.eventos.cliquePerm.ativo = false;
+							};
+							i3GEO.pluginI3geo.OBJETOS[camada.name] = markercluster;
+							markercluster_dados = null;
 						};
-						markercluster.desLigaCamada = function() {
-							i3GEO.eventos.cliquePerm.ativo = true;
-						};
-						markercluster.removeCamada = function() {
-							i3GEO.eventos.cliquePerm.ativo = true;
-						};
-						markercluster.atualizaCamada = function() {
-							i3GEO.eventos.cliquePerm.ativo = false;
-						};
-						i3GEO.pluginI3geo.OBJETOS[camada.name] = markercluster;
-						markercluster_dados = null;
-					};
 					// se o script nao existir carrega o codigo e os dados
 					// caso contrario, carrega apenas os dados no script
 					if (!$i(nomeScript)) {
@@ -818,19 +762,11 @@ i3GEO.pluginI3geo =
 					} else {
 						nomeScript = "";
 					}
-					p += "?carregajs="
-						+ carregaJs
-						+ "&layer="
-						+ camada.name
-						+ "&g_sid="
-						+ i3GEO.configura.sid
-						+ "&tipoEstilos="
-						+ camada.plugini3geo.parametros.tipoEstilos
-						+ "&nomevariavel=markercluster_dados&nomevariavelConfig=markercluster_config";
-					i3GEO.util.scriptTag(
-						p,
-						criaLayer,
-						nomeScript);
+					p +=
+						"?carregajs=" + carregaJs + "&layer=" + camada.name + "&g_sid=" + i3GEO.configura.sid + "&tipoEstilos="
+							+ camada.plugini3geo.parametros.tipoEstilos
+							+ "&nomevariavel=markercluster_dados&nomevariavelConfig=markercluster_config";
+					i3GEO.util.scriptTag(p, criaLayer, nomeScript);
 				}
 			}
 		},
@@ -858,8 +794,7 @@ i3GEO.pluginI3geo =
 		 */
 		layerkml : {
 			linkAjuda : function() {
-				return i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=3&idajuda=121";
+				return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=121";
 				// http://localhost/i3geo/aplicmap/dados/sundials.kml
 				// http://dev.openlayers.org/examples/kml/sundials.kml
 			},
@@ -873,17 +808,16 @@ i3GEO.pluginI3geo =
 					config = YAHOO.lang.JSON.parse(configDefault);
 				}
 				parametros = config.parametros;
-				ins += "<p>Url do arquivo Kml:<br><input name='url' type='text' value='"
-					+ parametros.url
-					+ "'/></p>"
-					+ "<p>Veja o exemplo utilizado no tema _lmapakml.map</p>";
+				ins +=
+					"<p>Url do arquivo Kml:<br><input name='url' type='text' value='" + parametros.url + "'/></p>"
+						+ "<p>Veja o exemplo utilizado no tema _lmapakml.map</p>";
 				return ins;
 			},
 			/**
 			 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
 			 * Esse icone e utilizado para reabrir o formulario de parametros
 			 */
-			iconeArvoreDeCamadas : function(nomecamada){
+			iconeArvoreDeCamadas : function(nomecamada) {
 				return false;
 			},
 			googlemaps : {
@@ -904,12 +838,11 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				inicia : function(camada) {
-					var layerkml = new google.maps.KmlLayer(
-						camada.plugini3geo.parametros.url, {
-							map : i3GeoMap,
-							preserveViewport : true,
-							name : camada.name
-						});
+					var layerkml = new google.maps.KmlLayer(camada.plugini3geo.parametros.url, {
+						map : i3GeoMap,
+						preserveViewport : true,
+						name : camada.name
+					});
 					i3GEO.janela.fechaAguarde("aguardePlugin");
 					layerkml.ligaCamada = function() {
 						i3GEO.pluginI3geo.OBJETOS[camada.name].setMap(i3GeoMap);
@@ -948,67 +881,65 @@ i3GEO.pluginI3geo =
 				},
 				inicia : function(camada, objMapa) {
 					var layerkml;
-					url = i3GEO.configura.locaplic
-						+ "/classesphp/proxy.php?url="
-						+ camada.plugini3geo.parametros.url;
-					layerkml = new OpenLayers.Layer.Vector(
-						camada.name, {
-							displayOutsideMaxExtent : true,
-							displayInLayerSwitcher : false,
-							visibility : true,
-							strategies : [
-								new OpenLayers.Strategy.Fixed()
-							],
-							protocol : new OpenLayers.Protocol.HTTP(
-								{
-									url : url,
-									format : new OpenLayers.Format.KML(
-										{
-											extractStyles : true,
-											extractAttributes : true,
-											maxDepth : 5
-										})
-								})
-						});
+					url = i3GEO.configura.locaplic + "/classesphp/proxy.php?url=" + camada.plugini3geo.parametros.url;
+					layerkml = new OpenLayers.Layer.Vector(camada.name, {
+						displayOutsideMaxExtent : true,
+						displayInLayerSwitcher : false,
+						visibility : true,
+						strategies : [
+							new OpenLayers.Strategy.Fixed()
+						],
+						protocol : new OpenLayers.Protocol.HTTP({
+							url : url,
+							format : new OpenLayers.Format.KML({
+								extractStyles : true,
+								extractAttributes : true,
+								maxDepth : 5
+							})
+						})
+					});
 					i3geoOL.addLayer(layerkml);
 
 					if (!objMapa) {
 						objMapa = i3geoOL;
 					}
-					layerkml.div.onclick = function(e) {
-						var targ = "", id, temp, features, n, i, j = "", html = "";
-						if (!e) {
-							e = window.event;
-						}
-						if (e.target) {
-							targ = e.target;
-						} else if (e.srcElement) {
-							targ = e.srcElement;
-						}
-						if (targ.id) {
-							temp = targ.id.split("_Point");
-							if (temp[0] === "OpenLayers_Geometry") {
-								id = targ.id;
-								temp = i3geoOL.getLayer(this.id);
-								features = temp.features;
-								n = features.length;
-								for (i = 0; i < n; i++) {
-									if (features[i].geometry.id === id) {
-										for (j in features[i].attributes) {
-											html += j
-												+ ": "
-												+ features[i].attributes[j];
-										}
-										g = features[i].geometry;
-										i3geoOL.addPopup(new OpenLayers.Popup.FramedCloud(
-											"kml", new OpenLayers.LonLat(
-												g.x, g.y), null, html, null, true));
+					layerkml.div.onclick =
+						function(e) {
+							var targ = "", id, temp, features, n, i, j = "", html = "";
+							if (!e) {
+								e = window.event;
+							}
+							if (e.target) {
+								targ = e.target;
+							} else if (e.srcElement) {
+								targ = e.srcElement;
+							}
+							if (targ.id) {
+								temp = targ.id.split("_Point");
+								if (temp[0] === "OpenLayers_Geometry") {
+									id = targ.id;
+									temp = i3geoOL.getLayer(this.id);
+									features = temp.features;
+									n = features.length;
+									for (i = 0; i < n; i++) {
+										if (features[i].geometry.id === id) {
+											for (j in features[i].attributes) {
+												html += j + ": " + features[i].attributes[j];
+											}
+											g = features[i].geometry;
+											i3geoOL.addPopup(new OpenLayers.Popup.FramedCloud(
+												"kml",
+												new OpenLayers.LonLat(g.x, g.y),
+												null,
+												html,
+												null,
+												true));
 
+										}
 									}
 								}
 							}
-						}
-					};
+						};
 
 					i3GEO.janela.fechaAguarde("aguardePlugin");
 					i3GEO.eventos.cliquePerm.ativo = false;
@@ -1058,8 +989,7 @@ i3GEO.pluginI3geo =
 		 */
 		parametrossql : {
 			linkAjuda : function() {
-				return i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=3&idajuda=127";
+				return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=127";
 			},
 			formAdmin : function(config) {
 				var n, i, parametros, ins = "", configDefault =
@@ -1073,35 +1003,26 @@ i3GEO.pluginI3geo =
 				}
 				parametros = config.parametros;
 				n = 4;
-				if(config.ativo == undefined){
+				if (config.ativo == undefined) {
 					config.ativo = "sim";
 				}
 				ins += "<p class='paragrafo'>Abre o formul&aacute;rio quando a camada &eacute; adicionada ao mapa: (true ou false)</p>";
 				ins += "<select style='width:200px' id='parametrosSqlAtivo' ><option value='' ></option>";
-				if(config.ativo === "nao"){
+				if (config.ativo === "nao") {
 					ins += "<option value=sim >sim</option><option value=nao selected >nao</option></select>";
-				} else{
+				} else {
 					ins += "<option value=sim selected >sim</option><option value=nao >nao</option></select>";
 				}
 
-				ins += "<table><tr><td>T&iacute;tulo</td><td>Chave</td><td>Tipo (input ou select)</td><td>Valores</td><td>PHP que retorna os valores (opcional)</td></tr>";
+				ins +=
+					"<table><tr><td>T&iacute;tulo</td><td>Chave</td><td>Tipo (input ou select)</td><td>Valores</td><td>PHP que retorna os valores (opcional)</td></tr>";
 				for (i = 0; i < n; i++) {
-					ins += "<tr><td><input name='titulo' type=text size=20 value='"
-						+ parametros[i].titulo
-						+ "' /></td>"
-						+ "<td><input name='chave' type=text size=20 value='"
-						+ parametros[i].chave
-						+ "' /></td>"
-						+ "<td><input name='tipo' type=text size=20 value='"
-						+ parametros[i].tipo
-						+ "' /></td> "
-						+ "<td><input name='valores' type=text size=20 value='"
-						+ parametros[i].valores
-						+ "' /></td> "
-						+ "<td><input name='prog' type=text size=20 value='"
-						+ parametros[i].prog
-						+ "' /></td> "
-						+ "<td></tr>";
+					ins +=
+						"<tr><td><input name='titulo' type=text size=20 value='" + parametros[i].titulo + "' /></td>"
+							+ "<td><input name='chave' type=text size=20 value='" + parametros[i].chave + "' /></td>"
+							+ "<td><input name='tipo' type=text size=20 value='" + parametros[i].tipo + "' /></td> "
+							+ "<td><input name='valores' type=text size=20 value='" + parametros[i].valores + "' /></td> "
+							+ "<td><input name='prog' type=text size=20 value='" + parametros[i].prog + "' /></td> " + "<td></tr>";
 				}
 				ins +=
 					"</table>"
@@ -1119,56 +1040,63 @@ i3GEO.pluginI3geo =
 			// administracao
 			// ver i3geo/admin/editormapfile.js funcao salvarDadosEditorPlugin
 			parametrosFormAdmin : function(onde) {
-				var campo = 0,nlinhas = 4, ncampos = 5, campos = onde.getElementsByTagName("input"), par = [], temp = [], i, j;
+				var campo = 0, nlinhas = 4, ncampos = 5, campos = onde.getElementsByTagName("input"), par = [], temp = [], i, j;
 				for (j = 0; j < nlinhas; j++) {
 					temp = [];
 					for (i = 0; i < ncampos; i++) {
-						if(campos[campo] && campos[campo].name != ""){
-							temp.push('"'+campos[campo].name
-								+ '" : "'
-								+ campos[campo].value
-								+ '"');
+						if (campos[campo] && campos[campo].name != "") {
+							temp.push('"' + campos[campo].name + '" : "' + campos[campo].value + '"');
 						}
 						campo++;
 					}
-					par.push("{"
-						+ temp.join(",")
-						+ "}");
+					par.push("{" + temp.join(",") + "}");
 				}
-				return '{"plugin":"parametrossql","ativo":"' + $i("parametrosSqlAtivo").value + '","parametros":['
-					+ par.join(",")
-					+ ']}';
+				return '{"plugin":"parametrossql","ativo":"' + $i("parametrosSqlAtivo").value + '","parametros":[' + par.join(",") + ']}';
 			},
 			/**
 			 * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas
 			 * Esse icone e utilizado para reabrir o formulario de parametros
 			 */
-			iconeArvoreDeCamadas : function(nomecamada){
-				var icone = "<img "
-				+ "class='pluginParametrossql'"
-				+ " onclick='i3GEO.util.animaClique(this);" 
-				+ "i3GEO.pluginI3geo.parametrossql.buscaParForm(\"" + nomecamada + "\")"
-				+ "' title='Variaveis'" 
-				+ "' src='"
-				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
-				+ "'/>";
+			iconeArvoreDeCamadas : function(nomecamada) {
+				var icone =
+					"<img class='pluginParametrossql' " 
+					+ "onclick='i3GEO.util.animaClique(this);"
+					+ "i3GEO.pluginI3geo.parametrossql.buscaParForm(\"" + nomecamada + "\");return false;'"
+					+ "title='Variaveis' "
+					+ "src='" 
+					+ i3GEO.configura.locaplic 
+					+ "/imagens/branco.gif' />";
 				return icone;
 			},
-			buscaParForm : function (nomecamada){
-				var p, cp, temp;
-				temp = function(retorno){
+			buscaParForm : function(nomecamada) {
+				var p, cp, temp,s;
+				temp = function(retorno) {
+					var camada;
 					retorno.data.ativo = "sim";
 					//pega o objeto camada
-					var camada = i3GEO.arvoreDeCamadas.pegaTema(nomecamada);
-					camada.plugini3geo = retorno.data;
+					if(i3GEO.arvoreDeCamadas){
+						camada = i3GEO.arvoreDeCamadas.pegaTema(nomecamada);
+						camada.plugini3geo = retorno.data;
+					}
+					else{
+						camada = {
+							plugini3geo : retorno.data,
+							name : nomecamada
+						};
+					}
 					i3GEO.pluginI3geo.parametrossql.inicia(camada);
 				};
+				s = i3GEO.configura.sid;
+				if(s === undefined){
+					s = "";
+				}
 				//aqui e necessario buscar os parametros do plugin para poder abrir o formulario
-				p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
-				+ "&funcao=PARAMETROSPLUGIN&name="+ nomecamada;
+				p =
+					i3GEO.configura.locaplic + "/ferramentas/parametrossql/exec.php?g_sid=" + s
+						+ "&funcao=PARAMETROSPLUGIN&tema=" + nomecamada;
 				cp = new cpaint();
 				cp.set_response_type("JSON");
-				cp.call(p,"foo",temp); 
+				cp.call(p, "foo", temp);
 			},
 			inicia : function(camada) {
 				i3GEO.janela.fechaAguarde("aguardePlugin");
@@ -1195,6 +1123,16 @@ i3GEO.pluginI3geo =
 				},
 				aplicaPropriedades : function(camada) {
 					return camada;
+				},
+				layerMashup : function(camada,epsg) {
+					var p;
+					p = new OpenLayers.Layer.WMS(
+						camada.tema,
+						"http://localhost/i3geo/ogc.php?tema="+camada.name+"&",
+						{layers:camada.name,SRS:'EPSG:'+epsg,FORMAT:'image/png'},
+						{singleTile:false,isBaseLayer:false,visibility:true,plugini3geo:"parametrossql"}
+					);
+					return p;
 				}
 			}
 		}

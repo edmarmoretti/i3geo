@@ -470,6 +470,27 @@ if(count($temasPluginI3Geo) > 0){
 	opacity: .8;
 	filter: alpha(opacity = 80);
 }
+
+.pluginParametrossql {
+	background-image: url("../imagens/gisicons/settings.png");
+	background-size: 14px auto;
+	cursor: pointer;
+	position: relative;
+	top: 3px;
+	width: 14px;
+}
+
+.ajuda_usuario {
+	background-image: url(../imagens/external.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	margin-left: 0;
+	text-decoration: none;
+	cursor: help;
+	position: relative;
+	top: 2px;
+	font-size: 13px;
+}
 </style>
 </head>
 <body class=" yui-skin-sam">
@@ -544,7 +565,7 @@ i3GEO.editorOL.ativarodadomouse = "<?php
 i3GEO.editorOL.legendahtml = "<?php
 	if(isset($legendahtml)){echo $legendahtml;}
 	else
-	{echo "false";}
+	{echo "true";}
 ?>";
 
 <?php
@@ -593,25 +614,31 @@ i3GEO.editorOL.mapa = new OpenLayers.Map(
 		minResolution: i3GEO.editorOL.minresolution
 	}
 );
-i3GEO.editorOL.inicia();
 if(!i3GEO.configura){
 	i3GEO.configura = {"locaplic":  "../"};
 }
 <?php
 //camadas plugin
-
 foreach ($temasPluginI3Geo as $t){
 	//cria um objeto javascript para iniciar o plugin
 	$camada = '{"tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].'}';
 	echo "var camada = $camada;\n";
 	//echo "i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);\n";
-	echo "adicionaPluginI3geo(camada);\n";
+	$visivel = "false";
+	if(in_array($t["name"],$visiveis)){
+		$visivel = "true";
+	}
+	echo "adicionaPluginI3geo(camada,$visivel);\n";
 }
 ?>
-function adicionaPluginI3geo(camada){
+i3GEO.editorOL.inicia();
+
+function adicionaPluginI3geo(camada,visivel){
 	//TODO nao funciona
-	if(camada.plugini3geo.plugin != "parametrossql"){
-		i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);
+	var l = i3GEO.pluginI3geo.layerMashup("openlayers",camada,"4326");
+	l.setVisibility(visivel);
+	if(l != true){
+		i3GEO.editorOL.layersIniciais.push(l);
 	}
 }
 </script>

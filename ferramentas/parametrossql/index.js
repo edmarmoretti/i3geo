@@ -129,9 +129,6 @@ i3GEOF.parametrossql = {
 				//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
 				cabecalho = function(){
 				};
-				minimiza = function(){
-					i3GEO.janela.minimiza("i3GEOF.parametrossql");
-				};
 				//cria a janela flutuante
 				titulo = "<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
 				janela = i3GEO.janela.cria(
@@ -145,7 +142,7 @@ i3GEOF.parametrossql = {
 					false,
 					"hd",
 					cabecalho,
-					minimiza,
+					"",
 					"",
 					true
 				);

@@ -185,10 +185,11 @@ i3GEO.editorOL = {
 			nfundo = fundo.length,
 			ncontroles = i3GEO.editorOL.controles.length,
 			i,
-			n;
-		if(i3GEO.editorOL.tiles === false || i3GEO.editorOL.tiles === "false"){
-			single = true;
-		}
+			n,
+			temp;
+		//if(i3GEO.editorOL.tiles === false || i3GEO.editorOL.tiles === "false"){
+		//	single = true;
+		//}
 		if(i3GEO.editorOL.ativalayerswitcher === "false"){
 			i3GEO.editorOL.ativalayerswitcher = false;
 		}
@@ -306,6 +307,17 @@ i3GEO.editorOL = {
 			i3GEO.editorOL.mapa.zoomToMaxExtent();
 		}
 		i3GEO.editorOL.sobeLayersGraficos();
+		//evita que botoes de opcoes propaguem
+		//o mashup utiliza esse tipo de botal junto ao nome do layer
+		temp = i3GEO.editorOL.pegaControle("OpenLayers.Control.LayerSwitcher");
+		if(temp){
+			temp = temp.dataLayersDiv.getElementsByTagName("label");
+			n = temp.length;
+			for(i = 0; i < n; i++){
+				//YAHOO.util.Event.addListener(temp[i], "click", YAHOO.util.Event.stopEvent);
+				temp[i].onclick = "";
+			}
+		}
 	},
 	criaLayerGrafico: function(){
 		i3GEO.desenho.openlayers.criaLayerGrafico();
@@ -593,14 +605,20 @@ i3GEO.editorOL = {
 	mostraLegenda: function(){
 		var layers = i3GEO.editorOL.layersLigados(),
 			nlayers = layers.length,
-			ins = "",i;
+			ins = "",i, icone = "";
 		for(i=0;i<nlayers;i++){
 			try{
 				if(layers[i].isBaseLayer === false){
 					var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
 					if(i3GEO.editorOL.legendahtml === true){
 						url = url.replace("image%2Fpng","text/html");
-						ins += layers[i].name+"<br><div id=legendaL_"+i+" ></div><br>";
+						//verifica se a camada veio de um plugin de classe_plugini3geo
+						//e insere o icone se for necessario
+						if(layers[i].options.plugini3geo){
+							icone = i3GEO.pluginI3geo[layers[i].options.plugini3geo].iconeArvoreDeCamadas(layers[i].params.LAYERS);
+						}
+						
+						ins += icone + layers[i].name+"<br><div id=legendaL_"+i+" ></div><br>";
 						//necessario pq nao e sincrono
 						eval ("var f = function(retorno){document.getElementById('legendaL_"+i+"').innerHTML = retorno.responseText;};");
 						var config = {
@@ -634,8 +652,7 @@ i3GEO.editorOL = {
 			YAHOO.legendaeditorOL.container.panel.center();
 
 			YAHOO.util.Event.addListener(YAHOO.legendaeditorOL.container.panel.close, "click", function(){
-				//i3GEOpanelEditor.deactivate();
-				//i3GEOpanelEditor.activate();
+				YAHOO.legendaeditorOL.container.panel.destroy();
 			});
 		}
 		else{
