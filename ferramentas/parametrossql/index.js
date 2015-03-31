@@ -229,7 +229,7 @@ i3GEOF.parametrossql = {
 		+ "&funcao=INCLUDEPROG&prog="+ plugin.prog;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
-		cp.call(p,"foo",temp); 
+		cp.call(p,"foo",temp);
 	},
 	aplicar: function(camada){
 		var fim,cp,p,onde = $i("i3GEOFparametrosSQLForm"),
@@ -246,19 +246,35 @@ i3GEOF.parametrossql = {
 			chaves.push(campos[i].name);
 			valores.push(campos[i].value);
 		}
-		fim = function(){
-			i3GEO.janela.destroi("i3GEOF.parametrossql");
-			i3GEO.atualiza();
-			i3GEO.Interface.atualizaMapa();
-		};
-		p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
-			+ "&funcao=aplicar"
-			+ "&tema=" + camada.name
-			+ "&chaves=" + chaves.join(",")
-			+ "&valores=" + valores.join(",");
-		cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"foo",fim);
+		//verifica os objetos pois essa funcao pode ter sido chamada do mashup
+		if(typeof i3geoOL != 'undefined' || typeof i3GeoMap != 'undefined'){
+			fim = function(){
+				i3GEO.janela.destroi("i3GEOF.parametrossql");
+				i3GEO.atualiza();
+				i3GEO.Interface.atualizaMapa();
+			};
+			p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
+				+ "&funcao=aplicar"
+				+ "&tema=" + camada.name
+				+ "&chaves=" + chaves.join(",")
+				+ "&valores=" + valores.join(",");
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"foo",fim);
+		}
+		else if(i3GEO.editorOL.mapa){
+			//pega o layer
+			p = i3GEO.editorOL.layerPorParametro("LAYERS",camada.name);
+			//muda os parametros
+			if(p){
+				reg = new RegExp("plugin" + "([=])+([a-zA-Z0-9_]*)");
+				p.url = p.url.replace(reg, "");
+				p.url = p.url + "&plugin=" + valores.join(",");
+				p.setUrl(p.url);
+				i3GEO.janela.destroi("i3GEOF.parametrossql");
+				p.redraw();
+			}
+		}
 	},
 	cancela: function(){
 		var fim,cp,p;

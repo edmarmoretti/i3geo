@@ -132,7 +132,6 @@ i3GEO.editorOL = {
 		'zoomtot':true,
 		'zoomin': true,
 		'zoomout': true,
-		'legenda':true,
 		'distancia':true,
 		'area':true,
 		'identifica':true,
@@ -329,6 +328,17 @@ i3GEO.editorOL = {
 		for(i=0;i<nlayers;i++){
 			if(layers[i].visibility === true){
 				ins.push(layers[i]);
+			}
+		}
+		return ins;
+	},
+	layerPorParametro: function(parametro,valor){
+		var layers = i3GEO.editorOL.mapa.layers,
+			nlayers = layers.length,
+			ins = false,i;
+		for(i=0;i<nlayers;i++){
+			if(layers[i].params && layers[i].params[parametro] && layers[i].params[parametro] === valor){
+				ins = layers[i];
 			}
 		}
 		return ins;
@@ -617,7 +627,7 @@ i3GEO.editorOL = {
 						if(layers[i].options.plugini3geo){
 							icone = i3GEO.pluginI3geo[layers[i].options.plugini3geo].iconeArvoreDeCamadas(layers[i].params.LAYERS);
 						}
-						
+
 						ins += icone + layers[i].name+"<br><div id=legendaL_"+i+" ></div><br>";
 						//necessario pq nao e sincrono
 						eval ("var f = function(retorno){document.getElementById('legendaL_"+i+"').innerHTML = retorno.responseText;};");
