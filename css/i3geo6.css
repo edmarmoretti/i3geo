@@ -1626,7 +1626,7 @@ margin-left: 1px;
 background-image: url("../imagens/ic_zoom.png");
 background-repeat: no-repeat;
 cursor: pointer;
-width: 16px;
+width: 14px;
 text-align: center;
 }
 .x {
