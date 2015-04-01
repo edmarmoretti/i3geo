@@ -185,7 +185,10 @@ i3GEO.gadgets =
 					ins = "<table><tr><td>" + i;
 					temp = 'i3GEO.Interface.adicionaKml();';
 					ins +=
-						"</td><td><img src='" + i3GEO.configura.locaplic + "/imagens/branco.gif" + "' class='tic' onclick='" + temp
+						"</td><td><img src='" + i3GEO.configura.locaplic
+							+ "/imagens/branco.gif"
+							+ "' class='tic' onclick='"
+							+ temp
 							+ "' /></td></tr></table>";
 					$i(id).innerHTML = ins;
 				}
@@ -220,8 +223,9 @@ i3GEO.gadgets =
 				}
 				if (!$i("i3geo_escalanum")) {
 					i =
-						"<form id='i3GEOescalanumForm' >"
-							+ $inputText(id, "100", "i3geo_escalanum", $trad("d10"), "10", parseInt(i3GEO.parametros.mapscale, 10))
+						"<form id='i3GEOescalanumForm' >" + $inputText(id, "100", "i3geo_escalanum", $trad("d10"), "10", parseInt(
+							i3GEO.parametros.mapscale,
+							10))
 							+ "</form>";
 					ins = "<table style='width:120px;'><tr><td>" + i;
 					temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
@@ -279,8 +283,7 @@ i3GEO.gadgets =
 			if ($i(id)) {
 				if (!$i("imagemEscalaGrafica")) {
 					ins =
-						"<img class='menuarrow' src=\""
-							+ i3GEO.configura.locaplic
+						"<img class='menuarrow' src=\"" + i3GEO.configura.locaplic
 							+ "/imagens/branco.gif\" title='op&ccedil;&otilde;es' onclick='i3GEO.mapa.dialogo.opcoesEscala()' style='cursor:pointer'/><img id=imagemEscalaGrafica src='' />";
 					$i(id).innerHTML = ins;
 				}
@@ -328,89 +331,95 @@ i3GEO.gadgets =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.gadgets.mostraBuscaRapida()");
 
-			var i, ins, temp, fbusca;
+			var ins, temp, fbusca, hashMustache, templateMustache;
 			if (arguments.length === 0) {
 				id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;
 			}
 			i3GEO.gadgets.mostraBuscaRapida.id = id;
-			if ($i(id)) {
-				i =
-					"<form id=i3GEObotaoFormBuscaRapida"
-						+ id
-						+ " >"
-						+ "<div class='i3geoForm' style='width:160px;'><input class=i3geoFormSemIcone type=text value='' id='valorBuscaRapida"
-						+ id + "' /></div>" + "</form>";
-				ins =
-					"<table><tr><td><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-						+ "/ajuda_usuario.php?idcategoria=8&idajuda=71' ><img src='" + i3GEO.configura.locaplic + "/imagens/branco.gif' /></a></td>" 
-						+ "<td><img src='" + i3GEO.configura.locaplic + "/imagens/branco.gif" + "' title='" + $trad("p13")
-						+ "' class='ticPropriedades2' id=i3GEObotaoPropriedadesBuscaRapida" + id
-						+ " style='margin-right:5px;margin-left:5px;'/></td>"
-						+ "<td>" + i + "</td>"
-						+ "<td><img src='" + i3GEO.configura.locaplic
-						+ "/imagens/branco.gif" + "' class='ticfind' id=i3GEObotaoBuscaRapida" + id + " style='margin-left:3px;' /></td></tr></table>";
-				temp = $i(id);
-				if (temp) {
-					fbusca =
-						function() {
-							if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google === false
-								&& i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos === false
-								&& i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa === false) {
-								i3GEO.janela.tempoMsg($trad("x35"));
-								return;
+			temp = $i(id);
+			if (temp) {
+				hashMustache = {
+					"idform" : "i3GEObotaoFormBuscaRapida" + id,
+					"idinput" : "valorBuscaRapida" + id,
+					"link" : i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=71",
+					"branco" : i3GEO.configura.locaplic + "/imagens/branco.gif",
+					"ajuda" : $trad("p13"),
+					"prop" : "i3GEObotaoPropriedadesBuscaRapida" + id,
+					"busca" : "i3GEObotaoBuscaRapida" + id
+				};
+				templateMustache =
+					"" + "<table><tr>"
+						+ "	<td><a class=ajuda_usuario target=_blank href='{{link}}' ><img src='{{branco}}' /></a></td>"
+						+ "	<td><img src='{{branco}}' title='{{ajuda}}' class='ticPropriedades2' id={{prop}} style='margin-right:5px;margin-left:5px;'/></td>"
+						+ "	<td>"
+						+ "		<form id={{idform}}>"
+						+ "			<div class='i3geoForm' style='width:160px;'><input class=i3geoFormSemIcone type=text value='' id='{{idinput}}' /></div>"
+						+ "		</form>"
+						+ "	</td>"
+						+ "	<td><img src='{{branco}}' class='ticfind' id={{busca}} style='margin-left:3px;' /></td>"
+						+ "</tr></table>";
+
+				ins = Mustache.render(templateMustache, hashMustache);
+				temp.innerHTML = ins;
+				fbusca =
+					function() {
+						if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google === false && i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos === false
+							&& i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa === false) {
+							i3GEO.janela.tempoMsg($trad("x35"));
+							return;
+						}
+						if ($i("valorBuscaRapida" + id).value === "") {
+							i3GEO.janela.tempoMsg($trad("x36"));
+							return;
+						}
+						i3GEO.janela.cria(
+							"300px",
+							"280px",
+							i3GEO.configura.locaplic + "/ferramentas/buscarapida/index.htm",
+							"",
+							"",
+							$trad("o2"));
+						return false;
+					};
+				$i("i3GEObotaoBuscaRapida" + id).onclick = fbusca;
+				$i("i3GEObotaoFormBuscaRapida" + id).onsubmit = fbusca;
+				$i("i3GEObotaoPropriedadesBuscaRapida" + id).onclick =
+					function() {
+						var ins, interno = "", externo = "", google = "";
+						i3GEO.janela.cria("300px", "150px", "", "", "", $trad("s5"), "i3GEOpropriedadesBuscaRapida" + id);
+						if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos) {
+							externo = "checked";
+						}
+						if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa) {
+							interno = "checked";
+						}
+						ins =
+							"<p class=paragrafo >" + $trad("x37")
+								+ ":</p>"
+								+ "<table class=lista3 >"
+								+ "<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox "
+								+ externo
+								+ " ></td><td> "
+								+ $trad("x38")
+								+ "</td></tr>"
+								+ "<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "
+								+ interno
+								+ " ></td><td>"
+								+ $trad("x39")
+								+ "</td></tr>";
+						if (i3GEO.Interface.ATUAL === "googlemaps") {
+							if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google) {
+								google = "checked";
 							}
-							if ($i("valorBuscaRapida" + id).value === "") {
-								i3GEO.janela.tempoMsg($trad("x36"));
-								return;
-							}
-							i3GEO.janela.cria(
-								"300px",
-								"280px",
-								i3GEO.configura.locaplic + "/ferramentas/buscarapida/index.htm",
-								"",
-								"",
-								$trad("o2"));
-							return false;
-						};
-					temp.innerHTML = ins;
-					$i("i3GEObotaoBuscaRapida" + id).onclick = fbusca;
-					$i("i3GEObotaoFormBuscaRapida" + id).onsubmit = fbusca;
-					$i("i3GEObotaoPropriedadesBuscaRapida" + id).onclick =
-						function() {
-							var ins, interno = "", externo = "", google = "";
-							i3GEO.janela.cria("300px", "150px", "", "", "", $trad("s5"), "i3GEOpropriedadesBuscaRapida" + id);
-							if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos) {
-								externo = "checked";
-							}
-							if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa) {
-								interno = "checked";
-							}
-							ins =
-								"<p class=paragrafo >"
-									+ $trad("x37")
-									+ ":</p>"
-									+ "<table class=lista3 >"
-									+ "<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox "
-									+ externo
-									+ " ></td><td> "
-									+ $trad("x38")
-									+ "</td></tr>"
-									+ "<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "
-									+ interno + " ></td><td>" + $trad("x39") + "</td></tr>";
-							if (i3GEO.Interface.ATUAL === "googlemaps") {
-								if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google) {
-									google = "checked";
-								}
-								ins +=
-									"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google = this.checked' type=checkbox "
-										+ google + " ></td><td>Google</td></tr>";
-							} else {
-								i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google = false;
-							}
-							ins += "</table><br>" + "<p class=paragrafo >" + $trad("x40") + "</p>";
-							$i("i3GEOpropriedadesBuscaRapida" + id + "_corpo").innerHTML = ins;
-						};
-				}
+							ins +=
+								"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google = this.checked' type=checkbox " + google
+									+ " ></td><td>Google</td></tr>";
+						} else {
+							i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google = false;
+						}
+						ins += "</table><br>" + "<p class=paragrafo >" + $trad("x40") + "</p>";
+						$i("i3GEOpropriedadesBuscaRapida" + id + "_corpo").innerHTML = ins;
+					};
 			}
 		},
 		/**
@@ -440,11 +449,13 @@ i3GEO.gadgets =
 				}
 				ins +=
 					"<tr><td><img  id='i3geo_zoomanterior' class='zoomAnterior' title='anterior' src='" + i3GEO.configura.locaplic
-						+ "/imagens/branco.gif" + "'  /></td>";
+						+ "/imagens/branco.gif"
+						+ "'  /></td>";
 				ins += "<td>&nbsp;</td>";
 				ins +=
 					"<td><img  id='i3geo_zoomproximo' class='zoomProximo' title='proximo' src='" + i3GEO.configura.locaplic
-						+ "/imagens/branco.gif" + "'  /></td>";
+						+ "/imagens/branco.gif"
+						+ "'  /></td>";
 				ins += "</tr></table>";
 				$i(id).innerHTML = ins;
 			}
@@ -585,8 +596,13 @@ i3GEO.gadgets =
 						if (confm.submenus[confm.menu[i].id].length > 0) {
 							ins +=
 								'<li class="yuimenubaritem" style="padding-top:2px;"><a style="' + estilo
-									+ '" href="#" class="yuimenubaritemlabel" ' + t + 'id="menu' + confm.menu[i].id + '" >&nbsp;'
-									+ confm.menu[i].nome + '</a></li>';
+									+ '" href="#" class="yuimenubaritemlabel" '
+									+ t
+									+ 'id="menu'
+									+ confm.menu[i].id
+									+ '" >&nbsp;'
+									+ confm.menu[i].nome
+									+ '</a></li>';
 						}
 					}
 					ins += '</ul>';
@@ -633,11 +649,7 @@ i3GEO.gadgets =
 			// marca o tipo de interface em uso
 			//
 			temp = [
-				"omenudataInterface1",
-				"omenudataInterface2",
-				"omenudataInterface3",
-				"omenudataInterface4",
-				"omenudataInterface5"
+				"omenudataInterface1", "omenudataInterface2", "omenudataInterface3", "omenudataInterface4", "omenudataInterface5"
 			];
 			n = temp.length;
 			while (n > 0) {
@@ -672,11 +684,7 @@ i3GEO.gadgets =
 			// desabilita op&ccedil;&otilde;es em interfaces espec&iacute;ficas
 			//
 			temp = [
-				"omenudataFerramentas7b",
-				"omenudataArquivos3",
-				"omenudataJanelas1",
-				"omenudataJanelas3",
-				"omenudataFerramentas2a"
+				"omenudataFerramentas7b", "omenudataArquivos3", "omenudataJanelas1", "omenudataJanelas3", "omenudataFerramentas2a"
 			];
 			n = temp.length;
 			while (n > 0) {
@@ -691,23 +699,17 @@ i3GEO.gadgets =
 				switch (i3GEO.Interface.ATUAL) {
 				case "openlayers":
 					temp = [
-						"omenudataArquivos3",
-						"omenudataJanelas1"
+						"omenudataArquivos3", "omenudataJanelas1"
 					];
 					break;
 				case "googlemaps":
 					temp = [
-						"omenudataArquivos3",
-						"omenudataJanelas1",
-						"omenudataJanelas3"
+						"omenudataArquivos3", "omenudataJanelas1", "omenudataJanelas3"
 					];
 					break;
 				case "googleearth":
 					temp = [
-						"omenudataFerramentas7b",
-						"omenudataArquivos3",
-						"omenudataJanelas3",
-						"omenudataFerramentas2a"
+						"omenudataFerramentas7b", "omenudataArquivos3", "omenudataJanelas3", "omenudataFerramentas2a"
 					];
 					break;
 				}
