@@ -335,9 +335,9 @@ i3GEO.gadgets = {
 	},
 	/**
 	 * Function: atualizaEscalaGrafica
-	 * 
+	 *
 	 * Atualiza a escala gr&aacute;fica
-	 * 
+	 *
 	 */
 	atualizaEscalaGrafica : function() {
 		var e = $i("imagemEscalaGrafica");
@@ -382,7 +382,7 @@ i3GEO.gadgets = {
 			i = "<form id=i3GEObotaoFormBuscaRapida"
 				+ id
 				+ " >"
-				+ "<div class='styled-select' style='width:160px;'><input type=text value='' id='valorBuscaRapida"
+				+ "<div class='i3geoForm' style='width:160px;'><input class=i3geoFormSemIcone type=text value='' id='valorBuscaRapida"
 				+ id
 				+ "' /></div>"
 				+ "</form>";
@@ -400,7 +400,7 @@ i3GEO.gadgets = {
 				+ " style='margin-right:5px;margin-left:5px;'/></td>";
 			ins += "<td><img src='"
 				+ i3GEO.configura.locaplic + "/imagens/branco.gif"
-				+ "' class='tic' id=i3GEObotaoBuscaRapida"
+				+ "' class='ticfind' id=i3GEObotaoBuscaRapida"
 				+ id
 				+ " /></td></tr></table>";
 			temp = $i(id);

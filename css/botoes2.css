@@ -435,7 +435,13 @@
 	box-shadow: 1px 1px 3px 0px lightgray;
 	margin-left: 1px;
 }
-
+.ticfind {
+	background-image: url("../imagens/ic_zoom.png");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 16px;
+    text-align: center;
+}
 .x {
 	background-image: URL('../imagens/sprite.png');
 	background-repeat: no-repeat;
