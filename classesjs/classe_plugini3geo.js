@@ -960,7 +960,6 @@ i3GEO.pluginI3geo =
 	        		   }
 	        	   }
 	           },
-	           //TODO apos adicionar a camada, incluir icone que permita modificar os parametros
 	           /**
 	            * Section: i3GEO.pluginI3geo.parametrossql
 	            *
@@ -979,6 +978,8 @@ i3GEO.pluginI3geo =
 	            *
 	            * Esse matadado deve conter uma string que ser&aacute; transformada em
 	            * um objeto javascript para uso no plugin
+	            *
+	            * Ver ferramentas/parametrossql
 	            *
 	            * Exemplo:
 	            *

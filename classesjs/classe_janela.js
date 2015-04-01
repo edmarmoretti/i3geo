@@ -294,6 +294,7 @@ i3GEO.janela =
 			}
 			// executa as fun&ccedil;&otilde;es default de antes de qualquer
 			// cria&ccedil;&atilde;o de janela
+			//TODO remover eval
 			if (this.ANTESCRIA) {
 				for (i = 0; i < this.ANTESCRIA.length; i++) {
 					eval(this.ANTESCRIA[i]);

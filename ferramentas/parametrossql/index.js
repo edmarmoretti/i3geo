@@ -133,7 +133,7 @@ i3GEOF.parametrossql = {
 				titulo = "<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
 				janela = i3GEO.janela.cria(
 					"290px",
-					"330px",
+					"auto",
 					"",
 					"",
 					"",

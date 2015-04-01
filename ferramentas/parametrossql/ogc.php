@@ -1,4 +1,12 @@
 <?php
+/**
+Esse programa e uma adaptacao do codigo i3geo/ogc.php
+E utilizado no mashup (i3geo/mashup) nas camadas que sao configuradas cm o plugin parametrossql
+Ao adicionar uma camada ao mapa, o i3Geo identifica se a camada usa o plugin e nesse caso, ao inves de usar
+o gerador de webservice i3geo/ogc.php ustiliza esse aqui.
+A diferenca e que esse servico processa o parametro "plugin", aplicando os filtros definidos
+no plugin parametrossql
+ */
 $cache = true;
 require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/../../ms_configura.php");
@@ -147,7 +155,7 @@ else{
 			}
 			$chaves = implode(",",$chaves);
 			$filtro = $l->getFilterString();
-				
+
 			$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$chaves);
 			$chaves = explode(",",$chaves);
 			$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$plugin);
