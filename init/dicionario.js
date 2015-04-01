@@ -121,7 +121,7 @@ g_traducao_init =
 			],
 			18 : [
 				{
-					pt : "Integre mapas em outras aplica&ccedil;&otilde;es",
+					pt : "Integre mapas com",
 					en : "",
 					es : ""
 				}

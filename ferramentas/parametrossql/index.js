@@ -147,6 +147,9 @@ i3GEOF.parametrossql = {
 					true
 				);
 				divid = janela[2].id;
+				temp = $i("i3GEOF.parametrossql_corpo").style;
+				temp.paddingLeft = "0px";
+				temp.paddingRight = "0px";
 				i3GEOF.parametrossql.aguarde = $i("i3GEOF.parametrossql_imagemCabecalho").style;
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.parametrossql.cancela);
 				i3GEOF.parametrossql.inicia(divid,camada);
@@ -270,9 +273,10 @@ i3GEOF.parametrossql = {
 				reg = new RegExp("plugin" + "([=])+([a-zA-Z0-9_]*)");
 				p.url = p.url.replace(reg, "");
 				p.url = p.url + "&plugin=" + valores.join(",");
-				p.setUrl(p.url);
+				p.setUrl(p.url+"&");
 				i3GEO.janela.destroi("i3GEOF.parametrossql");
-				p.redraw();
+				p.setVisibility(false);
+				p.setVisibility(true);
 			}
 		}
 	},

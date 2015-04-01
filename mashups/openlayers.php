@@ -449,8 +449,8 @@ function ajuda(){
 <?php
 //carrega o script para layers do tipo plugin
 if(count($temasPluginI3Geo) > 0){
-	echo '<script type="text/javascript" src="../classesjs/classe_plugini3geo.js"></script>'."\n";
-	//echo '<script type="text/javascript" src="../classesjs/compactados/classe_plugini3geo_compacto.js"></script>'."\n";
+	//echo '<script type="text/javascript" src="../classesjs/classe_plugini3geo.js"></script>'."\n";
+	echo '<script type="text/javascript" src="../classesjs/compactados/classe_plugini3geo_compacto.js"></script>'."\n";
 	echo '<script type="text/javascript" src="../pacotes/cpaint/cpaint2_compacto.inc.js"></script>'."\n";
 }
 ?>

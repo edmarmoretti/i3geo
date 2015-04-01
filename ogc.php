@@ -272,7 +272,7 @@ if(isset($_GET["DESLIGACACHE"]) && $_GET["DESLIGACACHE"] == "sim"){
 	$agora = time();
 	$cache = false;
 }
-$nomeMapfileTmp = $dir_tmp."/ogc_".md5($tema)."_".$agora.".map";
+$nomeMapfileTmp = $dir_tmp."/ogc_".md5($tema.($req->getValueByName("SRS")))."_".$agora.".map";
 $nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
 $nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao

@@ -194,7 +194,7 @@ botoesIni.push({
 	},{
 	"img":"mashup.png",
 	"href":"../mashups",
-	"titulo":$trad(18,g_traducao_init)
+	"titulo":$trad(18,g_traducao_init) + "<br><a href='../mashups/osm.php?temas=&largura=800&altura=500' target=_blank >OSM</a>" + " - <a href='../mashups/openlayers.php?temas=&largura=800&altura=500' target=_blank >OpenLayers</a>"
 	},{
 	"img":"googlemaps.png",
 	"href":"../<?php echo $customDir; ?>/black_gm.phtml",

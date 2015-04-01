@@ -438,7 +438,8 @@ function ajuda(){
 <?php
 //carrega o script para layers do tipo plugin
 if(count($temasPluginI3Geo) > 0){
-	echo '<script type="text/javascript" src="../classesjs/classe_plugini3geo.js"></script>'."\n";
+	echo '<script type="text/javascript" src="../classesjs/compactados/classe_plugini3geo_compacto.js"></script>'."\n";
+	echo '<script type="text/javascript" src="../pacotes/cpaint/cpaint2_compacto.inc.js"></script>'."\n";
 }
 ?>
 <link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
@@ -457,6 +458,26 @@ if(count($temasPluginI3Geo) > 0){
 	z-index: 2001;
 	opacity: .8;
 	filter: alpha(opacity = 80);
+}
+.pluginParametrossql {
+	background-image: url("../imagens/gisicons/settings.png");
+	background-size: 14px auto;
+	cursor: pointer;
+	position: relative;
+	top: 3px;
+	width: 14px;
+}
+
+.ajuda_usuario {
+	background-image: url(../imagens/external.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	margin-left: 0;
+	text-decoration: none;
+	cursor: help;
+	position: relative;
+	top: 2px;
+	font-size: 13px;
 }
 </style>
 </head>
@@ -532,7 +553,7 @@ i3GEO.editorOL.ativarodadomouse = "<?php
 i3GEO.editorOL.legendahtml = "<?php
 	if(isset($legendahtml)){echo $legendahtml;}
 	else
-	{echo "false";}
+	{echo "true";}
 ?>";
 <?php
 if(isset($controles)){
@@ -584,21 +605,35 @@ i3GEO.editorOL.mapa = new OpenLayers.Map(
 		minResolution: i3GEO.editorOL.minresolution
 	}
 );
-i3GEO.editorOL.inicia();
+
 if(!i3GEO.configura){
 	i3GEO.configura = {"locaplic":  "../"};
 }
 
 <?php
 //camadas plugin
-
 foreach ($temasPluginI3Geo as $t){
 	//cria um objeto javascript para iniciar o plugin
 	$camada = '{"tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].'}';
 	echo "var camada = $camada;\n";
-	echo "i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);\n";
+	//echo "i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);\n";
+	$visivel = "false";
+	if(in_array($t["name"],$visiveis)){
+		$visivel = "true";
+	}
+	echo "adicionaPluginI3geo(camada,$visivel);\n";
 }
 ?>
+i3GEO.editorOL.inicia();
+
+function adicionaPluginI3geo(camada,visivel){
+	//TODO nao funciona
+	var l = i3GEO.pluginI3geo.layerMashup("openlayers",camada,"4326");
+	l.setVisibility(visivel);
+	if(l != true){
+		i3GEO.editorOL.layersIniciais.push(l);
+	}
+}
 </script>
 </body>
 </html>
