@@ -16,16 +16,16 @@
 
 /**
  * Licen&ccedil;a
- *
+ * 
  * GPL2
- *
+ * 
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
+ * 
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
+ * 
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
+ * 
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -37,17 +37,17 @@ if (typeof (i3GEO) === 'undefined') {
 }
 /**
  * YAHOO.namespace
- *
+ * 
  * Namespace da biblioteca YUI utilizado para armazenar janelas flutuantes
  */
 YAHOO.namespace("i3GEO.janela");
 /**
  * Variavel: YAHOO.widget.OverlayManager
- *
+ * 
  * Gerenciador das janelas flutuantes da biblioteca YUI
- *
+ * 
  * Type:
- *
+ * 
  * {YAHOO.widget.OverlayManager}
  */
 YAHOO.i3GEO.janela.manager = new YAHOO.widget.OverlayManager();
@@ -56,75 +56,75 @@ YAHOO.namespace("janelaDoca.xp");
 YAHOO.janelaDoca.xp.manager = new YAHOO.widget.OverlayManager();
 /**
  * Variavel: YAHOO.i3GEO.janela.managerAguarde
- *
+ * 
  * Gerenciador das janelas flutuantes de aguarde
- *
+ * 
  * Type:
- *
+ * 
  * {YAHOO.widget.OverlayManager}
  */
 YAHOO.i3GEO.janela.managerAguarde = new YAHOO.widget.OverlayManager();
 
-//TODO criar janela que permita inserir um link e salva-la junto com o mapa
+// TODO criar janela que permita inserir um link e salva-la junto com o mapa
 i3GEO.janela =
 	{
 		/**
 		 * Propriedade: ESTILOABD
-		 *
+		 * 
 		 * Estilo que ser&aacute; aplicado ao elemento body da janela (class='bd')
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {String}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * display:block;padding:5px 1px 5px 1px;
 		 */
 		ESTILOBD : "display:block;padding:5px 1px 5px 1px;",
 		/**
 		 * Propriedade: ESTILOAGUARDE
-		 *
+		 * 
 		 * Estilo da janela de aguarde
-		 *
+		 * 
 		 * Pode ser normal|reduzida|minima
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {String}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * normal
 		 */
 		ESTILOAGUARDE : "normal",
 		/**
 		 * Propriedade: AGUARDEMODAL
-		 *
+		 * 
 		 * Indica se a janela de aguarde ser&aacute; do tipo MODAL, ou seja, se ir&aacute; ou n&atilde;o bloquear as op&ccedil;&otilde;es do
 		 * mapa.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Boolean}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * false
 		 */
 		AGUARDEMODAL : false,
 		/**
 		 * Lista com os nomes das fun&ccedil;&otilde;es que ser&atilde;o executadas antes de abrir a janela.
-		 *
+		 * 
 		 * Este &eacute; um array que pode ser modificado utilizando-se as fun&ccedil;&otilde;es javascript de manipula&ccedil;&atilde;o de
 		 * arrays.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * i3GEO.janela.prepara()
 		 */
 		ANTESCRIA : [
@@ -132,59 +132,59 @@ i3GEO.janela =
 		],
 		/**
 		 * Lista com os nomes das fun&ccedil;&otilde;es que ser&atilde;o executadas antes de fechar a janela.
-		 *
+		 * 
 		 * Este &eacute; um array que pode ser modificado utilizando-se as fun&ccedil;&otilde;es javascript de manipula&ccedil;&atilde;o de
 		 * arrays.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Array}
 		 */
 		ANTESFECHA : [],
 		/**
 		 * Propriedade: TRANSICAOSUAVE
-		 *
+		 * 
 		 * Altera a transpar&ecirc;ncia das janelas quando o mouse sobrep&otilde;e e quando sai (n&atilde;o &eacute; ativado no navegador
 		 * IE)
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {boolean}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * true
 		 */
 		TRANSICAOSUAVE : true,
 		/**
 		 * Propriedade: OPACIDADE
-		 *
+		 * 
 		 * Valor da opacidade min&iacute;ma utilizada quando TRANSICAOSUAVE for igual a true.
-		 *
+		 * 
 		 * Varia de 0 a 100
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {numeric}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * 65
 		 */
 		OPACIDADE : 65,
 		/**
 		 * Propriedade: OPACIDADEAGUARDE
-		 *
+		 * 
 		 * Valor da opacidade da janela de aguarde.
-		 *
+		 * 
 		 * Varia de 0 a 100
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {numeric}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * 50
 		 */
 		OPACIDADEAGUARDE : 50,
@@ -213,59 +213,59 @@ i3GEO.janela =
 		},
 		/**
 		 * Function: cria
-		 *
+		 * 
 		 * Cria uma janela flutuante.
-		 *
+		 * 
 		 * Vc pode obter o elemento HTML interno da janela por meio de:
-		 *
+		 * 
 		 * retorno[2].innerHTML
-		 *
+		 * 
 		 * Vc pode recuperar uma janela com o comando
-		 *
+		 * 
 		 * YAHOO.i3GEO.janela.manager.find(id);
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * {integer} - largura da janela em pixels
-		 *
+		 * 
 		 * {integer} - altura da janela em pixels
-		 *
+		 * 
 		 * {String} - URL que ser&aacute; inclu&iacute;da no SRC do iframe interno da janela. Se for "", o iframe n&atilde;o ser&aacute;
 		 * criado
-		 *
+		 * 
 		 * {Integer} - posi&ccedil;&atilde;o x da janela em pixels. Se for "" ser&aacute; fixada no centro
-		 *
+		 * 
 		 * {Integer} - posi&ccedil;&atilde;o y da janela em pixels. Se for "" ser&aacute; fixada no centro
-		 *
+		 * 
 		 * {String} - texto do cabe&ccedil;alho
-		 *
+		 * 
 		 * {String} - (opcional) nome que ser&aacute; dado ao id que conter&aacute; a janela. Se n&atilde;o for definido, ser&aacute; usado
 		 * o id="wdoca". O id do iframe interno &eacute; sempre igual ao id + a letra i. Por default, ser&aacute; "wdocai". O id do
 		 * cab&ccedil;alho ser&aacute; igual a id+"_cabecalho" e o id do corpo ser&aacute; id+"_corpo". O id tamb&eacute;m &eacute;
 		 * utilizado na fun&ccedil;&atilde;o de fechamento da janela. Quando for usada a t&eacute;cnica de script tag, ao fechar a janela a
 		 * fun&ccedil;&atilde;o de mesmo nome do id ser&aacute; definida como "null".
-		 *
+		 * 
 		 * {Boolean} - (opcional) indica se a janela bloquear&aacute; as inferiores ou n&atilde;o. Por default &eacute; false
-		 *
+		 * 
 		 * {String} - (opcional) classe CSS que ser&aacute; aplicada a barra de menu. Por default o valor &eacute; hd2. Na interface Google
 		 * Earth, esse valor &eacute; sempre alterado para "hd".
-		 *
+		 * 
 		 * {function} - (opcional) funcao que ser&aacute; executada quando o usu&aacute;rio clicar no cabecalho
-		 *
+		 * 
 		 * {function} - (opcional) funcao que ser&aacute; executada para minimizar a janela
-		 *
+		 * 
 		 * {function} - (opcional) funcao que ser&aacute; executada para alterar o tamanho da janela
-		 *
+		 * 
 		 * {boolean} - (opcional) a janela pode ser redimensionada ou nao pelo usuario
-		 *
+		 * 
 		 * {string} - (opcional) icone que ser&aacute; mostrado no canto superior esquerdo da janela
-		 *
+		 * 
 		 * {funcao} - funcao executada quando o icone + for clicado
-		 *
+		 * 
 		 * {sim|nao} - (opcional) indica se o efeito de transpar&ecirc;ncia nos eventos mouseover/out ser&aacute; aplicado
-		 *
+		 * 
 		 * Return:
-		 *
+		 * 
 		 * {Array} Array contendo objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 		 */
 		cria : function(wlargura, waltura, wsrc, nx, ny, texto, id, modal, classe, funcaoCabecalho, funcaoMinimiza, funcaoAposRedim,
@@ -273,7 +273,7 @@ i3GEO.janela =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.janela.cria()");
 
-			if(!transicao){
+			if (!transicao) {
 				transicao = "sim";
 			}
 			if (!dimensionavel) {
@@ -294,7 +294,7 @@ i3GEO.janela =
 			}
 			// executa as fun&ccedil;&otilde;es default de antes de qualquer
 			// cria&ccedil;&atilde;o de janela
-			//TODO remover eval
+			// TODO remover eval
 			if (this.ANTESCRIA) {
 				for (i = 0; i < this.ANTESCRIA.length; i++) {
 					eval(this.ANTESCRIA[i]);
@@ -331,8 +331,10 @@ i3GEO.janela =
 			ins = '<div id="' + id + '_cabecalho" class="' + classe + '" >';
 			if (i3GEO.configura !== undefined) {
 				ins +=
-					"<img id='" + id + "_imagemCabecalho' class='i3GeoAguardeJanela' style='visibility:hidden;' src=\'"
-						+ i3GEO.configura.locaplic + "/imagens/aguarde2.gif\' />";
+					"<img id='" + id
+						+ "_imagemCabecalho' class='i3GeoAguardeJanela' style='visibility:hidden;' src=\'"
+						+ i3GEO.configura.locaplic
+						+ "/imagens/aguarde2.gif\' />";
 			}
 			if (icone != "") {
 				ins += "<img class='i3GeoIconeJanela' src='" + icone + "' >";
@@ -406,7 +408,7 @@ i3GEO.janela =
 					dragOnly : true,
 					keylisteners : null
 				});
-				if(YAHOO.util.Resize){
+				if (YAHOO.util.Resize) {
 					var resize = new YAHOO.util.Resize(id, {
 						handles : [
 							'br'
@@ -423,7 +425,7 @@ i3GEO.janela =
 					resize.on('resize', function(args) {
 						this.cfg.setProperty("height", args.height + "px");
 						if (wdocaiframe) {
-							wdocaiframe.style.height = args.height -50 + "px";
+							wdocaiframe.style.height = args.height - 50 + "px";
 						}
 					}, janela, true);
 					if (funcaoAposRedim && funcaoAposRedim != "") {
@@ -454,7 +456,9 @@ i3GEO.janela =
 			janela.bringToTop();
 
 			// ajusta estilos e outras caracter&iacute;sticas da janela criada
-			if (navm && id !== "i3geo_janelaMensagens" && i3GEO.Interface && i3GEO.Interface != undefined
+			if (navm && id !== "i3geo_janelaMensagens"
+				&& i3GEO.Interface
+				&& i3GEO.Interface != undefined
 				&& i3GEO.Interface.ATUAL === "googleearth") {
 				janela.moveTo(0, 0);
 			}
@@ -478,22 +482,20 @@ i3GEO.janela =
 			}, true);
 			temp = $i(id + "_corpo");
 			return ([
-				janela,
-				$i(id + "_cabecalho"),
-				temp
+				janela, $i(id + "_cabecalho"), temp
 			]);
 		},
 		/**
 		 * Minimiza ou maximiza a janela
-		 *
+		 * 
 		 * Parametro:
-		 *
+		 * 
 		 * {string} - prefixo utilizado na composi&ccedil;&atilde;o do id da janela
-		 *
+		 * 
 		 * {string} - (opcional) largura minima da janela
-		 *
+		 * 
 		 * Return:
-		 *
+		 * 
 		 * {min|max} indicativo se minimizou ou maximizou
 		 */
 		minimiza : function(id, min) {
@@ -563,11 +565,11 @@ i3GEO.janela =
 		/**
 		 * Aplica a op&ccedil;&atilde;o definida em ANTESFECHA e elimina alguns objetos que s&atilde;o comumente adicionados por algumas
 		 * opera&ccedil;&otilde;es do i3geo como box, pin
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * event {objeto} - objeto YUI do evento que gerou o fechamento da janela
-		 *
+		 * 
 		 * args {objeto} - parametros do evento que fechou a janela
 		 */
 		fecha : function(event, args) {
@@ -596,9 +598,9 @@ i3GEO.janela =
 		},
 		/**
 		 * Destroi uma janela sem aplicar as funcoes adicionais
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * id {string} - id da janela
 		 */
 		destroi : function(id) {
@@ -615,15 +617,15 @@ i3GEO.janela =
 		},
 		/**
 		 * Function: alteraTamanho
-		 *
+		 * 
 		 * Altera o tamanho de uma janela aberta
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * {Integer} - nova largura
-		 *
+		 * 
 		 * {Integer} - nova altura
-		 *
+		 * 
 		 * {String} - (opcional) id que identifica a janela aberta
 		 */
 		alteraTamanho : function(w, h, id) {
@@ -643,13 +645,13 @@ i3GEO.janela =
 		},
 		/**
 		 * Function: abreAguarde
-		 *
+		 * 
 		 * Abre uma janela com a mensagem de aguarde
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * {String} - id da nova janela
-		 *
+		 * 
 		 * {String} - texto da janela
 		 */
 		abreAguarde : function(id, texto) {
@@ -659,8 +661,7 @@ i3GEO.janela =
 			}
 			janela = YAHOO.i3GEO.janela.managerAguarde.find(id);
 			pos = [
-				0,
-				0
+				0, 0
 			];
 			if (i3GEO.Interface && $i(i3GEO.Interface.IDCORPO)) {
 				pos = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));
@@ -691,7 +692,8 @@ i3GEO.janela =
 			if (i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "minima") {
 				janela.setHeader("<span><img id=aguardeGifAberto src='" + i3GEO.configura.locaplic
 					+ "/imagens/aguarde.gif' /></span>&nbsp;<span style=font-size:8px >"
-					+ YAHOO.i3GEO.janela.managerAguarde.overlays.length + "</span>");
+					+ YAHOO.i3GEO.janela.managerAguarde.overlays.length
+					+ "</span>");
 			}
 			if (i3GEO.parametros && i3GEO.parametros.w > 0) {
 				janela.moveTo(pos[0] + (i3GEO.parametros.w / 2) - 120, pos[1]);
@@ -710,11 +712,11 @@ i3GEO.janela =
 		},
 		/**
 		 * Function: fechaAguarde
-		 *
+		 * 
 		 * Fecha uma janela do tipo aguarde
-		 *
+		 * 
 		 * Paremeters:
-		 *
+		 * 
 		 * {String} - id da janela que ser&aacute; fechada. Se n&atilde;o for definido, tenta fechar as janelas principais.
 		 */
 		fechaAguarde : function(id) {
@@ -728,24 +730,23 @@ i3GEO.janela =
 		},
 		/**
 		 * Function: tempoMsg
-		 *
+		 * 
 		 * Abre uma janela com uma mensagem temporaria
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * {String} - texto da janela
-		 *
+		 * 
 		 * {segundos}
 		 */
 		tempoMsg : function(texto, tempo) {
-			if(!YAHOO.util.Easing){
+			if (!YAHOO.util.Easing) {
 				return;
 			}
 			var pos, janela, attributes, anim, altura = 40;
 			janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
 			pos = [
-				0,
-				0
+				0, 0
 			];
 			if (i3GEO.Interface && $i(i3GEO.Interface.IDCORPO)) {
 				pos = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));
@@ -832,7 +833,7 @@ i3GEO.janela =
 		},
 		/**
 		 * Function: ativaAlerta
-		 *
+		 * 
 		 * Substitui a janel&ccedil;a de alerta padr&atilde;o do sistema operacional por uma outra customizada
 		 */
 		ativaAlerta : function() {
@@ -881,21 +882,21 @@ i3GEO.janela =
 		},
 		/**
 		 * Function: confirma
-		 *
+		 * 
 		 * Janela de confirmacao
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * {string} - texto da pegunta
-		 *
+		 * 
 		 * {numeric} - largura da janela
-		 *
+		 * 
 		 * {string} - (opcional) texto do botao 1
-		 *
+		 * 
 		 * {string} - (opcional) texto do botao 2
-		 *
+		 * 
 		 * {function} - (opcional) funcao do botao 1
-		 *
+		 * 
 		 * {function} - (opcional) funcao do botao 2
 		 */
 		confirma : function(pergunta, w, resposta1, resposta2, funcao1, funcao2) {
@@ -938,8 +939,7 @@ i3GEO.janela =
 				{
 					text : $trad("x75"),
 					handler : f3
-				},
-				{
+				}, {
 					text : resposta1,
 					handler : f1
 				}
@@ -975,17 +975,17 @@ i3GEO.janela =
 		},
 		/**
 		 * Function: prompt
-		 *
+		 * 
 		 * Janela de prompt para entrada de dados
-		 *
+		 * 
 		 * O campo para digitacao contem o ID 'i3GEOjanelaprompt'
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * {string} - texto da pegunta
-		 *
+		 * 
 		 * {function} - (opcional) funcao do botao ok
-		 *
+		 * 
 		 * {string} - (opcional) valor default
 		 */
 		prompt : function(pergunta, funcaoOk, valorDefault) {
@@ -1001,33 +1001,33 @@ i3GEO.janela =
 		},
 		/**
 		 * Function: mensagemSimples
-		 *
+		 * 
 		 * Mostra uma janela simples com uma mensagem
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * {String} - texto da mensagem
-		 *
+		 * 
 		 * {String} - texto do cabecalho
-		 *
+		 * 
 		 * {numeric} - (opcional) largura em pixel
-		 *
+		 * 
 		 * {numeric} - (opcional) altura em pixel
 		 */
 		mensagemSimples : function(texto, cabecalho, largura, altura) {
 			var janela;
-			if(!largura){
+			if (!largura) {
 				largura = 300;
 			}
-			if(!altura){
+			if (!altura) {
 				altura = 300;
 			}
-			if(!cabecalho){
+			if (!cabecalho) {
 				cabecalho = "";
 			}
 			janela = new YAHOO.widget.SimpleDialog(YAHOO.util.Dom.generateId(), {
-				width : parseInt(largura,10) + "px",
-				height : parseInt(altura,10) + "px",
+				width : parseInt(largura, 10) + "px",
+				height : parseInt(altura, 10) + "px",
 				fixedcenter : true,
 				visible : true,
 				draggable : true,
@@ -1043,7 +1043,7 @@ i3GEO.janela =
 				text : ""
 			});
 			YAHOO.i3GEO.janela.manager.register(janela);
-			//$i(id + '_corpo').style.height = parseInt(waltura, 10) + "px";
+			// $i(id + '_corpo').style.height = parseInt(waltura, 10) + "px";
 			janela.setHeader(cabecalho);
 			janela.render(document.body);
 			janela.setHeader(cabecalho);
@@ -1054,9 +1054,9 @@ i3GEO.janela =
 		},
 		/**
 		 * Cria um DIV e posiciona sobre o mapa na posi&ccedil;&atilde;o do mouse.
-		 *
+		 * 
 		 * Return:
-		 *
+		 * 
 		 * ID do DIV criado
 		 */
 		tip : function() {
@@ -1086,14 +1086,16 @@ i3GEO.janela =
 			// registra a fun&ccedil;&atilde;o de elimina&ccedil;&atilde;o dos
 			// tips
 			//
-			i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.janela.excluiTips('todos')"]);
+			i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
+				"i3GEO.janela.excluiTips('todos')"
+			]);
 			return (Nid);
 		},
 		/**
 		 * Exclui os tips armazenados na vari&aacute;vel i3GEO.janela.TIPS
-		 *
+		 * 
 		 * Parametro:
-		 *
+		 * 
 		 * tipo {String} - todos|naofixos tipos de tips que ser&atilde;o exclu&iacute;dos
 		 */
 		excluiTips : function(tipo) {
@@ -1173,23 +1175,23 @@ i3GEO.janela =
 		},
 		/**
 		 * Adiciona no cabe&ccedil;alho da janela um combo com a lista de temas para janelas abertas por ferramentas
-		 *
+		 * 
 		 * Essa fun&ccedil;&atilde;o &eacute; utilizada pelas ferramentas que operam sobre um determinado tema. O combo permite que o
 		 * usu&aacute;rio selecione um tema e ative a ferramenta para funcionar com esse tema
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * idDiv {string} - id do elemento HTML que receber&aacute; o combo
-		 *
+		 * 
 		 * idCombo {string} - id do combo que ser&aacute; criado
-		 *
+		 * 
 		 * ferramenta {string} - nome da ferramenta (namespace da classe, por exemplo "tabela" para a classe i3GEOF.tabela
-		 *
+		 * 
 		 * tipo {string} - tipo de combo
-		 *
+		 * 
 		 * onButtonClick {function} - funcao que sera executada no evento onchange do combo a ser criado
 		 */
-		//TODO atualizar todos os combos quando a arvore de camadas e modificada
+		// TODO atualizar todos os combos quando a arvore de camadas e modificada
 		comboCabecalhoTemas : function(idDiv, idCombo, ferramenta, tipo, onButtonClick) {
 			var temp = $i(idDiv);
 			if (temp && !($i(idCombo))) {
@@ -1217,19 +1219,17 @@ i3GEO.janela =
 								// target of the event
 								if (oMenuItem) {
 									i3GEO.mapa.ativaTema(oMenuItem.value);
-									if(oMenuItem.value === ""){
+									if (oMenuItem.value === "") {
 										i3GEO.temaAtivo = "";
-										botao.set("label", "<span class='cabecalhoTemas' >" + $trad("x92")
-											+ "</span>&nbsp;&nbsp;");
-									}
-									else{
+										botao.set("label", "<span class='cabecalhoTemas' >" + $trad("x92") + "</span>&nbsp;&nbsp;");
+									} else {
 										botao.set("label", "<span class='cabecalhoTemas' >" + oMenuItem.cfg.getProperty("text")
 											+ "</span>&nbsp;&nbsp;");
 									}
 
 									if (i3GEOF[ferramenta]) {
 										i3GEOF[ferramenta].tema = oMenuItem.value;
-										if($i("i3GEOF." + ferramenta + "_corpo")){
+										if ($i("i3GEOF." + ferramenta + "_corpo")) {
 											$i("i3GEOF." + ferramenta + "_corpo").innerHTML = "";
 											eval("i3GEOF." + ferramenta + ".inicia('i3GEOF." + ferramenta + "_corpo');");
 										}
@@ -1248,6 +1248,8 @@ i3GEO.janela =
 				i3GEO.eventos.ATUALIZAARVORECAMADAS = [];
 			}
 			temp = "i3GEO.janela.comboCabecalhoTemas('" + idDiv + "','" + idCombo + "','" + ferramenta + "','" + tipo + "')";
-			i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",[temp]);
+			i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS", [
+				temp
+			]);
 		}
 	};

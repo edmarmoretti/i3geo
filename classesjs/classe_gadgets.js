@@ -328,6 +328,7 @@ i3GEO.gadgets =
 		 * {String} - id do elemento HTML que receber&aacute; o resultado. Esse id por default &eacute; obtido de i3GEO.gadgets.PARAMETROS
 		 */
 		mostraBuscaRapida : function(id) {
+			//TODO implementar a separacao do template mustache em arquivos em disco
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.gadgets.mostraBuscaRapida()");
 
@@ -338,6 +339,7 @@ i3GEO.gadgets =
 			i3GEO.gadgets.mostraBuscaRapida.id = id;
 			temp = $i(id);
 			if (temp) {
+				// monta a interface
 				hashMustache = {
 					"idform" : "i3GEObotaoFormBuscaRapida" + id,
 					"idinput" : "valorBuscaRapida" + id,
@@ -361,17 +363,21 @@ i3GEO.gadgets =
 
 				ins = Mustache.render(templateMustache, hashMustache);
 				temp.innerHTML = ins;
+				// funcao de busca
 				fbusca =
 					function() {
+						// sem condicoes de busca
 						if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google === false && i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos === false
 							&& i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa === false) {
 							i3GEO.janela.tempoMsg($trad("x35"));
 							return;
 						}
+						// nao digitou palavra
 						if ($i("valorBuscaRapida" + id).value === "") {
 							i3GEO.janela.tempoMsg($trad("x36"));
 							return;
 						}
+						// janela com a rotina e o resultado da busca
 						i3GEO.janela.cria(
 							"300px",
 							"280px",
@@ -385,40 +391,51 @@ i3GEO.gadgets =
 				$i("i3GEObotaoFormBuscaRapida" + id).onsubmit = fbusca;
 				$i("i3GEObotaoPropriedadesBuscaRapida" + id).onclick =
 					function() {
-						var ins, interno = "", externo = "", google = "";
-						i3GEO.janela.cria("300px", "150px", "", "", "", $trad("s5"), "i3GEOpropriedadesBuscaRapida" + id);
+						var janela, hashMustache, templateMustache, ins, interno = "", externo = "", google = "";
 						if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos) {
 							externo = "checked";
 						}
 						if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa) {
 							interno = "checked";
 						}
-						ins =
-							"<p class=paragrafo >" + $trad("x37")
-								+ ":</p>"
-								+ "<table class=lista3 >"
-								+ "<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox "
-								+ externo
-								+ " ></td><td> "
-								+ $trad("x38")
-								+ "</td></tr>"
-								+ "<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox "
-								+ interno
-								+ " ></td><td>"
-								+ $trad("x39")
-								+ "</td></tr>";
-						if (i3GEO.Interface.ATUAL === "googlemaps") {
-							if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google) {
-								google = "checked";
-							}
-							ins +=
-								"<tr><td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google = this.checked' type=checkbox " + google
-									+ " ></td><td>Google</td></tr>";
-						} else {
-							i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google = false;
+						if (i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google) {
+							google = "checked";
 						}
-						ins += "</table><br>" + "<p class=paragrafo >" + $trad("x40") + "</p>";
-						$i("i3GEOpropriedadesBuscaRapida" + id + "_corpo").innerHTML = ins;
+						hashMustache = {
+							"externo" : externo,
+							"interno" : interno,
+							"google" : google,
+							"titulo" : $trad("x37"),
+							"servExt" : $trad("x38"),
+							"servMap" : $trad("x39"),
+							"googlemaps" : false,
+							"ajuda" : $trad("x40")
+						};
+						if (i3GEO.Interface.ATUAL === "googlemaps") {
+							hashMustache["googlemaps"] = true;
+						}
+						templateMustache =
+							"" + "<p class=paragrafo >{{titulo}}:</p>"
+								+ "<table class=lista3 >"
+								+ "	<tr>"
+								+ "		<td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.servicosexternos = this.checked' type=checkbox {{externo}} ></td>"
+								+ "		<td>{{servExt}}</td>"
+								+ "	</tr>"
+								+ "	<tr>"
+								+ "		<td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.temasmapa = this.checked' type=checkbox {{interno}} ></td>"
+								+ "		<td>{{servMap}}</td>"
+								+ "	</tr>"
+								+ "{{#googlemaps}}"
+								+ "	<tr>"
+								+ "		<td><input style=cursor:pointer onclick='i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.google = this.checked' type=checkbox {{google}} ></td>"
+								+ "		<td>Google</td>"
+								+ "	</tr>"
+								+ "{{/googlemaps}}"
+								+ "</table><br><p class=paragrafo >{{ajuda}}</p>";
+
+						ins =i3GEO.util.parseMustache(templateMustache, hashMustache);
+						janela = i3GEO.janela.cria("300px", "150px", "", "", "", $trad("s5"), "i3GEOpropriedadesBuscaRapida" + id);
+						janela[0].setBody("<div>"+ins+"</div>");
 					};
 			}
 		},

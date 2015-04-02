@@ -242,7 +242,7 @@ i3GEObuscaRapida =
 								+ ext
 								+ "\")' onmouseover=\"i3GEObuscaRapida.mostraxy('"
 								+ ext
-								+ "','extent')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>";
+								+ "','extent')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='ticfind' /></td></tr>";
 					}
 					ins += "</table>";
 				}
@@ -300,7 +300,7 @@ i3GEObuscaRapida =
 										+ retorno.data.geonames[i].lugares[j].nome
 										+ "')\" onmouseover=\"i3GEObuscaRapida.mostraxy('"
 										+ wkt
-										+ "','wkt')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>";
+										+ "','wkt')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='ticfind' /></td></tr>";
 							}
 						}
 						ins += "</table>";
