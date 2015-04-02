@@ -1128,11 +1128,12 @@ i3GEO.pluginI3geo =
 	        		   layerMashup : function(camada,epsg) {
 	        			   var p;
 	        			   //o gerador de OGC e especifico desse plugin, pois aceita parametros diferentes do original i3geo/ogc.php
+	        			   //TODO usar tile conforme parametro no mapfile
 	        			   p = new OpenLayers.Layer.WMS(
 	        				   camada.tema,
 	        				   i3GEO.configura.locaplic+"ferramentas/parametrossql/ogc.php?tema="+camada.name+"&",
 	        				   {layers:camada.name,SRS:'EPSG:'+epsg,FORMAT:'image/png'},
-	        				   {singleTile:false,isBaseLayer:false,visibility:true,plugini3geo:"parametrossql"}
+	        				   {singleTile:false,isBaseLayer:false,visibility:true,plugini3geo:"parametrossql","pluginparametros":camada.plugini3geo.parametros}
 	        			   );
 	        			   return p;
 	        		   }

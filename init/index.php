@@ -231,7 +231,7 @@ botoesIni.push({
 	"img":"../imagens/saiku_free_small.png",
 	"href":"../ferramentas/saiku/esquemaxml.php?locaplic="+window.location.href.replace("/init/index.php",""),
 	"titulo":$trad(25,g_traducao_init),
-	"subtitulo": " <a target=_blank src='https://medium.com/@Meteorite_BI/so-people-who-land-on-our-community-download-page-will-notice-a-subtle-difference-when-they-click-1b61aca316c5' >"+$trad(29,g_traducao_init)+"</a>",
+	"subtitulo": " <a style='cursor:pointer;' target=_blank src='https://medium.com/innovative-business-intelligence/so-people-who-land-on-our-community-download-page-will-notice-a-subtle-difference-when-they-click-1b61aca316c5' >"+$trad(29,g_traducao_init)+"</a>",
 	},{
 	"img":"../imagens/gvsig.jpg",
 	"href":"../pacotes/gvsig/gvsig2mapfile/upload.htm",
