@@ -165,8 +165,7 @@ i3GEO.mapa =
 				Dw = YAHOO.util.Dom.getViewportWidth();
 				Dh = YAHOO.util.Dom.getViewportHeight();
 				i3GEO.tamanhodoc = [
-					Dw,
-					Dh
+					Dw, Dh
 				];
 				if (ativo === true) {
 					setTimeout(function() {
@@ -444,10 +443,10 @@ i3GEO.mapa =
 			if (!cookies) {
 				cookies = i3GEO.util.pegaDadosLocal("preferenciasDoI3Geo");
 			}
-			// TODO remover eval
 			if (cookies) {
 				props = cookies.split("::");
 				nprops = props.length;
+				//nao tente remover eval com window[], nao funciona com namespace
 				for (i = 0; i < nprops; i++) {
 					try {
 						temp = props[i].split("|");
@@ -551,8 +550,7 @@ i3GEO.mapa =
 							re = new RegExp("legendack_", "g");
 							retorno.data.legenda = retorno.data.legenda.replace(re, "liblegendack_");
 							legenda =
-								"<div class='botoesLegendaFlutuante'>"
-									+ "<input type='button' value='"
+								"<div class='botoesLegendaFlutuante'>" + "<input type='button' value='"
 									+ $trad("mostraTodosLegenda")
 									+ "' id='legendaMostraTodos' />"
 									+ "<input type='button' value='"
@@ -561,15 +559,16 @@ i3GEO.mapa =
 									+ "<input type='button' value='PNG' id='legendaExpImagem' />"
 									+ "</div>"
 									+ "<div id='i3GEOconteudoLegenda' class='i3GEOconteudoLegendaClass' style='width:100%;height:100%;'><div>"
-									+ retorno.data.legenda + "</div>";
+									+ retorno.data.legenda
+									+ "</div>";
 						}
 						if (legenda != "" && idleg) {
 							ins = "";
 							// mostra o icone que permite liberar a legenda (usado quando nao esta em uma janela flutuante)
 							if (i3GEO.mapa.legendaHTML.incluiBotaoLibera === true) {
 								ins +=
-									'<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -35px; top: -22px;">'
-										+ $trad("x11") + '</p></div>';
+									'<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -35px; top: -22px;">' + $trad("x11")
+										+ '</p></div>';
 							}
 							re = new RegExp("<img src='' />", "g");
 							legenda = legenda.replace(re, "");
@@ -755,8 +754,11 @@ i3GEO.mapa =
 					}
 				};
 				titulo =
-					"<span class='i3GEOconeFerramenta i3GEOiconeLegenda' title='" + $trad("P3") + "'></span>"
-						+ "<div id='legendaTituloI' style='display:block;' >" + $trad("p3") + "</div>";
+					"<span class='i3GEOconeFerramenta i3GEOiconeLegenda' title='" + $trad("P3")
+						+ "'></span>"
+						+ "<div id='legendaTituloI' style='display:block;' >"
+						+ $trad("p3")
+						+ "</div>";
 				janela = i3GEO.janela.cria(largura + "px", altura + "px", "", "", "", titulo, "wlegenda", false, "hd", cabecalho, minimiza);
 				$i("wlegenda_corpo").style.backgroundColor = "white";
 				i3GEO.mapa.legendaHTML.ID = "wlegenda_corpo";
@@ -780,14 +782,12 @@ i3GEO.mapa =
 				i3GEO.janela.cria(
 					"400px",
 					"300px",
-					i3GEO.configura.locaplic
-					+ "/ferramentas/conectarwms/listalayers.php?servico="+servico,
+					i3GEO.configura.locaplic + "/ferramentas/conectarwms/listalayers.php?servico=" + servico,
 					"",
 					"",
-					$trad("a4")
-					+ " <a class=ajuda_usuario target=_blank href='"
-					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=4&idajuda=28' >&nbsp;&nbsp;&nbsp;</a>",
+					$trad("a4") + " <a class=ajuda_usuario target=_blank href='"
+						+ i3GEO.configura.locaplic
+						+ "/ajuda_usuario.php?idcategoria=4&idajuda=28' >&nbsp;&nbsp;&nbsp;</a>",
 					"i3GEO.conectarwms",
 					false,
 					"hd",
@@ -906,11 +906,14 @@ i3GEO.mapa =
 				};
 				if (i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps") {
 					url =
-						i3GEO.configura.locaplic + "/ferramentas/congelamapa/openlayers.php?g_sid=" + i3GEO.configura.sid + "&ext="
+						i3GEO.configura.locaplic + "/ferramentas/congelamapa/openlayers.php?g_sid="
+							+ i3GEO.configura.sid
+							+ "&ext="
 							+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 					titulo =
 						"<span class='i3GEOconeFerramenta i3GEOiconeCongela'></span>" + "Mapa"
-							+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+							+ " <a class=ajuda_usuario target=_blank href='"
+							+ i3GEO.configura.locaplic
 							+ "/ajuda_usuario.php?idcategoria=6&idajuda=123' >&nbsp;&nbsp;&nbsp;</a>";
 					i3GEO.janela.cria("500px", "350px", url, "", "", titulo, idjanela, false, "hd", cabecalho, minimiza);
 				}
@@ -1421,8 +1424,11 @@ i3GEO.mapa =
 													if (valor !== "" && link !== "") {
 														temp +=
 															"<span>" + alias
-																+ " : <a style='color:blue;cursor:pointer' target=_blanck href='" + link
-																+ "' >" + valor + "</a></span><br>";
+																+ " : <a style='color:blue;cursor:pointer' target=_blanck href='"
+																+ link
+																+ "' >"
+																+ valor
+																+ "</a></span><br>";
 													}
 													if (img !== "") {
 														temp += img + "<br>";

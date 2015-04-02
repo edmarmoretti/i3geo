@@ -599,6 +599,8 @@ if(empty($fundo)){
 }
 ?>
 i3GEO.Interface = {openlayers:{googleLike:false}};
+//evita que seja mostrada a opcao de salvar figura
+i3GEO.editorOL.nomeFuncaoSalvar = "";
 var temp = i3GEO.editorOL.minresolution,
 	r = [ i3GEO.editorOL.minresolution ];
 for (var j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
