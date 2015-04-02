@@ -1,4 +1,3 @@
-//XODO incluir opcao de controle do modo tile
 function montaNoLayer(codigo,indice){
 	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','layer','"+codigo+"','"+indice+"')\" title=sobe src=\"../imagens/34.png\" />";
 	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','layer','"+codigo+"','"+indice+"')\" title=desce src=\"../imagens/33.png\" />";

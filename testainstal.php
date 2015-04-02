@@ -304,22 +304,51 @@ catch(ee)
 		$enderecocgi = $proto.$server.$locmapserv;
 		echo "Voc&ecirc; pode testar o CGI clicando <a href='".$enderecocgi."' target='_blank'>aqui</a>, se o programa responder corretamente, dever&aacute; aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'\n" ;
 
-		$f = @fopen("temas/teste.txt",w);
-		@fclose($f);
-		if (!file_exists("temas/teste.txt")){
+		if (file_exists("temas/teste.txt")){
+			echo "<br><br>Removendo arquivo de testes temas/teste.txt";
+			unlink("temas/teste.txt");
+		}
+		if (file_exists("temas/teste.txt")){
 			echo "<br><span style='color:red'>N&atilde;o foi possivel escrever na pasta temas. O sistema de administracao pode nao funcionar corretamente</span><br>";
 		}
-
-		echo "<br>Escrevendo nos diret&oacute;rios tempor&aacute;rios...<br>";
+		else{
+			echo "<br><br>Testando criar arquivo temas/teste.txt";
+			$f = @fopen("temas/teste.txt",w);
+			@fclose($f);
+			if (!file_exists("temas/teste.txt")){
+				echo "<br><span style='color:red'>N&atilde;o foi possivel escrever na pasta temas. O sistema de administracao pode nao funcionar corretamente</span><br>";
+			}
+			else{
+				unlink("temas/teste.txt");
+				echo "<br>ok.";
+			}
+		}
+		echo "<br><br>Escrevendo nos diret&oacute;rios tempor&aacute;rios...<br><br>";
+		if (file_exists($dir_tmp."/teste.txt")){
+			//echo "<br><br>Removendo arquivo de testes $dir_tmp/teste.txt<br>";
+			unlink($dir_tmp."/teste.txt");
+		}
+		if (file_exists($dir_tmp."/teste.txt")){
+			saindo("\nN&atilde;o foi poss&iacute;vel testar o diret&oacute;rio tempor&aacute;rio $dir_tmp");
+		}
 		$f = @fopen($dir_tmp."/teste.txt",w);
 		@fclose($f);
-		if (file_exists($dir_tmp."/teste.txt")) echo "do Mapserver ok<br>\n"; else saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio $dir_tmp");
-
+		if (file_exists($dir_tmp."/teste.txt")) {
+			echo " do Mapserver <br>ok<br>\n"; 
+		}
+		else {
+			saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio $dir_tmp");
+		}
 		$f = @fopen(session_save_path()."/teste.txt",w);
 		@fclose($f);
-		if (file_exists(session_save_path()."/teste.txt")) echo "da SESSION PHP ok<br>\n"; else saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio da SESSION");
+		if (file_exists(session_save_path()."/teste.txt")) {
+			echo " da SESSION PHP <br>ok<br>\n"; 
+		}
+		else {
+			saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio da SESSION");
+		}
 
-		echo " \n";
+		echo " <br>\n";
 		echo "Carregando o map_file base...\n";
 		$versao = versao();
 		$versao = $versao["principal"];
@@ -373,7 +402,7 @@ catch(ee)
 		}
 
 		echo "<br>O arquivo mapfile de iniciliza&ccedil;&atilde;o &eacute;: $f<br>\n";
-		echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no $f):</b>\n";
+		echo "<br><b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no $f):</b>\n";
 		$imgo = @$mapa->draw();
 		$nome = ($imgo->imagepath)."teste.png";
 		echo "<p>Nome da imagem gerada: $nome </p>";
