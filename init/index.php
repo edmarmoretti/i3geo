@@ -61,7 +61,7 @@ body {
 	text-align: center;
 	font-size: 0.6cm;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	background-color: rgb(250,250,250);
+	background-color: rgb(250, 250, 250);
 	maergin: auto;
 }
 
@@ -112,61 +112,75 @@ a {
 	text-decoration: none;
 	font-size: 14px;
 }
+
 .borda {
-    background-color: #990000;
-    padding: 5px 0px 5px 0px;
-    text-align: left;
-    width: 100%;
+	background-color: #990000;
+	padding: 5px 0px 5px 0px;
+	text-align: left;
+	width: 100%;
 }
 </style>
 </head>
 <body class=" yui-skin-sam ">
-		<div class="borda">
-			<div id="bandeiras"></div>
-			<div><a href="http://www.softwarepublico.gov.br" target="_blank" style="color:white;"><b>i3Geo</b></a></div>
+	<div class="borda">
+		<div id="bandeiras"></div>
+		<div>
+			<a href="http://www.softwarepublico.gov.br" target="_blank" style="color: white;"><b>i3Geo 6.0</b> </a>
 		</div>
+	</div>
 
-			<div id="conteudo" style="position: relative; top: -10px; margin:auto;max-width:1000px;left: 10px;">
-				<div style="margin-top: 5px;">
-					<?php
-					if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
+	<div id="conteudo" style="position: relative; top: -10px; margin: auto; max-width: 1000px; left: 10px;">
+		<div style="margin-top: 5px;">
+			<?php
+			if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
 						echo "<p style='font-size:14px;color:red;margin-top:20px;'><script>document.write($"."trad(19,g_traducao_init));</script>";
 					}
 					?>
-					<br>
-					<div id="botoes" style=""></div>
+			<br>
+			<div id="botoes" style=""></div>
 
-					<div class="r"><table><tbody><tr><td>
-					<script type="text/javascript" src="http://www.openhub.net/p/150688/widgets/project_users.js?style=gray"></script>
-					</td></tr></tbody></table></div>
-				</div>
-				<div style="float: left">
-					<a href="#" class="r" style="width: 230px; height: 380px;">
-						<table>
-							<tr>
-								<td><a class="twitter-timeline" href="https://twitter.com/i3geo" data-widget-id="288061915689787392" width="220" height="350">Tweets @i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-								</td>
-							</tr>
-						</table>
-					</a> <a href="#" class="r" style="width: 230px; height: 380px;">
-						<table>
-							<tr>
-								<td><a class="twitter-timeline" href="https://twitter.com/search?q=@i3geo" data-widget-id="288053202174222336" width="220" height="350">Tweets #i3Geo</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-								</td>
-							</tr>
-						</table>
-					</a>
-					<a href="#" class="r" style="width: 345px; height: 220px;">
-						<table>
-							<tr>
-								<td>
-								<script type="text/javascript" src="http://www.openhub.net/p/150688/widgets/project_basic_stats.js"></script>
-								</td>
-							</tr>
-						</table>
-					</a>
-				</div>
+			<div class="r">
+				<table>
+					<tbody>
+						<tr>
+							<td>
+								<script type="text/javascript" src="http://www.openhub.net/p/150688/widgets/project_users.js?style=gray"></script>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
+		</div>
+		<div style="float: left">
+			<a href="#" class="r" style="width: 230px; height: 380px;">
+				<table>
+					<tr>
+						<td>
+							<a class="twitter-timeline" href="https://twitter.com/i3geo" data-widget-id="288061915689787392" width="220" height="350">Tweets @i3Geo</a>
+							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+						</td>
+					</tr>
+				</table>
+			</a> <a href="#" class="r" style="width: 230px; height: 380px;">
+				<table>
+					<tr>
+						<td>
+							<a class="twitter-timeline" href="https://twitter.com/search?q=@i3geo" data-widget-id="288053202174222336" width="220" height="350">Tweets #i3Geo</a>
+							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+						</td>
+					</tr>
+				</table>
+			</a> <a href="#" class="r" style="width: 345px; height: 220px;">
+				<table>
+					<tr>
+						<td>
+							<script type="text/javascript" src="http://www.openhub.net/p/150688/widgets/project_basic_stats.js"></script>
+						</td>
+					</tr>
+				</table>
+			</a>
+		</div>
+	</div>
 
 </body>
 <script>
@@ -250,14 +264,6 @@ botoesIni.push({
 	"titulo":$trad(14,g_traducao_init)
 	},{
 	"img":"accessories-dictionary.png",
-	"href":"../documentacao/manual-i3geo-6_0-pt.pdf",
-	"titulo":$trad(15,g_traducao_init)
-	},{
-	"img":"accessories-dictionary.png",
-	"href":"../documentacao/manual-admin-i3geo-6_0-pt.pdf",
-	"titulo":$trad(21,g_traducao_init)
-	},{
-	"img":"accessories-dictionary.png",
 	"href":"../guia_de_migracao.txt",
 	"titulo":$trad(17,g_traducao_init)
 	},{
@@ -270,8 +276,20 @@ botoesIni.push({
 	"titulo":$trad(28,g_traducao_init)
 	},{
 	"img":"tools-report-bug.png",
-	"href":"http://svn.softwarepublico.gov.br/trac/i3geo",
+	"href":"http://svn.softwarepublico.gov.br/trac/i3geo/newticket",
 	"titulo":$trad(16,g_traducao_init)
+	},{
+	"img":"trac_logo_mini.png",
+	"href":"http://svn.softwarepublico.gov.br/trac/i3geo/wiki",
+	"titulo":$trad(30,g_traducao_init)
+	},{
+	"img":"logo_psp.png",
+	"href":"http://www.softwarepublico.gov.br/ver-comunidade?community_id=1444332",
+	"titulo":$trad(31,g_traducao_init)
+	},{
+	"img":"mailman.jpg",
+	"href":"http://lists.osgeo.org/cgi-bin/mailman/listinfo/i3geo",
+	"titulo":$trad(32,g_traducao_init)
 	}
 );
 mostraBotoes();
