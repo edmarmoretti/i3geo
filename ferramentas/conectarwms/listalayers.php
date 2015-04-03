@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Este programa e utilizado pela ferramenta buscainde
  * E uma copia da ferramenta conctarwms sem mostrar as guias de esolha de servico
@@ -53,6 +53,7 @@ p{
 <input type=hidden id=servico value="<?php echo $_GET["servico"];?>" />
 
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
+
 <script type="text/javascript" src="index.js"></script>
 
 <script type="text/javascript" >

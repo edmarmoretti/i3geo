@@ -170,22 +170,18 @@ Veja:
 */
 function clickGuia3(codLayer)
 {
-	var listatemas = function(retorno)
-	{
+	var listatemas = function(retorno){
 		g_idws = "";
 		aguarde("none");
-		if ((retorno.data != "erro") && (retorno.data != undefined))
-		{
+		if ((retorno.data != "erro") && (retorno.data != undefined)){
 			$i("listatemas").innerHTML = retorno.data;
 			g_tipo = ""; //tipo de tema
 			g_tema = ""; //tema selecionado do ws
 			g_legenda = ""; //legenda do tema
 			g_nometema = ""; //nome do tema
 			g_sld = "";
-			if ($i("suportasld"))
-			{
-				if ($i("suportasld").value != "nao")
-				{
+			if ($i("suportasld")){
+				if ($i("suportasld").value != "nao")				{
 					if ($i("textoSLD"))
 					$i("textoSLD").style.display = "block";
 				}
@@ -193,10 +189,13 @@ function clickGuia3(codLayer)
 			//ativa um layer caso tenha sido enviado como um parametro no inicio da ferramenta
 			ativaAutoLayer(codLayer);
 		}
-		else
-		{$i("listatemas").innerHTML = "erro";}
+		else{
+			$i("listatemas").innerHTML = "erro";
+		}
+		//TODO remover essa funcao em prol de classesjs/classe_guias
+		mostraGuia("guia3");
 	};
-	mostraGuia("guia3");
+
 	if ($i("servico").value == ""){
 		i3GEO.janela.tempoMsg($trad('servico',i3GEOF.conectarwms.dicionario));
 	}
@@ -213,14 +212,17 @@ function clickGuia3(codLayer)
 }
 function ativaAutoLayer(codLayer){
 	if(codLayer && codLayer != ""){
-		var container = $i("listatemas"),
-			rs = container.getElementsByTagName("input"),
-			nrs = re.lenght,
-			i,r;
-		for(i = 0; i < nrs; i++){
-			r = rs[i];
-			if(r.type === "radio" && r.name === codLayer){
-				r.onclick.call();
+		var container, rs, nrs, i, r;
+		container = $i("listatemas");
+		if(container){
+			rs = container.getElementsByTagName("input");
+			nrs = rs.length;
+
+			for(i = 0; i < nrs; i++){
+				r = rs[i];
+				if(r.type === "radio" && r.value === codLayer){
+					r.onclick.call();
+				}
 			}
 		}
 	}
