@@ -232,7 +232,7 @@ if(isset($version) && !isset($VERSION)){
 	$VERSION = $version;
 }
 if(!isset($VERSION)){
-	$req->setParameter("VeRsIoN","1.0.0");
+	$req->setParameter("VeRsIoN","1.1.1");
 }
 if (!isset($intervalo)){
 	$intervalo = "0,5000";
@@ -391,6 +391,7 @@ else{
 						$l->set("dump",MS_TRUE);
 						$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 						$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+						
 						if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png")){
 							$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
 							$l->setmetadata("wms_attribution_logourl_format","image/png");
@@ -756,7 +757,7 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 		$req->setParameter("FORMAT","image/png");
 	}
 	$legenda = $oMap->legend;
-	$legenda->set("status",MS_DEFAULT);
+	$legenda->set("status",MS_ON);
 	$l->set("minscaledenom",0);
 	$l->set("maxscaledenom",0);
 	if($req->getValueByName("FORMAT") == "text/html"){
