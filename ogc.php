@@ -391,7 +391,7 @@ else{
 						$l->set("dump",MS_TRUE);
 						$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 						$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-						
+
 						if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png")){
 							$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
 							$l->setmetadata("wms_attribution_logourl_format","image/png");

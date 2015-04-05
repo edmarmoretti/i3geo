@@ -30,21 +30,6 @@ p{
 				<img alt="" src="../../imagens/aguarde.gif" />Aguarde...
 			</div>
 			<div style="text-align:left;top:0px;left:0px;font-size:10px">
-				<div id=men2 style="top:5px;left:0px;">
-				Ap&oacute;s a conex&atilde;o ser estabelecida e surgir a lista de temas, selecione a camada que ser&aacute; adicionada ao mapa.<br>
-				</div>
-				<div id=textoSLD style="display:none;font-size:10px" >
-				<p>Opcionalmente vc pode indicar o tipo de representa&ccedil;&atilde;o que ser&aacute; utilizada.<br>
-				N&atilde;o altere o tipo de representa&ccedil;&atilde;o se a camada escolhida for uma imagem (dados raster) ou se voc&ecirc; tiver d&uacute;vidas sobre ela.<br>
-				<div class=styled-select><select id=tiporep >
-				<option value="">---</option>
-				<option value="poligonal">poligonal</option>
-				<option value="linear">linear</option>
-				<option value="pontual">pontual</option>
-				</select>
-				</div>
-				</div>
-
 			</div>
 			<div id=listatemas style="display:block;position:relative;top:10px;left:0px;">
 			</div>
@@ -83,6 +68,7 @@ for(i = 0; i < n; i++){
 	}
 }
 g_locaplic = "../..";
+//console.info(codLayer)
 clickGuia3(codLayer);
 </script>
 </body>

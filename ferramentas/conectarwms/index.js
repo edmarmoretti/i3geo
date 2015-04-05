@@ -47,13 +47,19 @@ g_idws = "";
 var g_tipows = "";//obtido do mapfile
 ativaGuias("");
 mostraGuia("guia1");
-$i("guia1").onclick = function()
-{
-	mostraGuia("guia1");
-	$i("resultadoget").innerHTML = "";
-};
-$i("guia2").onclick = function(){clickGuia2();};
-$i("guia3").onclick = function(){clickGuia3();};
+if($i("guia1")){
+	$i("guia1").onclick = function()
+	{
+		mostraGuia("guia1");
+		$i("resultadoget").innerHTML = "";
+	};
+}
+if($i("guia2")){
+	$i("guia2").onclick = function(){clickGuia2();};
+}
+if($i("guia3")){
+	$i("guia3").onclick = function(){clickGuia3();};
+}
 function aguarde(valor){
 	document.getElementById("aguarde").style.display = valor;
 }
@@ -170,6 +176,8 @@ Veja:
 */
 function clickGuia3(codLayer)
 {
+	//TODO remover essa funcao em prol de classesjs/classe_guias
+	mostraGuia("guia3");
 	var listatemas = function(retorno){
 		g_idws = "";
 		aguarde("none");
@@ -190,10 +198,8 @@ function clickGuia3(codLayer)
 			ativaAutoLayer(codLayer);
 		}
 		else{
-			$i("listatemas").innerHTML = "erro";
+			//$i("listatemas").innerHTML = "erro";
 		}
-		//TODO remover essa funcao em prol de classesjs/classe_guias
-		mostraGuia("guia3");
 	};
 
 	if ($i("servico").value == ""){
@@ -213,6 +219,13 @@ function clickGuia3(codLayer)
 function ativaAutoLayer(codLayer){
 	if(codLayer && codLayer != ""){
 		var container, rs, nrs, i, r;
+		codLayer = codLayer.split(":");
+		if(codLayer.length > 0){
+			codLayer = codLayer[1];
+		}
+		else{
+			codLayer = codLayer[0];
+		}
 		container = $i("listatemas");
 		if(container){
 			rs = container.getElementsByTagName("input");
@@ -222,11 +235,14 @@ function ativaAutoLayer(codLayer){
 				r = rs[i];
 				if(r.type === "radio" && r.value === codLayer){
 					r.onclick.call();
+					r.checked = true;
+					r.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.scrollIntoView(true);
 				}
 			}
 		}
 	}
 }
+
 /*
 Function: registraws
 
@@ -284,7 +300,10 @@ function seltema(tipo,tema,legenda,nometema,nomecamada,sldflag)
 			{window.parent.i3GEO.atualiza();}
 		};
 		aguarde("block");
-		var tiporep = $i("tiporep").value;
+		var tiporep = "";
+		if($i("tiporep")){
+			tiporep = $i("tiporep").value;
+		}
 		var url = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid;
 		if($i("servico").value.split("?").length === 1){
 			$i("servico").value = $i("servico").value+"?";
