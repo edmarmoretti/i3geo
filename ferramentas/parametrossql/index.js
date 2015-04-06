@@ -270,14 +270,15 @@ i3GEOF.parametrossql = {
 			p = i3GEO.editorOL.layerPorParametro("LAYERS",camada.name);
 			//muda os parametros
 			if(p){
+				$i("i3GEOFparametrosSqlAplicar").innerHTML = "Aguarde...";
 				reg = new RegExp("plugin" + "([=])+([a-zA-Z0-9_]*)");
 				p.url = p.url.replace(reg, "");
 				p.url = p.url + "&plugin=" + valores.join(",");
 				p.setUrl(p.url+"&");
-				i3GEO.janela.destroi("i3GEOF.parametrossql");
 				p.setVisibility(false);
 				p.setVisibility(true);
 			}
+			i3GEO.janela.destroi("i3GEOF.parametrossql");
 		}
 	},
 	cancela: function(){
