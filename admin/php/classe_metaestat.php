@@ -183,8 +183,7 @@ class Metaestat{
 	 * @return Array
 	 */
 	function execSQL($sql,$id="",$convTexto=true){
-		$buscar = array("drop","update","insert","delete");
-		$sql = str_ireplace($buscar,"",$sql);
+		$sql = str_ireplace(array("update","delete","insert","--","drop",";"),"",$sql);
 		try	{
 			$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
 		}

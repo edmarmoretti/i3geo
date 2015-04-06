@@ -268,6 +268,8 @@ function autenticaUsuario($usuario,$senha){
 	include(dirname(__FILE__)."/conexao.php");
 	$senhamd5 = md5($senha);
 	//verifica se o usuario esta cadastrado no ms_configura.php em $i3geomaster
+	//echo "select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1";exit;
+	//exit;
 	if(verificaMaster($usuario,$senha) == true){
 		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$locaplic);
 		$op = pegadados("SELECT O.codigo FROM ".$esquemaadmin."i3geousr_operacoes AS O");

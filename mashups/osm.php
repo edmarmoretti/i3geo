@@ -279,7 +279,7 @@ if($temas != ""){
 						}
 						// echo $visivel;exit;
 						// var_dump($visiveis);exit;
-						if($nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM"){
+						if($nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM" && $layern->getmetadata("PLUGINI3GEO") == ""){
 							if($layern->type != 2 && $layern->type != 3){
 								$opacidade = 1;
 							}

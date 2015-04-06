@@ -873,6 +873,7 @@ class Arvore
 	{
 		//echo "<br>".$sql;
 		//error_reporting(0);
+		$sql = str_ireplace(array("update","delete","insert","--","drop",";"),"",$sql);
 		$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
 		if($q)
 		{

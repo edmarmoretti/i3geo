@@ -198,6 +198,8 @@ function pegaDados($sql,$locaplic="")
 	*/
 	include(dirname(__FILE__)."/conexao.php");
 	error_reporting(0);
+	//$dbh deve ser definido com somente leitura, mas por prevencao:
+	$sql = str_ireplace(array("update","delete","insert","--","drop",";"),"",$sql);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 	if($q)
 	{

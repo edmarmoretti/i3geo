@@ -60,8 +60,10 @@ if (isset($_GET))
 {
 	foreach(array_keys($_GET) as $k)
 	{
+		$k = str_ireplace(array(" ","delete","drop","update","insert","exec","system",";"),"",$k);
 		if ($_GET[$k] != "''"){
 			$v = strip_tags($_GET[$k]);
+			$v = str_ireplace(array("delete","drop","update","insert","exec","system",";"),"",$v);
 			eval("\$".$k."='".(trim($v))."';");
 		}
 	}
@@ -72,8 +74,11 @@ if (isset($_POST))
 	//var_dump($_POST);exit;
 	foreach(array_keys($_POST) as $k)
 	{
+		$k = str_ireplace(array(" ","delete","drop","update","insert","exec","system",";"),"",$k);
+		$_POST[$k] = str_ireplace(array("delete","drop","update","insert","exec","system",";"),"",$_POST[$k]);
 		if (($_POST[$k] != "''"))
 		eval("\$".$k."='".(strip_tags(trim($_POST[$k])))."';");
+		
 		if (($_POST[$k] != "''") && ($k == "cpaint_argument"))
 		{
 			foreach($_POST["cpaint_argument"] as $argumento_)

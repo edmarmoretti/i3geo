@@ -76,9 +76,9 @@ switch (strtoupper($funcao))
 					$chaves = implode(",",$chaves);
 					$filtro = $layer1->getFilterString();
 					if(!empty($valores)){
-						$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$chaves);
+						$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--","drop",";"),"",$chaves);
 						$chaves = explode(",",$chaves);
-						$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$valores);
+						$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--","drop",";"),"",$valores);
 						$valores = explode(",",strip_tags($valores));
 						$n = count($chaves);
 						for($i = 0; $i < $n; $i++){
