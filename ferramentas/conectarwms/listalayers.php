@@ -21,24 +21,29 @@ body {
 p{
 	text-align: left;
 }
+.guiaobj {
+	background-color: white;
+	display: block;
+	height: 97%;
+	left: 0;
+	overflow: auto;
+	text-align: left;
+	top: 0;
+	width: 98%;
+}
 </style>
 </head>
-<body class="yui-skin-sam" >
-	<div id=geral style="left:0px;top:0px;">
+<body class="yui-skin-sam" style="background-color: white;">
+
 		<div class=guiaobj id="guia3obj" style="left:0px;display:block;">
-			<div id="aguarde">
-				<img alt="" src="../../imagens/aguarde.gif" />Aguarde...
-			</div>
-			<div style="text-align:left;top:0px;left:0px;font-size:10px">
-			</div>
 			<div id=listatemas style="display:block;position:relative;top:10px;left:0px;">
+			Aguarde...
 			</div>
 		</div>
-	</div>
+
 <input type=hidden id=servico value="<?php echo $_GET["servico"];?>" />
 
-<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
-
+<script type="text/javascript" src="../../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="index.js"></script>
 
 <script type="text/javascript" >

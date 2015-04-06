@@ -549,7 +549,7 @@ i3GEO.Interface =
 			 * Propriedade: TILES
 			 *
 			 * Indica se ser&aacute; utilizado o modo de navega&ccedil;&atilde;o em tiles em todas as camadas do mapa
-			 * 
+			 *
 			 * Ao bloquear o modo tile, o cache de imagens n&atilde;o poder&aacute; ser realizado
 			 *
 			 * Tipo:
@@ -1172,7 +1172,7 @@ i3GEO.Interface =
 					{
 						displayOutsideMaxExtent:true,
 						displayInLayerSwitcher:false,
-						visibility:true, 
+						visibility:true,
 						strategies: [new OpenLayers.Strategy.Fixed()],
 						protocol: new OpenLayers.Protocol.HTTP(
 							{
@@ -1729,12 +1729,13 @@ i3GEO.Interface =
 						return;
 					}
 					lonlat = i3geoOL.getLonLatFromPixel(p);
-
 					if (i3GEO.Interface.openlayers.googleLike === true) {
 						projWGS84 = new OpenLayers.Projection("EPSG:4326");
 						proj900913 = new OpenLayers.Projection("EPSG:900913");
-						point = new OpenLayers.LonLat(lonlat.lon, lonlat.lat);
-						lonlat = point.transform(proj900913, projWGS84);
+						if(lonlat){
+							point = new OpenLayers.LonLat(lonlat.lon, lonlat.lat);
+							lonlat = point.transform(proj900913, projWGS84);
+						}
 					}
 					try {
 						d = i3GEO.calculo.dd2dms(lonlat.lon, lonlat.lat);
@@ -2519,7 +2520,7 @@ i3GEO.Interface =
 						+ "isPng: true," + "name: '" + nomeLayer + "'" + "});";
 				eval(s);
 				*/
-				
+
 				i3GEOTileO = new google.maps.ImageMapType({
 					getTileUrl: function(coord, zoom) {
 						var url = i3GEO.configura.locaplic + "/classesphp/mapa_googlemaps.php?g_sid=" + i3GEO.configura.sid + "&cache=" + cache
@@ -2531,7 +2532,7 @@ i3GEO.Interface =
 					isPng: true,
 					name: nomeLayer
 				});
-				
+
 				/*
 				i3GEOTileO = new google.maps.ImageMapType({
 					getTileUrl: function(coord, zoom) {
@@ -2549,8 +2550,8 @@ i3GEO.Interface =
 					projection : i3GeoMap.getProjection(),
 					b : i3GeoMap.getBounds()
 				});
-				
-				
+
+
 				google.maps.event.addListener(i3GEOTileO, 'tilesloaded', function() {
 					var l = i3GEO.Interface.googlemaps.retornaObjetoLayer(nomeLayer);
 					var currentBounds = i3GeoMap.getBounds();
@@ -2573,13 +2574,13 @@ i3GEO.Interface =
 				var source = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
 					dest = "+title= Google Mercator EPSG:900913 +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs",
 					p = new Proj4js.Point(parseInt(x,10), parseInt(y,10));
-				
+
 				Proj4js.defs["WGS84"] = source;
 				Proj4js.defs["EPSG:900913"] = dest;
 
-				source = new Proj4js.Proj('WGS84');    
+				source = new Proj4js.Proj('WGS84');
 				dest = new Proj4js.Proj('EPSG:900913');
-				
+
 				Proj4js.transform(source, dest, p);
 				return p;
 			},

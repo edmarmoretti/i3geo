@@ -304,7 +304,7 @@ i3GEO.coordenadas =
 		 * {string} - (opcional) se nao for definido sera utilizado objposicaocursor.dmsy
 		 */
 		atualizaLocalizarGeo : function(id, x, y) {
-			if(!id){
+			if (!id) {
 				id = "coordgeotabela";
 			}
 			if (typeof (x) === 'undefined') {
@@ -353,21 +353,59 @@ i3GEO.coordenadas =
 		 */
 		criaMascaraDMS : function(prefixo, titulo, caixa) {
 			var ins =
-				'<table class="i3GeoMascaraCoord" id=' + prefixo + ' ><tr>' + "<td>" + caixa + "&nbsp;</td>"
-					+ '<td style=width:10px;text-align:right >&nbsp;X:&nbsp;</td>' + '<td>'
-					+ $inputText('', '', prefixo + 'xg', 'grau', '3', '-00') + '</td>' + '<td>'
-					+ $inputText('', '', prefixo + 'xm', 'minuto', '2', '00') + '</td>' + '<td>'
-					+ $inputText('', '', prefixo + 'xs', 'segundo', '5', '00.00') + '</td>' + '<td>&nbsp;Y:&nbsp;'
-					+ $inputText('', '', prefixo + 'yg', 'grau', '3', '-00') + '</td>' + '<td>'
-					+ $inputText('', '', prefixo + 'ym', 'minuto', '2', '00') + '</td>' + '<td>'
-					+ $inputText('', '', prefixo + 'ys', 'segundo', '5', '00.00') + '</td>', temp =
-				'var ' + prefixo + 'xxx = i3GEO.calculo.dms2dd($i(\'' + prefixo + 'xg\').value,$i(\'' + prefixo + 'xm\').value,$i(\''
-					+ prefixo + 'xs\').value);' + 'var ' + prefixo + 'yyy = i3GEO.calculo.dms2dd($i(\'' + prefixo + 'yg\').value,$i(\''
-					+ prefixo + 'ym\').value,$i(\'' + prefixo + 'ys\').value);'
-					+ 'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,' + prefixo + 'xxx,' + prefixo + 'yyy);';
+				'<table class="i3GeoMascaraCoord" id=' + prefixo
+					+ ' ><tr>'
+					+ "<td>"
+					+ caixa
+					+ "&nbsp;</td>"
+					+ '<td style=width:10px;text-align:right >&nbsp;X:&nbsp;</td>'
+					+ '<td>'
+					+ $inputText('', '', prefixo + 'xg', 'grau', '3', '-00')
+					+ '</td>'
+					+ '<td>'
+					+ $inputText('', '', prefixo + 'xm', 'minuto', '2', '00')
+					+ '</td>'
+					+ '<td>'
+					+ $inputText('', '', prefixo + 'xs', 'segundo', '5', '00.00')
+					+ '</td>'
+					+ '<td>&nbsp;Y:&nbsp;'
+					+ $inputText('', '', prefixo + 'yg', 'grau', '3', '-00')
+					+ '</td>'
+					+ '<td>'
+					+ $inputText('', '', prefixo + 'ym', 'minuto', '2', '00')
+					+ '</td>'
+					+ '<td>'
+					+ $inputText('', '', prefixo + 'ys', 'segundo', '5', '00.00')
+					+ '</td>', temp =
+				'var ' + prefixo
+					+ 'xxx = i3GEO.calculo.dms2dd($i(\''
+					+ prefixo
+					+ 'xg\').value,$i(\''
+					+ prefixo
+					+ 'xm\').value,$i(\''
+					+ prefixo
+					+ 'xs\').value);'
+					+ 'var '
+					+ prefixo
+					+ 'yyy = i3GEO.calculo.dms2dd($i(\''
+					+ prefixo
+					+ 'yg\').value,$i(\''
+					+ prefixo
+					+ 'ym\').value,$i(\''
+					+ prefixo
+					+ 'ys\').value);'
+					+ 'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,'
+					+ prefixo
+					+ 'xxx,'
+					+ prefixo
+					+ 'yyy);';
 			ins +=
-				'<td><img class=ticfind style="margin-left:8px;" title=zoom onclick="' + temp + '" src="' + i3GEO.configura.locaplic + "/imagens/branco.gif"
-					+ '" /></td>' + "</tr></table>";
+				'<td><img class=ticfind style="margin-left:8px;" title=zoom onclick="' + temp
+					+ '" src="'
+					+ i3GEO.configura.locaplic
+					+ "/imagens/branco.gif"
+					+ '" /></td>'
+					+ "</tr></table>";
 			return ins;
 		},
 		/**
@@ -418,11 +456,24 @@ i3GEO.coordenadas =
 		 */
 		criaMascaraMetrica : function(prefixo, titulo, caixa) {
 			var ins =
-				"<table id=" + prefixo + " class='i3GeoMascaraCoord' ><tr>" + "<td>" + caixa + "&nbsp;<td>"
-					+ "<td style=width:100px;text-align:right >" + titulo + " X:&nbsp;</td>" + "<td>"
-					+ $inputText("", "", prefixo + "X", "X", "12", "00") + "&nbsp;</td>" + "<td>Y:"
-					+ $inputText("", "", prefixo + "Y", "Y", "12", "00") + "&nbsp;</td>" + "<td>Zn:"
-					+ $inputText("", "", prefixo + "ZN", "Zona", "2", "--") + "&nbsp;</td>" + "</tr></table>";
+				"<table id=" + prefixo
+					+ " class='i3GeoMascaraCoord' ><tr>"
+					+ "<td>"
+					+ caixa
+					+ "&nbsp;<td>"
+					+ "<td style=width:100px;text-align:right >"
+					+ titulo
+					+ " X:&nbsp;</td>"
+					+ "<td>"
+					+ $inputText("", "", prefixo + "X", "X", "12", "00")
+					+ "&nbsp;</td>"
+					+ "<td>Y:"
+					+ $inputText("", "", prefixo + "Y", "Y", "12", "00")
+					+ "&nbsp;</td>"
+					+ "<td>Zn:"
+					+ $inputText("", "", prefixo + "ZN", "Zona", "2", "--")
+					+ "&nbsp;</td>"
+					+ "</tr></table>";
 			return ins;
 		},
 		/**
@@ -449,10 +500,24 @@ i3GEO.coordenadas =
 				funcao = "i3GEO.coordenadas.geohash.zoomCodigo(\'" + prefixo + "Codigo\')";
 			}
 			ins =
-				"<table id=" + prefixo + " class='i3GeoMascaraCoord' ><tr>" + "<td>" + caixa + "&nbsp;<td>"
-					+ "<td style=width:100px;text-align:right >" + titulo + " :&nbsp;</td>" + "<td>"
-					+ $inputText("", "", prefixo + "Codigo", "Cod", "12", "00") + "&nbsp;</td>" + '<td><img class=tic title=zoom onclick="'
-					+ funcao + '" src="' + i3GEO.configura.locaplic + "/imagens/branco.gif" + '" /></td>' + "</tr></table>";
+				"<table id=" + prefixo
+					+ " class='i3GeoMascaraCoord' ><tr>"
+					+ "<td>"
+					+ caixa
+					+ "&nbsp;<td>"
+					+ "<td style=width:100px;text-align:right >"
+					+ titulo
+					+ " :&nbsp;</td>"
+					+ "<td>"
+					+ $inputText("", "", prefixo + "Codigo", "Cod", "12", "00")
+					+ "&nbsp;</td>"
+					+ '<td><img class=tic title=zoom onclick="'
+					+ funcao
+					+ '" src="'
+					+ i3GEO.configura.locaplic
+					+ "/imagens/branco.gif"
+					+ '" /></td>'
+					+ "</tr></table>";
 			return ins;
 		},
 		/**
@@ -490,6 +555,9 @@ i3GEO.coordenadas =
 		 *
 		 */
 		atualizaProj4 : function(onde, configProj, x, y) {
+			if (i3GEO.coordenadas.formato === "bloco" && i3GEO.coordenadas.padrao !== configProj) {
+				return;
+			}
 			var zona, temp, p, destino = "", iu = i3GEO.util;
 			try {
 				if (!$i(onde + configProj + "ZN")) {
@@ -626,6 +694,25 @@ i3GEO.coordenadas =
 		 * {string} - (opcional) id onde o resultado ser&aacute; mostrado (ir&aacute; ignorar os ids definidos em coordenadas.config)
 		 */
 		mostraCoordenadas : function(ativaMovimento, onde, x, y) {
+			//FIXME As coordenadas metricas nao funcionam em OSM
+			if (i3GEO.Interface.openlayers.googleLike === true) {
+				i3GEO.coordenadas.config = {
+					"geoProj" : {
+						idhtml : "localizarxy",
+						tipo : "geo",
+						titulo : "Geo",
+						ativo : true,
+						defepsg : ""
+					},
+					"dd" : {
+						idhtml : "localizarxy",
+						tipo : "metrica",
+						titulo : "D&eacute;c. de grau",
+						ativo : true,
+						defepsg : ""
+					}
+				};
+			}
 			try {
 				var tipos = i3GEO.util.listaChaves(i3GEO.coordenadas.config), n = tipos.length, temp, ins = "", i = 0, caixa, janela, nomeFunc;
 				i3GEO.coordenadas.MODOTEXTO = "";
@@ -693,8 +780,7 @@ i3GEO.coordenadas =
 					onde = "i3GEOJanelaCoordenadas_corpo";
 
 					ins +=
-						"<br><a href='#' style='cursor:pointer;color:blue' onclick='new YAHOO.util.KeyListener(document.body,{alt:true,keys:67},{fn: function(type, args, obj){i3GEO.janela.tempoMsg(i3GEO.coordenadas.MODOTEXTO);}}).enable();' >"
-							+ "Clique aqui para ativar Alt+C para poder capturar as coordenadas</a>";
+						"<br><a href='#' style='cursor:pointer;color:blue' onclick='new YAHOO.util.KeyListener(document.body,{alt:true,keys:67},{fn: function(type, args, obj){i3GEO.janela.tempoMsg(i3GEO.coordenadas.MODOTEXTO);}}).enable();' >" + "Clique aqui para ativar Alt+C para poder capturar as coordenadas</a>";
 				}
 				if (onde !== "" && $i(onde)) {
 					$i(onde).innerHTML = ins;
@@ -705,13 +791,20 @@ i3GEO.coordenadas =
 						if (temp.tipo === "geo") {
 							if (ativaMovimento === true) {
 								if (i3GEO.Interface.TABLET === true) {
-									i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEO.coordenadas.atualizaLocalizarGeo('" + onde + tipos[i] + "')"]);
+									i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
+										"i3GEO.coordenadas.atualizaLocalizarGeo('" + onde + tipos[i] + "')"
+									]);
 								} else {
-									i3GEO.eventos.adicionaEventos("MOUSEMOVE",["i3GEO.coordenadas.atualizaLocalizarGeo('" + onde + tipos[i] + "')"]);
+									i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
+										"i3GEO.coordenadas.atualizaLocalizarGeo('" + onde + tipos[i] + "')"
+									]);
 								}
 							}
 							if (typeof (x) !== 'undefined') {
-								i3GEO.coordenadas.atualizaLocalizarGeo(onde + tipos[i], i3GEO.calculo.dd2dms(x)[0], i3GEO.calculo.dd2dms(y)[0]);
+								i3GEO.coordenadas.atualizaLocalizarGeo(
+									onde + tipos[i],
+									i3GEO.calculo.dd2dms(x)[0],
+									i3GEO.calculo.dd2dms(y)[0]);
 							}
 						} else {
 							nomeFunc = "i3GEO.coordenadas.atualizaProj4";
@@ -720,9 +813,13 @@ i3GEO.coordenadas =
 							}
 							if (ativaMovimento === true) {
 								if (i3GEO.Interface.TABLET === true) {
-									i3GEO.eventos.adicionaEventos("MOUSECLIQUE",[nomeFunc + "('" + onde + "','" + tipos[i] + "')"]);
+									i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
+										nomeFunc + "('" + onde + "','" + tipos[i] + "')"
+									]);
 								} else {
-									i3GEO.eventos.adicionaEventos("MOUSEMOVE",[nomeFunc + "('" + onde + "','" + tipos[i] + "')"]);
+									i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
+										nomeFunc + "('" + onde + "','" + tipos[i] + "')"
+									]);
 								}
 							}
 							if (typeof (x) !== 'undefined') {
@@ -733,9 +830,13 @@ i3GEO.coordenadas =
 				}
 				if (ativaMovimento === true) {
 					if (i3GEO.Interface.TABLET === true) {
-						i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEO.coordenadas.limpaModoTexto()"]);
+						i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
+							"i3GEO.coordenadas.limpaModoTexto()"
+						]);
 					} else {
-						i3GEO.eventos.adicionaEventos("MOUSEMOVE",["i3GEO.coordenadas.limpaModoTexto()"]);
+						i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
+							"i3GEO.coordenadas.limpaModoTexto()"
+						]);
 					}
 				}
 				if (i3GEO.coordenadas.formato === "bloco") {
@@ -763,11 +864,7 @@ i3GEO.coordenadas =
 		 */
 		geohash : {
 			BITS : [
-				16,
-				8,
-				4,
-				2,
-				1
+				16, 8, 4, 2, 1
 			],
 			BASE32 : "0123456789bcdefghjkmnpqrstuvwxyz",
 			refine_interval : function(interval, cd, mask) {

@@ -44,13 +44,15 @@ g_tema = ""; //tema selecionado do ws
 g_legenda = ""; //legenda do tema
 g_nometema = ""; //nome do tema
 g_idws = "";
+g_sid = window.parent.i3GEO.configura.sid;
 var g_tipows = "";//obtido do mapfile
-ativaGuias("");
-mostraGuia("guia1");
+//ativaGuias("");
+//mostraGuia("guia1");
+i3GEO.guias.mostraGuiaFerramenta("guia1");
 if($i("guia1")){
-	$i("guia1").onclick = function()
-	{
-		mostraGuia("guia1");
+	$i("guia1").onclick = function(){
+		//mostraGuia("guia1");
+		i3GEO.guias.mostraGuiaFerramenta("guia1");
 		$i("resultadoget").innerHTML = "";
 	};
 }
@@ -61,6 +63,7 @@ if($i("guia3")){
 	$i("guia3").onclick = function(){clickGuia3();};
 }
 function aguarde(valor){
+	if(document.getElementById("aguarde"))
 	document.getElementById("aguarde").style.display = valor;
 }
 /*
@@ -138,7 +141,8 @@ Veja:
 */
 function clickGuia2()
 {
-	mostraGuia("guia2");
+	//mostraGuia("guia2");
+	i3GEO.guias.mostraGuiaFerramenta("guia2");
 	if ($i("servico").value == ""){i3GEO.janela.tempoMsg($trad('servico',i3GEOF.conectarwms.dicionario));}
 	else
 	{
@@ -176,8 +180,8 @@ Veja:
 */
 function clickGuia3(codLayer)
 {
-	//TODO remover essa funcao em prol de classesjs/classe_guias
-	mostraGuia("guia3");
+	//mostraGuia("guia3");
+	i3GEO.guias.mostraGuiaFerramenta("guia3");
 	var listatemas = function(retorno){
 		g_idws = "";
 		aguarde("none");
@@ -201,7 +205,6 @@ function clickGuia3(codLayer)
 			//$i("listatemas").innerHTML = "erro";
 		}
 	};
-
 	if ($i("servico").value == ""){
 		i3GEO.janela.tempoMsg($trad('servico',i3GEOF.conectarwms.dicionario));
 	}
@@ -218,13 +221,13 @@ function clickGuia3(codLayer)
 }
 function ativaAutoLayer(codLayer){
 	if(codLayer && codLayer != ""){
-		var container, rs, nrs, i, r;
-		codLayer = codLayer.split(":");
-		if(codLayer.length > 0){
-			codLayer = codLayer[1];
+		var container, rs, nrs, i, r, codLayer1;
+		codLayer1 = codLayer.split(":");
+		if(codLayer1.length > 0){
+			codLayer1 = codLayer1[1];
 		}
 		else{
-			codLayer = codLayer[0];
+			codLayer1 = codLayer1[0];
 		}
 		container = $i("listatemas");
 		if(container){
@@ -233,7 +236,7 @@ function ativaAutoLayer(codLayer){
 
 			for(i = 0; i < nrs; i++){
 				r = rs[i];
-				if(r.type === "radio" && r.value === codLayer){
+				if(r.type === "radio" && (r.value === codLayer || r.value === codLayer1)){
 					r.onclick.call();
 					r.checked = true;
 					r.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.scrollIntoView(true);
@@ -340,7 +343,7 @@ s {string} - src do iframe
 */
 function abrejanelaIframe(){
 	var s = g_locaplic+"/admin/html/webservices.html?tipo=wms";
-	var janelaeditor = window.parent.i3GEO.janela.cria(
+	var janelaeditor = i3GEO.janela.cria(
 			"1000",
 			"500",
 			s,
