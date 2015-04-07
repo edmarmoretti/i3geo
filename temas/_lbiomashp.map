@@ -14,7 +14,7 @@ MAP
       "download"	"SIM"
       "itembuscarapida"	"CD_LEGENDA"
       "ITENS"	"CD_LEGENDA"
-      "permiteogc"	"sim"
+      "permiteogc"	"nao"
       "permitekml"	"sim"
       "TEMA"	"Biomas shapefile (acentuação)"
       "ESCALA" "1000000"

@@ -24,7 +24,7 @@ body {
 	margin-left: 10px;
 	font-size: 14px;
 	margin: auto;
-    width: 1100px;
+    width: 1150px;
 }
 .CodeMirror {
 	height:500px;
@@ -32,7 +32,7 @@ body {
 	width: 500px;
 }
 #selectComboMapfile {
-	width:520px;
+	width:570px;
 	text-overflow: ellipsis;
 	font-size:	14px;
 }
@@ -142,14 +142,15 @@ Alt-left - Início da linha<br>
 			
 			</fieldset>
 			
-			<fieldset style="position: relative; float: left; width:520px;margin: 5px;padding:10px;left:10px;">
+			<fieldset style="position: relative; float: left; width:580px;margin: 5px;padding:10px;left:10px;">
 			<legend>Mapfile em edi&ccedil;&atilde;o</legend>
 			<div id=filtroDeLetras ></div>
 			<div id="comboMapfiles" >Aguarde...</div>
 			<?php
+			//TODO O preview nao e mostrado quando o servico WMS e bloqueado
 			$mapfile = str_replace("\\","/",$mapfile);
 
-			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=450&fundo=".$mapfile."&temas=".$mapfile."' cols=100 rows=20 style='position:relative;top:2px;overflow:hidden;width:525px;height:500px;border:1px solid gray;'>";
+			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?servidor=../admin/php/preview.php&fundo=&nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=550&altura=400&temas=".$mapfile."' style='position:relative;top:2px;overflow:hidden;width:100%;height:450px;border:0px solid gray;'>";
 			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
 
