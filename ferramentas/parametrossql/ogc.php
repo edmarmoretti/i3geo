@@ -13,6 +13,12 @@ include(dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 $temas = $tema;
+if(isset($_GET["sld"]) || isset($_GET["filter"])){
+	$cache = false;
+}
+if(isset($_GET["DESLIGACACHE"]) && $_GET["DESLIGACACHE"] == "sim"){
+	$cache = false;
+}
 //
 //pega os endere&ccedil;os para compor a url de chamada do gerador de web services
 //ogc.php
