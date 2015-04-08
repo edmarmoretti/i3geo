@@ -798,7 +798,7 @@ i3GEO.barraDeBotoes =
 						if (l[b].conteudo) {
 							temp.innerHTML = l[b].conteudo;
 						}
-						if (l[b].dica && i3GEO.barraDeBotoes.TIPO != "emlinha") {
+						if (l[b] && l[b].dica && i3GEO.barraDeBotoes.TIPO != "emlinha") {
 							$i(l[b].iddiv).onmouseover = function(e) {
 								i3GEO.barraDeBotoes.mostraJanela(this, l[b].dica, e);
 							};
@@ -806,19 +806,19 @@ i3GEO.barraDeBotoes =
 								i3GEO.barraDeBotoes.mostraJanela(this, "", e);
 							};
 						}
-						if (l[b].titulo && i3GEO.barraDeBotoes.TIPO === "emlinha") {
+						if (l[b] && l[b].titulo && i3GEO.barraDeBotoes.TIPO === "emlinha") {
 							new YAHOO.widget.Tooltip(l[b].iddiv + "_tip", {
 								context : l[b].iddiv,
 								text : l[b].titulo
 							});
 						}
-						if (l[b].funcaoonclick) {
+						if (l[b] && l[b].funcaoonclick) {
 							temp.onclick = l[b].funcaoonclick;
 							if (l[b].iddiv == padrao) {
 								l[b].funcaoonclick();
 							}
 						}
-						if (l[b].constroiconteudo) {
+						if (l[b] && l[b].constroiconteudo) {
 							eval(l[b].constroiconteudo);
 						}
 					}

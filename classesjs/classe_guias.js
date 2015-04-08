@@ -16,16 +16,16 @@
  */
 /**
  * Licen&ccedil;a
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -39,61 +39,61 @@ i3GEO.guias =
 	{
 		/**
 		 * Variavel: ATUAL
-		 * 
+		 *
 		 * Guia que est&aacute; ativa ou que ser&aacute; ativada ao iniciar o mapa
-		 * 
+		 *
 		 * O nome da guia &eacute; a definida na vari&aacute;vel i3GEO.guias.CONFIGURA
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {string}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * temas
 		 */
 		ATUAL : "temas",
 		/**
 		 * Propriedade: ALTURACORPOGUIAS
-		 * 
+		 *
 		 * Altura em pixels que ser&aacute; aplicado em cada guia
-		 * 
+		 *
 		 * Por default, a altura &eacute; calculada automaticamente, mas em alguns casos, pode ser necess&aacute;rio especificar o valor
 		 * para permitir um melhor ajuste do layout do mapa
-		 * 
+		 *
 		 * Mantenha como 0 para que o c&aacute;lculo seja autom&aacute;tico
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {numeric}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * 0
 		 */
 		ALTURACORPOGUIAS : 0,
 		/**
 		 * Propriedade: CONFIGURA
-		 * 
+		 *
 		 * Define os par&acirc;metros de cada guia que ser&aacute; mostrada no mapa, como t&iacute;tulo, conte&uacute;do, etc.
-		 * 
+		 *
 		 * Voc&ecirc; pode modificar o nome de uma guia como no exemplo
-		 * 
+		 *
 		 * i3GEO.guias.CONFIGURA.legenda.titulo = "nome diferente";
-		 * 
+		 *
 		 * Por padr&atilde;o s&atilde;o definidas as guias legenda, temas, adiciona e mapas (links)
-		 * 
+		 *
 		 * Exemplo:
-		 * 
+		 *
 		 * (start code)
-		 * 
+		 *
 		 * i3GEO.guias.CONFIGURA.legenda = { icone : "imagens/gisicons/show-legend.png", titulo : "Legenda", id : "guia4", idconteudo :
 		 * "guia4obj", click : function() { i3GEO.guias.mostra("legenda"); i3GEO.mapa.legendaHTML.cria("guia4obj"); } };
-		 * 
+		 *
 		 * (end)
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {objeto}
 		 */
 		CONFIGURA : {
@@ -268,70 +268,70 @@ i3GEO.guias =
 		},
 		/**
 		 * Propriedade: ORDEM
-		 * 
+		 *
 		 * Ordem de inclus&atilde;o das guias no mapa. Essa op&ccedil;&atilde;o &eacute; mais &uacute;til no caso do tipo sanfona, pois
 		 * nesse caso, a primeira guia &eacute; sempre a que fica ativa. Se esse parametro for uma string vazia, a ordem utilizada
 		 * ser&aacute; a ordem existente em i3GEO.guias.CONFIGURA.
-		 * 
+		 *
 		 * Ao ser definida, apenas as guias indicadas no array ser&atilde;o inclu&iacute;das
-		 * 
+		 *
 		 * Exemplo:
-		 * 
+		 *
 		 * i3GEO.guias.ORDEM = ["temas","adiciona","legenda"];
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {array}
 		 */
 		ORDEM : "",
 		/**
 		 * Propriedade: TIPO
-		 * 
+		 *
 		 * Tipo de guia
-		 * 
+		 *
 		 * Quando TIPO = "movel", a inicializa&ccedil;&atilde;o da guia &eacute; feita em i3GEO.inicia Isso &eacute; ne cess&aacute;rio pq a
 		 * guia m&oacute;vel s&oacute; pode ser criada ap&oacute;s o posicionamento do corpo do mapa
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {string}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * guia
-		 * 
+		 *
 		 * Values:
-		 * 
+		 *
 		 * guia|sanfona|tablet|movel
 		 */
 		TIPO : "guia",
 		/**
 		 * Propriedade: idguias
-		 * 
+		 *
 		 * ID do elemento DOM, criado pelo YUI, onde ser&atilde;o inseridas as guias
-		 * 
+		 *
 		 * Tipo:
-		 * 
+		 *
 		 * {String}
-		 * 
+		 *
 		 * Default:
-		 * 
+		 *
 		 * guiasYUI
 		 */
 		IDGUIAS : "guiasYUI",
 		/**
 		 * Function: cria
-		 * 
+		 *
 		 * Cria as guias com base na vari&aacute;vel i3GEO.guias.CONFIGURA
-		 * 
+		 *
 		 * As guias podem ser definidas no HTML do mapa, sem necessariamente estarem na vari&aacute;vel configura.<b> As guias, nesse caso,
 		 * devem ter como ID "guia'n'", por exemplo id="guia6". Para cada uma dessas guias deve haver um DIV com o conte&uacute;do. Esse DIV
 		 * deve ter como ID "guia'n'obj", por exemplo id="guia6obj". No caso de ser utilizado a guia m&oacute;vel, com i3GEO.guias.TIPO =
 		 * "movel" , "guia'n" n&atilde;o &eacute; necess&aacute;rio, uma vez que s&atilde;o utilizados os &iacute;cones definidos em
 		 * i3GEO.guias.CONFIGURA
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * {String} - id do elemento que conter&aacute; as guias
 		 */
 		cria : function(onde) {
@@ -399,9 +399,11 @@ i3GEO.guias =
 				//
 				if (arguments.length === 0) {
 					for (ng = 0; ng < nguias; ng++) {
-						i = $i(i3GEO.guias.CONFIGURA[guias[ng]].id);
-						if (i) {
-							onde = i.parentNode;
+						if(i3GEO.guias.CONFIGURA[guias[ng]]){
+							i = $i(i3GEO.guias.CONFIGURA[guias[ng]].id);
+							if (i) {
+								onde = i.parentNode;
+							}
 						}
 					}
 				} else {
@@ -481,10 +483,12 @@ i3GEO.guias =
 					guiaconteudo = $i(id);
 					if (guiaconteudo) {
 						if (guia.click === "" || guia.click === undefined) {
-							//eval('$i("' + id + '").onclick = function(event){i3GEO.guias.mostra("' + guias[g] + '");}');
-							$i(id).onclick = function(event){
-								i3GEO.guias.mostra(guias[g]);
-							};
+							//TODO remover eval
+							eval('$i("' + id + '").onclick = function(event){i3GEO.guias.mostra("' + guias[g] + '");}');
+							//nao funcionou! verificar em guias antigas
+							//$i(id).onclick = function(event){
+							//	i3GEO.guias.mostra(guias[g]);
+							//};
 						} else {
 							guiaconteudo.onclick = guia.click;
 						}
@@ -598,9 +602,9 @@ i3GEO.guias =
 		},
 		/**
 		 * Mostra no mapa uma determinada guia
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * {String} - nome da guia
 		 */
 		mostra : function(guia) {
@@ -611,6 +615,9 @@ i3GEO.guias =
 			// se a guia clicada j&aacute; estiver aberta na interface com
 			// TABLET
 			//
+			if (!$i(i3GEO.guias.CONFIGURA[guia].id)) {
+				return;
+			}
 			if (!$i(i3GEO.guias.CONFIGURA[guia].idconteudo)) {
 				return;
 			}
@@ -681,11 +688,11 @@ i3GEO.guias =
 		},
 		/**
 		 * Function: ativa
-		 * 
+		 *
 		 * Ativa uma determinada guia
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * {String} - guia que ser&aacute; ativada
 		 */
 		ativa : function(guia) {
@@ -796,17 +803,17 @@ i3GEO.guias =
 		},
 		/**
 		 * Mostra uma determinada guia em uma janela do tipo ferramenta.
-		 * 
+		 *
 		 * As guias s&atilde;o constru&iacute;das pelo construtor da ferramenta
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {String} - O elemento html cujo id for igual a guia+"obj" ter&aacute; seu estilo (display) definido como block, tornando-o
 		 * vis&iacute;vel
-		 * 
+		 *
 		 * {String} - Todos os elementos html que tiverem como id o namespace, seguindo por um n&uacute;mero e "obj", ter&atilde;o seu
 		 * estilo alterado para none, tornando-se invis&iacute;veis
-		 * 
+		 *
 		 */
 		mostraGuiaFerramenta : function(guia, namespace) {
 			var g, Dom = YAHOO.util.Dom;
@@ -820,19 +827,19 @@ i3GEO.guias =
 		},
 		/**
 		 * Function: ajustaGuiaFerramenta
-		 * 
+		 *
 		 * Ajusta as guias de uma janela para que sempre fiquem no topo da janela, aplicando o overflow ao conte&uacute;do das guias
-		 * 
+		 *
 		 * Deve ser utilizado pelas ferramentas ap&oacute;s a janela ter seu conte&uacute;do renderizado.
-		 * 
+		 *
 		 * Veja como exemplo a ferramenta tabela
-		 * 
+		 *
 		 * Paremeters:
-		 * 
+		 *
 		 * {string} - id da janela
-		 * 
+		 *
 		 * {string} - namespace da janela utilizado para definir os elementos DIV onde o conte&uacute;do &eacute; renderizado
-		 * 
+		 *
 		 */
 		ajustaGuiaFerramenta : function(idjanela, namespace) {
 			var c = $i(idjanela + "_corpo"), h, g, temp;
@@ -853,31 +860,31 @@ i3GEO.guias =
 		},
 		/**
 		 * Section: guiaMovel
-		 * 
+		 *
 		 * Controla as guias do tipo "movel", que apresenta uma janela retr&aacute;til onde as op&ccedil;&otilde;es s&atilde;o mostradas
 		 */
 		guiaMovel : {
 			/**
 			 * Propriedade: ABERTA
-			 * 
+			 *
 			 * Indica se a guia inicializar&aacute; aberta
-			 * 
+			 *
 			 * Type:
-			 * 
+			 *
 			 * {boolean}
-			 * 
+			 *
 			 * Default:
-			 * 
+			 *
 			 * false
 			 */
 			ABERTA : false,
 			/**
 			 * Propriedade: config
-			 * 
+			 *
 			 * Define os valores de posicionamento dos elementos que comp&otilde;em a guia
-			 * 
+			 *
 			 * Default:
-			 * 
+			 *
 			 * (start code) i3GEO.guias.guiaMovel.config = { larguraPuxador : 50, alturaPuxador : 319, alturaGuiaMovel : 0, larguraGuiaMovel :
 			 * 320, topGuiaMovel : 0, guias : { icones : [], ids : [], idsconteudos : [], titulos : [], chaves : [] }, posicao : [ "c", "r" ] };
 			 * (end)
@@ -906,7 +913,7 @@ i3GEO.guias =
 			left : 0,
 			/**
 			 * Function: inicia
-			 * 
+			 *
 			 * Inicializa a guia m&oacute;vel
 			 */
 			inicia : function() {
@@ -1106,9 +1113,9 @@ i3GEO.guias =
 			},
 			/**
 			 * Ativa o conte&uacute;do de determinada guia
-			 * 
+			 *
 			 * Parametro:
-			 * 
+			 *
 			 * chave {string} - c&oacute;digo da guia, definido em i3GEO.guias.CONFIGURA
 			 */
 			ativa : function(chave) {
@@ -1164,7 +1171,7 @@ i3GEO.guias =
 			},
 			/**
 			 * Function: abreFecha
-			 * 
+			 *
 			 * Abre ou fecha a guia m&oacute;vel
 			 */
 			abreFecha : function(forca) {
