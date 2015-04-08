@@ -505,49 +505,49 @@ i3GEO.arvoreDeCamadas =
 		LOCAPLIC : null,
 		/**
 		 * Propriedade: CONFIGICONES
-		 * 
+		 *
 		 * Define as configura&ccedil;&otilde;es dos &iacute;cones mostrados na raiz da &aacute;rvore e na raiz de cada tema
-		 * 
+		 *
 		 * Cada &iacute;cone possu&iacute; um nome e propriedades, descritas a seguir, e que sao usadas no formato
-		 * 
+		 *
 		 * i3GEO.arvoreDeCamadas.CONFIGICONES.refresh (onde refresh &eacute; o nome do &iacute;cone)
-		 * 
+		 *
 		 * &Iacute;cones dispon&iacute;veis:
-		 * 
+		 *
 		 * refresh - Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite atualizar a &acute;rvore
-		 * 
+		 *
 		 * opacidade - Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite alterar a transpar&ecirc;ncia das camadas existentes no mapa
-		 * 
+		 *
 		 * ferramentas - Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite abrir os atalhos para as ferramentas que atuam sobre o mapa
-		 * 
+		 *
 		 * imprimir - Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite abrir a ferramenta de impress&atilde;o
-		 * 
+		 *
 		 * animacao - Mostra ou n&atilde;o a op&ccedil;&atilde;o que permite gerar uma anima&ccedil;&atilde;o do mapa, ligando e desligando camadas
-		 * 
+		 *
 		 * olhoaberto
-		 * 
+		 *
 		 * olhofechado
-		 * 
+		 *
 		 * Propriedades de cada &iacute;cone:
-		 * 
+		 *
 		 * tipo - arvore|tema
-		 * 
+		 *
 		 * icone - caminho para a imagem relativo a localiza&ccedil;&atilde;o do i3Geo
-		 * 
+		 *
 		 * classe - nome da classe CSS que define o estilo do &iacute;cone
-		 * 
+		 *
 		 * funcao - string com a fun&ccedil;&atilde;o inserida em onclick
-		 * 
+		 *
 		 * title - string inserida em title
-		 * 
+		 *
 		 * dica - ajuda sobre como usar a ferramenta
-		 * 
+		 *
 		 * id - id que ser&aacute; inserido no &iacute;cone
-		 * 
+		 *
 		 * status - true|false ser&aacute; ou n&atilde;o inclu&#297;do na &aacute;rvore
-		 * 
+		 *
 		 * flag - true|false indicador tempor&aacute;rio se o &iacute;cone deve ou n&atilde;o ser inserido (o flag muda durante a montagem dos icones dos temas)
-		 * 
+		 *
 		 */
 		CONFIGICONES : {
 			"refresh" : {
@@ -763,7 +763,7 @@ i3GEO.arvoreDeCamadas =
 				tipo : "tema",
 				icone : "imagens/oxygen/16x16/download.png",
 				classe : "arvCamDownload",
-				funcao : "i3GEO.tema.download",
+				funcao : "i3GEO.tema.dialogo.download",
 				title : "Download",
 				dica : $trad("t6"),
 				id : "",
@@ -1203,12 +1203,12 @@ i3GEO.arvoreDeCamadas =
 					ins +=
 						"<img "
 						+ estilo(c.classe)
-						+ " onclick='i3GEO.util.animaClique(this);" 
-						+ c.funcao 
-						+ "' title='" 
-						+ c.title 
-						+ "' id='" 
-						+ c.id 
+						+ " onclick='i3GEO.util.animaClique(this);"
+						+ c.funcao
+						+ "' title='"
+						+ c.title
+						+ "' id='"
+						+ c.id
 						+ "'/>";
 				}
 			}
@@ -1782,14 +1782,14 @@ i3GEO.arvoreDeCamadas =
 				if(c.status === true && c.tipo === "tema" && c.flag === true){
 					html +=
 						"<img "
-						+ "class='" 
+						+ "class='"
 						+ c.classe
-						+ "' onclick='i3GEO.util.animaClique(this);" 
-						+ c.funcao 
+						+ "' onclick='i3GEO.util.animaClique(this);"
+						+ c.funcao
 						+ "(\"" + tema.name + "\",true,\"" + tema.link_tema + "\")"
-						+ "' title='" 
-						+ c.title 
-						+ "' id='" 
+						+ "' title='"
+						+ c.title
+						+ "' id='"
 						+ c.id
 						+ "' src='"
 						+ imb
