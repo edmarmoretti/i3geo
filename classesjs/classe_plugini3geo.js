@@ -15,16 +15,16 @@
 
 /**
  * Licen&ccedil;a
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -39,7 +39,7 @@ i3GEO.pluginI3geo =
 		OBJETOS : {},
 		/**
 		 * Lista de plugins
-		 * 
+		 *
 		 * Utilizado no editor de mapfiles do sistema de administracao
 		 */
 		// ZODO criar plugin geojson
@@ -66,11 +66,11 @@ i3GEO.pluginI3geo =
 		],
 		/**
 		 * Inicia a execucao de um plugin
-		 * 
+		 *
 		 * Camada e um objeto gerado pelo i3Geo quando uma camada e adicionada ao mapa O objeto i3GEO.arvoreDeCamadas.CAMADAS guarda todas
 		 * as camadas adicionadas ao mapa Ao adicionar uma camada pelo catalogo, o i3Geo verifica se a camada possui plugin e direciona para
 		 * ca Os plugins sao definidos como metadados em cada mapfile de cada tema
-		 * 
+		 *
 		 * Veja em i3geo/classesphp/classe_mapa.php funcao parametrostemas
 		 */
 		inicia : function(camada) {
@@ -142,7 +142,7 @@ i3GEO.pluginI3geo =
 		},
 		/**
 		 * Aplica as propriedades em um objeto do tipo tema
-		 * 
+		 *
 		 * tema e fornecido por i3GEO.arvoreDeCamadas o ajuste das propriedades e necessario para que as propriedades aparecam de forma
 		 * correta na arvore de camadas
 		 */
@@ -154,20 +154,18 @@ i3GEO.pluginI3geo =
 		},
 		/**
 		 * Cria um layer conforme a API em uso no aplicativo mashup
-		 * 
+		 *
 		 * Parametros
-		 * 
+		 *
 		 * {string} - nome da interface em uso openlayers|googlemaps
-		 * 
+		 *
 		 * {objeto} - objeto camada, conforme definido em i3GEO.arvoreDeCamadas.CAMADAS
-		 * 
+		 *
 		 * {string} - codigo epsg que sera usado no WMS
-		 * 
-		 * {string} - valor do metadata cache existente no mapfile
 		 */
-		layerMashup : function(Interface, camada, epsg, cache) {
+		layerMashup : function(Interface, camada, epsg) {
 			if (camada.plugini3geo && camada.plugini3geo != "" && i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup) {
-				return i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup(camada, epsg, cache);
+				return i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup(camada, epsg);
 			} else {
 				return [
 					false
@@ -176,29 +174,29 @@ i3GEO.pluginI3geo =
 		},
 		/**
 		 * Section: i3GEO.pluginI3geo.heatmap
-		 * 
+		 *
 		 * Mapa de calor
-		 * 
+		 *
 		 * Gera um layer do tipo mapa de calor e adiciona ao mapa
-		 * 
+		 *
 		 * As depend&ecirc;ncias em javascript sao carregadas via script tag por meio de ferramentas/heatmap
-		 * 
+		 *
 		 * Esse programa tamb&eacute;m obt&eacute;m os dados necess&aacute;rios ao plugin
-		 * 
+		 *
 		 * O layer existente no mapfile deve conter um metadata chamado PLUGINI3GEO
-		 * 
+		 *
 		 * Esse matadado deve conter uma string que ser&aacute; transformada em um objeto javascript para uso no plugin
-		 * 
+		 *
 		 * Exemplo:
-		 * 
+		 *
 		 * "PLUGINI3GEO" '{"plugin":"heatmap","parametros":{"tipoGradiente": "default","coluna":"teste","max":"10","radius":"15"}}'
-		 * 
+		 *
 		 * Coluna &eacute; a que cont&eacute;m os dados num&eacute;ricos que definem a quantidade de uma medida em cada ponto e &eacute;
 		 * usada para gerar a representa&ccedil;&atilde;o. Se for vazia, considera-se o valor como 1
-		 * 
+		 *
 		 * As cores das classes existentes no LAYER ser&atilde;o utilizadas para calcular as cores do mapa de calor. Se tipoGradiente for
 		 * igual a "default" ser&aacute; utilizado o gradiente padrão.
-		 * 
+		 *
 		 */
 		heatmap : {
 			linkAjuda : function() {
@@ -454,26 +452,26 @@ i3GEO.pluginI3geo =
 		},
 		/**
 		 * Section: i3GEO.pluginI3geo.markercluster
-		 * 
+		 *
 		 * Markercluster
-		 * 
+		 *
 		 * Gera um layer que agrupa pontos conforme a dist&acirc;ncia entre eles e insere um contador adiciona ao mapa
-		 * 
+		 *
 		 * As depend&ecirc;ncias em javascript sao carregadas via script tag por meio de ferramentas/markercluster
-		 * 
+		 *
 		 * Esse programa tamb&eacute;m obt&eacute;m os dados necess&aacute;rios ao plugin
-		 * 
+		 *
 		 * O layer existente no mapfile deve conter um metadata chamado PLUGINI3GEO
-		 * 
+		 *
 		 * Esse matadado deve conter uma string que ser&aacute; transformada em um objeto javascript para uso no plugin
-		 * 
+		 *
 		 * Exemplo:
-		 * 
+		 *
 		 * "PLUGINI3GEO" '{"plugin":"markercluster","parametros":{"coluna":"teste","gridSize":"50"}}'
-		 * 
+		 *
 		 * Coluna &eacute; a que cont&eacute;m os dados num&eacute;ricos que definem a quantidade de uma medida em cada ponto e &eacute;
 		 * usada para gerar a representa&ccedil;&atilde;o. Se for vazia, considera-se o valor como 1
-		 * 
+		 *
 		 */
 		markercluster : {
 			linkAjuda : function() {
@@ -770,21 +768,21 @@ i3GEO.pluginI3geo =
 		},
 		/**
 		 * Section: i3GEO.pluginI3geo.layerkml
-		 * 
+		 *
 		 * Adiciona ao mapa uma camada vetorial baseada em um arquivo Kml
-		 * 
+		 *
 		 * As depend&ecirc;ncias em javascript sao carregadas via script tag por meio de ferramentas/markercluster
-		 * 
+		 *
 		 * Esse programa tamb&eacute;m obt&eacute;m os dados necess&aacute;rios ao plugin
-		 * 
+		 *
 		 * O layer existente no mapfile deve conter um metadata chamado PLUGINI3GEO
-		 * 
+		 *
 		 * Esse matadado deve conter uma string que ser&aacute; transformada em um objeto javascript para uso no plugin
-		 * 
+		 *
 		 * Exemplo:
-		 * 
+		 *
 		 * "PLUGINI3GEO" '{"plugin":"layerkml","parametros":{"url":"teste"}}'
-		 * 
+		 *
 		 */
 		layerkml : {
 			linkAjuda : function() {
@@ -957,26 +955,26 @@ i3GEO.pluginI3geo =
 		},
 		/**
 		 * Section: i3GEO.pluginI3geo.parametrossql
-		 * 
+		 *
 		 * Adiciona ao mapa uma camada vetorial baseada em um arquivo mapfile normal por&eacute;m permite substituir par&acirc;metros no
 		 * item DATA do LAYER
-		 * 
+		 *
 		 * Com o plugin, o i3GEO ir&aacute; mostrar um formul&aacute;rio com par&acirc;metros quando o usu&aacute;rio adicionar uma camada
 		 * ao mapa
-		 * 
+		 *
 		 * O formul&aacute;rio colhe os valores que ser&atilde;o utilizados para substituir chaves inseridas no SQL
-		 * 
+		 *
 		 * O layer existente no mapfile deve conter um metadata chamado PLUGINI3GEO
-		 * 
+		 *
 		 * Esse matadado deve conter uma string que ser&aacute; transformada em um objeto javascript para uso no plugin
-		 * 
+		 *
 		 * Ver ferramentas/parametrossql
-		 * 
+		 *
 		 * Exemplo:
-		 * 
+		 *
 		 * "PLUGINI3GEO"
 		 * '{"plugin":"parametrossql","parametros":{[{"titulo":"","tipo":"input|select","valores":[],"chave":"","prog":"","ativo":sim|nao}]}}'
-		 * 
+		 *
 		 * A op&ccedil;&atilde;o &quot;ativo&quot; indica se o formul&aacute;rio ser&aacute; aberto ou n&atilde;o quando a camada for
 		 * adicionada ao mapa
 		 */
@@ -1128,14 +1126,24 @@ i3GEO.pluginI3geo =
 				aplicaPropriedades : function(camada) {
 					return camada;
 				},
-				layerMashup : function(camada, epsg, cache) {
+				layerMashup : function(camada, epsg) {
 					var p = [];
-					if (!cache) {
-						cache = "NAO";
+					if (!camada.cache) {
+						camada["cache"] = "NAO";
 					}
+					if (!camada.transitioneffect) {
+						camada["transitioneffect"] = "SIM";
+					}
+					if(camada["transitioneffect"] === "SIM"){
+						camada["transitioneffect"] = "resize";
+					}
+					else{
+						camada["transitioneffect"] = null;
+					}
+
 					// o gerador de OGC e especifico desse plugin, pois aceita parametros diferentes do original i3geo/ogc.php
 					// TODO usar tile conforme parametro no mapfile
-					if (cache === "NAO") {
+					if (camada.cache === "NAO") {
 						p.push(new OpenLayers.Layer.WMS(camada.tema, i3GEO.configura.locaplic + "ferramentas/parametrossql/ogc.php?tema="
 							+ camada.name
 							+ "&", {
@@ -1146,7 +1154,7 @@ i3GEO.pluginI3geo =
 							singleTile : false,
 							isBaseLayer : false,
 							visibility : true,
-							transitionEffect : null,
+							transitionEffect : camada["transitioneffect"],
 							plugini3geo : "parametrossql",
 							"pluginparametros" : camada.plugini3geo.parametros
 						}));
@@ -1162,7 +1170,7 @@ i3GEO.pluginI3geo =
 							tileOrigin : new OpenLayers.LonLat(-180, -90),
 							layername : camada.name,
 							type : "png",
-							transitionEffect : null,
+							transitionEffect : camada["transitioneffect"],
 							plugini3geo : "parametrossql",
 							"pluginparametros" : camada.plugini3geo.parametros
 						}));
@@ -1181,11 +1189,6 @@ i3GEO.pluginI3geo =
 							plugini3geo : "parametrossql",
 							"pluginparametros" : camada.plugini3geo.parametros
 						}));
-						// cria um clone WMS para efeitos de getfeatureinfo
-						// $objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'",
-						// "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent:
-						// "true", format: "image/png"},{displayInLayerSwitcher:false,singleTile:true,visibility:false,isBaseLayer:false})';
-
 					}
 					return p;
 				}

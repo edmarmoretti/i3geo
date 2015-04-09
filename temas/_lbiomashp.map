@@ -7,6 +7,7 @@ MAP
     METADATA
       "TIP"	"CD_LEGENDA"
       #"cache"	"sim"
+      "transitioneffect" "SIM"
       "CLASSE"	"SIM"
       "permitekmz"	"nao"
       "ITENSDESC"	"Teste de acentuação"
@@ -18,7 +19,7 @@ MAP
       "permitekml"	"sim"
       "TEMA"	"Biomas shapefile (acentuação)"
       "ESCALA" "1000000"
-      #"TILES"	"NAO"
+      "TILES"	"SIM"
     END # METADATA
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"

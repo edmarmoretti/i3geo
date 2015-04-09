@@ -44,7 +44,7 @@ MAP
       "arquivokmz"	""
       "permitekml"	"sim"
       "permiteogc"	"sim"
-      "transitioneffect"	"NAO"
+      "transitioneffect"	"SIM"
       "TEMA"	"Teste de plugin parametrizado com PHP"
       "convcaracter"	""
       "cortepixels"	"40"

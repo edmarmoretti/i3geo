@@ -19,16 +19,8 @@ if (browserType) {document.write("<div class=" + browserType + ">");if (browserV
 
 <div class="CPropriedade"><div class=CTopic><h3 class=CTitle><a name="ALTURACORPOGUIAS"></a>ALTURACORPOGUIAS</h3><div class=CBody><p>Altura em pixels que ser&aacute; aplicado em cada guia</p><p>Por default, a altura &eacute; calculada automaticamente, mas em alguns casos, pode ser necess&aacute;rio especificar o valor para permitir um melhor ajuste do layout do mapa</p><p>Mantenha como 0 para que o c&aacute;lculo seja autom&aacute;tico</p><h4 class=CHeading>Tipo</h4><p>{numeric}</p><h4 class=CHeading>Default</h4><p>0</p></div></div></div>
 
-<div class="CPropriedade"><div class=CTopic><h3 class=CTitle><a name="CONFIGURA"></a>CONFIGURA</h3><div class=CBody><p>Define os par&acirc;metros de cada guia que ser&aacute; mostrada no mapa, como t&iacute;tulo, conte&uacute;do, etc.</p><p>Voc&ecirc; pode modificar o nome de uma guia como no exemplo</p><p>i3GEO.guias.CONFIGURA.legenda.titulo = &ldquo;nome diferente&rdquo;;</p><p>Por padr&atilde;o s&atilde;o definidas as guias legenda, temas, adiciona e mapas (links)</p><h4 class=CHeading>Exemplo</h4><blockquote><pre class="prettyprint">i3GEO.guias.CONFIGURA.legenda = {
-     icone : &quot;imagens/gisicons/show-legend.png&quot;,
-     titulo : &quot;Legenda&quot;,
-     id : &quot;guia4&quot;,
-     idconteudo : &quot;guia4obj&quot;,
-     click : function() {
-         i3GEO.guias.mostra(&quot;legenda&quot;);
-         i3GEO.mapa.legendaHTML.cria(&quot;guia4obj&quot;);
-     }
-};</pre></blockquote><h4 class=CHeading>Tipo</h4><p>{objeto}</p></div></div></div>
+<div class="CPropriedade"><div class=CTopic><h3 class=CTitle><a name="CONFIGURA"></a>CONFIGURA</h3><div class=CBody><p>Define os par&acirc;metros de cada guia que ser&aacute; mostrada no mapa, como t&iacute;tulo, conte&uacute;do, etc.</p><p>Voc&ecirc; pode modificar o nome de uma guia como no exemplo</p><p>i3GEO.guias.CONFIGURA.legenda.titulo = &ldquo;nome diferente&rdquo;;</p><p>Por padr&atilde;o s&atilde;o definidas as guias legenda, temas, adiciona e mapas (links)</p><h4 class=CHeading>Exemplo</h4><blockquote><pre class="prettyprint">i3GEO.guias.CONFIGURA.legenda = { icone : &quot;imagens/gisicons/show-legend.png&quot;, titulo : &quot;Legenda&quot;, id : &quot;guia4&quot;, idconteudo :
+&quot;guia4obj&quot;, click : function() { i3GEO.guias.mostra(&quot;legenda&quot;); i3GEO.mapa.legendaHTML.cria(&quot;guia4obj&quot;); } };</pre></blockquote><h4 class=CHeading>Tipo</h4><p>{objeto}</p></div></div></div>
 
 <div class="CPropriedade"><div class=CTopic><h3 class=CTitle><a name="ORDEM"></a>ORDEM</h3><div class=CBody><p>Ordem de inclus&atilde;o das guias no mapa.&nbsp; Essa op&ccedil;&atilde;o &eacute; mais &uacute;til no caso do tipo sanfona, pois nesse caso, a primeira guia &eacute; sempre a que fica ativa.&nbsp; Se esse parametro for uma string vazia, a ordem utilizada ser&aacute; a ordem existente em i3GEO.guias.CONFIGURA.</p><p>Ao ser definida, apenas as guias indicadas no array ser&atilde;o inclu&iacute;das</p><h4 class=CHeading>Exemplo</h4><p>i3GEO.guias.ORDEM = [&ldquo;temas&rdquo;,&rdquo;adiciona&rdquo;,&rdquo;legenda&rdquo;];</p><h4 class=CHeading>Tipo</h4><p>{array}</p></div></div></div>
 
@@ -50,24 +42,7 @@ if (browserType) {document.write("<div class=" + browserType + ">");if (browserV
 
 <div class="CPropriedade"><div class=CTopic><h3 class=CTitle><a name="ABERTA"></a>ABERTA</h3><div class=CBody><p>Indica se a guia inicializar&aacute; aberta</p><h4 class=CHeading>Type</h4><p>{boolean}</p><h4 class=CHeading>Default</h4><p>false</p></div></div></div>
 
-<div class="CPropriedade"><div class=CTopic><h3 class=CTitle><a name="config"></a>config</h3><div class=CBody><p>Define os valores de posicionamento dos elementos que comp&otilde;em a guia</p><h4 class=CHeading>Default</h4><blockquote><pre class="prettyprint">i3GEO.guias.guiaMovel.config = {
-     larguraPuxador : 50,
-     alturaPuxador : 319,
-     alturaGuiaMovel : 0,
-     larguraGuiaMovel : 320,
-     topGuiaMovel : 0,
-     guias : {
-         icones : [],
-         ids : [],
-         idsconteudos : [],
-         titulos : [],
-         chaves : []
-     },
-     posicao : [
-         &quot;c&quot;,
-         &quot;r&quot;
-     ]
-};</pre></blockquote></div></div></div>
+<div class="CPropriedade"><div class=CTopic><h3 class=CTitle><a name="config"></a>config</h3><div class=CBody><p>Define os valores de posicionamento dos elementos que comp&otilde;em a guia</p><h4 class=CHeading>Default</h4><p>(start code) i3GEO.guias.guiaMovel.config = { larguraPuxador : 50, alturaPuxador : 319, alturaGuiaMovel : 0, larguraGuiaMovel : 320, topGuiaMovel : 0, guias : { icones : [], ids : [], idsconteudos : [], titulos : [], chaves : [] }, posicao : [ &ldquo;c&rdquo;, &ldquo;r&rdquo; ] }; (end)</p></div></div></div>
 
 <div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Functions"></a>Functions</h3></div></div>
 
