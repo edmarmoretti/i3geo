@@ -224,7 +224,7 @@ if(isset($_GET["tms"])){
 	$lat2 = ($y+1) / $n * 180.0 - 90.0;
 	//essa funcao termina o processo se a imagem existir
 	if($cache == true){
-		carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+		carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"],$_GET["plugin"],$_GET["tema"]);
 	}
 	$layer0 = $oMap->getlayer(0);
 	//
@@ -259,7 +259,7 @@ if(isset($_GET["tms"])){
 		exit;
 	}
 	if($cache == true){
-		salvaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+		salvaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"],$_GET["plugin"],$_GET["tema"]);
 	}
 	renderNocacheTms();
 }
@@ -469,8 +469,11 @@ function renderNocacheTms(){
 		header("Content-type: image/png");
 	}
 }
-function carregaCacheImagem($cachedir,$map,$tms){
+function carregaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 	global $dir_tmp;
+	if(!empty($plugin)){
+		$tms = str_replace($tema,$tema.md5($plugin),$tms);
+	}
 	if($cachedir == ""){
 		$nome = $dir_tmp."/cache".$tms;
 	}
@@ -489,8 +492,11 @@ function carregaCacheImagem($cachedir,$map,$tms){
 		exit;
 	}
 }
-function salvaCacheImagem($cachedir,$map,$tms){
+function salvaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 	global $img,$dir_tmp,$cortePixels;
+	if(!empty($plugin)){
+		$tms = str_replace($tema,$tema.md5($plugin),$tms);
+	}
 	if($cachedir == ""){
 		$nome = $dir_tmp."/cache".$tms;
 	}
