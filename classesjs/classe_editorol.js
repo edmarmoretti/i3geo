@@ -328,10 +328,16 @@ i3GEO.editorOL = {
 	layerPorParametro: function(parametro,valor){
 		var layers = i3GEO.editorOL.mapa.layers,
 			nlayers = layers.length,
-			ins = false,i;
+			ins = [],i;
 		for(i=0;i<nlayers;i++){
-			if(layers[i].params && layers[i].params[parametro] && layers[i].params[parametro] === valor){
-				ins = layers[i];
+			if(layers[i][parametro] || layers[i][parametro.toLowerCase()]){
+				if(layers[i][parametro] === valor || layers[i][parametro.toLowerCase()] === valor){
+					ins.push(layers[i]);
+				}
+			} else {
+				if(layers[i].params && layers[i].params[parametro] && layers[i].params[parametro] === valor){
+					ins.push(layers[i]);
+				}
 			}
 		}
 		return ins;
@@ -616,7 +622,7 @@ i3GEO.editorOL = {
 					if(i3GEO.editorOL.legendahtml === true){
 						//os parametros FORMAT e SERVICE sao inseridos de forma redundante para grantir
 						//caso seja um TMS
-						url = url.replace("image%2Fpng","text/html") 
+						url = url.replace("image%2Fpng","text/html")
 							+ "&FORMAT=text/html&SERVICE=WMS";
 						//verifica se a camada veio de um plugin de classe_plugini3geo
 						//e insere o icone se for necessario

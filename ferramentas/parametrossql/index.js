@@ -235,7 +235,7 @@ i3GEOF.parametrossql = {
 		cp.call(p,"foo",temp);
 	},
 	aplicar: function(camada){
-		var fim,cp,p,onde = $i("i3GEOFparametrosSQLForm"),
+		var temp, fim,cp,p,onde = $i("i3GEOFparametrosSQLForm"),
 			campos,n,i,chaves = [], valores = [];
 		campos = onde.getElementsByTagName("input");
 		n = campos.length
@@ -267,9 +267,11 @@ i3GEOF.parametrossql = {
 		}
 		else if(i3GEO.editorOL.mapa){
 			//pega o layer
-			p = i3GEO.editorOL.layerPorParametro("LAYERS",camada.name);
+			temp = i3GEO.editorOL.layerPorParametro("LAYERS",camada.name);
 			//muda os parametros
-			if(p){
+			n = temp.length;
+			for (i = 0; i < n; i++){
+				p = temp[i];
 				p.setVisibility(false);
 				p.clearGrid();
 				$i("i3GEOFparametrosSqlAplicar").innerHTML = "Aguarde...";
@@ -284,14 +286,16 @@ i3GEOF.parametrossql = {
 	},
 	cancela: function(){
 		var fim,cp,p;
-		fim = function(){
-			i3GEO.atualiza();
-		};
-		p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
-			+ "&funcao=remover"
-			+ "&tema=" + i3GEOF.parametrossql.tema;
-		cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"foo",fim);
+		if(typeof i3geoOL != 'undefined' || typeof i3GeoMap != 'undefined'){
+			fim = function(){
+				i3GEO.atualiza();
+			};
+			p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
+				+ "&funcao=remover"
+				+ "&tema=" + i3GEOF.parametrossql.tema;
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"foo",fim);
+		}
 	}
 };
