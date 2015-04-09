@@ -6,7 +6,7 @@ MAP
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
     METADATA
       "TIP"	"TIPO,NOMELOC,ANOCRIA"
-      #"cache"	"SIM"
+      "cache"	"SIM"
       "CLASSE"	"SIM"
       "LTEMPOITEMDESCRICAO"	"TIPO"
       "LTEMPOITEMINICIO"	"ANOCRIA"
@@ -26,7 +26,7 @@ MAP
       "permiteogc"	"sim"
       "transitioneffect"	"NAO"
       "TEMA"	"Localidades (usar com timeline) para teste"
-      #"cortepixels"	"30"
+      "cortepixels"	"30"
       "LTEMPOCONVENCODE"	"SIM"
     END # METADATA
     NAME "_llocali"

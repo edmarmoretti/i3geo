@@ -257,7 +257,8 @@ if($temas != ""){
 								$temasPluginI3Geo[] = array(
 										"name"=>$layern->name,
 										"tema"=>$layern->getmetadata("tema"),
-										"plugin"=>$layern->getmetadata("PLUGINI3GEO")
+										"plugin"=>$layern->getmetadata("PLUGINI3GEO"),
+										"cache"=>strtoupper($layern->getmetadata("cache"))
 								);
 							}
 							else{

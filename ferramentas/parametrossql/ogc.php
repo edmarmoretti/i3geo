@@ -180,6 +180,15 @@ else{
 				$l->setfilter($filtro);
 			}
 			$l->set("data",$data);
+			//acrecenta-se um md5 apos o nome caso seja necessario gerar cache
+			if($cache == true){
+				$original = $l->getmetadata("nomeoriginal");
+				if($original == ""){
+					$l->setmetadata("nomeoriginal",$l->name);
+					$original = $l->name;
+				}
+				$l->set("name",$original.md5($plugin));
+			}
 		}
 	}
 	ms_newLayerObj($oMap, $l);
@@ -192,7 +201,68 @@ else{
 if(ob_get_contents ()){
 	ob_end_clean();
 }
+//
+//verifica se a requisicao e do tipo TMS.
+//
+//
+//calcula a extensao geografica com base no x,y,z em requisisoes TMS
+//quando for do tipo tms $_GET["tms"] contem os parametros do tile
+//essa rotina faz um exit ao final
+//o cache tms so fucniona se houver apenas uma camada no mapa
+//tms e usado basicamente por mashup ou openlayers
+//
+if(isset($_GET["tms"])){
+	$temp = explode("/",$_GET["tms"]);
+	$z = $temp[2];
+	$x = $temp[3];
+	$y = str_replace(".png","",$temp[4]);
+	$n = pow(2,$z+1);
+	$lon1 = $x / $n * 360.0 - 180.0;
+	$lon2 = ($x+1) / $n * 360.0 - 180.0;
+	$n = pow(2,$z);
+	$lat1 = $y / $n * 180.0 - 90.0;
+	$lat2 = ($y+1) / $n * 180.0 - 90.0;
+	//essa funcao termina o processo se a imagem existir
+	if($cache == true){
+		carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+	}
+	$layer0 = $oMap->getlayer(0);
+	//
+	//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
+	//
+	if ($layer0->getmetadata("cortepixels") != ""){
+		$cortePixels = $layer0->getmetadata("cortepixels");
+	}
+	//se nao existir, salva a imagem
+	//echo $lon1." ".$lat1." ".$lon2." ".$lat2;exit;
+	$oMap->setsize(256,256);
 
+	$oMap->setExtent($lon1,$lat1,$lon2,$lat2);
+
+	$layer0->set("status",MS_DEFAULT);
+	//
+	//se o layer foi marcado para corte altera os parametros para ampliar o mapa
+	//antes de gerar a imagem
+	//
+	if($cortePixels > 0){
+		//$oMap->prepareImage();
+		$escalaInicial = $oMap->scaledenom;
+		$extensaoInicial = $oMap->extent;
+		$wh = 256+($cortePixels*2);
+		$oMap->setsize($wh,$wh);
+		$ponto = new pointObj();
+		$ponto->setxy(($wh/2),($wh/2));
+		$oMap->zoomScale($escalaInicial, $ponto, $wh, $wh, $extensaoInicial);
+	}
+	$img = $oMap->draw();
+	if($img->imagepath == ""){
+		exit;
+	}
+	if($cache == true){
+		salvaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
+	}
+	renderNocacheTms();
+}
 //
 //verifica se a chamada do servico e do tipo TILE no padrao do Google
 //
@@ -359,6 +429,100 @@ function nomeRand($n=10)
 		$nomes .= $a{mt_rand(0, $max)};
 	}
 	return $nomes;
+}
+function renderNocacheTms(){
+	global $img,$i3georendermode,$dir_tmp,$cortePixels;
+	if($i3georendermode == 1 && $cortePixels == 0){
+		ob_clean();
+		header('Content-Type: image/png');
+		$img->saveImage();
+		exit;
+	}
+	if($i3georendermode == 1 && $cortePixels > 0){
+		$i3georendermode = 0;
+	}
+	$nomer = $dir_tmp."/temp".nomeRand().".png";
+	$img->saveImage($nomer);
+	//
+	//corta a imagem gerada para voltar ao tamanho normal
+	//
+	if($cortePixels > 0){
+		$img = imagecreatefrompng($nomer);
+		$imgc = imagecreate(256,256);
+		imagecopy( $imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256 );
+		imagepng($imgc,$nomer);
+	}
+	if($i3georendermode == 0 || !isset($i3georendermode)){
+
+		header('Content-Length: '.filesize($nomer));
+		header('Content-Type: image/png');
+		header('Cache-Control: max-age=3600, must-revalidate');
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
+		fpassthru(fopen($nomer, 'rb'));
+	}
+	if($i3georendermode == 2){
+		ob_clean();
+		header('Cache-Control: public, max-age=22222222');
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
+		header("X-Sendfile: $nomer");
+		header("Content-type: image/png");
+	}
+}
+function carregaCacheImagem($cachedir,$map,$tms){
+	global $dir_tmp;
+	if($cachedir == ""){
+		$nome = $dir_tmp."/cache".$tms;
+	}
+	else{
+		$nome = $cachedir.$tms;
+	}
+	if(file_exists($nome)){
+		header('Content-Length: '.filesize($nome));
+		header('Content-Type: image/png');
+		header('Cache-Control: max-age=3600, must-revalidate');
+		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
+		$etag = md5_file($nome);
+		header('Etag: '.$etag);
+		fpassthru(fopen($nome, 'rb'));
+		exit;
+	}
+}
+function salvaCacheImagem($cachedir,$map,$tms){
+	global $img,$dir_tmp,$cortePixels;
+	if($cachedir == ""){
+		$nome = $dir_tmp."/cache".$tms;
+	}
+	else{
+		$nome = $cachedir.$tms;
+	}
+	@mkdir(dirname($nome),0777,true);
+	chmod(dirname($nome),0777);
+	$img->saveImage($nome);
+	//
+	//corta a imagem gerada para voltar ao tamanho normal
+	//
+	if($cortePixels > 0){
+		$img = imagecreatefrompng($nome);
+		$imgc = imagecreate(256,256);
+
+		imagesavealpha($imgc, true);
+		// Fill the image with transparent color
+		$color = imagecolorallocatealpha($imgc,0x00,0x00,0x00,127);
+		imagefill($imgc, 0, 0, $color);
+
+		imagecopy($imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256);
+		imagepng($imgc,$nome);
+	}
+	chmod($nome,0777);
+	header('Content-Length: '.filesize($nome));
+	header('Content-Type: image/png');
+	header('Cache-Control: max-age=3600, must-revalidate');
+	header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
+	fpassthru(fopen($nome, 'rb'));
+	exit;
 }
 
 ?>

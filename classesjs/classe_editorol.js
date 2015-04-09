@@ -614,11 +614,21 @@ i3GEO.editorOL = {
 				if(layers[i].isBaseLayer === false){
 					var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
 					if(i3GEO.editorOL.legendahtml === true){
-						url = url.replace("image%2Fpng","text/html");
+						//os parametros FORMAT e SERVICE sao inseridos de forma redundante para grantir
+						//caso seja um TMS
+						url = url.replace("image%2Fpng","text/html") 
+							+ "&FORMAT=text/html&SERVICE=WMS";
 						//verifica se a camada veio de um plugin de classe_plugini3geo
 						//e insere o icone se for necessario
 						if(layers[i].options.plugini3geo){
-							icone = i3GEO.pluginI3geo[layers[i].options.plugini3geo].iconeArvoreDeCamadas(layers[i].params.LAYERS);
+							if(layers[i].params.LAYERS){
+								//wms
+								icone = i3GEO.pluginI3geo[layers[i].options.plugini3geo].iconeArvoreDeCamadas(layers[i].params.LAYERS);
+							}
+							else{
+								//tms
+								icone = i3GEO.pluginI3geo[layers[i].options.plugini3geo].iconeArvoreDeCamadas(layers[i].layers);
+							}
 						}
 
 						ins += icone + layers[i].name+"<br><div id=legendaL_"+i+" ></div><br>";
