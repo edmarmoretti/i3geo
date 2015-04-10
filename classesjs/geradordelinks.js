@@ -378,8 +378,8 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	this.buscageo_init = function()
 	{
 		var ins = "<div style=margin:10px;text-align:left; >";
-		ins += "<p class=paragrafo ><b>Utilize o mapa abaixo para definir as coordenadas geogr&aacute;ficas do seu mapa, ou digite os valores desejados (opcional):</b></p>";
-		ins += "<div id=i3geo_gl_mapa1 style='width:250px;height:250px;border:1px solid blue;display:none'></div>";
+		ins += "<p class=paragrafo ><b>Utilize o navegador abaixo para definir as coordenadas geogr&aacute;ficas do seu mapa, ou digite os valores desejados (opcional):</b></p>";
+		ins += "<div id=i3geo_gl_mapa1 style='width:256px;height:256px;border:1px solid blue;display:none'></div>";
 		ins += "<div style=position:absolute;top:40px;left:270px;text-align:left; >";
 		ins += "Coordenadas geogr&aacute;ficas:<br><br>";
 		ins += "<table style=text-align:left >";
@@ -407,22 +407,38 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		//
 		//layers
 		//
-		var ol_wms = new OpenLayers.Layer.WMS( "OpenLayers WMS", "http://labs.metacarta.com/wms/vmap0",{layers: 'basic'},{isBaseLayer: true} );
-		ol_wms.setVisibility(true);
-		$i3geo_gl.OL.addLayer(ol_wms);
-		var jpl_wms = new OpenLayers.Layer.WMS( "NASA Global Mosaic","http://wms.jpl.nasa.gov/wms.cgi", {layers: "global_mosaic"},{isBaseLayer: false});
-		jpl_wms.setVisibility(false);
-		$i3geo_gl.OL.addLayer(jpl_wms);
-		var base = new OpenLayers.Layer.WMS( "Cartografia", "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",{layers:'baseraster',transparent:'true',format:'image/png'},{isBaseLayer:false});
-		base.setVisibility(false);
-		$i3geo_gl.OL.addLayer(base);
+		var wsm = new OpenLayers.Layer.ArcGIS93Rest(
+			"ESRI World Street Map",
+			"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
+			{
+				format : "jpeg"
+			}, {
+				isBaseLayer : true,
+				visibility : true
+			});
+		$i3geo_gl.OL.addLayer(wsm);
+
+		var bra = new OpenLayers.Layer.WMS(
+			"Base carto MMA",
+			"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
+			{
+				layers : "baseraster",
+				srs : "EPSG:4618",
+				format : "image/png",
+				isBaseLayer : false
+			}, {
+				isBaseLayer : true,
+				visibility : false
+			});
+		$i3geo_gl.OL.addLayer(bra);
+
 		//
 		//zoom e controle de layers
 		//
 		var ls = new OpenLayers.Control.LayerSwitcher();
 		$i3geo_gl.OL.addControl(ls);
 		$i(ls.id).style.zIndex=2000;
-		$i3geo_gl.OL.setCenter(new OpenLayers.LonLat(-55,-14), 2);
+		$i3geo_gl.OL.setCenter(new OpenLayers.LonLat(-55,-14), 3);
 		var panel = new OpenLayers.Control.NavToolbar();
 		$i3geo_gl.OL.addControl(panel);
 		panel.div.style.left="-4px";
