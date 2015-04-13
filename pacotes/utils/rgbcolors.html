@@ -1,0 +1,78 @@
+<?xml version="1.1" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+<title>RGBColor test</title>
+<style type="text/css">
+#result {
+	margin: 5px;
+	width: 50px;
+	height: 50px;
+}
+
+#result-wrap {
+	border: 1px solid #999999;
+	width: 60px;
+	height: 60px;
+	margin: 5px;
+}
+
+body {
+	font-family: Arial;
+}
+</style>
+<script type="text/javascript" src="../rgbcolor.js"></script>
+<script type="text/javascript">
+	function isThatAColor(s) {
+		var color = new RGBColor(s);
+		if (color.ok) {
+			document.getElementById('result').style.backgroundColor = 'rgb(' + color.r + ', ' + color.g + ', ' + color.b + ')';
+			document.getElementById('result-text').innerHTML =
+				'Red: ' + color.r
+					+ '<br />Green: '
+					+ color.g
+					+ '<br />Blue: '
+					+ color.b
+					+ '<br />RGB: '
+					+ color.toRGB()
+					+ '<br />Hex: '
+					+ color.toHex();
+		} else {
+			document.getElementById('result-text').innerHTML = 'Never heard of such a color :(';
+			document.getElementById('result').style.backgroundColor = 'rgb(255, 255, 255)';
+		}
+	}
+
+	function showHelp() {
+		var color = new RGBColor('');
+		document.getElementById('help').innerHTML = '';
+		document.getElementById('help').appendChild(color.getHelpXML());
+	}
+</script>
+</head>
+<body>
+
+	<h1>RGB color parser demo</h1>
+
+	<p>This is a demo of the RGBColor JavaScript class. Just type in something that should be a color and navigate away from the input field. The script will try to parse your input and derive a valid color.</p>
+	<p>For ideas on what's possible, click &quot;Help?&quot;</p>
+	<p>
+		More info in <a href="http://www.phpied.com/rgb-color-parser-in-javascript/">this blog posting</a>.
+	</p>
+	<form action="" onsubmit="isThatAColor(this.elements[0].value); return false;">
+		<div>
+			<input type="text" value="" onblur="isThatAColor(this.value)" />
+		</div>
+	</form>
+	<div id="result-wrap">
+		<div id="result"></div>
+	</div>
+	<div id="result-text"></div>
+	<p />
+	<span onclick="showHelp()" style="cursor: pointer; text-decoration: underline">help?</span>
+	<div id="help"></div>
+
+</body>
+</html>
