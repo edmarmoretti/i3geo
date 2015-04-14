@@ -223,5 +223,12 @@ g_traducao_init =
 				en : "",
 				es : ""
 			}
+		],
+		33 : [
+			{
+				pt : "Utilit&aacute;rios",
+				en : "",
+				es : ""
+			}
 		]
 	};

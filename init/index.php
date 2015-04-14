@@ -263,6 +263,10 @@ botoesIni.push({
 	"href":"../exemplos",
 	"titulo":$trad(14,g_traducao_init)
 	},{
+		"img":"applications-development.png",
+		"href":"../pacotes/utils/index.php",
+		"titulo":$trad(33,g_traducao_init)
+	},{
 	"img":"accessories-dictionary.png",
 	"href":"../guia_de_migracao.txt",
 	"titulo":$trad(17,g_traducao_init)
