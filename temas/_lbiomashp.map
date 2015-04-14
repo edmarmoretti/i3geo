@@ -6,20 +6,19 @@ MAP
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
       "TIP"	"CD_LEGENDA"
-      #"cache"	"sim"
-      "transitioneffect" "SIM"
       "CLASSE"	"SIM"
       "permitekmz"	"nao"
       "ITENSDESC"	"Teste de acentuação"
+      "TILES"	"SIM"
+      "ESCALA"	"1000000"
       "permitedownload"	"sim"
       "download"	"SIM"
       "itembuscarapida"	"CD_LEGENDA"
       "ITENS"	"CD_LEGENDA"
-      "permiteogc"	"sim"
       "permitekml"	"sim"
+      "permiteogc"	"nao"
+      "transitioneffect"	"SIM"
       "TEMA"	"Biomas shapefile (acentuação)"
-      "ESCALA" "1000000"
-      "TILES"	"SIM"
     END # METADATA
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
@@ -28,7 +27,7 @@ MAP
     STATUS OFF
     TEMPLATE "none.htm"
     TILEITEM "location"
-    OPACITY 90
+    OPACITY 40
     TYPE POLYGON
     UNITS METERS
     CLASS

@@ -1,7 +1,6 @@
 <?php
-//TODO verificar se e possivel usar menu de contexto
+//TODO incluir autocomplete no editor (eh possivel?)
 //TODO incluir a lista de itens que podem ser usados em METADATA
-//TODO ao salvar um mapfile, atualizar o banco de dados conforme os metadados que o usuário pode ter modificado
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -111,6 +110,43 @@ body {
 					fwrite($fp,implode("\r\n",$novoTexto));
 				}
 				fclose($fp);
+				//verifica os metadata que sao armazenados tambem no banco de dados de administracao
+				//isso e necessario para manter a consistencia caso o usuario altere manualmente os valores
+
+				//cria o objeto map
+				$mapa = ms_newMapObj($mapfile);
+				$codigo_tema = $_GET["mapfile"];
+				$layer = $mapa->getlayerbyname($codigo_tema);
+				if($layer == ""){
+					echo "<br><span style='color:red;'>Atenção: não existe nenhum LAYER com NAME igual a ".$codigo_tema."</span><br>";
+				}
+				else{
+					include("conexao.php");
+					//pega o metadata
+					$meta = $layer->getmetadata("permitedownload");
+					$meta = strtoupper($meta);
+					if ($meta != "" && ($meta == "SIM" || $meta == "NAO" )){
+						//grava no banco
+						$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET download_tema='$meta' WHERE codigo_tema = '$codigo_tema'");
+					}
+					$meta = $layer->getmetadata("permiteogc");
+					$meta = strtoupper($meta);
+					if ($meta != "" && ($meta == "SIM" || $meta == "NAO" )){
+						$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET ogc_tema='$meta' WHERE codigo_tema = '$codigo_tema'");
+					}
+					$meta = $layer->getmetadata("permitekml");
+					$meta = strtoupper($meta);
+					if ($meta != "" && ($meta == "SIM" || $meta == "NAO" )){
+						$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET kml_tema='$meta' WHERE codigo_tema = '$codigo_tema'");
+					}
+					$meta = $layer->getmetadata("permitekmz");
+					$meta = strtoupper($meta);
+					if ($meta != "" && ($meta == "SIM" || $meta == "NAO" )){
+						$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET kmz_tema='$meta' WHERE codigo_tema = '$codigo_tema'");
+					}
+					$dbhw = null;
+					$dbh = null;
+				}
 			}
 			?>
 			<div style=float:left; >
@@ -147,7 +183,6 @@ Alt-left - Início da linha<br>
 			<div id=filtroDeLetras ></div>
 			<div id="comboMapfiles" >Aguarde...</div>
 			<?php
-			//TODO O preview nao e mostrado quando o servico WMS e bloqueado
 			$mapfile = str_replace("\\","/",$mapfile);
 
 			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?servidor=../admin/php/preview.php&fundo=&nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=550&altura=400&temas=".$mapfile."' style='position:relative;top:2px;overflow:hidden;width:100%;height:450px;border:0px solid gray;'>";
