@@ -133,12 +133,14 @@ i3GEOF.tabela =
 					}
 				}
 			};
-			i3GEO.janela.comboCabecalhoTemas(
-				idjanela + "i3GEOFtabelaComboCabeca",
-				idjanela + "i3GEOFtabelaComboCabecaSel",
-				"tabela",
-				"ligadosComTabela",
-				onButtonClick);
+			if (!$i(idjanela + "i3GEOFtabelaComboCabecaSel")) {
+				i3GEO.janela.comboCabecalhoTemas(
+					idjanela + "i3GEOFtabelaComboCabeca",
+					idjanela + "i3GEOFtabelaComboCabecaSel",
+					"tabela",
+					"ligadosComTabela",
+					onButtonClick);
+			}
 			if (i3GEOF.tabela.propJanelas[idjanela].tema === "") {
 				$i(iddiv).innerHTML = "";
 				return;
@@ -279,6 +281,9 @@ i3GEOF.tabela =
 			if ($i(idjanela)) {
 				$i(idjanela).style.visibility = "visible";
 			}
+			i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS", [
+				"i3GEOF.tabela.atualizaCombosCabecalhos()"
+			]);
 		},
 		/*
 		 * Function: html
@@ -331,7 +336,7 @@ i3GEOF.tabela =
 				};
 				// cria a janela flutuante
 				titulo =
-					"<span class='i3GEOconeFerramenta i3GEOiconeTabela' title='" + $trad('tabela', i3GEOF.tabela.dicionario)
+					"<span class='i3GEOiconeFerramenta i3GEOiconeTabela' title='" + $trad('tabela', i3GEOF.tabela.dicionario)
 						+ "'></span>"
 						+ "<div id='"
 						+ id
@@ -431,10 +436,30 @@ i3GEOF.tabela =
 			}
 		},
 		atualizaCombosCabecalhos : function() {
-			var i, id, n = i3GEOF.tabela.janelas.length;
+			var i, id, n = i3GEOF.tabela.janelas.length, onButtonClick;
 			for (i = 0; i < n; i++) {
 				id = i3GEOF.tabela.janelas[i];
-				i3GEO.janela.comboCabecalhoTemas(id + "i3GEOFtabelaComboCabeca", id + "i3GEOFtabelaComboCabecaSel", "tabela", "");
+				onButtonClick =
+					function(p_sType, p_aArgs, botao) {
+						var oMenuItem = p_aArgs[1];
+						if (oMenuItem) {
+							if (oMenuItem.value != "") {
+								i3GEO.mapa.ativaTema(oMenuItem.value);
+								botao.set("label", "<span class='cabecalhoTemas' >" + oMenuItem.cfg.getProperty("text")
+									+ "</span>&nbsp;&nbsp;");
+								i3GEOF.tabela.propJanelas[id].tema = oMenuItem.value;
+								$i(id + "_corpo").innerHTML = "";
+								i3GEOF.tabela.inicia(id + "_corpo", id);
+							}
+						}
+					};
+				i3GEO.janela.comboCabecalhoTemas(
+					id + "i3GEOFtabelaComboCabeca",
+					id + "i3GEOFtabelaComboCabecaSel",
+					"tabela",
+					"ligadosComTabela",
+					onButtonClick,
+					i3GEOF.tabela.propJanelas[id].tema);
 			}
 		},
 		/**
@@ -992,7 +1017,7 @@ i3GEOF.tabela =
 			}
 			$i(idjanela + "i3GEOtabelainicio").value = 1;
 			$i(idjanela + "i3GEOtabelafim").value = "";
-			i3GEOF.tabela.pegaRegistros(idjanela, false, false, false, 1, true);
+			i3GEOF.tabela.pegaRegistros(idjanela, false, false, false, 1, false);
 		},
 		/*
 		 * Function: menos

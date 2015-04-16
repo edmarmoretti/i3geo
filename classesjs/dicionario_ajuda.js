@@ -1075,6 +1075,14 @@ g_traducao_ajuda = {
 			pt:"Define par&acirc;metros que modificam o comportamento de uma camada em fun&ccedil;&atilde;o da escala do mapa ou da abrang&ecirc;ncia espacial.",
 			complemento:"",
 			apijs:"i3GEO.tema.dialogo.mmscale();"
+		},
+		"129": {
+			titulo: "M&aacute;scara",
+			diretorio:"i3geo/ferramentas/mascara.js",
+			categoria:"1",
+			pt:"A m&aacute;scara &eacute; uma camada que ser&aacute; sobreposta as demais permitindo o desenho apenas dos elementos que intersectem.",
+			complemento:"",
+			apijs:"i3GEO.mapa.dialogo.mascara();"
 		}
 	}
 };

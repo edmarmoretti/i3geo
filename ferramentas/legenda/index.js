@@ -387,7 +387,7 @@ i3GEOF.legenda =
 			};
 			// cria a janela flutuante
 			titulo =
-				"<span class='i3GEOconeFerramenta i3GEOiconeLegenda' title='"+$trad("t33")+"'></span>"
+				"<span class='i3GEOiconeFerramenta i3GEOiconeLegenda' title='"+$trad("t33")+"'></span>"
 				+ "<div id='i3GEOFlegendaCabecalhoI' style='left:10px;'>"
 				+ "<div  id='i3GEOFlegendaComboCabeca' class='comboTemasCabecalho' style='left:0px;'>   ------</div>&nbsp;&nbsp;&nbsp;" + $trad("t33")
 				+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic

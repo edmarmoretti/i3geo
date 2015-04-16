@@ -1191,32 +1191,38 @@ i3GEO.janela =
 		 * 
 		 * onButtonClick {function} - funcao que sera executada no evento onchange do combo a ser criado
 		 */
-		// TODO atualizar todos os combos quando a arvore de camadas e modificada
-		comboCabecalhoTemas : function(idDiv, idCombo, ferramenta, tipo, onButtonClick) {
+		comboCabecalhoTemas : function(idDiv, idCombo, ferramenta, tipo, onButtonClick, temaSel) {
 			var temp = $i(idDiv);
-			if (temp && !($i(idCombo))) {
+			// tenta pegar o tema que ja foi escolhido antes
+			if (!temaSel) {
+				temaSel = "";
+			}
+			if (temaSel == "" && i3GEOF[ferramenta] && i3GEOF[ferramenta].tema && i3GEOF[ferramenta].tema != "") {
+				// o tema escolhido pode estar definido na variavel da ferramenta
+				temaSel = i3GEOF[ferramenta].tema;
+			}
+			if (temp) {
 				i3GEO.util.comboTemas(temp.id + "Sel", function(retorno) {
 					var tema, container = $i(idDiv), botao;
 					container.innerHTML = retorno.dados;
 					botao = new YAHOO.widget.Button(idCombo, {
 						type : "menu",
 						menu : idCombo + "select"
-					// menuclassname: "yui-button-menu-i3geo"
 					});
-
-					if (i3GEO.temaAtivo != "") {
-						tema = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
-						botao.set("label", "<span class='cabecalhoTemas' >" + tema.tema + "</span>&nbsp;&nbsp;");
+					if (temaSel != "") {
+						tema = i3GEO.arvoreDeCamadas.pegaTema(temaSel);
+						if (tema && tema != undefined) {
+							botao.set("label", "<span class='cabecalhoTemas' >" + tema.tema + "</span>&nbsp;&nbsp;");
+						} else {
+							botao.set("label", "<span class='cabecalhoTemas' >" + $trad("x92") + "</span>&nbsp;&nbsp;");
+						}
 					} else {
 						botao.set("label", "<span class='cabecalhoTemas' >" + $trad("x92") + "</span>&nbsp;&nbsp;");
 					}
 					if (!onButtonClick) {
 						onButtonClick =
 							function(p_sType, p_aArgs) {
-								// var oEvent = p_aArgs[0], // DOM event
 								var oMenuItem = p_aArgs[1]; // MenuItem instance
-								// that was the
-								// target of the event
 								if (oMenuItem) {
 									i3GEO.mapa.ativaTema(oMenuItem.value);
 									if (oMenuItem.value === "") {
@@ -1236,20 +1242,19 @@ i3GEO.janela =
 									}
 								}
 							};
+						//
+						// a busca nao funciona com parametros dentro de parenteses
+						// por isso e necessario zerar o array
+						//
+						if (i3GEO.eventos.ATUALIZAARVORECAMADAS.length > 20) {
+							i3GEO.eventos.ATUALIZAARVORECAMADAS = [];
+						}
+						i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS", [
+							"i3GEO.janela.comboCabecalhoTemas('" + idDiv + "','" + idCombo + "','" + ferramenta + "','" + tipo + "')"
+						]);
 					}
 					botao.getMenu().subscribe("click", onButtonClick, botao);
 				}, temp.id, "", false, tipo, "", true, true);
 			}
-			//
-			// a busca nao funciona com parametros dentro de parenteses
-			// por isso e necessario zerar o array
-			//
-			if (i3GEO.eventos.ATUALIZAARVORECAMADAS.length > 20) {
-				i3GEO.eventos.ATUALIZAARVORECAMADAS = [];
-			}
-			temp = "i3GEO.janela.comboCabecalhoTemas('" + idDiv + "','" + idCombo + "','" + ferramenta + "','" + tipo + "')";
-			i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS", [
-				temp
-			]);
 		}
 	};

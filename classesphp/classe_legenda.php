@@ -322,8 +322,7 @@ totaliza - sim|nao indica se os totais de elementos devem ser acrescentados ao n
 return:
 array
 */
-	function tabelaLegenda($totaliza="nao")
-	{
+	function tabelaLegenda($totaliza="nao"){
 		$linhas = array();
 		foreach ($this->visiveis as $l){
 			$layer = $this->mapa->getlayerbyname($l);
@@ -333,7 +332,6 @@ array
 			$s = $layer->getmetadata("wms_sld_url");
 			$im = $layer->getmetadata("legendaimg");
 			$nc = $layer->numclasses;
-
 			//
 			//se for wms e tiver classes define o tipo de layer para poder gerar a legenda corretamente
 			//
@@ -341,16 +339,17 @@ array
 				$tipotemp = $layer->type;
 				$tiporep = $layer->getmetadata("tipooriginal");
 				$layer->set("type",MS_LAYER_POLYGON);
-				if($tiporep == "linear")
-				{$layer->set("type",MS_LAYER_LINE);}
-				if ($tiporep == "pontual")
-				{$layer->set("type",MS_LAYER_POINT);}
+				if($tiporep == "linear"){
+					$layer->set("type",MS_LAYER_LINE);
+				}
+				if ($tiporep == "pontual"){
+					$layer->set("type",MS_LAYER_POINT);
+				}
 			}
 			//
 			//se for WMS e n&atilde;o tiver classes, tenta pegar a legenda via requisi&ccedil;&atilde;o WMS
 			//
-			if ($nc == 0 && ($c == 7 || $im != ""))
-			{
+			if ($nc == 0 && ($c == 7 || $im != ""))	{
 				if($c == 7){
 					$con = $layer->connection;
 					$ver = $layer->getmetadata("wms_server_version");
@@ -359,16 +358,17 @@ array
 					$f = explode(",",$f);
 					$f = $f[0];
 					$imgLeg = $con."&request=GetLegendGraphic&version=".$ver."&service=wms&layer=".$lwms."&format=".$f."&SLD=".$s;
-					if ($layer->getmetadata("legendawms") != "")
-					{$imgLeg = $layer->getmetadata("legendawms");}
+					if ($layer->getmetadata("legendawms") != ""){
+						$imgLeg = $layer->getmetadata("legendawms");
+					}
 				}
-				else
-				{$imgLeg = $im;}
+				else{
+					$imgLeg = $im;
+				}
 				$linhas[] = array("tema"=>$l,"idclasse"=>"","nomeclasse"=>"","expressao"=>"","expressao"=>"","imagem"=>$imgLeg,"minScale"=>0,"maxScale"=>0);
 			}
-			else
-			{
-				for ($c = 0;$c < $nc;$c++){
+			else {
+				for ($c = 0;$c < $nc;$c++) {
 					$classe = $layer->getclass($c);
 					$imgi = $classe->createlegendicon(30,15);
 					$classe->drawlegendicon(30,15,$imgi,0,0);
@@ -382,15 +382,18 @@ array
 					//{$nomeclasse = mb_convert_encoding($nomeclasse,"UTF-8","ISO-8859-1");}
 					$nomeclasse = $this->converte($nomeclasse);
 					$nomeexp = $classe->getExpressionString();
-					if (function_exists("mb_convert_encoding"))
-					{$nomeexp = mb_convert_encoding($nomeexp,"UTF-8","ISO-8859-1");}
+					if (function_exists("mb_convert_encoding"))	{
+						$nomeexp = mb_convert_encoding($nomeexp,"UTF-8","ISO-8859-1");
+					}
 
 					$linhas[] = array("tema"=>$l,"idclasse"=>$c,"nomeclasse"=>$nomeclasse,"expressao"=>$nomeexp,"imagem"=>$i,"proc"=>"","minScale"=>$classe->minscaledenom,"maxScale"=>$classe->maxscaledenom);
 				}
 				if (($totaliza=="sim") && ($nc > 1)){
 					$layer->set("template","none.htm");
 					$sopen = $layer->open();
-					if($sopen == MS_FAILURE){return "erro";}
+					if($sopen == MS_FAILURE){
+						return "erro";
+					}
 					$itens = $layer->getitems();
 					$total = 0;
 					$nreg = array();
@@ -415,11 +418,17 @@ array
 								$exp = str_replace("]","",$exp);
 							}
 							$teste = $layer->queryByAttributes($itens[0], $exp, 1);
+							if($teste != MS_SUCCESS){
+								$teste = $layer->queryByAttributes($itens[0], mb_convert_encoding($exp,"ISO-8859-1","UTF-8"), 1);
+							}
+							if($teste != MS_SUCCESS){
+								$teste = $layer->queryByAttributes($itens[0], mb_convert_encoding($exp,"UTF-8","ISO-8859-1"), 1);
+							}
 						}
 						else{
 							$teste = 0;
 						}
-						if ($teste == 0){
+						if ($teste == MS_SUCCESS){
 							$n = $layer->getNumResults();
 							$nreg[] = $n;
 						}
@@ -431,7 +440,9 @@ array
 					$layer->close();
 					for ($c = 0;$c < $nc;$c++){
 						$classe = $layer->getclass($c);
-						$nome = $linhas[$c]["nomeclasse"]." - n=".$nreg[$c]."(".(round(($nreg[$c] * 100 / $total)))."%)";
+						$nome = $linhas[$c]["nomeclasse"];
+						$nome = explode(" - n=",$nome);
+						$nome = $nome[0]." - n=".$nreg[$c]."(".(round(($nreg[$c] * 100 / $total)))."%)";
 						$classe->set("name",$nome);
 						$linhas[$c]["nomeclasse"] = $nome;
 						$linhas[$c]["nreg"] = $nreg[$c];

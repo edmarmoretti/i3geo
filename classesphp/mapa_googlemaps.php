@@ -148,6 +148,7 @@ $ret = $mapa->extent;
 
 $cache = false;
 $cortePixels = 0;
+$versao = versaoMS();
 if(!isset($_GET["telaR"])){
 	//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
@@ -155,6 +156,28 @@ if(!isset($_GET["telaR"])){
 		$l = $mapa->getlayer($i);
 		$layerName = $l->name;
 		$l->set("status",MS_OFF);
+		//no caso de haver uma mascara definida no layer
+		if($versao["principal"] == 6){
+			if($l->mask != ""){
+				$lmask = $mapa->getlayerbyname($l->mask);
+				if(!empty($postgis_mapa)){
+					if($lmask->connectiontype == MS_POSTGIS){
+						$lcon = $l->connection;
+						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
+							if(($lcon == " ") || ($lcon == "")){
+								$lmask->set("connection",$postgis_mapa);
+							}
+							else{
+								$lmask->set("connection",$postgis_mapa[$lcon]);
+							}
+						}
+					}
+				}
+				if($lmask->getProjection() == "" ){
+					$lmask->setProjection("proj=latlong,a=6378137,b=6378137");
+				}
+			}
+		}
 		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != ""){
 			$l->set("template","none.htm");
 			$l->set("status",MS_DEFAULT);
@@ -348,8 +371,8 @@ else{
 		$cor->setrgb($c->red,$c->green,$c->blue);
 		$cor = $classe0->getstyle(0)->outlinecolor;
 		$cor->setrgb($c->red,$c->green,$c->blue);
-		$v = versaoMS();
-		if($v["principal"] == 6){
+		//$v = versaoMS();
+		if($versao["principal"] == 6){
 			$l->open();
 			foreach ($shp as $indx){
 				$shape = $l->getShape(new resultObj($indx));

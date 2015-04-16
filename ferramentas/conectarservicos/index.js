@@ -164,7 +164,7 @@ i3GEOF.conectarservicos =
 			i3GEO.janela.minimiza("i3GEOFconectarservicos");
 		};
 		// cria a janela flutuante
-		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeAdd'></span>" + $trad("conexao",i3GEOF.conectarservicos.dicionario);
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeAdd'></span>" + $trad("conexao",i3GEOF.conectarservicos.dicionario);
 		janela =
 			i3GEO.janela.cria(
 				"230px",

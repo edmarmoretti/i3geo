@@ -582,7 +582,7 @@ i3GEOF.graficointerativo1 =
 					i3GEOF.graficointerativo1.iniciaJanelaFlutuante();
 				};
 				titulo =
-					"<span class='i3GEOconeFerramenta i3GEOiconeGrafico' title='"+$trad("t37b")+"'></span>"
+					"<span class='i3GEOiconeFerramenta i3GEOiconeGrafico' title='"+$trad("t37b")+"'></span>"
 					+ "<div id='" + idjanela + "I' style='left:10px;'>"
 					+ "&nbsp;&nbsp;&nbsp;" + $trad("t37b")
 					+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic

@@ -173,7 +173,7 @@ i3GEOF.tme = {
 			i3GEO.janela.minimiza("i3GEOF.tme");
 		};
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeTme'></span>" + "<div  id='i3GEOFtmeComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px> tme </span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=108' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeTme'></span>" + "<div  id='i3GEOFtmeComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px> tme </span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=108' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
 			"320px",

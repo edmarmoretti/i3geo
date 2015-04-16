@@ -271,12 +271,29 @@ i3GEO.eventos =
 		 * Executa as fun&ccedil;&otilde;es armazenadas em MOUSEUP.
 		 */
 		mouseupMapa : function(exy) {
-			// console.error(exy.target.id);
-			// console.error(exy.target.style.zIndex);
-			// tenta evitar abrir o balao em objetos do openlayers ou googlemaps
 			if (!exy) {
 				i3GEO.eventos.executaEventos(this.MOUSEUP);
 			} else {
+				if (i3GEO.Interface.ATUAL === "googlemaps"  && exy.target && !exy.target.src) {
+					//recalcula a posicao do mouse. Necessario em dispositivos touch
+					if(i3GEOtouchesPosMapa === ""){
+						i3GEOtouchesPosMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
+					}
+					pos = i3GEOtouchesPosMapa;
+					p = new google.maps.Point(exy.clientX - pos[0],exy.clientY - pos[1]);
+					e = null;
+					lonlat = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(p);
+					if(lonlat){
+						objposicaocursor.ddx = lonlat.lng();
+						objposicaocursor.ddy = lonlat.lat();
+					}
+					i3GEO.eventos.executaEventos(this.MOUSEUP);
+				}
+				else if (i3GEO.Interface.ATUAL === "openlayers"){
+					i3GEO.eventos.executaEventos(this.MOUSEUP);
+				}
+				
+				/*
 				if (i3GEO.Interface.ATUAL === "googlemaps" && exy.target && !exy.target.src) {
 					//recalcula a posicao do mouse. Necessario em dispositivos touch
 					if(i3GEOtouchesPosMapa === ""){
@@ -299,6 +316,7 @@ i3GEO.eventos =
 						i3GEO.eventos.executaEventos(this.MOUSEUP);
 					}
 				}
+				*/
 			}
 		},
 		/**
@@ -527,18 +545,27 @@ i3GEO.eventos =
 				};
 			};
 			docMapa.onmouseout = function() {
-				objposicaocursor.dentroDomapa = true;
+				objposicaocursor.dentroDomapa = false;
 				try {
 					objmapaparado = "parar";
 				} catch (e) {}
 			};
 			docMapa.onmousedown = function(exy) {
+				if(objposicaocursor.dentroDomapa === false){
+					return;
+				}
 				i3GEO.eventos.mousedownMapa();
 			};
 			docMapa.onclick = function(exy) {
+				if(objposicaocursor.dentroDomapa === false){
+					return;
+				}
 				i3GEO.eventos.mousecliqueMapa(exy);
 			};
 			docMapa.onmouseup = function(exy) {
+				if(objposicaocursor.dentroDomapa === false){
+					return;
+				}
 				if (i3GEO.Interface.ATUAL === "googlemaps") {
 					if(modoAtual === "move"){
 						modoAtual = "";

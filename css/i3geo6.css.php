@@ -2220,14 +2220,14 @@ box-shadow: 0 10px 5px -10px gray;
 .eudockImagemTop {
 }
 /* icones das ferramentas utilizado nas janelas flutuantes e menu suspenso */
-.i3GEOconeFerramenta {
+.i3GEOiconeFerramenta {
 display: block;
 height: 16px;
 width: 16px;
 position: absolute;
 left: 2px;
 }
-.hd .i3GEOconeFerramenta{
+.hd .i3GEOiconeFerramenta{
 top: 5px;
 }
 .i3GEOiconeMais{
@@ -2263,6 +2263,10 @@ float: left;
 .i3GEOiconeXis {
 background-image: url("../imagens/oxygen/16x16/edit-delete.png");
 cursor: pointer;
+}
+.i3GEOiconeMascara{
+background-image: URL('../imagens/gisicons/layer-show.png');
+background-size: 16px;
 }
 .i3GEOiconemmscale{
 background-image: URL('../imagens/oxygen/16x16/graphics-viewer-document.png');

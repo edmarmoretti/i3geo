@@ -263,7 +263,7 @@ i3GEOF.selecao = {
 				}
 			};
 			titulo =
-				"<span class='i3GEOconeFerramenta i3GEOiconeSelecao' title='"+$trad("x51")+"'></span>"
+				"<span class='i3GEOiconeFerramenta i3GEOiconeSelecao' title='"+$trad("x51")+"'></span>"
 				+ "<div id='i3GEOFSelecaoCabecalhoI' style='left:10px;'>"
 				+ "&nbsp;&nbsp;&nbsp;" + $trad("x51")
 				+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
@@ -1002,14 +1002,14 @@ i3GEOF.selecao = {
 			var add,xis,interrogacao,operador,conector,valor,ntr,ntad,ntd,ntd1,ntd2,ntd3,ntd4,ntd5,tabela;
 			try{
 				add = document.createElement("img");
-				add.src = i3GEO.configura.locaplic+'/imagens/plus.gif';
+				add.src = i3GEO.configura.locaplic+'/imagens/oxygen/16x16/list-add.png';
 				add.style.cursor="pointer";
 				add.onclick = function(){
 					i3GEOF.selecao.adicionaLinhaFiltro();
 				};
 
 				xis = document.createElement("img");
-				xis.src = i3GEO.configura.locaplic+'/imagens/x.gif';
+				xis.src = i3GEO.configura.locaplic+'/imagens/oxygen/16x16/edit-delete.png';
 				xis.style.cursor="pointer";
 				xis.onclick = function(){
 					var p = this.parentNode.parentNode.parentNode,
@@ -1019,7 +1019,7 @@ i3GEOF.selecao = {
 					}
 				};
 				interrogacao = document.createElement("img");
-				interrogacao.src = i3GEO.configura.locaplic+'/imagens/interrogacao.gif';
+				interrogacao.src = i3GEO.configura.locaplic+'/imagens/oxygen/16x16/format-line-spacing-normal.png';
 				interrogacao.title='mostra valores';
 				interrogacao.style.cursor="pointer";
 				interrogacao.style.margin="5px";

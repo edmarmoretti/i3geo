@@ -101,6 +101,7 @@ function ogc_endereco(botao)
 	ins += "<p><a target=blank href='"+servico+"&OUTPUTFORMAT=shape-zip&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"' />download shapefile via WFS</a>";
 	ins += "<p><a target=blank href='"+servico+"&OUTPUTFORMAT=csv&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"' />download CSV via WFS</a>";
 	ins += "<p><a target=blank href='"+servico+"&OUTPUTFORMAT=kmz&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"' />download KMZ</a>";
+	ins += "<p><a target=blank href='"+servico+"&OUTPUTFORMAT=geojson&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"' />GeoJson</a>";
 
 	if(!$i("panellistaarquivos")){
 		YAHOO.namespace("datadownloadLista");

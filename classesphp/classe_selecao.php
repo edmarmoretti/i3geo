@@ -494,7 +494,6 @@ $valor - Valor.
 	*/
 	function selecaoAtributos2($filtro,$tipo)
 	{
-		//FIXME nao funciona com LATIN1 na string de conexao
 		$items = pegaItens($this->layer);
 		if ($tipo == "novo")
 		{
@@ -508,19 +507,6 @@ $valor - Valor.
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
-		/*
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
-		$res_count = $this->layer->getNumresults();
-		$shp_atual = array();
-		for ($i = 0; $i < $res_count;++$i)
-		{
-			$rc = $this->layer->getResult($i);
-			$shp_atual[] = $rc->shapeindex;
-		}
-		$this->mapa->freequery($indxlayer);
-		*/
-
 		$shp_atual = array();
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
 		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
@@ -537,7 +523,13 @@ $valor - Valor.
 			$filtro = str_replace("("," ",$filtro);
 			$filtro = str_replace(")"," ",$filtro);
 		}
-		$this->layer->querybyattributes($items[0],$filtro,1);
+		$teste = $this->layer->querybyattributes($items[0],$filtro,1);
+		if($teste != MS_SUCCESS){
+			$teste = $this->layer->queryByAttributes($itens[0], mb_convert_encoding($filtro,"ISO-8859-1","UTF-8"), 1);
+		}
+		if($teste != MS_SUCCESS){
+			$teste = $this->layer->queryByAttributes($itens[0], mb_convert_encoding($filtro,"UTF-8","ISO-8859-1"), 1);
+		}
 		$res_count = $this->layer->getNumresults();
 		$shpi = array();
 		for ($i = 0; $i < $res_count; ++$i)

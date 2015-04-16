@@ -754,7 +754,7 @@ i3GEO.mapa =
 					}
 				};
 				titulo =
-					"<span class='i3GEOconeFerramenta i3GEOiconeLegenda' title='" + $trad("P3")
+					"<span class='i3GEOiconeFerramenta i3GEOiconeLegenda' title='" + $trad("P3")
 						+ "'></span>"
 						+ "<div id='legendaTituloI' style='display:block;' >"
 						+ $trad("p3")
@@ -796,7 +796,19 @@ i3GEO.mapa =
 					"",
 					true);
 			},
-
+			/**
+			 * Function: mascara
+			 * 
+			 * Abre a janela de di&aacute;logo com as ferramenta mascara
+			 */
+			mascara : function() {
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.mapa.dialogo.mascara()",
+					"mascara",
+					"mascara",
+					"dependencias.php",
+					"i3GEOF.mascara.iniciaJanelaFlutuante()");
+			},
 			/**
 			 * Function: ferramentas
 			 * 
@@ -911,7 +923,7 @@ i3GEO.mapa =
 							+ "&ext="
 							+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 					titulo =
-						"<span class='i3GEOconeFerramenta i3GEOiconeCongela'></span>" + "Mapa"
+						"<span class='i3GEOiconeFerramenta i3GEOiconeCongela'></span>" + "Mapa"
 							+ " <a class=ajuda_usuario target=_blank href='"
 							+ i3GEO.configura.locaplic
 							+ "/ajuda_usuario.php?idcategoria=6&idajuda=123' >&nbsp;&nbsp;&nbsp;</a>";
@@ -1344,11 +1356,6 @@ i3GEO.mapa =
 			 * Essa e a funcao padrao definida em i3GEO.configura
 			 */
 			verificaTipDefault : function(e) {
-				// evita clicar sobre a barra do googlemaps
-				// FIXME nada elegante
-				if (objposicaocursor.imgx < 70) {
-					return;
-				}
 				if (i3GEO.barraDeBotoes.BOTAOCLICADO !== "identificaBalao" && i3GEO.eventos.cliquePerm.ativo === false) {
 					return;
 				}

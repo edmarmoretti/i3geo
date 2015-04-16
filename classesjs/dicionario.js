@@ -2069,6 +2069,12 @@ g_traducao = {
 	pt: "Para editar os atributos, utilize a ferramenta de identifica&ccedil;&atilde;o. &Eacute; necess&aacute;rio que exista uma coluna com identificadores &uacute;nicos na tabela a ser editada e que essa coluna esteja vis&iacute;vel na ferramenta de identifica&ccedil;&atilde;o.",
 	en:"",
 	es:""
+}],
+"mascara": [
+{
+	pt: "M&aacute;scara",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

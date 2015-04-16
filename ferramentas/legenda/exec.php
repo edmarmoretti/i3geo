@@ -77,7 +77,7 @@ Acrescenta a contagem de elementos em cada classe.
 <Legenda->tabelaLegenda>
 */
 	case "CONTAGEMCLASSE":
-		//FIXME apresenta erro com palavras acentuadas
+		//apresenta erro com palavras acentuadas
 		include_once(dirname(__FILE__)."/../../classesphp/classe_legenda.php");
 		$m = new Legenda($map_file,$locaplic,$tema);
 		$r = $m->tabelaLegenda("sim");

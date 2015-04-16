@@ -471,83 +471,88 @@ i3GEO.configura =
 								[
 									{
 										id : "omenudataFerramentas5a",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeBusca'></span>" + $trad("x59"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeBusca'></span>" + $trad("x59"),
 										url : "javascript:i3GEO.mapa.dialogo.locregiao()"
 									},
 									{
 										id : "omenudataFerramentas6a",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeFiltro'></span>" + $trad("x61"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeFiltro'></span>" + $trad("x61"),
 										url : "javascript:i3GEO.mapa.dialogo.filtraregiao()"
 									},
 									{
 										id : "omenudataFerramentas4a",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeCatalogo'></span>" + $trad("g1a"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeCatalogo'></span>" + $trad("g1a"),
 										url : "javascript:i3GEO.arvoreDeTemas.flutuante()"
 									},
 									{
 										id : "omenudataFerramentas1a",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeOpacidadeMapa'></span>" + $trad("t20"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeOpacidadeMapa'></span>" + $trad("t20"),
 										url : "javascript:i3GEO.mapa.dialogo.opacidade()"
 									},
 									{
 										id : "omenudataFerramentas2a",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeAnimacao'></span>" + $trad("p21"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeAnimacao'></span>" + $trad("p21"),
 										url : "javascript:i3GEO.mapa.dialogo.animacao()"
 									},
 									{
 										id : "omenudataFerramentas3a",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeSelecao'></span>" + $trad("d24t"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeSelecao'></span>" + $trad("d24t"),
 										url : "javascript:i3GEO.mapa.dialogo.selecao();"
 									},
 									{
 										id : "omenudataFerramentas7a",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeCongela'></span>" + $trad("x64a"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeCongela'></span>" + $trad("x64a"),
 										url : "javascript:i3GEO.mapa.dialogo.congelaMapa();"
 									},
 									{
 										id : "omenudataFerramentas8a",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeAutoredesenha'></span>" + $trad("p12"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeAutoredesenha'></span>" + $trad("p12"),
 										url : "javascript:i3GEO.mapa.dialogo.autoredesenha()"
 									},
 									{
 										id : "omenudataFerramentas9",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeVinde'></span>" + $trad("x85"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeVinde'></span>" + $trad("x85"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.vinde()"
 									},
 									{
 										id : "omenudataFerramentas10",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeGeoLocal'></span>" + $trad("x93"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeGeoLocal'></span>" + $trad("x93"),
 										url : "javascript:i3GEO.mapa.dialogo.geolocal()"
 									},
 									{
 										id : "omenudataFerramentas11",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeInserexy'></span>" + $trad("d22t"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeInserexy'></span>" + $trad("d22t"),
 										url : "javascript:i3GEO.mapa.dialogo.cliquePonto()"
 									},
 									{
 										id : "omenudataFerramentas12",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeCliqueTexto'></span>" + $trad("d25t"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeCliqueTexto'></span>" + $trad("d25t"),
 										url : "javascript:i3GEO.mapa.dialogo.cliqueTexto()"
 									},
 									{
 										id : "omenudataImprimir",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeImprimir'></span>" + $trad("d12"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeImprimir'></span>" + $trad("d12"),
 										url : "javascript:i3GEO.mapa.dialogo.imprimir()"
 									},
 									{
 										id : "omenudataTipoImg",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeTipoImg'></span>" + $trad("p2"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeTipoImg'></span>" + $trad("p2"),
 										url : "javascript:i3GEO.mapa.dialogo.tipoimagem()"
 									},
 									{
 										id : "omenudataCorFundo",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeColorchooser'></span>" + $trad("p9"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeColorchooser'></span>" + $trad("p9"),
 										url : "javascript:i3GEO.mapa.dialogo.corFundo()"
 									},
 									{
 										id : "gradeCoordenadas",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeGraticule'></span>" + $trad("p10"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeGraticule'></span>" + $trad("p10"),
 										url : "javascript:i3GEO.mapa.dialogo.gradeCoord()"
+									},
+									{
+										id : "mascara",
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeMascara'></span>" + $trad("mascara"),
+										url : "javascript:i3GEO.mapa.dialogo.mascara()"
 									}
 								]
 							]
@@ -563,57 +568,57 @@ i3GEO.configura =
 								[
 									{
 										id : "omenudataFerramentas1b",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeTabela'></span>" + $trad("t31"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeTabela'></span>" + $trad("t31"),
 										url : "javascript:i3GEO.tema.dialogo.tabela()"
 									},
 									{
 										id : "omenudataFerramentas2b",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeBusca'></span>" + $trad("t23"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeBusca'></span>" + $trad("t23"),
 										url : "javascript:i3GEO.tema.dialogo.procuraratrib()"
 									},
 									{
 										id : "omenudataFerramentas3b",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeToponimia'></span>" + $trad("t25"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeToponimia'></span>" + $trad("t25"),
 										url : "javascript:i3GEO.tema.dialogo.toponimia()"
 									},
 									{
 										id : "omenudataFerramentas4b",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeEtiqueta'></span>" + $trad("t27"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeEtiqueta'></span>" + $trad("t27"),
 										url : "javascript:i3GEO.tema.dialogo.etiquetas()"
 									},
 									{
 										id : "omenudataFerramentas5b",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeFiltro'></span>" + $trad("t29"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeFiltro'></span>" + $trad("t29"),
 										url : "javascript:i3GEO.tema.dialogo.filtro()"
 									},
 									{
 										id : "omenudataFerramentas6b",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeLegenda'></span>" + $trad("t33"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeLegenda'></span>" + $trad("t33"),
 										url : "javascript:i3GEO.tema.dialogo.editaLegenda()"
 									},
 									{
 										id : "omenudataFerramentas7b",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeCortina'></span>" + $trad("t42"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeCortina'></span>" + $trad("t42"),
 										url : "javascript:i3GEO.tema.dialogo.cortina()"
 									},
 									{
 										id : "omenudataFerramentas8b",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeGrTema'></span>" + $trad("t37a"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeGrTema'></span>" + $trad("t37a"),
 										url : "javascript:i3GEO.tema.dialogo.graficotema()"
 									},
 									{
 										id : "omenudataFerramentas9b",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeGrafico'></span>" + $trad("t37b"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeGrafico'></span>" + $trad("t37b"),
 										url : "javascript:i3GEO.analise.dialogo.graficoInterativo1()"
 									},
 									{
 										id : "omenudataFerramentasmmscale",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconemmscale'></span>" + $trad("variaEscala"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconemmscale'></span>" + $trad("variaEscala"),
 										url : "javascript:i3GEO.tema.dialogo.mmscale()"
 									},
 									{
 										id : "omenudataFerramentas3e",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeTme'></span>" + $trad("t49"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeTme'></span>" + $trad("t49"),
 										url : "javascript:i3GEO.tema.dialogo.tme()"
 									}
 								]
@@ -630,12 +635,12 @@ i3GEO.configura =
 								[
 									{
 										id : "omenudataFerramentas1e",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeCartograma'></span>" + $trad("x57"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeCartograma'></span>" + $trad("x57"),
 										url : "javascript:i3GEO.mapa.dialogo.metaestat()"
 									},
 									{
 										id : "omenudataFerramentas4e",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeAplicStat'></span>" + $trad("x71"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeAplicStat'></span>" + $trad("x71"),
 										url : "javascript:i3GEO.mapa.dialogo.metaestatListaMapas()"
 									}
 								]
@@ -652,12 +657,12 @@ i3GEO.configura =
 								[
 									{
 										id : "omenudataFerramentas14",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeAdd'></span>" + $trad("conexaoServicoGeo"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeAdd'></span>" + $trad("conexaoServicoGeo"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"
 									},
 									{
 										id : "omenudataFerramentas9i",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeVinde'></span>" + $trad("x85"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeVinde'></span>" + $trad("x85"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.vinde()"
 									}
 								]
@@ -674,7 +679,7 @@ i3GEO.configura =
 								[
 									{
 										id : "omenudataFerramentas13",
-										text : "<span class='i3GEOconeFerramenta i3GEOiconeUpload'></span>" + $trad("uploadArquivoGeo"),
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeUpload'></span>" + $trad("uploadArquivoGeo"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.uploadarquivo()"
 									}
 								]

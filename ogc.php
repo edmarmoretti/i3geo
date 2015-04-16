@@ -845,7 +845,6 @@ if(isset($OUTPUTFORMAT)){
 			header('Content-Disposition: attachment; filename='.$n.'.zip');
 		}
 	}
-	//FIXME envia uma linha estranha no header. Nao da pra usar
 	if(strtolower($OUTPUTFORMAT) == "geojson"){
 		$l = $oMap->getlayer(0);
 		$oMap->selectOutputFormat("geojson");
@@ -868,7 +867,10 @@ if(strtolower($request) == "getcapabilities"){
 if(!isset($OUTPUTFORMAT)){
 	header("Content-type: $contenttype");
 }
-
+if(strtolower($OUTPUTFORMAT) == "geojson"){
+	ms_iostripstdoutbuffercontentheaders();
+	header("Content-type: application/json; subtype=geojson");
+}
 $buffer = ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
 //

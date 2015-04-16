@@ -499,6 +499,7 @@ $testa - Testa o filtro e retorna uma imagem.
 		}
 		foreach($this->indices as $indice){
 			$layer = $this->mapa->getlayer($indice);
+			$items = pegaItens($layer);
 			if(!$layer){return "erro";}
 			$layer->setmetadata("cache","");
 			$fil = $layer->getFilterString();
@@ -515,7 +516,21 @@ $testa - Testa o filtro e retorna uma imagem.
 				$layer->setfilter($filtro);
 			}
 			else{
-				$layer->setfilter($filtro);
+				//testa o filtro
+				$teste = $layer->querybyattributes($items[0],$filtro,1);
+				if($teste != MS_SUCCESS){
+					$teste = $this->layer->queryByAttributes($itens[0], mb_convert_encoding($filtro,"ISO-8859-1","UTF-8"), 1);
+					if($teste != MS_SUCCESS){
+						$teste = $this->layer->queryByAttributes($itens[0], mb_convert_encoding($filtro,"UTF-8","ISO-8859-1"), 1);
+						$filtro =  mb_convert_encoding($filtro,"UTF-8","ISO-8859-1");
+					}
+					else{
+						$filtro = mb_convert_encoding($filtro,"ISO-8859-1","UTF-8");
+					}
+				}
+				if($teste == MS_SUCCESS){
+					$layer->setfilter($filtro);
+				}
 				$v = versao();
 				//corrige bug do mapserver
 				if (($v["completa"] == "4.10.0") && ($layer->connectiontype == MS_POSTGIS)){

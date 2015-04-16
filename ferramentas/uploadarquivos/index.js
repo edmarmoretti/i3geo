@@ -100,7 +100,7 @@ i3GEOF.uploadarquivos =
 			i3GEO.janela.minimiza("i3GEOFuploadarquivos");
 		};
 		// cria a janela flutuante
-		titulo = "<span class='i3GEOconeFerramenta i3GEOiconeUpload'></span>" + $trad("upload",i3GEOF.uploadarquivos.dicionario);
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeUpload'></span>" + $trad("upload",i3GEOF.uploadarquivos.dicionario);
 		janela =
 			i3GEO.janela.cria(
 				"230px",
