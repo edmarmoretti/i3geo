@@ -871,7 +871,7 @@ function core_comboTemas(onde,id,marcar,funcao)
 				{funcao = "";}
 				if (funcao != "")
 				{funcao = "onchange='"+funcao+"'";}
-				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >";
+				ins = "<select size=6 style='width:355px' id='"+id+"' "+funcao+" >";
 				ins += core_comboObjeto(valores,"id_tema","nome_tema",marcar,"codigo_tema");
 				ins += "</select></p>";
 				$i(onde).innerHTML = ins;
@@ -1639,6 +1639,31 @@ function core_ativaforms(lista){
 		}
 	}
 }
+
+function core_filtraLetrasCombo(id,letra){
+	if (letra == "Todos") {
+		letra = "";
+	}
+	i3GEO.util.insereCookie("I3GEOletraAdmin", letra);
+	if($i("iniciaisLetras")){
+		$i("iniciaisLetras").value = letra;
+	}
+	var combo = $i(id),
+		n, i, o, v;
+	if(combo){
+		o = combo.options;
+		n = o.length;
+		letra = letra.toLowerCase();
+		for(i = 0; i < n; i++){
+			v = o[i].text.toLowerCase();
+			o[i].style.display = "block";
+			if(v.search(letra) < 0 && o[i].value != combo.value ){
+				o[i].style.display = "none";
+			}
+		}
+	}
+}
+
 function core_listaDeLetras(onde,nomeFuncao,semLetras){
 	//letraAtual guarda a ultima letra clicada
 	var o,i,ins= "<p><b>",
@@ -1659,7 +1684,7 @@ function core_listaDeLetras(onde,nomeFuncao,semLetras){
 					+ "\")' style='color:blue;cursor:pointer;padding:1px;border: 1px solid #C8C8FA'>"
 					+ letras[i] + "</span>&nbsp;";
 		}
-		ins += "</b></p>";
+		//ins += "</b></p>";
 	}
 	else{
 		ins = "";
@@ -1668,7 +1693,7 @@ function core_listaDeLetras(onde,nomeFuncao,semLetras){
 		o = document.getElementById(onde);
 		if(o){
 			if(!semLetras){
-				o.innerHTML = "<fieldset style=padding:2px; class=letras ><form id=forminiciais ><p><b>Iniciais: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /></form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></p></fieldset>";
+				o.innerHTML = "<fieldset style=padding:2px; class=letras ><form id=forminiciais ><p><b>Filtro: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /></form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></fieldset>";
 			}
 			else{
 				o.innerHTML = "<form id=forminiciais >Iniciais: <input name='' onchange='' value='' id=iniciaisLetras type=text style=width:40px;cursor:pointer /></form>";

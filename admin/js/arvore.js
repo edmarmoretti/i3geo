@@ -41,7 +41,6 @@ i3geo/admin/js/arvore.js
 //obtem os parametros da url
 //
 YAHOO.namespace("admin.container");
-//TODO permitir escolher mais de um tema ao adicionar em um no da arvore
 (function(){
 	$id_menu = "";
 	$id_grupo = "";
@@ -671,6 +670,7 @@ function editar(tipo,id)
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
 					core_montaEditor("gravaDados('tema','"+id+"')","400px","400px","","Tema",true,true,false);
 					$i("editor_bd").innerHTML = montaDivTema(dados);
+					core_listaDeLetras("letrasDivTema","filtraLetraTemas");
 					core_comboTemas("comboTema","Eid_tema",dados.id_tema,"");
 					core_comboPerfis("comboPerfil","Eperfil_tema","","registraPerfil(this.value,\"En3_perfil\")");
 				}
@@ -699,6 +699,9 @@ function editar(tipo,id)
 	{sUrl = "../php/arvore.php?funcao=pegaDadosRaiz&id="+id+"&idioma="+idiomaSel();}
 	if(sUrl)
 	{core_makeRequest(sUrl,callback);}
+}
+function filtraLetraTemas(letra) {
+	core_filtraLetrasCombo("Eid_tema",letra);
 }
 function montaDivGrupo(i)
 {
@@ -738,6 +741,7 @@ function montaDivSubGrupo(i)
 function montaDivTema(i)
 {
 	var ins = "<p>Escolha o tema para esse n&iacute;vel:</p>";
+	ins += "<div id='letrasDivTema'></div>";
 	ins += "<div id=comboTema >Buscando...</div>";
 	ins += "<p>Perfis que podem ver: </p>";
 	ins += "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' style='position:relative;width:200px;float:left;'/>";

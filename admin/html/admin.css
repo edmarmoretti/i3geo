@@ -215,6 +215,15 @@ fieldset {
 	margin: 7px;
 }
 
+select{
+	text-align: left;
+	border: 0px solid gray;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 0 1px 3px gray;
+	background-color: rgb(250, 250, 250);
+	padding: 2px;
+}
+
 .mascaraPrincipal {
 	position: relative;
 	top: -15px;
