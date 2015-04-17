@@ -5,41 +5,19 @@ MAP
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	""
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
-      "ltempoitemimagem"	""
       "CLASSE"	"SIM"
       "ltempoitemdescricao"	""
-      "palletestep"	""
       "ltempoiteminicio"	""
       "permitekmz"	"nao"
       "ltempoitemtip"	""
-      "temporizador"	""
-      "iconetema"	""
-      "description_template"	""
-      "ltempoitemtitulo"	""
-      "ltempoitemlink"	""
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "palletefile"	""
       "permitedownload"	"sim"
-      "ltempoformatodata"	""
-      "ltempoitemicone"	""
-      "permitecomentario"	""
-      "metaestat"	""
       "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"tipoEstilos":"default","gridSize":"50"}}'
-      "itembuscarapida"	""
-      "arquivokmz"	""
-      "arquivodownload"	""
       "permitekml"	"sim"
       "permiteogc"	"sim"
-      "convcaracter"	""
       "TEMA"	"Localidades (usar com mapa de cluster)"
       "cortepixels"	"0"
-      "editorsql"	""
-      "ltempoconvencode"	""
-      "ltempoitemfim"	""
-      "legendaimg"	""
     END # METADATA
     NAME "_lmapadecluster"
     STATUS OFF
@@ -81,8 +59,5 @@ MAP
         #SYMBOL "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/people55.png"
       END # STYLE
     END # CLASS
-
   END # LAYER
-
 END # MAP
-

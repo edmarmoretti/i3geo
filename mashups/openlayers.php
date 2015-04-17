@@ -655,8 +655,9 @@ function adicionaPluginI3geo(camada,visivel){
 		camada["cache"] = "NAO";
 	}
 	var l = i3GEO.pluginI3geo.layerMashup("openlayers",camada,"4326"),
-		n = l.length,
+		n,
 		i;
+		n = l.length;
 	for(i = 0; i < n; i++){
 		if(l[i].displayInLayerSwitcher === true){
 			l[i].setVisibility(visivel);

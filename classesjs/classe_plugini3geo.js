@@ -165,7 +165,8 @@ i3GEO.pluginI3geo =
 		 */
 		layerMashup : function(Interface, camada, epsg) {
 			if (camada.plugini3geo && camada.plugini3geo != "" && i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup) {
-				return i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup(camada, epsg);
+				var l = i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup(camada, epsg);
+				return l;
 			} else {
 				return [
 					false
@@ -349,6 +350,10 @@ i3GEO.pluginI3geo =
 					camada.wms = false;
 					camada.classe = "NAO";
 					return camada;
+				},
+				layerMashup : function(camada, epsg){
+					i3GEO.pluginI3geo.heatmap.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+					return [];
 				},
 				inicia : function(camada, objMapa) {
 					var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php", carregaJs =
@@ -612,6 +617,10 @@ i3GEO.pluginI3geo =
 					camada.classe = "NAO";
 					return camada;
 				},
+				layerMashup : function(camada, epsg){
+					i3GEO.pluginI3geo.markercluster.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+					return [];
+				},
 				inicia : function(camada, objMapa) {
 					var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic + "/ferramentas/markercluster/openlayers_js.php", carregaJs =
 						"nao", criaLayer;
@@ -871,6 +880,10 @@ i3GEO.pluginI3geo =
 					camada.wms = false;
 					camada.classe = "NAO";
 					return camada;
+				},
+				layerMashup : function(camada, epsg){
+					i3GEO.pluginI3geo.layerkml.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+					return [];
 				},
 				inicia : function(camada, objMapa) {
 					var layerkml;
