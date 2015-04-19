@@ -117,7 +117,11 @@ if (!euEnv.imageBasePath)
 					if(i3GEO.barraDeBotoes.POSICAO === "top"){
 						classe = "eudockImagemTop";
 					}
-					this.container.innerHTML+="<img onLoad='"+onLoadFunc+";' id='"+this.id+"' src='"+args.image+"' style='position:absolute;visibility:hidden;' class='"+classe+"' >";
+					var alt = "";
+					if(args.titulo && args.titulo != ""){
+						alt = args.titulo;
+					}
+					this.container.innerHTML+="<img title='" + alt + "' onLoad='"+onLoadFunc+";' id='"+this.id+"' src='"+args.image+"' style='position:absolute;visibility:hidden;' class='"+classe+"' >";
 				}
 				else{
 					this.container.innerHTML+="<img onLoad='"+onLoadFunc+";' id='"+this.id+"' src='"+args.image+"' style='position:absolute;visibility:hidden;' class='noprint' >";

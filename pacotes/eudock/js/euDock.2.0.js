@@ -556,7 +556,7 @@ var euOPAQUE      = 16;
 			this.addIcon = function(args,params){
 				var i,id = params.id;
 				var id = 'euDock_icon_'+euEnv.Kost.next();
-				euEnv.euDockArray[id] = new euDockIcon(id,this);
+				euEnv.euDockArray[id] = new euDockIcon(id,this,params.titulo);
 				euEnv.euDockArray[id].addElement(args);
 				this.iconsArray.push(euEnv.euDockArray[id]);
 				for (i in this.iconParams)
@@ -591,9 +591,8 @@ var euOPAQUE      = 16;
  ******     (START)               *******
  ****************************************
  */
-		function euDockIcon(id,dock){
+		function euDockIcon(id,dock,titulo){
 			this.id = id;
-
 			this.parentDock = dock;
 
 			this.elementsArray;
@@ -747,7 +746,6 @@ var euOPAQUE      = 16;
 					this.mouseInsideClick(x,y,this.id,this.getAbsolutePosX(),this.getAbsolutePosY());
 				}
 			};
-
 		};
 /*
  ****************************************

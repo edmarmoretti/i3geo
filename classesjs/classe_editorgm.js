@@ -1,6 +1,5 @@
 //TODO documentar
 //TODO traduzir
-//TODO incluir opcao para selecionar todas as figuras
 //TODO incluir balao de informacoes como um elemento grafico de desenho
 //TODO incluir caixas de texto
 //TODO incluir undo na edicao

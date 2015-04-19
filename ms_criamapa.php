@@ -826,11 +826,11 @@ function incluiTemasIniciais(){
 						$layern = $maptemp->getLayer($i);
 						if($layern->type == MS_LAYER_RASTER)
 						{$existeraster = true;}
-						if ($layern->name == "estadosl")
-						{$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");}
+						if ($layern->name == "estadosl"){
+							$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");
+						}
 						$layern->setmetadata("nomeoriginal",$layern->name);
 						$nNome = str_replace(".map","",basename($arqtemp));
-						//TODO verificar o uso dos metadados arquivotemaoriginal e nomeoriginal
 						$layern->setmetadata("arquivotemaoriginal",$nNome);
 						autoClasses($layern,$mapn);
 						//

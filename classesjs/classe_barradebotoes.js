@@ -24,16 +24,16 @@
 
 /**
  * Licen&ccedil;a
- *
+ * 
  * GPL2
- *
+ * 
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
+ * 
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
+ * 
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
+ * 
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -47,262 +47,262 @@ i3GEO.barraDeBotoes =
 	{
 		/**
 		 * Variavel: BARRAS
-		 *
+		 * 
 		 * Array com os objetos YAHOO.i3GEO.janela.botoes criados
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {array}
 		 */
 		BARRAS : [],
 		/**
 		 * Variavel: BOTAOCLICADO
-		 *
+		 * 
 		 * &Uacute;ltimo icone que foi clicado
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {String}
 		 */
 		BOTAOCLICADO : "",
 		/**
 		 * Propriedade: ATIVA
-		 *
+		 * 
 		 * Indica se a barra de bot&otilde;es ser&aacute; ou n&atilde;o cosntru&iacute;da automaticamente no processo de
 		 * inicializa&ccedil;&atilde;o do mapa.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {boolean}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * true
 		 */
 		ATIVA : true,
 		/**
 		 * Propriedade: TIPO
-		 *
+		 * 
 		 * Tipo de barra.
-		 *
+		 * 
 		 * Por padr&atilde;o, utiliza a biblioteca YUI para construir a barra, opcionalmente pode-se utilizar outro tipo.
-		 *
+		 * 
 		 * Se for utilizado o padr&atilde;o YUI e os elementos para compor a barra n&atilde;o forem encontrados, a barra n&atilde;o
 		 * ser&aacute; criada.
-		 *
+		 * 
 		 * O tipo emlinha insere os bot&otilde;es em um elemento html qualquer j&aacute; existente na p&aacute;gina. Nesse caso a barra
 		 * n&atilde;o &eacute; iniciada automaticamente, sendo necess&aacute;rio usar a fun&ccedil;&atilde;o
-		 *
+		 * 
 		 * i3GEO.barraDeBotoes.inicializaBarra("","",false,0,0,onde)
-		 *
+		 * 
 		 * Caso o par&acirc;metro &quot;onde&quot; seja omitido ou o o elemento HTML com esse ID n&atilde;o for encontrado, ser&aacute;
 		 * criado um elemento do tipo DIV no contexto do mapa.
-		 *
+		 * 
 		 * Se voc&ecirc; quer usar a barra do tipo olho de peixe e seu mapa tiver tamanho fixo, utilize o tipo &quot;olhodepeixe1&quot;
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {string}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {yui}
-		 *
+		 * 
 		 * Valores:
-		 *
+		 * 
 		 * {"yui","olhodepeixe","olhodepeixe1","emlinha"}
 		 */
 		TIPO : "yui",
 		/**
 		 * Propriedade: OFFSET
-		 *
+		 * 
 		 * Ajuste do deslocamento vertical da barra (v&aacute;lido apenas para o tipo "olhodepeixe")
-		 *
+		 * 
 		 * Desloca a barra em uma determinada quantidade de pixels. Valores negativos fazem a barra subir.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {numeric}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {-205}
 		 */
 		OFFSET : -205,
 		/**
 		 * Propriedade: POSICAO
-		 *
+		 * 
 		 * Define o posicionamento da barra de bot&otilde;es do tipo olhodepeixe
-		 *
+		 * 
 		 * Valores:
-		 *
+		 * 
 		 * {"top","bottom"}
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {string}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {"bottom"}
 		 */
 		POSICAO : "bottom",
 		/**
 		 * Propriedade: MAXBOTOES
-		 *
+		 * 
 		 * N&uacute;mero de bot&otilde;es iniciais (v&aacute;lido apenas para os tipos olho de peixe)
-		 *
+		 * 
 		 * Se for 0, todos os bot&otilde;es ser&atilde;o mostrados
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {numeric}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {13}
 		 */
 		MAXBOTOES : 13,
 		/**
 		 * Propriedade: AJUDA
-		 *
+		 * 
 		 * Mostra um texto de ajuda colado ao &iacute;cone da ferramenta
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {boolean}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {true}
 		 */
 		AJUDA : true,
 		/**
 		 * Propriedade: ORIENTACAO
-		 *
+		 * 
 		 * Orienta&ccedil;&atilde;o vertical ou horizontal da barra (n&atilde;o se aplica aos tipos olhos de peixe)
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {string}
-		 *
+		 * 
 		 * Valores:
-		 *
+		 * 
 		 * {"horizontal","vertical"}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {"vertical"}
 		 */
 		ORIENTACAO : "vertical",
 		/**
 		 * Propriedade: HORIZONTALW
-		 *
+		 * 
 		 * Largura da barra quando ORIENTACAO = "horizontal" (n&atilde;o se aplica aos tipos olhos de peixe)
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {numeric}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {350}
 		 */
 		HORIZONTALW : 350,
 		/**
 		 * Propriedade: TIPOAJUDA
-		 *
+		 * 
 		 * Tipo do bal&atilde;o de ajuda que &eacute; mostrado colado ao &iacute;cone da ferramenta
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {string}
-		 *
+		 * 
 		 * Valores:
-		 *
+		 * 
 		 * {"horizontal","vertical","balao"}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {"horizontal"}
 		 */
 		TIPOAJUDA : "balao",
 		/**
 		 * Propriedade: SOICONES
-		 *
+		 * 
 		 * Esconde as bordas das barras e o fundo, mostrando apenas os &iacute;cones (n&atilde;o se aplica aos tipos olhos de peixe)
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {false}
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {boolean}
 		 */
 		SOICONES : false,
 		/**
 		 * Propriedade: AUTOALTURA
-		 *
+		 * 
 		 * Ajusta automaticamente a altura das barras conforme a altura do mapa.
-		 *
+		 * 
 		 * Esta op&ccedil;&atilde;o n&atilde;o tem efeito se a barra contiver a barra de zoom (isso ocorre em fun&ccedil;&atilde;o de um bug
 		 * do YIU, que causa erro na barra nessas condi&ccedil;&otilde;es)
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {boolean}
 		 */
 		AUTOALTURA : false,
 		/**
 		 * Propriedade: TRANSICAOSUAVE
-		 *
+		 * 
 		 * Altera a transpar&ecirc;ncia das barras quando o mouse sobrep&otilde;e a barra e quando sai da barra (n&atilde;o se aplica aos
 		 * tipos olhos de peixe)
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {boolean}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {true}
 		 */
 		TRANSICAOSUAVE : true,
 		/**
 		 * Propriedade: OPACIDADE
-		 *
+		 * 
 		 * Valor da opacidade min&iacute;ma utilizada quando TRANSICAOSUAVE for igual a true. (n&atilde;o se aplica aos tipos olhos de
 		 * peixe)
-		 *
+		 * 
 		 * Varia de 0 a 100
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {numeric}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {65}
 		 */
 		OPACIDADE : 65,
 		/**
 		 * Propriedade: PERMITEFECHAR
-		 *
+		 * 
 		 * Mostra o bot&atilde;o para fechar as barras ou n&atilde;o.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {boolean}
 		 */
 		PERMITEFECHAR : true,
 		/**
 		 * Propriedade: PERMITEDESLOCAR
-		 *
+		 * 
 		 * Permite deslocar as barras ou n&atilde;o.
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {boolean}
 		 */
 		PERMITEDESLOCAR : true,
@@ -312,118 +312,118 @@ i3GEO.barraDeBotoes =
 		ATIVAMENUCONTEXTO : false,
 		/**
 		 * Propriedade: AUTO
-		 *
+		 * 
 		 * Cria as barras de bot&otilde;es automaticamente, utilizando os bot&otilde;es padr&atilde;o sem considerar a lista de
 		 * bot&otilde;es definidas no HTML da interface.
-		 *
+		 * 
 		 * A lista de bot&otilde;es &eacute; definida em i3GEO.configura
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {Boolean}
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * {false}
 		 */
 		AUTO : false,
 		/**
 		 * Propriedade: LISTABOTOES
-		 *
+		 * 
 		 * Objeto com a lista de bot&otilde;es e suas propriedades, como por exemplo, a fun&ccedil;&atilde;o a ser executada ao se clicar no
 		 * bot&atilde;o.
-		 *
+		 * 
 		 * Essa lista n&atilde;o indica quais os bot&otilde;es que ser&atilde;o inseridos. Para definir os bot&otilde;es que ser&atilde;o
 		 * inseridos, inclua no HTML da interface os bot&otilde;es desejados (veja em i3geo/exemplos). Se vc utilizar a op&ccedil;&atilde;o
 		 * i3GEO.barraDeBotoes.AUTO = true , os bot&otilde;es ser&atilde;o inseridos automaticamente. Nesse caso, utilize a
 		 * op&ccedil;&atilde;o i3GEO.barraDeBotoes.INCLUIRBOTOES para indicar os bot&otilde;es desejados.
-		 *
+		 * 
 		 * Por default utiliza os botoes definidos em i3GEO.configura.funcoesBotoes.botoes
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {objeto}
 		 */
 		LISTABOTOES : i3GEO.configura.funcoesBotoes.botoes,
 		/**
 		 * Propriedade: INCLUIBOTAO
-		 *
+		 * 
 		 * Objeto que indica quais os bot&otilde;es que ser&atilde;o inseridos na barra de bot&otilde;es 2.
-		 *
+		 * 
 		 * Essa op&ccedil;&atilde;o s&oacute; funciona se i3GEO.barraDeBotoes.AUTO = true
-		 *
+		 * 
 		 * Vc pode tamb&eacute;m alterar a ordem dos botoes ou adicionar novos
-		 *
+		 * 
 		 * Na barra de bot&otilde;es do tipo "yui", as chaves ser&atilde;o adicionadas como o atributo "id" em cada bot&atilde;o. Nesse
 		 * caso, &eacute; poss&iacute;vel definir o estilo CSS para cada bot&atilde;o (veja em i3geo/css/botoes2.css).
-		 *
+		 * 
 		 * A ativa&ccedil;&atilde;o de cada bot&atilde;o, ou seja, a fun&ccedil;&atilde;o que &eacute; executada ao ser feito o clique,
 		 * &eacute; definida em i3GEO.configura.funcoesBotoes
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * INCLUIBOTAO: {
-		 *
+		 * 
 		 * abreJanelaLegenda: false,
-		 *
+		 * 
 		 * zoomli: false,
-		 *
+		 * 
 		 * zoomiauto: false,
-		 *
+		 * 
 		 * zoomoauto: false
-		 *
+		 * 
 		 * pan: false,
-		 *
+		 * 
 		 * zoomtot:false,
-		 *
+		 * 
 		 * identifica: true,
-		 *
+		 * 
 		 * identificaBalao: true,
-		 *
+		 * 
 		 * mede: true,
-		 *
+		 * 
 		 * area: true,
-		 *
+		 * 
 		 * imprimir: true,
-		 *
+		 * 
 		 * reinicia: true,
-		 *
+		 * 
 		 * exten: true,
-		 *
+		 * 
 		 * referencia: true,
-		 *
+		 * 
 		 * inserexy: true,
-		 *
+		 * 
 		 * textofid: true,
-		 *
+		 * 
 		 * selecao: true,
-		 *
+		 * 
 		 * barraedicao: false,
-		 *
+		 * 
 		 * google: true,
-		 *
+		 * 
 		 * buscafotos: true,
-		 *
+		 * 
 		 * wiki: true,
-		 *
+		 * 
 		 * metar: true,
-		 *
+		 * 
 		 * lentei: true,
-		 *
+		 * 
 		 * confluence: true,
-		 *
+		 * 
 		 * inseregrafico: true,
-		 *
+		 * 
 		 * v3d: true,
-		 *
+		 * 
 		 * localizar: true,
-		 *
+		 * 
 		 * zoomproximo: true,
-		 *
+		 * 
 		 * zoomanterior: true }
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {objeto}
 		 */
 		INCLUIBOTAO : {
@@ -457,77 +457,77 @@ i3GEO.barraDeBotoes =
 			inseregrafico : true,
 			v3d : false
 		},
-		//TODO colocar os icones como propriedade das definicoes do botao
+		// TODO colocar os icones como propriedade das definicoes do botao
 		/**
 		 * Propriedade: ICONEBOTAO
-		 *
+		 * 
 		 * &Iacute;cones utilizados em cada um dos bot&otilde;es da barra.
-		 *
+		 * 
 		 * Esses &iacute;cones s&atilde;o utilizados apenas se i3GEO.barraDeBotoes.TIPO = "olhodepeixe" e "olhodepeixe1". Para cada elemento
 		 * existente em i3GEO.barraDeBotoes.INCLUIBOTAO deve existir um elemento nesse objeto. A chave de cada elemento &eacute; a mesma do
 		 * objeto INCLUIBOTAO. O endere&ccedil;o da imagem ser&aacute; complementado pelo i3geo, adicionando no in&iacute;cio da string o
 		 * valor da vari&aacute;vel i3GEO.configura.locaplic
-		 *
+		 * 
 		 * Default:
-		 *
+		 * 
 		 * ICONEBOTAO: {
-		 *
+		 * 
 		 * zoomli: "/imagens/gisicons/eudock/zoom-region.png",
-		 *
+		 * 
 		 * zoomproximo: "/imagens/gisicons/eudock/zoom-next.png",
-		 *
+		 * 
 		 * zoomanterior: "/imagens/gisicons/eudock/zoom-last.png",
-		 *
+		 * 
 		 * pan: "/imagens/gisicons/eudock/pan.png",
-		 *
+		 * 
 		 * zoomtot: "/imagens/gisicons/eudock/zoom-extent.png",
-		 *
+		 * 
 		 * identifica: "/imagens/gisicons/eudock/identify.png",
-		 *
+		 * 
 		 * identificaBalao: "/imagens/gisicons/eudock/tips.png",
-		 *
+		 * 
 		 * mede: "/imagens/gisicons/eudock/length-measure.png",
-		 *
+		 * 
 		 * area: "/imagens/gisicons/eudock/area-measure.png",
-		 *
+		 * 
 		 * imprimir: "/imagens/gisicons/eudock/print.png",
-		 *
+		 * 
 		 * reinicia: "/imagens/gisicons/eudock/redraw.png",
-		 *
+		 * 
 		 * exten: "/imagens/gisicons/eudock/map-extent-info.png",
-		 *
+		 * 
 		 * referencia: "/imagens/gisicons/eudock/map-reference.png",
-		 *
+		 * 
 		 * inserexy: "/imagens/gisicons/eudock/point-create.png",
-		 *
+		 * 
 		 * textofid: "/imagens/gisicons/eudock/text-add.png",
-		 *
+		 * 
 		 * selecao: "/imagens/gisicons/eudock/select.png",
-		 *
+		 * 
 		 * google: "/imagens/gisicons/eudock/google-map.png",
-		 *
+		 * 
 		 * buscafotos: "/imagens/gisicons/eudock/fotos.png",
-		 *
+		 * 
 		 * wiki: "/imagens/gisicons/eudock/wiki.png",
-		 *
+		 * 
 		 * metar: "/imagens/gisicons/eudock/metar.png",
-		 *
+		 * 
 		 * lentei: "/imagens/gisicons/eudock/lente.png",
-		 *
+		 * 
 		 * confluence: "/imagens/gisicons/eudock/confluence.png",
-		 *
+		 * 
 		 * inseregrafico: "/imagens/gisicons/eudock/grafico.png",
-		 *
+		 * 
 		 * v3d: "/imagens/gisicons/eudock/v3d.png",
-		 *
+		 * 
 		 * barraedicao: "/imagens/gisicons/eudock/editopen.png",
-		 *
+		 * 
 		 * localizar: "/imagens/gisicons/eudock/search.png",
-		 *
+		 * 
 		 * abreJanelaLegenda: "/imagens/gisicons/eudock/legenda.png" }
-		 *
+		 * 
 		 * Type:
-		 *
+		 * 
 		 * {objeto}
 		 */
 		ICONEBOTAO : {
@@ -563,64 +563,64 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Propriedade: TEMPLATEBOTAO
-		 *
+		 * 
 		 * Template HTML que ser&aacute; utilizado na constru&ccedil;&atilde;o autom&aacute;tica dos bot&otilde;es da barra 2.
-		 *
+		 * 
 		 * Utilize a string $$ para indicar onde ser&aacute; inclu&iacute;do o c&oacute;digo do bot&atilde;o.
-		 *
+		 * 
 		 * Default: "<div style='display:inline;background-color:rgb(250,250,250);'>
 		 * <p style='font-size:2px;'>
 		 * &nbsp;
 		 * </p>
 		 * <img src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>"
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {string}
 		 */
 		TEMPLATEBOTAO : "",
 		/**
 		 * Propriedade: BOTAOPADRAO
-		 *
+		 * 
 		 * Bot&atilde;o que ser&aacute; ativado ao inicializar os bot&otilde;es com ativaBotoes.
-		 *
+		 * 
 		 * Correpsonde ao item iddiv de LISTABOTOES
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {String}
 		 */
 		BOTAOPADRAO : "pan",
 		/**
 		 * Propriedade: COMPORTAMENTO
-		 *
+		 * 
 		 * Define o comportamento dos bot&otilde;es quando &eacute; pressionado
-		 *
+		 * 
 		 * Tipo:
-		 *
+		 * 
 		 * {String}
-		 *
+		 * 
 		 * Valores:
-		 *
+		 * 
 		 * "padrao" - comportamento padr&atilde;o, com bordas da esquerda e inferiores ativadas
-		 *
+		 * 
 		 * "destacado" - destaca apenas o bot&atilde;o atualmente pressionado
-		 *
+		 * 
 		 * "vermelho" - destaca com fundo vermelho
-		 *
+		 * 
 		 * "laranja" - destaca com fundo laranja
-		 *
+		 * 
 		 * "cinza" - destaca com fundo cinza
-		 *
+		 * 
 		 */
 		COMPORTAMENTO : "padrao",
 		/**
 		 * Function: adicionaBotao
-		 *
+		 * 
 		 * Adiciona um novo botao nas definicoes da barra de botoes
-		 *
+		 * 
 		 * O Objeto deve ser como no exemplo abaixo
-		 *
+		 * 
 		 * i3GEO.barraDeBotoes.adicionaBotao( { iddiv:"meubotao", tipo:"", dica:"Meu Bot&atilde;o", titulo: "Meu Bot&atilde;o", icone:
 		 * "/imagens/oxygen/22x22/user-online.png", funcaoonclick:function(){ alert("Meu novo botao com ID = meubotao"); } } );
 		 */
@@ -631,9 +631,9 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Function: ativaPadrao
-		 *
+		 * 
 		 * Ativa o bot&atilde;o definido como padr&atilde;o, executando a fun&ccedil;&atilde;o definida em onclick
-		 *
+		 * 
 		 * Utilizado para restaurar o status padr&atilde;o da barra, principalmente por ferramentas que alteram &iacute;cones e outras
 		 * propriedades do mapa
 		 */
@@ -650,14 +650,14 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Function: ativaIcone
-		 *
+		 * 
 		 * Altera as bordas de um &iacute;cone aplicando um efeito de &iacute;cone real&ccedil;ado.
-		 *
+		 * 
 		 * Todos os demais &iacute;cones definidos em LISTABOTOES e que tiverem o tipo = "dinamico" ser&atilde;o processados para alterar as
 		 * bordas dando o efeito de n&atilde;o ativo.
-		 *
+		 * 
 		 * Parametro:
-		 *
+		 * 
 		 * {String} - id do icone que ser&aacute; ativado. Esse id &eacute; o mesmo definido em LISTABOTOES
 		 */
 		ativaIcone : function(icone) {
@@ -718,9 +718,7 @@ i3GEO.barraDeBotoes =
 				}
 			}
 			if (i3GEO.util.in_array(i3GEO.barraDeBotoes.COMPORTAMENTO, [
-				"laranja",
-				"vermelho",
-				"cinza"
+				"laranja", "vermelho", "cinza"
 			])) {
 				if (ko >= 0) {
 					do {
@@ -770,13 +768,13 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Function: ativaBotoes
-		 *
+		 * 
 		 * Ativa os botoes definidos em LISTABOTOES
-		 *
+		 * 
 		 * Os botoes s&atilde;o constru&iacute;dos e as fun&ccedil;&otilde;es definidas s&atilde;o embutidas no evento onclick
-		 *
+		 * 
 		 * Parametro:
-		 *
+		 * 
 		 * {String} - botao que ser&aacute; mostrado como ativo (opcional). Se n&atilde;o for definido, ser&aacute; utilizado o bot&atilde;o
 		 * especificado em BOTAOPADRAO. O nome do botao deve estar em LISTABOTOES na propriedade iddiv
 		 */
@@ -784,7 +782,7 @@ i3GEO.barraDeBotoes =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.barraDeBotoes.ativaBotoes()");
 
-			var l, b, temp;
+			var atrib, l, b, temp;
 			if (arguments.length === 0) {
 				padrao = this.BOTAOPADRAO;
 			}
@@ -794,13 +792,19 @@ i3GEO.barraDeBotoes =
 			if (b >= 0) {
 				do {
 					temp = $i(l[b].iddiv);
+					atrib = document.createAttribute("indxBotao");
+					atrib.value = b;
 					if (temp) {
+						temp.setAttributeNode(atrib);
 						if (l[b].conteudo) {
 							temp.innerHTML = l[b].conteudo;
 						}
 						if (l[b] && l[b].dica && i3GEO.barraDeBotoes.TIPO != "emlinha") {
 							$i(l[b].iddiv).onmouseover = function(e) {
-								i3GEO.barraDeBotoes.mostraJanela(this, l[b].dica, e);
+								var i = this.attributes["indxBotao"].value, l = i3GEO.barraDeBotoes.LISTABOTOES;
+								if (l && l[i] && l[i].dica) {
+									i3GEO.barraDeBotoes.mostraJanela(this, l[i].dica, e);
+								}
 							};
 							$i(l[b].iddiv).onmouseout = function(e) {
 								i3GEO.barraDeBotoes.mostraJanela(this, "", e);
@@ -818,6 +822,7 @@ i3GEO.barraDeBotoes =
 								l[b].funcaoonclick();
 							}
 						}
+						// TODO remover eval
 						if (l[b] && l[b].constroiconteudo) {
 							eval(l[b].constroiconteudo);
 						}
@@ -833,16 +838,16 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Function: execBotao
-		 *
+		 * 
 		 * Com base no c&oacute;digo de um bot&atilde;o (iddiv), obt&eacute;m a fun&ccedil;&atilde;o armazenada em
 		 * i3GEO.barraDeBotoes.LISTABOTOES e executa.
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * {string} - identificador do bot&atilde;o, conforme definido no elemento iddiv de i3GEO.barraDeBotoes.LISTABOTOES
-		 *
+		 * 
 		 * {numeric} - (opcional) posi&ccedil;&atilde;o em pixels da tela onde foi feito o clique do mouse
-		 *
+		 * 
 		 * {numeric} - (opcional) posi&ccedil;&atilde;o em pixels da tela onde foi feito o clique do mouse
 		 */
 		execBotao : function(id, x, y, posX, posY) {
@@ -856,16 +861,10 @@ i3GEO.barraDeBotoes =
 			}
 			try {
 				/*
-				if (x) {
-					i3GEO.util.criaPin("i3geoMarcaIcone", i3GEO.configura.locaplic + "/imagens/dot1cinza.gif", "38px", "4px");
-					temp = $i("i3geoMarcaIcone");
-					if (temp) {
-						temp.style.display = "block";
-						temp.style.top = posY + 28 + "px";
-						temp.style.left = posX + "px";
-					}
-				}
-				*/
+				 * if (x) { i3GEO.util.criaPin("i3geoMarcaIcone", i3GEO.configura.locaplic + "/imagens/dot1cinza.gif", "38px", "4px"); temp =
+				 * $i("i3geoMarcaIcone"); if (temp) { temp.style.display = "block"; temp.style.top = posY + 28 + "px"; temp.style.left =
+				 * posX + "px"; } }
+				 */
 				if (botao.funcaoonclick) {
 					botao.funcaoonclick.call();
 				}
@@ -876,11 +875,11 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Function: defBotao
-		 *
+		 * 
 		 * Obt&eacute;m as defini&ccedil;&otilde;es de um bot&atilde;o conforme o seu c&oacute;digo (iddiv)
-		 *
+		 * 
 		 * Retorno:
-		 *
+		 * 
 		 * {objeto} - ver i3GEO.barraDeBotoes.LISTABOTOES
 		 */
 		defBotao : function(iddiv) {
@@ -897,34 +896,18 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Function: inicializaBarraOP
-		 *
+		 * 
 		 * Inicializa a barra de bot&otilde;es quando for do tipo "olhodepeixe" ou "olhodepeixe1"
-		 *
+		 * 
 		 * O objeto euEnv armazena todas as caracter&iacute;sticas da barra
-		 *
+		 * 
 		 * "olhodepeixe1" substitui a antiga "olhodepeixe" e nao precisa de ajustes de posicionamento
-		 *
+		 * 
 		 */
 		inicializaBarraOP : function(onde) {
 			if (i3GEO.barraDeBotoes.ATIVA === false || !$i(i3GEO.Interface.IDCORPO)) {
 				return;
 			}
-			// isso veio do js do eudock
-			/*
-			if (document.onmousemove)
-				euEnv.onmousemoveBK = document.onmousemove;
-
-			document.onmousemove = on_MouseMove;
-
-			if (document.onmousedown)
-				euEnv.onmousedownBK = document.onmousedown;
-			document.onmousedown = on_MouseDown;
-
-			if (document.onmouseup)
-				euEnv.onmouseupBK = document.onmouseup;
-			document.onmouseup = on_MouseUp;
-			*/
-
 			if (document.onclick)
 				euEnv.onclickBK = document.onclick;
 
@@ -971,7 +954,7 @@ i3GEO.barraDeBotoes =
 					}
 				}
 			});
-			i3GEO.barraDeBotoes.AJUDA = false;
+			//i3GEO.barraDeBotoes.AJUDA = false;
 			dock.setIconsOffset(7);
 			if (i3GEO.barraDeBotoes.MAXBOTOES > 0) {
 				n = i3GEO.barraDeBotoes.MAXBOTOES;
@@ -979,7 +962,7 @@ i3GEO.barraDeBotoes =
 			for (i = 0; i < n; i += 1) {
 				if (i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true) {
 					botao = i3GEO.barraDeBotoes.defBotao(chaves[i]);
-					if (botao === false) {
+					if (botao === false || i3GEO.barraDeBotoes.AJUDA === false) {
 						dica = "";
 						titulo = "";
 					} else {
@@ -988,18 +971,18 @@ i3GEO.barraDeBotoes =
 						} else {
 							dica = "";
 						}
-						if (botao.titulo != undefined) {
+						if (botao.titulo != undefined && i3GEO.barraDeBotoes.AJUDA === true) {
 							titulo = botao.titulo;
 						} else {
 							titulo = "";
 						}
 					}
-					dock.addIcon(
-						new Array({
-							euImage : {
-								image : i3GEO.configura.locaplic + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]
-							}
-						}), {
+					dock.addIcon(new Array({
+						euImage : {
+							image : i3GEO.configura.locaplic + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]],
+							titulo : titulo
+						}
+					}), {
 						mouseInsideClick : function(x, y, id, posX, posY) {
 							i3GEO.util.animaClique($i(euEnv.euDockArray[id].elementsArray[0].id));
 							i3GEO.barraDeBotoes.execBotao(euEnv.euDockArray[id].idBotao, x, y, posX, posY);
@@ -1011,25 +994,20 @@ i3GEO.barraDeBotoes =
 				}
 			}
 			$i(euEnv.euDockArray.euDock_0.bar.elementsArray.left.id).onclick = function() {
-				//i3GEO.ajuda.ATIVAJANELA = true;
-				//i3GEO.ajuda.abreJanela();
+				// i3GEO.ajuda.ATIVAJANELA = true;
+				// i3GEO.ajuda.abreJanela();
 				i3GEO.barraDeBotoes.ajudaEmLista();
 			};
 			/*
-			$i("euDock_0").onmouseout = function(){
-				var temp = $i("i3geoMarcaIcone");
-				if(temp){
-					temp.style.display = "none";
-				}
-			};
-			*/
+			 * $i("euDock_0").onmouseout = function(){ var temp = $i("i3geoMarcaIcone"); if(temp){ temp.style.display = "none"; } };
+			 */
 			$i(euEnv.euDockArray.euDock_0.bar.elementsArray.right.id).onclick =
 				function() {
 					var dica, titulo, chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO), n = chaves.length, nb =
 						euEnv.euDockArray.euDock_0.iconsArray.length, i;
-					//if ($i("i3geoMarcaIcone")) {
-					//	$i("i3geoMarcaIcone").style.display = "none";
-					//}
+					// if ($i("i3geoMarcaIcone")) {
+					// $i("i3geoMarcaIcone").style.display = "none";
+					// }
 					// a barra j&aacute; foi expandida
 					if (nb !== i3GEO.barraDeBotoes.MAXBOTOES) {
 						i3GEO.barraDeBotoes.recria();
@@ -1055,7 +1033,8 @@ i3GEO.barraDeBotoes =
 								}
 								dock.addIcon(new Array({
 									euImage : {
-										image : i3GEO.configura.locaplic + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]
+										image : i3GEO.configura.locaplic + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]],
+										titulo : titulo
 									}
 								}), {
 									mouseInsideClick : function(x, y, id, posX) {
@@ -1072,39 +1051,39 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Function: inicializaBarra
-		 *
+		 * 
 		 * Inicializa a barra de bot&otilde;es
-		 *
+		 * 
 		 * A barra de zoom &eacute; inserida automaticamente na barra de botoes 1 se esta existir
-		 *
+		 * 
 		 * Caso i3GEO.barraDeBotoes.TIPO === "olhodepeixe" os par&acirc;metros s&atilde;o ignorados.
-		 *
+		 * 
 		 * Exemplo:
-		 *
+		 * 
 		 * if ($i("barraDeBotoes1"))
-		 *
+		 * 
 		 * i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes1","i3geo_barra1",true,x1,y1);
-		 *
+		 * 
 		 * if ($i("barraDeBotoes2"))
-		 *
+		 * 
 		 * i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);
-		 *
+		 * 
 		 * Os objetos criados s&atilde;o armazenados no array BARRAS, dessa forma, para acessar uma barra utilize por exemplo:
-		 *
+		 * 
 		 * i3GEO.barraDeBotoes.BARRAS[1].show();
-		 *
+		 * 
 		 * Parametros:
-		 *
+		 * 
 		 * {String} - id do elemento existente no HTML e que cont&eacute;m as defini&ccedil;&otilde;es dos bot&otilde;es
-		 *
+		 * 
 		 * {String} - id do elemento que ser&aacute; criado para adicionar os boto&otilde;es
-		 *
+		 * 
 		 * {boolean} - indica se a barra de zoom ser&aacute; inclu&iacute;da
-		 *
+		 * 
 		 * {Numeric} - posi&ccedil;&atilde;o x (pixels) da barra em rela&ccedil;&atilde;o ao mapa
-		 *
+		 * 
 		 * {Numeric} - posi&ccedil;&atilde;o y (pixels) da barra em rela&ccedil;&atilde;o ao mapa
-		 *
+		 * 
 		 * {String} - (opcional) id do elemento HTML onde os bot&otilde;es ser&atilde;o inseridos
 		 */
 		inicializaBarra : function(idconteudo, idconteudonovo, barraZoom, x, y, onde) {
@@ -1125,13 +1104,13 @@ i3GEO.barraDeBotoes =
 			} else {
 				if (this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === false) {
 					this.TEMPLATEBOTAO =
-						"<div style='display:inline;background-color:rgb(250,250,250);'><img style='border:0px solid white;' src='"
-							+ i3GEO.configura.locaplic + "/imagens/branco.gif' id='$$'/></div>";
+						"<div style='display:inline;background-color:rgb(250,250,250);'><img style='border:0px solid white;' src='" + i3GEO.configura.locaplic
+							+ "/imagens/branco.gif' id='$$'/></div>";
 				}
 				if (this.TEMPLATEBOTAO === "" && i3GEO.Interface.TABLET === true) {
 					this.TEMPLATEBOTAO =
-						"<div style='display:inline;background-color:rgb(250,250,250);'><img style='margin:4px;border:0px solid white;' src='"
-							+ i3GEO.configura.locaplic + "/imagens/branco.gif' id='$$'/></div>";
+						"<div style='display:inline;background-color:rgb(250,250,250);'><img style='margin:4px;border:0px solid white;' src='" + i3GEO.configura.locaplic
+							+ "/imagens/branco.gif' id='$$'/></div>";
 				}
 
 				if (navm) {
@@ -1144,8 +1123,14 @@ i3GEO.barraDeBotoes =
 					for (i = 0; i < n; i += 1) {
 						if (i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true) {
 							temp +=
-								"<img id='" + chaves[i] + "_iconeId' onclick='i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.execBotao(\"" + chaves[i] + "\")' src='"
-									+ i3GEO.configura.locaplic + "/" + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]] + "' />";
+								"<img id='" + chaves[i]
+									+ "_iconeId' onclick='i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.execBotao(\""
+									+ chaves[i]
+									+ "\")' src='"
+									+ i3GEO.configura.locaplic
+									+ "/"
+									+ i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]
+									+ "' />";
 						}
 					}
 					//
@@ -1175,8 +1160,7 @@ i3GEO.barraDeBotoes =
 						novoel = document.createElement("div");
 						novoel.id = "barraDeBotoes1";
 						temp =
-							'<table style="width:100%"><tr><td style="background-color:rgb(250,250,250);"><div ID="historicozoom" ></div></td></tr><tr><td style=height:5px ></td></tr></table>'
-								+ "<div style='display:inline;background-color:rgb(250,250,250);'>"
+							'<table style="width:100%"><tr><td style="background-color:rgb(250,250,250);"><div ID="historicozoom" ></div></td></tr><tr><td style=height:5px ></td></tr></table>' + "<div style='display:inline;background-color:rgb(250,250,250);'>"
 								+ '<img title="zoom" alt="zoom" src="'
 								+ branco
 								+ '" id="zoomli"/>'
@@ -1187,7 +1171,10 @@ i3GEO.barraDeBotoes =
 								+ '" id="pan"/>'
 								+ "</div>"
 								+ "<div style='display:inline;background-color:rgb(250,250,250);'>"
-								+ '<img title="geral" alt="geral" src="' + branco + '" id="zoomtot"/>' + "</div>";
+								+ '<img title="geral" alt="geral" src="'
+								+ branco
+								+ '" id="zoomtot"/>'
+								+ "</div>";
 						novoel.innerHTML = temp;
 						document.body.appendChild(novoel);
 					}
@@ -1205,14 +1192,14 @@ i3GEO.barraDeBotoes =
 							novoel = document.createElement("div");
 							novoel.id = "barraDeBotoes2";
 							novoel.innerHTML =
-								"<table style='width:100%'>"
-									+ "<tr><td style='background-color:rgb(250,250,250);'><img title='' alt='sobe' src='"
+								"<table style='width:100%'>" + "<tr><td style='background-color:rgb(250,250,250);'><img title='' alt='sobe' src='"
 									+ branco
 									+ "' id='sobeferramentas'/></td></tr>"
 									+ "</table>"
 									+ temp
 									+ "<table style='width:100%;'><tr><td style='background-color:rgb(250,250,250);'><img title='desce' alt='' src='"
-									+ branco + "' id='desceferramentas'/></td></tr></table>";
+									+ branco
+									+ "' id='desceferramentas'/></td></tr></table>";
 							document.body.appendChild(novoel);
 						} else {
 							$i(onde).innerHTML = temp;
@@ -1250,19 +1237,19 @@ i3GEO.barraDeBotoes =
 						if (i3GEO.barraDeBotoes.TRANSICAOSUAVE) {
 							YAHOO.util.Dom.setStyle(novoel, "opacity", 1);
 						}
-						//if (i3GEO.Interface.TABLET === true) {
-							// i3GEO.barraDeBotoes.BARRAS[0].cfg.setProperty("height", "");
-							// $i(i3GEO.barraDeBotoes.BARRAS[0].id+"_").style.top = "0px";
-						//}
+						// if (i3GEO.Interface.TABLET === true) {
+						// i3GEO.barraDeBotoes.BARRAS[0].cfg.setProperty("height", "");
+						// $i(i3GEO.barraDeBotoes.BARRAS[0].id+"_").style.top = "0px";
+						// }
 					};
 					novoel.onmouseout = function() {
 						if (i3GEO.barraDeBotoes.TRANSICAOSUAVE) {
 							YAHOO.util.Dom.setStyle(novoel, "opacity", i3GEO.barraDeBotoes.OPACIDADE / 100);
 						}
-						//if (i3GEO.Interface.TABLET === true) {
-							// i3GEO.barraDeBotoes.BARRAS[0].cfg.setProperty("height", "10px");
-							// $i(i3GEO.barraDeBotoes.BARRAS[0].id+"_").style.top = "-200px";
-						//}
+						// if (i3GEO.Interface.TABLET === true) {
+						// i3GEO.barraDeBotoes.BARRAS[0].cfg.setProperty("height", "10px");
+						// $i(i3GEO.barraDeBotoes.BARRAS[0].id+"_").style.top = "-200px";
+						// }
 					};
 					document.body.appendChild(novoel);
 				}
@@ -1308,8 +1295,7 @@ i3GEO.barraDeBotoes =
 					}
 					if (elementos.length <= numerobotoes) {
 						Dom.setStyle([
-							"sobeferramentas",
-							"desceferramentas"
+							"sobeferramentas", "desceferramentas"
 						], "display", "none");
 					}
 				}
@@ -1361,8 +1347,7 @@ i3GEO.barraDeBotoes =
 					}
 					if (this.SOICONES === true) {
 						Dom.setStyle([
-							"i3geo_barra2",
-							"i3geo_barra1"
+							"i3geo_barra2", "i3geo_barra1"
 						], "borderWidth", "0 0 0 0");
 					}
 					YAHOO.i3GEO.janela.botoes.render();
@@ -1464,15 +1449,15 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Function: reativa
-		 *
+		 * 
 		 * Reativa as barras de ferramentas j&aacute; criadas
-		 *
+		 * 
 		 * Essa op&ccedil;&atilde;o apenas aplica o m&eacute;todo "show" aos objetos armazenados em i3GEO.barraDeBotoes.BARRAS
-		 *
+		 * 
 		 * Se a barra n&atilde;o existir previamente, nada ir&aacute; contecer
-		 *
+		 * 
 		 * Parametro:
-		 *
+		 * 
 		 * {Integer} - &iacute;ndice do array BARRAS que guarda os objetos YAHOO com as barras Se n&atilde;o for definido, todas as barras
 		 * ser&atilde;o reativadas
 		 */
@@ -1503,12 +1488,12 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Function: recria
-		 *
+		 * 
 		 * Recria uma barra de ferramentas j&aacute; aberta aplicando os par&acirc;metros de configura&ccedil;&atilde;o definidos
 		 * (vari&aacute;veis)
-		 *
+		 * 
 		 * Parametro:
-		 *
+		 * 
 		 * {String} - id da barra
 		 */
 		recria : function(id) {
@@ -1525,9 +1510,9 @@ i3GEO.barraDeBotoes =
 					$i("euDock_0_bar").parentNode.parentNode.removeChild($i("euDock_0_bar").parentNode);
 				}
 				i3GEO.barraDeBotoes.inicializaBarra();
-				//if ($i("i3geoMarcaIcone")) {
-				//	$i("i3geoMarcaIcone").style.display = "none";
-				//}
+				// if ($i("i3geoMarcaIcone")) {
+				// $i("i3geoMarcaIcone").style.display = "none";
+				// }
 				return;
 			}
 			var i, n, temp, novoel, barraZoom, x, y, BARRAS = i3GEO.barraDeBotoes.BARRAS, iu = i3GEO.util;
@@ -1567,11 +1552,11 @@ i3GEO.barraDeBotoes =
 		},
 		/**
 		 * Function: fecha
-		 *
+		 * 
 		 * Fecha uma barra de ferramentas
-		 *
+		 * 
 		 * Parametro:
-		 *
+		 * 
 		 * {String} - id que identifica a barra. Corresponde ao parametro idconteudonovo da fun&ccedil;&atilde;o de
 		 * inicializa&ccedil;&atilde;o das barras
 		 */
@@ -1598,7 +1583,7 @@ i3GEO.barraDeBotoes =
 				}
 				return;
 			}
-			var divmensagem = $i("divMensagemBarraDeBotoes"), balloonAjuda, pos = YAHOO.util.Dom.getXY(objeto);
+			var divmensagem = $i("divMensagemBarraDeBotoes"), pos = YAHOO.util.Dom.getXY(objeto);
 			if (this.AJUDA === false || $i("janelaMenTexto")) {
 				i3GEO.ajuda.mostraJanela(mensagem);
 				i3GEO.barraDeBotoes.escondeJanelaAjuda();
@@ -1621,15 +1606,13 @@ i3GEO.barraDeBotoes =
 				}
 				if (this.TIPOAJUDA === "horizontal") {
 					divmensagem.innerHTML =
-						"<table style='z-index:20000' ><tr><td id='imgMensagemBarraDeBotoes' style='background:none;padding-top:2px;padding-right:3px;vertical-align:top'><img src='"
-							+ i3GEO.configura.locaplic
+						"<table style='z-index:20000' ><tr><td id='imgMensagemBarraDeBotoes' style='background:none;padding-top:2px;padding-right:3px;vertical-align:top'><img src='" + i3GEO.configura.locaplic
 							+ "/imagens/left.png"
 							+ "' ></td><td style='text-align:left;border-left:1px solid rgb(210,210,210)'><span style='text-align:right;cursor:pointer;color:blue;' onclick='javascript:i3GEO.util.insereCookie(\"botoesAjuda\",\"nao\");i3GEO.barraDeBotoes.AJUDA = false;'>fecha</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'></div></td></tr></table>";
 				}
 				if (this.TIPOAJUDA === "vertical") {
 					divmensagem.innerHTML =
-						"<table style='z-index:20000' ><tr><td id='imgMensagemBarraDeBotoes' style='background:none;padding-top:2px;padding-right:3px;vertical-align:top'><img src='"
-							+ i3GEO.configura.locaplic
+						"<table style='z-index:20000' ><tr><td id='imgMensagemBarraDeBotoes' style='background:none;padding-top:2px;padding-right:3px;vertical-align:top'><img src='" + i3GEO.configura.locaplic
 							+ "/imagens/top.png"
 							+ "' ></td><td style='text-align:left;border-left:1px solid rgb(210,210,210)'><span style='text-align:right;cursor:pointer;color:blue;' onclick='javascript:i3GEO.util.insereCookie(\"botoesAjuda\",\"nao\");i3GEO.barraDeBotoes.AJUDA = false;'>fecha</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'></div></td></tr></table>";
 				}
@@ -1651,39 +1634,14 @@ i3GEO.barraDeBotoes =
 					}
 					i3GEO.barraDeBotoes.timeMostraAjudaBotoes =
 						setTimeout("i3GEO.barraDeBotoes.mostraJanelaAjuda('" + mensagem + "');", 5000);
-				} else {
-					hideAllTooltips();
-					balloonAjuda = new Balloon();
-					BalloonConfig(balloonAjuda, 'GBubble');
-					balloonAjuda.delayTime = 0;
-					balloonAjuda.stem = false;
-					balloonAjuda.stemHeight = 0;
-					balloonAjuda.vOffset = -24;
-					balloonAjuda.images = i3GEO.configura.locaplic + '/pacotes/balloon-tooltips/htdocs/images/GBubblec';
-					mensagem =
-						"<table style='z-index:20000' ><tr><td style='text-align:left;'><span style='text-align:right;cursor:pointer;color:blue;' onclick='javascript:i3GEO.util.insereCookie(\"botoesAjuda\",\"nao\");i3GEO.barraDeBotoes.AJUDA = false;'>fecha</span><br><div style='vertical-align:middle;text-align:left;width:250px;border: 0px solid black;border-left:1px;' id='divMensagemBarraDeBotoesCorpo'>"
-							+ mensagem + "</div></td></tr></table>";
-					try {
-						clearTimeout(i3GEO.barraDeBotoes.timeAjudaBotoes);
-					} catch (e) {
-					}
-					i3GEO.barraDeBotoes.timeMostraAjudaBotoes = setTimeout(function() {
-						balloonAjuda.cleanup();
-						balloonIsVisible = false;
-						// alert(mensagem);
-						if (i3GEO.barraDeBotoes.TIPO === "olhodepeixe" || i3GEO.barraDeBotoes.TIPO === "olhodepeixe1") {
-							balloonAjuda.showTooltip(objeto, mensagem, null, null, null, pos[0], pos[1] - 40);
-						} else {
-							balloonAjuda.showTooltip(objeto, mensagem, null, null, null, pos[0] + 12, pos[1]);
-						}
-						try {
-							clearTimeout(timeMostraAjudaBotoes);
-						} catch (e) {
-						}
-						i3GEO.barraDeBotoes.timeAjudaBotoes = setTimeout(function() {
-							balloonAjuda.cleanup();
-						}, 4000);
-					}, 4000);
+				}
+				else{
+					/*
+					new YAHOO.widget.Tooltip(objeto.id + "_tip", {
+						context : objeto,
+						text : mensagem
+					});
+					*/
 				}
 			}
 		},
@@ -1712,30 +1670,36 @@ i3GEO.barraDeBotoes =
 		/**
 		 * Abre uma janela com a descricao de cada botao
 		 */
-		ajudaEmLista : function(){
-			var n,i, ins = "",b;
+		ajudaEmLista : function() {
+			var n, i, ins = "", b;
 			n = i3GEO.barraDeBotoes.LISTABOTOES.length;
 			ins += "<table class=lista8 >";
-			for(i = 0; i < n; i++){
+			for (i = 0; i < n; i++) {
 				b = i3GEO.barraDeBotoes.LISTABOTOES[i];
-				if(i3GEO.barraDeBotoes.INCLUIBOTAO[b.iddiv] === true){
-					if(b.dica != ""){
-						ins += "<tr><td><img src='" + i3GEO.configura.locaplic + "/" + i3GEO.barraDeBotoes.ICONEBOTAO[b.iddiv] + "' /></td><td>" + b.dica + "</td></tr>";
+				if (i3GEO.barraDeBotoes.INCLUIBOTAO[b.iddiv] === true) {
+					if (b.dica != "") {
+						ins +=
+							"<tr><td><img src='" + i3GEO.configura.locaplic
+								+ "/"
+								+ i3GEO.barraDeBotoes.ICONEBOTAO[b.iddiv]
+								+ "' /></td><td>"
+								+ b.dica
+								+ "</td></tr>";
 					}
 				}
 			}
 			ins += "</table>";
-			i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>"+ins+"</div>","");
+			i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + ins + "</div>", "");
 		},
 		/**
 		 * Section: i3GEO.barraDeBotoes.editor
-		 *
+		 * 
 		 * Editor vetorial
 		 */
 		editor : {
 			/**
 			 * Function: inicia
-			 *
+			 * 
 			 * Abre as op&ccedil;&otilde;es do editor conforme a interface em uso
 			 */
 			inicia : function() {

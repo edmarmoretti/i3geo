@@ -291,7 +291,6 @@ Retorno:
 		else
 		{return($nomer);}
 	}
-	//TODO nao funciona nas versoes antigas
 	function removeToponimia(){
 		$nclasses = $this->layer->numclasses;
 		if($this->vi >= 60200){
