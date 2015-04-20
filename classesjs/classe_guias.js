@@ -152,6 +152,7 @@ i3GEO.guias =
 					if (!onde) {
 						onde = i3GEO.guias.CONFIGURA.mapas.idconteudo;
 					}
+					//TODO retirar os estilos do codigo e incluir em arquivo css
 					var pegaMapas =
 						function(retorno) {
 							var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;
@@ -183,13 +184,13 @@ i3GEO.guias =
 										link = lkd;
 									}
 									ins +=
-										"<div style='width:170px;background-color:white;padding:5px;margin:auto;border: 1px solid #F0F0F0;border-radius: 5px;box-shadow: 1px 1px 1px 1px #D3D3D3;' >";
+										"<div style='float: left;width:170px;background-color:white;padding:5px;margin:5px;border: 1px solid #F0F0F0;border-radius: 5px;box-shadow: 1px 1px 1px 1px #D3D3D3;' >";
 
 									if (temp.IMAGEM && temp.IMAGEM != "") {
 										ins +=
-											"<div style=text-align:center ><a href='" + link
+											"<div style='text-align:center;' ><a href='" + link
 												+ "' style=text-align:center;text-decoration:none; >" + "<img src='" + temp.IMAGEM
-												+ "'></a></div><br>";
+												+ "'></a></div>";
 									}
 									// verifica se o mapfile esta salvo no banco
 									// diretamente
@@ -251,7 +252,7 @@ i3GEO.guias =
 												"<br>" + combo + "<br><div style='cursor:pointer;' id='i3geoMapasLink_" + ig1 + "' ></div>"
 												+ "</p></div>";
 									}
-									ins += "</div><br>";
+									ins += "</div>";
 									ig1++;
 								} while (ig1 < ig1lt);
 							}

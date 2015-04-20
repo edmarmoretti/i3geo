@@ -38,7 +38,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-// TODO incluir nova ferramenta para usar a opcao de mascara do Mapserver
 // TODO incluir opcao para gerar imagem via canvas apenas do corpo do mapa
 i3GEO.mapa =
 	{
@@ -896,7 +895,7 @@ i3GEO.mapa =
 					if ($i("i3GEOFsalvaMapaLista")) {
 						return;
 					}
-					janela = i3GEO.janela.cria("200px", "450px", "", "", "", "", "i3GEOFsalvaMapaLista", false, "hd");
+					janela = i3GEO.janela.cria("600px", "350px", "", "", "", "", "i3GEOFsalvaMapaLista", false, "hd");
 					divid = janela[2].id;
 					// a funcao que mostra a lista de mapas e a mesma que pode
 					// ser utilizada ao incluir a lista de mapas
