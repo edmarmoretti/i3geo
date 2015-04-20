@@ -284,6 +284,8 @@ i3GEOF.tme = {
 				var ins = "<p class=paragrafo >" + $trad('arquivoDownload',i3GEOF.tme.dicionario) +"<br><a href='"+retorno.data.url+"' target=new >"+retorno.data.url+"</a><br>";
 				ins += "<br>" + $trad('abreNoI3geo',i3GEOF.tme.dicionario) +"<br><a href='"+i3GEO.configura.locaplic+"/ms_criamapa.php?interface=googleearth.phtml&kmlurl="+retorno.data.url+"' target='new' >interface Google Earth</a><br>";
 				$i("i3GEOTMEresultado").innerHTML = ins;
+				$i("i3GEOTMEresultado").scrollIntoView(true);
+
 			};
 			p = i3GEO.configura.locaplic+"/pacotes/tme/TME_i3geo.php?maxHeight="+$i("i3GEOTMEmaxHeight").value+"&barSize="+$i("i3GEOTMEbarSize").value+"&sid="+i3GEO.configura.sid+"&nomelayer="+i3GEO.temaAtivo+"&colunasvalor="+lista.toString(",")+"&colunanomeregiao="+colunanomeregiao+"&titulo="+$i("i3GEOTMEtitulo").value+"&descricao="+$i("i3GEOTMEdesc").value;
 			cp.set_response_type("JSON");
