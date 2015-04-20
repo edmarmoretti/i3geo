@@ -113,6 +113,19 @@ i3GEOF.navegapostgis = {
 				}}}
 			);
 		}
+		if($i("i3GEOFnavegapostgisLista")){
+			new YAHOO.widget.Button(
+				"i3GEOFnavegapostgisLista",
+				{onclick:{fn: function(){
+					window.open(
+						i3GEO.configura.locaplic+"/admin/php/listadadostabela.php?nreg=50&nome_tabela=" + i3GEOF.navegapostgis.tabela
+						+"&nomeEsquema=" + i3GEOF.navegapostgis.esquema
+						+"&codigo_estat_conexao=" + i3GEOF.navegapostgis.conexao
+					);
+				}}}
+			);
+		}
+
 		var conexao = function(retorno){
 				var ins = "<select style='width:200px;' onchange='i3GEOF.navegapostgis.montaArvore(this.value)'><option value='' >---</option>",
 					n = retorno.length,
@@ -132,7 +145,13 @@ i3GEOF.navegapostgis = {
 		if(botao){
 			botao.style.position = "absolute";
 			botao.style.top = "230px";
-			botao.style.left = "70px";
+			botao.style.left = "5px";
+		}
+		botao = $i("i3GEOFnavegapostgisLista");
+		if(botao){
+			botao.style.position = "absolute";
+			botao.style.top = "230px";
+			botao.style.left = "80px";
 		}
 		cpJSON.call(p,"foo",conexao);
 		/*
@@ -167,7 +186,9 @@ i3GEOF.navegapostgis = {
 			"<textarea id=i3GEOFnavegapostgisSql style='width: 313px;overflow: auto;height: 104px;border: 1px solid lightgray;position: absolute;left:223px;top: 190px;'> "+
 			"</textarea>";
 		if(i3GEOF.navegapostgis.tipo == "sql"){
-			ins += "<input style='position:absolute;top:235px;left:70px;' id=i3GEOFnavegapostgisAplicar type='button' value='"+$trad('aplica',i3GEOF.navegapostgis.dicionario)+"' />";
+			ins += "<input id=i3GEOFnavegapostgisAplicar type='button' value='"+$trad('aplica',i3GEOF.navegapostgis.dicionario)+"' />";
+			ins += "<input id=i3GEOFnavegapostgisLista type='button' value='"+$trad('lista',i3GEOF.navegapostgis.dicionario)+"' />";
+
 		}
 		ins += "</div>";
 		return ins;
@@ -395,7 +416,7 @@ i3GEOF.navegapostgis = {
 		if(gid === "" && i3GEOF.navegapostgis.tipo === "sql"){
 			alert("Coluna com ID unico nao foi escolhida!");
 		}
-		if(gi3GEOF.navegapostgis.tipo === "sql"){
+		if(i3GEOF.navegapostgis.tipo === "sql"){
 			$i("i3GEOFnavegapostgisSql").value = sql;
 		}
 	}

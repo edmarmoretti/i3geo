@@ -822,7 +822,6 @@ i3GEO.barraDeBotoes =
 								l[b].funcaoonclick();
 							}
 						}
-						// TODO remover eval
 						if (l[b] && l[b].constroiconteudo) {
 							eval(l[b].constroiconteudo);
 						}

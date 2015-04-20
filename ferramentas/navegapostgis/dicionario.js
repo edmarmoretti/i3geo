@@ -54,5 +54,10 @@ i3GEOF.navegapostgis.dicionario = {
 		pt : "Escolha a coluna",
 		en : "",
 		es : ""
+	} ],
+	'lista' : [ {
+		pt : "Amostra de dados",
+		en : "",
+		es : ""
 	} ]
 };

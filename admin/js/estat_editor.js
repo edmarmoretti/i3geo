@@ -337,14 +337,24 @@ i3GEOadmin.editor = {
 				}
 			}
 		},
-		mostrar: function(){
-			if($i("i3GEOadmintabela").value == ""){
+		mostrar: function(nreg, nome_tabela, nomeEsquema, codigo_estat_conexao, w){
+			if(!nome_tabela && $i("i3GEOadmintabela").value == ""){
 				alert("Escolha a tabela");
 				return;
 			}
-
-			var nreg = window.prompt("Numero maximo de registros"),
-				callback = {
+			if(!nome_tabela){
+				nome_tabela = $i("i3GEOadmintabela").value;
+			}
+			if(!nomeEsquema){
+				nomeEsquema = $i("i3GEOadminesquema").value;
+			}
+			if(!codigo_estat_conexao){
+				codigo_estat_conexao = $i("i3GEOadmincodigo_estat_conexao").value;
+			}
+			if(!nreg){
+				nreg = window.prompt("Numero maximo de registros");
+			}
+			var	callback = {
 					success:function(o){
 						try	{
 							core_carregando("desativa");
@@ -353,7 +363,7 @@ i3GEOadmin.editor = {
 								linhas = dados.linhas,
 								nlinhas = linhas.length,
 								tabela = [],
-								i,j,l,w;
+								i,j,l;
 							tabela.push("<head><body><table style='border:1px solid black'><tr>");
 							for(i=0;i<ncolunas;i++){
 								tabela.push("<td style='border:1px solid gray' >"+dados.nomescolunas[i]+"</td>");
@@ -368,7 +378,9 @@ i3GEOadmin.editor = {
 								tabela.push("</tr>");
 							}
 							tabela.push("</table></body></head>");
-							w = window.open();
+							if (!w){
+								w = window.open();
+							}
 							w.document.write(tabela.join(""));
 							w.document.close();
 						}
@@ -376,10 +388,9 @@ i3GEOadmin.editor = {
 					},
 					failure:core_handleFailure,
 					argument: { foo:"foo", bar:"bar" }
-			},
-			nomeEsquema = $i("i3GEOadminesquema").value;
+			};
 			core_carregando("obtendo dados...");
-			core_makeRequest("../php/metaestat.php?funcao=obtemDadosTabelaDB&nreg="+nreg+"&geo=nao&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
+			core_makeRequest("../php/metaestat.php?funcao=obtemDadosTabelaDB&nreg="+nreg+"&geo=nao&formato=json&nome_tabela="+nome_tabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+codigo_estat_conexao,callback);
 		},
 		csv: function(){
 			if($i("i3GEOadmintabela").value == ""){
