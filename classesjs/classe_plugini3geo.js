@@ -480,7 +480,7 @@ i3GEO.pluginI3geo =
 		 */
 		markercluster : {
 			linkAjuda : function() {
-				return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=121";
+				return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=122";
 			},
 			formAdmin : function(config) {
 				var parametros, ins = "", configDefault =
@@ -795,7 +795,7 @@ i3GEO.pluginI3geo =
 		 */
 		layerkml : {
 			linkAjuda : function() {
-				return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=121";
+				return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=126";
 				// http://localhost/i3geo/aplicmap/dados/sundials.kml
 				// http://dev.openlayers.org/examples/kml/sundials.kml
 			},
