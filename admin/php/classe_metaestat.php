@@ -1810,6 +1810,7 @@ class Metaestat{
 		elseif($id_medida_variavel != "") {
 			$sql .= "WHERE i3geoestat_medida_variavel.id_medida_variavel = $id_medida_variavel ";
 		}
+		$sql .= "ORDER BY i3geoestat_medida_variavel.nomemedida";
 		$res = $this->execSQL($sql,$id_medida_variavel);
 		$res = str_replace('"',"'",$res);
 		return $res;
