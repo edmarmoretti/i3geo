@@ -695,6 +695,9 @@ i3GEO.coordenadas =
 		 */
 		mostraCoordenadas : function(ativaMovimento, onde, x, y) {
 			//FIXME As coordenadas metricas nao funcionam em OSM
+			if(i3GEO.parametros.w < 600){
+				return;
+			}
 			if (i3GEO.Interface.openlayers.googleLike === true) {
 				i3GEO.coordenadas.config = {
 					"geoProj" : {
