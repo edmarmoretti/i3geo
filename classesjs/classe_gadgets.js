@@ -626,7 +626,7 @@ i3GEO.gadgets =
 					i3GEO.configura.oMenuData = menuUnico;
 					confm = i3GEO.configura.oMenuData;
 				};
-				if(i3GEO.parametros.w < 600){
+				if(i3GEO.parametros.w < 700){
 					menuUnico();
 				}
 				i3GEOoMenuBar = YAHOO.widget.MenuManager;

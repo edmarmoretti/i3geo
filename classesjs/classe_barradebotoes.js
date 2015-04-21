@@ -1089,7 +1089,7 @@ i3GEO.barraDeBotoes =
 			if (i3GEO.barraDeBotoes.ATIVA === false) {
 				return;
 			}
-			if(i3GEO.parametros.w < 600){
+			if(i3GEO.parametros.w < 700){
 				if(i3GEO.barraDeBotoes.MAXBOTOES >  6){
 					i3GEO.barraDeBotoes.MAXBOTOES = 6;
 				}
