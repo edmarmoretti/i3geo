@@ -850,7 +850,7 @@ var i3GEO = {
 			Dw = screen.availWidth;
 		}
 		if (Dh > screen.availHeight){
-			Dh = screen.availHeight;
+			Dh = screen.availHeight - 20;
 		}
 
 		novow = Dw
