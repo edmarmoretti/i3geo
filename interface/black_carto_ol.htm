@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>i3GEO - OpenLayers</title>
 	<script src="../classesjs/i3geo.js"></script>
 	<script src="../ferramentas/metaestat/index.js"></script>
@@ -100,7 +101,7 @@
 			<div id='guia1obj' style='display:none;' >
 				<!-- Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico -->
 				<div style='left:5px;top:10px;width:150px;' id=buscaRapida ></div>
-				<!--	Esta div acrescenta a lista de propriedades do mapa 
+				<!--	Esta div acrescenta a lista de propriedades do mapa
 				<!--<div id=listaPropriedades style='top:15px;' ></div>-->-->
 				<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
 				<div id=listaLayersBase style='top:15px;'></div>
@@ -142,7 +143,7 @@
 		i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
 		i3GEO.ajuda.ATIVAJANELA = false;
 		i3GEO.idioma.IDSELETOR = "seletorIdiomas";
-		
+
 		//i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
 		i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;

@@ -1099,7 +1099,7 @@ i3GEO.barraDeBotoes =
 				i3GEO.barraDeBotoes.INCLUIBOTAO.zoomiauto = false;
 				i3GEO.barraDeBotoes.INCLUIBOTAO.zoomoauto = false;
 				i3GEO.barraDeBotoes.INCLUIBOTAO.pan = false;
-				i3GEO.barraDeBotoes.INCLUIBOTAO.zoomtot = false;
+				i3GEO.barraDeBotoes.INCLUIBOTAO.zoomtot = true;
 			}
 			var ticone, tipo, mostra, i, temp, e, wj, recuo, alturadisponivel, n, chaves, elementos = "", numerobotoes = 0, nelementos = 0, Dom =
 				YAHOO.util.Dom, branco = i3GEO.configura.locaplic + '/imagens/branco.gif', novoel;

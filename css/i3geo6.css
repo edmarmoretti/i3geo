@@ -1576,6 +1576,11 @@ background-repeat: no-repeat;
 height: 15px;
 width: 57px;
 }
+#menumenuUnico {
+background-image: url("../imagens/oxygen/16x16/format-list-unordered.png");
+background-repeat: no-repeat;
+margin-left: 5px;
+}
 /*bandeira do brasil*/
 #brasil {
 background-image: URL('../imagens/sprite.png');

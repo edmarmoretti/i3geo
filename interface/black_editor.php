@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>i3GEO - OpenLayers</title>
 	<style>
 		.olControlEditingToolbar1 div {
@@ -143,7 +144,7 @@
 		i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
 		i3GEO.ajuda.ATIVAJANELA = false;
 		i3GEO.idioma.IDSELETOR = "seletorIdiomas";
-		
+
 		//i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
 		i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
