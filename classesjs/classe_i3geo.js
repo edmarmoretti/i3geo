@@ -800,6 +800,7 @@ var i3GEO = {
 	 * Return: {array} - [w,h]
 	 */
 	calculaTamanho : function() {
+		alert(screen.availWidth)
 		var diminuix, diminuiy, menos, novow, novoh, w, h, temp, Dw, Dh;
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
