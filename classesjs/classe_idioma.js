@@ -341,8 +341,8 @@ i3GEO.idioma = {
 		ins = "";
 		n = i3GEO.idioma.SELETORES.length;
 		if ($i("i3geo")
-			&& i3GEO.parametros.w < 550) {
-			w = "width:12px;";
+			&& i3GEO.parametros.w < 700) {
+			w = "width:10px;";
 		} else {
 			w = "";
 		}
@@ -363,9 +363,6 @@ i3GEO.idioma = {
 			}
 			if (temp === "es") {
 				ins += 'alt="Espanhol" id="espanhol" />';
-			}
-			if (temp === "it") {
-				ins += 'alt="Italiano" id="italiano" />';
 			}
 		}
 		if (i3GEO.idioma.IDSELETOR !== ""

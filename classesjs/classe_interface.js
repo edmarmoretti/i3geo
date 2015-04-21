@@ -861,6 +861,10 @@ i3GEO.Interface =
 								i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
 							}
 						}
+						if (i3GEO.parametros.h < 600) {
+							openlayers.GADGETS.PanZoomBar = false;
+							openlayers.GADGETS.ScaleLine = false;
+						}
 						if (openlayers.GADGETS.ScaleLine === true) {
 							pz = new OpenLayers.Control.ScaleLine();
 							i3geoOL.addControl(pz);
@@ -869,9 +873,7 @@ i3GEO.Interface =
 						if (openlayers.GADGETS.OverviewMap === true) {
 							i3geoOL.addControl(new OpenLayers.Control.OverviewMap());
 						}
-						if (i3GEO.parametros.h < 600) {
-							openlayers.GADGETS.PanZoomBar = false;
-						}
+
 						// i3geoOL.addControl(new
 						// OpenLayers.Control.KeyboardDefaults());
 						//
