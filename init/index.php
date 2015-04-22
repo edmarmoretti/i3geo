@@ -52,8 +52,16 @@ header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$cache_expire) . ' GMT');
 ?>
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="dicionario.js"></script>
+<script type="text/javascript" src="index.js"></script>
+<script>
+men = "";
+<?php
+	if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
+		echo "men = $"."trad(19,g_traducao_init);";
+	}
+?>
+</script>
 <link rel="stylesheet" type="text/css" href="../admin/html/admin.css">
-
 <style>
 body {
 	padding-top: 0px;
@@ -62,7 +70,7 @@ body {
 	font-size: 0.6cm;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	background-color: rgb(250, 250, 250);
-	maergin: auto;
+	margin: auto;
 }
 
 .r {
@@ -121,7 +129,7 @@ a {
 }
 </style>
 </head>
-<body class=" yui-skin-sam ">
+<body class=" yui-skin-sam " style="background-color: rgb(250, 250, 250);" >
 	<div class="borda">
 		<div id="bandeiras"></div>
 		<div>
@@ -131,14 +139,10 @@ a {
 
 	<div id="conteudo" style="position: relative; top: -10px; margin: auto; max-width: 1000px; left: 10px;">
 		<div style="margin-top: 5px;">
-			<?php
-			if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
-						echo "<p style='font-size:14px;color:red;margin-top:20px;'><script>document.write($"."trad(19,g_traducao_init));</script>";
-					}
-					?>
+			<div id="mensagemLogin" style="font-size:14px;color:red;margin-top:20px;text-align: left;"></div>
 			<br>
 			<div id="botoes" style=""></div>
-
+			<script>mostraBotoes();</script>
 			<div class="r">
 				<table>
 					<tbody>
@@ -181,140 +185,5 @@ a {
 			</a>
 		</div>
 	</div>
-
-</body>
-<script>
-botoesIni = [];
-botoesIni.push({
-	"img":"start-here.png",
-	"href":"../testainstal.php",
-	"titulo":$trad(2,g_traducao_init)
-	},{
-	"img":"applications-development-web.png",
-	"href":"../admin",
-	"titulo":$trad(3,g_traducao_init)
-	},{
-	"img":"openlayers.png",
-	"href":"../<?php echo $customDir; ?>/black_ol.htm",
-	"titulo":$trad(4,g_traducao_init)
-	},{
-	"img":"openlayersdebug.png",
-	"href":"../<?php echo $customDir; ?>/openlayersdebug.htm",
-	"titulo":$trad(5,g_traducao_init)
-	},{
-		"img":"osm.png",
-		"href":"../<?php echo $customDir; ?>/black_osm.htm",
-		"titulo":$trad(23,g_traducao_init)
-	},{
-	"img":"mashup.png",
-	"href":"../mashups",
-	"titulo":$trad(18,g_traducao_init) + "<br><a href='../mashups/osm.php?temas=&largura=800&altura=500' target=_blank >OSM</a>" + " - <a href='../mashups/openlayers.php?temas=&largura=800&altura=500' target=_blank >OpenLayers</a>"
-	},{
-	"img":"googlemaps.png",
-	"href":"../<?php echo $customDir; ?>/black_gm.phtml",
-	"titulo":$trad(6,g_traducao_init)
-	},{
-	"img":"googlemaps_noite.png",
-	"href":"../<?php echo $customDir; ?>/googlemaps_noite.phtml",
-	"titulo":$trad(22,g_traducao_init)
-	},{
-	"img":"googleearth.png",
-	"href":"../<?php echo $customDir; ?>/googleearth.phtml",
-	"titulo":$trad(7,g_traducao_init)
-	},{
-	"img":"cartogramas.png",
-	"href":"../<?php echo $customDir; ?>/black_carto_ol.htm",
-	"titulo":$trad(8,g_traducao_init)
-	},{
-	"img":"editor.png",
-	"href":"../ferramentas/metaestat/editorlimites.php",
-	"titulo":$trad(9,g_traducao_init)
-	},{
-	"img":"svn-update.png",
-	"href":"../datadownload.htm",
-	"titulo":$trad(10,g_traducao_init)
-	},{
-	"img":"ogc_logo.jpg",
-	"href":"../ogc.htm",
-	"titulo":$trad(11,g_traducao_init)
-	},{
-	"img":"application-vnd-google-earth-kml.png",
-	"href":"../kml.php",
-	"titulo":$trad(12,g_traducao_init)
-	},{
-	"img":"../imagens/saiku_free_small.png",
-	"href":"../ferramentas/saiku/esquemaxml.php?locaplic="+window.location.href.replace("/init/index.php",""),
-	"titulo":$trad(25,g_traducao_init),
-	"subtitulo": " <a style='cursor:pointer;' target=_blank src='https://medium.com/innovative-business-intelligence/so-people-who-land-on-our-community-download-page-will-notice-a-subtle-difference-when-they-click-1b61aca316c5' >"+$trad(29,g_traducao_init)+"</a>",
-	},{
-	"img":"../imagens/gvsig.jpg",
-	"href":"../pacotes/gvsig/gvsig2mapfile/upload.htm",
-	"titulo":$trad(26,g_traducao_init)
-	},{
-	"img":"insert-link.png",
-	"href":"../geradordelinks.htm",
-	"titulo":$trad(13,g_traducao_init)
-	},{
-	"img":"atlas.png",
-	"href":"../atlas",
-	"titulo":$trad(27,g_traducao_init)
-	},{
-	"img":"folder-image.png",
-	"href":"../exemplos",
-	"titulo":$trad(14,g_traducao_init)
-	},{
-		"img":"applications-development.png",
-		"href":"../pacotes/utils/index.php",
-		"titulo":$trad(33,g_traducao_init)
-	},{
-	"img":"accessories-dictionary.png",
-	"href":"../guia_de_migracao.txt",
-	"titulo":$trad(17,g_traducao_init)
-	},{
-	"img":"accessories-dictionary.png",
-	"href":"../documentacao",
-	"titulo":$trad(24,g_traducao_init)
-	},{
-	"img":"accessories-dictionary.png",
-	"href":"http://moodle.gvsig-training.com/course/view.php?id=11",
-	"titulo":$trad(28,g_traducao_init)
-	},{
-	"img":"tools-report-bug.png",
-	"href":"http://svn.softwarepublico.gov.br/trac/i3geo/newticket",
-	"titulo":$trad(16,g_traducao_init)
-	},{
-	"img":"trac_logo_mini.png",
-	"href":"http://svn.softwarepublico.gov.br/trac/i3geo/wiki",
-	"titulo":$trad(30,g_traducao_init)
-	},{
-	"img":"logo_psp.png",
-	"href":"http://www.softwarepublico.gov.br/ver-comunidade?community_id=1444332",
-	"titulo":$trad(31,g_traducao_init)
-	},{
-	"img":"mailman.jpg",
-	"href":"http://lists.osgeo.org/cgi-bin/mailman/listinfo/i3geo",
-	"titulo":$trad(32,g_traducao_init)
-	}
-);
-mostraBotoes();
-
-i3GEO.configura.locaplic = "..";
-i3GEO.idioma.IDSELETOR = "bandeiras";
-i3GEO.idioma.mostraSeletor();
-i3GEO.barraDeBotoes.ATIVA = false;
-function mostraBotoes(){
-	var ins = [],i,n = botoesIni.length,texto;
-	for(i=0;i<n;i++){
-		texto = '<div class="r" ><table ><tr><td><a target=_blank href="'+botoesIni[i].href+'" ><img src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';
-		if(botoesIni[i].subtitulo){
-			texto += botoesIni[i].subtitulo;
-		}
-		texto += '</td></tr></table></div>';
-		ins.push(texto);
-	}
-	$i("botoes").innerHTML = ins.join("");
-	$i("conteudo").style.height = i3GEO.util.getScrollHeight() + "px";
-}
-
-</script>
+	</body>
 </html>
