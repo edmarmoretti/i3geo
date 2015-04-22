@@ -113,10 +113,10 @@ botoesIni.push({
 function mostraBotoes(){
 	$i("mensagemLogin").innerHTML = men;
 
-	i3GEO.configura.locaplic = "..";
+	i3GEO.configura = {"locaplic" : ".."};
 	i3GEO.idioma.IDSELETOR = "bandeiras";
 	i3GEO.idioma.mostraSeletor();
-	i3GEO.barraDeBotoes.ATIVA = false;
+	//i3GEO.barraDeBotoes.ATIVA = false;
 	var ins = [],i,n = botoesIni.length,texto;
 	for(i=0;i<n;i++){
 		texto = '<div class="r" ><table ><tr><td><a target=_blank href="'+botoesIni[i].href+'" ><img src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';

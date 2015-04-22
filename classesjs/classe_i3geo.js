@@ -80,7 +80,9 @@ i3GEOF = [];
  *
  * {YAHOO.namespace}
  */
-YAHOO.namespace("i3GEO");
+if(typeof YAHOO != "undefined" ){
+	YAHOO.namespace("i3GEO");
+}
 /**
  * Section: i3GEO
  */

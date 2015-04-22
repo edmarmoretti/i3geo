@@ -50,17 +50,22 @@ header("Pragma: public");
 header("Cache-Control: max-age=".$cache_expire);
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$cache_expire) . ' GMT');
 ?>
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
-<script type="text/javascript" src="dicionario.js"></script>
-<script type="text/javascript" src="index.js"></script>
 <script>
+i3GEOF = [];
 men = "";
 <?php
-	if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
-		echo "men = $"."trad(19,g_traducao_init);";
-	}
+include("dicionario.js");
+include("../classesjs/compactados/dicionario_compacto.js");
+include("../classesjs/compactados/classe_util_compacto.js");
+include("../classesjs/compactados/classe_idioma_compacto.js");
+
+include("index.js");
+if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
+	echo "men = $"."trad(19,g_traducao_init);";
+}
 ?>
 </script>
+<link rel='stylesheet' type='text/css' href='../css/i3geo6.css.php'></link>
 <link rel="stylesheet" type="text/css" href="../admin/html/admin.css">
 <style>
 body {
