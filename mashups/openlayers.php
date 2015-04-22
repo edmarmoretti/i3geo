@@ -214,16 +214,6 @@ if($temas != ""){
 	if(!isset($servidor)){
 		$servidor = "../ogc.php";
 	}
-	/*
-	if(isset($servidor) && $servidor != "../ogc.php"){
-		$layers = $temas;
-		foreach($temas as $tema){
-			$nomeLayer = str_replace(".map","",basename($tema));
-			$nomeLayer = str_replace(".php","",$nomeLayer);
-			$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tema.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{isBaseLayer:false})';
-		}
-	}
-	*/
 	foreach($temas as $tema){
 		if(file_exists($locaplic."/temas/".$tema.".gvp")){
 			include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
@@ -263,7 +253,8 @@ if($temas != ""){
 									"tema"=>$layern->getmetadata("tema"),
 									"plugin"=>$layern->getmetadata("PLUGINI3GEO"),
 									"cache"=>strtoupper($layern->getmetadata("cache")),
-									"transitioneffect"=>strtoupper($layern->getmetadata("transitioneffect"))
+									"transitioneffect"=>strtoupper($layern->getmetadata("transitioneffect")),
+									"tiles"=>strtoupper($layern->getmetadata("tiles"))
 							);
 						}
 						else{
@@ -637,39 +628,39 @@ if(!i3GEO.configura){
 	i3GEO.configura = {"locaplic":  "../"};
 }
 <?php
-//camadas plugin
-foreach ($temasPluginI3Geo as $t){
-	//var_dump($temasPluginI3Geo);exit;
-	//cria um objeto javascript para iniciar o plugin
-	$camada = '{"tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].',"cache":"'.$t["cache"].'","transitioneffect":"'.$t["transitioneffect"].'"}';
-	echo "var camada = $camada;\n";
-	//echo "i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);\n";
-	$visivel = "false";
-	if(in_array($t["name"],$visiveis)){
-		$visivel = "true";
-	}
-	echo "adicionaPluginI3geo(camada,$visivel);\n";
-}
-?>
-i3GEO.editorOL.inicia();
-
-function adicionaPluginI3geo(camada,visivel){
-	if(!camada.cache){
-		camada["cache"] = "NAO";
-	}
-	var l = i3GEO.pluginI3geo.layerMashup("openlayers",camada,"4326"),
-		n,
-		i;
-		n = l.length;
-	for(i = 0; i < n; i++){
-		if(l[i].displayInLayerSwitcher === true){
-			l[i].setVisibility(visivel);
+	//camadas plugin
+	foreach ($temasPluginI3Geo as $t){
+		//var_dump($temasPluginI3Geo);exit;
+		//cria um objeto javascript para iniciar o plugin
+		$camada = '{"tiles":"'.$t["tiles"].'","tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].',"cache":"'.$t["cache"].'","transitioneffect":"'.$t["transitioneffect"].'"}';
+		echo "var camada = $camada;\n";
+		//echo "i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);\n";
+		$visivel = "false";
+		if(in_array($t["name"],$visiveis)){
+			$visivel = "true";
 		}
-		if(l[i] != true){
-			i3GEO.editorOL.layersIniciais.push(l[i]);
+		echo "adicionaPluginI3geo(camada,$visivel);\n";
+	}
+	?>
+	i3GEO.editorOL.inicia();
+	
+	function adicionaPluginI3geo(camada,visivel){
+		if(!camada.cache){
+			camada["cache"] = "NAO";
+		}
+		var l = i3GEO.pluginI3geo.layerMashup("openlayers",camada,"4326"),
+			n,
+			i;
+			n = l.length;
+		for(i = 0; i < n; i++){
+			if(l[i].displayInLayerSwitcher === true){
+				l[i].setVisibility(visivel);
+			}
+			if(l[i] != true){
+				i3GEO.editorOL.layersIniciais.push(l[i]);
+			}
 		}
 	}
-}
 </script>
 </body>
 </html>

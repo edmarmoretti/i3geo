@@ -58,7 +58,7 @@ if(!isset($temas)){
 // problema na vers&atilde;o 211 do OpenLayers. Tamanho em % n&atilde;o &eacute;
 // aceito
 // if(!isset($largura))
-	// {$largura = 500;}
+// {$largura = 500;}
 if(isset($largura) && !isset($altura)){
 	$altura = $largura;
 }
@@ -211,138 +211,132 @@ if($temas != ""){
 		$visiveis = explode(",",$visiveis);
 	}
 	$objOpenLayers = array();
-	if(isset($servidor) && $servidor != "../ogc.php"){
-		$layers = $temas;
-		foreach($temas as $tema){
-			$nomeLayer = str_replace(".map","",basename($tema));
-			$nomeLayer = str_replace(".php","",$nomeLayer);
-			$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tema.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{isBaseLayer:false})';
-		}
+	if(!isset($servidor)){
+		$servidor = "../ogc.php";
 	}
-	else{
-		foreach($temas as $tema){
-			if(file_exists($locaplic."/temas/".$tema.".gvp")){
-				include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
-				$gm = new gvsig2mapfile($locaplic."/temas/".$tema.".gvp");
-				$gvsigview = $gm->getViewsNames();
-				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$gvsigview[0].'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$tema.'",transparent: "true", format: "image/png"},{singleTile:false,visibility:true,isBaseLayer:false})';
+	foreach($temas as $tema){
+		if(file_exists($locaplic."/temas/".$tema.".gvp")){
+			include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
+			$gm = new gvsig2mapfile($locaplic."/temas/".$tema.".gvp");
+			$gvsigview = $gm->getViewsNames();
+			$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$gvsigview[0].'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$tema.'",transparent: "true", format: "image/png"},{singleTile:false,visibility:true,isBaseLayer:false})';
+		}
+		else{
+			$nomeMap = "";
+			if(file_exists($locaplic."/temas/".$tema.".map")){
+				$nomeMap = $locaplic."/temas/".$tema.".map";
 			}
 			else{
-				$nomeMap = "";
-				if(file_exists($locaplic."/temas/".$tema.".map")){
-					$nomeMap = $locaplic."/temas/".$tema.".map";
+				if(file_exists($tema)){
+					$nomeMap = $tema;
 				}
 				else{
-					if(file_exists($tema)){
-						$nomeMap = $tema;
-					}
-					else{
-						// acontece caso o mapfile tenha sido gerado na pasta
-						// temporaria por algum sistema
-						if(file_exists($dir_tmp."/".$tema.".map")){
-							$nomeMap = $dir_tmp."/".$tema.".map";
-						}
+					// acontece caso o mapfile tenha sido gerado na pasta
+					// temporaria por algum sistema
+					if(file_exists($dir_tmp."/".$tema.".map")){
+						$nomeMap = $dir_tmp."/".$tema.".map";
 					}
 				}
-				if($nomeMap != ""){
-					$layersNomes = array();
-					$layers = array();
-					$maptemp = @ms_newMapObj($nomeMap);
-					if($maptemp){
-						$nlayers = $maptemp->numlayers;
-						for($i=0;$i<($nlayers);++$i)	{
-							$layern = $maptemp->getLayer($i);
-							if($layern->getmetadata("PLUGINI3GEO") != ""){
-								//obtem os dados necessarios para iniciar o plugin
-								$temasPluginI3Geo[] = array(
-										"name"=>$layern->name,
-										"tema"=>$layern->getmetadata("tema"),
-										"plugin"=>$layern->getmetadata("PLUGINI3GEO"),
-										"cache"=>strtoupper($layern->getmetadata("cache")),
-										"transitioneffect"=>strtoupper($layern->getmetadata("transitioneffect"))
-								);
-							}
-							else{
-								$layersNomes[] = $layern->name;
-								$layers[] = $layern;
-							}
+			}
+			if($nomeMap != ""){
+				$layersNomes = array();
+				$layers = array();
+				$maptemp = @ms_newMapObj($nomeMap);
+				if($maptemp){
+					$nlayers = $maptemp->numlayers;
+					for($i=0;$i<($nlayers);++$i)	{
+						$layern = $maptemp->getLayer($i);
+						if($layern->getmetadata("PLUGINI3GEO") != ""){
+							//obtem os dados necessarios para iniciar o plugin
+							$temasPluginI3Geo[] = array(
+									"name"=>$layern->name,
+									"tema"=>$layern->getmetadata("tema"),
+									"plugin"=>$layern->getmetadata("PLUGINI3GEO"),
+									"cache"=>strtoupper($layern->getmetadata("cache")),
+									"transitioneffect"=>strtoupper($layern->getmetadata("transitioneffect")),
+									"tiles"=>strtoupper($layern->getmetadata("tiles"))
+							);
 						}
-						$nomeLayer = implode(",",$layersNomes);
-						$tituloLayer = $layern->getmetadata("tema");
-						$ebase = "false";
-						if(isset($fundo) && $fundo != ""){
-							if(in_array($tema,$fundo)){
-								$ebase = "true";
+						else{
+							$layersNomes[] = $layern->name;
+							$layers[] = $layern;
+						}
+					}
+					$nomeLayer = implode(",",$layersNomes);
+					$tituloLayer = $layern->getmetadata("tema");
+					$ebase = "false";
+					if(isset($fundo) && $fundo != ""){
+						if(in_array($tema,$fundo)){
+							$ebase = "true";
+						}
+					}
+					$visivel = "false";
+					if(in_array($tema,$visiveis)){
+						$visivel = "true";
+					}
+					// echo $visivel;exit;
+					// var_dump($visiveis);exit;
+					if($nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM" && $layern->getmetadata("PLUGINI3GEO") == ""){
+						if($layern->type != 2 && $layern->type != 3){
+							$opacidade = 1;
+						}
+						//
+						//verifica se deve aplicar filtro
+						//
+						$filtro = $_GET["map_layer_".$layern->name."_filter"];
+						if(!empty($filtro)){
+							$DESLIGACACHE = "sim";
+							$nocache = "map_layer_".$layern->name."_filter=".$filtro."&".$nocache;
+						}
+						// nesse caso o layer e adicionado como TMS
+						// tms leva os parametros do TMS
+						$teffect = 'transitionEffect: "resize",';
+						if(strtoupper($layern->getmetadata("transitioneffect")) == "NAO"){
+							$teffect = 'transitionEffect: null,';
+						}
+						$objOpenLayers[] = 'new OpenLayers.Layer.XYZ("'.$tituloLayer.'", "'.$servidor.'?Z=${z}&X=${x}&Y=${y}&'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&SRS=EPSG:3857",{'.$teffect.'opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png"})';
+						// cria um clone WMS para efeitos de getfeatureinfo
+						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{transitionEffect : null, displayInLayerSwitcher:false,singleTile:true,visibility:false,isBaseLayer:false})';
+					}
+					else{
+						foreach($layers as $l){
+							$singleTile = true;
+							if(strtoupper($l->getmetadata("TILES")) == "NAO"){
+								$singleTile = false;
 							}
-						}
-						$visivel = "false";
-						if(in_array($tema,$visiveis)){
-							$visivel = "true";
-						}
-						// echo $visivel;exit;
-						// var_dump($visiveis);exit;
-						if($nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM" && $layern->getmetadata("PLUGINI3GEO") == ""){
-							if($layern->type != 2 && $layern->type != 3){
+							$tituloLayer = $l->getmetadata("tema");
+							$nomeLayer = $l->name;
+							$visivel = "false";
+							if($l->status == MS_DEFAULT || in_array($tema,$visiveis)){
+								$visivel = "true";
+							}
+							if($l->type != 2 && $l->type != 3){
 								$opacidade = 1;
 							}
 							//
 							//verifica se deve aplicar filtro
 							//
-							$filtro = $_GET["map_layer_".$layern->name."_filter"];
+							$filtro = $_GET["map_layer_".$l->name."_filter"];
 							if(!empty($filtro)){
 								$DESLIGACACHE = "sim";
-								$nocache = "map_layer_".$layern->name."_filter=".$filtro."&".$nocache;
+								$nocache = "map_layer_".$l->name."_filter=".$filtro."&".$nocache;
 							}
-							// nesse caso o layer e adicionado como TMS
-							// tms leva os parametros do TMS
 							$teffect = 'transitionEffect: "resize",';
-							if(strtoupper($layern->getmetadata("transitioneffect")) == "NAO"){
+							if(strtoupper($l->getmetadata("transitioneffect")) == "NAO"){
 								$teffect = 'transitionEffect: null,';
 							}
-							$objOpenLayers[] = 'new OpenLayers.Layer.XYZ("'.$tituloLayer.'", "../ogc.php?Z=${z}&X=${x}&Y=${y}&'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&SRS=EPSG:3857",{'.$teffect.'opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png"})';
-							// cria um clone WMS para efeitos de getfeatureinfo
-							$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{transitionEffect : null, displayInLayerSwitcher:false,singleTile:true,visibility:false,isBaseLayer:false})';
-						}
-						else{
-							foreach($layers as $l){
-								$singleTile = true;
-								if(strtoupper($l->getmetadata("TILES")) == "NAO"){
-									$singleTile = false;
-								}
-								$tituloLayer = $l->getmetadata("tema");
-								$nomeLayer = $l->name;
-								$visivel = "false";
-								if($l->status == MS_DEFAULT || in_array($tema,$visiveis)){
-									$visivel = "true";
-								}
-								if($l->type != 2 && $l->type != 3){
-									$opacidade = 1;
-								}
-								//
-								//verifica se deve aplicar filtro
-								//
-								$filtro = $_GET["map_layer_".$l->name."_filter"];
-								if(!empty($filtro)){
-									$DESLIGACACHE = "sim";
-									$nocache = "map_layer_".$l->name."_filter=".$filtro."&".$nocache;
-								}
-								$teffect = 'transitionEffect: "resize",';
-								if(strtoupper($l->getmetadata("transitioneffect")) == "NAO"){
-									$teffect = 'transitionEffect: null,';
-								}
-								if($tituloLayer != ""){
-									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' singleTile: '.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
-								}
-								else{
-									$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "../ogc.php?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' displayInLayerSwitcher:false,singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
-								}
+							if($tituloLayer != ""){
+								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' singleTile: '.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+							}
+							else{
+								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' displayInLayerSwitcher:false,singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
 							}
 						}
 					}
 				}
-				else{
-					echo $tema." n&atilde;o foi encontrado.<br>";
-				}
+			}
+			else{
+				echo $tema." n&atilde;o foi encontrado.<br>";
 			}
 		}
 	}
@@ -472,6 +466,7 @@ if(count($temasPluginI3Geo) > 0){
 	opacity: .8;
 	filter: alpha(opacity = 80);
 }
+
 .pluginParametrossql {
 	background-image: url("../imagens/gisicons/settings.png");
 	background-size: 14px auto;
@@ -628,7 +623,7 @@ if(!i3GEO.configura){
 	foreach ($temasPluginI3Geo as $t){
 		//var_dump($temasPluginI3Geo);exit;
 		//cria um objeto javascript para iniciar o plugin
-		$camada = '{"tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].',"cache":"'.$t["cache"].'","transitioneffect":"'.$t["transitioneffect"].'"}';
+		$camada = '{"tiles":"'.$t["tiles"].'","tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].',"cache":"'.$t["cache"].'","transitioneffect":"'.$t["transitioneffect"].'"}';
 		echo "var camada = $camada;\n";
 		//echo "i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);\n";
 		$visivel = "false";
@@ -639,14 +634,15 @@ if(!i3GEO.configura){
 	}
 	?>
 	i3GEO.editorOL.inicia();
-
+	
 	function adicionaPluginI3geo(camada,visivel){
 		if(!camada.cache){
 			camada["cache"] = "NAO";
 		}
 		var l = i3GEO.pluginI3geo.layerMashup("openlayers",camada,"4326"),
-			n = l.length,
+			n,
 			i;
+			n = l.length;
 		for(i = 0; i < n; i++){
 			if(l[i].displayInLayerSwitcher === true){
 				l[i].setVisibility(visivel);

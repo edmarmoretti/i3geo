@@ -1140,7 +1140,7 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				layerMashup : function(camada, epsg) {
-					var p = [];
+					var p = [], tile;
 					if (!camada.cache) {
 						camada["cache"] = "NAO";
 					}
@@ -1153,9 +1153,13 @@ i3GEO.pluginI3geo =
 					else{
 						camada["transitioneffect"] = null;
 					}
-
+					if(camada["tiles"] === "NAO"){
+						tile = false;
+					}
+					else{
+						tile = true;
+					}
 					// o gerador de OGC e especifico desse plugin, pois aceita parametros diferentes do original i3geo/ogc.php
-					// TODO usar tile conforme parametro no mapfile
 					if (camada.cache === "NAO") {
 						p.push(new OpenLayers.Layer.WMS(camada.tema, i3GEO.configura.locaplic + "ferramentas/parametrossql/ogc.php?tema="
 							+ camada.name
@@ -1164,7 +1168,7 @@ i3GEO.pluginI3geo =
 							SRS : 'EPSG:' + epsg,
 							FORMAT : 'image/png'
 						}, {
-							singleTile : false,
+							singleTile : tile,
 							isBaseLayer : false,
 							visibility : true,
 							transitionEffect : camada["transitioneffect"],
