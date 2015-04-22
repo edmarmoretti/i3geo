@@ -65,8 +65,7 @@ if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" 
 }
 ?>
 </script>
-<link rel='stylesheet' type='text/css' href='../css/i3geo6.css.php'></link>
-<link rel="stylesheet" type="text/css" href="../admin/html/admin.css">
+
 <style>
 body {
 	padding-top: 0px;
@@ -112,8 +111,39 @@ h1 {
 	margin: 25px;
 }
 
+#brasil {
+	background-image: url("../imagens/sprite.png");
+	background-position: 0 -600px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	height: 10px;
+	width: 20px;
+}
+
+#uk {
+	background-image: url("../imagens/sprite.png");
+	background-position: 0 -625px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	height: 10px;
+	width: 20px;
+}
+
+#espanhol {
+	background-image: url("../imagens/sprite.png");
+	background-position: 0 -1400px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	height: 10px;
+	width: 20px;
+}
+
+#bandeiras img {
+	margin-left: 7px;
+}
+
 #bandeiras {
-	width: 80px;
+	width: 100px;
 	text-align: left;
 	position: absolute;
 	left: 0.2cm;
@@ -134,19 +164,21 @@ a {
 }
 </style>
 </head>
-<body class=" yui-skin-sam " style="background-color: rgb(250, 250, 250);" >
+<body class=" yui-skin-sam " style="background-color: rgb(250, 250, 250);">
 	<div class="borda">
 		<div id="bandeiras"></div>
-		<div>
-			<a href="http://www.softwarepublico.gov.br" target="_blank" style="color: white;"><b>i3Geo 6.0</b> </a>
+		<div style="text-align:center">
+			<a href="http://www.softwarepublico.gov.br" target="_blank" style="color: white;">
+				<b>i3Geo 6.0</b>
+			</a>
 		</div>
 	</div>
 
 	<div id="conteudo" style="position: relative; top: -10px; margin: auto; max-width: 1000px; left: 10px;">
 		<div style="margin-top: 5px;">
-			<div id="mensagemLogin" style="font-size:14px;color:red;margin-top:20px;text-align: left;"></div>
+			<div id="mensagemLogin" style="font-size: 14px; color: red; margin-top: 20px; text-align: left;"></div>
 			<br>
-			<div id="botoes" style=""></div>
+			<div id="botoes" style="width: 100%;"></div>
 			<script>mostraBotoes();</script>
 			<div class="r">
 				<table>
@@ -170,7 +202,8 @@ a {
 						</td>
 					</tr>
 				</table>
-			</a> <a href="#" class="r" style="width: 230px; height: 380px;">
+			</a>
+			<a href="#" class="r" style="width: 230px; height: 380px;">
 				<table>
 					<tr>
 						<td>
@@ -179,7 +212,8 @@ a {
 						</td>
 					</tr>
 				</table>
-			</a> <a href="#" class="r" style="width: 345px; height: 220px;">
+			</a>
+			<a href="#" class="r" style="width: 345px; height: 220px;">
 				<table>
 					<tr>
 						<td>
@@ -190,5 +224,5 @@ a {
 			</a>
 		</div>
 	</div>
-	</body>
+</body>
 </html>
