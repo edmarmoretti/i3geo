@@ -1688,9 +1688,9 @@ g_traducao = {
 }],
 "x64":[
 {
-	pt:"&Iacute;tem",
+	pt:"Item",
 	en:"Item",
-	es:"&Iacute;tem"
+	es:"Item"
 }],
 "x65":[
 {
@@ -2073,6 +2073,144 @@ g_traducao = {
 "mascara": [
 {
 	pt: "M&aacute;scara",
+	en:"",
+	es:""
+}],
+"result": [
+{
+	pt: "Resultado",
+	en:"",
+	es:""
+}],
+"tativo": [
+{
+	pt: "Tema ativo",
+	en:"",
+	es:""
+}],
+"geosel": [
+{
+	pt: "geometria(s) selecionada(s) encontrada(s)",
+	en:"",
+	es:""
+}],
+"listar": [
+{
+	pt: "Listar",
+	en:"",
+	es:""
+}],
+"sdados": [
+{
+	pt: "Salvar dados",
+	en:"",
+	es:""
+}],
+"incorpo": [
+{
+	pt: "Incorporar ao mapa",
+	en:"",
+	es:""
+}],
+"selum": [
+{
+	pt: "Selecione pelo menos um elemento",
+	en:"",
+	es:""
+}],
+"atrib": [
+{
+	pt: "Atributos",
+	en:"",
+	es:""
+}],
+"reg": [
+{
+	pt: "Registros",
+	en:"",
+	es:""
+}],
+"adic": [
+{
+	pt: "Adicionando",
+	en:"",
+	es:""
+}],
+"stema": [
+{
+	pt: "Salvar no tema",
+	en:"",
+	es:""
+}],
+"seluma": [
+{
+	pt: "Selecione apenas uma figura",
+	en:"",
+	es:""
+}],
+"salva": [
+{
+	pt: "Salva",
+	en:"",
+	es:""
+}],
+"canc": [
+{
+	pt: "Cancela",
+	en:"",
+	es:""
+}],
+"dlinha": [
+{
+	pt: "digitalizar linha",
+	en:"",
+	es:""
+}],
+"dpol": [
+{
+	pt: "digitalizar pol&iacute;gono",
+	en:"",
+	es:""
+}],
+"dponto": [
+{
+	pt: "digitalizar ponto",
+	en:"",
+	es:""
+}],
+"dtexto": [
+{
+	pt: "digitalizar texto",
+	en:"",
+	es:""
+}],
+"cortaf": [
+{
+	pt: "corta figura",
+	en:"",
+	es:""
+}],
+"modf": [
+{
+	pt: "modifica figura",
+	en:"",
+	es:""
+}],
+"listag": [
+{
+	pt: "lista geometrias",
+	en:"",
+	es:""
+}],
+"frente": [
+{
+	pt: "trazer para frente",
+	en:"",
+	es:""
+}],
+"studo": [
+{
+	pt: "selecionar tudo",
 	en:"",
 	es:""
 }]
