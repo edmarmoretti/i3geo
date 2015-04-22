@@ -154,6 +154,12 @@ a {
 	margin: 0px auto;
 	text-decoration: none;
 	font-size: 14px;
+	color: #26298D;
+	outline : none;
+}
+
+A:hover {
+	color: #4142ff;
 }
 
 .borda {
