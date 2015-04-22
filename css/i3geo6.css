@@ -1576,10 +1576,19 @@ background-repeat: no-repeat;
 height: 15px;
 width: 57px;
 }
-#menumenuUnico {
-background-image: url("../imagens/oxygen/16x16/format-list-unordered.png");
-background-repeat: no-repeat;
-margin-left: 5px;
+.menuTresLinhas {
+float: left;
+position: relative;
+left : -5px;
+top : 2px;
+}
+.menuTresLinhas b {
+background: none repeat scroll 0 0 #fff;
+border-radius: 2px;
+display: block;
+height: 2px;
+margin-bottom: 3px;
+width: 15px;
 }
 /*bandeira do brasil*/
 #brasil {

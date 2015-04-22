@@ -474,5 +474,10 @@ i3GEOF.preferencias.dicionario = {
 		pt : "Mostra o t&iacute;tulo no n&oacute; raiz da &aacute;rvore",
 		en : "",
 		es : ""
+	} ],
+	'menuUnico' : [ {
+		pt : "Utiliza uma entra &uacute;nica para o menu suspenso",
+		en : "",
+		es : ""
 	} ]
 };

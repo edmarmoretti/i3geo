@@ -98,6 +98,7 @@ i3GEO.gadgets =
 				marcadores : true,
 				idhtml : "menus",
 				deslocaEsquerda : 0,
+				menuUnico : false,
 				parametrosYUI : {
 					iframe : false,
 					autosubmenudisplay : false,
@@ -582,7 +583,7 @@ i3GEO.gadgets =
 						n = 0, s, tempMenu, m = 0, idts, idt;
 					menuUnico["menu"] = [
 						{
-							nome : "Menu",
+							nome : "<span class='menuTresLinhas' ><b> </b><b> </b><b> </b></span>MENU",
 							id : "menuUnico"
 						}
 					];
@@ -626,7 +627,7 @@ i3GEO.gadgets =
 					i3GEO.configura.oMenuData = menuUnico;
 					confm = i3GEO.configura.oMenuData;
 				};
-				if(i3GEO.parametros.w < 700){
+				if(i3GEO.parametros.w < 700 || ms.menuUnico === true){
 					menuUnico();
 				}
 				i3GEOoMenuBar = YAHOO.widget.MenuManager;
@@ -666,7 +667,7 @@ i3GEO.gadgets =
 									+ t
 									+ 'id="menu'
 									+ confm.menu[i].id
-									+ '" >&nbsp;'
+									+ '" >'
 									+ confm.menu[i].nome
 									+ '</a></li>';
 						}

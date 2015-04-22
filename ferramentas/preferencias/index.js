@@ -351,6 +351,10 @@ i3GEOF.preferencias = {
 						titulo: $trad('deslocamentoEsquerda',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda"
+					},{
+						titulo: $trad('menuUnico',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.menuUnico"
 					}
 				]
 			},{
