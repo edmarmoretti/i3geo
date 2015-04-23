@@ -52,6 +52,9 @@ if(!empty($restauramapa)){
 //
 // imprime na tela a ajuda ao usu&aacute;rio
 //
+if(!isset($temas) && isset($layers)){
+	$temas = $layers;
+}
 if(!isset($temas)){
 	ajuda();
 }

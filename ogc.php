@@ -88,6 +88,9 @@ include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 //para o caso da requisicao kml
 if(strtolower($OUTPUTFORMAT) == "kml" || strtolower($OUTPUTFORMAT) == "kmz"){
 	//http://localhost/i3geo/pacotes/kmlmapserver/kmlservice.php?request=kmz&map=_lbiomashp&typename=_lbiomashp
+	if(!isset($tema) && isset($layers)){
+		$tema = $layers;
+	}
 	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;
 	header("Location:".$urln);
 	exit;
