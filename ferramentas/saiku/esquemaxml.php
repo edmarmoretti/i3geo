@@ -7,9 +7,9 @@
 //utilize $regiao para obter o xml de uma so regiao
 //
 /**
-http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?output=&xmlesquema=http://localhost/i3geo/ferramentas/saiku/testemondrian.xml&output=xml
-http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?xmlesquema=&output=xml&regiao=1
-*/
+ http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?output=xml
+ http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?xmlesquema=&output=xml&regiao=1
+ */
 
 //
 //quando o saiku e iniciado de fora do i3geo, e necessario inicializar um mapfile para uso como base dos mapas
@@ -90,9 +90,14 @@ $VirtualCubeDimensionDaRegiao = array();
 $VirtualCubeMeasureDaRegiao = array();
 $nivelDaDimensao = array();
 
+$VirtualCubeDimensionDaMedida = array();
+$CubosPorMedida = array();
+
 $dimRegioes = dimensoesGeo();
 
-$xmlRegioes = array_map(function($element){return $element['xml'];}, $dimRegioes);
+$xmlRegioes = array_map(function($element){
+	return $element['xml'];
+}, $dimRegioes);
 $xmlRegioes = implode(" ",$xmlRegioes);
 
 //
@@ -116,8 +121,10 @@ $xmlCuboTodas = cuboTodas();
 //
 $xmlCuboRegioes = cuboRegioes();
 
+$xmlCuboVariaveis = cuboVariaveis();
+
 $xml = "<Schema name='i3Geo Metaestat'>";
-$xml .= $xmlTempo.$xmlRegioes.$xmlOutrasDim.$xmlDimensoesTabelas.$xmlCuboRegioes.$xmlCuboTodas;
+$xml .= $xmlTempo.$xmlRegioes.$xmlOutrasDim.$xmlDimensoesTabelas.$xmlCuboRegioes.$xmlCuboTodas.$xmlCuboVariaveis;
 $xml .= "</Schema>";
 
 //xml pronto!!!!!
@@ -298,8 +305,8 @@ function pegaSelecaoRegioes(){
 			}
 		}
 		return array(
-			"selecaoRegiao"=>$selecaoRegiao,
-			"codigo_tipo_regiao"=>$codigo_tipo_regiao
+				"selecaoRegiao"=>$selecaoRegiao,
+				"codigo_tipo_regiao"=>$codigo_tipo_regiao
 		);
 	}
 }
@@ -360,7 +367,7 @@ function sqlDasRegioes($regiao,$caminho,$chavesRegiao){
 			$nomesColunas[] = " nome".$regiaoJoin["codigo_tipo_regiao"];
 
 			$juncoes .= " JOIN {$regiaoJoin['esquemadb']}.{$regiaoJoin['tabela']} as $tabelaAtual ON
-				$tabelaAtual.$colunaLigacaoAtual::text = $tabelaAnterior.$colunaLigacaoAnterior::text
+			$tabelaAtual.$colunaLigacaoAtual::text = $tabelaAnterior.$colunaLigacaoAnterior::text
 			";
 			$codRegioes[] = $regiaoJoin["codigo_tipo_regiao"];
 		}
@@ -403,12 +410,12 @@ function dimensoesGeo(){
 		$sqls = array();
 		$temp = converte($regiao["nome_tipo_regiao"]);
 		$xml1 = "
-			<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='Onde:".$temp."'>
-			<Hierarchy hasAll='true'  primaryKey='codigo{$regiao["codigo_tipo_regiao"]}'>
+		<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' caption='Onde:".$temp."'>
+		<Hierarchy hasAll='true'  primaryKey='codigo{$regiao["codigo_tipo_regiao"]}'>
 		";
 		$xml2 = "
-			<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_geocod' caption='GeoCod:".$temp."'>
-			<Hierarchy hasAll='true'  primaryKey='codigo{$regiao["codigo_tipo_regiao"]}'>
+		<Dimension name='codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_geocod' caption='GeoCod:".$temp."'>
+		<Hierarchy hasAll='true'  primaryKey='codigo{$regiao["codigo_tipo_regiao"]}'>
 		";
 		//
 		//cria uma view juntando as tabelas da hierarquia de regioes
@@ -433,13 +440,13 @@ function dimensoesGeo(){
 
 		$temp = converte($regiao["nome_tipo_regiao"]);
 		$niveisXml1[] = "
-			<Level name='".$temp."' column='codigo{$regiao["codigo_tipo_regiao"]}' nameColumn='nome".$regiao["codigo_tipo_regiao"]."'
-			uniqueMembers='false' />
-			";
+		<Level name='".$temp."' column='codigo{$regiao["codigo_tipo_regiao"]}' nameColumn='nome".$regiao["codigo_tipo_regiao"]."'
+		uniqueMembers='false' />
+		";
 		$niveisXml2[] = "
-				<Level name='".$temp." - GeoCod #".$regiao["codigo_tipo_regiao"]."' column='codigo{$regiao["codigo_tipo_regiao"]}' nameColumn='codigo".$regiao["codigo_tipo_regiao"]."'
-				uniqueMembers='false' />
-			";
+		<Level name='".$temp." - GeoCod #".$regiao["codigo_tipo_regiao"]."' column='codigo{$regiao["codigo_tipo_regiao"]}' nameColumn='codigo".$regiao["codigo_tipo_regiao"]."'
+		uniqueMembers='false' />
+		";
 		//juncoes
 		while($caminho){
 			$a = array_shift($caminho);
@@ -482,14 +489,14 @@ function dimensoesGeo(){
 			$sqlreg = " WHERE tabela{$regiao["codigo_tipo_regiao"]}.".$rs["sql"];
 		}
 		$xml1 .= "
-			<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' >
-					<SQL dialect='generic' >".$dadosSelect["select"].$sqlreg."</SQL>
-			</view>
+		<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."' >
+		<SQL dialect='generic' >".$dadosSelect["select"].$sqlreg."</SQL>
+		</view>
 		";
 		$xml2 .= "
-			<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_GeoCod' >
-					<SQL dialect='generic' >".$dadosSelect["select"].$sqlreg."</SQL>
-			</view>
+		<view alias='view_codigo_tipo_regiao_".$regiao["codigo_tipo_regiao"]."_GeoCod' >
+		<SQL dialect='generic' >".$dadosSelect["select"].$sqlreg."</SQL>
+		</view>
 		";
 		$niveisXml1 = array_reverse($niveisXml1);
 		$niveisXml2 = array_reverse($niveisXml2);
@@ -553,7 +560,7 @@ function dimensoesOutras(){
 	return $xml3;
 }
 function dimensoesTabelas(){
-	global $nivelDaDimensao,$dimRegioes, $filhosDaRegiao, $m, $VirtualCubeDimension, $VirtualCubeMeasure, $chavesRegiao, $medidas, $codigo_tipo_regiao, $VirtualCubeDimensionDaRegiao, $VirtualCubeMeasureDaRegiao;
+	global $VirtualCubeDimensionDaMedida, $CubosPorMedida, $nivelDaDimensao, $dimRegioes, $filhosDaRegiao, $m, $VirtualCubeDimension, $VirtualCubeMeasure, $chavesRegiao, $medidas, $codigo_tipo_regiao, $VirtualCubeDimensionDaRegiao, $VirtualCubeMeasureDaRegiao;
 
 	$xml = "";
 	$tbs = array();
@@ -567,6 +574,8 @@ function dimensoesTabelas(){
 			else{
 				array_push($tbs[$k],$medida);
 			}
+			$CubosPorMedida[$medida["nome_variavel"]] = array();
+			$VirtualCubeDimensionDaMedida[$medida["nome_variavel"]] = array();
 		}
 	}
 	//monta os cubos para cada esquema.tabela diferente
@@ -581,13 +590,24 @@ function dimensoesTabelas(){
 		";
 
 		array_push(
-		$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
-		"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
-		);
+				$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
+				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
+				);
 		array_push(
-		$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
-		"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />"
-		);
+				$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
+				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />"
+				);
+
+		array_push(
+				$VirtualCubeDimensionDaMedida[$c["nome_variavel"]],
+				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
+				);
+		array_push(
+				$VirtualCubeDimensionDaMedida[$c["nome_variavel"]],
+				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />"
+				);
+
+
 		//verifica as dimensoes do tipo tempo
 		$dimEnsoes = array();
 
@@ -629,6 +649,7 @@ function dimensoesTabelas(){
 		//$dimEnsoes[] = '<DimensionUsage foreignKey="coduf" name="codigo_tipo_regiao_2" source="codigo_tipo_regiao_2"/>';
 
 		$xml .= "<Cube cache='false' name='Tabela: {$c["esquemadb"]}{$c["tabela"]}'>";
+
 		$incluirChaves = array("tabelamedida{$c["id_medida_variavel"]}.*");
 		//colunas quando o nome da coluna com os valores for vazia
 		foreach($tb as $mdd){
@@ -651,7 +672,7 @@ function dimensoesTabelas(){
 		}
 		$r = $chavesRegiao[$c["codigo_tipo_regiao"]];
 		$sql = "
-			select ".implode(",",$incluirChaves).", tabelamedida{$c["id_medida_variavel"]}.{$c["colunaidgeo"]}::text as codigoreg
+		select ".implode(",",$incluirChaves).", tabelamedida{$c["id_medida_variavel"]}.{$c["colunaidgeo"]}::text as codigoreg
 		";
 		if(count($dimRegioes[$c["codigo_tipo_regiao"]]["colunas"]) > 0){
 			$sql .= ",".implode(",",$dimRegioes[$c["codigo_tipo_regiao"]]["colunas"]);
@@ -659,38 +680,38 @@ function dimensoesTabelas(){
 		}
 
 		$sql .= "
-			from {$c["esquemadb"]}.{$c["tabela"]} as tabelamedida{$c["id_medida_variavel"]}
-			JOIN {$r["esquemadb"]}.{$r["tabela"]} as tabela{$r["codigo_tipo_regiao"]}
-			ON  tabela{$r["codigo_tipo_regiao"]}.{$r["identificador"]}::text = tabelamedida{$c["id_medida_variavel"]}.{$c["colunaidgeo"]}::text
-			";
+		from {$c["esquemadb"]}.{$c["tabela"]} as tabelamedida{$c["id_medida_variavel"]}
+		JOIN {$r["esquemadb"]}.{$r["tabela"]} as tabela{$r["codigo_tipo_regiao"]}
+		ON  tabela{$r["codigo_tipo_regiao"]}.{$r["identificador"]}::text = tabelamedida{$c["id_medida_variavel"]}.{$c["colunaidgeo"]}::text
+		";
 		$sql .= $dimRegioes[$c["codigo_tipo_regiao"]]["juncoes"];
 		$f = array();
 		foreach($tb as $mdd){
 			if($mdd["filtro"] != ""){
 				$f[] = str_replace('"',"'",$mdd["filtro"]);
 			}
-		}		
+		}
 		if(count($f) > 0){
 			$sql .= " WHERE ".implode(" OR ",$f);
 		}
 
 		$xml .= "
-			<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
+		<view alias='view_{$c["esquemadb"]}{$c["tabela"]}' ><SQL dialect='generic' >$sql</SQL></view>
 		";
 		//dimensoes vinculadas
 		$temp = $dimRegioes[$c["codigo_tipo_regiao"]]["codRegioes"];
 		$temp[] = $c["codigo_tipo_regiao"];
 		foreach($temp as $cod){
 			$xml .= "
-				<DimensionUsage foreignKey='codigo{$cod}' name='codigo_tipo_regiao_{$cod}' source='codigo_tipo_regiao_{$cod}'/>
-				<DimensionUsage foreignKey='codigo{$cod}' name='codigo_tipo_regiao_{$cod}_geocod' source='codigo_tipo_regiao_{$cod}_geocod'/>
+			<DimensionUsage foreignKey='codigo{$cod}' name='codigo_tipo_regiao_{$cod}' source='codigo_tipo_regiao_{$cod}'/>
+			<DimensionUsage foreignKey='codigo{$cod}' name='codigo_tipo_regiao_{$cod}_geocod' source='codigo_tipo_regiao_{$cod}_geocod'/>
 			";
 		}
 		//inclui as dimensoes filhas
 		foreach($filhosDaRegiao[$c["codigo_tipo_regiao"]] as $fr){
 			$xml .= "
-				<DimensionUsage foreignKey='codigoreg' name='codigo_tipo_regiao_".$fr."' source='codigo_tipo_regiao_".$fr."'/>
-				<DimensionUsage foreignKey='codigoreg' name='codigo_tipo_regiao_".$fr."_geocod' source='codigo_tipo_regiao_".$fr."_geocod'/>
+			<DimensionUsage foreignKey='codigoreg' name='codigo_tipo_regiao_".$fr."' source='codigo_tipo_regiao_".$fr."'/>
+			<DimensionUsage foreignKey='codigoreg' name='codigo_tipo_regiao_".$fr."_geocod' source='codigo_tipo_regiao_".$fr."_geocod'/>
 			";
 		}
 
@@ -719,6 +740,10 @@ function dimensoesTabelas(){
 			";
 			$VirtualCubeMeasure[] = $u;
 			array_push($VirtualCubeMeasureDaRegiao[$c["codigo_tipo_regiao"]],$u);
+			//verifica em qual variavel entra
+			//<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_12]'/>
+			$u = "<VirtualCubeMeasure cubeName='Tabela: {$c["esquemadb"]}{$c["tabela"]}' name='[Measures].[id_medida_variavel_".$medida["id_medida_variavel"]."]'/>";
+			array_push($CubosPorMedida[$c["nome_variavel"]],$u);
 		}
 		$xml .= "
 		</Cube>
@@ -752,6 +777,21 @@ function cuboRegioes(){
 			$xml .= implode(" ",array_unique($mm));
 			$xml .= '</VirtualCube>';
 		}
+	}
+	return $xml;
+}
+
+function cuboVariaveis(){
+	global $CubosPorMedida, $VirtualCubeDimensionDaMedida;
+	//var_dump($VirtualCubeDimensionDaMedida);exit;
+	$xml = "";
+	$chaves = array_keys($CubosPorMedida);
+	foreach ($chaves as $c){
+		$xml .= '<VirtualCube name="'.converte($c).'" >';
+		$xml .= '<VirtualCubeDimension name="Tempo" />';
+		$xml .= implode(" ",$VirtualCubeDimensionDaMedida[$c]);
+		$xml .= implode(" ",$CubosPorMedida[$c]);
+		$xml .= '</VirtualCube>';
 	}
 	return $xml;
 }

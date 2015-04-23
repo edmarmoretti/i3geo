@@ -1,481 +1,302 @@
 <Schema name='i3Geo Metaestat'>
 	<Dimension name='Anual' type='TimeDimension' caption='Tempo: Anual'>
-		<Hierarchy hasAll='true' primaryKey='nu_ano'>
-			<view alias='tempo_ano'>
-				<SQL dialect='generic'>select nu_ano from
-					i3geo_metaestat.dim_tempo group
-					by nu_ano order by nu_ano
-				</SQL>
-			</view>
-			<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true'
-				levelType='TimeYears' />
-		</Hierarchy>
+	<Hierarchy hasAll='true' primaryKey='nu_ano'>
+	<view alias='tempo_ano' ><SQL dialect='generic' >select nu_ano from i3geo_metaestat.dim_tempo group by nu_ano order by nu_ano</SQL></view>
+	<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true' levelType='TimeYears'/>
+	</Hierarchy>
 	</Dimension>
 	<Dimension name='Mensal' type='TimeDimension' caption='Tempo: Mensal'>
-		<Hierarchy hasAll='true' primaryKey='nu_anomes'>
-			<view alias='tempo_ano'>
-				<SQL dialect='generic'>select
-					nu_ano::text,nu_mes::text,ds_mes_abreviado as
-					mes,COALESCE
-					(nu_ano::text||'-'||nu_mes::text,nu_ano::text) as
-					nu_anomes from
-					i3geo_metaestat.dim_tempo group by
-					nu_ano,nu_mes,mes,nu_anomes
-					order by nu_ano,nu_mes
-				</SQL>
-			</view>
-			<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true'
-				levelType='TimeYears' />
-			<Level nameColumn='mes' name='Mes' column='nu_mes' type='Numeric'
-				uniqueMembers='false' levelType='TimeMonths' />
-		</Hierarchy>
+	<Hierarchy hasAll='true' primaryKey='nu_anomes'>
+	<view alias='tempo_ano' ><SQL dialect='generic' >select nu_ano::text,nu_mes::text,ds_mes_abreviado as mes,COALESCE (nu_ano::text||'-'||nu_mes::text,nu_ano::text) as nu_anomes from i3geo_metaestat.dim_tempo group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes</SQL></view>
+	<Level name='Ano' column='nu_ano' type='Numeric' uniqueMembers='true' levelType='TimeYears'/>
+	<Level nameColumn='mes' name='Mes' column='nu_mes' type='Numeric' uniqueMembers='false' levelType='TimeMonths'/>
+	</Hierarchy>
 	</Dimension>
 	<Dimension name='Tempo' type='TimeDimension' caption='Tempo'>
-		<Hierarchy hasAll='true' primaryKey='nu_anomes'>
-			<view alias='tempo'>
-				<SQL dialect='generic'>select
-					nu_ano::text,nu_mes::text,ds_mes_abreviado as
-					mes,COALESCE
-					(nu_ano::text||'-'||nu_mes::text,nu_ano::text) as
-					nu_anomes from
-					i3geo_metaestat.dim_tempo group by
-					nu_ano,nu_mes,mes,nu_anomes
-					order by nu_ano,nu_mes
-				</SQL>
-			</view>
-			<Level name='Ano' column='nu_ano' type='String' uniqueMembers='true'
-				levelType='TimeYears' />
-			<Level nameColumn='mes' name='Mes' column='nu_mes' type='String'
-				uniqueMembers='false' levelType='TimeMonths' />
-		</Hierarchy>
+	<Hierarchy hasAll='true' primaryKey='nu_anomes'>
+	<view alias='tempo' ><SQL dialect='generic' >select nu_ano::text,nu_mes::text,ds_mes_abreviado as mes,COALESCE (nu_ano::text||'-'||nu_mes::text,nu_ano::text) as nu_anomes from i3geo_metaestat.dim_tempo group by nu_ano,nu_mes,mes,nu_anomes order by nu_ano,nu_mes</SQL></view>
+	<Level name='Ano' column='nu_ano' type='String' uniqueMembers='true' levelType='TimeYears'/>
+	<Level nameColumn='mes' name='Mes' column='nu_mes' type='String' uniqueMembers='false' levelType='TimeMonths'/>
+	</Hierarchy>
 	</Dimension>
-
-	<Dimension name='codigo_tipo_regiao_1' caption='Onde:Bairro (IBGE)'>
-		<Hierarchy hasAll='true' primaryKey='co_bairro'>
-
-			<view alias='view_codigo_tipo_regiao_1'>
-				<SQL dialect='generic'>SELECT regiao.co_bairro as codigo
-					,regiao.no_bairro
-					AS nome,j0.no_cidade AS
-					j0no_cidade,j0.co_municipio AS
-					j0co_municipio,j1.no_uf AS
-					j1no_uf,j1.co_uf AS
-					j1co_uf,regiao.co_bairro as
-					co_bairro,regiao.no_bairro as
-					no_bairro,regiao.no_distr as
-					no_distr,regiao.no_municip as
-					no_municip FROM
-					i3geo_metaestat.bairros AS regiao INNER JOIN
-					i3geo_metaestat.municipios
-					AS j0 ON j0.co_municipio::text =
-					regiao.co_municipio::text
-					INNER JOIN i3geo_metaestat.uf
-					AS j1 ON
-					j1.co_uf::text = j0.co_uf::text
-				</SQL>
+	
+			<Dimension name='codigo_tipo_regiao_1' caption='Onde:Bairro (IBGE)'>
+			<Hierarchy hasAll='true'  primaryKey='codigo1'>
+		
+			<view alias='view_codigo_tipo_regiao_1' >
+					<SQL dialect='generic' >SELECT tabela1.co_bairro::text as codigo, tabela1.co_bairro::text AS codigo1,tabela1.no_bairro::text AS nome1,tabela2.co_municipio::text AS codigo2,tabela2.no_cidade::text AS nome2,tabela3.co_uf::text AS codigo3,tabela3.no_uf::text AS nome3 FROM i3geo_metaestat.bairros as tabela1 
+ JOIN i3geo_metaestat.municipios as tabela2 ON
+				tabela2.co_municipio::text = tabela1.co_municipio::text
+			 JOIN i3geo_metaestat.uf as tabela3 ON
+				tabela3.co_uf::text = tabela2.co_uf::text
+			</SQL>
 			</view>
-
-			<Level name='Estado' column='j1co_uf' nameColumn='j1no_uf'
+		
+			<Level name='Estado' column='codigo3' nameColumn='nome3'
+			uniqueMembers='false' />
+			 
+			<Level name='Munic&amp;iacute;pio' column='codigo2' nameColumn='nome2'
+			uniqueMembers='false' />
+			 
+			<Level name='Bairro (IBGE)' column='codigo1' nameColumn='nome1'
+			uniqueMembers='false' />
+			
+		</Hierarchy>
+		</Dimension>
+		
+			<Dimension name='codigo_tipo_regiao_1_geocod' caption='GeoCod:Bairro (IBGE)'>
+			<Hierarchy hasAll='true'  primaryKey='codigo1'>
+		
+			<view alias='view_codigo_tipo_regiao_1_GeoCod' >
+					<SQL dialect='generic' >SELECT tabela1.co_bairro::text as codigo, tabela1.co_bairro::text AS codigo1,tabela1.no_bairro::text AS nome1,tabela2.co_municipio::text AS codigo2,tabela2.no_cidade::text AS nome2,tabela3.co_uf::text AS codigo3,tabela3.no_uf::text AS nome3 FROM i3geo_metaestat.bairros as tabela1 
+ JOIN i3geo_metaestat.municipios as tabela2 ON
+				tabela2.co_municipio::text = tabela1.co_municipio::text
+			 JOIN i3geo_metaestat.uf as tabela3 ON
+				tabela3.co_uf::text = tabela2.co_uf::text
+			</SQL>
+			</view>
+		
+			<Level name='Estado - GeoCod #3' column='codigo3' nameColumn='codigo3'
+			uniqueMembers='false' />
+			 
+			<Level name='Munic&amp;iacute;pio - GeoCod #2' column='codigo2' nameColumn='codigo2'
+			uniqueMembers='false' />
+			 
+				<Level name='Bairro (IBGE) - GeoCod #1' column='codigo1' nameColumn='codigo1'
 				uniqueMembers='false' />
-
-			<Level name='Munic&amp;iacute;pio' column='j0co_municipio'
-				nameColumn='j0no_cidade' uniqueMembers='false' />
-
-			<Level name='Bairro (IBGE)' column='codigo' nameColumn='nome'
-				uniqueMembers='true'>
-			</Level>
-
+			
 		</Hierarchy>
-	</Dimension>
-
-	<Dimension name='codigo_tipo_regiao_47'
-		caption='Onde:Colegiado de gest&amp;atilde;o em sa&amp;uacute;de'>
-		<Hierarchy hasAll='true' primaryKey='co_colegiado'>
-
-			<view alias='view_codigo_tipo_regiao_47'>
-				<SQL dialect='generic'>SELECT regiao.co_colegiado as codigo
-					,regiao.no_colegiado AS nome FROM i3geo_metaestat.colegiado_gestao
-					AS regiao
-				</SQL>
+		</Dimension>
+		 
+			<Dimension name='codigo_tipo_regiao_47' caption='Onde:Colegiado de gest&amp;atilde;o em sa&amp;uacute;de'>
+			<Hierarchy hasAll='true'  primaryKey='codigo47'>
+		
+			<view alias='view_codigo_tipo_regiao_47' >
+					<SQL dialect='generic' >SELECT tabela47.co_colegiado::text as codigo, tabela47.co_colegiado::text AS codigo47,tabela47.no_colegiado::text AS nome47 FROM i3geo_metaestat.colegiado_gestao as tabela47 
+</SQL>
 			</view>
-
-			<Level name='Colegiado de gest&amp;atilde;o em sa&amp;uacute;de'
-				column='codigo' nameColumn='nome' uniqueMembers='true'>
-			</Level>
-
+		
+			<Level name='Colegiado de gest&amp;atilde;o em sa&amp;uacute;de' column='codigo47' nameColumn='nome47'
+			uniqueMembers='false' />
+			
 		</Hierarchy>
-	</Dimension>
-
-	<Dimension name='codigo_tipo_regiao_3' caption='Onde:Estado'>
-		<Hierarchy hasAll='true' primaryKey='codigo'>
-			<view alias='view_codigo_tipo_regiao_3'>
-				<SQL dialect='generic'>
-					SELECT
-					co_uf::text as codigo,
-					co_uf::text as co_uf,
-					no_uf::text
-					FROM
-					i3geo_metaestat.uf
-
-				</SQL>
+		</Dimension>
+		
+			<Dimension name='codigo_tipo_regiao_47_geocod' caption='GeoCod:Colegiado de gest&amp;atilde;o em sa&amp;uacute;de'>
+			<Hierarchy hasAll='true'  primaryKey='codigo47'>
+		
+			<view alias='view_codigo_tipo_regiao_47_GeoCod' >
+					<SQL dialect='generic' >SELECT tabela47.co_colegiado::text as codigo, tabela47.co_colegiado::text AS codigo47,tabela47.no_colegiado::text AS nome47 FROM i3geo_metaestat.colegiado_gestao as tabela47 
+</SQL>
 			</view>
-			<Level name='Estado' column='co_uf' nameColumn='no_uf'
-				uniqueMembers='true' />
-		</Hierarchy>
-
-	</Dimension>
-	///////////////////////////////////////////////////////////////////////////
-	<Dimension name='codigo_tipo_regiao_2' caption='Onde:Munic&amp;iacute;pio'>
-		<Hierarchy hasAll='true' primaryKey='codigo'>
-			<view alias='view_codigo_tipo_regiao_2'>
-				<SQL dialect='generic'>
-				SELECT a0.co_municipio::text as codigo ,a0.co_municipio::text AS  co_municipio ,
-				a0.no_cidade::text AS no_cidade ,b0.co_uf::text AS co_uf ,b0.no_uf::text AS no_uf
-				FROM i3geo_metaestat.municipios as a0  JOIN i3geo_metaestat.uf as b0 ON
-a0.co_uf::text = b0.co_uf::text
-UNION
-SELECT a1.co_uf::text as codigo ,'','',a1.co_uf::text AS  co_uf ,a1.no_uf::text AS no_uf  FROM i3geo_metaestat.uf as a1
-				</SQL>
-			</view>
-			<Level name='Estado' column='no_uf' nameColumn='no_uf'
-				uniqueMembers='true' />
-			<Level name='Munic&amp;iacute;pio' column='no_cidade'
-				nameColumn='no_cidade' uniqueMembers='true' />
-		</Hierarchy>
-	</Dimension>
-
-	<Dimension name='codigo_tipo_regiao_1_geocod' caption='GeoCod:Bairro (IBGE)'>
-		<Hierarchy hasAll='true' primaryKey='co_bairro'>
-
-			<view alias='view_codigo_tipo_regiao_1_GeoCod'>
-				<SQL dialect='generic'>SELECT regiao.co_bairro as codigo
-					,regiao.no_bairro
-					AS nome,j0.no_cidade AS
-					j0no_cidade,j0.co_municipio AS
-					j0co_municipio,j1.no_uf AS
-					j1no_uf,j1.co_uf AS
-					j1co_uf,regiao.co_bairro as
-					co_bairro,regiao.no_bairro as
-					no_bairro,regiao.no_distr as
-					no_distr,regiao.no_municip as
-					no_municip FROM
-					i3geo_metaestat.bairros AS regiao INNER JOIN
-					i3geo_metaestat.municipios
-					AS j0 ON j0.co_municipio::text =
-					regiao.co_municipio::text
-					INNER JOIN i3geo_metaestat.uf
-					AS j1 ON
-					j1.co_uf::text = j0.co_uf::text
-				</SQL>
-			</view>
-
-			<Level name='Munic&amp;iacute;pio - GeoCod #2' column='j0co_municipio'
-				nameColumn='j0co_municipio' uniqueMembers='false' />
-
-			<Level name='Estado - GeoCod #3' column='j1co_uf' nameColumn='j1co_uf'
+		
+				<Level name='Colegiado de gest&amp;atilde;o em sa&amp;uacute;de - GeoCod #47' column='codigo47' nameColumn='codigo47'
 				uniqueMembers='false' />
-
-			<Level name='Bairro (IBGE) - GeoCod #1' column='codigo'
-				nameColumn='codigo' uniqueMembers='true' />
-
+			
 		</Hierarchy>
-	</Dimension>
-
-	<Dimension name='codigo_tipo_regiao_47_geocod'
-		caption='GeoCod:Colegiado de gest&amp;atilde;o em sa&amp;uacute;de'>
-		<Hierarchy hasAll='true' primaryKey='co_colegiado'>
-
-			<view alias='view_codigo_tipo_regiao_47_GeoCod'>
-				<SQL dialect='generic'>SELECT regiao.co_colegiado as codigo
-					,regiao.no_colegiado AS nome FROM i3geo_metaestat.colegiado_gestao
-					AS regiao
-				</SQL>
+		</Dimension>
+		 
+			<Dimension name='codigo_tipo_regiao_3' caption='Onde:Estado'>
+			<Hierarchy hasAll='true'  primaryKey='codigo3'>
+		
+			<view alias='view_codigo_tipo_regiao_3' >
+					<SQL dialect='generic' >SELECT tabela3.co_uf::text as codigo, tabela3.co_uf::text AS codigo3,tabela3.no_uf::text AS nome3 FROM i3geo_metaestat.uf as tabela3 
+</SQL>
 			</view>
-
-			<Level
-				name='Colegiado de gest&amp;atilde;o em sa&amp;uacute;de - GeoCod #47'
-				column='codigo' nameColumn='codigo' uniqueMembers='true' />
-
+		
+			<Level name='Estado' column='codigo3' nameColumn='nome3'
+			uniqueMembers='false' />
+			
 		</Hierarchy>
-	</Dimension>
-
-	<Dimension name='codigo_tipo_regiao_3_geocod' caption='GeoCod:Estado'>
-		<Hierarchy hasAll='true' primaryKey='co_uf'>
-
-			<view alias='view_codigo_tipo_regiao_3_GeoCod'>
-				<SQL dialect='generic'>SELECT regiao.co_uf as codigo
-					,regiao.no_uf AS
-					nome,regiao.co_uf as co_uf,regiao.sg_uf as
-					sg_uf,regiao.no_uf as
-					no_uf,regiao.no_regiao as no_regiao FROM
-					i3geo_metaestat.uf AS
-					regiao
-				</SQL>
+		</Dimension>
+		
+			<Dimension name='codigo_tipo_regiao_3_geocod' caption='GeoCod:Estado'>
+			<Hierarchy hasAll='true'  primaryKey='codigo3'>
+		
+			<view alias='view_codigo_tipo_regiao_3_GeoCod' >
+					<SQL dialect='generic' >SELECT tabela3.co_uf::text as codigo, tabela3.co_uf::text AS codigo3,tabela3.no_uf::text AS nome3 FROM i3geo_metaestat.uf as tabela3 
+</SQL>
 			</view>
-
-			<Level name='Estado - GeoCod #3' column='codigo' nameColumn='codigo'
-				uniqueMembers='true' />
-
-		</Hierarchy>
-	</Dimension>
-
-	<Dimension name='codigo_tipo_regiao_2_geocod' caption='GeoCod:Munic&amp;iacute;pio'>
-		<Hierarchy hasAll='true' primaryKey='co_municipio'>
-
-			<view alias='view_codigo_tipo_regiao_2_GeoCod'>
-				<SQL dialect='generic'>SELECT regiao.co_municipio as codigo
-					,regiao.no_cidade AS nome,j0.no_uf AS j0no_uf,j0.co_uf AS
-					j0co_uf,regiao.co_municipio as co_municipio,regiao.no_cidade as
-					no_cidade,regiao.co_uf as co_uf,regiao.sg_uf as
-					sg_uf,regiao.area_territorial as
-					area_territorial,regiao.nu_ano_instalacao as nu_ano_instalacao FROM
-					i3geo_metaestat.municipios AS regiao INNER JOIN i3geo_metaestat.uf
-					AS j0 ON j0.co_uf::text = regiao.co_uf::text
-				</SQL>
-			</view>
-
-			<Level name='Estado - GeoCod #3' column='j0co_uf' nameColumn='j0co_uf'
+		
+				<Level name='Estado - GeoCod #3' column='codigo3' nameColumn='codigo3'
 				uniqueMembers='false' />
-
-			<Level name='Munic&amp;iacute;pio - GeoCod #2' column='codigo'
-				nameColumn='codigo' uniqueMembers='true' />
-
+			
 		</Hierarchy>
-	</Dimension>
-
-	<Dimension name='public_sfb_teste_descncm' caption='NCM'>
-		<Hierarchy hasAll='true' primaryKey='codigo'>
-			<view alias='public_sfb_teste_descncm'>
-				<SQL dialect='generic'>SELECT dim.descncm as codigo, dim.descncm
-					AS nome
-					FROM public.sfb_teste as dim group by codigo
-				</SQL>
+		</Dimension>
+		 
+			<Dimension name='codigo_tipo_regiao_2' caption='Onde:Munic&amp;iacute;pio'>
+			<Hierarchy hasAll='true'  primaryKey='codigo2'>
+		
+			<view alias='view_codigo_tipo_regiao_2' >
+					<SQL dialect='generic' >SELECT tabela2.co_municipio::text as codigo, tabela2.co_municipio::text AS codigo2,tabela2.no_cidade::text AS nome2,tabela3.co_uf::text AS codigo3,tabela3.no_uf::text AS nome3 FROM i3geo_metaestat.municipios as tabela2 
+ JOIN i3geo_metaestat.uf as tabela3 ON
+				tabela3.co_uf::text = tabela2.co_uf::text
+			</SQL>
 			</view>
-			<Level name='NCM' column='codigo' nameColumn='nome'
-				uniqueMembers='true' />
+		
+			<Level name='Estado' column='codigo3' nameColumn='nome3'
+			uniqueMembers='false' />
+			 
+			<Level name='Munic&amp;iacute;pio' column='codigo2' nameColumn='nome2'
+			uniqueMembers='false' />
+			
 		</Hierarchy>
-	</Dimension>
-	<Cube cache='false' name='Tabela: idsustb_indicador'>
-		<view alias='view_idsustb_indicador'>
-			<SQL dialect='generic'>
-			select tb_indicador.*,ibge::text as codigodim,uf.co_uf::text as co_uf, ano::text as ano_ from
-				idsus.tb_indicador
-				JOIN i3geo_metaestat.municipios as municipio ON ibge::text = co_municipio::text
-				JOIN i3geo_metaestat.uf as uf ON municipio.co_uf::text = uf.co_uf::text
+		</Dimension>
+		
+			<Dimension name='codigo_tipo_regiao_2_geocod' caption='GeoCod:Munic&amp;iacute;pio'>
+			<Hierarchy hasAll='true'  primaryKey='codigo2'>
+		
+			<view alias='view_codigo_tipo_regiao_2_GeoCod' >
+					<SQL dialect='generic' >SELECT tabela2.co_municipio::text as codigo, tabela2.co_municipio::text AS codigo2,tabela2.no_cidade::text AS nome2,tabela3.co_uf::text AS codigo3,tabela3.no_uf::text AS nome3 FROM i3geo_metaestat.municipios as tabela2 
+ JOIN i3geo_metaestat.uf as tabela3 ON
+				tabela3.co_uf::text = tabela2.co_uf::text
 			</SQL>
-		</view>
-		<DimensionUsage foreignKey='codigodim' name='codigo_tipo_regiao_2'
-			source='codigo_tipo_regiao_2' />
-		<DimensionUsage foreignKey='codigodim'
-			name='codigo_tipo_regiao_2_geocod' source='codigo_tipo_regiao_2_geocod' />
-
-		<DimensionUsage foreignKey='co_uf'
-			name='codigo_tipo_regiao_3' source='codigo_tipo_regiao_3' />
-
-		<DimensionUsage foreignKey='ano_' name='Tempo' source='Tempo' />
-
-		<Measure name='id_medida_variavel_12' caption='IDSUS municipal'
-			column='idsus_mun' aggregator='avg' />
-
-		<Measure name='id_medida_variavel_15'
-			caption='&amp;Iacute;ndice da aten&amp;ccedil;&amp;atilde;o b&amp;aacute;sica'
-			column='idatb' aggregator='avg' />
-
-		<Measure name='id_medida_variavel_16'
-			caption='&amp;Iacute;ndice de m&amp;eacute;dia e alta complexidade'
-			column='idmac' aggregator='avg' />
-
-		<Measure name='id_medida_variavel_17' caption='&amp;Iacute;ndice de acesso do SUS'
-			column='id_acesso_sus' aggregator='avg' />
-
-		<Measure name='id_medida_variavel_18'
-			caption='&amp;Iacute;ndice de acesso da aten&amp;ccedil;&amp;atilde;o b&amp;aacute;sica'
-			column='atbas_acess' aggregator='avg' />
-
-		<Measure name='id_medida_variavel_19'
-			caption='&amp;Iacute;ndice de acesso da m&amp;eacute;dia complexidade ambulatorial e hospitalar'
-			column='acess_ah_medc' aggregator='avg' />
-
-		<Measure name='id_medida_variavel_20'
-			caption='&amp;Iacute;ndice de acesso da alta complexidade, urg&amp;ecirc;ncia e emerg&amp;ecirc;ncia'
-			column='acess_ah_altc' aggregator='avg' />
-
-		<Measure name='id_medida_variavel_21' caption='&amp;Iacute;ndice de efetividade do SUS'
-			column='id_quali_sus' aggregator='avg' />
-
-		<Measure name='id_medida_variavel_22'
-			caption='&amp;Iacute;ndice de efetividade da aten&amp;ccedil;&amp;atilde;o b&amp;aacute;sica'
-			column='atbas_quali' aggregator='avg' />
-
-		<Measure name='id_medida_variavel_23'
-			caption='&amp;Iacute;ndice de efetividade ambiental e hospitalar da m&amp;eacute;dia e alta complexidade'
-			column='quali_ah_mac' aggregator='avg' />
-
-	</Cube>
-
-	<Cube cache='false' name='Tabela: ibgepopulacao_residente'>
-		<view alias='view_ibgepopulacao_residente'>
-			<SQL dialect='generic'>
-			select a.*,a.co_municipio::text as codigo,uf.co_uf::text as co_uf, ano::text as ano_
-			from
-			ibge.populacao_residente as a
-			JOIN i3geo_metaestat.municipios AS municipio ON municipio.co_municipio::text = a.co_municipio::text
-			JOIN i3geo_metaestat.uf as uf ON municipio.co_uf::text = uf.co_uf::text
-			</SQL>
-		</view>
-		<DimensionUsage foreignKey='codigo' name='codigo_tipo_regiao_2'
-			source='codigo_tipo_regiao_2' />
-		<DimensionUsage foreignKey='codigo'
-			name='codigo_tipo_regiao_2_geocod' source='codigo_tipo_regiao_2_geocod' />
-
-		<DimensionUsage foreignKey='co_uf'
-			name='codigo_tipo_regiao_3' source='codigo_tipo_regiao_3' />
-
-		<DimensionUsage foreignKey='ano_' name='Tempo' source='Tempo' />
-
-		<Measure name='id_medida_variavel_25' caption='Popula&amp;ccedil;&amp;atilde;o total'
-			column='pop_res_tot' aggregator='sum' />
-
-	</Cube>
-
-	<Cube cache='false' name='Tabela: dbacoes_saudetb_farmacia_pop'>
-		<view alias='view_dbacoes_saudetb_farmacia_pop'>
-			<SQL dialect='generic'>select *,ano_farm||'-'||mes_farm_pop::text
-				as
-				ano_farm_mes_farm_pop_ from dbacoes_saude.tb_farmacia_pop
-			</SQL>
-		</view>
-		<DimensionUsage foreignKey='co_ibge' name='codigo_tipo_regiao_2'
-			source='codigo_tipo_regiao_2' />
-
-		<DimensionUsage foreignKey='co_ibge'
-			name='codigo_tipo_regiao_2_geocod' source='codigo_tipo_regiao_2_geocod' />
-
-		<DimensionUsage foreignKey='ano_farm_mes_farm_pop_'
-			name='Tempo' source='Tempo' />
-
-		<Measure name='id_medida_variavel_40' caption='Farm&amp;aacute;cias populares existentes'
-			column='nu_farm_funcionando' aggregator='sum' />
-
-	</Cube>
-
-	<Cube cache='false' name='Tabela: publicsfb_teste'>
-		<view alias='view_publicsfb_teste'>
-			<SQL dialect='generic'>select *,coduf::text as codigo,ano::text as ano_ from
-				public.sfb_teste
-			</SQL>
-		</view>
-
-		<DimensionUsage foreignKey='codigo'
-			name='codigo_tipo_regiao_3' source='codigo_tipo_regiao_3' />
-
-		<DimensionUsage foreignKey='codigo'
-			name='codigo_tipo_regiao_2' source='codigo_tipo_regiao_2' />
-
-
-		<DimensionUsage foreignKey='ano_' name='Tempo' source='Tempo' />
-		<DimensionUsage foreignKey='descncm' name='nome'
-			source='public_sfb_teste_descncm' />
-
-		<Measure name='id_medida_variavel_42' caption='Kg liq P1'
-			column='kgliqp1' aggregator='sum' />
-
-		<Measure name='id_medida_variavel_43' caption='Mil d&amp;oacute;lares'
-			column='us1000' aggregator='sum' />
-
-	</Cube>
-
-	<VirtualCube name="Regi&amp;atilde;o: Estado">
-
-		<VirtualCubeDimension name='codigo_tipo_regiao_3' />
-
-		<VirtualCubeDimension name='codigo_tipo_regiao_3_geocod' />
-
-		<VirtualCubeDimension name='Tempo' />
-
-		<VirtualCubeDimension name='public_sfb_teste_descncm' />
-
-		<VirtualCubeMeasure cubeName='Tabela: publicsfb_teste'
-			name='[Measures].[id_medida_variavel_42]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: publicsfb_teste'
-			name='[Measures].[id_medida_variavel_43]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_12]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_15]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_16]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_17]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_18]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_19]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_20]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_21]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_22]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_23]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: ibgepopulacao_residente'
-			name='[Measures].[id_medida_variavel_25]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: dbacoes_saudetb_farmacia_pop'
-			name='[Measures].[id_medida_variavel_40]' />
-	</VirtualCube>
-
-	<VirtualCube name="Regi&amp;atilde;o: Munic&amp;iacute;pio">
+			</view>
+		
+			<Level name='Estado - GeoCod #3' column='codigo3' nameColumn='codigo3'
+			uniqueMembers='false' />
+			 
+				<Level name='Munic&amp;iacute;pio - GeoCod #2' column='codigo2' nameColumn='codigo2'
+				uniqueMembers='false' />
+			
+		</Hierarchy>
+		</Dimension>
+		<Cube cache='false' name='Tabela: idsustb_indicador'>
+			<view alias='view_idsustb_indicador' ><SQL dialect='generic' >
+			select tabelamedida12.*,ano::text as ano_, tabelamedida12.ibge::text as codigoreg
+		,tabela2.co_municipio::text AS codigo2,tabela2.no_cidade::text AS nome2,tabela3.co_uf::text AS codigo3,tabela3.no_uf::text AS nome3
+			from idsus.tb_indicador as tabelamedida12
+			JOIN i3geo_metaestat.municipios as tabela2
+			ON  tabela2.co_municipio::text = tabelamedida12.ibge::text
+			 JOIN i3geo_metaestat.uf as tabela3 ON
+				tabela3.co_uf::text = tabela2.co_uf::text
+			</SQL></view>
+		
+				<DimensionUsage foreignKey='codigo3' name='codigo_tipo_regiao_3' source='codigo_tipo_regiao_3'/>
+				<DimensionUsage foreignKey='codigo3' name='codigo_tipo_regiao_3_geocod' source='codigo_tipo_regiao_3_geocod'/>
+			
+				<DimensionUsage foreignKey='codigo2' name='codigo_tipo_regiao_2' source='codigo_tipo_regiao_2'/>
+				<DimensionUsage foreignKey='codigo2' name='codigo_tipo_regiao_2_geocod' source='codigo_tipo_regiao_2_geocod'/>
+			
+				<DimensionUsage foreignKey='ano_' name='Tempo' source='Tempo'/>
+				
+			<Measure name='id_medida_variavel_12' caption='1 - IDSUS municipal' column='idsus_mun' aggregator='avg' />
+			
+			<Measure name='id_medida_variavel_16' caption='2 - &amp;Iacute;ndice de m&amp;eacute;dia e alta complexidade' column='idmac' aggregator='avg' />
+			
+			<Measure name='id_medida_variavel_15' caption='3 - &amp;Iacute;ndice da aten&amp;ccedil;&amp;atilde;o b&amp;aacute;sica' column='idatb' aggregator='avg' />
+			
+			<Measure name='id_medida_variavel_20' caption='&amp;Iacute;ndice de acesso da alta complexidade, urg&amp;ecirc;ncia e emerg&amp;ecirc;ncia' column='acess_ah_altc' aggregator='avg' />
+			
+			<Measure name='id_medida_variavel_18' caption='&amp;Iacute;ndice de acesso da aten&amp;ccedil;&amp;atilde;o b&amp;aacute;sica' column='atbas_acess' aggregator='avg' />
+			
+			<Measure name='id_medida_variavel_19' caption='&amp;Iacute;ndice de acesso da m&amp;eacute;dia complexidade ambulatorial e hospitalar' column='acess_ah_medc' aggregator='avg' />
+			
+			<Measure name='id_medida_variavel_17' caption='&amp;Iacute;ndice de acesso do SUS' column='id_acesso_sus' aggregator='avg' />
+			
+			<Measure name='id_medida_variavel_23' caption='&amp;Iacute;ndice de efetividade ambiental e hospitalar da m&amp;eacute;dia e alta complexidade' column='quali_ah_mac' aggregator='avg' />
+			
+			<Measure name='id_medida_variavel_22' caption='&amp;Iacute;ndice de efetividade da aten&amp;ccedil;&amp;atilde;o b&amp;aacute;sica' column='atbas_quali' aggregator='avg' />
+			
+			<Measure name='id_medida_variavel_21' caption='&amp;Iacute;ndice de efetividade do SUS' column='id_quali_sus' aggregator='avg' />
+			
+		</Cube>
+		<Cube cache='false' name='Tabela: dbacoes_saudetb_farmacia_pop'>
+			<view alias='view_dbacoes_saudetb_farmacia_pop' ><SQL dialect='generic' >
+			select tabelamedida40.*,'1'::numeric as contagem40,ano_farm||'-'||mes_farm_pop::text as ano_farm_mes_farm_pop_, tabelamedida40.co_ibge::text as codigoreg
+		,tabela2.co_municipio::text AS codigo2,tabela2.no_cidade::text AS nome2,tabela3.co_uf::text AS codigo3,tabela3.no_uf::text AS nome3
+			from dbacoes_saude.tb_farmacia_pop as tabelamedida40
+			JOIN i3geo_metaestat.municipios as tabela2
+			ON  tabela2.co_municipio::text = tabelamedida40.co_ibge::text
+			 JOIN i3geo_metaestat.uf as tabela3 ON
+				tabela3.co_uf::text = tabela2.co_uf::text
+			</SQL></view>
+		
+				<DimensionUsage foreignKey='codigo3' name='codigo_tipo_regiao_3' source='codigo_tipo_regiao_3'/>
+				<DimensionUsage foreignKey='codigo3' name='codigo_tipo_regiao_3_geocod' source='codigo_tipo_regiao_3_geocod'/>
+			
+				<DimensionUsage foreignKey='codigo2' name='codigo_tipo_regiao_2' source='codigo_tipo_regiao_2'/>
+				<DimensionUsage foreignKey='codigo2' name='codigo_tipo_regiao_2_geocod' source='codigo_tipo_regiao_2_geocod'/>
+			
+				<DimensionUsage foreignKey='ano_farm_mes_farm_pop_' name='Tempo' source='Tempo'/>
+				
+			<Measure name='id_medida_variavel_40' caption='Farm&amp;aacute;cias populares existentes' column='contagem40' aggregator='sum' />
+			
+		</Cube>
+		<Cube cache='false' name='Tabela: ibgepopulacao_residente'>
+			<view alias='view_ibgepopulacao_residente' ><SQL dialect='generic' >
+			select tabelamedida25.*,ano::text as ano_, tabelamedida25.munic::text as codigoreg
+		,tabela2.co_municipio::text AS codigo2,tabela2.no_cidade::text AS nome2,tabela3.co_uf::text AS codigo3,tabela3.no_uf::text AS nome3
+			from ibge.populacao_residente as tabelamedida25
+			JOIN i3geo_metaestat.municipios as tabela2
+			ON  tabela2.co_municipio::text = tabelamedida25.munic::text
+			 JOIN i3geo_metaestat.uf as tabela3 ON
+				tabela3.co_uf::text = tabela2.co_uf::text
+			</SQL></view>
+		
+				<DimensionUsage foreignKey='codigo3' name='codigo_tipo_regiao_3' source='codigo_tipo_regiao_3'/>
+				<DimensionUsage foreignKey='codigo3' name='codigo_tipo_regiao_3_geocod' source='codigo_tipo_regiao_3_geocod'/>
+			
+				<DimensionUsage foreignKey='codigo2' name='codigo_tipo_regiao_2' source='codigo_tipo_regiao_2'/>
+				<DimensionUsage foreignKey='codigo2' name='codigo_tipo_regiao_2_geocod' source='codigo_tipo_regiao_2_geocod'/>
+			
+				<DimensionUsage foreignKey='ano_' name='Tempo' source='Tempo'/>
+				
+			<Measure name='id_medida_variavel_25' caption='Popula&amp;ccedil;&amp;atilde;o total' column='pop_res_tot' aggregator='sum' />
+			
+		</Cube>
+		<VirtualCube name="Regi&amp;atilde;o: Munic&amp;iacute;pio" ><VirtualCubeDimension name='codigo_tipo_regiao_2' /> <VirtualCubeDimension name='codigo_tipo_regiao_2_geocod' /> <VirtualCubeDimension name='Tempo' />
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_12]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_16]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_15]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_20]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_18]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_19]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_17]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_23]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_22]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_21]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: dbacoes_saudetb_farmacia_pop' name='[Measures].[id_medida_variavel_40]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: ibgepopulacao_residente' name='[Measures].[id_medida_variavel_25]'/>
+			</VirtualCube><VirtualCube name="Todas as medidas" >
 		<VirtualCubeDimension name='codigo_tipo_regiao_2' />
+		 
 		<VirtualCubeDimension name='codigo_tipo_regiao_2_geocod' />
-		<VirtualCubeDimension name='Tempo' />
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_12]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_15]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_16]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_17]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_18]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_19]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_20]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_21]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_22]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador'
-			name='[Measures].[id_medida_variavel_23]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: ibgepopulacao_residente'
-			name='[Measures].[id_medida_variavel_25]' />
-
-		<VirtualCubeMeasure cubeName='Tabela: dbacoes_saudetb_farmacia_pop'
-			name='[Measures].[id_medida_variavel_40]' />
-	</VirtualCube>
-</Schema>
+		 
+				<VirtualCubeDimension name='Tempo' />
+				
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_12]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_16]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_15]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_20]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_18]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_19]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_17]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_23]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_22]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_21]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: dbacoes_saudetb_farmacia_pop' name='[Measures].[id_medida_variavel_40]'/>
+			 
+			<VirtualCubeMeasure cubeName='Tabela: ibgepopulacao_residente' name='[Measures].[id_medida_variavel_25]'/>
+			</VirtualCube></Schema>
