@@ -302,9 +302,12 @@
 						<li><a href="#open_query"
 								class="i18n open button sprite"
 								title="Open query"></a></li>
+						<!-- Bloqueia o botao se o login for anonimo -->
+						<% if (Saiku.session.attributes.username != "anonimo") {%>
 						<li><a href="#save_query"
 								class="i18n save button disabled_toolbar sprite"
 								title="Save query"></a></li>
+						<%};%>
 						<li class="seperator"><a href="#run_query"
 								class="i18n run button disabled_toolbar sprite"
 								title="Run query"></a></li>
