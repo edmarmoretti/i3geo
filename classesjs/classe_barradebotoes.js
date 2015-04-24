@@ -1738,7 +1738,7 @@ i3GEO.barraDeBotoes =
 									"",
 									"",
 									"",
-									"Editor",
+									"<div class='i3GeoTituloJanela'>Editor</div>",
 									"i3GEOjanelaEditor",
 									false,
 									"hd",
@@ -1804,7 +1804,7 @@ i3GEO.barraDeBotoes =
 						i3GEO.janela.minimiza("i3GEOjanelaEditor");
 					};
 					// cria a janela flutuante
-					titulo = $trad("u29");
+					titulo = "<div class='i3GeoTituloJanela'>"+$trad("u29")+"</div>";
 					janela = i3GEO.janela.cria("300px", "200px", "", "", "", titulo, "i3GEOjanelaEditor", false, "hd", cabecalho, minimiza);
 					divid = janela[2].id;
 					$i("i3GEOjanelaEditor_corpo").style.backgroundColor = "white";

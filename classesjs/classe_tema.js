@@ -111,7 +111,7 @@ i3GEO.tema =
 					link,
 					"",
 					"",
-					"Metadata",
+					"<div class='i3GeoTituloJanela'>Metadata</div>",
 					"metadata" + tema
 				);
 			}
@@ -708,8 +708,8 @@ i3GEO.tema =
 			sld : function(idtema) {
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.janela.cria("500px", "350px", i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?funcao=tema2sld&tema="
-					+ idtema + "&g_sid=" + i3GEO.configura.sid, "", "", "SLD <a class=ajuda_usuario target=_blank href='"
-					+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>");
+					+ idtema + "&g_sid=" + i3GEO.configura.sid, "", "", "<div class='i3GeoTituloJanela'>SLD <a class=ajuda_usuario target=_blank href='"
+					+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a></div>");
 			},
 			/**
 			 * Function: aplicarsld

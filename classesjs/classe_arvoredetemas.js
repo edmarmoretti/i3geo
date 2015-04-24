@@ -3086,7 +3086,7 @@ i3GEO.arvoreDeTemas = {
 		navegacaoDir : function() {
 			i3GEO.janela.cria("550px", "350px", i3GEO.configura.locaplic
 					+ "/ferramentas/navegacaodir/index.htm", "", "",
-					$trad("x45"));
+					"<div class='i3GeoTituloJanela'>"+$trad("x45")+"</div>");
 		},
 		/**
 		 * Function: dialogo.importarwmc
@@ -3107,7 +3107,7 @@ i3GEO.arvoreDeTemas = {
 		 */
 		conectarwfs : function() {
 			i3GEO.janela.cria("400px", "300px", i3GEO.configura.locaplic
-					+ "/ferramentas/conectarwfs/index.htm", "", "", "WFS");
+					+ "/ferramentas/conectarwfs/index.htm", "", "", "<div class='i3GeoTituloJanela'>WFS</div>");
 		},
 		/**
 		 * Function: dialogo.downloadbase

@@ -797,7 +797,7 @@ i3GEO.editorGM = {
 				minimiza = function(){
 					i3GEO.janela.minimiza("salvaLimite");
 				};
-				titulo = "Salva limite&nbsp;&nbsp;&nbsp;</a>";
+				titulo = "<div class='i3GeoTituloJanela'>Salva limite&nbsp;&nbsp;&nbsp;</div>";
 				janela = i3GEO.janela.cria(
 						"300px",
 						"265px",
@@ -929,7 +929,7 @@ i3GEO.editorGM = {
 				minimiza = function(){
 					i3GEO.janela.minimiza("editaAtributos");
 				};
-				titulo = "Atributos&nbsp;&nbsp;&nbsp;</a>";
+				titulo = "<div class='i3GeoTituloJanela'>Atributos&nbsp;&nbsp;&nbsp;</div>";
 				janela = i3GEO.janela.cria(
 						"250px",
 						"265px",
@@ -1178,7 +1178,7 @@ i3GEO.editorGM = {
 			minimiza = function(){
 				i3GEO.janela.minimiza("editaAtributosAjuda");
 			};
-			titulo = "Ajuda&nbsp;</a>";
+			titulo = "<div class='i3GeoTituloJanela'>Ajuda&nbsp;</div>";
 			i3GEO.janela.cria(
 					"400px",
 					"350px",

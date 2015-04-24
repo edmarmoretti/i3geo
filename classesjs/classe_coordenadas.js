@@ -767,7 +767,7 @@ i3GEO.coordenadas =
 					}
 				}
 				if (this.formato === "janela") {
-					janela = i3GEO.janela.cria("450px", "120px", "", "", "", $trad("x49"), "i3GEOJanelaCoordenadas", false, "hd", "", "");
+					janela = i3GEO.janela.cria("450px", "120px", "", "", "", "<div class='i3GeoTituloJanela'>"+$trad("x49")+"</div>", "i3GEOJanelaCoordenadas", false, "hd", "", "");
 					YAHOO.util.Event.addListener(janela[0].close, "click", function() {
 						i3GEO.coordenadas.formato = "bloco", i3GEO.coordenadas.mostraCoordenadas();
 					});

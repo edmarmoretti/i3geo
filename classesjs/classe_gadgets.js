@@ -379,7 +379,7 @@ i3GEO.gadgets =
 						}
 						// janela com a rotina e o resultado da busca
 						i3GEO.janela.cria("300px", "280px", i3GEO.configura.locaplic + "/ferramentas/buscarapida/index.htm", "", "",
-							$trad("o2"));
+							"<div class='i3GeoTituloJanela'>"+$trad("o2")+"</div>");
 						return false;
 					};
 				$i("i3GEObotaoBuscaRapida" + id).onclick = fbusca;
@@ -429,7 +429,7 @@ i3GEO.gadgets =
 								+ "</table><br><p class=paragrafo >{{ajuda}}</p>";
 
 						ins = i3GEO.util.parseMustache(templateMustache, hashMustache);
-						janela = i3GEO.janela.cria("300px", "150px", "", "", "", $trad("s5"), "i3GEOpropriedadesBuscaRapida" + id);
+						janela = i3GEO.janela.cria("300px", "150px", "", "", "", "<div class='i3GeoTituloJanela'>"+$trad("s5")+"</div>", "i3GEOpropriedadesBuscaRapida" + id);
 						janela[0].setBody("<div>" + ins + "</div>");
 					};
 			}

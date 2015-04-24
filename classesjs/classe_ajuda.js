@@ -381,7 +381,7 @@ i3GEO.ajuda =
 				i3GEO.configura.locaplic + "/ferramentas/redessociais/index.php",
 				"",
 				"",
-				$trad("u5c"),
+				"<div class='i3GeoTituloJanela'>" + $trad("u5c") + "</div>",
 				YAHOO.util.Dom.generateId(null, "redes"));
 		}
 	};
