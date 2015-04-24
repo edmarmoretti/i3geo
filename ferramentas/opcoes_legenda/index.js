@@ -85,7 +85,7 @@ i3GEOF.opcoesLegenda = {
 			i3GEO.janela.minimiza("i3GEOF.opcoesLegenda");
 		};
 		//cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>" + $trad("t18b")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=2' >&nbsp;&nbsp;&nbsp;</a></div>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("t18b")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=2' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"320px",
 			"390px",

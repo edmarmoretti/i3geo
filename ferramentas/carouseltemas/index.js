@@ -176,7 +176,7 @@ i3GEOF.carouseltemas = {
 			i3GEO.janela.minimiza("i3GEOF.carouseltemas");
 		};
 		//cria a janela flutuante
-		titulo = $trad('miniaturas',i3GEOF.carouseltemas.dicionario)+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=85' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = $trad('miniaturas',i3GEOF.carouseltemas.dicionario)+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=85' ><b> </b></a>";
 		janela = i3GEO.janela.cria(
 			"210px",
 			"380px",

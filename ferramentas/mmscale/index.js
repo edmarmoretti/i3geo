@@ -81,7 +81,7 @@ i3GEOF.mmscale = {
 		}
 		//cria a janela flutuante
 		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconemmscale'></span>" + "<div  id='i3GEOFmmscaleComboCabeca' class='comboTemasCabecalho'>   ------</div>"
-		+ "<div class='i3GeoTituloJanela' style='margin-left: 60px;'>" + $trad("p4")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=128' >&nbsp;&nbsp;&nbsp;</a></div>";
+		+ "<div class='i3GeoTituloJanela' style='margin-left: 60px;'>" + $trad("p4")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=128' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"330px",
 			"260px",

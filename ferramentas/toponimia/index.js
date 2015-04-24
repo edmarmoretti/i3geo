@@ -127,7 +127,7 @@ i3GEOF.toponimia = {
 		//cria a janela flutuante
 		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeToponimia'></span>"
 			+ "<div  id='i3GEOFtoponimiaComboCabeca' class='comboTemasCabecalho'>   ------</div>"
-			+ "<div class='i3GeoTituloJanela'>" + $trad("x56")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a></div>";
+			+ "<div class='i3GeoTituloJanela'>" + $trad("x56")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"410px",
 			"260px",

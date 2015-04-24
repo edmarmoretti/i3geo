@@ -175,7 +175,7 @@ i3GEOF.inseretxt = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.inseretxt");
 		};
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeCliqueTexto'></span><div class='i3GeoTituloJanela'>" + $trad("d25t")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=83' >&nbsp;&nbsp;&nbsp;</a></div>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeCliqueTexto'></span><div class='i3GeoTituloJanela'>" + $trad("d25t")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=83' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"360px",
 			"250px",

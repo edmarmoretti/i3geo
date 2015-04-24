@@ -122,7 +122,7 @@ i3GEOF.geolocal = {
 				i3GEO.janela.minimiza("i3GEOF.geolocal");
 			};
 			//cria a janela flutuante
-			titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeGeoLocal'></span><div class='i3GeoTituloJanela'>" + $trad('localizaUsuario',i3GEOF.geolocal.dicionario)+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=118' >&nbsp;&nbsp;&nbsp;</a></div>";
+			titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeGeoLocal'></span><div class='i3GeoTituloJanela'>" + $trad('localizaUsuario',i3GEOF.geolocal.dicionario)+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=118' ><b> </b></a></div>";
 			janela = i3GEO.janela.cria(
 					"290",
 					"220",

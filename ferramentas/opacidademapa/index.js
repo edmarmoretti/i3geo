@@ -144,7 +144,7 @@ i3GEOF.opacidademapa = {
 		};
 		var janela,divid,titulo;
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeOpacidadeMapa'></span><div  id='i3GEOFopacidademapaComboCabeca' class='comboTemasCabecalho'>------</div>&nbsp;&nbsp;&nbsp;<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeOpacidadeMapa'></span><div  id='i3GEOFopacidademapaComboCabeca' class='comboTemasCabecalho'>------</div>&nbsp;&nbsp;&nbsp;<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' ><b> </b></a>";
 		janela = i3GEO.janela.cria(
 			"230px",
 			"40px",

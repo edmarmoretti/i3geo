@@ -130,7 +130,7 @@ i3GEOF.parametrossql = {
 				cabecalho = function(){
 				};
 				//cria a janela flutuante
-				titulo = "<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
+				titulo = "<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' ><b> </b></a>";
 				janela = i3GEO.janela.cria(
 					"290px",
 					"auto",

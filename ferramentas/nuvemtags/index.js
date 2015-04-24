@@ -174,7 +174,7 @@ i3GEOF.nuvemtags = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.nuvemtags");
 		};
-		titulo = "<div class='i3GeoTituloJanela'>" + $trad("a5a")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=30' >&nbsp;&nbsp;&nbsp;</a></div>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("a5a")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=30' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"370px",
 			"180px",

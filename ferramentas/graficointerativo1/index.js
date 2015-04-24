@@ -586,7 +586,7 @@ i3GEOF.graficointerativo1 =
 					+ "<div id='" + idjanela + "I' style='left:10px;'>"
 					+ "<div class='i3GeoTituloJanela'>" + $trad("t37b")
 					+ "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a></div></div></div>";
+					+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' ><b> </b></a></div></div></div>";
 
 				janela =
 					i3GEO.janela.cria(

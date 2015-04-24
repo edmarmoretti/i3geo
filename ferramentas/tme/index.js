@@ -175,7 +175,7 @@ i3GEOF.tme = {
 		//cria a janela flutuante
 		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeTme'></span>"
 			+ "<div  id='i3GEOFtmeComboCabeca' class='comboTemasCabecalho'>   ------</div>"
-			+ "<div class='i3GeoTituloJanela'>tme </span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=108' >&nbsp;&nbsp;&nbsp;</a></div>";
+			+ "<div class='i3GeoTituloJanela'>tme </span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=108' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"380px",
 			"320px",

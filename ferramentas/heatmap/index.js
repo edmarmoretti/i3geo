@@ -121,7 +121,7 @@ i3GEOF.heatmap =
 			// cria a janela flutuante
 			titulo =
 				"<div class='i3GeoTituloJanela'>" +  $trad("x102") + "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=3&idajuda=121' >&nbsp;&nbsp;&nbsp;</a></div>";
+					+ "/ajuda_usuario.php?idcategoria=3&idajuda=121' ><b> </b></a></div>";
 			cabecalho = function() {
 			};
 			janela = i3GEO.janela.cria("400px", "250px", "", "", "", titulo, "i3GEOF.heatmap", false, "hd", function() {

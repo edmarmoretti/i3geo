@@ -51,7 +51,7 @@ i3GEOF.listamapas = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.listamapas");
 		};
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeAplicStat'></span>" + "Mapas"+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=9&idajuda=125' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeAplicStat'></span>" + "Mapas"+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=9&idajuda=125' ><b> </b></a>";
 		janela = i3GEO.janela.cria(
 			"350px",
 			"300px",

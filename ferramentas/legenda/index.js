@@ -392,7 +392,7 @@ i3GEOF.legenda =
 				+ "<div  id='i3GEOFlegendaComboCabeca' class='comboTemasCabecalho' style='left:0px;'>   ------</div>"
 				+ "<div class='i3GeoTituloJanela'>" + $trad("t33")
 				+ "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-				+ "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a></div></div></div>";
+				+ "/ajuda_usuario.php?idcategoria=5&idajuda=41' ><b> </b></a></div></div></div>";
 			janela =
 				i3GEO.janela.cria(
 					"490px",

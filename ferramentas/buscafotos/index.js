@@ -179,7 +179,7 @@ i3GEOF.buscaFotos = {
 			i3GEO.janela.minimiza("i3GEOF.buscaFotos");
 		};
 		//cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>Fotos<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=74' >&nbsp;&nbsp;&nbsp;</a></div>";
+		titulo = "<div class='i3GeoTituloJanela'>Fotos<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=74' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"430px",
 			"250px",

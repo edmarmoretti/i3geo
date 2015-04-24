@@ -1188,11 +1188,11 @@ i3GEO.arvoreDeTemas = {
 					+ "/ajuda_usuario.php?idcategoria=4&idajuda=31' >&nbsp;&nbsp;&nbsp;&nbsp;</a></span></td>"
 					+ "<td>"
 					+ "<div><input onclick='javascript:this.select();' class='digitar' type='text' id='i3geo_buscatema' style=width:112px; value=''  /></div>"
-					+ "</td>" + "<td><img  class='tic' ";
+					+ "</td>" + "<td><img  class='ticfind' ";
 			if (navm) {
-				insp += "style='top:0px;'";
+				insp += "style='top:0px; margin-left: 4px;'";
 			} else {
-				insp += "style='top:4px;'";
+				insp += "style='top:4px;margin-left: 4px;'";
 			}
 			insp += " src='"
 					+ i3GEO.configura.locaplic + "/imagens/branco.gif"
@@ -1319,14 +1319,14 @@ i3GEO.arvoreDeTemas = {
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
 							html : "<span style='position:relative;'>OGC-WMS</span>"
-									+ "<a class=ajuda_usuario target=_blank href='"
+									+ "<a class=ajuda_usuario style=left:3px; target=_blank href='"
 									+ i3GEO.configura.locaplic
-									+ "/ajuda_usuario.php?idcategoria=4&idajuda=33' >&nbsp;&nbsp;&nbsp;</a>"
+									+ "/ajuda_usuario.php?idcategoria=4&idajuda=33' ><b> </b></a>"
 									+ editor,
 							idwms : "raiz",
 							expanded : false,
 							className: "i3GeoFolder",
-							enableHighlight : true
+							enableHighlight : false
 						}, mais);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaWMS, 1);
 			}
@@ -1339,13 +1339,13 @@ i3GEO.arvoreDeTemas = {
 							html : "<span style='position:relative;'>"
 									+ $trad("x87")
 									+ "</span>"
-									+ "<a class=ajuda_usuario target=_blank href='"
+									+ "<a class=ajuda_usuario style=left:3px; target=_blank href='"
 									+ i3GEO.configura.locaplic
-									+ "/ajuda_usuario.php?idcategoria=4&idajuda=33' >&nbsp;&nbsp;&nbsp;</a>",
+									+ "/ajuda_usuario.php?idcategoria=4&idajuda=33' ><b> </b></a>",
 							idregioes : "raiz",
 							expanded : false,
 							className: "i3GeoFolder",
-							enableHighlight : true
+							enableHighlight : false
 						}, mais);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaRegioes, 1);
 			}
@@ -1358,13 +1358,13 @@ i3GEO.arvoreDeTemas = {
 							html : "<span style='position:relative;'>"
 									+ $trad("x57")
 									+ "</span>"
-									+ "<a class=ajuda_usuario target=_blank href='"
+									+ "<a class=ajuda_usuario style=left:3px; target=_blank href='"
 									+ i3GEO.configura.locaplic
-									+ "/ajuda_usuario.php?idcategoria=4&idajuda=112' >&nbsp;&nbsp;&nbsp;</a>",
+									+ "/ajuda_usuario.php?idcategoria=4&idajuda=112' ><b> </b></a>",
 							idwmsmetaestat : "raiz",
 							expanded : false,
 							className: "i3GeoFolder",
-							enableHighlight : true
+							enableHighlight : false
 						}, mais);
 				tempNode.setDynamicLoad(
 						i3GEO.arvoreDeTemas.listaVariaveisMetaestat, 1);
@@ -1393,9 +1393,9 @@ i3GEO.arvoreDeTemas = {
 							expanded : false,
 							html : "<span style='position:relative;' >"
 									+ $trad("t46")
-									+ "</span><a class=ajuda_usuario target=_blank href='"
+									+ "</span><a class=ajuda_usuario style=left:3px; target=_blank href='"
 									+ i3GEO.configura.locaplic
-									+ "/ajuda_usuario.php?idcategoria=4&idajuda=95' >&nbsp;&nbsp;&nbsp;</a>",
+									+ "/ajuda_usuario.php?idcategoria=4&idajuda=95' ><b> </b></a>",
 							enableHighlight : false,
 							className: "i3GeoFolder"
 						}, mais);
@@ -1420,9 +1420,9 @@ i3GEO.arvoreDeTemas = {
 						tempNode = new YAHOO.widget.HTMLNode(
 								{
 									html : $trad("a11")
-											+ "<a class=ajuda_usuario target=_blank href='"
+											+ "<a class=ajuda_usuario style=left:3px; target=_blank href='"
 											+ i3GEO.configura.locaplic
-											+ "/ajuda_usuario.php?idcategoria=4&idajuda=34' >&nbsp;&nbsp;&nbsp;</a>",
+											+ "/ajuda_usuario.php?idcategoria=4&idajuda=34' ><b> </b></a>",
 									expanded : false,
 									enableHighlight : false
 								}, mais);
@@ -1556,10 +1556,10 @@ i3GEO.arvoreDeTemas = {
 					{
 						html : ""
 								+ $trad("a6")
-								+ "<a class=ajuda_usuario target=_blank href='"
+								+ "<a class=ajuda_usuario style=left:3px; target=_blank href='"
 								+ i3GEO.configura.locaplic
-								+ "/ajuda_usuario.php?idcategoria=4&idajuda=32' >&nbsp;&nbsp;&nbsp;</a>",
-						enableHighlight : true,
+								+ "/ajuda_usuario.php?idcategoria=4&idajuda=32' ><b> </b></a>",
+						enableHighlight : false,
 						expanded : false,
 						className: "i3GeoFolder"
 					}, i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idmais","idmais")

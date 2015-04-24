@@ -175,7 +175,7 @@ i3GEOF.filtro = {
 		}
 		//cria a janela flutuante
 		if(modoCalculadora === false){
-			titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeFiltro'></span><div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalho'>   ------</div><div class='i3GeoTituloJanela'>"+$trad("t29")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a></div>";
+			titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeFiltro'></span><div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalho'>   ------</div><div class='i3GeoTituloJanela'>"+$trad("t29")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' ><b> </b></a></div>";
 		}
 		janela = i3GEO.janela.cria(
 			"580px",

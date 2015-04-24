@@ -127,7 +127,7 @@ i3GEOF.mascara = {
 			i3GEO.janela.minimiza("i3GEOF.mascara");
 		};
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeMascara'></span><div class='i3GeoTituloJanela'>" + $trad("mascara")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=129' >&nbsp;&nbsp;&nbsp;</a></div>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeMascara'></span><div class='i3GeoTituloJanela'>" + $trad("mascara")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=129' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"310px",
 			"220px",

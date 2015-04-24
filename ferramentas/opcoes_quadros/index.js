@@ -110,7 +110,7 @@ i3GEOF.opcoesQuadros = {
 			i3GEO.janela.minimiza("i3GEOF.opcoesQuadros");
 		};
 		//cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>Quadros<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=54' >&nbsp;&nbsp;&nbsp;</a></div>";
+		titulo = "<div class='i3GeoTituloJanela'>Quadros<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=54' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"170px",
 			"130px",

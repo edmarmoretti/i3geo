@@ -197,7 +197,7 @@ i3GEOF.imprimir = {
 			i3GEO.janela.minimiza("i3GEOF.imprimir");
 		};
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeImprimir'></span><div class='i3GeoTituloJanela'>" + $trad("d12") + "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=49' >&nbsp;&nbsp;&nbsp;</a></div>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeImprimir'></span><div class='i3GeoTituloJanela'>" + $trad("d12") + "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=49' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"250px",
 			"230px",

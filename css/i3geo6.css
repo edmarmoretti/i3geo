@@ -519,7 +519,11 @@ background-size: 14px 14px;
 vertical-align: middle;
 }
 #buscaRapida .ajuda_usuario {
-top: 2px;
+top: 1px;
+display: inline-block;
+height: 14px;
+width: 14px;
+left: 2px;
 }
 .executar {
 cursor: pointer;
@@ -3098,7 +3102,15 @@ font-size: 13px;
 font-weight: 100;
 }
 .i3GeoTituloJanela .ajuda_usuario {
+height: 14px;
 left: 3px;
+width: 14px;
+}
+.ajuda_usuario b {
+margin-bottom: 0px;
+margin-left: 0px;
+margin-right: 14px;
+margin-top: 0px;
 }
 .i3GeoRodapeJanela {
 background-color: #F2F2F2;

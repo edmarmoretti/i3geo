@@ -122,7 +122,7 @@ i3GEOF.opcoesTamanho = {
 			i3GEO.janela.minimiza("i3GEOF.opcoesTamanho");
 		};
 		//cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>" + $trad("p5")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=4' >&nbsp;&nbsp;&nbsp;</a></div>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("p5")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=4' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"190px",
 			"130px",

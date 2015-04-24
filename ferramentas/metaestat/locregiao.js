@@ -173,7 +173,7 @@ i3GEOF.locregiao = {
 			titulo = $trad("x59");
 		}
 		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeFiltro'></span>"
-			+ "<div class='i3GeoTituloJanela'>" + titulo + "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=111' >&nbsp;&nbsp;&nbsp;</a></div>";
+			+ "<div class='i3GeoTituloJanela'>" + titulo + "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=111' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			largura + "px",
 			altura,

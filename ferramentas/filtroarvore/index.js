@@ -66,7 +66,7 @@ i3GEOF.filtroarvore = {
 			i3GEO.janela.minimiza("i3GEOF.filtroarvore");
 		};
 		//cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>" + $trad("t29")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=97' >&nbsp;&nbsp;&nbsp;</a></div>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("t29")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=97' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"260px",
 			"140px",

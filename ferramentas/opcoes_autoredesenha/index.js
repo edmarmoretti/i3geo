@@ -113,7 +113,7 @@ i3GEOF.opcoesTempo = {
 		};
 		//cria a janela flutuante
 		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeAutoredesenha'></span>"
-			+ "<div class='i3GeoTituloJanela'>" + $trad("p12")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=9' >&nbsp;&nbsp;&nbsp;</a></div>";
+			+ "<div class='i3GeoTituloJanela'>" + $trad("p12")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=9' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"110px",

@@ -107,7 +107,7 @@ i3GEOF.markercluster = {
 		titulo = "<div class='i3GeoTituloJanela'>" + $trad("x104")
 				+ "<a class=ajuda_usuario target=_blank href='"
 				+ i3GEO.configura.locaplic
-				+ "/ajuda_usuario.php?idcategoria=3&idajuda=122' >&nbsp;&nbsp;&nbsp;</a></div>";
+				+ "/ajuda_usuario.php?idcategoria=3&idajuda=122' ><b> </b></a></div>";
 		cabecalho = function() {
 		};
 		janela = i3GEO.janela.cria(

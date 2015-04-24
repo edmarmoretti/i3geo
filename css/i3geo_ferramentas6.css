@@ -585,7 +585,11 @@ select option:hover {
 }
 
 #buscaRapida .ajuda_usuario {
-	top: 2px;
+	top: 1px;
+	display: inline-block;
+	height: 14px;
+	width: 14px;
+	left: 2px;
 }
 
 .executar {

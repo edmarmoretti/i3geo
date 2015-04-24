@@ -473,7 +473,7 @@ i3GEOF.identifica =
 			titulo = "<div class='i3GeoTituloJanela'>" + $trad("d7t")
 				+ "<a class=ajuda_usuario target=_blank href='"
 				+ i3GEO.configura.locaplic
-				+ "/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a></div>";
+				+ "/ajuda_usuario.php?idcategoria=8&idajuda=70' ><b> </b></a></div>";
 			janela = i3GEO.janela.cria(
 				"450px",
 				"250px",

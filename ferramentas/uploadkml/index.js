@@ -108,7 +108,7 @@ i3GEOF.uploadkml = {
 			i3GEO.janela.minimiza("i3GEOF.uploadkml");
 		};
 		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeUpload'></span>"
-			+ "<div class='i3GeoTituloJanela'>KML<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=104' >&nbsp;&nbsp;&nbsp;</a></div>";
+			+ "<div class='i3GeoTituloJanela'>KML<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=104' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"450px",
 			"390px",

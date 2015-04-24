@@ -351,7 +351,7 @@ i3GEO.gadgets =
 				};
 				templateMustache =
 					"" + "<table><tr>"
-						+ "	<td><a class=ajuda_usuario target=_blank href='{{link}}' >&nbsp;&nbsp;&nbsp;</a></td>"
+						+ "	<td><a class=ajuda_usuario target=_blank href='{{link}}' ><b> </b></a></td>"
 						+ "	<td><img src='{{branco}}' title='{{ajuda}}' class='ticPropriedades2' id={{prop}} style='margin-right:5px;margin-left:5px;'/></td>"
 						+ "	<td>"
 						+ "		<form id={{idform}}>"
