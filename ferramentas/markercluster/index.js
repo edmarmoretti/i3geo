@@ -130,7 +130,7 @@ i3GEOF.markercluster = {
 				i3GEO.configura.locaplic
 						+ "/imagens/oxygen/16x16/accessories-calculator.png");
 		divid = janela[2].id;
-		janela[0].setFooter("<div id=i3GEOF.markercluster_rodape style=background-color:#F2F2F2; ></div>");
+		janela[0].setFooter("<div id=i3GEOF.markercluster_rodape class='i3GeoRodapeJanela' ></div>");
 		i3GEOF.markercluster.aguarde = $i("i3GEOF.markercluster_imagemCabecalho").style;
 		i3GEOF.markercluster.inicia(divid);
 		temp = function() {

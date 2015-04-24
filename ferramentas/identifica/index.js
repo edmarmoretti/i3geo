@@ -516,7 +516,7 @@ i3GEOF.identifica =
 			temp = 'i3GEOF.identifica.propJanelas["'
 				+ id
 				+ '"].atualiza = this.checked';
-			janela[0].setFooter("<div style=background-color:#F2F2F2; ><input class='inputsb' style='cursor:pointer;position:relative;top:2px;' checked onclick='"
+			janela[0].setFooter("<div class='i3GeoRodapeJanela' ><input class='inputsb' style='cursor:pointer;position:relative;top:2px;' checked onclick='"
 				+ temp
 				+ "' type=checkbox />&nbsp;"
 				+ $trad(

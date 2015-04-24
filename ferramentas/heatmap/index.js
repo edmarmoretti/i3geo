@@ -129,7 +129,7 @@ i3GEOF.heatmap =
 				i3GEO.janela.minimiza("i3GEOF.heatmap");
 			}, "", false, i3GEO.configura.locaplic + "/imagens/oxygen/16x16/accessories-calculator.png");
 			divid = janela[2].id;
-			janela[0].setFooter("<div id=i3GEOF.heatmap_rodape style=background-color:#F2F2F2; ></div>");
+			janela[0].setFooter("<div id=i3GEOF.heatmap_rodape class='i3GeoRodapeJanela' ></div>");
 			i3GEOF.heatmap.aguarde = $i("i3GEOF.heatmap_imagemCabecalho").style;
 			i3GEOF.heatmap.inicia(divid);
 			temp = function() {

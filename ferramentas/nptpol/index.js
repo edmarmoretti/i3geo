@@ -120,7 +120,7 @@ i3GEOF.nptpol = {
 			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
 		);
 		divid = janela[2].id;
-		janela[0].setFooter("<div id=i3GEOF.nptpol_rodape style=background-color:#F2F2F2; ></div>");
+		janela[0].setFooter("<div id=i3GEOF.nptpol_rodape class='i3GeoRodapeJanela' ></div>");
 		i3GEOF.nptpol.aguarde = $i("i3GEOF.nptpol_imagemCabecalho").style;
 		i3GEOF.nptpol.inicia(divid);
 		temp = function(){

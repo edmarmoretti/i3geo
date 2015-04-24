@@ -143,7 +143,7 @@ i3GEOF.melhorcaminho = {
 			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
 		);
 		divid = janela[2].id;
-		janela[0].setFooter("<div id=i3GEOF.melhorcaminho_rodape style=background-color:#F2F2F2; ></div>");
+		janela[0].setFooter("<div id=i3GEOF.melhorcaminho_rodape class='i3GeoRodapeJanela' ></div>");
 		i3GEOF.melhorcaminho.aguarde = $i("i3GEOF.melhorcaminho_imagemCabecalho").style;
 		i3GEOF.melhorcaminho.inicia(divid);
 		temp = function(){

@@ -3089,6 +3089,9 @@ top: 5px;
 right: 0px;
 text-align:left;
 }
+.i3GeoRodapeJanela {
+background-color:#F2F2F2;
+}
 .cabecalhoTemas {
 display: inline-block;
 overflow: hidden;

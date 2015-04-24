@@ -619,7 +619,7 @@ i3GEOF.graficointerativo1 =
 				// indica se a janela sera atualizada na navegacao
 				temp = 'i3GEOF.graficointerativo1.propJanelas["' + idjanela + '"].atualiza = this.checked';
 				janela[0]
-					.setFooter("<div id='i3GEOFgraficoRodape" + idjanela + "' style=background-color:#F2F2F2; ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
+					.setFooter("<div id='i3GEOFgraficoRodape" + idjanela + "' class='i3GeoRodapeJanela' ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
 						+ temp + "' type=checkbox />&nbsp;" + $trad("atualizaNavegacao", i3GEOF.graficointerativo1.dicionario) + " (" + idjanela + ")</div>");
 
 				temp = function() {

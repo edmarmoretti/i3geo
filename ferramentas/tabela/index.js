@@ -364,7 +364,7 @@ i3GEOF.tabela =
 				temp = 'i3GEOF.tabela.propJanelas["' + id + '"].atualiza = this.checked';
 				janela[0]
 					.setFooter("<div id='i3GEOFtabelaRodape" + id
-						+ "' style=background-color:#F2F2F2; ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
+						+ "' class='i3GeoRodapeJanela' ><input class='inputsb' checked style='cursor:pointer;position:relative;top:2px;' onclick='"
 						+ temp
 						+ "' type=checkbox />&nbsp;"
 						+ $trad('atualizaAoNavegar', i3GEOF.tabela.dicionario)

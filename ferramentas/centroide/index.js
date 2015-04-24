@@ -120,7 +120,7 @@ i3GEOF.centroide = {
 			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
 		);
 		divid = janela[2].id;
-		janela[0].setFooter("<div id=i3GEOF.centroide_rodape style=background-color:#F2F2F2; ></div>");
+		janela[0].setFooter("<div id=i3GEOF.centroide_rodape class='i3GeoRodapeJanela' ></div>");
 		i3GEOF.centroide.aguarde = $i("i3GEOF.centroide_imagemCabecalho").style;
 		i3GEOF.centroide.inicia(divid);
 		temp = function(){

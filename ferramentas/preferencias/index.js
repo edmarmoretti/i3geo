@@ -683,7 +683,7 @@ i3GEOF.preferencias = {
 			'<input id=i3GEOpreferenciasbotao2 size=20 type=button value="'+$trad('aplica',i3GEOF.preferencias.dicionario)+'" />&nbsp;&nbsp;&nbsp;' +
 			'<input id=i3GEOpreferenciasbotao3 size=20 type=button value="'+$trad('codigo',i3GEOF.preferencias.dicionario)+'" />' ;
 
-		janela[0].setFooter("<div style=background-color:#F2F2F2; >"+rodape+"</div>");
+		janela[0].setFooter("<div class='i3GeoRodapeJanela' >"+rodape+"</div>");
 
 		$i("i3GEOF.preferencias_corpo").style.backgroundColor = "white";
 		$i("i3GEOF.preferencias_corpo").style.textAlign = "left";

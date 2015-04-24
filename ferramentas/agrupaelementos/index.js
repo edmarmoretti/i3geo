@@ -121,7 +121,7 @@ i3GEOF.agrupaElementos = {
 			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
 		);
 		divid = janela[2].id;
-		janela[0].setFooter("<div id=i3GEOF.agrupaElementos_rodape style=background-color:#F2F2F2; ></div>");
+		janela[0].setFooter("<div id=i3GEOF.agrupaElementos_rodape class='i3GeoRodapeJanela' ></div>");
 		i3GEOF.agrupaElementos.aguarde = $i("i3GEOF.agrupaElementos_imagemCabecalho").style;
 		i3GEOF.agrupaElementos.inicia(divid);
 		temp = function(){

@@ -122,7 +122,7 @@ i3GEOF.distanciaptpt = {
 			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
 		);
 		divid = janela[2].id;
-		janela[0].setFooter("<div id=i3GEOF.distanciaptpt_rodape style=background-color:#F2F2F2; ></div>");
+		janela[0].setFooter("<div id=i3GEOF.distanciaptpt_rodape class='i3GeoRodapeJanela' ></div>");
 		i3GEOF.distanciaptpt.aguarde = $i("i3GEOF.distanciaptpt_imagemCabecalho").style;
 		i3GEOF.distanciaptpt.inicia(divid);
 		temp = function(){
