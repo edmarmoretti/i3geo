@@ -80,6 +80,15 @@ ogc.php?intervalo=0,50
 //
 //valida&ccedil;&otilde;es e includes
 //
+//
+//compatibiliza chamadas fora do padrao
+//
+if(isset($_GET["outputFormat"]) && $_GET["outputFormat"] != ""){
+	$_GET["OUTPUTFORMAT"] = $_GET["outputFormat"];
+}
+if(isset($_GET["outputformat"]) && $_GET["outputformat"] != ""){
+	$_GET["OUTPUTFORMAT"] = $_GET["outputformat"];
+}
 $cache = true;
 require_once(dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
@@ -265,12 +274,7 @@ if(isset($_GET["tms"])){
 if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$agora .= "google";
 }
-//
-//compatibiliza chamadas fora do padrao
-//
-if(isset($_GET["outputFormat"]) && $_GET["outputFormat"] != ""){
-	$_GET["OUTPUTFORMAT"] = $_GET["outputFormat"];
-}
+
 //
 //se o outputformat for definido, evita o cahce de arquivo
 //o mesmo se existir filtro para o layer
@@ -828,9 +832,6 @@ if((isset($legenda)) && (strtolower($legenda) == "sim")){
 //
 //altera o outputformat
 //
-if(isset($outputFormat)){
-	$OUTPUTFORMAT = $outputFormat;
-}
 if(isset($OUTPUTFORMAT)){
 	if(strtolower($OUTPUTFORMAT) == "shape-zip"){
 		$l = $oMap->getlayer(0);
