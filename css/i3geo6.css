@@ -3092,6 +3092,15 @@ text-align:left;
 .i3GeoRodapeJanela {
 background-color:#F2F2F2;
 }
+.i3GeoRodapeJanela table {
+width:100%;
+background-color:#F2F2F2;
+}
+.i3GeoRodapeJanela td {
+border:0px solid white;
+cursor:pointer;
+background-color:#F2F2F2;
+}
 .cabecalhoTemas {
 display: inline-block;
 overflow: hidden;

@@ -2201,21 +2201,19 @@ i3GEO.util =
 		 * {string} - (opcional) id onde os botoes serao colocados
 		 */
 		proximoAnterior : function(anterior, proxima, texto, idatual, container, mantem, onde) {
-			var temp = $i(idatual), botoes = "", ndiv = document.createElement("div"), nids, i, fundo;
+			var temp = $i(idatual), botoes = "", ndiv = document.createElement("div"), nids, i;
 			if (!mantem) {
 				mantem = false;
 			}
 			if (temp && mantem == false) {
 				$i(container).removeChild(temp);
 			}
-			fundo = "#F2F2F2"; // $i(container).style.backgroundColor;
 			$i(container).style.backgroundColor = "white";
 
-			botoes = "<table style='width:100%;background-color:" + fundo + ";' ><tr style='width:100%'>";
+			botoes = "<table><tr style='width:100%'>";
 			if (anterior !== "") {
 				botoes +=
-					"<td style='border:0px solid white;text-align:left;cursor:pointer;background-color:" + fundo
-						+ ";'><input id='"
+					"<td style='text-align:left;'><input id='"
 						+ idatual
 						+ "anterior_' onclick='"
 						+ anterior
@@ -2223,8 +2221,7 @@ i3GEO.util =
 			}
 			if (proxima !== "") {
 				botoes +=
-					"<td style='border:0px solid white;text-align:right;cursor:pointer;background-color:" + fundo
-						+ ";'><input id='"
+					"<td style='text-align:right;'><input id='"
 						+ idatual
 						+ "proxima_' onclick='"
 						+ proxima
