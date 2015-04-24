@@ -116,8 +116,12 @@ if(isset($id_medida_variavel)){
 if(!isset($temas) && isset($tema)){
 	$temas = $tema;
 }
+if(isset($typeName)){
+	$typename = $typeName;
+}
 if(!isset($temas) && isset($typename)){
 	$temas = $typename;
+	$tema = $typename;
 }
 //
 //recupera um mapa salvo no banco de administracao
