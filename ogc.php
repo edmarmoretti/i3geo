@@ -116,6 +116,9 @@ if(isset($id_medida_variavel)){
 if(!isset($temas) && isset($tema)){
 	$temas = $tema;
 }
+if(!isset($temas) && isset($typename)){
+	$temas = $typename;
+}
 //
 //recupera um mapa salvo no banco de administracao
 //
@@ -821,6 +824,9 @@ if((isset($legenda)) && (strtolower($legenda) == "sim")){
 //
 //altera o outputformat
 //
+if(isset($outputFormat)){
+	$OUTPUTFORMAT = $outputFormat;
+}
 if(isset($OUTPUTFORMAT)){
 	if(strtolower($OUTPUTFORMAT) == "shape-zip"){
 		$l = $oMap->getlayer(0);
