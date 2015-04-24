@@ -347,7 +347,7 @@ i3GEOF.tabela =
 						+ "<div class='i3GeoTituloJanela'>" + $trad('tabela', i3GEOF.tabela.dicionario)
 						+ "<a class=ajuda_usuario target=_blank href='"
 						+ i3GEO.configura.locaplic
-						+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a></div></div></div>";
+						+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' ><b> </b></a></div></div></div>";
 
 				janela = i3GEO.janela.cria("550px", "400px", "", "", "", titulo, id, false, "hd", cabecalho, minimiza, function() {
 					i3GEO.guias.ajustaGuiaFerramenta(id, id + "i3GEOtabela");

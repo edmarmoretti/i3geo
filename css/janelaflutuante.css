@@ -4,7 +4,16 @@
 }
 
 .i3GeoTituloJanela .ajuda_usuario {
+	height: 14px;
 	left: 3px;
+	width: 14px;
+}
+
+.i3GeoTituloJanela .ajuda_usuario b {
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 14px;
+	margin-top: 0px;
 }
 
 .i3GeoRodapeJanela {
