@@ -42,14 +42,14 @@ if (typeof (i3GEOF) === 'undefined') {
 }
 /*
  * Classe: i3GEOF.metar
- * 
+ *
  */
 i3GEOF.metar =
 	{
 		MARCA : false,
 		/*
 		 * Variavel: aguarde
-		 * 
+		 *
 		 * Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 		 */
 		aguarde : "",
@@ -66,11 +66,11 @@ i3GEOF.metar =
 		},
 		/*
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
@@ -100,11 +100,11 @@ i3GEOF.metar =
 		},
 		/*
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
@@ -113,7 +113,7 @@ i3GEOF.metar =
 		},
 		/*
 		 * Function: iniciaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function() {
@@ -130,8 +130,8 @@ i3GEOF.metar =
 			};
 			// cria a janela flutuante
 			titulo =
-				"Metar <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=8&idajuda=87' >&nbsp;&nbsp;&nbsp;</a>";
+				"<div class='i3GeoTituloJanela'>Metar<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+					+ "/ajuda_usuario.php?idcategoria=8&idajuda=87' >&nbsp;&nbsp;&nbsp;</a></div>";
 			janela = i3GEO.janela.cria("250px", "190px", "", "", "", titulo, "i3GEOF.metar", false, "hd", cabecalho, minimiza);
 			divid = janela[2].id;
 			i3GEOF.metar.aguarde = $i("i3GEOF.metar_imagemCabecalho").style;
@@ -153,7 +153,7 @@ i3GEOF.metar =
 		},
 		/*
 		 * Function: ativaFoco
-		 * 
+		 *
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function() {
@@ -163,7 +163,7 @@ i3GEOF.metar =
 		},
 		/*
 		 * Function: lista
-		 * 
+		 *
 		 * Lista as esta&ccedil;&otilde;es consultando o webservice http://ws.geonames.org/weatherJSON
 		 */
 		lista : function() {
@@ -232,13 +232,13 @@ i3GEOF.metar =
 		},
 		/*
 		 * Function: mostraxy
-		 * 
+		 *
 		 * Indica no mapa a localiza&ccedil;&atilde;o de uma esta&ccedil;&atilde;o
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * x {Numero} - longitude em dd
-		 * 
+		 *
 		 * y {Numero} - latitude em dd
 		 */
 		mostraxy : function(x, y) {

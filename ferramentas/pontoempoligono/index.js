@@ -99,7 +99,7 @@ i3GEOF.pontoEmPoligono = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = $trad("u13")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=18' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("u13")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=18' >&nbsp;&nbsp;&nbsp;</a></div>";
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.pontoEmPoligono");

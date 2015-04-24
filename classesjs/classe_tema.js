@@ -51,7 +51,7 @@ i3GEO.tema =
 		 * Parametros:
 		 *
 		 * {string} - codigo do tema
-		 * 
+		 *
 		 * {boolean} - confirma exclusao
 		 */
 		exclui : function(tema,confirma) {
@@ -450,7 +450,7 @@ i3GEO.tema =
 						"<img src='"
 							+ i3GEO.configura.locaplic
 							+ "/imagens/player_volta.png' style=cursor:pointer onclick='javascript:history.go(-1)'><span style=position:relative;top:-2px; > "
-							+ $trad("x19") + " " + tema + " </span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+							+ $trad("x19") + " " + tema + "</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
 							+ "/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>",
 						"comentario" + Math.random());
 			},
@@ -708,7 +708,7 @@ i3GEO.tema =
 			sld : function(idtema) {
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.janela.cria("500px", "350px", i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?funcao=tema2sld&tema="
-					+ idtema + "&g_sid=" + i3GEO.configura.sid, "", "", "<div class='i3GeoTituloJanela'>SLD <a class=ajuda_usuario target=_blank href='"
+					+ idtema + "&g_sid=" + i3GEO.configura.sid, "", "", "<div class='i3GeoTituloJanela'>SLD<a class=ajuda_usuario target=_blank href='"
 					+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a></div>");
 			},
 			/**

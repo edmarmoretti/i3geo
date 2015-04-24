@@ -1652,9 +1652,9 @@ g_traducao = {
 }],
 "x59":[
 {
-	pt:"Localiza limite",
-	en:"Locate limit",
-	es:"Localiza l&iacute;mite"
+	pt:"Localiza",
+	en:"Locate",
+	es:"Localiza"
 }],
 "x60":[
 {

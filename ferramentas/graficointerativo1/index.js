@@ -584,9 +584,9 @@ i3GEOF.graficointerativo1 =
 				titulo =
 					"<span class='i3GEOiconeFerramenta i3GEOiconeGrafico' title='"+$trad("t37b")+"'></span>"
 					+ "<div id='" + idjanela + "I' style='left:10px;'>"
-					+ "&nbsp;&nbsp;&nbsp;" + $trad("t37b")
-					+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a></div></div>";
+					+ "<div class='i3GeoTituloJanela'>" + $trad("t37b")
+					+ "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+					+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a></div></div></div>";
 
 				janela =
 					i3GEO.janela.cria(
@@ -706,7 +706,7 @@ i3GEOF.graficointerativo1 =
 			minimiza = function() {
 				i3GEO.janela.minimiza(id);
 			};
-			titulo = "&nbsp;&nbsp;&nbsp;" + idjanela;
+			titulo = "<div class='i3GeoTituloJanela'>" + idjanela + "</div>";
 			janela = i3GEO.janela.cria("380px", "280px", "", "", "", titulo, id, false, "hd", cabecalho, minimiza);
 			divid = janela[2].id;
 			$i(divid).style.marginTop = "0px";

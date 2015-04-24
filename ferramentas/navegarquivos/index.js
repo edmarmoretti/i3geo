@@ -127,7 +127,7 @@ i3GEOF.navegarquivos = {
 			i3GEO.janela.minimiza("i3GEOF.navegarquivos");
 		};
 		//cria a janela flutuante
-		titulo = $trad('arquivos',i3GEOF.navegarquivos.dicionario);
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad('arquivos',i3GEOF.navegarquivos.dicionario) + "</div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"300px",

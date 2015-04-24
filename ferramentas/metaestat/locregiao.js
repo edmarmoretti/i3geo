@@ -167,12 +167,13 @@ i3GEOF.locregiao = {
 		};
 		//cria a janela flutuante
 		if(i3GEOF.locregiao.ATIVAFILTRO === true){
-			titulo = "Filtro geogr&aacute;fico";
+			titulo = "Filtro";
 		}
 		else{
 			titulo = $trad("x59");
 		}
-		titulo += "<span class='i3GEOiconeFerramenta i3GEOiconeFiltro'></span>" + " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=111' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeFiltro'></span>"
+			+ "<div class='i3GeoTituloJanela'>" + titulo + "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=111' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			largura + "px",
 			altura,

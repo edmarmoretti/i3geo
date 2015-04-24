@@ -116,7 +116,7 @@ i3GEOF.insereGrafico = {
 			i3GEO.janela.minimiza("i3GEOF.insereGrafico");
 		};
 		//cria a janela flutuante
-		titulo = $trad("t37")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=80' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("t37")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=80' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"320px",
@@ -310,7 +310,7 @@ i3GEOF.insereGrafico = {
 				while(i--);
 			}
 			par += "</table>";
-			w = i3GEO.janela.cria(200,200,"","center","center","Legenda","FlegendaGr");
+			w = i3GEO.janela.cria(200,200,"","center","center","<div class='i3GeoTituloJanela'>Legenda</div>","FlegendaGr");
 			w = w[2].id;
 			$i(w).innerHTML = par;
 		}

@@ -118,7 +118,7 @@ i3GEOF.analisaGeometrias = {
 			i3GEO.janela.minimiza("i3GEOF.analisaGeometrias");
 		};
 		//cria a janela flutuante
-		titulo = $trad("u6")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=23' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("u6")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=23' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			"500px",
 			"300px",

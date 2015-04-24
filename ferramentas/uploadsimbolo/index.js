@@ -125,7 +125,7 @@ i3GEOF.uploadsimbolo = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.uploadsimbolo");
 		};
-		titulo = "PNG/JPG <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=116' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div class='i3GeoTituloJanela'>PNG/JPG<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=116' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			"355px",
 			"470px",

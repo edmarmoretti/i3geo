@@ -265,9 +265,9 @@ i3GEOF.selecao = {
 			titulo =
 				"<span class='i3GEOiconeFerramenta i3GEOiconeSelecao' title='"+$trad("x51")+"'></span>"
 				+ "<div id='i3GEOFSelecaoCabecalhoI' style='left:10px;'>"
-				+ "&nbsp;&nbsp;&nbsp;" + $trad("x51")
-				+ " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-				+ "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a></div></div>";
+				+ "<div class='i3GeoTituloJanela'>" + $trad("x51")
+				+ "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+				+ "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a></div></div></div>";
 			janela = i3GEO.janela.cria(
 					"510px",
 					"210px",

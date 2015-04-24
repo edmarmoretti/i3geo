@@ -507,15 +507,19 @@ select option:hover {
 background-color: #CCFFFF;
 }
 .ajuda_usuario {
-background-image: url(../imagens/external.png);
+background-image: url(../imagens/oxygen/16x16/dialog-information.png);
 background-position: 0px 0px;
 background-repeat: no-repeat;
 margin-left: 0;
 text-decoration: none;
 cursor: help;
 position: relative;
+font-size: 14px;
+background-size: 14px 14px;
+vertical-align: middle;
+}
+#buscaRapida .ajuda_usuario {
 top: 2px;
-font-size: 13px;
 }
 .executar {
 cursor: pointer;
@@ -3089,17 +3093,24 @@ top: 5px;
 right: 0px;
 text-align:left;
 }
+.i3GeoTituloJanela {
+font-size: 13px;
+font-weight: 100;
+}
+.i3GeoTituloJanela .ajuda_usuario {
+left: 3px;
+}
 .i3GeoRodapeJanela {
-background-color:#F2F2F2;
+background-color: #F2F2F2;
 }
 .i3GeoRodapeJanela table {
-width:100%;
-background-color:#F2F2F2;
+width: 100%;
+background-color: #F2F2F2;
 }
 .i3GeoRodapeJanela td {
-border:0px solid white;
-cursor:pointer;
-background-color:#F2F2F2;
+border: 0px solid white;
+cursor: pointer;
+background-color: #F2F2F2;
 }
 .cabecalhoTemas {
 display: inline-block;
@@ -3194,7 +3205,7 @@ line-height: 2;
 padding: 0 10px;
 height: 30px;
 opacity: .80;
-filter: alpha(opacity =     80);
+filter: alpha(opacity =       80);
 }
 .yui-skin-sam .container-close {
 background: transparent
@@ -3208,7 +3219,7 @@ top: 3px;
 width: 25px;
 z-index: 2001;
 opacity: .80;
-filter: alpha(opacity =     80);
+filter: alpha(opacity =       80);
 }
 .yui-skin-sam .container-minimiza {
 background: transparent
@@ -3222,7 +3233,7 @@ top: 3px;
 width: 25px;
 z-index: 2001;
 opacity: .8;
-filter: alpha(opacity =     80);
+filter: alpha(opacity =       80);
 }
 .yui-skin-sam .container-duplica {
 background: transparent
@@ -3236,7 +3247,7 @@ top: 3px;
 width: 25px;
 z-index: 2001;
 opacity: .8;
-filter: alpha(opacity =     80);
+filter: alpha(opacity =       80);
 }
 .yui-skin-sam .yui-panel .bd {
 text-align: left;

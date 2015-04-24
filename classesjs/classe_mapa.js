@@ -758,7 +758,7 @@ i3GEO.mapa =
 				titulo =
 					"<span class='i3GEOiconeFerramenta i3GEOiconeLegenda' title='" + $trad("P3")
 						+ "'></span>"
-						+ "<div id='legendaTituloI' style='display:block;' >"
+						+ "<div class='i3GeoTituloJanela'>"
 						+ $trad("p3")
 						+ "</div>";
 				janela = i3GEO.janela.cria(largura + "px", altura + "px", "", "", "", titulo, "wlegenda", false, "hd", cabecalho, minimiza);
@@ -787,7 +787,7 @@ i3GEO.mapa =
 					i3GEO.configura.locaplic + "/ferramentas/conectarwms/listalayers.php?servico=" + servico,
 					"",
 					"",
-					"<div class='i3GeoTituloJanela'>"+$trad("a4") + " <a class=ajuda_usuario target=_blank href='"
+					"<div class='i3GeoTituloJanela'>"+$trad("a4") + "<a class=ajuda_usuario target=_blank href='"
 						+ i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=4&idajuda=28' >&nbsp;&nbsp;&nbsp;</a></div>",
 					"i3GEO.conectarwms",
@@ -926,7 +926,7 @@ i3GEO.mapa =
 							+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 					titulo =
 						"<div class='i3GeoTituloJanela'><span class='i3GEOiconeFerramenta i3GEOiconeCongela'></span>" + "Mapa"
-							+ " <a class=ajuda_usuario target=_blank href='"
+							+ "<a class=ajuda_usuario target=_blank href='"
 							+ i3GEO.configura.locaplic
 							+ "/ajuda_usuario.php?idcategoria=6&idajuda=123' >&nbsp;&nbsp;&nbsp;</a></div>";
 					i3GEO.janela.cria("500px", "350px", url, "", "", titulo, idjanela, false, "hd", cabecalho, minimiza);
@@ -1170,7 +1170,7 @@ i3GEO.mapa =
 					i3GEO.configura.locaplic + "/ferramentas/template/index.htm",
 					"",
 					"",
-					"<div class='i3GeoTituloJanela'>Template <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+					"<div class='i3GeoTituloJanela'>Template<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=1&idajuda=8' >&nbsp;&nbsp;&nbsp;</a></div>");
 			},
 			/**

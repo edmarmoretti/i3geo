@@ -49,7 +49,7 @@ i3GEOF.atalhoscamada =
 	 */
 	inicia : function(iddiv, idjanela) {
 		var tema, temp, b, ltema, funcoes = i3GEO.arvoreDeCamadas.FUNCOES;
-		
+
 		tema = i3GEOF.atalhoscamada.propJanelas[idjanela].tema;
 		ltema = i3GEO.arvoreDeCamadas.pegaTema(tema);
 
@@ -267,7 +267,7 @@ i3GEOF.atalhoscamada =
 			i3GEO.janela.minimiza(id);
 		};
 		// cria a janela flutuante
-		titulo = ltema.tema + "&nbsp;&nbsp;&nbsp;";
+		titulo = "<div class='i3GeoTituloJanela'>" + ltema.tema + "</div>";
 		janela =
 			i3GEO.janela.cria(
 				"280px",
@@ -312,7 +312,7 @@ i3GEOF.atalhoscamada =
 	 * Para isso, a funcao salvarmapfile deve ser preparada para obter o parametro
 	 * e enviar para a funcao php
 	 * veja em i3GEOF.salvamapfile.salva
-	 * 
+	 *
 	 * conv indica se deve ser feita a conversao de checked para sim/nao
 	 */
 	metadata: function(obj,conv){

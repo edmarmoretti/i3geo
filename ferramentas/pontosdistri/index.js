@@ -110,7 +110,7 @@ i3GEOF.pontosDistri = {
 			i3GEO.janela.minimiza("i3GEOF.pontosDistri");
 		};
 		//cria a janela flutuante
-		titulo = $trad("u14")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=20' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("u14")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=20' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"330px",

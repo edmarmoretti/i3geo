@@ -58,7 +58,7 @@ i3GEOF.conectarservicos =
 						"",
 						"",
 						$trad("a4")
-						+ " <a class=ajuda_usuario target=_blank href='"
+						+ "<a class=ajuda_usuario target=_blank href='"
 						+ i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=4&idajuda=28' >&nbsp;&nbsp;&nbsp;</a>",
 						"i3GEO.conectarwms",
@@ -84,7 +84,7 @@ i3GEOF.conectarservicos =
 						"",
 						"",
 						$trad("x46")
-						+ " <a class=ajuda_usuario target=_blank href='"
+						+ "<a class=ajuda_usuario target=_blank href='"
 						+ i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=4&idajuda=76' >&nbsp;&nbsp;&nbsp;</a>",
 						"i3GEO.conectarwmst",
@@ -110,7 +110,7 @@ i3GEOF.conectarservicos =
 						"",
 						"",
 						$trad("x47")
-						+ " <a class=ajuda_usuario target=_blank href='"
+						+ "<a class=ajuda_usuario target=_blank href='"
 						+ i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=4&idajuda=29' >&nbsp;&nbsp;&nbsp;</a>",
 						"i3GEO.conectargeorss",
@@ -164,7 +164,7 @@ i3GEOF.conectarservicos =
 			i3GEO.janela.minimiza("i3GEOFconectarservicos");
 		};
 		// cria a janela flutuante
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeAdd'></span>" + $trad("conexao",i3GEOF.conectarservicos.dicionario);
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeAdd'></span><div class='i3GeoTituloJanela'>" + $trad("conexao",i3GEOF.conectarservicos.dicionario)+"</div>";
 		janela =
 			i3GEO.janela.cria(
 				"230px",

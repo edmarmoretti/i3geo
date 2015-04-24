@@ -127,7 +127,7 @@ i3GEOF.busca = {
 			i3GEO.janela.minimiza("i3GEOF.busca");
 		};
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeBusca'></span>" + "<div  id='i3GEOFbuscaComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeBusca'></span><div  id='i3GEOFbuscaComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"290px",
 			"330px",
@@ -262,7 +262,7 @@ i3GEOF.busca = {
 			posicaotop  = parseInt($i("i3GEOF.busca_c").style.top,10)+(i3GEOF.busca.nbuscas*10);
 
 		i3GEOF.busca.nbuscas++;
-		i3GEO.janela.cria("200px","200px","",posicaoleft+290,posicaotop,palavra,idJanela);
+		i3GEO.janela.cria("200px","200px","",posicaoleft+290,posicaotop,"<div class='i3GeoTituloJanela'>" + palavra + "</div>",idJanela);
 		if (retorno.data !== undefined)
 		{
 			nlinhas = retorno.data.length;

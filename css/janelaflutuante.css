@@ -1,16 +1,25 @@
+.i3GeoTituloJanela {
+	font-size: 13px;
+	font-weight: 100;
+}
+
+.i3GeoTituloJanela .ajuda_usuario {
+	left: 3px;
+}
+
 .i3GeoRodapeJanela {
-	background-color:#F2F2F2;
+	background-color: #F2F2F2;
 }
 
 .i3GeoRodapeJanela table {
-	width:100%;
-	background-color:#F2F2F2;
+	width: 100%;
+	background-color: #F2F2F2;
 }
 
 .i3GeoRodapeJanela td {
-	border:0px solid white;
-	cursor:pointer;
-	background-color:#F2F2F2;
+	border: 0px solid white;
+	cursor: pointer;
+	background-color: #F2F2F2;
 }
 
 .cabecalhoTemas {
@@ -86,14 +95,14 @@
 
 /*veja tambem openlayers.css*/
 .yui-skin-sam .yui-panel .hd {
-		background: none;
-		background-color: #F2F2F2;
-		color: #000000;
-		font-size: 93%;
-		font-weight: bold;
-		line-height: 2;
-		padding: 0 10px;
-		height: 30px;
+	background: none;
+	background-color: #F2F2F2;
+	color: #000000;
+	font-size: 93%;
+	font-weight: bold;
+	line-height: 2;
+	padding: 0 10px;
+	height: 30px;
 }
 
 .yui-skin-sam .yui-panel .hd1 {
@@ -119,7 +128,7 @@
 	padding: 0 10px;
 	height: 30px;
 	opacity: .80;
-	filter: alpha(opacity =     80);
+	filter: alpha(opacity =       80);
 }
 
 .yui-skin-sam .container-close {
@@ -134,7 +143,7 @@
 	width: 25px;
 	z-index: 2001;
 	opacity: .80;
-	filter: alpha(opacity =     80);
+	filter: alpha(opacity =       80);
 }
 
 .yui-skin-sam .container-minimiza {
@@ -149,7 +158,7 @@
 	width: 25px;
 	z-index: 2001;
 	opacity: .8;
-	filter: alpha(opacity =     80);
+	filter: alpha(opacity =       80);
 }
 
 .yui-skin-sam .container-duplica {
@@ -164,9 +173,8 @@
 	width: 25px;
 	z-index: 2001;
 	opacity: .8;
-	filter: alpha(opacity =     80);
+	filter: alpha(opacity =       80);
 }
-
 
 .yui-skin-sam .yui-panel .bd {
 	text-align: left;

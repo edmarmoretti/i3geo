@@ -247,7 +247,7 @@ i3GEOF.proplabel = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.proplabel");
 		};
-		titulo = $trad('propriedadesTexto',i3GEOF.proplabel.dicionario);
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad('propriedadesTexto',i3GEOF.proplabel.dicionario) + "</div>";
 		janela = i3GEO.janela.cria(
 			"360px",
 			"230px",

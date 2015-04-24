@@ -38,13 +38,13 @@ if (typeof (i3GEOF) === 'undefined') {
 }
 /*
  * Classe: i3GEOF.saiku
- * 
+ *
  */
 i3GEOF.saiku =
 	{
 		/*
 		 * Variavel: aguarde
-		 * 
+		 *
 		 * Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 		 */
 		aguarde : "",
@@ -56,9 +56,9 @@ i3GEOF.saiku =
 		},
 		/*
 		 * Function: iniciaDicionario
-		 * 
+		 *
 		 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-		 * 
+		 *
 		 * O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 		 */
 		iniciaDicionario : function() {
@@ -73,11 +73,11 @@ i3GEOF.saiku =
 		},
 		/*
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
@@ -101,11 +101,11 @@ i3GEOF.saiku =
 		},
 		/*
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
@@ -126,7 +126,7 @@ i3GEOF.saiku =
 		},
 		/*
 		 * Function: iniciaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function() {
@@ -141,8 +141,8 @@ i3GEOF.saiku =
 			};
 			// cria a janela flutuante
 			titulo =
-				"Saiku <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=4&idajuda=117' >&nbsp;&nbsp;&nbsp;</a>";
+				"<div class='i3GeoTituloJanela'>Saiku<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+					+ "/ajuda_usuario.php?idcategoria=4&idajuda=117' >&nbsp;&nbsp;&nbsp;</a></div>";
 			janela =
 				i3GEO.janela.cria(
 					"400px",

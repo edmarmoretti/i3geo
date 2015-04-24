@@ -208,7 +208,7 @@ i3GEOF.navegapostgis = {
 			i3GEO.janela.minimiza("i3GEOF.navegapostgis");
 		};
 		//cria a janela flutuante
-		titulo = $trad('conectaPostgis',i3GEOF.navegapostgis.dicionario);
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad('conectaPostgis',i3GEOF.navegapostgis.dicionario) + "</div>";
 		janela = i3GEO.janela.cria(
 			"550px",
 			"335px",

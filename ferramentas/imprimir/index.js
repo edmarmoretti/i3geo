@@ -160,7 +160,7 @@ i3GEOF.imprimir = {
 				}
 			});
 			b.addClass("abrir200");
-			
+
 			var temp = function(retorno){
 				g_legendaHTML = retorno.data.legenda;
 			};
@@ -197,7 +197,7 @@ i3GEOF.imprimir = {
 			i3GEO.janela.minimiza("i3GEOF.imprimir");
 		};
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeImprimir'></span>" + $trad("d12") + " <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=49' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeImprimir'></span><div class='i3GeoTituloJanela'>" + $trad("d12") + "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=49' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			"250px",
 			"230px",
@@ -209,7 +209,7 @@ i3GEOF.imprimir = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			""
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.imprimir_corpo").style.backgroundColor = "white";
@@ -236,7 +236,7 @@ i3GEOF.imprimir = {
 		url = url+"?g_sid="+i3GEO.configura.sid+"&interface="+interf+"&mapexten="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 		var id = "imprimir"+Math.random();
 		if(tipoAbertura){
-			i3GEO.janela.cria("350px","350px",url,"","","Arquivos",id);
+			i3GEO.janela.cria("350px","350px",url,"","","<div class='i3GeoTituloJanela'>Arquivos</div>",id);
 		}
 		else{
 			window.open(url);

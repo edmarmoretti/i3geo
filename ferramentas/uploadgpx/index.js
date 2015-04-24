@@ -110,7 +110,8 @@ i3GEOF.uploadgpx = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.uploadgpx");
 		};
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeUpload'></span>" + "GPX <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=103' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeUpload'></span>"
+			+ "<div class='i3GeoTituloJanela'>GPX<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=103' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"280px",

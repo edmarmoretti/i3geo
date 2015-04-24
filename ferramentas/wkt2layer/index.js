@@ -97,10 +97,10 @@ i3GEOF.wkt2layer =
 		cabecalho = function() {
 		};
 		minimiza = function() {
-			i3GEO.janela.minimiza("i3GEOF.wkt2layer");
+			//i3GEO.janela.minimiza("i3GEOF.wkt2layer");
 		};
 		// cria a janela flutuante
-		titulo = $trad("wkt2layer",i3GEOF.wkt2layer.dicionario);
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("wkt2layer",i3GEOF.wkt2layer.dicionario) + "</div>";
 		janela =
 			i3GEO.janela.cria(
 				"280px",
@@ -113,7 +113,7 @@ i3GEOF.wkt2layer =
 				false,
 				"hd",
 				cabecalho,
-				minimiza,
+				"",
 				"",
 				true
 			);

@@ -919,7 +919,7 @@ i3GEO.navega =
 			desativa : function() {
 				if (typeof (console) !== 'undefined')
 					console.info("i3GEO.navega.destacaTema.desativa()");
-				
+
 				i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.navega.destacaTema.atualiza()"]);
 				i3GEO.eventos.removeEventos("MOUSEMOVE",["i3GEO.navega.destacaTema.movimenta()"]);
 				i3GEO.navega.destacaTema.ESTAATIVO = "nao";
@@ -1002,7 +1002,7 @@ i3GEO.navega =
 				//i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.navega.atualizaGoogle()"]);
 				var idgoogle = "googlemaps" + Math.random();
 				i3GEO.janela.cria((i3GEO.parametros.w / 2.5) + 25 + "px", (i3GEO.parametros.h / 2.5) + 18 + "px", i3GEO.configura.locaplic
-					+ "/ferramentas/googlemaps1/index.php", "", "", "<div class='i3GeoTituloJanela'>Google maps <a class=ajuda_usuario target=_blank href='"
+					+ "/ferramentas/googlemaps1/index.php", "", "", "<div class='i3GeoTituloJanela'>Google maps<a class=ajuda_usuario target=_blank href='"
 					+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a></div>", idgoogle);
 				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.navega.atualizaGoogle('"+idgoogle+"')"]);
 			},

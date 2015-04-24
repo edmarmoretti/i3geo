@@ -470,10 +470,10 @@ i3GEOF.identifica =
 					i3GEOF.identifica.propJanelas[id].y);
 			};
 			// cria a janela flutuante
-			titulo = $trad("d7t")
-				+ " <a class=ajuda_usuario target=_blank href='"
+			titulo = "<div class='i3GeoTituloJanela'>" + $trad("d7t")
+				+ "<a class=ajuda_usuario target=_blank href='"
 				+ i3GEO.configura.locaplic
-				+ "/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a>";
+				+ "/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a></div>";
 			janela = i3GEO.janela.cria(
 				"450px",
 				"250px",
@@ -611,9 +611,9 @@ i3GEOF.identifica =
 			}
 			var temp, titulo;
 			// cria a janela flutuante
-			titulo = $trad(
+			titulo = "<div class='i3GeoTituloJanela'>" + $trad(
 				'move',
-				i3GEOF.identifica.dicionario);
+				i3GEOF.identifica.dicionario) + "</div>";
 			i3GEO.janela.cria(
 				"250px",
 				"100px",

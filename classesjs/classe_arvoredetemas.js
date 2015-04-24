@@ -469,7 +469,7 @@ i3GEO.arvoreDeTemas = {
 			altura = 500;
 		}
 		janela = i3GEO.janela.cria("360px", altura + "px", "", "", "",
-				"<span class='i3GEOiconeFerramenta i3GEOiconeCatalogo'></span>" + $trad("g1a"), "i3GEOFcatalogo", false, "hd", cabecalho,
+				"<span class='i3GEOiconeFerramenta i3GEOiconeCatalogo'></span><div class='i3GeoTituloJanela'>" + $trad("g1a") + "</div>", "i3GEOFcatalogo", false, "hd", cabecalho,
 				minimiza);
 		temp = function() {
 			delete (i3GEO.arvoreDeTemas.ARVORE);
@@ -1183,7 +1183,7 @@ i3GEO.arvoreDeTemas = {
 			insp = "<table><tr>"
 					+ "<td><span style='font-size:12px'>&nbsp;"
 					+ $trad("a1")
-					+ " <a class=ajuda_usuario target=_blank href='"
+					+ "<a class=ajuda_usuario target=_blank href='"
 					+ i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=4&idajuda=31' >&nbsp;&nbsp;&nbsp;&nbsp;</a></span></td>"
 					+ "<td>"
@@ -1319,7 +1319,7 @@ i3GEO.arvoreDeTemas = {
 				tempNode = new YAHOO.widget.HTMLNode(
 						{
 							html : "<span style='position:relative;'>OGC-WMS</span>"
-									+ " <a class=ajuda_usuario target=_blank href='"
+									+ "<a class=ajuda_usuario target=_blank href='"
 									+ i3GEO.configura.locaplic
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=33' >&nbsp;&nbsp;&nbsp;</a>"
 									+ editor,
@@ -1339,7 +1339,7 @@ i3GEO.arvoreDeTemas = {
 							html : "<span style='position:relative;'>"
 									+ $trad("x87")
 									+ "</span>"
-									+ " <a class=ajuda_usuario target=_blank href='"
+									+ "<a class=ajuda_usuario target=_blank href='"
 									+ i3GEO.configura.locaplic
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=33' >&nbsp;&nbsp;&nbsp;</a>",
 							idregioes : "raiz",
@@ -1358,7 +1358,7 @@ i3GEO.arvoreDeTemas = {
 							html : "<span style='position:relative;'>"
 									+ $trad("x57")
 									+ "</span>"
-									+ " <a class=ajuda_usuario target=_blank href='"
+									+ "<a class=ajuda_usuario target=_blank href='"
 									+ i3GEO.configura.locaplic
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=112' >&nbsp;&nbsp;&nbsp;</a>",
 							idwmsmetaestat : "raiz",
@@ -1393,7 +1393,7 @@ i3GEO.arvoreDeTemas = {
 							expanded : false,
 							html : "<span style='position:relative;' >"
 									+ $trad("t46")
-									+ "</span> <a class=ajuda_usuario target=_blank href='"
+									+ "</span><a class=ajuda_usuario target=_blank href='"
 									+ i3GEO.configura.locaplic
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=95' >&nbsp;&nbsp;&nbsp;</a>",
 							enableHighlight : false,
@@ -1420,7 +1420,7 @@ i3GEO.arvoreDeTemas = {
 						tempNode = new YAHOO.widget.HTMLNode(
 								{
 									html : $trad("a11")
-											+ " <a class=ajuda_usuario target=_blank href='"
+											+ "<a class=ajuda_usuario target=_blank href='"
 											+ i3GEO.configura.locaplic
 											+ "/ajuda_usuario.php?idcategoria=4&idajuda=34' >&nbsp;&nbsp;&nbsp;</a>",
 									expanded : false,
@@ -1481,7 +1481,7 @@ i3GEO.arvoreDeTemas = {
 				i3GEOF.vinde.inicia("", i3GEO.arvoreDeTemas.ARVORE);
 			};
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-					+ "/ferramentas/vinde/index.js", temp,
+					+ "/ferramentas/vinde/dependencias.php", temp,
 					"i3GEOF.vinde_script");
 		}
 
@@ -1556,7 +1556,7 @@ i3GEO.arvoreDeTemas = {
 					{
 						html : ""
 								+ $trad("a6")
-								+ " <a class=ajuda_usuario target=_blank href='"
+								+ "<a class=ajuda_usuario target=_blank href='"
 								+ i3GEO.configura.locaplic
 								+ "/ajuda_usuario.php?idcategoria=4&idajuda=32' >&nbsp;&nbsp;&nbsp;</a>",
 						enableHighlight : true,

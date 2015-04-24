@@ -3,16 +3,16 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 /*
  * Classe: i3GEOF.html2canvas
- * 
+ *
  */
 i3GEOF.html2canvas = {
 	/*
 	 * Function: inicia
-	 * 
+	 *
 	 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	 * 
+	 *
 	 * Parametro:
-	 * 
+	 *
 	 * obj {dom}
 	 */
 	inicia: function(obj){
@@ -30,7 +30,7 @@ i3GEOF.html2canvas = {
 	},
 	/*
 	 * Function: iniciaJanelaFlutuante
-	 * 
+	 *
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante: function(obj){
@@ -43,7 +43,7 @@ i3GEOF.html2canvas = {
 			i3GEO.janela.minimiza("i3GEOF.html2canvas");
 		};
 		// cria a janela flutuante
-		titulo = "img";
+		titulo = "<div class='i3GeoTituloJanela'>img</div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"230px",

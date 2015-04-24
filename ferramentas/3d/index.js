@@ -133,7 +133,7 @@ i3GEOF.t3d = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "3d <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=69' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div class='i3GeoTituloJanela'>3d<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=69' >&nbsp;&nbsp;&nbsp;</a></div>";
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.t3d");

@@ -42,17 +42,17 @@ Classe: i3GEOF.opcoesQuadros
 i3GEOF.opcoesQuadros = {
 	/*
 	Variavel: aguarde
-	
+
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
 	/*
 	Function: inicia
-	
+
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	
+
 	Parametro:
-	
+
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
@@ -76,17 +76,17 @@ i3GEOF.opcoesQuadros = {
 	},
 	/*
 	Function: html
-	
+
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	
+
 	Retorno:
-	
+
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<table summary="" class=lista >' + 
+		var ins = '<table summary="" class=lista >' +
 			'<tr><td>Tempo:</td><td>' +
-			$inputText("","","i3GEOopcoesQuadrostempoanima","",4,"450") +	
+			$inputText("","","i3GEOopcoesQuadrostempoanima","",4,"450") +
 			'</td></tr><tr><td>&nbsp;</td><td></td></tr>' +
 			'<tr><td>N. de quadros:</td><td>' +
 			$inputText("","","i3GEOopcoesQuadrosnquadros","",4,i3GEO.gadgets.quadros.quadrosfilme.length) +
@@ -97,9 +97,9 @@ i3GEOF.opcoesQuadros = {
 	},
 	/*
 	Function: criaJanelaFlutuante
-	
+
 	Cria a janela flutuante para controle da ferramenta.
-	*/	
+	*/
 	criaJanelaFlutuante: function(){
 		var janela,divid,titulo;
 		if ($i("i3GEOF.opcoesQuadros")) {
@@ -110,7 +110,7 @@ i3GEOF.opcoesQuadros = {
 			i3GEO.janela.minimiza("i3GEOF.opcoesQuadros");
 		};
 		//cria a janela flutuante
-		titulo = "Quadros <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=54' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div class='i3GeoTituloJanela'>Quadros<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=54' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			"170px",
 			"130px",
@@ -132,11 +132,11 @@ i3GEOF.opcoesQuadros = {
 	},
 	/*
 	Function: executa
-	
+
 	Executa a anima&ccedil;&atilde;o
-	
+
 	Veja:
-	
+
 	<i3GEO.gadgets.quadros.anima>
 	*/
 	executa: function(){
@@ -144,7 +144,7 @@ i3GEOF.opcoesQuadros = {
 	},
 	/*
 	Function: limpa
-	
+
 	Limpa o gadget quadros
 	*/
 	limpa: function(){

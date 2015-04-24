@@ -131,7 +131,7 @@ i3GEOF.alterarep = {
 			i3GEO.janela.minimiza("i3GEOF.alterarep");
 		};
 		//cria a janela flutuante
-		titulo = "Representa&ccedil;&atilde;o &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+		titulo = "<div class='i3GeoTituloJanela'>Representa&ccedil;&atilde;o</div>";
 		janela = i3GEO.janela.cria(
 			"250px",
 			"",

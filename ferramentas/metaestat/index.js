@@ -251,7 +251,7 @@ i3GEOF.metaestat = {
 						"",
 						"",
 						"",
-						$trad('analise',i3GEOF.metaestat.dicionario),
+						"<div class='i3GeoTituloJanela' style='width:90%'>" + $trad('analise',i3GEOF.metaestat.dicionario) + "</div>",
 						"i3geoCartoAnalise",
 						false,
 						"hd",
@@ -380,7 +380,7 @@ i3GEOF.metaestat = {
 					i3GEO.janela.minimiza("i3GEOF.junta");
 				};
 				//cria a janela flutuante
-				titulo = "Jun&ccedil;&atilde;o de medidas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
+				titulo = "<div class='i3GeoTituloJanela'>Jun&ccedil;&atilde;o de medidas</div>";
 				i3GEO.janela.cria(
 					"260px",
 					"300px",
@@ -799,7 +799,7 @@ i3GEOF.metaestat = {
 					i3GEO.janela.minimiza("i3GEOF.filtraperiodo");
 				};
 				//cria a janela flutuante
-				titulo = "Filtro temporal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>";
+				titulo = "<div class='i3GeoTituloJanela'>Filtro temporal</div>";
 				i3GEO.janela.cria(
 					"260px",
 					"340px",
@@ -1017,7 +1017,7 @@ i3GEOF.metaestat = {
 						"",
 						"",
 						"",
-						$trad('classes',i3GEOF.metaestat.dicionario),
+						"<div class='i3GeoTituloJanela' style='width:90%'>" + $trad('classes',i3GEOF.metaestat.dicionario) + "</div>",
 						"i3geoCartoClasses",
 						true,
 						"hd",
@@ -1548,7 +1548,7 @@ i3GEOF.metaestat = {
 						"",
 						"",
 						"",
-						$trad('ajudanteEditor',i3GEOF.metaestat.dicionario1),
+						"<div class='i3GeoTituloJanela'>" + $trad('ajudanteEditor',i3GEOF.metaestat.dicionario1) + "</div>",
 						"i3geoCartoEditor",
 						false,
 						"hd",
@@ -1900,7 +1900,7 @@ i3GEOF.metaestat = {
 								i3GEO.configura.locaplic+"/ferramentas/metaestat/upload.html",//abre em um iframe
 								"",
 								"",
-								"Upload",
+								"<div class='i3GeoTituloJanela'>Upload</div>",
 								"i3geoCartoUpload",
 								false,
 								"hd",
@@ -2403,7 +2403,7 @@ i3GEOF.metaestat = {
 				if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
 					modal = true;
 				}
-				titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeCartograma'></span>" + $trad("x57")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=9&idajuda=124' >&nbsp;&nbsp;&nbsp;</a>";
+				titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeCartograma'></span><div class='i3GeoTituloJanela' style='width:90%'>" + $trad("x57")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=9&idajuda=124' >&nbsp;&nbsp;&nbsp;</a></div>";
 				janela = i3GEO.janela.cria(
 						i3GEOF.metaestat.LARGURA+10+"px",
 						i3GEOF.metaestat.ALTURA+"px",
@@ -2473,7 +2473,7 @@ i3GEOF.metaestat = {
 							"",
 							"",
 							"",
-							$trad('relatorio',i3GEOF.metaestat.dicionario),
+							"<div class='i3GeoTituloJanela'>" + $trad('relatorio',i3GEOF.metaestat.dicionario) + "</div>",
 							"i3geoCartoMaisInfo",
 							false,
 							"hd",

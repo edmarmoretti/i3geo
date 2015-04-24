@@ -84,7 +84,7 @@ i3GEOF.opcoesEscala = {
 			i3GEO.janela.minimiza("i3GEOF.opcoesEscala");
 		};
 		//cria a janela flutuante
-		titulo = $trad("p4")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=3' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("p4")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=3' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			"280px",
 			"350px",

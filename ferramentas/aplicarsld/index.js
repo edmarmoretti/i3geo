@@ -105,7 +105,7 @@ i3GEOF.aplicarsld = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.aplicarsld");
 		};
-		titulo = $trad("t43")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=91' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("t43")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=91' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			"320px",
 			"280px",

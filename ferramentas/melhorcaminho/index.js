@@ -119,7 +119,7 @@ i3GEOF.melhorcaminho = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = $trad("melhorcaminho")+" <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=14' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("melhorcaminho")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=14' >&nbsp;&nbsp;&nbsp;</a></div>";
 		cabecalho = function(){
 			i3GEO.barraDeBotoes.execBotao("pan");
 		};
@@ -163,7 +163,7 @@ i3GEOF.melhorcaminho = {
 	t1: function(){
 		var ins = "<p class='paragrafo'>"+$trad('raster',i3GEOF.melhorcaminho.dicionario) +" :<br>" +
 			"<div class='styled-select' id='i3GEOmelhorcaminhoDivRaster'></div>" +
-			"<br>";	
+			"<br>";
 		i3GEO.util.proximoAnterior("i3GEOF.melhorcaminho.t0()","i3GEOF.melhorcaminho.t2()",ins,"i3GEOF.melhorcaminho.t1","i3GEOmelhorcaminhoresultado",true,"i3GEOF.melhorcaminho_rodape");
 		i3GEOF.melhorcaminho.comboTemasRaster();
 	},
@@ -171,14 +171,14 @@ i3GEOF.melhorcaminho = {
 		i3GEOF.melhorcaminho.COORDENADASTEMA = "";
 		var ins = "<p class='paragrafo'>"+$trad('temas',i3GEOF.melhorcaminho.dicionario) +" :<br>" +
 			"<div class='styled-select' id='i3GEOmelhorcaminhoDivTema'></div>" +
-			"<br>";	
+			"<br>";
 		i3GEO.util.proximoAnterior("i3GEOF.melhorcaminho.t1()","i3GEOF.melhorcaminho.t3()",ins,"i3GEOF.melhorcaminho.t2","i3GEOmelhorcaminhoresultado",true,"i3GEOF.melhorcaminho_rodape");
 		i3GEOF.melhorcaminho.comboTemas();
 	},
 	t3: function(){
 		var ins,
 			retorno = i3GEOF.melhorcaminho.COORDENADASTEMA;
-		
+
 		ins = "<p class='paragrafo'><b>"+$trad('pti',i3GEOF.melhorcaminho.dicionario)+"</b>";
 		ins += "<p class='paragrafo'>X (long): ";
 		ins += $trad('grau',i3GEOF.melhorcaminho.dicionario)+" - "+$trad('minuto',i3GEOF.melhorcaminho.dicionario)+" - "+$trad('segundo',i3GEOF.melhorcaminho.dicionario)+"</p>";
@@ -211,7 +211,7 @@ i3GEOF.melhorcaminho = {
 	},
 	t4: function(){
 		var ins,
-			retorno = i3GEOF.melhorcaminho.COORDENADASTEMA;		
+			retorno = i3GEOF.melhorcaminho.COORDENADASTEMA;
 		ins = "<p class='paragrafo'><b>"+$trad('ptf',i3GEOF.melhorcaminho.dicionario)+"</b>";
 		ins += "<p class='paragrafo'>X (long): ";
 		ins += $trad('grau',i3GEOF.melhorcaminho.dicionario)+" - "+$trad('minuto',i3GEOF.melhorcaminho.dicionario)+" - "+$trad('segundo',i3GEOF.melhorcaminho.dicionario)+"</p>";
@@ -303,7 +303,7 @@ i3GEOF.melhorcaminho = {
 			"raster",
 			" "
 		);
-	},	
+	},
 	comboTemas: function(){
 		i3GEO.util.comboTemas(
 			"i3GEOmelhorcaminhoTema",
@@ -328,7 +328,7 @@ i3GEOF.melhorcaminho = {
 			"naoraster",
 			" "
 		);
-	},	
+	},
 	shape2pontos: function(tema){
 		var p, par, retorno
 		p = i3GEO.configura.locaplic + "/ferramentas/melhorcaminho/exec.php?g_sid="+i3GEO.configura.sid;
@@ -456,6 +456,6 @@ i3GEOF.melhorcaminho = {
 			+"&caminho="+caminho;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
-		cp.call(p,"melhorcaminho",fim);		
+		cp.call(p,"melhorcaminho",fim);
 	}
 };

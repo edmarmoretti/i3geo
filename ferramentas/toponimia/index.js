@@ -64,13 +64,13 @@ i3GEOF.toponimia = {
 			};
 			var b,versao;
 			versao = i3GEO.parametros.versaomscompleta.split(".");
-			
+
 			b = new YAHOO.widget.Button(
 				"i3GEOtoponimiabotao1",
 				{onclick:{fn: i3GEOF.toponimia.cria}}
 			);
 			b.addClass("rodar150");
-			
+
 			if(parseInt(versao[0],10) <= 6 && parseInt(versao[1],10) == 0){
 				$i("i3GEOtoponimiabotao2").style.display = "none";
 			}
@@ -125,7 +125,9 @@ i3GEOF.toponimia = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeToponimia'></span>" + "<div  id='i3GEOFtoponimiaComboCabeca' class='comboTemasCabecalho'>   ------</div><span style=margin-left:60px>"+$trad("x56")+"&nbsp;</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeToponimia'></span>"
+			+ "<div  id='i3GEOFtoponimiaComboCabeca' class='comboTemasCabecalho'>   ------</div>"
+			+ "<div class='i3GeoTituloJanela'>" + $trad("x56")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a></div>";
 		janela = i3GEO.janela.cria(
 			"410px",
 			"260px",
