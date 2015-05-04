@@ -58,7 +58,7 @@ include("dicionario.js");
 include("../classesjs/compactados/dicionario_compacto.js");
 include("../classesjs/compactados/classe_util_compacto.js");
 include("../classesjs/compactados/classe_idioma_compacto.js");
-
+include("../versao.php");
 include("index.js");
 if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
 	echo "men = $"."trad(19,g_traducao_init);";
@@ -163,7 +163,7 @@ A:hover {
 }
 
 .borda {
-	background-color: #990000;
+	background-color:  #4682b4;
 	padding: 5px 0px 5px 0px;
 	text-align: left;
 	width: 100%;
@@ -175,7 +175,7 @@ A:hover {
 		<div id="bandeiras"></div>
 		<div style="text-align:center">
 			<a href="http://www.softwarepublico.gov.br" target="_blank" style="color: white;">
-				<b>i3Geo 6.0</b>
+				<b><?php echo $mensagemInicia;?></b>
 			</a>
 		</div>
 	</div>

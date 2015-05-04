@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>i3Geo 6.0</name>
+	<name>i3Geo 7.0</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -27,7 +27,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1428952996735</id>
+			<id>0</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
@@ -36,7 +36,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1428952996736</id>
+			<id>0</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -45,7 +45,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1428952996777</id>
+			<id>0</id>
 			<name></name>
 			<type>10</type>
 			<matcher>
@@ -54,7 +54,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1428952996779</id>
+			<id>0</id>
 			<name></name>
 			<type>14</type>
 			<matcher>
