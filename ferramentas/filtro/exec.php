@@ -27,7 +27,7 @@ Inclui um filtro no tema.
 */
 	case "INSEREFILTRO":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
-		copiaSeguranca($map_file);
+		//copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		if(!isset($testa)){$testa="";}
 		{$retorno = $m->insereFiltro($filtro,$testa,"sim");}

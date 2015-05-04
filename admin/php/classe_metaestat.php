@@ -425,7 +425,7 @@ class Metaestat{
 			$sqlagrupamento .= " /*FA*//*FA*/ /*FAT*//*FAT*/ GROUP BY ".$agruparpor." ORDER BY ".$agruparpor;
 		}
 		//SQL para a primeira regiao __SQLDADOS__ ira conter os sqls dos niveis inferiores da regiao se ouver
-		//ZODO ajustar tipos das colunas no join para tornar mais rapida a juncao
+		//XXX ajustar tipos das colunas no join para tornar mais rapida a juncao
 		//no caso de ser um contador forcado
 		if($dados["colunavalor"] == ""){
 			$nomeColunaValor = "contagem";
@@ -1924,9 +1924,7 @@ class Metaestat{
 				$data[] = "'-01'";
 			}
 			$data = implode("||",$data);
-			/**
-			 * ZODO falta a hora
-			 */
+			//XXX falta a hora
 			return "to_date($data,'$tipodata')";
 		}
 	}

@@ -37,6 +37,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
+//TODO verificar a lista de WMS cadastrados
 //parametrosURL();
 //variaveis globais
 g_tipo = ""; //tipo de tema

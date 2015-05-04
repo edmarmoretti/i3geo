@@ -88,7 +88,6 @@ var Query = Backbone.Model.extend({
         $(this.workspace.el).find(".workspace_results_info").empty();
         this.workspace.trigger('query:run');
         this.result.result = null;
-        // TODO - Validate query
         // maybe we should sync it with the backend query JSON?
         // this definitely needs improvement
         if (this.get('type') != "MDX") {

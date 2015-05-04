@@ -1167,7 +1167,7 @@ class Mapa
 		}
 		return ("ok");
 	}
-	//ZODO criar opcao para construcao de cache automatico em shapefile
+	//XXX criar opcao para construcao de cache automatico em shapefile
 	/*
 	 Method: adicionaTema
 

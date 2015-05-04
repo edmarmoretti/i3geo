@@ -1855,14 +1855,14 @@ i3GEOF.graficointerativo1 =
 		},
 		filtraCamada: function(idjanela,filtro){
 			var p, cp, temp,tema = i3GEOF.graficointerativo1.propJanelas[idjanela].tema;
-			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
+			p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro&filtro="+i3GEO.util.base64encode(filtro);
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode('POST');
 			temp = function(retorno){
 				i3GEO.Interface.atualizaTema(retorno,tema);
 			};
-			cp.call(p,"insereFiltro",temp,"tema="+tema,"filtro="+i3GEO.util.base64encode(filtro));
+			cp.call(p,"insereFiltro",temp,"tema="+tema);
 		},
 		limparFiltros: function(){
 			var i, p, cp, temp,tema,

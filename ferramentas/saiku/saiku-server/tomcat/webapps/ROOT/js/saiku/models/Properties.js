@@ -39,7 +39,7 @@ var Properties = Backbone.Model.extend({
     },
     
     update: function(async) {
-        // FIXME - this really sucks
+        //this really sucks
         // Why can't we just use the body?
         this.attributes = {
             properties: _.template(
@@ -52,7 +52,7 @@ var Properties = Backbone.Model.extend({
     },
     
     parse: function(response) {
-        // FIXME - POST should return properties as well
+        //POST should return properties as well
         if (typeof response == "object") {
             _.extend(this.properties, response);
         }

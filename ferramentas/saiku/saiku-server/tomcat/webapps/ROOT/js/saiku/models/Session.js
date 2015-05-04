@@ -90,7 +90,7 @@ var Session = Backbone.Model.extend({
     },
     
     logout: function() {
-        // FIXME - This is a hack (inherited from old UI)
+        //This is a hack (inherited from old UI)
         Saiku.ui.unblock();
         $('#header').empty().hide();
         $('#tab_panel').remove();

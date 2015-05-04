@@ -42,8 +42,8 @@ i3GEO.pluginI3geo =
 		 *
 		 * Utilizado no editor de mapfiles do sistema de administracao
 		 */
-		// ZODO criar plugin geojson
-		// ZODO criar plugin que aceite um JSON generico
+		//XXX criar plugin geojson
+		//XXX criar plugin que aceite um JSON generico
 		PLUGINS : [
 			{
 				"classe" : "heatmap", // namespace da classe

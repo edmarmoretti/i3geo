@@ -517,7 +517,7 @@ i3GEO.php =
 			}
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
 				"funcao=referenciadinamica&g_sid=" + i3GEO.configura.sid + "&zoom=" + zoom + "&tipo=" + tipo + "&ext="
-					+ i3GEO.parametros.mapexten + "&w=" + w + "&h=" + h;
+					+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten) + "&w=" + w + "&h=" + h;
 			cpJSON.call(p, "retornaReferenciaDinamica", funcao, par);
 		},
 		/**

@@ -310,6 +310,10 @@ i3GEO.maparef =
 				i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay", "block");
 				if ($i("localizarxygeoProjxg")) {
 					var temp = function() {
+						//FIXME nao funciona no OSM
+						if(i3GEO.Interface.openlayers.googleLike === true){
+							return false;
+						}
 						i3GEO.coordenadas.atualizaGeo(objposicaocursor.dmsx, objposicaocursor.dmsy, "localizarxygeoProj");
 					};
 					YAHOO.util.Event.addListener($i("imagemReferencia"), "mousemove", temp);
@@ -502,7 +506,10 @@ i3GEO.maparef =
 		click : function() {
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.maparef.click()");
-
+			//FIXME nao funciona no OSM
+			if(i3GEO.Interface.openlayers.googleLike === true){
+				return false;
+			}
 			if (i3GEO.Interface.ATUAL === "openlayers") {
 				i3GEO.Interface.openlayers.pan2ponto(objposicaocursor.ddx, objposicaocursor.ddy);
 				return;

@@ -23,6 +23,7 @@ catch(ee)
 	<div class="bordaSuperior">&nbsp;</div>
 	<div class="mascaraPrincipal" id="divGeral" style="text-align: left">
 		<?php
+		//TODO Incluir opcoes para carregar as listas default do i3Geo como sistemas de identificacao e WMS
 		/*
 		 Testa a instala&ccedil;&atilde;o do i3Geo
 
