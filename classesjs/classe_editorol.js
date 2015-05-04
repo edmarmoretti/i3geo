@@ -1,4 +1,3 @@
-//TODO documentar
 //TODO incluir balao de informacoes como um elemento grafico de desenho
 //TODO incluir caixas de texto
 //TODO incluir undo na edicao
@@ -1419,13 +1418,12 @@ i3GEO.editorOL = {
 			controles.push(button);
 			adiciona = true;
 		}
-		//TODO traduzir
 		if(botoes.apaga===true){
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLapaga",
 				trigger: function(){
 					if(i3GEO.desenho.layergrafico.selectedFeatures.length > 0){
-						var x = window.confirm("Exclui os elementos selecionados?");
+						var x = window.confirm($trad("excsel")+"?");
 						if(x){
 							i3GEO.editorOL.guardaBackup();
 							i3GEO.desenho.layergrafico.removeFeatures(i3GEO.desenho.layergrafico.selectedFeatures);
@@ -1433,15 +1431,15 @@ i3GEO.editorOL = {
 								i3GEO.editorOL.listaGeometrias();
 							}
 							if(typeof i3geoOL !== "undefined"){
-								i3GEO.janela.tempoMsg("Para excluir registros do banco de dados utilize a ferramenta de identificacao");
+								i3GEO.janela.tempoMsg($trad("meneditor1"));
 							}
 						}
 					}
 					else{
-						i3GEO.janela.tempoMsg("Selecione pelo menos um elemento");
+						i3GEO.janela.tempoMsg($trad("seluma"));
 					}
 				},
-				title: "apaga selecionados",
+				title: $trad("excsel"),
 				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
@@ -1463,7 +1461,7 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLpropriedades",
 				trigger: function(){i3GEO.editorOL.propriedades();},
-				title: "propriedades",
+				title: $trad("p13"),
 				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
@@ -1473,7 +1471,7 @@ i3GEO.editorOL = {
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLsalva",
 				trigger: function(){i3GEO.editorOL.salvaGeometrias();},
-				title: "salva",
+				title: $trad("salva"),
 				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
@@ -1488,7 +1486,7 @@ i3GEO.editorOL = {
 					catch(e)
 					{window.open("openlayers_ajuda.php");}
 				},
-				title: "ajuda",
+				title: $trad("s1"),
 				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
@@ -1527,7 +1525,7 @@ i3GEO.editorOL = {
 						catch(e){}
 					}
 				},
-				title: "fecha editor",
+				title: $trad("x74"),
 				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);
@@ -1765,9 +1763,9 @@ i3GEO.editorOL = {
 			YAHOO.namespace("editorOL.listaGeometrias");
 			YAHOO.editorOL.listaGeometrias.panel = new YAHOO.widget.Panel("panellistagEditor", {zIndex:20000, iframe:true, width:"320px", visible:false, draggable:true, close:true } );
 			if(i3GEO && typeof i3GEO != undefined && i3GEO != "")
-			{YAHOO.editorOL.listaGeometrias.panel.setHeader("Geometrias <div id='panellistagEditor_minimizaCabecalho' class='container-minimiza'></div>");}
+			{YAHOO.editorOL.listaGeometrias.panel.setHeader($trad("u6")+" <div id='panellistagEditor_minimizaCabecalho' class='container-minimiza'></div>");}
 			else
-			{YAHOO.editorOL.listaGeometrias.panel.setHeader("Geometrias");}
+			{YAHOO.editorOL.listaGeometrias.panel.setHeader($trad("u6"));}
 			YAHOO.editorOL.listaGeometrias.panel.setFooter("");
 			YAHOO.editorOL.listaGeometrias.panel.render(document.body);
 			YAHOO.editorOL.listaGeometrias.panel.center();
@@ -1786,7 +1784,7 @@ i3GEO.editorOL = {
 			geos = i3GEO.desenho.layergrafico.features,
 			n = geos.length,
 			ins = "<table class=lista4 >";
-		ins += "<tr><td><i>Geometrias</i></td><td><i>Op&ccedil;&otilde;es</i></td><td></td><td></td></tr>";
+		ins += "<tr><td><i>"+$trad("u6")+"</i></td><td><i>"+$trad("opcoes")+"</i></td><td></td><td></td></tr>";
 
 		while(n > 0){
 			n -= 1;
@@ -1794,8 +1792,9 @@ i3GEO.editorOL = {
 			ins += "<tr><td>"+g.CLASS_NAME+"</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.selFeature("+n+")'>seleciona</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.unselFeature("+n+")'>limpa</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.flashFeaturesI("+n+")'>brilha</td></tr>";
 		}
 		ins += "</table>";
-		if(geos.length === 0)
-		{ins = "Nenhum elemento gr&aacute;fico encontrado. Utilize as op&ccedil;&otilde;es de cria&ccedil;&atilde;o de geometrias.";}
+		if(geos.length === 0){
+			ins = $trad("meneditor2");
+		}
 		YAHOO.editorOL.listaGeometrias.panel.show();
 		if(i3GEO.configura)
 		{temp = $i("panellistagEditor").getElementsByTagName("div")[2];}
@@ -1810,7 +1809,7 @@ i3GEO.editorOL = {
 			YAHOO.namespace("editorOL.ferramentas");
 			YAHOO.editorOL.ferramentas.panel = new YAHOO.widget.Panel("panelferramentasEditor", {zIndex:20000, iframe:true, width:"300px", visible:false, draggable:true, close:true } );
 			var ins = "" +
-			'<p class=paragrafo >Opera&ccedil;&otilde;es sobre as figuras selecionadas:</p>' +
+			'<p class=paragrafo >'+$trad("opsel")+':</p>' +
 			'<select onchange="i3GEO.editorOL.processageo(this.value);this.value = \'\'" >' +
 			'	<option value="">---</option>' +
 			'	<option value=union >Uni&atilde;o</option>';

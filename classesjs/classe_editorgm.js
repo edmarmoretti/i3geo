@@ -1,5 +1,4 @@
 //TODO documentar
-//TODO traduzir
 //TODO incluir balao de informacoes como um elemento grafico de desenho
 //TODO incluir caixas de texto
 //TODO incluir undo na edicao
@@ -197,15 +196,15 @@ i3GEO.editorGM = {
 		 */
 		html:function(){
 			var ins = '<div style=margin-left:5px >' +
-			'	<button title="Desenhar um poligono" onclick="i3GEO.editorGM.digitalizaPol(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon-create.png" /></button>' +
-			'	<button title="Adicionar ponto" onclick="i3GEO.editorGM.digitalizaPt(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/point-create.png" /></button>' +
-			'	<button title="Capturar elemento de um tema" onclick="i3GEO.editorGM.capturaPoligonoTema.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-import.png" /></button>' +
-			'	<button title="Selecionar" onclick="i3GEO.editorGM.seleciona(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>' +
-			'	<button title="Selecionar tudo" onclick="i3GEO.editorGM.selectAll(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selectall.png" /></button>' +
-			'	<button title="Remove selecionado (n&atilde;o apaga)" onclick="i3GEO.editorGM.deleteSelectedShape()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
-			'	<button title="Salvar/excluir dados" onclick="i3GEO.editorGM.salvaLimite.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/vector-save.png" /></button>' +
-			'	<button title="Editar atributos" onclick="i3GEO.editorGM.editarAtributos.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/annotation-form.png" /></button>' +
-			'	<button title="Ajuda" onmousedown="i3GEO.editorGM.mudaicone()" onclick="i3GEO.editorGM.ajuda()" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/help-contents.png" /></button>' +
+			'	<button title="'+$trad("dpol")+'" onclick="i3GEO.editorGM.digitalizaPol(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon-create.png" /></button>' +
+			'	<button title="'+$trad("dponto")+'" onclick="i3GEO.editorGM.digitalizaPt(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/point-create.png" /></button>' +
+			'	<button title="'+$trad("capturar")+'" onclick="i3GEO.editorGM.capturaPoligonoTema.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-import.png" /></button>' +
+			'	<button title="'+$trad("d24t")+'" onclick="i3GEO.editorGM.seleciona(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/select.png" /></button>' +
+			'	<button title="'+$trad("studo")+'" onclick="i3GEO.editorGM.selectAll(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selectall.png" /></button>' +
+			'	<button title="'+$trad("excsel")+'" onclick="i3GEO.editorGM.deleteSelectedShape()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/selected-delete.png" /></button>' +
+			'	<button title="'+$trad("salvexc")+'" onclick="i3GEO.editorGM.salvaLimite.inicia()"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/vector-save.png" /></button>' +
+			'	<button title="'+$trad("edatrib")+'" onclick="i3GEO.editorGM.editarAtributos.ativa(this)"><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/annotation-form.png" /></button>' +
+			'	<button title="'+$trad("s1")+'" onmousedown="i3GEO.editorGM.mudaicone()" onclick="i3GEO.editorGM.ajuda()" ><img src="'+i3GEO.configura.locaplic+'/imagens/gisicons/help-contents.png" /></button>' +
 			'	<br><div id="i3geoCartoRegioesEditaveisDiv" ><img style="display:block;z-index:2" src="'+i3GEO.configura.locaplic+'/imagens/aguarde.gif" /></div></div>'; //combo para escolher a regiao
 			return ins;
 		},
@@ -272,7 +271,7 @@ i3GEO.editorGM = {
 		 * @param boolean indica se deve ser feita uma confirmacao ou nao antes de apagar
 		 */
 		deleteSelectedShape: function(naoconfirma) {
-			i3GEO.janela.tempoMsg("Para excluir o registro utilize a ferramenta de identificacao");
+			i3GEO.janela.tempoMsg($trad("meneditor1"));
 			if(!naoconfirma){
 				naoconfirma = false;
 			}
@@ -280,7 +279,7 @@ i3GEO.editorGM = {
 			n = i3GEO.desenho.googlemaps.shapes.length;
 			if(n > 0){
 				if(naoconfirma === false){
-					var x = window.confirm("Remove as figuras selecionadas?");
+					var x = window.confirm($trad("excsel")+"?");
 				}
 				else{
 					x = true;
@@ -295,7 +294,7 @@ i3GEO.editorGM = {
 				}
 			}
 			else{
-				i3GEO.janela.tempoMsg("Selecione pelo menos uma figura");
+				i3GEO.janela.tempoMsg($trad("selum"));
 			}
 		},
 		/**
@@ -416,7 +415,7 @@ i3GEO.editorGM = {
 						//obtem os dados buscando nos itens que vem da requisicao ao wms
 						temp = retorno.data[0].resultado[0];
 						if(temp === " "){
-							i3GEO.janela.tempoMsg("Nada encontrado");
+							i3GEO.janela.tempoMsg($trad("meneditor2"));
 							return;
 						}
 						i3GEO.editorGM.mudaicone();
@@ -479,7 +478,7 @@ i3GEO.editorGM = {
 			var onde = $i("i3geoCartoRegioesEditaveisDiv"),
 			temp = function(dados){
 				var n = dados.length,
-				ins = '<br><p class="paragrafo" >Camadas edit&aacute;veis:</p>',
+				ins = '<br><p class="paragrafo" >'+$trad("camedit")+':</p>',
 				i;
 				ins += "<select onchange='i3GEO.editorGM.comboRegiaoEditavelOnchange(this)' id='i3geoCartoRegioesEditaveis' style='width:175px' ><option value=''>---</option>";
 				for(i=0;i<n;i++){
@@ -698,7 +697,7 @@ i3GEO.editorGM = {
 			 */
 			inicia: function(){
 				if(i3GEO.login.verificaCookieLogin() === false){
-					i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar a op&ccedil;&atilde;o de salvar no banco de dados");
+					i3GEO.janela.tempoMsg($trad("meneditor3"));
 					if(i3GEO.editorGM.selectedShapes().length > 0){
 						var temp = i3GEO.editorGM.toWKT(i3GEO.editorGM.selectedShapes()[0]);
 						i3GEO.mapa.dialogo.wkt2layer(temp);
@@ -797,7 +796,7 @@ i3GEO.editorGM = {
 				minimiza = function(){
 					i3GEO.janela.minimiza("salvaLimite");
 				};
-				titulo = "<div class='i3GeoTituloJanela'>Salva limite&nbsp;&nbsp;&nbsp;</div>";
+				titulo = "<div class='i3GeoTituloJanela'>"+$trad("sdados")+"</div>";
 				janela = i3GEO.janela.cria(
 						"300px",
 						"265px",
@@ -822,10 +821,10 @@ i3GEO.editorGM = {
 			 */
 			gravaDados: function(comwkt){
 				if(i3GEO.login.verificaCookieLogin() === false){
-					i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
+					i3GEO.janela.tempoMsg($trad("meneditor3"));
 					return;
 				}
-				if(!window.confirm("Grava mesmo os dados?")){
+				if(!window.confirm($trad("sdados")+"?")){
 					return;
 				}
 				var p,codigo_tipo_regiao = $i("i3geoCartoRegioesEditaveis").value,
@@ -846,7 +845,7 @@ i3GEO.editorGM = {
 				}
 				else{
 					if(identificadornovo === identificador && $i("inputNomeElemento").value === nome){
-						i3GEO.janela.tempoMsg("Valores iguais ao original");
+						i3GEO.janela.tempoMsg($trad("meneditor4"));
 						return;
 					}
 				}
@@ -859,10 +858,10 @@ i3GEO.editorGM = {
 			 */
 			excluiPoligono: function(){
 				if(i3GEO.login.verificaCookieLogin() === false){
-					i3GEO.janela.tempoMsg("Voc&ecirc; precisa fazer login para usar essa op&ccedil;&atilde;o");
+					i3GEO.janela.tempoMsg($trad("meneditor3"));
 					return;
 				}
-				if(!window.confirm("Exclui mesmo o poligono?")){
+				if(!window.confirm($trad("excsel")+"?")){
 					return;
 				}
 				var codigo_tipo_regiao = $i("i3geoCartoRegioesEditaveis").value,
@@ -877,7 +876,7 @@ i3GEO.editorGM = {
 				},
 				p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=mantemDadosRegiao&tipo=excluir";
 				if(identificador === ""){
-					i3GEO.janela.tempoMsg("&Eacute; necess&aacute;rio ter um c&oacute;digo para poder excluir");
+					i3GEO.janela.tempoMsg($trad("meneditor5"));
 				}
 				else{
 					cpJSON.call(p,"foo",temp,"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador="+identificador);
@@ -929,7 +928,7 @@ i3GEO.editorGM = {
 				minimiza = function(){
 					i3GEO.janela.minimiza("editaAtributos");
 				};
-				titulo = "<div class='i3GeoTituloJanela'>Atributos&nbsp;&nbsp;&nbsp;</div>";
+				titulo = "<div class='i3GeoTituloJanela'>"+$trad("atrib")+"</div>";
 				janela = i3GEO.janela.cria(
 						"250px",
 						"265px",
@@ -945,7 +944,7 @@ i3GEO.editorGM = {
 				);
 				$i("editaAtributos_corpo").style.backgroundColor = "white";
 				$i("editaAtributos_corpo").innerHTML = html;
-				i3GEO.janela.tempoMsg("Ap&oacute;s escolher a medida da vari&aacute;vel, clique no mapa para escolher o limite geogr&aacute;fico.");
+				i3GEO.janela.tempoMsg($trad("meneditor6"));
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.editorGM.mudaicone);
 			},
 			/**
@@ -961,6 +960,7 @@ i3GEO.editorGM = {
 				'';
 				return ins;
 			},
+			//TODO traduzir
 			/**
 			 * Monta um combo para escolha de uma variavel que sera editada
 			 * Executa i3GEO.php.listaVariavel

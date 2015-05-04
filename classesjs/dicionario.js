@@ -2213,6 +2213,84 @@ g_traducao = {
 	pt: "selecionar tudo",
 	en:"",
 	es:""
+}],
+"excsel": [
+{
+	pt: "Remove os elementos selecionados",
+	en:"",
+	es:""
+}],
+"opcoes": [
+{
+	pt: "Op&ccedil;&otilde;es",
+	en:"",
+	es:""
+}],
+"meneditor1": [
+{
+	pt: "Para excluir registros do banco de dados utilize a ferramenta de identifica&ccedil;&atilde;o",
+	en:"",
+	es:""
+}],
+"meneditor2": [
+{
+	pt: "Nenhum elemento gr&aacute;fico encontrado. Utilize as op&ccedil;&otilde;es de cria&ccedil;&atilde;o de geometrias.",
+	en:"",
+	es:""
+}],
+"meneditor3": [
+{
+	pt: "Voc&ecirc; precisa fazer login para usar a op&ccedil;&atilde;o de salvar no banco de dados",
+	en:"",
+	es:""
+}],
+"meneditor4": [
+{
+	pt: "Valores iguais ao original",
+	en:"",
+	es:""
+}],
+"meneditor5": [
+{
+	pt: "&Eacute; necess&aacute;rio ter um c&oacute;digo para poder excluir",
+	en:"",
+	es:""
+}],
+"meneditor6": [
+{
+	pt: "Ap&oacute;s escolher a medida da vari&aacute;vel, clique no mapa para escolher o limite geogr&aacute;fico.",
+	en:"",
+	es:""
+}],
+"opsel": [
+{
+	pt: "Opera&ccedil;&otilde;es sobre as figuras selecionadas",
+	en:"",
+	es:""
+}],
+"capturar": [
+{
+	pt: "Capturar elemento de um tema",
+	en:"",
+	es:""
+}],
+"salvexc": [
+{
+	pt: "Salvar/excluir dados",
+	en:"",
+	es:""
+}],
+"edatrib": [
+{
+	pt: "Editar atributos",
+	en:"",
+	es:""
+}],
+"camedit": [
+{
+	pt: "Camadas edit&aacute;veis",
+	en:"",
+	es:""
 }]
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");
