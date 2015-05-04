@@ -238,7 +238,7 @@ i3GEO.calculo =
 		 */
 		tela2dd : function(xfign, yfign, g_celula, imgext, idorigem) {
 			try {
-				var amext, longdd, latdd, point;
+				var amext, longdd, latdd;
 				if (i3GEO.Interface.ATUAL === "googlemaps" && arguments.length === 4) {
 					amext = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(xfign, yfign));
 					return [
@@ -246,15 +246,17 @@ i3GEO.calculo =
 						amext.lat()
 					];
 				}
+				/*
 				if (i3GEO.Interface.openlayers.googleLike === true) {
 					amext = i3geoOL.getLonLatFromPixel(new OpenLayers.Pixel(xfign, yfign));
-					point = new OpenLayers.LonLat(amext.lon, amext.lat);
+					var point = new OpenLayers.LonLat(amext.lon, amext.lat);
 					amext = point.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
 					return [
 						amext.lon,
 						amext.lat
 					];
 				}
+				*/
 				if (i3GEO.Interface.ATUAL === "openlayers" && arguments.length === 4) {
 					amext = i3geoOL.getLonLatFromPixel(new OpenLayers.Pixel(xfign, yfign));
 					return [

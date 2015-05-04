@@ -707,8 +707,13 @@ function retornaReferenciaDinamica($ext="",$w="",$h="")
 	//adiciona o tema com o web service com o mapa mundi
 	//
 	$objMapa = ms_newMapObj($map_file);
-	if($interface == "googlemaps")
-	{$objMapa->setProjection("init=epsg:4618,a=6378137,b=6378137");}
+	$i = $objMapa->getmetadata("interface");
+	if($i == ""){
+		$i = $interface;
+	}
+	if($i == "googlemaps"){
+		$objMapa->setProjection("init=epsg:4618,a=6378137,b=6378137");
+	}
 	if($ext && $ext != ""){
 		$e = explode(" ",$ext);
 		$extatual = $objMapa->extent;
@@ -759,16 +764,16 @@ function retornaReferenciaDinamica($ext="",$w="",$h="")
 	$nomer = ($objImagem->imageurl).basename($nomer);
 	$s =  "var refimagem='".$nomer."';var refwidth=".$w.";var refheight=".$h.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
 	$mapa = ms_newMapObj($map_file);
-	if($interface == "googlemaps")
-	{$mapa->setProjection("init=epsg:4618");}
+	if($i == "googlemaps"){
+		$mapa->setProjection("init=epsg:4618,a=6378137,b=6378137");
+	}
 	$ref = $mapa->reference;
 	$r = $ref->extent;
 	//
 	//guarda a extensao original para quando o modo din&acirc;mico parar
 	//
 	$original = $mapa->getmetadata("referenciaextentoriginal");
-	if($original == "")
-	{
+	if($original == ""){
 		$original = $r->minx." ".$r->miny." ".$r->maxx." ".$r->maxy;
 		$mapa->setmetadata("referenciaextentoriginal",$original);
 	}
