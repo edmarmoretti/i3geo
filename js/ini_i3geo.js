@@ -395,9 +395,6 @@ var i3GEO = {
 		// usuario clica no mapa
 		i3GEO.eventos.cliquePerm.ativoinicial = i3GEO.eventos.cliquePerm.ativo;
 		var montaMapa, mashup, tamanho;
-		if (typeof ("i3GEOmantemCompatibilidade") === 'function') {
-			i3GEOmantemCompatibilidade();
-		}
 		i3GEO.mapa.aplicaPreferencias();
 		montaMapa = function(retorno) {
 			try {
@@ -477,9 +474,9 @@ var i3GEO = {
 						if (i3GEO.parametros.logado === "nao") {
 							i3GEO.login.anulaCookie();
 						}
-						//
+
 						i3GEO.arvoreDeCamadas.registaCamadas(retorno.data.temas);
-						//
+
 						if (retorno.data.variaveis.navegacaoDir.toLowerCase() === "sim") {
 							i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 						}

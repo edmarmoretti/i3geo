@@ -2504,15 +2504,15 @@ i3GEO.util =
 			for (i = 0; i < ns; i++) {
 				src = scripts[i].getAttribute('src');
 				if (src) {
-					index = src.lastIndexOf("/classesjs/i3geo.js");
+					index = src.lastIndexOf("/js/i3geo.js");
 					// is it found, at the end of the URL?
-					if ((index > -1) && (index + "/classesjs/i3geo.js".length === src.length)) {
-						scriptLocation = src.slice(0, -"/classesjs/i3geo.js".length);
+					if ((index > -1) && (index + "/js/i3geo.js".length === src.length)) {
+						scriptLocation = src.slice(0, -"/js/i3geo.js".length);
 						break;
 					}
-					index = src.lastIndexOf("/classesjs/i3geonaocompacto.js");
-					if ((index > -1) && (index + "/classesjs/i3geonaocompacto.js".length === src.length)) {
-						scriptLocation = src.slice(0, -"/classesjs/i3geonaocompacto.js".length);
+					index = src.lastIndexOf("/js/i3geonaocompacto.js");
+					if ((index > -1) && (index + "/js/i3geonaocompacto.js".length === src.length)) {
+						scriptLocation = src.slice(0, -"/js/i3geonaocompacto.js".length);
 						break;
 					}
 				}

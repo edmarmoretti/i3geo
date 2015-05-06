@@ -66,6 +66,7 @@ inicializa();
 //calcula a extensao geografica com base no x,y,z
 //nos casos do modo notile, a requisicao e feita como se fosse um wms
 //quando for do tipo tms $_GET["tms"] contem os parametros do tile
+//
 if(isset($_GET["tms"])){
 	$_GET["WIDTH"] = 256;
 	$_GET["HEIGHT"] = 256;
@@ -82,8 +83,50 @@ if(isset($_GET["tms"])){
 	$lat2 = ($y+1) / $n * 180.0 - 90.0;
 	$_GET["BBOX"] = $lon1." ".$lat1." ".$lon2." ".$lat2;
 }
-$map_fileX = $_SESSION["map_file"];
+//para o caso da versao 3 do OpenLayers
+//excluir?
+if(isset($_GET["X"])){
+	$box = explode(",",$_GET["BBOX"]);
+	$res = ($box[2] + 180) - ($box[0] + 180);
+	$res = $res / 256;
+	$z = intval((0.703125 / $res) / 4) + 1;
+	$x = floor((($box[0] + 180) / 360) * pow(2, $z));
+	$y = floor((1 - log(tan(deg2rad($box[3])) + 1 / cos(deg2rad($box[3]))) / pi()) /2 * pow(2, $z));
+	
+	$_GET["WIDTH"] = 256;
+	$_GET["HEIGHT"] = 256;
+	$_GET["tms"] = "/".$_GET["layer"]."/".$z."/".$x."/".$y.".png";
+	echo $_GET["BBOX"]." ".$_GET["tms"];exit;
+}
+if(isset($_GET["TileMatrix"])){
+	$_GET["WIDTH"] = 256;
+	$_GET["HEIGHT"] = 256;
+	$z = $_GET["TileMatrix"];
+	$x = $_GET["TileCol"];
+	$y = $_GET["TileRow"];
+	//calcula resolucoes
+	$res = array();
+	$temp = 0.703125;
+	for($i = 0; $i < 40; $i++){
+		$res[] = $temp;
+		$temp = $temp / 2;
+	}
+	$_GET["tms"] = "/wmts/".$_GET["layer"]."/".$z."/".$x."/".$y.".png";
 
+	$top_left_minx = -180;
+	$top_left_maxy = 90;
+
+	$x_size = $res[$z - 1] * 256;
+	$y_size = $x_size;
+
+	$lon1 = $top_left_minx + ($x * $x_size);
+	$lat1 = $top_left_maxy - ($y * $y_size) - $y_size;
+	$lon2 = $top_left_minx + ($x * $x_size) + $x_size;
+	$lat2 = $top_left_maxy - ($y * $y_size);
+
+	$_GET["BBOX"] = $lon1." ".$lat1." ".$lon2." ".$lat2;
+}
+$map_fileX = $_SESSION["map_file"];
 //
 //verifica se o request e OGC
 if(!empty($_GET["request"])){
