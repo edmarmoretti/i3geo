@@ -349,7 +349,7 @@ i3GEOF.tabela =
 						+ i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' ><b> </b></a></div></div></div>";
 
-				janela = i3GEO.janela.cria("550px", "400px", "", "", "", titulo, id, false, "hd", cabecalho, minimiza, function() {
+				janela = i3GEO.janela.cria("570px", "400px", "", "", "", titulo, id, false, "hd", cabecalho, minimiza, function() {
 					i3GEO.guias.ajustaGuiaFerramenta(id, id + "i3GEOtabela");
 				}, true, "", duplica);
 				divid = janela[2].id;
@@ -1306,7 +1306,7 @@ i3GEOF.tabela =
 					[], nome, ordem, i, temp, n = inputs.length;
 				for (i = 0; i < n; i++) {
 					if (inputs[i].type === "checkbox" && inputs[i].checked == true) {
-						listai.push(inputs[i].id + ";" + inputs[i].name);
+						listai.push(inputs[i].id + "|" + inputs[i].name);
 						nome = $i(inputs[i].id + inputs[i].name).value;
 						listanomes.push(nome);
 						ordem = $i("ordem_" + inputs[i].id + inputs[i].name).value;
@@ -1345,7 +1345,7 @@ i3GEOF.tabela =
 					inputs.length;
 				for (i = 0; i < n; i++) {
 					if (inputs[i].checked === true) {
-						listai.push(inputs[i].id + ";" + inputs[i].name);
+						listai.push(inputs[i].id + "|" + inputs[i].name);
 						nome = $i(inputs[i].id + inputs[i].name).value;
 						listanomes.push(nome);
 					}

@@ -178,7 +178,8 @@ i3GEOF.legenda =
 							var tabela = $i("i3GEOlegendalegenda");
 							var trs = tabela.getElementsByTagName("tr");
 							var ncores = trs.length - 1;
-							i3GEO.util.abreColourRamp("", "listaColourRamp", ncores);
+							//$i("i3geo_janelaCorRampComboCabecaSel").value = i3GEOF.legenda.tema;
+							i3GEO.util.abreColourRamp("", "listaColourRamp", ncores, i3GEOF.legenda.tema);
 						}
 					}
 				});

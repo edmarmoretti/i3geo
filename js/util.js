@@ -2415,6 +2415,9 @@ i3GEO.util =
 					+ "&locaplic="
 					+ i3GEO.configura.locaplic, // +janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "", texto = "", id = "i3geo_janelaCorRamp", classe = "hd";
+			if(!temaSel){
+				temaSel = "";
+			}
 			if ($i(id)) {
 				janela = YAHOO.i3GEO.janela.manager.find(id);
 				janela.show();
@@ -2487,7 +2490,8 @@ i3GEO.util =
 					"i3geo_janelaCorRampComboCabecaSel",
 					"none",
 					"ligados",
-					temp);
+					temp,
+					temaSel);
 			}
 		},
 		/**

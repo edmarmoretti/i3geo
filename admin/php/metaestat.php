@@ -496,7 +496,7 @@ switch (strtoupper($funcao))
 		if(!empty($cores)){
 			$cores = str_replace("rgb(","",$cores);
 			$cores = str_replace(")","",$cores);
-			$cores = explode(";",$cores);
+			$cores = explode("|",$cores);
 		}
 		if(empty($limite)){
 			$limite = "";

@@ -196,7 +196,7 @@ function aplicarCores()
 		if(inputs[i].parentNode.style.display !== "none")
 		{listaRGB.push(inputs[i].value);}
 	}
-	doc.getElementById(elemento).value = listaRGB.join(";");
+	doc.getElementById(elemento).value = listaRGB.join("|");
 	try{
 		doc.getElementById(elemento).onchange.call();
 	}

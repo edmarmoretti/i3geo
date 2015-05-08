@@ -17,7 +17,7 @@ substituiCon($map_file,$postgis_mapa);
 $temp = explode(",",$nomesrel);
 $colunasTemp = array();
 foreach($temp as $t){
-	$t1Temp=explode(";",$t);
+	$t1Temp=explode("|",$t);
 	$colunasTemp[] = $t1Temp[0];
 }
 //reordena as colunas
@@ -51,7 +51,7 @@ $temp = explode(",",$itensrel);
 $itensrel = array();
 foreach($temp as $t)
 {
-	$t1=explode(";",$t);
+	$t1=explode("|",$t);
 	$itensrel[] = $t1[0];
 }
 if($itemagruparel != ""  && !in_array($itemagruparel,$itensrel))
@@ -81,31 +81,32 @@ else
 {$convC = true;}
 //$registros[] = array();
 $res_count = $layer->getNumresults();
-for ($i = 0; $i < $res_count; $i++)
-{
+for ($i = 0; $i < $res_count; $i++){
 	$valitem = array();
-	if($versao == 6)
-	{$shape = $layer->getShape($layer->getResult($i));}
-	else{$shape = $layer->getFeature($layer->getResult($i)->shapeindex);}
+	if($versao == 6){
+		$shape = $layer->getShape($layer->getResult($i));
+	}
+	else{
+		$shape = $layer->getFeature($layer->getResult($i)->shapeindex);
+	}
 	$grupo = "";
-	foreach ($itensrel as $item)
-	{
+	foreach ($itensrel as $item){
 		$v = trim($shape->values[$item]);
 		//$v = mb_convert_encoding($v,mb_detect_encoding($v),"ISO-8859-1");
-		if (function_exists("mb_convert_encoding") && $convC == true)
-		{$v = mb_convert_encoding($v,"UTF-8","ISO-8859-1");}
+		if (function_exists("mb_convert_encoding") && $convC == true){
+			$v = mb_convert_encoding($v,"UTF-8","ISO-8859-1");
+		}
 		$valitem[$item] = $v;
 	}
-	if ($itemagruparel != "")
-	{$grupo = $valitem[$itemagruparel];}
-	if($arearel == "true")
-	{
+	if ($itemagruparel != ""){
+		$grupo = $valitem[$itemagruparel];
+	}
+	if($arearel == "true"){
 		$valitem["area"] = calculaarea($shape);
 	}
 	if ($itemagruparel == "")
 	$registros[] = $valitem;
-	else
-	{
+	else{
 		if(!$registros[$grupo])
 		$registros[$grupo]=array($valitem);
 		else
@@ -115,8 +116,7 @@ for ($i = 0; $i < $res_count; $i++)
 $fechou = $layer->close();
 restauraCon($map_file,$postgis_mapa);
 
-if(isset($tiporel) && $tiporel == "csv")
-{
+if(isset($tiporel) && $tiporel == "csv"){
 	echo "<pre>";
 	echo implode(";",explode(",",$nomesrel));
 	if($arearel == "true")
@@ -150,7 +150,7 @@ body,td
 <body>
 <img src='../../imagens/i3geo1.jpg' /><br>
 <?php
-echo "<span style=font-size:18px; >Relat&oacute;rio do tema: <b>".$layer->getmetadata("TEMA")."</b><br></span>";
+echo "<span style=font-size:18px; >Relat&oacute;rio do tema: <b>".converte($layer->getmetadata("TEMA"))."</b><br></span>";
 $ocorrencias = count($registros);
 echo "ocorr&ecirc;ncias: ".$ocorrencias."<br>";
 if ($itemagruparel == "")
@@ -165,20 +165,19 @@ if ($itemagruparel == "")
 	{echo "<td>&aacute;rea em ha</td>";}
 	foreach ($registros as $linhas)
 	{
-		if(count($linhas)>0)
-		{
+		if(count($linhas)>0){
 			echo "<tr style=background-color:$cor >";
 			if ($statrel == "true")
 			echo "<td></td>";
 			$conta = 0;
-			foreach($linhas as $v)
-			{
-				if(is_numeric(trim($v)))
-				{echo "<td style='text-align:right'>".number_format($v,2,",",".")."</td>";}
-				else
-				{echo "<td style='text-align:left'>$v</td>";}
-				if ($statrel == "true")
-				{
+			foreach($linhas as $v){
+				if(is_numeric(trim($v))){
+					echo "<td style='text-align:right'>".number_format($v,2,",",".")."</td>";
+				}
+				else{
+					echo "<td style='text-align:left'>$v</td>";
+				}
+				if ($statrel == "true"){
 					$v = trim($v);
 					if(!is_numeric($v)){$v = 0;}
 					if ($v == $excluirvalor){$v = 0;}
@@ -297,5 +296,16 @@ function calculaarea($geo)
 	$shape = ms_shapeObjFromWkt($s);
 	$area = $shape->getArea();
 	return $area / 10000;
+}
+function converte($texto)
+{
+	if (function_exists("mb_convert_encoding"))
+	{
+		if (!mb_detect_encoding($texto,"UTF-8",true))
+		{
+			$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
+		}
+	}
+	return $texto;
 }
 ?>

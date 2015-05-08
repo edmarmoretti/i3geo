@@ -1178,7 +1178,7 @@ switch (strtoupper($funcao))
 			$cores = str_replace("rgb","",$cores);
 			$cores = str_replace(")","",$cores);
 			$cores = str_replace("(","",$cores);
-			$retorno = $m->aplicacoresrgb(explode(";",$cores));
+			$retorno = $m->aplicacoresrgb(explode("|",$cores));
 		}
 		if ($opcao == "sobeclasse"){
 			$retorno = $m->sobeclasse($idclasse);
