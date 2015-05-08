@@ -2893,7 +2893,7 @@ class Metaestat{
 		//loop pelos resgistros
 		for($i=0;$i<$nreg;++$i){
 			$id = $idsunicos[$i];
-			$vals = explode(";",$valores[$i]);
+			$vals = explode("|",$valores[$i]);
 			$sets = array();
 			//loop pelas colunas
 			for($j=0;$j<$ncols;$j++){

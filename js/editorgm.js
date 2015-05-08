@@ -1233,8 +1233,8 @@ i3GEO.editorGM =
 						valores.push(inputs[j].value);
 					}
 					idsunicosT.push(inputs[0].id.replace(re, ''));
-					colunasT.push(colunas.join(";"));
-					valoresT.push(valores.join(";"));
+					colunasT.push(colunas.join("|"));
+					valoresT.push(valores.join("|"));
 				}
 				i3GEO.janela.AGUARDEMODAL = true;
 				i3GEO.janela.abreAguarde("aguardeSalvaAtributos", "Salvando...");
@@ -1247,9 +1247,9 @@ i3GEO.editorGM =
 					+ "&colunas="
 					+ colunasT[0]
 					+ "&valores="
-					+ valoresT.join("|")
+					+ valoresT.join("#")
 					+ "&idsunicos="
-					+ idsunicosT.join(";"));
+					+ idsunicosT.join("|"));
 			}
 		},
 		/**

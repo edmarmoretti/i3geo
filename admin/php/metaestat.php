@@ -1643,9 +1643,9 @@ switch (strtoupper($funcao))
 	case "SALVAATRIBUTOSMEDIDAVARIAVEL":
 		/*	"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+identificador_regiao+"&id_medida_variavel="+id_medida_variavel+"&colunas="+colunasT[0]+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT[0]
 		*/
-		$valores = explode("|",$valores);//array de uma lista de strings com valores separados por ;
-		$idsunicos = explode(";",$idsunicos);//array
-		$colunas = explode(";",$colunas);//array
+		$valores = explode("#",$valores);//array de uma lista de strings com valores separados por ;
+		$idsunicos = explode("|",$idsunicos);//array
+		$colunas = explode("|",$colunas);//array
 		$m = new Metaestat();
 		$resultado = $m->salvaAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$idsunicos,$colunas,$valores);
 		retornaJSON($resultado);
