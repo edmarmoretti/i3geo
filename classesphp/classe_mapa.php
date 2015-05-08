@@ -145,10 +145,10 @@ class Mapa
 		{
 			$metadata = $l->getmetadata("itembuscarapida");
 			if($metadata != ""){
-				$lista[] = $metadata.";".$l->name;
+				$lista[] = $metadata.",".$l->name;
 			}
 		}
-		return implode(",",$lista);
+		return implode("|",$lista);
 	}
 	/*
 	 Method: mudaoutputformat

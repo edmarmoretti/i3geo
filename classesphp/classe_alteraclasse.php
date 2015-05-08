@@ -709,7 +709,7 @@ class Alteraclasse
 		{
 			$classe = $this->layer->getclass($i);
 			$numestilos = $classe->numstyles;
-			$o = $i * $n;
+			$o = ($i * $n) + 5;
 			for($j=0;$j<$numestilos;++$j)
 			{
 				$estilo = $classe->getstyle($j);

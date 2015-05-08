@@ -179,7 +179,7 @@ i3GEOF.busca = {
 			ins += ("<table class=lista >");
 			n = retorno.data.valores.length;
 			for (i=0;i<n; i++){
-				ins += "<tr><td><input size=2 style='cursor:pointer;border:0px solid white;' name='"+retorno.data.valores[i].item+";"+retorno.data.valores[i].tema+"' type=checkbox /></td>";
+				ins += "<tr><td><input size=2 style='cursor:pointer;border:0px solid white;' name='"+retorno.data.valores[i].item+","+retorno.data.valores[i].tema+"' type=checkbox /></td>";
 				ins += "<td>&nbsp;"+retorno.data.valores[i].item+" - "+retorno.data.valores[i].tema+"</td></tr>";
 			}
 			ins += "</table>";
@@ -229,10 +229,11 @@ i3GEOF.busca = {
 				if ($i("i3GEObuscaregiao").checked === true)
 				{onde = "regiao";}
 				palavra = i3GEO.util.removeAcentos(palavra);
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listavaloresitens&palavra="+palavra+"&lista="+listai.toString()+"&tipo="+tipo+"&onde="+onde+"&ext="+i3GEO.parametros.mapexten;
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid;
 				cp = new cpaint();
 				cp.set_response_type("json");
-				cp.call(p,"listavaloresitens",i3GEOF.busca.mostraBusca);
+				cp.set_transfer_mode('POST');
+				cp.call(p,"listavaloresitens",i3GEOF.busca.mostraBusca,"funcao=listavaloresitens","palavra="+palavra,"lista="+listai.toString(),"tipo="+tipo,"onde="+onde,"ext="+i3GEO.parametros.mapexten);
 			}
 		}
 	},

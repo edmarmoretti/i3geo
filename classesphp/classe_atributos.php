@@ -661,25 +661,22 @@ class Atributos
 	{
 		//error_reporting(0);
 		$resultado = array();
-		if ($onde == "mapa")
-		{
+		if ($onde == "mapa"){
 			$this->mapa = extPadrao($this->mapa);
 		}
-		$ptvs = explode(",",$lista);
+		$ptvs = explode("|",$lista);
 		//monta a lista de temas que serao utilizados
-		foreach ($ptvs as $p)
-		{
-			$pp = explode(";",$p);
+		foreach ($ptvs as $p){
+			$pp = explode(",",$p);
 			$temas[] = $pp[1];
 		}
 		$temas = array_unique($temas);
 		//monta a lista de itens por tema
-		foreach ($temas as $tema)
-		{
+		foreach ($temas as $tema){
 			$temp = array();
 			foreach ($ptvs as $p)
 			{
-				$pp = explode(";",$p);
+				$pp = explode(",",$p);
 				if ($pp[1] == $tema)
 				{
 					$temp[] = $pp[0];
@@ -689,30 +686,26 @@ class Atributos
 		}
 		$encontrado = "nao";
 		$palavra = trim($palavra);
-		foreach ($temas as $tema)
-		{
+		foreach ($temas as $tema){
 			$registros = array();
 			$items = $temasi[$tema];
 			$l = $this->mapa->getlayerbyname($tema);
 			$this->layer = $l;
 			$l->set("template","none.htm");
-			if ($l->data == "")
-			{
+			if ($l->data == ""){
 				return "Erro. O tema n&atilde;o tem tabela";
 			}
-			if(strtoupper($l->getmetadata("convcaracter")) == "NAO")
-			{
+			if(strtoupper($l->getmetadata("convcaracter")) == "NAO"){
 				$convC = false;
 			}
-			else
-			{$convC = true;
+			else{
+				$convC = true;
 			}
 			$filtro = $l->getfilterstring();
 			if ($filtro != ""){
 				$l->setfilter("");
 			}
 			$b = "&Aacute;&Atilde;&Otilde;&Oacute;&Ocirc;&aacute;&atilde;&acirc;&agrave;&oacute;&otilde;&ocirc;&ograve;&uacute;&ucirc;&iacute;&ecirc;&eacute;&ccedil;";
-
 			$trocas = "AAOOOaaaaoooouuieecAAOOOaaaaoooouuieecAAOOOaaaaoooouuieec";
 			$buscas = b.(html_entity_decode($b,ENT_NOQUOTES,'UTF8')).(html_entity_decode($b,ENT_NOQUOTES,'ISO8859-1'));
 			$sopen = $l->open();
@@ -722,8 +715,7 @@ class Atributos
 			$prjMapa = $this->mapa->getProjection();
 			$prjTema = $l->getProjection();
 			$ret = $this->mapa->extent;
-			if (($prjTema != "") && ($prjMapa != $prjTema))
-			{
+			if (($prjTema != "") && ($prjMapa != $prjTema))	{
 				$projInObj = ms_newprojectionobj($prjTema);
 				$projOutObj = ms_newprojectionobj($prjMapa);
 				$status = $ret->project($projInObj, $projOutObj);
@@ -731,12 +723,11 @@ class Atributos
 					$ret = $this->mapa->extent;
 				}
 			}
+
 			$fr = array();
-			if (@$l->queryByrect($ret) == MS_SUCCESS)
-			{
+			if (@$l->queryByrect($ret) == MS_SUCCESS){
 				$res_count = $l->getNumresults();
-				for ($i = 0; $i < $res_count; ++$i)
-				{
+				for ($i = 0; $i < $res_count; ++$i)	{
 					$valitem = array();
 					if($this->v == 6){
 						$shape = $l->getShape($l->getResult($i));
@@ -749,11 +740,9 @@ class Atributos
 					}
 					$novoreg = array();
 					$r = array();
-					foreach ($items as $item)
-					{
+					foreach ($items as $item){
 						$v = trim($shape->values[$item]);
-						if ($tipo == "exata")
-						{
+						if ($tipo == "exata"){
 							if ($v == $palavra || (strtr($v,$buscas,$trocas) == strtr($palavra,$buscas,$trocas)))
 							{
 								if($convC == true)
@@ -764,11 +753,8 @@ class Atributos
 								$encontrado = "sim";
 							}
 						}
-						else
-						{
-
-							if (strtolower($v) == strtolower($palavra) || (stristr(strtr(strtolower($v),$buscas,$trocas),strtr(strtolower($palavra),$buscas,$trocas))))
-							{
+						else{
+							if (strtolower($v) == strtolower($palavra) || (stristr(strtr(strtolower($v),$buscas,$trocas),strtr(strtolower($palavra),$buscas,$trocas)))){
 								if($convC == true){
 									$v = $this->converte($v);
 								}
@@ -777,11 +763,9 @@ class Atributos
 							}
 						}
 					}
-					if ($encontrado == "sim")
-					{
+					if ($encontrado == "sim"){
 						$ret = $this->extensaoShape($shape,$l);
-						if (($prjTema != "") && ($prjMapa != $prjTema))
-						{
+						if (($prjTema != "") && ($prjMapa != $prjTema)){
 							$ret->project($projInObj, $projOutObj);
 						}
 						$novoreg["box"] = $ret;
