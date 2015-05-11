@@ -89,6 +89,9 @@ if(isset($_GET["outputFormat"]) && $_GET["outputFormat"] != ""){
 if(isset($_GET["outputformat"]) && $_GET["outputformat"] != ""){
 	$_GET["OUTPUTFORMAT"] = $_GET["outputformat"];
 }
+if(strtolower($OUTPUTFORMAT) == "geojson"){
+	$OUTPUTFORMAT = "json";
+}
 $cache = true;
 require_once(dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
