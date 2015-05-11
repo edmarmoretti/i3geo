@@ -1484,7 +1484,7 @@ switch (strtoupper($funcao))
 		if(!isset($urli3geo)){
 			$urli3geo = "";
 		}
-		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma,$filtro);
 		if(!isset($idmenu)){
 			$idmenu="";
 		}

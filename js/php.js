@@ -276,6 +276,15 @@ i3GEO.php =
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
 				"funcao=pegalistadegrupos&map_file=&g_sid=" + i3GEO.configura.sid + "&idmenu=" + id_menu
 					+ "&listasistemas=nao&listasgrupos=" + listasgrupos + "&idioma=" + i3GEO.idioma.ATUAL;
+			//tipo de filtragem
+			if(i3GEO.arvoreDeTemas){
+				if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD === true){
+					par += "&filtro=download";
+				}
+				else if	(i3GEO.arvoreDeTemas.FILTRAOGC === true){
+					par += "&filtro=ogc";
+				}
+			}
 			cpJSON.call(p, "pegalistadegrupos", funcao, par);
 		},
 		/**

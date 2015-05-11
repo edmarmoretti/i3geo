@@ -48,6 +48,9 @@ class Arvore
 	//public $sql_grupos = "select i3geoadmin_grupos.nome_grupo,id_n1,id_menu,i3geoadmin_n1.publicado,n1_perfil from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo ";
 	//nomes de todos os grupos
 	public $sql_todosgrupos = "select * from i3geoadmin_grupos ";
+	//tipo de filtro
+	//ogc|download|""
+	public $filtro;
 	//temas na raiz
 	//public $sql_temasraiz = "select id_raiz,i3geoadmin_raiz.id_tema,nome_tema,tipoa_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
 	//todos os temas
@@ -65,9 +68,10 @@ class Arvore
 
 	idioma {string} - default = "pt"
 	*/
-	function __construct($locaplic,$idioma="pt")
+	function __construct($locaplic,$idioma="pt",$filtro="")
 	{
 		$this->locaplic = $locaplic;
+		$this->filtro = $filtro;
 		$dbh = "";
 		error_reporting(0);
 		include($locaplic."/admin/php/conexao.php");
@@ -89,6 +93,9 @@ class Arvore
 			$coluna = $idioma;
 		}
 		$this->sql_grupos = "select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,id_menu,i3geoadmin_n1.publicado,n1_perfil from ".$this->esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo ";
+		if($filtro === "ogc" || $filtro === "download"){
+			$this->sql_grupos = "select * from (select DISTINCT grupos.$coluna as nome_grupo,gr.id_n1,gr.id_menu,gr.publicado,gr.n1_perfil, gr.ordem from ".$this->esquemaadmin."i3geoadmin_grupos as grupos, ".$this->esquemaadmin."i3geoadmin_n1 as gr, ".$this->esquemaadmin."i3geoadmin_n2 as sg, ".$this->esquemaadmin."i3geoadmin_n3 as t where gr.id_grupo = grupos.id_grupo AND sg.id_n1 = gr.id_n1 AND t.id_n2 = sg.id_n2 ) as s ";
+		}
 
 		if($idioma == "pt"){
 			$coluna = "nome_subgrupo";
@@ -476,8 +483,10 @@ class Arvore
 	{array}
 	*/
 	function pegaGruposMenu($id_menu){
-		$grupos = $this->execSQL($this->sql_grupos."where ".$this->pubsql." id_menu='$id_menu' order by ordem");
-		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 order by ordem");
+		$sqlgrupos = $this->sql_grupos."where ".$this->pubsql." id_menu='$id_menu' order by ordem";
+		$sqlraiz = $this->sql_temasraiz."where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 order by ordem";
+		$grupos = $this->execSQL($sqlgrupos);
+		$raiz = $this->execSQL($sqlraiz);
 		$raiz = $this->validaTemas($raiz,"codigo_tema");
 		return array("raiz"=>$raiz,"grupos"=>$grupos);
 	}

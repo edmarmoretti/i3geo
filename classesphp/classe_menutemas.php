@@ -61,7 +61,7 @@ $editores - (depreciado) array com os editores cadastrados no ms_configura.php
 
 $idioma - (opcional) pt|en|es|it
 */
-	function __construct($map_file="",$perfil="",$locaplic="",$urli3geo="",$editores="",$idioma="pt")
+	function __construct($map_file="",$perfil="",$locaplic="",$urli3geo="",$editores="",$idioma="pt", $filtro="")
 	{
 		if($locaplic == ""){
 			include(dirname(__FILE__)."/../ms_configura.php");
@@ -71,6 +71,7 @@ $idioma - (opcional) pt|en|es|it
 		$this->locaplic = $locaplic;
 		$this->urli3geo = $urli3geo;
 		$this->idioma = $idioma;
+		$this->filtro = $filtro;
 		if (($map_file != "") && (file_exists($map_file)))
 		{
 			$this->mapa = ms_newMapObj($map_file);
@@ -139,6 +140,8 @@ listasistemas - sim|nao pega a lista de sistemas para montar a &aacute;rvore de 
 
 listasgrupos - sim|nao lista tamb&eacute;m os subgrupos associados
 
+filtro ogc|download|""
+
 return:
 
 array
@@ -156,7 +159,7 @@ array
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
 				include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
-				$arvore = new Arvore($this->locaplic,$this->idioma);
+				$arvore = new Arvore($this->locaplic,$this->idioma,$this->filtro);
 				$grupos = $arvore->formataGruposMenu($idmenu,$this->perfil,$listasgrupos);
 				unset($arvore);
 			}
