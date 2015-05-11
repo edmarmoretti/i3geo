@@ -48,7 +48,7 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-// TODO integrar Cesium http://cesiumjs.org/2013/04/12/Cesium-up-and-running/
+//TODO integrar Cesium http://cesiumjs.org/2013/04/12/Cesium-up-and-running/
 i3GEO.Interface =
 	{
 		/**
