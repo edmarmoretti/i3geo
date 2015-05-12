@@ -744,6 +744,7 @@ switch (strtoupper($funcao))
 		break;
 	case "ALTERARDISPO":
 		alterarDispo();
+		alteraTemas();
 		retornaJSON(pegaDispo());
 		exit;
 		break;
@@ -1674,6 +1675,10 @@ function pegaDispo()
 	$dados["download"] = $layer->getmetadata("download");
 	$dados["arquivodownload"] = $layer->getmetadata("arquivodownload");
 	$dados["arquivokmz"] = $layer->getmetadata("arquivokmz");
+	$dados["ogc_tema"] = $layer->getmetadata("permiteogc");
+	$dados["download_tema"] = $layer->getmetadata("permitedownload");
+	$dados["kml_tema"] = $layer->getmetadata("permitekml");
+	$dados["kmz_tema"] = $layer->getmetadata("permitekmz");
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
 	return $dados;
@@ -1712,17 +1717,31 @@ function alterarEditavel()
 }
 function alterarDispo()
 {
-	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic,$download,$arquivodownload,$arquivokmz;
+	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic,$download,$arquivodownload,$arquivokmz,$ogc_tema,$kml_tema,$kmz_tema,$download_tema;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$layer->setmetadata("download",$download);
 	$layer->setmetadata("arquivodownload",$arquivodownload);
 	$layer->setmetadata("arquivokmz",$arquivokmz);
+	$layer->setmetadata("permiteogc",$ogc_tema);
+	$layer->setmetadata("permitekml",$kml_tema);
+	$layer->setmetadata("permitekmz",$kmz_tema);
+	$layer->setmetadata("permitedownload",$download_tema);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";
 }
+//essa funcao existe tambem em menutemas.php
+function alteraTemas()
+{
+	global $esquemaadmin,$codigoLayer,$ogc_tema,$kml_tema,$kmz_tema,$locaplic,$download_tema;
+	include("conexao.php");
+	$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET download_tema = '$download_tema.', ogc_tema='$ogc_tema',kml_tema='$kml_tema',kmz_tema='$kmz_tema' WHERE codigo_tema = '$codigoLayer'");
+	$dbhw = null;
+	$dbh = null;
+}
+
 function pegaConexao()
 {
 	global $codigoMap,$codigoLayer,$locaplic,$postgis_mapa;

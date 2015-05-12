@@ -689,7 +689,21 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "dispo")
 	{
-		campos = new Array("download","arquivodownload","arquivokmz");
+		//validacao
+		if($i("kml_tema") && $i("ogc_tema")){
+			if(($i("ogc_tema").value).toLowerCase() == "sim"){
+				$i("kml_tema").value = "SIM";
+			}
+		}
+		if($i("kml_tema") && $i("kmz_tema")){
+			if(($i("kmz_tema").value).toLowerCase() == "sim"){
+				$i("kml_tema").value = "SIM";
+			}
+			if(($i("kml_tema").value).toLowerCase() == "nao"){
+				$i("kmz_tema").value = "NAO";
+			}
+		}
+		campos = new Array("download","arquivodownload","arquivokmz","ogc_tema","kml_tema","kmz_tema","download_tema");
 		par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		prog = "../php/editormapfile.php?funcao=alterarDispo";
 	}

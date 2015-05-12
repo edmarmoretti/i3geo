@@ -152,7 +152,7 @@ body {
 			<div style=float:left; >
 			Estilo: <select onchange="mudaEstilo(this.value)">
 				<option value=elegant >Elegant</option>
-				<option value=ambiance >Ambiance</option>
+				<option value=ambiance >Ambiance</option> 
 				<option value=cobalt >Cobalt</option>
 				<option value=night >Night</option>
 				<option value=neo >Neo</option>
@@ -173,7 +173,7 @@ Ctrl+a - Seleciona tudo<br>
 Ctrl+d - Apaga a linha<br>
 Ctrl-z - Desfazer<br>
 Ctrl-Up - Sobe<br>
-Alt-left - Início da linha<br>
+Alt-left - In&iacute;cio da linha<br>
 
 			
 			</fieldset>

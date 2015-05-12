@@ -28,6 +28,25 @@ function montaEditorDispo(dados)
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
+	
+	ins += "<p>Permite acesso via WMS/WFS? (n&atilde;o ocasiona restri&ccedil;&atilde;o em temas do tipo gvSIG)<br>";
+	ins += "<select  id='ogc_tema' >";
+	ins += core_combosimnao(dados.ogc_tema);
+	ins += "</select></p>";
+	ins += "<p>Permite o download na aplica&ccedil;&atilde;o datadownload.htm? (n&atilde;o afeta temas do tipo gvSIG) (n&atilde;o afeta a permiss&atilde;o de download definida no item 'disponibilidade' existente em cada layer)<br>";
+	ins += "<select  id='download_tema' >";
+	ins += core_combosimnao(dados.download_tema);
+	ins += "</select></p>";
+	ins += "<p>Permite acesso via kml? (n&atilde;o restringe em temas do tipo gvSIG)<br>";
+	ins += "<select  id='kml_tema' >";
+	ins += core_combosimnao(dados.kml_tema);
+	ins += "</select></p>";
+	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)? (n&atilde;o restringe em temas do tipo gvSIG)<br>";
+	ins += "<select  id='kmz_tema' >";
+	ins += core_combosimnao(dados.kmz_tema);
+	ins += "</select></p>";
+	
+	
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
 	if($i("cDownload")){
