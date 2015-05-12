@@ -297,6 +297,15 @@ i3GEO.php =
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
 				"funcao=pegalistadeSubgrupos&g_sid=" + i3GEO.configura.sid + "&idmenu=" + id_menu + "&grupo=" + id_grupo
 					+ "&map_file=&idioma=" + i3GEO.idioma.ATUAL;
+			//tipo de filtragem
+			if(i3GEO.arvoreDeTemas){
+				if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD === true){
+					par += "&filtro=download";
+				}
+				else if	(i3GEO.arvoreDeTemas.FILTRAOGC === true){
+					par += "&filtro=ogc";
+				}
+			}
 			cpJSON.call(p, "pegalistadeSubgrupos", funcao, par);
 		},
 		/**

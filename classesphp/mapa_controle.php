@@ -1529,7 +1529,7 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGALISTADESUBGRUPOS":
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma,$filtro);
 		if(!isset($idmenu)){
 			$idmenu = "";
 		}

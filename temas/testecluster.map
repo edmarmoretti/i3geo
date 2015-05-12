@@ -2,6 +2,10 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
+    CLUSTER
+      MAXDISTANCE 20
+      REGION "rectangle"
+    END # CLUSTER
     CONNECTION "host=10.1.2.25 port=5432 dbname=dbspo user=luiscrneves password=130670"
     CONNECTIONTYPE POSTGIS
     DATA "geom from (
@@ -28,27 +32,23 @@ WHERE
 dbacoes_saude.tb_ubs_det.func_total = 'S' and dbacoes_saude.tb_ubs_det.ano_ubs_det=2014 and dbacoes_saude.tb_ubs_det.mes_ubs_det=12    
     ) as foo using unique co_cnes using srid=4674"
     METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "CLASSE"	"SIM"
       "permitekmz"	"nao"
-      "permitedownload"	"sim"
-      "permitekml"	"sim"
-      "permiteogc"	"sim"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "permitedownload"	"nao"
+      "metaestat"	""
+      "permiteogc"	"nao"
+      "permitekml"	"nao"
       "TEMA"	"Cluster"
       "IDENTIFICA"	"SIM"
-      #"cache" "sim"
-    END
+    END # METADATA
     NAME "testecluster"
     STATUS DEFAULT
     TEMPLATE "none.htm"
+    TILEITEM "location"
     TYPE POINT
     UNITS METERS
-    CLUSTER
-     MAXDISTANCE 20  # in pixels
-     REGION "rectangle"  # can be rectangle or ellipse
-     #GROUP (expression)  # an expression to create separate groups for each value
-     #FILTER (expression) # a logical expression to specify the grouping condition
-	END
-	#CLASSITEM "Cluster_FeatureCount"
     CLASS
       NAME "= 1"
       EXPRESSION ([Cluster:FeatureCount] = 1)
@@ -57,64 +57,66 @@ dbacoes_saude.tb_ubs_det.func_total = 'S' and dbacoes_saude.tb_ubs_det.ano_ubs_d
         OUTLINECOLOR 200 200 200
         SIZE 10
         SYMBOL "ponto"
-      END
-    END
+      END # STYLE
+    END # CLASS
     CLASS
       NAME "> 1"
+      EXPRESSION (([Cluster:FeatureCount] > 1) AND ([Cluster:FeatureCount] <= 500))
       LABEL
         FONT "arial"
         SIZE 8
         OFFSET 0 0
         POSITION CC
+        SHADOWSIZE 1 1
         TEXT "[Cluster:FeatureCount]"
         TYPE TRUETYPE
       END # LABEL
-      EXPRESSION (([Cluster:FeatureCount] > 1) AND ([Cluster:FeatureCount] <= 500))
       STYLE
         COLOR 230 230 230
         OUTLINECOLOR 200 200 200
         SIZE 20
         SYMBOL "ponto"
-      END
-    END
+      END # STYLE
+    END # CLASS
     CLASS
       NAME "> 1"
+      EXPRESSION (([Cluster:FeatureCount] > 500) AND ([Cluster:FeatureCount] <= 1000))
       LABEL
         FONT "arial"
         SIZE 8
         OFFSET 0 0
         POSITION CC
+        SHADOWSIZE 1 1
         TEXT "[Cluster:FeatureCount]"
         TYPE TRUETYPE
       END # LABEL
-      EXPRESSION (([Cluster:FeatureCount] > 500) AND ([Cluster:FeatureCount] <= 1000))
       STYLE
         COLOR 240 240 240
         OUTLINECOLOR 200 200 200
         SIZE 28
         SYMBOL "ponto"
-      END
-    END
+      END # STYLE
+    END # CLASS
     CLASS
       NAME "> 1"
+      EXPRESSION ([Cluster:FeatureCount] > 1000)
       LABEL
         FONT "arial"
         SIZE 8
         OFFSET 0 0
         POSITION CC
+        SHADOWSIZE 1 1
         TEXT "[Cluster:FeatureCount]"
         TYPE TRUETYPE
       END # LABEL
-      EXPRESSION ([Cluster:FeatureCount] > 1000)
       STYLE
         COLOR 250 250 250
         OUTLINECOLOR 200 200 200
         SIZE 32
         SYMBOL "ponto"
-      END
-    END
- 
-  END
+      END # STYLE
+    END # CLASS
+  END # LAYER
 
-END
+END # MAP
 

@@ -192,7 +192,7 @@ array
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
 				include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
-				$arvore = new Arvore($this->locaplic,$this->idioma);
+				$arvore = new Arvore($this->locaplic,$this->idioma,$this->filtro);
 				$subGrupos = $arvore->formataSubgruposGrupo($idmenu,$codgrupo,$this->perfil);
 				unset($arvore);
 				return($subGrupos);

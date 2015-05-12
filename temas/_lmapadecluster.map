@@ -5,17 +5,20 @@ MAP
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
     METADATA
-      "cache"	""
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
-      "CLASSE"	"SIM"
+      "cache"	""
       "ltempoitemdescricao"	""
+      "CLASSE"	"SIM"
       "ltempoiteminicio"	""
-      "permitekmz"	"nao"
       "ltempoitemtip"	""
-      "permitedownload"	"sim"
+      "permitekmz"	"nao"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "permitedownload"	"nao"
+      "metaestat"	""
       "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"tipoEstilos":"default","gridSize":"50"}}'
-      "permitekml"	"sim"
-      "permiteogc"	"sim"
+      "permiteogc"	"nao"
+      "permitekml"	"nao"
       "TEMA"	"Localidades (usar com mapa de cluster)"
       "cortepixels"	"0"
     END # METADATA
@@ -25,39 +28,31 @@ MAP
     TILEITEM "location"
     TYPE POINT
     UNITS METERS
-    #
-    #se vc quiser especificar o simbolo que achar melhor, crie classes com a URL do simbolo e o SIZE
-    #a primeira classe sera utilizada como o simbolo para pontos (fora do cluster) e as demais como o simbolo para os clusters
-    #vc pode criar quantos clusters quiser
-    #no METADATA PLUGINI3GEO voce deve colocar "tipoEstilos":"" no lugar de "tipoEstilos":"default"
-    #
     CLASS
       NAME "Ponto"
       STYLE
         SIZE 20
-        #SYMBOL "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/people35.png"
       END # STYLE
     END # CLASS
     CLASS
       NAME "Cluster 1"
       STYLE
         SIZE 35
-        #SYMBOL "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/people35.png"
       END # STYLE
     END # CLASS
     CLASS
       NAME "Cluster 2"
       STYLE
-      	SIZE 45
-        #SYMBOL "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/people45.png"
+        SIZE 45
       END # STYLE
     END # CLASS
-     CLASS
+    CLASS
       NAME "Cluster 3"
       STYLE
         SIZE 55
-        #SYMBOL "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/people55.png"
       END # STYLE
     END # CLASS
   END # LAYER
+
 END # MAP
+

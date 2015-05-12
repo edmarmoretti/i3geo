@@ -94,7 +94,9 @@ class Arvore
 		}
 		$this->sql_grupos = "select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,id_menu,i3geoadmin_n1.publicado,n1_perfil from ".$this->esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo ";
 		if($filtro === "ogc" || $filtro === "download"){
-			$this->sql_grupos = "select * from (select DISTINCT grupos.$coluna as nome_grupo,gr.id_n1,gr.id_menu,gr.publicado,gr.n1_perfil, gr.ordem from ".$this->esquemaadmin."i3geoadmin_grupos as grupos, ".$this->esquemaadmin."i3geoadmin_n1 as gr, ".$this->esquemaadmin."i3geoadmin_n2 as sg, ".$this->esquemaadmin."i3geoadmin_n3 as t where gr.id_grupo = grupos.id_grupo AND sg.id_n1 = gr.id_n1 AND t.id_n2 = sg.id_n2 ) as s ";
+			//esse sql retorna tambem os grupos dos temas que estao na raiz do grupo
+			$this->sql_grupos = "select DISTINCT * from (select grupos.$coluna as nome_grupo,gr.id_n1,gr.id_menu,gr.publicado,gr.n1_perfil, gr.ordem from ".$this->esquemaadmin."i3geoadmin_grupos as grupos, ".$this->esquemaadmin."i3geoadmin_n1 as gr, ".$this->esquemaadmin."i3geoadmin_n2 as sg, ".$this->esquemaadmin."i3geoadmin_n3 as t, i3geoadmin_temas as temas where gr.id_grupo = grupos.id_grupo AND sg.id_n1 = gr.id_n1 AND t.id_n2 = sg.id_n2 AND t.id_tema = temas.id_tema AND (temas.ogc_tema != 'NAO' OR temas.download_tema != 'NAO' ) UNION select c.nome_grupo as nome_grupo,a.id_nivel as id_n1,a.id_menu,'SIM' as publicado,a.perfil as n1_perfil, a.ordem from ".$this->esquemaadmin."i3geoadmin_raiz as a, ".$this->esquemaadmin."i3geoadmin_temas as b, ".$this->esquemaadmin."i3geoadmin_grupos as c, ".$this->esquemaadmin."i3geoadmin_n1 as d where nivel = 1 AND a.id_tema = b.id_tema AND a.id_nivel = d.id_n1 AND d.id_grupo = c.id_grupo) as s ";
+			//echo $this->sql_grupos;exit;
 		}
 
 		if($idioma == "pt"){
