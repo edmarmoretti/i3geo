@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello World!</title>
+    <script src="Build/Cesium/Cesium.js"></script>
+    <style>
+      @import url(Build/Cesium/Widgets/widgets.css);
+      #cesiumContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      html {
+        height: 100%;
+      }
+
+      body {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        height: 100%;
+      }
+    </style>
+  </head>
+<body>
+  <div id="cesiumContainer"></div>
+  <script>
+    var viewer = new Cesium.Viewer('cesiumContainer');
+    // Add a WMS imagery layer
+var imageryLayers = viewer.imageryLayers;
+imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
+    url : 'http://localhost/i3geo/ogc.php',
+    layers : '_lbiomashp',
+    parameters : {
+        transparent : true,
+        format : 'image/png'
+    }
+}));
+  </script>
+</body>
+</html>

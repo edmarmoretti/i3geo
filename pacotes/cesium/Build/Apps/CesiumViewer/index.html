@@ -10,10 +10,26 @@
     <title>Cesium Viewer</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="CesiumViewer.css" media="screen">
+
     <script data-main="CesiumViewerStartup" src="./require.js"></script>
+    
 </head>
 <body style="background: #000;">
     <div id="cesiumContainer" class="fullWindow"></div>
     <div id="loadingIndicator" class="loadingIndicator"></div>
+      <script>
+
+var widget = new Cesium.CesiumWidget('cesiumContainer');
+var url='http://localhost/i3geo/ogc.php'; //Geoserver URL
+var layers = widget.scene.globe.imageryLayers;
+    layers.removeAll();
+    layers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
+        url : url,        
+        layers: '_llocali'// Here just give layer name
+    }));
+    //cesiumWidget.dataSources.add(czmlSource);
+
+//Sandcastle.finishedLoading();
+</script>
 </body>
 </html>
