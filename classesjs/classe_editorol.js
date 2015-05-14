@@ -687,6 +687,9 @@ i3GEO.editorOL = {
 			xy = lonlat.split(","),
 			u = layers[0].url+"&REQUEST=getfeature&service=wfs&version=1.0.0";
 			u += "&OUTPUTFORMAT=gml2&typename="+layers[0].params.LAYERS;
+			if(i3GEO.Interface.openlayers.googleLike === true){
+				u += "&SRS=EPSG:3857";
+			}
 			//remove parametros nao desejados
 			u = u.replace("&cache=sim","&DESLIGACACHE=sim");
 			u = u.replace("&Z=${z}&X=${x}&Y=${y}","");
