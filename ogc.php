@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Gerador de servi&ccedil;os OGC
+ Title: Gerador de servi&ccedil;os OGC
 
 Gera web services nos padr&otilde;es OGC para os temas existentes na pasta i3geo/temas
 
@@ -45,13 +45,13 @@ legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
 perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
 
 format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
-	abrir o mashup do OpenLayers com as camadas definida em temas.
-	Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
+abrir o mashup do OpenLayers com as camadas definida em temas.
+Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
 
 OUTPUTFORMAT - em getfeature, aceita tamb&eacute;m shape-zip para download de shapefile e csv para download de csv compactado
 
 id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
-	nao deve ser utilizado junto com tema
+nao deve ser utilizado junto com tema
 
 restauramapa - ID de um mapa salvo no sistema de administracao. O mapa e restaurado e tratado como WMS
 
@@ -59,11 +59,11 @@ DESLIGACACHE (opcional) {sim|nao} - forca a nao usar o cache de imagens qd defin
 
 filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
 
-  Exemplo de filtro
+Exemplo de filtro
 
-  http://localhost/i3geo/ogc.php?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&tema=_lbiomashp&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=_lbiomashp
+http://localhost/i3geo/ogc.php?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&tema=_lbiomashp&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=_lbiomashp
 
-  no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
+no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
 
 Exemplos:
 
@@ -392,8 +392,8 @@ else{
 							$l->set("status",MS_OFF);
 						}
 						/*
-						if($cache == true && strtolower($l->getmetadata('cache')) == 'sim' && $tipo == '' && count($tema) == 1){
-							carregaCacheImagem($_GET['BBOX'],$tx,$_GET['WIDTH'],$_GET['HEIGHT'],$cachedir);
+						 if($cache == true && strtolower($l->getmetadata('cache')) == 'sim' && $tipo == '' && count($tema) == 1){
+						carregaCacheImagem($_GET['BBOX'],$tx,$_GET['WIDTH'],$_GET['HEIGHT'],$cachedir);
 						}
 						*/
 						$l->setmetadata("ows_title",pegaNome($l));
@@ -455,7 +455,7 @@ else{
 							if(!in_array("POLYLINE_NO_CLIP=True",$pr)){
 								$l->setprocessing("POLYLINE_NO_CLIP=True");
 							}
-													}
+						}
 						//
 						//verifica se existem parametros de substituicao passados via url
 						//
@@ -871,11 +871,50 @@ if(isset($OUTPUTFORMAT)){
 	}
 }
 ms_ioinstallstdouttobuffer();
+
 //verifica parametro outputformat
 if(strtolower($req->getValueByName("REQUEST")) == "getmap" && $req->getValueByName("format") == ""){
 	$req->setParameter("format","image/png");
 }
+
+if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo" && $_GET["info_format"] == "application/json"){
+	$req->setParameter("info_format","text/plain");
+	$oMap->owsdispatch($req);
+	ms_iostripstdoutbuffercontentheaders();
+	ob_clean();
+	$r = ms_iogetstdoutbufferstring();
+	$t = explode("=",$r);
+	$n = array();
+	if(count($t) > 1){
+		$v = str_replace("\\n","",$t[1]);
+		$v = str_replace("\\r","",$v);
+		if(trim($v) != ""){
+			$va = trim($v);
+			$coluna = trim(explode(":",$t[0])[2]);
+			$valor = str_replace("'","",$va);
+			$n[] = array (
+					"type" => "FeatureCollection",
+					"features" => array(
+							array(
+									"type"=>"Feature",
+									"id" => "",
+									"geometry" => array(),
+									"properties" => array(
+											$coluna => $valor
+									),
+									"geometry_name" => ""
+							)
+					)
+			);
+		}
+	}
+	header("Content-type: application/json");
+	echo json_encode($n[0]);
+	exit;
+}
+
 $oMap->owsdispatch($req);
+
 $contenttype = ms_iostripstdoutbuffercontenttype();
 if(strtolower($request) == "getcapabilities"){
 	header('Content-Disposition: attachment; filename=getcapabilities.xml');
@@ -888,6 +927,7 @@ if(strtolower($OUTPUTFORMAT) == "geojson"){
 	ms_iostripstdoutbuffercontentheaders();
 	header("Content-type: application/json; subtype=geojson");
 }
+
 $buffer = ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
 //
@@ -1059,7 +1099,9 @@ function nomeRand($n=10)
 	$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	$max = 51;
 	for($i=0; $i < $n; ++$i)
-	{$nomes .= $a{mt_rand(0, $max)};}
+	{
+		$nomes .= $a{mt_rand(0, $max)};
+	}
 	return $nomes;
 }
 function renderNocacheTms(){

@@ -25,6 +25,13 @@
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 		<nature>org.eclipse.php.core.PHPNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>cesium</name>
+			<type>2</type>
+			<location>/var/www/i3geo/pacotes/cesium</location>
+		</link>
+	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1431135588159</id>
