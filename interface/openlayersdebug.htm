@@ -15,8 +15,9 @@
 	padding-right: 4px;
 	top: 2em;
 }
+
 .ol-zoomslider {
-	top : 6em;
+	top: 6em;
 }
 </style>
 </head>
@@ -111,7 +112,7 @@
 				<div id='guia1obj' style='display: none;'>
 					<!-- Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico -->
 					<div style='left: 5px; top: 10px; width: 150px;' id=buscaRapida></div>
-					<!--	Esta div acrescenta a lista de propriedades do mapa 
+					<!--	Esta div acrescenta a lista de propriedades do mapa
 					<div id=listaPropriedades style='top: 15px;'></div>-->
 					<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
 					<!--<div id=listaLayersBase style='top: 15px;'></div>-->
@@ -179,11 +180,22 @@
 		//indica se a opcao de navegacao nas pastas do servidor sera ativada
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 		i3GEO.janela.TRANSICAOSUAVE = true;
-
+		//desliga a camada com o mapa mundi
+		i3GEO.configura.mashuppar = "&desligar=mundo";
 		(function() {
+
+			var eng = new ol.layer.Tile({
+				title : "ESRI National Geographic",
+				visible : true,
+				isBaseLayer : true,
+				name : "eng",
+				source : new ol.source.TileArcGISRest({
+					url : "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
+				})
+			});
 			var bou = new ol.layer.Tile({
 				title : "Relevo",
-				visible : true,
+				visible : false,
 				isBaseLayer : true,
 				preload : 0,
 				name : "bou",
@@ -252,7 +264,7 @@
 				})
 			});
 			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [
-				bou, oce, ims, wsm, bra, tms
+				eng, bou, oce, ims, wsm, bra, tms
 			];
 		})();
 		i3GEO.inicia();

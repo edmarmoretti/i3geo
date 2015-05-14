@@ -39,7 +39,8 @@
 		}
     );
     // Add a WMS imagery layer
-	var imageryLayers = viewer.imageryLayers;
+
+    var imageryLayers = viewer.imageryLayers;
 	imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
 		url : 'http://localhost/i3geo/ogc.php',
 		layers : '_lbiomashp',
@@ -49,7 +50,7 @@
 		}
 	}));
 
-	//viewer.dataSources.add(Cesium.KmlDataSource.load('http://localhost/ms_tmp/tme1431562949.kmz'))
+	//viewer.dataSources.add(Cesium.KmlDataSource.load('http://localhost/i3geo/aplicmap/dados/teste3d.kmz'))
   </script>
 </body>
 </html>

@@ -162,7 +162,19 @@
 		i3GEO.janela.TRANSICAOSUAVE = true;
 
 		OpenLayers.ImgPath = "../pacotes/openlayers/img/";
+		//desliga a camada com o mapa mundi
+		i3GEO.configura.mashuppar = "&desligar=mundo";
+		//se vc nao quer o fundo, mude visibility true para false
 		(function() {
+			var eng = new OpenLayers.Layer.ArcGIS93Rest(
+				"ESRI National Geographic",
+				"http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/export",
+				{
+					format : "jpeg"
+				}, {
+					isBaseLayer : true,
+					visibility : true
+				});
 			var oce = new OpenLayers.Layer.ArcGIS93Rest(
 					"ESRI Ocean Basemap",
 					"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
@@ -213,7 +225,7 @@
 						visibility : false
 					});
 
-			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ oce, ims, wsm, tms,
+			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ eng, oce, ims, wsm, tms,
 					bra ];
 		})();
 		i3GEO.inicia();
