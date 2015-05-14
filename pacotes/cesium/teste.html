@@ -43,6 +43,8 @@ imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
         format : 'image/png'
     }
 }));
+viewer.dataSources.add(Cesium.KmlDataSource.load('http://localhost/ms_tmp/tme1431562949.kmz'))
+//http://localhost/ms_tmp/tme1431562949.kmz
   </script>
 </body>
 </html>
