@@ -32,19 +32,25 @@
 <body>
   <div id="cesiumContainer"></div>
   <script>
-    var viewer = new Cesium.Viewer('cesiumContainer');
+    var viewer = new Cesium.Viewer(
+		'cesiumContainer',
+		{
+			timeline : false,
+			clock : false
+		}
+    );
     // Add a WMS imagery layer
-var imageryLayers = viewer.imageryLayers;
-imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
-    url : 'http://localhost/i3geo/ogc.php',
-    layers : '_lbiomashp',
-    parameters : {
-        transparent : true,
-        format : 'image/png'
-    }
-}));
-viewer.dataSources.add(Cesium.KmlDataSource.load('http://localhost/ms_tmp/tme1431562949.kmz'))
-//http://localhost/ms_tmp/tme1431562949.kmz
+	var imageryLayers = viewer.imageryLayers;
+	imageryLayers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({
+		url : 'http://localhost/i3geo/ogc.php',
+		layers : '_lbiomashp',
+		parameters : {
+			transparent : true,
+			format : 'image/png'
+		}
+	}));
+
+	//viewer.dataSources.add(Cesium.KmlDataSource.load('http://localhost/ms_tmp/tme1431562949.kmz'))
   </script>
 </body>
 </html>
