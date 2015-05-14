@@ -373,6 +373,7 @@ i3GEO.desenho = {
 			return box;
 		},
 		addPin : function(x, y, w, h, imagem, namespace, centro, funcaoclick) {
+			return;
 			if (!imagem
 				|| imagem === "") {
 				imagem = i3GEO.configura.locaplic
@@ -436,6 +437,7 @@ i3GEO.desenho = {
 			return f;
 		},
 		removePins : function(namespace) {
+			return;
 			if (!namespace) {
 				namespace = "pin";
 			}
@@ -450,12 +452,14 @@ i3GEO.desenho = {
 			}
 		},
 		movePin : function(pin, x, y) {
+			return;
 			var point = new OpenLayers.LonLat(
 				x, y);
 			point = i3GEO.util.extGeo2OSM(point);
 			pin.move(point);
 		},
 		criaLayerGrafico : function() {
+			return;
 			if (!i3GEO.desenho.layergrafico) {
 				var sketchSymbolizers = {
 					"Point" : {

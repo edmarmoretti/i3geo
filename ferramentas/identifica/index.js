@@ -1060,9 +1060,7 @@ i3GEOF.identifica =
 				if (!x) {
 					i3GEOF.identifica.criaJanelaFlutuante();
 				} else {
-					i3GEOF.identifica.criaJanelaFlutuante(
-						x,
-						y);
+					i3GEOF.identifica.criaJanelaFlutuante(x,y);
 				}
 			}
 		},
