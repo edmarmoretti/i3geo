@@ -326,7 +326,7 @@ i3GEOF.metaestat = {
 				return;
 			}
 			i3GEO.mapa.ativaTema($i("i3geoCartoAnaliseCamadasCombo").value);
-			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia","index.js","i3GEOF.metaestat.analise.abreToponimia()");
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia","dependencias.php","i3GEOF.metaestat.analise.abreToponimia()");
 		},
 		/**
 		 * Obtem os parametros necessarios ao funcionamento de i3GEOF.metaestat.analise.toponimia()
@@ -579,7 +579,7 @@ i3GEOF.metaestat = {
 		 * Executa i3GEO.tema.dialogo.tme() com a funcao i3GEOF.metaestat.analise.abreTme()
 		 */
 		ativaTme: function(){
-			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tme()","tme","tme","index.js","i3GEOF.metaestat.analise.abreTme()");
+			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tme()","tme","tme","dependencias.php","i3GEOF.metaestat.analise.abreTme()");
 		},
 		/**
 		 * Abre a ferramenta de visualização em 3d
@@ -680,7 +680,7 @@ i3GEOF.metaestat = {
 		 * executa i3GEO.mapa.dialogo.animacao() com a funcao i3GEOF.metaestat.analise.listaCamadasAnimacao()
 		 */
 		ativaAnimacao: function(){
-			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.animacao()","animacao","animacao","index.js","i3GEOF.metaestat.analise.listaCamadasAnimacao()");
+			i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.animacao()","animacao","animacao","dependencias.php","i3GEOF.metaestat.analise.listaCamadasAnimacao()");
 		},
 		/**
 		 * Lista as camadas que podem ser usadas na ferramenta de animacao
@@ -746,7 +746,13 @@ i3GEOF.metaestat = {
 		 * Executa i3GEO.tema.dialogo.editaLegenda()
 		 */
 		alteraClasses: function(){
-			i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editaLegenda()","legenda","legenda","index.js","i3GEOF.metaestat.analise.ativaEditorLegenda()");
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.tema.dialogo.editaLegenda()",
+				"legenda",
+				"legenda",
+				"dependencias.php",
+				"i3GEOF.metaestat.analise.ativaEditorLegenda()"
+			);
 		},
 		/**
 		 * Ativa a ferramenta que permite modificar o degrade de cores utilizado
