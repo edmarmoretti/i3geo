@@ -106,17 +106,6 @@ if(strtolower($OUTPUTFORMAT) == "kml" || strtolower($OUTPUTFORMAT) == "kmz"){
 	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;
 	header("Location:".$urln);
 	exit;
-	/*
-		$l = $oMap->getlayer(0);
-	$n = $l->name."-kml";
-	$oMap->selectOutputFormat("kml");
-	$oMap->outputformat->setOption("STORAGE", "memory");
-	$oMap->outputformat->setOption("FILENAME", $n.".kml");
-	$l->setmetadata("wfs_getfeature_formatlist","kml");
-	$oMap->save($nomeMapfileTmp);
-	header('Content-Disposition: attachment; filename='.$n.'.kml');
-	header("Content-type: application/vnd.google-earth.kml+xml");
-	*/
 }
 
 //define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
@@ -876,42 +865,53 @@ ms_ioinstallstdouttobuffer();
 if(strtolower($req->getValueByName("REQUEST")) == "getmap" && $req->getValueByName("format") == ""){
 	$req->setParameter("format","image/png");
 }
-
+if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo" && $_GET["info_format"] == "text/xml"){
+	$req->setParameter("info_format","application/vnd.ogc.gml");
+}
+//json conforme cesium
 if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo" && $_GET["info_format"] == "application/json"){
-	//TODO verificar itens e itensdesc
-	//FIXME essa nao e a melhor forma de fazer o Json
-	$req->setParameter("info_format","text/plain");
+	$req->setParameter("info_format","application/vnd.ogc.gml");
 	$oMap->owsdispatch($req);
 	ms_iostripstdoutbuffercontentheaders();
 	ob_clean();
 	$r = ms_iogetstdoutbufferstring();
-	$t = explode("=",$r);
+	//$r = converteenc($r);
+	$nome = $oMap->getlayer(0)->name;
+	$xml = simplexml_load_string($r);
+
+	$json = json_encode($xml);
+	$r = json_decode($json,TRUE);
+	$propriedades = $r[$nome."_layer"];
+	$propriedades = $propriedades[$nome."_feature"];
+	$propriedades = converteenc(json_encode($propriedades));
+	$propriedades = json_decode($propriedades);
 	$n = array();
-	if(count($t) > 1){
-		$v = str_replace("\\n","",$t[1]);
-		$v = str_replace("\\r","",$v);
-		if(trim($v) != ""){
-			$va = trim($v);
-			$coluna = trim(explode(":",$t[0])[2]);
-			$valor = str_replace("'","",$va);
-			$n[] = array (
-					"type" => "FeatureCollection",
-					"features" => array(
-							array(
-									"type"=>"Feature",
-									"id" => "",
-									"geometry" => array(),
-									"properties" => array(
-											$coluna => $valor
-									),
-									"geometry_name" => ""
-							)
+	$n[] = array (
+			"type" => "FeatureCollection",
+			"features" => array(
+					array(
+							"type"=>"Feature",
+							"id" => "",
+							"geometry" => array(),
+							"properties" => array(
+									$propriedades
+							),
+							"geometry_name" => ""
 					)
-			);
-		}
-	}
+			)
+	);
 	header("Content-type: application/json");
-	echo json_encode($n[0]);
+	$json = json_encode($n[0]);
+	//verifica a substituicao de alias
+	$itens = $oMap->getlayer(0)->getmetadata("ITENS"); // itens
+	$itensdesc = $oMap->getlayer(0)->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens
+	$itens = explode(",",$itens);
+	$itensdesc = explode(",",converteenc($itensdesc));
+	$n = count($itens);
+	for($i = 0; $i < $n; $i++){
+		$json = str_ireplace($itens[$i],$itensdesc[$i],$json);
+	}
+	echo $json;
 	exit;
 }
 
@@ -1144,5 +1144,11 @@ function renderNocacheTms(){
 		header("X-Sendfile: $nomer");
 		header("Content-type: image/png");
 	}
+}
+function converteenc($texto){
+	if (!mb_detect_encoding($texto,"UTF-8",true)){
+		$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
+	}
+	return $texto;
 }
 ?>

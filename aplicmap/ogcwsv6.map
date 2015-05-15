@@ -138,6 +138,7 @@ MAP
 			"ows_postcode"	""
 			"ows_enable_request" "*"
 			"ows_sld_enabled" "true"
+			"wms_feature_info_mime_type" "application/json"
 		END
 		QUERYFORMAT text/html
 		LEGENDFORMAT text/html

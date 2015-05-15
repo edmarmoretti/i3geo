@@ -7,6 +7,10 @@ Para a versão 7.0
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 
+- para permitir o retorno da requisição WMS getfeatureinfo em JSON, foi incluído no mapfile base utilizado para
+gerar os serviços OGC a linha "wms_feature_info_mime_type" "application/json" em WEB->METADATA
+Caso você utilize um mapfile específico da sua instalação, veja o arquivo original existente em i3geo/aplicmap
+para fazer as adaptações.
 
 - style.overflow passou a ser definido automaticamente como "hidden" para previnir problemas com as janelas de informação.
 Essa definição ocorre apenas quando o elemento body do HTML contiver o id definido como "i3geo" e quando seu estilo
@@ -18,7 +22,7 @@ de informação
 - Inclusão da variável $i3geo_proxy_server no ms_configura.php para uso em algumas operações baseadas no acesso
 a outros servidores via Curl e OGC
 
-- Inclusão da variável $statusFerramentas no ms_configura para controlar o status de ferramentas que 
+- Inclusão da variável $statusFerramentas no ms_configura para controlar o status de ferramentas que
 dependem de configuração específica do servidor
 
 - Foram incluídos subitens no menu suspenso para acomodar o grande número de opções. Os códigos locais que

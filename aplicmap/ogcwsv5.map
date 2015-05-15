@@ -107,6 +107,7 @@ MAP
 			"ows_address"	"http://www.mma.gov.br"
 			"ows_postcode"	""
 		"ows_enable_request" "*"
+		"wms_feature_info_mime_type" "application/json"
 		END
 		QUERYFORMAT text/html
 		LEGENDFORMAT text/html
