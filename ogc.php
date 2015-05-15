@@ -878,6 +878,8 @@ if(strtolower($req->getValueByName("REQUEST")) == "getmap" && $req->getValueByNa
 }
 
 if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo" && $_GET["info_format"] == "application/json"){
+	//TODO verificar itens e itensdesc
+	//FIXME essa nao e a melhor forma de fazer o Json
 	$req->setParameter("info_format","text/plain");
 	$oMap->owsdispatch($req);
 	ms_iostripstdoutbuffercontentheaders();
