@@ -9,6 +9,10 @@ licenca.txt
 
 http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332
 
+Instalação e mais informações:
+
+http://moodle.gvsig-training.com/mod/book/view.php?id=5025
+
 Se vc está fazendo um upgrade do i3geo, faça cópia dos diretórios temas, aplicmap
 e dos arquivos ms_configura.php. Consulte o documento i3geo/guia_de_migracao.txt para verificar
 quais cuidados vc deve tomar nos upgrades
@@ -76,39 +80,8 @@ nos web services automáticos gerados com i3geo/ogc.php
 
 ---------
 
-Se vc é usuário windows, descompacte o arquivo do i3geo adequado na raiz do drive "c". No final vc terá
-um diretório c:\ms4w
-Clique duas vezes em c:\ms4w\apache-install.bat para ativar o servidor Apache. Depois, abra o navegador
-para internet e digite o endereço http://localhost/i3geo
-
----------
-
-Se vc é usuário Ubuntu, siga o seguinte roteiro:
-
-http://edmarmoretti.blogspot.com.br/2013/03/instalacao-do-i3geo-no-ubuntu-12-ou.html
-
----------
-
 Após instalar utilize o localhost/i3geo/testainstal.php para ver se está tudo certo.
 
----------
 
-Se o testaisntal.php estiver mostrando os mapas e mesmo assim ao abrir o i3Geo as camadas não são mostradas, considere o seguinte:
-
-Primeiro, experimente instalar a biblioteca php5-imagick no Linux.
-
-Alguns usuários reportaram problemas em algumas instalações do Mapserver. Esses usuários conseguem adicionar camadas
-ao mapa mas nada é mostrado, mesmo quando as questões de projeção e outras estão todas configuradas de acordo. Se esse for o seu caso,
-experimente trocar os arquivos de renderização fazendo o seguinte:
-
-altere os nomes dos seguintes arquivos para mantê-los como cópia:
-
-i3geo/classesphp/mapa_openlayers.php -> mapa_openlayers_original.php
-i3geo/classesphp/mapa_googlemaps.php -> mapa_googlemaps_original.php
-
-altere os nomes dos arquivos alternativos:
-
-i3geo/classesphp/mapa_openlayers_alternativo.php -> mapa_openlayers.php
-i3geo/classesphp/mapa_googlemaps_alternativo.php -> mapa_googlemaps.php
 
 
