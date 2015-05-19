@@ -762,11 +762,9 @@ i3GEO.Interface =
 			redesenha : function() {
 				var openlayers = i3GEO.Interface.openlayers;
 				openlayers.criaLayers();
-				//FIXME returns aqui
 				openlayers.ordenaLayers();
-				//openlayers.recalcPar();
-				//i3GEO.janela.fechaAguarde();
-				//openlayers.sobeLayersGraficos();
+				openlayers.recalcPar();
+				i3GEO.janela.fechaAguarde();
 			},
 			/**
 			 * Cria o mapa do lado do cliente (navegador) Define o que for necessario para a criacao de
@@ -803,6 +801,9 @@ i3GEO.Interface =
 				//
 				// funcoes utilitarias
 				//
+				ol.layer.Layer.prototype.setVisibility = function(v){
+					this.setVisible(v);
+				};
 				i3geoOL.getLayersByName = function(nome) {
 					var res = [], layers = this.getLayers(), n = layers.getLength(), i;
 					for (i = 0; i < n; i++) {
@@ -823,6 +824,9 @@ i3GEO.Interface =
 							}
 						}
 					}
+				};
+				i3geoOL.getLayersBase = function(){
+					return i3geoOL.getLayersBy("isBaseLayer",true);
 				};
 				i3geoOL.getLayersBy = function(chave, valor) {
 					var res = [], layers = this.getLayers(), n = layers.getLength(), i;
@@ -1524,18 +1528,21 @@ i3GEO.Interface =
 			 * Ordena os layers no mapa conforme i3GEO.arvoreDeCamadas.CAMADAS
 			 */
 			ordenaLayers : function() {
-				var ordem = i3GEO.arvoreDeCamadas.CAMADAS, nordem = ordem.length, layer, layers, i, maiorindice;
-				// maior indice
+				var ordem = i3GEO.arvoreDeCamadas.CAMADAS,
+					nordem = ordem.length,
+					nbase = i3geoOL.getLayersBase().length,
+					layer, layers, i, maiorindice;
+				
 				layers = i3geoOL.getLayers();
-				maiorindice = i3geoOL.getLayerIndex(layers[(layers.length) - 1]);
 				for (i = nordem - 1; i >= 0; i--) {
-					layers = i3geoOL.getLayersByName(ordem[i].name);
+					layer = i3geoOL.getLayersByName(ordem[i].name);
 					layer = layers[0];
 					if (layer) {
-						i3geoOL.setLayerIndex(layer, maiorindice + i);
+						layers.setAt(nordem + nbase,layer);
 					}
 				}
-				i3GEO.Interface.openlayers.sobeLayersGraficos();
+				//TODO precisa subir os layers graficos?
+				//i3GEO.Interface.openlayers.sobeLayersGraficos();
 			},
 			/**
 			 * Sobe ou desce um layer na pilha de camadas
@@ -1560,10 +1567,10 @@ i3GEO.Interface =
 				if (layers.length > 0) {
 					layers[0].setVisibility(obj.checked);
 					if (obj.checked === true) {
-						layers[0].div.style.display = "block";
+						//layers[0].div.style.display = "block";
 						i3GEO.pluginI3geo.ligaCamada(obj.value);
 					} else {
-						layers[0].div.style.display = "none";
+						//layers[0].div.style.display = "none";
 						i3GEO.pluginI3geo.desligaCamada(obj.value);
 					}
 				}

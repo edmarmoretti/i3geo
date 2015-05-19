@@ -2354,7 +2354,6 @@ i3GEO.Interface =
 					try {
 						i3GeoMap = new google.maps.Map($i(i3GEO.Interface.IDMAPA), i3GEO.Interface.googlemaps.MAPOPTIONS);
 					} catch (e) {
-						alert(e);
 						return;
 					}
 					if (i3GEO.Interface.googlemaps.ESTILOS && i3GEO.Interface.googlemaps.ESTILOPADRAO != "") {
