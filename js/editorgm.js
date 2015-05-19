@@ -2043,7 +2043,7 @@ google.maps.Circle.prototype.type = 'circle';
 						}
 
 						return {
-							comps : comps
+							"comps" : comps
 						};
 					}())
 

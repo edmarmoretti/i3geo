@@ -124,7 +124,6 @@ i3GEO.tema =
 		 * {string} - codigo do tema
 		 */
 		sobe : function(tema) {
-			i3GEO.mapa.ativaTema(tema);
 			i3GEO.php.sobetema(function(retorno) {
 				//
 				// atualiza apenas remonta a arvore
@@ -145,7 +144,6 @@ i3GEO.tema =
 		 * tema - codigo do tema
 		 */
 		desce : function(tema) {
-			i3GEO.mapa.ativaTema(tema);
 			i3GEO.php.descetema(function(retorno) {
 				//
 				// atualiza apenas remonta a arvore

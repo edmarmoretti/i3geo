@@ -507,8 +507,7 @@ i3GEO.Interface =
 			parametrosMap : {
 				target : "openlayers",
 				layers : [],
-				controls : [
-				],
+				controls : [],
 				loadTilesWhileAnimating : true,
 				loadTilesWhileInteracting : true
 			},
@@ -772,8 +771,7 @@ i3GEO.Interface =
 			 * i3geoOL = new OpenLayers.Map()
 			 */
 			cria : function(w, h) {
-				var f, ins, temp, j, r, mi = i3GEO.Interface.openlayers.MINEXTENT, ma = i3GEO.Interface.openlayers.MAXEXTENT, i =
-					$i(i3GEO.Interface.IDCORPO), bb = i3GEO.barraDeBotoes;
+				var f, ins, i = $i(i3GEO.Interface.IDCORPO);
 
 				if (i) {
 					f = $i("openlayers");
@@ -801,7 +799,7 @@ i3GEO.Interface =
 				//
 				// funcoes utilitarias
 				//
-				ol.layer.Layer.prototype.setVisibility = function(v){
+				ol.layer.Layer.prototype.setVisibility = function(v) {
 					this.setVisible(v);
 				};
 				i3geoOL.getLayersByName = function(nome) {
@@ -817,21 +815,21 @@ i3GEO.Interface =
 					var n = lista.length, i, lan, l;
 					for (i = 0; i < n; i++) {
 						lan = lista[i].get("name");
-						if(lan){
+						if (lan) {
 							l = this.getLayersByName(lan);
-							if(l.length === 0){
+							if (l.length === 0) {
 								this.addLayer(lista[i]);
 							}
 						}
 					}
 				};
-				i3geoOL.getLayersBase = function(){
-					return i3geoOL.getLayersBy("isBaseLayer",true);
+				i3geoOL.getLayersBase = function() {
+					return i3geoOL.getLayersBy("isBaseLayer", true);
 				};
 				i3geoOL.getLayersBy = function(chave, valor) {
 					var res = [], layers = this.getLayers(), n = layers.getLength(), i;
 					for (i = 0; i < n; i++) {
-						if (layers.item(i)[chave] && layers.item(i)[chave] === valor) {
+						if (layers.item(i).get(chave) && layers.item(i).get(chave) === valor) {
 							res.push(layers.item(i));
 						}
 					}
@@ -1225,7 +1223,7 @@ i3GEO.Interface =
 			 */
 			criaLayers : function() {
 				var matrixIds, resolutions, size, z, projectionExtent, source, configura = i3GEO.configura, url, nlayers =
-					i3GEO.arvoreDeCamadas.CAMADAS.length, layer, camada, urllayer, opcoes, i, n, temp, fundoIsBase = true;
+					i3GEO.arvoreDeCamadas.CAMADAS.length, layer, camada, urllayer, opcoes, i, temp;
 
 				// barra de status
 				temp = $i("i3GEOprogressoDiv");
@@ -1351,14 +1349,11 @@ i3GEO.Interface =
 										if (i3GEO.Interface.openlayers.googleLike === true) {
 											opcoes.projection = "EPSG:3857";
 										}
-										//erro aqui - corrigir
+										// erro aqui - corrigir
 										/*
-										layer = new OpenLayers.Layer.WMS(camada.name, urllayer, {
-											LAYERS : camada.name,
-											format : camada.wmsformat,
-											transparent : true
-										}, opcoes);
-										*/
+										 * layer = new OpenLayers.Layer.WMS(camada.name, urllayer, { LAYERS : camada.name, format :
+										 * camada.wmsformat, transparent : true }, opcoes);
+										 */
 
 									} else {
 										// FIXME testar isso
@@ -1528,36 +1523,18 @@ i3GEO.Interface =
 			 * Ordena os layers no mapa conforme i3GEO.arvoreDeCamadas.CAMADAS
 			 */
 			ordenaLayers : function() {
-				var ordem = i3GEO.arvoreDeCamadas.CAMADAS,
-					nordem = ordem.length,
-					nbase = i3geoOL.getLayersBase().length,
-					layer, layers, i, maiorindice;
-				
+				var ordem = i3GEO.arvoreDeCamadas.CAMADAS, nordem = ordem.length, layer, layers, i;
 				layers = i3geoOL.getLayers();
 				for (i = nordem - 1; i >= 0; i--) {
 					layer = i3geoOL.getLayersByName(ordem[i].name);
-					layer = layers[0];
+					layer = layer[0];
 					if (layer) {
-						layers.setAt(nordem + nbase,layer);
+						layers.remove(layer);
+						layers.push(layer);
 					}
 				}
-				//TODO precisa subir os layers graficos?
-				//i3GEO.Interface.openlayers.sobeLayersGraficos();
-			},
-			/**
-			 * Sobe ou desce um layer na pilha de camadas
-			 */
-			sobeDesceLayer : function(tema, tipo) {
-				var layer = i3geoOL.getLayersByName(tema)[0], indice;
-				if (layer) {
-					indice = i3geoOL.getLayerIndex(layer);
-					if (tipo === "sobe") {
-						i3geoOL.setLayerIndex(layer, indice + 1);
-					} else {
-						i3geoOL.setLayerIndex(layer, indice - 1);
-					}
-				}
-				i3GEO.Interface.openlayers.sobeLayersGraficos();
+				// TODO precisa subir os layers graficos?
+				// i3GEO.Interface.openlayers.sobeLayersGraficos();
 			},
 			/**
 			 * Liga ou desliga um layer
@@ -1567,10 +1544,10 @@ i3GEO.Interface =
 				if (layers.length > 0) {
 					layers[0].setVisibility(obj.checked);
 					if (obj.checked === true) {
-						//layers[0].div.style.display = "block";
+						// layers[0].div.style.display = "block";
 						i3GEO.pluginI3geo.ligaCamada(obj.value);
 					} else {
-						//layers[0].div.style.display = "none";
+						// layers[0].div.style.display = "none";
 						i3GEO.pluginI3geo.desligaCamada(obj.value);
 					}
 				}
@@ -1750,10 +1727,10 @@ i3GEO.Interface =
 					if (modoAtual === "move") {
 						return;
 					}
-					var point, lonlat = false, d, pos = "";
+					var lonlat = false, d, pos = "";
 					lonlat = e.coordinate;
 					if (i3GEO.Interface.openlayers.googleLike === true) {
-						lonlat = ol.proj.transform(lonlat,'EPSG:3857', 'EPSG:4326');
+						lonlat = ol.proj.transform(lonlat, 'EPSG:3857', 'EPSG:4326');
 					}
 					d = i3GEO.calculo.dd2dms(lonlat[0], lonlat[1]);
 					objposicaocursor.ddx = lonlat[0];

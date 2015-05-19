@@ -909,8 +909,8 @@ i3GEO.coordenadas =
 				x = (lon[0] + lon[1]) / 2;
 
 				return {
-					latitude : y,
-					longitude : x
+					"latitude" : y,
+					"longitude" : x
 				};
 			},
 			/**
