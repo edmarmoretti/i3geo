@@ -270,7 +270,8 @@ class Mapa
 				"colunaidunico",
 				"cortepixels",
 				"plugini3geo",
-				"link_tema"
+				"link_tema",
+				"ferramentas"
 		);
 		foreach ($this->layers as $oLayer){
 			$sel = "nao";
@@ -430,6 +431,19 @@ class Mapa
 				if($link_tema == "" && $oLayer->getmetadata("link_tema") != ""){
 					$link_tema = $oLayer->getmetadata("link_tema");
 				}
+				//TODO colocar aqui os parametros da linha do tempo???
+				//
+				//parametros para ferramentas especiaifcas
+				//
+				$ferramentas = array();
+				//mapa 3d
+				if($oLayer->getmetadata("tme") != ""){
+					$f = $oLayer->getmetadata("tme");
+					if (!mb_detect_encoding($f,"UTF-8",true)){
+						$f = mb_convert_encoding($f,"UTF-8","ISO-8859-1");
+					}
+					$ferramentas["tme"] = json_decode($f);
+				}
 				//formatacao antiga, antes da versao 6.0
 				/*
 				 $temas[] = array(
@@ -516,7 +530,8 @@ class Mapa
 						$oLayer->getmetadata("COLUNAIDUNICO"),
 						$cortepixels,
 						$plugini3geo,
-						$link_tema
+						$link_tema,
+						$ferramentas
 				);
 			}
 		}
@@ -1091,7 +1106,7 @@ class Mapa
 		//tem erro na vers&atilde;o 6 do Mapserver. J&aacute; abri um ticket no trac da OSGEO
 		$nlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Grade de coordenadas","SIM");
 		ms_newgridobj($nlayer);
-		
+
 		$nlayer->grid->set("labelformat", "DDMMSS");
 		$nlayer->grid->set("maxinterval", $intervalo);
 		$classe = $nlayer->getclass(0);
@@ -1117,7 +1132,7 @@ class Mapa
 			else{
 				$label = $classe->label;
 			}
-			
+
 			$label->set("size",$tamanhotexto);
 			$label->set("type",MS_BITMAP);
 			if ($fonte != "bitmap")	{
@@ -1305,7 +1320,7 @@ class Mapa
 						$nNome = str_replace(".map","",basename($nomemap));
 						$nlayer->setmetadata("arquivotemaoriginal",$nNome);
 						$nlayer->setmetadata("nomeoriginal",$nlayer->name);
-						
+
 						$nlayer->set("name",$nomeunico[$n]);
 						//altera o nome do grupo se existir
 						if ($nlayer->group != " " && $nlayer->group != "" ){

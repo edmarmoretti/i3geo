@@ -491,7 +491,7 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 	$xml .= "<rss version='2.0'>";
 	$xml .= "<channel>\n";
 	$xml .= "<title>RSS</title>\n";
-	$xml .= "<description>$descricao</description>\n";
+	$xml .= "<description>".str_replace("&","&amp;",$descricao)."</description>\n";
 	$xml .= "<link></link>\n";
 	$xml .= "<docs></docs>\n";
 	$xml .= "<copyright>Gerado pelo i3Geo</copyright>\n";
@@ -527,7 +527,7 @@ function geraXmlAtlas($locaplic,$editores)
 	error_reporting(0);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
-	
+
 	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
 	else
@@ -914,7 +914,7 @@ function array_in_array($needle, $haystack)
 }
 function xmlTexto_prepara($texto)
 {
-	return str_replace("&","&",$texto);
+	return str_replace("&","&amp;",$texto);
 }
 function entity_decode($texto)
 {
