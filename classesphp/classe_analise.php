@@ -1620,6 +1620,8 @@ class Analise
 		$nomeCentroides = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentroides;
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
+		
+		//$shapes = $shape[0];
 		foreach($shapes as $shape){
 			$LineObj = ms_newLineObj();
 			$LineObj->add($shape->getCentroid());
@@ -1663,7 +1665,7 @@ class Analise
 		else
 			dbase_close($db);
 		//adiciona no mapa atual o novo tema
-		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centr�ide (".$nomeCentroides.")"),$metaClasse="SIM");
+		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centroide (".$nomeCentroides.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->set("template","none.htm");
