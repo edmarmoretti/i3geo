@@ -112,14 +112,9 @@ i3GEO.guias =
 				click : function() {
 					var ondeArvore;
 					i3GEO.guias.mostra("adiciona");
+					ondeArvore = "arvoreAdicionaTema";
 					if (!$i("arvoreAdicionaTema")) {
-						try {
-							ondeArvore = objmapa.guiaMenu + "obj";
-						} catch (e) {
-							ondeArvore = "guia2obj";
-						}
-					} else {
-						ondeArvore = "arvoreAdicionaTema";
+						ondeArvore = "guia2obj";
 					}
 					// para efeitos de compatibilidade
 					if (document.getElementById("outrasOpcoesAdiciona")) {

@@ -2562,9 +2562,12 @@ i3GEO.util =
 		 * {string} - valor que sera aplicado
 		 */
 		defineValor : function(id, prop, valor) {
-			try {
-				$i(id)[prop] = valor;
-			} catch (e) {
+			var o = $i(id);
+			if(o){
+				try {
+					$i(id)[prop] = valor;
+				} catch (e) {
+				}
 			}
 		},
 		/**

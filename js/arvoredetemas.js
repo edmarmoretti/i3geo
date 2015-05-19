@@ -2624,7 +2624,7 @@ i3GEO.arvoreDeTemas = {
 					console.error(r);
 			}
 		};
-		i3GEO.mapa.ativaTema("");
+		i3GEO.mapa.ativaTema();
 		//
 		// pega os temas ativados na arvore de menus
 		//

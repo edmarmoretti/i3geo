@@ -83,7 +83,7 @@ i3GEO.tema =
 			i3GEO.php.excluitema(i3GEO.atualiza, [
 				tema
 			]);
-			i3GEO.mapa.ativaTema("");
+			i3GEO.mapa.ativaTema();
 			i3GEO.temaAtivo = "";
 		},
 		/**

@@ -762,10 +762,11 @@ i3GEO.Interface =
 			redesenha : function() {
 				var openlayers = i3GEO.Interface.openlayers;
 				openlayers.criaLayers();
+				//FIXME returns aqui
 				openlayers.ordenaLayers();
-				openlayers.recalcPar();
-				i3GEO.janela.fechaAguarde();
-				openlayers.sobeLayersGraficos();
+				//openlayers.recalcPar();
+				//i3GEO.janela.fechaAguarde();
+				//openlayers.sobeLayersGraficos();
 			},
 			/**
 			 * Cria o mapa do lado do cliente (navegador) Define o que for necessario para a criacao de
@@ -805,16 +806,22 @@ i3GEO.Interface =
 				i3geoOL.getLayersByName = function(nome) {
 					var res = [], layers = this.getLayers(), n = layers.getLength(), i;
 					for (i = 0; i < n; i++) {
-						if (layers.item(i).name && layers.item(i).name === nome) {
+						if (layers.item(i).get("name") && layers.item(i).get("name") === nome) {
 							res.push(layers.item(i));
 						}
 					}
 					return res;
 				};
 				i3geoOL.addLayers = function(lista) {
-					var n = lista.length, i;
+					var n = lista.length, i, lan, l;
 					for (i = 0; i < n; i++) {
-						this.addLayer(lista[i]);
+						lan = lista[i].get("name");
+						if(lan){
+							l = this.getLayersByName(lan);
+							if(l.length === 0){
+								this.addLayer(lista[i]);
+							}
+						}
 					}
 				};
 				i3geoOL.getLayersBy = function(chave, valor) {
@@ -1340,11 +1347,14 @@ i3GEO.Interface =
 										if (i3GEO.Interface.openlayers.googleLike === true) {
 											opcoes.projection = "EPSG:3857";
 										}
+										//erro aqui - corrigir
+										/*
 										layer = new OpenLayers.Layer.WMS(camada.name, urllayer, {
 											LAYERS : camada.name,
 											format : camada.wmsformat,
 											transparent : true
 										}, opcoes);
+										*/
 
 									} else {
 										// FIXME testar isso
@@ -1516,7 +1526,7 @@ i3GEO.Interface =
 			ordenaLayers : function() {
 				var ordem = i3GEO.arvoreDeCamadas.CAMADAS, nordem = ordem.length, layer, layers, i, maiorindice;
 				// maior indice
-				layers = i3geoOL.layers;
+				layers = i3geoOL.getLayers();
 				maiorindice = i3geoOL.getLayerIndex(layers[(layers.length) - 1]);
 				for (i = nordem - 1; i >= 0; i--) {
 					layers = i3geoOL.getLayersByName(ordem[i].name);
