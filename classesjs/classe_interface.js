@@ -769,8 +769,18 @@ i3GEO.Interface =
 				if (!i3GEO.Interface.openlayers.parametrosMap.allOverlays) {
 					i3GEO.Interface.openlayers.parametrosMap.allOverlays = false;
 				}
+
+				i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.TouchNavigation({
+					dragPanOptions : {
+						interval : 100,
+						enableKinetic : true
+					}
+				}));
+				i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.PinchZoom());
+
 				if (i3GEO.Interface.TABLET === true) {
 					i3GEO.Interface.openlayers.parametrosMap.theme = null;
+
 					i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.Attribution());
 					i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.TouchNavigation({
 						dragPanOptions : {
@@ -778,7 +788,9 @@ i3GEO.Interface =
 							enableKinetic : true
 						}
 					}));
+
 					i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.ZoomPanel());
+
 				} else if (i3GEO.parametros.w > 700) {
 					bb.INCLUIBOTAO.zoomli = true;
 					bb.INCLUIBOTAO.pan = true;
