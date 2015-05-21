@@ -41,7 +41,7 @@ if (typeof (i3GEO) === 'undefined') {
 }
 /*
  * Classe i3GEO.editorGM
- * 
+ *
  * Fun&ccedil;&otilde;es de edi&ccedil;&atilde;o vetorial utilizadas pelo editor de regi&otilde;es do sistema METAESTAT
  */
 i3GEO.editorGM =
@@ -55,7 +55,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Objeto DOM com a imagem de aguarde existente no cabecalho da janela
-		 * 
+		 *
 		 */
 		aguarde : "",
 		/**
@@ -81,10 +81,10 @@ i3GEO.editorGM =
 		descregioes : [],
 		/**
 		 * Inicia o editor
-		 * 
+		 *
 		 * Cria o objeto da API do Google Maps com new google.maps.drawing.DrawingManager A janela flutuante que recebera os componentes do
 		 * editor ja deve estar aberta (veja editorlimites.php) Executa i3GEO.editorGM.html
-		 * 
+		 *
 		 * @param Id
 		 *            do DIV que recebera o conteudo HTML do editor
 		 */
@@ -191,7 +191,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Monta o codigo HTML com o conteudo da ferramenta Define os botoes e demais elementos que serao preenchidos via codigo
-		 * 
+		 *
 		 * @return html
 		 */
 		html : function() {
@@ -256,7 +256,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Marca uma figura como selecionada
-		 * 
+		 *
 		 * @param objeto
 		 *            shape que sera marcado
 		 */
@@ -307,7 +307,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Remove do mapa as figuras que estiverem selecionadas
-		 * 
+		 *
 		 * @param boolean
 		 *            indica se deve ser feita uma confirmacao ou nao antes de apagar
 		 */
@@ -338,7 +338,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Lista as figuras que estao marcadas como selecionadas
-		 * 
+		 *
 		 * @return array de shapes
 		 */
 		selectedShapes : function() {
@@ -352,11 +352,11 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Lista as coordenadas de todas as figuras existentes
-		 * 
+		 *
 		 * @return objeto contendo a indicacao do tipo de figura e o array com a lista de coordenadas
 		 */
 		getCoordenadas : function() {
-			var coordenadas = [], lista = [], n = i3GEO.desenho.googlemaps.shapes.length, tipo = "", ps, nps, j, p, i, r = {};
+			var coordenadas = [], lista = [], n = i3GEO.desenho.googlemaps.shapes.length, tipo = "", ps, nps, j, p, i, r;
 
 			for (i = 0; i < n; i++) {
 				coordenadas = [];
@@ -383,7 +383,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Converte um objeto shape em uma string WKT
-		 * 
+		 *
 		 * @param shape
 		 */
 		toWKT : function(obj) {
@@ -411,7 +411,7 @@ i3GEO.editorGM =
 			/**
 			 * Ativa a operaco de captura definindo o evento que sera executado no onclick do mouse sobre o mapa O evento executa
 			 * i3GEO.editorGM.capturaPoligonoTema.captura
-			 * 
+			 *
 			 * @param botao
 			 *            da interface que foi pressionado
 			 */
@@ -515,7 +515,7 @@ i3GEO.editorGM =
 		/**
 		 * Monta um combo com a lista de regioes cadastradas e que podem ser editadas pelo editor A regiao em edicao sera a escolhida nesse
 		 * combo Ao ser escolhida, e adicionada uma camada no mapa
-		 * 
+		 *
 		 * @param opcional
 		 *            codigo da regiao no cadastro. Se nao for definido, busca todas
 		 */
@@ -578,7 +578,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Altera as bordas dos icones e desativa eventos Desativa todos os botoes e ativa o indicado
-		 * 
+		 *
 		 * @param objeto
 		 *            DOM que representa o botao que sera focado
 		 */
@@ -596,7 +596,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Ativa a digitalizacao de poligono
-		 * 
+		 *
 		 * @param objeto
 		 *            DOM que representa o botao que sera focado
 		 */
@@ -609,7 +609,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Ativa a digitalizacao de ponto
-		 * 
+		 *
 		 * @param objeto
 		 *            DOM que representa o botao que sera focado
 		 */
@@ -622,7 +622,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Ativa a selecao de figuras
-		 * 
+		 *
 		 * @param objeto
 		 *            DOM que representa o botao que sera focado
 		 */
@@ -635,7 +635,7 @@ i3GEO.editorGM =
 		},
 		/**
 		 * Adiciona uma nova figura ao mapa (shape) Pode ser poligono ou ponto
-		 * 
+		 *
 		 * @param objeto
 		 *            shape (API do Google)
 		 * @param codigo
@@ -857,7 +857,7 @@ i3GEO.editorGM =
 			},
 			/**
 			 * Cria a janela flutuante para receber os componentes da ferramenta
-			 * 
+			 *
 			 * @param html
 			 *            com o conteudo da ferramenta
 			 */
@@ -877,7 +877,7 @@ i3GEO.editorGM =
 			/**
 			 * Aplica a operacao de salvar os dados no banco para o shape selecionado Executa
 			 * admin/php/metaestat.php?funcao=mantemDadosRegiao
-			 * 
+			 *
 			 * @param boolean
 			 *            indica se as coordenadas serao salvas tambem
 			 */
@@ -999,7 +999,7 @@ i3GEO.editorGM =
 			},
 			/**
 			 * Fornece o HTML com os objetos que receberao os componentes da ferramenta
-			 * 
+			 *
 			 * @return html
 			 */
 			html : function() {
@@ -1037,7 +1037,7 @@ i3GEO.editorGM =
 			},
 			/**
 			 * Monta um combo com as medidas de uma variavel Executa i3GEO.php.listaMedidaVariavel
-			 * 
+			 *
 			 * @param objeto
 			 *            DOM do tipo select que contem a lista de variaveis
 			 */
@@ -1305,18 +1305,18 @@ google.maps.Circle.prototype.type = 'circle';
 
 /**
  * @license
- * 
+ *
  * Copyright (C) 2012 K. Arthur Endsley (kaendsle@mtu.edu) Michigan Tech Research Institute (MTRI) 3600 Green Court, Suite 100, Ann Arbor,
  * MI, 48105
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 (function(Wkt) {
 
@@ -1333,7 +1333,7 @@ google.maps.Circle.prototype.type = 'circle';
 	Wkt.Wkt.prototype.construct = {
 		/**
 		 * Creates the framework's equivalent point geometry object.
-		 * 
+		 *
 		 * @param config
 		 *            {Object} An optional properties hash the object should use
 		 * @param component
@@ -1352,7 +1352,7 @@ google.maps.Circle.prototype.type = 'circle';
 
 		/**
 		 * Creates the framework's equivalent multipoint geometry object.
-		 * 
+		 *
 		 * @param config
 		 *            {Object} An optional properties hash the object should use
 		 * @return {Array} Array containing multiple google.maps.Marker
@@ -1375,7 +1375,7 @@ google.maps.Circle.prototype.type = 'circle';
 
 		/**
 		 * Creates the framework's equivalent linestring geometry object.
-		 * 
+		 *
 		 * @param config
 		 *            {Object} An optional properties hash the object should use
 		 * @param component
@@ -1402,7 +1402,7 @@ google.maps.Circle.prototype.type = 'circle';
 
 		/**
 		 * Creates the framework's equivalent multilinestring geometry object.
-		 * 
+		 *
 		 * @param config
 		 *            {Object} An optional properties hash the object should use
 		 * @return {Array} Array containing multiple google.maps.Polyline instances
@@ -1429,7 +1429,7 @@ google.maps.Circle.prototype.type = 'circle';
 
 		/**
 		 * Creates the framework's equivalent Box or Rectangle geometry object.
-		 * 
+		 *
 		 * @param config
 		 *            {Object} An optional properties hash the object should use
 		 * @param component
@@ -1448,7 +1448,7 @@ google.maps.Circle.prototype.type = 'circle';
 
 		/**
 		 * Creates the framework's equivalent polygon geometry object.
-		 * 
+		 *
 		 * @param config
 		 *            {Object} An optional properties hash the object should use
 		 * @param component
@@ -1511,7 +1511,7 @@ google.maps.Circle.prototype.type = 'circle';
 
 		/**
 		 * Creates the framework's equivalent multipolygon geometry object.
-		 * 
+		 *
 		 * @param config
 		 *            {Object} An optional properties hash the object should use
 		 * @return {Array} Array containing multiple google.maps.Polygon

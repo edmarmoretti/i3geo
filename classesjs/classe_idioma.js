@@ -400,7 +400,7 @@ i3GEO.idioma = {
 		if (!dic) {
 			dic = i3GEO.idioma.DICIONARIO;
 		}
-		var novo = {}, k = 0;
+		var novo = [], k = 0;
 		for (k in dic) {
 			if (dic.hasOwnProperty(k)) {
 				novo[k] = i3GEO.idioma.traduzir(
