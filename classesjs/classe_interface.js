@@ -770,13 +770,6 @@ i3GEO.Interface =
 					i3GEO.Interface.openlayers.parametrosMap.allOverlays = false;
 				}
 
-				i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.TouchNavigation({
-					dragPanOptions : {
-						interval : 100,
-						enableKinetic : true
-					}
-				}));
-				i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.PinchZoom());
 
 				if (i3GEO.Interface.TABLET === true) {
 					i3GEO.Interface.openlayers.parametrosMap.theme = null;
