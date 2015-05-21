@@ -38,8 +38,6 @@ ajuda - (opcional) mostra uma ajuda ao usu&aacute;rio
 
 tema - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil;o. Se for definido, o web service conter&aacute; apenas esse tema. O tema &eacute; o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo. Se n&atilde;o for definido, ser&atilde;o considerados todos os temas
 
-intervalo - (opcional) valor inicial e final com o n&uacute;mero de temas que ser&atilde;o mostrados no servi&ccedil;o
-
 legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
 
 perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
@@ -49,6 +47,9 @@ abrir o mashup do OpenLayers com as camadas definida em temas.
 Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
 
 OUTPUTFORMAT - em getfeature, aceita tamb&eacute;m shape-zip para download de shapefile e csv para download de csv compactado
+
+ows_geomtype - permite definir o tipo de geometria conforme utilizado pelo parametro GEOMETRY do OGR (veja http://gdal.org/drv_csv.html)
+afeta o OUTPUTFORMAT csv. Utilize &ows_geomtype=none para obter um csv sem a coluna geometry
 
 id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
 nao deve ser utilizado junto com tema
@@ -75,7 +76,6 @@ ogc.php?tema=bioma
 
 ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 
-ogc.php?intervalo=0,50
 */
 $_GET = array_merge($_GET,$_POST);
 //
@@ -854,12 +854,13 @@ if(strtolower($OUTPUTFORMAT) == "shape-zip"){
 	exit;
 }
 if(strtolower($OUTPUTFORMAT) == "csv"){
+	ms_iostripstdoutbuffercontentheaders();
 	//grava em disco
-	$arq = $dir_tmp."/".$tema.".csv";
+	$arq = $dir_tmp."/".$tema.$ows_geomtype.".csv";
 	$contents = ms_iogetstdoutbufferstring();
 	file_put_contents($arq,$contents);
 	//envia para download
-	header('Content-Disposition: attachment; filename='.$tema.'.csv');
+	header('Content-Disposition: attachment; filename='.$tema.$ows_geomtype.'.csv');
 	header("Content-type: text/csv");
 	ms_iogetStdoutBufferBytes();
 	ms_ioresethandlers();
@@ -1066,7 +1067,6 @@ function renderNocacheTms(){
 		imagepng($imgc,$nomer);
 	}
 	if($i3georendermode == 0 || !isset($i3georendermode)){
-
 		header('Content-Length: '.filesize($nomer));
 		header('Content-Type: image/png');
 		header('Cache-Control: max-age=3600, must-revalidate');
@@ -1128,7 +1128,7 @@ function getfeatureinfoJson(){
 	echo $json;
 }
 function processaOutputformatMapfile(){
-	global $OUTPUTFORMAT, $oMap, $tema;
+	global $OUTPUTFORMAT, $oMap, $tema, $ows_geomtype;
 	if(strtolower($OUTPUTFORMAT) == "shape-zip"){
 		$l = $oMap->getlayer(0);
 		$n = $l->name;
@@ -1143,8 +1143,11 @@ function processaOutputformatMapfile(){
 		$n = $l->name."-csv";
 		$oMap->selectOutputFormat("csv");
 		$oMap->outputformat->setOption("STORAGE", "filesystem");
-		$oMap->outputformat->setOption("FILENAME", $tema.".csv");
+		$oMap->outputformat->setOption("FILENAME", $tema.$ows_geomtype.".csv");
 		$oMap->outputformat->setOption("FORM", "simple");
+		if(isset($ows_geomtype) && $ows_geomtype != ""){
+			$oMap->outputformat->setOption("LCO:GEOMETRY", $ows_geomtype);
+		}
 		$l->setmetadata("wfs_getfeature_formatlist","csv");
 	}
 	if(strtolower($OUTPUTFORMAT) == "geojson" || strtolower($OUTPUTFORMAT) == "json"){
@@ -1154,7 +1157,7 @@ function processaOutputformatMapfile(){
 	}
 }
 function carregaCacheArquivo(){
-	global $dir_tmp, $tema, $OUTPUTFORMAT;
+	global $dir_tmp, $tema, $OUTPUTFORMAT, $ows_geomtype;
 	if(strtolower($OUTPUTFORMAT) == "shape-zip"){
 		$arq = $dir_tmp."/".$tema."_shapefile.zip";
 		if(file_exists($arq)){
@@ -1164,9 +1167,9 @@ function carregaCacheArquivo(){
 		}
 	}
 	if(strtolower($OUTPUTFORMAT) == "csv"){
-		$arq = $dir_tmp."/".$tema.".csv";
+		$arq = $dir_tmp."/".$tema.$ows_geomtype.".csv";
 		if(file_exists($arq)){
-			header('Content-Disposition: attachment; filename='.$tema.'.csv');
+			header('Content-Disposition: attachment; filename='.$tema.$ows_geomtype.'.csv');
 			header("Content-type: text/csv");
 			readfile($arq);
 			exit;
