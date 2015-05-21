@@ -770,7 +770,6 @@ i3GEO.Interface =
 					i3GEO.Interface.openlayers.parametrosMap.allOverlays = false;
 				}
 
-
 				if (i3GEO.Interface.TABLET === true) {
 					i3GEO.Interface.openlayers.parametrosMap.theme = null;
 
