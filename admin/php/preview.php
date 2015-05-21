@@ -141,13 +141,14 @@ if(ob_get_contents ()){
 	ob_end_clean();
 }
 
-	$l = $oMap->getlayer(0);
-	$req->setParameter("LAYERS",$l->name);
+$l = $oMap->getlayer(0);
+$req->setParameter("LAYERS",$l->name);
 
 ms_ioinstallstdouttobuffer();
 $req->setParameter("format","image/png");
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
+
 if(!isset($OUTPUTFORMAT)){
 	header("Content-type: $contenttype");
 }

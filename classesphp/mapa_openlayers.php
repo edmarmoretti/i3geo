@@ -92,7 +92,7 @@ if(isset($_GET["X"])){
 	$z = intval((0.703125 / $res) / 4) + 1;
 	$x = floor((($box[0] + 180) / 360) * pow(2, $z));
 	$y = floor((1 - log(tan(deg2rad($box[3])) + 1 / cos(deg2rad($box[3]))) / pi()) /2 * pow(2, $z));
-	
+
 	$_GET["WIDTH"] = 256;
 	$_GET["HEIGHT"] = 256;
 	$_GET["tms"] = "/".$_GET["layer"]."/".$z."/".$x."/".$y.".png";
@@ -413,7 +413,8 @@ else{
 			//header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
 			header('Cache-Control: public, max-age=22222222');
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
-			fpassthru(fopen($nomer, 'rb'));
+			//fpassthru(fopen($nomer, 'rb'));
+			readfile($nomer);
 		}
 	}
 	else{
@@ -501,7 +502,8 @@ function carregaCacheImagem($cachedir,$map,$tms,$i3georendermode=0){
 			header('Cache-Control: public, max-age=22222222');
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
 			//header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
-			fpassthru(fopen($nome, 'rb'));
+			//fpassthru(fopen($nome, 'rb'));
+			readfile($nome);
 		}
 		else{
 			header('Cache-Control: public, max-age=22222222');

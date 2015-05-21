@@ -2,7 +2,7 @@
 /*
  * Gera uma miniatura de um mapfile salvo no banco de dados
  * Verifica se a imagem existe, caso contrario cria uma no diretorio temporario
- * 
+ *
  * @param restauramapa - id do mapa a ser restaurado
  * @param w
  * @param h
@@ -47,5 +47,6 @@ header('Content-Length: '.filesize($nomeImagem));
 header('Content-Type: image/png');
 header('Cache-Control: public, max-age=22222222');
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
-fpassthru(fopen($nomeImagem, 'rb'));
+//fpassthru(fopen($nomeImagem, 'rb'));
+readfile($nomeImagem);
 ?>

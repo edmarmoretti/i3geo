@@ -277,7 +277,7 @@ if($temas != ""){
 					if(in_array($tema,$visiveis)){
 						$visivel = "true";
 					}
-					if($nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM" && $layern->getmetadata("PLUGINI3GEO") == ""){
+					if(strtolower($DESLIGACACHE) != "sim" && $nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM" && $layern->getmetadata("PLUGINI3GEO") == ""){
 						if($layern->type != 2 && $layern->type != 3){
 							$opacidade = 1;
 						}
@@ -646,7 +646,7 @@ if(!i3GEO.configura){
 	}
 	?>
 	i3GEO.editorOL.inicia();
-	
+
 	function adicionaPluginI3geo(camada,visivel){
 		if(!camada.cache){
 			camada["cache"] = "NAO";

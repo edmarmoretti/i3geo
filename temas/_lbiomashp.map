@@ -5,21 +5,17 @@ MAP
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"CD_LEGENDA"
+  "CACHE" "SIM"
       "CLASSE"	"SIM"
       "permitekmz"	"SIM"
       "ITENSDESC"	"Bioma Teste de acentuação"
       "ESCALA"	"1000000"
       "TILES"	"SIM"
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "permitedownload"	"SIM"
-      "metaestat"	""
       "download"	"SIM"
       "itembuscarapida"	"CD_LEGENDA"
       "ITENS"	"CD_LEGENDA"
-      "arquivodownload"	""
-      "arquivokmz"	""
       "transitioneffect"	"SIM"
       "permiteogc"	"SIM"
       "permitekml"	"SIM"
@@ -90,6 +86,4 @@ MAP
       TITLE ""
     END # CLASS
   END # LAYER
-
 END # MAP
-

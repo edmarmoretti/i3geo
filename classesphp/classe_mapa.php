@@ -1366,8 +1366,14 @@ class Mapa
 								for ($i = $numlayers-1;$i > 0;$i--){
 									$layerAbaixo = $this->mapa->getlayer($i);
 									$tipo = $layerAbaixo->type;
-									if($tipo == 2 && ($layerAbaixo->getclass(0)->getstyle(0)->color->red == -1) && ($l->getclass(0)->getstyle(0)->color->red != -1)) {
-										$tipo = 0;//vai subir
+									if($layerAbaixo->numclasses > 0 && $l->numclasses > 0){
+										$c = $layerAbaixo->getclass(0);
+										$c1 = $l->getclass(0);
+										if($c->numstyles > 0 && $c1->numstyles > 0){
+											if($tipo == 2 && ($c->getstyle(0)->color->red == -1) && ($c1->getstyle(0)->color->red != -1)) {
+												$tipo = 0;//vai subir
+											}
+										}
 									}
 									if (($tipo != 2) && ($tipo != 3)){
 										$nummove++;

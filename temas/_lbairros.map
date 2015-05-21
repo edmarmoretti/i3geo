@@ -7,7 +7,7 @@ MAP
     DATA "the_geom from (select gid, st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros /*FW*//*FW*/) as foo using unique co_bairro using srid=4326"
     METADATA
       "TIP"	"no_bairro"
-      "cache"	""
+      "cache"	"SIM"
       "CLASSE"	"SIM"
       "ITENSDESC"	"id,Código bairro,Nome,Distrito,Município"
       "EDITAVEL"	"SIM"

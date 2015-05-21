@@ -634,7 +634,7 @@ if(!i3GEO.configura){
 	}
 	?>
 	i3GEO.editorOL.inicia();
-	
+
 	function adicionaPluginI3geo(camada,visivel){
 		if(!camada.cache){
 			camada["cache"] = "NAO";

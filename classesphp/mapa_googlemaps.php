@@ -511,7 +511,8 @@ function carregaCacheImagem(){
 			header('Content-Type: image/png');
 			header('Cache-Control: public, max-age=22222222');
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
-			fpassthru(fopen($nome, 'rb'));
+			//fpassthru(fopen($nome, 'rb'));
+			readfile($nome);
 		}
 		else{
 			header('Cache-Control: public, max-age=22222222');

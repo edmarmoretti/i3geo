@@ -459,7 +459,8 @@ function renderNocacheTms(){
 		header('Cache-Control: max-age=3600, must-revalidate');
 		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
-		fpassthru(fopen($nomer, 'rb'));
+		//fpassthru(fopen($nomer, 'rb'));
+		readfile($nomer);
 	}
 	if($i3georendermode == 2){
 		ob_clean();
@@ -488,7 +489,8 @@ function carregaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
 		$etag = md5_file($nome);
 		header('Etag: '.$etag);
-		fpassthru(fopen($nome, 'rb'));
+		//fpassthru(fopen($nome, 'rb'));
+		readfile($nome);
 		exit;
 	}
 }
@@ -527,7 +529,8 @@ function salvaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 	header('Cache-Control: max-age=3600, must-revalidate');
 	header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
 	header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
-	fpassthru(fopen($nome, 'rb'));
+	//fpassthru(fopen($nome, 'rb'));
+	readfile($nome);
 	exit;
 }
 
