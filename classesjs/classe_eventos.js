@@ -582,6 +582,7 @@ i3GEO.eventos =
 			docMapa.ontouchend = function(exy) {
 				i3GEO.eventos.cliquePerm.status = true;
 				if(i3GEO.eventos.CONTATOUCH < 10){
+					i3GEO.Interface.STATUS.pan = false;
 					i3GEO.eventos.mouseupMapa(exy);
 				}
 				i3GEO.eventos.CONTATOUCH = 0;
