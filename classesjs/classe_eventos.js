@@ -516,6 +516,7 @@ i3GEO.eventos =
 		 * docMapa {DOM node} - objeto que ser&aacute; alvo da ativa&ccedil;&atilde;o dos cliques
 		 */
 		ativa : function(docMapa) {
+			var nt = 0;
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.eventos.ativa()");
 
@@ -575,11 +576,12 @@ i3GEO.eventos =
 				i3GEO.eventos.mouseupMapa(exy);
 			};
 			docMapa.ontouchmove = function(exy) {
-				console.warn(exy)
+				nt++;
+				console.info(a)
 				i3GEO.eventos.cliquePerm.status = false;
 			};
 			docMapa.ontouchend = function(exy) {
-				//console.warn(exy)
+				nt = 0;
 			};
 		},
 		/**
