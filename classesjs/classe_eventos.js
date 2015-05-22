@@ -575,10 +575,11 @@ i3GEO.eventos =
 				i3GEO.eventos.mouseupMapa(exy);
 			};
 			docMapa.ontouchmove = function(exy) {
+				console.warn(exy)
 				i3GEO.eventos.cliquePerm.status = false;
 			};
 			docMapa.ontouchend = function(exy) {
-				console.warn(exy)
+				//console.warn(exy)
 			};
 		},
 		/**
