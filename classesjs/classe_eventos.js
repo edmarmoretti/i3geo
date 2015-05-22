@@ -577,12 +577,10 @@ i3GEO.eventos =
 			};
 			docMapa.ontouchmove = function(exy) {
 				i3GEO.eventos.CONTATOUCH++;
-				i3GEO.eventos.cliquePerm.status = false;
 				i3GEO.Interface.STATUS.pan = true;
 				i3GEO.eventos.posicaoMouseMapa(exy);
 			};
 			docMapa.ontouchend = function(exy) {
-				i3GEO.eventos.cliquePerm.status = true;
 				if(i3GEO.eventos.CONTATOUCH < 10){
 					i3GEO.Interface.STATUS.pan = false;
 					i3GEO.eventos.mouseupMapa(exy);
