@@ -582,6 +582,7 @@ i3GEO.eventos =
 			};
 			docMapa.ontouchend = function(exy) {
 				i3GEO.eventos.CONTATOUCH = 0;
+				i3GEO.eventos.cliquePerm.status = true;
 			};
 			docMapa.ontouchcancel = function(exy) {
 				i3GEO.eventos.CONTATOUCH = 0;
