@@ -577,12 +577,14 @@ i3GEO.eventos =
 			};
 			docMapa.ontouchmove = function(exy) {
 				i3GEO.eventos.CONTATOUCH++;
-				console.info(i3GEO.eventos.CONTATOUCH)
 				i3GEO.eventos.cliquePerm.status = false;
 			};
 			docMapa.ontouchend = function(exy) {
-				i3GEO.eventos.CONTATOUCH = 0;
 				i3GEO.eventos.cliquePerm.status = true;
+				if(i3GEO.eventos.CONTATOUCH < 10){
+					i3GEO.eventos.mouseupMapa(exy);
+				}
+				i3GEO.eventos.CONTATOUCH = 0;
 			};
 			docMapa.ontouchcancel = function(exy) {
 				i3GEO.eventos.CONTATOUCH = 0;
