@@ -1740,16 +1740,16 @@ i3GEO.Interface =
 					objposicaocursor.telax = e.pixel[0] + pos[0];
 					objposicaocursor.telay = e.pixel[1] + pos[1];
 				});
-				/*
-				i3geoOL.events.register("touchend", i3geoOL, function(e) {
+				i3geoOL.on("touchend", function(e) {
 					e.preventDefault();
 					calcCoord(e);
-					if (i3GEO.eventos.cliquePerm.status === true) {
+					if (i3GEO.eventos.cliquePerm.status === true && i3GEO.eventos.CONTATOUCH < 10) {
 						i3GEO.eventos.mouseupMapa(e);
 					}
 					i3GEO.eventos.cliquePerm.status = true;
+					i3GEO.eventos.CONTATOUCH = 0;
+					i3GEO.Interface.STATUS.pan = false;
 				});
-				*/
 			},
 			/**
 			 * Ativa os botoes da bara de botoes

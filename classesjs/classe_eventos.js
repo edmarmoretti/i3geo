@@ -580,14 +580,6 @@ i3GEO.eventos =
 				i3GEO.Interface.STATUS.pan = true;
 				i3GEO.eventos.posicaoMouseMapa(exy);
 			};
-			docMapa.ontouchend = function(exy) {
-				console.info(i3GEO.eventos.CONTATOUCH)
-				if(i3GEO.eventos.CONTATOUCH < 10){
-					i3GEO.Interface.STATUS.pan = false;
-					i3GEO.eventos.mouseupMapa(exy);
-				}
-				i3GEO.eventos.CONTATOUCH = 0;
-			};
 			docMapa.ontouchcancel = function(exy) {
 				i3GEO.eventos.CONTATOUCH = 0;
 			};

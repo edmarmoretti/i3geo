@@ -73,6 +73,7 @@ objposicaocursor = {
 
 i3GEO.eventos =
 	{
+		CONTATOUCH : 0,
 		/**
 		 * Variavel: SELECAO
 		 *
@@ -575,7 +576,12 @@ i3GEO.eventos =
 				i3GEO.eventos.mouseupMapa(exy);
 			};
 			docMapa.ontouchmove = function(exy) {
-				i3GEO.eventos.cliquePerm.status = false;
+				i3GEO.eventos.CONTATOUCH++;
+				i3GEO.Interface.STATUS.pan = true;
+				i3GEO.eventos.posicaoMouseMapa(exy);
+			};
+			docMapa.ontouchcancel = function(exy) {
+				i3GEO.eventos.CONTATOUCH = 0;
 			};
 		},
 		/**
