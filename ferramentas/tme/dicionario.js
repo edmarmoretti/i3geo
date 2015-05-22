@@ -46,7 +46,12 @@ i3GEOF.tme.dicionario = {
 		es : ""
 	} ],
 	'abreNoI3geo' : [ {
-		pt : "Ou clique para abrir no i3Geo:",
+		pt : "Clique para abrir com GoogleEarth:",
+		en : "",
+		es : ""
+	} ],
+	'abreNoCesium' : [ {
+		pt : "Clique para abrir com Cesium:",
 		en : "",
 		es : ""
 	} ],
