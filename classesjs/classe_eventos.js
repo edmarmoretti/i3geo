@@ -271,6 +271,7 @@ i3GEO.eventos =
 		 * Executa as fun&ccedil;&otilde;es armazenadas em MOUSEUP.
 		 */
 		mouseupMapa : function(exy) {
+			console.info("mouseup")
 			if (!exy) {
 				i3GEO.eventos.executaEventos(this.MOUSEUP);
 			} else {
@@ -325,6 +326,7 @@ i3GEO.eventos =
 		 * Executa as fun&ccedil;&otilde;es armazenadas em MOUSECLIQUE.
 		 */
 		mousecliqueMapa : function() {
+			console.info("mouseclique")
 			i3GEO.eventos.executaEventos(this.MOUSECLIQUE);
 		},
 		/**
