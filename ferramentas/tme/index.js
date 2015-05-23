@@ -311,7 +311,9 @@ i3GEOF.tme =
 								+ "' target='new' >"
 								+ url
 								+ "</a><br>";
-						url = i3GEO.configura.locaplic + "/ferramentas/cesium/kml3d.php?kmlurl=" + retorno.data.url;
+						url = i3GEO.configura.locaplic + "/ferramentas/cesium/kml3d.php?kmlurl=" 
+							+ retorno.data.url
+							+ "&legenda=" + retorno.data.legenda;
 						ins +=
 							"<br>" + $trad('abreNoCesium', i3GEOF.tme.dicionario)
 								+ "<br><a href='"

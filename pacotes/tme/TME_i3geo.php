@@ -75,18 +75,39 @@ if(!isset($parametersTME)){
 			'maxHeight' => $maxHeight
 	);
 }
-$dataConnector = new DataConnector($_GET["sid"],$verificaSID);
-$dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["titulo"],$_GET["descricao"],"");
-// Create thematic map object
-$map = new ThematicMap($dataStore, $parametersTME);
+$nomeTemp = array_merge($_GET,$_POST);
+$nomeTemp = md5(implode("",$nomeTemp));
 
-$file = $map->getKML($dataConnector->url,$download);
+$nomeFile = $dir_tmp."/tme".$nomeTemp.".kmz";
+
+//sesion e aberto com isso
+$dataConnector = new DataConnector($_GET["sid"],$verificaSID);
+
+if(!file_exists($nomeFile)){
+	$dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["titulo"],$_GET["descricao"],"");
+}
+else{
+	$dataStore = "";
+}
+$url = $_SESSION["tmpurl"]."/tme".$nomeTemp.".kmz";
+// Create thematic map object
+$map = new ThematicMap($dataStore, $parametersTME, $nomeTemp);
+
+$file = $map->getKML($dataConnector->url,$download,$nomeFile);
+
+$nomeArquivo = $map->nomeArquivo;
+
+$legenda = str_replace("kmz","png",basename($nomeArquivo));
+$legenda = str_replace("tme","legend",$legenda);
+$legenda = str_replace(basename($nomeArquivo),$legenda,$file);
+
+
 if(!$download){
 	if(!function_exists("cpjson"))
 	{
 		require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 	}
-	cpjson(array('url' => $file));
+	cpjson(array('url' => $url, 'arquivo' => $nomeArquivo, 'legenda'=>$legenda));
 }
 //echo "<p><a href='$file'>$file</a>";
 ?>
