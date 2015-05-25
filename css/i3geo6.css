@@ -266,6 +266,7 @@ font-size: 12px;
 position: relative;
 top: 2px;
 border: 0px solid white;
+cursor: pointer;
 }
 .lista td {
 border: 0px solid rgb(240, 240, 240);

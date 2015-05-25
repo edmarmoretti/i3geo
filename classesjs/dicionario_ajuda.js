@@ -906,7 +906,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/tme",
 			categoria:"5",
 			pt:"Cria um arquivo no formato KML, representando os dados de uma coluna da tabela de atributos como elementos em 3d. Mais detalhes em http://thematicmapping.org/",
-			complemento:"",
+			complemento:"Os par&acirc;metros utilizaados nessa ferramenta podem ser armazenados (por usu&aacute;rios cadastrados) no mapfile correspondente ao tema. Quando isso &eacute; feito, a ferramenta &eacute; aberta com esses par&acirc;metros pr&eacute;-definidos. As op&ccedil;&otilde;es que possibilitam isso s&atilde;o mostradas apenas quando o usu&aacute;rio estiver logado.",
 			//tela:"",
 			apijs:"i3GEO.tema.dialogo.tme()"
 		},

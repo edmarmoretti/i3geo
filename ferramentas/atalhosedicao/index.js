@@ -41,7 +41,7 @@ i3GEOF.atalhosedicao =
 	 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	 */
 	inicia : function(iddiv, idjanela) {
-		var tema, temp;
+		var tema;
 		i3GEO.janela.comboCabecalhoTemas(
 			"i3GEOFatalhosedicaoComboCabeca",
 			"i3GEOFatalhosedicaoComboCabecaSel",
@@ -122,6 +122,16 @@ i3GEOF.atalhosedicao =
 			}
 		});
 		$i("i3GEOFatalhosedicaoOpacidadeB-button").style.width = "50px";
+		
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoTme", {
+			onclick : {
+				fn : function() {
+					i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
+					i3GEO.tema.dialogo.tme(i3GEOF.atalhosedicao.tema);
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoTme-button").style.width = "200px";
 		//
 		//atualiza os campos que dependem de parametros de cada camada
 		//
@@ -150,7 +160,7 @@ i3GEOF.atalhosedicao =
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante : function() {
-		var minimiza, cabecalho, janela, divid, temp, titulo;
+		var minimiza, cabecalho, janela, divid, titulo;
 
 		if($i("i3GEOF.atalhosedicao")){
 			return;
@@ -205,7 +215,7 @@ i3GEOF.atalhosedicao =
 			}
 		}
 		else{
-			valor = obj.value
+			valor = obj.value;
 		}
 		tema = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.atalhosedicao.tema);
 		tema[obj.name] = valor;

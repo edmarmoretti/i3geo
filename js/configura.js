@@ -92,6 +92,7 @@ i3GEO.configura =
 		 * ""
 		 */
 		grupoLayers : "",
+		//TODO separa em novo javascript
 		/**
 		 * Propriedade: oMenuData
 		 *
@@ -897,6 +898,7 @@ i3GEO.configura =
 		 *
 		 * ""
 		 */
+		//TODO verificar se pode ser removida na versao 7
 		map3d : "",
 		/**
 		 * Propriedade: embedLegenda
@@ -915,6 +917,7 @@ i3GEO.configura =
 		 *
 		 * nao
 		 */
+		//TODO verificar se pode ser removida na versao 7
 		embedLegenda : "nao",
 		/**
 		 * Propriedade: templateLegenda
@@ -1010,6 +1013,7 @@ i3GEO.configura =
 		 *
 		 * default
 		 */
+		//TODO verificar se pode ser removida na versao 7
 		visual : "default",
 		/**
 		 * Propriedade: cursores
@@ -1024,6 +1028,7 @@ i3GEO.configura =
 		 *
 		 * {Objeto}
 		 */
+		//TODO verificar se pode ser removida na versao 7
 		cursores : {
 			"identifica" : {
 				ff : "pointer",
@@ -1071,6 +1076,7 @@ i3GEO.configura =
 		 *
 		 * {Objeto}
 		 */
+		//TODO verificar se pode ser removida na versao 7
 		listaDePropriedadesDoMapa : {
 			"propriedades" : [
 				//
@@ -1133,6 +1139,7 @@ i3GEO.configura =
 		 *
 		 * 4000
 		 */
+		//TODO verificar se pode ser removida na versao 7
 		tempoAplicar : 4000,
 		/**
 		 * Propriedade: tempoMouseParado
@@ -1150,6 +1157,7 @@ i3GEO.configura =
 		 *
 		 * 3500
 		 */
+		//TODO verificar se pode ser removida na versao 7
 		tempoMouseParado : 1800,
 		/**
 		 * Propriedade: iniciaJanelaMensagens
@@ -1166,6 +1174,7 @@ i3GEO.configura =
 		 *
 		 * true
 		 */
+		//TODO verificar se pode ser removida na versao 7
 		iniciaJanelaMensagens : false,
 		/**
 		 * Propriedade: liberaGuias
@@ -1184,6 +1193,7 @@ i3GEO.configura =
 		 *
 		 * nao
 		 */
+		//TODO verificar se pode ser removida na versao 7
 		liberaGuias : "nao",
 		/**
 		 * Propriedade: funcoesBotoes
@@ -1208,6 +1218,7 @@ i3GEO.configura =
 		 * {Object}
 		 *
 		 */
+		//TODO separar em novo arquivo js
 		funcoesBotoes : {
 			"botoes" : [
 				{
@@ -1715,6 +1726,7 @@ i3GEO.configura =
 				}
 			]
 		},
+		//TODO separar em um novo arquivo js
 		/**
 		 * Propriedade: iniciaFerramentas
 		 *
@@ -1739,6 +1751,7 @@ i3GEO.configura =
 		 *
 		 * {Objeto}
 		*/
+		//TODO incluir a ferramenta visualizador da INDE
 		iniciaFerramentas : {
 			executa : function() {
 				var q = i3GEO.configura.iniciaFerramentas.quais, i = 0;

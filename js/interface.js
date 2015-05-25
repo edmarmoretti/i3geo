@@ -309,6 +309,18 @@ i3GEO.Interface =
 			}
 		},
 		/**
+		 * Function : aposAdicNovaCamada
+		 * 
+		 * Executa funcoes apos uma nova camada ter sido adicionada ao mapa, mas antes do layer ter sido efetivamente adicionado ao objeto com o mapa
+		 *
+		 * Parametros:
+		 * 
+		 * {obj} - objeto camada ver i3GEO.arvoreDeCamadas.CAMADAS
+		 */
+		aposAdicNovaCamada : function (camada) {
+			i3GEO.tema.ativaFerramentas(camada);
+		},
+		/**
 		 * Function: redesenha
 		 *
 		 * Aplica o m&eacute;todo redesenha da interface atual. Em alguns casos, a fun&ccedil;&atilde;o de redesenho aplica os mesmos
@@ -1400,6 +1412,7 @@ i3GEO.Interface =
 								layer.preload = 0;
 							}
 							i3geoOL.addLayer(layer);
+							i3GEO.Interface.aposAdicNovaCamada(camada);
 						}
 					} else {
 						layer = i3geoOL.getLayersByName(camada.name)[0];
@@ -2412,6 +2425,7 @@ i3GEO.Interface =
 								i3GEO.Interface.googlemaps.insereLayer(camada.name, 0, camada.cache);
 							}
 						}
+						i3GEO.Interface.aposAdicNovaCamada(camada);
 					}
 				}
 				i3GEO.Interface.googlemaps.recalcPar();

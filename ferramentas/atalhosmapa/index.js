@@ -17,7 +17,7 @@ i3GEOF.atalhosmapa =
 	 */
 	inicia : function(iddiv) {
 		//pega os itens do menu suspenso e que contem a lista de aplicativos
-		var s, b, m, n, i, t, ins = "<div style='margin-left: 5px'>";
+		var s = "", b, m, n, i, t = [], ins = "<div style='margin-left: 5px'>";
 		m = i3GEO.configura.oMenuDataOriginal.submenus.ferramentas;
 		n = m.length;
 		for(i=0;i<n;i++){
@@ -47,7 +47,7 @@ i3GEOF.atalhosmapa =
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante : function() {
-		var temp, minimiza, cabecalho, janela, divid, temp, titulo, ltema;
+		var minimiza, cabecalho, janela, divid, titulo;
 
 		cabecalho = function() {
 		};

@@ -55,13 +55,33 @@ i3GEOF.tme.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	11 : [ {
-		pt : "",
+	'salvaParametros' : [ {
+		pt : "Salva par&acirc;metros no mapfile",
 		en : "",
 		es : ""
 	} ],
-	12 : [ {
-		pt : "",
+	'removeParametros' : [ {
+		pt : "Remove par&acirc;metros do mapfile",
+		en : "",
+		es : ""
+	} ],
+	'ativaAoAdic' : [ {
+		pt : "Abre essa ferramenta ao adicionar a camada ao mapa",
+		en : "",
+		es : ""
+	} ],
+	'execAoAdic' : [ {
+		pt : "Executa essa ferramenta ao adicionar a camada ao mapa",
+		en : "",
+		es : ""
+	} ],
+	'removePar' : [ {
+		pt : "Remove os par&acirc;metros armazenados no tema?",
+		en : "",
+		es : ""
+	} ],
+	'incluiPar' : [ {
+		pt : "Inclui os par&acirc;metros no tema?",
 		en : "",
 		es : ""
 	} ]

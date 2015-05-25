@@ -44,6 +44,22 @@ i3GEO.tema =
 		 */
 		TEMPORIZADORESID : {},
 		/**
+		 * Function: ativaFerramentas
+		 * 
+		 * Verifica se uma camada possuí ferramentas configuradas e que devem ser abertas ao ser adicionada ao mapa
+		 * 
+		 * Parametros:
+		 * 
+		 * {objeto} - objeto camada ver em i3GEO.arvoreDeCamadas.CAMADAS
+		 */
+		ativaFerramentas : function(camada){
+			if(camada.ferramentas && camada.ferramentas != ""){
+				if(camada.tme){
+					i3GEO.tema.dialogo.tme(camada.name);
+				}
+			}
+		},
+		/**
 		 * Function: exclui
 		 *
 		 * Exclui um tema do mapa
@@ -407,13 +423,19 @@ i3GEO.tema =
 			 * {string} - codigo do tema escolhido
 			 */
 			tme : function(tema) {
-				i3GEO.mapa.ativaTema(tema);
+				if(!tema){
+					tema = "";
+				}
+				var temp = function(){
+					//i3GEO.mapa.ativaTema(tema);
+					i3GEOF.tme.iniciaJanelaFlutuante(tema);
+				};
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.tema.dialogo.tme()",
 					"tme",
 					"tme",
 					"dependencias.php",
-					"i3GEOF.tme.iniciaJanelaFlutuante()");
+					temp);
 			},
 			/**
 			 * Function: mostraWms
