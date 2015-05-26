@@ -173,7 +173,7 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 			$l->set("status",MS_OFF);
 		}
 		//no caso de haver uma mascara definida no layer
-		if($versao["principal"] == 6){
+		if($versao["inteiro"] >= 60200){
 			if($l->mask != ""){
 				$lmask = $mapa->getlayerbyname($l->mask);
 				if(!empty($postgis_mapa)){
