@@ -1,5 +1,6 @@
 //utilize $trad("p1") para retornar o texto
-g_traducao = {
+g_traducao =
+	{
 		// texto da janela de mensagens
 		"p1" : [
 			{
@@ -2669,6 +2670,13 @@ g_traducao = {
 		"camedit" : [
 			{
 				pt : "Camadas edit&aacute;veis",
+				en : "",
+				es : ""
+			}
+		],
+		"nenhum" : [
+			{
+				pt : "Nenhum",
 				en : "",
 				es : ""
 			}

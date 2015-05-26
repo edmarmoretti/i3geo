@@ -1026,13 +1026,13 @@ i3GEO.arvoreDeCamadas =
 					);
 					for (i = 0; i < n; i++) {
 						temp =
-							"<div class='" + k + "' onclick='i3GEO.Interface.openlayers.ativaFundo(\"" + c[i].name + "\")'>"
+							"<div class='" + k + "' onclick='i3GEO.Interface.openlayers.ativaFundo(\"" + c[i].get("name") + "\")'>"
 							+ "<input name=layer type=checkbox ";
-						if(c[i].visibility === true){
+						if(c[i].getVisible() === true){
 							temp += " checked ";
 						}
-						temp += " value='" + c[i].name + "' id='CK" + c[i].id + "'/>"
-							+ " <label for='CK" + c[i].id + "'>" + c[i].name + "</label></div>";
+						temp += " value='" + c[i].get("name") + "' id='CK" + c[i].get("name") + "'/>"
+							+ " <label for='CK" + c[i].get("name") + "'>" + c[i].get("title") + "</label></div>";
 						new YAHOO.widget.HTMLNode(
 							{
 								html : temp,
