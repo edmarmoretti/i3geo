@@ -52,7 +52,7 @@ class DataConnector
 			{dl('php_mapscript.so');}
 		}
 		//include("../../classesphp/carrega_ext.php");
-		//verificação de segurança
+		//verificaï¿½ï¿½o de seguranï¿½a
 		if($verificaSID == true){
 			$_SESSION = array();
 			session_name("i3GeoPHP");
@@ -182,7 +182,7 @@ class DataConnector
 				"lat"=>$pt->y,
 				"wkt"=>$shape->toWkt()
 			);
-			//[0] é o ano
+			//[0] ï¿½ o ano
 			foreach($colunasvalor as $colunavalor){
 				$valor = $shape->values[$colunavalor];
 

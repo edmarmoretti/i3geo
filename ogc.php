@@ -601,6 +601,7 @@ else{
 	processaOutputformatMapfile();
 
 	$oMap->save($nomeMapfileTmp);
+	validaAcessoTemas($nomeMapfileTmp,true);
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
 if(ob_get_contents ()){

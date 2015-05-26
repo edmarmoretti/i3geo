@@ -11,7 +11,7 @@ MAP
       "TITULO"	"Países do mundo"
       "itembuscarapida"	"LONG_NAME"
       "ITENS"	"FIPS_CNTRY,GMI_CNTRY,LONG_NAME,CNTRY_NAME"
-      "tme"	'{"titulo":"População x","colnome":"CNTRY_NAME","colsdata":["POP_CNTRY"],"lmax":"100000","amax":"2000000","auto":"sim","exec":"sim"}'
+      "tme"	'{"titulo":"População","colnome":"CNTRY_NAME","colsdata":["POP_CNTRY"],"lmax":"100000","amax":"2000000","auto":"sim","exec":"sim"}'
       "TEMA"	"Países do mundo 3d"
     END # METADATA
     NAME "_lteste3d"

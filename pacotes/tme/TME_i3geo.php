@@ -101,7 +101,9 @@ $legenda = str_replace("kmz","png",basename($nomeArquivo));
 $legenda = str_replace("tme","legend",$legenda);
 $legenda = str_replace(basename($nomeArquivo),$legenda,$file);
 
-
+if (isset($inclusao) && $inclusao == true){
+	$download = true;
+}
 if(!$download){
 	if(!function_exists("cpjson"))
 	{

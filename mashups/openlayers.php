@@ -7,6 +7,7 @@
 include_once(dirname(__FILE__)."/../ms_configura.php");
 include_once(dirname(__FILE__)."/../classesphp/pega_variaveis.php");
 include_once(dirname(__FILE__)."/../classesphp/carrega_ext.php");
+include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 error_reporting(0);
 if(!empty($desligacache)){
 	$DESLIGACACHE = $desligacache;
@@ -28,8 +29,8 @@ $temasPluginI3Geo = array();
 // recupera um mapa salvo no banco de administracao
 //
 if(!empty($restauramapa)){
-	include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 	$xbase = restauraMapaAdmin($restauramapa,$dir_tmp);
+	validaAcessoTemas($xbase,true);
 	$m = ms_newMapObj($xbase);
 	$w = $m->web;
 	$w->set("imagepath",dirname($w->imagepath)."/");
@@ -217,12 +218,22 @@ if($temas != ""){
 	if(!isset($servidor)){
 		$servidor = "../ogc.php";
 	}
+	//
+	//lista de ferramentas
+	//lista os nomes de metadados que contem os parametros das
+	//ferramentas customizaveis e que seraco incluidas na propriedade do layer
+	//
+	$listaFerramentas = array("tme");
 	foreach($temas as $tema){
+		//
+		//utilzado para obter os parametros de ferramentas especificas indicadas nos metadados do LAYER
+		//
+		$ferramentas = array();
 		if(file_exists($locaplic."/temas/".$tema.".gvp")){
 			include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 			$gm = new gvsig2mapfile($locaplic."/temas/".$tema.".gvp");
 			$gvsigview = $gm->getViewsNames();
-			$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$gvsigview[0].'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$tema.'",transparent: "true", format: "image/png"},{singleTile:false,visibility:true,isBaseLayer:false})';
+			$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$gvsigview[0].'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$tema.'",transparent: "true", format: "image/png"},{singleTile:false,visibility:true,isBaseLayer:false, ferramentas :'.$ferramentas.')';
 		}
 		else{
 			$nomeMap = "";
@@ -264,6 +275,16 @@ if($temas != ""){
 							$layersNomes[] = $layern->name;
 							$layers[] = $layern;
 						}
+						//
+						//verifica se o layer contem ferramentas parametrizadas
+						//
+						foreach($listaFerramentas as $lf){
+							$meta = $layern->getmetadata($lf);
+							if($meta != ""){
+								$ferramentas[] = "'tme':".$meta;
+							}
+						}
+						$ferramentas = '{'.implode(",",$ferramentas).'}';
 					}
 					$nomeLayer = implode(",",$layersNomes);
 					$tituloLayer = $layern->getmetadata("tema");
@@ -295,9 +316,9 @@ if($temas != ""){
 						}
 						// nesse caso o layer e adicionado como TMS
 						// tms leva os parametros do TMS
-						$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png"})';
+						$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png", ferramentas :'.$ferramentas.'})';
 						// cria um clone WMS para efeitos de getfeatureinfo
-						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,transitionEffect : null,singleTile:true,visibility:false,isBaseLayer:false})';
+						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,transitionEffect : null,singleTile:true,visibility:false,isBaseLayer:false, ferramentas :'.$ferramentas.'})';
 					}
 					else{
 						foreach($layers as $l){
@@ -327,10 +348,10 @@ if($temas != ""){
 								$teffect = 'transitionEffect: null,';
 							}
 							if($tituloLayer != ""){
-								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.', ferramentas :'.$ferramentas.'})';
 							}
 							else{
-								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' displayInLayerSwitcher:false,singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.'})';
+								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' displayInLayerSwitcher:false,singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.', ferramentas :'.$ferramentas.'})';
 							}
 						}
 					}
@@ -484,6 +505,14 @@ if(count($temasPluginI3Geo) > 0){
 
 .pluginParametrossql {
 	background-image: url("../imagens/gisicons/settings.png");
+	background-size: 14px auto;
+	cursor: pointer;
+	position: relative;
+	top: 3px;
+	width: 14px;
+}
+
+.i3GEOiconeTme {
 	background-size: 14px auto;
 	cursor: pointer;
 	position: relative;

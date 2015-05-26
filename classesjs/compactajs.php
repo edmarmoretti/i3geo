@@ -286,6 +286,7 @@ $jsfiles = array(
 $buffer = "";
 salvatudojs($jsfiles,$buffer,"../mashups/openlayers_compacto.js","js");
 $jsfiles = array(
+"../css/botoes2.css",
 "../pacotes/yui290/build/fonts/fonts-min.css",
 "../pacotes/yui290/build/container/assets/skins/sam/container.css",
 "../mashups/theme/default/style.css",

@@ -636,7 +636,16 @@ i3GEO.editorOL = {
 								icone = i3GEO.pluginI3geo[layers[i].options.plugini3geo].iconeArvoreDeCamadas(layers[i].layers);
 							}
 						}
-
+						//
+						//verifica se a camada tem ferramentas parametrizadas
+						//insere o icone
+						//
+						fers = layers[i].options.ferramentas;
+						for(f in fers){
+							if(i3GEO.editorOL.ferramentasLayers[f]){
+								icone = i3GEO.editorOL.ferramentasLayers[f].icone(layers[i]);
+							}
+						}
 						ins += icone + layers[i].name+"<br><div id=legendaL_"+i+" ></div><br>";
 						//necessario pq nao e sincrono
 						eval ("var f = function(retorno){document.getElementById('legendaL_"+i+"').innerHTML = retorno.responseText;};");
@@ -2149,6 +2158,38 @@ i3GEO.editorOL = {
 			if (layers[i].CLASS_NAME == "OpenLayers.Layer.Vector"
 					&& layers[i].name != "Nenhum") {
 				i3GEO.editorOL.mapa.raiseLayer(i3GEO.editorOL.mapa.layers[i], nlayers);
+			}
+		}
+	},
+	/**
+	 * Propriedade: ferramentasLayers
+	 * 
+	 * Armazena fun&ccedil;&otilde;es e objetos que s&atilde;o utilizados para configurar ferramentas
+	 * 
+	 * que possuem par&acirc;metros definidos em cada mapfile. Normalmente, os par&acirc;metros
+	 * 
+	 * s&atilde;o utilizados no mashup para criar &iacute;cones que executam opera&ccedil;&otilde;es especiais
+	 */
+	ferramentasLayers : {
+		//lista de ferramentas que aceitam parametros embutidos em mapfiles
+		param : ["tme"],
+		"tme" : {
+			"metadata" : "tme",
+			"classe" : "i3GEOiconeTme",
+			init : function (codigo){
+				window.open(i3GEO.configura.locaplic+"/ferramentas/tme/cesium.php?&tema="+codigo);
+			},
+			icone : function(layer) {
+				var icone =
+					"<img class='i3GEOiconeTme' onclick='i3GEO.util.animaClique(this);"
+						+ "i3GEO.editorOL.ferramentasLayers.tme.init(\""
+						+ layer.params.LAYERS
+						+ "\");return false;'"
+						+ "title='3d' "
+						+ "src='"
+						+ i3GEO.configura.locaplic
+						+ "/imagens/branco.gif' />";
+				return icone;
 			}
 		}
 	}

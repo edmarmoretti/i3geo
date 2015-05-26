@@ -4,34 +4,19 @@ MAP
   LAYER
     DATA "/var/www/i3geo/aplicmap/dados/locali"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "LTEMPOITEMIMAGEM"	""
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "LTEMPOITEMDESCRICAO"	"TIPO"
       "CLASSE"	"SIM"
-      "palletestep"	""
       "LTEMPOITEMINICIO"	"ANOCRIA"
-      "temporizador"	""
       "LTEMPOITEMTIP"	"ANOCRIA"
       "permitekmz"	"nao"
-      "description_template"	""
       "LTEMPOITEMTITULO"	"NOMELOC"
-      "iconetema"	""
-      "LTEMPOITEMLINK"	""
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "palletefile"	""
       "permitedownload"	"sim"
-      "permitecomentario"	""
-      "metaestat"	""
       "itembuscarapida"	"NOMELOC"
-      "arquivokmz"	""
-      "arquivodownload"	""
       "transitioneffect"	"NAO"
       "permiteogc"	"sim"
       "permitekml"	"sim"
       "TEMA"	"_Localidades com restrição de acesso"
-      "editorsql"	""
-      "legendaimg"	""
     END # METADATA
     NAME "_llocalirestrito"
     STATUS DEFAULT
@@ -50,6 +35,4 @@ MAP
       END # STYLE
     END # CLASS
   END # LAYER
-
 END # MAP
-

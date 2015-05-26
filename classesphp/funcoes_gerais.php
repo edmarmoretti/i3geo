@@ -2639,7 +2639,7 @@ function listaLayersIndevidos($map_file){
 				$meta = str_replace(".map","",basename($map_file));
 			}
 			if($meta != ""){
-				if(in_array($meta,array_keys($restritos))){
+				if(in_array($meta,array_keys($restritos)) || in_array($layer->name,array_keys($restritos))){
 					$indevido = true;
 					foreach($gruposusr as $g){
 						foreach($restritos[$meta] as $r){
