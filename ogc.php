@@ -49,7 +49,7 @@ Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no f
 OUTPUTFORMAT - em getfeature, aceita tamb&eacute;m shape-zip para download de shapefile e csv para download de csv compactado
 
 ows_geomtype - permite definir o tipo de geometria conforme utilizado pelo parametro GEOMETRY do OGR (veja http://gdal.org/drv_csv.html)
-afeta o OUTPUTFORMAT csv. Utilize &ows_geomtype=none para obter um csv sem a coluna geometry
+afeta o OUTPUTFORMAT csv. Por default utiliza &ows_geomtype=none para obter um csv sem a coluna geometry. Para obter a geometria utilize &ows_geomtypeAS_WKT
 
 id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
 nao deve ser utilizado junto com tema
@@ -101,6 +101,12 @@ $cache = true;
 include(dirname(__FILE__)."/ms_configura.php");
 include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
+//
+//ajusta o default
+//
+if(!isset($ows_geomtype) || $ows_geomtype == ""){
+	$ows_geomtype = "none";
+}
 //
 //imprime na tela a ajuda
 //
@@ -1256,7 +1262,7 @@ function exportaCsv(){
 			$reg[] = '"'.$shape->towkt().'"';
 		}
 		$linhas[] = implode(",",$reg);
-		
+
 	}
 	$contents = implode("\n",$linhas);
 	file_put_contents($arq,$contents);
@@ -1295,7 +1301,7 @@ function exportaGeojson(){
 			$propriedades[] = array($item=>$v);
 		}
 		$wkt = $shape->towkt();
-		
+
 		$features[] = array(
 			"type"=>"Feature",
 			"properties"=>$propriedades,
