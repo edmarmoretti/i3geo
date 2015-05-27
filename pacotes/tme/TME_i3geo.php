@@ -84,7 +84,7 @@ $nomeFile = $dir_tmp."/tme".$nomeTemp.".kmz";
 $dataConnector = new DataConnector($_GET["sid"],$verificaSID);
 
 if(!file_exists($nomeFile)){
-	$dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["titulo"],$_GET["descricao"],"");
+	$dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["titulo"],$_GET["descricao"],"","bar");
 }
 else{
 	$dataStore = "";

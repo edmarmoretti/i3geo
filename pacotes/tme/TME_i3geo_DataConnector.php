@@ -111,7 +111,7 @@ class DataConnector
     }
 
     // Make data store
-    function getDataStore($nomelayer,$colunasvalor,$colunanomeregiao,$titulo,$descricao,$ext=""){ //$indicatorID, $year, $region){
+    function getDataStore($nomelayer,$colunasvalor,$colunanomeregiao,$titulo,$descricao,$ext="",$mapType=""){ //$indicatorID, $year, $region){
     	if(!function_exists("versao")){
     		include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
     	}
@@ -175,12 +175,18 @@ class DataConnector
 				$texto = mb_convert_encoding($texto,"ISO-8859-1","UTF-8");
 			}
 			*/
+			if($mapType == "bar"){
+				$wkt = "";
+			}
+			else{
+				$wkt = $shape->toWkt();
+			}
 			$dataStore['features'][$i] = array(
 				"featureID"=>$i,
 				"name"=>$texto,
 				"lon"=>$pt->x,
 				"lat"=>$pt->y,
-				"wkt"=>$shape->toWkt()
+				"wkt"=>$wkt
 			);
 			//[0] � o ano
 			foreach($colunasvalor as $colunavalor){
