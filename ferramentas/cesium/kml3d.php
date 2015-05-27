@@ -52,6 +52,8 @@ body {
 <body>
 	<div id="cesiumContainer"></div>
 	<div id="legenda">
+		<img src='<?php echo str_replace("legend","logo",$legenda);?>' />
+		<br>
 		<img src='<?php echo $legenda;?>' />
 	</div>
 	<script>

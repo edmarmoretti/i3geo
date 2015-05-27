@@ -958,9 +958,6 @@ i3GEO.php =
 					return;
 				}
 			}
-			// if(i3GEO.Interface.openlayers.googleLike === true){
-			// proj = "EPSG:3857";
-			// }
 			p = locaplic + "/classesphp/mapa_controle.php", par =
 				"g_sid=" + sid + "&funcao=adicionatemawms&servico=" + servico + "&tema=" + tema + "&nome=" + nome + "&proj=" + proj
 					+ "&formato=" + formato + "&versao=" + versao + "&nomecamada=" + nomecamada + "&tiporep=" + tiporep + "&suportasld="

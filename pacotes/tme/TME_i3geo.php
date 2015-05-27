@@ -72,7 +72,10 @@ if(!isset($parametersTME)){
 			'timeType' => $tipo, //para mais de um ano, escolha slider ou series
 			'dirtmp' => $dir_tmp,
 			'barSize'=> $barSize,
-			'maxHeight' => $maxHeight
+			'maxHeight' => $maxHeight,
+			'outlinecolor' => $_GET["outlinecolor"],
+			'numvertices' => $_GET["numvertices"],
+			'symbolType' => 'polygon'
 	);
 }
 $nomeTemp = array_merge($_GET,$_POST);
@@ -84,7 +87,7 @@ $nomeFile = $dir_tmp."/tme".$nomeTemp.".kmz";
 $dataConnector = new DataConnector($_GET["sid"],$verificaSID);
 
 if(!file_exists($nomeFile)){
-	$dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["titulo"],$_GET["descricao"],"","bar");
+	$dataStore = $dataConnector->getDataStore($_GET["nomelayer"],$colunas,$_GET["colunanomeregiao"],$_GET["titulo"],$_GET["descricao"],"",$parametersTME["mapType"]);
 }
 else{
 	$dataStore = "";

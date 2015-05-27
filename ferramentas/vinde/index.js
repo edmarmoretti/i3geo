@@ -132,12 +132,6 @@ i3GEOF.vinde = {
 					layer = dados.layers[temp[1]];
 					if(layer){
 						layer = layer[1];
-						//muda o tipo
-						//tipo = i3GEO.arvoreDeTemas.TIPOBOTAO;
-						//i3GEO.arvoreDeTemas.TIPOBOTAO = "checkbox";
-						//if (i3GEO.Interface.ATUAL !=  "openlayers" || i3GEO.Interface.openlayers.googleLike === true){
-						//	epsg = "EPSG:3857";
-						//}
 						texto = i3GEO.arvoreDeTemas.montaTextoTemaWMS(
 										layer.url,
 										layer.layers,

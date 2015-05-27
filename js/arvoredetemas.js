@@ -748,7 +748,7 @@ i3GEO.arvoreDeTemas = {
 		html += "onclick='javascript:"
 				+ adiciona
 				+ "' "
-				+ " type='radio'  /></td><td style='padding-top:4px;vertical-align:top;text-align:left;padding-left:3px;color:"
+				+ " type='checkbox'  /></td><td style='padding-top:4px;vertical-align:top;text-align:left;padding-left:3px;color:"
 				+ cor + ";' >";
 		if (link) {
 			html += "<a href='" + link + "' target=_blank >" + layer + " - "

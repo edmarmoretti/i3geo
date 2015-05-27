@@ -54,6 +54,8 @@ i3GEOF.tme =
 		// utilizado para definir item que iniciara marcado na lista de itens que indica a coluna que contem os dados
 		ITEMDADOS : "",
 		TITULO : "",
+		OUTLINECOLOR : "-1,-1,-1",
+		NUMVERTICES : 8,
 		LMAX : 5000,
 		AMAX : 2000000,
 		/*
@@ -133,6 +135,8 @@ i3GEOF.tme =
 						i3GEOF.tme.LMAX = camada.ferramentas.tme.lmax;
 						i3GEOF.tme.ITEMDADOS = camada.ferramentas.tme.colsdata.join(",");
 						i3GEOF.tme.TITULO = camada.ferramentas.tme.titulo;
+						i3GEOF.tme.OUTLINECOLOR = camada.ferramentas.tme.outlinecolor;
+						i3GEOF.tme.NUMVERTICES = camada.ferramentas.tme.numvertices;
 						if(camada.ferramentas.tme.auto === "sim"){
 							$i("ativaAoAdic").checked = true;
 						}
@@ -146,6 +150,8 @@ i3GEOF.tme =
 				$i("i3GEOTMEbarSize").value = i3GEOF.tme.AMAX;
 				$i("i3GEOTMEmaxHeight").value = i3GEOF.tme.LMAX;
 				$i("i3GEOTMEtitulo").value = i3GEOF.tme.TITULO;
+				$i("i3GEOTMEoutlinecolor").value = i3GEOF.tme.OUTLINECOLOR;
+				$i("i3GEOTMEnumvertices").value = i3GEOF.tme.NUMVERTICES;
 				// combo para escolher a coluna com os nomes das regioes
 				i3GEO.util.comboItens("i3GEOTMEregioes", i3GEOF.tme.tema, function(retorno) {
 					if ($i("i3GEOTMEregioeslista")) {
@@ -295,6 +301,10 @@ i3GEOF.tme =
 				+ $i("i3GEOTMEmaxHeight").value
 				+ '","amax":"'
 				+ $i("i3GEOTMEbarSize").value
+				+ '","outlinecolor":"'
+				+ $i("i3GEOTMEoutlinecolor").value
+				+ '","numvertices":"'
+				+ $i("i3GEOTMEnumvertices").value
 				+ '","auto":"'
 				+ auto
 				+ '","exec":"'
@@ -460,7 +470,11 @@ i3GEOF.tme =
 						+ "&titulo="
 						+ $i("i3GEOTMEtitulo").value
 						+ "&descricao="
-						+ $i("i3GEOTMEdesc").value;
+						+ $i("i3GEOTMEdesc").value
+						+ "&outlinecolor="
+						+ $i("i3GEOTMEoutlinecolor").value
+						+ "&numvertices="
+						+ $i("i3GEOTMEnumvertices").value;
 				cp.set_response_type("JSON");
 				cp.call(p, "tme", temp);
 			} catch (e) {

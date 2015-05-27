@@ -84,5 +84,15 @@ i3GEOF.tme.dicionario = {
 		pt : "Inclui os par&acirc;metros no tema?",
 		en : "",
 		es : ""
+	} ],
+	'outLineColor' : [ {
+		pt : "Cor do contorno das figuras no formato r,g,b . Deixe em branco ou com -1,-1,-1 para n&atilde;o usar nenhuma cor",
+		en : "",
+		es : ""
+	} ],
+	'numvertices' : [ {
+		pt : "N&uacute;mero de v&eacute;rtices utilizados para compor os c&iacute;rculos quando forem utilizadas barras",
+		en : "",
+		es : ""
 	} ]
 };

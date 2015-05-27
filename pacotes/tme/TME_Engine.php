@@ -62,6 +62,8 @@ class ThematicMap
 	public $numClasses = 5;
 	public $nomeArquivo = "";
 	public $nomeTemp = ""; //prefixo para as imagens
+	public $outlinecolor = "";
+	public $numvertices = "";
 
 	private $myColourScale;               // Only choropleth/prism
 	private $startColourRGB;            // Array
@@ -97,6 +99,13 @@ class ThematicMap
 		$this->mapType     = $paramArray['mapType'];   // Mapping technique
 		$this->indicatorID = $paramArray['indicator']; // Main indicator
 		$this->year        = $paramArray['year'];      // Year
+		if(!isset($paramArray['outlinecolor']) || $paramArray['outlinecolor'] == "" || $paramArray['outlinecolor'] == "-1,-1,-1"){
+			$this->outlinecolor = "";
+		}
+		else{
+			$this->outlinecolor = $this->RGB2hex(explode(",",$paramArray['outlinecolor']));
+		}
+		$this->numvertices     = $paramArray['numvertices'];
 		$this->dirtmp        = $paramArray['dirtmp'];
 		// Extract indicator metadata and values from dataStore
 		if($dataStore != ""){
@@ -258,16 +267,22 @@ class ThematicMap
 					break;
 
 				case "bar":
-
+					if($this->outlinecolor == ""){
+						$outline = 0;
+					} else {
+						$outline = 1;
+					}
 					$kmlStyles .= "      <PolyStyle>" . PHP_EOL
 					. "        <fill>1</fill>" . PHP_EOL
-					. "        <outline>0</outline>" . PHP_EOL
+					. "        <outline>".$outline."</outline>" . PHP_EOL
 					. "        $kmlSingleColour" . PHP_EOL
 					. "      </PolyStyle>" . PHP_EOL;
+					if($this->outlinecolor != ""){
+						$kmlStyles .= "<LineStyle>" . PHP_EOL
+							. "        <color>".$this->outlinecolor."</color>" . PHP_EOL
+							. "      </LineStyle>" . PHP_EOL;						
+					}
 					break;
-
-
-
 					// Proportional symbol
 				case "symbol":
 
@@ -409,7 +424,6 @@ class ThematicMap
 					. "        </TimeSpan>" . PHP_EOL;
 
 				}
-
 				// Loop thorough all features (values without features will not be shown)
 				foreach ($this->dataStore['features'] as $featureID => $feature)
 				{
@@ -453,7 +467,11 @@ class ThematicMap
 					else {
 						$kmlColour = self::rgb2bgr($this->noDataColour);
 					}
-
+					if($this->outlinecolor == ""){
+						$outline = 0;
+					} else {
+						$outline = 1;
+					}
 
 					switch ($this->mapType) {
 
@@ -464,7 +482,6 @@ class ThematicMap
 							. "              <color>$kmlColour</color>" . PHP_EOL
 							. "            </PolyStyle>" . PHP_EOL
 							. "          </Style>" . PHP_EOL;
-
 							$kmlFeature .= self::wkt2kml($feature['wkt'], 0);
 							break;
 
@@ -490,12 +507,17 @@ class ThematicMap
 									$kmlFeature = "          <Style>" . PHP_EOL
 									. "            <PolyStyle>" . PHP_EOL
 									. "              <color>$kmlColour</color>" . PHP_EOL
-									. "              <outline>0</outline>" . PHP_EOL
-									. "            </PolyStyle>" . PHP_EOL
-									. "          </Style>" . PHP_EOL;
+									. "              <outline>".$outline."</outline>" . PHP_EOL
+									. "            </PolyStyle>" . PHP_EOL;
+									if($this->outlinecolor != ""){
+										$kmlFeature .= "<LineStyle>" . PHP_EOL
+										. "        <color>".$this->outlinecolor."</color>" . PHP_EOL
+										. "      </LineStyle>" . PHP_EOL;
+									}
+									$kmlFeature .= "          </Style>" . PHP_EOL;
 								}
 
-								$kmlFeature .= self::kmlSymbolCalculator($longitude, $latitude, $this->barSize, 8, $altitude);
+								$kmlFeature .= self::kmlSymbolCalculator($longitude, $latitude, $this->barSize, $this->numvertices, $altitude);
 							}
 							break;
 
@@ -1018,6 +1040,13 @@ class ThematicMap
 		imagepng($legend, $file);
 
 		return $file;
+	}
+	function RGB2hex($rgb)
+	{
+		$r = str_pad(dechex($rgb[0]), 2, '0', STR_PAD_LEFT);
+		$g = str_pad(dechex($rgb[1]), 2, '0', STR_PAD_LEFT);
+		$b = str_pad(dechex($rgb[2]), 2, '0', STR_PAD_LEFT);
+		return("ff" . $b . $g . $r);
 	}
 } // class ThematicMap
 
