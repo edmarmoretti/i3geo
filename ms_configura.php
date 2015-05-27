@@ -74,6 +74,12 @@ $statusFerramentas = array(
 	"melhorcaminho"=>true
 );
 /*
+Variable: $ogrOutput
+
+Indica se o OGR esta corretamente instalado, permitindo o seu uso nos servicos OGC de exportacao de dados
+*/
+$ogrOutput = true;
+/*
 Variable: saikuUrl
 
 URL para acessar o aplicativo SAIKU. Se nao estiver instalado, deixe em branco

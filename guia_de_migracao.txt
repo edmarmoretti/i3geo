@@ -3,7 +3,7 @@ GUIA DE UPDATES e UPGRADES
 -------------------------------------------------------------------------------------------------
 Para a versão 7.0
 
-
+Inclusão da variável $ogrOutput em ms_configura.php, que indica se o OGR esta corretamente instalado, permitindo o seu uso nos servicos OGC de exportacao de dados
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 

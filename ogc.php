@@ -440,9 +440,7 @@ else{
 							$l->setfilter($parametro);
 							$cache = false;
 						}
-
 						ms_newLayerObj($oMap, $l);
-						//$req->setParameter("LAYERS", "mundo");
 					}
 				}
 			}
@@ -818,9 +816,6 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo" && $_GET["inf
 	getfeatureinfoJson();
 	exit;
 }
-$oMap->owsdispatch($req);
-
-$contenttype = ms_iostripstdoutbuffercontenttype();
 
 if(strtolower($request) == "getcapabilities"){
 	header('Content-Disposition: attachment; filename=getcapabilities.xml');
@@ -829,12 +824,19 @@ if(strtolower($request) == "getcapabilities"){
 if(!isset($OUTPUTFORMAT)){
 	header("Content-type: $contenttype");
 }
+//$ogrOutput vem de ms_configura.php
 
 //precisa limpar o cabecalho
 if(strtolower($OUTPUTFORMAT) == "geojson" || strtolower($OUTPUTFORMAT) == "json"){
+	$arq = $dir_tmp."/".$tema.".json";
+	if(isset($ogrOutput) && $ogrOutput == false){
+		exportaGeojson();
+		exit;
+	}
+	$oMap->owsdispatch($req);
+	$contenttype = ms_iostripstdoutbuffercontenttype();
 	ms_iostripstdoutbuffercontentheaders();
 	//grava em disco
-	$arq = $dir_tmp."/".$tema.".json";
 	$contents = ms_iogetstdoutbufferstring();
 	file_put_contents($arq,$contents);
 	//envia para download
@@ -844,6 +846,8 @@ if(strtolower($OUTPUTFORMAT) == "geojson" || strtolower($OUTPUTFORMAT) == "json"
 	exit;
 }
 if(strtolower($OUTPUTFORMAT) == "shape-zip"){
+	$oMap->owsdispatch($req);
+	$contenttype = ms_iostripstdoutbuffercontenttype();
 	//grava em disco
 	$arq = $dir_tmp."/".$tema."_shapefile.zip";
 	$contents = ms_iogetstdoutbufferstring();
@@ -855,18 +859,28 @@ if(strtolower($OUTPUTFORMAT) == "shape-zip"){
 	exit;
 }
 if(strtolower($OUTPUTFORMAT) == "csv"){
+	$arq = $dir_tmp."/".$tema.$ows_geomtype.".csv";
+	$fileName = $tema.$ows_geomtype.'.csv';
+	if(isset($ogrOutput) && $ogrOutput == false){
+		exportaCsv();
+		exit;
+	}
+	//
+	$oMap->owsdispatch($req);
+	$contenttype = ms_iostripstdoutbuffercontenttype();
 	ms_iostripstdoutbuffercontentheaders();
 	//grava em disco
-	$arq = $dir_tmp."/".$tema.$ows_geomtype.".csv";
 	$contents = ms_iogetstdoutbufferstring();
 	file_put_contents($arq,$contents);
 	//envia para download
-	header('Content-Disposition: attachment; filename='.$tema.$ows_geomtype.'.csv');
+	header('Content-Disposition: attachment; filename='.$fileName);
 	header("Content-type: text/csv");
 	ms_iogetStdoutBufferBytes();
 	ms_ioresethandlers();
 	exit;
 }
+$oMap->owsdispatch($req);
+$contenttype = ms_iostripstdoutbuffercontenttype();
 $buffer = ms_iogetStdoutBufferBytes();
 
 ms_ioresethandlers();
@@ -1209,6 +1223,98 @@ function restauraMapaSalvo(){
 	$l = $m->getlayer(0);
 	$_GET["LAYERS"] = $l->name;
 }
+function exportaCsv(){
+	global $oMap, $arq, $fileName, $versao, $ows_geomtype;
+	$layer = $oMap->getlayer(0);
+	$items = pegaItens($layer,$oMap);
+	$layer->querybyrect($oMap->extent);
+	$layer->open();
+	$res_count = $layer->getNumresults();
+	$linhas = array();
+	if($ows_geomtype == "none"){
+		$linhas[] = implode(",",$items);
+	}
+	else{
+		$linhas[] = implode(",",$items).",wkt";
+	}
+	for ($i = 0; $i < $res_count; $i++){
+		if($versao == 6){
+			$shape = $layer->getShape($layer->getResult($i));
+		}
+		else{
+			$shape = $layer->getFeature($layer->getResult($i)->shapeindex);
+		}
+		$reg = array();
+		foreach ($items as $item){
+			$v = trim($shape->values[$item]);
+			if(is_string($v)){
+				$v = '"'.converteenc($v).'"';
+			}
+			$reg[] = $v;
+		}
+		if($ows_geomtype != "none"){
+			$reg[] = '"'.$shape->towkt().'"';
+		}
+		$linhas[] = implode(",",$reg);
+		
+	}
+	$contents = implode("\n",$linhas);
+	file_put_contents($arq,$contents);
+	//envia para download
+	ob_clean();
+	header('Content-Disposition: attachment; filename='.$fileName);
+	header("Content-type: text/csv");
+	echo $contents;
+	exit;
+}
+function exportaGeojson(){
+	global $oMap, $arq, $fileName, $versao, $ows_geomtype;
+	include("pacotes/gisconverter/gisconverter.php");
+	$decoder = new gisconverter\WKT();
+	$layer = $oMap->getlayer(0);
+	$items = pegaItens($layer,$oMap);
+	$layer->querybyrect($oMap->extent);
+	$layer->open();
+	$res_count = $layer->getNumresults();
+	$linhas = array();
+
+	$features = array();
+	for ($i = 0; $i < $res_count; $i++){
+		if($versao == 6){
+			$shape = $layer->getShape($layer->getResult($i));
+		}
+		else{
+			$shape = $layer->getFeature($layer->getResult($i)->shapeindex);
+		}
+		$propriedades = array();
+		foreach ($items as $item){
+			$v = trim($shape->values[$item]);
+			if(is_string($v)){
+				$v = '"'.converteenc($v).'"';
+			}
+			$propriedades[] = array($item=>$v);
+		}
+		$wkt = $shape->towkt();
+		
+		$features[] = array(
+			"type"=>"Feature",
+			"properties"=>$propriedades,
+			"geometry"=>json_decode($decoder->geomFromText($wkt)->toGeoJSON())
+		);
+	}
+	$n[] = array (
+			"type" => "FeatureCollection",
+			"features" => $features
+	);
+	$contents = json_encode($n[0]);
+	$contents = str_replace('\"','',$contents);
+	file_put_contents($arq,$contents);
+	ob_clean();
+	header("Content-type: application/json; subtype=geojson");
+	echo $contents;
+	exit;
+}
+
 function converteenc($texto){
 	if (!mb_detect_encoding($texto,"UTF-8",true)){
 		$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
