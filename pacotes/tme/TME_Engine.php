@@ -490,11 +490,12 @@ class ThematicMap
 									$kmlFeature = "          <Style>" . PHP_EOL
 									. "            <PolyStyle>" . PHP_EOL
 									. "              <color>$kmlColour</color>" . PHP_EOL
+									. "              <outline>0</outline>" . PHP_EOL
 									. "            </PolyStyle>" . PHP_EOL
 									. "          </Style>" . PHP_EOL;
 								}
 
-								$kmlFeature .= self::kmlSymbolCalculator($longitude, $latitude, $this->barSize, 15, $altitude);
+								$kmlFeature .= self::kmlSymbolCalculator($longitude, $latitude, $this->barSize, 8, $altitude);
 							}
 							break;
 

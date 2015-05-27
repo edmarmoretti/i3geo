@@ -184,8 +184,8 @@ class DataConnector
 			$dataStore['features'][$i] = array(
 				"featureID"=>$i,
 				"name"=>$texto,
-				"lon"=>$pt->x,
-				"lat"=>$pt->y,
+				"lon"=>round($pt->x,6),
+				"lat"=>round($pt->y,6),
 				"wkt"=>$wkt
 			);
 			//[0] � o ano
