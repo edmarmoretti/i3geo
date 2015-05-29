@@ -34,6 +34,8 @@ $_GET["maxHeight"] = $tme["amax"];
 $_GET["titulo"] = $tme["titulo"];
 $_GET["nomelayer"] = $_GET["tema"];
 $_GET["colunanomeregiao"] = $tme["colnome"];
+$_GET["numvertices"] = $tme["numvertices"];
+$_GET["outlinecolor"] = $tme["outlinecolor"];
 $_GET["descricao"] = "";
 
 //mapfile de inicializacao
@@ -80,7 +82,6 @@ $layern = $maptemp->getLayerbyname($_GET["tema"]);
 ms_newLayerObj($mapn, $layern);
 
 $mapn->save($map_file);
-
 
 $_SESSION["tmpurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual;
 $_SESSION["map_file"] = $map_file;

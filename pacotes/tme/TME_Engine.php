@@ -158,11 +158,7 @@ class ThematicMap
 		// Make an array of available years
 		if ($this->timeType != 'year') $this->yearArray = $this->indicator['years'];
 		else $this->yearArray = array($this->year); // Only one year
-
-
 	}
-
-
 	//
 	// Constructor
 	// @access protected
@@ -171,8 +167,6 @@ class ThematicMap
 	{
 		// What goes here?
 	}
-
-
 	//
 	// Function
 	// @access protected
@@ -280,7 +274,7 @@ class ThematicMap
 					if($this->outlinecolor != ""){
 						$kmlStyles .= "<LineStyle>" . PHP_EOL
 							. "        <color>".$this->outlinecolor."</color>" . PHP_EOL
-							. "      </LineStyle>" . PHP_EOL;						
+							. "      </LineStyle>" . PHP_EOL;
 					}
 					break;
 					// Proportional symbol
@@ -676,7 +670,7 @@ class ThematicMap
 			$zip->addFile($kml, 'doc.kml');//edmar
 			$zip->output($file);//edmar
 		}
-		
+
 		if($download){
 			ob_end_clean();
 			//header('Content-Type: application/vnd.google-earth.kml+xml');

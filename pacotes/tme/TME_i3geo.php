@@ -78,6 +78,7 @@ if(!isset($parametersTME)){
 			'symbolType' => 'polygon'
 	);
 }
+
 $nomeTemp = array_merge($_GET,$_POST);
 $nomeTemp = md5(implode("",$nomeTemp));
 
@@ -94,6 +95,7 @@ else{
 }
 $url = $_SESSION["tmpurl"]."/tme".$nomeTemp.".kmz";
 // Create thematic map object
+
 $map = new ThematicMap($dataStore, $parametersTME, $nomeTemp);
 
 $file = $map->getKML($dataConnector->url,$download,$nomeFile);
@@ -111,6 +113,10 @@ if(!$download){
 	if(!function_exists("cpjson"))
 	{
 		require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+	}
+	if(!file_exists($nomeArquivo)){
+		echo "Nao foi possivel gerar o arquivo de visualizacao.";
+		exit;
 	}
 	cpjson(array('url' => $url, 'arquivo' => $nomeArquivo, 'legenda'=>$legenda));
 }

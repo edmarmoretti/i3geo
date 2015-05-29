@@ -2167,11 +2167,11 @@ i3GEO.editorOL = {
 	},
 	/**
 	 * Propriedade: ferramentasLayers
-	 * 
+	 *
 	 * Armazena fun&ccedil;&otilde;es e objetos que s&atilde;o utilizados para configurar ferramentas
-	 * 
+	 *
 	 * que possuem par&acirc;metros definidos em cada mapfile. Normalmente, os par&acirc;metros
-	 * 
+	 *
 	 * s&atilde;o utilizados no mashup para criar &iacute;cones que executam opera&ccedil;&otilde;es especiais
 	 */
 	ferramentasLayers : {
@@ -2184,10 +2184,16 @@ i3GEO.editorOL = {
 				window.open(i3GEO.configura.locaplic+"/ferramentas/tme/cesium.php?&tema="+codigo);
 			},
 			icone : function(layer) {
-				var icone =
+				var l, icone;
+				if(layer.params.LAYERS){
+					l = layer.params.LAYERS;
+				} else{
+					l = layer.layername;
+				}
+				icone =
 					"<img class='i3GEOiconeTme' onclick='i3GEO.util.animaClique(this);"
 						+ "i3GEO.editorOL.ferramentasLayers.tme.init(\""
-						+ layer.params.LAYERS
+						+ l
 						+ "\");return false;'"
 						+ "title='3d' "
 						+ "src='"
