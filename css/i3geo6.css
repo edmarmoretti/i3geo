@@ -2375,6 +2375,10 @@ background-image: URL('../imagens/oxygen/16x16/text-mathml.png');
 background-image: URL('../imagens/3d.png');
 background-size: 16px;
 }
+.i3GEOiconeStorymap {
+background-image: URL('../imagens/oxygen/16x16/kmplayer.png');
+background-size: 16px;
+}
 .i3GEOiconeAdd {
 background-image: URL('../imagens/gisicons/layer-add.png');
 background-size: 16px;

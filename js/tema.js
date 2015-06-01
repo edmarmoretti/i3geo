@@ -414,6 +414,29 @@ i3GEO.tema =
 		 */
 		dialogo : {
 			/**
+			 * Function: storymap
+			 *
+			 * Abre a ferramenta storymap
+			 *
+			 * Parametros:
+			 *
+			 * {string} - codigo do tema escolhido
+			 */
+			storymap : function(tema) {
+				if(!tema){
+					tema = "";
+				}
+				var temp = function(){
+					i3GEOF.storymap.iniciaJanelaFlutuante(tema);
+				};
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.tema.dialogo.storymap()",
+					"storymap",
+					"storymap",
+					"dependencias.php",
+					temp);
+			},
+			/**
 			 * Function: tme
 			 *
 			 * Abre a ferramenta TME
