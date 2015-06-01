@@ -52,9 +52,9 @@ body {
 <body>
 	<div id="cesiumContainer"></div>
 	<div id="legenda">
-		<img src='<?php echo str_replace("legend","logo",$legenda);?>' />
+		<img src='<?php echo strip_tags(str_replace("legend","logo",$legenda));?>' />
 		<br>
-		<img src='<?php echo $legenda;?>' />
+		<img src='<?php echo strip_tags($legenda);?>' />
 	</div>
 	<script>
 	var viewer = new Cesium.Viewer(
@@ -67,7 +67,7 @@ body {
 	
 	var imageryLayers = viewer.imageryLayers;
 	if('<?php echo $kmlurl;?>' != ''){
-		viewer.dataSources.add(Cesium.KmlDataSource.load('<?php echo $kmlurl;?>'))
+		viewer.dataSources.add(Cesium.KmlDataSource.load('<?php echo strip_tags($kmlurl);?>'))
 	}
 	viewer.camera.lookAt(Cesium.Cartesian3.fromDegrees(-55.0, -13.0), new Cesium.Cartesian3(0.0, -4790000.0, 3930000.0));
 	viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
