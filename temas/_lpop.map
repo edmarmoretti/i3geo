@@ -1,0 +1,64 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "user=postgres password=postgres dbname=i3geosaude host=localhost port=5432"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom from /*SE*/(SELECT (j.valorcalculado) AS pop_res_tot, co_municipio,no_cidade,co_uf,sg_uf,area_territorial,nu_ano_instalacao,/*SG*/the_geom as the_geom /*SG*/ FROM i3geo_metaestat.municipios AS regiao  INNER JOIN ( SELECT munic AS cod_regiao,sum(pop_res_tot) AS valorcalculado FROM ibge.populacao_residente WHERE ano IN ('2000') AND pop_res_tot IS NOT NULL  /*FA*//*FA*/ /*FAT*//*FAT*/ GROUP BY cod_regiao  )  AS j ON j.cod_regiao::text = regiao.co_municipio::text /*FR*//*FR*/ )/*SE*/ as foo using unique co_municipio using srid=4326"
+    METADATA
+      "CLASSE"	"SIM"
+      "tme"	"{\"titulo\":\"População total (pol) Município ano IN (\'2000\')\",\"colnome\":\"no_cidade\",\"colsdata\":[\"pop_res_tot\"],\"lmax\":\"8000\",\"amax\":\"500000\",\"outlinecolor\":\"-1,-1,-1\",\"numvertices\":\"4\",\"auto\":\"sim\",\"exec\":\"nao\"}"
+      "TEMA"	"População total (pol) Município ano IN ('2000')"
+    END # METADATA
+    NAME "_lpop"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "<= 6008"
+      EXPRESSION ([pop_res_tot]<=6008)
+      STYLE
+        COLOR 255 255 199
+        OUTLINECOLOR 255 255 255
+        OUTLINEWIDTH 6
+        SIZE 6
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "> 6008 e <= 11531"
+      EXPRESSION (([pop_res_tot]>6008)and([pop_res_tot]<=11531))
+      STYLE
+        COLOR 235 235 210
+        OUTLINECOLOR 255 255 255
+        OUTLINEWIDTH 11
+        SIZE 11
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "> 11531 e <= 22638"
+      EXPRESSION (([pop_res_tot]>11531)and([pop_res_tot]<=22638))
+      STYLE
+        COLOR 216 216 220
+        OUTLINECOLOR 255 255 255
+        OUTLINEWIDTH 16
+        SIZE 16
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "> 22638"
+      EXPRESSION ([pop_res_tot]>22638)
+      STYLE
+        COLOR 196 196 230
+        OUTLINECOLOR 255 255 255
+        OUTLINEWIDTH 21
+        SIZE 21
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

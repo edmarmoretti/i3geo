@@ -176,7 +176,7 @@ MAP
 			"itembuscarapida" "LONG_NAME"
 		END
 		NAME "mundo"
-		STATUS DEFAULT
+		STATUS OFF
 		TEMPLATE "none.htm"
 		TYPE POLYGON
 		CLASS

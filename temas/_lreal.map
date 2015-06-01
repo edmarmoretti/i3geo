@@ -1,0 +1,29 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION ""
+    DATA "/var/www/i3geo/aplicmap/dados/estradareal/novo.shp"
+    METADATA
+     "CLASSE"	"SIM"
+     "TEMA"	"Caminho Novo Estrada Real"
+    END # METADATA
+    NAME "_lreal"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 250 0 0
+        SIZE 15
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+
+  END # LAYER
+END # MAP

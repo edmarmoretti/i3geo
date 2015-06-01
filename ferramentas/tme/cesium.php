@@ -37,6 +37,8 @@ $_GET["colunanomeregiao"] = $tme["colnome"];
 $_GET["numvertices"] = $tme["numvertices"];
 $_GET["outlinecolor"] = $tme["outlinecolor"];
 $_GET["descricao"] = "";
+$_GET["numvertices"] = $tme["numvertices"];
+$_GET["outlinecolor"] = $tme["outlinecolor"];
 
 //mapfile de inicializacao
 $versao = versao();
