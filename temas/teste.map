@@ -2,119 +2,63 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "sigeo"
-    CONNECTIONTYPE POSTGIS
-    DATA "geom from (select * from limites.tindi) as foo using unique gid using srid=4326"
+    CONNECTION ""
+    DATA "/var/www/temp/localizador_052015.shp"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "TIP"	"terrai_nom"
-      "cache"	"sim"
-      "ltempoitemimagem"	""
-      "olopacity"	""
-      "CLASSE"	"SIM"
-      "ltempoitemdescricao"	""
-      "palletestep"	""
-      "ltempoiteminicio"	""
-      "ltempoitemtip"	""
-      "gmopacity"	""
-      "gmstatus"	""
-      "itensdesc"	"código,nome,etnia,município,fase,modalidade"
-      "description_template"	""
-      "ltempoitemtitulo"	""
-      "ltempoitemlink"	""
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "arquivotemaoriginal"	""
-      "palletefile"	""
-      "olstatus"	""
-      "nomeoriginal"	""
-      "ltempoformatodata"	""
-      "ltempoitemicone"	""
-      "metaestat"	""
-      "itembuscarapida"	""
-      "CONEXAOORIGINAL"	"sigeo"
-      "itens"	"terrai_cod,terrai_nom,etnia_nome,municipio_,fase_ti,modalidade"
-      "TEMA"	"Terras indígenas por fase de regularização"
-      "convcaracter"	""
-      "cortepixels"	"0"
-      "editorsql"	""
-      "ltempoconvencode"	""
-      "ltempoitemfim"	""
+      "METAESTAT_ID_MEDIDA_VARIAVEL"""
+      "ltempoitemimagem"""
+      "tip""RELATORIO"
+      "ltempoitemdescricao"""
+      "CLASSE""SIM"
+      "ltempoiteminicio"""
+      "palletestep"""
+      "ltempoitemtip"""
+      "temporizador"""
+      "ltempoitemtitulo"""
+      "description_template"""
+      "itensdesc""OBS,PROCESSO,RIP,ORGAO,RELATORIO"
+      "iconetema"""
+      "ltempoitemlink"""
+      "itenslink""[OBS]"
+      "tiles"""
+      "METAESTAT_CODIGO_TIPO_REGIAO"""
+      "palletefile"""
+      "ltempoformatodata"""
+      "ltempoitemicone"""
+      "permitecomentario""SIM"
+      "PLUGINI3GEO"""
+      "metaestat"""
+      "escondido""NAO"
+      "itembuscarapida""OBS"
+      "itens""OBS,PROCESSO,RIP,ORGAO,RELATORIO"
+      "transitioneffect""SIM"
+      "TEMA""localizador"
+      "convcaracter"""
+      "cortepixels""0"
+      "ltempoconvencode"""
+      "editorsql"""
+      "identifica""SIM"
+      "aplicaextensao""SIM"
+      "ltempoitemfim"""
     END # METADATA
-    NAME "tiregula"
-    PROCESSING "LABEL_NO_CLIP=True"
-    PROCESSING "POLYLINE_NO_CLIP=True"
-    PROCESSING "LABEL_NO_CLIP=True"
-    PROCESSING "POLYLINE_NO_CLIP=True"
+    NAME "teste"
+    PROJECTION
+      "init=epsg:29194"
+    END # PROJECTION
     STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"
-    TYPE POLYGON
+    TYPE POINT
     UNITS METERS
     CLASS
-      NAME "Declarada"
-      EXPRESSION ('[fase_ti]'eq'Declarada')
+      NAME ""
       STYLE
         ANGLE 0
-        COLOR 198 105 222
+        COLOR 166 16 16
         OFFSET 0 0
-        OUTLINECOLOR 255 255 255
+        SIZE 20
+        SYMBOL "ponto"
       END # STYLE
-      TITLE ""
-    END # CLASS
-    CLASS
-      NAME "Regularizada"
-      EXPRESSION ('[fase_ti]'eq'Regularizada')
-      STYLE
-        ANGLE 0
-        COLOR 141 104 56
-        OFFSET 0 0
-        OUTLINECOLOR 255 255 255
-      END # STYLE
-      TITLE ""
-    END # CLASS
-    CLASS
-      NAME "Encaminhada RI"
-      EXPRESSION ('[fase_ti]'eq'Encaminhada RI')
-      STYLE
-        ANGLE 0
-        COLOR 80 222 151
-        OFFSET 0 0
-        OUTLINECOLOR 255 255 255
-      END # STYLE
-      TITLE ""
-    END # CLASS
-    CLASS
-      NAME "Homologada"
-      EXPRESSION ('[fase_ti]'eq'Homologada')
-      STYLE
-        ANGLE 0
-        COLOR 56 127 51
-        OFFSET 0 0
-        OUTLINECOLOR 255 255 255
-      END # STYLE
-      TITLE ""
-    END # CLASS
-    CLASS
-      NAME "Delimitada"
-      EXPRESSION ('[fase_ti]'eq'Delimitada')
-      STYLE
-        ANGLE 0
-        COLOR 154 239 245
-        OFFSET 0 0
-        OUTLINECOLOR 255 255 255
-      END # STYLE
-      TITLE ""
-    END # CLASS
-    CLASS
-      NAME "Em Estudo"
-      EXPRESSION ('[fase_ti]'eq'Em Estudo')
-      STYLE
-        ANGLE 0
-        COLOR 232 157 44
-        OFFSET 0 0
-        OUTLINECOLOR 255 255 255
-      END # STYLE
-      TITLE ""
     END # CLASS
   END # LAYER
 
