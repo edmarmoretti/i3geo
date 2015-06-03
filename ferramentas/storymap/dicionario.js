@@ -69,5 +69,15 @@ i3GEOF.storymap.dicionario = {
 		pt : "Coluna com a latitude (em DD)",
 		en : "",
 		es : ""
+	} ],
+	'removePar' : [ {
+		pt : "Remove os par&acirc;metros armazenados no tema?",
+		en : "",
+		es : ""
+	} ],
+	'incluiPar' : [ {
+		pt : "Inclui os par&acirc;metros no tema?",
+		en : "",
+		es : ""
 	} ]
 };

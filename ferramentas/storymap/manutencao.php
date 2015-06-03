@@ -2,8 +2,8 @@
 include_once(dirname(__FILE__)."/../inicia.php");
 include_once(dirname(__FILE__)."/../../admin/php/login.php");
 $funcoesEdicao = array(
-		"REMOVETME",
-		"INCLUITME"
+		"REMOVE",
+		"INCLUI"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/editormapfile") == false){
@@ -17,11 +17,11 @@ error_reporting(0);
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
-	case "REMOVETME":
+	case "REMOVE":
 		$mapa = ms_newMapObj($map_file);
 		$l = $mapa->getlayerbyname($tema);
 		if($l != ""){
-			$l->setmetadata("tme","");
+			$l->setmetadata("storymap","");
 			$mapa->save($map_file);
 		}
 		$arq = $locaplic."/temas/".$tema.".map";
@@ -29,18 +29,18 @@ switch (strtoupper($funcao))
 			$mapa = ms_newMapObj($arq);
 			$l = $mapa->getlayerbyname($tema);
 			if($l != ""){
-				$l->setmetadata("tme","");
+				$l->setmetadata("storymap","");
 				$mapa->save($arq);
 				removeCabecalho($arq);
 			}
 		}
 		$retorno = "ok";
 	break;
-	case "INCLUITME":
+	case "INCLUI":
 		$mapa = ms_newMapObj($map_file);
 		$l = $mapa->getlayerbyname($tema);
 		if($l != ""){
-			$l->setmetadata("tme",base64_decode($tme));
+			$l->setmetadata("storymap",base64_decode($storymap));
 			$mapa->save($map_file);
 		}
 		$arq = $locaplic."/temas/".$tema.".map";
@@ -48,7 +48,7 @@ switch (strtoupper($funcao))
 			$mapa = ms_newMapObj($arq);
 			$l = $mapa->getlayerbyname($tema);
 			if($l != ""){
-				$l->setmetadata("tme",base64_decode($tme));
+				$l->setmetadata("storymap",base64_decode($storymap));
 				$mapa->save($arq);
 				removeCabecalho($arq);
 			}

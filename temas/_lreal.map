@@ -5,14 +5,16 @@ MAP
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/estradareal/novo.shp"
     METADATA
-     "CLASSE"	"SIM"
-     "TEMA"	"Caminho Novo Estrada Real"
+      "CLASSE"	"SIM"
+      "TEMA"	"Caminho Novo Estrada Real"
+      "storymap"	'{"cabecalho":"Primeiro slide","texto":"Texto do primeiro slide da apresentação","colcabecalho":"NOME","coltexto":"COMENTARIO","collocal":"NOME","colicone":"","colmedia":"URL","collon":"LONGITUDE","collat":"LATITUDE"}'
     END # METADATA
     NAME "_lreal"
     PROCESSING "LABEL_NO_CLIP=True"
     PROCESSING "POLYLINE_NO_CLIP=True"
     STATUS DEFAULT
     TEMPLATE "none.htm"
+    TILEITEM "location"
     TYPE POINT
     UNITS METERS
     CLASS
@@ -24,6 +26,7 @@ MAP
       END # STYLE
       TITLE ""
     END # CLASS
-
   END # LAYER
+
 END # MAP
+

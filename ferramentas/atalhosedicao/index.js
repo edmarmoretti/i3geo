@@ -132,6 +132,15 @@ i3GEOF.atalhosedicao =
 			}
 		});
 		$i("i3GEOFatalhosedicaoTme-button").style.width = "200px";
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoStorymap", {
+			onclick : {
+				fn : function() {
+					i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
+					i3GEO.tema.dialogo.storymap(i3GEOF.atalhosedicao.tema);
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoStorymap-button").style.width = "200px";
 		//
 		//atualiza os campos que dependem de parametros de cada camada
 		//

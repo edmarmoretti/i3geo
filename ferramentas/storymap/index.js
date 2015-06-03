@@ -7,6 +7,8 @@ Abre apenas se o usuário estiver logado
 
 <i3GEO.tema.dialogo.storymap>
 
+Para testar utilize http://localhost/i3geo/ms_criamapa.php?temasa=_lreal
+
 Arquivo:
 
 i3geo/ferramentas/storymap/index.js.php
@@ -109,7 +111,7 @@ i3GEOF.storymap =
 		inicia : function(iddiv) {
 			var camada = "";
 			i3GEO.janela.comboCabecalhoTemas("i3GEOFstoComboCabeca", "i3GEOFstoComboCabecaSel", "storymap", "ligadosComTabela");
-			if(i3GEOF.storymap.tema === ""){
+			if (i3GEOF.storymap.tema === "") {
 				return;
 			}
 			$i(iddiv).innerHTML = i3GEOF.storymap.html();
@@ -120,45 +122,38 @@ i3GEOF.storymap =
 				//
 				if (i3GEO.arvoreDeCamadas) {
 					camada = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.storymap.tema);
-					if (camada != "" && camada.ferramentas.storymap) {
-						if(camada.ferramentas.storymap.auto === "sim"){
-							$i("ativaAoAdic").checked = true;
-						}
-						if(camada.ferramentas.storymap.exec === "sim"){
-							$i("execAoAdic").checked = true;
-						}
-					}
 				}
-				//cria os combos de opcao
+				// cria os combos de opcao
 				var temp = function(r) {
-					var combo = function (dados, idonde){
-						var n,i,ins;
+					var combo = function(dados, idonde) {
+						var n, i, ins;
 						n = dados.length;
-						ins = "<select id='"+idonde+"Combo' >";
+						ins = "<select id='" + idonde + "Combo' >";
 						ins += "<option value='' >---</option>";
 						for (i = 0; i < n; i++) {
-							ins += "<option value='"+dados[i]["item"]+"' >"+dados[i]["item"]+"</option>";
+							ins += "<option value='" + dados[i]["item"] + "' >" + dados[i]["item"] + "</option>";
 						}
 						ins += "</select>";
 						$i(idonde).innerHTML = ins;
 					};
-					combo(r.data.valores,"i3GEOstocolcabecalho");
-					combo(r.data.valores,"i3GEOstocoltexto");
-					combo(r.data.valores,"i3GEOstocollocal");
-					combo(r.data.valores,"i3GEOstocolicone");
-					combo(r.data.valores,"i3GEOstocolmedia");
-					combo(r.data.valores,"i3GEOstocollon");
-					combo(r.data.valores,"i3GEOstocollat");
+					combo(r.data.valores, "i3GEOstocolcabecalho");
+					combo(r.data.valores, "i3GEOstocoltexto");
+					combo(r.data.valores, "i3GEOstocollocal");
+					combo(r.data.valores, "i3GEOstocolicone");
+					combo(r.data.valores, "i3GEOstocolmedia");
+					combo(r.data.valores, "i3GEOstocollon");
+					combo(r.data.valores, "i3GEOstocollat");
 					// se os parametros da ferramenta estiverem definidos na camada
-					if (camada != "" && camada.ferramentas.storymap && camada.ferramentas.storymap.exec === "sim") {
-						i3GEO.util.defineValor("i3GEOstocolcabecalho", "value", camada.ferramentas.storymap.colcabecalho);
-						i3GEO.util.defineValor("i3GEOstocoltexto", "value", camada.ferramentas.storymap.coltexto);
-						i3GEO.util.defineValor("i3GEOstocollocal", "value", camada.ferramentas.storymap.collocal);
-						i3GEO.util.defineValor("i3GEOstocolicone", "value", camada.ferramentas.storymap.colicone);
-						i3GEO.util.defineValor("i3GEOstocolmedia", "value", camada.ferramentas.storymap.colmedia);
-						i3GEO.util.defineValor("i3GEOstocollon", "value", camada.ferramentas.storymap.collon);
-						i3GEO.util.defineValor("i3GEOstocollat", "value", camada.ferramentas.storymap.collat);
-						i3GEOF.storymap.ativa();
+					if (camada != "" && camada.ferramentas.storymap) {
+						$i("i3GEOStocabecalho").value = camada.ferramentas.storymap.cabecalho;
+						$i("i3GEOStotexto").value = camada.ferramentas.storymap.texto;
+						$i("i3GEOstocolcabecalhoCombo").value = camada.ferramentas.storymap.colcabecalho;
+						$i("i3GEOstocoltextoCombo").value = camada.ferramentas.storymap.coltexto;
+						$i("i3GEOstocollocalCombo").value = camada.ferramentas.storymap.collocal;
+						$i("i3GEOstocoliconeCombo").value = camada.ferramentas.storymap.colicone;
+						$i("i3GEOstocolmediaCombo").value = camada.ferramentas.storymap.colmedia;
+						$i("i3GEOstocollonCombo").value = camada.ferramentas.storymap.collon;
+						$i("i3GEOstocollatCombo").value = camada.ferramentas.storymap.collat;
 					}
 				};
 				i3GEO.php.listaItensTema(temp, i3GEOF.storymap.tema);
@@ -186,8 +181,8 @@ i3GEOF.storymap =
 
 			var b = new YAHOO.widget.Button("i3GEOstobotao1", {
 				onclick : {
-					fn : function(){
-						window.open(i3GEO.configura.locaplic+"/ferramentas/storymap/default.php?tema="+i3GEOF.storymap.tema);
+					fn : function() {
+						window.open(i3GEO.configura.locaplic + "/ferramentas/storymap/default.php?tema=" + i3GEOF.storymap.tema);
 					}
 				}
 			});
@@ -257,68 +252,56 @@ i3GEOF.storymap =
 			};
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		},
-		salvaParametros: function(){
-			//monta a string JSON que sera enviada para gravacao
-			//'{"titulo":"População","colnome":"CNTRY_NAME","colsdata":["POP_CNTRY"],"lmax":"100000","amax":"2000000","auto":"sim","exec":"sim"}'
-			var j, auto = "nao", exec = "nao";
-			if($i("ativaAoAdic").checked === true){
-				auto = "sim";
-			}
-			if($i("execAoAdic").checked === true){
-				exec = "sim";
-			}
+		salvaParametros : function() {
+			var j;
+			j =
+				'{"cabecalho":"' + $i("i3GEOStocabecalho").value
+					+ '","texto":"'
+					+ $i("i3GEOStotexto").value
+					+ '","colcabecalho":"'
+					+ $i("i3GEOstocolcabecalhoCombo").value
+					+ '","coltexto":"'
+					+ $i("i3GEOstocoltextoCombo").value
+					+ '","collocal":"'
+					+ $i("i3GEOstocollocalCombo").value
+					+ '","colicone":"'
+					+ $i("i3GEOstocoliconeCombo").value
+					+ '","colmedia":"'
+					+ $i("i3GEOstocolmediaCombo").value
+					+ '","collon":"'
+					+ $i("i3GEOstocollonCombo").value
+					+ '","collat":"'
+					+ $i("i3GEOstocollatCombo").value
+					+ '"}';
 
-			j = '{"titulo":"'
-				+ $i("i3GEOTMEtitulo").value
-				+ '","colnome":"'
-				+ $i("i3GEOTMEregioes").value
-				+ '","colsdata":['
-				+ '"' + colsdata.join('","') + '"'
-				+ '],"lmax":"'
-				+ $i("i3GEOTMEmaxHeight").value
-				+ '","amax":"'
-				+ $i("i3GEOTMEbarSize").value
-				+ '","outlinecolor":"'
-				+ $i("i3GEOTMEoutlinecolor").value
-				+ '","numvertices":"'
-				+ $i("i3GEOTMEnumvertices").value
-				+ '","auto":"'
-				+ auto
-				+ '","exec":"'
-				+ exec
-				+ '"}';
+			i3GEO.janela.confirma($trad("incluiPar", i3GEOF.storymap.dicionario), 300, $trad("x14"), "", function() {
+				p = i3GEO.configura.locaplic + "/ferramentas/storymap/manutencao.php";
+				par =
+					"&g_sid=" + i3GEO.configura.sid
+						+ "&tema="
+						+ i3GEOF.storymap.tema
+						+ "&storymap="
+						+ i3GEO.util.base64encode(j)
+						+ "&funcao=inclui";
 
-			i3GEO.janela.confirma($trad("incluiPar", i3GEOF.storymap.dicionario), 300, $trad("x14"),
-				"", function() {
-					p = i3GEO.configura.locaplic + "/ferramentas/tme/manutencao.php";
-					par = "&g_sid=" + i3GEO.configura.sid
-						+ "&tema=" + i3GEOF.storymap.tema
-						+ "&tme=" + i3GEO.util.base64encode(j)
-						+ "&funcao=incluitme";
-	
-					retorno =
-						function(retorno) {
-							i3GEO.janela.fechaAguarde("tme");
-						};
-					i3GEO.janela.abreAguarde("tme", $trad("o1"));
-					cpJSON.call(p, "foo", retorno, par);
-				});
-			
+				retorno = function(retorno) {
+					i3GEO.janela.fechaAguarde("storymap");
+				};
+				i3GEO.janela.abreAguarde("storymap", $trad("o1"));
+				cpJSON.call(p, "foo", retorno, par);
+			});
+
 		},
-		removeParametros: function(){
-			i3GEO.janela.confirma($trad("removePar", i3GEOF.storymap.dicionario), 300, $trad("x14"),
-				"", function() {
-					p = i3GEO.configura.locaplic + "/ferramentas/tme/manutencao.php";
-					par = "&g_sid=" + i3GEO.configura.sid
-						+ "&tema=" + i3GEOF.storymap.tema
-						+ "&funcao=removetme";
-	
-					retorno =
-						function(retorno) {
-							i3GEO.janela.fechaAguarde("tme");
-						};
-					i3GEO.janela.abreAguarde("tme", $trad("o1"));
-					cpJSON.call(p, "foo", retorno, par);
-				});
+		removeParametros : function() {
+			i3GEO.janela.confirma($trad("removePar", i3GEOF.storymap.dicionario), 300, $trad("x14"), "", function() {
+				p = i3GEO.configura.locaplic + "/ferramentas/storymap/manutencao.php";
+				par = "&g_sid=" + i3GEO.configura.sid + "&tema=" + i3GEOF.storymap.tema + "&funcao=remove";
+
+				retorno = function(retorno) {
+					i3GEO.janela.fechaAguarde("storymap");
+				};
+				i3GEO.janela.abreAguarde("storymap", $trad("o1"));
+				cpJSON.call(p, "foo", retorno, par);
+			});
 		}
 	};

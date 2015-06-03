@@ -126,15 +126,26 @@ $oMap = ms_newMapobj($nomeMapfileTmp);
 $data = pegaDadosJ();
 if($format == "storymap"){
 	//parametros via URL
-	$cabecalho = converteenc("Cabeçalho do primeiro slide");
-	$texto = "Texto do primeiro slide";
-	$coltexto = "COMENTARIO";
-	$colcabecalho = "NOME";
-	$collocal = "ZONA";
-	$colicone = "";
-	$collon = "LONGITUDE";
-	$collat = "LATITUDE";
-	$colmedia = "URL";
+	$layer = $oMap->getlayerbyname($tema);
+	if($layer == ""){
+		echo "Layer nao encontrado";
+		exit;
+	}
+	$storymap = $layer->getmetadata("storymap");
+	if($storymap == ""){
+		echo "Parametros nao definidos no METADATA storymap";
+		exit;
+	}
+	$storymap = json_decode($storymap,true);
+	$cabecalho = converteenc($storymap["cabecalho"]);
+	$texto = converteenc($storymap["texto"]);
+	$coltexto = $storymap["coltexto"];
+	$colcabecalho = $storymap["colcabecalho"];
+	$collocal = $storymap["collocal"];
+	$colicone = $storymap["colicone"];
+	$collon = $storymap["collon"];
+	$collat = $storymap["collat"];
+	$colmedia = $storymap["colmedia"];
 	
 	$par = array(
 			"cabecalho"=>$cabecalho,
@@ -211,6 +222,7 @@ function storymap($par){
 	);
 	//echo "<pre>";var_dump($j);exit;
 	$contents = json_encode($j);
+	//var_dump($contents);exit;
 	file_put_contents($nomeArq.".json",$contents);
 	//envia para download
 	ob_clean();

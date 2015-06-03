@@ -193,7 +193,7 @@
 						format : "jpeg"
 					}, {
 						isBaseLayer : true,
-						visibility : false
+						visibility : true
 					});
 			var bra = new OpenLayers.Layer.WMS(
 					"Base carto MMA",

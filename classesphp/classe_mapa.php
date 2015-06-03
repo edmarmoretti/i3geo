@@ -444,6 +444,14 @@ class Mapa
 					}
 					$ferramentas["tme"] = json_decode($f);
 				}
+				//storymap
+				if($oLayer->getmetadata("storymap") != ""){
+					$f = $oLayer->getmetadata("storymap");
+					if (!mb_detect_encoding($f,"UTF-8",true)){
+						$f = mb_convert_encoding($f,"UTF-8","ISO-8859-1");
+					}
+					$ferramentas["storymap"] = json_decode($f);
+				}
 				//formatacao antiga, antes da versao 6.0
 				/*
 				 $temas[] = array(

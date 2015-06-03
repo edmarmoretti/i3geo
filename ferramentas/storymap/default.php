@@ -3,7 +3,8 @@
 		echo "&tema nao definido";
 		exit;
 	}
-	if(!file_exists(dirname(__FILE__)."/../../temas/".$_GET["tema"])){
+	//echo dirname(__FILE__)."/../../temas/".$_GET["tema"];
+	if(!file_exists(dirname(__FILE__)."/../../temas/".$_GET["tema"].".map")){
 		echo "&tema nao existe";
 		exit;
 	}
