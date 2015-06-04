@@ -182,7 +182,7 @@ i3GEO.login = {
 			return resultado;
 		};
 		// verificacao rapida, busca apenas na sessao do usuario ja aberta
-		if (tipo === "sessao") {
+		if (!tipo || tipo === "sessao") {
 			p = locaplic
 				+ "/admin/php/login.php?funcao=validaoperacaosessao";
 		}

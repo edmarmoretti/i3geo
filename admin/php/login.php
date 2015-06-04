@@ -108,7 +108,13 @@ switch (strtoupper($funcao))
 			$fingerprint = 'I3GEOLOGIN' . $_SERVER['HTTP_USER_AGENT'];
 			//var_dump($_SESSION["operacoes"]);exit;
 			$_SESSION['fingerprint'] = md5($fingerprint . session_id());
-			$retorno = array("id"=>session_id(),"nome"=>$teste["usuario"]["nome_usuario"]);
+			$editor = "nao";
+			foreach($_SESSION["papeis"] as $p){
+				if($p < 3){
+					$editor = "sim";
+				}
+			}
+			$retorno = array("id"=>session_id(),"nome"=>$teste["usuario"]["nome_usuario"],"editor"=>$editor);
 			cpjson($retorno);
 		}
 		else{

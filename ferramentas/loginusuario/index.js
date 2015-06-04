@@ -209,7 +209,7 @@ i3GEOF.loginusuario = {
 					alert("Login OK -> "+retorno.data.nome);
 				}
 				if(i3GEO.parametros){
-					i3GEO.parametros.editor = "sim";
+					i3GEO.parametros.editor = retorno.data.editor;
 					i3GEO.arvoreDeTemas.atualiza();
 				}
 			}

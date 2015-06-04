@@ -614,11 +614,13 @@ i3GEO.editorOL = {
 	mostraLegenda: function(){
 		var layers = i3GEO.editorOL.layersLigados(),
 			nlayers = layers.length,
-			ins = "",i, icone = "";
+			ins = "",i, icone = "",
+			url, fers, f="", fer = "";
 		for(i=0;i<nlayers;i++){
 			try{
 				if(layers[i].isBaseLayer === false){
-					var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
+					url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
+					icone = "";
 					if(i3GEO.editorOL.legendahtml === true){
 						//os parametros FORMAT e SERVICE sao inseridos de forma redundante para grantir
 						//caso seja um TMS
@@ -641,9 +643,9 @@ i3GEO.editorOL = {
 						//insere o icone
 						//
 						fers = layers[i].options.ferramentas;
-						for(f in fers){
-							if(i3GEO.editorOL.ferramentasLayers[f]){
-								icone = i3GEO.editorOL.ferramentasLayers[f].icone(layers[i]);
+						for(fer in fers){
+							if(i3GEO.configura.ferramentasLayers[fer]){
+								icone = i3GEO.configura.ferramentasLayers[fer].icone(layers[i]);
 							}
 						}
 						ins += icone + layers[i].name+"<br><div id=legendaL_"+i+" ></div><br>";
@@ -2158,44 +2160,6 @@ i3GEO.editorOL = {
 			if (layers[i].CLASS_NAME == "OpenLayers.Layer.Vector"
 					&& layers[i].name != "Nenhum") {
 				i3GEO.editorOL.mapa.raiseLayer(i3GEO.editorOL.mapa.layers[i], nlayers);
-			}
-		}
-	},
-	/**
-	 * Propriedade: ferramentasLayers
-	 *
-	 * Armazena fun&ccedil;&otilde;es e objetos que s&atilde;o utilizados para configurar ferramentas
-	 *
-	 * que possuem par&acirc;metros definidos em cada mapfile. Normalmente, os par&acirc;metros
-	 *
-	 * s&atilde;o utilizados no mashup para criar &iacute;cones que executam opera&ccedil;&otilde;es especiais
-	 */
-	ferramentasLayers : {
-		//lista de ferramentas que aceitam parametros embutidos em mapfiles
-		param : ["tme"],
-		"tme" : {
-			"metadata" : "tme",
-			"classe" : "i3GEOiconeTme",
-			init : function (codigo){
-				window.open(i3GEO.configura.locaplic+"/ferramentas/tme/cesium.php?&tema="+codigo);
-			},
-			icone : function(layer) {
-				var l, icone;
-				if(layer.params.LAYERS){
-					l = layer.params.LAYERS;
-				} else{
-					l = layer.layername;
-				}
-				icone =
-					"<img class='i3GEOiconeTme' onclick='i3GEO.util.animaClique(this);"
-						+ "i3GEO.editorOL.ferramentasLayers.tme.init(\""
-						+ l
-						+ "\");return false;'"
-						+ "title='3d' "
-						+ "src='"
-						+ i3GEO.configura.locaplic
-						+ "/imagens/branco.gif' />";
-				return icone;
 			}
 		}
 	}

@@ -223,7 +223,7 @@ if($temas != ""){
 	//lista os nomes de metadados que contem os parametros das
 	//ferramentas customizaveis e que seraco incluidas na propriedade do layer
 	//
-	$listaFerramentas = array("tme");
+	$listaFerramentas = array("tme","storymap");
 	foreach($temas as $tema){
 		//
 		//utilzado para obter os parametros de ferramentas especificas indicadas nos metadados do LAYER
@@ -281,7 +281,7 @@ if($temas != ""){
 						foreach($listaFerramentas as $lf){
 							$meta = $layern->getmetadata($lf);
 							if($meta != ""){
-								$ferramentas[] = "'tme':".$meta;
+								$ferramentas[] = "'".$lf."':".$meta;
 							}
 						}
 						$ferramentas = '{'.implode(",",$ferramentas).'}';
@@ -512,12 +512,13 @@ if(count($temasPluginI3Geo) > 0){
 	width: 14px;
 }
 
-.i3GEOiconeTme {
+.i3GEOiconeTme, .i3GEOiconeStorymap {
 	background-size: 14px auto;
 	cursor: pointer;
 	position: relative;
-	top: 3px;
+	top: 2px;
 	width: 14px;
+	margin-right: 2px;
 }
 
 .ajuda_usuario {
@@ -656,8 +657,8 @@ i3GEO.editorOL.mapa = new OpenLayers.Map(
 		minResolution: i3GEO.editorOL.minresolution
 	}
 );
-if(!i3GEO.configura){
-	i3GEO.configura = {"locaplic":  "../"};
+if(i3GEO.configura.locaplic === ""){
+	i3GEO.configura.locaplic = "../";
 }
 <?php
 	//camadas plugin

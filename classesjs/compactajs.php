@@ -281,6 +281,7 @@ $jsfiles = array(
 "../classesjs/compactados/classe_editorol_compacto.js",
 "compactados/dicionario_compacto.js",
 "compactados/classe_idioma_compacto.js",
+"compactados/classe_configura_compacto.js",
 "compactados/mustache.js"
 );
 $buffer = "";

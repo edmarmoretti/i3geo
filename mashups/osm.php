@@ -7,6 +7,7 @@
 include_once(dirname(__FILE__)."/../ms_configura.php");
 include_once(dirname(__FILE__)."/../classesphp/pega_variaveis.php");
 include_once(dirname(__FILE__)."/../classesphp/carrega_ext.php");
+include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 error_reporting(0);
 if(!empty($desligacache)){
 	$DESLIGACACHE = $desligacache;
@@ -23,13 +24,13 @@ if($nocache == "sim"){
 else{
 	$nocache = "";
 }
+$temasPluginI3Geo = array();
 //
 // recupera um mapa salvo no banco de administracao
 //
-$temasPluginI3Geo = array();
 if(!empty($restauramapa)){
-	include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 	$xbase = restauraMapaAdmin($restauramapa,$dir_tmp);
+	validaAcessoTemas($xbase,true);
 	$m = ms_newMapObj($xbase);
 	$w = $m->web;
 	$w->set("imagepath",dirname($w->imagepath)."/");
@@ -52,6 +53,9 @@ if(!empty($restauramapa)){
 //
 // imprime na tela a ajuda ao usu&aacute;rio
 //
+if(!isset($temas) && isset($layers)){
+	$temas = $layers;
+}
 if(!isset($temas)){
 	ajuda();
 }
@@ -219,7 +223,7 @@ if($temas != ""){
 	//lista os nomes de metadados que contem os parametros das
 	//ferramentas customizaveis e que seraco incluidas na propriedade do layer
 	//
-	$listaFerramentas = array("tme");
+	$listaFerramentas = array("tme","storymap");
 	foreach($temas as $tema){
 		//
 		//utilzado para obter os parametros de ferramentas especificas indicadas nos metadados do LAYER
@@ -229,7 +233,7 @@ if($temas != ""){
 			include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 			$gm = new gvsig2mapfile($locaplic."/temas/".$tema.".gvp");
 			$gvsigview = $gm->getViewsNames();
-			$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$gvsigview[0].'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$tema.'",transparent: "true", format: "image/png"},{singleTile:false,visibility:true,isBaseLayer:false,ferramentas :'.$ferramentas.'})';
+			$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$gvsigview[0].'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$tema.'",transparent: "true", format: "image/png"},{singleTile:false,visibility:true,isBaseLayer:false, ferramentas :'.$ferramentas.')';
 		}
 		else{
 			$nomeMap = "";
@@ -277,7 +281,7 @@ if($temas != ""){
 						foreach($listaFerramentas as $lf){
 							$meta = $layern->getmetadata($lf);
 							if($meta != ""){
-								$ferramentas[] = "'tme':".$meta;
+								$ferramentas[] = "'".$lf."':".$meta;
 							}
 						}
 						$ferramentas = '{'.implode(",",$ferramentas).'}';
@@ -294,9 +298,7 @@ if($temas != ""){
 					if(in_array($tema,$visiveis)){
 						$visivel = "true";
 					}
-					// echo $visivel;exit;
-					// var_dump($visiveis);exit;
-					if($nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM" && $layern->getmetadata("PLUGINI3GEO") == ""){
+					if(strtolower($DESLIGACACHE) != "sim" && $nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM" && $layern->getmetadata("PLUGINI3GEO") == ""){
 						if($layern->type != 2 && $layern->type != 3){
 							$opacidade = 1;
 						}
@@ -308,15 +310,15 @@ if($temas != ""){
 							$DESLIGACACHE = "sim";
 							$nocache = "map_layer_".$layern->name."_filter=".$filtro."&".$nocache;
 						}
-						// nesse caso o layer e adicionado como TMS
-						// tms leva os parametros do TMS
 						$teffect = 'transitionEffect: "resize",';
 						if(strtoupper($layern->getmetadata("transitioneffect")) == "NAO"){
 							$teffect = 'transitionEffect: null,';
 						}
-						$objOpenLayers[] = 'new OpenLayers.Layer.XYZ("'.$tituloLayer.'", "'.$servidor.'?Z=${z}&X=${x}&Y=${y}&'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&SRS=EPSG:3857",{'.$teffect.'opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png",ferramentas :'.$ferramentas.'})';
+						// nesse caso o layer e adicionado como TMS
+						// tms leva os parametros do TMS
+						$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png", ferramentas :'.$ferramentas.'})';
 						// cria um clone WMS para efeitos de getfeatureinfo
-						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{transitionEffect : null, displayInLayerSwitcher:false,singleTile:true,visibility:false,isBaseLayer:false,ferramentas :'.$ferramentas.'})';
+						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,transitionEffect : null,singleTile:true,visibility:false,isBaseLayer:false, ferramentas :'.$ferramentas.'})';
 					}
 					else{
 						foreach($layers as $l){
@@ -346,10 +348,10 @@ if($temas != ""){
 								$teffect = 'transitionEffect: null,';
 							}
 							if($tituloLayer != ""){
-								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' singleTile: '.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.',ferramentas :'.$ferramentas.'})';
+								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.', ferramentas :'.$ferramentas.'})';
 							}
 							else{
-								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' displayInLayerSwitcher:false,singleTile:true,visibility:'.$visivel.',isBaseLayer:'.$ebase.',ferramentas :'.$ferramentas.'})';
+								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' displayInLayerSwitcher:false,singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.', ferramentas :'.$ferramentas.'})';
 							}
 						}
 					}
@@ -398,6 +400,30 @@ function ajuda(){
 	desligacache (sim|nao) - desativa o uso do cache de imagens em disco do lado do servidor, for&ccedil;ando a renderiza&ccedil;&atilde;o dos tiles de cada camada em cada requisi&ccedil;&atilde;o
 	nocache (sim) - evita o uso de imagens em cache existentes no navegador do usu&aacute;rio
 
+	Filtros
+
+	filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
+
+	Exemplo de filtro
+
+	?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))
+
+	no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
+
+	fundo - lista com os nomes, separados por ',' dos layers que ser&atilde;o usados como fundo para o mapa. Se n&atilde;o for definido,
+	ser&aacute; usado o default. O primeiro da lista ser&aacute; o fundo ativo. Se na lista de temas de fundo estiver algum
+	tema incluido com o parametro 'temas', esses ser&atilde;o inclu&iacute;dos como temas de fundo.
+	Quando for vazio, o ultimo layer sera considerado como o layer de fundo
+	Os seguintes fundos podem usados nessa lista:
+
+	e_oce - ESRI Ocean Basemap
+	e_ims - ESRI Imagery World 2D
+	e_wsm - ESRI World Street Map
+	ol_mma - base cartogr&aacute;fica do Brasil
+	ol_wms - base mundial da Meta Carta
+	top_wms - topon&iacute;mia do servidor do MMA usado no mapa de refer&ecirc;ncia
+	est_wms - estados do Brasil
+
 	controles - lista com os nomes dos controles que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os controles ser&atilde;o adicionados
 	navigation
 	panzoombar
@@ -439,7 +465,7 @@ function ajuda(){
 
 	Exemplo:
 
-	&lt;iframe height='400px' src='http://mapas.mma.gov.br/i3geo/mashups/osm.php?temas=bioma&amp;altura=350&amp;largura=350' style='border: 0px solid white;' width='400px'&gt;&lt;/iframe&gt;
+	&lt;iframe height='400px' src='http://mapas.mma.gov.br/i3geo/mashups/openlayers.php?temas=bioma&amp;altura=350&amp;largura=350' style='border: 0px solid white;' width='400px'&gt;&lt;/iframe&gt;
 
 	";
 	exit;
@@ -451,20 +477,10 @@ function ajuda(){
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="openlayers_compacto.js.php"></script>
-<!-- para debug
-<script type="text/javascript" src="../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="../pacotes/yui290/build/dragdrop/dragdrop-min.js"></script>
-<script type="text/javascript" src="../pacotes/yui290/build/container/container-min.js"></script>
-<script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
-<script type="text/javascript" src="../classesjs/classe_util.js"></script>
-<script type="text/javascript" src="../classesjs/compactados/classe_janela_compacto.js"></script>
-<script type="text/javascript" src="../pacotes/openlayers/OpenLayers2131.js"></script>
-<script type="text/javascript" src="../classesjs/compactados/classe_desenho_compacto.js"></script>
-<script type="text/javascript" src="../classesjs/classe_editorol.js"></script>
--->
 <?php
 //carrega o script para layers do tipo plugin
 if(count($temasPluginI3Geo) > 0){
+	//echo '<script type="text/javascript" src="../classesjs/classe_plugini3geo.js"></script>'."\n";
 	echo '<script type="text/javascript" src="../classesjs/compactados/classe_plugini3geo_compacto.js"></script>'."\n";
 	echo '<script type="text/javascript" src="../pacotes/cpaint/cpaint2_compacto.inc.js"></script>'."\n";
 }
@@ -496,12 +512,13 @@ if(count($temasPluginI3Geo) > 0){
 	width: 14px;
 }
 
-.i3GEOiconeTme {
+.i3GEOiconeTme, .i3GEOiconeStorymap {
 	background-size: 14px auto;
 	cursor: pointer;
 	position: relative;
-	top: 3px;
+	top: 2px;
 	width: 14px;
+	margin-right: 2px;
 }
 
 .ajuda_usuario {
@@ -592,6 +609,10 @@ i3GEO.editorOL.legendahtml = "<?php
 	{echo "true";}
 ?>";
 <?php
+if(isset($fundo) && $fundo != ""){
+	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";
+}
+
 if(isset($controles)){
 	echo "i3GEO.editorOL.controles = [".implode(",",$objControles)."];";
 }
@@ -641,9 +662,8 @@ i3GEO.editorOL.mapa = new OpenLayers.Map(
 		minResolution: i3GEO.editorOL.minresolution
 	}
 );
-
-if(!i3GEO.configura){
-	i3GEO.configura = {"locaplic":  "../"};
+if(i3GEO.configura.locaplic === ""){
+	i3GEO.configura.locaplic = "../";
 }
 
 <?php

@@ -201,7 +201,7 @@ i3GEOF.tme =
 			});
 			b.addClass("rodar");
 			$i("i3GEOtmebotao1-button").style.width = "350px";
-			if (i3GEO.login.verificaCookieLogin() === true) {
+			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
 				$i("parametrosComLogin").style.display = 'block';
 				b = new YAHOO.widget.Button("i3GEOtmebotaoSalva", {
 					onclick : {

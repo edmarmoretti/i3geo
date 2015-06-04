@@ -278,6 +278,7 @@ $jsfiles = array(
 "../js/compactados/editorol_compacto.js",
 "compactados/dicionario_compacto.js",
 "compactados/idioma_compacto.js",
+"compactados/configura_compacto.js",
 "compactados/mustache.js"
 );
 $buffer = "";
