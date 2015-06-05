@@ -665,6 +665,8 @@ class Metaestat{
 			}
 			$dados[] = '	METADATA';
 			$dados[] = '		TEMA "'.$titulolayer.'"';
+			$dados[] = '		tme	"{\"titulo\":\"'.$titulolayer.'\",\"colnome\":\"'.$sql["nomeregiao"].'\",\"colsdata\":[\"'.$sql["colunavalor"].'\"],\"lmax\":\"8000\",\"amax\":\"500000\",\"outlinecolor\":\"-1,-1,-1\",\"numvertices\":\"4\",\"auto\":\"nao\",\"exec\":\"nao\"}"';
+				
 			$dados[] = '		TIP "'.$sql["colunavalor"].','.$sql["nomeregiao"].'"';
 			$dados[] = '		CLASSE "SIM"';
 			$dados[] = '		permitedownload "SIM"';

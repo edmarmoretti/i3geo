@@ -8,6 +8,9 @@
 include("../../classesphp/funcoes_gerais.php");
 include("../../ms_configura.php");
 $nomeDoMapfileTema = dirname(__FILE__)."/../../temas/".$_GET["tema"].".map";
+if(!file_exists($nomeDoMapfileTema)){
+	$nomeDoMapfileTema = $dir_tmp."/".$_GET["tema"].".map";
+}
 //verifica se o mapfile existe
 if(!file_exists($nomeDoMapfileTema)){
 	echo $_GET["tema"]." nao existe";
