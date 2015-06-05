@@ -136,9 +136,9 @@ if($format == "storymap"){
 		echo "Parametros nao definidos no METADATA storymap";
 		exit;
 	}
-	$storymap = json_decode($storymap,true);
-	$cabecalho = converteenc($storymap["cabecalho"]);
-	$texto = converteenc($storymap["texto"]);
+	$storymap = json_decode(converteenc($storymap),true);
+	$cabecalho = ($storymap["cabecalho"]);
+	$texto = ($storymap["texto"]);
 	$coltexto = $storymap["coltexto"];
 	$colcabecalho = $storymap["colcabecalho"];
 	$collocal = $storymap["collocal"];
