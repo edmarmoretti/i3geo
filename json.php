@@ -183,6 +183,11 @@ function gdocs(){
 		for($i = 0; $i < $n; $i++){
 			$r[$items[$i]] = $d[$i];
 		}
+		//var_dump($dd["shape"].getcentroid());exit;
+		$c = $dd["shape"]->getcentroid();
+
+		$r["calcx"] = $c->x;
+		$r["calcy"] = $c->y;
 		$records[] = $r;
 	}
 	$fields = array();
@@ -192,6 +197,15 @@ function gdocs(){
 			"type"=>$tipos[$i]
 		);
 	}
+	
+	$fields[] = array(
+			"id"=>"calcx",
+			"type"=>"number"
+	);
+	$fields[] = array(
+			"id"=>"calcy",
+			"type"=>"number"
+	);
 	$j = array(
 			"records"=>$records,
 			"fields"=>$fields
@@ -257,7 +271,7 @@ function storymap($par){
 			$local = $d[$nomeLocal];
 		}
 		if($par["collon"] == "" || $par["collat"] == ""){
-			$c = $dd["shape"].getcentroid();
+			$c = $dd["shape"]->getcentroid();
 			$lon = $c->x;
 			$lat = $c->y;
 		}

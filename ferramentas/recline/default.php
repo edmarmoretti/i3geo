@@ -6,46 +6,46 @@
     <link rel="stylesheet" type="text/css" href="../../admin/html/admin.css">
     <!-- you do not have to use bootstrap but we use it by default -->
     
-    <link rel="stylesheet" href="../../pacotes/recline/vendor/bootstrap/3.2.0/css/bootstrap.css">
+    <link rel="stylesheet" href="../../pacotes/knightlab/recline/vendor/bootstrap/3.2.0/css/bootstrap.css">
     <!-- vendor css -->
-    <link href="../../pacotes/recline/vendor/leaflet/0.7.3/leaflet.css" rel="stylesheet">
-    <link href="../../pacotes/recline/vendor/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
-    <link href="../../pacotes/recline/vendor/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../pacotes/recline/vendor/slickgrid/2.2/slick.grid.css">
+    <link href="../../pacotes/knightlab/recline/vendor/leaflet/0.7.3/leaflet.css" rel="stylesheet">
+    <link href="../../pacotes/knightlab/recline/vendor/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
+    <link href="../../pacotes/knightlab/recline/vendor/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/slick.grid.css">
     
     <!-- recline css -->
-    <link href="../../pacotes/recline/css/map.css" rel="stylesheet">
+    <link href="../../pacotes/knightlab/recline/css/map.css" rel="stylesheet">
 
-    <link href="../../pacotes/recline/css/multiview.css" rel="stylesheet">
-    <link href="../../pacotes/recline/css/slickgrid.css"rel="stylesheet">
-    <link href="../../pacotes/recline/css/flot.css" rel="stylesheet">
+    <link href="../../pacotes/knightlab/recline/css/multiview.css" rel="stylesheet">
+    <link href="../../pacotes/knightlab/recline/css/slickgrid.css"rel="stylesheet">
+    <link href="../../pacotes/knightlab/recline/css/flot.css" rel="stylesheet">
     
     <!-- Vendor JS - general dependencies -->
-    <script src="../../pacotes/recline/vendor/jquery/1.7.1/jquery.js" type="text/javascript"></script>
-    <script src="../../pacotes/recline/vendor/underscore/1.4.4/underscore.js" type="text/javascript"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/jquery/1.7.1/jquery.js" type="text/javascript"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/underscore/1.4.4/underscore.js" type="text/javascript"></script>
     <!--<script src="vendor/underscore.deferred/0.4.0/underscore.deferred.js" type="text/javascript"></script>-->
-    <script src="../../pacotes/recline/vendor/backbone/1.0.0/backbone.js" type="text/javascript"></script>
-    <script src="../../pacotes/recline/vendor/mustache/0.5.0-dev/mustache.js" type="text/javascript"></script>
-    <script src="../../pacotes/recline/vendor/bootstrap/3.2.0/js/bootstrap.js" type="text/javascript"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/backbone/1.0.0/backbone.js" type="text/javascript"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/mustache/0.5.0-dev/mustache.js" type="text/javascript"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/bootstrap/3.2.0/js/bootstrap.js" type="text/javascript"></script>
 
     <!-- Vendor JS - view dependencies -->
-    <script src="../../pacotes/recline/vendor/leaflet/0.7.3/leaflet.js" type="text/javascript"></script>
-    <script src="../../pacotes/recline/vendor/leaflet.markercluster/leaflet.markercluster.js" type="text/javascript"></script>
-    <script type="text/javascript" src="../../pacotes/recline/vendor/flot/jquery.flot.js"></script>
-    <script type="text/javascript" src="../../pacotes/recline/vendor/flot/jquery.flot.time.js"></script>
-    <script type="text/javascript" src="../../pacotes/recline/vendor/moment/2.0.0/moment.js"></script>
-    <script src="../../pacotes/recline/vendor/slickgrid/2.2/jquery-ui-1.8.16.custom.min.js"></script>
-    <script src="../../pacotes/recline/vendor/slickgrid/2.2/jquery.event.drag-2.2.js"></script>
-    <script src="../../pacotes/recline/vendor/slickgrid/2.2/jquery.event.drop-2.2.js"></script>
-    <script src="../../pacotes/recline/vendor/slickgrid/2.2/slick.core.js"></script>
-    <script src="../../pacotes/recline/vendor/slickgrid/2.2/slick.formatters.js"></script>
-    <script src="../../pacotes/recline/vendor/slickgrid/2.2/slick.editors.js"></script>
-    <script src="../../pacotes/recline/vendor/slickgrid/2.2/slick.grid.js"></script>
-    <script src="../../pacotes/recline/vendor/slickgrid/2.2/plugins/slick.rowselectionmodel.js" type="text/javascript"></script>
-    <script src="../../pacotes/recline/vendor/slickgrid/2.2/plugins/slick.rowmovemanager.js" type="text/javascript"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/leaflet/0.7.3/leaflet.js" type="text/javascript"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/leaflet.markercluster/leaflet.markercluster.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../pacotes/knightlab/recline/vendor/flot/jquery.flot.js"></script>
+    <script type="text/javascript" src="../../pacotes/knightlab/recline/vendor/flot/jquery.flot.time.js"></script>
+    <script type="text/javascript" src="../../pacotes/knightlab/recline/vendor/moment/2.0.0/moment.js"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/jquery-ui-1.8.16.custom.min.js"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/jquery.event.drag-2.2.js"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/jquery.event.drop-2.2.js"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/slick.core.js"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/slick.formatters.js"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/slick.editors.js"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/slick.grid.js"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/plugins/slick.rowselectionmodel.js" type="text/javascript"></script>
+    <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/plugins/slick.rowmovemanager.js" type="text/javascript"></script>
 
     <!-- Recline JS (combined distribution, all views) -->
-    <script src="../../pacotes/recline/dist/recline.js" type="text/javascript"></script>
+    <script src="../../pacotes/knightlab/recline/dist/recline.js" type="text/javascript"></script>
   </head>
   <body>
 	<div class="borda">
