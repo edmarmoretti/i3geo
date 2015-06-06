@@ -7,7 +7,7 @@ MAP
     METADATA
       "CLASSE"	"SIM"
       "TEMA"	"Caminho Novo Estrada Real"
-      "storymap"	'{"cabecalho":"Primeiro slide","texto":"Texto do primeiro slide da apresentação","colcabecalho":"NOME","coltexto":"COMENTARIO","collocal":"NOME","colicone":"","colmedia":"URL","collon":"LONGITUDE","collat":"LATITUDE"}'
+      "storymap"	'{"cabecalho":"Primeiro slide","texto":"Texto do primeiro slide da apresentação","colcabecalho":"NOME","coltexto":"COMENTARIO","collocal":"NOME","colicone":"","colmedia":"URL","collon":"","collat":""}'
     END # METADATA
     NAME "_lreal"
     PROCESSING "LABEL_NO_CLIP=True"

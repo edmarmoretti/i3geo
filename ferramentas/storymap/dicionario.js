@@ -61,12 +61,12 @@ i3GEOF.storymap.dicionario = {
 		es : ""
 	} ],
 	'collon' : [ {
-		pt : "Coluna com a longitude (em DD)",
+		pt : "Coluna com a longitude (em DD) - deixe em branco para usar o centr&oacute;ide calculado",
 		en : "",
 		es : ""
 	} ],
 	'collat' : [ {
-		pt : "Coluna com a latitude (em DD)",
+		pt : "Coluna com a latitude (em DD) - deixe em branco para usar o centr&oacute;ide calculado",
 		en : "",
 		es : ""
 	} ],

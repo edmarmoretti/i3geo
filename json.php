@@ -123,14 +123,14 @@ $oMap->save($nomeMapfileTmp);
 validaAcessoTemas($nomeMapfileTmp,true);
 
 $oMap = ms_newMapobj($nomeMapfileTmp);
+$layer = $oMap->getlayerbyname($tema);
+if($layer == ""){
+	echo "Layer nao encontrado";
+	exit;
+}
 $data = pegaDadosJ();
 if($format == "storymap"){
 	//parametros via URL
-	$layer = $oMap->getlayerbyname($tema);
-	if($layer == ""){
-		echo "Layer nao encontrado";
-		exit;
-	}
 	$storymap = $layer->getmetadata("storymap");
 	if($storymap == ""){
 		echo "Parametros nao definidos no METADATA storymap";
@@ -161,7 +161,48 @@ if($format == "storymap"){
 	storymap($par);
 	exit;
 }
-//echo "<pre>".var_dump ($data);
+if($format == "gdocs"){
+	gdocs();
+}
+function gdocs(){
+	global $data, $nomeArq;
+	$items = $data["items"];
+	$n = count($items);
+	$dados = $data["features"];
+	$tipos = $data["tipos"];
+	$records = array();
+	$id = 0;
+	foreach($dados as $dd){
+		$d = $dd["valores"];
+		$r = array();
+		$r["id"] = $id;
+		$id++;
+		for($i = 0; $i < $n; $i++){
+			$r[$items[$i]] = $d[$i];
+		}
+		$records[] = $r;
+	}
+	$fields = array();
+	for($i = 0; $i < $n; $i++){
+		$fields[] = array(
+			"id"=>$items[$i],
+			"type"=>$tipos[$i]
+		);
+	}
+	$j = array(
+			"records"=>$records,
+			"fields"=>$fields
+	);
+	//echo "<pre>";var_dump($j);exit;
+	$contents = json_encode($j);
+	//var_dump($contents);exit;
+	file_put_contents($nomeArq.".json",$contents);
+	//envia para download
+	ob_clean();
+	header("Content-type: application/json");
+	echo $contents;
+}
+
 function storymap($par){
 	global $data, $nomeArq;
 
@@ -194,16 +235,43 @@ function storymap($par){
 		if(!empty($d[$par["colicone"]])){
 			$icone = $d[$par["colicone"]];
 		}
+		if($par["coltexto"] == ""){
+			$texto = "";
+		}
+		else{
+			$texto = $d[$colunaTexto];
+		}
+		if($par["colcabecalho"] == ""){
+			$cabec = "";
+		}
+		else{
+			$cabec = $d[$colcabecalho];
+		}
+		if($par["collocal"] == ""){
+			$local = "";
+		}
+		else{
+			$local = $d[$nomeLocal];
+		}
+		if($par["collon"] == "" || $par["collat"] == ""){
+			$c = $dd["shape"].getcentroid();
+			$lon = $c->x;
+			$lat = $c->y;
+		}
+		else{
+			$lon = $d[$colunaLon];
+			$lat = $d[$colunaLat];
+		}
 		$slide = array(
 				"text"=>array(
-						"text"=>$d[$colunaTexto],
-						"headline"=>$d[$colcabecalho]
+						"text"=>$texto,
+						"headline"=>$cabec
 				),
 				"location"=>array(
-						"name" => $d[$nomeLocal],
-						"lon" => $d[$colunaLon]*1,
+						"name" => $local,
+						"lon" => $lon*1,
 						//"zoom" => 10,
-						"lat" => $d[$colunaLat]*1,
+						"lat" => $lat*1,
 						"line" => false,
 						"icon" => $icone
 				)
@@ -292,8 +360,27 @@ function pegaDadosJ(){
 				"shape"=>$shape
 		);
 	}
+	//verifica os tipos dos itens
+	$n = 10;
+	$ni = count($items);
+	$tipos = array();
+	if(count($linhas) <= 10){
+		$n = count($linhas);
+	}
+	for ($j = 0; $j < $ni; $j++){
+		$tipos[$j] = "string";
+	}
+	for ($i = 0; $i < $n; $i++){
+		$valores = $linhas[$i]["valores"];
+		for ($j = 0; $j < $ni; $j++){
+			if($tipos[$j] == "string" && $valores[$j] != "" && is_numeric($valores[$j])){
+				$tipos[$j] = "number";
+			}
+		}
+	}
 	$resultado = array(
 			"items"=>$items,
+			"tipos"=>$tipos,
 			"features"=>$linhas
 	);
 	return $resultado;
