@@ -53,6 +53,7 @@ body {
 			<input type=submit value="Salvar" />
 			<input type=button value="Testar" onclick="testar()" />
 			<input type=button value="Testar no i3Geo" onclick="abrirI3geo()" />
+			<input type=button value="Tabela" onclick="abrirTabela()" />
 			(Salve antes de testar)
 		</fieldset>
 		<fieldset style="position: relative; float: left; width:500px;margin: 5px;padding:5px;">
@@ -270,5 +271,8 @@ function testar(){
 }
 function abrirI3geo(){
 	window.open("../../ms_criamapa.php?layers=<?php echo $_GET["mapfile"]; ?>");
+}
+function abrirTabela(){
+	window.open("../../ferramentas/recline/default.php?tema=<?php echo $_GET["mapfile"]; ?>");
 }
 </script>
