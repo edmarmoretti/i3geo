@@ -206,6 +206,8 @@ A:hover {
 				"<p><a target=blank href='"+servico+"OUTPUTFORMAT=kmz&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />download KMZ</a>";
 			ins +=
 				"<p><a target=blank href='"+servico+"OUTPUTFORMAT=geojson&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />GeoJson</a>";
+			ins +=
+				"<p><a target=blank href='ferramentas/recline/default.php?tema="+tema+"' />Explore a tabela de atributos</a>";
 
 			if (!$i("panellistaarquivos")) {
 				YAHOO.namespace("datadownloadLista");
