@@ -56,13 +56,9 @@
 		</div>
 	</div>
 	<br><br>
-  <div class="container">
-      <style type="text/css">
-        .recline-slickgrid {
-          height: 300px;
-        }
-
-      </style>
+  <div class="container" style="height: 100%">
+<style type="text/css">.recline-slickgrid { height: 500px; }</style>
+  
 
       <div class="data-explorer-here"></div>
       <div style="clear: both;"></div>
@@ -73,7 +69,7 @@
   window.explorerDiv = $('.data-explorer-here');
 
   // create the demo dataset
-  var dataset = createDemoDataset();
+  var dataset = createDataset();
   // now create the multiview
   // this is rather more elaborate than the minimum as we configure the
   // MultiView in various ways (see function below)
@@ -91,7 +87,7 @@
 });
 
 // create standard demo dataset
-function createDemoDataset() {
+function createDataset() {
   var dataset = new recline.Model.Dataset(
 	<?php 
 		$format = "gdocs";

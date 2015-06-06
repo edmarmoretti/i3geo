@@ -60,7 +60,10 @@ $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 $nomeArq = $dir_tmp."/ogc_".md5(implode("",$_GET))."_json_".$output;
 $nomeMapfileTmp = $nomeArq.".map";
 
-carregaCacheArquivo();
+$cache = carregaCacheArquivo();
+if($cache == true){
+	return;
+}
 //
 //pega a versao do Mapserver
 //
@@ -327,8 +330,9 @@ function carregaCacheArquivo(){
 	if(file_exists($nomeArq.".json")){
 		header("Content-type: application/json");
 		readfile($nomeArq.".json");
-		exit;
+		return true;
 	}
+	return false;
 }
 
 function pegaDadosJ(){
