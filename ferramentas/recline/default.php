@@ -12,13 +12,14 @@
     <link href="../../pacotes/knightlab/recline/vendor/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../pacotes/knightlab/recline/vendor/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
     <link rel="stylesheet" href="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/slick.grid.css">
+    <link rel="stylesheet" href="../../pacotes/knightlab/recline/vendor/timeline/css/timeline.css">
     
     <!-- recline css -->
     <link href="../../pacotes/knightlab/recline/css/map.css" rel="stylesheet">
-
     <link href="../../pacotes/knightlab/recline/css/multiview.css" rel="stylesheet">
     <link href="../../pacotes/knightlab/recline/css/slickgrid.css"rel="stylesheet">
     <link href="../../pacotes/knightlab/recline/css/flot.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../pacotes/knightlab/recline/css/timeline.css">
     
     <!-- Vendor JS - general dependencies -->
     <script src="../../pacotes/knightlab/recline/vendor/jquery/1.7.1/jquery.js" type="text/javascript"></script>
@@ -34,6 +35,8 @@
     <script type="text/javascript" src="../../pacotes/knightlab/recline/vendor/flot/jquery.flot.js"></script>
     <script type="text/javascript" src="../../pacotes/knightlab/recline/vendor/flot/jquery.flot.time.js"></script>
     <script type="text/javascript" src="../../pacotes/knightlab/recline/vendor/moment/2.0.0/moment.js"></script>
+    <script type="text/javascript" src="../../pacotes/knightlab/recline/vendor/timeline/js/timeline.js"></script>
+    
     <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/jquery-ui-1.8.16.custom.min.js"></script>
     <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/jquery.event.drag-2.2.js"></script>
     <script src="../../pacotes/knightlab/recline/vendor/slickgrid/2.2/jquery.event.drop-2.2.js"></script>
@@ -63,45 +66,38 @@
       <div class="data-explorer-here"></div>
       <div style="clear: both;"></div>
 
+            
       <script>
-      jQuery(function($) {
-  window.multiView = null;
-  window.explorerDiv = $('.data-explorer-here');
+//define como variavel global
+var dadosJ;
+returnData = function(dataFromJsonp){
+	dadosJ = dataFromJsonp;
+	jQuery(function($) {
+		  window.multiView = null;
+		  window.explorerDiv = $('.data-explorer-here');
 
-  // create the demo dataset
-  var dataset = createDataset();
-  // now create the multiview
-  // this is rather more elaborate than the minimum as we configure the
-  // MultiView in various ways (see function below)
-  window.multiview = createMultiView(dataset);
+		  // create the demo dataset
+		  var dataset = createDataset(dadosJ);
+		  // now create the multiview
+		  // this is rather more elaborate than the minimum as we configure the
+		  // MultiView in various ways (see function below)
+		  window.multiview = createMultiView(dataset);
 
-  // last, we'll demonstrate binding to changes in the dataset
-  // this will print out a summary of each change onto the page in the
-  // changelog section
-  dataset.records.bind('all', function(name, obj) {
-    var $info = $('<div />');
-    $info.html(name + ': ' + JSON.stringify(obj.toJSON()));
-    $('.changelog').append($info);
-    $('.changelog').show();
-  });
-});
+		  // last, we'll demonstrate binding to changes in the dataset
+		  // this will print out a summary of each change onto the page in the
+		  // changelog section
+		  dataset.records.bind('all', function(name, obj) {
+		    var $info = $('<div />');
+		    $info.html(name + ': ' + JSON.stringify(obj.toJSON()));
+		    $('.changelog').append($info);
+		    $('.changelog').show();
+		  });
+		});
+};
 
 // create standard demo dataset
-function createDataset() {
-  var dataset = new recline.Model.Dataset(
-	<?php 
-		$format = "gdocs";
-		include("../../json.php");
-		/*
-		$curl = curl_init();
-		curl_setopt ($curl, CURLOPT_URL, "../../json.php?tema=_lreal&format=recline&");
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		$result = curl_exec($curl);
-		curl_close ($curl);
-		echo $result;
-		*/
-	?>
-  );
+function createDataset(data) {
+  var dataset = new recline.Model.Dataset(data);
   return dataset;
 }
 
@@ -172,8 +168,12 @@ var createMultiView = function(dataset, state) {
   return multiView;
 }
 
-      
-      </script>
+</script>
+      <?php
+      //inclui os dados via jsonp
+      $url = "../../json.php?tema=".strip_tags($_GET["tema"])."&format=gdocs&jsonp=returnData";
+      echo "<script src='$url' ></script>";
+      ?>      
     </div>
   </body>
 </html>

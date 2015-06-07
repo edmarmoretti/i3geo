@@ -1,4 +1,6 @@
 <?php
+//TODO incluir BBOX na obtencao dos dados
+//TODO gerar dados para id_medida_variavel
 /*
  Title: Gerador de dados JSON
 
@@ -28,26 +30,17 @@ Arquivo: i3geo/ogc.php
 
 Par&acirc;metros:
 
-ajuda - (opcional) mostra uma ajuda ao usu&aacute;rio
+tema - nome do tema existente em i3geo/temas ou na pasta temporaria do mapserver
 
-tema - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil;o. Se for definido, o web service conter&aacute; apenas esse tema. O tema &eacute; o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo. Se n&atilde;o for definido, ser&atilde;o considerados todos os temas
+format -  storymap|gdocs
 
-format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
-abrir o mashup do OpenLayers com as camadas definida em temas.
-Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
+No caso de storymap, o fornecimento dos dados depende dos parametros definidos no METADATA storymap existente no tema
 
 */
 $_GET = array_merge($_GET,$_POST);
 include(dirname(__FILE__)."/ms_configura.php");
 include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
-//
-//imprime na tela a ajuda
-//
-if(isset($ajuda)){
-	imprimeAjuda();
-	exit;
-}
 //
 //pega os enderecos para compor a url de chamada do gerador de web services
 //
@@ -168,7 +161,7 @@ if($format == "gdocs"){
 	gdocs();
 }
 function gdocs(){
-	global $data, $nomeArq;
+	global $data, $nomeArq, $jsonp;
 	$items = $data["items"];
 	$n = count($items);
 	$dados = $data["features"];
@@ -186,8 +179,7 @@ function gdocs(){
 		//var_dump($dd["shape"].getcentroid());exit;
 		$c = $dd["shape"]->getcentroid();
 
-		$r["calcx"] = $c->x;
-		$r["calcy"] = $c->y;
+		$r["geo"] = array("lat"=>$c->y,"lon"=>$c->x);
 		$records[] = $r;
 	}
 	$fields = array();
@@ -199,29 +191,28 @@ function gdocs(){
 	}
 	
 	$fields[] = array(
-			"id"=>"calcx",
-			"type"=>"number"
-	);
-	$fields[] = array(
-			"id"=>"calcy",
-			"type"=>"number"
+			"id"=>"geo",
+			"type"=>"geo"
 	);
 	$j = array(
 			"records"=>$records,
 			"fields"=>$fields
 	);
-	//echo "<pre>";var_dump($j);exit;
 	$contents = json_encode($j);
-	//var_dump($contents);exit;
-	file_put_contents($nomeArq.".json",$contents);
-	//envia para download
-	ob_clean();
-	header("Content-type: application/json");
-	echo $contents;
+	//envia
+	if(empty($jsonp)){
+		file_put_contents($nomeArq.".json",$contents);
+		header("Content-type: application/json");
+		echo $contents;
+	}
+	else{
+		file_put_contents($nomeArq.".json",$jsonp."(".$contents.");");
+		echo $jsonp."(".$contents.");";
+	}
 }
 
 function storymap($par){
-	global $data, $nomeArq;
+	global $data, $nomeArq, $jsonp;
 
 	$items = $data["items"];
 	$colunaTexto = array_search($par["coltexto"],$items);
@@ -309,24 +300,15 @@ function storymap($par){
 	$contents = json_encode($j);
 	//var_dump($contents);exit;
 	file_put_contents($nomeArq.".json",$contents);
-	//envia para download
+	//envia
 	ob_clean();
-	header("Content-type: application/json");
-	echo $contents;
-}
-function ogc_imprimeAjuda(){
-	echo "<pre><b>Construtor de web services do I3Geo.</b><br><br>";
-	echo "Esse programa usa os arquivos mapfiles existentes em <br>";
-	echo "i3geo/temas para gerar web services OGC.<br>";
-	echo "Para escolher um tema, utilize:<br>";
-	echo "ogc.php?lista=temas - para listar os temas dispon&iacute;veis<br>";
-	echo "Para usar esse web service voce pode usar o parametro &tema=,<br>";
-	echo "ou seja,http://[host]/i3geo/ogc.php?tema=[codigo do tema]<br>";
-	echo "no lugar do codigo pode ser especificado um arquivo mapfile qualquer. ";
-	echo "Nesse caso, deve ser digitado o caminho completo no servidor<br><br>";
-	echo "Utilize o sistema de administracao do i3Geo para configurar quais os temas da pasta i3geo/temas podem ser utilizados.<br><br>";
-	echo "Utilize o parametro restauramapa para indicar o ID de um mapa salvo no banco <br>";
-	echo "de dados de administracao para utiliza-lo como um WMS";
+	if(empty($jsonp)){
+		header("Content-type: application/json");
+		echo $contents;
+	}
+	else{
+		echo $jsonp."(".$contents.");";
+	}
 }
 function nomeRand($n=10)
 {

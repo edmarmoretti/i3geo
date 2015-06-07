@@ -1065,9 +1065,9 @@ my.Flot = Backbone.View.extend({
     <div class="recline-flot"> \
       <div class="panel graph" style="display: block;"> \
         <div class="js-temp-notice alert alert-warning alert-block"> \
-          <h3 class="alert-heading">Hey there!</h3> \
-          <p>There\'s no graph here yet because we don\'t know what fields you\'d like to see plotted.</p> \
-          <p>Please tell us by <strong>using the menu on the right</strong> and a graph will automatically appear.</p> \
+          <h3 class="alert-heading">Olá!</h3> \
+          <p>Não tem nenhum gráfico aqui ainda. Você precisa definir quais colunas serão utilizadas.</p> \
+          <p>Por favor <strong>utilize as opções ao lado</strong> e o gráfico aparecerá automaticamente.</p> \
         </div> \
       </div> \
     </div> \
@@ -3679,7 +3679,7 @@ my.Timeline = Backbone.View.extend({
 
   // These are the default (case-insensitive) names of field that are used if found.
   // If not found, the user will need to define these fields on initialization
-  startFieldNames: ['date','startdate', 'start', 'start-date'],
+  startFieldNames: ['data','date','startdate', 'start', 'start-date'],
   endFieldNames: ['end','endDate'],
   elementId: '#vmm-timeline-id',
 
