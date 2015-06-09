@@ -2163,7 +2163,7 @@ switch (strtoupper($funcao))
 		}
 		if ($opcao == "aplica")
 		{
-			$retorno = $m->aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle,$minsize,$maxsize);
+			$retorno = $m->aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle,$minsize,$maxsize,$offsetx,$offsety);
 			if(!empty($symbolscale)){
 				$m->layer->set("symbolscaledenom",$symbolscale);
 			}

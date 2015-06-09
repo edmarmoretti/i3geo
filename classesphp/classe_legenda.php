@@ -629,7 +629,7 @@ parameters:
 $classe - &Iacute;ndice da classe.
 
 return:
-string com o 
+string com o
 tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size,symbolscaledenom,maxsize,minsize|
 */
 	function pegaParametros($classe)
@@ -662,6 +662,8 @@ tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size,sy
 			$linha[] = $this->layer->symbolscaledenom;
 			$linha[] = $estilo->minsize;
 			$linha[] = $estilo->maxsize;
+			$linha[] = $estilo->offsetx;
+			$linha[] = $estilo->offsety;
 			$linhas[] = $tipoLayer."#".implode("#",$linha);
 		}
 		//retorna tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size,symbolscaledenom
@@ -690,7 +692,7 @@ $size - Tamanho que ser&aacute; aplicado ao s&iacute;mbolo.
 
 $opacidade - Opacidade
 */
-	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle,$minsize=0,$maxsize=500)
+	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle,$minsize=0,$maxsize=500,$offsetx=0,$offsety=0)
 	{
 		if(!$this->layer){return "erro";}
 		if(!empty($pattern))
@@ -743,6 +745,8 @@ $opacidade - Opacidade
 		}
 		$estilo->set("minsize",$minsize);
 		$estilo->set("maxsize",$maxsize);
+		$estilo->set("offsetx",$offsetx);
+		$estilo->set("offsety",$offsety);
 		if ($this->layer->getmetadata("sld") != "")
 		{
 			$sld = $this->layer->getmetadata("sld");
