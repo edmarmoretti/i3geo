@@ -592,7 +592,7 @@ i3GEOadmin.editor = {
 			'<p class="paragrafo" ><input type=checkbox name=i3GEOuploadCriaMapfile id=i3GEOuploadCriaMapfile style="cursor:pointer;position:relative;top:2px;" />&nbsp;Marque para criar o arquivo de configura&ccedil;&atilde;o (mapfile) e visualizar os dados no mapa interativo (voc&ecirc; poder&aacute; editar esse arquivo posteriormente no editor de mapfiles)' +
 			'<p class="paragrafo" ><input type="checkbox" id="incluiserialshp" name="incluiserialshp" style="cursor:pointer;position:relative;top:2px;">&nbsp;Inclui uma coluna gid do tipo serial e chave prim&aacute;ria com c&oacute;digo &uacute;nico</p>' +
 			'<p class="paragrafo" ><input id=i3GEOuploadsubmit type="button" value="Enviar shapefile" size=12 />' +
-			'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
+			'<input type="hidden" name="MAX_FILE_SIZE" value="100000000">' +
 			'<input type="hidden" id="i3GEOuploadcodigoconexao" name="i3GEOuploadcodigoconexao" value="">' +
 			'<input type="hidden" id="i3GEOuploadesquema" name="i3GEOuploadesquema" value="">' +
 			"<p class='paragrafo' style=color:red >N&atilde;o utilize '_' no nome do arquivo. Apenas letras e n&uacute;meros s&atilde;o aceitos!!!</p>" +
