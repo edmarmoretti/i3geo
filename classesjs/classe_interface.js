@@ -310,11 +310,11 @@ i3GEO.Interface =
 		},
 		/**
 		 * Function : aposAdicNovaCamada
-		 * 
+		 *
 		 * Executa funcoes apos uma nova camada ter sido adicionada ao mapa, mas antes do layer ter sido efetivamente adicionado ao objeto com o mapa
 		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {obj} - objeto camada ver i3GEO.arvoreDeCamadas.CAMADAS
 		 */
 		aposAdicNovaCamada : function (camada) {
@@ -1441,6 +1441,8 @@ i3GEO.Interface =
 				if (i3GEO.Interface.openlayers.LAYERFUNDO != "") {
 					i3GEO.Interface.openlayers.ativaFundo(i3GEO.Interface.openlayers.LAYERFUNDO);
 				}
+				//necessario quando geometrias sao recuperadas de um mapa salvo
+				i3GEO.Interface.openlayers.sobeLayersGraficos();
 			},
 			/**
 			 * Altera a posicao do layer de desenho de figuras, posicionando-o sobre todos os demais

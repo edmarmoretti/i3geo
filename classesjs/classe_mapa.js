@@ -393,14 +393,23 @@ i3GEO.mapa =
 			// carrega o script do editor vetorial
 			if (geometrias.length > 0) {
 				var inicia = function() {
-					i3GEO.barraDeBotoes.editor.ativaPainel();
+					if(!i3GEO.desenho.layergrafico){
+						i3GEO.editorOL.criaLayerGrafico();
+					}
+					i3GEO.barraDeBotoes.editor[i3GEO.Interface.ATUAL].ativaPainel();
 					var n = geometrias.length, i;
 					for (i = 0; i < n; i++) {
 						i3GEO.editorOL.adicionaFeatureWkt(geometrias[i].geometria, geometrias[i].atributos);
 					}
-					$i(i3GEO.editorOL.layergrafico.id).style.zIndex = 5000;
+					i3GEO.editorOL.sobeLayersGraficos();
 				};
-				i3GEO.util.scriptTag(i3GEO.configura.locaplic + "/mashups/openlayers.js", inicia, "openlayers.js", true);
+				if (!i3GEO.editorOL) {
+					i3GEO.util.scriptTag(
+						i3GEO.configura.locaplic + "/classesjs/compactados/classe_editorol_compacto.js",
+						inicia,
+						"editorol.js",
+						true);
+				}
 			}
 		},
 		/**
