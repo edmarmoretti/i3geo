@@ -161,9 +161,12 @@ if(!isset($tema) && isset($typename)){
 }
 //
 //garante que layers possam ser especificados de diferentes maneiras
+//mas evita definir o layer como o nome do mapfile
 //
-$_GET["layers"] = $tema;
-$_GET["LAYERS"] = $tema;
+if(!file_exists($tema)){
+	$_GET["layers"] = $tema;
+	$_GET["LAYERS"] = $tema;
+}
 $layers = $tema;
 //
 //verifica o OUTPUTFORMAT e o cache de arquivo
@@ -273,7 +276,15 @@ if(isset($_GET["DESLIGACACHE"]) && $_GET["DESLIGACACHE"] == "sim"){
 	$agora = time();
 	$cache = false;
 }
-$nomeMapfileTmp = $dir_tmp."/ogc_".md5(implode("",$_GET))."_".$agora.".map";
+//remove o bbox do calculo do nome do mapfile
+$arrayget = $_GET;
+$arrayget["bbox"] = "";
+$arrayget["BBOX"] = "";
+$arrayget["Z"] = "";
+$arrayget["X"] = "";
+$arrayget["Y"] = "";
+$arrayget["tms"] = "";
+$nomeMapfileTmp = $dir_tmp."/ogc_".md5(implode("",$arrayget))."_".$agora.".map";
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
 $cortePixels = 0;
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
@@ -1221,6 +1232,7 @@ function restauraMapaSalvo(){
 	if($l != ""){
 		$l->set("status",MS_DELETE);
 	}
+	$m->setmetadata("ows_enable_request","*");
 	$m->save($xbase);
 	//$fundo = $xbase;
 	$tema = $xbase;
