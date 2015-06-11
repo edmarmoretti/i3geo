@@ -121,7 +121,7 @@ function montaDivTemas(i)
 	ins += "<select  id='kmz_tema' >";
 	ins += core_combosimnao(i.kmz_tema);
 	ins += "</select></p>";
-	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >Atualiza ou cria a miniatura.</span> Cada tema pode ter uma imagem miniatura que &eacute; mostrada em algumas funcionalidades do i3Geo. Utilize essa op&ccedil;&atilde;o para criar a miniatura para o tema em edi&ccedil;&atilde;o.<br>";
+	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >Clique para atualizar ou cria a miniatura.</span> Cada tema pode ter uma imagem miniatura que &eacute; mostrada em algumas funcionalidades do i3Geo. Utilize essa op&ccedil;&atilde;o para criar a miniatura para o tema em edi&ccedil;&atilde;o.<br>";
 	ins += "<img id='imagemMiniatura' src='../../temas/miniaturas/"+i.imagem+"' /></p><br><br>";
 	ins += "<input type=hidden id=codigo_tema value='"+i.codigo_tema+"'/>";
 	return(ins);
@@ -135,16 +135,12 @@ function atualizaMiniatura(){
 	{
   		success:function(o)
   		{
-  			i.style.display = none;
-  			i.onLoad = function(){
-  				$i("imagemMiniatura").style.display = "block";
-  			};
-  			try
-  			{i.src = "../../temas/miniaturas/"+tema+".map.grande.png";}
-  			catch(e){
-  				i.style.display = block;
-  				core_handleFailure(e,o.responseText);
-  			}
+  			var i = $i("imagemMiniatura");
+  			//i.style.display = none;
+  			//i.onLoad = function(){
+  			//	$i("imagemMiniatura").style.display = "block";
+  			//};
+  			i.src = "../../temas/miniaturas/"+tema+".map.grande.png";
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
