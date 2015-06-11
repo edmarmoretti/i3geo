@@ -338,6 +338,10 @@ i3GEOadmin.editor = {
 			}
 		},
 		mostrar: function(nreg, nome_tabela, nomeEsquema, codigo_estat_conexao, w){
+			//caso o clique venha como evento
+			if(arguments.length === 2){
+				nreg = false;
+			}
 			if(!nome_tabela && $i("i3GEOadmintabela").value == ""){
 				alert("Escolha a tabela");
 				return;
