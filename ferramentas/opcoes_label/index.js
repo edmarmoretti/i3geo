@@ -155,8 +155,8 @@ i3GEOF.proplabel = {
 		'		<option value="MS_CC" >'+$trad('centro',i3GEOF.proplabel.dicionario)+'</option>' +
 		'		<option value="MS_CR" >'+$trad('centroDireito',i3GEOF.proplabel.dicionario)+'</option>' +
 		'		<option value="MS_LL" >'+$trad('inferiorEsquerdo',i3GEOF.proplabel.dicionario)+'</option>' +
-		'		<option value="MS_LC" >'+$trad('inferiorCentro',i3GEOF.proplabel.dicionario)+'inferior centro</option>' +
-		'		<option value="MS_LR" >'+$trad('inferiorDireito',i3GEOF.proplabel.dicionario)+'inferior direito</option>' +
+		'		<option value="MS_LC" >'+$trad('inferiorCentro',i3GEOF.proplabel.dicionario)+' inferior centro</option>' +
+		'		<option value="MS_LR" >'+$trad('inferiorDireito',i3GEOF.proplabel.dicionario)+' inferior direito</option>' +
 		'	</select>' +
 		'</div>' +
 
