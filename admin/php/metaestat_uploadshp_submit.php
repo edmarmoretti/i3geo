@@ -150,7 +150,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	if($tabelaExiste == false && $_POST["tipoOperacao"] == "criar"){
 		$sql = "CREATE TABLE ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"]."(the_geom geometry";
 		foreach($colunas as $coluna){
-			$sql .= ",".strtolower($coluna)." ".$tipoColuna[$coluna];
+			$sql .= ",".remove_accents(strtolower($coluna))." ".$tipoColuna[$coluna];
 		}
 		$sql .= ")WITH(OIDS=FALSE)";
 		$sqltabela[] = $sql;
@@ -192,8 +192,9 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	for ($i=0; $i<$numshapes;$i++){
 		$s = $layer->getShape(new resultObj($i));
 		$vs = array();
-		$escape = "";
+
 		foreach($colunas as $coluna){
+			$escape = "";
 			if($tipoColuna[$coluna] == "varchar"){
 				$texto = $s->getValue($layer,$coluna);
 				//echo $i." - ".mb_detect_encoding($texto)."<br>";
@@ -204,10 +205,10 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 					$escape = "E";
 				}
 				if($enc != "" && $enc != $encodingdb){
-					$textosl = "'".mb_convert_encoding($textosl,$encodingdb,$enc)."'";
+					$textosl = "$escape'".mb_convert_encoding($textosl,$encodingdb,$enc)."'";
 				}
 				else{
-					$textosl = "'".$textosl."'";
+					$textosl = "$escape'".$textosl."'";
 				}
 				if($textosl == "''"){
 					$textosl = 'null';
@@ -264,7 +265,10 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 					$linha = remove_accents($linha);
 					$res = $dbh->query($linha);
 					if($res == false){
-						echo "<br><br><span style=color:red >Erro em: </span>".$linha;
+						$res = pg_query($bdcon,$linha);
+						if($res == false){
+							echo "<br><br><span style=color:red >Erro em: </span>".$linha;
+						}
 					}
 					else{
 						echo "<br><br><span style=color:red >Linha com acentos removidos: </span>".$linha;
