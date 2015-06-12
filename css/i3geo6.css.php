@@ -89,6 +89,7 @@ margin: auto;
 text-align: left;
 cursor: pointer;
 top: -2px;
+font-weight : bold;
 }
 .i3GEOarvCamTemaIE {
 text-align: left;
