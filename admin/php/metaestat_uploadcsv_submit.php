@@ -67,7 +67,6 @@ if (ob_get_level() == 0) ob_start();
 			}
 			echo "<p class='paragrafo' >Separador de colunas identificado: <b>".$separador."</b></p>";
 			echo "<p class='paragrafo' >Total de colunas: <b>".count($colunas)."</b></p>";
-			//var_dump($colunas);
 			fclose ($handle);
 			//le o csv em um array
 			$handle = fopen ($arqcsv, "r");
@@ -77,7 +76,7 @@ if (ob_get_level() == 0) ob_start();
 			while (!feof($handle)) {
 				$buffer = fgets($handle);
 				if($buffer != $cabecalho){
-					$buffer = str_replace('"','',$buffer);
+					//$buffer = str_replace('"','',$buffer);
 					$buffer = str_replace("'",'',$buffer);
 					$buffer = str_replace("\n",'',$buffer);
 					$buffer = str_replace("\r",'',$buffer);
@@ -96,7 +95,7 @@ if (ob_get_level() == 0) ob_start();
 			}
 			fclose ($handle);
 			//decobre o tipo de coluna
-			$testar = 500;
+			$testar = 50;
 			if(count($linhas) < $testar){
 				$testar = count($linhas);
 			}
@@ -198,25 +197,36 @@ if (ob_get_level() == 0) ob_start();
 			$escapar = "',<,>,%,#,@,(,)";
 			for ($i=0; $i<$nlinhas;$i++){
 				$s = $linhas[$i];
+				$s = str_replace('"','',$s);
 				$enc = mb_detect_encoding($s);
 				if($enc != ""){
 					$s = mb_convert_encoding($s,$encodingdb,$enc);
 				}
 				$vs = array();
 				for ($j=0; $j<$ncolunas;$j++){
-					if($tipoColuna[$colunas[$j]] == "varchar"){
+					$escape = "";
+					if($tipoColuna[$coluna] == "varchar"){
 						$texto = $s[$j];
-						$texto = str_replace("'","",$texto);
-						$texto = "'".addcslashes($texto,$escapar)."'";
-						if($texto == "''"){
-							$texto = 'null';
+						$enc = mb_detect_encoding($texto);
+						$textosl = addcslashes($texto,$escapar);
+						if($textosl != $texto){
+							$escape = "E";
 						}
-						$vs[] = $texto;
+						if($enc != "" && $enc != $encodingdb){
+							$textosl = "$escape'".mb_convert_encoding($textosl,$encodingdb,$enc)."'";
+						}
+						else{
+							$textosl = "$escape'".$textosl."'";
+						}
+						if($textosl == "''"){
+							$textosl = 'null';
+						}
+						$vs[] = $textosl;
 					}
 					else{
 						$valor = $s[$j];
-						if($valor == ""){
-							$valor = "nulo";
+						if($valor == "" || (empty($valor) && $valor != 0)){
+							$valor = 'nulo';
 						}
 						$vs[] = $valor;
 					}
@@ -253,20 +263,39 @@ if (ob_get_level() == 0) ob_start();
 					echo 'Erro: ' . $e->getMessage();
 				}
 			}
+			$bdcon = pg_connect('dbname='.$conexao["bancodedados"].' user='.$conexao["usuario"].' password='.$conexao["senha"].' host='.$conexao["host"].' port='.$conexao["porta"]."options='-c client_encoding=LATIN1'");
+
 			foreach($linhasql as $linha){
 				try {
 					$res = $dbh->query($linha);
 					if($res == false){
-						echo "<br><br><span style=color:red >Erro em: </span>".$linha;
+						$res = pg_query($bdcon,$linha);
+						if($res == false){
+							$linha = remove_accents($linha);
+							$res = $dbh->query($linha);
+							if($res == false){
+								$res = pg_query($bdcon,$linha);
+								if($res == false){
+									echo "<br><br><span style=color:red >Erro em: </span>".$linha;
+								}
+							}
+							else{
+								echo "<br><br><span style=color:red >Linha com acentos removidos: </span>".$linha;
+							}
+						}
 					}
 				} catch (PDOException $e) {
 					echo 'Erro: ' . $e->getMessage();
 				}
 			}
-			echo "<br>Registros existentes no CSV: ". $nlinhas;
 			$sql = "select * from ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"];
 			$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 			$r = $q->fetchAll();
+			if($nlinhas != count($r)){
+				echo "<span style='color:red'>";
+			}
+			echo "<br>Registros existentes no CSV: ". $nlinhas;
+
 			echo "<br>Registros na tabela final: ". count($r);
 			echo "<b><br>Feito!!!<br>Fa&ccedil;a o reload da p&aacute;gina";
 		}
@@ -274,8 +303,8 @@ if (ob_get_level() == 0) ob_start();
 			echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
 		}
 
-	?>
-	<script>window.scrollTo(0,10000);</script>
+		?>
+		<script>window.scrollTo(0,10000);</script>
 
 </body>
 </html>
