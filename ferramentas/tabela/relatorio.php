@@ -1,3 +1,10 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<title>i3Geo</title>
+</head>
 <?php
 session_name("i3GeoPHP");
 if (isset($g_sid))
@@ -94,7 +101,7 @@ for ($i = 0; $i < $res_count; $i++){
 		$v = trim($shape->values[$item]);
 		//$v = mb_convert_encoding($v,mb_detect_encoding($v),"ISO-8859-1");
 		if (function_exists("mb_convert_encoding") && $convC == true){
-			$v = mb_convert_encoding($v,"UTF-8","ISO-8859-1");
+			//$v = mb_convert_encoding($v,"UTF-8","ISO-8859-1");
 		}
 		$valitem[$item] = $v;
 	}
@@ -123,18 +130,13 @@ if(isset($tiporel) && $tiporel == "csv"){
 	{echo ";&aacute;rea em ha \n";}
 	else
 	{echo "\n";}
-	foreach ($registros as $linhas)
-	{echo implode(";",$linhas)."\n";}
+	foreach ($registros as $linhas){
+		echo converte(implode(";",$linhas))."\n";
+	}
 	exit;
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<html>
-<head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<title>i3Geo</title>
-</head>
 <style>
 body,td
 {
@@ -175,7 +177,7 @@ if ($itemagruparel == "")
 					echo "<td style='text-align:right'>".number_format($v,2,",",".")."</td>";
 				}
 				else{
-					echo "<td style='text-align:left'>$v</td>";
+					echo "<td style='text-align:left'>".converte($v)."</td>";
 				}
 				if ($statrel == "true"){
 					$v = trim($v);
@@ -246,7 +248,7 @@ else
 					if(is_numeric(trim($v)))
 					{echo "<td style='text-align:right'>".number_format($v,2,",",".")."</td>";}
 					else
-					{echo "<td style='text-align:left'>$v</td>";}
+					{echo "<td style='text-align:left'>".converte($v)."</td>";}
 					if ($statrel == "true")
 					{
 						$v = trim($v);
@@ -299,12 +301,9 @@ function calculaarea($geo)
 }
 function converte($texto)
 {
-	if (function_exists("mb_convert_encoding"))
+	if (!mb_detect_encoding($texto,"UTF-8",true))
 	{
-		if (!mb_detect_encoding($texto,"UTF-8",true))
-		{
-			$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
-		}
+		$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
 	}
 	return $texto;
 }

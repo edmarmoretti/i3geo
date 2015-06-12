@@ -1332,32 +1332,30 @@ i3GEOF.tabela =
 		 *
 		 * Gera o relat&oacute;rio no formato CSV
 		 */
-		relatorioTexto : function() {
-			try {
-				$i("i3GEOtabelaarearelh").value = $i("i3GEOtabelacalculaarea").checked;
-				$i("i3GEOtabelastatrelh").value = $i("i3GEOtabelacalculaestat").checked;
-				$i("i3GEOtabelaexcluirvalorh").value = $i("i3GEOtabelaexcestat").value;
-				$i("i3GEOtabelatemarelh").value = i3GEOF.tabela.tema;
-				$i("i3GEOtabelag_sidh").value = i3GEO.configura.sid;
-				$i("i3GEOtabelaitemagruparelh").value = $i("i3GEOtabelaagrupaItem").value;
-				$i("i3GEOtabelatiporelh").value = "csv";
-				var inputs = $i("i3GEOtabelaitensrelatorio").getElementsByTagName("input"), listai = [], listanomes = [], nome, i, temp, n =
-					inputs.length;
-				for (i = 0; i < n; i++) {
-					if (inputs[i].checked === true) {
-						listai.push(inputs[i].id + "|" + inputs[i].name);
-						nome = $i(inputs[i].id + inputs[i].name).value;
-						listanomes.push(nome);
-					}
+		relatorioTexto : function(idjanela) {
+
+			$i(idjanela + "i3GEOtabelaarearelh").value = $i(idjanela + "i3GEOtabelacalculaarea").checked;
+			$i(idjanela + "i3GEOtabelastatrelh").value = $i(idjanela + "i3GEOtabelacalculaestat").checked;
+			$i(idjanela + "i3GEOtabelaexcluirvalorh").value = $i(idjanela + "i3GEOtabelaexcestat").value;
+			$i(idjanela + "i3GEOtabelatemarelh").value = i3GEOF.tabela.propJanelas[idjanela].tema;
+			$i(idjanela + "i3GEOtabelag_sidh").value = i3GEO.configura.sid;
+			$i(idjanela + "i3GEOtabelaitemagruparelh").value = $i(idjanela + "i3GEOtabelaagrupaItem").value;
+			$i(idjanela + "i3GEOtabelatiporelh").value = "csv";
+			var inputs = $i(idjanela + "i3GEOtabelaitensrelatorio").getElementsByTagName("input"), listai = [], listanomes = [], nome, i, temp, n =
+				inputs.length;
+			for (i = 0; i < n; i++) {
+				if (inputs[i].checked === true) {
+					listai.push(inputs[i].id + "|" + inputs[i].name);
+					nome = $i(inputs[i].id + inputs[i].name).value;
+					listanomes.push(nome);
 				}
-				$i("i3GEOtabelanomesrelh").value = listanomes;
-				$i("i3GEOtabelaitensrelh").value = listai;
-				temp = $i("i3GEOtabelarelatorio").action;
-				$i("i3GEOtabelarelatorio").action += "?ext=" + i3GEO.parametros.mapexten;
-				$i("i3GEOtabelarelatorio").submit();
-				$i("i3GEOtabelarelatorio").action = temp;
-			} catch (e) {
-				i3GEO.janela.tempoMsg(e);
 			}
+			$i(idjanela + "i3GEOtabelanomesrelh").value = listanomes;
+			$i(idjanela + "i3GEOtabelaitensrelh").value = listai;
+			temp = $i(idjanela + "i3GEOtabelarelatorio").action;
+			$i(idjanela + "i3GEOtabelarelatorio").action += "?ext=" + i3GEO.parametros.mapexten;
+			$i(idjanela + "i3GEOtabelarelatorio").submit();
+			$i(idjanela + "i3GEOtabelarelatorio").action = temp;
+
 		}
 	};
