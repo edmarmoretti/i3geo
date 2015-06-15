@@ -59,6 +59,43 @@ if(!isset($temas) && isset($layers)){
 if(!isset($temas)){
 	ajuda();
 }
+if(!isset($mapext)){
+	if(isset($base) && $base != ""){
+		if(file_exists($base)){
+			$f = $base;
+		}
+		else{
+			$f = $locaplic."/aplicmap/".$base.".map";
+		}
+	}
+	else
+	{
+		$f = "";
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+			$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+		}
+		else{
+			if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+				$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+			}
+			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+			}
+			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+			}
+			if($f == "")
+			{
+				$f = $locaplic."/aplicmap/geral1v".$versao.".map";
+			}
+		}
+	}
+	if(@ms_newMapObj($f)){
+		$mapae = ms_newMapObj($f);
+		$c = $mapae->extent;
+		$mapext = $c->minx.",".$c->miny.",".$c->maxx.",".$c->maxy;
+	}
+}
 // problema na vers&atilde;o 211 do OpenLayers. Tamanho em % n&atilde;o &eacute;
 // aceito
 // if(!isset($largura))

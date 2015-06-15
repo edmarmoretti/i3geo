@@ -222,20 +222,25 @@ i3GEO.guias =
 												+ "'>Com a interface atual</option>"
 												+ "<option value='"
 												+ i3GEO.configura.locaplic
-												+ "/mashups/openlayers.php?restauramapa="
+												+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
 												+ temp.ID_MAPA
 												+ "&fundo=e_wsm'>Openlayers com todos os botoes</option>"
 												+ "<option value='"
 												+ i3GEO.configura.locaplic
-												+ "/mashups/openlayers.php?restauramapa="
+												+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
 												+ temp.ID_MAPA
 												+ "&fundo=est_wms'>Sem o fundo</option>"
 												+ "<option value='"
 												+ i3GEO.configura.locaplic
-												+ "/mashups/openlayers.php?restauramapa="
+												+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
 												+ temp.ID_MAPA
-												+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com booes principais</option>"
-												+ "<option value='" + i3GEO.configura.locaplic + "/mashups/openlayers.php?restauramapa="
+												+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com botoes principais</option>"
+												+ "<option value='"
+												+ i3GEO.configura.locaplic
+												+ "/mashups/osm.php?numzoomlevels=18&restauramapa="
+												+ temp.ID_MAPA
+												+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com botoes principais e OSM</option>"
+												+ "<option value='" + i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
 												+ temp.ID_MAPA
 												+ "&botoes=legenda pan zoombox zoomtot zoomin zoomout'>Botoes de navegacao</option>"
 												+ "</select>";

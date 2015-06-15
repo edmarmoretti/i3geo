@@ -35,6 +35,10 @@ p,td
 </div>
 <table class="olControlEditingToolbar1" >
 	<tr>
+		<td style=width:20px ></td>
+		<td>Para ver os par&acirc;metros que podem ser utilizados na URL para abrir o mapa, <a href='openlayers.php?ajuda' target='_blank'>clique aqui</a></td>
+	</tr>
+	<tr>
 		<td style=width:20px ><div class="editorOLprocuraItemInactive"></div></td>
 		<td>Procure um elemento no tema que estiver ativo</td>
 	</tr>

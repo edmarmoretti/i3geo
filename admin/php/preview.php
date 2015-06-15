@@ -26,6 +26,8 @@ $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 error_reporting(0);
 $versao = versao();
 $versao = $versao["principal"];
+
+
 if($_GET["SRS"] == "EPSG:900913"){
 	$_GET["SRS"] = "EPSG:3857";
 }
@@ -132,6 +134,9 @@ if($versao > 5){
 	}
 }
 $l->set("status",MS_DEFAULT);
+
+
+
 ms_newLayerObj($oMap, $l);
 
 $oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
@@ -140,6 +145,7 @@ $oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
 if(ob_get_contents ()){
 	ob_end_clean();
 }
+cloneInlineSymbol($l,$nmap,$oMap);
 
 $l = $oMap->getlayer(0);
 $req->setParameter("LAYERS",$l->name);

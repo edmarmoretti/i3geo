@@ -1,5 +1,49 @@
 <?php
+include("../../ms_configura.php");
 include("../../classesphp/pega_variaveis.php");
+include("../../classesphp/funcoes_gerais.php");
+//define o centro, pegando as coordenadas do mapa de inicializacao
+$versao = versao();
+$versao = $versao["principal"];
+if(isset($base) && $base != ""){
+	if(file_exists($base)){
+		$f = $base;
+	}
+	else{
+		$f = $locaplic."/aplicmap/".$base.".map";
+	}
+}
+else
+{
+	$f = "";
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+		$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+	}
+	else{
+		if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+			$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+		}
+		if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+			$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+		}
+		if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+			$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+		}
+		if($f == "")
+		{
+			$f = $locaplic."/aplicmap/geral1v".$versao.".map";
+		}
+	}
+}
+$centroX = -55;
+$centroY = -13;
+if(@ms_newMapObj($f)){
+	$mapa = ms_newMapObj($f);
+
+	$c = $mapa->extent;
+	$centroX = $c->maxx - ($c->maxx - $c->minx) / 2;
+	$centroY = $c->maxy - ($c->maxy - $c->miny) / 2;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,14 +108,16 @@ body {
 		}
 	);
 	// Add a WMS imagery layer
-	
+
 	var imageryLayers = viewer.imageryLayers;
 	if('<?php echo $kmlurl;?>' != ''){
 		viewer.dataSources.add(Cesium.KmlDataSource.load('<?php echo strip_tags($kmlurl);?>'))
 	}
-	viewer.camera.lookAt(Cesium.Cartesian3.fromDegrees(-55.0, -13.0), new Cesium.Cartesian3(0.0, -4790000.0, 3930000.0));
-	viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
-	//viewer.extend(Cesium.viewerCesiumInspectorMixin);
+	var center = Cesium.Cartesian3.fromDegrees(<?php echo $centroX.",".$centroY;?>);
+    var transform = Cesium.Transforms.eastNorthUpToFixedFrame(center);
+    var camera = viewer.camera;
+    camera.constrainedAxis = Cesium.Cartesian3.UNIT_Z;
+    camera.lookAtTransform(transform, new Cesium.Cartesian3(-120000.0, -120000.0, 120000.0));
 </script>
 </body>
 </html>

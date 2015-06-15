@@ -66,6 +66,45 @@ body {
 				$_POST["texto"] = "";
 			}
 			include_once(dirname(__FILE__)."/login.php");
+			//pega a extensao geografica
+			if(isset($base) && $base != ""){
+				if(file_exists($base)){
+					$f = $base;
+				}
+				else{
+					$f = $locaplic."/aplicmap/".$base.".map";
+				}
+			}
+			else
+			{
+				$f = "";
+				if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+					$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+				}
+				else{
+					if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+						$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+					}
+					if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+						$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+					}
+					if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+						$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+					}
+					if($f == "")
+					{
+						$f = $locaplic."/aplicmap/geral1v".$versao.".map";
+					}
+				}
+			}
+			if(@ms_newMapObj($f)){
+				$mapa = ms_newMapObj($f);
+				$c = $mapa->extent;
+				$extensao = $c->minx.",".$c->miny.",".$c->maxx.",".$c->maxy;
+			}
+
+
+
 			if(verificaOperacaoSessao("admin/php/editortexto") == false){
 				echo "Vc nao pode realizar essa operacao.";exit;
 			}
@@ -153,7 +192,7 @@ body {
 			<div style=float:left; >
 			Estilo: <select onchange="mudaEstilo(this.value)">
 				<option value=elegant >Elegant</option>
-				<option value=ambiance >Ambiance</option> 
+				<option value=ambiance >Ambiance</option>
 				<option value=cobalt >Cobalt</option>
 				<option value=night >Night</option>
 				<option value=neo >Neo</option>
@@ -176,17 +215,21 @@ Ctrl-z - Desfazer<br>
 Ctrl-Up - Sobe<br>
 Alt-left - In&iacute;cio da linha<br>
 
-			
+
 			</fieldset>
-			
+
 			<fieldset style="position: relative; float: left; width:580px;margin: 5px;padding:10px;left:10px;">
 			<legend>Mapfile em edi&ccedil;&atilde;o</legend>
 			<div id=filtroDeLetras ></div>
 			<div id="comboMapfiles" >Aguarde...</div>
 			<?php
 			$mapfile = str_replace("\\","/",$mapfile);
-
-			echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?servidor=../admin/php/preview.php&fundo=&nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=550&altura=400&temas=".$mapfile."' style='position:relative;top:2px;overflow:hidden;width:100%;height:450px;border:0px solid gray;'>";
+			if(!empty($extensao)){
+				echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?mapext=".$extensao."&servidor=../admin/php/preview.php&fundo=e_wsm&nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=550&altura=400&temas=".$mapfile."' style='position:relative;top:2px;overflow:hidden;width:100%;height:450px;border:0px solid gray;'>";
+			}
+			else{
+				echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?servidor=../admin/php/preview.php&fundo=e_wsm&nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=550&altura=400&temas=".$mapfile."' style='position:relative;top:2px;overflow:hidden;width:100%;height:450px;border:0px solid gray;'>";
+			}
 			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
 
@@ -196,6 +239,7 @@ Alt-left - In&iacute;cio da linha<br>
 			else{
 				$mapa = ms_newMapObj($mapfile);
 				$n = $mapa->numlayers;
+				echo "<br>Obs.: o corte de imagens n&atilde;o &eacute; considerado no preview";
 				echo "<br>Ajudante de cores RGB: <input type=text value='clique' size=10 id='corrgb' onclick=\"i3GEO.util.abreCor('','corrgb','rgbSep')\" />";
 				echo "<br><br>Colunas dos layers:<br><br>";
 				for($i=0;$i<$n;$i++){

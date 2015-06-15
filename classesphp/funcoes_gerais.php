@@ -2730,7 +2730,7 @@ function cloneInlineSymbol($layern,$nmapa,$mapa){
 				if($estilo->symbolname != ""){
 					$nomesimbolo = $estilo->symbolname;
 					$simbolo = $nmapa->getSymbolObjectById($nmapa->getSymbolByName($nomesimbolo));
-					if($simbolo->inmapfile == MS_TRUE){
+					if($simbolo->inmapfile == MS_TRUE || file_exists($nomesimbolo)){
 						$simbolon = new symbolObj($mapa, $nomesimbolo);
 						$simbolon->set("inmapfile",MS_TRUE);
 						$simbolon->setImagePath($simbolo->imagepath);
