@@ -230,5 +230,12 @@ g_traducao_init =
 				en : "",
 				es : ""
 			}
+		],
+		34 : [
+			{
+				pt : "Lista de mapas",
+				en : "",
+				es : ""
+			}
 		]
 	};

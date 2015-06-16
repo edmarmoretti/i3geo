@@ -44,6 +44,10 @@ botoesIni.push({
 	"href":"../ferramentas/metaestat/editorlimites.php",
 	"titulo":$trad(9,g_traducao_init)
 	},{
+	"img":"window-duplicate.png",
+	"href":"../ferramentas/salvamapa/lista.htm",
+	"titulo":$trad(34,g_traducao_init)
+	},{
 	"img":"svn-update.png",
 	"href":"../datadownload.htm",
 	"titulo":$trad(10,g_traducao_init)
