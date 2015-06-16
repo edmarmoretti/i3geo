@@ -9,6 +9,12 @@ margin-top: -5px;
 }
 */
 /*
+Ajusta altura dos controles do googlemaps
+*/
+div.gmnoprint {
+padding-top: 10px;
+}
+/*
 Utilizado na janela do buscador INDE
 */
 .meta-param, .meta-value{
