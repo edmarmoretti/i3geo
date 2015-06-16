@@ -85,8 +85,19 @@ i3GEOF.telaremota = {
 		ins += '<p class="paragrafo" ><div id=i3GEOtelaremotaResultado style=text-align:left ></div>';
 		$i(divid).innerHTML += ins;
 		mostraLink = function(retorno){
+			//pega o fundo no caso do openlayers - o objeto fundo deve existir no php que abre a tela remota
+			var fundo = "";
+			if(i3GEO.Interface.ATUAL === "openlayers"){
+				var n = i3GEO.Interface.openlayers.LAYERSADICIONAIS.length;
+				var i;
+				for(i= 0; i < n; i++){
+					if(i3GEO.Interface.openlayers.LAYERSADICIONAIS[i].isBaseLayer === true && i3GEO.Interface.openlayers.LAYERSADICIONAIS[i].visibility === true){
+						fundo = i;
+					}
+				}
+			}
 			var ins = "";
-			var url1 = "?tempo=7000&telaR="+retorno.data+"&g_sid="+i3GEO.configura.sid;
+			var url1 = "?tempo=7000&telaR="+retorno.data+"&g_sid="+i3GEO.configura.sid+"&fundo=" + fundo;
 			var url2 = i3GEO.configura.locaplic+"/ferramentas/telaremota/openlayers1.php"+url1;
 			ins += "<p style='font-size:13px;text-align:left' >Openlayers:</p><br>";
 			ins += "<a href="+url2+" target=_blank >"+url2+"</a>";

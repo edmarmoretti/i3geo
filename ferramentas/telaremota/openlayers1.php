@@ -1,3 +1,9 @@
+<?php
+include("../../classesphp/pega_variaveis.php");
+if(!isset($fundo)){
+	$fundo = "''";
+}
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
@@ -112,7 +118,7 @@ function inicia(){
 	if (app==='N'){navn=true;}else{navm=true;}
 	OpenLayers.ImgPath = "../../pacotes/openlayers/img/"
 	OpenLayers.Lang.setCode("pt-BR");
-	var urlLayer = "../../classesphp/mapa_openlayers.php?DESLIGACACHE=sim&g_sid=<?php echo $_GET["g_sid"];?>&telaR=<?php echo $_GET["telaR"];?>";
+	var urlLayer = "../../classesphp/mapa_openlayers.php?DESLIGACACHE=sim&g_sid=<?php echo $g_sid;?>&telaR=<?php echo $telaR;?>";
 	
 	var remoto = new OpenLayers.Layer.WMS(
 		"Remoto",
@@ -120,18 +126,68 @@ function inicia(){
 		{transparent: "false", format: "image/png"},
 		{isBaseLayer:false,singleTile:true,buffer:0,gutter:0,ratio:1}
 	);
-	var remotoFundo = new OpenLayers.Layer.WMS(
-		"Fundo",
-		urlLayer+"&tipolayer=fundo",
-		{transparent: "false", format: "image/png"},
-		{isBaseLayer:true,singleTile:true,visibility:true,buffer:0,gutter:0,ratio:1}
-	);
-	var bra = new OpenLayers.Layer.WMS( 
-		"Base carto MMA",
-		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
-		{layers:"baseraster",srs:"EPSG:4618",format:"image/png"},
-		{isBaseLayer:true,visibility:false}
-	);
+
+	var eng = new OpenLayers.Layer.ArcGIS93Rest(
+		"ESRI National Geographic",
+		"http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/export",
+		{
+			format : "jpeg"
+		}, {
+			isBaseLayer : true,
+			visibility : true
+		});
+	var oce = new OpenLayers.Layer.ArcGIS93Rest(
+			"ESRI Ocean Basemap",
+			"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
+			{
+				format : "jpeg"
+			}, {
+				isBaseLayer : true,
+				visibility : true
+			});
+	var ims = new OpenLayers.Layer.ArcGIS93Rest(
+			"ESRI Imagery World 2D",
+			"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
+			{
+				format : "jpeg"
+			}, {
+				isBaseLayer : true,
+				visibility : true
+			});
+	var wsm = new OpenLayers.Layer.ArcGIS93Rest(
+			"ESRI World Street Map",
+			"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
+			{
+				format : "jpeg"
+			}, {
+				isBaseLayer : true,
+				visibility : true
+			});
+	var bra = new OpenLayers.Layer.WMS(
+			"Base carto MMA",
+			"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
+			{
+				layers : "baseraster",
+				srs : "EPSG:4618",
+				format : "image/png",
+				isBaseLayer : false
+			}, {
+				isBaseLayer : true,
+				visibility : true
+			});
+
+	var tms = new OpenLayers.Layer.TMS("OSGEO",
+			"http://tilecache.osgeo.org/wms-c/Basic.py/", {
+				layername : "basic",
+				type : "png",
+				// set if different than the bottom left of map.maxExtent
+				tileOrigin : new OpenLayers.LonLat(-180, -90),
+				isBaseLayer : true,
+				visibility : true
+			});
+
+	var LAYERSADICIONAIS = [ eng, oce, ims, wsm, tms, bra ];
+
 	mapaRemoto = new OpenLayers.Map({
 		div: "openlayers",
 		controls: [
@@ -139,9 +195,14 @@ function inicia(){
 			new OpenLayers.Control.LayerSwitcher(),
 			new OpenLayers.Control.ScaleLine(),
 			new OpenLayers.Control.Navigation()
-		] 		
-	});	
-	mapaRemoto.addLayers([remotoFundo,bra,remoto]);
+		]
+	});
+	if(<?php echo $fundo; ?> !== ""){
+		mapaRemoto.addLayers([LAYERSADICIONAIS[<?php echo $fundo; ?>],remoto]);
+	}
+	else{
+		mapaRemoto.addLayers([remoto]);
+	}
 	recuperaMapa();
 }
 function zoom2ext(ext){
@@ -155,11 +216,13 @@ function atualizaMapa(){
 		nlayers = layers.length,
 		i;
 	for(i=0;i<nlayers;i++){
-		layers[i].mergeNewParams({r:Math.random()});
-		layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&","");
-		layers[i].url = layers[i].url+"&&";				
-		if(layers[i].visibility === true){
-			layers[i].redraw();
+		if(layers[i].isBaseLayer === false){
+			layers[i].mergeNewParams({r:Math.random()});
+			layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&","");
+			layers[i].url = layers[i].url+"&&";
+			if(layers[i].visibility === true){
+				layers[i].redraw();
+			}
 		}
 	}
 }
