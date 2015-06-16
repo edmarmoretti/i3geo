@@ -3363,6 +3363,10 @@ i3GEO.util =
 		 */
 		animaClique : function(obj) {
 			if (obj) {
+				//fecha o streetview
+				if(i3GEO.Interface.ATUAL === "googlemaps"){
+					i3GeoMap.getStreetView().setVisible(false);
+				}
 				obj.style.visibility = "hidden";
 				setTimeout(function() {
 					obj.style.visibility = "visible";

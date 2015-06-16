@@ -359,9 +359,9 @@ if($temas != ""){
 					}
 					else{
 						foreach($layers as $l){
-							$singleTile = true;
+							$singleTile = "false";
 							if(strtoupper($l->getmetadata("TILES")) == "NAO"){
-								$singleTile = false;
+								$singleTile = "true";
 							}
 							$tituloLayer = $l->getmetadata("tema");
 							$nomeLayer = $l->name;

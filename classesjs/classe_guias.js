@@ -157,7 +157,7 @@ i3GEO.guias =
 						function(retorno) {
 							var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;
 							ins =
-								"<br><div id='banners' style='overflow:auto;text-align:center'>" + "<a href='" + i3GEO.configura.locaplic
+								"<br><div id='banners' style='overflow:auto;text-align:center'>" + "<a class='linkMapasEditor' href='" + i3GEO.configura.locaplic
 									+ "/admin/html/mapas.html' target=_blank >" + $trad("x89") + "</a><br><br>";
 							mapa = retorno.data.mapas;
 							ig1lt = mapa.length;
@@ -615,6 +615,10 @@ i3GEO.guias =
 		 * {String} - nome da guia
 		 */
 		mostra : function(guia) {
+			//fecha o streetview
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				i3GeoMap.getStreetView().setVisible(false);
+			}
 			var guias, nguias, g, temp, attributes, anim;
 			guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 			nguias = guias.length;

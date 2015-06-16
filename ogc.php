@@ -530,14 +530,29 @@ else{
 		$menus = $m->pegaListaDeMenus();
 		foreach ($menus as $menu){
 			$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
+			//temas na raiz do menu
+			$lts = $menu["temas"];
+			//var_dump($lts);exit;
+			foreach($lts as $t){
+				if(strtolower($t["ogc_tema"]) != "nao"){
+					$codigosTema[$t["codigo_tema"]] = array("tema"=>$t["codigo_tema"],"fonte"=>$t["link_tema"]);
+				}
+			}
 			foreach($grupos as $grupo){
+				$lts = $grupo["temasgrupo"];
+				//var_dump($lts);
+				foreach($lts as $t){
+					if(strtolower($t["ogc"]) != "nao"){
+						$codigosTema[$t["tid"]] = array("tema"=>$t["tid"],"fonte"=>$t["link"]);
+					}
+				}
 				if(strtolower($grupo["ogc"]) == "sim"){
 					foreach($grupo["subgrupos"] as $sgrupo){
 						if(strtolower($sgrupo["ogc"]) == "sim"){
 							$lts = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
 							foreach($lts as $t){
 								if(strtolower($t["ogc"]) == "sim"){
-									$codigosTema[] = array("tema"=>$t["tid"],"fonte"=>$t["link"]);
+									$codigosTema[$t["tid"]] = array("tema"=>$t["tid"],"fonte"=>$t["link"]);
 								}
 							}
 						}
@@ -545,6 +560,7 @@ else{
 				}
 			}
 		}
+		//echo "<pre>".var_dump($codigosTema);exit;
 		foreach($codigosTema as $c){
 			$codigoTema = $c["tema"];
 			if(file_exists($locaplic."/temas/".$codigoTema.".map")){

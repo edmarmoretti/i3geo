@@ -131,7 +131,13 @@ i3GEO.mapa =
 			}
 			if (tipo === "openlayers") {
 				novoel.onclick = function(evt) {
-					i3GEO.Interface.atual2ol.inicia();
+					//fecha o streetview
+					if(i3GEO.Interface.ATUAL === "googlemaps" && i3GeoMap.getStreetView().getVisible() === true){
+						i3GeoMap.getStreetView().setVisible(false);
+					}
+					else{
+						i3GEO.Interface.atual2ol.inicia();
+					}
 				};
 			}
 			novoel.style.cursor = "pointer";
@@ -901,7 +907,11 @@ i3GEO.mapa =
 			 *
 			 * Lista os mapas cadastrados no sistema de administracao do i3geo
 			 */
-			listaDeMapasBanco : function() {
+			listaDeMapasBanco : function(idonde) {
+				if(idonde){
+					i3GEO.guias.CONFIGURA["mapas"].click.call(this, idonde);
+					return;
+				}
 				if (i3GEO.guias.CONFIGURA["mapas"]) {
 					var janela, divid;
 					if ($i("i3GEOFsalvaMapaLista")) {

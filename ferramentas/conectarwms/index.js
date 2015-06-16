@@ -161,7 +161,7 @@ function clickGuia2()
 		};
 		$i("guia2obj").style.display="block";
 		aguarde("block");
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=getcapabilities2&servico="+$i("servico").value;
+		var p = "../../classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=getcapabilities2&servico="+$i("servico").value;
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -213,7 +213,7 @@ function clickGuia3(codLayer)
 	{
 		$i("listatemas").innerHTML = "";
 		aguarde("block");
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=temaswms&id_ws="+g_idws+"&servico="+$i("servico").value;
+		var p = "../../classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=temaswms&id_ws="+g_idws+"&servico="+$i("servico").value;
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -308,7 +308,7 @@ function seltema(tipo,tema,legenda,nometema,nomecamada,sldflag)
 		if($i("tiporep")){
 			tiporep = $i("tiporep").value;
 		}
-		var url = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid;
+		var url = "../../classesphp/mapa_controle.php?g_sid="+g_sid;
 		if($i("servico").value.split("?").length === 1){
 			$i("servico").value = $i("servico").value+"?";
 		}
@@ -343,7 +343,7 @@ h {string} - altura
 s {string} - src do iframe
 */
 function abrejanelaIframe(){
-	var s = g_locaplic+"/admin/html/webservices.html?tipo=wms";
+	var s = "../../admin/html/webservices.html?tipo=wms";
 	var janelaeditor = i3GEO.janela.cria(
 			"1000",
 			"500",
