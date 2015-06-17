@@ -101,13 +101,15 @@ fieldset {
 			<p class=paragrafo>
 				<b>Escolha a interface para o mapa (opcional)</b>
 			</p>
-			<select id=interface onchange="$i3geo_gl.crialink()">
-				<option value="">Default</option>
-				<option value="black_gm.phtml">Google Maps</option>
-				<option value="googleearth.phtml">Google Earth</option>
-				<option value="black_ol.htm">Openlayers</option>
-				<option value="black_osm.htm">Open Street Map</option>
-			</select>
+			<div id="comboInterfaces">
+				<select id=interface onchange="$i3geo_gl.crialink()">
+					<option value="">Default</option>
+					<option value="black_gm.phtml">Google Maps</option>
+					<option value="googleearth.phtml">Google Earth</option>
+					<option value="black_ol.htm">Openlayers</option>
+					<option value="black_osm.htm">Open Street Map</option>
+				</select>
+			</div>
 		</div>
 	</fieldset>
 	<fieldset id=buscageo ></fieldset>
@@ -150,7 +152,7 @@ fieldset {
 	i3GEO.configura.locaplic = g_locaplic;
 
 	var i3geo_gl_configura =
-		new i3geo_gl_configura(g_locaplic, "estadosl", "temasa", "link", "grupos", "subgrupos", "temas", "buscageo", "menus")
+		new i3geo_gl_configura(g_locaplic, "", "temasa", "link", "grupos", "subgrupos", "temas", "buscageo", "menus")
 	i3geo_gl_inicia(i3geo_gl_configura)
 	i3GEO.idioma.IDSELETOR = "bandeiras";
 	i3GEO.idioma.mostraSeletor();

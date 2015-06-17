@@ -398,6 +398,7 @@ function listaArquivos($diretorio,$seguro=false)
 		$arqs = array();
 		$nomes = array();
 		$urls = array();
+		$exts = array();
 		$d = dir($diretorio);
 		while (($nd = $d->read()) != FALSE)
 		{
@@ -410,6 +411,7 @@ function listaArquivos($diretorio,$seguro=false)
 						if(in_array($buscar,$permitido)){
 							$arqs[] = $nd;
 							$nomes[] = basename($nd);
+							$exts[] = $ext[1];
 							$url = "";
 
 							if(strpos($diretorio,$docroot) === true || strpos($diretorio,$docroot) === 0){
@@ -422,6 +424,7 @@ function listaArquivos($diretorio,$seguro=false)
 						$arqs[] = $nd;
 						$nomes[] = basename($nd);
 						$urls = "";
+						$exts[] = $ext[1];
 					}
 				}
 				if (count($ext)==1){
@@ -430,7 +433,7 @@ function listaArquivos($diretorio,$seguro=false)
 			}
 		}
 		sort($dirs);
-		return array("diretorios"=>$dirs,"arquivos"=>$arqs,"nomes"=>$nomes,"urls"=>$urls);
+		return array("diretorios"=>$dirs,"arquivos"=>$arqs,"nomes"=>$nomes,"urls"=>$urls,"extensoes"=>$exts);
 	}
 	else
 	{return "erro";}

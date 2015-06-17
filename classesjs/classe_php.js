@@ -1687,5 +1687,15 @@ i3GEO.php =
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?";
 			par = "funcao=marcadores2shp";
 			i3GEO.util.ajaxGet(p + par, funcao);
+		},
+		/**
+		 * Function: listaInterfaces
+		 *
+		 * Lista as interfaces que podem ser utilizadas para abrir um mapa
+		 */
+		listaInterfaces : function(funcao) {
+			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
+				"&funcao=listainterfaces";
+			cpJSON.call(p, "foo", funcao, par);
 		}
 	};

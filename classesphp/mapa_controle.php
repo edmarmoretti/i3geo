@@ -143,10 +143,10 @@ if ($funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funca
 		}
 	}
 }
-	//
-	//isso &eacute; necess&aacute;rio pois a vari&aacute;vel "interface" pode ser utilizada como par&acirc;metro em algumas fun&ccedil;&otilde;es ajax
-	//nesses casos, &eacute; necess&aacute;rio recuperar o valor correto e n&atilde;o da sess&atilde;o
-	//
+//
+//isso &eacute; necess&aacute;rio pois a vari&aacute;vel "interface" pode ser utilizada como par&acirc;metro em algumas fun&ccedil;&otilde;es ajax
+//nesses casos, &eacute; necess&aacute;rio recuperar o valor correto e n&atilde;o da sess&atilde;o
+//
 if(isset($interfaceTemp) && $interfaceTemp != ""){
 	$_SESSION["interface"] = $interfaceTemp;
 	$interface = $interfaceTemp;
@@ -2334,6 +2334,42 @@ switch (strtoupper($funcao))
 			if (gethostbyname($n["ip"]) == $ipcliente)
 			{
 				$retorno[] = $n["drives"];
+			}
+		}
+		break;
+		/*
+		 Valor: LISTAINTERFACES
+
+		Lista as interfaces de abertura de mapas
+		
+		Pesquisa na pasta interfaces e na pasta definida em $customDir
+		*/
+	case "LISTAINTERFACES":
+		include(dirname(__FILE__)."/../ms_configura.php");
+		$pesquisarEm = array($locaplic."/interface");
+		//$customDir = "teste";
+		if(isset($customDir) && $customDir != "" && $customDir != "interface"){
+			$pesquisarEm[] = $locaplic."/".$customDir;
+		}
+		$retorno = array();
+		foreach($pesquisarEm as $p){
+			$r = listaArquivos($p);
+			//var_dump($r);exit;
+			$arqs = $r["arquivos"];
+			$ext = $r["extensoes"];
+			$nomes = $r["nomes"];
+			$n = count($arqs);
+			for($i=0; $i<$n; $i++){
+				if(in_array($ext[$i],array("php","phtml","htm","html"))){
+					//verifica se tem a carga do js i3geo.js
+					$a = $p."/".$nomes[$i];
+					$handle = fopen ($a, "r");
+					$conteudo = fread ($handle, filesize ($a));
+					fclose ($handle);
+					if(strstr($conteudo,"i3geo.js")){
+						$retorno[] = "../".basename($p)."/".$nomes[$i];
+					}
+				}
 			}
 		}
 		break;

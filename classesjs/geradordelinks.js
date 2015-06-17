@@ -299,6 +299,20 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$i($i3geo_gl.tema).innerHTML = "<span style=color:red >Aguarde...</span>";
 		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"530","5","",temas);
 	};
+	this.combointerfaces = function(){
+		var temp = function(retorno){
+			var ins = "<select id=interface onchange='$i3geo_gl.crialink()'><option value=''>Default</option>",
+				d = retorno.data,
+				n = d.length,
+				i;
+			for(i=0; i<n; i++){
+				ins += "<option value='"+d[i]+"'>"+d[i]+"</option>";
+			}
+			ins += "</select>";
+			$i("comboInterfaces").innerHTML = ins;
+		};
+		i3GEO.php.listaInterfaces(temp);
+	};
 	/*
 	Function preseltema
 
@@ -478,7 +492,7 @@ function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 	$i3geo_gl = objeto_i3geo_gl_configura;
 	if(document.getElementById($i3geo_gl.buscageo))
 	$i3geo_gl.buscageo_init();
-	$i3geo_gl.seltema($i3geo_gl.nomeseltema);
+	$i3geo_gl.combointerfaces();
 	i3GEO.arvoreDeTemas.comboMenus($i3geo_gl.loc_i3geo,"$i3geo_gl.combogrupos",$i3geo_gl.menu,"","530","1","");
 	/*
 	$inputText("paiPontos","","pontos","","","")
