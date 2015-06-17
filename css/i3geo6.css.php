@@ -1,4 +1,14 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>/*
+para nao selecionar
+*/
+* {
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: -moz-none;
+-o-user-select: none;
+user-select: none;
+}
+/*
 .olPopupCloseBox {
 background: url("img/edit-delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 cursor: pointer;

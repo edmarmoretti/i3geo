@@ -344,7 +344,7 @@ i3GEO.guias =
 			//
 			// obt&eacute;m outras guias que podem existir no mapa
 			//
-			var atrib, nguiasreal = 0, guiaconteudo, id, guia, g, re, ng, tituloguia, i, ins, altura, temp, CONFIGURA = i3GEO.guias.CONFIGURA, guias =
+			var nguiasreal = 0, guiaconteudo, id, guia, g, re, ng, tituloguia, i, ins, altura, temp, CONFIGURA = i3GEO.guias.CONFIGURA, guias =
 				i3GEO.util.listaChaves(CONFIGURA), nguias = guias.length;
 			//
 			// no caso de TIPO === "movel", as guias n&atilde;o s&atilde;o
@@ -489,13 +489,13 @@ i3GEO.guias =
 					guiaconteudo = $i(id);
 					if (guiaconteudo) {
 						if (guia.click === "" || guia.click === undefined) {
-							//eval('$i("' + id + '").onclick = function(event){i3GEO.guias.mostra("' + guias[g] + '");}');
-							atrib = document.createAttribute("nomeGuia");
-							atrib.value = guias[g];
-							$i(id).setAttributeNode(atrib);
-							$i(id).onclick = function(event){
-								i3GEO.guias.mostra(this.attributes["nomeGuia"].value);
-							};
+							eval('$i("' + id + '").onclick = function(event){i3GEO.guias.mostra("' + guias[g] + '");}');
+							//atrib = document.createAttribute("nomeGuia");
+							//atrib.value = guias[g];
+							//$i(id).setAttributeNode(atrib);
+							//$i(id).onclick = function(event){
+							//	i3GEO.guias.mostra(this.getAttribute("nomeGuia"));
+							//};
 						} else {
 							guiaconteudo.onclick = guia.click;
 						}
