@@ -10,6 +10,9 @@
 //http://stackoverflow.com/questions/1538681/how-to-call-fromlatlngtodivpixel-in-google-maps-api-v3
 
 function HeatmapOverlay(map, name, cfg) {
+	if(document.getElementById("i3GeoHeatmapGm"+name)){
+		return;
+	}
 	var me = this;
 	me.name = name;
 	me.heatmap = null;
@@ -29,6 +32,7 @@ HeatmapOverlay.prototype.onAdd = function() {
 	var panes = this.getPanes(), w = this.getMap().getDiv().clientWidth, h = this
 			.getMap().getDiv().clientHeight, el = document.createElement("div");
 
+	el.id = "i3GeoHeatmapGm"+this.name;
 	el.style.cssText = "position:absolute;top:0;left:0;width:" + w
 			+ "px;height:" + h + "px;";
 

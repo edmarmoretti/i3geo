@@ -266,6 +266,10 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				inicia : function(camada) {
+					if(document.getElementById("i3GeoHeatmapGm"+camada.name)){
+						i3GEO.janela.fechaAguarde("aguardePlugin");
+						return;
+					}
 					var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic + "/ferramentas/heatmap/googlemaps_js.php", carregaJs =
 						"nao", criaLayer;
 					criaLayer = function() {
@@ -532,6 +536,10 @@ i3GEO.pluginI3geo =
 					return camada;
 				},
 				inicia : function(camada) {
+					if(document.getElementById("i3GeoClustermapGm")){
+						i3GEO.janela.fechaAguarde("aguardePlugin");
+						return;
+					}
 					var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic + "/ferramentas/markercluster/googlemaps_js.php", carregaJs =
 						"nao", criaLayer;
 					criaLayer = function() {

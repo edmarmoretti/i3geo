@@ -2634,7 +2634,6 @@ i3GEO.Interface =
 				var i = false;
 				try {
 					i3GeoMap.overlayMapTypes.forEach(function(elemento, number) {
-						// alert(nomeLayer+" "+elemento.name)
 						if (elemento.name === nomeLayer) {
 							i = number;
 						}

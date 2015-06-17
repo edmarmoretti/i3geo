@@ -1,4 +1,5 @@
-<?php 
+<?php
+//TODO incluir camadas do i3geo como WMS
 	if(empty($_GET["tema"])){
 		echo "&tema nao definido";
 		exit;
