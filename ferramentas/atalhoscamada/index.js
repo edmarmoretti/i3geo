@@ -251,7 +251,7 @@ i3GEOF.atalhoscamada =
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante : function() {
-		var temp, minimiza, cabecalho, janela, divid, temp, titulo, ltema, id = "atc"
+		var minimiza, cabecalho, janela, divid, temp, titulo, ltema, id = "atc"
 			+ parseInt(
 				Math.random() * 1000000,
 				10);

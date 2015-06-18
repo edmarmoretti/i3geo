@@ -1,6 +1,6 @@
 <?php
 /*
-Title: classe_legenda.php
+ Title: classe_legenda.php
 
 Manipula&ccedil;&atilde;o da legenda.
 
@@ -25,7 +25,7 @@ por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma c�pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
+	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -34,102 +34,104 @@ Arquivo:
 i3geo/classesphp/classe_legenda.php
 */
 /*
-Classe: Legenda
+ Classe: Legenda
 
 */
 class Legenda
 {
 	/*
-	Variavel: $mapa
+	 Variavel: $mapa
 
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
-	Variavel: $arquivo
+	 Variavel: $arquivo
 
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
-	Variavel: $layer
+	 Variavel: $layer
 
 	Objeto layer
 	*/
 	public $layer;
 	/*
-	Variavel: $nome
+	 Variavel: $nome
 
 	Nome do layer
 	*/
 	protected $nome;
 	/*
-	Variavel: $grupo
+	 Variavel: $grupo
 
 	Array com os temas do grupo, se houver
 	*/
 	protected $grupo;
 	/*
-	Variavel: $visiveis
+	 Variavel: $visiveis
 
 	Temas do grupo que s&atilde;o vis&iacute;veis em fun&ccedil;&atilde;o da escala
 	*/
 	protected $visiveis;
 	/*
-	Variavel: $indices
+	 Variavel: $indices
 
 	Indices dos layers do grupo
 	*/
 	protected $indices;
 	/*
-	Variavel: $templateleg
+	 Variavel: $templateleg
 
 	Template da legenda
 	*/
 	protected $templateleg;
 	/*
-	Variavel: $localaplicacao
+	 Variavel: $localaplicacao
 
 	Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o
 	*/
 	protected $localaplicacao;
 	/*
-	Variavel: $v
+	 Variavel: $v
 
 	Vers&atilde;o atual do Mapserver (primeiro d&iacute;gito)
 	*/
 	public $v;
-/*
-Function: __construct
+	/*
+	 Function: __construct
 
-Cria um objeto Legenda
+	Cria um objeto Legenda
 
-parameters:
+	parameters:
 
-$map_file - Endere&ccedil;o do mapfile no servidor.
+	$map_file - Endere&ccedil;o do mapfile no servidor.
 
-$locaplic - localiza&ccedil;&atilde;o do I3Geo no servidor
+	$locaplic - localiza&ccedil;&atilde;o do I3Geo no servidor
 
-$tema - nome do tema
+	$tema - nome do tema
 
-$template - nome do template para processar a legenda
-*/
+	$template - nome do template para processar a legenda
+	*/
 
 	function __construct($map_file="",$locaplic="",$tema="",$template="")
 	{
-			//error_reporting(0);
-			include_once(dirname(__FILE__)."/funcoes_gerais.php");
+		//error_reporting(0);
+		include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->localaplicacao = $locaplic;
-			if($map_file == "")
-		{return;}
+		if($map_file == "")
+		{
+			return;
+		}
 		$this->mapa = ms_newMapObj($map_file);
-			$this->arquivo = $map_file;
-			if($tema != "" && @$this->mapa->getlayerbyname($tema))
-			{
-				$this->layer = $this->mapa->getlayerbyname($tema);
-				$this->nome = $tema;
+		$this->arquivo = $map_file;
+		if($tema != "" && @$this->mapa->getlayerbyname($tema))
+		{
+			$this->layer = $this->mapa->getlayerbyname($tema);
+			$this->nome = $tema;
 			$vermultilayer = new vermultilayer();
 			$vermultilayer->verifica($map_file,$tema);
 			if ($vermultilayer->resultado == 1) // o tema e multi layer
@@ -148,63 +150,76 @@ $template - nome do template para processar a legenda
 				$t = $this->mapa->getlayerbyname($l);
 				$this->indices[] = $t->index;
 			}
-			}
-			if ($template == ""){$template="legenda.htm";}
-			if(file_exists($template))
-			{
-				$this->templateleg = $template;
-				return;
-			}
+		}
+		if ($template == ""){
+			$template="legenda.htm";
+		}
+		if(file_exists($template))
+		{
+			$this->templateleg = $template;
+			return;
+		}
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$this->templateleg = $locaplic."\\aplicmap\\".$template;}
+		{
+			$this->templateleg = $locaplic."\\aplicmap\\".$template;
+		}
 		else
-		{$this->templateleg = $locaplic."/aplicmap/".$template;}
+		{$this->templateleg = $locaplic."/aplicmap/".$template;
+		}
 	}
-/*
-function: salva
+	/*
+	 function: salva
 
-Salva o mapfile atual
-*/
+	Salva o mapfile atual
+	*/
 	function salva()
 	{
-		if (connection_aborted()){exit();}
+		if (connection_aborted()){
+			exit();
+		}
 		$this->recalculaSLD();
 		$this->mapa->save($this->arquivo);
 	}
-/*
-function: recalculaSLD
+	/*
+	 function: recalculaSLD
 
-Constroi o SLD que &eacute; aplicado ao metadata wms_sld_body. O SLD resultante &eacute; baseado nas defini&ccedil;&otilde;es das classes existentes no layer
-*/
+	Constroi o SLD que &eacute; aplicado ao metadata wms_sld_body. O SLD resultante &eacute; baseado nas defini&ccedil;&otilde;es das classes existentes no layer
+	*/
 	function recalculaSLD(){
 		if($this->layer->classitem != "" && $this->layer->connectiontype == 7 && $this->layer->numclasses > 0){
 			$tipotemp = $this->layer->type;
 			$tiporep = $this->layer->getmetadata("tipooriginal");
 			$this->layer->set("type",MS_LAYER_POLYGON);
 			if ($tiporep == "linear")
-			{$this->layer->set("type",MS_LAYER_LINE);}
+			{
+				$this->layer->set("type",MS_LAYER_LINE);
+			}
 			if ($tiporep == "pontual")
-			{$this->layer->set("type",MS_LAYER_POINT);}
+			{
+				$this->layer->set("type",MS_LAYER_POINT);
+			}
 			$this->layer->set("status",MS_DEFAULT);
 			$this->layer->setmetadata("wms_sld_body","");
 			$sld = $this->layer->generateSLD();
 			if($sld != "")
-			{$this->layer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));}
+			{
+				$this->layer->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
+			}
 			$this->layer->set("type",$tipotemp);
 		}
 	}
 
-/*
-function: criaLegenda
+	/*
+	 function: criaLegenda
 
-Gera a legenda processando o template HTML definido na constru&ccedil;&atilde;o da classe.
+	Gera a legenda processando o template HTML definido na constru&ccedil;&atilde;o da classe.
 
-Se o tema for um WMS ou se o metadata legendaimg estiver definido, executa $this->tabelaLegenda
+	Se o tema for um WMS ou se o metadata legendaimg estiver definido, executa $this->tabelaLegenda
 
-Return:
+	Return:
 
-string com a legenda HTML
-*/
+	string com a legenda HTML
+	*/
 	function criaLegenda()
 	{
 		$l = "";
@@ -218,9 +233,13 @@ string com a legenda HTML
 			for ($i=0;$i < $numlayers;++$i){
 				$la = $this->mapa->getlayer($i);
 				if ($la->name != $this->nome)
-				{$la->set("status",MS_OFF);}
+				{
+					$la->set("status",MS_OFF);
+				}
 				if ($la->group == $this->nome)
-				{$la->set("status",MS_DEFAULT);}
+				{
+					$la->set("status",MS_DEFAULT);
+				}
 				$la->set("minscaledenom",0);
 				$la->set("maxscaledenom",0);
 			}
@@ -269,14 +288,14 @@ string com a legenda HTML
 		$l = implode("<tr>",$pedacos);
 		return (array("legenda"=>$l,"desativar"=>$desligar));
 	}
-/*
-function: legendaGrafica
+	/*
+	 function: legendaGrafica
 
-Desenha a imagem da legenda.
+	Desenha a imagem da legenda.
 
-return:
-string de variaveis no formato javascript que permitem montar a legenda.
-*/
+	return:
+	string de variaveis no formato javascript que permitem montar a legenda.
+	*/
 	function legendaGrafica(){
 		$numlayers = $this->mapa->numlayers;
 		for ($i=0;$i < $numlayers;++$i){
@@ -285,7 +304,9 @@ string de variaveis no formato javascript que permitem montar a legenda.
 				if ($layer->numclasses > 0){
 					$classe = $layer->getclass(0);
 					if (($classe->name == "") || ($classe->name == " "))
-					{$classe->set("name",$layer->getmetadata("tema"));}
+					{
+						$classe->set("name",$layer->getmetadata("tema"));
+					}
 					//corrige o titulo da legenda
 					if($layer->type != 3 && $layer->type != 4){
 						$nclass = $layer->numclasses;
@@ -302,26 +323,28 @@ string de variaveis no formato javascript que permitem montar a legenda.
 		$nomeImagem = nomeRandomico();
 		$imgo = $this->mapa->drawlegend();
 		if($imgo->imagepath == "")
-		{echo "Erro IMAGEPATH vazio";exit;}
+		{
+			echo "Erro IMAGEPATH vazio";exit;
+		}
 		$nomer = ($imgo->imagepath)."leg".$nomeImagem.".png";
 		$imgo->saveImage($nomer);
 		$nomer = ($imgo->imageurl).basename($nomer);
 		return("var legimagem='".$nomer."';var legwidth=".$imgo->width.";var legheight=".$imgo->height.";var legpath='".$imgo->imagepath."';var legurl='".$imgo->imageurl."'");
 	}
-/*
-function: tabelaLegenda
+	/*
+	 function: tabelaLegenda
 
-Cria elementos para construir uma legenda no formato de tabela em HTML.
+	Cria elementos para construir uma legenda no formato de tabela em HTML.
 
-Utilizado na fun&ccedil;&atilde;o de edi&ccedil;&atilde;o de legenda e legenda de WMS
+	Utilizado na fun&ccedil;&atilde;o de edi&ccedil;&atilde;o de legenda e legenda de WMS
 
-parameters:
+	parameters:
 
-totaliza - sim|nao indica se os totais de elementos devem ser acrescentados ao nome da classe
+	totaliza - sim|nao indica se os totais de elementos devem ser acrescentados ao nome da classe
 
-return:
-array
-*/
+	return:
+	array
+	*/
 	function tabelaLegenda($totaliza="nao"){
 		$linhas = array();
 		foreach ($this->visiveis as $l){
@@ -464,129 +487,187 @@ array
 		}
 		return $linhas;
 	}
-/*
-function: excluiEstilo
+	/*
+	 function: excluiEstilo
 
-Exclui um estilo de uma classe.
-*/
+	Exclui um estilo de uma classe.
+	*/
 	function excluiEstilo($classe,$estilo)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$classe = $this->layer->getclass($classe);
 		$classe->deletestyle($estilo);
 		$this->layer->removeMetaData("cache");
 		return "ok";
 	}
-/*
-function: adicionaEstilo
+	/*
+	 function: adicionaEstilo
 
-Adiciona um estilo em uma classe.
+	Adiciona um estilo em uma classe.
 
-return:
-objeto estilo
-*/
+	return:
+	objeto estilo
+	*/
 	function adicionaEstilo($classe,$estilo)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$classe = $this->layer->getclass($classe);
 		$estilo = $classe->getstyle($estilo);
 		$e = ms_newStyleObj($classe,$estilo);
 		$this->layer->removeMetaData("cache");
 		return($e);
 	}
-/*
-function: sobeEstilo
+	/*
+	 function: sobeEstilo
 
 
-Sobe um estilo na ordem de desenho de uma classe.
+	Sobe um estilo na ordem de desenho de uma classe.
 
-parameters:
-$classe - &Iacute;ndice da classe.
-$estilo - &Iacute;ndice do estilo de uma classe que ser&aacute; clonado.
-*/
+	parameters:
+	$classe - &Iacute;ndice da classe.
+	$estilo - &Iacute;ndice do estilo de uma classe que ser&aacute; clonado.
+	*/
 	function sobeEstilo($classe,$estilo)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$classe = $this->layer->getclass($classe);
 		$classe->movestyleup($estilo);
 		$this->layer->removeMetaData("cache");
 	}
-/*
-function: desceEstilo
+	/*
+	 function: desceEstilo
 
-Desce um estilo na ordem de desenho de uma classe.
+	Desce um estilo na ordem de desenho de uma classe.
 
-parameters:
-$classe - &Iacute;ndice da classe.
+	parameters:
+	$classe - &Iacute;ndice da classe.
 
-$estilo - &Iacute;ndice do estilo de uma classe que ser&aacute; clonado.
-*/
+	$estilo - &Iacute;ndice do estilo de uma classe que ser&aacute; clonado.
+	*/
 	function desceEstilo($classe,$estilo)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$classe = $this->layer->getclass($classe);
 		$classe->movestyledown($estilo);
 		$this->layer->removeMetaData("cache");
 	}
-/*
-function: listaSimbolos
+	/*
+	 function: listaSimbolos
 
-Retorna uma lista de s&iacute;mbolos clic&aacute;veis no formato HTML.
+	Retorna uma lista de s&iacute;mbolos clic&aacute;veis no formato HTML.
 
-Para cada tipo de simbologia deve haver um arquivo .map com as defini&ccedil;&otilde;es b&aacute;sicas.
+	Para cada tipo de simbologia deve haver um arquivo .map com as defini&ccedil;&otilde;es b&aacute;sicas.
 
-Todos os s&iacute;mbolos do arquivo symbols/simbolos ser&atilde;o retornados como imagens.
+	Todos os s&iacute;mbolos do arquivo symbols/simbolos ser&atilde;o retornados como imagens.
 
-parameters:
+	parameters:
 
-$tipo - Tipo de representa&ccedil;&atilde;o do s&iacute;mbolo, 0 pontos, 1 linhas e 2 pol&iacute;gonos.
+	$tipo - Tipo de representa&ccedil;&atilde;o do s&iacute;mbolo, 0 pontos, 1 linhas e 2 pol&iacute;gonos.
 
-$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver.
+	$dir_tmp - Diret&oacute;rio tempor&aacute;rio do mapserver.
 
-$imgdir - Diret&oacute;rio tempor&aacute;rio das imagens.
+	$imgdir - Diret&oacute;rio tempor&aacute;rio das imagens.
 
-$onclick - Fun&ccedil;&atilde;o que ser&aacute; inclu&iacute;da no HTML no evento onclick sobre o s&iacute;mbolo
+	$onclick - Fun&ccedil;&atilde;o que ser&aacute; inclu&iacute;da no HTML no evento onclick sobre o s&iacute;mbolo
 
-$tamanho - Tamanho (size) do s&iacute;mbolo
+	$tamanho - Tamanho (size) do s&iacute;mbolo
 
-$forca {boolean} - forca a exclusao dos simbolos atualmente em cache
+	$forca {boolean} - forca a exclusao dos simbolos atualmente em cache
 
-return:
+	return:
 
-String no formato HTML com as imagens dos s&iacute;mbolos
-*/
+	String no formato HTML com as imagens dos s&iacute;mbolos
+	*/
 	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,$tamanho=8,$width=1,$forca=false)
 	{
 		$versao = versao();
 		$versao = $versao["principal"];
 		error_reporting(0);
-		if ($tipo == 3){$tipo = 2;} //tipo raster
+		if ($tipo == 3){
+			$tipo = 2;
+		} //tipo raster
 		if($imgdir == "")
-		{$dir = $dir_tmp;}
+		{
+			$dir = $dir_tmp;
+		}
 		else
-		{$dir = $dir_tmp."/".$imgdir;}
+		{$dir = $dir_tmp."/".$imgdir;
+		}
 		if($forca == true){
 			unlink($dir."/simbolos".$tipo.".inc");
+		}
+		$ins = "";
+		//pega imagens que podem ser usadas como simbolos
+		if($tipo == 0){
+			if(!isset($locaplic)){
+				include(dirname(__FILE__)."/../ms_configura.php");
+			}
+			//veja esse codigo tambem em ferramentas/uploadsimbolo/exec.php
+			$pasta = $locaplic."/temas";
+			$url = "../temas";
+			if($customDir != "interface"){
+				$teste = $locaplic."/".$customDir;
+				if(file_exists($teste)){
+					$pasta = $teste;
+					$url = "../".$customDir;
+				}
+				$teste = $locaplic."/".$customDir."/images";
+				if(file_exists($teste)){
+					$pasta = $teste;
+					$url = "../".$customDir."/images";
+				}
+				$teste = $locaplic."/".$customDir."/imagens";
+				if(file_exists($teste)){
+					$pasta = $teste;
+					$url = "../".$customDir."/imagens";
+				}
+			}
+			if(file_exists($pasta)){
+				$lista = listaArquivos($pasta,true,array("png","PNG"));
+				//var_dump($lista);exit;
+				$n = count($lista["nomes"]);
+				for($i = 0; $i < $n; $i++){
+					$ins .= "<img src='".$url."/".$lista["nomes"][$i]."' style='cursor:pointer;border: 5px solid #FFFFFF' title=".$pasta."/".$lista["nomes"][$i]." onclick='".$onclick."'>";
+				}
+			}
 		}
 		if (!file_exists($dir."/simbolos".$tipo.".inc"))
 		{
 			$f = fopen($dir."/simbolos".$tipo.".inc","w");
-			if ($tipo == 2){$t="simpolv".$versao.".map";}
-			if ($tipo == 0){$t="simptv".$versao.".map";}
+			if ($tipo == 2){
+				$t="simpolv".$versao.".map";
+			}
+			if ($tipo == 0){
+				$t="simptv".$versao.".map";
+			}
 			if ($tipo == 1){
 				$t="simlinv".$versao.".map";
 				$tamanho = $tamanho / 4;
 			}
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{$mapatemp = ms_newMapObj($this->localaplicacao."\\aplicmap\\".$t);}
+			{
+				$mapatemp = ms_newMapObj($this->localaplicacao."\\aplicmap\\".$t);
+			}
 			else
-			{$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);}
-			$ins = "";
+			{$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);
+			}
+				
 			$l = $mapatemp->getlayer(0);
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{$novoss = dirname($this->mapa->symbolsetfilename)."\\".basename($mapatemp->symbolsetfilename);}
+			{
+				$novoss = dirname($this->mapa->symbolsetfilename)."\\".basename($mapatemp->symbolsetfilename);
+			}
 			else
-			{$novoss = dirname($this->mapa->symbolsetfilename)."/".basename($mapatemp->symbolsetfilename);}
+			{$novoss = dirname($this->mapa->symbolsetfilename)."/".basename($mapatemp->symbolsetfilename);
+			}
 			$this->mapa->setsymbolset($novoss);
 			$ns = $this->mapa->getnumsymbols();
 			for ($i=0;$i < $ns;++$i)
@@ -594,7 +675,9 @@ String no formato HTML com as imagens dos s&iacute;mbolos
 				$oSymbol = $this->mapa->getSymbolObjectById($i);
 				$nomes = $oSymbol->name;
 				if($nomes == "")
-				{$nomes = $i;}
+				{
+					$nomes = $i;
+				}
 				$adiciona = ms_newLayerObj($this->mapa, $l);
 				$nomel = $l->name;
 				$tematemp= $this->mapa->getlayerbyname($nomel);
@@ -620,21 +703,23 @@ String no formato HTML com as imagens dos s&iacute;mbolos
 			return $res;
 		}
 	}
-/*
-function: pegaParametros
+	/*
+	 function: pegaParametros
 
-Retorna uma lista com par&acirc;metros sobre cada estilo de uma classe.
+	Retorna uma lista com par&acirc;metros sobre cada estilo de uma classe.
 
-parameters:
-$classe - &Iacute;ndice da classe.
+	parameters:
+	$classe - &Iacute;ndice da classe.
 
-return:
-string com o
-tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size,symbolscaledenom,maxsize,minsize|
-*/
+	return:
+	string com o
+	tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size,symbolscaledenom,maxsize,minsize|
+	*/
 	function pegaParametros($classe)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$tipoLayer = $this->layer->type;
 		$classe = $this->layer->getclass($classe);
 		$numestilos = $classe->numstyles;
@@ -669,34 +754,38 @@ tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size,sy
 		//retorna tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbolname,size,symbolscaledenom
 		return implode("|",$linhas);
 	}
-/*
-function: aplicaParametro
+	/*
+	 function: aplicaParametro
 
-Aplica um par&acirc;metro em um estilo de uma classe.
+	Aplica um par&acirc;metro em um estilo de uma classe.
 
-parameters:
+	parameters:
 
-$classe - &Iacute;ndice da classe.
+	$classe - &Iacute;ndice da classe.
 
-$estilo - &Iacute;ndice do estilo que ser&aacute; alterado.
+	$estilo - &Iacute;ndice do estilo que ser&aacute; alterado.
 
-$outlinecolor - Cor do contorno.
+	$outlinecolor - Cor do contorno.
 
-$backgroundcolor - Cor do fundo.
+	$backgroundcolor - Cor do fundo.
 
-$color - Cor da frente.
+	$color - Cor da frente.
 
-$symbolname - Nome do s&iacute;mbolo.
+	$symbolname - Nome do s&iacute;mbolo.
 
-$size - Tamanho que ser&aacute; aplicado ao s&iacute;mbolo.
+	$size - Tamanho que ser&aacute; aplicado ao s&iacute;mbolo.
 
-$opacidade - Opacidade
-*/
+	$opacidade - Opacidade
+	*/
 	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle,$minsize=0,$maxsize=500,$offsetx=0,$offsety=0)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		if(!empty($pattern))
-		{$pattern = str_replace(","," ",$pattern);}
+		{
+			$pattern = str_replace(","," ",$pattern);
+		}
 		$classe = $this->layer->getclass($classe);
 		//isso &eacute; necess&aacute;rio pq o mapserver n&atilde;o consegue apagar o nome de um estilo
 		if(isset($symbolname) && ($symbolname == "" || $symbolname == "0")){
@@ -727,18 +816,29 @@ $opacidade - Opacidade
 		if((isset($symbolname)) && ($symbolname != ""))
 		{
 			if(is_numeric($symbolname))
-			{$estilo->set("symbol",$symbolname);}
+			{
+				$estilo->set("symbol",$symbolname);
+			}
 			else
-			{$estilo->set("symbolname",$symbolname);}
+			{$estilo->set("symbolname",$symbolname);
+			}
 		}
 		if ((isset ($size)) && ($size != "-1"))
-		{$estilo->set("size",$size);}
+		{
+			$estilo->set("size",$size);
+		}
 		if ((isset ($width)) && ($width != "-1") && ($this->v == 6))
-		{$estilo->set("width",$width);}
+		{
+			$estilo->set("width",$width);
+		}
 		if ((isset ($pattern)) && ($pattern != "-1") && ($this->v == 6) && ($pattern != ""))
-		{$estilo->updatefromstring("STYLE PATTERN ".$pattern." END");}
+		{
+			$estilo->updatefromstring("STYLE PATTERN ".$pattern." END");
+		}
 		if(isset($opacidade))
-		{$estilo->set("opacity",$opacidade);}
+		{
+			$estilo->set("opacity",$opacidade);
+		}
 		if(isset($angle))
 		{
 			$estilo->set("angle",$angle);
@@ -755,16 +855,16 @@ $opacidade - Opacidade
 		$this->layer->setMetaData("cache","");
 		return "ok";
 	}
-/*
-function: pegaParametrosLegImg
+	/*
+	 function: pegaParametrosLegImg
 
-Pega os par&acirc;metros da legenda embebida no mapa.
+	Pega os par&acirc;metros da legenda embebida no mapa.
 
-return:
+	return:
 
-array - "imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$position,"status"=>$status,"outlinecolor"=>$outlinecolor,"keyspacingy"=>$keyspacingy,"keyspacingx"=>$keyspacingx,"keysizey"=>$keysizey,"keysizex"=>$keysizex,"heigt"=>$height,"width"=>$width
+	array - "imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$position,"status"=>$status,"outlinecolor"=>$outlinecolor,"keyspacingy"=>$keyspacingy,"keyspacingx"=>$keyspacingx,"keysizey"=>$keysizey,"keysizex"=>$keysizex,"heigt"=>$height,"width"=>$width
 
-*/
+	*/
 	function pegaParametrosLegImg()
 	{
 		error_reporting(0);
@@ -778,7 +878,9 @@ array - "imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$positi
 		$outlinecolor = corRGB($legenda->outlinecolor); //Color of outline of box, -1 for no outline
 		$status = $legenda->status; //MS_ON, MS_OFF, MS_EMBED
 		$position = $legenda->position;
-		if ($position < 99){$position = "10".$position;}
+		if ($position < 99){
+			$position = "10".$position;
+		}
 		$transparent = 100;
 		$imagecolor = corRGB($legenda->imagecolor);
 		$label = $legenda->label;
@@ -786,46 +888,56 @@ array - "imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$positi
 		if($font == MS_BITMAP)
 		{
 			$l = $label->size;
-			if ($l == MS_TINY){$t = 5;}
-			if ($l == MS_SMALL){$t = 7;}
-			if ($l == MS_MEDIUM){$t = 10;}
-			if ($l == MS_LARGE){$t = 12;}
-			if ($l == MS_GIANT){$t = 14;}
+			if ($l == MS_TINY){
+				$t = 5;
+			}
+			if ($l == MS_SMALL){
+				$t = 7;
+			}
+			if ($l == MS_MEDIUM){
+				$t = 10;
+			}
+			if ($l == MS_LARGE){
+				$t = 12;
+			}
+			if ($l == MS_GIANT){
+				$t = 14;
+			}
 			$labelsize = $t;
 		}
 		else
-		$labelsize = $label->size;
+			$labelsize = $label->size;
 
 		$tipofonte = $label->type;
 		return(array("tipofonte"=>$tipofonte,"font"=>$font,"imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$position,"status"=>$status,"outlinecolor"=>$outlinecolor,"keyspacingy"=>$keyspacingy,"keyspacingx"=>$keyspacingx,"keysizey"=>$keysizey,"keysizex"=>$keysizex,"height"=>$height,"width"=>$width,"labelsize"=>$labelsize));
 	}
-/*
-function: aplicaParametrosLegImg
+	/*
+	 function: aplicaParametrosLegImg
 
-Aplica os par&acirc;metros da legenda embebida no mapa.
+	Aplica os par&acirc;metros da legenda embebida no mapa.
 
-parameters:
+	parameters:
 
-$imagecolor
+	$imagecolor
 
-$position
+	$position
 
-$status
+	$status
 
-$outlinecolor
+	$outlinecolor
 
-$keyspacingy
+	$keyspacingy
 
-$keyspacingx
+	$keyspacingx
 
-$keysizey
+	$keysizey
 
-$keysizex
+	$keysizex
 
-$heigt
+	$heigt
 
-$width
-*/
+	$width
+	*/
 	function aplicaParametrosLegImg($fonte,$imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize)
 	{
 		$legenda = $this->mapa->legend;
@@ -839,13 +951,18 @@ $width
 		$cor = explode(",",$outlinecolor);
 		$corres->setRGB($cor[0],$cor[1],$cor[2]);
 		if ($status == 3)
-		{$legenda->set("status",MS_EMBED);} //MS_ON, MS_OFF, MS_EMBED
+		{
+			$legenda->set("status",MS_EMBED);
+		} //MS_ON, MS_OFF, MS_EMBED
 		else
-		{$legenda->set("status",MS_OFF);}
+		{$legenda->set("status",MS_OFF);
+		}
 		$verifica = $legenda->position;
 		if ($verifica < 100)
 		{
-			if($position > 99){$position = 3;}
+			if($position > 99){
+				$position = 3;
+			}
 		}
 		$legenda->set("position",$position);
 		$corres = $legenda->imagecolor;
@@ -863,17 +980,27 @@ $width
 		{
 			$label->set("type",MS_BITMAP);
 			$t = MS_TINY;
-			if ($labelsize > 5 ){$t = MS_TINY;}
-			if ($labelsize >= 7 ){$t = MS_SMALL;}
-			if ($labelsize >= 10 ){$t = MS_MEDIUM;}
-			if ($labelsize >= 12 ){$t = MS_LARGE;}
-			if ($labelsize >= 14 ){$t = MS_GIANT;}
+			if ($labelsize > 5 ){
+				$t = MS_TINY;
+			}
+			if ($labelsize >= 7 ){
+				$t = MS_SMALL;
+			}
+			if ($labelsize >= 10 ){
+				$t = MS_MEDIUM;
+			}
+			if ($labelsize >= 12 ){
+				$t = MS_LARGE;
+			}
+			if ($labelsize >= 14 ){
+				$t = MS_GIANT;
+			}
 			$label->set("size",$t);
 		}
 		return("ok");
 	}
 	/*
-	Function: reSLD
+	 Function: reSLD
 
 	Gera o SLD de um tema WMS.
 
@@ -893,19 +1020,27 @@ $width
 		$tiporep = $layer->getmetadata("tipooriginal");
 		$layer->set("type",MS_LAYER_POLYGON);
 		if ($tiporep == "linear")
-		{$layer->set("type",MS_LAYER_LINE);}
+		{
+			$layer->set("type",MS_LAYER_LINE);
+		}
 		if ($tiporep == "pontual")
-		{$layer->set("type",MS_LAYER_POINT);}
+		{
+			$layer->set("type",MS_LAYER_POINT);
+		}
 		$sldf = $layer->generateSLD();
 		if (file_exists($sld))
-		{unlink($sld);}
+		{
+			unlink($sld);
+		}
 		$fp = fopen($sld, "a");
 		fputs( $fp, $sldf );
 		fclose($fp);
 	}
 	function aplicaTodasClasses($parametro,$valor)
 	{
-		if(!$this->layer){return "erro";}
+		if(!$this->layer){
+			return "erro";
+		}
 		$numc = $this->layer->numclasses;
 		for ($c = 0;$c < $numc;$c++){
 			$classe = $this->layer->getclass($c);
@@ -918,7 +1053,7 @@ $width
 							$estilo->updatefromstring("STYLE PATTERN ".$valor." END");
 						}
 					}
-				continue;
+					continue;
 				case "symbolname":
 					if($parametro == "" || $parametro == "0"){
 						$classe->deletestyle($estilo);
@@ -932,34 +1067,34 @@ $width
 							$estilo->set("symbolname",$valor);
 						}
 					}
-				continue;
+					continue;
 				case "outlinecolor":
 					$cor = $estilo->outlinecolor;
 					$nc = explode(",",$valor);
 					$cor->setRGB($nc[0],$nc[1],$nc[2]);
-				continue;
+					continue;
 				case "backgroundcolor":
 					$cor = $estilo->backgroundcolor;
 					$nc = explode(",",$valor);
 					$cor->setRGB($nc[0],$nc[1],$nc[2]);
-				continue;
+					continue;
 				case "color":
 					$cor = $estilo->color;
 					$nc = explode(",",$valor);
 					$cor->setRGB($nc[0],$nc[1],$nc[2]);
-				continue;
+					continue;
 				case "size":
 					$estilo->set("size",$valor);
-				break;
+					break;
 				case "width":
 					$estilo->set("width",$valor);
-				continue;
+					continue;
 				case "opacity":
 					$estilo->set("opacity",$valor);
-				continue;
+					continue;
 				case "angle":
 					$estilo->set("angle",$valor);
-				continue;
+					continue;
 			}
 		}
 		$this->layer->setMetaData("cache","");

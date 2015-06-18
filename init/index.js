@@ -1,6 +1,6 @@
 botoesIni = [];
 botoesIni.push({
-	"img":"start-here.png",
+	"img":"certificate-server.png",
 	"href":"../testainstal.php",
 	"titulo":$trad(2,g_traducao_init)
 	},{

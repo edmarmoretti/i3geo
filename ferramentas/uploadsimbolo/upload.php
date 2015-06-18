@@ -31,8 +31,12 @@ if (isset($_FILES['i3GEOuploadsimboloarq']['name'])){
 	if(!isset($dirDestino) || $dirDestino == ""){
 		$dirDestino = $locaplic."/symbols/images";
 	}
-	if(!file_exists($dirDestino))
-	{echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor";paraAguarde();exit;}
+	if(!file_exists($dirDestino)){
+		$dirDestino = dirname($locaplic)."/".$dirDestino;
+		if(!file_exists($dirDestino)){
+			echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor";paraAguarde();exit;
+		}
+	}
 	//verifica nomes
 
 	$nome = basename($_FILES['i3GEOuploadsimboloarq']['name']);

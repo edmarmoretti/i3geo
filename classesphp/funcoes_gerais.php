@@ -387,7 +387,7 @@ Retorno:
 
 {array}
 */
-function listaArquivos($diretorio,$seguro=false)
+function listaArquivos($diretorio,$seguro=false,$permitido=array("png","PNG","jpg","JPG","tif","tiff","TIF","TIFF","shp","SHP","img"))
 {
 	$docroot = $_SERVER["DOCUMENT_ROOT"];
 	if (!is_dir($diretorio)){
@@ -407,7 +407,7 @@ function listaArquivos($diretorio,$seguro=false)
 				if (count($ext)>1){
 					if($seguro == true){
 						$buscar = $ext[1];
-						$permitido = array("png","PNG","jpg","JPG","tif","tiff","TIF","TIFF","shp","SHP","img");
+						//$permitido = array("png","PNG","jpg","JPG","tif","tiff","TIF","TIFF","shp","SHP","img");
 						if(in_array($buscar,$permitido)){
 							$arqs[] = $nd;
 							$nomes[] = basename($nd);
