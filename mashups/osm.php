@@ -15,6 +15,7 @@ if(!empty($desligacache)){
 if(empty($opacidade)){
 	$opacidade = 1;
 }
+
 //
 //verifica se em cada camada deve ser inserido um parametro aleatorio para evitar cache de imagem do lado do cliente
 //
@@ -60,6 +61,8 @@ if(!isset($temas)){
 	ajuda();
 }
 if(!isset($mapext)){
+	$versao = versao();
+	$versao = $versao["principal"];
 	if(isset($base) && $base != ""){
 		if(file_exists($base)){
 			$f = $base;
@@ -96,6 +99,7 @@ if(!isset($mapext)){
 		$mapext = $c->minx.",".$c->miny.",".$c->maxx.",".$c->maxy;
 	}
 }
+
 // problema na vers&atilde;o 211 do OpenLayers. Tamanho em % n&atilde;o &eacute;
 // aceito
 // if(!isset($largura))

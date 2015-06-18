@@ -51,6 +51,8 @@ if(!empty($restauramapa)){
 	}
 }
 if(!isset($mapext)){
+	$versao = versao();
+	$versao = $versao["principal"];
 	if(isset($base) && $base != ""){
 		if(file_exists($base)){
 			$f = $base;
