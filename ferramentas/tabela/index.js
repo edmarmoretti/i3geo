@@ -351,7 +351,7 @@ i3GEOF.tabela =
 
 				janela = i3GEO.janela.cria("570px", "400px", "", "", "", titulo, id, false, "hd", cabecalho, minimiza, function() {
 					i3GEO.guias.ajustaGuiaFerramenta(id, id + "i3GEOtabela");
-				}, true, "", duplica);
+				}, true, "", duplica, "nao");
 				divid = janela[2].id;
 				if (i3GEOF.tabela.janelas.length > 1) {
 					temp = janela[0].cfg.config;

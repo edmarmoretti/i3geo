@@ -1252,6 +1252,18 @@ border: 1px solid black
 .noprint {
 display: none !important;
 }
+.yui-skin-sam .yui-panel .hd {
+display: none !important;
+}
+.yui-skin-sam .yui-panel .ft {
+display: none !important;
+}
+.yui-navset {
+display: none !important;
+}
+.yui-skin-sam .yui-button {
+display: none !important;
+}
 .yuimenubar {
 display: none !important;
 }

@@ -604,7 +604,8 @@ i3GEOF.graficointerativo1 =
 						mudaTamanhoGrafico,
 						true,
 						"",
-						duplica);
+						duplica,
+						"nao");
 				divid = janela[2].id;
 				if (i3GEOF.graficointerativo1.janelas.length > 1) {
 					temp = janela[0].cfg.config;

@@ -416,7 +416,7 @@ i3GEOF.legenda =
 			janela =
 				i3GEO.janela.cria("490px", "340px", "", "", "", titulo, "i3GEOF.legenda", false, "hd", cabecalho, minimiza, function() {
 					i3GEO.guias.ajustaGuiaFerramenta("i3GEOF.legenda", "i3GEOlegenda");
-				}, true);
+				}, true, "", "", "nao");
 			divid = janela[2].id;
 			i3GEOF.legenda.aguarde = $i("i3GEOF.legenda_imagemCabecalho").style;
 			$i("i3GEOF.legenda_corpo").style.backgroundColor = "white";

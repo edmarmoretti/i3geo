@@ -877,7 +877,7 @@ i3GEO.Interface =
 								i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
 							}
 						}
-						if (i3GEO.parametros.h < 600) {
+						if (i3GEO.parametros.h < 750) {
 							openlayers.GADGETS.PanZoomBar = false;
 							openlayers.GADGETS.ScaleLine = false;
 						}
