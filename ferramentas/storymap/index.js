@@ -139,7 +139,6 @@ i3GEOF.storymap =
 					combo(r.data.valores, "i3GEOstocolcabecalho");
 					combo(r.data.valores, "i3GEOstocoltexto");
 					combo(r.data.valores, "i3GEOstocollocal");
-					combo(r.data.valores, "i3GEOstocolicone");
 					combo(r.data.valores, "i3GEOstocolmedia");
 					combo(r.data.valores, "i3GEOstocollon");
 					combo(r.data.valores, "i3GEOstocollat");
@@ -150,7 +149,6 @@ i3GEOF.storymap =
 						$i("i3GEOstocolcabecalhoCombo").value = camada.ferramentas.storymap.colcabecalho;
 						$i("i3GEOstocoltextoCombo").value = camada.ferramentas.storymap.coltexto;
 						$i("i3GEOstocollocalCombo").value = camada.ferramentas.storymap.collocal;
-						$i("i3GEOstocoliconeCombo").value = camada.ferramentas.storymap.colicone;
 						$i("i3GEOstocolmediaCombo").value = camada.ferramentas.storymap.colmedia;
 						$i("i3GEOstocollonCombo").value = camada.ferramentas.storymap.collon;
 						$i("i3GEOstocollatCombo").value = camada.ferramentas.storymap.collat;
@@ -264,8 +262,6 @@ i3GEOF.storymap =
 					+ $i("i3GEOstocoltextoCombo").value
 					+ '","collocal":"'
 					+ $i("i3GEOstocollocalCombo").value
-					+ '","colicone":"'
-					+ $i("i3GEOstocoliconeCombo").value
 					+ '","colmedia":"'
 					+ $i("i3GEOstocolmediaCombo").value
 					+ '","collon":"'

@@ -52,6 +52,9 @@ html, body {
 	padding: 0px;
 	margin: 0px;
 }
+.vco-map-line{
+	display: none
+}
 </style>
 
 </head>
@@ -60,8 +63,24 @@ html, body {
 	<!-- JavaScript-->
 	<script src="../../pacotes/knightlab/StoryMapJS/compiled/js/storymap.js"></script>
 	<script>
+	VCO.Language = {
+    name: "Português",
+    lang: "pt",
+    messages: {
+        loading: "carregando",
+        wikipedia: "da Wikipedia, a enciclopédia livre",
+		start: 				"Explore"
+    },
+    buttons: {
+        map_overview:      "vista geral do mapa",
+		overview:          "vista geral",
+        backtostart:       "voltar ao começo",
+        collapse_toggle:   "ocultar o mapa",
+        uncollapse_toggle: "mostrar o mapa"
+    }
+};
 	var storymap = new VCO.StoryMap('storymap', '../../json.php?tema=<?php echo strip_tags($_GET["tema"]);?>&format=storymap&', {
-		show_lines: false
+		"show_lines": false
 	});
 	window.onresize = function(event) {
 		storymap.updateDisplay();

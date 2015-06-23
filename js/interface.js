@@ -1298,11 +1298,6 @@ i3GEO.Interface =
 							i3GEO.pluginI3geo.inicia(camada);
 							continue;
 						} else {
-							if (camada.cache) {
-								urllayer = url + "&cache=" + camada.cache + "&layer=" + camada.name + "&r=" + Math.random();
-							} else {
-								urllayer = url + "&cache=&layer=" + camada.name + "&r=" + Math.random();
-							}
 							try {
 								// Layer types do mapserver
 								// MS_LAYER_POINT, MS_LAYER_LINE, MS_LAYER_POLYGON,
@@ -1311,7 +1306,6 @@ i3GEO.Interface =
 								// MS_LAYER_TILEINDEX, MS_LAYER_CHART
 								// temp = camada.type === 0 ? opcoes.gutter = 20 : opcoes.gutter = 0;
 								temp = camada.transitioneffect === "nao" ? opcoes.preload = 0 : opcoes.preload = Infinity;
-
 								//
 								// layers marcados com o metadata wmstile com valor
 								// 1 sao inseridos com Layer.TileCache
@@ -1361,6 +1355,13 @@ i3GEO.Interface =
 									if (camada.tiles === "sim" || camada.cache === "sim" || (camada.cortepixels && camada.cortepixels > 0)) {
 										opcoes.singleTile = false;
 									}
+									
+									if (camada.cache) {
+										urllayer = url + "&cache=" + camada.cache;
+									} else {
+										urllayer = url + "&cache=nao";
+									}
+									urllayer += "&layer=" + camada.name;
 									if (opcoes.singleTile === true) {
 										source = new ol.source.ImageWMS({
 											url : urllayer,
@@ -1370,6 +1371,7 @@ i3GEO.Interface =
 											},
 											projection : opcoes.projection
 										});
+										source.set("tipoServico", "ImageWMS");
 									} else {
 										source = new ol.source.WMTS({
 											url : urllayer,
@@ -1383,6 +1385,7 @@ i3GEO.Interface =
 											}),
 											wrapX : true
 										});
+										source.set("tipoServico", "WMTS");
 									}
 									source.set("name", camada.name);
 									opcoes.source = source;
@@ -1617,21 +1620,32 @@ i3GEO.Interface =
 			 * Atualiza o mapa atual, forcando o redesenho dos layers
 			 */
 			atualizaMapa : function() {
-				var layers = i3geoOL.layers, nlayers = layers.length, i;
+				var layer, layers = i3geoOL.layers, nlayers = layers.length, i, servico, source;
 				for (i = 0; i < nlayers; i++) {
-					if (layers[i].url) {
-						layers[i].mergeNewParams({
-							r : Math.random()
-						});
-						if (layers[i].url.search("\\?") >= 0) {
-							layers[i].url = layers[i].url.replace("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", "&foo=");
-							layers[i].url = layers[i].url + "&&";
+					layer = layers[i];
+					if (layer && layer != undefined) {
+						source = layer.getSource();
+						servico = source.getProperties().tipoServico;
+						if(servico === "WMTS"){
+							funcaoLoad = layer.getSource().getTileUrlFunction();
+							if(funcaoLoad){
+								layer.getSource().setTileUrlFunction(function() {
+									var url = funcaoLoad.apply(this, arguments);
+									url = url.replace("&cache=sim", "&cache=nao");
+									//console.info(layer.getSource().getProperties().tipoServico)
+									return url + '&r=' + Math.random();
+								});
+							}
 						}
-						// cache e um parametro especifico do i3geo
-						// utilizado por mapa_openlayers.php e mapa_googlemaps.php
-						layers[i].url = layers[i].url.replace("&cache=sim", "&cache=nao");
-						if (layers[i].visibility === true) {
-							layers[i].redraw();
+						if(servico === "ImageWMS"){
+							funcaoLoad = layer.getSource().getImageLoadFunction();
+							if(funcaoLoad){
+								layer.getSource().setImageLoadFunction(function(image,src) {
+									src = src.replace("&cache=sim", "&cache=nao");
+									src += '&r=' + Math.random();
+									image.getImage().src = src;
+								});
+							}
 						}
 					}
 				}
@@ -1641,16 +1655,30 @@ i3GEO.Interface =
 			 * Forca o redesenho de um layer especifico
 			 */
 			atualizaTema : function(retorno, tema) {
-				var layer = i3geoOL.getLayersByName(tema)[0], objtemas;
+				var layer = i3geoOL.getLayersByName(tema)[0], objtemas, funcaoLoad, servico, source;
 				if (layer && layer != undefined) {
-					if (layer.url) {
-						layer.mergeNewParams({
-							r : Math.random()
-						});
-						layer.url = layer.url.replace("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", "&foo=");
-						layer.url = layer.url + "&&";
-						layer.url = layer.url.replace("&cache=sim", "&cache=nao");
-						layer.redraw();
+					source = layer.getSource();
+					servico = source.getProperties().tipoServico;
+					if(servico === "WMTS"){
+						funcaoLoad = layer.getSource().getTileUrlFunction();
+						if(funcaoLoad){
+							layer.getSource().setTileUrlFunction(function() {
+								var url = funcaoLoad.apply(this, arguments);
+								url = url.replace("&cache=sim", "&cache=nao");
+								//console.info(layer.getSource().getProperties().tipoServico)
+								return url + '&r=' + Math.random();
+							});
+						}
+					}
+					if(servico === "ImageWMS"){
+						funcaoLoad = layer.getSource().getImageLoadFunction();
+						if(funcaoLoad){
+							layer.getSource().setImageLoadFunction(function(image,src) {
+								src = src.replace("&cache=sim", "&cache=nao");
+								src += '&r=' + Math.random();
+								image.getImage().src = src;
+							});
+						}
 					}
 				}
 				if (retorno === "") {
