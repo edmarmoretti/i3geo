@@ -849,12 +849,11 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo" && $_GET["inf
 	getfeatureinfoJson();
 	exit;
 }
-
 if(strtolower($request) == "getcapabilities"){
-	header('Content-Disposition: attachment; filename=getcapabilities.xml');
+	//header('Content-Disposition: attachment; filename=getcapabilities.xml');
 }
-
-if(!isset($OUTPUTFORMAT)){
+elseif(!isset($OUTPUTFORMAT)){
+	//$contenttype = ms_iostripstdoutbuffercontenttype();
 	header("Content-type: $contenttype");
 }
 //$ogrOutput vem de ms_configura.php
