@@ -66,6 +66,8 @@ body {
 				$_POST["texto"] = "";
 			}
 			include_once(dirname(__FILE__)."/login.php");
+			$versao = versao();
+			$versao = $versao["principal"];
 			//pega a extensao geografica
 			if(isset($base) && $base != ""){
 				if(file_exists($base)){
@@ -102,7 +104,6 @@ body {
 				$c = $mapa->extent;
 				$extensao = $c->minx.",".$c->miny.",".$c->maxx.",".$c->maxy;
 			}
-
 
 
 			if(verificaOperacaoSessao("admin/php/editortexto") == false){
