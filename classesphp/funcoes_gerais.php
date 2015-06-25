@@ -2275,12 +2275,12 @@ function echojson($a)
 	//ob_clean();
 	error_reporting(0);
 	ob_end_clean();
-	if(extension_loaded('zlib'))
-	{ob_start('ob_gzhandler');}
+	//if(extension_loaded('zlib'))
+	//{ob_start('ob_gzhandler');}
 	header("Content-type: text/html");
 	echo $a;
-	if(extension_loaded('zlib'))
-	{ob_end_flush();}
+	//if(extension_loaded('zlib'))
+	//{ob_end_flush();}
 	exit;
 }
 /*

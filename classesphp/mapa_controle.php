@@ -1664,7 +1664,7 @@ switch (strtoupper($funcao))
 		include_once("wmswfs.php");
 		restauraCon($map_file,$postgis_mapa);
 		$retorno = temaswms();
-		break;
+	break;
 		/*
 		 Valor: LISTALAYERSWMS
 
