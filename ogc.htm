@@ -175,6 +175,8 @@ A:hover {
 			ins = "<H1>Endere&ccedil;o do web service:</H1>";
 			var re = new RegExp(".htm", "g");
 			var servico = window.location.href.replace(re, '.php?');
+			//remove variaveis adicionais, se houver
+			servico = servico.split("?")[0]+"?";
 			var s = ""; //"tema="+tema;
 			if (botao.name === "metaestat") {
 				s = "id_medida_variavel=" + tema.split("_")[1] + "&";
@@ -185,7 +187,8 @@ A:hover {
 			}
 
 			servico += s;
-			ins += "<p>" + servico;
+			ins += "<p><a href='" + servico + "' target='_blank' >" + servico + "</a>";
+			ins += "<p>Link para essa p&aacute;gina: <a href='"+ window.location.href.split("?")[0] + "?temaOgc=" + tema + "'>"+ window.location.href.split("?")[0] + "?temaOgc=" + tema + "</a>";
 			ins += "<p>Bookmark: <span id=bm ></span>";
 			ins +=
 				"<p><iframe src='http://www.facebook.com/plugins/like.php?href=" + servico
@@ -259,6 +262,19 @@ A:hover {
 		i3GEO.arvoreDeTemas.INCLUIESTRELAS = false;
 		i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 		i3GEO.arvoreDeTemas.cria("", g_locaplic, "arvoreTemas", "ogc_endereco\(this\)");
+		//verifica se deve abrir de imediato a janela de links
+		temp = loc.split("temaOgc=");
+		if(temp[1]){
+			temaOgc = temp[1];
+			temaOgc = temaOgc.split("&");
+			temaOgc = temaOgc[0];
+			var botao = {
+				checked: false,
+				name: temaOgc,
+				value: temaOgc
+			};
+			ogc_endereco(botao);
+		}
 	</script>
 </body>
 </html>
