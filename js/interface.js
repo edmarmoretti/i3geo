@@ -723,21 +723,40 @@ i3GEO.Interface =
 			googleLike : false,
 			BALAOPROP : {
 				removeAoAdicionar : true,
-				classeCadeado : "i3GEOiconeAberto"
+				classeCadeado : "i3GEOiconeAberto",
+				autoPan : true,
+				autoPanAnimation: {
+					duration: 250
+				},
+				width: '200px',
+				baloes: []
 			},
 			balao : function(texto, completo, x, y) {
-				var e, b, c, temp, p = i3GEO.Interface.openlayers.BALAOPROP;
+				var icone, painel, b, cabecalho, conteudo, p = i3GEO.Interface.openlayers.BALAOPROP, removeBaloes;
 
-				// cabecalho de opcoes
-				c = "<div class='i3GEOCabecalhoInfoWindow' ></div>";
-				texto = c + texto;
-				b = new OpenLayers.Popup.FramedCloud(null, i3GEO.util.projGeo2OSM(new OpenLayers.LonLat(x, y)), null, texto, null, true);
-				b.maxsize = new OpenLayers.Size(parseInt(i3GEO.parametros.w / 2, 10), parseInt(i3GEO.parametros.h / 2, 10));
+				removeBaloes = function(){
+					var t, n = i3GEO.Interface.openlayers.BALAOPROP.baloes.length, i;
+					for(i=0; i<n; i++){
+						t = i3GEO.Interface.openlayers.BALAOPROP.baloes[i];
+						t.setPosition(undefined);
+						t.getElement().parentNode.innerHTML = "";
+					}
+					i3GEO.Interface.openlayers.BALAOPROP.baloes = [];
+					return false;
+				};
+				if(p.classeCadeado === "i3GEOiconeAberto"){
+					removeBaloes();
+				}
+				painel = document.createElement("div");
+				painel.style.width = p.width;
+				painel.className = "ol-popup";
 
-				i3geoOL.addPopup(b, p.removeAoAdicionar);
-				e = document.createElement("div");
-				e.className = p.classeCadeado;
-				e.onclick = function() {
+				cabecalho = document.createElement("div");
+				cabecalho.className = "i3GEOCabecalhoInfoWindow";
+				//icone que indica se os baloes devem ficar na tela ou nao
+				icone = document.createElement("div");
+				icone.className = p.classeCadeado;
+				icone.onclick = function() {
 					if (p.classeCadeado === "i3GEOiconeAberto") {
 						p.classeCadeado = "i3GEOiconeFechado";
 					} else {
@@ -745,25 +764,50 @@ i3GEO.Interface =
 					}
 					this.className = p.classeCadeado;
 					p.removeAoAdicionar = !p.removeAoAdicionar;
+					return false;
 				};
-				temp = $i(b.id).getElementsByClassName("i3GEOCabecalhoInfoWindow")[0];
-				temp.appendChild(e);
-				e = document.createElement("div");
-				e.className = "i3GEOiconeFerramentas";
-				e.style.left = "3px";
-				e.onclick = function() {
+				cabecalho.appendChild(icone);
+				//icone das propriedades
+				icone = document.createElement("div");
+				icone.className = "i3GEOiconeFerramentas";
+				icone.style.left = "3px";
+				icone.onclick = function() {
 					i3GEO.janela.prompt($trad("tolerancia"), function() {
 						i3GEO.mapa.RESOLUCAOTIP = $i("i3GEOjanelaprompt").value;
 					}, i3GEO.mapa.RESOLUCAOTIP);
+					return false;
 				};
-				temp.appendChild(e);
-				e = document.createElement("div");
-				e.className = "i3GEOiconeMais";
-				e.style.left = "9px";
-				e.onclick = function() {
+				cabecalho.appendChild(icone);
+				//icone mais info
+				icone = document.createElement("div");
+				icone.className = "i3GEOiconeMais";
+				icone.style.left = "9px";
+				icone.onclick = function() {
 					i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + completo + "</div>", "");
+					return false;
 				};
-				temp.appendChild(e);
+				cabecalho.appendChild(icone);
+				//icone x
+				icone = document.createElement("div");
+				icone.className = "ol-popup-closer";
+				icone.onclick = removeBaloes;
+				cabecalho.appendChild(icone);
+
+				painel.appendChild(cabecalho);
+	
+				conteudo = document.createElement("div");
+				conteudo.innerHTML = texto;
+				painel.appendChild(conteudo);
+				
+				b = new ol.Overlay({
+					element: painel,
+					stopEvent: true,
+					autoPan: p.autoPan,
+					autoPanAnimation: p.autoPanAnimation
+				});
+				p.baloes.push(b);
+				i3geoOL.addOverlay(b);
+				b.setPosition([x,y]);
 			},
 			/**
 			 * Redesenha o mapa atual
@@ -814,6 +858,12 @@ i3GEO.Interface =
 				ol.layer.Layer.prototype.setVisibility = function(v) {
 					this.setVisible(v);
 				};
+				ol.layer.Layer.prototype.getVisibility = function(v) {
+					this.getVisible(v);
+				};
+				i3geoOL.panTo = function(x,y){
+					this.getView().setCenter([x,y]);
+				};
 				i3geoOL.getLayersByName = function(nome) {
 					var res = [], layers = this.getLayers(), n = layers.getLength(), i;
 					for (i = 0; i < n; i++) {
@@ -843,6 +893,15 @@ i3GEO.Interface =
 					for (i = 0; i < n; i++) {
 						if (layers.item(i).get(chave) && layers.item(i).get(chave) === valor) {
 							res.push(layers.item(i));
+						}
+					}
+					return res;
+				};
+				i3geoOL.getControlsBy = function(chave, valor) {
+					var res = [], controles = this.getControls(), n = controles.getLength(), i;
+					for (i = 0; i < n; i++) {
+						if (controles.item(i).get(chave) && controles.item(i).get(chave) === valor) {
+							res.push(controles.item(i));
 						}
 					}
 					return res;
@@ -1010,7 +1069,7 @@ i3GEO.Interface =
 				for (i = nlayers - 1; i >= 0; i--) {
 					camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 					l = i3geoOL.getLayersByName(camada.name)[0];
-					if (l && l.isBaseLayer === false) {
+					if (l && l.get("isBaseLayer") === false) {
 						if (layer == "" || layer == camada.name) {
 							l.setOpacity(opacidade);
 						}
@@ -1829,7 +1888,7 @@ i3GEO.Interface =
 						y = metrica.lat;
 					}
 				}
-				i3geoOL.panTo(new OpenLayers.LonLat(x, y));
+				i3geoOL.panTo(x,y);
 			}
 		},
 		/**

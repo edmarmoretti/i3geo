@@ -290,7 +290,8 @@ i3GEO.eventos =
 					}
 					i3GEO.eventos.executaEventos(this.MOUSEUP);
 				}
-				else if (i3GEO.Interface.ATUAL === "openlayers"){
+				else if (i3GEO.Interface.ATUAL === "openlayers" && exy.target && exy.target.tagName === "CANVAS"){
+					//para evitar bubble
 					i3GEO.eventos.executaEventos(this.MOUSEUP);
 				}
 

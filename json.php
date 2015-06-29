@@ -91,7 +91,7 @@ copy($base,$nomeMapfileTmp);
 $oMap = ms_newMapobj($nomeMapfileTmp);
 $nmap = ms_newMapobj($locaplic."/temas/".$tema.".map");
 $l = $nmap->getlayerbyname($tema);
-
+$l->set("template","none.htm");
 if (!empty($postgis_mapa)){
 	if ($l->connectiontype == MS_POSTGIS){
 		$lcon = $l->connection;
@@ -333,14 +333,17 @@ function carregaCacheArquivo(){
 
 function pegaDadosJ(){
 	global $oMap, $tema, $versao;
+	set_time_limit(0);
 	$layer = $oMap->getlayerbyname($tema);
+	$layer->set("status",MS_DEFAULT);
+	$layer->set("template","none.htm");
 	$items = pegaItens($layer,$oMap);
 	$layer->querybyrect($oMap->extent);
 	$layer->open();
 	$res_count = $layer->getNumresults();
 	$linhas = array();
-
 	for ($i = 0; $i < $res_count; $i++){
+		//echo $i." - <br>";
 		if($versao == 6){
 			$shape = $layer->getShape($layer->getResult($i));
 		}

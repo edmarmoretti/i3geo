@@ -780,10 +780,6 @@ var i3GEO = {
 			}
 
 			i3GEO.eventos.navegaMapa();
-			i3GEO.ajuda.mostraJanela(
-				"Tempo de redesenho em segundos: "
-					+ retorno.data.variaveis.tempo,
-				"");
 			//
 			// verifica se deve ser feito o zoom em algum tema
 			//

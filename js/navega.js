@@ -328,6 +328,8 @@ i3GEO.navega =
 			if (sid !== "") {
 				i3GEO.configura.sid = sid;
 			}
+			i3GEO.php.zoomponto(i3GEO.atualiza,x,y,tamanho,simbolo,cor);
+			/*
 			var f =
 				"i3GEO.navega.timerNavega = null;" + "i3GEO.php.zoomponto(i3GEO.atualiza," + x + "," + y + "," + tamanho + ",'" + simbolo
 					+ "','" + cor + "');";
@@ -335,6 +337,7 @@ i3GEO.navega =
 				clearTimeout(i3GEO.navega.timerNavega);
 			}
 			i3GEO.navega.timerNavega = setTimeout(f, i3GEO.navega.TEMPONAVEGAR);
+			*/
 		},
 		/**
 		 * Function: zoompontoIMG

@@ -188,6 +188,10 @@ i3GEOF.cortina = {
 		if(i3GEOF.cortina.tema !== ""){
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				layer = i3geoOL.getLayersByName(i3GEOF.cortina.tema)[0];
+				//TODO nao funciona no OL3
+				if(!layer.div){
+					return;
+				}
 				i3GEOF.cortina.estilo = layer.div.style;
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){

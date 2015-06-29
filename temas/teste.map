@@ -1,65 +1,53 @@
 MAP
   FONTSET "../symbols/fontes.txt"
-  SYMBOLSET "../symbols/simbolosv6.sym"
+  SYMBOLSET "../symbols/simbolos.sym"
   LAYER
     CONNECTION ""
-    DATA "/var/www/temp/localizador_052015.shp"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (
+		SELECT
+		co_seq_id AS gid,
+		ST_MakePoint(tb_cep.long::numeric,tb_cep.lat::numeric) AS geom,
+		tb_cep.lat,
+		tb_cep.long,
+		ano_farm_pop_aqt AS ano,
+		mes_farm_pop_aqt AS mes,
+		nu_ddd_farmacia AS ddd,
+		nu_telefone_farmacia,
+		nu_cep_farmacia,
+		no_bairro_farmacia,
+		ds_endereco_farmacia,
+		no_farmacia,
+		dbgeral.tb_ibge.cidade_sem_acento,
+		dbgeral.tb_ibge.uf
+		FROM
+		dbacoes_saude.tb_farmacia_pop_aqt
+		INNER JOIN dbgeral.tb_cep ON dbacoes_saude.tb_farmacia_pop_aqt.nu_cep_farmacia = dbgeral.tb_cep.cep
+		INNER JOIN dbgeral.tb_ibge ON dbacoes_saude.tb_farmacia_pop_aqt.co_ibge = dbgeral.tb_ibge.ibge
+		WHERE
+		'm'||tb_farmacia_pop_aqt.mes_farm_pop_aqt||'a'||tb_farmacia_pop_aqt.ano_farm_pop_aqt = (SELECT 'm'||tb_farmacia_pop_aqt.mes_farm_pop_aqt||'a'||tb_farmacia_pop_aqt.ano_farm_pop_aqt
+		FROM dbacoes_saude.tb_farmacia_pop_aqt
+		ORDER BY tb_farmacia_pop_aqt.ano_farm_pop_aqt DESC, tb_farmacia_pop_aqt.mes_farm_pop_aqt DESC LIMIT 1)
+		AND 
+		farmacia_apta not LIKE '%N%' AND
+		nu_cep_farmacia not LIKE '%-%'
+    ) as foo using unique gid using srid=4674"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"""
-      "ltempoitemimagem"""
-      "tip""RELATORIO"
-      "ltempoitemdescricao"""
-      "CLASSE""SIM"
-      "ltempoiteminicio"""
-      "palletestep"""
-      "ltempoitemtip"""
-      "temporizador"""
-      "ltempoitemtitulo"""
-      "description_template"""
-      "itensdesc""OBS,PROCESSO,RIP,ORGAO,RELATORIO"
-      "iconetema"""
-      "ltempoitemlink"""
-      "itenslink""[OBS]"
-      "tiles"""
-      "METAESTAT_CODIGO_TIPO_REGIAO"""
-      "palletefile"""
-      "ltempoformatodata"""
-      "ltempoitemicone"""
-      "permitecomentario""SIM"
-      "PLUGINI3GEO"""
-      "metaestat"""
-      "escondido""NAO"
-      "itembuscarapida""OBS"
-      "itens""OBS,PROCESSO,RIP,ORGAO,RELATORIO"
-      "transitioneffect""SIM"
-      "TEMA""localizador"
-      "convcaracter"""
-      "cortepixels""0"
-      "ltempoconvencode"""
-      "editorsql"""
-      "identifica""SIM"
-      "aplicaextensao""SIM"
-      "ltempoitemfim"""
-    END # METADATA
+      "CLASSE"	"SIM"
+      "TEMA"	"loc"
+      "IDENTIFICA"	"SIM"
+    END
     NAME "teste"
-    PROJECTION
-      "init=epsg:29194"
-    END # PROJECTION
     STATUS DEFAULT
-    TEMPLATE "none.htm"
-    TILEITEM "location"
     TYPE POINT
     UNITS METERS
     CLASS
-      NAME ""
+      NAME " "
       STYLE
-        ANGLE 0
-        COLOR 166 16 16
-        OFFSET 0 0
-        SIZE 20
+        COLOR 255 0 0
         SYMBOL "ponto"
-      END # STYLE
-    END # CLASS
-  END # LAYER
-
-END # MAP
+        SIZE 10
+      END
+    END
+  END
+END
