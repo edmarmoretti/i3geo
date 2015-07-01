@@ -946,7 +946,7 @@ i3GEO.mapa =
 							+ "<a class=ajuda_usuario target=_blank href='"
 							+ i3GEO.configura.locaplic
 							+ "/ajuda_usuario.php?idcategoria=6&idajuda=123' ><b> </b></a></div>";
-					i3GEO.janela.cria("500px", "350px", url, "", "", titulo, idjanela, false, "hd", cabecalho, minimiza);
+					i3GEO.janela.cria("500px", "350px", url, "", "", titulo, idjanela, false, "hd", cabecalho, minimiza, "", "", "", "", false);
 				}
 			},
 			/**

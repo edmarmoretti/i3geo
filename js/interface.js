@@ -1725,7 +1725,7 @@ i3GEO.Interface =
 								var url = funcaoLoad.apply(this, arguments);
 								url = url.replace("&cache=sim", "&cache=nao");
 								//console.info(layer.getSource().getProperties().tipoServico)
-								return url + '&r=' + Math.random();
+								return url.split('&r=')[0] + '&r=' + Math.random();
 							});
 						}
 					}
@@ -1734,7 +1734,7 @@ i3GEO.Interface =
 						if(funcaoLoad){
 							layer.getSource().setImageLoadFunction(function(image,src) {
 								src = src.replace("&cache=sim", "&cache=nao");
-								src += '&r=' + Math.random();
+								src = src.split('&r=')[0] + '&r=' + Math.random();
 								image.getImage().src = src;
 							});
 						}

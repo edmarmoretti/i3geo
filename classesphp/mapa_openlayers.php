@@ -112,7 +112,9 @@ if(isset($_GET["TileMatrix"])){
 		$temp = $temp / 2;
 	}
 	$_GET["tms"] = "/wmts/".$_GET["layer"]."/".$z."/".$x."/".$y.".png";
-
+	if($z."/".$x."/".$y == "0/0/0" || $x == -1 || $y == -1){
+		return;
+	}
 	$top_left_minx = -180;
 	$top_left_maxy = 90;
 
