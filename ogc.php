@@ -377,6 +377,9 @@ else{
 				}
 				foreach ($ts as $t){
 					$l = $nmap->getlayerbyname($t);
+					if($l == ""){
+						$l = $nmap->getlayer(0);
+					}
 					$permite = $l->getmetadata("permiteogc");
 					if(strtolower($permite) != "nao"){
 						//necess&aacute;rio pq o mapfile pode ter todos os layers como default
