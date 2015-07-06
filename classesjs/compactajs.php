@@ -59,24 +59,28 @@ $f = @fopen("../classesjs/teste.txt",w);
 if (!file_exists("../classesjs/teste.txt")){
 	echo "<span style='color:red'>N&atilde;o foi possivel escrever em classesjs";exit;
 }
+unlink("../classesjs/teste.txt");
 unlink("../css/teste.txt");
 $f = @fopen("../css/teste.txt",w);
 @fclose($f);
 if (!file_exists("../css/teste.txt")){
 	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em css";exit;
 }
+unlink("../css/teste.txt");
 unlink("../pacotes/teste.txt");
 $f = @fopen("../pacotes/teste.txt",w);
 @fclose($f);
 if (!file_exists("../pacotes/teste.txt")){
 	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em pacotes";exit;
 }
+unlink("../pacotes/teste.txt");
 unlink("../mashups/teste.txt");
 $f = @fopen("../mashups/teste.txt",w);
 @fclose($f);
 if (!file_exists("../mashups/teste.txt")){
 	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em mashups";exit;
 }
+unlink("../mashups/teste.txt");
 echo "<pre>";
 //
 //compacta os arquivos do i3geo

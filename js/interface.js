@@ -1374,25 +1374,42 @@ i3GEO.Interface =
 								if (i3GEO.Interface.openlayers.googleLike === false && camada.connectiontype === 7
 									&& camada.wmsurl !== ""
 									&& camada.usasld.toLowerCase() != "sim") {
-									urllayer = camada.wmsurl + "&r=" + Math.random();
-									if (camada.wmstile == 1) {
+									urllayer = camada.wmsurl;
+									if (camada.wmstile == 10) {
 										// TODO testar isso
-										layer = new OpenLayers.Layer.TMS(camada.name, camada.wmsurl, {
-											isBaseLayer : false,
-											layername : camada.wmsname,
-											type : 'png'
+										source = new ol.source.WMTS({
+											url : urllayer,
+											matrixSet : opcoes.projection,
+											format : 'image/png',
+											projection : opcoes.projection,
+											tileGrid : new ol.tilegrid.WMTS({
+												origin : ol.extent.getTopLeft(projectionExtent),
+												resolutions : resolutions,
+												matrixIds : matrixIds
+											}),
+											wrapX : true
 										});
+										source.set("tipoServico", "WMTS");
+										opcoes.singleTile = false;
 									} else {
-										// TODO testar isso
-										layer = new OpenLayers.Layer.WMS(camada.name, urllayer, {
-											LAYERS : camada.name,
-											format : camada.wmsformat,
-											transparent : true
-										}, opcoes);
+										source = new ol.source.TileWMS({
+											url : urllayer,
+											params : {
+												//'LAYERS' : camada.wmsname,
+												'VERSION' : '1.1.0'
+												//'format' : camada.wmsformat
+											},
+											projection : camada.wmssrs
+										});
+										source.set("tipoServico", "ImageWMS");
+										opcoes.singleTile = false;
 									}
-									if (camada.wmssrs != "" && layer.url) {
-										layer.url = layer.url + "&SRS=" + camada.wmssrs + "&CRS=" + camada.wmssrs;
-									}
+									source.set("name", camada.name);
+									opcoes.source = source;
+									opcoes.title = camada.tema;
+									opcoes.name = camada.name;
+									opcoes.isBaseLayer = false;
+									opcoes.visible = true;
 								} else {
 									// verifica se havera apenas um tile
 									if (camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim"
@@ -1414,7 +1431,7 @@ i3GEO.Interface =
 									if (camada.tiles === "sim" || camada.cache === "sim" || (camada.cortepixels && camada.cortepixels > 0)) {
 										opcoes.singleTile = false;
 									}
-									
+
 									if (camada.cache) {
 										urllayer = url + "&cache=" + camada.cache;
 									} else {
@@ -1450,24 +1467,24 @@ i3GEO.Interface =
 									opcoes.source = source;
 									opcoes.title = camada.tema;
 									opcoes.name = camada.name;
-									opcoes.isBaseLayer = false;
-									opcoes.visible = true;
-									if (i3GEO.arvoreDeCamadas.BARRAPROGRESSO === true) {
-										source.on('tileloadstart', function(event) {
-											i3GEO.Interface.openlayers.loadStartLayer(source.get("name"));
-										});
-										source.on('tileloadend', function(event) {
-											i3GEO.Interface.openlayers.loadStopLayer(source.get("name"));
-										});
-										source.on('tileloaderror', function(event) {
-											i3GEO.Interface.openlayers.loadStopLayer(source.get("name"));
-										});
-									}
-									if (opcoes.singleTile === true) {
-										layer = new ol.layer.Image(opcoes);
-									} else {
-										layer = new ol.layer.Tile(opcoes);
-									}
+								}
+								opcoes.isBaseLayer = false;
+								opcoes.visible = true;
+								if (i3GEO.arvoreDeCamadas.BARRAPROGRESSO === true) {
+									source.on('tileloadstart', function(event) {
+										i3GEO.Interface.openlayers.loadStartLayer(source.get("name"));
+									});
+									source.on('tileloadend', function(event) {
+										i3GEO.Interface.openlayers.loadStopLayer(source.get("name"));
+									});
+									source.on('tileloaderror', function(event) {
+										i3GEO.Interface.openlayers.loadStopLayer(source.get("name"));
+									});
+								}
+								if (opcoes.singleTile === true) {
+									layer = new ol.layer.Image(opcoes);
+								} else {
+									layer = new ol.layer.Tile(opcoes);
 								}
 							} catch (e) {
 							}
@@ -1509,6 +1526,8 @@ i3GEO.Interface =
 			 * Altera a posicao do layer de desenho de figuras, posicionando-o sobre todos os demais
 			 */
 			sobeLayersGraficos : function() {
+				//TODO remover?
+				return;
 				var nlayers = i3geoOL.getNumLayers(), layers = i3geoOL.layers, i;
 				for (i = 0; i < nlayers; i++) {
 					if (layers[i].CLASS_NAME == "OpenLayers.Layer.Vector" && layers[i].name != "Nenhum") {
@@ -1679,36 +1698,10 @@ i3GEO.Interface =
 			 * Atualiza o mapa atual, forcando o redesenho dos layers
 			 */
 			atualizaMapa : function() {
-				var layer, layers = i3geoOL.layers, nlayers = layers.length, i, servico, source;
-				for (i = 0; i < nlayers; i++) {
-					layer = layers[i];
-					if (layer && layer != undefined) {
-						source = layer.getSource();
-						servico = source.getProperties().tipoServico;
-						if(servico === "WMTS"){
-							funcaoLoad = layer.getSource().getTileUrlFunction();
-							if(funcaoLoad){
-								layer.getSource().setTileUrlFunction(function() {
-									var url = funcaoLoad.apply(this, arguments);
-									url = url.replace("&cache=sim", "&cache=nao");
-									//console.info(layer.getSource().getProperties().tipoServico)
-									return url + '&r=' + Math.random();
-								});
-							}
-						}
-						if(servico === "ImageWMS"){
-							funcaoLoad = layer.getSource().getImageLoadFunction();
-							if(funcaoLoad){
-								layer.getSource().setImageLoadFunction(function(image,src) {
-									src = src.replace("&cache=sim", "&cache=nao");
-									src += '&r=' + Math.random();
-									image.getImage().src = src;
-								});
-							}
-						}
-					}
+				var camadas = i3GEO.arvoreDeCamadas.CAMADAS, n = camadas.lenght, i;
+				for (i = 0; i < n; i++) {
+					i3GEO.Interface.openlayers.atualizaTema("", camadas[i].name);
 				}
-				i3GEO.Interface.openlayers.sobeLayersGraficos();
 			},
 			/**
 			 * Forca o redesenho de um layer especifico

@@ -937,7 +937,7 @@ i3GEO.mapa =
 				};
 				if (i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps") {
 					url =
-						i3GEO.configura.locaplic + "/ferramentas/congelamapa/openlayers.php?g_sid="
+						i3GEO.configura.locaplic + "/ferramentas/congelamapa/openlayers3.php?g_sid="
 							+ i3GEO.configura.sid
 							+ "&ext="
 							+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);

@@ -83,6 +83,7 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/editormapfile") == false){
 		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}
+	unlink("$locaplic/temas/teste.txt");
 }
 error_reporting(0);
 //define o parametro de output do resultado da funcao

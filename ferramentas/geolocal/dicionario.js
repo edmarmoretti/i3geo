@@ -20,8 +20,8 @@ i3GEOF.geolocal.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'exclui' : [ {
-		pt : "Exclui",
+	'shp' : [ {
+		pt : "Cria camada com os pontos",
 		en : "",
 		es : ""
 	} ],
