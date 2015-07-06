@@ -1865,7 +1865,7 @@ i3GEO.Interface =
 					parseInt(m[0], 10), parseInt(m[1], 10), parseInt(m[2], 10), parseInt(m[3], 10)
 				];
 				v = i3geoOL.getView();
-				v.fitExtent(m, i3geoOL.getSize());
+				v.fit(m, i3geoOL.getSize());
 				i3GEO.eventos.cliquePerm.status = true;
 			},
 			pan2ponto : function(x, y) {

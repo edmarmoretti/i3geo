@@ -91,7 +91,7 @@ var parametrosMap = {
 mapa = new ol.Map(parametrosMap);
 
 var v = mapa.getView();
-v.fitExtent([<?php echo $mapext; ?>], mapa.getSize());
+v.fit([<?php echo $mapext; ?>], mapa.getSize());
 
 </script>
 </body>

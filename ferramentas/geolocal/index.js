@@ -339,7 +339,7 @@ i3GEOF.geolocal =
 						]),
 						origem : 'i3GEOFgeolocal'
 					});
-					i3GEO.desenho.layergrafico.addFeature(feature);
+					i3GEO.desenho.layergrafico.getSource().addFeature(feature);
 					// linha
 					if (ps[i + 1]) {
 						feature = new ol.Feature({
@@ -352,7 +352,7 @@ i3GEOF.geolocal =
 							]),
 							origem : 'i3GEOFgeolocal'
 						});
-						i3GEO.desenho.layergrafico.addFeature(feature);
+						i3GEO.desenho.layergrafico.getSource().addFeature(feature);
 					}
 				}
 			},
@@ -367,7 +367,7 @@ i3GEOF.geolocal =
 					}
 				}
 				for (r in remover) {
-					i3GEO.desenho.layergrafico.removeFeature(remover[r]);
+					i3GEO.desenho.layergrafico.getSource().removeFeature(remover[r]);
 				}
 			},
 			removeLayer : function() {

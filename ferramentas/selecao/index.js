@@ -605,7 +605,7 @@ i3GEOF.selecao =
 					}
 				}
 				for(r in remover){
-					i3GEO.desenho.layergrafico.removeFeature(remover[r]);
+					i3GEO.desenho.layergrafico.getSource().removeFeature(remover[r]);
 				}
 			},
 			openlayers : function() {
@@ -656,7 +656,7 @@ i3GEOF.selecao =
 								origem: 'i3GEOFselecao'
 							});
 							//i3GEOF.selecao.box.ol3.draw.feature.setProperties({origem : "i3GEOFselecao"});
-							i3GEO.desenho.layergrafico.addFeature(feature);
+							i3GEO.desenho.layergrafico.getSource().addFeature(feature);
 						}
 						i3GEOF.selecao.box.ol3.removeControle();
 						i3GEO.eventos.cliquePerm.ativa();
@@ -761,7 +761,7 @@ i3GEOF.selecao =
 						var geo, ponto = evt.feature.getGeometry();
 						if ($i("i3GEOFselecaoMantemFigura").checked === true) {
 							evt.feature.setProperties({origem : "i3GEOFselecao"});
-							i3GEO.desenho.layergrafico.addFeature(evt.feature);
+							i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 						}
 						i3GEOF.selecao.clique.ol3.removeControle();
 						i3GEO.eventos.cliquePerm.ativa();
@@ -1014,7 +1014,7 @@ i3GEOF.selecao =
 						var n, i, x = [],y =[],geo, pol = evt.feature.getGeometry();
 						if ($i("i3GEOFselecaoMantemFigura").checked === true) {
 							evt.feature.setProperties({origem : "i3GEOFselecao"});
-							i3GEO.desenho.layergrafico.addFeature(evt.feature);
+							i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 						}
 						i3GEOF.selecao.poligono.ol3.removeControle();
 						i3GEO.eventos.cliquePerm.ativa();

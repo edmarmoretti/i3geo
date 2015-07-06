@@ -393,7 +393,11 @@ i3GEO.desenho =
 			},
 			criaLayerGrafico : function() {
 				if (!i3GEO.desenho.layergrafico) {
-					i3GEO.desenho.layergrafico = new ol.FeatureOverlay({
+					i3GEO.desenho.layergrafico = new ol.layer.Vector({
+						source : new ol.source.Vector({
+							features : new ol.Collection(),
+							useSpatialIndex : false
+						}),
 						style : new ol.style.Style({
 							fill : new ol.style.Fill({
 								color : 'rgba(255, 255, 255, 0.2)'
