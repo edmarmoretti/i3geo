@@ -596,10 +596,10 @@ i3GEOF.selecao =
 		removeFiguras : {
 			ol3 : function(){
 				var features, n, f, i, remover = [];
-				features = i3GEO.desenho.layergrafico.getFeatures();
-				n = features.getLength();
+				features = i3GEO.desenho.layergrafico.getSource().getFeatures();
+				n = features.length;
 				for(i = 0; i < n; i++){
-					f = features.item(i);
+					f = features[i];
 					if(f.getProperties().origem === "i3GEOFselecao"){
 						remover.push(f);
 					}

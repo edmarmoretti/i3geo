@@ -358,15 +358,15 @@ i3GEOF.geolocal =
 			},
 			removeFiguras : function() {
 				var features, n, f, i, remover = [];
-				features = i3GEO.desenho.layergrafico.getFeatures();
-				n = features.getLength();
-				for (i = 0; i < n; i++) {
-					f = features.item(i);
-					if (f.getProperties().origem === "i3GEOFgeolocal") {
+				features = i3GEO.desenho.layergrafico.getSource().getFeatures();
+				n = features.length;
+				for(i = 0; i < n; i++){
+					f = features[i];
+					if(f.getProperties().origem === "i3GEOFselecao"){
 						remover.push(f);
 					}
 				}
-				for (r in remover) {
+				for(r in remover){
 					i3GEO.desenho.layergrafico.getSource().removeFeature(remover[r]);
 				}
 			},
