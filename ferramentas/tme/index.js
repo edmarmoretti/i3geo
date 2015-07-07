@@ -422,13 +422,15 @@ i3GEOF.tme =
 				temp =
 					function(retorno) {
 						i3GEOF.tme.aguarde.visibility = "hidden";
-						var url, ins =
+						var ext, url, ins =
 							"<p class=paragrafo >" + $trad('arquivoDownload', i3GEOF.tme.dicionario)
 								+ "<br><a href='"
 								+ retorno.data.url
 								+ "' target=new >"
 								+ retorno.data.url
 								+ "</a><br>";
+						ext = i3GEO.parametros.mapexten;
+						ext = i3GEO.util.extOSM2Geo(ext);
 						url = i3GEO.configura.locaplic + "/ms_criamapa.php?interface=googleearth.phtml&kmlurl=" + retorno.data.url;
 						ins +=
 							"<br>" + $trad('abreNoI3geo', i3GEOF.tme.dicionario)
@@ -441,7 +443,8 @@ i3GEOF.tme =
 							i3GEO.configura.locaplic + "/ferramentas/cesium/kml3d.php?kmlurl="
 								+ retorno.data.url
 								+ "&legenda="
-								+ retorno.data.legenda;
+								+ retorno.data.legenda
+								+ "&mapext=" + ext;
 						ins +=
 							"<br>" + $trad('abreNoCesium', i3GEOF.tme.dicionario)
 								+ "<br><a href='"

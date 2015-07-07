@@ -5,44 +5,54 @@ include("../../classesphp/funcoes_gerais.php");
 //define o centro, pegando as coordenadas do mapa de inicializacao
 $versao = versao();
 $versao = $versao["principal"];
-if(isset($base) && $base != ""){
-	if(file_exists($base)){
-		$f = $base;
-	}
-	else{
-		$f = $locaplic."/aplicmap/".$base.".map";
-	}
-}
-else
-{
-	$f = "";
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-		$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
-	}
-	else{
-		if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
-			$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
-		}
-		if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-			$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
-		}
-		if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-			$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
-		}
-		if($f == "")
-		{
-			$f = $locaplic."/aplicmap/geral1v".$versao.".map";
-		}
-	}
-}
 $centroX = -55;
 $centroY = -13;
-if(@ms_newMapObj($f)){
-	$mapa = ms_newMapObj($f);
+$extensao = "-180,-90,180,90";
+if(!isset($mapext)){
+	if(isset($base) && $base != ""){
+		if(file_exists($base)){
+			$f = $base;
+		}
+		else{
+			$f = $locaplic."/aplicmap/".$base.".map";
+		}
+	}
+	else
+	{
+		$f = "";
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+			$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+		}
+		else{
+			if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
+				$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
+			}
+			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
+			}
+			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
+				$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
+			}
+			if($f == "")
+			{
+				$f = $locaplic."/aplicmap/geral1v".$versao.".map";
+			}
+		}
+	}
 
-	$c = $mapa->extent;
-	$centroX = $c->maxx - ($c->maxx - $c->minx) / 2;
-	$centroY = $c->maxy - ($c->maxy - $c->miny) / 2;
+	if(@ms_newMapObj($f)){
+		$mapa = ms_newMapObj($f);
+		$c = $mapa->extent;
+		$centroX = $c->maxx - ($c->maxx - $c->minx) / 2;
+		$centroY = $c->maxy - ($c->maxy - $c->miny) / 2;
+		$extensao = $c->minx.",".$c->miny.",".$c->maxx.",".$c->maxy;
+	}
+}
+else{
+	$c = explode(" ",$mapext);
+	$centroX = $c[2] - ($c[2] - $c[0]) / 2;
+	$centroY = $c[3] - ($c[3] - $c[1]) / 2;
+	$extensao = $c[0].",".$c[1].",".$c[2].",".$c[3];	
 }
 ?>
 <!DOCTYPE html>
@@ -101,6 +111,10 @@ body {
 		<img src='<?php echo strip_tags($legenda);?>' />
 	</div>
 	<script>
+	var extent = Cesium.Rectangle.fromDegrees(<?php echo $extensao;?>);
+
+	Cesium.Camera.DEFAULT_VIEW_RECTANGLE = extent;
+	Cesium.Camera.DEFAULT_VIEW_FACTOR = 0;
 	var viewer = new Cesium.Viewer(
 		'cesiumContainer',
 		{
@@ -113,11 +127,13 @@ body {
 	if('<?php echo $kmlurl;?>' != ''){
 		viewer.dataSources.add(Cesium.KmlDataSource.load('<?php echo strip_tags($kmlurl);?>'))
 	}
+	/*
 	var center = Cesium.Cartesian3.fromDegrees(<?php echo $centroX.",".$centroY;?>);
     var transform = Cesium.Transforms.eastNorthUpToFixedFrame(center);
     var camera = viewer.camera;
     camera.constrainedAxis = Cesium.Cartesian3.UNIT_Z;
-    camera.lookAtTransform(transform, new Cesium.Cartesian3(-120000.0, -120000.0, 120000.0));
+    camera.lookAtTransform(transform, new Cesium.Cartesian3(0,0, 12000000.0));
+    */
 </script>
 </body>
 </html>
