@@ -81,18 +81,21 @@ if ($tipo == "")
 {
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
 	echo '<html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">';
-	echo '<link rel="stylesheet" type="text/css" href="admin/html/admin.css">';
-	echo '<style>body {COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}</style>';
-
-	echo '</head>';
+	echo '<script src="classesjs/i3geo.js"></script>';
 	echo '<script>';
 	echo 'function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}';
 	echo 'function rodaTabela(){window.location.href = window.location.href+"&tabela";}';
+	echo 'i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo";';
 	echo '</script>';
-	echo '<body><center><div class="bordaSuperior"  >&nbsp;</div><div class="mascaraPrincipal" id="divGeral">';
-	echo '<form action="testamapfile.php" method="post" id=f >';
-	echo 'Nome do arquivo map existente no diretório i3geo/temas. Exemplo para uso manual da URL: testamapfile.php?map=biomashp (utilize "testamapfile.php?map=todos" na URL para testar todos de uma só vez)<br><br>';
-	//echo '<br>Mostra apenas a legenda? <input type=radio name=solegenda value=sim />sim <input type=radio name=solegenda value=nao CHECKED /> n&atilde;o<br>';
+	echo '<script src="admin/js/core.js"></script>';
+	echo '</head>';
+	echo '<body class=" yui-skin-sam" style="background: white;"><center>';
+	echo '<div class="bordaSuperior"  >&nbsp;</div>';
+	echo '<div class="mascaraPrincipal" id="divGeral" style=display:none; >';
+	echo '<div id=cabecalhoPrincipal></div>';
+	echo '<h1 style="background-color: white; color: black;" >Administra&ccedil;&atilde;o do i3geo - teste de mapfiles </h1>';
+	echo '<form action="testamapfile.php" method="post" id=f   >';
+	echo '<br><p>Nome do arquivo map existente no diretório i3geo/temas. Exemplo para uso manual da URL: testamapfile.php?map=biomashp (utilize "testamapfile.php?map=todos" na URL para testar todos de uma só vez)</p>';
 	$combo = "<br><select onchange='roda()' id=nomemap ><option value=''>Escolha o arquivo para testar</option>";
 	foreach ($arqs["arquivos"] as $arq){
 		$temp = explode(".",$arq);
@@ -101,7 +104,7 @@ if ($tipo == "")
 		}
 	}
 	echo $combo."</select></form><br>";
-	echo '<br><input type=button value="Testa tabela" onclick="rodaTabela();" />';
+	echo '<br><input type=button value="Testa tabela" id="rodatabela" />';
 }
 if (isset($map) && $map != "")
 {
@@ -125,9 +128,30 @@ if (isset($map) && $map != "")
 		verifica($map,$solegenda,$tabela);
 	}
 }
-echo '</div>';
-echo '<script>if(screen.availWidth > 700){document.getElementById("divGeral").style.width = "700px";}</script>';
-echo '</body></html>';
+?>
+
+</div>
+<div id=logajax style="display: block"></div>
+<script>
+	if(screen.availWidth > 900){
+		document.getElementById("divGeral").style.width = "900px";
+	};
+	cabecalhoGeral("cabecalhoPrincipal","menus","admin/html/");
+	inicia = function() {
+		$i("divGeral").style.display = "block";
+	};
+	i3GEO.login.recarrega = true;
+	i3GEO.login.verificaOperacao("admin/html/menus",i3GEO.configura.locaplic, inicia, "sessao", i3GEO.login.dialogo.abreLogin);
+	var botao = new YAHOO.widget.Button("rodatabela");
+	botao.addClass("abrir150");
+	$i("rodatabela-button").onclick = function(){
+		rodaTabela();
+	};
+</script>
+</body>
+</html>
+
+<?php
 function verifica($map,$solegenda,$tabela){
 	global $tipo,$locaplic,$postgis_mapa,$versao,$base,$dir_tmp,$tempo;
 	$mapUrl = $map;
@@ -348,7 +372,7 @@ function verifica($map,$solegenda,$tabela){
 		$destino = $dir_tmp."/".nomeRandomico().".map";
 
 		$mapa->save($destino);
-		//echo $destino;exit;
+		validaAcessoTemas($destino,true);
 
 		//testa a tabela de atributos
 		if(isset($tabela)){

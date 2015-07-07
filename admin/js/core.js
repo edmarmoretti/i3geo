@@ -1745,7 +1745,7 @@ function core_listaDeLetras(onde,nomeFuncao,semLetras){
 	*/
 	var jsfiles = [];
 	var cssfiles = [];
-	if(typeof(i3GEO) !== 'undefined' && i3GEO.locaplic){
+	if(typeof(i3GEO) !== 'undefined' && i3GEO.configura.locaplic){
 		scriptLocation = "";
 		jsfiles = [];
 		//

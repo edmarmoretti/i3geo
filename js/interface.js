@@ -725,18 +725,18 @@ i3GEO.Interface =
 				removeAoAdicionar : true,
 				classeCadeado : "i3GEOiconeAberto",
 				autoPan : true,
-				autoPanAnimation: {
-					duration: 250
+				autoPanAnimation : {
+					duration : 250
 				},
-				width: '200px',
-				baloes: []
+				width : '200px',
+				baloes : []
 			},
 			balao : function(texto, completo, x, y) {
 				var icone, painel, b, cabecalho, conteudo, p = i3GEO.Interface.openlayers.BALAOPROP, removeBaloes;
 
-				removeBaloes = function(){
+				removeBaloes = function() {
 					var t, n = i3GEO.Interface.openlayers.BALAOPROP.baloes.length, i;
-					for(i=0; i<n; i++){
+					for (i = 0; i < n; i++) {
 						t = i3GEO.Interface.openlayers.BALAOPROP.baloes[i];
 						t.setPosition(undefined);
 						t.getElement().parentNode.innerHTML = "";
@@ -744,7 +744,7 @@ i3GEO.Interface =
 					i3GEO.Interface.openlayers.BALAOPROP.baloes = [];
 					return false;
 				};
-				if(p.classeCadeado === "i3GEOiconeAberto"){
+				if (p.classeCadeado === "i3GEOiconeAberto") {
 					removeBaloes();
 				}
 				painel = document.createElement("div");
@@ -753,7 +753,7 @@ i3GEO.Interface =
 
 				cabecalho = document.createElement("div");
 				cabecalho.className = "i3GEOCabecalhoInfoWindow";
-				//icone que indica se os baloes devem ficar na tela ou nao
+				// icone que indica se os baloes devem ficar na tela ou nao
 				icone = document.createElement("div");
 				icone.className = p.classeCadeado;
 				icone.onclick = function() {
@@ -767,7 +767,7 @@ i3GEO.Interface =
 					return false;
 				};
 				cabecalho.appendChild(icone);
-				//icone das propriedades
+				// icone das propriedades
 				icone = document.createElement("div");
 				icone.className = "i3GEOiconeFerramentas";
 				icone.style.left = "3px";
@@ -778,7 +778,7 @@ i3GEO.Interface =
 					return false;
 				};
 				cabecalho.appendChild(icone);
-				//icone mais info
+				// icone mais info
 				icone = document.createElement("div");
 				icone.className = "i3GEOiconeMais";
 				icone.style.left = "9px";
@@ -787,27 +787,29 @@ i3GEO.Interface =
 					return false;
 				};
 				cabecalho.appendChild(icone);
-				//icone x
+				// icone x
 				icone = document.createElement("div");
 				icone.className = "ol-popup-closer";
 				icone.onclick = removeBaloes;
 				cabecalho.appendChild(icone);
 
 				painel.appendChild(cabecalho);
-	
+
 				conteudo = document.createElement("div");
 				conteudo.innerHTML = texto;
 				painel.appendChild(conteudo);
-				
+
 				b = new ol.Overlay({
-					element: painel,
-					stopEvent: true,
-					autoPan: p.autoPan,
-					autoPanAnimation: p.autoPanAnimation
+					element : painel,
+					stopEvent : true,
+					autoPan : p.autoPan,
+					autoPanAnimation : p.autoPanAnimation
 				});
 				p.baloes.push(b);
 				i3geoOL.addOverlay(b);
-				b.setPosition([x,y]);
+				b.setPosition([
+					x, y
+				]);
 			},
 			/**
 			 * Redesenha o mapa atual
@@ -861,8 +863,10 @@ i3GEO.Interface =
 				ol.layer.Layer.prototype.getVisibility = function(v) {
 					this.getVisible(v);
 				};
-				i3geoOL.panTo = function(x,y){
-					this.getView().setCenter([x,y]);
+				i3geoOL.panTo = function(x, y) {
+					this.getView().setCenter([
+						x, y
+					]);
 				};
 				i3geoOL.getLayersByName = function(nome) {
 					var res = [], layers = this.getLayers(), n = layers.getLength(), i;
@@ -1395,17 +1399,15 @@ i3GEO.Interface =
 										source = new ol.source.TileWMS({
 											url : urllayer,
 											params : {
-												//'LAYERS' : camada.wmsname,
+												// 'LAYERS' : camada.wmsname,
 												'VERSION' : '1.1.0'
-												//'format' : camada.wmsformat
+											// 'format' : camada.wmsformat
 											},
 											projection : camada.wmssrs
 										});
 										source.set("tipoServico", "ImageWMS");
 										opcoes.singleTile = false;
 									}
-									source.set("name", camada.name);
-									opcoes.source = source;
 									opcoes.title = camada.tema;
 									opcoes.name = camada.name;
 									opcoes.isBaseLayer = false;
@@ -1463,11 +1465,12 @@ i3GEO.Interface =
 										});
 										source.set("tipoServico", "WMTS");
 									}
-									source.set("name", camada.name);
-									opcoes.source = source;
 									opcoes.title = camada.tema;
 									opcoes.name = camada.name;
 								}
+								source.set("name", camada.name);
+								source.set("parametrosUrl", {par : ""});
+								opcoes.source = source;
 								opcoes.isBaseLayer = false;
 								opcoes.visible = true;
 								if (i3GEO.arvoreDeCamadas.BARRAPROGRESSO === true) {
@@ -1526,14 +1529,6 @@ i3GEO.Interface =
 			 * Altera a posicao do layer de desenho de figuras, posicionando-o sobre todos os demais
 			 */
 			sobeLayersGraficos : function() {
-				//TODO remover?
-				return;
-				var nlayers = i3geoOL.getNumLayers(), layers = i3geoOL.layers, i;
-				for (i = 0; i < nlayers; i++) {
-					if (layers[i].CLASS_NAME == "OpenLayers.Layer.Vector" && layers[i].name != "Nenhum") {
-						i3geoOL.raiseLayer(i3geoOL.layers[i], nlayers);
-					}
-				}
 			},
 			/**
 			 * Inverte o modo de desenho para uso de TILES ou nao
@@ -1565,16 +1560,25 @@ i3GEO.Interface =
 			 * Modifica um parametro da URL de um layer
 			 */
 			alteraParametroLayers : function(parametro, valor) {
-				var layers = i3geoOL.layers, nlayers = layers.length, i, url, reg;
+				var layer, layers = i3GEO.arvoreDeCamadas.CAMADAS, nlayers = layers.length, i, param, source, k, url = "", n, j;
 				for (i = 0; i < nlayers; i += 1) {
-					if (layers[i].url) {
-						url = layers[i].url;
-						if (url.search("\\?") > 0) {
-							reg = new RegExp(parametro + "([=])+([a-zA-Z0-9_]*)");
-							layers[i].url = url.replace(reg, "");
-							layers[i].url = layers[i].url + "&" + parametro + "=" + valor;
-							layers[i].redraw();
+					layer = i3geoOL.getLayersByName(layers[i].name)[0];
+					if (layer && layer != undefined && layer.get("isBaseLayer") === false) {
+						url = "";
+						source = layer.getSource();
+						param = source.getProperties().parametrosUrl;
+						param[parametro] = valor;
+						chaves = i3GEO.util.listaTodasChaves(param);
+						n = chaves.length;
+						for(j = 0; j < n; j++){
+							k = chaves[j];
+							if(param[k] != "" && k != "par"){
+								url += "&" + k + "=" + param[k];
+							}
 						}
+						param.par = url;
+						console.info(url);
+						source.set("parametrosUrl",param);
 					}
 				}
 			},
@@ -1698,7 +1702,7 @@ i3GEO.Interface =
 			 * Atualiza o mapa atual, forcando o redesenho dos layers
 			 */
 			atualizaMapa : function() {
-				var camadas = i3GEO.arvoreDeCamadas.CAMADAS, n = camadas.lenght, i;
+				var camadas = i3GEO.arvoreDeCamadas.CAMADAS, n = camadas.length, i;
 				for (i = 0; i < n; i++) {
 					i3GEO.Interface.openlayers.atualizaTema("", camadas[i].name);
 				}
@@ -1707,28 +1711,37 @@ i3GEO.Interface =
 			 * Forca o redesenho de um layer especifico
 			 */
 			atualizaTema : function(retorno, tema) {
-				var layer = i3geoOL.getLayersByName(tema)[0], objtemas, funcaoLoad, servico, source;
+				var layer = i3geoOL.getLayersByName(tema), objtemas, funcaoLoad, servico, source;
+				if(layer.length == 0){
+					return "";
+				}
+				else{
+					layer = layer[0];
+				}
 				if (layer && layer != undefined) {
 					source = layer.getSource();
 					servico = source.getProperties().tipoServico;
-					if(servico === "WMTS"){
-						funcaoLoad = layer.getSource().getTileUrlFunction();
-						if(funcaoLoad){
+					if (servico === "WMTS") {
+						funcaoLoad = source.getTileUrlFunction();
+						if (funcaoLoad) {
+							// console.info("atualiza")
 							layer.getSource().setTileUrlFunction(function() {
+								// camada = i3GEO.arvoreDeCamadas.pegaTema(tema)
+								// if(camada && camada.cache && camada.cache === "nao"){
 								var url = funcaoLoad.apply(this, arguments);
 								url = url.replace("&cache=sim", "&cache=nao");
-								//console.info(layer.getSource().getProperties().tipoServico)
-								return url.split('&r=')[0] + '&r=' + Math.random();
+								return url.split('&r=')[0] + '&r=' + Math.random() + source.getProperties().parametrosUrl.par;
 							});
+
 						}
 					}
-					if(servico === "ImageWMS"){
-						funcaoLoad = layer.getSource().getImageLoadFunction();
-						if(funcaoLoad){
-							layer.getSource().setImageLoadFunction(function(image,src) {
+					if (servico === "ImageWMS") {
+						funcaoLoad = source.getImageLoadFunction();
+						if (funcaoLoad) {
+							layer.getSource().setImageLoadFunction(function(image, src) {
 								src = src.replace("&cache=sim", "&cache=nao");
 								src = src.split('&r=')[0] + '&r=' + Math.random();
-								image.getImage().src = src;
+								image.getImage().src = src + source.getProperties().parametrosUrl.par;
 							});
 						}
 					}
@@ -1881,7 +1894,7 @@ i3GEO.Interface =
 						y = metrica.lat;
 					}
 				}
-				i3geoOL.panTo(x,y);
+				i3geoOL.panTo(x, y);
 			}
 		},
 		/**
