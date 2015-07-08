@@ -710,13 +710,28 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$x = $_GET["X"];
 	$y = $_GET["Y"];
 	$z = $_GET["Z"];
-	$layer0 = $oMap->getlayer(0);
+	
+	if(file_exists($tema)){
+		$layer0 = $oMap->getlayer(0);
+		$layer0->set("status",MS_DEFAULT);
+		$layer0->setProjection("proj=latlong,a=6378137,b=6378137");
+	}
+	else{
+		//pode ter mais de um tema
+		$lista = explode(" ",$tema);
+		foreach($lista as $nomeLayer){
+			$layer0 = $oMap->getlayerbyname($nomeLayer);
+			$layer0->set("status",MS_DEFAULT);
+			$layer0->setProjection("proj=latlong,a=6378137,b=6378137");
+		}
+	}
 	//
 	//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
 	//
 	if ($layer0->getmetadata("cortepixels") != ""){
 		$cortePixels = $layer0->getmetadata("cortepixels");
 	}
+	
 	if($cache == true){
 		carregaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
 	}
@@ -742,9 +757,10 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$oMap->setsize(256,256);
 	$oMap->setExtent($poPoint1->x,$poPoint1->y,$poPoint2->x,$poPoint2->y);
 
-	$oMap->getlayer(0)->set("status",MS_DEFAULT);
+	
+	
 	$oMap->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
-	$layer0->setProjection("proj=latlong,a=6378137,b=6378137");
+	
 	//
 	//se o layer foi marcado para corte altera os parametros para ampliar o mapa
 	//antes de gerar a imagem

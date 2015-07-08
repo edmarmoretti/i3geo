@@ -180,7 +180,7 @@ i3GEOF.storymap =
 			var b = new YAHOO.widget.Button("i3GEOstobotao1", {
 				onclick : {
 					fn : function() {
-						window.open(i3GEO.configura.locaplic + "/ferramentas/storymap/default.php?tema=" + i3GEOF.storymap.tema);
+						window.open(i3GEO.configura.locaplic + "/ferramentas/storymap/default.php?layers=&tema=" + i3GEOF.storymap.tema);
 					}
 				}
 			});

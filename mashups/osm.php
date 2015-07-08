@@ -357,7 +357,13 @@ if($temas != ""){
 						}
 						// nesse caso o layer e adicionado como TMS
 						// tms leva os parametros do TMS
-						$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png", ferramentas :'.$ferramentas.'})';
+						//$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png", ferramentas :'.$ferramentas.'})';
+						$objOpenLayers[] = 'new OpenLayers.Layer.OSM("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&Z=${z}&X=${x}&Y=${y}",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png", ferramentas :'.$ferramentas.'})';
+						//layer = new OpenLayers.Layer.OSM(camada.name, urllayer + "&Z=${z}&X=${x}&Y=${y}", {
+						//	isBaseLayer : false
+						//});
+						
+						
 						// cria um clone WMS para efeitos de getfeatureinfo
 						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,transitionEffect : null,singleTile:true,visibility:false,isBaseLayer:false, ferramentas :'.$ferramentas.'})';
 					}

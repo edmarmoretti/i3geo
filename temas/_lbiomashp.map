@@ -11,7 +11,7 @@ MAP
       "CLASSE"	"SIM"
       "permitekmz"	"nao"
       "ITENSDESC"	"Bioma Teste de acentuação"
-      #"TILES"	"NAO"
+      "TILES"	"SIM"
       "ESCALA"	"1000000"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "permitedownload"	"sim"
@@ -31,7 +31,7 @@ MAP
     STATUS OFF
     TEMPLATE "none.htm"
     TILEITEM "location"
-    OPACITY 40
+    OPACITY 100
     TYPE POLYGON
     UNITS METERS
     CLASS
