@@ -77,6 +77,8 @@ ogc.php?tema=bioma
 ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 
 */
+set_time_limit(0);
+ini_set('memory_limit', '512M');
 $_GET = array_merge($_GET,$_POST);
 //
 //caso nenhum parametros tenha sido enviado
@@ -167,6 +169,7 @@ if(!file_exists($tema)){
 	$_GET["layers"] = $tema;
 	$_GET["LAYERS"] = $tema;
 }
+
 $layers = $tema;
 //
 //verifica o OUTPUTFORMAT e o cache de arquivo
@@ -285,12 +288,14 @@ $arrayget["X"] = "";
 $arrayget["Y"] = "";
 $arrayget["tms"] = "";
 $nomeMapfileTmp = $dir_tmp."/ogc_".md5(implode("",$arrayget))."_".$agora.".map";
+
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
 $cortePixels = 0;
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
 else{
+	
 	if(empty($ogcwsmap)){
 		$oMap = ms_newMapobj($locaplic."/aplicmap/ogcwsv".$versao.".map");
 	}
@@ -323,6 +328,7 @@ else{
 	}
 	$e = $oMap->extent;
 	$extensaoMap = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
+	
 	//gera o mapa
 	if ($tema != ""){
 		$listatema = explode(" ",$tema);
@@ -335,6 +341,7 @@ else{
 			$temai3geo = false;
 			$nmap->setmetadata("ows_enable_request","*");
 		}
+		
 		foreach ($listatema as $tx){
 			$extensao = ".map";
 			if($temai3geo == true && file_exists($locaplic."/temas/".$tx.".php")){
@@ -344,10 +351,13 @@ else{
 				$extensao = ".gvp";
 			}
 			if($extensao == ".map"){
+				
 				//cria o mapfile com base no sistema de metadados estatisticos
 				//verifica se o id_medida_variavel existe no mapfile e nao foi passado como um parametro
-				if(!isset($id_medida_variavel) && $temai3geo == true){
+				if(!isset($id_medida_variavel) && $temai3geo == true){				
+					
 					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
+					
 					$l = $nmap->getlayer(0);
 					$teste = $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
 					if($teste != "" && $l->data == ""){
@@ -364,10 +374,12 @@ else{
 					$nmap->setmetadata("ows_enable_request","*");
 					$req->setParameter("LAYERS", "ogcmetaestat".$id_medida_variavel);
 				}
+				
 				if($temai3geo == true){
 					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
 					$nmap->setmetadata("ows_enable_request","*");
 				}
+				
 				if($temai3geo == false || empty($layers)){
 					$ts = $nmap->getalllayernames();
 					$nmap->setmetadata("ows_enable_request","*");
@@ -375,13 +387,16 @@ else{
 				else{
 					$ts = explode(",",str_replace(" ",",",$layers));
 				}
+				
 				foreach ($ts as $t){
 					$l = $nmap->getlayerbyname($t);
 					if($l == ""){
 						$l = $nmap->getlayer(0);
 					}
 					$permite = $l->getmetadata("permiteogc");
+					
 					if(strtolower($permite) != "nao"){
+						
 						//necess&aacute;rio pq o mapfile pode ter todos os layers como default
 						if($temai3geo == false){
 							$l->set("status",MS_OFF);
@@ -632,12 +647,14 @@ else{
 	//
 	//caso seja download ou json ou csv
 	//
+	
 	processaOutputformatMapfile();
 
 	$oMap->save($nomeMapfileTmp);
 	validaAcessoTemas($nomeMapfileTmp,true);
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
+
 if(ob_get_contents ()){
 	ob_end_clean();
 }
@@ -831,6 +848,7 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 		}
 	}
 }
+
 if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
 	$l = $oMap->getlayer(0);
 	if($req->getValueByName("TYPENAME") == "" || $req->getValueByName("TYPENAME") == "undefined"){
@@ -852,7 +870,6 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo"){
 		$_GET["SRS"] = "EPSG:3857";
 	}
 }
-
 ms_ioinstallstdouttobuffer();
 //
 //verifica parametro outputformat e ajusta a requisicao
@@ -885,15 +902,19 @@ if(strtolower($OUTPUTFORMAT) == "geojson" || strtolower($OUTPUTFORMAT) == "json"
 		exit;
 	}
 	$oMap->owsdispatch($req);
+	
 	$contenttype = ms_iostripstdoutbuffercontenttype();
 	ms_iostripstdoutbuffercontentheaders();
 	//grava em disco
 	$contents = ms_iogetstdoutbufferstring();
 	file_put_contents($arq,$contents);
 	//envia para download
+	
 	header("Content-type: application/json; subtype=geojson");
+	
 	ms_iogetStdoutBufferBytes();
 	ms_ioresethandlers();
+	
 	exit;
 }
 if(strtolower($OUTPUTFORMAT) == "shape-zip"){

@@ -5,26 +5,29 @@ MAP
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
     METADATA
-      "TIP"	"TIPO,NOMELOC,ANOCRIA"
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	"SIM"
-      "CLASSE"	"SIM"
+      "TIP"	"TIPO,NOMELOC,ANOCRIA"
       "LTEMPOITEMDESCRICAO"	"TIPO"
+      "CLASSE"	"SIM"
       "LTEMPOITEMINICIO"	"ANOCRIA"
-      "permitekmz"	"sim"
       "LTEMPOITEMTIP"	"ANOCRIA"
-      "ITENSDESC"	"Município,TIPO,Localidade,ANOCRIA"
+      "permitekmz"	"sim"
       "LTEMPOITEMTITULO"	"NOMELOC"
-      "ITENSLINK"	",,,"
+      "ITENSDESC"	"Município,TIPO,Localidade,ANOCRIA"
       "TILES"	"SIM"
-      "permitedownload"	"sim"
+      "ITENSLINK"	",,,"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "LTEMPOFORMATODATA"	"iso8601"
+      "permitedownload"	"sim"
       "permitecomentario"	"SIM"
+      "metaestat"	""
       "download"	"SIM"
       "itembuscarapida"	"NOMELOC"
       "ITENS"	"NOMEMUN,TIPO,NOMELOC,ANOCRIA"
-      "permitekml"	"sim"
-      "permiteogc"	"sim"
       "transitioneffect"	"NAO"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
       "TEMA"	"Localidades (usar com timeline) para teste"
       "cortepixels"	"30"
       "LTEMPOCONVENCODE"	"SIM"
@@ -34,6 +37,7 @@ MAP
     PROCESSING "POLYLINE_NO_CLIP=True"
     STATUS DEFAULT
     TEMPLATE "none.htm"
+    TILEITEM "location"
     TYPE POINT
     UNITS METERS
     CLASS
@@ -68,4 +72,6 @@ MAP
       TITLE ""
     END # CLASS
   END # LAYER
+
 END # MAP
+
