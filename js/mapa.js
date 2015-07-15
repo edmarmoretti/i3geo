@@ -773,7 +773,7 @@ i3GEO.mapa =
 						+ "<div class='i3GeoTituloJanela'>"
 						+ $trad("p3")
 						+ "</div>";
-				janela = i3GEO.janela.cria(largura + "px", altura + "px", "", "", "", titulo, "wlegenda", false, "hd", cabecalho, minimiza);
+				janela = i3GEO.janela.cria(largura + "px", altura + "px", "", "", "", titulo, "wlegenda", false, "hd", cabecalho, minimiza,"","","","","nao");
 				$i("wlegenda_corpo").style.backgroundColor = "white";
 				i3GEO.mapa.legendaHTML.ID = "wlegenda_corpo";
 				i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [

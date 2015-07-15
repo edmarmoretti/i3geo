@@ -1,0 +1,4 @@
+<FilesMatch ".*\.(map)$" >
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>

@@ -778,7 +778,6 @@ var i3GEO = {
 			if ($i("mensagemt")) {
 				$i("mensagemt").value = i3GEO.parametros.mapexten;
 			}
-
 			i3GEO.eventos.navegaMapa();
 			//
 			// verifica se deve ser feito o zoom em algum tema

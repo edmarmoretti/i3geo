@@ -26,7 +26,6 @@ i3GEOF.gradeCoord = {
 		dicionario["asp"] = '"';
 		return dicionario;
 	},
-
 	/*
 	Function: inicia
 
@@ -100,12 +99,14 @@ i3GEOF.gradeCoord = {
 	<GRADECOORD>
 	*/
 	executa: function(){
-		if (($i("i3GEOgradeCoordintervalo").value == 0) || ($i("i3GEOgradeCoordintervalo").value == ""))
-		{i3GEO.janela.tempoMsg($trad('distLinhas',i3GEOF.gradeCoord.dicionario));}
+		if (($i("i3GEOgradeCoordintervalo").value == 0) || ($i("i3GEOgradeCoordintervalo").value == "")){
+			i3GEO.janela.tempoMsg($trad('distLinhas',i3GEOF.gradeCoord.dicionario));
+		}
 		else
 		{
-			if(i3GEOF.gradeCoord.aguarde.visibility === "visible")
-			{return;}
+			if(i3GEOF.gradeCoord.aguarde.visibility === "visible"){
+				return;
+			}
 			i3GEOF.gradeCoord.aguarde.visibility = "visible";
 			var temp = function(){
 				i3GEO.atualiza();

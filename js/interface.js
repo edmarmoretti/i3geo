@@ -1373,13 +1373,12 @@ i3GEO.Interface =
 								// layers marcados com o metadata wmstile com valor
 								// 1 sao inseridos com Layer.TileCache
 								// i3GEO.Interface.openlayers.googleLike === false
-								// &&
 								// FIXME testar isso
 								if (i3GEO.Interface.openlayers.googleLike === false && camada.connectiontype === 7
 									&& camada.wmsurl !== ""
 									&& camada.usasld.toLowerCase() != "sim") {
 									urllayer = camada.wmsurl;
-									if (camada.wmstile == 10) {
+									if (camada.wmstile == 10){
 										// TODO testar isso
 										source = new ol.source.WMTS({
 											url : urllayer,
@@ -1414,6 +1413,7 @@ i3GEO.Interface =
 									opcoes.visible = true;
 								} else {
 									// verifica se havera apenas um tile
+									// 10 e do tipo grid de coordenadas
 									if (camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim"
 										|| camada.connectiontype === 10
 										|| (camada.type === 0 && camada.cache === "nao")
@@ -1447,7 +1447,8 @@ i3GEO.Interface =
 												'LAYERS' : camada.name,
 												'VERSION' : '1.1.0'
 											},
-											projection : opcoes.projection
+											projection : opcoes.projection,
+											ratio : 1
 										});
 										source.set("tipoServico", "ImageWMS");
 									} else {
