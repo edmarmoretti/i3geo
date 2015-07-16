@@ -5,9 +5,29 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>i3GEO - OpenLayers+OSM</title>
-	<script src="../classesjs/i3geonaocompacto.js"></script>
-	<script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
-	<link rel="stylesheet" type="text/css" href="../css/black.css">
+<script src="../classesjs/i3geonaocompacto.js"></script>
+<script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
+<link rel="stylesheet" type="text/css" href="../css/black.css">
+<style>
+.ol-zoom {
+	padding-left: 4px;
+	padding-right: 4px;
+	top: 2em;
+}
+
+.ol-zoomslider {
+	top: 6em;
+}
+
+.ol-attribution img {
+	display: none;
+}
+
+.ol-attribution.ol-uncollapsible {
+	height: 2.1em;
+	right: 24px;
+}
+</style>
 </head>
 <body id="i3geo" style='margin-left: 7px; background: white;'>
 	<!-- inclui o nome do usuario logado -->
@@ -59,12 +79,16 @@
 	</table>
 	<table id="i3GEOlogoMarca" style='margin: 0px auto; box-shadow: 0 1px 13px gray; border-radius: 5px;'>
 		<tr>
-			<td><div id=versaoi3geo></div>
+			<td>
+				<div id=versaoi3geo></div>
 				<h2 style="font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2>
-				<h3 style="font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3></td>
+				<h3 style="font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3>
+			</td>
 		</tr>
 		<tr>
-			<td style="padding: 10px;"><img style="width: 560px; height: 81px" alt="" src='../imagens/logo_inicio.png'></td>
+			<td style="padding: 10px;">
+				<img style="width: 560px; height: 81px" alt="" src='../imagens/logo_inicio.png'>
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -82,7 +106,7 @@
 			<div id="i3GEOguiaMovelConteudo" style='overflow: auto; display: none; position: absolute; border-color: gray; border-width: 0px 0 0px 0px; left: 0px; height: 0px; background-color: white'>
 				<div id='guia1obj' style='display: none;'>
 					<!-- Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico -->
-					<div style='left: 5px; top: 10px;width:150px;' id=buscaRapida></div>
+					<div style='left: 5px; top: 10px; width: 150px;' id=buscaRapida></div>
 					<!--	Esta div acrescenta a lista de propriedades do mapa -->
 					<div id=listaPropriedades style='top: 15px;'></div>
 					<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
@@ -91,7 +115,8 @@
 					<div id=listaTemas style='top: 15px;'></div>
 				</div>
 				<div id='guia2obj' style='display: none;'>
-					Aguarde...<img alt="" src="../imagens/branco.gif" width=248 />
+					Aguarde...
+					<img alt="" src="../imagens/branco.gif" width=248 />
 				</div>
 				<div id='guia4obj' style='display: none; text-align: left'>
 					<div id='legenda' style='text-align: left'></div>
@@ -149,18 +174,123 @@
 		i3GEO.janela.TRANSICAOSUAVE = true;
 		OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		(function() {
-			//http://maps.stamen.com/#watercolor/12/37.7706/-122.3782
+			function getTileURL(bounds) {
+		           var res = i3geoOL.getResolution();
+		           //console.info(bounds)
+		            var x = Math.round((bounds.left - i3geoOL.maxExtent.left) / (res * 256));
+		            var y = Math.round((i3geoOL.maxExtent.top - bounds.top) / (res * 256));
+		            var z = i3geoOL.getZoom();
+		            //var limit = Math.pow(2, z);
+		            
+		            //if (y < 0 || y >= limit) {
+		            //    return OpenLayers.Util.getImagesLocation() + "404.png";
+		            //} else {
+		                x = ((x % limit) + limit) % limit;
+		                return this.url + "x=" + x + "&y=" + y + "&z=" + z;    //+ "&ss=" + x + "-" + y + "-" + z
+		            //}
+			}
+			
+			var attribOSMData = 'Map Data: &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors';
+			var attribMapQuestOSM = attribOSMData + ', Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
+			var attribMapQuestAerial = 'Map Data: &copy; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
+			var attribOpenCycleMap = 'Map Data: &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors';
+			var attribDEMData = '<a href="http://srtm.csi.cgiar.org/">SRTM</a>; ASTER GDEM is a product of <a href="http://www.meti.go.jp/english/press/data/20090626_03.html">METI</a> and <a href="https://lpdaac.usgs.gov/products/aster_policies">NASA</a>';
+			var attribStamen = 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA';
+			var mapSurfer = 'Map data © OpenStreetMap contributors, Imagery GIScience Research Group @ Heidelberg University';
+			
 			var aquarela = new OpenLayers.Layer.OSM("Aquarela",
 					"http://tile.stamen.com/watercolor/${z}/${x}/${y}.jpg", {
 						isBaseLayer : true,
-						visibility : false
+						visibility : false,
+						attribution: attribStamen
 					});
+			
+			var toner = new OpenLayers.Layer.OSM("Toner",
+				"http://tile.stamen.com/toner/${z}/${x}/${y}.jpg", {
+					isBaseLayer : true,
+					visibility : false,
+					attribution: attribStamen
+				});
+			
+			var tonerlite = new OpenLayers.Layer.OSM("Toner lite",
+				"http://tile.stamen.com/toner-lite/${z}/${x}/${y}.jpg", {
+					isBaseLayer : true,
+					visibility : false,
+					attribution: attribStamen
+				});
+			
 			var osm = new OpenLayers.Layer.OSM("OSM",
 					"http://tile.openstreetmap.org/${z}/${x}/${y}.png", {
 						isBaseLayer : true,
-						visibility : true
+						visibility : true,
+						attribution: attribOSMData
 					});
-			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ osm, aquarela ];
+			
+
+			var layMSNOsmRoad = new OpenLayers.Layer.TMS("OSM Roads", "http://korona.geog.uni-heidelberg.de/tiles/roads/", {
+				type : 'png',
+				getURL : getTileURL,
+				isBaseLayer : true,
+				visibility : false,
+				attribution : mapSurfer,
+				numZoomLevels: 20
+				//tileOrigin: new OpenLayers.LonLat(0,0)
+			});
+			
+			var layMSNOsmRoadsGray =
+				new OpenLayers.Layer.TMS("OSM Roads Grayscale", "http://korona.geog.uni-heidelberg.de/tiles/roadsg/", {
+					type : 'png',
+					getURL : getTileURL,
+					displayOutsideMaxExtent : true,
+					isBaseLayer : true,
+					visibility : false,
+					attribution : mapSurfer
+				});
+			
+			var layMSNOsmBoundariesOverlay =
+				new OpenLayers.Layer.TMS("OSM Admin Boundaries (experimental)", "http://korona.geog.uni-heidelberg.de/tiles/adminb/", {
+					type : 'png',
+					getURL : getTileURL,
+					displayOutsideMaxExtent : true,
+					isBaseLayer : true,
+					visibility : false,
+					attribution : mapSurfer
+				});
+			
+			var layMSNOsmHybrid = new OpenLayers.Layer.TMS("OSM Semitransparent", "http://korona.geog.uni-heidelberg.de/tiles/hybrid/", {
+				type : 'png',
+				getURL : getTileURL,
+				visibility : false,
+				isBaseLayer : true,
+				attribution : mapSurfer
+			});
+			
+			var layMSNAsterHillshade =
+				new OpenLayers.Layer.TMS(
+					"ASTER GDEM & SRTM Hillshade (experimental)",
+					"http://korona.geog.uni-heidelberg.de/tiles/asterh/",
+					{
+						type : 'png',
+						getURL : getTileURL,
+						displayOutsideMaxExtent : true,
+						isBaseLayer : true,
+						visibility : false,
+						attribution : mapSurfer
+					});
+			
+			var layMSNAsterContours =
+				new OpenLayers.Layer.TMS("ASTER GDEM Contour Lines (zoom 13-17)", "http://korona.geog.uni-heidelberg.de/tiles/asterc/", {
+					type : 'png',
+					getURL : getTileURL,
+					displayOutsideMaxExtent : true,
+					isBaseLayer : true,
+					visibility : false,
+					attribution : mapSurfer
+				});
+
+			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [
+				osm, aquarela, toner, tonerlite, layMSNOsmRoad,layMSNOsmRoadsGray,layMSNOsmBoundariesOverlay,layMSNOsmHybrid,layMSNAsterHillshade,layMSNAsterContours
+			];
 		})();
 		i3GEO.Interface.openlayers.googleLike = true;
 		i3GEO.inicia();

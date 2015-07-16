@@ -168,6 +168,16 @@
 
 		OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		(function() {
+			var eng = new OpenLayers.Layer.ArcGIS93Rest(
+				"ESRI National Geographic",
+				"http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/export",
+				{
+					format : "jpeg"
+				}, {
+					isBaseLayer : true,
+					visibility : true,
+					attribution: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
+				});
 			var oce = new OpenLayers.Layer.ArcGIS93Rest(
 					"ESRI Ocean Basemap",
 					"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
@@ -175,7 +185,8 @@
 						format : "jpeg"
 					}, {
 						isBaseLayer : true,
-						visibility : false
+						visibility : false,
+						attribution: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
 					});
 			var ims = new OpenLayers.Layer.ArcGIS93Rest(
 					"ESRI Imagery World 2D",
@@ -184,7 +195,8 @@
 						format : "jpeg"
 					}, {
 						isBaseLayer : true,
-						visibility : false
+						visibility : false,
+						attribution : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
 					});
 			var wsm = new OpenLayers.Layer.ArcGIS93Rest(
 					"ESRI World Street Map",
@@ -193,7 +205,8 @@
 						format : "jpeg"
 					}, {
 						isBaseLayer : true,
-						visibility : true
+						visibility : false,
+						attribution : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
 					});
 			var bra = new OpenLayers.Layer.WMS(
 					"Base carto MMA",
@@ -215,13 +228,14 @@
 						// set if different than the bottom left of map.maxExtent
 						tileOrigin : new OpenLayers.LonLat(-180, -90),
 						isBaseLayer : true,
-						visibility : false
+						visibility : false,
+						attribution : '&copy; <a href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
 					});
 
-			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ oce, ims, wsm, tms,
+			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ eng, oce, ims, wsm, tms,
 					bra ];
 		})();
-
+		
 		i3GEO.inicia();
 	</script>
 </body>

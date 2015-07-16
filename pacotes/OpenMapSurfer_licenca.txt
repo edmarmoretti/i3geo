@@ -1,0 +1,201 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: edmar.moretti@gmail.com
+Received: by 10.27.174.145 with SMTP id x139csp173449wle;
+        Thu, 16 Jul 2015 05:30:49 -0700 (PDT)
+X-Received: by 10.194.236.199 with SMTP id uw7mr19888241wjc.92.1437049849319;
+        Thu, 16 Jul 2015 05:30:49 -0700 (PDT)
+Return-Path: <maxim.rylov@geog.uni-heidelberg.de>
+Received: from relay2.uni-heidelberg.de (relay2.uni-heidelberg.de. [129.206.210.211])
+        by mx.google.com with ESMTPS id x4si13462399wjq.202.2015.07.16.05.30.49
+        for <edmar.moretti@gmail.com>
+        (version=TLSv1 cipher=RC4-SHA bits=128/128);
+        Thu, 16 Jul 2015 05:30:49 -0700 (PDT)
+Received-SPF: pass (google.com: domain of maxim.rylov@geog.uni-heidelberg.de designates 129.206.210.211 as permitted sender) client-ip=129.206.210.211;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of maxim.rylov@geog.uni-heidelberg.de designates 129.206.210.211 as permitted sender) smtp.mail=maxim.rylov@geog.uni-heidelberg.de
+Received: from ix.urz.uni-heidelberg.de (cyrus-portal01.urz.uni-heidelberg.de [129.206.100.176])
+	by relay2.uni-heidelberg.de (8.13.8/8.13.8) with ESMTP id t6GCUm61029973
+	for <edmar.moretti@gmail.com>; Thu, 16 Jul 2015 14:30:48 +0200
+Received: from extmail.urz.uni-heidelberg.de (extmail.urz.uni-heidelberg.de [129.206.100.140])
+	by ix.urz.uni-heidelberg.de (Postfix) with ESMTPS id ABCAD20D9924
+	for <edmar.moretti@gmail.com>; Thu, 16 Jul 2015 14:30:48 +0200 (CEST)
+Received: from [129.206.98.73] (giscience018.geog.uni-heidelberg.de [129.206.98.73])
+	by extmail.urz.uni-heidelberg.de (8.13.4/8.13.1) with ESMTP id t6GCUoSc016501
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO)
+	for <edmar.moretti@gmail.com>; Thu, 16 Jul 2015 14:30:50 +0200
+Subject: Re: TMS use
+To: Moretti Edmar <edmar.moretti@gmail.com>
+References: <CALsLRNAeWHr6esj8Fz_-v_1Z8QUx38JKN09Q9cPy1Wcg7R5=OQ@mail.gmail.com>
+From: Maxim Rylov <maxim.rylov@geog.uni-heidelberg.de>
+Message-ID: <55A7A529.8090608@geog.uni-heidelberg.de>
+Date: Thu, 16 Jul 2015 14:35:53 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101
+ Thunderbird/38.1.0
+MIME-Version: 1.0
+In-Reply-To: <CALsLRNAeWHr6esj8Fz_-v_1Z8QUx38JKN09Q9cPy1Wcg7R5=OQ@mail.gmail.com>
+Content-Type: multipart/alternative;
+ boundary="------------090803020409050403020708"
+
+This is a multi-part message in MIME format.
+--------------090803020409050403020708
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Dear Mr. Moretti,
+
+The permission is granted to you for using OpenMapSurfer service in your 
+web application.
+To acknowledge our web map service, you need to provide the following 
+attributions:
+Map data Â© OpenStreetMap <http://osm.org> contributors, Imagery 
+GIScience Research Group @ Heidelberg University 
+<http://giscience.uni-hd.de/>
+
+Kind regards,
+Maxim Rylov
+
+On 7/11/2015 11:45 PM, Moretti Edmar wrote:
+> Dear,
+>
+> My name is Edmar Moretti.
+> I am a geographer and work in Brazil in developing a software called 
+> i3Geo.
+> i3Geo is a free software developed by the Brazilian government. More 
+> details at: http://i3geo.com.br/i3geo and 
+> https://portal.softwarepublico.gov.br/social/i3geo/
+> I use OSM in some of the maps that are provided to end users. I would 
+> like to add services (TMS) that your university offers as layers on 
+> these maps.
+> The license of these TMS allows me to do that?
+>
+> i3Geo is used and installed in different public and private 
+> institutions, mainly in Brazil. If authorized use, these institutions 
+> are likely to use layers in your own maps.
+>
+> The use of these TMS services will be important for us. I hope we can 
+> use them.
+>
+> Thank you and sorry for my bad English.
+>
+> I got your contact address in http://129.206.74.245/contact.html
+>
+>
+> -- 
+> Edmar Moretti
+> http://www.edmarmoretti.com.br
+> Skype: edmar.moretti
+> gTalk: edmar.moretti
+
+
+
+--------------090803020409050403020708
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  </head>
+  <body bgcolor="#FFFFFF" text="#000000">
+    <div class="moz-cite-prefix">Dear Mr. Moretti,<br>
+      <br>
+      The permission is granted to you for using OpenMapSurfer service
+      in your web application.<br>
+      To acknowledge our web map service, you need to provide the
+      following attributions:<br>
+      Map data Â© <a moz-do-not-send="true" href="http://osm.org">OpenStreetMap</a>
+      contributors, Imagery <a moz-do-not-send="true"
+        href="http://giscience.uni-hd.de/" target="_blank">GIScience
+        Research Group @ Heidelberg University</a><br>
+      <br>
+      Kind regards,<br>
+      Maxim Rylov<br>
+      <br>
+      On 7/11/2015 11:45 PM, Moretti Edmar wrote:<br>
+    </div>
+    <blockquote
+cite="mid:CALsLRNAeWHr6esj8Fz_-v_1Z8QUx38JKN09Q9cPy1Wcg7R5=OQ@mail.gmail.com"
+      type="cite">
+      <div dir="ltr">
+        <div><span tabindex="-1" id="result_box" class="" lang="en"><span
+              class="">Dear,</span><br>
+            <br>
+            <span class="">My name is</span> <span class="">Edmar</span>
+            <span class="">Moretti</span>.<br>
+            <span class="">I am</span> <span class="">a geographer and</span>
+            <span class="">work</span> <span class="">in Brazil</span>
+            <span class="">in developing a</span> <span class="">software</span>
+            <span class="">called</span> <span class="">i3Geo</span>.<br>
+            <span class="">i3Geo</span> <span class="">is a free</span>
+            <span class="">software</span> <span class="">developed</span>
+            <span class="">by the Brazilian government</span>. <span
+              class="">More</span> <span class="">details at:</span> <span
+              class=""><a moz-do-not-send="true"
+                href="http://i3geo.com.br/i3geo">http://i3geo.com.br/i3geo</a></span>
+            <span class="">and</span> <span class=""><a
+                moz-do-not-send="true"
+                href="https://portal.softwarepublico.gov.br/social/i3geo/"><a class="moz-txt-link-freetext" href="https://portal.softwarepublico.gov.br/social/i3geo/">https://portal.softwarepublico.gov.br/social/i3geo/</a></a></span><br>
+            <span class="">I use</span> <span class="">OSM</span> <span
+              class="">in</span> <span class="">some of the</span> <span
+              class="">maps that</span> <span class="">are provided</span>
+            <span class="">to end users.</span> <span class="">I</span>
+            <span class="">would like to add</span> <span class="">services
+              (</span>TMS) <span class="">that</span> <span class="">your
+              university</span> <span class="">offers</span> <span
+              class="">as layers</span> <span class="">on these maps</span>.<br>
+            <span class="">The</span> <span class="">license</span> <span
+              class="">of these</span> <span class="">TMS</span> <span
+              class="">allows</span> <span class="">me to do</span> <span
+              class="">that?</span><br>
+            <br>
+            <span class="">i3Geo</span> <span class="">is</span> <span
+              class="">used and installed</span> <span class="">in
+              different</span> <span class="">public and private
+              institutions</span>, mainly in Brazil. <span class="">If
+              authorized</span> <span class="">use,</span> <span
+              class="">these institutions</span> <span class="">are
+              likely to use</span> <span class="">layers</span> <span
+              class="">in</span> <span class="">your own maps</span>.<br>
+            <br>
+            <span class="">The</span> <span class="">use of these</span>
+            <span class="">TMS</span> <span class="">services</span> <span
+              class="">will be important</span> <span class="">for us.</span>
+            <span class="">I hope we can</span> <span class="">use
+              them.</span><br>
+            <br>
+            <span class="">Thank you and</span> <span class="">sorry</span>
+            <span class="">for</span> <span class="">my bad</span> <span
+              class="">English.</span><br>
+            <br>
+            <span class="">I got</span> <span class="">your contact</span>
+            <span class="">address</span> <span class="">in</span> <span
+              class=""><a moz-do-not-send="true"
+                href="http://129.206.74.245/contact.html">http://129.206.74.245/contact.html</a></span></span><br>
+        </div>
+        <div><span tabindex="-1" class="" lang="en"><span class=""><br>
+            </span></span></div>
+        <div><span tabindex="-1" class="" lang="en"><span class=""><br>
+            </span></span></div>
+        -- <br>
+        <div class="gmail_signature">
+          <div dir="ltr">
+            <div>
+              <div>
+                <div>Edmar Moretti<br>
+                </div>
+                <a moz-do-not-send="true"
+                  href="http://www.edmarmoretti.com.br" target="_blank">http://www.edmarmoretti.com.br</a><br>
+              </div>
+              Skype: edmar.moretti<br>
+            </div>
+            gTalk: edmar.moretti<br>
+          </div>
+        </div>
+      </div>
+    </blockquote>
+    <br>
+    <br>
+  </body>
+</html>
+
+--------------090803020409050403020708--

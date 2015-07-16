@@ -945,7 +945,7 @@ i3GEO.Interface =
 				//
 				var montaMapa =
 					function() {
-						var pz, temp, layers, i, texto, estilo, layersn, openlayers = i3GEO.Interface.openlayers;
+						var at, pz, temp, layers, i, texto, estilo, layersn, openlayers = i3GEO.Interface.openlayers;
 						i3geoOL.updateSize();
 
 						openlayers.registraEventos();
@@ -967,6 +967,11 @@ i3GEO.Interface =
 							pz = new ol.control.ScaleLine(openlayers.SCALELINE);
 							pz.setMap(i3geoOL);
 						}
+						at = new ol.control.Attribution({
+							collapsible: false
+						});
+						at.setMap(i3geoOL);
+
 						openlayers.criaLayers();
 						//
 						// insere a lista de layers de fundo

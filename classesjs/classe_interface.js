@@ -785,7 +785,6 @@ i3GEO.Interface =
 				if (i3GEO.Interface.TABLET === true) {
 					i3GEO.Interface.openlayers.parametrosMap.theme = null;
 
-					i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.Attribution());
 					i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.TouchNavigation({
 						dragPanOptions : {
 							interval : 100,
@@ -810,6 +809,9 @@ i3GEO.Interface =
 						fractionalZoom : false
 					};
 				}
+				
+				i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.Attribution());
+				
 				i3geoOL = new OpenLayers.Map('openlayers', i3GEO.Interface.openlayers.parametrosMap);
 			},
 			/**
