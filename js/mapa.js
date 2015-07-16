@@ -1389,7 +1389,12 @@ i3GEO.mapa =
 					return;
 				}
 				var ntemas, etiquetas, j, retorna, x = objposicaocursor.ddx, y = objposicaocursor.ddy;
-
+				if(x === -1 || y === -1){
+					return;
+				}
+				//para evitar duplo clique
+				objposicaocursor.ddx = -1;
+				objposicaocursor.ddy = -1;
 				ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
 				etiquetas = false;
 				for (j = 0; j < ntemas; j += 1) {

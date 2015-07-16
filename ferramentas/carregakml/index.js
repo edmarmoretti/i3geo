@@ -150,12 +150,19 @@ i3GEOF.carregakml = {
 	Adiciona o KML ao mapa
 	*/
 	adiciona: function(){
-		if(i3GEOF.carregakml.aguarde.visibility === "visible")
-		{return;}
-		var url = $i("i3GEOcarregakmlurl").value;
+		var url, temp, cp, p;
+		if(i3GEOF.carregakml.aguarde.visibility === "visible"){
+			return;
+		}
+		url = $i("i3GEOcarregakmlurl").value;
 		if(url !== ""){
-			i3GEOF.carregakml.aguarde.visibility = "visible";
-			i3GEO.Interface[i3GEO.Interface.ATUAL].adicionaKml(false,url,url,true);
+			temp = function(retorno){
+				i3GEO.atualiza();
+			};
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			p = i3GEO.configura.locaplic+"/ferramentas/carregakml/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=crialayer&url="+url;
+			cp.call(p,"foo",temp);
 			i3GEOF.carregakml.aguarde.visibility = "hidden";
 		}
 	}

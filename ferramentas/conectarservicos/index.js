@@ -154,7 +154,7 @@ i3GEOF.conectarservicos =
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante : function() {
-		var minimiza, cabecalho, janela, divid, temp, titulo;
+		var minimiza, cabecalho, janela, divid, titulo;
 		if($i("i3GEOF.conectarservicos")){
 			return;
 		}

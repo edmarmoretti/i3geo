@@ -194,7 +194,7 @@ i3GEOF.mascara = {
 			+ "&funcao=aplicar"
 			+ "&tema=" + tema
 			+ "&mascarar=" + mascarar.join(",");
-		cp = new cpaint()
+		cp = new cpaint();
 		fim = function(retorno){
 			i3GEO.Interface.atualizaMapa();
 			i3GEOF.mascara.aguarde.visibility = "hidden";

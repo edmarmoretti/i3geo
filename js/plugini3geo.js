@@ -894,66 +894,51 @@ i3GEO.pluginI3geo =
 					return [];
 				},
 				inicia : function(camada, objMapa) {
-					var layerkml;
+					var layerkml, url, temp;
 					url = i3GEO.configura.locaplic + "/classesphp/proxy.php?url=" + camada.plugini3geo.parametros.url;
-					layerkml = new OpenLayers.Layer.Vector(camada.name, {
-						displayOutsideMaxExtent : true,
-						displayInLayerSwitcher : false,
-						visibility : true,
-						strategies : [
-							new OpenLayers.Strategy.Fixed()
-						],
-						protocol : new OpenLayers.Protocol.HTTP({
+					layerkml = new ol.layer.Vector({
+						name : camada.name,
+						isBaseLayer : false,
+						source : new ol.source.Vector({
 							url : url,
-							format : new OpenLayers.Format.KML({
-								extractStyles : true,
-								extractAttributes : true,
-								maxDepth : 5
-							})
+							format : new ol.format.KML({
+								extractStyles : true
+							}),
+							tipoServico : "kml"
 						})
 					});
 					i3geoOL.addLayer(layerkml);
-
 					if (!objMapa) {
 						objMapa = i3geoOL;
 					}
-					layerkml.div.onclick =
-						function(e) {
-							var targ = "", id, temp, features, n, i, j = "", html = "";
-							if (!e) {
-								e = window.event;
-							}
-							if (e.target) {
-								targ = e.target;
-							} else if (e.srcElement) {
-								targ = e.srcElement;
-							}
-							if (targ.id) {
-								temp = targ.id.split("_Point");
-								if (temp[0] === "OpenLayers_Geometry") {
-									id = targ.id;
-									temp = i3geoOL.getLayer(this.id);
-									features = temp.features;
-									n = features.length;
-									for (i = 0; i < n; i++) {
-										if (features[i].geometry.id === id) {
-											for (j in features[i].attributes) {
-												html += j + ": " + features[i].attributes[j];
-											}
-											g = features[i].geometry;
-											i3geoOL.addPopup(new OpenLayers.Popup.FramedCloud(
-												"kml",
-												new OpenLayers.LonLat(g.x, g.y),
-												null,
-												html,
-												null,
-												true));
-
-										}
-									}
+					temp = function(pixel) {
+						var feature, chaves, c, i = 0, html = "", prop, g;
+						feature = i3geoOL.forEachFeatureAtPixel(pixel, function(feature, layer) {
+							return feature;
+						});
+						if (feature) {
+							i3GEO.Interface.openlayers.BALAOPROP.removeAoAdicionar = false;
+							i3GEO.Interface.openlayers.BALAOPROP.classeCadeado = "i3GEOiconeFechado";
+							chaves = feature.getKeys();
+							prop = feature.getProperties();
+							c = chaves.length;
+							for (i = 0; i < c; i++) {
+								if (chaves[i] != "geometry" && chaves[i] != "styleUrl") {
+									html += chaves[i] + ": " + prop[chaves[i]];
 								}
 							}
-						};
+							g = feature.getGeometry().getCoordinates();
+							i3GEO.Interface.openlayers.balao(html, "", g[0], g[1], "kml");
+						}
+					};
+					i3geoOL.on('click', function(evt) {
+						evt.stopPropagation();
+						evt.preventDefault();
+						if (evt.dragging) {
+							return;
+						}
+						temp(i3geoOL.getEventPixel(evt.originalEvent));
+					});
 
 					i3GEO.janela.fechaAguarde("aguardePlugin");
 					i3GEO.eventos.cliquePerm.ativo = false;

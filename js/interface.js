@@ -728,7 +728,7 @@ i3GEO.Interface =
 				autoPanAnimation : {
 					duration : 250
 				},
-				width : '200px',
+				minWidth : '200px',
 				baloes : []
 			},
 			balao : function(texto, completo, x, y) {
@@ -748,7 +748,7 @@ i3GEO.Interface =
 					removeBaloes();
 				}
 				painel = document.createElement("div");
-				painel.style.width = p.width;
+				painel.style.minWidth = p.minWidth;
 				painel.className = "ol-popup";
 
 				cabecalho = document.createElement("div");
@@ -972,7 +972,6 @@ i3GEO.Interface =
 						// insere a lista de layers de fundo
 						//
 						temp = $i("listaLayersBase");
-						// FIXME testar isso
 						if (temp && i3GEO.arvoreDeCamadas.INCLUILFUNDO === false) {
 							//
 							// torna false a variavel que pode permitir que as camadas de fundo
@@ -1058,9 +1057,6 @@ i3GEO.Interface =
 				// verifica se nas preferencias existem ferramentas que devem ser
 				// abertas
 				i3GEO.configura.iniciaFerramentas.executa();
-
-				// FIXME nao esta funcionando
-				// i3GEO.Interface.openlayers.sobeLayersGraficos();
 			},
 			/**
 			 * Aplica um valor de opacidade aos layers do mapa
@@ -1217,68 +1213,48 @@ i3GEO.Interface =
 			insereLayerKml : function(id, url) {
 				var l, temp;
 				url = i3GEO.configura.locaplic + "/classesphp/proxy.php?url=" + url;
-				/*
-				 * eval(id + " = new OpenLayers.Layer.Vector('" + id + "',
-				 * {displayOutsideMaxExtent:true,displayInLayerSwitcher:false,visibility:true, strategies: [new
-				 * OpenLayers.Strategy.Fixed()],protocol: new OpenLayers.Protocol.HTTP({url: '" + url + "',format: new
-				 * OpenLayers.Format.KML({extractStyles: true,extractAttributes: true,maxDepth: 5})})})"); eval("i3geoOL.addLayer(" + id +
-				 * ");"); eval("temp = " + id + ".div;");
-				 */
-				l = new OpenLayers.Layer.Vector(id, {
-					displayOutsideMaxExtent : true,
-					displayInLayerSwitcher : false,
-					visibility : true,
-					strategies : [
-						new OpenLayers.Strategy.Fixed()
-					],
-					protocol : new OpenLayers.Protocol.HTTP({
+				l = new ol.layer.Vector({
+					title : url,
+					name : id,
+					isBaseLayer : false,
+					source : new ol.source.Vector({
 						url : url,
-						format : new OpenLayers.Format.KML({
-							extractStyles : true,
-							extractAttributes : true,
-							maxDepth : 5
-						})
+						format : new ol.format.KML({
+							extractStyles : true
+						}),
+						tipoServico : "kml"
 					})
 				});
 				i3geoOL.addLayer(l);
-				temp = l.div;
-				temp.onclick =
-					function(e) {
-						var targ = "", id, temp, features, n, i, j = "", html = "";
-						if (!e) {
-							e = window.event;
-						}
-						if (e.target) {
-							targ = e.target;
-						} else if (e.srcElement) {
-							targ = e.srcElement;
-						}
-						if (targ.id) {
-							temp = targ.id.split("_Point");
-							if (temp[0] === "OpenLayers_Geometry") {
-								id = targ.id;
-								temp = i3geoOL.getLayer(this.id);
-								features = temp.features;
-								n = features.length;
-								for (i = 0; i < n; i++) {
-									if (features[i].geometry.id === id) {
-										for (j in features[i].attributes) {
-											html += j + ": " + features[i].attributes[j];
-										}
-										g = features[i].geometry;
-										i3geoOL.addPopup(new OpenLayers.Popup.FramedCloud(
-											"kml",
-											new OpenLayers.LonLat(g.x, g.y),
-											null,
-											html,
-											null,
-											true));
+				temp = function(pixel) {
+					var feature, chaves, c, i = 0, html = "", prop, g;
 
-									}
-								}
+					feature = i3geoOL.forEachFeatureAtPixel(pixel, function(feature, layer) {
+						return feature;
+					});
+					if (feature) {
+						i3GEO.Interface.openlayers.BALAOPROP.removeAoAdicionar = false;
+						i3GEO.Interface.openlayers.BALAOPROP.classeCadeado = "i3GEOiconeFechado";
+						chaves = feature.getKeys();
+						prop = feature.getProperties();
+						c = chaves.length;
+						for (i = 0; i < c; i++) {
+							if (chaves[i] != "geometry" && chaves[i] != "styleUrl") {
+								html += chaves[i] + ": " + prop[chaves[i]];
 							}
 						}
-					};
+						g = feature.getGeometry().getCoordinates();
+						i3GEO.Interface.openlayers.balao(html, "", g[0], g[1], "kml");
+					}
+				};
+				i3geoOL.on('click', function(evt) {
+					evt.stopPropagation();
+					evt.preventDefault();
+					if (evt.dragging) {
+						return;
+					}
+					temp(i3geoOL.getEventPixel(evt.originalEvent));
+				});
 			},
 			ativaDesativaCamadaKml : function(obj, url) {
 				if (!obj.checked) {
@@ -1378,7 +1354,7 @@ i3GEO.Interface =
 									&& camada.wmsurl !== ""
 									&& camada.usasld.toLowerCase() != "sim") {
 									urllayer = camada.wmsurl;
-									if (camada.wmstile == 10){
+									if (camada.wmstile == 10) {
 										// TODO testar isso
 										source = new ol.source.WMTS({
 											url : urllayer,
@@ -1470,7 +1446,9 @@ i3GEO.Interface =
 									opcoes.name = camada.name;
 								}
 								source.set("name", camada.name);
-								source.set("parametrosUrl", {par : ""});
+								source.set("parametrosUrl", {
+									par : ""
+								});
 								opcoes.source = source;
 								opcoes.isBaseLayer = false;
 								opcoes.visible = true;
@@ -1571,15 +1549,15 @@ i3GEO.Interface =
 						param[parametro] = valor;
 						chaves = i3GEO.util.listaTodasChaves(param);
 						n = chaves.length;
-						for(j = 0; j < n; j++){
+						for (j = 0; j < n; j++) {
 							k = chaves[j];
-							if(param[k] != "" && k != "par"){
+							if (param[k] != "" && k != "par") {
 								url += "&" + k + "=" + param[k];
 							}
 						}
 						param.par = url;
 						console.info(url);
-						source.set("parametrosUrl",param);
+						source.set("parametrosUrl", param);
 					}
 				}
 			},
@@ -1713,10 +1691,9 @@ i3GEO.Interface =
 			 */
 			atualizaTema : function(retorno, tema) {
 				var layer = i3geoOL.getLayersByName(tema), objtemas, funcaoLoad, servico, source;
-				if(layer.length == 0){
+				if (layer.length == 0) {
 					return "";
-				}
-				else{
+				} else {
 					layer = layer[0];
 				}
 				if (layer && layer != undefined) {
@@ -1778,11 +1755,11 @@ i3GEO.Interface =
 				//
 				i3geoOL.on("pointerdrag", function(e) {
 					i3GEO.Interface.STATUS.pan = true;
-					var xy;
+					//var xy;
 					modoAtual = "move";
 					i3GEO.barraDeBotoes.BOTAOCLICADO = "pan";
-					xy = i3GEO.navega.centroDoMapa();
-					i3GEO.navega.marcaCentroDoMapa(xy);
+					//xy = i3GEO.navega.centroDoMapa();
+					//i3GEO.navega.marcaCentroDoMapa(xy);
 				});
 				i3geoOL.on("click", function(e) {
 					e.stopPropagation();
@@ -2594,10 +2571,10 @@ i3GEO.Interface =
 				i3GEOtouchesPosMapa = "";
 				modoAtual = "";
 				google.maps.event.addListener(i3GeoMap, "dragstart", function() {
-					var xy;
+					//var xy;
 					modoAtual = "move";
-					xy = i3GEO.navega.centroDoMapa();
-					i3GEO.navega.marcaCentroDoMapa(xy);
+					//xy = i3GEO.navega.centroDoMapa();
+					//i3GEO.navega.marcaCentroDoMapa(xy);
 					i3GEO.eventos.cliquePerm.status = false;
 				});
 				google.maps.event.addListener(i3GeoMap, "dragend", function() {

@@ -2,7 +2,6 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    
     METADATA
       "CLASSE"	"SIM"
       "PLUGINI3GEO"	'{"plugin":"layerkml","parametros":{"url":"http://dev.openlayers.org/examples/kml/sundials.kml"}}'
@@ -22,6 +21,4 @@ MAP
       END # STYLE
     END # CLASS
   END # LAYER
-
 END # MAP
-
