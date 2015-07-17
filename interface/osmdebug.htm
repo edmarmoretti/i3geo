@@ -5,7 +5,7 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>i3GEO - OpenLayers+OSM</title>
-<script src="../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 <script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
 <link rel="stylesheet" type="text/css" href="../css/black.css">
 <style>
@@ -175,18 +175,22 @@
 		OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		(function() {
 			function getTileURL(bounds) {
-		           var res = i3geoOL.getResolution();
-		           //console.info(bounds)
-		            var x = Math.round((bounds.left - i3geoOL.maxExtent.left) / (res * 256));
-		            var y = Math.round((i3geoOL.maxExtent.top - bounds.top) / (res * 256));
-		            var z = i3geoOL.getZoom();
-		            //var limit = Math.pow(2, z);
+		        console.info(this)   
+				var res = this.map.getResolution();
+		           //var m = i3GEO.util.projGeo2OSM(i3geoOL.maxExtent);
+		           //bounds = i3GEO.util.projGeo2OSM(bounds)
+		           //this.map.zoomIn()
+		           var m = (this.maxExtent);
+		            var x = Math.round((bounds.left - m.left) / (res * 256));
+		            var y = Math.round((m.top - bounds.top) / (res * 256));
+		            var z = this.map.getZoom();
+		            var limit = Math.pow(2, z);
 		            
 		            //if (y < 0 || y >= limit) {
 		            //    return OpenLayers.Util.getImagesLocation() + "404.png";
 		            //} else {
 		                x = ((x % limit) + limit) % limit;
-		                return this.url + "x=" + x + "&y=" + y + "&z=" + z;    //+ "&ss=" + x + "-" + y + "-" + z
+		                return this.url + "x=" + x + "&y=" + y + "&z=" + (z);    //+ "&ss=" + x + "-" + y + "-" + z
 		            //}
 			}
 			
@@ -226,6 +230,18 @@
 						attribution: attribOSMData
 					});
 			
+			var arrayMapQuestAerial = ["http://oatile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg",
+				"http://oatile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg",
+				"http://oatile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg",
+				"http://oatile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg"
+			];
+
+			var layMapQuestAerial = new OpenLayers.Layer.OSM("MapQuest Open Aerial", arrayMapQuestAerial,{
+				displayOutsideMaxExtent: true,
+				attribution: attribMapQuestAerial,
+				isBaseLayer : true,
+				visibility : false
+			});
 
 			var layMSNOsmRoad = new OpenLayers.Layer.TMS("OSM Roads", "http://korona.geog.uni-heidelberg.de/tiles/roads/", {
 				type : 'png',
@@ -233,8 +249,7 @@
 				isBaseLayer : true,
 				visibility : false,
 				attribution : mapSurfer,
-				numZoomLevels: 20
-				//tileOrigin: new OpenLayers.LonLat(0,0)
+				displayOutsideMaxExtent: true
 			});
 			
 			var layMSNOsmRoadsGray =
@@ -289,7 +304,7 @@
 				});
 
 			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [
-				osm, aquarela, toner, tonerlite, layMSNOsmRoad,layMSNOsmRoadsGray,layMSNOsmBoundariesOverlay,layMSNOsmHybrid,layMSNAsterHillshade,layMSNAsterContours
+				osm, aquarela, toner, tonerlite, layMapQuestAerial, layMSNOsmRoad,layMSNOsmRoadsGray,layMSNOsmBoundariesOverlay,layMSNOsmHybrid,layMSNAsterHillshade,layMSNAsterContours
 			];
 		})();
 		i3GEO.Interface.openlayers.googleLike = true;
