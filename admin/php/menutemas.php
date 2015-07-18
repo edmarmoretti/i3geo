@@ -1221,7 +1221,7 @@ Retorna a lista de mapfiles do diretorio i3geo/temas
 */
 function listaMapsTemas()
 {
-	global $cp,$locaplic,$letra,$filtro,$esquemaadmin;
+	global $cp,$locaplic,$letra,$filtro,$esquemaadmin,$checaNomes;
 	$arquivos = array();
 	if (is_dir($locaplic."/temas"))
 	{
@@ -1287,7 +1287,6 @@ function listaMapsTemas()
 	foreach($regs as $reg){
 		$nomes[$reg["codigo_tema"]] = $reg["nome_tema"];
 		$ids[$reg["codigo_tema"]] = $reg["id_tema"];
-		//$outros[$reg["codigo_tema"]] = array("kmz"=>$reg["kmz_tema"],"kml"=>$reg["kml_tema"],"ogc"=>$reg["ogc_tema"],"download"=>$reg["download_tema"],"link"=>$reg["link_tema"]);
 	}
 	$lista = array();
 	foreach($arquivos as $arq){
@@ -1311,6 +1310,25 @@ function listaMapsTemas()
 		if(file_exists($locaplic."/temas/miniaturas/".$arq.".map.mini.png")){
 			$imagem = $arq.".map.mini.png";
 		}
+		if($checaNomes == "true"){
+			if($extensao == "map"){
+				if(file_exists($locaplic."/temas/".$arq.".map")){
+					$handle = fopen($locaplic."/temas/".$arq.".map", "r");
+					while (!feof($handle)){
+						$linha = fgets($handle);
+						if(strpos(strtoupper($linha),"'TEMA'") !== false || strpos(strtoupper($linha),'"TEMA"') !== false){
+							$ntema = str_replace(array("'TEMA'",'"TEMA"',"'tema'",'"tema"'),"",$linha);
+							$ntema = trim(str_replace(array("'",'"'),"",$ntema));
+							if($n != $ntema && $n != utf8_encode($ntema) && $n != ""){
+								$n .= "<span style=color:red;margin-left:5px >".utf8_encode($ntema)."</span>";
+							}
+							break;
+						}
+					}
+					fclose($handle);
+				}
+			}
+		}
 		if(isset($filtro) && $filtro != "" && $n != ""){
 			$lista[] = array("grupousr"=>$grupousr,"id_tema"=>$id,"nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem,"extensao"=>$extensao);
 		}
@@ -1318,6 +1336,7 @@ function listaMapsTemas()
 			$lista[] = array("grupousr"=>$grupousr,"id_tema"=>$id,"nome"=>$n,"codigo"=>$arq,"imagem"=>$imagem,"extensao"=>$extensao);
 		}
 	}
+
 	return $lista;
 }
 /*

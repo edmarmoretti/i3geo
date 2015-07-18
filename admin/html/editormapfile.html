@@ -92,6 +92,8 @@ body {
 				as caracter&iacute;sticas de cada LAYER nas op&ccedil;&otilde;es
 				abaixo. <br> Para incluir o tema nos menus, <a
 					href='arvore.html'>edite a &aacute;rvore de temas </a> </p>
+					<p class=paragrafo >O texto marcado em cinza corresponde ao nome do tema registrados na &aacute;rvore de temas (registro no banco de dados).
+					Nem todos os temas s&atilde;o utilizados na &aacute;rvore, por isso n&atilde;o necessitam ser associados a um 'tema' e registrados no banco de dados.</p>
 				<div id="letras"></div>
 				<p>Mapfiles (arquivos existentes no diret&oacute;rio i3geo/temas):</p>
 				<div id="tabela" style="left: -5px;"></div>
@@ -163,7 +165,8 @@ body {
 			}
 			i3GEO.util.insereCookie("I3GEOletraAdmin", letra);
 			core_pegaMapfiles("montaArvore()", letra, document
-					.getElementById("selFiltro").value);
+					.getElementById("selFiltro").value,document
+					.getElementById("checaNomes").checked);
 		}
 		//necessario para a ferramenta login e outras
 		i3GEO.configura = {
@@ -178,6 +181,8 @@ body {
 					+ "\")' >"
 					+ "<option value='' >----</option>"
 					+ "<option value='link_tema,=,' >Sem fonte</option>"
+					+ "<option value='nome_tema,=,' >Nome n&atilde;o definido no banco de dados</option>"
+					+ "<option value='nome_tema,!=,' >Nome definido no banco de dados</option>"
 					+ "<option value='download_tema,=,sim' >Permite download</option>"
 					+ "<option value='download_tema,=,nao' >N&atilde;o permite download</option>"
 					+ "<option value='ogc_tema,=,sim' >Permite WMS</option>"
@@ -187,10 +192,15 @@ body {
 					+ "<option value='kmz_tema,=,sim' >Permite KMZ</option>"
 					+ "<option value='kmz_tema,=,nao' >N&atilde;o permite KMZ</option>"
 					+ "</select>";
-			ins += "&nbsp;<input onclick='filtraLetra(\""
+			ins += "<br><input onclick='filtraLetra(\""
 					+ letraAtual
-					+ "\")' type=checkbox id=mostraMini style=position:relative;top:2px; />Mostra a miniatura se houver";
+					+ "\")' type=checkbox id=mostraMini style=position:relative;top:2px; /><span class=paragrafo >Mostra a miniatura armazenada em temas/miniaturas</span>";
 
+			ins += "<br><input onclick='filtraLetra(\""
+				+ letraAtual
+				+ "\")' type=checkbox id=checaNomes style=position:relative;top:2px; /><span class=paragrafo >Verifica nome registrado no banco e no mapfile. Marca em vermelho o nome registrado no mapfile quando houver diverg&ecirc;ncia</span>";
+
+					
 			ins += "<p><div id=filtroDeLetras ></div>";
 			document.getElementById("letras").innerHTML = ins;
 			core_listaDeLetras("filtroDeLetras","filtraLetra");

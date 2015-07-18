@@ -608,22 +608,24 @@ funcaoM - (opcional) nome da funcao que ser&aacute; executada ao terminar a busc
 letra - (opcional) letra inicial utilizada para filtrar a lista
 
 filtro - (opcional) string com o filtro, por exemplo, "'download_tema' = 'SIM'"
+
+checaNomes - (0pcional) bate o nome do mapfile (tema) com o registro no banco
 */
-function core_pegaMapfiles(funcaoM,letra,filtro)
+function core_pegaMapfiles(funcaoM,letra,filtro,checaNomes)
 {
-	if(arguments.length == 0){
+	if(!letra){
 		letra = "";
+	}
+	if(!filtro){
 		filtro = "";
+	}
+	if(!funcaoM){
 		funcaoM = "";
+	}	
+	if(!checaNomes){
+		checaNomes = "false";
 	}
-	if(arguments.length == 1){
-		letra = "";
-		filtro = "";
-	}
-	if(arguments.length == 2){
-		filtro = "";
-	}
-	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra+"&filtro="+filtro;
+	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra+"&filtro="+filtro+"&checaNomes="+checaNomes;
 	var callbackM =
 	{
 			success:function(o)
