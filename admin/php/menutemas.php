@@ -1221,7 +1221,7 @@ Retorna a lista de mapfiles do diretorio i3geo/temas
 */
 function listaMapsTemas()
 {
-	global $cp,$locaplic,$letra,$filtro,$esquemaadmin,$checaNomes;
+	global $cp,$locaplic,$letra,$filtro,$esquemaadmin,$checaNomes,$checaNames;
 	$arquivos = array();
 	if (is_dir($locaplic."/temas"))
 	{
@@ -1316,11 +1316,35 @@ function listaMapsTemas()
 					$handle = fopen($locaplic."/temas/".$arq.".map", "r");
 					while (!feof($handle)){
 						$linha = fgets($handle);
-						if(strpos(strtoupper($linha),"'TEMA'") !== false || strpos(strtoupper($linha),'"TEMA"') !== false){
+						if(stripos($linha,"'TEMA'") !== false || stripos($linha,'"TEMA"') !== false){
 							$ntema = str_replace(array("'TEMA'",'"TEMA"',"'tema'",'"tema"'),"",$linha);
 							$ntema = trim(str_replace(array("'",'"'),"",$ntema));
 							if($n != $ntema && $n != utf8_encode($ntema) && $n != ""){
 								$n .= "<span style=color:red;margin-left:5px >".utf8_encode($ntema)."</span>";
+							}
+							break;
+						}
+					}
+					fclose($handle);
+				}
+			}
+		}
+		if($checaNames == "true"){
+			if($extensao == "map"){
+				if(file_exists($locaplic."/temas/".$arq.".map")){
+					$handle = fopen($locaplic."/temas/".$arq.".map", "r");
+					//deve buscar dentro de LAYER pois pode haver simbolos antes
+					$elayer = false;
+					while (!feof($handle)){
+						$linha = trim(fgets($handle));
+						if(stripos($linha,"LAYER") === 0){
+							$elayer = true;
+						}
+						if($elayer == true && stripos($linha,"NAME") === 0){
+							$ntema = ltrim($linha,"NAMEname");
+							$ntema = trim(str_replace(array("'",'"'),"",$ntema));
+							if($arq != $ntema){
+								$n .= "<img style='margin-left:3px;' src='../imagens/face-sad.png' title='Nome do LAYER diferente do nome do arquivo' />";
 							}
 							break;
 						}

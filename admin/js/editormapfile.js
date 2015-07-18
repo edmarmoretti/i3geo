@@ -290,10 +290,14 @@ function montaNosRaiz(redesenha)
 		if($mapfiles[i].extensao === "gvp"){
 			conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"downloadGvp('"+$mapfiles[i].codigo+"')\" title='download' src=\"../imagens/down1.gif\" />";
 		}
-		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"','"+$mapfiles[i].extensao+"')\" title='testar!' src=\"../imagens/41.png\" />";
+		if($mapfiles[i].extensao === "map" || $mapfiles[i].extensao === "gvp"){
+			conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"','"+$mapfiles[i].extensao+"')\" title='testar!' src=\"../imagens/41.png\" />";
+			conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfileRapido('"+$mapfiles[i].codigo+"','"+$mapfiles[i].extensao+"')\" title='teste rapido' src=\"../imagens/41r.png\" />";
+		}
 		conteudo += "&nbsp;<img width=20px style=\"margin-left:2px;position:relative;cursor:pointer;top:2px\" onclick=\"javascript:window.open('../../interface/black_editor.php?&temaEdicao="+$mapfiles[i].codigo+"')\" title='editar no i3Geo' src=\"../imagens/i3geo2editor.jpg\" />";
 		conteudo += "&nbsp;<img width=20px style=\"margin-left:2px;position:relative;cursor:pointer;top:2px\" onclick=\"javascript:window.open('../../ms_criamapa.php?temasa="+$mapfiles[i].codigo+"&layers="+$mapfiles[i].codigo+"')\" title='testar no i3Geo' src=\"../imagens/i3geo2.jpg\" />";
 		conteudo += "<b>&nbsp;<span>"+$mapfiles[i].codigo+" <span style=color:gray id='idNome_"+$mapfiles[i].codigo+"'>"+$mapfiles[i].nome+"</span></span>";
+		conteudo += "</b><br><img src=''style='display:none;' id='testeRapido"+$mapfiles[i].codigo+"' />";
 		if($mapfiles[i].imagem != "" && $i("mostraMini").checked == true){
 			conteudo += "</b><br><img src='../../temas/miniaturas/"+$mapfiles[i].imagem+"'/>";
 		}
@@ -305,6 +309,15 @@ function montaNosRaiz(redesenha)
 	if(redesenha=="sim")
 	tree.draw();
 	return nos;
+}
+function testarMapfileRapido(codigoMap,extensao)
+{
+	if($i("testeRapido"+codigoMap).style.display === "block"){
+		$i("testeRapido"+codigoMap).style.display = "none";
+		return;
+	}
+	$i("testeRapido"+codigoMap).src = "../../testamapfile.php?tipo=grande&map="+codigoMap+".map";
+	$i("testeRapido"+codigoMap).style.display = "block";
 }
 function testarMapfile(codigoMap,extensao)
 {

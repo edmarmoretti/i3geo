@@ -610,8 +610,10 @@ letra - (opcional) letra inicial utilizada para filtrar a lista
 filtro - (opcional) string com o filtro, por exemplo, "'download_tema' = 'SIM'"
 
 checaNomes - (0pcional) bate o nome do mapfile (tema) com o registro no banco
+
+checaNames - (opcional) bate o nome do mapfile com o nome do layer
 */
-function core_pegaMapfiles(funcaoM,letra,filtro,checaNomes)
+function core_pegaMapfiles(funcaoM,letra,filtro,checaNomes,checaNames)
 {
 	if(!letra){
 		letra = "";
@@ -625,7 +627,10 @@ function core_pegaMapfiles(funcaoM,letra,filtro,checaNomes)
 	if(!checaNomes){
 		checaNomes = "false";
 	}
-	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra+"&filtro="+filtro+"&checaNomes="+checaNomes;
+	if(!checaNames){
+		checaNames = "false";
+	}
+	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra+"&filtro="+filtro+"&checaNomes="+checaNomes+"&checaNames="+checaNames;
 	var callbackM =
 	{
 			success:function(o)
