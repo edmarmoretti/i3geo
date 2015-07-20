@@ -184,6 +184,9 @@ function ativaBotaoAdicionaMapfile(idBotao)
 		core_montaEditor("adicionaNovoMapfile()","450px","660px","","Mapfile",true,true,false);
 		ins = "<p><b>Nome do novo arquivo mapfile (sem .map) </b>n&atilde;o utilize caracteres acentuados ou espa&ccedil;os em branco</p>";
 		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>";
+		ins += "<p><input type=checkbox id=Eacessopublico checked style=position:relative;top:2px; />";
+		ins += "Permitir o acesso aos dados via download e Web Services (WMS, WFS, etc.)</p>";
+
 		ins += "<p><b>Esse mapfile baseia-se no sistema de metadados estat&iacute;sticos?</b> Caso escolha sim, a conex&atilde;o com o banco e o sql de acesso aos dados ser&atilde;o constru&iacute;dos de forma din&acirc;mica</p>";
 		ins += "<select id='Emetaestat' >";
 		ins += core_combosimnao("nao");
@@ -451,13 +454,17 @@ function adicionaNovoMapfile()
 		en = $i("EtituloEN").value,
 		codigo = $i("Ecodigo").value,
 		metaestat = $i("Emetaestat").value;
+		acessopublico = "SIM";
+	if($i("Eacessopublico").checked === false){
+		acessopublico = "NAO";
+	}
 	if(codigo === ""){
 		alert("Digite o nome do arquivo");return;
 	}
 	codigo = codigo.toLowerCase();
 	codigo = i3GEO.util.removeAcentos(codigo);
 	codigo = codigo.replace(" ","");
-	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo+"&it="+it+"&en="+en+"&es="+es+"&metaestat="+metaestat;
+	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo+"&it="+it+"&en="+en+"&es="+es+"&metaestat="+metaestat+"&acessopublico="+acessopublico;
 	core_carregando("ativa");
 	core_carregando(" adicionando um novo mapfile");
 	var callback =

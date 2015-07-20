@@ -1219,8 +1219,11 @@ function sobeDesce()
 }
 //essa funcao e usada tambem por i3geo/ferramentas/upload/upload.php
 function criarNovoMap(){
-	global $nome,$codigo,$locaplic,$it,$en,$es,$esquemaadmin,$metaestat,$tipoLayer,$data,$conexao;
+	global $nome,$codigo,$locaplic,$it,$en,$es,$esquemaadmin,$metaestat,$tipoLayer,$data,$conexao,$acessopublico;
 	$arq = $locaplic."/temas/".$codigo.".map";
+	if(empty($acessopublico)){
+		$acessopublico = "SIM";
+	}
 	if(!file_exists($arq)){
 		if(empty($tipoLayer)){
 			$tipoLayer = "line";
@@ -1258,6 +1261,11 @@ function criarNovoMap(){
 			//METAESTAT_CODIGO_TIPO_REGIAO
 			//ID_MEDIDA_VARIAVEL
 		}
+		$dados[] = '		permiteogc "'.$acessopublico.'"';
+		$dados[] = '		permitedownload "'.$acessopublico.'"';
+		$dados[] = '		permitekml "'.$acessopublico.'"';
+		$dados[] = '		permitekmz "'.$acessopublico.'"';
+
 		$dados[] = '	END';
 		$dados[] = '    CLASS';
 		$dados[] = '        NAME ""';
@@ -1282,7 +1290,7 @@ function criarNovoMap(){
 			$nome = utf8_encode($nome);
 			$desc = utf8_encode($desc);
 		}
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_temas (link_tema,kml_tema,kmz_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema,it,es,en) VALUES ('','','', '','','','$tipoa_tema','','$nome','$codigo','$it','$es','$en')");
+		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_temas (link_tema,kml_tema,kmz_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema,it,es,en) VALUES ('','$acessopublico','$acessopublico', '$acessopublico','$acessopublico','','$tipoa_tema','','$nome','$codigo','$it','$es','$en')");
 		$dbh = null;
 		$dbhw = null;
 		return "ok";
