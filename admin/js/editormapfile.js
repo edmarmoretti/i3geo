@@ -316,7 +316,7 @@ function testarMapfileRapido(codigoMap,extensao)
 		$i("testeRapido"+codigoMap).style.display = "none";
 		return;
 	}
-	$i("testeRapido"+codigoMap).src = "../../testamapfile.php?tipo=grande&map="+codigoMap+".map";
+	$i("testeRapido"+codigoMap).src = "../../testamapfile.php?cache=nao&tipo=grande&map="+codigoMap+".map";
 	$i("testeRapido"+codigoMap).style.display = "block";
 }
 function testarMapfile(codigoMap,extensao)

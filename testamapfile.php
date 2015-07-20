@@ -125,7 +125,10 @@ if (isset($map) && $map != "")
 		echo "<hr><br><br><a href='testamapfile.php?map=todos&iniciar=".($iniciar+10)."' >Próximos mapas</a>";
 	}
 	else{
-		verifica($map,$solegenda,$tabela);
+		if(empty($cache)){
+			$cache = "sim";
+		}
+		verifica($map,$solegenda,$tabela,$cache);
 	}
 }
 ?>
@@ -152,15 +155,15 @@ if (isset($map) && $map != "")
 </html>
 
 <?php
-function verifica($map,$solegenda,$tabela){
+function verifica($map,$solegenda,$tabela,$cache="sim"){
 	global $tipo,$locaplic,$postgis_mapa,$versao,$base,$dir_tmp,$tempo;
 	$mapUrl = $map;
-	if ($tipo == "mini" && file_exists('temas/miniaturas/'.$map.".mini.png")){
+	if ($tipo == "mini" && file_exists('temas/miniaturas/'.$map.".mini.png") && $cache == "sim"){
 		Header("Content-type: image/png");
 		ImagePng(ImageCreateFromPNG('temas/miniaturas/'.$map.".mini.png"));
 		exit;
 	}
-	if ($tipo == "grande" && file_exists('temas/miniaturas/'.$map.".grande.png")){
+	if ($tipo == "grande" && file_exists('temas/miniaturas/'.$map.".grande.png")  && $cache == "sim"){
 		Header("Content-type: image/png");
 		ImagePng(ImageCreateFromPNG('temas/miniaturas/'.$map.".grande.png"));
 		exit;
