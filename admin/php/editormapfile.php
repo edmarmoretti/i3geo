@@ -1245,6 +1245,7 @@ function criarNovoMap(){
 		$dados[] = "	TYPE ".$tipoLayer;
 		if(empty($data)){
 			$dados[] = '	DATA ""';
+			$dados[] = '	CONNECTION ""';
 		}
 		else{
 			$dados[] = '	DATA "'.$data.'"';
