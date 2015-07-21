@@ -244,7 +244,7 @@ g_traducao_ajuda = {
 			pt:"Uma conex&atilde;o WMS permite que dados dispon&iacute;veis em outros servidores sejam inclu&iacute;dos como camadas no i3Geo. Na ferramenta de conex&atilde;o &eacute; mostrada uma lista de endere&ccedil;os previamente cadastrados, mas pode-se digitar um outro endere&ccedil;o qualquer, desde que seja um servi&ccedil;o no padr&atilde;o WMS. Ap&oacute;s um servi&ccedil;o ser escolhido, a lista de camadas dispon&iacute;veis &eacute; mostrada na guia 'Temas'.",
 			complemento:"Camadas obtidas por meio de conex&atilde;o WMS n&atilde;o permitem que algumas opera&ccedil;&otilde;es dispon&iacute;veis no i3Geo sejam executadas, como por exemplo a altera&ccedil;&atilde;o na legenda, sele&ccedil;&atilde;o, entre outras. Quando um servidor apresentar problemas, a camada n&atilde;o poder&aacute; ser adicionada.",
 			//tela:"ferramentas/conectarwms/exemplo.htm",
-			apijs:"i3GEO.arvoreDeTemas.conectarwms.upload()"
+			apijs:"i3GEO.arvoreDeTemas.dialogo.conectaservico()"
 		},
 		"29": {
 			titulo: "Conex&atilde;o GeoRSS",
@@ -253,7 +253,7 @@ g_traducao_ajuda = {
 			pt:"Uma conex&atilde;o GeoRSS permite obter a localiza&ccedil;&atilde;o de conte&uacute;dos dispon&iacute;veis no formato RSS com coordenadas geogr&aacute;ficas inclu&iacute;das. Na ferramenta de conex&atilde;o &eacute; mostrada uma lista de endere&ccedil;os previamente cadastrados, mas pode-se digitar um outro endere&ccedil;o qualquer, desde que seja um servi&ccedil;o no padr&atilde;o GeoRSS.",
 			complemento:"A camada adicionada ao mapa baseia-se em um arquivo shapefile criado temporariamente pelo i3Geo. Caso o servi&ccedil;o GeoRSS sofrer altera&ccedil;&otilde;es, como a inclus&atilde;o de um novo item, &eacute; necess&aacute;rio fazer novamente a conex&atilde;o para que a camada reflita a altera&ccedil;&atilde;o.",
 			//tela:"ferramentas/conectargeorss/exemplo.htm",
-			apijs:"i3GEO.arvoreDeTemas.conectargeorss.upload()"
+			apijs:"i3GEO.arvoreDeTemas.dialogo.conectaservico()"
 		},
 		"30": {
 			titulo: "Nuvem de tags",

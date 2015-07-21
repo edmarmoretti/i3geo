@@ -36,39 +36,55 @@ p {
 <body class="yui-skin-sam" style="background-color: white;">
 	<div id=guiasYUI class="yui-navset" style="top: 0px; cursor: pointer; left: 0px;">
 		<ul class="yui-nav" style="border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;">
-			<li><a href="#ancora"><em><span id="guia1" style="text-align: center; font-size: 10px; left: 0px;">Servi&ccedil;os</span></em></a></li>
-			<li><a href="#ancora"><em><span id="guia2" style="text-align: center; font-size: 10px; left: 0px;">Metadados</span></em></a></li>
-			<li><a href="#ancora"><em><span id="guia3" style="text-align: center; font-size: 10px; left: 0px;">Temas</span></em></a></li>
+			<li>
+				<a href="#ancora">
+					<em><span id="guia1" style="text-align: center; font-size: 10px; left: 0px;">Servi&ccedil;os</span></em>
+				</a>
+			</li>
+			<li>
+				<a href="#ancora">
+					<em><span id="guia2" style="text-align: center; font-size: 10px; left: 0px;">Metadados</span></em>
+				</a>
+			</li>
+			<li>
+				<a href="#ancora">
+					<em><span id="guia3" style="text-align: center; font-size: 10px; left: 0px;">Temas</span></em>
+				</a>
+			</li>
 		</ul>
 	</div>
 
 	<div class=guiaobj id="guia1obj" style="left: 5px; top: 0px; text-align: left">
-		<p class=paragrafo >
-			<a href="../../documentacao/ajuda/The_ArcIMS_OGC_WMS_Connector.pdf" target=blank>Veja como criar web services no ARCIMS</a> <br>
-			<a href="../../documentacao/ajuda/ArcGIS9.x.html" target=blank>Veja como utilizar web services no ARCGIS</a><br>
+		<p class=paragrafo>
+			<a href="../../documentacao/ajuda/The_ArcIMS_OGC_WMS_Connector.pdf" target=blank>Veja como criar web services no ARCIMS</a>
+			<br>
+			<a href="../../documentacao/ajuda/ArcGIS9.x.html" target=blank>Veja como utilizar web services no ARCGIS</a>
+			<br>
 		</p>
-		<p class=paragrafo >
+		<p class=paragrafo>
 			Digite o endere&ccedil;o do servi&ccedil;o ou escolha da lista abaixo. Utilize as guias acima para ver o resultado do acesso. Por padr&atilde;o, utiliza-se a vers&atilde;o 1.1.0 do GetCapabilities. Voc&ecirc; pode adicionar um outro, bastando incluir no endere&ccedil;o do servi&ccedil;o "&amp;version=1.3.0" por exemplo.<br>
 		</p>
-			<div class="styled-select" style="width: 350px; margin-top: 15px;">
-				<input tabindex='0' id=servico value="" size=45 />
-			</div>
-
-		<div id=RSSwms style="text-align: left; color: navy; cursor: pointer;"></div>
+		<div class="styled-select" style="width: 350px; margin-top: 15px;">
+			<input tabindex='0' id=servico value="" size=45 />
+		</div>
+		<p class=paragrafo>
+		<div id=RSSwms style="width: 350px;" ></div>
+		<br>
+		<div id=RSSbt></div>
 	</div>
 	<div class=guiaobj id="guia2obj" style="display: none; left: 0px; top: 00px">
 		<br>
-		<input type=button value="getCapabilities" size=20 onclick="getcapabilities()" class="aplicar"/>
+		<input type=button value="getCapabilities" size=20 onclick="getcapabilities()" class="aplicar" />
 		<br>
-		<div id=resultadoget style="display: block; position: relative; top: 5px; left: 1px" class=paragrafo ></div>
+		<div id=resultadoget style="display: block; position: relative; top: 5px; left: 1px" class=paragrafo></div>
 	</div>
 	<div class=guiaobj id="guia3obj" style="left: 0px; display: none;">
 		<div style="text-align: left; top: 0px; left: 0px; font-size: 10px">
-			<p class=paragrafo >
+			<p class=paragrafo>
 				Ap&oacute;s a conex&atilde;o ser estabelecida e surgir a lista de temas, selecione a camada que ser&aacute; adicionada ao mapa.<br>
 			</p>
 			<div id=textoSLD style="display: none; font-size: 10px">
-				<p class=paragrafo >
+				<p class=paragrafo>
 					Opcionalmente vc pode indicar o tipo de representa&ccedil;&atilde;o que ser&aacute; utilizada.<br> N&atilde;o altere o tipo de representa&ccedil;&atilde;o se a camada escolhida for uma imagem (dados raster) ou se voc&ecirc; tiver d&uacute;vidas sobre ela.<br>
 				</p>
 				<div class=styled-select>
@@ -124,9 +140,14 @@ p {
 			}
 			var canais = retorno.data.canais
 			var ncanais = canais.length
-			var ins = "<br>" + retorno.data.rss
+			$i("RSSbt").innerHTML = retorno.data.rss;
+			var ins = "";
+			ins += "<select size='5' onchange='registraws(this.value)' style='width:100%;' ><option value='' >WMS cadastrados:</option>";
 			for (i = 0; i < ncanais; i++) {
-				var caso = canais[i]
+				var caso = canais[i];
+				var valor = "'" + caso.link + "','"	+ caso.id_ws + "','" + caso.tipo_ws + "'";
+				ins += "<option value=" + valor + " >"+caso.title+"</option>";
+				/*
 				ins +=
 					"\<p class=clique onclick=\"registraws('" + caso.link
 						+ "','"
@@ -148,8 +169,10 @@ p {
 							+ caso.nacessos
 							+ ")\<\/span>\<\/p\>";
 				}
+				 */
 			}
-			document.getElementById("RSSwms").innerHTML = ins + "<br><br>"
+			ins += "</select>";
+			document.getElementById("RSSwms").innerHTML = ins;
 			aguarde("none")
 		}
 	</script>
