@@ -770,7 +770,7 @@ i3GEO.mapa =
 				titulo =
 					"<span class='i3GEOiconeFerramenta i3GEOiconeLegenda' title='" + $trad("P3")
 						+ "'></span>"
-						+ "<div class='i3GeoTituloJanela'>"
+						+ "<div class='i3GeoTituloJanela' id='legendaTituloI'>"
 						+ $trad("p3")
 						+ "</div>";
 				janela = i3GEO.janela.cria(largura + "px", altura + "px", "", "", "", titulo, "wlegenda", false, "hd", cabecalho, minimiza,"","","","","nao");
