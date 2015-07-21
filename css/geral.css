@@ -8,6 +8,13 @@ para nao selecionar
     -o-user-select: none;
     user-select: none;
 }
+input[type=text]{
+	-webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -o-user-select: text;
+    user-select: text;
+}
 /*
 Popup do identifica no openlayers 3
 */
