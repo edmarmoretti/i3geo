@@ -1,7 +1,7 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas6.css">
+<link rel="stylesheet" type="text/css" href="../../css/black.css">
 <title></title>
 <style type="text/css">
 button {
@@ -16,20 +16,15 @@ body {
 	border: 0px;
 	background-color: white;
 }
-
-p {
-	text-align: left;
-}
-
 .guiaobj {
 	background-color: white;
 	display: block;
-	height: 97%;
+	height: 90%;
 	left: 0;
 	overflow: auto;
 	text-align: left;
 	top: 0;
-	width: 98%;
+	width: 97%;
 }
 </style>
 </head>
@@ -37,25 +32,31 @@ p {
 	<div id=guiasYUI class="yui-navset" style="top: 0px; cursor: pointer; left: 0px;">
 		<ul class="yui-nav" style="border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;">
 			<li>
-				<a href="#ancora">
-					<em><span id="guia1" style="text-align: center; font-size: 10px; left: 0px;">Servi&ccedil;os</span></em>
-				</a>
+				<div id='guia1' style='text-align: center; left: 0px;'>
+					<a>
+						<em>Servi&ccedil;os</em>
+					</a>
+				</div>
 			</li>
 			<li>
-				<a href="#ancora">
-					<em><span id="guia2" style="text-align: center; font-size: 10px; left: 0px;">Metadados</span></em>
-				</a>
+				<div id='guia2' style='text-align: center; left: 0px;'>
+					<a>
+						<em>Metadados</em>
+					</a>
+				</div>
 			</li>
 			<li>
-				<a href="#ancora">
-					<em><span id="guia3" style="text-align: center; font-size: 10px; left: 0px;">Temas</span></em>
-				</a>
+				<div id='guia3' style='text-align: center; left: 0px;'>
+					<a>
+						<em>Lista de temas</em>
+					</a>
+				</div>
 			</li>
 		</ul>
 	</div>
 
 	<div class=guiaobj id="guia1obj" style="left: 5px; top: 0px; text-align: left">
-		<p class=paragrafo>
+		<p class=paragrafo >
 			<a href="../../documentacao/ajuda/The_ArcIMS_OGC_WMS_Connector.pdf" target=blank>Veja como criar web services no ARCIMS</a>
 			<br>
 			<a href="../../documentacao/ajuda/ArcGIS9.x.html" target=blank>Veja como utilizar web services no ARCGIS</a>
@@ -67,15 +68,15 @@ p {
 		<div class="styled-select" style="width: 350px; margin-top: 15px;">
 			<input tabindex='0' id=servico value="" size=45 />
 		</div>
-		<p class=paragrafo>
-		<div id=RSSwms style="width: 350px;" ></div>
+		<p class=paragrafo >
+		<div id=RSSwms style="width: 350px;" class=paragrafo ></div>
 		<br>
-		<div id=RSSbt></div>
+		<div id=RSSbt style="text-align:left;"></div>
 	</div>
-	<div class=guiaobj id="guia2obj" style="display: none; left: 0px; top: 00px">
-		<br>
-		<input type=button value="getCapabilities" size=20 onclick="getcapabilities()" class="aplicar" />
-		<br>
+	<div class=guiaobj id="guia2obj" style="display: none; left: 0px; top: 10px">
+		<p class=paragrafo>
+			<input type=button id="getCapabilities" value="Descri&ccedil;&atilde;o do WMS"/>
+		</p>
 		<div id=resultadoget style="display: block; position: relative; top: 5px; left: 1px" class=paragrafo></div>
 	</div>
 	<div class=guiaobj id="guia3obj" style="left: 0px; display: none;">
@@ -98,7 +99,7 @@ p {
 			</div>
 
 		</div>
-		<div id=listatemas style="display: block; position: relative; top: 10px; left: 0px;"></div>
+		<div id=listatemas style="display: block; position: relative; top: 10px; left: 0px;" class=paragrafo ></div>
 	</div>
 
 	<div id="aguarde">
@@ -109,8 +110,11 @@ p {
 	<script type="text/javascript" src="../../classesjs/i3geo.js"></script>
 	<script type="text/javascript" src="index.js"></script>
 	<script type="text/javascript">
-		//mensagemAjuda("men1",document.getElementById("men1").innerHTML)
-		//mensagemAjuda("men2",document.getElementById("men2").innerHTML)
+		var b = new YAHOO.widget.Button(
+			"getCapabilities",
+			{onclick:{fn: getcapabilities}}
+		);
+		b.addClass("rodar");
 		if (window.parent.i3GEO.parametros.editor.toLowerCase() == "sim") {
 			var temp =
 				"<p><a href='#' style='color:red' onclick='abrejanelaIframe()' title='Op&ccedil;&atilde;o vis&iacute;vel apenas para usu&aacute;rios editores'>Editar a lista de endere&ccedil;os dos servi&ccedil;os</a></p>";
@@ -142,34 +146,11 @@ p {
 			var ncanais = canais.length
 			$i("RSSbt").innerHTML = retorno.data.rss;
 			var ins = "";
-			ins += "<select size='5' onchange='registraws(this.value)' style='width:100%;' ><option value='' >WMS cadastrados:</option>";
+			ins += "<select size='5' onchange='registraws(this.value)' style='width:100%;' >";
 			for (i = 0; i < ncanais; i++) {
 				var caso = canais[i];
 				var valor = "'" + caso.link + "','"	+ caso.id_ws + "','" + caso.tipo_ws + "'";
 				ins += "<option value=" + valor + " >"+caso.title+"</option>";
-				/*
-				ins +=
-					"\<p class=clique onclick=\"registraws('" + caso.link
-						+ "','"
-						+ caso.id_ws
-						+ "','"
-						+ caso.tipo_ws
-						+ "')\" \>\<b\>"
-						+ caso.title
-						+ "\<\/b\>&nbsp;"
-						+ caso.description
-						+ "&nbsp;("
-						+ caso.author
-						+ ")"
-				if (caso.nacessos > 0) {
-					var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos)
-					ins +=
-						" \<span style=color:gray \>(disponibilidade: " + pc
-							+ "%, acessos considerados: "
-							+ caso.nacessos
-							+ ")\<\/span>\<\/p\>";
-				}
-				 */
 			}
 			ins += "</select>";
 			document.getElementById("RSSwms").innerHTML = ins;

@@ -58,7 +58,7 @@ i3GEOF.conectarservicos =
 						"",
 						"",
 						$trad("a4")
-						+ "<a class=ajuda_usuario target=_blank href='"
+						+ "&nbsp;<a class=ajuda_usuario target=_blank href='"
 						+ i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=4&idajuda=28' ><b> </b></a>",
 						"i3GEO.conectarwms",
@@ -154,14 +154,11 @@ i3GEOF.conectarservicos =
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante : function() {
-		var minimiza, cabecalho, janela, divid, titulo;
+		var cabecalho, janela, divid, titulo;
 		if($i("i3GEOF.conectarservicos")){
 			return;
 		}
 		cabecalho = function() {
-		};
-		minimiza = function() {
-			i3GEO.janela.minimiza("i3GEOFconectarservicos");
 		};
 		// cria a janela flutuante
 		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeAdd'></span><div class='i3GeoTituloJanela'>" + $trad("conexao",i3GEOF.conectarservicos.dicionario)+"</div>";
@@ -177,7 +174,7 @@ i3GEOF.conectarservicos =
 				false,
 				"hd",
 				cabecalho,
-				minimiza,
+				"",
 				"",
 				true
 			);

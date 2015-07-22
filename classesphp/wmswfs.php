@@ -441,11 +441,11 @@ function temaswms()
 			if(count($layers2) == 1){$retorna[] = "<hr>";}
 		}
 	}
-	$retorna[] = "<br>Proj.:<input size=30 id=proj type=text class=digitar value='".implode(",",wms_srs($dom))."'/><br>";
-	$retorna[] = "<br>Formatos imagem:<input size=30 id=formatos type=text class=digitar value='".implode(",",wms_formats($dom))."'/><br><br>";
-	$retorna[] = "<br>Formatos info:<input size=30 id=formatosinfo type=text class=digitar value='".implode(",",wms_formatsinfo($dom))."'/><br><br>";
-	$retorna[] = "<br>Versao:<input size=30 id=versao type=text class=digitar value='".(wms_version($dom))."'/><br><br>";
-	$retorna[] = "<br>Suporta SLD:<input size=30 id=suportasld type=text class=digitar value='".$suporta."'/><br><br><br>";
+	$retorna[] = "<p class='paragrafo'>Proje&ccedil;&atilde;o:</p><div class='styled-select'><input type='text' id='proj' value='".implode(",",wms_srs($dom))."' /></div>";
+	$retorna[] = "<br><p class='paragrafo'>Formatos imagem:</p><div class='styled-select'><input type='text' id='formatos' value='".implode(",",wms_formats($dom))."' /></div>";
+	$retorna[] = "<br><p class='paragrafo'>Formatos de informa&ccedil;&atilde;o:</p><div class='styled-select'><input type='text' id='formatosinfo' value='".implode(",",wms_formatsinfo($dom))."' /></div>";
+	$retorna[] = "<br><p class='paragrafo'>Vers&atilde;o:</p><div class='styled-select'><input type='text' id='versao' value='".implode(",",wms_version($dom))."' /></div>";
+	$retorna[] = "<br><p class='paragrafo'>Suporta SLD:</p><div class='styled-select'><input type='text' id='suportasld' value='".$suporta."' /></div>";
 	return(implode($retorna));
 }
 /*
