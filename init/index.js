@@ -123,11 +123,11 @@ function mostraBotoes(){
 	//i3GEO.barraDeBotoes.ATIVA = false;
 	var ins = [],i,n = botoesIni.length,texto;
 	for(i=0;i<n;i++){
-		texto = '<div class="r" ><table ><tr><td><a target=_blank href="'+botoesIni[i].href+'" ><img src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';
+		texto = '<div class="r" ><div class="ri" ><a target=_blank href="'+botoesIni[i].href+'" ><img src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';
 		if(botoesIni[i].subtitulo){
 			texto += botoesIni[i].subtitulo;
 		}
-		texto += '</td></tr></table></div>';
+		texto += '</div></div>';
 		ins.push(texto);
 	}
 	$i("botoes").innerHTML = ins.join("");

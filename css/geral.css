@@ -15,6 +15,9 @@ input[type=text]{
     -o-user-select: text;
     user-select: text;
 }
+a:active {
+    outline: none;
+}
 /*
 Popup do identifica no openlayers 3
 */
@@ -1343,10 +1346,10 @@ h1 {
 	text-overflow: ellipsis;
 	font-size: 12px;
 	appearance: none;
-  background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 6px;
+  background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
   @media (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi) {
-      background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 6px;
+      background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
       background-size: 16px 144px;
     }
 }

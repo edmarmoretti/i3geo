@@ -175,14 +175,14 @@
 		OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		(function() {
 			function getTileURL(bounds) {
-		        console.info(this)   
+		        console.info(bounds)   
 				var res = this.map.getResolution();
 		           //var m = i3GEO.util.projGeo2OSM(i3geoOL.maxExtent);
 		           //bounds = i3GEO.util.projGeo2OSM(bounds)
 		           //this.map.zoomIn()
 		           var m = (this.maxExtent);
-		            var x = Math.round((bounds.left - m.left) / (res * 256));
-		            var y = Math.round((m.top - bounds.top) / (res * 256));
+		            var x = Math.round((bounds.left - m.left) / ((res) * 256));
+		            var y = Math.round((m.top - bounds.top) / ((res) * 256));
 		            var z = this.map.getZoom();
 		            var limit = Math.pow(2, z);
 		            
@@ -243,13 +243,13 @@
 				visibility : false
 			});
 
-			var layMSNOsmRoad = new OpenLayers.Layer.TMS("OSM Roads", "http://korona.geog.uni-heidelberg.de/tiles/roads/", {
+			var layMSNOsmRoad = new OpenLayers.Layer.OSM("OSM Roads", ["http://korona.geog.uni-heidelberg.de/tiles/roads/x=${x}&y=${y}&z=${z}"], {
+				displayOutsideMaxExtent: true,
 				type : 'png',
-				getURL : getTileURL,
+				//getURL : getTileURL,
 				isBaseLayer : true,
 				visibility : false,
-				attribution : mapSurfer,
-				displayOutsideMaxExtent: true
+				attribution : mapSurfer
 			});
 			
 			var layMSNOsmRoadsGray =
@@ -272,9 +272,8 @@
 					attribution : mapSurfer
 				});
 			
-			var layMSNOsmHybrid = new OpenLayers.Layer.TMS("OSM Semitransparent", "http://korona.geog.uni-heidelberg.de/tiles/hybrid/", {
-				type : 'png',
-				getURL : getTileURL,
+			var layMSNOsmHybrid = new OpenLayers.Layer.OSM("OSM Semitransparent", "http://korona.geog.uni-heidelberg.de/tiles/hybrid/x=${x}&y=${y}&z=${z}", {
+				displayOutsideMaxExtent: true,
 				visibility : false,
 				isBaseLayer : true,
 				attribution : mapSurfer
