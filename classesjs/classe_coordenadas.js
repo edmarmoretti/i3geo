@@ -355,7 +355,7 @@ i3GEO.coordenadas =
 			var ins =
 				'<table class="i3GeoMascaraCoord" id=' + prefixo
 					+ ' ><tr>'
-					+ "<td>"
+					+ "<td class='contemCaixaTipoCoord' >"
 					+ caixa
 					+ "&nbsp;</td>"
 					+ '<td style=width:10px;text-align:right >&nbsp;X:&nbsp;</td>'
@@ -458,7 +458,7 @@ i3GEO.coordenadas =
 			var ins =
 				"<table id=" + prefixo
 					+ " class='i3GeoMascaraCoord' ><tr>"
-					+ "<td>"
+					+ "<td class='contemCaixaTipoCoord'>"
 					+ caixa
 					+ "&nbsp;<td>"
 					+ "<td style=width:100px;text-align:right >"
@@ -502,7 +502,7 @@ i3GEO.coordenadas =
 			ins =
 				"<table id=" + prefixo
 					+ " class='i3GeoMascaraCoord' ><tr>"
-					+ "<td>"
+					+ "<td class='contemCaixaTipoCoord'>"
 					+ caixa
 					+ "&nbsp;<td>"
 					+ "<td style=width:100px;text-align:right >"
@@ -731,7 +731,7 @@ i3GEO.coordenadas =
 				}
 				caixa =
 					"<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this,\"" + onde
-						+ "\");' class='i3geoCoordenadasComboTipo' ><option>---</option><option value='janela' >janela</option>";
+						+ "\");' class='i3geoCoordenadasComboTipo' ><option>DMS</option><option value='janela' >janela</option>";
 				//
 				// cria a caixa de sele&ccedil;&atilde;o
 				//

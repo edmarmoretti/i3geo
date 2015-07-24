@@ -2680,5 +2680,12 @@ g_traducao =
 				en : "",
 				es : ""
 			}
-		]
+		],
+		"tipo" : [
+ 			{
+ 				pt : "Tipo",
+ 				en : "",
+ 				es : ""
+ 			}
+ 		]
 	};

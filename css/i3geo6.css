@@ -15,6 +15,9 @@ input[type=text]{
 -o-user-select: text;
 user-select: text;
 }
+/*
+Para nao marcar links
+*/
 a:active {
 outline: none;
 }

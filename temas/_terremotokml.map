@@ -1,0 +1,32 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION ""
+    DATA ""
+    METADATA
+      "CLASSE"	"SIM"
+      "permitekmz"	"SIM"
+      "permitedownload"	"SIM"
+      "PLUGINI3GEO"	'{"plugin":"layerkml","parametros":{"url":"openlayers.org/en/v3.7.0/examples/data/kml/2012_Earthquakes_Mag5.kml"}}'
+      "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "TEMA"	"Terremotos kml"
+    END # METADATA
+    NAME "_terremotokml"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 0 0 0
+        SIZE 12
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

@@ -1,4 +1,22 @@
 /*
+para o campo escala e coordenadas
+*/
+.fundoRodape .digitar {
+    background-color: #222222 !IMPORTANT;
+    opacity: 0.9 !IMPORTANT;
+    box-shadow: none !IMPORTANT;
+}
+
+.fundoRodape .digitar:hover {
+    background-color: #222222 !IMPORTANT;
+    opacity: 0.9 !IMPORTANT;
+}
+
+.fundoRodape .digitarOver {
+    background-color: #222222 !IMPORTANT;
+    opacity: 0.9 !IMPORTANT;
+}
+/*
 Barra de botoes de edicao vetorial do openlayers
 */
 .olControlEditingToolbar1 div {
@@ -24,6 +42,12 @@ Estilo geral do rodape da pagina que contem a barra de escala, coordenadas, etc
 		position: relative;
 		text-align: center;
 		background: black;
+}
+.fundoRodape .ticfind {
+	background-image: url("../imagens/botao-tiny-zoomparacoordenadas.png");
+}
+.fundoRodape .ticfind:hover {
+	background-image: url("../imagens/botao-tiny-zoomparacoordenadas-hover.png");
 }
 /*
 Configuracoes especificas dos elementos que ficam no rodape
@@ -77,14 +101,23 @@ Configuracoes especificas dos elementos que ficam no rodape
 .i3GeoMascaraCoord span {
 	border: 0px solid white;
 }
+.contemCaixaTipoCoord {
+	overflow: hidden;
+	width: 40px;
+	background-color: black;
+}
 .i3GeoMascaraCoord select {
-		border: 1px solid #B4B4B4;
-		font-size: 10px;
-		height: 16px;
-		left: 1px;
-		position: relative;
-		top: 1px;
-		width: 40px;
+	border: 0px solid #B4B4B4;
+	font-size: 10px;
+	height: 17px;
+	left: 1px;
+	position: relative;
+	top: 7px;
+	width: 130%;
+	background-color: #222222 !important;
+	box-shadow: none !important;
+	opacity: 0.9 !important;
+	color: white;
 }
 .i3GeoMascaraCoord tr {
 	border: 0px solid white;
