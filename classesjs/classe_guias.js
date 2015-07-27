@@ -146,13 +146,12 @@ i3GEO.guias =
 				id : "guia5",
 				idconteudo : "guia5obj",
 				mostraLink : function(id, url) {
-					$i("i3geoMapasLink_" + id).innerHTML = "<a href='" + url + "' target=_blank >" + url + "</a>";
+					$i("i3geoMapasLink_" + id).innerHTML = "<a href='" + url + "' target=_blank >" + $trad("abreMapa") + "</a>";
 				},
 				click : function(onde) {
 					if (!onde) {
 						onde = i3GEO.guias.CONFIGURA.mapas.idconteudo;
 					}
-					//TODO retirar os estilos do codigo e incluir em arquivo css
 					var pegaMapas =
 						function(retorno) {
 							var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;

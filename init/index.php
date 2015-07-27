@@ -196,7 +196,7 @@ A:hover {
 			<script>mostraBotoes();</script>
 			<div class="r">
 				<div class="ri" >
-					<script type="text/javascript" src="http://www.openhub.net/p/150688/widgets/project_users.js?style=gray"></script>
+					<script type='text/javascript' src='https://www.openhub.net/p/i3geo/widgets/project_users?format=js&style=blue'></script>
 				</div>
 			</div>
 		</div>

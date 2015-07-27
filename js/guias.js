@@ -141,7 +141,7 @@ i3GEO.guias =
 				id : "guia5",
 				idconteudo : "guia5obj",
 				mostraLink : function(id, url) {
-					$i("i3geoMapasLink_" + id).innerHTML = "<a href='" + url + "' target=_blank >" + url + "</a>";
+					$i("i3geoMapasLink_" + id).innerHTML = "<a href='" + url + "' target=_blank >" + $trad("abreMapa") + "</a>";
 				},
 				click : function(onde) {
 					if (!onde) {

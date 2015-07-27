@@ -2682,10 +2682,17 @@ g_traducao =
 			}
 		],
 		"tipo" : [
- 			{
- 				pt : "Tipo",
- 				en : "",
- 				es : ""
- 			}
- 		]
+			{
+				pt : "Tipo",
+				en : "",
+				es : ""
+			}
+		],
+		"abreMapa" : [
+			{
+				pt : "Abrir o mapa",
+				en : "",
+				es : ""
+			}
+		]
 	};
