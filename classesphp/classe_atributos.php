@@ -2117,10 +2117,10 @@ class Atributos
 			$res = str_replace("INFOFORMAT","INFO_FORMAT",$res);
 			$res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"MIME");
 			$res2 = str_replace("INFOFORMAT","INFO_FORMAT",$res2);
+			//echo $res." ".$res2;exit;
 
 			$resposta = file($res);
 			//var_dump($resposta);exit;
-
 			$n = array();
 			if(strtoupper($formatoinfo) != "TEXT/HTML" && strtoupper($formatoinfo) != "MIME"){
 				foreach($resposta as $r){
@@ -2158,20 +2158,21 @@ class Atributos
 				}
 			}
 			//var_dump($n);exit;
-			if(count($n) == 0){
+			$id = nomeRandomico();
+			if(count($n) == 0 && strtoupper($formatoinfo) != "TEXT/HTML"){
 				$formatoinfo = "MIME";
 			}
 			if(strtoupper($formatoinfo) == "TEXT/HTML" && $res != ""){
-				$n[] = array("alias"=>"","valor"=>"<iframe width=250px src='".$res."'></iframe>","link"=>"","img"=>"");
+				$n[] = array("alias"=>"","valor"=>"<iframe width=250px id='".$id."' name='".$id."' src='".$res."'></iframe>","link"=>"","img"=>"");
 			}
 			if(strtoupper($formatoinfo) == "MIME" && $res2 != ""){
-				$n[] = array("alias"=>"","valor"=>"<iframe width=250px src='".$res2."'></iframe>","link"=>"","img"=>"");
+				$n[] = array("alias"=>"","valor"=>"<iframe width=250px id='".$id."' name='".$id."' src='".$res2."'></iframe>","link"=>"","img"=>"");
 			}
 			if($res != ""){
-				$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo ".$formatoinfo,"link"=>$res,"img"=>"");
+				$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo ".$formatoinfo,"link"=>$res,"img"=>"","idIframe"=>$id);
 			}
 			if($res2 != ""){
-				$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo padr&atilde;o do servi&ccedil;o","link"=>$res2,"img"=>"");
+				$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo padr&atilde;o do servi&ccedil;o","link"=>$res2,"img"=>"","idIframe"=>$id);
 			}
 			if($res == "" && $res2 == ""){
 				$n[] = array("alias"=>"Ocorreu um erro","valor"=>"","link"=>"","img"=>"");
