@@ -1163,11 +1163,13 @@ function: adicionaLabel
 Adiciona LABEL em uma classe de um tema
 */
 	function adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,$texto=""){
-		while($novac->numlabels > 0){
-			$novac->removeLabel(0);
+		if($this->vi >= 60300){
+			while($novac->numlabels > 0){
+				$novac->removeLabel(0);
+			}
 		}
 		if($texto == ""){
-			if($this->vi >= 60200){
+			if($this->vi >= 60300){
 				$indiceLabel = $novac->addLabel(new labelObj());
 				$label = $novac->getLabel($indiceLabel);
 			}
@@ -1175,7 +1177,7 @@ Adiciona LABEL em uma classe de um tema
 				$label = $novac->label;
 			}
 		}
-		elseif ($novac->numlabels == 0){
+		elseif ($this->vi >= 60300 && $novac->numlabels == 0){
 			if($wrap != ""){
 				$s = "CLASS LABEL WRAP '$wrap' TEXT '".$texto."' END END";
 				$novac->updateFromString($s);
@@ -1185,8 +1187,8 @@ Adiciona LABEL em uma classe de um tema
 				$novac->updateFromString($s);
 			}
 		}
-
-		if($this->vi >= 60200){
+		
+		if($this->vi >= 60300){
 			$label = $novac->getLabel(0);
 		}
 		else{
@@ -1206,11 +1208,21 @@ Adiciona LABEL em uma classe de um tema
 			$label->set("type",MS_BITMAP);
 			//$label->set("font",$fonte);
 			$t = MS_TINY;
-			if ($tamanho > 5 ){$t = MS_TINY;}
-			if ($tamanho >= 7 ){$t = MS_SMALL;}
-			if ($tamanho >= 10 ){$t = MS_MEDIUM;}
-			if ($tamanho >= 12 ){$t = MS_LARGE;}
-			if ($tamanho >= 14 ){$t = MS_GIANT;}
+			if ($tamanho > 5 ){
+				$t = MS_TINY;
+			}
+			if ($tamanho >= 7 ){
+				$t = MS_SMALL;
+			}
+			if ($tamanho >= 10 ){
+				$t = MS_MEDIUM;
+			}
+			if ($tamanho >= 12 ){
+				$t = MS_LARGE;
+			}
+			if ($tamanho >= 14 ){
+				$t = MS_GIANT;
+			}
 			$label->set("size",$t);
 		}
 		$label->set("angle",$angulo);
