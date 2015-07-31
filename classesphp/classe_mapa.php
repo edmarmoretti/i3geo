@@ -1130,7 +1130,7 @@ class Mapa
 			$cor->setrgb($corlinha[0],$corlinha[1],$corlinha[2]);
 		}
 		if($incluitexto == "sim"){
-			if($this->vi >= 60200){
+			if($this->vi >= 60300){
 				//$classe->addLabel(new labelObj());
 				//$label = $classe->getLabel(0);
 				$s = "CLASS LABEL  END END";

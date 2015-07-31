@@ -50,10 +50,11 @@ body,td
 <table>
 <tr>
 	<td>
-		<script type="text/javascript" src="http://twibbon.com/embed/i3Geo"></script>
+		<a href="https://www.facebook.com/groups/1517726825162707" target="_blank"><img style="width: 120px;" src="../../init/facebook.png"></a>
 	</td>
 	<td>
-		Inclua o logo do i3Geo em seu avatar do Twitter e Facebook (Twibbon)
+		<a href="https://lists.osgeo.org/cgi-bin/mailman/listinfo/i3geo" target="_blank"><img src="../../init/mailman.jpg">
+		</a>
 	</td>
 </tr>
 <tr>
@@ -61,17 +62,10 @@ body,td
 		<script type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
 	</td>
 	<td>
-		Registre-se como um usu&aacute;rio na rede de desenvolvedores de software Ohloh
-	</td>
-</tr>
-<tr>
-	<td>
 		<a href="http://www.twitter.com/i3geo"><img src="http://twitter-badges.s3.amazonaws.com/follow_bird-a.png" /></a>
 	</td>
-	<td>
-		Siga no Twitter
-	</td>
 </tr>
+
 
 </table>
   </body>
