@@ -97,7 +97,7 @@ i3GEOF.animacao = {
 		while(n > 0){
 			n -= 1;
 			if(camadas[n].tema !== "")
-			{ins += "<tr><td><input class=inputsb style='cursor:pointer' type=checkbox value='"+camadas[n].name+"' /></td><td><span style=background:white id='i3GEOanima"+camadas[n].name+"'>"+camadas[n].tema+"</span></td></tr>";}
+			{ins += "<tr><td><input class=inputsb style='cursor:pointer' type=checkbox value='"+camadas[n].name+"' /></td><td><span id='i3GEOanima"+camadas[n].name+"'>"+camadas[n].tema+"</span></td></tr>";}
 		}
 		ins += "</table>";
 		$i("i3GEOFanimacaoLista").innerHTML = ins;
@@ -256,7 +256,7 @@ i3GEOF.animacao = {
 			n = cs.length;
 		while(n > 0){
 			n -= 1;
-			$i("i3GEOanima"+cs[n].value).style.backgroundColor = "white";
+			$i("i3GEOanima"+cs[n].value).style.backgroundColor = "";
 		}
 	}
 };
