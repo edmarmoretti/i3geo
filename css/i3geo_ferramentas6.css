@@ -82,6 +82,24 @@ Utilizado na janela do buscador INDE
 	font-size: 12px;
 	padding: 5px;
 }
+
+.mensagemAjuda {
+	width:95%;
+	padding:2;
+	vertical-align:top;
+	background-color:#ffffff;
+}
+
+.mensagemAjuda th {
+	background-color: #cedff2; 
+	font-family:Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 8pt; 
+	border: 1px solid #B1CDEB; 
+	text-align: left; 
+	padding-left: 7px;
+	padding-right: 11px;
+}
+
 .botoesLegendaFlutuante {
 	font-size: 10px;
 }

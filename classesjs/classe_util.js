@@ -1351,9 +1351,8 @@ i3GEO.util =
 		 * {String} - texto da mensagem
 		 */
 		mensagemAjuda : function(onde, texto) {
-			// TODO remover e criar um estilo
 			var ins =
-				"<table style='width:95%;padding:2;vertical-align:top;background-color:#ffffff;' ><tr><th style='background-color: #cedff2; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; border: 1px solid #B1CDEB; text-align: left; padding-left: 7px;padding-right: 11px;'>";
+				"<table class='mensagemAjuda' ><tr><th>";
 			ins += '<div style="float:right"></div>';
 			ins += '<div style="text-align:left;">';
 			if (texto === "") {
