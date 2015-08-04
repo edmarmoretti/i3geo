@@ -43,6 +43,7 @@ if(!file_exists($nomeImagem)){
 	$objImagemM->saveImage($nomeImagem);
 
 }
+ob_clean();
 header('Content-Length: '.filesize($nomeImagem));
 header('Content-Type: image/png');
 header('Cache-Control: public, max-age=22222222');
