@@ -94,7 +94,7 @@ i3GEOF.opacidademapa = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		i3GEO.janela.comboCabecalhoTemas("i3GEOFopacidademapaComboCabeca","i3GEOFopacidademapaComboCabecaSel","tabela","ligados");
+		i3GEO.janela.comboCabecalhoTemas("i3GEOFopacidademapaComboCabeca","i3GEOFopacidademapaComboCabecaSel","opacidademapa","ligados");
 		try{
 			$i(iddiv).innerHTML = i3GEOF.opacidademapa.html();
 		}
