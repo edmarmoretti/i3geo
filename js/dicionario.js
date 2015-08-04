@@ -2694,5 +2694,19 @@ g_traducao =
 				en : "",
 				es : ""
 			}
+		],
+		"areaAprox" : [
+			{
+				pt : "&Aacute;rea aproximada",
+				en : "",
+				es : ""
+			}
+		],
+		"distAprox" : [
+			{
+				pt : "Dist&acirc;ncia aproximada",
+				en : "",
+				es : ""
+			}
 		]
 	};

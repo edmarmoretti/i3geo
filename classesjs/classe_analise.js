@@ -408,7 +408,7 @@ i3GEO.analise =
 					novoel = document.createElement("div");
 					novoel.id = "mostradistancia";
 					ins =
-						'<div class="hd" style="font-size:11px"><div class="i3GeoTituloJanela">Dist&acirc;ncia aproximada<a class=ajuda_usuario target=_blank href="'
+						'<div class="hd" style="font-size:11px"><div class="i3GeoTituloJanela">'+$trad("distAprox")+'<a class=ajuda_usuario target=_blank href="'
 							+ i3GEO.configura.locaplic + '/ajuda_usuario.php?idcategoria=6&idajuda=50" ><b> </b></a></div></div>'
 							+ '<div class="bd" style="text-align:left;padding:3px;" >'
 							+ '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>'
@@ -425,7 +425,6 @@ i3GEO.analise =
 					novoel.style.borderColor = "gray";
 					document.body.appendChild(novoel);
 					janela = new YAHOO.widget.Panel("mostradistancia", {
-						iframe : true,
 						width : "255px",
 						fixedcenter : false,
 						constraintoviewport : true,
@@ -1076,7 +1075,7 @@ i3GEO.analise =
 					novoel = document.createElement("div");
 					novoel.id = "mostraarea";
 					ins =
-						'<div class="hd" ><div class="i3GeoTituloJanela">&Aacute;rea aproximada<a class=ajuda_usuario target=_blank href="' + i3GEO.configura.locaplic
+						'<div class="hd" ><div class="i3GeoTituloJanela">'+$trad("areaAprox")+'<a class=ajuda_usuario target=_blank href="' + i3GEO.configura.locaplic
 							+ '"/ajuda_usuario.php?idcategoria=6&idajuda=51" ><b> </b></a></div></div>'
 							+ '<div class="bd" style="text-align:left;padding:3px;font-size:10px" >'
 							// + '<label class=paragrafo style="float:left;top:5px;position:relative;">Estilo:</label>'

@@ -992,7 +992,6 @@ width: 95%;
 #mostradistancia {
 z-index: 2600;
 color: red;
-background-color: white;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 10px;
 }
