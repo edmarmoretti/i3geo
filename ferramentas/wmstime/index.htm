@@ -1,15 +1,12 @@
 <html>
+<head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas6.css">
-<style type="text/css">
-.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}
-textarea
-{COLOR: #2F4632;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
-</style>
-<title></title>
+<script src="../../classesjs/i3geo.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/black.css">
+
 </head>
-  <body class="yui-skin-sam" style="background-color: white;" >
-   <div style="height:400px;top:-10px;left:5px;display:block;width:95%;overflow:auto;"  id="parametros" >
+  <body class="yui-skin-sam" style="background-color: white;" id="i3geo" >
+   <div style="height:390px;top:10px;left:5px;display:block;width:95%;overflow:auto;"  id="parametros" >
 
    </div>
    <div id=quadroAnima style="display:none">
@@ -18,16 +15,16 @@ textarea
    	<div id=imagensLidas style="width:210px;background-color:white;height:170px;overflow:auto;top:20px;"></div>
    	<div id=marcaTempo style="display:none;position:absolute;cursor:pointer" ></div>
    	<div id=marcaData style="display:block;position:absolute;text-align:center" ></div>
-   	<div id=controle style="text-align:center;display:none;position:absolute;cursor:pointer"  >
+   	<div id=controle style="margin:auto;width:90%;margin-top:10px;text-align:center;display:none;position:absolute;cursor:pointer"  >
    		<img title='inicia' src="../../imagens/player_inicia.png" onclick="iniciarFilme()" />&nbsp;
    		<img title='pausa' src="../../imagens/player_pausa.png" onclick="pausarFilme()" />&nbsp;
    		<img title='rebobina' src="../../imagens/player_para.png" onclick="rebobina()" />&nbsp;
    		<img title='mais rapido' src="../../imagens/player_avanca.png" onclick="maisrapido()" />&nbsp;
    		<img title='mais lento' src="../../imagens/player_volta.png" onclick="maislento()" />&nbsp;
-		<input style='position:relative;top:-2px;' onclick="javascript:$i('quadroAnima').style.display='none';$i('parametros').style.display='block';" size=18 type='button' value='Voltar' />
+		<br>
+		<input id='voltar' type='button' value='Voltar' />
    	</div>
    </div>
-<script src="../../classesjs/i3geo_tudo_compacto6.js.php" type="text/javascript"></script>
 <script type="text/javascript" src="dicionario.js"></script>
 <script type="text/javascript" src="index.js"></script>
 </body>

@@ -54,37 +54,54 @@ wms_configura = {
 		tipo: 2
 	}
 };
-ins = "<p>"+$trad(1,i3GEOF.wmstime.dicionario)+"</p>";
-ins += "<select style='width:95%;border:1px solid gray;' onchange='escolheuServico(this.value)'>";
+ins = "<p class='paragrafo'>"+$trad(1,i3GEOF.wmstime.dicionario)+":</p>";
+ins += "<div class='styled-select'><select  onchange='escolheuServico(this.value)'>";
 ins += "<option value='' >---</option>";
 for(key in wms_configura){
 	ins += "<option value='"+key+"'>"+wms_configura[key].titulo+"</option>";
 }
-ins += "</select>";
-ins += "<p><input  type=text id=iServico style=width:95% />";
-ins += "<p><TEXTAREA id='WMS_descricao' rows='3' style='width:95%' ></TEXTAREA></p>";
-ins += "<table style='text-align:left'>";
-ins += "<tr><td style='text-align:left'>"+$trad(2,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='0' id=WMS_anoinicio size=4 />";
-ins += "<td style='text-align:left'>"+$trad(3,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='0' id=WMS_anofim size=4 /></tr>";
+ins += "</select></div>";
+ins += "<br><div class='i3geoForm i3geoFormIconeEdita'><input  type=text id=iServico /></div>";
+ins += "<br><p class='paragrafo' ><TEXTAREA id='WMS_descricao' rows='3' style='width:95%' >Metadados</TEXTAREA></p>";
 
-ins += "<tr><td style='text-align:left'>"+$trad(4,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='nulo' id=WMS_mesinicio size=4 />";
-ins += "<td style='text-align:left'>"+$trad(5,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='nulo' id=WMS_mesfim size=4 /></tr>";
+ins += "<table class='lista6'>";
+ins += "<tr><td>"+$trad(2,i3GEOF.wmstime.dicionario)+" </td><td><div class='i3geoForm100'><input  type=text value='0' id=WMS_anoinicio size=4 /></div></td>";
+ins += "<td>"+$trad(3,i3GEOF.wmstime.dicionario)+" </td><td><div class='i3geoForm100'><input  type=text value='0' id=WMS_anofim size=4 /></div></td></tr>";
 
-ins += "<tr><td style='text-align:left'>"+$trad(6,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='nulo' id=WMS_diainicio size=4 />";
-ins += "<td style='text-align:left'>"+$trad(7,i3GEOF.wmstime.dicionario)+" </td><td><input  type=text value='nulo' id=WMS_diafim size=4 /></tr>";
+ins += "<tr><td>"+$trad(4,i3GEOF.wmstime.dicionario)+" </td><td><div class='i3geoForm100'><input  type=text value='nulo' id=WMS_mesinicio size=4 /></div></td>";
+ins += "<td>"+$trad(5,i3GEOF.wmstime.dicionario)+" </td><td><div class='i3geoForm100'><input  type=text value='nulo' id=WMS_mesfim size=4 /></div></td></tr>";
+
+ins += "<tr><td>"+$trad(6,i3GEOF.wmstime.dicionario)+" </td><td><div class='i3geoForm100'><input  type=text value='nulo' id=WMS_diainicio size=4 /></div></td>";
+ins += "<td>"+$trad(7,i3GEOF.wmstime.dicionario)+" </td><td><div class='i3geoForm100'><input  type=text value='nulo' id=WMS_diafim size=4 /></div></td></tr>";
 
 ins += "</table>";
 //ins += "<div style='position:absolute;left:120px;top:180px'>"
-ins += "<p>" + $trad(8,i3GEOF.wmstime.dicionario);
-ins += "<div id='divumaImagemPor' style=width:200px; ></div>";
+ins += "<br><p class='paragrafo'>" + $trad(8,i3GEOF.wmstime.dicionario);
+ins += "<div id='divumaImagemPor' class='styled-select' ></div>";
 
-
-ins += "<div onclick='iniciaImagens()' style='text-align:left;left:0px;top:20px;'><input id='botao1' size=18 type='button' value='"+$trad(9,i3GEOF.wmstime.dicionario)+"' /></div>";
+ins += "<br><input id='botao1' size=18 type='button' value='"+$trad(9,i3GEOF.wmstime.dicionario)+"' />";
 ins += "</div>";
+
 $i("parametros").innerHTML = ins;
 idServicoEscolhido = "";
 emPausa = true;
-//new YAHOO.widget.Button("botao1");
+b = new YAHOO.widget.Button(
+	"botao1",
+	{onclick:{fn: iniciaImagens}}
+);
+b.addClass("rodar150");
+
+b = new YAHOO.widget.Button(
+	"voltar",
+	{
+		onclick: function(){
+			$i('quadroAnima').style.display='none';
+			$i('parametros').style.display='block';
+		}
+	}
+);
+b.addClass("rodar150");
+
 /*
 Function: escolheuServico
 
@@ -112,7 +129,7 @@ function escolheuServico(idWMS){
 	//if(tipoServico > 2)
 	$i("WMS_diafim").value = wms_configura[idWMS].diaFim;
 
-	var ins = "<select id='umaImagemPor' style='border:1px solid gray;width:150px'>";
+	var ins = "<select id='umaImagemPor' >";
 	if(tipoServico == 1){
 		ins += "<option value='ano' selected >"+$trad(10,i3GEOF.wmstime.dicionario)+"</option></select>";
 	}
