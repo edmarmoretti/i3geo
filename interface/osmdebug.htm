@@ -206,28 +206,32 @@
 					"http://tile.stamen.com/watercolor/${z}/${x}/${y}.jpg", {
 						isBaseLayer : true,
 						visibility : false,
-						attribution: attribStamen
+						attribution: attribStamen,
+						tileOptions: {crossOriginKeyword: "anonymous"}
 					});
 			
 			var toner = new OpenLayers.Layer.OSM("Toner",
 				"http://tile.stamen.com/toner/${z}/${x}/${y}.jpg", {
 					isBaseLayer : true,
 					visibility : false,
-					attribution: attribStamen
+					attribution: attribStamen,
+					tileOptions: {crossOriginKeyword: "anonymous"}
 				});
 			
 			var tonerlite = new OpenLayers.Layer.OSM("Toner lite",
 				"http://tile.stamen.com/toner-lite/${z}/${x}/${y}.jpg", {
 					isBaseLayer : true,
 					visibility : false,
-					attribution: attribStamen
+					attribution: attribStamen,
+					tileOptions: {crossOriginKeyword: "anonymous"}
 				});
 			
 			var osm = new OpenLayers.Layer.OSM("OSM",
 					"http://tile.openstreetmap.org/${z}/${x}/${y}.png", {
 						isBaseLayer : true,
 						visibility : true,
-						attribution: attribOSMData
+						attribution: attribOSMData,
+						tileOptions: {crossOriginKeyword: "anonymous"}
 					});
 			
 			var arrayMapQuestAerial = ["http://oatile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg",
@@ -240,7 +244,8 @@
 				displayOutsideMaxExtent: true,
 				attribution: attribMapQuestAerial,
 				isBaseLayer : true,
-				visibility : false
+				visibility : false,
+				tileOptions: {crossOriginKeyword: "anonymous"}
 			});
 
 			var layMSNOsmRoad = new OpenLayers.Layer.OSM("OSM Roads", ["http://korona.geog.uni-heidelberg.de/tiles/roads/x=${x}&y=${y}&z=${z}"], {
@@ -249,7 +254,8 @@
 				//getURL : getTileURL,
 				isBaseLayer : true,
 				visibility : false,
-				attribution : mapSurfer
+				attribution : mapSurfer,
+				tileOptions: {crossOriginKeyword: "anonymous"}
 			});
 			
 			var layMSNOsmRoadsGray =
@@ -276,7 +282,8 @@
 				displayOutsideMaxExtent: true,
 				visibility : false,
 				isBaseLayer : true,
-				attribution : mapSurfer
+				attribution : mapSurfer,
+				tileOptions: {crossOriginKeyword: "anonymous"}
 			});
 			
 			var layMSNAsterHillshade =
