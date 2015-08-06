@@ -304,7 +304,7 @@ i3GEOF.tabela =
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function(parametros) {
-			var minimiza, cabecalho, janela, divid, temp, titulo, id;
+			var duplica, minimiza, cabecalho, janela, divid, temp, titulo, id;
 			if (!parametros) {
 				parametros = {};
 			}

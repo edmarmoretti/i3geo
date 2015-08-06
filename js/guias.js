@@ -1081,7 +1081,7 @@ i3GEO.guias =
 			 * Altera a cor do fundo dos &iacute;cones, voltando ao original
 			 */
 			desativaIcones : function(o) {
-				var ims, n, i;
+				var ims, n, i, temp;
 				if (!o) {
 					o = 0.9;
 				}

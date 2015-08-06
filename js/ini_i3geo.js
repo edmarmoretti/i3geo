@@ -69,7 +69,7 @@
  * Cada javascript inserido na p&aacute;gina adiciona novos objetos, como por
  * exemplo i3GEOF.buffer.
  */
-i3GEOF = [];
+var i3GEOF = [];
 /**
  * Section: YAHOO.i3GEO
  *
@@ -394,7 +394,7 @@ var i3GEO = {
 		// define o valor inicial da variavel que controla as etiquetas quando o
 		// usuario clica no mapa
 		i3GEO.eventos.cliquePerm.ativoinicial = i3GEO.eventos.cliquePerm.ativo;
-		var montaMapa, mashup, tamanho;
+		var montaMapa, mashup, tamanho, temp;
 		i3GEO.mapa.aplicaPreferencias();
 		montaMapa = function(retorno) {
 			try {
@@ -752,7 +752,6 @@ var i3GEO = {
 				return;
 			}
 			i3GEO.mapa.verifica(retorno);
-			tempo = "";
 			mapscale = i3GEO.parametros.mapscale;
 			i3GEO.atualizaParametros(retorno.data.variaveis);
 

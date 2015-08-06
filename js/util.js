@@ -42,7 +42,7 @@ if (typeof (i3GEO) === 'undefined') {
  *
  * {boolean}
  */
-navm = false;
+var navm = false;
 /**
  * Constant: navn
  *
@@ -52,7 +52,7 @@ navm = false;
  *
  * {boolean}
  */
-navn = false;
+var navn = false;
 /**
  * Constant: chro
  *
@@ -62,7 +62,7 @@ navn = false;
  *
  * {boolean}
  */
-chro = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+var chro = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 /**
  * Constant: opera
  *
@@ -72,7 +72,7 @@ chro = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
  *
  * {boolean}
  */
-opera = navigator.userAgent.toLowerCase().indexOf('opera') > -1;
+var opera = navigator.userAgent.toLowerCase().indexOf('opera') > -1;
 if (navigator.appName.substring(0, 1) === 'N') {
 	navn = true;
 }
@@ -90,12 +90,12 @@ if (opera === true) {
  *
  * Essas operacoes sao controladas pela funcao ajaxiniciaparametros.
  */
-g_operacao = "";
+var g_operacao = "";
 /**
  * Depreciado - Tipo de acao que esta sendo executada. Quando o usuario clica no mapa, essa variavel e pesquisada para definir o tipo de
  * operacao que deve ser executada. E definida quando o usuario seleciona uma determinada ferramenta do i3Geo.
  */
-g_tipoacao = "zoomli";
+var g_tipoacao = "zoomli";
 
 /**
  * Function: $i
@@ -110,7 +110,10 @@ g_tipoacao = "zoomli";
  *
  * {Object}
  */
-$i = function(id) {
+var $i = function(id) {
+	if(!id || id === ""){
+		return false;
+	}
 	return document.getElementById(id);
 };
 /**
@@ -1221,6 +1224,7 @@ i3GEO.util =
 		 * {boolean} - mostra ou nao a janela de aguarde
 		 */
 		scriptTag : function(js, ini, id, aguarde) {
+			var head, script;
 			/*
 			 * if (!aguarde) { aguarde = false; } var head, script, tipojanela = ""; if (i3GEO.janela) { tipojanela =
 			 * i3GEO.janela.ESTILOAGUARDE; }
@@ -1453,7 +1457,7 @@ i3GEO.util =
 			var monta, temp, temp1, temp2;
 			monta =
 				function(retorno) {
-					var i, comboTemas = '', n, nome = "";
+					var i, comboTemas = '', n, nome = "", tema;
 					if (yui === true) {
 						comboTemas =
 							'<input type="button" name=' + id + '_button id="' + id + '" value="' + $trad("x33") + '&nbsp;&nbsp;">';
@@ -2815,6 +2819,7 @@ i3GEO.util =
 		 * {function} - fun&ccedil;&atilde;o que ir&aacute; processar o resultado
 		 */
 		ajaxGet : function(sUrl, funcaoRetorno) {
+			var re,falhou, callback;
 			sUrl = escape(sUrl);
 			re = new RegExp("%3F", "g");
 			sUrl = sUrl.replace(re, '?');
@@ -2825,8 +2830,9 @@ i3GEO.util =
 
 			re = new RegExp("%3A", "g");
 			sUrl = sUrl.replace(re, ':');
-			var falhou = function(e) {
-			}, callback = {
+			falhou = function(e) {
+			};
+			callback = {
 				success : function(o) {
 					try {
 						funcaoRetorno.call("", YAHOO.lang.JSON.parse(o.responseText));
@@ -3536,10 +3542,10 @@ try {
 // alias
 
 // depreciado na versao 6.0
-$im = function(g) {
+var $im = function(g) {
 	return i3GEO.util.$im(g);
 };
-$inputText = function(idPai, larguraIdPai, idInput, titulo, digitos, valor, nome, onch) {
+var $inputText = function(idPai, larguraIdPai, idInput, titulo, digitos, valor, nome, onch) {
 	if (arguments.length === 6) {
 		nome = "";
 	}

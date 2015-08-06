@@ -1,5 +1,5 @@
 //utilize $trad("p1") para retornar o texto
-g_traducao =
+var g_traducao =
 	{
 		// texto da janela de mensagens
 		"p1" : [

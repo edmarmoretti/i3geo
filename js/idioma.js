@@ -427,7 +427,7 @@ i3GEO.idioma = {
  *
  * {String} - Texto traduzido.
  */
-$trad = function(id, dic) {
+var $trad = function(id, dic) {
 	if (!dic) {
 		dic = i3GEO.idioma.DICIONARIO;
 	}
@@ -437,24 +437,13 @@ $trad = function(id, dic) {
 };
 //
 (function() {
-	try {
-		var c = i3GEO.util.pegaCookie("i3geolingua");
-		if (c) {
-			i3GEO.idioma.define(c);
-			g_linguagem = c;
-		} else {
-			if (typeof (g_linguagem) !== "undefined") {
-				i3GEO.idioma.define(g_linguagem);
-			} else {
-				g_linguagem = "pt";
-				i3GEO.idioma.define("pt");
-			}
-		}
-		if (typeof ('g_traducao') !== "undefined") {
-			i3GEO.idioma.defineDicionario(g_traducao);
-		}
-	} catch (e) {
-		i3GEO.janela.tempoMsg("Problemas com idiomas "
-			+ e);
+	var c = i3GEO.util.pegaCookie("i3geolingua");
+	if (c) {
+		i3GEO.idioma.define(c);
+	} else {
+		i3GEO.idioma.define("pt");
+	}
+	if (typeof ('g_traducao') !== "undefined") {
+		i3GEO.idioma.defineDicionario(g_traducao);
 	}
 })();

@@ -525,8 +525,8 @@ i3GEO.coordenadas =
 		 *
 		 */
 		atualizaCodigo : function(onde, configProj, x, y) {
-			var ondeValor = $i(onde + configProj + "Codigo");
-			onde = $i(onde), temp = i3GEO.coordenadas.config[configProj], codigo = "";
+			var ondeValor = $i(onde + configProj + "Codigo"), temp = i3GEO.coordenadas.config[configProj], codigo = "";
+			onde = $i(onde);
 			if (onde && onde.style.display === "none") {
 				return;
 			}
@@ -917,7 +917,7 @@ i3GEO.coordenadas =
 			 * Converte coordeanadas lat long em geohash
 			 */
 			encodeGeoHash : function(latitude, longitude) {
-				var is_even = 1, lat = [], lon = [], bit = 0, ch = 0, precision = 12, geohash = "";
+				var mid, is_even = 1, lat = [], lon = [], bit = 0, ch = 0, precision = 12, geohash = "";
 				lat[0] = -90.0;
 				lat[1] = 90.0;
 				lon[0] = -180.0;

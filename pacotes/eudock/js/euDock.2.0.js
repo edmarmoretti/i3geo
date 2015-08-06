@@ -882,7 +882,7 @@ function on_MouseUp(e) {
 };
 
 function on_MouseClick(e) {
-	if (!e) var e = window.event;
+	if (!e) e = window.event;
 	for (var i in euEnv.euDockArray)
 		if (euEnv.euDockArray[i].mouseClick)
 			euEnv.exeThread |= euEnv.euDockArray[i].mouseClick(euEnv.euScrOfX+e.clientX,euEnv.euScrOfY+e.clientY);

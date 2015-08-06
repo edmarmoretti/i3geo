@@ -537,7 +537,7 @@ i3GEO.arvoreDeTemas = {
 			console.info("i3GEO.arvoreDeTemas.listaRegioes()");
 
 		var monta = function(retorno) {
-			var node, nraiz, i, html;
+			var node, nraiz, i, html, tema;
 			node = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idregioes",
 					"raiz");
 			nraiz = retorno.length;
@@ -549,19 +549,20 @@ i3GEO.arvoreDeTemas = {
 					"nameInput" : "regioesmetaestat",
 					"tid" : "metaregiao_" + retorno[i].codigo_tipo_regiao,
 					"nome" : retorno[i].nome_tipo_regiao
-				}, html = i3GEO.arvoreDeTemas.montaTextoTema("gray", tema),
-						new YAHOO.widget.HTMLNode({
-							isleaf : true,
-							html : html,
-							expanded : false,
-							hasIcon : true,
-							className: "i3GeoFolder",
-							enableHighlight : false,
-							tipoa_tema : "METAREGIAO",
-							codigo_tipo_regiao : retorno[i].codigo_tipo_regiao,
-							idtema : "metaregiao_"
-									+ retorno[i].codigo_tipo_regiao
-						}, node);
+				};
+				html = i3GEO.arvoreDeTemas.montaTextoTema("gray", tema);
+				new YAHOO.widget.HTMLNode({
+					isleaf : true,
+					html : html,
+					expanded : false,
+					hasIcon : true,
+					className: "i3GeoFolder",
+					enableHighlight : false,
+					tipoa_tema : "METAREGIAO",
+					codigo_tipo_regiao : retorno[i].codigo_tipo_regiao,
+					idtema : "metaregiao_"
+							+ retorno[i].codigo_tipo_regiao
+				}, node);
 			}
 			node.loadComplete();
 		};
@@ -1166,7 +1167,7 @@ i3GEO.arvoreDeTemas = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.arvoreDeTemas.montaArvore()");
 
-		var mais = "", tempNode, tempNode1, retorno, root, insp, outrasOpcoes, dados, c, i, j, conteudo, editor;
+		var ig, mais = "", tempNode, tempNode1, retorno, root, insp, outrasOpcoes, dados, c, i, j, conteudo, editor;
 		(function() {
 			function changeIconMode() {
 				buildTree();
@@ -1595,7 +1596,7 @@ i3GEO.arvoreDeTemas = {
 			console.info("i3GEO.arvoreDeTemas.montaGrupos()");
 
 		var temp = function() {
-			var grupos, c, raiz, nraiz, mostra, i, d, editor;
+			var grupos, c, raiz, nraiz, mostra, i, d, editor, tempNode;
 			grupos = i3GEO.arvoreDeTemas.GRUPOS.grupos;
 			c = grupos.length - 3;
 			raiz = grupos[c].temasraiz;
@@ -1693,7 +1694,7 @@ i3GEO.arvoreDeTemas = {
 			console.info("i3GEO.arvoreDeTemas.montaSubGrupos()");
 
 		var temp = function() {
-			var i, c, mostra, d, tempNode, nraiz, subgrupos, raiz;
+			var i, c, mostra, d, tempNode, nraiz, subgrupos, raiz, editor;
 			subgrupos = i3GEO.arvoreDeTemas.SUBGRUPOS.subgrupo;
 			c = subgrupos.length;
 			raiz = i3GEO.arvoreDeTemas.SUBGRUPOS.temasgrupo;
@@ -2020,7 +2021,7 @@ i3GEO.arvoreDeTemas = {
 		var html, lkmini, lkmini1, lkgrcode, lkgrcode1, n, ogc;
 		if (node.data.fonte && node.data.fonte !== ""
 				&& node.data.fonte !== " ") {
-			tempNode = new YAHOO.widget.HTMLNode({
+			new YAHOO.widget.HTMLNode({
 				isLeaf : true,
 				enableHighlight : false,
 				expanded : false,

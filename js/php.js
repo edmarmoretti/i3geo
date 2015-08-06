@@ -75,7 +75,7 @@ if (typeof (i3GEO) === 'undefined') {
  * isso n&atilde;o afeta em nada) e temp &eacute; a fun&ccedil;&atilde;o que tratar&aacute; o retorno dos dados.
  *
  */
-cpJSON = new cpaint();
+var cpJSON = new cpaint();
 cpJSON.set_response_type("JSON");
 cpJSON.set_transfer_mode("POST");
 

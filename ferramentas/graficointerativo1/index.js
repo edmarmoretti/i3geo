@@ -534,7 +534,7 @@ i3GEOF.graficointerativo1 =
 		 *
 		 */
 		iniciaJanelaFlutuante : function(parametros) {
-			var minimiza, cabecalho, janela, divid, temp, titulo, idjanela;
+			var duplica, minimiza, cabecalho, janela, divid, temp, titulo, idjanela;
 			//
 			// verifica se parametros contem dados, caso contrario compatibiliza o objeto
 			// com a versao 6.0 do i3Geo

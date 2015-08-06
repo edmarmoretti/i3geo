@@ -58,7 +58,7 @@ if (typeof (i3GEO) === 'undefined') {
  *
  * (end)
  */
-objposicaocursor = {
+var objposicaocursor = {
 	ddx : "",
 	ddy : "",
 	dmsx : "",
@@ -546,9 +546,6 @@ i3GEO.eventos =
 			};
 			docMapa.onmouseout = function() {
 				objposicaocursor.dentroDomapa = false;
-				try {
-					objmapaparado = "parar";
-				} catch (e) {}
 			};
 			docMapa.onmousedown = function(exy) {
 				if(objposicaocursor.dentroDomapa === false){

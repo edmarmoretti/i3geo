@@ -546,8 +546,10 @@ i3GEO.gadgets =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.gadgets.mostraMenuSuspenso()");
 
-			var menuUnico, objid, i, estilo, t, onMenuBarBeforeRender, temp, i3GEOoMenuBarLocal, ms = i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso, confm =
+			var i3GEOoMenuBar, n, menuUnico, objid, i, estilo, t, onMenuBarBeforeRender, temp, i3GEOoMenuBarLocal, ms = i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso, confm =
 				i3GEO.configura.oMenuData, ins = "", alinhamento = "";
+
+			i3GEOoMenuBar = YAHOO.widget.MenuManager;
 
 			if (arguments.length === 0) {
 				id = ms.idhtml;
@@ -630,7 +632,6 @@ i3GEO.gadgets =
 				if(i3GEO.parametros.w < 700 || ms.menuUnico === true){
 					menuUnico();
 				}
-				i3GEOoMenuBar = YAHOO.widget.MenuManager;
 				if (objid) {
 					objid.className = "yuimenubar";
 					temp = $i("contemMenu");

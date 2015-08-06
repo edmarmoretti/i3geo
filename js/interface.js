@@ -48,6 +48,13 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
+// essa variavel guarda a posicao do mapa na tela
+// e usada em vercoes com dispositivo touche para melhorar a performance
+var i3GEOtouchesPosMapa = "";
+
+//variavel que armazena o objeto mapa criado com o OpenLayers
+var i3geoOL;
+
 i3GEO.Interface =
 	{
 		/**
@@ -1005,12 +1012,16 @@ i3GEO.Interface =
 								});
 							}
 							i3GEO.util.arvore("<b>" + $trad("p16") + "</b>", "listaLayersBase", temp);
-						} else {
+						}
+						//TODO layerSwitcher talvez volte um dia https://twitter.com/RemiBovard/status/525028570780139520
+						/*
+						else {
 							if (openlayers.GADGETS.LayerSwitcher === true && i3GEO.arvoreDeCamadas.INCLUILFUNDO === false) {
 								// nao existe no OL3
 								// i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
 							}
 						}
+						*/
 
 						if (i3GEO.configura.mapaRefDisplay !== "none") {
 							if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay")) {
