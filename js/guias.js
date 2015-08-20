@@ -150,114 +150,115 @@ i3GEO.guias =
 					//TODO retirar os estilos do codigo e incluir em arquivo css
 					var pegaMapas =
 						function(retorno) {
-							var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;
-							ins =
-								"<br><div id='banners' style='overflow:auto;text-align:center'>" + "<a class='linkMapasEditor' href='" + i3GEO.configura.locaplic
-									+ "/admin/html/mapas.html' target=_blank >" + $trad("x89") + "</a><br><br>";
-							mapa = retorno.data.mapas;
-							ig1lt = mapa.length;
-							ig1 = 0;
-							urlinterface = window.location.origin + window.location.pathname;
-							if (ig1lt > 0) {
-								do {
-									temp = mapa[ig1];
-									nome = temp.NOME;
-									if (temp.PUBLICADO) {
-										if (temp.PUBLICADO.toLowerCase() === "nao") {
-											nome = "<s>" + nome + "</s>";
-										}
+						var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;
+						ins =
+							"<br><div id='banners' style='overflow:auto;text-align:center'>";
+						if(i3GEO.configura.verificaCookieLogin === true){
+							ins += "<a class='linkMapasEditor' href='" + i3GEO.configura.locaplic
+								+ "/admin/html/mapas.html' target=_blank >" + $trad("x89") + "</a><br>";
+						}
+						ins += "<br>";
+						mapa = retorno.data.mapas;
+						ig1lt = mapa.length;
+						ig1 = 0;
+						urlinterface = window.location.origin + window.location.pathname;
+						if (ig1lt > 0) {
+							do {
+								temp = mapa[ig1];
+								nome = temp.NOME;
+								if (temp.PUBLICADO) {
+									if (temp.PUBLICADO.toLowerCase() === "nao") {
+										nome = "<s>" + nome + "</s>";
 									}
-									lkd = temp.LINK;
-									link = i3GEO.configura.locaplic + "/ms_criamapa.php?temasa=" + temp.TEMAS + "&layers=" + temp.LIGADOS;
-									if (temp.EXTENSAO !== "") {
-										link += "&mapext=" + temp.EXTENSAO;
-									}
-									if (temp.OUTROS !== "") {
-										link += "&" + temp.OUTROS;
-									}
-									if (lkd !== "") {
-										link = lkd;
-									}
-									ins +=
-										"<div style='float: left;width:170px;background-color:white;padding:5px;margin:5px;border: 1px solid #F0F0F0;border-radius: 5px;box-shadow: 1px 1px 1px 1px #D3D3D3;' >";
+								}
+								lkd = temp.LINK;
+								link = i3GEO.configura.locaplic + "/ms_criamapa.php?temasa=" + temp.TEMAS + "&layers=" + temp.LIGADOS;
+								if (temp.EXTENSAO !== "") {
+									link += "&mapext=" + temp.EXTENSAO;
+								}
+								if (temp.OUTROS !== "") {
+									link += "&" + temp.OUTROS;
+								}
+								if (lkd !== "") {
+									link = lkd;
+								}
+								ins +=
+									"<div style='cursor:pointer; height: 120px;float: left;width:45%;background-color:white;padding:5px;margin:5px;border: 1px solid #F0F0F0;border-radius: 5px;box-shadow: 1px 1px 1px 1px #D3D3D3;' >";
 
-									if (temp.IMAGEM && temp.IMAGEM != "") {
-										ins +=
-											"<div style='text-align:center;' ><a href='" + link
-												+ "' style=text-align:center;text-decoration:none; >" + "<img src='" + temp.IMAGEM
-												+ "'></a></div>";
-									}
-									// verifica se o mapfile esta salvo no banco
-									// diretamente
-									if (temp.CONTEMMAPFILE == "nao") {
-										ins +=
-											"<div><p class=paragrafo style=text-align:center;cursor:pointer >" + "<a href='" + link
-												+ "' style=text-align:center;text-decoration:none; >" + nome + " (" + temp.ID_MAPA
-												+ ")</a></p></div>";
-									} else {
-										// combo de opcoes para abrir os mapas
-										// salvos
-										// como mapfiles
-										// esses links tambem sao colocados em
-										// admin/php/xml.php geraRSSmapas
-										combo =
-											"<select style='width:170px;' onchange='i3GEO.guias.CONFIGURA.mapas.mostraLink("
-												+ ig1
-												+ ",this.value)'>"
-												+ "<option value=''>"
-												+ $trad("x103")
-												+ ":</option>"
-												+ "<option value='"
-												+ link
-												+ "'>Como foi salvo</option>"
-												+ "<option value='"
-												+ link
-												+ "&interface="
-												+ urlinterface
-												+ "'>Com a interface atual</option>"
-												+ "<option value='"
-												+ i3GEO.configura.locaplic
-												+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
-												+ temp.ID_MAPA
-												+ "&fundo=e_wsm'>Openlayers com todos os botoes</option>"
-												+ "<option value='"
-												+ i3GEO.configura.locaplic
-												+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
-												+ temp.ID_MAPA
-												+ "&fundo=est_wms'>Sem o fundo</option>"
-												+ "<option value='"
-												+ i3GEO.configura.locaplic
-												+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
-												+ temp.ID_MAPA
-												+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com botoes principais</option>"
-												+ "<option value='"
-												+ i3GEO.configura.locaplic
-												+ "/mashups/osm.php?numzoomlevels=18&restauramapa="
-												+ temp.ID_MAPA
-												+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com botoes principais e OSM</option>"
-												+ "<option value='" + i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
-												+ temp.ID_MAPA
-												+ "&botoes=legenda pan zoombox zoomtot zoomin zoomout'>Botoes de navegacao</option>"
-												+ "</select>";
-										ins +=
-											"<div>" + "<p class=paragrafo style=text-align:center;cursor:pointer >"
-												+ "<img style=text-align:center src='" + i3GEO.configura.locaplic
-												+ "/ferramentas/salvamapa/geraminiatura.php?w=100&h=67&restauramapa=" + temp.ID_MAPA
-												+ "'><br><br>" + "<a href='" + link + "' style=text-align:center;text-decoration:none; >"
-												+ nome + " (" + temp.ID_MAPA + ")</a>" +
-												// "<br><a target=_blank
-												// href='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?"+temp.OUTROS+"&fundo=e_wsm'
-												// style=text-align:center;text-decoration:none;color:gray;
-												// >Preview</a>" +
-												"<br>" + combo + "<br><div style='cursor:pointer;' id='i3geoMapasLink_" + ig1 + "' ></div>"
-												+ "</p></div>";
-									}
-									ins += "</div>";
-									ig1++;
-								} while (ig1 < ig1lt);
-							}
-							$i(onde).innerHTML = ins + "</div>";
-						};
+								if (temp.IMAGEM && temp.IMAGEM != "") {
+									ins +=
+										"<div style='float:left;margin:2px' ><a href='" + link
+											+ "' style=text-align:center;text-decoration:none; >" + "<img src='" + temp.IMAGEM
+											+ "'></a></div>";
+								}
+								// verifica se o mapfile esta salvo no banco
+								// diretamente
+								nome +=  " (" + temp.ID_MAPA + ")";
+								if (temp.CONTEMMAPFILE == "nao") {
+									ins +=
+										"<div class=paragrafo style='text-align:left;'>" + "<a href='" + link
+											+ "' style=text-align:left;text-decoration:none; >" + nome
+											+ "</a></div>";
+								} else {
+									// combo de opcoes para abrir os mapas
+									// salvos
+									// como mapfiles
+									// esses links tambem sao colocados em
+									// admin/php/xml.php geraRSSmapas
+									combo =
+										"<select style='width:170px;' onchange='i3GEO.guias.CONFIGURA.mapas.mostraLink("
+											+ ig1
+											+ ",this.value)'>"
+											+ "<option value=''>"
+											+ $trad("x103")
+											+ ":</option>"
+											+ "<option value='"
+											+ link
+											+ "'>Como foi salvo</option>"
+											+ "<option value='"
+											+ link
+											+ "&interface="
+											+ urlinterface
+											+ "'>Com a interface atual</option>"
+											+ "<option value='"
+											+ i3GEO.configura.locaplic
+											+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
+											+ temp.ID_MAPA
+											+ "&fundo=e_wsm'>Openlayers com todos os botoes</option>"
+											+ "<option value='"
+											+ i3GEO.configura.locaplic
+											+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
+											+ temp.ID_MAPA
+											+ "&fundo=est_wms'>Sem o fundo</option>"
+											+ "<option value='"
+											+ i3GEO.configura.locaplic
+											+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
+											+ temp.ID_MAPA
+											+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com botoes principais</option>"
+											+ "<option value='"
+											+ i3GEO.configura.locaplic
+											+ "/mashups/osm.php?numzoomlevels=18&restauramapa="
+											+ temp.ID_MAPA
+											+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com botoes principais e OSM</option>"
+											+ "<option value='" + i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
+											+ temp.ID_MAPA
+											+ "&botoes=legenda pan zoombox zoomtot zoomin zoomout'>Botoes de navegacao</option>"
+											+ "</select>";
+									ins +=
+										"<div style='float:left;margin:2px'>"
+											+ "<img src='" + i3GEO.configura.locaplic
+											+ "/ferramentas/salvamapa/geraminiatura.php?w=100&h=67&restauramapa=" + temp.ID_MAPA
+											+ "'></div><div class=paragrafo style='text-align:left;'><a href='" + link + "' style=text-align:center;text-decoration:none; >"
+											+ nome + "</a></div>"
+											+ combo + "<br><div style='cursor:pointer;' id='i3geoMapasLink_" + ig1 + "' ></div>";
+
+								}
+								ins += "</div>";
+								ig1++;
+							} while (ig1 < ig1lt);
+						}
+						$i(onde).innerHTML = ins + "</div>";
+					};
 					if ($i(i3GEO.guias.CONFIGURA.mapas.idconteudo)) {
 						$i(i3GEO.guias.CONFIGURA.mapas.idconteudo).innerHTML = "Aguarde...";
 					}

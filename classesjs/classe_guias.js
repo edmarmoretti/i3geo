@@ -156,8 +156,12 @@ i3GEO.guias =
 						function(retorno) {
 							var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;
 							ins =
-								"<br><div id='banners' style='overflow:auto;text-align:center'>" + "<a class='linkMapasEditor' href='" + i3GEO.configura.locaplic
-									+ "/admin/html/mapas.html' target=_blank >" + $trad("x89") + "</a><br><br>";
+								"<br><div id='banners' style='overflow:auto;text-align:center'>";
+							if(i3GEO.configura.verificaCookieLogin === true){
+								ins += "<a class='linkMapasEditor' href='" + i3GEO.configura.locaplic
+									+ "/admin/html/mapas.html' target=_blank >" + $trad("x89") + "</a><br>";
+							}
+							ins += "<br>";
 							mapa = retorno.data.mapas;
 							ig1lt = mapa.length;
 							ig1 = 0;
@@ -183,21 +187,22 @@ i3GEO.guias =
 										link = lkd;
 									}
 									ins +=
-										"<div style='float: left;width:170px;background-color:white;padding:5px;margin:5px;border: 1px solid #F0F0F0;border-radius: 5px;box-shadow: 1px 1px 1px 1px #D3D3D3;' >";
+										"<div style='cursor:pointer; height: 120px;float: left;width:45%;background-color:white;padding:5px;margin:5px;border: 1px solid #F0F0F0;border-radius: 5px;box-shadow: 1px 1px 1px 1px #D3D3D3;' >";
 
 									if (temp.IMAGEM && temp.IMAGEM != "") {
 										ins +=
-											"<div style='text-align:center;' ><a href='" + link
+											"<div style='float:left;margin:2px' ><a href='" + link
 												+ "' style=text-align:center;text-decoration:none; >" + "<img src='" + temp.IMAGEM
 												+ "'></a></div>";
 									}
 									// verifica se o mapfile esta salvo no banco
 									// diretamente
+									nome +=  " (" + temp.ID_MAPA + ")";
 									if (temp.CONTEMMAPFILE == "nao") {
 										ins +=
-											"<div><p class=paragrafo style=text-align:center;cursor:pointer >" + "<a href='" + link
-												+ "' style=text-align:center;text-decoration:none; >" + nome + " (" + temp.ID_MAPA
-												+ ")</a></p></div>";
+											"<div class=paragrafo style='text-align:left;'>" + "<a href='" + link
+												+ "' style=text-align:left;text-decoration:none; >" + nome
+												+ "</a></div>";
 									} else {
 										// combo de opcoes para abrir os mapas
 										// salvos
@@ -244,17 +249,13 @@ i3GEO.guias =
 												+ "&botoes=legenda pan zoombox zoomtot zoomin zoomout'>Botoes de navegacao</option>"
 												+ "</select>";
 										ins +=
-											"<div>" + "<p class=paragrafo style=text-align:center;cursor:pointer >"
-												+ "<img style=text-align:center src='" + i3GEO.configura.locaplic
+											"<div style='float:left;margin:2px'>"
+												+ "<img src='" + i3GEO.configura.locaplic
 												+ "/ferramentas/salvamapa/geraminiatura.php?w=100&h=67&restauramapa=" + temp.ID_MAPA
-												+ "'><br><br>" + "<a href='" + link + "' style=text-align:center;text-decoration:none; >"
-												+ nome + " (" + temp.ID_MAPA + ")</a>" +
-												// "<br><a target=_blank
-												// href='"+i3GEO.configura.locaplic+"/mashups/openlayers.php?"+temp.OUTROS+"&fundo=e_wsm'
-												// style=text-align:center;text-decoration:none;color:gray;
-												// >Preview</a>" +
-												"<br>" + combo + "<br><div style='cursor:pointer;' id='i3geoMapasLink_" + ig1 + "' ></div>"
-												+ "</p></div>";
+												+ "'></div><div class=paragrafo style='text-align:left;'><a href='" + link + "' style=text-align:center;text-decoration:none; >"
+												+ nome + "</a></div>"
+												+ combo + "<br><div style='cursor:pointer;' id='i3geoMapasLink_" + ig1 + "' ></div>";
+
 									}
 									ins += "</div>";
 									ig1++;

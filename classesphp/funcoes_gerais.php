@@ -1269,8 +1269,7 @@ function georssCanais($servico,$map_file,$dir_tmp,$locaplic)
 {
 	$xml = simplexml_load_file($servico);
 	//var_dump($xml);
-	foreach($xml->channel as $c)
-	{
+	foreach($xml->channel as $c){
 		$resultado[] = array("title"=>(ixml($c,"title")),"link"=>(ixml($c,"link")),"description"=>(ixml($c,"description")),"category"=>(ixml($c,"category")));
 	}
 	//var_dump($resultado);

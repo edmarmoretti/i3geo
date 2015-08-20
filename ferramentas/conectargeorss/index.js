@@ -39,20 +39,26 @@ Free Software Foundation, Inc., no endere&ccedil;o
 */
 
 //parametrosURL();
-ativaGuias("");
-mostraGuia("guia1");
+
+
 //variaveis globais
+i3GEOF = {conectargeorss: {}};
+
 g_tipo = ""; //tipo de tema
 g_tema = ""; //tema selecionado do ws
 g_legenda = ""; //legenda do tema
 g_nometema = ""; //nome do tema
+g_sid = window.parent.i3GEO.configura.sid;
 
-$i("guia1").onclick = function()
-{
-	mostraGuia("guia1");
+i3GEO.guias.mostraGuiaFerramenta("guia1");
+
+$i("guia1").onclick = function(){
+	i3GEO.guias.mostraGuiaFerramenta("guia1");
 	$i("resultadoget").innerHTML = "";
 };
-$i("guia2").onclick = function(){clickGuia2();};
+$i("guia2").onclick = function(){
+	clickGuia2();
+};
 
 /*
 Function: clickGuia2
@@ -65,11 +71,10 @@ Veja:
 */
 function clickGuia2()
 {
-	mostraGuia("guia2");
+	i3GEO.guias.mostraGuiaFerramenta("guia2");
 	$i("resultadoget").innerHTML = "";
 	if ($i("servico").value == ""){i3GEO.janela.tempoMsg($trad('msgServico',i3GEOF.conectargeorss.dicionario));}
-	else
-	{
+	else{
 		$i("guia2obj").style.display="block";
 		aguarde("block");
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=georssCanais&servico="+$i("servico").value;
@@ -99,14 +104,14 @@ retorno {JSON} - retorno da fun&ccedil;&atilde;o clickGuia2
 */
 function listaCanais(retorno)
 {
-	var i,ins = $trad('selecionaItem',i3GEOF.conectargeorss.dicionario)+"<br>";
+	var i,ins = "<p class='paragrafo'>"+ $trad('selecionaItem',i3GEOF.conectargeorss.dicionario)+"</p>";
 	if (retorno.data != undefined)
 	{
 		retorno = retorno.data;
 		for (i=0;i<retorno.length; i++)
 		{
-			ins += "<p style=cursor:pointer onclick=adicionatema('"+i+"') ><input type=radio name=cn value=mapa >&nbsp;<b>"+retorno[i].title+ "</b></p>";
-			ins += "<br><a href="+retorno[i].link+" target=blank >"+retorno[i].link+"</a>";
+			ins += "<p class='paragrafo'><input style='cursor:pointer;' onclick=adicionatema('"+i+"') type=radio name=cn value=mapa >&nbsp;<b>"+retorno[i].title+ "</b></p>";
+			ins += "<a href="+retorno[i].link+" target=blank >"+retorno[i].link+"</a>";
 			ins += "<br><i>"+$trad('descricao',i3GEOF.conectargeorss.dicionario)+"</i> "+retorno[i].description;
 			ins += "<br><i>"+$trad('categoria',i3GEOF.conectargeorss.dicionario)+" </i>"+retorno[i].category;
 		}
@@ -177,4 +182,8 @@ function abrejanelaIframe(){
 			g_locaplic+"/imagens/oxygen/16x16/application-x-smb-workgroup.png"
 		);
 	YAHOO.util.Event.addListener(janelaeditor[0].close, "click", iniciaListaGEORSS,janelaeditor[0].panel,{id:janelaeditor[0].id},true);
+}
+function aguarde(valor){
+	if(document.getElementById("aguarde"))
+	document.getElementById("aguarde").style.display = valor;
 }

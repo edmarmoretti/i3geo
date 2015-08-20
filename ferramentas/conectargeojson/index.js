@@ -56,7 +56,6 @@ i3GEOF.conectargeojson = {
 	 */
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.conectargeojson.dicionario);
-		dicionario["conectaGeoJson"] = $inputText('','','i3GEOconectargeojsonurl','',45,'');
 		dicionario["aguarde"] = $trad("o1");
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["aplica"] = $trad("p14");

@@ -84,7 +84,7 @@ i3GEOF.conectarservicos =
 						"",
 						"",
 						$trad("x46")
-						+ "<a class=ajuda_usuario target=_blank href='"
+						+ "&nbsp;<a class=ajuda_usuario target=_blank href='"
 						+ i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=4&idajuda=76' ><b> </b></a>",
 						"i3GEO.conectarwmst",
@@ -110,7 +110,7 @@ i3GEOF.conectarservicos =
 						"",
 						"",
 						$trad("x47")
-						+ "<a class=ajuda_usuario target=_blank href='"
+						+ "&nbsp;<a class=ajuda_usuario target=_blank href='"
 						+ i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=4&idajuda=29' ><b> </b></a>",
 						"i3GEO.conectargeorss",

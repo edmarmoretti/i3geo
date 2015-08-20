@@ -1,55 +1,86 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas6.css">
+<script type="text/javascript" src="../../classesjs/i3geo.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/black.css">
 <title></title>
-<style type="text/css" >button{background:url(../../imagens/tic.png) 98% 50% no-repeat;}</style>
-<link rel="stylesheet" type="text/css" href="../../pacotes/yui290/build/button/assets/skins/sam/button.css"/>
+
+<style type="text/css">
+button {
+	background: url(../../imagens/tic.png) 98% 50% no-repeat;
+}
+</style>
 <style type="text/css">
 body {
-	margin:0;
-	padding:0;border:0px;
+	margin: 0;
+	padding: 0;
+	border: 0px;
+	background-color: white;
+}
+.guiaobj {
+	background-color: white;
+	display: block;
+	height: 90%;
+	left: 0;
+	overflow: auto;
+	text-align: left;
+	top: 0;
+	width: 97%;
 }
 </style>
 </head>
-<body class="yui-skin-sam" >
+<body class="yui-skin-sam" style="background-color: white;" id="i3geo">
 	<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">
 		<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">
-			<li><div id="guia1" style="text-align:center;font-size:10px;left:0px;" ><a href="#ancora"><em>Servi&ccedil;os</em></a></div></li>
-			<li><div id="guia2" style="text-align:center;font-size:10px;left:0px;" ><a href="#ancora"><em>Canais</em></a></div></li>
+			<li>
+				<div id="guia1" style="text-align:center;font-size:10px;left:0px;" >
+					<a><em>Servi&ccedil;os</em></a>
+				</div>
+			</li>
+			<li>
+				<div id="guia2" style="text-align:center;font-size:10px;left:0px;" ><a href="#ancora"><em>Canais</em></a></div>
+			</li>
 		</ul>
 	</div>
-	<div id=geral style="left:0px;top:0px;">
-		<div class=guiaobj id="guia1obj" style="text-align:left;top:0px;left:0px">
-			<div id=opc1 style="text-align:left;top:0px;left:0px">
-				Digite o endere&ccedil;o do servi&ccedil;o ou clique da lista abaixo. Utilize as guias acima para ver o resultado do acesso.<br>
-				<input class=digitar id=servico value="" size=45 />
-			</div>
-			<div id=RSS style="text-align:left;color:navy;cursor:pointer;width:95%;top:5px;left:5px"></div>
+	<div class=guiaobj id="guia1obj" style="text-align:left;top:0px;left:0px">
+		<p class=paragrafo>
+			Digite o endere&ccedil;o do servi&ccedil;o ou clique da lista abaixo. Utilize as guias acima para ver o resultado da conex&atilde;o.<br>
+		</p>
+		<div class="i3geoForm i3geoFormIconeEdita" style="width:350px;">
+			<input id=servico type="text" value=""  />
 		</div>
-		<div class=guiaobj id="guia2obj" style="display:none;text-align:left;top:0px;left:0px">
-			<div id=resultadoget style="text-align:left;top:0px;left:0px">
-			</div>
+		<p class=paragrafo >
+		<div id=RSSgeo style="width: 350px;" class=paragrafo ></div>
+		<br>
+		<div id=RSS style="text-align:left;"></div>
+		<div id=opc1 style="text-align:left;"></div>
+	</div>
+	<div class=guiaobj id="guia2obj" style="display:none;text-align:left;top:0px;left:0px">
+		<div id=resultadoget class="paragrafo" style="text-align:left;top:0px;left:0px">
 		</div>
 	</div>
 
-<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
-<script type="text/javascript" src="index.js"></script>
+	<div id="aguarde">
+		<img alt="" src="../../imagens/aguarde.gif" />
+		Aguarde...
+	</div>
+
+
+	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="dicionario.js"></script>
 
 <script type="text/javascript" >
-//TODO remover i3geo_tudo_compacto.js.php
-if(window.parent.i3GEO.parametros.editor.toLowerCase() == "sim"){
-	var temp = "<p><a href='#' style='color:red' onclick='abrejanelaIframe()' title='Op&ccedil;&atilde;o vis&iacute;vel apenas para usu&aacute;rios editores'>Editar a lista de endere&ccedil;os dos servi&ccedil;os</a></p>";
-	document.getElementById("opc1").innerHTML += temp;
-}
+
 aguarde("block");
 g_RSS = new Array("");
-iniciaListaGEORSS()
+iniciaListaGEORSS();
+g_locaplic = "../..";
 function iniciaListaGEORSS(){
 	if (document.getElementById("RSS"))
 	{
 		if (g_RSS.length > 0)
 		{
+			aguarde("block");
 			var p = "../../classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+g_RSS.join("|")+"&tipo=GEORSS";
 			var cp = new cpaint();
 			//cp.set_debug(2)
@@ -69,18 +100,17 @@ function mostraRetornoRSS(retorno)
 	}
 	var canais = retorno.data.canais
 	var ncanais = canais.length
-	var ins = "<br>"+retorno.data.rss
-	for (i=0;i<ncanais; i++)
-	{
-		var caso = canais[i]
-		ins += "\<p class=clique onclick=\"registraws('"+caso.link+"','"+caso.id_ws+"')\" \>\<b\>"+caso.title+"\<\/b\>&nbsp;"+caso.description+"&nbsp;("+caso.author+")"
-		if(caso.nacessos > 0)
-		{
-			var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos)
-			ins += " \<span style=color:gray \>(disponibilidade: "+pc+"%, acessos considerados: "+caso.nacessos+")\<\/span>\<\/p\>";
-		}
+
+	$i("RSS").innerHTML = retorno.data.rss;
+	var i, ins = "";
+	ins += "<select size='5' onchange='registraws(this.value)' style='width:100%;' >";
+	for (i = 0; i < ncanais; i++) {
+		var caso = canais[i];
+		var valor = "'" + caso.link + "','"	+ caso.id_ws + "'";
+		ins += "<option value=" + valor + " >"+caso.title+"</option>";
 	}
-	document.getElementById("RSS").innerHTML = ins+"<br><br>"
+	ins += "</select>";
+	document.getElementById("RSSgeo").innerHTML = ins;
 }
 
 </script>
