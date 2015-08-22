@@ -1918,26 +1918,32 @@ class Mapa
 		$xml = simplexml_load_file($servico);
 		$conta = 0;
 		foreach($xml->channel as $c){
-			if ($conta == $canal)
-			{
+			if ($conta == $canal){
 				$canal = $c;
+			}
+		}
+		$nos = $canal->item;
+		//verifica se o canal faz referencia a elementos externos
+		//se sim, usa todos os elementos do xml no lugar do canal
+		foreach ($canal->items as $t){
+			foreach ($t->xpath('rdf:Seq') as $x){
+				foreach ($x->xpath('rdf:li') as $z){
+					$nos = $xml->item;
+				}
 			}
 		}
 		$resultado = array();
 		$tipog = "";
-		foreach ($canal->item as $item){
+		foreach ($nos as $item){
 			$env = array();
 			//define o tipo
-			if ($item->xpath('geo:lat'))
-			{
+			if ($item->xpath('geo:lat')){
 				$tipog = "geo";
 			}
-			if ($item->xpath('georss:point'))
-			{
+			if ($item->xpath('georss:point')){
 				$tipog = "georsspoint";
 			}
-			if ($item->xpath('georss:where'))
-			{
+			if ($item->xpath('georss:where')){
 				$tipog = "envelope";
 			}
 			if ($tipog == "envelope"){
@@ -1981,7 +1987,7 @@ class Mapa
 			{
 				//$temp = $item->xpath('georss:point');
 				$temp = (string) $item->children('georss', TRUE)->point;
-				$env = array( explode(" ",$temp) );
+				$env = ( explode(" ",$temp) );
 			}
 			if (count($env) > 0){
 				$resultado[] = array(ixml($item,"title"),ixml($item,"link"),ixml($item,"description"),ixml($item,"category"),$env);
@@ -2006,12 +2012,11 @@ class Mapa
 			$def[] = array("LINK","C","254");
 			$def[] = array("DESC","C","254");
 			$def[] = array("CATEGORIA","C","254");
-			if(!function_exists(dbase_create))
-			{
+			if(!function_exists(dbase_create)){
 				$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
 			}
-			else
-			{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+			else{
+				$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
 			}
 			//acrescenta os pontos no novo shapefile
 			$dbname = $nomeshp.".dbf";
@@ -2042,6 +2047,7 @@ class Mapa
 				$reg = array();
 			}
 			xbase_close($db);
+
 			if ($tipog == "georsspoint" || $tipog == "geo"){
 				$tipol = MS_LAYER_POINT;
 			}

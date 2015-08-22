@@ -56,7 +56,6 @@ i3GEOF.conectargeojson = {
 	 */
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.conectargeojson.dicionario);
-		dicionario["aguarde"] = $trad("o1");
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["aplica"] = $trad("p14");
 		return dicionario;
@@ -85,7 +84,7 @@ i3GEOF.conectargeojson = {
 					combo += "<option value='"+raiz[i].link+"'>"+raiz[i].title+"</option>";
 				}
 				combo += "</select>";
-				$i("i3GEOconectargeojsonCombo").innerHTML = "<div class=styled-select>"+combo+"</div>";
+				$i("i3GEOconectargeojsonCombo").innerHTML = combo;
 			};
 			i3GEO.php.listaRSSwsARRAY(monta,"GEOJSON");
 			b = new YAHOO.widget.Button(

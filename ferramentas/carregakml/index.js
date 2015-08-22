@@ -56,7 +56,6 @@ i3GEOF.carregakml = {
 	 */
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.carregakml.dicionario);
-		dicionario["digite"] = $trad("o1");
 		dicionario["botao"] = $trad("p14");
 		return dicionario;
 	},
@@ -82,7 +81,7 @@ i3GEOF.carregakml = {
 					combo += "<option value='"+raiz[i].link+"'>"+raiz[i].title+"</option>";
 				}
 				combo += "</select>";
-				$i("i3GEOcarregakmlCombo").innerHTML = "<div class=styled-select>"+combo+"</div>";
+				$i("i3GEOcarregakmlCombo").innerHTML = combo;
 			};
 			i3GEO.php.listaRSSwsARRAY(monta,"KML");
 			b = new YAHOO.widget.Button(
