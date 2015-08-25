@@ -108,7 +108,7 @@ i3GEOF.uploaddbf = {
 			+ "<div class='i3GeoTituloJanela'>" + $trad("a2b")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=26' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"320px",
-			"390px",
+			"480px",
 			"",
 			"",
 			"",

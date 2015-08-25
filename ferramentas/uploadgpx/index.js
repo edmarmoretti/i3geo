@@ -114,7 +114,7 @@ i3GEOF.uploadgpx = {
 			+ "<div class='i3GeoTituloJanela'>GPX<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=103' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
-			"280px",
+			"330px",
 			"",
 			"",
 			"",

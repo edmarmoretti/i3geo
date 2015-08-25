@@ -1,4 +1,3 @@
-
 /*
 Title: Upload de arquivo shapefile
 
@@ -160,7 +159,7 @@ i3GEOF.upload = {
 			+ "<div class='i3GeoTituloJanela'>" + $trad("a2")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
-			"470px",
+			"480px",
 			"",
 			"",
 			"",

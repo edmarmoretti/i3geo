@@ -89,7 +89,7 @@ i3GEOF.uploadarquivos =
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante : function() {
-		var minimiza, cabecalho, janela, divid, temp, titulo;
+		var minimiza, cabecalho, janela, divid, titulo;
 
 		if ($i("i3GEOF.uploadarquivos")) {
 			return;
@@ -97,7 +97,7 @@ i3GEOF.uploadarquivos =
 		cabecalho = function() {
 		};
 		minimiza = function() {
-			i3GEO.janela.minimiza("i3GEOFuploadarquivos");
+			i3GEO.janela.minimiza("i3GEOF.uploadarquivos");
 		};
 		// cria a janela flutuante
 		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeUpload'></span>"
@@ -105,7 +105,7 @@ i3GEOF.uploadarquivos =
 		janela =
 			i3GEO.janela.cria(
 				"230px",
-				"180px",
+				"140px",
 				"",
 				"",
 				"",
