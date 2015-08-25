@@ -595,7 +595,7 @@ i3GEOF.selecao =
 		 */
 		removeFiguras : {
 			ol3 : function(){
-				var features, n, f, i, remover = [];
+				var features, n, f, i, remover = [], temp;
 				features = i3GEO.desenho.layergrafico.getSource().getFeatures();
 				n = features.length;
 				for(i = 0; i < n; i++){
@@ -604,8 +604,13 @@ i3GEOF.selecao =
 						remover.push(f);
 					}
 				}
-				for(r in remover){
-					i3GEO.desenho.layergrafico.getSource().removeFeature(remover[r]);
+				if(remover.length > 0){
+					temp = window.confirm($trad("x94"));
+					if(temp){
+						for(r in remover){
+							i3GEO.desenho.layergrafico.getSource().removeFeature(remover[r]);
+						}
+					}
 				}
 			},
 			openlayers : function() {
