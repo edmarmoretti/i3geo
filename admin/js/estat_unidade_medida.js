@@ -55,7 +55,7 @@ i3GEOadmin.umedida = {
 		if(i3GEOadmin.umedida.dados == ""){
 			i3GEOadmin.umedida.dados = dados;
 		}
-		core_listaDeLetras("letras","i3GEOadmin.umedida.filtra");
+		core_listaDeLetras("letras","i3GEOadmin.umedida.filtra",false,300);
 		YAHOO.example.InlineCellEditing = new function(){
 			// Custom formatter for "address" column to preserve line breaks
 			var myDataSource = new YAHOO.util.DataSource(dados);

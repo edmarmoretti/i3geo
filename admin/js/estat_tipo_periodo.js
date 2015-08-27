@@ -53,7 +53,7 @@ i3GEOadmin.periodo = {
 		if(i3GEOadmin.periodo.dados == ""){
 			i3GEOadmin.periodo.dados = dados;
 		}
-		core_listaDeLetras("letras","i3GEOadmin.periodo.filtra");
+		core_listaDeLetras("letras","i3GEOadmin.periodo.filtra",false,300);
 		YAHOO.example.InlineCellEditing = new function(){
 			// Custom formatter for "address" column to preserve line breaks
 			var myDataSource = new YAHOO.util.DataSource(dados);

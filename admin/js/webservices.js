@@ -91,7 +91,7 @@ i3GEOadmin.webservices = {
 		if(i3GEOadmin.webservices.dados == ""){
 			i3GEOadmin.webservices.dados = dados;
 		}
-		core_listaDeLetras("letras_W","i3GEOadmin.webservices.filtra");
+		core_listaDeLetras("letras_W","i3GEOadmin.webservices.filtra",false,300);
 		YAHOO.example.InlineCellEditing = new function(){
 			// Custom formatter for "address" column to preserve line breaks
 			var myDataSource = new YAHOO.util.DataSource(dados);

@@ -113,6 +113,7 @@ Monta a arvore de temas
 */
 function montaArvore(dados)
 {
+	//TODO incluir filtro de grupos - nao colocar opcao de reordenamento se o filtro estiver ativo
 	YAHOO.tree = new function()
 	{
 		tree = "";
@@ -849,6 +850,11 @@ function gravaDados(tipo,id)
 							}
 							else{
 								texto = document.getElementById("Eid_grupo");
+								if(texto.selectedIndex < 0){
+									core_carregando("desativa");
+									alert("Escolha um grupo");
+									return;
+								}
 								texto = texto.options[texto.selectedIndex].text;
 							}
 							no = tree.getNodeByProperty("id_n1",id);
@@ -870,6 +876,11 @@ function gravaDados(tipo,id)
 							}
 							else{
 								texto = document.getElementById("Eid_subgrupo");
+								if(texto.selectedIndex < 0){
+									core_carregando("desativa");
+									alert("Escolha um subgrupo");
+									return;
+								}
 								texto = texto.options[texto.selectedIndex].text;
 							}
 							objpub = document.getElementById("Epublicado");
@@ -888,6 +899,11 @@ function gravaDados(tipo,id)
 						if(tipo == "tema")
 						{
 							texto = document.getElementById("Eid_tema");
+							if(texto.selectedIndex < 0){
+								core_carregando("desativa");
+								alert("Escolha um tema");
+								return;
+							}
 							texto = texto.options[texto.selectedIndex].text;
 
 							objpub = document.getElementById("Epublicado");
@@ -904,10 +920,15 @@ function gravaDados(tipo,id)
 
 							no.html = no.getContentEl().innerHTML;
 						}
-					if(tipo == "raizmenu" || tipo == "raizgrupo")
+						if(tipo == "raizmenu" || tipo == "raizgrupo")
 						{
 							obje = document.getElementById("Eid_tema");
 							if(obje){
+								if(obje.selectedIndex < 0){
+									core_carregando("desativa");
+									alert("Escolha um tema");
+									return;
+								}
 								texto = obje.options[obje.selectedIndex].text;
 								no = tree.getNodeByProperty("id_raiz",id);
 								no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto;

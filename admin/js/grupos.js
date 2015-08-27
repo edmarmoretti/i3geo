@@ -120,7 +120,7 @@ i3GEOadmin.grupos = {
 		if(i3GEOadmin.grupos.dados == ""){
 			i3GEOadmin.grupos.dados = dados;
 		}
-		core_listaDeLetras("letras_G","i3GEOadmin.grupos.filtra");
+		core_listaDeLetras("letras_G","i3GEOadmin.grupos.filtra",false,300);
 		YAHOO.example.InlineCellEditing = new function(){
 			// Custom formatter for "address" column to preserve line breaks
 			var myDataSource = new YAHOO.util.DataSource(dados);

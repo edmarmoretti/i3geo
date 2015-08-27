@@ -623,7 +623,7 @@ function core_pegaMapfiles(funcaoM,letra,filtro,checaNomes,checaNames)
 	}
 	if(!funcaoM){
 		funcaoM = "";
-	}	
+	}
 	if(!checaNomes){
 		checaNomes = "false";
 	}
@@ -1671,8 +1671,11 @@ function core_filtraLetrasCombo(id,letra){
 	}
 }
 
-function core_listaDeLetras(onde,nomeFuncao,semLetras){
+function core_listaDeLetras(onde,nomeFuncao,semLetras,w){
 	//letraAtual guarda a ultima letra clicada
+	if(!w){
+		w = 40;
+	}
 	var o,i,ins= "<p><b>",
 		letras = ["Todos","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z","_","1","2","3","4","5","6","7","8","9"],
 		nletras = letras.length;
@@ -1700,7 +1703,7 @@ function core_listaDeLetras(onde,nomeFuncao,semLetras){
 		o = document.getElementById(onde);
 		if(o){
 			if(!semLetras){
-				o.innerHTML = "<fieldset style=padding:2px; class=letras ><form id=forminiciais ><p><b>Filtro: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:40px;cursor:pointer /></form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></fieldset>";
+				o.innerHTML = "<fieldset style=padding:2px; class=letras ><form id=forminiciais ><p><b>Filtro: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:" + w + "px;cursor:pointer /></form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></fieldset>";
 			}
 			else{
 				o.innerHTML = "<form id=forminiciais >Iniciais: <input name='' onchange='' value='' id=iniciaisLetras type=text style=width:40px;cursor:pointer /></form>";

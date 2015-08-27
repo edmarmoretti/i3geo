@@ -53,7 +53,7 @@ i3GEOadmin.fonteinfo = {
 		if(i3GEOadmin.fonteinfo.dados == ""){
 			i3GEOadmin.fonteinfo.dados = dados;
 		}
-		core_listaDeLetras("letras","i3GEOadmin.fonteinfo.filtra");
+		core_listaDeLetras("letras","i3GEOadmin.fonteinfo.filtra",false,300);
 		YAHOO.example.InlineCellEditing = new function(){
 			// Custom formatter for "address" column to preserve line breaks
 			var myDataSource = new YAHOO.util.DataSource(dados);

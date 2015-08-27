@@ -29,6 +29,9 @@ Arquivo:
 
 i3geo/admin/js/editormapfile.js
 */
+
+//TODO incluir opcao para criar filtro por exemplo
+//TODO incluir favoritos
 contaN = 0;
 objcontype = [
 	{texto:"MS_INLINE",valor:"0"},

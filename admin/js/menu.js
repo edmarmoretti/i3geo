@@ -97,7 +97,7 @@ i3GEOadmin.menus = {
 		if(i3GEOadmin.menus.dados == ""){
 			i3GEOadmin.menus.dados = dados;
 		}
-		core_listaDeLetras("letras_M","i3GEOadmin.menus.filtra");
+		core_listaDeLetras("letras_M","i3GEOadmin.menus.filtra",false,300);
 		YAHOO.example.InlineCellEditing = new function(){
 			// Custom formatter for "address" column to preserve line breaks
 			var myDataSource = new YAHOO.util.DataSource(dados);

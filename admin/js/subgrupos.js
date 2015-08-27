@@ -95,7 +95,7 @@ i3GEOadmin.subgrupos = {
 		if(i3GEOadmin.subgrupos.dados == ""){
 			i3GEOadmin.subgrupos.dados = dados;
 		}
-		core_listaDeLetras("letras_SG","i3GEOadmin.subgrupos.filtra");
+		core_listaDeLetras("letras_SG","i3GEOadmin.subgrupos.filtra",false,300);
 		YAHOO.example.InlineCellEditing = new function(){
 			// Custom formatter for "address" column to preserve line breaks
 			var myDataSource = new YAHOO.util.DataSource(dados);

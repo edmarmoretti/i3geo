@@ -64,7 +64,7 @@ i3GEOadmin.conexao = {
 		if(i3GEOadmin.conexao.dados == ""){
 			i3GEOadmin.conexao.dados = dados;
 		}
-		core_listaDeLetras("letras","i3GEOadmin.conexao.filtra");
+		core_listaDeLetras("letras","i3GEOadmin.conexao.filtra",false,300);
 		YAHOO.example.InlineCellEditing = new function(){
 			// Custom formatter for "address" column to preserve line breaks
 			var myDataSource = new YAHOO.util.DataSource(dados);
