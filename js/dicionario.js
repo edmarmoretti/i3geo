@@ -865,7 +865,7 @@ var g_traducao =
 		],
 		"a2b" : [
 			{
-				pt : "Upload de arquivo dbf ou CSV",
+				pt : "Upload de DBF ou CSV",
 				en : "Upload DBF or CSV file",
 				es : "Subir archivo DBF o CSV"
 			}

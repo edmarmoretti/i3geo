@@ -30,9 +30,9 @@ Arquivo:
 i3geo/admin/js/editormapfile.js
 */
 
-//TODO incluir opcao para criar filtro por exemplo
-//TODO incluir favoritos
+
 contaN = 0;
+//TODO incluir favoritos
 objcontype = [
 	{texto:"MS_INLINE",valor:"0"},
 	{texto:"MS_SHAPEFILE",valor:"1"},
@@ -285,8 +285,10 @@ function montaNosRaiz(redesenha)
 			conteudo += "<b>("+$mapfiles[i].extensao+") </b>";
 		}
 		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />";
-		if(iconePlus)
-		{conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma copia' src=\"../imagens/clonar.png\" />";}
+		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"filtraLetra('"+$mapfiles[i].codigo+"')\" title='filtrar lista' src=\"../imagens/view-filter.png\" />";
+		if(iconePlus){
+			conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma copia' src=\"../imagens/clonar.png\" />";
+		}
 		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o cache de imagens se houver' src=\"../imagens/limparcache.png\" />";
 		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />";
 		if(iconePlus){

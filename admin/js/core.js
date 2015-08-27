@@ -630,6 +630,9 @@ function core_pegaMapfiles(funcaoM,letra,filtro,checaNomes,checaNames)
 	if(!checaNames){
 		checaNames = "false";
 	}
+	if($i("iniciaisLetras")){
+		$i("iniciaisLetras").value = letra;
+	}
 	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra+"&filtro="+filtro+"&checaNomes="+checaNomes+"&checaNames="+checaNames;
 	var callbackM =
 	{
