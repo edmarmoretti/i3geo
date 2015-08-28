@@ -32,7 +32,7 @@ i3geo/admin/js/editormapfile.js
 
 
 contaN = 0;
-//TODO incluir favoritos
+favoritosNode = "";
 objcontype = [
 	{texto:"MS_INLINE",valor:"0"},
 	{texto:"MS_SHAPEFILE",valor:"1"},
@@ -215,34 +215,28 @@ Monta a &aacute;rvore
 
 <PEGALAYERS>
 */
-function montaArvore()
-{
-	YAHOO.example.treeExample = new function()
-	{
+function montaArvore(){
+	YAHOO.example.treeExample = new function(){
 		tree = "";
-		function changeIconMode()
-		{buildTree();}
-		function loadNodeData(node, fnLoadComplete)
-		{
+		function changeIconMode(){
+			buildTree();
+		}
+		function loadNodeData(node, fnLoadComplete){
 			if(node.data.codigoMap == undefined){
 				fnLoadComplete.call();
 				return;
 			}
 			var sUrl = "../php/editormapfile.php?funcao=pegaLayers&codigoMap="+node.data.codigoMap;
-			var callback =
-			{
-				success: function(oResponse)
-				{
+			var callback = {
+				success: function(oResponse){
 					var dados = YAHOO.lang.JSON.parse(oResponse.responseText);
 					montaRaizTema(node,dados);
 					oResponse.argument.fnLoadComplete();
 				},
-				failure: function(oResponse)
-				{
+				failure: function(oResponse){
 					oResponse.argument.fnLoadComplete();
 				},
-				argument:
-				{
+				argument: {
 					"node": node,
 					"fnLoadComplete": fnLoadComplete
 				},
@@ -250,11 +244,12 @@ function montaArvore()
 			};
 			YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
 		}
-		function buildTree()
-		{
+		function buildTree(){
 			tree = new YAHOO.widget.TreeView("tabela");
 			tree.setDynamicLoad(loadNodeData, 0);
 			var root = tree.getRoot();
+			favoritosNode = new YAHOO.widget.TextNode('Favoritos', root, true);
+			favoritosNode.isLeaf = false;
 			if(letraAtual == ""){
 				var tempNode = new YAHOO.widget.TextNode('Todos', root, false);
 				tempNode.isLeaf = true;
@@ -268,54 +263,117 @@ function montaArvore()
 		}
 		buildTree();
 	}();
-		montaNosRaiz("nao");
-		tree.draw();
+	montaFavoritos();
+	montaNosRaiz("nao");
+	tree.draw();
 }
-function montaNosRaiz(redesenha)
-{
-	var root = tree.getRoot();
-	var nos = new Array();
-	var conteudo = "";
+favoritosArray = [];
+retornaFavoritosArray();
+function retornaFavoritosArray(){
+	var temp = i3GEO.util.pegaCookie("I3GEOfavoritosEditorMapfile");
+	if(temp){
+		favoritosArray = temp.split(",");
+	}
+	else{
+		favoritosArray = [];
+	}
+	return favoritosArray;
+}
+function registraFavoritos(codigoTema){
+	favoritosArray.remove(codigoTema);
+	favoritosArray.push(codigoTema);
+	i3GEO.util.insereCookie("I3GEOfavoritosEditorMapfile", favoritosArray.toString(","));
+	montaFavoritos();
+	tree.draw();
+}
+function removeFavoritos(codigoTema,redesenha){
+	var temp = tree.getNodeByProperty("id",codigoTema+"favorito");
+	if(temp){
+		tree.removeNode(temp);
+	}
+	favoritosArray.remove(codigoTema);
+	i3GEO.util.insereCookie("I3GEOfavoritosEditorMapfile", favoritosArray.toString(","));
+	if(redesenha){
+		tree.draw();
+	}
+}
+function montaFavoritos(){
+	var mapfile, i, j, conteudo, iconePlus, d, tempNode;
+	for (i=0, j=$mapfiles.length; i<j; i++){
+		mapfile = $mapfiles[i];
+		if(!tree.getNodeByProperty("id",mapfile.codigo+"favorito")){
+			if(i3GEO.util.in_array(mapfile.codigo,favoritosArray)){
+				iconePlus = true;
+				if(mapfile.extensao != "map"){
+					iconePlus = false;
+				}
+				conteudo = montaTextoTemaMapfile(mapfile);
+				d = {html:conteudo,tipo:"favorito",id_tema:mapfile.id_tema,id:mapfile.codigo+"favorito",codigoMap:mapfile.codigo};
+				tempNode = new YAHOO.widget.HTMLNode(d, favoritosNode, false, iconePlus);
+				tempNode.isLeaf = true;
+				tempNode.enableHighlight = false;
+			}
+		}
+	}
+}
+function montaTextoTemaMapfile(mapfile){
+	var conteudo = "", i, iconePlus = true;
+	if(mapfile.extensao != "map"){
+		iconePlus = false;
+		conteudo += "<b>("+mapfile.extensao+") </b>";
+	}
+
+	i = "margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px";
+	conteudo += "&nbsp;<img style="+i+" onclick=\"excluirMapfile('"+mapfile.codigo+"')\" title=excluir src=\"../imagens/01.png\" />";
+	conteudo += "&nbsp;<img style="+i+" onclick=\"filtraLetra('"+mapfile.codigo+"')\" title='filtrar lista' src=\"../imagens/view-filter.png\" />";
+	if(i3GEO.util.in_array(mapfile.codigo,favoritosArray)){
+		conteudo += "&nbsp;<img style="+i+" onclick=\"removeFavoritos('"+mapfile.codigo+"',true)\" title='retira dos favoritos' src=\"../imagens/bookmarks.png\" />";
+	}
+	else{
+		conteudo += "&nbsp;<img style="+i+" onclick=\"registraFavoritos('"+mapfile.codigo+"')\" title='favorito' src=\"../imagens/bookmarks.png\" />";
+	}
+	if(iconePlus){
+		conteudo += "&nbsp;<img style="+i+" onclick=\"clonarMapfile('"+mapfile.codigo+"')\" title='cria uma copia' src=\"../imagens/clonar.png\" />";
+	}
+	conteudo += "&nbsp;<img style="+i+" onclick=\"limparCacheMapfile('"+mapfile.codigo+"')\" title='limpa o cache de imagens se houver' src=\"../imagens/limparcache.png\" />";
+	conteudo += "&nbsp;<img style="+i+" onclick=\"editorTemaMapfile('"+mapfile.codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />";
+	if(iconePlus){
+		conteudo += "<a style='margin-left:2px;border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+mapfile.codigo+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/06.png\" /></a>";
+	}
+	//opcao de download se for gvsig
+	if(mapfile.extensao === "gvp"){
+		conteudo += "&nbsp;<img style="+i+" onclick=\"downloadGvp('"+mapfile.codigo+"')\" title='download' src=\"../imagens/down1.gif\" />";
+	}
+	if(mapfile.extensao === "map" || mapfile.extensao === "gvp"){
+		conteudo += "&nbsp;<img style="+i+" onclick=\"testarMapfile('"+mapfile.codigo+"','"+mapfile.extensao+"')\" title='testar!' src=\"../imagens/41.png\" />";
+		conteudo += "&nbsp;<img style="+i+" onclick=\"testarMapfileRapido('"+mapfile.codigo+"','"+mapfile.extensao+"')\" title='teste rapido' src=\"../imagens/41r.png\" />";
+	}
+	conteudo += "&nbsp;<img style="+i+";width:20px; onclick=\"javascript:window.open('../../interface/black_editor.php?&temaEdicao="+mapfile.codigo+"')\" title='editar no i3Geo' src=\"../imagens/i3geo2editor.jpg\" />";
+	conteudo += "&nbsp;<img style="+i+";width:20px; onclick=\"javascript:window.open('../../ms_criamapa.php?temasa="+mapfile.codigo+"&layers="+mapfile.codigo+"')\" title='testar no i3Geo' src=\"../imagens/i3geo2.jpg\" />";
+	conteudo += "<b>&nbsp;"+mapfile.codigo+"</b>&nbsp;<span style=color:gray id='idNome_"+mapfile.codigo+"'>"+mapfile.nome+"</span>";
+	conteudo += "<br><img src=''style='display:none;' id='testeRapido"+mapfile.codigo+"' />";
+	if(mapfile.imagem != "" && $i("mostraMini").checked == true){
+		conteudo += "</b><br><img src='../../temas/miniaturas/"+mapfile.imagem+"'/>";
+	}
+	return conteudo;
+}
+function montaNosRaiz(redesenha){
+	var root = tree.getRoot(), nos = new Array(), conteudo = "", iconePlus = true;
 	for (var i=0, j=$mapfiles.length; i<j; i++)
 	{
-		conteudo = "";
-		var iconePlus = true;
+		iconePlus = true;
 		if($mapfiles[i].extensao != "map"){
 			iconePlus = false;
-			conteudo += "<b>("+$mapfiles[i].extensao+") </b>";
 		}
-		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i].codigo+"')\" title=excluir src=\"../imagens/01.png\" />";
-		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"filtraLetra('"+$mapfiles[i].codigo+"')\" title='filtrar lista' src=\"../imagens/view-filter.png\" />";
-		if(iconePlus){
-			conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"clonarMapfile('"+$mapfiles[i].codigo+"')\" title='cria uma copia' src=\"../imagens/clonar.png\" />";
-		}
-		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"limparCacheMapfile('"+$mapfiles[i].codigo+"')\" title='limpa o cache de imagens se houver' src=\"../imagens/limparcache.png\" />";
-		conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i].codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />";
-		if(iconePlus){
-			conteudo += "<a style='margin-left:2px;border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+$mapfiles[i].codigo+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/06.png\" /></a>";
-		}
-		//opcao de download se for gvsig
-		if($mapfiles[i].extensao === "gvp"){
-			conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"downloadGvp('"+$mapfiles[i].codigo+"')\" title='download' src=\"../imagens/down1.gif\" />";
-		}
-		if($mapfiles[i].extensao === "map" || $mapfiles[i].extensao === "gvp"){
-			conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i].codigo+"','"+$mapfiles[i].extensao+"')\" title='testar!' src=\"../imagens/41.png\" />";
-			conteudo += "&nbsp;<img style=\"margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfileRapido('"+$mapfiles[i].codigo+"','"+$mapfiles[i].extensao+"')\" title='teste rapido' src=\"../imagens/41r.png\" />";
-		}
-		conteudo += "&nbsp;<img width=20px style=\"margin-left:2px;position:relative;cursor:pointer;top:2px\" onclick=\"javascript:window.open('../../interface/black_editor.php?&temaEdicao="+$mapfiles[i].codigo+"')\" title='editar no i3Geo' src=\"../imagens/i3geo2editor.jpg\" />";
-		conteudo += "&nbsp;<img width=20px style=\"margin-left:2px;position:relative;cursor:pointer;top:2px\" onclick=\"javascript:window.open('../../ms_criamapa.php?temasa="+$mapfiles[i].codigo+"&layers="+$mapfiles[i].codigo+"')\" title='testar no i3Geo' src=\"../imagens/i3geo2.jpg\" />";
-		conteudo += "<b>&nbsp;<span>"+$mapfiles[i].codigo+" <span style=color:gray id='idNome_"+$mapfiles[i].codigo+"'>"+$mapfiles[i].nome+"</span></span>";
-		conteudo += "</b><br><img src=''style='display:none;' id='testeRapido"+$mapfiles[i].codigo+"' />";
-		if($mapfiles[i].imagem != "" && $i("mostraMini").checked == true){
-			conteudo += "</b><br><img src='../../temas/miniaturas/"+$mapfiles[i].imagem+"'/>";
-		}
+		conteudo = montaTextoTemaMapfile($mapfiles[i]);
 		var d = {html:conteudo,tipo:"mapfile",id_tema:$mapfiles[i].id_tema,id:$mapfiles[i].codigo,codigoMap:$mapfiles[i].codigo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,iconePlus);
 		tempNode.enableHighlight = false;
 		nos.push(tempNode);
 	}
-	if(redesenha=="sim")
-	tree.draw();
+	if(redesenha=="sim"){
+		tree.draw();
+	}
 	return nos;
 }
 function testarMapfileRapido(codigoMap,extensao)
@@ -541,6 +599,7 @@ Exclui um mapfile
 */
 function excluirMapfile(codigoMap)
 {
+	removeFavoritos(codigoMap,false);
 	var mensagem = " excluindo "+codigoMap;
 	var no = tree.getNodeByProperty("id",codigoMap);
 	var sUrl = "../php/editormapfile.php?funcao=excluirMapfile&codigoMap="+codigoMap;
