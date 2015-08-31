@@ -363,20 +363,32 @@ function montaTemas(idmenu,no,dados,redesenha)
 	}
 	if(redesenha){tree.draw();}
 }
+function testarMapfile(codigoMap){
+	window.open("../../testamapfile.php?map="+codigoMap);
+}
 function montaConteudoNo(id,publicado,nome,tipo,tema){
 	var complemento = "", cor = "", conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','"+tipo+"','"+id+"')\" title=sobe src=\"../imagens/34.png\" />";
 	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','"+tipo+"','"+id+"')\" title=desce src=\"../imagens/33.png\" />";
 	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('"+tipo+"','"+id+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('"+tipo+"','"+id+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;";
-	if(publicado == "NAO")
-	{cor = "style='color:red'";}
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('"+tipo+"','"+id+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />";
+	if(tipo === "tema"){
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px;width:10px;\" onclick=\"testarMapfile('"+tema+".map')\" title='testar!' src=\"../imagens/41.png\" />";
+		conteudo += "<a style='margin-left:2px;border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+tema+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/document-edit.png\" /></a>";
+
+	}
+	conteudo += "&nbsp;";
+	if(publicado == "NAO"){
+		cor = "style='color:red'";
+	}
 	if(tema && tema != undefined && tema != ""){
 		complemento = " tema: "+tema;
 	}
-	if(nome)
-	conteudo += "<span "+cor+" >"+nome+"<span style='color:gray'> id: "+id+complemento+"</span></span>";
-	else
-	conteudo += "<span "+cor+" > ??? vc precisa editar esse n&oacute;</span>";
+	if(nome){
+		conteudo += "<span "+cor+" >"+nome+"<span style='color:gray'> id: "+id+complemento+"</span></span>";
+	}
+	else {
+		conteudo += "<span "+cor+" > ??? vc precisa editar esse n&oacute;</span>";
+	}
 	return conteudo;
 }
 function montaTemasRaiz(no,dados,redesenha)

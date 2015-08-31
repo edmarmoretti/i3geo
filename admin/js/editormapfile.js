@@ -323,7 +323,7 @@ function montaTextoTemaMapfile(mapfile){
 		conteudo += "<b>("+mapfile.extensao+") </b>";
 	}
 
-	i = "margin-left:2px;width:12px;position:relative;cursor:pointer;top:2px";
+	i = "margin-left:2px;width:13px;position:relative;cursor:pointer;top:2px";
 	conteudo += "&nbsp;<img style="+i+" onclick=\"excluirMapfile('"+mapfile.codigo+"')\" title=excluir src=\"../imagens/01.png\" />";
 	conteudo += "&nbsp;<img style="+i+" onclick=\"filtraLetra('"+mapfile.codigo+"')\" title='filtrar lista' src=\"../imagens/view-filter.png\" />";
 	if(i3GEO.util.in_array(mapfile.codigo,favoritosArray)){
@@ -336,9 +336,9 @@ function montaTextoTemaMapfile(mapfile){
 		conteudo += "&nbsp;<img style="+i+" onclick=\"clonarMapfile('"+mapfile.codigo+"')\" title='cria uma copia' src=\"../imagens/clonar.png\" />";
 	}
 	conteudo += "&nbsp;<img style="+i+" onclick=\"limparCacheMapfile('"+mapfile.codigo+"')\" title='limpa o cache de imagens se houver' src=\"../imagens/limparcache.png\" />";
-	conteudo += "&nbsp;<img style="+i+" onclick=\"editorTemaMapfile('"+mapfile.codigo+"')\" title='editar tema associado' src=\"../imagens/03.png\" />";
+	conteudo += "&nbsp;<img style="+i+" onclick=\"editorTemaMapfile('"+mapfile.codigo+"')\" title='editar tema associado' src=\"../imagens/text-frame-link.png\" />";
 	if(iconePlus){
-		conteudo += "<a style='margin-left:2px;border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+mapfile.codigo+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/06.png\" /></a>";
+		conteudo += "<a style='margin-left:2px;border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+mapfile.codigo+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/document-edit.png\" /></a>";
 	}
 	//opcao de download se for gvsig
 	if(mapfile.extensao === "gvp"){
