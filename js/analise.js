@@ -21,18 +21,18 @@
  */
 
 /**
- *
+ * 
  * Licen&ccedil;a
- *
+ * 
  * GPL2
- *
+ * 
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
+ * 
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
+ * 
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
+ * 
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAÇ&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -53,19 +53,19 @@ i3GEO.analise =
 		},
 		/**
 		 * Classe: i3GEO.analise.dialogo
-		 *
+		 * 
 		 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de an&aacute;lise
-		 *
+		 * 
 		 * Exemplo:
-		 *
+		 * 
 		 * Para abrir a mensagem de di&aacute;logo de gera&ccedil;&atilde;o de buffer, utilize
-		 *
+		 * 
 		 * i3GEO.analise.dialogo.buffer()
 		 */
 		dialogo : {
 			/**
 			 * Function: markercluster
-			 *
+			 * 
 			 * Ferramenta mapa agrupamento de pontos
 			 */
 			markercluster : function() {
@@ -78,7 +78,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: heatmap
-			 *
+			 * 
 			 * Ferramenta mapa de calor
 			 */
 			heatmap : function() {
@@ -91,11 +91,11 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: saiku
-			 *
+			 * 
 			 * Ferramenta SAIKU em nova aba do navegador
 			 */
 			saiku : function() {
-				if(i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.saiku === false){
+				if (i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.saiku === false) {
 					i3GEO.janela.tempoMsg($trad("naoInstalado"));
 					return;
 				}
@@ -103,11 +103,11 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: saikuMapa
-			 *
+			 * 
 			 * Ferramenta SAIKU em uma janela interna
 			 */
 			saikuMapa : function() {
-				if(i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.saiku === false){
+				if (i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.saiku === false) {
 					i3GEO.janela.tempoMsg($trad("naoInstalado"));
 					return;
 				}
@@ -119,7 +119,7 @@ i3GEO.analise =
 					"i3GEOF.saiku.iniciaJanelaFlutuante2()");
 			},
 			/**
-			 *
+			 * 
 			 * Ferramenta graficointerativo versao flash
 			 */
 			graficoInterativo : function() {
@@ -127,7 +127,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: graficoInterativo1
-			 *
+			 * 
 			 * Ferramenta gr&aacute;fico interativo
 			 */
 			graficoInterativo1 : function() {
@@ -140,7 +140,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: linhaDoTempo
-			 *
+			 * 
 			 * Ferramenta linha do tempo
 			 */
 			linhaDoTempo : function() {
@@ -174,9 +174,15 @@ i3GEO.analise =
 									doc = document.frames("i3GEOF.linhaDoTempoi").document;
 								}
 							}
-							doc.getElementById("tl") ? window.parent["i3GEOF.linhaDoTempoi"].carregaDados() : i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.analise.atualizaLinhaDoTempo()"]);
+							doc.getElementById("tl") ? window.parent["i3GEOF.linhaDoTempoi"].carregaDados() : i3GEO.eventos.removeEventos(
+								"NAVEGAMAPA",
+								[
+									"i3GEO.analise.atualizaLinhaDoTempo()"
+								]);
 						} catch (e) {
-							i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.analise.atualizaLinhaDoTempo()"]);
+							i3GEO.eventos.removeEventos("NAVEGAMAPA", [
+								"i3GEO.analise.atualizaLinhaDoTempo()"
+							]);
 						}
 					};
 				i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
@@ -190,7 +196,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: perfil
-			 *
+			 * 
 			 * Ferramenta perfil
 			 */
 			perfil : function() {
@@ -198,11 +204,11 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: melhorcaminho
-			 *
+			 * 
 			 * Ferramenta melhor caminho
 			 */
 			melhorcaminho : function() {
-				if(i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.melhorcaminho === false){
+				if (i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.melhorcaminho === false) {
 					i3GEO.janela.tempoMsg($trad("naoInstalado"));
 					return;
 				}
@@ -210,7 +216,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: gradePontos
-			 *
+			 * 
 			 * Ferramenta grade de pontos
 			 */
 			gradePontos : function() {
@@ -218,7 +224,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: gradePol
-			 *
+			 * 
 			 * Ferramenta grade de pol&iacute;gonos
 			 */
 			gradePol : function() {
@@ -226,7 +232,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: gradeHex
-			 *
+			 * 
 			 * Ferramenta grade de hex&aacute;gonos
 			 */
 			gradeHex : function() {
@@ -234,7 +240,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: analisaGeometrias
-			 *
+			 * 
 			 * Ferramenta de an&aacute;lise de geometrias
 			 */
 			analisaGeometrias : function() {
@@ -247,7 +253,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: pontosdistri
-			 *
+			 * 
 			 * Ferramenta de c&aacute;lculo de distribui&ccedil;&atilde;o de pontos
 			 */
 			pontosdistri : function() {
@@ -260,7 +266,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: pontoempoligono
-			 *
+			 * 
 			 * Ferramenta ponto em pol&iacute;gono
 			 */
 			pontoempoligono : function() {
@@ -273,7 +279,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: centromassa
-			 *
+			 * 
 			 * Ferramenta centro m&eacute;dio
 			 */
 			centromassa : function() {
@@ -286,7 +292,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: nptPol
-			 *
+			 * 
 			 * Ferramenta n&uacute;mero de pontos em pol&iacute;gono
 			 */
 			nptPol : function() {
@@ -299,7 +305,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: buffer
-			 *
+			 * 
 			 * Ferramenta buffer
 			 */
 			buffer : function() {
@@ -312,7 +318,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: distanciaptpt
-			 *
+			 * 
 			 * Ferramenta dist&acirc;ncia entre pontos
 			 */
 			distanciaptpt : function() {
@@ -325,7 +331,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: centroide
-			 *
+			 * 
 			 * Ferramenta centr&oacute;ide
 			 */
 			centroide : function() {
@@ -338,7 +344,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: dissolve
-			 *
+			 * 
 			 * Ferramenta dissolve bordas comuns
 			 */
 			dissolve : function() {
@@ -351,7 +357,7 @@ i3GEO.analise =
 			},
 			/**
 			 * Function: agrupaElementos
-			 *
+			 * 
 			 * Ferramenta agrupa elementos
 			 */
 			agrupaElementos : function() {
@@ -365,7 +371,7 @@ i3GEO.analise =
 		},
 		/**
 		 * Section: medeDistancia
-		 *
+		 * 
 		 * Ativa e controla a op&ccedil;&atilde;o de medi&ccedil;&atilde;o de dist&acirc;ncias. A medida &eacute; feita quando o
 		 * usu&aacute;rio clica no mapa com esta op&ccedil;&atilde;o ativa. Quando o bot&atilde;o e acionado, abre-se a janela que mostra o
 		 * resultado da medida, o &iacute;cone que segue o mouse &eacute; alterado. Para mostrar o resultado do c&aacute;lculo, &eacute;
@@ -386,7 +392,7 @@ i3GEO.analise =
 			ultimaMedida : "",
 			/**
 			 * Function: inicia
-			 *
+			 * 
 			 * Inicia a opera&ccedil;&atilde;o de medi&ccedil;&atilde;o, abrindo a janela de resultados e criando os componentes
 			 * necess&aacute;rios. S&atilde;o registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 			 */
@@ -408,19 +414,30 @@ i3GEO.analise =
 					novoel = document.createElement("div");
 					novoel.id = "mostradistancia";
 					ins =
-						'<div class="hd" style="font-size:11px"><div class="i3GeoTituloJanela">'+$trad("distAprox")+'<a class=ajuda_usuario target=_blank href="'
-							+ i3GEO.configura.locaplic + '/ajuda_usuario.php?idcategoria=6&idajuda=50" ><b> </b></a></div></div>'
+						'<div class="hd" style="font-size:11px"><div class="i3GeoTituloJanela">' + $trad("distAprox")
+							+ '<a class=ajuda_usuario target=_blank href="'
+							+ i3GEO.configura.locaplic
+							+ '/ajuda_usuario.php?idcategoria=6&idajuda=50" ><b> </b></a></div></div>'
 							+ '<div class="bd" style="text-align:left;padding:3px;" >'
 							+ '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>'
 							+ '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo_movel" ></div>'
 							+ '<div style="text-align:left;font-size:10px" >'
-							+ '<span style="color:navy;cursor:pointer;text-align:left;" >' + '<table class="lista7" style="width:250px">' + '<tr>'
-							+ '<td><input style="cursor:pointer" type="checkbox" id="pararraios" checked /></td>' + '<td>Raios</td>'
-							+ '<td>&nbsp;</td>' + '<td><input style="cursor:pointer" type="checkbox" id="parartextos" checked /></td>'
-							+ '<td>Textos<td>' + '<td>&nbsp;Estilo:</td>' + '<td><div class=styled-select style="width:85px;">'
-							+ i3GEO.desenho.caixaEstilos() + '</div></td></tr>'
+							+ '<span style="color:navy;cursor:pointer;text-align:left;" >'
+							+ '<table class="lista7" style="width:250px">'
+							+ '<tr>'
+							+ '<td><input style="cursor:pointer" type="checkbox" id="pararraios" checked /></td>'
+							+ '<td>Raios</td>'
+							+ '<td>&nbsp;</td>'
+							+ '<td><input style="cursor:pointer" type="checkbox" id="parartextos" checked /></td>'
+							+ '<td>Textos<td>'
+							+ '<td>&nbsp;Estilo:</td>'
+							+ '<td><div class=styled-select style="width:85px;">'
+							+ i3GEO.desenho.caixaEstilos()
+							+ '</div></td></tr>'
 							+ '<tr><td></td><td></td>'
-							+ '<td></td><td></td><td></td><td></td><td>&nbsp;<input id=i3GEObotaoPerfil size="22" type="button" value="perfil"></td><td>&nbsp;<input id=i3GEObotaoDistWkt size="22" type="button" value="incorporar"></td></tr></table></span>' + '</div>' + '</div>';
+							+ '<td></td><td></td><td></td><td></td><td>&nbsp;<input id=i3GEObotaoPerfil size="22" type="button" value="perfil"></td><td>&nbsp;<input id=i3GEObotaoDistWkt size="22" type="button" value="incorporar"></td></tr></table></span>'
+							+ '</div>'
+							+ '</div>';
 					novoel.innerHTML = ins;
 					novoel.style.borderColor = "gray";
 					document.body.appendChild(novoel);
@@ -496,146 +513,162 @@ i3GEO.analise =
 			 * Funcoes especificas da interface openlayers
 			 */
 			openlayers : {
+				draw : "",
+				featureListener : null,
+				//numero de pontos da geometria atual
+				//utilizado para saber se houve um clique ou nao
+				numpontos : 0,
+				removeControle : function() {
+					i3geoOL.removeInteraction(i3GEO.analise.medeDistancia.openlayers.draw);
+					i3GEO.analise.medeDistancia.openlayers.draw = "";
+				},
 				/**
 				 * Inicializa o processo Cria a variavel para guardar os pontos Executa a funcao de inicializacao do desenho, que cria o
 				 * layer para receber os graficos
 				 */
 				inicia : function() {
-					var linha, estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao], controle =
-						i3geoOL.getControlsBy("id", "i3GeoMedeDistancia");
+					var m = i3GEO.analise.medeDistancia.openlayers;
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
-					i3GEO.analise.medeDistancia.pontos = {
-						xpt : [],
-						ypt : [],
-						dist : []
-					};
-					if (controle.length === 0) {
-						linha =
-							new OpenLayers.Control.DrawFeature(i3GEO.desenho.layergrafico, OpenLayers.Handler.Path, {
-								autoActivate : true,
-								id : "i3GeoMedeDistancia",
-								type : OpenLayers.Control.TYPE_TOOL,
-								callbacks : {
-									done : function(feature) {
-										var t, f = new OpenLayers.Feature.Vector(feature, {
-											origem : "medeDistancia"
-										}, {
-											graphicName : "square",
-											pointRadius : 10,
-											graphicOpacity : 1,
-											strokeWidth : estilo.linewidth,
-											strokeColor : estilo.linecolor
-										});
-										i3GEO.desenho.layergrafico.addFeatures([
-											f
-										]);
-										if (i3GEO.Interface) {
-											i3GEO.Interface.openlayers.sobeLayersGraficos();
-										}
-										i3GEO.analise.medeDistancia.openlayers.mostraParcial(0, 0, 0);
-										i3GEO.analise.medeDistancia.ultimoWkt = i3GEO.analise.medeDistancia.pontos2wkt();
-										t = i3GEO.analise.medeDistancia.openlayers.somaDist();
-										t = t.toFixed(3) + " km";
-										i3GEO.analise.medeDistancia.ultimaMedida = t;
-										i3GEO.analise.medeDistancia.openlayers.inicia();
-									},
-									modify : function(point) {
-										var n, x1, y1, x2, y2, trecho, parcial, direcao;
-										n = i3GEO.analise.medeDistancia.pontos.ypt.length;
-										if (n > 0) {
-											x1 = i3GEO.analise.medeDistancia.pontos.xpt[n - 1];
-											y1 = i3GEO.analise.medeDistancia.pontos.ypt[n - 1];
-											x2 = point.x;
-											y2 = point.y;
-											// projeta
-											if (i3GEO.Interface.openlayers.googleLike) {
-												temp = i3GEO.util.extOSM2Geo(x1 + " " + y1 + " " + x2 + " " + y2);
-												temp = temp.split(" ");
-												x1 = temp[0];
-												y1 = temp[1];
-												x2 = temp[2];
-												y2 = temp[3];
-											}
-											trecho = i3GEO.calculo.distancia(x1, y1, x2, y2);
-											parcial = i3GEO.analise.medeDistancia.openlayers.somaDist();
-											direcao = i3GEO.calculo.direcao(x1, y1, x2, y2);
-											direcao = i3GEO.calculo.dd2dms(direcao, direcao);
-											direcao = direcao[0];
-											i3GEO.analise.medeDistancia.openlayers.mostraParcial(trecho, parcial, direcao);
-										}
-									},
-									point : function(point) {
-										var n, x1, y1, x2, y2, trecho, temp, circ, label, raio, pontoRaio,
-										// registra os pontos e calcula a distancia
-										total = 0;
-										i3GEO.analise.medeDistancia.pontos.xpt.push(point.x);
-										i3GEO.analise.medeDistancia.pontos.ypt.push(point.y);
-										i3GEO.analise.pontos.xpt.push(point.x);
-										i3GEO.analise.pontos.ypt.push(point.y);
-										n = i3GEO.analise.medeDistancia.pontos.ypt.length;
-										if (n > 1) {
-											x1 = i3GEO.analise.medeDistancia.pontos.xpt[n - 2];
-											y1 = i3GEO.analise.medeDistancia.pontos.ypt[n - 2];
-											x2 = point.x;
-											y2 = point.y;
-											raio = point.distanceTo(new OpenLayers.Geometry.Point(x1, y1));
-											pontoRaio = new OpenLayers.Geometry.Point(x1, y1);
-											// projeta
-											if (i3GEO.Interface.openlayers.googleLike) {
-												temp = i3GEO.util.extOSM2Geo(x1 + " " + y1 + " " + x2 + " " + y2);
-												temp = temp.split(" ");
-												x1 = temp[0];
-												y1 = temp[1];
-												x2 = temp[2];
-												y2 = temp[3];
-											}
-											trecho = i3GEO.calculo.distancia(x1, y1, x2, y2);
-											i3GEO.analise.medeDistancia.pontos.dist.push(trecho);
-											total = i3GEO.analise.medeDistancia.openlayers.somaDist();
-											i3GEO.analise.medeDistancia.openlayers.mostraTotal(trecho, total);
-											// raio
-											if ($i("pararraios") && $i("pararraios").checked === true) {
-												circ =
-													new OpenLayers.Feature.Vector(OpenLayers.Geometry.Polygon.createRegularPolygon(
-														pontoRaio,
-														raio,
-														30), {
-														origem : "medeDistanciaExcluir"
-													}, {
-														fill : false,
-														strokeColor : estilo.circcolor,
-														strokeWidth : 1
-													});
-												i3GEO.desenho.layergrafico.addFeatures([
-													circ
-												]);
-											}
-											// desenha ponto
-											if ($i("parartextos") && $i("parartextos").checked === true) {
-												label = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(point.x, point.y), {
-													origem : "medeDistanciaExcluir"
-												}, {
-													graphicName : "square",
-													pointRadius : 3,
-													strokeColor : "black",
-													graphicOpacity : 1,
-													strokeWidth : 1,
-													fillColor : "white",
-													label : trecho.toFixed(3),
-													labelAlign : "rb",
-													fontColor : estilo.textcolor,
-													fontSize : 12,
-													fontWeight : "bold"
-												});
-												i3GEO.desenho.layergrafico.addFeatures([
-													label
-												]);
-											}
-										}
-									}
-								}
+					m.removeControle();
+					m.draw = new ol.interaction.Draw({
+						type : "LineString"
+					});
+					i3GEO.Interface.openlayers.interacoes[0].setActive(false);
+					m.draw.on("drawend", function(evt) {
+						evt.feature.setProperties({
+							origem : "medeDistancia"
+						});
+						var m = i3GEO.analise.medeDistancia.openlayers;
+						i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
+						m.draw.setActive(false);
+						m.draw.setActive(true);
+					});
+					i3GEO.analise.medeDistancia.openlayers.draw.on('drawstart', function(evt) {
+						i3GEO.analise.medeDistancia.pontos = {
+							xpt : [],
+							ypt : [],
+							dist : []
+						};
+						// set sketch
+						var m = i3GEO.analise.medeDistancia.openlayers,
+							sketch = evt.feature;
+
+						m.numpontos = 1;
+
+						m.featureListener = sketch.getGeometry().on('change', function(evt) {
+							var ponto,
+								geom = evt.target,
+								coords = geom.getCoordinates();
+								n = coords.length,
+								m = i3GEO.analise.medeDistancia.openlayers;
+							ponto = new ol.geom.Point(coords[n-1]);
+							if(m.numpontos === n-1){
+								//clicou
+								m.numpontos = n;
+								m.point(ponto);
+							}
+							else{
+								m.modify(ponto);
+							}
+						});
+					});
+					i3geoOL.addInteraction(m.draw);
+				},
+				modify : function(point) {
+					var n, x1, y1, x2, y2, trecho, parcial, direcao,
+						coord = point.getCoordinates();
+					n = i3GEO.analise.medeDistancia.pontos.ypt.length;
+					if (n > 0) {
+						x1 = i3GEO.analise.medeDistancia.pontos.xpt[n - 1];
+						y1 = i3GEO.analise.medeDistancia.pontos.ypt[n - 1];
+						x2 = coord[0];
+						y2 = coord[1];
+						// projeta
+						if (i3GEO.Interface.openlayers.googleLike) {
+							temp = i3GEO.util.extOSM2Geo(x1 + " " + y1 + " " + x2 + " " + y2);
+							temp = temp.split(" ");
+							x1 = temp[0];
+							y1 = temp[1];
+							x2 = temp[2];
+							y2 = temp[3];
+						}
+						trecho = i3GEO.calculo.distancia(x1, y1, x2, y2);
+						parcial = i3GEO.analise.medeDistancia.openlayers.somaDist();
+						direcao = i3GEO.calculo.direcao(x1, y1, x2, y2);
+						direcao = i3GEO.calculo.dd2dms(direcao, direcao);
+						direcao = direcao[0];
+						i3GEO.analise.medeDistancia.openlayers.mostraParcial(trecho, parcial, direcao);
+					}
+				},
+				point : function(point) {
+					var n, x1, y1, x2, y2, trecho, temp, circ, label, raio, pontoRaio,
+						coord = point.getCoordinates();
+						total = 0;
+					i3GEO.analise.medeDistancia.pontos.xpt.push(coord[0]);
+					i3GEO.analise.medeDistancia.pontos.ypt.push(coord[1]);
+					i3GEO.analise.pontos.xpt.push(coord[0]);
+					i3GEO.analise.pontos.ypt.push(coord[1]);
+					n = i3GEO.analise.medeDistancia.pontos.ypt.length;
+					if (n > 1) {
+						x1 = i3GEO.analise.medeDistancia.pontos.xpt[n - 2];
+						y1 = i3GEO.analise.medeDistancia.pontos.ypt[n - 2];
+						x2 = coord[0];
+						y2 = coord[1];
+						//raio = point.distanceTo(new OpenLayers.Geometry.Point(x1, y1));
+						//pontoRaio = new OpenLayers.Geometry.Point(x1, y1);
+						// projeta
+						if (i3GEO.Interface.openlayers.googleLike) {
+							temp = i3GEO.util.extOSM2Geo(x1 + " " + y1 + " " + x2 + " " + y2);
+							temp = temp.split(" ");
+							x1 = temp[0];
+							y1 = temp[1];
+							x2 = temp[2];
+							y2 = temp[3];
+						}
+						trecho = i3GEO.calculo.distancia(x1, y1, x2, y2);
+						i3GEO.analise.medeDistancia.pontos.dist.push(trecho);
+						total = i3GEO.analise.medeDistancia.openlayers.somaDist();
+						i3GEO.analise.medeDistancia.openlayers.mostraTotal(trecho, total);
+						/*
+						// raio
+						if ($i("pararraios") && $i("pararraios").checked === true) {
+							circ =
+								new OpenLayers.Feature.Vector(OpenLayers.Geometry.Polygon.createRegularPolygon(
+									pontoRaio,
+									raio,
+									30), {
+									origem : "medeDistanciaExcluir"
+								}, {
+									fill : false,
+									strokeColor : estilo.circcolor,
+									strokeWidth : 1
+								});
+							i3GEO.desenho.layergrafico.addFeatures([
+								circ
+							]);
+						}
+						// desenha ponto
+						if ($i("parartextos") && $i("parartextos").checked === true) {
+							label = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(point.x, point.y), {
+								origem : "medeDistanciaExcluir"
+							}, {
+								graphicName : "square",
+								pointRadius : 3,
+								strokeColor : "black",
+								graphicOpacity : 1,
+								strokeWidth : 1,
+								fillColor : "white",
+								label : trecho.toFixed(3),
+								labelAlign : "rb",
+								fontColor : estilo.textcolor,
+								fontSize : 12,
+								fontWeight : "bold"
 							});
-						i3geoOL.addControl(linha);
+							i3GEO.desenho.layergrafico.addFeatures([
+								label
+							]);
+						}
+						*/
 					}
 				},
 				/**
@@ -654,21 +687,29 @@ i3GEO.analise =
 				 * atributo "origem" Os raios e pontos sao sempre removidos
 				 */
 				fechaJanela : function() {
-					var temp, controle = i3geoOL.getControlsBy("id", "i3GeoMedeDistancia"), f =
-						i3GEO.desenho.layergrafico.getFeaturesByAttribute("origem", "medeDistancia");
-					if (controle.length > 0) {
-						controle[0].deactivate();
-						i3geoOL.removeControl(controle[0]);
-					}
-					if (f && f.length > 0) {
-						temp = window.confirm($trad("x94"));
-						if (temp) {
-							i3GEO.desenho.layergrafico.destroyFeatures(f);
+					var m = i3GEO.analise.medeDistancia.openlayers;
+					ol.Observable.unByKey(m.featureListener);
+					m.featureListener = null;
+					m.removeControle();
+					m.numpontos = 0;
+					i3GEO.eventos.cliquePerm.ativa();
+
+					var features, n, f, i, remover = [], temp;
+					features = i3GEO.desenho.layergrafico.getSource().getFeatures();
+					n = features.length;
+					for (i = 0; i < n; i++) {
+						f = features[i];
+						if (f.getProperties().origem === "medeDistancia" || f.getProperties().origem === "medeDistanciaExcluir") {
+							remover.push(f);
 						}
 					}
-					f = i3GEO.desenho.layergrafico.getFeaturesByAttribute("origem", "medeDistanciaExcluir");
-					if (f && f.length > 0) {
-						i3GEO.desenho.layergrafico.destroyFeatures(f);
+					if (remover.length > 0) {
+						temp = window.confirm($trad("x94"));
+						if (temp) {
+							for (r in remover) {
+								i3GEO.desenho.layergrafico.getSource().removeFeature(remover[r]);
+							}
+						}
 					}
 				},
 				/**
@@ -678,8 +719,19 @@ i3GEO.analise =
 					var mostra = $i("mostradistancia_calculo"), texto;
 					if (mostra) {
 						texto =
-							"<b>" + $trad("x96") + ":</b> " + total.toFixed(3) + " km" + "<br><b>" + $trad("x96") + ":</b> "
-								+ (total * 1000).toFixed(2) + " m" + "<br>" + $trad("x25") + ": " + i3GEO.calculo.metododistancia;
+							"<b>" + $trad("x96")
+								+ ":</b> "
+								+ total.toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x96")
+								+ ":</b> "
+								+ (total * 1000).toFixed(2)
+								+ " m"
+								+ "<br>"
+								+ $trad("x25")
+								+ ": "
+								+ i3GEO.calculo.metododistancia;
 						mostra.innerHTML = texto;
 					}
 				},
@@ -690,8 +742,19 @@ i3GEO.analise =
 					var mostra = $i("mostradistancia_calculo_movel"), texto;
 					if (mostra) {
 						texto =
-							"<b>" + $trad("x95") + ":</b> " + trecho.toFixed(3) + " km" + "<br><b>" + $trad("x97") + ":</b> "
-								+ (parcial + trecho).toFixed(3) + " km" + "<br><b>" + $trad("x23") + " (DMS):</b> " + direcao;
+							"<b>" + $trad("x95")
+								+ ":</b> "
+								+ trecho.toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x97")
+								+ ":</b> "
+								+ (parcial + trecho).toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x23")
+								+ " (DMS):</b> "
+								+ direcao;
 						mostra.innerHTML = texto;
 					}
 				}
@@ -885,8 +948,19 @@ i3GEO.analise =
 					var mostra = $i("mostradistancia_calculo"), texto;
 					if (mostra) {
 						texto =
-							"<b>" + $trad("x96") + ":</b> " + total.toFixed(3) + " km" + "<br><b>" + $trad("x96") + ":</b> "
-								+ (total * 1000).toFixed(2) + " m" + "<br>" + $trad("x25") + ": " + i3GEO.calculo.metododistancia;
+							"<b>" + $trad("x96")
+								+ ":</b> "
+								+ total.toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x96")
+								+ ":</b> "
+								+ (total * 1000).toFixed(2)
+								+ " m"
+								+ "<br>"
+								+ $trad("x25")
+								+ ": "
+								+ i3GEO.calculo.metododistancia;
 						mostra.innerHTML = texto;
 					}
 				},
@@ -897,8 +971,19 @@ i3GEO.analise =
 					var mostra = $i("mostradistancia_calculo_movel"), texto;
 					if (mostra) {
 						texto =
-							"<b>" + $trad("x95") + ":</b> " + trecho.toFixed(3) + " km" + "<br><b>" + $trad("x97") + ":</b> "
-								+ (parcial + trecho).toFixed(3) + " km" + "<br><b>" + $trad("x23") + " (DMS):</b> " + direcao;
+							"<b>" + $trad("x95")
+								+ ":</b> "
+								+ trecho.toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x97")
+								+ ":</b> "
+								+ (parcial + trecho).toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x23")
+								+ " (DMS):</b> "
+								+ direcao;
 						mostra.innerHTML = texto;
 					}
 				}
@@ -998,9 +1083,15 @@ i3GEO.analise =
 					if (temp) {
 						i3GEO.desenho.googleearth.removePlacemark("divGeometriasTemp");
 					}
-					i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEO.analise.medeDistancia.googleearth.clique()"]);
-					i3GEO.eventos.removeEventos("MOUSEMOVE",["i3GEO.analise.medeDistancia.movimento.googleearth()"]);
-					i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.analise.medeDistancia.fechaJanela()"]);
+					i3GEO.eventos.removeEventos("MOUSECLIQUE", [
+						"i3GEO.analise.medeDistancia.googleearth.clique()"
+					]);
+					i3GEO.eventos.removeEventos("MOUSEMOVE", [
+						"i3GEO.analise.medeDistancia.movimento.googleearth()"
+					]);
+					i3GEO.eventos.removeEventos("NAVEGAMAPA", [
+						"i3GEO.analise.medeDistancia.fechaJanela()"
+					]);
 				},
 				/**
 				 * Mostra a totalizacao das linhas ja digitalizadas
@@ -1009,8 +1100,19 @@ i3GEO.analise =
 					var mostra = $i("mostradistancia_calculo"), texto;
 					if (mostra) {
 						texto =
-							"<b>" + $trad("x96") + ":</b> " + total.toFixed(3) + " km" + "<br><b>" + $trad("x96") + ":</b> "
-								+ (total * 1000).toFixed(2) + " m" + "<br>" + $trad("x25") + ": " + i3GEO.calculo.metododistancia;
+							"<b>" + $trad("x96")
+								+ ":</b> "
+								+ total.toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x96")
+								+ ":</b> "
+								+ (total * 1000).toFixed(2)
+								+ " m"
+								+ "<br>"
+								+ $trad("x25")
+								+ ": "
+								+ i3GEO.calculo.metododistancia;
 						mostra.innerHTML = texto;
 					}
 				},
@@ -1021,8 +1123,19 @@ i3GEO.analise =
 					var mostra = $i("mostradistancia_calculo_movel"), texto;
 					if (mostra) {
 						texto =
-							"<b>" + $trad("x95") + ":</b> " + trecho.toFixed(3) + " km" + "<br><b>" + $trad("x97") + ":</b> "
-								+ (parcial + trecho).toFixed(3) + " km" + "<br><b>" + $trad("x23") + " (DMS):</b> " + direcao;
+							"<b>" + $trad("x95")
+								+ ":</b> "
+								+ trecho.toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x97")
+								+ ":</b> "
+								+ (parcial + trecho).toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x23")
+								+ " (DMS):</b> "
+								+ direcao;
 						mostra.innerHTML = texto;
 					}
 				}
@@ -1030,14 +1143,14 @@ i3GEO.analise =
 		},
 		/**
 		 * Section: medeArea
-		 *
+		 * 
 		 * Ativa e controla a op&atilde;o de medi&ccedil;&atilde;o de &aacute;rea.
-		 *
+		 * 
 		 * A medida &eacute; feita quando o usu&aacute;rio clica no mapa com esta op&ccedil;&atilde;o ativa
-		 *
+		 * 
 		 * Quando o bot&atilde;o &eacute; acionado, abre-se a janela que mostra o resultado da medida, o &iacute;cone que segue o mouse
 		 * &eacute; alterado.
-		 *
+		 * 
 		 * Para mostrar o resultado do cálculo, é incluido um div específico.
 		 */
 		medeArea : {
@@ -1055,10 +1168,10 @@ i3GEO.analise =
 			ultimaMedida : "",
 			/**
 			 * Function: inicia
-			 *
+			 * 
 			 * Inicia a opera&ccedil;&atilde;o de medi&ccedil;&atilde;o, abrindo a janela de resultados e criando os componentes
 			 * necess&aacute;rios
-			 *
+			 * 
 			 * S&atilde;o registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 			 */
 			inicia : function() {
@@ -1075,14 +1188,17 @@ i3GEO.analise =
 					novoel = document.createElement("div");
 					novoel.id = "mostraarea";
 					ins =
-						'<div class="hd" ><div class="i3GeoTituloJanela">'+$trad("areaAprox")+'<a class=ajuda_usuario target=_blank href="' + i3GEO.configura.locaplic
+						'<div class="hd" ><div class="i3GeoTituloJanela">' + $trad("areaAprox")
+							+ '<a class=ajuda_usuario target=_blank href="'
+							+ i3GEO.configura.locaplic
 							+ '"/ajuda_usuario.php?idcategoria=6&idajuda=51" ><b> </b></a></div></div>'
 							+ '<div class="bd" style="text-align:left;padding:3px;font-size:10px" >'
 							// + '<label class=paragrafo style="float:left;top:5px;position:relative;">Estilo:</label>'
 							// + '<div class=styled-select style="width:70px;">' + i3GEO.desenho.caixaEstilos() + '</div><br>'
 							+ '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo" ></div>'
 							+ '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo_parcial" ></div>'
-							+ '<br><input id=i3GEObotaoAreaWkt size="22" type="button" value="incorporar">' + '</div>';
+							+ '<br><input id=i3GEObotaoAreaWkt size="22" type="button" value="incorporar">'
+							+ '</div>';
 					novoel.innerHTML = ins;
 					novoel.style.borderColor = "gray";
 					document.body.appendChild(novoel);
@@ -1332,9 +1448,24 @@ i3GEO.analise =
 					var mostra = $i("mostraarea_calculo"), texto;
 					if (mostra) {
 						texto =
-							"<b>" + $trad("d21at") + ":</b> " + (area / 1000000).toFixed(3) + " km2" + "<br><b>" + $trad("d21at")
-								+ ":</b> " + (area / 10000).toFixed(2) + " ha" + "<br><b>" + $trad("x98") + ":</b> " + (per).toFixed(2)
-								+ " km" + "<br>" + $trad("x25") + ": " + i3GEO.calculo.metododistancia;
+							"<b>" + $trad("d21at")
+								+ ":</b> "
+								+ (area / 1000000).toFixed(3)
+								+ " km2"
+								+ "<br><b>"
+								+ $trad("d21at")
+								+ ":</b> "
+								+ (area / 10000).toFixed(2)
+								+ " ha"
+								+ "<br><b>"
+								+ $trad("x98")
+								+ ":</b> "
+								+ (per).toFixed(2)
+								+ " km"
+								+ "<br>"
+								+ $trad("x25")
+								+ ": "
+								+ i3GEO.calculo.metododistancia;
 						mostra.innerHTML = texto;
 						i3GEO.analise.medeArea.ultimaMedida = (area / 1000000).toFixed(3) + " km2";
 					}
@@ -1346,10 +1477,29 @@ i3GEO.analise =
 					var mostra = $i("mostraarea_calculo_parcial"), texto;
 					if (mostra) {
 						texto =
-							"<b>" + $trad("d21at") + ":</b> " + (area / 1000000).toFixed(3) + " km2" + "<br><b>" + $trad("d21at")
-								+ ":</b> " + (area / 10000).toFixed(2) + " ha" + "<br><b>" + $trad("x95") + ":</b> " + trecho.toFixed(3)
-								+ " km" + "<br><b>" + $trad("x98") + ":</b> " + (per).toFixed(3) + " km" + "<br><b>" + $trad("x23")
-								+ " (DMS):</b> " + direcao;
+							"<b>" + $trad("d21at")
+								+ ":</b> "
+								+ (area / 1000000).toFixed(3)
+								+ " km2"
+								+ "<br><b>"
+								+ $trad("d21at")
+								+ ":</b> "
+								+ (area / 10000).toFixed(2)
+								+ " ha"
+								+ "<br><b>"
+								+ $trad("x95")
+								+ ":</b> "
+								+ trecho.toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x98")
+								+ ":</b> "
+								+ (per).toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x23")
+								+ " (DMS):</b> "
+								+ direcao;
 						mostra.innerHTML = texto;
 					}
 				}
@@ -1523,9 +1673,24 @@ i3GEO.analise =
 					var mostra = $i("mostraarea_calculo"), texto;
 					if (mostra) {
 						texto =
-							"<b>" + $trad("d21at") + ":</b> " + (area / 1000000).toFixed(3) + " km2" + "<br><b>" + $trad("d21at")
-								+ ":</b> " + (area / 10000).toFixed(2) + " ha" + "<br><b>" + $trad("x98") + ":</b> " + (per).toFixed(2)
-								+ " km" + "<br>" + $trad("x25") + ": " + i3GEO.calculo.metododistancia;
+							"<b>" + $trad("d21at")
+								+ ":</b> "
+								+ (area / 1000000).toFixed(3)
+								+ " km2"
+								+ "<br><b>"
+								+ $trad("d21at")
+								+ ":</b> "
+								+ (area / 10000).toFixed(2)
+								+ " ha"
+								+ "<br><b>"
+								+ $trad("x98")
+								+ ":</b> "
+								+ (per).toFixed(2)
+								+ " km"
+								+ "<br>"
+								+ $trad("x25")
+								+ ": "
+								+ i3GEO.calculo.metododistancia;
 						mostra.innerHTML = texto;
 						i3GEO.analise.medeArea.ultimaMedida = (area / 1000000).toFixed(3) + " km2";
 					}
@@ -1537,10 +1702,29 @@ i3GEO.analise =
 					var mostra = $i("mostraarea_calculo_parcial"), texto;
 					if (mostra) {
 						texto =
-							"<b>" + $trad("d21at") + ":</b> " + (area / 1000000).toFixed(3) + " km2" + "<br><b>" + $trad("d21at")
-								+ ":</b> " + (area / 10000).toFixed(2) + " ha" + "<br><b>" + $trad("x95") + ":</b> " + trecho.toFixed(3)
-								+ " km" + "<br><b>" + $trad("x98") + ":</b> " + (per).toFixed(3) + " km" + "<br><b>" + $trad("x23")
-								+ " (DMS):</b> " + direcao;
+							"<b>" + $trad("d21at")
+								+ ":</b> "
+								+ (area / 1000000).toFixed(3)
+								+ " km2"
+								+ "<br><b>"
+								+ $trad("d21at")
+								+ ":</b> "
+								+ (area / 10000).toFixed(2)
+								+ " ha"
+								+ "<br><b>"
+								+ $trad("x95")
+								+ ":</b> "
+								+ trecho.toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x98")
+								+ ":</b> "
+								+ (per).toFixed(3)
+								+ " km"
+								+ "<br><b>"
+								+ $trad("x23")
+								+ " (DMS):</b> "
+								+ direcao;
 						mostra.innerHTML = texto;
 					}
 				}
