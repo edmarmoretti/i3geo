@@ -1010,6 +1010,7 @@ i3GEO.barraDeBotoes =
 					// a barra j&aacute; foi expandida
 					if (nb !== i3GEO.barraDeBotoes.MAXBOTOES) {
 						i3GEO.barraDeBotoes.recria();
+						return;
 					}
 					if (i3GEO.barraDeBotoes.MAXBOTOES > 0 && n > nb) {
 						for (i = nb; i < n; i += 1) {

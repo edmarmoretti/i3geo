@@ -89,15 +89,12 @@ i3GEOF.wkt2layer =
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante : function(wkt,texto) {
-		var minimiza, cabecalho, janela, divid, temp, titulo;
+		var cabecalho, janela, divid, titulo;
 
 		if ($i("i3GEOF.wkt2layer")) {
 			return;
 		}
 		cabecalho = function() {
-		};
-		minimiza = function() {
-			//i3GEO.janela.minimiza("i3GEOF.wkt2layer");
 		};
 		// cria a janela flutuante
 		titulo = "<div class='i3GeoTituloJanela'>" + $trad("wkt2layer",i3GEOF.wkt2layer.dicionario) + "</div>";
@@ -160,7 +157,7 @@ i3GEOF.wkt2layer =
 		if(i3GEOF.wkt2layer.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.wkt2layer.aguarde.visibility = "visible";
-		var wkt,monta,par,p,nometema,temp,cp;
+		var wkt,monta,par,p,cp;
 		monta = function(){
 		 	i3GEOF.wkt2layer.aguarde.visibility = "hidden";
 		 	i3GEO.atualiza();
@@ -185,7 +182,7 @@ i3GEOF.wkt2layer =
 		if(i3GEOF.wkt2layer.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.wkt2layer.aguarde.visibility = "visible";
-		var wkt,monta,par,p,nometema,temp,cp;
+		var wkt,monta,par,p,cp;
 		monta = function(){
 		 	i3GEOF.wkt2layer.aguarde.visibility = "hidden";
 		 	i3GEO.atualiza();

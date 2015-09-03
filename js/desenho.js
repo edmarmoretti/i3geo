@@ -294,7 +294,7 @@ i3GEO.desenho =
 				}
 			},
 			addBox : function(xmin, ymin, xmax, ymax, namespace, strokeColor, strokeWidth) {
-				var bounds, f;
+				var pol, f;
 				if (!namespace) {
 					namespace = "box";
 				}
@@ -305,31 +305,34 @@ i3GEO.desenho =
 					strokeWidth = 2;
 				}
 				i3GEO.desenho.openlayers.inicia();
-				bounds = OpenLayers.Bounds.fromArray([
-					xmin, ymin, xmax, ymax
-				]);
-				bounds = bounds.toGeometry();
-				bounds = i3GEO.util.extGeo2OSM(bounds);
-				f = new OpenLayers.Feature.Vector(bounds, {
-					origem : namespace
-				}, {
-					fill : false,
-					strokeColor : strokeColor,
-					strokeWidth : strokeWidth
+				xmin = xmin * 1;
+				ymin = ymin * 1;
+				xmax = xmax * 1;
+				ymax = ymax * 1;
+				pol = new ol.geom.Polygon([[[xmin,ymin],[xmin,ymax],[xmax,ymax],[xmax,ymin],[xmin,ymin]]]);
+				pol = i3GEO.util.extGeo2OSM(pol);
+				f = new ol.Feature({
+					geometry: pol
 				});
-				i3GEO.desenho.layergrafico.addFeatures([
-					f
-				]);
+				f.setStyle(
+					new ol.style.Style({
+						stroke: new ol.style.Stroke({
+							color: strokeColor,
+							width: strokeWidth
+						})
+					})
+				);
+				f.setProperties({
+					origem : namespace
+				});
+				i3GEO.desenho.layergrafico.getSource().addFeature(f);
 				return f;
 			},
 			moveBox : function(box, xmin, ymin, xmax, ymax) {
-				i3GEO.desenho.layergrafico.removeFeatures(box);
-				var namespace = box["attributes"].origem, strokeWidth = box["style"].strokeWidth, strokeColor = box["style"].strokeColor;
-				box = i3GEO.desenho.addBox(xmin, ymin, xmax, ymax, namespace, strokeColor, strokeWidth);
+				box.getGeometry().setCoordinates([[[xmin,ymin],[xmin,ymax],[xmax,ymax],[xmax,ymin],[xmin,ymin]]]);
 				return box;
 			},
 			addPin : function(x, y, w, h, imagem, namespace, centro, funcaoclick) {
-				return;
 				if (!imagem || imagem === "") {
 					imagem = i3GEO.configura.locaplic + "/imagens/google/confluence.png";
 				}
@@ -353,46 +356,53 @@ i3GEO.desenho =
 				i3GEO.desenho.openlayers.inicia();
 				var point, f, ox, oy;
 				if (centro === true) {
-					ox = parseInt(w / 2, 10) * -1;
-					oy = parseInt(h / 2, 10) * -1;
+					ox = 0.5;
+					oy = 0.5;
 				} else {
-					ox = parseInt(w / 2, 10) * -1;
-					oy = h * -1;
+					ox = 0.5;
+					oy = 1;
 				}
-				point = new OpenLayers.Geometry.Point(x, y);
+				point = new ol.geom.Point([x, y]);
 				point = i3GEO.util.extGeo2OSM(point);
-				f = new OpenLayers.Feature.Vector(point, {
-					origem : namespace,
-					click : funcaoclick
-				}, {
-					graphicWidth : w,
-					graphicHeight : h,
-					graphicXOffset : ox,
-					graphicYOffset : oy,
-					externalGraphic : imagem
+				
+				f = new ol.Feature({
+					geometry: point
 				});
-				i3GEO.desenho.layergrafico.addFeatures([
-					f
-				]);
+				f.setProperties({
+					origem : namespace
+				});
+				f.setStyle(
+					new ol.style.Style({
+						image: new ol.style.Icon({
+							src : imagem,
+							size: [w,h],
+							anchor: [ox,oy]
+						})
+					})
+				);
+				//FIXME como incluir o evento click?
+				//f.on('click',funcaoclick);
+				i3GEO.desenho.layergrafico.getSource().addFeature(f);
 				return f;
 			},
 			removePins : function(namespace) {
-				return;
 				if (!namespace) {
 					namespace = "pin";
 				}
 				if (i3GEO.desenho.layergrafico) {
-					var f = i3GEO.desenho.layergrafico.getFeaturesByAttribute("origem", namespace);
-					if (f && f.length > 0) {
-						i3GEO.desenho.layergrafico.destroyFeatures(f);
+					var features, n, f, i;
+					features = i3GEO.desenho.layergrafico.getSource().getFeatures();
+					n = features.length;
+					for (i = 0; i < n; i++) {
+						f = features[i];
+						if (f && f.getProperties().origem === namespace) {
+							i3GEO.desenho.layergrafico.getSource().removeFeature(f);
+						}
 					}
 				}
 			},
 			movePin : function(pin, x, y) {
-				return;
-				var point = new OpenLayers.LonLat(x, y);
-				point = i3GEO.util.extGeo2OSM(point);
-				pin.move(point);
+				pin.getGeometry().setCoordinates([x,y]);
 			},
 			criaLayerGrafico : function() {
 				if (!i3GEO.desenho.layergrafico) {

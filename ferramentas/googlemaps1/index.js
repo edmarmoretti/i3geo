@@ -129,11 +129,6 @@ function inicializa(){
 		}
 	});
 	if(i3GEO){
-		/*
-		if(i3GEO.parametros.mapfile){
-			botaoI3geo();
-		}
-		*/
 		ondegoogle(map);
 	}
 	botaoRota();

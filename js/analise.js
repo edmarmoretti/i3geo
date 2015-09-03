@@ -601,7 +601,7 @@ i3GEO.analise =
 					}
 				},
 				point : function(point) {
-					var n, x1, y1, x2, y2, trecho, temp, circ, label, raio, pontoRaio,
+					var n, x1, y1, x2, y2, trecho, temp, circ, label, raio,
 						estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao];
 						coord = point.getCoordinates();
 						total = 0;
@@ -629,6 +629,7 @@ i3GEO.analise =
 						i3GEO.analise.medeDistancia.pontos.dist.push(trecho);
 						total = i3GEO.analise.medeDistancia.openlayers.somaDist();
 						i3GEO.analise.medeDistancia.openlayers.mostraTotal(trecho, total);
+						i3GEO.analise.medeDistancia.ultimoWkt = i3GEO.analise.medeDistancia.pontos2wkt();
 						// raio
 						if ($i("pararraios") && $i("pararraios").checked === true) {
 							circ = new ol.Feature({
@@ -682,25 +683,6 @@ i3GEO.analise =
 								})
 							);
 							i3GEO.desenho.layergrafico.getSource().addFeature(label);
-							
-							/*
-							label = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(point.x, point.y), {
-								origem : "medeDistanciaExcluir"
-							}, {
-								graphicName : "square",
-								pointRadius : 3,
-								strokeColor : "black",
-								graphicOpacity : 1,
-								strokeWidth : 1,
-								fillColor : "white",
-								label : trecho.toFixed(3),
-								labelAlign : "rb",
-								fontColor : estilo.textcolor,
-								fontSize : 12,
-								fontWeight : "bold"
-							});
-							*/
-							
 						}
 					}
 				},

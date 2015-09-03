@@ -969,7 +969,10 @@ i3GEOF.graficointerativo1 =
 			}
 
 			if (tema === "") {
-				i3GEO.janela.tempoMsg($trad('selecionaTema', i3GEOF.graficointerativo1.dicionario));
+				//pode ser que os dados tenham vindo de outra fonte
+				if($i(idjanela + "i3GEOgraficointerativo1Dados").innerHTML === ""){
+					i3GEO.janela.tempoMsg($trad('selecionaTema', i3GEOF.graficointerativo1.dicionario));
+				}
 				return;
 			}
 			if (x === "") {

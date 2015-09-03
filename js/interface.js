@@ -924,6 +924,10 @@ i3GEO.Interface =
 						"lat" : c[1]
 					};
 				};
+				i3geoOL.getZoom = function() {
+					var c = this.getView().getZoom();
+					return c;
+				};
 				i3geoOL.getExtent = function() {
 					var e = this.getView().calculateExtent(this.getSize());
 					return {
