@@ -602,6 +602,7 @@ i3GEO.analise =
 				},
 				point : function(point) {
 					var n, x1, y1, x2, y2, trecho, temp, circ, label, raio, pontoRaio,
+						estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao];
 						coord = point.getCoordinates();
 						total = 0;
 					i3GEO.analise.medeDistancia.pontos.xpt.push(coord[0]);
@@ -614,8 +615,7 @@ i3GEO.analise =
 						y1 = i3GEO.analise.medeDistancia.pontos.ypt[n - 2];
 						x2 = coord[0];
 						y2 = coord[1];
-						//raio = point.distanceTo(new OpenLayers.Geometry.Point(x1, y1));
-						//pontoRaio = new OpenLayers.Geometry.Point(x1, y1);
+						raio = new ol.geom.LineString([[x1, y1],[x2, y2]]).getLength();
 						// projeta
 						if (i3GEO.Interface.openlayers.googleLike) {
 							temp = i3GEO.util.extOSM2Geo(x1 + " " + y1 + " " + x2 + " " + y2);
@@ -629,26 +629,61 @@ i3GEO.analise =
 						i3GEO.analise.medeDistancia.pontos.dist.push(trecho);
 						total = i3GEO.analise.medeDistancia.openlayers.somaDist();
 						i3GEO.analise.medeDistancia.openlayers.mostraTotal(trecho, total);
-						/*
 						// raio
 						if ($i("pararraios") && $i("pararraios").checked === true) {
-							circ =
-								new OpenLayers.Feature.Vector(OpenLayers.Geometry.Polygon.createRegularPolygon(
-									pontoRaio,
-									raio,
-									30), {
-									origem : "medeDistanciaExcluir"
-								}, {
-									fill : false,
-									strokeColor : estilo.circcolor,
-									strokeWidth : 1
-								});
-							i3GEO.desenho.layergrafico.addFeatures([
-								circ
-							]);
+							circ = new ol.Feature({
+								geometry: new ol.geom.Circle([x1, y1],raio)
+							});
+							circ.setProperties({
+								origem : "medeDistanciaExcluir"
+							});
+							circ.setStyle(
+								new ol.style.Style({
+									stroke: new ol.style.Stroke({
+										color: estilo.circcolor,
+										width: 1
+									})
+								})
+							);
+							i3GEO.desenho.layergrafico.getSource().addFeature(circ);
 						}
 						// desenha ponto
 						if ($i("parartextos") && $i("parartextos").checked === true) {
+							label = new ol.Feature({
+								geometry: new ol.geom.Point([x2, y2])
+							});
+							label.setProperties({
+								origem : "medeDistanciaExcluir"
+							});
+							label.setStyle(
+								new ol.style.Style({
+									image: new ol.style.Circle({
+										radius: 3,
+										fill: new ol.style.Fill({
+											color: estilo.circcolor
+										}),
+										stroke: new ol.style.Stroke({
+											color: estilo.circcolor, 
+											width: 1
+										})
+									}),
+									text: new ol.style.Text({
+										text: trecho.toFixed(3),
+										font: 'Bold 13px Arial',
+										textAlign: 'left',
+										stroke: new ol.style.Stroke({
+											color: 'white', 
+											width: 1
+										}),
+										fill: new ol.style.Fill({
+											color: estilo.textcolor
+										})
+									})
+								})
+							);
+							i3GEO.desenho.layergrafico.getSource().addFeature(label);
+							
+							/*
 							label = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(point.x, point.y), {
 								origem : "medeDistanciaExcluir"
 							}, {
@@ -664,11 +699,9 @@ i3GEO.analise =
 								fontSize : 12,
 								fontWeight : "bold"
 							});
-							i3GEO.desenho.layergrafico.addFeatures([
-								label
-							]);
+							*/
+							
 						}
-						*/
 					}
 				},
 				/**

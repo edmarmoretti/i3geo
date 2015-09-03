@@ -157,6 +157,9 @@ i3GEO.desenho = {
 		caixa += "</select>";
 		return caixa;
 	},
+	definePadrao : function(valor){
+		i3GEO.desenho.estiloPadrao = valor;
+	},
 	/**
 	 * Function: addBox
 	 *

@@ -517,7 +517,8 @@ i3GEO.analise =
 								type : OpenLayers.Control.TYPE_TOOL,
 								callbacks : {
 									done : function(feature) {
-										var t, f = new OpenLayers.Feature.Vector(feature, {
+										var estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao],
+											t, f = new OpenLayers.Feature.Vector(feature, {
 											origem : "medeDistancia"
 										}, {
 											graphicName : "square",
@@ -567,7 +568,8 @@ i3GEO.analise =
 									point : function(point) {
 										var n, x1, y1, x2, y2, trecho, temp, circ, label, raio, pontoRaio,
 										// registra os pontos e calcula a distancia
-										total = 0;
+										total = 0,
+										estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao];
 										i3GEO.analise.medeDistancia.pontos.xpt.push(point.x);
 										i3GEO.analise.medeDistancia.pontos.ypt.push(point.y);
 										i3GEO.analise.pontos.xpt.push(point.x);
