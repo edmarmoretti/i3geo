@@ -53,7 +53,7 @@ euEnv.Kost.num     = 0;
 euEnv.Kost.next    = function(){return this.num++;};
 euEnv.euDockArray  = new Array();
 euEnv.refreshTime  = 35;
-euEnv.exeThread          = true;
+euEnv.exeThread          = false;
 euEnv.exeThreadWhiteLoop = 0;
 euEnv.x = 0;
 euEnv.y = 0;
@@ -247,8 +247,8 @@ var euOPAQUE      = 16;
 			this.offset     = 0;
 			this.iconOffset = 0;
 
-			this.venusHillSize  = 3;//200;
-			this.venusHillTrans = euLinear;
+			this.venusHillSize  = 0;//200;
+			//this.venusHillTrans = euLinear;
 
 			this.position    = euUP;
 			this.align       = euSCREEN;
@@ -434,6 +434,7 @@ var euOPAQUE      = 16;
 			this.setPosX   = function(x) {document.getElementById(this.id).style.left=x+'px';};
 			this.getPosY   = function() {return document.getElementById(this.id).style.top.replace(/[^0-9]/g,"");};
 			this.setPosY   = function(y) {document.getElementById(this.id).style.top=y+'px';};
+			
 			this.getWidth  = function() {return document.getElementById(this.id).style.width.replace(/[^0-9]/g,"");};
 			this.setWidth  = function(w){document.getElementById(this.id).style.width=Math.round(w)+'px';};
 			this.getHeight  = function() {return document.getElementById(this.id).style.height.replace(/[^0-9]/g,"");};
@@ -446,6 +447,7 @@ var euOPAQUE      = 16;
 			this.getMouseRelativeY = function(){return this.mouseY-euIdObjTop(this.div);};
 
 			this.updateDims = function(){
+				//console.info("zzzzzzzzzzzz")
 				var bakWidth  = 0;
 				var bakHeight = 0;
 				for (var i in this.iconsArray) if (this.iconsArray[i].id){
@@ -503,7 +505,6 @@ var euOPAQUE      = 16;
 					}
 					this.iconsArray[i].setPos(updPosX,updPosY);
 					this.iconsArray[i].refresh();
-
 				}
 
 				this.setDim(bakWidth,bakHeight);
@@ -568,13 +569,14 @@ var euOPAQUE      = 16;
 			};
 
 			this.delIcon = function(elem) {
+				return;
 				euEnv.euDockArray.splice(elem);
 				euEnv.euDockArray[elem.id]=0;
 				for (var i in this.iconsArray) if (this.iconsArray[i] == elem)
 					this.iconsArray.splice(i,1);
 				elem.destroy();
 				elem=null;
-				this.updateDims();
+				//this.updateDims();
 			};
 
 		};
@@ -615,16 +617,20 @@ var euOPAQUE      = 16;
 			this.runningFading = false;
 
 			this.updateDims = function(){
+				//console.info(this)
 				if (!this.loaded)return;
 
-				for (var i=0;i<this.elementsArray.length;i++)
+				for (var i=0;i<this.elementsArray.length;i++){
+					//console.info("euDockIcon.updatedims")
 					this.elementsArray[i].setProperties(this.posX,this.posY,this.getWidth(),this.getHeight());
+				}
 			};
 
 			this.updateFading = function(){
 			};
 
 			this.refresh = function(){
+				//console.info("euDockIcon.refresh")
 				this.updateDims();
 			};
 
@@ -649,14 +655,17 @@ var euOPAQUE      = 16;
 			this.retrieveLoadingDims = function(elem,num){
 				if (elem.onLoadPrev)
 					elem.onLoadPrev();
+				
 				if (num==0 && !this.loaded)
 					this.setDim(elem.getWidth(),elem.getHeight());
+				
 				elem.loaded=true;
 				var ret=true;
 				for (var i in this.elementsArray) if (this.elementsArray[i].id)
 						ret&=this.elementsArray[i].loaded;
 				this.loaded=ret;
 				if (this.loaded){
+					//console.info("aaaaaaa")
 					this.parentDock.updateDims();
 					for (var i in this.elementsArray) if (this.elementsArray[i].id)
 						this.elementsArray[i].show();
@@ -683,12 +692,12 @@ var euOPAQUE      = 16;
 			this.setPosX   = function(x) {this.posX=x;};
 			this.setPosY   = function(y) {this.posY=y;};
 			this.getWidth  = function()  {
-				if (!this.loaded)return 0;
-				var calc = this.width*this.zoomFuncW(this.frame);
+				//if (!this.loaded)return 0;
+				//var calc = this.width*this.zoomFuncW(this.frame);
 				return 38;
 			};
 			this.getHeight = function()  {
-				if (!this.loaded)return 0;
+				//if (!this.loaded)return 0;
 				return 38;
 			};
 
@@ -719,15 +728,18 @@ var euOPAQUE      = 16;
 
 			this.addElement = function(args){
 				if (typeof(args)!="undefined" && args!=null){
+					//console.info("xxxxx");
 					this.elementsArray=new Array();
 					this.fadingStep = 0.5/args.length;
 
 					for (var i=0;i<args.length;i++)
 						for (var ii in args[i]){
 							var id = "euDock_"+ii+"_"+euEnv.Kost.next();
-							euEnv.euDockArray[id]= new window[ii](id,args[i][ii],this.parentDock.div,"euEnv.euDockArray."+this.id+".retrieveLoadingDims(euEnv.euDockArray."+id+","+i+");");
-							this.elementsArray.push(euEnv.euDockArray[id]);
-							euEnv.euDockArray[id].loaded=false;
+							if(!euEnv.euDockArray[id]){
+								euEnv.euDockArray[id]= new window[ii](id,args[i][ii],this.parentDock.div,"euEnv.euDockArray."+this.id+".retrieveLoadingDims(euEnv.euDockArray."+id+","+i+");");
+								this.elementsArray.push(euEnv.euDockArray[id]);
+								euEnv.euDockArray[id].loaded=false;
+							}
 						}
 				}
 			};
@@ -784,6 +796,7 @@ var euOPAQUE      = 16;
 			this.refresh = function(){
 				if (!this.loaded)
 					return;
+				
 				if (this.align==euUP || this.align==euDOWN || this.align==euHORIZONTAL){
 					this.elementsArray.left.setPos(-this.elementsArray.left.getWidth(),0);
 					this.elementsArray.horizontal.setProperties(0,0,Math.round(this.len),this.getSize());
@@ -815,7 +828,6 @@ var euOPAQUE      = 16;
 						this.elementsArray.horizontal.hide();
 					}
 				}
-
 			};
 
 			this.setProperties = function(len,align){
@@ -831,9 +843,10 @@ var euOPAQUE      = 16;
 				var ret=true;
 				for (var i in this.elementsArray) if (this.elementsArray[i].id)
 					ret&=this.elementsArray[i].loaded;
+				
 				this.loaded=ret;
 				if (this.loaded){
-					this.parentDock.updateDims();
+					//this.parentDock.updateDims();
 					for (var i in this.elementsArray) if (this.elementsArray[i].id)
 						this.elementsArray[i].show();
 				}
@@ -850,9 +863,11 @@ var euOPAQUE      = 16;
 							//	this.elementsArray[i].hide();
 							//	euEnv.euDockArray[this.elementsArray[i].id]=null;
 							//}
-							euEnv.euDockArray[id]=new window[ii](id,args[i][ii],this.parentDock.divBar,"euEnv.euDockArray."+this.id+".retrieveLoadingDims(euEnv.euDockArray."+id+");");
-							this.elementsArray[i]=euEnv.euDockArray[id];
-							euEnv.euDockArray[id].loaded=false;
+							if(!euEnv.euDockArray[id]){
+								euEnv.euDockArray[id]=new window[ii](id,args[i][ii],this.parentDock.divBar,"euEnv.euDockArray."+this.id+".retrieveLoadingDims(euEnv.euDockArray."+id+");");
+								this.elementsArray[i]=euEnv.euDockArray[id];
+								euEnv.euDockArray[id].loaded=false;
+							}
 						}
 				}
 			};

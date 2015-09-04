@@ -1002,7 +1002,7 @@ i3GEO.barraDeBotoes =
 			 */
 			$i(euEnv.euDockArray.euDock_0.bar.elementsArray.right.id).onclick =
 				function() {
-					var dica, titulo, chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO), n = chaves.length, nb =
+				var dica, titulo, chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO), n = chaves.length, nb =
 						euEnv.euDockArray.euDock_0.iconsArray.length, i;
 					// if ($i("i3geoMarcaIcone")) {
 					// $i("i3geoMarcaIcone").style.display = "none";
@@ -1010,6 +1010,7 @@ i3GEO.barraDeBotoes =
 					// a barra j&aacute; foi expandida
 					if (nb !== i3GEO.barraDeBotoes.MAXBOTOES) {
 						i3GEO.barraDeBotoes.recria();
+						return;
 					}
 					if (i3GEO.barraDeBotoes.MAXBOTOES > 0 && n > nb) {
 						for (i = nb; i < n; i += 1) {
@@ -1517,8 +1518,11 @@ i3GEO.barraDeBotoes =
 			if (i3GEO.barraDeBotoes.TIPO === "olhodepeixe" || i3GEO.barraDeBotoes.TIPO === "olhodepeixe1") {
 				euEnv.euDockArray = [];
 				euEnv.Kost.num = 0;
+				if ($i("euDock_0")) {
+					$i("euDock_0").parentNode.removeChild($i("euDock_0"));
+				}
 				if ($i("euDock_0_bar")) {
-					$i("euDock_0_bar").parentNode.parentNode.removeChild($i("euDock_0_bar").parentNode);
+					$i("euDock_0_bar").parentNode.removeChild($i("euDock_0_bar"));
 				}
 				i3GEO.barraDeBotoes.inicializaBarra();
 				// if ($i("i3geoMarcaIcone")) {

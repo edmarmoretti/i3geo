@@ -122,6 +122,9 @@ Configuracoes especificas dos elementos que ficam no rodape
 .i3GeoMascaraCoord tr {
 	border: 0px solid white;
 }
+#localizarxy {
+	z-index : 50;
+}
 /*
 Imagens de fundo da barra de botoes
 Ao definir background, o default e redefinido
@@ -129,16 +132,20 @@ Ao definir background, o default e redefinido
 #euDock_euImage_2 {
 		background: black;
 		opacity: 1;
+		max-height: 28px;
 }
 #euDock_euImage_3 {
 		background: black;
 		opacity: 1;
+		max-height: 28px;
 }
 #euDock_euImage_4 {
 		background: black;
 		opacity: 1;
+		max-height: 28px;
 }
 #euDock_euImage_2 {
+	max-height: 28px;
 	border: 1px solid black;
 	border-radius: 35px 0 0 5px;
 	opacity: 1;
@@ -147,6 +154,7 @@ Ao definir background, o default e redefinido
 }
 
 #euDock_euImage_3 {
+	max-height: 28px;
 	border: 1px solid black;
 	opacity: 1;
 	background: black;
@@ -154,11 +162,15 @@ Ao definir background, o default e redefinido
 }
 
 #euDock_euImage_4 {
+	max-height: 28px;
 	border: 1px solid black;
 	border-radius: 0px 35 5 0px;
 	opacity: 1;
 	background: black;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='black', endColorstr='black',GradientType=0 );
+}
+#euDock_0 {
+	margin-top: 5px;
 }
 
 /*

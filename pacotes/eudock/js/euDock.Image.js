@@ -67,7 +67,7 @@ if (!euEnv.imageBasePath)
 			container.className = "noprint";
 			this.container = container;
 
-			euPreloadImage(args.image);
+			//euPreloadImage(args.image);
 
 			this.setProperties = function(x,y,w,h){
 				this.setPos(x,y);
@@ -88,8 +88,8 @@ if (!euEnv.imageBasePath)
 			this.setPosX   = function(x) {document.getElementById(this.id).style.left=x+'px';};
 			this.getPosY   = function() {return document.getElementById(this.id).style.top.replace(/[^0-9]/g,"");};
 			this.setPosY   = function(y) {
-			if(container.id === "euDock_0"){
-				document.getElementById(this.id).style.top=(y - 10)+'px';
+				if(container.id === "euDock_0"){
+					document.getElementById(this.id).style.top=(y - 10)+'px';
 				}
 				else{
 					document.getElementById(this.id).style.top= y + 'px';
