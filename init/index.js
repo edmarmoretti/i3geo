@@ -106,7 +106,7 @@ botoesIni.push({
 	"titulo":$trad(30,g_traducao_init)
 	},{
 	"img":"logo_psp.png",
-	"href":"http://www.softwarepublico.gov.br/ver-comunidade?community_id=1444332",
+	"href":"https://portal.softwarepublico.gov.br/social/i3geo/",
 	"titulo":$trad(31,g_traducao_init)
 	},{
 	"img":"mailman.jpg",
