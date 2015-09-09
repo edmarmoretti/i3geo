@@ -24,7 +24,7 @@ function listafotosflickr()
 	if ($ai != "")
 	$ai = strtotime("1 Jan ".$ai);// echo strtotime("10 September 2000")
 	if($af != "")
-	$af = strtotime("30 Dec ".$af);
+	$af = strtotime("31 Dec ".$af);
 	$f = new phpFlickr($key);
 	$recent = @$f->photos_search(array("page"=>$page,"extras"=>"geo","accuracy"=>"11","min_upload_date"=>$ai,"max_upload_date"=>$af,"text"=>$texto,"bbox"=>$ret,"privacy_filter"=>"1"));
 	if(!$recent){$recent = "";}

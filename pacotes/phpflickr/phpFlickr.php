@@ -44,7 +44,7 @@ ini_set('include_path', ini_get('include_path') . $path_delimiter . dirname(__FI
 class phpFlickr {
 	var $api_key;
 	var $secret;
-	var $REST = 'http://api.flickr.com/services/rest/';
+	var $REST = 'https://api.flickr.com/services/rest/';
 	var $Upload = 'http://api.flickr.com/services/upload/';
 	var $Replace = 'http://api.flickr.com/services/replace/';
 	var $req;
