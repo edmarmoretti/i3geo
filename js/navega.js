@@ -521,15 +521,12 @@ i3GEO.navega =
 		 * {Numeric} - denominador da escala
 		 */
 		aplicaEscala : function(locaplic, sid, escala) {
-			if (typeof (console) !== 'undefined')
-				console.info("i3GEO.navega.aplicaEscala()");
-
-			// YAHOO.log("aplicaescala", "i3geo");
 			if (i3GEO.Interface.ATUAL === "googlemaps") {
 				i3GeoMap.setZoom(i3GEO.Interface.googlemaps.escala2nzoom(escala));
 			}
 			if (i3GEO.Interface.ATUAL === "openlayers") {
 				i3geoOL.zoomToScale(escala, true);
+				i3GEO.parametros.mapscale = parseInt(i3geoOL.getScale(),10);
 			}
 		},
 		panFixo : function() {
@@ -1006,7 +1003,7 @@ i3GEO.navega =
 				janela = i3GEO.janela.cria((i3GEO.parametros.w / 2.5) + 25 + "px", (i3GEO.parametros.h / 2.5) + 18 + "px", i3GEO.configura.locaplic
 					+ "/ferramentas/googlemaps1/index.php", "", "", "<div class='i3GeoTituloJanela'>Google maps<a class=ajuda_usuario target=_blank href='"
 					+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=68' ><b> </b></a></div>", idgoogle);
-				
+
 				temp = function() {
 					i3GEO.desenho.removePins("boxOndeGoogle");
 					i3GEO.desenho.removePins("googlemaps");

@@ -101,7 +101,7 @@ i3GEOF.buscaFotos = {
 				i3GEOF.buscaFotos.mostraMenu();
 			}}});
 			new YAHOO.widget.Button("i3GEObuscafotosbotao3",{onclick:{fn: function(){
-				i3GEO.parametros.mapscale=300000;
+				i3GEO.parametros.mapscale = 300000;
 				i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,300000);
 				i3GEOF.buscaFotos.mostraMenu();
 			}}});

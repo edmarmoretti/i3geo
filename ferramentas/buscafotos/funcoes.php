@@ -14,6 +14,7 @@ if($funcao == "listafotoslocr")
 {$cp->register('listafotoslocr');}
 $cp->start();
 $cp->return_data();
+//$i3geo_proxy_server = "proxy.saude.gov";
 function listafotosflickr()
 {
 	global $ret, $cp, $key, $texto,$ai,$af,$page;
@@ -31,12 +32,19 @@ function listafotosflickr()
 }
 function listafotospanoramio()
 {
-	global $ret, $cp,$ai,$af;
+	global $ret, $cp,$ai,$af,$i3geo_proxy_server;
 	$ret = explode(" ",$ret);
 	$resultado = "";
-	//echo "http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=small";
-	//return;
-	$recent = file_get_contents("http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=thumbnail");
+	$curl = curl_init();
+	curl_setopt ($curl, CURLOPT_URL, "http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=thumbnail");
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
+		curl_setopt($curl, CURLOPT_PROXY, $i3geo_proxy_server);
+	}
+	$recent = curl_exec($curl);
+	curl_close ($curl);
+
+	//$recent = file_get_contents("http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=thumbnail");
 	$recent = str_replace("\n","",$recent);
 	$recent = str_replace("'","",$recent);
 	$recent = str_replace('"',"'",$recent);
@@ -44,11 +52,19 @@ function listafotospanoramio()
 }
 function listafotoslocr()
 {
-	global $ret,$cp,$ai,$af;
+	global $ret,$cp,$ai,$af,$i3geo_proxy_server;
 	$ret = explode(" ",$ret);
 	$resultado = "";
 	$u = "http://www.locr.com/api/get_photos_json.php?latitudemin=".$ret[1]."&longitudemin=".$ret[0]."&latitudemax=".$ret[3]."" ."&longitudemax=".$ret[2]."&size=thumbnail&category=popularity&locr=true&start=".$ai."&count=".($af-$ai);
-	$recent = file_get_contents($u);
+	$curl = curl_init();
+	curl_setopt ($curl, CURLOPT_URL, $u);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
+		curl_setopt($curl, CURLOPT_PROXY, $i3geo_proxy_server);
+	}
+	$recent = curl_exec($curl);
+	curl_close ($curl);
+	//$recent = file_get_contents($u);
 	$recent = str_replace("\n","",$recent);
 	$recent = str_replace("\t","",$recent);
 	$recent = str_replace("'","",$recent);
