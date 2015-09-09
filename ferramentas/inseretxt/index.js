@@ -374,7 +374,7 @@ i3GEOF.inseretxt = {
 			par += "&cor=0 0 0";
 		}
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+
-				"&funcao=inserefeature&"+par+"&pin="+nometema+"&tipo=LINE&texto="+texto+" (conector)&xy="+xy;
+				"&funcao=inserefeature&"+par+"&pin="+nometema+"&tipo=LINE&nomeTema="+texto+" (conector)&xy="+xy;
 		if(par === false){
 			i3GEOF.inseretxt.aguarde.visibility = "hidden";
 			return;

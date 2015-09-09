@@ -17,10 +17,12 @@ Cria um novo tema com a topon&iacute;mia do tema atual.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
-		if(!isset($tipo))
-		{$tipo="";}
-		if(!isset($novotema))
-		{$novotema = "sim";}
+		if(!isset($tipo)){
+			$tipo="";
+		}
+		if(!isset($novotema)){
+			$novotema = "sim";
+		}
 		$retorno = $m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema);
 		if(empty($maxscale)){
 			$maxscale = -1;

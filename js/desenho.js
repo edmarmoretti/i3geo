@@ -428,6 +428,9 @@ i3GEO.desenho =
 						})
 					});
 					i3GEO.desenho.layergrafico.setMap(i3geoOL);
+					i3GEO.desenho.layergrafico.getFeatures = function(){
+						return i3GEO.desenho.layergrafico.getSource().getFeatures();
+					};
 				}
 				return;
 				if (!i3GEO.desenho.layergrafico) {

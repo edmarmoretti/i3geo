@@ -757,6 +757,7 @@ $wkt - boolean indicando se $xy e um WKT
 				case "ANNOTATION":
 					//$c->set("status",MS_DELETE);
 					$pinlayer->setmetadata("TEMA",$texto);
+					$pinlayer->setmetadata("tiles","nao");
 					$pinlayer->set("type",MS_LAYER_ANNOTATION);
 					$pinlayer->set("opacity","100");
 				break;

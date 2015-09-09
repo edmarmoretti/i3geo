@@ -158,14 +158,18 @@ i3GEOF.mostraExten = {
 	*/
 	executa: function(){
 		try{
-			var x = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenxg").value,$i("i3GEOmostraExtenxm").value,$i("i3GEOmostraExtenxs").value);
-			var xx = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenxxg").value,$i("i3GEOmostraExtenxxm").value,$i("i3GEOmostraExtenxxs").value);
-			var y = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyg").value,$i("i3GEOmostraExtenym").value,$i("i3GEOmostraExtenys").value);
-			var yy = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyyg").value,$i("i3GEOmostraExtenyym").value,$i("i3GEOmostraExtenyys").value);
-			if ((x == xx) || (y == yy))
-			{i3GEO.janela.tempoMsg($trad('msgCoordValida',i3GEOF.mostraExten.dicionario));return;}
-			if ((x > xx) || (y > yy))
-			{i3GEO.janela.tempoMsg($trad('msgCoordValida',i3GEOF.mostraExten.dicionario));return;}
+			var x = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenxg").value,$i("i3GEOmostraExtenxm").value,$i("i3GEOmostraExtenxs").value),
+				xx = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenxxg").value,$i("i3GEOmostraExtenxxm").value,$i("i3GEOmostraExtenxxs").value),
+				y = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyg").value,$i("i3GEOmostraExtenym").value,$i("i3GEOmostraExtenys").value),
+				yy = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyyg").value,$i("i3GEOmostraExtenyym").value,$i("i3GEOmostraExtenyys").value);
+			if ((x == xx) || (y == yy)){
+				i3GEO.janela.tempoMsg($trad('msgCoordValida',i3GEOF.mostraExten.dicionario));
+				return;
+			}
+			if ((x > xx) || (y > yy)){
+				i3GEO.janela.tempoMsg($trad('msgCoordValida',i3GEOF.mostraExten.dicionario));
+				return;
+			}
 			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,window.parent.i3GEO.parametros.tipoimagem,(x+" "+y+" "+xx+" "+yy));
 		}
 		catch(e){i3GEO.janela.tempoMsg(e+" Erro.");}

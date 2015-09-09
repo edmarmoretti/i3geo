@@ -196,6 +196,7 @@ Retorno:
 				$novolayer->set("status",MS_DEFAULT);
 				$novolayer->setmetadata("tema","texto de ".$nome);
 				$novolayer->setmetadata("tip","");
+				$novolayer->setmetadata("tiles","nao");
 				$novolayer->setmetadata("identifica","nao");
 				$novolayer->set("labelitem",$item);
 			}

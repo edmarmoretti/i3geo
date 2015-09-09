@@ -980,7 +980,10 @@ switch (strtoupper($funcao))
 		if(!isset($wkt)){
 			$wkt = false;
 		}
-		$m->insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap,$wkt);
+		if(!isset($nomeTema)){
+			$nomeTema = "";
+		}
+		$m->insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap,$wkt,$nomeTema);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();

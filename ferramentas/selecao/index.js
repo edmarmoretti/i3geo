@@ -483,9 +483,11 @@ i3GEOF.selecao =
 			i3GEO.Interface.atualizaTema(retorno, tema);
 			nsel = i3GEO.arvoreDeCamadas.pegaTema(tema, retorno.data.temas);
 			$i("i3GEOselecaoNsel").innerHTML = $trad('selecionados', i3GEOF.selecao.dicionario) + ": " + (nsel.nsel);
-			i3GEO.eventos.adicionaEventos("SELECAO", [
-				"i3GEOF.tabela.atualizaListaDeRegistros()"
-			]);
+			if(i3GEOF.tabela){
+				i3GEO.eventos.adicionaEventos("SELECAO", [
+					"i3GEOF.tabela.atualizaListaDeRegistros()"
+				]);
+			}
 			i3GEO.eventos.executaEventos(i3GEO.eventos.SELECAO);
 		},
 		/*
@@ -898,18 +900,18 @@ i3GEOF.selecao =
 				draw : "",
 				inicia : function() {
 					var features = i3GEO.desenho.layergrafico.getFeatures();
-					if(features.getLength() === 0){
+					if(features.length === 0){
 						return;
 					}
 					i3GEO.eventos.cliquePerm.desativa();
 					i3GEOF.selecao.figura.ol3.removeControle();
 					i3GEOF.selecao.figura.ol3.draw = new ol.interaction.Select();
 					i3GEOF.selecao.figura.ol3.draw.on("select",function(evt){
-						var wkt, geo, i, n, f, format = new ol.format.WKT();
+						var wkt, i, n, f, format = new ol.format.WKT();
 						geo = i3GEOF.selecao.figura.ol3.draw.getFeatures();
-						n = geo.getLength();
+						n = evt.selected.length;
 						for(i=0; i<n; i++){
-							f = geo.item(i);
+							f =evt.selected[i];
 							f = i3GEO.util.projOSM2Geo(f);
 							wkt = format.writeFeature(f);
 							i3GEOF.selecao.figura.termina(i3GEO.temaAtivo, $i("i3GEOselecaotipoOperacao").value, wkt);

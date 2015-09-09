@@ -501,7 +501,7 @@ i3GEO.analise =
 				 * layer para receber os graficos
 				 */
 				inicia : function() {
-					var linha, estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao], controle =
+					var linha, controle =
 						i3geoOL.getControlsBy("id", "i3GeoMedeDistancia");
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 					i3GEO.analise.medeDistancia.pontos = {
