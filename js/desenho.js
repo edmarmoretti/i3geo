@@ -417,7 +417,7 @@ i3GEO.desenho =
 							}),
 							stroke : new ol.style.Stroke({
 								color : '#ffcc33',
-								width : 2
+								width : 4
 							}),
 							image : new ol.style.Circle({
 								radius : 7,

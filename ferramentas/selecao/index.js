@@ -595,6 +595,9 @@ i3GEOF.selecao =
 		 */
 		removeFiguras : {
 			ol3 : function(){
+				if(!i3GEO.desenho.layergrafico){
+					return;
+				}
 				var features, n, f, i, remover = [], temp;
 				features = i3GEO.desenho.layergrafico.getSource().getFeatures();
 				n = features.length;
