@@ -322,14 +322,7 @@ i3GEOF.tabela =
 					i3GEOF.tabela.ativaFoco(id);
 				};
 				minimiza = function() {
-					var t = i3GEO.janela.minimiza(id, "120px");
-					if (t === "min") {
-						$i(id + "I").style.display = "none";
-						$i("i3GEOFtabelaRodape" + id).style.display = "none";
-					} else {
-						$i(id + "I").style.display = "block";
-						$i("i3GEOFtabelaRodape" + id).style.display = "block";
-					}
+					i3GEO.janela.iconiza(id,120,"i3GEOFtabelaRodape" + id);
 				};
 				duplica = function() {
 					i3GEOF.tabela.iniciaJanelaFlutuante();

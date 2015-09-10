@@ -460,6 +460,7 @@ i3GEOF.legenda =
 				b.addClass("rodar");
 				$i("i3GEOlegendabotao10-button").style.width = "100%";
 				$i("i3GEOlegendabotao10").style.width = "100%";
+				$i("i3GEOlegendabotao10").style.display = tipo;
 			}
 		},
 		/*

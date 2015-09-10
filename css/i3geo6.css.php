@@ -360,6 +360,12 @@ top: 2px;
 border: 0px solid white;
 cursor: pointer;
 }
+.paragrafo input[type=radio] {
+position: relative;
+top: 3px;
+border: 0px solid white;
+cursor: pointer;
+}
 .lista td {
 border: 0px solid rgb(240, 240, 240);
 border-left: 0px;

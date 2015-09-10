@@ -474,6 +474,40 @@ i3GEO.janela =
 			]);
 		},
 		/**
+		 * Minimiza uma janela na forma de um icone com opcoes de fechar e abrir novamente
+		 *
+		 * Parametro:
+		 *
+		 * {string} - id da janela
+		 *
+		 * {number} - largura em pixels da janela iconizada
+		 *
+		 * {string} - (opcional) id do rodape da janela
+		 */
+		iconiza : function(id,w,rodape){
+			var j,r,t = i3GEO.janela.minimiza(id, w+"px",rodape);
+			r = YAHOO.util.Resize.getResizeById(id);
+			j = $i(id + "I");
+			if(!j){
+				return;
+			}
+			if (t === "min") {
+				j.style.display = "none";
+				if(r){
+					r.lock();
+				}
+				if(rodape){
+					$i(rodape).style.display = "none";
+				}
+			} else {
+				j.style.display = "block";
+				if(r){
+					r.unlock();
+				}
+				$i(rodape).style.display = "block";
+			}
+		},
+		/**
 		 * Minimiza ou maximiza a janela
 		 *
 		 * Parametro:
