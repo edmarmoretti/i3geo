@@ -394,13 +394,8 @@ i3GEOF.legenda =
 				i3GEOF.legenda.ativaFoco();
 			};
 			minimiza = function() {
-				var t = i3GEO.janela.minimiza("i3GEOF.legenda", "100px");
+				i3GEO.janela.iconiza("i3GEOF.legenda",120,"i3GEOFlegendaCabecalhoI");
 				i3GEOF.legenda.ativaAplicar("none");
-				if (t === "min") {
-					$i("i3GEOFlegendaCabecalhoI").style.display = "none";
-				} else {
-					$i("i3GEOFlegendaCabecalhoI").style.display = "block";
-				}
 			};
 			// cria a janela flutuante
 			titulo =

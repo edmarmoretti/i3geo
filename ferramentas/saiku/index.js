@@ -170,12 +170,7 @@ i3GEOF.saiku =
 				i3GEO.configura.locaplic + "/ferramentas/saiku/esquemaxml.php?origem=i3geo&g_sid=" + i3GEO.configura.sid + "&locaplic="
 					+ i3GEO.configura.locaplic + "&mapext=" + mapext, cabecalho = function() {
 			}, minimiza = function() {
-				var t = i3GEO.janela.minimiza("i3GEOF.saikuMapa","100px");
-				if(t === "min"){
-					$i("i3GEOFsaikubotao3").style.display = "none";
-				} else {
-					$i("i3GEOFsaikubotao3").style.display = "block";
-				}
+				i3GEO.janela.iconiza("i3GEOF.saikuMapa",100,"i3GEOFsaikubotao3");
 			}, titulo =
 				"<div class='comboTemasCabecalho'><input id=i3GEOFsaikubotao3 type=button value='Atualiza o mapa' /></div>";
 

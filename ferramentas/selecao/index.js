@@ -45,7 +45,7 @@ i3GEOF.selecao =
 		tipoSel : "",
 		/*
 		 * Variavel: aguarde
-		 * 
+		 *
 		 * Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 		 */
 		aguarde : "",
@@ -57,9 +57,9 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: iniciaDicionario
-		 * 
+		 *
 		 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-		 * 
+		 *
 		 * O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 		 */
 		iniciaDicionario : function() {
@@ -74,11 +74,11 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
@@ -157,11 +157,11 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
@@ -325,7 +325,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: iniciaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function() {
@@ -338,12 +338,7 @@ i3GEOF.selecao =
 				i3GEOF.selecao.ativaFoco();
 			};
 			minimiza = function() {
-				var t = i3GEO.janela.minimiza("i3GEOF.selecao", "100px");
-				if (t === "min") {
-					$i("i3GEOFSelecaoCabecalhoI").style.display = "none";
-				} else {
-					$i("i3GEOFSelecaoCabecalhoI").style.display = "block";
-				}
+				i3GEO.janela.iconiza("i3GEOF.selecao",100,"i3GEOFSelecaoCabecalhoI");
 			};
 			titulo =
 				"<span class='i3GEOiconeFerramenta i3GEOiconeSelecao' title='" + $trad("x51")
@@ -389,7 +384,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: ativaFoco
-		 * 
+		 *
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function() {
@@ -407,7 +402,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: criaCombosTemas
-		 * 
+		 *
 		 * Cria os combos de sele&ccedil;&atilde;o de temas
 		 */
 		criaCombosTemas : function() {
@@ -433,7 +428,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: mudaicone
-		 * 
+		 *
 		 * Altera as bordas dos &iacute;cones
 		 */
 		mudaicone : function() {
@@ -451,7 +446,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: pegaTemasSel
-		 * 
+		 *
 		 * Pega a lista de temas escolhidos pelo usu&aacute;rio
 		 */
 		pegaTemasSel : function() {
@@ -472,9 +467,9 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: fimSelecao
-		 * 
+		 *
 		 * Funcoes executadas quando uma operacao de selecao e concluida
-		 * 
+		 *
 		 */
 		fimSelecao : function(retorno) {
 			var nsel, tema = i3GEO.temaAtivo;
@@ -492,15 +487,15 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: operacao
-		 * 
+		 *
 		 * Executa uma opera&ccedil;&atilde;o sobre o conjunto de elementos selecionados
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <i3GEO.php.selecaopt>
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * tipo {String} - tipo de opera&ccedil;&atilde;o inverte|limpa
 		 */
 		operacao : function(tipo) {
@@ -525,11 +520,11 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: tiposel
-		 * 
+		 *
 		 * Executa um tipo de sele&ccedil;&atilde;o interativa
-		 * 
+		 *
 		 * Parameter:
-		 * 
+		 *
 		 * obj {objeto dom) - objeto que foi clicado para disparar a opera&ccedil;&atilde;o. O valor identifica o tipo de
 		 * opera&ccedil;&atilde;o
 		 */
@@ -641,7 +636,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Classe: i3GEOF.selecao.box
-		 * 
+		 *
 		 * Controla o desenho do box para a sele&ccedil;&atilde;o e executa a opera&ccedil;&atilde;o de sele&ccedil;&atilde;o
 		 */
 		box : {
@@ -656,7 +651,7 @@ i3GEOF.selecao =
 							stroke: new ol.style.Stroke({
 								color: [0, 0, 255, 1]
 							})
-						})	
+						})
 					});
 					i3GEOF.selecao.box.ol3.draw.on("boxend",function(evt){
 						var feature, geo, pol = i3GEOF.selecao.box.ol3.draw.getGeometry();
@@ -753,7 +748,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: clique
-		 * 
+		 *
 		 * Seleciona elementos clicando no mapa
 		 */
 		clique : {
@@ -892,7 +887,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: figura
-		 * 
+		 *
 		 * Seleciona elementos com base em uma figura existente no mapa
 		 */
 		figura : {
@@ -1006,7 +1001,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Classe: i3GEOF.selecao.poligono
-		 * 
+		 *
 		 * Realiza a sele&ccedil;&atilde;o desenhando um pol&iacute;gono no mapa
 		 */
 		poligono : {
@@ -1179,7 +1174,7 @@ i3GEOF.selecao =
 			},
 			/*
 			 * Function: termina
-			 * 
+			 *
 			 * Termina o desenho do pol&iacute;gono e executa a opera&ccedil;&atilde;o de sele&ccedil;&atilde;o
 			 */
 			termina : function(pontos) {
@@ -1211,7 +1206,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: criatema
-		 * 
+		 *
 		 * Cria um novo tema com a sele&ccedil;&atilde;o atual
 		 */
 		criatema : function() {
@@ -1236,7 +1231,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: adicionaLinhaFiltro
-		 * 
+		 *
 		 * Adiciona uma nova linha de filtro
 		 */
 		adicionaLinhaFiltro : function() {
@@ -1351,7 +1346,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: atributo
-		 * 
+		 *
 		 * Seleciona por atributo
 		 */
 		atributo : function() {
@@ -1411,7 +1406,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: aplicaselecaoTema
-		 * 
+		 *
 		 * Realiza a sele&ccedil;&atilde;o cruzando um tema com outro
 		 */
 		aplicaselecaoTema : function() {
@@ -1441,7 +1436,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: grafico
-		 * 
+		 *
 		 * Abre uma janela flutuante para criar gr&aacute;ficos
 		 */
 		grafico : function() {
@@ -1449,7 +1444,7 @@ i3GEOF.selecao =
 		},
 		/*
 		 * Function: graficoPerfil
-		 * 
+		 *
 		 * Abre uma janela flutuante para criar gr&aacute;ficos de perfil
 		 */
 		graficoPerfil : function() {
