@@ -44,7 +44,7 @@ g_traducao_init =
 		],
 		7 : [
 			{
-				pt : "Mapa com interface Google Earth",
+				pt : "Mapa com interface Google Earth (depreciado)",
 				en : "",
 				es : ""
 			}

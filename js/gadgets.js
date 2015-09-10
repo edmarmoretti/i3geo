@@ -546,7 +546,7 @@ i3GEO.gadgets =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.gadgets.mostraMenuSuspenso()");
 
-			var i3GEOoMenuBar, n, menuUnico, objid, i, estilo, t, onMenuBarBeforeRender, temp, i3GEOoMenuBarLocal, ms = i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso, confm =
+			var n, menuUnico, objid, i, estilo, t, onMenuBarBeforeRender, temp, i3GEOoMenuBarLocal, ms = i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso, confm =
 				i3GEO.configura.oMenuData, ins = "", alinhamento = "";
 
 			i3GEOoMenuBar = YAHOO.widget.MenuManager;
