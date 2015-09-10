@@ -452,11 +452,6 @@ i3GEO.pluginI3geo =
 							+ "&nomevariavel=heatmap_dados&nomevariavelConfig=heatmap_config";
 					i3GEO.util.scriptTag(p, criaLayer, nomeScript);
 				}
-			},
-			googleearth : {
-				inicia : function() {
-					alert("Plugin nao disponivel");
-				}
 			}
 		},
 		/**

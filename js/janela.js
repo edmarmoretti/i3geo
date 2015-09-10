@@ -310,10 +310,6 @@ i3GEO.janela =
 				modal = false;
 			}
 			ifr = false;
-			if (i3GEO.Interface && i3GEO.Interface != undefined && i3GEO.Interface.ATUAL === "googleearth") {
-				i3GEO.janela.TRANSICAOSUAVE = false;
-				ifr = true;
-			}
 			fix = "contained";
 			if (nx === "" || nx === "center") {
 				fix = true;
@@ -454,13 +450,6 @@ i3GEO.janela =
 			janela.render();
 			janela.bringToTop();
 
-			// ajusta estilos e outras caracter&iacute;sticas da janela criada
-			if (navm && id !== "i3geo_janelaMensagens"
-				&& i3GEO.Interface
-				&& i3GEO.Interface != undefined
-				&& i3GEO.Interface.ATUAL === "googleearth") {
-				janela.moveTo(0, 0);
-			}
 			if (ifr === true) {
 				janela.iframe.style.zIndex = 4;
 			}
@@ -771,11 +760,7 @@ i3GEO.janela =
 			altura = 70;
 			janela.body.style.padding = "5px";
 			janela.body.style.backgroundColor = "yellow";
-			if (i3GEO.Interface && i3GEO.Interface.ATUAL != "googleearth") {
-				janela.body.style.height = "0px";
-			} else {
-				janela.body.style.height = altura + "px";
-			}
+			janela.body.style.height = "0px";
 			janela.body.style.overflow = "hidden";
 			janela.body.onclick = function() {
 				var janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
@@ -790,20 +775,18 @@ i3GEO.janela =
 				janela.moveTo(pos[0], pos[1]);
 			}
 			janela.show();
-			if (i3GEO.Interface && i3GEO.Interface.ATUAL != "googleearth") {
-				attributes = {
-					height : {
-						to : altura
-					}
-				};
-				anim = new YAHOO.util.Anim(janela.body, attributes, .5, YAHOO.util.Easing.easeNone);
-				anim.onComplete.subscribe(function() {
-					janela.body.style.overflow = "auto";
-					janela.body.style.display = "block";
-					$i("i3geoTempoMsg_c").style.zIndex = 100000;
-				});
-				anim.animate();
-			}
+			attributes = {
+				height : {
+					to : altura
+				}
+			};
+			anim = new YAHOO.util.Anim(janela.body, attributes, .5, YAHOO.util.Easing.easeNone);
+			anim.onComplete.subscribe(function() {
+				janela.body.style.overflow = "auto";
+				janela.body.style.display = "block";
+				$i("i3geoTempoMsg_c").style.zIndex = 100000;
+			});
+			anim.animate();
 			// YAHOO.util.Dom.setStyle(temp,"opacity",i3GEO.janela.OPACIDADEAGUARDE
 			// / 100);
 			if (!tempo) {
@@ -811,22 +794,18 @@ i3GEO.janela =
 			}
 			setTimeout(function() {
 				var attributes, anim, janela = YAHOO.i3GEO.janela.managerAguarde.find("i3geoTempoMsg");
-				if (i3GEO.Interface && i3GEO.Interface.ATUAL != "googleearth") {
-					if (janela) {
-						janela.body.style.overflow = "hidden";
-						attributes = {
-							height : {
-								to : 0
-							}
-						};
-						anim = new YAHOO.util.Anim(janela.body, attributes, .5, YAHOO.util.Easing.easeNone);
-						anim.onComplete.subscribe(function() {
-							janela.destroy();
-						});
-						anim.animate();
-					}
-				} else {
-					janela.destroy();
+				if (janela) {
+					janela.body.style.overflow = "hidden";
+					attributes = {
+						height : {
+							to : 0
+						}
+					};
+					anim = new YAHOO.util.Anim(janela.body, attributes, .5, YAHOO.util.Easing.easeNone);
+					anim.onComplete.subscribe(function() {
+						janela.destroy();
+					});
+					anim.animate();
 				}
 			}, tempo);
 

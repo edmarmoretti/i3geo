@@ -178,10 +178,6 @@ i3GEO.php =
 							i3GeoMap.overlayMapTypes.removeAt(indice);
 						}
 					}
-					if (i3GEO.Interface.ATUAL === "googleearth") {
-						indice = i3GEO.Interface.googleearth.retornaObjetoLayer(temas[i]);
-						i3GeoMap.getFeatures().removeChild(indice);
-					}
 				}
 				funcao.call(funcao, retorno);
 			};
@@ -622,11 +618,6 @@ i3GEO.php =
 						i3GEO.Interface.googlemaps.zoom2extent(ext);
 					}
 					break;
-				case "googleearth":
-					if (atualiza === true) {
-						i3GEO.Interface.googleearth.zoom2extent(ext);
-					}
-					break;
 				case "openlayers":
 					i3GEO.Interface.openlayers.zoom2ext(ext);
 					break;
@@ -809,10 +800,6 @@ i3GEO.php =
 					i3GEO.Interface.googlemaps.zoom2extent(retorno.data.variaveis.mapexten);
 					i3GEO.atualizaParametros(retorno.data.variaveis);
 					break;
-				case "googleearth":
-					i3GEO.Interface.googleearth.zoom2extent(retorno.data.variaveis.mapexten);
-					i3GEO.atualizaParametros(retorno.data.variaveis);
-					break;
 				case "openlayers":
 					i3GEO.Interface.openlayers.zoom2ext(retorno.data.variaveis.mapexten);
 					i3GEO.atualizaParametros(retorno.data.variaveis);
@@ -836,10 +823,6 @@ i3GEO.php =
 				case "googlemaps":
 					i3GEO.atualizaParametros(retorno.data.variaveis);
 					i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
-					break;
-				case "googleearth":
-					i3GEO.atualizaParametros(retorno.data.variaveis);
-					i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
 					break;
 				case "openlayers":
 					i3GEO.atualizaParametros(retorno.data.variaveis);
@@ -1128,21 +1111,6 @@ i3GEO.php =
 			cpJSON.call(p, "googlemaps", retorno, par);
 		},
 		/**
-		 * googleearth
-		 *
-		 * Ativa a interface googleearth
-		 */
-		googleearth : function(funcao) {
-			i3GEO.php.verifica();
-			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par = "funcao=googleearth&g_sid=" + i3GEO.configura.sid, retorno =
-				function(retorno) {
-					i3GEO.janela.fechaAguarde("googleearth");
-					funcao.call(funcao, retorno);
-				};
-			i3GEO.janela.abreAguarde("googleearth", $trad("o1"));
-			cpJSON.call(p, "googleearth", retorno, par);
-		},
-		/**
 		 * openlayers
 		 *
 		 * Ativa a interface openlayers
@@ -1164,11 +1132,6 @@ i3GEO.php =
 			i3GEO.php.verifica();
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
 				"funcao=corpo&tipoimagem=" + tipoimagem + "&g_sid=" + i3GEO.configura.sid + "&interface=" + i3GEO.Interface.ATUAL;
-			// recalcula a extens&atilde;o geogr&aacute;fica do parametro i3GEO.parametros.mapexten
-			if (i3GEO.Interface.ATUAL === "googleearth") {
-				i3GEO.Interface.googleearth.recalcPar();
-				par += "&mapexten=" + i3GEO.parametros.mapexten;
-			}
 			cpJSON.call(p, "corpo", funcao, par);
 		},
 		/**

@@ -415,11 +415,6 @@ i3GEO.configura =
 										id : "omenudataInterface4",
 										text : "Google Maps",
 										url : "javascript:window.location = i3GEO.configura.locaplic+'/interface/black_gm.phtml?'+i3GEO.configura.sid"
-									},
-									{
-										id : "omenudataInterface5",
-										text : "Google Earth",
-										url : "javascript:window.location = i3GEO.configura.locaplic+'/interface/googleearth.phtml?'+i3GEO.configura.sid"
 									}
 								]
 							]
@@ -1395,7 +1390,7 @@ i3GEO.configura =
 							i3GEO.util.mudaCursor(i3GEO.configura.cursores, temp, i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 						}
 						i3GEO.barraDeBotoes.ativaIcone("identifica");
-						if (i3GEO.Interface.ATUAL === "googleearth" || i3GEO.eventos.cliquePerm.ativo === false) {
+						if (i3GEO.eventos.cliquePerm.ativo === false) {
 							// caso seja um clique para desativar
 							if (i3GEO.eventos.MOUSECLIQUE.toString().search(i3GEO.configura.funcaoIdentifica) >= 0) {
 								i3GEO.eventos.MOUSECLIQUE.remove(i3GEO.configura.funcaoIdentifica);
@@ -1431,7 +1426,7 @@ i3GEO.configura =
 							i3GEO.util.mudaCursor(i3GEO.configura.cursores, temp, i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 						}
 						i3GEO.barraDeBotoes.ativaIcone("identificaBalao");
-						if (i3GEO.Interface.ATUAL === "googleearth" || i3GEO.eventos.cliquePerm.ativo === false) {
+						if (i3GEO.eventos.cliquePerm.ativo === false) {
 							// na opcao de identificacao so e permitido um evento
 							i3GEO.eventos.MOUSECLIQUE = [
 								i3GEO.configura.funcaoTip

@@ -1601,10 +1601,6 @@ i3GEO.barraDeBotoes =
 				i3GEO.barraDeBotoes.escondeJanelaAjuda();
 				return;
 			}
-			if (i3GEO.Interface.ATUAL === "googleearth") {
-				objeto.title = mensagem;
-				return;
-			}
 			if (!divmensagem && this.TIPOAJUDA !== "balao") {
 				divmensagem = document.createElement("div");
 				divmensagem.id = "divMensagemBarraDeBotoes";

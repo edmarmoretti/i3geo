@@ -1343,11 +1343,6 @@ i3GEO.mapa =
 				i3GEO.eventos.removeEventos("MOUSEPARADO", [
 					"verificaTip()"
 				]);
-				// na interface googleearth verifica se existe mais eventos no
-				// mouseclick
-				if (i3GEO.Interface.ATUAL === "googleearth" && i3GEO.eventos.MOUSECLIQUE.length > 1) {
-					return;
-				}
 				// javascript nao foi carregado
 				if (typeof (i3GEOF.identifica) === 'undefined') {
 					// javascript que sera carregado
@@ -1383,11 +1378,6 @@ i3GEO.mapa =
 				} else {
 					i3GEO.eventos.cliquePerm.status = false;
 				}
-				// na interface googleearth verifica se existe mais eventos no
-				// mouseclick
-				if (i3GEO.Interface.ATUAL === "googleearth" && i3GEO.eventos.MOUSECLIQUE.length > 1) {
-					return;
-				}
 				var ntemas, etiquetas, j, retorna, x = objposicaocursor.ddx, y = objposicaocursor.ddy;
 				if(x === -1 || y === -1){
 					return;
@@ -1404,9 +1394,6 @@ i3GEO.mapa =
 				}
 				if (etiquetas === false) {
 					return;
-				}
-				if (i3GEO.Interface.ATUAL === "googleearth") {
-					i3GEO.Interface.googleearth.aguarde.visibility = "visible";
 				}
 				retorna =
 					function(retorno) {

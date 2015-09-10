@@ -170,11 +170,7 @@ i3GEO.desenho =
 		 * {string} - expessura do contorno
 		 */
 		addBox : function(xmin, ymin, xmax, ymax, namespace, strokeColor, strokeWidth) {
-			if (i3GEO.Interface.ATUAL != "googleearth") {
-				return i3GEO.desenho[i3GEO.Interface.ATUAL].addBox(xmin, ymin, xmax, ymax, namespace, strokeColor, strokeWidth);
-			} else {
-				return false;
-			}
+			return i3GEO.desenho[i3GEO.Interface.ATUAL].addBox(xmin, ymin, xmax, ymax, namespace, strokeColor, strokeWidth);
 		},
 		/**
 		 * Function: moveBox
@@ -194,11 +190,7 @@ i3GEO.desenho =
 		 * {numeric} - novo ymax
 		 */
 		moveBox : function(box, xmin, ymin, xmax, ymax) {
-			if (i3GEO.Interface.ATUAL != "googleearth") {
-				return i3GEO.desenho[i3GEO.Interface.ATUAL].moveBox(box, xmin, ymin, xmax, ymax);
-			} else {
-				return false;
-			}
+			return i3GEO.desenho[i3GEO.Interface.ATUAL].moveBox(box, xmin, ymin, xmax, ymax);
 		},
 		/**
 		 * Function: removeBox
@@ -239,11 +231,7 @@ i3GEO.desenho =
 		 * 
 		 */
 		addPin : function(x, y, w, h, imagem, namespace, centro, funcaoclick) {
-			if (i3GEO.Interface.ATUAL != "googleearth") {
-				return i3GEO.desenho[i3GEO.Interface.ATUAL].addPin(x, y, w, h, imagem, namespace, centro);
-			} else {
-				return false;
-			}
+			return i3GEO.desenho[i3GEO.Interface.ATUAL].addPin(x, y, w, h, imagem, namespace, centro);
 		},
 		/**
 		 * Function: removePins
@@ -255,9 +243,7 @@ i3GEO.desenho =
 		 * {string} - namespace que identifica o grupo de marcas que serao removidas
 		 */
 		removePins : function(namespace) {
-			if (i3GEO.Interface.ATUAL != "googleearth") {
-				i3GEO.desenho[i3GEO.Interface.ATUAL].removePins(namespace);
-			}
+			i3GEO.desenho[i3GEO.Interface.ATUAL].removePins(namespace);
 		},
 		/**
 		 * Function: movePin
@@ -273,9 +259,7 @@ i3GEO.desenho =
 		 * {numeric} - novo y
 		 */
 		movePin : function(pin, x, y) {
-			if (i3GEO.Interface.ATUAL != "googleearth") {
-				i3GEO.desenho[i3GEO.Interface.ATUAL].movePin(pin, x, y);
-			}
+			i3GEO.desenho[i3GEO.Interface.ATUAL].movePin(pin, x, y);
 		},
 		/**
 		 * Section: i3GEO.desenho.openlayers
@@ -648,87 +632,6 @@ i3GEO.desenho =
 						f[i].setMap(null);
 						f[i] = "";
 					}
-				}
-			}
-		},
-		/**
-		 * Section: i3GEO.desenho.googleearth
-		 * 
-		 * Fun&ccedil;&otilde;es utilizadas quando o mapa baseia-se na interface GoogleEarth
-		 */
-		googleearth : {
-			insereMarca : function(description, ddx, ddy, name, snippet) {
-				if (typeof (console) !== 'undefined')
-					console.info("i3GEO.Interface.googleearth.insereMarca()");
-
-				var placemark = i3GeoMap.createPlacemark(''), point = i3GeoMap.createPoint('');
-				placemark.setName(name);
-				point.setLatitude(ddy);
-				point.setLongitude(ddx);
-				placemark.setGeometry(point);
-				if (description !== "") {
-					placemark.setDescription(description);
-				}
-				placemark.setSnippet(snippet);
-				i3GeoMap.getFeatures().appendChild(placemark);
-			},
-			//
-			// c&oacute;digo obtido em
-			// http://code.google.com/intl/pt-BR/apis/earth/documentation/geometries.html
-			//
-			insereCirculo : function(centerLng, centerLat, radius, name, snippet) {
-				function makeCircle(centerLat, centerLng, radius) {
-					var ring = i3GeoMap.createLinearRing(''), steps = 25, i, pi2 = Math.PI * 2, lat, lng;
-					for (i = 0; i < steps; i++) {
-						lat = centerLat + radius * Math.cos(i / steps * pi2);
-						lng = centerLng + radius * Math.sin(i / steps * pi2);
-						ring.getCoordinates().pushLatLngAlt(lat, lng, 0);
-					}
-					return ring;
-				}
-				var polygonPlacemark = i3GeoMap.createPlacemark(''), poly = i3GeoMap.createPolygon(''), polyStyle;
-				poly.setAltitudeMode(i3GeoMap.ALTITUDE_RELATIVE_TO_GROUND);
-				polygonPlacemark.setGeometry(poly);
-				polygonPlacemark.getGeometry().setOuterBoundary(makeCircle(centerLat, centerLng, radius));
-				polygonPlacemark.setName(name);
-				polygonPlacemark.setSnippet(snippet);
-				polygonPlacemark.setStyleSelector(i3GeoMap.createStyle(''));
-				polyStyle = polygonPlacemark.getStyleSelector().getPolyStyle();
-				polyStyle.setFill(0);
-				i3GeoMap.getFeatures().appendChild(polygonPlacemark);
-			},
-			insereLinha : function(xi, yi, xf, yf, name, snippet) {
-				var lineStringPlacemark = i3GeoMap.createPlacemark(''), lineString, lineStyle;
-				lineStringPlacemark.setName(name);
-				lineString = i3GeoMap.createLineString('');
-				lineString.setAltitudeMode(i3GeoMap.ALTITUDE_RELATIVE_TO_GROUND);
-				lineStringPlacemark.setGeometry(lineString);
-				lineString.getCoordinates().pushLatLngAlt(yi, xi, 0);
-				lineString.getCoordinates().pushLatLngAlt(yf, xf, 0);
-
-				lineStringPlacemark.setStyleSelector(i3GeoMap.createStyle(''));
-				lineStringPlacemark.setSnippet(snippet);
-				lineStyle = lineStringPlacemark.getStyleSelector().getLineStyle();
-				lineStyle.setWidth(3);
-
-				i3GeoMap.getFeatures().appendChild(lineStringPlacemark);
-			},
-			removePlacemark : function(nome) {
-				var features = i3GeoMap.getFeatures(), n = features.getChildNodes().getLength(), i, nfeatures = [];
-				for (i = 0; i < n; i++) {
-					try {
-						if (features.getChildNodes().item(i).getName() === nome || features.getChildNodes().item(i).getDescription() === nome
-							|| features.getChildNodes().item(i).getSnippet() === nome) {
-							// features.getChildNodes().item(i).setVisibility(false);
-							nfeatures.push(features.getChildNodes().item(i));
-							// features.removeChild(features.getChildNodes().item(i));
-						}
-					} catch (e) {
-					}
-				}
-				n = nfeatures.length;
-				for (i = 0; i < n; i++) {
-					features.removeChild(nfeatures[i]);
 				}
 			}
 		}

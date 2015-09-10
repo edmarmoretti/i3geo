@@ -676,9 +676,6 @@ i3GEO.gadgets =
 					ins += '</ul>';
 					ins += '</div>';
 					objid.innerHTML = ins;
-					if (i3GEO.Interface.ATUAL === "googleearth") {
-						i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI.iframe = true;
-					}
 					i3GEOoMenuBarLocal = new YAHOO.widget.MenuBar(id, i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.parametrosYUI);
 					onMenuBarBeforeRender = function(p_sType, p_sArgs) {
 						var nomeMenu = "", nomeSub, subs = i3GEO.configura.oMenuData.submenus, conta = 0;
@@ -736,9 +733,6 @@ i3GEO.gadgets =
 				case "googlemaps":
 					temp = "omenudataInterface4";
 					break;
-				case "googleearth":
-					temp = "omenudataInterface5";
-					break;
 				}
 				if (temp != "" && $i(temp)) {
 					i3GEOoMenuBar.getMenuItem(temp).cfg.setProperty("checked", true);
@@ -773,11 +767,6 @@ i3GEO.gadgets =
 				case "googlemaps":
 					temp = [
 						"omenudataArquivos3", "omenudataJanelas1", "omenudataJanelas3"
-					];
-					break;
-				case "googleearth":
-					temp = [
-						"omenudataFerramentas7b", "omenudataArquivos3", "omenudataJanelas3", "omenudataFerramentas2a"
 					];
 					break;
 				}

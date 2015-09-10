@@ -446,10 +446,6 @@ var i3GEO = {
 							temp = i3GEO.util.base64decode(preferencias.preferenciasbase64);
 							i3GEO.mapa.aplicaPreferencias(temp);
 						}
-
-						if (i3GEO.Interface.ATUAL === "googleearth") {
-							i3GEO.configura.guardaExtensao = false;
-						}
 						// obtem o cookie com a ultima extensao geografica
 						if (i3GEO.configura.guardaExtensao === true) {
 							if (i3GEO.Interface.openlayers.googleLike === true) {
@@ -978,9 +974,6 @@ var i3GEO = {
 			switch (i3GEO.Interface.ATUAL) {
 			case "googlemaps":
 				i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
-				break;
-			case "googleearth":
-				i3GEO.Interface.googleearth.zoom2extent(i3GEO.parametros.mapexten);
 				break;
 			case "openlayers":
 				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
