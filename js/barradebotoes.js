@@ -1768,9 +1768,10 @@ i3GEO.barraDeBotoes =
 			},
 			openlayers : {
 				inicia : function(idjanela) {
+					//TODO mudar carga do JS do editor para o compactado
 					if (!i3GEO.editorOL) {
 						i3GEO.util.scriptTag(
-							i3GEO.configura.locaplic + "/classesjs/compactados/classe_editorol_compacto.js",
+							i3GEO.configura.locaplic + "/js/editorol.js",
 							"i3GEO.barraDeBotoes.editor.openlayers.ativaPainel('" + idjanela + "')",
 							"editorol.js",
 							true);
@@ -1782,10 +1783,18 @@ i3GEO.barraDeBotoes =
 							]);
 						}
 						if (!i3GEO.editorOL.backup) {
-							i3GEO.editorOL.backup = new OpenLayers.Layer.Vector("Backup", {
-								displayInLayerSwitcher : false,
-								visibility : false
+							i3GEO.editorOL.backup = new ol.layer.Vector({
+								source : new ol.source.Vector({
+									features : new ol.Collection(),
+									useSpatialIndex : false,
+									name : "Backup"
+								}),
+								visible: false
 							});
+							i3GEO.editorOL.backup.setMap(i3geoOL);
+							i3GEO.editorOL.backup.getFeatures = function(){
+								return i3GEO.editorOL.backup.getSource().getFeatures();
+							};
 						}
 						i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
 					}
@@ -1809,7 +1818,7 @@ i3GEO.barraDeBotoes =
 					return divid;
 				},
 				ativaPainel : function(idjanela) {
-					OpenLayers.ImgPath = i3GEO.configura.locaplic + "/pacotes/openlayers/img/";
+					//OpenLayers.ImgPath = i3GEO.configura.locaplic + "/pacotes/openlayers/img/";
 					i3GEO.editorOL.fundo = "";// i3GEO.editorOL &eacute; criado pelo script carregado
 					i3GEO.editorOL.mapa = i3geoOL;
 					i3GEO.editorOL.maxext = "";
