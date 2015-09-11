@@ -254,7 +254,7 @@ $listaepsg = $req->getValueByName("SRS")." EPSG:4618 EPSG:4291 EPSG:4326 EPSG:22
 if(isset($version) && !isset($VERSION)){
 	$VERSION = $version;
 }
-if(!isset($VERSION)){
+if(!isset($VERSION) || $VERSION == ""){
 	$req->setParameter("VeRsIoN","1.1.1");
 }
 //

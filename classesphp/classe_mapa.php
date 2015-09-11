@@ -1568,7 +1568,9 @@ class Mapa
 	*/
 	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo="",$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain",$time="",$tile=0)
 	{
-		//echo $tile;exit;
+		if($versao == ""){
+			$versao = "1.1.1";
+		}
 		if(file_exists($this->locaplic."/classesphp/wmswfs.php"))
 			include_once($this->locaplic."/classesphp/wmswfs.php");
 		else
