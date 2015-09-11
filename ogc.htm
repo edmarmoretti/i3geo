@@ -172,7 +172,7 @@ A:hover {
 			if (tema === undefined) {
 				tema = botao.title;
 			}
-			ins = "<H1>Endere&ccedil;o do web service:</H1>";
+			ins = "<H1>Endere&ccedil;os de acesso:</H1>";
 			var re = new RegExp(".htm", "g");
 			var servico = window.location.href.replace(re, '.php?');
 			//remove variaveis adicionais, se houver
@@ -187,7 +187,8 @@ A:hover {
 			}
 
 			servico += s;
-			ins += "<p><a href='" + servico + "' target='_blank' >" + servico + "</a>";
+			ins += "<p>Webservice com todas as camadas: <a href='" + servico + "' target='_blank' >" + servico + "</a>";
+			ins += "<p>Webservice dessa camada: <a href='" + servico + "tema=" + tema + "&' target='_blank' >" + servico + "tema=" + tema + "&</a>";
 			ins += "<p>Link para essa p&aacute;gina: <a href='"+ window.location.href.split("?")[0] + "?temaOgc=" + tema + "'>"+ window.location.href.split("?")[0] + "?temaOgc=" + tema + "</a>";
 			ins += "<p>Bookmark: <span id=bm ></span>";
 			ins +=
