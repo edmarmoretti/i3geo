@@ -6,8 +6,8 @@ i3GEOadmin.menu.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'teste' : [ {
-		pt : "",
+	'abre' : [ {
+		pt : "Abre o i3Geo",
 		en : "",
 		es : ""
 	} ]
