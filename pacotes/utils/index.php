@@ -4,17 +4,8 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="../../admin/html/admin.css">
-
+<script type="text/javascript" src="../../classesjs/i3geo.js"></script>
 <style>
-body {
-	padding-top: 0px;
-	COLOR: #2F4632;
-	text-align: center;
-	font-size: 0.6cm;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	background-color: rgb(250, 250, 250);
-	maergin: auto;
-}
 
 .r {
 	border: 1px solid #F0F0F0;
@@ -63,21 +54,14 @@ a {
 	text-decoration: none;
 	font-size: 14px;
 }
-
-.borda {
-	background-color: #990000;
-	padding: 5px 0px 5px 0px;
-	text-align: left;
-	width: 100%;
-}
 </style>
 </head>
-<body class=" yui-skin-sam ">
-	<div class="borda">
+<body class=" yui-skin-sam " style="background-color:white;text-align:left;">
+	<div class="bordaSuperior">
 		<div id="bandeiras"></div>
 		<div>
 			<a href="http://www.softwarepublico.gov.br" target="_blank" style="color: white;">
-				<b>i3Geo 6.0</b>
+				<b><?php include("../../versao.php"); echo $mensagemInicia;?> </b>
 			</a>
 		</div>
 	</div>
@@ -118,6 +102,11 @@ botoesIni.push(
 		"img":"",
 		"href":"https://maptools.info/tools/converter/",
 		"titulo": "Conversor de coordenadas"
+	},
+	{
+		"img":"",
+		"href":"http://codebeautify.org/",
+		"titulo": "Free Online Tools For Developers - To Beautify, Validate, Minify, Analyse and Convert"
 	}
 );
 mostraBotoes();
