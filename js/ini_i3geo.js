@@ -70,6 +70,7 @@
  * exemplo i3GEOF.buffer.
  */
 var i3GEOF = [];
+var i3GEOadmin = [];
 /**
  * Section: YAHOO.i3GEO
  *

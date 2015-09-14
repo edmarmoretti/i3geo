@@ -7,6 +7,7 @@
 
 	<link rel="stylesheet" type="text/css" href="html/admin.css">
 	<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+	<script type="text/javascript" src="dicionario/menu.js"></script>
 	<style>
 		td.ygtvcell {
 			border: 0 none;
@@ -26,13 +27,12 @@
 	</head>
 	<body class=" yui-skin-sam" style="background-color:white;text-align:left;">
 			<div class="bordaSuperior">&nbsp;</div>
-
 			<div style="margin-left:10px;" id=arvore ></div>
 	</body>
 	<script>
 	propriedades = [
 	{
-	html: "Configura&ccedil;&atilde;o geral",
+	html: $trad("configGeral",i3GEOadmin.menu.dicionario),
 	type: "html",
 	children:[
 		{
@@ -43,7 +43,6 @@
 		html: "<a href='../testainstal.php' target='principal'>Testar a instala&ccedil;&atilde;o do i3geo (testainstal.php)</a>",
 		type: "html",
 		enableHighlight: false,
-
 		},{
 		html: "<a href='../init/remover.php' target='principal'>Remover a tela inicial de apresenta&ccedil;&atilde;o do i3Geo</a>",
 		type: "html",
