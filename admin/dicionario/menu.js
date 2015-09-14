@@ -10,5 +10,10 @@ i3GEOadmin.menu.dicionario = {
 		pt : "Abre o i3Geo",
 		en : "",
 		es : ""
+	} ],
+	'contAcesso' : [ {
+		pt : "Controle de acesso e usu&aacute;rios",
+		en : "",
+		es : ""
 	} ]
 };
