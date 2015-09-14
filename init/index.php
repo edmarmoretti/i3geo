@@ -164,7 +164,7 @@ a {
 	text-decoration: none;
 	font-size: 14px;
 	color: #26298D;
-	outline : none;
+	outline: none;
 }
 
 A:hover {
@@ -172,7 +172,7 @@ A:hover {
 }
 
 .borda {
-	background-color:  #4682b4;
+	background-color: #4682b4;
 	padding: 5px 0px 5px 0px;
 	text-align: left;
 	width: 100%;
@@ -182,9 +182,8 @@ A:hover {
 <body class=" yui-skin-sam " style="background-color: rgb(250, 250, 250);">
 	<div class="borda">
 		<div id="bandeiras"></div>
-		<div style="text-align:center">
-			<a href="http://www.softwarepublico.gov.br" target="_blank" style="color: white;">
-				<b><?php echo $mensagemInicia;?></b>
+		<div style="text-align: center">
+			<a href="http://www.softwarepublico.gov.br" target="_blank" style="color: white;"> <b><?php echo $mensagemInicia;?> </b>
 			</a>
 		</div>
 	</div>
@@ -196,7 +195,7 @@ A:hover {
 			<div id="botoes" style="width: 100%;"></div>
 			<script>mostraBotoes();</script>
 			<div class="r">
-				<div class="ri" >
+				<div class="ri">
 					<script type='text/javascript' src='https://www.openhub.net/p/i3geo/widgets/project_users?format=js&style=blue'></script>
 				</div>
 			</div>
@@ -209,8 +208,9 @@ A:hover {
 				</div>
 			</div>
 			<div class="r" style="width: 230px; height: 380px;">
-				<div class="ri" >
-					<a class="twitter-timeline" href="https://twitter.com/search?q=@i3geo" data-widget-id="288053202174222336" width="220" height="350">Tweets #i3Geo</a>
+				<div class="ri">
+					<a class="twitter-timeline" href="https://twitter.com/hashtag/i3geo" data-widget-id="643417277208133633">i3geo Tweets</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 				</div>
 			</div>
 			<div class="r" style="width: 345px; height: 220px;">
