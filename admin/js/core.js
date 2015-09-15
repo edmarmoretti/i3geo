@@ -1730,6 +1730,12 @@ function core_listaDeLetras(onde,nomeFuncao,semLetras,w){
 		return ins;
 	}
 }
+function core_parseMustacheBody (hashMustache){
+	var re = new RegExp("&amp;", "g"), m;
+	m = Mustache.render(document.body.innerHTML, i3GEO.idioma.objetoIdioma(hashMustache));
+	m = m.replace(re, '&');
+	document.body.innerHTML = m;
+}
 //
 //carregador de javascript
 //
@@ -1785,6 +1791,8 @@ function core_listaDeLetras(onde,nomeFuncao,semLetras,w){
 		"../../pacotes/yui290/build/editor/editor-min.js",
 		"../../pacotes/yui290/build/resize/resize-min.js",
 		"../../pacotes/cpaint/cpaint2.inc.compressed.js",
+		"../../classesjs/compactados/mustache.js",
+		"../../classesjs/compactados/classe_i3geo_compacto.js",
 		"../../classesjs/compactados/classe_util_compacto.js",
 		"../../classesjs/compactados/classe_login_compacto.js",
 		"../../classesjs/compactados/classe_janela_compacto.js",

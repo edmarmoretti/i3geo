@@ -7,14 +7,14 @@
 
 <link rel="stylesheet" type="text/css" href="html/admin.css">
 <script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="dicionario/principal.js"></script>
 </head>
 <body class=" yui-skin-sam fundoPonto">
 	<center>
 		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
-			<p style="color: red">Aten&ccedil;&atilde;o: o sistema de administra&ccedil;&atilde;o n&atilde;o
-				funciona corretamente com o navegador Internet Explorer.</p>
+			<p style="color: red">{{atencao}}</p>
 			<h1>Administra&ccedil;&atilde;o do i3geo</h1>
 			<p>Se voc&ecirc; atualizou o Mapserver para a vers&atilde;o
 				5.2.2, seus mapfiles antigos podem n&atilde;o funcionar. Veja em
@@ -89,6 +89,7 @@
 	</center>
 </body>
 <script>
+core_parseMustacheBody(i3GEOadmin.principal.dicionario);
 navn = false;
 navm = false;
 //seta as vari&aacute;veis navn e navm
