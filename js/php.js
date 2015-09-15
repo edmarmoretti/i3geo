@@ -1661,7 +1661,7 @@ i3GEO.php =
 		 */
 		listaInterfaces : function(funcao) {
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-				"&funcao=listainterfaces";
+				"&map_file=&funcao=listainterfaces";
 			cpJSON.call(p, "foo", funcao, par);
 		}
 	};

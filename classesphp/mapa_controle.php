@@ -119,7 +119,7 @@ $interfaceTemp = $interface;
 //TEMA2SLD e usado por datadownload.htm
 //PEGAMAPAS e utilizado em varias funcoes
 //
-if ($funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funcao != "procurartemasestrela" && $funcao != "pegalistadegrupos" && $funcao != "pegalistademenus" && $funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS"){
+if ($funcao != "listainterfaces" && $funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funcao != "procurartemasestrela" && $funcao != "pegalistadegrupos" && $funcao != "pegalistademenus" && $funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS"){
 	session_name("i3GeoPHP");
 	if (isset($g_sid) && $g_sid != "")
 	{
@@ -205,7 +205,6 @@ if (!isset($map_file))
 	ilegal();
 	exit;
 }
-
 include_once("classe_vermultilayer.php");
 include_once("classe_estatistica.php");
 if (isset($debug) && strtolower($debug) == "sim")
@@ -2350,7 +2349,6 @@ switch (strtoupper($funcao))
 	case "LISTAINTERFACES":
 		include(dirname(__FILE__)."/../ms_configura.php");
 		$pesquisarEm = array($locaplic."/interface");
-		//$customDir = "teste";
 		if(isset($customDir) && $customDir != "" && $customDir != "interface"){
 			$pesquisarEm[] = $locaplic."/".$customDir;
 		}
