@@ -91,7 +91,7 @@ i3GEOadmin.menu.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'xmlWms' : [ {
+	'xmlWmsMetaestat' : [ {
 		pt : "Ver xml com a lista de servi&ccedil;os WMS originados do sistema de metadados estat&iacute;sticos",
 		en : "",
 		es : ""
@@ -166,98 +166,113 @@ i3GEOadmin.menu.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Cadastro principal de vari&aacute;veis",
+	'editaArvore' : [ {
+		pt : "Editar a &aacute;rvore completa dos menus",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Cadastro de mapas para publica&ccedil;&atilde;o",
+	'editaListaMenus' : [ {
+		pt : "Editar a lista de menus",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Cadastro de unidades de medida",
+	'editaTabelasAux' : [ {
+		pt : "Edi&ccedil;&atilde;o das tabelas auxiliares",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Cadastro de tipos de per&iacute;odos de tempo",
+	'editaPerfil' : [ {
+		pt : "Editar a lista de perfis",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Cadastro de conex&otilde;es com banco de dados",
+	'editaTags' : [ {
+		pt : "Editar a lista de tags (palavras-chave)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "Cadastro de tabelas com regi&otilde;es geogr&aacute;ficas",
+    'atlas' : [ {
+		pt : "Atlas",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Cadastro de fontes de informa&ccedil;&atilde;o",
+	'editaAtlas' : [ {
+		pt : "Edi&ccedil;&atilde;o dos atlas",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Gerenciador de banco de dados, upload de SHP e CSV",
+	'webServ' : [ {
+		pt : "Web services e links para download",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Ver xml com a lista de servi&ccedil;os WMS originados do sistema de metadados estat&iacute;sticos",
+	'editaWebServ' : [ {
+		pt : "Edi&ccedil;&atilde;o do cadastro",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Ver RSS com a lista de mapas cadastrados",
+	'xmlWebServ' : [ {
+		pt : "Ver xml com a lista de servi&ccedil;os WS (webservices convencionais)",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Enviar arquivo para o servidor",
+	'xmlWms' : [ {
+		pt : "Ver xml com a lista de servi&ccedil;os WMS",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Upload de arquivo Shape file",
+	'xmlGeoRss' : [ {
+		pt : "Ver xml com a lista de servi&ccedil;os Geo RSS",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Upload de imagem para uso como s&iacute;mbolo",
+	'sistIdentifica' : [ {
+		pt : "Sistemas especiais de identifica&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Edi&ccedil;&atilde;o de mapfiles",
+	'editaIdentifica' : [ {
+		pt : "Edi&ccedil;&atilde;o dos sistemas",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Edi&ccedil;&atilde;o da lista de menus",
+	'sistAdiciona' : [ {
+		pt : "Sistemas que adicionam camadas",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "&Aacute;rvore de temas",
+	'editaSist' : [ {
+		pt : "Edi&ccedil;&atilde;o dos sistemas",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Ver RSS com os grupos, subgrupos e temas",
+	'xmlSistAdiciona' : [ {
+		pt : "Ver xml com a lista de sistemas que adicionam temas especiais",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Ver RSS com os coment&aacute;rios sobre os temas",
+	'outrasOpc' : [ {
+		pt : "Outras op&ccedil;&otilde;es",
 		en : "",
 		es : ""
 	} ],
-	'' : [ {
-		pt : "Links para mapas",
+	'estat' : [ {
+		pt : "Estat&iacute;sticas",
+		en : "",
+		es : ""
+	} ],
+	'descricaoBd' : [ {
+		pt : "Descri&ccedil;&atilde;o do banco padr&atilde;o (SQLITE)",
+		en : "",
+		es : ""
+	} ],
+	'criaBd' : [ {
+		pt : "Criar banco de dados - apenas usu&aacute;rios cadastrados em ms_configura na vari&aacute;vel $i3geomaster podem realizar essa opera&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
+	'geraMiniatura' : [ {
+		pt : "Gera as miniaturas (thumbnails) para os temas existentes no diret&oacute;rio i3geo/temas",
 		en : "",
 		es : ""
 	} ]
