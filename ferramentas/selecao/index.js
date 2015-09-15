@@ -338,12 +338,12 @@ i3GEOF.selecao =
 				i3GEOF.selecao.ativaFoco();
 			};
 			minimiza = function() {
-				i3GEO.janela.iconiza("i3GEOF.selecao",100,"i3GEOFSelecaoCabecalhoI");
+				i3GEO.janela.iconiza("i3GEOF.selecao",100);
 			};
 			titulo =
 				"<span class='i3GEOiconeFerramenta i3GEOiconeSelecao' title='" + $trad("x51")
 					+ "'></span>"
-					+ "<div id='i3GEOFSelecaoCabecalhoI' style='left:10px;'>"
+					+ "<div id='i3GEOF.selecaoI' style='left:10px;'>"
 					+ "<div class='i3GeoTituloJanela'>"
 					+ $trad("x51")
 					+ "<a class=ajuda_usuario target=_blank href='"

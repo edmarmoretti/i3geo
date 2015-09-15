@@ -563,7 +563,7 @@ i3GEOF.graficointerativo1 =
 					i3GEOF.graficointerativo1.ativaFoco(idjanela);
 				};
 				minimiza = function() {
-					i3GEO.janela.iconiza(id,120,"i3GEOFgraficoRodape" + id);
+					i3GEO.janela.iconiza(idjanela,120,"i3GEOFgraficoRodape" + idjanela);
 				};
 				mudaTamanhoGrafico = function() {
 					var t = $i(idjanela + "i3GEOgraficointerativo1Grafico");

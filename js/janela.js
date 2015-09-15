@@ -504,7 +504,9 @@ i3GEO.janela =
 				if(r){
 					r.unlock();
 				}
-				$i(rodape).style.display = "block";
+				if(rodape){
+					$i(rodape).style.display = "block";
+				}
 			}
 		},
 		/**
@@ -521,7 +523,8 @@ i3GEO.janela =
 		 * {min|max} indicativo se minimizou ou maximizou
 		 */
 		minimiza : function(id, min) {
-			var temp = $i(id + "_corpo"), n, i, m = YAHOO.i3GEO.janela.manager.find(id), c = $i(id), t = "min";
+			var temp = $i(id + "_corpo"), n, i, m = YAHOO.i3GEO.janela.manager.find(id), c = $i(id), t = "min", r = YAHOO.util.Resize.getResizeById(id),
+			rodape = $i(id + "_rodape");
 
 			if (temp) {
 				if (temp.style.display === "block") {
@@ -542,14 +545,6 @@ i3GEO.janela =
 					t = "max";
 				}
 			}
-			temp = $i(id + "_resizehandle");
-			if (temp) {
-				if (temp.style.display === "none") {
-					temp.style.display = "block";
-				} else {
-					temp.style.display = "none";
-				}
-			}
 			temp = $i(id + "_c");
 			if (temp) {
 				temp = temp.getElementsByTagName("div");
@@ -568,8 +563,20 @@ i3GEO.janela =
 			if (temp) {
 				if (temp.style.display === "none") {
 					temp.style.display = "block";
+					if(r){
+						r.unlock();
+					}
+					if(rodape){
+						rodape.style.display = "block";
+					}
 				} else {
 					temp.style.display = "none";
+					if(r){
+						r.lock();
+					}
+					if(rodape){
+						rodape.style.display = "none";
+					}
 				}
 
 			}

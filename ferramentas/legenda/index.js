@@ -401,7 +401,7 @@ i3GEOF.legenda =
 			titulo =
 				"<span class='i3GEOiconeFerramenta i3GEOiconeLegenda' title='" + $trad("t33")
 					+ "'></span>"
-					+ "<div id='i3GEOFlegendaCabecalhoI' style='left:10px;'>"
+					+ "<div id='i3GEOF.legendaI' style='left:10px;'>"
 					+ "<div  id='i3GEOFlegendaComboCabeca' class='comboTemasCabecalho' style='left:0px;'>   ------</div>"
 					+ "<div class='i3GeoTituloJanela'>"
 					+ $trad("t33")
