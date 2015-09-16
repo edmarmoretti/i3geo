@@ -34,6 +34,7 @@ body {
 
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/arvore.js"></script>
 <script type="text/javascript" src="../js/arvore.js"></script>
 <script type="text/javascript" src="../js/menu.js"></script>
 <script type="text/javascript" src="../js/grupos.js"></script>
@@ -46,26 +47,13 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - &Aacute;rvore de temas <img
+				{{arvoreTemas}}<img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="ajuda" style="display: none">
-				<div class="hd">Ajuda</div>
+				<div class="hd">{{ajuda}}</div>
 				<div class="bd" style="height: 144px; overflow: auto">
-					<p>Este formul&aacute;rio permite editar &aacute;rvore de temas que ser&aacute;
-						utilizada pelo i3Geo.
-					<p>A &aacute;rvore &eacute; composta de menus, grupos, sub-grupos e temas. Vc
-						deve criar os menus, a lista de grupos e a lista de sub-grupos. Ao
-						criar um menu, esse &eacute; mostrado imediatamente na &aacute;rvore.
-					<p>Menus ou nós da &aacute;rvore marcados como n&atilde;o publicados s&atilde;o
-						mostrados em vermelho e aparecem apenas para os administradores.
-					<p>Em cada nó da &aacute;rvore podem ser associados os temas, mesmo na
-						raiz de um dos n&iacute;veis. Os temas s&atilde;o arquivos mapfiles armazenados
-						em i3geo/temas e registrados no sistema de administra&ccedil;&atilde;o.
-					<p>A cria&ccedil;&atilde;o de mapfiles e a vincula&ccedil;&atilde;o tema-mapfile &eacute; feita
-						por meio do editor de mapfiles, e consiste na determina&ccedil;&atilde;o de um
-						nome para cada mapfile. Esse nome &eacute; listado ao ser adicionado um
-						tema na &aacute;rvore.
+					{{{txtAjuda}}}
 				</div>
 				<div class="ft"></div>
 			</div>
@@ -79,20 +67,16 @@ body {
 						<option value="it">Italiano</option>
 					</select>
 				</p>
-				<p class=paragrafo>
-					Utilize os bot&otilde;es para criar novos nomes de menus, grupos ou
-					sub-grupos, formando listas de itens.<br>Os itens criados podem
-					ser reaproveitados em v&aacute;rios n&oacute;s da &aacute;rvore.
-				</p>
+				{{{txtCria}}}
 				<p class=paragrafo>
 					<input id="botaoEditorMenu" type=button
-						value="Editar lista de menus" style="left: -5px;" /> <input
-						id="botaoEditorGrupo" type=button value="Editar lista de grupos" />
+						value="{{editaMenus}}" style="left: -5px;" /> <input
+						id="botaoEditorGrupo" type=button value="{{editaGrupos}}" />
 					<input id="botaoEditorSubGrupo" type=button
-						value="Editar lista de sub-grupos" />
+						value="{{editaSubgrupos}}" />
 				</p>
 
-				<p>&Aacute;rvore do cat&aacute;logo:</p>
+				<p>{{arvoreCatalogo}}</p>
 				<div id="arvoreMenus" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -147,6 +131,7 @@ i3GEO.configura = {
 	locaplic: "../.."
 };
 //
+core_parseMustacheBody(i3GEOadmin.arvore.dicionario);
 cabecalhoGeral("cabecalhoPrincipal","arvore");
 temp = function(){
 	document.getElementById("formulario").style.display = "block";
