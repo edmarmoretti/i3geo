@@ -168,12 +168,12 @@ i3GEO.calculo =
 		 * {Array} - Array com o valor de x [0] e y [1] no formato dd mm ss
 		 */
 		dd2dms : function(x, y) {
-			var restod = 0, sx = "00.00", sy = "00.00", mx, mm, restos, my, s, dx, dy;
+			var res, restod = 0, sx = "00.00", sy = "00.00", mx, mm, restos, my, s, dx, dy;
 			dx = parseInt(x, 10);
-			if (dx > 0) {
+			if (x > 0) {
 				restod = x - dx;
 			}
-			if (dx < 0) {
+			if (x < 0) {
 				restod = (x * -1) - (dx * -1);
 			}
 			if (restod !== 0) {
@@ -190,10 +190,10 @@ i3GEO.calculo =
 				sx = "00.00";
 			}
 			dy = parseInt(y, 10);
-			if (dy > 0) {
+			if (y > 0) {
 				restod = y - dy;
 			}
-			if (dy < 0) {
+			if (y < 0) {
 				restod = (y * -1) - (dy * -1);
 			}
 			if (restod !== 0) {
@@ -209,10 +209,17 @@ i3GEO.calculo =
 				my = "00";
 				sy = "00.00";
 			}
-			return [
-				dx + " " + mx + " " + sx,
-				dy + " " + my + " " + sy
-			];
+			if(y < 0 && y > -1){
+				dy = "-"+dy;
+			}
+			if(x < 0 && x > -1){
+				dx = "-"+dx;
+			}
+			res = [
+					dx + " " + mx + " " + sx,
+					dy + " " + my + " " + sy
+				];
+			return res;
 		},
 		/**
 		 * Function: tela2dd

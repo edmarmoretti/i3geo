@@ -474,7 +474,6 @@ i3GEO.util =
 						do {
 							curleft += obj.offsetLeft - obj.scrollLeft;
 							curtop += obj.offsetTop - obj.scrollTop;
-							// $i("posicaoDomouse").innerHTML = obj.id+" "+curleft;
 							obj = obj.offsetParent;
 						} while (obj);
 					}

@@ -903,151 +903,102 @@ i3GEO.barraDeBotoes =
 		 * "olhodepeixe1" substitui a antiga "olhodepeixe" e nao precisa de ajustes de posicionamento
 		 *
 		 */
-		inicializaBarraOP : function(onde) {
+		inicializaBarraOP : function(onde,numBotoes) {
 			if (i3GEO.barraDeBotoes.ATIVA === false || !$i(i3GEO.Interface.IDCORPO)) {
 				return;
 			}
-			if (document.onclick)
-				euEnv.onclickBK = document.onclick;
+			var	divBarra = document.createElement("div"),
+				chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO),
+				icones = [],
+				imagens = [],
+				n = 7,
+				i, botao, titulo, imagem, l, topo;
 
-			document.onclick = on_MouseClick;
-			euDimensioni();
-			offsEut();
-			euThread();
-			//
-			euEnv.imageBasePath = i3GEO.configura.locaplic + "/pacotes/eudock/";
-			var botao, dica, titulo, i, dock = new euDock(onde), temp = "dockBg-r.png", tempAjuda = "dockBg-l.png", chaves =
-				i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO), n = chaves.length, preload;
-			preload = new Image();
-			preload.src = i3GEO.configura.locaplic + "/imagens/gisicons/eudock/sobe1.png";
-			if (i3GEO.barraDeBotoes.POSICAO === "top") {
-				dock.setObjectAlign(i3GEO.Interface.IDCORPO, euUP, (i3GEO.parametros.h) * 1 + i3GEO.barraDeBotoes.OFFSET, euDOWN);
-			} else {
-				if (onde) {
-					dock.setObjectAlign(i3GEO.Interface.IDCORPO, euDOWN, i3GEO.barraDeBotoes.OFFSET, euUP);
-				} else {
-					dock.setObjectAlign(i3GEO.Interface.IDCORPO, euDOWN, (parseInt(document.body.style.height, 10)) * -1
-						+ i3GEO.barraDeBotoes.OFFSET, euUP);
-				}
-			}
-			if (i3GEO.barraDeBotoes.MAXBOTOES >= chaves.length) {
-				temp = "vazio.png";
-			}
-			if (i3GEO.barraDeBotoes.AJUDA === false) {
-				tempAjuda = "vazio.png";
-			}
-			dock.setBar({
-				left : {
-					euImage : {
-						image : i3GEO.configura.locaplic + "/pacotes/eudock/barImages/" + tempAjuda
-					}
-				},
-				horizontal : {
-					euImage : {
-						image : i3GEO.configura.locaplic + "/pacotes/eudock/barImages/dockBg-c-o.png"
-					}
-				},
-				right : {
-					euImage : {
-						image : i3GEO.configura.locaplic + "/pacotes/eudock/barImages/" + temp
-					}
-				}
-			});
-			//i3GEO.barraDeBotoes.AJUDA = false;
-			dock.setIconsOffset(7);
 			if (i3GEO.barraDeBotoes.MAXBOTOES > 0) {
 				n = i3GEO.barraDeBotoes.MAXBOTOES;
 			}
+			if(numBotoes){
+				n = numBotoes;
+			}
+			topo = (i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO))[1] + i3GEO.barraDeBotoes.OFFSET) * -1;
+			divBarra.style.position = "relative";
+			divBarra.style.top = topo - 6 + "px";
+			divBarra.style.margin = "auto";
+			divBarra.style.marginLeft = "0px";
+			divBarra.style.textAlign = "center";
+			divBarra.style.width = i3GEO.parametros.w + "px";
+			divBarra.style.height = "0px";
+			//cria os icones
+			//l acumula a largura da barra de icones
+			l = 0;
 			for (i = 0; i < n; i += 1) {
-				if (i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true) {
+				if (chaves[i] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true) {
+
 					botao = i3GEO.barraDeBotoes.defBotao(chaves[i]);
 					if (botao === false || i3GEO.barraDeBotoes.AJUDA === false) {
-						dica = "";
 						titulo = "";
 					} else {
-						if (botao.dica) {
-							dica = botao.dica;
-						} else {
-							dica = "";
-						}
 						if (botao.titulo != undefined && i3GEO.barraDeBotoes.AJUDA === true) {
 							titulo = botao.titulo;
 						} else {
 							titulo = "";
 						}
 					}
-					dock.addIcon(new Array({
-						euImage : {
-							image : i3GEO.configura.locaplic + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]],
-							titulo : titulo
-						}
-					}), {
-						mouseInsideClick : function(x, y, id, posX, posY) {
-							i3GEO.util.animaClique($i(euEnv.euDockArray[id].elementsArray[0].id));
-							i3GEO.barraDeBotoes.execBotao(euEnv.euDockArray[id].idBotao, x, y, posX, posY);
-						},
-						idBotao : chaves[i],
-						dica : dica,
-						titulo : titulo
-					});
+					imagem = i3GEO.configura.locaplic + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]];
+					icones.push('<img name="' + chaves[i] + '" class="eudockImagemBottom" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.execBotao(this.name)" style="width: 38px; height: 38px; position: absolute; visibility: visible; left: ' + l + 'px; top: 0px;" src="' + imagem + '" title="' + titulo + '">');
+					l += 38;
 				}
 			}
-			$i(euEnv.euDockArray.euDock_0.bar.elementsArray.left.id).onclick = function() {
-				// i3GEO.ajuda.ATIVAJANELA = true;
-				// i3GEO.ajuda.abreJanela();
-				i3GEO.barraDeBotoes.ajudaEmLista();
+			if (i3GEO.barraDeBotoes.POSICAO === "top") {}
+
+			if(!onde){
+				onde = document.body;
+			}
+			//nesse caso a posicao e definida em funcao do corpo do mapa
+			if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe1"){
+				onde = $i(i3GEO.Interface.IDCORPO);
+				divBarra.style.top = "-30px";
+				imagens.push('<div style="left: 0px; z-index: 1; border: 0px solid black; top: 0px; position: relative; text-align: center; margin: auto;" id="euDock_0_bar" class="noprint">');
+				imagens.push('<img onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" id="euDock_euImage_2" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
+				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
+				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
+				imagens.push('</div>');
+				imagens.push('<div style="margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: -50px; width: ' + l + 'px; height: 38px;" id="euDock_0" class="noprint">');
+				//inclui os icones
+				imagens.push(icones.join(""));
+				//
+				imagens.push('</div>');
+			}
+			else{
+				imagens.push('<div style="left: 0px; z-index: 1; border: 0px solid black; top: 0px; position: relative; text-align: center; margin: auto;" id="euDock_0_bar" class="noprint">');
+				imagens.push('<img id="euDock_euImage_2" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
+				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
+				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
+				imagens.push('<div style="display: inline;margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: ' + (topo - 6) + 'px; width: ' + l + 'px; height: 38px; left: -' + (l + 20) + 'px;" id="euDock_0" class="noprint">');
+				//inclui os icones
+				imagens.push(icones.join(""));
+				//
+				imagens.push('</div>');
+				imagens.push('</div>');
+			}
+			divBarra.innerHTML = imagens.join("");
+
+			//adiciona a barra ao mapa
+			onde.appendChild(divBarra);
+			//funcao de expancao da barra
+			$i("euDock_euImage_4").onclick = function(){
+				var nicones = icones.length;
+				if ($i("euDock_0_bar")) {
+					$i("euDock_0_bar").parentNode.parentNode.removeChild($i("euDock_0_bar").parentNode);
+				}
+				//30 e um valor qualquer
+				if(i3GEO.barraDeBotoes.MAXBOTOES === nicones){
+					i3GEO.barraDeBotoes.inicializaBarraOP(false,30);
+				}
+				else{
+					i3GEO.barraDeBotoes.inicializaBarraOP();
+				}
 			};
-			/*
-			 * $i("euDock_0").onmouseout = function(){ var temp = $i("i3geoMarcaIcone"); if(temp){ temp.style.display = "none"; } };
-			 */
-			$i(euEnv.euDockArray.euDock_0.bar.elementsArray.right.id).onclick =
-				function() {
-				var dica, titulo, chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO), n = chaves.length, nb =
-						euEnv.euDockArray.euDock_0.iconsArray.length, i;
-					// if ($i("i3geoMarcaIcone")) {
-					// $i("i3geoMarcaIcone").style.display = "none";
-					// }
-					// a barra j&aacute; foi expandida
-					if (nb !== i3GEO.barraDeBotoes.MAXBOTOES) {
-						i3GEO.barraDeBotoes.recria();
-						return;
-					}
-					if (i3GEO.barraDeBotoes.MAXBOTOES > 0 && n > nb) {
-						for (i = nb; i < n; i += 1) {
-							if (i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true) {
-								botao = i3GEO.barraDeBotoes.defBotao(chaves[i]);
-								if (botao === false) {
-									dica = "";
-									titulo = "";
-								} else {
-									if (botao.dica) {
-										dica = botao.dica;
-									} else {
-										dica = "";
-									}
-									if (botao.titulo != undefined) {
-										titulo = botao.titulo;
-									} else {
-										titulo = "";
-									}
-								}
-								dock.addIcon(new Array({
-									euImage : {
-										image : i3GEO.configura.locaplic + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]],
-										titulo : titulo
-									}
-								}), {
-									mouseInsideClick : function(x, y, id, posX) {
-										i3GEO.barraDeBotoes.execBotao(euEnv.euDockArray[id].idBotao, x, y, posX);
-									},
-									idBotao : chaves[i],
-									dica : dica,
-									titulo : titulo
-								});
-							}
-						}
-					}
-				};
 		},
 		/**
 		 * Function: inicializaBarra
@@ -1516,18 +1467,10 @@ i3GEO.barraDeBotoes =
 				console.info("i3GEO.barraDeBotoes.recria()");
 
 			if (i3GEO.barraDeBotoes.TIPO === "olhodepeixe" || i3GEO.barraDeBotoes.TIPO === "olhodepeixe1") {
-				euEnv.euDockArray = [];
-				euEnv.Kost.num = 0;
-				if ($i("euDock_0")) {
-					$i("euDock_0").parentNode.removeChild($i("euDock_0"));
-				}
 				if ($i("euDock_0_bar")) {
-					$i("euDock_0_bar").parentNode.removeChild($i("euDock_0_bar"));
+					$i("euDock_0_bar").parentNode.parentNode.removeChild($i("euDock_0_bar").parentNode);
 				}
 				i3GEO.barraDeBotoes.inicializaBarra();
-				// if ($i("i3geoMarcaIcone")) {
-				// $i("i3geoMarcaIcone").style.display = "none";
-				// }
 				return;
 			}
 			var i, n, temp, novoel, barraZoom, x, y, BARRAS = i3GEO.barraDeBotoes.BARRAS, iu = i3GEO.util;

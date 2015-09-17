@@ -1462,7 +1462,7 @@ i3GEO.mapa =
 													if (img !== "") {
 														temp += img + "<br>";
 													}
-													if (tipotip === "balao" && ds[s][tips[r]].tip.toLowerCase() === "sim") {
+													if (tipotip != "completo" && ds[s][tips[r]].tip.toLowerCase() === "sim") {
 														textoTempSimples += temp;
 													}
 													textoTempCompleto += temp;
@@ -1504,7 +1504,7 @@ i3GEO.mapa =
 										n.style.textAlign = "left";
 										n.innerHTML += res;
 									} else {
-										n.innerHTML = res;
+										n.innerHTML = textoSimples;
 									}
 								}
 							}

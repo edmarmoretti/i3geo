@@ -8,7 +8,7 @@ include_once("../ms_configura.php");
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3GEO - Google Maps</title>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry"></script>
-	<script type="text/javascript" src="../classesjs/i3geo6.js"></script>
+	<script type="text/javascript" src="../classesjs/i3geo.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/black.css">
 </head>
 <body id="i3geo" style='margin-left: 7px; background: white;'>
@@ -80,7 +80,6 @@ include_once("../ms_configura.php");
 
 <div id="i3GEOguiaMovel" style="visibility:hidden;position:absolute;display:block;border:0px solid white;text-align:left;z-index:2000;background-color:none">
 	<div style="cursor:pointer;position:absolute;top:50%;margin-top: -65px;width:30px;z-index:5000; left:18px;">
-		<img src='../imagens/openbars1.png' style="width: 48px; position: absolute; left: -16px; height: 418px; top: -160px;">
 		<div id="iconeGuia_temas" ></div>
 		<div id="iconeGuia_adiciona" style="margin-top:3px;" ></div>
 		<div id="iconeGuia_legenda" style="margin-top:3px;"></div>
@@ -113,10 +112,7 @@ include_once("../ms_configura.php");
 	</div>
 </div>
 </div>
-
-
-
-	<script type="text/javascript">
+<script type="text/javascript">
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.Interface.ATUAL = "googlemaps";
 i3GEO.Interface.IDCORPO = "contemImg";

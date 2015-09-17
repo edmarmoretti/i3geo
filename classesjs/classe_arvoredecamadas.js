@@ -807,6 +807,7 @@ i3GEO.arvoreDeCamadas =
 					novoel.id = "i3GEOprogressoDiv";
 					novoel.style.position = "absolute";
 					novoel.style.top = "0px";
+					novoel.style.display = "none";
 					novoel.style.zIndex = "50000";
 					novoel.style.left = ((i3GEO.parametros.w / 2) - 75) + "px";
 					// novoel.style.display = "none";

@@ -582,9 +582,11 @@ i3GEO.Interface =
 			/**
 			 * Propriedade: TILES
 			 *
-			 * Indica se ser&aacute; utilizado o modo de navega&ccedil;&atilde;o em tiles em todas as camadas do mapa
+			 * Indica se por default ser&aacute; utilizado o modo de navega&ccedil;&atilde;o em tiles em todas as camadas do mapa
 			 *
 			 * Ao bloquear o modo tile, o cache de imagens n&atilde;o poder&aacute; ser realizado
+			 * 
+			 * A configura&ccedil;&atilde;o de cada camada sobrep&otilde;e essa propriedade
 			 *
 			 * Tipo:
 			 *
@@ -1044,7 +1046,7 @@ i3GEO.Interface =
 						if (i3GEO.Interface.openlayers.googleLike === true) {
 							i3GEO.barraDeBotoes.INCLUIBOTAO.lentei = false;
 						}
-						i3GEO.Interface.ativaBotoes();
+						//i3GEO.Interface.ativaBotoes();
 					};
 				if (i3GEO.arvoreDeCamadas.ATIVATEMA === "") {
 					i3GEO.arvoreDeCamadas.ATIVATEMA =
@@ -1070,6 +1072,7 @@ i3GEO.Interface =
 				if ($i("mst")) {
 					$i("mst").style.visibility = "visible";
 				}
+				i3GEO.Interface.ativaBotoes();
 				// executa fun&ccedil;&atilde;o de finaliza&ccedil;&atilde;o, se
 				// houver
 				if (YAHOO.lang.isFunction(i3GEO.finalizaAPI)) {
@@ -1829,7 +1832,7 @@ i3GEO.Interface =
 					objposicaocursor.dmsy = d[1];
 					objposicaocursor.imgx = e.pixel[0];
 					objposicaocursor.imgy = e.pixel[1];
-					pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+					//pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 					objposicaocursor.telax = e.pixel[0] + pos[0];
 					objposicaocursor.telay = e.pixel[1] + pos[1];
 				});
@@ -2443,7 +2446,6 @@ i3GEO.Interface =
 					if (i3GEO.Interface.STATUS.trocando === false) {
 						i3GEO.gadgets.mostraInserirKml();
 					}
-					i3GEO.Interface.ativaBotoes();
 					i3GEO.eventos.ativa($i(i3GEO.Interface.IDMAPA));
 					if (i3GEO.Interface.STATUS.trocando === false) {
 						i3GEO.coordenadas.mostraCoordenadas();
@@ -2468,6 +2470,7 @@ i3GEO.Interface =
 					if (i3GEO.parametros.kmlurl !== "") {
 						i3GEO.Interface.googlemaps.adicionaKml(true, i3GEO.parametros.kmlurl);
 					}
+					i3GEO.Interface.ativaBotoes();
 					// executa fun&ccedil;&atilde;o de finaliza&ccedil;&atilde;o, se
 					// houver
 					if (YAHOO.lang.isFunction(i3GEO.finalizaAPI)) {

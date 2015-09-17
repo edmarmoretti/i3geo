@@ -130,8 +130,8 @@ packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
 packer("../pacotes/mustache.js-master/mustache.js","compactados/mustache.js","Normal");
 packer("../pacotes/proj4js/lib/proj4js.js","compactados/proj4js.js","Normal");
 packer("../pacotes/wicket/wicket.js","compactados/wicket.js","Normal");
-packer("../pacotes/eudock/js/euDock.2.0.js","compactados/euDock.2.0.js","Normal");
-packer("../pacotes/eudock/js/euDock.Image.js","compactados/euDock.Image.js","Normal");
+//packer("../pacotes/eudock/js/euDock.2.0.js","compactados/euDock.2.0.js","Normal");
+//packer("../pacotes/eudock/js/euDock.Image.js","compactados/euDock.Image.js","Normal");
 //
 //gera um unico js para a inicializacao do I3Geo
 //
@@ -189,8 +189,8 @@ $jsfiles = array(
 "compactados/login_compacto.js",
 "compactados/marcador_compacto.js",
 "compactados/plugini3geo_compacto.js",
-"compactados/euDock.2.0.js",
-"compactados/euDock.Image.js",
+//"compactados/euDock.2.0.js",
+//"compactados/euDock.Image.js",
 "compactados/mustache.js"
 );
 

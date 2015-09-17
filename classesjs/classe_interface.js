@@ -556,9 +556,11 @@ i3GEO.Interface =
 			/**
 			 * Propriedade: TILES
 			 *
-			 * Indica se ser&aacute; utilizado o modo de navega&ccedil;&atilde;o em tiles em todas as camadas do mapa
+			 * Indica se por padr&atilde;o ser&aacute; utilizado o modo de navega&ccedil;&atilde;o em tiles em todas as camadas do mapa
 			 *
 			 * Ao bloquear o modo tile, o cache de imagens n&atilde;o poder&aacute; ser realizado
+			 * 
+			 * A configura&ccedil;&atilde;o de cada camada sobrep&otilde;e essa propriedade
 			 *
 			 * Tipo:
 			 *
@@ -933,7 +935,6 @@ i3GEO.Interface =
 						if (i3GEO.Interface.openlayers.googleLike === true) {
 							i3GEO.barraDeBotoes.INCLUIBOTAO.lentei = false;
 						}
-						i3GEO.Interface.ativaBotoes();
 						if (openlayers.GADGETS.PanZoomBar === true) {
 							i3GEO.Interface.openlayers.OLpanzoombar = new OpenLayers.Control.PanZoomBar();
 							i3geoOL.addControl(i3GEO.Interface.openlayers.OLpanzoombar);
@@ -955,6 +956,16 @@ i3GEO.Interface =
 					i3GEO.arvoreDeCamadas.ATIVATEMA =
 						"i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);";
 				}
+
+				i3GEO.coordenadas.mostraCoordenadas();
+				montaMapa();
+				i3GEO.gadgets.mostraMenuSuspenso();
+				i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
+				i3GEO.idioma.mostraSeletor();
+				i3GEO.gadgets.mostraEscalaNumerica();
+				i3GEO.util.arvore("<b>" + $trad("p13") + "</b>", "listaPropriedades", i3GEO.configura.listaDePropriedadesDoMapa);
+				i3GEO.gadgets.mostraMenuLista();
+				/*
 				i3GEO.util.multiStep([
 					i3GEO.coordenadas.mostraCoordenadas,
 					montaMapa,
@@ -972,6 +983,7 @@ i3GEO.Interface =
 					], null
 				], function() {
 				});
+				*/
 				i3GEO.arvoreDeCamadas.cria("", i3GEO.arvoreDeCamadas.CAMADAS, i3GEO.configura.sid, i3GEO.configura.locaplic);
 				if (i3GEO.arvoreDeCamadas.MOSTRALISTAKML === true) {
 					i3GEO.Interface.openlayers.adicionaListaKml();
@@ -982,6 +994,7 @@ i3GEO.Interface =
 				if ($i("mst")) {
 					$i("mst").style.visibility = "visible";
 				}
+				i3GEO.Interface.ativaBotoes();
 				// executa fun&ccedil;&atilde;o de finaliza&ccedil;&atilde;o, se
 				// houver
 				if (YAHOO.lang.isFunction(i3GEO.finalizaAPI)) {
@@ -2412,7 +2425,6 @@ i3GEO.Interface =
 					if (i3GEO.Interface.STATUS.trocando === false) {
 						i3GEO.gadgets.mostraInserirKml();
 					}
-					i3GEO.Interface.ativaBotoes();
 					i3GEO.eventos.ativa($i(i3GEO.Interface.IDMAPA));
 					if (i3GEO.Interface.STATUS.trocando === false) {
 						i3GEO.coordenadas.mostraCoordenadas();
@@ -2447,6 +2459,7 @@ i3GEO.Interface =
 						}
 					}
 					i3GEO.configura.iniciaFerramentas.executa();
+					i3GEO.Interface.ativaBotoes();
 					// ajusta a extensao geografica do mapa
 					google.maps.event.addListenerOnce(i3GeoMap, 'idle', function() {
 						var z = i3GeoMap.getZoom();

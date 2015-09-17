@@ -920,12 +920,14 @@ i3GEO.barraDeBotoes =
 			if(numBotoes){
 				n = numBotoes;
 			}
-			topo = (i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA))[1] + i3GEO.barraDeBotoes.OFFSET) * -1;
+			topo = (i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO))[1] + i3GEO.barraDeBotoes.OFFSET) * -1;
 			divBarra.style.position = "relative";
-			divBarra.style.top = topo - 10 + "px";
+			divBarra.style.top = topo - 6 + "px";
 			divBarra.style.margin = "auto";
+			divBarra.style.marginLeft = "0px";
 			divBarra.style.textAlign = "center";
 			divBarra.style.width = i3GEO.parametros.w + "px";
+			divBarra.style.height = "0px";
 			//cria os icones
 			//l acumula a largura da barra de icones
 			l = 0;
@@ -949,22 +951,39 @@ i3GEO.barraDeBotoes =
 			}
 			if (i3GEO.barraDeBotoes.POSICAO === "top") {}
 
-			imagens.push('<div style="z-index: 1; border: 0px solid black; top: 0px; position: relative; text-align: center; margin: auto;" id="euDock_0_bar" class="noprint">');
-			imagens.push('<img onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" id="euDock_euImage_2" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
-			imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
-			imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
-			imagens.push('</div>');
-			imagens.push('<div style="margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: ' + (-10 + topo) + 'px; width: ' + l + 'px; height: 38px;" id="euDock_0" class="noprint">');
-			//inclui os icones
-			imagens.push(icones.join(""));
-			//
-			imagens.push('</div>');
-			divBarra.innerHTML = imagens.join("");
-
-			//adiciona a barra ao mapa
 			if(!onde){
 				onde = document.body;
 			}
+			//nesse caso a posicao e definida em funcao do corpo do mapa
+			if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe1"){
+				onde = $i(i3GEO.Interface.IDCORPO);
+				divBarra.style.top = "-30px";
+				imagens.push('<div style="left: 0px; z-index: 1; border: 0px solid black; top: 0px; position: relative; text-align: center; margin: auto;" id="euDock_0_bar" class="noprint">');
+				imagens.push('<img onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" id="euDock_euImage_2" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
+				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
+				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
+				imagens.push('</div>');
+				imagens.push('<div style="margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: -50px; width: ' + l + 'px; height: 38px;" id="euDock_0" class="noprint">');
+				//inclui os icones
+				imagens.push(icones.join(""));
+				//
+				imagens.push('</div>');
+			}
+			else{
+				imagens.push('<div style="left: 0px; z-index: 1; border: 0px solid black; top: 0px; position: relative; text-align: center; margin: auto;" id="euDock_0_bar" class="noprint">');
+				imagens.push('<img id="euDock_euImage_2" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
+				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
+				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
+				imagens.push('<div style="display: inline;margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: ' + (topo - 6) + 'px; width: ' + l + 'px; height: 38px; left: -' + (l + 20) + 'px;" id="euDock_0" class="noprint">');
+				//inclui os icones
+				imagens.push(icones.join(""));
+				//
+				imagens.push('</div>');
+				imagens.push('</div>');
+			}
+			divBarra.innerHTML = imagens.join("");
+
+			//adiciona a barra ao mapa
 			onde.appendChild(divBarra);
 			//funcao de expancao da barra
 			$i("euDock_euImage_4").onclick = function(){
