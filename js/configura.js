@@ -1562,6 +1562,7 @@ i3GEO.configura =
 				},
 				{
 					// Coloca as guias em uma janela m&oacute;vel
+					//remover na versao 7
 					iddiv : "encolheFerramentas",
 					tipo : "",
 					dica : $trad("d19"),
@@ -1800,7 +1801,7 @@ i3GEO.configura =
 		 * que possuem par&acirc;metros definidos em cada mapfile. Normalmente, os par&acirc;metros
 		 *
 		 * s&atilde;o utilizados no mashup para criar &iacute;cones que executam opera&ccedil;&otilde;es especiais
-		 * 
+		 *
 		 * Veja também mashups/openlayers.php variavel $listaFerramentas
 		 */
 		ferramentasLayers : {

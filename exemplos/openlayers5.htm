@@ -17,13 +17,11 @@
 <td>
   <table width=100% cellspacing=0 cellpadding=0 >
    <tr>
-   <td title="libera guias" class=tdclaro id=encolheFerramentas style="vertical-align:top;width:5px;text-align:left;"></td>
    <td>
     <div class=verdeescuro style="top:0px;cursor:pointer;">
 	 <div id=guia1 class=guia >Temas</div>
 	 <div id=guia2 class=guia >Adiciona</div>
 	 <div id=guia4 class=guia >Legenda</div>
-	 <div id=guia5 class=guia >Links</div>
     </div>
    </td>
 
@@ -35,9 +33,9 @@
 </td>
 </tr>
 <tr>
- <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:300px;text-align:left;">
+ <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:350px;text-align:left;">
   <div id='guia1obj' >
-	<div style='left:5px;top:10px;' id=buscaRapida ></div>
+	<div style='left:5px;top:10px;width:90%;' id=buscaRapida ></div>
   	<div id=listaPropriedades style='top:15px;' ></div>
   	<div id=listaLayersBase style='top:15px;'></div>
   	<div id=listaTemas style='top:15px;'></div>
@@ -93,7 +91,7 @@
 </style>
 <script type="text/javascript">
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
+i3GEO.mapa.TEMASINICIAISLIGADOS = "mundo";
 //
 //muda a extens&atilde;o m&aacute;xima
 //
@@ -117,8 +115,8 @@ i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.barraDeBotoes.TIPO = "yui";
 i3GEO.barraDeBotoes.AUTOALTURA = false;
 
-i3GEO.barraDeBotoes.PERMITEFECHAR = true;
-i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
+i3GEO.barraDeBotoes.PERMITEFECHAR = false;
+i3GEO.barraDeBotoes.PERMITEDESLOCAR = false;
 i3GEO.barraDeBotoes.AUTO = true;
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
 i3GEO.Interface.BARRABOTOESLEFT = 50
