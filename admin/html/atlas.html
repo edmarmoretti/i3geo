@@ -15,6 +15,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/atlas.js"></script>
 <script type="text/javascript" src="../js/atlas.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
@@ -24,29 +25,20 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - Atlas <img src="../imagens/04.png"
+				{{{adminAtlas}}}<img src="../imagens/04.png"
 					style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
 			<div id="ajuda">
-				<div class="hd">Ajuda</div>
+				<div class="hd">{{ajuda}}</div>
 				<div class="bd" style="height: 144px; overflow: auto">
-					<p>O cadastro de Atlas &eacute; utilizado na interface "Atlas" do
-						i3geo. Essa interface pode ser vista em
-						http://localhost/i3geo/atlas
-					<p>Cada Atlas possu&iacute; uma lista de pranchas e cada prancha uma
-						lista de temas e outros par&acirc;metros.
-					<p>A montagem de cada Atlas &eacute; feito definindo-se os par&acirc;metros
-						de cada n&iacute;vel hier&aacute;rquico, editando-se uma &aacute;rvore cuja raiz &eacute; cada
-						Atlas, seguido pelas pranchas e temas.
-					<p>Para cada Atlas e cada prancha pode ser definido um texto
-						explicativo que ser&aacute; aberto ao iniciar o Atlas ou a prancha.
+					{{{txtAjudaAtlas}}}
 				</div>
 				<div class="ft"></div>
 			</div>
 			<input onclick="adicionaLinha()" type=button id=adiciona
-				value="Criar um novo atlas" /> <br>
-			<p>Atlas existentes:</p>
+				value="{{criaAtlas}}" /> <br>
+			<p>{{atlasExistente}}</p>
 			<div id="tabela" style="left: -5px;"></div>
 			<div id=logajax style="display: block"></div>
 			</div>
@@ -95,6 +87,7 @@ i3GEO.configura = {
 	locaplic: "../.."
 };
 //
+core_parseMustacheBody(i3GEOadmin.atlas.dicionario);
 cabecalhoGeral("cabecalhoPrincipal","atlas");
 temp = function(){
 	document.getElementById("formulario").style.display = "block";
