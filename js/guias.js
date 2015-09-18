@@ -898,7 +898,7 @@ i3GEO.guias =
 			 */
 			config : {
 				larguraPuxador : 50,
-				alturaPuxador : 319,
+				alturaPuxador : 280,
 				alturaGuiaMovel : 0,
 				larguraGuiaMovel : 320,
 				topGuiaMovel : 0,
@@ -949,7 +949,7 @@ i3GEO.guias =
 					temp.top = config.topGuiaMovel + "px";
 				}
 				temp.width = config.larguraPuxador + "px";
-				temp.height = config.alturaGuiaMovel + "px";
+				temp.height = config.alturaPuxador + "px";
 				// aberta temp.width = config.larguraPuxador +
 				// config.larguraGuiaMovel + "px";
 
