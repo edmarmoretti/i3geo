@@ -912,8 +912,11 @@ i3GEO.barraDeBotoes =
 				icones = [],
 				imagens = [],
 				n = 7,
-				i, botao, titulo, imagem, l, topo;
+				i, botao, titulo, imagem, l, topo, vis = "visible";
 
+			if(i3GEO.barraDeBotoes.SOICONES === true){
+				vis = "hidden";
+			}
 			if (i3GEO.barraDeBotoes.MAXBOTOES > 0) {
 				n = i3GEO.barraDeBotoes.MAXBOTOES;
 			}
@@ -950,8 +953,15 @@ i3GEO.barraDeBotoes =
 							titulo = "";
 						}
 					}
-					imagem = i3GEO.configura.locaplic + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]];
-					icones.push('<img name="' + chaves[i] + '" class="eudockImagemBottom" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.execBotao(this.name)" style="width: 38px; height: 38px; position: absolute; visibility: visible; left: ' + l + 'px; top: 0px;" src="' + imagem + '" title="' + titulo + '">');
+					//caso ICONEBOTAO nao exista, coloca o id para uso de css
+					if(i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]]){
+						imagem = i3GEO.configura.locaplic + i3GEO.barraDeBotoes.ICONEBOTAO[chaves[i]];
+						icones.push('<img name="' + chaves[i] + '" class="eudockImagemBottom" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.execBotao(this.name)" style="width: 38px; height: 38px; position: absolute; visibility: visible; left: ' + l + 'px; top: 0px;" src="' + imagem + '" title="' + titulo + '">');
+					}
+					else{
+						imagem = i3GEO.configura.locaplic + "/imagens/branco.gif";
+						icones.push('<img id="' + chaves[i] + '" name="' + chaves[i] + '" class="eudockImagemBottom" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.execBotao(this.name)" style="width: 38px; height: 38px; position: absolute; visibility: visible; left: ' + l + 'px; top: 0px;" src="' + imagem + '" title="' + titulo + '">');
+					}
 					l += 38;
 				}
 			}
@@ -965,9 +975,9 @@ i3GEO.barraDeBotoes =
 				divBarra.style.top = "-30px";
 				deslocaIcones = -50;
 				imagens.push('<div style="left: 0px; z-index: 1; border: 0px solid black; top: 0px; position: relative; text-align: center; margin: auto;" id="euDock_0_bar" class="noprint">');
-				imagens.push('<img onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" id="euDock_euImage_2" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
-				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
-				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
+				imagens.push('<img onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" id="euDock_euImage_2" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
+				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
+				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
 				imagens.push('</div>');
 				imagens.push('<div style="margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: ' + deslocaIcones + 'px; width: ' + l + 'px; height: 38px;" id="euDock_0" class="noprint">');
 				//inclui os icones
@@ -977,9 +987,9 @@ i3GEO.barraDeBotoes =
 			}
 			else{
 				imagens.push('<div style="left: 0px; z-index: 1; border: 0px solid black; top: 0px; position: relative; text-align: center; margin: auto;" id="euDock_0_bar" class="noprint">');
-				imagens.push('<img id="euDock_euImage_2" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
-				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
-				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
+				imagens.push('<img id="euDock_euImage_2" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
+				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
+				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
 				if (i3GEO.barraDeBotoes.POSICAO === "top") {
 					imagens.push('<div style="display: inline;margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: -38px; width: ' + l + 'px; height: 38px; left: -' + (l + 20) + 'px;" id="euDock_0" class="noprint">');
 				}
