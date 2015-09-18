@@ -83,7 +83,6 @@
 
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
-  <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
  </td>
  <td style="vertical-align:top;border-width:0px;">
   <table width="100%" style="vertical-align:top;border-width:0px">
@@ -162,10 +161,9 @@
 <script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
 <script>
 //define qual guia iniciara aberta
-i3GEO.guias.ATUAL = "mapas";
-
-
+i3GEO.guias.ATUAL = "adiciona";
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+i3GEO.mapa.TEMASINICIAISLIGADOS = "mundo";
 i3GEO.configura.autotamanho = false;
 i3GEO.Interface.ATUAL = "openlayers";
 i3GEO.Interface.IDCORPO = "contemImg";
