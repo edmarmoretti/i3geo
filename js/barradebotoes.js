@@ -920,9 +920,15 @@ i3GEO.barraDeBotoes =
 			if(numBotoes){
 				n = numBotoes;
 			}
-			topo = (i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO))[1] + i3GEO.barraDeBotoes.OFFSET) * -1;
+			if(i3GEO.barraDeBotoes.POSICAO === "top"){
+				topo = (i3GEO.parametros.h + i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO))[1] + i3GEO.barraDeBotoes.OFFSET) * -1;
+			}
+			else{
+				topo = (i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO))[1] + i3GEO.barraDeBotoes.OFFSET) * -1;
+				topo = topo - 6;
+			}
 			divBarra.style.position = "relative";
-			divBarra.style.top = topo - 6 + "px";
+			divBarra.style.top = topo + "px";
 			divBarra.style.margin = "auto";
 			divBarra.style.marginLeft = "0px";
 			divBarra.style.textAlign = "center";
@@ -949,7 +955,6 @@ i3GEO.barraDeBotoes =
 					l += 38;
 				}
 			}
-			if (i3GEO.barraDeBotoes.POSICAO === "top") {}
 
 			if(!onde){
 				onde = document.body;
@@ -958,12 +963,13 @@ i3GEO.barraDeBotoes =
 			if(i3GEO.barraDeBotoes.TIPO === "olhodepeixe1"){
 				onde = $i(i3GEO.Interface.IDCORPO);
 				divBarra.style.top = "-30px";
+				deslocaIcones = -50;
 				imagens.push('<div style="left: 0px; z-index: 1; border: 0px solid black; top: 0px; position: relative; text-align: center; margin: auto;" id="euDock_0_bar" class="noprint">');
 				imagens.push('<img onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" id="euDock_euImage_2" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
 				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
 				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
 				imagens.push('</div>');
-				imagens.push('<div style="margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: -50px; width: ' + l + 'px; height: 38px;" id="euDock_0" class="noprint">');
+				imagens.push('<div style="margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: ' + deslocaIcones + 'px; width: ' + l + 'px; height: 38px;" id="euDock_0" class="noprint">');
 				//inclui os icones
 				imagens.push(icones.join(""));
 				//
@@ -974,7 +980,12 @@ i3GEO.barraDeBotoes =
 				imagens.push('<img id="euDock_euImage_2" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
 				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
 				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: visible; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
-				imagens.push('<div style="display: inline;margin:auto; margin-bottom: -38px;z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: -38px; width: ' + l + 'px; height: 38px; left: -' + (l + 20) + 'px;" id="euDock_0" class="noprint">');
+				if (i3GEO.barraDeBotoes.POSICAO === "top") {
+					imagens.push('<div style="display: inline;margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: -38px; width: ' + l + 'px; height: 38px; left: -' + (l + 20) + 'px;" id="euDock_0" class="noprint">');
+				}
+				else{
+					imagens.push('<div style="display: inline;margin:auto; margin-bottom: -38px;z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: -38px; width: ' + l + 'px; height: 38px; left: -' + (l + 20) + 'px;" id="euDock_0" class="noprint">');
+				}
 				//inclui os icones
 				imagens.push(icones.join(""));
 				//
