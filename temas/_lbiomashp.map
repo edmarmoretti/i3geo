@@ -24,6 +24,8 @@ MAP
       "transitioneffect"	"SIM"
       "TEMA"	"Biomas shapefile (acentuação)"
     END # METADATA
+    #para teste de legenda com grupo
+    GROUP "biomas"
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
     PROCESSING "LABEL_NO_CLIP=True"
