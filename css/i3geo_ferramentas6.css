@@ -8,7 +8,7 @@ para nao selecionar
     -o-user-select: none;
     user-select: none;
 }
-input[type=text]{
+input[type=text], textarea{
 	-webkit-user-select: text;
     -khtml-user-select: text;
     -moz-user-select: text;
@@ -91,11 +91,11 @@ Utilizado na janela do buscador INDE
 }
 
 .mensagemAjuda th {
-	background-color: #cedff2; 
-	font-family:Verdana, Arial, Helvetica, sans-serif; 
-	font-size: 8pt; 
-	border: 1px solid #B1CDEB; 
-	text-align: left; 
+	background-color: #cedff2;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	border: 1px solid #B1CDEB;
+	text-align: left;
 	padding-left: 7px;
 	padding-right: 11px;
 }
