@@ -2700,5 +2700,12 @@ g_traducao = {
 				en : "",
 				es : ""
 			}
-		]
+		],
+		"trocaInterface" : [
+   			{
+   				pt : "Troca de interface",
+   				en : "",
+   				es : ""
+   			}
+   		]
 	};

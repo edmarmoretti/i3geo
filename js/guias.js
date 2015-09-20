@@ -266,6 +266,25 @@ i3GEO.guias =
 					i3GEO.php.pegaMapas(pegaMapas);
 					i3GEO.navega.removeCookieExtensao();
 				}
+			},
+			"dobraPagina" : {
+				icone : "imagens/googlemaps.png",
+				titulo : $trad("trocaInterface"),
+				id : "guia6",
+				idconteudo : "",
+				click : function() {
+					if(i3GEO.Interface.ATUAL === "googlemaps"){
+						if(i3GeoMap.getStreetView().getVisible() === true){
+							i3GeoMap.getStreetView().setVisible(false);
+						}
+						else{
+							i3GEO.Interface.atual2ol.inicia();
+						}
+					}
+					if(i3GEO.Interface.ATUAL === "openlayers"){
+						i3GEO.Interface.atual2gm.inicia();
+					}
+				}
 			}
 		},
 		/**
@@ -350,8 +369,9 @@ i3GEO.guias =
 			//
 			if (i3GEO.guias.TIPO === "movel") {
 				i3GEO.guias.IDGUIAS = "i3GEOguiaMovelConteudo";
-				for (ng = 0; ng < nguias; ng++) {
-					if ($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo)) {
+				for (ng = 0; ng < 20; ng++) {
+					//icones sem conteudo devem ter um div com id com prefixo "iconeGuia_"
+					if (i3GEO.guias.CONFIGURA[guias[ng]] && ($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo) || $i("iconeGuia_"+guias[ng]))) {
 						i3GEO.guias.guiaMovel.config.guias.ids.push(i3GEO.guias.CONFIGURA[guias[ng]].id);
 						i3GEO.guias.guiaMovel.config.guias.idsconteudos.push(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo);
 						if (i3GEO.guias.CONFIGURA[guias[ng]].icone !== undefined) {
@@ -1132,6 +1152,10 @@ i3GEO.guias =
 				}
 				i3GEO.guias.escondeGuias();
 				i3GEO.guias.guiaMovel.desativaIcones(0.5);
+				//nao tem conteudo para mostrar
+				if(!$i(i3GEO.guias.CONFIGURA[chave].idconteudo)){
+					return;
+				}
 				if (i3GEO.guias.ATUAL === chave && $i("i3GEOguiaMovelMolde").style.display === "block") {
 					i3GEO.guias.ATUAL = "";
 					i3GEO.guias.guiaMovel.desativaIcones(0.9);

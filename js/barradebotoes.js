@@ -935,7 +935,9 @@ i3GEO.barraDeBotoes =
 			divBarra.style.margin = "auto";
 			divBarra.style.marginLeft = "0px";
 			divBarra.style.textAlign = "center";
-			divBarra.style.width = i3GEO.parametros.w + "px";
+			//da um espaco para incluir o icone de dobra de pagina
+			divBarra.style.width = (i3GEO.parametros.w - 100) + "px";
+			divBarra.style.left = "50px";
 			divBarra.style.height = "0px";
 			//cria os icones
 			//l acumula a largura da barra de icones
