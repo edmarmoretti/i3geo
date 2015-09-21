@@ -94,6 +94,7 @@
 		<div id="iconeGuia_temas" ></div>
 		<div id="iconeGuia_adiciona" style="margin-top:3px;" ></div>
 		<div id="iconeGuia_legenda" style="margin-top:3px;"></div>
+		<div id="iconeGuia_dobraPagina" style="margin-top: 3px;"></div>
 	</div>
 
 	<!--
@@ -163,8 +164,7 @@
 			if ($i("i3GEOlogoMarca")) {
 				$i("i3GEOlogoMarca").style.display = "none";
 			}
-			i3GEO.mapa.insereDobraPagina("googlemaps",
-					"../imagens/dobragooglemaps.png");
+			//i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
 		};
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 		i3GEO.janela.TRANSICAOSUAVE = true;
@@ -185,7 +185,7 @@
 					attribution: attribStamen,
 					tileOptions: {crossOriginKeyword: "anonymous"}
 				});
-		
+
 			var toner = new OpenLayers.Layer.OSM("Toner",
 				"http://tile.stamen.com/toner/${z}/${x}/${y}.jpg", {
 					isBaseLayer : true,
@@ -193,7 +193,7 @@
 					attribution: attribStamen,
 					tileOptions: {crossOriginKeyword: "anonymous"}
 				});
-			
+
 			var tonerlite = new OpenLayers.Layer.OSM("Toner lite",
 				"http://tile.stamen.com/toner-lite/${z}/${x}/${y}.jpg", {
 					isBaseLayer : true,
@@ -201,7 +201,7 @@
 					attribution: attribStamen,
 					tileOptions: {crossOriginKeyword: "anonymous"}
 				});
-			
+
 			var osm = new OpenLayers.Layer.OSM("OSM",
 					"http://tile.openstreetmap.org/${z}/${x}/${y}.png", {
 						isBaseLayer : true,
@@ -209,13 +209,13 @@
 						attribution: attribOSMData,
 						tileOptions: {crossOriginKeyword: "anonymous"}
 					});
-			
+
 			var arrayMapQuestAerial = ["http://oatile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg",
 				"http://oatile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg",
 				"http://oatile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg",
 				"http://oatile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg"
 			];
-	
+
 			var layMapQuestAerial = new OpenLayers.Layer.OSM("MapQuest Open Aerial", arrayMapQuestAerial,{
 				displayOutsideMaxExtent: true,
 				attribution: attribMapQuestAerial,

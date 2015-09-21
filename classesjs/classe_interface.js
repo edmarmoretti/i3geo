@@ -242,6 +242,7 @@ i3GEO.Interface =
 		 * Troca o renderizador do mapa passando a usar a API do Google Maps
 		 */
 		atual2gm : {
+			insereIcone: true,
 			inicia : function() {
 				i3GEO.Interface.STATUS.trocando = true;
 				i3GEO.janela.ESTILOAGUARDE = "normal";
@@ -270,7 +271,9 @@ i3GEO.Interface =
 					i3GEO.janela.fechaAguarde("googleMapsAguarde");
 					i3GEO.arvoreDeCamadas.CAMADAS = [];
 					i3GEO.atualiza();
-					i3GEO.mapa.insereDobraPagina("openlayers", i3GEO.configura.locaplic + "/imagens/dobraopenlayers.png");
+					if(i3GEO.Interface.atual2gm.insereIcone === true){
+						i3GEO.mapa.insereDobraPagina("openlayers", i3GEO.configura.locaplic + "/imagens/dobraopenlayers.png");
+					}
 				};
 				i3GEO.php.converte2googlemaps(temp);
 			}
@@ -279,6 +282,7 @@ i3GEO.Interface =
 		 * Troca o renderizador do mapa passando a usar a API do Open Layers
 		 */
 		atual2ol : {
+			insereIcone: true,
 			inicia : function() {
 				i3GEO.Interface.STATUS.trocando = true;
 				i3GEO.janela.ESTILOAGUARDE = "normal";
@@ -302,7 +306,9 @@ i3GEO.Interface =
 					i3GEO.janela.fechaAguarde("OpenLayersAguarde");
 					i3GEO.arvoreDeCamadas.CAMADAS = [];
 					i3GEO.atualiza();
-					i3GEO.mapa.insereDobraPagina("googlemaps", i3GEO.configura.locaplic + "/imagens/dobragooglemaps.png");
+					if(i3GEO.Interface.atual2ol.insereIcone === true){
+						i3GEO.mapa.insereDobraPagina("googlemaps", i3GEO.configura.locaplic + "/imagens/dobragooglemaps.png");
+					}
 					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
 				};
 				i3GEO.php.converte2openlayers(temp);
@@ -559,7 +565,7 @@ i3GEO.Interface =
 			 * Indica se por padr&atilde;o ser&aacute; utilizado o modo de navega&ccedil;&atilde;o em tiles em todas as camadas do mapa
 			 *
 			 * Ao bloquear o modo tile, o cache de imagens n&atilde;o poder&aacute; ser realizado
-			 * 
+			 *
 			 * A configura&ccedil;&atilde;o de cada camada sobrep&otilde;e essa propriedade
 			 *
 			 * Tipo:
@@ -811,9 +817,9 @@ i3GEO.Interface =
 						fractionalZoom : false
 					};
 				}
-				
+
 				i3GEO.Interface.openlayers.parametrosMap.controls.push(new OpenLayers.Control.Attribution());
-				
+
 				i3geoOL = new OpenLayers.Map('openlayers', i3GEO.Interface.openlayers.parametrosMap);
 			},
 			/**
