@@ -290,8 +290,10 @@ i3GEO.guias =
 					i3GEO.Interface.atual2gm.insereIcone = false;
 					i3GEO.Interface.atual2ol.insereIcone = false;
 					if (i3GEO.Interface.ATUAL === "googlemaps") {
-						if (i3GeoMap.getStreetView().getVisible() === true) {
-							i3GeoMap.getStreetView().setVisible(false);
+						if (typeof i3GeoMap.getStreetView != "undefined"){
+							if(i3GeoMap.getStreetView().getVisible() === true) {
+								i3GeoMap.getStreetView().setVisible(false);
+							}
 						} else {
 							i3GEO.guias.CONFIGURA.dobraPagina.icone = "imagens/googlemaps.png";
 							i3GEO.Interface.atual2ol.inicia();
@@ -662,7 +664,9 @@ i3GEO.guias =
 		mostra : function(guia) {
 			// fecha o streetview
 			if (i3GEO.Interface.ATUAL === "googlemaps") {
-				i3GeoMap.getStreetView().setVisible(false);
+				if(typeof i3GeoMap.getStreetView != "undefined"){
+					i3GeoMap.getStreetView().setVisible(false);
+				}
 			}
 			var guias, nguias, g, temp, attributes, anim;
 			guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
