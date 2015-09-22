@@ -25,20 +25,5 @@ i3GEOadmin.atlas.dicionario = {
 		pt : "Atlas existentes:",
 		en : "",
 		es : ""
-	} ],
-    '' : [ {
-		pt : "Editar lista de sub-grupos",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "Editar lista de menus",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "&Aacute;rvore do cat&aacute;logo:",
-		en : "",
-		es : ""
 	} ]
 };
