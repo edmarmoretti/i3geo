@@ -21,6 +21,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/editormapfile.js"></script>
 <script src="../js/listatemas.js" type="text/javascript"></script>
 <script src="../js/editormapfile.js" type="text/javascript"></script>
 <script src="../js/editormapfile_classes.js" type="text/javascript"></script>
@@ -52,41 +53,31 @@ table.ygtvtable {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - mapfiles dos temas
+				{{{adminMapfile}}}
 				<img src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda" style="display: none">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						<p>Importante: a restri&ccedil;&atilde;o ao tema por meio da defini&ccedil;&atilde;o de grupos de usu&aacute;rios n&atilde;o bloqueia o acesso por meio de download, WMS, KML, etc. Para bloquear esse tipo de acesso &eacute; necess&aacute;rio alterar as op&ccedil;&otilde;es espec&iacute;ficas. Por padr&atilde;o, esses servi&ccedil;os s&atilde;o habilitados para qualquer usu&aacute;rio, n&atilde;o sendo poss&iacute;vel bloquear apenas para determinados grupos.
-						<p>Este formul&aacute;rio permite criar ou editar os arquivos mapfile que comp&otilde;em temas no i3geo.
-						<p>Os arquivo .map s&atilde;o armazenados no diretório i3geo/temas e podem tamb&eacute;m ser editados manualmente.
-						<p>Cada arquivo cont&eacute;m layers definidos conforme a sintaxe utilizada pelo Mapserver. Esses arquivos s&atilde;o as estruturas b&aacute;sicas utilizadas pelo i3geo na apresenta&ccedil;&atilde;o de dados e montagem das camadas que s&atilde;o vistas no mapa.
-						<p>Após criados os mapfiles, deve-se ainda definir as caracter&iacute;sticas de cada LAYER.
-						<p>A lista de IPs dos usu&aacute;rios que podem administrar o i3geo &eacute; definida no arquivo i3geo/ms_configura.php
-						<p>Apenas os mapfiles que forem vinculados a um tema poder&atilde;o ser vistos na janela de inclus&atilde;o de temas na &aacute;rvore de temas. Se voc&ecirc; criou um mapfile manualmente, utilize a op&ccedil;&atilde;o de edi&ccedil;&atilde;o (&iacute;cone apresentado ao lado de cada mapfile) para fazer essa associa&ccedil;&atilde;o.
-						<p>A op&ccedil;&atilde;o "Verifica temas sem mapfiles" possibilita resolver problemas decorrentes da elimina&ccedil;&atilde;o manual de um arquivo mapfile do servidor. Nesses casos, o registro no banco de dados permanece. Com essa op&ccedil;&atilde;o &eacute; poss&iacute;vel apagar os registros ou recriar o mapfile perdido.
+						{{{txtAjudaMapfile}}}
 					</div>
 					<div class="ft"></div>
 				</div>
-				<input onclick="" type=button id=adiciona value="Criar um novo mapfile" />
-				<input onclick="" type=button id=uploadGvsig value="Upload gvSIG" />
-				<input onclick="" type=button id=semmapfiles value="Verificar temas sem mapfiles" />
+				<input onclick="" type=button id=adiciona value="{{{criaMapfile}}}" />
+				<input onclick="" type=button id=uploadGvsig value="{{{upGvsig}}}" />
+				<input onclick="" type=button id=semmapfiles value="{{{semMapfile}}}" />
 
-				<p class=paragrafo>
-					Al&eacute;m de criar os mapfiles, &eacute; necess&aacute;rio definir as caracter&iacute;sticas de cada LAYER nas op&ccedil;&otilde;es abaixo. <br> Para incluir o tema nos menus,
-					<a href='arvore.html'>edite a &aacute;rvore de temas </a>
-				</p>
-				<p class=paragrafo>O texto marcado em cinza corresponde ao nome do tema registrados na &aacute;rvore de temas (registro no banco de dados). Nem todos os temas s&atilde;o utilizados na &aacute;rvore, por isso n&atilde;o necessitam ser associados a um 'tema' e registrados no banco de dados.</p>
+			{{{txtDesc}}}
 				<div id="letras"></div>
-				<p>Mapfiles (arquivos existentes no diret&oacute;rio i3geo/temas):</p>
+				{{{listaMapfile}}}
 				<div id="tabela" style="left: -5px;"></div>
 			</div>
 		</div>
 		<div id=logajax style="display: block"></div>
 		<div id=dialogoContinua style="display: block"></div>
 	</center>
+	</body>
 	<script>
 		/*
 		Title: Editor de mapfiles
@@ -133,9 +124,8 @@ table.ygtvtable {
 
 		i3geo/admin/html/editormapfile.html
 		 */
-	</script>
-
-	<script>
+		core_parseMustacheBody(i3GEOadmin.editormapfile.dicionario);
+	
 		if (i3GEO.util.pegaCookie("I3GEOletraAdmin")) {
 			letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
 		} else {
@@ -200,5 +190,5 @@ table.ygtvtable {
 				initMenu();
 			};
 		i3GEO.login.verificaOperacao("admin/html/editormapfile", i3GEO.configura.locaplic, temp, "sessao", i3GEO.login.dialogo.abreLogin);
+		
 	</script>
-</body>
