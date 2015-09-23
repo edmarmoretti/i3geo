@@ -1,13 +1,79 @@
 /*
-.olPopupCloseBox {
-background: url("img/edit-delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-cursor: pointer;
-padding: 3px;
-background-position: 7px 0px;
-margin-right: -5px;
-margin-top: -5px;
-}
+para nao selecionar
 */
+* {
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: -moz-none;
+-o-user-select: none;
+user-select: none;
+}
+input[type=text], textarea{
+-webkit-user-select: text;
+-khtml-user-select: text;
+-moz-user-select: text;
+-o-user-select: text;
+user-select: text;
+}
+/*
+Para nao marcar links
+*/
+a:active {
+outline: none;
+}
+/*
+Popup do identifica no openlayers 3
+*/
+.ol-popup {
+position: absolute;
+background-color: white;
+-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+padding: 8px;
+border-radius: 10px;
+border: 1px solid #cccccc;
+bottom: 12px;
+left: -50px;
+}
+.ol-popup:after, .ol-popup:before {
+top: 100%;
+border: solid transparent;
+content: " ";
+height: 0;
+width: 0;
+position: absolute;
+pointer-events: none;
+}
+.ol-popup:after {
+border-top-color: white;
+border-width: 10px;
+left: 48px;
+margin-left: -10px;
+}
+.ol-popup:before {
+border-top-color: #cccccc;
+border-width: 11px;
+left: 48px;
+margin-left: -11px;
+}
+.ol-popup-closer {
+text-decoration: none;
+position: absolute;
+top: 2px;
+right: 1px;
+cursor:pointer;
+}
+.ol-popup-closer:after {
+content: "\2716";
+color: red;
+font-size: 16px;
+}
+/*
+Ajusta altura dos controles do googlemaps
+*/
+div.gmnoprint {
+padding-top: 10px;
+}
 /*
 Utilizado na janela do buscador INDE
 */
@@ -15,6 +81,21 @@ Utilizado na janela do buscador INDE
 text-align: left;
 font-size: 12px;
 padding: 5px;
+}
+.mensagemAjuda {
+width:95%;
+padding:2;
+vertical-align:top;
+background-color:#ffffff;
+}
+.mensagemAjuda th {
+background-color: #cedff2;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size: 8pt;
+border: 1px solid #B1CDEB;
+text-align: left;
+padding-left: 7px;
+padding-right: 11px;
 }
 .botoesLegendaFlutuante {
 font-size: 10px;
@@ -89,6 +170,7 @@ margin: auto;
 text-align: left;
 cursor: pointer;
 top: -2px;
+font-weight : bold;
 }
 .i3GEOarvCamTemaIE {
 text-align: left;
@@ -218,22 +300,32 @@ width: 40px;
 border: 0px solid white;
 }
 .toolTipBalaoTitulo {
-text-decoration: underline;
+text-decoration: none;
 text-align: left;
 font-size: 8pt;
 font-weight: normal;
+margin-top: 8px;
+margin-bottom: 2px;
 }
 .toolTipBalaoTexto {
 text-align: left;
 font-size: 8pt;
 background-color: #E0E0E0;
 color: black;
+padding: 3px;
+-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+border-radius: 6px;
 }
 .toolTipBalaoTexto1 {
 text-align: left;
 font-size: 8pt;
-background-color: #F8F8F8;
+background-color: #e5e5e5;
 color: black;
+padding: 3px;
+-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+border-radius: 6px;
 }
 fieldset {
 text-align: left;
@@ -266,6 +358,13 @@ font-size: 12px;
 position: relative;
 top: 2px;
 border: 0px solid white;
+cursor: pointer;
+}
+.paragrafo input[type=radio] {
+position: relative;
+top: 3px;
+border: 0px solid white;
+cursor: pointer;
 }
 .lista td {
 border: 0px solid rgb(240, 240, 240);
@@ -899,7 +998,6 @@ width: 95%;
 #mostradistancia {
 z-index: 2600;
 color: red;
-background-color: white;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 10px;
 }
@@ -1129,10 +1227,10 @@ white-space: nowrap;
 text-overflow: ellipsis;
 font-size: 12px;
 appearance: none;
-background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 6px;
+background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
-background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 6px;
+background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
 background-size: 16px 144px;
 }
 }
@@ -1232,6 +1330,18 @@ border: 1px solid black
 /* esconde na impressao */
 @media print {
 .noprint {
+display: none !important;
+}
+.yui-skin-sam .yui-panel .hd {
+display: none !important;
+}
+.yui-skin-sam .yui-panel .ft {
+display: none !important;
+}
+.yui-navset {
+display: none !important;
+}
+.yui-skin-sam .yui-button {
 display: none !important;
 }
 .yuimenubar {
@@ -2372,6 +2482,10 @@ background-image: URL('../imagens/oxygen/16x16/text-mathml.png');
 }
 .i3GEOiconeTme {
 background-image: URL('../imagens/3d.png');
+background-size: 16px;
+}
+.i3GEOiconeStorymap {
+background-image: URL('../imagens/oxygen/16x16/kmplayer.png');
 background-size: 16px;
 }
 .i3GEOiconeAdd {

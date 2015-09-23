@@ -19,15 +19,27 @@ para o campo escala e coordenadas
 /*
 Barra de botoes de edicao vetorial do openlayers
 */
+
+/*
+no caso do OL3
+*/
+.ol-overlaycontainer-stopevent .olControlEditingToolbar1  {
+	left: auto;
+	position: absolute;
+	right: 0;
+	top: 10px;
+}
+
 .olControlEditingToolbar1 div {
-	background-image:url(../mashups/openlayers.png);
-	background-repeat:no-repeat;
-	float:right;
-	right: 0px;
-	height:29px;
-	margin:2px;
-	width:29px;
-	cursor:pointer;
+	background-image: url(../mashups/openlayers.png);
+	background-repeat: no-repeat;
+	float: right;
+	right: 50px;
+	height: 29px;
+	margin: 2px;
+	width: 29px;
+	cursor: pointer;
+	top: 10px;
 }
 /*
 Estilo geral do rodape da pagina que contem a barra de escala, coordenadas, etc

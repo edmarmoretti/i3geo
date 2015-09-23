@@ -116,8 +116,8 @@ packer("interface.js","compactados/interface_compacto.js","Normal");
 packer("ini_i3geo.js","compactados/ini_i3geo_compacto.js","Normal");
 packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal");
 packer("social.js","compactados/social_compacto.js","Normal");
-packer("editorol.js","compactados/editorol_compacto.js","Normal");
-packer("editorgm.js","compactados/editorgm_compacto.js","Normal");
+packer("../ferramentas/editorol/editorol.js","../ferramentas/editorol/editorol_compacto.js","Normal");
+packer("../ferramentas/editorgm/editorgm.js","../ferramentas/editorgm/editorgm_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container.js","../pacotes/yui290/build/container/container_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container_core.js","../pacotes/yui290/build/container/container_core_compacto.js","Normal");
 packer("../pacotes/yui290/build/utilities/utilities.js","../pacotes/yui290/build/utilities/utilities_compacto.js","Normal");
@@ -279,7 +279,7 @@ $jsfiles = array(
 "../pacotes/openlayers/OpenLayers2131.js",
 "../js/compactados/desenho_compacto.js",
 "../js/compactados/janela_compacto.js",
-"../js/compactados/editorol_compacto.js",
+"../ferramentas/editorol/editorol_compacto.js",
 "compactados/dicionario_compacto.js",
 "compactados/idioma_compacto.js",
 "compactados/configura_compacto.js",

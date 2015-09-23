@@ -514,15 +514,7 @@ i3GEO.analise =
 			 */
 			openlayers : {
 				draw : "",
-				estilo: new ol.style.Style({
-					stroke: new ol.style.Stroke({
-						color: '#ffcc33',
-						width: 5
-					}),
-					fill: new ol.style.Fill({
-						  color: 'rgba(255, 153, 0, 0.8)'
-					})
-				}),
+				estilo: "",
 				featureListener : null,
 				//numero de pontos da geometria atual
 				//utilizado para saber se houve um clique ou nao
@@ -536,6 +528,16 @@ i3GEO.analise =
 				 * layer para receber os graficos
 				 */
 				inicia : function() {
+					i3GEO.analise.medeDistancia.openlayers.estilo = 
+						new ol.style.Style({
+							stroke: new ol.style.Stroke({
+								color: '#ffcc33',
+								width: 5
+							}),
+							fill: new ol.style.Fill({
+								  color: 'rgba(255, 153, 0, 0.8)'
+							})
+						});
 					var m = i3GEO.analise.medeDistancia.openlayers;
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 					m.removeControle();
@@ -1131,15 +1133,7 @@ i3GEO.analise =
 			 */
 			openlayers : {
 				draw : "",
-				estilo: new ol.style.Style({
-					stroke: new ol.style.Stroke({
-						color: '#ffcc33',
-						width: 5
-					}),
-					fill: new ol.style.Fill({
-						  color: 'rgba(255, 153, 0, 0.8)'
-					})
-				}),
+				estilo: "",
 				featureListener : null,
 				//numero de pontos da geometria atual
 				//utilizado para saber se houve um clique ou nao
@@ -1154,6 +1148,16 @@ i3GEO.analise =
 				 */
 				inicia : function() {
 					var m = i3GEO.analise.medeArea.openlayers;
+					i3GEO.analise.openlayers.medeArea.estilo = new ol.style.Style({
+						stroke: new ol.style.Stroke({
+							color: '#ffcc33',
+							width: 5
+						}),
+						fill: new ol.style.Fill({
+							  color: 'rgba(255, 153, 0, 0.8)'
+						})
+					});
+					
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 					m.removeControle();
 					m.draw = new ol.interaction.Draw({

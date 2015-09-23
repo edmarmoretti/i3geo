@@ -1726,7 +1726,7 @@ i3GEO.barraDeBotoes =
 					// @TODO incluir o js compactado ao inves do original
 					if (!i3GEO.editorGM) {
 						i3GEO.util.scriptTag(
-							i3GEO.configura.locaplic + "/classesjs/compactados/classe_editorgm_compacto.js",
+							i3GEO.configura.locaplic + "/ferramentas/editorgm/editorgm_compacto.js",
 							temp,
 							"editorgm.js",
 							true);
@@ -1739,8 +1739,9 @@ i3GEO.barraDeBotoes =
 				inicia : function(idjanela) {
 					//TODO mudar carga do JS do editor para o compactado
 					if (!i3GEO.editorOL) {
+						//a barra de botoes utiliza codigo do Opelayers2
 						i3GEO.util.scriptTag(
-							i3GEO.configura.locaplic + "/js/editorol.js",
+							i3GEO.configura.locaplic + "/ferramentas/editorol/editorol.js",
 							"i3GEO.barraDeBotoes.editor.openlayers.ativaPainel('" + idjanela + "')",
 							"editorol.js",
 							true);
@@ -1787,7 +1788,6 @@ i3GEO.barraDeBotoes =
 					return divid;
 				},
 				ativaPainel : function(idjanela) {
-					//OpenLayers.ImgPath = i3GEO.configura.locaplic + "/pacotes/openlayers/img/";
 					i3GEO.editorOL.fundo = "";// i3GEO.editorOL &eacute; criado pelo script carregado
 					i3GEO.editorOL.mapa = i3geoOL;
 					i3GEO.editorOL.maxext = "";

@@ -547,28 +547,19 @@ i3GEO.Interface =
 			/**
 			 * Propriedade: interacoes
 			 *
-			 * Interacoes default utilizadas no mapa.
+			 * Interacoes utilizadas no mapa.
 			 *
 			 * http://openlayers.org/en/v3.4.0/apidoc/ol.interaction.Interaction.html?unstable=true
 			 *
 			 * Parametros do objeto Map.options.interactions do OpenLayers
+			 * 
+			 * Se for um array vazio, as interacoes default sao adicionadas na funcao de i3GEO.Interface.openlayers.cria
 			 *
 			 * Tipo:
 			 *
 			 * {array}
 			 */
-			interacoes : [
-				new ol.interaction.DoubleClickZoom(),
-				new ol.interaction.KeyboardPan(),
-				new ol.interaction.KeyboardZoom(),
-				new ol.interaction.MouseWheelZoom(),
-				new ol.interaction.PinchRotate(),
-				new ol.interaction.PinchZoom(),
-				new ol.interaction.DragZoom(),
-				// FIXME alt nao funciona
-				// new ol.interaction.DragRotateAndZoom({condition : ol.events.condition.altKeyOnly}),
-				new ol.interaction.DragPan()
-			],
+			interacoes : [],
 			/**
 			 * Propriedade: FUNDOTEMA
 			 *
@@ -843,6 +834,20 @@ i3GEO.Interface =
 			cria : function(w, h) {
 				var f, ins, i = $i(i3GEO.Interface.IDCORPO);
 
+				if(i3GEO.Interface.openlayers.interacoes.length === 0){
+					i3GEO.Interface.openlayers.interacoes = [
+						new ol.interaction.DoubleClickZoom(),
+						new ol.interaction.KeyboardPan(),
+						new ol.interaction.KeyboardZoom(),
+						new ol.interaction.MouseWheelZoom(),
+						new ol.interaction.PinchRotate(),
+						new ol.interaction.PinchZoom(),
+						new ol.interaction.DragZoom(),
+						// FIXME alt nao funciona
+						// new ol.interaction.DragRotateAndZoom({condition : ol.events.condition.altKeyOnly}),
+						new ol.interaction.DragPan()
+					];
+				}
 				if (i) {
 					f = $i("openlayers");
 					if (!f) {
