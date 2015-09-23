@@ -15,6 +15,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/estat_tipo_periodo.js"></script>
 <script type="text/javascript" src="../js/estat_tipo_periodo.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
@@ -23,21 +24,19 @@ body {
 	<div class="mascaraPrincipal" id="divGeral">
 		<div id=cabecalhoPrincipal></div>
 		<h1>
-			Metadados estat&iacute;sticos - Unidades de medida <img
+			{{{estatTipoPeriodo}}} <img
 				src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 		</h1>
 		<div id="formulario" style="display: none">
 			<div id="ajuda" style="display: none">
-				<div class="hd">Ajuda</div>
+				<div class="hd">{{{ajuda}}}</div>
 				<div class="bd" style="height: 144px; overflow: auto">
-					<p>Este formul&aacute;rio permite editar a lista de
-						per&iacute;odos de tempo que s&atilde;o mostradas nos
-						formul&aacute;rios do sistema de metadados estat&iacute;sticos
+					{{{txtAjuda}}}
 				</div>
 				<div class="ft"></div>
 			</div>
 			<br> <input type=button id=adicionaNovaLinha
-				value="Adicionar um novo registro" style="left: -5px;" />
+				value="{{{adicionaRegistro}}}" style="left: -5px;" />
 			<div id="letras" ></div><br>
 			<div id="tabela" style="left: -5px;"></div>
 		</div>
@@ -78,6 +77,7 @@ body {
 		i3GEO.configura = {
 			locaplic : "../.."
 		};
+		core_parseMustacheBody(i3GEOadmin.estat_tipo_periodo.dicionario);
 		cabecalhoMetaestat("cabecalhoPrincipal", "periodo_tempo");
 
 		temp = function() {
