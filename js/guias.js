@@ -286,6 +286,14 @@ i3GEO.guias =
 				titulo : $trad("trocaInterface"),
 				id : "guia6",
 				idconteudo : "",
+				inicializa : function(){
+					if (i3GEO.Interface.ATUAL === "googlemaps") {
+						i3GEO.guias.CONFIGURA.dobraPagina.icone = "imagens/openlayers.png";
+					}
+					else{
+						i3GEO.guias.CONFIGURA.dobraPagina.icone = "imagens/googlemaps.png";
+					}
+				},
 				click : function() {
 					i3GEO.Interface.atual2gm.insereIcone = false;
 					i3GEO.Interface.atual2ol.insereIcone = false;
@@ -294,14 +302,13 @@ i3GEO.guias =
 							if(i3GeoMap.getStreetView().getVisible() === true) {
 								i3GeoMap.getStreetView().setVisible(false);
 							}
-						} else {
-							i3GEO.guias.CONFIGURA.dobraPagina.icone = "imagens/googlemaps.png";
-							i3GEO.Interface.atual2ol.inicia();
 						}
+						i3GEO.Interface.atual2ol.inicia();
+						i3GEO.guias.CONFIGURA.dobraPagina.icone = "imagens/googlemaps.png";
 					}
 					if (i3GEO.Interface.ATUAL === "openlayers") {
-						i3GEO.guias.CONFIGURA.dobraPagina.icone = "imagens/openlayers.png";
 						i3GEO.Interface.atual2gm.inicia();
+						i3GEO.guias.CONFIGURA.dobraPagina.icone = "imagens/openlayers.png";
 					}
 					$i("guia6").src = i3GEO.configura.locaplic + "/" + i3GEO.guias.CONFIGURA.dobraPagina.icone;
 				}
@@ -381,6 +388,13 @@ i3GEO.guias =
 			//
 			var nguiasreal = 0, guiaconteudo, id, guia, g, re, ng, tituloguia, i, ins, altura, temp, CONFIGURA = i3GEO.guias.CONFIGURA, guias =
 				i3GEO.util.listaChaves(CONFIGURA), nguias = guias.length;
+			
+			//roda a funcao de inicializacao se existir
+			for (ng = 0; ng < 20; ng++) {
+				if(i3GEO.guias.CONFIGURA[guias[ng]] && i3GEO.guias.CONFIGURA[guias[ng]].inicializa){
+					i3GEO.guias.CONFIGURA[guias[ng]].inicializa.call();
+				}
+			}
 			//
 			// no caso de TIPO === "movel", as guias n&atilde;o s&atilde;o
 			// constru&iacute;das de imediato, apenas &eacute; criado um objeto
