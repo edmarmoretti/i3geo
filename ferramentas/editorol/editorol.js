@@ -165,6 +165,8 @@ i3GEO.editorOL =
 		fundo : "e_ims,e_wsm,ol_mma,ol_wms,top_wms",
 		kml : [],
 		layersIniciais : [],
+		//essa configuracao dos botoes afeta apenas o mashup
+		//para a configuração do editor dentro de um mapa normal, veja i3GEO.barraDebotoes.editor.ativaPainel()
 		botoes : {
 			'pan' : true,
 			'zoombox' : true,
@@ -359,10 +361,11 @@ i3GEO.editorOL =
 			i3GEO.desenho.openlayers.criaLayerGrafico();
 		},
 		layersLigados : function() {
-			var layers = i3GEO.editorOL.mapa.layers, nlayers = layers.length, ins = [], i;
+			var l, layers = i3GEO.editorOL.mapa.getLayers(), nlayers = layers.getLength(), ins = [], i;
 			for (i = 0; i < nlayers; i++) {
-				if (layers[i].visibility === true) {
-					ins.push(layers[i]);
+				l = layers.item(i);
+				if (l.getVisible() === true) {
+					ins.push(l);
 				}
 			}
 			return ins;
@@ -668,13 +671,15 @@ i3GEO.editorOL =
 			i3GEO.editorOL.mapa.zoomToExtent(b);
 		},
 		mostraLegenda : function() {
+			//TODO testar no mashup
 			var layers = i3GEO.editorOL.layersLigados(), nlayers = layers.length, ins = "", i, icone = "", url, fers, f = "", fer = "";
 			for (i = 0; i < nlayers; i++) {
 				try {
-					if (layers[i].isBaseLayer === false) {
+					if (layers[i].get("isBaseLayer") === false) {
 						url = layers[i].getFullRequestString({
 							"request" : "getlegendgraphic"
 						});
+						//i3GEO.editorOL.mapa.getLayers().item(0).getSource().getUrls()[0]
 						icone = "";
 						if (i3GEO.editorOL.legendahtml === true) {
 							// os parametros FORMAT e SERVICE sao inseridos de forma redundante para grantir
@@ -1015,236 +1020,90 @@ i3GEO.editorOL =
 				i3GEOpanelEditor.appendChild(temp);
 				largura += 30;
 			}
+			if (botoes.pan === true) {
+				temp = document.createElement("div");
+				temp.className = "editorOLpanItemInactive olButton";
+				temp.title = "pan";
+				temp.onclick = function(){
+				};
+				i3GEOpanelEditor.appendChild(temp);
+				largura += 30;
+			}
+			if (botoes.zoombox === true) {
+				temp = document.createElement("div");
+				temp.className = "editorOLzoomboxItemInactive olButton";
+				temp.title = "zoombox";
+				temp.onclick = i3GEO.barraDeBotoes.defBotao("zoomli").funcaoonclick;
+				i3GEOpanelEditor.appendChild(temp);
+				largura += 30;
+			}
+			if (botoes.zoomtot === true) {
+				temp = document.createElement("div");
+				temp.className = "editorOLzoomtotItemInactive olButton";
+				temp.title = $trad("d2t");
+				temp.onclick = function(){
+					if (i3GEO.editorOL.mapext && i3GEO.editorOL.mapext != "") {
+						i3GEO.Interface.openlayers.zoom2ext(i3GEO.editorOL.mapext.join(" "));
+					} else {
+						i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.extentTotal);
+					}
+				};
+				i3GEOpanelEditor.appendChild(temp);
+				largura += 30;
+			}
+			if (botoes.zoomin === true) {
+				temp = document.createElement("div");
+				temp.className = "editorOLzoominItemInactive olButton";
+				temp.title = $trad("d5t");
+				temp.onclick = function(){
+					var v = i3GEO.editorOL.mapa.getView();
+					v.setZoom(v.getZoom() + 1);
+				};
+				i3GEOpanelEditor.appendChild(temp);
+				largura += 30;
+			}
+			if (botoes.zoomout === true) {
+				temp = document.createElement("div");
+				temp.className = "editorOLzoomoutItemInactive olButton";
+				temp.title = $trad("d5t");
+				temp.onclick = function(){
+					var v = i3GEO.editorOL.mapa.getView();
+					v.setZoom(v.getZoom() - 1);
+				};
+				i3GEOpanelEditor.appendChild(temp);
+				largura += 30;
+			}
+			if (botoes.legenda === true) {
+				temp = document.createElement("div");
+				temp.className = "editorOLlegendaItemInactive olButton";
+				temp.title = $trad("p3");
+				temp.onclick = function(){
+					i3GEO.editorOL.mostraLegenda();
+				};
+				i3GEOpanelEditor.appendChild(temp);
+				largura += 30;
+			}
+			if (botoes.distancia === true) {
+				temp = document.createElement("div");
+				temp.className = "editorOLdistanciaItemInactive olButton";
+				temp.title = $trad("d21t");
+				temp.onclick = i3GEO.barraDeBotoes.defBotao("mede").funcaoonclick;
+				i3GEOpanelEditor.appendChild(temp);
+				largura += 30;
+			}
+			if (botoes.area === true) {
+				temp = document.createElement("div");
+				temp.className = "editorOLareaItemInactive olButton";
+				temp.title = $trad("d21at");
+				temp.onclick = i3GEO.barraDeBotoes.defBotao("area").funcaoonclick;
+				i3GEOpanelEditor.appendChild(temp);
+				largura += 30;
+			}
 			i3GEOpanelEditor.style.width = largura + "px";
-			//i3GEO.editorOL.mapa.getTargetElement().appendChild(i3GEOpanelEditor);
-			//i3GEO.editorOL.mapa.getViewport().appendChild(i3GEOpanelEditor);
 			i3GEO.editorOL.mapa.getViewport().getElementsByClassName("ol-overlaycontainer-stopevent")[0].appendChild(i3GEOpanelEditor);
 
 			/*
-			i3GEOpanelEditor = new OpenLayers.Control.Panel({
-				displayClass : "olControlEditingToolbar1 noprint",
-				saveState : false,
-				activateControl : function(c) {
-					this.deactivate();
-					this.activate();
-					try {
-						i3GEO.editorOL.ModifyFeature.deactivate();
-						if (i3GEO && i3GEO.barraDeBotoes) {
-							i3GEO.barraDeBotoes.ativaPadrao();
-						}
-					} catch (e) {
-					}
-					if (!c.trigger) {
-						c.activate();
-					} else {
-						c.trigger.call();
-					}
-				}
-			});
-			if (botoes.procura === false) {
-				button = new OpenLayers.Control.Button({
-					displayClass : "editorOLprocura",
-					trigger : function() {
-						YAHOO.procura.container.panel.show();
-					},
-					title : $trad("t23"),
-					type : OpenLayers.Control.TYPE_BUTTON
-				});
-				controles.push(button);
-				adiciona = true;
-			}
-			if (botoes.pan === true) {
-				controles.push(new OpenLayers.Control.Navigation({
-					title : "pan",
-					displayClass : "editorOLpan",
-					type : OpenLayers.Control.TYPE_TOOL
-				}));
-				adiciona = true;
-			}
-			if (botoes.zoombox === true) {
-				controles.push(new OpenLayers.Control.ZoomBox({
-					title : "zoombox",
-					displayClass : "editorOLzoombox",
-					type : OpenLayers.Control.TYPE_TOOL
-				}));
-				adiciona = true;
-			}
-			if (botoes.zoomtot === true) {
-				button = new OpenLayers.Control.Button({
-					displayClass : "editorOLzoomtot",
-					trigger : function() {
-						if (i3GEO.editorOL.mapext && i3GEO.editorOL.mapext != "") {
-							i3GEO.editorOL.mapa.zoomToExtent(i3GEO.editorOL.mapext);
-						} else {
-							i3GEO.editorOL.mapa.zoomToMaxExtent();
-						}
-					},
-					title : $trad("d2t"),
-					type : OpenLayers.Control.TYPE_BUTTON
-				});
-				controles.push(button);
-				adiciona = true;
-			}
-			if (botoes.zoomin === true) {
-				button = new OpenLayers.Control.Button({
-					displayClass : "editorOLzoomin",
-					trigger : function() {
-						i3GEO.editorOL.mapa.zoomIn();
-					},
-					title : $trad("d5t"),
-					type : OpenLayers.Control.TYPE_BUTTON
-				});
-				controles.push(button);
-				adiciona = true;
-			}
-			if (botoes.zoomout === true) {
-				button = new OpenLayers.Control.Button({
-					displayClass : "editorOLzoomout",
-					trigger : function() {
-						i3GEO.editorOL.mapa.zoomOut();
-					},
-					title : $trad("d6t"),
-					type : OpenLayers.Control.TYPE_BUTTON
-				});
-				controles.push(button);
-				adiciona = true;
-			}
-			if (botoes.legenda === true) {
-				button = new OpenLayers.Control.Button({
-					displayClass : "editorOLlegenda",
-					trigger : function() {
-						i3GEO.editorOL.mostraLegenda();
-					},
-					title : $trad("p3"),
-					type : OpenLayers.Control.TYPE_BUTTON
-				});
-				controles.push(button);
-				adiciona = true;
-			}
-			if (botoes.distancia === true) {
-				button = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {
-					handlerOptions : {
-						layerOptions : {
-							styleMap : styleMap
-						}
-					},
-					persist : true,
-					displayClass : "editorOLdistancia",
-					title : $trad("d21t"),
-					type : OpenLayers.Control.TYPE_TOOL
-				});
-				button.events.on({
-					"measure" : function(event) {
-						var units = event.units, measure = event.measure;
-						alert($trad("d21t") + ": " + measure.toFixed(3) + " " + units);
-					}
-				});
-				controles.push(button);
-				adiciona = true;
-			}
-			if (botoes.area === true) {
-				button = new OpenLayers.Control.Measure(OpenLayers.Handler.Polygon, {
-					handlerOptions : {
-						layerOptions : {
-							styleMap : styleMap
-						}
-					},
-					persist : true,
-					displayClass : "editorOLarea",
-					title : $trad("d21at"),
-					type : OpenLayers.Control.TYPE_TOOL
-				});
-				button.events.on({
-					"measure" : function(event) {
-						var units = event.units;
-						var measure = event.measure;
-						alert($trad("d21at") + ": " + measure.toFixed(3) + " " + units + "2");
-					}
-				});
-				controles.push(button);
-				adiciona = true;
-			}
-			if (botoes.identifica === true) {
-				//TODO incluir codigo ol3
-				
-				botaoIdentifica =
-					new OpenLayers.Control.WMSGetFeatureInfo(
-						{
-							maxFeatures : 1,
-							infoFormat : 'text/plain', // 'application/vnd.ogc.gml',
-							layers : [
-								i3GEO.editorOL.layerAtivo()
-							],
-							queryVisible : true,
-							title : $trad("d7t"),
-							type : OpenLayers.Control.TYPE_TOOL,
-							displayClass : "editorOLidentifica",
-							eventListeners : {
-								getfeatureinfo : function(event) {
-									var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy), lonlattexto = "<hr>", formata;
-									if (botoes.linha === true || botoes.ponto === true || botoes.poligono === true || botoes.edita === true) {
-										lonlattexto +=
-											"<pre><span style=font-size:12px;color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\"" + lonlat.lon
-												+ ","
-												+ lonlat.lat
-												+ "\")'>edita geometria</span></pre><br>";
-									}
-									formata = function(texto) {
-										var temp, temp1, n, i, f = [], textoN = texto.split(":");
-										try {
-											if (textoN.length > 1) {
-												temp = textoN[2].replace(/\n\r/g, "");
-												temp = temp.replace(/'/g, "");
-												temp = temp.replace(/\n/g, "|");
-												temp = temp.replace(/_/g, " ");
-												temp = temp.replace(/=/g, ":");
-												temp = temp.split("|");
-												n = temp.length;
-												for (i = 0; i < n; i++) {
-													temp1 = temp[i].replace(/^\s+/, "");
-													temp1 = temp1.replace(/\s+$/, "");
-													if (temp1 != "")
-														f.push(temp1);
-												}
-												texto = f.join("<br><br>");
-											}
-										} catch (e) {
-										}
-										return texto;
-									};
-									i3GEO.editorOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud("chicken", i3GEO.editorOL.mapa
-										.getLonLatFromPixel(event.xy), null, "<div style=text-align:left >" + lonlattexto
-										+ "<pre>"
-										+ formata(event.text)
-										+ "</pre></div>", null, true));
-									i3GEO.editorOL.removeClone();
-								},
-								beforegetfeatureinfo : function(event) {
-									var ativo = [
-										i3GEO.editorOL.layerAtivo()
-									];
-									// se for TMS tem de pegar o clone wms
-									if (ativo[0].serviceVersion === "&tms=" || ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS"
-										|| ativo[0].CLASS_NAME == "OpenLayers.Layer.OSM") {
-										ativo = [
-											i3GEO.editorOL.layertms2wms(ativo[0])
-										];
-									}
-									ativo[0].projection = new OpenLayers.Projection("EPSG:4326");
-									event.object.layers = ativo;
-									botaoIdentifica.layers = ativo;
-									botaoIdentifica.url = ativo[0].url;
-								},
-								activate : function() {
-									i3GEO.editorOL.criaJanelaAtivaTema();
-								}
-							}
-						});
-				// button.events.register("getfeatureinfo", this, showInfo);
-				controles.push(botaoIdentifica);
-				adiciona = true;
-				
-			}
+
 			if (botoes.linha === true) {
 				
 				button = new OpenLayers.Control.DrawFeature(i3GEO.desenho.layergrafico, OpenLayers.Handler.Path, {
@@ -1669,6 +1528,88 @@ i3GEO.editorOL =
 				adiciona = true;
 				
 			}
+			if (botoes.identifica === true) {
+				//TODO incluir codigo ol3
+				
+				botaoIdentifica =
+					new OpenLayers.Control.WMSGetFeatureInfo(
+						{
+							maxFeatures : 1,
+							infoFormat : 'text/plain', // 'application/vnd.ogc.gml',
+							layers : [
+								i3GEO.editorOL.layerAtivo()
+							],
+							queryVisible : true,
+							title : $trad("d7t"),
+							type : OpenLayers.Control.TYPE_TOOL,
+							displayClass : "editorOLidentifica",
+							eventListeners : {
+								getfeatureinfo : function(event) {
+									var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy), lonlattexto = "<hr>", formata;
+									if (botoes.linha === true || botoes.ponto === true || botoes.poligono === true || botoes.edita === true) {
+										lonlattexto +=
+											"<pre><span style=font-size:12px;color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\"" + lonlat.lon
+												+ ","
+												+ lonlat.lat
+												+ "\")'>edita geometria</span></pre><br>";
+									}
+									formata = function(texto) {
+										var temp, temp1, n, i, f = [], textoN = texto.split(":");
+										try {
+											if (textoN.length > 1) {
+												temp = textoN[2].replace(/\n\r/g, "");
+												temp = temp.replace(/'/g, "");
+												temp = temp.replace(/\n/g, "|");
+												temp = temp.replace(/_/g, " ");
+												temp = temp.replace(/=/g, ":");
+												temp = temp.split("|");
+												n = temp.length;
+												for (i = 0; i < n; i++) {
+													temp1 = temp[i].replace(/^\s+/, "");
+													temp1 = temp1.replace(/\s+$/, "");
+													if (temp1 != "")
+														f.push(temp1);
+												}
+												texto = f.join("<br><br>");
+											}
+										} catch (e) {
+										}
+										return texto;
+									};
+									i3GEO.editorOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud("chicken", i3GEO.editorOL.mapa
+										.getLonLatFromPixel(event.xy), null, "<div style=text-align:left >" + lonlattexto
+										+ "<pre>"
+										+ formata(event.text)
+										+ "</pre></div>", null, true));
+									i3GEO.editorOL.removeClone();
+								},
+								beforegetfeatureinfo : function(event) {
+									var ativo = [
+										i3GEO.editorOL.layerAtivo()
+									];
+									// se for TMS tem de pegar o clone wms
+									if (ativo[0].serviceVersion === "&tms=" || ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS"
+										|| ativo[0].CLASS_NAME == "OpenLayers.Layer.OSM") {
+										ativo = [
+											i3GEO.editorOL.layertms2wms(ativo[0])
+										];
+									}
+									ativo[0].projection = new OpenLayers.Projection("EPSG:4326");
+									event.object.layers = ativo;
+									botaoIdentifica.layers = ativo;
+									botaoIdentifica.url = ativo[0].url;
+								},
+								activate : function() {
+									i3GEO.editorOL.criaJanelaAtivaTema();
+								}
+							}
+						});
+				// button.events.register("getfeatureinfo", this, showInfo);
+				controles.push(botaoIdentifica);
+				adiciona = true;
+				
+			}
+
 			//
 			// controle que permite o snap
 			//

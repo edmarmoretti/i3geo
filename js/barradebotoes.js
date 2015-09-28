@@ -944,7 +944,6 @@ i3GEO.barraDeBotoes =
 			l = 0;
 			for (i = 0; i < n; i += 1) {
 				if (chaves[i] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] && i3GEO.barraDeBotoes.INCLUIBOTAO[chaves[i]] === true) {
-
 					botao = i3GEO.barraDeBotoes.defBotao(chaves[i]);
 					if (botao === false || i3GEO.barraDeBotoes.AJUDA === false) {
 						titulo = "";
@@ -1793,12 +1792,14 @@ i3GEO.barraDeBotoes =
 					i3GEO.editorOL.maxext = "";
 					i3GEO.editorOL.controles = [];
 					i3GEO.editorOL.botoes = {
-						'pan' : false,
-						'zoombox' : false,
-						'zoomtot' : false,
-						'legenda' : false,
-						'distancia' : false,
-						'area' : false,
+						'zoomin' : true,
+						'zoomout' : true,
+						'pan' : true,
+						'zoombox' : true,
+						'zoomtot' : true,
+						'legenda' : true,
+						'distancia' : true,
+						'area' : true,
 						'identifica' : true,
 						'linha' : true,
 						'ponto' : true,

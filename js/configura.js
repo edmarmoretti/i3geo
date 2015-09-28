@@ -1240,12 +1240,6 @@ i3GEO.configura =
 							i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.extentTotal);
 							return;
 						}
-						i3GEO.navega.zoomExt(
-							i3GEO.configura.locaplic,
-							i3GEO.configura.sid,
-							i3GEO.configura.tipoimagem,
-							i3GEO.parametros.extentTotal);
-						marcadorZoom = "";
 					}
 				},
 				{
@@ -1297,12 +1291,10 @@ i3GEO.configura =
 								draggable : true
 							});
 							i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
-							return;
 						}
 						if (i3GEO.Interface.ATUAL === "openlayers") {
-							i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
+							//i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 							// i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLzoom);
-							return;
 						}
 					}
 				},

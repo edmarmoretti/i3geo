@@ -1148,7 +1148,7 @@ i3GEO.analise =
 				 */
 				inicia : function() {
 					var m = i3GEO.analise.medeArea.openlayers;
-					i3GEO.analise.openlayers.medeArea.estilo = new ol.style.Style({
+					m.estilo = new ol.style.Style({
 						stroke: new ol.style.Stroke({
 							color: '#ffcc33',
 							width: 5
@@ -1157,7 +1157,6 @@ i3GEO.analise =
 							  color: 'rgba(255, 153, 0, 0.8)'
 						})
 					});
-					
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 					m.removeControle();
 					m.draw = new ol.interaction.Draw({
