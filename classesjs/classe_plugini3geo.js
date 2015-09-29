@@ -122,6 +122,7 @@ i3GEO.pluginI3geo =
 		removeCamada : function(nomecamada) {
 			if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada) {
 				i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada();
+				i3GEO.pluginI3geo.OBJETOS[nomecamada] = false;
 				delete (i3GEO.pluginI3geo.OBJETOS[nomecamada]);
 				return true;
 			}

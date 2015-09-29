@@ -184,7 +184,7 @@ HeatmapOverlay.prototype.destroy = function() {
 		e.parentNode.removeChild(e);
 	}
 	google.maps.event.removeListener(this.eventoDraw);
-	this.delete();
+	//this.delete();
 	
 };
 HeatmapOverlay.prototype.toggle = function() {
