@@ -121,9 +121,11 @@ i3GEO.pluginI3geo =
 		},
 		removeCamada : function(nomecamada) {
 			if (i3GEO.pluginI3geo.OBJETOS[nomecamada] && i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada) {
-				i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada();
-				i3GEO.pluginI3geo.OBJETOS[nomecamada] = false;
-				delete (i3GEO.pluginI3geo.OBJETOS[nomecamada]);
+				try{
+					i3GEO.pluginI3geo.OBJETOS[nomecamada].removeCamada();
+					delete (i3GEO.pluginI3geo.OBJETOS[nomecamada]);
+				}
+				catch(e){}
 				return true;
 			}
 			return false;

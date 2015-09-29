@@ -30,17 +30,17 @@ OpenLayers.Layer.Heatmap = OpenLayers.Class(OpenLayers.Layer, {
 		// add to our heatmap.js config
 		hmoptions.element = heatdiv;
 		this.mapLayer = mLayer;
-		this.map = map;
+		//this.map = map;
 		// create the heatmap with passed heatmap-options
 		this.heatmap = h337.create(hmoptions);
 
 		handler = function(){ 
-			if(this.tmpData.max){
+			if(this.map && this.tmpData.max){
 				this.updateLayer(); 
 			}
 		};
 		handler1 = function(){ 
-			if(this.tmpData.max){
+			if(this.tmpData && this.tmpData.max){
 				this.toggle();
 				this.updateLayer();
 			}
@@ -138,14 +138,14 @@ OpenLayers.Layer.Heatmap = OpenLayers.Class(OpenLayers.Layer, {
 			}
 			this.heatmap.store.addDataPoint.apply(this.heatmap.store, args);
 		}
-
 	},
 	toggle: function(){
 		this.heatmap.toggleDisplay();
 	},
 	destroy: function() {
-		// for now, nothing special to do here. 
-		OpenLayers.Layer.Grid.prototype.destroy.apply(this, arguments);  
+		// for now, nothing special to do here.
+		//OpenLayers.Layer.Grid.prototype.destroy.apply(this, arguments);
+		//this.tmpData = false;
 	},
 	CLASS_NAME: "OpenLayers.Layer.Heatmap"
 });

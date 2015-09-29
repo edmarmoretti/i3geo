@@ -82,13 +82,15 @@ i3GEO.tema =
 			try {
 				try {
 					i3GEO.pluginI3geo.removeCamada(tema);
-				} catch (r) {
+				} catch (r) {}
+				try{
+					var p = document.getElementById("idx" + tema).parentNode.parentNode.parentNode;
+					do {
+						p.removeChild(p.childNodes[0]);
+					} while (p.childNodes.length > 0);
+					p.parentNode.removeChild(p);
 				}
-				var p = document.getElementById("idx" + tema).parentNode.parentNode.parentNode;
-				do {
-					p.removeChild(p.childNodes[0]);
-				} while (p.childNodes.length > 0);
-				p.parentNode.removeChild(p);
+				catch(rr){}
 				// atualiza a arvore de temas se for o caso
 				var ck = i3GEO.arvoreDeTemas.buscaCheckbox(tema);
 				if (ck) {
