@@ -74,16 +74,18 @@ i3GEO.pluginI3geo =
 		 * Veja em i3geo/classesphp/classe_mapa.php funcao parametrostemas
 		 */
 		inicia : function(camada) {
-			if (i3GEO.janela) {
-				i3GEO.janela.AGUARDEMODAL = true;
-				i3GEO.janela.abreAguarde("aguardePlugin", "Plugin...");
-				i3GEO.janela.AGUARDEMODAL = false;
+			if(camada.plugini3geo){
+				if (i3GEO.janela) {
+					i3GEO.janela.AGUARDEMODAL = true;
+					i3GEO.janela.abreAguarde("aguardePlugin", "Plugin...");
+					i3GEO.janela.AGUARDEMODAL = false;
+				}
+				// chama a funcao conforme o tipo de plugin e a interface atual
+				// para cada plugin deve haver um objeto com as funcoes especificas
+				// para
+				// cada interface
+				i3GEO.pluginI3geo[camada.plugini3geo.plugin][i3GEO.Interface.ATUAL].inicia(camada);
 			}
-			// chama a funcao conforme o tipo de plugin e a interface atual
-			// para cada plugin deve haver um objeto com as funcoes especificas
-			// para
-			// cada interface
-			i3GEO.pluginI3geo[camada.plugini3geo.plugin][i3GEO.Interface.ATUAL].inicia(camada);
 		},
 		/**
 		 * Retorna o HTML com o formulario para editar os parametros do plugin
@@ -366,7 +368,7 @@ i3GEO.pluginI3geo =
 					var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php", carregaJs =
 						"nao", criaLayer;
 					criaLayer = function() {
-						var temp, heatmap, transformedTestData = {
+						var v = true, temp, heatmap, transformedTestData = {
 							max : 1,
 							data : []
 						}, data = heatmap_dados, datalen = heatmap_dados.length, nudata = [], max = 0;
@@ -392,8 +394,11 @@ i3GEO.pluginI3geo =
 						transformedTestData.max = max;
 						transformedTestData.data = nudata;
 						// create our heatmap layer
+						if(camada.status === "0"){
+							v = false;
+						}
 						heatmap = new OpenLayers.Layer.Heatmap(camada.name, objMapa, objMapa.baseLayer, {
-							"visible" : true,
+							"visible" : v,
 							"opacity" : camada.transparency,
 							"radius" : camada.plugini3geo.parametros.radius,
 							"gradient" : heatmap_config.gradient,
@@ -427,6 +432,7 @@ i3GEO.pluginI3geo =
 						i3GEO.pluginI3geo.OBJETOS[camada.name] = heatmap;
 						objMapa.addLayer(heatmap);
 						heatmap.setDataSet(transformedTestData);
+
 						heatmap_dados = null;
 						if (i3GEO.janela) {
 							i3GEO.janela.fechaAguarde("aguardePlugin");
