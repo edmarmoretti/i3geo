@@ -1106,12 +1106,14 @@ i3GEO.editorOL =
 				temp.className = "editorOLlinhaItemInactive olButton";
 				temp.title = $trad("dlinha");
 				temp.onclick = function(){
+					i3GEO.eventos.cliquePerm.desativa();
 					i3GEO.editorOL.marcaBotao("editorOLlinha");
 					var draw = new ol.interaction.Draw({
 						type : "LineString"
 					});
 					//adiciona a interacao para poder ser removida
 					i3GEO.editorOL.interacoes.push(draw);
+					//desativa ol.interaction.DoubleClickZoom
 					i3GEO.Interface.openlayers.interacoes[0].setActive(false);
 					draw.on("drawend", function(evt) {
 						evt.feature.setStyle(
@@ -1138,10 +1140,12 @@ i3GEO.editorOL =
 			}
 			//TODO falta definir imagem
 			if (botoes.ponto === true) {
+				i3GEO.eventos.cliquePerm.desativa();
 				temp = document.createElement("div");
 				temp.className = "editorOLpontoItemInactive olButton";
 				temp.title = $trad("dponto");
 				temp.onclick = function(){
+					i3GEO.eventos.cliquePerm.desativa();
 					i3GEO.editorOL.marcaBotao("editorOLponto");
 					var draw = new ol.interaction.Draw({
 						type : "Point"
@@ -1176,6 +1180,7 @@ i3GEO.editorOL =
 				i3GEOpanelEditor.appendChild(temp);
 			}
 			if (botoes.poligono === true) {
+				i3GEO.eventos.cliquePerm.desativa();
 				temp = document.createElement("div");
 				temp.className = "editorOLpoligonoItemInactive olButton";
 				temp.title = $trad("dpoligono");

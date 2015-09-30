@@ -751,6 +751,9 @@ i3GEO.Interface =
 				if (p.classeCadeado === "i3GEOiconeAberto") {
 					removeBaloes();
 				}
+				if (i3GEO.eventos.cliquePerm.ativo === false) {
+					return;
+				}
 				painel = document.createElement("div");
 				painel.style.minWidth = p.minWidth;
 				painel.className = "ol-popup";

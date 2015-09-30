@@ -713,6 +713,7 @@ i3GEO.analise =
 				 * atributo "origem" Os raios e pontos sao sempre removidos
 				 */
 				fechaJanela : function() {
+					i3GEO.Interface.openlayers.interacoes[0].setActive(false);
 					var m = i3GEO.analise.medeDistancia.openlayers;
 					ol.Observable.unByKey(m.featureListener);
 					m.featureListener = null;
@@ -1300,6 +1301,7 @@ i3GEO.analise =
 				 * atributo "origem" Os raios e pontos sao sempre removidos
 				 */
 				fechaJanela : function() {
+					i3GEO.Interface.openlayers.interacoes[0].setActive(true);
 					var m = i3GEO.analise.medeArea.openlayers;
 					ol.Observable.unByKey(m.featureListener);
 					m.featureListener = null;

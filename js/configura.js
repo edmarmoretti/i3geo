@@ -1382,6 +1382,7 @@ i3GEO.configura =
 							i3GEO.util.mudaCursor(i3GEO.configura.cursores, temp, i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 						}
 						i3GEO.barraDeBotoes.ativaIcone("identifica");
+						i3GEO.eventos.cliquePerm.desativa();
 						if (i3GEO.eventos.cliquePerm.ativo === false) {
 							// caso seja um clique para desativar
 							if (i3GEO.eventos.MOUSECLIQUE.toString().search(i3GEO.configura.funcaoIdentifica) >= 0) {
@@ -1428,6 +1429,7 @@ i3GEO.configura =
 							i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoIdentifica]);
 							i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoTip]);
 						}
+						i3GEO.eventos.cliquePerm.ativa();
 					}
 				},
 				{
