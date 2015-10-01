@@ -2402,8 +2402,12 @@ i3GEO.util =
 		 * elemento sera acionado quando o botao aplicar for clicado
 		 *
 		 * {numerico} - numero de cores default ao abrir o seletor de cores
+		 *
+		 * {string} - (opcional) nome do tema default que sera mostrado no combo de selecao de temas
+		 *
+		 * {string} - (opcional) valor do estilo 'display' que sera aplicado ao combo. Usado para esconder o combo quando se quer apenas a janela de selecao de cores
 		 */
-		abreColourRamp : function(janelaid, elemento, ncores,temaSel) {
+		abreColourRamp : function(janelaid, elemento, ncores,temaSel, displayComboTemas) {
 			var janela, ins, novoel, wdocaiframe, temp, fix = false, wsrc =
 				i3GEO.configura.locaplic + "/ferramentas/colourramp/index.php?ncores="
 					+ ncores
@@ -2417,6 +2421,9 @@ i3GEO.util =
 			if(!temaSel){
 				temaSel = "";
 			}
+			if(!displayComboTemas){
+				displayComboTemas = "block";
+			}
 			if ($i(id)) {
 				janela = YAHOO.i3GEO.janela.manager.find(id);
 				janela.show();
@@ -2428,7 +2435,7 @@ i3GEO.util =
 				"<span><img id='i3geo_janelaCorRamp_imagemCabecalho' style='visibility:hidden;' src=\'" + i3GEO.configura.locaplic
 					+ "/imagens/aguarde.gif\' /></span>";
 			if (i3GEO && i3GEO.arvoreDeCamadas) {
-				ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalho' style='top:0px;'>   ------</div>";
+				ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalho' style='top:0px;display:" + displayComboTemas + ";'>   ------</div>";
 			}
 			ins += "&nbsp;&nbsp;&nbsp;" + texto;
 			ins += '</div><div id="i3geo_janelaCorRamp_corpo" class="bd" style="padding:5px">';
