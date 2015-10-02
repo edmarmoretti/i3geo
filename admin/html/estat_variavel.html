@@ -31,6 +31,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/estat_variavel"></script>
 <script type="text/javascript" src="../js/estat_variavel.js"></script>
 <script type="text/javascript" src="../../pacotes/mustache.js-master/mustache.js"></script>
 
@@ -47,21 +48,18 @@ body {
 			</h1>
 			<div id="formulario" style="display: none">
 				<div id="estatVariavelajuda">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						<p>Esse formul&aacute;rio permite editar as var&iacute;&aacute;veis e suas medidas, definindo-se as fontes dos dados, tipos de classifica&ccedil;&atilde;o,
-						forma de representa&ccedil;&atilde;o etc. As v&aacute;ri&aacute;veis s&atilde;o fen&ocirc;menos que possuem medidas estat&iacute;sticas. Os par&acirc;metros definem como
-						as vari&aacute;veis s&atilde;o acessadas para a montagem dos cartogramas.
+						{{{txtAjuda}}}
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input onclick="adicionaLinha()" type=button id=estatVariavelAdiciona
-					value="Adicionar vari&aacute;vel" />
+					value="{{{adicionaVariavel}}}" />
 				<input onclick="relatorioCompleto()" type=button id=estatVariavelrelatorioCompleto
-					value="Relat&oacute;rio" />
+					value="{{{relatorio}}}" />
 					<br>
-				<p style="font-size:10px;">Observação: caso algum mapa esteja aberto (em outra aba por exemplo) não se esqueça de recarregar o navegador após alterar alguma classificação. Isso é necessário para que o mapa reflita as alterações feitas, anulando eventuais arquivos em cache.</p>
-				<p>Vari&aacute;veis cadastradas:</p>
+				<p style="font-size:10px;">{{{obs}}}{{{listaVariaveis}}}</p>
 				<div id="estatVariavelArvore" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -109,6 +107,7 @@ body {
 			locaplic : window.location.href.replace("/admin/html/estat_variavel.html","")
 		};
 		//
+		core_parseMustacheBody(i3GEOadmin.estat_variavel.dicionario);
 		cabecalhoMetaestat("cabecalhoPrincipal", "variavel");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";

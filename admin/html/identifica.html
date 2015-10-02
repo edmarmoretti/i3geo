@@ -16,6 +16,7 @@ body {
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
 <script type="text/javascript" src="../js/identifica.js"></script>
+<script type="text/javascript" src="../dicionario/identifica.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
@@ -23,30 +24,17 @@ body {
 		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
-			<h1>Administra&ccedil;&atilde;o do i3geo - sistemas de
-				identifica&ccedil;&atilde;o</h1>
+			<h1>{{{identificacao}}}</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda" style="display: none">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						Este programa permite editar a lista de sistemas de
-						identifica&ccedil;&atilde;o.<br> <br> A ferramenta de
-						identifica&ccedil;&atilde;o utilizada no i3geo, lista os dados do
-						ponto clicado no mapa pelo usu&aacute;rio, com base nas camadas
-						existentes no mapa. Os sistemas de identifica&ccedil;&atilde;o
-						adicionam outras op&ccedil;&otilde;es na janela de
-						identifica&ccedil;&atilde;o, permitindo, por exemplo, o uso de
-						programas especiais de busca de dados.<br> <br> Os
-						sistemas s&atilde;o baseados no banco admin.db e os
-						usu&aacute;rios que n&atilde;o s&atilde;o editores podem ver
-						apenas os sistemas publicados.<br> <br> A lista de IPs
-						dos usu&aacute;rios que podem administrar o i3geo &eacute;
-						definida no arquivo i3geo/ms_configura.php
+						{{{txtAjuda}}}
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input type=button id=adicionaNovoIdentifica
-					value="Adicionar um novo sistema" /> <br>
+					value="{{{adicionaSistema}}}" /> <br>
 				<p></p>
 				<div id="letras_I" ></div><br>
 				<div id="tabela" style="left: -5px;"></div>
@@ -55,6 +43,7 @@ body {
 			</div>
 		</div>
 	</center>
+	
 	<script>
 		/*
 		 Title: Op&ccedil;&otilde;es da ferramenta identifica
@@ -99,6 +88,7 @@ body {
 			locaplic : "../.."
 		};
 		//
+		core_parseMustacheBody(i3GEOadmin.identifica.dicionario);
 		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
@@ -107,5 +97,5 @@ body {
 		i3GEO.login.verificaOperacao("admin/html/identifica",
 				i3GEO.configura.locaplic, temp, "sessao",i3GEO.login.dialogo.abreLogin);
 	</script>
-
 </body>
+

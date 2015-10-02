@@ -15,6 +15,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/gruposusuarios.js"></script>
 <script type="text/javascript" src="../js/gruposusuarios.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
@@ -24,20 +25,20 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - Grupos de usu&aacute;rios <img
+				{{{gruposusuarios}}} <img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						<p>Cada usu&aacute;rio pode pertencer a um ou mais grupos. Os grupos s&atilde;o utilizados na defini&ccedil;&atilde;o das permiss&otilde;es de usu&aacute;rios para acesso a dados ou mapas
+						{{{txtAjuda}}}
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input onclick="adicionaLinha()" type=button id=adiciona
-					value="Adicionar grupo" /> <br>
-				<p>Grupos cadastrados:</p>
+					value="{{{adicionaGrupo}}}" /> <br>
+				<p>{{{grupoCadastrado}}}</p>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -85,6 +86,7 @@ body {
 			locaplic : "../.."
 		};
 		//
+		core_parseMustacheBody(i3GEOadmin.gruposusuarios.dicionario);
 		cabecalhoUsuarios("cabecalhoPrincipal", "gruposusuarios");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
