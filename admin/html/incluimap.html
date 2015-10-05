@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/incluimap.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
@@ -11,19 +12,9 @@
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<div id="formulario" style="display: none">
-				<p>As vers&otilde;es novas do Mapserver exigem que os arquivos
-					mapfile iniciem com a palavra "MAP"</p>
-				<p>Os mapfiles utilizados pelo i3geo, at&eacute; a vers&atilde;o
-					4.1, e armazenados no diretório i3Geo/temas n&atilde;o iniciam com
-					"MAP". Para ajustar os mapfiles voc&ecirc; pode edit&aacute;-los
-					individulamente ou rodar o programa i3geo/admin/php/incluiMAP.php
-				<p>Antes de fazer isso, fa&ccedil;a um backup do seu diretório
-					i3geo/temas
-				<p>
-					<a href="../php/incluiMAP.php">Clique para ajustar os mapfiles
-						- inclus&atilde;o da palavra "MAP" no in&iacute;cio dos arquivos;
-						substitui&ccedil;&atilde;o de v&aacute;rios elementos depreciados</a>
-				<p>Lista de substitui&ccedil;&otilde;es:
+				{{{incluiMap}}}
+					<a href="../php/incluiMAP.php">{{{link}}}</a>
+				<p>{{{lista}}}
 				<pre>
 		$search = array(
 			"transparency ",
@@ -93,6 +84,7 @@
 			locaplic : "../.."
 		};
 		//
+		core_parseMustacheBody(i3GEOadmin.incluimap.dicionario);
 		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
