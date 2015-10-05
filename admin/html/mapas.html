@@ -16,6 +16,7 @@ body {
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
 <script type="text/javascript" src="../js/mapas.js"></script>
+<script type="text/javascript" src="../dicionario/mapas.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
@@ -24,26 +25,20 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - Links para mapas<img
+				{{{mapas}}}<img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda" style="display: none">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						<p>Vc pode registrar qualquer link para mapas. A
-							op&ccedil;&atilde;o "editar" abre um formul&aacute;rio para a
-							cria&ccedil;&atilde;o do link conforme os par&acirc;metros
-							utilizados pelo i3Geo. Voc&ecirc; pode desprezar
-							todos os campos do formul&aacute;rio e incluir apenas o link
-							direto desejado. Pode ser armazenado um mapfile completo com todas
-							as configura&ccedil;&otilde;es do mapa
+						{{{txtAjuda}}}
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input type=button id=adicionaNovoMapa
-					value="Adicionar um novo" /> <br>
-				<p>Links existentes:</p>
+					value="{{{ajudaNovo}}}" /> <br>
+				<p>{{{linksExistentes}}}</p>
 				<div id="letras_Mp" ></div><br>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
@@ -94,6 +89,7 @@ body {
 			locaplic : "../.."
 		};
 		//
+		core_parseMustacheBody(i3GEOadmin.mapas.dicionario);
 		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
