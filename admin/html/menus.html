@@ -16,6 +16,7 @@ body {
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
 <script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript" src="../dicionario/menus.js"></script>
 </head>
 <body class=" yui-skin-sam">
 	<div style="margin: 20px">
@@ -23,34 +24,16 @@ body {
 		</div>
 		<div style="width: 80%; text-align: center;">
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - Menus <img
+				{{{menus}}} <img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 
 		</div>
 		<div id="formulario" style="display: none">
 			<div id="ajuda" style="display: none">
-				<div class="hd">Ajuda</div>
+				<div class="hd">{{{ajuda}}}</div>
 				<div class="bd" style="height: 144px; overflow: auto">
-					<p>Este formul&aacute;rio permite editar a lista de menus que
-						ser&aacute; utilizada pelo i3Geo.
-					<p>A &aacute;rvore &eacute; composta de menus, grupos,
-						sub-grupos e temas. Vc deve criar os menus, a lista de grupos e a
-						lista de sub-grupos. Ao criar um menu, esse &eacute; mostrado
-						imediatamente na &aacute;rvore.
-					<p>Menus ou nós da &aacute;rvore marcados como n&atilde;o
-						publicados s&atilde;o mostrados em vermelho e aparecem apenas para
-						os administradores.
-					<p>Em cada nó da &aacute;rvore podem ser associados os temas,
-						mesmo na raiz de um dos n&iacute;veis. Os temas s&atilde;o
-						arquivos mapfiles armazenados em i3geo/temas e registrados no
-						sistema de administra&ccedil;&atilde;o.
-					<p>A cria&ccedil;&atilde;o de mapfiles e a
-						vincula&ccedil;&atilde;o tema-mapfile &eacute; feita por meio do
-						editor de mapfiles, e consiste na determina&ccedil;&atilde;o de um
-						nome para cada mapfile. Esse nome &eacute; listado ao ser
-						adicionado um tema na &aacute;rvore.
-				</div>
+					{{{txtAjuda}}}
 				<div class="ft"></div>
 			</div>
 			<br>
@@ -62,7 +45,7 @@ body {
 					<option value="it">Italiano</option>
 				</select>
 			</p>
-			<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left: -5px;" />
+			<input type=button id=adicionaNovoMenu value="{{{adicionaMenu}}}" style="left: -5px;" />
 			<p>
 			<div id="letras_M" ></div>
 			<br>
@@ -119,6 +102,7 @@ body {
 		i3GEO.configura = {
 			locaplic : "../.."
 		};
+		core_parseMustacheBody(i3GEOadmin.menus.dicionario);
 		cabecalhoGeral("cabecalhoPrincipal", "menus");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
