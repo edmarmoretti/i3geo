@@ -1,3 +1,11 @@
+<html>
+	<body>
+	<h1>Compactador de c&oacute;digo Javascript da vers&atilde;o 7.0</h1>
+	<p>Esse programa deve ser executado sempre que forem feitas altera&ccedil;&otilde;es nos c&oacute;digos javascript principais do i3Geo (aqueles que ficam na pasta i3geo/js).
+	A compacta&ccedil;&atilde;o reduz o tamanho dos arquivos e faz a concatena&ccedil;&atilde;o de v&aacute;rios arquivos em um s&oacute;. O compactador atua tamb&eacute;m sobre os arquivos CSS existentes
+	em i3geo/css. Ao utilizar o javascript i3geo/js/i3geo.js o arquivo compactado ser&aacute; carregado, assim como o CSS, correspondentes a &uacute;ltima vers&atilde;o do i3Geo.
+	A compacta&ccedil;&atilde;o tamb&eacute;m gera arquivos em i3geo/mashups. Os arquivos individuais compactados, da pasta i3geo/js, s&atilde;o armazenados em i3geo/js/compactados</p>
+
 <?php
 /*
 Compacta os arquivos js e css utilizados pelo I3Geo.
@@ -419,3 +427,12 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 	chmod($final.".php",0777);
 }
 ?>
+	<p>Notas importantes:</p>
+	<p>Ao escrever c&oacute;digo, para usar o console do firebug utilize sempre sem {}, exemplo:
+	<pre>
+	if (typeof (console) !== 'undefined')
+			console.info("i3GEO.arvoreDeCamadas.atualiza()");
+	</pre>
+	<p>Para fins de debug, voc&ecirc; pode utilizar o arquivo i3geonaocompacto.js no lugar de i3geo.js em sua interface de mapa interativo.</p>
+</html>
+</body>
