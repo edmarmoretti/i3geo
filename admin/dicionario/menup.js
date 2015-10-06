@@ -2,7 +2,7 @@
 i3GEOadmin.menup = {};
 i3GEOadmin.menup.dicionario = {
 	'configGeral' : [ {
-		pt : "Configura&ccedil;&atilde;o geral",
+		pt : "Para desenvolvedores e administradores",
 		en : "",
 		es : ""
 	} ],
@@ -273,6 +273,11 @@ i3GEOadmin.menup.dicionario = {
 	} ],
 	'geraMiniatura' : [ {
 		pt : "Gera as miniaturas (thumbnails) para os temas existentes no diret&oacute;rio i3geo/temas",
+		en : "",
+		es : ""
+	} ],
+	'compacta' : [ {
+		pt : "Compacta&ccedil;&atilde;o de c&oacute;digo javascript",
 		en : "",
 		es : ""
 	} ]
