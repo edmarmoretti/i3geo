@@ -4,238 +4,239 @@ g_traducao_init =
 			{
 				pt : "Remover  essa tela de apresenta&ccedil;&atilde;o (depois voc&ecirc; poder&aacute; ir direto para http:// localhost/i3geo/init)",
 				en : "",
-				es : ""
+				es : "Eliminar esta pantalla de presentaci&oacute; (despu&eacute;s usted podr&aacute; ir directamente al enlace http:// localhost/i3geo/init)"
 			}
 		],
 		2 : [
 			{
 				pt : "Teste da instala&ccedil;&atilde;o",
 				en : "",
-				es : ""
+				es : "Test de instalaci&oacute;n"
 			}
 		],
 		3 : [
 			{
 				pt : "Sistema de administra&ccedil;&atilde;o",
 				en : "",
-				es : ""
+				es : "Sistema de administraci&oacute;n"
 			}
 		],
 		4 : [
 			{
 				pt : "Mapa com interface Openlayers",
 				en : "",
-				es : ""
+				es : "Mapa con interfaz Openlayers"
 			}
 		],
 		5 : [
 			{
 				pt : "Mapa com interface Openlayers (modo debug)",
 				en : "",
-				es : ""
+				es : "Mapa con interfaz Openlayers (modo debug)"
 			}
 		],
 		6 : [
 			{
 				pt : "Mapa com interface Google Maps",
 				en : "",
-				es : ""
+				es : "Mapa con interfaz Google Maps "
 			}
 		],
 		7 : [
 			{
 				pt : "Mapa com interface Google Earth (depreciado)",
 				en : "",
-				es : ""
+				es : "Mapa con interfaz Google Earth (depreciado)"
 			}
 		],
 		8 : [
 			{
 				pt : "Cartogramas (METAESTAT)",
 				en : "",
-				es : ""
+				es : "Cartogramas (METAESTAT)"
 			}
 		],
 		9 : [
 			{
 				pt : "Editor de regi&otilde;es (METAESTAT)",
 				en : "",
-				es : ""
+				es : "Editor de regiones (METAESTAT)"
 			}
 		],
 		10 : [
 			{
 				pt : "Download de dados geo",
 				en : "",
-				es : ""
+				es : "Download de datos geo"
 			}
 		],
 		11 : [
 			{
 				pt : "Servi&ccedil;os OGC (WMS e WFS)",
 				en : "",
-				es : ""
+				es : "Servicios OGC (WMS E WFS)"
 			}
 		],
 		12 : [
 			{
 				pt : "Cat&aacute;logo de temas no formato KML",
 				en : "",
-				es : ""
+				es : "Cat&aacute;logo de temas en formato KML"
 			}
 		],
 		13 : [
 			{
 				pt : "Gerador de links permanentes",
 				en : "",
-				es : ""
+				es : "Generador de links permanentes"
 			}
 		],
 		14 : [
 			{
 				pt : "Exemplos de customiza&ccedil;&atilde;o da interface de mapas",
 				en : "",
-				es : ""
+				es : "Ejemplos de personalizaci&oacute;n de la interfaz de mapas"
 			}
 		],
 		15 : [
 			{
 				pt : "Manual de uso",
 				en : "",
-				es : ""
+				es : "Manual de uso"
 			}
 		],
 		16 : [
 			{
 				pt : "Registro de bugs",
 				en : "",
-				es : ""
+				es : "Registro de bugs"
 			}
 		],
 		17 : [
 			{
 				pt : "Guia de migra&ccedil;&atilde;o",
 				en : "",
-				es : ""
+				es : "Gu&iacute;a de migraci&oacute;n"
 			}
 		],
 		18 : [
 			{
 				pt : "Integre mapas com",
 				en : "",
-				es : ""
+				es : "Integrar mapas con"
 			}
 		],
 		19 : [
 			{
 				pt : "ATEN&Ccedil;&Atilde;O!!! Essa instala&ccedil;&atilde;o est&aacute; vulner&aacute;vel: edite o arquivo i3geo/ms_configura.php e altere o login e senha definidos na vari&aacute;vel $i3geomaster.<br>Ao acessar o i3Geo em um servidor que n&atilde;o seja o localhost os mapas ficar&atilde;o bloqueados at&eacute; que essa edi&ccedil;&atilde;o seja feita.",
 				en : "",
-				es : ""
+				es : "¡¡¡ATENCI&Oacute;N!!! Esta instalaci&oacute;n es vulnerable: edite el archivo i3geo/ms_configura.php y altere el login y la contraseña definidos en la variable $i3geomaster.<br>Al acceder al i3Geo en un servidor que no sea el localhost los mapas quedaran bloqueados hasta que la presente edici&oacute;n sea concluida"
 			}
 		],
 		20 : [
 			{
 				pt : "Incluia um link apenas na sua p&aacute;gina",
 				en : "",
-				es : ""
+				es : "Incluya un link apenas en su p&aacute;gina"
 			}
 		],
 		21 : [
 			{
 				pt : "Manual de administra&ccedil;&atilde;o",
 				en : "",
-				es : ""
+				es : "Manual de administraci&oacute;n"
 			}
 		],
 		22 : [
 			{
 				pt : "Google Maps com aplica&ccedil;&atilde;o de estilo",
 				en : "",
-				es : ""
+				es : "Google Maps con aplicaci&oacute;n de estilo"
 			}
 		],
 		23 : [
 			{
 				pt : "Mapa com Open Street Map (OSM)",
 				en : "",
-				es : ""
+				es : "Mapa con Open Street Map (OSM)"
 			}
 		],
 		24 : [
 			{
 				pt : "Documenta&ccedil;&atilde;o da API",
 				en : "",
-				es : ""
+				es : "Documentaci&oacute;n de la API"
 			}
 		],
 		25 : [
 			{
 				pt : "SAIKU - an&aacute;lise tabular",
 				en : "",
-				es : ""
+				es : "SAIKU - an&aacute;lisis tabular"
 			}
 		],
 		26 : [
 			{
 				pt : "Teste do conversor de projeto GVP para Mapfile",
 				en : "",
-				es : ""
+				es : "Test del convertidor de proyecto GVP para Mapfile"
 			}
 		],
 		27 : [
 			{
 				pt : "Lista de Atlas cadastrados",
 				en : "",
-				es : ""
+				es : "Lista de Atlas registrados"
 			}
 		],
 		28 : [
 			{
 				pt : "Curso de i3Geo em Gvsig-training",
 				en : "",
-				es : ""
+				es : "Curso de i3Geo en Gvsig-training"
 			}
 		],
 		29 : [
 			{
 				pt : "- Considere uma doa&ccedil;&atilde;o!",
 				en : "",
-				es : ""
+				es : "- Considere hacer una donaci&oacute;n"
 			}
 		],
 		30 : [
 			{
 				pt : "Wiki, instala&ccedil;&atilde;o, SVN",
 				en : "",
-				es : ""
+				es : "Wiki, instalaci&oacute;n, SVN"
 			}
 		],
 		31 : [
 			{
 				pt : "Comunidade, download",
 				en : "",
-				es : ""
+				es : "Comunidad, download"
 			}
 		],
 		32 : [
 			{
 				pt : "Lista",
 				en : "",
-				es : ""
+				es : "Lista"
 			}
 		],
 		33 : [
 			{
 				pt : "Utilit&aacute;rios",
 				en : "",
-				es : ""
+				es : "Utilitarios"
 			}
 		],
 		34 : [
 			{
 				pt : "Lista de mapas",
 				en : "",
-				es : ""
+				es : "Lista de mapas"
 			}
 		]
 	};
+	
