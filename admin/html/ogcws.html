@@ -15,6 +15,7 @@ body {
 </style>
 
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/ogcws.js"></script>
 <script src="../js/ogcws.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
@@ -24,23 +25,18 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - Web Services OGC <img
+				{{{ogcws}}} <img
 					id=botaoAjuda src="../imagens/04.png" style="cursor: pointer" />
 			</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						<p>Este formul&aacute;rio permite alterar as
-							configura&ccedil;&otilde;es de contato do gerador de Web Services
-
-						<p>As mudan&ccedil;as inclu&iacute;das aqui afetam o programa
-							i3geo/ogc.php e s&atilde;o armazenadas em
-							i3geo/aplicmpa/ogcws.map
+						{{{txtAjuda}}}
 					</div>
 					<div class="ft"></div>
 				</div>
-				<p>Par&acirc;metros obtidos do mapfile:</p>
+				{{{parametros}}}
 				<b><span id=mapfile style="color: navy"></span></b><br> <br>
 				<div id="tabela" style="left: -5px;"></div>
 			</div>
@@ -90,6 +86,7 @@ body {
 			locaplic : "../.."
 		};
 		//
+		core_parseMustacheBody(i3GEOadmin.ogcws.dicionario);
 		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
