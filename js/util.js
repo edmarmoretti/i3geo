@@ -3397,6 +3397,14 @@ i3GEO.util =
 			m = Mustache.render(templateMustache, hashMustache);
 			m = m.replace(re, '&');
 			return m;
+		},
+		/**
+		 * Function: uid
+		 * 
+		 * Retorna um ID unico baseado no tempo
+		 */
+		uid : function(){
+			return (new Date().getTime()).toString(36);
 		}
 	};
 

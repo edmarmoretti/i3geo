@@ -2282,7 +2282,7 @@ switch (strtoupper($funcao))
 		/*
 		 Valor: LISTAEPSG
 
-		Pega os c�digos de proje&ccedil;&atilde;o EPSG.
+		Pega os codigos de proje&ccedil;&atilde;o EPSG.
 
 		*/
 	case "LISTAEPSG":

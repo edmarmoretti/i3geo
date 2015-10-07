@@ -942,6 +942,7 @@ var i3GEO = {
 				+ "px";
 			temp.style.width = w
 				+ "px";
+			/*
 			YAHOO.util.Event.addListener(
 				temp,
 				"click",
@@ -949,6 +950,7 @@ var i3GEO = {
 			YAHOO.util.Event.addFocusListener(
 				temp,
 				YAHOO.util.Event.preventDefault);
+			*/
 		}
 		temp = $i(i3GEO.Interface.IDCORPO);
 		if (temp) {
