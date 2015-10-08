@@ -16,6 +16,7 @@ body {
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
 <script type="text/javascript" src="../js/webservices.js"></script>
+<script type="text/javascript" src="../dicionario/webservices.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
@@ -23,31 +24,18 @@ body {
 		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
-			<h1>Administra&ccedil;&atilde;o do i3geo - web Services</h1>
+			<h1>{{{webservices}}}</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda" style="display: none">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						Este programa permite editar o cadastro de Web Services.<br>
-						<br> O i3Geo acessa Web Services e servi&ccedil;os para
-						obten&ccedil;&atilde;o de dados nos padr&otilde;es WMS, RSS,
-						GEORSS e endere&ccedil;os de sistemas de download de dados. Todos
-						os endere&ccedil;os s&atilde;o cadastrados e organizados por
-						tipos. A lista de WMS e GEORSS &eacute; utilizada na guia de
-						adi&ccedil;&atilde;o de temas j&aacute; os Web Services
-						convencionais, s&atilde;o utilizados no aplicativo WSCLIENTE.
-						Pode-se ainda cadastrar endere&ccedil;os para s&iacute;tios na
-						internet que possibilitam o download de dados, esse cadastro
-						&eacute; utilizado no aplicativo DATADOWNLOAD.<br> <br>
-						A lista de Web Services &eacute; baseada no banco admin.db.<br>
-						<br> A lista de IPs dos usu&aacute;rios que podem administrar
-						o i3geo &eacute; definida no arquivo i3geo/ms_configura.php
+						{{{txtAjuda}}}
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input type=button id=adicionaNovoWebservice
-					value="Adicionar um novo endere&ccedil;o" /> <br>
-				<p>Endere&ccedil;os cadastrados:</p>
+					value="{{{adicionaEdereco}}}" /> <br>
+				<p>{{{enderecosCadastrados}}}</p>
 				<div id="letras_W" ></div><br>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
@@ -98,6 +86,7 @@ body {
 			locaplic : "../.."
 		};
 		//
+		core_parseMustacheBody(i3GEOadmin.webservices.dicionario);
 		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
