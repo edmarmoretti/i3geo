@@ -4,7 +4,7 @@ i3GEOF.atalhoscamada.dicionario = {
 		{
 			pt : "Altera a opacidade (de 0 a 100)",
 			en : "",
-			es : ""
+			es : "Altera la opacidad"
 		}
 	],
 	"temporizador" : [
@@ -19,7 +19,7 @@ i3GEOF.atalhoscamada.dicionario = {
 		{
 			pt : "Muda o nome atual do tema. Utilize para melhorar a legenda do mapa.",
 			en : "Rename layer. Use it for make a better legend of the map",
-			es : "Renombrar tema. Utilice para mejorar la leyenda del mapa.",
+			es : "Renombrar el nombre actual del tema. Utilice para mejorar la leyenda del mapa.",
 			it : "Cambia il nome del tema corrente. Utilizzare per migliorare la legenda della mappa."
 		}
 	],
@@ -27,7 +27,7 @@ i3GEOF.atalhoscamada.dicionario = {
 		{
 			pt : "Cria uma c&oacute;pia da camada",
 			en : "",
-			es : "",
+			es : "Crea una copia de la capa",
 			it : ""
 		}
 	]
