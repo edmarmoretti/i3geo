@@ -15,6 +15,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/tags.js"></script>
 <script type="text/javascript" src="../js/tags.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
@@ -24,23 +25,21 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - tags <img
+				{{{tags}}} <img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						<p>Tags s&atilde;o como palavras-chave que podem ser
-							adicionadas aos temas para a realiza&ccedil;&atilde;o de buscas.
+						{{{txtAjuda}}}
 
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input onclick="adicionaLinha()" type=button id=adiciona
-					value="Adicionar um novo tag" /> <br>
-				<p>Tags existentes: (clique na c&eacute;lula para editar e salve
-					a linha editada)</p>
+					value="{{{adicionaTag}}}" /> <br>
+				{{{tagsExistentes}}}
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -90,6 +89,7 @@ body {
 			locaplic : "../.."
 		};
 		//
+		core_parseMustacheBody(i3GEOadmin.tags.dicionario);
 		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
