@@ -14,10 +14,11 @@ body {
 	padding: 0;
 }
 </style>
+<script type="text/javascript" src="../js/core.js"></script>
 <script type="text/javascript" src="../../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="../../ferramentas/uploadsimbolo/index.js"></script>
 <script type="text/javascript" src="../../ferramentas/uploadsimbolo/dicionario.js"></script>
-<script type="text/javascript" src="../js/core.js"></script>
+
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body class=" yui-skin-sam fundoPonto">
@@ -65,7 +66,9 @@ Arquivo:
 
 i3geo/admin/html/subirsimbolo.html
 */
-i3GEO.configura.locaplic = "../..";
+i3GEO.configura = {
+	locaplic : "../.."
+};
 i3GEO.parametros.editor = "sim";
 i3GEO.configura.sid = "";
 cabecalhoGeral("cabecalhoPrincipal","");
