@@ -15,6 +15,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/sistemas.js"></script>
 <script type="text/javascript" src="../js/sistemas.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
@@ -23,30 +24,18 @@ body {
 		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
-			<h1>Administra&ccedil;&atilde;o do i3geo - sistemas especiais</h1>
+			<h1>{{{sistemas}}}</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						Este programa permite editar a lista de sistemas especiais.<br>
-						<br> Sistemas especiais s&atilde;o utilizados para incluir
-						camadas no i3geo tendo como base programas que interagem com o
-						usu&aacute;rio de alguma forma espec&iacute;fica.<br> <br>
-						Cada sistema pode ter um objetivo espec&iacute;fico e uma
-						interface própria. Normalmente s&atilde;o utilizados para realizar
-						consultas a bancos de dados ou Web Services e gerar a camada para
-						acrescentar ao mapa.<br> <br> Esses sistemas podem por
-						exemplo, consultar bancos de dados estat&iacute;sticos para gerar
-						cartogramas.<br> <br> A lista de sistemas &eacute;
-						baseada no banco admin.db.<br> <br> A lista de IPs dos
-						usu&aacute;rios que podem administrar o i3geo &eacute; definida no
-						arquivo i3geo/ms_configura.php
+						{{{txtAjuda}}}
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input onclick="adicionaLinha()" type=button id=adiciona
-					value="Adicionar um novo sistema" /> <br>
-				<p>Sistemas existentes:</p>
+					value="{{{adicionaSistema}}}" /> <br>
+				<p>{{{sistemasExistentes}}}</p>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -96,6 +85,7 @@ body {
 			locaplic : "../.."
 		};
 		//
+		core_parseMustacheBody(i3GEOadmin.sistemas.dicionario);
 		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";

@@ -15,6 +15,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/operacoes.js"></script>
 <script type="text/javascript" src="../js/operacoes.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
@@ -24,26 +25,21 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - Opera&ccedil;&otilde;es e pap&eacute;is<img
+				{{{operacoes}}}<img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
-			<p>Pap&eacute;is s&atilde;o pr&eacute;-definidos no i3Geo e s&atilde;o atribu&iacute;dos aos usu&aacute;rios individualmente. Para definir os pap&eacute;is de cada usu&aacute;rio, utilize o editor de usu&aacute;rios.</p>
+			{{{txtOperacoes}}}
 			<div id="formulario" style="display: none">
 				<div id="ajuda">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						<p>Aqui s&atilde;o definidas quais funcionalidades
-							ser&atilde;o controladas e quais pap&eacute;is podem
-							utiliz&aacute;-las
-						<p>Para que o controle funcione, o c&oacute;digo do i3Geo deve ser
-							modificado para que a valida&ccedil;&atilde;o seja realizada.
-						<p>Usu&aacute;rios administradores podem acessar qualquer opera&ccedil;&atilde;o.
+						{{{txtAjuda}}}
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input onclick="adicionaLinha()" type=button id=adiciona
-					value="Adicionar funcionalidade" /> <br>
-				<p>Opera&ccedil;&otilde;es controladas:</p>
+					value="{{{adicionaFuncionalidade}}}" /> <br>
+				<p>{{{operacoesControladas}}}</p>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -92,6 +88,7 @@ body {
 			locaplic : "../.."
 		};
 		//
+		core_parseMustacheBody(i3GEOadmin.operacoes.dicionario);
 		cabecalhoUsuarios("cabecalhoPrincipal", "operacoes");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";

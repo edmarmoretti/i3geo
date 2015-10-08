@@ -15,6 +15,7 @@ body {
 }
 </style>
 <script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../dicionario/perfis.js"></script>
 <script type="text/javascript" src="../js/perfis.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
@@ -24,24 +25,20 @@ body {
 		<div class="mascaraPrincipal" id="divGeral">
 			<div id=cabecalhoPrincipal></div>
 			<h1>
-				Administra&ccedil;&atilde;o do i3geo - perfis <img src="../imagens/04.png"
+				{{{perfis}}} <img src="../imagens/04.png"
 					style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
 				<div id="ajuda">
-					<div class="hd">Ajuda</div>
+					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
-						<p>Os perfis s&atilde;o utilizados para restringir o acesso a
-							determinados temas, grupos, sub-grupos e menus. Nesse formul&aacute;rio &eacute;
-							montada a lista de perfis que &eacute; mostrada nos outros formul&aacute;rios do
-							sistema.
+						{{{txtAjuda}}}
 					</div>
 					<div class="ft"></div>
 				</div>
 				<input onclick="adicionaLinha()" type=button id=adiciona
-					value="Adicionar um novo perfil" /> <br>
-				<p>Perfis existentes: (clique na c&eacute;lula para editar e salve a
-					linha editada)</p>
+					value="{{{adicionaPerfil}}}" /> <br>
+				{{{editaPerfil}}}
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -90,6 +87,7 @@ i3GEO.configura = {
 	locaplic: "../.."
 };
 //
+core_parseMustacheBody(i3GEOadmin.perfis.dicionario);
 cabecalhoGeral("cabecalhoPrincipal","");
 temp = function(){
 	document.getElementById("formulario").style.display = "block";
