@@ -553,7 +553,7 @@ i3GEO.Interface =
 			 * http://openlayers.org/en/v3.4.0/apidoc/ol.interaction.Interaction.html?unstable=true
 			 *
 			 * Parametros do objeto Map.options.interactions do OpenLayers
-			 * 
+			 *
 			 * Se for um array vazio, as interacoes default sao adicionadas na funcao de i3GEO.Interface.openlayers.cria
 			 *
 			 * Tipo:

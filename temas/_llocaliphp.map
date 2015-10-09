@@ -37,7 +37,7 @@ MAP
       "permitecomentario"	"SIM"
       "LTEMPOITEMICONE"	""
       "metaestat"	""
-      "PLUGINI3GEO"	'{"plugin":"parametrossql","ativo":"nao","parametros":[{"titulo" : "Ano de criação","chave" : "1990","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""}]}'
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","ativo":"nao","parametros":[{"titulo" : "Ano de criação","chave" : "1990","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "xxx","chave" : "xxx","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""}]}'
       "download"	"SIM"
       "itembuscarapida"	"NOMELOC"
       "ITENS"	"NOMEMUN,TIPO,NOMELOC,ANOCRIA"

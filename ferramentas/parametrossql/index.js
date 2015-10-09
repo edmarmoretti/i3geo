@@ -108,20 +108,11 @@ i3GEOF.parametrossql = {
 	iniciaJanelaFlutuante: function(camada){
 		//verifica se deve ser aberto o formulario
 		if(camada.plugini3geo.ativo != undefined && camada.plugini3geo.ativo === "nao"){
-			fim = function(){
-				i3GEO.atualiza();
-			};
-			p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
-				+ "&funcao=aplicar"
-				+ "&tema=" + camada.name
-				+ "&chaves=&valores=";
-			cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"foo",fim);
+			i3GEOF.parametrossql.iniciaDefault(camada);
 		}
 		else{
 			if(camada.plugini3geo.parametros){
-				var minimiza,cabecalho,janela,divid,temp,titulo;
+				var cabecalho,janela,divid,temp,titulo;
 				if($i("i3GEOF.parametrossql")){
 					i3GEOF.parametrossql.inicia("i3GEOF.parametrossql_corpo",camada);
 					return;
@@ -156,6 +147,86 @@ i3GEOF.parametrossql = {
 			}
 		}
 	},
+	//aplica os parametros default na camada
+	//usado quando o formulario nao e aberto de imediato para o usuario digitar os valores
+	iniciaDefault : function(camada){
+		var aplicaParametros;
+		aplicaParametros = function(valores){
+			var atualiza, p, cp, par = [];
+			for(var i in valores){
+			  par.push(valores[i]);
+			}
+			atualiza = function(){
+				i3GEO.atualiza();
+			};
+			p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
+				+ "&funcao=aplicar"
+				+ "&tema=" + camada.name
+				+ "&chaves=&valores=" + par.join(",");
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"foo",atualiza);
+		};
+		i3GEOF.parametrossql.obtemParametrosDefault(camada,aplicaParametros);
+	},
+	obtemParametrosDefault : function(camada, funcao){
+		var parametriza, p, cp, aplicaParametros, valores = {};
+		//aplica na camada os parametros de substituicao e atualiza o mapa
+		aplicaParametros = function(){
+			funcao.call("",valores);
+		};
+		parametriza = function(plugin){
+			var temp, i, pegaParametro, parametros;
+			parametros = plugin.data.parametros;
+			//funcao que faz a chamada AJAX que pega os valores caso seja um programa em PHP
+			//numParametros e um contador pois as chamas para buscar os valores
+			//sao assincronas
+			pegaParametro = function(indice){
+				if(parametros.length == indice){
+					aplicaParametros();
+				}
+				else{
+					var fim, p, cp, prog = parametros[indice].prog;
+					if(prog != ""){
+						fim = function(retorno){
+							valores[indice] = retorno.data[0].v;
+							indice += 1;
+							pegaParametro(indice);
+						};
+						p = i3GEO.configura.locaplic
+							+ "/ferramentas/parametrossql/exec.php?"
+							+ "g_sid=" + i3GEO.configura.sid
+							+ "&funcao=INCLUDEPROG&prog=" + prog;
+						cp = new cpaint();
+						cp.set_response_type("JSON");
+						cp.call(p,"foo",fim);
+					}
+					else{
+						indice += 1;
+						pegaParametro(indice);
+					}
+				}
+			};
+			temp = parametros.length;
+			//obtem os valores que nao precisam AJAX
+			for(i = 0; i < temp; i++){
+				if(parametros[i].titulo != "" && parametros[i].prog === ""){
+					valores[i] = parametros[i].valores.split(",")[0];
+				}
+			}
+			//executa as chamadas ajax de modo assincrono para obter os demais parametros
+			pegaParametro(0);
+		};
+		// aqui e necessario buscar os parametros do plugin para pegar os valores default
+		//de cada parametro. Quando termina, roda a funcao que monta os parametros
+		p = i3GEO.configura.locaplic + "/ferramentas/parametrossql/exec.php?g_sid="
+				+ i3GEO.configura.sid
+				+ "&funcao=PARAMETROSPLUGIN&tema="
+				+ camada.name;
+		cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p, "foo", parametriza);
+	},
 	formulario: function(camada){
 		//sobre os parametros ver em classe_plugini3geo
 		var parametros = camada.plugini3geo.parametros,
@@ -180,7 +251,7 @@ i3GEOF.parametrossql = {
 					}
 					if(p.tipo === "select"){
 						ins += "<div class='styled-select' >"
-							+ "<select name='"+p.chave+"' ><option value=''>---</option>";
+							+ "<select name='"+p.chave+"' >";
 						l = p.valores.split(",");
 						nj = l.length;
 						for(j=0; j<nj; j++){
@@ -199,13 +270,7 @@ i3GEOF.parametrossql = {
 	buscaSelect: function(camada){
 		var parametros = camada.plugini3geo.parametros,
 		n = parametros.length,
-		i,
-		ins = "",
-		p,
-		j,
-		nj,
-		l,
-		temp;
+		i;
 		for(i=0; i<n; i++){
 			p = parametros[i];
 			if(p.prog != ""){
@@ -220,7 +285,7 @@ i3GEOF.parametrossql = {
 		var p,cp,temp;
 		temp = function(retorno){
 			var i,n,ins;
-			ins = "<select name='"+plugin.chave+"' ><option value=''>---</option>";
+			ins = "<select name='"+plugin.chave+"' >";
 			n = retorno.data.length;
 			for(i=0; i<n; i++){
 				ins += "<option value='"+ retorno.data[i].v +"'>"+ retorno.data[i].n +"</option>";
@@ -238,13 +303,13 @@ i3GEOF.parametrossql = {
 		var temp, fim,cp,p,onde = $i("i3GEOFparametrosSQLForm"),
 			campos,n,i,chaves = [], valores = [];
 		campos = onde.getElementsByTagName("input");
-		n = campos.length
+		n = campos.length;
 		for (i = 0; i<n; i++) {
 			chaves.push(campos[i].name);
 			valores.push(campos[i].value);
 		}
 		campos = onde.getElementsByTagName("select");
-		n = campos.length
+		n = campos.length;
 		for (i = 0; i<n; i++) {
 			chaves.push(campos[i].name);
 			valores.push(campos[i].value);
@@ -285,6 +350,7 @@ i3GEOF.parametrossql = {
 		}
 	},
 	cancela: function(){
+		/*
 		var fim,cp,p;
 		if(typeof i3geoOL != 'undefined' || typeof i3GeoMap != 'undefined'){
 			fim = function(){
@@ -297,5 +363,6 @@ i3GEOF.parametrossql = {
 			cp.set_response_type("JSON");
 			cp.call(p,"foo",fim);
 		}
+		*/
 	}
 };

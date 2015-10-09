@@ -326,7 +326,7 @@ i3GEOF.atalhoscamada =
 			}
 		}
 		else{
-			valor = obj.value
+			valor = obj.value;
 		}
 		tema = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.atalhoscamada.tema);
 		tema[obj.name] = valor;

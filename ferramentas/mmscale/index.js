@@ -73,7 +73,7 @@ i3GEOF.mmscale = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/
 	iniciaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo;
+		var janela,divid,titulo;
 		if($i("i3GEOF.mmscale")){
 			i3GEOF.mmscale.tema = i3GEO.temaAtivo;
 			i3GEOF.mmscale.inicia("i3GEOF.mmscale_corpo");

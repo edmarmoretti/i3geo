@@ -168,9 +168,9 @@ i3GEO.pluginI3geo =
 		 *
 		 * {string} - codigo epsg que sera usado no WMS
 		 */
-		layerMashup : function(Interface, camada, epsg) {
+		layerMashup : function(Interface, camada, epsg, funcao) {
 			if (camada.plugini3geo && camada.plugini3geo != "" && i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup) {
-				var l = i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup(camada, epsg);
+				var l = i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup(camada, epsg, funcao);
 				return l;
 			} else {
 				return [
@@ -1156,7 +1156,7 @@ i3GEO.pluginI3geo =
 				aplicaPropriedades : function(camada) {
 					return camada;
 				},
-				layerMashup : function(camada, epsg) {
+				layerMashup : function(camada, epsg, funcao) {
 					var p = [], tile;
 					if (!camada.cache) {
 						camada["cache"] = "NAO";
@@ -1180,7 +1180,7 @@ i3GEO.pluginI3geo =
 					if (camada.cache === "NAO") {
 						p.push(new OpenLayers.Layer.WMS(camada.tema, i3GEO.configura.locaplic + "ferramentas/parametrossql/ogc.php?tema="
 							+ camada.name
-							+ "&", {
+							+ "&DESLIGACACHE=sim&", {
 							layers : camada.name,
 							SRS : 'EPSG:' + epsg,
 							FORMAT : 'image/png'
@@ -1224,7 +1224,12 @@ i3GEO.pluginI3geo =
 							"pluginparametros" : camada.plugini3geo.parametros
 						}));
 					}
-					return p;
+					if(funcao){
+						funcao.call("", p);
+					}
+					else{
+						return p;
+					}
 				}
 			}
 		}

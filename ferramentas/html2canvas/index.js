@@ -26,7 +26,7 @@ i3GEOF.html2canvas = {
 				$i("i3GEOF.html2canvas_corpo").appendChild(d);
 			},
 			letterRendering: true
-		})
+		});
 	},
 	/*
 	 * Function: iniciaJanelaFlutuante
@@ -34,7 +34,7 @@ i3GEOF.html2canvas = {
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante: function(obj){
-		var janela,titulo,cabecalho,minimiza;
+		var titulo,cabecalho,minimiza;
 		if ($i("i3GEOF.html2canvas")) {
 			return;
 		}
@@ -44,7 +44,7 @@ i3GEOF.html2canvas = {
 		};
 		// cria a janela flutuante
 		titulo = "<div class='i3GeoTituloJanela'>img</div>";
-		janela = i3GEO.janela.cria(
+		i3GEO.janela.cria(
 			"400px",
 			"230px",
 			"",

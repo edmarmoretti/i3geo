@@ -51,7 +51,7 @@ switch (strtoupper($funcao))
 		/*
 		 Valor: APLICAR
 
-		Aplica a substituicao de chaves pelos valores enviados
+		Aplica a substituicao de chaves pelos valores enviados no parametro $valores com os valores separados por virgulas na sequencia das chaves
 		*/
 	case "APLICAR":
 		$map = ms_newMapObj($map_file);

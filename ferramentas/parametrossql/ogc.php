@@ -149,46 +149,63 @@ else{
 		}
 	}
 	//aplica os parametros especificos do plugin
-	if(!empty($plugin)){
-		$data = $l->data;
-		$c = $l->getmetadata("PLUGINI3GEO");
-		if($c != ""){
-			$cs = json_decode($c,true);
-			$cs = $cs["parametros"];
-			$chaves = array();
-			foreach($cs as $c){
-				$chaves[] = $c["chave"];
-			}
-			$chaves = implode(",",$chaves);
-			$filtro = $l->getFilterString();
+	$data = $l->data;
+	$c = $l->getmetadata("PLUGINI3GEO");
+	if($c != ""){
+		$cs = json_decode($c,true);
+		$cs = $cs["parametros"];
+		$chaves = array();
+		foreach($cs as $c){
+			$chaves[] = $c["chave"];
+		}
+		$chaves = implode(",",$chaves);
+		$filtro = $l->getFilterString();
 
-			$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$chaves);
-			$chaves = explode(",",$chaves);
-			$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$plugin);
-			$valores = explode(",",strip_tags($valores));
-			$n = count($chaves);
-			for($i = 0; $i < $n; $i++){
-				if($chaves[$i] != ""){
-					$v = $valores[$i];
-					$data = str_replace($chaves[$i],$v,$data);
-					if($filtro != ""){
-						$filtro = str_replace($chaves[$i],$v,$filtro);
+		$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$chaves);
+		$chaves = explode(",",$chaves);
+		$n = count($chaves);
+		//a variavel $plugin vem da URL e contem os valores
+		//que devem ser substituidos
+		//se $plugin for vazio, usa o primeiro valor definido na configuracao do plugin
+		//A ordem dos valores deve ser exatamente a ordem das chaves
+		if(empty($plugin)){
+			$plugin = array();
+			foreach($cs as $c){
+				if($c["chave"] != ""){
+					//valores definidos no plugin como uma string
+					if($c["valores"] != ""){
+						$plugin[] = explode(",",$c["valores"])[0];
+					}
+					elseif ($c["prog"] != ""){
+						$plugin[] = execProg($locaplic."/".$c["prog"]);
 					}
 				}
 			}
-			if($filtro != ""){
-				$l->setfilter($filtro);
-			}
-			$l->set("data",$data);
-			//acrecenta-se um md5 apos o nome caso seja necessario gerar cache
-			if($cache == true){
-				$original = $l->getmetadata("nomeoriginal");
-				if($original == ""){
-					$l->setmetadata("nomeoriginal",$l->name);
-					$original = $l->name;
+			$plugin = implode(",",$plugin);
+		}
+		$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$plugin);
+		$valores = explode(",",strip_tags($valores));
+		for($i = 0; $i < $n; $i++){
+			if($chaves[$i] != ""){
+				$v = $valores[$i];
+				$data = str_replace($chaves[$i],$v,$data);
+				if($filtro != ""){
+					$filtro = str_replace($chaves[$i],$v,$filtro);
 				}
-				$l->set("name",$original.md5($plugin));
 			}
+		}
+		if($filtro != ""){
+			$l->setfilter($filtro);
+		}
+		$l->set("data",$data);
+		//acrecenta-se um md5 apos o nome caso seja necessario gerar cache
+		if($cache == true){
+			$original = $l->getmetadata("nomeoriginal");
+			if($original == ""){
+				$l->setmetadata("nomeoriginal",$l->name);
+				$original = $l->name;
+			}
+			$l->set("name",$original.md5($plugin));
 		}
 	}
 	ms_newLayerObj($oMap, $l);
@@ -533,5 +550,10 @@ function salvaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 	readfile($nome);
 	exit;
 }
-
+function execProg($prog){
+	include($prog);
+	//$retorno variavel deve ser retornada pelo programa $prog
+	//veja como exemplo i3geo/aplicmap/daods/listaano.php
+	return $retorno[0]["v"];
+}
 ?>

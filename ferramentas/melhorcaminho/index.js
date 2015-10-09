@@ -246,7 +246,7 @@ i3GEOF.melhorcaminho = {
 	t5: function(){
 		var b, ins = "<p class='paragrafo'>"+$trad('lut',i3GEOF.melhorcaminho.dicionario);
 		ins += "<table><tr><td>"+$trad('maiorque',i3GEOF.melhorcaminho.dicionario)+"</td><td>"+$trad('menorque',i3GEOF.melhorcaminho.dicionario)+"</td><td>"+$trad('novovalor',i3GEOF.melhorcaminho.dicionario)+"</td><td></td></tr>";
-		ins += "<tr>"
+		ins += "<tr>";
 		ins += "<td><div class='i3geoForm100' style='float:left;' ><input id='i3GEOmelhorcaminhoLut1' type=text value=''/></div>&nbsp;</td>";
 		ins += "<td><div class='i3geoForm100' style='float:left;' ><input id='i3GEOmelhorcaminhoLut2' type=text value=''/></div>&nbsp;</td>";
 		ins += "<td><div class='i3geoForm100' style='float:left;' ><input id='i3GEOmelhorcaminhoLut3' type=text value=''/></div></td>";
@@ -330,11 +330,10 @@ i3GEOF.melhorcaminho = {
 		);
 	},
 	shape2pontos: function(tema){
-		var p, par, retorno
+		var p, par, retorno;
 		p = i3GEO.configura.locaplic + "/ferramentas/melhorcaminho/exec.php?g_sid="+i3GEO.configura.sid;
 		par = "funcao=shape2pontos&tema=" + tema;
 		retorno = function(retorno) {
-			var dms,dmsx,dmsy;
 			i3GEO.janela.fechaAguarde("shape2pontos");
 			i3GEOF.melhorcaminho.COORDENADASTEMA = retorno;
 			i3GEOF.melhorcaminho.t3();

@@ -24,6 +24,7 @@ if($nocache == "sim"){
 else{
 	$nocache = "";
 }
+//guarda os parametros das camadas que possuem plugins configurados
 $temasPluginI3Geo = array();
 //
 // recupera um mapa salvo no banco de administracao
@@ -239,6 +240,8 @@ if(isset($fundo) && $fundo != ""){
 //
 // define quais os layers que compor&atilde;o o mapa
 //
+//$objOpenLayers guarda a string javascript que sera usada para criar os objetos
+//layer do OpenLayers
 if(isset($temas)){
 	$objOpenLayers = array();
 }
@@ -301,14 +304,18 @@ if($temas != ""){
 						$layern = $maptemp->getLayer($i);
 						if($layern->getmetadata("PLUGINI3GEO") != ""){
 							//obtem os dados necessarios para iniciar o plugin
+							//os objetos layer (openLayers) sao criados apenas no final
+							//do processo, pois necessitam usar javascript e nao apenas PHP
 							$temasPluginI3Geo[] = array(
 									"name"=>$layern->name,
 									"tema"=>$layern->getmetadata("tema"),
 									"plugin"=>$layern->getmetadata("PLUGINI3GEO"),
 									"cache"=>strtoupper($layern->getmetadata("cache")),
 									"transitioneffect"=>strtoupper($layern->getmetadata("transitioneffect")),
-									"tiles"=>strtoupper($layern->getmetadata("tiles"))
+									"tiles"=>strtoupper($layern->getmetadata("tiles")),
+									"posicaoLayer"=>count($objOpenLayers)
 							);
+							$objOpenLayers[] = "";
 						}
 						else{
 							$layersNomes[] = $layern->name;
@@ -699,8 +706,30 @@ i3GEO.editorOL.mapa = new OpenLayers.Map(
 if(i3GEO.configura.locaplic === ""){
 	i3GEO.configura.locaplic = "../";
 }
+//faz a inclusao das camadas que possuem plugins
+//veja o codigo PHP abaixo da funcao
+//a variavel i3GEO.editorOL.layersIniciais ja contem a entrada para o layer
+//mas vazia. Isso e necessario para incluir a camada na ordem correta
+function adicionaPluginI3geo(camada,visivel,indice){
+	if(!camada.cache){
+		camada["cache"] = "NAO";
+	}
+	var n, i, l = i3GEO.pluginI3geo.layerMashup("openlayers",camada,"4326");
+	n = l.length;
+	for(i = 0; i < n; i++){
+		if(l[i].displayInLayerSwitcher === true){
+			l[i].setVisibility(visivel);
+		}
+		if(l[i] != true){
+			i3GEO.editorOL.layersIniciais[indice] = l[i];
+		}
+	}
+}
 <?php
 	//camadas plugin
+	//cria o javascript que faz a inclusao das camadas
+	//configuradas com plugins do i3geo
+	//a variavel $temasPluginI3Geo e definida no inicio do PHP
 	foreach ($temasPluginI3Geo as $t){
 		//var_dump($temasPluginI3Geo);exit;
 		//cria um objeto javascript para iniciar o plugin
@@ -711,28 +740,10 @@ if(i3GEO.configura.locaplic === ""){
 		if(in_array($t["name"],$visiveis)){
 			$visivel = "true";
 		}
-		echo "adicionaPluginI3geo(camada,$visivel);\n";
+		echo "adicionaPluginI3geo(camada,".$visivel.",".$t["posicaoLayer"].");\n";
 	}
-	?>
-	i3GEO.editorOL.inicia();
-
-	function adicionaPluginI3geo(camada,visivel){
-		if(!camada.cache){
-			camada["cache"] = "NAO";
-		}
-		var l = i3GEO.pluginI3geo.layerMashup("openlayers",camada,"4326"),
-			n,
-			i;
-			n = l.length;
-		for(i = 0; i < n; i++){
-			if(l[i].displayInLayerSwitcher === true){
-				l[i].setVisibility(visivel);
-			}
-			if(l[i] != true){
-				i3GEO.editorOL.layersIniciais.push(l[i]);
-			}
-		}
-	}
+?>
+i3GEO.editorOL.inicia();
 </script>
 </body>
 </html>
