@@ -174,7 +174,8 @@ else{
 				if($c["chave"] != ""){
 					//valores definidos no plugin como uma string
 					if($c["valores"] != ""){
-						$plugin[] = explode(",",$c["valores"])[0];
+						$temp = explode(",",$c["valores"]);
+						$plugin[] = $temp[0];
 					}
 					elseif ($c["prog"] != ""){
 						$plugin[] = execProg($locaplic."/".$c["prog"]);
@@ -183,6 +184,7 @@ else{
 			}
 			$plugin = implode(",",$plugin);
 		}
+		$l->setmetadata("TEMA",$l->getmetadata("TEMA")." - ".$plugin);
 		$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$plugin);
 		$valores = explode(",",strip_tags($valores));
 		for($i = 0; $i < $n; $i++){
@@ -197,6 +199,7 @@ else{
 		if($filtro != ""){
 			$l->setfilter($filtro);
 		}
+		
 		$l->set("data",$data);
 		//acrecenta-se um md5 apos o nome caso seja necessario gerar cache
 		if($cache == true){
