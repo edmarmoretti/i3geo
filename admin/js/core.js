@@ -67,14 +67,14 @@ Armazena o objeto com a lista de perfis
 $perfis = "";
 function cabecalhoMetaestat(id,excluir){
 	var botao,i,n,temp,
-		ins = "<fieldset><legend>Atalhos</legend>",
+		ins = '<fieldset><legend>Atalhos</legend>',
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
-			{id:"principal",titulo:"In&iacute;cio",link:"../principal.html"},
-			{id:"arvore",titulo:"&Aacute;rvore completa",link:"estat_variavel.html"},
-			{id:"conexao",titulo:"Conex&otilde;es",link:"estat_conexao.html"},
-			{id:"tipo_regiao",titulo:"Regi&otilde;es",link:"estat_tipo_regiao.html"},
-			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
+			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:"../principal.html"},
+			{id:"arvore",titulo:$trad("arvoreCompleta",i3GEOadmin.core.dicionario),link:"estat_variavel.html"},
+			{id:"conexao",titulo:$trad("conexoes",i3GEOadmin.core.dicionario),link:"estat_conexao.html"},
+			{id:"tipo_regiao",titulo:$trad("regioes",i3GEOadmin.core.dicionario),link:"estat_tipo_regiao.html"},
+			{id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;
 	for(i=0;i<n;i++){
@@ -115,11 +115,11 @@ function cabecalhoUsuarios(id,excluir){
 		ins = "<fieldset ><legend>Atalhos</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
-			{id:"principal",titulo:"In&iacute;cio",link:"../principal.html"},
-			{id:"operacoes",titulo:"Opera&ccedil;&otilde;es",link:"operacoes.html"},
-			{id:"usuarios",titulo:"Usu&aacute;rios",link:"usuarios.html"},
-			{id:"gruposusuarios",titulo:"Grupos e Usu&aacute;rios",link:"gruposusuarios.html"},
-			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
+			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:"../principal.html"},
+			{id:"operacoes",titulo:$trad("operacoes",i3GEOadmin.core.dicionario),link:"operacoes.html"},
+			{id:"usuarios",titulo:$trad("usuarios",i3GEOadmin.core.dicionario),link:"usuarios.html"},
+			{id:"gruposusuarios",titulo:$trad("gruposUsuarios",i3GEOadmin.core.dicionario),link:"gruposusuarios.html"},
+			{id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;
 	for(i=0;i<n;i++){
@@ -164,11 +164,11 @@ function cabecalhoGeral(id,excluir,prefixo){
 		ins = "<fieldset ><legend>Atalhos</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
-			{id:"principal",titulo:"In&iacute;cio",link:prefixo+"../principal.html"},
-			{id:"menus",titulo:"Menus",link:prefixo+"menus.html"},
-			{id:"arvore",titulo:"&Aacute;rvore de temas",link:prefixo+"arvore.html"},
-			{id:"editormapfile",titulo:"Mapfiles",link:prefixo+"editormapfile.html"},
-			{id:"login",titulo:"Login",js:"i3GEO.login.dialogo.abreLogin()"}
+			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:prefixo+"../principal.html"},
+			{id:"menus",titulo:$trad("menus",i3GEOadmin.core.dicionario),link:prefixo+"menus.html"},
+			{id:"arvore",titulo:$trad("arvore",i3GEOadmin.core.dicionario),link:prefixo+"arvore.html"},
+			{id:"editormapfile",titulo:$trad("mapfiles",i3GEOadmin.core.dicionario),link:prefixo+"editormapfile.html"},
+			{id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
 		];
 	n = botoes.length;
 	for(i=0;i<n;i++){
