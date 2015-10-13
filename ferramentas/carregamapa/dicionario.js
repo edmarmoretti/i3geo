@@ -3,11 +3,11 @@ i3GEOF.carregaMapa.dicionario = {
 	'insereArquivo' : [ {
 		pt : "Arquivo para upload:",
 		en : "",
-		es : ""
+		es : "Archivo para upload"
 	} ],
 	'carregaArquivo' : [ {
 		pt : "Carregar arquivo",
 		en : "",
-		es : ""
+		es : "Cargar archivo"
 	} ]
 };
