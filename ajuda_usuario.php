@@ -49,17 +49,107 @@ include("ms_configura.php");
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="css/i3geo_ferramentas45.css">
-<style>
-div {left: 0px;}
-</style>
+
+<script type="text/javascript" src="classesjs/i3geo.js"></script>
 <link rel="stylesheet" type="text/css" href="admin/html/admin.css">
+<style>
+.ajuda_usuario {
+	margin-left: 10px;
+}
 
-<title></title>
+P {
+	padding-top: 12px;
+	COLOR: #2F4632;
+	text-align: left;
+	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+#corpo {
+	text-align: left;
+	font-size: 12px;
+	width: 450px;
+	position: absolute;
+	top: 0px;
+	left: 300px;
+	background: white;
+}
+
+#arvoreTemas {
+	width: 280px;
+}
+
+body {
+	padding-top: 0px;
+	COLOR: #2F4632;
+	text-align: center;
+	font-size: 0.6cm;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: white;
+	margin: auto;
+}
+
+#brasil {
+	background-image: url("imagens/sprite.png");
+	background-position: 0 -600px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	height: 10px;
+	width: 20px;
+}
+
+#uk {
+	background-image: url("imagens/sprite.png");
+	background-position: 0 -625px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	height: 10px;
+	width: 20px;
+}
+
+#espanhol {
+	background-image: url("imagens/sprite.png");
+	background-position: 0 -1400px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	height: 10px;
+	width: 20px;
+}
+
+#bandeiras img {
+	margin-left: 7px;
+}
+
+#bandeiras {
+	width: 100px;
+	text-align: left;
+	position: absolute;
+	left: 0.2cm;
+	z-index: 10;
+}
+
+a {
+	margin: 0px auto;
+	text-decoration: none;
+	font-size: 14px;
+	color: #26298D;
+	outline: none;
+}
+
+A:hover {
+	color: #4142ff;
+}
+
+</style>
 </head>
-<body class=" yui-skin-sam fundoPonto" style="overflow:auto" >
+<body class=" yui-skin-sam " style="background-color: rgb(250, 250, 250);">
+	<div class="borda">
+		<div id="bandeiras"></div>
+		<div style="text-align: center">
+			<b>&nbsp;</b>
+		</div>
+	</div>
 
-<div class="bordaSuperior"  >&nbsp;</div>
 <div class="mascaraPrincipal" id="divGeral">
 	<img src="imagens/i3geo1.jpg" />
 	<p style='font-size:16px'>Documenta&ccedil;&atilde;o do usu&aacute;rio.</p>
@@ -81,10 +171,15 @@ div {left: 0px;}
 </div>
 <script language="JavaScript" type="text/javascript" src="classesjs/dicionario_ajuda.js"></script>
 <script>
+i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://"
++ window.location.host + "/i3geo";
+i3GEO.idioma.IDSELETOR = "bandeiras";
+i3GEO.idioma.mostraSeletor();
 var idcategoria = "<?php echo $idcategoria;?>";
 var idajuda = "<?php echo $idajuda;?>";
-if(screen.availWidth > 700)
-{document.getElementById("divGeral").style.width = "700px";}
+if(screen.availWidth > 700){
+	document.getElementById("divGeral").style.width = "700px";
+}
 function pegaAjuda(tipo,categoria){
 	eval("var obj = g_traducao_ajuda."+tipo);
 	for(var k in obj){
@@ -93,10 +188,14 @@ function pegaAjuda(tipo,categoria){
 		else{
 			if(idajuda == "" && categoria != obj[k].categoria){}
 			else{
-				ins += "<br><li onclick='expande(\""+k+"\")' style='cursor:pointer;font-size:16px;color:#759555'><b>"+obj[k].titulo+"</b></li>";
-				ins += "<div id='"+k+"' style='display:none'><p>"+obj[k].pt+"</p>";
-				ins += "<p>"+obj[k].complemento+"</p>";
-				ins += "<p style='color:gray;padding-left:20px'>"+obj[k].diretorio+"</p>";
+				ins += "<br><li onclick='expande(\""+k+"\")' style='cursor:pointer;font-size:16px;color:#759555'><b>"+traduzir(obj[k].titulo)+"</b></li>";
+				ins += "<div id='"+k+"' style='display:none'><p>"+traduzir(obj[k])+"</p>";
+				if(obj[k].complemento){
+					ins += "<p>"+obj[k].complemento+"</p>";
+				}
+				if(obj[k].diretorio){
+					ins += "<p style='color:gray;padding-left:20px'>"+obj[k].diretorio+"</p>";
+				}
 				if(obj[k].apijs){
 					ins += "<p style='color:gray;padding-left:20px'>API js: "+obj[k].apijs+"</p>";
 				}
@@ -111,17 +210,16 @@ function pegaAjuda(tipo,categoria){
 		}
 	}
 }
-function inicia()
-{
+function inicia(){
 	ins = "<div style='text-align:justify'>";
 	for(var key in g_traducao_ajuda_categorias){
 		if(idcategoria != "" && idcategoria != key)
 		{}
 		else{
 			if(idajuda == "")
-				ins += "<p style='font-size:18px' ><b>"+g_traducao_ajuda_categorias[key].titulo+"</b></p>";
+				ins += "<p style='font-size:18px' ><br><b>"+traduzir(g_traducao_ajuda_categorias[key].titulo)+"</b></p>";
 			if(g_traducao_ajuda_categorias[key].observacao && idajuda == "")
-				ins += "<p style='font-size:14px;color:gray' >"+g_traducao_ajuda_categorias[key].observacao+"</p>";
+				ins += "<p style='font-size:14px;color:gray' >"+traduzir(g_traducao_ajuda_categorias[key].observacao)+"</p>";
 			if(idajuda == "")
 				pegaAjuda("ferramentas",key);
 			else{
@@ -130,7 +228,6 @@ function inicia()
 			if(idcategoria == ""){
 				document.getElementById("resultado").innerHTML = ins+"</div>";
 				expande(idajuda);
-				//return;
 			}
 		}
 	}
@@ -152,6 +249,13 @@ function expandirtudo(){
 		if(j)
 		{expande(key);}
 	}
+}
+function traduzir(hash){
+	var r = hash[i3GEO.idioma.ATUAL];
+	if (!r || (r && r == "")) {
+		r = hash["pt"];
+	}
+	return r;
 }
 inicia()
 </script>
