@@ -64,7 +64,9 @@ function initMenu(){
 	var botao, editorDeMenus = function()	{
 			if($i("editor_bd")){return;}
 			core_montaEditor("","600px","500px","pegaMenus","Menu");
-			$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="letras_M" ></div><br><br><div id="tabela" style="left:-5px;"> </div>';
+			$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="' 
+			+ $trad("adicionaMenu",i3GEOadmin.arvore.dicionario) + 
+			'" style="left:-5px;" /><br><br><div id="letras_M" ></div><br><br><div id="tabela" style="left:-5px;"> </div>';
 			i3GEOadmin.menus.inicia();
 		},
 		editorDeGrupos = function(){

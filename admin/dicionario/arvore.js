@@ -40,5 +40,10 @@ i3GEOadmin.arvore.dicionario = {
 		pt : "&Aacute;rvore do cat&aacute;logo:",
 		en : "",
 		es : ""
+	} ],
+    'adicionaMenu' : [ {
+		pt : "Adicionar um novo menu",
+		en : "",
+		es : ""
 	} ]
 };

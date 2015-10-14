@@ -54,6 +54,11 @@ i3GEOadmin.core.dicionario = {
     'gruposUsuarios' : [ {
 		pt : "Grupos e Usu&aacute;rios",
 		en : "",
+		es : "",
+	} ],
+    'atalhos' : [ {
+		pt : "Atalhos",
+		en : "",
 		es : ""
 	} ]
 };

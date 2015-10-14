@@ -67,7 +67,7 @@ Armazena o objeto com a lista de perfis
 $perfis = "";
 function cabecalhoMetaestat(id,excluir){
 	var botao,i,n,temp,
-		ins = '<fieldset><legend>Atalhos</legend>',
+		ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
 			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:"../principal.html"},
@@ -112,7 +112,7 @@ function cabecalhoMetaestat(id,excluir){
 
 function cabecalhoUsuarios(id,excluir){
 	var botao,i,n,temp,
-		ins = "<fieldset ><legend>Atalhos</legend>",
+		ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
 			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:"../principal.html"},
@@ -161,7 +161,7 @@ function cabecalhoGeral(id,excluir,prefixo){
 		prefixo = "";
 	}
 	var botao,i,n,temp,
-		ins = "<fieldset ><legend>Atalhos</legend>",
+		ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
 		u = i3GEO.util.pegaCookie("i3geousuarionome"),
 		botoes = [
 			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:prefixo+"../principal.html"},
