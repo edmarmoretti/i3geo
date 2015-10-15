@@ -60,5 +60,35 @@ i3GEOadmin.core.dicionario = {
 		pt : "Atalhos",
 		en : "",
 		es : ""
+	} ],
+    'sobe' : [ {
+		pt : "sobe",
+		en : "",
+		es : ""
+	} ],
+    'desce' : [ {
+		pt : "desce",
+		en : "",
+		es : ""
+	} ],
+    'editar' : [ {
+		pt : "editar",
+		en : "",
+		es : ""
+	} ],
+    'excluir' : [ {
+		pt : "excluir",
+		en : "",
+		es : ""
+	} ],
+    'testar' : [ {
+		pt : "testar!",
+		en : "",
+		es : ""
+	} ],
+    'editorTxt' : [ {
+		pt : "Editor de textos",
+		en : "",
+		es : ""
 	} ]
 };

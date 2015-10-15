@@ -45,5 +45,155 @@ i3GEOadmin.arvore.dicionario = {
 		pt : "Adicionar um novo menu",
 		en : "",
 		es : ""
+	} ],
+    'adicionaGrupo' : [ {
+		pt : "Adicionar um novo grupo",
+		en : "",
+		es : ""
+	} ],
+    'adicionaSubgrupo' : [ {
+		pt : "Adicionar um novo subgrupo",
+		en : "",
+		es : ""
+	} ],
+    'adicionaNovo' : [ {
+		pt : "Adicionar um novo",
+		en : "",
+		es : ""
+	} ],
+    'grupos' : [ {
+		pt : "Grupos",
+		en : "",
+		es : ""
+	} ],
+    'raizMenu' : [ {
+		pt : "Temas na raiz do menu",
+		en : "",
+		es : ""
+	} ],
+    'subgrupos' : [ {
+		pt : "Subgrupos",
+		en : "",
+		es : ""
+	} ],
+    'temas' : [ {
+		pt : "Temas",
+		en : "",
+		es : ""
+	} ],
+    'editaNo' : [ {
+		pt : " ??? vc precisa editar esse n&oacute;",
+		en : "",
+		es : ""
+	} ],
+    'raizGrupo' : [ {
+		pt : "Temas na raiz do grupo:",
+		en : "",
+		es : ""
+	} ],
+    'msgTema' : [ {
+		pt : " adicionando tema...",
+		en : "",
+		es : ""
+	} ],
+    'msgGrupo' : [ {
+		pt : " adicionando grupo...",
+		en : "",
+		es : ""
+	} ],
+    'msgSubgrupo' : [ {
+		pt : " adicionando subgrupo...",
+		en : "",
+		es : ""
+	} ],
+    'msgExclui' : [ {
+		pt : " excluindo o registro do id= ",
+		en : "",
+		es : ""
+	} ],
+    'escolheGrupo' : [ {
+		pt : "Escolha o grupo para esse n&iacute;vel:",
+		en : "",
+		es : ""
+	} ],
+    'msgBusca' : [ {
+		pt : "Buscando...",
+		en : "",
+		es : ""
+	} ],
+    'novoGrupo' : [ {
+		pt : "Ou digite o nome de um novo grupo:",
+		en : "",
+		es : ""
+	} ],
+    'perfilVer' : [ {
+		pt : "Perfis que podem ver:",
+		en : "",
+		es : ""
+	} ],
+    'publicado' : [ {
+		pt : "Publicado?",
+		en : "",
+		es : ""
+	} ],
+    'escolheSubgrupo' : [ {
+		pt : "Escolha o subgrupo para esse n&iacute;vel:",
+		en : "",
+		es : ""
+	} ],
+    'novoSubgrupo' : [ {
+		pt : "Ou digite o nome de um novo subgrupo:",
+		en : "",
+		es : ""
+	} ],
+    'escolheTema' : [ {
+		pt : "Escolha o tema para esse n&iacute;vel:",
+		en : "",
+		es : ""
+	} ],
+    'ordem' : [ {
+		pt : "Ordem",
+		en : "",
+		es : ""
+	} ],
+    'tema' : [ {
+		pt : "Tema:",
+		en : "",
+		es : ""
+	} ],
+    'msgNaoExclui' : [ {
+		pt : "Nao foi possivel excluir. Verifique se nao existem menus vinculados a este tema",
+		en : "",
+		es : ""
+	} ],
+    'msgGravando' : [ {
+		pt : " gravando o registro do id= ",
+		en : "",
+		es : ""
+	} ],
+    'msgEscolheGrupo' : [ {
+		pt : "Escolha um grupo",
+		en : "",
+		es : ""
+	} ],
+    'msgEscolheSubgrupo' : [ {
+		pt : "Escolha um subgrupo",
+		en : "",
+		es : ""
+	} ],
+    'msgEscolheTema' : [ {
+		pt : "Escolha um tema",
+		en : "",
+		es : ""
+	} ],
+    'msgModificaOrdem' : [ {
+		pt : " modificando a ordem no banco de dados",
+		en : "",
+		es : ""
+	} ],
+    'msgBuscaDados' : [ {
+		pt : " buscando dados",
+		en : "",
+		es : ""
 	} ]
 };

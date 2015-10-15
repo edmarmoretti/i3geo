@@ -72,13 +72,17 @@ function initMenu(){
 		editorDeGrupos = function(){
 			if($i("editor_bd")){return;}
 			core_montaEditor("","600px","500px","","Grupos");
-			$i("editor_bd").innerHTML = '<p class=paragrafo ><input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /></p><p><br><br><div id="letras_G" ></div><br><div id="tabela" style="left:-5px;"> </div>';
+			$i("editor_bd").innerHTML = '<p class=paragrafo ><input type=button id=adicionaNovoGrupo value="'
+			+ $trad("adicionaGrupo",i3GEOadmin.arvore.dicionario) + 
+			'" style="left:-5px;" /></p><p><br><br><div id="letras_G" ></div><br><div id="tabela" style="left:-5px;"> </div>';
 			i3GEOadmin.grupos.inicia();
 		},
 		editorDeSubGrupos = function()	{
 			if($i("editor_bd")){return;}
 			core_montaEditor("","650px","500px","","Subgrupos");
-			$i("editor_bd").innerHTML = '<p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="Adicionar um novo subgrupo" style="left:-5px;" /></p><br><br><div id="letras_SG" ></div><br><div id="tabela" style="left:-5px;"> </div>';
+			$i("editor_bd").innerHTML = '<p class=paragrafo ><input type=button id=adicionaNovoSubGrupo value="'
+			+ $trad("adicionaSubgrupo",i3GEOadmin.arvore.dicionario) +
+			'" style="left:-5px;" /></p><br><br><div id="letras_SG" ></div><br><div id="tabela" style="left:-5px;"> </div>';
 			i3GEOadmin.subgrupos.inicia();
 		};
 	botao = new YAHOO.widget.Button("botaoEditorMenu",{ onclick: { fn: editorDeMenus } });
@@ -217,12 +221,14 @@ function montaNosGrupos(idmenu,no,dados,redesenha)
 	if(!tree.getNodeByProperty("etiquetaGrupo","menu_"+idmenu))
 	{
 		var temp = "menu_"+idmenu;
-		var d = {tipo:"etiqueta","etiquetaGrupo":temp,html:"<i style=color:gray >Grupos</i>"};
+		var d = {tipo:"etiqueta","etiquetaGrupo":temp,html:"<i style=color:gray > "+ $trad("grupos",i3GEOadmin.arvore.dicionario) + "</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		if($id_grupo !== "" || $id_menu !== "")
 		{tempNodeR.expand();}
-		var conteudo = "<span onclick=\"novoGrupo('"+idmenu+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>";
+		var conteudo = "<span onclick=\"novoGrupo('"+idmenu+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > "
+		+ $trad("adicionaNovo",i3GEOadmin.arvore.dicionario) + 
+		"</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.enableHighlight = false;
@@ -311,14 +317,17 @@ function montaNosSubgrupos(idmenu,no,dados,redesenha)
 	{return;}
 	if(!tree.getNodeByProperty("etiquetaTemasSubGrupo",no.data.id_n1))
 	{
-		var d = {tipo:"etiqueta",etiquetaTemasSubGrupo:no.data.id_n1,html:"<i style=color:gray >Sub-grupos</i>"};
+		var d = {tipo:"etiqueta",etiquetaTemasSubGrupo:no.data.id_n1,html:"<i style=color:gray > "
+			+ $trad("subgrupos",i3GEOadmin.arvore.dicionario) + "</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.enableHighlight = false;
 		tempNodeR.isLeaf = false;
 		if($id_subgrupo !== "" || $id_grupo !== "")
 		{tempNodeR.expand();}
 
-		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"novoSubGrupo('"+idmenu+"','"+no.data.id_n1+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>";
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"novoSubGrupo('"+idmenu+"','"+no.data.id_n1+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > "
+		+ $trad("adicionaNovo",i3GEOadmin.arvore.dicionario) + 
+		"</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
@@ -345,11 +354,15 @@ function montaTemas(idmenu,no,dados,redesenha)
 	var tempNodeR = null;
 	if(!tree.getNodeByProperty("etiquetaTemas",no.data.id_n2))
 	{
-		var d = {tipo:"etiqueta",etiquetaTemas:no.data.id_n2,html:"<i style=color:gray >Temas</i>"};
+		var d = {tipo:"etiqueta",etiquetaTemas:no.data.id_n2,html:"<i style=color:gray >"
+			+ $trad("temas",i3GEOadmin.arvore.dicionario) +
+			"</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, true,true);
 		tempNodeR.isLeaf = false;
 		tempNodeR.enableHighlight = false;
-		var conteudo = "<span onclick=\"novoTema('"+idmenu+"','"+no.data.id_n2+"')\" style=\"cursor:pointer;\"><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > Adicionar um novo</i></span>";
+		var conteudo = "<span onclick=\"novoTema('"+idmenu+"','"+no.data.id_n2+"')\" style=\"cursor:pointer;\"><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray > "
+		+ $trad("adicionaNovo",i3GEOadmin.arvore.dicionario) +
+		"</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
@@ -369,13 +382,13 @@ function testarMapfile(codigoMap){
 	window.open("../../testamapfile.php?map="+codigoMap);
 }
 function montaConteudoNo(id,publicado,nome,tipo,tema){
-	var complemento = "", cor = "", conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','"+tipo+"','"+id+"')\" title=sobe src=\"../imagens/34.png\" />";
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','"+tipo+"','"+id+"')\" title=desce src=\"../imagens/33.png\" />";
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('"+tipo+"','"+id+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('"+tipo+"','"+id+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />";
+	var complemento = "", cor = "", conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','"+tipo+"','"+id+"')\" title="+ $trad("sobe",i3GEOadmin.core.dicionario) +" src=\"../imagens/34.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','"+tipo+"','"+id+"')\" title="+ $trad("desce",i3GEOadmin.core.dicionario) +" src=\"../imagens/33.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('"+tipo+"','"+id+"')\" title="+ $trad("excluir",i3GEOadmin.core.dicionario) +" width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('"+tipo+"','"+id+"')\" title="+ $trad("editar",i3GEOadmin.core.dicionario) +" width='10px' heigth='10px' src=\"../imagens/06.png\" />";
 	if(tipo === "tema"){
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px;width:10px;\" onclick=\"testarMapfile('"+tema+".map')\" title='testar!' src=\"../imagens/41.png\" />";
-		conteudo += "<a style='margin-left:2px;border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+tema+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/document-edit.png\" /></a>";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px;width:10px;\" onclick=\"testarMapfile('"+tema+".map')\" title="+ $trad("testar",i3GEOadmin.core.dicionario) +" src=\"../imagens/41.png\" />";
+		conteudo += "<a style='margin-left:2px;border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+tema+"' target=_self >&nbsp;<img title="+ $trad("editorTxt",i3GEOadmin.core.dicionario) +" style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/document-edit.png\" /></a>";
 
 	}
 	conteudo += "&nbsp;";
@@ -389,7 +402,7 @@ function montaConteudoNo(id,publicado,nome,tipo,tema){
 		conteudo += "<span "+cor+" >"+nome+"<span style='color:gray'> id: "+id+complemento+"</span></span>";
 	}
 	else {
-		conteudo += "<span "+cor+" > ??? vc precisa editar esse n&oacute;</span>";
+		conteudo += "<span "+cor+" >"+ $trad("editaNo",i3GEOadmin.arvore.dicionario) +"</span>";
 	}
 	return conteudo;
 }
@@ -402,21 +415,25 @@ function montaTemasRaiz(no,dados,redesenha)
 	if(!tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+no.data.id_menu))
 	{
 		var temp = "menu_"+no.data.id_menu;
-		var d = {id_menu:no.data.id_menu,tipo:"etiqueta",etiquetaTemasRaiz:temp,html:"<i style=color:gray >Temas na raiz do menu</i>"};
+		var d = {id_menu:no.data.id_menu,tipo:"etiqueta",etiquetaTemasRaiz:temp,html:"<i style=color:gray > "
+			+ $trad("raizMenu",i3GEOadmin.arvore.dicionario) +
+			"</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		tempNodeR.enableHighlight = false;
-		var d = {tipo:"etiqueta",html:"<span style=\"cursor:pointer;\" onclick=\"novoTemaRaiz('"+no.data.id_menu+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray >Adicionar um novo</i></span>"};
+		var d = {tipo:"etiqueta",html:"<span style=\"cursor:pointer;\" onclick=\"novoTemaRaiz('"+no.data.id_menu+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray >"
+			+ $trad("adicionaNovo",i3GEOadmin.arvore.dicionario) +
+			"</i></span>"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 		tempNode.enableHighlight = false;
 	}
 	for (var i=0, j=dados.raiz.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','raizmenu','"+dados.raiz[i].id_raiz+"')\" title=sobe src=\"../imagens/34.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','raizmenu','"+dados.raiz[i].id_raiz+"')\" title=desce src=\"../imagens/33.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('raizmenu','"+dados.raiz[i].id_raiz+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('raizmenu','"+dados.raiz[i].id_raiz+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados.raiz[i].nome_tema+"</span>";
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','raizmenu','"+dados.raiz[i].id_raiz+"')\" title="+ $trad("sobe",i3GEOadmin.core.dicionario) +" src=\"../imagens/34.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','raizmenu','"+dados.raiz[i].id_raiz+"')\" title="+ $trad("desce",i3GEOadmin.core.dicionario) +" src=\"../imagens/33.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('raizmenu','"+dados.raiz[i].id_raiz+"')\" title="+ $trad("excluir",i3GEOadmin.core.dicionario) +" width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('raizmenu','"+dados.raiz[i].id_raiz+"')\" title="+ $trad("editar",i3GEOadmin.core.dicionario) +" width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados.raiz[i].nome_tema+"</span>";
 		var d = {html:conteudo,id_raiz:dados.raiz[i].id_raiz,tipo:"raizmenu"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.enableHighlight = false;
@@ -434,11 +451,11 @@ function montaTemasRaizGrupo(idmenu,no,dados,redesenha)
 	if(!tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+no.data.id_n1))
 	{
 		var temp = "grupo_"+no.data.id_n1;
-		var d = {etiquetaTemasGrupo:temp,tipo:"etiqueta",html:"<i style=color:gray >Temas na raiz do grupo:</i>"};
+		var d = {etiquetaTemasGrupo:temp,tipo:"etiqueta",html:"<i style=color:gray >"+ $trad("raizGrupo",i3GEOadmin.arvore.dicionario) +"</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		tempNodeR.enableHighlight = false;
-		var d = {tipo:"etiqueta",html:"<span onclick=\"novoTemaRaizGrupo('"+idmenu+"','"+no.data.id_n1+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray >Adicionar um novo</i></span>"};
+		var d = {tipo:"etiqueta",html:"<span onclick=\"novoTemaRaizGrupo('"+idmenu+"','"+no.data.id_n1+"')\" style=\"cursor:pointer;\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i style=color:gray >"+ $trad("adicionaNovo",i3GEOadmin.arvore.dicionario) +"</i></span>"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.enableHighlight = false;
 		tempNode.isLeaf = true;
@@ -464,7 +481,7 @@ Adiciona um novo tema na raiz de um menu
 function novoTemaRaiz(id)
 {
 	core_carregando("ativa");
-	var mensagem = " adicionando tema...";
+	var mensagem = $trad("msgTema",i3GEOadmin.arvore.dicionario);
 	core_carregando(mensagem);
 	var no = tree.getNodeByProperty("etiquetaTemasRaiz","menu_"+id);
 	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaiz&id_menu="+id+"&idioma="+idiomaSel();
@@ -497,7 +514,7 @@ Adiciona um novo tema na raiz de um grupo
 function novoTemaRaizGrupo(idmenu,id)
 {
 	core_carregando("ativa");
-	var mensagem = " adicionando tema...";
+	var mensagem = $trad("msgTema",i3GEOadmin.arvore.dicionario);
 	core_carregando(mensagem);
 	var no = tree.getNodeByProperty("etiquetaTemasGrupo","grupo_"+id);
 	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaizGrupo&id_n1="+id+"&id_menu="+idmenu+"&idioma="+idiomaSel();
@@ -530,7 +547,7 @@ Adiciona um novo grupo em um menu
 function novoGrupo(id_menu)
 {
 	core_carregando("ativa");
-	var mensagem = " adicionando grupo...";
+	var mensagem = $trad("msgGrupo",i3GEOadmin.arvore.dicionario);
 	core_carregando(mensagem);
 	var sUrl = "../php/arvore.php?funcao=adicionarGrupo&id_menu="+id_menu+"&idioma="+idiomaSel();
 	var callback =
@@ -565,7 +582,7 @@ Adiciona um novo subgrupo em um grupo
 function novoSubGrupo(id_menu,id_n1)
 {
 	core_carregando("ativa");
-	var mensagem = " adicionando Sub-grupo...";
+	var mensagem = $trad("msgSubgrupo",i3GEOadmin.arvore.dicionario);
 	core_carregando(mensagem);
 	var sUrl = "../php/arvore.php?funcao=adicionarSubGrupo&id_n1="+id_n1+"&idioma="+idiomaSel();
 	var callback =
@@ -600,7 +617,7 @@ Adiciona um novo tema
 function novoTema(id_menu,id_n2)
 {
 	core_carregando("ativa");
-	var mensagem = " adicionando tema...";
+	var mensagem = $trad("msgTema",i3GEOadmin.arvore.dicionario);
 	core_carregando(mensagem);
 	var sUrl = "../php/arvore.php?funcao=adicionarTema&id_n2="+id_n2+"&idioma="+idiomaSel();
 	var callback =
@@ -626,7 +643,7 @@ function novoTema(id_menu,id_n2)
 }
 function excluir(tipo,id)
 {
-	var mensagem = " excluindo o registro do id= "+id,
+	var mensagem = $trad("msgExclui",i3GEOadmin.arvore.dicionario);+id,
 		no = null,
 		sUrl = null;
 	if(tipo == "raizgrupo" || tipo == "raizmenu")
@@ -656,7 +673,7 @@ function excluir(tipo,id)
 function editar(tipo,id)
 {
 	core_carregando("ativa");
-	core_carregando(" buscando dados");
+	core_carregando($trad("msgBuscaDados",i3GEOadmin.arvore.dicionario));
 	var sUrl = null;
 	var callback =
 	{
@@ -720,63 +737,63 @@ function filtraLetraTemas(letra) {
 }
 function montaDivGrupo(i)
 {
-	var ins = "<p>Escolha o grupo para esse n&iacute;vel:</p>";
-	ins += "<div id=comboGrupo >Buscando...</div>";
-	ins += "<p>Ou digite o nome de um novo grupo:</p>";
-	ins += "<input type=text id='EnomeNovoGrupo' value='' style='position:relative;width:200px;' />";
+	var ins = "<p>" + $trad("escolheGrupo",i3GEOadmin.arvore.dicionario) + "</p>"
+	+ "<div id=comboGrupo >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
+	+ "<p>"+ $trad("novoGrupo",i3GEOadmin.arvore.dicionario) +"</p>"
+	+ "<input type=text id='EnomeNovoGrupo' value='' style='position:relative;width:200px;' />"
 
-	ins += "<p>Perfis que podem ver:</p>";
-	ins += "<input type=text id='En1_perfil' value='"+i.n1_perfil+"' style='position:relative;width:200px;float:left;' />";
-	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>";
-	ins += "<p style='width:200px;' >Publicado?";
-	ins += "<select id='Epublicado' style='left:5px;position:relative;'>";
-	ins += core_combosimnao(i.publicado);
-	ins += "</select>";
-	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />";
+	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
+	+ "<input type=text id='En1_perfil' value='"+i.n1_perfil+"' style='position:relative;width:200px;float:left;' />"
+	+ "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
+	+ "<p style='width:200px;' >"+ $trad("publicado",i3GEOadmin.arvore.dicionario) +""
+	+ "<select id='Epublicado' style='left:5px;position:relative;'>"
+	+ core_combosimnao(i.publicado)
+	+ "</select>"
+	+ "<input type=hidden value="+i.ordem+" id='Eordem' />";
 	return(ins);
 }
 function montaDivSubGrupo(i)
 {
-	var ins = "<p>Escolha o sub-grupo para esse n&iacute;vel:</p>";
-	ins += "<div id=comboSubGrupo >Buscando...</div>";
-	ins += "<p>Ou digite o nome de um novo sub-grupo:</p>";
-	ins += "<input type=text id='EnomeNovoSubGrupo' value='' style='position:relative;width:200px;' />";
-
-	ins += "<p>Perfis que podem ver: </p>";
-	ins += "<input type=text id='En2_perfil' value='"+i.n2_perfil+"' style='position:relative;width:200px;float:left;' />";
-	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;' >Buscando...</div>";
-	ins += "<p style='width:200px;'>Publicado?";
-	ins += "<select id='Epublicado' style='left:5px;position:relative;'>";
-	ins += core_combosimnao(i.publicado);
-	ins += "</select>";
-	ins += "<br>";
-	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />";
+	var ins = "<p>" + $trad("escolheSubgrupo",i3GEOadmin.arvore.dicionario) + "</p>"
+	+ "<div id=comboSubGrupo >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
+	+ "<p>"+ $trad("novoSubgrupo",i3GEOadmin.arvore.dicionario) +"</p>"
+	+ "<input type=text id='EnomeNovoSubGrupo' value='' style='position:relative;width:200px;' />"
+    
+	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
+	+ "<input type=text id='En2_perfil' value='"+i.n2_perfil+"' style='position:relative;width:200px;float:left;' />"
+	+ "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;' >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
+	+ "<p style='width:200px;'>"+ $trad("publicado",i3GEOadmin.arvore.dicionario) +""
+	+ "<select id='Epublicado' style='left:5px;position:relative;'>"
+	+ core_combosimnao(i.publicado)
+	+ "</select>"
+	+ "<br>"
+	+ "<input type=hidden value="+i.ordem+" id='Eordem' />";
 	return(ins);
 }
 function montaDivTema(i)
 {
-	var ins = "<p>Escolha o tema para esse n&iacute;vel:</p>";
-	ins += "<div id='letrasDivTema'></div>";
-	ins += "<div id=comboTema >Buscando...</div>";
-	ins += "<p>Perfis que podem ver: </p>";
-	ins += "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' style='position:relative;width:200px;float:left;'/>";
-	ins += "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>";
-	ins += "<p style='float:left;width:200px;'>Publicado?<br><br>";
-	ins += "<select id='Epublicado' >";
-	ins += core_combosimnao(i.publicado);
-	ins += "</select>";
-	ins += "<p style='width:200px;'>Ordem<br><br>";
-	ins += "<input size=10 type=text value="+i.ordem+" id='Eordem' />";;
+	var ins = "<p>" + $trad("escolheTema",i3GEOadmin.arvore.dicionario) + "</p>"
+	+ "<div id='letrasDivTema'></div>"
+	+ "<div id=comboTema >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
+	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
+	+ "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' style='position:relative;width:200px;float:left;'/>"
+	+ "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>"
+	+ "<p style='float:left;width:200px;'>"+ $trad("publicado",i3GEOadmin.arvore.dicionario) +"<br><br>"
+	+ "<select id='Epublicado' >"
+	+ core_combosimnao(i.publicado)
+	+ "</select>"
+	+ "<p style='width:200px;'>"+ $trad("ordem",i3GEOadmin.arvore.dicionario) +"<br><br>"
+	+ "<input size=10 type=text value="+i.ordem+" id='Eordem' />";
 	return(ins);
 }
 function montaDivRaiz(i)
 {
-	var ins = "<p>Tema:</p>";
-	ins += "<div id=comboTema >Buscando...</div>";
-	ins += "<p>Perfis que podem ver: </p>";
-	ins += "<input size=45 type=text id='Eperfil' value='"+i.perfil+"' /></p>";
-	ins += "<div id=comboPerfil >Buscando...</div>";
-	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />";
+	var ins = "<p>"+ $trad("tema",i3GEOadmin.arvore.dicionario) +"</p>"
+	+ "<div id=comboTema >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
+	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
+	+ "<input size=45 type=text id='Eperfil' value='"+i.perfil+"' /></p>"
+	+ "<div id=comboPerfil >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
+	+ "<input type=hidden value="+i.ordem+" id='Eordem' />";
 	return(ins);
 }
 function registraPerfil(valor,id)
@@ -833,7 +850,7 @@ function gravaDados(tipo,id)
 	for (var i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"="+($i("E"+campos[i]).value);}
 	core_carregando("ativa");
-	core_carregando(" gravando o registro do id= "+id);
+	core_carregando($trad("msgGravando",i3GEOadmin.arvore.dicionario)+id);
 	var sUrl = prog+par;
 	var callback =
 	{
@@ -849,7 +866,7 @@ function gravaDados(tipo,id)
 				{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 					{
-						core_carregando("<span style=color:red >Nao foi possivel excluir. Verifique se nao existem menus vinculados a este tema</span>");
+						core_carregando("<span style=color:red >"+ $trad("msgNaoExclui",i3GEOadmin.arvore.dicionario) +"</span>");
 						setTimeout("core_carregando('desativa')",3000);
 					}
 					else
@@ -866,7 +883,7 @@ function gravaDados(tipo,id)
 								texto = document.getElementById("Eid_grupo");
 								if(texto.selectedIndex < 0){
 									core_carregando("desativa");
-									alert("Escolha um grupo");
+									alert($trad("msgEscolheGrupo",i3GEOadmin.arvore.dicionario));
 									return;
 								}
 								texto = texto.options[texto.selectedIndex].text;
@@ -892,7 +909,7 @@ function gravaDados(tipo,id)
 								texto = document.getElementById("Eid_subgrupo");
 								if(texto.selectedIndex < 0){
 									core_carregando("desativa");
-									alert("Escolha um subgrupo");
+									alert($trad("msgEscolheSubgrupo",i3GEOadmin.arvore.dicionario));
 									return;
 								}
 								texto = texto.options[texto.selectedIndex].text;
@@ -915,7 +932,7 @@ function gravaDados(tipo,id)
 							texto = document.getElementById("Eid_tema");
 							if(texto.selectedIndex < 0){
 								core_carregando("desativa");
-								alert("Escolha um tema");
+								alert($trad("msgEscolheTema",i3GEOadmin.arvore.dicionario));
 								return;
 							}
 							texto = texto.options[texto.selectedIndex].text;
@@ -940,7 +957,7 @@ function gravaDados(tipo,id)
 							if(obje){
 								if(obje.selectedIndex < 0){
 									core_carregando("desativa");
-									alert("Escolha um tema");
+									alert($trad("msgEscolheTema",i3GEOadmin.arvore.dicionario));
 									return;
 								}
 								texto = obje.options[obje.selectedIndex].text;
@@ -996,7 +1013,7 @@ function sobeDesce(movimento,tipo,id)
 	{
 		var sUrl = "../php/arvore.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&id="+id+"&idioma="+idiomaSel();
 		core_carregando("ativa");
-		core_carregando(" modificando a ordem no banco de dados");
+		core_carregando($trad("msgModificaOrdem",i3GEOadmin.arvore.dicionario));
 		core_makeRequest(sUrl,callback);
 	}
 }
