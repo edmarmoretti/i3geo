@@ -2215,7 +2215,7 @@ g_traducao = {
 			{
 				pt : "C&aacute;lculo n&atilde;o pode ser realizado. Falta carregar a API de geometria do GM",
 				en : "",
-				es : ""
+				es : "El c&aacute;lculo no puede ser realizado. Falta cargar la API de geometr&iacute;a de GM"
 			}
 		],
 		"x101" : [
