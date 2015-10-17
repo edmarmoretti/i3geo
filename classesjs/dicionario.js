@@ -2221,29 +2221,29 @@ g_traducao = {
 		"x101" : [
 			{
 				pt : "C&oacute;pia",
-				en : "",
-				es : ""
+				en : "Copy",
+				es : "Copia"
 			}
 		],
 		"x102" : [
 			{
 				pt : "Mapa de calor",
 				en : "Heatmap",
-				es : ""
+				es : "Mapa de calor"
 			}
 		],
 		"x103" : [
 			{
 				pt : "Links para abrir o mapa",
-				en : "",
-				es : ""
+				en : "Links to open the map",
+				es : "Links para abrir el mapa "
 			}
 		],
 		"x104" : [
 			{
 				pt : "Mapa de agrupamentos",
-				en : "",
-				es : ""
+				en : "Cluster map",
+				es : "Mapa de agrupaci&oacute;n"
 			}
 		],
 		"x105" : [
