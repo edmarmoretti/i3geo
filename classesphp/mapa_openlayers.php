@@ -59,9 +59,9 @@ Arquivo:
 i3geo/classesphp/mapa_openlayers.php
 
 */
+
 error_reporting(0);
 inicializa();
-
 //
 //calcula a extensao geografica com base no x,y,z
 //nos casos do modo notile, a requisicao e feita como se fosse um wms
@@ -145,7 +145,6 @@ if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getf
 if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
 	carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"],$_SESSION["i3georendermode"]);
 }
-
 //
 //map_fileX e para o caso register_globals = On no PHP.INI
 //
@@ -244,7 +243,6 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 		}
 	}
 }
-
 if (!function_exists('imagepng')){
 	$_GET["TIPOIMAGEM"] = "";
 }
@@ -562,6 +560,9 @@ function inicializa(){
 		ilegal();
 	}
 	session_start();
+	if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){
+		return;
+	}
 	if(@$_SESSION["fingerprint"]){
 		$f = explode(",",$_SESSION["fingerprint"]);
 		if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) )
