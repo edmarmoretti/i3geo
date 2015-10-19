@@ -1515,7 +1515,8 @@ i3GEO.editorOL =
 							retorno = function(r){
 								console.info(r);
 							};
-							xy = evt.feature.getGeometry().getFirstCoordinate();
+							//xy = evt.feature.getGeometry().getFirstCoordinate();
+							xy = evt.target.downPx_;
 							p = i3GEO.configura.locaplic + "/classesphp/proxy.php?"
 								+ url
 								+ "&tipoRetornoProxy=string&REQUEST=GetFeatureInfo&TIPOIMAGEM=nenhum&DESLIGACACHE=sim&STYLES=&SERVICE=WMS&VERSION=1.1.1&FEATURE_COUNT=1"
