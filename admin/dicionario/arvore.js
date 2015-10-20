@@ -106,11 +106,6 @@ i3GEOadmin.arvore.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'msgExclui' : [ {
-		pt : " excluindo o registro do id= ",
-		en : "",
-		es : ""
-	} ],
     'escolheGrupo' : [ {
 		pt : "Escolha o grupo para esse n&iacute;vel:",
 		en : "",
@@ -183,16 +178,6 @@ i3GEOadmin.arvore.dicionario = {
 	} ],
     'msgEscolheTema' : [ {
 		pt : "Escolha um tema",
-		en : "",
-		es : ""
-	} ],
-    'msgModificaOrdem' : [ {
-		pt : " modificando a ordem no banco de dados",
-		en : "",
-		es : ""
-	} ],
-    'msgBuscaDados' : [ {
-		pt : " buscando dados",
 		en : "",
 		es : ""
 	} ]

@@ -90,5 +90,25 @@ i3GEOadmin.core.dicionario = {
 		pt : "Editor de textos",
 		en : "",
 		es : ""
+	} ],
+    'abrirI3geo' : [ {
+		pt : "Abrir no i3Geo",
+		en : "",
+		es : ""
+	} ],
+    'msgBuscaDados' : [ {
+		pt : " buscando dados",
+		en : "",
+		es : ""
+	} ],
+    'msgModificaOrdem' : [ {
+		pt : " modificando a ordem no banco de dados",
+		en : "",
+		es : ""
+	} ],
+    'msgExclui' : [ {
+		pt : " excluindo o registro do id= ",
+		en : "",
+		es : ""
 	} ]
 };

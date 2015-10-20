@@ -643,7 +643,7 @@ function novoTema(id_menu,id_n2)
 }
 function excluir(tipo,id)
 {
-	var mensagem = $trad("msgExclui",i3GEOadmin.arvore.dicionario);+id,
+	var mensagem = $trad("msgExclui",i3GEOadmin.core.dicionario)+id,
 		no = null,
 		sUrl = null;
 	if(tipo == "raizgrupo" || tipo == "raizmenu")
@@ -673,7 +673,7 @@ function excluir(tipo,id)
 function editar(tipo,id)
 {
 	core_carregando("ativa");
-	core_carregando($trad("msgBuscaDados",i3GEOadmin.arvore.dicionario));
+	core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 	var sUrl = null;
 	var callback =
 	{
@@ -1013,7 +1013,7 @@ function sobeDesce(movimento,tipo,id)
 	{
 		var sUrl = "../php/arvore.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&id="+id+"&idioma="+idiomaSel();
 		core_carregando("ativa");
-		core_carregando($trad("msgModificaOrdem",i3GEOadmin.arvore.dicionario));
+		core_carregando($trad("msgModificaOrdem",i3GEOadmin.core.dicionario));
 		core_makeRequest(sUrl,callback);
 	}
 }
