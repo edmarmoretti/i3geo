@@ -2249,22 +2249,22 @@ g_traducao = {
 		"x105" : [
 			{
 				pt : "Navega&ccedil;&atilde;o",
-				en : "",
-				es : ""
+				en : "Browsing",
+				es : "Navegaci&oacute;n"
 			}
 		],
 		"mais" : [
 			{
 				pt : "Mais...",
-				en : "",
-				es : ""
+				en : "More...",
+				es : "M&aacute;s..."
 			}
 		],
 		"uploadArquivoGeo" : [
 			{
 				pt : "Upload de arquivo geo",
-				en : "",
-				es : ""
+				en : "Upload of the geo file",
+				es : "Carga del archivo geo"
 			}
 		],
 		"conexaoServicoGeo" : [
