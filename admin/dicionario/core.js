@@ -196,6 +196,56 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'obtemDados' : [ {
+		pt : "Obtendo dados...",
+		en : "",
+		es : ""
+	} ],
+    'editor' : [ {
+		pt : "Editor",
+		en : "",
+		es : ""
+	} ],
+    'cancela' : [ {
+		pt : "Cancela",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
     '' : [ {
 		pt : "",
 		en : "",
