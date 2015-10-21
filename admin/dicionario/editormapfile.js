@@ -40,5 +40,160 @@ i3GEOadmin.editormapfile.dicionario = {
 		pt : "<p>Mapfiles (arquivos existentes no diret&oacute;rio i3geo/temas):</p>",
 		en : "",
 		es : ""
-	} ]
+	} ],
+    'gvp' : [ {
+		pt : "Arquivo gvp: ",
+		en : "",
+		es : ""
+	} ],
+    'nomeMap' : [ {
+		pt : "Nome do novo arquivo mapfile (sem .map) </b>N&atilde;o utilize caracteres acentuados ou espa&ccedil;os em branco",
+		en : "",
+		es : ""
+	} ],
+    'permiteOgc' : [ {
+		pt : "Permitir o acesso aos dados via download e Web Services (WMS, WFS, etc.)",
+		en : "",
+		es : ""
+	} ],
+    'metaestat' : [ {
+		pt : "Esse mapfile baseia-se no sistema de metadados estat&iacute;sticos?</b> Caso escolha sim, a conex&atilde;o com o banco e o sql de acesso aos dados ser&atilde;o constru&iacute;dos de forma din&acirc;mica",
+		en : "",
+		es : ""
+	} ],
+    'tituloTema' : [ {
+		pt : "T&iacute;tulo do novo tema",
+		en : "",
+		es : ""
+	} ],
+    'tituloPt' : [ {
+		pt : "Em portugu&ecirc;s: ",
+		en : "",
+		es : ""
+	} ],
+    'tituloEs' : [ {
+		pt : "Espanhol (opcional): ",
+		en : "",
+		es : ""
+	} ],
+    'tituloEn' : [ {
+		pt : "Ingl&ecirc;s: (opcional)",
+		en : "",
+		es : ""
+	} ],
+    'filtraLista' : [ {
+		pt : "filtrar lista",
+		en : "",
+		es : ""
+	} ],
+    'retiraFavoritos' : [ {
+		pt : "retira dos favoritos",
+		en : "",
+		es : ""
+	} ],
+    'favorito' : [ {
+		pt : "favorito",
+		en : "",
+		es : ""
+	} ],
+    'criaCopia' : [ {
+		pt : "cria uma copia",
+		en : "",
+		es : ""
+	} ],
+    'limpaCache' : [ {
+		pt : "limpa o cache de imagens se houver",
+		en : "",
+		es : ""
+	} ],
+    'editaTema' : [ {
+		pt : "editar tema associado",
+		en : "",
+		es : ""
+	} ],
+    'gruposUsuarios' : [ {
+		pt : "Grupos de usu&aacute;rios que podem utilizar",
+		en : "",
+		es : ""
+	} ],
+    'semMap' : [ {
+		pt : "Os temas listados a seguir n&atilde;o possuem mapfiles criados. Voc&ecirc; pode excluir o registro do tema (remo&ccedil;&atilde;o do banco de dados) clicando na op&ccedil;&atilde;o 'excluir' ou criar o mapfile na op&ccedil;&atilde;o existente no formul&aacute;rio principal.",
+		en : "",
+		es : ""
+	} ],
+    'digitaNome' : [ {
+		pt : "Digite o nome do arquivo",
+		en : "",
+		es : ""
+	} ],
+    'msgLimpa' : [ {
+		pt : " limpando ",
+		en : "",
+		es : ""
+	} ],
+    'excluiCache' : [ {
+		pt : "Exclui o cache tempor&aacute;rio de renderiza&ccedil;&atilde;o?",
+		en : "",
+		es : ""
+	} ],
+    'extensao' : [ {
+		pt : "Sao necessarios 4 valores em extensao",
+		en : "",
+		es : ""
+	} ],
+    'xmin' : [ {
+		pt : "xmin maior que xmax em extensao",
+		en : "",
+		es : ""
+	} ],
+    'ymin' : [ {
+		pt : "ymin maior que ymax em extensao",
+		en : "",
+		es : ""
+	} ],
+    'erroEscala' : [ {
+		pt : "Valor de escala incorreto",
+		en : "",
+		es : ""
+	} ],
+    'senhaBd' : [ {
+		pt : "Senha de acesso ao banco",
+		en : "",
+		es : ""
+	} ],
+    'valorSenha' : [ {
+		pt : "Complete com o valor da senha de acesso em 'password', exemplo: password=postgres",
+		en : "",
+		es : ""
+	} ],
+    'apenasShp' : [ {
+		pt : "Opcao disponivel apenas para o tipo shapefile", // esta sem acento pois alguns navegadores não aceitam acentuacao em alert
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ]  
 };

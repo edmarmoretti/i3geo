@@ -150,7 +150,7 @@ function initMenu()
 	ativaBotaoUploadGvsig("uploadGvsig");
 
 	core_carregando("ativa");
-	core_carregando("buscando temas...");
+	core_carregando($trad("msgBuscaTemas",i3GEOadmin.core.dicionario));
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	core_pegaMapfiles("montaArvore()",letraAtual);
 }
@@ -168,8 +168,8 @@ function ativaBotaoUploadGvsig(idBotao)
 {
 	var botao,temp = function(){
 		var ins = '<form id=i3GEOuploadgvp target="i3GEOuploadgvpiframe" action="../php/uploadgvp.php" method="post" ENCTYPE="multipart/form-data">' +
-		'<p class="paragrafo" >Arquivo gvp: <br><input type="file" size=20 name="i3GEOuploadgvp" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" ><input id=i3GEOuploadgvpbotao1 type="submit" value="Enviar" size=12 name="submit">' +
+		'<p class="paragrafo" >'+ $trad("gvp",i3GEOadmin.editormapfile.dicionario) +'<br><input type="file" size=20 name="i3GEOuploadgvp" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p class="paragrafo" ><input id=i3GEOuploadgvpbotao1 type="submit" value='+ $trad("enviar",i3GEOadmin.core.dicionario) +' size=12 name="submit">' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
 		'</form>' +
 		'<br><iframe name=i3GEOuploadgvpiframe style="text-align:left;border:1px solid gray;" width="98%" height="150px"></iframe>';
@@ -185,21 +185,21 @@ function ativaBotaoAdicionaMapfile(idBotao)
 	var botao, adiciona = function()
 	{
 		core_montaEditor("adicionaNovoMapfile()","450px","660px","","Mapfile",true,true,false);
-		ins = "<p><b>Nome do novo arquivo mapfile (sem .map) </b>n&atilde;o utilize caracteres acentuados ou espa&ccedil;os em branco</p>";
+		ins = "<p><b>"+ $trad("nomeMap",i3GEOadmin.editormapfile.dicionario) +"</p>";
 		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>";
 		ins += "<p><input type=checkbox id=Eacessopublico checked style=position:relative;top:2px; />";
-		ins += "Permitir o acesso aos dados via download e Web Services (WMS, WFS, etc.)</p>";
+		ins += ""+ $trad("permiteOgc",i3GEOadmin.editormapfile.dicionario) +"</p>";
 
-		ins += "<p><b>Esse mapfile baseia-se no sistema de metadados estat&iacute;sticos?</b> Caso escolha sim, a conex&atilde;o com o banco e o sql de acesso aos dados ser&atilde;o constru&iacute;dos de forma din&acirc;mica</p>";
+		ins += "<p><b>"+ $trad("metaestat",i3GEOadmin.editormapfile.dicionario) +"</p>";
 		ins += "<select id='Emetaestat' >";
 		ins += core_combosimnao("nao");
 		ins += "</select>";
-		ins += "<p><b>T&iacute;tulo do novo tema</b></p>";
-		ins += "<p>Em portugu&ecirc;s: </p>";
+		ins += "<p><b>"+ $trad("tituloTema",i3GEOadmin.editormapfile.dicionario) +"</b></p>";
+		ins += "<p>"+ $trad("tituloPt",i3GEOadmin.editormapfile.dicionario) +"</p>";
 		ins += "<input size=50 type=text id='Etitulo' value='' /></p>";
-		ins += "<p>Espanhol (opcional): </p>";
+		ins += "<p>"+ $trad("tituloEs",i3GEOadmin.editormapfile.dicionario) +"</p>";
 		ins += "<input size=50 type=text id='EtituloES' value='' /></p>";
-		ins += "<p>Ingl&ecirc;s: (opcional)</p>";
+		ins += "<p>"+ $trad("tituloEn",i3GEOadmin.editormapfile.dicionario) +"</p>";
 		ins += "<input size=50 type=text id='EtituloEN' value='' /></p>";
 		ins += "<input size=50 type=hidden id='EtituloIT' value='' /></p>";
 		$i("editor_bd").innerHTML = ins;
@@ -324,32 +324,32 @@ function montaTextoTemaMapfile(mapfile){
 	}
 
 	i = "margin-left:2px;width:13px;position:relative;cursor:pointer;top:2px";
-	conteudo += "&nbsp;<img style="+i+" onclick=\"excluirMapfile('"+mapfile.codigo+"')\" title=excluir src=\"../imagens/01.png\" />";
-	conteudo += "&nbsp;<img style="+i+" onclick=\"filtraLetra('"+mapfile.codigo+"')\" title='filtrar lista' src=\"../imagens/view-filter.png\" />";
+	conteudo += "&nbsp;<img style="+i+" onclick=\"excluirMapfile('"+mapfile.codigo+"')\" title="+ $trad("excluir",i3GEOadmin.core.dicionario) +" src=\"../imagens/01.png\" />";
+	conteudo += "&nbsp;<img style="+i+" onclick=\"filtraLetra('"+mapfile.codigo+"')\" title='"+ $trad("filtraLista",i3GEOadmin.editormapfile.dicionario) +"' src=\"../imagens/view-filter.png\" />";
 	if(i3GEO.util.in_array(mapfile.codigo,favoritosArray)){
-		conteudo += "&nbsp;<img style="+i+" onclick=\"removeFavoritos('"+mapfile.codigo+"',true)\" title='retira dos favoritos' src=\"../imagens/bookmarks.png\" />";
+		conteudo += "&nbsp;<img style="+i+" onclick=\"removeFavoritos('"+mapfile.codigo+"',true)\" title='"+ $trad("retiraFavoritos",i3GEOadmin.editormapfile.dicionario) +"' src=\"../imagens/bookmarks.png\" />";
 	}
 	else{
-		conteudo += "&nbsp;<img style="+i+" onclick=\"registraFavoritos('"+mapfile.codigo+"')\" title='favorito' src=\"../imagens/bookmarks.png\" />";
+		conteudo += "&nbsp;<img style="+i+" onclick=\"registraFavoritos('"+mapfile.codigo+"')\" title='"+ $trad("favoritos",i3GEOadmin.editormapfile.dicionario) +"' src=\"../imagens/bookmarks.png\" />";
 	}
 	if(iconePlus){
-		conteudo += "&nbsp;<img style="+i+" onclick=\"clonarMapfile('"+mapfile.codigo+"')\" title='cria uma copia' src=\"../imagens/clonar.png\" />";
+		conteudo += "&nbsp;<img style="+i+" onclick=\"clonarMapfile('"+mapfile.codigo+"')\" title='"+ $trad("criaCopia",i3GEOadmin.editormapfile.dicionario) +"' src=\"../imagens/clonar.png\" />";
 	}
-	conteudo += "&nbsp;<img style="+i+" onclick=\"limparCacheMapfile('"+mapfile.codigo+"')\" title='limpa o cache de imagens se houver' src=\"../imagens/limparcache.png\" />";
-	conteudo += "&nbsp;<img style="+i+" onclick=\"editorTemaMapfile('"+mapfile.codigo+"')\" title='editar tema associado' src=\"../imagens/text-frame-link.png\" />";
+	conteudo += "&nbsp;<img style="+i+" onclick=\"limparCacheMapfile('"+mapfile.codigo+"')\" title='"+ $trad("limpaCache",i3GEOadmin.editormapfile.dicionario) +"' src=\"../imagens/limparcache.png\" />";
+	conteudo += "&nbsp;<img style="+i+" onclick=\"editorTemaMapfile('"+mapfile.codigo+"')\" title='"+ $trad("editaTema",i3GEOadmin.editormapfile.dicionario) +"' src=\"../imagens/text-frame-link.png\" />";
 	if(iconePlus){
-		conteudo += "<a style='margin-left:2px;border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+mapfile.codigo+"' target=_self >&nbsp;<img title='Editor de textos' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/document-edit.png\" /></a>";
+		conteudo += "<a style='margin-left:2px;border:solid white 0px;text-decoration:none;' href='../php/editortexto.php?mapfile="+mapfile.codigo+"' target=_self >&nbsp;<img title='"+ $trad("editorTxt",i3GEOadmin.core.dicionario) +"' style=\"border:0px solid white;width:12px;position:relative;cursor:pointer;top:2px\" src=\"../imagens/document-edit.png\" /></a>";
 	}
 	//opcao de download se for gvsig
 	if(mapfile.extensao === "gvp"){
 		conteudo += "&nbsp;<img style="+i+" onclick=\"downloadGvp('"+mapfile.codigo+"')\" title='download' src=\"../imagens/down1.gif\" />";
 	}
 	if(mapfile.extensao === "map" || mapfile.extensao === "gvp"){
-		conteudo += "&nbsp;<img style="+i+" onclick=\"testarMapfile('"+mapfile.codigo+"','"+mapfile.extensao+"')\" title='testar!' src=\"../imagens/41.png\" />";
-		conteudo += "&nbsp;<img style="+i+" onclick=\"testarMapfileRapido('"+mapfile.codigo+"','"+mapfile.extensao+"')\" title='teste rapido' src=\"../imagens/41r.png\" />";
+		conteudo += "&nbsp;<img style="+i+" onclick=\"testarMapfile('"+mapfile.codigo+"','"+mapfile.extensao+"')\" title='"+ $trad("testar",i3GEOadmin.core.dicionario) +"' src=\"../imagens/41.png\" />";
+		conteudo += "&nbsp;<img style="+i+" onclick=\"testarMapfileRapido('"+mapfile.codigo+"','"+mapfile.extensao+"')\" title='"+ $trad("testarRapido",i3GEOadmin.core.dicionario) +"' src=\"../imagens/41r.png\" />";
 	}
-	conteudo += "&nbsp;<img style="+i+";width:20px; onclick=\"javascript:window.open('../../interface/black_editor.php?&temaEdicao="+mapfile.codigo+"')\" title='editar no i3Geo' src=\"../imagens/i3geo2editor.jpg\" />";
-	conteudo += "&nbsp;<img style="+i+";width:20px; onclick=\"javascript:window.open('../../ms_criamapa.php?temasa="+mapfile.codigo+"&layers="+mapfile.codigo+"')\" title='testar no i3Geo' src=\"../imagens/i3geo2.jpg\" />";
+	conteudo += "&nbsp;<img style="+i+";width:20px; onclick=\"javascript:window.open('../../interface/black_editor.php?&temaEdicao="+mapfile.codigo+"')\" title='"+ $trad("editarI3geo",i3GEOadmin.core.dicionario) +"' src=\"../imagens/i3geo2editor.jpg\" />";
+	conteudo += "&nbsp;<img style="+i+";width:20px; onclick=\"javascript:window.open('../../ms_criamapa.php?temasa="+mapfile.codigo+"&layers="+mapfile.codigo+"')\" title='"+ $trad("testarI3geo",i3GEOadmin.core.dicionario) +"' src=\"../imagens/i3geo2.jpg\" />";
 	conteudo += "<b>&nbsp;"+mapfile.codigo+"</b>&nbsp;<span style=color:gray id='idNome_"+mapfile.codigo+"'>"+mapfile.nome+"</span>";
 	conteudo += "<br><img src=''style='display:none;' id='testeRapido"+mapfile.codigo+"' />";
 	if(mapfile.imagem != "" && $i("mostraMini").checked == true){
@@ -402,11 +402,11 @@ function montaRaizTema(no,dados)
 	//no que permite listar os grupos de usuarios registrados para o mapfile
 	if(!tree.getNodeByProperty("etiquetaGrupousrTema",no.data.codigoMap))
 	{
-		var d = {tipo:"etiqueta",etiquetaGrupousrTema:no.data.id_tema,html:"<i>Grupos de usu&aacute;rios que podem utilizar</i>"};
+		var d = {tipo:"etiqueta",etiquetaGrupousrTema:no.data.id_tema,html:"<i>"+ $trad("gruposUsuarios",i3GEOadmin.editormapfile.dicionario) +"</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, true,true);
 		tempNodeR.isLeaf = false;
 		tempNodeR.enableHighlight = false;
-		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editorGrupousr('"+no.data.id_tema+"','"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>Adicionar um novo</i></span>";
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editorGrupousr('"+no.data.id_tema+"','"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>"+ $trad("adicionaNovo",i3GEOadmin.core.dicionario) +"</i></span>";
 		var d = {html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
@@ -423,12 +423,12 @@ function montaRaizTema(no,dados)
 	//no que permite listar os layers de um mapfile
 	if(!tree.getNodeByProperty("etiquetaLayers",no.data.codigoMap))
 	{
-		var d = {tipo:"etiqueta",etiquetaLayers:no.data.codigoMap,html:"<i>Layers</i>"};
+		var d = {tipo:"etiqueta",etiquetaLayers:no.data.codigoMap,html:"<i>"+ $trad("layers",i3GEOadmin.core.dicionario) +"</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, true,true);
 		tempNodeR.isLeaf = false;
 		tempNodeR.enableHighlight = false;
 
-		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionaNovoLayer('"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>Adicionar um novo</i></span>";
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"adicionaNovoLayer('"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>"+ $trad("adicionaNovo",i3GEOadmin.core.dicionario) +"</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
@@ -463,7 +463,7 @@ function verificaOrfaos()
 {
 	sUrl = "../php/menutemas.php?funcao=verificaOrfaos";
 	core_carregando("ativa");
-	core_carregando(" verificando");
+	core_carregando($trad("msgVerifica",i3GEOadmin.core.dicionario));
 
 	var callback =
 	{
@@ -473,18 +473,18 @@ function verificaOrfaos()
 			{
 				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 				{
-					core_carregando("<span style=color:red >Erro</span>");
+					core_carregando("<span style=color:red >"+ $trad("erro",i3GEOadmin.core.dicionario) +"</span>");
 					setTimeout("core_carregando('desativa')",3000);
 				}
 				else
 				{
 					core_carregando("desativa");
-					var ins = "<p>Os temas listados a seguir n&atilde;o possuem mapfiles criados. Voc&ecirc; pode excluir o registro do tema (remo&ccedil;&atilde;o do banco de dados) clicando na op&ccedil;&atilde;o 'excluir' ou criar o mapfile na op&ccedil;&atilde;o existente no formul&aacute;rio principal.",
+					var ins = "<p>"+ $trad("semMap",i3GEOadmin.editormapfile.dicionario) +"",
 						d = YAHOO.lang.JSON.parse(o.responseText),
 						n = d.length,
 						i,ima;
 					for(i=0;i<n;i++){
-						ima = '<img src="../imagens/01.png" title="excluir" onclick="excluirOrfao(\''+d[i].codigo_tema+'\')" style="position:relative;cursor:pointer;top:4px;left:-2px">';
+						ima = '<img src="../imagens/01.png" title='+ $trad("excluir",i3GEOadmin.core.dicionario) +' onclick="excluirOrfao(\''+d[i].codigo_tema+'\')" style="position:relative;cursor:pointer;top:4px;left:-2px">';
 						ins += "<p>"+ima+d[i].nome_tema+" <span style=color:gray >"+d[i].codigo_tema+" id: "+d[i].id_tema+"</span>";
 					}
 					$i("editor_bd").innerHTML = ins;
@@ -522,14 +522,14 @@ function adicionaNovoMapfile()
 		acessopublico = "NAO";
 	}
 	if(codigo === ""){
-		alert("Digite o nome do arquivo");return;
+		alert($trad("digitaNome",i3GEOadmin.editormapfile.dicionario));return;
 	}
 	codigo = codigo.toLowerCase();
 	codigo = i3GEO.util.removeAcentos(codigo);
 	codigo = codigo.replace(" ","");
 	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo+"&it="+it+"&en="+en+"&es="+es+"&metaestat="+metaestat+"&acessopublico="+acessopublico;
 	core_carregando("ativa");
-	core_carregando(" adicionando um novo mapfile");
+	core_carregando($trad("adicionaMap",i3GEOadmin.core.dicionario));
 	var callback =
 	{
 		success:function(o)
@@ -538,7 +538,7 @@ function adicionaNovoMapfile()
 			{
 				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 				{
-					core_carregando("<span style=color:red >Código j&aacute; existe</span>");
+					core_carregando("<span style=color:red >"+ $trad("codigoExiste",i3GEOadmin.core.dicionario) +"</span>");
 					setTimeout("core_carregando('desativa')",3000);
 				}
 				else
@@ -564,7 +564,7 @@ Exclui o cache de imagens referentes ao mapfile
 */
 function limparCacheMapfile(codigoMap)
 {
-	var mensagem = " limpando "+codigoMap;
+	var mensagem = $trad("msgLimpa",i3GEOadmin.editormapfile.dicionario)+codigoMap;
 	var sUrl = "../php/editormapfile.php?funcao=limparCacheMapfile&codigoMap="+codigoMap;
 	var handleYes = function()
 	{
@@ -586,7 +586,7 @@ function limparCacheMapfile(codigoMap)
 	};
 	var handleNo = function()
 	{this.hide();};
-	var mensagem = "Exclui o cache tempor&aacute;rio de renderiza&ccedil;&atilde;o?";
+	var mensagem = $trad("excluiCache",i3GEOadmin.editormapfile.dicionario);
 	var largura = "300";
 	core_dialogoContinua(handleYes,handleNo,mensagem,largura);
 }
@@ -600,7 +600,7 @@ Exclui um mapfile
 function excluirMapfile(codigoMap)
 {
 	removeFavoritos(codigoMap,false);
-	var mensagem = " excluindo "+codigoMap;
+	var mensagem = $trad("msgExcluiMap",i3GEOadmin.core.dicionario)+codigoMap;
 	var no = tree.getNodeByProperty("id",codigoMap);
 	var sUrl = "../php/editormapfile.php?funcao=excluirMapfile&codigoMap="+codigoMap;
 	core_excluiNoTree(sUrl,no,mensagem,codigoMap);
@@ -634,7 +634,7 @@ function clonarMapfile(codigoMap)
 		if(novonome == "")
 		{return;}
 		core_carregando("ativa");
-		core_carregando("Copiando...");
+		core_carregando($trad("msgCopia",i3GEOadmin.core.dicionario));
 		var callback =
 		{
 				success:function(o)
@@ -653,7 +653,7 @@ function clonarMapfile(codigoMap)
 	};
 	var handleNo = function()
 	{this.hide();};
-	var mensagem = "Nome do novo arquivo:<br><input type=text value='' id=clonarComo />";
+	var mensagem = ""+ $trad("nomeArquivo",i3GEOadmin.core.dicionario) +"<br><input type=text value='' id=clonarComo />";
 	var largura = "300";
 	core_dialogoPergunta(handleYes,handleNo,mensagem,largura);
 }
@@ -715,7 +715,7 @@ function salvarDadosEditorPlugin(onde,plugin,codigoMap,codigoLayer){
 		}
 	}
 	core_carregando("ativa");
-	core_carregando(" gravando o registro do layer= "+codigoLayer);
+	core_carregando($trad("gravaLayer",i3GEOadmin.core.dicionario)+codigoLayer);
 	var sUrl = prog
 		+ "&codigoMap=" + codigoMap
 		+ "&codigoLayer=" + codigoLayer
@@ -724,7 +724,7 @@ function salvarDadosEditorPlugin(onde,plugin,codigoMap,codigoLayer){
 			success:function(o)	{
 				try	{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro") {
-						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel salvar.</span>");
+						core_carregando("<span style=color:red >"+ $trad("naoSalva",i3GEOadmin.core.dicionario) +"</span>");
 						setTimeout("core_carregando('desativa')",3000);
 					}
 					else {
@@ -806,17 +806,17 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 		if(valorTeste != ""){
 			teste1 = valorTeste.split(" ");
 			if(teste1.length != 4)
-			{alert("Sao necessarios 4 valores em extensao");return;}
+			{alert($trad("extensao",i3GEOadmin.editormapfile.dicionario));return;}
 			if(teste1[0]*1 > teste1[2]*1)
-			{alert("xmin maior que xmax em extensao");return;}
+			{alert($trad("xmin",i3GEOadmin.editormapfile.dicionario));return;}
 			if(teste1[1]*1 > teste1[3]*1)
-			{alert("ymin maior que ymax em extensao");return;}
+			{alert($trad("ymin",i3GEOadmin.editormapfile.dicionario));return;}
 		}
 		valorTeste = $i("escala").value;
 		if(valorTeste != ""){
 			teste1 = valorTeste * 1;
 			if(teste1 <= 0){
-				alert("Valor de escala incorreto");
+				alert($trad("erroEscala",i3GEOadmin.editormapfile.dicionario));
 				return;
 			}
 		}
@@ -876,13 +876,13 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 		}
 	}catch(e){alert(e);}
 	core_carregando("ativa");
-	core_carregando(" gravando o registro do layer= "+codigoLayer);
+	core_carregando($trad("gravaLayer",i3GEOadmin.core.dicionario)+codigoLayer);
 	sUrl = prog+par;
 	callback = {
 			success:function(o)	{
 				try{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel salvar.</span>");
+						core_carregando("<span style=color:red >"+ $trad("naoSalva",i3GEOadmin.core.dicionario) +"</span>");
 						setTimeout("core_carregando('desativa')",3000);
 					}
 					else{
@@ -1018,7 +1018,7 @@ function sobeDesce(movimento,tipo,codigoMap,codigoLayer,indiceClasse,indiceEstil
 	{
 		var sUrl = "../php/editormapfile.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;
 		core_carregando("ativa");
-		core_carregando(" modificando a ordem");
+		core_carregando($trad("msgModificaOrdem2",i3GEOadmin.core.dicionario));
 		core_makeRequest(sUrl,callback);
 	}
 }
@@ -1033,13 +1033,13 @@ function selConexaoBanco(eleValue){
 					textos = [],
 					selecionados = [],
 					funcaoFinal = function(){
-						var c,m = prompt("Senha de acesso ao banco", "");
+						var c,m = prompt($trad("senhaBd",i3GEOadmin.editormapfile.dicionario), "");
 						if (m != null) {
 							c = $i(eleValue);
 							c.value = c.value.replace("******",m);
 						}
 						else{
-							alert("Complete com o valor da senha de acesso em 'password', exemplo: password=postgres");
+							alert($trad("valorSenha",i3GEOadmin.editormapfile.dicionario));
 						}
 					};
 					for(i=0;i<n;i++){
@@ -1069,7 +1069,7 @@ function selNavegador(onde,tipo){
 			i3GEO.util.navegadorPostgis(onde);
 			break;
 		default:
-			alert("Opcao disponivel apenas para o tipo shape file");
+			alert($trad("apenasShp",i3GEOadmin.editormapfile.dicionario));
 		}
 	}
 	else{
