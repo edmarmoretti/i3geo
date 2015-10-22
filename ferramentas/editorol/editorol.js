@@ -1512,11 +1512,13 @@ i3GEO.editorOL =
 						if(tema){
 							layer = i3geoOL.getLayersByName(tema.value)[0];
 							url = layer.getSource().getUrls()[0];
-							retorno = function(r){
-								console.info(r);
-							};
-							//xy = evt.feature.getGeometry().getFirstCoordinate();
 							xy = evt.target.downPx_;
+							retorno = function(r){
+								var xy = evt.feature.getGeometry().getFirstCoordinate();
+								i3GEO.eventos.cliquePerm.ativo = true;
+								i3GEO.Interface.openlayers.balao(r,"", xy[0], xy[1]);
+								i3GEO.eventos.cliquePerm.ativo = false;
+							};
 							p = i3GEO.configura.locaplic + "/classesphp/proxy.php?"
 								+ url
 								+ "&tipoRetornoProxy=string&REQUEST=GetFeatureInfo&TIPOIMAGEM=nenhum&DESLIGACACHE=sim&STYLES=&SERVICE=WMS&VERSION=1.1.1&FEATURE_COUNT=1"
