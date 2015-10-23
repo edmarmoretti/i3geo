@@ -206,6 +206,16 @@ i3GEOF.atalhoscamada =
 				});
 				b.addClass("abrir");
 			}
+			if (funcoes.storymap === true) {
+				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaStoryMap", {
+					onclick : {
+						fn : function() {
+							i3GEO.tema.dialogo.storymap(tema);
+						}
+					}
+				});
+				b.addClass("abrir");
+			}
 		}
 		if ((ltema.type < 4 || ltema.type === 8)
 			&& funcoes.editorlegenda === true) {

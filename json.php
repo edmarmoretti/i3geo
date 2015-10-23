@@ -26,7 +26,7 @@ Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Arquivo: i3geo/ogc.php
+Arquivo: i3geo/json.php
 
 Par&acirc;metros:
 

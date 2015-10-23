@@ -620,6 +620,11 @@ i3GEO.configura =
 										id : "omenudataFerramentas3e",
 										text : "<span class='i3GEOiconeFerramenta i3GEOiconeTme'></span>" + $trad("t49"),
 										url : "javascript:i3GEO.tema.dialogo.tme()"
+									},
+									{
+										id : "omenudataFerramentasStoryMap",
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeStorymap'></span>StoryMap",
+										url : "javascript:i3GEO.tema.dialogo.storymap()"
 									}
 								]
 							]
