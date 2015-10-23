@@ -700,5 +700,245 @@ i3GEOadmin.editormapfile.dicionario = {
 		pt : "Obs.: Apenas temas baseados em Postgis podem ser editados",
 		en : "",
 		es : ""
+	} ],
+    'excluiEstilo' : [ {
+		pt : "Exclui o estilo?",
+		en : "",
+		es : ""
+	} ],
+    'symbolname' : [ {
+		pt : "O s&iacute;mbolo a ser usado para representar as fei&ccedil;&otilde;es. Integer &eacute; o &iacute;ndice do s&iacute;mbolo no symbolset, come&ccedil;ando em 1 (o quinto s&iacute;mbolo &eacute; o s&iacute;mbolo 5). String &eacute; o nome do s&iacute;mbolo (como definido usando o par&acirc;metro SYMBOL NAME). Filename especifica o caminho para um arquivo contendo um s&iacute;mbolo. Por exemplo, um arquivo PNG. Especifique o caminho relativo ao diret&oacute;rio contendo o mapfile. URL especifica o endere&ccedil;o de um arquivo contendo um s&iacute;mbolo pixmap. Por exemplo, um arquivo PNG. Uma URL deve come&ccedil;ar com &#8220;http&#8221;. Exemplo: SYMBOL &#8220;http://myserver.org/path/to/file.png . [ATRIBUTO] permite representa&ccedil;&atilde;o individual de fei&ccedil;&otilde;es usando um atributo no conjunto de dados que especifica o nome do s&iacute;mbolo (como definido usando o par&acirc;metro SYMBOL NAME). S&atilde;o necess&aacute;rios os colchetes []. Se SYMBOL n&atilde;o for especificado, o comportamento depende do tipo de fei&ccedil;&atilde;o: Para pontos, nada ser&aacute; representado; Para linhas, SYMBOL s&oacute; &eacute; relevante se voc&ecirc; quer estilizar as linhas utilizando s&iacute;mbolos, ent&atilde;o a aus&ecirc;ncia de SYMBOL significa que voc&ecirc; ter&aacute; as linhas como especificadas utilizando os par&acirc;metros de representa&ccedil;&atilde;o de linhas (COLOR, WIDTH, PATTERN, LINECAP, etc.); Para pol&iacute;gonos, o interior dos pol&iacute;gonos ser&aacute; representado utilizando um preenchimento s&oacute;lido da cor especificada no par&acirc;metro COLOR.",
+		en : "",
+		es : ""
+	} ],
+    'symbolnameTitulo' : [ {
+		pt : "Symbolname (pode ser utilizado uma imagem, exemplo: /var/www/i3geo/imagensteste.png) :",
+		en : "",
+		es : ""
+	} ],
+    'color' : [ {
+		pt : "Cor a ser utilizada para desenhar fei&ccedil;&otilde;es.",
+		en : "",
+		es : ""
+	} ],
+    'colorTitulo' : [ {
+		pt : "Color",
+		en : "",
+		es : ""
+	} ],
+    'backgroundcolor' : [ {
+		pt : "Cor de fundo a ser utilizada para desenhar fei&ccedil;&otilde;es.",
+		en : "",
+		es : ""
+	} ],
+    'backgroundcolorTitulo' : [ {
+		pt : "Backgroundcolor",
+		en : "",
+		es : ""
+	} ],
+    'size' : [ {
+		pt : "Tamanho, em SIZEUNITS, do SYMBOL/PATTERN a ser usado. O valor padr&atilde;o depende do tipo do s&iacute;mbolo: para pixmap, o tamanho (em pixeis) do pixmap; para ellipse e vector, o valor m&aacute;ximo de y do par&acirc;metro SYMBOL POINTS; para hatch, 1,0; para truetype, 1,0. Quando a escala de s&iacute;mbolos &eacute; utilizada (SYMBOLSCALEDENOM &eacute; utilizado no n&iacute;vel da LAYER) o SIZE define o tamanho - de acordo com o SIZEUNITS da camada - do SYMBOL /PATTERN a ser usado na escala 1:SYMBOLSCALEDENOM. Para s&iacute;mbolos do tipo hatch, o tamanho &eacute; a dist&acirc;ncia de centro a centro entre as linhas. [ATRIBUTO] especifica um atributo a ser usado para usar como valor de tamanho. Os colchetes [] s&atilde;o necess&aacute;rios.",
+		en : "",
+		es : ""
+	} ],
+    'sizeTitulo' : [ {
+		pt : "Size",
+		en : "",
+		es : ""
+	} ],
+    'outlinecolor' : [ {
+		pt : "Cor usada para contornar pol&iacute;gonos e alguns s&iacute;mbolos de marcadores (marker). N&atilde;o possui efeito para linhas. A largura do contorno pode ser especificada usando WIDTH. Se n&atilde;o for especificado nenhum WIDTH, ser&aacute; tra&ccedil;ado um contorno de 1 pixel de largura. Se h&aacute; algum s&iacute;mbolo definido em STYLE, ser&aacute; criado um contorno para este s&iacute;mbolo (somente ellipse, truetype e polygon vector ganhar&atilde;o um contorno). Se n&atilde;o houver s&iacute;mbolo definido em STYLE, o pol&iacute;gono ganhar&aacute; um contorno. [ATRIBUTO] especifica um atributo a ser usado para usar como valor de cor. Os colchetes [] s&atilde;o necess&aacute;rios.",
+		en : "",
+		es : ""
+	} ],
+    'outlinecolorTitulo' : [ {
+		pt : "Outlinecolor",
+		en : "",
+		es : ""
+	} ],
+    'width' : [ {
+		pt : "WIDTH se refere &agrave; espessura da linha desenhada, em pixeis. Padr&atilde;o &eacute; 1. Quando a escala de s&iacute;mbolos &eacute; utilizada (SYMBOLSCALEDENOM &eacute; utilizado no n&iacute;vel da LAYER) o WIDTH define a espessura da linha - de acordo com o SIZEUNITS da camada &#8211; em rela&ccedil;&atilde;o &agrave; escala 1:SYMBOLSCALEDENOM. Se utilizado com SYMBOL e OUTLINECOLOR, WIDTH define a espessura do contorno dos s&iacute;mbolos. Isto se aplica para os s&iacute;mbolos do tipo  ellipse, truetype e polygon vector. Para linhas, WIDTH especifica a espessura da linha. Para pol&iacute;gonos, se utilizado com OUTLINECOLOR, WIDTH especifica a espessura da linha do pol&iacute;gono. Para um s&iacute;mbolo do tipo hatch, WIDTH especifica a largura das linhas hachuradas. [ATRIBUTO] especifica o atributo a ser usado para valores de WIDTH. Os colchetes [] s&atilde;o necess&aacute;rios.",
+		en : "",
+		es : ""
+	} ],
+    'widthTitulo' : [ {
+		pt : "Width",
+		en : "",
+		es : ""
+	} ],
+    'minsize' : [ {
+		pt : "Tamanho m&iacute;nimo em pixeis para desenhar um s&iacute;mbolo. Padr&atilde;o &eacute; 0. S&oacute; &eacute; &uacute;til quando usada escala de s&iacute;mbolos. Para s&iacute;mbolos do tipo hatch, o tamanho &eacute; a dist&acirc;ncia entre linhas hachuradas.",
+		en : "",
+		es : ""
+	} ],
+    'minsizeTitulo' : [ {
+		pt : "Minsize",
+		en : "",
+		es : ""
+	} ],
+    'maxsize' : [ {
+		pt : "Tamanho m&aacute;ximo em pixeis para desenhar um s&iacute;mbolo. Padr&atilde;o &eacute; 500.",
+		en : "",
+		es : ""
+	} ],
+    'maxsizeTitulo' : [ {
+		pt : "Maxsize",
+		en : "",
+		es : ""
+	} ],
+    'offsetx' : [ {
+		pt : "Valor de deslocamento no eixo x para s&iacute;mbolos com sombras, vazios etc.",
+		en : "",
+		es : ""
+	} ],
+    'offsetxTitulo' : [ {
+		pt : "Offsetx",
+		en : "",
+		es : ""
+	} ],
+    'offsety' : [ {
+		pt : "Valor de deslocamento no eixo y para s&iacute;mbolos com sombras, vazios etc.",
+		en : "",
+		es : ""
+	} ],
+    'offsetyTitulo' : [ {
+		pt : "Offsety",
+		en : "",
+		es : ""
+	} ],
+    'antialias' : [ {
+		pt : "Ativa ou desativa o antialias para fontes truetype.",
+		en : "",
+		es : ""
+	} ],
+    'antialiasTitulo' : [ {
+		pt : "Antialias",
+		en : "",
+		es : ""
+	} ],
+    'minwidth' : [ {
+		pt : "Tamanho m&iacute;nimo em pixeis para desenhar uma linha. Padr&atilde;o &eacute; 0.",
+		en : "",
+		es : ""
+	} ],
+    'minwidthTitulo' : [ {
+		pt : "Minwidth",
+		en : "",
+		es : ""
+	} ],
+    'maxwidth' : [ {
+		pt : "Tamanho m&aacute;ximo em pixeis para desenhar uma linha. Padr&atilde;o &eacute; 32.",
+		en : "",
+		es : ""
+	} ],
+    'maxwidthTitulo' : [ {
+		pt : "Maxwidth",
+		en : "",
+		es : ""
+	} ],
+    'angle' : [ {
+		pt : "&Acirc;ngulo, em graus, para rotacionar um s&iacute;mbolo (sentido anti-hor&aacute;rio). Padr&atilde;o &eacute; 0 (sem rota&ccedil;&atilde;o). Para pontos, especifica a rota&ccedil;&atilde;o de um s&iacute;mbolo em rela&ccedil;&atilde;o a seu centro. Para linhas estilizadas, o comportamento depende do valor do elemento GAP. Para valores de GAP negativos, ele especifica o rotacionamento de um s&iacute;mbolo relativo &agrave; dire&ccedil;&atilde;o da linha. Um &acirc;ngulo de 0 significa que o eixo x do s&iacute;mbolo &eacute; orientado juntamente com a dire&ccedil;&atilde;o da linha. Se o valor do GAP for positivo, ele especifica o rotacionamento do s&iacute;mbolo em rela&ccedil;&atilde;o ao seu pr&oacute;prio centro.",
+		en : "",
+		es : ""
+	} ],
+    'angleTitulo' : [ {
+		pt : "Angle",
+		en : "",
+		es : ""
+	} ],
+    'msgNovoEstilo' : [ {
+		pt : " adicionando um novo estilo",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
 	} ]
 };

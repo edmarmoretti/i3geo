@@ -1,11 +1,13 @@
 //
 //Utilizado por editormapfile.js
 //
-
+//
+//Dependencias: Este programa necessita do arquivo "../dicionario/editormapfile.js"
+//
 function editorDeTexto(codigoMap)
 {
 	core_carregando("ativa");
-	core_carregando("buscando texto...");
+	core_carregando($trad("obtemDados",i3GEOadmin.core.dicionario));
 	sUrl = "../php/editormapfile.php?funcao=pegaTextoMapfile&codigoMap="+codigoMap;
 	var callback =
 	{
@@ -17,7 +19,7 @@ function editorDeTexto(codigoMap)
 			var botao, temp = function()
 			{
 				core_carregando("ativa");
-				core_carregando("salvando texto...");
+				core_carregando($trad("salvaTxt",i3GEOadmin.core.dicionario));
 				var callback1 =
 				{
 					success:function(o)

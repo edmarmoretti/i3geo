@@ -1,3 +1,6 @@
+//
+//Dependencias: Este programa necessita do arquivo "../dicionario/editormapfile.js"
+//
 /*
 Function: editorEditavel
 
@@ -8,7 +11,7 @@ Abre o editor que define se o tema e editavel ou nao
 function editorEditavel(codigoMap,codigoLayer)
 {
 	var sUrl = "../php/editormapfile.php?funcao=pegaEditavel&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEditavel");
+	core_pegaDados($trad("obtemDados",i3GEOadmin.core.dicionario),sUrl,"montaEditorEditavel");
 }
 function montaEditorEditavel(dados)
 {
