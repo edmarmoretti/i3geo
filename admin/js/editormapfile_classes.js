@@ -1,6 +1,8 @@
 //
 //Utilizado por editormapfile.js
 //
+//Dependencias: Este programa necessita do arquivo "../dicionario/editormapfile.js"
+//
 /*
 Function: editorClasseGeral
 

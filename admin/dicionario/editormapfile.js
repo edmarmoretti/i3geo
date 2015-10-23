@@ -431,6 +431,206 @@ i3GEOadmin.editormapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'type' : [ {
+		pt : "Especifica como o dado deve ser desenhado. N&atilde;o precisa ser do mesmo tipo do shapefile. Por exemplo, um shapefile de pol&iacute;gonos pode ser desenhado como pontos, mas um shape de pontos n&atilde;o pode ser desenhado como um pol&iacute;gono. Para diferenciar entre POLYGON e POLYLINE, simplesmente use ou omita o par&acirc;metro COLOR na classifica&ccedil;&atilde;o. Se voc&ecirc; utiliz&aacute;-lo, &eacute; um pol&iacute;gono com uma cor de preenchimento, sen&atilde;o, &eacute; uma polilinha cuja cor &eacute; definida em OUTLINECOLOR. Um c&iacute;rculo (circle) deve ser definido por um ret&acirc;ngulo de limites m&iacute;nimos. Isto &eacute;, dois pontos que definem o menor quadrado que pode cont&ecirc;-lo.",
+		en : "",
+		es : ""
+	} ],
+    'typeTitulo' : [ {
+		pt : "Type - tipo das geometrias",
+		en : "",
+		es : ""
+	} ],
+    'connectiontype' : [ {
+		pt : "Tipo de conex&atilde;o. com os dados",
+		en : "",
+		es : ""
+	} ],
+    'connectiontypeTitulo' : [ {
+		pt : "Connectiontype - tipo de conex&atilde;o com a fonte de dados",
+		en : "",
+		es : ""
+	} ],
+    'connection' : [ {
+		pt : "Voc&ecirc; pode digitar apenas o 'alias' para esconder a string de conex&atilde;o. Database connection string to retrieve remote data.An SDE connection string consists of a hostname, instance name, database name, username and password separated by commas.A PostGIS connection string is basically a regular PostgreSQL connection string, it takes the form of 'user=nobody password=****** dbname=dbname host=localhost port=5432' An Oracle connection string: user/pass[@db] . Se vc tiver problemas com acentua&ccedil;&atilde;o, experimente algo como: user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'",
+		en : "",
+		es : ""
+	} ],
+    'connectionTitulo' : [ {
+		pt : "Connection - par&acirc;metros de conex&atilde;o com a fonte de dados",
+		en : "",
+		es : ""
+	} ],
+    'data' : [ {
+		pt : "Nome completo do arquivo de dado espacial a ser processado. N&atilde;o &eacute; necess&aacute;ria a extens&atilde;o do arquivo para shapefiles. Exemplo: c://ms4w/Apache/htdocs/geodados/brasil/limitespol/localidades.shp. Pode ser especificado relativo &agrave; op&ccedil;&atilde;o SHAPEPATH do objeto MAP. Se for uma camada SDE, deve ser inclu&iacute;do o nome da camada bem como da coluna de geometria, por exemplo, mylayer,shape,myversion. Se &eacute; uma camada PostGIS, o par&acirc;metro deve seguir a forma <columnname> from <tablename>, na qual columnname &eacute; o nome da coluna que cont&eacute;m a geometria e tablename &eacute; o nome da tabela cuja geometria ser&aacute; lida. Exemplo: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291. Para Oracle, use shape FROM table ou shape FROM (SELECT statement) ou at&eacute; express&otilde;es mais complexas. Note que, no entanto, h&aacute; impactos importantes de performance quando utilizadas subconsultas espaciais. Tente utilizar o objeto FILTER sempre que poss&iacute;vel. Voc&ecirc; tamb&eacute;m pode ver o SQL submetido ao for&ccedil;ar um erro, submetendo um par&acirc;metro DATA que voc&ecirc; sabe que n&atilde;o funcionar&aacute;, como uma nome de coluna errado.",
+		en : "",
+		es : ""
+	} ],
+    'dataTitulo' : [ {
+		pt : "Data - SQL ou caminho do arquivo com os dados",
+		en : "",
+		es : ""
+	} ],
+    'cache' : [ {
+		pt : "Ativa ou n&atilde;o a manuten&ccedil;&atilde;o de um cache para armazenar as imagens geradas para montar o mapa. O cache &eacute; mantido no diret&oacute;rio tempor&aacute;rio utilizado pelo i3Geo, na pasta chamada cache. Para cada camada &eacute; criada uma sub-pasta. Para limpar o cache, utilize a op&ccedil;&atilde;o existente junto ao n&oacute; principal desse mapfile. Camadas WMS s&atilde;o acessadas diretamente do servidor de origem quando o cache estiver inativo.",
+		en : "",
+		es : ""
+	} ],
+    'cacheTitulo' : [ {
+		pt : "Cache de mapas (CACHE)",
+		en : "",
+		es : ""
+	} ],
+    'cortepixels' : [ {
+		pt : "Ao desenhar a imagem de um TILE que comp&otilde;e o mapa, a imagem &eacute; extendida e depois cortada para o tamanho correto. Isso evita que s&iacute;mbolos apare&ccedil;am de forma parcial no mapa. Indicado para temas com representa&ccedil;&atilde;o pontual e que tamb&eacute;m utilizem cache, pois pode degradar a performance.",
+		en : "",
+		es : ""
+	} ],
+    'cortepixelsTitulo' : [ {
+		pt : "Extende e corta imagem em pixels (cortepixels)",
+		en : "",
+		es : ""
+	} ],
+    'metaestat' : [ {
+		pt : "Indica se as defini&ccedil;&otilde;es da camada est&atilde;o relacionadas ao sistema de metadados estat&iacute;sticos. Se estiver, alguns par&acirc;metros s&atilde;o obtidos de forma autom&aacute;tica, como a conex&atilde;o e o SQL de acesso aos dados.",
+		en : "",
+		es : ""
+	} ],
+    'metaestatTitulo' : [ {
+		pt : "Esse mapfile est&aacute; integrado ao sistema de metadados estat&iacute;sticos?",
+		en : "",
+		es : ""
+	} ],
+    'medidaVariavel' : [ {
+		pt : "ID da medida da vari&aacute;vel que relaciona a camada ao sistema de metadados estat&iacute;sticos. S&oacute; deve ser definido se o mapfile for integrado a esse sistema.",
+		en : "",
+		es : ""
+	} ],
+    'medidaVariavelTitulo' : [ {
+		pt : "ID da vari&aacute;vel no sistema de metadados estat&iacute;sticos ",
+		en : "",
+		es : ""
+	} ],
+    'convCaracter' : [ {
+		pt : "Aplica a convers&atilde;o de caracteres nas ferramentas que obt&eacute;m os dados descritivos referentes aos elementos do LAYER. Em alguns casos, a convers&atilde;o pode provocar problemas de acentua&ccedil;&atilde;o. Se isso ocorrer, na ferramenta tabela por exemplo, experimente marcar essa op&ccedil;&atilde;o como 'nao'",
+		en : "",
+		es : ""
+	} ],
+    'convCaracterTitulo' : [ {
+		pt : "Convers&atilde;o de caracteres (METADATA: CONVCARACTER)",
+		en : "",
+		es : ""
+	} ],
+    'projecao' : [ {
+		pt : "Proje&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
+    'filter' : [ {
+		pt : "Este par&acirc;metro permite filtrar atributos espec&iacute;ficos ao mesmo tempo em que &eacute; feita uma filtragem espacial, mas antes de que qualquer express&atilde;o em CLASS seja contabilizada. Para OGR e shapefiles, a string &eacute; simplesmente uma express&atilde;o regular do MapServer. Por exemplo: FILTER type= road  and size &lt;2. Para bancos de dados espaciais &eacute; uma cl&aacute;usula SQL WHERE que &eacute; v&aacute;lida de acordo com o banco de dados subjacente. ",
+		en : "",
+		es : ""
+	} ],
+    'filterItem' : [ {
+		pt : "Item a ser usado com simples express&otilde;es FILTER. Somente para OGR e shapefile.",
+		en : "",
+		es : ""
+	} ],
+    'tileItem' : [ {
+		pt : "Item que cont&eacute;m a localiza&ccedil;&atilde;o individual de um tile. Padr&atilde;o &eacute;  location .",
+		en : "",
+		es : ""
+	} ],
+    'tileIndex' : [ {
+		pt : "Nome do arquivo ou camada de tileindex. Um tileindex &eacute; semelhante a uma biblioteca de &iacute;ndices do ArcInfo. O tileindex cont&eacute;m fei&ccedil;&otilde;es de pol&iacute;gono para cada tile (ladrilho). O item que cont&eacute;m a localiza&ccedil;&atilde;o do dado ladrilhado &eacute; obtido utilizando o par&acirc;metro TILEITEM. Quando um arquivo &eacute; utilizado como o tileindex para camadas shapefiles ou raster, o tileindex pode ser um shapefile. Para camadas com CONNECTIONTYPE OGR, qualquer fonte de dados OGR suportada pode ser um tileindex. Normalmente a localiza&ccedil;&atilde;o deve conter o caminho do arquivo de tile relativo ao caminho do shape, e n&atilde;o relativo ao pr&oacute;prio tileindex. Se o par&acirc;metro DATA cont&eacute;m algum valor ent&atilde;o ele &eacute; adicionado ao fim da localiza&ccedil;&atilde;o. Quando uma camada de tileindex &eacute; utilizada, ela funciona de forma similar a referir-se diretamente a um arquivo, sendo que qualquer fonte de fei&ccedil;&atilde;o suportada pode ser usada (como PostgreSQL, Oracle etc.).",
+		en : "",
+		es : ""
+	} ],
+    'tipoOriginal' : [ {
+		pt : "Tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es mostradas da camada. &Eacute; importante definir esse par&acirc;metro para que as fun&ccedil;&otilde;es de gera&ccedil;&atilde;o de SLD funcionem corretamente.",
+		en : "",
+		es : ""
+	} ],
+    'tipoOriginalTitulo' : [ {
+		pt : "Tipo de representa&ccedil;&atilde;o (tipooriginal) - para temas do tipo WMS",
+		en : "",
+		es : ""
+	} ],
+    'tiles' : [ {
+		pt : "A camada ser&aacute; desenhada em tiles (ladrilhos) de 256x256 pixels. O default &eacute; vazio, nesse caso a camada obedecer&aacute; a l&oacute;gica default de decis&atilde;o para definir se o modo tile ser&aacute; ou n&atilde;o aplicado (depender&aacute; do tipo de layer). Quando for 'nao', o modo tile n&atilde;o ser&aacute; aplicado. Quando 'sim' o modo tile &eacute; sempre aplicado. ",
+		en : "",
+		es : ""
+	} ],
+    'tilesTitulo' : [ {
+		pt : "Utiliza o modo TILE (TILES)",
+		en : "",
+		es : ""
+	} ],
+    'atributosLayer' : [ {
+		pt : "O layer possui as seguintes colunas na tabela de atributos: ",
+		en : "",
+		es : ""
+	} ],
+    'msgAlias' : [ {
+		pt : "Prefira sempre usar um 'alias'. Os seguintes 'alias' podem ser utilizados aqui no lugar da string de conex&atilde;o completa: ",
+		en : "",
+		es : ""
+	} ],
+    'defineAlias' : [ {
+		pt : "Para definir um novo, &eacute; necess&aacute;rio editar o arquivo i3geo/ms_configura.php, consulte o administrador do servidor",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
     '' : [ {
 		pt : "",
 		en : "",
