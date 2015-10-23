@@ -2263,29 +2263,29 @@ g_traducao = {
 		"uploadArquivoGeo" : [
 			{
 				pt : "Upload de arquivo geo",
-				en : "Upload of the geo file",
+				en : "Geo file Upload",
 				es : "Carga del archivo geo"
 			}
 		],
 		"conexaoServicoGeo" : [
 			{
 				pt : "Conex&atilde;o com servi&ccedil;os geo",
-				en : "",
-				es : ""
+				en : "Connection to geo services ",
+				es : "Conexi&oacute;n con servicios geo"
 			}
 		],
 		"saikuAba" : [
 			{
 				pt : "SAIKU - OLAP (abrir em nova aba)",
-				en : "",
-				es : ""
+				en : "SAIKU - OLAP (open in new tab)",
+				es : "SAIKU - OLAP (abrir en una nueva pesta&ntilde;a)"
 			}
 		],
 		"saikuMapa" : [
 			{
 				pt : "SAIKU - OLAP (abrir em janela interna)",
-				en : "",
-				es : ""
+				en : "SAIKU - OLAP (open in internal window)",
+				es : "SAIKU - OLAP (abrir en una ventana interna)"
 			}
 		],
 		"refMapaAtual" : [
