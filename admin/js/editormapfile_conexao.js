@@ -24,7 +24,7 @@ function montaEditorDados(dados)
 		function(){
 			salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false);
 		},
-		"500px","650px","","Conex&atilde;o",false,true,false
+		"500px","650px","",$trad("conexao",i3GEOadmin.editormapfile.dicionario),false,true,false
 	);
 
 	var temp,ins = "",idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],

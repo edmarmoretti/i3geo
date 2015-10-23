@@ -15,25 +15,25 @@ function montaEditorEditavel(dados)
 	var temp = function(){
 		salvarDadosEditor('editavel',dados.codigoMap,dados.codigoLayer,false);
 	};
-	core_montaEditor(temp,"450px","450px","","Edi&ccedil;&atilde;o",false,true,false);
+	core_montaEditor(temp,"450px","450px","",$trad("edicao",i3GEOadmin.editormapfile.dicionario),false,true,false);
 
 	var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
 		param = {
 		"linhas":[
-			{ajuda:"Indica se o tema poder&aacute; ser utilizado nos editores vetoriais e de atributos",
-			titulo:"O tema pode ser editado? (METADATA: EDITAVEL)",id:"",value:dados.editavel,tipo:"text",div:"<div id=cEditavel ></div>"},
-			{ajuda:"Esquema do banco de dados onde est&aacute; a tabela que poder&aacute; ser editada",
-			titulo:"Esquema no banco de dados",id:"",value:"",tipo:"text",div:"<div id=cEsquematabelaeditavel ></div>" },
-			{ajuda:"Tabela do banco que poder&aacute; ser editada",
-			titulo:"Tabela no banco de dados",id:"",value:"",tipo:"text",div:"<div id=cTabelatabelaeditavel ></div>" },
-			{ajuda:"Coluna que identifica de forma &uacute;nica cada registro da tabela",
-			titulo:"Coluna com IDs &uacute;nicos",id:"",value:"",tipo:"text",div:"<div id=cColunatabelaeditavel ></div>" },
-			{ajuda:"Coluna que contem as geometrias da tabela",
-			titulo:"Coluna com geometria edit&aacute;vel",id:"",value:"",tipo:"text",div:"<div id=cColunageometriatabelaeditavel ></div>" }
+			{ajuda:$trad("editavel",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("editavelTitulo",i3GEOadmin.editormapfile.dicionario),id:"",value:dados.editavel,tipo:"text",div:"<div id=cEditavel ></div>"},
+			{ajuda:$trad("esquemaBd",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("esquemaBdTitulo",i3GEOadmin.editormapfile.dicionario),id:"",value:"",tipo:"text",div:"<div id=cEsquematabelaeditavel ></div>" },
+			{ajuda:$trad("tabelaBd",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("tabelaBdTitulo",i3GEOadmin.editormapfile.dicionario),id:"",value:"",tipo:"text",div:"<div id=cTabelatabelaeditavel ></div>" },
+			{ajuda:$trad("colunaBd",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("colunaBdTitulo",i3GEOadmin.editormapfile.dicionario),id:"",value:"",tipo:"text",div:"<div id=cColunatabelaeditavel ></div>" },
+			{ajuda:$trad("bdGeom",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("bdGeomTitulo",i3GEOadmin.editormapfile.dicionario),id:"",value:"",tipo:"text",div:"<div id=cColunageometriatabelaeditavel ></div>" }
 		]
 		},
 	ins = "";
-	ins += "<p>Obs.: Apenas temas baseados em Postgis podem ser editados</p>";
+	ins += "<p>"+ $trad("obsPostgis",i3GEOadmin.editormapfile.dicionario) +"</p>";
 	ins += core_geraLinhas(param);
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;

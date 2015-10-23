@@ -581,63 +581,123 @@ i3GEOadmin.editormapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'disponibilidade' : [ {
+		pt : "Disponibilidade",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'conexao' : [ {
+		pt : "Conex&atilde;o",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'permiteDownload' : [ {
+		pt : "Indica se o usu&aacute;rio pode fazer download do tema. Se sim, o &iacute;cone de download ser&aacute; mostrado na &aacute;rvore de camadas dispon&iacute;veis no mapa.",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'permiteDownloadTitulo' : [ {
+		pt : "Permite download (METADATA: DOWNLOAD)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'endereco' : [ {
+		pt : "Endere&ccedil;o de um arquivo pr&eacute;-existente para download dos dados (caminho completo no servidor). Se definido, o sistema ir&aacute; usar esse arquivo ao inv&eacute;s de gerar os dados, quando o usu&aacute;rio clicar nas op&ccedil;&otilde;es de download. Se n&atilde;o for definido, o arquivo de download &eacute; gerado diretamente do original, convertendo do banco ou copiando o arquivo definido em DATA.",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'enderecoTitulo' : [ {
+		pt : "Arquivo download (ARQUIVODOWNLOAD)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'arquivoKmz' : [ {
+		pt : "Endere&ccedil;o de um arquivo KMZ ou KML pr&eacute;-existente para download dos dados (caminho completo no servidor). Se definido, o sistema ir&aacute; usar esse arquivo ao inv&eacute;s de gerar os dados, quando o usu&aacute;rio clicar nas op&ccedil;&otilde;es de visualiza&ccedil;&atilde;o de KML ou KMZ. Se n&atilde;o for definido, o arquivo &eacute; gerado diretamente do original.",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'arquivoKmzTitulo' : [ {
+		pt : "Arquivo KML ou KMZ (ARQUIVOKMZ)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'permiteOgc2' : [ {
+		pt : "Permite acesso via WMS/WFS? (n&atilde;o ocasiona restri&ccedil;&atilde;o em temas do tipo gvSIG)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'permiteDownload2' : [ {
+		pt : "Permite o download na aplica&ccedil;&atilde;o datadownload.htm? (n&atilde;o afeta temas do tipo gvSIG) (n&atilde;o afeta a permiss&atilde;o de download definida no item 'disponibilidade' existente em cada layer)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'permiteKml' : [ {
+		pt : "Permite acesso via kml? (n&atilde;o restringe em temas do tipo gvSIG)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'permiteKmz' : [ {
+		pt : "Permite acesso via kmz (kml com dados vetoriais)? (n&atilde;o restringe em temas do tipo gvSIG)",
+		en : "",
+		es : ""
+	} ],
+    'edicao' : [ {
+		pt : "Edi&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
+    'editavel' : [ {
+		pt : "Indica se o tema poder&aacute; ser utilizado nos editores vetoriais e de atributos",
+		en : "",
+		es : ""
+	} ],
+    'editavelTitulo' : [ {
+		pt : "O tema pode ser editado? (METADATA: EDITAVEL)",
+		en : "",
+		es : ""
+	} ],
+    'esquemaBd' : [ {
+		pt : "Esquema do banco de dados onde est&aacute; a tabela que poder&aacute; ser editada",
+		en : "",
+		es : ""
+	} ],
+    'esquemaBdTitulo' : [ {
+		pt : "Esquema no banco de dados",
+		en : "",
+		es : ""
+	} ],
+    'tabelaBd' : [ {
+		pt : "Tabela do banco que poder&aacute; ser editada",
+		en : "",
+		es : ""
+	} ],
+    'tabelaBdTitulo' : [ {
+		pt : "Tabela no banco de dados",
+		en : "",
+		es : ""
+	} ],
+    'colunaBd' : [ {
+		pt : "Coluna que identifica de forma &uacute;nica cada registro da tabela",
+		en : "",
+		es : ""
+	} ],
+    'colunaBdTitulo' : [ {
+		pt : "Coluna com IDs &uacute;nicos",
+		en : "",
+		es : ""
+	} ],
+    'bdGeom' : [ {
+		pt : "Coluna que contem as geometrias da tabela",
+		en : "",
+		es : ""
+	} ],
+    'bdGeomTitulo' : [ {
+		pt : "Coluna com geometria edit&aacute;vel",
+		en : "",
+		es : ""
+	} ],
+    'obsPostgis' : [ {
+		pt : "Obs.: Apenas temas baseados em Postgis podem ser editados",
 		en : "",
 		es : ""
 	} ]
