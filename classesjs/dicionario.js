@@ -2291,29 +2291,29 @@ g_traducao = {
 		"refMapaAtual" : [
 			{
 				pt : "Mapa atual",
-				en : "",
-				es : ""
+				en : "Current map",
+				es : "Mapa actual"
 			}
 		],
 		"refMapaDinamico" : [
 			{
 				pt : "Mapa din&acirc;mico",
-				en : "",
-				es : ""
+				en : "Dynamic map",
+				es : "Mapa din&aacute;mico"
 			}
 		],
 		"naoPermitido" : [
 			{
 				pt : "Operacao nao autorizada para esse usuario",
-				en : "",
-				es : ""
+				en : "Unauthorized operation for this user",
+				es : "Operaci&oacute;n no autorizada para ese usuario"
 			}
 		],
 		"melhorcaminho" : [
 			{
 				pt : "Melhor caminho (raster)",
-				en : "",
-				es : ""
+				en : "Best way (raster)",
+				es : "Mejor camino (raster)"
 			}
 		],
 		"tolerancia" : [
