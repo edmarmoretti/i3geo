@@ -46,7 +46,7 @@ MAP
       STYLE
         COLOR 250 193 4
         SIZE 20
-        SYMBOL "/var/www/i3geo/imagens/google/condominium.png"
+        SYMBOL "http://localhost/i3geo/imagens/google/condominium.png"
       END # STYLE
       TITLE ""
     END # CLASS
@@ -57,7 +57,7 @@ MAP
         COLOR 62 9 41
         OFFSET 0 -10
         SIZE 20
-        SYMBOL "/var/www/i3geo/imagens/google/condominium1.png"
+        SYMBOL "http://localhost/i3geo/imagens/google/condominium1.png"
       END # STYLE
       TITLE ""
     END # CLASS

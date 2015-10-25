@@ -1,0 +1,575 @@
+SYMBOLSET
+  SYMBOL 
+    NAME 'cruzeta'
+		TYPE VECTOR
+		POINTS
+    0.5 0
+    0.5 1
+    -99 -99
+    0 0.5
+    1 0.5
+		END
+	END
+  SYMBOL 
+    NAME 'google1' 
+		TYPE VECTOR
+		FILLED TRUE 
+		POINTS 
+			90	-363
+			140	-363
+			165	-347
+			177	-335
+			188	-323
+			201	-311
+			213	-287
+			213	-192
+			199	-169
+			188	-154
+			175	-144
+			163	-132
+			152	-106
+			141	-82
+			126	-46
+			117	50
+			97	50
+			85	-46
+			74	-82
+			61	-106
+			50	-132
+			38	-144
+			25	-154
+			12	-169
+			0	-192
+			0	-287
+			14	-311
+			25	-323
+			38	-335
+			51	-347
+			73	-363
+			120	-363
+		END 
+	END
+
+  Symbol
+    Name "rosa200"
+    Type PIXMAP
+    Image "rosa200.png"
+  END 
+
+	Symbol 
+		NAME 'p0' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 1 
+		0 0 
+		1 0 
+		1 1 
+		0 1 
+		END 
+  END
+	
+  Symbol
+    Name "p1"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    0 1
+    1 1
+    END
+  END
+	
+  Symbol
+    Name "p2"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    1 0
+    1 1
+    END
+  END
+
+Symbol
+  Name 'ferrovia-line1'
+  Type ELLIPSE
+  Points
+    1 1
+  END
+  FILLED TRUE
+END
+
+Symbol
+  Name 'ferrovia-line2'
+  Type VECTOR
+  Points
+    0 0
+    1 0
+    1 0
+    0 0
+  END
+  FILLED TRUE
+END
+  Symbol
+    Name "p3"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    1 0
+    0 1
+    END
+  END
+
+  Symbol
+    Name "p4"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    1 1
+    0 0
+    END
+  END
+
+  Symbol
+    Name "p5"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    0 0
+    1 0
+    0 1
+    END
+  END
+  
+  Symbol
+    Name "p6"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    0 0
+    0 1
+    1 0
+    END
+  END
+	
+  Symbol
+    Name "p7"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    0 1
+		1 1
+    1 0
+    END
+  END
+
+  Symbol
+    Name "p8"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+		0 1
+    1 1
+		-99 -99
+		0 3
+		3 3
+    END
+  END
+	
+  Symbol
+    Name "p9"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+		0 1
+    1 1
+		-99 -99
+		0 0
+		1 1
+    END
+  END
+
+  Symbol
+    Name "pt1"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    1 1
+    1 1
+    END
+  END
+	
+  Symbol 
+	  name "pt2" 
+    TYPE ELLIPSE
+    POINTS 1 1 END
+    FILLED true
+  END
+
+  Symbol
+    Name "pt3"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  END
+	
+  Symbol
+    Name "linha"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  END
+
+  Symbol
+    Name "linha1"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  END
+
+	Symbol 
+	name "dashed" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+		1 1 
+		END 
+  END
+
+	Symbol 
+	name "dashed1" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+		1 1 
+		END 
+  END 
+
+	Symbol 
+	name "dashed2" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+    2 0
+		END 
+  END 	
+	
+  Symbol
+    Name "aviao"
+    Type PIXMAP
+    Image "aviao.png"
+  END
+	
+  Symbol
+    Name "seta"
+    Type PIXMAP
+    Image "seta.png"
+  END
+	
+  Symbol
+    Name "aviao1"
+    Type PIXMAP
+    Image "aviao1.png"
+  END
+
+	  Symbol
+    Name "leste"
+    Type PIXMAP
+    Image "leste.png"
+  END
+
+	  Symbol
+    Name "oeste"
+    Type PIXMAP
+    Image "oeste.png"
+  END
+
+	  Symbol
+    Name "norte"
+    Type PIXMAP
+    Image "norte.png"
+  END
+
+	  Symbol
+    Name "sul"
+    Type PIXMAP
+    Image "sul.png"
+  END
+  
+  Symbol
+    Name "sede"
+    Type PIXMAP
+    Image "sede.png"
+    Transparent 1
+  END
+
+  Symbol
+    Name "cidmun"
+    Type PIXMAP
+    Image "cidmun.png"
+  END
+	
+  Symbol
+    Name "capital"
+    Type PIXMAP
+    Image "capital.png"
+  END
+
+  Symbol
+    Name "cidade"
+    Type PIXMAP
+    Image "cidade.png"
+  END
+
+  Symbol
+    Name "vila"
+    Type PIXMAP
+    Image "vila.png"
+  END
+
+  Symbol
+    Name "xy"
+    Type PIXMAP
+    Image "xy.png"
+  END
+
+	Symbol
+    Name "xyr"
+    Type PIXMAP
+    Image "xyr.png"
+  END
+	
+  Symbol
+    Name "porto"
+    Type PIXMAP
+    Image "porto.png"
+  END
+	
+  Symbol
+    Name "ref"
+    Type PIXMAP
+    Image "ref.png"
+  END
+
+  Symbol
+    Name "foto"
+    Type PIXMAP
+    Image "foto.png"
+  END
+	
+  Symbol
+    Name "filme"
+    Type PIXMAP
+    Image "filme.png"
+  END
+
+  Symbol
+    Name "marca"
+    Type PIXMAP
+    Image "marca.png"
+  END
+
+	
+  Symbol
+    Name "ponto"
+    Type ELLIPSE
+		FILLED true
+    TRANSPARENT 0
+    Points
+    1 1
+    1 1
+    END
+  END
+ 
+	Symbol 
+		NAME 'quadrado' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 1 
+		0 0 
+		1 0 
+		1 1 
+		0 1 
+		END 
+	END
+
+	SYMBOL 
+  	NAME "estrela"
+  	TYPE vector
+  	FILLED TRUE
+  	POINTS
+		81 48
+		66 0
+		50 48
+		0 48
+		41 77
+		25 125
+		66 96
+		106 125
+		91 77
+		131 48
+		81 48
+  	END 
+	END
+
+  SYMBOL 
+    NAME 'triangulo' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 1 
+		.5 0 
+		1 1 
+		0 1 
+		END 
+	END
+
+  SYMBOL 
+    NAME 'industria' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 2
+		0 5
+		4 5
+		4 0
+		3 0
+		3 2
+		0 2
+		END 
+	END
+	
+  SYMBOL 
+    NAME 'torre' 
+		TYPE VECTOR 
+		FILLED FALSE 
+		POINTS 
+		2 0
+		3 4
+		4 4
+		4 5
+		0 5
+		0 4
+		1 4
+		2 0
+		END 
+	END
+	
+  SYMBOL 
+    NAME 'mineracao' 
+		TYPE VECTOR 
+		FILLED FALSE 
+		POINTS 
+		0 0
+		5 5
+		4 6
+		3 7
+		2 6
+		0 5
+		5 0
+		END 
+	END
+
+  SYMBOL 
+    NAME 'templo' 
+		TYPE VECTOR 
+		FILLED FALSE 
+		POINTS 
+		2 0
+		3 0
+		3 1
+		4 1
+		4 2
+		3 2
+		3 3
+		5 3
+		5 5
+		0 5
+		0 3
+		2 3
+		2 2
+		1 2
+		1 1
+		2 1
+		2 0
+		END 
+	END
+	
+  SYMBOL 
+    NAME 'saude' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		2 0
+		3 0
+		3 1
+		4 1
+		4 2
+		3 2
+		3 3
+		2 3
+		2 2
+		1 2
+		1 1
+		2 1
+		2 0
+		END 
+	END
+	
+  SYMBOL 
+    NAME 'escola' 
+		TYPE VECTOR 
+		FILLED FALSE 
+		POINTS 
+		2 0
+		5 2
+		3 2
+		3 4
+		5 4
+		5 7
+		0 7
+		0 4
+		2 4
+		2 0
+		END 
+	END
+
+  SYMBOL 
+    NAME 'cruz' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		2 0
+		3 0
+		3 1
+		5 1
+		5 2
+		3 2
+		3 7
+		2 7
+		2 2
+		0 2
+		0 1
+		2 1
+		2 0
+		END 
+	END
+
+Symbol 
+	name "circle" 
+	Type ELLIPSE 
+	Filled true 
+	POINTS 
+		1 1 
+		END 
+END
+SYMBOL
+NAME "T"
+TYPE TRUETYPE
+FONT "arial"
+CHARACTER "#"
+ANTIALIAS TRUE
+END
+
+
+

@@ -17,27 +17,24 @@ MAP
 	#
 	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do default
 	#
-	FONTSET "/opt/www/html/i3geo/symbols/fontes.txt"
-	SYMBOLSET "/opt/www/html/i3geo/symbols/simbolosv6.sym"
-	SHAPEPATH "/opt/www/html/geodados"
-	IMAGECOLOR 104 171 195
+	FONTSET "c:\ms4w\apache\htdocs\i3geo\symbols\fontes.txt"
+	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo\symbols\simbolosv6.sym"
+	DEBUG OFF
 	MAXSIZE 4096
-	#
-	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
-	#Esse tipo nao e adequado para imagens raster, mas o i3geo muda automaticamente
-	#para png1 quando um arquivo raster e adicionado ao mapa
-	#
+	#DEBUG 5
+	#CONFIG "MS_ERRORFILE" "c:\ms4w\tmp\ms_error.txt"
+
+	SHAPEPATH "c:\ms4w\apache\htdocs\geodados"
+	IMAGECOLOR 104 171 195
 	IMAGETYPE AGG_Q
 	#Brasil
 	#EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
-	EXTENT -160 -70 160 70
+	EXTENT -140 -60 140 60
 	SIZE 480 500
 	STATUS ON
 	UNITS DD
 	NAME "GERAL"
-	DEBUG OFF
-	#
-	#utilize o agg apenas com mapserver 5x
+
 	OUTPUTFORMAT
 		NAME 'AGG_Q'
 		DRIVER AGG/PNG
@@ -52,13 +49,14 @@ MAP
 			NAME svg
 			MIMETYPE "image/svg+xml"
 			DRIVER cairo/svg
+		IMAGEMODE RGB
 			#FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
 			#FORMATOPTION  "FULL_RESOLUTION=TRUE"
 		END
 	OUTPUTFORMAT
 			NAME jpeg
 			DRIVER "AGG/JPEG"
-			MIMETYPE "image/jpeg"
+			#MIMETYPE "image/jpeg"
 			IMAGEMODE RGB
 			EXTENSION jpg
 			FORMATOPTION "INTERLACE=OFF"
@@ -69,7 +67,7 @@ MAP
 		MIMETYPE image/png
 		DRIVER AGG/PNG
 		EXTENSION png
-		IMAGEMODE RGB
+		IMAGEMODE RGBA
 		TRANSPARENT FALSE
 		FORMATOPTION "INTERLACE=OFF"
 	END
@@ -83,6 +81,7 @@ MAP
 		TRANSPARENT TRUE
 		FORMATOPTION "INTERLACE=OFF"
 	END
+
 	PROJECTION
 		"+proj=longlat +ellps=GRS67 +no_defs"
 	END
@@ -103,9 +102,9 @@ MAP
 			PARTIALS TRUE
 		END
 		POSITION LL
-		STATUS off
+		STATUS OFF
 		#edite o caminho se a aplicacao for movida de lugar
-		#TEMPLATE "/opt/www/html/i3geo/aplicmap/legenda.htm"
+		#TEMPLATE "c:\ms4w\apache\htdocs\i3geo/aplicmap/legenda.htm"
 	END
 	QUERYMAP
 		#OUTLINECOLOR 255 0 0
@@ -118,7 +117,7 @@ MAP
 		COLOR -1 -1 -1
 		EXTENT -75.5728 -37.4751 -30.525 7.57273#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401
 		#edite o caminho se a aplicacao for movida de lugar
-		IMAGE "/opt/www/html/i3geo/imagens/referencia1.png"
+		IMAGE "c:/ms4w/apache/htdocs/i3geo/imagens/referencia1.png"
 		OUTLINECOLOR -1 -1 -1
 		SIZE 150 150
 		STATUS off
@@ -151,13 +150,12 @@ MAP
 	END
 	WEB
 		#edite o caminho se a aplicacao for movida de lugar
-		IMAGEPATH "/var/tmp/ms_tmp/"
+		IMAGEPATH "c:/ms4w/tmp/ms_tmp/"
 		IMAGEURL "/ms_tmp/"
 		TEMPLATE ""
 	END
 	LAYER
-		DATA "/opt/www/html/i3geo/aplicmap/dados/mundo"
-		GROUP "mundo"
+		DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/mundo"
 		METADATA
 			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda
 			"ITENS"	"FIPS_CNTRY,GMI_CNTRY,LONG_NAME,CNTRY_NAME" #itens que serao mostrados na opcao de identificacao
@@ -166,15 +164,16 @@ MAP
 			"TEMA"	"Países do mundo" #nome que sera mostrado na legenda
 			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
 			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
+			#"ESCONDIDO" "sim"
 			"cache" "sim"
 			"itembuscarapida" "LONG_NAME"
 		END
 		NAME "mundo"
-		STATUS DEFAULT
+		STATUS OFF
 		TEMPLATE "none.htm"
 		TYPE POLYGON
 		CLASS
-			NAME "" #vazio indica que nao sera incluido o nome ao lado do simbolo
+			NAME " " #vazio indica que nao sera incluido o nome ao lado do simbolo
 			STYLE
 				COLOR 230 230 230
 				OUTLINECOLOR 255 255 255
@@ -185,7 +184,7 @@ MAP
 	#para mostrar o mapa do Brasil, remova os comentarios
 	#
 	#LAYER
-	#	DATA "/opt/www/html/i3geo/aplicmap/dados/estados"
+	#	DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/estados"
 	#	METADATA
 	#		"CLASSE"	"SIM"
 	#		"TEMA"	"Brasil"
@@ -220,7 +219,7 @@ MAP
 	#  NAME estadosl # ok
 	#  TYPE line
 	#  STATUS DEFAULT
-	#  DATA "/opt/www/html/i3geo/aplicmap/dados/estados"
+	#  DATA "c:/ms4w/apache/htdocs/i3geo/aplicmap/dados/estados.shp"
 	#  TEMPLATE "estados.htm"
 	#  METADATA
 	#	  ITENS "ESTADO"
@@ -244,7 +243,6 @@ MAP
 	#  END  # CLASS
 	#END  # LAYER
 
-
 	LAYER
 		METADATA
 			#"TEMA"	"NAO"
@@ -253,11 +251,11 @@ MAP
 		END
 		NAME "copyright"
 		SIZEUNITS PIXELS
-		STATUS default
+		STATUS DEFAULT
 		TOLERANCE 0
 		TOLERANCEUNITS PIXELS
 		TRANSFORM FALSE
-		TYPE ANNOTATION
+		TYPE POINT
 		UNITS METERS
 		CLASS
 			LABEL
@@ -285,7 +283,8 @@ MAP
 			"TEMA"	"Rosa dos ventos"
 			"IDENTIFICA" "nao"
 			"TABELA" "nao"
-						"CLASSE"	"NAO"
+			"CLASSE" "NAO"
+			#"cache" "sim"
 		END
 		NAME "rosadosventos"
 		SIZEUNITS PIXELS
@@ -305,4 +304,5 @@ MAP
 			END
 		END
 	END
+
 END

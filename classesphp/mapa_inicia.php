@@ -286,7 +286,7 @@ function iniciaMapa()
 	$copyright = "";
 	$lc = $m->mapa->getlayerbyname("copyright");
 	if($lc != "" && $lc->status == MS_DEFAULT ){
-		if($versao["principal"] == 6){
+		if($versao["principal"] > 6){
 			$shape = $lc->getShape(new resultObj(0));
 			$copyright = $shape->text;
 		}

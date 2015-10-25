@@ -659,8 +659,8 @@ class Legenda
 			else
 			{$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);
 			}
-				
 			$l = $mapatemp->getlayer(0);
+			
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 			{
 				$novoss = dirname($this->mapa->symbolsetfilename)."\\".basename($mapatemp->symbolsetfilename);
@@ -673,11 +673,13 @@ class Legenda
 			for ($i=0;$i < $ns;++$i)
 			{
 				$oSymbol = $this->mapa->getSymbolObjectById($i);
+				
 				$nomes = $oSymbol->name;
 				if($nomes == "")
 				{
 					$nomes = $i;
 				}
+
 				$adiciona = ms_newLayerObj($this->mapa, $l);
 				$nomel = $l->name;
 				$tematemp= $this->mapa->getlayerbyname($nomel);
@@ -686,8 +688,11 @@ class Legenda
 				$e->set("symbolname",$nomes);
 				$e->set("size",$tamanho);
 				$e->set("width",$width);
+				
 				$ico = $c->createLegendIcon(40,40);
+				
 				$nimg = $ico->saveWebImage();
+				
 				$pat = $this->mapa->web->imageurl;
 				$ins .= "<img src='".$nimg."' style='cursor:pointer;border: 5px solid #FFFFFF' title=".$nomes." onclick='".$onclick."'>";
 			}

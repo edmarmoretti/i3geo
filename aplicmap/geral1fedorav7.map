@@ -17,9 +17,9 @@ MAP
 	#
 	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do default
 	#
-	FONTSET "/opt/www/html/i3geo/symbols/fontes.txt"
-	SYMBOLSET "/opt/www/html/i3geo/symbols/simbolosv6.sym"
-	SHAPEPATH "/opt/www/html/geodados"
+	FONTSET "/var/www/html/i3geo/symbols/fontes.txt"
+	SYMBOLSET "/var/www/html/i3geo/symbols/simbolosv6.sym"
+	SHAPEPATH "/var/www/html/geodados"
 	IMAGECOLOR 104 171 195
 	MAXSIZE 4096
 	#
@@ -36,8 +36,10 @@ MAP
 	UNITS DD
 	NAME "GERAL"
 	DEBUG OFF
+	#CONFIG "MS_ERRORFILE" "/tmp/ms_tmp/ms_error.txt"
 	#
 	#utilize o agg apenas com mapserver 5x
+
 	OUTPUTFORMAT
 		NAME 'AGG_Q'
 		DRIVER AGG/PNG
@@ -48,13 +50,14 @@ MAP
 		FORMATOPTION "INTERLACE=OFF"
 	END
 
-	OUTPUTFORMAT
-			NAME svg
-			MIMETYPE "image/svg+xml"
-			DRIVER cairo/svg
-			#FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
-			#FORMATOPTION  "FULL_RESOLUTION=TRUE"
-		END
+	#OUTPUTFORMAT
+		#	NAME svg
+		#	MIMETYPE "image/svg+xml"
+		#	DRIVER cairo/svg
+		#	#FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
+		#	#FORMATOPTION  "FULL_RESOLUTION=TRUE"
+		#END
+
 	OUTPUTFORMAT
 			NAME jpeg
 			DRIVER "AGG/JPEG"
@@ -83,6 +86,8 @@ MAP
 		TRANSPARENT TRUE
 		FORMATOPTION "INTERLACE=OFF"
 	END
+
+
 	PROJECTION
 		"+proj=longlat +ellps=GRS67 +no_defs"
 	END
@@ -105,7 +110,7 @@ MAP
 		POSITION LL
 		STATUS off
 		#edite o caminho se a aplicacao for movida de lugar
-		#TEMPLATE "/opt/www/html/i3geo/aplicmap/legenda.htm"
+		#TEMPLATE "/var/www/html/i3geo/aplicmap/legenda.htm"
 	END
 	QUERYMAP
 		#OUTLINECOLOR 255 0 0
@@ -116,9 +121,10 @@ MAP
 	END
 	REFERENCE
 		COLOR -1 -1 -1
-		EXTENT -75.5728 -37.4751 -30.525 7.57273#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401
+		EXTENT -75.5728 -37.4751 -30.525 7.57273
+		#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401
 		#edite o caminho se a aplicacao for movida de lugar
-		IMAGE "/opt/www/html/i3geo/imagens/referencia1.png"
+		IMAGE "/var/www/html/i3geo/imagens/referencia1.png"
 		OUTLINECOLOR -1 -1 -1
 		SIZE 150 150
 		STATUS off
@@ -151,12 +157,12 @@ MAP
 	END
 	WEB
 		#edite o caminho se a aplicacao for movida de lugar
-		IMAGEPATH "/var/tmp/ms_tmp/"
+		IMAGEPATH "/tmp/ms_tmp/"
 		IMAGEURL "/ms_tmp/"
 		TEMPLATE ""
 	END
 	LAYER
-		DATA "/opt/www/html/i3geo/aplicmap/dados/mundo"
+		DATA "/var/www/html/i3geo/aplicmap/dados/mundo"
 		GROUP "mundo"
 		METADATA
 			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda
@@ -170,9 +176,10 @@ MAP
 			"itembuscarapida" "LONG_NAME"
 		END
 		NAME "mundo"
-		STATUS DEFAULT
+		STATUS OFF
 		TEMPLATE "none.htm"
 		TYPE POLYGON
+		UNITS METERS
 		CLASS
 			NAME "" #vazio indica que nao sera incluido o nome ao lado do simbolo
 			STYLE
@@ -185,7 +192,7 @@ MAP
 	#para mostrar o mapa do Brasil, remova os comentarios
 	#
 	#LAYER
-	#	DATA "/opt/www/html/i3geo/aplicmap/dados/estados"
+	#	DATA "/var/www/html/i3geo/aplicmap/dados/estados"
 	#	METADATA
 	#		"CLASSE"	"SIM"
 	#		"TEMA"	"Brasil"
@@ -220,7 +227,7 @@ MAP
 	#  NAME estadosl # ok
 	#  TYPE line
 	#  STATUS DEFAULT
-	#  DATA "/opt/www/html/i3geo/aplicmap/dados/estados"
+	#  DATA "/var/www/html/i3geo/aplicmap/dados/estados"
 	#  TEMPLATE "estados.htm"
 	#  METADATA
 	#	  ITENS "ESTADO"
@@ -244,7 +251,6 @@ MAP
 	#  END  # CLASS
 	#END  # LAYER
 
-
 	LAYER
 		METADATA
 			#"TEMA"	"NAO"
@@ -257,7 +263,7 @@ MAP
 		TOLERANCE 0
 		TOLERANCEUNITS PIXELS
 		TRANSFORM FALSE
-		TYPE ANNOTATION
+		TYPE POINT
 		UNITS METERS
 		CLASS
 			LABEL
@@ -285,7 +291,7 @@ MAP
 			"TEMA"	"Rosa dos ventos"
 			"IDENTIFICA" "nao"
 			"TABELA" "nao"
-						"CLASSE"	"NAO"
+			"CLASSE"	"NAO"
 		END
 		NAME "rosadosventos"
 		SIZEUNITS PIXELS
