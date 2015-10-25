@@ -390,7 +390,9 @@ catch(ee)
 				}
 			}
 		}
-
+		echo "<br>O arquivo mapfile de iniciliza&ccedil;&atilde;o &eacute;: $f<br>\n";
+		echo "<br><b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no $f):</b>\n";
+		echo "<br>Criando o objeto com ms_newMapObj...";
 		$mapa = ms_newMapObj($f);
 
 		for($i=0;$i<($mapa->numlayers);$i++)
@@ -402,8 +404,7 @@ catch(ee)
 			}
 		}
 
-		echo "<br>O arquivo mapfile de iniciliza&ccedil;&atilde;o &eacute;: $f<br>\n";
-		echo "<br><b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no $f):</b>\n";
+		
 		$imgo = @$mapa->draw();
 		$nome = ($imgo->imagepath)."teste.png";
 		echo "<p>Nome da imagem gerada: $nome </p>";

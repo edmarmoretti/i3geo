@@ -88,6 +88,7 @@ if ($tipo == "")
 	echo 'i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo";';
 	echo '</script>';
 	echo '<script src="admin/js/core.js"></script>';
+	echo '<script src="admin/dicionario/core.js"></script>';
 	echo '</head>';
 	echo '<body class=" yui-skin-sam" style="background: white;"><center>';
 	echo '<div class="bordaSuperior"  >&nbsp;</div>';
