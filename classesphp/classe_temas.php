@@ -555,17 +555,35 @@ Muda a transpar&ecirc;ncia do tema.
 parameter:
 $valor - Novo valor da transpar&ecirc;ncia
 */
-	function mudaTransparencia($valor)
-	{
-				//error_reporting(0);
+	function mudaTransparencia($valor){
 		$v = versao();
-		foreach ($this->grupo as $lg)
-		{
+		foreach ($this->grupo as $lg){
 			$ll = $this->mapa->getlayerbyname($lg);
-			$v["principal"] == "4" ? $ll->set("transparency",$valor) : $ll->set("opacity",$valor);
 			$ll->setmetaData("cache","");
+			if($this->v == 4){
+				$ll->set("transparency",$valor);
+				return("ok");
+			}
+			if($this->v < 7){
+				$ll->set("opacity",$valor);
+				return("ok");
+			}
+			if($this->v >= 7){
+				//$ll->composite->opacity = $valor;
+				//$ll->set("opacity",$valor);
+				//$ll->updateFromString('LAYER COMPOSITE OPACITY '.$valor.'END END');
+				$numclasses = $ll->numclasses;
+				for($i=0;$i<$numclasses;++$i){
+					$classe = $this->layer->getclass($i);
+					$numestilos = $classe->numstyles;
+					for($j=0;$j<$numestilos;++$j){
+						$estilo = $classe->getstyle($j);
+						$estilo->set("opacity",$valor);
+					}
+				}
+				return("ok");
+			}
 		}
-		return("ok");
 	}
 /*
 function: inverteStatusLegenda
