@@ -1,7 +1,7 @@
 function montaNoLayer(codigo,indice){
-	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','layer','"+codigo+"','"+indice+"')\" title=sobe src=\"../imagens/34.png\" />";
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','layer','"+codigo+"','"+indice+"')\" title=desce src=\"../imagens/33.png\" />";
-	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirLayer('"+codigo+"','"+indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+indice+"</span>";
+	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','layer','"+codigo+"','"+indice+"')\" title="+ $trad("sobe",i3GEOadmin.core.dicionario) +" src=\"../imagens/34.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','layer','"+codigo+"','"+indice+"')\" title="+ $trad("desce",i3GEOadmin.core.dicionario) +" src=\"../imagens/33.png\" />";
+	conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirLayer('"+codigo+"','"+indice+"')\" title="+ $trad("excluir",i3GEOadmin.core.dicionario) +" width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+indice+"</span>";
 	var d = {html:conteudo,id:codigo+"_"+indice,codigoMap:codigo,codigoLayer:indice};
 	return d;
 }
@@ -47,14 +47,14 @@ function montaParametrosTemas(no,dados,redesenha)
 		d;
 	if(!tree.getNodeByProperty("etiquetaDados",id))
 	{
-		conteudo = "<span style=cursor:pointer; onclick=\"editorDados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Conex&atilde;o com os dados</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorDados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" />"+ $trad("conexaoLayer",i3GEOadmin.editormapfile.dicionario) +"</span>";
 		d = {tipo:"etiquetaDados",etiquetaDados:id,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
 	if(!tree.getNodeByProperty("etiquetaTitulo",id))
 	{
-		conteudo = "<span style=cursor:pointer; onclick=\"editorTitulo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> T&iacute;tulo, escala, extens&atilde;o</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorTitulo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" />"+ $trad("tituloLayer",i3GEOadmin.editormapfile.dicionario) +"</span>";
 		d = {tipo:"etiquetaTitulo",etiquetaTitulo:id,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -62,7 +62,7 @@ function montaParametrosTemas(no,dados,redesenha)
 	}
 	if(!tree.getNodeByProperty("etiquetaEditavel",id))
 	{
-		conteudo = "<span style=cursor:pointer; onclick=\"editorEditavel('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Edit&aacute;vel (define se o tema &eacute; edit&aacute;vel)</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorEditavel('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" />"+ $trad("editavelLayer",i3GEOadmin.editormapfile.dicionario) +"</span>";
 		d = {tipo:"etiquetaEditavel",etiquetaEditavel:id,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -70,7 +70,7 @@ function montaParametrosTemas(no,dados,redesenha)
 	}
 	if(!tree.getNodeByProperty("etiquetaComport",id))
 	{
-		conteudo = "<span style=cursor:pointer; onclick=\"editorComport('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Comportamento no mapa</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorComport('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" />"+ $trad("comportamentoLayer",i3GEOadmin.editormapfile.dicionario) +"</span>";
 		d = {tipo:"etiquetaComport",etiquetaComport:id,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -79,7 +79,7 @@ function montaParametrosTemas(no,dados,redesenha)
 
 	if(!tree.getNodeByProperty("etiquetaDispo",id))
 	{
-		conteudo = "<span style=cursor:pointer; onclick=\"editorDispo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" /> Disponibilidade (download, wms,...)</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorDispo('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='' src=\"../imagens/06.png\" />"+ $trad("disponibLayer",i3GEOadmin.editormapfile.dicionario) +"</span>";
 		d = {tipo:"etiquetaDispo",etiquetaDispo:id,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -88,7 +88,7 @@ function montaParametrosTemas(no,dados,redesenha)
 //rever
 	if(!tree.getNodeByProperty("etiquetaMetadados",id))
 	{
-		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Miscel&acirc;nea</span>";
+		conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" />"+ $trad("miscLayer",i3GEOadmin.editormapfile.dicionario) +"</span>";
 		d = {tipo:"etiquetaMetadados",etiquetaMetadados:id,html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -101,19 +101,19 @@ function montaParametrosTemas(no,dados,redesenha)
 		tempNodeR.isLeaf = false;
 		tempNodeR.enableHighlight = false;
 
-		conteudo = "<span style='cursor:pointer;' onclick=\"adicionaNovaClasse('"+codigoMap+"','"+codigoLayer+"')\" ><img  style='position:relative;top:2px' src=\"../imagens/05.png\" /> Adicionar uma classe</span>";
+		conteudo = "<span style='cursor:pointer;' onclick=\"adicionaNovaClasse('"+codigoMap+"','"+codigoLayer+"')\" ><img  style='position:relative;top:2px' src=\"../imagens/05.png\" />"+ $trad("adicionaClasseLayer",i3GEOadmin.editormapfile.dicionario) +"</span>";
 		d = {html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 		tempNode.enableHighlight = false;
 
-		conteudo = "<span style='cursor:pointer;' onclick=\"classesAuto('"+codigoMap+"','"+codigoLayer+"')\" ><img style='position:relative;top:2px' src=\"../imagens/classificar.gif\" /> Criar classes automaticamente</span>";
+		conteudo = "<span style='cursor:pointer;' onclick=\"classesAuto('"+codigoMap+"','"+codigoLayer+"')\" ><img style='position:relative;top:2px' src=\"../imagens/classificar.gif\" />"+ $trad("criaClassesLayer",i3GEOadmin.editormapfile.dicionario) +"</span>";
 		d = {html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
 		tempNode.enableHighlight = false;
 
-		conteudo = "<span style='cursor:pointer;' onclick=\"window.open('../../testamapfile.php?solegenda=sim&map="+no.data.codigoMap+"')\" > <img style='position:relative;top:2px' src=\"../imagens/41.png\" /> Testar</span>";
+		conteudo = "<span style='cursor:pointer;' onclick=\"window.open('../../testamapfile.php?solegenda=sim&map="+no.data.codigoMap+"')\" > <img style='position:relative;top:2px' src=\"../imagens/41.png\" />"+ $trad("testaLayer",i3GEOadmin.editormapfile.dicionario) +"</span>";
 		d = {html:conteudo};
 		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
 		tempNode.isLeaf = true;
@@ -132,7 +132,7 @@ function montaParametrosTemas(no,dados,redesenha)
 
 	if(!tree.getNodeByProperty("pluginI3geo",id))
 	{
-		d = {id:id,codigoLayer:codigoLayer,tipo:"pluginI3geo",etiquetaPluginI3geo:id,html:"<i>&nbsp;Plugin (s&oacute; &eacute; poss&iacute;vel ativar um plugin por LAYER)</i>"};
+		d = {id:id,codigoLayer:codigoLayer,tipo:"pluginI3geo",etiquetaPluginI3geo:id,html:"<i>&nbsp;"+ $trad("pluginLayer",i3GEOadmin.editormapfile.dicionario) +"</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNodeR.isLeaf = false;
 		tempNodeR.enableHighlight = false;
@@ -161,8 +161,8 @@ function pegaPluginLayer(plugin,codigoMap,codigoLayer){
 	core_montaEditor("","450px","500px","","Plugin",true,false,false);
 	var sUrl = "../php/editormapfile.php?funcao=pegaPlugin&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	var montaEditorPlugin = function(retorno){
-		var ins = "<input type=button title='Salvar' value='Salvar' id=salvarPlugin />"
-			+ "<input type=button title='Remover' value='Remover' id=removerPlugin />";
+		var ins = "<input type=button title='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' value='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' id=salvarPlugin />"
+			+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
 		//pega os campos do formulario
 		ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
 		var ajuda = "<p>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
@@ -176,7 +176,7 @@ function pegaPluginLayer(plugin,codigoMap,codigoLayer){
 			salvarDadosEditorPlugin($i("editor_bd"),"",codigoMap,codigoLayer);
 		} }});
 	};
-	core_pegaDados("Obtendo dados...",sUrl,montaEditorPlugin);
+	core_pegaDados($trad("obtemDados",i3GEOadmin.core.dicionario),sUrl,montaEditorPlugin);
 }
 /*
 Function: adicionaNovoLayer
@@ -188,7 +188,7 @@ Adiciona um novo layer
 function adicionaNovoLayer(codigoMap)
 {
 	core_carregando("ativa");
-	core_carregando(" adicionando um novo layer");
+	core_carregando($trad("msgAdicionaNovoLayer",i3GEOadmin.editormapfile.dicionario));
 	sUrl = "../php/editormapfile.php?funcao=criarNovoLayer&codigoMap="+codigoMap;
 	var callback =
 	{
@@ -198,7 +198,7 @@ function adicionaNovoLayer(codigoMap)
 			{
 				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 				{
-					core_carregando("<span style=color:red >Erro</span>");
+					core_carregando("<span style=color:red >"+ $trad("erro",i3GEOadmin.core.dicionario) +"</span>");
 					setTimeout("core_carregando('desativa')",3000);
 				}
 				else
@@ -231,7 +231,7 @@ Exclui um layer
 */
 function excluirLayer(codigoMap,codigoLayer)
 {
-	var mensagem = " excluindo "+codigoLayer;
+	var mensagem = $trad("msgExcluiMap",i3GEOadmin.core.dicionario)+codigoLayer;
 	var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer);
 	var sUrl = "../php/editormapfile.php?funcao=excluirLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_excluiNoTree(sUrl,no,mensagem,codigoLayer);

@@ -1121,6 +1121,66 @@ i3GEOadmin.editormapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'conexaoLayer' : [ {
+		pt : " Conex&atilde;o com os dados",
+		en : "",
+		es : ""
+	} ],
+    'tituloLayer' : [ {
+		pt : " T&iacute;tulo, escala, extens&atilde;o",
+		en : "",
+		es : ""
+	} ],
+    'editavelLayer' : [ {
+		pt : " Edit&aacute;vel (define se o tema &eacute; edit&aacute;vel)",
+		en : "",
+		es : ""
+	} ],
+    'comportamentoLayer' : [ {
+		pt : " Comportamento no mapa",
+		en : "",
+		es : ""
+	} ],
+    'disponibLayer' : [ {
+		pt : " Disponibilidade (download, wms,...)",
+		en : "",
+		es : ""
+	} ],
+    'miscLayer' : [ {
+		pt : " Miscel&acirc;nea",
+		en : "",
+		es : ""
+	} ],
+    'adicionaClasseLayer' : [ {
+		pt : " Adicionar uma classe",
+		en : "",
+		es : ""
+	} ],
+    'criaClassesLayer' : [ {
+		pt : " Criar classes automaticamente",
+		en : "",
+		es : ""
+	} ],
+    'testaLayer' : [ {
+		pt : " Testar",
+		en : "",
+		es : ""
+	} ],
+    'pluginLayer' : [ {
+		pt : "Plugin (s&oacute; &eacute; poss&iacute;vel ativar um plugin por LAYER)",
+		en : "",
+		es : ""
+	} ],
+    'msgAdicionaNovoLayer' : [ {
+		pt : " adicionando um novo layer",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
     '' : [ {
 		pt : "",
 		en : "",

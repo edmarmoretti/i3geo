@@ -221,13 +221,13 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'salva' : [ {
+		pt : "Salvar",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'remove' : [ {
+		pt : "Remover",
 		en : "",
 		es : ""
 	} ],
