@@ -22,7 +22,7 @@ function montaEditorClasseLabel(dados)
 	core_montaEditor(temp,"450px","500px","","Label",true,true,false);
 	var param = {
 		"linhas":[
-		{ajuda:$trad("colorLabel",i3GEOadmin.editormapfile.dicionario)",
+		{ajuda:$trad("colorLabel",i3GEOadmin.editormapfile.dicionario),
 		titulo:$trad("colorLabelTitulo",i3GEOadmin.editormapfile.dicionario),id:"color",value:dados.color,tipo:"cor"},
 		{ajuda:$trad("sizeLabel",i3GEOadmin.editormapfile.dicionario),
 		titulo:$trad("sizeLabelTitulo",i3GEOadmin.editormapfile.dicionario),id:"size",value:dados.size,tipo:"text"},
@@ -46,8 +46,8 @@ function montaEditorClasseLabel(dados)
 		titulo:$trad("outlinecolorLabelTitulo",i3GEOadmin.editormapfile.dicionario),id:"outlinecolor",value:dados.outlinecolor,tipo:"cor"},
 		{ajuda:$trad("shadowcolor",i3GEOadmin.editormapfile.dicionario),
 		titulo:$trad("shadowcolorTitulo",i3GEOadmin.editormapfile.dicionario),id:"shadowcolor",value:dados.shadowcolor,tipo:"text"},
-		{ajuda:$trad("shadowsizex",i3GEOadmin.editormapfile.dicionario)"Deslocamento da sombra no eixo x em pixeis.",
-		titulo:$trad("shadowsizexTitulo",i3GEOadmin.editormapfile.dicionario)"Shadowsizex",id:"shadowsizex",value:dados.shadowsizex,tipo:"text"},
+		{ajuda:$trad("shadowsizex",i3GEOadmin.editormapfile.dicionario),
+		titulo:$trad("shadowsizexTitulo",i3GEOadmin.editormapfile.dicionario),id:"shadowsizex",value:dados.shadowsizex,tipo:"text"},
 		{ajuda:$trad("shadowsizey",i3GEOadmin.editormapfile.dicionario),
 		titulo:$trad("shadowsizeyTitulo",i3GEOadmin.editormapfile.dicionario),id:"shadowsizey",value:dados.shadowsizey,tipo:"text"},
 		{ajuda:$trad("backgroundshadowsizex",i3GEOadmin.editormapfile.dicionario),
@@ -70,8 +70,8 @@ function montaEditorClasseLabel(dados)
 		titulo:$trad("antialiasLabelTitulo",i3GEOadmin.editormapfile.dicionario),id:"antialias",value:dados.antialias,tipo:"text"},
 		{ajuda:$trad("wrap",i3GEOadmin.editormapfile.dicionario),
 		titulo:$trad("wrapTitulo",i3GEOadmin.editormapfile.dicionario),id:"wrap",value:dados.wrap,tipo:"text"},
-		{ajuda:$trad("minfeaturesize",i3GEOadmin.editormapfile.dicionario)"Tamanho m&iacute;nimo que uma fei&ccedil;&atilde;o deve ter para ser etiquetada. Dado em pixeis. Para dados do tipo linha o comprimento geral da linha exibida &eacute; usada. Para pol&iacute;gonos, a menor dimens&atilde;o da caixa circundante &eacute; usada. AUTO diz ao MapServer s&oacute; etiquetar fei&ccedil;&otilde;es que s&atilde;o maiores do que sua respectiva label. Dispon&iacute;vel somente para labels em cache.",
-		titulo:$trad("minfeaturesizeTitulo",i3GEOadmin.editormapfile.dicionario)"Minfeaturesize",id:"minfeaturesize",value:dados.minfeaturesize,tipo:"text"},
+		{ajuda:$trad("minfeaturesize",i3GEOadmin.editormapfile.dicionario),
+		titulo:$trad("minfeaturesizeTitulo",i3GEOadmin.editormapfile.dicionario),id:"minfeaturesize",value:dados.minfeaturesize,tipo:"text"},
 		{ajuda:$trad("mindistance",i3GEOadmin.editormapfile.dicionario),
 		titulo:$trad("mindistanceTitulo",i3GEOadmin.editormapfile.dicionario),id:"mindistance",value:dados.mindistance,tipo:"text"},
 		{ajuda:$trad("encoding",i3GEOadmin.editormapfile.dicionario),
