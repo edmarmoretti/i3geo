@@ -1,5 +1,5 @@
 MAP
-SYMBOLSET ../symbols/simbolospolv6.sym
+SYMBOLSET ../symbols/simbolospolv7.sym
 FONTSET   "../symbols/fontes.txt"
 	DEBUG OFF
 	#DEBUG 5

@@ -18,7 +18,7 @@ MAP
 	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do default
 	#
 	FONTSET "/var/www/i3geo/symbols/fontes.txt"
-	SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
+	SYMBOLSET "/var/www/i3geo/symbols/simbolosv7.sym"
 	SHAPEPATH "/var/www/geodados"
 	IMAGECOLOR 104 171 195
 	MAXSIZE 4096

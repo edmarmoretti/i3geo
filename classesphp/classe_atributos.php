@@ -214,7 +214,7 @@ class Atributos
 		//$this->layer->setfilter("");
 		$ext = "";
 		//procura o registro e pega a extens&atilde;o geogr&aacute;fica
-		if($this->v == 6){
+		if($this->v >= 6){
 			$this->layer->open();
 			$shape = $this->layer->getShape(new resultObj($registro));
 			//$shape = $this->layer->getShape($this->layer->getResult($registro));
@@ -505,7 +505,7 @@ class Atributos
 				$valoresunicos = array();
 				for ($i = $inicio; $i < $res_count; ++$i){
 					$valitem = array();
-					if($this->v == 6){
+					if($this->v >= 6){
 						$shape = $this->layer->getShape($this->layer->getResult($i));
 						$indx = $shape->index;
 					}
@@ -621,7 +621,7 @@ class Atributos
 				$sopen = $this->layer->open();
 				for ($i = 0; $i < $res_count; ++$i){
 					$valitem = array();
-					if($this->v == 6){
+					if($this->v >= 6){
 						$shape = $this->layer->getShape($this->layer->getResult($i));
 						$indx = $shape->index;
 					}
@@ -732,7 +732,7 @@ class Atributos
 				$palavra = $this->remove_accents(strtolower($palavra));
 				for ($i = 0; $i < $res_count; ++$i)	{
 					$valitem = array();
-					if($this->v == 6){
+					if($this->v >= 6){
 						$shape = $l->getShape($l->getResult($i));
 						$indx = $shape->index;
 					}
@@ -1930,7 +1930,7 @@ class Atributos
 			for ($i = 0; $i < $res_count; ++$i)
 			{
 				$valori = array();
-				if($this->v == 6)
+				if($this->v >= 6)
 				{
 					$shape = $layer->getShape($layer->getResult($i));
 				}
@@ -2308,7 +2308,7 @@ class Atributos
 			}
 			for ($i = 0; $i < $res_count; ++$i)	{
 				$valori = array();
-				if($this->v == 6){
+				if($this->v >= 6){
 					$shape = $layer->getShape($layer->getResult($i));
 				}
 				else{

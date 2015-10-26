@@ -438,7 +438,7 @@ array("layerprj"=>$xylayer,"mapprj"=>$xymapa)
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$xy = array();
-		if($this->v == 6)
+		if($this->v >= 6)
 		{$shape = $this->layer->getShape($this->layer->getshape(new resultObj($res_count - 1)));}
 		else{
 			$result = $this->layer->getResult($res_count - 1);

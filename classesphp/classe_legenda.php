@@ -656,8 +656,8 @@ class Legenda
 			{
 				$mapatemp = ms_newMapObj($this->localaplicacao."\\aplicmap\\".$t);
 			}
-			else
-			{$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);
+			else{
+				$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);
 			}
 			$l = $mapatemp->getlayer(0);
 			
@@ -665,21 +665,38 @@ class Legenda
 			{
 				$novoss = dirname($this->mapa->symbolsetfilename)."\\".basename($mapatemp->symbolsetfilename);
 			}
-			else
-			{$novoss = dirname($this->mapa->symbolsetfilename)."/".basename($mapatemp->symbolsetfilename);
+			else{
+				$novoss = dirname($this->mapa->symbolsetfilename)."/".basename($mapatemp->symbolsetfilename);
 			}
+
 			$this->mapa->setsymbolset($novoss);
+			
 			$ns = $this->mapa->getnumsymbols();
-			for ($i=0;$i < $ns;++$i)
-			{
+			$inis = 0;
+
+			//na versao 7 nao tem o simbolo 0
+			if($this->v >= 7){
+				$inis = 1;
+				//se for versao 7 inclui um primeiro simbolo com valor 0 e imagem
+				$oSymbol = $this->mapa->getSymbolObjectById(1);
+				$adiciona = ms_newLayerObj($this->mapa, $l);
+				$nomel = $l->name;
+				$tematemp= $this->mapa->getlayerbyname($nomel);
+				$c = $tematemp->getClass(0);
+				$e = $c->getstyle(0);
+				$e->set("size",1);
+				$e->set("width",1);
+				$ico = $c->createLegendIcon(40,40);
+				$nimg = $ico->saveWebImage();
+				$pat = $this->mapa->web->imageurl;
+				$ins .= "<img src='".$nimg."' style='cursor:pointer;border: 5px solid #FFFFFF' title='0' onclick='".$onclick."'>";
+			}
+			for ($i=$inis;$i < $ns;++$i){
 				$oSymbol = $this->mapa->getSymbolObjectById($i);
-				
 				$nomes = $oSymbol->name;
-				if($nomes == "")
-				{
+				if($nomes == ""){
 					$nomes = $i;
 				}
-
 				$adiciona = ms_newLayerObj($this->mapa, $l);
 				$nomel = $l->name;
 				$tematemp= $this->mapa->getlayerbyname($nomel);
@@ -688,11 +705,8 @@ class Legenda
 				$e->set("symbolname",$nomes);
 				$e->set("size",$tamanho);
 				$e->set("width",$width);
-				
 				$ico = $c->createLegendIcon(40,40);
-				
 				$nimg = $ico->saveWebImage();
-				
 				$pat = $this->mapa->web->imageurl;
 				$ins .= "<img src='".$nimg."' style='cursor:pointer;border: 5px solid #FFFFFF' title=".$nomes." onclick='".$onclick."'>";
 			}
@@ -701,8 +715,7 @@ class Legenda
 			//copy ($dir."/simbolos".$tipo.".inc",$dir_tmp."/comum/simbolos".$tipo.".inc");
 			return $ins;
 		}
-		else
-		{
+		else	{
 			$res = "";
 			include_once $dir."/simbolos".$tipo.".inc";
 			return $res;
@@ -728,8 +741,7 @@ class Legenda
 		$tipoLayer = $this->layer->type;
 		$classe = $this->layer->getclass($classe);
 		$numestilos = $classe->numstyles;
-		for ($i=0;$i<$numestilos;++$i)
-		{
+		for ($i=0;$i<$numestilos;++$i){
 			$linha = array();
 			$estilo = $classe->getstyle($i);
 			$linha[] = $i;
@@ -739,7 +751,7 @@ class Legenda
 			$linha[] = $estilo->symbolname;
 			$linha[] = $estilo->size;
 			$linha[] = $estilo->opacity;
-			if($this->v == 6){
+			if($this->v >= 6){
 				$linha[] = $estilo->width;
 				$s = $estilo->symbol;
 				$linha[] = implode(" ",$s->getPatternArray);
@@ -832,11 +844,11 @@ class Legenda
 		{
 			$estilo->set("size",$size);
 		}
-		if ((isset ($width)) && ($width != "-1") && ($this->v == 6))
+		if ((isset ($width)) && ($width != "-1") && ($this->v >= 6))
 		{
 			$estilo->set("width",$width);
 		}
-		if ((isset ($pattern)) && ($pattern != "-1") && ($this->v == 6) && ($pattern != ""))
+		if ((isset ($pattern)) && ($pattern != "-1") && ($this->v >= 6) && ($pattern != ""))
 		{
 			$estilo->updatefromstring("STYLE PATTERN ".$pattern." END");
 		}
@@ -1054,7 +1066,7 @@ class Legenda
 				case "pattern":
 					if(!empty($pattern)){
 						$pattern = str_replace(","," ",$valor);
-						if ($this->v == 6){
+						if ($this->v >= 6){
 							$estilo->updatefromstring("STYLE PATTERN ".$valor." END");
 						}
 					}

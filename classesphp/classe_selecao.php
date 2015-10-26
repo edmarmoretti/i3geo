@@ -276,7 +276,7 @@ $buffer - Opcional
 			$res_count = $layero->getNumresults();
 			for ($i = 0; $i < $res_count; ++$i)
 			{
-				if($this->v == 6)
+				if($this->v >= 6)
 				{$sh = $layero->getShape($layero->getResult($i));}
 				else{
 					$result = $layero->getResult($i);
@@ -339,7 +339,7 @@ $buffer - Opcional
 			$conta = $layero->getNumresults();
 			for ($k = 0; $k < $conta; $k++)
 			{
-				if($this->v == 6)
+				if($this->v >= 6)
 				{$s = @$layero->getShape($layero->getResult($k));}
 				else
 				{$s = @$layero->getfeature($k,-1);}

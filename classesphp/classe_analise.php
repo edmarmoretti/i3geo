@@ -1132,7 +1132,7 @@ class Analise
 					}
 					if ($layer->getResult(0) !== FALSE)
 					{
-						if($this->v == 6)
+						if($this->v >= 6)
 						{
 							$shape = $layer->getShape($layer->getResult(0));
 						}
@@ -1261,7 +1261,7 @@ class Analise
 
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			if($this->v == 6)
+			if($this->v >= 6)
 			{
 				$shapesdestino[] = $layerdestino->getShape($layerdestino->getResult($i));
 			}
@@ -2200,7 +2200,7 @@ class Analise
 				$layerPt->open();
 				$res_count = $layerPt->getNumresults();
 				for ($i = 0; $i < $res_count; ++$i){
-					if($this->v == 6){
+					if($this->v >= 6){
 						$s = $layerPt->getShape($layerPt->getResult($i));
 					}
 					else{
