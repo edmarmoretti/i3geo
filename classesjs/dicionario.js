@@ -2319,29 +2319,29 @@ g_traducao = {
 		"tolerancia" : [
 			{
 				pt : "Toler&acirc;ncia de busca (em pixels)",
-				en : "",
-				es : ""
+				en : "Search tolerance (in pixels)",
+				es : "Tolerancia de b&uacute;squeda (en Pixeles)"
 			}
 		],
 		"naoInstalado" : [
 			{
 				pt : "Ferramenta n&atilde;o dispon&iacute;vel nessa instala&ccedil;&atilde;o do i3Geo",
-				en : "",
-				es : ""
+				en : "Tool unavailable in this installation of i3geo",
+				es : "Herramienta no disponible en esta instalaci&oacute;n de i3geo"
 			}
 		],
 		"variaEscala" : [
 			{
 				pt : "Depend&ecirc;ncia da escala",
-				en : "",
-				es : ""
+				en : "Scale dependency",
+				es : "Dependencia de escala"
 			}
 		],
 		"mostraTodosLegenda" : [
 			{
 				pt : "todos",
-				en : "",
-				es : ""
+				en : "all",
+				es : "todos"
 			}
 		],
 		"mostraSoLegenda" : [
