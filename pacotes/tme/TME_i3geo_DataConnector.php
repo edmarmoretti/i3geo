@@ -165,7 +165,7 @@ class DataConnector
 		for ($i = 0; $i < $res_count; $i++)
 		{
 			$valitem = array();
-			if($versao == 6)
+			if($versao >= 6)
 			{$shape = $layer->getShape($layer->getResult($i));}
 			else{$shape = $layer->getFeature($layer->getResult($i)->shapeindex);}
 			$pt = $shape->getCentroid();

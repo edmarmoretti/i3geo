@@ -383,7 +383,7 @@ class LayerServer {
 												for ($j=0; $j < $layer->getNumResults(); $j++)
 												{
 														// get next shape row
-							if($versao == 6)
+							if($versao >= 6)
 							{$shape  =  $layer->getShape($layer->getResult($j));}
 							else{
 								$result = $layer->getResult($j);
@@ -404,7 +404,7 @@ class LayerServer {
 										for ($j=0; $j < $n; $j++)
 										{
 												// get next shape row
-						if($versao == 6)
+						if($versao >= 6)
 						{
 							$result = $layer->getResult($j);
 							$shape  =  $layer->getShape($result);
