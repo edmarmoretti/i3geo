@@ -1176,6 +1176,301 @@ i3GEOadmin.editormapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'palletefile' : [ {
+		pt : "A palete &eacute; v&aacute;lida apenas para temas RASTER. Entre com o endere&ccedil;o do arquivo no servidor. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
+		en : "",
+		es : ""
+	} ],
+    'palletefileTitulo' : [ {
+		pt : "Arquivo com palete de cores (opcional e serve apenas para temas raster) (PALLETEFILE)",
+		en : "",
+		es : ""
+	} ],
+    'palletestep' : [ {
+		pt : "Quantas cores em cada n&iacute;vel da palete. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
+		en : "",
+		es : ""
+	} ],
+    'palletestepTitulo' : [ {
+		pt : "Passo (opcional e serve apenas para temas raster) (PALLETESTEP)",
+		en : "",
+		es : ""
+	} ],
+    'editorsql' : [ {
+		pt : "Indica se o usu&aacute;rio pode abrir o editor de SQL para poder alterar o elemento DATA do Mapfile.",
+		en : "",
+		es : ""
+	} ],
+    'editorsqlTitulo' : [ {
+		pt : "Permite editar SQL (EDITORSQL)",
+		en : "",
+		es : ""
+	} ],
+    'ltempoformatodata' : [ {
+		pt : "Formato das datas existentes na tabela de atributos p.e. iso8601",
+		en : "",
+		es : ""
+	} ],
+    'ltempoformatodataTitulo' : [ {
+		pt : "Linha do tempo: LTEMPOFORMATODATA",
+		en : "",
+		es : ""
+	} ],
+    'ltempoiteminicio' : [ {
+		pt : "Item que indica a data de in&iacute;cio de um evento",
+		en : "",
+		es : ""
+	} ],
+    'ltempoiteminicioTitulo' : [ {
+		pt : "Linha do tempo: LTEMPOITEMINICIO",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemfim' : [ {
+		pt : "Item que indica a data final de um evento (opcional)",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemfimTitulo' : [ {
+		pt : "Linha do tempo: LTEMPOITEMFIM",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemtitulo' : [ {
+		pt : "Item que cont&eacute;m o t&iacute;tulo de cada evento",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemtituloTitulo' : [ {
+		pt : "Linha do tempo: LTEMPOITEMTITULO",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemdescricao' : [ {
+		pt : "Item com a descri&ccedil;&atilde;o do evento (opcional)",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemdescricaoTitulo' : [ {
+		pt : "Linha do tempo: LTEMPOITEMDESCRICAO",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemtip' : [ {
+		pt : "Item para etiquetas do t&iacute;tulo (opcional)",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemtipTitulo' : [ {
+		pt : "Linha do tempo: LTEMPOITEMTIP",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemimagem' : [ {
+		pt : "Item com o endere&ccedil;o de uma imagem que ser&aacute; inclu&iacute;da no menu popup, aberto quando o usu&aacute;rio clica em um evento (opcional)",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemimagemTitulo' : [ {
+		pt : "Linha do tempo: LTEMPOITEMIMAGEM",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemlink' : [ {
+		pt : "Link para uma p&aacute;gina que ser&aacute; inclu&iacute;do no menu popup",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemlinkTitulo' : [ {
+		pt : "Linha do tempo: LTEMPOITEMLINK",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemicone' : [ {
+		pt : "Endere&ccedil;o da imagem do &iacute;cone que ir&aacute; representar o evento (opcional)",
+		en : "",
+		es : ""
+	} ],
+    'ltempoitemiconeTitulo' : [ {
+		pt : "Linha do tempo: LTEMPOITEMICONE",
+		en : "",
+		es : ""
+	} ],
+    'ltempoconvencode' : [ {
+		pt : "Aplica convers&atilde;o do código de caracteres? Pode ser necess&aacute;rio para corrigir problemas de acentua&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
+    'ltempoconvencodeTitulo' : [ {
+		pt : "Aplica convers&atilde;o do código de caracteres? Pode ser necess&aacute;rio para corrigir problemas de acentua&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
+    'classesitem' : [ {
+		pt : "&Eacute; poss&iacute;vel a gera&ccedil;&atilde;o de classes automaticamente por meio da defini&ccedil;&atilde;o de colunas na tabela de atributos do tema que armazenam as informa&ccedil;&otilde;es sobre cor, tamanho, etc. Esse metadata &eacute; utilizado para definir qual a coluna da tabela que identifica unicamente cada classe. Para cada valor ser&aacute; criada uma classe.<br>O tema que utiliza a gera&ccedil;&atilde;o de classes de forma autom&aacute;tica, deve ter definido apenas uma classe. Essa classe ser&aacute; utilizada como padr&atilde;o para gera&ccedil;&atilde;o das demais.",
+		en : "",
+		es : ""
+	} ],
+    'classesitemTitulo' : [ {
+		pt : "Auto-legenda: id das classes (CLASSESITEM)",
+		en : "",
+		es : ""
+	} ],
+    'classesnome' : [ {
+		pt : "Nome da coluna que ser&aacute; utilizada para compor o nome das classes geradas automaticamente.",
+		en : "",
+		es : ""
+	} ],
+    'classesnomeTitulo' : [ {
+		pt : "Auto-legenda: nome das classes (CLASSESNOME)",
+		en : "",
+		es : ""
+	} ],
+    'classescor' : [ {
+		pt : "Nome da coluna que definir&aacute; a cor do s&iacute;mbolo utilizado em cada classe. As cores devem ser definidas em RGB.",
+		en : "",
+		es : ""
+	} ],
+    'classescorTitulo' : [ {
+		pt : "Auto-legenda: cor da classe (CLASSESCOR)",
+		en : "",
+		es : ""
+	} ],
+    'classessimbolo' : [ {
+		pt : "Nome da coluna que definir&aacute; o s&iacute;mbolo utilizado em cada classe.",
+		en : "",
+		es : ""
+	} ],
+    'classessimboloTitulo' : [ {
+		pt : "Auto-legenda: s&iacute;mbolo (CLASSESSIMBOLO)",
+		en : "",
+		es : ""
+	} ],
+    'classestamanho' : [ {
+		pt : "Nome da coluna que definir&aacute; o tamanho de cada s&iacute;mbolo.",
+		en : "",
+		es : ""
+	} ],
+    'classestamanhoTitulo' : [ {
+		pt : "Auto-legenda: tamanho (CLASSESTAMANHO)",
+		en : "",
+		es : ""
+	} ],
+    'itembuscarapida' : [ {
+		pt : "Nome da coluna da tabela de atributos do tema que ser&aacute; utilizado na ferramenta busca r&aacute;pida. Entre apenas uma coluna",
+		en : "",
+		es : ""
+	} ],
+    'itembuscarapidaTitulo' : [ {
+		pt : "Item utilizado no busca r&aacute;pida (itembuscarapida)",
+		en : "",
+		es : ""
+	} ],
+    'itens' : [ {
+		pt : "Nomes das colunas da tabela de atributos do tema, que ser&atilde;o mostradas na ferramenta de identifica&ccedil;&atilde;o. Se for vazio, todas as colunas ser&atilde;o mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
+		en : "",
+		es : ""
+	} ],
+    'itensTitulo' : [ {
+		pt : "Itens (ITENS)",
+		en : "",
+		es : ""
+	} ],
+    'itensdesc' : [ {
+		pt : "Lista com os 'alias', ou apelidos, para os nomes das colunas listados no metadata 'itens'. Os alias devem ser separados por ',' e seguir a ordem definida em ITENS.",
+		en : "",
+		es : ""
+	} ],
+    'itensdescTitulo' : [ {
+		pt : "Nomes dos itens (ITENSDESC)",
+		en : "",
+		es : ""
+	} ],
+    'itenslink' : [ {
+		pt : "Lista de links que ser&atilde;o inclu&iacute;dos em cada resultado de busca da ferramenta de identifica&ccedil;&atilde;o. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item n&atilde;o tem link. Exemplo de uso para inclus&atilde;o de links para o site do IBGE quando um munic&iacute;pio &eacute; clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do munic&iacute;pio,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'<br>Podem ser inclu&iacute;dos comandos javascript, para isso utilize sempre aspas simples para fechar o link e acrescente o código javascript, exemplo:<br>ITENSLINK \",'../ferramentas/identifica/testelink.php?sid='+i3GEO.configura.sid\"",
+		en : "",
+		es : ""
+	} ],
+    'itenslinkTitulo' : [ {
+		pt : "Links dos itens (ITENSLINK)",
+		en : "",
+		es : ""
+	} ],
+    'descriptiontemplate' : [ {
+		pt : "Template utilizado no gerador de KML para definir o conte&uacute;do dos bal&otilde;es de informa&ccedil;&atilde;o. O template utiliza o caractere '%' para iniciar e fechar o nome de uma coluna. O template pode usar tamb&eacute;m elementos HTML, por exemplo: <code>'<b>Nome do municipio</b>: %NOMEMUN%'</code>. Se o template n&atilde;o for especificado, o i3Geo ir&aacute; utilizar o metadata ITENS e ITENSDESC. Se esses n&atilde;o forem especificados, ser&aacute; utilizado o nome original da coluna.",
+		en : "",
+		es : ""
+	} ],
+    'descriptiontemplateTitulo' : [ {
+		pt : "KML template (DESCRIPTION_TEMPLATE)",
+		en : "",
+		es : ""
+	} ],
+    'tip' : [ {
+		pt : "Lista de colunas que ser&atilde;o utilizadas na op&ccedil;&atilde;o de inclus&atilde;o de 'etiquetas'. As etiquetas s&atilde;o mostradas no mapa quando o usu&aacute;rio estaciona o mouse por alguns instantes sobre o mapa. Separe a lista com ','.",
+		en : "",
+		es : ""
+	} ],
+    'tipTitulo' : [ {
+		pt : "Etiqueta (TIP)",
+		en : "",
+		es : ""
+	} ],
+    'wmstile' : [ {
+		pt : "Metadata espec&iacute;fico do i3Geo. Indica se o layer &eacute; do tipo TILECACHE",
+		en : "",
+		es : ""
+	} ],
+    'wmstileTitulo' : [ {
+		pt : "&Eacute; do tipo TileCache (0 ou 1 indicam n&atilde;o ou sim) - wms_tile",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
     '' : [ {
 		pt : "",
 		en : "",

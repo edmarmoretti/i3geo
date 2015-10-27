@@ -5,10 +5,14 @@ Abre o editor de metadados
 
 <PEGAMETADADOS>
 */
+//
+//Dependencias: Este programa necessita do arquivo "../dicionario/editormapfile.js"
+//
+
 function editorMetadados(codigoMap,codigoLayer){
 	//core_montaEditor("","450px","500px","","Miscel&acirc;nea");
 	var sUrl = "../php/editormapfile.php?funcao=pegaMetadados&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
-	core_pegaDados("Obtendo dados...",sUrl,"montaEditorMetadados");
+	core_pegaDados($trad("obtemDados",i3GEOadmin.core.dicionario),sUrl,"montaEditorMetadados");
 }
 function montaEditorMetadados(dados){
 	//core_montaEditor("","450px","500px","","Miscel&acirc;nea");
@@ -18,66 +22,66 @@ function montaEditorMetadados(dados){
 	core_montaEditor(temp,"450px","500px","","Miscel&acirc;nea",true,true,false);
 	var paramRaster = {
 		"linhas":[
-			{ajuda:"A palete &eacute; v&aacute;lida apenas para temas RASTER. Entre com o endere&ccedil;o do arquivo no servidor. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
-			titulo:"Arquivo com palete de cores (opcional e serve apenas para temas raster) (PALLETEFILE)",id:"palletefile",value:dados.palletefile,tipo:"text"},
-			{ajuda:"Quantas cores em cada n&iacute;vel da palete. Veja exemplo em i3geo/localhost/symbols/testepalete.txt",
-			titulo:"Passo (opcional e serve apenas para temas raster) (PALLETESTEP)",id:"palletestep",value:dados.palletestep,tipo:"text"}
+			{ajuda:$trad("palletefile",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("palletefileTitulo",i3GEOadmin.editormapfile.dicionario),id:"palletefile",value:dados.palletefile,tipo:"text"},
+			{ajuda:$trad("palletestep",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("palletestepTitulo",i3GEOadmin.editormapfile.dicionario),id:"palletestep",value:dados.palletestep,tipo:"text"}
 		]
 	};
 	var paramVetor = {
 		"linhas":[
-			{ajuda:"Indica se o usu&aacute;rio pode abrir o editor de SQL para poder alterar o elemento DATA do Mapfile.",
-			titulo:"Permite editar SQL (EDITORSQL)",id:"",value:dados.editorsql,tipo:"text",div:"<div id=cEditorsql ></div>"},
-			{ajuda:"Formato das datas existentes na tabela de atributos p.e. iso8601",
-			titulo:"Linha do tempo: LTEMPOFORMATODATA",id:"ltempoformatodata",value:dados.ltempoformatodata,tipo:"text"},
-			{ajuda:"Item que indica a data de in&iacute;cio de um evento",
-			titulo:"Linha do tempo: LTEMPOITEMINICIO",id:"ltempoiteminicio",value:dados.ltempoiteminicio,tipo:"text"},
-			{ajuda:"Item que indica a data final de um evento (opcional)",
-			titulo:"Linha do tempo: LTEMPOITEMFIM",id:"ltempoitemfim",value:dados.ltempoitemfim,tipo:"text"},
-			{ajuda:"Item que cont&eacute;m o t&iacute;tulo de cada evento",
-			titulo:"Linha do tempo: LTEMPOITEMTITULO",id:"ltempoitemtitulo",value:dados.ltempoitemtitulo,tipo:"text"},
-			{ajuda:"Item com a descri&ccedil;&atilde;o do evento (opcional)",
-			titulo:"Linha do tempo: LTEMPOITEMDESCRICAO",id:"ltempoitemdescricao",value:dados.ltempoitemdescricao,tipo:"text"},
-			{ajuda:"Item para etiquetas do t&iacute;tulo (opcional)",
-			titulo:"Linha do tempo: LTEMPOITEMTIP",id:"ltempoitemtip",value:dados.ltempoitemtip,tipo:"text"},
-			{ajuda:"Item com o endere&ccedil;o de uma imagem que ser&aacute; inclu&iacute;da no menu popup, aberto quando o usu&aacute;rio clica em um evento (opcional)",
-			titulo:"Linha do tempo: LTEMPOITEMIMAGEM",id:"ltempoitemimagem",value:dados.ltempoitemimagem,tipo:"text"},
-			{ajuda:"Link para uma p&aacute;gina que ser&aacute; inclu&iacute;do no menu popup",
-			titulo:"Linha do tempo: LTEMPOITEMLINK",id:"ltempoitemlink",value:dados.ltempoitemlink,tipo:"text"},
-			{ajuda:"Endere&ccedil;o da imagem do &iacute;cone que ir&aacute; representar o evento (opcional)",
-			titulo:"Linha do tempo: LTEMPOITEMICONE",id:"ltempoitemicone",value:dados.ltempoitemicone,tipo:"text"},
-			{ajuda:"Aplica convers&atilde;o do código de caracteres? Pode ser necess&aacute;rio para corrigir problemas de acentua&ccedil;&atilde;o",
-			titulo:"Linha do tempo: LTEMPOCONVENCODE",id:"",value:dados.ltempoconvencode,tipo:"text",div:"<div id=cLtempoconvencode ></div>"},
+			{ajuda:$trad("editorsql",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("editorsqlTitulo",i3GEOadmin.editormapfile.dicionario),id:"",value:dados.editorsql,tipo:"text",div:"<div id=cEditorsql ></div>"},
+			{ajuda:$trad("ltempoformatodata",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("ltempoformatodataTitulo",i3GEOadmin.editormapfile.dicionario),id:"ltempoformatodata",value:dados.ltempoformatodata,tipo:"text"},
+			{ajuda:$trad("ltempoiteminicio",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("ltempoiteminicioTitulo",i3GEOadmin.editormapfile.dicionario),id:"ltempoiteminicio",value:dados.ltempoiteminicio,tipo:"text"},
+			{ajuda:$trad("ltempoitemfim",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("ltempoitemfimTitulo",i3GEOadmin.editormapfile.dicionario),id:"ltempoitemfim",value:dados.ltempoitemfim,tipo:"text"},
+			{ajuda:$trad("ltempoitemtitulo",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("ltempoitemtituloTitulo",i3GEOadmin.editormapfile.dicionario),id:"ltempoitemtitulo",value:dados.ltempoitemtitulo,tipo:"text"},
+			{ajuda:$trad("ltempoitemdescricao",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("ltempoitemdescricaoTitulo",i3GEOadmin.editormapfile.dicionario),id:"ltempoitemdescricao",value:dados.ltempoitemdescricao,tipo:"text"},
+			{ajuda:$trad("ltempoitemtip",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("ltempoitemtipTitulo",i3GEOadmin.editormapfile.dicionario),id:"ltempoitemtip",value:dados.ltempoitemtip,tipo:"text"},
+			{ajuda:$trad("ltempoitemimagem",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("ltempoitemimagemTitulo",i3GEOadmin.editormapfile.dicionario),id:"ltempoitemimagem",value:dados.ltempoitemimagem,tipo:"text"},
+			{ajuda:$trad("ltempoitemlink",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("ltempoitemlinkTitulo",i3GEOadmin.editormapfile.dicionario),id:"ltempoitemlink",value:dados.ltempoitemlink,tipo:"text"},
+			{ajuda:$trad("ltempoitemicone",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("ltempoitemiconeTitulo",i3GEOadmin.editormapfile.dicionario),id:"ltempoitemicone",value:dados.ltempoitemicone,tipo:"text"},
+			{ajuda:$trad("ltempoconvencode",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("ltempoconvencodeTitulo",i3GEOadmin.editormapfile.dicionario),id:"",value:dados.ltempoconvencode,tipo:"text",div:"<div id=cLtempoconvencode ></div>"},
 		]
 	};
 	var paramNaoOWS = {
 		"linhas":[
-			{ajuda:"&Eacute; poss&iacute;vel a gera&ccedil;&atilde;o de classes automaticamente por meio da defini&ccedil;&atilde;o de colunas na tabela de atributos do tema que armazenam as informa&ccedil;&otilde;es sobre cor, tamanho, etc. Esse metadata &eacute; utilizado para definir qual a coluna da tabela que identifica unicamente cada classe. Para cada valor ser&aacute; criada uma classe.<br>O tema que utiliza a gera&ccedil;&atilde;o de classes de forma autom&aacute;tica, deve ter definido apenas uma classe. Essa classe ser&aacute; utilizada como padr&atilde;o para gera&ccedil;&atilde;o das demais.",
-			titulo:"Auto-legenda: id das classes (CLASSESITEM)",id:"classesitem",value:dados.classesitem,tipo:"text"},
-			{ajuda:"Nome da coluna que ser&aacute; utilizada para compor o nome das classes geradas automaticamente.",
-			titulo:"Auto-legenda: nome das classes (CLASSESNOME)",id:"classesnome",value:dados.classesnome,tipo:"text"},
-			{ajuda:"Nome da coluna que definir&aacute; a cor do s&iacute;mbolo utilizado em cada classe. As cores devem ser definidas em RGB.",
-			titulo:"Auto-legenda: cor da classe (CLASSESCOR)",id:"classescor",value:dados.classescor,tipo:"text"},
-			{ajuda:"Nome da coluna que definir&aacute; o s&iacute;mbolo utilizado em cada classe.",
-			titulo:"Auto-legenda: s&iacute;mbolo (CLASSESSIMBOLO)",id:"classessimbolo",value:dados.classessimbolo,tipo:"text"},
-			{ajuda:"Nome da coluna que definir&aacute; o tamanho de cada s&iacute;mbolo.",
-			titulo:"Auto-legenda: tamanho (CLASSESTAMANHO)",id:"classestamanho",value:dados.classestamanho,tipo:"text"}
+			{ajuda:$trad("classesitem",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("classesitemTitulo",i3GEOadmin.editormapfile.dicionario),id:"classesitem",value:dados.classesitem,tipo:"text"},
+			{ajuda:$trad("classesnome",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("classesnomeTitulo",i3GEOadmin.editormapfile.dicionario),id:"classesnome",value:dados.classesnome,tipo:"text"},
+			{ajuda:$trad("classescor",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("classescorTitulo",i3GEOadmin.editormapfile.dicionario),id:"classescor",value:dados.classescor,tipo:"text"},
+			{ajuda:$trad("classessimbolo",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("classessimboloTitulo",i3GEOadmin.editormapfile.dicionario),id:"classessimbolo",value:dados.classessimbolo,tipo:"text"},
+			{ajuda:$trad("classestamanho",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("classestamanhoTitulo",i3GEOadmin.editormapfile.dicionario),id:"classestamanho",value:dados.classestamanho,tipo:"text"}
 		]
 	};
 	var param = {
 		"linhas":[
-			{ajuda:"Nome da coluna da tabela de atributos do tema que ser&aacute; utilizado na ferramenta busca r&aacute;pida. Entre apenas uma coluna",
-			titulo:"Item utilizado no busca r&aacute;pida (itembuscarapida)",id:"itembuscarapida",value:dados.itembuscarapida,tipo:"text"},
-			{ajuda:"Nomes das colunas da tabela de atributos do tema, que ser&atilde;o mostradas na ferramenta de identifica&ccedil;&atilde;o. Se for vazio, todas as colunas ser&atilde;o mostradas. A lista de itens deve ser separada por ',' e grafada em caixa alta no caso de shapefile.",
-			titulo:"Itens (ITENS)",id:"itens",value:dados.itens,tipo:"text"},
-			{ajuda:"Lista com os 'alias', ou apelidos, para os nomes das colunas listados no metadata 'itens'. Os alias devem ser separados por ',' e seguir a ordem definida em ITENS.",
-			titulo:"Nomes dos itens (ITENSDESC)",id:"itensdesc",value:dados.itensdesc,tipo:"text"},
-			{ajuda:"Lista de links que ser&atilde;o inclu&iacute;dos em cada resultado de busca da ferramenta de identifica&ccedil;&atilde;o. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item n&atilde;o tem link. Exemplo de uso para inclus&atilde;o de links para o site do IBGE quando um munic&iacute;pio &eacute; clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do munic&iacute;pio,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'<br>Podem ser inclu&iacute;dos comandos javascript, para isso utilize sempre aspas simples para fechar o link e acrescente o código javascript, exemplo:<br>ITENSLINK \",'../ferramentas/identifica/testelink.php?sid='+i3GEO.configura.sid\"",
-			titulo:"Links dos itens (ITENSLINK)",id:"itenslink",value:dados.itenslink,tipo:"text"},
-			{ajuda:"Template utilizado no gerador de KML para definir o conte&uacute;do dos bal&otilde;es de informa&ccedil;&atilde;o. O template utiliza o caractere '%' para iniciar e fechar o nome de uma coluna. O template pode usar tamb&eacute;m elementos HTML, por exemplo: <code>'<b>Nome do municipio</b>: %NOMEMUN%'</code>. Se o template n&atilde;o for especificado, o i3Geo ir&aacute; utilizar o metadata ITENS e ITENSDESC. Se esses n&atilde;o forem especificados, ser&aacute; utilizado o nome original da coluna.",
-			titulo:"KML template (DESCRIPTION_TEMPLATE)",id:"description_template",value:dados.description_template,tipo:"text"},
-			{ajuda:"Lista de colunas que ser&atilde;o utilizadas na op&ccedil;&atilde;o de inclus&atilde;o de 'etiquetas'. As etiquetas s&atilde;o mostradas no mapa quando o usu&aacute;rio estaciona o mouse por alguns instantes sobre o mapa. Separe a lista com ','.",
-			titulo:"Etiqueta (TIP)",id:"tip",value:dados.tip,tipo:"text"}
+			{ajuda:$trad("itembuscarapida",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("itembuscarapidaTitulo",i3GEOadmin.editormapfile.dicionario),id:"itembuscarapida",value:dados.itembuscarapida,tipo:"text"},
+			{ajuda:$trad("itens",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("itensTitulo",i3GEOadmin.editormapfile.dicionario),id:"itens",value:dados.itens,tipo:"text"},
+			{ajuda:$trad("itensdesc",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("itensdescTitulo",i3GEOadmin.editormapfile.dicionario),id:"itensdesc",value:dados.itensdesc,tipo:"text"},
+			{ajuda:$trad("itenslink",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("itenslinkTitulo",i3GEOadmin.editormapfile.dicionario),id:"itenslink",value:dados.itenslink,tipo:"text"},
+			{ajuda:$trad("descriptiontemplate",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("descriptiontemplateTitulo",i3GEOadmin.editormapfile.dicionario),id:"description_template",value:dados.description_template,tipo:"text"},
+			{ajuda:$trad("tip",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("tipTitulo",i3GEOadmin.editormapfile.dicionario),id:"tip",value:dados.tip,tipo:"text"}
 		]
 	};
 
@@ -125,15 +129,15 @@ function montaEditorMetadados(dados){
 			titulo:"wms_transparent",id:"wms_transparent",value:dados.wms_transparent,tipo:"text"},
 			{ajuda:"value to use for the TIME parameter in GetMap requests for this layer",
 			titulo:"wms_time",id:"wms_time",value:dados.wms_time,tipo:"text"},
-			{ajuda:"Metadata espec&iacut;fico do i3Geo. Indica se o layer &eacute; do tipo TILECACHE",
-			titulo:"&Eacute; do tipo TileCache (0 ou 1 indicam n&atilde;o ou sim) - wms_tile",id:"wms_tile",value:dados.wms_tile,tipo:"text"}
+			{ajuda:$trad("wmstile",i3GEOadmin.editormapfile.dicionario),
+			titulo:$trad("wmstileTitulo",i3GEOadmin.editormapfile.dicionario),id:"wms_tile",value:dados.wms_tile,tipo:"text"}
 		]
 	};
 	//var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />";
 	var ins = "";
 	if(dados.colunas != "")
 	{
-		ins += "<p>O layer possu&iacute; as seguintes colunas na tabela de atributos: <br>";
+		ins += "<p>"+ $trad("atributos",i3GEOadmin.editormapfile.dicionario) +"<br>";
 		ins += dados.colunas+"</p>";
 	}
 	ins += core_geraLinhas(param);

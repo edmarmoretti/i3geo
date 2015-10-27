@@ -330,7 +330,7 @@ function montaTextoTemaMapfile(mapfile){
 		conteudo += "&nbsp;<img style="+i+" onclick=\"removeFavoritos('"+mapfile.codigo+"',true)\" title='"+ $trad("retiraFavoritos",i3GEOadmin.editormapfile.dicionario) +"' src=\"../imagens/bookmarks.png\" />";
 	}
 	else{
-		conteudo += "&nbsp;<img style="+i+" onclick=\"registraFavoritos('"+mapfile.codigo+"')\" title='"+ $trad("favoritos",i3GEOadmin.editormapfile.dicionario) +"' src=\"../imagens/bookmarks.png\" />";
+		conteudo += "&nbsp;<img style="+i+" onclick=\"registraFavoritos('"+mapfile.codigo+"')\" title='"+ $trad("favorito",i3GEOadmin.editormapfile.dicionario) +"' src=\"../imagens/bookmarks.png\" />";
 	}
 	if(iconePlus){
 		conteudo += "&nbsp;<img style="+i+" onclick=\"clonarMapfile('"+mapfile.codigo+"')\" title='"+ $trad("criaCopia",i3GEOadmin.editormapfile.dicionario) +"' src=\"../imagens/clonar.png\" />";
