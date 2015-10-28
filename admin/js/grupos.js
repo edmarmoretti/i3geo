@@ -84,11 +84,11 @@ i3GEOadmin.grupos = {
 	},
 	defColunas: function(){
 		return [
-			{key:"excluir",label:"excluir",formatter:i3GEOadmin.grupos.formatExclui},
-			{key:"mais",label:"editar",formatter:i3GEOadmin.grupos.formatMais},
+			{key:"excluir",label:$trad("excluir",i3GEOadmin.core.dicionario),formatter:i3GEOadmin.grupos.formatExclui},
+			{key:"mais",label:$trad("editar",i3GEOadmin.core.dicionario),formatter:i3GEOadmin.grupos.formatMais},
 			{label:"id",key:"id_grupo", formatter:i3GEOadmin.grupos.formatTexto},
-			{label:"nome",resizeable:true,key:"nome_grupo", formatter:i3GEOadmin.grupos.formatTexto},
-			{label:"descri&ccedil;&atilde;o",resizeable:true,key:"desc_grupo", formatter:i3GEOadmin.grupos.formatTexto},
+			{label:$trad("nome",i3GEOadmin.core.dicionario),resizeable:true,key:"nome_grupo", formatter:i3GEOadmin.grupos.formatTexto},
+			{label:$trad("descricao",i3GEOadmin.core.dicionario),resizeable:true,key:"desc_grupo", formatter:i3GEOadmin.grupos.formatTexto},
 			{label:"en",resizeable:true,key:"en", formatter:i3GEOadmin.grupos.formatTexto},
 			{label:"es",resizeable:true,key:"es", formatter:i3GEOadmin.grupos.formatTexto},
 			{label:"it",resizeable:true,key:"it", formatter:i3GEOadmin.grupos.formatTexto}
@@ -114,7 +114,7 @@ i3GEOadmin.grupos = {
 	obtem: function(){
 		i3GEOadmin.grupos.dados = "";
 		core_carregando("ativa");
-		core_pegaDados("buscando grupos...","../php/menutemas.php?funcao=pegaGrupos","i3GEOadmin.grupos.tabela");
+		core_pegaDados($trad("msgBuscaGrupos",i3GEOadmin.grupos.dicionario),"../php/menutemas.php?funcao=pegaGrupos","i3GEOadmin.grupos.tabela");
 	},
 	tabela: function(dados){
 		if(i3GEOadmin.grupos.dados == ""){
@@ -152,7 +152,7 @@ i3GEOadmin.grupos = {
 				}
 				if (column.key == 'mais'){
 					core_carregando("ativa");
-					core_carregando("buscando dados...");
+					core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 					$clicouId = registro.getData('id_grupo');
 					$recordid = registro.getId();
 					sUrl = "../php/menutemas.php?funcao=pegaGrupos&id_grupo="+$clicouId;
@@ -177,7 +177,7 @@ i3GEOadmin.grupos = {
 			var botao,ins,
 				novoel = document.createElement("div");
 			novoel.id =  "janela_editor2";
-			ins = '<div class="hd"><input id=okcancel_checkbox_id2 type="buttom" value="Salva" /><span style="margin-left:10px;position:relative;top:-10px;">Grupo</span></div>';
+			ins = '<div class="hd"><input id=okcancel_checkbox_id2 type="buttom" value='+ $trad('salva1',i3GEOadmin.core.dicionario) +' /><span style="margin-left:10px;position:relative;top:-10px;">'+ $trad('grupo',i3GEOadmin.core.dicionario) +'</span></div>';
 			ins += "<div class='bd' style='height:354px;overflow:auto'>";
 			ins += "<div id='editor_bd2'></div>";
 			ins += "<div id='letras_G'></div>";
@@ -211,11 +211,11 @@ i3GEOadmin.grupos = {
 	formulario: function(i){
 		var param = {
 				"linhas":[
-					{titulo:"Nome padr&atilde;o:",id:"Enome_grupo",size:"50",value:i.nome_grupo,tipo:"text",div:""},
-					{titulo:"Descri&ccedil;&atilde;o (opcional):",id:"Edesc_grupo",size:"50",value:i.desc_grupo,tipo:"text",div:""},
-					{titulo:"Nome em ingl&ecirc;s (opcional):",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
-					{titulo:"Espanhol (opcional):",id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
-					{titulo:"Italiano (opcional):",id:"Eit",size:"50",value:i.it,tipo:"text",div:""}
+					{titulo:$trad('nomePadrao',i3GEOadmin.grupos.dicionario),id:"Enome_grupo",size:"50",value:i.nome_grupo,tipo:"text",div:""},
+					{titulo:$trad('descricao',i3GEOadmin.grupos.dicionario),id:"Edesc_grupo",size:"50",value:i.desc_grupo,tipo:"text",div:""},
+					{titulo:$trad('nomeIngles',i3GEOadmin.grupos.dicionario),id:"Een",size:"50",value:i.en,tipo:"text",div:""},
+					{titulo:$trad('nomeEspanhol',i3GEOadmin.grupos.dicionario),id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
+					{titulo:$trad('nomeItaliano',i3GEOadmin.grupos.dicionario),id:"Eit",size:"50",value:i.it,tipo:"text",div:""}
 				]
 			},
 			ins = "";
@@ -230,7 +230,7 @@ i3GEOadmin.grupos = {
 		i3GEOadmin.grupos.letra = letra;
 		if(i3GEOadmin.grupos.dados == ""){
 			core_carregando("ativa");
-			core_pegaDados("buscando grupos...","../php/menutemas.php?funcao=pegaGrupos","i3GEOadmin.grupos.atualizaFiltro");
+			core_pegaDados($trad("msgBuscaGrupos",i3GEOadmin.grupos.dicionario),"../php/menutemas.php?funcao=pegaGrupos","i3GEOadmin.grupos.atualizaFiltro");
 			return;
 		}
 		var i,temp,
@@ -251,7 +251,7 @@ i3GEOadmin.grupos = {
 		i3GEOadmin.grupos.tabela(novo);
 	},
 	exclui: function(id,row){
-		var mensagem = " excluindo o registro do id= "+id,
+		var mensagem = $trad("msgExclui",i3GEOadmin.core.dicionario)+id,
 			sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=grupos";
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.grupos.dataTable);
 		i3GEOadmin.grupos.dados = "";
@@ -269,13 +269,13 @@ i3GEOadmin.grupos = {
 		}
 		par += "&id_grupo="+id;
 		core_carregando("ativa");
-		core_carregando(" gravando o registro do id= "+id);
+		core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 		sUrl = "../php/menutemas.php?funcao=alteraGrupos"+par;
 		callback = {
 	  		success:function(o){
 	  			try	{
 	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+	  					core_carregando("<span style=color:red >"+ $trad("msgErroExclui",i3GEOadmin.core.dicionario) +"</span>");
 	  					setTimeout("core_carregando('desativa')",3000);
 	  				}
 	  				else{

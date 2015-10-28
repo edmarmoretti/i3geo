@@ -231,6 +231,66 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'nome' : [ {
+		pt : "nome",
+		en : "",
+		es : ""
+	} ],
+    'descricao' : [ {
+		pt : "descri&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
+    'salva1' : [ {
+		pt : "Salva",
+		en : "",
+		es : ""
+	} ],
+    'grupo' : [ {
+		pt : "Grupo",
+		en : "",
+		es : ""
+	} ],
+    'gravaId' : [ {
+		pt : " gravando o registro do id= ",
+		en : "",
+		es : ""
+	} ],
+    'msgErroExclui' : [ {
+		pt : "N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
     '' : [ {
 		pt : "",
 		en : "",
