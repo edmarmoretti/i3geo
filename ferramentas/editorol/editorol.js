@@ -748,15 +748,15 @@ i3GEO.editorOL =
 			}
 		},
 		captura : function(x,y,tema) {
-			var d = 0.1, 
+			var d = 0.1,
 				layer = i3geoOL.getLayersByName(tema)[0],
 				xy = [x,y],
 				u = layer.getSource().getUrls()[0],
 				poligono, retorno;
-			
+
 			u += "&REQUEST=getfeature&service=wfs&version=1.0.0";
 			u += "&OUTPUTFORMAT=gml2&typename=undefined";
-			
+
 			// remove parametros nao desejados
 			if (i3GEO.Interface.openlayers.googleLike === true) {
 				u += "&SRS=EPSG:3857";
@@ -790,11 +790,26 @@ i3GEO.editorOL =
 				"&filter=<Filter><Intersects><PropertyName>Geometry</PropertyName><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:posList>" + poligono
 					+ "</gml:posList></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></Intersects></Filter>";
 			retorno = function(r){
+				//FIXME nao funciona
 				//parser gml
+				var f,c,format;
+				/*
+				format = new ol.format.GML2({
+					featurePrefix: "ms",
+					geometryName : "msGeometry",
+					featureNS : "http://mapserver.gis.umn.edu/mapserver"
+				});
+				 */
+				//console.info(r[0])
+				format = new ol.format.GML2();
+				f = format.readFeatures(r[0]);
+				//console.info(f);
+				c = i3GEO.desenho.layergrafico.getSource();
+				c.addFeature(f);
 			};
 			u = i3GEO.configura.locaplic + "/classesphp/proxy.php?"
 				+ u
-				+ "&tipoRetornoProxy=string";
+				+ "&tipoRetornoProxy=json";
 			cpJSON.call(u, "foo", retorno, "");
 		},
 		salvaGeometrias : function() {
@@ -1085,7 +1100,7 @@ i3GEO.editorOL =
 								fill: new ol.style.Fill({
 									  color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
 								})
-							})	
+							})
 						);
 						evt.feature.setId(i3GEO.util.uid());
 						i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
@@ -1170,7 +1185,7 @@ i3GEO.editorOL =
 								fill: new ol.style.Fill({
 									color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
 								})
-							})	
+							})
 						);
 						evt.feature.setId(i3GEO.util.uid());
 						i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
@@ -1407,7 +1422,7 @@ i3GEO.editorOL =
 				temp.onclick = function(){
 					i3GEO.editorOL.listaGeometrias();
 				};
-				i3GEOpanelEditor.appendChild(temp);	
+				i3GEOpanelEditor.appendChild(temp);
 			}
 			//TODO abrir em uma janela flutuante interna
 			if (botoes.ajuda === true) {
@@ -1538,7 +1553,7 @@ i3GEO.editorOL =
 
 			/*
 			if (botoes.salva === true) {
-				
+
 				button = new OpenLayers.Control.Button({
 					displayClass : "editorOLsalva",
 					trigger : function() {
@@ -1549,11 +1564,11 @@ i3GEO.editorOL =
 				});
 				controles.push(button);
 				adiciona = true;
-				
+
 			}
 			if (botoes.identifica === true) {
 				//TODO incluir codigo ol3
-				
+
 				botaoIdentifica =
 					new OpenLayers.Control.WMSGetFeatureInfo(
 						{
@@ -1630,7 +1645,7 @@ i3GEO.editorOL =
 				// button.events.register("getfeatureinfo", this, showInfo);
 				controles.push(botaoIdentifica);
 				adiciona = true;
-				
+
 			}
 
 			*/
@@ -1850,7 +1865,7 @@ i3GEO.editorOL =
 						+ '		<td><input style=cursor:pointer onclick="i3GEO.editorOL.snap()" type="checkbox" id="target_edge" /></td><td><input onchange="i3GEO.editorOL.snap()" id="target_edgeTolerance" type="text" size="3" value=15 /></td>'
 						+ '	</tr>'
 						+ '</table>'
-						
+
 						+ '<br />'
 						+ '<p class=paragrafo ><b>Divide intersec&ccedil;&atilde;o ao digitalizar</b></p>'
 						+ '<table class=lista7 >'
@@ -2127,8 +2142,8 @@ i3GEO.editorOL =
 		uniaojts : function(geoms) {
 			var n = geoms.length,
 				fwkt = new ol.format.WKT(),
-				rwkt = new jsts.io.WKTReader(), 
-				wwkt = new jsts.io.WKTWriter(), 
+				rwkt = new jsts.io.WKTReader(),
+				wwkt = new jsts.io.WKTWriter(),
 				g, i, uniao;
 			if (n > 1) {
 				uniao = fwkt.writeFeatures([geoms[0]]);

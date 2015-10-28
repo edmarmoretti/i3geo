@@ -21,8 +21,14 @@ if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
 $resultado = curl_exec($ch);
 if($_GET["tipoRetornoProxy"] == "string"){
 	echo '"'.$resultado.'"';
+	exit;
 }
-else{
-	echo $resultado;
+
+if($_GET["tipoRetornoProxy"] == "json"){
+	$r = array($resultado);
+	//echo json_encode(str_replace(array("\n","\r","\t"),"",$r));
+	echo json_encode($r);
+	exit;
 }
+echo $resultado;
 ?>

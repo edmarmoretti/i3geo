@@ -369,7 +369,7 @@ i3GEOF.melhorcaminho = {
 	executa: function(){
 		if(i3GEOF.melhorcaminho.aguarde.visibility === "visible")
 		{return;}
-		var raster = "",ptax,ptbx,ptby,ptby,pta,ptb,lut=[],lutObjs,n,i;
+		var raster = "",ptax,ptbx,ptby,pta,ptb,lut=[],lutObjs,n,i;
 		//pega tema com raster
 		if($i("i3GEOmelhorcaminhoRaster")){
 			raster = $i("i3GEOmelhorcaminhoRaster").value;
