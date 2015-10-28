@@ -365,12 +365,12 @@ function montaDivAtlas(i)
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
-	ins += $trad("pranchaInicia",i3GEOadmin.atlas.dicionario) +"<br>"
-	ins += "<div id=comboPranchaIni ></div><br>"
-	ins += $trad("tipoGuia",i3GEOadmin.atlas.dicionario) +"<br>"
-	ins += "<select  id='Etipoguias_atlas' />"
-	ins += "<option value='' >---</option>"
-	ins += "<option value='automatica' "
+	ins += $trad("pranchaInicia",i3GEOadmin.atlas.dicionario) +"<br>";
+	ins += "<div id=comboPranchaIni ></div><br>";
+	ins += $trad("tipoGuia",i3GEOadmin.atlas.dicionario) +"<br>";
+	ins += "<select  id='Etipoguias_atlas' />";
+	ins += "<option value='' >---</option>";
+	ins += "<option value='automatica' ";
 	if (i.tipoguias_atlas == "automatica"){ins += "selected";}
 	ins += " >"+ $trad("automatica",i3GEOadmin.atlas.dicionario) +"</option>";
 	ins += "<option value='combo' ";
