@@ -301,7 +301,7 @@ i3GEOF.graficointerativo1 =
 			i3GEOF.graficointerativo1.LISTAREGATIVO = false;
 			var n, i;
 			par = i3GEO.util.base64decode(par);
-			//alert(par)
+			//console.info(par);
 			par = YAHOO.lang.JSON.parse(par);
 			n = par.length;
 			for (i = 0; i < n; i++) {

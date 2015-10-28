@@ -61,16 +61,21 @@ switch (strtoupper($funcao))
 				$dbh = new PDO('pgsql:dbname='.$c["dbname"].';user='.$c["user"].';password='.$c["password"].';host='.$c["host"].';port='.$c["port"]);
 				//pega o SRID
 				$sql = "select ST_SRID($colunageometria) as srid from $esquema"."."."$tabela LIMIT 1";
-				//echo $sql;exit;
 				$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 				$r = $q->fetchAll();
 				$srid = $r[0]["srid"];
-
+				if($srid == ""){
+					$sql = "select srid from public.geometry_columns where f_table_schema = '$esquema' and f_table_name = '$tabela'";
+					$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+					$r = $q->fetchAll();
+					$srid = $r[0]["srid"];
+					if($srid == ""){
+						$srid = -1;
+					}
+				}
+				
 				$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$dbh->beginTransaction();
-				if($srid == ""){
-					$srid = "4326";
-				}
 
 				$sql = "INSERT INTO ".$esquema.".".$tabela." (".$colunageometria.")";
 				$sql .= " VALUES (ST_GeomFromText('SRID=$srid;".$wkt."'))";
