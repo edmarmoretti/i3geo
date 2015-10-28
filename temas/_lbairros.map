@@ -2,7 +2,7 @@ MAP
   FONTSET "/var/www/i3geo/symbols/fontes.txt"
   SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "user=postgres password=postgres dbname=i3geosaude host=localhost port=5432 options='-c client_encoding=LATIN1'"
+    CONNECTION "user=postgres password=postgres dbname=i3geosaude host=localhost port=5432"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom from (select gid, st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros /*FW*//*FW*/) as foo using unique co_bairro using srid=4326"
     METADATA
@@ -21,7 +21,6 @@ MAP
     NAME "_lbairros"
     STATUS DEFAULT
     TEMPLATE "none.htm"
-    TILEITEM "location"
     TYPE POLYGON
     UNITS METERS
     CLASS
