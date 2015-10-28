@@ -67,6 +67,7 @@ inicializa();
 //nos casos do modo notile, a requisicao e feita como se fosse um wms
 //quando for do tipo tms $_GET["tms"] contem os parametros do tile
 //
+
 if(isset($_GET["tms"])){
 	$_GET["WIDTH"] = 256;
 	$_GET["HEIGHT"] = 256;
@@ -83,10 +84,11 @@ if(isset($_GET["tms"])){
 	$lat2 = ($y+1) / $n * 180.0 - 90.0;
 	$_GET["BBOX"] = $lon1." ".$lat1." ".$lon2." ".$lat2;
 }
+
 //para o caso da versao 3 do OpenLayers
-//excluir?
-if(isset($_GET["X"])){
-	$box = explode(",",$_GET["BBOX"]);
+if(isset($_GET["X"]) && !($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature")){
+	$box = str_replace(" ",",",$_GET["BBOX"]);
+	$box = explode(",",$box);
 	$res = ($box[2] + 180) - ($box[0] + 180);
 	$res = $res / 256;
 	$z = intval((0.703125 / $res) / 4) + 1;
@@ -98,6 +100,7 @@ if(isset($_GET["X"])){
 	$_GET["tms"] = "/".$_GET["layer"]."/".$z."/".$x."/".$y.".png";
 	echo $_GET["BBOX"]." ".$_GET["tms"];exit;
 }
+
 if(isset($_GET["TileMatrix"])){
 	$_GET["WIDTH"] = 256;
 	$_GET["HEIGHT"] = 256;
@@ -128,6 +131,7 @@ if(isset($_GET["TileMatrix"])){
 
 	$_GET["BBOX"] = $lon1." ".$lat1." ".$lon2." ".$lat2;
 }
+
 $map_fileX = $_SESSION["map_file"];
 //
 //verifica se o request e OGC
@@ -139,11 +143,14 @@ if(!empty($_GET["request"])){
 //
 $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
-if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){
+
+if($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){
 	$_GET["DESLIGACACHE"] = "sim";
 }
-if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
-	carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"],$_SESSION["i3georendermode"]);
+else{
+	if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
+		carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"],$_SESSION["i3georendermode"]);
+	}
 }
 //
 //map_fileX e para o caso register_globals = On no PHP.INI
@@ -219,7 +226,6 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 				}
 			}
 		}
-
 		if($layerName == $_GET["layer"]){
 			if(strtolower($l->getmetadata("cache")) == "sim"){
 				$cache = true;
@@ -228,7 +234,7 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 					$nomecache = $layerName;
 				}
 			}
-			if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature" ){
+			if($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature" ){
 				$l->setmetadata("gml_include_items","all");
 				$l->set("template","none.htm");
 				$l->setmetadata("WMS_INCLUDE_ITEMS","all");
@@ -243,6 +249,7 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 		}
 	}
 }
+
 if (!function_exists('imagepng')){
 	$_GET["TIPOIMAGEM"] = "";
 }
@@ -273,9 +280,13 @@ if(isset($_GET["mapext"])){
 //
 //qd a cahamda e para um WMS, redireciona para ogc.php
 //
-if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
+if($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
 	$req = ms_newowsrequestobj();
+	if($_GET["BBOX"]){
+		$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
+	}
 	$_GET = array_merge($_GET,$_POST);
+	
 	foreach ($_GET as $k=>$v){
 		$req->setParameter($k, $v);
 	}
@@ -283,7 +294,6 @@ if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
 	$server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 	$or = $proto.$server.$_SERVER['PHP_SELF'];
 	$mapa->setmetadata("wfs_onlineresource",$or."?".$_SERVER["QUERY_STRING"]);
-
 	ms_ioinstallstdouttobuffer();
 	$mapa->owsdispatch($req);
 	$contenttype = ms_iostripstdoutbuffercontenttype();
@@ -560,7 +570,7 @@ function inicializa(){
 		ilegal();
 	}
 	session_start();
-	if($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){
+	if($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){
 		return;
 	}
 	if(@$_SESSION["fingerprint"]){

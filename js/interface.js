@@ -735,9 +735,15 @@ i3GEO.Interface =
 				minWidth : '200px',
 				baloes : []
 			},
-			balao : function(texto, completo, x, y) {
+			balao : function(texto, completo, x, y, botaoMais, botaoProp) {
 				var icone, painel, b, cabecalho, conteudo, p = i3GEO.Interface.openlayers.BALAOPROP, removeBaloes;
 
+				if(botaoMais === undefined){
+					botaoMais = true;
+				}
+				if(botaoProp === undefined){
+					botaoProp = true;
+				}
 				removeBaloes = function() {
 					var t, n = i3GEO.Interface.openlayers.BALAOPROP.baloes.length, i;
 					for (i = 0; i < n; i++) {
@@ -775,25 +781,29 @@ i3GEO.Interface =
 				};
 				cabecalho.appendChild(icone);
 				// icone das propriedades
-				icone = document.createElement("div");
-				icone.className = "i3GEOiconeFerramentas";
-				icone.style.left = "3px";
-				icone.onclick = function() {
-					i3GEO.janela.prompt($trad("tolerancia"), function() {
-						i3GEO.mapa.RESOLUCAOTIP = $i("i3GEOjanelaprompt").value;
-					}, i3GEO.mapa.RESOLUCAOTIP);
-					return false;
-				};
-				cabecalho.appendChild(icone);
+				if(botaoProp === true){
+					icone = document.createElement("div");
+					icone.className = "i3GEOiconeFerramentas";
+					icone.style.left = "3px";
+					icone.onclick = function() {
+						i3GEO.janela.prompt($trad("tolerancia"), function() {
+							i3GEO.mapa.RESOLUCAOTIP = $i("i3GEOjanelaprompt").value;
+						}, i3GEO.mapa.RESOLUCAOTIP);
+						return false;
+					};
+					cabecalho.appendChild(icone);
+				}
 				// icone mais info
-				icone = document.createElement("div");
-				icone.className = "i3GEOiconeMais";
-				icone.style.left = "9px";
-				icone.onclick = function() {
-					i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + completo + "</div>", "");
-					return false;
-				};
-				cabecalho.appendChild(icone);
+				if(botaoMais === true){
+					icone = document.createElement("div");
+					icone.className = "i3GEOiconeMais";
+					icone.style.left = "9px";
+					icone.onclick = function() {
+						i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + completo + "</div>", "");
+						return false;
+					};
+					cabecalho.appendChild(icone);
+				}
 				// icone x
 				icone = document.createElement("div");
 				icone.className = "ol-popup-closer";
