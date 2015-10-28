@@ -1426,73 +1426,73 @@ i3GEOadmin.editormapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'name' : [ {
+		pt : "Elemento 'NAME'. N&atilde;o confunda com o nome que aparece no mapa ou  na &aacute;rvore de temas. Normalmente o código recebe o mesmo nome do arquivo mapfile, sem a extens&atilde;o '.map'",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'nameTitulo' : [ {
+		pt : "C&oacute;digo do layer",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'group' : [ {
+		pt : "Nome do grupo a qual a camada pertence. O nome do grupo pode ser refer&ecirc;ncia como um nome regular de uma camada, permitindo fazer coisas como ligar e desligar um grupo de camadas de uma vez.",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'groupTitulo' : [ {
+		pt : "Group",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'tema' : [ {
+		pt : "Nome que ser&aacute; utilizado na legenda do mapa e na guia 'Temas'",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'temaTitulo' : [ {
+		pt : "T&iacute;tulo (METADATA: TEMA)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'escala' : [ {
+		pt : "Denominador da escala da fonte dos dados utilizado pelo tema. &Eacute; utilizado para apresentar a indica&ccedil;&atilde;o de compatibilidade entre a escala do tema e a escala do mapa que est&aacute; sendo visto.",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'escalaTitulo' : [ {
+		pt : "Escala (ESCALA)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'exten' : [ {
+		pt : "Extens&atilde;o geogr&aacute;fica m&aacute;xima do tema, no formato xmin ymin xmax ymax. &Eacute; utilizado na op&ccedil;&atilde;o de 'zoom para o tema'. Quando o tema &eacute; baseado em shapefile, esse metadata n&atilde;o &eacute; necess&aacute;rio, pois o mapserver consegue calcular a extens&atilde;o. J&aacute; em outros tipos de dados, como Postgis, o par&acirc;metro &eacute; necess&aacute;rio. Nesse caso, se n&atilde;o for indicado, o bot&atilde;o de zoom para o tema n&atilde;o ser&aacute; vis&iacute;vel para o usu&aacute;rio",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'extenTitulo' : [ {
+		pt : "Extensao (EXTENSAO)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'iconetema' : [ {
+		pt : "&Iacute;cone que ser&aacute; mostrado na &aacute;rvore de camadas. A imagem deve existir na web e deve ser inclu&iacute;do o caminho completo ou relativo em rela&ccedil;&atilde;o ao local da interface HTML do mapa.",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'iconetemaTitulo' : [ {
+		pt : "&Iacute;cone (METADATA: ICONETEMA)",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'mensagem' : [ {
+		pt : "Mensagem que ser&aacute; mostrada no rodap&eacute; do mapa quando o tema estiver vis&iacute;vel. &Eacute; &uacute;til para apresentar ao usu&aacute;rio observa&ccedil;&otilde;es especiais sobre o uso daquele tema.",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'mensagemTitulo' : [ {
+		pt : "Mensagem (MENSAGEM)",
 		en : "",
 		es : ""
 	} ],

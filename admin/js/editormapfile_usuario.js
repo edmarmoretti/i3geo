@@ -1,3 +1,6 @@
+//
+//Dependencias: Este programa necessita do arquivo "../dicionario/editormapfile.js"
+//
 function montaNoGruposUsrTema(dados){
 	var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirGrupoUsrTema('"+dados.id_tema+"','"+dados.id_grupo+"','"+dados.codigo_tema+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+dados.nome+"</span>";
 	var d = {html:conteudo,id:"usr_"+dados.id_tema+"_"+dados.id_grupo};
