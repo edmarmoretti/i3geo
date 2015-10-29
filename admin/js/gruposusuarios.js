@@ -45,7 +45,7 @@ function ativaBotaoAdicionaGrupo(sUrl,idBotao){
 	var botao, adiciona = function()
 	{
 		core_carregando("ativa");
-		core_carregando(" adicionando um novo registro");
+		core_carregando($trad("msgNovoRegistro",i3GEOadmin.core.dicionario));
 		var callback =
 		{
 				success:function(o)
@@ -69,7 +69,7 @@ function ativaBotaoAdicionaGrupo(sUrl,idBotao){
 	botao.addClass("rodar");
 }
 function pegaGrupos(){
-	core_pegaDados("buscando usu&aacute;rios...","../php/gruposusuarios.php?funcao=pegaGrupos","montaArvore");
+	core_pegaDados($trad("msgBuscaUsuarios",i3GEOadmin.gruposusuarios.dicionario),"../php/gruposusuarios.php?funcao=pegaGrupos","montaArvore");
 }
 /*
 Function: montaArvore
@@ -125,7 +125,7 @@ function adicionaNosUsuarios(no,dados,redesenha)
 		{currentIconMode = newVal;}
 	}
 	if(!redesenha){
-		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editar('usuario','"+no.data.id_grupo+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar novo usu&aacute;rio</i></span>";
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editar('usuario','"+no.data.id_grupo+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>"+ $trad("novoUsuario",i3GEOadmin.gruposusuarios.dicionario) +"</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -136,7 +136,7 @@ function adicionaNosUsuarios(no,dados,redesenha)
 		if(dados[i].nome != "")
 		{conteudo += "&nbsp;<span><b>"+dados[i].login+"</b></span>";}
 		else
-		{conteudo += "&nbsp;<span style=color:red >Edite para definir o papel!!!</span>";}
+		{conteudo += "&nbsp;<span style=color:red >"+ $trad("definePapel",i3GEOadmin.gruposusuarios.dicionario) +"</span>";}
 		var d = {html:conteudo,id_nousuario:dados[i].id_usuario+"_"+dados[i].id_grupo,tipo:"usuario"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -152,7 +152,7 @@ function adicionaNosGrupos(dados,redesenha){
 		if(dados[i].nome && dados[i].nome != "")
 		{conteudo += "&nbsp;<span>"+dados[i].nome+" id: "+dados[i].id_grupo+"</span>";}
 		else
-		{conteudo += "&nbsp;<span style=color:red >Edite para definir o grupo!!!</span>";}
+		{conteudo += "&nbsp;<span style=color:red >"+ $trad("defineGrupo",i3GEOadmin.gruposusuarios.dicionario) +"</span>";}
 		var d = {html:conteudo,id_grupo:dados[i].id_grupo,tipo:"grupo"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 		tempNode.enableHighlight = false;
@@ -166,7 +166,7 @@ Abre o editor de um no
 */
 function editar(tipo,id){
 	core_carregando("ativa");
-	core_carregando(" buscando dados");
+	core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 	var sUrl = null;
 	var callback =	{
 		success:function(o)		{
@@ -204,8 +204,8 @@ function montaDivGrupo(i){
 	core_montaEditor(temp,"450px","280px","","Grupo",true,true,false);
 	var param = {
 		"linhas":[
-				{titulo:"Nome:",id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
-				{titulo:"Descri&ccedil;&atilde;o:",id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""}
+				{titulo:$trad("nome",i3GEOadmin.gruposusuarios.dicionario),id:"Enome",size:"50",value:i.nome,tipo:"text",div:""},
+				{titulo:$trad("descricao",i3GEOadmin.gruposusuarios.dicionario),id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""}
 		]
 	};
 	var ins = "";
@@ -232,7 +232,7 @@ Exclui um elemento do atlas
 */
 function excluir(tipo,id_grupo,id_usuario)
 {
-	var mensagem = " excluindo o registro do usu&aacute;rio= "+id_usuario;
+	var mensagem = $trad("msgExcluiUsuario",i3GEOadmin.gruposusuarios.dicionario)+id_usuario;
 	var no = null;
 	var sUrl = null;
 	if(tipo == "grupo")	{
@@ -278,7 +278,7 @@ function gravaDados(tipo,id){
 			success:function(o){
 				try	{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						core_carregando("<span style=color:red >"+ $trad("msgNaoExclui",i3GEOadmin.gruposusuarios.dicionario) +"</span>");
 						setTimeout("core_carregando('desativa')",3000);
 					}
 					else{
@@ -304,7 +304,7 @@ function gravaDados(tipo,id){
 	};
 	if(prog && par){
 		core_carregando("ativa");
-		core_carregando(" gravando o registro do id= "+id);
+		core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 		var sUrl = prog+par;
 		core_makeRequest(sUrl,callback,'POST');
 	}

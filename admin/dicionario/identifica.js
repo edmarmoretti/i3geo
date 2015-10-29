@@ -21,6 +21,46 @@ i3GEOadmin.identifica.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'publicado' : [ {
+		pt : "publicado?",
+		en : "",
+		es : ""
+	} ],
+    'programa' : [ {
+		pt : "programa",
+		en : "",
+		es : ""
+	} ],
+    'abreComo' : [ {
+		pt : "abrir como?",
+		en : "",
+		es : ""
+	} ],
+    'msgBuscaEndereco' : [ {
+		pt : "buscando endere&ccedil;os...",
+		en : "",
+		es : ""
+	} ],
+    'nome' : [ {
+		pt : "Nome:",
+		en : "",
+		es : ""
+	} ],
+    'programaDesc' : [ {
+		pt : "Programa: o i3Geo ir&aacute; adicionar automaticamente os par&acirc;metros &x e &y no final do endere&ccedil;o",
+		en : "",
+		es : ""
+	} ],
+    'abreComoDesc' : [ {
+		pt : "Abrir como: escreva 'target' para abrir em uma nova aba do navegador",
+		en : "",
+		es : ""
+	} ],
+    'publicado2' : [ {
+		pt : "Publicado?",
+		en : "",
+		es : ""
+	} ],
     '' : [ {
 		pt : "",
 		en : "",

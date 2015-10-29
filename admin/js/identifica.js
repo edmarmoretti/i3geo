@@ -51,13 +51,13 @@ i3GEOadmin.identifica = {
 	},
 	defColunas: function(){
 		return [
-			{key:"excluir",label:"excluir",formatter:i3GEOadmin.identifica.formatExclui},
-			{key:"mais",label:"editar",formatter:i3GEOadmin.identifica.formatMais},
+			{key:"excluir",label:$trad("excluir",i3GEOadmin.core.dicionario),formatter:i3GEOadmin.identifica.formatExclui},
+			{key:"mais",label:$trad("editar",i3GEOadmin.core.dicionario),formatter:i3GEOadmin.identifica.formatMais},
 			{label:"id",key:"id_i", formatter:i3GEOadmin.identifica.formatTexto},
-			{label:"nome",resizeable:true,key:"nome_i", formatter:i3GEOadmin.identifica.formatTexto},
-			{label:"publicado?",resizeable:true,key:"publicado_i", formatter:i3GEOadmin.identifica.formatTexto},
-			{label:"programa",resizeable:true,key:"abrir_i", formatter:i3GEOadmin.identifica.formatTexto},
-			{label:"abrir como?",resizeable:true,key:"target_i", formatter:i3GEOadmin.identifica.formatTexto}
+			{label:$trad("nome",i3GEOadmin.core.dicionario),resizeable:true,key:"nome_i", formatter:i3GEOadmin.identifica.formatTexto},
+			{label:$trad("publicado",i3GEOadmin.identifica.dicionario),resizeable:true,key:"publicado_i", formatter:i3GEOadmin.identifica.formatTexto},
+			{label:$trad("programa",i3GEOadmin.identifica.dicionario),resizeable:true,key:"abrir_i", formatter:i3GEOadmin.identifica.formatTexto},
+			{label:$trad("abreComo",i3GEOadmin.identifica.dicionario),resizeable:true,key:"target_i", formatter:i3GEOadmin.identifica.formatTexto}
 		];
 	},
 	/*
@@ -80,7 +80,7 @@ i3GEOadmin.identifica = {
 	obtem: function(){
 		i3GEOadmin.identifica.dados = "";
 		core_carregando("ativa");
-		core_pegaDados("buscando endere&ccedil;os...","../php/identifica.php?funcao=pegaFuncoes","i3GEOadmin.identifica.tabela");
+		core_pegaDados($trad("msgBuscaEndereco",i3GEOadmin.identifica.dicionario),"../php/identifica.php?funcao=pegaFuncoes","i3GEOadmin.identifica.tabela");
 	},
 	tabela: function(dados){
 		if(i3GEOadmin.identifica.dados == ""){
@@ -118,7 +118,7 @@ i3GEOadmin.identifica = {
 				}
 				if (column.key == 'mais'){
 					core_carregando("ativa");
-					core_carregando("buscando dados...");
+					core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 					$clicouId = registro.getData('id_i');
 					$recordid = registro.getId();
 					sUrl = "../php/identifica.php?funcao=pegafuncoes&id_i="+$clicouId;
@@ -150,7 +150,7 @@ i3GEOadmin.identifica = {
 			var editorBotoes,ins,
 				novoel = document.createElement("div");
 			novoel.id =  "janela_editor2";
-			ins = '<div class="hd">Editor</div>';
+			ins = '<div class="hd">'+ $trad("editor",i3GEOadmin.core.dicionario) +'</div>';
 			ins += "<div class='bd' style='height:354px;overflow:auto'>";
 			ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
 			ins += "<div id='letras_I'></div>";
@@ -159,8 +159,8 @@ i3GEOadmin.identifica = {
 			document.body.appendChild(novoel);
 			editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
 			editorBotoes.addButtons([
-				{ label: "Salva", value: "OK", checked: false},
-				{ label: "Cancela", value: "CANCEL", checked: false }
+				{ label: $trad("salva",i3GEOadmin.core.dicionario), value: "OK", checked: false},
+				{ label: $trad("cancela",i3GEOadmin.core.dicionario), value: "CANCEL", checked: false }
 			]);
 			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 			YAHOO.identifica.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
@@ -173,15 +173,15 @@ i3GEOadmin.identifica = {
 	formulario: function(i){
 		var param = {
 			"linhas":[
-			{titulo:"Nome:",id:"Enome_i",size:"50",value:i.nome_i,tipo:"text",div:""},
-			{titulo:"Programa: o i3Geo ir&aacute; adicionar automaticamente os par&acirc;metros &x e &y no final do endere&ccedil;o",id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
-			{titulo:"Abrir como: escreva 'target' para abrir em uma nova aba do navegador",id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
+			{titulo:$trad("nome",i3GEOadmin.identifica.dicionario),id:"Enome_i",size:"50",value:i.nome_i,tipo:"text",div:""},
+			{titulo:$trad("programaDesc",i3GEOadmin.identifica.dicionario),id:"Eabrir_i",size:"50",value:i.abrir_i,tipo:"text",div:""},
+			{titulo:$trad("abreComoDesc",i3GEOadmin.identifica.dicionario),id:"Etarget_i",size:"50",value:i.target_i,tipo:"text",div:""}
 			]
 		};
 		var ins = "";
 		ins += core_geraLinhas(param)	;
 
-		ins += "<p><b>Publicado?</b><br>";
+		ins += "<p><b>"+ $trad("publicado2",i3GEOadmin.identifica.dicionario) +"</b><br>";
 		ins += "<select  id='Epublicado_i' />";
 		ins += "<option value='' ";
 		if (i.publicado_i == ""){ins += "selected";}
@@ -203,7 +203,7 @@ i3GEOadmin.identifica = {
 		i3GEOadmin.identifica.letra = letra;
 		if(i3GEOadmin.identifica.dados == ""){
 			core_carregando("ativa");
-			core_pegaDados("buscando endere&ccedil;os...","../php/identifica.php?funcao=pegaFuncoes","i3GEOadmin.identifica.atualizaFiltro");
+			core_pegaDados($trad("msgBuscaEndereco",i3GEOadmin.identifica.dicionario),"../php/identifica.php?funcao=pegaFuncoes","i3GEOadmin.identifica.atualizaFiltro");
 		}
 		var i,temp,
 			n = i3GEOadmin.identifica.dados.length,
@@ -223,7 +223,7 @@ i3GEOadmin.identifica = {
 		i3GEOadmin.identifica.tabela(novo);
 	},
 	exclui: function(id,row){
-		var mensagem = " excluindo o registro do id= "+id,
+		var mensagem = $trad("msgExclui",i3GEOadmin.core.dicionario)+id,
 			sUrl = "../php/identifica.php?funcao=excluir&id="+id;
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.identifica.dataTable);
 		i3GEOadmin.identifica.dados = "";
@@ -241,13 +241,13 @@ i3GEOadmin.identifica = {
 		}
 		par += "&id_i="+id;
 		core_carregando("ativa");
-		core_carregando(" gravando o registro do id= "+id);
+		core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 		sUrl = "../php/identifica.php?funcao=alterarFuncoes"+par;
 		callback = {
 				success:function(o){
 					try	{
 						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+							core_carregando("<span style=color:red >"+ $trad("msgErroExclui",i3GEOadmin.core.dicionario) +"</span>");
 							setTimeout("core_carregando('desativa')",3000);
 						}
 						else{

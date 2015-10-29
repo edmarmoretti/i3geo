@@ -261,13 +261,8 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
+    'msgNovoRegistro' : [ {
+		pt : " adicionando um novo registro",
 		en : "",
 		es : ""
 	} ],

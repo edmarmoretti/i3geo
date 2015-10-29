@@ -26,6 +26,51 @@ i3GEOadmin.gruposusuarios.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'msgBuscaUsuarios' : [ {
+		pt : "buscando usu&aacute;rios...",
+		en : "",
+		es : ""
+	} ],
+    'novoUsuario' : [ {
+		pt : "Adicionar novo usu&aacute;rio",
+		en : "",
+		es : ""
+	} ],
+    'definePapel' : [ {
+		pt : "Edite para definir o papel!!!",
+		en : "",
+		es : ""
+	} ],
+    'defineGrupo' : [ {
+		pt : "Edite para definir o grupo!!!",
+		en : "",
+		es : ""
+	} ],
+    'msgExcluiUsuario' : [ {
+		pt : " excluindo o registro do usu&aacute;rio=",
+		en : "",
+		es : ""
+	} ],
+    'nome' : [ {
+		pt : "Nome:",
+		en : "",
+		es : ""
+	} ],
+    'descricao' : [ {
+		pt : "Descri&ccedil;&atilde;o:",
+		en : "",
+		es : ""
+	} ],
+    'msgNaoExclui' : [ {
+		pt : "N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
     '' : [ {
 		pt : "",
 		en : "",
