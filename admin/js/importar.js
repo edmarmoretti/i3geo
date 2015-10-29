@@ -38,30 +38,30 @@ function fim ()
 function importarXmlMenu()
 {
 	core_carregando("ativa");
-	core_pegaDados("importando...","../php/menutemas.php?funcao=importarXmlMenu&nomemenu="+$i("nome").value+"&xml="+$i("arquivo").value,"fim()");
+	core_pegaDados($trad("importa",i3GEOadmin.core.dicionario),"../php/menutemas.php?funcao=importarXmlMenu&nomemenu="+$i("nome").value+"&xml="+$i("arquivo").value,"fim()");
 }
 function importarXmlMapas()
 {
 	core_carregando("ativa");
-	core_pegaDados("importando...","../php/mapas.php?funcao=importarXmlMapas&xml="+$i("arquivo").value,"fim()");
+	core_pegaDados($trad("importa",i3GEOadmin.core.dicionario),"../php/mapas.php?funcao=importarXmlMapas&xml="+$i("arquivo").value,"fim()");
 }
 function importarXmlAtlas()
 {
 	core_carregando("ativa");
-	core_pegaDados("importando...","../php/atlas.php?funcao=importarXmlAtlas&xml="+$i("arquivo").value,"fim()");
+	core_pegaDados($trad("importa",i3GEOadmin.core.dicionario),"../php/atlas.php?funcao=importarXmlAtlas&xml="+$i("arquivo").value,"fim()");
 }
 function importarXmlWS()
 {
 	core_carregando("ativa");
-	core_pegaDados("importando...","../php/webservices.php?funcao=importarXmlWS&xml="+$i("arquivo").value+"&tipo="+$i("tipo").value,"fim()");
+	core_pegaDados($trad("importa",i3GEOadmin.core.dicionario),"../php/webservices.php?funcao=importarXmlWS&xml="+$i("arquivo").value+"&tipo="+$i("tipo").value,"fim()");
 }
 function importarXmlI()
 {
 	core_carregando("ativa");
-	core_pegaDados("importando...","../php/identifica.php?funcao=importarXmlI&xml="+$i("arquivo").value,"fim()");
+	core_pegaDados($trad("importa",i3GEOadmin.core.dicionario),"../php/identifica.php?funcao=importarXmlI&xml="+$i("arquivo").value,"fim()");
 }
 function importarXmlSistemas()
 {
 	core_carregando("ativa");
-	core_pegaDados("importando...","../php/sistemas.php?funcao=importarXmlSistemas&xml="+$i("arquivo").value,"fim()");
+	core_pegaDados($trad("importa",i3GEOadmin.core.dicionario),"../php/sistemas.php?funcao=importarXmlSistemas&xml="+$i("arquivo").value,"fim()");
 }

@@ -266,8 +266,8 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'importa' : [ {
+		pt : "importando...",
 		en : "",
 		es : ""
 	} ],
