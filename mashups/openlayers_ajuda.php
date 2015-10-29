@@ -1,5 +1,9 @@
 <?php
 include(dirname(__FILE__)."/../versao.php");
+$completo = "block";
+if(!empty($_GET["completo"]) && $_GET["completo"] == "none"){
+	$completo = "none";
+}
 ?>
 <html>
 <head>
@@ -17,27 +21,25 @@ p,td
 	padding:2px;
 }
 .olControlEditingToolbar1 {
-		height: 20px;
-		left: 20px;
-		position: relative;
-		width: 100%;
+	height: 20px;
+	left: 20px;
+	position: relative;
+	width: 90%;
 	float: left;
 }
 
 </style>
 
 </head>
-<body >
-<div style=text-align:left >
+<body>
+<div style="text-align:left;display:<?php echo $completo;?>" >
 <p><img src="../imagens/i3geo1.jpg" /></p>
 <p><?php echo $mensagemInicia;?></p>
 <p style='font-size:16px'>Documenta&ccedil;&atilde;o do editor</p>
+<p>Para ver os par&acirc;metros que podem ser utilizados na URL para abrir o mapa, <a href='openlayers.php?ajuda' target='_blank'>clique aqui</a></p>
+
 </div>
 <table class="olControlEditingToolbar1" >
-	<tr>
-		<td style=width:20px ></td>
-		<td>Para ver os par&acirc;metros que podem ser utilizados na URL para abrir o mapa, <a href='openlayers.php?ajuda' target='_blank'>clique aqui</a></td>
-	</tr>
 	<tr>
 		<td style=width:20px ><div class="editorOLprocuraItemInactive"></div></td>
 		<td>Procure um elemento no tema que estiver ativo</td>

@@ -1260,7 +1260,7 @@ i3GEO.editorOL =
 					i3GEO.editorOL.interacoes.push(sel);
 					i3GEO.Interface.openlayers.interacoes[0].setActive(false);
 					sel.on("select", function(evt) {
-						var i, n, id, f;
+						var s,i, n, id, f;
 						n = evt.selected.length;
 						for(i=0; i<n; i++){
 							f = evt.selected[i];
@@ -1272,12 +1272,35 @@ i3GEO.editorOL =
 								id = i3GEO.util.uid();
 								i3GEO.editorOL.idsSelecionados.push(id);
 								f.setId(id);
-								f.setProperties({
-									fillColor: f.getStyle().getFill().getColor(),
-									strokeColor: f.getStyle().getStroke().getColor()
-								});
-								f.getStyle().getFill().setColor('rgba(255, 255, 255, 0.5)');
-								f.getStyle().getStroke().setColor('blue');
+								s = f.getStyle();
+								if(s.getImage()){
+									f.setProperties({
+										fillColor: s.getImage().getFill().getColor(),
+										strokeColor: s.getImage().getStroke().getColor()
+									});
+									f.setStyle(
+										new ol.style.Style({
+											image: new ol.style.Circle({
+												radius: i3GEO.editorOL.simbologia.pointRadius,
+												fill: new ol.style.Fill({
+													color: 'rgba(255, 255, 255, 0.5)'
+												}),
+												stroke: new ol.style.Stroke({
+													color: 'blue',
+													width: i3GEO.editorOL.simbologia.pointRadius / 3
+												})
+											})
+										})
+									);
+								}
+								else{
+									f.setProperties({
+										fillColor: s.getFill().getColor(),
+										strokeColor: s.getStroke().getColor()
+									});
+									s.getFill().setColor('rgba(255, 255, 255, 0.5)');
+									s.getStroke().setColor('blue');
+								}
 							}
 						}
 						if (n === 0){
@@ -1428,14 +1451,14 @@ i3GEO.editorOL =
 				};
 				i3GEOpanelEditor.appendChild(temp);
 			}
-			//TODO abrir em uma janela flutuante interna
 			if (botoes.ajuda === true) {
 				temp = document.createElement("div");
 				temp.className = "editorOLajudaItemInactive olButton";
 				temp.title = $trad("s1");
 				temp.onclick = function(){
 					if(i3GEO.configura && i3GEO.configura.locaplic){
-						window.open(i3GEO.configura.locaplic + "/mashups/openlayers_ajuda.php");
+						i3GEO.janela.cria("400px", "200px", i3GEO.configura.locaplic
+							+ "/mashups/openlayers_ajuda.php?completo=none", "", "", $trad("s1"), "editorOlAjuda");
 					}
 					else{
 						window.open("openlayers_ajuda.php");
@@ -2104,7 +2127,7 @@ i3GEO.editorOL =
 		},
 		selTodos : function() {
 			i3GEO.editorOL.unselTodos();
-			var features, n, f, i, id;
+			var features, n, f, i, id, st;
 			features = i3GEO.desenho.layergrafico.getSource().getFeatures();
 			n = features.length;
 			for (i = 0; i < n; i++) {
@@ -2115,24 +2138,68 @@ i3GEO.editorOL =
 					f.setId(id);
 				}
 				i3GEO.editorOL.idsSelecionados.push(id);
-				f.setProperties({
-					fillColor: f.getStyle().getFill().getColor(),
-					strokeColor: f.getStyle().getStroke().getColor()
-				});
-				f.getStyle().getFill().setColor('rgba(255, 255, 255, 0.5)');
-				f.getStyle().getStroke().setColor('blue');
+				st = f.getStyle();
+				//para o caso de pontos
+				if(st.getImage()){
+					f.setStyle(
+						new ol.style.Style({
+							image: new ol.style.Circle({
+								radius: i3GEO.editorOL.simbologia.pointRadius,
+								fill: new ol.style.Fill({
+									color: 'rgba(255, 255, 255, 0.5)'
+								}),
+								stroke: new ol.style.Stroke({
+									color: 'blue',
+									width: i3GEO.editorOL.simbologia.pointRadius / 3
+								})
+							})
+						})
+					);
+					f.setProperties({
+						fillColor: st.getImage().getFill().getColor(),
+						strokeColor: st.getImage().getStroke().getColor()
+					});
+				}
+				else{
+					f.setProperties({
+						fillColor: st.getFill().getColor(),
+						strokeColor: st.getStroke().getColor()
+					});
+					st.getFill().setColor('rgba(255, 255, 255, 0.5)');
+					st.getStroke().setColor('blue');
+				}
 			}
 			i3GEO.desenho.layergrafico.getSource().changed();
 		},
 		unselTodos : function() {
-			var i, n, f, s;
+			var i, n, f, s, st;
 			s = i3GEO.desenho.layergrafico.getSource();
 			n = i3GEO.editorOL.idsSelecionados.length;
 			for(i=0; i<n; i++){
 				f = s.getFeatureById(i3GEO.editorOL.idsSelecionados[i]);
 				if(f){
-					f.getStyle().getFill().setColor(f.getProperties().fillColor);
-					f.getStyle().getStroke().setColor(f.getProperties().strokeColor);
+					st = f.getStyle();
+					//caso de ponto
+					if(st.getImage()){
+						f.setStyle(
+							new ol.style.Style({
+								image: new ol.style.Circle({
+									radius: i3GEO.editorOL.simbologia.pointRadius,
+									fill: new ol.style.Fill({
+										color: f.getProperties().fillColor
+									}),
+									stroke: new ol.style.Stroke({
+										color: f.getProperties().strokeColor,
+										width: i3GEO.editorOL.simbologia.pointRadius / 3
+									})
+								})
+							})
+						);
+					}
+					else{
+						st.getFill().setColor(f.getProperties().fillColor);
+						st.getStroke().setColor(f.getProperties().strokeColor);
+					}
 				}
 			}
 			i3GEO.editorOL.idsSelecionados = [];
