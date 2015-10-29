@@ -36,6 +36,7 @@ MAP
 	UNITS DD
 	NAME "GERAL"
 	DEBUG OFF
+	#CONFIG "CPL_DEBUG" "ON"
 	#CONFIG "MS_ERRORFILE" "/tmp/ms_tmp/ms_error.txt"
 	#
 	#utilize o agg apenas com mapserver 5x

@@ -3,10 +3,11 @@ MAP
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
     CONNECTION "/var/www/i3geo/aplicmap/dados/ucsfi.gml"
+    #CONNECTION "/tmp/ms_tmp/gml_UGJUDdOMyt.gml"
     CONNECTIONTYPE OGR
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	"sim"
+      "cache"	"nao"
       "CLASSE"	"SIM"
       "permitekmz"	"nao"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""

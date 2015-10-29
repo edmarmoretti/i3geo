@@ -664,7 +664,6 @@ i3GEO.editorOL =
 			i3GEO.editorOL.mapa.zoomToExtent(b);
 		},
 		mostraLegenda : function() {
-			//TODO testar no mashup
 			var layers = i3GEO.editorOL.layersLigados(), nlayers = layers.length, ins = "", i, icone = "", url, fers, f = "", fer = "";
 			for (i = 0; i < nlayers; i++) {
 				try {
@@ -790,26 +789,31 @@ i3GEO.editorOL =
 				"&filter=<Filter><Intersects><PropertyName>Geometry</PropertyName><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:posList>" + poligono
 					+ "</gml:posList></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></Intersects></Filter>";
 			retorno = function(r){
-				//FIXME nao funciona
-				//parser gml
-				var f,c,format;
-				/*
-				format = new ol.format.GML2({
-					featurePrefix: "ms",
-					geometryName : "msGeometry",
-					featureNS : "http://mapserver.gis.umn.edu/mapserver"
-				});
-				 */
-				//console.info(r[0])
-				format = new ol.format.GML2();
-				f = format.readFeatures(r[0]);
-				//console.info(f);
+				var fs,c,format, f, n, i;
+				format = new ol.format.WKT();
+				fs = format.readFeatures(r[0]);
+				n = fs.length;
 				c = i3GEO.desenho.layergrafico.getSource();
-				c.addFeature(f);
+				for(i=0; i<n; i++){
+					f = fs[i];
+					f.setStyle(
+						new ol.style.Style({
+							stroke: new ol.style.Stroke({
+								color: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
+								width: i3GEO.editorOL.simbologia.strokeWidth
+							}),
+							fill: new ol.style.Fill({
+								color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
+							})
+						})
+					);
+					f.setId(i3GEO.util.uid());
+					c.addFeature(f);
+				}
 			};
 			u = i3GEO.configura.locaplic + "/classesphp/proxy.php?"
 				+ u
-				+ "&tipoRetornoProxy=json";
+				+ "&tipoRetornoProxy=gml2wkt";
 			cpJSON.call(u, "foo", retorno, "");
 		},
 		salvaGeometrias : function() {
@@ -1566,88 +1570,6 @@ i3GEO.editorOL =
 				adiciona = true;
 
 			}
-			if (botoes.identifica === true) {
-				//TODO incluir codigo ol3
-
-				botaoIdentifica =
-					new OpenLayers.Control.WMSGetFeatureInfo(
-						{
-							maxFeatures : 1,
-							infoFormat : 'text/plain', // 'application/vnd.ogc.gml',
-							layers : [
-								i3GEO.editorOL.layerAtivo()
-							],
-							queryVisible : true,
-							title : $trad("d7t"),
-							type : OpenLayers.Control.TYPE_TOOL,
-							displayClass : "editorOLidentifica",
-							eventListeners : {
-								getfeatureinfo : function(event) {
-									var lonlat = i3GEO.editorOL.mapa.getLonLatFromPixel(event.xy), lonlattexto = "<hr>", formata;
-									if (botoes.linha === true || botoes.ponto === true || botoes.poligono === true || botoes.edita === true) {
-										lonlattexto +=
-											"<pre><span style=font-size:12px;color:blue;cursor:pointer onclick='i3GEO.editorOL.captura(\"" + lonlat.lon
-												+ ","
-												+ lonlat.lat
-												+ "\")'>edita geometria</span></pre><br>";
-									}
-									formata = function(texto) {
-										var temp, temp1, n, i, f = [], textoN = texto.split(":");
-										try {
-											if (textoN.length > 1) {
-												temp = textoN[2].replace(/\n\r/g, "");
-												temp = temp.replace(/'/g, "");
-												temp = temp.replace(/\n/g, "|");
-												temp = temp.replace(/_/g, " ");
-												temp = temp.replace(/=/g, ":");
-												temp = temp.split("|");
-												n = temp.length;
-												for (i = 0; i < n; i++) {
-													temp1 = temp[i].replace(/^\s+/, "");
-													temp1 = temp1.replace(/\s+$/, "");
-													if (temp1 != "")
-														f.push(temp1);
-												}
-												texto = f.join("<br><br>");
-											}
-										} catch (e) {
-										}
-										return texto;
-									};
-									i3GEO.editorOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud("chicken", i3GEO.editorOL.mapa
-										.getLonLatFromPixel(event.xy), null, "<div style=text-align:left >" + lonlattexto
-										+ "<pre>"
-										+ formata(event.text)
-										+ "</pre></div>", null, true));
-									i3GEO.editorOL.removeClone();
-								},
-								beforegetfeatureinfo : function(event) {
-									var ativo = [
-										i3GEO.editorOL.layerAtivo()
-									];
-									// se for TMS tem de pegar o clone wms
-									if (ativo[0].serviceVersion === "&tms=" || ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS"
-										|| ativo[0].CLASS_NAME == "OpenLayers.Layer.OSM") {
-										ativo = [
-											i3GEO.editorOL.layertms2wms(ativo[0])
-										];
-									}
-									ativo[0].projection = new OpenLayers.Projection("EPSG:4326");
-									event.object.layers = ativo;
-									botaoIdentifica.layers = ativo;
-									botaoIdentifica.url = ativo[0].url;
-								},
-								activate : function() {
-									i3GEO.editorOL.criaJanelaAtivaTema();
-								}
-							}
-						});
-				// button.events.register("getfeatureinfo", this, showInfo);
-				controles.push(botaoIdentifica);
-				adiciona = true;
-
-			}
-
 			*/
 		},
 		removeFeaturesSel : function(){
