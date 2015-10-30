@@ -2347,22 +2347,22 @@ g_traducao = {
 		"mostraSoLegenda" : [
 			{
 				pt : "s&oacute; legenda",
-				en : "",
-				es : ""
+				en : "only legend",
+				es : "s&oacute;lo leyenda"
 			}
 		],
 		"removerDoMapa" : [
 			{
 				pt : "Remove a camada do mapa?",
-				en : "",
-				es : ""
+				en : "Do you want to remove the layer from map?",
+				es : "¿Se remueve la capa del mapa?"
 			}
 		],
 		"dicaBuscaRapida" : [
 			{
 				pt : "Abre uma janela flutuante com op&ccedil;&otilde;es de busca de dados em servi&ccedil;os como o Google Maps ou nas camadas exsitentes no mapa",
-				en : "",
-				es : ""
+				en : "It opens a window with options to search data in services like Google Maps or in the map existing layers",
+				es : "Abre una ventana con opciones de b&uacute;squeda de datos en servicios como Google Maps o en las capas existentes en el mapa"
 			}
 		],
 		"refresh" : [
