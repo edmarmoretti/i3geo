@@ -1920,24 +1920,25 @@ i3GEO.editorOL =
 			temp.style.height = "100px";
 			temp.innerHTML = ins;
 		},
-		//TODO incuir um botao para executar a operacao ao inves do evento onchange
 		ferramentas : function() {
+			var b, ins;
 			if (!document.getElementById("panelferramentasEditor")) {
 				YAHOO.namespace("editorOL.ferramentas");
 				YAHOO.editorOL.ferramentas.panel = new YAHOO.widget.Panel("panelferramentasEditor", {
 					zIndex : 20000,
 					iframe : true,
 					width : "300px",
+					height : "150px",
 					visible : false,
 					draggable : true,
 					close : true
 				});
-				var ins =
+				ins =
 					"" + '<p class=paragrafo >'
 						+ $trad("opsel")
 						+ ':</p>'
 						+ '<div class=styled-select >'
-						+ '<select onchange="i3GEO.editorOL.processageo(this.value);this.value = \'\'" >'
+						+ '<select id="panelferramentasEditorOpcoes">'
 						+ '	<option value="">---</option>'
 						+ '	<option value=union >Uni&atilde;o</option>';
 				if (i3GEO.php) {
@@ -1947,8 +1948,9 @@ i3GEO.editorOL =
 							+ '	<option value=difference >Diferen&ccedil;a</option>'
 							+ '	<option value=symdifference >Diferen&ccedil;a sim&eacute;trica</option>';
 				}
-				ins +=
-					'</select></div>';
+				ins += '</select></p>';
+				ins += '</div>';
+				ins += '<br><p class=paragrafo ><input id="panelferramentasEditorAplicar" type="button" value="' + $trad("p14") + '" />';
 
 				YAHOO.editorOL.ferramentas.panel.setBody(ins);
 				if (i3GEO && typeof i3GEO != undefined && i3GEO != "") {
@@ -1969,10 +1971,20 @@ i3GEO.editorOL =
 						i3GEO.janela.minimiza("panelferramentasEditor");
 					};
 				}
+				b = new YAHOO.widget.Button(
+					"panelferramentasEditorAplicar",{
+					onclick:{
+						fn:	function(){
+							i3GEO.editorOL.processageo($i("panelferramentasEditorOpcoes").value);
+						}
+					}
+				});
+				b.addClass("rodar");
 			} else {
 				YAHOO.editorOL.ferramentas.panel.render(document.body);
 			}
 			YAHOO.editorOL.ferramentas.panel.show();
+
 		},
 		//TODO implementar ao atualizar OL3
 		snap : function() {
