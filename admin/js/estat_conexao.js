@@ -23,7 +23,7 @@ i3GEOadmin.conexao = {
 		}
 	},
 	formatSenha: function(elCell, oRecord, oColumn){
-		elCell.innerHTML = "A senha deve ser editada diretamente no banco de dados de administra&ccedil;&atilde;o. Veja o i3geo/ms_configura.php para saber qual &eacute; o banco.";
+		elCell.innerHTML = "A senha deve ser editada diretamente no banco de dados de administra&ccedil;&atilde;o (tabela i3geo_admin.i3geoestat_conexao). Veja o i3geo/ms_configura.php para saber qual &eacute; o banco.";
 	},
 	defColunas: function(){
 		return [
