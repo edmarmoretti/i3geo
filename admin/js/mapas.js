@@ -51,12 +51,12 @@ i3GEOadmin.mapas = {
 	},
 	defColunas: function(){
 		return [
-			{key:"excluir",label:"excluir",formatter:i3GEOadmin.mapas.formatExclui},
-			{key:"mais",label:"editar",formatter:i3GEOadmin.mapas.formatMais},
+			{key:"excluir",label:$trad("excluir",i3GEOadmin.core.dicionario),formatter:i3GEOadmin.mapas.formatExclui},
+			{key:"mais",label:$trad("editar",i3GEOadmin.core.dicionario),formatter:i3GEOadmin.mapas.formatMais},
 			{label:"id",key:"id_mapa", formatter:i3GEOadmin.mapas.formatTexto},
-			{label:"nome",resizeable:true,key:"nome_mapa", formatter:i3GEOadmin.mapas.formatTexto},
-			{label:"ordem",resizeable:true,key:"ordem_mapa", formatter:i3GEOadmin.mapas.formatTexto},
-			{label:"contem mapfile",resizeable:true,key:"contemmapfile", formatter:i3GEOadmin.mapas.formatTexto}
+			{label:$trad("nome",i3GEOadmin.core.dicionario),resizeable:true,key:"nome_mapa", formatter:i3GEOadmin.mapas.formatTexto},
+			{label:$trad("ordem",i3GEOadmin.mapas.dicionario),resizeable:true,key:"ordem_mapa", formatter:i3GEOadmin.mapas.formatTexto},
+			{label:$trad("contemMapfile",i3GEOadmin.mapas.dicionario),resizeable:true,key:"contemmapfile", formatter:i3GEOadmin.mapas.formatTexto}
 		];
 	},
 	/*
@@ -79,7 +79,7 @@ i3GEOadmin.mapas = {
 	obtem: function(){
 		i3GEOadmin.mapas.dados = "";
 		core_carregando("ativa");
-		core_pegaDados("buscando dados...","../php/mapas.php?funcao=pegaMapas","i3GEOadmin.mapas.tabela");
+		core_pegaDados($trad("msgBuscaDados",i3GEOadmin.core.dicionario),"../php/mapas.php?funcao=pegaMapas","i3GEOadmin.mapas.tabela");
 	},
 	tabela: function(dados){
 		if(i3GEOadmin.mapas.dados == ""){
@@ -117,7 +117,7 @@ i3GEOadmin.mapas = {
 				}
 				if (column.key == 'mais'){
 					core_carregando("ativa");
-					core_carregando("buscando dados...");
+					core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 					$clicouId = registro.getData('id_mapa');
 					$recordid = registro.getId();
 					sUrl = "../php/mapas.php?funcao=pegaDadosMapa&id_mapa="+$clicouId;
@@ -182,42 +182,42 @@ i3GEOadmin.mapas = {
 	formulario: function(i){
 		var ins = "";
 
-		ins += "<p>Ordem de apresenta&ccedil;&atilde;o do mapa:<br>";
+		ins += "<p>"+ $trad("ordemMapa",i3GEOadmin.mapas.dicionario) +"<br>";
 		ins += "<input size=10 type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></p>";
 
-		ins += "<p>Nome do mapa:<br>";
+		ins += "<p>"+ $trad("nomeMapa",i3GEOadmin.mapas.dicionario) +"<br>";
 		ins += "<input size=35 type=text id=Enome_mapa value='"+i.nome_mapa+"' /></p>";
 
-		ins += "<p>Publicado?<br>";
+		ins += "<p>"+ $trad("publicado",i3GEOadmin.mapas.dicionario) +"<br>";
 		ins += "<select  id='Epublicado_mapa' >";
 		ins += core_combosimnao(i.publicado_mapa);
 		ins += "</select></p>";
 
-		ins += "<p>Descri&ccedil;&atilde;o:<br>";
+		ins += "<p>"+ $trad("descricao",i3GEOadmin.mapas.dicionario) +"<br>";
 		ins += "<input size=35 type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></p>";
 
-		ins += "<p>Extens&atilde;o geogr&aacute;fica:<br>";
+		ins += "<p>"+ $trad("extensao",i3GEOadmin.mapas.dicionario) +"<br>";
 		ins += "<input size=35 type=text id=Eext_mapa value='"+i.ext_mapa+"' /></p>";
 
-		ins += "<p>URL da imagem miniatura:<br>";
+		ins += "<p>"+ $trad("img",i3GEOadmin.mapas.dicionario) +"<br>";
 		ins += "<input size=35 type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></p>";
 		ins += "<img src='"+i.imagem_mapa+"' />";
 
-		ins += "<p>Temas que ser&atilde;o inclu&iacute;dos nesse mapa (utilize os c&oacute;digos dos mapfiles mostrados na lista abaixo): </p>";
+		ins += "<p>"+ $trad("temas",i3GEOadmin.mapas.dicionario) +"</p>";
 		ins += "<input size=35 type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></p>";
-		ins += "<div id=comboMapfiles >Buscando...</div>";
+		ins += "<div id=comboMapfiles >"+ $trad("msgBusca",i3GEOadmin.mapas.dicionario) +"</div>";
 
-		ins += "<p>Temas que ser&atilde;o ligados. Devem constar na lista de temas inclu&iacute;dos: </p>";
+		ins += "<p>"+ $trad("temasLigados",i3GEOadmin.mapas.dicionario) +"</p>";
 		ins += "<input size=35 type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></p>";
 
-		ins += "<p>Perfis que podem ver este mapa: </p>";
+		ins += "<p>"+ $trad("perfis",i3GEOadmin.mapas.dicionario) +"</p>";
 		ins += "<input size=35 type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></p>";
-		ins += "<div id=comboPerfis >Buscando...</div>";
+		ins += "<div id=comboPerfis >"+ $trad("msgBusca",i3GEOadmin.mapas.dicionario) +"</div>";
 
-		ins += "<p>Outros par&acirc;metros (separe com '&'):<br>";
+		ins += "<p>"+ $trad("parametros",i3GEOadmin.mapas.dicionario) +"<br>";
 		ins += "<input size=35 type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></p>";
 
-		ins += "<p>Link direto para abertura do mapa (despreza os outros par&acirc;metros):<br>";
+		ins += "<p>"+ $trad("linkDireto",i3GEOadmin.mapas.dicionario) +"<br>";
 		ins += "<input size=35 type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></p>";
 		ins += "<br><br><br>";
 		return(ins);
@@ -230,7 +230,7 @@ i3GEOadmin.mapas = {
 		i3GEOadmin.mapas.letra = letra;
 		if(i3GEOadmin.mapas.dados == ""){
 			core_carregando("ativa");
-			core_pegaDados("buscando dados...","../php/mapas.php?funcao=pegaMapas","i3GEOadmin.mapas.atualizaFiltro");
+			core_pegaDados($trad("msgBuscaDados",i3GEOadmin.core.dicionario),"../php/mapas.php?funcao=pegaMapas","i3GEOadmin.mapas.atualizaFiltro");
 			return;
 		}
 		var i,temp,
@@ -251,7 +251,7 @@ i3GEOadmin.mapas = {
 		i3GEOadmin.mapas.tabela(novo);
 	},
 	exclui: function(id,row){
-		var mensagem = " excluindo o registro do id= "+id,
+		var mensagem = $trad("msgExclui",i3GEOadmin.core.dicionario)+id,
 			sUrl = "../php/mapas.php?funcao=excluirMapa&id="+id;
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.mapas.dataTable);
 		i3GEOadmin.mapas.dados = "";
@@ -271,13 +271,13 @@ i3GEOadmin.mapas = {
 		}
 		par += "&id_mapa="+id;
 		core_carregando("ativa");
-		core_carregando(" gravando o registro do id= "+id);
+		core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 		sUrl = "../php/mapas.php?funcao=alterarMapa"+par;
 		callback = {
 				success:function(o){
 					try	{
 						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+							core_carregando("<span style=color:red >"+ $trad("msgErroExclui",i3GEOadmin.core.dicionario) +"</span>");
 							setTimeout("core_carregando('desativa')",3000);
 						}
 						else{
