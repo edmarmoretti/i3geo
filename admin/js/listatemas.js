@@ -1,3 +1,6 @@
+//
+//Dependencias: Este programa necessita do arquivo "../dicionario/editormapfile.js"
+//
 function editorTemaMapfile(mapfile)
 {
 	core_pegaDados("buscando dados...","../php/menutemas.php?funcao=pegaTemaPorMapfile&codigo_tema="+mapfile,"montaEditorTema");
@@ -77,51 +80,51 @@ function montaDivTemas(i)
 {
 	var param = {
 		"linhas":[
-		{titulo:"Nome que ser&aacute; mostrado na &aacute;rvore de menus (portugu&ecirc;s) - altera tamb&eacute;m o metadata TEMA, existente no mapfile, usado como t&iacute;tulo na &aacute;rvore de camadas:",id:"nome_tema",size:"30",value:i.nome_tema,tipo:"text",div:""},
-		{titulo:"Ingl&ecirc;s (opcional):",id:"en",size:"30",value:i.en,tipo:"text",div:""},
-		{titulo:"Espanhol (opcional):",id:"es",size:"30",value:i.es,tipo:"text",div:""},
-		{titulo:"Italiano (opcional):",id:"it",size:"30",value:i.it,tipo:"text",div:""}
+		{titulo:$trad("nomeTema",i3GEOadmin.listatemas.dicionario),id:"nome_tema",size:"30",value:i.nome_tema,tipo:"text",div:""},
+		{titulo:$trad("en",i3GEOadmin.listatemas.dicionario),id:"en",size:"30",value:i.en,tipo:"text",div:""},
+		{titulo:$trad("es",i3GEOadmin.listatemas.dicionario),id:"es",size:"30",value:i.es,tipo:"text",div:""},
+		{titulo:$trad("it",i3GEOadmin.listatemas.dicionario),id:"it",size:"30",value:i.it,tipo:"text",div:""}
 		]
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
-	ins += "<p>Descri&ccedil;&atilde;o (opcional):<br>";
+	ins += "<p>"+ $trad("descricao",i3GEOadmin.listatemas.dicionario) +"<br>";
 	ins += "<input size=30 type=text id=desc_tema value='"+i.desc_tema+"' /></p>";
-	ins += "<p>Link para a fonte (opcional):<br>";
+	ins += "<p>"+ $trad("fonte",i3GEOadmin.listatemas.dicionario) +"<br>";
 	ins += "<input size=30 type=text id=link_tema value='"+i.link_tema+"' /></p>";
-	ins += "<p>Tags (separe com espa&ccedil;o). Voc&ecirc; pode digitar novos tags ou pegar da lista abaixo (opcional):";
+	ins += "<p>"+ $trad("tags",i3GEOadmin.listatemas.dicionario) +"";
 	ins += "<input type=text size=30 value='"+i.tags_tema+"' id='tags_tema' ><br>";
-	ins += "<div id=comboTags >Buscando...</div>";
+	ins += "<div id=comboTags >"+ $trad("busca",i3GEOadmin.listatemas.dicionario) +"</div>";
 	//tipoa_tema pode receber o valor META indicando que baseia-se no sistema de metadados estatisticos
 	//nesse caso, tipoa_tema e preenchido pelo editor de mapfile
-	ins += "<p>Tipo (preencha apenas se contiver layers do tipo WMS ou se for baseado no sistema METAESTAT):<br>";
+	ins += "<p>"+ $trad("tipo",i3GEOadmin.listatemas.dicionario) +"<br>";
 	ins += "<select  id='tipoa_tema' />";
 	ins += "<option value='' ";
 	if (i.tipoa_tema == ""){ins += "selected";}
-	ins += ">Normal</option>";
+	ins += ">"+ $trad("Normal",i3GEOadmin.listatemas.dicionario) +"</option>";
 	ins += "<option value='META' ";
 	if (i.tipoa_tema == "META"){ins += "selected";}
-	ins += ">Vinculado ao METAESTAT</option>";
+	ins += ">"+ $trad("metaestat",i3GEOadmin.listatemas.dicionario) +"</option>";
 	ins += "<option value='WMS' ";
 	if (i.tipoa_tema == "WMS"){ins += "selected";}
 	ins += " >WMS<option></select></p>";
-	ins += "<p>Permite acesso via WMS/WFS? (n&atilde;o ocasiona restri&ccedil;&atilde;o em temas do tipo gvSIG)<br>";
+	ins += "<p>"+ $trad("permiteOgc",i3GEOadmin.listatemas.dicionario) +"<br>";
 	ins += "<select  id='ogc_tema' >";
 	ins += core_combosimnao(i.ogc_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite o download na aplica&ccedil;&atilde;o datadownload.htm? (n&atilde;o afeta temas do tipo gvSIG) (n&atilde;o afeta a permiss&atilde;o de download definida no item 'disponibilidade' existente em cada layer)<br>";
+	ins += "<p>"+ $trad("permiteDownload",i3GEOadmin.listatemas.dicionario) +"<br>";
 	ins += "<select  id='download_tema' >";
 	ins += core_combosimnao(i.download_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite acesso via kml? (n&atilde;o restringe em temas do tipo gvSIG)<br>";
+	ins += "<p>"+ $trad("permiteKml",i3GEOadmin.listatemas.dicionario) +"<br>";
 	ins += "<select  id='kml_tema' >";
 	ins += core_combosimnao(i.kml_tema);
 	ins += "</select></p>";
-	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)? (n&atilde;o restringe em temas do tipo gvSIG)<br>";
+	ins += "<p>"+ $trad("permiteKmz",i3GEOadmin.listatemas.dicionario) +"<br>";
 	ins += "<select  id='kmz_tema' >";
 	ins += core_combosimnao(i.kmz_tema);
 	ins += "</select></p>";
-	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >Clique para atualizar ou cria a miniatura.</span> Cada tema pode ter uma imagem miniatura que &eacute; mostrada em algumas funcionalidades do i3Geo. Utilize essa op&ccedil;&atilde;o para criar a miniatura para o tema em edi&ccedil;&atilde;o.<br>";
+	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >"+ $trad("miniatura",i3GEOadmin.listatemas.dicionario) +"<br>";
 	ins += "<img id='imagemMiniatura' src='../../temas/miniaturas/"+i.imagem+"' /></p><br><br>";
 	ins += "<input type=hidden id=codigo_tema value='"+i.codigo_tema+"'/>";
 	return(ins);
@@ -175,7 +178,7 @@ function gravaDadosTema(id)
 	}
 	par += "&id="+id;
 	core_carregando("ativa");
-	core_carregando(" gravando o registro do id= "+id);
+	core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 	var sUrl = "../php/menutemas.php?funcao=alteraTemas"+par;
 	var callback =
 	{
@@ -185,7 +188,7 @@ function gravaDadosTema(id)
   			{
   				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   				{
-  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+  					core_carregando("<span style=color:red >"+ $trad("msgNaoExcluiTema",i3GEOadmin.listatemas.dicionario) +"</span>");
   					setTimeout("core_carregando('desativa')",3000);
   				}
   				else
