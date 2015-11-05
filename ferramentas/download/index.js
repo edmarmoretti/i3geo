@@ -104,23 +104,30 @@ i3GEOF.download = {
 		else{
 			mostraDownload = function(retorno){
 				var ins = "",
-					arqs,n,arq;
+					arqs,n,arq, temp;
 				if (retorno.data != undefined){
 					retorno = retorno.data;
 					arqs = retorno.arquivos.split(",");
 					n = arqs.length;
-					if(retorno == "erro")
-					{ins = "<p style=color:red >"+$trad('erroTema',i3GEOF.download.dicionario)+"<br>";}
+					if(retorno == "erro"){
+						ins = "<p style=color:red >"+$trad('erroTema',i3GEOF.download.dicionario)+"<br>";
+					}
 					else{
 						for (arq=0;arq<n;arq++){
 							ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>";
 						}
 					}
-					if(retorno.nreg)
-					{ins += "<br><br>"+$trad('registros',i3GEOF.download.dicionario)+" ="+retorno.nreg;}
+					if(retorno.nreg){
+						ins += "<br><br>"+$trad('registros',i3GEOF.download.dicionario)+" ="+retorno.nreg;
+					}
+					ins += "<br><br>"+$trad('pagdownload',i3GEOF.download.dicionario);
+					temp = i3GEO.configura.locaplic+"/datadownload.htm?tema="+tema+"&temaDownload="+tema;
+					ins += "<a href='"+temp+"' target=_blank >"+temp+"</a>";
+
 				}
-				else
-				{ins = "<p style=color:red >"+$trad("x66")+"<br>";}
+				else{
+					ins = "<p style=color:red >"+$trad("x66")+"<br>";
+				}
 				$i("i3GEOdownloadResultado").innerHTML = ins;
 				i3GEOF.download.aguarde.visibility = "hidden";
 			};
@@ -153,7 +160,7 @@ i3GEOF.download = {
 		titulo = "<div class='i3GeoTituloJanela'>Download<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=82' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
-			"150px",
+			"200px",
 			"",
 			"",
 			"",
