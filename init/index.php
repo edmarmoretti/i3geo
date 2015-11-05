@@ -164,7 +164,7 @@ a {
 	text-decoration: none;
 	font-size: 14px;
 	color: #26298D;
-	outline: none;
+	outline: doted;
 }
 
 A:hover {

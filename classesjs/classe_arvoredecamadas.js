@@ -770,6 +770,17 @@ i3GEO.arvoreDeCamadas =
 				id : "",
 				status : true,
 				flag : true
+			},
+			"ogc" : {
+				tipo : "tema",
+				icone : "imagens/oxygen/16x16/application-x-smb-workgroup.png",
+				classe : "arvCamOgc",
+				funcao : "i3GEO.tema.dialogo.ogcwindow",
+				title : "OGC",
+				dica : "OGC",
+				id : "",
+				status : true,
+				flag : true
 			}
 		},
 
@@ -1774,6 +1785,10 @@ i3GEO.arvoreDeCamadas =
 			this.CONFIGICONES.download.flag = false;
 			if (tema.download.toLowerCase() === "sim" || tema.download === "" && tema.features.toLowerCase() !== "sim") {
 				this.CONFIGICONES.download.flag = true;
+			}
+			this.CONFIGICONES.ogc.flag = false;
+			if (tema.permiteogc.toLowerCase() === "sim") {
+				this.CONFIGICONES.ogc.flag = true;
 			}
 			//
 			//monta os icones

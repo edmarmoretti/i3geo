@@ -45,11 +45,11 @@ i3GEO.tema =
 		TEMPORIZADORESID : {},
 		/**
 		 * Function: ativaFerramentas
-		 * 
+		 *
 		 * Verifica se uma camada possuí ferramentas configuradas e que devem ser abertas ao ser adicionada ao mapa
-		 * 
+		 *
 		 * Parametros:
-		 * 
+		 *
 		 * {objeto} - objeto camada ver em i3GEO.arvoreDeCamadas.CAMADAS
 		 */
 		ativaFerramentas : function(camada){
@@ -740,6 +740,19 @@ i3GEO.tema =
 			download : function(idtema) {
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.download()", "download", "download");
+			},
+			/**
+			 * Function: ogcwindow
+			 *
+			 * Abre uma aba no navegador com as opcoes de acesso aos dados de um tema via OGC
+			 *
+			 * Parametros:
+			 *
+			 * {string} - id que identifica o tema no map file.
+			 */
+			ogcwindow : function(idtema) {
+				i3GEO.mapa.ativaTema(idtema);
+				window.open(i3GEO.configura.locaplic+"/ogc.htm?temaOgc="+idtema);
 			},
 			/**
 			 * Function: sld
