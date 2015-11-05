@@ -349,7 +349,7 @@ i3GEOF.navegapostgis = {
 
 					for(i=0;i<n;i++){
 						ck = "";
-						if(retorno[i].serial === true){
+						if(retorno[i].serial === true || retorno[i].field === "gid"){
 							ck = "checked";
 							gidok = true;
 						}else if(retorno[i].notnull === true && gidok === false){
@@ -414,7 +414,7 @@ i3GEOF.navegapostgis = {
 		sql = the_geom+" from (\n\n select "+i+" from "+i3GEOF.navegapostgis.esquema+"."+i3GEOF.navegapostgis.tabela+"\n\n) as foo using unique "+gid+" using srid=4326";
 		sql = sql.replace(",,",",");
 		if(gid === "" && i3GEOF.navegapostgis.tipo === "sql"){
-			alert("Coluna com ID unico nao foi escolhida!");
+			alert($trad("gid",i3GEOF.navegapostgis.dicionario));
 		}
 		if(i3GEOF.navegapostgis.tipo === "sql"){
 			$i("i3GEOFnavegapostgisSql").value = sql;

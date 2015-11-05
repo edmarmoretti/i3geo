@@ -59,5 +59,10 @@ i3GEOF.navegapostgis.dicionario = {
 		pt : "Amostra de dados",
 		en : "",
 		es : ""
+	} ],
+	'gid' : [ {
+		pt : "A coluna com ID unico nao foi escolhida automaticamente, voce deve escolher.",
+		en : "",
+		es : ""
 	} ]
 };
