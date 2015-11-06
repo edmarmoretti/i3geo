@@ -19,7 +19,7 @@ function montaEditorClasseLabel(dados)
 	var temp = function(){
 		salvarDadosEditor('classeLabel',dados.codigoMap,dados.codigoLayer,dados.indiceClasse);
 	};
-	core_montaEditor(temp,"450px","500px","","Label",true,true,false);
+	core_montaEditor(temp,"450px","500px","","Label&nbsp;"+dados.codigoMap,true,true,false);
 	var param = {
 		"linhas":[
 		{ajuda:$trad("colorLabel",i3GEOadmin.editormapfile.dicionario),

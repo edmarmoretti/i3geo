@@ -18,7 +18,7 @@ function montaEditorEditavel(dados)
 	var temp = function(){
 		salvarDadosEditor('editavel',dados.codigoMap,dados.codigoLayer,false);
 	};
-	core_montaEditor(temp,"450px","450px","",$trad("edicao",i3GEOadmin.editormapfile.dicionario),false,true,false);
+	core_montaEditor(temp,"450px","450px","",$trad("edicao",i3GEOadmin.editormapfile.dicionario) + "&nbsp;"+dados.codigoMap,false,true,false);
 
 	var limg = i3GEO.configura.locaplic+"/imagens/ic_zoom.png",
 		param = {

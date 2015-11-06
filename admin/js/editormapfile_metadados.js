@@ -19,7 +19,7 @@ function montaEditorMetadados(dados){
 	var temp = function(){
 		salvarDadosEditor('metadados',dados.codigoMap,dados.codigoLayer);
 	};
-	core_montaEditor(temp,"450px","500px","","Miscel&acirc;nea",true,true,false);
+	core_montaEditor(temp,"450px","500px","","Miscel&acirc;nea&nbsp;"+dados.codigoMap,true,true,false);
 	var paramRaster = {
 		"linhas":[
 			{ajuda:$trad("palletefile",i3GEOadmin.editormapfile.dicionario),

@@ -18,7 +18,7 @@ function montaEditorTitulo(dados)
 	var temp = function(){
 		salvarDadosEditor('titulo',dados.codigoMap,dados.codigoLayer);
 	};
-	core_montaEditor(temp,"450px","650px","","T&iacute;tulo",true,true,false);
+	core_montaEditor(temp,"450px","650px","","T&iacute;tulo&nbsp;"+dados.codigoMap,true,true,false);
 
 	var param = {
 		"linhas":[

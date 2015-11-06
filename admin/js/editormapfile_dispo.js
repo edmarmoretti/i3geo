@@ -18,7 +18,7 @@ function montaEditorDispo(dados)
 	var temp = function(){
 		salvarDadosEditor('dispo',dados.codigoMap,dados.codigoLayer,false);
 	};
-	core_montaEditor(temp,"450px","650px","",$trad("disponibilidade",i3GEOadmin.editormapfile.dicionario),true,true,false);
+	core_montaEditor(temp,"450px","650px","",$trad("disponibilidade",i3GEOadmin.editormapfile.dicionario) + "&nbsp;"+dados.codigoMap,true,true,false);
 	var param = {
 		"linhas":[
 			{ajuda:$trad("permiteDownload",i3GEOadmin.editormapfile.dicionario),
@@ -31,7 +31,7 @@ function montaEditorDispo(dados)
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
-	
+
 	ins += "<p>"+ $trad("permiteOgc2",i3GEOadmin.editormapfile.dicionario) +"<br>";
 	ins += "<select  id='ogc_tema' >";
 	ins += core_combosimnao(dados.ogc_tema);
@@ -48,8 +48,8 @@ function montaEditorDispo(dados)
 	ins += "<select  id='kmz_tema' >";
 	ins += core_combosimnao(dados.kmz_tema);
 	ins += "</select></p>";
-	
-	
+
+
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
 	if($i("cDownload")){
