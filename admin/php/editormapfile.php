@@ -57,6 +57,7 @@ $funcoesEdicao = array(
 		"ALTERARESTILO",
 		"ALTERARCONEXAO",
 		"ALTERARTITULO",
+		"ALTERARNOMETEMA",
 		"ALTERARDISPO",
 		"ALTERARCOMPORT",
 		"ALTERARMETADADOS",
@@ -736,6 +737,12 @@ switch (strtoupper($funcao))
 		break;
 	case "ALTERARTITULO":
 		alterarTitulo();
+		retornaJSON(pegaTitulo());
+		exit;
+		break;
+	case "ALTERARNOMETEMA":
+		alterarNomeTema();
+		$codigoLayer = $codigoMap;
 		retornaJSON(pegaTitulo());
 		exit;
 		break;
@@ -1655,6 +1662,26 @@ function pegaTitulo()
 	$dados["codigoLayer"] = $codigoLayer;
 
 	return $dados;
+}
+function alterarNomeTema(){
+	global $locaplic,$codigoMap, $novoNome, $esquemaadmin;
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoMap);
+	if($layer){
+
+		$layer->setmetadata("tema",$novoNome);
+		$mapa->save($mapfile);
+		removeCabecalho($mapfile);
+		include("conexao.php");
+		if($convUTF){
+			$novoNome = utf8_encode($novoNome);
+		}
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET nome_tema='$novoNome' WHERE codigo_tema='$codigoMap'");
+		$dbhw = null;
+		$dbh = null;
+	}
+	return "ok";	
 }
 function alterarTitulo()
 {

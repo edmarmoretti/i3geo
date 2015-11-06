@@ -350,7 +350,7 @@ function montaTextoTemaMapfile(mapfile){
 	}
 	conteudo += "&nbsp;<img style="+i+";width:20px; onclick=\"javascript:window.open('../../interface/black_editor.php?&temaEdicao="+mapfile.codigo+"')\" title='"+ $trad("editarI3geo",i3GEOadmin.core.dicionario) +"' src=\"../imagens/i3geo2editor.jpg\" />";
 	conteudo += "&nbsp;<img style="+i+";width:20px; onclick=\"javascript:window.open('../../ms_criamapa.php?temasa="+mapfile.codigo+"&layers="+mapfile.codigo+"')\" title='"+ $trad("testarI3geo",i3GEOadmin.core.dicionario) +"' src=\"../imagens/i3geo2.jpg\" />";
-	conteudo += "<b>&nbsp;"+mapfile.codigo+"</b>&nbsp;<span style=color:gray id='idNome_"+mapfile.codigo+"'>"+mapfile.nome+"</span>";
+	conteudo += "<b>&nbsp;"+mapfile.codigo+"</b>&nbsp;<span title='"+$trad("editar",i3GEOadmin.core.dicionario)+"' onclick='alteraNomeTema(this)' style=cursor:pointer;color:gray id='idNome_"+mapfile.codigo+"'>"+mapfile.nome+"</span>";
 	conteudo += "<br><img src=''style='display:none;' id='testeRapido"+mapfile.codigo+"' />";
 	if(mapfile.imagem != "" && $i("mostraMini").checked == true){
 		conteudo += "</b><br><img src='../../temas/miniaturas/"+mapfile.imagem+"'/>";
@@ -655,6 +655,40 @@ function clonarMapfile(codigoMap)
 	{this.hide();};
 	var mensagem = ""+ $trad("nomeArquivo",i3GEOadmin.core.dicionario) +"<br><input type=text value='' id=clonarComo />";
 	var largura = "300";
+	core_dialogoPergunta(handleYes,handleNo,mensagem,largura);
+}
+function alteraNomeTema(obj){
+	var handleYes, handleNo, codigoMap, mensagem, largura = "300";
+	codigoMap = obj.id.replace("idNome_","");
+	mensagem = ""+ $trad("novoTitulo",i3GEOadmin.core.dicionario) +"<br><input size=30 type=text value='"+obj.innerHTML+"' id=mudarNomePara />";
+	handleNo = function(){
+		this.hide();
+	};
+	handleYes = function(){
+		var callback, sUrl, novonome = $i("mudarNomePara").value;
+		this.hide();
+		if(novonome == "" || novonome === obj.innerHTML){
+			return;
+		}
+		sUrl = "../php/editormapfile.php?funcao=alterarNomeTema&codigoMap="+codigoMap+"&novoNome="+novonome;
+		core_carregando("ativa");
+		core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+codigoMap);
+		callback = {
+			success:function(o) {
+				try	{
+					core_carregando("desativa");
+					var dados = YAHOO.lang.JSON.parse(o.responseText);
+					obj.innerHTML = dados.tema;
+				}
+				catch(e){
+					core_handleFailure(o,o.responseText);
+				}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
+		};
+		core_makeRequest(sUrl,callback);
+	};
 	core_dialogoPergunta(handleYes,handleNo,mensagem,largura);
 }
 function selIdMedidaVariavel(idEleValue,idEleCodigoConexao){

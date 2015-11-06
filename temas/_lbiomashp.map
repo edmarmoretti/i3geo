@@ -4,12 +4,13 @@ MAP
   LAYER
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
+    GROUP "biomas"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "CACHE"	"SIM"
       "TIP"	"CD_LEGENDA"
       "CLASSE"	"SIM"
-      "permitekmz"	"nao"
+      "permitekmz"	"sim"
       "ITENSDESC"	"Bioma Teste de acentuação"
       "TILES"	"SIM"
       "ESCALA"	"1000000"
@@ -22,10 +23,8 @@ MAP
       "permitekml"	"sim"
       "permiteogc"	"sim"
       "transitioneffect"	"SIM"
-      "TEMA"	"Biomas shapefile (acentuação)"
+      "TEMA"	"_Biomas SHP (acentução)"
     END # METADATA
-    #para teste de legenda com grupo
-    GROUP "biomas"
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
     PROCESSING "LABEL_NO_CLIP=True"
@@ -33,7 +32,6 @@ MAP
     STATUS OFF
     TEMPLATE "none.htm"
     TILEITEM "location"
-    OPACITY 100
     TYPE POLYGON
     UNITS METERS
     CLASS

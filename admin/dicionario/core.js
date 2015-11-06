@@ -271,8 +271,8 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'novoTitulo' : [ {
+		pt : "Novo t&iacute;tulo do tema",
 		en : "",
 		es : ""
 	} ],
