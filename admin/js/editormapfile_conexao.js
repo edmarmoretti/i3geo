@@ -24,7 +24,7 @@ function montaEditorDados(dados)
 		function(){
 			salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false);
 		},
-		"500px","650px","",$trad("conexao",i3GEOadmin.editormapfile.dicionario),false,true,false
+		"500px","650px","",$trad("conexao",i3GEOadmin.editormapfile.dicionario) + "&nbsp;"+dados.codigoMap,false,true,false
 	);
 
 	var temp,ins = "",idsForms = ["connection","data","tileitem","tileindex","type","tipooriginal","metaestat_id_medida_variavel"],
@@ -44,7 +44,7 @@ function montaEditorDados(dados)
 			titulo:$trad("cacheTitulo",i3GEOadmin.editormapfile.dicionario),id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
 			{ajuda:$trad("cortepixels",i3GEOadmin.editormapfile.dicionario),
 			titulo:$trad("cortepixelsTitulo",i3GEOadmin.editormapfile.dicionario),id:"cortepixels",value:dados.cortepixels,tipo:"text"},
-			
+
 			{ajuda:$trad("tiles",i3GEOadmin.editormapfile.dicionario),
 			titulo:$trad("tilesTitulo",i3GEOadmin.editormapfile.dicionario),id:"",value:dados.tiles,tipo:"text",div:"<div id=cTiles ></div>"},
 

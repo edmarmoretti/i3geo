@@ -276,8 +276,8 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'editarNome' : [ {
+		pt : "Editar nome",
 		en : "",
 		es : ""
 	} ],
