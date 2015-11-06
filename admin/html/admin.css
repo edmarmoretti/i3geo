@@ -340,7 +340,7 @@ select{
 	background: url(../../imagens/oxygen/16x16/svn-commit.png) 5% 50% no-repeat;
 	width: 250px;
 }
-.editar {
+.iconeEditar {
     -moz-appearance: none;
     background: transparent url("../../imagens/gisicons/edit2.png") no-repeat scroll 100% 3px;
     border: 0 none;
