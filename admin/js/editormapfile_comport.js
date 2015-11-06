@@ -21,7 +21,7 @@ function montaEditorComport(dados)
 	var temp = function(){
 		salvarDadosEditor('comport',dados.codigoMap,dados.codigoLayer,false);
 	};
-	core_montaEditor(temp,"450px","650px","","Comportamento",true,true,false);
+	core_montaEditor(temp,"450px","650px","","Comportamento&nbsp;"+dados.codigoMap,true,true,false);
 	var param = {
 		"linhas":[
 			{ajuda:$trad("status",i3GEOadmin.editormapfile.dicionario),
