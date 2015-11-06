@@ -408,7 +408,7 @@ function montaRaizTema(no,dados)
 		tempNodeR.enableHighlight = false;
 		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editorGrupousr('"+no.data.id_tema+"','"+no.data.codigoMap+"')\" ><img style='position:relative;top:2px' src=\"../imagens/05.png\" /><i>"+ $trad("adicionaNovo",i3GEOadmin.core.dicionario) +"</i></span>";
 		var d = {html:conteudo};
-		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, false,true);
+		tempNode = new YAHOO.widget.HTMLNode(d, tempNodeR, true,true);
 		tempNode.isLeaf = true;
 		tempNode.enableHighlight = false;
 	}
@@ -437,7 +437,7 @@ function montaRaizTema(no,dados)
 	//adiciona a lista de layers no no
 	for (var i=0, j=dados.layers.length; i<j; i++)
 	{
-		tempNode = new YAHOO.widget.HTMLNode(montaNoLayer(no.data.codigoMap,dados.layers[i]), tempNodeR, false,true);
+		tempNode = new YAHOO.widget.HTMLNode(montaNoLayer(no.data.codigoMap,dados.layers[i]), tempNodeR, true,true);
 		tempNode.setDynamicLoad(loadLayerData, 0);
 		tempNode.isLeaf = false;
 		tempNode.enableHighlight = false;
