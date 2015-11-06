@@ -59,7 +59,10 @@ Arquivo:
 i3geo/classesphp/mapa_openlayers.php
 
 */
-
+//para efeitos de compatibilidade
+if (!function_exists('ms_GetVersion')){
+	include_once ("carrega_ext.php");
+}
 error_reporting(0);
 inicializa();
 //
@@ -152,6 +155,7 @@ else{
 		carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"],$_SESSION["i3georendermode"]);
 	}
 }
+
 //
 //map_fileX e para o caso register_globals = On no PHP.INI
 //
@@ -165,9 +169,7 @@ if(isset($_GET["BBOX"])){
 	$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 }
 $_GET["TIPOIMAGEM"] = trim($_GET["TIPOIMAGEM"]);
-
 $mapa = ms_newMapObj($map_fileX);
-
 //
 //processa os layers do mapfile
 //
