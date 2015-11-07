@@ -215,6 +215,9 @@ background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
 .i3GEOarvCamTemaIco .arvCamDownload, .i3GEOarvCamTemaIcoIE .Download {
 background-image: url("../imagens/oxygen/16x16/download.png");
 }
+.i3GEOarvCamTemaIco .arvCamOgc, .i3GEOarvCamTemaIcoIE .Ogc {
+background-image: url("../imagens/oxygen/16x16/application-x-smb-workgroup.png");
+}
 .i3GEOarvCamTemaIco .arvCamFonte, .i3GEOarvCamTemaIcoIE .Fonte {
 background-image: url("../imagens/oxygen/16x16/help-about.png");
 }
