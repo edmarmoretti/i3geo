@@ -132,6 +132,9 @@ else{
 		if($ll->getmetadata("tema") == "Limites"){
 			$ll->set("status",MS_DELETE);
 		}
+		if(strtoupper($ll->getmetadata("classe")) == "NAO" || $ll->getmetadata("classe") == ""){
+			$ll->set("status",MS_DELETE);
+		}
 	}
 
 	$layer = ms_newLayerObj($mapa);
@@ -229,6 +232,7 @@ else{
 		$mapa->save($map_file);
 	}
 }
+
 header("Location:".$opcoes["locaplic"]."/mashups/openlayers.php?temas=".$map_file."&DESLIGACACHE=sim&botoes=legenda,pan,zoombox,zoomtot,zoomin,zoomout,distancia,area,identifica&controles=navigation,layerswitcher,scaleline,mouseposition,overviewmap,keyboarddefaults&tiles=false&mapext=".$opcoes["mapext"]);
 
 function mapaBarras($colunas){
