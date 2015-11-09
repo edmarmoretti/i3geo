@@ -702,6 +702,7 @@ i3GEO.editorOL =
 							// necessario pq nao e sincrono
 							eval("var f = function(retorno){document.getElementById('legendaL_" + i
 								+ "').innerHTML = retorno.responseText;};");
+							url = url.replace("LAYERS", "LAYER");
 							var config = {
 								method : "GET",
 								url : url,

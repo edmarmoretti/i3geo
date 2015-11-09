@@ -653,6 +653,7 @@ i3GEO.editorOL = {
 						ins += icone + layers[i].name+"<br><div id=legendaL_"+i+" ></div><br>";
 						//necessario pq nao e sincrono
 						eval ("var f = function(retorno){document.getElementById('legendaL_"+i+"').innerHTML = retorno.responseText;};");
+						url = url.replace("LAYERS","LAYER");
 						var config = {
 							method: "GET",
 							url: url,
