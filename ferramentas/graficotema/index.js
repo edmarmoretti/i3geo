@@ -266,6 +266,9 @@ i3GEOF.graficoTema = {
 			temp = function(retorno){
 				i3GEOF.graficoTema.aguarde.visibility = "hidden";
 				i3GEO.atualiza(retorno);
+				if(i3GEOF.graficoTema.propriedades.mesmoTema === true){
+					i3GEO.Interface.atualizaTema(retorno,i3GEOF.graficoTema.tema);
+				}
 			};
 			p = i3GEO.configura.locaplic+"/ferramentas/graficotema/exec.php?"
 			+ "g_sid="+i3GEO.configura.sid

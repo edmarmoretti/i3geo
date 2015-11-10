@@ -964,7 +964,7 @@ parameters:
 lista - lista de item e cores de cada parte do grafico
 
 */
-	function graficotema($lista,$tamanho="50",$tipo="PIE",$outlinecolor="",$offset=0)
+	function graficotema($lista,$tamanho="50",$tipo="PIE",$outlinecolor="",$offset=0, $mesmoTema=false)
 	{
 		if(!$this->layer){return "erro";}
 		$nome = pegaNome($this->layer);
@@ -1002,6 +1002,11 @@ lista - lista de item e cores de cada parte do grafico
 			}
 			if($tipo == "PIE")
 			$novoestilo->set("offsetx",$offset);
+		}
+		if($mesmoTema == true){
+			$this->layer->set("status",MS_DELETE);
+			$novolayer->set("name",$this->layer->name);
+			$novolayer->setmetadata("tema",$this->layer->getmetadata("tema"));
 		}
 	}
 /*

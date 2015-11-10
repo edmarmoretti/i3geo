@@ -17,7 +17,14 @@ Gera graficos automaticamente para os elementos de um tema
 		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema,$locaplic);
-		$m->graficotema($lista,$tamanho,$tipo,$outlinecolor,$offset);
+		if($mesmoTema == "true"){
+			$mesmoTema = true;
+		}
+		else{
+			$mesmoTema = false;
+		}
+
+		$m->graficotema($lista,$tamanho,$tipo,$outlinecolor,$offset,$mesmoTema);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();

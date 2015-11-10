@@ -146,11 +146,13 @@ i3GEOF.atalhosedicao =
 			onclick : {
 				fn : function() {
 					i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
-					i3GEO.tema.dialogo.graficotema();
+					i3GEO.tema.dialogo.graficotema(i3GEO.temaAtivo,{
+						mesmoTema : true
+					});
 				}
 			}
 		});
-		$i("i3GEOFatalhosedicaoFiltro-button").style.width = "200px";
+		$i("i3GEOFatalhosedicaoTemaComGrafico-button").style.width = "200px";
 		//
 		//atualiza os campos que dependem de parametros de cada camada
 		//
