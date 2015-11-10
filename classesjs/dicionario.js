@@ -2673,6 +2673,13 @@ g_traducao = {
 				es : ""
 			}
 		],
+		"nenhum" : [
+			{
+				pt : "Nenhum",
+				en : "",
+				es : ""
+			}
+		],
 		"tipo" : [
 			{
 				pt : "Tipo",

@@ -603,15 +603,20 @@ i3GEO.tema =
 			 * Parametros:
 			 *
 			 * {string} - codigo do tema
+			 * 
+			 * {objeto} - propriedades (ver ferramentas/graficotema/index.js funcao iniciaJanelaFlutuante)
 			 */
-			graficotema : function(idtema) {
+			graficotema : function(idtema,propriedades) {
 				i3GEO.mapa.ativaTema(idtema);
+				var temp = function(){
+					i3GEOF.graficoTema.iniciaJanelaFlutuante(propriedades);
+				};
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.tema.dialogo.graficotema()",
 					"graficotema",
 					"graficoTema",
 					"dependencias.php",
-					"i3GEOF.graficoTema.iniciaJanelaFlutuante()");
+					temp);
 			},
 			/**
 			 * Function: toponimia

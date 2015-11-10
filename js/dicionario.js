@@ -2215,155 +2215,155 @@ var g_traducao =
 		"x99" : [
 			{
 				pt : "C&aacute;lculo n&atilde;o pode ser realizado. Falta carregar a API de geometria do GM",
-				en : "",
-				es : ""
+				en : "The calculation cannot be performed. It is necessary to upload the API of GM geometry",
+				es : "El c&aacute;lculo no puede ser realizado. Falta cargar la API de geometr&iacute;a de GM"
 			}
 		],
 		"x101" : [
 			{
 				pt : "C&oacute;pia",
-				en : "",
-				es : ""
+				en : "Copy",
+				es : "Copia"
 			}
 		],
 		"x102" : [
 			{
 				pt : "Mapa de calor",
 				en : "Heatmap",
-				es : ""
+				es : "Mapa de calor"
 			}
 		],
 		"x103" : [
 			{
 				pt : "Links para abrir o mapa",
-				en : "",
-				es : ""
+				en : "Links to open the map",
+				es : "Links para abrir el mapa "
 			}
 		],
 		"x104" : [
 			{
 				pt : "Mapa de agrupamentos",
-				en : "",
-				es : ""
+				en : "Cluster map",
+				es : "Mapa de agrupaci&oacute;n"
 			}
 		],
 		"x105" : [
 			{
 				pt : "Navega&ccedil;&atilde;o",
-				en : "",
-				es : ""
+				en : "Browsing",
+				es : "Navegaci&oacute;n"
 			}
 		],
 		"mais" : [
 			{
 				pt : "Mais...",
-				en : "",
-				es : ""
+				en : "More...",
+				es : "M&aacute;s..."
 			}
 		],
 		"uploadArquivoGeo" : [
 			{
 				pt : "Upload de arquivo geo",
-				en : "",
-				es : ""
+				en : "Geo file Upload",
+				es : "Carga del archivo geo"
 			}
 		],
 		"conexaoServicoGeo" : [
 			{
 				pt : "Conex&atilde;o com servi&ccedil;os geo",
-				en : "",
-				es : ""
+				en : "Connection to geo services ",
+				es : "Conexi&oacute;n con servicios geo"
 			}
 		],
 		"saikuAba" : [
 			{
 				pt : "SAIKU - OLAP (abrir em nova aba)",
-				en : "",
-				es : ""
+				en : "SAIKU - OLAP (open in new tab)",
+				es : "SAIKU - OLAP (abrir en una nueva pesta&ntilde;a)"
 			}
 		],
 		"saikuMapa" : [
 			{
 				pt : "SAIKU - OLAP (abrir em janela interna)",
-				en : "",
-				es : ""
+				en : "SAIKU - OLAP (open in internal window)",
+				es : "SAIKU - OLAP (abrir en una ventana interna)"
 			}
 		],
 		"refMapaAtual" : [
 			{
 				pt : "Mapa atual",
-				en : "",
-				es : ""
+				en : "Current map",
+				es : "Mapa actual"
 			}
 		],
 		"refMapaDinamico" : [
 			{
 				pt : "Mapa din&acirc;mico",
-				en : "",
-				es : ""
+				en : "Dynamic map",
+				es : "Mapa din&aacute;mico"
 			}
 		],
 		"naoPermitido" : [
 			{
 				pt : "Operacao nao autorizada para esse usuario",
-				en : "",
-				es : ""
+				en : "Unauthorized operation for this user",
+				es : "Operaci&oacute;n no autorizada para ese usuario"
 			}
 		],
 		"melhorcaminho" : [
 			{
 				pt : "Melhor caminho (raster)",
-				en : "",
-				es : ""
+				en : "Best way (raster)",
+				es : "Mejor camino (raster)"
 			}
 		],
 		"tolerancia" : [
 			{
 				pt : "Toler&acirc;ncia de busca (em pixels)",
-				en : "",
-				es : ""
+				en : "Search tolerance (in pixels)",
+				es : "Tolerancia de b&uacute;squeda (en Pixeles)"
 			}
 		],
 		"naoInstalado" : [
 			{
 				pt : "Ferramenta n&atilde;o dispon&iacute;vel nessa instala&ccedil;&atilde;o do i3Geo",
-				en : "",
-				es : ""
+				en : "Tool unavailable in this installation of i3geo",
+				es : "Herramienta no disponible en esta instalaci&oacute;n de i3geo"
 			}
 		],
 		"variaEscala" : [
 			{
 				pt : "Depend&ecirc;ncia da escala",
-				en : "",
-				es : ""
+				en : "Scale dependency",
+				es : "Dependencia de escala"
 			}
 		],
 		"mostraTodosLegenda" : [
 			{
 				pt : "todos",
-				en : "",
-				es : ""
+				en : "all",
+				es : "todos"
 			}
 		],
 		"mostraSoLegenda" : [
 			{
 				pt : "s&oacute; legenda",
-				en : "",
-				es : ""
+				en : "only legend",
+				es : "s&oacute;lo leyenda"
 			}
 		],
 		"removerDoMapa" : [
 			{
 				pt : "Remove a camada do mapa?",
-				en : "",
-				es : ""
+				en : "Do you want to remove the layer from map?",
+				es : "¿Se remueve la capa del mapa?"
 			}
 		],
 		"dicaBuscaRapida" : [
 			{
 				pt : "Abre uma janela flutuante com op&ccedil;&otilde;es de busca de dados em servi&ccedil;os como o Google Maps ou nas camadas exsitentes no mapa",
-				en : "",
-				es : ""
+				en : "It opens a window with options to search data in services like Google Maps or in the map existing layers",
+				es : "Abre una ventana con opciones de b&uacute;squeda de datos en servicios como Google Maps o en las capas existentes en el mapa"
 			}
 		],
 		"refresh" : [

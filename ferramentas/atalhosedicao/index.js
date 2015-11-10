@@ -122,7 +122,7 @@ i3GEOF.atalhosedicao =
 			}
 		});
 		$i("i3GEOFatalhosedicaoOpacidadeB-button").style.width = "50px";
-		
+
 		new YAHOO.widget.Button("i3GEOFatalhosedicaoTme", {
 			onclick : {
 				fn : function() {
@@ -141,6 +141,16 @@ i3GEOF.atalhosedicao =
 			}
 		});
 		$i("i3GEOFatalhosedicaoStorymap-button").style.width = "200px";
+
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoTemaComGrafico", {
+			onclick : {
+				fn : function() {
+					i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
+					i3GEO.tema.dialogo.graficotema();
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoFiltro-button").style.width = "200px";
 		//
 		//atualiza os campos que dependem de parametros de cada camada
 		//

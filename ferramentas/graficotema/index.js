@@ -40,6 +40,9 @@ Classe: i3GEOF.graficoTema
 
 */
 i3GEOF.graficoTema = {
+	propriedades : {
+		mesmoTema : false
+	},
 	tema : i3GEO.temaAtivo,
 	/*
 	Variavel: aguarde
@@ -137,7 +140,10 @@ i3GEOF.graficoTema = {
 
 	Cria a janela flutuante para controle da ferramenta.
 	*/
-	iniciaJanelaFlutuante: function(){
+	iniciaJanelaFlutuante: function(propriedades){
+		if(propriedades){
+			i3GEOF.graficoTema.propriedades = propriedades;
+		}
 		var janela,divid,temp,titulo;
 		if($i("i3GEOF.graficoTema")){
 			i3GEOF.graficoTema.inicia("i3GEOF.graficoTema_corpo");
@@ -261,7 +267,16 @@ i3GEOF.graficoTema = {
 				i3GEOF.graficoTema.aguarde.visibility = "hidden";
 				i3GEO.atualiza(retorno);
 			};
-			p = i3GEO.configura.locaplic+"/ferramentas/graficotema/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=graficotema&tema="+i3GEOF.graficoTema.tema+"&lista="+lista+"&tamanho="+tamanho+"&tipo="+tipo+"&outlinecolor="+outlinecolor+"&offset="+offset;
+			p = i3GEO.configura.locaplic+"/ferramentas/graficotema/exec.php?"
+			+ "g_sid="+i3GEO.configura.sid
+			+ "&funcao=graficotema"
+			+ "&tema="+i3GEOF.graficoTema.tema
+			+ "&lista="+lista
+			+ "&tamanho="+tamanho
+			+ "&tipo="+tipo
+			+ "&outlinecolor="+outlinecolor
+			+ "&offset="+offset
+			+ "&mesmoTema="+i3GEOF.graficoTema.propriedades.mesmoTema;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficotema",temp);
 		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.graficoTema.aguarde.visibility = "hidden";}

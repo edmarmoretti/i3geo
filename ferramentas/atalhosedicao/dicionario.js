@@ -54,5 +54,10 @@ i3GEOF.atalhosedicao.dicionario = {
 		pt : "Ferramentas com par&acirc;metros que podem ser armazenados no mapfile do tema",
 		en : "",
 		es : "Herramientas con par&aacute;metros que pueden ser almazenados en el mapfile del tema"
-	} ]
+	} ],
+	"temacomgrafico" : [{
+		pt : "Fei&ccedil;&otilde;es com Gr&aacute;ficos",
+		en : "",
+		es : "Feiciones con Gr&aacute;ficos"
+	}]
 };
