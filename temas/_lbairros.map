@@ -13,7 +13,7 @@ MAP
       "EDITAVEL"	"SIM"
       "ESQUEMATABELAEDITAVEL"	"i3geo_metaestat"
       "ITENS"	"gid,co_bairro,no_bairro,no_distr,no_municip"
-      "TEMA"	"Bairro via mapfile"
+      "TEMA"	"_Bairros POSTGIS"
       "COLUNAIDUNICO"	"gid"
       "COLUNAGEOMETRIA"	"the_geom"
       "TABELAEDITAVEL"	"bairros"
@@ -21,6 +21,7 @@ MAP
     NAME "_lbairros"
     STATUS DEFAULT
     TEMPLATE "none.htm"
+    TILEITEM "location"
     TYPE POLYGON
     UNITS METERS
     CLASS

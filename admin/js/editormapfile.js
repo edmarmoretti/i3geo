@@ -350,7 +350,7 @@ function montaTextoTemaMapfile(mapfile){
 	}
 	conteudo += "&nbsp;<img style="+i+";width:20px; onclick=\"javascript:window.open('../../interface/black_editor.php?&temaEdicao="+mapfile.codigo+"')\" title='"+ $trad("editarI3geo",i3GEOadmin.core.dicionario) +"' src=\"../imagens/i3geo2editor.jpg\" />";
 	conteudo += "&nbsp;<img style="+i+";width:20px; onclick=\"javascript:window.open('../../ms_criamapa.php?temasa="+mapfile.codigo+"&layers="+mapfile.codigo+"')\" title='"+ $trad("testarI3geo",i3GEOadmin.core.dicionario) +"' src=\"../imagens/i3geo2.jpg\" />";
-	conteudo += "<b>&nbsp;"+mapfile.codigo+"</b>&nbsp;<span class=iconeEditar title='"+$trad("editarNome",i3GEOadmin.core.dicionario)+"' onclick='alteraNomeTema(this)' style=cursor:pointer;color:gray id='idNome_"+mapfile.codigo+"'>"+mapfile.nome+"</span>";
+	conteudo += "<b>&nbsp;"+mapfile.codigo+"</b>&nbsp;<span class=iconeEditar title='"+$trad("editarNome",i3GEOadmin.core.dicionario)+"' onclick='alteraNomeTema(this,\""+mapfile.codigo+"\")' style=cursor:pointer;color:gray id='idNome_"+mapfile.codigo+"'>"+mapfile.nome+"</span>";
 	conteudo += "<br><img src=''style='display:none;' id='testeRapido"+mapfile.codigo+"' />";
 	if(mapfile.imagem != "" && $i("mostraMini").checked == true){
 		conteudo += "</b><br><img src='../../temas/miniaturas/"+mapfile.imagem+"'/>";
@@ -659,9 +659,9 @@ function clonarMapfile(codigoMap)
 	var largura = "300";
 	core_dialogoPergunta(handleYes,handleNo,mensagem,largura);
 }
-function alteraNomeTema(obj){
+function alteraNomeTema(obj,codigoMap){
 	var handleYes, handleNo, codigoMap, mensagem, largura = "300";
-	codigoMap = obj.id.replace("idNome_","");
+	
 	mensagem = ""+ $trad("novoTitulo",i3GEOadmin.core.dicionario) +"<br><input size=30 type=text value='"+obj.innerHTML+"' id=mudarNomePara />";
 	handleNo = function(){
 		this.hide();
