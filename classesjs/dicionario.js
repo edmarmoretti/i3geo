@@ -2368,50 +2368,50 @@ g_traducao = {
 		"refresh" : [
 			{
 				pt : "Refaz a &aacute;rvore, reconstruindo os &iacute;cones e lista de camadas",
-				en : "",
-				es : ""
+				en : "Remake the tree, rebuilding the icons and the layer list",
+				es : "Vuelva a hacer el &aacute;rbol, reconstruyendo los iconos y la lista de capas"
 			}
 		],
 		"lixeira" : [
 			{
 				pt : "Clique para ver a lista de camadas em uma janela flutuante com op&ccedil;&atilde;o para remover um ou mais camadas do mapa. Arraste uma camada sobre esse &iacute;cone para remov&ecirc;-la individualmente",
-				en : "",
-				es : ""
+				en : "Click to see the layer list on a floating window  ",
+				es : "Haga clic para ver la lista de capas en una ventana flotante con la opci&oacute;n de eliminar uan o m&aacute;s capas del mapa. Arrastre una capa sobre ese icono para removerla individualmente"
 			}
 		],
 		"filtraCam" : [
 			{
 				pt : "Permite filtrar a lista de camadas mostradas na &aacute;rvore conforme propriedades espec&iacute;ficas de cada uma",
-				en : "",
-				es : ""
+				en : "It allows to filter the layer tree-list according to layers particular properties",
+				es : "Permite filtrar la lista de capas mostradas mostradas en el &aacute;rbol de acuerdo a las propiedades espec&iacute;ficas de cada una"
 			}
 		],
 		"legenda" : [
 			{
 				pt : "Abre a legenda do mapa em uma janela flutuante",
-				en : "",
-				es : ""
+				en : "It opens the map legend in a floating window",
+				es : "Abre la leyenda del mapa en una ventana flotante "
 			}
 		],
 		"ferramMapa" : [
 			{
 				pt : "Mostra a lista de ferramentas que atuam sobre o mapa",
-				en : "",
-				es : ""
+				en : "It shows a list of tools which perform actions on the map",
+				es : "Muestra una lista de herramientas que act&uacute;an sobre el mapa"
 			}
 		],
 		"ferramCamadas" : [
 			{
 				pt : "Mostra a lista de ferramentas que atuam sobre camadas",
-				en : "",
-				es : ""
+				en : "It shows a list of tools which perform actions on the layers",
+				es : "Muestra una lista de herramientas que actúan sobre las capas"
 			}
 		],
 		"ajudaEditorOlSalva" : [
 			{
 				pt : "Para editar os atributos, utilize a ferramenta de identifica&ccedil;&atilde;o. &Eacute; necess&aacute;rio que exista uma coluna com identificadores &uacute;nicos na tabela a ser editada e que essa coluna esteja vis&iacute;vel na ferramenta de identifica&ccedil;&atilde;o.",
 				en : "",
-				es : ""
+				es : "Para editar los atributos, utilice la herramienta de identificaci&oacute;n. Es necesario que exista una columna con identificadores &uacute;nicos en la tabla a ser editada y que esa columna sea visible en la herramienta de identificaci&oacute;n."
 			}
 		],
 		"mascara" : [
