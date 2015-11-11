@@ -257,7 +257,9 @@ Alt-left - In&iacute;cio da linha<br>
 			</fieldset>
 		</form>
 	</div>
+	
 	<script type="text/javascript" src="../js/core.js"></script>
+	<script type="text/javascript" src="../dicionario/core.js"></script>
 	<script src="../../classesjs/classe_util.js" type="text/javascript"></script>
 	<script>
 i3GEO.configura = {locaplic: "../../"};
