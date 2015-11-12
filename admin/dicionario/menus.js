@@ -1,6 +1,6 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
-//i3GEOadmin.menus = {};
-i3GEOadmin.menus.dicionario = {
+i3GEOadmin.listamenu = {};
+i3GEOadmin.listamenu.dicionario = {
 	'menus' : [ {
 		pt : "Administra&ccedil;&atilde;o do i3geo - Menus",
 		en : "",
@@ -18,6 +18,91 @@ i3GEOadmin.menus.dicionario = {
 	} ],
     'adicionaMenu' : [ {
 		pt : "Adicionar um novo menu",
+		en : "",
+		es : ""
+	} ],
+    'nomeMenu' : [ {
+		pt : "nome padr&atilde;o do menu",
+		en : "",
+		es : ""
+	} ],
+    'nomeIn' : [ {
+		pt : "nome em ingl&ecirc;s (opcional)",
+		en : "",
+		es : ""
+	} ],
+    'nomeEs' : [ {
+		pt : "nome em espanhol (opcional)",
+		en : "",
+		es : ""
+	} ],
+    'nomeIt' : [ {
+		pt : "nome em italiano (opcional)",
+		en : "",
+		es : ""
+	} ],
+    'publicado' : [ {
+		pt : "publicado para todos verem?",
+		en : "",
+		es : ""
+	} ],
+    'perfil' : [ {
+		pt : "perfis",
+		en : "",
+		es : ""
+	} ],
+    'iniciaAberto' : [ {
+		pt : "inicia aberto?",
+		en : "",
+		es : ""
+	} ],
+    'descricao' : [ {
+		pt : "descri&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
 		en : "",
 		es : ""
 	} ],

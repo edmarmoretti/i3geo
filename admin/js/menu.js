@@ -58,17 +58,17 @@ i3GEOadmin.menus = {
 	},
 	defColunas: function(){
 		return [
-			{key:"excluir",label:"excluir",formatter:i3GEOadmin.menus.formatExclui},
-			{key:"mais",label:"editar",formatter:i3GEOadmin.menus.formatMais},
+			{key:"excluir",label:$trad('excluir',i3GEOadmin.core.dicionario),formatter:i3GEOadmin.menus.formatExclui},
+			{key:"mais",label:$trad('editar',i3GEOadmin.core.dicionario),formatter:i3GEOadmin.menus.formatMais},
 			{label:"id",key:"id_menu", formatter:i3GEOadmin.menus.formatTexto},
-			{label:"nome padr&atilde;o do menu",resizeable:true,key:"nome_menu", formatter:i3GEOadmin.menus.formatTexto},
-			{label:"nome em ingl&ecirc;s (opcional)",resizeable:true,key:"en", formatter:i3GEOadmin.menus.formatTexto},
-			{label:"nome em espanhol (opcional)",resizeable:true,key:"es", formatter:i3GEOadmin.menus.formatTexto},
-			{label:"nome em italiano (opcional)",resizeable:true,key:"it", formatter:i3GEOadmin.menus.formatTexto},
-			{label:"publicado para todos verem?",key:"publicado_menu", formatter:i3GEOadmin.menus.formatTexto},
-			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:i3GEOadmin.menus.formatTexto},
-			{label:"inicia aberto?",key:"aberto", formatter:i3GEOadmin.menus.formatTexto},
-			{label:"descri&ccedil;&atilde;o",resizeable:true,key:"desc_menu", formatter:i3GEOadmin.menus.formatTexto}
+			{label:$trad("nomeMenu",i3GEOadmin.listamenu.dicionario),resizeable:true,key:"nome_menu", formatter:i3GEOadmin.menus.formatTexto},
+			{label:$trad("nomeIn",i3GEOadmin.listamenu.dicionario),resizeable:true,key:"en", formatter:i3GEOadmin.menus.formatTexto},
+			{label:$trad("nomeEs",i3GEOadmin.listamenu.dicionario),resizeable:true,key:"es", formatter:i3GEOadmin.menus.formatTexto},
+			{label:$trad("nomeIt",i3GEOadmin.listamenu.dicionario),resizeable:true,key:"it", formatter:i3GEOadmin.menus.formatTexto},
+			{label:$trad("publicado",i3GEOadmin.listamenu.dicionario),resizeable:true,key:"publicado_menu", formatter:i3GEOadmin.menus.formatTexto},
+			{label:$trad("perfil",i3GEOadmin.listamenu.dicionario),resizeable:true,key:"perfil_menu", formatter:i3GEOadmin.menus.formatTexto},
+			{label:$trad("iniciaAberto",i3GEOadmin.listamenu.dicionario),resizeable:true,key:"aberto", formatter:i3GEOadmin.menus.formatTexto},
+			{label:$trad("descricao",i3GEOadmin.listamenu.dicionario),resizeable:true,key:"desc_menu", formatter:i3GEOadmin.menus.formatTexto}
 		];
 	},
 	/*
@@ -91,7 +91,7 @@ i3GEOadmin.menus = {
 	obtem: function(){
 		i3GEOadmin.menus.dados = "";
 		core_carregando("ativa");
-		core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","i3GEOadmin.menus.tabela");
+		core_pegaDados($trad("msgBuscaMenu",i3GEOadmin.core.dicionario),"../php/menutemas.php?funcao=pegaMenus","i3GEOadmin.menus.tabela");
 	},
 	tabela: function(dados){
 		if(i3GEOadmin.menus.dados == ""){

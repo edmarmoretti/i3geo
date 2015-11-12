@@ -281,18 +281,18 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'menu' : [ {
+		pt : "Menu",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'excluiTitulo' : [ {
+		pt : "exclui",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'msgBuscaMenu' : [ {
+		pt : "buscando menus...",
 		en : "",
 		es : ""
 	} ],
