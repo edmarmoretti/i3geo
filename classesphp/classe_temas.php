@@ -776,7 +776,7 @@ $wkt - boolean indicando se $xy e um WKT
 					//$c->set("status",MS_DELETE);
 					$pinlayer->setmetadata("TEMA",$texto);
 					$pinlayer->setmetadata("tiles","nao");
-					$pinlayer->set("type",MS_LAYER_ANNOTATION);
+					$pinlayer->set("type",MS_LAYER_POINT);
 					$pinlayer->set("opacity","100");
 				break;
 			}
@@ -820,6 +820,7 @@ $wkt - boolean indicando se $xy e um WKT
 			}
 			$this->adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,"");
 		}
+
 		$pinlayer->addfeature($shp);
 		if($nomeTema != ""){
 			$pinlayer->setmetadata("tema",$nomeTema);
@@ -1211,7 +1212,6 @@ Adiciona LABEL em uma classe de um tema
 				$novac->updateFromString($s);
 			}
 		}
-		
 		if($this->vi >= 60300){
 			$label = $novac->getLabel(0);
 		}
@@ -1223,14 +1223,15 @@ Adiciona LABEL em uma classe de um tema
 		}
 		if($fonte != "bitmap")
 		{
-			$label->set("type",MS_TRUETYPE);
+			//para funcionar na versao 7 do mapserver
+			$label->updateFromString("LABEL type truetype END");
 			$label->set("font",$fonte);
 			$label->set("size",$tamanho);
 		}
 		else
 		{
-			$label->set("type",MS_BITMAP);
-			//$label->set("font",$fonte);
+			//para funcionar na versao 7 do mapserver
+			$label->updateFromString("LABEL type bitmap END");
 			$t = MS_TINY;
 			if ($tamanho > 5 ){
 				$t = MS_TINY;
