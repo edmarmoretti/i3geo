@@ -2528,7 +2528,7 @@ g_traducao = {
 		],
 		"dpol" : [
 			{
-				pt : "digitalizar pol&iacute;gono",
+				pt : "digitalizar poligono",
 				en : "",
 				es : ""
 			}
