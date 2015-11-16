@@ -296,13 +296,13 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'nao' : [ {
+		pt : "n&atilde;o",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'sim' : [ {
+		pt : "sim",
 		en : "",
 		es : ""
 	} ],

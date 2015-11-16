@@ -129,7 +129,7 @@ i3GEOadmin.menus = {
 				}
 				if (column.key == 'mais'){
 					core_carregando("ativa");
-					core_carregando("buscando dados...");
+					core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 					$clicouId = registro.getData('id_menu');
 					$recordid = registro.getId();
 					sUrl = "../php/menutemas.php?funcao=pegamenus&id_menu="+$clicouId;
@@ -188,39 +188,39 @@ i3GEOadmin.menus = {
 	formulario: function(i){
 		var param = {
 				"linhas":[
-					{titulo:"Nome padr&atilde;o:",id:"Enome_menu",size:"50",value:i.nome_menu,tipo:"text",div:""},
-					{titulo:"Descri&ccedil;&atilde;o (opcional):",id:"Edesc_menu",size:"50",value:i.desc_menu,tipo:"text",div:""},
-					{titulo:"Nome em ingl&ecirc;s (opcional):",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
-					{titulo:"Espanhol (opcional):",id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
-					{titulo:"Italiano (opcional):",id:"Eit",size:"50",value:i.it,tipo:"text",div:""},
-					{titulo:"Perfis (opcional):",id:"Eperfil_menu",size:"50",value:i.perfil_menu,tipo:"text",div:""}
+					{titulo:$trad("nomePadrao",i3GEOadmin.listamenu.dicionario),id:"Enome_menu",size:"50",value:i.nome_menu,tipo:"text",div:""},
+					{titulo:$trad("descricao1",i3GEOadmin.listamenu.dicionario),id:"Edesc_menu",size:"50",value:i.desc_menu,tipo:"text",div:""},
+					{titulo:$trad("nomeIn1",i3GEOadmin.listamenu.dicionario),id:"Een",size:"50",value:i.en,tipo:"text",div:""},
+					{titulo:$trad("nomeEs1",i3GEOadmin.listamenu.dicionario),id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
+					{titulo:$trad("nomeIt1",i3GEOadmin.listamenu.dicionario),id:"Eit",size:"50",value:i.it,tipo:"text",div:""},
+					{titulo:$trad("perfil1",i3GEOadmin.listamenu.dicionario),id:"Eperfil_menu",size:"50",value:i.perfil_menu,tipo:"text",div:""}
 				]
 			},
 			ins = "";
 		ins += core_geraLinhas(param);
-		ins += "<p>Publicado para todos verem?<br>";
+		ins += "<p>"+ $trad("publicado1",i3GEOadmin.listamenu.dicionario) +"<br>";
 		ins += "<select  id='Epublicado_menu' />";
 		ins += "<option value='' ";
 		if (i.publicado_menu == ""){ins += "selected";}
 		ins += ">---</option>";
 		ins += "<option value='SIM' ";
 		if ((i.publicado_menu).toLowerCase() == "sim"){ins += "selected";}
-		ins += " >sim</option>";
+		ins += " >"+ $trad("sim",i3GEOadmin.core.dicionario) +"</option>";
 		ins += "<option value='NAO' ";
 		if ((i.publicado_menu).toLowerCase() == "nao"){ins += "selected";}
-		ins += " >n&atilde;o</option>";
+		ins += " >"+ $trad("nao",i3GEOadmin.core.dicionario) +"</option>";
 		ins += "</select></p>";
-		ins += "<p>Inicia aberto na &aacute;rvore?<br>";
+		ins += "<p>"+ $trad("iniciaAberto1",i3GEOadmin.listamenu.dicionario) +"<br>";
 		ins += "<select  id='Eaberto' />";
 		ins += "<option value='' ";
 		if (i.aberto == ""){ins += "selected";}
 		ins += ">---</option>";
 		ins += "<option value='SIM' ";
 		if ((i.aberto).toLowerCase() == "sim"){ins += "selected";}
-		ins += " >sim</option>";
+		ins += " >"+ $trad("sim",i3GEOadmin.core.dicionario) +"</option>";
 		ins += "<option value='NAO' ";
 		if ((i.aberto).toLowerCase() == "nao"){ins += "selected";}
-		ins += " >n&atilde;o</option>";
+		ins += " >"+ $trad("nao",i3GEOadmin.core.dicionario) +"</option>";
 		ins += "</select></p>";
 		return(ins);
 	},
@@ -232,7 +232,7 @@ i3GEOadmin.menus = {
 		i3GEOadmin.menus.letra = letra;
 		if(i3GEOadmin.menus.dados == ""){
 			core_carregando("ativa");
-			core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","i3GEOadmin.menus.atualizaFiltro");
+			core_pegaDados($trad("msgBuscaMenu",i3GEOadmin.core.dicionario),"../php/menutemas.php?funcao=pegaMenus","i3GEOadmin.menus.atualizaFiltro");
 			return;
 		}
 		var i,temp,
@@ -253,7 +253,7 @@ i3GEOadmin.menus = {
 		i3GEOadmin.menus.tabela(novo);
 	},
 	exclui: function(id,row){
-		var mensagem = " excluindo o registro do id= "+id,
+		var mensagem = $trad("msgExclui",i3GEOadmin.core.dicionario)+id,
 			sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=menus";
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.menus.dataTable);
 		i3GEOadmin.menus.dados = "";
@@ -271,13 +271,13 @@ i3GEOadmin.menus = {
 		}
 		par += "&id_menu="+id;
 		core_carregando("ativa");
-		core_carregando(" gravando o registro do id= "+id);
+		core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 		sUrl = "../php/menutemas.php?funcao=alteraMenus"+par;
 		callback = {
 	  		success:function(o){
 	  			try	{
 	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+	  					core_carregando("<span style=color:red >"+ $trad("msgErroExclui",i3GEOadmin.core.dicionario) +"</span>");
 	  					setTimeout("core_carregando('desativa')",3000);
 	  				}
 	  				else{

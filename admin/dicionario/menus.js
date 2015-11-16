@@ -61,43 +61,43 @@ i3GEOadmin.listamenu.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'nomePadrao' : [ {
+		pt : "Nome padr&atilde;o:",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'descricao1' : [ {
+		pt : "Descri&ccedil;&atilde;o (opcional):",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'nomeIn1' : [ {
+		pt : "Nome em ingl&ecirc;s (opcional):",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'nomeEs1' : [ {
+		pt : "Espanhol (opcional):",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'nomeIt1' : [ {
+		pt : "Italiano (opcional):",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'perfil1' : [ {
+		pt : "Perfis (opcional):",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'publicado1' : [ {
+		pt : "Publicado para todos verem?",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'iniciaAberto1' : [ {
+		pt : "Inicia aberto na &aacute;rvore?",
 		en : "",
 		es : ""
 	} ],
