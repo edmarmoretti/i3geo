@@ -1031,18 +1031,29 @@ i3GEO.editorOL =
 				i3GEO.editorOL.interacoes.push(draw);
 				i3GEO.Interface.openlayers.interacoes[0].setActive(false);
 				draw.on("drawend", function(evt) {
+					var simbolo, url;
+					url = i3GEO.editorOL.simbologia.externalGraphic;
+					if(url === ""){
+						simbolo = new ol.style.Circle({
+							radius: i3GEO.editorOL.simbologia.pointRadius,
+							fill: new ol.style.Fill({
+								color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
+							}),
+							stroke: new ol.style.Stroke({
+								color: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
+								width: i3GEO.editorOL.simbologia.pointRadius / 3
+							})
+						});
+					}
+					else{
+						simbolo = new ol.style.Icon({
+							src : url,
+							size : [i3GEO.editorOL.simbologia.graphicWidth,i3GEO.editorOL.simbologia.graphicHeight]
+						});
+					}
 					evt.feature.setStyle(
 						new ol.style.Style({
-							image: new ol.style.Circle({
-								radius: i3GEO.editorOL.simbologia.pointRadius,
-								fill: new ol.style.Fill({
-									color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
-								}),
-								stroke: new ol.style.Stroke({
-									color: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
-									width: i3GEO.editorOL.simbologia.pointRadius / 3
-								})
-							})
+							image: simbolo
 						})
 					);
 					evt.feature.setId(i3GEO.util.uid());
@@ -1168,11 +1179,8 @@ i3GEO.editorOL =
 							i3GEO.editorOL.idsSelecionados.push(id);
 							f.setId(id);
 							s = f.getStyle();
+
 							if(s.getImage()){
-								f.setProperties({
-									fillColor: s.getImage().getFill().getColor(),
-									strokeColor: s.getImage().getStroke().getColor()
-								});
 								f.setStyle(
 									new ol.style.Style({
 										image: new ol.style.Circle({
@@ -1187,11 +1195,32 @@ i3GEO.editorOL =
 										})
 									})
 								);
+								if(!s.getImage().getSrc){
+									f.setProperties({
+										fillColor: s.getImage().getFill().getColor(),
+										strokeColor: s.getImage().getStroke().getColor(),
+										externalGraphic: "",
+										graphicHeight : 25,
+										graphicWidth : 25
+									});
+								}
+								else{
+									f.setProperties({
+										fillColor: "",
+										strokeColor: "",
+										externalGraphic: s.getImage().getSrc(),
+										graphicHeight : s.getImage().getSize()[1],
+										graphicWidth : s.getImage().getSize()[0]
+									});
+								}
 							}
 							else{
 								f.setProperties({
 									fillColor: s.getFill().getColor(),
-									strokeColor: s.getStroke().getColor()
+									strokeColor: s.getStroke().getColor(),
+									externalGraphic: "",
+									graphicHeight : 25,
+									graphicWidth : 25
 								});
 								s.getFill().setColor('rgba(255, 255, 255, 0.5)');
 								s.getStroke().setColor('blue');
@@ -1597,13 +1626,24 @@ i3GEO.editorOL =
 			for(i=0; i<nsel; i++){
 				f = s.getFeatureById(i3GEO.editorOL.idsSelecionados[i]);
 				if(f){
-					f.setProperties({
-						fillColor: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
-						strokeColor: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
-						width: i3GEO.editorOL.simbologia.strokeWidth,
-						fontSize: i3GEO.editorOL.simbologia.fontSize,
-						fontColor: i3GEO.editorOL.simbologia.fontColor
-					});
+					if(estilo === "externalGraphic" || estilo === "graphicWidth" || estilo === "graphicHeight"){
+						f.setProperties({
+							src: i3GEO.editorOL.simbologia.externalGraphic,
+							size: [
+							       i3GEO.editorOL.simbologia.graphicWidth,
+							       i3GEO.editorOL.simbologia.graphicHeight
+							]
+						});
+					}
+					else{
+						f.setProperties({
+							fillColor: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
+							strokeColor: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
+							width: i3GEO.editorOL.simbologia.strokeWidth,
+							fontSize: i3GEO.editorOL.simbologia.fontSize,
+							fontColor: i3GEO.editorOL.simbologia.fontColor,
+						});
+					}
 				}
 			}
 		},
@@ -1713,42 +1753,38 @@ i3GEO.editorOL =
 					+ '<div class="i3geoForm100 i3geoFormIconeAquarela" >'
 					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeColor\',\'i3GEOEditorOLcorContorno\');return false;" type="text" id="i3GEOEditorOLcorContorno" value="' + i3GEO.editorOL.simbologia.strokeColor + '" />'
 					+ '</div>'
-					+ '<p class=paragrafo >Cor do preenchimento</p>'
+					+ '<br><p class=paragrafo >Cor do preenchimento</p>'
 					+ '<div class="i3geoForm100 i3geoFormIconeAquarela" >'
 					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'fillColor\',\'i3GEOEditorOLcorPre\');return false;" type="text" id="i3GEOEditorOLcorPre" value="' + i3GEO.editorOL.simbologia.fillColor + '" />'
 					+ '</div>'
-					+ '<p class=paragrafo >Cor da fonte</p>'
+					+ '<br><p class=paragrafo >Cor da fonte</p>'
 					+ '<div class="i3geoForm100 i3geoFormIconeAquarela" >'
 					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'fontColor\',\'i3GEOEditorOLcorFonte\');return false;" type="text" id="i3GEOEditorOLcorFonte" value="' + i3GEO.editorOL.simbologia.fontColor + '" />'
 					+ '</div>'
-					+ '<p class=paragrafo >Tamanho da fonte</p>'
+					+ '<br><p class=paragrafo >Tamanho da fonte</p>'
 					+ '<div class="i3geoForm100 i3geoFormIconeEdita" >'
 					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'fontSize\',\'i3GEOEditorOLfontsize\');return false;" type="text" id="i3GEOEditorOLfontsize" value="' + i3GEO.editorOL.simbologia.fontSize + '" />'
 					+ '</div>'
-					+ '<p class=paragrafo >Opacidade (de 0 a 1)</p>'
+					+ '<br><p class=paragrafo >Opacidade (de 0 a 1)</p>'
 					+ '<div class="i3geoForm100 i3geoFormIconeEdita" >'
 					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'opacidade\',\'i3GEOEditorOLopacidade\');return false;" type="text" id="i3GEOEditorOLopacidade" value="' + i3GEO.editorOL.simbologia.opacidade + '" />'
 					+ '</div>'
-					+ '<p class=paragrafo >Largura da linha/contorno</p>'
+					+ '<br><p class=paragrafo >Largura da linha/contorno</p>'
 					+ '<div class="i3geoForm100 i3geoFormIconeEdita" >'
 					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeWidth\',\'i3GEOEditorOLlarguraLinha\');return false;" type="text" id="i3GEOEditorOLlarguraLinha" value="' + i3GEO.editorOL.simbologia.strokeWidth + '" />'
+					+ '</div>'
+					+ '<br><p class=paragrafo >Url de uma imagem</p>'
+					+ '<div class="i3geoForm i3geoFormIconeEdita" >'
+					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'externalGraphic\',\'i3GEOEditorOLexternalGraphic\');return false;" type="text" id="i3GEOEditorOLexternalGraphic" value="' + i3GEO.editorOL.simbologia.externalGraphic + '" />'
+					+ '</div>'
+					+ '<br><p class=paragrafo >Largura da imagem</p>'
+					+ '<div class="i3geoForm100 i3geoFormIconeEdita" >'
+					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'graphicWidth\',\'i3GEOEditorOLgraphicWidth\');return false;" type="text" id="i3GEOEditorOLgraphicWidth" value="' + i3GEO.editorOL.simbologia.graphicWidth + '" />'
+					+ '</div>'
+					+ '<br><p class=paragrafo >Altura da imagem</p>'
+					+ '<div class="i3geoForm100 i3geoFormIconeEdita" >'
+					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'graphicHeight\',\'i3GEOEditorOLgraphicHeight\');return false;" type="text" id="i3GEOEditorOLgraphicHeight" value="' + i3GEO.editorOL.simbologia.graphicHeight + '" />'
 					+ '</div>';
-
-						//TODO incluir propriedades de uma figura
-						/*
-						+ '	<tr>'
-						+ '		<td>Url de uma figura</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'externalGraphic\',\'i3GEOEditorOLexternalGraphic\')" type="text" style="cursor:text" id="i3GEOEditorOLexternalGraphic" size="22" value="'
-						+ i3GEO.editorOL.simbologia.externalGraphic
-						+ '" /></td><td></td>'
-						+ '	</tr>'
-						+ '	<tr>'
-						+ '		<td>Largura e altura</td><td><input onchange="i3GEO.editorOL.mudaSimbolo(\'graphicWidth\',\'i3GEOEditorOLgraphicWidth\')" type="text" style="cursor:text" id="i3GEOEditorOLgraphicWidth" size="4" value="'
-						+ i3GEO.editorOL.simbologia.graphicWidth
-						+ '" />&nbsp;<input onchange="i3GEO.editorOL.mudaSimbolo(\'graphicHeight\',\'i3GEOEditorOLgraphicHeight\')" type="text" style="cursor:text" id="i3GEOEditorOLgraphicHeight" size="4" value="'
-						+ i3GEO.editorOL.simbologia.graphicHeight
-						+ '" /></td><td></td>'
-						+ '	</tr>'
-						*/
 
 						//TODO implementar ao atualizar OL3
 						/*
@@ -2122,10 +2158,24 @@ i3GEO.editorOL =
 							})
 						})
 					);
-					f.setProperties({
-						fillColor: st.getImage().getFill().getColor(),
-						strokeColor: st.getImage().getStroke().getColor()
-					});
+					if(st.getImage().getSrc){
+						f.setProperties({
+							fillColor: "",
+							strokeColor: "",
+							externalGraphic: st.getImage().getSrc(),
+							graphicHeight : st.getImage().getSize()[1],
+							graphicWidth : st.getImage().getSize()[0]
+						});
+					}
+					else{
+						f.setProperties({
+							fillColor: st.getImage().getFill().getColor(),
+							strokeColor: st.getImage().getStroke().getColor(),
+							externalGraphic: "",
+							graphicHeight: "",
+							graphicWidth: ""
+						});
+					}
 				}
 				else{
 					f.setProperties({
@@ -2148,20 +2198,32 @@ i3GEO.editorOL =
 					st = f.getStyle();
 					//caso de ponto
 					if(st.getImage()){
-						f.setStyle(
-							new ol.style.Style({
-								image: new ol.style.Circle({
-									radius: i3GEO.editorOL.simbologia.pointRadius,
-									fill: new ol.style.Fill({
-										color: f.getProperties().fillColor
-									}),
-									stroke: new ol.style.Stroke({
-										color: f.getProperties().strokeColor,
-										width: i3GEO.editorOL.simbologia.pointRadius / 3
+						if(st.getImage().getSrc || f.getProperties().externalGraphic != ""){
+							f.setStyle(
+								new ol.style.Style({
+									image: new ol.style.Icon({
+										src : f.getProperties().externalGraphic,
+										size : [f.getProperties().graphicWidth,f.getProperties().graphicHeight]
 									})
 								})
-							})
-						);
+							);
+						}
+						else{
+							f.setStyle(
+								new ol.style.Style({
+									image: new ol.style.Circle({
+										radius: i3GEO.editorOL.simbologia.pointRadius,
+										fill: new ol.style.Fill({
+											color: f.getProperties().fillColor
+										}),
+										stroke: new ol.style.Stroke({
+											color: f.getProperties().strokeColor,
+											width: i3GEO.editorOL.simbologia.pointRadius / 3
+										})
+									})
+								})
+							);
+						}
 					}
 					else{
 						st.getFill().setColor(f.getProperties().fillColor);
@@ -2185,8 +2247,14 @@ i3GEO.editorOL =
 			s = i3GEO.desenho.layergrafico.getSource();
 			f = s.getFeatureById(id);
 			if(f){
-				f.getStyle().getFill().setColor(f.getProperties().fillColor);
-				f.getStyle().getStroke().setColor(f.getProperties().strokeColor);
+				if(f.getStyle().getSrc()){
+					f.getStyle().setSrc(f.getProperties().externalGraphic);
+					f.getStyle().setSize([f.getProperties().graphicWidth,f.getProperties().graphicHeight]);
+				}
+				else{
+					f.getStyle().getFill().setColor(f.getProperties().fillColor);
+					f.getStyle().getStroke().setColor(f.getProperties().strokeColor);
+				}
 			}
 			i3GEO.editorOL.idsSelecionados.remove(id);
 			i3GEO.desenho.layergrafico.getSource().changed();
@@ -2274,7 +2342,8 @@ i3GEO.editorOL =
 				i3GEO.editorOL.idsSelecionados.push(id);
 				f.setProperties({
 					fillColor: f.getStyle().getFill().getColor(),
-					strokeColor: f.getStyle().getStroke().getColor()
+					strokeColor: f.getStyle().getStroke().getColor(),
+					externalGraphic: ""
 				});
 				f.getStyle().getFill().setColor('rgba(255, 255, 255, 0.5)');
 				f.getStyle().getStroke().setColor('blue');
