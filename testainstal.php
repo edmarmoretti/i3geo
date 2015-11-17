@@ -3,6 +3,15 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="admin/html/admin.css">
+<style>
+body {
+	padding-top: 0px;
+	COLOR: #2F4632;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: rgb(250, 250, 250);
+	margin: auto;
+}
+</style>
 </head>
 <script>
 try
@@ -18,7 +27,7 @@ catch(ee)
 	}
 }
 </script>
-<body class="yui-skin-sam fundoPonto">
+<body class="yui-skin-sam">
 
 	<div class="bordaSuperior">&nbsp;</div>
 	<div class="mascaraPrincipal" id="divGeral" style="text-align: left">
@@ -84,10 +93,10 @@ catch(ee)
 		error_reporting(0);
 		//echo "<pre>\n";
 		echo "<span style=font-size:10px >Observa&ccedil;&atilde;o: se voc&ecirc; estiver usando Linux e a biblioteca CAIRO estiver instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e geral1debianv6.map para remover os coment&aacute;rios do OUTPUTFORMAT que utiliza SVG com o drive Cairo</span><br>\n";
-		echo "<br><b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
+		echo "<br><b>TESTE DE INSTALA&Ccedil;&Atilde;O DO i3Geo</b><br>\n";
 		include ("versao.php");
-		echo "<br><b>$mensagemInicia </b><br><br> \n";
-		echo "<br>Para mais informa&ccedil;&otilde;es sobre a instala&ccedil;&atilde;o de pacotes complementares, como o SAIKU e ferramentas que precisam de softwares espec&iacute;ficos, veja o link <a href='http://moodle.gvsig-training.com/course/view.php?id=11' >http://moodle.gvsig-training.com/course/view.php?id=11</a></b><br><br> \n";
+		echo "<br><b>$mensagemInicia </b><br> \n";
+		echo "<br>Para mais informa&ccedil;&otilde;es sobre a instala&ccedil;&atilde;o de pacotes complementares, como o SAIKU e ferramentas que precisam de softwares espec&iacute;ficos, veja o link <a href='http://moodle.gvsig-training.com/course/view.php?id=11' >http://moodle.gvsig-training.com/course/view.php?id=11</a></b><br> \n";
 		//ip
 		$ip = "UNKNOWN";
 		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
@@ -105,6 +114,7 @@ catch(ee)
 		echo "<br>MapServer: <br>";
 		echo ms_GetVersion();
 		echo "<br><br>";
+		echo "Array que armazena os par&acirc;metros da vers&atilde;o:<br><br>";
 		var_dump (versao())."<br><br>";
 		if(!function_exists("ms_GetVersion"))
 		{
@@ -113,8 +123,9 @@ catch(ee)
 		if (get_cfg_var("safe_mode") == 1){
 			echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
 		}
-		echo "<br><br>As seguintes letras devem aparecer corretamente acentuadas: çÇãâáÁóÓ";
-		echo "<br>Caso contr&aacute;rio, certifique-se que o par&acirc;metro de configura&ccedil;&atilde;o do Apache <b>AddDefaultCharset</b> esteja desativado.";
+		echo "<br><br>As seguintes letras devem aparecer corretamente acentuadas: ";
+		echo "<br><br>çÇãâáÁóÓ";
+		echo "<br><br>Caso contr&aacute;rio, verifique os par&acirc;metros de configura&ccedil;&atilde;o do Apache <b>AddDefaultCharset (httpd.conf) e default_charset (php.ini)</b> (default_charset='' no php.ini geralmente funciona).";
 		//executa as opcoes linux definidas no formulario
 		if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaPastaMstmp"] == "on"){
 			echo "<br>Criando a pasta $dir_tmp \n";
@@ -201,23 +212,21 @@ catch(ee)
 		var_dump( $exts );
 
 		echo "</pre>Existe o ms_configura.php? <br>";
-		if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo(" ms_configura n&atilde;o encontrado");
-		}
+		if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo(" ms_configura n&atilde;o encontrado");}
 		echo "Incluindo...\n<br>";
 		include ("ms_configura.php");
-		echo "Mensagem de inicializa&ccedil;&atilde;o: <b>$mensagemInicia </b><br><br> \n";
-		echo "dir_tmp = $dir_tmp \n<br>";
-		echo "locmapserv = $locmapserv \n";
-		echo "\n<br>";
-		echo "Este php est&aacute; em ".getcwd()."\n";
-		echo "<br>O diretorio de arquivos SESSION tempor&aacute;rio &eacute;: ".session_save_path()."<br>\n";
+		echo "<br>Mensagem de inicializa&ccedil;&atilde;o: <b>$mensagemInicia </b> \n";
+		echo "<br><br>dir_tmp = $dir_tmp \n";
+		echo "<br><br>locmapserv = $locmapserv \n";
+		echo "<br><br>Este php est&aacute; em ".getcwd()."\n";
+		echo "<br><br>O diretorio de arquivos SESSION tempor&aacute;rio &eacute;: ".session_save_path()."\n";
 		if($conexaoadmin == "" && file_exists($locaplic."/admin/admin.db")){
-			echo "<br>As permiss&otilde;es do banco de dados $locaplic/admin/admin.db s&atilde;o (se o arquivo estiver bloqueado, o sistema de administra&ccedil;&atilde;o n&atilde;o ir&aacute; funcionar):<br>";
-			echo permissoesarquivo($locaplic."/admin/admin.db")."<br>";
+			echo "<br><br>As permiss&otilde;es do banco de dados $locaplic/admin/admin.db s&atilde;o (se o arquivo estiver bloqueado, o sistema de administra&ccedil;&atilde;o n&atilde;o ir&aacute; funcionar):<br>";
+			echo permissoesarquivo($locaplic."/admin/admin.db");
 		}
-		echo "<pre>";
 		include_once("admin/php/conexao.php");
-		echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
+		echo "<br><br>Verificando banco de dados de administra&ccedil;&atilde;o...\n";
+		echo "<pre>";
 		//TODO Verificar ao fechar versao - verificar tabelas
 		$tabelas = array(
 				"i3geoadmin_sistemasf"=>"abrir_funcao,h_funcao,id_funcao,id_sistema,nome_funcao,perfil_funcao,w_funcao",
@@ -299,7 +308,7 @@ catch(ee)
 			}
 		}
 		echo "\n";
-		echo "</pre><br>localizando o cgi...\n";
+		echo "</pre><br>Localizando o cgi...\n";
 		$proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 		$server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 		$enderecocgi = $proto.$server.$locmapserv;
@@ -335,7 +344,7 @@ catch(ee)
 		$f = @fopen($dir_tmp."/teste.txt",w);
 		@fclose($f);
 		if (file_exists($dir_tmp."/teste.txt")) {
-			echo " do Mapserver <br>ok<br>\n"; 
+			echo " do Mapserver <br>ok<br><br>\n"; 
 		}
 		else {
 			saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio $dir_tmp");
@@ -343,7 +352,7 @@ catch(ee)
 		$f = @fopen(session_save_path()."/teste.txt",w);
 		@fclose($f);
 		if (file_exists(session_save_path()."/teste.txt")) {
-			echo " da SESSION PHP <br>ok<br>\n"; 
+			echo " da SESSION PHP <br>ok<br><br>\n"; 
 		}
 		else {
 			saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio da SESSION");
@@ -354,27 +363,23 @@ catch(ee)
 		$versao = versao();
 		$versao = $versao["principal"];
 		if(isset($base) && $base != ""){
-			if(file_exists($base))
-			{
+			if(file_exists($base)){
 				$f = $base;
 			}
-			else
-			{$f = $locaplic."/aplicmap/".$base.".map";
+			else{
+				$f = $locaplic."/aplicmap/".$base.".map";
 			}
 			if(!file_exists($base)){
 				echo "<span style=color:red >ARQUIVO $base N&Acirc;O FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
 				exit;
 			}
 		}
-		else
-		{
+		else{
 			$f = "";
-			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
 				$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
 			}
-			else
-			{
+			else{
 				if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 					$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 				}
@@ -384,30 +389,29 @@ catch(ee)
 				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 					$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 				}
-				if($f == "")
-				{
+				if($f == ""){
 					$f = $locaplic."/aplicmap/geral1v".$versao.".map";
 				}
 			}
 		}
 		echo "<br>O arquivo mapfile de iniciliza&ccedil;&atilde;o &eacute;: $f<br>\n";
 		echo "<br><b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no $f):</b>\n";
-		echo "<br>Criando o objeto com ms_newMapObj...";
+		echo "<br><br>Criando o objeto com ms_newMapObj...";
 		$mapa = ms_newMapObj($f);
-
-		for($i=0;$i<($mapa->numlayers);$i++)
-		{
+		//para evitar erros que possam ser originados da conexao com o banco
+		for($i=0;$i<($mapa->numlayers);$i++){
 			$layern = $mapa->getLayer($i);
-			if ($layern->connectiontype == MS_POSTGIS )
-			{
+			if ($layern->connectiontype == MS_POSTGIS )	{
 				$layern->set("status",MS_OFF);
 			}
 		}
-
-		
+		$l = $mapa->getLayerByname("mundo");
+		if($l != ""){
+			$l->set("status",MS_DEFAULT);
+		}
 		$imgo = @$mapa->draw();
 		$nome = ($imgo->imagepath)."teste.png";
-		echo "<p>Nome da imagem gerada: $nome </p>";
+		echo "<br><br>Nome da imagem gerada: $nome ";
 
 		if (!$imgo){
 			echo "Problemas ao gerar o mapa<br>";
@@ -450,11 +454,11 @@ catch(ee)
 			$error = $error->next();
 		}
 		echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no estadosl.map ou estadoslwindows.map):</b>\n";
-		echo "Um problema bastante comum &eacute; o n&atilde;o reconhecimento do diret&oacute;rio ms_tmp pelo Apache. \nO diretorio ms_tmp &eacute; utilizado pelo Mapserver e pelo i3geo para armazenar dados tempor&aacute;rios. \n&Eacute; nesse diretorio que ficam as imagens do mapa.\n";
+		echo "<br><br>Um problema bastante comum &eacute; o n&atilde;o reconhecimento do diret&oacute;rio ms_tmp pelo Apache. \nO diretorio ms_tmp &eacute; utilizado pelo Mapserver e pelo i3geo para armazenar dados tempor&aacute;rios. \n&Eacute; nesse diretorio que ficam as imagens do mapa.\n";
 		echo "Quando o Apache n&atilde;o consegue utilizar esse diret&oacute;rio, a imagem n&atilde;o ser&aacute; mostrada,\n apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do \nmapa est&atilde;o sendo criadas no ms_tmp apos rodar o testainstal.php).\n";
 		echo "Para solucionar esse problema, vc pode criar um link simb&oacute;lico (nos sistemas linux),\n no mesmo local onde est&aacute; instalado o i3geo, apontando para o local \nf&iacute;sico onde est&aacute; o ms_tmp.\n";
 		echo "<b>O nome do link simbolico deve ser o mesmo que estiver definido em aplicmap/geral1.map ou geral1debian.map na linha IMAGEURL. Esse nome por default &eacute; definido como ms_tmp.\n";
-		echo "No wiki do portal do software p&uacute;blico vc poder&aacute; encontrar mais detalhes sobre isso.\n";
+		echo "No wiki do portal do software p&uacute;blico vc poder&aacute; encontrar mais detalhes sobre isso.</b>\n";
 
 		for($i=0;$i<($maptemp->numlayers);$i++)
 		{
@@ -482,7 +486,7 @@ catch(ee)
 		}
 
 		$nome = ($imgo->imagepath)."teste1.png";
-		echo "<p>Nome da imagem gerada: $nome </p>";
+		echo "<br><br>Nome da imagem gerada: $nome ";
 		$imgo->saveImage($nome);
 		$nome = ($imgo->imageurl).basename($nome);
 		echo "<p><img src=$nome /></p></body></html>";
