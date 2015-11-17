@@ -45,82 +45,82 @@ function initMenu()
 	"simples": [
 		{
 			mensagem: "ows_abstract",
-			cabeca: "Resumo",
+			cabeca: $trad("resumo",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_abstract"
 		},
 		{
 			mensagem: "ows_keywordlist",
-			cabeca: "Palavras chave",
+			cabeca: $trad("palavraChave",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_keywordlist"
 		},
 		{
 			mensagem: "ows_fees",
-			cabeca: "Taxas",
+			cabeca: $trad("taxas",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_fees"
 		},
 		{
 			mensagem: "ows_accessconstraints",
-			cabeca: "Restri&ccedil;&otilde;es",
+			cabeca: $trad("restricao",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_accessconstraints"
 		},
 		{
 			mensagem: "ows_contactperson",
-			cabeca: "Pessoa de contato",
+			cabeca: $trad("pessoaContato",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_contactperson"
 		},
 		{
 			mensagem: "ows_contactorganization",
-			cabeca: "Organiza&ccedil;&atilde;o",
+			cabeca: $trad("organizacao",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_contactorganization"
 		},
 		{
 			mensagem: "ows_contactposition",
-			cabeca: "Cargo",
+			cabeca: $trad("cargo",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_contactposition"
 		},
 		{
 			mensagem: "ows_addresstype",
-			cabeca: "Tipo de endere&ccedil;o",
+			cabeca: $trad("tipoEndereco",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_addresstype"
 		},
 		{
 			mensagem: "ows_address",
-			cabeca: "Endere&ccedil;o",
+			cabeca: $trad("endereco",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_address"
 		},
 		{
 			mensagem: "ows_city",
-			cabeca: "Cidade",
+			cabeca: $trad("cidade",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_city"
 		},
 		{
 			mensagem: "ows_stateorprovince",
-			cabeca: "Estado",
+			cabeca: $trad("estado",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_stateorprovince"
 		},
 		{
 			mensagem: "ows_postcode",
-			cabeca: "CEP",
+			cabeca: $trad("cep",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_postcode"
 		},
 		{
 			mensagem: "ows_country",
-			cabeca: "Pa&iacute;s",
+			cabeca: $trad("pais",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_country"
 		},
 		{
 			mensagem: "ows_contactelectronicmailaddress",
-			cabeca: "E-mail",
+			cabeca: $trad("email",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_contactelectronicmailaddress"
 		},
 		{
 			mensagem: "ows_name",
-			cabeca: "Nome do servi&ccedil;o",
+			cabeca: $trad("nomeServico",i3GEOadmin.ogcws.dicionario),
 			variavel: "ows_name"
 		}
 	]};
 	core_carregando("ativa");
-	core_pegaDados("buscando par&acirc;metros...","../php/ogcws.php?funcao=pegaParametrosConfigura","pegaParametros");
+	core_pegaDados($trad("buscaParametro",i3GEOadmin.ogcws.dicionario),"../php/ogcws.php?funcao=pegaParametrosConfigura","pegaParametros");
 }
 function pegaParametros(retorno)
 {
@@ -135,7 +135,7 @@ function pegaParametros(retorno)
 		ins += "</fieldset><br>";
 	}
 	$i("tabela").innerHTML += ins;
-	retorno.$postgis_mapa = "Esta vari&aacute;vel s&oacute; pode ser definida editando-se diretamente o arquivo ms_configura.php";
+	retorno.$postgis_mapa = $trad("msgDefineVariavel",i3GEOadmin.ogcws.dicionario);
 	for (i=0;i<$parametros.simples.length;i++)
 	{
 		if($i($parametros.simples[i].variavel))
@@ -157,8 +157,8 @@ function salva(variavel)
 	else
 	{
 		var original = $i(variavel).value;
-		$i(variavel).value = "gravando...";
-		core_pegaDados("gravando...","../php/ogcws.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+original,"");
+		$i(variavel).value = $trad("grava",i3GEOadmin.ogcws.dicionario);
+		core_pegaDados($trad("grava",i3GEOadmin.ogcws.dicionario),"../php/ogcws.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+original,"");
 		$i(variavel).style.color = "";
 		$i(variavel).value = original;
 	}
