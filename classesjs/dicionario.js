@@ -2410,78 +2410,78 @@ g_traducao = {
 		"ajudaEditorOlSalva" : [
 			{
 				pt : "Para editar os atributos, utilize a ferramenta de identifica&ccedil;&atilde;o. &Eacute; necess&aacute;rio que exista uma coluna com identificadores &uacute;nicos na tabela a ser editada e que essa coluna esteja vis&iacute;vel na ferramenta de identifica&ccedil;&atilde;o.",
-				en : "",
+				en : "To edit attributes, use an identification tool. The table´s column being modified should have an unique identifier, and being visible in the identification tool. ",
 				es : "Para editar los atributos, utilice la herramienta de identificaci&oacute;n. Es necesario que exista una columna con identificadores &uacute;nicos en la tabla a ser editada y que esa columna sea visible en la herramienta de identificaci&oacute;n."
 			}
 		],
 		"mascara" : [
 			{
 				pt : "M&aacute;scara",
-				en : "",
-				es : ""
+				en : "Mask",
+				es : "M&aacute;scara"
 			}
 		],
 		"result" : [
 			{
 				pt : "Resultado",
-				en : "",
-				es : ""
+				en : "Result",
+				es : "Resultado"
 			}
 		],
 		"tativo" : [
 			{
 				pt : "Tema ativo",
-				en : "",
-				es : ""
+				en : "Active theme ",
+				es : "Tema activo"
 			}
 		],
 		"geosel" : [
 			{
 				pt : "geometria(s) selecionada(s) encontrada(s)",
-				en : "",
-				es : ""
+				en : "selected geometry found",
+				es : "geometr&iacute;a(s) seleccionada(s) encontrada(s)"
 			}
 		],
 		"listar" : [
 			{
 				pt : "Listar",
-				en : "",
-				es : ""
+				en : "List",
+				es : "Hacer una lista"
 			}
 		],
 		"sdados" : [
 			{
 				pt : "Salvar dados",
-				en : "",
-				es : ""
+				en : "Save data",
+				es : "Guardar datos"
 			}
 		],
 		"incorpo" : [
 			{
 				pt : "Incorporar ao mapa",
-				en : "",
-				es : ""
+				en : "Add to map",
+				es : "Incorporar al mapa"
 			}
 		],
 		"selum" : [
 			{
 				pt : "Selecione pelo menos um elemento",
-				en : "",
-				es : ""
+				en : "Select at least one element",
+				es : "Seleccione al menos un elemento"
 			}
 		],
 		"atrib" : [
 			{
 				pt : "Atributos",
-				en : "",
-				es : ""
+				en : "Attributes",
+				es : "Atributos"
 			}
 		],
 		"reg" : [
 			{
 				pt : "Registros",
-				en : "",
-				es : ""
+				en : "Records",
+				es : "Registros"
 			}
 		],
 		"adic" : [
