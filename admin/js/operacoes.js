@@ -45,7 +45,7 @@ function ativaBotaoAdicionaOperacao(sUrl,idBotao){
 	var botao, adiciona = function()
 	{
 		core_carregando("ativa");
-		core_carregando(" adicionando um novo registro");
+		core_carregando($trad("msgNovoRegistro",i3GEOadmin.core.dicionario));
 		var callback =
 		{
 				success:function(o)
@@ -76,7 +76,7 @@ Obt&eacute;m a lista de atlas
 <PEGAATLAS>
 */
 function pegaOperacoes(){
-	core_pegaDados("buscando opera&ccedil;&otilde;es...","../php/operacoes.php?funcao=pegaOperacoes","montaArvore");
+	core_pegaDados($trad("msgBuscaOperacoes",i3GEOadmin.operacoes.dicionario),"../php/operacoes.php?funcao=pegaOperacoes","montaArvore");
 }
 /*
 Function: montaArvore
@@ -143,7 +143,7 @@ function adicionaNosPapeis(no,dados,redesenha)
 	}
 	if(!redesenha)
 	{
-		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editar('papel','"+no.data.id_operacao+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar novo papel</i></span>";
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editar('papel','"+no.data.id_operacao+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>"+ $trad("adicionaPapel",i3GEOadmin.operacoes.dicionario) +"</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -170,7 +170,7 @@ function adicionaNosOperacoes(dados,redesenha){
 		if(dados[i].codigo != "")
 		{conteudo += "&nbsp;<span>"+dados[i].codigo+" - "+dados[i].descricao+"</span>";}
 		else
-		{conteudo += "&nbsp;<span style=color:red >Edite para definir a opera&ccedil;&atilde;o!!!</span>";}
+		{conteudo += "&nbsp;<span style=color:red >"+ $trad("editaOperacao",i3GEOadmin.operacoes.dicionario) +"</span>";}
 		var d = {html:conteudo,id_operacao:dados[i].id_operacao,tipo:"operacao"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 		tempNode.enableHighlight = false;
@@ -185,7 +185,7 @@ Abre o editor de um no
 function editar(tipo,id)
 {
 	core_carregando("ativa");
-	core_carregando(" buscando dados");
+	core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 	var sUrl = null;
 	var callback =
 	{
@@ -196,7 +196,7 @@ function editar(tipo,id)
 				if(tipo == "operacao")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('operacao','"+id+"')","","","","Opera&ccedil;&atilde;o",true,true,false);
+					core_montaEditor("gravaDados('operacao','"+id+"')","","","",$trad("operacao",i3GEOadmin.operacoes.dicionario),true,true,false);
 					$i("editor_bd").innerHTML = montaDivOperacao(dados);
 					core_carregando("desativa");
 				}
@@ -225,8 +225,8 @@ function editar(tipo,id)
 function montaDivOperacao(i){
 	var param = {
 		"linhas":[
-		{titulo:"C&oacute;digo:",id:"Ecodigo",size:"50",value:i.codigo,tipo:"text",div:""},
-		{titulo:"(opcional) Descri&ccedil;&atilde;o:",id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""}
+		{titulo:$trad("codigo",i3GEOadmin.operacoes.dicionario),id:"Ecodigo",size:"50",value:i.codigo,tipo:"text",div:""},
+		{titulo:$trad("descricao",i3GEOadmin.operacoes.dicionario),id:"Edescricao",size:"50",value:i.descricao,tipo:"text",div:""}
 		]
 	};
 	var ins = "";
@@ -252,7 +252,7 @@ Exclui um elemento do atlas
 */
 function excluir(tipo,id_operacao,id_papel)
 {
-	var mensagem = " excluindo o registro do id= "+id_operacao+" - "+id_papel;
+	var mensagem = $trad("msgExclui",i3GEOadmin.core.dicionario)+id_operacao+" - "+id_papel;
 	var no = null;
 	var sUrl = null;
 	if(tipo == "papel")
@@ -296,7 +296,7 @@ function gravaDados(tipo,id)
 			success:function(o){
 				try	{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						core_carregando("<span style=color:red >"+ $trad("msgErroExclui",i3GEOadmin.operacoes.dicionario) +"</span>");
 						setTimeout("core_carregando('desativa')",3000);
 					}
 					else{
@@ -322,7 +322,7 @@ function gravaDados(tipo,id)
 	};
 	if(prog && par){
 		core_carregando("ativa");
-		core_carregando(" gravando o registro do id= "+id);
+		core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 		var sUrl = prog+par;
 		core_makeRequest(sUrl,callback,'POST');
 	}

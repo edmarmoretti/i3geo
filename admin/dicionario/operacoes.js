@@ -30,5 +30,75 @@ i3GEOadmin.operacoes.dicionario = {
 		pt : "Opera&ccedil;&otilde;es controladas:",
 		en : "",
 		es : ""
+	} ],
+    'msgBuscaOperacoes' : [ {
+		pt : "buscando opera&ccedil;&otilde;es...",
+		en : "",
+		es : ""
+	} ],
+    'adicionaPapel' : [ {
+		pt : "Adicionar novo papel",
+		en : "",
+		es : ""
+	} ],
+    'editaOperacao' : [ {
+		pt : "Edite para definir a opera&ccedil;&atilde;o!!!",
+		en : "",
+		es : ""
+	} ],
+    'codigo' : [ {
+		pt : "C&oacute;digo:",
+		en : "",
+		es : ""
+	} ],
+    'operacao' : [ {
+		pt : "Opera&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
+    'descricao' : [ {
+		pt : "(opcional) Descri&ccedil;&atilde;o:",
+		en : "",
+		es : ""
+	} ],
+    'msgErroExclui' : [ {
+		pt : "N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
 	} ]
 };
