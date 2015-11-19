@@ -549,6 +549,11 @@ i3GEO.configura =
 										id : "mascara",
 										text : "<span class='i3GEOiconeFerramenta i3GEOiconeMascara'></span>" + $trad("mascara"),
 										url : "javascript:i3GEO.mapa.dialogo.mascara()"
+									},
+									{
+										id : "wkt2layer",
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconewkt2layer'></span>" + $trad("wkt2layer"),
+										url : "javascript:i3GEO.mapa.dialogo.wkt2layer()"
 									}
 								]
 							]

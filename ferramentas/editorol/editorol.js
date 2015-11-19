@@ -728,7 +728,8 @@ i3GEO.editorOL =
 			cpJSON.call(u, "foo", retorno, "");
 		},
 		salvaGeometrias : function() {
-			var geos = i3GEO.desenho.layergrafico.selectedFeatures, n = geos.length, ins = "";
+			var n = i3GEO.editorOL.idsSelecionados.length,
+				ins = "";
 			if (n > 0) {
 				if ($i("panelsalvageometrias")) {
 					if (YAHOO.i3GEO) {
@@ -782,28 +783,13 @@ i3GEO.editorOL =
 			i3GEO.editorOL.processageo("incorporar");
 		},
 		listaGeometriasSel : function() {
-			var geos = i3GEO.desenho.layergrafico.selectedFeatures, n = geos.length, ins = "", i, a, w, g;
+			var n = i3GEO.editorOL.idsSelecionados.length, 
+				ins = "",
+				s = i3GEO.desenho.layergrafico.getSource(),
+				i, w, g;
 			for (i = 0; i < n; i++) {
-				g = geos[i];
-				ins += "<b>" + $trad("u6") + ": " + i + "</b><br>" + i3GEO.editorOL.google2wgs(g.geometry) + "<br><br>";
-				ins += "<b>" + $trad("atrib") + ": " + i + "</b><br>";
-				a = g.attributes;
-				for (key in a) {
-					if (a[key]) {
-						ins += key + " = " + a[key] + "<br>";
-					}
-				}
-				// lista os registros se for fruto de uma captura
-				if (g.attributes.registros) {
-					ins += "<b>" + $trad("reg") + ": " + i + "</b><br>";
-					a = g.attributes.registros;
-					for (key in a) {
-						if (a[key]) {
-							ins += key + " = " + a[key] + "<br>";
-						}
-					}
-				}
-				ins += "<br>";
+				g = s.getFeatureById(i3GEO.editorOL.idsSelecionados[i]);
+				ins += "<b>" + $trad("u6") + ": #" + i + "</b><br>" + i3GEO.editorOL.google2wgs(g.getGeometry().getCoordinates()) + "<br><br>";
 			}
 			w = window.open();
 			w.document.write(ins);
@@ -812,6 +798,7 @@ i3GEO.editorOL =
 		testeSalvar : function() {
 			alert("Funcao nao disponivel. Defina o nome da funcao em i3GEO.editorOL.nomeFuncaoSalvar ");
 		},
+		//TODO verificar se esta funcionando
 		salvaGeo : function() {
 			var geos = i3GEO.desenho.layergrafico.selectedFeatures, n = geos.length, funcaoOK =
 				function() {
@@ -1015,7 +1002,6 @@ i3GEO.editorOL =
 			};
 			return temp;
 		},
-		//TODO falta definir imagem
 		botaoPonto: function(){
 			i3GEO.eventos.cliquePerm.desativa();
 			var temp = document.createElement("div");
@@ -1494,25 +1480,14 @@ i3GEO.editorOL =
 			};
 			return temp;
 		},
-		//TODO implementar botao salvar
 		botaoSalva: function(){
-			/*
-			if (botoes.salva === true) {
-
-				button = new OpenLayers.Control.Button({
-					displayClass : "editorOLsalva",
-					trigger : function() {
-						i3GEO.editorOL.salvaGeometrias();
-					},
-					title : $trad("salva"),
-					type : OpenLayers.Control.TYPE_BUTTON
-				});
-				controles.push(button);
-				adiciona = true;
-
-			}
-			*/
-			return "";
+			var temp = document.createElement("div");
+			temp.className = "editorOLsalvaItemInactive olButton";
+			temp.title = $trad("salva");
+			temp.onclick = function(){
+				i3GEO.editorOL.salvaGeometrias();
+			};
+			return temp;
 		},
 		criaBotoes : function(botoes) {
 			if($i("i3GEObarraEdicao")){
@@ -1594,7 +1569,7 @@ i3GEO.editorOL =
 				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoPropriedades());
 			}
 			if (botoes.salva === true) {
-				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoSalva());
+				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoSalva());
 			}
 			if (botoes.ajuda === true) {
 				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoAjuda());
@@ -2009,9 +1984,6 @@ i3GEO.editorOL =
 			}
 			var polis, linhas, pontos, temp, nsel = i3GEO.editorOL.idsSelecionados.length;
 			if (nsel > 0) {
-				polis = i3GEO.editorOL.retornaGeometriasTipo("Polygon");
-				linhas = i3GEO.editorOL.retornaGeometriasTipo("LineString");
-				pontos = i3GEO.editorOL.retornaGeometriasTipo("Point");
 				temp = function(retorno) {
 					if (i3GEO.janela) {
 						i3GEO.janela.fechaAguarde("i3GEO.editorPoli");
@@ -2027,6 +1999,9 @@ i3GEO.editorOL =
 					}
 				};
 				if (operacao === "incorporar") {
+					polis = i3GEO.editorOL.retornaFeaturesTipo("Polygon");
+					linhas = i3GEO.editorOL.retornaFeaturesTipo("LineString");
+					pontos = i3GEO.editorOL.retornaFeaturesTipo("Point");
 					if (polis.length > 0) {
 						temp = i3GEO.editorOL.merge(polis);
 					}
@@ -2042,6 +2017,9 @@ i3GEO.editorOL =
 					return;
 				}
 				if (operacao === "union" && !i3GEO.php) {
+					polis = i3GEO.editorOL.retornaFeaturesTipo("Polygon");
+					linhas = i3GEO.editorOL.retornaFeaturesTipo("LineString");
+					pontos = i3GEO.editorOL.retornaFeaturesTipo("Point");
 					if (polis.length > 0) {
 						temp = i3GEO.editorOL.uniaojts(polis);
 						i3GEO.editorOL.substituiFeaturesSel(temp);
@@ -2055,6 +2033,9 @@ i3GEO.editorOL =
 						i3GEO.editorOL.substituiFeaturesSel(temp);
 					}
 				} else {
+					polis = i3GEO.editorOL.retornaGeometriasTipo("Polygon");
+					linhas = i3GEO.editorOL.retornaGeometriasTipo("LineString");
+					pontos = i3GEO.editorOL.retornaGeometriasTipo("Point");
 					if (polis.length > 0) {
 						i3GEO.janela.abreAguarde("i3GEO.editorPoli", "Poligonos");
 						i3GEO.php.funcoesGeometriasWkt(temp, polis.join("|"), operacao);
@@ -2075,8 +2056,12 @@ i3GEO.editorOL =
 			}
 		},
 		merge : function(geoms) {
-			var n = geoms.length, w = new Wkt.Wkt(), g, m, i, format = new ol.format.WKT();
-			w.read(format.writeFeatures([geoms[0]]));
+			var n = geoms.length, 
+				w = new Wkt.Wkt(), 
+				g, m, i,f,
+				format = new ol.format.WKT();
+				f = format.writeFeatures([geoms[0]]);
+				w.read(f);
 			if (n > 1) {
 				for (i = 1; i < n; i++) {
 					g = format.writeFeatures([geoms[i]]);
@@ -2094,12 +2079,15 @@ i3GEO.editorOL =
 				wwkt = new jsts.io.WKTWriter(),
 				g, i, uniao;
 			if (n > 1) {
+				//converte em wkt
 				uniao = fwkt.writeFeatures([geoms[0]]);
+				//le na jsts
 				uniao = rwkt.read(uniao);
 				for (i = 1; i <= n; i++) {
 					g = fwkt.writeFeatures([geoms[i]]);
 					uniao = uniao.union(rwkt.read(g));
 				}
+				//gera em wkt
 				uniao = wwkt.write(uniao);
 				return [
 					fwkt.readFeatures(uniao)
@@ -2116,6 +2104,17 @@ i3GEO.editorOL =
 				f = s.getFeatureById(i3GEO.editorOL.idsSelecionados[i]);
 				if (f.getGeometry().getType() == tipo) {
 					lista.push(fwkt.writeFeatures([f]));
+				}
+			}
+			return lista;
+		},
+		retornaFeaturesTipo : function(tipo) {
+			var n = i3GEO.editorOL.idsSelecionados.length, lista = [], i,
+				s = i3GEO.desenho.layergrafico.getSource();
+			for (i = 0; i < n; i++) {
+				f = s.getFeatureById(i3GEO.editorOL.idsSelecionados[i]);
+				if (f.getGeometry().getType() == tipo) {
+					lista.push(f);
 				}
 			}
 			return lista;
@@ -2396,8 +2395,7 @@ i3GEO.editorOL =
 		},
 		google2wgs : function(obj) {
 			if (i3GEO.Interface.openlayers.googleLike === true) {
-				var projWGS84 = new OpenLayers.Projection("EPSG:4326"), proj900913 = new OpenLayers.Projection("EPSG:900913");
-				return obj.transform(proj900913, projWGS84);
+				return obj.transform("EPSG:900913","EPSG:4326");
 			} else {
 				return obj;
 			}

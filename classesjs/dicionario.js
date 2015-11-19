@@ -2714,5 +2714,12 @@ g_traducao = {
    				en : "",
    				es : ""
    			}
+   		],
+   		"wkt2layer" : [
+   			{
+   				pt : "Converte WKT em camada",
+   				en : "",
+   				es : ""
+   			}
    		]
 	};

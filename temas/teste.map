@@ -1,53 +1,49 @@
 MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
-  LAYER
-    CONNECTION ""
-    CONNECTIONTYPE POSTGIS
-    DATA "geom from (
-		SELECT
-		co_seq_id AS gid,
-		ST_MakePoint(tb_cep.long::numeric,tb_cep.lat::numeric) AS geom,
-		tb_cep.lat,
-		tb_cep.long,
-		ano_farm_pop_aqt AS ano,
-		mes_farm_pop_aqt AS mes,
-		nu_ddd_farmacia AS ddd,
-		nu_telefone_farmacia,
-		nu_cep_farmacia,
-		no_bairro_farmacia,
-		ds_endereco_farmacia,
-		no_farmacia,
-		dbgeral.tb_ibge.cidade_sem_acento,
-		dbgeral.tb_ibge.uf
-		FROM
-		dbacoes_saude.tb_farmacia_pop_aqt
-		INNER JOIN dbgeral.tb_cep ON dbacoes_saude.tb_farmacia_pop_aqt.nu_cep_farmacia = dbgeral.tb_cep.cep
-		INNER JOIN dbgeral.tb_ibge ON dbacoes_saude.tb_farmacia_pop_aqt.co_ibge = dbgeral.tb_ibge.ibge
-		WHERE
-		'm'||tb_farmacia_pop_aqt.mes_farm_pop_aqt||'a'||tb_farmacia_pop_aqt.ano_farm_pop_aqt = (SELECT 'm'||tb_farmacia_pop_aqt.mes_farm_pop_aqt||'a'||tb_farmacia_pop_aqt.ano_farm_pop_aqt
-		FROM dbacoes_saude.tb_farmacia_pop_aqt
-		ORDER BY tb_farmacia_pop_aqt.ano_farm_pop_aqt DESC, tb_farmacia_pop_aqt.mes_farm_pop_aqt DESC LIMIT 1)
-		AND 
-		farmacia_apta not LIKE '%N%' AND
-		nu_cep_farmacia not LIKE '%-%'
-    ) as foo using unique gid using srid=4674"
+ LAYER
+    DATA "/var/www/i3geo/aplicmap/dados/mundo"
+    GROUP ""
     METADATA
+      "TIP"	"FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
+      "cache"	"nao"
+      "olopacity"	"100"
       "CLASSE"	"SIM"
-      "TEMA"	"loc"
-      "IDENTIFICA"	"SIM"
-    END
+      "ITENSDESC"	"FIPS,GMI,Nome,Wikipedia"
+      "ITENSLINK"	",,,http://pt.wikipedia.org/wiki/[CNTRY_NAME]"
+      "TITULO"	"Países do mundo"
+      "olstatus"	"OFF"
+      "itembuscarapida"	"LONG_NAME"
+      "ITENS"	"FIPS_CNTRY,GMI_CNTRY,LONG_NAME,CNTRY_NAME"
+      "TEMA"	"grafico de Países do mundo"
+      "permitedownload" "nao"
+      "download" "nao"
+    END # METADATA
     NAME "teste"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    PROCESSING "CHART_TYPE=PIE"
+    PROCESSING "CHART_SIZE=50"
     STATUS DEFAULT
-    TYPE POINT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE CHART
     UNITS METERS
     CLASS
-      NAME " "
+      NAME "SQKM"
       STYLE
-        COLOR 255 0 0
-        SYMBOL "ponto"
-        SIZE 10
-      END
-    END
-  END
+        COLOR 75 43 106
+        OUTLINECOLOR 0 0 0
+        SIZE [SQKM]
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "SQMI"
+      STYLE
+        COLOR 108 251 237
+        OUTLINECOLOR 0 0 0
+        SIZE [SQMI]
+      END # STYLE
+    END # CLASS
+  END # LAYER
 END

@@ -1164,6 +1164,7 @@ function alteraTemas()
 					{
 						$layer = $mapa->getlayer($i);
 						$layer->setmetadata("permitedownload",strtolower($download));
+						$layer->setmetadata("download",strtolower($download));
 						$layer->setmetadata("permiteogc",strtolower($ogc));
 						$layer->setmetadata("permitekml",strtolower($kml));
 						$layer->setmetadata("permitekmz",strtolower($kmz));

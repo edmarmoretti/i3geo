@@ -1350,31 +1350,27 @@ function criaLayer($oMapa,$ms_tipo,$ms_status,$metaTema,$metaClasse="SIM",$repos
 	$classe->set("name","");
 	$estilo = ms_newStyleObj($classe);
 	$cor = $estilo->color;
-	$cor->setrgb(0,255,255);
+	$cor->setrgb(31,165,165);
 	$coro = $estilo->outlinecolor;
 	$coro->setrgb(0,0,0);
-	if ($ms_tipo == MS_LAYER_POINT)
-	{
+	if ($ms_tipo == MS_LAYER_POINT){
 		$estilo->set( "size",4);
 		$estilo->set("symbolname","ponto");
 	}
 	//reposiciona o layer na pilha
 	if($reposiciona == true){
 		$ltipo = $l->type;
-		if (($ltipo == 2) || ($ltipo == 3))
-		{
+		if (($ltipo == 2) || ($ltipo == 3)){
 			$indicel = $l->index;
 			$numlayers = $oMapa->numlayers;
 			$nummove = 0;
-			for ($i = $numlayers-1;$i > 0;$i--)
-			{
+			for ($i = $numlayers-1;$i > 0;$i--){
 				$layerAbaixo = $oMapa->getlayer($i);
 				$tipo = $layerAbaixo->type;
 				if (($tipo != 2) && ($tipo != 3))
 				{$nummove++;}
 			}
-			if ($nummove > 2)
-			{
+			if ($nummove > 2){
 				for ($i=0;$i<=($nummove - 3);++$i)
 				{$oMapa->movelayerup($indicel);}
 			}
@@ -1453,8 +1449,9 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			dbase_add_record($db,$reg);
 			dbase_close($db);
 		}
-		if($versao == 6)
-		{$shape = $layer->getshape(new resultObj(0));}
+		if($versao >= 6){
+			$shape = $layer->getshape(new resultObj(0));
+		}
 		else{
 			$s = $layer->getfeature(0,-1);
 			$result = $layer->getResult(0);
@@ -1466,7 +1463,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$resultadoFinal = true;
 	}
 	else{
-		$shapesSel = retornaShapesSelecionados($layer,$map_file,$map);//
+		$shapesSel = retornaShapesSelecionados($layer,$map_file,$map);
 		$items = pegaItens($layer);
 		// cria o dbf
 		$def = array();
@@ -2507,7 +2504,7 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa,$indexado=false)
 
 		for ($i = 0; $i < $res_count; ++$i)
 		{
-			if($versao == 6){
+			if($versao >= 6){
 				$shape = $objLayer->getShape($objLayer->getResult($i));
 				$shp_index  = $shape->index;
 			}

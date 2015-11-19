@@ -1002,7 +1002,7 @@ class Alteraclasse
 			$valitem = array();
 			for ($i=0;$i<$res_count;++$i)
 			{
-				if($versao == 6)
+				if($versao >= 6)
 				{
 					$shape = $layer->getShape($layer->getResult($i));
 				}

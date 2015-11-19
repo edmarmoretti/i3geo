@@ -696,7 +696,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 		$res_count = $layer->getNumresults();
 		//echo $res_count;echo "\n";
 		for ($i=0;$i<$res_count;++$i){
-			if($versao == 6){
+			if($versao >= 6){
 				$shape = $layer->getShape($layer->getResult($i));
 				$shp_index = $shape->index;
 			}

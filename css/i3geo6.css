@@ -2399,6 +2399,10 @@ float: left;
 background-image: url("../imagens/oxygen/16x16/edit-delete.png");
 cursor: pointer;
 }
+.i3GEOiconewkt2layer{
+background-image: URL('../imagens/gisicons/layer.png');
+background-size: 16px;
+}
 .i3GEOiconeMascara{
 background-image: URL('../imagens/gisicons/layer-show.png');
 background-size: 16px;

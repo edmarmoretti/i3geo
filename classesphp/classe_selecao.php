@@ -795,11 +795,14 @@ $dir_tmp - localiza&ccedil;&atilde;o do diret&oacute;rio tempor&aacute;rio
 		$novolayer->set("name",basename($nomeshp));
 		$down = "nao";
 		$down = $this->layer->getmetadata("download");
-		if ($down == ""){$down = "nao";}
+		if ($down == ""){
+			$down = "sim";
+		}
 		$novolayer->setmetadata("DOWNLOAD",$down);
 		$tipo = $this->layer->type;
-		if ($this->layer->getmetadata("TABELA") != '')
-		{$novolayer->setmetadata("TABELA","NAO");}
+		if ($this->layer->getmetadata("TABELA") != ''){
+			$novolayer->setmetadata("TABELA","NAO");
+		}
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$novolayer->setfilter("");
 		return("ok");

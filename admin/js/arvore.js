@@ -775,13 +775,13 @@ function montaDivTema(i)
 	var ins = "<p>" + $trad("escolheTema",i3GEOadmin.arvore.dicionario) + "</p>"
 	+ "<div id='letrasDivTema'></div>"
 	+ "<div id=comboTema >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
-	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
-	+ "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' style='position:relative;width:200px;float:left;'/>"
-	+ "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>"
-	+ "<p style='float:left;width:200px;'>"+ $trad("publicado",i3GEOadmin.arvore.dicionario) +"<br><br>"
+	+ "<p>"+ $trad("publicado",i3GEOadmin.arvore.dicionario) +"</p>"
 	+ "<select id='Epublicado' >"
 	+ core_combosimnao(i.publicado)
 	+ "</select>"
+	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
+	+ "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' style='position:relative;width:200px;float:left;'/>"
+	+ "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>"
 	+ "<p style='width:200px;'>"+ $trad("ordem",i3GEOadmin.arvore.dicionario) +"<br><br>"
 	+ "<input size=10 type=text value="+i.ordem+" id='Eordem' />";
 	return(ins);

@@ -660,7 +660,7 @@ function clonarMapfile(codigoMap)
 	core_dialogoPergunta(handleYes,handleNo,mensagem,largura);
 }
 function alteraNomeTema(obj,codigoMap){
-	var handleYes, handleNo, codigoMap, mensagem, largura = "300";
+	var handleYes, handleNo, mensagem, largura = "300";
 	
 	mensagem = ""+ $trad("novoTitulo",i3GEOadmin.core.dicionario) +"<br><input size=30 type=text value='"+obj.innerHTML+"' id=mudarNomePara />";
 	handleNo = function(){
