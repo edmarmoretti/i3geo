@@ -6,18 +6,19 @@
 <title></title>
 <style>
 td {
-	text-align: left
+	text-align: left;
+	min-width: 200px;
 }
 </style>
 </head>
 <body style="overflow: auto;">
-	<div style="text-align: center; width: 600px">
+	<div style="text-align: center; width: 800px">
 		<p>
 			<img src="../../imagens/i3geo1.jpg" />
 		</p>
 		<p style='font-size: 16px'>Estat&iacute;stica do sistema de administra&ccedil;&atilde;o</p>
 	</div>
-	<div style="text-align: left; width: 600px">
+	<div style="text-align: left; width: 800px">
 		<?php
 		/*
 		 Title: Estat&iacute;sticas do banco de dados de administra&ccedil;&atilde;o
