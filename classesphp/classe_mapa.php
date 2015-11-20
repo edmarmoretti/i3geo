@@ -2149,7 +2149,7 @@ class Mapa
 		$resultado = array();
 		include("$locaplic/admin/php/conexao.php");
 		if(!empty($esquemaadmin)){
-			$esquemaadmin = $esquemaadmin.".";
+			$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 		}
 		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_acessostema (codigo_tema,nacessos,dia,mes,ano) VALUES ('$codigo_tema',1,".abs(date("d")).",".abs(date("m")).",".abs(date("Y")).")");
 		$dbh = null;
