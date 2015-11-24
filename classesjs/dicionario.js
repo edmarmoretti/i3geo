@@ -2487,36 +2487,36 @@ g_traducao = {
 		"adic" : [
 			{
 				pt : "Adicionando",
-				en : "",
-				es : ""
+				en : "Adding",
+				es : "Adicionando"
 			}
 		],
 		"stema" : [
 			{
 				pt : "Salvar no tema",
-				en : "",
-				es : ""
+				en : "Save theme",
+				es : "Salvar el tema"
 			}
 		],
 		"seluma" : [
 			{
 				pt : "Selecione apenas uma figura",
-				en : "",
-				es : ""
+				en : "Select only one shape",
+				es : "Seleccione s&oacute;lo una figura"
 			}
 		],
 		"salva" : [
 			{
 				pt : "Salva",
-				en : "",
-				es : ""
+				en : "Save",
+				es : "Salva"
 			}
 		],
 		"canc" : [
 			{
 				pt : "Cancela",
-				en : "",
-				es : ""
+				en : "Cancel",
+				es : "Cancela"
 			}
 		],
 		"dlinha" : [
