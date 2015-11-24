@@ -2369,155 +2369,155 @@ var g_traducao =
 		"refresh" : [
 			{
 				pt : "Refaz a &aacute;rvore, reconstruindo os &iacute;cones e lista de camadas",
-				en : "",
-				es : ""
+				en : "Remake the tree, rebuilding the icons and the layer list",
+				es : "Vuelva a hacer el &aacute;rbol, reconstruyendo los iconos y la lista de capas"
 			}
 		],
 		"lixeira" : [
 			{
 				pt : "Clique para ver a lista de camadas em uma janela flutuante com op&ccedil;&atilde;o para remover um ou mais camadas do mapa. Arraste uma camada sobre esse &iacute;cone para remov&ecirc;-la individualmente",
-				en : "",
-				es : ""
+				en : "Click to see the layer list on a floating window  ",
+				es : "Haga clic para ver la lista de capas en una ventana flotante con la opci&oacute;n de eliminar uan o m&aacute;s capas del mapa. Arrastre una capa sobre ese icono para removerla individualmente"
 			}
 		],
 		"filtraCam" : [
 			{
 				pt : "Permite filtrar a lista de camadas mostradas na &aacute;rvore conforme propriedades espec&iacute;ficas de cada uma",
-				en : "",
-				es : ""
+				en : "It allows to filter the layer tree-list according to layers particular properties",
+				es : "Permite filtrar la lista de capas mostradas mostradas en el &aacute;rbol de acuerdo a las propiedades espec&iacute;ficas de cada una"
 			}
 		],
 		"legenda" : [
 			{
 				pt : "Abre a legenda do mapa em uma janela flutuante",
-				en : "",
-				es : ""
+				en : "It opens the map legend in a floating window",
+				es : "Abre la leyenda del mapa en una ventana flotante "
 			}
 		],
 		"ferramMapa" : [
 			{
 				pt : "Mostra a lista de ferramentas que atuam sobre o mapa",
-				en : "",
-				es : ""
+				en : "It shows a list of tools which perform actions on the map",
+				es : "Muestra una lista de herramientas que act&uacute;an sobre el mapa"
 			}
 		],
 		"ferramCamadas" : [
 			{
 				pt : "Mostra a lista de ferramentas que atuam sobre camadas",
-				en : "",
-				es : ""
+				en : "It shows a list of tools which perform actions on the layers",
+				es : "Muestra una lista de herramientas que actúan sobre las capas"
 			}
 		],
 		"ajudaEditorOlSalva" : [
 			{
 				pt : "Para editar os atributos, utilize a ferramenta de identifica&ccedil;&atilde;o. &Eacute; necess&aacute;rio que exista uma coluna com identificadores &uacute;nicos na tabela a ser editada e que essa coluna esteja vis&iacute;vel na ferramenta de identifica&ccedil;&atilde;o.",
-				en : "",
-				es : ""
+				en : "To edit attributes, use an identification tool. The table´s column being modified should have an unique identifier, and being visible in the identification tool. ",
+				es : "Para editar los atributos, utilice la herramienta de identificaci&oacute;n. Es necesario que exista una columna con identificadores &uacute;nicos en la tabla a ser editada y que esa columna sea visible en la herramienta de identificaci&oacute;n."
 			}
 		],
 		"mascara" : [
 			{
 				pt : "M&aacute;scara",
-				en : "",
-				es : ""
+				en : "Mask",
+				es : "M&aacute;scara"
 			}
 		],
 		"result" : [
 			{
 				pt : "Resultado",
-				en : "",
-				es : ""
+				en : "Result",
+				es : "Resultado"
 			}
 		],
 		"tativo" : [
 			{
 				pt : "Tema ativo",
-				en : "",
-				es : ""
+				en : "Active theme ",
+				es : "Tema activo"
 			}
 		],
 		"geosel" : [
 			{
 				pt : "geometria(s) selecionada(s) encontrada(s)",
-				en : "",
-				es : ""
+				en : "selected geometry found",
+				es : "geometr&iacute;a(s) seleccionada(s) encontrada(s)"
 			}
 		],
 		"listar" : [
 			{
 				pt : "Listar",
-				en : "",
-				es : ""
+				en : "List",
+				es : "Hacer una lista"
 			}
 		],
 		"sdados" : [
 			{
 				pt : "Salvar dados",
-				en : "",
-				es : ""
+				en : "Save data",
+				es : "Guardar datos"
 			}
 		],
 		"incorpo" : [
 			{
 				pt : "Incorporar ao mapa",
-				en : "",
-				es : ""
+				en : "Add to map",
+				es : "Incorporar al mapa"
 			}
 		],
 		"selum" : [
 			{
 				pt : "Selecione pelo menos um elemento",
-				en : "",
-				es : ""
+				en : "Select at least one element",
+				es : "Seleccione al menos un elemento"
 			}
 		],
 		"atrib" : [
 			{
 				pt : "Atributos",
-				en : "",
-				es : ""
+				en : "Attributes",
+				es : "Atributos"
 			}
 		],
 		"reg" : [
 			{
 				pt : "Registros",
-				en : "",
-				es : ""
+				en : "Records",
+				es : "Registros"
 			}
 		],
 		"adic" : [
 			{
 				pt : "Adicionando",
-				en : "",
-				es : ""
+				en : "Adding",
+				es : "Adicionando"
 			}
 		],
 		"stema" : [
 			{
 				pt : "Salvar no tema",
-				en : "",
-				es : ""
+				en : "Save theme",
+				es : "Salvar el tema"
 			}
 		],
 		"seluma" : [
 			{
 				pt : "Selecione apenas uma figura",
-				en : "",
-				es : ""
+				en : "Select only one shape",
+				es : "Seleccione s&oacute;lo una figura"
 			}
 		],
 		"salva" : [
 			{
 				pt : "Salva",
-				en : "",
-				es : ""
+				en : "Save",
+				es : "Salva"
 			}
 		],
 		"canc" : [
 			{
 				pt : "Cancela",
-				en : "",
-				es : ""
+				en : "Cancel",
+				es : "Cancela"
 			}
 		],
 		"dlinha" : [
@@ -2722,5 +2722,12 @@ var g_traducao =
    				en : "",
    				es : ""
    			}
-   		]
+   		],
+   		"salvaDadosEditor": [
+ 			{
+				pt : "Os dados s&oacute; podem ser salvos em temas que permitem edi&ccedil;&atilde;o e que possuem coluna com auto incremento",
+				en : "",
+				es : ""
+			}
+		]
 	};

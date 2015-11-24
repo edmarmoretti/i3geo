@@ -1,5 +1,6 @@
 //utilize $trad("p1") para retornar o texto
-g_traducao = {
+var g_traducao =
+	{
 		// texto da janela de mensagens
 		"p1" : [
 			{
@@ -2721,5 +2722,12 @@ g_traducao = {
    				en : "",
    				es : ""
    			}
-   		]
+   		],
+   		"salvaDadosEditor": [
+ 			{
+				pt : "Os dados s&oacute; podem ser salvos em temas que permitem edi&ccedil;&atilde;o e que possuem coluna com auto incremento",
+				en : "",
+				es : ""
+			}
+		]
 	};

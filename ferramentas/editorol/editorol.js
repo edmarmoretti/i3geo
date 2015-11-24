@@ -801,7 +801,6 @@ i3GEO.editorOL =
 		testeSalvar : function() {
 			alert("Funcao nao disponivel. Defina o nome da funcao em i3GEO.editorOL.nomeFuncaoSalvar ");
 		},
-		//TODO verificar se esta funcionando
 		salvaGeo : function() {
 			var s = i3GEO.desenho.layergrafico.getSource(), 
 				n = i3GEO.editorOL.idsSelecionados.length,
@@ -850,7 +849,8 @@ i3GEO.editorOL =
 				funcaoCombo = function(obj) {
 					$i("editorOLondeComboTemaEditavel").innerHTML = obj.dados;
 				}, 
-				texto = $trad("stema") + ":<br><div id=editorOLondeComboTemaEditavel  ></div><br><br>";
+				texto = $trad("stema") + ":<br><div id=editorOLondeComboTemaEditavel  ></div><p class=paragrafo >"+$trad("salvaDadosEditor")+"</p><br><br>";
+			//monta a janela para o usuario escolher em qual camada os dados serao salvos
 			if (n != 1) {
 				i3GEO.janela.tempoMsg($trad("seluma"));
 			} else {
