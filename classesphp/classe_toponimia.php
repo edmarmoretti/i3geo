@@ -177,6 +177,7 @@ Retorno:
 		error_reporting(0);
 		if(!$this->layer){return "erro";}
 		$this->removeToponimia();
+		
 		if (!isset($tipo)){$tipo = "";}
 		if ($item != "") //o layer nao tem tabela mas tem toponimia
 		{
@@ -186,7 +187,7 @@ Retorno:
 				$nomer = nomeRandomico();
 				$novolayer->set("name",$nomer);
 				$novolayer->set("group","");
-				$novolayer->set("type",MS_LAYER_ANNOTATION);
+				$novolayer->set("type",$this->layer->type);
 				$nclasses = $novolayer->numclasses;
 				for ($i=0; $i < $nclasses; ++$i){
 					$c = $novolayer->getclass($i);
@@ -242,13 +243,15 @@ Retorno:
 			}
 			if ($fonte != "bitmap")
 			{
-				$label->set("type",MS_TRUETYPE);
+				//$label->set("type",MS_TRUETYPE);
+				$label->updatefromstring("LABEL TYPE TRUETYPE END");
 				$label->set("font",$fonte);
 				$label->set("size",$tamanho);
 			}
 			else
 			{
-				$label->set("type",MS_BITMAP);
+				//$label->set("type",MS_BITMAP);
+				$label->updatefromstring("LABEL TYPE BITMAP END");
 				//$label->set("font",$fonte);
 				$t = MS_TINY;
 				if ($tamanho > 5 ){$t = MS_TINY;}
@@ -261,10 +264,10 @@ Retorno:
 			if($angulo > 0){
 				$label->set("angle",$angulo);
 			}
-			if($angulo == "AUTO")
-			{$label->updatefromstring("LABEL ANGLE AUTO END");}
-			if (strtoupper($angulo) == "CURVO" || strtoupper($angulo) == "FOLLOW")
-			{
+			if($angulo == "AUTO"){
+				$label->updatefromstring("LABEL ANGLE AUTO END");
+			}
+			if (strtoupper($angulo) == "CURVO" || strtoupper($angulo) == "FOLLOW"){
 				$label->updatefromstring("LABEL ANGLE FOLLOW END");
 			}
 			corE($label,$cor,"color");

@@ -657,8 +657,8 @@ i3GEO.editorOL =
 				YAHOO.legendaeditorOL.container.panel.show();
 			}
 		},
-		captura : function(x,y,tema) {
-			var d = 0.1,
+		captura : function(x,y,tema,idunico) {
+			var d = 0.001,
 				layer = i3geoOL.getLayersByName(tema)[0],
 				xy = [x,y],
 				u = layer.getSource().getUrls()[0],
@@ -719,6 +719,9 @@ i3GEO.editorOL =
 						})
 					);
 					f.setId(i3GEO.util.uid());
+					f.setProperties({
+						idUnico : idunico
+					});
 					c.addFeature(f);
 				}
 			};
@@ -800,51 +803,54 @@ i3GEO.editorOL =
 		},
 		//TODO verificar se esta funcionando
 		salvaGeo : function() {
-			var geos = i3GEO.desenho.layergrafico.selectedFeatures, n = geos.length, funcaoOK =
-				function() {
+			var s = i3GEO.desenho.layergrafico.getSource(), 
+				n = i3GEO.editorOL.idsSelecionados.length,
+				funcaoOK = function() {
 					// verifica se a geometria contem o atributo que indica a coluna ou codigo unico
-					if (geos[0].geometry) {
-						var registros = "", valorunico = "", nometema = $i("editorOLcomboTemaEditavel").value, key = "", tema, redesenha, p, g =
-							i3GEO.editorOL.google2wgs(geos[0].geometry);
-						if (nometema == "") {
-							return;
-						}
-						tema = i3GEO.arvoreDeCamadas.pegaTema(nometema, "", "name");
-						// o tema contem o indicador de qual e a coluna que contem o identificador unico
-						if (geos[0].attributes.registros) {
-							registros = geos[0].attributes.registros;
-							for (key in registros) {
-								if (registros[key] && key == tema.colunaidunico) {
-									valorunico = registros[key];
-								}
-							}
-						}
-						redesenha = function(retorno) {
-							i3GEO.janela.fechaAguarde("aguardeSalvaPonto");
-							i3GEO.desenho.layergrafico.removeFeatures(i3GEO.desenho.layergrafico.selectedFeatures);
-							i3GEO.Interface.atualizaTema("", nometema);
-						};
-						i3GEO.janela.AGUARDEMODAL = true;
-						i3GEO.janela.abreAguarde("aguardeSalvaPonto", $trad("adic") + "...");
-						i3GEO.janela.AGUARDEMODAL = false;
+					var f = s.getFeatureById(i3GEO.editorOL.idsSelecionados[0]),
+						g = f.getGeometry(),
+						tema = $i("editorOLcomboTemaEditavel").value,
+						redesenha, p, format;
 
-						// cria um novo registro
-						if (valorunico == "") {
-							p =
-								i3GEO.configura.locaplic + "/ferramentas/editortema/exec.php?funcao=adicionaGeometria&g_sid="
-									+ i3GEO.configura.sid;
-							cpJSON.call(p, "foo", redesenha, "&tema=" + nometema + "&wkt=" + g);
-						} else {
-							// atualiza a geometria
-							p =
-								i3GEO.configura.locaplic + "/ferramentas/editortema/exec.php?funcao=atualizaGeometria&g_sid="
-									+ i3GEO.configura.sid;
-							cpJSON.call(p, "foo", redesenha, "&idunico=" + valorunico + "&tema=" + nometema + "&wkt=" + g);
-						}
+					g = i3GEO.editorOL.google2wgs(g);
+					format = new ol.format.WKT();
+					f.setGeometry(g);
+
+					if (tema == "") {
+						return;
 					}
-				}, funcaoCombo = function(obj) {
-				$i("editorOLondeComboTemaEditavel").innerHTML = obj.dados;
-			}, texto = $trad("stema") + ":<br><div id=editorOLondeComboTemaEditavel  ></div><br><br>";
+					redesenha = function(retorno) {
+						i3GEO.janela.fechaAguarde("aguardeSalvaPonto");
+						i3GEO.editorOL.removeFeaturesSel();
+						i3GEO.Interface.atualizaTema("", tema);
+					};
+					i3GEO.janela.AGUARDEMODAL = true;
+					i3GEO.janela.abreAguarde("aguardeSalvaPonto", $trad("adic") + "...");
+					i3GEO.janela.AGUARDEMODAL = false;
+
+					// cria um novo registro
+					if(!f.getProperties().idUnico || f.getProperties().idUnico == ""){
+						p = i3GEO.configura.locaplic 
+							+ "/ferramentas/editortema/exec.php?funcao=adicionaGeometria&g_sid="
+							+ i3GEO.configura.sid;
+						cpJSON.call(p, "foo", redesenha, "&tema=" + tema + "&wkt=" + format.writeFeatures([f]));
+					} else {
+						// atualiza a geometria
+						p = i3GEO.configura.locaplic 
+							+ "/ferramentas/editortema/exec.php?funcao=atualizaGeometria&g_sid="
+							+ i3GEO.configura.sid;
+						cpJSON.call(
+							p, 
+							"foo", 
+							redesenha, 
+							"&idunico=" + f.getProperties().idUnico + "&tema=" + tema + "&wkt=" + format.writeFeatures([f])
+						);
+					}
+				},
+				funcaoCombo = function(obj) {
+					$i("editorOLondeComboTemaEditavel").innerHTML = obj.dados;
+				}, 
+				texto = $trad("stema") + ":<br><div id=editorOLondeComboTemaEditavel  ></div><br><br>";
 			if (n != 1) {
 				i3GEO.janela.tempoMsg($trad("seluma"));
 			} else {
@@ -1430,7 +1436,8 @@ i3GEO.editorOL =
 						url = layer.getSource().getUrls()[0];
 						xy = evt.target.downPx_;
 						retorno = function(r){
-							var texto = "", lonlattexto, xy, temp, temp1, n, i, f = [], textoN = r.split(":");
+							var valorunico = "", camada, texto = "", lonlattexto, xy, temp, temp1, n, i, f = [], textoN = r.split(":");
+							camada = i3GEO.arvoreDeCamadas.pegaTema(tema.value, "", "name");
 							xy = evt.feature.getGeometry().getFirstCoordinate();
 							i3GEO.eventos.cliquePerm.ativo = true;
 							try {
@@ -1445,8 +1452,14 @@ i3GEO.editorOL =
 									for (i = 0; i < n; i++) {
 										temp1 = temp[i].replace(/^\s+/, "");
 										temp1 = temp1.replace(/\s+$/, "");
-										if (temp1 != "")
+										if (temp1 != ""){
+											//verifica se a coluna eh o idunico e pega o valor
+											if(camada.colunaidunico != "" && temp1.split(":")[0].trim() == camada.colunaidunico){
+												valorunico = temp1.split(":")[1].trim();
+												temp1 = "(*) "+temp1;
+											}
 											f.push(temp1);
+										}
 									}
 									texto = "<pre>" + f.join("<br>") + "</pre>";
 								}
@@ -1458,6 +1471,9 @@ i3GEO.editorOL =
 									+ xy[1]
 									+ ",\""
 									+ tema.value
+									+ "\""
+									+ ",\""
+									+ valorunico
 									+ "\")'>edita geometria</span><br>";
 							i3GEO.Interface.openlayers.balao("<div style='text-align:left' >" + lonlattexto + texto + "</div>","", xy[0], xy[1], false, false);
 							i3GEO.eventos.cliquePerm.ativo = false;
