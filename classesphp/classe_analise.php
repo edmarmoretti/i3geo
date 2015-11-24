@@ -1276,7 +1276,7 @@ class Analise
 		$projInObj = $layerorigem->getProjection();
 		if ($projInObj == "")
 		{
-			$projInObj = ms_newprojectionobj("proj=latlong");
+			$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 		}
 		$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
 		$origemdestino = array();
@@ -1413,7 +1413,9 @@ class Analise
 		foreach($listaShapes as $shape){
 			//calcula a extens&atilde;o geografica
 			$rect = $shape->bounds;
-			$projInObj = ms_newprojectionobj("proj=latlong");
+			//proj=longlat,ellps=WGS84,datum=WGS84,no_defs
+			//proj=latlong
+			$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
 			$poPoint = ms_newpointobj();
 			$poPoint->setXY($rect->minx, $rect->miny);
@@ -1440,8 +1442,7 @@ class Analise
 		//faz a uni&atilde;o dos elementos se necess&aacute;rio
 		if($unir == "sim"){
 			$ns = $buffers[0];
-			for($s=1;$s < count($buffers);$s++)
-			{
+			for($s=1;$s < count($buffers);$s++){
 				$ns = $ns->union($buffers[$s]);
 			}
 			$buffers = array($ns);
@@ -1465,10 +1466,8 @@ class Analise
 			$db=xbase_open($dbname,2);
 		else
 			$db=dbase_open($dbname,2);
-		for($i = 0;$i < count($buffers);++$i)
-		{
-			foreach ($items as $ni)
-			{
+		for($i = 0;$i < count($buffers);++$i){
+			foreach ($items as $ni){
 				if(!empty($shapes[$i]->values[$ni])){
 					$reg[] = $this->truncaS($shapes[$i]->values[$ni]);
 				}
@@ -2646,7 +2645,7 @@ class Analise
 					case "perimetro":
 						$shape = ms_shapeObjFromWkt($g);
 						$rect = $shape->bounds;
-						$projInObj = ms_newprojectionobj("proj=latlong");
+						$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 						$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000,units=m");
 						$shape->project($projInObj, $projOutObj);
 						$s = $shape->towkt();
@@ -2657,7 +2656,7 @@ class Analise
 					case "area":
 						$shape = ms_shapeObjFromWkt($g);
 						$rect = $shape->bounds;
-						$projInObj = ms_newprojectionobj("proj=latlong");
+						$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 						$projOutObj = ms_newprojectionobj("proj=laea,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=500000,y_0=10000000,ellps=GRS67,units=m,no_defs");
 						$shape->project($projInObj, $projOutObj);
 						$s = $shape->towkt();

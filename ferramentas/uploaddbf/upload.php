@@ -13,6 +13,7 @@ if (ob_get_level() == 0) ob_start();
 ?>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="../../css/input.css" />
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>

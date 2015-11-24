@@ -210,6 +210,7 @@ salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto6.js","js");
 //
 
 $cssfiles = array(
+"../css/input.css",
 "../css/geral.css",
 "../css/botoes2.css",
 "../css/documentation.css",
@@ -236,6 +237,7 @@ $buffer = "";
 salvatudojs($cssfiles,$buffer,"../css/i3geo6.css","css");
 //css das ferramentas
 $cssfiles = array(
+"../css/input.css",
 "../css/geral.css",
 "../css/button.css",
 "../css/ferramentas.css",

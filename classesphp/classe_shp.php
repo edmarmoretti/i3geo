@@ -257,7 +257,7 @@ $projecao - codigo epsg da proje&ccedil;&atilde;o das coordenadas
 				$poPoint->setXY($xy[$i],$xy[$i+1]);
 				if($projecao != "")
 				{
-					$projOutObj = ms_newprojectionobj("proj=latlong");
+					$projOutObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 					$projInObj = ms_newprojectionobj("init=epsg:".$projecao);
 					$poPoint->project($projInObj, $projOutObj);
 				}

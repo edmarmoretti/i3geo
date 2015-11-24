@@ -1,3 +1,164 @@
+input{
+font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+input[type=text], textarea{
+-webkit-user-select: text;
+-khtml-user-select: text;
+-moz-user-select: text;
+-o-user-select: text;
+user-select: text;
+}
+input[type=text] {
+font-size: 10px;
+color: #2F4632;
+background-color: #FFFFFF;
+padding: 0;
+border: 1px solid rgb(180, 180, 180);
+text-align: center;
+cursor: text;
+height: 22px;
+}
+input[type=checkbox] {
+border: 0px solid white;
+}
+input[type=file] {
+border: 0px solid white;
+background-color: none;
+background: none;
+}
+select {
+box-shadow: 1px 1px 3px 0 lightgray;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 10px;
+color: #2F4632;
+background-color: #FFFFFF;
+padding: 0;
+border: 1px solid rgb(230, 230, 230);
+text-align: left;
+cursor: pointer;
+}
+select option:hover {
+background-color: #CCFFFF;
+}
+.inputsb {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 10px;
+color: #2F4632;
+background-color: #FFFFFF;
+padding: 0;
+border: 0px solid gray;
+text-align: center;
+cursor: text;
+}
+.styled-select input, .styled-select150 input {
+width: 100%;
+height: 22px;
+border: 0;
+box-shadow: none;
+line-height: 1.5;
+-webkit-appearance: none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+font-size: 12px;
+appearance: none;
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
+background-size: 16px 144px;
+}
+}
+.i3geoForm, .i3geoForm150, .i3geoForm100 {
+width: 252px;
+overflow: hidden;
+background: #F8F8F8;
+border: 1px solid #DDDDDD;
+height: 22px;
+border-radius: 2px;
+}
+.i3geoForm150 {
+width: 150px;
+}
+.i3geoForm100 {
+width: 100px;
+}
+.i3geoFormIconeEdita {
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
+background-size: 16px 144px;
+}
+}
+.i3geoFormIconeUsuario {
+background: transparent url("../imagens/oxygen/22x22/system-users.png") no-repeat scroll 100% 0px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/oxygen/22x22/system-users.png") no-repeat scroll 100% 0px;
+background-size: 16px 144px;
+}
+}
+.i3geoFormIconeSenha {
+background: transparent url("../imagens/oxygen/22x22/preferences-desktop-user-password.png") no-repeat scroll 100% 0px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/oxygen/22x22/preferences-desktop-user-password.png") no-repeat scroll 100% 0px;
+background-size: 16px 144px;
+}
+}
+.i3geoFormSemIcone {
+background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
+background-size: 16px 144px;
+}
+}
+.i3geoFormTag {
+background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
+background-size: 16px 144px;
+}
+border-radius: 8px;
+background-color: #F0F0F0;
+cursor: pointer;
+}
+.i3geoFormIconeAquarela {
+cursor: pointer;
+background: transparent url("../imagens/aquarela.gif") no-repeat scroll 98% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/aquarela.gif") no-repeat scroll 100% 5px;
+background-size: 16px 144px;
+}
+}
+.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
+width: 90%;
+height: 22px;
+border: 0;
+box-shadow: none;
+line-height: 1.5;
+-webkit-appearance: none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+font-size: 12px;
+appearance: none;
+cursor: text;
+}
+.i3geoFormIconeAquarela input{
+width: 80%;
+}
+/*hack opera */
+@media all and (-webkit-min-device-pixel-ratio:10000) , not all and
+(-webkit-min-device-pixel-ratio:0) {
+.inputsb {
+border: 1px solid black
+}
+}
 /*
 para nao selecionar
 */
@@ -7,13 +168,6 @@ para nao selecionar
 -moz-user-select: -moz-none;
 -o-user-select: none;
 user-select: none;
-}
-input[type=text], textarea{
--webkit-user-select: text;
--khtml-user-select: text;
--moz-user-select: text;
--o-user-select: text;
-user-select: text;
 }
 /*
 Para nao marcar links
@@ -576,38 +730,6 @@ text-align: center;
 font-size: 12px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-input {
-font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 10px;
-color: #2F4632;
-background-color: #FFFFFF;
-padding: 0;
-border: 1px solid rgb(180, 180, 180);
-text-align: center;
-cursor: text;
-}
-input[type=checkbox] {
-border: 0px solid white;
-}
-input[type=file] {
-border: 0px solid white;
-background-color: none;
-background: none;
-}
-select {
-box-shadow: 1px 1px 3px 0 lightgray;
-font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 10px;
-color: #2F4632;
-background-color: #FFFFFF;
-padding: 0;
-border: 1px solid rgb(230, 230, 230);
-text-align: left;
-cursor: pointer;
-}
-select option:hover {
-background-color: #CCFFFF;
-}
 .ajuda_usuario {
 background-image: url(../imagens/oxygen/16x16/dialog-information.png);
 background-position: 0px 0px;
@@ -638,16 +760,6 @@ border-style: outset;
 background-position: right;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 10px;
-}
-.inputsb {
-font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 10px;
-color: #2F4632;
-background-color: #FFFFFF;
-padding: 0;
-border: 0px solid gray;
-text-align: center;
-cursor: text;
 }
 .legendatemas {
 cursor: pointer;
@@ -1235,99 +1347,6 @@ background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll
 (min-resolution: 192dpi) {
 background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
 background-size: 16px 144px;
-}
-}
-.styled-select input, .styled-select150 input {
-width: 100%;
-height: 22px;
-border: 0;
-box-shadow: none;
-line-height: 1.5;
--webkit-appearance: none;
--moz-appearance: none;
-text-indent: 0.01px;
-text-overflow: '';
-font-size: 12px;
-appearance: none;
-background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
-background-size: 16px 144px;
-}
-}
-.i3geoForm, .i3geoForm150, .i3geoForm100 {
-width: 252px;
-overflow: hidden;
-background: #F8F8F8;
-border: 1px solid #DDDDDD;
-height: 22px;
-border-radius: 2px;
-}
-.i3geoForm150 {
-width: 150px;
-}
-.i3geoForm100 {
-width: 100px;
-}
-.i3geoFormIconeEdita {
-background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
-background-size: 16px 144px;
-}
-}
-.i3geoFormSemIcone {
-background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
-background-size: 16px 144px;
-}
-}
-.i3geoFormTag {
-background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
-background-size: 16px 144px;
-}
-border-radius: 8px;
-background-color: #F0F0F0;
-cursor: pointer;
-}
-.i3geoFormIconeAquarela {
-cursor: pointer;
-background: transparent url("../imagens/aquarela.gif") no-repeat scroll 98% 5px;
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-background: transparent url("../imagens/aquarela.gif") no-repeat scroll 100% 5px;
-background-size: 16px 144px;
-}
-}
-.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
-width: 90%;
-height: 22px;
-border: 0;
-box-shadow: none;
-line-height: 1.5;
--webkit-appearance: none;
--moz-appearance: none;
-text-indent: 0.01px;
-text-overflow: '';
-font-size: 12px;
-appearance: none;
-cursor: text;
-}
-.i3geoFormIconeAquarela input{
-width: 80%;
-}
-/*hack opera */
-@media all and (-webkit-min-device-pixel-ratio:10000) , not all and
-(-webkit-min-device-pixel-ratio:0) {
-.inputsb {
-border: 1px solid black
 }
 }
 /* esconde na impressao */

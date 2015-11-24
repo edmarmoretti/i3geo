@@ -589,7 +589,7 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 		else
 		{
 			error_reporting(0);
-			$projInObj = ms_newprojectionobj("proj=latlong");
+			$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$pt->x.",x_0=5000000,y_0=10000000");
 
 			$poPoint = ms_newpointobj();
@@ -976,7 +976,7 @@ $geos - array com os dados
 	function projetaDistancia($shape,$distancia){
 		error_reporting(0);
 		$pt = $shape->getCentroid();
-		$projInObj = ms_newprojectionobj("proj=latlong");
+		$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 		$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$pt->x.",x_0=5000000,y_0=10000000");
 		$poPoint = ms_newpointobj();
 		$poPoint->setXY($pt->x, $pt->y);

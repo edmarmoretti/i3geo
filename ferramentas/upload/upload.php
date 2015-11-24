@@ -19,6 +19,7 @@ if (ob_get_level() == 0) ob_start();
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/input.css" />
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <script src="../../classesjs/classe_util.js"></script>
 <title></title>

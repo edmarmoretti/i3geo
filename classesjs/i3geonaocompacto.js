@@ -77,6 +77,7 @@
 	//css
 	var allCssTags = "";
 	var cssfiles = new Array(
+	"../css/input.css",
 	"../css/geral.css",
 	"../css/botoes2.css",
 	"../css/documentation.css",

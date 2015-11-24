@@ -1771,6 +1771,7 @@ function core_parseMustacheBody (hashMustache){
 		//arquivos css
 		//
 		cssfiles =new Array(
+			i3GEO.configura.locaplic+"/css/input.css",
 			i3GEO.configura.locaplic+"/admin/html/admin.css"
 		);
 	}
@@ -1814,6 +1815,7 @@ function core_parseMustacheBody (hashMustache){
 		"../../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
 		"../../pacotes/yui290/build/editor/assets/skins/sam/editor.css",
 		"../../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
+		"../../css/input.css",
 		"../../css/janelaflutuante.css",
 		"../html/admin.css"
 		);

@@ -15,6 +15,7 @@ if (ob_get_level() == 0) ob_start();
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/input.css" />
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>

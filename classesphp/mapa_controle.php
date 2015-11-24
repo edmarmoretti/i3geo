@@ -2417,7 +2417,7 @@ function projetaExt($map_file,$ext,$separador=" ")
 		$rect = ms_newRectObj();
 		$rect->setextent($extA[0],$extA[1],$extA[2],$extA[3]);
 		$prjMapa = $mapa->getProjection();
-		$projInObj = ms_newprojectionobj("proj=latlong");
+		$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 		$projOutObj = ms_newprojectionobj($prjMapa);
 		$rect->project($projInObj, $projOutObj);
 		if($ponto == false)

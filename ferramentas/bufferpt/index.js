@@ -64,7 +64,6 @@ i3GEOF.bufferpt = {
 	 */
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.bufferpt.dicionario);
-		dicionario["distancia"] = $inputText('','','i3GEOFbufferptDistancia','',10,0);
 		dicionario["x"] = i3GEOF.bufferpt.x;
 		dicionario["y"] = i3GEOF.bufferpt.y;
 		return dicionario;
@@ -139,7 +138,7 @@ i3GEOF.bufferpt = {
 		titulo = "<div class='i3GeoTituloJanela'>" + $trad("u10")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=24&idajuda=3' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"290px",
-			"110px",
+			"130px",
 			"",
 			"",
 			"",

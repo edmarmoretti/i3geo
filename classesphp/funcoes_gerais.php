@@ -1238,7 +1238,7 @@ array(
 */
 function geo2utm($x,$y,$zona)
 {
-	$projInObj = ms_newprojectionobj("proj=latlong");
+	$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 	if($y < 0){$ns = "south";}
 	else
 	{$ns = "north";}
@@ -1920,7 +1920,7 @@ function calculaAreaPixel($map_file,$celsize)
 {
 	$mapa = ms_newMapObj($map_file);
 	$rect = $mapa->extent;
-	$projInObj = ms_newprojectionobj("proj=latlong");
+	$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 	$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
 	$y = $rect->maxy - ((($rect->maxy) - ($rect->miny)) / 2);
 	$x = $rect->maxx - ((($rect->maxx) - ($rect->minx)) / 2);

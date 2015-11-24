@@ -291,7 +291,7 @@ function calculaarea($geo)
 	$g = $geo->towkt();
 	$shape = ms_shapeObjFromWkt($g);
 	$rect = $shape->bounds;
-	$projInObj = ms_newprojectionobj("proj=latlong");
+	$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 	$projOutObj = ms_newprojectionobj("proj=laea,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=500000,y_0=10000000,ellps=GRS67,units=m,no_defs");
 	$shape->project($projInObj, $projOutObj);
 	$s = $shape->towkt();

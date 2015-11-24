@@ -12,6 +12,7 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 ?>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="../../css/input.css" />
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>
