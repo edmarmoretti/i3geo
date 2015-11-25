@@ -37,6 +37,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 if (typeof (i3GEOF) === 'undefined') {
 	var i3GEOF = {};
 }
+//TODO incluir as propriedades corretas em OL3 para permitir selecao de figuras
 /*
  * Classe: i3GEOF.selecao
  */
@@ -184,13 +185,13 @@ i3GEOF.selecao =
 					+ '<div class=guiaobj id="i3GEOselecaoguia4obj" style="left:1px;display:none;">'
 					+ '	<p class="paragrafo">'
 					+ '		<input type="checkbox" onclick="" id="i3GEOFselecaoMantemFigura" style="cursor: pointer; border: 0px solid white;" />'
-					+ '		<span style="cursor: pointer; position: relative; top: -2px;">'
+					+ '		<label>'
 					+ $trad('mantemfigura', i3GEOF.selecao.dicionario)
-					+ '</span>'
+					+ '</label>'
 					+ '	</p>'
 					+ '	<br><p class=paragrafo >'
 					+ $trad('distanciaSelecao', i3GEOF.selecao.dicionario)
-					+ '	<div class="styled-select">'
+					+ '	<div class="i3geoForm i3geoFormIconeDistancia">'
 					+ '		<input type=text id=i3GEOselecaotoleranciapt value=0 /></div>'
 					+ '		<br><p class=paragrafo ><input id=i3GEOFSelecaoQuery type=button value="'
 					+ $trad("p8")
@@ -349,7 +350,7 @@ i3GEOF.selecao =
 					+ "<a class=ajuda_usuario target=_blank href='"
 					+ i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=5&idajuda=48a' ><b> </b></a></div></div></div>";
-			janela = i3GEO.janela.cria("510px", "210px", "", "", "", titulo, "i3GEOF.selecao", false, "hd", cabecalho, minimiza);
+			janela = i3GEO.janela.cria("510px", "230px", "", "", "", titulo, "i3GEOF.selecao", false, "hd", cabecalho, minimiza);
 			divid = janela[2].id;
 			i3GEOF.selecao.aguarde = $i("i3GEOF.selecao_imagemCabecalho").style;
 			$i("i3GEOF.selecao_corpo").style.backgroundColor = "white";

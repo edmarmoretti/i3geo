@@ -94,6 +94,78 @@ select option:hover {
 	width: 100px;
 }
 
+.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
+	width: 90%;
+	height: 22px;
+	border: 0;
+	box-shadow: none;
+	line-height: 1.5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 0.01px;
+	text-overflow: '';
+	font-size: 12px;
+	appearance: none;
+	cursor: text;
+}
+
+.i3geoFormIconeMinuto {
+  background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px;
+      background-size: 16px 144px;
+    }
+}
+.i3geoFormIconeMinuto input{
+	width: 85%;
+}
+
+.i3geoFormIconeSegundo {
+  background: transparent url("../imagens/gisicons/segundo.png") no-repeat scroll 100% -1px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/segundo.png") no-repeat scroll 100% -1px;
+      background-size: 16px 144px;
+    }
+}
+.i3geoFormIconeSegundo input{
+	width: 85%;
+}
+
+.i3geoFormIconeLongitude {
+  background: transparent url("../imagens/gisicons/longitude.png") no-repeat scroll 100% -1px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/longitude.png") no-repeat scroll 100% -1px;
+      background-size: 16px 144px;
+    }
+}
+.i3geoFormIconeLongitude input{
+	width: 70%;
+}
+
+.i3geoFormIconeLatitude {
+  background: transparent url("../imagens/gisicons/latitude.png") no-repeat scroll 100% -1px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/latitude.png") no-repeat scroll 100% -1px;
+      background-size: 16px 144px;
+    }
+}
+.i3geoFormIconeLatitude input{
+	width: 70%;
+}
+
+.i3geoFormIconeDistancia {
+  background: transparent url("../imagens/gisicons/length-measure.png") no-repeat scroll 100% -2px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/length-measure.png") no-repeat scroll 100% -2px;
+      background-size: 16px 144px;
+    }
+}
+
 .i3geoFormIconeEdita {
   background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
   @media (-webkit-min-device-pixel-ratio: 2),
@@ -152,22 +224,6 @@ select option:hover {
     }
 
 }
-
-.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
-	width: 90%;
-	height: 22px;
-	border: 0;
-	box-shadow: none;
-	line-height: 1.5;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	text-indent: 0.01px;
-	text-overflow: '';
-	font-size: 12px;
-	appearance: none;
-	cursor: text;
-}
-
 .i3geoFormIconeAquarela input{
 	width: 80%;
 }
