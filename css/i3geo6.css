@@ -98,51 +98,51 @@ appearance: none;
 cursor: text;
 }
 .i3geoFormIconeMinuto {
-background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px;
+background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px / 18px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
 background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px;
-background-size: 16px 144px;
+background-size: 18px 144px;
 }
 }
 .i3geoFormIconeMinuto input{
 width: 85%;
 }
 .i3geoFormIconeSegundo {
-background: transparent url("../imagens/gisicons/segundo.png") no-repeat scroll 100% -1px;
+background: transparent url("../imagens/gisicons/segundo.png") no-repeat scroll 100% -1px / 18px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
 background: transparent url("../imagens/gisicons/segundo.png") no-repeat scroll 100% -1px;
-background-size: 16px 144px;
+background-size: 18px 144px;
 }
 }
 .i3geoFormIconeSegundo input{
 width: 85%;
 }
 .i3geoFormIconeLongitude {
-background: transparent url("../imagens/gisicons/longitude.png") no-repeat scroll 100% -1px;
+background: transparent url("../imagens/gisicons/longitude.png") no-repeat scroll 100% 2px / 18px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
-background: transparent url("../imagens/gisicons/longitude.png") no-repeat scroll 100% -1px;
-background-size: 16px 144px;
+background: transparent url("../imagens/gisicons/longitude.png") no-repeat scroll 100% 2px;
+background-size: 18px 144px;
 }
 }
 .i3geoFormIconeLongitude input{
 width: 70%;
 }
 .i3geoFormIconeLatitude {
-background: transparent url("../imagens/gisicons/latitude.png") no-repeat scroll 100% -1px;
+background: transparent url("../imagens/gisicons/latitude.png") no-repeat scroll 100% 2px / 18px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
-background: transparent url("../imagens/gisicons/latitude.png") no-repeat scroll 100% -1px;
-background-size: 16px 144px;
+background: transparent url("../imagens/gisicons/latitude.png") no-repeat scroll 100% 2px;
+background-size: 18px 144px;
 }
 }
 .i3geoFormIconeLatitude input{
 width: 70%;
 }
 .i3geoFormIconeDistancia {
-background: transparent url("../imagens/gisicons/length-measure.png") no-repeat scroll 100% -2px;
+background: transparent url("../imagens/gisicons/length-measure.png") no-repeat scroll 100% 2px / 18px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
 background: transparent url("../imagens/gisicons/length-measure.png") no-repeat scroll 100% -2px;
