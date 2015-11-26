@@ -25,5 +25,10 @@ i3GEOadmin.perfis.dicionario = {
 		pt : "<p>Perfis existentes: (clique na c&eacute;lula para editar e salve a linha editada)</p>",
 		en : "",
 		es : ""
+	} ],
+    'msgBuscaPerfil' : [ {
+		pt : "buscando perfis...",
+		en : "",
+		es : ""
 	} ]
 };

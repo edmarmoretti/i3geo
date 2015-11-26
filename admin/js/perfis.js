@@ -53,7 +53,7 @@ Obt&eacute;m a lista de perfis
 */
 function pegaPerfis()
 {
-	core_pegaDados("buscando perfis...","../php/menutemas.php?funcao=pegaPerfis","montaTabela");
+	core_pegaDados($trad("msgBuscaPerfil",i3GEOadmin.perfis.dicionario),"../php/menutemas.php?funcao=pegaPerfis","montaTabela");
 }
 function montaTabela(dados)
 {
@@ -78,10 +78,10 @@ function montaTabela(dados)
 			elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
 		};
 		var myColumnDefs = [
-			{key:"excluir",label:"excluir",formatter:formatExclui},
-			{label:"salvar",formatter:formatSalva},
+			{key:"excluir",label:$trad("excluir",i3GEOadmin.core.dicionario),formatter:formatExclui},
+			{label:$trad("salva2",i3GEOadmin.core.dicionario),formatter:formatSalva},
 			{label:"id",key:"id_perfil", formatter:formatTextoId},
-			{label:"nome",resizeable:true,key:"perfil", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
+			{label:$trad("nome",i3GEOadmin.core.dicionario),resizeable:true,key:"perfil", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
 		];
 		myDataSource = new YAHOO.util.DataSource(dados);
 		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
@@ -166,13 +166,13 @@ function gravaLinha(row)
 	var id_perfil = r.getData("id_perfil");
 	var perfil = r.getData("perfil");
 	core_carregando("ativa");
-	var mensagem = " gravando registro do id= "+id_perfil;
+	var mensagem = $trad("gravaId",i3GEOadmin.core.dicionario)+id_perfil;
 	var sUrl = "../php/menutemas.php?funcao=alteraPerfis&perfil="+perfil+"&id="+id_perfil;
 	core_gravaLinha(mensagem,row,sUrl);
 }
 function excluiLinha(id,row)
 {
-	var mensagem = " excluindo o registro do id= "+id;
+	var mensagem = $trad("msgExclui",i3GEOadmin.core.dicionario)+id;
 	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=perfis";
 	core_excluiLinha(sUrl,row,mensagem);
 }

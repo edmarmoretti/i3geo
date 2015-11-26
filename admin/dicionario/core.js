@@ -306,8 +306,8 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'salva2' : [ {
+		pt : "salvar",
 		en : "",
 		es : ""
 	} ],
