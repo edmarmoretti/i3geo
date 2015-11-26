@@ -199,7 +199,7 @@ else{
 		if($filtro != ""){
 			$l->setfilter($filtro);
 		}
-		
+
 		$l->set("data",$data);
 		//acrecenta-se um md5 apos o nome caso seja necessario gerar cache
 		if($cache == true){
@@ -417,6 +417,11 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo"){
 	}
 }
 ms_ioinstallstdouttobuffer();
+//o LAYER pode ter um nome randomico em funcao de ser um plugin
+$l = $oMap->getlayer(0);
+if($req->getValueByName("LAYERS") != $l->name){
+	$req->setParameter("LAYERS",$l->name);
+}
 //verifica parametro outputformat
 if(strtolower($req->getValueByName("REQUEST")) == "getmap" && $req->getValueByName("format") == ""){
 	$req->setParameter("format","image/png");
