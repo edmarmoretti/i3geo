@@ -147,7 +147,7 @@ if(!empty($_GET["request"])){
 $qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
 $qy = file_exists($qyfile);
 
-if($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){
+if($_GET["REQUEST"] == "getlegendgraphic" || $_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){
 	$_GET["DESLIGACACHE"] = "sim";
 }
 else{
@@ -228,6 +228,15 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 				}
 			}
 		}
+		if($_GET["REQUEST"] == "getlegendgraphic"){
+			$nclass = $l->numclasses;
+			for($ic=0;$ic<$nclass;$ic++){
+				$classe = $l->getclass($ic);
+				if($classe->title === ""){
+					$classe->title = $classe->name;
+				}
+			}
+		}
 		if($layerName == $_GET["layer"]){
 			if(strtolower($l->getmetadata("cache")) == "sim"){
 				$cache = true;
@@ -251,7 +260,6 @@ if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao e alter
 		}
 	}
 }
-
 if (!function_exists('imagepng')){
 	$_GET["TIPOIMAGEM"] = "";
 }
@@ -259,7 +267,6 @@ if (!function_exists('imagepng')){
 if($_GET["layer"] == ""){
 	$cache = true;
 }
-
 if(($_GET == false) || ($qy) || (strtolower($_GET["DESLIGACACHE"]) == "sim")){
 	$cache = false;
 }
@@ -282,7 +289,7 @@ if(isset($_GET["mapext"])){
 //
 //qd a cahamda e para um WMS, redireciona para ogc.php
 //
-if($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
+if($_GET["REQUEST"] == "getlegendgraphic" || $_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
 	$req = ms_newowsrequestobj();
 	if($_GET["BBOX"]){
 		$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);

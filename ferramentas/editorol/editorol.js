@@ -152,11 +152,6 @@ i3GEO.editorOL =
 			var alayers = [], fundo = (i3GEO.editorOL.fundo).split(","), nfundo = fundo.length, ncontroles =
 				i3GEO.editorOL.controles.length, i, n, temp;
 
-			// TODO layerswitcher no OL3
-			/*
-			 * if (i3GEO.editorOL.ativalayerswitcher === "false") { i3GEO.editorOL.ativalayerswitcher = false; } if
-			 * (i3GEO.editorOL.ativalayerswitcher === "true") { i3GEO.editorOL.ativalayerswitcher = true; }
-			 */
 			if (i3GEO.editorOL.ativarodadomouse === "false") {
 				i3GEO.editorOL.ativarodadomouse = false;
 			}
@@ -577,59 +572,68 @@ i3GEO.editorOL =
 			i3GEO.editorOL.mapa.zoomToExtent(b);
 		},
 		mostraLegenda : function() {
-			var layers = i3GEO.editorOL.layersLigados(), nlayers = layers.length, ins = "", i, icone = "", url, fers, f = "", fer = "";
+			var prop, layer, layers = i3GEO.editorOL.mapa.getLayers(), nlayers = layers.getLength(), ins = "", i, icone = "", url, f = "";
 			for (i = 0; i < nlayers; i++) {
-				try {
-					if (layers[i].get("isBaseLayer") === false) {
-						url = layers[i].getFullRequestString({
-							"request" : "getlegendgraphic"
-						});
-						//i3GEO.editorOL.mapa.getLayers().item(0).getSource().getUrls()[0]
-						icone = "";
-						if (i3GEO.editorOL.legendahtml === true) {
-							// os parametros FORMAT e SERVICE sao inseridos de forma redundante para grantir
-							// caso seja um TMS
-							url = url.replace("image%2Fpng", "text/html") + "&FORMAT=text/html&SERVICE=WMS";
-							// verifica se a camada veio de um plugin de classe_plugini3geo
-							// e insere o icone se for necessario
-							if (layers[i].options.plugini3geo) {
-								if (layers[i].params.LAYERS) {
-									// wms
-									icone = i3GEO.pluginI3geo[layers[i].options.plugini3geo].iconeArvoreDeCamadas(layers[i].params.LAYERS);
-								} else {
-									// tms
-									icone = i3GEO.pluginI3geo[layers[i].options.plugini3geo].iconeArvoreDeCamadas(layers[i].layers);
-								}
-							}
-							//
-							// verifica se a camada tem ferramentas parametrizadas
-							// insere o icone
-							//
-							fers = layers[i].options.ferramentas;
-							for (fer in fers) {
-								if (i3GEO.configura.ferramentasLayers[fer]) {
-									icone = i3GEO.configura.ferramentasLayers[fer].icone(layers[i]);
-								}
-							}
-							ins += icone + layers[i].name + "<br><div id=legendaL_" + i + " ></div><br>";
-							// necessario pq nao e sincrono
-							eval("var f = function(retorno){document.getElementById('legendaL_" + i
-								+ "').innerHTML = retorno.responseText;};");
-							url = url.replace("LAYERS", "LAYER");
-							var config = {
-								method : "GET",
-								url : url,
-								callback : f
-							};
-							OpenLayers.Request.issue(config);
-						} else {
-							url = url.replace("LAYERS", "LAYER");
-							url = url.replace("&Z=${z}&X=${x}&Y=${y}", "");
-							url = url.replace("Z=${z}&X=${x}&Y=${y}", "");
-							ins += layers[i].name + "<br><img src='" + url + "&SERVICE=wms' /><br>";
-						}
+				layer = layers.item(i);
+				prop = layer.getProperties();
+				//monta a url para fazer a requisicao da legenda
+				//para os temas que nao sao baselayers
+				if(prop.source.getUrls){
+					url = prop.source.getUrls()[0];
+					url = url.replace("&cache=sim", "&DESLIGACACHE=sim");
+					url = url.replace("&Z=${z}&X=${x}&Y=${y}", "");
+					url = url.replace("Z=${z}&X=${x}&Y=${y}", "");
+					url += "&REQUEST=getlegendgraphic&service=wms&version=1.0.0";
+					if (i3GEO.Interface.openlayers.googleLike === true) {
+						url += "&SRS=EPSG:3857";
 					}
-				} catch (e) {
+					icone = "";
+					//TODO criar a legenda para uso no mashup
+					//caso do mashup
+					if (i3GEO.editorOL.legendahtml === true) {
+						// os parametros FORMAT e SERVICE sao inseridos de forma redundante para grantir
+						// caso seja um TMS
+						url = url.replace("image%2Fpng", "text/html") + "&FORMAT=text/html&SERVICE=WMS";
+						// verifica se a camada veio de um plugin de classe_plugini3geo
+						// e insere o icone se for necessario
+						/*
+						if (layers[i].options.plugini3geo) {
+							if (layers[i].params.LAYERS) {
+								// wms
+								icone = i3GEO.pluginI3geo[layers[i].options.plugini3geo].iconeArvoreDeCamadas(layers[i].params.LAYERS);
+							} else {
+								// tms
+								icone = i3GEO.pluginI3geo[layers[i].options.plugini3geo].iconeArvoreDeCamadas(layers[i].layers);
+							}
+						}
+						//
+						// verifica se a camada tem ferramentas parametrizadas
+						// insere o icone
+						//
+						fers = layers[i].options.ferramentas;
+						for (fer in fers) {
+							if (i3GEO.configura.ferramentasLayers[fer]) {
+								icone = i3GEO.configura.ferramentasLayers[fer].icone(layers[i]);
+							}
+						}
+						*/
+						ins += icone + prop.name + "<br><div id=legendaL_" + i + " ></div><br>";
+						// necessario pq nao e sincrono
+						eval("var f = function(retorno){document.getElementById('legendaL_" + i
+							+ "').innerHTML = retorno.responseText;};");
+						url = url.replace("LAYERS", "LAYER");
+						var config = {
+							method : "GET",
+							url : url,
+							callback : f
+						};
+						OpenLayers.Request.issue(config);
+					} else if (prop.isBaseLayer === false && prop.visible === true) {
+						//caso a legenda seja aberta dentro do i3Geo
+						url = url.replace("LAYERS", "LAYER");
+						url += "&FORMAT=image/png";
+						ins += prop.title + "<br><img src='" + url + "' /><br>";
+					}
 				}
 			}
 			if (!document.getElementById("panellegendaeditorOL")) {
