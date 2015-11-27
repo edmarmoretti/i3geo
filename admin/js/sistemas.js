@@ -49,7 +49,7 @@ function ativaBotaoAdicionaRaiz(sUrl,idBotao)
 	var botao, adiciona = function()
 	{
 		core_carregando("ativa");
-		core_carregando(" adicionando um novo registro");
+		core_carregando($trad("msgNovoRegistro",i3GEOadmin.core.dicionario));
 		var callback =
 		{
 				success:function(o)
@@ -79,7 +79,7 @@ Obt&eacute;m a lista de sistemas
 */
 function pegaSistemas()
 {
-	core_pegaDados("buscando sistemas...","../php/sistemas.php?funcao=pegaSistemas","montaArvore");
+	core_pegaDados($trad("msgBuscaSistema",i3GEOadmin.sistemas.dicionario),"../php/sistemas.php?funcao=pegaSistemas","montaArvore");
 }
 /*
 Function: montaArvore
@@ -140,8 +140,8 @@ function adicionaNos(no,dados,redesenha)
 {
 	for (var i=0, j=dados.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('funcao','"+dados[i].id_funcao+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('funcao','"+dados[i].id_funcao+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].nome_funcao+"</span>";
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('funcao','"+dados[i].id_funcao+"')\" title="+ $trad('excluir',i3GEOadmin.core.dicionario) +" width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('funcao','"+dados[i].id_funcao+"')\" title="+ $trad('editar',i3GEOadmin.core.dicionario) +" width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].nome_funcao+"</span>";
 		var d = {html:conteudo,id_funcao:dados[i].id_funcao,tipo:"funcao"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -154,9 +154,9 @@ function adicionaNosRaiz(dados,redesenha)
 	var root = tree.getRoot();
 	for (var i=0, j=dados.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('sistema','"+dados[i].id_sistema+"')\" title=excluir src=\"../imagens/01.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionarFuncao('"+dados[i].id_sistema+"')\" title='adiciona fun&ccedil;&atilde;o' src=\"../imagens/05.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('sistema','"+dados[i].id_sistema+"')\" title=editar src=\"../imagens/06.png\" /><b>&nbsp;<span>"+dados[i].nome_sistema+"</span>";
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('sistema','"+dados[i].id_sistema+"')\" title="+ $trad('excluir',i3GEOadmin.core.dicionario) +" src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionarFuncao('"+dados[i].id_sistema+"')\" title="+ $trad('adicionaFuncao',i3GEOadmin.sistemas.dicionario) +" src=\"../imagens/05.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('sistema','"+dados[i].id_sistema+"')\" title="+ $trad('editar',i3GEOadmin.core.dicionario) +" src=\"../imagens/06.png\" /><b>&nbsp;<span>"+dados[i].nome_sistema+"</span>";
 		var d = {html:conteudo,id_sistema:dados[i].id_sistema,tipo:"sistema"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 		tempNode.enableHighlight = false;
@@ -177,7 +177,7 @@ function editar(tipo,id)
 	if(tipo == "funcao")
 	{
 		core_carregando("ativa");
-		core_carregando(" buscando dados");
+		core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 		var callback =
 		{
 			success:function(o)
@@ -198,7 +198,7 @@ function editar(tipo,id)
 	if(tipo == "sistema")
 	{
 		core_carregando("ativa");
-		core_carregando(" buscando dados");
+		core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 		var callback =
 		{
 			success:function(o)
@@ -219,14 +219,14 @@ function editar(tipo,id)
 }
 function montaEditorSistemas(dados,id)
 {
-	core_montaEditor("gravaDadosSistema('"+id+"')","","","","Sistema",true,true,false);
+	core_montaEditor("gravaDadosSistema('"+id+"')","","","",$trad("sistema",i3GEOadmin.sistemas.dicionario),true,true,false);
 	$i("editor_bd").innerHTML = montaDivSistemas(dados);
 	core_carregando("desativa");
 	core_comboPerfis("comboPerfis","selPerfil","","registraPerfil(this.value,\"Eperfil_sistema\")");
 }
 function montaEditorFuncoes(dados,id)
 {
-	core_montaEditor("gravaDadosFuncao('"+id+"')","","","","Fun&ccedil;&atilde;o",true,true,false);
+	core_montaEditor("gravaDadosFuncao('"+id+"')","","","",$trad("funcao",i3GEOadmin.sistemas.dicionario),true,true,false);
 	$i("editor_bd").innerHTML = montaDivFuncoes(dados);
 	core_carregando("desativa");
 	core_comboPerfis("comboPerfis","selPerfil","","registraPerfil(this.value,\"Eperfil_funcao\")");
@@ -245,13 +245,13 @@ function montaDivSistemas(i)
 	var param =
 	{
 		"linhas":[
-		{titulo:"Nome:",id:"Enome_sistema",size:"50",value:i.nome_sistema,tipo:"text",div:""},
-		{titulo:"Perfis - escolha da lista abaixo:",id:"Eperfil_sistema",size:"50",value:i.perfil_sistema,tipo:"text",div:"<div id=comboPerfis >Buscando...</div>"}
+		{titulo:$trad("nome",i3GEOadmin.sistemas.dicionario),id:"Enome_sistema",size:"50",value:i.nome_sistema,tipo:"text",div:""},
+		{titulo:$trad("perfil",i3GEOadmin.sistemas.dicionario),id:"Eperfil_sistema",size:"50",value:i.perfil_sistema,tipo:"text",div:"<div id=comboPerfis >Buscando...</div>"}
 		]
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
-	ins += "<br>Publicado?<br>";
+	ins += "<br>"+ $trad("publicado",i3GEOadmin.sistemas.dicionario) +"<br>";
 	ins += "<select id='Epublicado_sistema' >";
 	ins += core_combosimnao(i.publicado_sistema);
 	ins += "</select>";
@@ -262,11 +262,11 @@ function montaDivFuncoes(i)
 	var param =
 	{
 		"linhas":[
-		{titulo:"Nome da fun&ccedil;&atilde;o:",id:"Enome_funcao",size:"50",value:i.nome_funcao,tipo:"text",div:""},
-		{titulo:"Programa que ser&aacute; executado:",id:"Eabrir_funcao",size:"50",value:i.abrir_funcao,tipo:"text",div:""},
-		{titulo:"Largura da janela onde o programa ser&aacute; aberto:",id:"Ew_funcao",size:"5",value:i.w_funcao,tipo:"text",div:""},
-		{titulo:"Altura da janela:",id:"Eh_funcao",size:"5",value:i.h_funcao,tipo:"text",div:""},
-		{titulo:"Perfis - escolha da lista abaixo:",id:"Eperfil_funcao",size:"50",value:i.perfil_funcao,tipo:"text",div:"<div id=comboPerfis >Buscando...</div>"}
+		{titulo:$trad("publicado",i3GEOadmin.sistemas.dicionario),id:"Enome_funcao",size:"50",value:i.nome_funcao,tipo:"text",div:""},
+		{titulo:$trad("programa",i3GEOadmin.sistemas.dicionario),id:"Eabrir_funcao",size:"50",value:i.abrir_funcao,tipo:"text",div:""},
+		{titulo:$trad("largura",i3GEOadmin.sistemas.dicionario),id:"Ew_funcao",size:"5",value:i.w_funcao,tipo:"text",div:""},
+		{titulo:$trad("altura",i3GEOadmin.sistemas.dicionario),id:"Eh_funcao",size:"5",value:i.h_funcao,tipo:"text",div:""},
+		{titulo:$trad("perfilLista",i3GEOadmin.sistemas.dicionario),id:"Eperfil_funcao",size:"50",value:i.perfil_funcao,tipo:"text",div:"<div id=comboPerfis >Buscando...</div>"}
 		]
 	};
 	var ins = "";
@@ -284,7 +284,7 @@ Exclui um no espec&iacute;fico
 */
 function excluir(tipo,id)
 {
-	var mensagem = " excluindo o registro do id= "+id;
+	var mensagem = $trad("msgExclui",i3GEOadmin.core.dicionario)+id;
 	var no = "", sUrl = "";
 	if(tipo == "sistema")
 	{
@@ -337,7 +337,7 @@ function gravaDadosFuncao(id)
 	{par += "&"+campos[i]+"_funcao="+($i("E"+campos[i]+"_funcao").value);}
 	par += "&id_funcao="+id;
 	core_carregando("ativa");
-	core_carregando(" gravando o registro do id= "+id);
+	core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 	var sUrl = "../php/sistemas.php?funcao=alterarFuncoes"+par;
 	var callback =
 	{
@@ -347,7 +347,7 @@ function gravaDadosFuncao(id)
 				{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 					{
-						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						core_carregando("<span style=color:red >"+ $trad("msgNaoExclui",i3GEOadmin.sistemas.dicionario) +"</span>");
 						setTimeout("core_carregando('desativa')",3000);
 					}
 					else
@@ -382,7 +382,7 @@ function gravaDadosSistema(id)
 	{par += "&"+campos[i]+"_sistema="+($i("E"+campos[i]+"_sistema").value);}
 	par += "&id_sistema="+id;
 	core_carregando("ativa");
-	core_carregando(" gravando o registro do id= "+id);
+	core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 	var sUrl = "../php/sistemas.php?funcao=alterarSistemas"+par;
 	var callback =
 	{
@@ -392,7 +392,7 @@ function gravaDadosSistema(id)
 				{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
 					{
-						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						core_carregando("<span style=color:red >"+ $trad("msgNaoExclui",i3GEOadmin.sistemas.dicionario) +"</span>");
 						setTimeout("core_carregando('desativa')",3000);
 					}
 					else

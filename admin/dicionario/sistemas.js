@@ -25,5 +25,75 @@ i3GEOadmin.sistemas.dicionario = {
 		pt : "Sistemas existentes:",
 		en : "",
 		es : ""
+	} ],
+    'msgBuscaSistema' : [ {
+		pt : "buscando sistemas...",
+		en : "",
+		es : ""
+	} ],
+    'adicionaFuncao' : [ {
+		pt : "'adiciona fun&ccedil;&atilde;o'",
+		en : "",
+		es : ""
+	} ],
+    'sistema' : [ {
+		pt : "Sistema",
+		en : "",
+		es : ""
+	} ],
+    'funcao' : [ {
+		pt : "Fun&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
+    'nome' : [ {
+		pt : "Nome:",
+		en : "",
+		es : ""
+	} ],
+    'perfil' : [ {
+		pt : "Perfis - escolha da lista abaixo:",
+		en : "",
+		es : ""
+	} ],
+    'publicado' : [ {
+		pt : "Publicado?",
+		en : "",
+		es : ""
+	} ],
+    'nomeFuncao' : [ {
+		pt : "Nome da fun&ccedil;&atilde;o:",
+		en : "",
+		es : ""
+	} ],
+    'programa' : [ {
+		pt : "Programa que ser&aacute; executado:",
+		en : "",
+		es : ""
+	} ],
+    'largura' : [ {
+		pt : "Largura da janela onde o programa ser&aacute; aberto:",
+		en : "",
+		es : ""
+	} ],
+    'altura' : [ {
+		pt : "Altura da janela:",
+		en : "",
+		es : ""
+	} ],
+    'perfilLista' : [ {
+		pt : "Perfis - escolha da lista abaixo:",
+		en : "",
+		es : ""
+	} ],
+    'msgNaoExclui' : [ {
+		pt : "N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
 	} ]
 };
