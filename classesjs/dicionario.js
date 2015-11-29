@@ -2523,43 +2523,43 @@ var g_traducao =
 		"dlinha" : [
 			{
 				pt : "digitalizar linha",
-				en : "",
-				es : ""
+				en : "digitalize line",
+				es : "digitalizar l&iacute;nea"
 			}
 		],
 		"dpol" : [
 			{
 				pt : "digitalizar poligono",
-				en : "",
-				es : ""
+				en : "digitalize polygon",
+				es : "digitalizar Pol&iacute;gono"
 			}
 		],
 		"dponto" : [
 			{
 				pt : "digitalizar ponto",
-				en : "",
-				es : ""
+				en : "digitalize point",
+				es : "digitalizar punto"
 			}
 		],
 		"dtexto" : [
 			{
 				pt : "digitalizar texto",
-				en : "",
-				es : ""
+				en : "digitalize text",
+				es : "digitalizar texto"
 			}
 		],
 		"cortaf" : [
 			{
 				pt : "corta figura",
-				en : "",
-				es : ""
+				en : "cut shape",
+				es : "corta figura"
 			}
 		],
 		"modf" : [
 			{
 				pt : "modifica figura",
-				en : "",
-				es : ""
+				en : "modify shape",
+				es : "modificar figura"
 			}
 		],
 		"listag" : [
