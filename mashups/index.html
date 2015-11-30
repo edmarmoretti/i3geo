@@ -1,39 +1,89 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html>
 <head>
-
-<title>i3Geo</title>
-<link rel="stylesheet" type="text/css" href="../admin/html/admin.css">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Mashups</title>
+<link rel="stylesheet" type="text/css" href="../css/input.css" />
+<link rel="stylesheet" type="text/css" href="../css/geral.css">
 <style>
-body,td {
-	text-align: left;
-	border: 0px solid #FFFFFF;
+P {
+	text-align: justify;
+	font-size: 14px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	position: relative;
-	font-size: 10pt;
-	padding-bottom: 10px;
 }
 
-.m {
-	font-size: 11pt;
-	margin-left: 10px;
+fieldset {
+	border: 1px solid #F0F0F0;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 1px 1px 1px 1px lightgray;
+	margin: auto;
+	margin-top: 20px;
+	padding: 5px;
+	background-color: white;
+	font-size: 0.4cm;
+	display: block;
+	width: 80%;
+}
+.borda {
+	background-color: #4682b4;
+	padding: 5px 0px 5px 0px;
+	text-align: left;
+	width: 100%;
+}
+#bandeiras img {
+	margin-left: 7px;
+}
+
+#bandeiras {
+	width: 100px;
+	text-align: left;
+	position: absolute;
+	left: 0.2cm;
+	z-index: 10;
+}
+
+a {
+	margin: 0px auto;
+	text-decoration: none;
+	font-size: 14px;
+	color: #26298D;
+	outline: doted;
+}
+
+A:hover {
+	color: #4142ff;
+}
+
+body {
+	padding-top: 0px;
+	COLOR: #2F4632;
+	text-align: center;
+	font-size: 0.6cm;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: rgb(250, 250, 250);
+	margin: auto;
+}
+
+legend {
+	font-size: 14px;
 }
 </style>
 </head>
-<body class="yui-skin-sam fundoPonto">
-	<center>
-		<div class="bordaSuperior">&nbsp;</div>
-		<div class="mascaraPrincipal" id="divGeral" style="height: 2000px;">
-			<img src="../imagens/i3geo1.jpg"><br>
-			<h1>Mashups do i3geo</h1>
+<body>
+	<div class="borda">
+		<div id="bandeiras"></div>
+		<div style="text-align: center; color: white;">
+			<b>Mashups do i3geo</b>
+		</div>
+	</div>
+	<div style="text-align: left; margin: auto; width: 100%;">
+		<fieldset>
 			<p>Mashups s&atilde;o pequenos programas que podem ser facilmente inseridos em p&aacute;ginas HTML e que mostram determinados
 				conte&uacute;dos.</p>
 			<p>No caso do i3Geo, os mashups mostram mapas tendo como base o conjunto de temas existentes no diret&oacute;rio i3geo/temas.</p>
-
-			<p>
-				<b>OpenLayers</b>
-			</p>
-			<fieldset>
+		</fieldset>
+		<fieldset>
+		<legend>OpenLayers</legend>
 				<p>
 					O <a href="http://openlayers.org" target=_blank>OpenLayers</a> &eacute; uma biblioteca em javascript bastante popular. Possu&iacute;
 					uma interface simples mas que pode conter um grande n&uacute;mero de funcionalidades.
@@ -60,7 +110,8 @@ body,td {
 				</p>
 			</fieldset>
 			<fieldset>
-				<p>Filtro - cada tema pode receber filtros seguindo-se a sintaxe &amp;map_layer_{codigo do tema}_filter=<br>
+			<legend>Filtro</legend>
+				<p>Cada tema pode receber filtros seguindo-se a sintaxe &amp;map_layer_{codigo do tema}_filter=<br>
 				Em camadas com origem em arquivos shapefile o valor do filtro segue o padr&atilde;o (('[nome_da_coluna]'='valor_do_registro'))<br>
 				Camadas baseadas em Postgis seguem o padr&atilde;o nome_da_coluna=valor_do_registro.
 				</p>
@@ -72,7 +123,7 @@ body,td {
 				</p>
 			</fieldset>
 			<fieldset>
-				<p>Todas as op&ccedil;&otilde;es e um tema adicionado</p>
+				<legend>Todas as op&ccedil;&otilde;es e um tema adicionado</legend>
 				<p class="m">
 					Windows: <a target=_blank href="openlayers.php?temas=_wbiomashp&largura=800&altura=500">openlayers.php?temas=_wbiomashp&amp;largura=800&amp;altura=500</a>
 				</p>
@@ -81,9 +132,7 @@ body,td {
 				</p>
 			</fieldset>
 			<fieldset>
-				<p>
-					Duas camadas mas com apenas uma vis&iacute;vel na inicializa&ccedil;&atilde;o do mapa
-				</p>
+				<legend>Duas camadas mas com apenas uma vis&iacute;vel na inicializa&ccedil;&atilde;o do mapa</legend>
 				<p class="m">
 					Windows: <a target=_blank href="openlayers.php?temas=_wbiomashp,_wlocali&largura=800&altura=500&visiveis=_wbiomashp">openlayers.php?temas=_wbiomashp,_wlocali&amp;largura=800&amp;altura=500&amp;visiveis=_wbiomashp</a>
 				</p>
@@ -92,7 +141,7 @@ body,td {
 				</p>
 			</fieldset>
 			<fieldset>
-				<p>Zoom para uma regi&atilde;o</p>
+				<legend>Zoom para uma regi&atilde;o</legend>
 				<p class="m">
 					Windows: <a target=_blank href="openlayers.php?temas=_wbiomashp&largura=800&mapext=-68.39967%20-12.16172%20-62.67402%20-5.366808">openlayers.php?temas=_wbiomashp&amp;largura=800&amp;mapext=-68.39967
 						-12.16172 -62.67402 -5.366808</a>
@@ -103,7 +152,7 @@ body,td {
 				</p>
 			</fieldset>
 			<fieldset>
-				<p>Bot&otilde;es principais e barra de zoom maior</p>
+				<legend>Bot&otilde;es principais e barra de zoom maior</legend>
 				<p class="m">
 					Windows: <a target=_blank
 						href="openlayers.php?temas=_wbiomashp&largura=800&botoes=pan,zoombox,zoomtot,distancia,area,identifica&numzoomlevels=10">openlayers.php?temas=_wbiomashp&amp;largura=800&amp;botoes=pan,zoombox,zoomtot,distancia,area,identifica&amp;numzoomlevels=10</a>
@@ -114,7 +163,7 @@ body,td {
 				</p>
 			</fieldset>
 			<fieldset>
-				<p>Inclus&atilde;o de pontos</p>
+				<legend>Inclus&atilde;o de pontos</legend>
 				<p class="m">
 					Windows: <a target=_blank href="openlayers.php?temas=_wbiomashp&largura=800&pontos=-54%20-12%20-56%20-15">openlayers.php?temas=_wbiomashp&amp;largura=800&amp;pontos=-54
 						-12 -56 -15</a>
@@ -125,7 +174,7 @@ body,td {
 				</p>
 			</fieldset>
 			<fieldset>
-				<p>Camada adicional como fundo</p>
+				<legend>Camada adicional como fundo</legend>
 				<p class="m">
 					Windows: <a target=_blank href="openlayers.php?temas=_wbiomashp&largura=800&fundo=_wbiomashp">openlayers.php?temas=_wbiomashp&amp;largura=800&amp;fundo=_wbiomashp</a>
 				</p>
@@ -134,8 +183,7 @@ body,td {
 				</p>
 			</fieldset>
 			<fieldset>
-
-				<p>KML</p>
+				<legend>KML</legend>
 				<p class="m">
 					Windows: <a target=_blank href="openlayers.php?temas=_wbiomashp&largura=700&kml=http://localhost/i3geo/aplicmap/dados/sundials.kml">openlayers.php?temas=_wbiomashp&amp;largura=700&amp;kml=http://localhost/i3geo/aplicmap/dados/sundials.kml</a>
 				</p>
