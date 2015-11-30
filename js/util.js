@@ -2925,7 +2925,7 @@ i3GEO.util =
 		 * Converte string 'xmin ymin xmax ymax' ou 'xmin ymin' de geo para a projecao OSM
 		 */
 		extGeo2OSM : function(ext, retornaArray) {
-			var metrica, point, proj900913, projWGS84, temp, sep;
+			var metrica, point, temp, sep;
 			sep = " ";
 			if (typeof ext == "object") {
 				return i3GEO.util.projGeo2OSM(ext);
@@ -2937,15 +2937,13 @@ i3GEO.util =
 					temp = ext.split(sep);
 				}
 				if (temp[0] * 1 <= 180 && temp[0] * 1 >= -180) {
-					projWGS84 = new OpenLayers.Projection("EPSG:4326");
-					proj900913 = new OpenLayers.Projection("EPSG:900913");
-					point = new OpenLayers.LonLat(temp[0], temp[1]);
-					metrica = point.transform(projWGS84, proj900913);
-					ext = metrica.lon + sep + metrica.lat;
+					point = new ol.geom.Point([temp[0], temp[1]]);
+					metrica = point.transform("EPSG:4326","EPSG:900913");
+					ext = metrica.getCoordinates()[0] + sep + metrica.getCoordinates()[1];
 					if (temp.length > 2) {
-						point = new OpenLayers.LonLat(temp[2], temp[3]);
-						metrica = point.transform(projWGS84, proj900913);
-						ext += sep + metrica.lon + sep + metrica.lat;
+						point = new ol.geom.Point([temp[2], temp[3]]);
+						metrica = point.transform("EPSG:4326","EPSG:900913");
+						ext += sep + metrica.getCoordinates()[0] + sep + metrica.getCoordinates()[1];
 					}
 				}
 			}
@@ -2961,7 +2959,7 @@ i3GEO.util =
 		 * Converte string 'xmin ymin xmax ymax' ou 'xmin ymin' de geo para a projecao OSM
 		 */
 		extOSM2Geo : function(ext, retornaArray) {
-			var metrica, point, proj900913, projWGS84, temp, sep;
+			var metrica, point, temp, sep;
 			sep = " ";
 			if (typeof ext == "object") {
 				return i3GEO.util.projOSM2Geo(ext);
@@ -2973,15 +2971,13 @@ i3GEO.util =
 					temp = ext.split(sep);
 				}
 				if (temp[0] * 1 >= 180 || temp[0] * 1 <= -180) {
-					projWGS84 = new OpenLayers.Projection("EPSG:4326");
-					proj900913 = new OpenLayers.Projection("EPSG:900913");
-					point = new OpenLayers.LonLat(temp[0], temp[1]);
-					metrica = point.transform(proj900913, projWGS84);
-					ext = metrica.lon + sep + metrica.lat;
+					point = new ol.geom.Point([temp[0], temp[1]]);
+					metrica = point.transform("EPSG:900913","EPSG:4326");
+					ext = metrica.getCoordinates()[0] + sep + metrica.getCoordinates()[1];
 					if (temp.length > 2) {
-						point = new OpenLayers.LonLat(temp[2], temp[3]);
-						metrica = point.transform(proj900913, projWGS84);
-						ext += sep + metrica.lon + sep + metrica.lat;
+						point = new ol.geom.Point([temp[2], temp[3]]);
+						metrica = point.transform("EPSG:900913","EPSG:4326");
+						ext += sep + metrica.getCoordinates()[0] + sep + metrica.getCoordinates()[1];
 					}
 				}
 			}
@@ -2998,9 +2994,7 @@ i3GEO.util =
 		 */
 		projOSM2Geo : function(obj) {
 			if (i3GEO.Interface.openlayers.googleLike === true) {
-				projWGS84 = new OpenLayers.Projection("EPSG:4326");
-				proj900913 = new OpenLayers.Projection("EPSG:900913");
-				obj = obj.transform(proj900913, projWGS84);
+				obj = obj.transform("EPSG:900913","EPSG:4326");
 			}
 			return obj;
 		},
@@ -3011,9 +3005,7 @@ i3GEO.util =
 		 */
 		projGeo2OSM : function(obj) {
 			if (i3GEO.Interface.openlayers.googleLike === true) {
-				projWGS84 = new OpenLayers.Projection("EPSG:4326");
-				proj900913 = new OpenLayers.Projection("EPSG:900913");
-				obj = obj.transform(projWGS84, proj900913);
+				obj = obj.transform("EPSG:4326","EPSG:900913");
 			}
 			return obj;
 		},
@@ -3400,7 +3392,7 @@ i3GEO.util =
 		},
 		/**
 		 * Function: uid
-		 * 
+		 *
 		 * Retorna um ID unico baseado no tempo
 		 */
 		uid : function(){
