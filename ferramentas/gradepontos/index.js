@@ -171,15 +171,15 @@ i3GEOF.gradeDePontos = {
 		else{
 			ins += "<p class='paragrafo'>X: ";
 			ins += $trad('grau',i3GEOF.gradeDePontos.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDePontos.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDePontos.dicionario)+"</p>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input id='i3GEOgradedepontosxg' title='grau' type=text value='1'/></div>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;margin-right:10px;' ><input  id='i3GEOgradedepontosxm' title='minuto' type=text value='00'/></div>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='margin-left:10px;' ><input  id='i3GEOgradedepontosxs' title='segundo' type=text value='00.00'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeLongitude' style='float:left;' ><input id='i3GEOgradedepontosxg' title='grau' type=text value='1'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;margin-right:10px;' ><input  id='i3GEOgradedepontosxm' title='minuto' type=text value='00'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='margin-left:10px;' ><input  id='i3GEOgradedepontosxs' title='segundo' type=text value='00.00'/></div>";
 
 			ins += "<br><p class='paragrafo'>Y: ";
 			ins += $trad('grau',i3GEOF.gradeDePontos.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDePontos.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDePontos.dicionario)+"</p>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input  class=digitar id='i3GEOgradedepontosyg' title='grau' type=text value='1'/></div>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepontosym' title='minuto' type=text value='00'/></div>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepontosys' title='segundo' type=text value='00.00'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeLatitude' style='float:left;' ><input  class=digitar id='i3GEOgradedepontosyg' title='grau' type=text value='1'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepontosym' title='minuto' type=text value='00'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepontosys' title='segundo' type=text value='00.00'/></div>";
 		}
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t0()","i3GEOF.gradeDePontos.t2()",ins,"i3GEOF.gradeDePontos.t1","i3GEOgradedepontosresultado",true,"i3GEOF.gradeDePontos_rodape");
 	},
@@ -187,15 +187,15 @@ i3GEOF.gradeDePontos = {
 		var ins = "<p class='paragrafo'><b>"+$trad('coord',i3GEOF.gradeDePontos.dicionario)+"</b>";
 		ins += "<p class='paragrafo'>X: ";
 		ins += $trad('grau',i3GEOF.gradeDePontos.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDePontos.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDePontos.dicionario)+"</p>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input id='i3GEOgradedepontosixg' title='grau' type=text value='1'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;margin-right:10px;' ><input  id='i3GEOgradedepontosixm' title='minuto' type=text value='00'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='margin-left:10px;' ><input  id='i3GEOgradedepontosixs' title='segundo' type=text value='00.00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeLongitude' style='float:left;' ><input id='i3GEOgradedepontosixg' title='grau' type=text value='1'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;margin-right:10px;' ><input  id='i3GEOgradedepontosixm' title='minuto' type=text value='00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='margin-left:10px;' ><input  id='i3GEOgradedepontosixs' title='segundo' type=text value='00.00'/></div>";
 
 		ins += "<br><p class='paragrafo'>Y: ";
 		ins += $trad('grau',i3GEOF.gradeDePontos.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDePontos.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDePontos.dicionario)+"</p>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input id='i3GEOgradedepontosiyg' title='grau' type=text value='1'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepontosiym' title='minuto' type=text value='00'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepontosiys' title='segundo' type=text value='00.00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeLatitude' style='float:left;' ><input id='i3GEOgradedepontosiyg' title='grau' type=text value='1'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepontosiym' title='minuto' type=text value='00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepontosiys' title='segundo' type=text value='00.00'/></div>";
 
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t1()","i3GEOF.gradeDePontos.t3()",ins,"i3GEOF.gradeDePontos.t2","i3GEOgradedepontosresultado",true,"i3GEOF.gradeDePontos_rodape");
 		i3GEO.eventos.cliquePerm.desativa();

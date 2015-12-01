@@ -141,7 +141,17 @@ i3GEOF.geolocal =
 			i3GEOF.geolocal.aguarde = $i("i3GEOF.geolocal_imagemCabecalho").style;
 			i3GEOF.geolocal.inicia(divid);
 			temp = function() {
-				i3GEOF.geolocal[i3GEO.Interface.ATUAL].removeLayer();
+				var api;
+				if (i3GEO.Interface["ATUAL"] === "openlayers") {
+					if (typeof OpenLayers == "undefined") {
+						api = "ol3";
+					} else {
+						api = "openlayers";
+					}
+				} else {
+					api = i3GEO.Interface["ATUAL"];
+				}
+				i3GEOF.geolocal[api].removeLayer();
 				i3GEOF.geolocal.paraTempo();
 			};
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
@@ -336,9 +346,26 @@ i3GEOF.geolocal =
 					feature = new ol.Feature({
 						geometry : new ol.geom.Point([
 							ps[i].coords.longitude, ps[i].coords.latitude
-						]),
-						origem : 'i3GEOFgeolocal'
+						])
 					});
+					feature.setProperties({
+						origem : "i3GEOFgeolocal"
+					});
+					feature.setId(i3GEO.util.uid());
+					feature.setStyle(
+						new ol.style.Style({
+							image: new ol.style.Circle({
+								radius: 6,
+								fill: new ol.style.Fill({
+									color: 'red'
+								}),
+								stroke: new ol.style.Stroke({
+									color: 'white',
+									width: 2
+								})
+							})
+						})
+					);
 					i3GEO.desenho.layergrafico.getSource().addFeature(feature);
 					// linha
 					if (ps[i + 1]) {
@@ -349,29 +376,52 @@ i3GEOF.geolocal =
 								], [
 									ps[i + 1].coords.longitude, ps[i + 1].coords.latitude
 								]
-							]),
-							origem : 'i3GEOFgeolocal'
+							])
 						});
+						feature.setProperties({
+							origem : "i3GEOFgeolocal"
+						});
+						feature.setStyle(
+							new ol.style.Style({
+								stroke: new ol.style.Stroke({
+									color: 'white)',
+									width: 2
+								}),
+								fill: new ol.style.Fill({
+									  color: 'red'
+								})
+							})
+						);
+						feature.setId(i3GEO.util.uid());
 						i3GEO.desenho.layergrafico.getSource().addFeature(feature);
+
 					}
 				}
 			},
 			removeFiguras : function() {
-				var features, n, f, i, remover = [];
-				features = i3GEO.desenho.layergrafico.getSource().getFeatures();
+				var s, features, n, f, i, remover = [];
+				s = i3GEO.desenho.layergrafico.getSource();
+				features = s.getFeatures();
 				n = features.length;
 				for(i = 0; i < n; i++){
 					f = features[i];
-					if(f.getProperties().origem === "i3GEOFselecao"){
-						remover.push(f);
+					if(f.getProperties().origem === "i3GEOFgeolocal"){
+						remover.push(f.getId());
 					}
 				}
-				for(r in remover){
-					i3GEO.desenho.layergrafico.getSource().removeFeature(remover[r]);
+				n = remover.length;
+				if(n > 0){
+					for(i = 0; i < n; i++){
+						f = s.getFeatureById(remover[i]);
+						i3GEO.desenho.layergrafico.getSource().removeFeature(f);
+					}
 				}
 			},
 			removeLayer : function() {
-
+				var temp = window.confirm($trad("x94"));
+				if (temp) {
+					i3GEOF.geolocal.ol3.removeFiguras();
+				}
 			}
 		},
 		openlayers : {

@@ -155,9 +155,9 @@ i3GEOF.gradeDeHex = {
 	t0: function()
 	{
 		var ins = "<img class=i3GeoExemploImg src='"+i3GEO.configura.locaplic+"/ferramentas/gradehex/exemplo.png' />" +
-		"<p class='paragrafo' >"+$trad('ajuda',i3GEOF.gradeDeHex.dicionario) +
-		"<p class='paragrafo'>"+$trad('ajuda2',i3GEOF.gradeDeHex.dicionario) +
-		"<p class='paragrafo'>"+$trad('ajuda3',i3GEOF.gradeDeHex.dicionario) +
+		"<p class='paragrafo' >" + $trad('ajuda',i3GEOF.gradeDeHex.dicionario) +
+		"<p class='paragrafo'>" + $trad('ajuda2',i3GEOF.gradeDeHex.dicionario) +
+		"<p class='paragrafo'>" + $trad('ajuda3',i3GEOF.gradeDeHex.dicionario) +
 		"<p class='paragrafo'><input type=checkbox id=i3GEOgradedehexProj style='cursor:pointer;position:relative;top:2px;' />&nbsp;"+$trad('projMercator',i3GEOF.gradeDeHex.dicionario);
 		i3GEO.util.proximoAnterior("","i3GEOF.gradeDeHex.t1()",ins,"i3GEOF.gradeDeHex.t0()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
 	},
@@ -170,9 +170,9 @@ i3GEOF.gradeDeHex = {
 		}
 		else{
 			ins += $trad('grau',i3GEOF.gradeDeHex.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDeHex.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDeHex.dicionario)+"</p>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input id='i3GEOgradedehexxg' title='grau' type=text value='1'/></div>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input id='i3GEOgradedehexxm' title='minuto' type=text value='00'/></div>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input id='i3GEOgradedehexxs' title='segundo' type=text value='00.00'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeGlobo' style='float:left;' ><input id='i3GEOgradedehexxg' title='grau' type=text value='1'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;' ><input id='i3GEOgradedehexxm' title='minuto' type=text value='00'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='float:left;margin-left:10px;' ><input id='i3GEOgradedehexxs' title='segundo' type=text value='00.00'/></div>";
 		}
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t0()","i3GEOF.gradeDeHex.t2()",ins,"i3GEOF.gradeDeHex.t1()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
 	},
@@ -180,15 +180,15 @@ i3GEOF.gradeDeHex = {
 		var ins = "<p class='paragrafo'><b>"+$trad('coord',i3GEOF.gradeDeHex.dicionario)+"</b>";
 		ins += "<p class='paragrafo'><b>X (long):</b> ";
 		ins += $trad('grau',i3GEOF.gradeDeHex.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDeHex.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDeHex.dicionario)+"</p>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input id='i3GEOgradedehexixg' title='grau' type=text value='1'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;margin-right:10px;' ><input id='i3GEOgradedehexixm' title='minuto' type=text value='00'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='margin-left:10px;' ><input id='i3GEOgradedehexixs' title='segundo' type=text value='00.00'/></div></p>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeLongitude' style='float:left;' ><input id='i3GEOgradedehexixg' title='grau' type=text value='1'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;margin-right:10px;' ><input id='i3GEOgradedehexixm' title='minuto' type=text value='00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='margin-left:10px;' ><input id='i3GEOgradedehexixs' title='segundo' type=text value='00.00'/></div></p>";
 
 		ins += "<br><p class='paragrafo'><b>Y (lat):</b> ";
 		ins += $trad('grau',i3GEOF.gradeDeHex.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDeHex.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDeHex.dicionario)+"</p>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input class=digitar id='i3GEOgradedehexiyg' title='grau' type=text value='1'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input id='i3GEOgradedehexiym' title='minuto' type=text value='00'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input id='i3GEOgradedehexiys' title='segundo' type=text value='00.00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeLatitude' style='float:left;' ><input class=digitar id='i3GEOgradedehexiyg' title='grau' type=text value='1'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;' ><input id='i3GEOgradedehexiym' title='minuto' type=text value='00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='float:left;margin-left:10px;' ><input id='i3GEOgradedehexiys' title='segundo' type=text value='00.00'/></div>";
 
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t1()","i3GEOF.gradeDeHex.t3()",ins,"i3GEOF.gradeDeHex.t2()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
 		i3GEO.eventos.cliquePerm.desativa();

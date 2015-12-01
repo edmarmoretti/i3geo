@@ -171,15 +171,15 @@ i3GEOF.gradeDePoligonos = {
 		else{
 			ins += "<p class='paragrafo'>X: ";
 			ins += $trad('grau',i3GEOF.gradeDePoligonos.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDePoligonos.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDePoligonos.dicionario)+"</p>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input  id='i3GEOgradedepoligonosxg' title='grau' type=text value='1'/></div>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;margin-right:10px;' ><input  id='i3GEOgradedepoligonosxm' title='minuto' type=text value='00'/></div>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='margin-left:10px;' ><input  id='i3GEOgradedepoligonosxs' title='segundo' type=text value='00.00'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeLongitude' style='float:left;' ><input  id='i3GEOgradedepoligonosxg' title='grau' type=text value='1'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;margin-right:10px;' ><input  id='i3GEOgradedepoligonosxm' title='minuto' type=text value='00'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='margin-left:10px;' ><input  id='i3GEOgradedepoligonosxs' title='segundo' type=text value='00.00'/></div>";
 
 			ins += "<br><p class='paragrafo'>Y: ";
 			ins += $trad('grau',i3GEOF.gradeDePoligonos.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDePoligonos.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDePoligonos.dicionario)+"</p>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input id='i3GEOgradedepoligonosyg' title='grau' type=text value='1'/></div>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepoligonosym' title='minuto' type=text value='00'/></div>";
-			ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepoligonosys' title='segundo' type=text value='00.00'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeLatitude' style='float:left;' ><input id='i3GEOgradedepoligonosyg' title='grau' type=text value='1'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepoligonosym' title='minuto' type=text value='00'/></div>";
+			ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepoligonosys' title='segundo' type=text value='00.00'/></div>";
 		}
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t0()","i3GEOF.gradeDePoligonos.t2()",ins,"i3GEOF.gradeDePoligonos.t1","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 	},
@@ -187,15 +187,15 @@ i3GEOF.gradeDePoligonos = {
 		var ins = "<p class='paragrafo'><b>"+$trad('coord',i3GEOF.gradeDePoligonos.dicionario)+"</b>";
 		ins += "<p class='paragrafo'>X: ";
 		ins += $trad('grau',i3GEOF.gradeDePoligonos.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDePoligonos.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDePoligonos.dicionario)+"</p>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input id='i3GEOgradedepoligonosixg' title='grau' type=text value='1'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;margin-right:10px;' ><input  id='i3GEOgradedepoligonosixm' title='minuto' type=text value='00'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='margin-left:10px;' ><input  id='i3GEOgradedepoligonosixs' title='segundo' type=text value='00.00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeLongitude' style='float:left;' ><input id='i3GEOgradedepoligonosixg' title='grau' type=text value='1'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;margin-right:10px;' ><input  id='i3GEOgradedepoligonosixm' title='minuto' type=text value='00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='margin-left:10px;' ><input  id='i3GEOgradedepoligonosixs' title='segundo' type=text value='00.00'/></div>";
 
 		ins += "<br><p class='paragrafo'>Y: ";
 		ins += $trad('grau',i3GEOF.gradeDePoligonos.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDePoligonos.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDePoligonos.dicionario)+"</p>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;' ><input id='i3GEOgradedepoligonosiyg' title='grau' type=text value='1'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepoligonosiym' title='minuto' type=text value='00'/></div>";
-		ins += "<div class='i3geoForm100 i3geoFormIconeEdita' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepoligonosiys' title='segundo' type=text value='00.00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeLatitude' style='float:left;' ><input id='i3GEOgradedepoligonosiyg' title='grau' type=text value='1'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeMinuto' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepoligonosiym' title='minuto' type=text value='00'/></div>";
+		ins += "<div class='i3geoForm100 i3geoFormIconeSegundo' style='float:left;margin-left:10px;' ><input  id='i3GEOgradedepoligonosiys' title='segundo' type=text value='00.00'/></div>";
 
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t1()","i3GEOF.gradeDePoligonos.t3()",ins,"i3GEOF.gradeDePoligonos.t2","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 		i3GEO.eventos.cliquePerm.desativa();

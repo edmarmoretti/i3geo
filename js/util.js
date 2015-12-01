@@ -2045,9 +2045,9 @@ i3GEO.util =
 					var ins = [], i, temp, n;
 					if (retorno.data !== undefined) {
 						if (ordenacao === "sim") {
-							ins.push("<table class=lista3 ><tr><td></td><td>" + $trad("x64") + "</td><td>Ordem</td>");
+							ins.push("<table class=lista8 ><tr><td></td><td>" + $trad("x64") + "</td><td>Ordem</td>");
 						} else {
-							ins.push("<table class=lista3 ><tr><td></td><td>" + $trad("x64") + "</td><td></td>");
+							ins.push("<table class=lista8 ><tr><td></td><td>" + $trad("x64") + "</td><td></td>");
 						}
 						n = retorno.data.valores.length;
 						for (i = 0; i < n; i++) {
@@ -2056,7 +2056,7 @@ i3GEO.util =
 								+ prefixo
 								+ retorno.data.valores[i].item
 								+ "' /></td>");
-							ins.push("<td><input style='text-align:left;cursor:text;width:" + size
+							ins.push("<td class='i3geoForm i3geoFormSemIcone'><input style='text-align:left;cursor:text;width:" + size
 								+ "' onclick='javascript:this.select();' id='"
 								+ prefixo
 								+ retorno.data.valores[i].item
@@ -2065,7 +2065,7 @@ i3GEO.util =
 								+ retorno.data.valores[i].item
 								+ "' /></td>");
 							if (ordenacao === "sim") {
-								ins.push("<td><input style='text-align:left; cursor:text;' id='ordem_" + prefixo
+								ins.push("<td class='i3geoForm100 i3geoFormSemIcone'><input style='text-align:left; cursor:text;' id='ordem_" + prefixo
 									+ retorno.data.valores[i].item
 									+ retorno.data.valores[i].tema
 									+ "' type=text size='3' value='"

@@ -121,6 +121,7 @@ i3GEOF.graficoTema = {
 			i3GEO.php.listaItensTema(i3GEOF.graficoTema.montaListaItens,i3GEOF.graficoTema.tema);
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		i3GEO.util.aplicaAquarela("i3GEOgraficotemaguia2obj");
 	},
 	/*
 	Function: html
@@ -186,7 +187,7 @@ i3GEOF.graficoTema = {
 		var ins,i,n;
 		try{
 			ins = [];
-			ins.push("<table class=lista >");
+			ins.push("<table class=lista8 >");
 			n = retorno.data.valores.length;
 			for (i=0;i<n; i++){
 				ins.push("<tr><td><input size=2 style='cursor:pointer;border:0px solid white;' name="+retorno.data.valores[i].item+" type=checkbox id=i3GEOgraficotema"+retorno.data.valores[i].item+" /></td>");

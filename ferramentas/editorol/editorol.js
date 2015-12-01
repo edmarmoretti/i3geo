@@ -1,6 +1,7 @@
 //TODO incluir balao de informacoes como um elemento grafico de desenho
 //TODO incluir caixas de texto
 //TODO incluir undo na edicao
+//TODO incluir opção para digitar coordenadas do novo ponto ou vertice
 
 /*
  Title: Editor vetorial para OpenLayers
@@ -2162,7 +2163,7 @@ i3GEO.editorOL =
 				i3GEO.editorOL.idsSelecionados.push(id);
 				st = f.getStyle();
 				//para o caso de pontos
-				if(st.getImage()){
+				if(st && st.getImage()){
 					f.setStyle(
 						new ol.style.Style({
 							image: new ol.style.Circle({
@@ -2196,7 +2197,7 @@ i3GEO.editorOL =
 						});
 					}
 				}
-				else{
+				else if (st){
 					f.setProperties({
 						fillColor: st.getFill().getColor(),
 						strokeColor: st.getStroke().getColor()
@@ -2216,7 +2217,7 @@ i3GEO.editorOL =
 				if(f){
 					st = f.getStyle();
 					//caso de ponto
-					if(st.getImage()){
+					if(st && st.getImage()){
 						if(st.getImage().getSrc || f.getProperties().externalGraphic != ""){
 							f.setStyle(
 								new ol.style.Style({
@@ -2244,7 +2245,7 @@ i3GEO.editorOL =
 							);
 						}
 					}
-					else{
+					else if(st){
 						st.getFill().setColor(f.getProperties().fillColor);
 						st.getStroke().setColor(f.getProperties().strokeColor);
 					}

@@ -160,16 +160,19 @@ i3GEOF.cortina = {
 			var layer = null,estilo;
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				layer = i3geoOL.getLayersByName(i3GEO.temaAtivo)[0];
-				if(layer)
-				{estilo = layer.div.style;}
+				if(layer){
+					estilo = layer.div.style;
+				}
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				layer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEO.temaAtivo);
-				if(layer)
-				{estilo = layer.style;}
+				if(layer){
+					estilo = layer.style;
+				}
 			}
-			if(layer)
-			{estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";}
+			if(layer){
+				estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";
+			}
 			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.cortina.comboTemas()"]);
 			i3GEOF.cortina.slider = null;
 		};
@@ -189,7 +192,7 @@ i3GEOF.cortina = {
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				layer = i3geoOL.getLayersByName(i3GEOF.cortina.tema)[0];
 				//TODO nao funciona no OL3
-				if(!layer.div){
+				if(layer.div == undefined){
 					return;
 				}
 				i3GEOF.cortina.estilo = layer.div.style;

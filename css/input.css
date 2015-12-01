@@ -228,6 +228,18 @@ select option:hover {
 	width: 80%;
 }
 
+.i3geoFormIconeGlobo {
+  background: transparent url("../imagens/gisicons/projection.png") no-repeat scroll 100% 2px / 18px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/projection.png") no-repeat scroll 100% 2px;
+      background-size: 18px 144px;
+    }
+}
+.i3geoFormIconeGlobo input{
+	width: 70%;
+}
+
 /*hack opera */
 @media all and (-webkit-min-device-pixel-ratio:10000) , not all and
 	(-webkit-min-device-pixel-ratio:0) {
