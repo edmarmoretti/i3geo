@@ -240,6 +240,15 @@ select option:hover {
 	width: 70%;
 }
 
+.i3geoFormIconeNumero {
+  background: transparent url("../imagens/oxygen/16x16/number.png") no-repeat scroll 100% 4px / 14px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/oxygen/16x16/number.png") no-repeat scroll 100% 4px;
+      background-size: 14px 144px;
+    }
+}
+
 /*hack opera */
 @media all and (-webkit-min-device-pixel-ratio:10000) , not all and
 	(-webkit-min-device-pixel-ratio:0) {
