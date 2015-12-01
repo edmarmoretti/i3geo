@@ -7,7 +7,7 @@ MAP
     GROUP "biomas"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "CACHE"	"SIM"
+      "CACHE"	"sim"
       "TIP"	"CD_LEGENDA"
       "CLASSE"	"SIM"
       "permitekmz"	"sim"

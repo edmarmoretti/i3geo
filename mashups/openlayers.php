@@ -302,6 +302,16 @@ if($temas != ""){
 					$nlayers = $maptemp->numlayers;
 					for($i=0;$i<($nlayers);++$i)	{
 						$layern = $maptemp->getLayer($i);
+						//
+						//verifica se o layer contem ferramentas parametrizadas
+						//
+						foreach($listaFerramentas as $lf){
+							$meta = $layern->getmetadata($lf);
+							if($meta != ""){
+								$ferramentas[] = "'".$lf."':".$meta;
+							}
+						}
+						$ferramentas = '{'.implode(",",$ferramentas).'}';
 						if($layern->getmetadata("PLUGINI3GEO") != ""){
 							//obtem os dados necessarios para iniciar o plugin
 							//os objetos layer (openLayers) sao criados apenas no final
@@ -313,7 +323,8 @@ if($temas != ""){
 									"cache"=>strtoupper($layern->getmetadata("cache")),
 									"transitioneffect"=>strtoupper($layern->getmetadata("transitioneffect")),
 									"tiles"=>strtoupper($layern->getmetadata("tiles")),
-									"posicaoLayer"=>count($objOpenLayers)
+									"posicaoLayer"=>count($objOpenLayers),
+									"ferramentas"=>$ferramentas
 							);
 							$objOpenLayers[] = "";
 						}
@@ -321,16 +332,6 @@ if($temas != ""){
 							$layersNomes[] = $layern->name;
 							$layers[] = $layern;
 						}
-						//
-						//verifica se o layer contem ferramentas parametrizadas
-						//
-						foreach($listaFerramentas as $lf){
-							$meta = $layern->getmetadata($lf);
-							if($meta != ""){
-								$ferramentas[] = "'".$lf."':".$meta;
-							}
-						}
-						$ferramentas = '{'.implode(",",$ferramentas).'}';
 					}
 					$nomeLayer = implode(",",$layersNomes);
 					$tituloLayer = $layern->getmetadata("tema");
@@ -733,7 +734,7 @@ function adicionaPluginI3geo(camada,visivel,indice){
 	foreach ($temasPluginI3Geo as $t){
 		//var_dump($temasPluginI3Geo);exit;
 		//cria um objeto javascript para iniciar o plugin
-		$camada = '{"tiles":"'.$t["tiles"].'","tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].',"cache":"'.$t["cache"].'","transitioneffect":"'.$t["transitioneffect"].'"}';
+		$camada = '{"ferramentas":'.$t["ferramentas"].',"tiles":"'.$t["tiles"].'","tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].',"cache":"'.$t["cache"].'","transitioneffect":"'.$t["transitioneffect"].'"}';
 		echo "var camada = $camada;\n";
 		//echo "i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);\n";
 		$visivel = "false";

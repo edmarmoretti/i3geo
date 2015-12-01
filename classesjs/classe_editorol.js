@@ -621,6 +621,9 @@ i3GEO.editorOL = {
 				if(layers[i].isBaseLayer === false){
 					url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
 					icone = "";
+					url = url.replace("LAYERS","LAYER");
+					url = url.replace("&Z=${z}&X=${x}&Y=${y}","");
+					url = url.replace("Z=${z}&X=${x}&Y=${y}","");
 					if(i3GEO.editorOL.legendahtml === true){
 						//os parametros FORMAT e SERVICE sao inseridos de forma redundante para grantir
 						//caso seja um TMS
@@ -653,7 +656,6 @@ i3GEO.editorOL = {
 						ins += icone + layers[i].name+"<br><div id=legendaL_"+i+" ></div><br>";
 						//necessario pq nao e sincrono
 						eval ("var f = function(retorno){document.getElementById('legendaL_"+i+"').innerHTML = retorno.responseText;};");
-						url = url.replace("LAYERS","LAYER");
 						var config = {
 							method: "GET",
 							url: url,
@@ -662,9 +664,6 @@ i3GEO.editorOL = {
 						OpenLayers.Request.issue(config);
 					}
 					else{
-						url = url.replace("LAYERS","LAYER");
-						url = url.replace("&Z=${z}&X=${x}&Y=${y}","");
-						url = url.replace("Z=${z}&X=${x}&Y=${y}","");
 						ins += layers[i].name+"<br><img src='"+url+"&SERVICE=wms' /><br>";
 					}
 				}

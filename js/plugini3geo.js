@@ -1167,7 +1167,8 @@ i3GEO.pluginI3geo =
 							visibility : true,
 							transitionEffect : camada["transitioneffect"],
 							plugini3geo : "parametrossql",
-							"pluginparametros" : camada.plugini3geo.parametros
+							"pluginparametros" : camada.plugini3geo.parametros,
+							ferramentas : camada.ferramentas
 						}));
 					} else {
 						p.push(new OpenLayers.Layer.TMS(camada.tema, i3GEO.configura.locaplic + "ferramentas/parametrossql/ogc.php?tema="
@@ -1183,7 +1184,8 @@ i3GEO.pluginI3geo =
 							type : "png",
 							transitionEffect : camada["transitioneffect"],
 							plugini3geo : "parametrossql",
-							"pluginparametros" : camada.plugini3geo.parametros
+							"pluginparametros" : camada.plugini3geo.parametros,
+							ferramentas : camada.ferramentas
 						}));
 						p.push(new OpenLayers.Layer.WMS(camada.tema, i3GEO.configura.locaplic + "ferramentas/parametrossql/ogc.php?tema="
 							+ camada.name
@@ -1198,7 +1200,8 @@ i3GEO.pluginI3geo =
 							displayInLayerSwitcher:false,
 							transitionEffect : null,
 							plugini3geo : "parametrossql",
-							"pluginparametros" : camada.plugini3geo.parametros
+							"pluginparametros" : camada.plugini3geo.parametros,
+							ferramentas : camada.ferramentas
 						}));
 					}
 					if(funcao){

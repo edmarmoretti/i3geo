@@ -15,7 +15,6 @@ if(!empty($desligacache)){
 if(empty($opacidade)){
 	$opacidade = 1;
 }
-
 //
 //verifica se em cada camada deve ser inserido um parametro aleatorio para evitar cache de imagem do lado do cliente
 //
@@ -51,15 +50,6 @@ if(!empty($restauramapa)){
 	if (!isset($mapext)){
 		$mapext = $m->extent->minx." ".$m->extent->miny." ".$m->extent->maxx." ".$m->extent->maxy;
 	}
-}
-//
-// imprime na tela a ajuda ao usu&aacute;rio
-//
-if(!isset($temas) && isset($layers)){
-	$temas = $layers;
-}
-if(!isset($temas)){
-	ajuda();
 }
 if(!isset($mapext)){
 	$versao = versao();
@@ -100,11 +90,19 @@ if(!isset($mapext)){
 		$mapext = $c->minx.",".$c->miny.",".$c->maxx.",".$c->maxy;
 	}
 }
-
+//
+// imprime na tela a ajuda ao usu&aacute;rio
+//
+if(!isset($temas) && isset($layers)){
+	$temas = $layers;
+}
+if(!isset($temas)){
+	ajuda();
+}
 // problema na vers&atilde;o 211 do OpenLayers. Tamanho em % n&atilde;o &eacute;
 // aceito
 // if(!isset($largura))
-// {$largura = 500;}
+	// {$largura = 500;}
 if(isset($largura) && !isset($altura)){
 	$altura = $largura;
 }
@@ -304,6 +302,16 @@ if($temas != ""){
 					$nlayers = $maptemp->numlayers;
 					for($i=0;$i<($nlayers);++$i)	{
 						$layern = $maptemp->getLayer($i);
+						//
+						//verifica se o layer contem ferramentas parametrizadas
+						//
+						foreach($listaFerramentas as $lf){
+							$meta = $layern->getmetadata($lf);
+							if($meta != ""){
+								$ferramentas[] = "'".$lf."':".$meta;
+							}
+						}
+						$ferramentas = '{'.implode(",",$ferramentas).'}';
 						if($layern->getmetadata("PLUGINI3GEO") != ""){
 							//obtem os dados necessarios para iniciar o plugin
 							//os objetos layer (openLayers) sao criados apenas no final
@@ -315,7 +323,8 @@ if($temas != ""){
 									"cache"=>strtoupper($layern->getmetadata("cache")),
 									"transitioneffect"=>strtoupper($layern->getmetadata("transitioneffect")),
 									"tiles"=>strtoupper($layern->getmetadata("tiles")),
-									"posicaoLayer"=>count($objOpenLayers)
+									"posicaoLayer"=>count($objOpenLayers),
+									"ferramentas"=>$ferramentas
 							);
 							$objOpenLayers[] = "";
 						}
@@ -323,16 +332,6 @@ if($temas != ""){
 							$layersNomes[] = $layern->name;
 							$layers[] = $layern;
 						}
-						//
-						//verifica se o layer contem ferramentas parametrizadas
-						//
-						foreach($listaFerramentas as $lf){
-							$meta = $layern->getmetadata($lf);
-							if($meta != ""){
-								$ferramentas[] = "'".$lf."':".$meta;
-							}
-						}
-						$ferramentas = '{'.implode(",",$ferramentas).'}';
 					}
 					$nomeLayer = implode(",",$layersNomes);
 					$tituloLayer = $layern->getmetadata("tema");
@@ -366,11 +365,7 @@ if($temas != ""){
 						// tms leva os parametros do TMS
 						//$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png", ferramentas :'.$ferramentas.'})';
 						$objOpenLayers[] = 'new OpenLayers.Layer.OSM("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&Z=${z}&X=${x}&Y=${y}",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png", ferramentas :'.$ferramentas.'})';
-						//layer = new OpenLayers.Layer.OSM(camada.name, urllayer + "&Z=${z}&X=${x}&Y=${y}", {
-						//	isBaseLayer : false
-						//});
-						
-						
+
 						// cria um clone WMS para efeitos de getfeatureinfo
 						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,transitionEffect : null,singleTile:true,visibility:false,isBaseLayer:false, ferramentas :'.$ferramentas.'})';
 					}
@@ -662,6 +657,7 @@ i3GEO.editorOL.legendahtml = "<?php
 	else
 	{echo "true";}
 ?>";
+
 <?php
 if(isset($fundo) && $fundo != ""){
 	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";
@@ -681,14 +677,11 @@ if(isset($maxextent)){
 	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(".$maxextent.");\n";
 }
 else{
-	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds('-15125970.651191 -5205055.877383 15125970.651191 5205055.877383');\n";
+	echo "i3GEO.editorOL.maxext = new OpenLayers.Bounds(-76.5125927,-39.3925675209,-29.5851853,9.49014852081);\n";
 }
 if(isset($mapext)){
 	$mapext = str_replace(" ",",",$mapext);
 	echo "i3GEO.editorOL.mapext = new OpenLayers.Bounds(".$mapext.");\n";
-}
-else{
-	echo "i3GEO.editorOL.mapext = new OpenLayers.Bounds('-15125970.651191 -5205055.877383 15125970.651191 5205055.877383');\n";
 }
 if(empty($fundo)){
 	// echo "i3GEO.editorOL.mapa.allOverlays = true;";
@@ -696,13 +689,15 @@ if(empty($fundo)){
 ?>
 i3GEO.Interface = {openlayers:{googleLike:true}};
 i3GEO.editorOL.fundo = "osm";
-
+//evita que seja mostrada a opcao de salvar figura
+i3GEO.editorOL.nomeFuncaoSalvar = "";
 var temp = i3GEO.editorOL.minresolution,
-r = [ i3GEO.editorOL.minresolution ];
+	r = [ i3GEO.editorOL.minresolution ];
 for (var j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
 	temp = temp / 2;
 	r.push(temp);
 }
+i3GEO.editorOL.incluilayergrafico = true;
 i3GEO.editorOL.mapa = new OpenLayers.Map(
 	'i3geoMapa',
 	{
@@ -746,7 +741,7 @@ function adicionaPluginI3geo(camada,visivel,indice){
 	foreach ($temasPluginI3Geo as $t){
 		//var_dump($temasPluginI3Geo);exit;
 		//cria um objeto javascript para iniciar o plugin
-		$camada = '{"tiles":"'.$t["tiles"].'","tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].',"cache":"'.$t["cache"].'","transitioneffect":"'.$t["transitioneffect"].'"}';
+		$camada = '{"ferramentas":'.$t["ferramentas"].',"tiles":"'.$t["tiles"].'","tema": "'.$t["tema"].'","name":"'.$t["name"].'","plugini3geo":'.$t["plugin"].',"cache":"'.$t["cache"].'","transitioneffect":"'.$t["transitioneffect"].'"}';
 		echo "var camada = $camada;\n";
 		//echo "i3GEO.pluginI3geo[camada.plugini3geo.plugin].openlayers.inicia(camada,i3GEO.editorOL.mapa);\n";
 		$visivel = "false";
