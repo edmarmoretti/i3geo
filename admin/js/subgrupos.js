@@ -59,11 +59,11 @@ i3GEOadmin.subgrupos = {
 	},
 	defColunas: function(){
 		return [
-			{key:"excluir",label:"excluir",formatter:i3GEOadmin.subgrupos.formatExclui},
-			{key:"mais",label:"editar",formatter:i3GEOadmin.subgrupos.formatMais},
-			{label:"id",key:"id_subgrupo", formatter:i3GEOadmin.subgrupos.formatTexto},
-			{label:"nome",resizeable:true,key:"nome_subgrupo", formatter:i3GEOadmin.subgrupos.formatTexto},
-			{label:"descri&ccedil;&atilde;o",resizeable:true,key:"desc_subgrupo", formatter:i3GEOadmin.subgrupos.formatTexto},
+			{key:"excluir",label:$trad("excluir",i3GEOadmin.core.dicionario),formatter:i3GEOadmin.subgrupos.formatExclui},
+			{key:"mais",label:$trad("editar",i3GEOadmin.core.dicionario),formatter:i3GEOadmin.subgrupos.formatMais},
+			{label:"id",key:"id_subgrupo",resizeable:true, formatter:i3GEOadmin.subgrupos.formatTexto},
+			{label:$trad("nome",i3GEOadmin.core.dicionario),key:"nome_subgrupo", formatter:i3GEOadmin.subgrupos.formatTexto},
+			{label:$trad("descricao",i3GEOadmin.core.dicionario),resizeable:true,key:"desc_subgrupo", formatter:i3GEOadmin.subgrupos.formatTexto},
 			{label:"en",resizeable:true,key:"en", formatter:i3GEOadmin.subgrupos.formatTexto},
 			{label:"es",resizeable:true,key:"es", formatter:i3GEOadmin.subgrupos.formatTexto},
 			{label:"it",resizeable:true,key:"it", formatter:i3GEOadmin.subgrupos.formatTexto}
@@ -89,7 +89,7 @@ i3GEOadmin.subgrupos = {
 	obtem: function(){
 		i3GEOadmin.subgrupos.dados = "";
 		core_carregando("ativa");
-		core_pegaDados("buscando subgrupos...","../php/menutemas.php?funcao=pegaSubGrupos","i3GEOadmin.subgrupos.tabela");
+		core_pegaDados($trad("msgBuscaSubgrupo",i3GEOadmin.listasubgrupos.dicionario),"../php/menutemas.php?funcao=pegaSubGrupos","i3GEOadmin.subgrupos.tabela");
 	},
 	tabela: function(dados){
 		if(i3GEOadmin.subgrupos.dados == ""){
@@ -127,7 +127,7 @@ i3GEOadmin.subgrupos = {
 				}
 				if (column.key == 'mais'){
 					core_carregando("ativa");
-					core_carregando("buscando dados...");
+					core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 					$clicouId = registro.getData('id_subgrupo');
 					$recordid = registro.getId();
 					sUrl = "../php/menutemas.php?funcao=pegaSubGrupos&id_subgrupo="+$clicouId;
@@ -152,7 +152,7 @@ i3GEOadmin.subgrupos = {
 			var botao, ins,
 				novoel = document.createElement("div");
 			novoel.id =  "janela_editor2";
-			ins = '<div class="hd"><input id=okcancel_checkbox_id2 type="buttom" value="Salva" /><span style="margin-left:10px;position:relative;top:-10px;">Subgrupos</span></div>';
+			ins = '<div class="hd"><input id=okcancel_checkbox_id2 type="buttom" value="Salva" /><span style="margin-left:10px;position:relative;top:-10px;">'+ $trad("subgrupos",i3GEOadmin.listasubgrupos.dicionario) +'</span></div>';
 			ins += "<div class='bd' style='height:354px;overflow:auto'>";
 			ins += "<div id='editor_bd2'></div>";
 			ins += "<div id='letras_SG'></div>";
@@ -186,11 +186,11 @@ i3GEOadmin.subgrupos = {
 	formulario: function(i){
 		var param = {
 				"linhas":[
-					{titulo:"Nome padr&atilde;o:",id:"Enome_subgrupo",size:"50",value:i.nome_subgrupo,tipo:"text",div:""},
-					{titulo:"Descricao (opcional):",id:"Edesc_subgrupo",size:"50",value:i.desc_subgrupo,tipo:"text",div:""},
-					{titulo:"Nome em ingl&ecirc;s (opcional):",id:"Een",size:"50",value:i.en,tipo:"text",div:""},
-					{titulo:"Espanhol (opcional):",id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
-					{titulo:"Italiano (opcional):",id:"Eit",size:"50",value:i.it,tipo:"text",div:""}
+					{titulo:$trad("nomePadrao",i3GEOadmin.listasubgrupos.dicionario),id:"Enome_subgrupo",size:"50",value:i.nome_subgrupo,tipo:"text",div:""},
+					{titulo:$trad("descricao",i3GEOadmin.listasubgrupos.dicionario),id:"Edesc_subgrupo",size:"50",value:i.desc_subgrupo,tipo:"text",div:""},
+					{titulo:$trad("nomeIn",i3GEOadmin.listasubgrupos.dicionario),id:"Een",size:"50",value:i.en,tipo:"text",div:""},
+					{titulo:$trad("nomeEs",i3GEOadmin.listasubgrupos.dicionario),id:"Ees",size:"50",value:i.es,tipo:"text",div:""},
+					{titulo:$trad("nomeIt",i3GEOadmin.listasubgrupos.dicionario),id:"Eit",size:"50",value:i.it,tipo:"text",div:""}
 				]
 			},
 			ins = "";
@@ -205,7 +205,7 @@ i3GEOadmin.subgrupos = {
 		i3GEOadmin.subgrupos.letra = letra;
 		if(i3GEOadmin.subgrupos.dados == ""){
 			core_carregando("ativa");
-			core_pegaDados("buscando subgrupos...","../php/menutemas.php?funcao=pegaSubGrupos","i3GEOadmin.subgrupos.atualizaFiltro");
+			core_pegaDados($trad("msgBuscaSubgrupo",i3GEOadmin.listasubgrupos.dicionario),"../php/menutemas.php?funcao=pegaSubGrupos","i3GEOadmin.subgrupos.atualizaFiltro");
 			return;
 		}
 		var i,temp,
@@ -226,7 +226,7 @@ i3GEOadmin.subgrupos = {
 		i3GEOadmin.subgrupos.tabela(novo);
 	},
 	exclui: function(id,row){
-		var mensagem = " excluindo o registro do id= "+id,
+		var mensagem = $trad("msgExclui",i3GEOadmin.core.dicionario)+id,
 			sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=subgrupos";
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.subgrupos.dataTable);
 		i3GEOadmin.subgrupos.dados = "";
@@ -244,13 +244,13 @@ i3GEOadmin.subgrupos = {
 		}
 		par += "&id_subgrupo="+id;
 		core_carregando("ativa");
-		core_carregando(" gravando o registro do id= "+id);
+		core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 		sUrl = "../php/menutemas.php?funcao=alteraSubGrupos"+par;
 		callback = {
 	  		success:function(o){
 	  			try	{
 	  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-	  					core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+	  					core_carregando("<span style=color:red >"+ $trad("msgErroExclui",i3GEOadmin.core.dicionario) +"</span>");
 	  					setTimeout("core_carregando('desativa')",3000);
 	  				}
 	  				else{
