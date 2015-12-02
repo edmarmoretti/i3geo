@@ -4,7 +4,7 @@ MAP
   LAYER
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
-    FILTER (([ANOCRIA] = 1990))
+    FILTER (([ANOCRIA] = subsano))
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"TIPO,NOMELOC,ANOCRIA"
@@ -37,7 +37,7 @@ MAP
       "permitecomentario"	"SIM"
       "LTEMPOITEMICONE"	""
       "metaestat"	""
-      "PLUGINI3GEO"	'{"plugin":"parametrossql","ativo":"nao","parametros":[{"titulo" : "Ano de criação","chave" : "1990","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "xxx","chave" : "xxx","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""}]}'
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","ativo":"nao","parametros":[{"titulo" : "Ano de criação","chave" : "subsano","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "xxx","chave" : "xxx","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""}]}'
       "tme"	'{"titulo":"Teste","colnome":"no_cidade","colsdata":["taxa"],"lmax":"8000","amax":"50000","auto":"sim","exec":"nao","outlinecolor":"-1,-1,-1","numvertices":"4"}'
 
       "download"	"SIM"

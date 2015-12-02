@@ -351,7 +351,7 @@ else{
 			if($extensao == ".map"){
 				//cria o mapfile com base no sistema de metadados estatisticos
 				//verifica se o id_medida_variavel existe no mapfile e nao foi passado como um parametro
-				if(!isset($id_medida_variavel) && $temai3geo == true){				
+				if(!isset($id_medida_variavel) && $temai3geo == true){
 					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
 					$l = $nmap->getlayer(0);
 					$teste = $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
@@ -667,10 +667,11 @@ else{
 	}
 	$oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
 	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
+	//verifica se existem layers com plugin definido e processa conforme o tipo de plugin
+	processaPluginI3geo();
 	//
 	//caso seja download ou json ou csv
 	//
-	
 	processaOutputformatMapfile();
 
 	$oMap->save($nomeMapfileTmp);
@@ -750,7 +751,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$x = $_GET["X"];
 	$y = $_GET["Y"];
 	$z = $_GET["Z"];
-	
+
 	if(file_exists($tema)){
 		$layer0 = $oMap->getlayer(0);
 		$layer0->set("status",MS_DEFAULT);
@@ -771,7 +772,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	if ($layer0->getmetadata("cortepixels") != ""){
 		$cortePixels = $layer0->getmetadata("cortepixels");
 	}
-	
+
 	if($cache == true){
 		carregaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
 	}
@@ -797,10 +798,10 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$oMap->setsize(256,256);
 	$oMap->setExtent($poPoint1->x,$poPoint1->y,$poPoint2->x,$poPoint2->y);
 
-	
-	
+
+
 	$oMap->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
-	
+
 	//
 	//se o layer foi marcado para corte altera os parametros para ampliar o mapa
 	//antes de gerar a imagem
@@ -925,19 +926,19 @@ if(strtolower($OUTPUTFORMAT) == "geojson" || strtolower($OUTPUTFORMAT) == "json"
 		exit;
 	}
 	$oMap->owsdispatch($req);
-	
+
 	$contenttype = ms_iostripstdoutbuffercontenttype();
 	ms_iostripstdoutbuffercontentheaders();
 	//grava em disco
 	$contents = ms_iogetstdoutbufferstring();
 	file_put_contents($arq,$contents);
 	//envia para download
-	
+
 	header("Content-type: application/json; subtype=geojson");
-	
+
 	ms_iogetStdoutBufferBytes();
 	ms_ioresethandlers();
-	
+
 	exit;
 }
 if(strtolower($OUTPUTFORMAT) == "shape-zip"){
@@ -1416,5 +1417,72 @@ function converteenc($texto){
 		$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
 	}
 	return $texto;
+}
+function processaPluginI3geo(){
+	global $oMap, $locaplic;
+	$numlayers = $oMap->numlayers;
+	for ($i=0;$i < $numlayers;$i++){
+		$l = $oMap->getlayer($i);
+		$c = $l->getmetadata("PLUGINI3GEO");
+		if($c != ""){
+			$cs = json_decode($c,true);
+			if($cs["plugin"] == "parametrossql"){
+				$data = $l->data;
+				$cs = $cs["parametros"];
+				$chaves = array();
+				foreach($cs as $c){
+					$chaves[] = $c["chave"];
+				}
+				$chaves = implode(",",$chaves);
+				$filtro = $l->getFilterString();
+				$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$chaves);
+				$chaves = explode(",",$chaves);
+				$n = count($chaves);
+				//a variavel $plugin vem da URL e contem os valores
+				//que devem ser substituidos
+				//se $plugin for vazio, usa o primeiro valor definido na configuracao do plugin
+				//A ordem dos valores deve ser exatamente a ordem das chaves
+				if(empty($plugin)){
+					$plugin = array();
+					foreach($cs as $c){
+						if($c["chave"] != ""){
+							//valores definidos no plugin como uma string
+							if($c["valores"] != ""){
+								$temp = explode(",",$c["valores"]);
+								$plugin[] = $temp[0];
+							}
+							elseif ($c["prog"] != ""){
+								$plugin[] = execProg($locaplic."/".$c["prog"]);
+							}
+						}
+					}
+					$plugin = implode(",",$plugin);
+				}
+				$l->setmetadata("TEMA",$l->getmetadata("TEMA")." - ".$plugin);
+				$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$plugin);
+				$valores = explode(",",strip_tags($valores));
+				for($i = 0; $i < $n; $i++){
+					if($chaves[$i] != ""){
+						$v = $valores[$i];
+						$data = str_replace($chaves[$i],$v,$data);
+						if($filtro != ""){
+							$filtro = str_replace($chaves[$i],$v,$filtro);
+						}
+					}
+				}
+				if($filtro != ""){
+					$l->setfilter($filtro);
+				}
+				$l->set("data",$data);
+			}
+		}
+	}
+}
+//utilizada para obter os dados default quando se utiliza o plugin parametrossql
+function execProg($prog){
+	include($prog);
+	//$retorno variavel deve ser retornada pelo programa $prog
+	//veja como exemplo i3geo/aplicmap/daods/listaano.php
+	return $retorno[0]["v"];
 }
 ?>

@@ -46,7 +46,11 @@ Parametros:
 
 map {string} - Nome do mapfile que ser&aacute; testado ou usado na gera&ccedil;&atilde;o da miniatura. O arquivo &eacute; procurado no caminho indicado e no diretório i3geo/temas. Se map=todos, todos os mapas s&atilde;o testados em grupos de 10 em 10 e a miniatura n&atilde;o &eacute; gerada.
 
-tipo {string} - (opcional) mini|grande Define o tamanho da imagem que ser&aacute; gerada. Se n&atilde;o for definido, ser&aacute; feito o teste do mapfile. Controla o tamanho da miniatura que dever&aacute; ser mostrada.
+tipo {mini|grande} - (opcional) Define o tamanho da imagem que ser&aacute; gerada. Se n&atilde;o for definido, ser&aacute; feito o teste do mapfile. Controla o tamanho da miniatura que dever&aacute; ser mostrada.
+
+solegenda {sim|nao} - (opcional) mostra apenas a legenda do tema
+
+tabela - (opcional) testa a tabela de atributos
 */
 
 set_time_limit(300);
@@ -74,14 +78,17 @@ ms_ResetErrorList();
 if(!isset($tipo))
 {$tipo = "";}
 $tempo = microtime(true);
-$arqs = listaArquivos("temas");
-sort($arqs["arquivos"]);
-
 if ($tipo == "")
 {
 	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
 	echo '<html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">';
 	echo '<script src="classesjs/i3geo.js"></script>';
+}
+$arqs = listaArquivos("temas");
+sort($arqs["arquivos"]);
+
+if ($tipo == "")
+{
 	echo '<script>';
 	echo 'function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}';
 	echo 'function rodaTabela(){window.location.href = window.location.href+"&tabela";}';
@@ -132,9 +139,8 @@ if (isset($map) && $map != "")
 		verifica($map,$solegenda,$tabela,$cache);
 	}
 }
+echo "</div>";
 ?>
-
-</div>
 <div id=logajax style="display: block"></div>
 <script>
 	if(screen.availWidth > 900){
@@ -454,7 +460,7 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 			$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
 			$objImagem->saveImage($nomec);
 			$nomer = ($objImagem->imageurl).basename($nomec);
-	
+
 			$nomel = ($objImagemLegenda->imagepath).nomeRandomico()."testel.png";
 			$objImagemLegenda->saveImage($nomel);
 			$nomerl = ($objImagemLegenda->imageurl).basename($nomel);
@@ -477,7 +483,7 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 						$error = $error->next();
 					}
 				}
-	
+
 			}
 			else{
 				Header("Content-type: image/png");

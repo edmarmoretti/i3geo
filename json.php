@@ -142,7 +142,7 @@ if($format == "storymap"){
 	$collon = $storymap["collon"];
 	$collat = $storymap["collat"];
 	$colmedia = $storymap["colmedia"];
-	
+
 	$par = array(
 			"cabecalho"=>$cabecalho,
 			"texto"=>$texto,
@@ -189,7 +189,7 @@ function gdocs(){
 			"type"=>$tipos[$i]
 		);
 	}
-	
+
 	$fields[] = array(
 			"id"=>"geo",
 			"type"=>"geo"
@@ -332,9 +332,10 @@ function carregaCacheArquivo(){
 }
 
 function pegaDadosJ(){
-	global $oMap, $tema, $versao;
+	global $oMap, $tema, $versao, $locaplic;
 	set_time_limit(0);
 	$layer = $oMap->getlayerbyname($tema);
+	processaPluginI3geo();
 	$layer->set("status",MS_DEFAULT);
 	$layer->set("template","none.htm");
 	$items = pegaItens($layer,$oMap);
@@ -344,7 +345,7 @@ function pegaDadosJ(){
 	$linhas = array();
 	for ($i = 0; $i < $res_count; $i++){
 		//echo $i." - <br>";
-		if($versao == 6){
+		if($versao >= 6){
 			$shape = $layer->getShape($layer->getResult($i));
 		}
 		else{
@@ -388,7 +389,69 @@ function pegaDadosJ(){
 	);
 	return $resultado;
 }
-
+function processaPluginI3geo(){
+	global $locaplic, $layer;
+	$c = $layer->getmetadata("PLUGINI3GEO");
+	if($c != ""){
+		$cs = json_decode($c,true);
+		if($cs["plugin"] == "parametrossql"){
+			$data = $layer->data;
+			$cs = $cs["parametros"];
+			$chaves = array();
+			foreach($cs as $c){
+				$chaves[] = $c["chave"];
+			}
+			$chaves = implode(",",$chaves);
+			$filtro = $layer->getFilterString();
+			$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$chaves);
+			$chaves = explode(",",$chaves);
+			$n = count($chaves);
+			//a variavel $plugin vem da URL e contem os valores
+			//que devem ser substituidos
+			//se $plugin for vazio, usa o primeiro valor definido na configuracao do plugin
+			//A ordem dos valores deve ser exatamente a ordem das chaves
+			if(empty($plugin)){
+				$plugin = array();
+				foreach($cs as $c){
+					if($c["chave"] != ""){
+						//valores definidos no plugin como uma string
+						if($c["valores"] != ""){
+							$temp = explode(",",$c["valores"]);
+							$plugin[] = $temp[0];
+						}
+						elseif ($c["prog"] != ""){
+							$plugin[] = execProg($locaplic."/".$c["prog"]);
+						}
+					}
+				}
+				$plugin = implode(",",$plugin);
+			}
+			$layer->setmetadata("TEMA",$layer->getmetadata("TEMA")." - ".$plugin);
+			$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$plugin);
+			$valores = explode(",",strip_tags($valores));
+			for($i = 0; $i < $n; $i++){
+				if($chaves[$i] != ""){
+					$v = $valores[$i];
+					$data = str_replace($chaves[$i],$v,$data);
+					if($filtro != ""){
+						$filtro = str_replace($chaves[$i],$v,$filtro);
+					}
+				}
+			}
+			if($filtro != ""){
+				$layer->setfilter($filtro);
+			}
+			$layer->set("data",$data);
+		}
+	}
+}
+//utilizada para obter os dados default quando se utiliza o plugin parametrossql
+function execProg($prog){
+	include($prog);
+	//$retorno variavel deve ser retornada pelo programa $prog
+	//veja como exemplo i3geo/aplicmap/daods/listaano.php
+	return $retorno[0]["v"];
+}
 function converteenc($texto){
 	if (!mb_detect_encoding($texto,"UTF-8",true)){
 		$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
