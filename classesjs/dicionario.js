@@ -2565,36 +2565,36 @@ var g_traducao =
 		"listag" : [
 			{
 				pt : "lista geometrias",
-				en : "",
-				es : ""
+				en : "geometry list",
+				es : "lista geometr&iacute;as"
 			}
 		],
 		"frente" : [
 			{
 				pt : "trazer para frente",
-				en : "",
-				es : ""
+				en : "send forward",
+				es : "traer al frente"
 			}
 		],
 		"studo" : [
 			{
 				pt : "selecionar tudo",
-				en : "",
-				es : ""
+				en : "select all",
+				es : "seleccionar todo"
 			}
 		],
 		"excsel" : [
 			{
 				pt : "Remove os elementos selecionados",
-				en : "",
-				es : ""
+				en : "it removes selected features",
+				es : "Remueve los elementos seleccionados"
 			}
 		],
 		"opcoes" : [
 			{
 				pt : "Op&ccedil;&otilde;es",
-				en : "",
-				es : ""
+				en : "Options",
+				es : "Opciones"
 			}
 		],
 		"meneditor1" : [
