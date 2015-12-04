@@ -106,14 +106,14 @@ i3GEOF.proplabel = {
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('tamanho',i3GEOF.proplabel.dicionario)+':</p>' +
-		'<div class="i3geoForm i3geoFormIconeEdita" >' +
-		'<input type="text" value="8" id="i3GEOproplabeltamanho_i" />' +
+		'<div class="i3geoForm i3geoFormIconeNumero" >' +
+		'<input type="number" value="8" id="i3GEOproplabeltamanho_i" />' +
 		'</div>';
 
 		if(conector === true){
 			ins += '<br><p class="paragrafo">'+$trad('larguraConector',i3GEOF.proplabel.dicionario)+':</p>' +
-			'<div class="i3geoForm i3geoFormIconeEdita" >' +
-			'<input type="text" value="2" id="i3GEOproplabeltamanho_c" />' +
+			'<div class="i3geoForm i3geoFormIconeNumero" >' +
+			'<input type="number" value="2" id="i3GEOproplabeltamanho_c" />' +
 			'</div>' +
 			'<br><p class="paragrafo">'+$trad('corConector',i3GEOF.proplabel.dicionario)+':</p>' +
 			'<div class="i3geoForm100 i3geoFormIconeAquarela" >' +
@@ -121,18 +121,18 @@ i3GEOF.proplabel = {
 			'</div>';
 		}
 		ins += '<br><p class="paragrafo">'+$trad('angulo',i3GEOF.proplabel.dicionario)+':</p>' +
-		'<div class="i3geoForm i3geoFormIconeEdita" >' +
-		'<input type="text" value="0" id="i3GEOproplabelangulo_i" />' +
+		'<div class="i3geoForm i3geoFormIconeNumero" >' +
+		'<input type="number" value="0" id="i3GEOproplabelangulo_i" />' +
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('deslocamento',i3GEOF.proplabel.dicionario)+' X:</p>' +
-		'<div class="i3geoForm i3geoFormIconeEdita" >' +
-		'<input type="text" value="0" id="i3GEOproplabeloffsetx_i" />' +
+		'<div class="i3geoForm i3geoFormIconeNumero" >' +
+		'<input type="number" value="0" id="i3GEOproplabeloffsetx_i" />' +
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('deslocamento',i3GEOF.proplabel.dicionario)+' Y:</p>' +
-		'<div class="i3geoForm i3geoFormIconeEdita" >' +
-		'<input type="text" value="0" id="i3GEOproplabeloffsety_i" />' +
+		'<div class="i3geoForm i3geoFormIconeNumero" >' +
+		'<input type="number" value="0" id="i3GEOproplabeloffsety_i" />' +
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('corTexto',i3GEOF.proplabel.dicionario)+':</p>' +
@@ -146,7 +146,7 @@ i3GEOF.proplabel = {
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('posicionamento',i3GEOF.proplabel.dicionario)+':</p>' +
-		'<div class="styled-select" style="width:100px;">' +
+		'<div class="styled-select" >' +
 		'	<select id=i3GEOproplabelposition_i >' +
 		'		<option value="MS_AUTO" >'+$trad('automatico',i3GEOF.proplabel.dicionario)+'</option>' +
 		'		<option value="MS_UL" >'+$trad('superiorEsquerdo',i3GEOF.proplabel.dicionario)+'</option>' +
@@ -172,13 +172,13 @@ i3GEOF.proplabel = {
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('deslocamentoSombraFundo',i3GEOF.proplabel.dicionario)+' X:</p>' +
-		'<div class="i3geoForm i3geoFormIconeEdita" >' +
-		'<input type="text" value="1" id="i3GEOproplabelsombrax_i" />' +
+		'<div class="i3geoForm i3geoFormIconeNumero" >' +
+		'<input type="number" value="1" id="i3GEOproplabelsombrax_i" />' +
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('deslocamentoSombraFundo',i3GEOF.proplabel.dicionario)+' Y:</p>' +
-		'<div class="i3geoForm i3geoFormIconeEdita" >' +
-		'<input type="text" value="1" id="i3GEOproplabelsombray_i" />' +
+		'<div class="i3geoForm i3geoFormIconeNumero" >' +
+		'<input type="number" value="1" id="i3GEOproplabelsombray_i" />' +
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('corTextoFundo',i3GEOF.proplabel.dicionario)+':</p>' +
@@ -187,13 +187,13 @@ i3GEOF.proplabel = {
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('deslocamentoTextoFundo',i3GEOF.proplabel.dicionario)+' X:</p>' +
-		'<div class="i3geoForm i3geoFormIconeEdita" >' +
-		'<input type="text" value="1" id="i3GEOproplabelfrentex_i" />' +
+		'<div class="i3geoForm i3geoFormIconeNumero" >' +
+		'<input type="number" value="1" id="i3GEOproplabelfrentex_i" />' +
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('deslocamentoTextoFundo',i3GEOF.proplabel.dicionario)+' Y:</p>' +
-		'<div class="i3geoForm i3geoFormIconeEdita" >' +
-		'<input type="text" value="1" id="i3GEOproplabelfrentey_i" />' +
+		'<div class="i3geoForm i3geoFormIconeNumero" >' +
+		'<input type="number" value="1" id="i3GEOproplabelfrentey_i" />' +
 		'</div>' +
 
 		'<br><p class="paragrafo">'+$trad('forcaColisaoTexto',i3GEOF.proplabel.dicionario)+':</p>' +

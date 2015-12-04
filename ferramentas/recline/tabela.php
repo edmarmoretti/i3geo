@@ -1,46 +1,12 @@
 <?php
+//
+//Abre o Recline com base em um servico enviado pela URL
+//utilize &url= para indicar a url do servico que retorna os dados no padrao gdocs
+//
+
 //pega a extensao geografica da camada
 include("../../ms_configura.php");
 include("../../classesphp/pega_variaveis.php");
-include("../../classesphp/funcoes_gerais.php");
-$versao = versao();
-$versao = $versao["principal"];
-if(isset($base) && $base != ""){
-	if(file_exists($base)){
-		$f = $base;
-	}
-	else{
-		$f = $locaplic."/aplicmap/".$base.".map";
-	}
-}
-else
-{
-	$f = "";
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-		$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
-	}
-	else{
-		if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
-			$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
-		}
-		if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-			$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
-		}
-		if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-			$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
-		}
-		if($f == "")
-		{
-			$f = $locaplic."/aplicmap/geral1v".$versao.".map";
-		}
-	}
-}
-$mapext = "-180,-90,180,90";
-if(@ms_newMapObj($f)){
-	$mapa = ms_newMapObj($f);
-	$c = $mapa->extent;
-	$mapext = $c->minx.",".$c->miny.",".$c->maxx.",".$c->maxy;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,55 +59,6 @@ if(@ms_newMapObj($f)){
 
 <!-- Recline JS (combined distribution, all views) -->
 <script src="../../pacotes/knightlab/recline/dist/recline.js" type="text/javascript"></script>
-<!-- Openlayers -->
-<script type="text/javascript" src="../../mashups/openlayers_compacto.js.php"></script>
-<link rel="stylesheet" href="../../mashups/openlayers_compacto.css" type="text/css" />
-<style>
-.yui-skin-sam .container-minimiza {
-	background: transparent
-		url(../../pacotes/yui290/build/assets/skins/sam/sprite.png) no-repeat
-		scroll 0 -450px;
-	cursor: pointer;
-	height: 15px;
-	position: absolute;
-	right: 30px;
-	top: 1px;
-	width: 25px;
-	z-index: 2001;
-	opacity: .8;
-	filter: alpha(opacity = 80);
-}
-
-.pluginParametrossql {
-	background-image: url("../../imagens/gisicons/settings.png");
-	background-size: 14px auto;
-	cursor: pointer;
-	position: relative;
-	top: 3px;
-	width: 14px;
-}
-
-.i3GEOiconeTme, .i3GEOiconeStorymap {
-	background-size: 14px auto;
-	cursor: pointer;
-	position: relative;
-	top: 2px;
-	width: 14px;
-	margin-right: 2px;
-}
-
-.ajuda_usuario {
-	background-image: url(../../imagens/external.png);
-	background-position: 0px 0px;
-	background-repeat: no-repeat;
-	margin-left: 0;
-	text-decoration: none;
-	cursor: help;
-	position: relative;
-	top: 2px;
-	font-size: 13px;
-}
-</style>
 </head>
 <body class=" yui-skin-sam">
 	<div class="borda">
@@ -164,9 +81,6 @@ if(@ms_newMapObj($f)){
 			<div class="col-sm-8">
 				<div class="data-explorer-here"></div>
 				<div style="clear: both;"></div>
-			</div>
-			<div class="col-sm-8">
-				<div id=i3geoMapa style="width: 100%;height:450px;margin-top:5px;"></div>
 			</div>
 		</div>
 
@@ -270,75 +184,11 @@ var createMultiView = function(dataset, state) {
   });
   return multiView;
 }
-//Mapa i3Geo
-OpenLayers.ImgPath = "../../pacotes/openlayers/img/";
-OpenLayers.Lang.setCode("pt-BR");
-var m = document.getElementById("i3geoMapa");
-if(parseInt(m.style.width,10) === 0){
-	var t = i3GEO.util.tamanhoBrowser();
-	m.style.width = (t[0]-10)+"px";
-	m.style.height = (t[1]-20)+"px";
-}
-var camada = "<?php echo strip_tags($_GET["tema"]);?>";
-i3GEO.editorOL.layersIniciais = [new OpenLayers.Layer.WMS( camada, "../../ogc.php?tema="+camada+"&DESLIGACACHE=&",{opacity:1,layers:camada,transparent: "true", format: "image/png"},{transitionEffect: "resize", singleTile:true,visibility:true,isBaseLayer:false, ferramentas :{}})];
-i3GEO.editorOL.botoes = {'pan':true,'zoombox':true,'zoomtot':true,'identifica':true} ;i3GEO.editorOL.pontos = [];
-i3GEO.editorOL.kml = [];
-i3GEO.editorOL.marca = "../../pacotes/openlayers/img/marker-gold.png";
-i3GEO.editorOL.tiles = "true";
-i3GEO.editorOL.incluilayergrafico = "true";
-i3GEO.editorOL.ativalayerswitcher = "false";
-i3GEO.editorOL.ativarodadomouse = "false";
-
-i3GEO.editorOL.legendahtml = "true";
-
-i3GEO.editorOL.maxext = new OpenLayers.Bounds(<?php echo $mapext;?>);
-i3GEO.editorOL.mapext = new OpenLayers.Bounds(<?php echo $mapext;?>);
-i3GEO.Interface = {openlayers:{googleLike:false}};
-//evita que seja mostrada a opcao de salvar figura
-i3GEO.editorOL.nomeFuncaoSalvar = "";
-var temp = i3GEO.editorOL.minresolution,
-	r = [ i3GEO.editorOL.minresolution ];
-for (var j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
-	temp = temp / 2;
-	r.push(temp);
-}
-i3GEO.editorOL.incluilayergrafico = true;
-i3GEO.editorOL.mapa = new OpenLayers.Map(
-	'i3geoMapa',
-	{
-		autoUpdateSize: false,
-		controls:[],
-		resolutions: r,
-		minResolution: i3GEO.editorOL.minresolution
-	}
-);
-if(i3GEO.configura.locaplic === ""){
-	i3GEO.configura.locaplic = "../../";
-}
-	i3GEO.editorOL.inicia();
-
-	function adicionaPluginI3geo(camada,visivel){
-		if(!camada.cache){
-			camada["cache"] = "NAO";
-		}
-		var l = i3GEO.pluginI3geo.layerMashup("openlayers",camada,"4326"),
-			n,
-			i;
-			n = l.length;
-		for(i = 0; i < n; i++){
-			if(l[i].displayInLayerSwitcher === true){
-				l[i].setVisibility(visivel);
-			}
-			if(l[i] != true){
-				i3GEO.editorOL.layersIniciais.push(l[i]);
-			}
-		}
-	}
 </script>
 		<?php
 		//inclui os dados via jsonp
-		$url = "../../json.php?tema=".strip_tags($_GET["tema"])."&format=gdocs&jsonp=returnData";
-		echo "<script src='$url' ></script>";
+		$url = str_replace("urljson=","",$_SERVER["QUERY_STRING"]);
+		echo "<script src=".$url."&jsonp=returnData"." ></script>";
 		?>
 	</div>
 </body>

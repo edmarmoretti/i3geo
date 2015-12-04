@@ -192,7 +192,7 @@ i3GEOF.selecao =
 					+ '	<br><p class=paragrafo >'
 					+ $trad('distanciaSelecao', i3GEOF.selecao.dicionario)
 					+ '	<div class="i3geoForm i3geoFormIconeDistancia">'
-					+ '		<input type=text id=i3GEOselecaotoleranciapt value=0 /></div>'
+					+ '		<input type=number id=i3GEOselecaotoleranciapt value=0 /></div>'
 					+ '		<br><p class=paragrafo ><input id=i3GEOFSelecaoQuery type=button value="'
 					+ $trad("p8")
 					+ '" /></p>'
