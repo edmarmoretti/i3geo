@@ -289,7 +289,7 @@
 
 					for(var i = 0; i < gradient.length; i++){
 
-						labelText = max*gradient[i].stop >> 0;
+						labelText = max*gradient[i].stop; // >> 0;
 						offset = (ctx.measureText(labelText).width/2) >> 0;
 
 						if(i == 0){
