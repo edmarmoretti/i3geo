@@ -119,6 +119,9 @@ select option:hover {
 	appearance: none;
 	cursor: text;
 }
+.i3geoForm100 input[type=number] {
+	width: 85%;
+}
 
 .i3geoFormIconeMinuto {
   background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px / 18px;
