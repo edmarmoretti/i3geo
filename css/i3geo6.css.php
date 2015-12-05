@@ -1,7 +1,7 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>input{
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-input[type=text], textarea{
+input[type=text], textarea, input[type=number],{
 -webkit-user-select: text;
 -khtml-user-select: text;
 -moz-user-select: text;
@@ -17,6 +17,16 @@ border: 1px solid rgb(180, 180, 180);
 text-align: center;
 cursor: text;
 height: 22px;
+}
+input[type=number] {
+font-size: 12px;
+color: #2F4632;
+background-color: #FFFFFF;
+padding: 0;
+border: 1px solid rgb(180, 180, 180);
+text-align: center;
+cursor: text;
+height: 26px;
 }
 input[type=checkbox] {
 border: 0px solid white;
@@ -96,6 +106,9 @@ text-overflow: '';
 font-size: 12px;
 appearance: none;
 cursor: text;
+}
+.i3geoForm100 input[type=number] {
+width: 85%;
 }
 .i3geoFormIconeMinuto {
 background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px / 18px;
