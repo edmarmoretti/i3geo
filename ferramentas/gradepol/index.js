@@ -164,9 +164,9 @@ i3GEOF.gradeDePoligonos = {
 		var ins = "<p class='paragrafo'><b>"+$trad('distancia',i3GEOF.gradeDePoligonos.dicionario)+"</b>";
 		if($i("i3GEOgradedepoligonosProj").checked){
 			ins += "<p class='paragrafo'>" + $trad('metros',i3GEOF.gradeDePoligonos.dicionario)+" X:";
-			ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input  id='i3GEOgradedepoligonosxg' title='metros' type=text  value='100000'/></div>";
+			ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input  id='i3GEOgradedepoligonosxg' title='metros' type=number  value='100000'/></div>";
 			ins += "<br><p class='paragrafo'>"+$trad('metros',i3GEOF.gradeDePoligonos.dicionario)+" Y:";
-			ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input  id='i3GEOgradedepoligonosyg' title='metros' type=text value='100000'/></div>";
+			ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input  id='i3GEOgradedepoligonosyg' title='metros' type=number value='100000'/></div>";
 		}
 		else{
 			ins += "<p class='paragrafo'>X: ";
@@ -204,9 +204,9 @@ i3GEOF.gradeDePoligonos = {
 	t3: function(){
 		var ins = "<p class='paragrafo'><b>"+$trad('numero',i3GEOF.gradeDePoligonos.dicionario)+"</b>";
 		ins += "<p class='paragrafo'>X</p>";
-		ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOgradedepoligonosnptx' title='pontos em x'  type=text value='10'/></div>";
+		ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input id='i3GEOgradedepoligonosnptx' title='pontos em x'  type=number value='10'/></div>";
 		ins += "<br><p class='paragrafo'>Y";
-		ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOgradedepoligonosnpty' title='pontos em y'  type=text value='10'/></div>";
+		ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input id='i3GEOgradedepoligonosnpty' title='pontos em y'  type=number value='10'/></div>";
 
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePoligonos.t2()","i3GEOF.gradeDePoligonos.t4()",ins,"i3GEOF.gradeDePoligonos.t3","i3GEOgradedepoligonosresultado",true,"i3GEOF.gradeDePoligonos_rodape");
 	},

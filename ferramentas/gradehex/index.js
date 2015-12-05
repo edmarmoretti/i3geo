@@ -166,7 +166,7 @@ i3GEOF.gradeDeHex = {
 		ins += "<p class='paragrafo'> ";
 		if($i("i3GEOgradedehexProj").checked){
 			ins += $trad('metros',i3GEOF.gradeDeHex.dicionario);
-			ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOgradedehexxg' title='metros' type=text value='100000'/></div>";
+			ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input id='i3GEOgradedehexxg' title='metros' type=number value='100000'/></div>";
 		}
 		else{
 			ins += $trad('grau',i3GEOF.gradeDeHex.dicionario)+" - "+$trad('minuto',i3GEOF.gradeDeHex.dicionario)+" - "+$trad('segundo',i3GEOF.gradeDeHex.dicionario)+"</p>";
@@ -198,9 +198,9 @@ i3GEOF.gradeDeHex = {
 		var ins = "<p class='paragrafo'><b>"+$trad('numero',i3GEOF.gradeDeHex.dicionario)+"</b>";
 
 		ins += "<p class='paragrafo'>X</p>";
-		ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOgradedehexnptx' title='pontos em x'  type=text value='10'/></div>";
+		ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input id='i3GEOgradedehexnptx' title='pontos em x'  type=number value='10'/></div>";
 		ins += "<br><p class='paragrafo'>Y";
-		ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOgradedehexnpty' title='pontos em y'  type=text value='10'/></div>";
+		ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input id='i3GEOgradedehexnpty' title='pontos em y'  type=number value='10'/></div>";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t2()","i3GEOF.gradeDeHex.t4()",ins,"i3GEOF.gradeDeHex.t3()","i3GEOgradedehexresultado",true,"i3GEOF.gradeDeHex_rodape");
 	},
 	t4: function(){

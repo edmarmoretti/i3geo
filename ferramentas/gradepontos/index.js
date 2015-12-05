@@ -164,9 +164,9 @@ i3GEOF.gradeDePontos = {
 		var ins = "<p class='paragrafo'><b>"+$trad('espacamentoGrade',i3GEOF.gradeDePontos.dicionario)+"</b>";
 		if($i("i3GEOgradedepontosProj").checked){
 			ins += "<p class='paragrafo'>" + $trad('metros',i3GEOF.gradeDePontos.dicionario)+" X:";
-			ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input  id='i3GEOgradedepontosxg' title='metros' type=text  value='100000'/></div>";
+			ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input  id='i3GEOgradedepontosxg' title='metros' type=number  value='100000'/></div>";
 			ins += "<br><p class='paragrafo'>"+$trad('metros',i3GEOF.gradeDePontos.dicionario)+" Y:";
-			ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input  id='i3GEOgradedepontosyg' title='metros' type=text value='100000'/></div>";
+			ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input  id='i3GEOgradedepontosyg' title='metros' type=number value='100000'/></div>";
 		}
 		else{
 			ins += "<p class='paragrafo'>X: ";
@@ -204,9 +204,9 @@ i3GEOF.gradeDePontos = {
 	t3: function(){
 		var ins = "<p class='paragrafo'><b>"+$trad('numeroPontos',i3GEOF.gradeDePontos.dicionario)+"</b>";
 		ins += "<p class='paragrafo'>X</p>";
-		ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOgradedepontosnptx' title='pontos em x'  type=text value='10'/></div>";
+		ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input id='i3GEOgradedepontosnptx' title='pontos em x'  type=number value='10'/></div>";
 		ins += "<br><p class='paragrafo'>Y";
-		ins += "<div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEOgradedepontosnpty' title='pontos em y'  type=text value='10'/></div>";
+		ins += "<div class='i3geoForm i3geoFormIconeNumero' ><input id='i3GEOgradedepontosnpty' title='pontos em y'  type=number value='10'/></div>";
 
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t2()","i3GEOF.gradeDePontos.t4()",ins,"i3GEOF.gradeDePontos.t3","i3GEOgradedepontosresultado",true,"i3GEOF.gradeDePontos_rodape");
 	},
