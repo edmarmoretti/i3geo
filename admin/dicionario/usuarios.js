@@ -30,5 +30,105 @@ i3GEOadmin.usuarios.dicionario = {
 		pt : "Usu&aacute;rios cadastrados:",
 		en : "",
 		es : ""
+	} ],
+    'msgBuscaUsuario' : [ {
+		pt : "buscando usu&aacute;rios...",
+		en : "",
+		es : ""
+	} ],
+    'novoPapel' : [ {
+		pt : "Adicionar novo papel",
+		en : "",
+		es : ""
+	} ],
+    'definePapel' : [ {
+		pt : "Edite para definir o papel!!!",
+		en : "",
+		es : ""
+	} ],
+    'enviaSenha' : [ {
+		pt : "enviar senha",
+		en : "",
+		es : ""
+	} ],
+    'defineUsuario' : [ {
+		pt : "Edite para definir o usu&aacute;rio!!!",
+		en : "",
+		es : ""
+	} ],
+    'usuario' : [ {
+		pt : "Usu&aacute;rio",
+		en : "",
+		es : ""
+	} ],
+    'msgUsuario' : [ {
+		pt : "Se o usu&aacute;rio j&aacute; existir, preencha para alterar a senha. Se for mantido em branco, o sistema gerar&aacute; uma senha aleat&oacute;ria no caso de novos usu&aacute;rios. Envie a senha por e-mail ap&oacute;s o cadastro.",
+		en : "",
+		es : ""
+	} ],
+    'novaSenha' : [ {
+		pt : "Nova senha:",
+		en : "",
+		es : ""
+	} ],
+    'dataCadastro' : [ {
+		pt : "Data de cadastro:",
+		en : "",
+		es : ""
+	} ],
+    'ativo' : [ {
+		pt : "Ativo:",
+		en : "",
+		es : ""
+	} ],
+    'msgExcluiUsuario' : [ {
+		pt : " excluindo o registro do usu&aacute;rio= ",
+		en : "",
+		es : ""
+	} ],
+    'msgNaoEnvia' : [ {
+		pt : "N&atilde;o foi poss&iacute;vel enviar",
+		en : "",
+		es : ""
+	} ],
+    'msgEnvia' : [ {
+		pt : "Enviando e-mail",
+		en : "",
+		es : ""
+	} ],
+    'msgNaoExclui' : [ {
+		pt : "N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
 	} ]
 };

@@ -45,7 +45,7 @@ function ativaBotaoAdicionaUsuario(sUrl,idBotao){
 	var botao, adiciona = function()
 	{
 		core_carregando("ativa");
-		core_carregando(" adicionando um novo registro");
+		core_carregando($trad("msgNovoRegistro",i3GEOadmin.core.dicionario));
 		var callback =
 		{
 				success:function(o)
@@ -76,7 +76,7 @@ Obt&eacute;m a lista de operacoes
 <PEGAOPERACOES>
 */
 function pegaUsuarios(){
-	core_pegaDados("buscando usu&aacute;rios...","../php/usuarios.php?funcao=pegaUsuarios","montaArvore");
+	core_pegaDados($trad("msgBuscaUsuario",i3GEOadmin.usuarios.dicionario),"../php/usuarios.php?funcao=pegaUsuarios","montaArvore");
 }
 /*
 Function: montaArvore
@@ -143,7 +143,7 @@ function adicionaNosPapeis(no,dados,redesenha)
 	}
 	if(!redesenha)
 	{
-		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editar('papel','"+no.data.id_usuario+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>Adicionar novo papel</i></span>";
+		var conteudo = "<span style=\"cursor:pointer;\" onclick=\"editar('papel','"+no.data.id_usuario+"')\" ><img style=\"position:relative;top:2px\" src=\"../imagens/05.png\" /><i>"+ $trad("novoPapel",i3GEOadmin.usuarios.dicionario) +"</i></span>";
 		var d = {html:conteudo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -152,11 +152,11 @@ function adicionaNosPapeis(no,dados,redesenha)
 	for (var i=0, j=dados.length; i<j; i++)
 	{
 		if(!tree.getNodeByProperty("id_nopapel",dados[i].id_usuario+"_"+dados[i].id_papel)){
-			var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('papel','"+dados[i].id_usuario+"','"+dados[i].id_papel+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+			var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('papel','"+dados[i].id_usuario+"','"+dados[i].id_papel+"')\" title="+ $trad("excluir",i3GEOadmin.core.dicionario) +" width='10px' heigth='10px' src=\"../imagens/01.png\" />";
 			if(dados[i].nome != "")
 			{conteudo += "&nbsp;<span><b>"+dados[i].nome+"</b> - "+dados[i].descricao+"</span>";}
 			else
-			{conteudo += "&nbsp;<span style=color:red >Edite para definir o papel!!!</span>";}
+			{conteudo += "&nbsp;<span style=color:red >"+ $trad("definePapel",i3GEOadmin.usuarios.dicionario) +"</span>";}
 			var d = {html:conteudo,id_nopapel:dados[i].id_usuario+"_"+dados[i].id_papel,tipo:"papel"};
 			var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 			tempNode.isLeaf = true;
@@ -168,13 +168,13 @@ function adicionaNosPapeis(no,dados,redesenha)
 function adicionaNosUsuarios(dados,redesenha){
 	var root = tree.getRoot();
 	for (var i=0, j=dados.length; i<j; i++){
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('usuario','"+dados[i].id_usuario+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('usuario','"+dados[i].id_usuario+"')\" title=editar src=\"../imagens/06.png\" /><b>";
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px;width:25px;\" onclick=\"emailsenha('"+dados[i].id_usuario+"')\" title='enviar senha' src=\"../imagens/07.png\" /><b>";
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('usuario','"+dados[i].id_usuario+"')\" title="+ $trad("excluir",i3GEOadmin.core.dicionario) +" width='10px' heigth='10px' src=\"../imagens/01.png\" />";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('usuario','"+dados[i].id_usuario+"')\" title="+ $trad("editar",i3GEOadmin.core.dicionario) +"editar src=\"../imagens/06.png\" /><b>";
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px;width:25px;\" onclick=\"emailsenha('"+dados[i].id_usuario+"')\" title='"+ $trad("enviaSenha",i3GEOadmin.usuarios.dicionario) +"' src=\"../imagens/07.png\" /><b>";
 		if(dados[i].nome_usuario && dados[i].nome_usuario != "")
 		{conteudo += "&nbsp;<span>"+dados[i].nome_usuario+" - "+dados[i].login+" - ativo: "+dados[i].ativo+"</span>";}
 		else
-		{conteudo += "&nbsp;<span style=color:red >Edite para definir o usu&aacute;rio!!!</span>";}
+		{conteudo += "&nbsp;<span style=color:red >"+ $trad("defineUsuario",i3GEOadmin.usuarios.dicionario) +"</span>";}
 		var d = {html:conteudo,id_usuario:dados[i].id_usuario,tipo:"usuario"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 		tempNode.enableHighlight = false;
@@ -189,7 +189,7 @@ Abre o editor de um no
 function editar(tipo,id)
 {
 	core_carregando("ativa");
-	core_carregando(" buscando dados");
+	core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 	var sUrl = null;
 	var callback =
 	{
@@ -229,15 +229,15 @@ function montaDivUsuario(i){
 	var temp = function(){
 		gravaDados('usuario',i.id_usuario);
 	};
-	core_montaEditor(temp,"450px","380px","","Usu&aacute;rio",true,true,false);
+	core_montaEditor(temp,"450px","380px","",$trad("usuario",i3GEOadmin.usuarios.dicionario),true,true,false);
 	var param = {
 		"linhas":[
-				{titulo:"Nome:",id:"Enome_usuario",size:"50",value:i.nome_usuario,tipo:"text",div:""},
+				{titulo:$trad("nome2",i3GEOadmin.core.dicionario),id:"Enome_usuario",size:"50",value:i.nome_usuario,tipo:"text",div:""},
 				{titulo:"Login:",id:"Elogin",size:"50",value:i.login,tipo:"text",div:""},
-				{ajuda:"Se o usu&aacute;rio j&aacute; existir, preencha para alterar a senha. Se for mantido em branco, o sistema gerar&aacute; uma senha aleat&oacute;ria no caso de novos usu&aacute;rios. Envie a senha por e-mail ap&oacute;s o cadastro.",titulo:"Nova senha:",id:"Esenha",size:"50",value:"",tipo:"text",div:""},
+				{ajuda:$trad("msgUsuario",i3GEOadmin.usuarios.dicionario),titulo:$trad("novaSenha",i3GEOadmin.usuarios.dicionario),id:"Esenha",size:"50",value:"",tipo:"text",div:""},
 				{titulo:"E-mail:",id:"Eemail",size:"50",value:i.email,tipo:"text",div:""},
-				{titulo:"Data de cadastro:",id:"Edata_cadastro",size:"50",value:i.data_cadastro,tipo:"text",div:""},
-				{titulo:"Ativo:",id:"",size:"50",value:i.ativo,tipo:"text",div:"<div id=cAtivo ></div>"}
+				{titulo:$trad("dataCadastro",i3GEOadmin.usuarios.dicionario),id:"Edata_cadastro",size:"50",value:i.data_cadastro,tipo:"text",div:""},
+				{titulo:$trad("ativo",i3GEOadmin.usuarios.dicionario),id:"",size:"50",value:i.ativo,tipo:"text",div:"<div id=cAtivo ></div>"}
 		]
 	};
 	var ins = "";
@@ -246,8 +246,8 @@ function montaDivUsuario(i){
 	$i("editor_bd").innerHTML = ins;
 	if($i("cAtivo")){
 		temp = "<select id='Eativo' >";
-		temp += "<option value='1' >Sim</option>";
-		temp += "<option value='0' >N&atilde;o</option>";
+		temp += "<option value='1' >"+ $trad("sim2",i3GEOadmin.core.dicionario) +"</option>";
+		temp += "<option value='0' >"+ $trad("nao2",i3GEOadmin.core.dicionario) +"</option>";
 		temp += "</select>";
 		$i("cAtivo").innerHTML = temp;
 		$i("Eativo").value = i.ativo;
@@ -272,7 +272,7 @@ Exclui um elemento do atlas
 */
 function excluir(tipo,id_usuario,id_papel)
 {
-	var mensagem = " excluindo o registro do usu&aacute;rio= "+id_usuario;
+	var mensagem = $trad("msgExcluiUsuario",i3GEOadmin.usuarios.dicionario)+id_usuario;
 	var no = null;
 	var sUrl = null;
 	if(tipo == "usuario")	{
@@ -297,7 +297,7 @@ function emailsenha(id_usuario)
 			success:function(o){
 				try	{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel enviar");
+						core_carregando("<span style=color:red >"+ $trad("msgNaoEnvia",i3GEOadmin.usuarios.dicionario) +"");
 						setTimeout("core_carregando('desativa')",3000);
 					}
 					else{
@@ -310,7 +310,7 @@ function emailsenha(id_usuario)
 			argument: { foo:"foo", bar:"bar" }
 	};
 	core_carregando("ativa");
-	core_carregando("Enviando e-mail");
+	core_carregando($trad("msgEnvia",i3GEOadmin.usuarios.dicionario));
 	var sUrl = "../php/usuarios.php?funcao=enviarSenhaEmail&id_usuario="+id_usuario;
 	core_makeRequest(sUrl,callback,'POST');
 }
@@ -347,7 +347,7 @@ function gravaDados(tipo,id)
 			success:function(o){
 				try	{
 					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-						core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema</span>");
+						core_carregando("<span style=color:red >"+ $trad("msgNaoExclui",i3GEOadmin.usuarios.dicionario) +"</span>");
 						setTimeout("core_carregando('desativa')",3000);
 					}
 					else{
@@ -373,7 +373,7 @@ function gravaDados(tipo,id)
 	};
 	if(prog && par){
 		core_carregando("ativa");
-		core_carregando(" gravando o registro do id= "+id);
+		core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 		var sUrl = prog+par;
 		core_makeRequest(sUrl,callback,'POST');
 	}

@@ -44,18 +44,18 @@ i3GEOadmin.webservices = {
 		elCell.innerHTML = "<pre ><p style=cursor:default >" + oData + "</pre>";
 	},
 	formatExclui: function(elCell, oRecord, oColumn){
-		elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
+		elCell.innerHTML = "<div title="+ $trad("excluiTitulo",i3GEOadmin.core.dicionario) +" class=excluir style='text-align:center' ></div>";
 	},
 	formatMais: function(elCell, oRecord, oColumn){
-		elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
+		elCell.innerHTML = "<div class="+ $trad("editar",i3GEOadmin.core.dicionario) +" style='text-align:center' ></div>";
 	},
 	defColunas: function(){
 		return [
-			{key:"excluir",label:"excluir",formatter:i3GEOadmin.webservices.formatExclui},
-			{key:"mais",label:"editar",formatter:i3GEOadmin.webservices.formatMais},
+			{key:"excluir",label:$trad("excluir",i3GEOadmin.core.dicionario),formatter:i3GEOadmin.webservices.formatExclui},
+			{key:"mais",label:$trad("editar",i3GEOadmin.core.dicionario),formatter:i3GEOadmin.webservices.formatMais},
 			{label:"id",key:"id_ws", formatter:i3GEOadmin.webservices.formatTexto},
-			{label:"nome",resizeable:true,key:"nome_ws", formatter:i3GEOadmin.webservices.formatTexto},
-			{label:"tipo",resizeable:true,key:"tipo_ws", formatter:i3GEOadmin.webservices.formatTexto}
+			{label:$trad("nome",i3GEOadmin.core.dicionario),resizeable:true,key:"nome_ws", formatter:i3GEOadmin.webservices.formatTexto},
+			{label:$trad("tipo",i3GEOadmin.webservices.dicionario),resizeable:true,key:"tipo_ws", formatter:i3GEOadmin.webservices.formatTexto}
 		];
 	},
 	/*
@@ -85,7 +85,7 @@ i3GEOadmin.webservices = {
 			tipows = u[1];
 		}
 		catch(e){tipows = "";}
-		core_pegaDados("buscando endere&ccedil;os...","../php/webservices.php?funcao=pegaWS&tipows="+tipows,"i3GEOadmin.webservices.tabela");
+		core_pegaDados($trad("msgBuscaEndereco",i3GEOadmin.webservices.dicionario),"../php/webservices.php?funcao=pegaWS&tipows="+tipows,"i3GEOadmin.webservices.tabela");
 	},
 	tabela: function(dados){
 		if(i3GEOadmin.webservices.dados == ""){
@@ -123,7 +123,7 @@ i3GEOadmin.webservices = {
 				}
 				if (column.key == 'mais'){
 					core_carregando("ativa");
-					core_carregando("buscando dados...");
+					core_carregando($trad("msgBuscaDados",i3GEOadmin.core.dicionario));
 					$clicouId = registro.getData('id_ws');
 					$recordid = registro.getId();
 					sUrl = "../php/webservices.php?funcao=pegaDados&id_ws="+$clicouId;
@@ -155,7 +155,7 @@ i3GEOadmin.webservices = {
 			var editorBotoes,ins,
 				novoel = document.createElement("div");
 			novoel.id =  "janela_editor2";
-			ins = '<div class="hd">Editor</div>';
+			ins = '<div class="hd">'+ $trad("editor",i3GEOadmin.core.dicionario) +'</div>';
 			ins += "<div class='bd' style='height:354px;overflow:auto'>";
 			ins += "<div id='okcancel_checkbox2'></div><div id='editor_bd2'></div>";
 			ins += "<div id='letras_W'></div>";
@@ -164,8 +164,8 @@ i3GEOadmin.webservices = {
 			document.body.appendChild(novoel);
 			editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id2", name:  "okcancel_checkbox_id2", container:  "okcancel_checkbox2" });
 			editorBotoes.addButtons([
-				{ label: "Salva", value: "OK", checked: false},
-				{ label: "Cancela", value: "CANCEL", checked: false }
+				{ label: $trad("salva1",i3GEOadmin.core.dicionario), value: "OK", checked: false},
+				{ label: $trad("cancela",i3GEOadmin.core.dicionario), value: "CANCEL", checked: false }
 			]);
 			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
 			YAHOO.webservices.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:false,width:"400px", height:"480px",overflow:"auto", visible:false,constraintoviewport:true } );
@@ -178,16 +178,16 @@ i3GEOadmin.webservices = {
 	formulario: function(i){
 		var param = {
 			"linhas":[
-			{titulo:"Nome:",id:"Enome_ws",size:"50",value:i.nome_ws,tipo:"text",div:""},
-			{titulo:"Descri&ccedil;&atilde;o:",id:"Edesc_ws",size:"50",value:i.desc_ws,tipo:"text",div:""},
-			{titulo:"Autor:",id:"Eautor_ws",size:"50",value:i.autor_ws,tipo:"text",div:""},
-			{titulo:"Endere&ccedil;o:",id:"Elink_ws",size:"50",value:i.link_ws,tipo:"text",div:""}
+			{titulo:$trad("nome",i3GEOadmin.webservices.dicionario),id:"Enome_ws",size:"50",value:i.nome_ws,tipo:"text",div:""},
+			{titulo:$trad("descricao",i3GEOadmin.webservices.dicionario),id:"Edesc_ws",size:"50",value:i.desc_ws,tipo:"text",div:""},
+			{titulo:$trad("autor",i3GEOadmin.webservices.dicionario),id:"Eautor_ws",size:"50",value:i.autor_ws,tipo:"text",div:""},
+			{titulo:$trad("endereco",i3GEOadmin.webservices.dicionario),id:"Elink_ws",size:"50",value:i.link_ws,tipo:"text",div:""}
 			]
 		};
 		var ins = "";
 		ins += core_geraLinhas(param);
 
-		ins += "<p>Tipo:<br>";
+		ins += "<p>"+ $trad("tipo1",i3GEOadmin.webservices.dicionario) +"<br>";
 		ins += "<select  id='Etipo_ws' />";
 		ins += "<option value='' ";
 		if (i.tipo_ws == ""){ins += "selected";}
@@ -231,7 +231,7 @@ i3GEOadmin.webservices = {
 				tipows = u[1];
 			}
 			catch(e){tipows = "";}
-			core_pegaDados("buscando endere&ccedil;os...","../php/webservices.php?funcao=pegaWS&tipows="+tipows,"i3GEOadmin.webservices.atualizaFiltro");
+			core_pegaDados($trad("msgBuscaEndereco",i3GEOadmin.webservices.dicionario),"../php/webservices.php?funcao=pegaWS&tipows="+tipows,"i3GEOadmin.webservices.atualizaFiltro");
 			return;
 		}
 		var i,temp,
@@ -252,7 +252,7 @@ i3GEOadmin.webservices = {
 		i3GEOadmin.webservices.tabela(novo);
 	},
 	exclui: function(id,row){
-		var mensagem = " excluindo o registro do id= "+id,
+		var mensagem = $trad("msgExclui",i3GEOadmin.core.dicionario)+id,
 			sUrl = "../php/webservices.php?funcao=excluir&id="+id;
 		core_excluiLinha(sUrl,row,mensagem,"",i3GEOadmin.webservices.dataTable);
 		i3GEOadmin.webservices.dados = "";
@@ -270,13 +270,13 @@ i3GEOadmin.webservices = {
 		}
 		par += "&id_ws="+id;
 		core_carregando("ativa");
-		core_carregando(" gravando o registro do id= "+id);
+		core_carregando($trad("gravaId",i3GEOadmin.core.dicionario)+id);
 		sUrl = "../php/webservices.php?funcao=alterarWS"+par;
 		callback = {
 				success:function(o){
 					try	{
 						if(YAHOO.lang.JSON.parse(o.responseText) == "erro")	{
-							core_carregando("<span style=color:red >N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem registros vinculados</span>");
+							core_carregando("<span style=color:red >"+ $trad("msgErroExclui",i3GEOadmin.core.dicionario) +"</span>");
 							setTimeout("core_carregando('desativa')",3000);
 						}
 						else{

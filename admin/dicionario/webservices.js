@@ -25,5 +25,45 @@ i3GEOadmin.webservices.dicionario = {
 		pt : "Endere&ccedil;os cadastrados:",
 		en : "",
 		es : ""
+	} ],
+    'tipo' : [ {
+		pt : "tipo",
+		en : "",
+		es : ""
+	} ],
+    'msgBuscaEndereco' : [ {
+		pt : "buscando endere&ccedil;os...",
+		en : "",
+		es : ""
+	} ],
+    'nome' : [ {
+		pt : "Nome:",
+		en : "",
+		es : ""
+	} ],
+    'descricao' : [ {
+		pt : "Descri&ccedil;&atilde;o:",
+		en : "",
+		es : ""
+	} ],
+    'autor' : [ {
+		pt : "Autor:",
+		en : "",
+		es : ""
+	} ],
+    'endereco' : [ {
+		pt : "Endere&ccedil;o:",
+		en : "",
+		es : ""
+	} ],
+    'tipo1' : [ {
+		pt : "Tipo:",
+		en : "",
+		es : ""
+	} ],
+    '' : [ {
+		pt : "",
+		en : "",
+		es : ""
 	} ]
 };
