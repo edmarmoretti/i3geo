@@ -2600,15 +2600,15 @@ var g_traducao =
 		"meneditor1" : [
 			{
 				pt : "Para excluir registros do banco de dados utilize a ferramenta de identifica&ccedil;&atilde;o",
-				en : "",
-				es : ""
+				en : "To eliminate records from database use the identification tool",
+				es : "Para excluir registros de la base de datos utilice la herramienta de identificaci&oacute;n"
 			}
 		],
 		"meneditor2" : [
 			{
 				pt : "Nenhum elemento gr&aacute;fico encontrado. Utilize as op&ccedil;&otilde;es de cria&ccedil;&atilde;o de geometrias.",
-				en : "",
-				es : ""
+				en : "No graphic feature has been found. Use the options to create geometries",
+				es : "Ning&uacute;n elemento gr&aacute;fico encontrado. Utilice las opciones de creaci&oacute;n de geometr&iacute;a"
 			}
 		],
 		"meneditor3" : [
