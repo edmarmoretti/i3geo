@@ -210,7 +210,13 @@
 			    	  url : "http://tile.openstreetmap.org/${z}/${x}/${y}.png"
 			      })
 			    });
-			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [osm];
+			tdb = new ol.layer.Tile({
+			      source: new ol.source.TileDebug({
+			        projection: 'EPSG:3857',
+			        tileGrid: new ol.source.OSM().getTileGrid()
+			      })
+			    });
+			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [osm,tdb];
 
 			/*
 

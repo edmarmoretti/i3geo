@@ -953,6 +953,9 @@ i3GEO.Interface =
 					// precisa disso?
 					// i3GEO.Interface.openlayers.parametrosView.extent = ol.proj.get('EPSG:4326').getExtent();
 				}
+				else{
+					i3GEO.Interface.openlayers.parametrosView.projection = "EPSG:3857";
+				}
 				i3GEO.Interface.openlayers.parametrosMap.view = new ol.View(i3GEO.Interface.openlayers.parametrosView);
 				i3GEO.Interface.openlayers.parametrosMap.interactions = i3GEO.Interface.openlayers.interacoes;
 				//
