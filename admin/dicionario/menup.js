@@ -2,7 +2,7 @@
 i3GEOadmin.menup = {};
 i3GEOadmin.menup.dicionario = {
 	'configGeral' : [ {
-		pt : "Para desenvolvedores e administradores",
+		pt : "Ferramentas para desenvolvedores e administradores",
 		en : "",
 		es : ""
 	} ],
@@ -42,7 +42,7 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'metadadosEstatisticos' : [ {
-		pt : "Metadados estat&iacute;sticos",
+		pt : "M&oacute;dulo metadados estat&iacute;sticos",
 		en : "",
 		es : ""
 	} ],
@@ -87,7 +87,7 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'gerenciaBd' : [ {
-		pt : "Gerenciador de banco de dados, upload de SHP e CSV",
+		pt : "Gerenciador de banco de dados. Upload de SHP e CSV para armazenamento no Postgis",
 		en : "",
 		es : ""
 	} ],
