@@ -92,10 +92,10 @@ class Arvore
 		else{
 			$coluna = $idioma;
 		}
-		$this->sql_grupos = "select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,id_menu,i3geoadmin_n1.publicado,n1_perfil from ".$this->esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo ";
+		$this->sql_grupos = "select CASE i3geoadmin_grupos.$coluna WHEN '' THEN nome_grupo ELSE i3geoadmin_grupos.$coluna END as nome_grupo,id_n1,id_menu,i3geoadmin_n1.publicado,n1_perfil from ".$this->esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo ";
 		if($filtro === "ogc" || $filtro === "download"){
 			//esse sql retorna tambem os grupos dos temas que estao na raiz do grupo
-			$this->sql_grupos = "select DISTINCT * from (select grupos.$coluna as nome_grupo,gr.id_n1,gr.id_menu,gr.publicado,gr.n1_perfil, 0 as ordem from ".$this->esquemaadmin."i3geoadmin_grupos as grupos, ".$this->esquemaadmin."i3geoadmin_n1 as gr, ".$this->esquemaadmin."i3geoadmin_n2 as sg, ".$this->esquemaadmin."i3geoadmin_n3 as t, ".$this->esquemaadmin."i3geoadmin_temas as temas where gr.id_grupo = grupos.id_grupo AND sg.id_n1 = gr.id_n1 AND t.id_n2 = sg.id_n2 AND t.id_tema = temas.id_tema AND (temas.ogc_tema NOT IN ('NAO','nao') OR temas.download_tema NOT IN ('NAO','nao') ) UNION select c.nome_grupo as nome_grupo,a.id_nivel as id_n1,a.id_menu,'SIM' as publicado,a.perfil as n1_perfil, 0 as ordem from ".$this->esquemaadmin."i3geoadmin_raiz as a, ".$this->esquemaadmin."i3geoadmin_temas as b, ".$this->esquemaadmin."i3geoadmin_grupos as c, ".$this->esquemaadmin."i3geoadmin_n1 as d where nivel = 1 AND a.id_tema = b.id_tema AND a.id_nivel = d.id_n1 AND d.id_grupo = c.id_grupo) as s ";
+			$this->sql_grupos = "select DISTINCT * from (select CASE grupos.$coluna WHEN '' THEN nome_grupo ELSE grupos.$coluna END as nome_grupo,gr.id_n1,gr.id_menu,gr.publicado,gr.n1_perfil, 0 as ordem from ".$this->esquemaadmin."i3geoadmin_grupos as grupos, ".$this->esquemaadmin."i3geoadmin_n1 as gr, ".$this->esquemaadmin."i3geoadmin_n2 as sg, ".$this->esquemaadmin."i3geoadmin_n3 as t, ".$this->esquemaadmin."i3geoadmin_temas as temas where gr.id_grupo = grupos.id_grupo AND sg.id_n1 = gr.id_n1 AND t.id_n2 = sg.id_n2 AND t.id_tema = temas.id_tema AND (temas.ogc_tema NOT IN ('NAO','nao') OR temas.download_tema NOT IN ('NAO','nao') ) UNION select c.nome_grupo as nome_grupo,a.id_nivel as id_n1,a.id_menu,'SIM' as publicado,a.perfil as n1_perfil, 0 as ordem from ".$this->esquemaadmin."i3geoadmin_raiz as a, ".$this->esquemaadmin."i3geoadmin_temas as b, ".$this->esquemaadmin."i3geoadmin_grupos as c, ".$this->esquemaadmin."i3geoadmin_n1 as d where nivel = 1 AND a.id_tema = b.id_tema AND a.id_nivel = d.id_n1 AND d.id_grupo = c.id_grupo) as s ";
 		}
 
 		if($idioma == "pt"){
@@ -104,7 +104,7 @@ class Arvore
 		else{
 			$coluna = $idioma;
 		}
-		$this->sql_subgrupos = "select i3geoadmin_subgrupos.$coluna as nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado,i3geoadmin_n2.n2_perfil from ".$this->esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo ";
+		$this->sql_subgrupos = "select CASE i3geoadmin_subgrupos.$coluna WHEN '' THEN nome_subgrupo ELSE i3geoadmin_subgrupos.$coluna END as nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado,i3geoadmin_n2.n2_perfil from ".$this->esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo ";
 
 		if($idioma == "pt"){
 			$coluna = "nome_tema";
@@ -112,12 +112,13 @@ class Arvore
 		else{
 			$coluna = $idioma;
 		}
-		$this->sql_temasraiz = "select codigo_tema,id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,perfil, ogc_tema, link_tema FROM ".$this->esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$this->esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
-		$this->sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.$coluna as nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from ".$this->esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
+
+		$this->sql_temasraiz = "select codigo_tema,id_raiz,i3geoadmin_raiz.id_tema,CASE $coluna WHEN '' THEN nome_tema ELSE $coluna END as nome_tema,tipoa_tema,perfil, ogc_tema, link_tema FROM ".$this->esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$this->esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
+		$this->sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,CASE i3geoadmin_temas.$coluna WHEN '' THEN nome_tema ELSE i3geoadmin_temas.$coluna END as nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from ".$this->esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
 
 		//$this->sql_temas = "select kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema from i3geoadmin_temas ";
 
-		$this->sql_temas = "select kmz_tema,b.soma as nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema  from ".$this->esquemaadmin."i3geoadmin_temas as a,(SELECT c.codigo_tema codigo_soma,sum( r.nacessos) as soma FROM ".$this->esquemaadmin."i3geoadmin_temas c LEFT JOIN ".$this->esquemaadmin."i3geoadmin_acessostema r ON (c.codigo_tema = r.codigo_tema) group by  c.codigo_tema) as b WHERE a.codigo_tema = b.codigo_soma	";
+		$this->sql_temas = "select kmz_tema,b.soma as nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,CASE $coluna WHEN '' THEN nome_tema ELSE $coluna END as nome_tema,codigo_tema  from ".$this->esquemaadmin."i3geoadmin_temas as a,(SELECT c.codigo_tema codigo_soma,sum( r.nacessos) as soma FROM ".$this->esquemaadmin."i3geoadmin_temas c LEFT JOIN ".$this->esquemaadmin."i3geoadmin_acessostema r ON (c.codigo_tema = r.codigo_tema) group by  c.codigo_tema) as b WHERE a.codigo_tema = b.codigo_soma	";
 		//
 		//verifica se o ip atual est&aacute; cadastrado como um dos editores
 		//editores podem ver as coisas marcadas como n&atilde;o publicado
@@ -177,15 +178,14 @@ class Arvore
 		if($this->editor == true)
 		{
 			$perfil = "";
-			$sql = "SELECT publicado_menu,'' as perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus order by nome_menu";
+			$sql = "SELECT publicado_menu,'' as perfil_menu,aberto,desc_menu,id_menu,CASE $coluna WHEN '' THEN nome_menu ELSE $coluna END as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus order by nome_menu";
 		}
 		else{
-			$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu is null order by nome_menu";
+			$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,CASE $coluna WHEN '' THEN nome_menu ELSE $coluna END as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu is null order by nome_menu";
 		}
 		$regs = $this->execSQL($sql);
 		$resultado = array();
-		foreach($regs as $reg)
-		{
+		foreach($regs as $reg){
 			$a = $reg["perfil_menu"];
 			$a = str_replace(" ",",",$a);
 			if ($this->verificaOcorrencia($perfil,explode(",",$a)))
