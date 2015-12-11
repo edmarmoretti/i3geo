@@ -2,7 +2,7 @@
 i3GEOadmin.estat_editor = {};
 i3GEOadmin.estat_editor.dicionario = {
 	'estatEditor' : [ {
-		pt : "Metadados estat&iacute;sticos - editor de tabelas	de dados",
+		pt : "Gerenciador de dados Postgis",
 		en : "",
 		es : ""
 	} ],
