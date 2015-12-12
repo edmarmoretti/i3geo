@@ -2614,36 +2614,36 @@ var g_traducao =
 		"meneditor3" : [
 			{
 				pt : "Voc&ecirc; precisa fazer login para usar a op&ccedil;&atilde;o de salvar no banco de dados",
-				en : "",
-				es : ""
+				en : "In order to save to a database you need login",
+				es : "Usted necesita hacer login para usar la opci&oacute;n guardar en la base datos"
 			}
 		],
 		"meneditor4" : [
 			{
 				pt : "Valores iguais ao original",
-				en : "",
-				es : ""
+				en : "Values equal to original",
+				es : "Valores iguales al original"
 			}
 		],
 		"meneditor5" : [
 			{
 				pt : "&Eacute; necess&aacute;rio ter um c&oacute;digo para poder excluir",
-				en : "",
-				es : ""
+				en : "It is necessary to have a key to exclude",
+				es : "Es necesario tener una clave para excluir"
 			}
 		],
 		"meneditor6" : [
 			{
 				pt : "Ap&oacute;s escolher a medida da vari&aacute;vel, clique no mapa para escolher o limite geogr&aacute;fico.",
-				en : "",
-				es : ""
+				en : "After choosing the measurement of variable, click on the map to select a geographical boundary.",
+				es : "Despu&eacute;s de escoger la medida de la variable, haga clic en el mapa para escoger el l&iacute;mite geogr&aacute;fico."
 			}
 		],
 		"opsel" : [
 			{
 				pt : "Opera&ccedil;&otilde;es sobre as figuras selecionadas",
-				en : "",
-				es : ""
+				en : "Operations upon the selected shapes",
+				es : "Operaciones sobre las figuras seleccionadas"
 			}
 		],
 		"capturar" : [
