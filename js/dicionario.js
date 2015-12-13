@@ -2523,211 +2523,211 @@ var g_traducao =
 		"dlinha" : [
 			{
 				pt : "digitalizar linha",
-				en : "",
-				es : ""
+				en : "digitalize line",
+				es : "digitalizar l&iacute;nea"
 			}
 		],
 		"dpol" : [
 			{
 				pt : "digitalizar poligono",
-				en : "",
-				es : ""
+				en : "digitalize polygon",
+				es : "digitalizar Pol&iacute;gono"
 			}
 		],
 		"dponto" : [
 			{
 				pt : "digitalizar ponto",
-				en : "",
-				es : ""
+				en : "digitalize point",
+				es : "digitalizar punto"
 			}
 		],
 		"dtexto" : [
 			{
 				pt : "digitalizar texto",
-				en : "",
-				es : ""
+				en : "digitalize text",
+				es : "digitalizar texto"
 			}
 		],
 		"cortaf" : [
 			{
 				pt : "corta figura",
-				en : "",
-				es : ""
+				en : "cut shape",
+				es : "corta figura"
 			}
 		],
 		"modf" : [
 			{
 				pt : "modifica figura",
-				en : "",
-				es : ""
+				en : "modify shape",
+				es : "modificar figura"
 			}
 		],
 		"listag" : [
 			{
 				pt : "lista geometrias",
-				en : "",
-				es : ""
+				en : "geometry list",
+				es : "lista geometr&iacute;as"
 			}
 		],
 		"frente" : [
 			{
 				pt : "trazer para frente",
-				en : "",
-				es : ""
+				en : "send forward",
+				es : "traer al frente"
 			}
 		],
 		"studo" : [
 			{
 				pt : "selecionar tudo",
-				en : "",
-				es : ""
+				en : "select all",
+				es : "seleccionar todo"
 			}
 		],
 		"excsel" : [
 			{
 				pt : "Remove os elementos selecionados",
-				en : "",
-				es : ""
+				en : "it removes selected features",
+				es : "Remueve los elementos seleccionados"
 			}
 		],
 		"opcoes" : [
 			{
 				pt : "Op&ccedil;&otilde;es",
-				en : "",
-				es : ""
+				en : "Options",
+				es : "Opciones"
 			}
 		],
 		"meneditor1" : [
 			{
 				pt : "Para excluir registros do banco de dados utilize a ferramenta de identifica&ccedil;&atilde;o",
-				en : "",
-				es : ""
+				en : "To eliminate records from database use the identification tool",
+				es : "Para excluir registros de la base de datos utilice la herramienta de identificaci&oacute;n"
 			}
 		],
 		"meneditor2" : [
 			{
 				pt : "Nenhum elemento gr&aacute;fico encontrado. Utilize as op&ccedil;&otilde;es de cria&ccedil;&atilde;o de geometrias.",
-				en : "",
-				es : ""
+				en : "No graphic feature has been found. Use the options to create geometries",
+				es : "Ning&uacute;n elemento gr&aacute;fico encontrado. Utilice las opciones de creaci&oacute;n de geometr&iacute;a"
 			}
 		],
 		"meneditor3" : [
 			{
 				pt : "Voc&ecirc; precisa fazer login para usar a op&ccedil;&atilde;o de salvar no banco de dados",
-				en : "",
-				es : ""
+				en : "In order to save to a database you need login",
+				es : "Usted necesita hacer login para usar la opci&oacute;n guardar en la base datos"
 			}
 		],
 		"meneditor4" : [
 			{
 				pt : "Valores iguais ao original",
-				en : "",
-				es : ""
+				en : "Values equal to original",
+				es : "Valores iguales al original"
 			}
 		],
 		"meneditor5" : [
 			{
 				pt : "&Eacute; necess&aacute;rio ter um c&oacute;digo para poder excluir",
-				en : "",
-				es : ""
+				en : "It is necessary to have a key to exclude",
+				es : "Es necesario tener una clave para excluir"
 			}
 		],
 		"meneditor6" : [
 			{
 				pt : "Ap&oacute;s escolher a medida da vari&aacute;vel, clique no mapa para escolher o limite geogr&aacute;fico.",
-				en : "",
-				es : ""
+				en : "After choosing the measurement of variable, click on the map to select a geographical boundary.",
+				es : "Despu&eacute;s de escoger la medida de la variable, haga clic en el mapa para escoger el l&iacute;mite geogr&aacute;fico."
 			}
 		],
 		"opsel" : [
 			{
 				pt : "Opera&ccedil;&otilde;es sobre as figuras selecionadas",
-				en : "",
-				es : ""
+				en : "Operations upon selected shapes",
+				es : "Operaciones sobre las figuras seleccionadas"
 			}
 		],
 		"capturar" : [
 			{
 				pt : "Capturar elemento de um tema",
-				en : "",
-				es : ""
+				en : "Capturing a theme feature",
+				es : "Capturar elemento de un tema"
 			}
 		],
 		"salvexc" : [
 			{
 				pt : "Salvar/excluir dados",
-				en : "",
-				es : ""
+				en : "Save/exclude data",
+				es : "Guardar/excluir datos"
 			}
 		],
 		"edatrib" : [
 			{
 				pt : "Editar atributos",
-				en : "",
-				es : ""
+				en : "Edit Attributes",
+				es : "Editar atributos"
 			}
 		],
 		"camedit" : [
 			{
 				pt : "Camadas edit&aacute;veis",
-				en : "",
-				es : ""
+				en : "Editable layers",
+				es : "Capas editables"
 			}
 		],
 		"nenhum" : [
 			{
 				pt : "Nenhum",
-				en : "",
-				es : ""
+				en : "None",
+				es : "Ninguno"
 			}
 		],
 		"tipo" : [
 			{
 				pt : "Tipo",
-				en : "",
-				es : ""
+				en : "Type",
+				es : "Tipo"
 			}
 		],
 		"abreMapa" : [
 			{
 				pt : "Abrir o mapa",
-				en : "",
-				es : ""
+				en : "Open the map",
+				es : "Abrir el mapa "
 			}
 		],
 		"areaAprox" : [
 			{
 				pt : "&Aacute;rea aproximada",
-				en : "",
-				es : ""
+				en : "Approximate area",
+				es : "&Aacute;rea aproximada"
 			}
 		],
 		"distAprox" : [
 			{
 				pt : "Dist&acirc;ncia aproximada",
-				en : "",
-				es : ""
+				en : "Approximate distance",
+				es : "Distacia aproximada"
 			}
 		],
 		"trocaInterface" : [
    			{
    				pt : "Troca de interface",
-   				en : "",
-   				es : ""
+   				en : "Interface shift",
+   				es : "Cambio de interfaz"
    			}
    		],
    		"wkt2layer" : [
    			{
    				pt : "Converte WKT em camada",
-   				en : "",
-   				es : ""
+   				en : "Transforming WKT into layer",
+   				es : "Transforma WKT en capa"
    			}
    		],
    		"salvaDadosEditor": [
  			{
 				pt : "Os dados s&oacute; podem ser salvos em temas que permitem edi&ccedil;&atilde;o e que possuem coluna com auto incremento",
-				en : "",
-				es : ""
+				en : "Data can only be saved in themes that allow edition and have column with auto-increment",
+				es : "Los datos s&oacute;lo pueden ser guardados en los temas que permiten edici&oacute;n y que poseen columna con auto incremento"
 			}
 		]
 	};
