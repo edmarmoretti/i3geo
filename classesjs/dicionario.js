@@ -2642,92 +2642,92 @@ var g_traducao =
 		"opsel" : [
 			{
 				pt : "Opera&ccedil;&otilde;es sobre as figuras selecionadas",
-				en : "Operations upon the selected shapes",
+				en : "Operations upon selected shapes",
 				es : "Operaciones sobre las figuras seleccionadas"
 			}
 		],
 		"capturar" : [
 			{
 				pt : "Capturar elemento de um tema",
-				en : "",
-				es : ""
+				en : "Capturing a theme feature",
+				es : "Capturar elemento de un tema"
 			}
 		],
 		"salvexc" : [
 			{
 				pt : "Salvar/excluir dados",
-				en : "",
-				es : ""
+				en : "Save/exclude data",
+				es : "Guardar/excluir datos"
 			}
 		],
 		"edatrib" : [
 			{
 				pt : "Editar atributos",
-				en : "",
-				es : ""
+				en : "Edit Attributes",
+				es : "Editar atributos"
 			}
 		],
 		"camedit" : [
 			{
 				pt : "Camadas edit&aacute;veis",
-				en : "",
-				es : ""
+				en : "Editable layers",
+				es : "Capas editables"
 			}
 		],
 		"nenhum" : [
 			{
 				pt : "Nenhum",
-				en : "",
-				es : ""
+				en : "None",
+				es : "Ninguno"
 			}
 		],
 		"tipo" : [
 			{
 				pt : "Tipo",
-				en : "",
-				es : ""
+				en : "Type",
+				es : "Tipo"
 			}
 		],
 		"abreMapa" : [
 			{
 				pt : "Abrir o mapa",
-				en : "",
-				es : ""
+				en : "Open the map",
+				es : "Abrir el mapa "
 			}
 		],
 		"areaAprox" : [
 			{
 				pt : "&Aacute;rea aproximada",
-				en : "",
-				es : ""
+				en : "Approximate area",
+				es : "&Aacute;rea aproximada"
 			}
 		],
 		"distAprox" : [
 			{
 				pt : "Dist&acirc;ncia aproximada",
-				en : "",
-				es : ""
+				en : "Approximate distance",
+				es : "Distacia aproximada"
 			}
 		],
 		"trocaInterface" : [
    			{
    				pt : "Troca de interface",
-   				en : "",
-   				es : ""
+   				en : "Interface shift",
+   				es : "Cambio de interfaz"
    			}
    		],
    		"wkt2layer" : [
    			{
    				pt : "Converte WKT em camada",
-   				en : "",
-   				es : ""
+   				en : "Transforming WKT into layer",
+   				es : "Transforma WKT en capa"
    			}
    		],
    		"salvaDadosEditor": [
  			{
 				pt : "Os dados s&oacute; podem ser salvos em temas que permitem edi&ccedil;&atilde;o e que possuem coluna com auto incremento",
-				en : "",
-				es : ""
+				en : "Data can only be saved in themes that allow edition and have column with auto-increment",
+				es : "Los datos s&oacute;lo pueden ser guardados en los temas que permiten edici&oacute;n y que poseen columna con auto incremento"
 			}
 		]
 	};
