@@ -31,7 +31,7 @@ i3GEOF.upload.dicionario = {
 		es : ""
 	} ],
 	'projecao' : [ {
-		pt : "Proje&ccedil;&atilde;o",
+		pt : "Proje&ccedil;&atilde;o (apenas ser&aacute; utilizado se n&atilde;o for feito o upload de um arquivo .prj)",
 		en : "",
 		es : ""
 	} ],

@@ -85,10 +85,12 @@ i3GEOF.upload = {
 			);
 			b.addClass("rodar");
 			i3GEO.util.radioEpsg(
-				function(retorno)
-				{$i("i3GEOuploadListaepsg").innerHTML = retorno.dados;},
+				function(retorno){
+					$i("i3GEOuploadListaepsg").innerHTML = retorno.dados;
+				},
 				"i3GEOuploadListaepsg",
-				"upload"
+				"upload",
+				"nao"
 			);
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
@@ -108,6 +110,7 @@ i3GEOF.upload = {
 		'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
+		'<p class="paragrafo" >prj (opcional): <br><input type="file" size=22 name="i3GEOuploadprj" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'</fieldset>';
 		if(i3GEO.parametros.editor === "sim"){
 			ins += '<fieldset class=subbloco >' +

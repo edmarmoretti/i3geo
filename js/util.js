@@ -2107,14 +2107,21 @@ i3GEO.util =
 		 * {string} - id do elemento que recebera a mensagem de aguarde
 		 *
 		 * {string} - Prefixo que sera usado no name de cada elemento
+		 * 
+		 * {string} - sim|nao Marca como escolhido o primeiro valor
 		 */
-		radioEpsg : function(funcao, onde, prefixo) {
+		radioEpsg : function(funcao, onde, prefixo, marcado) {
+			var c;
 			if (arguments.length === 2) {
 				$i(onde).innerHTML = "<span style=color:red;font-size:10px; >buscando...</span>";
 			}
+			c = "checked";
+			if(marcado && marcado === "nao"){
+				c = "";
+			}
 			var monta =
 				function(retorno) {
-					var c = "checked", ins = [], i, n, temp;
+					var ins = [], i, n, temp;
 					if (retorno.data !== undefined) {
 						ins.push("<table class=lista2 >");
 						n = retorno.data.length;
