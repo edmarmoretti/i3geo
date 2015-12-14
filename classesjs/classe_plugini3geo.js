@@ -1221,7 +1221,7 @@ i3GEO.pluginI3geo =
 							singleTile : true,
 							isBaseLayer : false,
 							visibility : false,
-							displayInLayerSwitcher:false,
+							//displayInLayerSwitcher:false,
 							transitionEffect : null,
 							layername : camada.name,
 							plugini3geo : "parametrossql",

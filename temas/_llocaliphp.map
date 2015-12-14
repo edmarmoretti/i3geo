@@ -9,7 +9,7 @@ MAP
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"TIPO,NOMELOC,ANOCRIA"
       "LTEMPOITEMIMAGEM"	""
-      "cache"	"nao"
+      "cache"	"SIM"
       "tiles" "sim"
       "CLASSE"	"SIM"
       "LTEMPOITEMDESCRICAO"	"TIPO"
