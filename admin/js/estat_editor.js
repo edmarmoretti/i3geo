@@ -576,6 +576,7 @@ i3GEOadmin.editor = {
 			'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
+			'<p class="paragrafo" >prj (opcional): <br><input type="file" size=22 name="i3GEOuploadprj" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
 			'<legend>Destino</legend>' +
