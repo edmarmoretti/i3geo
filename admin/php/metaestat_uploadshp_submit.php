@@ -51,17 +51,17 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	$status =  move_uploaded_file($Arquivo,$dir_tmp."/".$nomePrefixo.".shp");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP";exit;}
-	
+
 	$Arquivo = $_FILES['i3GEOuploadshx']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dir_tmp."/".$nomePrefixo.".shx");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHX";exit;}
-	
+
 	$Arquivo = $_FILES['i3GEOuploaddbf']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dir_tmp."/".$nomePrefixo.".dbf");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo DBF";exit;}
-	
+
 	if($_FILES['i3GEOuploadprj']['tmp_name'] != ""){
 		$Arquivo = $_FILES['i3GEOuploadprj']['tmp_name'];
 		$status =  move_uploaded_file($Arquivo,$dir_tmp."/".$nomePrefixo.".prj");
@@ -204,17 +204,22 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	sleep(1);
 	$srid = 4326;
 	$escapar = "'";
-	$prjMapa = $mapObj->getProjection();
-	$prjTema = $layer->getProjection();
-	if (($prjTema != "") && ($prjMapa != $prjTema))
-	{
-		$projInObj = ms_newprojectionobj($prjTema);
-		$projOutObj = ms_newprojectionobj($prjMapa);
+	$projOutObj = "";
+	$projInObj = "";
+	//
+	//caso o usuario tenha definido a projecao de saida, os dados devem ser projetados
+	//
+	if($_POST["outsrid"] != ""){
+		$mapObj->setProjection("init=epsg:".$_POST["outsrid"]);
+		$prjMapa = $mapObj->getProjection();
+		$prjTema = $layer->getProjection();
+		if (($prjTema != "") && ($prjMapa != $prjTema))
+		{
+			$projInObj = ms_newprojectionobj($prjTema);
+			$projOutObj = ms_newprojectionobj($prjMapa);
+		}
 	}
-	else{
-		$projOutObj = "";
-		$projInObj = "";
-	}
+
 	for ($i=0; $i<$numshapes;$i++){
 		$s = $layer->getShape(new resultObj($i));
 		//projeta o shape se existir .prj

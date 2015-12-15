@@ -600,10 +600,9 @@ i3GEOadmin.editor = {
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
 			'<legend>Proje&ccedil;&atilde;o</legend>' +
-			'<p class="paragrafo" >Assegure-se que o shapefile esteja na proje&ccedil;&atilde;o geogr&aacute;fica se voc&ecirc; for usar com o sistema de metadados estat&iacute;sticos.</p>' +
-			'<p class="paragrafo" >C&oacute;digo da proje&ccedil;&atilde;o (SRID) do arquivo</p>' +
+			'<p class="paragrafo" >Se você não escolheu o arquivo PRJ escolha o c&oacute;digo da proje&ccedil;&atilde;o (SRID) do arquivo</p>' +
 			'<input class=digitar type="text" value="4326" size=20 id="insrid" name="insrid" style="top:0px;left:0px;cursor:pointer;float:left;margin-right:10px;"><div id=selInSrid ></div>' +
-			'<p class="paragrafo" >Projetar o arquivo para (deixe em branco caso n&atilde;o deva ser feita a proje&ccedil;&atilde;o dos dados):</p>' +
+			'<p class="paragrafo" >Projetar o arquivo para (deixe em branco se voc&ecirc; n&atilde;o quiser aplicar nenhuma transforma&ccedil;&atilde;o de proje&ccedil;&atilde;o):</p>' +
 			'<input class=digitar type="text" value="" size=20 id="outsrid" name="outsrid" style="top:0px;left:0px;cursor:pointer;float:left;margin-right:10px;"><div id=selOutSrid ></div>' +
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
