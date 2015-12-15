@@ -1416,20 +1416,25 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	$layer->set("template","none.htm");
 	$diretorio = dirname($dir_tmp);
 	$tipol = MS_SHP_POINT;
-	if ($layer->type == MS_LAYER_LINE)
-	{$tipol = MS_SHP_ARC;}
-	if ($layer->type == MS_LAYER_POLYGON)
-	{$tipol = MS_SHP_POLYGON;}
-	if ($nomeRand == true)
-	{$novonomelayer = $tema."_".nomeRandomico(5);}
-	else
-	{$novonomelayer = $tema;}
+	if ($layer->type == MS_LAYER_LINE){
+		$tipol = MS_SHP_ARC;
+	}
+	if ($layer->type == MS_LAYER_POLYGON){
+		$tipol = MS_SHP_POLYGON;
+	}
+	if ($nomeRand == true){
+		$novonomelayer = $tema."_".nomeRandomico(5);
+	}
+	else{
+		$novonomelayer = $tema;
+	}
 
 	$novonomelayer = str_replace(".","-",$novonomelayer);
 	$nomeshp = $dir_tmp."/".$novonomelayer;
 
-	if(file_exists($nomeshp.".shp"))
-	{return $nomeshp;}
+	if(file_exists($nomeshp.".shp")){
+		return $nomeshp;
+	}
 
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
 
@@ -1536,13 +1541,31 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 				$resultadoFinal = false;
 			}
 		}
-		else
-		{$resultadoFinal = false;}
+		else{
+			$resultadoFinal = false;
+		}
 	}
-	if($resultadoFinal == false)
-	{return false;}
-	else
-	{return $nomeshp;}
+	if($resultadoFinal == false){
+		return false;
+	}
+	else{
+		//gera o arquivo prj
+		/*
+		if(!file_exists($nomeshp.".prj")){
+			$projecao = $layer->getProjection();
+			if($projecao == ""){
+				$projecao = $map->getProjection();
+			}
+			include($locaplic."/pacotes/proj4php-proj4php5.2/src/proj4php/proj4php.php");
+
+			$proj4 = new Proj4php();
+			$projWGS84 = new Proj4phpProj('EPSG:4326',$proj4);
+			echo $projWGS84->projection;exit;
+
+		}
+		*/
+		return $nomeshp;
+	}
 }
 /*
 Function: downloadTema (depreciado)
@@ -1750,6 +1773,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				unlink($nomeshp.".dbf");
 				unlink($nomeshp.".shp");
 				unlink($nomeshp.".shx");
+				unlink($nomeshp.".prj");
 			}
 		}
 		//
@@ -1762,8 +1786,9 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			//
 			$nomecopia = $dir_tmp."/".basename($meta);
 			if(file_exists($meta)){
-				if(!file_exists($nomecopia))
-				{copy($meta,$nomecopia);}
+				if(!file_exists($nomecopia)){
+					copy($meta,$nomecopia);
+				}
 			}
 			$resultado[] = basename($dir_tmp)."/".basename($nomecopia);
 		}
