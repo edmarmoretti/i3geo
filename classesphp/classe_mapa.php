@@ -2117,6 +2117,10 @@ class Mapa
 			}
 			$layer = criaLayer($this->mapa,$tipo,MS_DEFAULT,basename($arq),"SIM");
 			$layer->set("data",$arq);
+			//verifica se existe o arquivo PRJ
+			if(file_exists(str_replace(".shp","",$arq).".prj")){
+				$layer->setprojection("AUTO");
+			}
 			$layer->set("name",basename($arq));
 			$layer->setmetadata("DOWNLOAD","nao");
 			$layer->setmetadata("TEMALOCAL","NAO");
