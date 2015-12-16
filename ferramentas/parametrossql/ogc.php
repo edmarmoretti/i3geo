@@ -12,6 +12,8 @@ require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+$projDefault = pegaProjecaoDefault();
+
 $temas = $tema;
 if(isset($_GET["sld"]) || isset($_GET["filter"])){
 	$cache = false;
@@ -40,7 +42,7 @@ if($_GET["SRS"] == "EPSG:900913"){
 $req = ms_newowsrequestobj();
 $_GET = array_merge($_GET,$_POST);
 if(!isset($_GET["srs"]) && !isset($_GET["SRS"])){
-	$_GET["srs"] = "EPSG:4326";
+	$_GET["srs"] = "EPSG:".$projDefault["epsg"];
 }
 foreach ($_GET as $k=>$v){
 	$req->setParameter(strtoupper($k), $v);
@@ -97,7 +99,7 @@ else{
 	$oMap->setmetadata("ows_enable_request","*");
 	//parametro mandatario
 	if($oMap->getmetadata("wms_srs") == ""){
-		$oMap->setmetadata("wms_srs","EPSG:4326");
+		$oMap->setmetadata("wms_srs","EPSG:".$projDefault["epsg"]);
 	}
 
 	$e = $oMap->extent;
@@ -310,7 +312,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$x--;
 	$y--;
 
-	$projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
+	$projInObj = ms_newprojectionobj($projDefault["proj4"]);
 	$projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
 
 	$poPoint1 = ms_newpointobj();
@@ -324,7 +326,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 
 	$oMap->getlayer(0)->set("status",MS_DEFAULT);
 	$oMap->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
-	$layer0->setProjection("proj=latlong,a=6378137,b=6378137");
+	$layer0->setProjection($projDefault["proj4"]);
 	//
 	//se o layer foi marcado para corte altera os parametros para ampliar o mapa
 	//antes de gerar a imagem
@@ -401,7 +403,7 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
 		$req->setParameter("TYPENAME",$l->name);
 	}
 	if($l->getProjection() == "" ){
-		$l->setProjection("proj=latlong,a=6378137,b=6378137");
+		$l->setProjection($projDefault["proj4"]);
 	}
 	if(strtolower($req->getValueByName("SRS")) == "epsg:900913"){
 		$req->setParameter("SRS","EPSG:3857");

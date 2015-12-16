@@ -74,7 +74,8 @@ $of->set("mimetype","image/jpeg");
 $of->set("extension","jpg");
 if($map->getmetadata("interface") == "googlemaps")
 {
-	$map->setProjection("init=epsg:4618,a=6378137,b=6378137");
+	$proj4 = pegaProjecaoDefault("proj4");
+	$map->setProjection($proj4);
 	$map->set("units",MS_METERS);
 	$map->preparequery();
 	$map->set("scaledenom",$map->scaledenom * 100000);

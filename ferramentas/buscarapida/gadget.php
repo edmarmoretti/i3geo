@@ -1,9 +1,13 @@
 <?php
 include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
-if(!isset($palavra))
-{echo "Par&acirc;metro &palavra= n&atilde;o foi definido. 'palavra' &eacute; a palavra que ser&aacute; buscada";}
-if(!isset($locaplic))
-{echo "<br>Par&acirc;metro &locaplic= n&atilde;o foi definido. 'locaplic' indica onde o i3geo est&aacute; instalado";}
+include_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+$projecao = pegaProjecaoDefault("epsg");
+if(!isset($palavra)){
+	echo "Par&acirc;metro &palavra= n&atilde;o foi definido. 'palavra' &eacute; a palavra que ser&aacute; buscada";
+}
+if(!isset($locaplic)){
+	echo "<br>Par&acirc;metro &locaplic= n&atilde;o foi definido. 'locaplic' indica onde o i3geo est&aacute; instalado";
+}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -22,7 +26,7 @@ i3GEObuscaRapida.idresultado
 var mapaLugar = function(wkt,layer,gid,nm)
 {
 	var ext = i3GEO.util.wkt2ext(wkt,"polygon");
-	var url = "<?php echo $locaplic;?>/ms_criamapa.php?srs_wms=epsg:4618&image_wms=image/png&versao_wms=1.1.1"
+	var url = "<?php echo $locaplic;?>/ms_criamapa.php?srs_wms=epsg:<?php echo $projecao;?>&image_wms=image/png&versao_wms=1.1.1"
 	url += "&url_wms=http://mapas.mma.gov.br/webservices/geonameswms.php?gid="+gid+"&";
 	url += "&layer_wms="+layer+"&style_wms=default"
 	url += "&nome_wms="+nm+" - "+layer

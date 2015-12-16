@@ -212,7 +212,7 @@ if(!empty($restauramapa)){
 //para operar como o Geoserver, abre o openlayers
 //
 if(isset($format) && strtolower($format) == "application/openlayers"){
-	$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers.php?layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica";
+	$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers.php?layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica,legenda";
 	//echo $urln;exit;
 	if(!headers_sent()){
 		header("Location:".$urln);
@@ -752,11 +752,11 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$x = $_GET["X"];
 	$y = $_GET["Y"];
 	$z = $_GET["Z"];
-
+	$proj4 = pegaProjecaoDefault("proj4");
 	if(file_exists($tema)){
 		$layer0 = $oMap->getlayer(0);
 		$layer0->set("status",MS_DEFAULT);
-		$layer0->setProjection("proj=latlong,a=6378137,b=6378137");
+		$layer0->setProjection($proj4);
 	}
 	else{
 		//pode ter mais de um tema
@@ -764,7 +764,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 		foreach($lista as $nomeLayer){
 			$layer0 = $oMap->getlayerbyname($nomeLayer);
 			$layer0->set("status",MS_DEFAULT);
-			$layer0->setProjection("proj=latlong,a=6378137,b=6378137");
+			$layer0->setProjection($proj4);
 		}
 	}
 	//
@@ -880,7 +880,7 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
 		$req->setParameter("TYPENAME",$l->name);
 	}
 	if($l->getProjection() == "" ){
-		$l->setProjection("proj=latlong,a=6378137,b=6378137");
+		$l->setProjection(pegaProjecaoDefault("proj4"));
 	}
 	if(strtolower($req->getValueByName("SRS")) == "epsg:900913"){
 		$req->setParameter("SRS","EPSG:3857");

@@ -157,7 +157,6 @@ class LayerServer {
 				} else {
 						$this->_networklink = false;
 				}
-
 				$imageObj = $this->map_object->drawlegend();
 				$url = $imageObj->saveWebImage();
 				$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);

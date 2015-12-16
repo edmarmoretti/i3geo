@@ -119,7 +119,7 @@ function inicia(){
 	OpenLayers.ImgPath = "../../pacotes/openlayers/img/"
 	OpenLayers.Lang.setCode("pt-BR");
 	var urlLayer = "../../classesphp/mapa_openlayers.php?DESLIGACACHE=sim&g_sid=<?php echo $g_sid;?>&telaR=<?php echo $telaR;?>";
-	
+
 	var remoto = new OpenLayers.Layer.WMS(
 		"Remoto",
 		urlLayer,
@@ -168,7 +168,7 @@ function inicia(){
 			"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
 			{
 				layers : "baseraster",
-				srs : "EPSG:4618",
+				srs : "EPSG:4326",
 				format : "image/png",
 				isBaseLayer : false
 			}, {

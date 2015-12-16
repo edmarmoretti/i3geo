@@ -199,6 +199,8 @@ A:hover {
 			ins +=
 				"<p><a target=blank href='"+servico+"SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers="+tema+"' />testar getmap</a>";
 			ins +=
+				"<p><a target=blank href='"+servico+"SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getlegendgraphic&layers="+tema+"' />testar getLegendGraphic</a>";
+			ins +=
 				"<p><a target=blank href='"+servico+"format=application/openlayers&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&layers="+tema+"' />visualizar com openLayers</a>";
 			ins +=
 				"<p><a target=blank href='"+servico+"OUTPUTFORMAT=shape-zip&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />download shapefile via WFS</a>";

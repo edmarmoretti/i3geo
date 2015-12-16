@@ -425,7 +425,7 @@ Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa
 		if(!$this->layer){return "erro";}
 		if($this->mapa->getmetadata("interface") == "googlemaps"){
 			$projO = $this->mapa->getProjection();
-			$this->mapa->setProjection("init=epsg:4618,a=6378137,b=6378137");
+			$this->mapa->setProjection(pegaProjecaoDefault("proj4"));
 		}
 		$prjMapa = "";
 		$prjTema = "";
@@ -829,7 +829,7 @@ $wkt - boolean indicando se $xy e um WKT
 		$c = $shp->getCentroid();
 		$c = $c->x;
 		if($c > -181 && $c < 181){
-			$pinlayer->setprojection("proj=latlong,a=6378137,b=6378137");
+			$pinlayer->setprojection(pegaProjecaoDefault("proj4"));
 		}
 		else{
 			$pinlayer->setprojection($this->mapa->getProjection());

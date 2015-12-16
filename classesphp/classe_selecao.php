@@ -124,7 +124,7 @@ $ext - extens&atilde;o geogr&aacute;fica do mapa
 		}
 		if($this->mapa->getmetadata("interface") == "googlemaps"){
 			$this->projO = $this->mapa->getProjection();
-			$this->mapa->setProjection("init=epsg:4618,a=6378137,b=6378137");
+			$this->mapa->setProjection(pegaProjecaoDefault("proj4"));
 		}
 	}
 /*

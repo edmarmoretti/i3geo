@@ -17,7 +17,7 @@ $novo_mapfile = $dir."/".nomeRandomico(5).$base;
 copy($map_file,$novo_mapfile);
 chmod($novo_mapfile,0777);
 $mapa = ms_newMapObj($novo_mapfile);
-$mapa->setProjection("+proj=longlat +ellps=GRS67 +no_defs");
+$mapa->setProjection(pegaProjecaoDefault("proj4"));
 $numlayers = $mapa->numlayers;
 $layers = array();
 for($i = 0;$i < $numlayers;++$i){

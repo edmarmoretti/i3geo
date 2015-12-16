@@ -45,7 +45,7 @@ Insere elementos no mapa como um layer do tipo feature baseado em wkt
 		$c = $shp->getCentroid();
 		$c = $c->x;
 		if($c > -181 && $c < 181){
-			$l->setprojection("proj=latlong,a=6378137,b=6378137");
+			$l->setprojection(pegaProjecaoDefault("proj4"));
 		}
 		else{
 			$l->setprojection($this->mapa->getProjection());

@@ -716,7 +716,7 @@ function retornaReferenciaDinamica($ext="",$w="",$h="")
 		$i = $interface;
 	}
 	if($i == "googlemaps"){
-		$objMapa->setProjection("init=epsg:4618,a=6378137,b=6378137");
+		$objMapa->setProjection(pegaProjecaoDefault("proj4"));
 	}
 	if($ext && $ext != ""){
 		$e = explode(" ",$ext);
@@ -769,7 +769,7 @@ function retornaReferenciaDinamica($ext="",$w="",$h="")
 	$s =  "var refimagem='".$nomer."';var refwidth=".$w.";var refheight=".$h.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
 	$mapa = ms_newMapObj($map_file);
 	if($i == "googlemaps"){
-		$mapa->setProjection("init=epsg:4618,a=6378137,b=6378137");
+		$mapa->setProjection(pegaProjecaoDefault("proj4"));
 	}
 	$ref = $mapa->reference;
 	$r = $ref->extent;
@@ -2873,7 +2873,7 @@ Se essa variavel nao existir, retorna o valor default baseado em EPSG:4326
 
 Parametros:
 
-tipo {string} - se for vazio retorna todos os elementos do array. Se nao for vazio, usa $tipo como 
+tipo {string} - se for vazio retorna todos os elementos do array. Se nao for vazio, usa $tipo como
 chave para retornar apenas o indice desejado (proj4, epsg, prj)
 
 Retorno:

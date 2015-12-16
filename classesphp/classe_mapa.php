@@ -2214,10 +2214,10 @@ class Mapa
 	function converteInterfacePara($interface){
 		if($interface == "openlayers"){
 			$prefixo = "ol";
-			$this->mapa->setProjection("+proj=longlat +ellps=GRS67 +no_defs");
+			$this->mapa->setProjection(pegaProjecaoDefault("proj4"));
 		}
-		else
-		{$prefixo = "gm";
+		else{
+			$prefixo = "gm";
 		}
 		foreach($this->layers as $l){
 			$opacidadeM = $l->getmetadata($prefixo."opacity");
