@@ -17,108 +17,73 @@ MAP
 	#
 	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do default
 	#
-	FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
-	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolosv5.sym"
+	FONTSET "c:\ms4w\apache\htdocs\i3geo\symbols\fontes.txt"
+	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo\symbols\simbolosv6.sym"
 	DEBUG OFF
+	MAXSIZE 4096
 	#DEBUG 5
-	#CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"
+	#CONFIG "MS_ERRORFILE" "c:\ms4w\tmp\ms_error.txt"
 
 	SHAPEPATH "c:\ms4w\apache\htdocs\geodados"
 	IMAGECOLOR 104 171 195
 	IMAGETYPE AGG_Q
 	#Brasil
 	#EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
-	EXTENT -160 -70 160 70
+	EXTENT -140 -60 140 60
 	SIZE 480 500
 	STATUS ON
 	UNITS DD
 	NAME "GERAL"
-		
+
 	OUTPUTFORMAT
 		NAME 'AGG_Q'
- 		DRIVER AGG/PNG
- 		IMAGEMODE RGB
- 		FORMATOPTION "QUANTIZE_FORCE=ON"
- 		FORMATOPTION "QUANTIZE_DITHER=OFF"
- 		FORMATOPTION "QUANTIZE_COLORS=256"
+		DRIVER AGG/PNG
+		IMAGEMODE RGB
+		FORMATOPTION "QUANTIZE_FORCE=ON"
+		FORMATOPTION "QUANTIZE_DITHER=OFF"
+		FORMATOPTION "QUANTIZE_COLORS=256"
 		FORMATOPTION "INTERLACE=OFF"
 	END
-	
+
 	OUTPUTFORMAT
-    	NAME svg
-    	MIMETYPE "image/svg+xml"
-    	DRIVER svg
-    	#FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
-    	#FORMATOPTION  "FULL_RESOLUTION=TRUE"
-  	END
+			NAME svg
+			MIMETYPE "image/svg+xml"
+			DRIVER cairo/svg
+		IMAGEMODE RGB
+			#FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
+			#FORMATOPTION  "FULL_RESOLUTION=TRUE"
+		END
 	OUTPUTFORMAT
-  		NAME jpeg
-  		DRIVER "GD/JPEG"
-  		MIMETYPE "image/jpeg"
-  		IMAGEMODE RGB
-  		EXTENSION jpg
-  		FORMATOPTION "INTERLACE=OFF"
+			NAME jpeg
+			DRIVER "AGG/JPEG"
+			#MIMETYPE "image/jpeg"
+			IMAGEMODE RGB
+			EXTENSION jpg
+			FORMATOPTION "INTERLACE=OFF"
 	END
 
 	OUTPUTFORMAT
 		NAME png1
 		MIMETYPE image/png
-		DRIVER GD/PNG
+		DRIVER AGG/PNG
 		EXTENSION png
-		IMAGEMODE RGB
+		IMAGEMODE RGBA
 		TRANSPARENT FALSE
 		FORMATOPTION "INTERLACE=OFF"
-	END  LAYER
-    CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map"
-    CONNECTIONTYPE WMS
-    METADATA
-      "wms_srs"	"EPSG:4291"
-      "tipooriginal"	""
-      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
-      "CLASSE"	"SIM"
-      "wfs"	"nao"
-      "TEXTO"	"NAO"
-      "wms_name"	"baseraster"
-      "nomeoriginal"	"cartobase"
-      "wms_format"	"image/png"
-      "wms_formatlist"	"image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff"
-      "wms_connectiontimeout"	"30"
-      "TEMA"	"Base cartografica"
-      "wms_server_version"	"1.1.1"
-      "wms_style"	"default"
-	  "cache" "sim"
-	  #"MENSAGEM" "As cartas RASTER sao mostradas apenas em determinadas escalas. Aproxime o mapa ate a escala 1:250.000 para que os dados sejam mostrados."
-    END
-    NAME "baserasterwms"
-    OFFSITE 255 255 255
-    STATUS off
-    TOLERANCE 0
-    TRANSFORM FALSE
-    TYPE RASTER
-    CLASS
-      NAME " "
-      STYLE
-        ANGLE 360
-        COLOR 200 50 0
-        OUTLINECOLOR 0 0 0
-        SYMBOL 0
-      END
-    END
-  END
-	
-	
+	END
+
 	OUTPUTFORMAT
 		NAME png2
 		MIMETYPE image/png
-		DRIVER GD/PNG
+		DRIVER AGG/PNG
 		EXTENSION png
 		IMAGEMODE PC256
 		TRANSPARENT TRUE
 		FORMATOPTION "INTERLACE=OFF"
 	END
-	
+
 	PROJECTION
-		"+proj=longlat +ellps=GRS67 +no_defs"
+		"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
 	END
 	LEGEND
 		IMAGECOLOR 255 255 255
@@ -150,7 +115,7 @@ MAP
 	END
 	REFERENCE
 		COLOR -1 -1 -1
-		EXTENT -75.5728 -37.4751 -30.525 7.57273#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401 
+		EXTENT -75.5728 -37.4751 -30.525 7.57273#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401
 		#edite o caminho se a aplicacao for movida de lugar
 		IMAGE "c:/ms4w/apache/htdocs/i3geo/imagens/referencia1.png"
 		OUTLINECOLOR -1 -1 -1
@@ -185,13 +150,12 @@ MAP
 	END
 	WEB
 		#edite o caminho se a aplicacao for movida de lugar
-		IMAGEPATH "c:\ms4w\tmp\ms_tmp\"
+		IMAGEPATH "c:/ms4w/tmp/ms_tmp/"
 		IMAGEURL "/ms_tmp/"
-		TEMPLATE "c:\ms4w\apache\htdocs\i3geo/aplicmap/geral.htm"
+		TEMPLATE ""
 	END
 	LAYER
 		DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/mundo"
-		GROUP "mundo"
 		METADATA
 			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda
 			"ITENS"	"FIPS_CNTRY,GMI_CNTRY,LONG_NAME,CNTRY_NAME" #itens que serao mostrados na opcao de identificacao
@@ -205,50 +169,17 @@ MAP
 			"itembuscarapida" "LONG_NAME"
 		END
 		NAME "mundo"
-		SIZEUNITS PIXELS
-		STATUS DEFAULT
+		STATUS OFF
 		TEMPLATE "none.htm"
-		TOLERANCE 0
-		TOLERANCEUNITS PIXELS
-		TRANSPARENCY 100
 		TYPE POLYGON
-		UNITS METERS
 		CLASS
 			NAME " " #vazio indica que nao sera incluido o nome ao lado do simbolo
 			STYLE
 				COLOR 230 230 230
-				SIZE 1
-				SYMBOL 0
+				OUTLINECOLOR 255 255 255
 			END
 		END
 	END
-	LAYER
-		DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/mundo"
-		GROUP "mundo"
-		METADATA
-			"CLASSE"	"NAO"
-			"TEMA" "linha"
-			"TEMA"	"NAO"
-			"ESCONDIDO" "SIM"
-			"cache" "sim"
-		END
-		NAME "mundo2"
-		SIZEUNITS PIXELS
-		STATUS DEFAULT
-		TOLERANCE 0
-		TOLERANCEUNITS PIXELS
-		TRANSPARENCY 100
-		TYPE LINE
-		UNITS METERS
-		CLASS
-			STYLE
-				COLOR 255 255 255
-				SIZE 3
-				SYMBOL "linha"
-			END
-		END
-	END
-	
 	#
 	#para mostrar o mapa do Brasil, remova os comentarios
 	#
@@ -311,7 +242,7 @@ MAP
 	#	  END
 	#  END  # CLASS
 	#END  # LAYER
-	
+
 	LAYER
 		METADATA
 			#"TEMA"	"NAO"

@@ -1787,7 +1787,8 @@ class Mapa
 		// adiciona os parametros no nivel do mapa
 		$this->mapa->setmetadata("wms_title","i3Geo");
 		$this->mapa->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
-		$this->mapa->setmetadata("wms_srs","EPSG:4618");
+		$projecao = pegaProjecaoDefault("epsg");
+		$this->mapa->setmetadata("wms_srs","EPSG:".$projecao);
 		$this->mapa->setmetadata("wms_getcontext_enabled","1");
 		foreach ($this->layers as $layer)
 		{

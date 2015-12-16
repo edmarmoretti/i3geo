@@ -1080,7 +1080,8 @@ Calcula a extens&atilde;o geogr&aacute;fica dos elementos selecionados de um tem
 		if(!$this->layer){return "erro";}
 		if($this->mapa->getmetadata("interface") == "googlemaps"){
 			$projO = $this->mapa->getProjection();
-			$this->mapa->setProjection("init=epsg:4291");
+			$projecao = pegaProjecaoDefault("epsg");
+			$this->mapa->setProjection("init=epsg:".$projecao);
 		}
 		$extatual = $this->mapa->extent;
 		$prjMapa = $this->mapa->getProjection();

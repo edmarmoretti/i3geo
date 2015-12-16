@@ -63,6 +63,39 @@ $i3geomaster = array(
 	array("usuario"=>"admin", "senha"=>"admin")
 );
 /*
+ Variable: $i3GeoProjDefault
+
+Parametros de projecao cartografica utilizados nos mapas e nas exportacoes de arquivos.
+
+Os valores devem ser obtidos do site http://spatialreference.org/
+
+proj4 - corresponde a string de definicao de projecao conforme a biblioteca proj4, exemplo http://spatialreference.org/ref/epsg/4326/proj4/
+
+epsg - corresponde ao codigo da projecao definido pela autoridade EPSG e eh o mesmo utilizado como SRID no Postgis, exemplo http://spatialreference.org/ref/epsg/4326/
+
+prj - string utilizado para gerar arquivos .prj que compoem shapefiles, exemplo: http://spatialreference.org/ref/epsg/4326/esriwkt/
+
+A exportacao de arquivos shapefile gera sempre o PRJ conforme essa definicao.
+
+Quando um mapfile utilizado no i3Geo nao possui a definicao de projecao no LAYER o i3Geo utilizara a projecao definida nessa variavel.
+
+Caso essa variavel esteja definida como vazio ou nao definida aqui o i3Geo utilizara o defaul, que se baseia no EPSG:4326.
+
+Os mapfiles de inicializacao tem seus parametros de projecao sobrepostos por essa variavel.
+
+Tipo:
+{array}
+
+Default:
+baseado em 4326
+
+*/
+$i3GeoProjDefault = array(
+	'proj4' => '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs ',
+	'epsg' => '4326',
+	'prj' => 'GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137,298.257223563]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]]'
+);
+/*
 Variable: $statusFerramentas
 
 Algumas das funcionalidades do mapa interativo dependem de configura&ccedil;&otilde;es espec&iacute;ficas do servidor.

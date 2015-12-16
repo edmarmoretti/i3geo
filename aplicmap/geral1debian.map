@@ -88,7 +88,7 @@ MAP
 	
 
 	PROJECTION
-		"+proj=longlat +ellps=GRS67 +no_defs"
+		"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
 	END
 	LEGEND
 		IMAGECOLOR 255 255 255

@@ -323,7 +323,8 @@ else{
 	$oMap->setmetadata("ows_enable_request","*");
 	//parametro mandatario
 	if($oMap->getmetadata("wms_srs") == ""){
-		$oMap->setmetadata("wms_srs","EPSG:4326");
+		$projecao = pegaProjecaoDefault("epsg");
+		$oMap->setmetadata("wms_srs","EPSG:".$projecao);
 	}
 	$e = $oMap->extent;
 	$extensaoMap = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);

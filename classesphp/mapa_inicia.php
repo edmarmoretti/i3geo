@@ -111,22 +111,26 @@ function iniciaMapa()
 		include_once("funcoes_gerais.php");
 	}
 	validaAcessoTemas($map_file);
-	if(!isset($kmlurl))
-	{$kmlurl = "";}
+	if(!isset($kmlurl)){
+		$kmlurl = "";
+	}
 	error_reporting(0);
-	if(!isset($interface)){$interface = "";}
+	if(!isset($interface)){
+		$interface = "";
+	}
 	if($interface == "openlayers"){
 		$m = ms_newMapObj($map_file);
 		$e = $m->extent;
 		$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
 		$c = $m->numlayers;
-		for ($i=0;$i < $c;++$i)
-		{
+		for ($i=0;$i < $c;++$i){
 			$layer = $m->getlayer($i);
-			if($layer->status == 2)
-			{$layer->setmetadata("olstatus","DEFAULT");}
-			else
-			{$layer->setmetadata("olstatus","OFF");}
+			if($layer->status == 2){
+				$layer->setmetadata("olstatus","DEFAULT");
+			}
+			else{
+				$layer->setmetadata("olstatus","OFF");
+			}
 			$layer->setmetadata("olopacity",$layer->opacity);
 		}
 		$m->save($map_file);
@@ -137,7 +141,7 @@ function iniciaMapa()
 		$e = $m->extent;
 		$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
 		if($interface == "googlemaps"){
-			$m->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+			$m->setProjection("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m");
 		}
 		$c = $m->numlayers;
 		for ($i=0;$i < $c;++$i)

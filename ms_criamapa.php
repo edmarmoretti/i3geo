@@ -297,14 +297,17 @@ if($_SERVER['SERVER_NAME'] != "localhost" && ($i3geomaster[0]["usuario"] == "adm
 /*
 Define o cookie para o idioma da interface
 */
-if(isset($idioma) && $idioma != "")
-{setcookie("i3geolingua", $idioma);}
+if(isset($idioma) && $idioma != ""){
+	setcookie("i3geolingua", $idioma);
+}
 /*
 Cria os diretorios tempor&aacute;rios que ser&atilde;o utilizados pelo i3geo para armazenar as imagens e outros dados.
 */
 $diretorios = criaDirMapa($dir_tmp,$cachedir);
-if(!$diretorios)
-{echo "<p style=color:red ><b>N&atilde;o foi poss&iacute;vel criar os diret&oacute;rios tempor&aacute;rios em $dir_tmp.</b></p>";exit;}
+if(!$diretorios){
+	echo "<p style=color:red ><b>N&atilde;o foi poss&iacute;vel criar os diret&oacute;rios tempor&aacute;rios em $dir_tmp.</b></p>";
+	exit;
+}
 criaIndex($dir_tmp,$diretorios);
 $tmpfname = $diretorios[0];
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
@@ -390,8 +393,10 @@ session_name("i3GeoPHP");
 session_start();
 //echo $_SESSION["map_file"];exit;
 if (!isset($g_sid)){$g_sid="";}
-if(isset($_SESSION["map_file"]) || $g_sid != "" || $g_sid == "undefined")
-{session_regenerate_id();$_SESSION = array();}
+if(isset($_SESSION["map_file"]) || $g_sid != "" || $g_sid == "undefined"){
+	session_regenerate_id();
+	$_SESSION = array();
+}
 /*
 Aguarde
 
@@ -470,8 +475,9 @@ if(!isset($base) || $base == ""){
 		if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 			$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 		}
-		if($base == "")
-		{$base = $locaplic."/aplicmap/geral1v".$versao.".map";}
+		if($base == ""){
+			$base = $locaplic."/aplicmap/geral1v".$versao.".map";
+		}
 	}
 }
 //if(!isset($estadosl))
@@ -575,6 +581,11 @@ $atual = $w->imagepath;
 $w->set("imagepath",$atual.$diretorios[2]."/");
 $atual = $w->imageurl;
 $w->set("imageurl",$atual.$diretorios[2]."/");
+
+$projecao = pegaProjecaoDefault("proj4");
+if($projecao != ""){
+	$mapn->setProjection($projecao);
+}
 
 $salvo = $mapn->save($tmpfname);
 

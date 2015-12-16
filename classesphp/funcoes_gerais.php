@@ -2864,4 +2864,39 @@ function pegaDadosAdminKey($sql,$subsEsquema){
 		return array();
 	}
 }
+/*
+ Function: pegaProjecaoDefault
+
+Retorna o array $i3GeoProjDefault definido em i3geo/ms_configura.php
+
+Se essa variavel nao existir, retorna o valor default baseado em EPSG:4326
+
+Parametros:
+
+tipo {string} - se for vazio retorna todos os elementos do array. Se nao for vazio, usa $tipo como 
+chave para retornar apenas o indice desejado (proj4, epsg, prj)
+
+Retorno:
+
+Array
+*/
+function pegaProjecaoDefault($tipo=""){
+	global $i3GeoProjDefault;
+	if(empty($i3GeoProjDefault) || !isset($i3GeoProjDefault)){
+		include(dirname(__FILE__)."/../ms_configura.php");
+	}
+	if(empty($i3GeoProjDefault) || !isset($i3GeoProjDefault)){
+		$i3GeoProjDefault = array(
+			'proj4' => '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs ',
+			'epsg' => '4326',
+			'prj' => 'GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137,298.257223563]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]]'
+		);
+	}
+	if($tipo == ""){
+		return $i3GeoProjDefault;
+	}
+	else{
+		return $i3GeoProjDefault[$tipo];
+	}
+}
 ?>
