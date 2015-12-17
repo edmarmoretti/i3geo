@@ -789,8 +789,11 @@ $dir_tmp - localiza&ccedil;&atilde;o do diret&oacute;rio tempor&aacute;rio
 	{
 		if(!$this->layer){return "erro";}
 		$this->layer->setfilter("");
-		$nomeshp = criaSHP($this->nome,$this->arquivo,$locaplic,$dir_tmp);
+		$nomeshp = criaSHP($this->nome,$this->arquivo,$locaplic,$dir_tmp,true,"",false);
 		$novolayer = criaLayer($this->mapa,$this->layer->type,MS_DEFAULT,"Sele&ccedil;&atilde;o de ".(pegaNome($this->layer))." (".$this->nome.")",$metaClasse="SIM");
+		if($this->layer->getprojection() != ""){
+			$novolayer->setprojection($this->layer->getprojection());
+		}
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->set("name",basename($nomeshp));
 		$down = "nao";

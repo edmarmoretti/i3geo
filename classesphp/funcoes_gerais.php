@@ -1397,11 +1397,13 @@ $nomeRand {boleano} - Gera um nome randomico para o shapefile (TRUE) ou utiliza 
 
 $prj {string} - String que sera gravada no arquivo prj
 
+$projetaToMap {boolean} - Projeta os shapes para a projecao do mapa
+
 Retorno:
 
 {string} - nome do arquivo criado ou false se ocorrer erro
 */
-function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="")
+function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$projetaToMap=true)
 {
 	$versao = versao();
 	$versao = $versao["principal"];
@@ -1510,7 +1512,9 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="")
 		if ($res_count > 0){
 			for ($i = 0; $i < $res_count; ++$i){
 				$shape = $shapesSel[$i];
-				$shape->project($projInObj, $projOutObj);
+				if($projetaToMap == true){
+					$shape->project($projInObj, $projOutObj);
+				}
 				foreach ($items as $ni){
 					$vreg = $shape->values[$ni];
 					if(strlen($vreg) > 255){
@@ -1569,6 +1573,15 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="")
 		//gera o arquivo prj
 		if($prj != ""){
 			gravaDados(array($prj),$nomeshp.".prj");
+		}
+		//se prj for vazio mas existir o arquivo prj original e a projecao do shape nao estiver ativa
+		//copia o arquivo prj original se existir
+		elseif ($projetaToMap == false){
+			$nomePrjOriginal = str_replace(".shp",".prj",$layer->data);
+			$nomeDestino = $nomeshp.".prj";
+			if(file_exists($nomePrjOriginal) && !file_exists($nomeDestino)){
+				copy($nomePrjOriginal,$nomeDestino);
+			}
 		}
 		return $nomeshp;
 	}
