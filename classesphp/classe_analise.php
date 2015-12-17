@@ -1274,8 +1274,7 @@ class Analise
 		$layerdestino->close();
 		$rect = $this->mapa->extent;
 		$projInObj = $layerorigem->getProjection();
-		if ($projInObj == "")
-		{
+		if ($projInObj == ""){
 			$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 		}
 		$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
@@ -1291,12 +1290,11 @@ class Analise
 		$def[] = array("dist_m","N","10","2");
 		$def[] = array("origem","C","255");
 		$def[] = array("destino","C","255");
-		if($this->dbaseExiste == false)
-		{
+		if($this->dbaseExiste == false){
 			$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);
 		}
-		else
-		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
+		else{
+			$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);
 		}
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
@@ -1304,26 +1302,23 @@ class Analise
 			$db=xbase_open($dbname,2);
 		else
 			$db=dbase_open($dbname,2);
-		foreach ($shapesorigem as $sorigem)
-		{
-			if($itemorigem != "")
-			{
+		foreach ($shapesorigem as $sorigem){
+			if($itemorigem != ""){
 				$valororigem = $sorigem->values[$itemorigem];
 			}
-			else
-			{$valororigem = "";
+			else{
+				$valororigem = "";
 			}
 			foreach ($shapesdestino as $sdestino)
 			{
 				$linha = ms_newLineObj();
 				$linha->add($sorigem->getCentroid());
 				$linha->add($sdestino->getCentroid());
-				if($itemdestino != "")
-				{
+				if($itemdestino != ""){
 					$valordestino = $sdestino->values[$itemdestino];
 				}
-				else
-				{$valordestino = "";
+				else{
+					$valordestino = "";
 				}
 				$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
 				$ShapeObj->add($linha);
@@ -1619,7 +1614,7 @@ class Analise
 		$nomeCentroides = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentroides;
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
-		
+
 		//$shapes = $shape[0];
 		foreach($shapes as $shape){
 			$LineObj = ms_newLineObj();

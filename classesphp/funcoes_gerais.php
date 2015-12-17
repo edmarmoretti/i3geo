@@ -1395,11 +1395,13 @@ $dir_tmp {string} - Diret&oacute;rio tempor&aacute;rio
 
 $nomeRand {boleano} - Gera um nome randomico para o shapefile (TRUE) ou utiliza o nome do tema (FALSE)
 
+$prj {string} - String que sera gravada no arquivo prj
+
 Retorno:
 
 {string} - nome do arquivo criado ou false se ocorrer erro
 */
-function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
+function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="")
 {
 	$versao = versao();
 	$versao = $versao["principal"];
@@ -1412,6 +1414,18 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	}
 	$map = @ms_newMapObj($map_file);
 	$layer = $map->getlayerbyname($tema);
+	//e necessario abrir ou nao vai projetar
+	$layer->open();
+	$prjMapa = $map->getProjection();
+	$prjTema = $layer->getProjection();
+	if($prjTema != ""){
+		$projInObj = new projectionObj($prjTema);
+		$projOutObj = new projectionObj($prjMapa);
+	}
+	else{
+		$projInObj = "";
+		$projOutObj = "";
+	}
 
 	$layer->set("template","none.htm");
 	$diretorio = dirname($dir_tmp);
@@ -1468,7 +1482,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$resultadoFinal = true;
 	}
 	else{
-		$shapesSel = retornaShapesSelecionados($layer,$map_file,$map);
+		$shapesSel = retornaShapesSelecionados($layer,$map_file,$map,false);
 		$items = pegaItens($layer);
 		// cria o dbf
 		$def = array();
@@ -1482,10 +1496,12 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			$def[] = array($temp,"C","254");
 			$cni = $cni + 1;
 		}
-		if(!function_exists("dbase_create"))
-		{$db = xbase_create($nomeshp.".dbf", $def);}
-		else
-		{$db = dbase_create($nomeshp.".dbf", $def);}
+		if(!function_exists("dbase_create")){
+			$db = xbase_create($nomeshp.".dbf", $def);
+		}
+		else{
+			$db = dbase_create($nomeshp.".dbf", $def);
+		}
 		$dbname = $nomeshp.".dbf";
 		$reg = array();
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
@@ -1494,8 +1510,8 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		if ($res_count > 0){
 			for ($i = 0; $i < $res_count; ++$i){
 				$shape = $shapesSel[$i];
-				foreach ($items as $ni)
-				{
+				$shape->project($projInObj, $projOutObj);
+				foreach ($items as $ni){
 					$vreg = $shape->values[$ni];
 					if(strlen($vreg) > 255){
 						$vreg = substr($vreg,0,255);
@@ -1513,7 +1529,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			xbase_close($db);
 			else
 			dbase_close($db);
-			$layer->close();
 			//
 			//verifica a quantidade de registros no final
 			//
@@ -1538,6 +1553,8 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 				{unlink($nomeshp.".shp");}
 				if(file_exists($nomeshp.".shx"))
 				{unlink($nomeshp.".shx");}
+				if(file_exists($nomeshp.".prj"))
+				{unlink($nomeshp.".prj");}
 				$resultadoFinal = false;
 			}
 		}
@@ -1550,20 +1567,9 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	}
 	else{
 		//gera o arquivo prj
-		/*
-		if(!file_exists($nomeshp.".prj")){
-			$projecao = $layer->getProjection();
-			if($projecao == ""){
-				$projecao = $map->getProjection();
-			}
-			include($locaplic."/pacotes/proj4php-proj4php5.2/src/proj4php/proj4php.php");
-
-			$proj4 = new Proj4php();
-			$projWGS84 = new Proj4phpProj('EPSG:4326',$proj4);
-			echo $projWGS84->projection;exit;
-
+		if($prj != ""){
+			gravaDados(array($prj),$nomeshp.".prj");
 		}
-		*/
 		return $nomeshp;
 	}
 }
@@ -1618,7 +1624,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//cria o arquivo mapfile, caso ele n&atilde;o exista, que servir&aacute; de base para obten&ccedil;&atilde;o dos dados
 	//
 	$nomeRand = true;
-	//echo $versao;exit;
+	$projecao = pegaProjecaoDefault();
 	if (($map_file == "") || (!@ms_newMapObj($map_file))){ //a funcao foi chamada do aplicativo datadownload
 		if($base == "" or !isset($base)){
 			$base = "";
@@ -1647,6 +1653,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		}
 		$map_tmp = ms_newMapObj($base);
 		$map_file = $dir_tmp."/".nomerandomico(20).".map";
+		$map_tmp->setProjection($projecao["proj4"]);
 		$map_tmp->save($map_file);
 		$nomeRand = false;
 	}
@@ -1830,12 +1837,19 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				}
 				//
 				//se nao existir selecao seleciona por box
+				//o box vem do mapfile original
 				//
 				if(!file_exists($sel->qyfile) || $numSel < 1){
 					$box = $rectextent->minx." ".$rectextent->miny." ".$rectextent->maxx." ".$rectextent->maxy;
 					$sel->selecaoBOX("novo",$box);
+					//reaproveita arquivo anterior
+					$nomeRand = false;
 				}
-				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand);
+				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand,$projecao["prj"]);
+				//remove o arquivo de selecao se ele foi criado apenas para pegar todos os elementos
+				if($nomeRand == false){
+					$sel->selecaoLimpa();
+				}
 				if($nomeshp == false){
 					return array("arquivos"=>"<span style=color:red >Ocorreu um erro, tente novamente","nreg"=>0);
 				}
@@ -1847,6 +1861,9 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 
 				$resultado[] = str_replace($radtmp."/","",$nomeshp).".dbf";
 				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".dbf"));
+
+				$resultado[] = str_replace($radtmp."/","",$nomeshp).".prj";
+				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".prj"));
 			}
 		}
 	}
@@ -2500,17 +2517,17 @@ function retornaShapesMapext($objLayer,$objMapa){
 function retornaShapesSelecionados($objLayer,$map_file,$objMapa,$indexado=false){
 	$shapes = array();
 	$qyfile = dirname($map_file)."/".$objLayer->name.".php";
-
-	if(!file_exists($qyfile))
-	{return $shapes;}
+	if(!file_exists($qyfile)){
+		return $shapes;
+	}
 
 	$handle = fopen ($qyfile, "r");
 	$conteudo = fread ($handle, filesize ($qyfile));
 	fclose ($handle);
 	$listaDeIndices = unserialize($conteudo);
-	//echo count($listaDeIndices);exit;
-	if(count($listaDeIndices) == 0)
-	{return $shapes;}
+	if(count($listaDeIndices) == 0){
+		return $shapes;
+	}
 
 	$versao = versao();
 	$versao = $versao["principal"];
@@ -2521,14 +2538,11 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa,$indexado=false)
 
 		$sopen = $objLayer->open();
 		if($sopen == MS_FAILURE){return "erro";}
-		$objLayer->open();
 		$res_count = $objLayer->getNumresults();
 		$centroides = array();
 		$shapes = array();
 		//pega um shape especifico
-
-		for ($i = 0; $i < $res_count; ++$i)
-		{
+		for ($i = 0; $i < $res_count; ++$i){
 			if($versao >= 6){
 				$shape = $objLayer->getShape($objLayer->getResult($i));
 				$shp_index  = $shape->index;
