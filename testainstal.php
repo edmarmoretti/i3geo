@@ -117,7 +117,7 @@ catch(ee)
 		echo "Array que armazena os par&acirc;metros da vers&atilde;o:<br><pre>";
 		var_dump (versao())."<br><br>";
 		echo "</pre>";
-		echo "Configura&ccedil;&atilde;o da proje&ccedil;&atilde;o default:<br>";
+		echo "Configura&ccedil;&atilde;o da proje&ccedil;&atilde;o default: (<a href='http://moodle.gvsig-training.com/mod/book/view.php?id=5090&chapterid=114'>saiba mais</a>)<br>";
 		if(!isset($i3GeoProjDefault)){
 			echo "<span style=color:red >A vari&aacute;vel de configura&ccedil;&atilde;o i3GeoProjDefault n&atilde;o existe no ms_configura.php. Ser&aacute; utilizada a proje&ccedil;&atilde;o 4326</span><br><br>";
 		}
