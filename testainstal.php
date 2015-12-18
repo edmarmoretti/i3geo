@@ -114,8 +114,16 @@ catch(ee)
 		echo "<br>MapServer: <br>";
 		echo ms_GetVersion();
 		echo "<br><br>";
-		echo "Array que armazena os par&acirc;metros da vers&atilde;o:<br><br>";
+		echo "Array que armazena os par&acirc;metros da vers&atilde;o:<br><pre>";
 		var_dump (versao())."<br><br>";
+		echo "</pre>";
+		echo "Configura&ccedil;&atilde;o da proje&ccedil;&atilde;o default:<br>";
+		if(!isset($i3GeoProjDefault)){
+			echo "<span style=color:red >A vari&aacute;vel de configura&ccedil;&atilde;o i3GeoProjDefault n&atilde;o existe no ms_configura.php. Ser&aacute; utilizada a proje&ccedil;&atilde;o 4326</span><br><br>";
+		}
+		echo "<pre>";
+		var_dump (pegaProjecaoDefault())."<br><br>";
+		echo "</pre>";
 		if(!function_exists("ms_GetVersion"))
 		{
 			echo "<span style=color:red >PARECE QUE O MAPSERVER NAO ESTA INSTALADO!!!<br><br>";
@@ -123,7 +131,7 @@ catch(ee)
 		if (get_cfg_var("safe_mode") == 1){
 			echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
 		}
-		echo "<br><br>As seguintes letras devem aparecer corretamente acentuadas: ";
+		echo "<br>As seguintes letras devem aparecer corretamente acentuadas: ";
 		echo "<br><br>Á«„‚·¡Û”";
 		echo "<br><br>Caso contr&aacute;rio, verifique os par&acirc;metros de configura&ccedil;&atilde;o do Apache <b>AddDefaultCharset (httpd.conf) e default_charset (php.ini)</b> (default_charset='' no php.ini geralmente funciona).";
 		//executa as opcoes linux definidas no formulario
