@@ -249,10 +249,12 @@ select{
 }
 
 .fundoPonto {
-	background: url("../../imagens/fundo_ponto.jpg") repeat-x scroll left
-		transparent;
-	margin: 0px;
+	padding-top: 0px;
+	COLOR: #2F4632;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: rgb(250, 250, 250);
+	margin: auto;
+	font-size: 12px;
 }
 
 .cabecalhoGeral {
