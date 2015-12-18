@@ -1427,6 +1427,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$proj
 	else{
 		$projInObj = "";
 		$projOutObj = "";
+		$projetaToMap = false;
 	}
 
 	$layer->set("template","none.htm");
@@ -1482,6 +1483,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$proj
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		$novoshpf->addShape($shape);
 		$resultadoFinal = true;
+
 	}
 	else{
 		$shapesSel = retornaShapesSelecionados($layer,$map_file,$map,false);
@@ -1892,6 +1894,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			if($db){$nreg = xbase_numrecords($db);}
 		}
 	}
+
 	//
 	//gera um mapfile para download
 	//
