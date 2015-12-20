@@ -3,78 +3,78 @@ g_traducao_init =
 		1 : [
 			{
 				pt : "Remover  essa tela de apresenta&ccedil;&atilde;o (depois voc&ecirc; poder&aacute; ir direto para http:// localhost/i3geo/init)",
-				en : "",
-				es : "Eliminar esta pantalla de presentaci&oacute; (despu&eacute;s usted podr&aacute; ir directamente al enlace http:// localhost/i3geo/init)"
+				en : "Remove this introduction screen (later you will be able to go to http:// localhost/i3geo/init)",
+				es : "Eliminar esta pantalla de presentaci&oacute;n (despu&eacute;s usted podr&aacute; ir directamente al enlace http:// localhost/i3geo/init)"
 			}
 		],
 		2 : [
 			{
 				pt : "Teste da instala&ccedil;&atilde;o",
-				en : "",
+				en : "Installation test",
 				es : "Test de instalaci&oacute;n"
 			}
 		],
 		3 : [
 			{
 				pt : "Sistema de administra&ccedil;&atilde;o",
-				en : "",
+				en : "Management system",
 				es : "Sistema de administraci&oacute;n"
 			}
 		],
 		4 : [
 			{
 				pt : "Mapa com interface Openlayers",
-				en : "",
+				en : "Map with Openlayers interface",
 				es : "Mapa con interfaz Openlayers"
 			}
 		],
 		5 : [
 			{
 				pt : "Mapa com interface Openlayers (modo debug)",
-				en : "",
+				en : "Map with Openlayers interface (debug mode)",
 				es : "Mapa con interfaz Openlayers (modo debug)"
 			}
 		],
 		6 : [
 			{
 				pt : "Mapa com interface Google Maps",
-				en : "",
+				en : "Map with Google Maps interface",
 				es : "Mapa con interfaz Google Maps "
 			}
 		],
 		7 : [
 			{
 				pt : "Mapa com interface Google Earth (depreciado)",
-				en : "",
+				en : "Map with Google Earth interface (deprecated)",
 				es : "Mapa con interfaz Google Earth (depreciado)"
 			}
 		],
 		8 : [
 			{
 				pt : "Cartogramas (METAESTAT)",
-				en : "",
+				en : "Cartogram (METAESTAT)",
 				es : "Cartogramas (METAESTAT)"
 			}
 		],
 		9 : [
 			{
 				pt : "Editor de regi&otilde;es (METAESTAT)",
-				en : "",
+				en : "Region editor (METAESTAT)",
 				es : "Editor de regiones (METAESTAT)"
 			}
 		],
 		10 : [
 			{
 				pt : "Download de dados geo",
-				en : "",
+				en : "Data geo download",
 				es : "Download de datos geo"
 			}
 		],
 		11 : [
 			{
 				pt : "Servi&ccedil;os OGC (WMS e WFS)",
-				en : "",
-				es : "Servicios OGC (WMS E WFS)"
+				en : "OGC (WMS and WFS) services ",
+				es : "Servicios OGC (WMS y WFS)"
 			}
 		],
 		12 : [
