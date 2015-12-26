@@ -80,49 +80,49 @@ g_traducao_init =
 		12 : [
 			{
 				pt : "Cat&aacute;logo de temas no formato KML",
-				en : "",
+				en : "Catalog of kml themes",
 				es : "Cat&aacute;logo de temas en formato KML"
 			}
 		],
 		13 : [
 			{
 				pt : "Gerador de links permanentes",
-				en : "",
+				en : "Permanent link creator",
 				es : "Generador de links permanentes"
 			}
 		],
 		14 : [
 			{
 				pt : "Exemplos de customiza&ccedil;&atilde;o da interface de mapas",
-				en : "",
+				en : "Examples of Map inteface customization",
 				es : "Ejemplos de personalizaci&oacute;n de la interfaz de mapas"
 			}
 		],
 		15 : [
 			{
 				pt : "Manual de uso",
-				en : "",
+				en : "User guide",
 				es : "Manual de uso"
 			}
 		],
 		16 : [
 			{
 				pt : "Registro de bugs",
-				en : "",
+				en : "Bug record",
 				es : "Registro de bugs"
 			}
 		],
 		17 : [
 			{
 				pt : "Guia de migra&ccedil;&atilde;o",
-				en : "",
+				en : "Migration guide",
 				es : "Gu&iacute;a de migraci&oacute;n"
 			}
 		],
 		18 : [
 			{
 				pt : "Integre mapas com",
-				en : "",
+				en : "Link maps with",
 				es : "Integrar mapas con"
 			}
 		],
