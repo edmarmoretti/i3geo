@@ -416,7 +416,7 @@ i3GEOF.preferencias = {
 						titulo: $trad('tipoJanelaAguarde',i3GEOF.preferencias.dicionario),
 						tipo: "select",
 						elemento: "i3GEO.janela.ESTILOAGUARDE",
-						opcoes: ["normal","reduzida","minima"]
+						opcoes: ["normal","reduzida","minima","nenhum"]
 					},{
 						titulo: $trad('janelaAguardeBloqueiaMapa',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
