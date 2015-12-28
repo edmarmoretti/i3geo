@@ -129,21 +129,21 @@ g_traducao_init =
 		19 : [
 			{
 				pt : "ATEN&Ccedil;&Atilde;O!!! Essa instala&ccedil;&atilde;o est&aacute; vulner&aacute;vel: edite o arquivo i3geo/ms_configura.php e altere o login e senha definidos na vari&aacute;vel $i3geomaster.<br>Ao acessar o i3Geo em um servidor que n&atilde;o seja o localhost os mapas ficar&atilde;o bloqueados at&eacute; que essa edi&ccedil;&atilde;o seja feita.",
-				en : "",
+				en : "WARNING!!! This Installation is vulnerable: edit the file i3geo/ms_configura.php and change login and password defined at variable $i3geomaster. When acceding to i3Geo through a non-localhost server maps will reamain blocked until the above-mentioned edition is made",
 				es : "¡¡¡ATENCI&Oacute;N!!! Esta instalaci&oacute;n es vulnerable: edite el archivo i3geo/ms_configura.php y altere el login y la contraseña definidos en la variable $i3geomaster.<br>Al acceder al i3Geo en un servidor que no sea el localhost los mapas quedaran bloqueados hasta que la presente edici&oacute;n sea concluida"
 			}
 		],
 		20 : [
 			{
 				pt : "Incluia um link apenas na sua p&aacute;gina",
-				en : "",
-				es : "Incluya un link apenas en su p&aacute;gina"
+				en : "Add a link only in your page",
+				es : "Incluya un link s&oacute;lo en su p&aacute;gina"
 			}
 		],
 		21 : [
 			{
 				pt : "Manual de administra&ccedil;&atilde;o",
-				en : "",
+				en : "Management guide",
 				es : "Manual de administraci&oacute;n"
 			}
 		],
