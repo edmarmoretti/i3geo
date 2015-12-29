@@ -150,49 +150,49 @@ g_traducao_init =
 		22 : [
 			{
 				pt : "Google Maps com aplica&ccedil;&atilde;o de estilo",
-				en : "",
+				en : "Google Maps with style application",
 				es : "Google Maps con aplicaci&oacute;n de estilo"
 			}
 		],
 		23 : [
 			{
 				pt : "Mapa com Open Street Map (OSM)",
-				en : "",
+				en : "Map with Open Street Map (OSM) ",
 				es : "Mapa con Open Street Map (OSM)"
 			}
 		],
 		24 : [
 			{
 				pt : "Documenta&ccedil;&atilde;o da API",
-				en : "",
+				en : "API reference",
 				es : "Documentaci&oacute;n de la API"
 			}
 		],
 		25 : [
 			{
 				pt : "SAIKU - an&aacute;lise tabular",
-				en : "",
+				en : "SAIKU - tabular analysis",
 				es : "SAIKU - an&aacute;lisis tabular"
 			}
 		],
 		26 : [
 			{
 				pt : "Teste do conversor de projeto GVP para Mapfile",
-				en : "",
-				es : "Test del convertidor de proyecto GVP para Mapfile"
+				en : "Test of GVP project to MapFile converter",
+				es : "Prueba del convertidor de proyecto GVP para Mapfile"
 			}
 		],
 		27 : [
 			{
 				pt : "Lista de Atlas cadastrados",
-				en : "",
+				en : "List of recorded Atlas ",
 				es : "Lista de Atlas registrados"
 			}
 		],
 		28 : [
 			{
 				pt : "Curso de i3Geo em Gvsig-training",
-				en : "",
+				en : "i3Geo course at Gvsig-training",
 				es : "Curso de i3Geo en Gvsig-training"
 			}
 		],
