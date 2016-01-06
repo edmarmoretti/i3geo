@@ -199,42 +199,42 @@ g_traducao_init =
 		29 : [
 			{
 				pt : "- Considere uma doa&ccedil;&atilde;o!",
-				en : "",
+				en : "_Donate",
 				es : "- Considere hacer una donaci&oacute;n"
 			}
 		],
 		30 : [
 			{
 				pt : "Wiki, instala&ccedil;&atilde;o, SVN",
-				en : "",
+				en : "Wiki, Installation, SVN",
 				es : "Wiki, instalaci&oacute;n, SVN"
 			}
 		],
 		31 : [
 			{
 				pt : "Comunidade, download",
-				en : "",
+				en : "Comunity,  download",
 				es : "Comunidad, download"
 			}
 		],
 		32 : [
 			{
 				pt : "Lista",
-				en : "",
+				en : "List",
 				es : "Lista"
 			}
 		],
 		33 : [
 			{
 				pt : "Utilit&aacute;rios",
-				en : "",
+				en : "Tools",
 				es : "Utilitarios"
 			}
 		],
 		34 : [
 			{
 				pt : "Lista de mapas",
-				en : "",
+				en : "Map list",
 				es : "Lista de mapas"
 			}
 		]
