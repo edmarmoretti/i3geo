@@ -228,7 +228,10 @@ i3GEO.navega =
 		marcaCentroDoMapa : function(xy) {
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.navega.marcaCentroDoMapa()");
-
+			var t = $i("i3GeoCentroDoMapa");
+			if(t && t.style.display === "block"){
+				return;
+			}
 			if (xy != false) {
 				xy =
 					i3GEO.calculo.dd2tela(

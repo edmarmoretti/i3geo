@@ -2706,7 +2706,7 @@ var g_traducao =
 			{
 				pt : "Dist&acirc;ncia aproximada",
 				en : "Approximate distance",
-				es : "Distacia aproximada"
+				es : "Distancia aproximada"
 			}
 		],
 		"trocaInterface" : [
@@ -2729,5 +2729,12 @@ var g_traducao =
 				en : "Data can only be saved in themes that allow edition and have column with auto-increment",
 				es : "Los datos s&oacute;lo pueden ser guardados en los temas que permiten edici&oacute;n y que poseen columna con auto incremento"
 			}
-		]
+		],
+   		"novaaba" : [
+   			{
+   				pt : "Abre em nova aba",
+   				en : "Open in new tab",
+   				es : "Abre en una nueva tab"
+   			}
+   		]
 	};

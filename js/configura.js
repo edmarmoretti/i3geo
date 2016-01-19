@@ -49,6 +49,20 @@ if (typeof (i3GEO) === 'undefined') {
 i3GEO.configura =
 	{
 		/**
+		 * Propriedade: mostraCentroDoMapa
+		 *
+		 * Mostra ou nao o centro do mapa durante o PAN
+		 *
+		 * Tipo:
+		 *
+		 * {boolean}
+		 *
+		 * Default:
+		 *
+		 * {true}
+		 */
+		mostraCentroDoMapa : false,
+		/**
 		 * Propriedade: guardaExtensao
 		 *
 		 * Indica se a extensao geografica do mapa sera armazenada como um cookie

@@ -87,7 +87,9 @@ i3GEO.janela =
 		 *
 		 * Estilo da janela de aguarde
 		 *
-		 * Pode ser normal|reduzida|minima
+		 * Pode ser normal|reduzida|minima|nenhum
+		 *
+		 * Utilize nenhum para nunca mostrar a janela
 		 *
 		 * Tipo:
 		 *
@@ -685,7 +687,7 @@ i3GEO.janela =
 		 */
 		abreAguarde : function(id, texto) {
 			var pos, temp, janela;
-			if (!id || id == undefined) {
+			if (!id || id == undefined || i3GEO.janela.ESTILOAGUARDE === "nenhum") {
 				return;
 			}
 			janela = YAHOO.i3GEO.janela.managerAguarde.find(id);

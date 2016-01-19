@@ -1,316 +1,226 @@
-<?php
-include_once("../ms_configura.php");
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<title>i3GEO - Google Maps</title>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry"></script>
-<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
-<script type="text/javascript" src="../classesjs/classe_editorgm.js"></script>
-<script type="text/javascript" src="http://localhost:8014/i3geo/sage/sistemas/fluxo/datateste.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>i3GEO - OpenLayers</title>
+<script src="../pacotes/ol3/ol-debug.js"></script>
+<script src="../js/i3geonaocompacto.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/black.css">
+<link rel="stylesheet" type="text/css" href="../pacotes/ol3/ol.css">
+<style>
+.ol-zoom {
+	padding-left: 4px;
+	padding-right: 4px;
+	top: 2em;
+}
+
+.ol-zoomslider {
+	top: 6em;
+}
+
+.ol-attribution img {
+	display: none;
+}
+
+.ol-attribution.ol-uncollapsible {
+	height: 2.1em;
+	right: 24px;
+	background: none;
+	margin-bottom: 15px;
+}
+
+</style>
 </head>
 <body id="i3geo" style='margin-left: 7px; background: white;'>
-	<!-- inclui o nome do usuario logado -->
-	<div id="i3GEONomeLogin" style="position: absolute; left: 10px; top: 12px; font-size: 11px; z-index: 50000"></div>
-	<table id='mst' summary="" style='display: none;' width=100% cellspacing='0'>
-		<tr>
-			<td id="contemMenu" style="background: black; height: 30px; text-align: right; border-width: 0pt 0pt 1px; border-color: rgb(240, 240, 240)">
-				<!--menu suspenso-->
-				<div id="menus" style="height: 0px;"></div>
-			</td>
-		</tr>
-		<tr>
-			<td style="vertical-align: top; border-width: 0px;">
-				<table width="100%" style="vertical-align: top; border-width: 0px">
-					<tr>
-						<td class=verdeclaro id=contemImg>
-							<div id=googlemapsdiv style="position: relative; background-image: url('../imagens/i3geo1bw.jpg');"></div>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<table style="width: 100%; height: 28px">
-					<tr>
-						<td class=fundoRodape style="width: 25%">
-							<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
-							<div id=escala style="margin: auto; text-align: right; left: 15px;"></div>
-						</td>
-						<td class=fundoRodape style="width: 5%"></td>
-						<td class=fundoRodape style="width: 40%">
-							<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
-							<div id=localizarxy style="margin: auto; text-align: left; font-size: 10px; display: inline-table"></div>
-						</td>
-						<td class=fundoRodape style="width: 20%">
-							<!-- bot&atilde;o de compartilhamento em redes sociais-->
-							<!--<div id=i3GEOcompartilhar style="width: 170px; margin: auto; text-align: left; padding-top: 1px"></div> -->
+<div id=contemImg >
+<div id=corpoMapa ></div>
+</div>
+	<script>
+		i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo";
+		i3GEO.configura.autotamanho = false;
+		i3GEO.Interface.ATUAL = "openlayers";
+		i3GEO.Interface.IDCORPO = "contemImg";
+		i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
+		i3GEO.Interface.openlayers.googleLike = true;
+		i3GEO.Interface.openlayers.TILES = true;
 
-							<!-- aqui ser&aacute; inclu&iacute;do o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
-							<div id=tempoRedesenho style="z-index: 100; position: absolute; top: 0px; color: green; background-color: black; width: 50px; display: none"></div>
-						</td>
-						<!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->
-						<td class=fundoRodape style="width: 10%;">
-							<div id=seletorIdiomas style="right: 15px;"></div>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-	<table id="i3GEOlogoMarca" style='margin: 0px auto; box-shadow: 0 1px 13px gray; border-radius: 5px;'>
-		<tr>
-			<td>
-				<div id=versaoi3geo></div>
-				<h2 style="font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2>
-				<h3 style="font-size: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3>
-			</td>
-		</tr>
-		<tr>
-			<td style="padding: 10px;">
-				<img style="width: 560px; height: 81px" alt="" src='../imagens/logo_inicio.png'>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<!--
-			<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
-			-->
-			</td>
-		</tr>
-	</table>
+		i3GEO.configura.guardaExtensao = false;
+		i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza =
+			'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 
-	<div id="i3GEOguiaMovel" style="position: absolute; display: block; border: 0px solid white; text-align: left; z-index: 1000; background-color: none">
-		<img id='i3GEOguiaMovelPuxador' onclick='i3GEO.guias.guiaMovel.abreFecha()' style='z-index: 2; border: solid 0px white; left: 0px; position: absolute; top: 0px' width='0px' src='../imagens/openbars.png'>
-		<div id="i3GEOguiaMovelMolde" style="position: absolute; display: none; border: 0px solid white; text-align: left; z-index: 1000; background-color: gray">
-			<div id='i3GEOguiaMovelIcones' style='overflow: none; left: 0px; display: none; position: absolute; top: 0px; text-align: center; height: 0px; width: 0px; border: solid 0px white; background-color: white'></div>
-			<div id='i3GEOguiaMovelConteudo' style='overflow: auto; display: none; position: absolute; border-color: gray; border-width: 0px 0 0px 0px; left: 0px; height: 0px; background-color: white'>
-				<div id='guia1obj' style='display: none;'>
-					<!-- Esta div acrescenta a op&ccedil;&atilde;o de busca r&aacute;pida, caso vc queira coloc&aacute;-la em um lugar espec&iacute;fico -->
-					<div style='left: 5px; top: 10px; width: 150px;' id=buscaRapida></div>
-					<!--	Esta div acrescenta a lista de propriedades do mapa -->
-					<div id=listaPropriedades style='top: 15px;'></div>
-					<!--	Esta div acrescenta a lista de de camadas do tipo 'baselayers' espec&iacute;ficas da interface Openlayers. Veja tamb&eacute;m a op&ccedil;&atilde;o i3GEO.Interface.openlayers.GADGETS.LayerSwitcher -->
-					<div id=listaLayersBase style='top: 15px;'></div>
-					<!--	Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
-					<div id=listaTemas style='top: 15px;'></div>
-				</div>
-				<div id='guia2obj' style='display: none;'>
-					Aguarde...
-					<img alt="" src="../imagens/branco.gif" width=248 />
-				</div>
-				<div id='guia4obj' style='display: none; text-align: left'>
-					<div id='legenda' style='text-align: left'></div>
-				</div>
-				<div id='guia5obj' style='display: none; text-align: left'>
-					<div id='banners' style='overflow: auto; text-align: left'>Aguarde...</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-i3GEO.Interface.ATUAL = "googlemaps";
-i3GEO.Interface.IDCORPO = "contemImg";
-i3GEO.configura.diminuixN = 20;
-
-i3GEO.configura.autotamanho = false;
-i3GEO.Interface.openlayers.TILES = true;
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
-i3GEO.cria();
-i3GEO.configura.mapaRefDisplay = "none";
-i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
-//ajusta o deslocamento da barra de botoes
-i3GEO.barraDeBotoes.OFFSET = 11;
-//ajusta a posicao da barra de botoes no IE
-if(navm){
-	i3GEO.barraDeBotoes.OFFSET = 5;
-}
-if(chro){
-	i3GEO.barraDeBotoes.OFFSET = 15;
-}
-
-i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
-i3GEO.ajuda.ATIVAJANELA = false;
-i3GEO.idioma.IDSELETOR = "seletorIdiomas";
-i3GEO.Interface.ATIVAMENUCONTEXTO = false;
-//i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
-i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
-i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
-i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
-i3GEO.mapa.AUTORESIZE = true;
-i3GEO.guias.TIPO = "movel";
-i3GEO.guias.guiaMovel.config.topGuiaMovel = 36;
-i3GEO.janela.ativaAlerta();
-
-//i3GEO.Interface.googlemaps.TIPOMAPA = "satellite";
-
-i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
-i3GEO.janela.TRANSICAOSUAVE = true;
-
-i3GEO.finaliza = function(){
-	if($i("i3GEOlogoMarca")){
-		$i("i3GEOlogoMarca").style.display = "none";
-	}
-	i3GEO.mapa.insereDobraPagina("openlayers","../imagens/dobraopenlayers.png");
-};
-i3GEO.finalizaAPI = function(){
-};
-i3GEO.inicia();
-
-function animaFluxo(){
-	animaFluxoLinhas = [];
-	animaFluxomAno ="";
-	animaFluxomMes = "";
-	animaFluxomDe = "";
-	animaFluxoLimpa();
-	i3GEO.janela.mensagemSimples(
-		"<div class='i3geoForm100 i3geoFormSemIcone' style='display: block;float:left; margin-right: 3px;'><input type=text size=10 value='' id='animaAno'/></div>   <div class='i3geoForm100 i3geoFormSemIcone' style='display: block'><input type=text size=10 value='' id='animaMes'/></div> <br><br><div style='overflow:auto;height:200px;' id='animaDe'> </div>",
-		"Anima&ccedil;&atilde;o"
-	);
-	animaFluxomAno = $i("animaAno");
-	animaFluxomMes = $i("animaMes");
-	animaFluxomDe = $i("animaDe");
-	var data,n,t,vl,d,p,cor,j,nm,multv,multvv;
-	data = datateste.data;
-	n = data.length;
-	t = 0;
-	vl = [];
-	for(i=0;i<n;i++){
-		d = data[i];
-		p = [new google.maps.LatLng(d.y2,d.x2),new google.maps.LatLng(d.y1,d.x1)];
-		if(t != 0 && t != d.ano+" "+ d.mes){
-			animaFluxoLinhas.push(vl);
-			vl = [];
+		i3GEO.cria();
+		i3GEO.configura.mapaRefDisplay = "none";
+		i3GEO.barraDeBotoes.ATIVA = true;
+		i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
+		//ajusta o deslocamento da barra de botoes
+		i3GEO.barraDeBotoes.OFFSET = 11;
+		//ajusta a posicao da barra de botoes no IE
+		if (navm) {
+			i3GEO.barraDeBotoes.OFFSET = 5;
 		}
-		cor = "red";
-		if(d.numocorrencias < 2){
-			cor = "yellow";
+		if (chro) {
+			i3GEO.barraDeBotoes.OFFSET = 15;
 		}
-		else if(d.numocorrencias < 10){
-			cor = "orange";
-		}		
-		vl.push(new google.maps.Polyline({
-			clickable : false,
-			strokeColor : cor,
-			strokeOpacity : 1,
-			strokeWeight : 2,
-			geodesic : true,
-			path : p,
-			origem : "aranha",
-			map : i3GeoMap,
-			visible : false,
-			ocorrencias : d.numocorrencias,
-			ano : d.ano,
-			mes : d.mes,
-			de : d.de,
-			parauf : d.parauf
-		}));
-		t = d.ano+" "+ d.mes;
-	}
-	nm = animaFluxoLinhas.length;
-	multv = [];
-	multvv = [];
-	for(j=0;j<nm;j++){
-		multv.push(animaFluxoVisivel);
-		multvv.push([j]);
-		if(j > 0){
-			multv.push(animaFluxoMudaOp);
-			multvv.push([j-1]);
-		}
-	}
-	animaFluxoMultiStep(
-		multv,
-		multvv,
-		function() {
-			i3GEO.janela.mensagemSimples("Fim !!!");
-		});
-}
-function animaFluxoLimpa(){
-	var i,k,m,j,r,n;
-	n = animaFluxoLinhas.length;
-	for(i=0;i<n;i++){
-		k = animaFluxoLinhas[i];
-		m = k.length;
-		for(j=0;j<m;j++){
-			r = k[j]
-			r.setMap(null);
-		}
-	}
-	animaFluxoLinhas = [];
-	animaFluxomAno ="";
-	animaFluxomMes = "";
-	animaFluxomDe = "";
-}
-function animaFluxoVisivel(l){
-	var n,i,k,no;
-	k = animaFluxoLinhas[l];
-	n = k.length;
-	no = [];
-	for(i=0;i<n;i++){
-		k[i].setVisible(true);
-		animaFluxomAno.value = k[i].ano;
-		animaFluxomMes.value = k[i].mes;
-		no.push("<div style='width:25px;float:left;text-align: right;margin-right: 3px;'>"+k[i].ocorrencias+"</div> "+k[i].parauf+" "+k[i].de);
-	}
-	animaFluxomDe.innerHTML = no.join("<br>");
-}
-function animaFluxoMudaOp(n){
-	var i,k,m,j,r;
-	for(i=0;i<n;i++){
-		k = animaFluxoLinhas[i];
-		m = k.length;
-		for(j=0;j<m;j++){
-			r = k[j]
-			if(r.strokeOpacity == 1){
-				r.setOptions({strokeOpacity : 0.8});
+
+		i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
+		i3GEO.ajuda.ATIVAJANELA = false;
+		i3GEO.idioma.IDSELETOR = "seletorIdiomas";
+
+		//i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
+		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
+		i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = true;
+		i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
+		i3GEO.arvoreDeCamadas.MOSTRATITULO = true;
+		i3GEO.mapa.AUTORESIZE = true;
+		i3GEO.guias.TIPO = "movel";
+		i3GEO.guias.guiaMovel.config.topGuiaMovel = 36;
+		i3GEO.janela.ativaAlerta();
+		i3GEO.finaliza = function() {
+			if ($i("i3GEOlogoMarca")) {
+				$i("i3GEOlogoMarca").style.display = "none";
 			}
-			else if(r.strokeOpacity == 0.8){
-				r.setOptions({strokeOpacity : 0.5});
-			}
-			else if(r.strokeOpacity == 0.5){
-				r.setOptions({strokeOpacity : 0.3});
-			}
-			else if(r.strokeOpacity == 0.3){
-				r.setOptions({strokeOpacity : 0.1});
-			}
-			else if(r.strokeOpacity == 0.1){
-				r.setMap(null);
-			}
-		}
-	}
-}
-function animaFluxoRemovel(l){
-	var n,i,k;
-	k = animaFluxoLinhas[l];
-	n = k.length;
-	for(i=0;i<n;i++){
-		k[i].setMap(null);
-	}
-}
-function animaFluxoMultiStep(steps, args, callback) {
-	var tasks = steps.concat();// cria um clone
-	setTimeout(function() {
-		var task = tasks.shift(), a = args.shift();
-		task.apply(null, a || []);
-		if (tasks.length > 0) {
-			setTimeout(arguments.callee, 250);
-		} else {
-			var n,i;
-			n = animaFluxoLinhas.length - 1;
-			for(i=0;i<n;i++){
-				animaFluxoRemovel(i);
-			}			
-		}
-	}, 250);
-}
-</script>
+			//i3GEO.mapa.insereDobraPagina("googlemaps", "../imagens/dobragooglemaps.png");
+		};
+		//indica se a opcao de navegacao nas pastas do servidor sera ativada
+		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
+		i3GEO.janela.TRANSICAOSUAVE = true;
+		//desliga a camada com o mapa mundi
+		i3GEO.configura.mashuppar = "&desligar=mundo";
+		(function() {
+			var attribOSMData = 'Map Data: &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors';
+			var attribMapQuestOSM = attribOSMData + ', Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
+			var attribMapQuestAerial = 'Map Data: &copy; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
+			var attribOpenCycleMap = 'Map Data: &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors';
+			var attribDEMData = '<a href="http://srtm.csi.cgiar.org/">SRTM</a>; ASTER GDEM is a product of <a href="http://www.meti.go.jp/english/press/data/20090626_03.html">METI</a> and <a href="https://lpdaac.usgs.gov/products/aster_policies">NASA</a>';
+			var attribStamen = 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA';
+			var mapSurfer = 'Map data © OpenStreetMap contributors, Imagery GIScience Research Group @ Heidelberg University';
+
+			var osm = new ol.layer.Tile({
+				title : "OSM Layer",
+				visible : true,
+				isBaseLayer : true,
+				name : "osm",
+				source: new ol.source.OSM({
+			    	  attributions : [new ol.Attribution({html: attribOSMData})],
+			    	  crossOrigin : "anonymous",
+			    	  url : "http://tile.openstreetmap.org/{z}/{x}/{y}.png",
+			    	  projection: 'EPSG:3857'
+			      })
+			    });
+			tdb = new ol.layer.Tile({
+				  name : "tdb",
+				  isBaseLayer : true,
+				  title : "OSM Tile",
+				  visible : true,
+			      source: new ol.source.TileDebug({
+			        projection: 'EPSG:3857',
+			        tileGrid: new ol.source.OSM().getTileGrid()
+			      })
+			    });
+			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [osm,tdb];
+
+			/*
+
+			var eng = new ol.layer.Tile({
+				title : "ESRI National Geographic",
+				visible : true,
+				isBaseLayer : true,
+				name : "eng",
+				source : new ol.source.TileArcGISRest({
+					url : "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
+					attributions: [
+						new ol.Attribution({
+							html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
+						})
+					]
+				})
+			});
+			var oce = new ol.layer.Tile({
+				title : "ESRI Ocean Basemap",
+				visible : false,
+				isBaseLayer : true,
+				name : "oce",
+				source : new ol.source.TileArcGISRest({
+					url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
+					attributions: [
+						new ol.Attribution({
+							html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
+						})
+					]
+				})
+			});
+			var ims = new ol.layer.Tile({
+				title : "ESRI Imagery World 2D",
+				visible : false,
+				isBaseLayer : true,
+				name : "ims",
+				source : new ol.source.TileArcGISRest({
+					url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
+					attributions: [
+						new ol.Attribution({
+							html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
+						})
+					]
+				})
+			});
+			var wsm = new ol.layer.Tile({
+				title : "ESRI World Street Map",
+				visible : false,
+				isBaseLayer : true,
+				name : "wsm",
+				source : new ol.source.TileArcGISRest({
+					url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
+					attributions: [
+						new ol.Attribution({
+							html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
+						})
+					]
+				})
+			});
+			var bra = new ol.layer.Tile({
+				title : "Base carto MMA",
+				visible : false,
+				isBaseLayer : true,
+				name : "bra",
+				source : new ol.source.TileWMS({
+					url : "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
+					params : {
+						'layers' : "baseraster",
+						'srs' : "EPSG:4326",
+						'format' : "image/png"
+					}
+				})
+			});
+			var tms = new ol.layer.Tile({
+				title : "OSGEO",
+				visible : false,
+				isBaseLayer : true,
+				name : "tms",
+				source : new ol.source.TileWMS({
+					url : "http://tilecache.osgeo.org/wms-c/Basic.py/",
+					params : {
+						'layers' : "basic",
+						'type' : "png",
+						'srs' : "EPSG:4326",
+						'format' : "image/png",
+						'VERSION' : '1.1.1'
+					},
+					attributions: [
+						new ol.Attribution({
+							html: '&copy; <a href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
+						})
+					]
+				})
+			});
+			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [
+				eng, oce, ims, wsm, bra, tms
+			];
+			*/
+		})();
+
+		i3GEO.inicia();
+	</script>
 </body>
 </html>

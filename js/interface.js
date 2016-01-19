@@ -955,6 +955,7 @@ i3GEO.Interface =
 				}
 				else{
 					i3GEO.Interface.openlayers.parametrosView.projection = "EPSG:3857";
+					//i3GEO.Interface.openlayers.parametrosView.extent = ol.proj.get('EPSG:3857').getExtent();
 				}
 				i3GEO.Interface.openlayers.parametrosMap.view = new ol.View(i3GEO.Interface.openlayers.parametrosView);
 				i3GEO.Interface.openlayers.parametrosMap.interactions = i3GEO.Interface.openlayers.interacoes;
@@ -1518,6 +1519,7 @@ i3GEO.Interface =
 									opcoes.isBaseLayer = false;
 									opcoes.visible = true;
 								} else {
+
 									// verifica se havera apenas um tile
 									// 10 e do tipo grid de coordenadas
 									if (camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim"
@@ -1885,11 +1887,12 @@ i3GEO.Interface =
 				//
 				i3geoOL.on("pointerdrag", function(e) {
 					i3GEO.Interface.STATUS.pan = true;
-					//var xy;
 					modoAtual = "move";
 					i3GEO.barraDeBotoes.BOTAOCLICADO = "pan";
-					//xy = i3GEO.navega.centroDoMapa();
-					//i3GEO.navega.marcaCentroDoMapa(xy);
+					//nao marca o centro se o campo de coordenadas nao existir
+					if(i3GEO.configura.mostraCentroDoMapa === true && $i("localizarxygeoProjxg")){
+						i3GEO.navega.marcaCentroDoMapa(i3GEO.navega.centroDoMapa());
+					}
 				});
 				i3geoOL.on("click", function(e) {
 					e.stopPropagation();
@@ -1979,6 +1982,7 @@ i3GEO.Interface =
 				i3GEO.gadgets.atualizaEscalaNumerica(parseInt(escalaAtual, 10));
 			},
 			zoom2ext : function(ext) {
+
 				var m, v;
 				ext = i3GEO.util.extGeo2OSM(ext);
 				m = ext.split(" ");
@@ -1992,14 +1996,13 @@ i3GEO.Interface =
 			pan2ponto : function(x, y) {
 				// verifica se nao e necessario alterar as coordenadas
 				if (i3GEO.Interface.openlayers.googleLike === true) {
-					var projWGS84, proj900913, point, metrica;
+					var metrica;
 					if (x < 180 && x > -180) {
-						projWGS84 = new OpenLayers.Projection("EPSG:4326");
-						proj900913 = new OpenLayers.Projection("EPSG:900913");
-						point = new OpenLayers.LonLat(x, y);
-						metrica = point.transform(projWGS84, proj900913);
-						x = metrica.lon;
-						y = metrica.lat;
+						metrica = ol.proj.transform(
+							[x,y], 'EPSG:4326', 'EPSG:3857'
+						);
+						x = metrica[0];
+						y = metrica[1];
 					}
 				}
 				i3geoOL.panTo(x, y);
@@ -2701,10 +2704,10 @@ i3GEO.Interface =
 				i3GEOtouchesPosMapa = "";
 				modoAtual = "";
 				google.maps.event.addListener(i3GeoMap, "dragstart", function() {
-					//var xy;
 					modoAtual = "move";
-					//xy = i3GEO.navega.centroDoMapa();
-					//i3GEO.navega.marcaCentroDoMapa(xy);
+					if(i3GEO.configura.mostraCentroDoMapa === true && $i("localizarxygeoProjxg")){
+						i3GEO.navega.marcaCentroDoMapa(i3GEO.navega.centroDoMapa());
+					}
 					i3GEO.eventos.cliquePerm.status = false;
 				});
 				google.maps.event.addListener(i3GeoMap, "dragend", function() {

@@ -3734,6 +3734,12 @@ background-position:-812px -28px;
 .olControlEditingToolbar1 .editorOLselecaoTudoItemInactive {
 background-position:-812px -0px;
 }
+.olControlEditingToolbar1 .editorOLnovaabaItemActive {
+background-position:-841px -28px;
+}
+.olControlEditingToolbar1 .editorOLnovaabaItemInactive {
+background-position:-841px -0px;
+}
 .olControlEditingToolbar1 {
 width:750px;
 float:right;

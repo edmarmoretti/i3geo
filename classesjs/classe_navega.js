@@ -70,6 +70,7 @@ i3GEO.navega =
 			posicao : 0,
 			emAcao : false
 		},
+		//TODO remover temponavegar
 		/**
 		 * Tempo em milisegundos que ser&aacute; esperado para executar uma opera&ccedil;&atilde;o de navega&ccedil;&atilde;o sobre o mapa.
 		 *
@@ -229,6 +230,10 @@ i3GEO.navega =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.navega.marcaCentroDoMapa()");
 
+			var t = $i("i3GeoCentroDoMapa");
+			if(t && t.style.display === "block"){
+				return;
+			}
 			if (xy != false) {
 				xy =
 					i3GEO.calculo.dd2tela(

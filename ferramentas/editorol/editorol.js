@@ -113,7 +113,8 @@ i3GEO.editorOL =
 			'undo' : false,
 			'frente' : false,
 			'legenda' : true,
-			'rodadomouse' : true
+			'rodadomouse' : true,
+			'novaaba' : false
 		},
 		pontos : [],
 		marca : "../pacotes/openlayers/img/marker-gold.png",
@@ -194,6 +195,7 @@ i3GEO.editorOL =
 				i3GEO.editorOL.botoes.tools = false;
 				i3GEO.editorOL.botoes.undo = false;
 				i3GEO.editorOL.botoes.frente = false;
+				i3GEO.editorOL.botoes.novaaba = false;
 			}
 			if (i3GEO.editorOL.mapa === "") {
 				alert("O objeto i3GEO.editorOL.mapa nao existe. Precisa ser criado com new OpenLayers.Map()");
@@ -791,7 +793,7 @@ i3GEO.editorOL =
 			i3GEO.editorOL.processageo("incorporar");
 		},
 		listaGeometriasSel : function() {
-			var n = i3GEO.editorOL.idsSelecionados.length, 
+			var n = i3GEO.editorOL.idsSelecionados.length,
 				ins = "",
 				s = i3GEO.desenho.layergrafico.getSource(),
 				i, w, g;
@@ -807,7 +809,7 @@ i3GEO.editorOL =
 			alert("Funcao nao disponivel. Defina o nome da funcao em i3GEO.editorOL.nomeFuncaoSalvar ");
 		},
 		salvaGeo : function() {
-			var s = i3GEO.desenho.layergrafico.getSource(), 
+			var s = i3GEO.desenho.layergrafico.getSource(),
 				n = i3GEO.editorOL.idsSelecionados.length,
 				funcaoOK = function() {
 					// verifica se a geometria contem o atributo que indica a coluna ou codigo unico
@@ -834,26 +836,26 @@ i3GEO.editorOL =
 
 					// cria um novo registro
 					if(!f.getProperties().idUnico || f.getProperties().idUnico == ""){
-						p = i3GEO.configura.locaplic 
+						p = i3GEO.configura.locaplic
 							+ "/ferramentas/editortema/exec.php?funcao=adicionaGeometria&g_sid="
 							+ i3GEO.configura.sid;
 						cpJSON.call(p, "foo", redesenha, "&tema=" + tema + "&wkt=" + format.writeFeatures([f]));
 					} else {
 						// atualiza a geometria
-						p = i3GEO.configura.locaplic 
+						p = i3GEO.configura.locaplic
 							+ "/ferramentas/editortema/exec.php?funcao=atualizaGeometria&g_sid="
 							+ i3GEO.configura.sid;
 						cpJSON.call(
-							p, 
-							"foo", 
-							redesenha, 
+							p,
+							"foo",
+							redesenha,
 							"&idunico=" + f.getProperties().idUnico + "&tema=" + tema + "&wkt=" + format.writeFeatures([f])
 						);
 					}
 				},
 				funcaoCombo = function(obj) {
 					$i("editorOLondeComboTemaEditavel").innerHTML = obj.dados;
-				}, 
+				},
 				texto = $trad("stema") + ":<br><div id=editorOLondeComboTemaEditavel  ></div><p class=paragrafo >"+$trad("salvaDadosEditor")+"</p><br><br>";
 			//monta a janela para o usuario escolher em qual camada os dados serao salvos
 			if (n != 1) {
@@ -1368,6 +1370,15 @@ i3GEO.editorOL =
 			};
 			return temp;
 		},
+		botaoNovaaba: function(){
+			var temp = document.createElement("div");
+			temp.className = "editorOLnovaabaItemInactive olButton";
+			temp.title = $trad("novaaba");
+			temp.onclick = function(){
+				window.open(window.location, '_blank');
+			};
+			return temp;
+		},
 		botaoAjuda: function(){
 			var temp = document.createElement("div");
 			temp.className = "editorOLajudaItemInactive olButton";
@@ -1592,8 +1603,11 @@ i3GEO.editorOL =
 			if (botoes.salva === true) {
 				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoSalva());
 			}
-			if (botoes.ajuda === true) {
+			if (botoes.novaaba === true) {
 				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoAjuda());
+			}
+			if (botoes.ajuda === true) {
+				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoNovaaba());
 			}
 			if (botoes.fecha === true) {
 				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoFecha());
@@ -2077,8 +2091,8 @@ i3GEO.editorOL =
 			}
 		},
 		merge : function(geoms) {
-			var n = geoms.length, 
-				w = new Wkt.Wkt(), 
+			var n = geoms.length,
+				w = new Wkt.Wkt(),
 				g, m, i,f,
 				format = new ol.format.WKT();
 				f = format.writeFeatures([geoms[0]]);

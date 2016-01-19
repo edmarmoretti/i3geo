@@ -2107,7 +2107,7 @@ i3GEO.util =
 		 * {string} - id do elemento que recebera a mensagem de aguarde
 		 *
 		 * {string} - Prefixo que sera usado no name de cada elemento
-		 * 
+		 *
 		 * {string} - sim|nao Marca como escolhido o primeiro valor
 		 */
 		radioEpsg : function(funcao, onde, prefixo, marcado) {
@@ -2944,11 +2944,11 @@ i3GEO.util =
 					temp = ext.split(sep);
 				}
 				if (temp[0] * 1 <= 180 && temp[0] * 1 >= -180) {
-					point = new ol.geom.Point([temp[0], temp[1]]);
+					point = new ol.geom.Point([temp[0]*1, temp[1]*1]);
 					metrica = point.transform("EPSG:4326","EPSG:900913");
 					ext = metrica.getCoordinates()[0] + sep + metrica.getCoordinates()[1];
 					if (temp.length > 2) {
-						point = new ol.geom.Point([temp[2], temp[3]]);
+						point = new ol.geom.Point([temp[2]*1, temp[3]*1]);
 						metrica = point.transform("EPSG:4326","EPSG:900913");
 						ext += sep + metrica.getCoordinates()[0] + sep + metrica.getCoordinates()[1];
 					}

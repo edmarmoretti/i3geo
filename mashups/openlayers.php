@@ -224,6 +224,9 @@ if(isset($botoes)){
 	if(in_array("texto",$botoes)){
 		$objBotoes[] = "'texto':true";
 	}
+	if(in_array("novaaba",$botoes)){
+		$objBotoes[] = "'novaaba':true";
+	}
 	$botoes = "{".implode(",",$objBotoes)."}";
 }
 
@@ -506,6 +509,7 @@ function ajuda(){
 	fecha
 	corta
 	legenda
+	novaaba
 
 	Para ver a lista de c&oacute;digos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os c&oacute;digos s&atilde;o mostrados em vermelho.

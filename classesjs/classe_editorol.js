@@ -151,7 +151,8 @@ i3GEO.editorOL = {
 		'undo':false,
 		'frente':false,
 		'legenda':true,
-		'rodadomouse':true
+		'rodadomouse':true,
+		'novaaba':false
 	},
 	pontos: [],
 	marca: "../pacotes/openlayers/img/marker-gold.png",
@@ -234,6 +235,7 @@ i3GEO.editorOL = {
 			i3GEO.editorOL.botoes.tools=false;
 			i3GEO.editorOL.botoes.undo=false;
 			i3GEO.editorOL.botoes.frente=false;
+			i3GEO.editorOL.botoes.novaaba=false;
 		}
 		if(i3GEO.editorOL.mapa === ""){
 			alert("O objeto i3GEO.editorOL.mapa nao existe. Precisa ser criado com new OpenLayers.Map()");
@@ -1488,6 +1490,18 @@ i3GEO.editorOL = {
 				displayClass: "editorOLsalva",
 				trigger: function(){i3GEO.editorOL.salvaGeometrias();},
 				title: $trad("salva"),
+				type: OpenLayers.Control.TYPE_BUTTON
+			});
+			controles.push(button);
+			adiciona = true;
+		}
+		if(botoes.novaaba===true){
+			button = new OpenLayers.Control.Button({
+				displayClass: "editorOLnovaaba",
+				trigger: function(){
+					window.open(window.location, '_blank');
+				},
+				title: $trad("novaaba"),
 				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);

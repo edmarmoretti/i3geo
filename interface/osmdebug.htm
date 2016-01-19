@@ -146,6 +146,7 @@
 		i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
 
 		i3GEO.Interface.openlayers.TILES = true;
+		//deve ser inserido antes de cria()
 		i3GEO.Interface.openlayers.googleLike = true;
 
 		i3GEO.configura.guardaExtensao = true;
@@ -207,7 +208,7 @@
 				source: new ol.source.OSM({
 			    	  attributions : [new ol.Attribution({html: attribOSMData})],
 			    	  crossOrigin : "anonymous",
-			    	  url : "http://tile.openstreetmap.org/${z}/${x}/${y}.png"
+			    	  url : "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
 			      })
 			    });
 			tdb = new ol.layer.Tile({
