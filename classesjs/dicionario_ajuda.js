@@ -3,8 +3,8 @@ g_traducao_ajuda = {
 		"1": {
 			titulo: {
 				pt: "Filtro de cores",
-				es: "",
-				en: ""
+				es: "Color filter",
+				en: "Filtro de colores"
 			},
 			diretorio:"i3geo/ferramentas/tipoimagem",
 			categoria:"1",
@@ -16,8 +16,8 @@ g_traducao_ajuda = {
 		"2": {
 			titulo: {
 				pt: "Legenda",
-				es: "",
-				en: ""
+				es: "Legend",
+				en: "Leyenda"
 			},
 			diretorio:"i3geo/ferramentas/opcoes_legenda",
 			categoria:"1",
