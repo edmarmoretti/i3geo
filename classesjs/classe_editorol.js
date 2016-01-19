@@ -963,6 +963,18 @@ i3GEO.editorOL = {
 				{c.trigger.call();}
 			}
 		});
+		if(botoes.novaaba===true){
+			button = new OpenLayers.Control.Button({
+				displayClass: "editorOLnovaaba",
+				trigger: function(){
+					window.open(window.location, '_blank');
+				},
+				title: $trad("novaaba"),
+				type: OpenLayers.Control.TYPE_BUTTON
+			});
+			controles.push(button);
+			adiciona = true;
+		}
 		if(botoes.procura===true){
 			button = new OpenLayers.Control.Button({
 				displayClass: "editorOLprocura",
@@ -1490,18 +1502,6 @@ i3GEO.editorOL = {
 				displayClass: "editorOLsalva",
 				trigger: function(){i3GEO.editorOL.salvaGeometrias();},
 				title: $trad("salva"),
-				type: OpenLayers.Control.TYPE_BUTTON
-			});
-			controles.push(button);
-			adiciona = true;
-		}
-		if(botoes.novaaba===true){
-			button = new OpenLayers.Control.Button({
-				displayClass: "editorOLnovaaba",
-				trigger: function(){
-					window.open(window.location, '_blank');
-				},
-				title: $trad("novaaba"),
 				type: OpenLayers.Control.TYPE_BUTTON
 			});
 			controles.push(button);

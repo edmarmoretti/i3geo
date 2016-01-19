@@ -1531,6 +1531,9 @@ i3GEO.editorOL =
 			i3GEOpanelEditor.id = "i3GEObarraEdicao";
 			i3GEOpanelEditor.className = "olControlEditingToolbar1 noprint";
 			//cria os icones
+			if (botoes.novaaba === true) {
+				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoNovaaba());
+			}
 			if (botoes.procura === true) {
 				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoProcura());
 			}
@@ -1603,11 +1606,8 @@ i3GEO.editorOL =
 			if (botoes.salva === true) {
 				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoSalva());
 			}
-			if (botoes.novaaba === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoAjuda());
-			}
 			if (botoes.ajuda === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoNovaaba());
+				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoAjuda());
 			}
 			if (botoes.fecha === true) {
 				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoFecha());
