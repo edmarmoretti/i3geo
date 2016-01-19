@@ -479,5 +479,10 @@ i3GEOF.preferencias.dicionario = {
 		pt : "Utiliza uma entra &uacute;nica para o menu suspenso",
 		en : "",
 		es : ""
+	} ],
+	'mostraCentroDoMapa' : [ {
+		pt : "Mostra o centro do mapa durante a navega&ccedil;&atilde;o do tipo PAN",
+		en : "",
+		es : ""
 	} ]
 };

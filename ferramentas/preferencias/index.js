@@ -314,8 +314,11 @@ i3GEOF.preferencias = {
 						tipo: "select",
 						elemento: "i3GEO.coordenadas.padrao",
 						opcoes: ["geoProj","dd","policonicaSad69","utmSad69Proj","utmSirgas2000Proj"]
+					},{
+						titulo: $trad('mostraCentroDoMapa',i3GEOF.preferencias.dicionario),
+						tipo: "boolean",
+						elemento: "i3GEO.configura.mostraCentroDoMapa"
 					}
-
 				]
 			},{
 				titulo: $trad('buscaRapida',i3GEOF.preferencias.dicionario), //busca rapida
