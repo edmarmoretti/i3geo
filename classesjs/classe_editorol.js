@@ -80,30 +80,37 @@ i3GEO.editorOL = {
 		"ESRI Ocean Basemap",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
 		{format:"jpeg"},
-		{isBaseLayer:true,visibility:false}
+		{
+			isBaseLayer:true,
+			visibility:false,
+			attribution: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
+		}
 	),
 	e_ims: new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI Imagery World 2D",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
 		{format:"jpeg"},
-		{isBaseLayer:true,visibility:false}
+		{
+			isBaseLayer:true,
+			visibility:false,
+			attribution : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
+		}
 	),
 	e_wsm: new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI World Street Map",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
 		{format:"jpeg"},
-		{isBaseLayer:true,visibility:false}
+		{
+			isBaseLayer:true,
+			visibility:false,
+			attribution : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
+		}
 	),
 	ol_mma: new OpenLayers.Layer.WMS(
 		"Base cartogr&aacute;fica",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
 		{layers:'baseraster',SRS:'EPSG:4618',FORMAT:'image/png'},
 		{singleTile:false}
-	),
-	ol_wms: new OpenLayers.Layer.WMS(
-		"OpenLayers WMS",
-		"http://labs.metacarta.com/wms/vmap0",
-		{layers: 'basic'}
 	),
 	top_wms: new OpenLayers.Layer.WMS(
 		"Topon&iacute;mia MMA",
@@ -119,7 +126,8 @@ i3GEO.editorOL = {
 		"http://tile.openstreetmap.org/${z}/${x}/${y}.png", {
 			isBaseLayer : true,
 			visibility : false
-		}),
+		}
+	),
 	fundo: "e_ims,e_wsm,ol_mma,ol_wms,top_wms,est_wms,e_oce",
 	kml: [],
 	layersIniciais: [],
@@ -163,7 +171,8 @@ i3GEO.editorOL = {
 		new OpenLayers.Control.ScaleLine(),
 		new OpenLayers.Control.MousePosition({'separator':' '}),
 		new OpenLayers.Control.OverviewMap(),
-		new OpenLayers.Control.KeyboardDefaults()
+		new OpenLayers.Control.KeyboardDefaults(),
+		new OpenLayers.Control.Attribution()
 	],
 	tiles: true,
 	incluilayergrafico: true,
