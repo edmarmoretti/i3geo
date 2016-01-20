@@ -536,7 +536,7 @@ i3GEOF.legenda =
 							exp = (retorno.data[i].expressao).replace(re, '"');
 
 							ins.push("<tr>");
-							ins.push("<td><div style='cursor:pointer' title='" + $trad('cliqueExclui', i3GEOF.legenda.dicionario)
+							ins.push("<td><div style='cursor:pointer;height:14px;' title='" + $trad('cliqueExclui', i3GEOF.legenda.dicionario)
 								+ "' onclick='i3GEOF.legenda.excluilinhaf(this)' src='"
 								+ i3GEO.configura.locaplic
 								+ "/imagens/x.gif' title='excluir' class='i3GEOiconeXis' >&nbsp;</div></td>");
