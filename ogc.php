@@ -976,6 +976,7 @@ if(strtolower($OUTPUTFORMAT) == "csv"){
 	ms_ioresethandlers();
 	exit;
 }
+//echo $req->getValue(1);exit;
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
 $buffer = ms_iogetStdoutBufferBytes();
