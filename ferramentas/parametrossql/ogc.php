@@ -374,6 +374,11 @@ if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
 	if($req->getValueByName("FORMAT") == "text/html"){
 		//$req->setParameter("FORMAT","image/png");
 		$l = $oMap->getlayerbyname($req->getValueByName("LAYER"));
+		//o nome do layer pode ter sido alterado no mapfile caso o cache esteja ativo
+		//nesse caso, pega o primeiro layer
+		if($l == ""){
+			$l = $oMap->getlayer(0);
+		}
 		$l->set("status",MS_DEFAULT);
 		//remove offset de simbolos pontuais
 		$nclass = $l->numclasses;
