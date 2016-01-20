@@ -1393,6 +1393,12 @@ i3GEO.Interface =
 					layer = "";
 					camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 					opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);
+					if(camada.exttema && camada.exttema != ""){
+						opcoes.maxExtent = camada.exttema.split(" ");
+					}
+					else{
+						opcoes.maxExtent = null;
+					}
 					// verifica se a camada ja existe no mapa
 					// o copyright &eacute; colocado no mapa como um elemento html.
 					// O LAYER com "name = copyright " s&oacute; &eacute; usado
@@ -1434,7 +1440,8 @@ i3GEO.Interface =
 										layer = new OpenLayers.Layer.TMS(camada.name, camada.wmsurl, {
 											isBaseLayer : false,
 											layername : camada.wmsname,
-											type : 'png'
+											type : 'png',
+											maxExtent : opcoes.maxExtent
 										});
 									} else {
 										layer = new OpenLayers.Layer.WMS(camada.name, urllayer, {
@@ -1467,6 +1474,7 @@ i3GEO.Interface =
 									if (camada.tiles === "sim" || camada.cache === "sim" || (camada.cortepixels && camada.cortepixels > 0)) {
 										opcoes.singleTile = false;
 									}
+
 									if (opcoes.singleTile === true) {
 										if (i3GEO.Interface.openlayers.googleLike === true) {
 											opcoes.projection = new OpenLayers.Projection("EPSG:3857");
@@ -1491,10 +1499,10 @@ i3GEO.Interface =
 												serviceVersion : "&tms=",
 												type : "png",
 												layername : camada.name,
-												map_imagetype : i3GEO.Interface.OUTPUTFORMAT
+												map_imagetype : i3GEO.Interface.OUTPUTFORMAT,
+												maxExtent : opcoes.maxExtent
 											}, opcoes);
 										}
-
 									}
 								}
 							} catch (e) {

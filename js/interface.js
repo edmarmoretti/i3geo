@@ -1404,6 +1404,7 @@ i3GEO.Interface =
 			 * Cria os layers conforme os parametros definidos em i3GEO.arvoreDeCamadas.CAMADAS
 			 */
 			criaLayers : function() {
+				//TODO incluir parametro que permita restringir o desenho do layer de acordo com a extensao definida em exttema
 				var matrixIds, resolutions, size, z, projectionExtent, source, configura = i3GEO.configura, url, nlayers =
 					i3GEO.arvoreDeCamadas.CAMADAS.length, layer, camada, urllayer, opcoes, i, temp;
 
