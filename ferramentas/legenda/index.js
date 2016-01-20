@@ -106,6 +106,7 @@ i3GEOF.legenda =
 			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.legenda.dicionario);
 			dicionario["locaplic"] = i3GEO.configura.locaplic;
 			dicionario["asp"] = '"';
+			dicionario["aplicar"] = $trad("p14");
 			return dicionario;
 		},
 		/*

@@ -1,4 +1,4 @@
-/*  
+/*
  *   Copyright 2012 OSBI Ltd
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +13,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
- 
+
 /**
  * Object which handles authentication and stores connections and cubes
  * @param username
@@ -24,7 +24,7 @@ var Session = Backbone.Model.extend({
     username: null,
     password: null,
     sessionid: null,
-        
+
     initialize: function(args, options) {
         // Attach a custom event bus to this model
         _.extend(this, Backbone.Events);
@@ -43,7 +43,7 @@ var Session = Backbone.Model.extend({
     check_session: function() {
         if (this.sessionid === null || this.username === null || this.password === null) {
             this.clear();
-            this.fetch({ success: this.process_session })
+            this.fetch({ success: this.process_session });
         } else {
             this.username = encodeURIComponent(options.username);
             this.load_session();
@@ -71,24 +71,24 @@ var Session = Backbone.Model.extend({
             }
             this.load_session();
         }
-        
+
         return this;
     },
-    
+
     error: function() {
         $(this.form.el).dialog('open');
     },
-    
+
     login: function(username, password) {
         // Set expiration on localStorage to one day in the future
-        var expires = (new Date()).getTime() + 
+        var expires = (new Date()).getTime() +
             Settings.LOCALSTORAGE_EXPIRATION;
         typeof localStorage !== "undefined" && localStorage && localStorage.setItem('expiration', expires);
 
         this.save({username:username, password:password},{success: this.check_session, error: this.check_session});
-        
+
     },
-    
+
     logout: function() {
         //This is a hack (inherited from old UI)
         Saiku.ui.unblock();
@@ -105,7 +105,7 @@ var Session = Backbone.Model.extend({
         this.password = null;
         this.destroy({async: false });
         //console.log("REFRESH!");
-        document.location.reload(false)
+        document.location.reload(false);
         delete this.id;
 
     },
