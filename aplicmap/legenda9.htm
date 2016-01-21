@@ -1,0 +1,53 @@
+<!--
+[leg_layer_html opt_flag=1]
+	</div>
+	<div style='display:block;float:left;padding-top: 5px;' id='legendaLayer_[leg_layer_name]' >
+	[if name=TEMA oper=neq value=NAO]
+		<table [if name=CLASSE oper=eq value=NAO] style=display:none;  [/if] >
+			<tr><td style=text-align:left >
+			<img style='position:relative;top:3px;' class='i3GEOLegendaExcluiTema' onclick='i3GEO.mapa.legendaHTML.escondeTema("[leg_layer_name]")' title="Esconde" src="../imagens/oxygen/16x16/edit-delete.png" >
+			<b><span class=legendaTema ><input value="[leg_layer_name]" name="layer" onclick="i3GEO.mapa.legendaHTML.ativaDesativaTema(this)" type=checkbox checked class=inputsb style=opacity:0.3;cursor:pointer;position:relative;top:2px;left:2px; >&nbsp;&nbsp;[metadata name=TEMA]</span></b><br>  </td>
+			</tr>
+			[if name=legendawms oper=isset ]
+				<tr><td style=text-align:left ><img src='[metadata name=legendawms]' /></td></tr>
+			[/if]
+			[if name=legendaimg oper=isset ]
+				<tr><td style=text-align:left ><img src='[metadata name=legendaimg]' /></td></tr>
+			[/if]
+		</table>
+	[/if]
+[/leg_layer_html]
+
+[leg_class_html]
+<table style=margin-top:5px;position:relative;left:22px; >
+	[if name=legendaimg oper=isnull ]
+		[if name=CLASSE oper=neq value=NAO]
+				<tr>
+					<td style=width:20px;text-align:left; ><input type=checkbox CHECKED title=liga/desliga class=inputsb style='border: 0px solid red;cursor:pointer;opacity:0.3;' value=[leg_class_index] name=[leg_layer_name] id='legendack_[leg_layer_name]_[leg_class_index]' onclick='i3GEO.arvoreDeCamadas.inverteStatusClasse(this)' />
+					</td>
+					<td style=text-align:left >
+						[if name=layer_type oper=eq value=0]
+						<img src=[leg_icon  width=30 height=30 ] />
+						[/if]
+						[if name=layer_type oper=eq value=1]
+						<img src=[leg_icon  width=30 height=16 ] />
+						[/if]
+						[if name=layer_type oper=eq value=2]
+						<img src=[leg_icon  width=30 height=16 ] />
+						[/if]
+						[if name=layer_type oper=eq value=3]
+						<img src=[leg_icon  width=30 height=16 ] />
+						[/if]
+						[if name=layer_type oper=eq value=8]
+						<img src=[leg_icon  width=30 height=16 ] />
+						[/if]
+					</td>
+					<td style="text-align:left;width:195px" ><span style="font-size:11px;position:relative;left:2px;" >[leg_class_name]</span></td>
+				</tr>
+		[/if]
+	[/if]
+</table>
+
+
+[/leg_class_html]
+-->
