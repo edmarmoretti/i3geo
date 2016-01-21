@@ -6,7 +6,11 @@
 		<table [if name=CLASSE oper=eq value=NAO] style=display:none;  [/if] >
 			<tr><td style=text-align:left >
 			<img style='position:relative;top:3px;' class='i3GEOLegendaExcluiTema' onclick='i3GEO.mapa.legendaHTML.escondeTema("[leg_layer_name]")' title="Esconde" src="../imagens/oxygen/16x16/edit-delete.png" >
-			<b><span class=legendaTema ><input value="[leg_layer_name]" name="layer" onclick="i3GEO.mapa.legendaHTML.ativaDesativaTema(this)" type=checkbox checked class=inputsb style=opacity:0.3;cursor:pointer;position:relative;top:2px;left:2px; >&nbsp;&nbsp;[metadata name=TEMA]</span></b><br>  </td>
+			<b><span class=legendaTema ><input value="[leg_layer_name]" name="layer" onclick="i3GEO.mapa.legendaHTML.ativaDesativaTema(this)" type=checkbox checked class=inputsb style=opacity:0.3;cursor:pointer;position:relative;top:2px;left:2px; >
+			<label style='cursor:pointer;' onmouseout='this.childNodes[1].style.display="none";' onmouseover='this.childNodes[1].style.display="block";' onclick='i3GEO.tema.dialogo.mudanome("[leg_layer_name]")'>&nbsp;&nbsp;[metadata name=TEMA]
+			<div class='i3GEOiconeEditar' style='display:none;float:right;top:5px;' ></div>
+			</label>
+			</span></b><br>  </td>
 			</tr>
 			[if name=legendawms oper=isset ]
 				<tr><td style=text-align:left ><img src='[metadata name=legendawms]' /></td></tr>

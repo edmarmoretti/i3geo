@@ -958,7 +958,7 @@ i3GEO.configura =
 		 *
 		 * ""
 		 */
-		templateLegenda : "legenda8.htm",
+		templateLegenda : "legenda9.htm",
 		/**
 		 * Propriedade: mashuppar
 		 *
@@ -1728,7 +1728,8 @@ i3GEO.configura =
 					}
 				},
 				{
-					// abre a legenda
+					//abre a legenda
+					// o template utilizado na geracao da legenda e definido em i3GEO.configura.templateLegenda
 					iddiv : "abreJanelaLegenda",
 					tipo : "",
 					dica : $trad("p3"),

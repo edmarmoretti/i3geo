@@ -956,7 +956,7 @@ i3GEO.configura =
 		 *
 		 * ""
 		 */
-		templateLegenda : "legenda8.htm",
+		templateLegenda : "legenda9.htm",
 		/**
 		 * Propriedade: mashuppar
 		 *

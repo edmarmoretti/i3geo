@@ -2609,6 +2609,28 @@ background-size: 16px;
 .i3GEOiconeUpload {
 background-image: URL('../imagens/oxygen/16x16/svn-commit.png');
 }
+.i3GEOiconeEditar {
+width: 16px;
+height: 16px;
+border: 0;
+box-shadow: none;
+line-height: 1.5;
+-webkit-appearance: none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+font-size: 12px;
+appearance: none;
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll;
+background-size: 16px 16px;
+}
+}
+#i3GEOiconeEditarHover:hover + div{
+display: block;
+}
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}
 .toc {margin-left: 15px;}

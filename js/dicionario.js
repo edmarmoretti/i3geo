@@ -2736,5 +2736,12 @@ var g_traducao =
    				en : "Open in new tab",
    				es : "Abre en una nueva tab"
    			}
+   		],
+   		"novonome" : [
+   			{
+   				pt : "Novo nome",
+   				en : "New name",
+   				es : "Nuevo nombre"
+   			}
    		]
 	};
