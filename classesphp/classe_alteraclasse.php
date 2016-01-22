@@ -320,6 +320,109 @@ class Alteraclasse
 		}
 	}
 	/*
+	 function: metade
+	
+	Classifica os dados em duas classes, a primeira concentra os registros que somados correspondem &agrave; primeira metade do total e a segunda classe corresponde &agrave; segunda metade
+	
+	Parametros:
+	
+	$item - item da tabela de atributos
+	
+	$itemid - item que identifica unicamente cada registro
+	
+	$ignorar - valor que ser&aacute; ignorado na listagem final
+	*/
+	function metade($item,$itemid,$ignorar)
+	{
+		if(!$this->layer){
+			return "erro";
+		}
+		//cria um array contendo o id como chave e o valor
+		$valores = $this->pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
+		$ids = $this->pegaValores($this->mapa,$this->layer,$itemid,false,$ignorar);
+		$lista = array();
+		for ($i = 0; $i < count($valores); ++$i){
+			$lista[$ids[$i]] = $valores[$i];
+		}
+
+		if (count($lista) > 0){
+			asort($lista);
+			//$valores = array_unique($valores);
+			$numValues = count($lista);
+			//soma os valores
+			$total = array_sum($lista);
+			//metade
+			$metade = $total / 2;
+			//separa os dados em dois conjuntos
+			$metadeInf = array();
+			$metadeSup = array();
+			$IdNumerico = true;
+			$soma = 0;
+			$somaInf = 0;
+			$somaSup = 0;
+			$maxMetade1 = 0;
+			foreach ($lista as $k => $v) {
+				$soma = $soma + $v;
+				if($soma < $metade){
+					$metadeInf[] = $k;
+					$somaInf = $soma;
+					$maxMetade1 = $v;
+				}
+				else{
+					$metadeSup[] = $k;
+					$somaSup = $somaSup + $v;
+				}
+			}
+			$percInf = ($somaInf * 100) / $total;
+			$percSup = ($somaSup * 100) / $total;
+
+			$numclassesatual = $this->layer->numclasses;
+			//apaga todas as classes existentes
+			$classetemp = $this->layer->getClass(0);
+			$estilotemp = $classetemp->getStyle(0);
+			for ($i=0; $i < $numclassesatual; ++$i){
+				$classe = $this->layer->getClass($i);
+				$classe->set("status",MS_DELETE);
+			}
+			//adiciona as classes novas
+			$expressao = "('[".$itemid."]'in'".implode(",",$metadeInf)."')";
+			$nomeclasse = "Tot ".$somaInf.' ('.round($percInf,2).'%) Max: '.$maxMetade1;
+			$classe = ms_newClassObj($this->layer);
+			$novoestilo = ms_newStyleObj($classe);
+			if ($this->layer->type == 0){
+				$novoestilo->set("symbolname","ponto");
+				$novoestilo->set("size","6");
+			}
+			$ncor = $novoestilo->color;
+			$ncor->setrgb(246,183,134);
+			$ncor = $novoestilo->outlinecolor;
+			$ncor->setrgb(255,255,255);
+			$classe->setexpression($expressao);
+			$classe->set("name",$nomeclasse);
+
+			$expressao = "('[".$itemid."]'in'".implode(",",$metadeSup)."')";
+			$nomeclasse = "Tot ".$somaSup.' ('.round($percSup,2).'%) ';
+			$classe = ms_newClassObj($this->layer);
+			$novoestilo = ms_newStyleObj($classe);
+			if ($this->layer->type == 0){
+				$novoestilo->set("symbolname","ponto");
+				$novoestilo->set("size","6");
+			}
+			$ncor = $novoestilo->color;
+			$ncor->setrgb(210,111,111);
+			$ncor = $novoestilo->outlinecolor;
+			$ncor->setrgb(255,255,255);
+			$classe->setexpression($expressao);
+			$classe->set("name",$nomeclasse);
+
+			$this->layer->setMetaData("cache","");
+			return ("ok");
+		}
+		else{
+			return ("erro. Nenhum valor numerico no item");
+		}
+	}
+	/*
 	 function: quantil
 
 	Cria classes em um objeto layer com intervalos baseados no calculo de quantil

@@ -758,5 +758,26 @@ i3GEOF.legenda.dicionario =
 				en : "",
 				es : ""
 			}
-		]
+		],
+		"metade" : [
+ 			{
+ 				pt : "Metade",
+ 				en : "",
+ 				es : ""
+ 			}
+ 		],
+		"duasmetades" : [
+  			{
+  				pt : "Classifica os dados em duas classes, a primeira concentra os registros que somados correspondem &agrave; primeira metade do total e a segunda classe corresponde &agrave; segunda metade",
+  				en : "",
+  				es : ""
+  			}
+  		],
+		"iunico" : [
+ 			{
+ 				pt : "Coluna que identifica cada registro de forma &uacute;nica",
+ 				en : "",
+ 				es : ""
+ 			}
+ 		]
 	};

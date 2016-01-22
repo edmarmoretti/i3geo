@@ -1215,6 +1215,9 @@ switch (strtoupper($funcao))
 		if ($opcao == "quebrasnaturais"){
 			$retorno = $m->quebrasnaturais($item,$nclasses,$ignorar);
 		}
+		if ($opcao == "metade"){
+			$retorno = $m->metade($item,$itemid,$ignorar);
+		}
 		if ($opcao == "quartis"){
 			if(!isset($tipoLegenda))
 			{
