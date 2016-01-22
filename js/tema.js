@@ -601,7 +601,7 @@ i3GEO.tema =
 			 * Parametros:
 			 *
 			 * {string} - codigo do tema
-			 * 
+			 *
 			 * {objeto} - propriedades (ver ferramentas/graficotema/index.js funcao iniciaJanelaFlutuante)
 			 */
 			graficotema : function(idtema,propriedades) {
@@ -730,6 +730,33 @@ i3GEO.tema =
 					"legenda",
 					"dependencias.php",
 					"i3GEOF.legenda.iniciaJanelaFlutuante()");
+			},
+			/**
+			 * Function: editaClasseLegenda
+			 *
+			 * Abre a janela de dialogo da ferramenta legenda deiretamente no editor de simbolo de uma classe especifica
+			 *
+			 * Parametros:
+			 *
+			 * {string} - id que identifica o tema conforme definido no map file
+			 */
+			editaClasseLegenda : function(idtema,idclasse) {
+				i3GEO.mapa.ativaTema(idtema);
+				var temp = function() {
+					i3GEOF.legenda.aposIniciar = function(){
+						i3GEOF.legenda.classe = 0;
+						i3GEOF.legenda.estilo = 0;
+						i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_'+idtema+"-"+idclasse);
+						i3GEOF.legenda.aposIniciar = function(){};
+					};
+					i3GEOF.legenda.iniciaJanelaFlutuante(idtema);
+				};
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.tema.dialogo.editaLegenda()",
+					"legenda",
+					"legenda",
+					"dependencias.php",
+					temp);
 			},
 			/**
 			 * Function: download

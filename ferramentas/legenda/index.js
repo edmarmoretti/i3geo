@@ -100,6 +100,14 @@ i3GEOF.legenda =
 		 */
 		MUSTACHE : "",
 		/**
+		 * Funcao do usuario que e executada apos iniciar a ferramenta
+		 */
+		aposIniciar : function(){
+			i3GEOF.legenda.classe = 0;
+			i3GEOF.legenda.estilo = 0;
+			i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_'+i3GEOF.legenda.tema+"-0");
+		},
+		/**
 		 * Susbtitutos para o template
 		 */
 		mustacheHash : function() {
@@ -373,8 +381,10 @@ i3GEOF.legenda =
 					i3GEO.tema.invertestatuslegenda(i3GEOF.legenda.tema);
 				};
 				i3GEO.util.aplicaAquarela("i3GEOF.legenda_corpo");
+				i3GEOF.legenda.aposIniciar.call();
 			} catch (erro) {
 				i3GEO.janela.tempoMsg(erro);
+				i3GEOF.legenda.aposIniciar = function(){};
 			}
 			i3GEO.guias.ajustaGuiaFerramenta("i3GEOF.legenda", "i3GEOlegenda");
 		},
@@ -1338,7 +1348,7 @@ i3GEOF.legenda =
 				}
 				var item = $i("i3GEOlegendaitensMetade").getElementsByTagName("select")[0].value,
 					itemid = $i("i3GEOlegendaitensMetadeId").getElementsByTagName("select")[0].value,
-					ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten), 
+					ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten),
 					p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid="
 						+ i3GEO.configura.sid
 						+ "&funcao=alteraclasse"
@@ -1351,8 +1361,8 @@ i3GEOF.legenda =
 						+ "&opcao=metade&ignorar="
 						+ $i("i3GEOlegendaignorar").value
 						+ "&ext="
-						+ ext, 
-						cp = new cpaint(), 
+						+ ext,
+						cp = new cpaint(),
 						fim = function() {
 							i3GEOF.legenda.aposAlterarLegenda();
 							i3GEOF.legenda.aguarde.visibility = "hidden";

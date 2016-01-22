@@ -7,7 +7,7 @@
 			<tr><td style=text-align:left >
 			<img style='position:relative;top:3px;' class='i3GEOLegendaExcluiTema' onclick='i3GEO.mapa.legendaHTML.escondeTema("[leg_layer_name]")' title="Esconde" src="../imagens/oxygen/16x16/edit-delete.png" >
 			<b><span class=legendaTema ><input value="[leg_layer_name]" name="layer" onclick="i3GEO.mapa.legendaHTML.ativaDesativaTema(this)" type=checkbox checked class=inputsb style=opacity:0.3;cursor:pointer;position:relative;top:2px;left:2px; >
-			<label style='cursor:pointer;' onmouseout='this.childNodes[1].style.display="none";' onmouseover='this.childNodes[1].style.display="block";' onclick='i3GEO.tema.dialogo.mudanome("[leg_layer_name]")'>&nbsp;&nbsp;[metadata name=TEMA]
+			<label style='cursor:pointer;' onmouseout='this.getElementsByTagName("div")[0].style.display="none";' onmouseover='this.getElementsByTagName("div")[0].style.display="block";' onclick='i3GEO.tema.dialogo.mudanome("[leg_layer_name]")'>&nbsp;&nbsp;[metadata name=TEMA]
 			<div class='i3GEOiconeEditar' style='display:none;float:right;top:5px;' ></div>
 			</label>
 			</span></b><br>  </td>
@@ -30,6 +30,7 @@
 					<td style=width:20px;text-align:left; ><input type=checkbox CHECKED title=liga/desliga class=inputsb style='border: 0px solid red;cursor:pointer;opacity:0.3;' value=[leg_class_index] name=[leg_layer_name] id='legendack_[leg_layer_name]_[leg_class_index]' onclick='i3GEO.arvoreDeCamadas.inverteStatusClasse(this)' />
 					</td>
 					<td style=text-align:left >
+						<span style='cursor:pointer;' onmouseout='this.getElementsByTagName("div")[0].style.display="none";' onmouseover='this.getElementsByTagName("div")[0].style.display="block";' onclick='i3GEO.tema.dialogo.editaClasseLegenda("[leg_layer_name]",[leg_class_index])' >
 						[if name=layer_type oper=eq value=0]
 						<img src=[leg_icon  width=30 height=30 ] />
 						[/if]
@@ -45,8 +46,11 @@
 						[if name=layer_type oper=eq value=8]
 						<img src=[leg_icon  width=30 height=16 ] />
 						[/if]
+						<span style="font-size:11px;position:relative;left:2px;top: -3px;" >[leg_class_name]&nbsp;</span>
+						<div class='i3GEOiconeEditar' style='display:none;float:right;top:4px;' ></div>
+
+						</span>
 					</td>
-					<td style="text-align:left;width:195px" ><span style="font-size:11px;position:relative;left:2px;" >[leg_class_name]</span></td>
 				</tr>
 		[/if]
 	[/if]
