@@ -779,5 +779,19 @@ i3GEOF.legenda.dicionario =
  				en : "",
  				es : ""
  			}
- 		]
+ 		],
+		"media" : [
+ 			{
+ 				pt : "M&eacute;dia",
+ 				en : "",
+ 				es : ""
+ 			}
+ 		],
+		"duasmedias" : [
+  			{
+  				pt : "Classifica os dados em duas classes, a primeira concentra os registros que est&atilde;o abaixo da m&eacute;dia e a segunda aqueles que s&atilde;o iguais ou superiores a m&eacute;dia",
+  				en : "",
+  				es : ""
+  			}
+  		]
 	};

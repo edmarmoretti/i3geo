@@ -1218,6 +1218,9 @@ switch (strtoupper($funcao))
 		if ($opcao == "metade"){
 			$retorno = $m->metade($item,$itemid,$ignorar);
 		}
+		if ($opcao == "media"){
+			$retorno = $m->classemedia($item,$ignorar);
+		}
 		if ($opcao == "quartis"){
 			if(!isset($tipoLegenda))
 			{
@@ -2346,7 +2349,7 @@ switch (strtoupper($funcao))
 		 Valor: LISTAINTERFACES
 
 		Lista as interfaces de abertura de mapas
-		
+
 		Pesquisa na pasta interfaces e na pasta definida em $customDir
 		*/
 	case "LISTAINTERFACES":

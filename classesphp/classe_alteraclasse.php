@@ -321,15 +321,15 @@ class Alteraclasse
 	}
 	/*
 	 function: metade
-	
+
 	Classifica os dados em duas classes, a primeira concentra os registros que somados correspondem &agrave; primeira metade do total e a segunda classe corresponde &agrave; segunda metade
-	
+
 	Parametros:
-	
+
 	$item - item da tabela de atributos
-	
+
 	$itemid - item que identifica unicamente cada registro
-	
+
 	$ignorar - valor que ser&aacute; ignorado na listagem final
 	*/
 	function metade($item,$itemid,$ignorar)
@@ -410,6 +410,75 @@ class Alteraclasse
 			}
 			$ncor = $novoestilo->color;
 			$ncor->setrgb(210,111,111);
+			$ncor = $novoestilo->outlinecolor;
+			$ncor->setrgb(255,255,255);
+			$classe->setexpression($expressao);
+			$classe->set("name",$nomeclasse);
+
+			$this->layer->setMetaData("cache","");
+			return ("ok");
+		}
+		else{
+			return ("erro. Nenhum valor numerico no item");
+		}
+	}
+	/*
+	 function: classemedia
+
+	Classifica os dados em duas classes, a primeira concentra os registros que est&atilde;o abaixo da m&eacute;dia e a segunda aqueles que s&atilde;o iguais ou superiores a m&eacute;dia
+
+	Parametros:
+
+	$item - item da tabela de atributos
+
+	$ignorar - valor que ser&aacute; ignorado na listagem final
+	*/
+	function classemedia($item,$ignorar)
+	{
+		if(!$this->layer){
+			return "erro";
+		}
+		$valores = $this->pegaValores($this->mapa,$this->layer,$item,false,$ignorar);
+
+		if (count($valores) > 0){
+			$media = array_sum($valores) / count($valores);
+
+			$numclassesatual = $this->layer->numclasses;
+			//apaga todas as classes existentes
+			$classetemp = $this->layer->getClass(0);
+			$estilotemp = $classetemp->getStyle(0);
+			for ($i=0; $i < $numclassesatual; ++$i){
+				$classe = $this->layer->getClass($i);
+				$classe->set("status",MS_DELETE);
+			}
+			//adiciona as classes novas
+			$expressao = "([".$item."]<".$media.")";
+			$nomeclasse = "< media ".$media;
+			$classe = ms_newClassObj($this->layer);
+
+			$novoestilo = ms_newStyleObj($classe);
+			if ($this->layer->type == 0){
+				$novoestilo->set("symbolname","ponto");
+				$novoestilo->set("size","6");
+			}
+			$ncor = $novoestilo->color;
+			$ncor->setrgb(200,183,134);
+			$ncor = $novoestilo->outlinecolor;
+			$ncor->setrgb(255,255,255);
+			$classe->setexpression($expressao);
+			$classe->set("name",$nomeclasse);
+
+			$expressao = "([".$item."]>=".$media.")";
+			$nomeclasse = ">= media ".$media;
+			$classe = ms_newClassObj($this->layer);
+
+			$novoestilo = ms_newStyleObj($classe);
+			if ($this->layer->type == 0){
+				$novoestilo->set("symbolname","ponto");
+				$novoestilo->set("size","6");
+			}
+			$ncor = $novoestilo->color;
+			$ncor->setrgb(210,100,100);
 			$ncor = $novoestilo->outlinecolor;
 			$ncor->setrgb(255,255,255);
 			$classe->setexpression($expressao);
