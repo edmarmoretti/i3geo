@@ -142,7 +142,7 @@ Retorno:
 
 RSS
 */
-function geraRSStemas($locaplic,$id_n2)
+function geraRSStemas($locaplic,$id_n2,$output="xml")
 {
 	global $esquemaadmin;
 	$sql = "
@@ -151,7 +151,7 @@ function geraRSStemas($locaplic,$id_n2)
 		LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = n3.id_tema
 		LEFT JOIN ".$esquemaadmin."i3geousr_grupotema ON n3.id_tema = i3geousr_grupotema.id_tema
 		where i3geousr_grupotema.id_grupo is null and i3geoadmin_temas.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' and n3.publicado != 'NAO' order by nome_ws";
-	return geraXmlRSS($locaplic,$sql,"Lista de temas");
+	return geraXmlRSS($locaplic,$sql,"Lista de temas",$output);
 }
 /*
 Function: geraRSStemasRaiz
@@ -196,12 +196,12 @@ Retorno:
 
 RSS
 */
-function geraRSSsubgrupos($locaplic,$id_n1)
+function geraRSSsubgrupos($locaplic,$id_n1,$output="json")
 {
 	global $esquemaadmin;
 	$sql = "select '' as tipo_ws, n2.id_n2 as id_ws,g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_subgrupos as g ";
 	$sql .= " where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' and n2.publicado != 'NAO' order by nome_ws";
-	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos");
+	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos",$output);
 }
 /*
 Function: geraRSSgrupos
@@ -216,13 +216,13 @@ Retorno:
 
 RSS
 */
-function geraRSSgrupos($locaplic)
+function geraRSSgrupos($locaplic,$output="xml")
 {
 	global $esquemaadmin;
 	$sql = "select '' as tipo_ws, n1.id_n1 as id_ws, g.nome_grupo as nome_ws,'rsstemasraiz.php?nivel=1&id='||n1.id_n1 as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws ";
 	$sql .= "from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as g ";
 	$sql .= "where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' and n1.publicado != 'NAO' group by id_ws,tipo_ws,nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
-	return geraXmlRSS($locaplic,$sql,"Lista de grupos");
+	return geraXmlRSS($locaplic,$sql,"Lista de grupos",$output);
 }
 /*
 Function: geraXmlDownload
@@ -474,11 +474,13 @@ locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
 sql {string} - SQL que ser&aacute; aplicado ao sistema de administra&ccedil;&atilde;o
 
 descricao {string} - descri&ccedil;&atilde;o que ser&aacute; inserida no canal RSS
+
+output {string} - xml|json
 Retorno:
 
 RSS
 */
-function geraXmlRSS($locaplic,$sql,$descricao)
+function geraXmlRSS($locaplic,$sql,$descricao,$output="xml")
 {
 	global $esquemaadmin;
 	//var_dump($_SERVER);exit;
@@ -497,6 +499,12 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 	$xml .= "<copyright>Gerado pelo i3Geo</copyright>\n";
 	$xml .= "<language>pt-br</language>\n";
 	$xml .= "<webmaster></webmaster>\n";
+	$json = array(
+		"description"=>$descricao,
+		"copyright"=>"Gerado pelo i3Geo",
+		"language"=>"pt-br"
+	);
+	$jsonItems = array();
 	$qatlas = $dbh->query($sql);
 	foreach($qatlas as $row)
 	{
@@ -505,8 +513,9 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 		$xml .= "<title>".entity_decode($row["nome_ws"])."</title>\n";
 		$xml .= "<description>".xmlTexto_prepara(entity_decode($row["desc_ws"]))."</description>\n";
 		$link = xmlTexto_prepara($row["link_ws"]);
-		if(stristr($link, 'http') === FALSE)
-		{$link = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["REQUEST_URI"])."/".$link;}
+		if(stristr($link, 'http') === FALSE){
+			$link = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["REQUEST_URI"])."/".$link;
+		}
 		$xml .= "<link><![CDATA[".$link."]]></link>\n";
 		$xml .= "<pubDate/>\n";
 		$xml .= "<author>".xmlTexto_prepara($row["autor_ws"])."</author>\n";
@@ -515,11 +524,25 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 		$xml .= "<id>".xmlTexto_prepara($row["id_ws"])."</id>\n";
 		$xml .= "<tipo>".$row["tipo_ws"]."</tipo>\n";
 		$xml .= "</item>\n";
+		$jsonItems[] = array(
+			"title"=>$row["nome_ws"],
+			"description"=>$row["desc_ws"],
+			"link"=>$link."&output=json",
+			"author"=>$row["autor_ws"],
+			"id"=>$row["id_ws"],
+			"tipo"=>$row["tipo_ws"]
+		);
 	}
+	$json["items"] = $jsonItems;
 	$xml .= "</channel></rss>\n";
 	$dbh = null;
 	$dbhw = null;
-	return $xml;
+	if($output=="xml"){
+		return $xml;
+	}
+	else{
+		return json_encode($json);
+	}
 }
 function geraXmlAtlas($locaplic,$editores)
 {

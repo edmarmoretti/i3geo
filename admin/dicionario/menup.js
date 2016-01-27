@@ -136,6 +136,11 @@ i3GEOadmin.menup.dicionario = {
 		en : "",
 		es : ""
 	} ],
+	'rssArvoreJson' : [ {
+		pt : "Ver JSON com os grupos, subgrupos e temas",
+		en : "",
+		es : ""
+	} ],
 	'rssComentarios' : [ {
 		pt : "Ver RSS com os coment&aacute;rios sobre os temas",
 		en : "",

@@ -85,16 +85,20 @@ if($indevidos == true){
 }
 //
 $mapa = ms_newMapObj($mapfile);
-if(!isset($tipoparse) || $tipoparse=="")
-{mapfile();exit;}
+if(!isset($tipoparse) || $tipoparse==""){
+	mapfile($_GET["output"]);
+	exit;
+}
 
 if($tipoparse == "legenda")
 {
 	$tipoLegenda = tipoLegenda($layername);
-	if($tipoLegenda == "simples")
-	{legendaSimples($layername);}
-	if($tipoLegenda == "valorunico")
-	legendaValorUnico($layername);
+	if($tipoLegenda == "simples"){
+		legendaSimples($layername);
+	}
+	if($tipoLegenda == "valorunico"){
+		legendaValorUnico($layername);
+	}
 }
 //
 //verifica o tipo de legenda
@@ -279,7 +283,7 @@ function legendaSimples($layername)
 //
 //gera xml com par&acirc;metros do mapfile
 //
-function mapfile()
+function mapfile($output="xml")
 {
 	global $codigoLayer,$mapfile,$mapa,$objcontype,$objlayertypes,$forcawms,$postgis_mapa,$bloqueiaStringConexao;
 	$layers = $mapa->getalllayernames();
@@ -288,11 +292,15 @@ function mapfile()
 	$xml .= "\n<parsemapfile>\n";
 	$xml .= "<tiposconexao>".implode(",",$objcontype)."</tiposconexao>\n";
 	$xml .= "<tiposlayer>".implode(",",$objlayertypes)."</tiposlayer>\n";
+	$json = array(
+		"tiposconexao"=>implode(",",$objcontype),
+		"tiposlayer"=>implode(",",$objlayertypes),
+	);
 	//verifica se tem grupos
 	$nlayers = array();
-	foreach ($layers as $layer)
+	foreach ($layers as $layerName)
 	{
-		$layer = $mapa->getlayerbyname($layer);
+		$layer = $mapa->getlayerbyname($layerName);
 		if($objcontype[$layer->connectiontype] != MS_WMS )
 		{
 			if($layer->group == "")
@@ -305,16 +313,19 @@ function mapfile()
 			$layers = $nlayers;
 		}
 	}
-	foreach ($layers as $layer)
+	foreach ($layers as $layerName)
 	{
 		$xml .= "\n<layer>\n";
-		$layer = $mapa->getlayerbyname($layer);
+		$layer = $mapa->getlayerbyname($layerName);
 		$xml .= "<titulo>".$layer->getmetadata('tema')."</titulo>\n";
+		$json["layer"] = array();
 		$d = $layer->data;
-		if (@$layer->open() == MS_SUCCESS)
-		{$colunas = implode(",",$layer->getItems());}
-		else
-		{$colunas = "*";}
+		if (@$layer->open() == MS_SUCCESS){
+			$colunas = implode(",",$layer->getItems());
+		}
+		else{
+			$colunas = "*";
+		}
 		$ct = $objcontype[$layer->connectiontype];
 		$tagLegenda = "parsemapfile.php?id=".$codigoLayer."&layername=".$layer->name."&tipoparse=legenda";
 		$nomeLayer = $layer->name;
@@ -323,9 +334,13 @@ function mapfile()
 			$ct = "MS_WMS";
 			$d =  "http://".$_SERVER['HTTP_HOST'].str_replace("/admin/php/parsemapfile.php","",$_SERVER['PHP_SELF'])."/ogc.php?tema=".$codigoLayer;
 			$xml .= "<version>1.1.1</version>";
-			$xml .= "<srs>EPSG:4618</srs>";
+			$json["layer"]["version"] = "1.1.1";
+			$xml .= "<srs>EPSG:4326</srs>";
+			$json["layer"]["srs"] = "EPSG:4326";
 			$xml .= "<format>image/png</format>";
+			$json["layer"]["format"] = "image/png";
 			$xml .= "<style>default</style>";
+			$json["layer"]["style"] = "default";
 			$tagLegenda = "";
 		}
 		else if($ct == "MS_WMS")
@@ -349,18 +364,27 @@ function mapfile()
 			if($s == "")
 			{$s = "default";}
 			$xml .= "<version>$v</version>";
+			$json["layer"]["version"] = $v;
 			$xml .= "<srs>$e</srs>";
+			$json["layer"]["srs"] = $e;
 			$xml .= "<format>image/png</format>";
+			$json["layer"]["format"] = "image/png";
 			$xml .= "<style>$s</style>";
+			$json["layer"]["style"] = $s;
 			$tagLegenda = "";
 		}
-		$xml .= "<geraxmllegenda>$tagLegenda</geraxmllegenda>";
+		$xml .= "<geraxmllegenda><![CDATA[".$tagLegenda."]]></geraxmllegenda>";
+		$json["layer"]["geraxmllegenda"] = $tagLegenda;
 		$xml .= "<connectiontype>".$ct."</connectiontype>\n";
+		$json["layer"]["connectiontype"] = $ct;
 		$xml .= "<data>$d</data>\n";
+		$json["layer"]["data"] = $d;
 		$xml .= "<name>$nomeLayer</name>\n";
+		$json["layer"]["name"] = $nomeLayer;
 		if($ct != "MS_WMS")
 		{
 			$xml .= "<connection>\n";
+			$json["layer"]["connection"] = array();
 			$con = $layer->connection;
 			if (($con == " ") || ($con == "") || (in_array($con,array_keys($postgis_mapa))))
 			{
@@ -371,17 +395,31 @@ function mapfile()
 			}
 			if($bloqueiaStringConexao == true){
 				$xml .= "<user>bloqueado (veja i3geo/admin/php/parsemapfile)</user>\n";
+				$json["layer"]["connection"]["user"] = "bloqueado (veja i3geo/admin/php/parsemapfile)";
 				$xml .= "<password></password>\n";
+				$json["layer"]["connection"]["password"] = "";
 				$xml .= "<dbname></dbname>\n";
+				$json["layer"]["connection"]["dbname"] = "";
 				$xml .= "<host></host>\n";
+				$json["layer"]["connection"]["host"] = "";
 				$xml .= "<port></port>\n";
+				$json["layer"]["connection"]["port"] = "";
 			}
 			else{
 				$xml .= "<user>".preg_replace('/.*user\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</user>\n";
+				$json["layer"]["connection"]["user"] = preg_replace('/.*user\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con);
+				
 				$xml .= "<password>".preg_replace('/.*password\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</password>\n";
+				$json["layer"]["connection"]["password"] = preg_replace('/.*password\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con);
+				
 				$xml .= "<dbname>".preg_replace('/.*dbname\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</dbname>\n";
+				$json["layer"]["connection"]["dbname"] = preg_replace('/.*dbname\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con);
+				
 				$xml .= "<host>".preg_replace('/.*host\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</host>\n";
+				$json["layer"]["connection"]["host"] = preg_replace('/.*host\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con);
+				
 				$xml .= "<port>".preg_replace('/.*port\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</port>\n";
+				$json["layer"]["connection"]["port"] = preg_replace('/.*port\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con);
 			}
 			$xml .= "</connection>\n";
 			$d = explode("(",$d);
@@ -390,7 +428,9 @@ function mapfile()
 			$dstring = str_replace("the_geom","",$dstring);
 			$dstring = str_replace("*",$colunas,$dstring);
 			$xml .= "<colunas>$colunas</colunas>";
+			$json["layer"]["colunas"] = $colunas;
 			$xml .= "<select>$dstring</select>\n";
+			$json["layer"]["select"] = $dstring;
 			$string = preg_replace('/.*from\s*(.+).*/i', '\1', $d[0]);
 			$s = explode("WHERE",$string);
 			if(count($s) == 1)
@@ -402,18 +442,35 @@ function mapfile()
 			$xml .= "<type>".$objlayertypes[$layer->type]."</type>\n";
 			$xml .= "<filter>".$layer->getfilterstring()."</filter>\n";
 			$xml .= "<filteritem>$layer->filteritem</filteritem>\n";
-			//$xml .= "<labelangleitem>".$layer->labelangleitem."</labelangleitem>\n";
 			$xml .= "<labelitem>$layer->labelitem</labelitem>\n";
 			$xml .= "<labelmaxscale>$layer->labelmaxscaledenom</labelmaxscale>\n";
 			$xml .= "<labelminscale>$layer->labelminscaledenom</labelminscale>\n";
 			$xml .= "<labelsizeitem></labelsizeitem>\n";
+			
+			$json["layer"]["esquema"] = $esquemaTabela[0];
+			$json["layer"]["tabela"] = $esquemaTabela[1];
+			$json["layer"]["where"] = $s[1];
+			$json["layer"]["type"] = $objlayertypes[$layer->type];
+			$json["layer"]["filter"] = $layer->getfilterstring();
+			$json["layer"]["filteritem"] = $layer->filteritem;
+			$json["layer"]["labelitem"] = $layer->labelitem;
+			$json["layer"]["labelmaxscale"] = $layer->labelmaxscaledenom;
+			$json["layer"]["labelminscale"] = $layer->labelminscaledenom;
+			$json["layer"]["labelsizeitem"] = "";
 		}
 		$xml .= "<group>$layer->group</group>\n";
 		$xml .= "<maxscale>$layer->maxscaledenom</maxscale>\n";
 		$xml .= "<minscale>$layer->minscaledenom</minscale>\n";
 		$xml .= "<offsite>".$layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue."</offsite>\n";
 		$xml .= "<opacity>$layer->opacity</opacity>\n";
-		if($ct != "MS_WMS")
+		
+		$json["layer"]["group"] = $layer->group;
+		$json["layer"]["maxscale"] = $layer->maxscaledenom;
+		$json["layer"]["minscale"] = $layer->minscaledenom;
+		$json["layer"]["offsite"] = $layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
+		$json["layer"]["opacity"] = $layer->opacity;
+		
+		if($ct != "xMS_WMS")
 		{
 			$xml .= "<symbolscale>$layer->symbolscaledenom</symbolscale>\n";
 			$xml .= "<tileindex>$layer->tileindex</tileindex>\n";
@@ -423,18 +480,33 @@ function mapfile()
 			$xml .= "<sizeunits>$layer->sizeunits</sizeunits>\n";
 			$xml .= "<projection>".$layer->getProjection()."</projection>\n";
 			$xml .= "<classes>\n";
-			$xml = pegaClasses($xml);
+			$xml .= pegaClasses($layer,"xml");
 			$xml .= "</classes>\n";
+			
+			$json["layer"]["symbolscale"] = $layer->symbolscaledenom;
+			$json["layer"]["tileindex"] = $layer->tileindex;
+			$json["layer"]["tileitem"] = $layer->tileitem;
+			$json["layer"]["tolerance"] = $layer->tolerance;
+			$json["layer"]["toleranceunits"] = $layer->toleranceunits;
+			$json["layer"]["sizeunits"] = $layer->sizeunits;
+			$json["layer"]["projection"] = $layer->getProjection();
+			$json["layer"]["classes"] = pegaClasses($layer,"json");
 		}
 		$xml .= "</layer>";
 	}
 	$xml .= "</parsemapfile>\n";
-	echo header("Content-type: application/xml");
-	echo $xml;
+	echo header("Content-type: application/".$output);
+	if($output=="xml"){
+		echo $xml;
+	}
+	else{
+		echo json_encode($json);
+	}
 }
-function pegaClasses($xml)
+function pegaClasses($layer,$output="xml")
 {
-	global $layer;
+	$xml = "";
+	$json = array();
 	$dados = array();
 	$nclasses = $layer->numclasses;
 	for($i=0;$i<$nclasses;++$i)
@@ -444,20 +516,29 @@ function pegaClasses($xml)
 		$xml .= "<name>".mb_convert_encoding(($classe->name),"UTF-8","ISO-8859-1")."</name>\n";
 		$xml .= "<expression>".$classe->getExpressionString()."</expression>\n";
 		$xml .= "<keyimage>$classe->keyimage</keyimage>\n";
-		$xml .= "<size>$classe->size</size>\n";
-		$xml .= "<symbolname>$classe->symbolname</symbolname>\n";
-		$xml .= "<type>$classe->type</type>\n";
 		$xml .= "<estilos>\n";
-		$xml = pegaEstilos($xml,$classe);
+		$xml .= pegaEstilos($classe,$output);
 		$xml .= "</estilos>\n";
 		$xml .= "</classe>\n";
+		
+		$j = array();
+		$j["name"] = mb_convert_encoding(($classe->name),"UTF-8","ISO-8859-1");
+		$j["expression"] = $classe->getExpressionString();
+		$j["keyimage"] = $classe->keyimage;
+		$j["estilos"] = pegaEstilos($classe,$output);
+		$json[] = $j;
 	}
-	return $xml;
+	if($output == "xml"){
+		return $xml;
+	}
+	else{
+		return $json;
+	}
 }
-function pegaEstilos($xml,$classe)
+function pegaEstilos($classe,$output = "xml")
 {
 	$numestilos = $classe->numstyles;
-	$estilos = array();
+	$json = array();
 	for($j=0;$j<$numestilos;++$j)
 	{
 		$xml .= "<estilo>\n";
@@ -468,7 +549,20 @@ function pegaEstilos($xml,$classe)
 		$xml .= "<backgroundcolor>".$estilo->backgroundcolor->red.",".$estilo->backgroundcolor->green.",".$estilo->backgroundcolor->blue."</backgroundcolor>\n";
 		$xml .= "<outlinecolor>".$estilo->outlinecolor->red.",".$estilo->outlinecolor->green.",".$estilo->outlinecolor->blue."</outlinecolor>\n";
 		$xml .= "</estilo>\n";
+		
+		$e = array();
+		$e["symbolname"] = $estilo->symbolname;
+		$e["color"] = $estilo->color->red.",".$estilo->color->green.",".$estilo->color->blue;
+		$e["size"] = $estilo->size;
+		$e["backgroundcolor"] = $estilo->backgroundcolor->red.",".$estilo->backgroundcolor->green.",".$estilo->backgroundcolor->blue;
+		$e["outlinecolor"] = $estilo->outlinecolor->red.",".$estilo->outlinecolor->green.",".$estilo->outlinecolor->blue;
+		$json[] = $e;
 	}
-	return $xml;
+	if($output == "xml"){
+		return $xml;
+	}
+	else{
+		return $json;
+	}
 }
 ?>
