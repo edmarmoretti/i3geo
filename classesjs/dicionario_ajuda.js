@@ -3,14 +3,13 @@ g_traducao_ajuda = {
 		"1": {
 			titulo: {
 				pt: "Filtro de cores",
-				es: "Filtro de colores", 
+				es: "Filtro de colores",
 				en: "Color filter"
 			},
 			diretorio:"i3geo/ferramentas/tipoimagem",
 			categoria:"1",
 			pt:"O filtro possibilita gerar efeitos de colora&ccedil;&atilde;o no mapa. &Eacute; aplicado sobre a imagem gerada toda vez que o mapa &eacute; alterado. No caso de temas baseados em dados RASTER, os n&iacute;veis de cores obtidos com a ferramenta de identifica&ccedil;&atilde;o n&atilde;o s&atilde;o alterados.<br>Os filtros podem provocar um tempo maior de desenho do mapa, devendo ser utilizados com cuidado. As op&ccedil;&otilde;es s&eacute;pia e tons de cinza utilizam algor&iacute;tmos pr&oacute;prios do i3Geo, j&aacute; as demais, utilizam a op&ccedil;&atilde;o de filtro dispon&iacute;vel com o PHP 5. Mais detalhes <a href='http://www.php.net/manual/pt_BR/function.imagefilter.php' >aqui</a>.",
-			es: "El filtro hace possible generar efectos de color en el mapa. Es aplicado sobre la imagen generada cada vez que el mapa es modificado. En el caso de los temas basados en datos RASTER, los niveles de los colores obtenidos con la herramienta de identificaci&oacute;n no son modificados. Los filtros pueden hacer que el mapa tarde m&aacute;s tiempo para mostrarse en pantalla, por lo que hay que tener precauci&oacute;n en su uso. 
-				Las opciones sepia y tonos de ceniza usan algoritmos propios del i3Geo, mientras que el resto usa la alternativa de filtro disponible con PHP5. M&aacute;s detalles <a href='http://www.php.net/manual/pt_BR/function.imagefilter.php' >aqu&iacute;</a>.",
+			es: "El filtro hace possible generar efectos de color en el mapa. Es aplicado sobre la imagen generada cada vez que el mapa es modificado. En el caso de los temas basados en datos RASTER, los niveles de los colores obtenidos con la herramienta de identificaci&oacute;n no son modificados. Los filtros pueden hacer que el mapa tarde m&aacute;s tiempo para mostrarse en pantalla, por lo que hay que tener precauci&oacute;n en su uso. Las opciones sepia y tonos de ceniza usan algoritmos propios del i3Geo, mientras que el resto usa la alternativa de filtro disponible con PHP5. M&aacute;s detalles <a href='http://www.php.net/manual/pt_BR/function.imagefilter.php' >aqu&iacute;</a>.",
 			en: "",
 			apijs:"i3GEO.mapa.dialogo.tipoimagem()"
 		},

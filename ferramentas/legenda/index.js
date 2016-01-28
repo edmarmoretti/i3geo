@@ -103,9 +103,7 @@ i3GEOF.legenda =
 		 * Funcao do usuario que e executada apos iniciar a ferramenta
 		 */
 		aposIniciar : function(){
-			i3GEOF.legenda.classe = 0;
-			i3GEOF.legenda.estilo = 0;
-			i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_'+i3GEOF.legenda.tema+"-0");
+
 		},
 		/**
 		 * Susbtitutos para o template
