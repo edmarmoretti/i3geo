@@ -2826,7 +2826,10 @@ function restauraMapaAdmin($id_mapa,$dir_tmp){
 		//verifica se existem parametros junto com o registro
 		$registro = explode(",",$registro);
 		$mapfile = $registro[0];
-		$s = fwrite($baseh,base64_decode($mapfile));
+		//adapta para versoes novas do mapserver
+		$mapfile = base64_decode($mapfile);
+		$mapfile = str_replace("TYPE ANNOTATION","TYPE POINT",$mapfile);
+		$s = fwrite($baseh,$mapfile);
 		fclose($baseh);
 	}
 	$dbh = null;
