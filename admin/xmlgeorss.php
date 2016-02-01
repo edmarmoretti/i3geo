@@ -41,6 +41,10 @@ if(!isset($locaplic)){
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
 include_once($locaplic."/admin/php/xml.php");
-echo header("Content-type: application/xml");
-echo geraXmlGeorss($locaplic);
+$output = "xml";
+if(strtolower($_GET["output"]) == "json" || strtolower($_POST["output"]) == "json"){
+	$output = "json";
+}
+echo header("Content-type: application/".$output);
+echo geraXmlGeorss($locaplic,$output);
 ?>

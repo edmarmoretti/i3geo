@@ -256,11 +256,11 @@ Retorno:
 
 RSS
 */
-function geraXmlWS($locaplic)
+function geraXmlWS($locaplic,$output)
 {
 	global $esquemaadmin;
 	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'WS' and nome_ws <> ''";
-	return geraXmlRSS($locaplic,$sql,"Web services");
+	return geraXmlRSS($locaplic,$sql,"Web services",$output);
 }
 /*
 Function: geraXmlKmlrss
@@ -294,11 +294,11 @@ Retorno:
 
 RSS
 */
-function geraXmlWMS($locaplic)
+function geraXmlWMS($locaplic,$output)
 {
 	global $esquemaadmin;
 	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where (tipo_ws = 'WMS' or tipo_ws = 'WMS-Tile') and nome_ws <> '' order by nome_ws";
-	return geraXmlRSS($locaplic,$sql,"Web services WMS-OGC");
+	return geraXmlRSS($locaplic,$sql,"Web services WMS-OGC",$output);
 }
 /*
 Function: geraXmlWMSmetaestat
@@ -338,11 +338,11 @@ Retorno:
 
 RSS
 */
-function geraXmlGeorss($locaplic)
+function geraXmlGeorss($locaplic,$output)
 {
 	global $esquemaadmin;
 	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'GEORSS' and nome_ws <> ''";
-	return geraXmlRSS($locaplic,$sql,"Georss");
+	return geraXmlRSS($locaplic,$sql,"Georss",$output);
 }
 /*
 Function: geraRSStemasDownload
@@ -707,7 +707,7 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	return $xml;
 }
 //mostra apenas os mapas que possuem outros_mapa definido, o que e tipico do sistema de metadados estatisticos
-function geraRSSmapas($locaplic)
+function geraRSSmapas($locaplic,$output)
 {
 	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
@@ -724,7 +724,7 @@ function geraRSSmapas($locaplic)
 	$descricao .= "<img src=$url/ferramentas/salvamapa/geraminiatura.php?w=300&h=300&restauramapa='||id_mapa||' >]]>'";
 	$sql = "select '' as tipo_ws,'".$url."/ms_criamapa.php?restauramapa='||id_mapa as link_ws, nome_mapa as nome_ws, ".$descricao." as desc_ws, '' as autor_ws from ".$esquemaadmin."i3geoadmin_mapas WHERE publicado_mapa = 'sim' AND mapfile != ''";
 	//echo $sql;exit;
-	return geraXmlRSS($locaplic,$sql,"Mapas cadastrados");
+	return geraXmlRSS($locaplic,$sql,"Mapas cadastrados",$output);
 }
 
 //

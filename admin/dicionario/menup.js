@@ -92,12 +92,12 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'xmlWmsMetaestat' : [ {
-		pt : "Ver xml com a lista de servi&ccedil;os WMS originados do sistema de metadados estat&iacute;sticos",
+		pt : "XML com a lista de servi&ccedil;os WMS originados do sistema de metadados estat&iacute;sticos",
 		en : "",
 		es : ""
 	} ],
 	'verRss' : [ {
-		pt : "Ver RSS com a lista de mapas cadastrados",
+		pt : "RSS com a lista de mapas cadastrados",
 		en : "",
 		es : ""
 	} ],
@@ -132,17 +132,17 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'rssArvore' : [ {
-		pt : "Ver RSS com os grupos, subgrupos e temas",
+		pt : "RSS com os grupos, subgrupos e temas",
 		en : "",
 		es : ""
 	} ],
 	'rssArvoreJson' : [ {
-		pt : "Ver JSON com os grupos, subgrupos e temas",
+		pt : "JSON com os grupos, subgrupos e temas",
 		en : "",
 		es : ""
 	} ],
 	'rssComentarios' : [ {
-		pt : "Ver RSS com os coment&aacute;rios sobre os temas",
+		pt : "RSS com os coment&aacute;rios sobre os temas",
 		en : "",
 		es : ""
 	} ],
@@ -163,6 +163,16 @@ i3GEOadmin.menup.dicionario = {
 	} ],
 	'xmlMapas' : [ {
 		pt : "XML com a lista de mapas",
+		en : "",
+		es : ""
+	} ],
+	'rssMapas' : [ {
+		pt : "RSS com a lista de mapas",
+		en : "",
+		es : ""
+	} ],
+	'rssMapasJson' : [ {
+		pt : "RSS com a lista de mapas (JSON)",
 		en : "",
 		es : ""
 	} ],
@@ -217,17 +227,32 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'xmlWebServ' : [ {
-		pt : "Ver xml com a lista de servi&ccedil;os WS (webservices convencionais)",
+		pt : "RSS com a lista de servi&ccedil;os WS (webservices convencionais)",
+		en : "",
+		es : ""
+	} ],
+	'xmlWebServJson' : [ {
+		pt : "RSS com a lista de servi&ccedil;os WS (webservices convencionais) em JSON",
 		en : "",
 		es : ""
 	} ],
 	'xmlWms' : [ {
-		pt : "Ver xml com a lista de servi&ccedil;os WMS",
+		pt : "RSS com a lista de servi&ccedil;os WMS",
+		en : "",
+		es : ""
+	} ],
+	'xmlWmsJson' : [ {
+		pt : "RSS com a lista de servi&ccedil;os WMS em JSON",
 		en : "",
 		es : ""
 	} ],
 	'xmlGeoRss' : [ {
-		pt : "Ver xml com a lista de servi&ccedil;os Geo RSS",
+		pt : "RSS com a lista de servi&ccedil;os Geo RSS",
+		en : "",
+		es : ""
+	} ],
+	'xmlGeoRssJson' : [ {
+		pt : "RSS com a lista de servi&ccedil;os Geo RSS em JSON",
 		en : "",
 		es : ""
 	} ],
@@ -252,7 +277,7 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'xmlSistAdiciona' : [ {
-		pt : "Ver xml com a lista de sistemas que adicionam temas especiais",
+		pt : "XML com a lista de sistemas que adicionam temas especiais",
 		en : "",
 		es : ""
 	} ],
