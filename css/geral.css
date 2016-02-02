@@ -169,11 +169,11 @@ Utilizado na janela do buscador INDE
 }
 
 .i3GEOarvCamGrupo {
-	font-size: 15px;
+	font-size: 13px;
 	margin: auto;
 	text-align: left;
 	cursor: pointer;
-	top: 1px;
+	top: -1px;
 	font-weight : bold;
 }
 

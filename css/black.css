@@ -254,9 +254,11 @@ Menu superior de opcoes
 
 .i3GEOarvCam .ygtvcell .ygtvtp, .i3GEOarvCam .ygtvtp {
     background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8897px transparent;
+    height: 22px;
 }
 .i3GEOarvCam .ygtvcell .ygtvtph, .i3GEOarvCam .ygtvtph {
     background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8917px transparent;
+    height: 22px;
 }
 .i3GEOarvCam .ygtvcell .ygtvtm, .i3GEOarvCam .ygtvtm {
     background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8937px transparent;

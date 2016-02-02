@@ -402,11 +402,11 @@ margin-left: 30px;
 cursor: move;
 }
 .i3GEOarvCamGrupo {
-font-size: 15px;
+font-size: 13px;
 margin: auto;
 text-align: left;
 cursor: pointer;
-top: 1px;
+top: -1px;
 font-weight : bold;
 }
 .i3GEOarvCamTema {
