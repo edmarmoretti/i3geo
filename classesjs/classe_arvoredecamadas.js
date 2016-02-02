@@ -1069,6 +1069,10 @@ i3GEO.arvoreDeCamadas =
 								+ "\",this.checked)' type=checkbox title='Ligar/desligar temas do grupo' />&nbsp;";
 					}
 					noGrupo += "<div class='i3GEOarvCamGrupo'>" + grupoLayers[i].nome + "</div>";
+					d = i3GEO.arvoreDeCamadas.EXPANDIDA;
+					if(grupoLayers[i].expandido && grupoLayers[i].expandido === true){
+						d = true;
+					}
 					n = grupoLayers[i].layers.length;
 
 					// layers de um grupo
@@ -1079,10 +1083,10 @@ i3GEO.arvoreDeCamadas =
 							if (ltema.name === grupoLayers[i].layers[j] && ltema.escondido === "nao") {
 								if (noGrupo !== "") {
 									grupoNode = new YAHOO.widget.HTMLNode({
-										enableHighlight : false,
+										enableHighlight : true,
 										hasIcon : false,
 										html : noGrupo,
-										expanded : true
+										expanded : d
 									}, tempNode);
 									noGrupo = "";
 								}
@@ -1125,10 +1129,10 @@ i3GEO.arvoreDeCamadas =
 				}
 				// inclui os temas n&atilde;o agrupados
 				grupoNode = new YAHOO.widget.HTMLNode({
-					expanded : true,
+					expanded : false,
 					hasIcon : false,
-					enableHighlight : false,
-					html : "<div class='i3GEOarvCamGrupo'>Outros</div>"
+					enableHighlight : true,
+					html : "<div class='i3GEOarvCamGrupo'>"+$trad("u27")+"</div>"
 				}, tempNode);
 				c = incluidos.length;
 				for (k = 0; k < nk; k += 1) {

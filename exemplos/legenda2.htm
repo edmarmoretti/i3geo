@@ -139,12 +139,12 @@ i3GEO.Interface.openlayers.parametrosMap.scales = [
 
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 //adiciona as camadas ao mapa
-i3GEO.configura.mashuppar = "&temasa=estadosl _llocali";
+i3GEO.configura.mashuppar = "&temasa=estadosl _llocali _lbiomashp";
 //grupos************************************************************
 i3GEO.configura.templateLegenda = "legendagrupos.htm";
 i3GEO.configura.grupoLayers = [
 	{nome:"Grupo 1",icone:true,dinamico:true,expandido:true,layers:["_wlocali","_llocali","estadosl"]},
-	{nome:"Grupo 2",icone:true,dinamico:true,expandido:true,layers:["mundo"]}
+	{nome:"Grupo 2",icone:true,dinamico:true,expandido:false,layers:["mundo","_lbiomashp"]}
 ];
 //
 

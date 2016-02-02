@@ -123,6 +123,8 @@
 		i3GEO.Interface.ATUAL = "openlayers";
 		i3GEO.Interface.IDCORPO = "contemImg";
 		i3GEO.Interface.openlayers.TILES = true;
+		//aplica ou nao a ultima extensao definida pelo usuario ao iniciar o mapa
+		i3GEO.configura.guardaExtensao = true;
 
 		i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 		i3GEO.cria();
@@ -157,6 +159,8 @@
 			//i3GEO.mapa.insereDobraPagina("googlemaps",
 			//	"../imagens/dobragooglemaps.png"
 			//);
+			//muda o valor default do botao 'enquadramento inicial'
+			i3GEO.parametros.extentTotal = "-180 -90 180 90";
 		};
 		//indica se a opcao de navegacao nas pastas do servidor sera ativada
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
