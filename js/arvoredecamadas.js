@@ -1018,43 +1018,6 @@ i3GEO.arvoreDeCamadas =
 							console.error(e);
 					}
 				}
-				//
-				//inclui os nos correspondentes aos layers base na interface Openlayers
-				//
-				if(i3GEO.Interface.ATUAL === "openlayers" && i3GEO.arvoreDeCamadas.INCLUILFUNDO === true){
-					c = i3GEO.Interface.openlayers.LAYERSADICIONAIS;
-					n = c.length;
-					k = "i3GEOarvCamTema";
-					// verifica se a versao do IE e menor que 9
-					if (navm && parseInt(YAHOO.env.ua.ie, 10) < 9) {
-						k = "i3GEOarvCamTemaIE";
-					}
-					temaNode = new YAHOO.widget.HTMLNode(
-						{
-							html : $trad("p16"),
-							isLeaf : false,
-							hasIcon : true
-						}, root
-					);
-					for (i = 0; i < n; i++) {
-						temp =
-							"<div class='" + k + "' onclick='i3GEO.Interface.openlayers.ativaFundo(\"" + c[i].get("name") + "\")'>"
-							+ "<input name=layer type=checkbox ";
-						if(c[i].getVisible() === true){
-							temp += " checked ";
-						}
-						temp += " value='" + c[i].get("name") + "' id='CK" + c[i].get("name") + "'/>"
-							+ " <label for='CK" + c[i].get("name") + "'>" + c[i].get("title") + "</label></div>";
-						new YAHOO.widget.HTMLNode(
-							{
-								html : temp,
-								tipo : "fundo",
-								isLeaf : true,
-								hasIcon : false
-							}, temaNode
-						);
-					}
-				}
 			} else {
 				nk = temas.length;
 				c = grupoLayers.length;
@@ -1177,6 +1140,43 @@ i3GEO.arvoreDeCamadas =
 						}
 
 					}
+				}
+			}
+			//
+			//inclui os nos correspondentes aos layers base na interface Openlayers
+			//
+			if(i3GEO.Interface.ATUAL === "openlayers" && i3GEO.arvoreDeCamadas.INCLUILFUNDO === true){
+				c = i3GEO.Interface.openlayers.LAYERSADICIONAIS;
+				n = c.length;
+				k = "i3GEOarvCamTema";
+				// verifica se a versao do IE e menor que 9
+				if (navm && parseInt(YAHOO.env.ua.ie, 10) < 9) {
+					k = "i3GEOarvCamTemaIE";
+				}
+				temaNode = new YAHOO.widget.HTMLNode(
+					{
+						html : $trad("p16"),
+						isLeaf : false,
+						hasIcon : true
+					}, root
+				);
+				for (i = 0; i < n; i++) {
+					temp =
+						"<div class='" + k + "' onclick='i3GEO.Interface.openlayers.ativaFundo(\"" + c[i].get("name") + "\")'>"
+						+ "<input name=layer type=checkbox ";
+					if(c[i].getVisible() === true){
+						temp += " checked ";
+					}
+					temp += " value='" + c[i].get("name") + "' id='CK" + c[i].get("name") + "'/>"
+						+ " <label for='CK" + c[i].get("name") + "'>" + c[i].get("title") + "</label></div>";
+					new YAHOO.widget.HTMLNode(
+						{
+							html : temp,
+							tipo : "fundo",
+							isLeaf : true,
+							hasIcon : false
+						}, temaNode
+					);
 				}
 			}
 			document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).style.textAlign = "left";
