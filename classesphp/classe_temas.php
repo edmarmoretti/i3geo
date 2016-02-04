@@ -1296,5 +1296,41 @@ Adiciona LABEL em uma classe de um tema
 			$this->layer->setMetaData("cache","");
 		}
 	}
+	function criaCluster ($group = "",$filter = "",$maxdistance=5,$region='rectangle',$buffer=0){
+		if($group != ""){
+			$group = "('[".$group."]')";
+		}
+		$cluster = $this->layer->cluster;
+
+		$par = "BUFFER $buffer REGION $region MAXDISTANCE $maxdistance";
+		if($group != ""){
+			$par .= " GROUP ".$group;
+		}
+		if($filter != ""){
+			$par .= " FILTER ".$filter;
+		}
+		$cluster->updateFromString("CLUSTER $par END");
+		$this->layer->setMetaData("cache","");
+		$this->layer->setMetadata("tiles","NAO");
+		$this->layer->setMetadata("cortepixels",0);
+	}
+	function removeCluster(){
+		$cluster = $this->layer->cluster;
+		/*
+		$cluster->maxdistance == 10 &&
+      	$cluster->buffer == 0.0 &&
+      	$cluster->region.string == '' &&
+      	$cluster->group.string == '' &&
+      	$cluster->filter.string == '';
+      	*/
+		$cluster->setFilter(NULL);
+		$cluster->setGroup(NULL);
+		$cluster->maxdistance = 10;
+		$cluster->region = NULL;
+
+		$this->layer->setMetaData("cache","");
+		$this->layer->setMetadata("tiles","NAO");
+		$this->layer->setMetadata("cortepixels",0);
+	}
 }
 ?>
