@@ -45,7 +45,7 @@ i3GEOF.legenda.dicionario =
 		],
 		'importaExportaSLD' : [
 			{
-				pt : "Importar/exportar SLD",
+				pt : "SLD",
 				en : "",
 				es : ""
 			}
@@ -793,5 +793,54 @@ i3GEOF.legenda.dicionario =
   				en : "",
   				es : ""
   			}
-  		]
+  		],
+		"cluster" : [
+  			{
+  				pt : "Cluster",
+  				en : "",
+  				es : ""
+  			}
+  		],
+  		"ClusterMaxdistance" : [
+   			{
+  				pt : "Dist&acirc;ncia (pixels) m&aacute;xima entre os pontos que ser&aacute; considerada para permitir o agrupamento",
+  				en : "",
+  				es : ""
+  			}
+  		],
+  		"ClusterBuffer" : [
+ 			{
+				pt : "Dist&acirc;ncia em pixel, no entorno da extens&atilde;o geogr&aacute;fica do mapa ou dos tiles, se for o caso, que extende a &aacute;rea de pesuisa dos pontos para forma&ccedil;&atilde;o do agrupamento",
+				en : "",
+				es : ""
+			}
+		],
+  		"ClusterFilter" : [
+  			{
+ 				pt : "Filtro que ser&aacute; aplicado para restringir os pontos que podem participar do agrupamento. A sintaxe do filtro &eacute; a mesma utilizada na defini&ccedil;&atilde;o das express&otilde;es que definem cada classe (ver o editor de classes)",
+ 				en : "",
+ 				es : ""
+ 			}
+ 		],
+  		"ClusterRegion" : [
+ 			{
+				pt : "Tipo de forma que ser&aacute; utilizada na defini&ccedil;&atilde;o da regi&atilde;o de busca dos pontos que formar&atilde;o o agrupamento",
+				en : "",
+				es : ""
+			}
+		],
+  		"ClusterGroup" : [
+  			{
+ 				pt : "Item que ser&aacute; utilizado para separar os diferentes agrupamentos",
+ 				en : "",
+ 				es : ""
+ 			}
+ 		],
+  		"remover" : [
+  			{
+ 				pt : "Remover",
+ 				en : "",
+ 				es : ""
+ 			}
+ 		]
 	};

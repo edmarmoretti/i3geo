@@ -135,6 +135,10 @@ i3GEOF.legenda =
 				$i(iddiv).innerHTML += i3GEOF.legenda.html();
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia1", "i3GEOlegendaguia");
 				// eventos das guias
+				$i("i3GEOlegendaguia7").onclick = function() {
+					i3GEOF.legenda.ativaAplicar("none");
+					i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia7", "i3GEOlegendaguia");
+				};
 				$i("i3GEOlegendaguia6").onclick = function() {
 					i3GEOF.legenda.ativaAplicar("none");
 					i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia6", "i3GEOlegendaguia");
@@ -159,6 +163,21 @@ i3GEOF.legenda =
 					i3GEOF.legenda.ativaAplicar("none");
 					i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia5", "i3GEOlegendaguia");
 				};
+
+				var b = new YAHOO.widget.Button("i3GEOlegendabotaoAplicarCluster", {
+					onclick : {
+						fn : i3GEOF.legenda.aplicarCluster
+					}
+				});
+				b.addClass("rodar");
+
+				var b = new YAHOO.widget.Button("i3GEOlegendabotaoRemoverCluster", {
+					onclick : {
+						fn : i3GEOF.legenda.removerCluster
+					}
+				});
+				b.addClass("rodar");
+
 				var b = new YAHOO.widget.Button("i3GEOlegendabotao1", {
 					onclick : {
 						fn : i3GEOF.legenda.mudaLegenda
@@ -375,6 +394,9 @@ i3GEOF.legenda =
 					}
 					if ($i("i3GEOlegendaitensValorClass")) {
 						$i("i3GEOlegendaitensValorClass").innerHTML = retorno.dados;
+					}
+					if ($i("i3GEOlegendaitensCluster")) {
+						$i("i3GEOlegendaitensCluster").innerHTML = retorno.dados;
 					}
 					if ($i("i3GEOlegendaitensValorQuartil")) {
 						$i("i3GEOlegendaitensValorQuartil").innerHTML = retorno.dados;
@@ -2280,5 +2302,45 @@ i3GEOF.legenda =
 				cp.set_response_type("JSON");
 				cp.call(p, "foo", temp);
 			});
+		},
+		aplicarCluster : function(){
+			var temp = function() {
+				// i3GEOF.legenda.mostralegenda();
+				i3GEOF.legenda.aposAlterarLegenda();
+			}, p, cp;
+			p =
+				i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid="
+					+ i3GEO.configura.sid
+					+ "&funcao=aplicarCluster"
+					+ "&maxdistance="
+					+ $i("i3GEOlegendaClusterMaxdistance").value
+					+ "&buffer="
+					+ $i("i3GEOlegendaClusterBuffer").value
+					+ "&filter="
+					+ i3GEO.util.base64encode($i("i3GEOlegendaClusterFilter").value)
+					+ "&region="
+					+ $i("i3GEOlegendaClusterRegion").value
+					+ "&group="
+					+ $i("i3GEOlegendaitensCluster").getElementsByTagName("select")[0].value
+					+ "&tema="
+					+ i3GEOF.legenda.tema;
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p, "foo", temp);
+		},
+		removerCluster : function(){
+			var temp = function() {
+				// i3GEOF.legenda.mostralegenda();
+				i3GEOF.legenda.aposAlterarLegenda();
+			}, p, cp;
+			p =
+				i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid="
+					+ i3GEO.configura.sid
+					+ "&funcao=removerCluster"
+					+ "&tema="
+					+ i3GEOF.legenda.tema;
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p, "foo", temp);
 		}
 	};

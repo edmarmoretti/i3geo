@@ -98,6 +98,25 @@ Acrescenta a contagem de elementos em cada classe.
 		if (!$r){$r = "erro.Erro legenda nao disponivel";}
 		$retorno = $r;
 	break;
+	case "APLICARCLUSTER":
+		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
+		$m = new Temas($map_file,$tema);
+		$l = $m->mapa->getlayerbyname($tema);
+		if($filter != ""){
+			$filter = base64decode($filter);
+		}
+		$m->criaCluster($group,$filter,$maxdistance,$region,$buffer);
+		$m->salva();
+		$retorno = "ok";
+	break;
+	case "REMOVERCLUSTER":
+		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
+		$m = new Temas($map_file,$tema);
+		$l = $m->mapa->getlayerbyname($tema);
+		$m->removeCluster();
+		$m->salva();
+		$retorno = "ok";
+	break;
 }
 if (!connection_aborted()){
 	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
