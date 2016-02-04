@@ -4,7 +4,7 @@
 
 Fun&ccedil;&otilde;es utilizadas por outros programas do sistema de administra&ccedil;&atilde;o.
 
-No in&iacute;�cio do programa &eacute; feita a inclus&atilde;o do i3geo/ms_configura.php e i3geo/classesphp/funcoes_gerais.php
+No inicio do programa &eacute; feita a inclus&atilde;o do i3geo/ms_configura.php e i3geo/classesphp/funcoes_gerais.php
 
 Licenca:
 
@@ -218,6 +218,139 @@ function pegaDados($sql,$locaplic="")
 		throw new Exception(" erro admin.php funcao pegaDados: <br><span style=color:red >".$e[2]."<br><span style=color:green >");
 	}
 }
+/**
+ * Faz o update dos dados de um registro em uma tabela do sistema de administracao
+ *
+ * @param obj $pdo - objeto pdo
+ * @param string $tabela - nome da tabela que sofrera o update
+ * @param array $data - array com os nomes dos campos da tabela e os valores
+ * @param string $filtro - filtro WHERE que sera utilizado para selecionar os registros que sofrerao o update
+ * @return boolean
+ */
+function i3GeoAdminUpdate($pdo,$tabela,$data,$filtro=""){
+	global $esquemaadmin;
+	$keys = array_keys($data);
+	$sset = array();
+	foreach($keys as $k){
+		$sset[] = $k."=?";
+	}
+	$sql = "UPDATE ".$esquemaadmin."$tabela SET ".implode($sset,",")." ".$filtro;
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	try {
+		$prep = $pdo->prepare($sql);
+	} catch (PDOException $e) {
+		return $e->getMessage();
+	}
+	try {
+		$exec = $prep->execute(array_values($data));
+		i3GeoAdminInsertLog($pdo,$sql,array_values($data));
+		return true;
+	} catch (PDOException $e) {
+		return $e->getMessage();
+	}
+}
+/**
+ * Faz o insert de um novo registro em uma tabela do sistema de administracao
+ *
+ * @param obj $pdo - objeto pdo
+ * @param string $tabela - nome da tabela que sofreara o insert
+ * @param array $data - array com os nomes dos campos da tabela e os valores
+ * @return boolean
+ */
+function i3GeoAdminInsert($pdo,$tabela,$data){
+	global $esquemaadmin;
+	$keys = array_keys($data);
+	//$fields = "'".implode("','",$keys)."'";
+	$fields = implode(",",$keys);
+	$placeholder = str_repeat("?,",count($keys));
+	$placeholder = trim($placeholder,",");
+	$sql = "INSERT INTO ".$esquemaadmin."$tabela($fields) VALUES ($placeholder)";
+	//echo $sql;exit;
+	//var_dump($data);exit;
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	try {
+	    $prep = $pdo->prepare($sql);
+	} catch (PDOException $e) {
+	    return "prepare ".$e->getMessage();
+	}
+	try {
+		$exec = $prep->execute(array_values($data));
+		//atualiza o log
+		i3GeoAdminInsertLog($pdo,$sql,array_values($data));
+		return true;
+	} catch (PDOException $e) {
+		return "execute ".$e->getMessage();
+	}
+}
+/**
+ * Faz o insert de um registro e retorna o ID unico criado
+ *
+ * @param obj $pdo - objeto pdo
+ * @param string $tabela - nome da tabela que sofreara o insert
+ * @param array $data - array com os nomes dos campos da tabela e os valores
+ * @param string $colTemp - coluna do tipo text que recebera um valor temporario para poder recuperar o registro inserido
+ * @param string $colId - coluna com id unico, cujo calculo e automatico
+ * @return string
+ */
+function i3GeoAdminInsertUnico($pdo,$tabela,$data,$colTemp,$colId){
+	global $esquemaadmin;
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$idtemp = (rand (9000,10000)) * -1;
+	$data[$colTemp] = $idtemp;
+	$q = i3GeoAdminInsert(
+		$pdo,
+		$tabela,
+		$data
+	);
+	if($q !== true){
+		echo "Error! insert: " . $q; exit;
+	}
+	try {
+		$id = $pdo->query("SELECT $colId FROM ".$esquemaadmin."$tabela WHERE $colTemp = '$idtemp'");
+	} catch (PDOException $e) {
+		return "SELECT ID ".$e->getMessage();
+	}
+	try {
+		$id = $id->fetchAll();
+		$id = $id[0][$colId];
+		$sql = "UPDATE ".$esquemaadmin."$tabela SET $colTemp = '' WHERE $colId = $id AND $colTemp = '$idtemp'";
+		$pdo->query($sql);
+		i3GeoAdminInsertLog($pdo,$sql);
+		return $id;
+	} catch (PDOException $e) {
+		return "UPDATE ID ".$e->getMessage();
+	}
+}
+function i3GeoAdminInsertLog($pdo,$sql,$data=array()){
+	global $esquemaadmin;
+	$s = "INSERT INTO ".$esquemaadmin."i3geoadmin_log(sql,serializedata,usuario,ip,timestamp,outros) VALUES (?,?,?,?,?,?)";
+	$ip = "UNKNOWN";
+	if (getenv("HTTP_CLIENT_IP")){
+		$ip = getenv("HTTP_CLIENT_IP");
+	}
+	else if(getenv("HTTP_X_FORWARDED_FOR")){
+		$ip = getenv("HTTP_X_FORWARDED_FOR");
+	}
+	else if(getenv("REMOTE_ADDR")) {
+		$ip = getenv("REMOTE_ADDR");
+	}
+	try {
+		$prep = $pdo->prepare($s);
+		$exec = $prep->execute(
+			array(
+				$sql,
+				serialize($data),
+				$_SESSION["usuario"],
+				$ip,
+				time()."(".date('r').")",
+				""
+			)
+		);
+		return true;
+	} catch (PDOException $e) {
+		echo $e->getMessage();exit;
+	}
+}
 /*
  Function: verificaFilhos
 
@@ -225,7 +358,7 @@ Verifica se o pai tem filhos nos componentes hier&Atilde;�rquicos do banco de 
 
 Por exemplo, pode-se verificar se um grupo possu&Atilde;� subgrupos, indicando-se como tabela i3geoadmin_grupos e o id do grupo
 
-Vari&Atilde;�veis globais:
+Variaveis globais:
 
 tabela {string} - tabela do banco de dados
 
