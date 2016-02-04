@@ -152,6 +152,9 @@ if(!isset($tema) && isset($layers)){
 if(!isset($tema) && isset($LAYERS)){
 	$tema = $LAYERS;
 }
+if(!isset($tema) && isset($LAYER)){
+	$tema = $LAYER;
+}
 if(!isset($tema) && isset($temas)){
 	$tema = $temas;
 }
