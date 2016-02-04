@@ -11,7 +11,7 @@ user-select: text;
 input[type=text] {
 font-size: 10px;
 color: #2F4632;
-background-color: #FFFFFF;
+background-color: rgb(250, 250, 250);
 padding: 0;
 border: 1px solid rgb(180, 180, 180);
 text-align: center;
@@ -21,7 +21,7 @@ height: 22px;
 input[type=number] {
 font-size: 12px;
 color: #2F4632;
-background-color: #FFFFFF;
+background-color: rgb(250, 250, 250);
 padding: 0;
 border: 1px solid rgb(180, 180, 180);
 text-align: center;
@@ -78,6 +78,10 @@ background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97
 background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
 background-size: 16px 144px;
 }
+}
+.styled-select input:focus, .i3geoForm input:focus {
+box-shadow: 0 0 1px blue inset;
+background: white none repeat scroll 0 0;
 }
 .i3geoForm, .i3geoForm150, .i3geoForm100 {
 width: 252px;
