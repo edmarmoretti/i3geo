@@ -6,8 +6,6 @@ Arquivos antigos e outras informações, veja em: https://softwarepublico.gov.br
 
 Guia completo sobre instalação e administração do software, veja em: http://moodle.gvsig-training.com/mod/book/view.php?id=5025
 
-Mantenha sua instalação atualizada, veja como: 
-
 # Guia rápido de instalação
 
 ## Windows
@@ -103,3 +101,15 @@ Para uso local você pode modificar de forma mais liberal as permissões dos arq
 	sudo chmod -R 777 /var/www/html/i3geo
 	
 	sudo chmod -R 777 /var/www/html/ms_tmp
+
+### Atualização do código
+
+Válido apenas se você não é um desenvolvedor do i3Geo e não tenha feito checkout via SSH.
+
+Abra o terminal e digite os seguintes comandos (no Linux pode ser necessário usar `sudo`):
+
+	git stash
+	
+	git -c http.sslVerify=false pull
+	
+	git stash pop
