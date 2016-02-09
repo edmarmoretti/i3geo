@@ -7,27 +7,23 @@ Veja:
 
 licenca.txt
 
-http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332
-
-Instalação e mais informações:
-
-http://moodle.gvsig-training.com/mod/book/view.php?id=5025
+https://softwarepublico.gov.br/social/i3geo/
 
 Se vc está fazendo um upgrade do i3geo, faça cópia dos diretórios temas, aplicmap
 e dos arquivos ms_configura.php. Consulte o documento i3geo/guia_de_migracao.txt para verificar
 quais cuidados vc deve tomar nos upgrades
 
+Comunidade: https://softwarepublico.gov.br/social/i3geo
+
+Código: https://softwarepublico.gov.br/gitlab/i3geo
+
+Histórico das versões: https://softwarepublico.gov.br/social/i3geo/historico-das-versoes
+
 ---------
 
-Histórico das versões: http://svn.softwarepublico.gov.br/trac/i3geo/wiki/HistoricoVersoes
-
----------
-
-Mantenha-se sempre atualizado utilizando o SVN
+Mantenha-se sempre atualizado utilizando o Git
 
 Isso permite que eventuais bugs sejam rapidamente corrigidos
-
-Veja como usar o SVN em: http://svn.softwarepublico.gov.br/trac/i3geo
 
 ---------
 
@@ -35,43 +31,23 @@ Altere a senha da variável $i3geomaster existente em ms_configura.php para desbl
 
 ---------
 
-Se vc está instalando pela primeira vez, veja no site da comunidade i3geo no www.softwarepublico.gov.br
-as instruções que ficam no item "documentacao". Para ter acesso ao portal, vc terá de fazer o cadastramento.
-
----------
-
 Se vc é usuário linux, dê preferência para instalar o i3geo no diretório:
-/var/www/i3geo
+/var/www/html/i3geo
 e o diretório temporário em
 /tmp/ms_tmp
 Assim vc não precisará alterar os arquivos de configuração.
 
 ---------
 
-A interface padrão utilizada pelo i3geo utiliza o html interface/openlayers.htm.
+A interface padrão utilizada pelo i3geo utiliza o html interface/black_ol.htm.
+
 Para customizar essa interface, edite o arquivo html conforme a documentação
 existente no próprio arquivo.
-É uma boa prática fazer suas alterações em uma cópia do openlayers.htm. Para utilizar a sua
+
+É uma boa prática fazer suas alterações em uma cópia da pasta i3geo/interface. Para utilizar a sua
 interface, inicie o i3geo da seguinte forma:
 
-http://hostname/i3geo/interface/minhainterface.htm
-
----------
-
-Para configurar a ferramenta google, registre seu servidor e edite o arquivo
-ms_configura.php para colocar a chave correta. Da mesma forma, se vc quiser usar
-as opções de integração com redes sociais, vc deve registrar sua instalação
-do i3geo no Facebook e Twitter.
-
----------
-
-Se vc for colocar o i3geo em um servidor web, verifique as configurações de segurança
-para possibilitar o uso de chamadas a web services.
-
----------
-
-Se vc quiser entrar em contato com a equipe que desenvolve o i3geo, por favor utilize
-o fórum da comunidade i3geo.
+http://host/i3geo/minhapasta/minhainterface.htm
 
 ---------
 
@@ -81,7 +57,4 @@ nos web services automáticos gerados com i3geo/ogc.php
 ---------
 
 Após instalar utilize o localhost/i3geo/testainstal.php para ver se está tudo certo.
-
-
-
 
