@@ -1,4 +1,6 @@
-# Versão 6 do i3Geo
+# Versão em desenvolvimento do i3Geo
+
+Para versões do Mapserver 6.x ou posteriores e Openlayers 3
 
 Arquivos antigos e outras informações, veja em: https://softwarepublico.gov.br/social/i3geo/
 
@@ -26,7 +28,7 @@ Para obter o código do i3Geo você tem duas opções, a primeira utiliza simple
 
 #### Primeira opção:
 
-* Baixe o código da versão em desenvolvimento do i3Geo: https://softwarepublico.gov.br/gitlab/i3geo/i3geo/repository/archive.zip
+* Baixe o código do i3Geo: https://softwarepublico.gov.br/gitlab/i3geo/i3geo/repository/archive.zip
 * Descompacte a pasta i3GEO.git para dentro da pasta c:\ms4w\Apache\htdocs
 * Renomeie a pasta c:\ms4w\Apache\htdocs\i3GEO.git para c:\ms4w\Apache\htdocs\i3geo
 * Teste o funcionamento digitando no navegador http://localhost/i3geo
@@ -41,8 +43,63 @@ Para obter o código do i3Geo você tem duas opções, a primeira utiliza simple
 	
 	cd i3geo
 	
-	git clone git@softwarepublico.gov.br:i3geo/i3geo.git .
+	git -c http.sslVerify=false clone http://softwarepublico.gov.br/gitlab/i3geo/i3geo.git .
 	
 Não esqueça o ponto no final da linha acima.
 
-## Linux
+## Linux (baseado em Ubuntu)
+
+Instale os softwares necesários para configurar o servidor web com PHP5, Mapserver e outros.
+
+No terminal, digite a sequência de comandos abaixo.
+
+	sudo apt-get install apache2 apache2-doc apache2-utils cgi-mapserver mapserver-bin sqlite libapache2-mod-php5 php5 php5-common php5-dev php5-curl php5-json php5-gd php5-odbc php5-pgsql php5-sqlite php5-ps php5-xmlrpc php5-xsl php5-imagick php5-mapscript
+	
+	sudo apt-get install php5-mbstring
+	
+	sudo apt-get install proj-epsg
+	
+	sudo a2enmod cgi
+	
+	sudo service apache2 restart
+	
+	sudo mkdir /var/www/html/i3geo
+	
+	sudo mkdir /tmp/ms_tmp
+	
+	sudo ln -s /tmp/ms_tmp /var/www/html/ms_tmp
+	
+Teste a instalação digitando no seu navegador web http://localhost
+	
+### i3Geo
+
+Para obter o código do i3Geo você tem duas opções, a primeira utiliza simplesmente o download de um arquivo e a segunda utiliza o Git. A vantagem da segunda opção é que você poderá atualizar sua instalação de forma mais fácil.
+
+Após a instalação, digite no navegador web http://localhost/i3geo
+
+#### Primeira opção:
+
+* Baixe o código do i3Geo: https://softwarepublico.gov.br/gitlab/i3geo/i3geo/repository/archive.zip
+* Descompacte a pasta i3GEO.git para dentro da pasta /var/www/html
+* Renomeie a pasta /var/www/html/i3GEO.git para /var/www/html/i3geo
+* Teste o funcionamento digitando no navegador http://localhost/i3geo
+
+#### Segunda opção:
+
+* No terminal digite a sequência de comandos:
+
+	sudo apt-get install git-core
+	
+	cd /var/www/html/i3geo
+	
+	sudo git -c http.sslVerify=false clone http://softwarepublico.gov.br/gitlab/i3geo/i3geo.git .
+	
+Não esqueça o ponto no final da linha acima.
+
+### Permissões
+
+Para uso local você pode modificar de forma mais liberal as permissões dos arquivos. No terminal digite:
+
+	sudo chmod -R 777 /var/www/html/i3geo
+	
+	sudo chmod -R 777 /var/www/html/ms_tmp
