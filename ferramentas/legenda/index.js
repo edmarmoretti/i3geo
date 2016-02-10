@@ -376,32 +376,7 @@ i3GEOF.legenda =
 				b.addClass("abrir100");
 				i3GEOF.legenda.ativaFoco();
 				i3GEOF.legenda.mostralegenda();
-				i3GEO.util.comboItens("", i3GEOF.legenda.tema, function(retorno) {
-					if ($i("i3GEOlegendaitensValorUnico")) {
-						$i("i3GEOlegendaitensValorUnico").innerHTML = retorno.dados;
-					}
-					if ($i("i3GEOlegendaClassesValorUnico")) {
-						$i("i3GEOlegendaClassesValorUnico").innerHTML = retorno.dados;
-					}
-					if ($i("i3GEOlegendaitensMetade")) {
-						$i("i3GEOlegendaitensMetade").innerHTML = retorno.dados;
-					}
-					if ($i("i3GEOlegendaitensMetadeId")) {
-						$i("i3GEOlegendaitensMetadeId").innerHTML = retorno.dados;
-					}
-					if ($i("i3GEOlegendaitensMedia")) {
-						$i("i3GEOlegendaitensMedia").innerHTML = retorno.dados;
-					}
-					if ($i("i3GEOlegendaitensValorClass")) {
-						$i("i3GEOlegendaitensValorClass").innerHTML = retorno.dados;
-					}
-					if ($i("i3GEOlegendaitensCluster")) {
-						$i("i3GEOlegendaitensCluster").innerHTML = retorno.dados;
-					}
-					if ($i("i3GEOlegendaitensValorQuartil")) {
-						$i("i3GEOlegendaitensValorQuartil").innerHTML = retorno.dados;
-					}
-				});
+				i3GEOF.legenda.montaCombosItens();
 				if (i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda.tema).classe && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda.tema).classe
 					.toLowerCase() == "nao") {
 					$i("i3GEOFlegendamostra").checked = false;
@@ -516,6 +491,7 @@ i3GEOF.legenda =
 		 * Fun&ccedil;&atilde;o executada ap&oacute;s ocorrer alguma altera&ccedil;&atilde;o efetiva da legenda do mapa
 		 */
 		aposAlterarLegenda : function() {
+			i3GEO.arvoreDeCamadas.CAMADAS = [];
 			i3GEO.atualiza();
 			i3GEO.Interface.atualizaTema("", i3GEOF.legenda.tema);
 			i3GEO.arvoreDeCamadas.atualizaLegenda(i3GEOF.legenda.tema);
@@ -1952,7 +1928,7 @@ i3GEOF.legenda =
 						+ "' id='i3GEOlegendamaxsize' />"
 						+ "</form></div>"
 
-						+ "<br><img style='float:left;' onclick='i3GEOF.legenda.aplicaTodasClasses(\"offsetx\",\"i3GEOlegendasymbolname\")' title='"
+						+ "<br><img style='float:left;' onclick='i3GEOF.legenda.aplicaTodasClasses(\"offsetx\",\"i3GEOlegendaoffsetx\")' title='"
 						+ $trad('aplicatodos', i3GEOF.legenda.dicionario)
 						+ "' src='"
 						+ i3GEO.configura.locaplic
@@ -1967,7 +1943,7 @@ i3GEOF.legenda =
 						+ "' id='i3GEOlegendaoffsetx' />"
 						+ "</form></div>"
 
-						+ "<br><img style='float:left;' onclick='i3GEOF.legenda.aplicaTodasClasses(\"offsety\",\"i3GEOlegendasymbolname\")' title='"
+						+ "<br><img style='float:left;' onclick='i3GEOF.legenda.aplicaTodasClasses(\"offsety\",\"i3GEOlegendaoffsety\")' title='"
 						+ $trad('aplicatodos', i3GEOF.legenda.dicionario)
 						+ "' src='"
 						+ i3GEO.configura.locaplic
@@ -2305,8 +2281,8 @@ i3GEOF.legenda =
 		},
 		aplicarCluster : function(){
 			var temp = function() {
-				// i3GEOF.legenda.mostralegenda();
 				i3GEOF.legenda.aposAlterarLegenda();
+				i3GEOF.legenda.montaCombosItens();
 			}, p, cp;
 			p =
 				i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid="
@@ -2330,7 +2306,7 @@ i3GEOF.legenda =
 		},
 		removerCluster : function(){
 			var temp = function() {
-				// i3GEOF.legenda.mostralegenda();
+				i3GEOF.legenda.montaCombosItens();
 				i3GEOF.legenda.aposAlterarLegenda();
 			}, p, cp;
 			p =
@@ -2342,5 +2318,33 @@ i3GEOF.legenda =
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p, "foo", temp);
+		},
+		montaCombosItens : function(){
+			i3GEO.util.comboItens("", i3GEOF.legenda.tema, function(retorno) {
+				if ($i("i3GEOlegendaitensValorUnico")) {
+					$i("i3GEOlegendaitensValorUnico").innerHTML = retorno.dados;
+				}
+				if ($i("i3GEOlegendaClassesValorUnico")) {
+					$i("i3GEOlegendaClassesValorUnico").innerHTML = retorno.dados;
+				}
+				if ($i("i3GEOlegendaitensMetade")) {
+					$i("i3GEOlegendaitensMetade").innerHTML = retorno.dados;
+				}
+				if ($i("i3GEOlegendaitensMetadeId")) {
+					$i("i3GEOlegendaitensMetadeId").innerHTML = retorno.dados;
+				}
+				if ($i("i3GEOlegendaitensMedia")) {
+					$i("i3GEOlegendaitensMedia").innerHTML = retorno.dados;
+				}
+				if ($i("i3GEOlegendaitensValorClass")) {
+					$i("i3GEOlegendaitensValorClass").innerHTML = retorno.dados;
+				}
+				if ($i("i3GEOlegendaitensCluster")) {
+					$i("i3GEOlegendaitensCluster").innerHTML = retorno.dados;
+				}
+				if ($i("i3GEOlegendaitensValorQuartil")) {
+					$i("i3GEOlegendaitensValorQuartil").innerHTML = retorno.dados;
+				}
+			});
 		}
 	};

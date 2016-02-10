@@ -1106,6 +1106,12 @@ class Legenda
 				case "width":
 					$estilo->set("width",$valor);
 					continue;
+				case "offsetx":
+					$estilo->set("offsetx",$valor);
+					continue;
+				case "offsety":
+					$estilo->set("offsety",$valor);
+					continue;
 				case "opacity":
 					$estilo->set("opacity",$valor);
 					continue;

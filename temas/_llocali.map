@@ -1,6 +1,7 @@
 MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
+
   LAYER
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"

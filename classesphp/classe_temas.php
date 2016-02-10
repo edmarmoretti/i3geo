@@ -1316,18 +1316,7 @@ Adiciona LABEL em uma classe de um tema
 	}
 	function removeCluster(){
 		$cluster = $this->layer->cluster;
-		/*
-		$cluster->maxdistance == 10 &&
-      	$cluster->buffer == 0.0 &&
-      	$cluster->region.string == '' &&
-      	$cluster->group.string == '' &&
-      	$cluster->filter.string == '';
-      	*/
-		$cluster->setFilter(NULL);
-		$cluster->setGroup(NULL);
-		$cluster->maxdistance = 10;
-		$cluster->region = NULL;
-
+		$this->layer->updatefromstring("LAYER CLUSTER END END");
 		$this->layer->setMetaData("cache","");
 		$this->layer->setMetadata("tiles","NAO");
 		$this->layer->setMetadata("cortepixels",0);
