@@ -27,7 +27,7 @@ Utilize uma das opções abaixo para instalar o servidor saiku-server
 
 		- Faça o download do SAIKU Server no endereço: http://meteorite.bi/saiku/download
 
-		- Descompacte os arquivos em uma pasta em seu servidor, podendo ser a mesma pasta onde se encontra a pasta i3geo (no Linux /var/www por exemplo)
+		- Descompacte os arquivos em uma pasta em seu servidor (no Linux /var por exemplo)
 
 		- Edite o arquivo saiku-server/tomcat/conf/server.xml para definir a porta utilizada pelo SAIKU
 
@@ -44,7 +44,7 @@ Utilize uma das opções abaixo para instalar o servidor saiku-server
 
 			Para que o SAIKU veja essa pasta é necessário editar o arquivo
 
-			/var/www/saiku-server/tomcat/webapps/saiku/WEB-INF/saiku-beans.xml
+			saiku-server/tomcat/webapps/saiku/WEB-INF/saiku-beans.xml
 
 			Procure pela linha:
 
@@ -59,12 +59,14 @@ Utilize uma das opções abaixo para instalar o servidor saiku-server
 			Alguns dos códigos do SAIKU originais foram alterados. As alterações estão na pasta i3geo/ferramentas/saiku/saiku-server
 			O conteúdo dessa pasta deve ser copiado para a pasta onde o saiku for instalado (saiku-server)
 
-2) Download via SVN do saiku-server com as alterações já realizadas
+2) Download via Git do saiku-server com as alterações já realizadas
 
-		Digite no terminal do sistema operacional:
-
-		svn checkout http://svn.softwarepublico.gov.br/svn/i3geo/subgrupos/i3geosaude/saiku-server /var/www/saiku-server
-
+		Veja as orientações sobre uso do Git e sobre como obter o código do i3geo. A obtenção do código do saiku-server segue a mesma lógica, no entanto você deve usar como exemplo os comandos abaixo:
+		
+		mkdir /var/saiku-server
+		cd /var/saiku-server
+		git -c http.sslVerify=false clone http://softwarepublico.gov.br/gitlab/i3geo/saiku-server.git .
+		chmod -R 766 /var/www/saiku-server
 
 Após a obtenção dos arquivos, inicialize o servidor
 
@@ -97,7 +99,7 @@ Banco de dados
 
 	Essa tabela pode ser obtida fazendo-se o RESTORE do banco de dados default. Para obter o arquivo de backup utilize:
 
-	http://devel.gvsig.org/svn/i3geo/subgrupos/i3geosaude/databasei3geosaude.backup
+	https://softwarepublico.gov.br/gitlab/i3geo/i3geosaude/blob/master/databasei3geosaude.backup
 
 	Por padrão, esse banco de ve ser restaurado em um DATABASE chamado "i3geosaude" com usuário "postgres" e senha "postgres"
 
