@@ -1313,6 +1313,23 @@ Adiciona LABEL em uma classe de um tema
 		$this->layer->setMetaData("cache","");
 		$this->layer->setMetadata("tiles","NAO");
 		$this->layer->setMetadata("cortepixels",0);
+		//apaga as classes pois nao fazem mais sentido
+		if($group == ""){
+			$numclasses = $this->layer->numclasses;
+			if ($numclasses > 0){
+				for ($i=0; $i < $numclasses; ++$i)
+				{
+					$classe = $this->layer->getClass($i);
+					$classe->set("status",MS_DELETE);
+				}
+			}
+			$classe = ms_newClassObj($this->layer);
+			$novoestilo = ms_newStyleObj($classe);
+			$novoestilo->set("size",6);
+			$novoestilo->set("symbolname","ponto");
+			$cor = $novoestilo->color;
+			$cor->setRGB(255,100,100);
+		}
 	}
 	function removeCluster(){
 		$cluster = $this->layer->cluster;
@@ -1320,6 +1337,18 @@ Adiciona LABEL em uma classe de um tema
 		$this->layer->setMetaData("cache","");
 		$this->layer->setMetadata("tiles","NAO");
 		$this->layer->setMetadata("cortepixels",0);
+		$numclasses = $this->layer->numclasses;
+		if ($numclasses > 0){
+			for ($i=0; $i < $numclasses; ++$i)
+			{
+				$classe = $this->layer->getClass($i);
+				$numestilos = $classe->numstyles;
+				for($j=0;$j<$numestilos;++$j){
+					$estilo = $classe->getstyle($j);
+					$estilo->removebinding(MS_STYLE_BINDING_SIZE);
+				}
+			}
+		}
 	}
 }
 ?>

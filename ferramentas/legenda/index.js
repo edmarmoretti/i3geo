@@ -1826,6 +1826,7 @@ i3GEOF.legenda =
 						+ linha[6]
 						+ "' id='i3GEOlegendasizes' />"
 						+ "</form></div>"
+						+ "<div class='styled-select' id='i3GEOlegendaComboSize'></div>"
 
 						+ "<br><img style='float:left;' onclick='i3GEOF.legenda.aplicaTodasClasses(\"width\",\"i3GEOlegendawidth\")' title='"
 						+ $trad('aplicatodos', i3GEOF.legenda.dicionario)
@@ -1974,6 +1975,13 @@ i3GEOF.legenda =
 						+ "</form></div>";
 
 				$i("i3GEOlegendaParametrosEstilos").innerHTML = d;
+				//preenche as listas de itens
+				i3GEO.util.comboItens("", i3GEOF.legenda.tema, function(retorno) {
+					if ($i("i3GEOlegendaComboSize")) {
+						$i("i3GEOlegendaComboSize").innerHTML = retorno.dados.replace("id=''"," onchange='$i(\"i3GEOlegendasizes\").value = this.value'");
+					}
+				});
+				
 				i3GEO.util.aplicaAquarela("i3GEOlegendaParametrosEstilos");
 				p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid="

@@ -148,8 +148,7 @@ class Alteraclasse
 			return "erro";
 		}
 		$numclasses = $this->layer->numclasses;
-		if ($numclasses > 0)
-		{
+		if ($numclasses > 0){
 			//elimina a express&atilde;o da primeira classe
 			$classe0 = $this->layer->getClass(0);
 			//echo "<pre>";var_dump($classe0);exit;
@@ -161,6 +160,16 @@ class Alteraclasse
 				$classe = $this->layer->getClass($i);
 				$classe->set("status",MS_DELETE);
 			}
+		}
+		else{
+			$classe = ms_newClassObj($this->layer);
+			$novoestilo = ms_newStyleObj($classe);
+			if ($this->layer->type == 0){
+				$novoestilo->set("symbolname","ponto");
+				$novoestilo->set("size","6");
+			}
+			$cor = $novoestilo->color;
+			$cor->setRGB(255,100,100);
 		}
 		$this->layer->setMetaData("cache","");
 		return("ok");
@@ -195,6 +204,7 @@ class Alteraclasse
 		$ids = explode(";",$ids);
 		$minScales = explode(";",$minScales);
 		$maxScales = explode(";",$maxScales);
+
 		$nomes = $this->converteTexto($nomes);
 		$nomes = explode(";",$nomes);
 		//$exps = mb_convert_encoding($exps,"ISO-8859-1","UTF-8");
@@ -210,12 +220,13 @@ class Alteraclasse
 		//elimina as classes existentes atualmente em cada layer
 		foreach ($t as $tema){
 			$layer = $this->mapa->getlayerbyname($tema);
-			$layer->setMetaData("cache","");
+			$layer->setmetadata("cache","");
 			$nc = $layer->numclasses;
-			for($i=0;$i < $nc;++$i)
-			{
-				$class = $layer->getclass($i);
-				$class->set("status",MS_DELETE);
+			if($nc > 0){
+				for($i=0;$i < $nc;++$i){
+					$class = $layer->getclass($i);
+					$class->set("status",MS_DELETE);
+				}
 			}
 		}
 		//acrescenta as classes definidas

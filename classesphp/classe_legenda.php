@@ -749,7 +749,12 @@ class Legenda
 			$linha[] = corRGB($estilo->backgroundcolor);
 			$linha[] = corRGB($estilo->color);
 			$linha[] = $estilo->symbolname;
-			$linha[] = $estilo->size;
+			if($estilo->getbinding(MS_STYLE_BINDING_SIZE)){
+				$linha[] = $estilo->getbinding(MS_STYLE_BINDING_SIZE);
+			}
+			else{
+				$linha[] = $estilo->size;
+			}
 			$linha[] = $estilo->opacity;
 			if($this->v >= 6){
 				$linha[] = $estilo->width;
@@ -842,7 +847,13 @@ class Legenda
 		}
 		if ((isset ($size)) && ($size != "-1"))
 		{
-			$estilo->set("size",$size);
+			if(is_numeric($size)){
+				$estilo->removebinding(MS_STYLE_BINDING_SIZE);
+				$estilo->set("size",$size);
+			}
+			else{
+				$estilo->setbinding(MS_STYLE_BINDING_SIZE, $size);
+			}
 		}
 		if ((isset ($width)) && ($width != "-1") && ($this->v >= 6))
 		{
@@ -1101,8 +1112,14 @@ class Legenda
 					$cor->setRGB($nc[0],$nc[1],$nc[2]);
 					continue;
 				case "size":
-					$estilo->set("size",$valor);
-					break;
+					if(is_numeric($valor)){
+						$estilo->removebinding(MS_STYLE_BINDING_SIZE);
+						$estilo->set("size",$valor);
+					}
+					else{
+						$estilo->setbinding(MS_STYLE_BINDING_SIZE, $valor);
+					}
+					continue;
 				case "width":
 					$estilo->set("width",$valor);
 					continue;
