@@ -43,7 +43,7 @@ MAP
 		NAME 'kml'
 		DRIVER 'OGR/KML'
 		MIMETYPE "application/vnd.google-earth.kml+xml"
-		#FORMATOPTION "STORAGE=memory"
+		FORMATOPTION "STORAGE=memory"
 		IMAGEMODE FEATURE
 	END
 	OUTPUTFORMAT

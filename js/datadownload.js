@@ -319,6 +319,7 @@ function mostraDownload(retorno)
 			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WFS&VERSION=1.1.0&request=getfeature&OUTPUTFORMAT=shape-zip' target=blank >Download shapefile com WFS (arquivo compactado incluindo .prj)</a><br><br>";
 			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WFS&VERSION=1.1.0&request=getfeature&OUTPUTFORMAT=csv' target=blank >Download CSV com WFS (arquivo compactado)</a><br><br>";
 			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WFS&VERSION=1.1.0&request=getfeature&OUTPUTFORMAT=kmz' target=blank >Download KMZ</a><br><br>";
+			ins += "<a href='"+g_locaplic+"/ogc.php?tema="+retorno.tema+"&SERVICE=WFS&VERSION=1.1.0&request=getfeature&OUTPUTFORMAT=kml' target=blank >Download KML</a><br><br>";
 
 			for (var arq=0;arq<n;arq++)
 			{

@@ -157,6 +157,29 @@ class LayerServer {
 				} else {
 						$this->_networklink = false;
 				}
+				//ajusta a legenda
+				$numlayers = $this->map_object->numlayers;
+				for ($i=0;$i < $numlayers;++$i){
+					$layer = $this->map_object->getlayer($i);
+					if (($layer->data != "") && (strtoupper($layer->getmetadata("escondido")) != "SIM") && (strtoupper($layer->getmetadata("tema")) != "NAO")){
+						if ($layer->numclasses > 0){
+							$classe = $layer->getclass(0);
+							if (($classe->name == "") || ($classe->name == " ")){
+								$classe->set("name",$layer->getmetadata("tema"));
+							}
+							//corrige o titulo da legenda
+							if($layer->type != 3 && $layer->type != 4){
+								$nclass = $layer->numclasses;
+								for($j=0;$j<$nclass;$j++){
+									$classe = $layer->getclass($j);
+									if($classe->title === ""){
+										$classe->title = $classe->name;
+									}
+								}
+							}
+						}
+					}
+				}
 				$imageObj = $this->map_object->drawlegend();
 				$url = $imageObj->saveWebImage();
 				$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);

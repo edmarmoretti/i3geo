@@ -1,7 +1,7 @@
 MAP
 	EXTENT -76.512593 -36.948432 -29.585185 7.046013
 	FONTSET "../symbols/fontes.txt"
-	SYMBOLSET "../symbols/simbolosv6.sym"
+	SYMBOLSET "../symbols/simbolosv7.sym"
 	IMAGECOLOR 255 255 255
 	IMAGETYPE png
 	MAXSIZE 10000
@@ -42,8 +42,8 @@ MAP
 	OUTPUTFORMAT
 		NAME 'kml'
 		DRIVER 'OGR/KML'
-		MIMETYPE "application/vnd.google-earth.kml+xml"
-		#FORMATOPTION "STORAGE=memory"
+		#MIMETYPE "application/vnd.google-earth.kml+xml"
+		FORMATOPTION "STORAGE=memory"
 		IMAGEMODE FEATURE
 	END
 	OUTPUTFORMAT

@@ -181,9 +181,10 @@ if(!empty($OUTPUTFORMAT)){
 	carregaCacheArquivo();
 }
 //
-//para o caso da requisicao kml
+//para o caso da requisicao kmz
+//kmz nao funciona diretamente com mapserver
 //
-if(strtolower($OUTPUTFORMAT) == "kml" || strtolower($OUTPUTFORMAT) == "kmz"){
+if(strtolower($OUTPUTFORMAT) == "xkml" || strtolower($OUTPUTFORMAT) == "kmz"){
 	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;
 	header("Location:".$urln);
 	exit;
@@ -291,7 +292,6 @@ $arrayget["X"] = "";
 $arrayget["Y"] = "";
 $arrayget["tms"] = "";
 $nomeMapfileTmp = $dir_tmp."/ogc_".md5(implode("",$arrayget))."_".$agora.".map";
-
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
 $cortePixels = 0;
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
@@ -677,9 +677,10 @@ else{
 	//caso seja download ou json ou csv
 	//
 	processaOutputformatMapfile();
-
 	$oMap->save($nomeMapfileTmp);
+
 	validaAcessoTemas($nomeMapfileTmp,true);
+	
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
 
@@ -943,6 +944,35 @@ if(strtolower($OUTPUTFORMAT) == "geojson" || strtolower($OUTPUTFORMAT) == "json"
 	ms_iogetStdoutBufferBytes();
 	ms_ioresethandlers();
 
+	exit;
+}
+if(strtolower($OUTPUTFORMAT) == "kml"){
+	$oMap->owsdispatch($req);
+	$contenttype = ms_iostripstdoutbuffercontenttype();
+	ms_iostripstdoutbuffercontentheaders();
+	//grava em disco
+	$arq = $dir_tmp."/".$tema.".kml";
+	$contents = ms_iogetstdoutbufferstring();
+	file_put_contents($arq,$contents);
+	//envia para download
+	header('Content-Disposition: attachment; filename='.$tema.'.kml');
+	ms_iogetStdoutBufferBytes();
+	ms_ioresethandlers();
+	exit;
+}
+//kmz nao funciona quando fornecido diretamente pelo mapserver
+if(strtolower($OUTPUTFORMAT) == "kmz"){
+	$oMap->owsdispatch($req);
+	$contenttype = ms_iostripstdoutbuffercontenttype();
+	ms_iostripstdoutbuffercontentheaders();
+	//grava em disco
+	$arq = $dir_tmp."/".$tema.".kmz";
+	$contents = ms_iogetstdoutbufferstring();
+	file_put_contents($arq,$contents);
+	//envia para download
+	header('Content-Disposition: attachment; filename='.$tema.'.kmz');
+	ms_iogetStdoutBufferBytes();
+	ms_ioresethandlers();
 	exit;
 }
 if(strtolower($OUTPUTFORMAT) == "shape-zip"){
@@ -1245,6 +1275,14 @@ function getfeatureinfoJson(){
 }
 function processaOutputformatMapfile(){
 	global $OUTPUTFORMAT, $oMap, $tema, $ows_geomtype;
+	if(strtolower($OUTPUTFORMAT) == "kml"){
+		$l = $oMap->getlayer(0);
+		$n = $l->name;
+		$oMap->selectOutputFormat("kml");
+		$oMap->outputformat->setOption("STORAGE", "filesystem");
+		$oMap->outputformat->setOption("FILENAME", $tema.".kml");
+		$l->setmetadata("wfs_getfeature_formatlist","kml");
+	}
 	if(strtolower($OUTPUTFORMAT) == "shape-zip"){
 		$l = $oMap->getlayer(0);
 		$n = $l->name;
@@ -1287,6 +1325,24 @@ function carregaCacheArquivo(){
 		if(file_exists($arq)){
 			header('Content-Disposition: attachment; filename='.$tema.$ows_geomtype.'.csv');
 			header("Content-type: text/csv");
+			readfile($arq);
+			exit;
+		}
+	}
+	if(strtolower($OUTPUTFORMAT) == "kml"){
+		$arq = $dir_tmp."/".$tema.".kml";
+		if(file_exists($arq)){
+			header('Content-Disposition: attachment; filename='.$tema.'.kml');
+			header("Content-type: application/vnd.google-earth.kml+xml");
+			readfile($arq);
+			exit;
+		}
+	}
+	if(strtolower($OUTPUTFORMAT) == "kmz"){
+		$arq = $dir_tmp."/".$tema.".kmz";
+		if(file_exists($arq)){
+			header('Content-Disposition: attachment; filename='.$tema.'.kmz');
+			header("Content-type: application/vnd.google-earth.kmz");
 			readfile($arq);
 			exit;
 		}
