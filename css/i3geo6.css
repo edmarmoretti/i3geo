@@ -257,7 +257,7 @@ para nao selecionar
 -o-user-select: none;
 user-select: none;
 }
-.bd input {
+.bd input, .bd textarea {
 -webkit-user-select: text;
 -khtml-user-select: text;
 -moz-user-select: text;
