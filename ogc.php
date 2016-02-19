@@ -174,6 +174,13 @@ if(!file_exists($tema)){
 }
 
 $layers = $tema;
+//ajusta o OUTPUTFORMAT
+if(strpos(strtolower($OUTPUTFORMAT),"kml") === true || strpos(strtolower($OUTPUTFORMAT),"kml") === 0){
+	$OUTPUTFORMAT = "kml";
+}
+if(strpos(strtolower($OUTPUTFORMAT),"kmz") === true || strpos(strtolower($OUTPUTFORMAT),"kmz") === 0){
+	$OUTPUTFORMAT = "kmz";
+}
 //
 //verifica o OUTPUTFORMAT e o cache de arquivo
 //
