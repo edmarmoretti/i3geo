@@ -119,7 +119,7 @@ $interfaceTemp = $interface;
 //TEMA2SLD e usado por datadownload.htm
 //PEGAMAPAS e utilizado em varias funcoes
 //
-if ($funcao != "listainterfaces" && $funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funcao != "procurartemasestrela" && $funcao != "pegalistadegrupos" && $funcao != "pegalistademenus" && $funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS"){
+if ($funcao != "download3" && $funcao != "listainterfaces" && $funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funcao != "procurartemasestrela" && $funcao != "pegalistadegrupos" && $funcao != "pegalistademenus" && $funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS"){
 	session_name("i3GeoPHP");
 	if (isset($g_sid) && $g_sid != "")
 	{

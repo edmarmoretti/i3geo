@@ -143,32 +143,38 @@ class LayerServer {
 		function run(){
 				// Check cache
 				if(ENABLE_CACHE){
-						$cache_file = $this->get_cache_file_name();
-						if(file_exists($cache_file)){
-				$this->send_header();
-				readfile($cache_file);
-				exit;
-						}
+					$cache_file = $this->get_cache_file_name();
+					if(file_exists($cache_file)){
+						$this->send_header();
+						readfile($cache_file);
+						exit;
+					}
 				}
 				// If not layer are requested, send all as networklinks
 				if(!$this->typename){
-						$this->_networklink = true;
-						$this->typename = $this->get_layer_list();
+					$this->_networklink = true;
+					$this->typename = $this->get_layer_list();
 				} else {
-						$this->_networklink = false;
+					$this->_networklink = false;
 				}
-				//ajusta a legenda
-				$numlayers = $this->map_object->numlayers;
-				for ($i=0;$i < $numlayers;++$i){
-					$layer = $this->map_object->getlayer($i);
-					if (($layer->data != "") && (strtoupper($layer->getmetadata("escondido")) != "SIM") && (strtoupper($layer->getmetadata("tema")) != "NAO")){
-						if ($layer->numclasses > 0){
-							$classe = $layer->getclass(0);
-							if (($classe->name == "") || ($classe->name == " ")){
-								$classe->set("name",$layer->getmetadata("tema"));
-							}
-							//corrige o titulo da legenda
-							if($layer->type != 3 && $layer->type != 4){
+				if($this->_networklink == false){
+					//desliga todos os layers
+					for($i = 0; $i < $this->map_object->numlayers; $i++){
+						$l = $this->map_object->getLayer($i);
+						$l->set("status",MS_OFF);
+					}
+					//ajusta a legenda
+					$nomesl = explode(',', $this->typename);
+					foreach ($nomesl as $nomel){
+						$layer = $this->map_object->getlayerbyname($nomel);
+						if($layer){
+							$layer->set("status",MS_DEFAULT);
+							if ($layer->numclasses > 0){
+								$classe = $layer->getclass(0);
+								if (($classe->name == "") || ($classe->name == " ")){
+									$classe->set("name",$layer->getmetadata("tema"));
+								}
+								//corrige o titulo da legenda
 								$nclass = $layer->numclasses;
 								for($j=0;$j<$nclass;$j++){
 									$classe = $layer->getclass($j);
@@ -193,8 +199,12 @@ class LayerServer {
 				. "      <screenXY x='0.01' y='0.14' xunits='fraction' yunits='fraction'/>" . PHP_EOL
 				. "      <size x='-1' y='-1' xunits='pixels' yunits='pixels'/>" . PHP_EOL
 				. "    </ScreenOverlay>" . PHP_EOL;
-
-				$this->_xml = new SimpleXMLElement('<kml xmlns="http://earth.google.com/kml/2.0"><Document >'.$legenda.'</Document></kml>');
+				if($this->_networklink == false){
+					$this->_xml = new SimpleXMLElement('<kml xmlns="http://earth.google.com/kml/2.0"><Document >'.$legenda.'</Document></kml>');
+				}
+				else{
+					$this->_xml = new SimpleXMLElement('<kml xmlns="http://earth.google.com/kml/2.0"><Document ></Document></kml>');
+				}
 				// Prepare projection
 				$this->in_proj  = ms_newProjectionObj($this->map_object->getProjection());
 				// Set projection to GOOGLE earth's projection

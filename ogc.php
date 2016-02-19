@@ -175,10 +175,10 @@ if(!file_exists($tema)){
 
 $layers = $tema;
 //ajusta o OUTPUTFORMAT
-if(strpos(strtolower($OUTPUTFORMAT),"kml") === true || strpos(strtolower($OUTPUTFORMAT),"kml") === 0){
+if(strpos(strtolower($OUTPUTFORMAT),"kml") !== false){
 	$OUTPUTFORMAT = "kml";
 }
-if(strpos(strtolower($OUTPUTFORMAT),"kmz") === true || strpos(strtolower($OUTPUTFORMAT),"kmz") === 0){
+if(strpos(strtolower($OUTPUTFORMAT),"kmz") !== false){
 	$OUTPUTFORMAT = "kmz";
 }
 //
@@ -191,8 +191,26 @@ if(!empty($OUTPUTFORMAT)){
 //para o caso da requisicao kmz
 //kmz nao funciona diretamente com mapserver
 //
-if(strtolower($OUTPUTFORMAT) == "xkml" || strtolower($OUTPUTFORMAT) == "kmz"){
+if(strtolower($OUTPUTFORMAT) == "kmz"){
 	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;
+	header("Location:".$urln);
+	exit;
+}
+if(strtolower($OUTPUTFORMAT) == "kml" && $ogrOutput == false){
+	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;
+	header("Location:".$urln);
+	exit;
+}
+//
+//caso seja uma requisição WMS com format
+//
+if(strpos(strtolower($format),"kml") !== false){
+	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kml&map=".$tema."&typename=".$tema;
+	header("Location:".$urln);
+	exit;
+}
+if(strpos(strtolower($format),"kmz") !== false){
+	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kml&map=".$tema."&typename=".$tema;
 	header("Location:".$urln);
 	exit;
 }
