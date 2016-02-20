@@ -215,7 +215,6 @@ class LayerServer {
 				$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 				$protocolo = strtolower($protocolo[0]);
 				$this->endpoint = $protocolo . '://'.$_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
-
 				// Process request
 				if(!$this->has_error()) {
 						 $this->process_request();
@@ -355,7 +354,7 @@ class LayerServer {
 						// Add parameters to OGC server call
 						// Fix &
 						$wms_link = preg_replace('/&/', '&amp;', $wms_link);
-						$wms_link .= 'VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4618&amp;STYLES=&amp;FORMAT=image/jpeg&amp;TRANSPARENT=TRUE&amp;';
+						$wms_link .= 'VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4618&amp;STYLES=&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;';
 						// Link ok, create folder
 						//$folder =& $this->_xml->Document->addChild('GroundOverlay');
 						$folder =& $this->simplexml_addChild($this->_xml->Document,'GroundOverlay');
@@ -1030,7 +1029,7 @@ class LayerServer {
 
 							$this->map_object = ms_newMapObj($this->map);
 							if(!$this->_zipped){
-								$this->map_object->setmetadata('wms_onlineresource',$servidor.":80/i3geo/ogc.php?tema=".$temp."&width=1500&height=1500&");
+								$this->map_object->setmetadata('wms_onlineresource',$servidor.":80/i3geo/ogc.php?tema=".$temp."&width=1500&height=1500&TRANSPARENT=true&FORMAT=image/png&");
 								$this->map_object->setmetadata("ows_enable_request","*");
 							}
 							$n = $this->map_object->numlayers;
@@ -1047,7 +1046,7 @@ class LayerServer {
 					if(!$this->_zipped)
 					{
 						$l->set("type",MS_LAYER_RASTER);
-						$l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
+						$l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=1500&height=1500&TRANSPARENT=true&FORMAT=image/png&");
 						$l->setmetadata("ows_enable_request","*");
 					}
 					ms_newLayerObj($this->map_object, $l);
@@ -1059,7 +1058,8 @@ class LayerServer {
 				//$w->set("template","none.htm");
 				
 				if(!$this->_zipped){
-					$this->map_object->setmetadata('wms_onlineresource',$servidor.":80".$locmapserv."?map=".$temp."&width=1500&height=1500&");
+					//$this->map_object->setmetadata('wms_onlineresource',$servidor.":80".$locmapserv."?map=".$temp."&width=1500&height=1500&");
+					$this->map_object->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=1500&height=1500&TRANSPARENT=true&FORMAT=image/png&");
 					$this->map_object->setmetadata("ows_enable_request","*");
 				}
 				$n = $this->map_object->numlayers;
