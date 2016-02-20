@@ -277,9 +277,11 @@ function autenticaUsuario($usuario,$senha){
 	//echo "select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1";exit;
 	//exit;
 	if(verificaMaster($usuario,$senha) == true){
+		
 		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$locaplic);
 		$op = pegadados("SELECT O.codigo FROM ".$esquemaadmin."i3geousr_operacoes AS O");
-		$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupousuario ");
+		$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupos ");
+		//var_dump($gr);exit;
 		$operacoes = array();
 		foreach($op as $o){
 			$operacoes[$o["codigo"]] = true;

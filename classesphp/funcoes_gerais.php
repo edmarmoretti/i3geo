@@ -2740,6 +2740,7 @@ Lista os grupos ao qual pertence o usuario atualmente logado
 */
 function listaGruposUsrLogin(){
 	error_reporting(0);
+	//echo $_COOKIE["i3geocodigologin"];exit;
 	if(empty($_COOKIE["i3geocodigologin"])){
 		return array();
 	}
