@@ -212,8 +212,8 @@ class LayerServer {
 				// Set endpoint
 				//die($_SERVER['REQUEST_URI']);
 
-		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-		$protocolo = strtolower($protocolo[0]);
+				$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+				$protocolo = strtolower($protocolo[0]);
 				$this->endpoint = $protocolo . '://'.$_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
 
 				// Process request
@@ -223,9 +223,7 @@ class LayerServer {
 				if($this->has_error()){
 						$this->add_errors();
 				}
-
 				return $this->send_stream($this->get_kml());
-
 		 }
 
 		/**

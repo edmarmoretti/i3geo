@@ -44,18 +44,15 @@ include_once ("classesphp/classe_menutemas.php");
 include_once ("ms_configura.php");
 include_once ("admin/php/conexao.php");
 $encoding = "ISO-8859-1";
-if($convUTF == true)
-{$encoding = "UTF-8";}
-if(!isset($idioma))
-{$idioma = "pt";}
-if(isset($_GET["tipoxml"]) && $_GET["tipoxml"] == "kml"){
-	echo header('Content-type: application/vnd.google-earth.kml+xml');
-	echo header('Content-Disposition: attachment; filename="i3geo.kml"');
+if($convUTF == true){
+	$encoding = "UTF-8";
 }
-else
-{echo header("Content-type: application/xml");}
-echo '<?xml version="1.0" encoding="'.$encoding.'"?>';
-echo "<kml xmlns='http://earth.google.com/kml/2.2'>\n";
+if(!isset($idioma)){
+	$idioma = "pt";
+}
+
+$xml = '<?xml version="1.0" encoding="'.$encoding.'"?>';
+$xml .= "<kml xmlns='http://earth.google.com/kml/2.2'>\n";
 
 //
 //pega os endere&ccedil;os para compor a url de chamada do gerador de web services
@@ -67,54 +64,69 @@ $protocolo1 = strtolower($protocolo . '://'.$_SERVER['SERVER_NAME']);
 $protocolo = $protocolo . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/kml.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //error_reporting(0);
-if(!isset($perfil)){$perfil = "";}
+if(!isset($perfil)){
+	$perfil = "";
+}
 //
 //monta o xml
 //
-echo "<Document><name>Menu i3geo</name><open>0</open><description></description><visibility>0</visibility>\n";
+$xml .= "<Document><name>Menu i3geo</name><open>0</open><description></description><visibility>0</visibility>\n";
 include(dirname(__FILE__)."/admin/php/admin.php");
 if(!empty($esquemaadmin)){
 	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }
-if($idioma == "pt")
-{$coluna = "nome_menu";}
-else
-{$coluna = $idioma;}
+if($idioma == "pt"){
+	$coluna = "nome_menu";
+}
+else{
+	$coluna = $idioma;
+}
 $menus = pegaDados("SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from ".$esquemaadmin."i3geoadmin_menus where lower(publicado_menu) != 'nao' or publicado_menu is null order by nome_menu ");
+
+//echo "<pre>menu - ".var_dump($menus);exit;
 foreach($menus as $menu){
-	kml_cabecalho($menu["nome_menu"],$menu["desc_menu"]);
+	$xml .= kml_cabecalho($menu["nome_menu"],$menu["desc_menu"]);
 	$id_menu = $menu["id_menu"];
 	//raiz
-	if($idioma == "pt")
-	{$coluna = "nome_tema";}
-	else
-	{$coluna = $idioma;}
+	if($idioma == "pt")	{
+		$coluna = "nome_tema";
+	}
+	else{
+		$coluna = $idioma;
+	}
+	
 	$sql = "select id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,codigo_tema,kmz_tema FROM ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where (lower(i3geoadmin_temas.tipoa_tema) != 'wms' or i3geoadmin_temas.tipoa_tema is null) and (lower(i3geoadmin_temas.kml_tema) != 'nao' or i3geoadmin_temas.kml_tema isnull) and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 and i3geoadmin_raiz.id_nivel = 0 order by ordem";
 	$temas = pegaDados($sql);
 	if(count($temas) > 0){
-		foreach ($temas as $tema)
-		{kml_tema_bd($tema);}
+		foreach ($temas as $tema){
+			$xml .= kml_tema_bd($tema);
+		}
 	}
+	
 	if($idioma == "pt"){
 		$coluna = "nome_grupo";
 	}
 	else{
 		$coluna = $idioma;
 	}
+	
 	$grupos = pegaDados("SELECT $coluna as nome_grupo,n1.id_n1,n1.id_grupo,gr.desc_grupo from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as gr where (lower(n1.publicado) != 'nao' or n1.publicado is null) and n1.id_menu = '$id_menu' and n1.id_grupo = gr.id_grupo order by gr.nome_grupo");
 	foreach($grupos as $grupo){
-		kml_cabecalho($grupo["nome_grupo"],$grupo["desc_grupo"]);
+		$xml .= kml_cabecalho($grupo["nome_grupo"],$grupo["desc_grupo"]);
 		$id_grupo = $grupo["id_grupo"];
 		//raiz
-		if($idioma == "pt")
-		{$coluna = "nome_tema";}
-		else
-		{$coluna = $idioma;}
+		if($idioma == "pt"){
+			$coluna = "nome_tema";
+		}
+		else{
+			$coluna = $idioma;
+		}
 		$sql = "select id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,kml_tema,kmz_tema,codigo_tema FROM ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where lower(i3geoadmin_temas.tipoa_tema) != 'wms' and lower(i3geoadmin_temas.kml_tema) != 'nao' and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = ".$grupo["id_n1"]." order by ordem";
 		$temas = pegaDados($sql);
 		if(count($temas) > 0){
-			foreach ($temas as $tema)
-			{kml_tema_bd($tema);}
+			foreach ($temas as $tema){
+				$xml .= kml_tema_bd($tema);
+			}
 		}
 		if($idioma == "pt"){
 			$coluna = "nome_subgrupo";
@@ -123,12 +135,13 @@ foreach($menus as $menu){
 			$coluna = $idioma;
 		}
 		$sql = "select s.$coluna as nome_subgrupo,n2.id_n2 from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_n1 as n1, ".$esquemaadmin."i3geoadmin_subgrupos as s ";
-		$sql .= "where n1.id_grupo = '$id_grupo' and n2.id_subgrupo = s.id_subgrupo ";
+		$sql .= "where n1.id_menu = '$id_menu' and n1.id_grupo = '$id_grupo' and n2.id_subgrupo = s.id_subgrupo ";
 		$sql .= "and n2.id_n1 = n1.id_n1 ";
 		$sql .= "and (n1.n1_perfil = '' or n1.n1_perfil is null) and (n2.n2_perfil = '' or n2.n2_perfil isnull) ";
 		$sql .= "and (lower(n2.publicado) != 'nao' or n2.publicado is null) ";
 		$sql .= "order by s.nome_subgrupo";
 		$subgrupos = pegaDados($sql);
+		//var_dump($subgrupos);
 		if($idioma == "pt"){
 			$coluna = "nome_tema";
 		}
@@ -145,20 +158,32 @@ foreach($menus as $menu){
 			$sql .= "and (lower(t.tipoa_tema) != 'wms' or t.tipoa_tema is null)";
 			$sql .= "and (lower(n3.publicado) != 'nao' or n3.publicado is null) ";
 			$temas = pegadados($sql);
-			kml_folder($subgrupo["nome_subgrupo"]);
+			$xml .= kml_folder($subgrupo["nome_subgrupo"]);
 			if(count($temas) > 0){
-				foreach ($temas as $tema)
-				{kml_tema_bd($tema);}
+				foreach ($temas as $tema){
+					$xml .= kml_tema_bd($tema);
+				}
 			}
-			echo "</Folder>\n";
+			$xml .= "</Folder>\n";
 		}
-		echo "</Folder>\n";
+		$xml .= "</Folder>\n";
 	}
-	echo "</Folder>\n";
+	$xml .= "</Folder>\n";
 }
-echo "</Document></kml>\n";
+
+$xml .= "</Document></kml>\n";
+//exit;
+if(isset($_GET["tipoxml"]) && $_GET["tipoxml"] == "kml"){
+	echo header('Content-type: application/vnd.google-earth.kml+xml');
+	echo header('Content-Disposition: attachment; filename="i3geo.kml"');
+}
+else{
+	echo header("Content-type: application/xml");
+}
+echo $xml;
 function kml_tema_bd($tema){
 	global $urli3geo;
+	$xml = "";
 	$teste = array_keys($tema);
 	if(in_array("link_tema",$teste)){
 		$fonte = $tema["link_tema"];
@@ -176,29 +201,34 @@ function kml_tema_bd($tema){
 	}
 	$fonte = "<a href='$fonte' >Fonte </a>";
 	$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
-
+	$urlLegenda = $urli3geo."/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg";
 	$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
-	kml_servico($nome,$fonte,$legenda,$desc,$href);
+	
+	$xml .= kml_servico($nome,$fonte,$legenda,$desc,$href,$urlLegenda);
 
 	if(strtolower($tema["kmz_tema"]) == "sim"){
 		$href = "$urli3geo/pacotes/kmlmapserver/kmlservice.php?request=kmz&amp;map=$id&amp;typename=$id";
-		kml_networklink($nome." (vetorial)",$fonte,$legenda,$desc,$href);
+		$xml .= kml_networklink($nome." (vetorial)",$fonte,$legenda,$desc,$href);
 	}
+	return $xml;
 }
 function kml_cabecalho($nome,$desc){
-	echo "<Folder>\n";
-	echo " <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
-	echo " <description>".str_replace("&","&amp;",kml_converteTexto($desc))."</description>\n";
-	echo " <open>0</open><visibility>0</visibility>\n";
+	$xml = "<Folder>\n";
+	$xml .= " <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
+	$xml .= " <description>".str_replace("&","&amp;",kml_converteTexto($desc))."</description>\n";
+	$xml .= " <open>0</open><visibility>0</visibility>\n";
+	return $xml;
 }
-function kml_folder($nome){
-	echo " <Folder>\n";
-	echo "  <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
-	echo "  <description></description>\n";
-	echo "  <open>0</open><visibility>0</visibility>\n";
+function kml_folder($nome,$open=0,$vis=0){
+	$xml = " <Folder>\n";
+	$xml .= "  <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
+	$xml .= "  <description></description>\n";
+	$xml .= "  <open>$open</open><visibility>$vis</visibility>\n";
+	return $xml;
 }
 function kml_tema($tema){
 	global $urli3geo;
+	$xml = "";
 	$nome = kml_converteTexto($tema->TNOME);
 	$desc = kml_converteTexto($tema->TDESC);
 	$id = kml_converteTexto($tema->TID);
@@ -218,31 +248,46 @@ function kml_tema($tema){
 
 		$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/png' >Legenda </a>";
 		$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
-		kml_servico($nome,$fonte,$legenda,$desc,$href);
+		$xml .= kml_servico($nome,$fonte,$legenda,$desc,$href);
 	}
+	return $xml;
 }
-function kml_servico($nome,$fonte,$legenda,$desc,$href){
-	echo "   <GroundOverlay>\n";
-	echo "    <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
-	echo "    <description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
-	echo "    <visibility>0</visibility>\n";
-	echo "    <Icon>\n";
-	echo "    <viewRefreshMode>onStop</viewRefreshMode>\n";
-	echo "    <href>$href</href>\n";
-	echo "    </Icon>\n";
-	echo "    <LatLonBox><north>9.49014618085</north><south>-39.3925604735</south><east>-29.5851853</east><west>-76.5125927</west></LatLonBox>\n";
-	echo "   </GroundOverlay>\n";
+function kml_servico($nome,$fonte,$legenda,$desc,$href,$urlLegenda){
+	$xml = kml_folder($nome);
+	$xml .= "<ScreenOverlay>\n";
+	$xml .= "<name>Legenda</name>\n";
+	$xml .= "<visibility>0</visibility>\n";
+	$xml .= "<Icon>\n";
+	$xml .= "<href><![CDATA[".$urlLegenda."]]></href>\n";
+	$xml .= "</Icon>\n";
+	$xml .= "<overlayXY x='0.01' y='0.14' xunits='fraction' yunits='fraction'/>\n";
+	$xml .= "<screenXY x='0.01' y='0.14' xunits='fraction' yunits='fraction'/>\n";
+	$xml .= "<size x='-1' y='-1' xunits='pixels' yunits='pixels'/>\n";
+	$xml .= "</ScreenOverlay>\n";
+	$xml .= "   <GroundOverlay>\n";
+	$xml .= "    <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
+	$xml .= "    <description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
+	$xml .= "    <visibility>0</visibility>\n";
+	$xml .= "    <Icon>\n";
+	$xml .= "    <viewRefreshMode>onStop</viewRefreshMode>\n";
+	$xml .= "    <href>$href</href>\n";
+	$xml .= "    </Icon>\n";
+	$xml .= "    <LatLonBox><north>9.49014618085</north><south>-39.3925604735</south><east>-29.5851853</east><west>-76.5125927</west></LatLonBox>\n";
+	$xml .= "   </GroundOverlay>\n";
+	$xml .= "</Folder>";
+	return $xml;
 }
 function kml_networklink($nome,$fonte,$legenda,$desc,$href){
-	echo "   <NetworkLink>\n";
-	echo "    <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
-	echo "    <description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
-	echo "    <visibility>0</visibility>\n";
-	echo "    <Link>\n";
-	echo "       <viewRefreshMode>never</viewRefreshMode>\n";
-	echo "       <href>$href</href>\n";
-	echo "    </Link>\n";
-	echo "   </NetworkLink>\n";
+	$xml = "   <NetworkLink>\n";
+	$xml .= "    <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
+	$xml .= "    <description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
+	$xml .= "    <visibility>0</visibility>\n";
+	$xml .= "    <Link>\n";
+	$xml .= "       <viewRefreshMode>never</viewRefreshMode>\n";
+	$xml .= "       <href>$href</href>\n";
+	$xml .= "    </Link>\n";
+	$xml .= "   </NetworkLink>\n";
+	return $xml;
 }
 function kml_converteTexto($i){
 	global $encoding;
