@@ -1632,6 +1632,8 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	else{
 		include(dirname(__FILE__)."/../ms_configura.php");
 	}
+	//para zipar o shapefile
+	include(dirname(__FILE__)."/../pacotes/kmlmapserver/classes/zip.class.php");
 	$versao = versao();
 	$versao = $versao["principal"];
 	$dataArquivos = array();
@@ -1781,6 +1783,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	}
 	//$temas agora &eacute; um array com os NAMEs dos LAYERS que ser&atilde;o baixados
 	$radtmp = dirname($dir_tmp);
+	$ziper = new zipfile();
 	foreach ($temas as $tema){
 		$l = $map->getlayerbyname($tema);
 		$novonomelayer = $tema;
@@ -1796,6 +1799,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				unlink($nomeshp.".shp");
 				unlink($nomeshp.".shx");
 				unlink($nomeshp.".prj");
+				unlink($nomeshp.".zip");
 			}
 		}
 		//
@@ -1868,17 +1872,31 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				if($nomeshp == false){
 					return array("arquivos"=>"<span style=color:red >Ocorreu um erro, tente novamente","nreg"=>0);
 				}
-				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shp";
+				$pre = str_replace($radtmp."/","",$nomeshp);
+				$resultado[] = $pre.".shp";
 				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".shp"));
 
-				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shx";
+				$resultado[] = $pre.".shx";
 				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".shx"));
 
-				$resultado[] = str_replace($radtmp."/","",$nomeshp).".dbf";
+				$resultado[] = $pre.".dbf";
 				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".dbf"));
 
-				$resultado[] = str_replace($radtmp."/","",$nomeshp).".prj";
+				$resultado[] = $pre.".prj";
 				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".prj"));
+				//zipa o arquivo
+				$zip = basename($pre);
+				if(!file_exists($pre.".zip")){
+					$ziper->addFile(file_get_contents($nomeshp.".shp"), $zip.".shp");
+					$ziper->addFile(file_get_contents($nomeshp.".shx"), $zip.".shx");
+					$ziper->addFile(file_get_contents($nomeshp.".dbf"), $zip.".dbf");
+					$ziper->addFile(file_get_contents($nomeshp.".prj"), $zip.".prj");
+					$fp = fopen($nomeshp.".zip","wb");
+					fwrite($fp, $ziper->file());
+					fclose($fp);
+				}
+				$resultado[] = $pre.".zip";
+				$dataArquivos[] = date ("F d Y H:i:s.",filemtime($nomeshp.".zip"));
 			}
 		}
 	}
@@ -1914,7 +1932,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		$maptemp->save($nomemapfile);
 		$nomemapfileurl = str_replace($radtmp."/","",$nomemapfile);
 	}
-	return array("tema"=>$tema,"mapfile"=>$nomemapfile,"mapfileurl"=>$nomemapfileurl,"arquivos"=>implode(",",$resultado),"nreg"=>$nreg,"datas"=>$dataArquivos);
+	return array("tema"=>$tema,"mapfile"=>$nomemapfile,"mapfileurl"=>$nomemapfileurl,"arquivos"=>implode(",",$resultado),"nreg"=>$nreg,"datas"=>$dataArquivos, "shape-zip"=>$nomeshp.".zip");
 }
 
 /*

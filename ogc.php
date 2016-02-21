@@ -201,6 +201,17 @@ if(strtolower($OUTPUTFORMAT) == "kml" && $ogrOutput == false){
 	header("Location:".$urln);
 	exit;
 }
+if(strtolower($OUTPUTFORMAT) == "shape-zip" && $ogrOutput == false){
+	$retorno = downloadTema2("",$tema,$locaplic,$dir_tmp,$postgis_mapa);
+	$zip = $retorno["shape-zip"];
+	if(file_exists($zip)){
+		ob_end_clean();
+		header('Content-type: application/zip');
+		header('Content-Disposition: attachment; filename='.basename($zip));
+		echo file_get_contents($zip);
+	}
+	exit;
+}
 //
 //caso seja uma requisição WMS com format
 //
