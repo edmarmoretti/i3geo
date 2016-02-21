@@ -385,14 +385,26 @@ function movimentaNo()
 	if($movimento == "sobe")
 	{
 		$menos = $ordematual - 1;
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem_$posfixo = $ordematual where $where ordem_$posfixo = '$menos'");
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem_$posfixo = $menos where id_$posfixo = '$id'");
+		$dataCol = array(
+			"ordem_".$posfixo=>$ordematual
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_".$tabela,$dataCol,"WHERE $where ordem_$posfixo = '$menos'");
+		$dataCol = array(
+				"ordem_".$posfixo=>$menos
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_".$tabela,$dataCol,"WHERE $where id_$posfixo = '$id'");
 	}
 	if($movimento == "desce")
 	{
 		$mais = $ordematual + 1;
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem_$posfixo = $ordematual where $where ordem_$posfixo = '$mais'");
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem_$posfixo = $mais where id_$posfixo = '$id'");
+		$dataCol = array(
+				"ordem_".$posfixo=>$ordematual
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_".$tabela,$dataCol,"WHERE $where ordem_$posfixo = '$mais'");
+		$dataCol = array(
+				"ordem_".$posfixo=>$mais
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_".$tabela,$dataCol,"WHERE $where id_$posfixo = '$id'");
 	}
 	$dbhw = null;
 	$dbh = null;
@@ -566,7 +578,9 @@ function excluirPrancha()
 	try
 	{
 		include("conexao.php");
-		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_prancha = $id");
+		$sql = "DELETE from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_prancha = $id";
+		$dbhw->query($sql);
+		i3GeoAdminInsertLog($dbhw,$sql);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
@@ -582,7 +596,9 @@ function excluirTema()
 	try
 	{
 		include("conexao.php");
-		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = $id");
+		$sql = "DELETE from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = $id";
+		$dbhw->query($sql);
+		i3GeoAdminInsertLog($dbhw,$sql);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
@@ -598,7 +614,9 @@ function excluirAtlas()
 	try
 	{
 		include("conexao.php");
-		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_atlas WHERE id_atlas = $id");
+		$sql = "DELETE from ".$esquemaadmin."i3geoadmin_atlas WHERE id_atlas = $id";
+		$dbhw->query($sql);
+		i3GeoAdminInsertLog($dbhw,$sql);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
