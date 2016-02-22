@@ -1466,8 +1466,8 @@ i3GEO.arvoreDeCamadas =
 				function(retorno) {
 					var original = {
 						data : ""
-					}, i, re, tabela, linhas, linha, colunas, incluir, elementos, nelementos, inputs, desativar, nindices;
-					if (retorno.data.legenda) {
+					}, i, re, tabela = "", linhas, linha, colunas, incluir, elementos, nelementos, inputs, desativar, nindices;
+					if (retorno.data && retorno.data.legenda) {
 						original = retorno;
 						retorno = retorno.data.legenda;
 						if (retorno[0]) {
@@ -1496,11 +1496,11 @@ i3GEO.arvoreDeCamadas =
 									} while (linha--);
 								}
 								tabela += "</table><br>";
-							} else {
+							} else if (retorno) {
 								tabela = retorno;
 							}
 						}
-					} else {
+					} else if(retorno && retorno.data){
 						tabela = "<img src='" + retorno.data[0].imagem + "' />";
 					} // o tema &eacute; um wms
 					incluir = "<div style='text-align:left' id='" + idtema + "verdiv" + "'>" + tabela + "</div>";
@@ -1526,7 +1526,7 @@ i3GEO.arvoreDeCamadas =
 							i++;
 						} while (i < nelementos);
 					}
-					if (original.data.desativar[idtema]) {
+					if (original && original.data && original.data.desativar && original.data.desativar[idtema]) {
 						desativar = original.data.desativar[idtema];
 						nindices = desativar.length;
 						i = 0;
