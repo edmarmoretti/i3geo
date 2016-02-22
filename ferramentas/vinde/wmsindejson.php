@@ -18,7 +18,7 @@ echo
 
 include(dirname(__FILE__)."/../../ms_configura.php");
 include($locaplic."/classesphp/funcoes_gerais.php");
-$agora = intval(time() / 1000);
+$agora = intval(time() / 10000);
 $arq = $dir_tmp."/inde$agora.html";
 if(!file_exists($arq)){
 	$ch = curl_init();
@@ -92,13 +92,10 @@ for ($i=0;$i<$n;$i++){
 			$linhas = ($matches[2][0]);
 			$parametros[$b[0]] = $linhas;
 			if($b[0] == "groupOfKeeper"){
-				if($gruposUnicos[$linhas] == ""){
+				if(empty($gruposUnicos[$linhas])){
 					$gruposUnicos[$linhas] = "a";
-
 					$linhas = $linhas." #$i";
 					$grupos[$linhas] = "";
-					//echo "<pre>";
-					//var_dump($matches);
 					if($grupos[$linhas]){
 						$grupos[$linhas] = array_merge($grupos[$linhas],array("l_".$i));
 					}
@@ -110,11 +107,6 @@ for ($i=0;$i<$n;$i++){
 		}
 		$layer[] = $parametros;
 		$layers[$i] = $layer;
-		//$parametros = "{".implode($novalinha,",")."}";
-		//$linha = str_replace('new OpenLayers.Layer.WMS(','',$linha);
-		//$linha = str_replace('})','}',$linha);
-		//$linha = str_replace("'",'"',$linha);
-		//$novalinha[] = "[".trim($linha,",")."]";
 	}
 }
 
@@ -131,7 +123,7 @@ foreach($chaves as $chave){
 	//echo count($hs);
 	$d = $hs;
 	array_shift($d);
-	if($arvore[$hs[0]]){
+	if(array_key_exists(0,$hs) && array_key_exists($hs[0],$arvore)){
 		$arvore[$hs[0]] = array_merge($arvore[$hs[0]],noi($d,$arvore[$hs[0]]));
 	}
 	else{
@@ -146,12 +138,14 @@ $final = array(
 );
 error_reporting(0);
 ob_end_clean();
-if(extension_loaded('zlib'))
-{ob_start('ob_gzhandler');}
+if(extension_loaded('zlib')){
+	ob_start('ob_gzhandler');
+}
 header("Content-type: text/html");
 echo json_encode($final,true);
-if(extension_loaded('zlib'))
-{ob_end_flush();}
+if(extension_loaded('zlib')){
+	ob_end_flush();
+}
 
 //echo json_encode($novalinha,true);
 //echo "{".implode($novalinha,",")."}";
@@ -163,8 +157,13 @@ function noi($n,$l){
 	array_shift($d);
 	//echo count($n);
 	if(count($n) > 1){
-		if($l[$n[0]]){
-			$l[$n[0]] = array_merge($l[$n[0]],$n[1]);
+		if(array_key_exists(0,$n) && array_key_exists($n[0],$l)){
+			if(is_array($n[1])){
+				$l[$n[0]] = array_merge($l[$n[0]],$n[1]);
+			}
+			else{
+				$l[$n[0]] = $l[$n[0]];
+			}
 		}
 		else{
 			$l[$n[0]] = $n[1];
