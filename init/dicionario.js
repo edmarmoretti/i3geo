@@ -205,9 +205,9 @@ g_traducao_init =
 		],
 		30 : [
 			{
-				pt : "Wiki, instala&ccedil;&atilde;o, SVN",
-				en : "Wiki, Installation, SVN",
-				es : "Wiki, instalaci&oacute;n, SVN"
+				pt : "Wiki, instala&ccedil;&atilde;o, GitLab",
+				en : "Wiki, Installation, GitLab",
+				es : "Wiki, instalaci&oacute;n, GitLab"
 			}
 		],
 		31 : [

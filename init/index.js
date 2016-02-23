@@ -81,9 +81,9 @@ botoesIni.push({
 	"href":"../exemplos",
 	"titulo":$trad(14,g_traducao_init)
 	},{
-		"img":"applications-development.png",
-		"href":"../pacotes/utils/index.php",
-		"titulo":$trad(33,g_traducao_init)
+	"img":"applications-development.png",
+	"href":"../pacotes/utils/index.php",
+	"titulo":$trad(33,g_traducao_init)
 	},{
 	"img":"accessories-dictionary.png",
 	"href":"../guia_de_migracao.txt",
@@ -98,11 +98,11 @@ botoesIni.push({
 	"titulo":$trad(28,g_traducao_init)
 	},{
 	"img":"tools-report-bug.png",
-	"href":"http://svn.softwarepublico.gov.br/trac/i3geo/newticket",
+	"href":"https://softwarepublico.gov.br/gitlab/i3geo/i3geo/issues",
 	"titulo":$trad(16,g_traducao_init)
 	},{
-	"img":"trac_logo_mini.png",
-	"href":"http://svn.softwarepublico.gov.br/trac/i3geo/wiki",
+	"img":"../imagens/apple-touch-icon.png",
+	"href":"https://softwarepublico.gov.br/gitlab/groups/i3geo",
 	"titulo":$trad(30,g_traducao_init)
 	},{
 	"img":"logo_psp.png",
@@ -123,7 +123,7 @@ function mostraBotoes(){
 	//i3GEO.barraDeBotoes.ATIVA = false;
 	var ins = [],i,n = botoesIni.length,texto;
 	for(i=0;i<n;i++){
-		texto = '<div class="r" ><div class="ri" ><a target=_blank href="'+botoesIni[i].href+'" ><img src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';
+		texto = '<div class="r" ><div class="ri" ><a target=_blank href="'+botoesIni[i].href+'" ><img style="max-height:77px;" src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';
 		if(botoesIni[i].subtitulo){
 			texto += botoesIni[i].subtitulo;
 		}
