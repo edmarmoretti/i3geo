@@ -10,6 +10,10 @@ function montaNoLayer(codigo,indice){
 }
 function loadLayerData(node, fnLoadComplete)
 {
+	//verifica se ja carregou os dados do layer
+	if(tree.getNodeByProperty("etiquetaDados",node.data.codigoMap+"_"+node.data.codigoLayer)){
+		return;
+	}
 	var sUrl = "../php/editormapfile.php?funcao=listaClasses&codigoMap="+node.data.codigoMap+"&codigoLayer="+node.data.codigoLayer;
 	var callback =
 	{
@@ -133,7 +137,7 @@ function montaParametrosTemas(no,dados,redesenha)
 		tempNode.enableHighlight = false;
 	}
 
-	if(!tree.getNodeByProperty("pluginI3geo",id))
+	if(!tree.getNodeByProperty("etiquetaPluginI3geo",id))
 	{
 		d = {id:id,codigoLayer:codigoLayer,tipo:"pluginI3geo",etiquetaPluginI3geo:id,html:"<i>&nbsp;"+ $trad("pluginLayer",i3GEOadmin.editormapfile.dicionario) +"</i>"};
 		tempNodeR = new YAHOO.widget.HTMLNode(d, no, false,true);
