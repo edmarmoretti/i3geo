@@ -246,18 +246,15 @@ function i3GeoAdminUpdate($pdo,$tabela,$data,$filtro=""){
 function i3GeoAdminInsert($pdo,$tabela,$data){
 	global $esquemaadmin;
 	$keys = array_keys($data);
-	//$fields = "'".implode("','",$keys)."'";
 	$fields = implode(",",$keys);
 	$placeholder = str_repeat("?,",count($keys));
 	$placeholder = trim($placeholder,",");
 	$sql = "INSERT INTO ".$esquemaadmin."$tabela($fields) VALUES ($placeholder)";
-	//echo $sql;
-	//var_dump($data);exit;
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	try {
-	    $prep = $pdo->prepare($sql);
+		$prep = $pdo->prepare($sql);
 	} catch (PDOException $e) {
-	    return "prepare ".$e->getMessage();
+		return "prepare ".$e->getMessage();
 	}
 	try {
 		$exec = $prep->execute(array_values($data));
@@ -307,8 +304,12 @@ function i3GeoAdminInsertUnico($pdo,$tabela,$data,$colTemp,$colId){
 		return "UPDATE ID ".$e->getMessage();
 	}
 }
+//$logTransacoes vem do ms_configura.php
 function i3GeoAdminInsertLog($pdo,$sql,$data=array()){
-	global $esquemaadmin;
+	global $esquemaadmin, $logTransacoes;
+	if(isset($logTransacoes) == true && $logTransacoes == false){
+		return;
+	}
 	$s = "INSERT INTO ".$esquemaadmin."i3geoadmin_log(sql,serializedata,usuario,ip,timestamp,outros) VALUES (?,?,?,?,?,?)";
 	$ip = "UNKNOWN";
 	if (getenv("HTTP_CLIENT_IP")){

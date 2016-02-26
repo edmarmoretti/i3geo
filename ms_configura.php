@@ -63,6 +63,20 @@ $i3geomaster = array(
 	array("usuario"=>"admin", "senha"=>"admin")
 );
 /*
+ Variable: $logTransacoes
+
+Define se as transacoes no banco de dados de administracao serao mantidas em uma tabela de logs
+
+Tipo:
+{boolean}
+
+Default:
+
+false
+
+*/
+$logTransacoes = false;
+/*
  Variable: $i3GeoProjDefault
 
 Parametros de projecao cartografica utilizados nos mapas e nas exportacoes de arquivos.
