@@ -146,7 +146,9 @@ function exclui()
 	{
 		include("conexao.php");
 		$tabela = $esquemaadmin.$tabela;
-		$dbhw->query("DELETE from $tabela WHERE $coluna = $id");
+		$sql = "DELETE from $tabela WHERE $coluna = $id";
+		$dbhw->query($sql);
+		i3GeoAdminInsertLog($dbhw,$sql);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
@@ -163,9 +165,9 @@ Executa um sql de busca de dados
 
 Parametros:
 
-sql {string} - sql que ser&Atilde;� executado
+sql {string} - sql que serao executado
 
-locaplic {string} - endere&Atilde;�o do i3Geo no sistema de arquivos
+locaplic {string} - endereco do i3Geo no sistema de arquivos
 
 Retorno:
 
@@ -249,7 +251,7 @@ function i3GeoAdminInsert($pdo,$tabela,$data){
 	$placeholder = str_repeat("?,",count($keys));
 	$placeholder = trim($placeholder,",");
 	$sql = "INSERT INTO ".$esquemaadmin."$tabela($fields) VALUES ($placeholder)";
-	//echo $sql;exit;
+	//echo $sql;
 	//var_dump($data);exit;
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	try {

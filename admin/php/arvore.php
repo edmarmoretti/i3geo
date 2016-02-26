@@ -529,115 +529,118 @@ switch (strtoupper($funcao))
 				exit;
 			}
 		}
-		retornaJSON(exclui());
+		retornaJSON(
+			exclui()
+		);
 		exit;
 	break;
 }
 /*
 Altera o registro de um n&iacute;vel 3 (temas)
 */
-function alteraN3()
-{
+function alteraN3(){
 	global $publicado,$n3_perfil,$id,$id_n2,$id_tema,$ordem,$esquemaadmin;
-	try
-	{
+	try	{
 		require_once("conexao.php");
-		if($id != "")
-		{
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n3 SET ordem = $ordem, publicado = '$publicado',id_tema = '$id_tema', n3_perfil = '$n3_perfil' WHERE id_n3 = $id");
+		if($id != ""){
+			$dataCol = array(
+				"ordem" => $ordem,
+				"publicado" => $publicado,
+				"id_tema" => $id_tema,
+				"n3_perfil" => $n3_perfil
+			);
+			i3GeoAdminUpdate($dbhw,"i3geoadmin_n3",$dataCol,"WHERE id_n3 = $id");
 			$retorna = $id;
 		}
-		else
-		{
+		else{
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM ".$esquemaadmin."i3geoadmin_n3 where id_n2 = '$id_n2'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_n3 (publicado,id_n2,n3_perfil,ordem) VALUES ('NAO',$id_n2,'$idtemp',$o)");
-			$id = $dbh->query("SELECT id_n3 FROM ".$esquemaadmin."i3geoadmin_n3 where n3_perfil = '$idtemp'");
-			$id = $id->fetchAll();
-			$id = $id[0]['id_n3'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n3 SET n3_perfil = '' WHERE id_n3 = $id AND n3_perfil = '$idtemp'");
-			$retorna = $id;
+			$dataCol = array(
+				"id_n2" => $id_n2,
+				"publicado" => 'NAO',
+				"ordem" => $o,
+				"n3_perfil" => ''
+			);
+			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_n3",$dataCol,"n3_perfil","id_n3");
 		}
 		$dbhw = null;
 		$dbh = null;
 		return $retorna;
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		return "Error!: " . $e->getMessage();
 	}
 }
 /*
 Altera o registro de um n&iacute;vel 2
 */
-function alteraN2()
-{
+function alteraN2(){
 	global $publicado,$n2_perfil,$id,$id_subgrupo,$id_n1,$esquemaadmin;
-	try
-	{
+	try	{
 		require("conexao.php");
-		if($id != "")
-		{
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n2 SET publicado='$publicado', id_subgrupo = '$id_subgrupo', n2_perfil = '$n2_perfil' WHERE id_n2 = $id");
+		if($id != ""){
+			$dataCol = array(
+				"publicado" => $publicado,
+				"id_subgrupo" => $id_subgrupo,
+				"n2_perfil" => $n2_perfil
+			);
+			i3GeoAdminUpdate($dbhw,"i3geoadmin_n2",$dataCol,"WHERE id_n2 = $id");
 			$retorna = $id;
 		}
-		else
-		{
+		else{
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM ".$esquemaadmin."i3geoadmin_n2 where id_n1 = '$id_n1'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_n2 (id_n1,n2_perfil,ordem,publicado) VALUES ($id_n1,'$idtemp',$o,'NAO')");
-			$id = $dbh->query("SELECT id_n2 FROM ".$esquemaadmin."i3geoadmin_n2 where n2_perfil = '$idtemp'");
-			$id = $id->fetchAll();
-			$id = $id[0]['id_n2'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n2 SET n2_perfil = '' WHERE id_n2 = $id AND n2_perfil = '$idtemp'");
-			$retorna = $id;
+			$dataCol = array(
+					"id_n1" => $id_n1,
+					"publicado" => 'NAO',
+					"ordem" => $o,
+					"n2_perfil" => ''
+			);
+			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_n2",$dataCol,"n2_perfil","id_n2");
 		}
 		$dbhw = null;
 		$dbh = null;
 		return $retorna;
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		return "Error!: " . $e->getMessage();
 	}
 }
 /*
 Altera o registro de um n&iacute;vel 1 (grupos)
 */
-function alteraN1()
-{
+function alteraN1(){
 	global $publicado,$n1_perfil,$id_grupo,$id,$id_menu,$esquemaadmin;
-	try
-	{
+	try{
 		require("conexao.php");
-		if($id != "")
-		{
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n1 SET publicado = '$publicado', id_grupo = '$id_grupo', n1_perfil = '$n1_perfil' WHERE id_n1 = $id");
+		if($id != ""){
+			$dataCol = array(
+					"publicado" => $publicado,
+					"id_grupo" => $id_grupo,
+					"n1_perfil" => $n1_perfil
+			);
+			i3GeoAdminUpdate($dbhw,"i3geoadmin_n1",$dataCol,"WHERE id_n1 = $id");
 			$retorna = $id;
 		}
-		else
-		{
+		else{
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM ".$esquemaadmin."i3geoadmin_n1 where id_menu = '$id_menu'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_n1 (id_menu,n1_perfil,ordem,publicado) VALUES ($id_menu,'$idtemp',$o,'NAO')");
-			$id = $dbh->query("SELECT id_n1 FROM ".$esquemaadmin."i3geoadmin_n1 where n1_perfil = '$idtemp'");
-			$id = $id->fetchAll();
-			$id = $id[0]['id_n1'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_n1 SET n1_perfil = '' WHERE id_n1 = $id AND n1_perfil = '$idtemp'");
-			$retorna = $id;
+			$dataCol = array(
+					"id_menu" => $id_menu,
+					"publicado" => 'NAO',
+					"ordem" => $o,
+					"n1_perfil" => ''
+			);
+			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_n1",$dataCol,"n1_perfil","id_n1");
 		}
 		$dbhw = null;
 		$dbh = null;
 		return $retorna;
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		return "Error!: " . $e->getMessage();
 	}
 }
@@ -647,26 +650,28 @@ Altera o registro na raiz de um n&iacute;vel
 function alterarRaiz()
 {
 	global $id_nivel,$nivel,$id,$id_menu,$perfil,$id_tema,$esquemaadmin;
-	try
-	{
+	try{
 		include("conexao.php");
-		if($id != "")
-		{
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_raiz SET perfil = '$perfil', id_tema = '$id_tema'  WHERE id_raiz = $id");
+		if($id != ""){
+			$dataCol = array(
+					"id_tema" => $id_tema,
+					"perfil" => $perfil
+			);
+			i3GeoAdminUpdate($dbhw,"i3geoadmin_raiz",$dataCol,"WHERE id_raiz = $id");
 			$retorna = $id;
 		}
-		else
-		{
+		else{
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM ".$esquemaadmin."i3geoadmin_raiz where id_menu = '$id_menu' and nivel = '$nivel' and id_nivel = '$id_nivel'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_raiz (id_nivel,nivel,id_menu,perfil,ordem) VALUES ($id_nivel,$nivel,$id_menu,'$idtemp',$o)");
-			$id = $dbh->query("SELECT id_raiz FROM ".$esquemaadmin."i3geoadmin_raiz WHERE perfil = '$idtemp'");
-			$id = $id->fetchAll();
-			$id = $id[0]['id_raiz'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_raiz SET perfil = '' WHERE id_raiz = $id AND perfil = '$idtemp'");
-			$retorna = $id;
+			$dataCol = array(
+					"id_menu" => $id_menu,
+					"id_nivel" => $id_nivel,
+					"nivel" => $nivel,
+					"ordem" => $o,
+					"perfil" => ''
+			);
+			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_raiz",$dataCol,"perfil","id_raiz");
 		}
 		$dbhw = null;
 		$dbh = null;
@@ -677,8 +682,7 @@ function alterarRaiz()
 		return "Error!: " . $e->getMessage();
 	}
 }
-function movimentaNo()
-{
+function movimentaNo(){
 	global $tipo,$movimento,$id,$esquemaadmin;
 	if($tipo == "raizmenu" || $tipo == "raizgrupo")
 	{
@@ -727,21 +731,29 @@ function movimentaNo()
 		$tabela = "n3";
 	}
 	include("conexao.php");
-	if($movimento == "sobe")
-	{
-		if ($ordematual > 1)
-		{
+	if($movimento == "sobe"){
+		if ($ordematual > 1){
 			$menos = $ordematual - 1;
-			//echo "UPDATE i3geoadmin_$tabela SET 'ordem' = $ordematual where $where and ordem = '$menos'";
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem = $ordematual where $where and ordem = '$menos'");
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem = $menos where id_$posfixo = '$id'");
+			$dataCol = array(
+				"ordem" => $ordematual
+			);
+			i3GeoAdminUpdate($dbhw,"i3geoadmin_".$tabela,$dataCol,"WHERE $where AND ordem = '$menos'");
+			$dataCol = array(
+				"ordem" => $menos
+			);
+			i3GeoAdminUpdate($dbhw,"i3geoadmin_".$tabela,$dataCol," where id_$posfixo = '$id'");
 		}
 	}
-	if($movimento == "desce")
-	{
+	if($movimento == "desce"){
 		$mais = $ordematual + 1;
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem = $ordematual where $where and ordem = '$mais'");
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_$tabela SET ordem = $mais where id_$posfixo = '$id'");
+		$dataCol = array(
+			"ordem" => $ordematual
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_".$tabela,$dataCol,"WHERE $where AND ordem = '$mais'");
+		$dataCol = array(
+			"ordem" => $mais
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_".$tabela,$dataCol," where id_$posfixo = '$id'");
 	}
 	$dbhw = null;
 	$dbh = null;
