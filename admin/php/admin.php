@@ -305,9 +305,10 @@ function i3GeoAdminInsertUnico($pdo,$tabela,$data,$colTemp,$colId){
 	}
 }
 //$logTransacoes vem do ms_configura.php
+//ver tambem classe_metaestat.php
 function i3GeoAdminInsertLog($pdo,$sql,$data=array()){
 	global $esquemaadmin, $logTransacoes;
-	if(isset($logTransacoes) == true && $logTransacoes == false){
+	if(isset($logTransacoes) == true && $logTransacoes !== true){
 		return;
 	}
 	$s = "INSERT INTO ".$esquemaadmin."i3geoadmin_log(sql,serializedata,usuario,ip,timestamp,outros) VALUES (?,?,?,?,?,?)";
