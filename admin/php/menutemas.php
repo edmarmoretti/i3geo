@@ -604,7 +604,7 @@ switch (strtoupper($funcao))
 				exit;
 			}
 		}
-		retornaJSON(exclui());
+		retornaJSON(exclui($tabela,$coluna,$id));
 		exit;
 		break;
 

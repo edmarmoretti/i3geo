@@ -129,7 +129,7 @@ function verificaDuplicados($sql,$dbh)
 
 Exlcui um registro de uma tabela do banco de dados de administra&Atilde;�&Atilde;�o
 
-Utiliza vari&Atilde;�veis globais para fazer a consulta ao banco
+Utiliza variaveis globais para fazer a consulta ao banco
 
 Globals:
 
@@ -139,22 +139,28 @@ coluna - nome da coluna
 
 id - valor
 */
-function exclui()
-{
-	global $tabela,$coluna,$id,$esquemaadmin;
-	try
-	{
+function exclui($tabela,$coluna,$id){
+	try {
 		include("conexao.php");
+		/*
 		$tabela = $esquemaadmin.$tabela;
-		$sql = "DELETE from $tabela WHERE $coluna = $id";
+		$sql = "DELETE from $tabela WHERE $coluna = :id";
 		$dbhw->query($sql);
 		i3GeoAdminInsertLog($dbhw,$sql);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
+		*/
+
+		$sql = "DELETE from $tabela WHERE $coluna = ?";
+		$prep = $dbhw->prepare($sql);
+		$prep->execute(array($id));
+		i3GeoAdminInsertLog($dbhw,$sql,array($id));
+		$dbhw = null;
+		$dbh = null;
+		return "ok";
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e) {
 		return "Error!: " . $e->getMessage();
 	}
 }

@@ -333,7 +333,7 @@ switch (strtoupper($funcao))
 			}
 			$tabela = "i3geoadmin_temas";
 			if($id){
-				exclui();
+				exclui($tabela,$coluna,$id);
 			}
 			retornaJSON("ok");
 			exit;
@@ -1298,7 +1298,22 @@ function criarNovoMap(){
 			$nome = utf8_encode($nome);
 			$desc = utf8_encode($desc);
 		}
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_temas (link_tema,kml_tema,kmz_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema,it,es,en) VALUES ('','$acessopublico','$acessopublico', '$acessopublico','$acessopublico','','$tipoa_tema','','$nome','$codigo','$it','$es','$en')");
+		$dataCol = array(
+			"link_tema" => '',
+			"kml_tema" => $acessopublico,
+			"kmz_tema" => $acessopublico,
+			"ogc_tema" => $acessopublico,
+			"download_tema" => $acessopublico,
+			"desc_tema" => '',
+			"tipoa_tema" => $tipoa_tema,
+			"tags_tema" => '',
+			"nome_tema" => $nome,
+			"codigo_tema" => $codigo,
+			"it" => $it,
+			"es" => $es,
+			"en" => $en
+		);
+		i3GeoAdminInsert($dbhw,"i3geoadmin_temas",$dataCol);
 		$dbh = null;
 		$dbhw = null;
 		return "ok";
@@ -1455,7 +1470,11 @@ function adicionaGrupoUsrTema(){
 	if($q){
 		$teste = $q->fetchAll();
 		if(count($teste) == 0){
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_grupotema (id_tema,id_grupo) VALUES ($id_tema , $id_grupo)");
+			$dataCol = array(
+				"id_tema" => $id_tema,
+				"id_grupo" => $id_grupo
+			);
+			i3GeoAdminInsert($dbhw,"i3geousr_grupotema",$dataCol);
 		}
 	}
 	return "ok";
@@ -1463,7 +1482,10 @@ function adicionaGrupoUsrTema(){
 function excluirGrupoUsrTema(){
 	global $id_tema,$id_grupo,$locaplic,$esquemaadmin;
 	include($locaplic."/admin/php/conexao.php");
-	$q = $dbhw->query("delete from ".$esquemaadmin."i3geousr_grupotema where id_tema = $id_tema and id_grupo = $id_grupo ");
+	$sql = "DELETE from ".$esquemaadmin."i3geousr_grupotema where id_tema = ? and id_grupo = ? ";
+	$prep = $dbhw->prepare($sql);
+	$prep->execute(array($id_tema,$id_grupo));
+	i3GeoAdminInsertLog($dbhw,$sql,array($id_tema,$id_grupo));
 	return "ok";
 }
 function pegaLayers()
@@ -1654,13 +1676,12 @@ function pegaTitulo()
 	$dados["name"] = $layer->name;
 	$dados["tema"] = mb_convert_encoding($layer->getmetadata("tema"),"UTF-8","ISO-8859-1");
 	$dados["iconetema"] = $layer->getmetadata("iconetema");
-	$dados["mensagem"] = mb_convert_encoding($layer->getmetadata("mensagem"),"UTF-8","ISO-8859-1");//$layer->getmetadata("mensagem");
+	$dados["mensagem"] = mb_convert_encoding($layer->getmetadata("mensagem"),"UTF-8","ISO-8859-1");
 	$dados["escala"] = $layer->getmetadata("escala");
 	$dados["extensao"] = $layer->getmetadata("extensao");
 	$dados["group"] = $layer->group;
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
-
 	return $dados;
 }
 function alterarNomeTema(){
@@ -1669,7 +1690,6 @@ function alterarNomeTema(){
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoMap);
 	if($layer){
-
 		$layer->setmetadata("tema",$novoNome);
 		$mapa->save($mapfile);
 		removeCabecalho($mapfile);
@@ -1677,7 +1697,10 @@ function alterarNomeTema(){
 		if($convUTF){
 			$novoNome = utf8_encode($novoNome);
 		}
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET nome_tema='$novoNome' WHERE codigo_tema='$codigoMap'");
+		$dataCol = array(
+			"nome_tema" => $novoNome
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol," WHERE codigo_tema='$codigoMap'");
 		$dbhw = null;
 		$dbh = null;
 	}
@@ -1770,11 +1793,16 @@ function alterarDispo()
 	return "ok";
 }
 //essa funcao existe tambem em menutemas.php
-function alteraTemas()
-{
+function alteraTemas(){
 	global $esquemaadmin,$codigoLayer,$ogc_tema,$kml_tema,$kmz_tema,$locaplic,$download_tema;
 	include("conexao.php");
-	$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET download_tema = '$download_tema.', ogc_tema='$ogc_tema',kml_tema='$kml_tema',kmz_tema='$kmz_tema' WHERE codigo_tema = '$codigoLayer'");
+	$dataCol = array(
+		"download_tema" => $download_tema,
+		"ogc_tema" => $ogc_tema,
+		"kml_tema" => $kml_tema,
+		"kmz_tema" => $kmz_tema
+	);
+	i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigoLayer'");
 	$dbhw = null;
 	$dbh = null;
 }
@@ -1848,7 +1876,19 @@ function alterarConexao()
 	$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_temas where codigo_tema = '$codigoMap'";
 	$dados = pegaDados($sql);
 	if(count($dados) == 0){
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_temas (tipoa_tema,nome_tema,codigo_tema,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,link_tema,desc_tema) VALUES ('META','$codigoMap','$codigoMap','SIM','NAO','SIM','SIM','','','')");
+		$dataCol = array(
+			"tipoa_tema" => "META",
+			"nome_tema" => $codigoMap,
+			"codigo_tema" => $codigoMap,
+			"kml_tema" => "SIM",
+			"kmz_tema" => "NAO",
+			"ogc_tema" => "SIM",
+			"download_tema" => "SIM",
+			"tags_tema" => "",
+			"link_tema" => "",
+			"desc_tema" => ""
+		);
+		i3GeoAdminInsert($dbhw,"i3geoadmin_temas",$dataCol);
 	}
 	if(strtoupper($metaestat) == "SIM"){
 		$connectiontype = 6;
@@ -1856,8 +1896,10 @@ function alterarConexao()
 		$filter = "";
 		$data = "";
 		$connection = "";
-		//echo "UPDATE ".$esquemaadmin."i3geoadmin_temas SET tipoa_tema='META' WHERE codigo_tema = '$codigoMap'";exit;
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET tipoa_tema='META' WHERE codigo_tema = '$codigoMap'");
+		$dataCol = array(
+			"tipoa_tema" => "META"
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigoMap'");
 		$layer->setmetadata("metaestat","SIM");
 		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL",$metaestat_id_medida_variavel);
 	}
@@ -1865,7 +1907,10 @@ function alterarConexao()
 		$layer->setmetadata("METAESTAT_CODIGO_TIPO_REGIAO","");
 		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL","");
 		$layer->setmetadata("metaestat","");
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_temas SET tipoa_tema='' WHERE codigo_tema = '$codigoMap'");
+		$dataCol = array(
+			"tipoa_tema" => ""
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigoMap'");
 	}
 	$layer->set("connection",$connection);
 	if(ms_GetVersionInt() > 50201){

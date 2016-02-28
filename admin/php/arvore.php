@@ -530,7 +530,7 @@ switch (strtoupper($funcao))
 			}
 		}
 		retornaJSON(
-			exclui()
+			exclui($tabela,$coluna,$id)
 		);
 		exit;
 	break;

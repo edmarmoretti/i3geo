@@ -1,0 +1,32 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION ""
+    DATA ""
+    METADATA
+      "cache"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"SIM"
+      "permitedownload"	"SIM"
+      "download"	"SIM"
+      "permiteogc"	"SIM"
+      "permitekml"	"SIM"
+      "cortepixels"	"0"
+    END # METADATA
+    NAME "_a"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 0 0 0
+        SIZE 12
+        SYMBOL "linha"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+END # MAP
