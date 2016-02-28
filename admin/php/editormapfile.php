@@ -1704,7 +1704,7 @@ function alterarNomeTema(){
 		$dbhw = null;
 		$dbh = null;
 	}
-	return "ok";	
+	return "ok";
 }
 function alterarTitulo()
 {
@@ -1723,6 +1723,7 @@ function alterarTitulo()
 
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
+	$codigoLayer = $name;
 	return "ok";
 }
 function pegaDispo()

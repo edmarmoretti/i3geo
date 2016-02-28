@@ -27,16 +27,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1433889485820</id>
-			<name></name>
-			<type>30</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-pacotes</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1433889485824</id>
+			<id>1456666496860</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
@@ -45,7 +36,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1433889485827</id>
+			<id>1456666496874</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
@@ -54,12 +45,12 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1433889485863</id>
+			<id>1456666496883</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-.svn</arguments>
+				<arguments>1.0-name-matches-false-false-.git</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>
