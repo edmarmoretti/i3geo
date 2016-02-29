@@ -126,54 +126,48 @@ switch (strtoupper($funcao))
 /*
 Altera o registro de um WS
 */
-function alterarFuncoes()
-{
+function alterarFuncoes(){
 	global $id_i,$abrir_i,$nome_i,$target_i,$publicado_i,$esquemaadmin;
-	try
-	{
+	try{
 		//$nome_i = mb_convert_encoding($nome_i,"UTF-8","ISO-8859-1");
 		require_once("conexao.php");
-		if($convUTF)
-		{
+		if($convUTF){
 			$nome_i = utf8_encode($nome_i);
 		}
-		if($id_i != "")
-		{
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_identifica SET publicado_i = '$publicado_i',nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
+		if($id_i != ""){
+			$dataCol = array(
+				"publicado_i" => $publicado_i,
+				"nome_i" => $nome_i,
+				"abrir_i" => $abrir_i,
+				"target_i" => $target_i
+			);
+			i3GeoAdminUpdate($dbhw,"i3geoadmin_identifica",$dataCol,"WHERE id_i = $id_i");
 			$retorna = $id_i;
 		}
-		else
-		{
-			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_identifica (publicado_i,nome_i,abrir_i,target_i) VALUES ('','$idtemp','','')");
-			$id_i = $dbh->query("SELECT id_i FROM ".$esquemaadmin."i3geoadmin_identifica WHERE nome_i = '$idtemp'");
-			$id_i = $id_i->fetchAll();
-			$id_i = $id_i[0]['id_i'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_identifica SET nome_i = '' WHERE id_i = $id_i AND nome_i = '$idtemp'");
-			$retorna = $id_i;
+		else{
+			$dataCol = array(
+				"publicado_i" => '',
+				"nome_i" => '',
+				"abrir_i" => '',
+				"target_i" => ''
+			);
+			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_identifica",$dataCol,"nome_i","id_i");
 		}
 		$dbhw = null;
 		$dbh = null;
 		return $retorna;
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		return "Error!: " . $e->getMessage();
 	}
 }
-function excluirFuncoes()
-{
+function excluirFuncoes(){
 	global $id,$esquemaadmin;
-	try
-	{
-		include("conexao.php");
-		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = $id");
-		$dbhw = null;
-		$dbh = null;
+	try{
+		exclui($esquemaadmin."i3geoadmin_identifica","id_i",$id);
 		return "ok";
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		return "Error!: " . $e->getMessage();
 	}
 }
