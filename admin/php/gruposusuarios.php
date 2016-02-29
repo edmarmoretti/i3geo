@@ -141,18 +141,19 @@ function alterarGrupos()
 			if(count($dados) > 0){
 				$retorna = false;
 			}
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_grupos SET nome='$nome',descricao='$descricao' WHERE id_grupo = $id_grupo");
+			$dataCol = array(
+				"nome" => $nome,
+				"descricao" => $descricao
+			);
+			i3GeoAdminUpdate($dbhw,"i3geousr_grupos",$dataCol,"WHERE id_grupo = $id_grupo");
 			$retorna = $id_grupo;
 		}
 		else{
-			$idtemp = rand (9000,1000000) * -1;
-			//echo "INSERT INTO ".$esquemaadmin."i3geousr_grupos (nome) VALUES ('$idtemp')";exit;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_grupos (nome) VALUES ('$idtemp')");
-			$id = $dbh->query("SELECT id_grupo FROM ".$esquemaadmin."i3geousr_grupos WHERE nome = '$idtemp'");
-			$id = $id->fetchAll();
-			$id = $id[0]['id_grupo'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_grupos SET nome = '' WHERE id_grupo = $id AND nome = '$idtemp'");
-			$retorna = $id;
+			$dataCol = array(
+				"nome" => '',
+				"descricao" => ''
+			);
+			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geousr_grupos",$dataCol,"nome","id_grupo");
 		}
 		$dbhw = null;
 		$dbh = null;
@@ -166,7 +167,11 @@ function adicionaUsuarioGrupo(){
 	global $id_usuario,$id_grupo;
 	try	{
 		include(dirname(__FILE__)."/conexao.php");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_grupousuario (id_usuario,id_grupo) VALUES ($id_usuario,$id_grupo)");
+		$dataCol = array(
+			"id_usuario" => $id_usuario,
+			"id_grupo" => $id_grupo
+		);
+		i3GeoAdminInsert($dbhw,"i3geousr_grupousuario",$dataCol);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
@@ -177,13 +182,9 @@ function adicionaUsuarioGrupo(){
 }
 function excluirGrupo()
 {
-	global $id_grupo;
-	try
-	{
-		include(dirname(__FILE__)."/conexao.php");
-		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geousr_grupos WHERE id_grupo = $id_grupo ");
-		$dbhw = null;
-		$dbh = null;
+	global $id_grupo,$esquemaadmin;
+	try{
+		exclui($esquemaadmin."i3geousr_grupos","id_grupo",$id_grupo);
 		return "ok";
 	}
 	catch (PDOException $e)
@@ -197,8 +198,9 @@ function excluirUsuarioGrupo()
 	try
 	{
 		include(dirname(__FILE__)."/conexao.php");
-		//echo "DELETE from ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario";exit;
-		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geousr_grupousuario WHERE id_usuario = $id_usuario AND id_grupo = $id_grupo ");
+		$sql = "DELETE FROM ".$esquemaadmin."i3geousr_grupousuario WHERE id_usuario = $id_usuario AND id_grupo = $id_grupo ";
+		$dbhw->query($sql);
+		i3GeoAdminInsertLog($dbhw,$sql);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";

@@ -142,16 +142,6 @@ id - valor
 function exclui($tabela,$coluna,$id){
 	try {
 		include("conexao.php");
-		/*
-		$tabela = $esquemaadmin.$tabela;
-		$sql = "DELETE from $tabela WHERE $coluna = :id";
-		$dbhw->query($sql);
-		i3GeoAdminInsertLog($dbhw,$sql);
-		$dbhw = null;
-		$dbh = null;
-		return "ok";
-		*/
-
 		$sql = "DELETE from $tabela WHERE $coluna = ?";
 		$prep = $dbhw->prepare($sql);
 		$prep->execute(array($id));
