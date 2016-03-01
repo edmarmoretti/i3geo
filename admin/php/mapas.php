@@ -215,22 +215,34 @@ function salvaMapfile(){
 		}
 		$retorna = "";
 		if(empty($id_mapa)){
-			$id_temp = (rand (9000,10000)) * -1;
-			//echo "INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('',0,'','','','','','','','','$id_temp')";exit;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('',0,'','','','','','','','','$id_temp')");
-			$id = $dbh->query("SELECT * FROM ".$esquemaadmin."i3geoadmin_mapas WHERE nome_mapa = '$id_temp'");
-			$id = $id->fetchAll();
-			$id = $id[0]['id_mapa'];
+			$dataCol = array(
+				"publicado_mapa" => '',
+				"ordem_mapa" => 0,
+				"perfil_mapa" => '',
+				"desc_mapa" => '',
+				"ext_mapa" => '',
+				"imagem_mapa" => '',
+				"linkdireto_mapa" => '',
+				"outros_mapa" => '',
+				"temas_mapa" => '',
+				"ligados_mapa" => '',
+				"nome_mapa" => ''
+			);
+			$id = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_mapas",$dataCol,"nome_mapa","id_mapa");
 		}
 		else{
 			$id = $id_mapa;
 		}
-		//echo "UPDATE ".$esquemaadmin."i3geoadmin_mapas SET mapfile = '$conteudo', publicado_mapa = 'sim', nome_mapa = '$nome_mapa', outros_mapa = '&restauramapa=$id&interface=$url' WHERE id_mapa =".$id; exit;
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_mapas SET mapfile = '$conteudo', publicado_mapa = 'sim', nome_mapa = '$nome_mapa', outros_mapa = '&restauramapa=$id&interface=$url' WHERE id_mapa =".$id);
-		$retorna = $id;
+		$dataCol = array(
+			"mapfile" => $conteudo,
+			"publicado_mapa" => "sim",
+			"nome_mapa" => $nome_mapa,
+			"outros_mapa" => "&restauramapa=$id&interface=$url"
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_mapas",$dataCol, "WHERE id_mapa =".$id);
 		$dbhw = null;
 		$dbh = null;
-		return array("id"=>$retorna,"status"=>"ok");
+		return array("id"=>$id,"status"=>"ok");
 	}
 	catch (PDOException $e){
 		return array("id"=>"","status"=>"Error!: " . $e->getMessage());
@@ -243,8 +255,7 @@ function alterarMapa(){
 	global $esquemaadmin,$publicado_mapa,$ordem_mapa,$id_mapa,$desc_mapa,$ext_mapa,$imagem_mapa,$outros_mapa,$nome_mapa,$linkdireto_mapa,$temas_mapa,$ligados_mapa,$perfil_mapa;
 	//substitui a string do parametro outros
 	$outros_mapa = str_replace("*","&",$outros_mapa);
-	try
-	{
+	try{
 		require_once("conexao.php");
 		if($convUTF){
 			$nome_mapa = utf8_encode($nome_mapa);
@@ -252,16 +263,38 @@ function alterarMapa(){
 		}
 		$retorna = "";
 		if($id_mapa != ""){
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_mapas SET publicado_mapa='$publicado_mapa',ordem_mapa='$ordem_mapa',desc_mapa = '$desc_mapa',ext_mapa = '$ext_mapa',imagem_mapa = '$imagem_mapa',outros_mapa = '$outros_mapa',nome_mapa = '$nome_mapa', linkdireto_mapa = '$linkdireto_mapa',temas_mapa = '$temas_mapa',ligados_mapa = '$ligados_mapa',perfil_mapa = '$perfil_mapa' WHERE id_mapa = $id_mapa");
+			$dataCol = array(
+				"publicado_mapa" => $publicado_mapa,
+				"ordem_mapa" => $ordem_mapa,
+				"desc_mapa" => $desc_mapa,
+				"ext_mapa" => $ext_mapa,
+				"imagem_mapa" => $imagem_mapa,
+				"outros_mapa" => $outros_mapa,
+				"nome_mapa" => $nome_mapa,
+				"linkdireto_mapa" => $linkdireto_mapa,
+				"temas_mapa" => $temas_mapa,
+				"ligados_mapa" => $ligados_mapa,
+				"perfil_mapa" => $perfil_mapa
+			);
+			i3GeoAdminUpdate($dbhw,"i3geoadmin_mapas",$dataCol, "WHERE id_mapa =".$id_mapa);
 			$retorna = $id_mapa;
 		}
 		else{
-			$id_temp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa,mapfile) VALUES ('',0,'','','','','','','','','$id_temp','')");
-			$id = $dbh->query("SELECT * FROM ".$esquemaadmin."i3geoadmin_mapas WHERE nome_mapa = '$id_temp'");
-			$id = $id->fetchAll();
-			$id = $id[0]['id_mapa'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_mapas SET nome_mapa = '' WHERE id_mapa = $id AND nome_mapa = '$id_temp'");
+			$dataCol = array(
+				"publicado_mapa" => '',
+				"ordem_mapa" => 0,
+				"perfil_mapa" => '',
+				"desc_mapa" => '',
+				"ext_mapa" => '',
+				"imagem_mapa" => '',
+				"linkdireto_mapa" => '',
+				"outros_mapa" => '',
+				"temas_mapa" => '',
+				"ligados_mapa" => '',
+				"nome_mapa" => '',
+				"mapfile" => ''
+			);
+			$id = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_mapas",$dataCol,"nome_mapa","id_mapa");
 			$retorna = $id;
 		}
 		$dbhw = null;
@@ -272,19 +305,13 @@ function alterarMapa(){
 		return "Error!: " . $e->getMessage();
 	}
 }
-function excluirMapa()
-{
+function excluirMapa(){
 	global $id,$esquemaadmin;
-	try
-	{
-		include("conexao.php");
-		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_mapas WHERE id_mapa = $id");
-		$dbhw = null;
-		$dbh = null;
+	try{
+		exclui($esquemaadmin."i3geoadmin_mapas","id_mapa",$id);
 		return "ok";
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		return "Error!: " . $e->getMessage();
 	}
 }
