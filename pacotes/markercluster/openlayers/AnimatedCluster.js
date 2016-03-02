@@ -155,7 +155,7 @@ OpenLayers.Strategy.AnimatedCluster = OpenLayers.Class(OpenLayers.Strategy.Clust
                     if(this.layer && this.layer.map) {
                         var screenBounds = this.layer.map.getExtent();
                         var featureBounds = feature.geometry.getBounds();
-                        if(!screenBounds.intersectsBounds(featureBounds)) {
+                        if(!screenBounds || !screenBounds.intersectsBounds(featureBounds)) {
                             continue;
                         }
                     }  
