@@ -1,4 +1,6 @@
 <?php
+//$dbh usuario somente leitura
+//$dbhw usuario com direito de escrita
 try
 {
 	$dbh = new PDO('pgsql:dbname=teste;user=postgres;password=postgres;host=localhost');

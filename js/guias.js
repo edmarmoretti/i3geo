@@ -388,7 +388,7 @@ i3GEO.guias =
 			//
 			var nguiasreal = 0, guiaconteudo, id, guia, g, re, ng, tituloguia, i, ins, altura, temp, CONFIGURA = i3GEO.guias.CONFIGURA, guias =
 				i3GEO.util.listaChaves(CONFIGURA), nguias = guias.length;
-			
+
 			//roda a funcao de inicializacao se existir
 			for (ng = 0; ng < 20; ng++) {
 				if(i3GEO.guias.CONFIGURA[guias[ng]] && i3GEO.guias.CONFIGURA[guias[ng]].inicializa){
@@ -1083,15 +1083,15 @@ i3GEO.guias =
 						i3GEO.guias.guiaMovel.mostraIcones();
 					}
 				};
-				if (i3GEO.guias.guiaMovel.ABERTA === true) {
-					i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);
-				}
 				i3GEO.guias.guiaMovel.mostraIcones();
 				temp = $i("i3GEOguiaMovel");
 				temp.style.visibility = "visible";
 				// evita sobreposicao com elementos que tenham onclick
 				temp.style.height = parseInt(temp.style.height) - 20 + "px";
 				i3GEO.util.aparece("i3GEOguiaMovel", 300, 100);
+				if (i3GEO.guias.guiaMovel.ABERTA === true) {
+					i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);
+				}
 			},
 			/**
 			 * Mostra os &iacute;cones que acionam cada guia

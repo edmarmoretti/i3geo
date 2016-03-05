@@ -1084,15 +1084,16 @@ i3GEO.guias =
 						i3GEO.guias.guiaMovel.mostraIcones();
 					}
 				};
-				if (i3GEO.guias.guiaMovel.ABERTA === true) {
-					i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);
-				}
+
 				i3GEO.guias.guiaMovel.mostraIcones();
 				temp = $i("i3GEOguiaMovel");
 				temp.style.visibility = "visible";
 				// evita sobreposicao com elementos que tenham onclick
 				temp.style.height = parseInt(temp.style.height) - 20 + "px";
 				i3GEO.util.aparece("i3GEOguiaMovel", 300, 100);
+				if (i3GEO.guias.guiaMovel.ABERTA === true) {
+					i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);
+				}
 			},
 			/**
 			 * Mostra os &iacute;cones que acionam cada guia
