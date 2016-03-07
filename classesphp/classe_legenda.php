@@ -594,12 +594,11 @@ class Legenda
 		if ($tipo == 3){
 			$tipo = 2;
 		} //tipo raster
-		if($imgdir == "")
-		{
+		if($imgdir == ""){
 			$dir = $dir_tmp;
 		}
-		else
-		{$dir = $dir_tmp."/".$imgdir;
+		else{
+			$dir = $dir_tmp."/".$imgdir;
 		}
 		if($forca == true){
 			unlink($dir."/simbolos".$tipo.".inc");
@@ -635,7 +634,7 @@ class Legenda
 				//var_dump($lista);exit;
 				$n = count($lista["nomes"]);
 				for($i = 0; $i < $n; $i++){
-					$ins .= "<img src='".$url."/".$lista["nomes"][$i]."' style='cursor:pointer;border: 5px solid #FFFFFF' title=".$pasta."/".$lista["nomes"][$i]." onclick='".$onclick."'>";
+					$ins .= "<img src='".$url."/".$lista["nomes"][$i]."' style='max-width: 80px;cursor:pointer;border: 5px solid #FFFFFF' title=".$pasta."/".$lista["nomes"][$i]." onclick='".$onclick."'>";
 				}
 			}
 		}
