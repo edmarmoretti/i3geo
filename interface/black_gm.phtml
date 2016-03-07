@@ -119,6 +119,7 @@ i3GEO.configura.diminuixN = 0;
 i3GEO.configura.autotamanho = false;
 i3GEO.Interface.openlayers.TILES = true;
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
+
 i3GEO.cria();
 i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
@@ -157,7 +158,12 @@ i3GEO.finaliza = function(){
 	}
 	//i3GEO.mapa.insereDobraPagina("openlayers","../imagens/dobraopenlayers.png");
 };
+//i3GEO.configura.guardaExtensao = false;
 i3GEO.finalizaAPI = function(){
+	//google.maps.event.addListenerOnce(i3GeoMap, 'idle', function() {
+	//	i3GeoMap.setCenter(new google.maps.LatLng(-34,151));
+	//	i3GeoMap.setZoom(10);
+	//});
 };
 i3GEO.inicia();
 </script>

@@ -2577,6 +2577,13 @@ i3GEO.Interface =
 						i3GEO.Interface.googlemaps.adicionaKml(true, i3GEO.parametros.kmlurl);
 					}
 					i3GEO.Interface.ativaBotoes();
+					// ajusta a extensao geografica do mapa
+					google.maps.event.addListenerOnce(i3GeoMap, 'idle', function() {
+						var z = i3GeoMap.getZoom();
+						if (z != undefined) {
+							i3GeoMap.setZoom(parseInt(z, 10) + 1);
+						}
+					});
 					// executa fun&ccedil;&atilde;o de finaliza&ccedil;&atilde;o, se
 					// houver
 					if (YAHOO.lang.isFunction(i3GEO.finalizaAPI)) {
@@ -2587,13 +2594,7 @@ i3GEO.Interface =
 						}
 					}
 					i3GEO.configura.iniciaFerramentas.executa();
-					// ajusta a extensao geografica do mapa
-					google.maps.event.addListenerOnce(i3GeoMap, 'idle', function() {
-						var z = i3GeoMap.getZoom();
-						if (z != undefined) {
-							i3GeoMap.setZoom(parseInt(z, 10) + 1);
-						}
-					});
+
 				};
 				i3GEO.php.googlemaps(montaMapa);
 			},
