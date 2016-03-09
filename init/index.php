@@ -40,6 +40,7 @@ error_reporting(0);
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
+<title>i3Geo</title>
 <meta name="url" content="http://www.softwarepublico.gov.br" />
 <meta name="description" content="i3Geo" />
 <meta name="keywords" content="i3geo mapa geoprocessamento" />
