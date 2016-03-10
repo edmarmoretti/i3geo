@@ -75,7 +75,7 @@ Default:
 false
 
 */
-$logTransacoes = false;
+$logTransacoes = true;
 /*
  Variable: $i3GeoProjDefault
 
