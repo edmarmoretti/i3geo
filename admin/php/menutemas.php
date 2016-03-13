@@ -1207,8 +1207,7 @@ function alteraTemas()
 {
 	global $esquemaadmin,$nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags,$kmz,$locaplic,$es,$it,$en;
 	//error_reporting(0);
-	try
-	{
+	try{
 		$retorna = "ok";
 		include("conexao.php");
 		$nomeo = $nome;
@@ -1235,7 +1234,7 @@ function alteraTemas()
 					"ogc_tema" => $ogc,
 					"kml_tema" => $kml
 			);
-			if(isset($kmz))
+			if(isset($kmz)){
 				$dataCol["kmz_tema"] = $kmz;
 			}
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE id_tema = $id");
@@ -1290,7 +1289,7 @@ function alteraTemas()
 				"ogc_tema" => "",
 				"kml_tema" => ""
 			);
-			if(isset($kmz))
+			if(isset($kmz)){
 				$dataCol["kmz_tema"] = "";
 			}
 			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_temas",$dataCol,"nome_tema","id_tema");
