@@ -5,25 +5,21 @@ MAP
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "TIP"	"CD_LEGENDA"
       "CACHE"	"sim"
+      "TIP"	"CD_LEGENDA"
       "CLASSE"	"SIM"
       "permitekmz"	"sim"
-      "iconetema"	""
       "ITENSDESC"	"Bioma Teste de acentuação"
-      "ESCALA"	"1000000"
       "TILES"	"SIM"
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "ESCALA"	"1000000"
       "extensao"	"-76 -39 -29 9"
       "permitedownload"	"sim"
-      "metaestat"	""
       "download"	"SIM"
       "itembuscarapida"	"CD_LEGENDA"
       "ITENS"	"CD_LEGENDA"
-      "transitioneffect"	"SIM"
-      "permiteogc"	"sim"
       "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "transitioneffect"	"SIM"
       "TEMA"	"_Biomas SHP (acentução)"
     END # METADATA
     NAME "_lbiomashp"
@@ -38,6 +34,18 @@ MAP
     CLASS
       NAME "CAATINGA"
       EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
+      LABEL
+        FONT ""
+        MAXSIZE 0
+        MINSIZE 0
+        SIZE 0
+        MINDISTANCE 0
+        MINFEATURESIZE 0
+        OFFSET 0 0
+        PARTIALS FALSE
+        SHADOWSIZE 0 0
+        TEXT "[CD_LEGENDA]"
+      END # LABEL
       STYLE
         COLOR 183 247 169
         OUTLINECOLOR 255 255 255

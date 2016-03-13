@@ -75,8 +75,7 @@ function corE($label,$cor,$elemento,$sombrax=1,$sombray=1)
 {
 	$versao = versao();
 	$versao = $versao["principal"];
-	if (is_string($cor))
-	{
+	if (is_string($cor)){
 		$cor = str_replace(","," ",$cor);
 		if (count(explode(" ",$cor)) == 3)
 		{

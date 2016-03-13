@@ -22,6 +22,8 @@ function montaEditorClasseLabel(dados)
 	core_montaEditor(temp,"450px","500px","","Label&nbsp;"+dados.codigoMap,true,true,false);
 	var param = {
 		"linhas":[
+		{ajuda:$trad("colunaLabel",i3GEOadmin.editormapfile.dicionario),
+		titulo:$trad("colunaLabel",i3GEOadmin.editormapfile.dicionario),id:"text",value:dados.text,tipo:"text"},
 		{ajuda:$trad("colorLabel",i3GEOadmin.editormapfile.dicionario),
 		titulo:$trad("colorLabelTitulo",i3GEOadmin.editormapfile.dicionario),id:"color",value:dados.color,tipo:"cor"},
 		{ajuda:$trad("sizeLabel",i3GEOadmin.editormapfile.dicionario),

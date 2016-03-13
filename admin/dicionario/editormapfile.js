@@ -7,7 +7,7 @@ i3GEOadmin.editormapfile.dicionario = {
 		es : ""
 	} ],
     'txtAjudaMapfile' : [ {
-		pt : "<p>Importante: a restri&ccedil;&atilde;o ao tema por meio da defini&ccedil;&atilde;o de grupos de usu&aacute;rios n&atilde;o bloqueia o acesso por meio de download, WMS, KML, etc. Para bloquear esse tipo de acesso &eacute; necess&aacute;rio alterar as op&ccedil;&otilde;es espec&iacute;ficas. Por padr&atilde;o, esses servi&ccedil;os s&atilde;o habilitados para qualquer usu&aacute;rio, n&atilde;o sendo poss&iacute;vel bloquear apenas para determinados grupos. <p>Este formul&aacute;rio permite criar ou editar os arquivos mapfile que comp&otilde;em temas no i3geo. <p>Os arquivo .map s&atilde;o armazenados no diretório i3geo/temas e podem tamb&eacute;m ser editados manualmente. <p>Cada arquivo cont&eacute;m layers definidos conforme a sintaxe utilizada pelo Mapserver. Esses arquivos s&atilde;o as estruturas b&aacute;sicas utilizadas pelo i3geo na apresenta&ccedil;&atilde;o de dados e montagem das camadas que s&atilde;o vistas no mapa. <p>Após criados os mapfiles, deve-se ainda definir as caracter&iacute;sticas de cada LAYER. <p>A lista de IPs dos usu&aacute;rios que podem administrar o i3geo &eacute; definida no arquivo i3geo/ms_configura.php <p>Apenas os mapfiles que forem vinculados a um tema poder&atilde;o ser vistos na janela de inclus&atilde;o de temas na &aacute;rvore de temas. Se voc&ecirc; criou um mapfile manualmente, utilize a op&ccedil;&atilde;o de edi&ccedil;&atilde;o (&iacute;cone apresentado ao lado de cada mapfile) para fazer essa associa&ccedil;&atilde;o. <p>A op&ccedil;&atilde;o 'Verifica temas sem mapfiles' possibilita resolver problemas decorrentes da elimina&ccedil;&atilde;o manual de um arquivo mapfile do servidor. Nesses casos, o registro no banco de dados permanece. Com essa op&ccedil;&atilde;o &eacute; poss&iacute;vel apagar os registros ou recriar o mapfile perdido.",
+		pt : "<p>Importante: a restri&ccedil;&atilde;o ao tema por meio da defini&ccedil;&atilde;o de grupos de usu&aacute;rios n&atilde;o bloqueia o acesso por meio de download, WMS, KML, etc. Para bloquear esse tipo de acesso &eacute; necess&aacute;rio alterar as op&ccedil;&otilde;es espec&iacute;ficas. Por padr&atilde;o, esses servi&ccedil;os s&atilde;o habilitados para qualquer usu&aacute;rio, n&atilde;o sendo poss&iacute;vel bloquear apenas para determinados grupos. <p>Este formul&aacute;rio permite criar ou editar os arquivos mapfile que comp&otilde;em temas no i3geo. <p>Os arquivo .map s&atilde;o armazenados no diretï¿½rio i3geo/temas e podem tamb&eacute;m ser editados manualmente. <p>Cada arquivo cont&eacute;m layers definidos conforme a sintaxe utilizada pelo Mapserver. Esses arquivos s&atilde;o as estruturas b&aacute;sicas utilizadas pelo i3geo na apresenta&ccedil;&atilde;o de dados e montagem das camadas que s&atilde;o vistas no mapa. <p>Apï¿½s criados os mapfiles, deve-se ainda definir as caracter&iacute;sticas de cada LAYER. <p>A lista de IPs dos usu&aacute;rios que podem administrar o i3geo &eacute; definida no arquivo i3geo/ms_configura.php <p>Apenas os mapfiles que forem vinculados a um tema poder&atilde;o ser vistos na janela de inclus&atilde;o de temas na &aacute;rvore de temas. Se voc&ecirc; criou um mapfile manualmente, utilize a op&ccedil;&atilde;o de edi&ccedil;&atilde;o (&iacute;cone apresentado ao lado de cada mapfile) para fazer essa associa&ccedil;&atilde;o. <p>A op&ccedil;&atilde;o 'Verifica temas sem mapfiles' possibilita resolver problemas decorrentes da elimina&ccedil;&atilde;o manual de um arquivo mapfile do servidor. Nesses casos, o registro no banco de dados permanece. Com essa op&ccedil;&atilde;o &eacute; poss&iacute;vel apagar os registros ou recriar o mapfile perdido.",
 		en : "",
 		es : ""
 	} ],
@@ -167,7 +167,7 @@ i3GEOadmin.editormapfile.dicionario = {
 		es : ""
 	} ],
     'apenasShp' : [ {
-		pt : "Opcao disponivel apenas para o tipo shapefile", // esta sem acento pois alguns navegadores não aceitam acentuacao em alert
+		pt : "Opcao disponivel apenas para o tipo shapefile", // esta sem acento pois alguns navegadores nï¿½o aceitam acentuacao em alert
 		en : "",
 		es : ""
 	} ],
@@ -327,7 +327,7 @@ i3GEOadmin.editormapfile.dicionario = {
 		es : ""
 	} ],
     'legendaImg' : [ {
-		pt : "URL de uma imagem que ser&aacute; utilizada em substitui&ccedil;&atilde;o à gera&ccedil;&atilde;o normal da legenda ",
+		pt : "URL de uma imagem que ser&aacute; utilizada em substitui&ccedil;&atilde;o ï¿½ gera&ccedil;&atilde;o normal da legenda ",
 		en : "",
 		es : ""
 	} ],
@@ -1297,12 +1297,12 @@ i3GEOadmin.editormapfile.dicionario = {
 		es : ""
 	} ],
     'ltempoconvencode' : [ {
-		pt : "Aplica convers&atilde;o do código de caracteres? Pode ser necess&aacute;rio para corrigir problemas de acentua&ccedil;&atilde;o",
+		pt : "Aplica convers&atilde;o do cï¿½digo de caracteres? Pode ser necess&aacute;rio para corrigir problemas de acentua&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
     'ltempoconvencodeTitulo' : [ {
-		pt : "Aplica convers&atilde;o do código de caracteres? Pode ser necess&aacute;rio para corrigir problemas de acentua&ccedil;&atilde;o",
+		pt : "Aplica convers&atilde;o do cï¿½digo de caracteres? Pode ser necess&aacute;rio para corrigir problemas de acentua&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
@@ -1387,7 +1387,7 @@ i3GEOadmin.editormapfile.dicionario = {
 		es : ""
 	} ],
     'itenslink' : [ {
-		pt : "Lista de links que ser&atilde;o inclu&iacute;dos em cada resultado de busca da ferramenta de identifica&ccedil;&atilde;o. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item n&atilde;o tem link. Exemplo de uso para inclus&atilde;o de links para o site do IBGE quando um munic&iacute;pio &eacute; clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do munic&iacute;pio,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'<br>Podem ser inclu&iacute;dos comandos javascript, para isso utilize sempre aspas simples para fechar o link e acrescente o código javascript, exemplo:<br>ITENSLINK \",'../ferramentas/identifica/testelink.php?sid='+i3GEO.configura.sid\"",
+		pt : "Lista de links que ser&atilde;o inclu&iacute;dos em cada resultado de busca da ferramenta de identifica&ccedil;&atilde;o. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item n&atilde;o tem link. Exemplo de uso para inclus&atilde;o de links para o site do IBGE quando um munic&iacute;pio &eacute; clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do munic&iacute;pio,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'<br>Podem ser inclu&iacute;dos comandos javascript, para isso utilize sempre aspas simples para fechar o link e acrescente o cï¿½digo javascript, exemplo:<br>ITENSLINK \",'../ferramentas/identifica/testelink.php?sid='+i3GEO.configura.sid\"",
 		en : "",
 		es : ""
 	} ],
@@ -1427,7 +1427,7 @@ i3GEOadmin.editormapfile.dicionario = {
 		es : ""
 	} ],
     'name' : [ {
-		pt : "Elemento 'NAME'. N&atilde;o confunda com o nome que aparece no mapa ou  na &aacute;rvore de temas. Normalmente o código recebe o mesmo nome do arquivo mapfile, sem a extens&atilde;o '.map'",
+		pt : "Elemento 'NAME'. N&atilde;o confunda com o nome que aparece no mapa ou  na &aacute;rvore de temas. Normalmente o cï¿½digo recebe o mesmo nome do arquivo mapfile, sem a extens&atilde;o '.map'",
 		en : "",
 		es : ""
 	} ],
@@ -1496,8 +1496,8 @@ i3GEOadmin.editormapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'colunaLabel' : [ {
+		pt : "Coluna da tabela de atributos",
 		en : "",
 		es : ""
 	} ],

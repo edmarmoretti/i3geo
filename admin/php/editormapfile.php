@@ -350,7 +350,7 @@ switch (strtoupper($funcao))
 
 		maporigem {string} - nome completo do arquivo mapfile que contem o layer que ser&aacute; utilizado para alterar o original
 
-		nomelayer {string} - c�digo do layer em mapfile que ser&aacute; utilizado para atualizar codigoMap
+		nomelayer {string} - codigo do layer em mapfile que ser&aacute; utilizado para atualizar codigoMap
 
 		Retorno:
 
@@ -2201,7 +2201,7 @@ function pegaClasseLabel()
 	$v = versao();
 	$vi = $v["inteiro"];
 	if($vi >= 60200){
-		$nlabel = $classe->numlabels;
+		$nlabels = $classe->numlabels;
 		if($nlabels > 0){
 			$label = $classe->getLabel(0);
 		}
@@ -2216,25 +2216,26 @@ function pegaClasseLabel()
 	{
 		$dados["font"] = $label->font;
 		$dados["type"] = $label->type;
-		$dados["backgroundcolor"] = $label->backgroundcolor->red.",".$label->backgroundcolor->green.",".$label->backgroundcolor->blue;
-		$dados["backgroundshadowcolor"] = $label->backgroundshadowcolor->red.",".$label->backgroundshadowcolor->green.",".$label->backgroundshadowcolor->blue;
+		//$dados["backgroundcolor"] = $label->backgroundcolor->red.",".$label->backgroundcolor->green.",".$label->backgroundcolor->blue;
+		//$dados["backgroundshadowcolor"] = $label->backgroundshadowcolor->red.",".$label->backgroundshadowcolor->green.",".$label->backgroundshadowcolor->blue;
 		$dados["color"] = $label->color->red.",".$label->color->green.",".$label->color->blue;
 		$dados["outlinecolor"] = $label->outlinecolor->red.",".$label->outlinecolor->green.",".$label->outlinecolor->blue;
 		$dados["shadowcolor"] = $label->shadowcolor->red.",".$label->shadowcolor->green.",".$label->shadowcolor->blue;
 		$dados["shadowsizex"] = $label->shadowsizex;
 		$dados["shadowsizey"] = $label->shadowsizey;
-		$dados["backgroundshadowsizex"] = $label->backgroundshadowsizex;
-		$dados["backgroundshadowsizey"] = $label->backgroundshadowsizey;
+		//$dados["backgroundshadowsizex"] = $label->backgroundshadowsizex;
+		//$dados["backgroundshadowsizey"] = $label->backgroundshadowsizey;
 		$dados["size"] = $label->size;
+
 		$dados["minsize"] = $label->minsize;
 		$dados["maxsize"] = $label->maxsize;
 		$dados["position"] = $label->position;
 		$dados["offsetx"] = $label->offsetx;
 		$dados["offsety"] = $label->offsety;
 		$dados["angle"] = $label->angle;
-		$dados["autoangle"] = $label->autoangle;
+		//$dados["autoangle"] = $label->autoangle;
 		$dados["buffer"] = $label->buffer;
-		$dados["antialias"] = $label->antialias;
+		//$dados["antialias"] = $label->antialias;
 		$dados["wrap"] = $label->wrap;
 		$dados["minfeaturesize"] = $label->minfeaturesize;
 		$dados["autominfeaturesize"] = $label->autominfeaturesize;
@@ -2259,7 +2260,13 @@ function pegaClasseLabel()
 }
 function alterarClasseLabel()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic,$autoangle,$encoding,$force,$partials,$mindistance,$minfeaturesize,$wrap,$antialias,$buffer,$angle,$offsety,$offsetx,$position,$maxsize,$minsize,$size,$backgroundshadowsizey,$backgroundshadowsizex,$shadowsizey,$shadowsizex,$shadowcolor,$outlinecolor,$color,$backgroundshadowcolor,$backgroundcolor,$type,$font;
+	global $text,$codigoMap,$codigoLayer,$indiceClasse,$locaplic,$autoangle,$encoding,$force,$partials,$mindistance,$minfeaturesize,$wrap,$antialias,$buffer,$angle,$offsety,$offsetx,$position,$maxsize,$minsize,$size,$backgroundshadowsizey,$backgroundshadowsizex,$shadowsizey,$shadowsizex,$shadowcolor,$outlinecolor,$color,$backgroundshadowcolor,$backgroundcolor,$type,$font;
+	if(!isset($text)){
+		$text = "";
+	}
+	else{
+		$text = "[".$text."]";
+	}
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -2268,38 +2275,104 @@ function alterarClasseLabel()
 		return "erro. Layer METAESTAT";
 	}
 	$classe = $layer->getclass($indiceClasse);
-	$label = $classe->label;
-	if ($label != "")
-	{
-		$label->set("font",$font);
-		$label->set("type",$type);
+	$v = versao();
+	$vi = $v["inteiro"];
+	if($vi >= 60300){
+		while($classe->numlabels > 0){
+			$classe->removeLabel(0);
+		}
+	}
+	if($text == ""){
+		if($vi >= 60300){
+			$indiceLabel = $classe->addLabel(new labelObj());
+			$label = $classe->getLabel($indiceLabel);
+		}
+		else{
+			$label = $classe->label;
+		}
+	}
+	elseif ($vi >= 60300 && $classe->numlabels == 0){
+		if($wrap != ""){
+			$s = "CLASS LABEL WRAP '$wrap' TEXT '".$text."' END END";
+			$classe->updateFromString($s);
+		}
+		else{
+			$s = "CLASS LABEL TEXT '".$text."' END END";
+			$classe->updateFromString($s);
+		}
+	}
+	
+	if($vi >= 60300){
+		$label = $classe->getLabel(0);
+	}
+	else{
+		$label = $classe->label;
+	}
+
+	if($wrap != ""){
+		$label->set("maxlength",1);
+	}
+	if($fonte != "bitmap"){
+		//para funcionar na versao 7 do mapserver
+		$label->updateFromString("LABEL type truetype END");
+		$label->set("font",$fonte);
+		$label->set("size",$tamanho);
+	}
+	else{
+		//para funcionar na versao 7 do mapserver
+		$label->updateFromString("LABEL type bitmap END");
+		$t = MS_TINY;
+		if ($tamanho > 5 ){
+			$t = MS_TINY;
+		}
+		if ($tamanho >= 7 ){
+			$t = MS_SMALL;
+		}
+		if ($tamanho >= 10 ){
+			$t = MS_MEDIUM;
+		}
+		if ($tamanho >= 12 ){
+			$t = MS_LARGE;
+		}
+		if ($tamanho >= 14 ){
+			$t = MS_GIANT;
+		}
+		$label->set("size",$t);
+	}
+	if ($label != ""){
+		//$label->set("type",$type);
 		corE($label,$backgroundcolor,"backgroundcolor");
 		corE($label,$backgroundshadowcolor,"backgroundshadowcolor");
 		corE($label,$color,"color");
 		corE($label,$outlinecolor,"outlinecolor");
-		corE($label,$shadowcolor,"shadowcolor");
+		if(!empty($sombra) && !empty($backgroundshadowsizex)){
+			corE($label,$sombra,"backgroundshadowcolor",$backgroundshadowsizex,$backgroundshadowsizey);
+		}
 		$label->set("shadowsizex",$shadowsizex);
 		$label->set("shadowsizey",$shadowsizey);
-		$label->set("backgroundshadowsizex",$backgroundshadowsizex);
-		$label->set("backgroundshadowsizey",$backgroundshadowsizey);
-		$label->set("size",$size);
+		//$label->set("backgroundshadowsizex",$backgroundshadowsizex);
+		//$label->set("backgroundshadowsizey",$backgroundshadowsizey);
+		
 		$label->set("minsize",$minsize);
 		$label->set("maxsize",$maxsize);
-		$label->set("position",$position);
+		//$label->set("position",$position);
+
 		$label->set("offsetx",$offsetx);
 		$label->set("offsety",$offsety);
 		$label->set("angle",$angle);
-		$label->set("autoangle",$autoangle);
-		$label->set("buffer",$buffer);
-		$label->set("antialias",$antialias);
+
+		//$label->set("autoangle",$autoangle);
+		//$label->set("buffer",$buffer);
+		//$label->set("antialias",$antialias);
 		$label->set("wrap",$wrap);
 		$label->set("minfeaturesize",$minfeaturesize);
-		//$label->set("autominfeaturesize",$autominfeaturesize);
 		$label->set("mindistance",$mindistance);
 		$label->set("partials",$partials);
 		$label->set("force",$force);
 		$label->set("encoding",$encoding);
-		$label->set("autoangle",$autoangle);
+
+		$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
+		$label->set("position",$p[$position]);
 	}
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
