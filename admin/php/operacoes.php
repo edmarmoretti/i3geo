@@ -112,27 +112,26 @@ switch (strtoupper($funcao))
 	break;
 }
 cpjson($retorno);
-function alterarOperacoes()
-{
+function alterarOperacoes(){
 	global $id_operacao,$codigo,$descricao;
-	try
-	{
+	try{
 		include(dirname(__FILE__)."/conexao.php");
 		if($convUTF){
 			$descricao = utf8_encode($descricao);
 		}
 		if($id_operacao != ""){
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_operacoes SET codigo='$codigo',descricao='$descricao' WHERE id_operacao = $id_operacao");
+			$dataCol = array(
+				"codigo" => $codigo,
+				"descricao" => $descricao
+			);
+			i3GeoAdminUpdate($dbhw,"i3geousr_operacoes",$dataCol,"WHERE id_operacao = $id_operacao");
 			$retorna = $id_operacao;
 		}
 		else{
-			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoes (codigo,descricao) VALUES ('','$idtemp')");
-			$id = $dbh->query("SELECT id_operacao FROM ".$esquemaadmin."i3geousr_operacoes WHERE descricao = '$idtemp'");
-			$id = $id->fetchAll();
-			$id = $id[0]['id_operacao'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_operacoes SET descricao = '' WHERE id_operacao = $id AND descricao = '$idtemp'");
-			$retorna = $id;
+			$dataCol = array(
+					"descricao" => ''
+			);
+			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geousr_operacoes",$dataCol,"descricao","id_operacao");
 		}
 		$dbhw = null;
 		$dbh = null;
@@ -144,10 +143,13 @@ function alterarOperacoes()
 }
 function adicionaPapelOperacoes(){
 	global $id_operacao,$id_papel;
-	try
-	{
+	try{
 		include(dirname(__FILE__)."/conexao.php");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_operacoespapeis (id_operacao,id_papel) VALUES ($id_operacao,$id_papel)");
+		$dataCol = array(
+				"id_operacao" => $id_operacao,
+				"id_papel" => $id_papel
+		);
+		i3GeoAdminInsert($dbhw,"i3geousr_operacoespapeis",$dataCol);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
@@ -158,10 +160,11 @@ function adicionaPapelOperacoes(){
 }
 function excluirPapelOperacao(){
 	global $id_operacao,$id_papel;
-	try
-	{
+	try{
 		include(dirname(__FILE__)."/conexao.php");
-		$dbhw->query("DELETE from ".$esquemaadmin."i3geousr_operacoespapeis WHERE id_operacao = $id_operacao AND id_papel = $id_papel");
+		$sql = "DELETE from ".$esquemaadmin."i3geousr_operacoespapeis WHERE id_operacao = $id_operacao AND id_papel = $id_papel";
+		$dbhw->query($sql);
+		i3GeoAdminInsertLog($dbhw,$sql);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
