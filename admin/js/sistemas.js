@@ -262,7 +262,7 @@ function montaDivFuncoes(i)
 	var param =
 	{
 		"linhas":[
-		{titulo:$trad("publicado",i3GEOadmin.sistemas.dicionario),id:"Enome_funcao",size:"50",value:i.nome_funcao,tipo:"text",div:""},
+		{titulo:$trad("funcao",i3GEOadmin.sistemas.dicionario),id:"Enome_funcao",size:"50",value:i.nome_funcao,tipo:"text",div:""},
 		{titulo:$trad("programa",i3GEOadmin.sistemas.dicionario),id:"Eabrir_funcao",size:"50",value:i.abrir_funcao,tipo:"text",div:""},
 		{titulo:$trad("largura",i3GEOadmin.sistemas.dicionario),id:"Ew_funcao",size:"5",value:i.w_funcao,tipo:"text",div:""},
 		{titulo:$trad("altura",i3GEOadmin.sistemas.dicionario),id:"Eh_funcao",size:"5",value:i.h_funcao,tipo:"text",div:""},
