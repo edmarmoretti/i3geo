@@ -487,7 +487,6 @@ class Atributos
 			$resultadoFinal[] = array("registros"=>$registros);
 		}
 		if ($tipolista == "tudo"){
-			//ini_set('memory_limit', '500M');
 			$shp_atual = $shapes;
 			$chk = "";
 			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS){
@@ -563,6 +562,62 @@ class Atributos
 			$resultadoFinal[] = array("totalGeral"=>$totalGeral,"registros"=>$registros);
 		}
 		return($resultadoFinal);
+	}
+	/*
+	 function: listaUnicoRapida
+
+	Obtem uma lista unica de registros de uma coluna
+
+	parameters:
+
+	$item
+
+	*/
+	function listaUnicoRapida($item)
+	{
+		error_reporting(0);
+		if(!$this->layer){
+			return "erro";
+		}
+		$this->layer->set("template","none.htm");
+		$this->layer->setfilter("");
+		if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO"){
+			$convC = false;
+		}
+		else{
+			$convC = true;
+		}
+		if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS){
+			$res_count = $this->layer->getNumresults();
+			$sopen = $this->layer->open();
+			if($sopen == MS_FAILURE){
+				return "erro";
+			}
+			$valoresunicos = array();
+			for ($i = 0; $i < $res_count; ++$i){
+				if($this->v >= 6){
+					$shape = $this->layer->getShape($this->layer->getResult($i));
+					$indx = $shape->index;
+				}
+				else{
+					$result = $this->layer->getResult($i);
+					$indx  = $result->shapeindex;
+					$shape = $this->layer->getfeature($indx,-1);
+				}
+				$valori = "";
+				if(@$shape->values[$item]){
+					$valori = ($shape->values[$item]);
+				}
+				if($convC == true){
+					$valori = $this->converte($valori);
+				}
+				$valoresunicos[] = $valori;
+			}
+			$this->layer->close();
+		}
+		$valoresunicos = array_unique($valoresunicos);
+		sort($valoresunicos);
+		return($valoresunicos);
 	}
 	/*
 	 function: listaRegistrosXY
@@ -711,19 +766,19 @@ class Atributos
 			}
 			$ret = $this->mapa->extent;
 			/*
-			$prjMapa = $this->mapa->getProjection();
+			 $prjMapa = $this->mapa->getProjection();
 			$prjTema = $l->getProjection();
 			if ($prjTema != ""){
-				$projInObj = ms_newprojectionobj($prjTema);
-				$projOutObj = ms_newprojectionobj($prjMapa);
+			$projInObj = ms_newprojectionobj($prjTema);
+			$projOutObj = ms_newprojectionobj($prjMapa);
 			}
 			*/
 			/*
-			if (($prjTema != "") && ($prjMapa != $prjTema))	{
-				$status = $ret->project($projInObj, $projOutObj);
-				if($status !== MS_SUCCESS){
-					$ret = $this->mapa->extent;
-				}
+			 if (($prjTema != "") && ($prjMapa != $prjTema))	{
+			$status = $ret->project($projInObj, $projOutObj);
+			if($status !== MS_SUCCESS){
+			$ret = $this->mapa->extent;
+			}
 			}
 			*/
 			$fr = array();
@@ -771,8 +826,8 @@ class Atributos
 					if ($encontrado == "sim"){
 						$ret = $this->extensaoShape($shape,$l);
 						/*
-						if (($prjTema != "") && ($prjMapa != $prjTema)){
-							$ret->project($projInObj, $projOutObj);
+						 if (($prjTema != "") && ($prjMapa != $prjTema)){
+						$ret->project($projInObj, $projOutObj);
 						}
 						*/
 						$novoreg["box"] = $ret;

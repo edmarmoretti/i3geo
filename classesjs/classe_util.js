@@ -1920,10 +1920,11 @@ i3GEO.util =
 				$i(onde).innerHTML = "<span style=color:red;font-size:10px; >buscando valores...</span>";
 			}
 			var monta = function(retorno) {
-				var ins = [], i, pares, j, valoresSort = [];
+				var ins = [], j;
 				if (retorno.data !== undefined) {
 					ins.push("<select  id=" + id + " >");
 					ins.push("<option value='' >---</option>");
+					/*
 					for (i = 0; i < retorno.data[1].registros.length; i++) {
 						pares = retorno.data[1].registros[i].valores;
 						for (j = 0; j < pares.length; j++) {
@@ -1931,8 +1932,9 @@ i3GEO.util =
 						}
 					}
 					valoresSort.sort();
-					for (j = 0; j < valoresSort.length; j++) {
-						ins.push('<option value="' + valoresSort[j] + '" >' + valoresSort[j] + '</option>');
+					*/
+					for (j = 0; j < retorno.data.length; j++) {
+						ins.push('<option value="' + retorno.data[j] + '" >' + retorno.data[j] + '</option>');
 					}
 					ins.push("</select>");
 					ins = ins.join('');

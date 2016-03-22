@@ -67,6 +67,12 @@ $i3geomaster = array(
 
 Define se as transacoes no banco de dados de administracao serao mantidas em uma tabela de logs
 
+Para que isso funcione e necessario que exista a tabela que armazena o log.
+
+Se voce possui um banco de administracao anterior a versao 7, utilize o seguinte sql para criar a tabela
+
+CREATE TABLE i3geoadmin_log (id_log INTEGER PRIMARY KEY,sql TEXT,serializedata TEXT,usuario TEXT,ip TEXT,timestamp TEXT,outros TEXT)
+
 Tipo:
 {boolean}
 

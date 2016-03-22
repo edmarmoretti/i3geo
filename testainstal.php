@@ -257,6 +257,7 @@ catch(ee)
 				"i3geoadmin_menus"=>"it,es,en,publicado_menu,perfil_menu,aberto,desc_menu,id_menu,nome_menu",
 				"i3geoadmin_comentarios"=>"comentario,data,openidnome,openidimagem,openidservico,openidusuario,openidurl,id_tema",
 				"i3geoadmin_acessostema"=>"codigo_tema,nacessos,dia,mes,ano",
+				"i3geoadmin_log"=>"id_log,sql,serializedata,usuario,ip,timestamp,outros",
 				"i3geousr_usuarios"=>"id_usuario,ativo,data_cadastro,email,login,nome_usuario,senha",
 				"i3geousr_papeis"=> "id_papel,nome,descricao",
 				"i3geousr_papelusuario"=> "id_usuario,id_papel",

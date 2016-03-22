@@ -1904,6 +1904,18 @@ switch (strtoupper($funcao))
 		$retorno["legenda"] = $legenda;
 		break;
 		/*
+		 Valor: LISTAUNICA
+		
+		Pega todos os valores dos itens de uma tabela de um tema.
+		
+		<Atributos->listaRegistros>
+		*/
+		case "LISTAUNICA":
+			include_once("classe_atributos.php");
+			$m = new Atributos($map_file,$tema,"",$ext);
+			$retorno = $m->listaUnicoRapida($item);
+		break;
+		/*
 		 Valor: EXTREGISTROS
 
 		Pega a extens&atilde;o geogr&aacute;fica de um registro na tabela de atributos de um tema.
