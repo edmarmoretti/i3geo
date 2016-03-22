@@ -151,63 +151,64 @@ switch (strtoupper($funcao))
 /*
  Altera o registro de um WS
 */
-function alterarWS()
-{
+function alterarWS(){
 	global $esquemaadmin,$id_ws,$desc_ws,$nome_ws,$link_ws,$autor_ws,$tipo_ws;
-	try
-	{
+	try{
 		require_once("conexao.php");
-		if($convUTF)
-		{
+		if($convUTF){
 			$nome_ws = utf8_encode($nome_ws);
 			$desc_ws = utf8_encode($desc_ws);
 			$autor_ws = utf8_encode($autor_ws);
 		}
-		if($id_ws != "")
-		{
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET desc_ws = '$desc_ws',nome_ws = '$nome_ws', link_ws = '$link_ws', autor_ws = '$autor_ws', tipo_ws = '$tipo_ws' WHERE id_ws = $id_ws");
+		if($id_ws != ""){
+			$dataCol = array(
+				"desc_ws" => $desc_ws,
+				"nome_ws" => $nome_ws,
+				"link_ws" => $link_ws,
+				"autor_ws" => $autor_ws,
+				"tipo_ws" => $tipo_ws
+			);
+			i3GeoAdminUpdate($dbhw,"i3geoadmin_ws",$dataCol,"WHERE id_ws = $id_ws");
 			$retorna = $id_ws;
 		}
-		else
-		{
-			$idtemp = (rand (9000,10000)) * -1;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws,nacessos,nacessosok) VALUES ('$idtemp','','','','',0,0)");
-			$id = $dbh->query("SELECT id_ws FROM ".$esquemaadmin."i3geoadmin_ws WHERE nome_ws = '$idtemp'");
-			$id = $id->fetchAll();
-			$id = $id[0]['id_ws'];
-			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET nome_ws = '' WHERE id_ws = $id AND nome_ws = '$idtemp'");
-			$retorna = $id;
+		else{
+			$dataCol = array(
+				"desc_ws" => '',
+				"nome_ws" => '',
+				"link_ws" => '',
+				"autor_ws" => '',
+				"tipo_ws" => '',
+				"nacessos" => 0,
+				"nacessosok" => 0
+			);
+			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_ws",$dataCol,"nome_ws","id_ws");
 		}
 		$dbhw = null;
 		$dbh = null;
 		return $retorna;
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		return "Error!: " . $e->getMessage();
 	}
 }
-function excluirWS()
-{
+function excluirWS(){
 	global $id,$esquemaadmin;
-	try
-	{
+	try{
 		include("conexao.php");
-		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id");
+		$sql = "DELETE from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id";
+		$dbhw->query($sql);
+		i3GeoAdminInsertLog($dbhw,$sql);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		return "Error!: " . $e->getMessage();
 	}
 }
-function adicionaAcesso($id_ws,$sucesso)
-{
+function adicionaAcesso($id_ws,$sucesso){
 	global $esquemaadmin;
-	try
-	{
+	try	{
 		if($id_ws == ""){
 			return;
 		}
@@ -229,12 +230,15 @@ function adicionaAcesso($id_ws,$sucesso)
 		if($ok == ""){
 			$ok = 0;
 		}
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET nacessos = '$acessos',nacessosok = '$ok' WHERE id_ws = $id_ws");
+		$dataCol = array(
+			"nacessos" => $acessos,
+			"nacessosok" => $ok
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_ws",$dataCol,"WHERE id_ws = $id_ws");
 		$dbhw = null;
 		$dbh = null;
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		return "Error!: " . $e->getMessage();
 	}
 }
