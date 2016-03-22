@@ -96,9 +96,9 @@ for ($i=0;$i < $numlayers;$i++){
 	}
 }
 //ajusta o label
-$l = $mapa->getlayerbyname("copyright");
-if($l != ""){
-	$classe = $l->getclass(0);
+$copyright = $mapa->getlayerbyname("copyright");
+if($copyright != ""){
+	$classe = $copyright->getclass(0);
 	$label = $classe->getLabel(0);
 	$label->updatefromstring("LABEL TYPE TRUETYPE END");
 	$label->set("font","arial");
@@ -197,9 +197,9 @@ foreach($lista as $l){
 //cria as imagens para cada periodo
 $layer = $mapa->getlayerbyname($tema);
 
-$l = $mapa->getlayerbyname("copyright");
-if($l != ""){
-	$c = $l->getclass(0);
+$copyright = $mapa->getlayerbyname("copyright");
+if($copyright != ""){
+	$c = $copyright->getclass(0);
 	$label = $c->getLabel(0);
 }
 $imagens = array();
@@ -218,7 +218,7 @@ foreach($listaunica as $d){
 	$nomec = $arqtemp.$d.".png";
 
 	$s = "LABEL TEXT '".$d."' END";
-	if($l != ""){
+	if($copyright != ""){
 		$label->updateFromString($s);
 	}
 	if($objImagem == ""){
