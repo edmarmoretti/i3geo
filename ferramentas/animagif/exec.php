@@ -187,16 +187,13 @@ if(validaAcessoTemas($arqtemp.".map",false) == true){
 //pega a lista de valores unicos da $colunat
 include_once("../../classesphp/classe_atributos.php");
 $m = new Atributos($arqtemp.".map",$tema);
-$lista = $m->listaRegistros($colunat,"mapa","sim",0,"","tudo","nao");
-$lista = $lista[1]["registros"];
+$lista = $m->listaUnicoRapida($colunat);
 $listaunica = array();
 foreach($lista as $l){
-	$v = $l["valores"][0]["valor"];
-	if($v != ""){
-		$listaunica[] = $v;
+	if($l != ""){
+		$listaunica[] = $l;
 	}
 }
-sort($listaunica);
 //cria as imagens para cada periodo
 $layer = $mapa->getlayerbyname($tema);
 

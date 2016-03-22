@@ -1,0 +1,56 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+
+  LAYER
+    CONNECTION ""
+    DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "cache"	"SIM"
+      "TIP"	"TIPO,NOMELOC,ANOCRIA"
+      "LTEMPOITEMDESCRICAO"	"TIPO"
+      "CLASSE"	"SIM"
+      "LTEMPOITEMINICIO"	"ANOCRIA"
+      "LTEMPOITEMTIP"	"ANOCRIA"
+      "permitekmz"	"sim"
+      "LTEMPOITEMTITULO"	"NOMELOC"
+      "ITENSDESC"	"Município,TIPO,Localidade,ANOCRIA"
+      "TILES"	"SIM"
+      "ITENSLINK"	",,,"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "LTEMPOFORMATODATA"	"iso8601"
+      "permitedownload"	"sim"
+      "permitecomentario"	"SIM"
+      "metaestat"	""
+      "download"	"SIM"
+      "itembuscarapida"	"NOMELOC"
+      "ITENS"	"NOMEMUN,TIPO,NOMELOC,ANOCRIA"
+      "transitioneffect"	"NAO"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "TEMA"	"Localidades (usar com animagif) para teste"
+      "cortepixels"	"30"
+      "LTEMPOCONVENCODE"	"SIM"
+    END # METADATA
+    NAME "_llocalianimagif"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "Localidades"
+      STYLE
+        COLOR 250 0 0
+        SIZE 10
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+
