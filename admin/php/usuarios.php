@@ -136,7 +136,9 @@ function enviarSenhaEmail(){
 	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where id_usuario = $id_usuario and ativo = 1");
 	if(count($dados) > 0){
 		$senha = md5($novaSenha);
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='$senha' WHERE id_usuario = $id_usuario");
+		$sql = "UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='$senha' WHERE id_usuario = $id_usuario";
+		$dbhw->query($sql);
+		i3GeoAdminInsertLog($dbhw,$sql);
 		$to      = $dados[0]["email"];
 		$subject = 'senha i3geo';
 		$message = $novaSenha;
@@ -162,28 +164,30 @@ function alterarUsuarios()
 			if(count($dados) > 0){
 				$retorna = false;
 			}
+			$dataCol = array(
+				"nome_usuario" => $nome_usuario,
+				"login" => $login,
+				"email" => $email,
+				"ativo" => $ativo,
+				"data_cadastro" => $data_cadastro
+			);
 			//se a senha foi enviada, ela sera trocada
 			if($senha != ""){
-				$senha = md5($senha);
-				$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='$senha',nome_usuario='$nome_usuario',login='$login',email='$email',ativo=$ativo,data_cadastro='$data_cadastro' WHERE id_usuario = $id_usuario");
+				$dataCol["senha"] = md5($senha);
 			}
-			else{
-				$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET nome_usuario='$nome_usuario',login='$login',email='$email',ativo=$ativo,data_cadastro='$data_cadastro' WHERE id_usuario = $id_usuario");
-			}
+			i3GeoAdminUpdate($dbhw,"i3geousr_usuarios",$dataCol,"WHERE id_usuario = $id_usuario");
 			$retorna = $id_usuario;
 		}
 		else{
-			$idtemp = rand (9000,1000000) * -1;
-			if($senha == ""){
-				$senha = md5($idtemp);
-			}
-			//echo "INSERT INTO ".$esquemaadmin."i3geousr_usuarios (senha,nome_usuario,ativo) VALUES ('$senha','$idtemp',0)";exit;
-			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_usuarios (login,senha,nome_usuario,ativo) VALUES ('$idtemp','$senha','$idtemp',0)");
-			$id = $dbh->query("SELECT id_usuario FROM ".$esquemaadmin."i3geousr_usuarios WHERE nome_usuario = '$idtemp'");
-			$id = $id->fetchAll();
-			$id = $id[0]['id_usuario'];
-			//$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET nome_usuario = '' WHERE id_usuario = $id AND nome_usuario = '$idtemp'");
-			$retorna = $id;
+			$dataCol = array(
+				"nome_usuario" => '',
+				"login" => '',
+				"email" => '',
+				"ativo" => 0,
+				"data_cadastro" => '',
+				"senha" => ''
+			);
+			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geousr_usuarios",$dataCol,"nome_usuario","id_usuario");
 		}
 		$dbhw = null;
 		$dbh = null;
@@ -195,10 +199,13 @@ function alterarUsuarios()
 }
 function adicionaPapelUsuario(){
 	global $id_usuario,$id_papel;
-	try
-	{
+	try	{
 		include(dirname(__FILE__)."/conexao.php");
-		$dbhw->query("INSERT INTO ".$esquemaadmin."i3geousr_papelusuario (id_usuario,id_papel) VALUES ($id_usuario,$id_papel)");
+		$dataCol = array(
+			"id_usuario" => $id_usuario,
+			"id_papel" => $id_papel
+		);
+		i3GeoAdminInsert($dbhw,"i3geousr_papelusuario",$dataCol);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
@@ -207,37 +214,33 @@ function adicionaPapelUsuario(){
 		return "Error!: " . $e->getMessage();
 	}
 }
-function excluirUsuario()
-{
+function excluirUsuario(){
 	global $id_usuario;
-	try
-	{
+	try	{
 		include(dirname(__FILE__)."/conexao.php");
-		//echo "DELETE from ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario";exit;
-		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario ");
+		$sql = "DELETE FROM ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario ";
+		$dbhw->query($sql);
+		i3GeoAdminInsertLog($dbhw,$sql);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e)	{
 		return "Error!: " . $e->getMessage();
 	}
 }
-function excluirPapelUsuario()
-{
+function excluirPapelUsuario(){
 	global $id_usuario,$id_papel;
-	try
-	{
+	try	{
 		include(dirname(__FILE__)."/conexao.php");
-		//echo "DELETE from ".$esquemaadmin."i3geousr_usuarios WHERE id_usuario = $id_usuario";exit;
-		$dbhw->query("DELETE FROM ".$esquemaadmin."i3geousr_papelusuario WHERE id_usuario = $id_usuario AND id_papel = $id_papel ");
+		$sql = "DELETE FROM ".$esquemaadmin."i3geousr_papelusuario WHERE id_usuario = $id_usuario AND id_papel = $id_papel ";
+		$dbhw->query($sql);
+		i3GeoAdminInsertLog($dbhw,$sql);
 		$dbhw = null;
 		$dbh = null;
 		return "ok";
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e) {
 		return "Error!: " . $e->getMessage();
 	}
 }

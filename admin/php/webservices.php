@@ -1,6 +1,6 @@
 <?php
 /*
-Title: webservices.php
+ Title: webservices.php
 
 Fun&ccedil;&otilde;es utilizadas pelo editor do cadastro de Web Services
 
@@ -24,7 +24,7 @@ por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
 Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
+	GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
@@ -59,12 +59,12 @@ ob_clean();
 switch (strtoupper($funcao))
 {
 	/*
-	Note:
+	 Note:
 
 	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
 	*/
 	/*
-	Valor: PEGAWS
+	 Valor: PEGAWS
 
 	Lista de servi&ccedil;os cadastrados
 
@@ -74,114 +74,117 @@ switch (strtoupper($funcao))
 	*/
 	case "PEGAWS":
 		if(isset($tipows) && $tipows != "")
-		{$sql = "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = '".strtoupper($tipows)."' order by tipo_ws,nome_ws ";}
+		{
+			$sql = "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = '".strtoupper($tipows)."' order by tipo_ws,nome_ws ";
+		}
 		else
-		{$sql = "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by tipo_ws,nome_ws";}
+		{$sql = "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by tipo_ws,nome_ws";
+		}
 		retornaJSON(pegaDados($sql));
 		exit;
-	break;
-	/*
-	Valor: PEGADADOS
+		break;
+		/*
+		 Valor: PEGADADOS
 
-	Dados de um servico
+		Dados de um servico
 
-	Parametro:
+		Parametro:
 
-	id_ws {string}
+		id_ws {string}
 
-	Retorno:
+		Retorno:
 
-	{JSON}
-	*/
+		{JSON}
+		*/
 	case "PEGADADOS":
 		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_ws where id_ws='$id_ws'"));
 		exit;
-	break;
-	/*
-	Valor: ALTERARWS
+		break;
+		/*
+		 Valor: ALTERARWS
 
-	Altera um registro
+		Altera um registro
 
-	Parametros:
+		Parametros:
 
-	id_ws
+		id_ws
 
-	desc_ws
+		desc_ws
 
-	nome_ws
+		nome_ws
 
-	link_ws
+		link_ws
 
-	autor_ws
+		autor_ws
 
-	tipo_ws
+		tipo_ws
 
-	Retorno:
+		Retorno:
 
-	{JSON}
-	*/
+		{JSON}
+		*/
 	case "ALTERARWS":
 		$novo = alterarWS();
 		$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = '".$novo."'";
 		retornaJSON(pegaDados($sql));
 		exit;
-	break;
-	/*
-	Valor: EXCLUIR
+		break;
+		/*
+		 Valor: EXCLUIR
 
-	Exclui um registro
+		Exclui um registro
 
-	Parametro:
+		Parametro:
 
-	id {string}
+		id {string}
 
-	Retorno:
+		Retorno:
 
-	{JSON}
-	*/
+		{JSON}
+		*/
 	case "EXCLUIR":
 		retornaJSON(excluirWS());
 		exit;
-	break;
+		break;
 
 }
 /*
-Altera o registro de um WS
+ Altera o registro de um WS
 */
 function alterarWS()
 {
 	global $esquemaadmin,$id_ws,$desc_ws,$nome_ws,$link_ws,$autor_ws,$tipo_ws;
 	try
 	{
-    	require_once("conexao.php");
+		require_once("conexao.php");
 		if($convUTF)
 		{
 			$nome_ws = utf8_encode($nome_ws);
 			$desc_ws = utf8_encode($desc_ws);
 			$autor_ws = utf8_encode($autor_ws);
 		}
-    	if($id_ws != "")
-    	{
-    		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET desc_ws = '$desc_ws',nome_ws = '$nome_ws', link_ws = '$link_ws', autor_ws = '$autor_ws', tipo_ws = '$tipo_ws' WHERE id_ws = $id_ws");
-    		$retorna = $id_ws;
-    	}
-    	else
-    	{
-    		$idtemp = (rand (9000,10000)) * -1;
+		if($id_ws != "")
+		{
+			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET desc_ws = '$desc_ws',nome_ws = '$nome_ws', link_ws = '$link_ws', autor_ws = '$autor_ws', tipo_ws = '$tipo_ws' WHERE id_ws = $id_ws");
+			$retorna = $id_ws;
+		}
+		else
+		{
+			$idtemp = (rand (9000,10000)) * -1;
 			$dbhw->query("INSERT INTO ".$esquemaadmin."i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws,nacessos,nacessosok) VALUES ('$idtemp','','','','',0,0)");
 			$id = $dbh->query("SELECT id_ws FROM ".$esquemaadmin."i3geoadmin_ws WHERE nome_ws = '$idtemp'");
 			$id = $id->fetchAll();
 			$id = $id[0]['id_ws'];
 			$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET nome_ws = '' WHERE id_ws = $id AND nome_ws = '$idtemp'");
 			$retorna = $id;
-    	}
-    	$dbhw = null;
-    	$dbh = null;
-    	return $retorna;
+		}
+		$dbhw = null;
+		$dbh = null;
+		return $retorna;
 	}
 	catch (PDOException $e)
 	{
-    	return "Error!: " . $e->getMessage();
+		return "Error!: " . $e->getMessage();
 	}
 }
 function excluirWS()
@@ -189,15 +192,15 @@ function excluirWS()
 	global $id,$esquemaadmin;
 	try
 	{
-    	include("conexao.php");
-    	$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id");
-    	$dbhw = null;
-    	$dbh = null;
-    	return "ok";
+		include("conexao.php");
+		$dbhw->query("DELETE from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id");
+		$dbhw = null;
+		$dbh = null;
+		return "ok";
 	}
 	catch (PDOException $e)
 	{
-    	return "Error!: " . $e->getMessage();
+		return "Error!: " . $e->getMessage();
 	}
 }
 function adicionaAcesso($id_ws,$sucesso)
@@ -205,26 +208,34 @@ function adicionaAcesso($id_ws,$sucesso)
 	global $esquemaadmin;
 	try
 	{
-    	if($id_ws == ""){return;}
-    	include("conexao.php");
-    	$dados = pegaDados("select * from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id_ws");
-    	if(count($dados) == 0){return;};
-    	if($dados[0]["nacessos"] == ""){$dados[0]["nacessos"] = 0;}
-    	$acessos = $dados[0]["nacessos"] + 1;
+		if($id_ws == ""){
+			return;
+		}
+		include("conexao.php");
+		$dados = pegaDados("select * from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id_ws");
+		if(count($dados) == 0){
+			return;
+		};
+		if($dados[0]["nacessos"] == ""){
+			$dados[0]["nacessos"] = 0;
+		}
+		$acessos = $dados[0]["nacessos"] + 1;
 
-    	if($sucesso)
-    	$ok = $dados[0]["nacessosok"] + 1;
-    	else
-    	$ok = $dados[0]["nacessosok"];
+		if($sucesso)
+			$ok = $dados[0]["nacessosok"] + 1;
+		else
+			$ok = $dados[0]["nacessosok"];
 
-    	if($ok == ""){$ok = 0;}
-   		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET nacessos = '$acessos',nacessosok = '$ok' WHERE id_ws = $id_ws");
-    	$dbhw = null;
-    	$dbh = null;
+		if($ok == ""){
+			$ok = 0;
+		}
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geoadmin_ws SET nacessos = '$acessos',nacessosok = '$ok' WHERE id_ws = $id_ws");
+		$dbhw = null;
+		$dbh = null;
 	}
 	catch (PDOException $e)
 	{
-    	return "Error!: " . $e->getMessage();
+		return "Error!: " . $e->getMessage();
 	}
 }
 ?>
