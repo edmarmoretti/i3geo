@@ -598,13 +598,12 @@ switch (strtoupper($funcao))
 			$tabela = "i3geoadmin_menus";
 			$coluna = "id_menu";
 			$filhos = verificaFilhos();
-			if($filhos)
-			{
+			if($filhos){
 				retornaJSON("erro");
 				exit;
 			}
 		}
-		retornaJSON(exclui($tabela,$coluna,$id));
+		retornaJSON(exclui($esquemaadmin.$tabela,$coluna,$id));
 		exit;
 		break;
 

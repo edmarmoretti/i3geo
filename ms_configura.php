@@ -71,7 +71,11 @@ Para que isso funcione e necessario que exista a tabela que armazena o log.
 
 Se voce possui um banco de administracao anterior a versao 7, utilize o seguinte sql para criar a tabela
 
+- caso esteja utilizando SQLlite:
 CREATE TABLE i3geoadmin_log (id_log INTEGER PRIMARY KEY,sql TEXT,serializedata TEXT,usuario TEXT,ip TEXT,timestamp TEXT,outros TEXT)
+
+- caso esteja utilizando postgesql:
+CREATE TABLE i3geoadmin.i3geoadmin_log (id_log SERIAL PRIMARY KEY NOT NULL,sql TEXT,serializedata TEXT,usuario TEXT,ip TEXT,timestamp TEXT,outros TEXT);
 
 Tipo:
 {boolean}

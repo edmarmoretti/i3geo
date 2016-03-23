@@ -530,7 +530,7 @@ switch (strtoupper($funcao))
 			}
 		}
 		retornaJSON(
-			exclui($tabela,$coluna,$id)
+			exclui($esquemaadmin.$tabela,$coluna,$id)
 		);
 		exit;
 	break;

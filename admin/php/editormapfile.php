@@ -333,7 +333,7 @@ switch (strtoupper($funcao))
 			}
 			$tabela = "i3geoadmin_temas";
 			if($id){
-				exclui($tabela,$coluna,$id);
+				exclui($esquemaadmin.$tabela,$coluna,$id);
 			}
 			retornaJSON("ok");
 			exit;
