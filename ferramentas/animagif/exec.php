@@ -14,6 +14,9 @@ if(empty($_GET)){
 		&mapext = extens&atilde;o geogr&aacute;fica xmin,ymin,xmax,ymax que ser&aacute; usada nas imagens<br>
 		&legenda = sim|nao<br>
 		&transparente = sim|nao<br>
+		&operador = operador que ser&aacute; utilizado no filtro. Por default utilza-se 'igual a'. Pode ser ainda lt (menor que) ou gt (maior que)<br>
+		&nulos = lista de valores, separados por ',' que não serão considerados ao aplicar o filtro, por exemplo &nulos=-, ,0<br>
+		&tipocolunat = string|numero tipo de dados existentes na coluna que cont&eacute;m os valores para o filtro<br>
 	";
 	exit;
 }
@@ -30,6 +33,24 @@ if($cache == "nao"){
 if(empty($tempo)){
 	$tempo = 40;
 }
+if(empty($nulos)){
+	$nulos = "";
+}
+if(empty($tipocolunat)){
+	$tipocolunat = "string";
+}
+if(empty($operador)){
+	$operador = "=";
+}
+else{
+	if($operador == "lt"){
+		$operador = "<";
+	}
+	if($operador == "gt"){
+		$operador = ">";
+	}
+}
+$nulos = explode(",",$nulos);
 $arqtemp = $dir_tmp."/".$nometemp;
 if(file_exists($arqtemp.".gif")){
 	$gifBinary = file_get_contents($arqtemp.".gif");
@@ -42,15 +63,13 @@ if(file_exists($arqtemp.".gif")){
 //
 //carrega o phpmapscript
 //
-if (!function_exists('ms_GetVersion'))
-{
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{
+if (!function_exists('ms_GetVersion')){
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
 		if(!@dl('php_mapscript_48.dll'))
 			dl('php_mapscript.dll');
 	}
-	else
-	{dl('php_mapscript.so');
+	else{
+		dl('php_mapscript.so');
 	}
 }
 $versao = versao();
@@ -176,6 +195,7 @@ $c = $mapa->imagecolor;
 $c->setrgb(-1,-1,-1);
 $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
+
 if($transparente == "sim"){
 	$o->set("transparent",MS_TRUE);
 }
@@ -190,6 +210,7 @@ $m = new Atributos($arqtemp.".map",$tema);
 $lista = $m->listaUnicoRapida($colunat);
 $listaunica = array();
 foreach($lista as $l){
+	$l = str_replace($nulos,"",$l);
 	if($l != ""){
 		$listaunica[] = $l;
 	}
@@ -208,10 +229,16 @@ $objImagem = "";
 //$listaunica = array($listaunica[1]);
 foreach($listaunica as $d){
 	if(strtoupper($colunat) == $colunat){
-		$filtro = "(('[$colunat]' = '$d'))";
+		$filtro = "(('[$colunat]' $operador '$d'))";
+		if($tipocolunat == "numerico"){
+			$filtro = "(([$colunat] $operador $d))";
+		}
 	}
 	else{
-		$filtro = "$colunat = '$d'";
+		$filtro = "$colunat $operador '$d'";
+		if($tipocolunat == "numerico"){
+			$filtro = "$colunat $operador $d";
+		}
 	}
 	$layer->setfilter($filtro);
 	//$mapa->save($arqtemp.".map");echo $arqtemp;exit;
