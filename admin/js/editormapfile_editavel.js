@@ -47,7 +47,7 @@ function montaEditorEditavel(dados)
 		$i("cEditavel").innerHTML = temp;
 	}
 	if($i("cEsquematabelaeditavel")){
-		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="esquematabelaeditavel" value="'+dados.esquematabelaeditavel+'" />' +
+		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="esquematabelaeditavel" value="'+dados.esquematabelaeditavel+'" style="width:90%;" />' +
 			"<img id='esquematabelaeditavelBusca' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cEsquematabelaeditavel").innerHTML = temp;
 	}
@@ -55,7 +55,7 @@ function montaEditorEditavel(dados)
 		i3GEO.util.navegadorPostgis($i("esquematabelaeditavel"),"","esquema");
 	};
 	if($i("cTabelatabelaeditavel")){
-		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="tabelaeditavel" value="'+dados.tabelaeditavel+'" />' +
+		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="tabelaeditavel" value="'+dados.tabelaeditavel+'" style="width:90%;" />' +
 			"<img id='tabelatabelaeditavelBusca' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cTabelatabelaeditavel").innerHTML = temp;
 	}
@@ -63,7 +63,7 @@ function montaEditorEditavel(dados)
 		i3GEO.util.navegadorPostgis($i("tabelaeditavel"),"","tabela");
 	};
 	if($i("cColunatabelaeditavel")){
-		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="colunaidunico" value="'+dados.colunaidunico+'" />' +
+		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="colunaidunico" value="'+dados.colunaidunico+'" style="width:90%;" />' +
 			"<img id='colunatabelaeditavelBusca' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cColunatabelaeditavel").innerHTML = temp;
 	}
@@ -71,7 +71,7 @@ function montaEditorEditavel(dados)
 		i3GEO.util.navegadorPostgis($i("colunaidunico"),"","coluna");
 	};
 	if($i("cColunageometriatabelaeditavel")){
-		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="colunageometria" value="'+dados.colunageometria+'" />' +
+		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="colunageometria" value="'+dados.colunageometria+'" style="width:90%;" />' +
 			"<img id='colunageometriatabelaeditavelBusca' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cColunageometriatabelaeditavel").innerHTML = temp;
 	}

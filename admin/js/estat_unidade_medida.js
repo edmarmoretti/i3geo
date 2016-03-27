@@ -197,7 +197,8 @@ i3GEOadmin.umedida = {
 			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.umedida.dados[i].nome;
-				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				//if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				if(temp.toUpperCase().startsWith(letra.toUpperCase(),0)){
 					novo.push(i3GEOadmin.umedida.dados[i]);
 				}
 			}

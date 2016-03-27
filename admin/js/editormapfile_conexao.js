@@ -85,7 +85,7 @@ function montaEditorDados(dados)
 			temp += "<br><b>"+dados.postgis_mapa+"</b>.<br><br>"+ $trad("defineAlias",i3GEOadmin.editormapfile.dicionario) +"";
 			temp += "</p>";
 		}
-		temp += '<div class="i3geoForm i3geoFormSemIcone"><input type="text" value="'+dados.connection+'" id="connection" >';
+		temp += '<div class="i3geoForm i3geoFormSemIcone"><input type="text" value="'+dados.connection+'" id="connection" style="width:90%;">';
 		temp += "<img onclick='selConexaoBanco(\"connection\")' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cConnection").innerHTML = temp;
 	}
@@ -95,7 +95,7 @@ function montaEditorDados(dados)
 		$i("cData").innerHTML = temp;
 	}
 	if($i("cMetaestat_id_medida_variavel")){
-		temp = '<div class="i3geoForm i3geoFormSemIcone"><input type="text" value="'+dados.metaestat_id_medida_variavel+'" id="metaestat_id_medida_variavel" >';
+		temp = '<div class="i3geoForm i3geoFormSemIcone"><input type="text" value="'+dados.metaestat_id_medida_variavel+'" id="metaestat_id_medida_variavel" style="width:90%;" >';
 		temp += "<img onclick='selIdMedidaVariavel(\"metaestat_id_medida_variavel\",\"metaestat_id_medida_variavel\")' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cMetaestat_id_medida_variavel").innerHTML = temp;
 	}

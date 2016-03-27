@@ -185,8 +185,9 @@ function ativaBotaoAdicionaMapfile(idBotao)
 	var botao, adiciona = function()
 	{
 		core_montaEditor("adicionaNovoMapfile()","450px","660px","","Mapfile",true,true,false);
-		ins = "<p><b>"+ $trad("nomeMap",i3GEOadmin.editormapfile.dicionario) +"</p>";
-		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>";
+		ins = "<p>"+ $trad("nomeMap",i3GEOadmin.editormapfile.dicionario) +"</p>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'>";
+		ins += "<input size=50 type=text id='Ecodigo' value='' /></div>";
 		ins += "<p><input type=checkbox id=Eacessopublico checked style=position:relative;top:2px; />";
 		ins += ""+ $trad("permiteOgc",i3GEOadmin.editormapfile.dicionario) +"</p>";
 
@@ -194,13 +195,16 @@ function ativaBotaoAdicionaMapfile(idBotao)
 		ins += "<div class='styled-select150'><select id='Emetaestat' >";
 		ins += core_combosimnao("nao");
 		ins += "</select></div>";
-		ins += "<p><b>"+ $trad("tituloTema",i3GEOadmin.editormapfile.dicionario) +"</b></p>";
+		ins += "<p>"+ $trad("tituloTema",i3GEOadmin.editormapfile.dicionario) +"</p>";
 		ins += "<p>"+ $trad("tituloPt",i3GEOadmin.editormapfile.dicionario) +"</p>";
-		ins += "<input size=50 type=text id='Etitulo' value='' /></p>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'>";
+		ins += "<input size=50 type=text id='Etitulo' value='' /></div>";
 		ins += "<p>"+ $trad("tituloEs",i3GEOadmin.editormapfile.dicionario) +"</p>";
-		ins += "<input size=50 type=text id='EtituloES' value='' /></p>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'>";
+		ins += "<input size=50 type=text id='EtituloES' value='' /></div>";
 		ins += "<p>"+ $trad("tituloEn",i3GEOadmin.editormapfile.dicionario) +"</p>";
-		ins += "<input size=50 type=text id='EtituloEN' value='' /></p>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'>";
+		ins += "<input size=50 type=text id='EtituloEN' value='' /></div>";
 		ins += "<input size=50 type=hidden id='EtituloIT' value='' /></p>";
 		$i("editor_bd").innerHTML = ins;
 	};

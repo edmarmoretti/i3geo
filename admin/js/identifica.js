@@ -215,7 +215,8 @@ i3GEOadmin.identifica = {
 			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.identifica.dados[i].nome_i;
-				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				//if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				if(temp.toUpperCase().startsWith(letra.toUpperCase(),0)){
 					novo.push(i3GEOadmin.identifica.dados[i]);
 				}
 			}

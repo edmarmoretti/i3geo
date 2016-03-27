@@ -170,7 +170,8 @@ i3GEOadmin.periodo = {
 			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.periodo.dados[i].nome;
-				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				//if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				if(temp.toUpperCase().startsWith(letra.toUpperCase(),0)){
 					novo.push(i3GEOadmin.periodo.dados[i]);
 				}
 			}

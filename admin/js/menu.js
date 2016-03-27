@@ -245,7 +245,8 @@ i3GEOadmin.menus = {
 			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.menus.dados[i].nome_menu;
-				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				//if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				if(temp.toUpperCase().startsWith(letra.toUpperCase(),0)){
 					novo.push(i3GEOadmin.menus.dados[i]);
 				}
 			}

@@ -63,10 +63,10 @@ Inicializa a arvore
 function initMenu(){
 	var botao, editorDeMenus = function()	{
 			if($i("editor_bd")){return;}
-			core_montaEditor("","600px","500px","pegaMenus","Menu");
+			core_montaEditor("","600px","350px","pegaMenus","Menu");
 			$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="' 
 			+ $trad("adicionaMenu",i3GEOadmin.arvore.dicionario) + 
-			'" style="left:-5px;" /><br><br><div id="letras_M" ></div><br><br><div id="tabela" style="left:-5px;"> </div>';
+			'" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>';
 			i3GEOadmin.menus.inicia();
 		},
 		editorDeGrupos = function(){
@@ -740,10 +740,14 @@ function montaDivGrupo(i)
 	var ins = "<p>" + $trad("escolheGrupo",i3GEOadmin.arvore.dicionario) + "</p>"
 	+ "<div id=comboGrupo >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
 	+ "<p>"+ $trad("novoGrupo",i3GEOadmin.arvore.dicionario) +"</p>"
-	+ "<input type=text id='EnomeNovoGrupo' value='' style='position:relative;width:200px;' />"
+	+ "<div class='i3geoForm i3geoFormSemIcone'>"
+	+ "<input type=text id='EnomeNovoGrupo' value='' />"
+	+ "</div>"
 
 	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
-	+ "<input type=text id='En1_perfil' value='"+i.n1_perfil+"' style='position:relative;width:200px;float:left;' />"
+	+ "<div class='i3geoForm i3geoFormSemIcone'>"
+	+ "<input type=text id='En1_perfil' value='"+i.n1_perfil+"' style='position:relative;float:left;' />"
+	+ "</div>"
 	+ "<div id=comboPerfil style='display:inline;left:2px;'>"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
 	+ "<p style='width:200px;' >"+ $trad("publicado",i3GEOadmin.arvore.dicionario) +""
 	+ "<div class='styled-select150'><select id='Epublicado'>"
@@ -757,10 +761,13 @@ function montaDivSubGrupo(i)
 	var ins = "<p>" + $trad("escolheSubgrupo",i3GEOadmin.arvore.dicionario) + "</p>"
 	+ "<div id=comboSubGrupo >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
 	+ "<p>"+ $trad("novoSubgrupo",i3GEOadmin.arvore.dicionario) +"</p>"
+	+ "<div class='i3geoForm i3geoFormSemIcone'>"
 	+ "<input type=text id='EnomeNovoSubGrupo' value='' style='position:relative;width:200px;' />"
-    
+    + "</div>"
 	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
-	+ "<input type=text id='En2_perfil' value='"+i.n2_perfil+"' style='position:relative;width:200px;float:left;' />"
+	+ "<div class='i3geoForm i3geoFormSemIcone'>"
+	+ "<input type=text id='En2_perfil' value='"+i.n2_perfil+"' style='position:relative;float:left;' />"
+	+ "</div>"
 	+ "<div id=comboPerfil style='display:inline;left:2px;' >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
 	+ "<p style='width:200px;'>"+ $trad("publicado",i3GEOadmin.arvore.dicionario) +""
 	+ "<div class='styled-select150'><select id='Epublicado'>"
@@ -780,10 +787,14 @@ function montaDivTema(i)
 	+ core_combosimnao(i.publicado)
 	+ "</select></div>"
 	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
-	+ "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' style='position:relative;width:200px;float:left;'/>"
+	+ "<div class='i3geoForm i3geoFormSemIcone'>"
+	+ "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' style='position:relative;float:left;'/>"
+	+ "</div>"
 	+ "<div id=comboPerfil style='display:inline;left:2px;'>Buscando...</div>"
 	+ "<p>"+ $trad("ordem",i3GEOadmin.arvore.dicionario) +"</p>"
-	+ "<input size=10 type=text value="+i.ordem+" id='Eordem' />";
+	+ "<div class='i3geoForm i3geoFormSemIcone'>"
+	+ "<input size=10 type=text value="+i.ordem+" id='Eordem' />"
+	+ "</div>";
 	return(ins);
 }
 function montaDivRaiz(i)
@@ -791,7 +802,9 @@ function montaDivRaiz(i)
 	var ins = "<p>"+ $trad("tema",i3GEOadmin.arvore.dicionario) +"</p>"
 	+ "<div id=comboTema >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
 	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
-	+ "<input size=45 type=text id='Eperfil' value='"+i.perfil+"' /></p>"
+	+ "<div class='i3geoForm i3geoFormSemIcone'>"
+	+ "<input size=45 type=text id='Eperfil' value='"+i.perfil+"' />"
+	+ "</div>"
 	+ "<div id=comboPerfil >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
 	+ "<input type=hidden value="+i.ordem+" id='Eordem' />";
 	return(ins);

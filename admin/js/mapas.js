@@ -183,10 +183,10 @@ i3GEOadmin.mapas = {
 		var ins = "";
 
 		ins += "<p>"+ $trad("ordemMapa",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<div class='styled-select'><input type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></div>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></div>";
 
 		ins += "<p>"+ $trad("nomeMapa",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<div class='styled-select'><input type=text id=Enome_mapa value='"+i.nome_mapa+"' /></div>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id=Enome_mapa value='"+i.nome_mapa+"' /></div>";
 
 		ins += "<p>"+ $trad("publicado",i3GEOadmin.mapas.dicionario) +"</p>";
 		ins += "<div class='styled-select'><select  id='Epublicado_mapa' >";
@@ -194,31 +194,31 @@ i3GEOadmin.mapas = {
 		ins += "</select></div>";
 
 		ins += "<p>"+ $trad("descricao",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<div class='styled-select'><input type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></div>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></div>";
 
 		ins += "<p>"+ $trad("extensao",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<div class='styled-select'><input type=text id=Eext_mapa value='"+i.ext_mapa+"' /></div>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id=Eext_mapa value='"+i.ext_mapa+"' /></div>";
 
 		ins += "<p>"+ $trad("img",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<div class='styled-select'><input type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></div>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></div>";
 		ins += "<img src='"+i.imagem_mapa+"' />";
 
 		ins += "<p>"+ $trad("temas",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<div class='styled-select'><input type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></div>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></div>";
 		ins += "<div id=comboMapfiles >"+ $trad("msgBusca",i3GEOadmin.mapas.dicionario) +"</div>";
 
 		ins += "<p>"+ $trad("temasLigados",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<div class='styled-select'><input type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></div>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></div>";
 
 		ins += "<p>"+ $trad("perfis",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<div class='styled-select'><input type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></div>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></div>";
 		ins += "<div id=comboPerfis >"+ $trad("msgBusca",i3GEOadmin.mapas.dicionario) +"</div>";
 
 		ins += "<p>"+ $trad("parametros",i3GEOadmin.mapas.dicionario) +"<br>";
-		ins += "<div class='styled-select'><input type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></div>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></div>";
 
 		ins += "<p>"+ $trad("linkDireto",i3GEOadmin.mapas.dicionario) +"<br>";
-		ins += "<div class='styled-select'><input type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></div>";
+		ins += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></div>";
 		ins += "<br><br><br>";
 		return(ins);
 	},
@@ -243,7 +243,8 @@ i3GEOadmin.mapas = {
 			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.mapas.dados[i].nome_mapa;
-				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				//if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				if(temp.toUpperCase().startsWith(letra.toUpperCase(),0)){
 					novo.push(i3GEOadmin.mapas.dados[i]);
 				}
 			}

@@ -698,7 +698,7 @@ i3GEOadmin.variaveis = {
 			"<input type=hidden value='' id='inputEventoOutlineCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoOutlineCor\",\"Eo\")' /> <br><br>";
 
 			if($i("cSimbolo")){
-				temp = '<div class="styled-select"><input type=text size=10 value="'+i.simbolo+'" id="Esimbolo" ></div>' +
+				temp = '<div class="i3geoForm i3geoFormSemIcone"><input type=text size=10 value="'+i.simbolo+'" id="Esimbolo" ></div>' +
 					"<img onclick='i3GEOadmin.variaveis.selNavegador(\"Esimbolo\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
 				$i("cSimbolo").innerHTML = temp;
 			}

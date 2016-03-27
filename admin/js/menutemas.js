@@ -10,7 +10,7 @@ function montaParametros()
 	{
 		ins += "<fieldset><legend><b>"+$parametros.simples[i].cabeca+"</b></legend>";
 		ins += "<p><input style=font-size:10px onclick='pegaParametros()' type=button value='Listar existentes' />";
-		ins += "&nbsp;Filtro:<input id=filtro style=font-size:10px type=text value='' size=30 title='Texto para filtrar' /></p>";
+		ins += "&nbsp;Filtro:<div class='i3geoForm i3geoFormSemIcone'><input id=filtro style=font-size:10px type=text value='' size=30 title='Texto para filtrar' /></div></p>";
 		ins += "<p><input onclick='alterar(\""+$parametros.simples[i].variavel+"\",\"\")' type=button value='Adicionar um novo' /></p>";
 		ins += "<div id='"+$parametros.simples[i].variavel+"' ></div>";
 		ins += "<p class=mensagem >"+$parametros.simples[i].mensagem+"</p>";

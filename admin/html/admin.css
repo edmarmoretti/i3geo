@@ -352,9 +352,10 @@ select{
 	background: url(../../imagens/oxygen/16x16/svn-commit.png) 5% 50% no-repeat;
 	width: 250px;
 }
+
 .iconeEditar {
     -moz-appearance: none;
-    background: transparent url("../../imagens/gisicons/edit2.png") no-repeat scroll 100% 3px;
+    background: transparent url("../../imagens/branco.gif") no-repeat scroll 100% 3px;
     border: 0 none;
     box-shadow: none;
     font-size: 12px;
@@ -363,6 +364,10 @@ select{
     padding-right: 12px;
     text-indent: 0.01px;
     text-overflow: "";
+}
+
+.styled-select input, .styled-select150 input {
+	background: transparent url("../../imagens/branco.gif") no-repeat scroll 100% 3px;
 }
 
 .styled-select {
@@ -403,6 +408,25 @@ select{
       background: transparent url("../../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
       background-size: 16px 144px;
     }
+}
+
+.i3geoFormSemIcone {
+  background: none;
+}
+
+.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
+	width: 100%;
+	height: 22px;
+	border: 0;
+	box-shadow: none;
+	line-height: 1.5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 0.01px;
+	text-overflow: '';
+	font-size: 12px;
+	appearance: none;
+	cursor: text;
 }
 
 .lupaBuscar {

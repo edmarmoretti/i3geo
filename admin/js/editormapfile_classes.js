@@ -222,9 +222,8 @@ function classesAuto(codigoMap,codigoLayer)
 			}
 			catch(e){}
 		};
-		YAHOO.util.Event.addListener(YAHOO.admin.container.panelEditorAutoClasses.close, "click", fecha);
-
 		YAHOO.admin.container.panelEditorAutoClasses.render();
+		YAHOO.util.Event.addListener(YAHOO.admin.container.panelEditorAutoClasses.close, "click", fecha);
 		var sUrl = "../php/editormapfile.php?funcao=pegaItensLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 		var callback = {
 				success:function(o)	{

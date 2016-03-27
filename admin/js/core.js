@@ -1179,11 +1179,17 @@ function core_geraLinhas(dados)
 					resultado += "<textarea style=width:90%; id="+p.id+"  >"+p.value+"</textarea>";
 				}
 				else{
-					resultado += "<div class='styled-select'><input type=text id="+p.id+" value=\""+p.value+"\" /></div>";
+					if(p.tipo == "cor"){
+						resultado += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id="+p.id+" value=\""+p.value+"\" style='width:90%;'/>";
+					}
+					else{
+						resultado += "<div class='i3geoForm i3geoFormSemIcone'><input type=text id="+p.id+" value=\""+p.value+"\" />";
+					}
 				}
 				if(p.tipo == "cor"){
-					resultado += "&nbsp;<img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\""+p.id+"\");' />";
+					resultado += "&nbsp;<img class='lupaBuscar' src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\""+p.id+"\");' />";
 				}
+				resultado += "</div>";
 			}
 			if(p.div){
 				resultado += p.div;
@@ -1696,7 +1702,6 @@ function core_listaDeLetras(onde,nomeFuncao,semLetras,w){
 					+ "\")' style='color:blue;cursor:pointer;padding:1px;border: 1px solid #C8C8FA'>"
 					+ letras[i] + "</span>&nbsp;";
 		}
-		//ins += "</b></p>";
 	}
 	else{
 		ins = "";

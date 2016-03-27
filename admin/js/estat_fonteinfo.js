@@ -170,7 +170,8 @@ i3GEOadmin.fonteinfo = {
 			novo = [];
 			for(i=0;i<n;i++){
 				temp = i3GEOadmin.fonteinfo.dados[i].titulo;
-				if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				//if(temp.charAt(0).toUpperCase() == letra.toUpperCase()){
+				if(temp.toUpperCase().startsWith(letra.toUpperCase(),0)){
 					novo.push(i3GEOadmin.fonteinfo.dados[i]);
 				}
 			}

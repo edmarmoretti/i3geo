@@ -88,12 +88,15 @@ function montaDivTemas(i)
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
-	ins += "<p>"+ $trad("descricao",i3GEOadmin.listatemas.dicionario) +"<br>";
-	ins += "<input size=30 type=text id=desc_tema value='"+i.desc_tema+"' /></p>";
-	ins += "<p>"+ $trad("fonte",i3GEOadmin.listatemas.dicionario) +"<br>";
-	ins += "<input size=30 type=text id=link_tema value='"+i.link_tema+"' /></p>";
-	ins += "<p>"+ $trad("tags",i3GEOadmin.listatemas.dicionario) +"";
-	ins += "<input type=text size=30 value='"+i.tags_tema+"' id='tags_tema' ><br>";
+	ins += "<p>"+ $trad("descricao",i3GEOadmin.listatemas.dicionario) +"</p>";
+	ins += "<div class='i3geoForm i3geoFormSemIcone'>";
+	ins += "<input size=30 type=text id=desc_tema value='"+i.desc_tema+"' /></div>";
+	ins += "<p>"+ $trad("fonte",i3GEOadmin.listatemas.dicionario) +"</p>";
+	ins += "<div class='i3geoForm i3geoFormSemIcone'>";
+	ins += "<input size=30 type=text id=link_tema value='"+i.link_tema+"' /></div>";
+	ins += "<p>"+ $trad("tags",i3GEOadmin.listatemas.dicionario) +"</p>";
+	ins += "<div class='i3geoForm i3geoFormSemIcone'>";
+	ins += "<input type=text size=30 value='"+i.tags_tema+"' id='tags_tema' ></div>";
 	ins += "<div id=comboTags >"+ $trad("busca",i3GEOadmin.listatemas.dicionario) +"</div>";
 	//tipoa_tema pode receber o valor META indicando que baseia-se no sistema de metadados estatisticos
 	//nesse caso, tipoa_tema e preenchido pelo editor de mapfile
