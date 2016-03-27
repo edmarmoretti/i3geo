@@ -106,7 +106,7 @@ i3GEOadmin.menus = {
 				fields: i3GEOadmin.menus.colunas
 			};
 			//i3GEOadmin.menus.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.menus.defColunas(), myDataSource);
-			i3GEOadmin.menus.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.menus.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.menus.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.menus.defColunas(), myDataSource,{width:"100%",height: "250px"});
 			i3GEOadmin.menus.dataTable.subscribe('postRenderEvent',function(){
 					//abre o editor
 					if(i3GEOadmin.menus.dados[0].nome_menu == ""){
@@ -198,8 +198,8 @@ i3GEOadmin.menus = {
 			},
 			ins = "";
 		ins += core_geraLinhas(param);
-		ins += "<p>"+ $trad("publicado1",i3GEOadmin.listamenu.dicionario) +"<br>";
-		ins += "<select  id='Epublicado_menu' />";
+		ins += "<p>"+ $trad("publicado1",i3GEOadmin.listamenu.dicionario) +"</p>";
+		ins += "<div class='styled-select'><select  id='Epublicado_menu' />";
 		ins += "<option value='' ";
 		if (i.publicado_menu == ""){ins += "selected";}
 		ins += ">---</option>";
@@ -209,9 +209,9 @@ i3GEOadmin.menus = {
 		ins += "<option value='NAO' ";
 		if ((i.publicado_menu).toLowerCase() == "nao"){ins += "selected";}
 		ins += " >"+ $trad("nao",i3GEOadmin.core.dicionario) +"</option>";
-		ins += "</select></p>";
-		ins += "<p>"+ $trad("iniciaAberto1",i3GEOadmin.listamenu.dicionario) +"<br>";
-		ins += "<select  id='Eaberto' />";
+		ins += "</select></div>";
+		ins += "<p>"+ $trad("iniciaAberto1",i3GEOadmin.listamenu.dicionario) +"</p>";
+		ins += "<div class='styled-select'><select  id='Eaberto' />";
 		ins += "<option value='' ";
 		if (i.aberto == ""){ins += "selected";}
 		ins += ">---</option>";
@@ -221,7 +221,7 @@ i3GEOadmin.menus = {
 		ins += "<option value='NAO' ";
 		if ((i.aberto).toLowerCase() == "nao"){ins += "selected";}
 		ins += " >"+ $trad("nao",i3GEOadmin.core.dicionario) +"</option>";
-		ins += "</select></p>";
+		ins += "</select></div>";
 		return(ins);
 	},
 	atualizaFiltro: function(dados){

@@ -110,8 +110,8 @@ function montaEditorEstilo(dados)
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
 
-	temp = "<input type='text' value='"+dados.symbolname+"' id='symbolname' size='50'>";
-	temp += "<img onclick='selNavegador(\"symbolname\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+	temp = "<div class='i3geoForm i3geoFormSemIcone'><input type='text' value='"+dados.symbolname+"' id='symbolname' >";
+	temp += "<img onclick='selNavegador(\"symbolname\")' src='"+limg+"' class='lupaBuscar'/></div>";
 	temp += "<div id='listaSimbolos' style='overflow:auto;width:350px;height:50px;'></div>";
 	$i("cSymbolname").innerHTML = temp;
 

@@ -245,18 +245,18 @@ function montaDivUsuario(i){
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
 	if($i("cAtivo")){
-		temp = "<select id='Eativo' >";
+		temp = "<div class='styled-select'><select id='Eativo' >";
 		temp += "<option value='1' >"+ $trad("sim2",i3GEOadmin.core.dicionario) +"</option>";
 		temp += "<option value='0' >"+ $trad("nao2",i3GEOadmin.core.dicionario) +"</option>";
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cAtivo").innerHTML = temp;
 		$i("Eativo").value = i.ativo;
 	}
 }
 function montaDivPapel(dados){
-	var ins = "<p><select id='Eid_papel' >";
+	var ins = "<div class='styled-select'><select id='Eid_papel' >";
 	ins += core_comboObjeto(dados,"id_papel","nome","","descricao");
-	ins += "</select>";
+	ins += "</select></div>";
 	return(ins);
 }
 /*

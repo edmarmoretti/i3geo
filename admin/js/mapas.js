@@ -182,43 +182,43 @@ i3GEOadmin.mapas = {
 	formulario: function(i){
 		var ins = "";
 
-		ins += "<p>"+ $trad("ordemMapa",i3GEOadmin.mapas.dicionario) +"<br>";
-		ins += "<input size=10 type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></p>";
+		ins += "<p>"+ $trad("ordemMapa",i3GEOadmin.mapas.dicionario) +"</p>";
+		ins += "<div class='styled-select'><input type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></div>";
 
-		ins += "<p>"+ $trad("nomeMapa",i3GEOadmin.mapas.dicionario) +"<br>";
-		ins += "<input size=35 type=text id=Enome_mapa value='"+i.nome_mapa+"' /></p>";
+		ins += "<p>"+ $trad("nomeMapa",i3GEOadmin.mapas.dicionario) +"</p>";
+		ins += "<div class='styled-select'><input type=text id=Enome_mapa value='"+i.nome_mapa+"' /></div>";
 
-		ins += "<p>"+ $trad("publicado",i3GEOadmin.mapas.dicionario) +"<br>";
-		ins += "<select  id='Epublicado_mapa' >";
+		ins += "<p>"+ $trad("publicado",i3GEOadmin.mapas.dicionario) +"</p>";
+		ins += "<div class='styled-select'><select  id='Epublicado_mapa' >";
 		ins += core_combosimnao(i.publicado_mapa);
-		ins += "</select></p>";
+		ins += "</select></div>";
 
-		ins += "<p>"+ $trad("descricao",i3GEOadmin.mapas.dicionario) +"<br>";
-		ins += "<input size=35 type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></p>";
+		ins += "<p>"+ $trad("descricao",i3GEOadmin.mapas.dicionario) +"</p>";
+		ins += "<div class='styled-select'><input type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></div>";
 
-		ins += "<p>"+ $trad("extensao",i3GEOadmin.mapas.dicionario) +"<br>";
-		ins += "<input size=35 type=text id=Eext_mapa value='"+i.ext_mapa+"' /></p>";
+		ins += "<p>"+ $trad("extensao",i3GEOadmin.mapas.dicionario) +"</p>";
+		ins += "<div class='styled-select'><input type=text id=Eext_mapa value='"+i.ext_mapa+"' /></div>";
 
-		ins += "<p>"+ $trad("img",i3GEOadmin.mapas.dicionario) +"<br>";
-		ins += "<input size=35 type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></p>";
+		ins += "<p>"+ $trad("img",i3GEOadmin.mapas.dicionario) +"</p>";
+		ins += "<div class='styled-select'><input type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></div>";
 		ins += "<img src='"+i.imagem_mapa+"' />";
 
 		ins += "<p>"+ $trad("temas",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<input size=35 type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></p>";
+		ins += "<div class='styled-select'><input type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></div>";
 		ins += "<div id=comboMapfiles >"+ $trad("msgBusca",i3GEOadmin.mapas.dicionario) +"</div>";
 
 		ins += "<p>"+ $trad("temasLigados",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<input size=35 type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></p>";
+		ins += "<div class='styled-select'><input type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></div>";
 
 		ins += "<p>"+ $trad("perfis",i3GEOadmin.mapas.dicionario) +"</p>";
-		ins += "<input size=35 type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></p>";
+		ins += "<div class='styled-select'><input type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></div>";
 		ins += "<div id=comboPerfis >"+ $trad("msgBusca",i3GEOadmin.mapas.dicionario) +"</div>";
 
 		ins += "<p>"+ $trad("parametros",i3GEOadmin.mapas.dicionario) +"<br>";
-		ins += "<input size=35 type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></p>";
+		ins += "<div class='styled-select'><input type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></div>";
 
 		ins += "<p>"+ $trad("linkDireto",i3GEOadmin.mapas.dicionario) +"<br>";
-		ins += "<input size=35 type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></p>";
+		ins += "<div class='styled-select'><input type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></div>";
 		ins += "<br><br><br>";
 		return(ins);
 	},

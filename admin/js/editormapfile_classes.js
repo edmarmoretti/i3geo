@@ -231,13 +231,13 @@ function classesAuto(codigoMap,codigoLayer)
 					try	{
 						var itens = core_comboObjeto(YAHOO.lang.JSON.parse(o.responseText).itens,"","","");
 						var ins = "<p>"+ $trad("itemExpressao",i3GEOadmin.editormapfile.dicionario) +"</p>";
-						ins += "<select  id='itemExpressao' >";
+						ins += "<div class='styled-select'><select  id='itemExpressao' >";
 						ins += itens;
-						ins += "</select></p>";
+						ins += "</select></div>";
 						ins += "<p>"+ $trad("itemNome",i3GEOadmin.editormapfile.dicionario) +"</p>";
-						ins += "<select  id='itemNome' >";
+						ins += "<div class='styled-select'><select  id='itemNome' >";
 						ins += itens;
-						ins += "</select></p>";
+						ins += "</select></div>";
 						$i("editor_bd").innerHTML = ins;
 						core_carregando("desativa");
 					}
@@ -329,9 +329,9 @@ function montaEditorClasseGeral(dados)
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
 
-	temp = "<select id='status' >";
+	temp = "<div class='styled-select'><select id='status' >";
 	temp += core_comboObjeto(objstatus,"valor","texto",dados.status);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cStatus").innerHTML = temp;
 }
 

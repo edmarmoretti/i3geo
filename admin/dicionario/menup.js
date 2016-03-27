@@ -3,7 +3,7 @@ i3GEOadmin.menup = {};
 i3GEOadmin.menup.dicionario = {
 	'configGeral' : [ {
 		pt : "Ferramentas para desenvolvedores e administradores",
-		en : "",
+		en : "Developer tools",
 		es : ""
 	} ],
 	'abre' : [ {

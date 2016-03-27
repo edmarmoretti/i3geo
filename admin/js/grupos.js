@@ -129,7 +129,7 @@ i3GEOadmin.grupos = {
 				fields: i3GEOadmin.grupos.colunas
 			};
 			//i3GEOadmin.grupos.dataTable = new YAHOO.widget.DataTable("tabela", i3GEOadmin.grupos.defColunas(), myDataSource);
-			i3GEOadmin.grupos.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.grupos.defColunas(), myDataSource,{width:"100%"});
+			i3GEOadmin.grupos.dataTable = new YAHOO.widget.ScrollingDataTable("tabela", i3GEOadmin.grupos.defColunas(), myDataSource,{width:"100%",height: "250px"});
 			i3GEOadmin.grupos.dataTable.subscribe('postRenderEvent',function(){
 					//abre o editor
 					if(i3GEOadmin.grupos.dados[0].nome_grupo == ""){

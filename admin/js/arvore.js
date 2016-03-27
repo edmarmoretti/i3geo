@@ -700,7 +700,7 @@ function editar(tipo,id)
 				if(tipo == "tema")
 				{
 					var dados = YAHOO.lang.JSON.parse(o.responseText)[0];
-					core_montaEditor("gravaDados('tema','"+id+"')","400px","400px","","Tema",true,true,false);
+					core_montaEditor("gravaDados('tema','"+id+"')","400px","480px","","Tema",true,true,false);
 					$i("editor_bd").innerHTML = montaDivTema(dados);
 					core_listaDeLetras("letrasDivTema","filtraLetraTemas");
 					core_comboTemas("comboTema","Eid_tema",dados.id_tema,"");
@@ -744,11 +744,11 @@ function montaDivGrupo(i)
 
 	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
 	+ "<input type=text id='En1_perfil' value='"+i.n1_perfil+"' style='position:relative;width:200px;float:left;' />"
-	+ "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
+	+ "<div id=comboPerfil style='display:inline;left:2px;'>"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
 	+ "<p style='width:200px;' >"+ $trad("publicado",i3GEOadmin.arvore.dicionario) +""
-	+ "<select id='Epublicado' style='left:5px;position:relative;'>"
+	+ "<div class='styled-select150'><select id='Epublicado'>"
 	+ core_combosimnao(i.publicado)
-	+ "</select>"
+	+ "</select></div>"
 	+ "<input type=hidden value="+i.ordem+" id='Eordem' />";
 	return(ins);
 }
@@ -761,11 +761,11 @@ function montaDivSubGrupo(i)
     
 	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
 	+ "<input type=text id='En2_perfil' value='"+i.n2_perfil+"' style='position:relative;width:200px;float:left;' />"
-	+ "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;' >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
+	+ "<div id=comboPerfil style='display:inline;left:2px;' >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
 	+ "<p style='width:200px;'>"+ $trad("publicado",i3GEOadmin.arvore.dicionario) +""
-	+ "<select id='Epublicado' style='left:5px;position:relative;'>"
+	+ "<div class='styled-select150'><select id='Epublicado'>"
 	+ core_combosimnao(i.publicado)
-	+ "</select>"
+	+ "</select></div>"
 	+ "<br>"
 	+ "<input type=hidden value="+i.ordem+" id='Eordem' />";
 	return(ins);
@@ -776,13 +776,13 @@ function montaDivTema(i)
 	+ "<div id='letrasDivTema'></div>"
 	+ "<div id=comboTema >"+ $trad("msgBusca",i3GEOadmin.arvore.dicionario) +"</div>"
 	+ "<p>"+ $trad("publicado",i3GEOadmin.arvore.dicionario) +"</p>"
-	+ "<select id='Epublicado' >"
+	+ "<div class='styled-select150'><select id='Epublicado' >"
 	+ core_combosimnao(i.publicado)
-	+ "</select>"
+	+ "</select></div>"
 	+ "<p>"+ $trad("perfilVer",i3GEOadmin.arvore.dicionario) +"</p>"
 	+ "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' style='position:relative;width:200px;float:left;'/>"
-	+ "<div id=comboPerfil style='left:5px;float:left;position:relative;width:100px;'>Buscando...</div>"
-	+ "<p style='width:200px;'>"+ $trad("ordem",i3GEOadmin.arvore.dicionario) +"<br><br>"
+	+ "<div id=comboPerfil style='display:inline;left:2px;'>Buscando...</div>"
+	+ "<p>"+ $trad("ordem",i3GEOadmin.arvore.dicionario) +"</p>"
 	+ "<input size=10 type=text value="+i.ordem+" id='Eordem' />";
 	return(ins);
 }

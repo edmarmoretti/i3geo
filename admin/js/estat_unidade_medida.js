@@ -150,7 +150,7 @@ i3GEOadmin.umedida = {
 
 		ins += core_geraLinhas(param);
 		ins += "<p>Possibilita somar os valores?<br>";
-		ins += "<select  id='Epermitesoma' />";
+		ins += "<div class='styled-select'><select  id='Epermitesoma' />";
 		ins += "<option value='' ";
 		if (i.permitesoma == ""){ins += "selected";}
 		ins += ">---</option>";
@@ -160,10 +160,10 @@ i3GEOadmin.umedida = {
 		ins += "<option value='0' ";
 		if (i.permitesoma == 0 ){ins += "selected";}
 		ins += " >n&atilde;o</option>";
-		ins += "</select></p>";
+		ins += "</select></div>";
 
 		ins += "<p>Possibilita calcular m&eacute;dia?<br>";
-		ins += "<select  id='Epermitemedia' />";
+		ins += "<div class='styled-select'><select  id='Epermitemedia' />";
 		ins += "<option value='' ";
 		if (i.permitemedia == ""){ins += "selected";}
 		ins += ">---</option>";
@@ -173,7 +173,7 @@ i3GEOadmin.umedida = {
 		ins += "<option value='0' ";
 		if (i.permitemedia == 0 ){ins += "selected";}
 		ins += " >n&atilde;o</option>";
-		ins += "</select></p>";
+		ins += "</select></div>";
 		return(ins);
 	},
 	atualizaFiltro: function(dados){

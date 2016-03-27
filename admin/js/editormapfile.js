@@ -191,9 +191,9 @@ function ativaBotaoAdicionaMapfile(idBotao)
 		ins += ""+ $trad("permiteOgc",i3GEOadmin.editormapfile.dicionario) +"</p>";
 
 		ins += "<p><b>"+ $trad("metaestat",i3GEOadmin.editormapfile.dicionario) +"</p>";
-		ins += "<select id='Emetaestat' >";
+		ins += "<div class='styled-select150'><select id='Emetaestat' >";
 		ins += core_combosimnao("nao");
-		ins += "</select>";
+		ins += "</select></div>";
 		ins += "<p><b>"+ $trad("tituloTema",i3GEOadmin.editormapfile.dicionario) +"</b></p>";
 		ins += "<p>"+ $trad("tituloPt",i3GEOadmin.editormapfile.dicionario) +"</p>";
 		ins += "<input size=50 type=text id='Etitulo' value='' /></p>";

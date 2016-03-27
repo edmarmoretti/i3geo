@@ -30,9 +30,9 @@ i3GEOadmin.editor = {
 							temp = "<fieldset>" +
 							"<legend>Conex&atilde;o</legend>" +
 							"<p>Escolha a conex&atilde;o com o banco:</p>" +
-							"<select id='i3GEOadmincodigo_estat_conexao' onchange='i3GEOadmin.editor.esquema.lista()'>" +
+							"<div class='styled-select'><select id='i3GEOadmincodigo_estat_conexao' onchange='i3GEOadmin.editor.esquema.lista()'>" +
 							core_comboObjeto(dados,"codigo_estat_conexao","bancodedados","","codigo_estat_conexao") +
-							"</select></fieldset>";
+							"</select></div></fieldset>";
 							$i(i3GEOadmin.editor.conexao.onde).innerHTML = temp;
 							core_carregando("desativa");
 						}
@@ -55,9 +55,9 @@ i3GEOadmin.editor = {
 							temp = "<fieldset>" +
 							"<legend>Esquema</legend>" +
 							"<p>Escolha um esquema existente no banco de dados:</p>" +
-							"<select id='i3GEOadminesquema' onchange='i3GEOadmin.editor.tabela.lista()'>" +
+							"<div class='styled-select'><select id='i3GEOadminesquema' onchange='i3GEOadmin.editor.tabela.lista()'>" +
 							core_comboObjeto(dados,"esquema","esquema") +
-							"</select>" +
+							"</select></div>" +
 							"<p class=paragrafo >Outras op&ccedil;&otilde;es:</p>"+
 							"<p class=paragrafo ><input type=button value='Criar um novo esquema' id='i3GEOadminesquemaCriar' />" +
 							"&nbsp;<input type=button value='Alterar nome do esquema' id='i3GEOadminesquemaAlterarNome' />" +
@@ -189,11 +189,11 @@ i3GEOadmin.editor = {
 							temp += "<fieldset>" +
 							"<legend>Tabela</legend>" +
 							"<p>Escolha uma tabela existente: " +
-							"<select id='i3GEOadmintabela' onchange='i3GEOadmin.editor.coluna.lista()'>";
+							"<div class='styled-select'><select id='i3GEOadmintabela' onchange='i3GEOadmin.editor.coluna.lista()'>";
 							opt = core_comboObjeto(dados,"tabela","tabela");
 							i3GEOadmin.editor.tabela.optionsTabela = opt;
 							temp += opt;
-							temp += "</select>" +
+							temp += "</select></div>" +
 								"<p class=paragrafo ><input type=button value='Mostrar dados' id='i3GEOadmintabelaMostrar' />" +
 								"<input type=button value='CSV' id='i3GEOadmintabelaCsv'/>" +
 								"<input type=button value='Alterar nome atual' id='i3GEOadmintabelaAlterarNome' />" +
@@ -433,9 +433,9 @@ i3GEOadmin.editor = {
 							temp = "<fieldset>" ;
 							temp += "<p>Coment&aacute;rio registrado na tabela: "+dados["comentario"];
 							temp += "<p>Escolha uma coluna: ";
-							temp += "<select id='i3GEOadmincoluna' >";
+							temp += "<div class='styled-select'><select id='i3GEOadmincoluna' >";
 							temp += core_comboObjeto(dados["colunas"],"","");
-							temp += "</select></p>";
+							temp += "</select></div>";
 							temp += "" +
 									"<p class=paragrafo ><input type=button value='Adicionar uma nova coluna' id='i3GEOadmincolunaCriar' />" +
 									"<input type=button value='Alterar o nome atual' id='i3GEOadmincolunaAlterarNome' />";
@@ -583,15 +583,15 @@ i3GEOadmin.editor = {
 			'<p class="paragrafo" >Nome da tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br>' +
 			'<input class=digitar type="text" size=40 id="tabelaDestino" name="tabelaDestino" style="top:0px;left:0px;cursor:pointer;"> ' +
 			'Ou escolha uma tabela existente no banco de dados: ' +
-			'<select onchange="javascript:$i(\'tabelaDestino\').value = this.value;">' +
+			'<div class='styled-select'><select onchange="javascript:$i(\'tabelaDestino\').value = this.value;">' +
 			i3GEOadmin.editor.tabela.optionsTabela +
-			'</select></p>' +
+			'</select></div>' +
 			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
-			'<select id=i3GEOtipoOperacao name=tipoOperacao >' +
+			'<div class='styled-select'><select id=i3GEOtipoOperacao name=tipoOperacao >' +
 			'<option value=criar >Criar a tabela nova e incluir registros do SHP</option>' +
 			'<option value=incluir >Adicionar novos registros</option>' +
 			'<option value=apagar >Apagar dados atuais e incluir do SHP</option>' +
-			'</select></p>' +
+			'</select></div>' +
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
 			'<legend>Coment&aacute;rio</legend>' +
@@ -600,7 +600,7 @@ i3GEOadmin.editor = {
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
 			'<legend>Proje&ccedil;&atilde;o</legend>' +
-			'<p class="paragrafo" >Se você não escolheu o arquivo PRJ escolha o c&oacute;digo da proje&ccedil;&atilde;o (SRID) do arquivo</p>' +
+			'<p class="paragrafo" >Se vocï¿½ nï¿½o escolheu o arquivo PRJ escolha o c&oacute;digo da proje&ccedil;&atilde;o (SRID) do arquivo</p>' +
 			'<input class=digitar type="text" value="4326" size=20 id="insrid" name="insrid" style="top:0px;left:0px;cursor:pointer;float:left;margin-right:10px;"><div id=selInSrid ></div>' +
 			'<p class="paragrafo" >Projetar o arquivo para (deixe em branco se voc&ecirc; n&atilde;o quiser aplicar nenhuma transforma&ccedil;&atilde;o de proje&ccedil;&atilde;o):</p>' +
 			'<input class=digitar type="text" value="" size=20 id="outsrid" name="outsrid" style="top:0px;left:0px;cursor:pointer;float:left;margin-right:10px;"><div id=selOutSrid ></div>' +
@@ -667,19 +667,19 @@ i3GEOadmin.editor = {
 			'<p class="paragrafo" >CSV (N&atilde;o utilize separador de milhar e utilize ponto como separador de casas decimais ou a importa&ccedil;&atilde;o poder&aacute; n&atilde;o ocorrer): <br><br><input type="file" size=22 name="i3GEOuploadcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >Nome da nova tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br><input class=digitar type="text" size=20 id="tabelaDestinocsv" name="tabelaDestinocsv" style="top:0px;left:0px;cursor:pointer;">&nbsp;' +
 			'Ou escolha da lista: ' +
-			'<select onchange="javascript:$i(\'tabelaDestinocsv\').value = this.value;">' +
+			'<div class='styled-select'><select onchange="javascript:$i(\'tabelaDestinocsv\').value = this.value;">' +
 			i3GEOadmin.editor.tabela.optionsTabela +
-			'</select></p>' +
+			'</select></div>' +
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
 			'<p class="paragrafo" >Coment&aacute;rio:</p>' +
 			'<textarea name="comentarioCsv" rows="5" cols="70" ></textarea>' +
 			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
-			'<select id=i3GEOtipoOperacaocsv name=tipoOperacao >' +
+			'<div class='styled-select'><select id=i3GEOtipoOperacaocsv name=tipoOperacao >' +
 			'<option value=criar >Criar a tabela nova e incluir registros do CSV</option>' +
 			'<option value=incluir >Adicionar novos registros</option>' +
 			'<option value=apagar >Apagar dados atuais e incluir do CSV</option>' +
-			'</select></p>' +
+			'</select></div>' +
 			'<p class="paragrafo" ><input type="checkbox" id="incluiserialcsv" name="incluiserialcsv" style="cursor:pointer;position:relative;top:2px;">&nbsp;Inclui uma coluna gid do tipo serial e chave prim&aacute;ria com c&oacute;digo &uacute;nico</p>' +
 			'<p class="paragrafo" >Opcional (utilize sempre coordenadas em d&eacute;cimos de grau no CSV): <br><br>coluna que cont&eacute;m as latitudes (Y) <input class=digitar type="text" size=8 id="colunaycsv" name="colunaycsv" style="top:0px;left:0px;cursor:pointer;"> coluna que cont&eacute;m as longitudes (X) <input class=digitar type="text" size=8 id="colunaxcsv" name="colunaxcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'</fieldset>' +

@@ -550,10 +550,10 @@ function montaDivMapa(i) {
 		]
 	}, ins = "";
 	ins += core_geraLinhas(param);
-	ins += "Publicado?<br>";
-	ins += "<select id='Epublicado' >";
+	ins += "<p>Publicado?</p>";
+	ins += "<div class='styled-select150'><select id='Epublicado' >";
 	ins += core_combosimnao(i.publicado);
-	ins += "</select>";
+	ins += "</select></div>";
 	return (ins);
 }
 function selLogo(id) {

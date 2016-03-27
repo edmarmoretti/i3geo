@@ -97,8 +97,8 @@ function montaDivTemas(i)
 	ins += "<div id=comboTags >"+ $trad("busca",i3GEOadmin.listatemas.dicionario) +"</div>";
 	//tipoa_tema pode receber o valor META indicando que baseia-se no sistema de metadados estatisticos
 	//nesse caso, tipoa_tema e preenchido pelo editor de mapfile
-	ins += "<p>"+ $trad("tipo",i3GEOadmin.listatemas.dicionario) +"<br>";
-	ins += "<select  id='tipoa_tema' />";
+	ins += "<p>"+ $trad("tipo",i3GEOadmin.listatemas.dicionario) +"</p>";
+	ins += "<div class='styled-select'><select  id='tipoa_tema' />";
 	ins += "<option value='' ";
 	if (i.tipoa_tema == ""){ins += "selected";}
 	ins += ">"+ $trad("Normal",i3GEOadmin.listatemas.dicionario) +"</option>";
@@ -107,23 +107,23 @@ function montaDivTemas(i)
 	ins += ">"+ $trad("metaestat",i3GEOadmin.listatemas.dicionario) +"</option>";
 	ins += "<option value='WMS' ";
 	if (i.tipoa_tema == "WMS"){ins += "selected";}
-	ins += " >WMS<option></select></p>";
-	ins += "<p>"+ $trad("permiteOgc",i3GEOadmin.listatemas.dicionario) +"<br>";
-	ins += "<select  id='ogc_tema' >";
+	ins += " >WMS<option></select></div>";
+	ins += "<p>"+ $trad("permiteOgc",i3GEOadmin.listatemas.dicionario) +"</p>";
+	ins += "<div class='styled-select'><select  id='ogc_tema' >";
 	ins += core_combosimnao(i.ogc_tema);
-	ins += "</select></p>";
-	ins += "<p>"+ $trad("permiteDownload",i3GEOadmin.listatemas.dicionario) +"<br>";
-	ins += "<select  id='download_tema' >";
+	ins += "</select></div>";
+	ins += "<p>"+ $trad("permiteDownload",i3GEOadmin.listatemas.dicionario) +"</p>";
+	ins += "<div class='styled-select'><select  id='download_tema' >";
 	ins += core_combosimnao(i.download_tema);
-	ins += "</select></p>";
-	ins += "<p>"+ $trad("permiteKml",i3GEOadmin.listatemas.dicionario) +"<br>";
-	ins += "<select  id='kml_tema' >";
+	ins += "</select></div>";
+	ins += "<p>"+ $trad("permiteKml",i3GEOadmin.listatemas.dicionario) +"</p>";
+	ins += "<div class='styled-select'><select  id='kml_tema' >";
 	ins += core_combosimnao(i.kml_tema);
-	ins += "</select></p>";
-	ins += "<p>"+ $trad("permiteKmz",i3GEOadmin.listatemas.dicionario) +"<br>";
-	ins += "<select  id='kmz_tema' >";
+	ins += "</select></div>";
+	ins += "<p>"+ $trad("permiteKmz",i3GEOadmin.listatemas.dicionario) +"</p>";
+	ins += "<div class='styled-select'><select  id='kmz_tema' >";
 	ins += core_combosimnao(i.kmz_tema);
-	ins += "</select></p>";
+	ins += "</select></div>";
 	ins += "<p><span onclick='atualizaMiniatura()' style='color:blue;cursor:pointer' >"+ $trad("miniatura",i3GEOadmin.listatemas.dicionario) +"<br>";
 	ins += "<img id='imagemMiniatura' src='../../temas/miniaturas/"+i.imagem+"' /></p><br><br>";
 	ins += "<input type=hidden id=codigo_tema value='"+i.codigo_tema+"'/>";

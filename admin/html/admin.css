@@ -265,6 +265,16 @@ select{
 	text-align: left;
 	font-size: 10pt;
 }
+
+.bd p {
+	 font-size: 1.02em;
+	 margin-bottom: 2px;
+	 margin-top: 8px;
+}
+
+.bd #_listaDeLetras {
+	height: 50px;
+}
 .yui-skin-sam .yui-panel .hd {
 	background: none;
 	background-color: #F2F2F2;
@@ -355,3 +365,50 @@ select{
     text-overflow: "";
 }
 
+.styled-select {
+	width: 252px;
+	overflow: hidden;
+	background: #F8F8F8;
+	border: 1px solid #DDDDDD;
+	height: 22px;
+	border-radius: 2px;
+	text-overflow: ellipsis;
+}
+
+.styled-select150 {
+	width: 150px;
+	overflow: hidden;
+	background: #F8F8F8;
+	border: 1px solid #DDDDDD;
+	height: 22px;
+	border-radius: 2px;
+}
+
+.styled-select select, .styled-select150 select {
+	width: 100%;
+	height: 22px;
+	border: 0;
+	box-shadow: none;
+	line-height: 1.5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 0.01px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	appearance: none;
+  background: transparent url("../../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
+      background-size: 16px 144px;
+    }
+}
+
+.lupaBuscar {
+	cursor: pointer;
+    height: 14px;
+    left: 4px;
+    position: relative;
+    top: 2px;
+}

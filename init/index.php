@@ -184,7 +184,8 @@ A:hover {
 	<div class="borda">
 		<div id="bandeiras"></div>
 		<div style="text-align: center">
-			<a href="http://www.softwarepublico.gov.br" target="_blank" style="color: white;"> <b><?php echo $mensagemInicia;?> </b>
+			<a href="http://www.softwarepublico.gov.br" target="_blank" style="color: white;">
+				<b><?php echo $mensagemInicia;?> </b>
 			</a>
 		</div>
 	</div>

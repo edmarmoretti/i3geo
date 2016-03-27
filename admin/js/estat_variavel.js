@@ -342,27 +342,27 @@ i3GEOadmin.variaveis = {
 			ins += "<input type=hidden id='Ecodigo_variavel' value='' />";
 			$i("editor_bd").innerHTML = ins;
 			if($i("Ccodigo_unidade_medida")){
-				temp = "<select id='Ecodigo_unidade_medida' >";
+				temp = "<div class='styled-select'><select id='Ecodigo_unidade_medida' >";
 				temp += core_comboObjeto(i3GEOadmin.variaveis.dadosAuxiliares.unidade_medida,"codigo_unidade_medida","nome",i.codigo_unidade_medida);
-				temp += "</select>";
+				temp += "</select></div>";
 				$i("Ccodigo_unidade_medida").innerHTML = temp;
 			}
 			if($i("Ccodigo_tipo_periodo")){
-				temp = "<select id='Ecodigo_tipo_periodo' >";
+				temp = "<div class='styled-select'><select id='Ecodigo_tipo_periodo' >";
 				temp += core_comboObjeto(i3GEOadmin.variaveis.dadosAuxiliares.tipo_periodo,"codigo_tipo_periodo","nome",i.codigo_tipo_periodo);
-				temp += "</select>";
+				temp += "</select></div>";
 				$i("Ccodigo_tipo_periodo").innerHTML = temp;
 			}
 			if($i("Ccodigo_tipo_regiao")){
-				temp = "<select id='Ecodigo_tipo_regiao' >";
+				temp = "<div class='styled-select'><select id='Ecodigo_tipo_regiao' >";
 				temp += core_comboObjeto(i3GEOadmin.variaveis.dadosAuxiliares.tipo_regiao,"codigo_tipo_regiao","nome_tipo_regiao",i.codigo_tipo_regiao);
-				temp += "</select>";
+				temp += "</select></div>";
 				$i("Ccodigo_tipo_regiao").innerHTML = temp;
 			}
 			if($i("Ccodigo_estat_conexao")){
-				temp = "<select id='Ecodigo_estat_conexao' >";
+				temp = "<div class='styled-select'><select id='Ecodigo_estat_conexao' >";
 				temp += core_comboObjeto(i3GEOadmin.variaveis.dadosAuxiliares.conexaoregistrada,"codigo_estat_conexao","bancodedados",i.codigo_estat_conexao);
-				temp += "</select>";
+				temp += "</select></div>";
 				$i("Ccodigo_estat_conexao").innerHTML = temp;
 			}
 			$i("Ecodigo_tipo_regiao").onchange = function(){
@@ -693,13 +693,12 @@ i3GEOadmin.variaveis = {
 				]
 			};
 			ins += core_geraLinhas(param);
-			//ins += "<br><br><br>";
 			//o input hidden recebe a cor da janela de selecao interativa e executa o preenchimento dos campos rgb
 			$i("editor_bd").innerHTML = ins+"<input type=hidden value='' id='inputEventoCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoCor\",\"E\")' />" +
-			"<input type=hidden value='' id='inputEventoOutlineCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoOutlineCor\",\"Eo\")' />";
+			"<input type=hidden value='' id='inputEventoOutlineCor' onchange='i3GEOadmin.variaveis.classes.preencheCores(\"inputEventoOutlineCor\",\"Eo\")' /> <br><br>";
 
 			if($i("cSimbolo")){
-				temp = '<input type=text size=10 value="'+i.simbolo+'" id="Esimbolo" style="width:90%;">' +
+				temp = '<div class="styled-select"><input type=text size=10 value="'+i.simbolo+'" id="Esimbolo" ></div>' +
 					"<img onclick='i3GEOadmin.variaveis.selNavegador(\"Esimbolo\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
 				$i("cSimbolo").innerHTML = temp;
 			}
@@ -783,9 +782,9 @@ i3GEOadmin.variaveis = {
 			$i("editor_bd").innerHTML = ins;
 			//para saber a lista de tipos, veja a descricao da tabela de parametros no MER do banco de dados
 			if($i("Ctipo_parametro")){
-				temp = "<select id='Etipo' >";
+				temp = "<div class='styled-select'><select id='Etipo' >";
 				temp += core_comboObjeto(i3GEOadmin.variaveis.dadosAuxiliares.tiposDeParametros,"id","valor",i.tipo);
-				temp += "</select>";
+				temp += "</select></div>";
 				$i("Ctipo_parametro").innerHTML = temp;
 			}
 		}
@@ -904,9 +903,9 @@ i3GEOadmin.variaveis = {
 		*/
 		montaDiv: function(dados){
 			ins = "<br><b>Escolha a Fonte:</b><br><br>";
-			ins += "<select style='width:400px;' id='Eid_fonteinfo' >";
+			ins += "<div class='styled-select'><select style='width:400px;' id='Eid_fonteinfo' >";
 			ins += core_comboObjeto(i3GEOadmin.variaveis.dadosAuxiliares.fonteinfo,"id_fonteinfo","titulo");
-			ins += "</select>";
+			ins += "</select></div>";
 			$i("editor_bd").innerHTML = ins;
 		}
 	},

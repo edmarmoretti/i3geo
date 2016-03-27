@@ -116,9 +116,9 @@ function montaParametros()
 {
 	var retorna = function(retorno)
 	{
-		ins = "<select id=temaAtivo onchange='ativaTema(this.value)'>";
+		ins = "<div class='styled-select'><select id=temaAtivo onchange='ativaTema(this.value)'>";
 		ins += comboObjeto(retorno.data,"codigo_tema","nome_tema","");
-		ins += "</select>";
+		ins += "</select></div>";
 		$i("arquivoAtivo").innerHTML = ins;
 	};
 	var p = "../php/menutemas.php?funcao=pegaTemas";
@@ -209,9 +209,9 @@ function pegaClasses(codigoMap,codigoLayer)
 			ins += "<p><input onclick=excluirClasse('"+codigoLayer+"','"+d.id+"',this) type=button value='Excluir classe' /></p>";
 			ins += "<br><fieldset><legend>+- status</legend><div style=display:none >";
 			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Sets the current display status of the class. Default turns the class on.</p>";
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='status_"+codigoLayer+"_"+d.id+"' >";
+			ins += "<div class='styled-select'><select onchange='this.style.color=\"blue\"' id='status_"+codigoLayer+"_"+d.id+"' >";
 			ins += comboObjeto(objstatus,"valor","texto",d.dados.status);
-			ins += "</select>";
+			ins += "</select></p>";
 			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasse(\""+codigoLayer+"_"+d.id+"\",\"status\",this)'/>";
 			ins += "</p></div></fieldset>";
 
@@ -262,33 +262,33 @@ function pegaClasses(codigoMap,codigoLayer)
 
 			ins += "<br><fieldset><legend>+- font</legend><div style=display:none >";
 			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Font alias (as defined in the FONTSET) to use for labeling.</p>";
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_font_"+codigoLayer+"_"+d.id+"' >";
+			ins += "<div class='styled-select'><select onchange='this.style.color=\"blue\"' id='label_font_"+codigoLayer+"_"+d.id+"' >";
 			ins += combolista(fontes,d.dados.label.font);
-			ins += "</select>";
+			ins += "</select></div>";
 			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".font\",this)'/>";
 			ins += "</p></div></fieldset>";
 
 			ins += "<br><fieldset><legend>+- type</legend><div style=display:none >";
 			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Type of font to use. Generally bitmap fonts are faster to draw then TrueType fonts. However,TrueType fonts are scalable and available in a variety of faces. Be sure to set the FONT parameter ifyou select TrueType.</p>";
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >";
+			ins += "<div class='styled-select'><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >";
 			ins += comboObjeto(objfonttypes,"valor","texto",d.dados.label.type);
-			ins += "</select>";
+			ins += "</select></div>";
 			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".type\",this)'/>";
 			ins += "</p></div></fieldset>";
 
 			ins += "<br><fieldset><legend>+- partials</legend><div style=display:none >";
 			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Can text run off the edge of the map? Default is true.</p>";
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >";
+			ins += "<div class='styled-select'><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >";
 			ins += comboObjeto(objbool_tf,"valor","texto",d.dados.label.partials);
-			ins += "</select>";
+			ins += "</select></div>";
 			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".partials\",this)'/>";
 			ins += "</p></div></fieldset>";
 
 			ins += "<br><fieldset><legend>+- force</legend><div style=display:none >";
 			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Forces labels for a particular class on, regardless of collisions. Available only for cached labels. Default is false.</p>";
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >";
+			ins += "<div class='styled-select'><select onchange='this.style.color=\"blue\"' id='label_type_"+codigoLayer+"_"+d.id+"' >";
 			ins += comboObjeto(objbool_tf,"valor","texto",d.dados.label.force);
-			ins += "</select>";
+			ins += "</select></div>";
 			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasseLabel(\""+codigoLayer+"_"+d.id+"\",\".force\",this)'/>";
 			ins += "</p></div></fieldset>";
 
@@ -439,18 +439,18 @@ function pegaMetadados(codigoMap,codigoLayer)
 
 		ins += "<br><fieldset><legend>+- aplicaextensao</legend><div style=display:none >";
 		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se a extens&atilde;o geogr&aacute;fica do mapa deve ser alterada quando o tema for adicionado ao mapa</p>";
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='aplicaextensao_"+codigoLayer+"' >";
+		ins += "<div class='styled-select150'><select onchange='this.style.color=\"blue\"' id='aplicaextensao_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.aplicaextensao);
-		ins += "</select>";
+		ins += "</select></div>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"aplicaextensao\",this)'/>";
 		ins += "</p></div></fieldset>";
 
 
 		ins += "<br><fieldset><legend>+- download</legend><div style=display:none >";
 		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o usu&aacute;rio pode fazer download do tema</p>";
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='download_"+codigoLayer+"' >";
+		ins += "<div class='styled-select150'><select onchange='this.style.color=\"blue\"' id='download_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.download);
-		ins += "</select>";
+		ins += "</select></div>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"download\",this)'/>";
 		ins += "</p></div></fieldset>";
 
@@ -486,25 +486,25 @@ function pegaMetadados(codigoMap,codigoLayer)
 
 		ins += "<br><fieldset><legend>+- classe</legend><div style=display:none >";
 		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se as classes ser&atilde;o mostradas ou n&atilde;o na legenda. Por padr&atilde;o &eacute; SIM.</p>";
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='classe_"+codigoLayer+"' >";
+		ins += "<div class='styled-select150'><select onchange='this.style.color=\"blue\"' id='classe_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.classe);
-		ins += "</select>";
+		ins += "</select></div>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"classe\",this)'/>";
 		ins += "</p></div></fieldset>";
 
 		ins += "<br><fieldset><legend>+- escondido</legend><div style=display:none >";
 		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema &eacute; mostrado no mapa mas n&atilde;o nas listas da legenda e na guia 'temas'</p>"	;
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='escondido_"+codigoLayer+"' >";
+		ins += "<div class='styled-select150'><select onchange='this.style.color=\"blue\"' id='escondido_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.escondido);
-		ins += "</select>";
+		ins += "</select></div>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"escondido\",this)'/>";
 		ins += "</p></div></fieldset>";
 
 		ins += "<br><fieldset><legend>+- identifica</legend><div style=display:none >";
 		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Indica se o tema ir&aacute; ser mostrado na ferramenta de identifica&ccedil;&atilde;o</p>";
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='identifica_"+codigoLayer+"' >";
+		ins += "<div class='styled-select150'><select onchange='this.style.color=\"blue\"' id='identifica_"+codigoLayer+"' >";
 		ins += combosimnao(retorna.data.identifica);
-		ins += "</select>";
+		ins += "</select></div>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarMetadados(\""+codigoLayer+"\",\"identifica\",this)'/>";
 		ins += "</p></div></fieldset>";
 
@@ -534,25 +534,25 @@ function pegaCaracteristicasGerais(codigoMap,codigoLayer)
 		ins += "<p>Colunas: "+retorna.data.colunas+"</p>";
 		ins += "<br><fieldset><legend>+- status</legend><div style=display:none >";
 		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >Sets the current status of the layer. Often modified by MapServer itself. Default turns the layer on permanently.</b></p>";
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='status_"+codigoLayer+"' >";
+		ins += "<div class='styled-select'><select onchange='this.style.color=\"blue\"' id='status_"+codigoLayer+"' >";
 		ins += comboObjeto(objstatus,"valor","texto",retorna.data.status);
-		ins += "</select>";
+		ins += "</select></div>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"status\",this)'/>";
 		ins += "</p></fieldset>";
 
 		ins += "<br><fieldset><legend>+- type</legend><div style=display:none >";
 		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >Specifies how the data should be drawn. Need not be the same as the shapefile type. For example, a polygon shapefile may be drawn as a point layer, but a point shapefile may not be drawn as a polygon layer. Common sense rules. Annotation means that a label point will be calculated for the features, but the feature itself will not be drawn although a marker symbol can be optionally drawn. this allows for advanced labeling like numbered highway shields. Points are labeled at that point. Polygons are labeled first using a centroid, and if that doesn't fall in the polygon a scanline approach is used to guarantee the label falls within the feature. Lines are labeled at the middle of the longest arc in the visible portion of the line. Query only means the layer can be queried but not drawn.In order to differentiate between POLYGONs and POLYLINEs (which do not exist as a type), simply respectively use or ommit the COLOR keyword when classifying. If you use it, it's a polygon with a fill color, otherwise it's a polyline with only an OUTLINECOLOR.For CHART layers, see the Dynamic Charting howto.A circle must be defined by a a minimum bounding rectangle. That is, 2 points that define the smallest square that can contain it. These 2 points are the two opposite corners of said box.</b></p>";
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='type_"+codigoLayer+"' >";
+		ins += "<div class='styled-select'><select onchange='this.style.color=\"blue\"' id='type_"+codigoLayer+"' >";
 		ins += comboObjeto(objlayertypes,"valor","texto",retorna.data.type);
-		ins += "</select>";
+		ins += "</select></div>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"type\",this)'/>";
 		ins += "</p></fieldset>";
 
 		ins += "<br><fieldset><legend>+- connectiontype</legend><div style=display:none >";
 		ins += "<p class=textoAjuda  style='background-color:rgb(250,250,250);' >Tipo de conex&atilde;o. Padr&atilde;o &eacute; local.</b></p>";
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='connectiontype_"+codigoLayer+"' >";
+		ins += "<div class='styled-select'><select onchange='this.style.color=\"blue\"' id='connectiontype_"+codigoLayer+"' >";
 		ins += comboObjeto(objcontype,"valor","texto",retorna.data.connectiontype);
-		ins += "</select>";
+		ins += "</select></div>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"connectiontype\",this)'/>";
 		ins += "</p></div></fieldset>";
 
@@ -604,9 +604,9 @@ function pegaCaracteristicasGerais(codigoMap,codigoLayer)
 
 		ins += "<br><fieldset><legend>+- sizeunits</legend><div style=display:none >";
 		ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);' >Sets the unit of CLASS object SIZE values (default is pixels). Useful for simulating buffering.</b><p>";
-		ins += "<p><select onchange='this.style.color=\"blue\"' id='sizeunits_"+codigoLayer+"' >";
+		ins += "<div class='styled-select'><select onchange='this.style.color=\"blue\"' id='sizeunits_"+codigoLayer+"' >";
 		ins += comboObjeto(objmapunits,"valor","texto",retorna.data.sizeunits);
-		ins += "</select>";
+		ins += "</select></div>";
 		ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarLayer(\""+codigoLayer+"\",\"sizeunits\",this)'/>";
 		ins += "</p></div></fieldset>";
 

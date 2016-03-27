@@ -50,9 +50,9 @@ function editorGrupousr(id_tema,codigo_mapa)
 }
 function montaEditorGrupousr(dados){
 	var temp = "";
-	temp += "<p>Escolha o grupo de usu&aacute;rios:</p><select id='Eid_grupousr' >";
+	temp += "<p>Escolha o grupo de usu&aacute;rios:</p><div class='styled-select'><select id='Eid_grupousr' >";
 	temp += core_comboObjeto(dados,"id_grupo","nome");
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("editor_bd").innerHTML += temp;
 
 }

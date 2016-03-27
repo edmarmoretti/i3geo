@@ -319,13 +319,13 @@ function editar(tipo,id)
 function montaDivTema(i)
 {
 	var ins = "";
-	ins += "<br>"+ $trad("codigoTema",i3GEOadmin.atlas.dicionario) +"<br>";
+	ins += "<br><p>"+ $trad("codigoTema",i3GEOadmin.atlas.dicionario) + "</p>";
 	ins += "<div id=comboTemaIni ></div>";
 
-	ins += ""+ $trad("temaVisivel",i3GEOadmin.atlas.dicionario) +"<br>";
-	ins += "<select id='Eligado_tema' >";
+	ins += "<br><p>"+ $trad("temaVisivel",i3GEOadmin.atlas.dicionario) +"</p>";
+	ins += "<div class='styled-select150'><select id='Eligado_tema' >";
 	ins += core_combosimnao(i.ligado_tema);
-	ins += "</select>";
+	ins += "</select></div>";
 	ins += "<input type=hidden value='"+i.ordem_tema+"' id='Eordem_tema' />";
 	return(ins);
 }
@@ -344,7 +344,7 @@ function montaDivPrancha(i)
 		]
 	};
 	var ins = "";
-	ins += core_geraLinhas(param);
+	ins += core_geraLinhas(param) + "<br><br>";
 	ins += "<input type=hidden value='"+i.ordem_prancha+"' id='Eordem_prancha' />";
 	return(ins);
 }
@@ -365,10 +365,10 @@ function montaDivAtlas(i)
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
-	ins += $trad("pranchaInicia",i3GEOadmin.atlas.dicionario) +"<br>";
-	ins += "<div id=comboPranchaIni ></div><br>";
-	ins += $trad("tipoGuia",i3GEOadmin.atlas.dicionario) +"<br>";
-	ins += "<select  id='Etipoguias_atlas' />";
+	ins += "<br>" + $trad("pranchaInicia",i3GEOadmin.atlas.dicionario);
+	ins += "<div id=comboPranchaIni ></div>";
+	ins += "<br>" + $trad("tipoGuia",i3GEOadmin.atlas.dicionario);
+	ins += "<div class='styled-select150'><select  id='Etipoguias_atlas' />";
 	ins += "<option value='' >---</option>";
 	ins += "<option value='automatica' ";
 	if (i.tipoguias_atlas == "automatica"){ins += "selected";}
@@ -378,11 +378,12 @@ function montaDivAtlas(i)
 	ins += " >"+ $trad("combo",i3GEOadmin.atlas.dicionario) +"</option>";
 	ins += "<option value='expandida' ";
 	if (i.tipoguias_atlas == "expandida"){ins += "selected";}
-	ins += " >"+ $trad("expandida",i3GEOadmin.atlas.dicionario) +"</option></select><br><br>";
-	ins += $trad("publicado",i3GEOadmin.atlas.dicionario) +"<br>";
-	ins += "<select id='Epublicado_atlas' >";
+	ins += " >"+ $trad("expandida",i3GEOadmin.atlas.dicionario) +"</option></select></div>";
+	ins += "<br>" + $trad("publicado",i3GEOadmin.atlas.dicionario);
+	ins += "<div class='styled-select150'><select id='Epublicado_atlas' >";
 	ins += core_combosimnao(i.publicado_atlas);
-	ins += "</select>";
+	ins += "</select></div>";
+	ins += "<br><br>";
 	ins += "<input type=hidden value='"+i.ordem_atlas+"' id='Eordem_atlas' />";
 
 	return(ins);

@@ -90,28 +90,28 @@ function montaEditorClasseLabel(dados)
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
 
-	temp = "<select id='font' >";
+	temp = "<div class='styled-select'><select id='font' >";
 	temp += core_comboObjeto(dados.fontes,"","",dados.font);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cFont").innerHTML = temp;
 
-	temp = "<select id='type' >";
+	temp = "<div class='styled-select'><select id='type' >";
 	temp += core_comboObjeto(objfonttypes,"valor","texto",dados.type);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cType").innerHTML = temp;
 
-	temp = "<select id='partials' >";
+	temp = "<div class='styled-select'><select id='partials' >";
 	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.partials);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cPartials").innerHTML = temp;
 
-	temp = "<select id='force' >";
+	temp = "<div class='styled-select'><select id='force' >";
 	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.force);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cForce").innerHTML = temp;
 
-	temp = "<select id='autoangle' >";
+	temp = "<div class='styled-select'><select id='autoangle' >";
 	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.autoangle);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cAutoangle").innerHTML = temp;
 }

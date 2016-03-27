@@ -153,15 +153,15 @@ function montaEditorMetadados(dados){
 	$i("editor_bd").innerHTML = ins;
 
 	if($i("cEditorsql")){
-		temp = "<select id='editorsql' >";
+		temp = "<div class='styled-select150'><select id='editorsql' >";
 		temp += core_combosimnao(dados.editorsql);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cEditorsql").innerHTML = temp;
 	}
 	if($i("cLtempoconvencode")){
-		temp = "<select id='ltempoconvencode' >";
+		temp = "<div class='styled-select150'><select id='ltempoconvencode' >";
 		temp += core_combosimnao(dados.ltempoconvencode);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cLtempoconvencode").innerHTML = temp;
 	}
 }

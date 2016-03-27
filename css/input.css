@@ -88,7 +88,6 @@ select option:hover {
     }
 }
 
-
 .styled-select input:focus, .i3geoForm input:focus {
 	box-shadow: 0 0 1px blue inset;
 	background: white none repeat scroll 0 0;

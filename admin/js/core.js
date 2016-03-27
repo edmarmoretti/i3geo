@@ -682,9 +682,9 @@ function core_comboMapfiles(onde,id,marcar,funcao,recarrega)
 	{
 		if (funcao != "")
 		{funcao = "onchange='"+funcao+"'";}
-		ins = "<select  id='"+id+"' "+funcao+" >";
+		ins = "<div class='styled-select'><select  id='"+id+"' "+funcao+" >";
 		ins += core_comboObjeto($mapfiles,"codigo","codigo",marcar);
-		ins += "</select></p>";
+		ins += "</select></div>";
 		$i(onde).innerHTML = ins;
 	}
 }
@@ -715,9 +715,9 @@ function core_comboPerfis(onde,id,marcar,funcao)
 	{
 		if (funcao != "")
 		{funcao = "onchange='"+funcao+"'";}
-		ins = "<select  id='"+id+"' "+funcao+" >";
+		ins = "<div class='styled-select150'><select  id='"+id+"' "+funcao+" >";
 		ins += core_comboObjeto($perfis,"perfil","perfil",marcar);
-		ins += "</select></p>";
+		ins += "</select></div>";
 		$i(onde).innerHTML = ins;
 	}
 }
@@ -752,9 +752,9 @@ function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
 				{funcao = "";}
 				if (funcao != "")
 				{funcao = "onchange='"+funcao+"'";}
-				ins = "<select  id='"+id+"' "+funcao+" >";
+				ins = "<div class='styled-select150'><select  id='"+id+"' "+funcao+" >";
 				ins += core_comboObjeto(valores,"id_prancha","titulo_prancha",marcar);
-				ins += "</select></p>";
+				ins += "</select></div>";
 				$i(onde).innerHTML = ins;
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
@@ -795,9 +795,9 @@ function core_comboGrupos(onde,id,marcar,funcao)
 				{funcao = "";}
 				if (funcao != "")
 				{funcao = "onchange='"+funcao+"'";}
-				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >";
+				ins = "<select size=6 style='width:370px;font-size:12px; margin: 0px;' id='"+id+"' "+funcao+" >";
 				ins += core_comboObjeto(valores,"id_grupo","nome_grupo",marcar);
-				ins += "</select></p>";
+				ins += "</select>";
 				$i(onde).innerHTML = ins;
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
@@ -838,9 +838,9 @@ function core_comboSubGrupos(onde,id,marcar,funcao)
 				{funcao = "";}
 				if (funcao != "")
 				{funcao = "onchange='"+funcao+"'";}
-				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >";
+				ins = "<select size=6 style='width:370px; font-size:12px; margin: 0px;' id='"+id+"' "+funcao+" >";
 				ins += core_comboObjeto(valores,"id_subgrupo","nome_subgrupo",marcar);
-				ins += "</select></p>";
+				ins += "</select>";
 				$i(onde).innerHTML = ins;
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
@@ -881,9 +881,9 @@ function core_comboTemas(onde,id,marcar,funcao)
 				{funcao = "";}
 				if (funcao != "")
 				{funcao = "onchange='"+funcao+"'";}
-				ins = "<select size=6 style='width:355px' id='"+id+"' "+funcao+" >";
+				ins = "<select size=6 style='width:355px;font-size:12px; margin: 0px;' id='"+id+"' "+funcao+" >";
 				ins += core_comboObjeto(valores,"id_tema","nome_tema",marcar,"codigo_tema");
-				ins += "</select></p>";
+				ins += "</select>";
 				$i(onde).innerHTML = ins;
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
@@ -951,9 +951,9 @@ function core_comboTags(onde,id,change)
 	}
 	else
 	{
-		ins = "<select onchange=\""+change+"(this.value)\" id='"+id+"' >";
+		ins = "<div class='styled-select'><select onchange=\""+change+"(this.value)\" id='"+id+"' >";
 		ins += core_comboObjeto($tags,"nome","nome","");
-		ins += "</select></p>";
+		ins += "</select></div>";
 		$i(onde).innerHTML = ins;
 	}
 }
@@ -1162,15 +1162,14 @@ function core_geraLinhas(dados)
 				else{
 					idajuda = "a"+parseInt(255*(Math.random()),10);
 				}
-				//var temp = "$i('"+idajuda+"_ajuda').style.display='block' "
-				resultado += "<p><div onclick='core_geralinhasEscondeAjuda(\""+idajuda+"\")' style='margin-bottom:6px;cursor:pointer' title='ajuda' ><img style='position:relative;top:3px;' id='"+idajuda+"_imgajuda' src='../../imagens/oxygen/16x16/help-about.png' >&nbsp;<b>"+p.titulo+"</b></div>";
+				resultado += "<div onclick='core_geralinhasEscondeAjuda(\""+idajuda+"\")' style='margin-bottom:6px;cursor:pointer' title='ajuda' ><p><img style='position:relative;top:3px;' id='"+idajuda+"_imgajuda' src='../../imagens/oxygen/16x16/help-about.png' >"+p.titulo+"</p></div>";
 				resultado += "<div id='"+idajuda+"_ajuda' style=display:none >"+p.ajuda+"</div>";
 			}
 			else{
-				resultado += "<p><div><b>"+p.titulo+"<br></b>";
+				resultado += "<div><p>"+p.titulo+"</p>";
 			}
 			if(p.texto){
-				resultado += "<br><span style=color:gray >"+p.texto+"</span>";
+				resultado += "<span style=color:gray ><p>"+p.texto+"</p></span>";
 			}
 			if(p.id != ""){
 				if(!p.value){
@@ -1180,7 +1179,7 @@ function core_geraLinhas(dados)
 					resultado += "<textarea style=width:90%; id="+p.id+"  >"+p.value+"</textarea>";
 				}
 				else{
-					resultado += "<input style=width:90%;font-size:1.26em; type=text id="+p.id+" value=\""+p.value+"\" />";
+					resultado += "<div class='styled-select'><input type=text id="+p.id+" value=\""+p.value+"\" /></div>";
 				}
 				if(p.tipo == "cor"){
 					resultado += "&nbsp;<img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\""+p.id+"\");' />";
@@ -1706,7 +1705,7 @@ function core_listaDeLetras(onde,nomeFuncao,semLetras,w){
 		o = document.getElementById(onde);
 		if(o){
 			if(!semLetras){
-				o.innerHTML = "<fieldset style=padding:2px; class=letras ><form id=forminiciais ><p><b>Filtro: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:" + w + "px;cursor:pointer /></form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></fieldset>";
+				o.innerHTML = "<fieldset style='padding:2px;margin-left: 0px;' class=letras ><form id=forminiciais ><p><b>Iniciais: <input name='' onchange='' value='"+letraAtual+"' id=iniciaisLetras type=text style=width:" + w + "px;cursor:pointer /></form><div style=position:relative;top:1px; id='_listaDeLetras' >"+ins+"</div></b></fieldset>";
 			}
 			else{
 				o.innerHTML = "<form id=forminiciais >Iniciais: <input name='' onchange='' value='' id=iniciaisLetras type=text style=width:40px;cursor:pointer /></form>";

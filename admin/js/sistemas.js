@@ -251,10 +251,10 @@ function montaDivSistemas(i)
 	};
 	var ins = "";
 	ins += core_geraLinhas(param);
-	ins += "<br>"+ $trad("publicado",i3GEOadmin.sistemas.dicionario) +"<br>";
-	ins += "<select id='Epublicado_sistema' >";
+	ins += "<p>"+ $trad("publicado",i3GEOadmin.sistemas.dicionario) +"</p>";
+	ins += "<div class='styled-select150'><select id='Epublicado_sistema' >";
 	ins += core_combosimnao(i.publicado_sistema);
-	ins += "</select>";
+	ins += "</select></div>";
 	return(ins);
 }
 function montaDivFuncoes(i)

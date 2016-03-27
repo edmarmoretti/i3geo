@@ -81,64 +81,64 @@ function montaEditorDados(dados)
 	if($i("cConnection")){
 		temp = "";
 		if(dados.postgis_mapa.length > 0){
-			temp += "<p class=paragrafo >"+ $trad("msgAlias",i3GEOadmin.editormapfile.dicionario) +"";
+			temp += "<p>"+ $trad("msgAlias",i3GEOadmin.editormapfile.dicionario) +"";
 			temp += "<br><b>"+dados.postgis_mapa+"</b>.<br><br>"+ $trad("defineAlias",i3GEOadmin.editormapfile.dicionario) +"";
 			temp += "</p>";
 		}
-		temp += '<input type="text" value="'+dados.connection+'" id="connection" style="width:90%;">';
-		temp += "<img onclick='selConexaoBanco(\"connection\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		temp += '<div class="i3geoForm i3geoFormSemIcone"><input type="text" value="'+dados.connection+'" id="connection" >';
+		temp += "<img onclick='selConexaoBanco(\"connection\")' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cConnection").innerHTML = temp;
 	}
 	if($i("cData")){
 		temp = '<textarea value="'+dados.data+'" id="data" style="height: 100px;width:90%;">'+dados.data+'</textarea>';
-		temp += "<img onclick='selNavegador(\"data\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		temp += "<img onclick='selNavegador(\"data\")' src='"+limg+"' class='lupaBuscar' />";
 		$i("cData").innerHTML = temp;
 	}
 	if($i("cMetaestat_id_medida_variavel")){
-		temp = '<input type="text" value="'+dados.metaestat_id_medida_variavel+'" id="metaestat_id_medida_variavel" style="width:90%;">';
-		temp += "<img onclick='selIdMedidaVariavel(\"metaestat_id_medida_variavel\",\"metaestat_id_medida_variavel\")' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		temp = '<div class="i3geoForm i3geoFormSemIcone"><input type="text" value="'+dados.metaestat_id_medida_variavel+'" id="metaestat_id_medida_variavel" >';
+		temp += "<img onclick='selIdMedidaVariavel(\"metaestat_id_medida_variavel\",\"metaestat_id_medida_variavel\")' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cMetaestat_id_medida_variavel").innerHTML = temp;
 	}
 	if($i("cMetaestat")){
-		temp = "<select id='metaestat' >";
+		temp = "<div class='styled-select150'><select id='metaestat' >";
 		temp += core_combosimnao(dados.metaestat);
-		temp += "</select>";
+		temp += "</select></div>";
 		//temp += "&nbsp;<input type=button value='Par&acirc;metros' id=parametrosMetaestat />";
 		$i("cMetaestat").innerHTML = temp;
 		//new YAHOO.widget.Button("parametrosMetaestat",{ onclick: { fn: parametrosMetaestat }});
 	}
 	if($i("cCache")){
-		temp = "<select id='cache' >";
+		temp = "<div class='styled-select150'><select id='cache' >";
 		temp += core_combosimnao(dados.cache);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cCache").innerHTML = temp;
 	}
 	if($i("cTiles")){
-		temp = "<select id='tiles' >";
+		temp = "<div class='styled-select150'><select id='tiles' >";
 		temp += core_combosimnao(dados.tiles);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cTiles").innerHTML = temp;
 	}
 	if($i("cTipoOriginal")){
-		temp = "<select id='tipooriginal' >";
+		temp = "<div class='styled-select'><select id='tipooriginal' >";
 		temp += core_comboObjeto(objtipooriginal,"valor","texto",dados.tipooriginal);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cTipoOriginal").innerHTML = temp;
 	}
-	temp = "<select id='connectiontype' >";
+	temp = "<div class='styled-select150'><select id='connectiontype' >";
 	temp += core_comboObjeto(objcontype,"valor","texto",dados.connectiontype);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cConnectiontype").innerHTML = temp;
 
-	temp = "<select id='type' >";
+	temp = "<div class='styled-select'><select id='type' >";
 	temp += core_comboObjeto(objlayertypes,"valor","texto",dados.type);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cType").innerHTML = temp;
 
 	if($i("cConvcaracter")){
-		temp = "<select id='convcaracter' >";
+		temp = "<div class='styled-select150'><select id='convcaracter' >";
 		temp += core_combosimnao(dados.convcaracter);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cConvcaracter").innerHTML = temp;
 	}
 

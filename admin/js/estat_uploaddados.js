@@ -24,11 +24,11 @@ i3GEOadmin.uploaddados = {
 			var i=0,
 				c = i3GEOadmin.uploaddados.COLUNASARQUIVO.split(","),
 				n = c.length,
-				ins = "<select id='"+id+"'><option value='' >---</option>";
+				ins = "<div class='styled-select'><select id='"+id+"'><option value='' >---</option>";
 			for(i=0;i<n;i++){
 				ins += "<option value='"+c[i]+"' >"+c[i]+"</option>";
 			}
-			ins += "</select>";
+			ins += "</select></div>";
 			return ins;
 		},
 		tipoValores: function(id){
@@ -36,11 +36,11 @@ i3GEOadmin.uploaddados = {
 				c = ["inteiro","num&eacute;rico","texto"],
 				d = ["valor_int","valor_num","valor_txt"],
 				n = c.length,
-				ins = "<select id='"+id+"'><option value='' >---</option>";
+				ins = "<div class='styled-select'><select id='"+id+"'><option value='' >---</option>";
 			for(i=0;i<n;i++){
 				ins += "<option value='"+d[i]+"' >"+c[i]+"</option>";
 			}
-			ins += "</select>";
+			ins += "</select></div>";
 			return ins;
 		},
 		tipoInclusao: function(id){
@@ -48,11 +48,11 @@ i3GEOadmin.uploaddados = {
 				c = ["substituir","acrescentar"],
 				d = ["substituir","acrescentar"],
 				n = c.length,
-				ins = "<select id='"+id+"'><option value='' >---</option>";
+				ins = "<div class='styled-select'><select id='"+id+"'><option value='' >---</option>";
 			for(i=0;i<n;i++){
 				ins += "<option value='"+d[i]+"' >"+c[i]+"</option>";
 			}
-			ins += "</select>";
+			ins += "</select></div>";
 			return ins;
 		},
 		fimsubmit: function(){
@@ -146,9 +146,9 @@ i3GEOadmin.uploaddados = {
 						try	{
 							var dados = YAHOO.lang.JSON.parse(o.responseText),
 							temp = "<p>Escolha a conex&atilde;o com o banco que receber&aacute; os dados:</p>";
-							temp += "<select id='i3GEOadmincodigo_estat_conexao' style='box-shadow:0 1px 5px gray;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px'>";
+							temp += "<div class='styled-select'><select id='i3GEOadmincodigo_estat_conexao' style='box-shadow:0 1px 5px gray;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px'>";
 							temp += core_comboObjeto(dados,"codigo_estat_conexao","bancodedados","","usuario");
-							temp += "</select>";
+							temp += "</select></div>";
 							$i(i3GEOadmin.uploaddados.conexao.onde).innerHTML = temp;
 							core_carregando("desativa");
 						}

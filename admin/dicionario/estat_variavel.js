@@ -27,7 +27,7 @@ i3GEOadmin.estat_variavel.dicionario = {
 		es : ""
 	} ],
     'obs' : [ {
-		pt : "Observação: caso algum mapa esteja aberto (em outra aba por exemplo) não se esqueça de recarregar o navegador após alterar alguma classificação. Isso é necessário para que o mapa reflita as alterações feitas, anulando eventuais arquivos em cache.</p>",
+		pt : "Observa&ccedil;&atilde;o: caso algum mapa esteja aberto (em outra aba por exemplo) n&atilde;o se esque&ccedil;a de recarregar o navegador ap&oacute;s alterar alguma classifica&ccedil;&atilde;o. Isso &eacute; necess&aacute;rio para que o mapa reflita as altera&ccedil;&otilde;es feitas, anulando eventuais arquivos em cache.</p>",
 		en : "",
 		es : ""
 	} ],

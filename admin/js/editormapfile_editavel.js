@@ -41,38 +41,38 @@ function montaEditorEditavel(dados)
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
 	if($i("cEditavel")){
-		temp = "<select id='editavel' >";
+		temp = "<div class='styled-select150'><select id='editavel' >";
 		temp += core_combosimnao(dados.editavel);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cEditavel").innerHTML = temp;
 	}
 	if($i("cEsquematabelaeditavel")){
-		temp = '<input id="esquematabelaeditavel" style="width:90%;" value="'+dados.esquematabelaeditavel+'" />' +
-			"<img id='esquematabelaeditavelBusca' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="esquematabelaeditavel" value="'+dados.esquematabelaeditavel+'" />' +
+			"<img id='esquematabelaeditavelBusca' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cEsquematabelaeditavel").innerHTML = temp;
 	}
 	$i("esquematabelaeditavelBusca").onclick = function(){
 		i3GEO.util.navegadorPostgis($i("esquematabelaeditavel"),"","esquema");
 	};
 	if($i("cTabelatabelaeditavel")){
-		temp = '<input id="tabelaeditavel" style="width:90%;" value="'+dados.tabelaeditavel+'" />' +
-			"<img id='tabelatabelaeditavelBusca' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="tabelaeditavel" value="'+dados.tabelaeditavel+'" />' +
+			"<img id='tabelatabelaeditavelBusca' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cTabelatabelaeditavel").innerHTML = temp;
 	}
 	$i("tabelatabelaeditavelBusca").onclick = function(){
 		i3GEO.util.navegadorPostgis($i("tabelaeditavel"),"","tabela");
 	};
 	if($i("cColunatabelaeditavel")){
-		temp = '<input id="colunaidunico" style="width:90%;" value="'+dados.colunaidunico+'" />' +
-			"<img id='colunatabelaeditavelBusca' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="colunaidunico" value="'+dados.colunaidunico+'" />' +
+			"<img id='colunatabelaeditavelBusca' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cColunatabelaeditavel").innerHTML = temp;
 	}
 	$i("colunatabelaeditavelBusca").onclick = function(){
 		i3GEO.util.navegadorPostgis($i("colunaidunico"),"","coluna");
 	};
 	if($i("cColunageometriatabelaeditavel")){
-		temp = '<input id="colunageometria" style="width:90%;" value="'+dados.colunageometria+'" />' +
-			"<img id='colunageometriatabelaeditavelBusca' src='"+limg+"' style='cursor:pointer;position :relative;top:2px'/>";
+		temp = '<div class="i3geoForm i3geoFormSemIcone"><input id="colunageometria" value="'+dados.colunageometria+'" />' +
+			"<img id='colunageometriatabelaeditavelBusca' src='"+limg+"' class='lupaBuscar'/></div>";
 		$i("cColunageometriatabelaeditavel").innerHTML = temp;
 	}
 	$i("colunageometriatabelaeditavelBusca").onclick = function(){

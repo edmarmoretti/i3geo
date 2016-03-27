@@ -2,7 +2,7 @@
 i3GEOadmin.incluimap = {};
 i3GEOadmin.incluimap.dicionario = {
 	'incluiMap' : [ {
-		pt : "<p>As vers&otilde;es novas do Mapserver exigem que os arquivos mapfile iniciem com a palavra 'MAP'</p><p>Os mapfiles utilizados pelo i3geo, at&eacute; a vers&atilde;o 4.1, e armazenados no diretório i3Geo/temas n&atilde;o iniciam com 'MAP'. Para ajustar os mapfiles voc&ecirc; pode edit&aacute;-los individulamente ou rodar o programa i3geo/admin/php/incluiMAP.php<p>Antes de fazer isso, fa&ccedil;a um backup do seu diretório i3geo/temas<p>",
+		pt : "<p>As vers&otilde;es novas do Mapserver exigem que os arquivos mapfile iniciem com a palavra 'MAP'</p><p>Os mapfiles utilizados pelo i3geo, at&eacute; a vers&atilde;o 4.1, e armazenados no diret&oacute;rio i3Geo/temas n&atilde;o iniciam com 'MAP'. Para ajustar os mapfiles voc&ecirc; pode edit&aacute;-los individulamente ou rodar o programa i3geo/admin/php/incluiMAP.php<p>Antes de fazer isso, fa&ccedil;a um backup do seu diret&oacute;rio i3geo/temas<p>",
 		en : "",
 		es : ""
 	} ],

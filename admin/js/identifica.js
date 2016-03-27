@@ -182,7 +182,7 @@ i3GEOadmin.identifica = {
 		ins += core_geraLinhas(param)	;
 
 		ins += "<p><b>"+ $trad("publicado2",i3GEOadmin.identifica.dicionario) +"</b><br>";
-		ins += "<select  id='Epublicado_i' />";
+		ins += "<div class='styled-select'><select  id='Epublicado_i' />";
 		ins += "<option value='' ";
 		if (i.publicado_i == ""){ins += "selected";}
 		ins += ">---</option>";
@@ -192,7 +192,7 @@ i3GEOadmin.identifica = {
 		ins += "<option value='NAO' ";
 		if (i.publicado_i == "NAO"){ins += "selected";}
 		ins += " >n&atilde;o</option>";
-		ins += "</select></p>";
+		ins += "</select></div>";
 		return(ins);
 	},
 	atualizaFiltro: function(dados){

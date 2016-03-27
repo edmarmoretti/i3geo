@@ -33,29 +33,29 @@ function montaEditorDispo(dados)
 	ins += core_geraLinhas(param);
 
 	ins += "<p>"+ $trad("permiteOgc2",i3GEOadmin.editormapfile.dicionario) +"<br>";
-	ins += "<select  id='ogc_tema' >";
+	ins += "<div class='styled-select150'><select  id='ogc_tema' >";
 	ins += core_combosimnao(dados.ogc_tema);
-	ins += "</select></p>";
+	ins += "</select></div>";
 	ins += "<p>"+ $trad("permiteDownload2",i3GEOadmin.editormapfile.dicionario) +"<br>";
-	ins += "<select  id='download_tema' >";
+	ins += "<div class='styled-select150'><select  id='download_tema' >";
 	ins += core_combosimnao(dados.download_tema);
-	ins += "</select></p>";
+	ins += "</select></div>";
 	ins += "<p>"+ $trad("permiteKml",i3GEOadmin.editormapfile.dicionario) +"<br>";
-	ins += "<select  id='kml_tema' >";
+	ins += "<div class='styled-select150'><select  id='kml_tema' >";
 	ins += core_combosimnao(dados.kml_tema);
-	ins += "</select></p>";
+	ins += "</select></div>";
 	ins += "<p>"+ $trad("permiteKmz",i3GEOadmin.editormapfile.dicionario) +"<br>";
-	ins += "<select  id='kmz_tema' >";
+	ins += "<div class='styled-select150'><select  id='kmz_tema' >";
 	ins += core_combosimnao(dados.kmz_tema);
-	ins += "</select></p>";
+	ins += "</select></div>";
 
 
 	ins += "<br><br><br>";
 	$i("editor_bd").innerHTML = ins;
 	if($i("cDownload")){
-		temp = "<select id='download' >";
+		temp = "<div class='styled-select150'><select id='download' >";
 		temp += core_combosimnao(dados.download);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cDownload").innerHTML = temp;
 	}
 }

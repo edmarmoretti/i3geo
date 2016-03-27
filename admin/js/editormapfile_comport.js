@@ -72,53 +72,53 @@ function montaEditorComport(dados)
 	$i("editor_bd").innerHTML = ins;
 
 	if($i("cAplicaextensao")){
-		temp = "<select id='aplicaextensao' >";
+		temp = "<div class='styled-select150'><select id='aplicaextensao' >";
 		temp += core_combosimnao(dados.aplicaextensao);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cAplicaextensao").innerHTML = temp;
 	}
 	if($i("cPermitecomentario")){
-		temp = "<select id='permitecomentario' >";
+		temp = "<div class='styled-select150'><select id='permitecomentario' >";
 		temp += core_combosimnao(dados.permitecomentario);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cPermitecomentario").innerHTML = temp;
 	}
 	if($i("cClasse")){
-		temp = "<p><select id='classe' >";
+		temp = "<div class='styled-select'><select id='classe' >";
 		temp += core_combosimnao(dados.classe);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cClasse").innerHTML = temp;
 	}
 	if($i("cEscondido")){
-		temp = "<select id='escondido' >";
+		temp = "<div class='styled-select150'><select id='escondido' >";
 		temp += core_combosimnao(dados.escondido);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cEscondido").innerHTML = temp;
 	}
 	if($i("cIdentifica")){
-		temp = "<select id='identifica' >";
+		temp = "<div class='styled-select150'><select id='identifica' >";
 		temp += core_combosimnao(dados.identifica);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cIdentifica").innerHTML = temp;
 	}
 	if($i("cTransitioneffect")){
-		temp = "<select id='transitioneffect' >";
+		temp = "<div class='styled-select150'><select id='transitioneffect' >";
 		temp += core_combosimnao(dados.transitioneffect);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("cTransitioneffect").innerHTML = temp;
 	}
-	temp = "<select id='status' >";
+	temp = "<div class='styled-select'><select id='status' >";
 	temp += core_comboObjeto(objstatus,"valor","texto",dados.status);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cStatus").innerHTML = temp;
 
-	temp = "<select id='sizeunits' >";
+	temp = "<div class='styled-select'><select id='sizeunits' >";
 	temp += core_comboObjeto(objmapunits,"valor","texto",dados.sizeunits);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cSizeunits").innerHTML = temp;
-	temp = "<select id='toleranceunits' >";
+	temp = "<div class='styled-select'><select id='toleranceunits' >";
 	temp += core_comboObjeto(objmapunits,"valor","texto",dados.toleranceunits);
-	temp += "</select>";
+	temp += "</select></div>";
 	$i("cToleranceunits").innerHTML = temp;
 }
 

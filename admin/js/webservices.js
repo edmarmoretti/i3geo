@@ -188,7 +188,7 @@ i3GEOadmin.webservices = {
 		ins += core_geraLinhas(param);
 
 		ins += "<p>"+ $trad("tipo1",i3GEOadmin.webservices.dicionario) +"<br>";
-		ins += "<select  id='Etipo_ws' />";
+		ins += "<div class='styled-select'><select  id='Etipo_ws' />";
 		ins += "<option value='' ";
 		if (i.tipo_ws == ""){ins += "selected";}
 		ins += ">---</option>";
@@ -214,7 +214,7 @@ i3GEOadmin.webservices = {
 		if (i.tipo_ws == "GEOJSON"){ins += "selected";}
 		ins += " >GEOJSON</option>";
 
-		ins += "</select></p>";
+		ins += "</select></div>";
 		return(ins);
 	},
 	atualizaFiltro: function(dados){

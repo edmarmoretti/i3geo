@@ -214,9 +214,9 @@ function montaDivGrupo(i){
 	$i("editor_bd").innerHTML = ins;
 }
 function montaDivUsuario(dados){
-	var ins = "<p><select id='Eid_usuario' >";
+	var ins = "<div class='styled-select'><select id='Eid_usuario' >";
 	ins += core_comboObjeto(dados,"id_usuario","login","","ativo");
-	ins += "</select>";
+	ins += "</select></div>";
 	return(ins);
 }
 /*

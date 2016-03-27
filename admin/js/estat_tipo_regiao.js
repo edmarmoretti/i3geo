@@ -311,11 +311,11 @@ function montaDiv(i){
 		},
 		ins = "";
 	ins += core_geraLinhas(param);
-	$i("editor_bd2").innerHTML = ins;
+	$i("editor_bd2").innerHTML = ins + "<br><br>";
 	if($i("Ccodigo_estat_conexao")){
-		temp = "<select id='Ecodigo_estat_conexao' >";
+		temp = "<div class='styled-select'><select id='Ecodigo_estat_conexao' >";
 		temp += core_comboObjeto(dadosAuxiliares.conexaoregistrada,"codigo_estat_conexao","bancodedados",i.codigo_estat_conexao);
-		temp += "</select>";
+		temp += "</select></div>";
 		$i("Ccodigo_estat_conexao").innerHTML = temp;
 	}
 }
