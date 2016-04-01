@@ -196,7 +196,8 @@ if($legenda == "sim"){
 	$labelleg->set("type",MS_TRUETYPE);
 	$labelleg->set("font","arial");
 	$labelleg->set("size",12);
-	//$leg->set("keyspacingy",10);
+	$leg->set("keyspacingy",0);
+	$leg->set("keysizey",20);
 	$layer = $mapa->getlayerbyname($tema);
 	$nclass = $layer->numclasses;
 	for($i=0;$i<$nclass;$i++){
@@ -235,7 +236,9 @@ foreach($lista as $l){
 		$listaunica[] = $l;
 	}
 }
-//$listaunica = array ("201501","201502","201503","201504","201505");
+
+//$listaunica = array("201537");
+
 //cria as imagens para cada periodo
 $layer = $mapa->getlayerbyname($tema);
 
