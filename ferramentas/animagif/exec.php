@@ -20,11 +20,16 @@ if(empty($_GET)){
 	";
 	exit;
 }
+//http://localhost/i3geo/ferramentas/animagif/exec.php?operador=lt&nulos=-&transparente=nao&legenda=sim&tema=_llocalianimagif&colunat=ANOCRIA&w=500&h=500&mapext=-74%20-32%20-34%204
 //http://localhost:8014/i3geo/ferramentas/animagif/exec.php?transparente=nao&legenda=sim&tema=dengue_casos_provaveis&colunat=semana_ano_epidemiologico&w=500&h=500&mapext=-74%20-32%20-34%204
 include("../../ms_configura.php");
 include("../../classesphp/funcoes_gerais.php");
 include("../../classesphp/pega_variaveis.php");
 include("../../classesphp/carrega_ext.php");
+$v = versao();
+$vi = $v["inteiro"];
+$v = $v["principal"];
+
 if($cache == "nao"){
 	$nometemp = nomeRandomico();
 } else {
@@ -101,6 +106,7 @@ else{
 		$base = $locaplic."/aplicmap/".$base;
 	}
 }
+//desenv /var/www/html/i3geo/i3geo/sage/camadas/base_linux.map
 $mapa = ms_newMapObj($base);
 
 //remove as camadas do mapa base
@@ -115,16 +121,23 @@ for ($i=0;$i < $numlayers;$i++){
 	}
 }
 //ajusta o label
+
 $copyright = $mapa->getlayerbyname("copyright");
 if($copyright != ""){
 	$classe = $copyright->getclass(0);
-	$label = $classe->getLabel(0);
+	if($vi >= 60200){
+		$label = $classe->getLabel(0);
+	}
+	else{
+		$label = $classe->label;
+	}
 	$label->updatefromstring("LABEL TYPE TRUETYPE END");
 	$label->set("font","arial");
 	$label->set("size",15);
 	$label->updatefromstring("LABEL POSITION lr END");
 	$label->updatefromstring('LABEL STYLE GEOMTRANSFORM "labelpoly" COLOR 255 255 255 END END');
 }
+
 //
 $mapa->save($arqtemp.".map");
 //adiciona ao mapa base as camadas do mapfile indicado em $tema
@@ -152,6 +165,7 @@ for ($i=0;$i < $numlayers;$i++){
 	cloneInlineSymbol($layern,$nmapa,$mapa);
 	ms_newLayerObj($mapa, $layern);
 }
+
 $mapa->save($arqtemp.".map");
 
 //aplica a extensao geografica
@@ -172,15 +186,16 @@ if ($ret != ""){
 $mapa->setsize($w,$h);
 $sca = $mapa->scalebar;
 $sca->set("status",MS_OFF);
+
 if($legenda == "sim"){
 	$leg = $mapa->legend;
 	$leg->set("status",MS_EMBED);
 	$cor = $leg->imagecolor;
 	$cor->setrgb(250,250,250);
 	$labelleg = $leg->label;
-	//$labelleg->set("type",MS_TRUETYPE);
-	//$labelleg->set("font","arial");
-	$labelleg->set("size",10);
+	$labelleg->set("type",MS_TRUETYPE);
+	$labelleg->set("font","arial");
+	$labelleg->set("size",12);
 	//$leg->set("keyspacingy",10);
 	$layer = $mapa->getlayerbyname($tema);
 	$nclass = $layer->numclasses;
@@ -191,6 +206,7 @@ if($legenda == "sim"){
 		}
 	}
 }
+
 $c = $mapa->imagecolor;
 $c->setrgb(-1,-1,-1);
 $o = $mapa->outputformat;
@@ -199,14 +215,18 @@ $o->set("imagemode",MS_IMAGEMODE_RGBA);
 if($transparente == "sim"){
 	$o->set("transparent",MS_TRUE);
 }
+
 $mapa->save($arqtemp.".map");
 $mapa = ms_newMapObj($arqtemp.".map");
+/*
 if(validaAcessoTemas($arqtemp.".map",false) == true){
 	echo "Existem temas restritos";exit;
 }
+*/
 //pega a lista de valores unicos da $colunat
 include_once("../../classesphp/classe_atributos.php");
 $m = new Atributos($arqtemp.".map",$tema);
+
 $lista = $m->listaUnicoRapida($colunat);
 $listaunica = array();
 foreach($lista as $l){
@@ -215,18 +235,34 @@ foreach($lista as $l){
 		$listaunica[] = $l;
 	}
 }
+//$listaunica = array ("201501","201502","201503","201504","201505");
 //cria as imagens para cada periodo
 $layer = $mapa->getlayerbyname($tema);
 
 $copyright = $mapa->getlayerbyname("copyright");
+$classe = ms_newClassObj($copyright);
+
+$classet = ms_newClassObj($copyright);
+$classet->title = " ";
+
+$mapa->moveLayerdown(0);
+
 if($copyright != ""){
 	$c = $copyright->getclass(0);
-	$label = $c->getLabel(0);
+	if($vi >= 60200){
+		$label = $c->getLabel(0);
+	}
+	else{
+		$label = $c->label;
+	}
 }
+
+//$classe = ms_newClassObj($copyright);
+
 $imagens = array();
 $duracao = array();
 $objImagem = "";
-//$listaunica = array($listaunica[1]);
+
 foreach($listaunica as $d){
 	if(strtoupper($colunat) == $colunat){
 		$filtro = "(('[$colunat]' $operador '$d'))";
@@ -241,27 +277,33 @@ foreach($listaunica as $d){
 		}
 	}
 	$layer->setfilter($filtro);
-	//$mapa->save($arqtemp.".map");echo $arqtemp;exit;
 	$nomec = $arqtemp.$d.".png";
 
-	$s = "LABEL TEXT '".$d."' END";
-	if($copyright != ""){
+	if($copyright != "" && $vi >= 60300){
+		$s = "LABEL TEXT '".$d."' END";
 		$label->updateFromString($s);
 	}
-	if($objImagem == ""){
-		$objImagem = $mapa->draw();
-		$objImagem->saveImage($nomec);
-	}
 	else{
-		$i = $mapa->draw();
-		$objImagem->pasteImage($i,-1);
-		$objImagem->saveImage($nomec);
+		$classe->title = $d;
+	}
+	if(!file_exists($nomec)){
+		if($objImagem == ""){
+			$objImagem = $mapa->draw();
+			$objImagem->saveImage($nomec);
+		}
+		else{
+			$i = $mapa->draw();
+			$objImagem->pasteImage($i,-1);
+			$objImagem->saveImage($nomec);
+		}
 	}
 	$imagens[] = $nomec;
 	$duracao[] = $tempo;
 }
 //junta as imagens no gif
+
 include("../../pacotes/gifcreator/GifCreator.php");
+
 $gc = new GifCreator();
 $gc->create($imagens, $duracao, 0);
 $gifBinary = $gc->getGif();
