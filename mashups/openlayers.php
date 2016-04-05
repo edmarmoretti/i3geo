@@ -268,7 +268,7 @@ if($temas != ""){
 	//lista os nomes de metadados que contem os parametros das
 	//ferramentas customizaveis e que seraco incluidas na propriedade do layer
 	//
-	$listaFerramentas = array("tme","storymap");
+	$listaFerramentas = array("tme","storymap","animagif");
 	foreach($temas as $tema){
 		//
 		//utilzado para obter os parametros de ferramentas especificas indicadas nos metadados do LAYER

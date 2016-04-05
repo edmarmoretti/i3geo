@@ -58,6 +58,12 @@ i3GEO.tema =
 				if(f.tme && f.tme.auto.toLowerCase() === "sim"){
 					i3GEO.tema.dialogo.tme(camada.name);
 				}
+				if(f.storymap && f.storymap.auto.toLowerCase() === "sim"){
+					i3GEO.tema.dialogo.storymap(camada.name);
+				}
+				if(f.animagif && f.animagif.auto.toLowerCase() === "sim"){
+					i3GEO.tema.dialogo.animagif(camada.name);
+				}
 			}
 		},
 		/**

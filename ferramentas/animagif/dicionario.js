@@ -6,7 +6,7 @@ i3GEOF.animagif.dicionario = {
 		es : ""
 	} ],
 	'execAoAdic' : [ {
-		pt : "Gera a animação quando o usuário adiciona a camada ao mapa",
+		pt : "Gera a anima&ccedil;&atilde;o quando o usu&aacute;rio adiciona a camada ao mapa",
 		en : "",
 		es : ""
 	} ],
@@ -89,5 +89,25 @@ i3GEOF.animagif.dicionario = {
 		pt : "Selecione uma coluna",
 		en : "",
 		es : ""
-	}]
+	}],
+	'salvaParametros' : [ {
+		pt : "Salva par&acirc;metros no mapfile",
+		en : "",
+		es : ""
+	} ],
+	'removeParametros' : [ {
+		pt : "Remove par&acirc;metros do mapfile",
+		en : "",
+		es : ""
+	} ],
+	'removePar' : [ {
+		pt : "Remove os par&acirc;metros armazenados no tema?",
+		en : "",
+		es : ""
+	} ],
+	'incluiPar' : [ {
+		pt : "Inclui os par&acirc;metros no tema?",
+		en : "",
+		es : ""
+	} ]
 };

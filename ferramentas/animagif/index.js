@@ -147,7 +147,7 @@ i3GEOF.animagif =
 				// combo para escolher a coluna com as datas
 				i3GEO.util.comboItens("i3GEOanimagifcolunat", i3GEOF.animagif.tema, function(retorno) {
 					$i("i3GEOANIMAGIFcolunatSel").innerHTML = retorno.dados;
-					temp = $i("i3GEOANIMAGIFcolunat").getElementsByTagName("select")[0];
+					temp = $i("i3GEOANIMAGIFcolunatSel").getElementsByTagName("select")[0];
 					temp.value = camada.ferramentas.animagif.colunat;
 				}, "i3GEOanimagifcolunatSel");
 			} else if (camada != "") {
@@ -244,7 +244,7 @@ i3GEOF.animagif =
 			"<span class='i3GEOiconeFerramenta i3GEOiconeanimagif'></span>" + "<div  id='i3GEOFanimagifComboCabeca' class='comboTemasCabecalho'>   ------</div>"
 			+ "<div class='i3GeoTituloJanela'>animagif </span><a class=ajuda_usuario target=_blank href='"
 			+ i3GEO.configura.locaplic
-			+ "/ajuda_usuario.php?idcategoria=5&idajuda=108' ><b> </b></a></div>";
+			+ "/ajuda_usuario.php?idcategoria=5&idajuda=130' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria("380px", "320px", "", "", "", titulo, "i3GEOF.animagif", false, "hd", cabecalho, minimiza, "", true);
 		divid = janela[2].id;
 		i3GEOF.animagif.aguarde = $i("i3GEOF.animagif_imagemCabecalho").style;
@@ -272,8 +272,7 @@ i3GEOF.animagif =
 	},
 	salvaParametros: function(){
 		//monta a string JSON que sera enviada para gravacao
-		//'{"titulo":"População","colnome":"CNTRY_NAME","colsdata":["POP_CNTRY"],"lmax":"100000","amax":"2000000","auto":"sim","exec":"sim"}'
-		var j, colsdata = i3GEOF.animagif.pegaItensMarcados(), auto = "nao", exec = "nao";
+		var j, auto = "nao", exec = "nao";
 		if($i("ativaAoAdic").checked === true){
 			auto = "sim";
 		}
@@ -281,20 +280,28 @@ i3GEOF.animagif =
 			exec = "sim";
 		}
 
-		j = '{"titulo":"'
-			+ $i("i3GEOanimagiftitulo").value
-			+ '","colnome":"'
-			+ $i("i3GEOanimagifregioes").value
-			+ '","colsdata":['
-			+ '"' + colsdata.join('","') + '"'
-			+ '],"lmax":"'
-			+ $i("i3GEOanimagifmaxHeight").value
-			+ '","amax":"'
-			+ $i("i3GEOanimagifbarSize").value
-			+ '","outlinecolor":"'
-			+ $i("i3GEOanimagifoutlinecolor").value
-			+ '","numvertices":"'
-			+ $i("i3GEOanimagifnumvertices").value
+		j = '{"colunat":"'
+			+ $i("i3GEOANIMAGIFcolunatSel").getElementsByTagName("select")[0].value
+			+ '","tipocolunat":"'
+			+ $i("i3GEOANIMAGIFtipocolunat").getElementsByTagName("select")[0].value
+			+ '","tempo":"'
+			+ $i("i3GEOANIMAGIFtempo").value
+			+ '","w":"'
+			+ $i("i3GEOANIMAGIFw").value
+			+ '","h":"'
+			+ $i("i3GEOANIMAGIFh").value
+			+ '","cache":"'
+			+ $i("i3GEOANIMAGIFcache").getElementsByTagName("select")[0].value
+			+ '","extensao":"'
+			+ $i("i3GEOANIMAGIFextensao").value
+			+ '","legenda":"'
+			+ $i("i3GEOANIMAGIFlegenda").getElementsByTagName("select")[0].value
+			+ '","transparente":"'
+			+ $i("i3GEOANIMAGIFtransparencia").getElementsByTagName("select")[0].value
+			+ '","operador":"'
+			+ $i("i3GEOANIMAGIFoperador").getElementsByTagName("select")[0].value
+			+ '","nulos":"'
+			+ $i("i3GEOANIMAGIFnulos").value
 			+ '","auto":"'
 			+ auto
 			+ '","exec":"'
@@ -307,7 +314,7 @@ i3GEOF.animagif =
 			par = "&g_sid=" + i3GEO.configura.sid
 			+ "&tema=" + i3GEOF.animagif.tema
 			+ "&animagif=" + i3GEO.util.base64encode(j)
-			+ "&funcao=incluianimagif";
+			+ "&funcao=inclui";
 
 			retorno =
 				function(retorno) {
@@ -324,7 +331,7 @@ i3GEOF.animagif =
 			p = i3GEO.configura.locaplic + "/ferramentas/animagif/manutencao.php";
 			par = "&g_sid=" + i3GEO.configura.sid
 			+ "&tema=" + i3GEOF.animagif.tema
-			+ "&funcao=removeanimagif";
+			+ "&funcao=remove";
 
 			retorno =
 				function(retorno) {
@@ -348,7 +355,7 @@ i3GEOF.animagif =
 			return;
 		}
 		par = "colunat=" + temp.value;
-		temp = $i("i3GEOANIMAGIFtipocolunat");
+		temp = $i("i3GEOANIMAGIFtipocolunat").getElementsByTagName("select")[0];
 		par += "&tipocolunat=" + temp.value;
 		temp = $i("i3GEOANIMAGIFtempo");
 		par += "&tempo=" + temp.value;
@@ -363,7 +370,7 @@ i3GEOF.animagif =
 		temp = $i("i3GEOANIMAGIFlegenda").getElementsByTagName("select")[0];
 		par += "&legenda=" + temp.value;
 		temp = $i("i3GEOANIMAGIFtransparencia").getElementsByTagName("select")[0];
-		par += "&transparencia=" + temp.value;
+		par += "&transparente=" + temp.value;
 		temp = $i("i3GEOANIMAGIFoperador").getElementsByTagName("select")[0];
 		par += "&operador=" + temp.value;
 		temp = $i("i3GEOANIMAGIFnulos");

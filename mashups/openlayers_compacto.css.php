@@ -1127,6 +1127,10 @@ background-size: 16px;
 background-image: URL('../imagens/oxygen/16x16/kmplayer.png');
 background-size: 16px;
 }
+.i3GEOiconeAnimagif {
+background-image: URL('../imagens/oxygen/16x16/tool-animator.png');
+background-size: 16px;
+}
 .i3GEOiconeAdd {
 background-image: URL('../imagens/gisicons/layer-add.png');
 background-size: 16px;

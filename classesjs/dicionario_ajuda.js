@@ -1650,6 +1650,19 @@ g_traducao_ajuda = {
 			es: "",
 			en: "",
 			apijs:"i3GEO.mapa.dialogo.mascara();"
+		},
+		"130": {
+			titulo: {
+				pt: "Anima&ccedil;&atilde;o Gif",
+				es: "",
+				en: ""
+			},
+			diretorio:"i3geo/ferramentas/animagif",
+			categoria:"5",
+			pt:"Gera uma anima&ccedil;&atilde;o no formato Gif por meio da cria&ccedil;&atilde;o de quadros baseados em uma coluna na tabela de atributos. Para cada valor &uacute;nico existente na coluna &eacute; aplicado um filtro. Ao sobrepor v&aacute;rias imagens, cria-se um arquivo Gif.",
+			es: "",
+			en: "",
+			apijs:"i3GEO.tema.dialogo.animagif()"
 		}
 	}
 };

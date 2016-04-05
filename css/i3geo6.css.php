@@ -1,7 +1,7 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>input{
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-input[type=text], textarea, input[type=number],{
+input[type=text], textarea, input[type=number]{
 -webkit-user-select: text;
 -khtml-user-select: text;
 -moz-user-select: text;
@@ -2607,6 +2607,10 @@ background-size: 16px;
 }
 .i3GEOiconeStorymap {
 background-image: URL('../imagens/oxygen/16x16/kmplayer.png');
+background-size: 16px;
+}
+.i3GEOiconeAnimagif {
+background-image: URL('../imagens/oxygen/16x16/tool-animator.png');
 background-size: 16px;
 }
 .i3GEOiconeAdd {

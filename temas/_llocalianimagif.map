@@ -1,7 +1,6 @@
 MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
-
   LAYER
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
@@ -11,6 +10,7 @@ MAP
       "TIP"	"TIPO,NOMELOC,ANOCRIA"
       "LTEMPOITEMDESCRICAO"	"TIPO"
       "CLASSE"	"SIM"
+      "animagif"	'{"colunat":"ANOCRIA","tipocolunat":"numero","tempo":"40","w":"500","h":"500","cache":"sim","extensao":"-114.697265 -46.735195 21.181642 17.864415","legenda":"nao","transparente":"sim","operador":"","nulos":"-","auto":"sim","exec":"nao"}'
       "LTEMPOITEMINICIO"	"ANOCRIA"
       "LTEMPOITEMTIP"	"ANOCRIA"
       "permitekmz"	"sim"

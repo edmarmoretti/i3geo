@@ -640,6 +640,11 @@ i3GEO.configura =
 										id : "omenudataFerramentasStoryMap",
 										text : "<span class='i3GEOiconeFerramenta i3GEOiconeStorymap'></span>StoryMap",
 										url : "javascript:i3GEO.tema.dialogo.storymap()"
+									},
+									{
+										id : "omenudataFerramentasAnimagif",
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeAnimagif'></span>Anima Gif",
+										url : "javascript:i3GEO.tema.dialogo.animagif()"
 									}
 								]
 							]
@@ -1824,7 +1829,7 @@ i3GEO.configura =
 		 */
 		ferramentasLayers : {
 			//lista de ferramentas que aceitam parametros embutidos em mapfiles
-			param : ["tme","storymap"],
+			param : ["tme","storymap","animagif"],
 			"tme" : {
 				"arvoreDeCamadas" : true,
 				"metadata" : "tme",
@@ -1881,6 +1886,37 @@ i3GEO.configura =
 							+ l
 							+ "\");return false;'"
 							+ "title='StoryMap' "
+							+ "src='"
+							+ i3GEO.configura.locaplic
+							+ "/imagens/branco.gif' />";
+					return icone;
+				}
+			},
+			"animagif" : {
+				"arvoreDeCamadas" : true,
+				"metadata" : "animagif",
+				"classe" : "i3GEOiconeAnimagif",
+				init : function (codigo){
+					window.open(i3GEO.configura.locaplic+"/ferramentas/animagif/index.php?&tema="+codigo);
+				},
+				icone : function(layer) {
+					var l, icone;
+					if(typeof layer != "string"){
+						if(layer.params.LAYERS){
+							l = layer.params.LAYERS;
+						} else{
+							l = layer.layername;
+						}
+					}
+					else{
+						l = layer;
+					}
+					icone =
+						"<img class='i3GEOiconeAnimagif' onclick='i3GEO.util.animaClique(this);"
+							+ "i3GEO.configura.ferramentasLayers.animagif.init(\""
+							+ l
+							+ "\");return false;'"
+							+ "title='Animagif' "
 							+ "src='"
 							+ i3GEO.configura.locaplic
 							+ "/imagens/branco.gif' />";

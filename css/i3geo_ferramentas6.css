@@ -1,7 +1,7 @@
 input{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-input[type=text], textarea, input[type=number],{
+input[type=text], textarea, input[type=number]{
 	-webkit-user-select: text;
     -khtml-user-select: text;
     -moz-user-select: text;
@@ -87,7 +87,6 @@ select option:hover {
       background-size: 16px 144px;
     }
 }
-
 
 .styled-select input:focus, .i3geoForm input:focus {
 	box-shadow: 0 0 1px blue inset;

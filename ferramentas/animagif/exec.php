@@ -17,6 +17,8 @@ if(empty($_GET)){
 		&operador = operador que ser&aacute; utilizado no filtro. Por default utilza-se 'igual a'. Pode ser ainda lt (menor que) ou gt (maior que)<br>
 		&nulos = lista de valores, separados por ',' que não serão considerados ao aplicar o filtro, por exemplo &nulos=-, ,0<br>
 		&tipocolunat = string|numero tipo de dados existentes na coluna que cont&eacute;m os valores para o filtro<br>
+		O tema pode ter par&acirc;metros j&aacute; armazenados no METADATA animagif, criado pelo formul&aacute;rio do i3Geo.
+		Para for&ccedil;ar o uso desses par&acirc;metros, basta passar &colunat como vazio.
 	";
 	exit;
 }
@@ -25,8 +27,32 @@ if(empty($_GET)){
 //http://localhost/i3geo/ferramentas/animagif/exec.php?nulos=-,0&transparente=sim&legenda=nao&tema=_llocalianimagif&colunat=ANOCRIA&w=500&h=500&mapext=-74%20-32%20-34%204&tipocolunat=string
 include("../../ms_configura.php");
 include("../../classesphp/funcoes_gerais.php");
-include("../../classesphp/pega_variaveis.php");
 include("../../classesphp/carrega_ext.php");
+//
+//verifica se existem parametros definidos no proprio mapfile
+//
+if(empty($_GET["colunat"])){
+	$nmapa = ms_newMapObj($locaplic."/temas/".$_GET["tema"].".map");
+
+	$layer = $nmapa->getlayerbyname($_GET["tema"]);
+
+	$animagif = $layer->getmetadata("animagif");
+	$animagif = json_decode($animagif,true);
+	$_GET["colunat"] = $animagif["colunat"];
+	$_GET["tempo"] = $animagif["tempo"];
+	$_GET["w"] = $animagif["w"];
+	$_GET["h"] = $animagif["h"];
+	$_GET["cache"] = $animagif["cache"];
+	$_GET["mapext"] = $animagif["mapext"];
+	$_GET["legenda"] = $animagif["legenda"];
+	$_GET["transparente"] = $animagif["transparente"];
+	$_GET["operador"] = $animagif["operador"];
+	$_GET["nulos"] = $animagif["nulos"];
+	$_GET["tipocolunat"] = $animagif["tipocolunat"];
+}
+
+include("../../classesphp/pega_variaveis.php");
+
 $v = versao();
 $vi = $v["inteiro"];
 $v = $v["principal"];
@@ -62,6 +88,7 @@ else{
 		$operador = ">";
 	}
 }
+
 $nulos = explode(",",$nulos);
 $arqtemp = $dir_tmp."/".$nometemp;
 if(file_exists($arqtemp.".gif")){

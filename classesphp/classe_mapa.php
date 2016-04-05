@@ -452,6 +452,14 @@ class Mapa
 					}
 					$ferramentas["storymap"] = json_decode($f);
 				}
+				//animagif
+				if($oLayer->getmetadata("animagif") != ""){
+					$f = $oLayer->getmetadata("animagif");
+					if (!mb_detect_encoding($f,"UTF-8",true)){
+						$f = mb_convert_encoding($f,"UTF-8","ISO-8859-1");
+					}
+					$ferramentas["animagif"] = json_decode($f);
+				}
 				//formatacao antiga, antes da versao 6.0
 				/*
 				 $temas[] = array(
