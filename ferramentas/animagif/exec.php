@@ -22,6 +22,7 @@ if(empty($_GET)){
 }
 //http://localhost/i3geo/ferramentas/animagif/exec.php?operador=lt&nulos=-&transparente=nao&legenda=sim&tema=_llocalianimagif&colunat=ANOCRIA&w=500&h=500&mapext=-74%20-32%20-34%204
 //http://localhost:8014/i3geo/ferramentas/animagif/exec.php?transparente=nao&legenda=sim&tema=dengue_casos_provaveis&colunat=semana_ano_epidemiologico&w=500&h=500&mapext=-74%20-32%20-34%204
+//http://localhost/i3geo/ferramentas/animagif/exec.php?nulos=-,0&transparente=sim&legenda=nao&tema=_llocalianimagif&colunat=ANOCRIA&w=500&h=500&mapext=-74%20-32%20-34%204&tipocolunat=string
 include("../../ms_configura.php");
 include("../../classesphp/funcoes_gerais.php");
 include("../../classesphp/pega_variaveis.php");
@@ -318,6 +319,7 @@ foreach($listaunica as $d){
 	}
 	$imagens[] = $nomec;
 	$duracao[] = $tempo;
+	//$mapa->save($arqtemp.".map");exit;
 }
 
 //junta as imagens no gif
