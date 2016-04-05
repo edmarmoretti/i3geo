@@ -38,6 +38,12 @@ if($cache == "nao"){
 if(empty($tempo)){
 	$tempo = 40;
 }
+if(empty($w)){
+	$w = 500;
+}
+if(empty($h)){
+	$h = 500;
+}
 if(empty($nulos)){
 	$nulos = "";
 }
@@ -106,6 +112,7 @@ else{
 		$base = $locaplic."/aplicmap/".$base;
 	}
 }
+
 //desenv /var/www/html/i3geo/i3geo/sage/camadas/base_linux.map
 $mapa = ms_newMapObj($base);
 
@@ -192,9 +199,12 @@ if($legenda == "sim"){
 	$leg->set("status",MS_EMBED);
 	$cor = $leg->imagecolor;
 	$cor->setrgb(250,250,250);
+
 	$labelleg = $leg->label;
-	$labelleg->set("type",MS_TRUETYPE);
+
+	$labelleg->updatefromstring("LABEL TYPE TRUETYPE END");
 	$labelleg->set("font","arial");
+
 	$labelleg->set("size",12);
 	$leg->set("keyspacingy",0);
 	$leg->set("keysizey",20);
@@ -219,6 +229,7 @@ if($transparente == "sim"){
 
 $mapa->save($arqtemp.".map");
 $mapa = ms_newMapObj($arqtemp.".map");
+
 /*
 if(validaAcessoTemas($arqtemp.".map",false) == true){
 	echo "Existem temas restritos";exit;
@@ -243,11 +254,11 @@ foreach($lista as $l){
 $layer = $mapa->getlayerbyname($tema);
 
 $copyright = $mapa->getlayerbyname("copyright");
-$classe = ms_newClassObj($copyright);
-
-$classet = ms_newClassObj($copyright);
-$classet->title = " ";
-
+if($copyright != ""){
+	$classe = ms_newClassObj($copyright);
+	$classet = ms_newClassObj($copyright);
+	$classet->title = " ";
+}
 $mapa->moveLayerdown(0);
 
 if($copyright != ""){
@@ -265,7 +276,6 @@ if($copyright != ""){
 $imagens = array();
 $duracao = array();
 $objImagem = "";
-
 foreach($listaunica as $d){
 	if(strtoupper($colunat) == $colunat){
 		$filtro = "(('[$colunat]' $operador '$d'))";
@@ -280,6 +290,7 @@ foreach($listaunica as $d){
 		}
 	}
 	$layer->setfilter($filtro);
+
 	$nomec = $arqtemp.$d.".png";
 
 	if($copyright != "" && $vi >= 60300){
@@ -289,12 +300,17 @@ foreach($listaunica as $d){
 	else{
 		$classe->title = $d;
 	}
+	//$mapa->save($arqtemp."teste.map");
 	if(!file_exists($nomec)){
 		if($objImagem == ""){
+			//$mapa->save($arqtemp.".map");
+			//echo $arqtemp.".map";
 			$objImagem = $mapa->draw();
 			$objImagem->saveImage($nomec);
 		}
 		else{
+			//$mapa->save($arqtemp.".map");
+			//echo $arqtemp.".map";
 			$i = $mapa->draw();
 			$objImagem->pasteImage($i,-1);
 			$objImagem->saveImage($nomec);
@@ -303,6 +319,7 @@ foreach($listaunica as $d){
 	$imagens[] = $nomec;
 	$duracao[] = $tempo;
 }
+
 //junta as imagens no gif
 
 include("../../pacotes/gifcreator/GifCreator.php");
@@ -312,6 +329,7 @@ $gc->create($imagens, $duracao, 0);
 $gifBinary = $gc->getGif();
 file_put_contents($arqtemp.".gif", $gifBinary);
 //retorna o gif para o navegador
+ob_clean();
 header('Content-type: image/gif');
 header('Content-Disposition: filename="'.$tema.'.gif"');
 echo $gifBinary;

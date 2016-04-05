@@ -418,6 +418,29 @@ i3GEO.tema =
 		 */
 		dialogo : {
 			/**
+			 * Function: animagif
+			 *
+			 * Abre a ferramenta animagif
+			 *
+			 * Parametros:
+			 *
+			 * {string} - codigo do tema escolhido
+			 */
+			animagif : function(tema) {
+				if(!tema){
+					tema = "";
+				}
+				var temp = function(){
+					i3GEOF.animagif.iniciaJanelaFlutuante(tema);
+				};
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.tema.dialogo.animagif()",
+					"animagif",
+					"animagif",
+					"dependencias.php",
+					temp);
+			},
+			/**
 			 * Function: tme
 			 *
 			 * Abre a ferramenta TME

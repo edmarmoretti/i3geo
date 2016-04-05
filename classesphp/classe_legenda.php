@@ -659,7 +659,7 @@ class Legenda
 				$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);
 			}
 			$l = $mapatemp->getlayer(0);
-			
+
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 			{
 				$novoss = dirname($this->mapa->symbolsetfilename)."\\".basename($mapatemp->symbolsetfilename);
@@ -669,7 +669,7 @@ class Legenda
 			}
 
 			$this->mapa->setsymbolset($novoss);
-			
+
 			$ns = $this->mapa->getnumsymbols();
 			$inis = 0;
 
@@ -977,35 +977,35 @@ class Legenda
 		$corres = $legenda->outlinecolor;
 		$cor = explode(",",$outlinecolor);
 		$corres->setRGB($cor[0],$cor[1],$cor[2]);
+
 		if ($status == 3)
 		{
 			$legenda->set("status",MS_EMBED);
-		} //MS_ON, MS_OFF, MS_EMBED
-		else
-		{$legenda->set("status",MS_OFF);
+		}
+		else{
+			$legenda->set("status",MS_OFF);
 		}
 		$verifica = $legenda->position;
-		if ($verifica < 100)
-		{
+		if ($verifica < 100){
 			if($position > 99){
 				$position = 3;
 			}
 		}
 		$legenda->set("position",$position);
+
 		$corres = $legenda->imagecolor;
 		$cor = explode(",",$imagecolor);
 		$corres->setRGB($cor[0],$cor[1],$cor[2]);
 		$label = $legenda->label;
-
 		if ($fonte != "bitmap")
 		{
-			$label->set("type",MS_TRUETYPE);
+			$label->updatefromstring("LABEL TYPE TRUETYPE END");
 			$label->set("font",$fonte);
 			$label->set("size",$labelsize);
 		}
 		else
 		{
-			$label->set("type",MS_BITMAP);
+			$label->updatefromstring("LABEL TYPE BITMAP END");
 			$t = MS_TINY;
 			if ($labelsize > 5 ){
 				$t = MS_TINY;
@@ -1024,6 +1024,7 @@ class Legenda
 			}
 			$label->set("size",$t);
 		}
+
 		return("ok");
 	}
 	/*
