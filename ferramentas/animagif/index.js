@@ -135,7 +135,7 @@ i3GEOF.animagif =
 				temp = $i("i3GEOANIMAGIFcache").getElementsByTagName("select")[0];
 				temp.value = camada.ferramentas.animagif.cache;
 				temp = $i("i3GEOANIMAGIFextensao");
-				temp.value = camada.ferramentas.animagif.extensao;
+				temp.value = camada.ferramentas.animagif.mapext;
 				temp = $i("i3GEOANIMAGIFlegenda").getElementsByTagName("select")[0];
 				temp.value = camada.ferramentas.animagif.legenda;
 				temp = $i("i3GEOANIMAGIFtransparencia").getElementsByTagName("select")[0];
@@ -245,7 +245,7 @@ i3GEOF.animagif =
 			+ "<div class='i3GeoTituloJanela'>animagif </span><a class=ajuda_usuario target=_blank href='"
 			+ i3GEO.configura.locaplic
 			+ "/ajuda_usuario.php?idcategoria=5&idajuda=130' ><b> </b></a></div>";
-		janela = i3GEO.janela.cria("380px", "320px", "", "", "", titulo, "i3GEOF.animagif", false, "hd", cabecalho, minimiza, "", true);
+		janela = i3GEO.janela.cria("380px", "380px", "", "", "", titulo, "i3GEOF.animagif", false, "hd", cabecalho, minimiza, "", true);
 		divid = janela[2].id;
 		i3GEOF.animagif.aguarde = $i("i3GEOF.animagif_imagemCabecalho").style;
 		$i("i3GEOF.animagif_corpo").style.backgroundColor = "white";
@@ -292,7 +292,7 @@ i3GEOF.animagif =
 			+ $i("i3GEOANIMAGIFh").value
 			+ '","cache":"'
 			+ $i("i3GEOANIMAGIFcache").getElementsByTagName("select")[0].value
-			+ '","extensao":"'
+			+ '","mapext":"'
 			+ $i("i3GEOANIMAGIFextensao").value
 			+ '","legenda":"'
 			+ $i("i3GEOANIMAGIFlegenda").getElementsByTagName("select")[0].value
@@ -366,7 +366,7 @@ i3GEOF.animagif =
 		temp = $i("i3GEOANIMAGIFcache").getElementsByTagName("select")[0];
 		par += "&cache=" + temp.value;
 		temp = $i("i3GEOANIMAGIFextensao");
-		par += "&extensao=" + temp.value;
+		par += "&mapext=" + temp.value;
 		temp = $i("i3GEOANIMAGIFlegenda").getElementsByTagName("select")[0];
 		par += "&legenda=" + temp.value;
 		temp = $i("i3GEOANIMAGIFtransparencia").getElementsByTagName("select")[0];
@@ -378,7 +378,7 @@ i3GEOF.animagif =
 
 		i3GEO.janela.cria(
 			(parseInt($i("i3GEOANIMAGIFw").value,10) + 50) + "px",
-			(parseInt($i("i3GEOANIMAGIFh").value,10) + 50) + "px",
+			(parseInt($i("i3GEOANIMAGIFh").value,10) + 150) + "px",
 			i3GEO.configura.locaplic+"/ferramentas/animagif/index.php?" + par + "&tema=" + i3GEOF.animagif.tema,
 			"",
 			"",

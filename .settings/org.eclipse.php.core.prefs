@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-include_path=0;/i3Geo 7.0
+include_path=0;/i3Geo 7
 org.eclipse.php.core.taskCaseSensitive=enabled
 org.eclipse.php.core.taskPriorities=NORMAL,HIGH,NORMAL,NORMAL,LOW,HIGH
 org.eclipse.php.core.taskTags=TODO,FIXME,XXX,@todo,ZODO,XODO
