@@ -58,4 +58,4 @@ nos web services automáticos gerados com i3geo/ogc.php
 
 Após instalar utilize o localhost/i3geo/testainstal.php para ver se está tudo certo.
 
-Esto es una prueba de acoiman
+
