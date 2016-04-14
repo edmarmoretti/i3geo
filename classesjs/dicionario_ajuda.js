@@ -29,8 +29,8 @@ g_traducao_ajuda = {
 		"3": {
 			titulo: {
 				pt: "Barra de escala",
-				es: "",
-				en: ""
+				es: "Escala gr&aacute;fica",
+				en: "Bar scale"
 			},
 			diretorio:"i3geo/ferramentas/opcoes_escala",
 			categoria:"1",
