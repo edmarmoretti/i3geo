@@ -1,7 +1,7 @@
 
 Interface Integrada para Internet de Ferramentas de Geoprocessamento.
 
-O i3geo È software livre licenciado sob GPL e integra o Portal do Software P˙blico Brasileiro.
+O i3geo √© software livre licenciado sob GPL e integra o Portal do Software P√∫blico Brasileiro.
 
 Veja:
 
@@ -9,15 +9,15 @@ licenca.txt
 
 https://softwarepublico.gov.br/social/i3geo/
 
-Se vc est· fazendo um upgrade do i3geo, faÁa cÛpia dos diretÛrios temas, aplicmap
+Se vc est√° fazendo um upgrade do i3geo, fa√ßa c√≥pia dos diret√≥rios temas, aplicmap
 e dos arquivos ms_configura.php. Consulte o documento i3geo/guia_de_migracao.txt para verificar
 quais cuidados vc deve tomar nos upgrades
 
 Comunidade: https://softwarepublico.gov.br/social/i3geo
 
-CÛdigo: https://softwarepublico.gov.br/gitlab/i3geo
+C√≥digo: https://softwarepublico.gov.br/gitlab/i3geo
 
-HistÛrico das versıes: https://softwarepublico.gov.br/social/i3geo/historico-das-versoes
+Hist√≥rico das vers√µes: https://softwarepublico.gov.br/social/i3geo/historico-das-versoes
 
 ---------
 
@@ -27,34 +27,35 @@ Isso permite que eventuais bugs sejam rapidamente corrigidos
 
 ---------
 
-Altere a senha da vari·vel $i3geomaster existente em ms_configura.php para desbloquear o i3geo.
+Altere a senha da vari√°vel $i3geomaster existente em ms_configura.php para desbloquear o i3geo.
 
 ---------
 
-Se vc È usu·rio linux, dÍ preferÍncia para instalar o i3geo no diretÛrio:
+Se vc √© usu√°rio linux, d√™ prefer√™ncia para instalar o i3geo no diret√≥rio:
 /var/www/html/i3geo
-e o diretÛrio tempor·rio em
+e o diret√≥rio tempor√°rio em
 /tmp/ms_tmp
-Assim vc n„o precisar· alterar os arquivos de configuraÁ„o.
+Assim vc n√£o precisar√° alterar os arquivos de configura√ß√£o.
 
 ---------
 
-A interface padr„o utilizada pelo i3geo utiliza o html interface/black_ol.htm.
+A interface padr√£o utilizada pelo i3geo utiliza o html interface/black_ol.htm.
 
-Para customizar essa interface, edite o arquivo html conforme a documentaÁ„o
-existente no prÛprio arquivo.
+Para customizar essa interface, edite o arquivo html conforme a documenta√ß√£o
+existente no pr√≥prio arquivo.
 
-… uma boa pr·tica fazer suas alteraÁıes em uma cÛpia da pasta i3geo/interface. Para utilizar a sua
+√â uma boa pr√°tica fazer suas altera√ß√µes em uma c√≥pia da pasta i3geo/interface. Para utilizar a sua
 interface, inicie o i3geo da seguinte forma:
 
 http://host/i3geo/minhapasta/minhainterface.htm
 
 ---------
 
-Edite o arquivo aplicmap/ogcws.map para incluir os dados da sua instituiÁ„o que ser„o mostrados
-nos web services autom·ticos gerados com i3geo/ogc.php
+Edite o arquivo aplicmap/ogcws.map para incluir os dados da sua institui√ß√£o que ser√£o mostrados
+nos web services autom√°ticos gerados com i3geo/ogc.php
 
 ---------
 
-ApÛs instalar utilize o localhost/i3geo/testainstal.php para ver se est· tudo certo.
+Ap√≥s instalar utilize o localhost/i3geo/testainstal.php para ver se est√° tudo certo.
+
 
