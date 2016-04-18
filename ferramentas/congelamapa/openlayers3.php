@@ -43,17 +43,6 @@ $urllayer = "../../ogc.php?tema=".$novo_mapfile;
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <script src="../../pacotes/ol3/ol.js"></script>
 <link rel="stylesheet" type="text/css" href="../../pacotes/ol3/ol.css">
-<style>
-.ol-zoom {
-	padding-left: 4px;
-	padding-right: 4px;
-	top: 2em;
-}
-
-.ol-zoomslider {
-	top: 6em;
-}
-</style>
 </head>
 <body style="background-color: white">
 	<div id=mapa style="width: 470px; height: 330px"></div>

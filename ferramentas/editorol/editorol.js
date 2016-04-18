@@ -77,9 +77,115 @@ i3GEO.editorOL =
 				useSpatialIndex : false,
 				name : "Backup"
 			}),
-			visible : false,
-			map : i3geoOL
+			//map : i3geoOL,
+			visible : false
 		}),
+		e_oce : new ol.layer.Tile({
+			title : "ESRI Ocean Basemap",
+			visible : false,
+			isBaseLayer : true,
+			name : "oce",
+			source : new ol.source.TileArcGISRest({
+				url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
+				attributions: [
+					new ol.Attribution({
+						html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
+					})
+				]
+			})
+		}),
+		e_ims : new ol.layer.Tile({
+			title : "ESRI Imagery World 2D",
+			visible : false,
+			isBaseLayer : true,
+			name : "ims",
+			source : new ol.source.TileArcGISRest({
+				url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
+				attributions: [
+					new ol.Attribution({
+						html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
+					})
+				]
+			})
+		}),
+		e_wsm : new ol.layer.Tile({
+			title : "ESRI World Street Map",
+			visible : false,
+			isBaseLayer : true,
+			name : "wsm",
+			source : new ol.source.TileArcGISRest({
+				url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
+				attributions: [
+					new ol.Attribution({
+						html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
+					})
+				]
+			})
+		}),
+		ol_mma : new ol.layer.Tile({
+			title : "Base carto MMA",
+			visible : false,
+			isBaseLayer : true,
+			name : "bra",
+			source : new ol.source.TileWMS({
+				url : "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
+				params : {
+					'layers' : "baseraster",
+					'srs' : "EPSG:4326",
+					'format' : "image/png"
+				}
+			})
+		}),
+		e_tms : new ol.layer.Tile({
+			title : "OSGEO",
+			visible : false,
+			isBaseLayer : true,
+			name : "tms",
+			source : new ol.source.TileWMS({
+				url : "http://tilecache.osgeo.org/wms-c/Basic.py/",
+				params : {
+					'layers' : "basic",
+					'type' : "png",
+					'srs' : "EPSG:4326",
+					'format' : "image/png",
+					'VERSION' : '1.1.1'
+				},
+				attributions: [
+					new ol.Attribution({
+						html: '&copy; <a href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
+					})
+				]
+			})
+		}),
+		top_wms : new ol.layer.Tile({
+			title : "Topon&iacute;mia MMA",
+			visible : false,
+			isBaseLayer : true,
+			name : "bra",
+			source : new ol.source.TileWMS({
+				url : "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseref.map&",
+				params : {
+					'layers' : "base",
+					'srs' : "EPSG:4326",
+					'format' : "image/png"
+				}
+			})
+		}),
+		est_wms : new ol.layer.Tile({
+			title : "Estados do Brasil",
+			visible : false,
+			isBaseLayer : true,
+			name : "bra",
+			source : new ol.source.TileWMS({
+				url : "http://mapas.mma.gov.br/i3geo/ogc.php?tema=estadosl&",
+				params : {
+					'layers' : "estadosl",
+					'srs' : "EPSG:4326",
+					'format' : "image/png"
+				}
+			})
+		}),
+		fundo: "e_ims,e_wsm,ol_mma,ol_wms,top_wms,est_wms,e_oce",
 		nomeFuncaoSalvar : "i3GEO.editorOL.salvaGeo()",
 		kml : [],
 		layersIniciais : [],
@@ -133,8 +239,51 @@ i3GEO.editorOL =
 		idsSelecionados : [],
 		//backup das features
 		featuresBackup : [],
+		resolutions : [],
+		matrixIds : [],
 		//utilizado pelo mashup
 		inicia : function() {
+			/*
+			var temp = i3GEO.editorOL.minresolution,
+				r = [ i3GEO.editorOL.minresolution ];
+			for (var j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
+				temp = temp / 2;
+				r.push(temp);
+			}
+			*/
+			var projectionExtent, size,resolutions,matrixIds,z;
+			if (i3GEO.Interface.openlayers.googleLike === true) {
+				projectionExtent = ol.proj.get('EPSG:3857').getExtent();
+			} else {
+				projectionExtent = ol.proj.get('EPSG:4326').getExtent();
+			}
+			size = ol.extent.getWidth(projectionExtent) / 256;
+			resolutions = new Array(40);
+			matrixIds = new Array(40);
+			for (z = 0; z < 40; ++z) {
+				resolutions[z] = size / Math.pow(2, z);
+				matrixIds[z] = z;
+			}
+			i3GEO.editorOL.resolutions = resolutions;
+			i3GEO.editorOL.matrixIds = matrixIds;
+
+			i3GEO.editorOL.incluilayergrafico = true;
+
+			i3GEO.Interface.openlayers.parametrosView = {
+				projection : "EPSG:4326",
+				resolutions: resolutions,
+				minResolution: i3GEO.editorOL.minresolution,
+				maxResolution: resolutions[i3GEO.editorOL.numzoom]
+			};
+			i3GEO.Interface.openlayers.parametrosMap = {
+				target : "i3geoMapa",
+				layers : [],
+				controls : []
+			};
+
+			i3GEO.Interface.openlayers.cria();
+			i3GEO.editorOL.mapa = i3geoOL;
+
 			// ativabotoes e boolean
 			if(i3GEO.editorOL.controles.length === 0){
 				i3GEO.editorOL.controles = [
@@ -197,10 +346,6 @@ i3GEO.editorOL =
 				i3GEO.editorOL.botoes.frente = false;
 				i3GEO.editorOL.botoes.novaaba = false;
 			}
-			if (i3GEO.editorOL.mapa === "") {
-				alert("O objeto i3GEO.editorOL.mapa nao existe. Precisa ser criado com new OpenLayers.Map()");
-				return;
-			}
 			for (i = 0; i < ncontroles; i++) {
 				i3GEO.editorOL.mapa.addControl(i3GEO.editorOL.controles[i]);
 			}
@@ -238,7 +383,7 @@ i3GEO.editorOL =
 			i3GEO.editorOL.adicionaMarcas();
 
 			i3GEO.editorOL.coordenadas();
-			i3GEO.editorOL.criaJanelaBusca();
+			//i3GEO.editorOL.criaJanelaBusca();
 			i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
 			if (i3GEO.editorOL.ativalayerswitcher === true) {
 				i3GEO.editorOL.ativaLayerSwitcher();
@@ -246,26 +391,27 @@ i3GEO.editorOL =
 			if (i3GEO.editorOL.ativarodadomouse === false) {
 				i3GEO.editorOL.desativaRodaDoMouse();
 			}
-
+			//TODO testar numzoom
+			/*
 			if (i3GEO.editorOL.numzoom !== "") {
-				i3GEO.editorOL.mapa.setOptions({
-					numZoomLevels : i3GEO.editorOL.numzoom
+				i3GEO.editorOL.mapa.getView().setOptions({
+					minResolution : i3GEO.editorOL.minresolution,
+					maxResolution :
 				});
 			}
+			*/
 			if (i3GEO.editorOL.maxext !== "") {
-				i3GEO.editorOL.mapa.setOptions({
-					maxExtent : i3GEO.editorOL.maxext
+				i3GEO.editorOL.mapa.getView().setProperties({
+					extent : i3GEO.editorOL.maxext
 				});
 			}
 			if (i3GEO.editorOL.mapext != "") {
 				var m = i3GEO.util.extGeo2OSM(i3GEO.editorOL.mapext);
 				i3GEO.editorOL.mapa.zoomToExtent(m);
-			} else {
-				i3GEO.editorOL.mapa.zoomToMaxExtent();
 			}
-			i3GEO.editorOL.sobeLayersGraficos();
+			//i3GEO.editorOL.sobeLayersGraficos();
 			// evita que botoes de opcoes propaguem
-			// o mashup utiliza esse tipo de botal junto ao nome do layer
+			// o mashup utiliza esse tipo de botao junto ao nome do layer
 			temp = i3GEO.editorOL.pegaControle("OpenLayers.Control.LayerSwitcher");
 			if (temp) {
 				temp = temp.dataLayersDiv.getElementsByTagName("label");
@@ -2436,12 +2582,14 @@ i3GEO.editorOL =
 			}
 		},
 		sobeLayersGraficos : function() {
+			/*
 			var nlayers = i3GEO.editorOL.mapa.getNumLayers(), layers = i3GEO.editorOL.mapa.layers, i;
 			for (i = 0; i < nlayers; i++) {
 				if (layers[i].CLASS_NAME == "OpenLayers.Layer.Vector" && layers[i].name != "Nenhum") {
 					i3GEO.editorOL.mapa.raiseLayer(i3GEO.editorOL.mapa.layers[i], nlayers);
 				}
 			}
+			*/
 		}
 	};
 

@@ -1,4 +1,253 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>/*
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>input{
+font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+input[type=text], textarea, input[type=number]{
+-webkit-user-select: text;
+-khtml-user-select: text;
+-moz-user-select: text;
+-o-user-select: text;
+user-select: text;
+}
+input[type=text] {
+font-size: 10px;
+color: #2F4632;
+background-color: rgb(250, 250, 250);
+padding: 0;
+border: 1px solid rgb(180, 180, 180);
+text-align: center;
+cursor: text;
+height: 22px;
+}
+input[type=number] {
+font-size: 12px;
+color: #2F4632;
+background-color: rgb(250, 250, 250);
+padding: 0;
+border: 1px solid rgb(180, 180, 180);
+text-align: center;
+cursor: text;
+height: 26px;
+}
+input[type=checkbox] {
+border: 0px solid white;
+}
+input[type=file] {
+border: 0px solid white;
+background-color: none;
+background: none;
+}
+select {
+box-shadow: 1px 1px 3px 0 lightgray;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 10px;
+color: #2F4632;
+background-color: #FFFFFF;
+padding: 0;
+border: 1px solid rgb(230, 230, 230);
+text-align: left;
+cursor: pointer;
+}
+select option:hover {
+background-color: #CCFFFF;
+}
+.inputsb {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 10px;
+color: #2F4632;
+background-color: #FFFFFF;
+padding: 0;
+border: 0px solid gray;
+text-align: center;
+cursor: text;
+}
+.styled-select input, .styled-select150 input {
+width: 100%;
+height: 22px;
+border: 0;
+box-shadow: none;
+line-height: 1.5;
+-webkit-appearance: none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+font-size: 12px;
+appearance: none;
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
+background-size: 16px 144px;
+}
+}
+.styled-select input:focus, .i3geoForm input:focus {
+box-shadow: 0 0 1px blue inset;
+background: white none repeat scroll 0 0;
+}
+.i3geoForm, .i3geoForm150, .i3geoForm100 {
+width: 252px;
+overflow: hidden;
+background: #F8F8F8;
+border: 1px solid #DDDDDD;
+height: 22px;
+border-radius: 2px;
+}
+.i3geoForm150 {
+width: 150px;
+}
+.i3geoForm100 {
+width: 100px;
+}
+.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
+width: 90%;
+height: 22px;
+border: 0;
+box-shadow: none;
+line-height: 1.5;
+-webkit-appearance: none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+font-size: 12px;
+appearance: none;
+cursor: text;
+}
+.i3geoForm100 input[type=number] {
+width: 85%;
+}
+.i3geoFormIconeMinuto {
+background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px / 18px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px;
+background-size: 18px 144px;
+}
+}
+.i3geoFormIconeMinuto input{
+width: 85%;
+}
+.i3geoFormIconeSegundo {
+background: transparent url("../imagens/gisicons/segundo.png") no-repeat scroll 100% -1px / 18px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/segundo.png") no-repeat scroll 100% -1px;
+background-size: 18px 144px;
+}
+}
+.i3geoFormIconeSegundo input{
+width: 85%;
+}
+.i3geoFormIconeLongitude {
+background: transparent url("../imagens/gisicons/longitude.png") no-repeat scroll 100% 2px / 18px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/longitude.png") no-repeat scroll 100% 2px;
+background-size: 18px 144px;
+}
+}
+.i3geoFormIconeLongitude input{
+width: 70%;
+}
+.i3geoFormIconeLatitude {
+background: transparent url("../imagens/gisicons/latitude.png") no-repeat scroll 100% 2px / 18px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/latitude.png") no-repeat scroll 100% 2px;
+background-size: 18px 144px;
+}
+}
+.i3geoFormIconeLatitude input{
+width: 70%;
+}
+.i3geoFormIconeDistancia {
+background: transparent url("../imagens/gisicons/length-measure.png") no-repeat scroll 100% 2px / 18px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/length-measure.png") no-repeat scroll 100% -2px;
+background-size: 16px 144px;
+}
+}
+.i3geoFormIconeEdita {
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
+background-size: 16px 144px;
+}
+}
+.i3geoFormIconeUsuario {
+background: transparent url("../imagens/oxygen/22x22/system-users.png") no-repeat scroll 100% 0px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/oxygen/22x22/system-users.png") no-repeat scroll 100% 0px;
+background-size: 16px 144px;
+}
+}
+.i3geoFormIconeSenha {
+background: transparent url("../imagens/oxygen/22x22/preferences-desktop-user-password.png") no-repeat scroll 100% 0px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/oxygen/22x22/preferences-desktop-user-password.png") no-repeat scroll 100% 0px;
+background-size: 16px 144px;
+}
+}
+.i3geoFormSemIcone {
+background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
+background-size: 16px 144px;
+}
+}
+.i3geoFormTag {
+background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
+background-size: 16px 144px;
+}
+border-radius: 8px;
+background-color: #F0F0F0;
+cursor: pointer;
+}
+.i3geoFormIconeAquarela {
+cursor: pointer;
+background: transparent url("../imagens/aquarela.gif") no-repeat scroll 98% 5px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/aquarela.gif") no-repeat scroll 100% 5px;
+background-size: 16px 144px;
+}
+}
+.i3geoFormIconeAquarela input{
+width: 80%;
+}
+.i3geoFormIconeGlobo {
+background: transparent url("../imagens/gisicons/projection.png") no-repeat scroll 100% 2px / 18px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/projection.png") no-repeat scroll 100% 2px;
+background-size: 18px 144px;
+}
+}
+.i3geoFormIconeGlobo input{
+width: 70%;
+}
+.i3geoFormIconeNumero {
+background: transparent url("../imagens/oxygen/16x16/number.png") no-repeat scroll 100% 4px / 14px;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/oxygen/16x16/number.png") no-repeat scroll 100% 4px;
+background-size: 14px 144px;
+}
+}
+/*hack opera */
+@media all and (-webkit-min-device-pixel-ratio:10000) , not all and
+(-webkit-min-device-pixel-ratio:0) {
+.inputsb {
+border: 1px solid black
+}
+}
+/*
 para nao selecionar
 */
 * {
@@ -8,12 +257,19 @@ para nao selecionar
 -o-user-select: none;
 user-select: none;
 }
-input[type=text], textarea{
+.bd input, .bd textarea {
 -webkit-user-select: text;
 -khtml-user-select: text;
 -moz-user-select: text;
 -o-user-select: text;
 user-select: text;
+}
+#i3GEOcopyright{
+display: block;
+top: 0px;
+left: 40px;
+zIndex: 5000;
+position: absolute;
 }
 /*
 Para nao marcar links
@@ -157,11 +413,11 @@ margin-left: 30px;
 cursor: move;
 }
 .i3GEOarvCamGrupo {
-font-size: 15px;
+font-size: 13px;
 margin: auto;
 text-align: left;
 cursor: pointer;
-top: 1px;
+top: -1px;
 font-weight : bold;
 }
 .i3GEOarvCamTema {
@@ -214,6 +470,9 @@ background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
 }
 .i3GEOarvCamTemaIco .arvCamDownload, .i3GEOarvCamTemaIcoIE .Download {
 background-image: url("../imagens/oxygen/16x16/download.png");
+}
+.i3GEOarvCamTemaIco .arvCamOgc, .i3GEOarvCamTemaIcoIE .Ogc {
+background-image: url("../imagens/oxygen/16x16/application-x-smb-workgroup.png");
 }
 .i3GEOarvCamTemaIco .arvCamFonte, .i3GEOarvCamTemaIcoIE .Fonte {
 background-image: url("../imagens/oxygen/16x16/help-about.png");
@@ -573,38 +832,6 @@ text-align: center;
 font-size: 12px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-input {
-font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 10px;
-color: #2F4632;
-background-color: #FFFFFF;
-padding: 0;
-border: 1px solid rgb(180, 180, 180);
-text-align: center;
-cursor: text;
-}
-input[type=checkbox] {
-border: 0px solid white;
-}
-input[type=file] {
-border: 0px solid white;
-background-color: none;
-background: none;
-}
-select {
-box-shadow: 1px 1px 3px 0 lightgray;
-font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 10px;
-color: #2F4632;
-background-color: #FFFFFF;
-padding: 0;
-border: 1px solid rgb(230, 230, 230);
-text-align: left;
-cursor: pointer;
-}
-select option:hover {
-background-color: #CCFFFF;
-}
 .ajuda_usuario {
 background-image: url(../imagens/oxygen/16x16/dialog-information.png);
 background-position: 0px 0px;
@@ -635,16 +862,6 @@ border-style: outset;
 background-position: right;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 10px;
-}
-.inputsb {
-font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 10px;
-color: #2F4632;
-background-color: #FFFFFF;
-padding: 0;
-border: 0px solid gray;
-text-align: center;
-cursor: text;
 }
 .legendatemas {
 cursor: pointer;
@@ -1232,99 +1449,6 @@ background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll
 (min-resolution: 192dpi) {
 background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
 background-size: 16px 144px;
-}
-}
-.styled-select input, .styled-select150 input {
-width: 100%;
-height: 22px;
-border: 0;
-box-shadow: none;
-line-height: 1.5;
--webkit-appearance: none;
--moz-appearance: none;
-text-indent: 0.01px;
-text-overflow: '';
-font-size: 12px;
-appearance: none;
-background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
-background-size: 16px 144px;
-}
-}
-.i3geoForm, .i3geoForm150, .i3geoForm100 {
-width: 252px;
-overflow: hidden;
-background: #F8F8F8;
-border: 1px solid #DDDDDD;
-height: 22px;
-border-radius: 2px;
-}
-.i3geoForm150 {
-width: 150px;
-}
-.i3geoForm100 {
-width: 100px;
-}
-.i3geoFormIconeEdita {
-background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
-background-size: 16px 144px;
-}
-}
-.i3geoFormSemIcone {
-background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
-background-size: 16px 144px;
-}
-}
-.i3geoFormTag {
-background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
-background-size: 16px 144px;
-}
-border-radius: 8px;
-background-color: #F0F0F0;
-cursor: pointer;
-}
-.i3geoFormIconeAquarela {
-cursor: pointer;
-background: transparent url("../imagens/aquarela.gif") no-repeat scroll 98% 5px;
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-background: transparent url("../imagens/aquarela.gif") no-repeat scroll 100% 5px;
-background-size: 16px 144px;
-}
-}
-.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
-width: 90%;
-height: 22px;
-border: 0;
-box-shadow: none;
-line-height: 1.5;
--webkit-appearance: none;
--moz-appearance: none;
-text-indent: 0.01px;
-text-overflow: '';
-font-size: 12px;
-appearance: none;
-cursor: text;
-}
-.i3geoFormIconeAquarela input{
-width: 80%;
-}
-/*hack opera */
-@media all and (-webkit-min-device-pixel-ratio:10000) , not all and
-(-webkit-min-device-pixel-ratio:0) {
-.inputsb {
-border: 1px solid black
 }
 }
 /* esconde na impressao */
@@ -2396,6 +2520,10 @@ float: left;
 background-image: url("../imagens/oxygen/16x16/edit-delete.png");
 cursor: pointer;
 }
+.i3GEOiconewkt2layer{
+background-image: URL('../imagens/gisicons/layer.png');
+background-size: 16px;
+}
 .i3GEOiconeMascara{
 background-image: URL('../imagens/gisicons/layer-show.png');
 background-size: 16px;
@@ -2488,6 +2616,10 @@ background-size: 16px;
 background-image: URL('../imagens/oxygen/16x16/kmplayer.png');
 background-size: 16px;
 }
+.i3GEOiconeAnimagif {
+background-image: URL('../imagens/oxygen/16x16/tool-animator.png');
+background-size: 16px;
+}
 .i3GEOiconeAdd {
 background-image: URL('../imagens/gisicons/layer-add.png');
 background-size: 16px;
@@ -2498,6 +2630,28 @@ background-size: 16px;
 }
 .i3GEOiconeUpload {
 background-image: URL('../imagens/oxygen/16x16/svn-commit.png');
+}
+.i3GEOiconeEditar {
+width: 16px;
+height: 16px;
+border: 0;
+box-shadow: none;
+line-height: 1.5;
+-webkit-appearance: none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+font-size: 12px;
+appearance: none;
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll;
+background-size: 16px 16px;
+}
+}
+#i3GEOiconeEditarHover:hover + div{
+display: block;
 }
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
 li	{margin-top:-10px;margin-bottom:15px;}
@@ -3623,6 +3777,12 @@ background-position:-812px -28px;
 }
 .olControlEditingToolbar1 .editorOLselecaoTudoItemInactive {
 background-position:-812px -0px;
+}
+.olControlEditingToolbar1 .editorOLnovaabaItemActive {
+background-position:-841px -28px;
+}
+.olControlEditingToolbar1 .editorOLnovaabaItemInactive {
+background-position:-841px -0px;
 }
 .olControlEditingToolbar1 {
 width:750px;

@@ -15,7 +15,8 @@ $url = strip_tags("./exec.php?".$_SERVER["QUERY_STRING"]);
 	</head>
 	<body>
 		<center>
-			<img id="anima" src="<?php echo $url; ?>" rel:animated_src="<?php echo $url; ?>" rel:auto_play="1" width="<?php echo $_GET["w"]?>" height="<?php echo $_GET["h"]?>" />
+			<div id="aguarde" style="display:block;">Aguarde...</div>
+			<img id="anima" onload="document.getElementById('aguarde').style.display='none';" src="<?php echo $url; ?>" rel:animated_src="<?php echo $url; ?>" rel:auto_play="1" width="<?php echo $_GET["w"]?>" height="<?php echo $_GET["h"]?>" />
 			<br>
 			<script type="text/javascript">
 				var sup1 = new SuperGif({ gif: document.getElementById('anima') } );
@@ -27,7 +28,7 @@ $url = strip_tags("./exec.php?".$_SERVER["QUERY_STRING"]);
 			<button style="cursor:pointer;" onclick="sup1.move_relative(-1); return false;"><img src='../../imagens/player_volta.png' /></button>
 			<button style="cursor:pointer;" onclick="sup1.move_relative(1); return false;"><img src='../../imagens/player_avanca.png' /></button> &nbsp;
 			<br><br>
-			<a href="<?php echo $url; ?>" >Download</a>
+			<a href="<?php echo $url; ?>" target="_blank">Download</a>
 		</center>
 	</body>
 </html>
