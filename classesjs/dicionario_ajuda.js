@@ -2,7 +2,7 @@ g_traducao_ajuda = {
 	ferramentas: {
 		"1": {
 			titulo: {
-				pt: "Filtro de cores",
+				pt: "Filtro de cores ",
 				es: "Filtro de colores",
 				en: "Color filter"
 			},
