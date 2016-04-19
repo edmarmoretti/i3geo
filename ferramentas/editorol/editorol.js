@@ -243,14 +243,6 @@ i3GEO.editorOL =
 		matrixIds : [],
 		//utilizado pelo mashup
 		inicia : function() {
-			/*
-			var temp = i3GEO.editorOL.minresolution,
-				r = [ i3GEO.editorOL.minresolution ];
-			for (var j = 0; j < (i3GEO.editorOL.numzoom - 1); j++) {
-				temp = temp / 2;
-				r.push(temp);
-			}
-			*/
 			var projectionExtent, size,resolutions,matrixIds,z;
 			if (i3GEO.Interface.openlayers.googleLike === true) {
 				projectionExtent = ol.proj.get('EPSG:3857').getExtent();
@@ -352,16 +344,8 @@ i3GEO.editorOL =
 			if (i3GEO.editorOL.fundo != "") {
 				for (i = nfundo - 1; i >= 0; i--) {
 					if (fundo[i] != "") {
-						try {
-							i3GEO.editorOL[fundo[i]].transitionEffect = 'resize';
-							i3GEO.editorOL[fundo[i]].setVisibility(false);
-							i3GEO.editorOL[fundo[i]].singleTile = false;
-							alayers.push(i3GEO.editorOL[fundo[i]]);
-						} catch (e) {
-							if (alayers[0]) {
-								alayers[0].setVisibility(true);
-							}
-						}
+						alayers.push(i3GEO.editorOL[fundo[i]]);
+						i3GEO.editorOL[fundo[i]].setVisibility(true);
 					}
 				}
 			}
@@ -518,7 +502,7 @@ i3GEO.editorOL =
 			var layers = i3GEO.editorOL.layersLigados(), nlayers = layers.length, i, ins, combo =
 				"<select id=i3GEOOLlistaTemasBusca ><option value=''>----</option>";
 			for (i = 0; i < nlayers; i++) {
-				combo += "<option value='" + i + "' >" + layers[i].name + "</option>";
+				combo += "<option value='" + i + "' >" + layers[i].getProperties().name + "</option>";
 			}
 			combo += "</select>";
 			ins = "<div class=paragrafo >" + $trad("a7") + ":<br>" + combo;

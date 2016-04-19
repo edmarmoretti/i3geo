@@ -118,26 +118,19 @@ if(isset($controles)){
 	$controles = strtolower($controles);
 	$controles = explode(",",$controles);
 	if(in_array("navigation",$controles)){
-		$objControles[] = "new OpenLayers.Control.Navigation()";
+		$objControles[] = "new ol.control.Zoom()";
 	}
 	if(in_array("panzoombar",$controles)){
-		$objControles[] = "new OpenLayers.Control.PanZoomBar()";
-	}
-	if(in_array("layerswitcher",$controles)){
-		$objControles[] = "new OpenLayers.Control.LayerSwitcher({'ascending':false})";
+		$objControles[] = "new ol.control.ZoomSlider()";
 	}
 	if(in_array("scaleline",$controles)){
-		$objControles[] = "new OpenLayers.Control.ScaleLine()";
+		$objControles[] = "new ol.control.ScaleLine()";
 	}
-	if(in_array("mouseposition",$controles))
-	{
-		$objControles[] = "new OpenLayers.Control.MousePosition({'separator':' '})";
+	if(in_array("mouseposition",$controles)){
+		$objControles[] = "new ol.control.MousePosition({coordinateFormat : function(c){return ol.coordinate.toStringHDMS(c);}})";
 	}
 	if(in_array("overviewmap",$controles)){
-		$objControles[] = "new OpenLayers.Control.OverviewMap()";
-	}
-	if(in_array("keyboarddefaults",$controles)){
-		$objControles[] = "new OpenLayers.Control.KeyboardDefaults()";
+		$objControles[] = "new ol.control.OverviewMap()";
 	}
 }
 //
@@ -385,6 +378,8 @@ if($temas != ""){
 							projection : "EPSG:4326",
 							ferramentas :'.$ferramentas.',
 							extent :'.$e.',
+							title: "'. $tituloLayer .'",
+							name: "'. $tema .'",
 							source: new ol.source.WMTS({
 								url : "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&tms=",
 								tileGrid : new ol.tilegrid.WMTS({
@@ -426,10 +421,19 @@ if($temas != ""){
 								$teffect = 'transitionEffect: null,';
 							}
 							if($tituloLayer != ""){
-								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.', ferramentas :'.$ferramentas.'})';
-							}
-							else{
-								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' displayInLayerSwitcher:false,singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.', ferramentas :'.$ferramentas.'})';
+								$url = $servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&';
+								$objOpenLayers[] = 'new ol.layer.Image({
+									extent: ['. $mapext .'],
+									source: new ol.source.ImageWMS({
+										url: "'. $url .'",
+										params: {
+											opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"
+										},
+										serverType: "geoserver"
+									}),
+									title: "'. $tituloLayer .'",
+									name: "'. $tema .'"
+								})';
 							}
 						}
 					}
@@ -648,6 +652,16 @@ if(count($temasPluginI3Geo) > 0){
 	top: 2px;
 	font-size: 13px;
 }
+.ol-mouse-position {
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.ol-overlaycontainer-stopevent .olControlEditingToolbar1 {
+	top: 15px;
+}
+
 </style>
 </head>
 <body class=" yui-skin-sam">

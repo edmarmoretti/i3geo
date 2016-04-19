@@ -226,10 +226,10 @@ Alt-left - In&iacute;cio da linha<br>
 			<?php
 			$mapfile = str_replace("\\","/",$mapfile);
 			if(!empty($extensao)){
-				echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?mapext=".$extensao."&servidor=../admin/php/preview.php&fundo=e_wsm&nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=550&altura=400&temas=".$mapfile."' style='position:relative;top:2px;overflow:hidden;width:100%;height:450px;border:0px solid gray;'>";
+				echo "<iframe id='mapaPreview' src='../../mashups/openlayers3.php?mapext=".$extensao."&servidor=../admin/php/preview.php&fundo=e_wsm&nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=550&altura=400&temas=".$mapfile."' style='position:relative;top:2px;overflow:hidden;width:100%;height:450px;border:0px solid gray;'>";
 			}
 			else{
-				echo "<iframe id='mapaPreview' src='../../mashups/openlayers.php?servidor=../admin/php/preview.php&fundo=e_wsm&nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=550&altura=400&temas=".$mapfile."' style='position:relative;top:2px;overflow:hidden;width:100%;height:450px;border:0px solid gray;'>";
+				echo "<iframe id='mapaPreview' src='../../mashups/openlayers3.php?servidor=../admin/php/preview.php&fundo=e_wsm&nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=550&altura=400&temas=".$mapfile."' style='position:relative;top:2px;overflow:hidden;width:100%;height:450px;border:0px solid gray;'>";
 			}
 			echo "</iframe>";
 			echo "<input type=hidden name=tipo value=gravar />";
