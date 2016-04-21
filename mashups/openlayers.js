@@ -1,1 +1,0 @@
-alert("mashups/openlayers.js foi depreciado. Utilize classesjs/compactados/classe_editorol_compacto.js");

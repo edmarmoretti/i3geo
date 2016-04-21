@@ -1579,11 +1579,18 @@ i3GEO.editorOL =
 					var xy, p, retorno, url, layer, tema = $i("i3GEOOLlistaTemasAtivos");
 					if(tema){
 						layer = i3geoOL.getLayersByName(tema.value)[0];
-						url = layer.getSource().getUrls()[0];
+						if(layer.getSource().getUrls){
+							url = layer.getSource().getUrls()[0];
+						}
+						else{
+							url = layer.getSource().getUrl();
+						}
 						xy = evt.target.downPx_;
 						retorno = function(r){
-							var valorunico = "", camada, texto = "", lonlattexto, xy, temp, temp1, n, i, f = [], textoN = r.split(":");
-							camada = i3GEO.arvoreDeCamadas.pegaTema(tema.value, "", "name");
+							var valorunico = "", camada = null, texto = "", lonlattexto, xy, temp, temp1, n, i, f = [], textoN = r.split(":");
+							if(i3GEO.arvoreDeCamadas){
+								camada = i3GEO.arvoreDeCamadas.pegaTema(tema.value, "", "name");
+							}
 							xy = evt.feature.getGeometry().getFirstCoordinate();
 							i3GEO.eventos.cliquePerm.ativo = true;
 							try {
@@ -1600,7 +1607,7 @@ i3GEO.editorOL =
 										temp1 = temp1.replace(/\s+$/, "");
 										if (temp1 != ""){
 											//verifica se a coluna eh o idunico e pega o valor
-											if(camada.colunaidunico != "" && temp1.split(":")[0].trim() == camada.colunaidunico){
+											if(camada && camada.colunaidunico != "" && temp1.split(":")[0].trim() == camada.colunaidunico){
 												valorunico = temp1.split(":")[1].trim();
 												temp1 = "(*) "+temp1;
 											}
@@ -1631,8 +1638,8 @@ i3GEO.editorOL =
 							+ "&LAYERS=" + tema.value
 							+ "&layer=" + tema.value
 							+ "&QUERY_LAYERS=" + tema.value
-							+ "&HEIGHT=" + i3GEO.parametros.h
-							+ "&WIDTH=" + i3GEO.parametros.w
+							+ "&HEIGHT=" + i3geoOL.getSize()[1]
+							+ "&WIDTH=" + i3geoOL.getSize()[0]
 							+ "&BBOX=" + i3geoOL.getExtent().toBBOX().split(",").join(" ")
 							+ "&X=" + xy[0] + "&Y=" + xy[1];
 						cpJSON.call(p, "foo", retorno, "");

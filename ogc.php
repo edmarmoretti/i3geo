@@ -80,6 +80,9 @@ ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 set_time_limit(0);
 ini_set('memory_limit', '512M');
 
+if(isset($_GET["BBOX"])){
+	$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
+}
 if(isset($_GET["TileMatrix"])){
 	$_GET["WIDTH"] = 256;
 	$_GET["HEIGHT"] = 256;

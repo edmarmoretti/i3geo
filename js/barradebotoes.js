@@ -976,9 +976,9 @@ i3GEO.barraDeBotoes =
 				divBarra.style.top = "-30px";
 				deslocaIcones = -50;
 				imagens.push('<div style="left: 0px; z-index: 1; border: 0px solid black; top: 0px; position: relative; text-align: center; margin: auto;" id="euDock_0_bar" class="noprint">');
-				imagens.push('<img onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" id="euDock_euImage_2" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
-				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
-				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
+				imagens.push('<img onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" id="euDock_euImage_2" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/imagens/dockBg-l.png">');
+				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/imagens/dockBg-c-o.png" >');
+				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/imagens/dockBg-r.png" >');
 				imagens.push('</div>');
 				imagens.push('<div style="margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: ' + deslocaIcones + 'px; width: ' + l + 'px; height: 38px;" id="euDock_0" class="noprint">');
 				//inclui os icones
@@ -988,9 +988,9 @@ i3GEO.barraDeBotoes =
 			}
 			else{
 				imagens.push('<div style="left: 0px; z-index: 1; border: 0px solid black; top: 0px; position: relative; text-align: center; margin: auto;" id="euDock_0_bar" class="noprint">');
-				imagens.push('<img id="euDock_euImage_2" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-l.png">');
-				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-c-o.png" >');
-				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/pacotes/eudock/barImages/dockBg-r.png" >');
+				imagens.push('<img id="euDock_euImage_2" onclick="javascript:i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.ajudaEmLista()" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/imagens/dockBg-l.png">');
+				imagens.push('<img id="euDock_euImage_3" width="' + l + '" height="28" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/imagens/dockBg-c-o.png" >');
+				imagens.push('<img id="euDock_euImage_4" class="noprint" style="position: relative; visibility: ' + vis + '; left: 0px; top: 0px;" src="' + i3GEO.configura.locaplic + '/imagens/dockBg-r.png" >');
 				if (i3GEO.barraDeBotoes.POSICAO === "top") {
 					imagens.push('<div style="display: inline;margin:auto; z-index: 1; position: relative; border: 0px solid black; cursor: pointer; top: -38px; width: ' + l + 'px; height: 38px; left: -' + (l + 20) + 'px;" id="euDock_0" class="noprint">');
 				}

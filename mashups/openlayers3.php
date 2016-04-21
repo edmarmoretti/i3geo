@@ -560,9 +560,12 @@ function ajuda(){
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-<script src="openlayers_compacto.js.php"></script>
+<script src="../pacotes/ol3/ol-debug.js"></script>
+<script src="../js/i3geonaocompacto.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/black.css">
+<link rel="stylesheet" type="text/css" href="../pacotes/ol3/ol.css">
 -->
-<link rel="stylesheet" href="../pacotes/ol3/ol.css" type="text/css" />
+
 <script src="../pacotes/yui290/build/yahoo/yahoo-min.js"></script>
 <script src="../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script src="../pacotes/yui290/build/dom/dom-min.js"></script>
@@ -584,12 +587,15 @@ function ajuda(){
 <script src="../pacotes/yui290/build/resize/resize_compacto.js"></script>
 <script src="../pacotes/yui290/build/progressbar/progressbar_compacto.js"></script>
 <script src="../pacotes/yui290/build/selector/selector-min.js"></script>
+
+<script src="../pacotes/ol3/ol-debug.js"></script>
+
+<script src="../pacotes/cpaint/cpaint2.inc.js"></script>
+<script src="../js/php.js"></script>
 <script src="../js/calculo.js"></script>
 <script src="../js/util.js"></script>
-<script src="../pacotes/ol3/ol-debug.js"></script>
 <script src="../js/desenho.js"></script>
 <script src="../js/janela.js"></script>
-<script src="../ferramentas/editorol/editorol.js"></script>
 <script src="../js/dicionario.js"></script>
 <script src="../js/idioma.js"></script>
 <script src="../js/configura.js"></script>
@@ -597,8 +603,13 @@ function ajuda(){
 <script src="../js/interface.js"></script>
 <script src="../js/barradebotoes.js"></script>
 <script src="../js/eventos.js"></script>
+<script src="../js/plugini3geo.js"></script>
+<script src="../ferramentas/editorol/editorol.js"></script>
+
+
 <link rel="stylesheet" href="openlayers_compacto.css" type="text/css" />
 <link rel="stylesheet" href="../css/black.css" type="text/css" />
+<link rel="stylesheet" href="../pacotes/ol3/ol.css" type="text/css">
 <?php
 //carrega o script para layers do tipo plugin
 if(count($temasPluginI3Geo) > 0){
@@ -662,6 +673,54 @@ if(count($temasPluginI3Geo) > 0){
 	top: 15px;
 }
 
+/*
+Popup do identifica no openlayers 3
+*/
+.ol-popup {
+  position: absolute;
+  background-color: white;
+  -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  bottom: 12px;
+  left: -50px;
+}
+.ol-popup:after, .ol-popup:before {
+  top: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.ol-popup:after {
+  border-top-color: white;
+  border-width: 10px;
+  left: 48px;
+  margin-left: -10px;
+}
+.ol-popup:before {
+  border-top-color: #cccccc;
+  border-width: 11px;
+  left: 48px;
+  margin-left: -11px;
+}
+.ol-popup-closer {
+  text-decoration: none;
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  cursor:pointer;
+}
+.ol-popup-closer:after {
+  content: "\2716";
+  color: red;
+  font-size: 16px;
+}
+
 </style>
 </head>
 <body class=" yui-skin-sam">
@@ -683,7 +742,7 @@ if(parseInt(m.style.width,10) === 0){
 	m.style.height = (t[1]-20)+"px";
 }
 
-var projectionExtent, size,resolutions,matrixIds,z;
+var projectionExtent,size,resolutions,matrixIds,z;
 if (i3GEO.Interface.openlayers.googleLike === true) {
 	projectionExtent = ol.proj.get('EPSG:3857').getExtent();
 } else {

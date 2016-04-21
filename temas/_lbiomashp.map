@@ -5,7 +5,7 @@ MAP
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
-      "CACHE"	"sim"
+      "CACHE"	"nao"
       "TIP"	"CD_LEGENDA"
       "CLASSE"	"SIM"
       "permitekmz"	"sim"
@@ -98,6 +98,4 @@ MAP
       TITLE ""
     END # CLASS
   END # LAYER
-
 END # MAP
-
