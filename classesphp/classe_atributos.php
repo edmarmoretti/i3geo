@@ -729,11 +729,9 @@ class Atributos
 		//monta a lista de itens por tema
 		foreach ($temas as $tema){
 			$temp = array();
-			foreach ($ptvs as $p)
-			{
+			foreach ($ptvs as $p){
 				$pp = explode(",",$p);
-				if ($pp[1] == $tema)
-				{
+				if ($pp[1] == $tema){
 					$temp[] = $pp[0];
 				}
 				$temasi[$tema] = $temp;

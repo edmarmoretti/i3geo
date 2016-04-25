@@ -180,7 +180,7 @@ i3GEOF.busca = {
 			n = retorno.data.valores.length;
 			for (i=0;i<n; i++){
 				ins += "<tr><td><input size=2 style='cursor:pointer;border:0px solid white;' name='"+retorno.data.valores[i].item+","+retorno.data.valores[i].tema+"' type=checkbox /></td>";
-				ins += "<td>&nbsp;"+retorno.data.valores[i].item+" - "+retorno.data.valores[i].tema+"</td></tr>";
+				ins += "<td>&nbsp;" + retorno.data.valores[i].item + "</td></tr>";
 			}
 			ins += "</table>";
 			$i("i3GEObuscalistai").innerHTML = ins;
@@ -211,29 +211,32 @@ i3GEOF.busca = {
 			palavra = $i("i3GEObuscapalavra").value,
 			p,
 			cp;
-		for (i=0;i<n; i++)
-		{
-			if (inputs[i].checked === true)
-			{listai.push(inputs[i].name);}
+		for (i=0;i<n; i++){
+			if (inputs[i].checked === true){
+				listai.push(inputs[i].name);
+			}
 		}
-		if (listai.length === 0)
-		{alert($trad('selecionaItem',i3GEOF.busca.dicionario));}
+		if (listai.length === 0){
+			alert($trad('selecionaItem',i3GEOF.busca.dicionario));
+		}
 		else{
-			if ($i("i3GEObuscapalavra").value === "")
-			{alert("Digite uma palavra");}
-			else
-			{
+			if ($i("i3GEObuscapalavra").value === ""){
+				alert("Digite uma palavra");
+			}
+			else{
 				i3GEOF.busca.aguarde.visibility = "visible";
-				if ($i("i3GEObuscaqualquer").checked === true)
-				{tipo = "qualquer";}
-				if ($i("i3GEObuscaregiao").checked === true)
-				{onde = "regiao";}
+				if ($i("i3GEObuscaqualquer").checked === true){
+					tipo = "qualquer";
+				}
+				if ($i("i3GEObuscaregiao").checked === true){
+					onde = "regiao";
+				}
 				palavra = i3GEO.util.removeAcentos(palavra);
 				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid;
 				cp = new cpaint();
 				cp.set_response_type("json");
 				cp.set_transfer_mode('POST');
-				cp.call(p,"listavaloresitens",i3GEOF.busca.mostraBusca,"funcao=listavaloresitens","palavra="+palavra,"lista="+listai.toString(),"tipo="+tipo,"onde="+onde,"ext="+i3GEO.parametros.mapexten);
+				cp.call(p,"listavaloresitens",i3GEOF.busca.mostraBusca,"funcao=listavaloresitens","palavra="+palavra,"lista="+listai.join("|"),"tipo="+tipo,"onde="+onde,"ext="+i3GEO.parametros.mapexten);
 			}
 		}
 	},
