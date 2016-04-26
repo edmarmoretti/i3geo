@@ -25,6 +25,7 @@ CSWClient = function(cswhost, host){
   this.getrecords_xsl = this.loadDocument("lib/xsl/getrecords.xsl");
   this.getrecordbyid_xsl = this.loadDocument("lib/xsl/getrecordbyid.xsl");
   this.defaults_xml = this.loadDocument("lib/xml/defaults.xml");
+
   this.defaultschema = this.defaults_xml.selectSingleNode("/defaults/outputschema/text()").nodeValue;
 }
 CSWClient.prototype.abreINDE = function(id)

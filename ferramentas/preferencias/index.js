@@ -477,6 +477,16 @@ i3GEOF.preferencias = {
 						elemento: "i3GEO.maparef.RIGHT"
 					}
 				]
+			},{
+				titulo: $trad('buscainde',i3GEOF.preferencias.dicionario), //IDE busca metadados
+				tipo: "buscainde",
+				props: [
+					{
+						titulo: $trad('buscaIndeCsw',i3GEOF.preferencias.dicionario),
+						tipo: "texto",
+						elemento: "i3GEO.configura.ferramentas.buscainde.csw"
+					}
+				]
 			}
 		];
 		return lista;

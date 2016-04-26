@@ -3,8 +3,11 @@ define ( I3GEO, true );
 include ("validaacesso.php");
 include ("../ms_configura.php");
 $csw = "http://www.metadados.inde.gov.br/geonetwork/srv/br";
-if (isset ( $configFerramentas )) {
-	$csw = $configFerramentas ["buscainde"] ["csw"];
+//if (isset ( $configFerramentas )) {
+//	$csw = $configFerramentas ["buscainde"] ["csw"];
+//}
+if (isset ( $_GET["csw"] )) {
+	$csw = $_GET["csw"];
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">

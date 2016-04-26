@@ -132,10 +132,6 @@ $statusFerramentas = array(
 	"saiku"=>true,
 	"melhorcaminho"=>true
 );
-//documentar
-$configFerramentas = array(
-	"buscainde"=> array("csw"=>"http://www.metadados.inde.gov.br/geonetwork/srv/br")
-);
 /*
 Variable: $ogrOutput
 
