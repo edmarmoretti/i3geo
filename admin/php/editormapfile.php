@@ -312,10 +312,16 @@ switch (strtoupper($funcao))
 		if(count($dados) > 0){
 			$id = $dados[0]["id_tema"];
 		}
+		else{
+			$id = "";
+			$f = "";
+		}
 		$tabela = "mapfiles";
 		$coluna = "id_tema";
-		$f = verificaFilhos();
-		if($f){
+		if($id != ""){
+			$f = verificaFilhos();
+		}
+		if($f && $f != ""){
 			retornaJSON("erro");
 			exit;
 		}
@@ -332,7 +338,7 @@ switch (strtoupper($funcao))
 				}
 			}
 			$tabela = "i3geoadmin_temas";
-			if($id){
+			if($id && $id != ""){
 				exclui($esquemaadmin.$tabela,$coluna,$id);
 			}
 			retornaJSON("ok");
@@ -2301,7 +2307,7 @@ function alterarClasseLabel()
 			$classe->updateFromString($s);
 		}
 	}
-	
+
 	if($vi >= 60300){
 		$label = $classe->getLabel(0);
 	}
@@ -2352,7 +2358,7 @@ function alterarClasseLabel()
 		$label->set("shadowsizey",$shadowsizey);
 		//$label->set("backgroundshadowsizex",$backgroundshadowsizex);
 		//$label->set("backgroundshadowsizey",$backgroundshadowsizey);
-		
+
 		$label->set("minsize",$minsize);
 		$label->set("maxsize",$maxsize);
 		//$label->set("position",$position);
@@ -2389,16 +2395,16 @@ function pegaEstilo()
 	$classe = $layer->getclass($indiceClasse);
 	$estilo = $classe->getstyle($indiceEstilo);
 	$dados["symbolname"] = $estilo->symbolname;
-	
+
 	$dados["color"] = $estilo->color->red.",".$estilo->color->green.",".$estilo->color->blue;
 	$dados["size"] = $estilo->size;
 	$dados["minsize"] = $estilo->minsize;
 	$dados["maxsize"] = $estilo->maxsize;
 	$dados["offsetx"] = $estilo->offsetx;
 	$dados["offsety"] = $estilo->offsety;
-	
+
 	//$dados["antialias"] = $estilo->antialias;
-	
+
 	$dados["backgroundcolor"] = $estilo->backgroundcolor->red.",".$estilo->backgroundcolor->green.",".$estilo->backgroundcolor->blue;
 	$dados["outlinecolor"] = $estilo->outlinecolor->red.",".$estilo->outlinecolor->green.",".$estilo->outlinecolor->blue;
 	$dados["width"] = $estilo->width;
@@ -2407,7 +2413,7 @@ function pegaEstilo()
 	$dados["maxwidth"] = $estilo->maxwidth;
 	$dados["angle"] = $estilo->angle;
 	$dados["codigoMap"] = $codigoMap;
-	
+
 	$dados["codigoLayer"] = $codigoLayer;
 	$dados["indiceClasse"] = $indiceClasse;
 	$dados["indiceEstilo"] = $indiceEstilo;

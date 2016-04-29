@@ -84,8 +84,9 @@ if(isset($_GET["tms"])){
 	$lon2 = ($x+1) / $n * 360.0 - 180.0;
 	$n = pow(2,$z);
 	$lat1 = $y / $n * 180.0 - 90.0;
-	$lat2 = ($y+1) / $n * 180.0 - 90.0;
+	$lat2 = ($y+1) / $n * 180.0 - 90;
 	$_GET["BBOX"] = $lon1." ".$lat1." ".$lon2." ".$lat2;
+	//echo $_GET["BBOX"];exit;
 }
 
 //para o caso da versao 3 do OpenLayers
@@ -295,7 +296,7 @@ if($_GET["REQUEST"] == "getlegendgraphic" || $_GET["REQUEST"] == "getfeatureinfo
 		$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
 	}
 	$_GET = array_merge($_GET,$_POST);
-	
+
 	foreach ($_GET as $k=>$v){
 		$req->setParameter($k, $v);
 	}

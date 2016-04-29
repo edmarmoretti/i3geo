@@ -484,5 +484,15 @@ i3GEOF.preferencias.dicionario = {
 		pt : "Mostra o centro do mapa durante a navega&ccedil;&atilde;o do tipo PAN",
 		en : "",
 		es : ""
+	} ],
+	'buscainde' : [ {
+		pt : "Ferramenta buscainde - Busca metadados em servi&ccedil;o CSW",
+		en : "",
+		es : ""
+	} ],
+	'buscaIndeCsw' : [ {
+		pt : "Endere&ccedil;o do servi&ccedil;o no padr&atilde;o CSW",
+		en : "",
+		es : ""
 	} ]
 };

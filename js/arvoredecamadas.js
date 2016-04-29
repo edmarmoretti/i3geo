@@ -1149,38 +1149,7 @@ i3GEO.arvoreDeCamadas =
 			//inclui os nos correspondentes aos layers base na interface Openlayers
 			//
 			if(i3GEO.Interface.ATUAL === "openlayers" && i3GEO.arvoreDeCamadas.INCLUILFUNDO === true){
-				c = i3GEO.Interface.openlayers.LAYERSADICIONAIS;
-				n = c.length;
-				k = "i3GEOarvCamTema";
-				// verifica se a versao do IE e menor que 9
-				if (navm && parseInt(YAHOO.env.ua.ie, 10) < 9) {
-					k = "i3GEOarvCamTemaIE";
-				}
-				temaNode = new YAHOO.widget.HTMLNode(
-					{
-						html : $trad("p16"),
-						isLeaf : false,
-						hasIcon : true
-					}, root
-				);
-				for (i = 0; i < n; i++) {
-					temp =
-						"<div class='" + k + "' onclick='i3GEO.Interface.openlayers.ativaFundo(\"" + c[i].name + "\")'>"
-						+ "<input name=layer type=checkbox ";
-					if(c[i].visibility === true){
-						temp += " checked ";
-					}
-					temp += " value='" + c[i].name + "' id='CK" + c[i].id + "'/>"
-						+ " <label for='CK" + c[i].id + "'>" + c[i].name + "</label></div>";
-					new YAHOO.widget.HTMLNode(
-						{
-							html : temp,
-							tipo : "fundo",
-							isLeaf : true,
-							hasIcon : false
-						}, temaNode
-					);
-				}
+				i3GEO.arvoreDeCamadas.montaNoFundo(root);
 			}
 			document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).style.textAlign = "left";
 			i3GEO.arvoreDeCamadas.ARVORE.draw();
@@ -1199,6 +1168,47 @@ i3GEO.arvoreDeCamadas =
 				]);
 			}
 			i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);
+		},
+		/**
+		 * Monta o no com a lista de camadas de fundo
+		 * @param root
+		 */
+		montaNoFundo: function(root){
+			var c = i3GEO.Interface.openlayers.LAYERSADICIONAIS,
+				n = c.length,
+				k = "i3GEOarvCamTema",
+				temaNode, i, l, temp;
+			// verifica se a versao do IE e menor que 9
+			if (navm && parseInt(YAHOO.env.ua.ie, 10) < 9) {
+				k = "i3GEOarvCamTemaIE";
+			}
+			temaNode = new YAHOO.widget.HTMLNode(
+				{
+					html : $trad("p16"),
+					isLeaf : false,
+					hasIcon : true
+				}, root
+			);
+			for (i = 0; i < n; i++) {
+				l = c[i].getProperties();
+				temp =
+					"<div class='" + k + "' onclick='i3GEO.Interface.openlayers.ativaFundo(\"" + l.name + "\")'>"
+					+ "<input name=layer type=checkbox ";
+				if(l.visible === true){
+					temp += " checked ";
+				}
+				temp += " value='" + l.name + "' id='CK" + l.name + "'/>"
+					+ " <label for='CK" + l.name + "'>" + l.title + "</label></div>";
+				new YAHOO.widget.HTMLNode(
+					{
+						html : temp,
+						tipo : "fundo",
+						isLeaf : true,
+						hasIcon : false
+					}, temaNode
+				);
+			}
+
 		},
 		/**
 		 * Monta os &iacute;cones de op&ccedil;&otilde;es gerais da &aacute;rvore, como a lixira, ligar todos, etc.

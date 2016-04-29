@@ -4,7 +4,7 @@
 * Organisation: National Aerospace Laboratory NLR
 * Country : The Netherlands
 * email : vanswol@nlr.nl
-* Description: Simple AJAX based CSW client 
+* Description: Simple AJAX based CSW client
 * Depends csw-proxy.php
 * Tested on : FireFox 3, Safari, IE 7
 * Last Change : 2008-10-22
@@ -17,7 +17,7 @@ CSWClient = function(cswhost, host){
  this.use_proxy = true;
  if (typeof cswhost != "undefined") {
     this.cswhost = cswhost;}
- 
+
  this.proxy = "csw-proxy.php";
   if (typeof host != "undefined") {
     this.proxy = host + "csw-proxy.php";}
@@ -25,11 +25,12 @@ CSWClient = function(cswhost, host){
   this.getrecords_xsl = this.loadDocument("lib/xsl/getrecords.xsl");
   this.getrecordbyid_xsl = this.loadDocument("lib/xsl/getrecordbyid.xsl");
   this.defaults_xml = this.loadDocument("lib/xml/defaults.xml");
+
   this.defaultschema = this.defaults_xml.selectSingleNode("/defaults/outputschema/text()").nodeValue;
 }
 CSWClient.prototype.abreINDE = function(id)
 {
-   window.open("http://metadados.inde.gov.br/geonetwork/srv/por/main.home?uuid="+id,"new");
+   window.open(csw+"/main.home?uuid="+id,"new");
 }
 CSWClient.prototype.adicionaI3geo = function(wms)
 {
@@ -47,7 +48,7 @@ CSWClient.prototype.useProxy = function(tf)
 
 CSWClient.prototype.writeClient = function(divId)
 {
-/*   
+/*
    var client_xml = this.loadDocument("lib/xml/cswclient.xml");
 
    if (this.cswhost == null) {
@@ -56,37 +57,37 @@ CSWClient.prototype.writeClient = function(divId)
  	 importNode = client_xml.importNode(cswhosts_xml.documentElement, true);
  	 span.appendChild(importNode);
    }
-   var serializer = new XMLSerializer(); 
+   var serializer = new XMLSerializer();
    var output = serializer.serializeToString(client_xml);
    //alert (output);
    var div = document.getElementById(divId);
    div.innerHTML = output;
-*/   
+*/
 }
 
 CSWClient.prototype.handleCSWResponse = function(request, xml)
 {
 
  var stylesheet = "lib/xsl/prettyxml.xsl";
- if (request == "getrecords" & 
+ if (request == "getrecords" &
        document.theForm.displaymode.value != "xml") {
    stylesheet = "lib/xsl/csw-results.xsl";
- } else if (request == "getrecordbyid" & 
+ } else if (request == "getrecordbyid" &
               document.theForm.displaymode.value != "xml") {
    stylesheet = "lib/xsl/csw-metadata.xsl";
  }
-  
+
  xslt = this.loadDocument(stylesheet);
  var processor = new XSLTProcessor();
  processor.importStylesheet(xslt);
 
  var XmlDom = processor.transformToDocument(xml)
- var serializer = new XMLSerializer(); 
- var output = serializer.serializeToString(XmlDom.documentElement); 
+ var serializer = new XMLSerializer();
+ var output = serializer.serializeToString(XmlDom.documentElement);
 
  var outputDiv = document.getElementById("csw-output");
  if (request == "getrecordbyid"){
-   
+
    //outputDiv = window.open().document.body;//document.getElementById("metadata");
    //output = '<head><link rel="stylesheet" type="text/css" href="'+i3GEO.configura.locaplic+'/pacotes/cswclient/lib/css/cswclient.css"/></head>' + output;
    //this.positionDiv(document.getElementById('popup'), document.getElementById('results'))
@@ -96,7 +97,7 @@ CSWClient.prototype.handleCSWResponse = function(request, xml)
    i3GEO.janela.mensagemSimples("<div style='text-align:left;overflow:auto;height: 250px;'>"+output+"</div>","",450);
    return;
 }
- outputDiv.innerHTML = output; 
+ outputDiv.innerHTML = output;
 }
 
 
@@ -105,16 +106,16 @@ CSWClient.prototype.getRecords = function(start)
 
  if (typeof start == "undefined") {
    start = 1;}
- 
+
  if (typeof  document.theForm.cswhosts != "undefined") {
    this.setCSWHost(document.theForm.cswhosts.value);}
- 
+
  var queryable = document.theForm.queryable.value;
- 
+
  /*because geonetwork doen not follow the specs*/
  if(this.cswhost.indexOf('geonetwork') !=-1 & queryable == "anytext")
    queryable = "any";
- 
+
  var operator = document.theForm.operator.value;
  var query = trim(document.theForm.query.value);
  var bbox = document.theForm.bbox.value;
@@ -125,10 +126,10 @@ CSWClient.prototype.getRecords = function(start)
  else{
 	bbox = bbox.split(" ");
 	var lowerCorner = bbox[1]+" "+bbox[0];
-	var upperCorner = bbox[3]+" "+bbox[2];	
+	var upperCorner = bbox[3]+" "+bbox[2];
  }
  if (operator == "contains" & query != "") {query = "%" + query + "%";}
- 
+
  var schema = "http://www.opengis.net/cat/csw/2.0.2"; // force outputSchema  always  to csw:Record for GetRecords requests
  this.setXpathValue(this.defaults_xml, "/defaults/outputschema", schema + '');
  this.setXpathValue(this.defaults_xml, "/defaults/propertyname", queryable + '');
@@ -152,7 +153,7 @@ CSWClient.prototype.getRecords = function(start)
  results += " maxrecords=\"";
  results += this.defaults_xml.selectSingleNode("/defaults/maxrecords/text()").nodeValue;
  results += "\"/></results>";
- 
+
  results_xml = (new DOMParser()).parseFromString(results, "text/xml");
  importNode = results_xml.importNode(csw_response.documentElement, true);
  results_xml.documentElement.appendChild(importNode);
@@ -190,23 +191,23 @@ CSWClient.prototype.sendCSWRequest = function(request)
 {
 
  var xml = Sarissa.getDomDocument();
- xml.async = false; 
+ xml.async = false;
  var xmlhttp = new XMLHttpRequest();
 
  var params;
  if (this.use_proxy) {
    params = "csw_host=" + this.cswhost + "&csw_request=" + encodeURIComponent(request);
-   xmlhttp.open("POST", this.proxy, false);  
-   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
- } else {  
+   xmlhttp.open("POST", this.proxy, false);
+   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ } else {
    params = request;
-   xmlhttp.open("POST", this.cswhost, false);  
+   xmlhttp.open("POST", this.cswhost, false);
    xmlhttp.setRequestHeader("Content-type", "application/xml");
  }
 
- //xmlhttp.open("POST", this.proxy, false);  
+ //xmlhttp.open("POST", this.proxy, false);
  //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
- //xmlhttp.open("POST", this.cswhost, false);  
+ //xmlhttp.open("POST", this.cswhost, false);
  //xmlhttp.setRequestHeader("Content-type", "application/xml");
  xmlhttp.setRequestHeader("Content-length", params.length);
  xmlhttp.setRequestHeader("Connection", "close");
@@ -269,7 +270,7 @@ CSWClient.prototype.overlayDiv = function(div)
 	while (div.tagName !="DIV") {
     div = div.parentNode
     }
- 
+
     _width = div.offsetWidth
     _height = div.offsetHeight
     _top = this.findPosY(div);
@@ -284,7 +285,7 @@ CSWClient.prototype.overlayDiv = function(div)
     overlay.style.background = "#555555"
     overlay.style.top = _top + "px"
     overlay.style.left = _left + "px"
- 
+
     overlay.style.filter = "alpha(opacity=70)"
     overlay.style.opacity = "0.7"
     overlay.style.mozOpacity = "0.7"
@@ -305,7 +306,7 @@ CSWClient.prototype.hideDiv = function(div)
 		div.style.visibility="hidden";
 	}
 }
- 
+
 CSWClient.prototype.showDiv = function(div)
 {
      //this.overlayDiv(document.getElementById('results-container'));

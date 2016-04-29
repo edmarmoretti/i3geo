@@ -293,6 +293,13 @@ para nao selecionar
     -o-user-select: text;
     user-select: text;
 }
+#i3GEOcopyright{
+	display: block;
+	top: 0px;
+	left: 40px;
+	zIndex: 5000;
+	position: absolute;
+}
 /*
 Para nao marcar links
 */

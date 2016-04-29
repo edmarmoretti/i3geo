@@ -1921,6 +1921,18 @@ i3GEO.configura =
 					return icone;
 				}
 			}
+		},
+		/**
+		 * Propriedade: ferramentas
+		 *
+		 * Parametros que sao utilizados para configurar ferramentas especificas
+		 *
+		 * i3GEO.ferramentas.buscainde.csw - endereco do servico csw utilizado na ferramenta de busca de metadados em IDE
+		 */
+		ferramentas: {
+			"buscainde" : {
+				"csw" : "http://www.metadados.inde.gov.br/geonetwork/srv/br"
+			}
 		}
 	};
 //

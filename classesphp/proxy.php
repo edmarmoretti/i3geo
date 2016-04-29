@@ -4,21 +4,26 @@
  * Voce pode usar o parametro proxy?url=
  * ou entao, enviar a URL e seus parametros apos o sinal "?"
  * http://localhost/i3geo/classesphp/proxy.php?http://localhost/i3geo/classesphp/mapa_openlayers.php?g_sid=e7oi2d2645gt712e4cjmt93pf5&TIPOIMAGEM=nenhum&DESLIGACACHE=sim&layer=mundo&REQUEST=getfeature&service=wfs&version=1.0.0&OUTPUTFORMAT=gml2
- * 
+ *
  * Para controlar o retorno dos dados, utilize o arametro &tipoRetornoProxy, que pode ter os seguintes valores:
  * (se nao for definido retorna no formato nativo)
- * 
+ *
  * string - retorna o resultado nativo entre aspas simples
  * gml2json - converte um formato GML2 em geoJson (util em chamadas getfeatureinfo)
  */
 if(!isset($i3geo_proxy_server)){
 	include(dirname(__FILE__)."/../ms_configura.php");
 }
+
+//echo $_SERVER ["SERVER_NAME"].":".$_SERVER ["SERVER_PORT"]."/".basename($locaplic)."/i3geo/ogc.php";
+//exit;
+
 $ch = curl_init();
 if(!$ch){
 	echo "erro curl_init";
 	exit;
 }
+
 if($_GET["url"]){
 	curl_setopt($ch, CURLOPT_URL, $_GET["url"]);
 }

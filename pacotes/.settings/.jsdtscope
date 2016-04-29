@@ -1,96 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="yui290/build/animation/|yui290/build/resize/|yui290/build/tabview/|yui290/build/menu/|yui290/build/yuiloader/|yui290/build/uploader/|yui290/build/datemath/|yui290/build/storage/|yui290/build/yahoo-dom-event/|yui290/build/autocomplete/|yui290/build/json/|yui290/build/get/|yui290/build/event-simulate/|richdraw/|yui290/build/profilerviewer/|openlayers/|yui290/build/history/|balloon-tooltips/htdocs_depreciado/js/|jsts/lib/|yui290/build/cookie/|simile/timeline_2.3.0/timeline_js/scripts/l10n/cs/|proj4js/docs/NaturalDocs/javascript/|yui290/build/element-delegate/|simile/timeline_2.3.0/timeline_ajax/|wicket/|simile/timeline_2.3.0/timeline_ajax/scripts/|mobileesp/|yui290/build/editor/|openflashchart/|simile/timeline_2.3.0/timeline_js/scripts/l10n/es/|yui290/build/profiler/|simile/timeline_local_example_1.0/local_example/|simile/timeline_2.3.0/timeline_js/scripts/l10n/de/|simile/timeline_2.3.0/timeline_js/|yui290/build/progressbar/|yui290/build/swfstore/|simile/timeline_2.3.0/timeline_js/scripts/l10n/zh/|yui290/build/dragdrop/|yui290/assets/|yui290/build/yahoo/|yui290/build/stylesheet/|simile/timeline_2.3.0/timeline_js/scripts/l10n/nl/|yui290/build/logger/|yui290/build/imagecropper/|cpaint/JSON/|yui290/build/dom/|yui290/build/charts/|yui290/build/slider/|ccc2/ccc/|proj4js/demo/maps/|yui290/build/swfdetect/|yui290/build/datasource/|yui290/build/button/|yui290/build/layout/|yui290/build/carousel/|simile/timeline_2.3.0/timeline_js/scripts/l10n/tr/|yui290/build/container/|yui290/build/event/|proj4js/lib/|yui290/build/calendar/|simile/timeline_2.3.0/timeline_js/scripts/l10n/fr/|eudock/js/|yui290/build/element/|simile/timeline_2.3.0/timeline_js/scripts/l10n/se/|cpaint/|proj4js/lib/projCode/|simile/timeline_2.3.0/timeline_js/scripts/l10n/ru/|simile/timeline_2.3.0/timeline_js/scripts/l10n/vi/|yui290/build/paginator/|yui290/build/yuiloader-dom-event/|tme/javascript/|yui290/build/datatable/|proj4js/lib/defs/|wpcumulus/|yui290/build/colorpicker/|proj4js/demo/|balloon-tooltips/htdocs/js/|yui290/build/swf/|yui290/build/utilities/|yui290/build/yuitest/|yui290/build/connection/|simile/timeline_2.3.0/timeline_js/scripts/l10n/it/|yui290/build/treeview/|yui290/build/event-delegate/|yui290/build/imageloader/|cswclient/lib/scripts/|simile/timeline_2.3.0/timeline_js/scripts/l10n/en/|yui290/build/selector/|yui290/build/event-mouseenter/|google/" kind="src" path=""/>
-	<classpathentry kind="src" path="balloon-tooltips/htdocs_depreciado/js"/>
-	<classpathentry kind="src" path="balloon-tooltips/htdocs/js"/>
-	<classpathentry kind="src" path="ccc2/ccc"/>
-	<classpathentry excluding="JSON/" kind="src" path="cpaint"/>
-	<classpathentry kind="src" path="cpaint/JSON"/>
-	<classpathentry kind="src" path="cswclient/lib/scripts"/>
-	<classpathentry kind="src" path="eudock/js"/>
-	<classpathentry kind="src" path="google"/>
-	<classpathentry kind="src" path="jsts/lib"/>
-	<classpathentry kind="src" path="mobileesp"/>
-	<classpathentry kind="src" path="openflashchart"/>
-	<classpathentry kind="src" path="openlayers"/>
-	<classpathentry excluding="maps/" kind="src" path="proj4js/demo"/>
-	<classpathentry kind="src" path="proj4js/demo/maps"/>
-	<classpathentry kind="src" path="proj4js/docs/NaturalDocs/javascript"/>
-	<classpathentry excluding="projCode/|defs/" kind="src" path="proj4js/lib"/>
-	<classpathentry kind="src" path="proj4js/lib/defs"/>
-	<classpathentry kind="src" path="proj4js/lib/projCode"/>
-	<classpathentry kind="src" path="richdraw"/>
-	<classpathentry excluding="scripts/" kind="src" path="simile/timeline_2.3.0/timeline_ajax"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_ajax/scripts"/>
-	<classpathentry excluding="scripts/l10n/cs/|scripts/l10n/es/|scripts/l10n/de/|scripts/l10n/zh/|scripts/l10n/nl/|scripts/l10n/tr/|scripts/l10n/fr/|scripts/l10n/se/|scripts/l10n/ru/|scripts/l10n/vi/|scripts/l10n/it/|scripts/l10n/en/" kind="src" path="simile/timeline_2.3.0/timeline_js"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/cs"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/de"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/en"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/es"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/fr"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/it"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/nl"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/ru"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/se"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/tr"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/vi"/>
-	<classpathentry kind="src" path="simile/timeline_2.3.0/timeline_js/scripts/l10n/zh"/>
-	<classpathentry kind="src" path="simile/timeline_local_example_1.0/local_example"/>
-	<classpathentry kind="src" path="tme/javascript"/>
-	<classpathentry kind="src" path="wicket"/>
-	<classpathentry kind="src" path="wpcumulus"/>
-	<classpathentry kind="src" path="yui290/assets"/>
-	<classpathentry kind="src" path="yui290/build/animation"/>
-	<classpathentry kind="src" path="yui290/build/autocomplete"/>
-	<classpathentry kind="src" path="yui290/build/button"/>
-	<classpathentry kind="src" path="yui290/build/calendar"/>
-	<classpathentry kind="src" path="yui290/build/carousel"/>
-	<classpathentry kind="src" path="yui290/build/charts"/>
-	<classpathentry kind="src" path="yui290/build/colorpicker"/>
-	<classpathentry kind="src" path="yui290/build/connection"/>
-	<classpathentry kind="src" path="yui290/build/container"/>
-	<classpathentry kind="src" path="yui290/build/cookie"/>
-	<classpathentry kind="src" path="yui290/build/datasource"/>
-	<classpathentry kind="src" path="yui290/build/datatable"/>
-	<classpathentry kind="src" path="yui290/build/datemath"/>
-	<classpathentry kind="src" path="yui290/build/dom"/>
-	<classpathentry kind="src" path="yui290/build/dragdrop"/>
-	<classpathentry kind="src" path="yui290/build/editor"/>
-	<classpathentry kind="src" path="yui290/build/element"/>
-	<classpathentry kind="src" path="yui290/build/element-delegate"/>
-	<classpathentry kind="src" path="yui290/build/event"/>
-	<classpathentry kind="src" path="yui290/build/event-delegate"/>
-	<classpathentry kind="src" path="yui290/build/event-mouseenter"/>
-	<classpathentry kind="src" path="yui290/build/event-simulate"/>
-	<classpathentry kind="src" path="yui290/build/get"/>
-	<classpathentry kind="src" path="yui290/build/history"/>
-	<classpathentry kind="src" path="yui290/build/imagecropper"/>
-	<classpathentry kind="src" path="yui290/build/imageloader"/>
-	<classpathentry kind="src" path="yui290/build/json"/>
-	<classpathentry kind="src" path="yui290/build/layout"/>
-	<classpathentry kind="src" path="yui290/build/logger"/>
-	<classpathentry kind="src" path="yui290/build/menu"/>
-	<classpathentry kind="src" path="yui290/build/paginator"/>
-	<classpathentry kind="src" path="yui290/build/profiler"/>
-	<classpathentry kind="src" path="yui290/build/profilerviewer"/>
-	<classpathentry kind="src" path="yui290/build/progressbar"/>
-	<classpathentry kind="src" path="yui290/build/resize"/>
-	<classpathentry kind="src" path="yui290/build/selector"/>
-	<classpathentry kind="src" path="yui290/build/slider"/>
-	<classpathentry kind="src" path="yui290/build/storage"/>
-	<classpathentry kind="src" path="yui290/build/stylesheet"/>
-	<classpathentry kind="src" path="yui290/build/swf"/>
-	<classpathentry kind="src" path="yui290/build/swfdetect"/>
-	<classpathentry kind="src" path="yui290/build/swfstore"/>
-	<classpathentry kind="src" path="yui290/build/tabview"/>
-	<classpathentry kind="src" path="yui290/build/treeview"/>
-	<classpathentry kind="src" path="yui290/build/uploader"/>
-	<classpathentry kind="src" path="yui290/build/utilities"/>
-	<classpathentry kind="src" path="yui290/build/yahoo"/>
-	<classpathentry kind="src" path="yui290/build/yahoo-dom-event"/>
-	<classpathentry kind="src" path="yui290/build/yuiloader"/>
-	<classpathentry kind="src" path="yui290/build/yuiloader-dom-event"/>
-	<classpathentry kind="src" path="yui290/build/yuitest"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.WebProject">
+		<attributes>
+			<attribute name="hide" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.baseBrowserLibrary"/>
+	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

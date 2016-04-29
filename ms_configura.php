@@ -122,9 +122,11 @@ $i3GeoProjDefault = array(
 /*
 Variable: $statusFerramentas
 
-Algumas das funcionalidades do mapa interativo dependem de configura&ccedil;&otilde;es espec&iacute;ficas do servidor.
-Esse array informa quais dessas ferramentas est&atilde;o corretamente configuradas.
-As que estiverem marcadas como false n&atilde;o ser&atilde;o mostradas na interface do mapa interativo
+Algumas das funcionalidades do mapa interativo dependem de configuracoes especificas do servidor.
+Esse array informa quais dessas ferramentas estao corretamente configuradas.
+As que estiverem marcadas como false nao serao mostradas na interface do mapa interativo
+Sobre essas configuracoes, veja na pasta i3geo/ferramentas e na documentacao do
+sistema de administracao do i3Geo
  */
 $statusFerramentas = array(
 	"saiku"=>true,

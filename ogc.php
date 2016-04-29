@@ -79,7 +79,31 @@ ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 */
 set_time_limit(0);
 ini_set('memory_limit', '512M');
+
+if(isset($_GET["BBOX"])){
+	$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
+}
+if(isset($_GET["TileMatrix"])){
+	$_GET["WIDTH"] = 256;
+	$_GET["HEIGHT"] = 256;
+	//calcula resolucoes
+	$res = array();
+	$temp = 0.703125;
+	for($i = 0; $i < 40; $i++){
+		$res[] = $temp;
+		$temp = $temp / 2;
+	}
+	//$_GET["tms"] = null;
+	$_GET["tms"] = "/wmts/".$_GET["layer"]."/".$_GET["TileMatrix"]."/".$_GET["TileCol"]."/".$_GET["TileRow"].".png";
+	if($_GET["TileMatrix"]."/".$_GET["TileCol"]."/".$_GET["TileRow"] == "0/0/0" || $_GET["TileCol"] == -1 || $_GET["TileRow"]== -1){
+		return;
+	}
+	$_GET["BBOX"] = $lon1.",".$lat1.",".$lon2.",".$lat2;
+	$_GET["SERVICE"] = "WMS";
+	$_GET["REQUEST"] = "getMap";
+}
 $_GET = array_merge($_GET,$_POST);
+
 //
 //caso nenhum parametros tenha sido enviado
 //
@@ -253,14 +277,16 @@ if(!empty($restauramapa)){
 //
 if(isset($format) && strtolower($format) == "application/openlayers"){
 	$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers.php?layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica,legenda";
-	//echo $urln;exit;
+	//caso exista o openlayers3
+	if(file_exists(dirname(__FILE__)."/mashups/openlayers3.php")){
+		$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers3.php?layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica,legenda";
+	}
 	if(!headers_sent()){
 		header("Location:".$urln);
 	}
 	else{
 		echo "<meta http-equiv='refresh' content='0;url=$urln'>";
 	}
-	//exit....
 }
 //
 //pega a versao do Mapserver
@@ -327,6 +353,10 @@ $arrayget["Z"] = "";
 $arrayget["X"] = "";
 $arrayget["Y"] = "";
 $arrayget["tms"] = "";
+$arrayget["TileMatrix"] = "";
+$arrayget["TileCol"] = "";
+$arrayget["TileRow"] = "";
+
 $nomeMapfileTmp = $dir_tmp."/ogc_".md5(implode("",$arrayget))."_".$agora.".map";
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
 $cortePixels = 0;
@@ -716,7 +746,7 @@ else{
 	$oMap->save($nomeMapfileTmp);
 
 	validaAcessoTemas($nomeMapfileTmp,true);
-	
+
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
 
@@ -734,16 +764,30 @@ if(ob_get_contents ()){
 //tms e usado basicamente por mashup ou openlayers
 //
 if(isset($_GET["tms"])){
-	$temp = explode("/",$_GET["tms"]);
-	$z = $temp[2];
-	$x = $temp[3];
-	$y = str_replace(".png","",$temp[4]);
-	$n = pow(2,$z+1);
-	$lon1 = $x / $n * 360.0 - 180.0;
-	$lon2 = ($x+1) / $n * 360.0 - 180.0;
-	$n = pow(2,$z);
-	$lat1 = $y / $n * 180.0 - 90.0;
-	$lat2 = ($y+1) / $n * 180.0 - 90.0;
+	if(!isset($_GET["TileMatrix"])){
+		$temp = explode("/",$_GET["tms"]);
+		$z = $temp[2];
+		$x = $temp[3];
+		$y = str_replace(".png","",$temp[4]);
+		$n = pow(2,$z+1);
+		$lon1 = $x / $n * 360.0 - 180.0;
+		$lon2 = ($x+1) / $n * 360.0 - 180.0;
+		$n = pow(2,$z);
+		$lat1 = $y / $n * 180.0 - 90.0;
+		$lat2 = ($y+1) / $n * 180.0 - 90.0;
+	}
+	else{
+		$top_left_minx = -180;
+		$top_left_maxy = 90;
+
+		$x_size = $res[$_GET["TileMatrix"] - 1] * 256;
+		$y_size = $x_size;
+
+		$lon1 = $top_left_minx + ($_GET["TileCol"] * $x_size);
+		$lat1 = $top_left_maxy - ($_GET["TileRow"] * $y_size) - $y_size;
+		$lon2 = $top_left_minx + ($_GET["TileCol"] * $x_size) + $x_size;
+		$lat2 = $top_left_maxy - ($_GET["TileRow"] * $y_size);
+	}
 	//essa funcao termina o processo se a imagem existir
 	if($cache == true){
 		carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
@@ -758,7 +802,6 @@ if(isset($_GET["tms"])){
 	//se nao existir, salva a imagem
 	//echo $lon1." ".$lat1." ".$lon2." ".$lat2;exit;
 	$oMap->setsize(256,256);
-
 	$oMap->setExtent($lon1,$lat1,$lon2,$lat2);
 
 	$layer0->set("status",MS_DEFAULT);

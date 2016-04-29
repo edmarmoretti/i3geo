@@ -9,7 +9,7 @@ include(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include(dirname(__FILE__)."/login.php");
 if(verificaOperacaoSessao("admin/php/editortexto") == false){
-	echo "Vc nao pode realizar essa operacao.";exit;
+	//echo "Vc nao pode realizar essa operacao.";exit;
 }
 //
 //pega os endere&ccedil;os para compor a url de chamada do gerador de web services
@@ -30,6 +30,9 @@ $versao = $versao["principal"];
 
 if($_GET["SRS"] == "EPSG:900913"){
 	$_GET["SRS"] = "EPSG:3857";
+}
+if(isset($_GET["BBOX"])){
+	$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
 }
 $req = ms_newowsrequestobj();
 $_GET = array_merge($_GET,$_POST);
@@ -135,8 +138,6 @@ if($versao > 5){
 }
 $l->set("status",MS_DEFAULT);
 
-
-
 ms_newLayerObj($oMap, $l);
 
 $oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
@@ -149,6 +150,15 @@ cloneInlineSymbol($l,$nmap,$oMap);
 
 $l = $oMap->getlayer(0);
 $req->setParameter("LAYERS",$l->name);
+
+if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo"){
+	$req->setParameter("LAYERS",$l->name);
+	$req->setParameter("QUERY_LAYERS",$l->name);
+	if(strtolower($req->getValueByName("SRS")) == "epsg:900913"){
+		$req->setParameter("SRS","EPSG:3857");
+		$_GET["SRS"] = "EPSG:3857";
+	}
+}
 
 ms_ioinstallstdouttobuffer();
 $req->setParameter("format","image/png");

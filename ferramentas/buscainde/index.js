@@ -39,6 +39,8 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Classe: i3GEOF.buscainde
 
+Veja as configuracoes de inicializacao em i3GEO.configura.ferramentas.buscainde
+
 */
 i3GEOF.buscainde = {
 	/*
@@ -57,6 +59,7 @@ i3GEOF.buscainde = {
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.buscainde.dicionario);
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["csw"] = i3GEO.configura.ferramentas.buscainde.csw;
 		return dicionario;
 	},
 	/*
