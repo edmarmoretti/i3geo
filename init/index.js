@@ -112,25 +112,11 @@ botoesIni.push({
 	"fa": "bar-chart",
 	"atalho": false
 },{
-	"img":"../imagens/gvsig.jpg",
-	"href":"../pacotes/gvsig/gvsig2mapfile/upload.htm",
-	"titulo":$trad(26,g_traducao_init),
-	"subtitulo": "",
-	"fa": "upload",
-	"atalho": false
-},{
 	"img":"insert-link.png",
 	"href":"../geradordelinks.htm",
 	"titulo":$trad(13,g_traducao_init),
 	"subtitulo": "",
 	"fa": "link",
-	"atalho": false
-},{
-	"img":"atlas.png",
-	"href":"../atlas",
-	"titulo":$trad(27,g_traducao_init),
-	"subtitulo": "",
-	"fa": "list",
 	"atalho": false
 },{
 	"img":"folder-image.png",
@@ -146,21 +132,21 @@ botoesIni.push({
 	"subtitulo": "",
 	"fa": "wrench"
 },{
-	"img":"accessories-dictionary.png",
+	"img":"guiamigracao.png",
 	"href":"../guia_de_migracao.txt",
 	"titulo":$trad(17,g_traducao_init),
 	"subtitulo": "",
 	"fa": "book",
 	"atalho": false
 },{
-	"img":"accessories-dictionary.png",
+	"img":"docapi.png",
 	"href":"../documentacao",
 	"titulo":$trad(24,g_traducao_init),
 	"subtitulo": "",
 	"fa": "book",
 	"atalho": false
 },{
-	"img":"accessories-dictionary.png",
+	"img":"gvsigtraining.png",
 	"href":"http://moodle.gvsig-training.com/course/view.php?id=11",
 	"titulo":$trad(28,g_traducao_init),
 	"subtitulo": "",
@@ -207,7 +193,7 @@ function mostraBotoes(){
 	for(i=0;i<n;i++){
 		texto = '<div class="r" ><div class="ri" ><a target=_blank href="'+botoesIni[i].href+'" ><img style="max-height:77px;" src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';
 		if(botoesIni[i].subtitulo){
-			texto += botoesIni[i].subtitulo;
+			//texto += botoesIni[i].subtitulo;
 		}
 		texto += '</div></div>';
 		ins.push(texto);
@@ -215,6 +201,7 @@ function mostraBotoes(){
 	$i("botoes").innerHTML = ins.join("");
 	$i("conteudo").style.height = i3GEO.util.getScrollHeight() + "px";
 }
+//TODO um dia, remover as imagens da pasta init e deixar apenas as da pasta init/imagens
 function mostraBotoesBT(template,men){
 	$i("mensagemLogin").innerHTML = men;
 	$i("jumbotron").innerHTML = "<img src='../imagens/i3Geo_bigTransp.png' style='float:left;width:80px;margin:5px;' /><p>"+$trad(35,g_traducao_init)+"</p>";
@@ -224,6 +211,7 @@ function mostraBotoesBT(template,men){
 	//i3GEO.barraDeBotoes.ATIVA = false;
 	var atalhos = [], ins = [],i,n = botoesIni.length;
 	for(i=0;i<n;i++){
+		botoesIni[i].img = "imagens/"+botoesIni[i].img;
 		ins.push(Mustache.render(template, botoesIni[i]));
 		if(botoesIni[i].atalho){
 			atalhos.push(Mustache.render('<a href="{{{href}}}" target="_blank" class="btn btn-raised">{{{titulo}}}</a>', botoesIni[i]));

@@ -76,9 +76,9 @@ define ( "ONDEI3GEO", ".." );
 #bandeiras {
 	width: 100px;
 	text-align: left;
-	position: absolute;
-	left: 0.2cm;
-	z-index: 10;
+	//position: absolute;
+	//left: 0.2cm;
+	//z-index: 10;
 }
 </style>
  </head>
@@ -87,7 +87,7 @@ define ( "ONDEI3GEO", ".." );
 	<nav class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
 			<div class="navbar-header">
-				<div id="bandeiras"></div>
+
 				<p class="pull-right visible-xs" style="padding:0px;">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas">
 						<i class="fa fa-chevron-left"></i><i class="fa fa-chevron-right"></i>
@@ -100,7 +100,10 @@ define ( "ONDEI3GEO", ".." );
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#"><i class="fa fa-home"></i></i></a></li>
+					<li><a href="#"><div class="fa" id="bandeiras"></div></a></li>
+				</ul>
+				<ul class="nav navbar-nav pull-right">
+					<li><a href="#"><i class="fa fa-home fa-2x"></i></i></a></li>
 				</ul>
 			</div>
 			<!-- /.nav-collapse -->
@@ -112,9 +115,9 @@ define ( "ONDEI3GEO", ".." );
 	<div class="container">
 
 		<div class="row row-offcanvas row-offcanvas-right">
-
+			<div id="mensagemLogin">
+			</div>
 			<div class="col-xs-12 col-sm-9">
-				<div id="mensagemLogin" class="alert alert-danger"></div>
 				<div class="jumbotron" id="jumbotron">
 				</div>
 				<div class="row" id="botoes"></div>
@@ -165,7 +168,7 @@ define ( "ONDEI3GEO", ".." );
     ?>
     <script>
     $(document).ready(function(){
-		var template = '<div class="col-xs-6 col-lg-4"><div class="panel panel-default"><div class="panel-body" style="height: 250px;"><div class="thumbnail" style="height:90px;"><img class="img-rounded" style="max-height:77px;" src="{{{img}}}" /></div><h4>{{{titulo}}}</h4><p>{{{subtitulo}}}</p></div><div class="panel-footer text-right" style="border:0px;background-color:white;"><p><a class="btn btn-primary btn-raised" href="{{{href}}}" role="button" target="_blank" >Abrir <i class="fa fa-{{{fa}}}" aria-hidden="true" ></i></a></p></div></div></div>';
+		var template = '<div class="col-xs-6 col-lg-4"><div class="panel panel-default"><div class="panel-body" style="height: 250px;"><div class="thumbnail" style="height:90px;"><img class="img-rounded" style="height: 100%; width: 100%" src="{{{img}}}" /></div><h4>{{{titulo}}}</h4><p>{{{subtitulo}}}</p></div><div class="panel-footer text-right" style="border:0px;background-color:white;"><p><a class="btn btn-primary btn-raised" href="{{{href}}}" role="button" target="_blank" >Abrir <i class="fa fa-{{{fa}}}" aria-hidden="true" ></i></a></p></div></div></div>';
 		<?php
 		if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
 			echo "var men = $" . "trad(19,g_traducao_init);";
@@ -173,7 +176,7 @@ define ( "ONDEI3GEO", ".." );
 			echo "var men = '';";
 		}
 		?>
-    	mostraBotoesBT(template, men);
+    	mostraBotoesBT(template, '<div class="col-xs-12 col-sm-12"><div class="alert alert-danger">' + men + '</div></div>');
     });
     </script>
 </body>
