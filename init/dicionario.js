@@ -237,6 +237,12 @@ g_traducao_init =
 				en : "Map list",
 				es : "Lista de mapas"
 			}
+		],
+		35 : [
+			{
+				pt : "Bem vindo à página principal do i3Geo. Aqui você encontrará os links de acesso aos mapas, documentação, sistema de administração e outros aplicativos. Colabore com o aprimoramento do i3Geo participando da comunidade de usuários!",
+				en : "",
+				es : ""
+			}
 		]
 	};
-	
