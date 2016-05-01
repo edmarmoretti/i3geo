@@ -1,29 +1,8 @@
-botoesIni = [];
-botoesIni.push({
-	"img":"certificate-server.png",
-	"href":"../testainstal.php",
-	"titulo":$trad(2,g_traducao_init),
-	"subtitulo": "Verifica se a instalação do i3Geo está correta e mostra algumas das características do servidor, como as versões dos softwares básicos instalados.",
-	"fa": "check",
-	"atalho": false
-},{
-	"img":"applications-development-web.png",
-	"href":"../admin",
-	"titulo":$trad(3,g_traducao_init),
-	"subtitulo": "",
-	"fa": "cogs",
-	"atalho": true
-},{
+botoesIni = [
+{
 	"img":"openlayers.png",
 	"href":"../<?php echo $customDir; ?>/black_ol.htm",
 	"titulo":$trad(4,g_traducao_init),
-	"subtitulo": "",
-	"fa": "map-o",
-	"atalho": true
-},{
-	"img":"openlayersdebug.png",
-	"href":"../<?php echo $customDir; ?>/openlayersdebug.htm",
-	"titulo":$trad(5,g_traducao_init),
 	"subtitulo": "",
 	"fa": "map-o",
 	"atalho": true
@@ -119,6 +98,27 @@ botoesIni.push({
 	"fa": "link",
 	"atalho": false
 },{
+	"img":"openlayersdebug.png",
+	"href":"../<?php echo $customDir; ?>/openlayersdebug.htm",
+	"titulo":$trad(5,g_traducao_init),
+	"subtitulo": "",
+	"fa": "map-o",
+	"atalho": true
+},{
+	"img":"certificate-server.png",
+	"href":"../testainstal.php",
+	"titulo":$trad(2,g_traducao_init),
+	"subtitulo": "Verifica se a instalação do i3Geo está correta e mostra algumas das características do servidor, como as versões dos softwares básicos instalados.",
+	"fa": "check",
+	"atalho": false
+},{
+	"img":"applications-development-web.png",
+	"href":"../admin",
+	"titulo":$trad(3,g_traducao_init),
+	"subtitulo": "",
+	"fa": "cogs",
+	"atalho": true
+},{
 	"img":"folder-image.png",
 	"href":"../exemplos",
 	"titulo":$trad(14,g_traducao_init),
@@ -181,10 +181,9 @@ botoesIni.push({
 	"fa": "envelope",
 	"atalho": true
 }
-);
+];
 function mostraBotoes(){
 	$i("mensagemLogin").innerHTML = men;
-
 	i3GEO.configura = {"locaplic" : ".."};
 	i3GEO.idioma.IDSELETOR = "bandeiras";
 	i3GEO.idioma.mostraSeletor();
@@ -202,20 +201,24 @@ function mostraBotoes(){
 	$i("conteudo").style.height = i3GEO.util.getScrollHeight() + "px";
 }
 //TODO um dia, remover as imagens da pasta init e deixar apenas as da pasta init/imagens
-function mostraBotoesBT(template,men){
+function mostraBotoesBT(men){
+	var html = "";
+	//menu
+	html = Mustache.to_html(
+		$("#menuTpl").html(),
+		i3GEO.idioma.objetoIdioma(g_traducao_init)
+	);
+	$("#menuTpl").html(html);
+	//
 	$i("mensagemLogin").innerHTML = men;
 	$i("jumbotron").innerHTML = "<img src='../imagens/i3Geo_bigTransp.png' style='float:left;width:80px;margin:5px;' /><p>"+$trad(35,g_traducao_init)+"</p>";
 	i3GEO.configura = {"locaplic" : ".."};
 	i3GEO.idioma.IDSELETOR = "bandeiras";
 	i3GEO.idioma.mostraSeletor();
-	//i3GEO.barraDeBotoes.ATIVA = false;
-	var ins = [],i,n = botoesIni.length;
-	for(i=0;i<n;i++){
-		botoesIni[i].img = "imagens/"+botoesIni[i].img;
-		ins.push(Mustache.render(template, botoesIni[i]));
-		//if(botoesIni[i].atalho){
-		//	atalhos.push(Mustache.render('<a href="{{{href}}}" target="_blank" class="btn btn-raised">{{{titulo}}}</a>', botoesIni[i]));
-		//}
-	}
-	$i("botoes").innerHTML = ins.join("");
+	html = Mustache.to_html(
+		"{{#d}}" + $("#botoesTpl").html() + "{{/d}}",
+		{"d":botoesIni,"abrir" : $trad(36,g_traducao_init)}
+	);
+	$("#botoesTpl").html(html);
 }
+

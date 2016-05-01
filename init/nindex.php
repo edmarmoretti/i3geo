@@ -99,9 +99,27 @@ define ( "ONDEI3GEO", ".." );
 				<ul class="nav navbar-nav">
 					<li><a href="#"><div class="fa" id="bandeiras"></div></a></li>
 				</ul>
-				<ul class="nav navbar-nav pull-right">
-					<li><a href="#"><i class="fa fa-home fa-2x"></i></i></a></li>
-				</ul>
+				<!-- template para permitir a traducao -->
+				<div id="menuTpl" >
+					<ul class="nav navbar-nav">
+						<li><a href="#map-o">{{{mapas}}}</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li><a href="#download">Download</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li><a href="#check">{{{admin}}}</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li><a href="#book">{{{docs}}}</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li><a href="#group">{{{comunidade}}}</a></li>
+					</ul>
+					<ul class="nav navbar-nav pull-right">
+						<li><a href="#"><i class="fa fa-home fa-2x"></i></i></a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -113,9 +131,29 @@ define ( "ONDEI3GEO", ".." );
 				<div class="jumbotron" id="jumbotron">
 				</div>
 			</div>
-			<div id="botoes">
-			</div>
-
+				<!-- Template para criacao dos quadros ver index.js -->
+				<div id="botoesTpl">
+					<div id="{{{fa}}}" class="col-sm-12" style="width:260px;min-width:260px;max-width:260px;">
+						<div class="panel panel-default">
+							<div class="panel-body" style="height: 250px;">
+								<div class="thumbnail" style="height:90px;">
+									<img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
+								</div>
+								<h4>{{{titulo}}}</h4>
+								<div style="overflow:auto;height:200px;">
+									<p>{{{subtitulo}}}</p>
+								</div>
+							</div>
+							<div class="panel-footer text-right" style="border:0px;background-color:white;">
+								<p>
+									<a class="btn btn-primary btn-raised" href="{{{href}}}" role="button" target="_blank" >
+									{{{abrir}}} <i class="fa fa-{{{fa}}}" aria-hidden="true" ></i>
+									</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			<div class="col-sm-12 hidden" id="tt" style="width:260px;">
 				<div class="panel panel-default" >
 					<div class="panel-body">
@@ -156,15 +194,16 @@ define ( "ONDEI3GEO", ".." );
     ?>
     <script>
     $(document).ready(function(){
-		var template = '<div class="col-sm-12" style="width:260px;min-width:260px;max-width:260px;"><div class="panel panel-default"><div class="panel-body" style="height: 250px;"><div class="thumbnail" style="height:90px;"><img class="img-rounded" style="height: 100%; width: 100%" src="{{{img}}}" /></div><h4>{{{titulo}}}</h4><div style="overflow:auto;height:200px;"><p>{{{subtitulo}}}</p></div></div><div class="panel-footer text-right" style="border:0px;background-color:white;"><p><a class="btn btn-primary btn-raised" href="{{{href}}}" role="button" target="_blank" >Abrir <i class="fa fa-{{{fa}}}" aria-hidden="true" ></i></a></p></div></div></div>';
-		<?php
+		var template = '<div class="col-sm-12" style="width:260px;min-width:260px;max-width:260px;"><div class="panel panel-default"><div class="panel-body" style="height: 250px;"><div class="thumbnail" style="height:90px;"><img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" /></div><h4>{{{titulo}}}</h4><div style="overflow:auto;height:200px;"><p>{{{subtitulo}}}</p></div></div><div class="panel-footer text-right" style="border:0px;background-color:white;"><p><a class="btn btn-primary btn-raised" href="{{{href}}}" role="button" target="_blank" >Abrir <i class="fa fa-{{{fa}}}" aria-hidden="true" ></i></a></p></div></div></div>';
+
+    	<?php
 		if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
-			echo "var men = $" . "trad(19,g_traducao_init);";
+			echo "var men = '<div class=\'alert alert-danger\' >' + $" . "trad(19,g_traducao_init) + '</div>';";
 		} else {
 			echo "var men = '';";
 		}
 		?>
-    	mostraBotoesBT(template, '<div class="alert alert-danger">' + men + '</div>');
+    	mostraBotoesBT(men);
     	$('.hidden').removeClass('hidden');
     	//carrega o TT
     	window.twttr = (function(d, s, id) {

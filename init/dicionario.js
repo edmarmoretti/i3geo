@@ -244,5 +244,40 @@ g_traducao_init =
 				en : "",
 				es : ""
 			}
+		],
+		36 : [
+			{
+				pt : "Abrir",
+				en : "Open",
+				es : "Abrir"
+			}
+		],
+		"mapas" : [
+			{
+				pt : "Mapas",
+				en : "Maps",
+				es : "Mapas"
+			}
+		],
+		"docs" : [
+			{
+				pt : "Docs",
+				en : "Docs",
+				es : "DOcs"
+			}
+		],
+		"admin" : [
+			{
+				pt : "Admin",
+				en : "Admin",
+				es : "Admin"
+			}
+		],
+		"comunidade" : [
+			{
+				pt : "Comunidade",
+				en : "",
+				es : ""
+			}
 		]
 	};
