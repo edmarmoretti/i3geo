@@ -209,14 +209,13 @@ function mostraBotoesBT(template,men){
 	i3GEO.idioma.IDSELETOR = "bandeiras";
 	i3GEO.idioma.mostraSeletor();
 	//i3GEO.barraDeBotoes.ATIVA = false;
-	var atalhos = [], ins = [],i,n = botoesIni.length;
+	var ins = [],i,n = botoesIni.length;
 	for(i=0;i<n;i++){
 		botoesIni[i].img = "imagens/"+botoesIni[i].img;
 		ins.push(Mustache.render(template, botoesIni[i]));
-		if(botoesIni[i].atalho){
-			atalhos.push(Mustache.render('<a href="{{{href}}}" target="_blank" class="btn btn-raised">{{{titulo}}}</a>', botoesIni[i]));
-		}
+		//if(botoesIni[i].atalho){
+		//	atalhos.push(Mustache.render('<a href="{{{href}}}" target="_blank" class="btn btn-raised">{{{titulo}}}</a>', botoesIni[i]));
+		//}
 	}
 	$i("botoes").innerHTML = ins.join("");
-	//$i("atalhos").innerHTML = atalhos.join("");
 }

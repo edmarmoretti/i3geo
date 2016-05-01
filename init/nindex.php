@@ -78,6 +78,11 @@ define ( "ONDEI3GEO", ".." );
 	text-align: left;
 }
 </style>
+	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
+	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
+	<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
+	<script src='../classesjs/compactados/mustache.js'></script>
+	<script src='dicionario.js'></script>
  </head>
 
 <body style="background-color: #eeeeee; padding-top: 80px;">
@@ -110,19 +115,18 @@ define ( "ONDEI3GEO", ".." );
 			</div>
 			<div id="botoes">
 			</div>
-			<div class="col-sm-12" style="width:260px;">
+
+			<div class="col-sm-12 hidden" id="tt" style="width:260px;">
 				<div class="panel panel-default" >
 					<div class="panel-body">
 						<a class="twitter-timeline" href="https://twitter.com/i3geo" data-widget-id="288061915689787392" height="300">Tweets @i3Geo</a>
-						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12" style="width:260px;">
+			<div class="col-sm-12 hidden" style="width:260px;">
 				<div class="panel panel-default" >
 					<div class="panel-body">
 						<a class="twitter-timeline" href="https://twitter.com/hashtag/i3geo" data-widget-id="643417277208133633" height="300">i3geo Tweets</a>
-						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 					</div>
 				</div>
 			</div>
@@ -130,26 +134,20 @@ define ( "ONDEI3GEO", ".." );
 
 		<hr>
 
-		<footer>
-			<div class="row" >
-				<div class="col-sm-10"
+		<footer class="text-center" >
+			<div class="row hidden" >
+				<div class="col-sm-6"
 					<a rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank"><img alt="Licen&ccedil;a Creative Commons" style="border-width: 0" src="https://i.creativecommons.org/l/GPL/2.0/88x62.png" /></a><br />O i3Geo est&aacute; licenciado com uma Licen&ccedil;a <a
 					rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank">Creative Commons - Licen&ccedil;a P&uacute;blica Geral GNU (&#34;GNU General Public License&#34;)</a>
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-6">
 					<script type='text/javascript' src='https://www.openhub.net/p/i3geo/widgets/project_users?format=js&style=blue'></script>
 				</div>
-
 			</div>
 		</footer>
 
 	</div>
-	<!--/.container-->
-	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
-	<script src='../classesjs/compactados/mustache.js'></script>
-	<script src='dicionario.js'></script>
+
     <?php
     echo "<script>";
     include "index.js";
@@ -158,7 +156,7 @@ define ( "ONDEI3GEO", ".." );
     ?>
     <script>
     $(document).ready(function(){
-		var template = '<div class="col-sm-12" style="width:260px;"><div class="panel panel-default"><div class="panel-body" style="height: 250px;"><div class="thumbnail" style="height:90px;"><img class="img-rounded" style="height: 100%; width: 100%" src="{{{img}}}" /></div><h4>{{{titulo}}}</h4><div style="overflow:auto;height:200px;"><p>{{{subtitulo}}}</p></div></div><div class="panel-footer text-right" style="border:0px;background-color:white;"><p><a class="btn btn-primary btn-raised" href="{{{href}}}" role="button" target="_blank" >Abrir <i class="fa fa-{{{fa}}}" aria-hidden="true" ></i></a></p></div></div></div>';
+		var template = '<div class="col-sm-12" style="width:260px;min-width:260px;max-width:260px;"><div class="panel panel-default"><div class="panel-body" style="height: 250px;"><div class="thumbnail" style="height:90px;"><img class="img-rounded" style="height: 100%; width: 100%" src="{{{img}}}" /></div><h4>{{{titulo}}}</h4><div style="overflow:auto;height:200px;"><p>{{{subtitulo}}}</p></div></div><div class="panel-footer text-right" style="border:0px;background-color:white;"><p><a class="btn btn-primary btn-raised" href="{{{href}}}" role="button" target="_blank" >Abrir <i class="fa fa-{{{fa}}}" aria-hidden="true" ></i></a></p></div></div></div>';
 		<?php
 		if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
 			echo "var men = $" . "trad(19,g_traducao_init);";
@@ -167,6 +165,24 @@ define ( "ONDEI3GEO", ".." );
 		}
 		?>
     	mostraBotoesBT(template, '<div class="alert alert-danger">' + men + '</div>');
+    	$('.hidden').removeClass('hidden');
+    	//carrega o TT
+    	window.twttr = (function(d, s, id) {
+    		  var js, fjs = d.getElementsByTagName(s)[0],
+    		    t = window.twttr || {};
+    		  if (d.getElementById(id)) return t;
+    		  js = d.createElement(s);
+    		  js.id = id;
+    		  js.src = "https://platform.twitter.com/widgets.js";
+    		  fjs.parentNode.insertBefore(js, fjs);
+
+    		  t._e = [];
+    		  t.ready = function(f) {
+    		    t._e.push(f);
+    		  };
+
+    		  return t;
+    		}(document, "script", "twitter-wjs"));
     });
     </script>
 </body>
