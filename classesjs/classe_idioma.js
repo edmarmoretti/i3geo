@@ -438,6 +438,21 @@ $trad = function(id, dic) {
 //
 (function() {
 	try {
+		/*
+		 * Define o idioma padrao quando o cookie ainda nao tiver sido escolhido
+		 */
+		if (document.cookie.indexOf("i3geolingua") === -1) {
+			var exdate = new Date();
+			exdate.setDate(exdate.getDate() + 10);
+			var l = "pt";
+			var lang = navigator.language || navigator.userLanguage;
+			lang = lang.split("-")[0];
+			if(lang == "en" || lang == "es" || lang == "pt"){
+				l = lang;
+			}
+			document.cookie = "i3geolingua=" + l + "; expires=" + exdate.toUTCString() + ";path=/";
+		}
+
 		var c = i3GEO.util.pegaCookie("i3geolingua");
 		if (c) {
 			i3GEO.idioma.define(c);

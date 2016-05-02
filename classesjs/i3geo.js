@@ -52,6 +52,11 @@ Retorno:
 
 object - objeto javaScript
 */
+
+/**
+ * define a lingua default do navegador
+ */
+
 $i = function(id)
 {return document.getElementById(id);};
 (function(){

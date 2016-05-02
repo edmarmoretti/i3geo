@@ -693,4 +693,19 @@ else //se for linux
 	$R_path = "R";
 	$R_libpath = "";
 }
+/**
+ * Define o idioma de inicializacao (cookies nao devem ter sido definidos anteriormente)
+ *
+ * Idiomas disponiveis: pt, en, es
+ *
+ * Para trocar, altere a linha abaixo
+ */
+if(empty($_COOKIE["i3geolingua"])){
+	$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+	$l = "pt";
+	if($lang == "en" || $lang == "es"){
+		$l = $lang;
+	}
+	setcookie('i3geolingua', $l, time()+60*60*24*365, '/');
+}
 ?>
