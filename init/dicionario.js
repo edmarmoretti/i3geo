@@ -1,3 +1,4 @@
+//veja em index.js o objeto que utiliza essa traducao
 g_traducao_init =
 	{
 		1 : [
@@ -14,6 +15,13 @@ g_traducao_init =
 				es : "Test de instalaci&oacute;n"
 			}
 		],
+		"2a" : [
+				{
+					pt : "Verifica se a instala&ccedil;&atilde;o est&aacute; correta. Mostra algumas informa&ccedil;&otilde;es b&aacute;sicas sobre o servidor e as configura&ccedil;&otilde;es do software.",
+					en : "",
+					es : ""
+				}
+			],
 		3 : [
 			{
 				pt : "Sistema de administra&ccedil;&atilde;o",

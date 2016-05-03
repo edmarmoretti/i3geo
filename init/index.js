@@ -5,181 +5,182 @@ botoesIni = [
 	"titulo":$trad(4,g_traducao_init),
 	"subtitulo": "",
 	"fa": "map-o",
-	"atalho": true
+	"_target": "_blank"
 },{
 	"img":"osm.png",
 	"href":"../<?php echo $customDir; ?>/black_osm.htm",
 	"titulo":$trad(23,g_traducao_init),
 	"subtitulo": "",
 	"fa": "map-o",
-	"atalho": true
+	"_target": "_blank"
 },{
 	"img":"mashup.png",
 	"href":"../mashups",
 	"titulo":$trad(18,g_traducao_init) + "<br><a href='../mashups/osm.php?temas=&largura=800&altura=500' target=_blank >OSM</a>" + " - <a href='../mashups/openlayers.php?temas=&largura=800&altura=500' target=_blank >OpenLayers</a>",
 	"subtitulo": "",
 	"fa": "map-o",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"googlemaps.png",
 	"href":"../<?php echo $customDir; ?>/black_gm.phtml",
 	"titulo":$trad(6,g_traducao_init),
 	"subtitulo": "",
 	"fa": "map-o",
-	"atalho": true
+	"_target": "_blank"
 },{
 	"img":"googlemaps_noite.png",
 	"href":"../<?php echo $customDir; ?>/googlemaps_noite.phtml",
 	"titulo":$trad(22,g_traducao_init),
 	"subtitulo": "",
 	"fa": "map-o",
-	"atalho": false
+	"_target": "_blank"
 },{
 	"img":"googleearth.png",
 	"href":"../<?php echo $customDir; ?>/googleearth.phtml",
 	"titulo":$trad(7,g_traducao_init),
 	"subtitulo": "",
 	"fa": "map-o",
-	"atalho": false
+	"_target": "_blank"
 },{
 	"img":"cartogramas.png",
 	"href":"../<?php echo $customDir; ?>/black_carto_ol.htm",
 	"titulo":$trad(8,g_traducao_init),
 	"subtitulo": "",
 	"fa": "map-o",
-	"atalho": false
+	"_target": "_blank"
 },{
 	"img":"editor.png",
 	"href":"../ferramentas/metaestat/editorlimites.php",
 	"titulo":$trad(9,g_traducao_init),
 	"subtitulo": "",
 	"fa": "map-o",
-	"atalho": false
+	"_target": "_blank"
 },{
 	"img":"window-duplicate.png",
 	"href":"../ferramentas/salvamapa/lista.htm",
 	"titulo":$trad(34,g_traducao_init),
 	"subtitulo": "",
 	"fa": "list",
-	"atalho": true
+	"_target": "_self"
 },{
 	"img":"svn-update.png",
 	"href":"../datadownload.htm",
 	"titulo":$trad(10,g_traducao_init),
 	"subtitulo": "",
 	"fa": "download",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"ogc_logo.jpg",
 	"href":"../ogc.htm",
 	"titulo":$trad(11,g_traducao_init),
 	"subtitulo": "",
 	"fa": "download",
-	"atalho": true
+	"_target": "_self"
 },{
 	"img":"application-vnd-google-earth-kml.png",
 	"href":"../kml.php",
 	"titulo":$trad(12,g_traducao_init),
 	"subtitulo": "",
 	"fa": "download",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"../imagens/saiku_free_small.png",
 	"href":"../ferramentas/saiku/esquemaxml.php?locaplic="+window.location.href.replace("/init/index.php",""),
 	"titulo":$trad(25,g_traducao_init),
 	"subtitulo": " <a style='cursor:pointer;' target=_blank src='https://medium.com/innovative-business-intelligence/so-people-who-land-on-our-community-download-page-will-notice-a-subtle-difference-when-they-click-1b61aca316c5' >"+$trad(29,g_traducao_init)+"</a>",
 	"fa": "bar-chart",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"insert-link.png",
 	"href":"../geradordelinks.htm",
 	"titulo":$trad(13,g_traducao_init),
 	"subtitulo": "",
 	"fa": "link",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"openlayersdebug.png",
 	"href":"../<?php echo $customDir; ?>/openlayersdebug.htm",
 	"titulo":$trad(5,g_traducao_init),
 	"subtitulo": "",
 	"fa": "map-o",
-	"atalho": true
+	"_target": "_blank"
 },{
 	"img":"certificate-server.png",
 	"href":"../testainstal.php",
 	"titulo":$trad(2,g_traducao_init),
-	"subtitulo": "Verifica se a instalação do i3Geo está correta e mostra algumas das características do servidor, como as versões dos softwares básicos instalados.",
+	"subtitulo": $trad("2a",g_traducao_init),
 	"fa": "check",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"applications-development-web.png",
 	"href":"../admin",
 	"titulo":$trad(3,g_traducao_init),
 	"subtitulo": "",
 	"fa": "cogs",
-	"atalho": true
+	"_target": "_self"
 },{
 	"img":"folder-image.png",
 	"href":"../exemplos",
 	"titulo":$trad(14,g_traducao_init),
 	"subtitulo": "",
 	"fa": "graduation-cap",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"applications-development.png",
 	"href":"../pacotes/utils/index.php",
 	"titulo":$trad(33,g_traducao_init),
 	"subtitulo": "",
-	"fa": "wrench"
+	"fa": "wrench",
+	"_target": "_self"
 },{
 	"img":"guiamigracao.png",
 	"href":"../guia_de_migracao.txt",
 	"titulo":$trad(17,g_traducao_init),
 	"subtitulo": "",
 	"fa": "book",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"docapi.png",
 	"href":"../documentacao",
 	"titulo":$trad(24,g_traducao_init),
 	"subtitulo": "",
 	"fa": "book",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"gvsigtraining.png",
 	"href":"http://moodle.gvsig-training.com/course/view.php?id=11",
 	"titulo":$trad(28,g_traducao_init),
 	"subtitulo": "",
 	"fa": "book",
-	"atalho": true
+	"_target": "_self"
 },{
 	"img":"tools-report-bug.png",
 	"href":"https://softwarepublico.gov.br/gitlab/i3geo/i3geo/issues",
 	"titulo":$trad(16,g_traducao_init),
 	"subtitulo": "",
 	"fa": "bug",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"../imagens/apple-touch-icon.png",
 	"href":"https://softwarepublico.gov.br/gitlab/groups/i3geo",
 	"titulo":$trad(30,g_traducao_init),
 	"subtitulo": "",
 	"fa": "group",
-	"atalho": true
+	"_target": "_self"
 },{
 	"img":"logo_psp.png",
 	"href":"https://portal.softwarepublico.gov.br/social/i3geo/",
 	"titulo":$trad(31,g_traducao_init),
 	"subtitulo": "",
 	"fa": "group",
-	"atalho": false
+	"_target": "_self"
 },{
 	"img":"mailman.jpg",
 	"href":"http://lists.osgeo.org/cgi-bin/mailman/listinfo/i3geo",
 	"titulo":$trad(32,g_traducao_init),
 	"subtitulo": "",
 	"fa": "envelope",
-	"atalho": true
+	"_target": "_self"
 }
 ];
 function mostraBotoes(){
