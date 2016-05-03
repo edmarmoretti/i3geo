@@ -123,18 +123,27 @@ define ( "ONDEI3GEO", ".." );
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid">
+	<div class="container-fluid hidden">
 		<div class="row">
 			<div class="col-sm-12" id="mensagemLogin"></div>
 			<div class="col-sm-12">
-				<div class="jumbotron" id="jumbotron"></div>
+				<div class="jumbotron" id="jumbotron">
+					<!-- Template pare mensagem do i3Geo -->
+					<ul class="list-inline">
+						<li>
+							<img class="pull-left" src='../imagens/i3Geo_bigTransp.png' style='width:80px;margin:5px;' />
+							<img class="pull-right" src='../pacotes/qrcode/php/qr_img.php?host={{{host}}}&d={{{href}}}' style='width:80px;margin:5px;' />
+							<p>{{{jumbotron}}}</p>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
 			<!-- Template para criacao dos quadros ver index.js -->
-			<div id="botoesTpl" class="hidden" >
+			<div id="botoesTpl" class="hidden">
 				<div id="{{{fa}}}" class="col-sm-12" style="width: 260px; min-width: 260px; max-width: 260px;">
 					<div class="panel panel-default">
 						<div class="panel-body" style="height: 250px;">
@@ -176,7 +185,7 @@ define ( "ONDEI3GEO", ".." );
 			</div>
 		</div>
 
-		<hr/>
+		<hr />
 
 		<footer class="text-center">
 			<div class="row hidden">
@@ -194,22 +203,22 @@ define ( "ONDEI3GEO", ".." );
 	</div>
 
     <?php
-				echo "<script>";
-				include "index.js";
-				echo "</script>";
-				include "body.php";
-				?>
+		echo "<script>";
+		include "index.js";
+		echo "</script>";
+		include "body.php";
+	?>
     <script>
     $(document).ready(function(){
 		var template = '<div class="col-sm-12" style="width:260px;min-width:260px;max-width:260px;"><div class="panel panel-default"><div class="panel-body" style="height: 250px;"><div class="thumbnail" style="height:90px;"><img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" /></div><h4>{{{titulo}}}</h4><div style="overflow:auto;height:200px;"><p>{{{subtitulo}}}</p></div></div><div class="panel-footer text-right" style="border:0px;background-color:white;"><p><a class="btn btn-primary btn-raised" href="{{{href}}}" role="button" target="_blank" >Abrir <i class="fa fa-{{{fa}}}" aria-hidden="true" ></i></a></p></div></div></div>';
 
     	<?php
-					if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
-						echo "var men = '<div class=\'alert alert-danger\' >' + $" . "trad(19,g_traducao_init) + '</div>';";
-					} else {
-						echo "var men = '';";
-					}
-					?>
+			if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
+				echo "var men = '<div class=\'alert alert-danger\' >' + $" . "trad(19,g_traducao_init) + '</div>';";
+			} else {
+				echo "var men = '';";
+			}
+		?>
     	mostraBotoesBT(men);
     	$('.hidden').removeClass('hidden');
     	//carrega o TT

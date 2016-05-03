@@ -212,7 +212,16 @@ function mostraBotoesBT(men){
 	$("#menuTpl").html(html);
 	//
 	$i("mensagemLogin").innerHTML = men;
-	$i("jumbotron").innerHTML = "<img src='../imagens/i3Geo_bigTransp.png' style='float:left;width:80px;margin:5px;' /><p>"+$trad(35,g_traducao_init)+"</p>";
+	//$i("jumbotron").innerHTML = "<img src='../imagens/i3Geo_bigTransp.png' style='float:left;width:80px;margin:5px;' /><p>"+$trad(35,g_traducao_init)+"</p>";
+	html = Mustache.to_html(
+		$("#jumbotron").html(),
+		{
+			"jumbotron" : $trad(35,g_traducao_init),
+			"host" : location.host,
+			"href" : location.href
+		}
+	);
+	$("#jumbotron").html(html);
 	i3GEO.configura = {"locaplic" : ".."};
 	i3GEO.idioma.IDSELETOR = "bandeiras";
 	i3GEO.idioma.mostraSeletor();
