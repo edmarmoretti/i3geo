@@ -2099,13 +2099,17 @@ i3GEO.arvoreDeTemas = {
 		}
 		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.qrcode === true) {
 			lkgrcode = i3GEO.arvoreDeTemas.LOCAPLIC
-					+ "/pacotes/qrcode/php/qr_html.php?d="
+					+ "/pacotes/qrcode/php/qr_html.php?host="
+					+ location.host
+					+ "&d="
 					+ i3GEO.arvoreDeTemas.LOCAPLIC
 					+ "/ms_criamapa.php?interface="
 					+ i3GEO.parametros.interfacePadrao + "&temasa="
 					+ node.data.idtema + "&layers=" + node.data.idtema;
 			lkgrcode1 = i3GEO.arvoreDeTemas.LOCAPLIC
-					+ "/pacotes/qrcode/php/qr_img.php?d="
+					+ "/pacotes/qrcode/php/qr_img.php?host="
+					+ location.host
+					+ "&d="
 					+ i3GEO.arvoreDeTemas.LOCAPLIC
 					+ "/ms_criamapa.php?interface="
 					+ i3GEO.parametros.interfacePadrao + "&temasa="

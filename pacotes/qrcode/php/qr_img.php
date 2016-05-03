@@ -46,7 +46,10 @@
 # USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 */
-
+if($_GET["host"] != $_SERVER["HTTP_HOST"]){
+	echo "Ooops bad host";
+	exit;
+}
 	if (!function_exists('imagecreate'))
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))

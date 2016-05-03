@@ -20,5 +20,5 @@ echo "<p>O c&oacute;digo de barras abaixo pode ser lido por dispositivos m&oacut
 echo "<p>Se o seu dispositivo possuir o software adequado, fotografe o c&oacute;digo para abrir o navegador de internet ou clique no link.";
 $d = $d."&temasa=".$temasa."&layers=".$layers;
 echo "<p><a href='$d' >$d</a><br>";
-echo "<img src='qr_img.php?d=$d' />";
+echo "<img src='qr_img.php?host=".$_GET["host"]."&d=$d' />";
 ?>
