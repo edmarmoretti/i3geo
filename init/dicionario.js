@@ -24,32 +24,60 @@ g_traducao_init =
 			],
 		3 : [
 			{
-				pt : "Sistema de administra&ccedil;&atilde;o",
+				pt : "Administra&ccedil;&atilde;o",
 				en : "Management system",
 				es : "Sistema de administraci&oacute;n"
 			}
 		],
+		"3a" : [
+				{
+					pt : "Usu&aacute;rios cadastrados podem criar camadas, organizar o acesso aos dados, inserir novos dados no servidor e executar diversas tarefas administrativas.",
+					en : "",
+					es : ""
+				}
+			],
 		4 : [
 			{
-				pt : "Mapa com interface Openlayers",
-				en : "Map with Openlayers interface",
-				es : "Mapa con interfaz Openlayers"
+				pt : "i3Geo + <a href='http://openlayers.org/' >OpenLayers <i class='fa fa-external-link fa-1g' aria-hidden='true'></i></a>",
+				en : "",
+				es : ""
 			}
 		],
+		"4a" : [
+				{
+					pt : "Essa &eacute; a interface de mapas de uso mais comum. N&atilde;o utiliza uma proje&ccedil;&atilde;o cartogr&aacute;fica espec&iacute;fica, o que torna mais r&aacute;pida a renderiza&ccedil;&atilde;o das camadas.",
+					en : "",
+					es : ""
+				}
+			],
 		5 : [
 			{
-				pt : "Mapa com interface Openlayers (modo debug)",
-				en : "Map with Openlayers interface (debug mode)",
-				es : "Mapa con interfaz Openlayers (modo debug)"
+				pt : "Debug",
+				en : "Debug",
+				es : "Debug"
 			}
 		],
+		"5a" : [
+				{
+					pt : "Mapa (OpenLayers) com o c&oacute;digo javascript n&atilde;o compactado, &uacute;til para desenvolvedores. Tamb&eacute;m nas vers&otilde;es com <a href='interface/osmdebug.htm' >OSM</a> e <a href='interface/gmdebug.phtml'>GoogleMaps</a>.",
+					en : "",
+					es : ""
+				}
+			],
 		6 : [
 			{
-				pt : "Mapa com interface Google Maps",
-				en : "Map with Google Maps interface",
-				es : "Mapa con interfaz Google Maps "
+				pt : "i3Geo + <a href='https://developers.google.com/maps' >Google Maps <i class='fa fa-external-link' aria-hidden='true'></i></a>",
+				en : "",
+				es : ""
 			}
 		],
+		"6a" : [
+				{
+					pt : "Baseado na API do GoogleMaps, esse mapa incorpora as funcionalidades desse popular software, incluindo as camadas de fundo com imagens e cartografia b&aacute;sica.",
+					en : "",
+					es : ""
+				}
+			],
 		7 : [
 			{
 				pt : "Mapa com interface Google Earth (depreciado)",
@@ -164,9 +192,16 @@ g_traducao_init =
 		],
 		23 : [
 			{
-				pt : "Mapa com Open Street Map (OSM)",
-				en : "Map with Open Street Map (OSM) ",
-				es : "Mapa con Open Street Map (OSM)"
+				pt : "i3Geo + <a href='http://wiki.openstreetmap.org' >OSM <i class='fa fa-external-link' aria-hidden='true'></i></a>",
+				en : "",
+				es : ""
+			}
+		],
+		"23a" : [
+			{
+				pt : "A mais completa base cartogr&aacute;fica livre, um esfor&ccedil;o de milhares de pessoas de todo o globo. Adicione outras camadas do cat&aacute;logo e crie mapas com riqueza de detalhes.",
+				en : "",
+				es : ""
 			}
 		],
 		24 : [

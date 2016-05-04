@@ -3,14 +3,21 @@ botoesIni = [
 	"img":"openlayers.png",
 	"href":"../<?php echo $customDir; ?>/black_ol.htm",
 	"titulo":$trad(4,g_traducao_init),
-	"subtitulo": "",
+	"subtitulo": $trad("4a",g_traducao_init),
 	"fa": "map-o",
 	"_target": "_blank"
 },{
 	"img":"osm.png",
 	"href":"../<?php echo $customDir; ?>/black_osm.htm",
 	"titulo":$trad(23,g_traducao_init),
-	"subtitulo": "",
+	"subtitulo": $trad("23a",g_traducao_init),
+	"fa": "map-o",
+	"_target": "_blank"
+},{
+	"img":"googlemaps.png",
+	"href":"../<?php echo $customDir; ?>/black_gm.phtml",
+	"titulo":$trad(6,g_traducao_init),
+	"subtitulo": $trad("6a",g_traducao_init),
 	"fa": "map-o",
 	"_target": "_blank"
 },{
@@ -20,13 +27,6 @@ botoesIni = [
 	"subtitulo": "",
 	"fa": "map-o",
 	"_target": "_self"
-},{
-	"img":"googlemaps.png",
-	"href":"../<?php echo $customDir; ?>/black_gm.phtml",
-	"titulo":$trad(6,g_traducao_init),
-	"subtitulo": "",
-	"fa": "map-o",
-	"_target": "_blank"
 },{
 	"img":"googlemaps_noite.png",
 	"href":"../<?php echo $customDir; ?>/googlemaps_noite.phtml",
@@ -101,7 +101,7 @@ botoesIni = [
 	"img":"openlayersdebug.png",
 	"href":"../<?php echo $customDir; ?>/openlayersdebug.htm",
 	"titulo":$trad(5,g_traducao_init),
-	"subtitulo": "",
+	"subtitulo": $trad("5a",g_traducao_init),
 	"fa": "map-o",
 	"_target": "_blank"
 },{
@@ -115,7 +115,7 @@ botoesIni = [
 	"img":"applications-development-web.png",
 	"href":"../admin",
 	"titulo":$trad(3,g_traducao_init),
-	"subtitulo": "",
+	"subtitulo": $trad("3a",g_traducao_init),
 	"fa": "cogs",
 	"_target": "_self"
 },{
