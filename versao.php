@@ -9,5 +9,5 @@ Utilizado como um include em ms_configura.php
  * v7 guia de migracao esta correto?
  * v7 gerar repositorio no SVN com o nome i3geo6
  */
-$mensagemInicia = 'Vers&atilde;o 7.0 (beta)';
+$mensagemInicia = 'V. 7.0 beta';
 ?>
