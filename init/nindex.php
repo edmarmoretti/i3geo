@@ -85,7 +85,7 @@ define ( "ONDEI3GEO", ".." );
 <script src='dicionario.js'></script>
 </head>
 
-<body style="background-color: #eeeeee; padding-top: 80px;">
+<body style="background-color: #eeeeee; padding-top: 90px;">
 
 	<nav class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container-fluid">
@@ -102,19 +102,19 @@ define ( "ONDEI3GEO", ".." );
 				<!-- template para permitir a traducao -->
 				<div id="menuTpl">
 					<ul class="nav navbar-nav">
-						<li><a href="#map-o">{{{mapas}}} <i class="fa fa-map-o" aria-hidden="true"></i></a></li>
+						<li><a href="#map-o">{{{mapas}}}</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
-						<li><a href="#download">Download <i class="fa fa-download" aria-hidden="true"></i></a></li>
+						<li><a href="#download">Download</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
-						<li><a href="#check">{{{admin}}} <i class="fa fa-cogs" aria-hidden="true"></i></a></li>
+						<li><a href="#check">{{{admin}}}</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
-						<li><a href="#book">{{{docs}}} <i class="fa fa-book" aria-hidden="true"></i></a></li>
+						<li><a href="#book">{{{docs}}}</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
-						<li><a href="#group">{{{comunidade}}} <i class="fa fa-group" aria-hidden="true"></i></a></li>
+						<li><a href="#group">{{{comunidade}}}</a></li>
 					</ul>
 					<ul class="nav navbar-nav pull-right">
 						<li><a href="#"><i class="fa fa-home fa-2x"></i></i></a></li>
