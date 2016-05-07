@@ -72,66 +72,122 @@ g_traducao_init =
 			}
 		],
 		"6a" : [
-				{
-					pt : "Baseado na API do GoogleMaps, esse mapa incorpora as funcionalidades desse popular software, incluindo as camadas de fundo com imagens e cartografia b&aacute;sica.",
-					en : "",
-					es : ""
-				}
-			],
+			{
+				pt : "Baseado na API do GoogleMaps, esse mapa incorpora as funcionalidades desse popular software, incluindo as camadas de fundo com imagens e cartografia b&aacute;sica.",
+				en : "",
+				es : ""
+			}
+		],
 		7 : [
 			{
-				pt : "Mapa com interface Google Earth (depreciado)",
-				en : "Map with Google Earth interface (deprecated)",
-				es : "Mapa con interfaz Google Earth (depreciado)"
+				pt : "Google Earth (depreciado)",
+				en : "Google Earth interface (deprecated)",
+				es : "Google Earth (depreciado)"
+			}
+		],
+		"7a" : [
+			{
+				pt : "Com o plugin do GE, esse mapa permite visualizar camadas sobrepostas ao relevo terrestre visto na forma de um globo com navega&ccedil;&atilde;o em 3d.",
+				en : "",
+				es : ""
 			}
 		],
 		8 : [
 			{
-				pt : "Cartogramas (METAESTAT)",
-				en : "Cartogram (METAESTAT)",
-				es : "Cartogramas (METAESTAT)"
+				pt : "Cartogramas",
+				en : "Cartogram",
+				es : "Cartogramas"
+			}
+		],
+		"8a" : [
+			{
+				pt : "Com o m&oacute;dulo METAESTAT, um sistema de cadastramento de vari&aacute;veis estat&iacute;sticas, construa cartogramas com fun&ccedil;&otilde;es de agrega&ccedil;&atilde;o geogr&aacute;fica, temporal  e diferentes classifica&ccedil;&otilde;es.",
+				en : "",
+				es : ""
 			}
 		],
 		9 : [
 			{
-				pt : "Editor de regi&otilde;es (METAESTAT)",
-				en : "Region editor (METAESTAT)",
-				es : "Editor de regiones (METAESTAT)"
+				pt : "Editor de regi&otilde;es",
+				en : "Region editor",
+				es : "Editor de regiones"
+			}
+		],
+		"9a" : [
+			{
+				pt : "Utilize esse editor vetorial para criar ou modificar as localidades ou regi&otilde;es geogr&aacute;ficas utilizadas nos cartogramas estat&iacute;sticos.",
+				en : "",
+				es : ""
 			}
 		],
 		10 : [
 			{
-				pt : "Download de dados geo",
-				en : "Data geo download",
-				es : "Download de datos geo"
+				pt : "Download de dados",
+				en : "Data download",
+				es : "Download de datos"
+			}
+		],
+		"10a" : [
+			{
+				pt : "Veja quais dados s&atilde;o p&uacute;blicos e podem ser obtidos por meio de download em diferentes formatos.",
+				en : "",
+				es : ""
 			}
 		],
 		11 : [
 			{
-				pt : "Servi&ccedil;os OGC (WMS e WFS)",
-				en : "OGC (WMS and WFS) services ",
-				es : "Servicios OGC (WMS y WFS)"
+				pt : "Servi&ccedil;os OGC",
+				en : "OGC services ",
+				es : "Servicios OGC"
+			}
+		],
+		"11a" : [
+			{
+				pt : "Dados p&uacute;blicos podem ser acessados por meio dos padr&otilde;es OGC mais comuns, como WMS e WFS. Veja aqui a lista e os links dos servi&ccedil;os",
+				en : "",
+				es : ""
 			}
 		],
 		12 : [
 			{
-				pt : "Cat&aacute;logo de temas no formato KML",
+				pt : "Cat&aacute;logo KML",
 				en : "Catalog of kml themes",
-				es : "Cat&aacute;logo de temas en formato KML"
+				es : "Cat&aacute;logo KML"
+			}
+		],
+		"12a" : [
+			{
+				pt : "O cat&aacute;logo de temas pode ser visto tamb&eacute;m no Google Earth. Basta adicion&aacute;-lo como um link de rede.",
+				en : "",
+				es : ""
 			}
 		],
 		13 : [
 			{
-				pt : "Gerador de links permanentes",
-				en : "Permanent link creator",
-				es : "Generador de links permanentes"
+				pt : "Links permanentes",
+				en : "Permanent link ",
+				es : "Links permanentes"
+			}
+		],
+		"13a" : [
+			{
+				pt : "Com esse utilit&aacute;rio voc&ecirc; pode criar links para abrir o i3Geo. Escolha as camadas, a abrang&ecirc;ncia geogr&aacute;fica, a interface e outros par&acirc;metros.",
+				en : "",
+				es : ""
 			}
 		],
 		14 : [
 			{
-				pt : "Exemplos de customiza&ccedil;&atilde;o da interface de mapas",
-				en : "Examples of Map inteface customization",
-				es : "Ejemplos de personalizaci&oacute;n de la interfaz de mapas"
+				pt : "Exemplos de customiza&ccedil;&atilde;o",
+				en : "Examples of customization",
+				es : "Ejemplos de personalizaci&oacute;n"
+			}
+		],
+		"14a" : [
+			{
+				pt : "As interfaces dos mapas podem ser modificadas de diferentes maneiras. Os exemplos mostram como fazer as mais comuns.",
+				en : "",
+				es : ""
 			}
 		],
 		15 : [
@@ -143,9 +199,16 @@ g_traducao_init =
 		],
 		16 : [
 			{
-				pt : "Registro de bugs",
-				en : "Bug record",
-				es : "Registro de bugs"
+				pt : "Bugs",
+				en : "Bug",
+				es : "Bugs"
+			}
+		],
+		"16a" : [
+			{
+				pt : "Nessa plataforma de registro de bugs voc&ecirc; pode informar problemas e interagir com os desenvolvedores.",
+				en : "",
+				es : ""
 			}
 		],
 		17 : [
@@ -155,11 +218,25 @@ g_traducao_init =
 				es : "Gu&iacute;a de migraci&oacute;n"
 			}
 		],
+		"17a" : [
+			{
+				pt : "Ao fazer a atualiza&ccedil;&atilde;o entre vers&otilde;es do i3Geo, verifique as mudan&ccedil;as que podem afetar o funcionamento dos mapas antigos.",
+				en : "",
+				es : ""
+			}
+		],
 		18 : [
 			{
 				pt : "Integre mapas com",
 				en : "Link maps with",
 				es : "Integrar mapas con"
+			}
+		],
+		"18a" : [
+			{
+				pt : "Crie mapas interativos com funções básicas, defina os botões e outras características com uma URL parametrizada.",
+				en : "",
+				es : ""
 			}
 		],
 		19 : [
@@ -183,13 +260,6 @@ g_traducao_init =
 				es : "Manual de administraci&oacute;n"
 			}
 		],
-		22 : [
-			{
-				pt : "Google Maps com aplica&ccedil;&atilde;o de estilo",
-				en : "Google Maps with style application",
-				es : "Google Maps con aplicaci&oacute;n de estilo"
-			}
-		],
 		23 : [
 			{
 				pt : "i3Geo + <a href='http://wiki.openstreetmap.org' >OSM <i class='fa fa-external-link' aria-hidden='true'></i></a>",
@@ -211,11 +281,25 @@ g_traducao_init =
 				es : "Documentaci&oacute;n de la API"
 			}
 		],
+		"24a" : [
+			{
+				pt : "Descri&ccedil;&atilde;o das fun&ccedil;&otilde;es javascript que podem ser modificadas ou utilizadas para criar interfaces para os seus mapas.",
+				en : "",
+				es : ""
+			}
+		],
 		25 : [
 			{
-				pt : "SAIKU - an&aacute;lise tabular",
-				en : "SAIKU - tabular analysis",
-				es : "SAIKU - an&aacute;lisis tabular"
+				pt : "i3Geo + <a href='http://community.meteorite.bi/' >SAIKU <i class='fa fa-external-link' aria-hidden='true'></i></a>",
+				en : "",
+				es : ""
+			}
+		],
+		"25a" : [
+			{
+				pt : "Ferramenta OLAP que permite cruzar dados tabulares definidos por meio do m&oacute;dulo METAESTAT.",
+				en : "",
+				es : ""
 			}
 		],
 		26 : [
@@ -234,9 +318,16 @@ g_traducao_init =
 		],
 		28 : [
 			{
-				pt : "Curso de i3Geo em Gvsig-training",
-				en : "i3Geo course at Gvsig-training",
-				es : "Curso de i3Geo en Gvsig-training"
+				pt : "Curso em Gvsig-training",
+				en : "Course at Gvsig-training",
+				es : "Curso en Gvsig-training"
+			}
+		],
+		"28a" : [
+			{
+				pt : "Curso gratuito sobre o sistema de administra&ccedil;&atilde;o hospedado na plataforma de treinamento da Associa&ccedil;&atilde;o gvSIG.",
+				en : "",
+				es : ""
 			}
 		],
 		29 : [
@@ -253,11 +344,25 @@ g_traducao_init =
 				es : "Wiki, instalaci&oacute;n, GitLab"
 			}
 		],
+		"30a" : [
+			{
+				pt : "Reposit&oacute;rio de c&oacute;digo Git. Informa&ccedil;&otilde;es sobre como instalar o i3Geo, como manter o c&oacute;digo atualizado.",
+				en : "",
+				es : ""
+			}
+		],
 		31 : [
 			{
 				pt : "Comunidade, download",
 				en : "Comunity,  download",
 				es : "Comunidad, download"
+			}
+		],
+		"31a" : [
+			{
+				pt : "Página da comunidade de usuários no Portal do Software pÚblico Brasileiro.",
+				en : "",
+				es : ""
 			}
 		],
 		32 : [
@@ -267,6 +372,13 @@ g_traducao_init =
 				es : "Lista"
 			}
 		],
+		"32a" : [
+			{
+				pt : "Lista de e-mails da comunidade i3Geo mantida pela <a href='http://www.osgeo.org/' target='_blank' >OSGEO <i class='fa fa-external-link fa-1g' aria-hidden='true'></i></a>. Tire d&uacute;vidas com outros usu&aacute;rios e divulgue assuntos de interesse.",
+				en : "",
+				es : ""
+			}
+		],
 		33 : [
 			{
 				pt : "Utilit&aacute;rios",
@@ -274,11 +386,25 @@ g_traducao_init =
 				es : "Utilitarios"
 			}
 		],
+		"33a" : [
+			{
+				pt : "Links para aplicativos que podem auxiliar em algumas tarefas de construção de mapas.",
+				en : "",
+				es : ""
+			}
+		],
 		34 : [
 			{
 				pt : "Lista de mapas",
 				en : "Map list",
 				es : "Lista de mapas"
+			}
+		],
+		"34a" : [
+			{
+				pt : "Aqui s&atilde;o mostrados os mapas que foram salvos e que podem ser abertos como links individuais. Usu&aacute;rios casdatrados podem salvar mapas.",
+				en : "",
+				es : ""
 			}
 		],
 		35 : [

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Pagina inicial do i3Geo
  * Voce pode utilizar o parametro customDir para indicar a pasta onde
@@ -13,121 +13,39 @@
 /**
  * Cria as pastas temporarias que o i3Geo precisa, caso nao existam
  */
-include(dirname(__FILE__)."/../ms_configura.php");
-if(!empty($_GET["customDir"])){
-	$customDir = strip_tags($_GET["customDir"]);
-}
-else if(empty($customDir)){
+define (ONDEI3GEO,"..");
+include (dirname ( __FILE__ ) . "/../ms_configura.php");
+if (! empty ( $_GET ["customDir"] )) {
+	$customDir = strip_tags ( $_GET ["customDir"] );
+} else if (empty ( $customDir )) {
 	$customDir = "interface";
 }
-if(!file_exists($dir_tmp)){
-	@mkdir ($dir_tmp,0777);
+if (! file_exists ( $dir_tmp )) {
+	@mkdir ( $dir_tmp, 0777 );
 }
-if(file_exists($dir_tmp)){
-	@mkdir($dir_tmp."/comum",0777);
-	@mkdir($dir_tmp."/saiku-datasources",0777);
-	chmod($dir_tmp."/saiku-datasources",0777);
-	@mkdir($dir_tmp."/cache",0777);
-	chmod($dir_tmp."/cache",0777);
-	@mkdir($dir_tmp."/cache/googlemaps",0777);
-	chmod($dir_tmp."/cache/googlemaps",0777);
+if (file_exists ( $dir_tmp )) {
+	@mkdir ( $dir_tmp . "/comum", 0777 );
+	@mkdir ( $dir_tmp . "/saiku-datasources", 0777 );
+	chmod ( $dir_tmp . "/saiku-datasources", 0777 );
+	@mkdir ( $dir_tmp . "/cache", 0777 );
+	chmod ( $dir_tmp . "/cache", 0777 );
+	@mkdir ( $dir_tmp . "/cache/googlemaps", 0777 );
+	chmod ( $dir_tmp . "/cache/googlemaps", 0777 );
 }
-if(file_exists($locaplic."/".$customDir."/index.php")){
-	include($locaplic."/".$customDir."/index.php");
-}
-error_reporting(0);
+error_reporting ( 0 );
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-<title>i3Geo</title>
-<meta name="url" content="http://www.softwarepublico.gov.br" />
-<meta name="description" content="i3Geo" />
-<meta name="keywords" content="i3geo mapa geoprocessamento" />
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<?php
-$cache_expire = 1;
-header("Pragma: public");
-header("Cache-Control: max-age=".$cache_expire);
-header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$cache_expire) . ' GMT');
-?>
-<script>
-i3GEOF = [];
-men = "";
-<?php
-include("dicionario.js");
-include("../classesjs/compactados/dicionario_compacto.js");
-include("../classesjs/compactados/classe_util_compacto.js");
-include("../classesjs/compactados/classe_idioma_compacto.js");
-include("../versao.php");
-include("index.js");
-if($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin" ){
-	echo "men = $"."trad(19,g_traducao_init);";
-}
-?>
-</script>
-
+	<?php include "head.php"; ?>
 <style>
-body {
-	padding-top: 0px;
-	COLOR: #2F4632;
-	text-align: center;
-	font-size: 0.6cm;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	background-color: rgb(250, 250, 250);
-	margin: auto;
-}
-
-.r {
-	border: 1px solid #F0F0F0;
-	border-radius: 5px 5px 5px 5px;
-	box-shadow: 1px 1px 1px 1px lightgray;
-	float: left;
-	height: 150px;
-	margin: 0px 25px 20px auto;
-	padding: 5px;
-	width: 200px;
-	background: white;
-	vertical-align: middle;
-	font-size: 0.4cm;
-	position: relative;
-	display: block;
-	text-align: center;
-	z-index: 2;
-}
-
-.ri {
-	left: 50%;
-	position: absolute;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	width: 100%;
-}
-
-table {
-	width: 100%;
-}
-
-td {
-	font-size: 0.4cm;
-	text-align: center;
-	height: 150px;
-}
-
-h1 {
-	font-size: 0.6cm;
-	text-align: left;
-	margin: 25px;
-}
-
 #brasil {
 	background-image: url("../imagens/sprite.png");
 	background-position: 0 -600px;
 	background-repeat: no-repeat;
 	cursor: pointer;
-	height: 10px;
-	width: 20px;
+	height: 13px;
+	width: 22px;
 }
 
 #uk {
@@ -135,8 +53,8 @@ h1 {
 	background-position: 0 -625px;
 	background-repeat: no-repeat;
 	cursor: pointer;
-	height: 10px;
-	width: 20px;
+	height: 13px;
+	width: 22px;
 }
 
 #espanhol {
@@ -144,8 +62,8 @@ h1 {
 	background-position: 0 -1400px;
 	background-repeat: no-repeat;
 	cursor: pointer;
-	height: 10px;
-	width: 20px;
+	height: 13px;
+	width: 22px;
 }
 
 #bandeiras img {
@@ -155,72 +73,166 @@ h1 {
 #bandeiras {
 	width: 100px;
 	text-align: left;
-	position: absolute;
-	left: 0.2cm;
-	z-index: 10;
 }
 
-a {
-	margin: 0px auto;
-	text-decoration: none;
-	font-size: 14px;
-	color: #26298D;
-	outline: doted;
-}
-
-A:hover {
-	color: #4142ff;
-}
-
-.borda {
-	background-color: #4682b4;
-	padding: 5px 0px 5px 0px;
-	text-align: left;
-	width: 100%;
+hr {
+	border-color: #fff -moz-use-text-color -moz-use-text-color;
 }
 </style>
+<script src='../classesjs/compactados/dicionario_compacto.js'></script>
+<script src='../classesjs/compactados/classe_util_compacto.js'></script>
+<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
+<script src='../classesjs/compactados/mustache.js'></script>
+<script src='dicionario.js'></script>
 </head>
-<body class=" yui-skin-sam " style="background-color: rgb(250, 250, 250);">
-	<div class="borda">
-		<div id="bandeiras"></div>
-		<div style="text-align: center">
-			<a href="http://www.softwarepublico.gov.br" target="_blank" style="color: white;">
-				<b><?php echo $mensagemInicia;?> </b>
-			</a>
+<body style="background-color: #eeeeee; padding-top: 90px;" id="topo">
+	<nav class="navbar navbar-fixed-top navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><?php echo $mensagemInicia;?></a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="#"><div class="fa" id="bandeiras"></div></a></li>
+				</ul>
+				<!-- template para permitir a traducao -->
+				<div id="menuTpl" class="hidden">
+					<ul class="nav navbar-nav">
+						<li><a href="#topo" onclick="$('.cartao').hide();$('.map-o').fadeIn(600);">{{{mapas}}}</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li><a href="#topo" onclick="$('.cartao').hide();$('.download').fadeIn(600);">Download</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li><a href="#topo" onclick="$('.cartao').hide();$('.cogs').fadeIn(600);">{{{admin}}}</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li><a href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li><a href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
+					</ul>
+					<ul class="nav navbar-nav pull-right">
+						<li><a href="#topo" onclick="$('.cartao').fadeIn(600);"><i class="fa fa-home fa-2x"></i></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div class="container-fluid hidden">
+		<div class="row">
+			<div class="col-xs-12" id="mensagemLogin"></div>
+			<div class="col-xs-12">
+				<div class="jumbotron" id="jumbotron">
+					<!-- Template pare mensagem do i3Geo -->
+					<ul class="list-inline">
+						<li>
+							<img class="pull-left" src='../imagens/i3Geo_bigTransp.png' style='width:80px;margin:5px;' />
+							<img class="pull-right" src='../pacotes/qrcode/php/qr_img.php?host={{{host}}}&d={{{href}}}' style='width:80px;margin:5px;' />
+							<p>{{{jumbotron}}}</p>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
+	<div class="container">
+		<div class="row center-block">
+			<!-- Template para criacao dos quadros ver index.js -->
+			<div id="botoesTpl" class="hidden">
+				<div class="cartao {{{fa}}} col-xs-12 center-block" style="width: 260px; min-width: 260px; max-width: 260px;">
+					<div class="panel panel-default">
+						<div class="panel-body" style="height: 250px;">
+							<div class="thumbnail" style="height: 90px;">
+								<img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
+							</div>
+							<h4>{{{titulo}}}</h4>
+							<div style="overflow: auto; height: 200px;">
+								<h5>{{{subtitulo}}}</h5>
+							</div>
+						</div>
+						<div class="panel-footer text-right" style="border: 0px; background-color: white;">
+							<p>
+								<a class="btn btn-primary btn-raised" href="{{{href}}}" role="button" target="{{{target}}}"> {{{abrir}}} <i class="fa fa-{{{fa}}}" aria-hidden="true"></i>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="center-block col-xs-12 hidden" id="tt" style="width: 260px; min-width: 260px; max-width: 260px;">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a class="twitter-timeline" href="https://twitter.com/i3geo" data-widget-id="288061915689787392" height="300">Tweets @i3Geo</a>
+					</div>
+				</div>
+			</div>
+			<div class="center-block col-xs-12 hidden" style="width: 260px; min-width: 260px; max-width: 260px;">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a class="twitter-timeline" href="https://twitter.com/hashtag/i3geo" data-widget-id="643417277208133633" height="300">i3geo Tweets</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<script type="text/javascript" src="http://www.openhub.net/p/150688/widgets/project_basic_stats.js"></script>
+			</div>
+		</div>
 
-	<div id="conteudo" style="position: relative; top: -10px; margin: auto; max-width: 1000px; left: 10px;">
-		<div style="margin-top: 5px;">
-			<div id="mensagemLogin" style="font-size: 14px; color: red; margin-top: 20px; text-align: left;"></div>
-			<br>
-			<div id="botoes" style="width: 100%;"></div>
-			<script>mostraBotoes();</script>
-			<div class="r">
-				<div class="ri">
+		<hr />
+
+		<footer>
+			<div class="row text-center hidden">
+				<div class="col-xs-6 center-block"
+
+					<a rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank"><img alt="Licen&ccedil;a Creative Commons" style="border-width: 0" src="https://i.creativecommons.org/l/GPL/2.0/88x62.png" /></a><br />O i3Geo est&aacute; licenciado com uma Licen&ccedil;a <a
+						rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank">Creative Commons - Licen&ccedil;a P&uacute;blica Geral GNU (&#34;GNU General Public License&#34;)</a>
+				</div>
+				<div class="col-xs-6 center-block">
 					<script type='text/javascript' src='https://www.openhub.net/p/i3geo/widgets/project_users?format=js&style=blue'></script>
 				</div>
 			</div>
-		</div>
-		<div style="float: left;">
-			<div class="r" style="width: 230px; height: 380px;">
-				<div class="ri">
-					<a class="twitter-timeline" href="https://twitter.com/i3geo" data-widget-id="288061915689787392" width="220" height="350">Tweets @i3Geo</a>
-					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-				</div>
-			</div>
-			<div class="r" style="width: 230px; height: 380px;">
-				<div class="ri">
-					<a class="twitter-timeline" href="https://twitter.com/hashtag/i3geo" data-widget-id="643417277208133633">i3geo Tweets</a>
-					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-				</div>
-			</div>
-			<div class="r" style="width: 345px; height: 220px;">
-				<div class="ri">
-					<script type="text/javascript" src="http://www.openhub.net/p/150688/widgets/project_basic_stats.js"></script>
-				</div>
-			</div>
-		</div>
+		</footer>
 	</div>
+    <script>
+	//utilizado em ms_configura.php para customizar o local da pasta de inicializacao
+	var customDir = "../<?php echo $customDir; ?>";
+    </script>
+    <script src='index.js'></script>
+    <script>
+    $(document).ready(function(){
+    	<?php
+			if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
+				echo "var men = '<div class=\'alert alert-danger\' >' + $" . "trad(19,g_traducao_init) + '</div>';";
+			} else {
+				echo "var men = '';";
+			}
+		?>
+    	mostraBotoesBT(men);
+    	$('.hidden').removeClass('hidden');
+    	//carrega o TT
+    	window.twttr = (function(d, s, id) {
+    		  var js, fjs = d.getElementsByTagName(s)[0],
+    		    t = window.twttr || {};
+    		  if (d.getElementById(id)) return t;
+    		  js = d.createElement(s);
+    		  js.id = id;
+    		  js.src = "https://platform.twitter.com/widgets.js";
+    		  fjs.parentNode.insertBefore(js, fjs);
+
+    		  t._e = [];
+    		  t.ready = function(f) {
+    		    t._e.push(f);
+    		  };
+
+    		  return t;
+    		}(document, "script", "twitter-wjs"));
+    });
+    </script>
 </body>
 </html>
