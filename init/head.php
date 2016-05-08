@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
 <?php
 //utilizado para o cabecalho das paginas que nao sao mapas e que usam bootstrap com material design
 echo "
@@ -40,3 +43,45 @@ echo "
     <script src='" . ONDEI3GEO . "/pacotes/bootstrap/js/ie10-viewport-bug-workaround.js'></script>
 ";
 ?>
+<style>
+#brasil {
+	background-image: url("../imagens/sprite.png");
+	background-position: 0 -600px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	height: 13px;
+	width: 22px;
+}
+
+#uk {
+	background-image: url("../imagens/sprite.png");
+	background-position: 0 -625px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	height: 13px;
+	width: 22px;
+}
+
+#espanhol {
+	background-image: url("../imagens/sprite.png");
+	background-position: 0 -1400px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	height: 13px;
+	width: 22px;
+}
+
+#bandeiras img {
+	margin-left: 7px;
+}
+
+#bandeiras {
+	width: 100px;
+	text-align: left;
+}
+
+hr {
+	border-color: #fff -moz-use-text-color -moz-use-text-color;
+}
+</style>
+</head>

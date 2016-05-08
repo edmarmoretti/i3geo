@@ -1,0 +1,18 @@
+<div style='width: 90%; margin: auto;'>
+	<p class='paragrafo'>
+		{{{ativo}}}: <b><i>{{{usuarioLogado}}}</i></b>
+	<p class='paragrafo'>{{{usuario}}}:</p>
+	<div class='i3geoForm i3geoFormIconeUsuario'>
+		<input id=i3geousuario type=text value=''/>
+	</div>
+	<br>
+	<p class='paragrafo'>{{{senha}}}:</p>
+	<div class='i3geoForm i3geoFormIconeSenha'>
+		<input id=i3geosenha type=password value='' /><br>
+	</div>
+	<br>
+	<p class='paragrafo'>
+		<input id=i3GEOFloginusuario size=20 type=button value='{{{enviar}}}' />&nbsp;<input id=i3GEOFlogoutusuario size=20 type=button value='Logout' />
+	<p class='paragrafo' onclick='i3GEOF.loginusuario.recuperarSenha()' style='cursor: pointer; color: blue;'>{{{recuperar}}}</p>
+	<p class='paragrafo' onclick='i3GEOF.loginusuario.alterarSenha()' style='cursor: pointer; color: blue;'>{{{alterar}}}</p>
+</div>

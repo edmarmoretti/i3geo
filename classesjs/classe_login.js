@@ -287,7 +287,7 @@ i3GEO.login = {
 			}
 			if (typeof (i3GEOF.loginusuario) === 'undefined') {
 				js = locaplic
-					+ "/ferramentas/loginusuario/index.js";
+					+ "/ferramentas/loginusuario/dependencias.php";
 				i3GEO.util.scriptTag(
 					js,
 					"i3GEOF.loginusuario.criaJanelaFlutuante()",

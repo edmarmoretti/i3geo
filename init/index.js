@@ -223,4 +223,3 @@ function mostraBotoesBT(men){
 	);
 	$("#botoesTpl").html(html);
 }
-

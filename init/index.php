@@ -13,7 +13,7 @@
 /**
  * Cria as pastas temporarias que o i3Geo precisa, caso nao existam
  */
-define (ONDEI3GEO,"..");
+define ( ONDEI3GEO, ".." );
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
 if (! empty ( $_GET ["customDir"] )) {
 	$customDir = strip_tags ( $_GET ["customDir"] );
@@ -33,58 +33,9 @@ if (file_exists ( $dir_tmp )) {
 	chmod ( $dir_tmp . "/cache/googlemaps", 0777 );
 }
 error_reporting ( 0 );
+include "head.php";
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<?php include "head.php"; ?>
-<style>
-#brasil {
-	background-image: url("../imagens/sprite.png");
-	background-position: 0 -600px;
-	background-repeat: no-repeat;
-	cursor: pointer;
-	height: 13px;
-	width: 22px;
-}
 
-#uk {
-	background-image: url("../imagens/sprite.png");
-	background-position: 0 -625px;
-	background-repeat: no-repeat;
-	cursor: pointer;
-	height: 13px;
-	width: 22px;
-}
-
-#espanhol {
-	background-image: url("../imagens/sprite.png");
-	background-position: 0 -1400px;
-	background-repeat: no-repeat;
-	cursor: pointer;
-	height: 13px;
-	width: 22px;
-}
-
-#bandeiras img {
-	margin-left: 7px;
-}
-
-#bandeiras {
-	width: 100px;
-	text-align: left;
-}
-
-hr {
-	border-color: #fff -moz-use-text-color -moz-use-text-color;
-}
-</style>
-<script src='../classesjs/compactados/dicionario_compacto.js'></script>
-<script src='../classesjs/compactados/classe_util_compacto.js'></script>
-<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
-<script src='../classesjs/compactados/mustache.js'></script>
-<script src='dicionario.js'></script>
-</head>
 <body style="background-color: #eeeeee; padding-top: 90px;" id="topo">
 	<nav class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container-fluid">
@@ -92,31 +43,23 @@ hr {
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><?php echo $mensagemInicia;?></a>
+				<a class="navbar-brand" onclick="$('.cartao').fadeIn(600);" href="#"><?php echo $mensagemInicia;?> <i class="fa fa-home fa-1x"></i></a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
+				<button data-toggle="modal" data-target="#modalPrincipal" type="button" class="btn btn-default navbar-btn pull-right">
+					Login <i class="fa fa-key" aria-hidden="true"></i>
+				</button>
 				<ul class="nav navbar-nav">
-					<li><a href="#"><div class="fa" id="bandeiras"></div></a></li>
+					<li class="fa"><a href="#"><div id="bandeiras"></div></a></li>
 				</ul>
 				<!-- template para permitir a traducao -->
 				<div id="menuTpl" class="hidden">
 					<ul class="nav navbar-nav">
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.map-o').fadeIn(600);">{{{mapas}}}</a></li>
-					</ul>
-					<ul class="nav navbar-nav">
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.download').fadeIn(600);">Download</a></li>
-					</ul>
-					<ul class="nav navbar-nav">
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.cogs').fadeIn(600);">{{{admin}}}</a></li>
-					</ul>
-					<ul class="nav navbar-nav">
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
-					</ul>
-					<ul class="nav navbar-nav">
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
-					</ul>
-					<ul class="nav navbar-nav pull-right">
-						<li><a href="#topo" onclick="$('.cartao').fadeIn(600);"><i class="fa fa-home fa-2x"></i></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -129,11 +72,8 @@ hr {
 				<div class="jumbotron" id="jumbotron">
 					<!-- Template pare mensagem do i3Geo -->
 					<ul class="list-inline">
-						<li>
-							<img class="pull-left" src='../imagens/i3Geo_bigTransp.png' style='width:80px;margin:5px;' />
-							<img class="pull-right" src='../pacotes/qrcode/php/qr_img.php?host={{{host}}}&d={{{href}}}' style='width:80px;margin:5px;' />
-							<p>{{{jumbotron}}}</p>
-						</li>
+						<li><img class="pull-left" src='../imagens/i3Geo_bigTransp.png' style='width: 80px; margin: 5px;' /> <img class="pull-right" src='../pacotes/qrcode/php/qr_img.php?host={{{host}}}&d={{{href}}}' style='width: 80px; margin: 5px;' />
+							<p>{{{jumbotron}}}</p></li>
 					</ul>
 				</div>
 			</div>
@@ -185,7 +125,6 @@ hr {
 		</div>
 
 		<hr />
-
 		<footer>
 			<div class="row text-center hidden">
 				<div class="col-xs-6 center-block"
@@ -199,20 +138,42 @@ hr {
 			</div>
 		</footer>
 	</div>
-    <script>
+	<!-- Esse modal e reaproveitado em varios botoes -->
+	<div class="modal fade" id="modalPrincipal" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<i class="fa fa-times" aria-hidden="true"></i>
+					</button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body" style="max-height: calc(100vh - 100px); overflow-y: auto;">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
 	//utilizado em ms_configura.php para customizar o local da pasta de inicializacao
 	var customDir = "../<?php echo $customDir; ?>";
     </script>
-    <script src='index.js'></script>
-    <script>
+	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
+	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
+	<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
+	<script src='../classesjs/compactados/classe_login_compacto.js'></script>
+	<script src='../classesjs/compactados/mustache.js'></script>
+	<script src='dicionario.js'></script>
+	<script src='index.js'></script>
+	<script>
     $(document).ready(function(){
     	<?php
-			if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
-				echo "var men = '<div class=\'alert alert-danger\' >' + $" . "trad(19,g_traducao_init) + '</div>';";
-			} else {
-				echo "var men = '';";
-			}
-		?>
+					if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
+						echo "var men = '<div class=\'alert alert-danger\' >' + $" . "trad(19,g_traducao_init) + '</div>';";
+					} else {
+						echo "var men = '';";
+					}
+					?>
     	mostraBotoesBT(men);
     	$('.hidden').removeClass('hidden');
     	//carrega o TT

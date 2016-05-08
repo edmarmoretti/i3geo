@@ -42,6 +42,33 @@ i3GEOF.loginusuario = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var usuario = i3GEO.util.pegaCookie("i3geousuariologin"),
+			dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.loginusuario.dicionario),
+			u = "";
+
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["ativo"] = $trad('x30');
+		dicionario["usuario"] = $trad('x27');
+		dicionario["senha"] = $trad('x28');
+		dicionario["enviar"] = $trad('x29');
+		dicionario["recuperar"] = $trad('x32');
+		dicionario["alterar"] = $trad('x52');
+
+		if(!usuario || !i3GEO.util.pegaCookie("i3GeoLogin") || i3GEO.util.pegaCookie("i3geousuariologin") == "" || i3GEO.util.pegaCookie("i3GeoLogin") == ""){
+			u = "-";
+		}
+		else{
+			u = usuario + " - "+i3GEO.util.pegaCookie("i3geousuariologin");
+		}
+
+		dicionario["usuarioLogado"] = u;
+		return dicionario;
+	},
 	/*
 		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
 	*/
@@ -100,31 +127,7 @@ i3GEOF.loginusuario = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var usuario = i3GEO.util.pegaCookie("i3geousuariologin"),
-			u = "",
-			ins = "";
-		if(!usuario || !i3GEO.util.pegaCookie("i3GeoLogin") || i3GEO.util.pegaCookie("i3geousuariologin") == "" || i3GEO.util.pegaCookie("i3GeoLogin") == ""){
-			u = "-";
-		}
-		else{
-			u = usuario+" - "+i3GEO.util.pegaCookie("i3geousuariologin");
-		}
-		if(!usuario || usuario == "null"){
-			usuario = "";
-		}
-		ins = '<div style=width:90%;margin:auto; ><p class="paragrafo" >'+$trad("x30")+': <b><i>'+u+"</i></b>" +
-		'<p class="paragrafo" >'+$trad("x27")+':</p>' +
-		'<div class="i3geoForm i3geoFormIconeUsuario">' +
-		'<input id=i3geousuario type=text value="'+usuario+'"/>' +
-		'</div>' +
-		'<br><p class="paragrafo" >'+$trad("x28")+':</p>' +
-		'<div class="i3geoForm i3geoFormIconeSenha">' +
-		'<input id=i3geosenha type=password value=""/><br>' +
-		'</div>' +
-		'<br><p class="paragrafo" ><input id=i3GEOFloginusuario size=20  type=button value="'+$trad("x29")+'" />&nbsp;<input id=i3GEOFlogoutusuario size=20  type=button value="Logout" />' +
-		'<p class="paragrafo" onclick="i3GEOF.loginusuario.recuperarSenha()" style="cursor:pointer;color:blue;">'+$trad("x32")+'</p>' +
-		'<p class="paragrafo" onclick="i3GEOF.loginusuario.alterarSenha()" style="cursor:pointer;color:blue;">'+$trad("x52")+'</p>' +
-		'</div>';
+		var ins = Mustache.render(i3GEOF.loginusuario.MUSTACHE, i3GEOF.loginusuario.mustacheHash());
 		return ins;
 	},
 	/*
