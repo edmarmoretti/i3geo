@@ -93,5 +93,6 @@ hr {
 #menuTpl li {
 	background-color: #3f51b5;
 }
+.navbar-collapse { max-height: 100% !important; }
 </style>
 </head>

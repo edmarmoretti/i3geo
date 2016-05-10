@@ -45,16 +45,16 @@ include "head.php";
 				</button>
 				<a class="navbar-brand" onclick="$('.cartao').fadeIn(600);" href="#"><?php echo $mensagemInicia;?> <i class="fa fa-home fa-1x"></i></a>
 			</div>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');" href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
-					<ul id="i3GEOF_loginusuario" class="dropdown-menu" style="min-width: 280px; padding: 10px; background-color: white;">
-					</ul>
-				</li>
-			</ul>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="fa"><a href="#"><div id="bandeiras"></div></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');" href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
+						<ul id="i3GEOF_loginusuario" class="dropdown-menu" style="min-width: 280px; padding: 10px; background-color: white;">
+						</ul>
+					</li>
 				</ul>
 				<!-- template para permitir a traducao -->
 				<div id="menuTpl" class="hidden">
