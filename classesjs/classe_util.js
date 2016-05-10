@@ -1240,7 +1240,7 @@ i3GEO.util =
 								/*
 								 * if (i3GEO.janela) { i3GEO.janela.fechaAguarde(id + "aguarde"); }
 								 */
-								if (YAHOO.lang.isFunction(ini)) {
+								if (ini.call) {
 									ini.call();
 								} else {
 									eval(ini);
@@ -1252,7 +1252,7 @@ i3GEO.util =
 							/*
 							 * if (i3GEO.janela) { i3GEO.janela.fechaAguarde(id + "aguarde"); }
 							 */
-							if (YAHOO.lang.isFunction(ini)) {
+							if (ini.call) {
 								ini.call();
 							} else {
 								eval(ini);
@@ -2106,7 +2106,7 @@ i3GEO.util =
 		 * {string} - id do elemento que recebera a mensagem de aguarde
 		 *
 		 * {string} - Prefixo que sera usado no name de cada elemento
-		 * 
+		 *
 		 * {string} - sim|nao Marca como escolhido o primeiro valor
 		 */
 		radioEpsg : function(funcao, onde, prefixo, marcado) {

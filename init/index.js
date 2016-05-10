@@ -204,7 +204,7 @@ function mostraBotoesBT(men){
 	);
 	$("#menuTpl").html(html);
 	//
-	$i("mensagemLogin").innerHTML = men;
+	$("#mensagemLogin").html(men);
 	html = Mustache.to_html(
 		$("#jumbotron").html(),
 		{

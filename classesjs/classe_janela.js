@@ -646,15 +646,17 @@ i3GEO.janela =
 		 * id {string} - id da janela
 		 */
 		destroi : function(id) {
-			var janela = YAHOO.i3GEO.janela.manager.find(id);
-			i3GEO.util.removeScriptTag(id + "_script");
-			i3GEO.util.removeScriptTag(id + ".dicionario_script");
-			if (janela) {
-				YAHOO.i3GEO.janela.manager.remove(janela);
-				// janela.destroy();
-				// destroy remove os listeners!!!!
-				janela = $i(id + "_c");
-				janela.parentNode.removeChild(janela);
+			if(typeof(YAHOO) != "undefined"){
+				var janela = YAHOO.i3GEO.janela.manager.find(id);
+				i3GEO.util.removeScriptTag(id + "_script");
+				i3GEO.util.removeScriptTag(id + ".dicionario_script");
+				if (janela) {
+					YAHOO.i3GEO.janela.manager.remove(janela);
+					// janela.destroy();
+					// destroy remove os listeners!!!!
+					janela = $i(id + "_c");
+					janela.parentNode.removeChild(janela);
+				}
 			}
 		},
 		/**

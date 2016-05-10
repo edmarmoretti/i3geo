@@ -1,0 +1,36 @@
+<li>
+	<div id="i3GEOF_loginusuario_imagemCabecalho" style="visibility:hidden;">
+		<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<form class="form" role="form" method="post" action="#">
+				<div class="form-group">
+					<label class="sr-only" for="i3geousuario">{{{usuario}}}</label> <input type="text" class="form-control" id="i3geousuario" placeholder="{{{usuario}}}" required>
+				</div>
+				<div class="form-group">
+					<label class="sr-only" for="i3geosenha">{{{senha}}}</label> <input type="password" class="form-control" id="i3geosenha" placeholder="{{{senha}}}" required>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<button onclick="i3GEOF.loginusuario.enviar()" class="btn btn-primary">{{{enviar}}}</button>
+		</div>
+		<div class="col-md-6">
+			<button onclick="i3GEO.login.dialogo.abreLogout()" class="btn btn-primary">Logout</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<a href="#" onclick="i3GEOF.loginusuario.recuperarSenha()">{{{recuperar}}}</a>&nbsp;&nbsp;
+			<a href="#" onclick="i3GEOF.loginusuario.alterarSenha()">{{{alterar}}}</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<ph6 class="text-muted">{{{ativo}}}: {{{usuarioLogado}}}</h6>
+		</div>
+	</div>
+</li>

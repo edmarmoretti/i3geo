@@ -282,12 +282,15 @@ i3GEO.login = {
 		 */
 		abreLogin : function(locaplic) {
 			var js;
-			if (!locaplic) {
+			if (!template || template == "") {
+				template = "template_mst.html";
+			}
+			if (!locaplic || locaplic == "") {
 				locaplic = i3GEO.configura.locaplic;
 			}
 			if (typeof (i3GEOF.loginusuario) === 'undefined') {
 				js = locaplic
-					+ "/ferramentas/loginusuario/dependencias.php";
+					+ "/ferramentas/loginusuario/dependencias.php?template=" + template;
 				i3GEO.util.scriptTag(
 					js,
 					"i3GEOF.loginusuario.criaJanelaFlutuante()",

@@ -280,14 +280,17 @@ i3GEO.login = {
 		 *
 		 * Abre a tela de login
 		 */
-		abreLogin : function(locaplic) {
+		abreLogin : function(locaplic,template) {
 			var js;
-			if (!locaplic) {
+			if (!template || template == "") {
+				template = "template_mst.html";
+			}
+			if (!locaplic || locaplic == "") {
 				locaplic = i3GEO.configura.locaplic;
 			}
 			if (typeof (i3GEOF.loginusuario) === 'undefined') {
 				js = locaplic
-					+ "/ferramentas/loginusuario/dependencias.php";
+					+ "/ferramentas/loginusuario/dependencias.php?template=" + template;
 				i3GEO.util.scriptTag(
 					js,
 					"i3GEOF.loginusuario.criaJanelaFlutuante()",
@@ -305,7 +308,9 @@ i3GEO.login = {
 			var r = confirm($trad("x26"));
 			if (r == true) {
 				i3GEO.login.anulaCookie();
-				i3GEO.janela.destroi("i3GEOF.loginusuario");
+				if(i3GEO.janela){
+					i3GEO.janela.destroi("i3GEOF.loginusuario");
+				}
 				if ($i(i3GEO.login.divnomelogin)) {
 					$i(i3GEO.login.divnomelogin).innerHTML = "";
 				}

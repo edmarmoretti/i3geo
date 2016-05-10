@@ -83,5 +83,15 @@ echo "
 hr {
 	border-color: #fff -moz-use-text-color -moz-use-text-color;
 }
+
+#menuTpl a:focus, #menuTpl a:hover {
+	padding-bottom: 17px;
+}
+#menuTpl ul {
+	background-color: #eeeeee;
+}
+#menuTpl li {
+	background-color: #3f51b5;
+}
 </style>
 </head>

@@ -1243,7 +1243,7 @@ i3GEO.util =
 								/*
 								 * if (i3GEO.janela) { i3GEO.janela.fechaAguarde(id + "aguarde"); }
 								 */
-								if (YAHOO.lang.isFunction(ini)) {
+								if (ini.call) {
 									ini.call();
 								} else {
 									eval(ini);
@@ -1255,7 +1255,8 @@ i3GEO.util =
 							/*
 							 * if (i3GEO.janela) { i3GEO.janela.fechaAguarde(id + "aguarde"); }
 							 */
-							if (YAHOO.lang.isFunction(ini)) {
+							//if (YAHOO.lang.isFunction(ini)) {
+							if (ini.call) {
 								ini.call();
 							} else {
 								eval(ini);
