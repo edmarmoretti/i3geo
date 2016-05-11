@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <?php
 //utilizado para o cabecalho das paginas que nao sao mapas e que usam bootstrap com material design
 echo "
@@ -41,6 +42,7 @@ echo "
     <script src='" . ONDEI3GEO . "/pacotes/bootstrap/js/bootstrap.min.js'></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src='" . ONDEI3GEO . "/pacotes/bootstrap/js/ie10-viewport-bug-workaround.js'></script>
+    <script src='" . ONDEI3GEO . "/pacotes/bootstrap-material-design/dist/js/material.min.js'></script>
 ";
 ?>
 <style>

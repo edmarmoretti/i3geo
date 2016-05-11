@@ -77,7 +77,6 @@ include "head.php";
 				</ul>
 				<div id="mensagemLogin"></div>
 			</div>
-
 		</div>
 	</nav>
 
@@ -188,6 +187,7 @@ include "head.php";
 
 			return t;
 		}(document, "script", "twitter-wjs"));
+		$.material.init();
 	});
 	</script>
 </body>

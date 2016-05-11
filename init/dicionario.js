@@ -234,7 +234,7 @@ g_traducao_init =
 		],
 		"18a" : [
 			{
-				pt : "Crie mapas interativos com funções básicas, defina os botões e outras características com uma URL parametrizada.",
+				pt : "Crie mapas interativos com fun&ccedil;&otilde;es b&aacute;sicas, defina os bot&otilde;es e outras caracter&iacute;sticas com uma URL parametrizada.",
 				en : "",
 				es : ""
 			}
@@ -409,7 +409,7 @@ g_traducao_init =
 		],
 		35 : [
 			{
-				pt : "Bem vindo à página principal do i3Geo. Aqui você encontrará os links de acesso aos mapas, documentação, sistema de administração e outros aplicativos. Colabore com o aprimoramento do i3Geo participando da comunidade de usuários!",
+				pt : "Bem vindo &agrave; p&aacute;gina principal do i3Geo. Aqui voc&ecirc; encontrar&aacute; os links de acesso aos mapas, documenta&ccedil;&atilde;o, sistema de administra&ccedil;&atilde;o e outros aplicativos. Colabore com o aprimoramento do i3Geo participando da comunidade de usu&aacute;rios!",
 				en : "",
 				es : ""
 			}
