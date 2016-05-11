@@ -113,7 +113,7 @@ botoesIni = [
 	"target": "_self"
 },{
 	"img":"folder-image.png",
-	"href":"../exemplos",
+	"href":"../exemplos/index.php",
 	"titulo":$trad(14,g_traducao_init),
 	"subtitulo": $trad("14a",g_traducao_init),
 	"fa": "cogs",
