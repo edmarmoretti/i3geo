@@ -46,7 +46,7 @@ include "head.php";
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="fa"><a href="#"><div id="bandeiras"></div></a></li>
+					<li class="fa"><a href="#"><span id="bandeiras"></span></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');" href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
@@ -128,7 +128,7 @@ include "head.php";
 		<hr />
 		<footer>
 			<div class="row text-center hidden">
-				<div class="col-xs-6 center-block"
+				<div class="col-xs-6 center-block">
 
 					<a rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank"><img alt="Licen&ccedil;a Creative Commons" style="border-width: 0" src="https://i.creativecommons.org/l/GPL/2.0/88x62.png" /></a><br />O i3Geo est&aacute; licenciado com uma Licen&ccedil;a <a
 						rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank">Creative Commons - Licen&ccedil;a P&uacute;blica Geral GNU (&#34;GNU General Public License&#34;)</a>
@@ -163,7 +163,7 @@ include "head.php";
 		?>
 		mostraBotoesBT(men);
 		$('.hidden').removeClass('hidden');
-		$(window).scroll(
+		$(window).on("scroll click",
 			function(){
 				$("#mensagemLogin").fadeOut(300);
 				$("#jumbotron").fadeOut(300)

@@ -20,14 +20,11 @@ include "../init/head.php";
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-				</button>
 				<a class="navbar-brand" href="../init/index.php">i3Geo <i class="fa fa-home fa-1x"></i></a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="fa"><a href="#"><div id="bandeiras"></div></a></li>
+					<li class="fa"><a href="#"><span id="bandeiras"></span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -138,57 +135,83 @@ HTML;
 		else{
 			$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
 			if($continua == false){
-				echo "Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster";
+echo <<<HTML
+				<div class="alert alert-danger" role="alert">
+				Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster
+				</div>
+HTML;
 				exit;
 			}
 		}
 		error_reporting(0);
-		//echo "<pre>\n";
-		echo "<span style=font-size:10px >Observa&ccedil;&atilde;o: se voc&ecirc; estiver usando Linux e a biblioteca CAIRO estiver instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e geral1debianv6.map para remover os coment&aacute;rios do OUTPUTFORMAT que utiliza SVG com o drive Cairo</span><br>\n";
-		echo "<br><b>TESTE DE INSTALA&Ccedil;&Atilde;O DO i3Geo</b><br>\n";
-		include ("../versao.php");
-		echo "<br><b>$mensagemInicia </b><br> \n";
-		echo "<br>Para mais informa&ccedil;&otilde;es sobre a instala&ccedil;&atilde;o de pacotes complementares, como o SAIKU e ferramentas que precisam de softwares espec&iacute;ficos, veja o link <a href='http://moodle.gvsig-training.com/course/view.php?id=11' >http://moodle.gvsig-training.com/course/view.php?id=11</a></b><br> \n";
-		//ip
 		$ip = "UNKNOWN";
 		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
 		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
 		else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
 		else $ip = "UNKNOWN";
-		echo "<br>Seu endere&ccedil;o IP: ".$ip."<br>\n";
-		echo "<br>Sistema operacional: ".PHP_OS."<br>\n";
-		echo "<br>PHP (a vers&atilde;o deve ser a 5x): ".phpversion()."<br>\n";
+		$os = PHP_OS;
+		$phpversion = phpversion();
+echo <<<HTML
+		<div class="page-header">
+			<h1>TESTE DE INSTALA&Ccedil;&Atilde;O DO i3Geo</h1>
+			<h2>$mensagemInicia</h2>
+		</div>
+
+		<div class="alert alert-warning" role="alert">
+		Observa&ccedil;&atilde;o: se voc&ecirc; estiver usando Linux e a biblioteca CAIRO estiver
+		instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e
+		geral1debianv6.map para remover os coment&aacute;rios do OUTPUTFORMAT que utiliza SVG com o drive Cairo
+		</div>
+		<div class="alert alert-info" role="alert">
+		Para mais informa&ccedil;&otilde;es sobre a instala&ccedil;&atilde;o de pacotes complementares,
+		como o SAIKU e ferramentas que precisam de softwares espec&iacute;ficos, veja o link
+		<a href='http://moodle.gvsig-training.com/course/view.php?id=11' >http://moodle.gvsig-training.com/course/view.php?id=11
+		</a></div>
+		<div class="alert alert-success" role="alert">
+			<li>Seu endere&ccedil;o IP <span class="label label-default">$ip</span></li>
+			<li>Sistema operacional <span class="label label-default">$os</span></li>
+			<li>PHP (a vers&atilde;o deve ser a 5x) <span class="label label-default">$phpversion</span></li>
+		</div>
+HTML;
+
 		include_once("../classesphp/carrega_ext.php");
 		include_once("../classesphp/funcoes_gerais.php");
 		$versao = versao();
 		$versao = $versao["principal"];
 		$exts = get_loaded_extensions();
-		echo "<br>MapServer: <br>";
+		echo "<h3>MapServer:</h3><pre>";
 		echo ms_GetVersion();
-		echo "<br><br>";
-		echo "Array que armazena os par&acirc;metros da vers&atilde;o:<br><pre>";
-		var_dump (versao())."<br><br>";
 		echo "</pre>";
-		echo "Configura&ccedil;&atilde;o da proje&ccedil;&atilde;o default: (<a href='http://moodle.gvsig-training.com/mod/book/view.php?id=5090&chapterid=114'>saiba mais</a>)<br>";
+		echo "<h3>Array que armazena os par&acirc;metros da vers&atilde;o:</h3><pre>";
+		var_dump (versao());
+		echo "</pre>";
+		echo "<h3>Configura&ccedil;&atilde;o da proje&ccedil;&atilde;o default: (<a href='http://moodle.gvsig-training.com/mod/book/view.php?id=5090&chapterid=114'>saiba mais</a>)</h3>";
 		if(!isset($i3GeoProjDefault)){
-			echo "<span style=color:red >A vari&aacute;vel de configura&ccedil;&atilde;o i3GeoProjDefault n&atilde;o existe no ms_configura.php. Ser&aacute; utilizada a proje&ccedil;&atilde;o 4326</span><br><br>";
+			echo '<div class="alert alert-warning" role="alert">A vari&aacute;vel de configura&ccedil;&atilde;o i3GeoProjDefault n&atilde;o existe no ms_configura.php. Ser&aacute; utilizada a proje&ccedil;&atilde;o 4326</div>';
 		}
 		echo "<pre>";
-		var_dump (pegaProjecaoDefault())."<br><br>";
+		var_dump (pegaProjecaoDefault());
 		echo "</pre>";
-		if(!function_exists("ms_GetVersion"))
-		{
-			echo "<span style=color:red >PARECE QUE O MAPSERVER NAO ESTA INSTALADO!!!<br><br>";
+		if(!function_exists("ms_GetVersion")){
+			echo '<div class="alert alert-warning" role="alert">PARECE QUE O MAPSERVER NAO ESTA INSTALADO!!!</div>';
 		}
 		if (get_cfg_var("safe_mode") == 1){
-			echo "<span style=color:red >Problema: safe_mode no php.ini deveria estar como 'Off'. O i3Geo n&atilde;o ir&aacute; funcionar!!!<br></span>";
+			echo '<div class="alert alert-warning" role="alert">Problema: safe_mode no php.ini deveria estar como Off. O i3Geo n&atilde;o ir&aacute; funcionar!!!</div>';
 		}
-		echo "<br>As seguintes letras devem aparecer corretamente acentuadas: ";
-		echo "<br><br>Á«„‚·¡Û”";
-		echo "<br><br>Caso contr&aacute;rio, verifique os par&acirc;metros de configura&ccedil;&atilde;o do Apache <b>AddDefaultCharset (httpd.conf) e default_charset (php.ini)</b> (default_charset='' no php.ini geralmente funciona).";
+echo <<<HTML
+		<h3>Acentua&ccedil;&atilde;o</h3>
+		<pre>
+As seguintes letras devem aparecer corretamente acentuadas:
+<b>Á«„‚·¡Û”</b>
+Caso contr&aacute;rio, verifique os par&acirc;metros de configura&ccedil;&atilde;o do Apache
+<b>AddDefaultCharset (httpd.conf) e default_charset (php.ini)</b>
+(default_charset='' no php.ini geralmente funciona)
+		</pre>
+HTML;
 		//executa as opcoes linux definidas no formulario
+		echo "<h3>Aplicando as operaÁıes opcionais</h3><pre>";
 		if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaPastaMstmp"] == "on"){
-			echo "<br>Criando a pasta $dir_tmp \n";
+			echo "Criando a pasta $dir_tmp";
 			if(!file_exists($dir_tmp)){
 				@mkdir ($dir_tmp,0777);
 			}
@@ -196,15 +219,18 @@ HTML;
 				chmod($dir_tmp,0777);
 			}
 			if(!file_exists($dir_tmp)){
-				echo "<span style=color:red >Arquivo $dir_tmp n&atilde;o pode ser criado\n";
+				echo "<span style=color:red >Arquivo $dir_tmp n&atilde;o pode ser criado";
 			}
 			else{
-				echo "...OK\n";
+				echo "...OK";
 			}
+		}
+		else{
+			echo "Cria&ccedil;&atilde;o de pastas n&atilde;o solicitada\n";
 		}
 		if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaLink"] == "on"){
 			$d = dirname(dirname(__FILE__))."/../ms_tmp";
-			echo "<br>Criando o link simb&oacute;lico $d \n";
+			echo "Criando o link simb&oacute;lico $d\n";
 			if(!file_exists($d)){
 				@symlink($dir_tmp,$d);
 			}
@@ -218,8 +244,11 @@ HTML;
 				echo "...OK\n";
 			}
 		}
+		else{
+			echo "Cria&ccedil;&atilde;o de link simb&oacute;lico n&atilde;o solicitada\n";
+		}
 		if(!empty($_POST["criaPastaMstmp"]) && $_POST["permPastaI3geo"] == "on"){
-			echo "<br>Alterando permiss&otilde;es i3geo i3geo/temas i3geo/admin i3geo/admin/admin.db\n";
+			echo "Alterando permiss&otilde;es i3geo i3geo/temas i3geo/admin i3geo/admin/admin.db\n";
 			if(file_exists($locaplic)){
 				chmod($locaplic,0777);
 				chmod($locaplic."/temas",0777);
@@ -228,64 +257,75 @@ HTML;
 				echo "...OK\n";
 			}
 		}
-		echo "<br><br>Extens&otilde;es PHP:<br><pre>";
+		else{
+			echo "Altera&ccedil;&otilde;es de permiss&atilde;o n&atilde;o solicitada\n";
+		}
+		echo "</pre>";
+		echo "<h3>Extens&otilde;es PHP</h3><pre>";
 		if (!extension_loaded("curl")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a curl que pode afetar algumas funcionalidades do i3Geo<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>Problema: n&atilde;o est&aacute; instalado a curl que pode afetar algumas funcionalidades do i3Geo</div>";
 		}
 		if (!extension_loaded("json")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a json<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>Problema: n&atilde;o est&aacute; instalado a json</div>";
 		}
 		if (!extension_loaded("libxml")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a libxml<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>Problema: n&atilde;o est&aacute; instalado a libxml</div>";
 		}
 		if (!extension_loaded( "PDO")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a PDO<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>Problema: n&atilde;o est&aacute; instalado a PDO</div>";
 		}
 		if (!extension_loaded( "pdo_sqlite")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a pdo_sqlite<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>>Problema: n&atilde;o est&aacute; instalado a pdo_sqlite</div>";
 		}
 		if (!extension_loaded( "SQLite") && !extension_loaded( "sqlite3")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a SQLite<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>Problema: n&atilde;o est&aacute; instalado a SQLite</div>";
 		}
 		if (!extension_loaded( "SimpleXML")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a SimpleXML<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>Problema: n&atilde;o est&aacute; instalado a SimpleXML</div>";
 		}
 		if (!extension_loaded( "dom")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a dom<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>Problema: n&atilde;o est&aacute; instalado a dom</div>";
 		}
 		if (!extension_loaded( "xml")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a xml<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>Problema: n&atilde;o est&aacute; instalado a xml</div>";
 		}
 		if (!extension_loaded( "zlib")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a zlib <br></span>";
-		}
-		if (!extension_loaded( "gd")){
-			echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a gd<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>Problema: n&atilde;o est&aacute; instalado a zlib </div>";
 		}
 		if (!extension_loaded( "mbstring")){
-			echo "<span style=color:red >Obs: n&atilde;o est&aacute; instalado a mbstring<br></span>";
+			echo "<div class='alert alert-danger' role='alert'>Obs: n&atilde;o est&aacute; instalado a mbstring</div>";
 		}
 		if (!extension_loaded( "yaml")){
-			echo "<span style=color:red >Obs: n&atilde;o est&aacute; instalado a YAML. A ferramenta de melhor tra&ccedil;ado raster precisa dessa extens&atilde;o.<br></span>";
+			echo "<div class='alert alert-warning' role='alert'>Obs: n&atilde;o est&aacute; instalado a YAML.\nA ferramenta de melhor tra&ccedil;ado raster precisa dessa extens&atilde;o.</div>";
 		}
 
 		var_dump( $exts );
-
-		echo "</pre>Existe o ms_configura.php? <br>";
-		if(file_exists("../ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo(" ms_configura n&atilde;o encontrado");}
-		echo "Incluindo...\n<br>";
+		echo "</pre>";
+		echo "<h3>ms_configura.php</h3>";
+		if(!file_exists("../ms_configura.php")){
+			echo "<div class='alert alert-danger' role='alert'>O arquivo ms_configura.php n&atilde;o foi encontrado. Teste abortado.</div>";
+		}
 		include ("../ms_configura.php");
-		echo "<br>Mensagem de inicializa&ccedil;&atilde;o: <b>$mensagemInicia </b> \n";
-		echo "<br><br>dir_tmp = $dir_tmp \n";
-		echo "<br><br>locmapserv = $locmapserv \n";
-		echo "<br><br>Este php est&aacute; em ".getcwd()."\n";
-		echo "<br><br>O diretorio de arquivos SESSION tempor&aacute;rio &eacute;: ".session_save_path()."\n";
+		$loceste = getcwd();
+		$spath = session_save_path();
+echo <<<HTML
+		<div class="alert alert-success" role="alert">
+		<li>Mensagem de inicializa&ccedil;&atilde;o <span class="label label-default">$mensagemInicia</span></li>
+		<li>dir_tmp <span class="label label-default">$dir_tmp</span></li>
+		<li>locmapserv <span class="label label-default">$locmapserv</span></li>
+		<li>Localiza&ccedil;&atilde;o deste PHP <span class="label label-default">$loceste</span></li>
+		<li>O diretorio de arquivos SESSION tempor&aacute;rio <span class="label label-default">$spath</span></li>
+		</div>
+HTML;
+		echo "<h3>Banco de administra&ccedil;&atilde;o</h3>";
 		if($conexaoadmin == "" && file_exists($locaplic."/admin/admin.db")){
-			echo "<br><br>As permiss&otilde;es do banco de dados $locaplic/admin/admin.db s&atilde;o (se o arquivo estiver bloqueado, o sistema de administra&ccedil;&atilde;o n&atilde;o ir&aacute; funcionar):<br>";
+			echo "<div class='alert alert-info' role='alert'>As permiss&otilde;es do banco de dados $locaplic/admin/admin.db s&atilde;o (se o arquivo estiver bloqueado, o sistema de administra&ccedil;&atilde;o n&atilde;o ir&aacute; funcionar):<br>";
+			echo '<span class="label label-default">';
 			echo permissoesarquivo($locaplic."/admin/admin.db");
+			echo "</span></div>";
 		}
 		include_once("../admin/php/conexao.php");
-		echo "<br><br>Verificando banco de dados de administra&ccedil;&atilde;o...\n";
+		echo "<h4>Verificando banco de dados de administra&ccedil;&atilde;o</h4>";
 		echo "<pre>";
 		//TODO Verificar ao fechar versao - verificar tabelas
 		$tabelas = array(
@@ -347,80 +387,83 @@ HTML;
 				$resultado = $q->fetchAll();
 				if(count($resultado) > 0)
 				{
-					echo "...ok\n";
+					echo " <span class='label label-success'>ok</span>\n";
 					foreach(explode(",",$tabelas[$tabela]) as $coluna)
 					{
 						echo "         coluna: ".$coluna;
-						if(in_array($coluna,array_keys($resultado[0])))
-						{
-							echo "...ok\n";
+						if(in_array($coluna,array_keys($resultado[0]))){
+							echo " <span class='label label-success'>ok</span>\n";
 						}
-						else
-						{echo "<span style=color:red >..n&atilde;o encontrada. Consulte o i3geo/guia_de_migracao.txt</span>\n";
+						else{
+							echo " <span class='label label-info'>n&atilde;o encontrada. Consulte o i3geo/guia_de_migracao.txt</span>\n";
 						}
 					}
 				}
-				else
-				{echo "<span style=color:red >...n&atilde;o existem registros cadastrados</span>\n";
+				else{
+					echo " <span class='label label-info'>n&atilde;o existem registros cadastrados</span>\n";
 				}
 			}
-			else
-			{echo "<span style=color:red >..n&atilde;o encontrada. Consulte o i3geo/guia_de_migracao.txt</span>\n";
+			else{
+				echo " <span class='label label-danger'>n&atilde;o encontrada. Consulte o i3geo/guia_de_migracao.txt</span>\n";
 			}
 		}
-		echo "\n";
-		echo "</pre><br>Localizando o cgi...\n";
+		echo "</pre>";
+		echo "<h3>CGI</h3>";
 		$proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 		$server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 		$enderecocgi = $proto.$server.$locmapserv;
-		echo "Voc&ecirc; pode testar o CGI clicando <a href='".$enderecocgi."' target='_blank'>aqui</a>, se o programa responder corretamente, dever&aacute; aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'\n" ;
+		echo "<div class='alert alert-info' role='alert'>Voc&ecirc; pode testar o CGI clicando <a href='".$enderecocgi."' target='_blank'>aqui</a>, se o programa responder corretamente, dever&aacute; aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'</div>" ;
 
+		echo "<h3>Testes de escrita</h3><pre>";
 		if (file_exists("../temas/teste.txt")){
-			echo "<br><br>Removendo arquivo de testes temas/teste.txt";
+			echo "<div class='alert alert-info' role='alert'><h4>Removendo arquivo de testes temas/teste.txt</h4>";
 			unlink("../temas/teste.txt");
 		}
 		if (file_exists("../temas/teste.txt")){
-			echo "<br><span style='color:red'>N&atilde;o foi possivel escrever na pasta temas. O sistema de administracao pode nao funcionar corretamente</span><br>";
+			echo "<div class='alert alert-danger' role='alert'>N&atilde;o foi possivel escrever na pasta temas. O sistema de administracao pode nao funcionar corretamente</div>";
 		}
 		else{
-			echo "<br><br>Testando criar arquivo temas/teste.txt";
+			echo "<h4>Testando criar arquivo temas/teste.txt</h4>";
 			$f = @fopen("../temas/teste.txt",w);
 			@fclose($f);
 			if (!file_exists("../temas/teste.txt")){
-				echo "<br><span style='color:red'>N&atilde;o foi possivel escrever na pasta temas. O sistema de administracao pode nao funcionar corretamente</span><br>";
+				echo "<div class='alert alert-danger' role='alert'>N&atilde;o foi possivel escrever na pasta temas. O sistema de administracao pode nao funcionar corretamente</div>";
 			}
 			else{
 				unlink("../temas/teste.txt");
-				echo "<br>ok.";
+				echo "<span class='label label-success'>ok</span>";
 			}
 		}
-		echo "<br><br>Escrevendo nos diret&oacute;rios tempor&aacute;rios...<br><br>";
+		echo "<h4>Escrevendo nos diret&oacute;rios tempor&aacute;rios</h4>";
 		if (file_exists($dir_tmp."/teste.txt")){
-			//echo "<br><br>Removendo arquivo de testes $dir_tmp/teste.txt<br>";
 			unlink($dir_tmp."/teste.txt");
 		}
 		if (file_exists($dir_tmp."/teste.txt")){
-			saindo("\nN&atilde;o foi poss&iacute;vel testar o diret&oacute;rio tempor&aacute;rio $dir_tmp");
+			saindo("<div class='alert alert-danger' role='alert'>N&atilde;o foi poss&iacute;vel testar o diret&oacute;rio tempor&aacute;rio $dir_tmp</div>");
+		}
+		else{
+			echo "<span class='label label-success'>ok</span>";
 		}
 		$f = @fopen($dir_tmp."/teste.txt",w);
 		@fclose($f);
 		if (file_exists($dir_tmp."/teste.txt")) {
-			echo " do Mapserver <br>ok<br><br>\n";
+			echo "<h4>Escrevendo nos diret&oacute;rios tempor&aacute;rios do Mapserver</h4>";
+			echo "<span class='label label-success'>ok</span>";
 		}
 		else {
-			saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio $dir_tmp");
+			saindo("<div class='alert alert-danger' role='alert'>N&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio $dir_tmp");
 		}
 		$f = @fopen(session_save_path()."/teste.txt",w);
 		@fclose($f);
 		if (file_exists(session_save_path()."/teste.txt")) {
-			echo " da SESSION PHP <br>ok<br><br>\n";
+			echo "<h4>Escrevendo nos diret&oacute;rios tempor&aacute;rios SESSION PHP</h4>";
+			echo "<span class='label label-success'>ok</span>";
 		}
 		else {
-			saindo("\nN&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio da SESSION");
+			saindo("<div class='alert alert-danger' role='alert'>N&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio da SESSION</div>");
 		}
-
-		echo " <br>\n";
-		echo "Carregando o map_file base...\n";
+		echo "</pre>";
+		echo "<h3>Carregando o map_file base</h3>";
 		$versao = versao();
 		$versao = $versao["principal"];
 		if(isset($base) && $base != ""){
@@ -431,7 +474,7 @@ HTML;
 				$f = $locaplic."/aplicmap/".$base.".map";
 			}
 			if(!file_exists($base)){
-				echo "<span style=color:red >ARQUIVO $base N&Acirc;O FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
+				echo "<div class='alert alert-danger' role='alert'>ARQUIVO $base N&Acirc;O FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php</div>";
 				exit;
 			}
 		}
@@ -455,9 +498,11 @@ HTML;
 				}
 			}
 		}
-		echo "<br>O arquivo mapfile de iniciliza&ccedil;&atilde;o &eacute;: $f<br>\n";
-		echo "<br><b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no $f):</b>\n";
-		echo "<br><br>Criando o objeto com ms_newMapObj...";
+		echo "<div class='alert alert-success' role='alert'><h4>O arquivo mapfile de iniciliza&ccedil;&atilde;o &eacute;: <strong>$f</strong></h4></div>";
+		echo "<pre>";
+		echo "<h4>Criando o objeto com ms_newMapObj...";
+		echo "<h4>Desenhando o mapa (se o mapa n&atilde;o aparecer \nverifique os caminhos no ms_configura.php e no $f)</h4>";
+
 		$mapa = ms_newMapObj($f);
 		//para evitar erros que possam ser originados da conexao com o banco
 		for($i=0;$i<($mapa->numlayers);$i++){
@@ -472,30 +517,28 @@ HTML;
 		}
 		$imgo = @$mapa->draw();
 		$nome = ($imgo->imagepath)."teste.png";
-		echo "<br><br>Nome da imagem gerada: $nome ";
+		echo "<h5>Nome da imagem gerada: $nome </h5>";
 
 		if (!$imgo){
-			echo "Problemas ao gerar o mapa<br>";
+			echo "<div class='alert alert-danger' role='alert'><h5>Problemas ao gerar o mapa</h5>";
 			$error = "";
 			$error = ms_GetErrorObj();
 			while($error && $error->code != MS_NOERR){
-				echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
+				echo "<h5>Error in %s: %s</h5>", $error->routine, $error->message;
 				$error = $error->next();
 			}
+			echo "</div>";
 		}
-		if($imgo->imagepath == "")
-		{
-			echo "Erro IMAGEPATH vazio";
+		if($imgo->imagepath == ""){
+			echo "<div class='alert alert-danger' role='alert'>Erro IMAGEPATH vazio</div>";
 		}
-
 		$imgo->saveImage($nome);
 		$nome = ($imgo->imageurl).basename($nome);
-		echo "<p><img src=$nome /></p>";
-
+		echo "<img src=$nome />";
 		echo " \n";
 		$error = "";
 		ms_ResetErrorList();
-		echo "Carregando o map_file geral1... e acrescentando os limites estaduais (aplicmap/estadosl...) \n";
+		echo "<h4>Carregando o map_file geral1... e acrescentando os limites estaduais (aplicmap/estadosl...) </h4>";
 		if(isset($estadosl))
 		{
 			$maptemp = ms_newMapObj($locaplic."/aplicmap/".$estadosl.".map");
@@ -509,23 +552,24 @@ HTML;
 			{$maptemp = ms_newMapObj($locaplic."/aplicmap/estadosl.map");
 			}
 		}
-		while($error && $error->code != MS_NOERR)
-		{
-			printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+		while($error && $error->code != MS_NOERR){
+			printf("<div class='alert alert-danger' role='alert'>Error in %s: %s<br></div>", $error->routine, $error->message);
 			$error = $error->next();
 		}
-		echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no estadosl.map ou estadoslwindows.map):</b>\n";
-		echo "<br><br>Um problema bastante comum &eacute; o n&atilde;o reconhecimento do diret&oacute;rio ms_tmp pelo Apache. \nO diretorio ms_tmp &eacute; utilizado pelo Mapserver e pelo i3geo para armazenar dados tempor&aacute;rios. \n&Eacute; nesse diretorio que ficam as imagens do mapa.\n";
-		echo "Quando o Apache n&atilde;o consegue utilizar esse diret&oacute;rio, a imagem n&atilde;o ser&aacute; mostrada,\n apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do \nmapa est&atilde;o sendo criadas no ms_tmp apos rodar o testainstal.php).\n";
-		echo "Para solucionar esse problema, vc pode criar um link simb&oacute;lico (nos sistemas linux),\n no mesmo local onde est&aacute; instalado o i3geo, apontando para o local \nf&iacute;sico onde est&aacute; o ms_tmp.\n";
-		echo "<b>O nome do link simbolico deve ser o mesmo que estiver definido em aplicmap/geral1.map ou geral1debian.map na linha IMAGEURL. Esse nome por default &eacute; definido como ms_tmp.\n";
-		echo "No wiki do portal do software p&uacute;blico vc poder&aacute; encontrar mais detalhes sobre isso.</b>\n";
-
-		for($i=0;$i<($maptemp->numlayers);$i++)
-		{
+echo <<<HTML
+<h4>Se o mapa n&atilde;o aparecer verifique os caminhos no ms_configura.php e no estadosl.map ou estadoslwindows.map\n
+Um problema bastante comum &eacute; o n&atilde;o reconhecimento do diret&oacute;rio ms_tmp pelo Apache. \n
+O diretorio ms_tmp &eacute; utilizado pelo Mapserver e pelo i3geo para armazenar dados tempor&aacute;rios. &Eacute; nesse diretorio\n
+que ficam as imagens do mapa. Quando o Apache n&atilde;o consegue utilizar esse diret&oacute;rio, a imagem n&atilde;o ser&aacute; mostrada,\n
+apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do mapa est&atilde;o sendo criadas no ms_tmp apos \n
+rodar o testainstal.php).Para solucionar esse problema, vc pode criar um link simb&oacute;lico (nos sistemas linux),\n
+no mesmo local onde est&aacute; instalado o i3geo, apontando para o local f&iacute;sico onde est&aacute; o ms_tmp.\n
+O nome do link simbolico deve ser o mesmo que estiver definido em aplicmap/geral1.map ou geral1debian.map na linha IMAGEURL. \n
+Esse nome por default &eacute; definido como ms_tmp. No wiki do portal do software p&uacute;blico vc poder&aacute; encontrar mais detalhes sobre isso.</h4>
+HTML;
+		for($i=0;$i<($maptemp->numlayers);$i++){
 			$layern = $maptemp->getLayer($i);
-			if ($layern->name == "estadosl")
-			{
+			if ($layern->name == "estadosl"){
 				$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");
 			}
 			ms_newLayerObj($mapa, $layern);
@@ -537,23 +581,22 @@ HTML;
 			$error = "";
 			$error = ms_GetErrorObj();
 			while($error && $error->code != MS_NOERR){
-				echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
+				echo "<div class='alert alert-danger' role='alert'>Error in %s: %s</div>", $error->routine, $error->message;
 				$error = $error->next();
 			}
 		}
-		if($imgo->imagepath == "")
-		{
-			echo "Erro IMAGEPATH vazio";
+		if($imgo->imagepath == ""){
+			echo "<div class='alert alert-danger' role='alert'>Erro IMAGEPATH vazio</div>";
 		}
 
 		$nome = ($imgo->imagepath)."teste1.png";
-		echo "<br><br>Nome da imagem gerada: $nome ";
+		echo "<h5>Nome da imagem gerada: $nome </h5>";
 		$imgo->saveImage($nome);
 		$nome = ($imgo->imageurl).basename($nome);
-		echo "<p><img src=$nome /></p></body></html>";
+		echo "<img src=$nome /></pre></body></html>";
 
 		function saindo($men){
-			echo "<span style=color:red ><br><b>Erro. Saindo...".$men;
+			echo "<div class='alert alert-danger' role='alert'>Erro. Saindo...".$men."</div>";
 		}
 		/*
 		 Retorna as permiss&otilde;es de um arquivo
@@ -617,5 +660,8 @@ HTML;
 
 		?>
 	</div>
+<script>
+$.material.init();
+</script>
 </body>
 </html>
