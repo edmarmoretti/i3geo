@@ -35,7 +35,6 @@ if (file_exists ( $dir_tmp )) {
 error_reporting ( 0 );
 include "head.php";
 ?>
-
 <body style="background-color: #eeeeee; padding-top: 90px;" id="topo">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
@@ -50,11 +49,9 @@ include "head.php";
 					<li class="fa"><a href="#"><div id="bandeiras"></div></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');" href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
+					<li class="dropdown"><a onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');" href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
 						<ul id="i3GEOF_loginusuario" class="dropdown-menu" style="min-width: 280px; padding: 10px; background-color: white;">
-						</ul>
-					</li>
+						</ul></li>
 				</ul>
 				<!-- template para permitir a traducao -->
 				<div id="menuTpl" class="hidden">
@@ -68,21 +65,22 @@ include "head.php";
 				</div>
 			</div>
 		</div>
+
 	</nav>
-	<nav class="navbar-fixed-bottom" id="mensagemLogin"></nav>
-	<div class="container-fluid hidden">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="jumbotron" id="jumbotron">
-					<!-- Template pare mensagem do i3Geo -->
-					<ul class="list-inline">
-						<li><img class="pull-left" src='../imagens/i3Geo_bigTransp.png' style='width: 80px; margin: 5px;' /> <img class="pull-right" src='../pacotes/qrcode/php/qr_img.php?host={{{host}}}&d={{{href}}}' style='width: 80px; margin: 5px;' />
-							<p>{{{jumbotron}}}</p></li>
-					</ul>
-				</div>
+	<nav class="navbar-fixed-bottom">
+		<div class="container-fluid hidden">
+			<div class="jumbotron" id="jumbotron">
+				<!-- Template para mensagem do i3Geo -->
+				<ul class="list-inline">
+					<li><img class="pull-left" src='../imagens/i3Geo_bigTransp.png' style='width: 80px; margin: 5px;' /> <img class="pull-right" src='../pacotes/qrcode/php/qr_img.php?host={{{host}}}&d={{{href}}}' style='width: 80px; margin: 5px;' />
+						<p>{{{jumbotron}}}</p></li>
+				</ul>
+				<div id="mensagemLogin"></div>
 			</div>
+
 		</div>
-	</div>
+	</nav>
+
 	<div class="container">
 		<div class="row center-block">
 			<!-- Template para criacao dos quadros ver index.js -->
@@ -145,7 +143,7 @@ include "head.php";
 	<script>
 	//utilizado em ms_configura.php para customizar o local da pasta de inicializacao
 	var customDir = "../<?php echo $customDir; ?>";
-    </script>
+	</script>
 	<script src='../pacotes/cpaint/cpaint2_compacto.inc.js'></script>
 	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
 	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
@@ -156,36 +154,41 @@ include "head.php";
 	<script src='dicionario.js'></script>
 	<script src='index.js'></script>
 	<script>
-    $(document).ready(function(){
-    	<?php
-					if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
-						echo "var men = '<div class=\'alert alert-danger\' style=\'margin-bottom:0px;\' >' + $" . "trad(19,g_traducao_init) + '</div>';";
-					} else {
-						echo "var men = '';";
-					}
-					?>
-    	mostraBotoesBT(men);
-    	$('.hidden').removeClass('hidden');
-    	$(window).scroll(function(){$("#mensagemLogin").fadeOut(300)});
-    	//$("#mensagemLogin").delay(10000).fadeOut(300);
-    	//carrega o TT
-    	window.twttr = (function(d, s, id) {
-    		  var js, fjs = d.getElementsByTagName(s)[0],
-    		    t = window.twttr || {};
-    		  if (d.getElementById(id)) return t;
-    		  js = d.createElement(s);
-    		  js.id = id;
-    		  js.src = "https://platform.twitter.com/widgets.js";
-    		  fjs.parentNode.insertBefore(js, fjs);
+	$(document).ready(function(){
+		<?php
+		if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
+			echo "var men = '<div class=\'alert alert-danger\' style=\'margin-bottom:0px;\' >' + $" . "trad(19,g_traducao_init) + '</div>';";
+		} else {
+			echo "var men = '';";
+		}
+		?>
+		mostraBotoesBT(men);
+		$('.hidden').removeClass('hidden');
+		$(window).scroll(
+			function(){
+				$("#mensagemLogin").fadeOut(300);
+				$("#jumbotron").fadeOut(300)
+			}
+		);
+		//$("#mensagemLogin").delay(10000).fadeOut(300);
+		//carrega o TT
+		window.twttr = (function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0],
+				t = window.twttr || {};
+			if (d.getElementById(id)) return t;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://platform.twitter.com/widgets.js";
+			fjs.parentNode.insertBefore(js, fjs);
 
-    		  t._e = [];
-    		  t.ready = function(f) {
-    		    t._e.push(f);
-    		  };
+			t._e = [];
+			t.ready = function(f) {
+				t._e.push(f);
+			};
 
-    		  return t;
-    		}(document, "script", "twitter-wjs"));
-    });
-    </script>
+			return t;
+		}(document, "script", "twitter-wjs"));
+	});
+	</script>
 </body>
 </html>
