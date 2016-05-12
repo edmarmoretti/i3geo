@@ -449,7 +449,7 @@ function mostraBotoesBT(){
 	//
 	//essa funcao obtem a lista unica de tags para montar o indice
 	//
-	var m = "",html = "", novalista = [], n, nc, i, j, chaves = [], nchaves = [];
+	var html = "", novalista = [], n, nc, i, j, chaves = [], nchaves = [];
 
 	n = botoesIni.length;
 	for(i=0; i<n; i++){
@@ -459,17 +459,10 @@ function mostraBotoesBT(){
 	chaves.sort();
 	nc = chaves.length;
 	for(j=0;j<nc;j++){
-		m = "";
 		for(i=0; i<n; i++){
 			if(botoesIni[i].tag == chaves[j]){
-				if(m == ""){
-					botoesIni[i]["id"] = "a"+j;
-				}
-				else{
-					botoesIni[i]["id"] = "";
-				}
+				botoesIni[i]["id"] = "a"+j;
 				novalista.push(botoesIni[i]);
-				m = "ok";
 			}
 		}
 	}
