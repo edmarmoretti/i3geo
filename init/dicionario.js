@@ -18,8 +18,8 @@ g_traducao_init =
 		"2a" : [
 				{
 					pt : "Verifica se a instala&ccedil;&atilde;o est&aacute; correta. Mostra algumas informa&ccedil;&otilde;es b&aacute;sicas sobre o servidor e as configura&ccedil;&otilde;es do software.",
-					en : "",
-					es : ""
+					en : "It checks that the installation was successful. It shows some basic information about the server and software configuration.",
+					es : "Verifica que la instaci&oacute;n sea correcta. Muestra algunas informaciones b&aacute;sicas sobre el servidor y las configuraciones del software."
 				}
 			],
 		3 : [
@@ -32,15 +32,15 @@ g_traducao_init =
 		"3a" : [
 				{
 					pt : "Usu&aacute;rios cadastrados podem criar camadas, organizar o acesso aos dados, inserir novos dados no servidor e executar diversas tarefas administrativas.",
-					en : "",
-					es : ""
+					en : "Registered users are able to create layers, set up data access, upload new data to the server and execute management tasks.",
+					es : "Usuarios registrados pueden crear capas, organizar el acceso a los datos, incluir datos nuevos en el servidor y ejecutar diversas tareas administrativas."
 				}
 			],
 		4 : [
 			{
 				pt : "i3Geo + <a href='http://openlayers.org/' >OpenLayers <i class='fa fa-external-link fa-1g' aria-hidden='true'></i></a>",
-				en : "",
-				es : ""
+				en : "i3Geo + <a href='http://openlayers.org/' >OpenLayers <i class='fa fa-external-link fa-1g' aria-hidden='true'></i></a>",
+				es : "i3Geo + <a href='http://openlayers.org/' >OpenLayers <i class='fa fa-external-link fa-1g' aria-hidden='true'></i></a>"
 			}
 		],
 		"4a" : [
