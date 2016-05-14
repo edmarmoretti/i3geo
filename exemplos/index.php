@@ -43,12 +43,13 @@ include "../init/head.php";
 	line-height: 30px;
 }
 </style>
-<body style="background-color: #eeeeee; padding-top: 90px;">
+<body style="background-color: #eeeeee; padding-top: 55px;">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i
 					class="fa fa-home fa-1x"></i></a>
+
 				<ul class="nav navbar-nav">
 					<li class="dropdown mega-dropdown"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown">Tags <span
@@ -62,6 +63,14 @@ include "../init/head.php";
 			</div>
 		</div>
 	</nav>
+	<div class="container-fluid">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="../init/index.php">i3Geo</a></li>
+				<li class="active">Exemplos</li>
+			</ol>
+		</div>
+	</div>
 	<div class="container-fluid">
 		<div class="row center-block">
 			<div class="col-sm-12">

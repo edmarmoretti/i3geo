@@ -1,140 +1,140 @@
 botoesIni = [
 {
 	"img":"openlayers.png",
-	"href": customDir + "/black_ol.htm",
+	"href": location.href.replace("index.php","") + customDir + "/black_ol.htm",
 	"titulo":$trad(4,g_traducao_init),
 	"subtitulo": $trad("4a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
 },{
 	"img":"osm.png",
-	"href": customDir + "/black_osm.htm",
+	"href": location.href.replace("index.php","") + customDir + "/black_osm.htm",
 	"titulo":$trad(23,g_traducao_init),
 	"subtitulo": $trad("23a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
 },{
 	"img":"googlemaps.png",
-	"href": customDir + "/black_gm.phtml",
+	"href": location.href.replace("index.php","") + customDir + "/black_gm.phtml",
 	"titulo":$trad(6,g_traducao_init),
 	"subtitulo": $trad("6a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
 },{
 	"img":"mashup.png",
-	"href":"../mashups",
+	"href": location.href.replace("index.php","") + "../mashups",
 	"titulo":$trad(18,g_traducao_init) + "<br><a href='../mashups/osm.php?temas=&largura=800&altura=500' target=_blank >OSM</a>" + " - <a href='../mashups/openlayers.php?temas=&largura=800&altura=500' target=_blank >OpenLayers</a>",
 	"subtitulo": $trad("18a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_self"
 },{
 	"img":"googleearth.png",
-	"href": customDir + "/googleearth.phtml",
+	"href": location.href.replace("index.php","") + customDir + "/googleearth.phtml",
 	"titulo":$trad(7,g_traducao_init),
 	"subtitulo": $trad("7a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
 },{
 	"img":"cartogramas.png",
-	"href": customDir + "/black_carto_ol.htm",
+	"href": location.href.replace("index.php","") + customDir + "/black_carto_ol.htm",
 	"titulo":$trad(8,g_traducao_init),
 	"subtitulo": $trad("8a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
 },{
 	"img":"editor.png",
-	"href":"../ferramentas/metaestat/editorlimites.php",
+	"href": location.href.replace("index.php","") + "../ferramentas/metaestat/editorlimites.php",
 	"titulo":$trad(9,g_traducao_init),
 	"subtitulo": $trad("9a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
 },{
 	"img":"window-duplicate.png",
-	"href":"../ferramentas/salvamapa/lista.htm",
+	"href": location.href.replace("index.php","") + "../ferramentas/salvamapa/lista.htm",
 	"titulo":$trad(34,g_traducao_init),
 	"subtitulo": $trad("34a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_self"
 },{
 	"img":"svn-update.png",
-	"href":"../datadownload.htm",
+	"href": location.href.replace("index.php","") + "../datadownload.htm",
 	"titulo":$trad(10,g_traducao_init),
 	"subtitulo": $trad("10a",g_traducao_init),
 	"fa": "download",
 	"target": "_self"
 },{
 	"img":"ogc_logo.jpg",
-	"href":"../ogc.htm",
+	"href": location.href.replace("index.php","") + "../ogc.htm",
 	"titulo":$trad(11,g_traducao_init),
 	"subtitulo": $trad("11a",g_traducao_init),
 	"fa": "download",
 	"target": "_self"
 },{
 	"img":"application-vnd-google-earth-kml.png",
-	"href":"../kml.php",
+	"href": location.href.replace("index.php","") +  "../kml.php",
 	"titulo":$trad(12,g_traducao_init),
 	"subtitulo": $trad("12a",g_traducao_init),
 	"fa": "download",
 	"target": "_self"
 },{
 	"img":"../imagens/saiku_free_small.png",
-	"href":"../ferramentas/saiku/esquemaxml.php?locaplic="+window.location.href.replace("/init/index.php",""),
+	"href": location.href.replace("index.php","") +  "../ferramentas/saiku/esquemaxml.php?locaplic="+window.location.href.replace("/init/index.php",""),
 	"titulo":$trad(25,g_traducao_init),
 	"subtitulo": $trad("25a",g_traducao_init),
 	"fa": "bar-chart",
 	"target": "_self"
 },{
 	"img":"insert-link.png",
-	"href":"../geradordelinks.htm",
+	"href": location.href.replace("index.php","") +  "../geradordelinks.htm",
 	"titulo":$trad(13,g_traducao_init),
 	"subtitulo": $trad("13a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_self"
 },{
 	"img":"openlayersdebug.png",
-	"href": customDir + "/openlayersdebug.htm",
+	"href": location.href.replace("index.php","") +  customDir + "/openlayersdebug.htm",
 	"titulo":$trad(5,g_traducao_init),
 	"subtitulo": $trad("5a",g_traducao_init),
 	"fa": "cogs",
 	"target": "_blank"
 },{
 	"img":"certificate-server.png",
-	"href":"../testainstal/index.php",
+	"href": location.href.replace("index.php","") +  "../testainstal/index.php",
 	"titulo":$trad(2,g_traducao_init),
 	"subtitulo": $trad("2a",g_traducao_init),
 	"fa": "cogs",
 	"target": "_self"
 },{
 	"img":"applications-development-web.png",
-	"href":"../admin",
+	"href": location.href.replace("index.php","") +  "../admin",
 	"titulo":$trad(3,g_traducao_init),
 	"subtitulo": $trad("3a",g_traducao_init),
 	"fa": "cogs",
 	"target": "_self"
 },{
 	"img":"folder-image.png",
-	"href":"../exemplos/index.php",
+	"href": location.href.replace("index.php","") +  "../exemplos/index.php",
 	"titulo":$trad(14,g_traducao_init),
 	"subtitulo": $trad("14a",g_traducao_init),
 	"fa": "cogs",
 	"target": "_self"
 },{
 	"img":"applications-development.png",
-	"href":"../pacotes/utils/index.php",
+	"href": location.href.replace("index.php","") +  "../pacotes/utils/index.php",
 	"titulo":$trad(33,g_traducao_init),
 	"subtitulo": $trad("33a",g_traducao_init),
 	"fa": "wrench",
 	"target": "_self"
 },{
 	"img":"guiamigracao.png",
-	"href":"../guia_de_migracao.txt",
+	"href": location.href.replace("index.php","") + "../guia_de_migracao.txt",
 	"titulo":$trad(17,g_traducao_init),
 	"subtitulo": $trad("17a",g_traducao_init),
 	"fa": "cogs",
 	"target": "_self"
 },{
 	"img":"docapi.png",
-	"href":"../documentacao",
+	"href": location.href.replace("index.php","") + "../documentacao",
 	"titulo":$trad(24,g_traducao_init),
 	"subtitulo": $trad("24a",g_traducao_init),
 	"fa": "book",
