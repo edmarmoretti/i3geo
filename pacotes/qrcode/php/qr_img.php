@@ -4,8 +4,8 @@
 # QRcode image PHP scripts  version 0.50g (C)2000-2005,Y.Swetake
 #
 #
-#  This program outputs a png image of "QRcode model 2". 
-#  You cannot use a several functions of QRcode in this version. 
+#  This program outputs a png image of "QRcode model 2".
+#  You cannot use a several functions of QRcode in this version.
 #  See README.txt .
 #
 #  This version supports QRcode model2 version 1-40.
@@ -38,9 +38,9 @@
 # IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
 # OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
 # IN NO EVENT SHALL Y.Swetake OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
 # (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)  HOWEVER CAUSED 
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)  HOWEVER CAUSED
 # AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 # USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -67,12 +67,16 @@ if($_GET["host"] != $_SERVER["HTTP_HOST"]){
 $path="./../data";           /* You must set path to data files. */
 $image_path="./../image";    /* You must set path to QRcode frame images. */
 
-$version_ul=40;              /* upper limit for version  */  
+$version_ul=40;              /* upper limit for version  */
 /* ------ setting area end ------ */
 
-
-$qrcode_data_string=@$_GET["d"];
-$qrcode_data_string .= "&temasa=".$_GET["temasa"]."&layers=".$_GET["layers"];
+if($_GET["d"]){
+	$qrcode_data_string=@$_GET["d"];
+	$qrcode_data_string .= "&temasa=".$_GET["temasa"]."&layers=".$_GET["layers"];
+}
+if($_GET["u"]){
+	$qrcode_data_string=@$_GET["u"];
+}
 $qrcode_error_correct=@$_GET["e"];
 $qrcode_module_size=@$_GET["s"];
 $qrcode_version=@$_GET["v"];
@@ -251,7 +255,7 @@ $ecc_character_hash=array("L"=>"1",
 "H"=>"2",
 "h"=>"2");
 
- $ec=@$ecc_character_hash[$qrcode_error_correct]; 
+ $ec=@$ecc_character_hash[$qrcode_error_correct];
 
  if (!$ec){$ec=0;}
 
@@ -283,7 +287,7 @@ if (!$qrcode_version){
  /* #--- auto version select */
     $i=1+40*$ec;
     $j=$i+39;
-    $qrcode_version=1; 
+    $qrcode_version=1;
     while ($i<=$j){
         if (($max_data_bits_array[$i])>=$total_data_bits+$codeword_num_plus[$qrcode_version]     ){
             $max_data_bits=$max_data_bits_array[$i];
@@ -380,7 +384,7 @@ while ($i<=$data_counter) {
 
     $flag=1;
     while ($flag) {
-        if ($remaining_bits>$buffer_bits){  
+        if ($remaining_bits>$buffer_bits){
             $codewords[$codewords_counter]=((@$codewords[$codewords_counter]<<$buffer_bits) | $buffer);
             $remaining_bits-=$buffer_bits;
             $flag=0;
@@ -392,7 +396,7 @@ while ($i<=$data_counter) {
                 $flag=0;
             } else {
                 $buffer= ($buffer & ((1 << $buffer_bits)-1) );
-                $flag=1;   
+                $flag=1;
             }
 
             $codewords_counter++;
@@ -503,7 +507,7 @@ while ($i<$max_codewords){
     $j=8;
     while ($j>=1){
         $codeword_bits_number=($i << 3) +  $j;
-        $matrix_content[ $matrix_x_array[$codeword_bits_number] ][ $matrix_y_array[$codeword_bits_number] ]=((255*($codeword_i & 1)) ^ $mask_array[$codeword_bits_number] ); 
+        $matrix_content[ $matrix_x_array[$codeword_bits_number] ][ $matrix_y_array[$codeword_bits_number] ]=((255*($codeword_i & 1)) ^ $mask_array[$codeword_bits_number] );
         $codeword_i= $codeword_i >> 1;
         $j--;
     }
@@ -533,7 +537,7 @@ $min_demerit_score=0;
         $k++;
     }
 $i=0;
-$all_matrix=$max_modules_1side * $max_modules_1side; 
+$all_matrix=$max_modules_1side * $max_modules_1side;
 while ($i<8){
     $demerit_n1=0;
     $ptn_temp=array();
@@ -574,7 +578,7 @@ while ($i<8){
        $demerit_n2+=(strlen($str_temp)-1);
    }
    $demerit_n2*=3;
-  
+
    $ptn_temp=array();
 
    preg_match_all($n1_search,$hor,$ptn_temp);
@@ -638,7 +642,7 @@ while ($i<$mxe){
     $jj=0;
     while ($j<$mxe){
         if ($matrix_content[$ii][$jj] & $mask_content){
-            ImageSetPixel($base_image,$i,$j,$col[1]); 
+            ImageSetPixel($base_image,$i,$j,$col[1]);
         }
         $j++;
         $jj++;
