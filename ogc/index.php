@@ -30,25 +30,27 @@ include "../init/head.php";
 </style>
 <script id="templateCamadas" type="x-tmpl-mustache">
 <div class="list-group-item">
-	<div class="bs-component btn-group-sm pull-left">
-		<a class="btn btn-primary btn-fab" href="{{codigo_tema}}{{tid}}">
+	<div class="bs-component btn-group-sm pull-left" data-toggle="modal" data-target="#modalCamada" onclick="mostraDadosServico('{{codigo_tema}}')">
+		<a class="btn btn-primary btn-fab" href="#">
 			<i class="material-icons">launch</i>
 		</a>
 	</div>
-	<div class="row-content" style="margin-left: 10px;">
-		<h4 class="list-group-item-heading">{{nome_tema}}{{nome}}</h4>
-			<p class="list-group-item-text">{{ogc_tema}}{{ogc}} {{link_tema}}{{link}}</p>
+	<div class="row-content" style="margin-left: 10px;" >
+		<h4 class="list-group-item-heading">
+			{{nome_tema}}{{nome}}
+			<a class="{{hidden}}" href="{{link_tema}}{{link}}" target="_blank"><i class="fa fa-link"></i></a>
+		</h4>
 	</div>
 </div>
 <div class="list-group-separator"></div>
 </script>
 <script id="templateMenu" type="x-tmpl-mustache">
 <div class="panel-group" id="menu{{idmenu}}" role="tablist" aria-multiselectable="true">
-	<div class="panel panel-default">
-		<div class="panel-heading" role="tab" id="tituloMenu{{idmenu}}">
-			<h4 class="panel-title">
+	<div class="panel panel-default" >
+		<div class="panel-heading" style="background-color:#80cbc4;" role="tab" id="tituloMenu{{idmenu}}">
+			<h3 class="panel-title">
 				<a class="collapsed in" role="button" data-toggle="collapse" data-parent="#menu{{idmenu}}" href="#corpoMenu{{idmenu}}" aria-expanded="false" aria-controls="#corpoMenu{{idmenu}}"> {{{nomemenu}}} </a>
-			</h4>
+			</h3>
 		</div>
 		<div class="panel-body">
 			<div id="corpoMenu{{idmenu}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
@@ -60,13 +62,13 @@ include "../init/head.php";
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 </script>
 <script id="templateGrupos" type="x-tmpl-mustache">
+<div class="list-group">
 <div class="panel panel-default">
-	<div class="panel-heading" role="tab" id="tituloGrupo{{id_n1}}">
+	<div class="panel-heading" style="background-color: #b2dfdb;" role="tab" id="tituloGrupo{{id_n1}}">
 		<h4 class="panel-title">
 			<a class="collapsed" role="button" data-toggle="collapse" data-parent="#corpoMenu{{idmenu}}" href="#corpoGrupo{{id_n1}}" aria-expanded="false" aria-controls="corpoGrupo{{id_n1}}"> {{{nome}}} </a>
 		</h4>
@@ -80,10 +82,12 @@ include "../init/head.php";
 		</div>
 	</div>
 </div>
+</div>
 </script>
 <script id="templateSubGrupos" type="x-tmpl-mustache">
+<div class="list-group">
 <div class="panel panel-default">
-	<div onclick="listaCamadasSubgrupo('{{idmenu}}','{{id_n1}}','{{id_n2}}')" class="panel-heading" role="tab" id="tituloSubGrupo{{id_n2}}">
+	<div style="background-color: #e0f2f1;" onclick="listaCamadasSubgrupo('{{idmenu}}','{{id_n1}}','{{id_n2}}')" class="panel-heading" role="tab" id="tituloSubGrupo{{id_n2}}">
 		<h4 class="panel-title">
 			<a class="collapsed" role="button" data-toggle="collapse" data-parent="#corpoGrupo{{id_n1}}" href="#corpoSubGrupo{{id_n2}}" aria-expanded="false" aria-controls="corpoSubGrupo{{id_n2}}"> {{{nome}}} </a>
 		</h4>
@@ -92,6 +96,7 @@ include "../init/head.php";
 		<div id="corpoSubGrupo{{id_n2}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
 		</div>
 	</div>
+</div>
 </div>
 </script>
 <body style="background-color: #eeeeee; padding-top: 55px;">
@@ -125,6 +130,19 @@ include "../init/head.php";
 			</div>
 		</div>
 	</nav>
+<div id="modalCamada" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">OGC</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+    </div>
+  </div>
+</div>
 	<script type="text/javascript" src="../classesjs/i3geo_tudo_compacto6.js.php"></script>
 	<script src='index.js'></script>
 	<script>

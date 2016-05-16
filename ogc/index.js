@@ -92,6 +92,9 @@ function ckCamada(camadas,templateCamadas){
 	var ncamadas = [];
 	$(camadas).each(function() {
 		if(this.ogc_tema != "NAO"){
+			if(this.link_tema == ""){
+				this.hidden = "hidden";
+			}
 			ncamadas.push(this);
 		}
 	});
@@ -105,4 +108,39 @@ function ckCamada(camadas,templateCamadas){
 	else{
 		return "";
 	}
+}
+function mostraDadosServico(tema){
+	ins = "<H1>Endere&ccedil;os de acesso:</H1>";
+	var re = new RegExp(".htm", "g");
+	var servico = window.location.href.replace(re, '.php?');
+	//remove variaveis adicionais, se houver
+	servico = servico.split("?")[0]+"?";
+
+	ins += "<p>Webservice com todas as camadas: <a href='" + servico + "' target='_blank' >" + servico + "</a>";
+	ins += "<p>Webservice dessa camada: <a href='" + servico + "tema=" + tema + "&' target='_blank' >" + servico + "tema=" + tema + "&</a>";
+	ins += "<p>Link para essa p&aacute;gina: <a href='"+ window.location.href.split("?")[0] + "?temaOgc=" + tema + "'>"+ window.location.href.split("?")[0] + "?temaOgc=" + tema + "</a>";
+	ins +=
+		"<p><a target=blank href='"+servico+"service=wms&version=1.1.1&request=getcapabilities&layers="+tema+"' />GetCapabilities</a>";
+	ins +=
+		"<p><a target=blank href='"+servico+"SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers="+tema+"' />testar getmap</a>";
+	ins +=
+		"<p><a target=blank href='"+servico+"SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getlegendgraphic&layers="+tema+"' />testar getLegendGraphic</a>";
+	ins +=
+		"<p><a target=blank href='"+servico+"format=application/openlayers&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&layers="+tema+"' />visualizar com openLayers</a>";
+	ins +=
+		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=shape-zip&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />download shapefile via WFS</a>";
+	ins +=
+		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=csv&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"&ows_geomtype=AS_WKT' />download CSV via WFS com geometria</a>";
+	ins +=
+		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=csv&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"&ows_geomtype=none' />download CSV via WFS mas sem a geometria</a>";
+	ins +=
+		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=kmz&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />download KMZ</a>";
+	ins +=
+		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=kml&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />download KML</a>";
+	ins +=
+		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=geojson&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />GeoJson</a>";
+	ins +=
+		"<p><a target=blank href='ferramentas/recline/default.php?tema="+tema+"' />Explore a tabela de atributos</a>";
+
+	$(".modal-body").html(ins);
 }
