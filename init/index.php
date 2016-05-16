@@ -93,7 +93,7 @@ include "head.php";
 				<!-- Template para mensagem do i3Geo -->
 				<ul class="list-inline">
 					<li><img class="pull-left" src='../imagens/i3Geo_bigTransp.png'
-						style='width: 80px; margin: 5px;' /> <img class="pull-right"
+						style='width: 80px; margin: 5px;' /> <img class="pull-right hidden-xs"
 						src='../pacotes/qrcode/php/qr_img.php?host={{{host}}}&d={{{href}}}'
 						style='width: 80px; margin: 5px;' />
 						<p>{{{jumbotron}}}</p></li>
@@ -113,7 +113,7 @@ include "head.php";
 						<div class="panel-body" style="height: 250px;">
 							<div class="thumbnail" role="button" style="height: 90px;" data-toggle="quadroQrcode" data-url="{{{href}}}">
 								<img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
-								<i class="fa fa-qrcode btn-qrcode pull-right" ></i>
+								<i class="fa fa-qrcode btn-qrcode pull-right hidden-xs" ></i>
 							</div>
 							<h4>{{{titulo}}}</h4>
 							<div style="overflow: auto; height: 200px;">
@@ -138,7 +138,7 @@ include "head.php";
 				style="width: 260px; min-width: 260px; max-width: 260px;">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<a class="twitter-timeline" href="https://twitter.com/i3geo"
+						<a class="twitter-timeline tline" href=""
 							data-widget-id="288061915689787392" height="300">Tweets @i3Geo</a>
 					</div>
 				</div>
@@ -147,7 +147,7 @@ include "head.php";
 				style="width: 260px; min-width: 260px; max-width: 260px;">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<a class="twitter-timeline" href="https://twitter.com/hashtag/i3geo"
+						<a class="twitter-timeline htag" href=""
 							data-widget-id="643417277208133633" height="300">i3geo Tweets</a>
 					</div>
 				</div>
@@ -164,7 +164,6 @@ include "head.php";
 		<footer>
 			<div class="row text-center hidden">
 				<div class="col-xs-6 center-block">
-
 					<a rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt"
 						target="_blank"><img alt="Licen&ccedil;a Creative Commons" style="border-width: 0"
 						src="https://i.creativecommons.org/l/GPL/2.0/88x62.png" /></a><br />O i3Geo est&aacute;
@@ -209,34 +208,38 @@ include "head.php";
 				$("#jumbotron").fadeOut(300)
 			}
 		);
-		//$("#mensagemLogin").delay(10000).fadeOut(300);
-		//carrega o TT
-		window.twttr = (function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0],
-				t = window.twttr || {};
-			if (d.getElementById(id)) return t;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "https://platform.twitter.com/widgets.js";
-			fjs.parentNode.insertBefore(js, fjs);
+		var tamanho = findBootstrapDeviceSize();
+		if(tamanho != "xs"){
+			$(".tline").attr("src","https://twitter.com/i3geo");
+			$(".tline").attr("src","https://twitter.com/hashtag/i3geo");
 
-			t._e = [];
-			t.ready = function(f) {
-				t._e.push(f);
-			};
+			window.twttr = (function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0],
+					t = window.twttr || {};
+				if (d.getElementById(id)) return t;
+				js = d.createElement(s);
+				js.id = id;
+				js.src = "https://platform.twitter.com/widgets.js";
+				fjs.parentNode.insertBefore(js, fjs);
 
-			return t;
-		}(document, "script", "twitter-wjs"));
+				t._e = [];
+				t.ready = function(f) {
+					t._e.push(f);
+				};
 
-		$('[data-toggle="quadroQrcode"]').popover({
-			html: true,
-			placement: "auto",
-			trigger: "click focus",
-			content: function(){
-				var urlqr = "../pacotes/qrcode/php/qr_img.php?host=" + window.location.host + "&u=" + $(this).attr("data-url");
-				return "<img style='width:200px; height: 200px;' src='" + urlqr + "' '>";
-			}
-		});
+				return t;
+			}(document, "script", "twitter-wjs"));
+
+			$('[data-toggle="quadroQrcode"]').popover({
+				html: true,
+				placement: "auto",
+				trigger: "click focus",
+				content: function(){
+					var urlqr = "../pacotes/qrcode/php/qr_img.php?host=" + window.location.host + "&u=" + $(this).attr("data-url");
+					return "<img style='width:200px; height: 200px;' src='" + urlqr + "' '>";
+				}
+			});
+		}
 		$.material.init();
 	});
 	</script>

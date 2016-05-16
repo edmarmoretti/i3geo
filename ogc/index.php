@@ -54,7 +54,9 @@ include "../init/head.php";
 			<div id="corpoMenu{{idmenu}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
 				<div class="panel-body">
 					{{{camadas}}}
-					<div id="gruposMenu{{idmenu}}"></div>
+					<div id="gruposMenu{{idmenu}}">
+						<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -73,8 +75,21 @@ include "../init/head.php";
 		<div id="corpoGrupo{{id_n1}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
 			<div class="panel-body">
 				{{{camadas}}}
-				<div id="subGruposGrupo{{id_n1}}">subgrupos</div>
+				<div id="subGruposGrupo{{id_n1}}">{{grupos}}</div>
 			</div>
+		</div>
+	</div>
+</div>
+</script>
+<script id="templateSubGrupos" type="x-tmpl-mustache">
+<div class="panel panel-default">
+	<div onclick="listaCamadasSubgrupo('{{idmenu}}','{{id_n1}}','{{id_n2}}')" class="panel-heading" role="tab" id="tituloSubGrupo{{id_n2}}">
+		<h4 class="panel-title">
+			<a class="collapsed" role="button" data-toggle="collapse" data-parent="#corpoGrupo{{id_n1}}" href="#corpoSubGrupo{{id_n2}}" aria-expanded="false" aria-controls="corpoSubGrupo{{id_n2}}"> {{{nome}}} </a>
+		</h4>
+	</div>
+	<div class="panel-body">
+		<div id="corpoSubGrupo{{id_n2}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
 		</div>
 	</div>
 </div>
@@ -98,58 +113,7 @@ include "../init/head.php";
 	<div class="container">
 		<div class="row center-block">
 			<div class="col-sm-12" id="arvore">
-				<!-- Modelo de menu -->
-				<!--
-				<div class="panel-group" id="menu1" role="tablist" aria-multiselectable="true">
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="tituloMenu1">
-							<h4 class="panel-title">
-								<a class="collapsed in" role="button" data-toggle="collapse" data-parent="#menu1" href="#corpoMenu1" aria-expanded="false" aria-controls="#corpoMenu1"> Collapsible Menu Item #1 </a>
-							</h4>
-						</div>
-						<div class="panel-body">
-							<div id="corpoMenu1" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
-								<div class="panel-body">
-									<div class="checkbox">
-										<label> <input type=checkbox name=criaLink /> Camada
-										</label>
-									</div>
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="tituloGrupo1">
-										<h4 class="panel-title">
-											<a class="collapsed" role="button" data-toggle="collapse" data-parent="#corpoMenu1" href="#corpoGrupo1" aria-expanded="false" aria-controls="corpoGrupo1"> Collapsible Group Item #1 </a>
-										</h4>
-									</div>
-									<div class="panel-body">
-										<div id="corpoGrupo1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="corpoMenu1">
-											<div class="checkbox">
-												<label> <input type=checkbox name=criaLink /> Camada
-												</label>
-											</div>
-											<div class="panel panel-default">
-												<div class="panel-heading" role="tab" id="tituloSubGrupo1">
-													<h4 class="panel-title">
-														<a class="collapsed" role="button" data-toggle="collapse" data-parent="#corpoGrupo1" href="#corpoSubGrupo1" aria-expanded="false" aria-controls="subGrupo1"> Collapsible Group Item #2 </a>
-													</h4>
-												</div>
-												<div id="corpoSubGrupo1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="tituloSubGrupo1">
-													<div class="panel-body">
-														<div class="checkbox">
-															<label> <input type=checkbox name=criaLink /> Camada
-															</label>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				-->
+				<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>
 			</div>
 		</div>
 	</div>
@@ -169,6 +133,7 @@ include "../init/head.php";
 		listaDoNivelMenu(
 				$("#templateMenu").html(),
 				$("#templateGrupos").html(),
+				$("#templateSubGrupos").html(),
 				$("#templateCamadas").html()
 			);
 		$(window).on("scroll click",

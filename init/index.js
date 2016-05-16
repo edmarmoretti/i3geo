@@ -199,27 +199,43 @@ function mostraBotoesBT(men){
 	var html = "";
 	//menu
 	html = Mustache.to_html(
-		$("#menuTpl").html(),
-		i3GEO.idioma.objetoIdioma(g_traducao_init)
+			$("#menuTpl").html(),
+			i3GEO.idioma.objetoIdioma(g_traducao_init)
 	);
 	$("#menuTpl").html(html);
 	//
 	$("#mensagemLogin").html(men);
 	html = Mustache.to_html(
-		$("#jumbotron").html(),
-		{
-			"jumbotron" : $trad(35,g_traducao_init),
-			"host" : location.host,
-			"href" : location.href
-		}
+			$("#jumbotron").html(),
+			{
+				"jumbotron" : $trad(35,g_traducao_init),
+				"host" : location.host,
+				"href" : location.href
+			}
 	);
 	$("#jumbotron").html(html);
 	i3GEO.configura = {"locaplic" : ".."};
 	i3GEO.idioma.IDSELETOR = "bandeiras";
 	i3GEO.idioma.mostraSeletor();
 	html = Mustache.to_html(
-		"{{#d}}" + $("#botoesTpl").html() + "{{/d}}",
-		{"d":botoesIni,"abrir" : $trad(36,g_traducao_init)}
+			"{{#d}}" + $("#botoesTpl").html() + "{{/d}}",
+			{"d":botoesIni,"abrir" : $trad(36,g_traducao_init)}
 	);
 	$("#botoesTpl").html(html);
+}
+function findBootstrapDeviceSize() {
+	var dsize = ['lg', 'md', 'sm', 'xs'];
+	for (var i = dsize.length - 1; i >= 0; i--) {
+
+		// Need to add &nbsp; for Chrome. Works fine in Firefox/Safari/Opera without it.
+		// Chrome seem to have an issue with empty div's
+		$el = $('<div id="sizeTest" class="hidden-'+dsize[i]+'">&nbsp;</div>');
+		$el.appendTo($('body'));
+
+		if ($el.is(':hidden')) {
+			$el.remove();
+			return dsize[i];
+		}
+	}
+	return 'unknown';
 }
