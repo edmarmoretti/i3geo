@@ -276,10 +276,16 @@ A:hover {
 			temaOgc = temp[1];
 			temaOgc = temaOgc.split("&");
 			temaOgc = temaOgc[0];
+			var name = temaOgc;
+			var value = temaOgc;
+			//verifica se eh metaestat
+			if(temaOgc.split("_")[0] == "metaestat"){
+				name = "metaestat";
+			}
 			var botao = {
 				checked: false,
-				name: temaOgc,
-				value: temaOgc
+				name: name,
+				value: value
 			};
 			ogc_endereco(botao);
 		}

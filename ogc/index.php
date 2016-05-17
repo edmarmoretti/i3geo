@@ -1,6 +1,12 @@
 <?php
 define ( ONDEI3GEO, ".." );
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
+// pega a extensao geografica
+if ($ogcwsmap == "") {
+	$ogcwsmap = $locaplic . "/aplicmap/ogcws.map";
+}
+$map = ms_newMapObj ( $ogcwsmap );
+$mapext = $map->extent->minx . "," . $map->extent->miny . "," . $map->extent->maxx . "," . $map->extent->maxy;
 error_reporting ( 0 );
 include "../init/head.php";
 ?>
@@ -28,9 +34,26 @@ include "../init/head.php";
 	transform: rotate(90deg);
 }
 </style>
+<script id="templateLinks" type="x-tmpl-mustache">
+<h3>{{{acesso}}}</h3>
+<p>{{{wstodas}}}: <a href="{{{servico}}}" target="_blank" >{{{servico}}}</a>
+<p>{{{wscamada}}}: <a href="{{{servico}}}tema={{{tema}}}{{{id_medida_variavel}}}&" target="_blank" >{{{servico}}}tema={{{tema}}}{{{id_medida_variavel}}}&</a>
+<p>{{{linkpagina}}}: <a href="{{{url}}}?temaOgc={{{tema}}}">{{{url}}}?temaOgc={{{tema}}}</a>
+<p><a target=blank href="{{{servico}}}service=wms&version=1.1.1&request=getcapabilities&layers={{{tema}}}{{{id_medida_variavel}}}" >GetCapabilities</a>
+<p><a target=blank href="{{{servico}}}SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=<?php echo $mapext;?>&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers={{{tema}}}{{{id_medida_variavel}}}" >{{{getmap}}}</a>
+<p><a target=blank href="{{{servico}}}SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=<?php echo $mapext;?>&FORMAT=image/png&service=wms&version=1.1.0&request=getlegendgraphic&layers={{{tema}}}{{{id_medida_variavel}}}" >{{{legenda}}}</a>
+<p><a target=blank href="{{{servico}}}format=application/openlayers&bbox=<?php echo $mapext;?>&layers={{{tema}}}" >{{{vOl}}}</a>
+<p><a target=blank href="{{{servico}}}OUTPUTFORMAT=shape-zip&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}&typeName={{{tema}}}{{{id_medida_variavel}}}" >{{{downwfs}}}</a>
+<p><a target=blank href="{{{servico}}}OUTPUTFORMAT=csv&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}{{{id_medida_variavel}}}&typeName={{{tema}}}&ows_geomtype=AS_WKT" >{{{downCgeo}}}</a>
+<p><a target=blank href="{{{servico}}}OUTPUTFORMAT=csv&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}{{{id_medida_variavel}}}&typeName={{{tema}}}&ows_geomtype=none" >{{{downSgeo}}}</a>
+<p><a target=blank href="{{{servico}}}OUTPUTFORMAT=kmz&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}{{{id_medida_variavel}}}&typeName={{{tema}}}" >{{{kmz}}}</a>
+<p><a target=blank href="{{{servico}}}OUTPUTFORMAT=kml&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}{{{id_medida_variavel}}}&typeName={{{tema}}}" >{{{kml}}}</a>
+<p><a target=blank href="{{{servico}}}OUTPUTFORMAT=geojson&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}{{{id_medida_variavel}}}&typeName={{{tema}}}" >GeoJson</a>
+<p><a target=blank href="../ferramentas/recline/default.php?tema={{{tema}}}{{{id_medida_variavel}}}" >{{{explore}}}</a>
+</script>
 <script id="templateCamadas" type="x-tmpl-mustache">
 <div class="list-group-item">
-	<div class="bs-component btn-group-sm pull-left" data-toggle="modal" data-target="#modalCamada" onclick="mostraDadosServico('{{codigo_tema}}')">
+	<div class="bs-component btn-group-sm pull-left" data-toggle="modal" data-target="#modalCamada" onclick="mostraLinksServico('{{codigo_tema}}','{{tipo}}')">
 		<a class="btn btn-primary btn-fab" href="#">
 			<i class="material-icons">launch</i>
 		</a>
@@ -99,11 +122,26 @@ include "../init/head.php";
 </div>
 </div>
 </script>
-<body style="background-color: #eeeeee; padding-top: 55px;">
+<body style="background-color: #eeeeee; padding-top: 55px;" id="topo">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i class="fa fa-home fa-1x"></i></a>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i
+					class="fa fa-home fa-1x"></i></a>
+			</div>
+			<!-- template para permitir a traducao -->
+			<div id="navbar" class="collapse navbar-collapse">
+				<div id="menuTpl" class="hidden">
+					<ul class="nav navbar-nav">
+						<li><a href="../kml.php?tipoxml=kml" target="_blank">Kml Google Earth</a></li>
+						<li><a href="">{{{lista}}}</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -111,11 +149,35 @@ include "../init/head.php";
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="../init/index.php">i3Geo</a></li>
-				<li class="active">Servi&ccedil;os OGC</li>
+				<li class="active">OGC</li>
 			</ol>
 		</div>
 	</div>
+	<!-- Camadas oriundas do sistema de metadados estatisticos -->
 	<div class="container">
+		<div class="row center-block hidden">
+			<div class="col-sm-12" id="metaestat">
+				<div class="panel-group" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+						<div class="panel-heading" style="background-color: #80cbc4;" role="tab">
+							<h3 class="panel-title">
+								<a class="collapsed in" role="button" data-toggle="collapse"
+									href="#corpoMetaestat" aria-expanded="false" aria-controls="#corpoMetaestat">
+									{{{nomemeta}}} </a>
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div id="corpoMetaestat" class="panel-collapse collapse" role="tabpanel"
+								aria-multiselectable="true">
+								<div class="panel-body">
+									{{{camadasmeta}}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row center-block">
 			<div class="col-sm-12" id="arvore">
 				<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>
@@ -124,41 +186,77 @@ include "../init/head.php";
 	</div>
 	<nav class="navbar-fixed-bottom">
 		<div class="container-fluid">
-			<div class="jumbotron">
-				Navegue pela &aacute;rvore ao lado para localizar o tema desejado. Clicando-se em um tema, &eacute; mostrado o endere&ccedil;o do servi&ccedil;o OGC. Os servi&ccedil;os s&atilde;o Web Wervices que possibilitam o acesso aos dados dispon&iacute;veis nessa instala&ccedil;&atilde;o do i3Geo. A lista de temas baseia-se nas configura&ccedil;&otilde;es espec&iacute;ficas de cada servidor onde o i3Geo
-				est&aacute; instalado. Voc&ecirc; pode usar um Web Service para acessar os dados configurados nesse servidor por meio de outros softwares de geoprocessamento, como o <a href="http://www.gvsig.gva.es/index.php?id=gvsig&L=0">gvSIG.</a> Para maiores informa&ccedil;&otilde;es sobre o uso de web services, veja <a href='http://www.opengeospatial.org/standards' target=blank>http://www.opengeospatial.org/standards</a>
-			</div>
+			<div class="jumbotron"></div>
 		</div>
 	</nav>
-<div id="modalCamada" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">OGC</h4>
-      </div>
-      <div class="modal-body">
-
-      </div>
-    </div>
-  </div>
-</div>
-	<script type="text/javascript" src="../classesjs/i3geo_tudo_compacto6.js.php"></script>
+	<div id="modalCamada" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">OGC</h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+	<script src='../pacotes/cpaint/cpaint2_compacto.inc.js'></script>
+	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
+	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
+	<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
+	<script src='../classesjs/compactados/classe_php_compacto.js'></script>
+	<script src='../classesjs/compactados/classe_arvoredetemas_compacto.js'></script>
+	<script src='../classesjs/compactados/mustache.js'></script>
+	<script src='dicionario.js'></script>
 	<script src='index.js'></script>
 	<script>
 	$(document).ready(function(){
-		i3GEO.configura.locaplic = "../";
+		$(".jumbotron").html($trad("jumbotron",g_traducao_ogc));
+		i3GEO.configura = {"locaplic" : "..","sid": ""};
+
+		var servico = window.location.href.split("/ogc")[0]+"/ogc.php?";
+		//g_traducao_ogc vem de dicionario.js
+		tradLinks = i3GEO.idioma.objetoIdioma(g_traducao_ogc);
+		tradLinks["servico"] = servico;
+		tradLinks["url"] = window.location.href.split("?")[0];
+		//traducao do menu nav
+		html = Mustache.to_html(
+			$("#menuTpl").html(),
+			tradLinks
+		);
+		$("#menuTpl").html(html);
+		//inicia arvore
 		listaDoNivelMenu(
 				$("#templateMenu").html(),
 				$("#templateGrupos").html(),
 				$("#templateSubGrupos").html(),
 				$("#templateCamadas").html()
 			);
+		listaMetaestat($("#metaestat"),$("#templateCamadas").html());
+		$('.hidden').removeClass('hidden');
 		$(window).on("scroll click",
 				function(){
 					$(".jumbotron").fadeOut(300)
 				}
 			);
+		$.material.init();
+		//verifica se deve abrir de imediato a janela de links
+		var temp = window.location.href.split("temaOgc=");
+		if(temp[1]){
+			var temaOgc = temp[1];
+			temaOgc = temaOgc.split("&");
+			temaOgc = temaOgc[0];
+			//verifica se eh metaestat
+			if(temaOgc.split("_")[0] == "metaestat"){
+				mostraLinksServico(temaOgc.split("_")[1],"meta")
+			}
+			else{
+				mostraLinksServico(temaOgc,"tema")
+			}
+			$("#modalCamada").modal('show');
+		}
 	});
 	</script>
 </body>

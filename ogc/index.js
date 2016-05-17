@@ -1,17 +1,15 @@
 function listaDoNivelMenu(templateMenus,templateGrupos,templateSubGrupos,templateCamadas){
 	var r = function(retorno) {
-		var menus = retorno.data;
-		var nmenus = menus.length;
-		var i = 0;
-		var s = [];
+		var menus = retorno.data,
+		nmenus = menus.length, i = 0, s = [], camadasRaiz, dataMenu, htmlMenus, grupos;
 		for(i=0; i<nmenus; i++){
-			var camadasRaiz = "",
-				dataMenu = menus[i];
+			camadasRaiz = "";
+			dataMenu = menus[i];
 			if(dataMenu.temas){
-				camadasRaiz = ckCamada(dataMenu.temas,templateCamadas);
+				camadasRaiz = ckCamada(dataMenu.temas,templateCamadas,"tema");
 				dataMenu["camadas"] = camadasRaiz;
 			}
-			var htmlMenus = Mustache.to_html(
+			htmlMenus = Mustache.to_html(
 					templateMenus,
 					dataMenu
 			);
@@ -20,21 +18,22 @@ function listaDoNivelMenu(templateMenus,templateGrupos,templateSubGrupos,templat
 		$("#arvore").html(s.join(""));
 		//pega os grupos do menu
 		for(i=0; i<nmenus; i++){
-			var grupos = function(retorno){
+			grupos = function(retorno){
 				if(retorno.data){
-					var gr = retorno.data.grupos;
+					var gr = retorno.data.grupos,
+					c, i = 0, g = [], camadas, htmlGrupos, subgrupos, nsubgrupos, j, htmlSubGrupos;
 					//verifica se existem dados na raiz e grupos
 					if(gr[0].length == 0 && gr[1].temasraiz.length == 0){
 						$("#gruposMenu"+retorno.data.idmenu).html("");
 						return;
 					}
-					var c = gr.length - 3;
-					var g = [];
-					var i = 0;
+					c = gr.length - 3;
+					g = [];
+					i = 0;
 					//camadas na raiz do grupo
 					for (i = 0; i < c; i++) {
 						if(gr[i].temasgrupo){
-							var camadas = ckCamada(gr[i].temasgrupo,templateCamadas);
+							camadas = ckCamada(gr[i].temasgrupo,templateCamadas,"tema");
 							gr[i]["camadas"] = camadas;
 						} else {
 							gr[i]["camadas"] = "";
@@ -42,23 +41,23 @@ function listaDoNivelMenu(templateMenus,templateGrupos,templateSubGrupos,templat
 						g.push(gr[i]);
 					}
 					if(g){
-						var htmlGrupos = Mustache.to_html(
+						htmlGrupos = Mustache.to_html(
 								"{{#grupos}}" + templateGrupos + "{{/grupos}}",
 								{"grupos":g}
 						);
 					}
 					$("#gruposMenu"+retorno.data.idmenu).html(htmlGrupos);
 					for (i = 0; i < c; i++) {
-						var subgrupos = gr[i].subgrupos;
+						subgrupos = gr[i].subgrupos;
 						id_n1 = gr[i]["id_n1"];
 
-						var nsubgrupos = subgrupos.length;
-						var j = 0;
+						nsubgrupos = subgrupos.length;
+						j = 0;
 						for( j = 0; j < nsubgrupos; j++){
 							subgrupos[j]["id_n1"] = id_n1;
 							subgrupos[j]["idmenu"] = retorno.data.idmenu;
 						}
-						var htmlSubGrupos = Mustache.to_html(
+						htmlSubGrupos = Mustache.to_html(
 								"{{#s}}" + templateSubGrupos + "{{/s}}",
 								{"s":subgrupos}
 						);
@@ -70,35 +69,73 @@ function listaDoNivelMenu(templateMenus,templateGrupos,templateSubGrupos,templat
 			};
 			i3GEO.php.pegalistadegrupos(grupos, menus[i]["idmenu"], "sim");
 		}
-		//$.material.init();
 	};
 	i3GEO.php.pegalistademenus(r);
 }
 function listaCamadasSubgrupo(idmenu,id_n1,id_n2){
 	//console.info(id_n2)
-	var corpo = $("#corpoSubGrupo"+id_n2);
+	var corpo = $("#corpoSubGrupo"+id_n2),
+	camadas;
 	if(corpo.html().trim()+"x" == "x"){
 		corpo.html('<div class="panel-body"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span></div>')
 
 	}
 	var r = function(retorno){
-		var camadas = ckCamada(retorno.data.temas,$("#templateCamadas").html());
+		camadas = ckCamada(retorno.data.temas,$("#templateCamadas").html(),"tema");
 		corpo.html('<div class="panel-body">' + camadas + "</div>");
 	}
 	i3GEO.php.pegalistadetemas(r, idmenu, id_n1, id_n2);
 }
-function ckCamada(camadas,templateCamadas){
-	//remove as camadas que nao sao ogc
-	var ncamadas = [];
+function listaMetaestat (onde,templateCamadas){
+	var r, p;
+	r = function(d){
+		var html = "", n, camadas = [], i, t;
+		n = d.length;
+		if(n > 0){
+			for(i=0; i<n; i++){
+				t = d[i];
+				camadas.push({
+					"nome": t.nomemedida,
+					"hidden": "",
+					"codigo_tema": t.id_medida_variavel
+				});
+			}
+
+			html = Mustache.to_html(
+					onde.html(),
+					{
+						"nomemeta":$trad("nomemeta",g_traducao_ogc),
+						"camadasmeta": ckCamada(camadas,templateCamadas,"meta"),
+						"hidden": "hidden"
+					}
+			);
+		}
+		onde.html(html);
+	};
+	//cpJSON vem de class_php.js
+	cpJSON.call("../admin/php/metaestat.php?funcao=listaMedidaVariavel&codigo_variavel=&g_sid=", "foo", r);
+
+
+}
+function ckCamada(camadas,templateCamadas,tipo){
+	var ncamadas = [],
+	html;
+	//marca as camadas que nao sao ogc
 	$(camadas).each(function() {
-		if(this.ogc_tema != "NAO"){
+		if(tipo == "tema" && this.ogc_tema != "NAO"){
 			if(this.link_tema == ""){
 				this.hidden = "hidden";
 			}
+			this.tipo = tipo;
+			ncamadas.push(this);
+		}
+		if(tipo == "meta"){
+			this.hidden = "hidden";
+			this.tipo = tipo;
 			ncamadas.push(this);
 		}
 	});
-	var html = Mustache.to_html(
+	html = Mustache.to_html(
 			"{{#data}}" + templateCamadas + "{{/data}}",
 			{"data":ncamadas}
 	);
@@ -109,38 +146,20 @@ function ckCamada(camadas,templateCamadas){
 		return "";
 	}
 }
-function mostraDadosServico(tema){
-	ins = "<H1>Endere&ccedil;os de acesso:</H1>";
-	var re = new RegExp(".htm", "g");
-	var servico = window.location.href.replace(re, '.php?');
-	//remove variaveis adicionais, se houver
-	servico = servico.split("?")[0]+"?";
+function mostraLinksServico(tema,tipo){
+	var html;
 
-	ins += "<p>Webservice com todas as camadas: <a href='" + servico + "' target='_blank' >" + servico + "</a>";
-	ins += "<p>Webservice dessa camada: <a href='" + servico + "tema=" + tema + "&' target='_blank' >" + servico + "tema=" + tema + "&</a>";
-	ins += "<p>Link para essa p&aacute;gina: <a href='"+ window.location.href.split("?")[0] + "?temaOgc=" + tema + "'>"+ window.location.href.split("?")[0] + "?temaOgc=" + tema + "</a>";
-	ins +=
-		"<p><a target=blank href='"+servico+"service=wms&version=1.1.1&request=getcapabilities&layers="+tema+"' />GetCapabilities</a>";
-	ins +=
-		"<p><a target=blank href='"+servico+"SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers="+tema+"' />testar getmap</a>";
-	ins +=
-		"<p><a target=blank href='"+servico+"SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getlegendgraphic&layers="+tema+"' />testar getLegendGraphic</a>";
-	ins +=
-		"<p><a target=blank href='"+servico+"format=application/openlayers&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&layers="+tema+"' />visualizar com openLayers</a>";
-	ins +=
-		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=shape-zip&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />download shapefile via WFS</a>";
-	ins +=
-		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=csv&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"&ows_geomtype=AS_WKT' />download CSV via WFS com geometria</a>";
-	ins +=
-		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=csv&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"&ows_geomtype=none' />download CSV via WFS mas sem a geometria</a>";
-	ins +=
-		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=kmz&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />download KMZ</a>";
-	ins +=
-		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=kml&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />download KML</a>";
-	ins +=
-		"<p><a target=blank href='"+servico+"OUTPUTFORMAT=geojson&bbox=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&service=wfs&version=1.1.0&request=getfeature&layers="+tema+"&typeName="+tema+"' />GeoJson</a>";
-	ins +=
-		"<p><a target=blank href='ferramentas/recline/default.php?tema="+tema+"' />Explore a tabela de atributos</a>";
+	if(tipo == "meta"){
+		tradLinks["tema"] = "metaestat_"+tema;
+		tradLinks["id_medida_variavel"] = "&id_medida_variavel="+tema;
+	}
+	else{
+		tradLinks["tema"] = tema;
+	}
 
-	$(".modal-body").html(ins);
+	html = Mustache.to_html(
+			$("#templateLinks").html(),
+			tradLinks
+	);
+	$(".modal-body").html(html);
 }
