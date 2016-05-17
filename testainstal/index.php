@@ -670,6 +670,7 @@ HTML;
 	</div>
 <script>
 $.material.init();
+$("html").niceScroll();
 </script>
 </body>
 </html>

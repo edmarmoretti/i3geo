@@ -43,6 +43,7 @@ echo "
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src='" . ONDEI3GEO . "/pacotes/bootstrap/js/ie10-viewport-bug-workaround.js'></script>
     <script src='" . ONDEI3GEO . "/pacotes/bootstrap-material-design/dist/js/material.min.js'></script>
+    <script src='" . ONDEI3GEO . "/pacotes/jquery/plugins/nicescroll/jquery.nicescroll.min.js'></script>
 ";
 ?>
 <style>

@@ -60,7 +60,7 @@ include "../init/head.php";
 	</div>
 	<div class="row-content" style="margin-left: 10px;" >
 		<h4 class="list-group-item-heading">
-			{{nome_tema}}{{nome}}
+			{{{nome_tema}}}{{{nome}}}
 			<a class="{{hidden}}" href="{{link_tema}}{{link}}" target="_blank"><i class="fa fa-link"></i></a>
 		</h4>
 	</div>
@@ -156,10 +156,10 @@ include "../init/head.php";
 	<!-- Camadas oriundas do sistema de metadados estatisticos -->
 	<div class="container">
 		<div class="row center-block hidden">
-			<div class="col-sm-12" id="metaestat">
+			<div class="col-sm-6" id="metaestat">
 				<div class="panel-group" role="tablist" aria-multiselectable="true">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="background-color: #80cbc4;" role="tab">
+						<div class="panel-heading" style="background-color: #00BCD4;" role="tab">
 							<h3 class="panel-title">
 								<a class="collapsed in" role="button" data-toggle="collapse"
 									href="#corpoMetaestat" aria-expanded="false" aria-controls="#corpoMetaestat">
@@ -171,6 +171,27 @@ include "../init/head.php";
 								aria-multiselectable="true">
 								<div class="panel-body">
 									{{{camadasmeta}}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 hidden" id="mapasSalvos">
+				<div class="panel-group" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+						<div class="panel-heading" style="background-color: #00BCD4;" role="tab">
+							<h3 class="panel-title">
+								<a class="collapsed in" role="button" data-toggle="collapse"
+									href="#corpomapasSalvos" aria-expanded="false" aria-controls="#corpomapasSalvos">
+									{{{nomeMapasSalvos}}} </a>
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div id="corpomapasSalvos" class="panel-collapse collapse" role="tabpanel"
+								aria-multiselectable="true">
+								<div class="panel-body">
+									{{{mapasSalvos}}}
 								</div>
 							</div>
 						</div>
@@ -235,12 +256,15 @@ include "../init/head.php";
 				$("#templateCamadas").html()
 			);
 		listaMetaestat($("#metaestat"),$("#templateCamadas").html());
+		listaMapasSalvos($("#mapasSalvos"),$("#templateCamadas").html());
 		$('.hidden').removeClass('hidden');
 		$(window).on("scroll click",
 				function(){
-					$(".jumbotron").fadeOut(300)
+					$(".jumbotron").fadeOut(300);
 				}
 			);
+
+		//$("html").niceScroll({"cursorwidth":"10px"});
 		$.material.init();
 		//verifica se deve abrir de imediato a janela de links
 		var temp = window.location.href.split("temaOgc=");

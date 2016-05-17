@@ -626,7 +626,7 @@ i3GEO.editorOL = {
 		var layers = i3GEO.editorOL.layersLigados(),
 			nlayers = layers.length,
 			ins = "",i, icone = "",
-			url, fers, f="", fer = "";
+			url, fers, f="", fer = "", fonte = "";
 		for(i=0;i<nlayers;i++){
 			try{
 				if(layers[i].isBaseLayer === false){
@@ -664,7 +664,11 @@ i3GEO.editorOL = {
 								icone += i3GEO.configura.ferramentasLayers[fer].icone(layers[i]);
 							}
 						}
-						ins += icone + layers[i].name+"<br><div id=legendaL_"+i+" ></div><br>";
+						fonte = "";
+						if(layers[i].link_tema != ""){
+							fonte = "&nbsp;<a class='i3GeoLinkFonte' href='" + layers[i].link_tema + "' target='_blank' >link</a>";
+						}
+						ins += icone + layers[i].name + fonte + "<br><div id=legendaL_"+i+" ></div><br>";
 						//necessario pq nao e sincrono
 						eval ("var f = function(retorno){document.getElementById('legendaL_"+i+"').innerHTML = retorno.responseText;};");
 						var config = {

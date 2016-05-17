@@ -343,7 +343,7 @@ i3GEO.editorOL =
 			}
 			if (i3GEO.editorOL.fundo != "") {
 				for (i = nfundo - 1; i >= 0; i--) {
-					if (fundo[i] != "") {
+					if (fundo[i] != "" && i3GEO.editorOL[fundo[i]]) {
 						alayers.push(i3GEO.editorOL[fundo[i]]);
 						i3GEO.editorOL[fundo[i]].setVisibility(true);
 					}
@@ -705,7 +705,7 @@ i3GEO.editorOL =
 			i3GEO.editorOL.mapa.zoomToExtent(b);
 		},
 		mostraLegenda : function() {
-			var prop, layer, layers = i3GEO.editorOL.mapa.getLayers(), nlayers = layers.getLength(), ins = "", i, icone = "", url, f = "";
+			var prop, layer, layers = i3GEO.editorOL.mapa.getLayers(), nlayers = layers.getLength(), ins = "", i, icone = "", url, f = "", fonte = "";
 			for (i = 0; i < nlayers; i++) {
 				layer = layers.item(i);
 				prop = layer.getProperties();
@@ -750,7 +750,13 @@ i3GEO.editorOL =
 							}
 						}
 						*/
-						ins += icone + prop.name + "<br><div id=legendaL_" + i + " ></div><br>";
+
+						fonte = "";
+						if(prop.link_tema != ""){
+							fonte = "&nbsp;<a class='i3GeoLinkFonte' href='" + prop.link_tema + "' target='_blank' >link</a>";
+						}
+
+						ins += icone + prop.name + fonte + "<br><div id=legendaL_" + i + " ></div><br>";
 						// necessario pq nao e sincrono
 						eval("var f = function(retorno){document.getElementById('legendaL_" + i
 							+ "').innerHTML = retorno.responseText;};");
@@ -760,7 +766,7 @@ i3GEO.editorOL =
 							url : url,
 							callback : f
 						};
-						OpenLayers.Request.issue(config);
+						//OpenLayers.Request.issue(config);
 					} else if (prop.isBaseLayer === false && prop.visible === true) {
 						//caso a legenda seja aberta dentro do i3Geo
 						url = url.replace("LAYERS", "LAYER");

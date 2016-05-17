@@ -9,6 +9,19 @@ include_once(dirname(__FILE__)."/../classesphp/pega_variaveis.php");
 include_once(dirname(__FILE__)."/../classesphp/carrega_ext.php");
 include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 error_reporting(0);
+//cria as pastas temporarias caso nao existam
+if (! file_exists ( $dir_tmp )) {
+	@mkdir ( $dir_tmp, 0777 );
+}
+if (file_exists ( $dir_tmp )) {
+	@mkdir ( $dir_tmp . "/comum", 0777 );
+	@mkdir ( $dir_tmp . "/saiku-datasources", 0777 );
+	chmod ( $dir_tmp . "/saiku-datasources", 0777 );
+	@mkdir ( $dir_tmp . "/cache", 0777 );
+	chmod ( $dir_tmp . "/cache", 0777 );
+	@mkdir ( $dir_tmp . "/cache/googlemaps", 0777 );
+	chmod ( $dir_tmp . "/cache/googlemaps", 0777 );
+}
 if(!empty($desligacache)){
 	$DESLIGACACHE = $desligacache;
 }
@@ -300,6 +313,7 @@ if($temas != ""){
 				$maptemp = @ms_newMapObj($nomeMap);
 				if($maptemp){
 					$nlayers = $maptemp->numlayers;
+					$dadosTemas = pegaDadosAdminKey("select codigo_tema,link_tema from __esq__i3geoadmin_temas","__esq__");
 					for($i=0;$i<($nlayers);++$i)	{
 						$layern = $maptemp->getLayer($i);
 						//
@@ -346,6 +360,11 @@ if($temas != ""){
 						$visivel = "true";
 					}
 					if(strtolower($DESLIGACACHE) != "sim" && $nlayers == 1 && strtoupper($layern->getmetadata("cache")) == "SIM" && $layern->getmetadata("PLUGINI3GEO") == ""){
+						//
+						//obtem a fonte
+						//
+						$link_tema = $dadosTemas[$layern->name];
+						$link_tema = $link_tema["link_tema"];
 						if($layern->type != 2 && $layern->type != 3){
 							$opacidade = 1;
 						}
@@ -364,10 +383,10 @@ if($temas != ""){
 						// nesse caso o layer e adicionado como TMS
 						// tms leva os parametros do TMS
 						//$objOpenLayers[] = 'new OpenLayers.Layer.TMS("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png", ferramentas :'.$ferramentas.'})';
-						$objOpenLayers[] = 'new OpenLayers.Layer.OSM("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&Z=${z}&X=${x}&Y=${y}",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png", ferramentas :'.$ferramentas.'})';
+						$objOpenLayers[] = 'new OpenLayers.Layer.OSM("'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&Z=${z}&X=${x}&Y=${y}",{'.$teffect.' tileOrigin: new OpenLayers.LonLat(-180, -90),opacity:'.$opacidade.',serviceVersion:"&tms=",visibility:'.$visivel.',isBaseLayer:'.$ebase.',layername:"'.$nomeLayer.'",type:"png", ferramentas :'.$ferramentas.',link_tema:"'.$link_tema.'"})';
 
 						// cria um clone WMS para efeitos de getfeatureinfo
-						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,transitionEffect : null,singleTile:true,visibility:false,isBaseLayer:false, ferramentas :'.$ferramentas.'})';
+						$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{cloneTMS:"'.$nomeLayer.'",layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{displayInLayerSwitcher:false,transitionEffect : null,singleTile:true,visibility:false,isBaseLayer:false, ferramentas :'.$ferramentas.',link_tema:"'.$link_tema.'"})';
 					}
 					else{
 						foreach($layers as $l){
@@ -377,6 +396,8 @@ if($temas != ""){
 							}
 							$tituloLayer = $l->getmetadata("tema");
 							$nomeLayer = $l->name;
+							$link_tema = $dadosTemas[$nomeLayer];
+							$link_tema = $link_tema["link_tema"];
 							$visivel = "false";
 							if($l->status == MS_DEFAULT || in_array($tema,$visiveis)){
 								$visivel = "true";
@@ -397,10 +418,10 @@ if($temas != ""){
 								$teffect = 'transitionEffect: null,';
 							}
 							if($tituloLayer != ""){
-								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.', ferramentas :'.$ferramentas.'})';
+								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.', ferramentas :'.$ferramentas.',link_tema:"'.$link_tema.'"})';
 							}
 							else{
-								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' displayInLayerSwitcher:false,singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.', ferramentas :'.$ferramentas.'})';
+								$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tituloLayer.'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{opacity:'.$opacidade.',layers:"'.$nomeLayer.'",transparent: "true", format: "image/png"},{'.$teffect.' displayInLayerSwitcher:false,singleTile:'.$singleTile.',visibility:'.$visivel.',isBaseLayer:'.$ebase.', ferramentas :'.$ferramentas.',link_tema:"'.$link_tema.'"})';
 							}
 						}
 					}

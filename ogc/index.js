@@ -114,7 +114,36 @@ function listaMetaestat (onde,templateCamadas){
 	};
 	//cpJSON vem de class_php.js
 	cpJSON.call("../admin/php/metaestat.php?funcao=listaMedidaVariavel&codigo_variavel=&g_sid=", "foo", r);
+}
+function listaMapasSalvos(onde,templateCamadas){
+	var r, p;
+	r = function(d){
+		d = d.data.mapas;
+		var html = "", n, camadas = [], i, t;
+		n = d.length;
+		if(n > 0){
+			for(i=0; i<n; i++){
+				t = d[i];
+				camadas.push({
+					"nome": t.NOME,
+					"hidden": "",
+					"codigo_tema": t.ID_MAPA
+				});
+			}
 
+			html = Mustache.to_html(
+					onde.html(),
+					{
+						"nomeMapasSalvos":$trad("nomeMapasSalvos",g_traducao_ogc),
+						"mapasSalvos": ckCamada(camadas,templateCamadas,"mapa"),
+						"hidden": "hidden"
+					}
+			);
+		}
+		onde.html(html);
+	};
+	//cpJSON vem de class_php.js
+	cpJSON.call("../classesphp/mapa_controle.php?map_file=&funcao=pegaMapas&g_sid=", "foo", r);
 
 }
 function ckCamada(camadas,templateCamadas,tipo){
@@ -130,6 +159,11 @@ function ckCamada(camadas,templateCamadas,tipo){
 			ncamadas.push(this);
 		}
 		if(tipo == "meta"){
+			this.hidden = "hidden";
+			this.tipo = tipo;
+			ncamadas.push(this);
+		}
+		if(tipo == "mapa"){
 			this.hidden = "hidden";
 			this.tipo = tipo;
 			ncamadas.push(this);
@@ -153,7 +187,11 @@ function mostraLinksServico(tema,tipo){
 		tradLinks["tema"] = "metaestat_"+tema;
 		tradLinks["id_medida_variavel"] = "&id_medida_variavel="+tema;
 	}
-	else{
+	if(tipo == "mapa"){
+		tradLinks["tema"] = "mapa_cadastrado_"+tema;
+		tradLinks["id_medida_variavel"] = "&mapa_cadastrado="+tema;
+	}
+	if(tipo == "tema"){
 		tradLinks["tema"] = tema;
 	}
 

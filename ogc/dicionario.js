@@ -81,6 +81,21 @@ g_traducao_ogc =
 			en : "",
 			es : ""
 		}],
+		"nomeMapasSalvos" : [{
+			pt : "Mapas de usu&aacute;rios",
+			en : "",
+			es : ""
+		}],
+		"1" : [{
+			pt : "",
+			en : "",
+			es : ""
+		}],
+		"1" : [{
+			pt : "",
+			en : "",
+			es : ""
+		}],
 		"1" : [{
 			pt : "",
 			en : "",

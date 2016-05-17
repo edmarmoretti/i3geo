@@ -6,32 +6,23 @@ MAP
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "CACHE"	"nao"
       "TIP"	"CD_LEGENDA"
+      "CACHE"	"nao"
       "CLASSE"	"SIM"
-      "olopacity"	""
       "permitekmz"	"sim"
-      "gmopacity"	""
-      "gmstatus"	""
       "ITENSDESC"	"Bioma Teste de acentuação"
-      "TILES"	"SIM"
       "ESCALA"	"1000000"
+      "TILES"	"SIM"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "arquivotemaoriginal"	""
       "extensao"	"-76 -39 -29 9"
-      "nomeoriginal"	""
-      "olstatus"	""
       "permitedownload"	"sim"
-      "FILTROORIGINAL"	""
       "metaestat"	""
-      "PLUGINI3GEO"	""
-      "DATAORIGINAL"	""
       "download"	"sim"
       "itembuscarapida"	"CD_LEGENDA"
       "ITENS"	"CD_LEGENDA"
-      "permitekml"	"sim"
-      "permiteogc"	"sim"
       "transitioneffect"	"SIM"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
       "TEMA"	"_Biomas SHP (acentução)"
     END # METADATA
     NAME "_lbiomashp"
@@ -80,7 +71,7 @@ MAP
       TITLE ""
     END # CLASS
     CLASS
-      NAME "AMAZÃ”NIA"
+      NAME "AMAZÔNIA"
       EXPRESSION ('[CD_LEGENDA]'eq'AMAZÃ”NIA')
       STYLE
         COLOR 23 2 150
@@ -89,7 +80,7 @@ MAP
       TITLE ""
     END # CLASS
     CLASS
-      NAME "MATA ATLÃ‚NTICA"
+      NAME "MATA ATLÂNTICA"
       EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLÃ‚NTICA')
       STYLE
         COLOR 187 96 164

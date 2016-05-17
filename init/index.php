@@ -110,13 +110,13 @@ include "head.php";
 				<div class="cartao {{{fa}}} col-xs-12 center-block"
 					style="width: 260px; min-width: 260px; max-width: 260px;">
 					<div class="panel panel-default">
-						<div class="panel-body" style="height: 250px;">
+						<div class="panel-body" style="max-height: 250px;">
 							<div class="thumbnail" role="button" style="height: 90px;" data-toggle="quadroQrcode" data-url="{{{href}}}">
 								<img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
-								<i class="fa fa-qrcode btn-qrcode pull-right hidden-xs" ></i>
+								<i class="fa fa-qrcode btn-qrcode pull-right" ></i>
 							</div>
 							<h4>{{{titulo}}}</h4>
-							<div style="overflow: auto; height: 200px;">
+							<div class="hidden-xs" style="overflow: auto; height: 200px;">
 								<h5>{{{subtitulo}}}</h5>
 							</div>
 						</div>
@@ -240,6 +240,7 @@ include "head.php";
 				}
 			});
 		}
+		$("html").niceScroll({"cursorwidth":"10px"});
 		$.material.init();
 	});
 	</script>
