@@ -101,7 +101,6 @@ include "../init/head.php";
 		mostraBotoesBT();
 		$('.hidden').removeClass('hidden');
 		$.material.init();
-		$("html").niceScroll({"cursorwidth":"10px"});
 	});
 	</script>
 </body>

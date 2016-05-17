@@ -240,7 +240,6 @@ include "head.php";
 				}
 			});
 		}
-		$("html").niceScroll({"cursorwidth":"10px"});
 		$.material.init();
 	});
 	</script>
