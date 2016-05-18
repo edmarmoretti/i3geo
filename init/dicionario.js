@@ -38,9 +38,9 @@ g_traducao_init =
 			],
 		4 : [
 			{
-				pt : "i3Geo + <a href='http://openlayers.org/' >OpenLayers <i class='fa fa-external-link fa-1g' aria-hidden='true'></i></a>",
-				en : "i3Geo + <a href='http://openlayers.org/' >OpenLayers <i class='fa fa-external-link fa-1g' aria-hidden='true'></i></a>",
-				es : "i3Geo + <a href='http://openlayers.org/' >OpenLayers <i class='fa fa-external-link fa-1g' aria-hidden='true'></i></a>"
+				pt : "i3Geo + <a href='http://openlayers.org/' >OpenLayers </a>",
+				en : "i3Geo + <a href='http://openlayers.org/' >OpenLayers </a>",
+				es : "i3Geo + <a href='http://openlayers.org/' >OpenLayers </a>"
 			}
 		],
 		"4a" : [
@@ -66,7 +66,7 @@ g_traducao_init =
 			],
 		6 : [
 			{
-				pt : "i3Geo + <a href='https://developers.google.com/maps' >Google Maps <i class='fa fa-external-link' aria-hidden='true'></i></a>",
+				pt : "i3Geo + <a href='https://developers.google.com/maps' >Google Maps </a>",
 				en : "",
 				es : ""
 			}
@@ -262,7 +262,7 @@ g_traducao_init =
 		],
 		23 : [
 			{
-				pt : "i3Geo + <a href='http://wiki.openstreetmap.org' >OSM <i class='fa fa-external-link' aria-hidden='true'></i></a>",
+				pt : "i3Geo + <a href='http://wiki.openstreetmap.org' >OSM </a>",
 				en : "",
 				es : ""
 			}
@@ -290,7 +290,7 @@ g_traducao_init =
 		],
 		25 : [
 			{
-				pt : "i3Geo + <a href='http://community.meteorite.bi/' >SAIKU <i class='fa fa-external-link' aria-hidden='true'></i></a>",
+				pt : "i3Geo + <a href='http://community.meteorite.bi/' >SAIKU </a>",
 				en : "",
 				es : ""
 			}
@@ -374,7 +374,7 @@ g_traducao_init =
 		],
 		"32a" : [
 			{
-				pt : "Lista de e-mails da comunidade i3Geo mantida pela <a href='http://www.osgeo.org/' target='_blank' >OSGEO <i class='fa fa-external-link fa-1g' aria-hidden='true'></i></a>. Tire d&uacute;vidas com outros usu&aacute;rios e divulgue assuntos de interesse.",
+				pt : "Lista de e-mails da comunidade i3Geo mantida pela <a href='http://www.osgeo.org/' target='_blank' >OSGEO </a>. Tire d&uacute;vidas com outros usu&aacute;rios e divulgue assuntos de interesse.",
 				en : "",
 				es : ""
 			}
@@ -388,7 +388,7 @@ g_traducao_init =
 		],
 		"33a" : [
 			{
-				pt : "Links para aplicativos que podem auxiliar em algumas tarefas de construção de mapas.",
+				pt : "Links para aplicativos que podem auxiliar em algumas tarefas de constru&ccedil;&atilde;o de mapas.",
 				en : "",
 				es : ""
 			}

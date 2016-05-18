@@ -12,12 +12,12 @@ include "../init/head.php";
 ?>
 <style>
 .panel-heading [data-toggle="collapse"]:after {
-	font-family: 'Glyphicons Halflings';
-	content: "\e250";
-	float: left;
+	font-family: 'FontAwesome';
+	content: "\f054";
+	float: right;
 	margin-right: 5px;
 	color: #fffff;
-	font-size: 8px;
+	font-size: 12px;
 	line-height: 16px;
 	-webkit-transform: rotate(-90deg);
 	-moz-transform: rotate(-90deg);
@@ -161,17 +161,14 @@ include "../init/head.php";
 					<div class="panel panel-default">
 						<div class="panel-heading" style="background-color: #00BCD4;" role="tab">
 							<h3 class="panel-title">
-								<a class="collapsed in" role="button" data-toggle="collapse"
-									href="#corpoMetaestat" aria-expanded="false" aria-controls="#corpoMetaestat">
-									{{{nomemeta}}} </a>
+								<a class="collapsed in" role="button" data-toggle="collapse" href="#corpoMetaestat"
+									aria-expanded="false" aria-controls="#corpoMetaestat"> {{{nomemeta}}} </a>
 							</h3>
 						</div>
 						<div class="panel-body">
 							<div id="corpoMetaestat" class="panel-collapse collapse" role="tabpanel"
 								aria-multiselectable="true">
-								<div class="panel-body">
-									{{{camadasmeta}}}
-								</div>
+								<div class="panel-body">{{{camadasmeta}}}</div>
 							</div>
 						</div>
 					</div>
@@ -182,17 +179,14 @@ include "../init/head.php";
 					<div class="panel panel-default">
 						<div class="panel-heading" style="background-color: #00BCD4;" role="tab">
 							<h3 class="panel-title">
-								<a class="collapsed in" role="button" data-toggle="collapse"
-									href="#corpomapasSalvos" aria-expanded="false" aria-controls="#corpomapasSalvos">
-									{{{nomeMapasSalvos}}} </a>
+								<a class="collapsed in" role="button" data-toggle="collapse" href="#corpomapasSalvos"
+									aria-expanded="false" aria-controls="#corpomapasSalvos"> {{{nomeMapasSalvos}}} </a>
 							</h3>
 						</div>
 						<div class="panel-body">
 							<div id="corpomapasSalvos" class="panel-collapse collapse" role="tabpanel"
 								aria-multiselectable="true">
-								<div class="panel-body">
-									{{{mapasSalvos}}}
-								</div>
+								<div class="panel-body">{{{mapasSalvos}}}</div>
 							</div>
 						</div>
 					</div>
@@ -214,12 +208,14 @@ include "../init/head.php";
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
 					<h4 class="modal-title">OGC</h4>
 				</div>
 				<div class="modal-body"></div>
+				<div class="modal-footer" style="padding: 0px;padding-right: 15px; border: 0px; background-color: white;">
+					<a class="btn btn-primary" href="#" role="button" data-dismiss="modal" aria-label="Close">
+						OK
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>

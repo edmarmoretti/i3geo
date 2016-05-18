@@ -31,8 +31,7 @@ include "../init/head.php";
 	padding: 3px 5px;
 }
 
-.mega-dropdown-menu>li ul>li>a:hover, .mega-dropdown-menu>li ul>li>a:focus
-	{
+.mega-dropdown-menu>li ul>li>a:hover, .mega-dropdown-menu>li ul>li>a:focus {
 	text-decoration: none;
 }
 
@@ -51,13 +50,11 @@ include "../init/head.php";
 					class="fa fa-home fa-1x"></i></a>
 
 				<ul class="nav navbar-nav">
-					<li class="dropdown mega-dropdown"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown">Tags <span
-							class="caret"></span></a>
-						<div id="tplLista"
-							class="col-sm-12 dropdown-menu mega-dropdown-menu">
-							<a class="btn btn-primary" href="#"
-								onclick="$('.exemplo').hide();$('.{{id}}').fadeIn(600);">{{tag}}</a>
+					<li class="dropdown mega-dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags
+							<span class="caret"></span>
+					</a>
+						<div id="tplLista" class="col-sm-12 dropdown-menu mega-dropdown-menu">
+							<a class="btn btn-primary" href="#" onclick="$('.exemplo').hide();$('.{{id}}').fadeIn(600);">{{tag}}</a>
 						</div></li>
 				</ul>
 			</div>
@@ -80,28 +77,33 @@ include "../init/head.php";
 						style="width: 260px; min-width: 260px; max-width: 260px;">
 						<div class="panel panel-default">
 							<div class="panel-body" style="height: 100px; overflow: auto;">
+								<span class="label label-info">{{{tag}}}</span>
 								<h4>{{{corpo}}}</h4>
 							</div>
-							<div class="panel-footer">
-								<span class="label label-info">{{{tag}}}</span> <a
-									class="pull-right" href="{{{link}}}" target="_blank"
-									role="button">Link</a>
+
+							<div class="panel-footer"
+								style="padding: 0px; padding-right: 15px; border: 0px; background-color: white;">
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-primary pull-right" href="{{{link}}}" target="_blank" role="button">Abrir</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<script src='../classesjs/compactados/mustache.js'></script>
-	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
-	<script src='index.js'></script>
-	<script>
+		<script src='../classesjs/compactados/mustache.js'></script>
+		<script src='../classesjs/compactados/classe_util_compacto.js'></script>
+		<script src='index.js'></script>
+		<script>
 	$(document).ready(function(){
 		mostraBotoesBT();
 		$('.hidden').removeClass('hidden');
 		$.material.init();
 	});
 	</script>
+
 </body>
 </html>

@@ -36,17 +36,16 @@ error_reporting ( 0 );
 include "head.php";
 ?>
 <style>
-.btn-qrcode{
-    background-color: #fff;
-    color: #ddd;
-    margin: 5px;
-    width: 13px;
-    position:absolute;
-    top:12px;
-    left:28px;
-    text-align: center;
-    border-radius: 20%;
-
+.btn-qrcode {
+	background-color: #fff;
+	color: #ddd;
+	margin: 5px;
+	width: 13px;
+	position: absolute;
+	top: 12px;
+	left: 28px;
+	text-align: center;
+	border-radius: 20%;
 }
 </style>
 <body style="background-color: #eeeeee; padding-top: 90px;" id="topo">
@@ -111,25 +110,20 @@ include "head.php";
 					style="width: 260px; min-width: 260px; max-width: 260px;">
 					<div class="panel panel-default">
 						<div class="panel-body" style="max-height: 250px;">
-							<div class="thumbnail" role="button" style="height: 90px;" data-toggle="quadroQrcode" data-url="{{{href}}}">
-								<img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
-								<i class="fa fa-qrcode btn-qrcode pull-right" ></i>
+							<div class="thumbnail" role="button" style="height: 90px;" data-toggle="quadroQrcode"
+								data-url="{{{href}}}">
+								<img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" /> <i
+									class="fa fa-qrcode btn-qrcode pull-right"></i>
 							</div>
 							<h4>{{{titulo}}}</h4>
 							<div class="hidden-xs" style="overflow: auto; height: 200px;">
 								<h5>{{{subtitulo}}}</h5>
 							</div>
 						</div>
-						<div class="panel-footer text-right" style="border: 0px; background-color: white;">
-							<div class="row">
-								<div class="col-xs-12">
-									<p>
-										<a class="btn btn-primary btn-raised " href="{{{href}}}" role="button"
-											target="{{{target}}}"> {{{abrir}}} <i class="fa fa-{{{fa}}}" aria-hidden="true"></i>
-										</a>
-									</p>
-								</div>
-							</div>
+						<div class="panel-footer text-right"
+							style="padding: 0px; padding-right: 15px; border: 0px; background-color: white;">
+							<a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}"> {{{abrir}}}
+							</a>
 						</div>
 					</div>
 				</div>
@@ -138,8 +132,8 @@ include "head.php";
 				style="width: 260px; min-width: 260px; max-width: 260px;">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<a class="twitter-timeline tline" href=""
-							data-widget-id="288061915689787392" height="300">Tweets @i3Geo</a>
+						<a class="twitter-timeline tline" href="" data-widget-id="288061915689787392" height="267">Tweets
+							@i3Geo</a>
 					</div>
 				</div>
 			</div>
@@ -147,8 +141,8 @@ include "head.php";
 				style="width: 260px; min-width: 260px; max-width: 260px;">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<a class="twitter-timeline htag" href=""
-							data-widget-id="643417277208133633" height="300">i3geo Tweets</a>
+						<a class="twitter-timeline htag" href="" data-widget-id="643417277208133633" height="267">i3geo
+							Tweets</a>
 					</div>
 				</div>
 			</div>
