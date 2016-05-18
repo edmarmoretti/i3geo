@@ -127,7 +127,8 @@ function listaMapasSalvos(onde,templateCamadas){
 				camadas.push({
 					"nome": t.NOME,
 					"hidden": "",
-					"codigo_tema": t.ID_MAPA
+					"codigo_tema": t.ID_MAPA,
+					"download": "nao"
 				});
 			}
 
@@ -151,12 +152,29 @@ function ckCamada(camadas,templateCamadas,tipo){
 	html;
 	//marca as camadas que nao sao ogc
 	$(camadas).each(function() {
-		if(tipo == "tema" && this.ogc_tema != "NAO"){
+		if(tipo == "tema"){
 			if(this.link_tema == ""){
 				this.hidden = "hidden";
 			}
 			this.tipo = tipo;
-			ncamadas.push(this);
+			//para compatibilizar entre as diferencas de respostas JSON
+			if(this.ogc){
+				this.ogc_tema = this.ogc;
+			}
+			if(this.download){
+				this.download_tema = this.download;
+			}
+			//nao mostra se nenhum permitir acao
+			if(!(this.ogc_tema.toLowerCase() == "nao" && this.download_tema.toLowerCase() == "nao")){
+				if(this.ogc_tema.toLowerCase() == "nao"){
+					this.disabledogc = "disabled";
+				}
+				if(this.download_tema.toLowerCase() == "nao"){
+					this.disableddown = "disabled";
+				}
+				ncamadas.push(this);
+			}
+
 		}
 		if(tipo == "meta"){
 			this.hidden = "hidden";
@@ -166,6 +184,7 @@ function ckCamada(camadas,templateCamadas,tipo){
 		if(tipo == "mapa"){
 			this.hidden = "hidden";
 			this.tipo = tipo;
+			this.disableddown = "disabled";
 			ncamadas.push(this);
 		}
 	});
@@ -180,24 +199,76 @@ function ckCamada(camadas,templateCamadas,tipo){
 		return "";
 	}
 }
-function mostraLinksServico(tema,tipo){
+function mostraLinksServico(tema,tipo,disabled){
+	$(".modal-body").html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>');
 	var html;
+	if(disabled != ""){
+		return;
+	}
+	else{
+		if(tipo == "meta"){
+			tradLinks["tema"] = "metaestat_"+tema;
+			tradLinks["id_medida_variavel"] = "&id_medida_variavel="+tema;
+		}
+		if(tipo == "mapa"){
+			tradLinks["tema"] = "mapa_cadastrado_"+tema;
+			tradLinks["id_medida_variavel"] = "&mapa_cadastrado="+tema;
+		}
+		if(tipo == "tema"){
+			tradLinks["tema"] = tema;
+		}
+		html = Mustache.to_html(
+				$("#templateLinksOgc").html(),
+				tradLinks
+		);
+		$(".modal-body").html(html);
+	}
 
-	if(tipo == "meta"){
-		tradLinks["tema"] = "metaestat_"+tema;
-		tradLinks["id_medida_variavel"] = "&id_medida_variavel="+tema;
+}
+function mostraLinksDownload(tema,tipo,disabled){
+	$(".modal-body").html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>');
+	var html, r, p;
+	if(disabled != ""){
+		return;
 	}
-	if(tipo == "mapa"){
-		tradLinks["tema"] = "mapa_cadastrado_"+tema;
-		tradLinks["id_medida_variavel"] = "&mapa_cadastrado="+tema;
-	}
-	if(tipo == "tema"){
-		tradLinks["tema"] = tema;
-	}
+	else{
+		r = function(retorno){
+			var html,arqs,i,n,ins = "";
+			retorno = retorno.data;
+			//adiciona no hash os dados necessarios
+			if(tipo == "meta"){
+				tradLinks["tema"] = "metaestat_" + tema;
+				tradLinks["id_medida_variavel"] = "&id_medida_variavel=" + tema;
+			}
+			if(tipo == "tema"){
+				tradLinks["tema"] = tema;
+			}
+			tradLinks["mapfile"] = window.location.protocol + "//" + window.location.host + "/" + retorno.mapfileurl;
+			tradLinks["sldurl"] = tradLinks["url"] + "classesphp/mapa_controle.php?funcao=TEMA2SLD&tema=" + retorno.tema + "&map_file=" + retorno.mapfile;
 
-	html = Mustache.to_html(
-			$("#templateLinks").html(),
-			tradLinks
-	);
-	$(".modal-body").html(html);
+			arqs = retorno.arquivos.split(",");
+			n = arqs.length;
+			for (i=0; i<n; i++){
+				ins += "<p><a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[i]+"'>"+arqs[i]+"</a></p>";
+			}
+			tradLinks["shp"] = ins;
+
+			html = Mustache.to_html(
+					$("#templateLinksDownload").html(),
+					tradLinks
+			);
+			tradLinks["shp"] = "";
+			tradLinks["mapfile"] = "";
+			tradLinks["sldurl"] = "";
+
+			$(".modal-body").html(html);
+		}
+		//obtem o shapefile e outros dados
+		p = "../classesphp/mapa_controle.php?map_file=&funcao=download3&tema="+tema;
+		//caso a camada venha do sistema de metadados estatisticos e seja uma variavel
+		if(tipo == "meta"){
+			p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&id_medida_variavel="+tema;
+		}
+		cpJSON.call(p, "foo", r);
+	}
 }

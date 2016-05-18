@@ -86,13 +86,13 @@ g_traducao_ogc =
 			en : "",
 			es : ""
 		}],
-		"1" : [{
-			pt : "",
+		"map" : [{
+			pt : "Arquivo de configura&ccedil;&atilde;o Mapfile",
 			en : "",
 			es : ""
 		}],
-		"1" : [{
-			pt : "",
+		"sld" : [{
+			pt : "Arquivo de legenda SLD",
 			en : "",
 			es : ""
 		}],

@@ -136,14 +136,14 @@ g_traducao_init =
 		],
 		11 : [
 			{
-				pt : "Servi&ccedil;os OGC",
+				pt : "OGC/Download",
 				en : "OGC services ",
 				es : "Servicios OGC"
 			}
 		],
 		"11a" : [
 			{
-				pt : "Dados p&uacute;blicos podem ser acessados por meio dos padr&otilde;es OGC mais comuns, como WMS e WFS. Veja aqui a lista e os links dos servi&ccedil;os",
+				pt : "Dados p&uacute;blicos podem ser acessados por meio de download ou dos padr&otilde;es OGC mais comuns, como WMS e WFS. Veja aqui a lista e os links dos servi&ccedil;os",
 				en : "",
 				es : ""
 			}

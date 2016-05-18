@@ -4,6 +4,14 @@ GUIA DE UPDATES e UPGRADES
 Para a versão 7.0
 
 Inclusão da variável $ogrOutput em ms_configura.php, que indica se o OGR esta corretamente instalado, permitindo o seu uso nos servicos OGC de exportacao de dados
+
+Inclusão da variável $logTransacoes em ms_configura.php para ativar/desativar o log de transações com o banco de dados de administração
+
+Os programas javascript do core do i3Geo agora ficam na pasta i3geo/js
+
+O aplicativo datadownload foi removido
+
+As funcionalidades de download foram concentrados no aplicativo de acesso aos webservices OGC
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 

@@ -56,13 +56,6 @@ botoesIni = [
 	"fa": "map-o",
 	"target": "_self"
 },{
-	"img":"svn-update.png",
-	"href": location.href.replace("index.php","") + "../datadownload.htm",
-	"titulo":$trad(10,g_traducao_init),
-	"subtitulo": $trad("10a",g_traducao_init),
-	"fa": "download",
-	"target": "_self"
-},{
 	"img":"ogc_logo.png",
 	"href": location.href.replace("index.php","") + "../ogc/index.php",
 	"titulo":$trad(11,g_traducao_init),

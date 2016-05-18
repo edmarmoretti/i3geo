@@ -34,15 +34,24 @@ include "../init/head.php";
 	transform: rotate(90deg);
 }
 </style>
-<script id="templateLinks" type="x-tmpl-mustache">
-<h3>{{{acesso}}}</h3>
+<script id="templateLinksOgc" type="x-tmpl-mustache">
+<h3>OGC</h3>
+<p>{{{linkpagina}}}: <a href="{{{url}}}?temaOgc={{{tema}}}">{{{url}}}?temaOgc={{{tema}}}</a>
 <p>{{{wstodas}}}: <a href="{{{servico}}}" target="_blank" >{{{servico}}}</a>
 <p>{{{wscamada}}}: <a href="{{{servico}}}tema={{{tema}}}{{{id_medida_variavel}}}&" target="_blank" >{{{servico}}}tema={{{tema}}}{{{id_medida_variavel}}}&</a>
 <p>{{{linkpagina}}}: <a href="{{{url}}}?temaOgc={{{tema}}}">{{{url}}}?temaOgc={{{tema}}}</a>
+<p><a href="{{{urli3geo}}}/fontetema.php?tema={{{tema}}}" target="_blank" >Metadata</a></p>
 <p><a target=blank href="{{{servico}}}service=wms&version=1.1.1&request=getcapabilities&layers={{{tema}}}{{{id_medida_variavel}}}" >GetCapabilities</a>
 <p><a target=blank href="{{{servico}}}SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=<?php echo $mapext;?>&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers={{{tema}}}{{{id_medida_variavel}}}" >{{{getmap}}}</a>
 <p><a target=blank href="{{{servico}}}SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=<?php echo $mapext;?>&FORMAT=image/png&service=wms&version=1.1.0&request=getlegendgraphic&layers={{{tema}}}{{{id_medida_variavel}}}" >{{{legenda}}}</a>
 <p><a target=blank href="{{{servico}}}format=application/openlayers&bbox=<?php echo $mapext;?>&layers={{{tema}}}" >{{{vOl}}}</a>
+</script>
+<script id="templateLinksDownload" type="x-tmpl-mustache">
+<h3>Download</h3>
+<p>{{{linkpagina}}}: <a href="{{{url}}}?temaDownload={{{tema}}}">{{{url}}}?temaDownload={{{tema}}}</a>
+<p>{{{map}}}: <a href="{{{mapfile}}}" target="_blank" >{{{mapfile}}}</a></p>
+<p>{{{sld}}}: <a href="{{{sldurl}}}" target="_blank" >{{{sldurl}}}</a>
+<p><a href="{{{urli3geo}}}/fontetema.php?tema={{{tema}}}" target="_blank" >Metadata</a></p>
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=shape-zip&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}&typeName={{{tema}}}{{{id_medida_variavel}}}" >{{{downwfs}}}</a>
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=csv&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}{{{id_medida_variavel}}}&typeName={{{tema}}}&ows_geomtype=AS_WKT" >{{{downCgeo}}}</a>
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=csv&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}{{{id_medida_variavel}}}&typeName={{{tema}}}&ows_geomtype=none" >{{{downSgeo}}}</a>
@@ -50,20 +59,23 @@ include "../init/head.php";
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=kml&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}{{{id_medida_variavel}}}&typeName={{{tema}}}" >{{{kml}}}</a>
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=geojson&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}{{{id_medida_variavel}}}&typeName={{{tema}}}" >GeoJson</a>
 <p><a target=blank href="../ferramentas/recline/default.php?tema={{{tema}}}{{{id_medida_variavel}}}" >{{{explore}}}</a>
+<h4>Shape file</h4>
+{{{shp}}}
 </script>
 <script id="templateCamadas" type="x-tmpl-mustache">
 <div class="list-group-item">
-	<div class="bs-component btn-group-sm pull-left" data-toggle="modal" data-target="#modalCamada" onclick="mostraLinksServico('{{codigo_tema}}','{{tipo}}')">
-		<a class="btn btn-primary btn-fab" href="#">
+	<div class="bs-component btn-group-sm pull-left" data-toggle="modal" data-target="#modalCamada" >
+		<a onclick="mostraLinksServico('{{codigo_tema}}','{{tipo}}','{{disabledogc}}')" class="btn btn-primary btn-fab {{disabledogc}}" href="#">
 			<i class="material-icons">launch</i>
 		</a>
+		<a onclick="mostraLinksDownload('{{codigo_tema}}','{{tipo}}','{{disableddown}}')" class="btn btn-primary btn-fab {{disableddown}}" href="#">
+			<i class="material-icons">file_download</i>
+		</a>
 	</div>
-	<div class="row-content" style="margin-left: 10px;" >
-		<h4 class="list-group-item-heading">
-			{{{nome_tema}}}{{{nome}}}
-			<a class="{{hidden}}" href="{{link_tema}}{{link}}" target="_blank"><i class="fa fa-link"></i></a>
-		</h4>
-	</div>
+	<h4>
+		&nbsp;{{{nome_tema}}}{{{nome}}}
+		<a class="{{hidden}}" href="{{link_tema}}{{link}}" target="_blank"><i class="fa fa-link"></i></a>
+	</h4>
 </div>
 <div class="list-group-separator"></div>
 </script>
@@ -207,9 +219,6 @@ include "../init/head.php";
 	<div id="modalCamada" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">OGC</h4>
-				</div>
 				<div class="modal-body"></div>
 				<div class="modal-footer" style="padding: 0px;padding-right: 15px; border: 0px; background-color: white;">
 					<a class="btn btn-primary" href="#" role="button" data-dismiss="modal" aria-label="Close">
@@ -238,6 +247,7 @@ include "../init/head.php";
 		tradLinks = i3GEO.idioma.objetoIdioma(g_traducao_ogc);
 		tradLinks["servico"] = servico;
 		tradLinks["url"] = window.location.href.split("?")[0];
+		tradLinks["urli3geo"] = window.location.href.split("/ogc")[0];
 		//traducao do menu nav
 		html = Mustache.to_html(
 			$("#menuTpl").html(),
@@ -274,6 +284,20 @@ include "../init/head.php";
 			}
 			else{
 				mostraLinksServico(temaOgc,"tema")
+			}
+			$("#modalCamada").modal('show');
+		}
+		var temp = window.location.href.split("temaDownload=");
+		if(temp[1]){
+			var temaDownload = temp[1];
+			temaDownload = temaDownload.split("&");
+			temaDownload = temaDownload[0];
+			//verifica se eh metaestat
+			if(temaDownload.split("_")[0] == "metaestat"){
+				mostraLinksDownload(temaDownload.split("_")[1],"meta")
+			}
+			else{
+				mostraLinksDownload(temaDownload,"tema")
 			}
 			$("#modalCamada").modal('show');
 		}

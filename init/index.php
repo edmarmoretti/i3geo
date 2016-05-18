@@ -76,7 +76,7 @@ include "head.php";
 				<div id="menuTpl" class="hidden">
 					<ul class="nav navbar-nav">
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.map-o').fadeIn(600);">{{{mapas}}}</a></li>
-						<li><a href="#topo" onclick="$('.cartao').hide();$('.download').fadeIn(600);">Download</a></li>
+						<li><a href="#topo" onclick="$('.cartao').hide();$('.download').fadeIn(600);">OGC/Download</a></li>
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.cogs').fadeIn(600);">{{{admin}}}</a></li>
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
