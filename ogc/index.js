@@ -267,8 +267,32 @@ function mostraLinksDownload(tema,tipo,disabled){
 		p = "../classesphp/mapa_controle.php?map_file=&funcao=download3&tema="+tema;
 		//caso a camada venha do sistema de metadados estatisticos e seja uma variavel
 		if(tipo == "meta"){
-			p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&id_medida_variavel="+tema;
+			p = "../classesphp/mapa_controle.php?map_file=&funcao=download3&id_medida_variavel="+tema;
 		}
 		cpJSON.call(p, "foo", r);
 	}
+}
+function listaCompleta(onde){
+	var r, p;
+	r = function(retorno){
+		var d, html = "", n, camadas = [], i, t;
+		d = retorno.data.temas;
+		n = d.length;
+		if(n > 0){
+			for(i=0; i<n; i++){
+				t = d[i];
+				camadas.push({
+					"nome": t.nome_tema,
+					"link_tema": t.link_tema,
+					"codigo_tema": t.codigo_tema,
+					"ogc_tema": t.ogc_tema,
+					"download_tema": t.download_tema
+				});
+			}
+			html = ckCamada(camadas,$("#templateCamadas").html(),"tema");
+		}
+		onde.html(html);
+	};
+	//cpJSON vem de class_php.js
+	cpJSON.call("../classesphp/mapa_controle.php?map_file=&funcao=pegaTodosTemas&g_sid=&idioma=pt", "foo", r);
 }

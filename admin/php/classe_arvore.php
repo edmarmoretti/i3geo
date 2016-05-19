@@ -554,6 +554,23 @@ class Arvore
 		return $raiz;
 	}
 	/*
+	 Function: pegaTodosTemas
+
+	 Retorna os dados de todos os temas
+
+	 Return:
+
+	 {array}
+	 */
+	function pegaTodosTemas()
+	{
+		$q =  $this->execSQL($this->sql_temas." ORDER BY nome_tema ASC");
+		if($q){
+			$q = $this->validaTemas($q,"codigo_tema");
+			return $q;
+		}
+	}
+	/*
 	Function: pegaTema
 
 	Retorna os dados de um tema

@@ -119,7 +119,7 @@ $interfaceTemp = $interface;
 //TEMA2SLD e usado por datadownload.htm
 //PEGAMAPAS e utilizado em varias funcoes
 //
-if ($funcao != "download3" && $funcao != "listainterfaces" && $funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funcao != "procurartemasestrela" && $funcao != "pegalistadegrupos" && $funcao != "pegalistademenus" && $funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS"){
+if ($funcao != "pegaTodosTemas" && $funcao != "download3" && $funcao != "listainterfaces" && $funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funcao != "procurartemasestrela" && $funcao != "pegalistadegrupos" && $funcao != "pegalistademenus" && $funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS"){
 	session_name("i3GeoPHP");
 	if (isset($g_sid) && $g_sid != "")
 	{
@@ -1559,6 +1559,17 @@ switch (strtoupper($funcao))
 		$retorno = array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo,$idmenu));
 		break;
 		/*
+		 Valor: PEGATODOSTEMAS
+
+		 Pega a lista de todos os temas que nao possuem restricoes de acesso
+		 */
+	case "PEGATODOSTEMAS":
+		include("../admin/php/classe_arvore.php");
+		$arvore = new Arvore($locaplic,$idioma);
+		$resultado = $arvore->pegaTodosTemas();
+		$retorno = array("temas"=>$resultado);
+		break;
+		/*
 		 Valor: PROCURARTEMAS
 
 		Procura um tema no menu considerando apenas os existentes em subgruppos.
@@ -1905,9 +1916,9 @@ switch (strtoupper($funcao))
 		break;
 		/*
 		 Valor: LISTAUNICA
-		
+
 		Pega todos os valores dos itens de uma tabela de um tema.
-		
+
 		<Atributos->listaRegistros>
 		*/
 		case "LISTAUNICA":

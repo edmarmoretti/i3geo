@@ -89,12 +89,10 @@ include "../init/head.php";
 		</div>
 		<div class="panel-body">
 			<div id="corpoMenu{{idmenu}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
-				<div class="panel-body">
 					{{{camadas}}}
 					<div id="gruposMenu{{idmenu}}">
 						<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -110,10 +108,8 @@ include "../init/head.php";
 	</div>
 	<div class="panel-body">
 		<div id="corpoGrupo{{id_n1}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
-			<div class="panel-body">
-				{{{camadas}}}
-				<div id="subGruposGrupo{{id_n1}}">{{grupos}}</div>
-			</div>
+			{{{camadas}}}
+			<div id="subGruposGrupo{{id_n1}}">{{grupos}}</div>
 		</div>
 	</div>
 </div>
@@ -148,10 +144,12 @@ include "../init/head.php";
 			</div>
 			<!-- template para permitir a traducao -->
 			<div id="navbar" class="collapse navbar-collapse">
-				<div id="menuTpl" class="hidden">
+				<div id="menuTpl" class="escondido hidden">
 					<ul class="nav navbar-nav">
 						<li><a href="../kml.php?tipoxml=kml" target="_blank">Kml Google Earth</a></li>
-						<li><a href="">{{{lista}}}</a></li>
+						<li><a data-toggle="collapse" href="#listaCompleta" aria-expanded="false"
+							aria-controls="#listaCompleta">{{{lista}}}</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -165,9 +163,19 @@ include "../init/head.php";
 			</ol>
 		</div>
 	</div>
-	<!-- Camadas oriundas do sistema de metadados estatisticos -->
+
 	<div class="container">
-		<div class="row center-block hidden">
+		<div class="row center-block hidden" id="listaCompleta">
+			<div class="col-sm-12">
+					<div class="panel panel-default">
+						<div class="panel-body" id="corpolistaCompleta">
+							<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>
+						</div>
+					</div>
+			</div>
+		</div>
+		<!-- Camadas oriundas do sistema de metadados estatisticos -->
+		<div class="row center-block escondido hidden">
 			<div class="col-sm-6" id="metaestat">
 				<div class="panel-group" role="tablist" aria-multiselectable="true">
 					<div class="panel panel-default">
@@ -180,13 +188,13 @@ include "../init/head.php";
 						<div class="panel-body">
 							<div id="corpoMetaestat" class="panel-collapse collapse" role="tabpanel"
 								aria-multiselectable="true">
-								<div class="panel-body">{{{camadasmeta}}}</div>
+								{{{camadasmeta}}}
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-6 hidden" id="mapasSalvos">
+			<div class="col-sm-6" id="mapasSalvos">
 				<div class="panel-group" role="tablist" aria-multiselectable="true">
 					<div class="panel panel-default">
 						<div class="panel-heading" style="background-color: #00BCD4;" role="tab">
@@ -198,7 +206,7 @@ include "../init/head.php";
 						<div class="panel-body">
 							<div id="corpomapasSalvos" class="panel-collapse collapse" role="tabpanel"
 								aria-multiselectable="true">
-								<div class="panel-body">{{{mapasSalvos}}}</div>
+								{{{mapasSalvos}}}
 							</div>
 						</div>
 					</div>
@@ -220,10 +228,9 @@ include "../init/head.php";
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body"></div>
-				<div class="modal-footer" style="padding: 0px;padding-right: 15px; border: 0px; background-color: white;">
-					<a class="btn btn-primary" href="#" role="button" data-dismiss="modal" aria-label="Close">
-						OK
-					</a>
+				<div class="modal-footer"
+					style="padding: 0px; padding-right: 15px; border: 0px; background-color: white;">
+					<a class="btn btn-primary" href="#" role="button" data-dismiss="modal" aria-label="Close"> OK </a>
 				</div>
 			</div>
 		</div>
@@ -263,14 +270,21 @@ include "../init/head.php";
 			);
 		listaMetaestat($("#metaestat"),$("#templateCamadas").html());
 		listaMapasSalvos($("#mapasSalvos"),$("#templateCamadas").html());
-		$('.hidden').removeClass('hidden');
+		$('.escondido').removeClass('hidden');
 		$(window).on("scroll click",
 				function(){
 					$(".jumbotron").fadeOut(300);
 				}
 			);
+		//container para a lista completa
+		$('#listaCompleta').on('show.bs.collapse', function () {
+			listaCompleta($('#corpolistaCompleta'));
+			$('#listaCompleta').removeClass('hidden');
+		})
+		$('#listaCompleta').on('hide.bs.collapse', function () {
+			$('#listaCompleta').addClass('hidden');
+		})
 
-		//$("html").niceScroll({"cursorwidth":"10px"});
 		$.material.init();
 		//verifica se deve abrir de imediato a janela de links
 		var temp = window.location.href.split("temaOgc=");
