@@ -100,7 +100,6 @@ function listaMetaestat (onde,templateCamadas){
 					"codigo_tema": t.id_medida_variavel
 				});
 			}
-
 			html = Mustache.to_html(
 					onde.html(),
 					{
@@ -291,7 +290,7 @@ function listaCompleta(onde){
 			}
 			html = ckCamada(camadas,$("#templateCamadas").html(),"tema");
 		}
-		onde.html(html);
+		onde.html(html + $("#corpoMetaestat").html());
 	};
 	//cpJSON vem de class_php.js
 	cpJSON.call("../classesphp/mapa_controle.php?map_file=&funcao=pegaTodosTemas&g_sid=&idioma=pt", "foo", r);

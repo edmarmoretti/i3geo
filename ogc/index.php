@@ -33,6 +33,9 @@ include "../init/head.php";
 	-o-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
+.list-group-separator{
+	width: 100%;
+}
 </style>
 <script id="templateLinksOgc" type="x-tmpl-mustache">
 <h3>OGC</h3>
@@ -165,6 +168,7 @@ include "../init/head.php";
 	</div>
 
 	<div class="container">
+		<!-- lista completa -->
 		<div class="row center-block hidden" id="listaCompleta">
 			<div class="col-sm-12">
 					<div class="panel panel-default">

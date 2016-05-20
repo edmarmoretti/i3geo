@@ -88,7 +88,7 @@ include "head.php";
 	</nav>
 	<nav class="navbar-fixed-bottom">
 		<div class="container-fluid hidden">
-			<div class="jumbotron" id="jumbotron">
+			<div class="jumbotron" id="jumbotron" style="background: rgb(255, 255, 255); background: rgba(255, 255, 255, 0.8); ">
 				<!-- Template para mensagem do i3Geo -->
 				<ul class="list-inline">
 					<li><img class="pull-left" src='../imagens/i3Geo_bigTransp.png'
