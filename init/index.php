@@ -230,7 +230,7 @@ include "head.php";
 				trigger: "click focus",
 				content: function(){
 					var urlqr = "../pacotes/qrcode/php/qr_img.php?host=" + window.location.host + "&u=" + $(this).attr("data-url");
-					return "<img style='width:200px; height: 200px;' src='" + urlqr + "' '>";
+					return "<a title='click' href='"+ $(this).attr("data-url") +"'><img style='width:200px; height: 200px;' src='" + urlqr + "' '></a>";
 				}
 			});
 		}

@@ -113,7 +113,7 @@ botoesIni = [
 	"target": "_self"
 },{
 	"img":"applications-development.png",
-	"href": location.href.replace("index.php","") +  "../pacotes/utils/index.php",
+	"href": location.href.replace("index.php","") +  "../utilitarios/index.php",
 	"titulo":$trad(33,g_traducao_init),
 	"subtitulo": $trad("33a",g_traducao_init),
 	"fa": "wrench",
