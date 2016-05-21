@@ -50,7 +50,7 @@ botoesIni = [
 	"target": "_blank"
 },{
 	"img":"window-duplicate.png",
-	"href": location.href.replace("index.php","") + "../ferramentas/salvamapa/lista.htm",
+	"href": location.href.replace("index.php","") + "../mapas/index.php",
 	"titulo":$trad(34,g_traducao_init),
 	"subtitulo": $trad("34a",g_traducao_init),
 	"fa": "map-o",
