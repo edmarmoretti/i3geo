@@ -51,8 +51,6 @@ include "../init/head.php";
 	</h4>
 </div>
 <div class="list-group-separator"></div>
-
-
 </script>
 <body style="background-color: #eeeeee; padding-top: 55px;" id="topo" data-spy="scroll" data-target="#indiceSpy" data-offset="80">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">

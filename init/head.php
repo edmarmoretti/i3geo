@@ -96,5 +96,17 @@ hr {
 	background-color: #3f51b5;
 }
 .navbar-collapse { max-height: 100% !important; }
+
+.btn.btn-fab.btn-fab-mini {
+    font-size: 12px;
+    height: 24px;
+    min-width: 24px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    width: 24px;
+}
+
 </style>
 </head>

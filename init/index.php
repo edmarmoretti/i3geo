@@ -35,19 +35,7 @@ if (file_exists ( $dir_tmp )) {
 error_reporting ( 0 );
 include "head.php";
 ?>
-<style>
-.btn-qrcode {
-	background-color: #fff;
-	color: #ddd;
-	margin: 5px;
-	width: 13px;
-	position: absolute;
-	top: 12px;
-	left: 28px;
-	text-align: center;
-	border-radius: 20%;
-}
-</style>
+
 <body style="background-color: #eeeeee; padding-top: 90px;" id="topo">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
@@ -88,7 +76,8 @@ include "head.php";
 	</nav>
 	<nav class="navbar-fixed-bottom">
 		<div class="container-fluid hidden">
-			<div class="jumbotron" id="jumbotron" style="background: rgb(255, 255, 255); background: rgba(255, 255, 255, 0.8); ">
+			<div class="jumbotron" id="jumbotron"
+				style="background: rgb(255, 255, 255); background: rgba(255, 255, 255, 0.8);">
 				<!-- Template para mensagem do i3Geo -->
 				<ul class="list-inline">
 					<li><img class="pull-left" src='../imagens/i3Geo_bigTransp.png'
@@ -109,11 +98,11 @@ include "head.php";
 				<div class="cartao {{{fa}}} col-xs-12 center-block"
 					style="width: 260px; min-width: 260px; max-width: 260px;">
 					<div class="panel panel-default">
-						<div class="panel-body" style="max-height: 250px;">
-							<div class="thumbnail" role="button" style="height: 90px;" data-toggle="quadroQrcode"
-								data-url="{{{href}}}">
-								<img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" /> <i
-									class="fa fa-qrcode btn-qrcode pull-right"></i>
+						<div class="panel-body" style="max-height: 270px;">
+							<div class="thumbnail" role="button" style="height: 90px;" >
+								<a target="{{{target}}}" href="{{{href}}}">
+								<img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
+								</a>
 							</div>
 							<h4>{{{titulo}}}</h4>
 							<div class="hidden-xs" style="overflow: auto; height: 200px;">
@@ -122,8 +111,18 @@ include "head.php";
 						</div>
 						<div class="panel-footer text-right"
 							style="padding: 0px; padding-right: 15px; border: 0px; background-color: white;">
-							<a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}"> {{{abrir}}}
-							</a>
+							<div class="row center-block">
+								<div class="col-xs-6" style="line-height: 3.5;text-align: left;">
+								<a role="button" data-toggle="quadroQrcode" data-url="{{{href}}}" class="btn btn-primary btn-fab btn-fab-mini" href="#"> <span
+									class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+								</a>
+								</div>
+								<div class="col-xs-6" >
+								<a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}">
+									{{{abrir}}} </a>
+									</div>
+
+							</div>
 						</div>
 					</div>
 				</div>
@@ -132,7 +131,7 @@ include "head.php";
 				style="width: 260px; min-width: 260px; max-width: 260px;">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<a class="twitter-timeline tline" href="" data-widget-id="288061915689787392" height="267">Tweets
+						<a class="twitter-timeline tline" href="" data-widget-id="288061915689787392" height="289">Tweets
 							@i3Geo</a>
 					</div>
 				</div>
@@ -141,7 +140,7 @@ include "head.php";
 				style="width: 260px; min-width: 260px; max-width: 260px;">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<a class="twitter-timeline htag" href="" data-widget-id="643417277208133633" height="267">i3geo
+						<a class="twitter-timeline htag" href="" data-widget-id="643417277208133633" height="289">i3geo
 							Tweets</a>
 					</div>
 				</div>
@@ -227,7 +226,7 @@ include "head.php";
 			$('[data-toggle="quadroQrcode"]').popover({
 				html: true,
 				placement: "auto",
-				trigger: "click focus",
+				trigger: "focus",
 				content: function(){
 					var urlqr = "../pacotes/qrcode/php/qr_img.php?host=" + window.location.host + "&u=" + $(this).attr("data-url");
 					return "<a title='click' href='"+ $(this).attr("data-url") +"'><img style='width:200px; height: 200px;' src='" + urlqr + "' '></a>";
