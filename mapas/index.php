@@ -37,12 +37,27 @@ include "../init/head.php";
 .list-group .list-group-separator::before {
 	width: 100%;
 }
+#indice .bs-docs-sidebar .nav > .active:focus > a, .bs-docs-sidebar .nav > .active:hover > a, .bs-docs-sidebar .nav > .active > a {
+    background-color: transparent;
+    border-left-color: green;
+    border-left-style: solid;
+    border-left-width: 2px;
+    color: green;
+    font-weight: 700;
+    padding-left: 18px;
+}
 </style>
 <script id="templateLinks" type="x-tmpl-mustache">
 <div class="list-group-item">
 	<div class="bs-component btn-group-sm pull-left" >
 		<a target="_blank" class="btn btn-primary btn-fab" href="{{{link}}}">
 			<i class="material-icons">launch</i>
+		</a>
+		<a onclick="i3GEO.util.copyToClipboard('{{{link}}}')" class="btn btn-primary btn-fab" href="#">
+			<i class="material-icons">content_copy</i>
+		</a>
+		<a role="button" data-toggle="quadroQrcode" data-url="{{{link}}}" class="btn btn-primary btn-fab btn-fab-mini" href="#">
+			<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
 		</a>
 	</div>
 	<h4>
@@ -52,7 +67,10 @@ include "../init/head.php";
 </div>
 <div class="list-group-separator"></div>
 </script>
-<body style="background-color: #eeeeee; padding-top: 55px;" id="topo" data-spy="scroll" data-target="#indiceSpy" data-offset="80">
+<script id="indiceTpl" type="x-tmpl-mustache">
+<li><a href="#affix-{{ID_MAPA}}">{{{NOME}}}</a></li>
+</script>
+<body style="background-color: #eeeeee; padding-top: 55px; position:relative;" id="affix-topo" data-spy="scroll" data-target="#indiceSpy" data-offset="80">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -61,7 +79,7 @@ include "../init/head.php";
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" onclick="$('.cartao').fadeIn(600);" href="#"><?php echo $mensagemInicia;?> <i
+				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i
 					class="fa fa-home fa-1x"></i></a>
 			</div>
 		</div>
@@ -78,13 +96,12 @@ include "../init/head.php";
 		<!-- Template para criacao dos quadros ver index.js -->
 		<div class="hidden">
 			<div class="row">
-				<div class="col-xs-9 center-block main" id="botoesTpl" >
+				<div class="col-xs-9 center-block" id="botoesTpl" >
 					<div class="row" id="affix-{{ID_MAPA}}" >
 						<div class="col-xs-12 center-block">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<div class="thumbnail" role="button" style="float: left; height: 78px; width: 170px"
-										data-toggle="quadroQrcode" data-url="{{{href}}}">
+									<div class="thumbnail" style="float: left; height: 78px; width: 170px">
 										<img class="img-rounded" style="height: 67px; width: 160px" src="{{{IMAGEM}}}" />
 									</div>
 									<h3>&nbsp;{{{NOME}}}</h3>
@@ -97,11 +114,11 @@ include "../init/head.php";
 						</div>
 					</div>
 				</div>
-				<div class="row complementary">
-					<div class="col-xs-3 center-block" >
+				<div class="row">
+					<div class="col-xs-3" >
 						<nav class="bs-docs-sidebar hidden-xs affix" style="" id="indiceSpy">
-							<ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="60" id="indice">
-								<li><a href="#affix-{{ID_MAPA}}">{{{NOME}}}</a></li>
+							<ul class="nav nav-pills nav-stacked" role="tablist" id="indice" >
+
 							</ul>
 						</nav>
 					</div>

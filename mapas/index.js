@@ -10,7 +10,7 @@ function mostraBotoesBT(men){
 }
 function mostraBotoesBT(){
 	var r, p;
-	i3GEO.configura = {"locaplic" : ".."};
+
 	r = function(d){
 		d = d.data;
 		var html = "", n, camadas = [], i;
@@ -22,12 +22,28 @@ function mostraBotoesBT(){
 				"{{#mapas}}" + $("#botoesTpl").html() + "{{/mapas}}",
 				d
 		);
+
 		$("#botoesTpl").html(html);
+		d.mapas.push({
+			"ID_MAPA": "topo",
+			"NOME": "Topo"
+		});
+		//indice
 		html = Mustache.to_html(
-				"{{#mapas}}" + $("#indice").html() + "{{/mapas}}",
+				"{{#mapas}}" + $("#indiceTpl").html() + "{{/mapas}}",
 				d
 		);
 		$("#indice").html(html);
+		$('[data-toggle="quadroQrcode"]').popover({
+			html: true,
+			placement: "bottom",
+			trigger: "focus",
+			container: "body",
+			content: function(){
+				var urlqr = "../pacotes/qrcode/php/qr_img.php?host=" + window.location.host + "&u=" + $(this).attr("data-url");
+				return "<a title='click' href='"+ $(this).attr("data-url") +"'><img style='width:200px; height: 200px;' src='" + urlqr + "' '></a>";
+			}
+		});
 	};
 	//cpJSON vem de class_php.js
 	cpJSON.call("../classesphp/mapa_controle.php?map_file=&funcao=pegaMapas&g_sid=", "foo", r);
@@ -41,7 +57,6 @@ function verificaMapa(mapa){
 		+ mapa.ID_MAPA;
 	}
 	//constroi o link para o mapa
-	lkd = mapa.LINK;
 	if(mapa.LINK != ""){
 		link = i3GEO.configura.locaplic + "/ms_criamapa.php?temasa=" + mapa.TEMAS + "&layers=" + mapa.LIGADOS;
 		if (mapa.EXTENSAO !== "") {
@@ -52,8 +67,8 @@ function verificaMapa(mapa){
 		}
 		mapa.LINK = link;
 		links.push({
-		            "nome": "",
-		            "link": mapa.LINK
+			"nome": "",
+			"link": mapa.LINK
 		});
 	}
 	// verifica se o mapfile esta salvo no banco
@@ -61,24 +76,23 @@ function verificaMapa(mapa){
 	mapa.NOME =  mapa.NOME + " (" + mapa.ID_MAPA + ")";
 	if (mapa.CONTEMMAPFILE != "nao") {
 		links = [
-		            {
-		            	"nome": "Como foi salvo",
-		            	"link": mapa.LINK
-		            },{
-		            	"nome": "Openlayers com todos os botoes",
-		            	"link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA
-		            },{
-		            	"nome": "Sem o fundo",
-		            	"link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA + "&fundo=est_wms"
-		            },{
-		            	"nome": "Com botoes principais",
-		            	"link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA + "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica"
-		            },{
-		            	"nome": "Botoes de navegacao",
-		            	"link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA
-		            }
-		            ];
-
+		         {
+		        	 "nome": "Como foi salvo",
+		        	 "link": mapa.LINK
+		         },{
+		        	 "nome": "Openlayers com todos os botoes",
+		        	 "link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA
+		         },{
+		        	 "nome": "Sem o fundo",
+		        	 "link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA + "&fundo=est_wms"
+		         },{
+		        	 "nome": "Com botoes principais",
+		        	 "link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA + "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica"
+		         },{
+		        	 "nome": "Botoes de navegacao",
+		        	 "link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA
+		         }
+		         ];
 
 	}
 	html = Mustache.to_html(

@@ -3405,6 +3405,23 @@ i3GEO.util =
 		 */
 		uid : function(){
 			return (new Date().getTime()).toString(36);
+		},
+		/**
+		 * Function: copyToClipboard
+		 *
+		 * Copia um texto para o clipboar
+		 *
+		 * Parametres:
+		 *
+		 * {string}
+		 */
+		copyToClipboard : function(texto) {
+			  var aux = document.createElement("input");
+			  aux.setAttribute("value", texto);
+			  document.body.appendChild(aux);
+			  aux.select();
+			  document.execCommand("copy");
+			  document.body.removeChild(aux);
 		}
 	};
 
