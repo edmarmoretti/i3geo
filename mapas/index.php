@@ -129,7 +129,7 @@ include "../init/head.php";
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" >
 									<div class="thumbnail" style="float: left; height: 78px; width: 170px">
-										<img class="img-rounded" style="height: 67px; width: 160px" src="{{{IMAGEM}}}" />
+										<a href="{{{LINK}}}"><img class="img-rounded" style="height: 67px; width: 160px" src="{{{IMAGEM}}}" /></a>
 									</div>
 									<h3 class="panel-title">
 										<a data-parent="#titulo{{ID_MAPA}}" class="collapsed in" role="button" data-toggle="collapse" href="#corpo{{ID_MAPA}}" aria-expanded="false" aria-controls="#corpo{{ID_MAPA}}">
