@@ -46,6 +46,29 @@ include "../init/head.php";
     font-weight: 700;
     padding-left: 18px;
 }
+
+.panel-heading [data-toggle="collapse"]:after {
+	font-family: 'FontAwesome';
+	content: "\f054";
+	float: right;
+	margin-right: 5px;
+	color: #fffff;
+	font-size: 12px;
+	line-height: 16px;
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+
+.panel-heading [data-toggle="collapse"].collapsed:after {
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
 </style>
 <script id="templateLinks" type="x-tmpl-mustache">
 <div class="list-group-item">
@@ -90,7 +113,7 @@ include "../init/head.php";
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="../init/index.php">i3Geo</a></li>
-				<li class="active">Mapas de usuários</li>
+				<li class="active">Mapas de usu&aacute;rios</li>
 			</ol>
 		</div>
 	</div>
@@ -101,18 +124,28 @@ include "../init/head.php";
 				<div class="col-xs-9 center-block" id="botoesTpl" >
 					<div class="row" id="affix-{{ID_MAPA}}" >
 						<div class="col-xs-12 center-block">
+
+							<div id="titulo{{ID_MAPA}}" class="panel-group" role="tablist" aria-multiselectable="true">
 							<div class="panel panel-default">
-								<div class="panel-heading">
+								<div class="panel-heading" role="tab" >
 									<div class="thumbnail" style="float: left; height: 78px; width: 170px">
 										<img class="img-rounded" style="height: 67px; width: 160px" src="{{{IMAGEM}}}" />
 									</div>
-									<h3>&nbsp;{{{NOME}}}</h3>
+									<h3 class="panel-title">
+										<a data-parent="#titulo{{ID_MAPA}}" class="collapsed in" role="button" data-toggle="collapse" href="#corpo{{ID_MAPA}}" aria-expanded="false" aria-controls="#corpo{{ID_MAPA}}">
+										</a>
+									</h3>
+									<h3>
+										&nbsp;<a href="{{{LINK}}}">{{{NOME}}}</a>
+									</h3>
 								</div>
 								<div class="clearfix"></div>
 								<div class="panel-body">
-									<div class="list-group">{{{subtitulo}}}</div>
+									<div id="corpo{{ID_MAPA}}" class="panel-collapse collapse list-group" role="tabpanel" aria-multiselectable="true">{{{subtitulo}}}</div>
 								</div>
 							</div>
+							</div>
+
 						</div>
 					</div>
 				</div>
