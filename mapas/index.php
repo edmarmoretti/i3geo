@@ -37,14 +37,16 @@ include "../init/head.php";
 .list-group .list-group-separator::before {
 	width: 100%;
 }
-#indice .bs-docs-sidebar .nav > .active:focus > a, .bs-docs-sidebar .nav > .active:hover > a, .bs-docs-sidebar .nav > .active > a {
-    background-color: transparent;
-    border-left-color: green;
-    border-left-style: solid;
-    border-left-width: 2px;
-    color: green;
-    font-weight: 700;
-    padding-left: 18px;
+
+#indice .bs-docs-sidebar .nav>.active:focus>a, .bs-docs-sidebar .nav>.active:hover>a,
+	.bs-docs-sidebar .nav>.active>a {
+	background-color: transparent;
+	border-left-color: green;
+	border-left-style: solid;
+	border-left-width: 2px;
+	color: green;
+	font-weight: 700;
+	padding-left: 18px;
 }
 
 .panel-heading [data-toggle="collapse"]:after {
@@ -93,7 +95,8 @@ include "../init/head.php";
 <script id="indiceTpl" type="x-tmpl-mustache">
 <li><a href="#affix-{{ID_MAPA}}">{{{NOME}}}</a></li>
 </script>
-<body style="background-color: #eeeeee; padding-top: 55px; position:relative;" id="affix-topo" data-spy="scroll" data-target="#indiceSpy" data-offset="80">
+<body style="background-color: #eeeeee; padding-top: 55px; position: relative;" id="affix-topo"
+	data-spy="scroll" data-target="#indiceSpy" data-offset="80">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -108,51 +111,63 @@ include "../init/head.php";
 		</div>
 	</nav>
 	<!--para as mensagens de alerta-->
-	<div class="navbar-fixed-top alert alert-success text-center" style="padding:0px;" ></div>
+	<div class="navbar-fixed-top alert alert-success text-center" style="padding: 0px;"></div>
 	<div class="container-fluid">
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="../init/index.php">i3Geo</a></li>
 				<li class="active">Mapas de usu&aacute;rios</li>
+				<li><a title="RSS" href="../admin/rssmapas.php"><i class="material-icons ">rss_feed</i></a>&nbsp; <a
+					title="JSON" href="../admin/rssmapas.php?output=json"><i class="material-icons ">code</i></a>
+				</li>
 			</ol>
 		</div>
 	</div>
 	<div class="container">
 		<!-- Template para criacao dos quadros ver index.js -->
-		<div class="escondido">
+		<div class="escondido hidden">
 			<div class="row">
-				<div class="col-xs-9 center-block" id="botoesTpl" >
-					<div class="row" id="affix-{{ID_MAPA}}" >
+				<div class="col-xs-9 center-block" id="botoesTpl">
+					<div class="row" id="affix-{{ID_MAPA}}">
 						<div class="col-xs-12 center-block">
 
 							<div id="titulo{{ID_MAPA}}" class="panel-group" role="tablist" aria-multiselectable="true">
-							<div class="panel panel-default">
-								<div class="panel-heading" role="tab" >
-									<div class="thumbnail" style="float: left; height: 78px; width: 170px">
-										<a href="{{{LINK}}}"><img class="img-rounded" style="height: 67px; width: 160px" src="{{{IMAGEM}}}" /></a>
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab">
+										<div class="thumbnail" style="float: left; height: 78px; width: 170px">
+											<a href="{{{LINK}}}"><img class="img-rounded" style="height: 67px; width: 160px"
+												src="{{{IMAGEM}}}" /></a>
+										</div>
+										<h3 class="panel-title">
+											&nbsp;<a data-parent="#titulo{{ID_MAPA}}" class="collapsed in pull-right" role="button"
+												data-toggle="collapse" href="#corpo{{ID_MAPA}}" aria-expanded="false"
+												aria-controls="#corpo{{ID_MAPA}}">{{{NOME}}}&nbsp;</a>
+										</h3>
+										<div class="bs-component btn-group-sm pull-left">
+											&nbsp;<a target="_blank" class="btn btn-primary btn-fab" href="{{{LINK}}}"> <i
+												class="material-icons">launch</i>
+											</a>
+											<button role="button" data-toggle="quadroQrcode" data-url="{{{LINK}}}"
+												class="btn btn-primary btn-fab btn-fab-max">
+												<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+											</button>
+										</div>
 									</div>
-									<h3 class="panel-title">
-										<a data-parent="#titulo{{ID_MAPA}}" class="collapsed in" role="button" data-toggle="collapse" href="#corpo{{ID_MAPA}}" aria-expanded="false" aria-controls="#corpo{{ID_MAPA}}">
-										</a>
-									</h3>
-									<h3>
-										&nbsp;<a href="{{{LINK}}}">{{{NOME}}}</a>
-									</h3>
+									<div class="clearfix"></div>
+									<div class="panel-body">
+										<div id="corpo{{ID_MAPA}}" class="panel-collapse collapse list-group" role="tabpanel"
+											aria-multiselectable="true">{{{subtitulo}}}</div>
+									</div>
 								</div>
-								<div class="clearfix"></div>
-								<div class="panel-body">
-									<div id="corpo{{ID_MAPA}}" class="panel-collapse collapse list-group" role="tabpanel" aria-multiselectable="true">{{{subtitulo}}}</div>
-								</div>
-							</div>
 							</div>
 
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-3" >
+					<div class="col-xs-3">
 						<nav class="bs-docs-sidebar hidden-xs affix" style="" id="indiceSpy">
-							<ul class="nav nav-pills nav-stacked" role="tablist" id="indice" >
+							<ul class="nav nav-pills nav-stacked" role="tablist" id="indice">
 
 							</ul>
 						</nav>
