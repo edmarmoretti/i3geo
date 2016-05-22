@@ -53,12 +53,12 @@ include "../init/head.php";
 		<a target="_blank" class="btn btn-primary btn-fab" href="{{{link}}}">
 			<i class="material-icons">launch</i>
 		</a>
-		<a onclick="i3GEO.util.copyToClipboard('{{{link}}}')" class="btn btn-primary btn-fab" href="#">
+		<button onclick="i3GEO.util.copyToClipboard('{{{link}}}');alerta('{{copiado}}');" class="btn btn-primary btn-fab" >
 			<i class="material-icons">content_copy</i>
-		</a>
-		<a role="button" data-toggle="quadroQrcode" data-url="{{{link}}}" class="btn btn-primary btn-fab btn-fab-mini" href="#">
+		</button>
+		<button role="button" data-toggle="quadroQrcode" data-url="{{{link}}}" class="btn btn-primary btn-fab btn-fab-max" >
 			<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
-		</a>
+		</button>
 	</div>
 	<h4>
 		&nbsp;{{{nome}}}
@@ -84,6 +84,8 @@ include "../init/head.php";
 			</div>
 		</div>
 	</nav>
+	<!--para as mensagens de alerta-->
+	<div class="navbar-fixed-top alert alert-success text-center" style="padding:0px;" ></div>
 	<div class="container-fluid">
 		<div class="row">
 			<ol class="breadcrumb">
@@ -94,7 +96,7 @@ include "../init/head.php";
 	</div>
 	<div class="container">
 		<!-- Template para criacao dos quadros ver index.js -->
-		<div class="hidden">
+		<div class="escondido">
 			<div class="row">
 				<div class="col-xs-9 center-block" id="botoesTpl" >
 					<div class="row" id="affix-{{ID_MAPA}}" >
@@ -142,7 +144,7 @@ include "../init/head.php";
 		i3GEO.configura = {"locaplic" : window.location.href.split("/mapas")[0],"sid": ""};
 		$(".active").html($trad("mapas",g_traducao_mapas));
 		mostraBotoesBT();
-		$('.hidden').removeClass('hidden');
+		$('.escondido').removeClass('hidden');
 		$.material.init();
 	});
 	</script>

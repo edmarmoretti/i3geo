@@ -5,5 +5,10 @@ g_traducao_mapas =
 			pt : "Mapas de usu&aacute;rios",
 			en : "",
 			es : ""
+		}],
+		"copiado" : [{
+			pt : "Copiado",
+			en : "",
+			es : ""
 		}]
 };

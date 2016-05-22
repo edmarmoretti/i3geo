@@ -68,7 +68,8 @@ function verificaMapa(mapa){
 		mapa.LINK = link;
 		links.push({
 			"nome": "",
-			"link": mapa.LINK
+			"link": mapa.LINK,
+			"copiado": $trad("copiado",g_traducao_mapas)
 		});
 	}
 	// verifica se o mapfile esta salvo no banco
@@ -77,18 +78,23 @@ function verificaMapa(mapa){
 	if (mapa.CONTEMMAPFILE != "nao") {
 		links = [
 		         {
+		        	 "copiado": $trad("copiado",g_traducao_mapas),
 		        	 "nome": "Como foi salvo",
 		        	 "link": mapa.LINK
 		         },{
+		        	 "copiado": $trad("copiado",g_traducao_mapas),
 		        	 "nome": "Openlayers com todos os botoes",
 		        	 "link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA
 		         },{
+		        	 "copiado": $trad("copiado",g_traducao_mapas),
 		        	 "nome": "Sem o fundo",
 		        	 "link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA + "&fundo=est_wms"
 		         },{
+		        	 "copiado": $trad("copiado",g_traducao_mapas),
 		        	 "nome": "Com botoes principais",
 		        	 "link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA + "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica"
 		         },{
+		        	 "copiado": $trad("copiado",g_traducao_mapas),
 		        	 "nome": "Botoes de navegacao",
 		        	 "link": i3GEO.configura.locaplic + "/mashups/openlayers.php?numzoomlevels=18&restauramapa=" + mapa.ID_MAPA
 		         }
@@ -101,5 +107,14 @@ function verificaMapa(mapa){
 	);
 	mapa.subtitulo = html;
 	return mapa;
+}
+function alerta(texto,d){
+	if(!d){
+		d = 500;
+	}
+	var a = $(".alert");
+	a.html(texto);
+	a.slideDown(d)
+	a.delay(d).slideUp(d)
 }
 

@@ -108,5 +108,16 @@ hr {
     width: 24px;
 }
 
+.btn.btn-fab.btn-fab-max {
+    font-size: 1.6em;
+    height: 40px;
+    min-width: 40px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 7px;
+    width: 40px;
+}
+
 </style>
 </head>
