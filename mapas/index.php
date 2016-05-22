@@ -73,6 +73,7 @@ include "../init/head.php";
 }
 </style>
 <script id="templateLinks" type="x-tmpl-mustache">
+<div class="list-group-separator"></div>
 <div class="list-group-item">
 	<div class="bs-component btn-group-sm pull-left" >
 		<a target="_blank" class="btn btn-primary btn-fab" href="{{{link}}}">
@@ -127,10 +128,9 @@ include "../init/head.php";
 		<!-- Template para criacao dos quadros ver index.js -->
 		<div class="escondido hidden">
 			<div class="row">
-				<div class="col-xs-9 center-block" id="botoesTpl">
+				<div class="col-xs-9 center-block escondido hidden" id="botoesTpl">
 					<div class="row" id="affix-{{ID_MAPA}}">
 						<div class="col-xs-12 center-block">
-
 							<div id="titulo{{ID_MAPA}}" class="panel-group" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-default">
 									<div class="panel-heading" role="tab">
@@ -143,7 +143,7 @@ include "../init/head.php";
 												data-toggle="collapse" href="#corpo{{ID_MAPA}}" aria-expanded="false"
 												aria-controls="#corpo{{ID_MAPA}}">{{{NOME}}}&nbsp;</a>
 										</h3>
-										<div class="bs-component btn-group-sm pull-left">
+										<div class="bs-component btn-group-sm pull-left hidden-xs">
 											&nbsp;<a target="_blank" class="btn btn-primary btn-fab" href="{{{LINK}}}"> <i
 												class="material-icons">launch</i>
 											</a>
