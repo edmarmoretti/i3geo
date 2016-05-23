@@ -6,7 +6,15 @@ include "../init/head.php";
 ?>
 <style>
 .list-group .list-group-separator::before{
-	width: 100%;
+	width: calc(100% - 45px);
+}
+.list-group-item-heading{
+	line-height: 2;
+	left: 5px;
+	margin-left: 45px;
+}
+.list-group{
+	margin: auto;
 }
 </style>
 <body style="background-color: #eeeeee; padding-top: 55px;">
@@ -31,15 +39,17 @@ include "../init/head.php";
 			<div class="col-sm-12 hidden">
 				<!-- Template para criacao dos quadros ver index.js -->
 				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="list-group" id="botoesTpl">
-							<div class="list-group-item">
+					<div class="panel-body" id="botoesTpl">
+						<div class="list-group" >
+							<div class="row-action-primary">
 								<div class="bs-component btn-group-sm pull-left">
 									<a class="btn btn-primary btn-fab" href="{{{link}}}"> <i class="material-icons">launch</i>
 									</a>
 								</div>
-								<h4>
-									&nbsp;<a href="{{{link}}}">{{{corpo}}} </a>
+							</div>
+							<div class="row-content">
+								<h4 class="list-group-item-heading">
+									<a href="{{{link}}}">{{{corpo}}} </a>
 								</h4>
 							</div>
 							<div class="list-group-separator"></div>
