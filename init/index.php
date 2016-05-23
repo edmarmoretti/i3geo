@@ -116,6 +116,11 @@ include "head.php";
 								<a role="button" data-toggle="quadroQrcode" data-url="{{{href}}}" class="btn btn-primary btn-fab btn-fab-mini" href="#"> <span
 									class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
 								</a>
+								<!-- TODO incluir favorito para ordenar lista
+								<a role="button" data-toggle="quadroQrcode" data-url="{{{href}}}" class="btn btn-primary btn-fab btn-fab-mini disabled" href="#"> <span
+									class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+								</a>
+								-->
 								</div>
 								<div class="col-xs-6" >
 								<a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}">

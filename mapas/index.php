@@ -133,12 +133,12 @@ include "../init/head.php";
 						<div class="col-xs-12 center-block">
 							<div id="titulo{{ID_MAPA}}" class="panel-group" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-default">
-									<div class="panel-heading" role="tab">
+									<div class="panel-heading" role="tab" style="background-color:#80cbc4;">
 										<div class="thumbnail" style="float: left; height: 78px; width: 170px">
 											<a href="{{{LINK}}}"><img class="img-rounded" style="height: 67px; width: 160px"
 												src="{{{IMAGEM}}}" /></a>
 										</div>
-										<h3 class="panel-title">
+										<h3 class="panel-title" >
 											&nbsp;<a data-parent="#titulo{{ID_MAPA}}" class="collapsed in pull-right" role="button"
 												data-toggle="collapse" href="#corpo{{ID_MAPA}}" aria-expanded="false"
 												aria-controls="#corpo{{ID_MAPA}}">{{{NOME}}}&nbsp;</a>

@@ -74,7 +74,6 @@ function verificaMapa(mapa){
 	}
 	// verifica se o mapfile esta salvo no banco
 	// diretamente
-	mapa.NOME =  mapa.NOME + " (" + mapa.ID_MAPA + ")";
 	if (mapa.CONTEMMAPFILE != "nao") {
 		links = [
 		         {
