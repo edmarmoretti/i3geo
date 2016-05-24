@@ -103,7 +103,7 @@ include "../init/head.php";
 <script id="indiceTpl" type="x-tmpl-mustache">
 <li><a href="#affix-{{ID_MAPA}}">{{{NOME}}}</a></li>
 </script>
-<body style="background-color: #eeeeee; padding-top: 55px; position: relative;" id="affix-topo"
+<body style="padding-top: 55px; position: relative;" id="affix-topo"
 	data-spy="scroll" data-target="#indiceSpy" data-offset="80">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">

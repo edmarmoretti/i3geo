@@ -118,6 +118,8 @@ hr {
     padding-top: 7px;
     width: 40px;
 }
-
+body{
+	background-color: #fff;
+}
 </style>
 </head>

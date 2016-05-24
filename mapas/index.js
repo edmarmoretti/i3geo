@@ -113,7 +113,7 @@ function alerta(texto,d){
 	}
 	var a = $(".alert");
 	a.html(texto);
-	a.slideDown(d)
-	a.delay(d).slideUp(d)
+	a.slideDown(d);
+	a.delay(d).slideUp(d);
 }
 

@@ -17,7 +17,7 @@ include "../init/head.php";
 	margin: auto;
 }
 </style>
-<body style="background-color: #eeeeee; padding-top: 55px;">
+<body style="padding-top: 55px;">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">

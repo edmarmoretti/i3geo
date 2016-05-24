@@ -77,7 +77,7 @@ function listaCamadasSubgrupo(idmenu,id_n1,id_n2){
 	var corpo = $("#corpoSubGrupo"+id_n2),
 	camadas;
 	if(corpo.html().trim()+"x" == "x"){
-		corpo.html('<div class="panel-body"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span></div>')
+		corpo.html('<div class="panel-body"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span></div>');
 
 	}
 	var r = function(retorno){

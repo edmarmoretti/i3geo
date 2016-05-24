@@ -8,7 +8,7 @@ div
 {text-align:left;border: 0px solid #FFFFFF;font-family: Verdana, Arial, Helvetica, sans-serif;position:relative;display:block;font-size:10px;padding:0px;font-weight:normal;left:10px;}
 #fundo
 {background-color:rgb(245,245,245);overflow:hidden;position:absolute;top:0px;left:0px;}
-.guias 
+.guias
 {background-color:rgb(245,245,245);cursor:pointer;position:relative;text-align: left;top:8px;left:8px;padding:0px;margin:0px;}
 .guia
 {display:inline;background-color:rgb(230,230,230);color:rgb(150,150,150);position:relative;left:0px;top:0px;border: 0px solid white;font-size: 12px;z-index:1050;padding:0;margin-right:3px;border-left:1px solid rgb(230,230,230);border-top:1px solid rgb(230,230,230);border-right:1px solid rgb(230,230,230);}
@@ -42,7 +42,7 @@ div
 		</div>
 		<div id=guia3obj style="display:none">
 			<div style="position:relative;top:5px;left:0px;width:90%" >
-				Para que as opera&ccedil;&otilde;es atuem apenas sobre os elementos selecionados, 
+				Para que as opera&ccedil;&otilde;es atuem apenas sobre os elementos selecionados,
 				ative a sele&ccedil;&atilde;o no mapa, para isso utilize, na guia "selecionados"
 				a op&ccedil;&atilde;o "Ativa a sele&ccedil;&atilde;o"
 			</div>
@@ -58,23 +58,22 @@ div
 <script type="text/javascript">
 //eventos das guias
 document.getElementById("guia1").onclick = function()
-{document.getElementById("guia1obj").style.display="block";}
+{document.getElementById("guia1obj").style.display="block";};
 document.getElementById("guia2").onclick = function()
-{document.getElementById("guia2obj").style.display="block";}
+{document.getElementById("guia2obj").style.display="block";};
 document.getElementById("guia3").onclick = function()
-{document.getElementById("guia3obj").style.display="block";}
+{document.getElementById("guia3obj").style.display="block";};
 document.getElementById("guia4").onclick = function()
-{document.getElementById("guia4obj").style.display="block";}
+{document.getElementById("guia4obj").style.display="block";};
 navm = false; // IE
 navn = false; // netscape
-var app = navigator.appName.substring(0,1);
+var i, j, app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
 //verifica se existem guias
-reduzAltura = 30
-for (i=0;i<7;i++)
-{
+reduzAltura = 30;
+for (i=0;i<7;i++){
 	if (document.getElementById("guia"+i))
-	{reduzAltura = 50}
+	{reduzAltura = 50;}
 }
 h = 500; //altura do corpo geral da guia
 if (navn)

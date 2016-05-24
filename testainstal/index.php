@@ -16,7 +16,7 @@
 define ( ONDEI3GEO, ".." );
 include "../init/head.php";
 ?>
-<body style="background-color: #eeeeee; padding-top: 55px;" id="topo">
+<body style="padding-top: 55px;" id="topo">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">

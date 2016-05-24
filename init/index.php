@@ -36,7 +36,7 @@ error_reporting ( 0 );
 include "head.php";
 ?>
 
-<body style="background-color: #eeeeee; padding-top: 90px;" id="topo">
+<body style="padding-top: 90px;" id="topo">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
