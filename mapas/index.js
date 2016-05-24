@@ -67,7 +67,7 @@ function verificaMapa(mapa){
 		}
 		mapa.LINK = link;
 		links.push({
-			"nome": "",
+			"nome": "Default",
 			"link": mapa.LINK,
 			"copiado": $trad("copiado",g_traducao_mapas)
 		});

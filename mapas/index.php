@@ -34,8 +34,8 @@ include "../init/head.php";
 	border-radius: 20%;
 }
 
-.list-group .list-group-separator::before {
-	width: 100%;
+.list-group .list-group-separator::before{
+	width: calc(100% - 130px);
 }
 
 #indice .bs-docs-sidebar .nav>.active:focus>a, .bs-docs-sidebar .nav>.active:hover>a,
@@ -73,25 +73,32 @@ include "../init/head.php";
 }
 </style>
 <script id="templateLinks" type="x-tmpl-mustache">
-<div class="list-group-separator"></div>
-<div class="list-group-item">
-	<div class="bs-component btn-group-sm pull-left" >
-		<a target="_blank" class="btn btn-primary btn-fab" href="{{{link}}}">
-			<i class="material-icons">launch</i>
-		</a>
-		<button onclick="i3GEO.util.copyToClipboard('{{{link}}}');alerta('{{copiado}}');" class="btn btn-primary btn-fab" >
-			<i class="material-icons">content_copy</i>
-		</button>
-		<button role="button" data-toggle="quadroQrcode" data-url="{{{link}}}" class="btn btn-primary btn-fab btn-fab-max" >
-			<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
-		</button>
+<div class="list-group">
+	<div class="row-action-primary">
+		<div class="bs-component btn-group-sm pull-left">
+			<a class="btn btn-primary btn-fab" href="{{{link}}}">
+				<i class="material-icons">launch</i>
+			</a>
+			<button onclick="i3GEO.util.copyToClipboard('{{{link}}}');alerta('{{copiado}}');" class="btn btn-primary btn-fab" >
+				<i class="material-icons">content_copy</i>
+			</button>
+			<button role="button" data-toggle="quadroQrcode" data-url="{{{link}}}" class="btn btn-primary btn-fab btn-fab-max" >
+				<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+			</button>
+		</div>
 	</div>
-	<h4>
-		&nbsp;{{{nome}}}
-		<a href="{{{link}}}" target="_blank">&nbsp;{{{link}}}</a>
-	</h4>
+	<div class="row-content" style="margin-left:130px;">
+		<h4 class="list-group-item-heading">
+			{{{nome}}}
+		</h4>
+		<p class="list-group-item-text hidden-xs">
+			<a href="{{{link}}}" target="_blank">{{{link}}}</a>
+		</p>
+	</div>
+
 </div>
 <div class="list-group-separator"></div>
+
 </script>
 <script id="indiceTpl" type="x-tmpl-mustache">
 <li><a href="#affix-{{ID_MAPA}}">{{{NOME}}}</a></li>
@@ -156,7 +163,11 @@ include "../init/head.php";
 									<div class="clearfix"></div>
 									<div class="panel-body">
 										<div id="corpo{{ID_MAPA}}" class="panel-collapse collapse list-group" role="tabpanel"
-											aria-multiselectable="true">{{{subtitulo}}}</div>
+											aria-multiselectable="true">
+											<div class="list-group" >
+											{{{subtitulo}}}
+											</div>
+											</div>
 									</div>
 								</div>
 							</div>
