@@ -78,7 +78,7 @@ botoesIni = [
 	"target": "_self"
 },{
 	"img":"insert-link.png",
-	"href": location.href.replace("index.php","") +  "../geradordelinks.htm",
+	"href": location.href.replace("index.php","") +  "../permlinks/index.php",
 	"titulo":$trad(13,g_traducao_init),
 	"subtitulo": $trad("13a",g_traducao_init),
 	"fa": "map-o",

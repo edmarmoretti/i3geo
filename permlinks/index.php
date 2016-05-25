@@ -20,9 +20,39 @@ if (file_exists ( $dir_tmp )) {
 }
 error_reporting ( 0 );
 include "../init/head.php";
+
 ?>
-<body style="background-color: #eeeeee; padding-top: 55px; position: relative;" id="affix-topo"
-	data-spy="scroll" data-target="#indiceSpy" data-offset="80">
+<script src="../pacotes/ol3/ol-debug.js"></script>
+<style>
+.checkbox, .radio {
+	margin-bottom: 5px;
+	margin-top: 0;
+	position: relative;
+	top: 1px;
+}
+</style>
+<script id="templateCamada" type="x-tmpl-mustache">
+<ul class="list-inline" id="linha_{{{idtema}}}">
+	<li>
+		<button onclick="$i3geo_gl.excluir('linha_{{{idtema}}}');return false;" role="button" class="btn btn-primary btn-fab btn-fab-mini">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		</button>
+		<button onclick="$i3geo_gl.subir('linha_{{{idtema}}}');return false;" role="button" class="btn btn-primary btn-fab btn-fab-mini">
+			<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+		</button>
+		<button onclick="$i3geo_gl.descer('linha_{{{idtema}}}');return false;" role="button" class="btn btn-primary btn-fab btn-fab-mini">
+			<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+		</button>
+	</li>
+	<li class="checkbox">
+		<label>
+			<input onclick="$i3geo_gl.crialink();" type="checkbox" value="{{{idtema}}}"><span class="checkbox-material"><span class="check"></span></span> {{{idtema}}}
+		</label>
+	</li>
+</ul>
+</script>
+
+<body style="padding-top: 55px; position: relative;">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -36,132 +66,183 @@ include "../init/head.php";
 			</div>
 		</div>
 	</nav>
-	<!--para as mensagens de alerta-->
-	<div class="navbar-fixed-top alert alert-success text-center" style="padding: 0px;"></div>
+	<nav style="padding-top: 10px;" class="navbar-fixed-top">
+		<div class="container">
+			<div class="well well-sm">
+				<div class="bs-component btn-group-sm pull-left" style="top: -2px; position: relative">
+					<button onclick="i3GEO.util.copyToClipboard($('#link').html());"
+						class="btn btn-primary btn-fab btn-fab-mini">
+						<i class="fa fa-files-o" aria-hidden="true"></i>
+					</button>
+				</div>
+				&nbsp; <a href="" id="link" target="_blank">http://</a>
+			</div>
+		</div>
+	</nav>
 	<div class="container-fluid">
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="../init/index.php">i3Geo</a></li>
-				<li class="active">Mapas de usu&aacute;rios</li>
+				<li class="active">Perm links</li>
 			</ol>
 		</div>
 	</div>
 	<div class="container">
-		<fieldset>
-			<legend style="font-size: 14px;"></legend>
-			<br>
-			<p class=paragrafo>
-				Para ver todos os par&acirc;metros de inicializa&ccedil;&atilde;o que podem ser utilizados: <a
-					href="ms_criamapa.php?ajuda" target=_blank>ms_criamapa.php?ajuda</a>
+		<div class="jumbotron">
+			<h1>Construtor de links</h1>
+			<p>Aqui voc&ecirc; pode gerar links para abrir o i3Geo de forma personalizada. Os links podem
+				ser inclu&iacute;dos em qualquer p&aacute;gina WEB, sendo poss&iacute;vel definir quais os temas
+				ser&atilde;o mostrados e qual a extens&atilde;o geogr&aacute;fica do mapa.</p>
+			<p>
+				Para ver todos os par&acirc;metros de inicializa&ccedil;&atilde;o que podem ser utilizados
+				acesse esse link: <a href="../ms_criamapa.php?ajuda" target=_blank>ms_criamapa.php?ajuda</a>
 			</p>
+		</div>
+		<div class="well bs-component">
+			<form class="form-vertical">
+				<fieldset>
+					<legend>Escolha das camadas</legend>
+					<h4>Escolha as camadas que ser&atilde;o inclu&iacute;das no mapa. As camadas são
+						organizadas em uma hierarquia começando em menu.</h4>
 
-			<p class=paragrafo>
-				Aqui voc&ecirc; pode gerar links para abrir o i3Geo de forma personalizada. Os links podem ser
-				inclu&iacute;dos em qualquer p&aacute;gina WEB, sendo poss&iacute;vel definir quais os temas
-				ser&atilde;o mostrados e qual a extens&atilde;o geogr&aacute;fica do mapa.<br> <br>
-			</p>
-		</fieldset>
-		<fieldset style="min-height: 100px;">
-			<p class=paragrafo>
-				Este &eacute; o link para abrir o mapa. Copie e cole em sua p&aacute;gina na internet ou clique
-				para testar: <a style="color: blue; font-size: 12px" href="" id=link target=blanck></a>
+					<div class="form-group">
+						<label for="menus">Menu</label> <select onchange="$i3geo_gl.combogrupos(this.value)"
+							class="form-control" id="menus">
+						</select> <span class="material-input"></span>
+					</div>
+					<div class="form-group">
+						<label for="grupos">Grupo</label> <select onchange="$i3geo_gl.combosubgrupos(this.value)"
+							class="form-control" id="grupos">
+						</select> <span class="material-input"></span>
+					</div>
+					<div class="form-group">
+						<label for="subgrupos">Subgrupo</label> <select onchange="$i3geo_gl.combotemas('',this.value)"
+							class="form-control" id="subgrupos">
+						</select> <span class="material-input"></span>
+					</div>
+					<div class="form-group">
+						<label for="temas">Temas</label> <select style="font-size: 15px;" multiple
+							onchange="$i3geo_gl.preseltema('','',this.value)" class="form-control" id="temas">
+						</select> <span class="help-block">Na lista abaixo voc&ecirc; pode remover temas j&aacute;
+							escolhidos. Clique em v&aacute;rios temas para escolher mais de um</span> <span
+							class="material-input"></span>
+					</div>
+					<div class="form-group">
+						<label for="temasa">Temas j&aacute; escolhidos. Os que estiverem marcados,
+							ficar&atilde;o ligados logo ao abrir o mapa</label>
+						<div id="temasa" class="form-control" style='height: 120px; overflow: auto'></div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="well bs-component">
+			<form class="form-vertical">
+				<fieldset>
+					<legend>Coordenadas</legend>
+					<p>Se vc quiser, o mapa poder&aacute; ser aberto mostrando pontos, digite abaixo as
+						coordenadas dos pontos em d&eacute;cimos de grau (exemplo: -54 -12 -54 1 -51 -15)</p>
+					<div class="form-group label-floating">
+						<label class="control-label" for="pontos">Coordenadas dos pontos</label> <input
+							class="form-control" id="pontos" type="text" onchange="$i3geo_gl.crialink()" />
+					</div>
+					<div class="form-group label-floating">
+						<label class="control-label" for="nometemapontos">Nome do tema para aparecer na
+							legenda</label> <input class="form-control" id="nometemapontos" type="text"
+							onchange="$i3geo_gl.crialink()" />
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="well bs-component">
+			<form class="form-vertical">
+				<fieldset>
+					<legend>Perfis</legend>
+					<p>Caso existam perfis definidos na configura&ccedil;&atilde;o do menu de temas, vc pode
+						restringir a lista de temas do menu de adi&ccedil;&atilde;o de temas do i3Geo</p>
+					<div class="form-group label-floating">
+						<label class="control-label" for="perfili">Perfil</label> <input class="form-control"
+							id="perfili" type="text" onchange="$i3geo_gl.crialink()" />
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="well bs-component">
+			<form class="form-vertical">
+				<fieldset>
+					<legend>Mapa</legend>
+					<div class="form-group">
+						<label for="temas">Escolha a interface que ser&aacute; utilizada para construir o mapa</label>
+						<div id="comboInterfaces"></div>
+						<span class="material-input"></span>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="well bs-component">
+			<form class="form-vertical">
+				<fieldset>
+					<legend>Extens&atilde;o geogr&aacute;fica</legend>
 
-		</fieldset>
-		<fieldset>
-			<div style="margin: 10px;">
-				<p class=paragrafo>
-					<b>Escolha os temas que ser&atilde;o inclu&iacute;dos no mapa (opcional):</b>
-				</p>
-				<p class=paragrafo>Menu:
+					<div class="row">
+						<div class="col-sm-6 text-left">
+							<label> Utilize o navegador abaixo para definir as coordenadas geogr&aacute;ficas do
+								seu mapa. Ap&oacute;s escolher a regi&atilde;o, clique no botão de captura.</label>
+							<div class="row">
+								<div class="col-sm-6 text-center">
+									<div id="i3geo_gl_mapa1" style="width: 256px; height: 256px; border: 1px solid gray;"></div>
+								</div>
+								<div class="col-sm-6 text-center">
+									<button onclick="$i3geo_gl.OL.capturageo();return false;" class="btn btn-primary">Capturar</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 text-left">
+							<label>Coordenadas geogr&aacute;ficas escolhidas (em d&eacute;cimos de grau). Digite
+								os valores ou capture as coordenadas</label>
 
+							<div class="coord form-group label-floating">
+								<label class="control-label" >X mínimo (longitude oeste -)</label> <input
+									class="form-control" id="i3geo_gl_xmin" type="text" onchange="$i3geo_gl.crialink()" />
+							</div>
+							<div class="coord form-group label-floating">
+								<label class="control-label" for="i3geo_gl_xmax">X m&aacute;ximo (longitude leste +)</label> <input
+									class="form-control" id="i3geo_gl_xmax" type="text" onchange="$i3geo_gl.crialink()" />
+							</div>
+							<div class="coord form-group label-floating">
+								<label class="control-label" for="i3geo_gl_ymin">Y m&iacute;nimo (latitude sul -)</label> <input
+									class="form-control" id="i3geo_gl_ymin" type="text" onchange="$i3geo_gl.crialink()" />
+							</div>
 
-				<div id=menus style="text-align: left;">Aguarde...</div>
-				<br>
-				<p class=paragrafo>Grupo:
+							<div class="coord form-group label-floating">
+								<label class="control-label" for="i3geo_gl_ymax">Y m&aacute;ximo (latitude norte +)</label> <input
+									class="form-control" id="i3geo_gl_ymax" type="text" onchange="$i3geo_gl.crialink()" />
+							</div>
+						</div>
+					</div>
 
+				</fieldset>
+			</form>
+		</div>
 
-				<div id=grupos style="text-align: left;">&nbsp;</div>
-				<br>
-				<p class=paragrafo>Sub-grupo:
-
-
-				<div id=subgrupos style="text-align: left;">&nbsp;</div>
-				<br>
-				<p class=paragrafo>Tema:
-
-
-				<div id=temas style="text-align: left;">&nbsp;</div>
-				<br>
-				<div style="left: 0px; text-align: left;">
-					Temas j&aacute; escolhidos. Os que estiverem marcados, ficar&atilde;o ligados logo ao abrir o
-					mapa:
-					<div id=temasa
-						style='width: 530px; border: 1px gray solid; height: 90px; top: 10px; left: 0px; text-align: left; overflow: auto'></div>
-				</div>
-			</div>
-
-		</fieldset>
-		<fieldset>
-			<div style="margin: 10px;">
-				<p class=paragrafo>
-					<b>Se vc quiser, o mapa poder&aacute; ser aberto mostrando pontos, digite abaixo as coordenadas
-						dos pontos em d&eacute;cimos de grau (exemplo: -54 -12 -54 1 -51 -15) (opcional):</b>
-				</p>
-				<p class=paragrafo>Coordenadas dos pontos:</p>
-				<div style="padding: 5px;" id=paiPontos>
-					<input type=text size=60 id=pontos value="" onchange="$i3geo_gl.crialink()" />
-				</div>
-				<p class=paragrafo>Nome do tema para aparecer na legenda:</p>
-				<div style="padding: 5px;" id=paiNometemapontos>
-					<input type=text size=60 id=nometemapontos value="" onchange="$i3geo_gl.crialink()" /> &nbsp;
-				</div>
-			</div>
-		</fieldset>
-		<fieldset>
-			<div style="margin: 10px;">
-				<p class=paragrafo>
-					<b>Caso existam perfis definidos na configura&ccedil;&atilde;o do menu de temas, vc pode
-						restringir a lista de temas do menu de adi&ccedil;&atilde;o de temas do I3Geo (opcional)</b>
-				</p>
-				<p class=paragrafo>Perfil:</p>
-				<input onchange="$i3geo_gl.crialink()" type=text size=60 id=perfili value=""
-					style="border: 1px solid black" />
-			</div>
-		</fieldset>
-		<fieldset>
-			<div style="margin: 10px; text-align: left;">
-				<p class=paragrafo>
-					<b>Escolha a interface para o mapa (opcional)</b>
-				</p>
-				<div id="comboInterfaces" style="text-align: left;">
-					<select id=interface onchange="$i3geo_gl.crialink()">
-						<option value="">Default</option>
-						<option value="black_gm.phtml">Google Maps</option>
-						<option value="googleearth.phtml">Google Earth</option>
-						<option value="black_ol.htm">Openlayers</option>
-						<option value="black_osm.htm">Open Street Map</option>
-					</select>
-				</div>
-			</div>
-		</fieldset>
-		<fieldset id=buscageo></fieldset>
 	</div>
-
 	<script type="text/javascript" src="../classesjs/i3geo_tudo_compacto6.js"></script>
 	<script src='dicionario.js'></script>
 	<script src='index.js'></script>
 	<script>
-	//$(document).ready(function(){
-		i3GEO.configura = {"locaplic" : window.location.href.split("/permlinks")[0],"sid": ""};
-		$(".active").html($trad("mapas",g_traducao_mapas));
-		OpenLayers.ImgPath = "../pacotes/openlayers/img/";
+		//$(document).ready(function(){
+		i3GEO.configura = {
+			"locaplic" : window.location.href.split("/permlinks")[0],
+			"sid" : ""
+		};
+		$(".active").html($trad("migalha", g_traducao_permlinks));
 
-		var i3geo_gl_configura =
-			new i3geo_gl_configura(i3GEO.configura.locaplic, "", "temasa", "link", "grupos", "subgrupos", "temas", "buscageo", "menus");
+		var i3geo_gl_configura = new i3geo_gl_configura(
+				i3GEO.configura.locaplic, "", "temasa", "link", "grupos",
+				"subgrupos", "temas", "buscageo", "menus");
 		i3geo_gl_inicia(i3geo_gl_configura);
-
+		$i3geo_gl.buscageo_init();
 		$.material.init();
-	//});
+		//});
 	</script>
 </body>
 </html>

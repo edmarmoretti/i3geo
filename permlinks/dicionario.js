@@ -1,13 +1,8 @@
 //veja em index.js o objeto que utiliza essa traducao
-g_traducao_mapas =
+g_traducao_permlinks =
 {
-		"mapas" : [{
-			pt : "Mapas de usu&aacute;rios",
-			en : "",
-			es : ""
-		}],
-		"copiado" : [{
-			pt : "Copiado",
+		"migalha" : [{
+			pt : "Links permanentes",
 			en : "",
 			es : ""
 		}]
