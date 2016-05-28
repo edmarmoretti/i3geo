@@ -35,7 +35,11 @@ if (file_exists ( $dir_tmp )) {
 error_reporting ( 0 );
 include "head.php";
 ?>
-
+<style>
+.amarelo {
+	color: yellow;
+}
+</style>
 <body style="padding-top: 90px;" id="topo">
 	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="container-fluid">
@@ -116,11 +120,10 @@ include "head.php";
 								<a role="button" data-toggle="quadroQrcode" data-url="{{{href}}}" class="btn btn-primary btn-fab btn-fab-mini" href="#"> <span
 									class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
 								</a>
-								<!-- TODO incluir favorito para ordenar lista
-								<a role="button" data-toggle="quadroQrcode" data-url="{{{href}}}" class="btn btn-primary btn-fab btn-fab-mini disabled" href="#"> <span
-									class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-								</a>
-								-->
+
+								<button onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini"> <span
+									data-cookie="{{{img}}}" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
 								</div>
 								<div class="col-xs-6" >
 								<a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}">

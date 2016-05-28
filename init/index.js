@@ -169,6 +169,7 @@ botoesIni = [
 	"target": "_self"
 }
 ];
+reordenaBotoesPorFavoritos();
 function mostraBotoes(){
 	$i("mensagemLogin").innerHTML = men;
 	i3GEO.configura = {"locaplic" : ".."};
@@ -215,6 +216,7 @@ function mostraBotoesBT(men){
 			{"d":botoesIni,"abrir" : $trad(36,g_traducao_init)}
 	);
 	$("#botoesTpl").html(html);
+	aplicaFavoritos()
 }
 function findBootstrapDeviceSize() {
 	var dsize = ['lg', 'md', 'sm', 'xs'];
@@ -232,3 +234,49 @@ function findBootstrapDeviceSize() {
 	}
 	return 'unknown';
 }
+//cookies sao armazenados em favoritosInit
+function favorita(obj){
+	$(obj).find("span").toggleClass("amarelo");
+	//
+	//modifica os cookies
+	//
+	var cookies = [];
+	$(".amarelo").each(
+			function(i,el){
+				cookies.push($(el).attr("data-cookie"));
+			}
+	);
+	i3GEO.util.insereCookie("favoritosInit",cookies.join("|"),200);
+}
+function aplicaFavoritos(){
+	var favoritos = i3GEO.util.pegaCookie("favoritosInit");
+	if(favoritos){
+		favoritos = favoritos.split("|");
+		$(favoritos).each(
+				function(i,el){
+					$('span[data-cookie="'+el+'"]').toggleClass("amarelo");
+				}
+		);
+	}
+}
+function reordenaBotoesPorFavoritos(){
+	var f = [],
+	nf = [],
+	favoritos = i3GEO.util.pegaCookie("favoritosInit");
+	if(favoritos){
+		favoritos = favoritos.split("|");
+		$(botoesIni).each(
+				function(i,el){
+					if(jQuery.inArray(el.img,favoritos) >= 0){
+						f.push(el);
+					}
+					else{
+						nf.push(el);
+					}
+				}
+		);
+		botoesIni = jQuery.merge( f, nf );
+	}
+}
+
+
