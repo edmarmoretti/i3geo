@@ -35,7 +35,7 @@ include "../init/head.php";
 }
 
 .list-group .list-group-separator::before{
-	width: calc(100% - 130px);
+	width: 100%;
 }
 
 #indice .bs-docs-sidebar .nav>.active:focus>a, .bs-docs-sidebar .nav>.active:hover>a,
@@ -71,10 +71,59 @@ include "../init/head.php";
 	-o-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
+
+.thumbnail.hidden-xs {
+	float: left;
+	height: 78px;
+	width: 170px
+}
+.thumbnail.hidden-xs > a > img {
+	height: 67px;
+	width: 160px;
+}
+
+.thumbnail.visible-xs {
+	float: left;
+	height: 43px;
+	width: 85px
+}
+.thumbnail.visible-xs > a > img {
+	height: 33px;
+	width: 80px;
+}
 </style>
 <script id="templateLinks" type="x-tmpl-mustache">
+<div class="row">
+	<div class="col-xs-12 col-sm-3 hidden-xs row-action-primary">
+		<div class="btn-group-sm pull-right" style="height: 60px;">
+
+<a class="hidden-sm btn btn-primary btn-fab" href="{{{link}}}">
+				<i class="material-icons">launch</i>
+			</a>
+			<button onclick="i3GEO.util.copyToClipboard('{{{link}}}');alerta('{{copiado}}');" class="btn btn-primary btn-fab" >
+				<i class="material-icons">content_copy</i>
+			</button>
+			<button role="button" data-toggle="quadroQrcode" data-url="{{{link}}}" class="btn btn-primary btn-fab btn-fab-max" >
+				<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+			</button>
+		</div>
+
+	</div>
+	<div class="col-sm-9 row-content" >
+		<h4 class="list-group-item-heading">
+			<a href="{{{link}}}" target="_blank">{{{nome}}}</a>
+		</h4>
+		<p class="list-group-item-text hidden-xs">
+			<a href="{{{link}}}" target="_blank">{{{link}}}</a>
+		</p>
+		<div class="list-group-separator"></div>
+	</div>
+</div>
+
+</script>
+<script id="templateLinksX" type="x-tmpl-mustache">
 <div class="list-group">
-	<div class="row-action-primary">
+	<div class="hidden-xs row-action-primary">
 		<div class="bs-component btn-group-sm pull-left">
 			<a class="btn btn-primary btn-fab" href="{{{link}}}">
 				<i class="material-icons">launch</i>
@@ -87,18 +136,16 @@ include "../init/head.php";
 			</button>
 		</div>
 	</div>
-	<div class="row-content" style="margin-left:130px;">
+	<div class="row-content" >
 		<h4 class="list-group-item-heading">
-			{{{nome}}}
+			<a href="{{{link}}}" target="_blank">{{{nome}}}</a>
 		</h4>
 		<p class="list-group-item-text hidden-xs">
 			<a href="{{{link}}}" target="_blank">{{{link}}}</a>
 		</p>
 	</div>
-
 </div>
 <div class="list-group-separator"></div>
-
 </script>
 <script id="indiceTpl" type="x-tmpl-mustache">
 <li><a href="#affix-{{ID_MAPA}}">{{{NOME}}}</a></li>
@@ -135,14 +182,18 @@ include "../init/head.php";
 		<!-- Template para criacao dos quadros ver index.js -->
 		<div class="escondido hidden">
 			<div class="row">
-				<div class="col-xs-9 center-block escondido hidden" id="botoesTpl">
+				<div class="col-xs-12 col-sm-9 center-block escondido hidden" id="botoesTpl">
 					<div class="row" id="affix-{{ID_MAPA}}">
-						<div class="col-xs-12 center-block">
+						<div class="col-md-12 center-block">
 							<div id="titulo{{ID_MAPA}}" class="panel-group" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-default">
 									<div class="panel-heading" role="tab" style="background-color:#80cbc4;">
-										<div class="thumbnail" style="float: left; height: 78px; width: 170px">
-											<a href="{{{LINK}}}"><img class="img-rounded" style="height: 67px; width: 160px"
+										<div class="thumbnail visible-xs">
+											<a href="{{{LINK}}}"><img class="img-rounded"
+												src="{{{IMAGEM}}}" /></a>
+										</div>
+										<div class="thumbnail hidden-xs">
+											<a href="{{{LINK}}}"><img class="img-rounded"
 												src="{{{IMAGEM}}}" /></a>
 										</div>
 										<h3 class="panel-title" >
@@ -171,13 +222,12 @@ include "../init/head.php";
 									</div>
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-3">
-						<nav class="bs-docs-sidebar hidden-xs affix" style="" id="indiceSpy">
+					<div class="col-sm-3 hidden-xs">
+						<nav class="bs-docs-sidebar affix" style="" id="indiceSpy">
 							<ul class="nav nav-pills nav-stacked" role="tablist" id="indice">
 
 							</ul>
