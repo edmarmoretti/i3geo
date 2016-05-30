@@ -46,8 +46,8 @@ g_traducao_init =
 		"4a" : [
 				{
 					pt : "Essa &eacute; a interface de mapas de uso mais comum. N&atilde;o utiliza uma proje&ccedil;&atilde;o cartogr&aacute;fica espec&iacute;fica, o que torna mais r&aacute;pida a renderiza&ccedil;&atilde;o das camadas.",
-					en : "",
-					es : ""
+					en : "This is a common map interface. Don't use a specific map projection that speeds up the layer rendering.",
+					es : "Esta es una interfaz de mapas de uso m&aacute;s com&uacute;n. No utilizar una proyecci&oacute;n espec&iacute;fica que haga m&aacute;s r&aacute;pida la visualizaci&oacute;n de las capas."
 				}
 			],
 		5 : [
@@ -60,15 +60,15 @@ g_traducao_init =
 		"5a" : [
 				{
 					pt : "Mapa (OpenLayers) com o c&oacute;digo javascript n&atilde;o compactado, &uacute;til para desenvolvedores. Tamb&eacute;m nas vers&otilde;es com <a href='interface/osmdebug.htm' >OSM</a> e <a href='interface/gmdebug.phtml'>GoogleMaps</a>.",
-					en : "",
-					es : ""
+					en : "Map (OpenLayers) with non-compacted javascript code, useful for developers. There are versions for <a href='interface/osmdebug.htm' >OSM</a> and <a href='interface/gmdebug.phtml'>GoogleMaps.</a>",
+					es : "Mapa (OpenLayers) con un c&oacute;digo javascript no compactado, &uacute;til para desarrolladores. Tambi&eacute;n en versiones de <a href='interface/osmdebug.htm' >OSM</a> y <a href='interface/gmdebug.phtml'>GoogleMaps.</a>"
 				}
 			],
 		6 : [
 			{
 				pt : "i3Geo + <a href='https://developers.google.com/maps' >Google Maps </a>",
-				en : "",
-				es : ""
+				en : "i3Geo + <a href='https://developers.google.com/maps' >Google Maps </a>",
+				es : "i3Geo + <a href='https://developers.google.com/maps' >Google Maps </a>"
 			}
 		],
 		"6a" : [
