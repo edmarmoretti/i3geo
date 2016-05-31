@@ -53,8 +53,9 @@ include "../init/head.php";
 					<li class="dropdown mega-dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags
 							<span class="caret"></span>
 					</a>
-						<div id="tplLista" class="col-sm-12 dropdown-menu mega-dropdown-menu">
-							<a class="btn btn-primary" href="#" onclick="$('.exemplo').hide();$('.{{id}}').fadeIn(600);">{{tag}}</a>
+						<!-- template para os tags -->
+						<div id="tplLista" style="background:#3f51b5" class="col-sm-12 dropdown-menu mega-dropdown-menu">
+							<a class="btn btn-info" href="#" onclick="$('.exemplo').hide();$('.{{id}}').fadeIn(600);">{{tag}}</a>
 						</div></li>
 				</ul>
 			</div>
@@ -94,10 +95,11 @@ include "../init/head.php";
 				</div>
 			</div>
 		</div>
-		<script src='../classesjs/compactados/mustache.js'></script>
-		<script src='../classesjs/compactados/classe_util_compacto.js'></script>
-		<script src='index.js'></script>
-		<script>
+	</div>
+	<script src='../classesjs/compactados/mustache.js'></script>
+	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
+	<script src='index.js'></script>
+	<script>
 	$(document).ready(function(){
 		mostraBotoesBT();
 		$('.hidden').removeClass('hidden');
