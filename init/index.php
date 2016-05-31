@@ -102,33 +102,33 @@ include "head.php";
 				<div class="cartao {{{fa}}} col-xs-12 center-block"
 					style="width: 260px; min-width: 260px; max-width: 260px;">
 					<div class="panel panel-default">
-						<div class="panel-body" >
-							<div class="thumbnail" role="button" style="height: 90px;" >
-								<a target="{{{target}}}" href="{{{href}}}">
-								<img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
+						<div class="panel-body">
+							<div class="thumbnail" role="button" style="height: 90px;">
+								<a target="{{{target}}}" href="{{{href}}}"> <img class="img-rounded"
+									style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
 								</a>
 							</div>
-							<h4 style="height:40px;">{{{titulo}}}</h4>
-
-								<h5 class="hidden-xs" style="height: 100px;">{{{subtitulo}}}</h5>
+							<h4 style="height: 40px;">{{{titulo}}}</h4>
+							<h5 class="hidden-xs" style="height: 100px;">{{{subtitulo}}}</h5>
 
 						</div>
 						<div class="panel-footer text-right"
 							style="padding: 0px; padding-right: 15px; border: 0px; background-color: white;">
 							<div class="row center-block">
-								<div class="col-xs-6" style="line-height: 3.5;text-align: left;">
-								<a role="button" data-toggle="quadroQrcode" data-url="{{{href}}}" class="btn btn-primary btn-fab btn-fab-mini" href="#"> <span
-									class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
-								</a>
+								<div class="col-xs-6" style="line-height: 3.5; text-align: left;">
+									<a role="button" data-toggle="quadroQrcode" data-url="{{{href}}}"
+										class="btn btn-primary btn-fab btn-fab-mini" href="#"> <span
+										class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+									</a>
 
-								<button onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini"> <span
-									data-cookie="{{{img}}}" class="glyphicon glyphicon-star" aria-hidden="true"></span>
-								</button>
+									<button onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
+										<span data-cookie="{{{img}}}" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+									</button>
 								</div>
-								<div class="col-xs-6" >
-								<a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}">
-									{{{abrir}}} </a>
-									</div>
+								<div class="col-xs-6">
+									<a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}">
+										{{{abrir}}} </a>
+								</div>
 
 							</div>
 						</div>
@@ -139,7 +139,7 @@ include "head.php";
 				style="width: 260px; min-width: 260px; max-width: 260px;">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<a class="twitter-timeline tline" href="" data-widget-id="288061915689787392" height="289">Tweets
+						<a class="twitter-timeline tline" href="" data-widget-id="288061915689787392" height="320">Tweets
 							@i3Geo</a>
 					</div>
 				</div>
@@ -148,37 +148,39 @@ include "head.php";
 				style="width: 260px; min-width: 260px; max-width: 260px;">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<a class="twitter-timeline htag" href="" data-widget-id="643417277208133633" height="289">i3geo
+						<a class="twitter-timeline htag" href="" data-widget-id="643417277208133633" height="320">i3geo
 							Tweets</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-12 text-center">
+
+	</div>
+	<div class="container-fluid"
+		style="background-color: rgb(250, 250, 250); margin-top: 10px; padding-top: 10px;">
+
+		<div class="row text-center hidden">
+
+			<div class="col-lg-4 center-block">
+				<a rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank"><img
+					alt="Licen&ccedil;a Creative Commons" style="border-width: 0"
+					src="https://i.creativecommons.org/l/GPL/2.0/88x62.png" /></a><br />O i3Geo est&aacute;
+				licenciado com uma Licen&ccedil;a <a rel="license"
+					href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank">Creative
+					Commons - Licen&ccedil;a P&uacute;blica Geral GNU (&#34;GNU General Public License&#34;)</a>
+			</div>
+			<div class="col-lg-4 center-block">
+
+				<script type='text/javascript'
+					src='https://www.openhub.net/p/i3geo/widgets/project_users?format=js&style=blue'></script>
+			</div>
+			<div class="col-lg-4 text-center">
 				<script type="text/javascript"
 					src="http://www.openhub.net/p/150688/widgets/project_basic_stats.js"></script>
 			</div>
 		</div>
-
-		<hr />
-		<footer>
-			<div class="row text-center hidden">
-				<div class="col-xs-6 center-block">
-					<a rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt"
-						target="_blank"><img alt="Licen&ccedil;a Creative Commons" style="border-width: 0"
-						src="https://i.creativecommons.org/l/GPL/2.0/88x62.png" /></a><br />O i3Geo est&aacute;
-					licenciado com uma Licen&ccedil;a <a rel="license"
-						href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank">Creative
-						Commons - Licen&ccedil;a P&uacute;blica Geral GNU (&#34;GNU General Public License&#34;)</a>
-				</div>
-				<div class="col-xs-6 center-block">
-					<script type='text/javascript'
-						src='https://www.openhub.net/p/i3geo/widgets/project_users?format=js&style=blue'></script>
-				</div>
-			</div>
-		</footer>
 	</div>
+
 	<script>
 	//utilizado em ms_configura.php para customizar o local da pasta de inicializacao
 	var customDir = "../<?php echo $customDir; ?>";
@@ -243,5 +245,6 @@ include "head.php";
 		$.material.init();
 	});
 	</script>
+
 </body>
 </html>
