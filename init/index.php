@@ -102,16 +102,16 @@ include "head.php";
 				<div class="cartao {{{fa}}} col-xs-12 center-block"
 					style="width: 260px; min-width: 260px; max-width: 260px;">
 					<div class="panel panel-default">
-						<div class="panel-body" style="max-height: 270px;">
+						<div class="panel-body" >
 							<div class="thumbnail" role="button" style="height: 90px;" >
 								<a target="{{{target}}}" href="{{{href}}}">
 								<img class="img-rounded" style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
 								</a>
 							</div>
-							<h4>{{{titulo}}}</h4>
-							<div class="hidden-xs" style="overflow: auto; height: 200px;">
-								<h5>{{{subtitulo}}}</h5>
-							</div>
+							<h4 style="height:40px;">{{{titulo}}}</h4>
+
+								<h5 class="hidden-xs" style="height: 100px;">{{{subtitulo}}}</h5>
+
 						</div>
 						<div class="panel-footer text-right"
 							style="padding: 0px; padding-right: 15px; border: 0px; background-color: white;">
