@@ -22,7 +22,7 @@ error_reporting ( 0 );
 include "../init/head.php";
 
 ?>
-<script src="../pacotes/ol3/ol-debug.js"></script>
+<script src="../pacotes/ol3/ol.js"></script>
 <style>
 .checkbox, .radio {
 	margin-bottom: 5px;
@@ -63,22 +63,20 @@ include "../init/head.php";
 				</button>
 				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i
 					class="fa fa-home fa-1x"></i></a>
+
 			</div>
+
+			<p class="navbar-text">
+				<button onclick="i3GEO.util.copyToClipboard($('#link').html());alerta('Copiado');"
+					class="btn btn-primary btn-fab btn-fab-mini">
+					<i class="fa fa-files-o" aria-hidden="true"></i>
+				</button>
+				&nbsp; <a class="navbar-link" href="" id="link" target="_blank">http://</a>
+			</p>
 		</div>
 	</nav>
-	<nav style="padding-top: 10px;" class="navbar-fixed-top">
-		<div class="container">
-			<div class="well well-sm">
-				<div class="bs-component btn-group-sm pull-left" style="top: -2px; position: relative">
-					<button onclick="i3GEO.util.copyToClipboard($('#link').html());"
-						class="btn btn-primary btn-fab btn-fab-mini">
-						<i class="fa fa-files-o" aria-hidden="true"></i>
-					</button>
-				</div>
-				&nbsp; <a href="" id="link" target="_blank">http://</a>
-			</div>
-		</div>
-	</nav>
+	<!--para as mensagens de alerta-->
+	<div class="navbar-fixed-top alert alert-success text-center" style="padding: 0px;"></div>
 	<div class="container-fluid">
 		<div class="row">
 			<ol class="breadcrumb">
@@ -121,7 +119,7 @@ include "../init/head.php";
 						</select> <span class="material-input"></span>
 					</div>
 					<div class="form-group">
-						<label for="temas">Temas</label> <select style="font-size: 15px;" multiple
+						<label for="temas">Temas</label> <select style="font-size: 15px;"
 							onchange="$i3geo_gl.preseltema('','',this.value)" class="form-control" id="temas">
 						</select> <span class="help-block">Na lista abaixo voc&ecirc; pode remover temas j&aacute;
 							escolhidos. Clique em v&aacute;rios temas para escolher mais de um</span> <span
@@ -188,10 +186,12 @@ include "../init/head.php";
 							<label> Utilize o navegador abaixo para definir as coordenadas geogr&aacute;ficas do
 								seu mapa. Ap&oacute;s escolher a regi&atilde;o, clique no botão de captura.</label>
 							<div class="row">
-								<div class="col-sm-6 text-center">
-									<div id="i3geo_gl_mapa1" style="width: 256px; height: 256px; border: 1px solid gray;"></div>
+								<div class="col-sm-12 text-center">
+									<div id="i3geo_gl_mapa1" style="width: 100%; height: 256px; border: 1px solid gray;"></div>
 								</div>
-								<div class="col-sm-6 text-center">
+							</div>
+							<div class="row">
+								<div class="col-sm-12 text-center">
 									<button onclick="$i3geo_gl.OL.capturageo();return false;" class="btn btn-primary">Capturar</button>
 								</div>
 							</div>
@@ -201,12 +201,12 @@ include "../init/head.php";
 								os valores ou capture as coordenadas</label>
 
 							<div class="coord form-group label-floating">
-								<label class="control-label" >X mínimo (longitude oeste -)</label> <input
+								<label class="control-label">X mínimo (longitude oeste -)</label> <input
 									class="form-control" id="i3geo_gl_xmin" type="text" onchange="$i3geo_gl.crialink()" />
 							</div>
 							<div class="coord form-group label-floating">
-								<label class="control-label" for="i3geo_gl_xmax">X m&aacute;ximo (longitude leste +)</label> <input
-									class="form-control" id="i3geo_gl_xmax" type="text" onchange="$i3geo_gl.crialink()" />
+								<label class="control-label" for="i3geo_gl_xmax">X m&aacute;ximo (longitude leste +)</label>
+								<input class="form-control" id="i3geo_gl_xmax" type="text" onchange="$i3geo_gl.crialink()" />
 							</div>
 							<div class="coord form-group label-floating">
 								<label class="control-label" for="i3geo_gl_ymin">Y m&iacute;nimo (latitude sul -)</label> <input
@@ -214,8 +214,8 @@ include "../init/head.php";
 							</div>
 
 							<div class="coord form-group label-floating">
-								<label class="control-label" for="i3geo_gl_ymax">Y m&aacute;ximo (latitude norte +)</label> <input
-									class="form-control" id="i3geo_gl_ymax" type="text" onchange="$i3geo_gl.crialink()" />
+								<label class="control-label" for="i3geo_gl_ymax">Y m&aacute;ximo (latitude norte +)</label>
+								<input class="form-control" id="i3geo_gl_ymax" type="text" onchange="$i3geo_gl.crialink()" />
 							</div>
 						</div>
 					</div>
@@ -229,7 +229,6 @@ include "../init/head.php";
 	<script src='dicionario.js'></script>
 	<script src='index.js'></script>
 	<script>
-		//$(document).ready(function(){
 		i3GEO.configura = {
 			"locaplic" : window.location.href.split("/permlinks")[0],
 			"sid" : ""
@@ -242,7 +241,6 @@ include "../init/head.php";
 		i3geo_gl_inicia(i3geo_gl_configura);
 		$i3geo_gl.buscageo_init();
 		$.material.init();
-		//});
 	</script>
 </body>
 </html>

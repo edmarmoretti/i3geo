@@ -420,3 +420,12 @@ function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 	//pega a lista de menus e as
 	i3GEO.arvoreDeTemas.comboMenus($i3geo_gl.loc_i3geo,"$i3geo_gl.combogrupos",$i3geo_gl.menu,"","530","1","");
 }
+function alerta(texto,d){
+	if(!d){
+		d = 500;
+	}
+	var a = $(".alert");
+	a.html(texto);
+	a.slideDown(d);
+	a.delay(d).slideUp(d);
+}

@@ -96,8 +96,7 @@ include "../init/head.php";
 <div class="row">
 	<div class="col-xs-12 col-sm-3 hidden-xs row-action-primary">
 		<div class="btn-group-sm pull-right" style="height: 60px;">
-
-<a class="hidden-sm btn btn-primary btn-fab" href="{{{link}}}">
+				<a class="hidden-sm btn btn-primary btn-fab" href="{{{link}}}">
 				<i class="material-icons">launch</i>
 			</a>
 			<button onclick="i3GEO.util.copyToClipboard('{{{link}}}');alerta('{{copiado}}');" class="btn btn-primary btn-fab" >
@@ -140,7 +139,7 @@ include "../init/head.php";
 		<h4 class="list-group-item-heading">
 			<a href="{{{link}}}" target="_blank">{{{nome}}}</a>
 		</h4>
-		<p class="list-group-item-text hidden-xs">
+		<p class="list-group-item-text hidden-xs hidden-sm">
 			<a href="{{{link}}}" target="_blank">{{{link}}}</a>
 		</p>
 	</div>
