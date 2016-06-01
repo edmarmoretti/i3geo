@@ -1018,11 +1018,13 @@ i3GEO.Interface =
 				i3geoOL.addLayers = function(lista) {
 					var n = lista.length, i, lan, l;
 					for (i = 0; i < n; i++) {
-						lan = lista[i].get("name");
-						if (lan) {
-							l = this.getLayersByName(lan);
-							if (l.length === 0) {
-								this.addLayer(lista[i]);
+						if(lista[i].get != undefined){
+							lan = lista[i].get("name");
+							if (lan) {
+								l = this.getLayersByName(lan);
+								if (l.length === 0) {
+									this.addLayer(lista[i]);
+								}
 							}
 						}
 					}
@@ -1095,6 +1097,12 @@ i3GEO.Interface =
 			 * Monta o corpo do mapa e os componentes marginais
 			 */
 			inicia : function() {
+				//
+				//verifica se a projecao esta correta
+				//
+				if(i3GEO.Interface.openlayers.googleLike === true && i3geoOL.getView().getProjection().getCode() != "EPSG:3857"){
+					alert("Alerta! Projecao diferente da esperada. Veja i3geo/guia_de_migracao.txt");
+				}
 				//
 				// monta o mapa ap&oacute;s receber o resultado da
 				// cria&ccedil;&atilde;o do mapfile tempor&aacute;rio

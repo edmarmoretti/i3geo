@@ -2883,15 +2883,11 @@ i3GEO.util =
 		 * array
 		 */
 		pegaDadosLocal : function(item) {
-			//nao roda no firefox
-			return false;
-			/*
 			if (i3GEO.util.verifica_html5_storage() && localStorage[item]) {
 				return window.localStorage[item];
 			} else {
 				return false;
 			}
-			*/
 		},
 		/**
 		 * Function: limpaDadosLocal

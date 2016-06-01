@@ -5,21 +5,20 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>i3GEO - OpenLayers+OSM</title>
-	<script src="../classesjs/i3geo.js"></script>
-	<script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
-	<link rel="stylesheet" type="text/css" href="../css/black.css">
+<script src="../pacotes/ol3/ol.js"></script>
+<script src="../js/i3geo.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/black.css">
+<link rel="stylesheet" type="text/css" href="../pacotes/ol3/ol.css">
 <style>
-	.olControlEditingToolbar1 div {
-		background-image: url(../mashups/openlayers.png);
-		background-repeat: no-repeat;
-		float: right;
-		right: 50px;
-		height: 29px;
-		margin: 2px;
-		width: 29px;
-		cursor: pointer;
-		top: 10px;
-	}
+.ol-attribution img {
+	display: none;
+}
+.ol-attribution.ol-uncollapsible {
+	height: 2.1em;
+	right: 24px;
+	background: none;
+	margin-bottom: 15px;
+}
 </style>
 </head>
 <body id="i3geo" style='margin-left: 7px; background: white;'>
@@ -133,8 +132,9 @@
 		i3GEO.Interface.ATUAL = "openlayers";
 		i3GEO.Interface.IDCORPO = "contemImg";
 		i3GEO.Interface.openlayers.TILES = true;
+		i3GEO.configura.guardaExtensao = false;
 		i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
-
+		i3GEO.Interface.openlayers.googleLike = true;
 		i3GEO.cria();
 		i3GEO.configura.mapaRefDisplay = "none";
 		i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
@@ -171,62 +171,67 @@
 		OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		(function() {
 			var attribOSMData = 'Map Data: &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors';
-			var attribMapQuestOSM = attribOSMData + ', Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
 			var attribMapQuestAerial = 'Map Data: &copy; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
-			var attribOpenCycleMap = 'Map Data: &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors';
-			var attribDEMData = '<a href="http://srtm.csi.cgiar.org/">SRTM</a>; ASTER GDEM is a product of <a href="http://www.meti.go.jp/english/press/data/20090626_03.html">METI</a> and <a href="https://lpdaac.usgs.gov/products/aster_policies">NASA</a>';
 			var attribStamen = 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA';
-			var mapSurfer = 'Map data © OpenStreetMap contributors, Imagery GIScience Research Group @ Heidelberg University';
 
-			var aquarela = new OpenLayers.Layer.OSM("Aquarela",
-				"http://tile.stamen.com/watercolor/${z}/${x}/${y}.jpg", {
-					isBaseLayer : true,
-					visibility : false,
-					attribution: attribStamen,
-					tileOptions: {crossOriginKeyword: "anonymous"}
-				});
-
-			var toner = new OpenLayers.Layer.OSM("Toner",
-				"http://tile.stamen.com/toner/${z}/${x}/${y}.jpg", {
-					isBaseLayer : true,
-					visibility : false,
-					attribution: attribStamen,
-					tileOptions: {crossOriginKeyword: "anonymous"}
-				});
-
-			var tonerlite = new OpenLayers.Layer.OSM("Toner lite",
-				"http://tile.stamen.com/toner-lite/${z}/${x}/${y}.jpg", {
-					isBaseLayer : true,
-					visibility : false,
-					attribution: attribStamen,
-					tileOptions: {crossOriginKeyword: "anonymous"}
-				});
-
-			var osm = new OpenLayers.Layer.OSM("OSM",
-					"http://tile.openstreetmap.org/${z}/${x}/${y}.png", {
-						isBaseLayer : true,
-						visibility : true,
-						attribution: attribOSMData,
-						tileOptions: {crossOriginKeyword: "anonymous"}
-					});
-
-			var arrayMapQuestAerial = ["http://oatile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg",
-				"http://oatile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg",
-				"http://oatile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg",
-				"http://oatile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.jpg"
-			];
-
-			var layMapQuestAerial = new OpenLayers.Layer.OSM("MapQuest Open Aerial", arrayMapQuestAerial,{
-				displayOutsideMaxExtent: true,
-				attribution: attribMapQuestAerial,
+			var osm = new ol.layer.Tile({
+				title : "OSM",
+				visible : true,
 				isBaseLayer : true,
-				visibility : false,
-				tileOptions: {crossOriginKeyword: "anonymous"}
-			});
+				name : "osm",
+				source: new ol.source.OSM({
+			    	  attributions : [new ol.Attribution({html: attribOSMData})],
+			    	  crossOrigin : "anonymous",
+			    	  url : "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
+			      })
+			    });
+			var aquarela = new ol.layer.Tile({
+				title : "Aquarela",
+				visible : false,
+				isBaseLayer : true,
+				name : "aquarela",
+				source: new ol.source.OSM({
+			    	  attributions : [new ol.Attribution({html: attribStamen})],
+			    	  crossOrigin : "anonymous",
+			    	  url : "http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
+			      })
+			    });
+			var toner = new ol.layer.Tile({
+				title : "Toner",
+				visible : false,
+				isBaseLayer : true,
+				name : "toner",
+				source: new ol.source.OSM({
+			    	  attributions : [new ol.Attribution({html: attribStamen})],
+			    	  crossOrigin : "anonymous",
+			    	  url : "http://tile.stamen.com/toner/{z}/{x}/{y}.png"
+			      })
+			    });
+			var tonerlite = new ol.layer.Tile({
+				title : "Toner Lite",
+				visible : false,
+				isBaseLayer : true,
+				name : "tonerlite",
+				source: new ol.source.OSM({
+			    	  attributions : [new ol.Attribution({html: attribStamen})],
+			    	  crossOrigin : "anonymous",
+			    	  url : "http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"
+			      })
+			    });
+			var layMapQuestAerial = new ol.layer.Tile({
+				title : "MapQuest Open Aerial",
+				visible : false,
+				isBaseLayer : true,
+				name : "layMapQuestAerial",
+				source: new ol.source.OSM({
+			    	  attributions : [new ol.Attribution({html: attribMapQuestAerial})],
+			    	  crossOrigin : "anonymous",
+			    	  url : "http://oatile4.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg"
+			      })
+			    });
 
 			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ osm, aquarela, toner, tonerlite, layMapQuestAerial ];
 		})();
-		i3GEO.Interface.openlayers.googleLike = true;
 		i3GEO.inicia();
 	</script>
 </body>

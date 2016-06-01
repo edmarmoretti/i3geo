@@ -4,22 +4,21 @@
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>i3GEO - OpenLayers</title>
-<script src="../classesjs/i3geo.js"></script>
-<script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
+<title>i3GEO - OpenLayers 3</title>
+<script src="../pacotes/ol3/ol.js"></script>
+<script src="../js/i3geo.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/black.css">
+<link rel="stylesheet" type="text/css" href="../pacotes/ol3/ol.css">
 <style>
-	.olControlEditingToolbar1 div {
-		background-image: url(../mashups/openlayers.png);
-		background-repeat: no-repeat;
-		float: right;
-		right: 50px;
-		height: 29px;
-		margin: 2px;
-		width: 29px;
-		cursor: pointer;
-		top: 10px;
-	}
+.ol-attribution img {
+	display: none;
+}
+.ol-attribution.ol-uncollapsible {
+	height: 2.1em;
+	right: 24px;
+	background: none;
+	margin-bottom: 15px;
+}
 </style>
 </head>
 <body id="i3geo" style='margin-left: 7px; background: white;'>
@@ -166,80 +165,105 @@
 		//indica se a opcao de navegacao nas pastas do servidor sera ativada
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 		i3GEO.janela.TRANSICAOSUAVE = true;
-
-		OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 		//desliga a camada com o mapa mundi
 		i3GEO.configura.mashuppar = "&desligar=mundo";
 		//se vc nao quer o fundo, mude visibility true para false
 		(function() {
-			var eng = new OpenLayers.Layer.ArcGIS93Rest(
-				"ESRI National Geographic",
-				"http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/export",
-				{
-					format : "jpeg"
-				}, {
-					isBaseLayer : true,
-					visibility : true,
-					attribution: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
-				});
-			var oce = new OpenLayers.Layer.ArcGIS93Rest(
-					"ESRI Ocean Basemap",
-					"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
-					{
-						format : "jpeg"
-					}, {
-						isBaseLayer : true,
-						visibility : false,
-						attribution: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
-					});
-			var ims = new OpenLayers.Layer.ArcGIS93Rest(
-					"ESRI Imagery World 2D",
-					"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
-					{
-						format : "jpeg"
-					}, {
-						isBaseLayer : true,
-						visibility : false,
-						attribution : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
-					});
-			var wsm = new OpenLayers.Layer.ArcGIS93Rest(
-					"ESRI World Street Map",
-					"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
-					{
-						format : "jpeg"
-					}, {
-						isBaseLayer : true,
-						visibility : false,
-						attribution : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
-					});
-			var bra = new OpenLayers.Layer.WMS(
-					"Base carto MMA",
-					"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
-					{
-						layers : "baseraster",
-						srs : "EPSG:4618",
-						format : "image/png",
-						isBaseLayer : false
-					}, {
-						isBaseLayer : true,
-						visibility : false
-					});
-
-			var tms = new OpenLayers.Layer.TMS("OSGEO",
-					"http://tilecache.osgeo.org/wms-c/Basic.py/", {
-						layername : "basic",
-						type : "png",
-						// set if different than the bottom left of map.maxExtent
-						tileOrigin : new OpenLayers.LonLat(-180, -90),
-						isBaseLayer : true,
-						visibility : false,
-						attribution : '&copy; <a href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
-					});
-
-			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ eng, oce, ims, wsm, tms,
-					bra ];
+			var eng = new ol.layer.Tile({
+				title : "ESRI National Geographic",
+				visible : true,
+				isBaseLayer : true,
+				name : "eng",
+				source : new ol.source.TileArcGISRest({
+					url : "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
+					attributions: [
+						new ol.Attribution({
+							html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
+						})
+					]
+				})
+			});
+			var oce = new ol.layer.Tile({
+				title : "ESRI Ocean Basemap",
+				visible : false,
+				isBaseLayer : true,
+				name : "oce",
+				source : new ol.source.TileArcGISRest({
+					url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
+					attributions: [
+						new ol.Attribution({
+							html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
+						})
+					]
+				})
+			});
+			var ims = new ol.layer.Tile({
+				title : "ESRI Imagery World 2D",
+				visible : false,
+				isBaseLayer : true,
+				name : "ims",
+				source : new ol.source.TileArcGISRest({
+					url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
+					attributions: [
+						new ol.Attribution({
+							html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
+						})
+					]
+				})
+			});
+			var wsm = new ol.layer.Tile({
+				title : "ESRI World Street Map",
+				visible : false,
+				isBaseLayer : true,
+				name : "wsm",
+				source : new ol.source.TileArcGISRest({
+					url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
+					attributions: [
+						new ol.Attribution({
+							html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
+						})
+					]
+				})
+			});
+			var bra = new ol.layer.Tile({
+				title : "Base carto MMA",
+				visible : false,
+				isBaseLayer : true,
+				name : "bra",
+				source : new ol.source.TileWMS({
+					url : "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
+					params : {
+						'layers' : "baseraster",
+						'srs' : "EPSG:4326",
+						'format' : "image/png"
+					}
+				})
+			});
+			var tms = new ol.layer.Tile({
+				title : "OSGEO",
+				visible : false,
+				isBaseLayer : true,
+				name : "tms",
+				source : new ol.source.TileWMS({
+					url : "http://tilecache.osgeo.org/wms-c/Basic.py/",
+					params : {
+						'layers' : "basic",
+						'type' : "png",
+						'srs' : "EPSG:4326",
+						'format' : "image/png",
+						'VERSION' : '1.1.1'
+					},
+					attributions: [
+						new ol.Attribution({
+							html: '&copy; <a href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
+						})
+					]
+				})
+			});
+			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [
+				eng, oce, ims, wsm, bra, tms
+			];
 		})();
-
 		i3GEO.inicia();
 	</script>
 </body>
