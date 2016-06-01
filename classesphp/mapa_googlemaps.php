@@ -140,9 +140,10 @@ elseif ($_GET["X"] != ""){
 	$_GET["WIDTH"] = 256;
 	$_GET["HEIGHT"] = 256;
 }
-else{
+elseif(isset($_GET["BBOX"])){
 	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 }
+
 $mapa = ms_newMapObj($map_fileX);
 $ret = $mapa->extent;
 

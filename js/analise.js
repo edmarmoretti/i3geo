@@ -528,7 +528,7 @@ i3GEO.analise =
 				 * layer para receber os graficos
 				 */
 				inicia : function() {
-					i3GEO.analise.medeDistancia.openlayers.estilo = 
+					i3GEO.analise.medeDistancia.openlayers.estilo =
 						new ol.style.Style({
 							stroke: new ol.style.Stroke({
 								color: '#ffcc33',
@@ -641,8 +641,10 @@ i3GEO.analise =
 						i3GEO.analise.medeDistancia.ultimoWkt = i3GEO.analise.medeDistancia.pontos2wkt();
 						// raio
 						if ($i("pararraios") && $i("pararraios").checked === true) {
+
+							temp = i3GEO.util.projGeo2OSM(new ol.geom.Point([x1*1, y1*1]));
 							circ = new ol.Feature({
-								geometry: new ol.geom.Circle([x1, y1],raio)
+								geometry: new ol.geom.Circle(temp.getCoordinates(),raio)
 							});
 							circ.setProperties({
 								origem : "medeDistanciaExcluir"
@@ -661,7 +663,7 @@ i3GEO.analise =
 						// desenha ponto
 						if ($i("parartextos") && $i("parartextos").checked === true) {
 							label = new ol.Feature({
-								geometry: new ol.geom.Point([x2, y2])
+								geometry: i3GEO.util.projGeo2OSM(new ol.geom.Point([x2*1, y2*1]))
 							});
 							label.setProperties({
 								origem : "medeDistanciaExcluir"
@@ -1236,8 +1238,8 @@ i3GEO.analise =
 							x1 = temp[0];
 							y1 = temp[1];
 						}
-						per += i3GEO.calculo.distancia(x1, y1, x2, y2);	
-						//getGeodesicArea 
+						per += i3GEO.calculo.distancia(x1, y1, x2, y2);
+						//getGeodesicArea
 						sourceProj = i3geoOL.getView().getProjection();
 						geom = (geom.clone().transform(sourceProj, 'EPSG:4326'));
 						coordinates = geom.getLinearRing(0).getCoordinates();

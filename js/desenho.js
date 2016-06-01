@@ -346,9 +346,7 @@ i3GEO.desenho =
 					ox = 0.5;
 					oy = 1;
 				}
-				point = new ol.geom.Point([x, y]);
-				point = i3GEO.util.extGeo2OSM(point);
-
+				point = i3GEO.util.extGeo2OSM(new ol.geom.Point([x, y]));
 				f = new ol.Feature({
 					geometry: point
 				});
@@ -386,7 +384,8 @@ i3GEO.desenho =
 				}
 			},
 			movePin : function(pin, x, y) {
-				pin.getGeometry().setCoordinates([x,y]);
+				var point = i3GEO.util.extGeo2OSM(new ol.geom.Point([x, y]));
+				pin.getGeometry().setCoordinates(point.getCoordinates());
 			},
 			criaLayerGrafico : function() {
 				if (!i3GEO.desenho.layergrafico) {

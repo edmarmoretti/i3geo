@@ -44,11 +44,11 @@ navn = false; // netscape
 var app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
 
-numl = 20
-numc = 20
-nco = 255
+numl = 20;
+numc = 20;
+nco = 255;
 
-inicia("vermelho")
+inicia("vermelho");
 function inicia(esquema)
 {
 	intnl = Math.ceil(nco / numl);
@@ -56,7 +56,7 @@ function inicia(esquema)
 	r = 0;
 	g = 0;
 	b = 0;
-	ins = ""
+	ins = "";
 	for (linhas = 1; linhas < numl; linhas++)
 	{
 		ins += "<tbody><tr>\n";
@@ -79,29 +79,29 @@ function inicia(esquema)
 		if (esquema == "ciano"){b = 255; g = linhas; r = 0;}
 		if (esquema == "amarelo"){b = 0; g = linhas; r = 255;}
 	}
-	document.getElementById("cores").innerHTML = "\<table cellpadding='0' cellspacing='0' border='0'\>"+ins+"\<\/table\>"
+	document.getElementById("cores").innerHTML = "\<table cellpadding='0' cellspacing='0' border='0'\>"+ins+"\<\/table\>";
 }
 function muda (e)
 {
-	inicia(e.value)
+	inicia(e.value);
 }
 function mais()
 {
-	nco = nco + 20
-	inicia(document.getElementById("esq").value)
+	nco = nco + 20;
+	inicia(document.getElementById("esq").value);
 }
 function menos()
 {
-	nco = nco - 20
-	inicia(document.getElementById("esq").value)
+	nco = nco - 20;
+	inicia(document.getElementById("esq").value);
 }
 function aplicacor(c)
 {
-	var doc = unescape(((((window.location.href).split("doc="))[1]).split("&"))[0] )
-	var doc = (navm) ? window.parent.frames(doc).document : window.parent.document.getElementById(doc).contentDocument
+	var doc = unescape(((((window.location.href).split("doc="))[1]).split("&"))[0] );
+	var doc = (navm) ? window.parent.frames(doc).document : window.parent.document.getElementById(doc).contentDocument;
 	var elemento = unescape(((((window.location.href).split("elemento="))[1]).split("&"))[0] );
-	doc.getElementById(elemento).value = c
-	window.parent.wdocafechaf('wdocac')
+	doc.getElementById(elemento).value = c;
+	window.parent.wdocafechaf('wdocac');
 }
 </script>
 </body>

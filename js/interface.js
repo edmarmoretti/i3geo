@@ -825,9 +825,7 @@ i3GEO.Interface =
 				});
 				p.baloes.push(b);
 				i3geoOL.addOverlay(b);
-				b.setPosition([
-					x, y
-				]);
+				b.setPosition(i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates());
 			},
 			/**
 			 * Redesenha o mapa atual
@@ -1557,7 +1555,6 @@ i3GEO.Interface =
 									opcoes.isBaseLayer = false;
 									opcoes.visible = true;
 								} else {
-
 									// verifica se havera apenas um tile
 									// 10 e do tipo grid de coordenadas
 									if (camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim"
@@ -1598,19 +1595,30 @@ i3GEO.Interface =
 										});
 										source.set("tipoServico", "ImageWMS");
 									} else {
-										source = new ol.source.WMTS({
-											url : urllayer,
-											matrixSet : opcoes.projection,
-											format : 'image/png',
-											projection : opcoes.projection,
-											tileGrid : new ol.tilegrid.WMTS({
-												origin : ol.extent.getTopLeft(projectionExtent),
-												resolutions : resolutions,
-												matrixIds : matrixIds
-											}),
-											wrapX : true
-										});
-										source.set("tipoServico", "WMTS");
+										if(i3GEO.Interface.openlayers.googleLike === false){
+											source = new ol.source.WMTS({
+												url : urllayer,
+												matrixSet : opcoes.projection,
+												format : 'image/png',
+												projection : opcoes.projection,
+												tileGrid : new ol.tilegrid.WMTS({
+													origin : ol.extent.getTopLeft(projectionExtent),
+													resolutions : resolutions,
+													matrixIds : matrixIds
+												}),
+												wrapX : true
+											});
+											source.set("tipoServico", "WMTS");
+										}else{
+											source = new ol.source.XYZ({
+												url : urllayer+"&X={x}&Y={y}&Z={z}",
+												matrixSet : opcoes.projection,
+												format : 'image/png',
+												projection : opcoes.projection,
+												wrapX : true
+											});
+											source.set("tipoServico", "WMTS");
+										}
 									}
 									opcoes.title = camada.tema;
 									opcoes.name = camada.name;
