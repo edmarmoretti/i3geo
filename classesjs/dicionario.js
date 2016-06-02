@@ -1379,6 +1379,13 @@ var g_traducao =
 				es : "Inserte un gr&aacute;fico en el punto marcado seg&uacute;n los atributos existentes en el tema seleccionado. El tema debe tener campos con valores num&eacute;ricos en la tabla de atributos."
 			}
 		],
+		"d23t" : [
+			{
+				pt : "Clique gr&aacute;fico",
+				en : "",
+				es : ""
+			}
+		],
 		"d24" : [
 			{
 				pt : "Abre as ferramentas para sele&ccedil;&atilde;o de elementos de um tema. Os elementos selecionados podem ser utilizados em outras opera&ccedil;&ocirc;es, como buffer e sele&ccedil;&atilde;o por tema.",

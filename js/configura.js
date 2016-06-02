@@ -194,7 +194,7 @@ i3GEO.configura =
 				"analise" : [
 					{
 						id : "omenudataAnalise1",
-						text : '<b>' + $trad("u22") + '</b>',
+						text : '> <b>' + $trad("u22") + '</b>',
 						submenu : {
 							id : "subAnalise1",
 							itemdata : [
@@ -220,7 +220,7 @@ i3GEO.configura =
 					},
 					{
 						id : "omenudataAnalise5",
-						text : '<b>' + $trad("u23") + '</b>',
+						text : '> <b>' + $trad("u23") + '</b>',
 						submenu : {
 							id : "subAnalise2",
 							itemdata : [
@@ -256,7 +256,7 @@ i3GEO.configura =
 					},
 					{
 						id : "omenudataAnalise10",
-						text : '<b>' + $trad("u24") + '</b>',
+						text : '> <b>' + $trad("u24") + '</b>',
 						submenu : {
 							id : "subAnalise3",
 							itemdata : [
@@ -271,39 +271,8 @@ i3GEO.configura =
 						}
 					},
 					{
-						id : "omenudataNavegacao1",
-						text : '<b>' + $trad("x105") + '</b>',
-						submenu : {
-							id : "subAnalise4",
-							itemdata : [
-								[
-									{
-										id : "omenudataAnalise18",
-										text : $trad("d30"),
-										url : "javascript:i3GEO.analise.dialogo.linhaDoTempo()"
-									},
-									{
-										id : "omenudataNavegacao2",
-										text : $trad("d15t"),
-										url : "javascript:i3GEO.navega.dialogo.google()"
-									},
-									{
-										id : "omenudataNavegacao3",
-										text : $trad("d9t"),
-										url : "javascript:i3GEO.maparef.inicia()"
-									},
-									{
-										id : "omenudataNavegacao4",
-										text : $trad("d8t"),
-										url : "javascript:i3GEO.mapa.dialogo.mostraExten()"
-									}
-								]
-							]
-						}
-					},
-					{
 						id : "omenudataAnalise12",
-						text : '<b>' + $trad("u27") + '</b>',
+						text : '> <b>' + $trad("u27") + '</b>',
 						submenu : {
 							id : "subAnalise5",
 							itemdata : [
@@ -410,7 +379,7 @@ i3GEO.configura =
 				"interface" : [
 					{
 						id : "omenudataInterface0a",
-						text : '<b>' + $trad("d27") + '</b>',
+						text : '> <b>' + $trad("d27") + '</b>',
 						submenu : {
 							id : "subInt1",
 							itemdata : [
@@ -436,7 +405,7 @@ i3GEO.configura =
 					},
 					{
 						id : "omenudataInterface0b",
-						text : '<b>' + $trad("u27") + '</b>',
+						text : '> <b>' + $trad("u27") + '</b>',
 						submenu : {
 							id : "subInt2",
 							itemdata : [
@@ -474,7 +443,7 @@ i3GEO.configura =
 					//
 					{
 						id : "omenudataFerramentas0a",
-						text : '<b>' + $trad("g4a") + '</b>',
+						text : '> <b>' + $trad("g4a") + '</b>',
 						submenu : {
 							id : "mapa",
 							itemdata : [
@@ -568,6 +537,11 @@ i3GEO.configura =
 										id : "wkt2layer",
 										text : "<span class='i3GEOiconeFerramenta i3GEOiconewkt2layer'></span>" + $trad("wkt2layer"),
 										url : "javascript:i3GEO.mapa.dialogo.wkt2layer()"
+									},
+									{
+										id : "omenudataFerramentasCliqueGrafico",
+										text : "<span class='i3GEOiconeFerramenta i3GEOiconeCliqueGrafico'></span>" + $trad("d23t"),
+										url : "javascript:i3GEO.mapa.dialogo.cliqueGrafico()"
 									}
 								]
 							]
@@ -576,7 +550,7 @@ i3GEO.configura =
 					// temas
 					{
 						id : "omenudataFerramentas0b",
-						text : '<b>' + $trad("a7") + '</b>',
+						text : '> <b>' + $trad("a7") + '</b>',
 						submenu : {
 							id : "camada",
 							itemdata : [
@@ -653,19 +627,19 @@ i3GEO.configura =
 					// cartogramas
 					{
 						id : "omenudataFerramentas0e",
-						text : '<b>' + $trad("x60") + '</b>',
+						text : '> <b>' + $trad("x60") + '</b>',
 						submenu : {
 							id : "subFerr3",
 							itemdata : [
 								[
 									{
 										id : "omenudataFerramentas1e",
-										text : "<span class='i3GEOiconeFerramenta i3GEOiconeCartograma'></span>" + $trad("x57"),
+										text : $trad("x57"),
 										url : "javascript:i3GEO.mapa.dialogo.metaestat()"
 									},
 									{
 										id : "omenudataFerramentas4e",
-										text : "<span class='i3GEOiconeFerramenta i3GEOiconeAplicStat'></span>" + $trad("x71"),
+										text : $trad("x71"),
 										url : "javascript:i3GEO.mapa.dialogo.metaestatListaMapas()"
 									}
 								]
@@ -675,19 +649,19 @@ i3GEO.configura =
 					// conexoes
 					{
 						id : "omenudataFerramentas0c",
-						text : '<b>' + $trad("a15") + '</b>',
+						text : '> <b>' + $trad("a15") + '</b>',
 						submenu : {
 							id : "subFerr4",
 							itemdata : [
 								[
 									{
 										id : "omenudataFerramentas14",
-										text : "<span class='i3GEOiconeFerramenta i3GEOiconeAdd'></span>" + $trad("conexaoServicoGeo"),
+										text : $trad("conexaoServicoGeo"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"
 									},
 									{
 										id : "omenudataFerramentas9i",
-										text : "<span class='i3GEOiconeFerramenta i3GEOiconeVinde'></span>" + $trad("x85"),
+										text : $trad("x85"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.vinde()"
 									}
 								]
@@ -697,19 +671,81 @@ i3GEO.configura =
 					// upload
 					{
 						id : "omenudataFerramentas0d",
-						text : '<b>Upload</b>',
+						text : '> <b>Upload</b>',
 						submenu : {
 							id : "subFerr5",
 							itemdata : [
 								[
 									{
 										id : "omenudataFerramentas13",
-										text : "<span class='i3GEOiconeFerramenta i3GEOiconeUpload'></span>" + $trad("uploadArquivoGeo"),
+										text : $trad("uploadArquivoGeo"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.uploadarquivo()"
 									}
 								]
 							]
 						}
+					},
+					//navegacao
+					{
+						id : "omenudataNavegacao1",
+						text : '> <b>' + $trad("x105") + '</b>',
+						submenu : {
+							id : "subAnalise4",
+							itemdata : [
+								[
+									{
+										id : "omenudataAnalise18",
+										text : $trad("d30"),
+										url : "javascript:i3GEO.analise.dialogo.linhaDoTempo()"
+									},
+									{
+										id : "omenudataNavegacao2",
+										text : $trad("d15t"),
+										url : "javascript:i3GEO.navega.dialogo.google()"
+									},
+									{
+										id : "omenudataNavegacao3",
+										text : $trad("d9t"),
+										url : "javascript:i3GEO.maparef.inicia()"
+									},
+									{
+										id : "omenudataNavegacao4",
+										text : $trad("d8t"),
+										url : "javascript:i3GEO.mapa.dialogo.mostraExten()"
+									},
+									{
+										id : "omenudataNavegacaoWiki",
+										text : $trad("d11t"),
+										url : "javascript:i3GEO.navega.dialogo.wiki()"
+									},
+									{
+										id : "omenudataNavegacaoMetar",
+										text : $trad("d29"),
+										url : "javascript:i3GEO.navega.dialogo.metar()"
+									},
+									{
+										id : "omenudataNavegacaoFotos",
+										text : "Fotos",
+										url : "javascript:i3GEO.navega.dialogo.buscaFotos()"
+									},
+									{
+										id : "omenudataNavegacaoConfluence",
+										text : $trad("d17t"),
+										url : "javascript:i3GEO.navega.dialogo.confluence()"
+									},
+									{
+										id : "omenudataNavegacaoLente",
+										text : $trad("d18t"),
+										url : "javascript:i3GEO.navega.lente.inicia()"
+									}
+								]
+							]
+						}
+					},
+					{
+						id : "omenudataBarraEdicao",
+						text : $trad("u29"),
+						url : "javascript:i3GEO.barraDeBotoes.editor.inicia()"
 					}
 				]
 			}
@@ -1667,7 +1703,6 @@ i3GEO.configura =
 					dica : $trad("d23"),
 					funcaoonclick : function() {
 						i3GEO.mapa.dialogo.cliqueGrafico();
-						i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 					}
 				},
 				{

@@ -295,7 +295,7 @@ i3GEO.barraDeBotoes =
 		 *
 		 * {boolean}
 		 */
-		PERMITEFECHAR : true,
+		PERMITEFECHAR : false,
 		/**
 		 * Propriedade: PERMITEDESLOCAR
 		 *
@@ -427,8 +427,8 @@ i3GEO.barraDeBotoes =
 		 * {objeto}
 		 */
 		INCLUIBOTAO : {
-			abreJanelaLegenda : true,
-			localizar : true,
+			abreJanelaLegenda : false,
+			localizar : false,
 			zoomanterior : true,
 			zoomli : true,
 			zoomproximo : true,
@@ -440,21 +440,21 @@ i3GEO.barraDeBotoes =
 			identificaBalao : true,
 			mede : true,
 			area : true,
-			selecao : true,
-			barraedicao : true,
-			imprimir : true,
-			google : true,
-			referencia : true,
-			exten : true,
-			inserexy : true,
-			textofid : true,
-			reinicia : true,
-			buscafotos : true,
-			wiki : true,
-			metar : true,
-			lentei : true,
-			confluence : true,
-			inseregrafico : true,
+			selecao : false,
+			barraedicao : false,
+			imprimir : false,
+			google : false,
+			referencia : false,
+			exten : false,
+			inserexy : false,
+			textofid : false,
+			reinicia : false,
+			buscafotos : false,
+			wiki : false,
+			metar : false,
+			lentei : false,
+			confluence : false,
+			inseregrafico : false,
 			v3d : false
 		},
 		// TODO colocar os icones como propriedade das definicoes do botao

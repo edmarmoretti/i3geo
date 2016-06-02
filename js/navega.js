@@ -695,9 +695,10 @@ i3GEO.navega =
 			 * apresenta&ccedil;&atilde;o da lente
 			 */
 			inicia : function() {
-				if (typeof (console) !== 'undefined')
-					console.info("i3GEO.navega.lente.inicia()");
-
+				if (i3GEO.navega.lente.ESTAATIVA != "nao") {
+					i3GEO.navega.lente.desativa();
+					return;
+				}
 				// insere lente de aumento
 				var novoel, novoimg, temp;
 				if (!$i("lente")) {

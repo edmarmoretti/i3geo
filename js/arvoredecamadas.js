@@ -387,7 +387,7 @@ i3GEO.arvoreDeCamadas =
 		 *
 		 * false
 		 */
-		MOSTRATITULO : true,
+		MOSTRATITULO : false,
 		/**
 		 * Propriedade: OPCOESICONES
 		 *
@@ -590,7 +590,7 @@ i3GEO.arvoreDeCamadas =
 				title : $trad("t2b"),
 				dica : $trad("legenda"),
 				id : "soltaleg2",
-				status : true
+				status : false
 			},
 			"opacidade" : {
 				tipo : "arvore",
