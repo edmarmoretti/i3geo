@@ -470,6 +470,14 @@ i3GEO.janela =
 			YAHOO.util.Event.addListener(janela.close, "click", i3GEO.janela.fecha, janela, {
 				id : id
 			}, true);
+			temp = $i(id + "_c");
+			if(temp && temp.style){
+				temp.style.maxWidth = "90%";
+			}
+			temp = $i(id);
+			if(temp && temp.style){
+				temp.style.maxWidth = "100%";
+			}
 			temp = $i(id + "_corpo");
 			return ([
 				janela, $i(id + "_cabecalho"), temp
