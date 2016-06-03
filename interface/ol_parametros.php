@@ -83,21 +83,21 @@
 		<td id="barraInferior" style="background-image:url('../imagens/rodape.png');height:10px"></td>
 	</tr>
 </table>
-<table id="i3GEOlogoMarca" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
-	<tr>
-		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h3></td>
-	</tr>
-	<tr>
-		<td style="padding:10px;"><img style="width:560px;height:81px" alt="" src='../imagens/logo_inicio.png' ></td>
-	</tr>
-	<tr>
-		<td>
-			<!--
-			<script id="ohloh" type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
-			-->
-		</td>
-	</tr>
-</table>
+	<div id="i3GEOlogoMarca" style="width:95%; max-width:600px; text-align:center;margin: auto auto; box-shadow: 0 1px 13px gray; border-radius: 5px;">
+		<table style="width:100%;">
+			<tr>
+				<td>
+					<div id=versaoi3geo></div>
+					<h1 style="font-size:14pt;padding:5px;">i3Geo
+						- Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h1>
+					<h1 style="font-size:14pt;padding:5px;">Baseado
+						no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico
+						Brasileiro</h1>
+				</td>
+			</tr>
+		</table>
+		<img style="width:inherit;padding:5px;" src='../imagens/logo_inicio.png'>
+	</div>
 
 <div id="i3GEOguiaMovel" style="position:absolute;display:block;border:0px solid white;text-align:left;z-index:2000;background-color:none">
 	<img id="i3GEOguiaMovelPuxador" onclick='i3GEO.guias.guiaMovel.abreFecha()' style='z-index:2;border:solid 0px white;left:0px;position:absolute;top:0px' width='0px' src='../imagens/openbars.png' >
