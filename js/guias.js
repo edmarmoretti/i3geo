@@ -967,7 +967,7 @@ i3GEO.guias =
 				larguraPuxador : 50,
 				alturaPuxador : 280,
 				alturaGuiaMovel : 0,
-				larguraGuiaMovel : 320,
+				larguraGuiaMovel : 300,
 				topGuiaMovel : 0,
 				guias : {
 					icones : [],
@@ -1044,11 +1044,6 @@ i3GEO.guias =
 					temp.left = "1px";
 					temp.top = "1px";
 					temp.width = (config.larguraGuiaMovel - 1) + "px";
-					temp.height = "35px";
-
-					if (navm) {
-						temp.height = "37px";
-					}
 					temp.zIndex = 5;
 					temp.paddingTop = "2px";
 					YAHOO.util.Dom.setStyle("i3GEOguiaMovelIcones", "opacity", 0.60);

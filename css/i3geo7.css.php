@@ -1770,53 +1770,32 @@ width: 20px;
 height: 10px;
 }
 #menuinterface {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -550px;
-width: 52px;
+width: 75px;
 height: 15px;
 }
 #menuajudaMenu {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -500px;
 width: 52px;
 height: 15px;
 }
 #menuanalise {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -525px;
 width: 52px;
 height: 15px;
 }
 #menujanelas {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -550px;
 width: 52px;
 height: 15px;
 }
 #menuferramentas {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -2157px;
-width: 65px;
+width: 75px;
 height: 15px;
 }
 #menuarquivos {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -575px;
 width: 52px;
 height: 15px;
 }
 #menui3GeoMenuMarcador {
-background-image: url("../imagens/sprite.png");
-background-position: 0px -2226px;
-background-repeat: no-repeat;
 height: 15px;
-width: 57px;
+width: 75px;
 }
 .menuTresLinhas {
 float: left;
@@ -2381,6 +2360,8 @@ margin-left: 8px;
 border: solid 1px gray;
 box-shadow: 0px 1px 3px lightgray;
 cursor: pointer;
+widh: 40px;
+height: 40px;
 }
 #i3GEOguiaMovel .iconeGuiaMovel{
 padding: 3px 0px;

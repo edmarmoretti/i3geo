@@ -16,6 +16,17 @@ para o campo escala e coordenadas
     background-color: #222222 !IMPORTANT;
     opacity: 0.9 !IMPORTANT;
 }
+/* menu */
+#contemMenu {
+	background: black;
+	height: 35px;
+	text-align: right;
+	border-width: 0pt 0pt 1px;
+	border-color: rgb(240, 240, 240);
+}
+#menus {
+	height: 35px;
+}
 /*
 Barra de botoes de edicao vetorial do openlayers
 */
@@ -217,6 +228,11 @@ Menu superior de opcoes
 .yui-skin-sam .yuimenuitemlabel a{
 	color: white;
 }
+
+.yuimenubaritemlabel, .yuimenuitemlabel  {
+	font-size: 14px;
+}
+
 /* itens dos submenus quando o mouse passa*/
 .yui-skin-sam .yuimenuitem-selected {
 	background: #707070;

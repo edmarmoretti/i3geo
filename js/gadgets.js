@@ -595,6 +595,18 @@ i3GEO.gadgets =
 					for (n in menu) {
 						if (menu[n].id) {
 							s = submenus[menu[n].id];
+
+							menuUnico["submenus"]["menuUnico"].push({
+								id : menu[n].id + "Menu",
+								text : menu[n].nome,
+								submenu : {
+									id : menu[n].id + "Sub",
+									itemdata : [
+										s
+									]
+								}
+							});
+							/*
 							tempMenu = [];
 							for (m in s) {
 								if (s[m].url) {
@@ -624,6 +636,7 @@ i3GEO.gadgets =
 									}
 								});
 							}
+							*/
 						}
 					}
 					i3GEO.configura.oMenuData = menuUnico;
