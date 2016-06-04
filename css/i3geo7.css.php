@@ -435,7 +435,7 @@ margin-left: 30px;
 cursor: move;
 }
 .i3GEOarvCamGrupo {
-font-size: 13px;
+font-size: 12pt;
 margin: auto;
 text-align: left;
 cursor: pointer;
@@ -443,7 +443,7 @@ top: -1px;
 font-weight : bold;
 }
 .i3GEOarvCamTema {
-font-size: 13px;
+font-size: 12pt;
 margin: auto;
 text-align: left;
 cursor: pointer;
@@ -452,7 +452,7 @@ font-weight : bold;
 }
 .i3GEOarvCamTemaIE {
 text-align: left;
-font-size: 13px;
+font-size: 12pt;
 vertical-align: middle;
 display: table-cell;
 font-weight : bold;
@@ -795,7 +795,7 @@ z-index: 1000;
 }
 A {
 text-align: left;
-font-size: 11px;
+font-size: 11pt;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 color: #26298D;
 outline : none;
@@ -851,7 +851,7 @@ padding: 0px;
 color: #2F4632;
 margin: 0px;
 text-align: center;
-font-size: 12px;
+font-size: 12pt !Important;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 .ajuda_usuario {
@@ -2955,11 +2955,11 @@ border-color: #D3D3D3;
 border-radius: 7px;
 }
 .ygtvcontent {
-font-size: 12px;
+font-size: 12pt;
 padding: 0 3px 10px 0;
 }
 .ygtvcell {
-font-size: 12px;
+font-size: 12pt;
 padding: 0 3px 5px 0;
 }
 .comboTemasCabecalho .yuimenuitemlabel {

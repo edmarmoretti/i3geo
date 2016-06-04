@@ -199,7 +199,7 @@ Utilizado na janela do buscador INDE
 }
 
 .i3GEOarvCamGrupo {
-	font-size: 13px;
+	font-size: 12pt;
 	margin: auto;
 	text-align: left;
 	cursor: pointer;
@@ -208,7 +208,7 @@ Utilizado na janela do buscador INDE
 }
 
 .i3GEOarvCamTema {
-	font-size: 13px;
+	font-size: 12pt;
 	margin: auto;
 	text-align: left;
 	cursor: pointer;
@@ -218,7 +218,7 @@ Utilizado na janela do buscador INDE
 
 .i3GEOarvCamTemaIE {
 	text-align: left;
-	font-size: 13px;
+	font-size: 12pt;
 	vertical-align: middle;
 	display: table-cell;
 	font-weight : bold;
@@ -603,7 +603,7 @@ body {
 
 A {
 	text-align: left;
-	font-size: 11px;
+	font-size: 11pt;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	color: #26298D;
 	outline : none;
@@ -667,7 +667,7 @@ td {
 	color: #2F4632;
 	margin: 0px;
 	text-align: center;
-	font-size: 12px;
+	font-size: 12pt !Important;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
