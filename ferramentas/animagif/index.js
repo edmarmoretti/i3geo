@@ -268,7 +268,7 @@ i3GEOF.animagif =
 	ativaFoco : function() {
 		var i = $i("i3GEOF.animagif_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	salvaParametros: function(){
 		//monta a string JSON que sera enviada para gravacao

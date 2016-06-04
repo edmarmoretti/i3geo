@@ -473,6 +473,7 @@ i3GEO.janela =
 			temp = $i(id + "_c");
 			if(temp && temp.style){
 				temp.style.maxWidth = "90%";
+				temp.style.zIndex = 50000;
 			}
 			temp = $i(id);
 			if(temp && temp.style){

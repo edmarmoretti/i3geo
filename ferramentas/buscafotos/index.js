@@ -214,7 +214,7 @@ i3GEOF.buscaFotos = {
 		{return;}
 		var i = $i("i3GEOF.buscaFotos_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: mostraMenu

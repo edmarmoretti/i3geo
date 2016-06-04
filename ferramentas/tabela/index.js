@@ -527,7 +527,7 @@ i3GEOF.tabela =
 			}
 			var i = $i(id + "_c").style;
 			i3GEO.janela.ULTIMOZINDEX++;
-			i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
+			i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 		},
 		vinculos : {
 			ligacoes : [],

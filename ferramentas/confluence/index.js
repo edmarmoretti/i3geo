@@ -158,7 +158,7 @@ i3GEOF.confluence = {
 	ativaFoco: function(){
 		var i = $i("i3GEOF.confluence_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: escondexy

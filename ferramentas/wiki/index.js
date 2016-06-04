@@ -159,7 +159,7 @@ i3GEOF.wiki = {
 	ativaFoco: function(){
 		var i = $i("i3GEOF.wiki_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: lista

@@ -396,7 +396,7 @@ i3GEOF.selecao =
 			i3GEOF.selecao.mudaicone();
 			var i = $i("i3GEOF.selecao_c").style;
 			i3GEO.janela.ULTIMOZINDEX++;
-			i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
+			i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 			if (i3GEO.Interface.ATUAL != "openlayers") {
 				i3GEO.Interface[i3GEO.Interface.ATUAL].recalcPar();
 			}

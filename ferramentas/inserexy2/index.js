@@ -231,7 +231,7 @@ i3GEOF.inserexy = {
 		i3GEO.barraDeBotoes.ativaIcone("inserexy");
 		var i = $i("i3GEOF.inserexy_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 21000 + i3GEO.janela.ULTIMOZINDEX;
+		i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: montaComboLocal
