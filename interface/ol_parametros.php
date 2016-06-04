@@ -83,20 +83,20 @@
 		<td id="barraInferior" style="background-image:url('../imagens/rodape.png');height:10px"></td>
 	</tr>
 </table>
-	<div id="i3GEOlogoMarca" style="width:95%; max-width:600px; text-align:center;margin: auto auto; box-shadow: 0 1px 13px gray; border-radius: 5px;">
-		<table style="width:100%;">
+	<div id="i3GEOlogoMarca">
+		<table>
 			<tr>
 				<td>
 					<div id=versaoi3geo></div>
-					<h1 style="font-size:14pt;padding:5px;">i3Geo
+					<h1 class="i3GEOlogoMarca">i3Geo
 						- Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h1>
-					<h1 style="font-size:14pt;padding:5px;">Baseado
+					<h1 class="i3GEOlogoMarca">Baseado
 						no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico
 						Brasileiro</h1>
 				</td>
 			</tr>
 		</table>
-		<img style="width:inherit;padding:5px;" src='../imagens/logo_inicio.png'>
+		<img src='../imagens/logo_inicio.png'>
 	</div>
 
 <div id="i3GEOguiaMovel" style="position:absolute;display:block;border:0px solid white;text-align:left;z-index:2000;background-color:none">
