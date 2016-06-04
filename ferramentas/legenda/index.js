@@ -436,7 +436,7 @@ i3GEOF.legenda =
 					+ i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=5&idajuda=41' ><b> </b></a></div></div></div>";
 			janela =
-				i3GEO.janela.cria("490px", "340px", "", "", "", titulo, "i3GEOF.legenda", false, "hd", cabecalho, minimiza, function() {
+				i3GEO.janela.cria("540px", "350px", "", "", "", titulo, "i3GEOF.legenda", false, "hd", cabecalho, minimiza, function() {
 					i3GEO.guias.ajustaGuiaFerramenta("i3GEOF.legenda", "i3GEOlegenda");
 				}, true, "", "", "nao");
 			divid = janela[2].id;
@@ -1981,7 +1981,7 @@ i3GEOF.legenda =
 						$i("i3GEOlegendaComboSize").innerHTML = retorno.dados.replace("id=''"," onchange='$i(\"i3GEOlegendasizes\").value = this.value'");
 					}
 				});
-				
+
 				i3GEO.util.aplicaAquarela("i3GEOlegendaParametrosEstilos");
 				p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid="

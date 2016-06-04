@@ -193,6 +193,27 @@ i3GEO.configura =
 				],
 				"analise" : [
 					{
+						id : "omenudataMedir",
+						text : '> <b>' + $trad("medir") + '</b>',
+						submenu : {
+							id : "subAnaliseMedir",
+							itemdata : [
+								[
+									{
+										id : "omenudataMedirArea",
+										text : $trad("d21at"),
+										url : "javascript:i3GEO.analise.medeArea.inicia()"
+									},
+									{
+										id : "omenudataMedirDist",
+										text : $trad("d21t"),
+										url : "javascript:i3GEO.analise.medeDistancia.inicia()"
+									}
+								]
+							]
+						}
+					},
+					{
 						id : "omenudataAnalise1",
 						text : '> <b>' + $trad("u22") + '</b>',
 						submenu : {
@@ -1652,11 +1673,6 @@ i3GEO.configura =
 					dica : $trad("d21"),
 					titulo : $trad("d21t"),
 					funcaoonclick : function() {
-						i3GEO.barraDeBotoes.ativaIcone("mede");
-						if ($i(i3GEO.Interface.IDMAPA)) {
-							$i(i3GEO.Interface.IDMAPA).title = "";
-							i3GEO.util.mudaCursor(i3GEO.configura.cursores, "distancia", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
-						}
 						i3GEO.analise.medeDistancia.inicia();
 					}
 				},
@@ -1667,11 +1683,6 @@ i3GEO.configura =
 					dica : $trad("d21a"),
 					titulo : $trad("d21at"),
 					funcaoonclick : function() {
-						i3GEO.barraDeBotoes.ativaIcone("area");
-						if ($i(i3GEO.Interface.IDMAPA)) {
-							$i(i3GEO.Interface.IDMAPA).title = "";
-							i3GEO.util.mudaCursor(i3GEO.configura.cursores, "area", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
-						}
 						i3GEO.analise.medeArea.inicia();
 					}
 				},

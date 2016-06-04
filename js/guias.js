@@ -97,6 +97,66 @@ i3GEO.guias =
 		 * {objeto}
 		 */
 		CONFIGURA : {
+			"identificaBalao" : {
+				icone : "imagens/gisicons/tips.png",
+				titulo : $trad("d7a"),
+				id : "guiaIdentificaBalao",
+				idconteudo : "",
+				click : function() {
+					if (i3GEO.arvoreDeCamadas.filtraCamadas("etiquetas", "", "diferente", i3GEO.arvoreDeCamadas.CAMADAS) === "") {
+						i3GEO.janela.tempoMsg($trad("d31"));
+						return;
+					}
+					if ($i(i3GEO.Interface.IDMAPA)) {
+						$i(i3GEO.Interface.IDMAPA).title = "";
+						var temp = "identifica";
+						i3GEO.util.mudaCursor(i3GEO.configura.cursores, temp, i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
+					}
+					i3GEO.barraDeBotoes.ativaIcone("identificaBalao");
+					if (i3GEO.eventos.cliquePerm.ativo === false) {
+						// na opcao de identificacao so e permitido um evento
+						i3GEO.eventos.MOUSECLIQUE = [
+							i3GEO.configura.funcaoTip
+						];
+					} else {
+						// desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
+						i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoIdentifica]);
+						i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoTip]);
+					}
+					i3GEO.eventos.cliquePerm.ativa();
+				}
+			},
+			"identifica" : {
+				icone : "imagens/gisicons/pointer-info.png",
+				titulo : $trad("d7"),
+				id : "guiaIdentifica",
+				idconteudo : "",
+				click : function() {
+					var temp;
+					if ($i(i3GEO.Interface.IDMAPA)) {
+						$i(i3GEO.Interface.IDMAPA).title = "";
+						temp = "identifica";
+						i3GEO.util.mudaCursor(i3GEO.configura.cursores, temp, i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
+					}
+					i3GEO.barraDeBotoes.ativaIcone("identifica");
+					i3GEO.eventos.cliquePerm.desativa();
+					if (i3GEO.eventos.cliquePerm.ativo === false) {
+						// caso seja um clique para desativar
+						if (i3GEO.eventos.MOUSECLIQUE.toString().search(i3GEO.configura.funcaoIdentifica) >= 0) {
+							i3GEO.eventos.MOUSECLIQUE.remove(i3GEO.configura.funcaoIdentifica);
+							return;
+						}
+						// na opcao de identificacao so e permitido um evento
+						i3GEO.eventos.MOUSECLIQUE = [
+							i3GEO.configura.funcaoIdentifica
+						];
+					} else {
+						// desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
+						i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoTip]);
+						i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoIdentifica]);
+					}
+				}
+			},
 			"temas" : {
 				icone : "imagens/layer.png",
 				titulo : $trad("g4a"),

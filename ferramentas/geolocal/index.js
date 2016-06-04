@@ -43,14 +43,14 @@ i3GEOF.geolocal =
 	{
 		/*
 		 * Variavel: posicoes
-		 * 
+		 *
 		 * Objetos capturados
 		 */
 		posicoes : [],
 		tempo : null,
 		/*
 		 * Variavel: aguarde
-		 * 
+		 *
 		 * Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 		 */
 		aguarde : "",
@@ -68,11 +68,11 @@ i3GEOF.geolocal =
 		},
 		/*
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
@@ -100,11 +100,11 @@ i3GEOF.geolocal =
 		},
 		/*
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
@@ -113,7 +113,7 @@ i3GEOF.geolocal =
 		},
 		/*
 		 * Function: iniciaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function() {
@@ -134,7 +134,7 @@ i3GEOF.geolocal =
 					+ "<a class=ajuda_usuario target=_blank href='"
 					+ i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=6&idajuda=118' ><b> </b></a></div>";
-			janela = i3GEO.janela.cria("290", "220", "", "", "", titulo, "i3GEOF.geolocal", false, "hd", cabecalho, minimiza);
+			janela = i3GEO.janela.cria("310", "230", "", "", "", titulo, "i3GEOF.geolocal", false, "hd", cabecalho, minimiza);
 			divid = janela[2].id;
 			$i("i3GEOF.geolocal_corpo").style.backgroundColor = "white";
 			$i("i3GEOF.geolocal_corpo").style.textAlign = "left";

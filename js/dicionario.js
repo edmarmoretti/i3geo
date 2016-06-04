@@ -2750,5 +2750,12 @@ var g_traducao =
    				en : "New name",
    				es : "Nuevo nombre"
    			}
-   		]
+   		],
+   		"medir" : [
+			{
+				pt : "Medir/Calcular",
+				en : "",
+				es : ""
+			}
+		]
 	};
