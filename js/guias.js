@@ -192,7 +192,12 @@ i3GEO.guias =
 				click : function() {
 					i3GEO.guias.mostra("legenda");
 					i3GEO.util.defineValor(i3GEO.mapa.legendaHTML.ID, "innerHTML", "");
-					i3GEO.mapa.legendaHTML.cria("guia4obj");
+					if($i("arvoreLegenda")){
+						i3GEO.mapa.legendaHTML.cria("arvoreLegenda");
+					}
+					else{
+						i3GEO.mapa.legendaHTML.cria("guia4obj");
+					}
 				}
 			},
 			"mapas" : {
