@@ -1,3 +1,9 @@
+#i3GEOcopyright {
+	position: absolute;
+	left: 10px;
+	top: 2.8em;
+	display: block;
+}
 /*
 para o campo escala e coordenadas
 */
@@ -47,15 +53,15 @@ no caso do OL3
 }
 
 .ol-zoom {
-	top: 40px;
+	top: 3.8em;
 }
 
 .ol-zoomslider {
-	top: 110px;
+	top: 8.2em;
 }
 
 .ol-scale-line {
-	bottom: 30px;
+	bottom: 2em;
 }
 
 .olControlEditingToolbar1 div {
@@ -104,10 +110,10 @@ Configuracoes especificas dos elementos que ficam no rodape
 	border: 0px solid white;
 }
 #escala input {
-	background: rgba(0, 60, 136, 0.3);
+	background: rgba(0, 60, 136, 0.5);
 	color: white;
 	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size: 12pt;
+	font-size: 1em;
 	margin: 0;
 	border: 0px solid white;
 	box-shadow: none;
@@ -118,20 +124,20 @@ Configuracoes especificas dos elementos que ficam no rodape
 	z-index: 20000;
 }
 #i3GEOcompartilhar td {
-	background: rgba(0, 60, 136, 0.3);
+	background: rgba(0, 60, 136, 0.5);
 }
 .i3GeoMascaraCoord {
 	width: 100%;
 }
 .i3GeoMascaraCoord td {
-	background: rgba(0, 60, 136, 0.3);
+	background: rgba(0, 60, 136, 0.5);
 	color: white;
 }
 .i3GeoMascaraCoord input {
-	background: rgba(0, 60, 136, 0.3);
+	background: rgba(0, 60, 136, 0.5);
 	color: white;
 	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size: 10px;
+	font-size: 1em;
 	margin: 0;
 	border: 0px solid white;
 	box-shadow: none;
@@ -141,14 +147,14 @@ Configuracoes especificas dos elementos que ficam no rodape
 }
 .contemCaixaTipoCoord {
 	overflow: hidden;
-	width: 60pt;
-	background-color: rgba(0, 60, 136, 0.3);
+	width: 4em;
+	background-color: rgba(0, 60, 136, 0.5);
 }
 .i3GeoMascaraCoord select {
 	border: 0px solid #B4B4B4;
 	left: 0px;
-	width: 60pt;
-	background-color: rgba(0, 60, 136, 0.3);
+	width: 4em;
+	background-color: rgba(0, 60, 136, 0.5);
 	box-shadow: none !important;
 	opacity: 0.8 !important;
 	color: white;
@@ -161,7 +167,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 	z-index : 50;
 }
 #localizarxy input, #localizarxy select {
-	font-size: 12pt;
+	font-size: 1em;
 }
 /*
 Imagens de fundo da barra de botoes

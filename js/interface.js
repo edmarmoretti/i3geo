@@ -1681,6 +1681,9 @@ i3GEO.Interface =
 						$i(i3GEO.Interface.IDMAPA).appendChild(temp);
 					}
 				}
+				else if (i3GEO.parametros.copyright != "" && $i("i3GEOcopyright")){
+					$i("i3GEOcopyright").innerHTML = i3GEO.parametros.copyright;
+				}
 				if (i3GEO.Interface.openlayers.LAYERFUNDO != "") {
 					i3GEO.Interface.openlayers.ativaFundo(i3GEO.Interface.openlayers.LAYERFUNDO);
 				}
