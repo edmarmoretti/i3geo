@@ -264,12 +264,34 @@ user-select: none;
 -o-user-select: text;
 user-select: text;
 }
-#i3GEOcopyright{
+#i3GEOlogoMarca {
 display: block;
-top: 0px;
-left: 40px;
+top: 10px;
 zIndex: 5000;
-position: absolute;
+}
+#i3GEOlogoMarca > table {
+width: 100%;
+}
+.i3GEOlogoMarca {
+font-size:14pt;
+padding:5px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+background-color: white;
+}
+#i3GEOlogoMarca > img {
+width:inherit;
+padding:5px;
+}
+/*
+Banner inicial
+*/
+#i3GEOlogoMarca {
+width:95%;
+max-width:600px;
+text-align:center;
+margin: auto auto;
+box-shadow: 0 1px 13px gray;
+border-radius: 5px;
 }
 /*
 Para nao marcar links
@@ -413,7 +435,7 @@ margin-left: 30px;
 cursor: move;
 }
 .i3GEOarvCamGrupo {
-font-size: 13px;
+font-size: 12pt;
 margin: auto;
 text-align: left;
 cursor: pointer;
@@ -421,7 +443,7 @@ top: -1px;
 font-weight : bold;
 }
 .i3GEOarvCamTema {
-font-size: 13px;
+font-size: 12pt;
 margin: auto;
 text-align: left;
 cursor: pointer;
@@ -430,7 +452,7 @@ font-weight : bold;
 }
 .i3GEOarvCamTemaIE {
 text-align: left;
-font-size: 13px;
+font-size: 12pt;
 vertical-align: middle;
 display: table-cell;
 font-weight : bold;
@@ -773,7 +795,7 @@ z-index: 1000;
 }
 A {
 text-align: left;
-font-size: 11px;
+font-size: 11pt;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 color: #26298D;
 outline : none;
@@ -829,7 +851,7 @@ padding: 0px;
 color: #2F4632;
 margin: 0px;
 text-align: center;
-font-size: 12px;
+font-size: 12pt !Important;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 .ajuda_usuario {
@@ -1770,53 +1792,32 @@ width: 20px;
 height: 10px;
 }
 #menuinterface {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -550px;
-width: 52px;
+width: 75px;
 height: 15px;
 }
 #menuajudaMenu {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -500px;
 width: 52px;
 height: 15px;
 }
 #menuanalise {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -525px;
 width: 52px;
 height: 15px;
 }
 #menujanelas {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -550px;
 width: 52px;
 height: 15px;
 }
 #menuferramentas {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -2157px;
-width: 65px;
+width: 75px;
 height: 15px;
 }
 #menuarquivos {
-background-image: URL('../imagens/sprite.png');
-background-repeat: no-repeat;
-background-position: 3px -575px;
 width: 52px;
 height: 15px;
 }
 #menui3GeoMenuMarcador {
-background-image: url("../imagens/sprite.png");
-background-position: 0px -2226px;
-background-repeat: no-repeat;
 height: 15px;
-width: 57px;
+width: 75px;
 }
 .menuTresLinhas {
 float: left;
@@ -2381,6 +2382,8 @@ margin-left: 8px;
 border: solid 1px gray;
 box-shadow: 0px 1px 3px lightgray;
 cursor: pointer;
+widh: 40px;
+height: 40px;
 }
 #i3GEOguiaMovel .iconeGuiaMovel{
 padding: 3px 0px;
@@ -2618,6 +2621,10 @@ background-size: 16px;
 }
 .i3GEOiconeAnimagif {
 background-image: URL('../imagens/oxygen/16x16/tool-animator.png');
+background-size: 16px;
+}
+.i3GEOiconeCliqueGrafico {
+background-image: URL('../imagens/oxygen/16x16/flag-red.png');
 background-size: 16px;
 }
 .i3GEOiconeAdd {
@@ -2948,11 +2955,11 @@ border-color: #D3D3D3;
 border-radius: 7px;
 }
 .ygtvcontent {
-font-size: 12px;
+font-size: 12pt;
 padding: 0 3px 10px 0;
 }
 .ygtvcell {
-font-size: 12px;
+font-size: 12pt;
 padding: 0 3px 5px 0;
 }
 .comboTemasCabecalho .yuimenuitemlabel {

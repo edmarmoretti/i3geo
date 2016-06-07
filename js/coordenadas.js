@@ -353,30 +353,18 @@ i3GEO.coordenadas =
 		 */
 		criaMascaraDMS : function(prefixo, titulo, caixa) {
 			var ins =
-				'<table class="i3GeoMascaraCoord" id=' + prefixo
-					+ ' ><tr>'
-					+ "<td class='contemCaixaTipoCoord'>"
+				'<div class="i3GeoMascaraCoord" id=' + prefixo
+					+ ' >'
 					+ caixa
-					+ "&nbsp;</td>"
-					+ '<td style=width:10px;text-align:right >&nbsp;X:&nbsp;</td>'
-					+ '<td>'
-					+ $inputText('', '', prefixo + 'xg', 'grau', '3', '-00')
-					+ '</td>'
-					+ '<td>'
-					+ $inputText('', '', prefixo + 'xm', 'minuto', '2', '00')
-					+ '</td>'
-					+ '<td>'
-					+ $inputText('', '', prefixo + 'xs', 'segundo', '5', '00.00')
-					+ '</td>'
-					+ '<td>&nbsp;Y:&nbsp;'
-					+ $inputText('', '', prefixo + 'yg', 'grau', '3', '-00')
-					+ '</td>'
-					+ '<td>'
-					+ $inputText('', '', prefixo + 'ym', 'minuto', '2', '00')
-					+ '</td>'
-					+ '<td>'
-					+ $inputText('', '', prefixo + 'ys', 'segundo', '5', '00.00')
-					+ '</td>', temp =
+					+ '&nbsp;X:&nbsp;'
+					+ '<input type="text" name="" value="-00" class="digitar" size="3" title="grau" id="' + prefixo + 'xg" onclick="javascript:this.select();">'
+					+ '<input type="text" name="" value="00" class="digitar" size="2" title="minuto" id="' + prefixo + 'xm" onclick="javascript:this.select();">'
+					+ '<input type="text" name="" value="00.00" class="digitar" size="5" title="segundo" id="' + prefixo + 'xs" onclick="javascript:this.select();">'
+					+ '&nbsp;Y:&nbsp;'
+					+ '<input type="text" name="" value="-00" class="digitar" size="3" title="grau" id="' + prefixo + 'yg" onclick="javascript:this.select();">'
+					+ '<input type="text" name="" value="00" class="digitar" size="2" title="minuto" id="' + prefixo + 'ym" onclick="javascript:this.select();">'
+					+ '<input type="text" name="" value="00.00" class="digitar" size="5" title="segundo" id="' + prefixo + 'ys" onclick="javascript:this.select();">',
+				temp =
 				'var ' + prefixo
 					+ 'xxx = i3GEO.calculo.dms2dd($i(\''
 					+ prefixo
@@ -400,12 +388,12 @@ i3GEO.coordenadas =
 					+ prefixo
 					+ 'yyy);';
 			ins +=
-				'<td><img class=ticfind style="margin-left:8px;" title=zoom onclick="' + temp
+				'<img class=ticfind style="margin-left:8px;" title=zoom onclick="' + temp
 					+ '" src="'
 					+ i3GEO.configura.locaplic
 					+ "/imagens/branco.gif"
-					+ '" /></td>'
-					+ "</tr></table>";
+					+ '" />'
+					+ "</div>";
 			return ins;
 		},
 		/**

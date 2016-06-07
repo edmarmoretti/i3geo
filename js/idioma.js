@@ -76,7 +76,7 @@ i3GEO.idioma = {
 	 *
 	 * true
 	 */
-	MOSTRASELETOR : true,
+	MOSTRASELETOR : false,
 	/**
 	 * Propriedade: IDSELETOR
 	 *

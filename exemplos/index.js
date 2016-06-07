@@ -442,6 +442,11 @@ botoesIni = [
 	"link":"login4.htm",
 	"corpo":"Exige login e verifica acesso &agrave; p&aacute;gina O mapa s&oacute; &eacute; aberto se o usu&aacute;rio estiver cadastrado em um dos pap&eacute;is que pode acessar essa opera&ccedil;&atilde;o.",
 	"tag":"Login"
+},
+{
+	"link":"idioma.htm",
+	"corpo":"Mostra o seletor deidiomas no rodap&eacute;",
+	"tag":"Idioma"
 }
 ];
 

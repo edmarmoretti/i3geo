@@ -809,7 +809,7 @@ i3GEO.configura =
 		 *
 		 * true
 		 */
-		ajustaDocType : true,
+		ajustaDocType : false,
 		/**
 		 * Propriedade: tipotip
 		 *
@@ -932,7 +932,7 @@ i3GEO.configura =
 		 *
 		 * 106
 		 */
-		diminuiyM : 70,
+		diminuiyM : 0,
 		/**
 		 * Propriedade: diminuiyN
 		 *
@@ -946,7 +946,7 @@ i3GEO.configura =
 		 *
 		 * 103
 		 */
-		diminuiyN : 70,
+		diminuiyN : 0,
 		/**
 		 * Propriedade: autotamanho
 		 *

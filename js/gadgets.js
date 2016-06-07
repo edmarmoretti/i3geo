@@ -223,14 +223,13 @@ i3GEO.gadgets =
 					onde.style.display = "block";
 				}
 				if (!$i("i3geo_escalanum")) {
-					i =
-						"<form id='i3GEOescalanumForm' >" + $inputText(id, "100", "i3geo_escalanum", $trad("d10"), "10", parseInt(
-							i3GEO.parametros.mapscale, 10))
-							+ "</form>";
-					ins = "<table style='width:120px;'><tr><td>" + i;
-					temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
-					temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';
-					ins += "</td></tr></table>";
+					ins =
+						"<form id='i3GEOescalanumForm' >"
+						+ "<input type='text' name='' value='"
+						+ parseInt(i3GEO.parametros.mapscale, 10)
+						+ "' class='digitar' size='10' title='' id='i3geo_escalanum' onclick='javascript:this.select();'>"
+						+ "</form>";
+
 					onde.innerHTML = ins;
 					$i("i3GEOescalanumForm").onsubmit =
 						function() {

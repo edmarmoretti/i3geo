@@ -2,19 +2,19 @@
 para o campo escala e coordenadas
 */
 .fundoRodape .digitar {
-    background-color: #222222 !IMPORTANT;
-    opacity: 0.9 !IMPORTANT;
+    background-color: none !IMPORTANT;
+    opacity: 0.7 !IMPORTANT;
     box-shadow: none !IMPORTANT;
 }
 
 .fundoRodape .digitar:hover {
     background-color: #222222 !IMPORTANT;
-    opacity: 0.9 !IMPORTANT;
+    opacity: 0.7 !IMPORTANT;
 }
 
 .fundoRodape .digitarOver {
     background-color: #222222 !IMPORTANT;
-    opacity: 0.9 !IMPORTANT;
+    opacity: 0.7 !IMPORTANT;
 }
 /* menu */
 #contemMenu {
@@ -23,6 +23,11 @@ para o campo escala e coordenadas
 	text-align: right;
 	border-width: 0pt 0pt 1px;
 	border-color: rgb(240, 240, 240);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	z-index: 5;
 }
 #menus {
 	height: 35px;
@@ -39,6 +44,18 @@ no caso do OL3
 	position: absolute;
 	right: 0;
 	top: 10px;
+}
+
+.ol-zoom {
+	top: 40px;
+}
+
+.ol-zoomslider {
+	top: 110px;
+}
+
+.ol-scale-line {
+	bottom: 30px;
 }
 
 .olControlEditingToolbar1 div {
@@ -64,7 +81,6 @@ Estilo geral do rodape da pagina que contem a barra de escala, coordenadas, etc
 		padding: 0;
 		position: relative;
 		text-align: center;
-		background: black;
 }
 .fundoRodape .ticfind {
 	background-image: url("../imagens/botao-tiny-zoomparacoordenadas.png");
@@ -82,38 +98,37 @@ Configuracoes especificas dos elementos que ficam no rodape
 	float: left;
 }
 #escala td {
-	background: black;
 	float: left;
 }
 #escala span {
 	border: 0px solid white;
 }
 #escala input {
-	background: black;
+	background: rgba(0, 60, 136, 0.3);
 	color: white;
 	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size: 10px;
+	font-size: 12pt;
 	margin: 0;
 	border: 0px solid white;
 	box-shadow: none;
-	text-align: right;
+	text-align: center;
 }
 #i3GEOcompartilhar {
 	border: 0px solid white;
 	z-index: 20000;
 }
 #i3GEOcompartilhar td {
-	background: black;
+	background: rgba(0, 60, 136, 0.3);
 }
 .i3GeoMascaraCoord {
 	width: 100%;
 }
 .i3GeoMascaraCoord td {
-	background: black;
+	background: rgba(0, 60, 136, 0.3);
 	color: white;
 }
 .i3GeoMascaraCoord input {
-	background: black;
+	background: rgba(0, 60, 136, 0.3);
 	color: white;
 	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 10px;
@@ -126,27 +141,27 @@ Configuracoes especificas dos elementos que ficam no rodape
 }
 .contemCaixaTipoCoord {
 	overflow: hidden;
-	width: 40px;
-	background-color: black;
+	width: 60pt;
+	background-color: rgba(0, 60, 136, 0.3);
 }
 .i3GeoMascaraCoord select {
 	border: 0px solid #B4B4B4;
-	font-size: 10px;
-	height: 17px;
-	left: 1px;
-	position: relative;
-	top: 7px;
-	width: 130%;
-	background-color: #222222 !important;
+	left: 0px;
+	width: 60pt;
+	background-color: rgba(0, 60, 136, 0.3);
 	box-shadow: none !important;
-	opacity: 0.9 !important;
+	opacity: 0.8 !important;
 	color: white;
+	height: auto;
 }
 .i3GeoMascaraCoord tr {
 	border: 0px solid white;
 }
 #localizarxy {
 	z-index : 50;
+}
+#localizarxy input, #localizarxy select {
+	font-size: 12pt;
 }
 /*
 Imagens de fundo da barra de botoes
