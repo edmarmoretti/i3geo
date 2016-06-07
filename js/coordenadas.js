@@ -444,24 +444,16 @@ i3GEO.coordenadas =
 		 */
 		criaMascaraMetrica : function(prefixo, titulo, caixa) {
 			var ins =
-				"<table id=" + prefixo
-					+ " class='i3GeoMascaraCoord' ><tr>"
-					+ "<td class='contemCaixaTipoCoord' >"
+				"<div id=" + prefixo
+					+ " class='i3GeoMascaraCoord' >"
 					+ caixa
-					+ "&nbsp;<td>"
-					+ "<td style=width:100px;text-align:right >"
-					+ titulo
-					+ " X:&nbsp;</td>"
-					+ "<td>"
-					+ $inputText("", "", prefixo + "X", "X", "12", "00")
-					+ "&nbsp;</td>"
-					+ "<td>Y:"
-					+ $inputText("", "", prefixo + "Y", "Y", "12", "00")
-					+ "&nbsp;</td>"
-					+ "<td>Zn:"
-					+ $inputText("", "", prefixo + "ZN", "Zona", "2", "--")
-					+ "&nbsp;</td>"
-					+ "</tr></table>";
+					+ "&nbsp;X:&nbsp;"
+					+ '<input type="text" name="" value="00" class="digitar" size="12" title="X" id="' + prefixo + 'X" >'
+					+ "&nbsp;Y:&nbsp;"
+					+ '<input type="text" name="" value="00" class="digitar" size="12" title="Y" id="' + prefixo + 'Y" >'
+					+ "&nbsp;Zn:&nbsp;"
+					+ '<input type="text" name="" value="--" class="digitar" size="2" title="Zona" id="' + prefixo + 'ZN" >'
+					+ "</div>";
 			return ins;
 		},
 		/**
@@ -488,24 +480,18 @@ i3GEO.coordenadas =
 				funcao = "i3GEO.coordenadas.geohash.zoomCodigo(\'" + prefixo + "Codigo\')";
 			}
 			ins =
-				"<table id=" + prefixo
-					+ " class='i3GeoMascaraCoord' ><tr>"
-					+ "<td class='contemCaixaTipoCoord' >"
+				"<div id=" + prefixo + " class='i3GeoMascaraCoord' >"
 					+ caixa
-					+ "&nbsp;<td>"
-					+ "<td style=width:100px;text-align:right >"
-					+ titulo
-					+ " :&nbsp;</td>"
-					+ "<td>"
-					+ $inputText("", "", prefixo + "Codigo", "Cod", "12", "00")
-					+ "&nbsp;</td>"
-					+ '<td><img class=tic title=zoom onclick="'
+					+ "&nbsp;"
+					+ '<input type="text" name="" value="00" class="digitar" size="12" title="Cod" id="' + prefixo + 'Codigo" >'
+					+ "&nbsp;"
+					+ '<img class=ticfind style="margin-left:8px;" title=zoom onclick="'
 					+ funcao
 					+ '" src="'
 					+ i3GEO.configura.locaplic
 					+ "/imagens/branco.gif"
-					+ '" /></td>'
-					+ "</tr></table>";
+					+ '" />'
+					+ "</div>";
 			return ins;
 		},
 		/**

@@ -97,6 +97,66 @@ i3GEO.guias =
 		 * {objeto}
 		 */
 		CONFIGURA : {
+			"zoomanterior" : {
+				icone : "imagens/gisicons/zoom-last.png",
+				titulo : $trad("d2"),
+				id : "guiaZoomanterior",
+				idconteudo : "",
+				click : function() {
+					i3GEO.navega.extensaoAnterior();
+				}
+			},
+			"zoomli" : {
+				icone : "imagens/gisicons/zoom-region.png",
+				titulo : $trad("d3"),
+				id : "guiaZoomli",
+				idconteudo : "",
+				click : function() {
+					if (DetectaMobile("DetectMobileLong")) {
+						i3GEO.janela.tempoMsg($trad("x70"));
+					} else {
+						i3GEO.janela.tempoMsg($trad("x69"));
+					}
+					if (i3GEO.Interface.ATUAL === "googlemaps") {
+						// alert("Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse");
+						i3GEO.barraDeBotoes.ativaIcone("pan");
+						i3GEO.barraDeBotoes.BOTAOPADRAO = "pan";
+						i3GeoMap.setOptions({
+							draggable : true
+						});
+						i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
+					}
+					if (i3GEO.Interface.ATUAL === "openlayers") {
+						//i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
+						// i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLzoom);
+					}
+				}
+			},
+			"zoomproximo" : {
+				icone : "imagens/gisicons/zoom-next.png",
+				titulo : $trad("d2"),
+				id : "guiaZoomproximo",
+				idconteudo : "",
+				click : function() {
+					i3GEO.navega.extensaoProximo();
+				}
+			},
+			"zoomtot" : {
+				icone : "imagens/gisicons/zoom-extent.png",
+				titulo : $trad("d2"),
+				id : "guiaZoomtot",
+				idconteudo : "",
+				click : function() {
+					if (i3GEO.Interface.ATUAL === "openlayers") {
+						i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.extentTotal);
+						return;
+					}
+					if (i3GEO.Interface.ATUAL === "googlemaps") {
+						i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.extentTotal);
+						return;
+					}
+				}
+			},
 			"identificaBalao" : {
 				icone : "imagens/gisicons/tips.png",
 				titulo : $trad("d7a"),

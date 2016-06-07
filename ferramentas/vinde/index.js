@@ -107,7 +107,7 @@ i3GEOF.vinde = {
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
-		titulo = "<table><tr><td><b>INDE-Br</b></td><td></td></tr></table>";
+		titulo = "<table><tr><td>INDE-Br</td><td></td></tr></table>";
 		d = {html:titulo};
 		tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
 		tempNode.enableHighlight = true;
@@ -155,6 +155,11 @@ i3GEOF.vinde = {
 			}
 		};
 		criaNo(dados.arvore,tempNode);
+		//adiciona um no para expandir o espaco onde fica a arvore
+		titulo = " ";
+		d = {html:titulo};
+		tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
+
 		if(arvore){
 			tempNode.collapseAll();
 			arvore.draw();

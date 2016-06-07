@@ -56,7 +56,7 @@ no caso do OL3
 	top: 3.8em;
 }
 
-.ol-zoomslider {
+.ol-touch .ol-zoomslider, .ol-zoomslider {
 	top: 8.2em;
 }
 
@@ -100,8 +100,14 @@ Configuracoes especificas dos elementos que ficam no rodape
 #seletorIdiomas {
 	float: right;
 }
+
 #escala {
-	float: left;
+	width: 100px;
+	left: 7px;
+	text-align: left;
+	position: absolute;
+	bottom: 0px;
+	display: block;
 }
 #escala td {
 	float: left;
@@ -118,6 +124,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 	border: 0px solid white;
 	box-shadow: none;
 	text-align: center;
+	height: 1.8em;
 }
 #i3GEOcompartilhar {
 	border: 0px solid white;
@@ -165,9 +172,19 @@ Configuracoes especificas dos elementos que ficam no rodape
 }
 #localizarxy {
 	z-index : 50;
+	color: white;
+	position: absolute;
+	bottom: 0px;
+	width: 350px;
+	left: 90px;
+	text-align: left;
+	font-size: 1em;
+	display: inline;
+	height: 1.8em;
 }
 #localizarxy input, #localizarxy select {
 	font-size: 1em;
+	height: 1.8em;
 }
 /*
 Imagens de fundo da barra de botoes

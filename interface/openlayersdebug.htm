@@ -51,12 +51,10 @@
 		<div id="menus"></div>
 	</div>
 	<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
-	<div id=escala class=fundoRodape
-		style="width: 100px; left: 7px; text-align: center; position: absolute; bottom: 0px; display: block;"></div>
+	<div id=escala class=fundoRodape ></div>
 
 	<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
-	<div id=localizarxy class=fundoRodape
-		style="color: white; position: absolute; bottom: 0px; width: 320pt; left: 115px; text-align: left; font-size: 12pt; display: inline"></div>
+	<div id=localizarxy class="fundoRodape" ></div>
 
 	<!-- mensagem de copyright -->
 	<div id="i3GEOcopyright" >i3Geo</div>
@@ -71,6 +69,10 @@
 			<div id="iconeGuia_dobraPagina" style="margin-top: 3px;"></div>
 			<div id="iconeGuia_identificaBalao" style="margin-top: 3px;"></div>
 			<div id="iconeGuia_identifica" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomtot" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomanterior" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomli" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomproximo" style="margin-top: 3px;"></div>
 		</div>
 		<div id="i3GEOguiaMovelMolde"
 			style="top: 0px; box-shadow: 0 2px 10px 0 #888888; position: absolute; display: none; border: 0px solid white; text-align: left; z-index: 1000; background-color: gray">
@@ -117,10 +119,10 @@
 
 		i3GEO.cria();
 		i3GEO.configura.mapaRefDisplay = "none";
-		i3GEO.barraDeBotoes.ATIVA = true;
-		i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
+		i3GEO.barraDeBotoes.ATIVA = false;
+		//i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
 		//ajusta o deslocamento da barra de botoes
-		i3GEO.barraDeBotoes.OFFSET = 25;
+		//i3GEO.barraDeBotoes.OFFSET = 25;
 
 		i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
 		i3GEO.ajuda.ATIVAJANELA = false;

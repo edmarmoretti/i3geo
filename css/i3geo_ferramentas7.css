@@ -295,7 +295,7 @@ para nao selecionar
 }
 #i3GEOlogoMarca {
 	display: block;
-	top: 10px;
+	top: 4em;
 	zIndex: 5000;
 }
 #i3GEOlogoMarca > table {
