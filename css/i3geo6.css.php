@@ -257,7 +257,7 @@ para nao selecionar
 -o-user-select: none;
 user-select: none;
 }
-.bd input, .bd textarea {
+.bd input, .bd textarea, #escala input {
 -webkit-user-select: text;
 -khtml-user-select: text;
 -moz-user-select: text;
@@ -266,7 +266,7 @@ user-select: text;
 }
 #i3GEOlogoMarca {
 display: block;
-top: 10px;
+top: 4em;
 zIndex: 5000;
 }
 #i3GEOlogoMarca > table {
@@ -2955,11 +2955,11 @@ border-color: #D3D3D3;
 border-radius: 7px;
 }
 .ygtvcontent {
-font-size: 12pt;
+font-size: 1em;
 padding: 0 3px 10px 0;
 }
 .ygtvcell {
-font-size: 12pt;
+font-size: 1em;
 padding: 0 3px 5px 0;
 }
 .comboTemasCabecalho .yuimenuitemlabel {
