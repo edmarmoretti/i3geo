@@ -795,10 +795,10 @@ var i3GEO = {
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
 		//se for mobile
-		if(i3GEO.Interface.ALTTABLET === "" && DetectaMobile("DetectMobileLong") === true){
-			menos = 20;
-			i3GEO.configura.autotamanho = true;
-		}
+		//if(i3GEO.Interface.ALTTABLET === "" && DetectaMobile("DetectMobileLong") === true){
+		//	menos = 20;
+		//	i3GEO.configura.autotamanho = true;
+		//}
 		temp = $i("contemFerramentas");
 		if (temp
 			&& temp.style
@@ -903,9 +903,9 @@ var i3GEO = {
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
 		//se for mobile
-		if(i3GEO.Interface.ALTTABLET === "" && DetectaMobile("DetectMobileLong") === true){
-			menos = 20;
-		}
+		//if(i3GEO.Interface.ALTTABLET === "" && DetectaMobile("DetectMobileLong") === true){
+		//	menos = 20;
+		//}
 		temp = $i("contemFerramentas");
 		if (temp
 			&& temp.style
@@ -922,7 +922,7 @@ var i3GEO = {
 				$i("ferramentas").style.width,
 				10);
 		}
-		document.body.style.width = "99%";
+		document.body.style.width = "100%";
 		temp = i3GEO.util.tamanhoBrowser();
 		novow = temp[0];
 		novoh = temp[1];

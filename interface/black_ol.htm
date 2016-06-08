@@ -1,19 +1,19 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>i3GEO - OpenLayers 3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+<title>i3GEO - OpenLayers</title>
 <script src="../pacotes/ol3/ol.js"></script>
 <script src="../js/i3geo.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/black.css">
+<script src="config.php?tipo=OL"></script>
 <link rel="stylesheet" type="text/css" href="../pacotes/ol3/ol.css">
+<link rel="stylesheet" type="text/css" href="../css/black.css">
 <style>
 .ol-attribution img {
 	display: none;
 }
-
 .ol-attribution.ol-uncollapsible {
 	height: 2.1em;
 	right: 24px;
@@ -22,55 +22,15 @@
 }
 </style>
 </head>
-<body id="i3geo" style='margin-left: 7px; background: white;'>
+<body id="i3geo" style='background: white;'>
+
 	<!-- inclui o nome do usuario logado -->
 	<div id="i3GEONomeLogin"
 		style="position: absolute; left: 10px; top: 12px; font-size: 11px; z-index: 50000"></div>
 	<table id='mst' summary="" style='display: none;' width=100% cellspacing='0'>
 		<tr>
-			<td id="contemMenu">
-				<!--menu suspenso-->
-				<div id="menus"></div>
-			</td>
-		</tr>
-		<tr>
-			<td style="vertical-align: top; border-width: 0px;">
-				<table width="100%" style="vertical-align: top; border-width: 0px">
-					<tr>
-						<td class=verdeclaro id=contemImg>
-							<div id=corpoMapa
-								style="position: relative; background-image: url('../imagens/i3geo1bw.jpg');"></div>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<table style="width: 100%; height: 28px">
-					<tr>
-						<td class=fundoRodape style="width: 25%">
-							<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
-							<div id=escala style="margin: auto; text-align: right; left: 15px;"></div>
-						</td>
-						<td class=fundoRodape style="width: 5%"></td>
-						<td class=fundoRodape style="width: 40%">
-							<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
-							<div id=localizarxy
-								style="margin: auto; text-align: left; font-size: 10px; display: inline-table"></div>
-						</td>
-						<td class=fundoRodape style="width: 20%">
-							<!-- bot&atilde;o de compartilhamento em redes sociais--> <!--<div id=i3GEOcompartilhar style="width: 170px; margin: auto; text-align: left; padding-top: 1px"></div> -->
-							<!-- aqui ser&aacute; inclu&iacute;do o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
-							<div id=tempoRedesenho
-								style="z-index: 100; position: absolute; top: 0px; color: green; background-color: black; width: 50px; display: none"></div>
-						</td>
-						<!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->
-						<td class=fundoRodape style="width: 10%;">
-							<div id=seletorIdiomas style="right: 15px;"></div>
-						</td>
-					</tr>
-				</table>
+			<td class=verdeclaro id=contemImg style="vertical-align: top; border-width: 0px;">
+				<div id=corpoMapa style="position: relative; background-image: url('../imagens/i3geo1bw.jpg');"></div>
 			</td>
 		</tr>
 	</table>
@@ -79,15 +39,25 @@
 			<tr>
 				<td>
 					<div id=versaoi3geo></div>
-					<h1 class="i3GEOlogoMarca">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas
-						interativos e geoprocessamento</h1>
-					<h1 class="i3GEOlogoMarca">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o
-						Portal do Software P&uacute;blico Brasileiro</h1>
+					<h1 class="i3GEOlogoMarca">i3Geo - Software livre para cria&ccedil;&atilde;o de mapas interativos e geoprocessamento</h1>
+					<h1 class="i3GEOlogoMarca">Baseado no Mapserver, &eacute; licenciado sob GPL e integra o Portal do Software P&uacute;blico Brasileiro</h1>
 				</td>
 			</tr>
 		</table>
 		<img src='../imagens/logo_inicio.png'>
 	</div>
+	<div id="contemMenu">
+		<!--menu suspenso-->
+		<div id="menus"></div>
+	</div>
+	<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
+	<div id=escala class=fundoRodape ></div>
+
+	<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
+	<div id=localizarxy class="fundoRodape" ></div>
+
+	<!-- mensagem de copyright -->
+	<div id="i3GEOcopyright" >i3Geo</div>
 
 	<div id="i3GEOguiaMovel"
 		style="visibility: hidden; position: absolute; display: block; border: 0px solid white; text-align: left; z-index: 2000; background-color: none">
@@ -99,6 +69,10 @@
 			<div id="iconeGuia_dobraPagina" style="margin-top: 3px;"></div>
 			<div id="iconeGuia_identificaBalao" style="margin-top: 3px;"></div>
 			<div id="iconeGuia_identifica" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomtot" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomanterior" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomli" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomproximo" style="margin-top: 3px;"></div>
 		</div>
 		<div id="i3GEOguiaMovelMolde"
 			style="top: 0px; box-shadow: 0 2px 10px 0 #888888; position: absolute; display: none; border: 0px solid white; text-align: left; z-index: 1000; background-color: gray">
@@ -130,157 +104,8 @@
 		</div>
 	</div>
 	<script>
-		i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://"
-				+ window.location.host + "/i3geo";
-
-		i3GEO.idioma.MOSTRASELETOR = true;
-
-		i3GEO.configura.autotamanho = false;
-		i3GEO.Interface.ATUAL = "openlayers";
-		i3GEO.Interface.IDCORPO = "contemImg";
-		i3GEO.Interface.openlayers.TILES = true;
-		//aplica ou nao a ultima extensao definida pelo usuario ao iniciar o mapa
-		i3GEO.configura.guardaExtensao = true;
-
-		i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
-		i3GEO.cria();
-		i3GEO.configura.mapaRefDisplay = "none";
-		i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
-		//ajusta o deslocamento da barra de botoes
-		i3GEO.barraDeBotoes.OFFSET = 11;
-		//ajusta a posicao da barra de botoes no IE
-		if (navm) {
-			i3GEO.barraDeBotoes.OFFSET = 5;
-		}
-		if (chro) {
-			i3GEO.barraDeBotoes.OFFSET = 15;
-		}
-
-		i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
-		i3GEO.ajuda.ATIVAJANELA = false;
-		i3GEO.idioma.IDSELETOR = "seletorIdiomas";
-
-		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = true;
-		i3GEO.mapa.AUTORESIZE = true;
-		i3GEO.guias.TIPO = "movel";
-		i3GEO.guias.guiaMovel.config.topGuiaMovel = 36;
-		i3GEO.janela.ativaAlerta();
-		i3GEO.finaliza = function() {
-			if ($i("i3GEOlogoMarca")) {
-				$i("i3GEOlogoMarca").style.display = "none";
-			}
-			//muda o valor default do botao 'enquadramento inicial'
-			i3GEO.parametros.extentTotal = "-180 -90 180 90";
-		};
-		//indica se a opcao de navegacao nas pastas do servidor sera ativada
-		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
-		i3GEO.janela.TRANSICAOSUAVE = true;
-		//desliga a camada com o mapa mundi
-		i3GEO.configura.mashuppar = "&desligar=mundo";
-		//se vc nao quer o fundo, mude visibility true para false
-		(function() {
-			var eng = new ol.layer.Tile(
-					{
-						title : "ESRI National Geographic",
-						visible : true,
-						isBaseLayer : true,
-						name : "eng",
-						source : new ol.source.TileArcGISRest(
-								{
-									url : "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
-									attributions : [ new ol.Attribution(
-											{
-												html : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
-											}) ]
-								})
-					});
-			var oce = new ol.layer.Tile(
-					{
-						title : "ESRI Ocean Basemap",
-						visible : false,
-						isBaseLayer : true,
-						name : "oce",
-						source : new ol.source.TileArcGISRest(
-								{
-									url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
-									attributions : [ new ol.Attribution(
-											{
-												html : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
-											}) ]
-								})
-					});
-			var ims = new ol.layer.Tile(
-					{
-						title : "ESRI Imagery World 2D",
-						visible : false,
-						isBaseLayer : true,
-						name : "ims",
-						source : new ol.source.TileArcGISRest(
-								{
-									url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
-									attributions : [ new ol.Attribution(
-											{
-												html : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
-											}) ]
-								})
-					});
-			var wsm = new ol.layer.Tile(
-					{
-						title : "ESRI World Street Map",
-						visible : false,
-						isBaseLayer : true,
-						name : "wsm",
-						source : new ol.source.TileArcGISRest(
-								{
-									url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
-									attributions : [ new ol.Attribution(
-											{
-												html : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
-											}) ]
-								})
-					});
-			var bra = new ol.layer.Tile(
-					{
-						title : "Base carto MMA",
-						visible : false,
-						isBaseLayer : true,
-						name : "bra",
-						source : new ol.source.TileWMS(
-								{
-									url : "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
-									params : {
-										'layers' : "baseraster",
-										'srs' : "EPSG:4326",
-										'format' : "image/png"
-									}
-								})
-					});
-			var tms = new ol.layer.Tile(
-					{
-						title : "OSGEO",
-						visible : false,
-						isBaseLayer : true,
-						name : "tms",
-						source : new ol.source.TileWMS(
-								{
-									url : "http://tilecache.osgeo.org/wms-c/Basic.py/",
-									params : {
-										'layers' : "basic",
-										'type' : "png",
-										'srs' : "EPSG:4326",
-										'format' : "image/png",
-										'VERSION' : '1.1.1'
-									},
-									attributions : [ new ol.Attribution(
-											{
-												html : '&copy; <a href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
-											}) ]
-								})
-					});
-			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ eng, oce, ims, wsm,
-					bra, tms ];
-		})();
-		i3GEO.inicia();
+	i3GEO.cria();
+	i3GEO.inicia();
 	</script>
 </body>
 </html>

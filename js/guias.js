@@ -99,7 +99,7 @@ i3GEO.guias =
 		CONFIGURA : {
 			"zoomanterior" : {
 				icone : "imagens/gisicons/zoom-last.png",
-				titulo : $trad("d2"),
+				titulo : "",
 				id : "guiaZoomanterior",
 				idconteudo : "",
 				click : function() {
@@ -134,7 +134,7 @@ i3GEO.guias =
 			},
 			"zoomproximo" : {
 				icone : "imagens/gisicons/zoom-next.png",
-				titulo : $trad("d2"),
+				titulo : "",
 				id : "guiaZoomproximo",
 				idconteudo : "",
 				click : function() {
