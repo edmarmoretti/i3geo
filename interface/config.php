@@ -52,7 +52,7 @@ i3GEO.janela.TRANSICAOSUAVE = true;
 //desliga a camada com o mapa mundi
 i3GEO.configura.mashuppar = "&desligar=mundo";
 (function() {
-	if(typeof ol != "undefined" && i3GEO.Interface.googleLike === false){
+	if(typeof ol != "undefined" && i3GEO.Interface.openlayers.googleLike === false){
 		var eng = new ol.layer.Tile(
 				{
 					title : "ESRI National Geographic",
