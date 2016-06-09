@@ -922,12 +922,19 @@ i3GEO.php =
 		adicionaTemaWMS : function(funcao, servico, tema, nome, proj, formato, versao, nomecamada, tiporep, suportasld, formatosinfo,
 			locaplic, sid, checked) {
 			var s, p, camadaArvore, par, ck;
+			if(funcao === ""){
+				funcao = function() {
+					i3GEO.janela.fechaAguarde("ajaxredesenha");
+					i3GEO.atualiza();
+				};
+			}
 			if (!locaplic || locaplic === "") {
 				locaplic = i3GEO.configura.locaplic;
 			}
 			if (!sid || sid === "") {
 				sid = i3GEO.configura.sid;
 			}
+
 			// verifica se a camada ja existe no mapa
 			if (checked || checked == false) {
 				s = servico + "&layers=" + tema + "&style=" + nome;
@@ -941,9 +948,6 @@ i3GEO.php =
 					return;
 				}
 			}
-			// if(i3GEO.Interface.openlayers.googleLike === true){
-			// proj = "EPSG:3857";
-			// }
 			p = locaplic + "/classesphp/mapa_controle.php", par =
 				"g_sid=" + sid + "&funcao=adicionatemawms&servico=" + servico + "&tema=" + tema + "&nome=" + nome + "&proj=" + proj
 					+ "&formato=" + formato + "&versao=" + versao + "&nomecamada=" + nomecamada + "&tiporep=" + tiporep + "&suportasld="

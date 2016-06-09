@@ -784,7 +784,6 @@ i3GEO.arvoreDeCamadas =
 				flag : true
 			}
 		},
-
 		/**
 		 * Function: cria
 		 *

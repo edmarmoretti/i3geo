@@ -449,6 +449,8 @@ i3GEO.arvoreDeTemas = {
 	 * {String}
 	 */
 	SID : null,
+	//contador utilizado para definir um ID para cada texto de WMS
+	CONTATEMAWMS : 0,
 	/**
 	 * Function: flutuante
 	 *
@@ -481,6 +483,7 @@ i3GEO.arvoreDeTemas = {
 		corpo.style.overflow = "auto";
 		if ($i(i3GEO.arvoreDeTemas.IDHTML)) {
 			$i(i3GEO.arvoreDeTemas.IDHTML).innerHTML = "";
+			$i(i3GEO.arvoreDeTemas.IDHTML).className = "i3GEOarvCat";
 		}
 		idold = i3GEO.arvoreDeTemas.IDHTML;
 		delete (i3GEO.arvoreDeTemas.ARVORE);
@@ -735,29 +738,41 @@ i3GEO.arvoreDeTemas = {
 	 */
 	montaTextoTemaWMS : function(servico, layer, estilo, titulo, proj,
 			formatoinfo, versao, formatoimg, cor, link) {
-		var html, temp, adiciona;
-		html = "<td style='vertical-align:top;padding-top:5px;'><span ><input style='cursor:pointer;border:solid 0 white;' ";
-		temp = function() {
-			i3GEO.janela.fechaAguarde("ajaxredesenha");
-			i3GEO.atualiza();
-		};
-		adiciona = "i3GEO.php.adicionaTemaWMS(" + temp + "," + "\"" + servico
+		var html, adiciona, e, id;
+		//id para marcar o checkbox
+		id = "wmsckbox" + i3GEO.arvoreDeTemas.CONTATEMAWMS;
+
+		adiciona = "i3GEO.php.adicionaTemaWMS(\"\"," + "\"" + servico
 				+ "\"," + "\"" + layer + "\"," + "\"" + estilo + "\"," + "\""
 				+ proj + "\"," + "\"" + formatoimg + "\"," + "\"" + versao
 				+ "\"," + "\"" + titulo + "\"," + "\"\"," + "\"nao\"," + "\""
-				+ formatoinfo + "\"," + "\"\"," + "\"\"," + "this.checked)";
-		html += "onclick='javascript:"
+				+ formatoinfo + "\"," + "\"\"," + "\"\",$i(\"" + id +"\").checked)";
+		adiciona = "onclick='javascript:"
 				+ adiciona
-				+ "' "
-				+ " type='checkbox'  /></td><td style='padding-top:4px;vertical-align:top;text-align:left;padding-left:3px;color:"
-				+ cor + ";' >";
+				+ "' ";
+
+		html = "<td style='vertical-align:top;padding-top:2px;text-align:left;'>";
+		html += "<input " + adiciona + " style='cursor:pointer;border:solid 0 white;' type='checkbox' id='" + id + "' />";
+
+		e = "style='cursor:pointer;text-align:left;padding-left:0px;position:relative;top:1px;'";
+		/*
 		if (link) {
-			html += "<a href='" + link + "' target=_blank >" + layer + " - "
-					+ titulo + "</a>";
+			html += "<label  " + e + "for='wmsckbox" + i3GEO.arvoreDeTemas.CONTATEMAWMS + "'><a href='" + link + "' target=_blank >" + layer + " - "
+					+ titulo + "</a></label>";
 		} else {
-			html += layer + " - " + titulo;
+			html += "<label " + e + " for='wmsckbox" + i3GEO.arvoreDeTemas.CONTATEMAWMS + "'>" + layer + " - " + titulo + "</label>";
 		}
-		html += "</td></span>";
+		*/
+		if(link){
+			link = "<a style='margin-left:15px;' href='" + link + "' target='_blank'>metadata </a>";
+		}
+		else{
+			link = "";
+		}
+		html += "<label for='" + id + "' " + e + " >" + layer + " - " + titulo + "</label>";
+
+		html += link + "</td>";
+		i3GEO.arvoreDeTemas.CONTATEMAWMS = i3GEO.arvoreDeTemas.CONTATEMAWMS + 1;
 		return (html);
 	},
 	/**
@@ -1139,6 +1154,7 @@ i3GEO.arvoreDeTemas = {
 		if (i3GEO.arvoreDeTemas.IDHTML === "") {
 			return;
 		}
+		$i(i3GEO.arvoreDeTemas.IDHTML).className = "i3GEOarvCat";
 		i3GEO.arvoreDeTemas.listaMenus(g_sid, g_locaplic,
 				"i3GEO.arvoreDeTemas.montaArvore");
 	},
@@ -1945,7 +1961,7 @@ i3GEO.arvoreDeTemas = {
 		html = "<td class='ygtvcontent' style='text-align:left;'>";
 		// verifica que tipo de botao sera usado para o usuario clicar
 		if (i3GEO.arvoreDeTemas.TIPOBOTAO !== "download") {
-			html += "<input title='"
+			html += "<input id='" + tema.tid + "ckboxc' title='"
 					+ tema.tid
 					+ "' style='position:relative;top:3px;width:12px;height:12px;cursor:pointer;border:solid 0 white;' ";
 		} else {
@@ -1970,15 +1986,15 @@ i3GEO.arvoreDeTemas = {
 		} else {
 			html += " /> ";
 		}
-		html += "<span title='"
+		html += "<label for='" + tema.tid + "ckboxc' title='"
 				+ tema.tid
 				+ "' onmouseout='javascript:this.style.color=\""
 				+ cor
-				+ "\";' onmouseover='javascript:this.style.color=\"blue\";' style='left:4px;cursor:pointer;text-align:left;color:"
+				+ "\";' onmouseover='javascript:this.style.color=\"blue\";' style='cursor:pointer;text-align:left;color:"
 				+ cor + ";padding-left:0px;position:relative;top:1px;' "
 				+ clique + ">";
 		html += tema.nome;
-		html += "</span></td>";
+		html += "</label></td>";
 		return (html);
 	},
 	/**
@@ -1986,7 +2002,9 @@ i3GEO.arvoreDeTemas = {
 	 * ou nao e decide se deve desligar ou ligar
 	 */
 	verificaStatusTema : function(obj, tid) {
-		//i3GEO.mapa.ativaTema(tid)
+		if(obj.tagName != "INPUT"){
+			return;
+		}
 		// confirma se o tema existe no mapa
 		if (i3GEO.arvoreDeCamadas.pegaTema(tid) !== "") {
 			if(i3GEO.arvoreDeCamadas.ARVORE){

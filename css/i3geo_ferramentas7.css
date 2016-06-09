@@ -437,6 +437,38 @@ Utilizado na janela do buscador INDE
 	top: -5px;
 }
 
+.i3GEOarvCat input[type=radio], .i3GEOarvCat input[type=checkbox] {
+	display: none;
+}
+
+.i3GEOarvCat input[type=checkbox]+label:before {
+    color: white;
+    content: "";
+    content: url("../imagens/checkbox-unchecked.png");
+    line-height: 15px;
+    text-align: center;
+    top: -1px;
+    position: absolute;
+    left: -25px;
+	cursor : pointer;
+}
+
+.i3GEOarvCat input[type=checkbox]:checked+label:before {
+    color: white;
+    content: "";
+    content: url("../imagens/checkbox-checked.png");
+    line-height: 15px;
+    text-align: center;
+    top: -1px;
+    position: absolute;
+    left: -25px;
+    cursor : pointer;
+}
+
+.i3GEOarvCat label {
+	left:12px;
+}
+
 .i3GEOarvCam .ygtvitem {
     text-align: left;
     margin-top: 3px;
