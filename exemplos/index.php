@@ -43,7 +43,7 @@ include "../init/head.php";
 }
 </style>
 <body style="padding-top: 55px;">
-	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i

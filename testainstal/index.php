@@ -17,7 +17,7 @@ define ( ONDEI3GEO, ".." );
 include "../init/head.php";
 ?>
 <body style="padding-top: 55px;" id="topo">
-	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="../init/index.php">i3Geo <i class="fa fa-home fa-1x"></i></a>

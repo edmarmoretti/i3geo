@@ -87,13 +87,13 @@ hr {
 }
 
 #menuTpl a:focus, #menuTpl a:hover {
-	padding-bottom: 17px;
+
 }
 #menuTpl ul {
-	background-color: #eeeeee;
+
 }
 #menuTpl li {
-	background-color: #3f51b5;
+
 }
 .navbar-collapse { max-height: 100% !important; }
 

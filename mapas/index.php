@@ -151,7 +151,7 @@ include "../init/head.php";
 </script>
 <body style="padding-top: 55px; position: relative;" id="affix-topo"
 	data-spy="scroll" data-target="#indiceSpy" data-offset="80">
-	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"

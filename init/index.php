@@ -41,7 +41,7 @@ include "head.php";
 }
 </style>
 <body style="padding-top: 90px;" id="topo">
-	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -52,7 +52,7 @@ include "head.php";
 				<a class="navbar-brand" onclick="$('.cartao').fadeIn(600);" href="#"><?php echo $mensagemInicia;?> <i
 					class="fa fa-home fa-1x"></i></a>
 			</div>
-			<div id="navbar" class="collapse navbar-collapse">
+			<div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav">
 					<li class="fa"><a href="#"><span id="bandeiras"></span></a></li>
 				</ul>

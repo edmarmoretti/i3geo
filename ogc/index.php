@@ -134,7 +134,7 @@ include "../init/head.php";
 </div>
 </script>
 <body style="padding-top: 55px;" id="topo">
-	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"

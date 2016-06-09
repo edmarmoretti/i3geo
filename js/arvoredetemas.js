@@ -514,7 +514,7 @@ i3GEO.arvoreDeTemas = {
 				} else {
 					html += " (% de acessos n&atilde;o definido)</span>";
 				}
-				html += "<hr>";
+				//html += "<hr>";
 				tempNode = new YAHOO.widget.HTMLNode({
 					html : html,
 					id_ws : raiz[i].id_ws,
@@ -614,7 +614,7 @@ i3GEO.arvoreDeTemas = {
 			for (i = 0; i < nraiz; i += 1) {
 				html = "<span title='" + retorno[i].descricao + "'> "
 						+ retorno[i].nome;
-				html += "<hr>";
+				//html += "<hr>";
 				tempNode = new YAHOO.widget.HTMLNode({
 					codigo_variavel : retorno[i].codigo_variavel,
 					html : html,
