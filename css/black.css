@@ -4,6 +4,14 @@
 	top: 2.8em;
 	display: block;
 }
+#buscaRapidaGuia {
+	margin: 5px;
+}
+#buscaRapidaGuia p {
+	font-size: 1.2em;
+    line-height: 1.2;
+    margin-top: 1em;
+}
 /*
 para o campo escala e coordenadas
 */
@@ -54,6 +62,12 @@ no caso do OL3
 
 .ol-zoom {
 	top: 3.8em;
+}
+
+.ol-i3GEOcontrols {
+	top: 3.8em;
+	left: 3em;
+	width: 55px;
 }
 
 .ol-touch .ol-zoomslider, .ol-zoomslider {
@@ -176,7 +190,8 @@ Configuracoes especificas dos elementos que ficam no rodape
 	position: absolute;
 	bottom: 0px;
 	width: 450px;
-	left: 90px;
+	left: auto;
+	right: 0px;
 	text-align: left;
 	font-size: 1em;
 	display: inline;

@@ -986,6 +986,66 @@ i3GEO.Interface =
 					i3GEO.Interface.openlayers.parametrosView
 				);
 				i3GEO.Interface.openlayers.parametrosMap.interactions = i3GEO.Interface.openlayers.interacoes;
+				////////
+				window.i3GEOcontrols = {};
+				var i3GEOcontrols = window.i3GEOcontrols;
+				i3GEOcontrols.zoom = function() {
+					var element = document.createElement('div');
+					element.className = 'ol-i3GEOcontrols ol-control';
+
+					var button = document.createElement('button');
+					button.style.float = "left";
+					button.innerHTML = "<img style='width:20px;' src='"+ i3GEO.configura.locaplic+"/imagens/gisicons/projection.png' />";
+					var zoom2ext = function() {
+						i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.extentTotal);
+					};
+					button.addEventListener('click', zoom2ext, false);
+					element.appendChild(button);
+
+					var button1 = document.createElement('button');
+					button1.style.float = "left";
+					button1.innerHTML = "<img style='width:20px;' src='"+ i3GEO.configura.locaplic+"/imagens/gisicons/zoom-region.png' />";
+					var zoomli = function() {
+						if (DetectaMobile("DetectMobileLong")) {
+							i3GEO.janela.tempoMsg($trad("x70"));
+						} else {
+							i3GEO.janela.tempoMsg($trad("x69"));
+						}
+					};
+					button1.addEventListener('click', zoomli, false);
+					element.appendChild(button1);
+
+					var button3 = document.createElement('button');
+					button3.style.float = "left";
+					button3.innerHTML = "<img style='width:16px;' src='"+ i3GEO.configura.locaplic+"/imagens/oxygen/16x16/draw-triangle1.png' />";
+					var anterior = function() {
+						i3GEO.navega.extensaoAnterior();
+					};
+					button3.addEventListener('click', anterior, false);
+					element.appendChild(button3);
+
+					var button2 = document.createElement('button');
+					button2.style.float = "left";
+					button2.innerHTML = "<img style='width:16px;' src='"+ i3GEO.configura.locaplic+"/imagens/oxygen/16x16/draw-triangle2.png' />";
+					var proximo = function() {
+						i3GEO.navega.extensaoProximo();
+					};
+					button2.addEventListener('click', proximo, false);
+					element.appendChild(button2);
+
+					ol.control.Control.call(this, {
+						element: element
+					});
+				};
+				ol.inherits(i3GEOcontrols.zoom, ol.control.Control);
+				i3GEO.Interface.openlayers.parametrosMap.controls = ol.control.defaults({
+			          attributionOptions:({
+			            collapsible: false
+			          })
+			        }).extend([
+			          new i3GEOcontrols.zoom()
+			        ]);
+
 				//
 				// cria o objeto mapa
 				//

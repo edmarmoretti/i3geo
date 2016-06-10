@@ -437,6 +437,23 @@ i3GEO.guias =
 					}
 					$i("guia6").src = i3GEO.configura.locaplic + "/" + i3GEO.guias.CONFIGURA.dobraPagina.icone;
 				}
+			},
+			"buscaRapida" : {
+				icone : "imagens/gisicons/search.png",
+				titulo : "",
+				id : "guia7",
+				idconteudo : "guia7obj",
+				status: false,
+				click : function() {
+					i3GEO.guias.mostra("buscaRapida");
+					//verifica se ja foi criada
+					if(i3GEO.guias.CONFIGURA.buscaRapida.status === true){
+						return;
+					}
+					i3GEO.guias.CONFIGURA.buscaRapida.status = true;
+					i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.tipo = "normal";
+					i3GEO.gadgets.mostraBuscaRapida("buscaRapidaGuia");
+				}
 			}
 		},
 		/**
