@@ -1015,6 +1015,10 @@ i3GEO.Interface =
 					button1.addEventListener('click', zoomli, false);
 					element.appendChild(button1);
 
+
+					element.appendChild(document.createElement('br'));
+
+
 					var button3 = document.createElement('button');
 					button3.style.float = "left";
 					button3.innerHTML = "<img style='width:16px;' src='"+ i3GEO.configura.locaplic+"/imagens/oxygen/16x16/draw-triangle1.png' />";

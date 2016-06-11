@@ -67,7 +67,7 @@ no caso do OL3
 .ol-i3GEOcontrols {
 	top: 3.8em;
 	left: 3em;
-	width: 55px;
+	width: auto;
 }
 
 .ol-touch .ol-zoomslider, .ol-zoomslider {
