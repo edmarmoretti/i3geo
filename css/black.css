@@ -308,6 +308,23 @@ Menu superior de opcoes
 }
 /*janelas flutuantes*/
 /*arvore de camadas*/
+/*botao de opcoes*/
+#arvoreCamOpcoes button, #arvoreCamOpcoes .yui-button, #arvoreCamOpcoes .yuimenu {
+	width: 250px;
+	color: black;
+	border-radius : 0px;
+}
+#arvoreCamOpcoes a {
+	color: black;
+}
+#arvoreCamOpcoes .yui-button {
+	background-image : none;
+	border-radius : 0px;
+}
+#arvoreCamOpcoes .first-child{
+	border-radius : 0px;
+}
+
 .i3GEOarvCam .ygtvcell .ygtvlp, .i3GEOarvCam .ygtvlp {
     background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8897px transparent;
 }

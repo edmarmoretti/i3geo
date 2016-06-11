@@ -21,7 +21,7 @@ i3GEOF.atalhosmapa =
 		m = i3GEO.configura.oMenuDataOriginal.submenus.ferramentas;
 		n = m.length;
 		for(i=0;i<n;i++){
-			if(m[i].submenu.id === "mapa"){
+			if(m[i] && m[i].submenu && m[i].submenu.id === "mapa"){
 				t = m[i].submenu.itemdata[0];
 			}
 		}

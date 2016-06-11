@@ -478,16 +478,16 @@ var g_traducao =
 		],
 		"t3a" : [
 			{
-				pt : "Clique para ligar todos os temas",
+				pt : "Ligar todos os temas",
 				en : "Turn on all layers",
-				es : "Haga clic para activar todos los temas"
+				es : "Activar todos los temas"
 			}
 		],
 		"t3b" : [
 			{
-				pt : "Clique para desligar todos os temas",
+				pt : "Desligar todos os temas",
 				en : "Turn off all layers",
-				es : "Haga clic para desactivar todos los temas"
+				es : "Desactivar todos los temas"
 			}
 		],
 		"t4" : [
