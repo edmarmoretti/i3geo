@@ -479,6 +479,7 @@ Utilizado na janela do buscador INDE
 	display: none;
 }
 
+/*
 .i3GEOarvCam input[type=checkbox]+label:before {
     color: white;
     content: "";
@@ -504,10 +505,10 @@ Utilizado na janela do buscador INDE
 }
 
 .i3GEOarvCam label {
-	margin-left: 30px;
+	margin-left: 0px;
 	cursor: move;
 }
-
+*/
 .i3GEOarvCamGrupo {
 	font-size: 12pt;
 	margin: auto;
@@ -535,6 +536,7 @@ Utilizado na janela do buscador INDE
 }
 .i3GEOarvCam .ygtvdepthcell {
 	background : none;
+	display: none;
 }
 
 .i3GEOarvCamTema input, .i3GEOarvCamTemaIE input {

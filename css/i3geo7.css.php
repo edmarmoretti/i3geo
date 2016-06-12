@@ -436,6 +436,7 @@ margin-bottom: 3px;
 .i3GEOarvCam input[type=radio], .i3GEOarvCam input[type=checkbox] {
 display: none;
 }
+/*
 .i3GEOarvCam input[type=checkbox]+label:before {
 color: white;
 content: "";
@@ -459,9 +460,10 @@ left: 1px;
 cursor : pointer;
 }
 .i3GEOarvCam label {
-margin-left: 30px;
+margin-left: 0px;
 cursor: move;
 }
+*/
 .i3GEOarvCamGrupo {
 font-size: 12pt;
 margin: auto;
@@ -487,6 +489,7 @@ font-weight : bold;
 }
 .i3GEOarvCam .ygtvdepthcell {
 background : none;
+display: none;
 }
 .i3GEOarvCamTema input, .i3GEOarvCamTemaIE input {
 cursor: pointer;
