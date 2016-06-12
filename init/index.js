@@ -170,25 +170,6 @@ botoesIni = [
 }
 ];
 reordenaBotoesPorFavoritos();
-function mostraBotoes(){
-	$i("mensagemLogin").innerHTML = men;
-	i3GEO.configura = {"locaplic" : ".."};
-	i3GEO.idioma.IDSELETOR = "bandeiras";
-	i3GEO.idioma.mostraSeletor();
-	//i3GEO.barraDeBotoes.ATIVA = false;
-	var ins = [],i,n = botoesIni.length,texto;
-	for(i=0;i<n;i++){
-		botoesIni[i].href = botoesIni[i].href.replace("#topo","");
-		texto = '<div class="r" ><div class="ri" ><a target=_blank href="'+botoesIni[i].href+'" ><img style="max-height:77px;" src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';
-		if(botoesIni[i].subtitulo){
-			//texto += botoesIni[i].subtitulo;
-		}
-		texto += '</div></div>';
-		ins.push(texto);
-	}
-	$i("botoes").innerHTML = ins.join("");
-	$i("conteudo").style.height = i3GEO.util.getScrollHeight() + "px";
-}
 //TODO um dia, remover as imagens da pasta init e deixar apenas as da pasta init/imagens
 function mostraBotoesBT(men){
 	var html = "";
@@ -268,6 +249,7 @@ function reordenaBotoesPorFavoritos(){
 		favoritos = favoritos.split("|");
 		$(botoesIni).each(
 				function(i,el){
+					el.href = el.href.replace("#topo","");
 					if(jQuery.inArray(el.img,favoritos) >= 0){
 						f.push(el);
 					}
