@@ -245,11 +245,15 @@ function reordenaBotoesPorFavoritos(){
 	var f = [],
 	nf = [],
 	favoritos = i3GEO.util.pegaCookie("favoritosInit");
+	$(botoesIni).each(
+		function(i,el){
+			el.href = el.href.replace("#topo","");
+		}
+	);
 	if(favoritos){
 		favoritos = favoritos.split("|");
 		$(botoesIni).each(
 				function(i,el){
-					el.href = el.href.replace("#topo","");
 					if(jQuery.inArray(el.img,favoritos) >= 0){
 						f.push(el);
 					}
