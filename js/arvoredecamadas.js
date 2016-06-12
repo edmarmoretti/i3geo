@@ -1216,7 +1216,7 @@ i3GEO.arvoreDeCamadas =
 				if(l.visible === true){
 					temp += " checked ";
 				}
-				temp += " />"
+				temp += " />";
 				temp += "<div class='temaSlider round' ></div>";
 				temp += "</label>&nbsp;" + l.title + "</div>";
 
