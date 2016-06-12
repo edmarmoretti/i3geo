@@ -183,7 +183,7 @@ include "head.php";
 
 	<script>
 	//utilizado em ms_configura.php para customizar o local da pasta de inicializacao
-	var customDir = "../<?php echo $customDir; ?>";
+	var customDir = "<?php echo $customDir; ?>";
 	</script>
 	<script src='../pacotes/cpaint/cpaint2_compacto.inc.js'></script>
 	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
