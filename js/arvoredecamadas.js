@@ -1193,12 +1193,8 @@ i3GEO.arvoreDeCamadas =
 		montaNoFundo: function(root){
 			var c = i3GEO.Interface.openlayers.LAYERSADICIONAIS,
 			n = c.length,
-			k = "i3GEOarvCamTema",
 			temaNode, i, l, temp;
-			// verifica se a versao do IE e menor que 9
-			if (navm && parseInt(YAHOO.env.ua.ie, 10) < 9) {
-				k = "i3GEOarvCamTemaIE";
-			}
+
 			temaNode = new YAHOO.widget.HTMLNode(
 					{
 						html : $trad("p16"),
@@ -1206,22 +1202,31 @@ i3GEO.arvoreDeCamadas =
 						hasIcon : true
 					}, root
 			);
+			/*
+			<label class="temaSwitch">
+			  <input type="checkbox" >
+			  <div class="temaSlider round"></div>
+			</label>
+			*/
 			for (i = 0; i < n; i++) {
 				l = c[i].getProperties();
-				temp =
-					"<div class='" + k + "' onclick='i3GEO.Interface.openlayers.ativaFundo(\"" + l.name + "\")'>"
-					+ "<input name=layer type=checkbox ";
+				temp = "<div><label class='temaSwitch' for='CK" + l.name + "'>";
+				temp += "<input type='checkbox' name=\"layer\" value='" + l.name + "' " + "id='CK" + l.name
+				+ "' onclick=\"i3GEO.Interface.openlayers.ativaFundo('" + l.name + "')\" ";
 				if(l.visible === true){
 					temp += " checked ";
 				}
-				temp += " value='" + l.name + "' id='CK" + l.name + "'/>"
-				+ " <label for='CK" + l.name + "'>" + l.title + "</label></div>";
+				temp += " />"
+				temp += "<div class='temaSlider round' ></div>";
+				temp += "</label>&nbsp;" + l.title + "</div>";
+
 				new YAHOO.widget.HTMLNode(
 						{
 							html : temp,
 							tipo : "fundo",
 							isLeaf : true,
-							hasIcon : false
+							hasIcon : false,
+							enableHighlight : false
 						}, temaNode
 				);
 			}
@@ -1737,9 +1742,9 @@ i3GEO.arvoreDeCamadas =
 				}
 			}
 			/*
-			<label class="switch">
+			<label class="temaSwitch">
 			  <input type="checkbox" >
-			  <div class="slider round"></div>
+			  <div class="temaSlider round"></div>
 			</label>
 			*/
 			// inicia o div
@@ -1762,9 +1767,9 @@ i3GEO.arvoreDeCamadas =
 			html +=
 				"<input type='checkbox' name=\"layer\" value='" + tema.name + "' " + "id='" + tema.name + "ckbox'" + ck + "onclick=\""
 				+ i3GEO.arvoreDeCamadas.ATIVATEMA + "\"" + " />";
-			html += "<div onclick='i3GEO.mapa.ativaTema(\"" + tema.name + "\");'  class='temaSlider round' ></div>";
+			html += "<div class='temaSlider round' ></div>";
 
-			html += "</label>";
+			html += "</label>&nbsp;";
 			html += tema.tema + "</div>";
 			// adiciona o temporizador
 			// que redesenha o tema de tempos em tempos
@@ -2175,7 +2180,8 @@ i3GEO.arvoreDeCamadas =
 			if(!camadas){
 				camadas = i3GEO.arvoreDeCamadas.CAMADAS;
 			}
-			var resultado = [], i = 0, temp, nelementos = camadas.length, ltema;
+			var resultado, i = 0, temp, nelementos = camadas.length, ltema;
+			resultado = [];
 			if (nelementos > 0) {
 				do {
 					ltema = camadas[i];

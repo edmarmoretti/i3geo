@@ -431,7 +431,7 @@ left:12px;
 .i3GEOarvCam .ygtvitem {
 text-align: left;
 margin-top: 3px;
-margin-bottom: 3px;
+margin-bottom: 10px;
 }
 .i3GEOarvCam input[type=radio], .i3GEOarvCam input[type=checkbox] {
 display: none;

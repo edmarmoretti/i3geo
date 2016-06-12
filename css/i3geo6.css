@@ -400,14 +400,43 @@ margin-top: -2px;
 height:16px;
 top: -5px;
 }
+.i3GEOarvCat input[type=radio], .i3GEOarvCat input[type=checkbox] {
+display: none;
+}
+.i3GEOarvCat input[type=checkbox]+label:before {
+color: white;
+content: "";
+content: url("../imagens/checkbox-unchecked.png");
+line-height: 15px;
+text-align: center;
+top: -1px;
+position: absolute;
+left: -25px;
+cursor : pointer;
+}
+.i3GEOarvCat input[type=checkbox]:checked+label:before {
+color: white;
+content: "";
+content: url("../imagens/checkbox-checked.png");
+line-height: 15px;
+text-align: center;
+top: -1px;
+position: absolute;
+left: -25px;
+cursor : pointer;
+}
+.i3GEOarvCat label {
+left:12px;
+}
 .i3GEOarvCam .ygtvitem {
 text-align: left;
 margin-top: 3px;
-margin-bottom: 3px;
+margin-bottom: 10px;
 }
 .i3GEOarvCam input[type=radio], .i3GEOarvCam input[type=checkbox] {
 display: none;
 }
+/*
 .i3GEOarvCam input[type=checkbox]+label:before {
 color: white;
 content: "";
@@ -431,9 +460,10 @@ left: 1px;
 cursor : pointer;
 }
 .i3GEOarvCam label {
-margin-left: 30px;
+margin-left: 0px;
 cursor: move;
 }
+*/
 .i3GEOarvCamGrupo {
 font-size: 12pt;
 margin: auto;
@@ -459,6 +489,7 @@ font-weight : bold;
 }
 .i3GEOarvCam .ygtvdepthcell {
 background : none;
+display: none;
 }
 .i3GEOarvCamTema input, .i3GEOarvCamTemaIE input {
 cursor: pointer;

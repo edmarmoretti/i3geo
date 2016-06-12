@@ -405,6 +405,9 @@ i3GEO.Interface =
 		 */
 		ligaDesliga : function(obj) {
 			i3GEO.Interface[i3GEO.Interface.ATUAL].ligaDesliga(obj);
+			if(obj.checked && obj.value != ""){
+				i3GEO.mapa.ativaTema(obj.value);
+			}
 			// atualiza a arvore de temas se for o caso
 			if (obj.value && obj.value != "") {
 				var ck = i3GEO.arvoreDeTemas.buscaCheckbox(obj.value);
@@ -1891,7 +1894,7 @@ i3GEO.Interface =
 			ativaFundo : function(nome) {
 				var baseLayers, n, i, t, ck = true;
 				if ($i("CK" + nome)) {
-					ck = $i("CK" + nome).checked;
+					ck = !$i("CK" + nome).checked;
 				}
 
 				baseLayers = i3geoOL.getLayersBase();

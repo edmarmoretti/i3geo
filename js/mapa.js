@@ -248,12 +248,8 @@ i3GEO.mapa =
 		 * {string} - codigo da camada
 		 */
 		ativaTema : function(codigo) {
-			//if (i3GEO.temaAtivo !== "") {
-			//	i3GEO.util.defineValor("ArvoreTituloTema" + i3GEO.temaAtivo, "style.color", "");
-			//}
 			if (codigo) {
 				i3GEO.temaAtivo = codigo;
-				//i3GEO.util.defineValor("ArvoreTituloTema" + codigo, "style.color", "brown");
 			}
 		},
 		/**

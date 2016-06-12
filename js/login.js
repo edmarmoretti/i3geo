@@ -280,7 +280,7 @@ i3GEO.login = {
 		 *
 		 * Abre a tela de login
 		 */
-		abreLogin : function(locaplic) {
+		abreLogin : function(locaplic,template) {
 			var js;
 			if (!template || template == "") {
 				template = "template_mst.html";
