@@ -194,10 +194,6 @@ i3GEOF.preferencias = {
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.OPCOESLEGENDA"
 					},{
-						titulo: $trad('ativaAguardeLegenda',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.arvoreDeCamadas.AGUARDALEGENDA"
-					},{
 						titulo: $trad('mostraIconeTema',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.ICONETEMA"

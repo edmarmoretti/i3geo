@@ -956,8 +956,6 @@ i3GEO.Interface =
 						new ol.interaction.PinchRotate(),
 						new ol.interaction.PinchZoom(),
 						new ol.interaction.DragZoom(),
-						// FIXME alt nao funciona
-						// new ol.interaction.DragRotateAndZoom({condition : ol.events.condition.altKeyOnly}),
 						new ol.interaction.DragPan()
 					];
 				}
@@ -975,12 +973,9 @@ i3GEO.Interface =
 				i3GEO.Interface.IDMAPA = "openlayers";
 				if (i3GEO.Interface.openlayers.googleLike === false) {
 					i3GEO.Interface.openlayers.parametrosView.projection = "EPSG:4326";
-					// precisa disso?
-					// i3GEO.Interface.openlayers.parametrosView.extent = ol.proj.get('EPSG:4326').getExtent();
 				}
 				else{
 					i3GEO.Interface.openlayers.parametrosView.projection = "EPSG:3857";
-					//i3GEO.Interface.openlayers.parametrosView.extent = ol.proj.get('EPSG:3857').getExtent();
 				}
 				i3GEO.Interface.openlayers.parametrosMap.view = new ol.View(
 					i3GEO.Interface.openlayers.parametrosView
@@ -1014,11 +1009,7 @@ i3GEO.Interface =
 					};
 					button1.addEventListener('click', zoomli, false);
 					element.appendChild(button1);
-
-
 					element.appendChild(document.createElement('br'));
-
-
 					var button3 = document.createElement('button');
 					button3.style.float = "left";
 					button3.innerHTML = "<img style='width:16px;' src='"+ i3GEO.configura.locaplic+"/imagens/oxygen/16x16/draw-triangle1.png' />";

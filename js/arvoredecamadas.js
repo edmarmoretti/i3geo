@@ -435,7 +435,7 @@ i3GEO.arvoreDeCamadas =
 		 */
 		OPCOESARVORE : true,
 		/**
-		 * Propriedade: AGUARDALEGENDA
+		 * Propriedade: AGUARDALEGENDA (depreciado na versao 7)
 		 *
 		 * Ativa a op&ccedil;&atilde;o de aguarde para mostrar a legenda de um tema quando o usu&aacute;rio estaciona o mouse sobre o nome
 		 * de um tema.
@@ -1702,7 +1702,7 @@ i3GEO.arvoreDeCamadas =
 		 * {string} - texto formatado
 		 */
 		montaTextoTema : function(tema) {
-			var ck, html, estilo, f;
+			var ck, html, f;
 			if (tema.status * 1 === 2) {
 				ck = ' CHECKED ';
 			} else {
@@ -1736,46 +1736,36 @@ i3GEO.arvoreDeCamadas =
 					return "";
 				}
 			}
-			estilo = "i3GEOarvCamTema";
-			// verifica se a versao do IE e menor que 9
-			if (navm && parseInt(YAHOO.env.ua.ie, 10) < 9) {
-				estilo = "i3GEOarvCamTemaIE";
-			}
+			/*
+			<label class="switch">
+			  <input type="checkbox" >
+			  <div class="slider round"></div>
+			</label>
+			*/
 			// inicia o div
-			html = "<div onclick='i3GEO.mapa.ativaTema(\"" + tema.name + "\")' id='arrastar_" + tema.name + "' class='" + estilo + "' >";
-			// estilo = navm ? "cursor:pointer;vertical-align:15%;" : "cursor:pointer;";
-			html +=
-				"<input type='checkbox' name=\"layer\" value='" + tema.name + "' " + "id='" + tema.name + "ckbox'" + ck + "onclick=\""
-				+ i3GEO.arvoreDeCamadas.ATIVATEMA + "\"" + " /><label for='" + tema.name + "ckbox'  ";
+			html = "<div id='arrastar_" + tema.name + "'><label class='temaSwitch' for='" + tema.name + "ckbox'  ";
 			//
 			// inclui icone do tema
 			//
 			if (tema.iconetema !== "" && i3GEO.arvoreDeCamadas.ICONETEMA === true) {
 				html += "&nbsp;<img class='i3GEOiconeTema' src='" + tema.iconetema + "' />";
 			}
-			tema.AGUARDALEGENDA = i3GEO.arvoreDeCamadas.AGUARDALEGENDA;
 			//
 			// ajusta as propriedades conforme as caracteristicas de cada plugin
 			// verifica se o tema e do tipo plugin antes
-			// nao e necessario clonar
+			// Nao e necessario clonar
 			//
 			tema = i3GEO.pluginI3geo.aplicaPropriedades(tema);
 
-			estilo = "";
-			if (tema.AGUARDALEGENDA) {
-				html +=
-					" id='ArvoreTituloTema" + tema.name + "' style='position:relative;top:2px;'"
-					+ " onclick=\"i3GEO.tema.mostralegendajanela('" + tema.name + "','" + tema.tema
-					+ "','abrejanela');\" onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('" + $trad("t7a")
-					+ "','');i3GEO.tema.mostralegendajanela('" + tema.name + "','" + tema.tema
-					+ "','ativatimer');\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('');i3GEO.tema.mostralegendajanela('"
-					+ tema.name + "','','desativatimer');\" >" + tema.tema;
-			} else {
-				html +=
-					" id='ArvoreTituloTema" + tema.name + "' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"
-					+ $trad("t7") + "','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >" + tema.tema;
-			}
-			html += "</label></div>";
+			html +=
+					" id='ArvoreTituloTema" + tema.name + "' >";
+			html +=
+				"<input type='checkbox' name=\"layer\" value='" + tema.name + "' " + "id='" + tema.name + "ckbox'" + ck + "onclick=\""
+				+ i3GEO.arvoreDeCamadas.ATIVATEMA + "\"" + " />";
+			html += "<div onclick='i3GEO.mapa.ativaTema(\"" + tema.name + "\");'  class='temaSlider round' ></div>";
+
+			html += "</label>";
+			html += tema.tema + "</div>";
 			// adiciona o temporizador
 			// que redesenha o tema de tempos em tempos
 			if (i3GEO.tema.TEMPORIZADORESID[tema.name] == undefined && tema.temporizador != "") {
