@@ -580,7 +580,7 @@ i3GEO.Interface =
 			 *
 			 * yellow
 			 */
-			FUNDOTEMA : "yellow",
+			FUNDOTEMA : "",
 			/**
 			 * Propriedade: TILES
 			 *
@@ -1810,7 +1810,9 @@ i3GEO.Interface =
 				var p = $i("i3GEOprogressoDiv");
 				if ($i("ArvoreTituloTema" + name)) {
 					i3GEO.Interface.STATUS.atualizando.push(name);
-					YAHOO.util.Dom.setStyle("ArvoreTituloTema" + name, "background", i3GEO.Interface.openlayers.FUNDOTEMA);
+					if(i3GEO.Interface.openlayers.FUNDOTEMA != ""){
+						YAHOO.util.Dom.setStyle("ArvoreTituloTema" + name, "background", i3GEO.Interface.openlayers.FUNDOTEMA);
+					}
 					if (p) {
 						p.style.display = "block";
 						i3GEO.arvoreDeCamadas.progressBar.set('maxValue', i3GEO.Interface.STATUS.atualizando.length);
@@ -1825,7 +1827,9 @@ i3GEO.Interface =
 				var p = $i("i3GEOprogressoDiv");
 				i3GEO.Interface.STATUS.atualizando.remove(name);
 				if ($i("ArvoreTituloTema" + name)) {
-					YAHOO.util.Dom.setStyle("ArvoreTituloTema" + name, "background", "");
+					if(i3GEO.Interface.openlayers.FUNDOTEMA != ""){
+						YAHOO.util.Dom.setStyle("ArvoreTituloTema" + name, "background", "");
+					}
 					if (p) {
 						p.style.display = "block";
 						if (i3GEO.Interface.STATUS.atualizando.length > 0) {

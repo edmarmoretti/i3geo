@@ -399,9 +399,23 @@ i3GEO.arvoreDeCamadas =
 		 *
 		 * Default:
 		 *
+		 * false
+		 */
+		OPCOESICONES : false,
+		/**
+		 * Propriedade: MENUCOTEXTOTEMA
+		 *
+		 * Inclui o menu de contexto no clique sobre o nome do tema
+		 *
+		 * Tipo:
+		 *
+		 * {boolean}
+		 *
+		 * Default:
+		 *
 		 * true
 		 */
-		OPCOESICONES : true,
+		MENUCOTEXTOTEMA : true,
 		/**
 		 * depreciado em 6.0
 		 */
@@ -1011,9 +1025,11 @@ i3GEO.arvoreDeCamadas =
 								temp.html = textoTema;
 								temp.idlegenda = ltema.name;
 								temp.tipo = "tema";
+								temp.enableHighlight = false;
 								temaNode = new YAHOO.widget.HTMLNode( temp, tempNode);
+
 								if (i3GEO.arvoreDeCamadas.OPCOESICONES === true) {
-									textoTema = i3GEO.arvoreDeCamadas.montaIconesTema(ltema);
+									textoTema = i3GEO.arvoreDeCamadas.montaIconesTema(ltema)[0];
 									//console.warn(tema.plugini3geo)
 									temp = i3GEO.arvoreDeCamadas.NOTEMAICONES;
 									temp.id = ltema.name;
@@ -1075,17 +1091,17 @@ i3GEO.arvoreDeCamadas =
 								textoTema = i3GEO.arvoreDeCamadas.montaTextoTema(ltema);
 								if (textoTema !== "") {
 									d = {
-											expanded : true,
+											expanded : false,
 											hasIcon : false,
 											html : textoTema,
 											idlegenda : ltema.name,
 											tipo : "tema",
-											enableHighlight : false
+											enableHighlight : true
 									};
 									temaNode = new YAHOO.widget.HTMLNode(d, grupoNode);
 
 									// if (i3GEO.arvoreDeCamadas.OPCOESICONES === true) {
-									textoTema = i3GEO.arvoreDeCamadas.montaIconesTema(ltema);
+									textoTema = i3GEO.arvoreDeCamadas.montaIconesTema(ltema)[0];
 									temaNodeFilho = new YAHOO.widget.HTMLNode({
 										id : ltema.name,
 										expanded : false,
@@ -1138,7 +1154,7 @@ i3GEO.arvoreDeCamadas =
 							};
 							temaNode = new YAHOO.widget.HTMLNode(d, grupoNode);
 							// if (i3GEO.arvoreDeCamadas.OPCOESICONES === true) {
-							textoTema = i3GEO.arvoreDeCamadas.montaIconesTema(ltema);
+							textoTema = i3GEO.arvoreDeCamadas.montaIconesTema(ltema)[0];
 							temaNodeFilho = new YAHOO.widget.HTMLNode({
 								id : ltema.name,
 								expanded : false,
@@ -1194,6 +1210,14 @@ i3GEO.arvoreDeCamadas =
 			var c = i3GEO.Interface.openlayers.LAYERSADICIONAIS,
 			n = c.length,
 			temaNode, i, l, temp;
+
+			temaNode = new YAHOO.widget.HTMLNode(
+					{
+						html : "",
+						isLeaf : false,
+						hasIcon : false
+					}, root
+			);
 
 			temaNode = new YAHOO.widget.HTMLNode(
 					{
@@ -1770,7 +1794,12 @@ i3GEO.arvoreDeCamadas =
 			html += "<div class='temaSlider round' ></div>";
 
 			html += "</label>&nbsp;";
-			html += tema.tema + "</div>";
+			if(i3GEO.arvoreDeCamadas.MENUCOTEXTOTEMA === true){
+				html += "<a href='#' style='cursor:pointer;' onclick='i3GEO.arvoreDeCamadas.menuContextoTema(this,\""+ tema.name +"\");return false;'>" + tema.tema + "</a></div>";
+			}
+			else{
+				html += tema.tema + "</div>";
+			}
 			// adiciona o temporizador
 			// que redesenha o tema de tempos em tempos
 			if (i3GEO.tema.TEMPORIZADORESID[tema.name] == undefined && tema.temporizador != "") {
@@ -1778,14 +1807,23 @@ i3GEO.arvoreDeCamadas =
 			}
 			return (html);
 		},
-		montaIconesTema : function(tema) {
-			var fer = "", fers, iconePlugin, n, i = null, c, html, estilo, farol, mfarol, imb = i3GEO.configura.locaplic + "/imagens/branco.gif";
-
-			estilo = "i3GEOarvCamTemaIco";
-			// verifica se a versao do IE e menor que 9
-			if (navm && parseInt(YAHOO.env.ua.ie, 10) < 9) {
-				estilo = "i3GEOarvCamTemaIcoIE";
+		menuContextoTema : function(obj,tema){
+			if(typeof i3GEO.arvoreDeCamadas.oMenuContextoTema != "undefined"){
+				i3GEO.arvoreDeCamadas.oMenuContextoTema.destroy();
 			}
+			i3GEO.arvoreDeCamadas.oMenuContextoTema = new YAHOO.widget.Menu("i3GEOmenuContextoTema", {
+				fixedcenter: false,
+				xy: YAHOO.util.Dom.getXY(obj),
+				position: "dynamic",
+				zIndex: 50000
+			});
+			i3GEO.arvoreDeCamadas.oMenuContextoTema.addItems(i3GEO.arvoreDeCamadas.montaIconesTema(i3GEO.arvoreDeCamadas.pegaTema(tema))[1]);
+			i3GEO.arvoreDeCamadas.oMenuContextoTema.render(document.body);
+			i3GEO.arvoreDeCamadas.oMenuContextoTema.show();
+		},
+		montaIconesTema : function(tema) {
+			var hash = [], fer = "", fers, iconePlugin, n, i = null, c, html, estilo, farol, mfarol, imb = i3GEO.configura.locaplic + "/imagens/branco.gif";
+			estilo = "i3GEOarvCamTemaIco";
 			// inicia o div
 			html = "<div class='" + estilo + "' >";
 			//
@@ -1816,7 +1854,13 @@ i3GEO.arvoreDeCamadas =
 				html +=
 					"&nbsp;<img class='arvCamFarol' id='farol" + tema.name + "' src='" + i3GEO.configura.locaplic + "/imagens/" + farol
 					+ "' title='" + mfarol + "' />";
+
+				hash.push({
+					text: "<img class='arvCamFarol' id='farol" + tema.name + "' src='" + i3GEO.configura.locaplic + "/imagens/" + farol
+						+ "/><label>" + mfarol + "</label>"
+				});
 			}
+
 			//
 			//modifica o flag dos icones conforme as caracteristicas do tema
 			//
@@ -1867,8 +1911,21 @@ i3GEO.arvoreDeCamadas =
 						+ "' src='"
 						+ imb
 						+ "'/>";
+
+					hash.push({
+						text: c.title,
+						url: "javascript:" + c.funcao + "('" + tema.name + "',true,'" + tema.link_tema + "')"
+					});
 				}
 			}
+			/*
+			hash.push({
+					text: temp,
+					value: c.funcao,
+					onclick: {fn: funcao}
+				});
+			*/
+
 			//inclui o icone especifico quando o tema e baseado em algum plugin
 			if (tema.plugini3geo){
 				iconePlugin = i3GEO.pluginI3geo.iconeArvoreDeCamadas(tema);
@@ -1886,7 +1943,7 @@ i3GEO.arvoreDeCamadas =
 				}
 			}
 			html += "</div>";
-			return (html);
+			return ([html,hash]);
 		},
 		/**
 		 * Atualiza o farol de cada tema.

@@ -1,4 +1,15 @@
 /*
+menu de contexto da arvore de camadas
+*/
+#i3GEOmenuContextoTema a {
+	color: gray;
+}
+
+#i3GEOmenuContextoTema .yuimenuitemlabel-selected {
+	color: white;
+}
+
+/*
 Botao de ligar desligar do tipo chave
 */
 .i3GEOarvCam .temaSwitch {
@@ -381,6 +392,11 @@ Menu superior de opcoes
 }
 #arvoreCamOpcoes .first-child{
 	border-radius : 0px;
+}
+
+.i3GEOarvCam a {
+	font-size: 1em;
+	text-decoration: solid;
 }
 
 .i3GEOarvCam .ygtvcell .ygtvlp, .i3GEOarvCam .ygtvlp {
