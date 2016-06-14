@@ -509,7 +509,8 @@ i3GEO.arvoreDeCamadas =
 			tme : true,
 			copia : true,
 			storymap: true,
-			animagif: true
+			animagif: true,
+			selecao: true
 		},
 		/**
 		 * C&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3Geo

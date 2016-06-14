@@ -59,9 +59,9 @@ g_traducao_init =
 		],
 		"5a" : [
 				{
-					pt : "Mapa (OpenLayers) com o c&oacute;digo javascript n&atilde;o compactado, &uacute;til para desenvolvedores. Tamb&eacute;m nas vers&otilde;es com <a href='interface/osmdebug.htm' >OSM</a> e <a href='interface/gmdebug.phtml'>GoogleMaps</a>.",
-					en : "Map (OpenLayers) with non-compacted javascript code, useful for developers. There are versions for <a href='interface/osmdebug.htm' >OSM</a> and <a href='interface/gmdebug.phtml'>GoogleMaps.</a>",
-					es : "Mapa (OpenLayers) con un c&oacute;digo javascript no compactado, &uacute;til para desarrolladores. Tambi&eacute;n en versiones de <a href='interface/osmdebug.htm' >OSM</a> y <a href='interface/gmdebug.phtml'>GoogleMaps.</a>"
+					pt : "Mapa (OpenLayers) com o c&oacute;digo javascript n&atilde;o compactado, &uacute;til para desenvolvedores. Tamb&eacute;m nas vers&otilde;es com <a target='_blank' href='../interface/osmdebug.htm' >OSM</a> e <a href='../interface/gmdebug.phtml'>GoogleMaps</a>.",
+					en : "Map (OpenLayers) with non-compacted javascript code, useful for developers. There are versions for <a target='_blank' href='../interface/osmdebug.htm' >OSM</a> and <a target='_blank' href='../interface/gmdebug.phtml'>GoogleMaps.</a>",
+					es : "Mapa (OpenLayers) con un c&oacute;digo javascript no compactado, &uacute;til para desarrolladores. Tambi&eacute;n en versiones de <a target='_blank' href='../interface/osmdebug.htm' >OSM</a> y <a target='_blank' href='../interface/gmdebug.phtml'>GoogleMaps.</a>"
 				}
 			],
 		6 : [

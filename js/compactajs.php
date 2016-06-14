@@ -171,6 +171,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/selector/selector-min.js",
 "compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",
+"compactados/mustache.js",
 "compactados/util_compacto.js",
 "compactados/dicionario_compacto.js",
 "compactados/idioma_compacto.js",
@@ -196,10 +197,7 @@ $jsfiles = array(
 "compactados/social_compacto.js",
 "compactados/login_compacto.js",
 "compactados/marcador_compacto.js",
-"compactados/plugini3geo_compacto.js",
-//"compactados/euDock.2.0.js",
-//"compactados/euDock.Image.js",
-"compactados/mustache.js"
+"compactados/plugini3geo_compacto.js"
 );
 
 $removeQuebra = array();

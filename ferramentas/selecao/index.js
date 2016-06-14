@@ -368,7 +368,7 @@ i3GEOF.selecao =
 				]);
 				i3GEO.barraDeBotoes.ativaPadrao();
 				if(i3GEO.Interface["ATUAL"] === "openlayers"){
-					if (typeof OpenLayers == "undefined") {
+					if (typeof OpenLayers.Control == "undefined") {
 						api = "ol3";
 						i3GEO.Interface.openlayers.interacoes[0].setActive(true);//duplo clique
 					} else {
@@ -542,7 +542,7 @@ i3GEOF.selecao =
 					i3GEOF.selecao.fimSelecao(retorno);
 				}, tema = i3GEOF.selecao.pegaTemasSel();
 				if (i3GEO.Interface["ATUAL"] === "openlayers") {
-					if (typeof OpenLayers == "undefined") {
+					if (typeof OpenLayers.Control == "undefined") {
 						api = "ol3";
 					} else {
 						api = "openlayers";

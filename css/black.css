@@ -1,3 +1,12 @@
+.i3GEOfechaGuia {
+	cursor: pointer;
+	left: 0px;
+	top: 0px;
+	width: 95%;
+	text-align: right;
+	font-size: 14pt;
+	margin-bottom: 10px;
+}
 /*
 menu de contexto da arvore de camadas
 */
@@ -156,7 +165,7 @@ no caso do OL3
 	margin: 2px;
 	width: 29px;
 	cursor: pointer;
-	top: 10px;
+	top: 30px;
 }
 /*
 Estilo geral do rodape da pagina que contem a barra de escala, coordenadas, etc

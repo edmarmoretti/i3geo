@@ -1,3 +1,54 @@
+OpenLayers = {
+		ImgPath: "",
+		Layer: {
+			OSM: function(opt){
+				var titulo = "", name = "", url = "", v = false;
+				if(opt == "Aquarela"){
+					titulo = "Aquarela";
+					name = "Aquarela";
+					url = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg";
+					v = false;
+				}
+				if(opt == "OSM"){
+					titulo = "OSM";
+					name = "osm";
+					url = "http://tile.openstreetmap.org/{z}/{x}/{y}.png";
+					v = true;
+				}
+				if(opt == "Toner"){
+					titulo = "Toner";
+					name = "toner";
+					url = "http://tile.stamen.com/toner/{z}/{x}/{y}.png";
+					v = false;
+				}
+				if(opt == "Toner lite"){
+					name = "tonerlite";
+					titulo = "Toner lite";
+					url = "http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png";
+					v = false;
+				}
+				if(opt == "MapQuest Open Aerial"){
+					titulo = "MapQuest Open Aerial";
+					name = "layMapQuestAerial";
+					url = "http://oatile1.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg";
+					v = false;
+				}
+				return new ol.layer.Tile({
+					title : titulo,
+					visible : v,
+					isBaseLayer : true,
+					name : name,
+					source: new ol.source.OSM({
+						attributions : [new ol.Attribution({html: 'Atualize as camadas de fundo para OL3'})],
+						crossOrigin : "anonymous",
+						url : url
+					})
+				});
+			}
+		}
+};
+
+
 (function(){
 	var scriptLocation = "";
 	var scripts = document.getElementsByTagName('script');
@@ -105,4 +156,5 @@
 	}
 	document.write(allCssTags);
 	document.write(allScriptTags);
+
 })();

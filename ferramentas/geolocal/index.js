@@ -143,7 +143,7 @@ i3GEOF.geolocal =
 			temp = function() {
 				var api;
 				if (i3GEO.Interface["ATUAL"] === "openlayers") {
-					if (typeof OpenLayers == "undefined") {
+					if (typeof OpenLayers.Control == "undefined") {
 						api = "ol3";
 					} else {
 						api = "openlayers";
@@ -256,7 +256,7 @@ i3GEOF.geolocal =
 		limpa : function() {
 			i3GEOF.geolocal.posicoes = [];
 			if (i3GEO.Interface["ATUAL"] === "openlayers") {
-				if (typeof OpenLayers == "undefined") {
+				if (typeof OpenLayers.Control == "undefined") {
 					api = "ol3";
 				} else {
 					api = "openlayers";

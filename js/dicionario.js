@@ -577,7 +577,7 @@ var g_traducao =
 		],
 		"t13" : [
 			{
-				pt : "sobe",
+				pt : "Sobe",
 				en : "Up",
 				es : "Subir"
 			}
@@ -591,7 +591,7 @@ var g_traducao =
 		],
 		"t15" : [
 			{
-				pt : "desce",
+				pt : "Desce",
 				en : "Down",
 				es : "Bajar"
 			}
@@ -605,7 +605,7 @@ var g_traducao =
 		],
 		"t17" : [
 			{
-				pt : "zoom para o tema",
+				pt : "Zoom para o tema",
 				en : "Zoom to layer",
 				es : "Zoom al tema"
 			}

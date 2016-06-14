@@ -26,6 +26,7 @@ i3GEOF.atalhoscamada =
 		dicionario["etiquetas"] = $trad("t27");
 		dicionario["filtro"] = $trad("t29");
 		dicionario["tabela"] = $trad("t31");
+		dicionario["selecao"] = $trad("x51");
 		dicionario["grafico"] = $trad("t37");
 		dicionario["editaLegenda"] = $trad("t33");
 		dicionario["destaca"] = $trad("t35");
@@ -191,6 +192,16 @@ i3GEOF.atalhoscamada =
 					onclick : {
 						fn : function() {
 							i3GEO.tema.dialogo.tabela(tema);
+						}
+					}
+				});
+				b.addClass("abrir");
+			}
+			if (funcoes.selecao === true) {
+				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaSelecao", {
+					onclick : {
+						fn : function() {
+							i3GEO.mapa.dialogo.selecao();
 						}
 					}
 				});
