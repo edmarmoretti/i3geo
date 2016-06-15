@@ -202,6 +202,7 @@ function mostraLinksServico(tema,tipo,disabled){
 	$(".modal-body").html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>');
 	var html;
 	if(disabled != ""){
+		$(".modal-body").html = "";
 		return;
 	}
 	else{

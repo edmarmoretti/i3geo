@@ -76,7 +76,8 @@ include "../init/head.php";
 		</a>
 	</div>
 	<h4>
-		&nbsp;{{{nome_tema}}}{{{nome}}}
+		&nbsp;<a onclick="mostraLinksServico('{{codigo_tema}}','{{tipo}}','{{disabledogc}}');$('#modalCamada').modal('show');" href="#">
+		{{{nome_tema}}}{{{nome}}}</a>
 		<a class="{{hidden}}" href="{{link_tema}}{{link}}" target="_blank"><i class="fa fa-link"></i></a>
 	</h4>
 </div>
@@ -301,7 +302,7 @@ include "../init/head.php";
 				mostraLinksServico(temaOgc.split("_")[1],"meta")
 			}
 			else{
-				mostraLinksServico(temaOgc,"tema")
+				mostraLinksServico(temaOgc,"tema",'')
 			}
 			$("#modalCamada").modal('show');
 		}
@@ -315,7 +316,7 @@ include "../init/head.php";
 				mostraLinksDownload(temaDownload.split("_")[1],"meta")
 			}
 			else{
-				mostraLinksDownload(temaDownload,"tema")
+				mostraLinksDownload(temaDownload,"tema",'')
 			}
 			$("#modalCamada").modal('show');
 		}
