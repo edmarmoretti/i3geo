@@ -1039,9 +1039,11 @@ i3GEO.arvoreDeCamadas =
 									temaNodeFilho = new YAHOO.widget.HTMLNode(temp, temaNode);
 								}
 								if (ltema.classe !== "NAO" && this.PERMITEEXPANDIRTEMAS) {
-									temaNodeFilho.setDynamicLoad(i3GEO.arvoreDeCamadas.mostraLegenda, 1);
-									if (i3GEO.arvoreDeCamadas.LEGENDAEXPANDIDA === true) {
-										temaNodeFilho.expand();
+									if(temaNodeFilho.setDynamicLoad){
+										temaNodeFilho.setDynamicLoad(i3GEO.arvoreDeCamadas.mostraLegenda, 1);
+										if (i3GEO.arvoreDeCamadas.LEGENDAEXPANDIDA === true) {
+											temaNodeFilho.expand();
+										}
 									}
 								}
 							}
@@ -1858,7 +1860,7 @@ i3GEO.arvoreDeCamadas =
 
 				hash.push({
 					text: "<img class='arvCamFarol' id='farol" + tema.name + "' src='" + i3GEO.configura.locaplic + "/imagens/" + farol
-						+ "/><label>" + mfarol + "</label>"
+						+ "'/><label>" + mfarol + "</label>"
 				});
 			}
 

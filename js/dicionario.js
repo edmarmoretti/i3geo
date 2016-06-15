@@ -492,14 +492,14 @@ var g_traducao =
 		],
 		"t4" : [
 			{
-				pt : "limpa sele&ccedil;&atilde;o",
+				pt : "Limpa sele&ccedil;&atilde;o",
 				en : "Clear selection",
 				es : "Limpia la selecci&oacute;n"
 			}
 		],
 		"t4a" : [
 			{
-				pt : "zoom para a sele&ccedil;&atilde;o",
+				pt : "Zoom para a sele&ccedil;&atilde;o",
 				en : "Zoom to selection",
 				es : "Zoom a la selecci&oacute;n"
 			}
@@ -542,21 +542,21 @@ var g_traducao =
 
 		"t9" : [
 			{
-				pt : "A escala do tema &eacute; compat&iacute;vel com a escala do mapa",
+				pt : "Compat&iacute;vel com a escala",
 				en : "The scale of the theme is compatible with the scale of the map",
 				es : "La escala del tema es compatible con la escala del mapa"
 			}
 		],
 		"t10" : [
 			{
-				pt : "A escala do tema &eacute incompat&iacute;vel com a escala do mapa",
+				pt : "Incompat&iacute;vel com a escala",
 				en : "The scale of the theme is incompatible with the scale of the map",
 				es : "La escala del tema es incompatible con la escala del mapa"
 			}
 		],
 		"t11" : [
 			{
-				pt : "A escala do tema n&atilde;o &eacute conhecida",
+				pt : "Escala n&atilde;o conhecida",
 				en : "The scale of the layer is unknown",
 				es : "La escala del tema no es conocida"
 			}
