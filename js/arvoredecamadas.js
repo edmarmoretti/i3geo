@@ -567,6 +567,16 @@ i3GEO.arvoreDeCamadas =
 		 *
 		 */
 		CONFIGICONES : {
+			"ajuda" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "ajudaMapa",
+				funcao : "i3GEO.arvoreDeCamadas.ajudaEmLista()",
+				title : $trad("s1"),
+				dica : "",
+				id : "ajudaMapa",
+				status : true
+			},
 			"refresh" : {
 				tipo : "arvore",
 				icone : "",
@@ -576,6 +586,36 @@ i3GEO.arvoreDeCamadas =
 				dica : $trad("refresh"),
 				curto : "Refresh",
 				id : "i3geo_refresh",
+				status : true
+			},
+			"legenda" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "soltaleg2",
+				funcao : "i3GEO.mapa.legendaHTML.libera()",
+				title : $trad("t2b"),
+				dica : $trad("legenda"),
+				id : "soltaleg2",
+				status : false
+			},
+			"olhoaberto" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "olhoAberto",
+				funcao : "i3GEO.arvoreDeCamadas.aplicaTemas(\"ligartodos\")",
+				title : $trad("t3a"),
+				dica : $trad("t3a"),
+				id : "olhoAberto",
+				status : true
+			},
+			"olhofechado" : {
+				tipo : "arvore",
+				icone : "",
+				classe : "olhoFechado",
+				funcao : "i3GEO.arvoreDeCamadas.aplicaTemas(\"desligartodos\")",
+				title : $trad("t3b"),
+				dica : $trad("t3b"),
+				id : "olhoFechado",
 				status : true
 			},
 			"lixeira" : {
@@ -598,16 +638,6 @@ i3GEO.arvoreDeCamadas =
 				dica : $trad("filtraCam"),
 				id : "i3geo_filtro",
 				status : true
-			},
-			"legenda" : {
-				tipo : "arvore",
-				icone : "",
-				classe : "soltaleg2",
-				funcao : "i3GEO.mapa.legendaHTML.libera()",
-				title : $trad("t2b"),
-				dica : $trad("legenda"),
-				id : "soltaleg2",
-				status : false
 			},
 			"opacidade" : {
 				tipo : "arvore",
@@ -649,34 +679,14 @@ i3GEO.arvoreDeCamadas =
 				id : "ferramentasMapa",
 				status : true
 			},
-			"ajuda" : {
+			"limpasel" : {
 				tipo : "arvore",
 				icone : "",
-				classe : "ajudaMapa",
-				funcao : "i3GEO.arvoreDeCamadas.ajudaEmLista()",
-				title : $trad("s1"),
-				dica : "",
-				id : "ajudaMapa",
-				status : true
-			},
-			"olhoaberto" : {
-				tipo : "arvore",
-				icone : "",
-				classe : "olhoAberto",
-				funcao : "i3GEO.arvoreDeCamadas.aplicaTemas(\"ligartodos\")",
-				title : $trad("t3a"),
-				dica : $trad("t3a"),
-				id : "olhoAberto",
-				status : true
-			},
-			"olhofechado" : {
-				tipo : "arvore",
-				icone : "",
-				classe : "olhoFechado",
-				funcao : "i3GEO.arvoreDeCamadas.aplicaTemas(\"desligartodos\")",
-				title : $trad("t3b"),
-				dica : $trad("t3b"),
-				id : "olhoFechado",
+				classe : "ferramentasMapa",
+				funcao : "i3GEO.mapa.limpasel()",
+				title : $trad("t4"),
+				dica : $trad("t4"),
+				id : "limpaSelMapa",
 				status : true
 			},
 			"ferramentasTema" : {
@@ -1260,7 +1270,7 @@ i3GEO.arvoreDeCamadas =
 
 		},
 		/**
-		 * Monta os &iacute;cones de op&ccedil;&otilde;es gerais da &aacute;rvore, como a lixira, ligar todos, etc.
+		 * Monta os &iacute;cones de op&ccedil;&otilde;es gerais da &aacute;rvore, como a lixeira, ligar todos, etc.
 		 *
 		 * * Parametros:
 		 *
@@ -1788,6 +1798,10 @@ i3GEO.arvoreDeCamadas =
 			// Nao e necessario clonar
 			//
 			tema = i3GEO.pluginI3geo.aplicaPropriedades(tema);
+			//marca se o tema esta selecionado
+			if(tema.sel && tema.sel.toLowerCase() === "sim"){
+				tema.tema = "<span class='i3GEOtemaComSel'>" + tema.tema + "</span>";
+			}
 
 			html +=
 					" id='ArvoreTituloTema" + tema.name + "' >";

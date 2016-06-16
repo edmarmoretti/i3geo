@@ -102,10 +102,12 @@ $ext - extens&atilde;o geogr&aacute;fica do mapa
 		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->qyfile = str_replace(".map",".qy",$map_file);
-  		if($tema != "")
-		{$this->qyfileTema = dirname($map_file)."/".$tema.".php";}
-		else
-		{$this->qyfileTema = "";}
+  		if($tema != ""){
+  			$this->qyfileTema = dirname($map_file)."/".$tema.".php";
+  		}
+		else{
+			$this->qyfileTema = "";
+		}
 		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
@@ -632,26 +634,36 @@ function: selecaoLimpa
 
 Limpa a sele&ccedil;&atilde;o do tema.
 */
-	function selecaoLimpa($apagaQyfile=false)
-	{
+	function selecaoLimpa($apagaQyfile=false){
 		//apaga o arquivo do i3geo com os ids selecionados
-		if(file_exists($this->qyfileTema))
-		{unlink($this->qyfileTema);}
-		if ($this->nome != "" && $apagaQyfile == false) //limpa de um tema
-		{
-			if(!$this->layer){return "erro";}
-			if (file_exists($this->qyfile))
-			{
+		if(file_exists($this->qyfileTema)){
+			unlink($this->qyfileTema);
+		}
+		//limpa de um tema
+		if ($this->nome != "" && $apagaQyfile == false){
+			if(!$this->layer){
+				return "erro";
+			}
+			if (file_exists($this->qyfile)){
 				$this->mapa->loadquery($this->qyfile);
 				$indxlayer = $this->layer->index;
 				$this->mapa->freequery($indxlayer);
 				$this->mapa->savequery($this->qyfile);
 			}
 		}
-		else //limpa de todos os temas
-		{
-			if (file_exists($this->qyfile))
-			{unlink ($this->qyfile);}
+		elseif ($this->nome == ""){
+			//limpa de todos os temas
+			$c = $this->mapa->numlayers;
+			for ($i=0;$i < $c;$i++){
+				$l = $this->mapa->getlayer($i);
+				$file = dirname($this->arquivo)."/".$l->name.".php";
+				if (file_exists($file)){
+					unlink ($file);
+				}
+			}
+			if (file_exists($this->qyfile)){
+				unlink ($this->qyfile);
+			}
 		}
 		return("ok");
 	}

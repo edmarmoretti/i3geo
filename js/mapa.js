@@ -104,6 +104,21 @@ i3GEO.mapa =
 		 */
 		GEOXML : [],
 		/**
+		 * Function: limpasel
+		 *
+		 * Limpa a selecao de todos os temas do mapa
+		 *
+		 */
+		limpasel : function() {
+			i3GEO.php.limpasel(
+				function(retorno) {
+					i3GEO.atualiza();
+					i3GEO.Interface.atualizaMapa();
+				},
+				""
+			);
+		},
+		/**
 		 * Function: insereDobraPagina
 		 *
 		 * Insere o icone do tipo "dobra de pagina" que permite alterar o renderizador do mapa
@@ -509,7 +524,7 @@ i3GEO.mapa =
 			 *
 			 * true
 			 */
-			incluiBotaoLibera : false,
+			incluiBotaoLibera : true,
 			/**
 			 * Armazena o id definido na criacao da legenda
 			 */
@@ -544,100 +559,108 @@ i3GEO.mapa =
 				]);
 				i3GEO.mapa.legendaHTML.atualiza();
 			},
+			montaLegenda : function(retorno){
+				var temp,idleg,legenda = "", ins, re, desativar, tema = "", classe = "";
+
+				idleg = $i(i3GEO.mapa.legendaHTML.ID);
+				//verifica se a janela esta aberta
+				temp = $i("wlegenda_corpo");
+				if (temp && temp.style.display === "block") {
+					idleg = $i("wlegenda_corpo");
+				}
+				re = new RegExp();
+				if (retorno.data !== "erro" && retorno.data !== undefined) {
+					// troca os ids pois podem ja existir na arvore de
+					// camadas
+					re = new RegExp("legendack_", "g");
+					retorno.data.legenda = retorno.data.legenda.replace(re, "liblegendack_");
+
+					legenda =
+						"<div id='i3GEOconteudoLegenda' class='i3GEOconteudoLegendaClass' style='width:100%;height:100%;'><div>"
+						+ retorno.data.legenda
+						+ "</div>";
+				}
+				if (legenda != "" && idleg) {
+					re = new RegExp("<img src='' />", "g");
+					legenda = legenda.replace(re, "");
+					ins = "<div id='legendaOpcoes' style='text-align:left; margin-bottom:10px;'></div>";
+					ins += "<div id='corpoLegi' style='min-height:200px;'>" + legenda + "</div>";
+
+					idleg.innerHTML = "<div style='padding:5px;' >" + ins + "</div>";
+
+					ins = [{
+							text: $trad("mostraTodosLegenda"),
+							url: "javascript:i3GEO.mapa.legendaHTML.mostraTodosOsTemas();"
+						},{
+							text: $trad("mostraSoLegenda"),
+							url: "javascript:i3GEO.mapa.legendaHTML.mostraSoLegenda();"
+						},{
+							text: "PNG",
+							url: "javascript:i3GEO.mapa.legendaHTML.png();"
+						}];
+						//mostra opcao que permite liberar a legenda (usado quando nao esta em uma janela flutuante)
+						if (i3GEO.mapa.legendaHTML.incluiBotaoLibera === true) {
+							ins.push({
+								text: "Abre em uma janela",
+								url: "javascript:i3GEO.mapa.legendaHTML.libera()"
+							});
+						}
+						new YAHOO.widget.Button({
+							type: "menu",
+							label: $trad("opcoes"),
+							name: "legendaOpcoes",
+							menu: ins,
+							container: "legendaOpcoes"
+						});
+				}
+				i3GEO.mapa.legendaHTML.escondeTemasMarcados();
+				// desmarca as classes desligadas
+				desativar = retorno.data.desativar;
+				for (tema in desativar) {
+					for (classe in desativar[tema]) {
+						ins = $i("liblegendack_" + tema + "_" + desativar[tema][classe]);
+						if (ins) {
+							ins.checked = false;
+						}
+					}
+				}
+			},
+			png: function() {
+				var obj = $i("i3GEOconteudoLegenda");
+				if($i("wlegenda")){
+					obj.style.width = $i("wlegenda").style.width;
+				}
+				else{
+					obj.style.width ="400px";
+				}
+				if($i("wlegenda_corpo")){
+					obj.style.height = $i("wlegenda_corpo").style.height;
+				}
+				else{
+					obj.style.height ="400px";
+				}
+				i3GEO.mapa.dialogo.html2canvas(obj);
+			},
+			mostraSoLegenda: function(){
+				var n, i, temp, raiz = $i("corpoLegi").parentNode;
+				temp = raiz.getElementsByClassName("i3GEOLegendaExcluiTema");
+				n = temp.length;
+				for (i = 0; i < n; i++) {
+					temp[i].style.display = "none";
+				}
+				temp = raiz.getElementsByTagName("input");
+				n = temp.length;
+				for (i = 0; i < n; i++) {
+					temp[i].style.display = "none";
+				}
+			},
 			/**
 			 * Function: atualiza
 			 *
 			 * Atualiza o elemento HTML do mapa utilizado para mostrar a legenda
 			 */
 			atualiza : function() {
-				var idleg = $i("wlegenda_corpo"), temp =
-					function(retorno) {
-						var legenda = "", ins, re, desativar, tema = "", classe = "", b;
-						re = new RegExp();
-						if (retorno.data !== "erro" && retorno.data !== undefined) {
-							// troca os ids pois podem ja existir na arvore de
-							// camadas
-							re = new RegExp("legendack_", "g");
-							retorno.data.legenda = retorno.data.legenda.replace(re, "liblegendack_");
-							legenda =
-								"<div class='botoesLegendaFlutuante'>" + "<input type='button' value='"
-									+ $trad("mostraTodosLegenda")
-									+ "' id='legendaMostraTodos' />"
-									+ "<input type='button' value='"
-									+ $trad("mostraSoLegenda")
-									+ "' id='legendaMostraSo' />"
-									+ "<input type='button' value='PNG' id='legendaExpImagem' />"
-									+ "</div>"
-									+ "<div id='i3GEOconteudoLegenda' class='i3GEOconteudoLegendaClass' style='width:100%;height:100%;'><div>"
-									+ retorno.data.legenda
-									+ "</div>";
-						}
-						if (legenda != "" && idleg) {
-							ins = "";
-							// mostra o icone que permite liberar a legenda (usado quando nao esta em uma janela flutuante)
-							if (i3GEO.mapa.legendaHTML.incluiBotaoLibera === true) {
-								ins +=
-									'<div style="cursor: pointer; text-align: left; font-size: 10px; display: block; height: 35px;" onclick="i3GEO.mapa.legendaHTML.libera()"><img id="soltaLeg" src="../imagens/branco.gif" title="clique para liberar" style="margin: 5px; position: relative;"> <p style="position: relative; left: -35px; top: -22px;">' + $trad("x11")
-										+ '</p></div>';
-							}
-							re = new RegExp("<img src='' />", "g");
-							legenda = legenda.replace(re, "");
-							ins += "<div id='corpoLegi' >" + legenda + "</div>";
-
-							idleg.innerHTML = "<div style='padding:5px;' >" + ins + "</div>";
-							// botoes de funcoes especiais
-							if ($i("legendaMostraTodos")) {
-								b = new YAHOO.widget.Button("legendaMostraTodos", {
-									onclick : {
-										fn : function() {
-											i3GEO.mapa.legendaHTML.mostraTodosOsTemas();
-										}
-									}
-								});
-								b.addClass("legendaMostraTodosTemas");
-								b = new YAHOO.widget.Button("legendaMostraSo", {
-									onclick : {
-										fn : function() {
-											var n, i, temp, raiz = $i("corpoLegi").parentNode;
-											temp = raiz.getElementsByClassName("i3GEOLegendaExcluiTema");
-											n = temp.length;
-											for (i = 0; i < n; i++) {
-												temp[i].style.display = "none";
-											}
-											temp = raiz.getElementsByTagName("input");
-											n = temp.length;
-											for (i = 0; i < n; i++) {
-												temp[i].style.display = "none";
-											}
-										}
-									}
-								});
-								b.addClass("legendaMostraSoTemas");
-								b = new YAHOO.widget.Button("legendaExpImagem", {
-									onclick : {
-										fn : function() {
-											var obj = $i("i3GEOconteudoLegenda");
-											obj.style.width = $i("wlegenda").style.width;
-											obj.style.height = $i("wlegenda_corpo").style.height;
-											i3GEO.mapa.dialogo.html2canvas(obj);
-										}
-									}
-								});
-								b.addClass("legendaExpImagemPng");
-							}
-						}
-						i3GEO.mapa.legendaHTML.escondeTemasMarcados();
-						// desmarca as classes desligadas
-						desativar = retorno.data.desativar;
-						for (tema in desativar) {
-							for (classe in desativar[tema]) {
-								ins = $i("liblegendack_" + tema + "_" + desativar[tema][classe]);
-								if (ins) {
-									ins.checked = false;
-								}
-							}
-						}
-					};
+				var idleg = $i("wlegenda_corpo");
 				if (idleg && idleg.style.display === "block") {
 					// para o caso da legenda ja estar aberta
 					if (i3GEO.mapa.legendaHTML.ID !== "") {
@@ -646,7 +669,7 @@ i3GEO.mapa =
 							idleg.innerHTML = "";
 						}
 					}
-					i3GEO.mapa.legendaHTML.obtem(temp);
+					i3GEO.mapa.legendaHTML.obtem(i3GEO.mapa.legendaHTML.montaLegenda);
 				} else {
 					if (idleg) {
 						idleg.innerHTML = "";
@@ -654,7 +677,7 @@ i3GEO.mapa =
 					if (i3GEO.mapa.legendaHTML.ID !== "") {
 						idleg = $i(i3GEO.mapa.legendaHTML.ID);
 						if (idleg && idleg.style.display === "block") {
-							i3GEO.mapa.legendaHTML.obtem(temp);
+							i3GEO.mapa.legendaHTML.obtem(i3GEO.mapa.legendaHTML.montaLegenda);
 						}
 					}
 				}
@@ -735,7 +758,7 @@ i3GEO.mapa =
 					ck = "nao";
 				}
 				if (!largura) {
-					largura = 340;
+					largura = 360;
 				}
 				if (!altura) {
 					altura = 300;

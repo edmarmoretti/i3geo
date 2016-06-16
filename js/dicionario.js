@@ -2347,14 +2347,14 @@ var g_traducao =
 		],
 		"mostraTodosLegenda" : [
 			{
-				pt : "todos",
+				pt : "Mostra tudo",
 				en : "all",
 				es : "todos"
 			}
 		],
 		"mostraSoLegenda" : [
 			{
-				pt : "s&oacute; legenda",
+				pt : "Mostra s&oacute; a legenda",
 				en : "only legend",
 				es : "s&oacute;lo leyenda"
 			}

@@ -1,3 +1,7 @@
+.i3GEOtemaComSel {
+	border-bottom: 1px solid cyan;
+}
+
 .i3GEOfechaGuia {
 	cursor: pointer;
 	left: 0px;
@@ -6,6 +10,24 @@
 	text-align: right;
 	font-size: 14pt;
 	margin-bottom: 10px;
+}
+/*
+botoes da legenda
+*/
+#legendaOpcoes button, #legendaOpcoes .yui-button, #legendaOpcoes .yuimenu {
+	width: 250px;
+	color: black;
+	border-radius : 0px;
+}
+#legendaOpcoes a {
+	color: black;
+}
+#legendaOpcoes .yui-button {
+	background-image : none;
+	border-radius : 0px;
+}
+#legendaOpcoes .first-child{
+	border-radius : 0px;
 }
 /*
 menu de contexto da arvore de camadas
