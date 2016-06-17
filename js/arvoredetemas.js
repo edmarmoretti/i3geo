@@ -22,7 +22,8 @@
  * <http://localhost/i3geo/classesjs/classe_arvoredetemas.js>
  */
 
- /** Licen&ccedil;a:
+/**
+ * Licen&ccedil;a:
  *
  * GPL2
  *
@@ -86,9 +87,10 @@ i3GEO.arvoreDeTemas = {
 	/**
 	 * Propriedade: OPCOESADICIONAIS
 	 *
-	 * Objeto com a defini&ccedil;&atilde;o das propriedades que ser&atilde;o utilizadas na inclus&atilde;o
-	 * dos &iacute;cones adicionais de adi&ccedil;&atilde;o de temas e no item de descri&ccedil;&atilde;o de cada
-	 * tema.
+	 * Objeto com a defini&ccedil;&atilde;o das propriedades que ser&atilde;o
+	 * utilizadas na inclus&atilde;o dos &iacute;cones adicionais de
+	 * adi&ccedil;&atilde;o de temas e no item de descri&ccedil;&atilde;o de
+	 * cada tema.
 	 *
 	 * "uploadarquivo" quando "true" indica que sera mostrado o icone de upload
 	 * de arquivos e o icone de conex&atilde;o com servi&ccedil;os
@@ -109,13 +111,16 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * flutuante - permite abrir o cat&aacute;logo em uma janela flutuante
 	 *
-	 * metaestat - inclui um n&oacute; que mostra os dados cadastrados no sistema metaestat
+	 * metaestat - inclui um n&oacute; que mostra os dados cadastrados no
+	 * sistema metaestat
 	 *
-	 * incluiArvore - inclui na &aacute;rvore do cat&aacute;logo os &iacute;cones de op&ccedil;&otilde;es
+	 * incluiArvore - inclui na &aacute;rvore do cat&aacute;logo os
+	 * &iacute;cones de op&ccedil;&otilde;es
 	 *
 	 * &Iacute;cones iniciais:
 	 *
-	 * uploadarquivo - agregador que abre uma &uacute;nica janela das op&ccedil;&otilde;es de upload de arquivos
+	 * uploadarquivo - agregador que abre uma &uacute;nica janela das
+	 * op&ccedil;&otilde;es de upload de arquivos
 	 *
 	 * uploaddbf- upload de arquivos dbf
 	 *
@@ -129,7 +134,8 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * nuvemTagsFlash - nuvem de tags no formato flash
 	 *
-	 * refresh - &iacute;cone que permite reconstruir a &aacute;rvore do cat&aacute;logo
+	 * refresh - &iacute;cone que permite reconstruir a &aacute;rvore do
+	 * cat&aacute;logo
 	 *
 	 * carousel - visualizador de temas na forma de carousel
 	 *
@@ -139,7 +145,8 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * kml - op&ccedil;&atilde;o para obter KML da camada em foco
 	 *
-	 * estrelas - mostra o n&uacute;mero de estrelas (temas mais acesssados possuem mais estrelas)
+	 * estrelas - mostra o n&uacute;mero de estrelas (temas mais acesssados
+	 * possuem mais estrelas)
 	 *
 	 * qrcode - op&ccedil;&atilde;o para obter QRCODE da camada em foco
 	 *
@@ -147,7 +154,8 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * comentarios - permite que os usu&aacute;rios comentem temas
 	 *
-	 * bookmark - permite que os usu&aacute;rios marquem um tema em servi&ccedil;os de bookmark
+	 * bookmark - permite que os usu&aacute;rios marquem um tema em
+	 * servi&ccedil;os de bookmark
 	 *
 	 * importarwmc - permite importar um arquivo do tipo map context
 	 *
@@ -156,15 +164,15 @@ i3GEO.arvoreDeTemas = {
 	 * {objeto}
 	 */
 	OPCOESADICIONAIS : {
-		incluiArvore : true,
-		uploaddbf : true, //depreciado na versao 6.0
-		uploadlocal : true, //depreciado na versao 6.0
+		incluiArvore : false,
+		uploaddbf : true, // depreciado na versao 6.0
+		uploadlocal : true, // depreciado na versao 6.0
 		uploadarquivo : true,
 		downloadbase : true,
-		conectarwms : true, //depreciado na versao 6.0
-		conectarwmst : true, //depreciado na versao 6.0
-		conectargeorss : true, //depreciado na versao 6.0
-		conectargeojson : true, //depreciado na versao 6.0
+		conectarwms : true, // depreciado na versao 6.0
+		conectarwmst : true, // depreciado na versao 6.0
+		conectargeorss : true, // depreciado na versao 6.0
+		conectargeojson : true, // depreciado na versao 6.0
 		nuvemTags : true,
 		nuvemTagsFlash : false,
 		navegacaoDir : true,
@@ -176,20 +184,21 @@ i3GEO.arvoreDeTemas = {
 		refresh : true,
 		carousel : true,
 		inde : true,
-		uploadgpx : true, //depreciado na versao 6.0
+		uploadgpx : true, // depreciado na versao 6.0
 		comentarios : true,
 		bookmark : true,
 		importarwmc : true,
 		googleearth : true,
-		carregaKml : true, //depreciado na versao 6.0
+		carregaKml : true, // depreciado na versao 6.0
 		flutuante : true,
 		metaestat : true,
-		idonde : ""
+		idonde : "arvoreCatOpcoes"
 	},
 	/**
 	 * Propriedade: INCLUISISTEMAS
 	 *
-	 * Inclui na &aacute;rvore a lista de sistemas adicionais definidos no i3geo?
+	 * Inclui na &aacute;rvore a lista de sistemas adicionais definidos no
+	 * i3geo?
 	 *
 	 * Tipo:
 	 *
@@ -217,8 +226,8 @@ i3GEO.arvoreDeTemas = {
 	/**
 	 * Propriedade: INCLUIREGIOES
 	 *
-	 * Inclui na &aacute;rvore a lista de de regi&otilde;es cadatsradas no sistema de
-	 * metadados estat&iacute;sticos
+	 * Inclui na &aacute;rvore a lista de de regi&otilde;es cadatsradas no
+	 * sistema de metadados estat&iacute;sticos
 	 *
 	 * Tipo:
 	 *
@@ -246,8 +255,8 @@ i3GEO.arvoreDeTemas = {
 	/**
 	 * Propriedade: INCLUIWMSMETAESTAT
 	 *
-	 * Inclui na &aacute;rvore a lista de Web Services WMS advindos do sistema de
-	 * metadados estat&iacute;sticos?
+	 * Inclui na &aacute;rvore a lista de Web Services WMS advindos do sistema
+	 * de metadados estat&iacute;sticos?
 	 *
 	 * Tipo:
 	 *
@@ -261,8 +270,8 @@ i3GEO.arvoreDeTemas = {
 	/**
 	 * Propriedade: INCLUIMAPASCADASTRADOS
 	 *
-	 * Inclui na &aacute;rvore a lista de mapas cadastrados do sistema de metadados
-	 * estat&iacute;sticos?
+	 * Inclui na &aacute;rvore a lista de mapas cadastrados do sistema de
+	 * metadados estat&iacute;sticos?
 	 *
 	 * Tipo:
 	 *
@@ -276,8 +285,8 @@ i3GEO.arvoreDeTemas = {
 	/**
 	 * Propriedade: INCLUIESTRELAS
 	 *
-	 * Inclui na &aacute;rvore um no com a lista de temas classificados conforme o
-	 * numero de estrelas que possui
+	 * Inclui na &aacute;rvore um no com a lista de temas classificados conforme
+	 * o numero de estrelas que possui
 	 *
 	 * Tipo:
 	 *
@@ -333,39 +342,37 @@ i3GEO.arvoreDeTemas = {
 	/**
 	 * Propriedade: ATIVATEMA
 	 *
-	 * Nome da fun&ccedil;&atilde;o que ser&aacute; incluida no evento onclick do elemento checkbox
-	 * adicionado no in&iacute;cio do nome de um tema.
+	 * Nome da fun&ccedil;&atilde;o que ser&aacute; incluida no evento onclick
+	 * do elemento checkbox adicionado no in&iacute;cio do nome de um tema.
 	 *
 	 * Tipo:
 	 *
 	 * {String}
 	 *
 	 * Default:
-	 *
-	 * ""
+	 *  ""
 	 */
 	ATIVATEMA : "",
 	/**
 	 * Propriedade: IDSMENUS
 	 *
 	 * Array com a lista de ids de menus cadastrados que ser&atilde;o
-	 * considerados na montagem da &aacute;rvore. Por default &eacute; vazio, o que
-	 * significa que todos os menus serao considerados.
+	 * considerados na montagem da &aacute;rvore. Por default &eacute; vazio, o
+	 * que significa que todos os menus serao considerados.
 	 *
 	 * Tipo:
 	 *
 	 * {Array}
 	 *
 	 * Default:
-	 *
-	 * []
+	 *  []
 	 */
 	IDSMENUS : [],
 	/**
 	 * Propriedade: RETORNAGUIA
 	 *
-	 * Guia que ser&aacute; ativada ap&oacute;s uma opera&ccedil;&atilde;o de adi&ccedil;&atilde;o de temas ter sido
-	 * concluida.
+	 * Guia que ser&aacute; ativada ap&oacute;s uma opera&ccedil;&atilde;o de
+	 * adi&ccedil;&atilde;o de temas ter sido concluida.
 	 *
 	 * Se for vazia, a guia atual sera mantida.
 	 *
@@ -378,13 +385,12 @@ i3GEO.arvoreDeTemas = {
 	 * {String}
 	 *
 	 * Default:
-	 *
-	 * ""
+	 *  ""
 	 */
 	RETORNAGUIA : "",
 	/**
-	 * Objeto com a lista de drives no servidor que podem ser abertos na
-	 * opcao de navegacao pelos diretorios
+	 * Objeto com a lista de drives no servidor que podem ser abertos na opcao
+	 * de navegacao pelos diretorios
 	 *
 	 * Tipo:
 	 *
@@ -400,8 +406,7 @@ i3GEO.arvoreDeTemas = {
 	 */
 	SISTEMAS : null,
 	/**
-	 * Armazena o objeto com a lista de menus resultante da funcao
-	 * listaMenus
+	 * Armazena o objeto com a lista de menus resultante da funcao listaMenus
 	 *
 	 * Tipo:
 	 *
@@ -449,7 +454,7 @@ i3GEO.arvoreDeTemas = {
 	 * {String}
 	 */
 	SID : null,
-	//contador utilizado para definir um ID para cada texto de WMS
+	// contador utilizado para definir um ID para cada texto de WMS
 	CONTATEMAWMS : 0,
 	/**
 	 * Function: flutuante
@@ -470,9 +475,16 @@ i3GEO.arvoreDeTemas = {
 		if (altura > 500) {
 			altura = 500;
 		}
-		janela = i3GEO.janela.cria("360px", altura + "px", "", "", "",
-				"<span class='i3GEOiconeFerramenta i3GEOiconeCatalogo'></span><div class='i3GeoTituloJanela'>" + $trad("g1a") + "</div>", "i3GEOFcatalogo", false, "hd", cabecalho,
-				minimiza);
+		janela = i3GEO.janela
+				.cria(
+						"360px",
+						altura + "px",
+						"",
+						"",
+						"",
+						"<span class='i3GEOiconeFerramenta i3GEOiconeCatalogo'></span><div class='i3GeoTituloJanela'>"
+								+ $trad("g1a") + "</div>", "i3GEOFcatalogo",
+						false, "hd", cabecalho, minimiza);
 		temp = function() {
 			delete (i3GEO.arvoreDeTemas.ARVORE);
 		};
@@ -514,7 +526,7 @@ i3GEO.arvoreDeTemas = {
 				} else {
 					html += " (% de acessos n&atilde;o definido)</span>";
 				}
-				//html += "<hr>";
+				// html += "<hr>";
 				tempNode = new YAHOO.widget.HTMLNode({
 					html : html,
 					id_ws : raiz[i].id_ws,
@@ -524,7 +536,7 @@ i3GEO.arvoreDeTemas = {
 					expanded : false,
 					hasIcon : true,
 					enableHighlight : true,
-					className: "i3GeoFolder"
+					className : "i3GeoFolder"
 				}, node);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
 			}
@@ -559,12 +571,11 @@ i3GEO.arvoreDeTemas = {
 					html : html,
 					expanded : false,
 					hasIcon : true,
-					className: "i3GeoFolder",
+					className : "i3GeoFolder",
 					enableHighlight : false,
 					tipoa_tema : "METAREGIAO",
 					codigo_tipo_regiao : retorno[i].codigo_tipo_regiao,
-					idtema : "metaregiao_"
-							+ retorno[i].codigo_tipo_regiao
+					idtema : "metaregiao_" + retorno[i].codigo_tipo_regiao
 				}, node);
 			}
 			node.loadComplete();
@@ -614,14 +625,14 @@ i3GEO.arvoreDeTemas = {
 			for (i = 0; i < nraiz; i += 1) {
 				html = "<span title='" + retorno[i].descricao + "'> "
 						+ retorno[i].nome;
-				//html += "<hr>";
+				// html += "<hr>";
 				tempNode = new YAHOO.widget.HTMLNode({
 					codigo_variavel : retorno[i].codigo_variavel,
 					html : html,
 					expanded : false,
 					hasIcon : true,
 					enableHighlight : true,
-					className: "i3GeoFolder"
+					className : "i3GeoFolder"
 				}, node);
 				tempNode.setDynamicLoad(
 						i3GEO.arvoreDeTemas.listaMedidasVariavel, 1);
@@ -739,37 +750,39 @@ i3GEO.arvoreDeTemas = {
 	montaTextoTemaWMS : function(servico, layer, estilo, titulo, proj,
 			formatoinfo, versao, formatoimg, cor, link) {
 		var html, adiciona, e, id;
-		//id para marcar o checkbox
+		// id para marcar o checkbox
 		id = "wmsckbox" + i3GEO.arvoreDeTemas.CONTATEMAWMS;
 
-		adiciona = "i3GEO.php.adicionaTemaWMS(\"\"," + "\"" + servico
-				+ "\"," + "\"" + layer + "\"," + "\"" + estilo + "\"," + "\""
-				+ proj + "\"," + "\"" + formatoimg + "\"," + "\"" + versao
-				+ "\"," + "\"" + titulo + "\"," + "\"\"," + "\"nao\"," + "\""
-				+ formatoinfo + "\"," + "\"\"," + "\"\",$i(\"" + id +"\").checked)";
-		adiciona = "onclick='javascript:"
-				+ adiciona
-				+ "' ";
+		adiciona = "i3GEO.php.adicionaTemaWMS(\"\"," + "\"" + servico + "\","
+				+ "\"" + layer + "\"," + "\"" + estilo + "\"," + "\"" + proj
+				+ "\"," + "\"" + formatoimg + "\"," + "\"" + versao + "\","
+				+ "\"" + titulo + "\"," + "\"\"," + "\"nao\"," + "\""
+				+ formatoinfo + "\"," + "\"\"," + "\"\",$i(\"" + id
+				+ "\").checked)";
+		adiciona = "onclick='javascript:" + adiciona + "' ";
 
 		html = "<td style='vertical-align:top;padding-top:2px;text-align:left;'>";
-		html += "<input " + adiciona + " style='cursor:pointer;border:solid 0 white;' type='checkbox' id='" + id + "' />";
+		html += "<input "
+				+ adiciona
+				+ " style='cursor:pointer;border:solid 0 white;' type='checkbox' id='"
+				+ id + "' />";
 
 		e = "style='cursor:pointer;text-align:left;padding-left:0px;position:relative;top:1px;'";
 		/*
+		 * if (link) { html += "<label " + e + "for='wmsckbox" +
+		 * i3GEO.arvoreDeTemas.CONTATEMAWMS + "'><a href='" + link + "'
+		 * target=_blank >" + layer + " - " + titulo + "</a></label>"; } else {
+		 * html += "<label " + e + " for='wmsckbox" +
+		 * i3GEO.arvoreDeTemas.CONTATEMAWMS + "'>" + layer + " - " + titulo + "</label>"; }
+		 */
 		if (link) {
-			html += "<label  " + e + "for='wmsckbox" + i3GEO.arvoreDeTemas.CONTATEMAWMS + "'><a href='" + link + "' target=_blank >" + layer + " - "
-					+ titulo + "</a></label>";
+			link = "<a style='margin-left:15px;' href='" + link
+					+ "' target='_blank'>metadata </a>";
 		} else {
-			html += "<label " + e + " for='wmsckbox" + i3GEO.arvoreDeTemas.CONTATEMAWMS + "'>" + layer + " - " + titulo + "</label>";
-		}
-		*/
-		if(link){
-			link = "<a style='margin-left:15px;' href='" + link + "' target='_blank'>metadata </a>";
-		}
-		else{
 			link = "";
 		}
-		html += "<label for='" + id + "' " + e + " >" + layer + " - " + titulo + "</label>";
+		html += "<label for='" + id + "' " + e + " >" + layer + " - " + titulo
+				+ "</label>";
 
 		html += link + "</td>";
 		i3GEO.arvoreDeTemas.CONTATEMAWMS = i3GEO.arvoreDeTemas.CONTATEMAWMS + 1;
@@ -780,8 +793,9 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Lista os menus
 	 *
-	 * Pesquisa no banco de dados administrativo ou na vari&aacute;vel de configura&ccedil;&atilde;o
-	 * (veja ms_configura.php) a lista de menus disponiveis.
+	 * Pesquisa no banco de dados administrativo ou na vari&aacute;vel de
+	 * configura&ccedil;&atilde;o (veja ms_configura.php) a lista de menus
+	 * disponiveis.
 	 *
 	 * O resultado e incluido em i3GEO.arvoreDeTemas.MENUS.
 	 *
@@ -792,11 +806,10 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
-	 * classesphp
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 	 *
-	 * {String} - nome da funcao que sera executada quando a lista for
-	 * recebida. Se for "", nao e chamada.
+	 * {String} - nome da funcao que sera executada quando a lista for recebida.
+	 * Se for "", nao e chamada.
 	 */
 	listaMenus : function(g_sid, g_locaplic, funcao) {
 		if (typeof (console) !== 'undefined')
@@ -818,7 +831,7 @@ i3GEO.arvoreDeTemas = {
 					}
 				}
 			}
-			//necessario usar arguments por causa do compactador de scripts
+			// necessario usar arguments por causa do compactador de scripts
 			if (funcao !== "") {
 				eval(funcao + "(arguments[0]);");
 			}
@@ -836,13 +849,12 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
-	 * classesphp
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 	 *
 	 * {String} - Id do menu que contem os grupos
 	 *
-	 * {Function} - funcao que sera executada quando a lista for
-	 * recebida. Se for "", nao e chamada.
+	 * {Function} - funcao que sera executada quando a lista for recebida. Se
+	 * for "", nao e chamada.
 	 */
 	listaGrupos : function(g_sid, g_locaplic, id_menu, funcao) {
 		if (typeof (console) !== 'undefined')
@@ -871,15 +883,14 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
-	 * classesphp
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 	 *
 	 * {String} - Id do menu que contem os grupos
 	 *
 	 * {String} - Id do grupo que contem os sub-grupos
 	 *
-	 * {Function} - funcao que sera executada quando a lista for
-	 * recebida. Se for "", nao e chamada.
+	 * {Function} - funcao que sera executada quando a lista for recebida. Se
+	 * for "", nao e chamada.
 	 */
 	listaSubGrupos : function(g_sid, g_locaplic, id_menu, id_grupo, funcao) {
 		if (typeof (console) !== 'undefined')
@@ -904,8 +915,7 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
-	 * classesphp
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 	 *
 	 * {String} - Id do menu que contem os grupos
 	 *
@@ -913,8 +923,8 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} - Id do sub-grupo que contem os temas
 	 *
-	 * {Function} - funcao que sera executada quando a lista for
-	 * recebida. Se for "", nao e chamada.
+	 * {Function} - funcao que sera executada quando a lista for recebida. Se
+	 * for "", nao e chamada.
 	 */
 	listaTemas : function(g_sid, g_locaplic, id_menu, id_grupo, id_subgrupo,
 			funcao) {
@@ -940,11 +950,10 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
-	 * classesphp
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 	 *
-	 * {Function} - funcao que sera executada quando a lista for
-	 * recebida. Se for "", nao e chamada.
+	 * {Function} - funcao que sera executada quando a lista for recebida. Se
+	 * for "", nao e chamada.
 	 */
 	listaSistemas : function(g_sid, g_locaplic, funcao) {
 		if (typeof (console) !== 'undefined')
@@ -968,11 +977,10 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} - Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio
-	 * classesphp
+	 * {String} - Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 	 *
-	 * {Function} - funcao que sera executada quando a lista for
-	 * recebida. Se for "", nao e chamada.
+	 * {Function} - funcao que sera executada quando a lista for recebida. Se
+	 * for "", nao e chamada.
 	 */
 	listaDrives : function(g_sid, g_locaplic, funcao) {
 		if (typeof (console) !== 'undefined')
@@ -1103,19 +1111,19 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} Codigo da secao PHP criada ao abrir o i3Geo
 	 *
-	 * {String} Endereco da aplicacao (i3geo) onde fica o diretorio
-	 * classesphp
+	 * {String} Endereco da aplicacao (i3geo) onde fica o diretorio classesphp
 	 *
-	 * {String} Id do elemento onde a arvore sera inserida. Se for
-	 * vazio, sera utilizado o ID definido em IDHTML
+	 * {String} Id do elemento onde a arvore sera inserida. Se for vazio, sera
+	 * utilizado o ID definido em IDHTML
 	 *
-	 * {String} (opcional) Nome da funcao que sera executada quando o usuario clicar no checkbox de um tema
+	 * {String} (opcional) Nome da funcao que sera executada quando o usuario
+	 * clicar no checkbox de um tema
 	 *
-	 * {Object} (opcional) Objeto com as opcoes necessarias para
-	 * criacao dos icones com as opcoes adicionais de adicao de temas
+	 * {Object} (opcional) Objeto com as opcoes necessarias para criacao dos
+	 * icones com as opcoes adicionais de adicao de temas
 	 *
-	 * {String} (opcional) checkbox|radio|download tipo de botao que
-	 * sera mostrado para o usuario escolher o tema
+	 * {String} (opcional) checkbox|radio|download tipo de botao que sera
+	 * mostrado para o usuario escolher o tema
 	 */
 	cria : function(g_sid, g_locaplic, idhtml, funcaoTema, objOpcoes, tipoBotao) {
 		if (typeof (console) !== 'undefined')
@@ -1183,7 +1191,7 @@ i3GEO.arvoreDeTemas = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.arvoreDeTemas.montaArvore()");
 
-		var ig, mais = "", tempNode, tempNode1, retorno, root, insp, outrasOpcoes, dados, c, i, j, conteudo, editor;
+		var ig, mais = "", tempNode, tempNode1, retorno, root, insp = "", outrasOpcoes, dados, c, i, j, conteudo, editor;
 		(function() {
 			function changeIconMode() {
 				buildTree();
@@ -1196,52 +1204,53 @@ i3GEO.arvoreDeTemas = {
 		})();
 		// opcao de busca de temas
 		root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
+		/*
 		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca === true) {
-			insp = "<table><tr>"
-					+ "<td><span style='font-size:12px'>&nbsp;"
-					+ $trad("a1")
-					+ "<a class=ajuda_usuario target=_blank href='"
-					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=4&idajuda=31' >&nbsp;&nbsp;&nbsp;&nbsp;</a></span></td>"
-					+ "<td>"
-					+ "<div><input onclick='javascript:this.select();' class='digitar' type='text' id='i3geo_buscatema' style=width:112px; value=''  /></div>"
-					+ "</td>" + "<td><img  class='ticfind' ";
-			if (navm) {
-				insp += "style='top:0px; margin-left: 4px;'";
-			} else {
-				insp += "style='top:4px;margin-left: 4px;'";
-			}
-			insp += " src='"
-					+ i3GEO.configura.locaplic + "/imagens/branco.gif"
-					+ "' onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.buscaTema2(document.getElementById(\"i3geo_buscatema\").value)' /></td>";
-			insp += "</tr></table>&nbsp;";
-
-			tempNode = new YAHOO.widget.HTMLNode({
-				html : insp,
-				enableHighlight : false,
-				expanded : false,
-				hasIcon : false
-			}, root);
+			insp = document.createElement("form");
+			insp.onsubmit = function(){
+				i3GEO.arvoreDeTemas.buscaTema2($i("i3GEObuscatema").value);
+			};
+			insp.innerHTML = "<div title='" + $trad("a1") +"' class='i3geoForm' style='width:160px;'><input name='' class=i3geoFormSemIcone type=text value='' id='i3GEObuscatema' /></div>";
 		}
-		//titulo do catalogo
-		tempNode = new YAHOO.widget.HTMLNode(
-			{
-				html : "<b>" + $trad("g1a") + "</b>",
-				idmenu : "",
-				enableHighlight : false,
-				expanded : false,
-				hasIcon : false
-			}, root);
+		*/
+		// titulo do catalogo
+		tempNode = new YAHOO.widget.HTMLNode({
+			html : "<b>" + $trad("g1a") + "</b>",
+			idmenu : "",
+			enableHighlight : false,
+			expanded : false,
+			hasIcon : false
+		}, root);
 		// icones com as outras opcoes
 		// conforme definido em i3GEO.arvoreDeTemas.OPCOESADICIONAIS
 		outrasOpcoes = i3GEO.arvoreDeTemas.outrasOpcoesHTML();
 		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde !== "") {
-			document
-					.getElementById(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde).innerHTML = outrasOpcoes;
+			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.googleearth === true){
+				outrasOpcoes["hash"].push({
+					text: $trad("a13"),
+					url: i3GEO.configura.locaplic + "/kml.php?tipoxml=kml",
+					target: "_blank"
+				});
+			}
+			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.flutuante === true){
+				outrasOpcoes["hash"].push({
+					text: $trad("x10"),
+					url: 'javascript:i3GEO.arvoreDeTemas.abrejanelaIframe("900","500","' + i3GEO.configura.locaplic + '/admin/html/menus.html\")'
+				});
+			}
+			new YAHOO.widget.Button({
+				type: "menu",
+				label: $trad("opcoes"),
+				name: "arvoreCatOpcoes",
+				menu: outrasOpcoes["hash"],
+				container: i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde
+			});
+			i3GEO.arvoreDeTemas.OPCOESADICIONAIS.googleearth = false;
+			i3GEO.arvoreDeTemas.OPCOESADICIONAIS.flutuante = false;
 		}
 		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore === true) {
 			tempNode = new YAHOO.widget.HTMLNode({
-				html : outrasOpcoes + "&nbsp;<br>",
+				html : outrasOpcoes["html"] + "&nbsp;<br>",
 				isLeaf : true,
 				enableHighlight : true,
 				expanded : false,
@@ -1285,19 +1294,17 @@ i3GEO.arvoreDeTemas = {
 		// abrir no google earth
 		//
 		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.googleearth === true) {
-			tempNode = new YAHOO.widget.HTMLNode(
-					{
-						html : "<a href='"
-								+ i3GEO.configura.locaplic
-								+ "/kml.php?tipoxml=kml' target=blank > <img src='"
-								+ i3GEO.configura.locaplic
-								+ "/imagens/branco.gif' class='abregoogleearth'> "
-								+ $trad("a13") + "</a>",
-						idmenu : "",
-						enableHighlight : false,
-						expanded : false,
-						hasIcon : true
-					}, root);
+			tempNode = new YAHOO.widget.HTMLNode({
+				html : "<a href='" + i3GEO.configura.locaplic
+						+ "/kml.php?tipoxml=kml' target=blank > <img src='"
+						+ i3GEO.configura.locaplic
+						+ "/imagens/branco.gif' class='abregoogleearth'> "
+						+ $trad("a13") + "</a>",
+				idmenu : "",
+				enableHighlight : false,
+				expanded : false,
+				hasIcon : true
+			}, root);
 		}
 		//
 		// abrir catalogo em janela flutuante
@@ -1312,14 +1319,19 @@ i3GEO.arvoreDeTemas = {
 						hasIcon : true
 					}, root);
 		}
-		//agrupamento de outras funcoes
-		if(i3GEO.arvoreDeTemas.INCLUISISTEMAS === true || i3GEO.arvoreDeTemas.INCLUIESTRELAS === true || i3GEO.arvoreDeTemas.INCLUIMAPASCADASTRADOS === true || i3GEO.arvoreDeTemas.INCLUIWMS === true || i3GEO.arvoreDeTemas.INCLUIREGIOES === true || i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT === true){
+		// agrupamento de outras funcoes
+		if (i3GEO.arvoreDeTemas.INCLUISISTEMAS === true
+				|| i3GEO.arvoreDeTemas.INCLUIESTRELAS === true
+				|| i3GEO.arvoreDeTemas.INCLUIMAPASCADASTRADOS === true
+				|| i3GEO.arvoreDeTemas.INCLUIWMS === true
+				|| i3GEO.arvoreDeTemas.INCLUIREGIOES === true
+				|| i3GEO.arvoreDeTemas.INCLUIWMSMETAESTAT === true) {
 			mais = new YAHOO.widget.HTMLNode({
 				html : $trad("mais"),
 				enableHighlight : false,
 				expanded : false,
-				idmais: "idmais",
-				className: "i3GeoFolder"
+				idmais : "idmais",
+				className : "i3GeoFolder"
 			}, root);
 			//
 			// wms
@@ -1329,7 +1341,8 @@ i3GEO.arvoreDeTemas = {
 					editor = "<img title='Editar lista' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""
 							+ i3GEO.configura.locaplic
 							+ "/admin/html/webservices.html?tipo=WMS\")' style='width:11px;position:relative;left:3px' src='"
-							+ i3GEO.configura.locaplic + "/imagens/edit.gif' />";
+							+ i3GEO.configura.locaplic
+							+ "/imagens/edit.gif' />";
 				} else {
 					editor = "";
 				}
@@ -1342,7 +1355,7 @@ i3GEO.arvoreDeTemas = {
 									+ editor,
 							idwms : "raiz",
 							expanded : false,
-							className: "i3GeoFolder",
+							className : "i3GeoFolder",
 							enableHighlight : false
 						}, mais);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaWMS, 1);
@@ -1361,7 +1374,7 @@ i3GEO.arvoreDeTemas = {
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=33' ><b> </b></a>",
 							idregioes : "raiz",
 							expanded : false,
-							className: "i3GeoFolder",
+							className : "i3GeoFolder",
 							enableHighlight : false
 						}, mais);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaRegioes, 1);
@@ -1380,7 +1393,7 @@ i3GEO.arvoreDeTemas = {
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=112' ><b> </b></a>",
 							idwmsmetaestat : "raiz",
 							expanded : false,
-							className: "i3GeoFolder",
+							className : "i3GeoFolder",
 							enableHighlight : false
 						}, mais);
 				tempNode.setDynamicLoad(
@@ -1391,15 +1404,15 @@ i3GEO.arvoreDeTemas = {
 			//
 			if (i3GEO.arvoreDeTemas.INCLUIMAPASCADASTRADOS === true) {
 				tempNode = new YAHOO.widget.HTMLNode({
-					html : "<span style='position:relative;'>"
-							+ $trad("x90") + "</span>",
+					html : "<span style='position:relative;'>" + $trad("x90")
+							+ "</span>",
 					idmapacadastrado : "raiz",
 					expanded : false,
-					className: "i3GeoFolder",
+					className : "i3GeoFolder",
 					enableHighlight : true
 				}, mais);
-				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaMapasCadastrados,
-						1);
+				tempNode.setDynamicLoad(
+						i3GEO.arvoreDeTemas.listaMapasCadastrados, 1);
 			}
 			//
 			// estrelas
@@ -1414,17 +1427,19 @@ i3GEO.arvoreDeTemas = {
 									+ i3GEO.configura.locaplic
 									+ "/ajuda_usuario.php?idcategoria=4&idajuda=95' ><b> </b></a>",
 							enableHighlight : false,
-							className: "i3GeoFolder"
+							className : "i3GeoFolder"
 						}, mais);
 				ig = 5;
 				do {
 					tempNode1 = new YAHOO.widget.HTMLNode({
 						expanded : false,
-						html : "<img src='" + i3GEO.configura.locaplic + "/imagens/e" + ig + ".png ' />",
+						html : "<img src='" + i3GEO.configura.locaplic
+								+ "/imagens/e" + ig + ".png ' />",
 						enableHighlight : true,
 						nivel : ig
 					}, tempNode);
-					tempNode1.setDynamicLoad(i3GEO.arvoreDeTemas.listaEstrelas, 1);
+					tempNode1.setDynamicLoad(i3GEO.arvoreDeTemas.listaEstrelas,
+							1);
 					ig -= 1;
 				} while (ig > 0);
 			}
@@ -1469,8 +1484,8 @@ i3GEO.arvoreDeTemas = {
 										+ "px','" + (funcoes[ig2].H) + "px','"
 										+ (funcoes[ig2].ABRIR) + "','','','"
 										+ $trad("a11") + "')";
-								nomeFunc = "<a href='#' onclick=\"" + abre + "\">"
-										+ funcoes[ig2].NOME + "</a>";
+								nomeFunc = "<a href='#' onclick=\"" + abre
+										+ "\">" + funcoes[ig2].NOME + "</a>";
 								new YAHOO.widget.HTMLNode({
 									html : nomeFunc,
 									expanded : false,
@@ -1526,9 +1541,7 @@ i3GEO.arvoreDeTemas = {
 			}
 			if (dados[i].publicado.toLowerCase() !== "nao") {
 				conteudo = "<span style='position:relative;' title='"
-						+ (dados[i].desc)
-						+ "'>"
-						+ dados[i].nomemenu
+						+ (dados[i].desc) + "'>" + dados[i].nomemenu
 						+ "</span>" + editor;
 			} else {
 				conteudo = "<span title='nao publicado' style='color:red'>"
@@ -1539,7 +1552,7 @@ i3GEO.arvoreDeTemas = {
 				idmenu : dados[i].idmenu,
 				enableHighlight : true,
 				expanded : false,
-				className: "i3GeoFolder"
+				className : "i3GeoFolder"
 			}, root);
 			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaGrupos, 1);
 			if (dados[i].status === "aberto") {
@@ -1550,7 +1563,7 @@ i3GEO.arvoreDeTemas = {
 		if (!i3GEO.arvoreDeTemas.INCLUISISTEMAS) {
 			if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir === false) {
 				i3GEO.arvoreDeTemas.ARVORE.draw();
-			} else if(mais != ""){
+			} else if (mais != "") {
 				i3GEO.arvoreDeTemas.adicionaNoNavegacaoDir();
 			}
 		}
@@ -1578,9 +1591,9 @@ i3GEO.arvoreDeTemas = {
 								+ "/ajuda_usuario.php?idcategoria=4&idajuda=32' ><b> </b></a>",
 						enableHighlight : false,
 						expanded : false,
-						className: "i3GeoFolder"
-					}, i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idmais","idmais")
-				);
+						className : "i3GeoFolder"
+					}, i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idmais",
+							"idmais"));
 			ig = 0;
 			do {
 				drive = new YAHOO.widget.HTMLNode({
@@ -1591,7 +1604,7 @@ i3GEO.arvoreDeTemas = {
 					caminho : drives[ig].caminho,
 					enableHighlight : true,
 					expanded : false,
-					className: "i3GeoFolder"
+					className : "i3GeoFolder"
 				}, tempNode);
 				drive.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
 				ig += 1;
@@ -1676,14 +1689,14 @@ i3GEO.arvoreDeTemas = {
 						html : "<span style='position:relative;'>"
 								+ grupos[i].nome + editor + "</span>",
 						idmenu : node.data.idmenu,
-						className: "i3GeoFolder",
+						className : "i3GeoFolder",
 						idgrupo : i
 					};
 					if (grupos[i].id_n1) {
 						d = {
 							html : grupos[i].nome + editor,
 							idmenu : node.data.idmenu,
-							className: "i3GeoFolder",
+							className : "i3GeoFolder",
 							idgrupo : grupos[i].id_n1
 						};
 					}
@@ -1787,7 +1800,7 @@ i3GEO.arvoreDeTemas = {
 								+ subgrupos[i].nome + editor + "</span>",
 						idmenu : node.data.idmenu,
 						idgrupo : node.data.idgrupo,
-						className: "i3GeoFolder",
+						className : "i3GeoFolder",
 						idsubgrupo : i
 					};
 					if (subgrupos[i].id_n2) {
@@ -1796,7 +1809,7 @@ i3GEO.arvoreDeTemas = {
 							idmenu : node.data.idmenu,
 							idgrupo : node.data.idgrupo,
 							idsubgrupo : subgrupos[i].id_n2,
-							className: "i3GeoFolder"
+							className : "i3GeoFolder"
 						};
 					}
 					tempNode = new YAHOO.widget.HTMLNode(d, node, false, true);
@@ -1902,7 +1915,7 @@ i3GEO.arvoreDeTemas = {
 					listaShp : node.data.listaShp,
 					retornaDir : node.data.retornaDir,
 					funcaoClick : funcaoClick,
-					className: "i3GeoFolder"
+					className : "i3GeoFolder"
 				}, node);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
 			}
@@ -1925,11 +1938,11 @@ i3GEO.arvoreDeTemas = {
 							+ "' onclick='" + funcaoClick + "(\""
 							+ node.data.caminho + "/" + conteudo + "\")' >"
 							+ conteudo + "</a>";
-					//if (retorno.data.urls && retorno.data.urls[ig] != "") {
-						// conteudo += "&nbsp;<img
-						// src='"+i3GEO.configura.locaplic+"/.."+retorno.data.urls[ig]+"'
-						// style='height:20px;width:20px'/>";
-					//}
+					// if (retorno.data.urls && retorno.data.urls[ig] != "") {
+					// conteudo += "&nbsp;<img
+					// src='"+i3GEO.configura.locaplic+"/.."+retorno.data.urls[ig]+"'
+					// style='height:20px;width:20px'/>";
+					// }
 					new YAHOO.widget.HTMLNode({
 						isLeaf : true,
 						enableHighlight : false,
@@ -1961,12 +1974,15 @@ i3GEO.arvoreDeTemas = {
 		html = "<td class='ygtvcontent' style='text-align:left;'>";
 		// verifica que tipo de botao sera usado para o usuario clicar
 		if (i3GEO.arvoreDeTemas.TIPOBOTAO !== "download") {
-			html += "<input id='" + tema.tid + "ckboxc' title='"
+			html += "<input id='"
+					+ tema.tid
+					+ "ckboxc' title='"
 					+ tema.tid
 					+ "' style='position:relative;top:3px;width:12px;height:12px;cursor:pointer;border:solid 0 white;' ";
 		} else {
 			html += "<img style='position:relative;top:3px;' title='"
-					+ tema.tid + "' src='" + i3GEO.configura.locaplic + "/imagens/down1.gif'";
+					+ tema.tid + "' src='" + i3GEO.configura.locaplic
+					+ "/imagens/down1.gif'";
 		}
 		// verifica se existe uma funcao alternativa de ativacao do tema
 		if (i3GEO.arvoreDeTemas.ATIVATEMA !== "") {
@@ -1986,7 +2002,9 @@ i3GEO.arvoreDeTemas = {
 		} else {
 			html += " /> ";
 		}
-		html += "<label for='" + tema.tid + "ckboxc' title='"
+		html += "<label for='"
+				+ tema.tid
+				+ "ckboxc' title='"
 				+ tema.tid
 				+ "' onmouseout='javascript:this.style.color=\""
 				+ cor
@@ -2002,15 +2020,14 @@ i3GEO.arvoreDeTemas = {
 	 * ou nao e decide se deve desligar ou ligar
 	 */
 	verificaStatusTema : function(obj, tid) {
-		if(obj.tagName != "INPUT"){
+		if (obj.tagName != "INPUT") {
 			return;
 		}
 		// confirma se o tema existe no mapa
 		if (i3GEO.arvoreDeCamadas.pegaTema(tid) !== "") {
-			if(i3GEO.arvoreDeCamadas.ARVORE){
+			if (i3GEO.arvoreDeCamadas.ARVORE) {
 				i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid, obj.checked);
-			}
-			else{
+			} else {
 				var temp = function() {
 					i3GEO.php.corpo(i3GEO.atualiza, i3GEO.configura.tipoimagem);
 					i3GEO.janela.fechaAguarde("redesenha");
@@ -2118,21 +2135,17 @@ i3GEO.arvoreDeTemas = {
 		}
 		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.qrcode === true) {
 			lkgrcode = i3GEO.arvoreDeTemas.LOCAPLIC
-				+ "/pacotes/qrcode/php/qr_html.php?host="
-				+ location.host
-				+ "&d="
-				+ i3GEO.arvoreDeTemas.LOCAPLIC
-				+ "/ms_criamapa.php?interface="
-				+ i3GEO.parametros.interfacePadrao + "&temasa="
-				+ node.data.idtema + "&layers=" + node.data.idtema;
+					+ "/pacotes/qrcode/php/qr_html.php?host=" + location.host
+					+ "&d=" + i3GEO.arvoreDeTemas.LOCAPLIC
+					+ "/ms_criamapa.php?interface="
+					+ i3GEO.parametros.interfacePadrao + "&temasa="
+					+ node.data.idtema + "&layers=" + node.data.idtema;
 			lkgrcode1 = i3GEO.arvoreDeTemas.LOCAPLIC
-				+ "/pacotes/qrcode/php/qr_img.php?host="
-				+ location.host
-				+ "&d="
-				+ i3GEO.arvoreDeTemas.LOCAPLIC
-				+ "/ms_criamapa.php?interface="
-				+ i3GEO.parametros.interfacePadrao + "&temasa="
-				+ node.data.idtema + "&layers=" + node.data.idtema;
+					+ "/pacotes/qrcode/php/qr_img.php?host=" + location.host
+					+ "&d=" + i3GEO.arvoreDeTemas.LOCAPLIC
+					+ "/ms_criamapa.php?interface="
+					+ i3GEO.parametros.interfacePadrao + "&temasa="
+					+ node.data.idtema + "&layers=" + node.data.idtema;
 			new YAHOO.widget.HTMLNode(
 					{
 						isLeaf : true,
@@ -2151,8 +2164,9 @@ i3GEO.arvoreDeTemas = {
 			if (n >= 5) {
 				n = 5;
 			}
-			html = (n > 0) ? "<img src='" + i3GEO.configura.locaplic + "/imagens/e" + n + ".png"
-					+ "'/>" : "<img src='" + i3GEO.configura.locaplic + "/imagens/e0.png'/>";
+			html = (n > 0) ? "<img src='" + i3GEO.configura.locaplic
+					+ "/imagens/e" + n + ".png" + "'/>" : "<img src='"
+					+ i3GEO.configura.locaplic + "/imagens/e0.png'/>";
 			new YAHOO.widget.HTMLNode({
 				isLeaf : true,
 				enableHighlight : false,
@@ -2181,11 +2195,12 @@ i3GEO.arvoreDeTemas = {
 	 * {String} - html gerado
 	 */
 	outrasOpcoesHTML : function() {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.arvoreDeTemas.outrasOpcoesHTML()");
+		var ins = "", t = 0, imb, OPCOESADICIONAIS, estilo, hash = [];
 
-		var ins = "", t = 0, imb = i3GEO.configura.locaplic + "/imagens/branco.gif", OPCOESADICIONAIS = i3GEO.arvoreDeTemas.OPCOESADICIONAIS, estilo = function(
-				i) {
+		imb = i3GEO.configura.locaplic + "/imagens/branco.gif";
+		OPCOESADICIONAIS = i3GEO.arvoreDeTemas.OPCOESADICIONAIS;
+
+		estilo = function(i) {
 			return " onmouseout='javascript:this.className = \""
 					+ i
 					+ " iconeMini iconeGuiaMovelMouseOut\";' onmouseover='javascript:this.className = \""
@@ -2193,11 +2208,16 @@ i3GEO.arvoreDeTemas = {
 					+ " iconeMini iconeGuiaMovelMouseOut' src='" + imb
 					+ "' style='cursor:pointer;text-align:left' ";
 		};
+
 		if (OPCOESADICIONAIS.refresh === true) {
 			ins += "<td><img "
 					+ estilo("i3geo_refresh2")
-					+ " onclick='i3GEO.util.animaClique(this);i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.atualiza()' title='Refresh'/></td>";
+					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.atualiza()' title='Refresh'/></td>";
 			t += 20;
+			hash.push({
+				text: "Refresh",
+				url: "javascript:i3GEO.arvoreDeTemas.atualiza()"
+			});
 		}
 		if (OPCOESADICIONAIS.uploadarquivo === true) {
 			ins += "<td><img "
@@ -2205,62 +2225,19 @@ i3GEO.arvoreDeTemas = {
 					+ " onclick='i3GEO.util.animaClique(this);i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.conectaservico()' title='"
 					+ $trad("a15") + "'/></td>";
 			t += 20;
+			hash.push({
+				text: $trad("a15"),
+				url: "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"
+			});
 			ins += "<td><img "
 					+ estilo("upload")
 					+ " onclick='i3GEO.util.animaClique(this);i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.uploadarquivo()' title='"
 					+ $trad("a14") + "'/></td>";
 			t += 20;
-		} else {
-			//depreciado na versao 6.0
-			/*
-			if (OPCOESADICIONAIS.uploadgpx === true) {
-				ins += "<td><img "
-						+ estilo("uploadgpx")
-						+ " onclick='i3GEO.arvoreDeTemas.dialogo.uploadgpx()' title='upload GPX'/></td>";
-				t += 20;
-			}
-			if (OPCOESADICIONAIS.uploaddbf === true) {
-				ins += "<td><img "
-						+ estilo("uploaddbf")
-						+ " onclick='i3GEO.arvoreDeTemas.dialogo.uploaddbf()' title='"
-						+ $trad("a2b") + "'/></td>";
-				t += 20;
-			}
-			if (OPCOESADICIONAIS.uploadlocal === true) {
-				ins += "<td><img "
-						+ estilo("upload")
-						+ " onclick='i3GEO.arvoreDeTemas.dialogo.upload()' title='"
-						+ $trad("a2") + "'/></td>";
-				t += 20;
-			}
-			if (OPCOESADICIONAIS.carregaKml === true) {
-				ins += "<td><img "
-						+ estilo("carregarKml")
-						+ " onclick='i3GEO.arvoreDeTemas.dialogo.carregaKml()' title='Kml'/></td>";
-				t += 20;
-			}
-			if (OPCOESADICIONAIS.conectarwms === true) {
-				ins += "<td><img "
-						+ estilo("conectarwms")
-						+ " onclick='i3GEO.arvoreDeTemas.dialogo.conectarwms()' title='"
-						+ $trad("a4") + "'/></td>";
-				t += 20;
-			}
-			if (OPCOESADICIONAIS.conectarwmst === true) {
-				ins += "<td><img "
-						+ estilo("conectarwmst")
-						+ " onclick='i3GEO.arvoreDeTemas.dialogo.conectarwmst()' title='"
-						+ $trad("a4b") + "'/></td>";
-				t += 20;
-			}
-			if (OPCOESADICIONAIS.conectargeorss === true) {
-				ins += "<td><img "
-						+ estilo("conectargeorss")
-						+ " onclick='i3GEO.arvoreDeTemas.dialogo.conectargeorss()' title='"
-						+ $trad("a5") + "'/></td>";
-				t += 20;
-			}
-			*/
+			hash.push({
+				text: $trad("a14"),
+				url: "javascript:i3GEO.arvoreDeTemas.dialogo.uploadarquivo()"
+			});
 		}
 		if (OPCOESADICIONAIS.downloadbase === true) {
 			ins += "<td><img "
@@ -2268,6 +2245,10 @@ i3GEO.arvoreDeTemas = {
 					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.downloadbase()' title='"
 					+ $trad("a3") + "'/></td>";
 			t += 20;
+			hash.push({
+				text: $trad("a3"),
+				url: "javascript:i3GEO.arvoreDeTemas.dialogo.downloadbase()"
+			});
 		}
 		if (OPCOESADICIONAIS.importarwmc === true) {
 			ins += "<td><img "
@@ -2275,6 +2256,10 @@ i3GEO.arvoreDeTemas = {
 					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.importarwmc()' title='"
 					+ $trad("a3a") + "'/></td>";
 			t += 20;
+			hash.push({
+				text: $trad("a3a"),
+				url: "javascript:i3GEO.arvoreDeTemas.dialogo.importarwmc()"
+			});
 		}
 		if (OPCOESADICIONAIS.nuvemTags === true) {
 			ins += "<td><img "
@@ -2282,6 +2267,10 @@ i3GEO.arvoreDeTemas = {
 					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.nuvemTags()' title='"
 					+ $trad("a5a") + "'/></td>";
 			t += 20;
+			hash.push({
+				text: $trad("a5a"),
+				url: "javascript:i3GEO.arvoreDeTemas.dialogo.nuvemTags()"
+			});
 		}
 		if (OPCOESADICIONAIS.nuvemTagsFlash === true) {
 			ins += "<td><img "
@@ -2289,26 +2278,45 @@ i3GEO.arvoreDeTemas = {
 					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.nuvemTagsFlash()' title='"
 					+ $trad("a5a") + "'/></td>";
 			t += 20;
+			hash.push({
+				text: $trad("a5a"),
+				url: "javascript:i3GEO.arvoreDeTemas.dialogo.nuvemTagsFlash()"
+			});
 		}
 		if (OPCOESADICIONAIS.carousel === true) {
 			ins += "<td><img "
 					+ estilo("carouselTemas")
 					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.carouselTemas()' title='Miniaturas'/></td>";
 			t += 20;
+			hash.push({
+				text: "Miniaturas",
+				url: "javascript:i3GEO.arvoreDeTemas.dialogo.carouselTemas()"
+			});
 		}
 		if (OPCOESADICIONAIS.inde === true) {
 			ins += "<td><img "
 					+ estilo("buscaInde")
 					+ " onclick='i3GEO.util.animaClique(this);i3GEO.arvoreDeTemas.dialogo.buscaInde()' title='Pesquisa na INDE'/></td>";
 			t += 20;
+			hash.push({
+				text: "Busca na INDE",
+				url: "javascript:i3GEO.arvoreDeTemas.dialogo.buscaInde()"
+			});
 		}
 		if (OPCOESADICIONAIS.metaestat === true) {
 			ins += "<td><img "
 					+ estilo("iconeMetaestat")
 					+ " onclick='i3GEO.util.animaClique(this);i3GEO.mapa.dialogo.metaestat()' title='Cartogramas estatisticos'/></td>";
 			t += 20;
+			hash.push({
+				text: "Cartogramas estat&iacute;sticos",
+				url: "javascript:i3GEO.mapa.dialogo.metaestat()"
+			});
 		}
-		return ("<table width='" + t + "px' ><tr>" + ins + "</tr></table>");
+		return ({
+			"html": "<table width='" + t + "px' ><tr>" + ins + "</tr></table>",
+			"hash": hash
+		});
 	},
 	/**
 	 * Function: desativaCheckbox
@@ -2336,14 +2344,14 @@ i3GEO.arvoreDeTemas = {
 	 */
 	buscaCheckbox : function(valor) {
 		var o, inputs, n, i;
-		if(i3GEO.arvoreDeTemas.ARVORE){
+		if (i3GEO.arvoreDeTemas.ARVORE) {
 			o = document.getElementById(i3GEO.arvoreDeTemas.ARVORE.id);
-			if(o){
+			if (o) {
 				inputs = o.getElementsByTagName("input");
 				n = inputs.length;
 				i = 0;
 				do {
-					if(inputs[i].value === valor){
+					if (inputs[i].value === valor) {
 						return inputs[i];
 					}
 					i += 1;
@@ -2616,8 +2624,8 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * Parametro:
 	 *
-	 * {array} - (opcional) codigo do tema que sera adicionado ao mapa. Se
-	 * nao for especificado, a lista de codigos sera obtida da arvore de temas
+	 * {array} - (opcional) codigo do tema que sera adicionado ao mapa. Se nao
+	 * for especificado, a lista de codigos sera obtida da arvore de temas
 	 */
 	adicionaTemas : function(tsl) {
 		if (typeof (console) !== 'undefined')
@@ -2747,8 +2755,8 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} - endereco do i3geo
 	 *
-	 * {String} - nome da funcao que sera executada quando o
-	 * usuario escolhe um grupo
+	 * {String} - nome da funcao que sera executada quando o usuario escolhe um
+	 * grupo
 	 *
 	 * {String} - id do elemento HTML que recebera o combo
 	 *
@@ -2802,8 +2810,8 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} - endereco do i3geo
 	 *
-	 * {String} - nome da funcao que sera executada quando o
-	 * usuario escolhe um grupo
+	 * {String} - nome da funcao que sera executada quando o usuario escolhe um
+	 * grupo
 	 *
 	 * {String} - id do elemento HTML que recebera o combo
 	 *
@@ -2857,8 +2865,8 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {String} - endereco do i3geo
 	 *
-	 * {String} - nome da funcao que sera executada quando o
-	 * usuario escolhe um grupo
+	 * {String} - nome da funcao que sera executada quando o usuario escolhe um
+	 * grupo
 	 *
 	 * {String} - id do elemento HTML que recebera o combo
 	 *
@@ -2910,8 +2918,8 @@ i3GEO.arvoreDeTemas = {
 	 *
 	 * {string} - endereco do i3geo
 	 *
-	 * {string} - nome da funcao que sera executada quando o usuario
-	 * escolhe um grupo
+	 * {string} - nome da funcao que sera executada quando o usuario escolhe um
+	 * grupo
 	 *
 	 * {string} - id do elemento HTML que recebera o combo
 	 *
@@ -3023,9 +3031,9 @@ i3GEO.arvoreDeTemas = {
 		 */
 		uploadarquivo : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-				+ "/ferramentas/uploadarquivos/dependencias.php",
-				"i3GEOF.uploadarquivos.iniciaJanelaFlutuante()",
-				"i3GEOF.uploadarquivos_script");
+					+ "/ferramentas/uploadarquivos/dependencias.php",
+					"i3GEOF.uploadarquivos.iniciaJanelaFlutuante()",
+					"i3GEOF.uploadarquivos_script");
 		},
 		/**
 		 * Function: dialogo.conectaservico
@@ -3035,9 +3043,9 @@ i3GEO.arvoreDeTemas = {
 		 */
 		conectaservico : function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-				+ "/ferramentas/conectarservicos/dependencias.php",
-				"i3GEOF.conectarservicos.iniciaJanelaFlutuante()",
-				"i3GEOF.conectarservicos_script");
+					+ "/ferramentas/conectarservicos/dependencias.php",
+					"i3GEOF.conectarservicos.iniciaJanelaFlutuante()",
+					"i3GEOF.conectarservicos_script");
 		},
 		/**
 		 * Function: dialogo.carouselTemas
@@ -3065,14 +3073,14 @@ i3GEO.arvoreDeTemas = {
 		/**
 		 * Function: dialogo.vinde
 		 *
-		 * Abre a janela flutuante com os servi&ccedil;os cadastrados no visualizador da INDE
+		 * Abre a janela flutuante com os servi&ccedil;os cadastrados no
+		 * visualizador da INDE
 		 */
 		vinde : function() {
-			i3GEO.util
-					.scriptTag(i3GEO.configura.locaplic
-							+ "/ferramentas/vinde/dependencias.php",
-							"i3GEOF.vinde.iniciaJanelaFlutuante()",
-							"i3GEOF.vinde_script");
+			i3GEO.util.scriptTag(i3GEO.configura.locaplic
+					+ "/ferramentas/vinde/dependencias.php",
+					"i3GEOF.vinde.iniciaJanelaFlutuante()",
+					"i3GEOF.vinde_script");
 		},
 		/**
 		 * Function: dialogo.nuvemTags
@@ -3107,9 +3115,11 @@ i3GEO.arvoreDeTemas = {
 		 * servidor
 		 */
 		navegacaoDir : function() {
-			i3GEO.janela.cria("550px", "350px", i3GEO.configura.locaplic
-					+ "/ferramentas/navegacaodir/index.htm", "", "",
-					"<div class='i3GeoTituloJanela'>"+$trad("x45")+"</div>");
+			i3GEO.janela
+					.cria("550px", "350px", i3GEO.configura.locaplic
+							+ "/ferramentas/navegacaodir/index.htm", "", "",
+							"<div class='i3GeoTituloJanela'>" + $trad("x45")
+									+ "</div>");
 		},
 		/**
 		 * Function: dialogo.importarwmc
@@ -3130,7 +3140,8 @@ i3GEO.arvoreDeTemas = {
 		 */
 		conectarwfs : function() {
 			i3GEO.janela.cria("400px", "300px", i3GEO.configura.locaplic
-					+ "/ferramentas/conectarwfs/index.htm", "", "", "<div class='i3GeoTituloJanela'>WFS</div>");
+					+ "/ferramentas/conectarwfs/index.htm", "", "",
+					"<div class='i3GeoTituloJanela'>WFS</div>");
 		},
 		/**
 		 * Function: dialogo.downloadbase

@@ -851,7 +851,7 @@ var g_traducao =
 		// guia adiciona
 		"a1" : [
 			{
-				pt : "procurar tema:",
+				pt : "Procurar tema:",
 				en : "Search layer:",
 				es : "Buscar Tema:"
 			}

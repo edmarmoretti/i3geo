@@ -12,6 +12,24 @@
 	margin-bottom: 10px;
 }
 /*
+botoes do catalogo
+*/
+#arvoreCatOpcoes button, #arvoreCatOpcoes .yui-button, #arvoreCatOpcoes .yuimenu {
+	width: 250px;
+	color: black;
+	border-radius : 0px;
+}
+#arvoreCatOpcoes a {
+	color: black;
+}
+#arvoreCatOpcoes .yui-button {
+	background-image : none;
+	border-radius : 0px;
+}
+#arvoreCatOpcoes .first-child{
+	border-radius : 0px;
+}
+/*
 botoes da legenda
 */
 #legendaOpcoes button, #legendaOpcoes .yui-button, #legendaOpcoes .yuimenu {
