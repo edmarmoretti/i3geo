@@ -316,7 +316,7 @@ i3GEO.arvoreDeCamadas =
 		/**
 		 * depreciado em 6.0
 		 */
-		ARRASTARLIXEIRA : true,
+		ARRASTARLIXEIRA : false,
 		/**
 		 * depreciado em 6.0
 		 */
@@ -1400,10 +1400,15 @@ i3GEO.arvoreDeCamadas =
 					dragEl = this.getDragEl();
 					clickEl = this.getEl();
 					Dom.setStyle(clickEl, "visibility", "hidden");
-					dragEl.innerHTML = clickEl.innerHTML;
+					if(clickEl.getElementsByTagName("span")){
+						dragEl.innerHTML = clickEl.getElementsByTagName("span")[0].innerHTML;
+					} else{
+						dragEl.innerHTML = clickEl.innerHTML;
+					}
 					Dom.setStyle(dragEl, "color", Dom.getStyle(clickEl, "color"));
 					Dom.setStyle(dragEl, "backgroundColor", Dom.getStyle(clickEl, "backgroundColor"));
-					Dom.setStyle(dragEl, "border", "4px solid gray");
+					Dom.setStyle(dragEl, "fontSize", Dom.getStyle(clickEl, "fontSize"));
+					Dom.setStyle(dragEl, "border", "2px solid gray");
 					Dom.setStyle(dragEl, "padding", "5px");
 					Dom.setStyle(dragEl, "z-index", "5000");
 				},
@@ -1485,20 +1490,20 @@ i3GEO.arvoreDeCamadas =
 						this.goingUp = false;
 					}
 					this.lastY = y;
-					if (i3GEO.guias.TIPO === "movel") {
-						YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.9);
-					}
+					//if (i3GEO.guias.TIPO === "movel") {
+					//	YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.9);
+					//}
 				},
 				onDragOver : function(e, id) {
 					var destEl;
 					destEl = YAHOO.util.Dom.get(id);
 					var dragEl = this.getDragEl();
-					Dom.setStyle(dragEl, "border", "4px solid red");
+					Dom.setStyle(dragEl, "border", "2px solid blue");
 					// We are only concerned with list items, we
 					// ignore the dragover
 					// notifications for the list.
 					if ($i("i3geo_lixeira") && id === "i3geo_lixeira") {
-						$i("i3geo_lixeira").style.border = "2px solid red";
+						$i("i3geo_lixeira").style.border = "2px solid blue";
 					} else {
 						destEl.style.textDecoration = "underline";
 					}
@@ -1506,7 +1511,7 @@ i3GEO.arvoreDeCamadas =
 				onDragOut : function(e, id) {
 					$i(id).style.textDecoration = "none";
 					var dragEl = this.getDragEl();
-					Dom.setStyle(dragEl, "border", "4px solid gray");
+					Dom.setStyle(dragEl, "border", "2px solid gray");
 				}
 			});
 			Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);
@@ -1714,7 +1719,7 @@ i3GEO.arvoreDeCamadas =
 		 */
 		inverteStatusClasse : function(leg) {
 			var temp = function(retorno) {
-				i3GEO.atualiza();
+				//i3GEO.atualiza();
 				i3GEO.Interface.atualizaTema(retorno, leg.name);
 				// obtem o objeto checkbox
 				var ck = "";
@@ -1812,7 +1817,7 @@ i3GEO.arvoreDeCamadas =
 
 			html += "</label>&nbsp;";
 			if(i3GEO.arvoreDeCamadas.MENUCOTEXTOTEMA === true){
-				html += "<a href='#' style='cursor:pointer;' onclick='i3GEO.arvoreDeCamadas.menuContextoTema(this,\""+ tema.name +"\");return false;'>" + tema.tema + "</a></div>";
+				html += "<span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' style='cursor:pointer;' onclick='i3GEO.arvoreDeCamadas.menuContextoTema(this,\""+ tema.name +"\");return false;'>" + tema.tema + "</span></div>";
 			}
 			else{
 				html += tema.tema + "</div>";

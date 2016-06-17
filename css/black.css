@@ -40,8 +40,70 @@ menu de contexto da arvore de camadas
 	color: white;
 }
 
+.i3GEOcorpoLegi {
+	min-height:200px;
+}
+
 /*
-Botao de ligar desligar do tipo chave
+Botao de ligar desligar do tipo chave da legenda
+*/
+.i3GEOcorpoLegi .temaSwitch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 18px;
+  top: 3px;
+}
+
+.i3GEOcorpoLegi .temaSwitch input {
+	display:none;
+}
+
+.i3GEOcorpoLegi .temaSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+}
+
+.i3GEOcorpoLegi .temaSlider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 1px;
+  bottom: 2px;
+  background-color: white;
+}
+
+.i3GEOcorpoLegi input:checked + .temaSlider {
+  background-color: rgb(100, 170, 200);
+}
+
+.i3GEOcorpoLegi input:focus + .temaSlider {
+  box-shadow: 0 0 1px rgb(100, 170, 200);
+}
+
+.i3GEOcorpoLegi input:checked + .temaSlider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+.i3GEOcorpoLegi .temaSlider.round {
+  border-radius: 34px;
+}
+
+.i3GEOcorpoLegi .temaSlider.round:before {
+  border-radius: 50%;
+}
+
+
+/*
+Botao de ligar desligar do tipo chave da arvore de camadas
 */
 .i3GEOarvCam .temaSwitch {
   position: relative;

@@ -584,7 +584,7 @@ i3GEO.mapa =
 					re = new RegExp("<img src='' />", "g");
 					legenda = legenda.replace(re, "");
 					ins = "<div id='legendaOpcoes' style='text-align:left; margin-bottom:10px;'></div>";
-					ins += "<div id='corpoLegi' style='min-height:200px;'>" + legenda + "</div>";
+					ins += "<div id='corpoLegi' class='i3GEOcorpoLegi'>" + legenda + "</div>";
 
 					idleg.innerHTML = "<div style='padding:5px;' >" + ins + "</div>";
 
@@ -598,13 +598,14 @@ i3GEO.mapa =
 							text: "PNG",
 							url: "javascript:i3GEO.mapa.legendaHTML.png();"
 						}];
-						//mostra opcao que permite liberar a legenda (usado quando nao esta em uma janela flutuante)
-						if (i3GEO.mapa.legendaHTML.incluiBotaoLibera === true) {
-							ins.push({
-								text: "Abre em uma janela",
-								url: "javascript:i3GEO.mapa.legendaHTML.libera()"
-							});
-						}
+					//mostra opcao que permite liberar a legenda (usado quando nao esta em uma janela flutuante)
+					if (i3GEO.mapa.legendaHTML.incluiBotaoLibera === true) {
+						ins.push({
+							text: "Abre em uma janela",
+							url: "javascript:i3GEO.mapa.legendaHTML.libera();"
+						});
+					}
+					if($i("legendaOpcoes").getElementsByTagName("span").length == 0){
 						new YAHOO.widget.Button({
 							type: "menu",
 							label: $trad("opcoes"),
@@ -612,6 +613,7 @@ i3GEO.mapa =
 							menu: ins,
 							container: "legendaOpcoes"
 						});
+					}
 				}
 				i3GEO.mapa.legendaHTML.escondeTemasMarcados();
 				// desmarca as classes desligadas
@@ -649,6 +651,11 @@ i3GEO.mapa =
 					temp[i].style.display = "none";
 				}
 				temp = raiz.getElementsByTagName("input");
+				n = temp.length;
+				for (i = 0; i < n; i++) {
+					temp[i].style.display = "none";
+				}
+				temp = raiz.getElementsByClassName("temaSwitch");
 				n = temp.length;
 				for (i = 0; i < n; i++) {
 					temp[i].style.display = "none";

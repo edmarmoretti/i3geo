@@ -866,6 +866,23 @@ i3GEO.tema =
 					"editorsql",
 					"dependencias.php",
 					"i3GEOF.editorsql.iniciaJanelaFlutuante()");
+			},
+			/**
+			 * Function: mudanome
+			 *
+			 * Abre uma janela para o usuario definir o novo nome do tema
+			 *
+			 * Parametros:
+			 *
+			 * {string} - id que identifica o tema no map file.
+			 */
+			mudanome : function(idtema) {
+				i3GEO.mapa.ativaTema(idtema);
+				var temp = function(){
+					var valor = $i("i3GEOjanelaprompt").value;
+					i3GEO.tema.mudanome(idtema,valor);
+				};
+				i3GEO.janela.prompt($trad("novonome"),temp);
 			}
 		}
 	};
