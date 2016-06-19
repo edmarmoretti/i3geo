@@ -90,6 +90,7 @@ background: #F8F8F8;
 border: 1px solid #DDDDDD;
 height: 22px;
 border-radius: 2px;
+text-align:left;
 }
 .i3geoForm150 {
 width: 150px;
@@ -113,6 +114,15 @@ cursor: text;
 }
 .i3geoForm100 input[type=number] {
 width: 85%;
+}
+.i3geoFormIconeBusca {
+background: transparent url("../imagens/oxygen/16x16/edit-find.png") no-repeat scroll 100% -1px / 16px;
+background-position: right center;
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px;
+background-size: 16px 144px;
+}
 }
 .i3geoFormIconeMinuto {
 background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px / 18px;

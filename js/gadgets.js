@@ -369,7 +369,7 @@ i3GEO.gadgets =
 					templateMustache = ""
 						+ "<p class=paragrafo >{{{cabecalho}}}</p>"
 						+ "<form id={{idform}}>"
-						+ "	<div class='i3geoForm i3geoFormIconeEdita'>"
+						+ "	<div class='i3geoForm i3geoFormIconeBusca'>"
 						+ "		<input type=text value='' id='{{idinput}}' />"
 						+ "	</div>"
 						+ "</form>";

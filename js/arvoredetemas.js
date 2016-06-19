@@ -1204,15 +1204,7 @@ i3GEO.arvoreDeTemas = {
 		})();
 		// opcao de busca de temas
 		root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
-		/*
-		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca === true) {
-			insp = document.createElement("form");
-			insp.onsubmit = function(){
-				i3GEO.arvoreDeTemas.buscaTema2($i("i3GEObuscatema").value);
-			};
-			insp.innerHTML = "<div title='" + $trad("a1") +"' class='i3geoForm' style='width:160px;'><input name='' class=i3geoFormSemIcone type=text value='' id='i3GEObuscatema' /></div>";
-		}
-		*/
+
 		// titulo do catalogo
 		tempNode = new YAHOO.widget.HTMLNode({
 			html : "<b>" + $trad("g1a") + "</b>",
@@ -1247,6 +1239,17 @@ i3GEO.arvoreDeTemas = {
 			});
 			i3GEO.arvoreDeTemas.OPCOESADICIONAIS.googleearth = false;
 			i3GEO.arvoreDeTemas.OPCOESADICIONAIS.flutuante = false;
+			if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca === true) {
+				insp = document.createElement("form");
+				insp.action = "";
+				insp.onsubmit = function(){
+					i3GEO.arvoreDeTemas.buscaTema2($i("i3GEObuscatema").value);
+					return false;
+				};
+				insp.innerHTML = "<div title='" + $trad("a1") +"' class='i3geoForm i3geoFormIconeBusca' style='width: 250px; margin-left:3px;'><input name='' type=text value='' id='i3GEObuscatema' /></div><br>";
+				$i(i3GEO.arvoreDeTemas.IDHTML).parentNode.insertBefore(insp,$i(i3GEO.arvoreDeTemas.IDHTML))
+				//$i(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde).insertBefore(insp,$i(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde).lastChild);
+			}
 		}
 		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore === true) {
 			tempNode = new YAHOO.widget.HTMLNode({
