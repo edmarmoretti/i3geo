@@ -74,8 +74,8 @@ g_traducao_init =
 		"6a" : [
 			{
 				pt : "Baseado na API do GoogleMaps, esse mapa incorpora as funcionalidades desse popular software, incluindo as camadas de fundo com imagens e cartografia b&aacute;sica.",
-				en : "",
-				es : ""
+				en : "Based on GoogleMap API, that map includes features of this popular software, including its basemap layers, imagery and basic cartography.",
+				es : "Basado en la API de GoogleMap, ese mapa incorpora las funcionalidades de este software popular, incluyendo las capas de fondo con im&aacute;genes y cartograf&iacute;a b&aacute;sica."
 			}
 		],
 		7 : [
@@ -88,8 +88,8 @@ g_traducao_init =
 		"7a" : [
 			{
 				pt : "Com o plugin do GE, esse mapa permite visualizar camadas sobrepostas ao relevo terrestre visto na forma de um globo com navega&ccedil;&atilde;o em 3d.",
-				en : "",
-				es : ""
+				en : "By using the GE plugin, that map allow you to visualize overlapped layers on Earth relief by means of a globe-shaped view with 3D navigation.",
+				es : "Con el plugin de GE, ese mapa permite visualizar capas superpuestas sobre el relieve terrestre vistas en forma de globo con navegaci&oacute;n en 3d."
 			}
 		],
 		8 : [
