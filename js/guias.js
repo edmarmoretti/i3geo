@@ -193,12 +193,11 @@ i3GEO.guias =
 				idconteudo : "",
 				click : function() {
 					var temp;
+					i3GEO.barraDeBotoes.BOTAOCLICADO = "identifica";
 					if ($i(i3GEO.Interface.IDMAPA)) {
 						$i(i3GEO.Interface.IDMAPA).title = "";
 						temp = "identifica";
-						i3GEO.util.mudaCursor(i3GEO.configura.cursores, temp, i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 					}
-					i3GEO.barraDeBotoes.ativaIcone("identifica");
 					i3GEO.eventos.cliquePerm.desativa();
 					if (i3GEO.eventos.cliquePerm.ativo === false) {
 						// caso seja um clique para desativar
