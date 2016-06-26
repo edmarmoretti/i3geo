@@ -107,22 +107,22 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'enviarShp' : [ {
-		pt : "Upload de arquivo Shape file",
+		pt : "Shape file",
 		en : "",
 		es : ""
 	} ],
 	'uploadSimbolo' : [ {
-		pt : "Upload de imagem para uso como s&iacute;mbolo",
+		pt : "Imagem para uso como s&iacute;mbolo",
 		en : "",
 		es : ""
 	} ],
 	'editorMapfile' : [ {
-		pt : "Edi&ccedil;&atilde;o de mapfiles",
+		pt : "Mapfiles",
 		en : "",
 		es : ""
 	} ],
 	'editorMenus' : [ {
-		pt : "Edi&ccedil;&atilde;o da lista de menus",
+		pt : "Menus",
 		en : "",
 		es : ""
 	} ],
@@ -147,7 +147,7 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'linkMapas' : [ {
-		pt : "Links para mapas",
+		pt : "Mapas",
 		en : "",
 		es : ""
 	} ],
@@ -197,12 +197,12 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'editaPerfil' : [ {
-		pt : "Editar a lista de perfis",
+		pt : "Perfis",
 		en : "",
 		es : ""
 	} ],
 	'editaTags' : [ {
-		pt : "Editar a lista de tags (palavras-chave)",
+		pt : "Tags (palavras-chave)",
 		en : "",
 		es : ""
 	} ],
@@ -308,6 +308,11 @@ i3GEOadmin.menup.dicionario = {
 	} ],
 	'compacta' : [ {
 		pt : "Compacta&ccedil;&atilde;o de c&oacute;digo javascript",
+		en : "",
+		es : ""
+	} ],
+	'cadastros' : [ {
+		pt : "Cadastros",
 		en : "",
 		es : ""
 	} ]

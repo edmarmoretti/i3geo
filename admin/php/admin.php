@@ -49,8 +49,8 @@ error_reporting(0);
 //
 include_once ($locaplic."/classesphp/carrega_ext.php");
 include_once ($locaplic."/classesphp/funcoes_gerais.php");
-
 $mapfile = mapfilebase($base,$locaplic);
+
 //
 //processa a variavel $esquemaadmin definida em ms_configura.php
 //essa variavel precisa ter um . no final quando nao for vazia, evitando erros na inclusao dentro dos SQLs

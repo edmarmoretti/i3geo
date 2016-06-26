@@ -9,25 +9,59 @@ menuPrincipal = [
 		html: $trad("configGeral",i3GEOadmin.menup.dicionario),
 		children:[
 			{
+			html: "<a href='" + i3GEO.configura.locaplic + "/ms_criamapa.php' target='_blank'>"+$trad("abre",i3GEOadmin.menup.dicionario)+"</a>"
+			},{
+			html: "<a href='" + i3GEO.configura.locaplic + "/testainstal.php' >"+$trad("testaInstal",i3GEOadmin.menup.dicionario)+"</a>"
+			},{
+			html: "<a href='" + i3GEO.configura.locaplic + "/classesjs/compactajs.php' target='_blank'>"+$trad("compacta",i3GEOadmin.menup.dicionario)+"</a>"
+			},{
 				html: $trad("outrasOpc",i3GEOadmin.menup.dicionario),
 				children:[
 					{
-					html: "<a href='php/estatisticas.php' >"+$trad("estat",i3GEOadmin.menup.dicionario)+"</a>"
+					html: "<a href='ferramentas/estatisticas/index.php' >"+$trad("estat",i3GEOadmin.menup.dicionario)+"</a>"
 					},{
-					html: "<a href='php/sqlite.php' >"+$trad("descricaoBd",i3GEOadmin.menup.dicionario)+"</a>"
+					html: "<a href='ferramentas/banco/index.php' >"+$trad("descricaoBd",i3GEOadmin.menup.dicionario)+"</a>"
 					},{
 					html: "<a href='php/criabanco.php' >"+$trad("criaBd",i3GEOadmin.menup.dicionario)+"</a>"
 					},{
-					html: "<a href='../geraminiatura.php' >"+$trad("geraMiniatura",i3GEOadmin.menup.dicionario)+"</a>"
+					html: "<a href='" + i3GEO.configura.locaplic + "/geraminiatura.php' >"+$trad("geraMiniatura",i3GEOadmin.menup.dicionario)+"</a>"
 					}
 				]
-			},
-			{
-			html: "<a href='../ms_criamapa.php' >"+$trad("abre",i3GEOadmin.menup.dicionario)+"</a>"
 			},{
-			html: "<a href='../testainstal.php' >"+$trad("testaInstal",i3GEOadmin.menup.dicionario)+"</a>"
-			},{
-			html: "<a href='../classesjs/compactajs.php' >"+$trad("compacta",i3GEOadmin.menup.dicionario)+"</a>"
+				html: "RSS, JSON, XML",
+				children:[
+					{
+					html: "<a href='xmlmetaestatogc.php' >"+$trad("xmlWmsMetaestat",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='rssmapas.php' >"+$trad("verRss",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='rssgrupos.php?output=xml' >"+$trad("rssArvore",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='rssgrupos.php?output=json' >"+$trad("rssArvoreJson",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='rsscomentariostemas.php' >"+$trad("rssComentarios",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='xmlservicosws.php' >"+$trad("xmlWebServ",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='xmlservicosws.php?output=json' >"+$trad("xmlWebServJson",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='xmlservicoswms.php' >"+$trad("xmlWms",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='xmlservicoswms.php?output=json' >"+$trad("xmlWmsJson",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='xmlgeorss.php?output=json' >"+$trad("xmlGeoRssJson",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='xmlmapas.php' >"+$trad("xmlMapas",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='rssmapas.php' >"+$trad("rssMapas",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='rssmapas.php?output=json' >"+$trad("rssMapasJson",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='xmlsistemas.php' >"+$trad("xmlSistAdiciona",i3GEOadmin.menup.dicionario)+"</a>"
+					},{
+					html: "<a href='xmlgeorss.php' >"+$trad("xmlGeoRss",i3GEOadmin.menup.dicionario)+"</a>"
+					}
+				]
 			}
 		]
 	},{
@@ -61,10 +95,6 @@ menuPrincipal = [
 		html: "<a href='html/estat_fonteinfo.html' >"+$trad("cadastroFonte",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
 		html: "<a href='html/estat_editor.html' >"+$trad("gerenciaBd",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='xmlmetaestatogc.php' >"+$trad("xmlWmsMetaestat",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='rssmapas.php' >"+$trad("verRss",i3GEOadmin.menup.dicionario)+"</a>"
 		}
 	]},{
 	html: $trad("enviarArquivo",i3GEOadmin.menup.dicionario),
@@ -88,79 +118,23 @@ menuPrincipal = [
 		},{
 		html: "<a href='html/arvore.html' >"+$trad("arvoreTemas",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/subirsimbolo.html' >"+$trad("uploadSimbolo",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='rssgrupos.php?output=xml' >"+$trad("rssArvore",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='rssgrupos.php?output=json' >"+$trad("rssArvoreJson",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='rsscomentariostemas.php' >"+$trad("rssComentarios",i3GEOadmin.menup.dicionario)+"</a>"
-		}
-	]},{
-	html: $trad("linkMapas",i3GEOadmin.menup.dicionario),
-	children:[
-		{
-		html: "<a href='html/mapas.html' >"+$trad("editaLinks",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='xmlmapas.php' >"+$trad("xmlMapas",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='rssmapas.php' >"+$trad("rssMapas",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='rssmapas.php?output=json' >"+$trad("rssMapasJson",i3GEOadmin.menup.dicionario)+"</a>"
-		}
-	]},{
-	html: $trad("editaMenus",i3GEOadmin.menup.dicionario),
-	children:[
-		{
-		html: "<a href='html/arvore.html' >"+$trad("editaArvore",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='html/menus.html' >"+$trad("editaListaMenus",i3GEOadmin.menup.dicionario)+"</a>"
-		}
-	]},{
-	html: $trad("editaTabelasAux",i3GEOadmin.menup.dicionario),
-	children:[
-		{
 		html: "<a href='html/perfis.html' >"+$trad("editaPerfil",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
 		html: "<a href='html/tags.html' >"+$trad("editaTags",i3GEOadmin.menup.dicionario)+"</a>"
+		},{
+		html: "<a href='html/mapas.html' >"+$trad("linkMapas",i3GEOadmin.menup.dicionario)+"</a>"
+		},{
+		html: "<a href='html/atlas.html' >"+$trad("atlas",i3GEOadmin.menup.dicionario)+"</a>"
 		}
 	]},{
-	html: $trad("atlas",i3GEOadmin.menup.dicionario),
+	html: $trad("cadastros",i3GEOadmin.menup.dicionario),
 	children:[
 		{
-		html: "<a href='html/atlas.html' >"+$trad("editaAtlas",i3GEOadmin.menup.dicionario)+"</a>"
-		}
-	]},{
-	html: $trad("webServ",i3GEOadmin.menup.dicionario),
-	children:[
-		{
-		html: "<a href='html/webservices.html' >"+$trad("editaWebServ",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='html/webservices.html' >"+$trad("webServ",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='xmlservicosws.php' >"+$trad("xmlWebServ",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='html/identifica.html' >"+$trad("sistIdentifica",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='xmlservicosws.php?output=json' >"+$trad("xmlWebServJson",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='xmlservicoswms.php' >"+$trad("xmlWms",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-			html: "<a href='xmlservicoswms.php?output=json' >"+$trad("xmlWmsJson",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='xmlgeorss.php' >"+$trad("xmlGeoRss",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-			html: "<a href='xmlgeorss.php?output=json' >"+$trad("xmlGeoRssJson",i3GEOadmin.menup.dicionario)+"</a>"
-		}
-	]},{
-	html: $trad("sistIdentifica",i3GEOadmin.menup.dicionario),
-	children:[
-		{
-		html: "<a href='html/identifica.html' >"+$trad("editaIdentifica",i3GEOadmin.menup.dicionario)+"</a>"
-		}
-	]},{
-	html: $trad("sistAdiciona",i3GEOadmin.menup.dicionario),
-	children:[
-		{
-		html: "<a href='html/sistemas.html' >"+$trad("editaSist",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='xmlsistemas.php' >"+$trad("xmlSistAdiciona",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='html/sistemas.html' >"+$trad("sistAdiciona",i3GEOadmin.menup.dicionario)+"</a>"
 		}
 	]}
 ];

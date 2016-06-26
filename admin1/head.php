@@ -54,6 +54,9 @@ echo "
 	<script src='" . ONDEI3GEO . "/admin1/dicionario/menup.js'></script>
 ";
 ?>
+<script>
+	i3GEO.configura = { "locaplic": "<?php echo ONDEI3GEO;?>"};
+</script>
 <style>
 hr {
 	border-color: #fff -moz-use-text-color -moz-use-text-color;
@@ -145,7 +148,7 @@ body{
 }
 </style>
 </head>
-<body style="padding-top: 90px;" id="topo">
+<body style="padding-top: 55px;" id="topo">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -166,9 +169,9 @@ body{
 							style="min-width: 280px; padding: 10px; background-color: white;">
 						</ul></li>
 				</ul>
-				<!-- template para permitir a traducao -->
 				<ul class="nav navbar-nav" id="menuPrincipalTpl">
 				</ul>
 			</div>
 		</div>
 	</nav>
+	<!-- ate aqui veio de admin1/head.php -->
