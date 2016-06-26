@@ -4,7 +4,7 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3Geo - Mapa interativo</title>
-<style> 
+<style>
 	.yui-log .i3geo {background-color:yellow;} /* customize a color */
 	.yui-log .redesenho {background-color:yellow;} /* customize a color */
 	.yui-log .janela {background-color:yellow;} /* customize a color */
@@ -35,7 +35,7 @@
 	border: 1px solid #aaa;
 	width: 290px;
 	*width:298px; /*IE*/
-	
+
 }
 .accordiontable{
 	text-align:left;
@@ -85,8 +85,8 @@
 }
 .accordion dd.getHeight {
 	display: block;
-}	 
-</style> 
+}
+</style>
 </head>
 <body id="i3geo">
 <table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
@@ -95,7 +95,7 @@
 </tr>
 <tr style="border:0px" >
 <td colspan=2 id="contemMenu" style="text-align:right;height:19px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
-	 <div id="menus" ></div>    
+	 <div id="menus" ></div>
 </td>
 </tr>
 <tr>
@@ -120,10 +120,10 @@
 	</p>
 	<p class=paragrafo >
 		<a href="http://www.mma.gov.br/index.php?ido=conteudo.monta&idEstrutura=95&idMenu=10816&idConteudo=10331" target="_blank" ><span>O que &eacute; o SNIF?</span></a>
-	</p>	
+	</p>
 	<p class=paragrafo >
 		<a href="http://www.mma.gov.br/index.php?ido=conteudo.monta&idEstrutura=95&idMenu=5108" target="_blank" ><span>Distrito Florestal Sustent&aacute;vel</span></a>
-	</p>	
+	</p>
 	<p class=paragrafo >
 		<a href="#" onclick='javascript:i3GEO.janela.cria("400px","400px","tecnologia.htm","","","Tecnologia","tecnologiaAtlas");'><span>Tecnologia</span></a>
 	</p><br>
@@ -137,7 +137,7 @@
 		<p class=paragrafo style=cursor:default >&nbsp;info@florestal.gov.br
 		<br><br>
 		<p class=paragrafo style=cursor:default ><b> Utilize a guia "Mapa" para ligar e desligar as camadas de cada prancha. Na guia "Cat&aacute;logo" encontram-se outras camadas que tamb&eacute;m podem ser adicionadas ao mapa.</b>
-	</p>	
+	</p>
   </div>
 	<div id='guia1obj' >
   	<div style='left:5px;top:10px;' id=buscaRapida ></div>
@@ -173,7 +173,7 @@
 	background-image:url(../mashups/openlayers.png);
 	background-repeat:no-repeat;
 	float:right;
-	right: 0px;	
+	right: 0px;
 	height:29px;
 	margin:2px;
 	width:29px;
@@ -194,11 +194,11 @@ i3GEO.Interface.openlayers.GADGETS = {
 		PanZoom:false,
 		LayerSwitcher:false,
 		ScaleLine:true,
-		OverviewMap:false	
+		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = true;
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
-i3GEO.cria()
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
+i3GEO.cria();
 i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe1";
 i3GEO.barraDeBotoes.OFFSET = -3;
@@ -221,7 +221,7 @@ i3GEO.guias.CONFIGURA.temas.click = function(){
 		i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedadesSanfona",i3GEO.configura.listaDePropriedadesDoMapa);
 	}
 	$i("guia1obj").style.display = "block";
-}
+};
 i3GEO.guias.CONFIGURA.guiaDeBusca = {
 	titulo:"Procurar",
 	id:"guia6",
@@ -236,7 +236,7 @@ i3GEO.guias.CONFIGURA.guiaSobre = {
 };
 i3GEO.guias.CONFIGURA.guiaSobre.click = function(){
 	$i("guia7obj").style.display = "block";
-}
+};
 i3GEO.guias.ORDEM = ["guiaSobre","temas","legenda","adiciona","guiaDeBusca"];
 i3GEO.guias.ATUAL = "guiaSobre";
 i3GEO.guias.TIPO = "sanfona";

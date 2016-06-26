@@ -95,17 +95,17 @@ Planos de manejo florestal cadastrados no IBAMA. <a href="http://www.mma.gov.br/
 </form>
 <DIV id=ResultadoPesquisa></DIV>
 <script type="text/javascript" >
-g_sid = window.parent.i3GEO.configura.sid
+g_sid = window.parent.i3GEO.configura.sid;
 function executa()
 {
-	parametros = "&uf="+document.frmPlanoDeManejo.cboEstado[document.frmPlanoDeManejo.cboEstado.selectedIndex].value; 
-	parametros = parametros+"&categoria="+document.frmPlanoDeManejo.cboCategoria[document.frmPlanoDeManejo.cboCategoria.selectedIndex].value; 
-	parametros = parametros+"&ano="+document.frmPlanoDeManejo.cboAno[document.frmPlanoDeManejo.cboAno.selectedIndex].value; 
-	parametros = parametros+"&situacao="+document.frmPlanoDeManejo.cboSituacao[document.frmPlanoDeManejo.cboSituacao.selectedIndex].value; 
-	parametros = parametros+"&mes="+document.frmPlanoDeManejo.cboMes[document.frmPlanoDeManejo.cboMes.selectedIndex].value; 
-	parametros = parametros+"&cnpj="+document.frmPlanoDeManejo.txtCnpj.value; 
+	parametros = "&uf="+document.frmPlanoDeManejo.cboEstado[document.frmPlanoDeManejo.cboEstado.selectedIndex].value;
+	parametros = parametros+"&categoria="+document.frmPlanoDeManejo.cboCategoria[document.frmPlanoDeManejo.cboCategoria.selectedIndex].value;
+	parametros = parametros+"&ano="+document.frmPlanoDeManejo.cboAno[document.frmPlanoDeManejo.cboAno.selectedIndex].value;
+	parametros = parametros+"&situacao="+document.frmPlanoDeManejo.cboSituacao[document.frmPlanoDeManejo.cboSituacao.selectedIndex].value;
+	parametros = parametros+"&mes="+document.frmPlanoDeManejo.cboMes[document.frmPlanoDeManejo.cboMes.selectedIndex].value;
+	parametros = parametros+"&cnpj="+document.frmPlanoDeManejo.txtCnpj.value;
 	document.getElementById("ResultadoPesquisa").innerHTML = "Aguarde! Pesquisando.....";
-	var p = "pesquisa.php?g_sid="+g_sid+parametros
+	var p = "pesquisa.php?g_sid="+g_sid+parametros;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -113,14 +113,14 @@ function executa()
 }
 function listaretornof(retorno)
 {
-	document.getElementById("ResultadoPesquisa").style.color="red"
+	document.getElementById("ResultadoPesquisa").style.color="red";
 	if (retorno.data != "erro")
 	{
-		document.getElementById("ResultadoPesquisa").innerHTML = "<b>Mapa criado!"
+		document.getElementById("ResultadoPesquisa").innerHTML = "<b>Mapa criado!";
 		window.parent.i3GEO.atualiza();
 	}
 	else
-	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Erro. O mapa nao pode ser criado!"}
+	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Erro. O mapa nao pode ser criado!";}
 }
 </script>
 </body>

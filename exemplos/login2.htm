@@ -32,10 +32,10 @@
 		i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo";
 		i3GEO.login.funcaoLoginOk = function(){
 			window.location.assign("login3.php");
-		}
+		};
 		i3GEO.login.funcaoLoginErro = function() {
 			i3GEO.login.dialogo.abreLogin();
-		}
+		};
 		//forca a verificacao do login
 		login = i3GEO.login.verificaOperacao("",i3GEO.configura.locaplic,i3GEO.login.funcaoLoginOk,"sessao",i3GEO.login.funcaoLoginErro);
 	</script>

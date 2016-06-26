@@ -91,15 +91,15 @@ function iniciaListaGEORSS(){
 }
 function mostraRetornoRSS(retorno)
 {
-	aguarde("none")
+	aguarde("none");
 	var reg = /Erro/gi;
 	if (retorno.data.rss.search(reg) != -1)
 	{
 		i3GEO.janela.tempoMsg("OOps! Ocorreu um erro\n"+retorno.data);
 		return;
 	}
-	var canais = retorno.data.canais
-	var ncanais = canais.length
+	var canais = retorno.data.canais;
+	var ncanais = canais.length;
 
 	$i("RSS").innerHTML = retorno.data.rss;
 	var i, ins = "";

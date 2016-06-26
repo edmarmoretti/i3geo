@@ -215,20 +215,20 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 
 function janelaMaisTemas(){
 	var janela = i3GEO.janela.cria("400px","380px","","","","+ Temas","maisTemas");
-	janela[2].style.textAlign="left"
-	janela[2].style.background = "white"
-	janela[2].style.overflow = "auto"
-	janela[2].style.height = "380px"
-	janela[2].innerHTML = "<div id='arvoreAdicionaTema' ></div>"
-	i3GEO.arvoreDeTemas.ARVORE = false
+	janela[2].style.textAlign="left";
+	janela[2].style.background = "white";
+	janela[2].style.overflow = "auto";
+	janela[2].style.height = "380px";
+	janela[2].innerHTML = "<div id='arvoreAdicionaTema' ></div>";
+	i3GEO.arvoreDeTemas.ARVORE = false;
 	i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");
 }
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.arvoreDeCamadas.EXPANDIDA = false;
 i3GEO.arvoreDeCamadas.LEGENDAEXPANDIDA = false;
-i3GEO.arvoreDeCamadas.OPCOESTEMAS = false
-i3GEO.arvoreDeCamadas.OPCOESICONES = false
-i3GEO.configura.templateLegenda = "legenda3.htm"
+i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;
+i3GEO.arvoreDeCamadas.OPCOESICONES = false;
+i3GEO.configura.templateLegenda = "legenda3.htm";
 i3GEO.inicia();
 </script>
 </body>

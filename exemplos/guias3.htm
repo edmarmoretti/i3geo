@@ -253,20 +253,20 @@
 					"<div id=ListaDeMenus ></div><br>" +
 					"<div id=ListaDeGrupos ></div><br>" +
 					"<div id=ListaDeSubGrupos ></div><br>" +
-					"<div id=ListaDeTemas ></div><br>";		
+					"<div id=ListaDeTemas ></div><br>";
 				i3GEO.arvoreDeTemas.comboMenus(i3GEO.configura.locaplic,"escolheuMenu","ListaDeMenus","comboMenus",300,1);
-		}
+		};
 		function escolheuMenu(id){
-			i3GEO.arvoreDeTemas.comboGruposMenu(i3GEO.configura.locaplic,"escolheuGrupo","ListaDeGrupos","comboGrupos",300,1,id)
+			i3GEO.arvoreDeTemas.comboGruposMenu(i3GEO.configura.locaplic,"escolheuGrupo","ListaDeGrupos","comboGrupos",300,1,id);
 		}
 		function escolheuGrupo(id){
-			i3GEO.arvoreDeTemas.comboSubGruposMenu(i3GEO.configura.locaplic,"escolheuSubGrupo","ListaDeSubGrupos","comboSubGrupos",id,300,1)
+			i3GEO.arvoreDeTemas.comboSubGruposMenu(i3GEO.configura.locaplic,"escolheuSubGrupo","ListaDeSubGrupos","comboSubGrupos",id,300,1);
 		}
 		function escolheuSubGrupo(idGrupo,idSubGrupo){
-			i3GEO.arvoreDeTemas.comboTemasMenu(i3GEO.configura.locaplic,"escolheuTema","ListaDeTemas","ListaDeTemas",idGrupo,idSubGrupo,300,1,$i("comboMenus").value)
+			i3GEO.arvoreDeTemas.comboTemasMenu(i3GEO.configura.locaplic,"escolheuTema","ListaDeTemas","ListaDeTemas",idGrupo,idSubGrupo,300,1,$i("comboMenus").value);
 		}
 		function escolheuTema(idGrupo,idSubGrupo,codigoTema){
-			i3GEO.arvoreDeTemas.adicionaTemas([codigoTema])
+			i3GEO.arvoreDeTemas.adicionaTemas([codigoTema]);
 		}
 		i3GEO.inicia();
 		i3GEO.guias.mostra("adiciona");

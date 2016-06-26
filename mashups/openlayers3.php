@@ -275,6 +275,7 @@ if($temas != ""){
 	//ferramentas customizaveis e que seraco incluidas na propriedade do layer
 	//
 	$listaFerramentas = array("tme","storymap","animagif");
+	$dadosTemas = pegaDadosAdminKey("SELECT codigo_tema,link_tema FROM __esq__i3geoadmin_temas WHERE codigo_tema IN('".implode($temas,',')."')","__esq__");
 	foreach($temas as $tema){
 		//
 		//utilzado para obter os parametros de ferramentas especificas indicadas nos metadados do LAYER
@@ -310,7 +311,6 @@ if($temas != ""){
 				$maptemp = @ms_newMapObj($nomeMap);
 				if($maptemp){
 					$nlayers = $maptemp->numlayers;
-					$dadosTemas = pegaDadosAdminKey("select codigo_tema,link_tema from __esq__i3geoadmin_temas","__esq__");
 					for($i=0;$i<($nlayers);++$i)	{
 						$layern = $maptemp->getLayer($i);
 						//

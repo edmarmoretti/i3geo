@@ -4,11 +4,11 @@ Digite a palavra para busca:<br>
 <input type=text value="" id="valorBuscaRapida" /><input type=button onclick="busca()" value="localizar" />
 <div style="width:610px;height:600px"><iframe style="width:610px;height:600px;display:none;" id="resBuscaLugar" src=''></iframe></div>
 <script>
-i3GEO = {configura:{locaplic: "http://localhost/i3geo"}}
+i3GEO = {configura:{locaplic: "http://localhost/i3geo"}};
 function busca(){
-	var i = document.getElementById("resBuscaLugar")	
-	i.src = "../ferramentas/buscarapida/gadget.php?locaplic=http://localhost/i3geo&palavra="+document.getElementById("valorBuscaRapida").value
-	i.style.display = "block"
+	var i = document.getElementById("resBuscaLugar");
+	i.src = "../ferramentas/buscarapida/gadget.php?locaplic=http://localhost/i3geo&palavra="+document.getElementById("valorBuscaRapida").value;
+	i.style.display = "block";
 }
 </script>
 

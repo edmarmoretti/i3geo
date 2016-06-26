@@ -192,7 +192,7 @@ i3GEO.mapa.TEMASINICIAISLIGADOS = "mundo";
 i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.Interface.ATUAL = "openlayers";
 i3GEO.Interface.IDCORPO = "contemImg";
-i3GEO.configura.diminuixN = 20
+i3GEO.configura.diminuixN = 20;
 
 i3GEO.Interface.openlayers.GADGETS = {
 		PanZoomBar:true,
@@ -203,27 +203,27 @@ i3GEO.Interface.openlayers.GADGETS = {
 	};
 i3GEO.Interface.openlayers.TILES = false;
 
-i3GEO.cria()
-i3GEO.barraDeBotoes.AUTOALTURA = true
-i3GEO.barraDeBotoes.PERMITEFECHAR = true
-i3GEO.barraDeBotoes.PERMITEDESLOCAR = true
-i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
+i3GEO.cria();
+i3GEO.barraDeBotoes.AUTOALTURA = true;
+i3GEO.barraDeBotoes.PERMITEFECHAR = true;
+i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
 
-i3GEO.Interface.BARRABOTOESLEFT = 50
-i3GEO.Interface.BARRABOTOESTOP = 10
+i3GEO.Interface.BARRABOTOESLEFT = 50;
+i3GEO.Interface.BARRABOTOESTOP = 10;
 
 i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.guias.CONFIGURA.adiciona.titulo = "Mais temas";
 //as barras de botoes ser&atilde;o construidas automaticamente, sem precisar de eleemntos HTML
-i3GEO.barraDeBotoes.AUTO = true
-i3GEO.configura.iniciaJanelaMensagens = false
+i3GEO.barraDeBotoes.AUTO = true;
+i3GEO.configura.iniciaJanelaMensagens = false;
 i3GEO.guias.CONFIGURA.temas.click = function(){
 	if($i("listaTemasSanfona").innerHTML === ""){
 		i3GEO.arvoreDeCamadas.cria("listaTemasSanfona",i3GEO.arvoreDeCamadas.CAMADAS);
 		i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedadesSanfona",i3GEO.configura.listaDePropriedadesDoMapa);
 	}
 	$i("guia1obj").style.display = "block";
-}
+};
 
 i3GEO.guias.TIPO = "sanfona";
 i3GEO.guias.CONFIGURA.guiaDeFotos = {

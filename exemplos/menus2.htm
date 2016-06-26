@@ -136,7 +136,7 @@ i3GEO.Interface.openlayers.GADGETS = {
 		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = true;
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 i3GEO.cria();
 i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
@@ -185,7 +185,7 @@ i3GEO.finaliza = function(){
 	if($i("i3GEOlogoMarca"))
 	{$i("i3GEOlogoMarca").style.display = "none";}
 	i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
-}
+};
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 i3GEO.inicia();
 </script>

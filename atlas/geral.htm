@@ -38,7 +38,7 @@
 </td>
 <td class="yui-navset" style="text-align:left;height:0px;border-width:0pt 0pt 0px;border-color:rgb(240,240,240)">
 	<div id="guiasAtlas" style="top:0px;cursor:pointer;overflow:auto;" >
-    </div>   
+    </div>
 </td>
 </tr>
 <tr>
@@ -115,7 +115,7 @@ i3GEO.Interface.openlayers.GADGETS = {
 		PanZoom:false,
 		LayerSwitcher:true,
 		ScaleLine:true,
-		OverviewMap:false	
+		OverviewMap:false
 	};
 i3GEO.Interface.openlayers.TILES = true;
 //
@@ -126,7 +126,7 @@ i3GEO.Interface.openlayers.TILES = true;
 //
 //desabilita o item que abre a interface "default" do menu suspenso
 //
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}'
+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 
 /*
 Após a cria&ccedil;&atilde;o, &eacute; criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
@@ -165,32 +165,32 @@ OpenLayers.ImgPath = "../pacotes/openlayers/img/";
 //adiciona camadas que podem ser ativadas como fundo do mapa
 //
 (function(){
-	var oce = new OpenLayers.Layer.ArcGIS93Rest( 
+	var oce = new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI Ocean Basemap",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export",
 		{format:"jpg"},
 		{isBaseLayer:true,visibility:false}
 	);
-	var ims = new OpenLayers.Layer.ArcGIS93Rest( 
+	var ims = new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI Imagery World 2D",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export",
 		{},
 		{isBaseLayer:true,visibility:false}
 	);
-	var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
+	var wsm = new OpenLayers.Layer.ArcGIS93Rest(
 		"ESRI World Street Map",
 		"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export",
 		{},
 		{isBaseLayer:true,visibility:false}
 	);
-	var bra = new OpenLayers.Layer.WMS( 
+	var bra = new OpenLayers.Layer.WMS(
 		"Base carto MMA",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
 		{layers:"baseraster",srs:"EPSG:4618",format:"image/png",isBaseLayer:false},
 		{isBaseLayer:true,visibility:false}
 	);
 	/*
-	var osm = new OpenLayers.Layer.WMS( 
+	var osm = new OpenLayers.Layer.WMS(
 		"Open Street Map",
 		"http://full.wms.geofabrik.de/std/demo_key",
 		{layers:""},
@@ -212,7 +212,7 @@ i3GEO.finaliza = function(){
 	{$i("i3GEOlogoMarca").style.display = "none";}
 	i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
 	iniciaAtlas();
-}
+};
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 //OpenLayers.DOTS_PER_INCH = 96
 //i3GEO.configura.sid = "";

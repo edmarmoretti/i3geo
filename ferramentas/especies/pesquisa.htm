@@ -157,9 +157,9 @@ Free Software Foundation, Inc., no endereco
 */
 
 
-g_sid = window.parent.g_sid
+g_sid = window.parent.g_sid;
 
-comboBancos()
+comboBancos();
 
 /*
 Function: comboBancos
@@ -170,14 +170,14 @@ function comboBancos()
 {
 	var monta = function(retorno)
 	{
-		var ins = "\<select class=combo id=comboFiltros onchange='comboListaFamilias(this.value)' \>\<option value=''\>Nenhum\<\/option\>"
+		var ins = "\<select class=combo id=comboFiltros onchange='comboListaFamilias(this.value)' \>\<option value=''\>Nenhum\<\/option\>";
 		for(i=0;i<retorno.data.especies.length;i++)
 		{
-			ins += "\<option value="+retorno.data.especies[i].database+" >"+retorno.data.especies[i].nome+"\<\/option\>"
+			ins += "\<option value="+retorno.data.especies[i].database+" >"+retorno.data.especies[i].nome+"\<\/option\>";
 		}
-		document.getElementById("tipoFiltro").innerHTML = ins+"\<\/select\>"
-	}
-	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaBancos"
+		document.getElementById("tipoFiltro").innerHTML = ins+"\<\/select\>";
+	};
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaBancos";
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -190,28 +190,28 @@ Lista familias de um banco.
 */
 function comboListaFamilias(banco)
 {
-	document.getElementById("especies").style.display="none"
+	document.getElementById("especies").style.display="none";
 	if (banco == "")
 	{
-		document.getElementById("valores").style.display="none"
+		document.getElementById("valores").style.display="none";
 		return
 	}
-	document.getElementById("valores").style.display="block"
-	document.getElementById("valoresFiltro").innerHTML = "Aguarde..."
+	document.getElementById("valores").style.display="block";
+	document.getElementById("valoresFiltro").innerHTML = "Aguarde...";
 	var monta = function(retorno)
 	{
-		var ins = "\<select class=combo id=comboFamilias onchange='comboListaEspecies(this.value)' \>\<option value=''\>---\<\/option\>"
+		var ins = "\<select class=combo id=comboFamilias onchange='comboListaEspecies(this.value)' \>\<option value=''\>---\<\/option\>";
 		for(i=0;i<retorno.data.especies.length;i++)
 		{
-			ins += "<option value='"+retorno.data.especies[i]+"' >"+retorno.data.especies[i]+"\<\/option\>"
+			ins += "<option value='"+retorno.data.especies[i]+"' >"+retorno.data.especies[i]+"\<\/option\>";
 		}
-		document.getElementById("valoresFiltro").innerHTML = ins+"\<\/select\>"
-	}
-	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaFamilias&banco="+banco
+		document.getElementById("valoresFiltro").innerHTML = ins+"\<\/select\>";
+	};
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaFamilias&banco="+banco;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"listaFamilias",monta);	
+	cp.call(p,"listaFamilias",monta);
 }
 /*
 Function: comboListaEspecies
@@ -222,27 +222,27 @@ function comboListaEspecies(familia)
 {
 	if (familia == "")
 	{
-		document.getElementById("especies").style.display="none"
+		document.getElementById("especies").style.display="none";
 		return
 	}
-	var banco = document.getElementById("comboFiltros").value
-	var familia = document.getElementById("comboFamilias").value
-	document.getElementById("especies").style.display="block"
-	document.getElementById("valoresEspecie").innerHTML = "Aguarde..."
+	var banco = document.getElementById("comboFiltros").value;
+	var familia = document.getElementById("comboFamilias").value;
+	document.getElementById("especies").style.display="block";
+	document.getElementById("valoresEspecie").innerHTML = "Aguarde...";
 	var monta = function(retorno)
 	{
-		var ins = "\<select class=combo id=comboEspecies \>\<option value=''\>---\<\/option\>"
+		var ins = "\<select class=combo id=comboEspecies \>\<option value=''\>---\<\/option\>";
 		for(i=0;i<retorno.data.especies.length;i++)
 		{
-			ins += "\<option value='"+retorno.data.especies[i]+"' \>"+retorno.data.especies[i]+"\<\/option\>"
+			ins += "\<option value='"+retorno.data.especies[i]+"' \>"+retorno.data.especies[i]+"\<\/option\>";
 		}
-		document.getElementById("valoresEspecie").innerHTML = ins+"\<\/select\>"
-	}
-	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaEspecies&banco="+banco+"&familia="+familia
+		document.getElementById("valoresEspecie").innerHTML = ins+"\<\/select\>";
+	};
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaEspecies&banco="+banco+"&familia="+familia;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"listaEspecies",monta);	
+	cp.call(p,"listaEspecies",monta);
 }
 
 /*
@@ -252,30 +252,30 @@ Chama a funcao Ajax para realizar a consulta e adicionar a nova camada ao mapa a
 */
 function executa()
 {
-	var banco = document.getElementById("comboFiltros").value
+	var banco = document.getElementById("comboFiltros").value;
 	if (banco == "")
-	{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha um tipo!");return}
+	{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha um tipo!");return;}
 	document.getElementById("ResultadoPesquisa").innerHTML = "Aguarde! Pesquisando.....";
 	if (document.getElementById("comboFamilias"))
 	{
-		var familia = document.getElementById("comboFamilias").value
+		var familia = document.getElementById("comboFamilias").value;
 		if (familia == "")
-		{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha uma familia!");return}
+		{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha uma familia!");return;}
 	}
-	var especie = ""
+	var especie = "";
 	if (document.getElementById("comboEspecies"))
 	{
-		var especie = (document.getElementById("comboEspecies").value)
+		var especie = (document.getElementById("comboEspecies").value);
 		if (especie == "")
-		{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha uma especie!");return}
+		{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha uma especie!");return;}
 	}
-	var cor = document.getElementById("cor").value
-	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=adicionatema&banco="+banco+"&familia="+familia+"&especie="+especie+"&cor="+cor
+	var cor = document.getElementById("cor").value;
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=adicionatema&banco="+banco+"&familia="+familia+"&especie="+especie+"&cor="+cor;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"adicionatema",listaretornof);
-	
+
 }
 /*
 Function: listaretornof
@@ -284,14 +284,14 @@ Recebe os dados da funcao "executa" e redesenha o mapa atual.
 */
 function listaretornof(retorno)
 {
-	document.getElementById("ResultadoPesquisa").style.color="red"
+	document.getElementById("ResultadoPesquisa").style.color="red";
 	if (retorno.data == "ok")
 	{
-		document.getElementById("ResultadoPesquisa").innerHTML = "<b>Mapa criado!"
-		window.parent.remapaf()
+		document.getElementById("ResultadoPesquisa").innerHTML = "<b>Mapa criado!";
+		window.parent.remapaf();
 	}
 	else
-	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Nenhum registro encontrado!"}
+	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Nenhum registro encontrado!";}
 }
 </script>
 </body>

@@ -103,7 +103,7 @@ botoesIni = [
 	"titulo":$trad(3,g_traducao_init),
 	"subtitulo": $trad("3a",g_traducao_init),
 	"fa": "cogs",
-	"target": "_self"
+	"target": "_blank"
 },{
 	"img":"folder-image.png",
 	"href": "../exemplos/index.php",

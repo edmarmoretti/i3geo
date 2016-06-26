@@ -8,15 +8,15 @@
 	Leitura dos programas javaScript e estilos.
 	Os códigos do i3geo s&atilde;o compactados para tornar o carregamento mais r&aacute;pido.
 	Se vc alterar os códigos originais, n&atilde;o se esque&ccedil;a de compact&aacute;-los com classesjs/compactajs.php.
-	Para depurar o código sem ter de compact&aacute;-los, substitua na linha abaixo 
+	Para depurar o código sem ter de compact&aacute;-los, substitua na linha abaixo
 	o arquivo i3geo.js por i3geo.js
 -->
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
-	<style> 
+	<style>
 		.yui-skin-sam .yui-panel .hd {
 			background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite_junho_saojoao.png) repeat-x scroll 0 -200px;
 		}
-	</style> 
+	</style>
 </head>
 <body id="i3geo">
 
@@ -53,7 +53,7 @@
 	<!--
 		menu suspenso
 	-->
-	 <div id="menus" ></div>    
+	 <div id="menus" ></div>
 </td>
 </tr>
 <tr>
@@ -79,7 +79,7 @@
  	<!-- se vc quiser colocar a arvore de adi&ccedil;&atilde;o de temas em um lugar espec&iacute;fico, use o div abaixo, caso contr&aacute;rio, a &aacute;rvore ser&aacute; colocada na guia definida em objmapa.guiaMenu
   	<div id=arvoreAdicionaTema style='top:25px;' ></div>
   	<div id=outrasOpcoesAdiciona style='top:25px;' ></div>
-  	-->	
+  	-->
   </div>
 
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
@@ -101,11 +101,11 @@
  </tr>
 <!--
 Mostra as coordenadas conforme o mouse &eacute; movimentado
--->  
+-->
 <!-- <div class=pcenter10 id='longlat'>Longitude e latitude</div> -->
 <!--
 Escala gr&aacute;fica. Pode ser exclu&iacute;da.
---> 
+-->
 <!-- <div id="escalaGrafica" style="text-align:left"></div> -->
 <!--
 vc pode optar por colocar mensagens de ajuda em algum lugar
@@ -164,7 +164,7 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
 	Para excluir um bot&atilde;o &eacute; só apagar a linha.
 	Para adicionar um bot&atilde;o, &eacute; só criar uma linha e especificar a fun&ccedil;&atilde;o que ser&aacute; executada quando o usu&aacute;rio clicar no bot&atilde;o
 -->
-<div id=barraDeBotoes1 style='display:none'> 
+<div id=barraDeBotoes1 style='display:none'>
    <table style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><div ID='historicozoom' ></div></td></tr><tr><td style=height:5px ></td></tr></table>
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
@@ -208,20 +208,20 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
 		<img title="reinicia" alt="" src="../imagens/branco.gif" id='reinicia'/>
 	</div>
 
-	
+
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
 		<img title="extensao" alt="" src="../imagens/branco.gif" id='exten'/>
-	</div>        
+	</div>
 
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
 		<img title="referencia" alt="" src="../imagens/branco.gif" id='referencia'/>
-	</div>        
+	</div>
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
 		<img title="insere xy" alt="" src="../imagens/branco.gif" id='inserexy'/>
-	</div> 
+	</div>
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
 		<img title="texto" alt="" src="../imagens/branco.gif" id='textofid'/>
@@ -238,7 +238,7 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
 		<img title="insere grafico" alt="" src="../imagens/branco.gif" id='inseregrafico'/>
-	</div> 
+	</div>
 	<div style='display:none;background-color:rgb(250,250,250);'>
 
 		<p style='font-size:2px;'>&nbsp;</p>
@@ -274,15 +274,15 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
 
 /*
 	Indica a localiza&ccedil;&atilde;o correta do i3geo.
-	
+
 	&Eacute; utilizada para identificar o local correto onde est&atilde;o os programas em php que s&atilde;o utilizados.
 */
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 
-i3GEO.cria()
+i3GEO.cria();
 //Log
 /*
-var myContainer = document.body.appendChild(document.createElement("div")); 
+var myContainer = document.body.appendChild(document.createElement("div"));
 myContainer.style.textAlign="left";
 i3geoLog = new YAHOO.widget.LogReader(myContainer);
 i3geoLog.show();
@@ -293,11 +293,11 @@ i3geoLog.show();
 */
 //i3GEO.guias.ATUAL = "legenda"
 
-i3GEO.barraDeBotoes.AUTOALTURA = false
-i3GEO.barraDeBotoes.PERMITEFECHAR = true
-i3GEO.barraDeBotoes.PERMITEDESLOCAR = true
+i3GEO.barraDeBotoes.AUTOALTURA = false;
+i3GEO.barraDeBotoes.PERMITEFECHAR = true;
+i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
 
-i3GEO.idioma.IDSELETOR = "seletorIdiomas"
+i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 
 i3GEO.configura.visual = "laranja";
 

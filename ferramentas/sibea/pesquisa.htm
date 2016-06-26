@@ -101,7 +101,7 @@ Acessa os web services do MMA para recuperar dados sobre educadores ambientais.
 
 Por ser executado dentro do I3Geo, boa parte dos parametros s&atilde;o obtidos da vari&aacute;vel de se&ccedil;&atilde;o.
 
-Arquivos: 
+Arquivos:
 
 i3geo/ferramentas/sibea/pesquisa.htm
 i3geo/ferramentas/sibea/pesquisa.php
@@ -130,9 +130,9 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 */
 
-g_sid = window.parent.i3GEO.configura.sid
+g_sid = window.parent.i3GEO.configura.sid;
 
-comboTipoFiltro()
+comboTipoFiltro();
 
 /*
 Function: comboTipoFiltro
@@ -143,14 +143,14 @@ function comboTipoFiltro()
 {
 	var monta = function(retorno)
 	{
-		var ins = "<select class=combo id=comboFiltros onchange='comboListaValores(this.value)' ><option value=''>Nenhum</option>"
+		var ins = "<select class=combo id=comboFiltros onchange='comboListaValores(this.value)' ><option value=''>Nenhum</option>";
 		for(i=0;i<retorno.data.sibea.length;i++)
 		{
-			ins += "<option value="+retorno.data.sibea[i].funcao+" >"+retorno.data.sibea[i].nome+"</option>"
+			ins += "<option value="+retorno.data.sibea[i].funcao+" >"+retorno.data.sibea[i].nome+"</option>";
 		}
-		document.getElementById("tipoFiltro").innerHTML = ins+"</select>"
-	}
-	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaTipoFiltro"
+		document.getElementById("tipoFiltro").innerHTML = ins+"</select>";
+	};
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaTipoFiltro";
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -165,25 +165,25 @@ function comboListaValores(funcao)
 {
 	if (funcao == "")
 	{
-		document.getElementById("valores").style.display="none"
+		document.getElementById("valores").style.display="none";
 		return
 	}
-	document.getElementById("valores").style.display="block"
-	document.getElementById("valoresFiltro").innerHTML = "Aguarde..."
+	document.getElementById("valores").style.display="block";
+	document.getElementById("valoresFiltro").innerHTML = "Aguarde...";
 	var monta = function(retorno)
 	{
-		var ins = "<select class=combo id=comboValores ><option value=''>---</option>"
+		var ins = "<select class=combo id=comboValores ><option value=''>---</option>";
 		for(i=0;i<retorno.data.sibea.length;i++)
 		{
-			ins += "<option value='"+retorno.data.sibea[i].codigo+"*"+retorno.data.sibea[i].nome+"' >"+retorno.data.sibea[i].nome+"</option>"
+			ins += "<option value='"+retorno.data.sibea[i].codigo+"*"+retorno.data.sibea[i].nome+"' >"+retorno.data.sibea[i].nome+"</option>";
 		}
-		document.getElementById("valoresFiltro").innerHTML = ins+"</select>"
-	}
-	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaValorFiltro&execFuncao="+funcao
+		document.getElementById("valoresFiltro").innerHTML = ins+"</select>";
+	};
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaValorFiltro&execFuncao="+funcao;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"listaValorFiltro",monta);	
+	cp.call(p,"listaValorFiltro",monta);
 }
 /*
 Function: executa
@@ -192,30 +192,30 @@ Chama a fun&ccedil;&atilde;o Ajax para realizar a consulta e adicionar a nova ca
 */
 function executa()
 {
-	var filtro = document.getElementById("comboFiltros").value
+	var filtro = document.getElementById("comboFiltros").value;
 	if (filtro == "")
-	{alert("Escolha um filtro!");return}
+	{alert("Escolha um filtro!");return;}
 	if (document.getElementById("comboValores").value == "")
 	{alert("Escolha um valor para o filtro");return;}
 	document.getElementById("ResultadoPesquisa").innerHTML = "Aguarde! Pesquisando.....";
 	if (document.getElementById("comboValores"))
 	{
-		var temp = (document.getElementById("comboValores").value).split("*")
-		var valor = temp[0]
-		var nomevalor = temp[1]
+		var temp = (document.getElementById("comboValores").value).split("*");
+		var valor = temp[0];
+		var nomevalor = temp[1];
 	}
 	else
 	{
-		var valor = ""
-		var nomevalor = ""
+		var valor = "";
+		var nomevalor = "";
 	}
-	var cor = document.getElementById("cor").value
-	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=adicionatema&filtro="+filtro+"&valor="+valor+"&nomevalor="+nomevalor+"&cor="+cor
+	var cor = document.getElementById("cor").value;
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=adicionatema&filtro="+filtro+"&valor="+valor+"&nomevalor="+nomevalor+"&cor="+cor;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"adicionatema",listaretornof);
-	
+
 }
 /*
 Function: listaretornof
@@ -224,14 +224,14 @@ Recebe os dados da fun&ccedil;&atilde;o "executa" e redesenha o mapa atual.
 */
 function listaretornof(retorno)
 {
-	document.getElementById("ResultadoPesquisa").style.color="red"
+	document.getElementById("ResultadoPesquisa").style.color="red";
 	if (retorno.data == "ok")
 	{
-		document.getElementById("ResultadoPesquisa").innerHTML = "<b>Mapa criado!"
-		window.parent.remapaf()
+		document.getElementById("ResultadoPesquisa").innerHTML = "<b>Mapa criado!";
+		window.parent.remapaf();
 	}
 	else
-	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Nenhum registro encontrado!"}
+	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Nenhum registro encontrado!";}
 }
 </script>
 

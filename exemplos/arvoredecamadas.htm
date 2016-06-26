@@ -179,7 +179,7 @@ Ativa a op&ccedil;&atilde;o de arrastar um tema para a lixeria quando se quer re
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 i3GEO.cria();
 i3GEO.inicia();
-i3GEO.ajuda.ATIVAJANELA = false
+i3GEO.ajuda.ATIVAJANELA = false;
 function ARVatualizar(){
 	var par = $i("ARVparametros").getElementsByTagName("select"),
 		n = par.length,
@@ -192,7 +192,7 @@ function ARVatualizar(){
 		codigo += c+"<br>";
 	}
 	$i("codigo").innerHTML = codigo;
-	i3GEO.arvoreDeCamadas.atualiza()
+	i3GEO.arvoreDeCamadas.atualiza();
 }
 ARVatualizar();
 </script>

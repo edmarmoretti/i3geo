@@ -244,7 +244,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 				});
 				$("#temas").html(temas.join(""));
 				temas = [];
-				temas.push("<option value=''>Escolha um grupo</option>");
+				temas.push("<option value=''>Escolha um subgrupo</option>");
 				//subgrupos
 				$(sgrupos).each(function(i){
 					temas.push("<option value='"+sgrupos[i].id_n2+"'>"+sgrupos[i].nome+"</option>");
