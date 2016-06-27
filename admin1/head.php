@@ -51,6 +51,7 @@ echo "
 	<script src='" . ONDEI3GEO . "/classesjs/compactados/classe_php_compacto.js'></script>
 	<script src='" . ONDEI3GEO . "/classesjs/compactados/mustache.js'></script>
 	<script src='" . ONDEI3GEO . "/admin1/index.js'></script>
+	<script src='" . ONDEI3GEO . "/admin1/dicionario/core.js'></script>
 	<script src='" . ONDEI3GEO . "/admin1/dicionario/menup.js'></script>
 ";
 ?>

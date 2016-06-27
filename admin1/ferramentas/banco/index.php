@@ -1,6 +1,6 @@
 <?php
 define ( ONDEI3GEO, "../../.." );
-include (dirname ( __FILE__ ) . "/../../ms_configura.php");
+include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 error_reporting ( 0 );
 include "../../head.php";
 ?>
@@ -19,6 +19,7 @@ include "../../head.php";
 		<div class="row center-block">
 			<div class="col-sm-12">
 				<div class="well">
+				<h2>Descri&ccedil;&atilde;o da estrutura do banco de dados de administra&ccedil;&atilde;o</h2>
 			<?php
 				if(!file_exists("../../../admin/admin.db")){
 					echo "<div class='well well-danger'>O arquivo menutemas/admin.db n&atilde;o existe. Utilize a op&ccedil;&atilde;o existente no menu de administra&ccedil;&atilde;o para criar o banco de dados SQLITE.</div>";

@@ -326,13 +326,13 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'usuario' : [ {
+		pt : "Usu&aacute;rio",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'senha' : [ {
+		pt : "Senha",
 		en : "",
 		es : ""
 	} ],

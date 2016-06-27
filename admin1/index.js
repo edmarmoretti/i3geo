@@ -18,11 +18,11 @@ menuPrincipal = [
 				html: $trad("outrasOpc",i3GEOadmin.menup.dicionario),
 				children:[
 					{
-					html: "<a href='ferramentas/estatisticas/index.php' >"+$trad("estat",i3GEOadmin.menup.dicionario)+"</a>"
+					html: "<a href='" + i3GEO.configura.locaplic + "/admin1/ferramentas/estatisticas/index.php' >"+$trad("estat",i3GEOadmin.menup.dicionario)+"</a>"
 					},{
-					html: "<a href='ferramentas/banco/index.php' >"+$trad("descricaoBd",i3GEOadmin.menup.dicionario)+"</a>"
+					html: "<a href='" + i3GEO.configura.locaplic + "/admin1/ferramentas/banco/index.php' >"+$trad("descricaoBd",i3GEOadmin.menup.dicionario)+"</a>"
 					},{
-					html: "<a href='php/criabanco.php' >"+$trad("criaBd",i3GEOadmin.menup.dicionario)+"</a>"
+					html: "<a href='" + i3GEO.configura.locaplic + "/admin1/ferramentas/criabanco/index.php' >"+$trad("criaBd",i3GEOadmin.menup.dicionario)+"</a>"
 					},{
 					html: "<a href='" + i3GEO.configura.locaplic + "/geraminiatura.php' >"+$trad("geraMiniatura",i3GEOadmin.menup.dicionario)+"</a>"
 					}
