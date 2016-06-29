@@ -14,3 +14,4 @@ arial FreeSans.ttf
 arial-bold FreeSansBold.ttf
 arial-italic FreeSansOblique.ttf
 verdana FreeMono.ttf
+fontawesome fontawesome-webfont.ttf

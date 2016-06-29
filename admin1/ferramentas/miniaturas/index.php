@@ -11,7 +11,7 @@ include "../../head.php";
 			<li><a href="../../init/index.php">i3Geo</a></li>
 			<li><a href="../../index.php">Admin</a></li>
 			<li>Ferramentas</li>
-			<li class="active">Cria banco</li>
+			<li class="active">Miniaturas</li>
 		</ol>
 	</div>
 </div>
@@ -21,21 +21,31 @@ include "../../head.php";
 			<div class="row">
 				<div class="col-md-12">
 					<div class="well">
-						<h3>Cria o banco de dados de administra&ccedil;&atilde;o conforme as
-							configura&ccedil;&otilde;es de conex&atilde;o existentes em i3geo/ms_configura.php</h3>
+						<h3>Gera imagens miniaturas de cada tema para abastecer a pasta i3geo/temas/miniaturas</h3>
 						<h4>O usu&aacute;rio e a senha devem estar cadastrados em i3geo/ms_configura.php</h4>
 					</div>
 					<div class="well">
 						<form class="form" role="form" method="post" action="exec.php">
 							<?php include("../../templates/login.php");?>
 							<div class="form-group">
-								<div class="checkbox">
-									<label> <input type="checkbox" name="mostraSoSQL" /> Mostra apenas o SQL, sem criar o banco
+								<div class="radio">
+									<label> <input name="tipo" value="todos" type="radio" required>todas as miniaturas
 									</label>
 								</div>
-								<button type="submit" class="btn btn-primary">{{{enviar}}}</button>
+								<div class="radio">
+									<label> <input name="tipo" value="mini" type="radio" required>apenas as pequenas
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input name="tipo" value="grande" type="radio" required>apenas as grandes
+									</label>
+								</div>
 							</div>
+							<button type="submit" class="btn btn-primary">{{{enviar}}}</button>
 						</form>
+					</div>
+					<div class="well well-info">
+					As miniaturas s&atilde;o geradas na pasta tempor&aacute;ria do servidor (ms_tmp). Depois de criadas, &eacute; necess&aacute;rio copi&aacute;-las para a pasta i3geo/temas/miniaturas. Apenas s&atilde;o processados os temas cujas miniaturas ainda n&atilde;o existirem.
 					</div>
 				</div>
 			</div>

@@ -15,7 +15,7 @@ include "head.php";
 	</div>
 	<div class="container">
 		<div class="row center-block">
-			<div class="col-sm-12">
+			<div class="col-sm-12 hidden">
 
 						<div class="well">
 						<h1>{{adminI3geo}}</h1>
@@ -61,6 +61,7 @@ include "head.php";
 			$(this).parent().siblings().removeClass('open');
 			$(this).parent().toggleClass('open');
 		});
+		$(".hidden").removeClass('hidden');
 		$.material.init();
 	});
 	</script>
