@@ -3,7 +3,7 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <?php
-//utilizado para o cabecalho das paginas que nao sao mapas e que usam bootstrap com material design
+// utilizado para o cabecalho das paginas que nao sao mapas e que usam bootstrap com material design
 echo "
 	<meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -50,7 +50,8 @@ echo "
 	<script src='" . ONDEI3GEO . "/classesjs/compactados/classe_login_compacto.js'></script>
 	<script src='" . ONDEI3GEO . "/classesjs/compactados/classe_php_compacto.js'></script>
 	<script src='" . ONDEI3GEO . "/classesjs/compactados/mustache.js'></script>
-	<script src='" . ONDEI3GEO . "/admin1/index.js'></script>
+	<script src='" . ONDEI3GEO . "/admin1/head.js'></script>
+	<script src='" . ONDEI3GEO . "/admin1/js/core.js'></script>
 	<script src='" . ONDEI3GEO . "/admin1/dicionario/core.js'></script>
 	<script src='" . ONDEI3GEO . "/admin1/dicionario/menup.js'></script>
 ";
@@ -66,86 +67,101 @@ hr {
 #menuTpl a:focus, #menuTpl a:hover {
 
 }
+
 #menuTpl ul {
 
 }
+
 #menuTpl li {
 
 }
-.navbar-collapse { max-height: 100% !important; }
+
+.navbar-collapse {
+	max-height: 100% !important;
+}
 
 .btn.btn-fab.btn-fab-mini {
-    font-size: 12px;
-    height: 24px;
-    min-width: 24px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    width: 24px;
+	font-size: 12px;
+	height: 24px;
+	min-width: 24px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	width: 24px;
 }
 
 .btn.btn-fab.btn-fab-max {
-    font-size: 1.6em;
-    height: 40px;
-    min-width: 40px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 7px;
-    width: 40px;
+	font-size: 1.6em;
+	height: 40px;
+	min-width: 40px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 7px;
+	width: 40px;
 }
-body{
+
+body {
 	background-color: #fff;
 }
+
 .marginBottom-0 {
-	margin-bottom:0;
+	margin-bottom: 0;
 }
-.dropdown-submenu{
-	position:relative;
+
+.dropdown-submenu {
+	position: relative;
 }
-.dropdown-submenu>.dropdown-menu{
-	top:0;
-	left:100%;
-	margin-top:-6px;
-	margin-left:-1px;
-	-webkit-border-radius:0 6px 6px 6px;
-	-moz-border-radius:0 6px 6px 6px;
-	border-radius:0 6px 6px 6px;
+
+.dropdown-submenu>.dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: -6px;
+	margin-left: -1px;
+	-webkit-border-radius: 0 6px 6px 6px;
+	-moz-border-radius: 0 6px 6px 6px;
+	border-radius: 0 6px 6px 6px;
 }
-.dropdown-submenu>a:after{
-	display:block;
-	content:" ";
-	float:right;
-	width:0;
-	height:0;
-	border-color:transparent;
-	border-style:solid;
-	border-width:5px 0 5px 5px;
-	border-left-color:#cccccc;
-	margin-top:5px;
-	margin-right:-10px;
+
+.dropdown-submenu>a:after {
+	display: block;
+	content: " ";
+	float: right;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 5px 0 5px 5px;
+	border-left-color: #cccccc;
+	margin-top: 5px;
+	margin-right: -10px;
 }
-.dropdown-submenu:hover>a:after{
-	border-left-color:#555;
+
+.dropdown-submenu:hover>a:after {
+	border-left-color: #555;
 }
-.dropdown-submenu.pull-left{
-	float:none;
+
+.dropdown-submenu.pull-left {
+	float: none;
 }
-.dropdown-submenu.pull-left>.dropdown-menu{
-	left:-100%;
-	margin-left:10px;
-	-webkit-border-radius:6px 0 6px 6px;
-	-moz-border-radius:6px 0 6px 6px;
-	border-radius:6px 0 6px 6px;
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+	left: -100%;
+	margin-left: 10px;
+	-webkit-border-radius: 6px 0 6px 6px;
+	-moz-border-radius: 6px 0 6px 6px;
+	border-radius: 6px 0 6px 6px;
 }
+
 .dropdown-menu li {
-    overflow-x: hidden;
-    overflow-y: hidden;
-    position: unset;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	position: unset;
 }
-.navbar .dropdown-menu li > a, .navbar.navbar-default .dropdown-menu li > a {
-    font-size: 1em;
+
+.navbar .dropdown-menu li>a, .navbar.navbar-default .dropdown-menu li>a {
+	font-size: 1em;
 }
 </style>
 </head>
@@ -164,7 +180,7 @@ body{
 			<div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a
-						onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');"
+						onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>/','template_mst_bt.html');"
 						href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
 						<ul id="i3GEOF_loginusuario" class="dropdown-menu"
 							style="min-width: 280px; padding: 10px; background-color: white;">

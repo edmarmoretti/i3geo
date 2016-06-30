@@ -22,7 +22,7 @@ include "../../head.php";
 				<h2>Descri&ccedil;&atilde;o da estrutura do banco de dados de administra&ccedil;&atilde;o</h2>
 			<?php
 				if(!file_exists("../../../admin/admin.db")){
-					echo "<div class='well well-danger'>O arquivo menutemas/admin.db n&atilde;o existe. Utilize a op&ccedil;&atilde;o existente no menu de administra&ccedil;&atilde;o para criar o banco de dados SQLITE.</div>";
+					echo "<div class='alert alert-danger'>O arquivo menutemas/admin.db n&atilde;o existe. Utilize a op&ccedil;&atilde;o existente no menu de administra&ccedil;&atilde;o para criar o banco de dados SQLITE.</div>";
 					exit;
 				}
 				$dbh = new PDO('sqlite:../../../admin/admin.db');
@@ -44,7 +44,7 @@ include "../../head.php";
 					}
 				}
 				echo "<h3>SQL no padr&atilde;o POSTGRES</h3>";
-				echo "<div class='well well-info'><p>Ap&oacute;s criar as tabelas no Postgres, vc deve definir as permiss&otilde;es para os usu&aacute;rios.</p>";
+				echo "<div class='alert alert-info'><p>Ap&oacute;s criar as tabelas no Postgres, vc deve definir as permiss&otilde;es para os usu&aacute;rios.</p>";
 				echo "<p>Para usar outro banco de dados que n&atilde;o seja o default (SQLITE), voc&ecirc; ter&aacute; de alterar o programa i3geo/admin/php/conexao.php</p></div>";
 				foreach($resultado as $r){
 					if(mb_detect_encoding($r["sql"],'UTF-8, ISO-8859-1') == "UTF-8"){

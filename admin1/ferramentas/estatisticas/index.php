@@ -150,8 +150,9 @@ include "../../head.php";
 					echo "<li class='list-group-item'><label class='text-success'>".$temasacessos2[$i]." <span class='badge'> ".$temasacessos[$temasacessos2[$i]]."</span></li>";
 				}
 			}
-			echo "</ul></div><div class='well well-info'>".date('l jS \of F Y h:i:s A')."</div>";
+			echo "</ul></div><div class='alert alert-info'>".date('l jS \of F Y h:i:s A')."</div>";
 			?>
+			</div>
 			</div>
 		</div>
 	</div>

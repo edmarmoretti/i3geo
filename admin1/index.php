@@ -42,8 +42,8 @@ include "head.php";
 			                   target="_new">{{{merBdMetaestat}}}</a><br>
 						</p>
 						</div>
-						<div class="well well-danger">{{atencao}}</div>
-						<div class="well well-warning">{{{leiaMe}}}</div>
+						<div class="alert alert-danger">{{atencao}}</div>
+						<div class="alert alert-warning">{{{leiaMe}}}</div>
 
 			</div>
 		</div>

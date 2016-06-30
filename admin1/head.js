@@ -68,7 +68,7 @@ menuPrincipal = [
 	html: $trad("contAcesso",i3GEOadmin.menup.dicionario),
 	children:[
 		{
-		html: "<a href='html/operacoes.html' >"+$trad("controleOperac",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/usuarios/operacoes/index.php' >"+$trad("controleOperac",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
 		html: "<a href='html/usuarios.html' >"+$trad("cadastroUsuario",i3GEOadmin.menup.dicionario)+"</a>"
 		},{

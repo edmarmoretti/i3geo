@@ -20,7 +20,7 @@ include "index.php";
 						} else {
 							$continua = verificaMaster ( $_POST ["usuario"], $_POST ["senha"], $i3geomaster );
 							if ($continua == false) {
-								echo "<div class='well well-warning'>Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster</div>";
+								echo "<div class='alert alert-warning'>Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster</div>";
 								exit ();
 							}
 						}
@@ -78,7 +78,7 @@ include "index.php";
 						if ($conexaoadmin == "") {
 							if ($_POST ["mostraSoSQL"] != "on") {
 								if (file_exists ( "../../../admin/admin.db" )) {
-									echo "<div class='well well-warning'>Arquivo admin/admin.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise</div>";
+									echo "<div class='alert alert-warning'>Arquivo admin/admin.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise</div>";
 								} else {
 									// TODO verificar ao fechar versao - caso tenha havido alteracoes no banco, gerar banco vazio
 									copy ( "../../../admin/admin_vazio.db", "../../../admin/admin.db" );
@@ -97,7 +97,7 @@ include "index.php";
 							include ($conexaoadmin);
 						}
 						if (empty ( $dbhw )) {
-							echo "<div class='well well-warning'>Conexao com o banco n&atilde;o pode ser estabelecida</div>";
+							echo "<div class='alert alert-warning'>Conexao com o banco n&atilde;o pode ser estabelecida</div>";
 							exit ();
 						}
 						$drivename = $dbhw->getAttribute ( PDO::ATTR_DRIVER_NAME );
@@ -242,7 +242,7 @@ include "index.php";
 						}
 						?>
 					</div>
-					<div class='well well-success'>Feito!</div>
+					<div class='alert alert-success'>Feito!</div>
 				</div>
 			</div>
 		</div>

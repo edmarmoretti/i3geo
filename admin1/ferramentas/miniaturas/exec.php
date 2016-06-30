@@ -39,7 +39,7 @@ include "index.php";
 						else{
 							$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
 							if($continua == false){
-								echo "<div class='well well-warning'>Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster</div>";
+								echo "<div class='alert alert-warning'>Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster</div>";
 								exit;
 							}
 						}
@@ -113,7 +113,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			else
 			{$f = $locaplic."/aplicmap/".$base.".map";}
 			if(!file_exists($base)){
-				echo "<div class='well well-danger'>ARQUIVO $base N&Acirc;O FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
+				echo "<div class='alert alert-danger'>ARQUIVO $base N&Acirc;O FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
 				exit;
 			}
 		}
@@ -143,7 +143,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				$nmapa = ms_newMapObj($tema);
 			}
 			else{
-				echo "<div class='well well-danger'>erro no arquivo $tema </div>";
+				echo "<div class='alert alert-danger'>erro no arquivo $tema </div>";
 				return;
 			}
 			$dados = "";
@@ -223,30 +223,30 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				$error = "";
 				$error = ms_GetErrorObj();
 				while($error && $error->code != MS_NOERR){
-					echo "<div class='well well-danger'>Error in %s: %s</div>", $error->routine, $error->message;
+					echo "<div class='alert alert-danger'>Error in %s: %s</div>", $error->routine, $error->message;
 					$error = $error->next();
 				}
 				return;
 			}
 			if($objImagemM->imagepath == ""){
-				echo "<div class='well well-danger'>Erro IMAGEPATH vazio</div>";return;
+				echo "<div class='alert alert-danger'>Erro IMAGEPATH vazio</div>";return;
 			}
 			$nomecM = ($objImagemM->imagepath).$map.".mini.png";
 			$objImagemM->saveImage($nomecM);
 		}
 		if($tipo=="grande" || $tipo == "todos"){
 			if (!$objImagemG){
-				echo "<div class='well well-danger'>Problemas ao gerar o mapa</div>";
+				echo "<div class='alert alert-danger'>Problemas ao gerar o mapa</div>";
 				$error = "";
 				$error = ms_GetErrorObj();
 				while($error && $error->code != MS_NOERR){
-					echo "<div class='well well-danger'>Error in %s: %s</div>", $error->routine, $error->message;
+					echo "<div class='alert alert-danger'>Error in %s: %s</div>", $error->routine, $error->message;
 					$error = $error->next();
 				}
 				return;
 			}
 			if($objImagemG->imagepath == ""){
-				echo "<div class='well well-danger'>Erro IMAGEPATH vazio</div>";return;
+				echo "<div class='alert alert-danger'>Erro IMAGEPATH vazio</div>";return;
 			}
 			$nomecG = ($objImagemG->imagepath).$map.".grande.png";
 			$objImagemG->saveImage($nomecG);

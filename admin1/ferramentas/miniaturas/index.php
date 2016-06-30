@@ -44,7 +44,7 @@ include "../../head.php";
 							<button type="submit" class="btn btn-primary">{{{enviar}}}</button>
 						</form>
 					</div>
-					<div class="well well-info">
+					<div class="alert alert-info">
 					As miniaturas s&atilde;o geradas na pasta tempor&aacute;ria do servidor (ms_tmp). Depois de criadas, &eacute; necess&aacute;rio copi&aacute;-las para a pasta i3geo/temas/miniaturas. Apenas s&atilde;o processados os temas cujas miniaturas ainda n&atilde;o existirem.
 					</div>
 				</div>
