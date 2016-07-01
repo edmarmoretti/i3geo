@@ -2,7 +2,7 @@
 i3GEOadmin.operacoes = {};
 i3GEOadmin.operacoes.dicionario = {
 	'operacoes' : [ {
-		pt : "Opera&ccedil;&otilde;es e executores (pap&eacute;is)",
+		pt : "Opera&ccedil;&otilde;es e quem pode execut&aacute;-las (pap&eacute;is)",
 		en : "",
 		es : ""
 	} ],

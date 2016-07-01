@@ -34,7 +34,7 @@ include "../init/head.php";
 	border-radius: 20%;
 }
 
-.list-group .list-group-separator::before{
+.list-group .list-group-separator::before {
 	width: 100%;
 }
 
@@ -77,7 +77,8 @@ include "../init/head.php";
 	height: 78px;
 	width: 170px
 }
-.thumbnail.hidden-xs > a > img {
+
+.thumbnail.hidden-xs>a>img {
 	height: 67px;
 	width: 160px;
 }
@@ -87,7 +88,8 @@ include "../init/head.php";
 	height: 43px;
 	width: 85px
 }
-.thumbnail.visible-xs > a > img {
+
+.thumbnail.visible-xs>a>img {
 	height: 33px;
 	width: 80px;
 }
@@ -149,8 +151,8 @@ include "../init/head.php";
 <script id="indiceTpl" type="x-tmpl-mustache">
 <li><a href="#affix-{{ID_MAPA}}">{{{NOME}}}</a></li>
 </script>
-<body style="padding-top: 55px; position: relative;" id="affix-topo"
-	data-spy="scroll" data-target="#indiceSpy" data-offset="80">
+<body style="padding-top: 55px; position: relative;" id="affix-topo" data-spy="scroll"
+	data-target="#indiceSpy" data-offset="80">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -171,8 +173,8 @@ include "../init/head.php";
 			<ol class="breadcrumb">
 				<li><a href="../init/index.php">i3Geo</a></li>
 				<li class="active">Mapas de usu&aacute;rios</li>
-				<li><a title="RSS" href="../admin/rssmapas.php"><i class="material-icons ">rss_feed</i></a>&nbsp; <a
-					title="JSON" href="../admin/rssmapas.php?output=json"><i class="material-icons ">code</i></a>
+				<li><a title="RSS" href="../admin/rssmapas.php"><i class="material-icons ">rss_feed</i></a>&nbsp;
+					<a title="JSON" href="../admin/rssmapas.php?output=json"><i class="material-icons ">code</i></a>
 				</li>
 			</ol>
 		</div>
@@ -182,20 +184,18 @@ include "../init/head.php";
 		<div class="escondido hidden">
 			<div class="row">
 				<div class="col-xs-12 col-sm-9 center-block escondido hidden" id="botoesTpl">
-					<div class="row" id="affix-{{ID_MAPA}}">
+					<div class="row" id="affix-{{ID_MAPA}}" style="padding-top: 90px; margin-top: -90px;">
 						<div class="col-md-12 center-block">
 							<div id="titulo{{ID_MAPA}}" class="panel-group" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" style="background-color:#80cbc4;">
+									<div class="panel-heading" role="tab" style="background-color: #80cbc4;">
 										<div class="thumbnail visible-xs">
-											<a href="{{{LINK}}}"><img class="img-rounded"
-												src="{{{IMAGEM}}}" /></a>
+											<a href="{{{LINK}}}"><img class="img-rounded" src="{{{IMAGEM}}}" /></a>
 										</div>
 										<div class="thumbnail hidden-xs">
-											<a href="{{{LINK}}}"><img class="img-rounded"
-												src="{{{IMAGEM}}}" /></a>
+											<a href="{{{LINK}}}"><img class="img-rounded" src="{{{IMAGEM}}}" /></a>
 										</div>
-										<h3 class="panel-title" >
+										<h3 class="panel-title">
 											&nbsp;<a data-parent="#titulo{{ID_MAPA}}" class="collapsed in pull-right" role="button"
 												data-toggle="collapse" href="#corpo{{ID_MAPA}}" aria-expanded="false"
 												aria-controls="#corpo{{ID_MAPA}}">{{{NOME}}}&nbsp;</a>
@@ -214,24 +214,20 @@ include "../init/head.php";
 									<div class="panel-body">
 										<div id="corpo{{ID_MAPA}}" class="panel-collapse collapse list-group" role="tabpanel"
 											aria-multiselectable="true">
-											<div class="list-group" >
-											{{{subtitulo}}}
-											</div>
-											</div>
+											<div class="list-group">{{{subtitulo}}}</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-3 hidden-xs">
-						<nav class="bs-docs-sidebar affix" style="" id="indiceSpy">
-							<ul class="nav nav-pills nav-stacked" role="tablist" id="indice">
+				<div class="col-sm-3 hidden-xs">
+					<nav class="bs-docs-sidebar affix" style="" id="indiceSpy">
+						<ul class="nav nav-pills nav-stacked" role="tablist" id="indice">
 
-							</ul>
-						</nav>
-					</div>
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</div>

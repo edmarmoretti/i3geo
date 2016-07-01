@@ -16,7 +16,7 @@ include "../../head.php";
 </div>
 <div class="container">
 	<div class="row center-block">
-		<div class="col-sm-12">
+		<div class="col-xs-12 col-sm-10">
 			<div class="well hidden" id="titulo">
 				<button data-toggle="modal" data-target="#ajudaPrincipal"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
@@ -24,7 +24,11 @@ include "../../head.php";
 				</button>
 				<h3>{{{operacoes}}}</h3>
 				<h4>{{{txtAjuda}}}</h4>
-				<!--Modal-->
+				<div class="row pull-right">
+					<a data-toggle="modal" data-target="#adicionaOperacao" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+				</div>
+				<div class="clearfix"></div>
+				<!--Modal ajuda-->
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -34,17 +38,42 @@ include "../../head.php";
 						</div>
 					</div>
 				</div>
+				<!--Modal adicao de nova operacao e preenchido na inicializacao-->
+				<div id="adicionaOperacao" class="modal fade" tabindex="-1">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-body modal-lg"></div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="well hidden" id="corpo">
-				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
+			<div class="well hidden">
+				<div id="corpo">
+					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
+				</div>
 			</div>
 		</div>
+		<!-- lateral-->
+		<div class="col-sm-2 hidden-xs">
+			<nav class="bs-docs-sidebar affix-top" style="" id="indiceSpy">
+				<ul class="nav nav-pills nav-stacked" role="tablist">
+
+					<li><a onclick="$('.panel').show();" href="#">Links <i class="material-icons">visibility</i></a></li>
+				</ul>
+				<ul class="nav nav-pills nav-stacked" role="tablist" id="indice">
+				</ul>
+			</nav>
+		</div>
+
 	</div>
 </div>
+<script id="indiceTpl" type="x-tmpl-mustache">
+<li><a onclick="$('.panel').hide();$('#form-{{id_operacao}}').show();" href="#">{{{codigo}}}</a></li>
+</script>
 <script id="templateOperacoes" type="x-tmpl-mustache">
-<div class="panel panel-default">
+<div class="panel panel-default" id="form-{{id_operacao}}">
 	<div class="panel-body">
-		<form class="form" role="form" method="post" action="">
+		<form class="form" role="form" method="post" action="" >
 			<div class="row">
 				<div class="col-md-8">
 					<h4>{{{operacao}}}</h4>
@@ -57,8 +86,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="descricao">{{{labelDescricao}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{descricao}}}" class="form-control" name="descricao"
-								placeholder="descricao" required>
+							<input type="text" value="{{{descricao}}}" class="form-control" name="descricao" required>
 						</div>
 					</div>
 				</div>
@@ -68,16 +96,20 @@ include "../../head.php";
 				</div>
 			</div>
 		</form>
+		<div class="pull-right">
+			<a href="javascript:void(0)" class="btn btn-danger" role="button">Excluir</a>
+			<a href="javascript:void(0)" class="btn btn-primary" role="button">salvar</a>
+		</div>
 	</div>
+
 </div>
 </script>
 <script id="templateInputPapeis" type="x-tmpl-mustache">
 	<div class="checkbox">
 		<label>
-			<input type="checkbox" {{checked}} name="{{{id_papel}}}" /> <abbr title="{{{descricao}}}">{{{nome}}}</abbr>
+			<input type="checkbox" {{checked}} name="id_papel-{{{id_papel}}}" /> <abbr title="{{{descricao}}}">{{{nome}}}</abbr>
 		</label>
 	</div>
-
 </script>
 <script type="text/javascript" src="../../dicionario/operacoes.js"></script>
 <script type="text/javascript" src="index.js"></script>
@@ -93,6 +125,8 @@ include "../../head.php";
 		});
 		//traducao
 		var t = $("#titulo");
+		//complementa dicionario
+		i3GEOadmin.operacoes.dicionario.adicionar = i3GEOadmin.core.dicionario.adicionar;
 		t.html(
 			Mustache.to_html(
 				t.html(),

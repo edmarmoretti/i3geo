@@ -141,6 +141,11 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'adicionar' : [ {
+		pt : "Adicionar",
+		en : "",
+		es : ""
+	} ],
     'layers' : [ {
 		pt : "Layers",
 		en : "",

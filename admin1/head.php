@@ -163,6 +163,17 @@ body {
 .navbar .dropdown-menu li>a, .navbar.navbar-default .dropdown-menu li>a {
 	font-size: 1em;
 }
+
+#indice .bs-docs-sidebar .nav>.active:focus>a, .bs-docs-sidebar .nav>.active:hover>a,
+	.bs-docs-sidebar .nav>.active>a {
+	background-color: transparent;
+	border-left-color: green;
+	border-left-style: solid;
+	border-left-width: 2px;
+	color: green;
+	font-weight: 700;
+	padding-left: 18px;
+}
 </style>
 </head>
 <body style="padding-top: 55px;" id="topo">

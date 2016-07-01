@@ -61,7 +61,7 @@ switch (strtoupper($funcao))
 			$operacao["papeis"] = $p;
 			$o[] = $operacao;
 		}
-		$papeis = pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome");
+		$papeis = pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis WHERE nome <> 'admin' order by nome");
 		retornaJSON(array("operacoes"=>$o,"papeis"=>$papeis));
 	break;
 	case "PEGAOPERACOES":

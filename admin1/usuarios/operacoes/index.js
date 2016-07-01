@@ -30,7 +30,7 @@ Inicializa o editor
 function init(){
 	pegaOperacoes();
 }
-function ativaBotaoAdicionaOperacao(sUrl,idBotao){
+function adicionaOperacao(){
 	var botao, adiciona = function()
 	{
 		core_carregando("ativa");
@@ -60,19 +60,20 @@ function ativaBotaoAdicionaOperacao(sUrl,idBotao){
 /*
 Function: pegaOperacoes
 
-Obt&eacute;m a lista de atlas
-
-<PEGAATLAS>
+Obt&eacute;m a lista de operacoes
  */
 function pegaOperacoes(){
-	//core_pegaDados($trad("msgBuscaOperacoes",i3GEOadmin.operacoes.dicionario),"../php/operacoes.php?funcao=pegaOperacoes","montaArvore");
 	$.post(
 			"exec.php?funcao=pegaOperacoesEpapeis",
 			{},
 			function(data, status){
+				//objeto json com os dados viondos do banco
 				var json = jQuery.parseJSON(data);
+				//template dos checkbox
 				var templatePapeis = $("#templateInputPapeis").html();
+				//template do form de cada operacao
 				var templateOperacoes = $("#templateOperacoes").html();
+				//lista todas as operacoes
 				var html = Mustache.to_html(
 						"{{#data}}" + templateOperacoes + "{{/data}}",
 						{
@@ -104,6 +105,34 @@ function pegaOperacoes(){
 						}
 				);
 				$("#corpo").html(html);
+				//indice
+				html = Mustache.to_html(
+						"{{#data}}" + $("#indiceTpl").html() + "{{/data}}",
+						{"data":json["operacoes"]}
+				);
+				$("#indice").html(html);
+				//$("#indice").affix('checkPosition');
+				//monta um template para o modal de inclusao de nova operacao
+				html = Mustache.to_html(
+						$("#templateOperacoes").html(),
+						{
+							"labelCodigo": $trad("codigo",i3GEOadmin.operacoes.dicionario),
+							"labelDescricao": $trad("descricao",i3GEOadmin.operacoes.dicionario),
+							"operacao": $trad("operacao",i3GEOadmin.operacoes.dicionario),
+							"papeisv": $trad("papeisv",i3GEOadmin.operacoes.dicionario),
+							"codigo": "",
+							"descricao": "",
+							"inputPapeis": function(){
+								return Mustache.to_html(
+										"{{#data}}" + $("#templateInputPapeis").html() + "{{/data}}",
+										{
+											"data":json["papeis"]
+										}
+								);
+							}
+						}
+				);
+				$("#adicionaOperacao .modal-body").html(html);
 				$.material.init();
 			}
 		);
