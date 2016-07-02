@@ -122,7 +122,7 @@ if (ob_get_level() == 0) ob_start();
 			try {
 				$dbh = new PDO('pgsql:dbname='.$conexao["bancodedados"].';user='.$conexao["usuario"].';password='.$conexao["senha"].';host='.$conexao["host"].';port='.$conexao["porta"]);
 			} catch (PDOException $e) {
-				echo 'Connection failed: ' . $e->getMessage();
+				echo 'Connection failed: ' . " ";
 			}
 			//encoding do banco de dados
 			$sql = "SELECT pg_encoding_to_char(encoding) FROM pg_database WHERE datname = '".$conexao["bancodedados"]."'";
@@ -261,7 +261,7 @@ if (ob_get_level() == 0) ob_start();
 				try {
 					$dbh->query($linha);
 				} catch (PDOException $e) {
-					echo 'Erro: ' . $e->getMessage();
+					echo 'Erro: ' . " ";
 				}
 			}
 			$bdcon = pg_connect('dbname='.$conexao["bancodedados"].' user='.$conexao["usuario"].' password='.$conexao["senha"].' host='.$conexao["host"].' port='.$conexao["porta"]."options='-c client_encoding=LATIN1'");
@@ -286,7 +286,7 @@ if (ob_get_level() == 0) ob_start();
 						}
 					}
 				} catch (PDOException $e) {
-					echo 'Erro: ' . $e->getMessage();
+					echo 'Erro: ' . " ";
 				}
 			}
 			$sql = "select * from ".$_POST["i3GEOuploadcsvesquema"].".".$_POST["tabelaDestinocsv"];

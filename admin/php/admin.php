@@ -151,7 +151,7 @@ function exclui($tabela,$coluna,$id){
 		return "ok";
 	}
 	catch (PDOException $e) {
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 /*
@@ -163,41 +163,35 @@ Parametros:
 
 sql {string} - sql que serao executado
 
-locaplic {string} - endereco do i3Geo no sistema de arquivos
-
 Retorno:
 
 Array originada de fetchAll
 */
-function pegaDados($sql,$locaplic="")
+function pegaDados($sql,$dbh="",$close=true)
 {
 	$resultado = array();
-	/*
-	if($locaplic == "")
-		include("conexao.php");
-	else
-		include("$locaplic/admin/php/conexao.php");
-	*/
-	include(dirname(__FILE__)."/conexao.php");
+	//is_string para efeitos de compatibilidade
+	if($dbh == "" || is_string($dbh)){
+		include(dirname(__FILE__)."/conexao.php");
+	}
 	error_reporting(0);
 	//$dbh deve ser definido com somente leitura, mas por prevencao:
 	$sql = str_ireplace(array("update","delete","insert","--","drop",";"),"",$sql);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
-	if($q)
-	{
+	if($q){
 		$resultado = $q->fetchAll();
-		$dbh = null;
-		$dbhw = null;
+		if($close == true){
+			$dbh = null;
+			$dbhw = null;
+		}
 		return $resultado;
 	}
-	else
-	{
-		$e = $dbh->errorInfo();
-		//$e1 = $dbhw->errorInfo();
-		$dbh = null;
-		$dbhw = null;
-		//echo " erro: ".$e[2];
-		throw new Exception(" erro admin.php funcao pegaDados: <br><span style=color:red >".$e[2]."<br><span style=color:green >");
+	else{
+		if($close == true){
+			$dbh = null;
+			$dbhw = null;
+		}
+		throw new Exception(" erro admin.php funcao pegaDados");
 	}
 }
 /**
@@ -221,14 +215,14 @@ function i3GeoAdminUpdate($pdo,$tabela,$data,$filtro=""){
 	try {
 		$prep = $pdo->prepare($sql);
 	} catch (PDOException $e) {
-		return $e->getMessage();
+		return "Error!: ";
 	}
 	try {
 		$exec = $prep->execute(array_values($data));
 		i3GeoAdminInsertLog($pdo,$sql,array_values($data));
 		return true;
 	} catch (PDOException $e) {
-		return $e->getMessage();
+		return "Error!: ";
 	}
 }
 /**
@@ -250,7 +244,7 @@ function i3GeoAdminInsert($pdo,$tabela,$data){
 	try {
 		$prep = $pdo->prepare($sql);
 	} catch (PDOException $e) {
-		return "prepare ".$e->getMessage();
+		return "prepare ";
 	}
 	try {
 		$exec = $prep->execute(array_values($data));
@@ -258,7 +252,7 @@ function i3GeoAdminInsert($pdo,$tabela,$data){
 		i3GeoAdminInsertLog($pdo,$sql,array_values($data));
 		return true;
 	} catch (PDOException $e) {
-		return "execute ".$e->getMessage();
+		return "execute ";
 	}
 }
 /**
@@ -276,18 +270,19 @@ function i3GeoAdminInsertUnico($pdo,$tabela,$data,$colTemp,$colId){
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$idtemp = (rand (9000,10000)) * -1;
 	$data[$colTemp] = $idtemp;
+
 	$q = i3GeoAdminInsert(
 		$pdo,
 		$tabela,
 		$data
 	);
 	if($q !== true){
-		echo "Error! insert: " . $q; exit;
+		echo "Error! insert "; exit;
 	}
 	try {
 		$id = $pdo->query("SELECT $colId FROM ".$esquemaadmin."$tabela WHERE $colTemp = '$idtemp'");
 	} catch (PDOException $e) {
-		return "SELECT ID ".$e->getMessage();
+		return "SELECT ID ";
 	}
 	try {
 		$id = $id->fetchAll();
@@ -297,7 +292,7 @@ function i3GeoAdminInsertUnico($pdo,$tabela,$data,$colTemp,$colId){
 		i3GeoAdminInsertLog($pdo,$sql);
 		return $id;
 	} catch (PDOException $e) {
-		return "UPDATE ID ".$e->getMessage();
+		return "UPDATE ID ";
 	}
 }
 //$logTransacoes vem do ms_configura.php
@@ -332,7 +327,7 @@ function i3GeoAdminInsertLog($pdo,$sql,$data=array()){
 		);
 		return true;
 	} catch (PDOException $e) {
-		echo $e->getMessage();exit;
+		echo " ";exit;
 	}
 }
 /*
@@ -505,7 +500,7 @@ function verificaFilhos()
 	}
 	catch (PDOException $e)
 	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 /*

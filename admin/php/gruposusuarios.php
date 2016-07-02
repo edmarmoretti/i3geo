@@ -160,7 +160,7 @@ function alterarGrupos()
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function adicionaUsuarioGrupo(){
@@ -177,7 +177,7 @@ function adicionaUsuarioGrupo(){
 		return "ok";
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirGrupo()
@@ -189,7 +189,7 @@ function excluirGrupo()
 	}
 	catch (PDOException $e)
 	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirUsuarioGrupo()
@@ -207,7 +207,7 @@ function excluirUsuarioGrupo()
 	}
 	catch (PDOException $e)
 	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 ?>

@@ -188,7 +188,7 @@ function alterarWS(){
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirWS(){
@@ -203,7 +203,7 @@ function excluirWS(){
 		return "ok";
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function adicionaAcesso($id_ws,$sucesso){
@@ -239,7 +239,7 @@ function adicionaAcesso($id_ws,$sucesso){
 		$dbh = null;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 ?>

@@ -134,7 +134,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	try {
 		$dbh = new PDO('pgsql:dbname='.$conexao["bancodedados"].';user='.$conexao["usuario"].';password='.$conexao["senha"].';host='.$conexao["host"].';port='.$conexao["porta"]);
 	} catch (PDOException $e) {
-		echo '<span style=color:red >Connection failed: ' . $e->getMessage();
+		echo '<span style=color:red >Connection failed: ' . " ";
 		exit;
 	}
 
@@ -289,7 +289,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 		try {
 			$dbh->query($linha);
 		} catch (PDOException $e) {
-			echo 'Erro: ' . $e->getMessage();
+			echo 'Erro: ' . " ";
 		}
 	}
 	$bdcon = pg_connect('dbname='.$conexao["bancodedados"].' user='.$conexao["usuario"].' password='.$conexao["senha"].' host='.$conexao["host"].' port='.$conexao["porta"]."options='-c client_encoding=LATIN1'");
@@ -313,7 +313,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 				}
 			}
 		} catch (PDOException $e) {
-			echo 'Erro: ' . $e->getMessage();
+			echo 'Erro: ' . " ";
 		}
 	}
 	$sql = "select * from ".$_POST["i3GEOuploadesquema"].".".$_POST["tabelaDestino"];

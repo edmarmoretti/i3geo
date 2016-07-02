@@ -138,7 +138,7 @@ function alterarOperacoes(){
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function adicionaPapelOperacoes(){
@@ -155,7 +155,7 @@ function adicionaPapelOperacoes(){
 		return "ok";
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirPapelOperacao(){
@@ -170,7 +170,7 @@ function excluirPapelOperacao(){
 		return "ok";
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 ?>

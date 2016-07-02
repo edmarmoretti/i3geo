@@ -803,7 +803,7 @@ function pegaTemas()
 	}
 	catch (PDOException $e)
 	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function pegaTemas2()
@@ -845,7 +845,7 @@ function pegaTemas2()
 	}
 	catch (PDOException $e)
 	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 /*
@@ -897,7 +897,7 @@ function alteraMenus()
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function alteraPerfis(){
@@ -1034,7 +1034,7 @@ function alteraPerfis(){
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function alteraTags(){
@@ -1073,7 +1073,7 @@ function alteraTags(){
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 /*
@@ -1116,7 +1116,7 @@ function alteraGrupos()
 		return $id_grupo;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 /*
@@ -1161,7 +1161,7 @@ function alteraSubGrupos()
 	}
 	catch (PDOException $e)
 	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 /*
@@ -1196,7 +1196,7 @@ function registraTema()
 		return "ok";
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 /*
@@ -1309,7 +1309,7 @@ function alteraTemas()
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 /*

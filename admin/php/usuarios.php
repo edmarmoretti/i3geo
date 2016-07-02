@@ -194,7 +194,7 @@ function alterarUsuarios()
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function adicionaPapelUsuario(){
@@ -211,7 +211,7 @@ function adicionaPapelUsuario(){
 		return "ok";
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirUsuario(){
@@ -226,7 +226,7 @@ function excluirUsuario(){
 		return "ok";
 	}
 	catch (PDOException $e)	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirPapelUsuario(){
@@ -241,7 +241,7 @@ function excluirPapelUsuario(){
 		return "ok";
 	}
 	catch (PDOException $e) {
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 ?>

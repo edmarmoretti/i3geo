@@ -89,7 +89,7 @@ if($conexaoadmin == ""){
 		$dbh = new PDO($conAdmin);
 	}
 	catch (PDOException $e)	{
-		print "Erro ao criar o objeto PDO!: " . $e->getMessage() . "<br/> Talvez exista alguma incompatibilidade entre o PHP e o banco admin.db. Vc pode apagar o arquivo menutemas/admin.db e recria-lo com admin/php/criasqlite.php";
+		print "Erro ao criar o objeto PDO!: <br/> Talvez exista alguma incompatibilidade entre o PHP e o banco admin.db. Vc pode apagar o arquivo menutemas/admin.db e recria-lo com admin/php/criasqlite.php";
 		die();
 	}
 }

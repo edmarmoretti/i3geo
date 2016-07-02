@@ -27,35 +27,10 @@ Function: initMenu
 
 Inicializa o editor
  */
-function init(){
+function init(onde){
+	//variavel global indicando o elemento que recebera a lista de operacoes
+	ondeListaOperacoes = onde;
 	pegaOperacoes();
-}
-function adicionaOperacao(){
-	var botao, adiciona = function()
-	{
-		core_carregando("ativa");
-		core_carregando($trad("msgNovoRegistro",i3GEOadmin.core.dicionario));
-		var callback =
-		{
-				success:function(o)
-				{
-					try
-					{
-						var j = YAHOO.lang.JSON.parse(o.responseText);
-						adicionaNosOperacoes(j,true);
-						editar("operacoes",j[j.length-1].id_operacao);
-						core_carregando("desativa");
-					}
-					catch(e){core_handleFailure(e,o.responseText);}
-				},
-				failure:core_handleFailure,
-				argument: { foo:"foo", bar:"bar" }
-		};
-		core_makeRequest(sUrl,callback);
-	};
-	//cria o bot&atilde;o de adi&ccedil;&atilde;o de um novo menu
-	botao = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adiciona } });
-	botao.addClass("rodar");
 }
 /*
 Function: pegaOperacoes
@@ -63,6 +38,7 @@ Function: pegaOperacoes
 Obt&eacute;m a lista de operacoes
  */
 function pegaOperacoes(){
+	iconeAguarde(ondeListaOperacoes);
 	$.post(
 			"exec.php?funcao=pegaOperacoesEpapeis",
 			{},
@@ -78,6 +54,8 @@ function pegaOperacoes(){
 						"{{#data}}" + templateOperacoes + "{{/data}}",
 						{
 							"data":json["operacoes"],
+							"excluir": $trad("excluir",i3GEOadmin.core.dicionario),
+							"salvar": $trad("salva",i3GEOadmin.core.dicionario),
 							"labelCodigo": $trad("codigo",i3GEOadmin.operacoes.dicionario),
 							"labelDescricao": $trad("descricao",i3GEOadmin.operacoes.dicionario),
 							"operacao": $trad("operacao",i3GEOadmin.operacoes.dicionario),
@@ -104,14 +82,14 @@ function pegaOperacoes(){
 							}
 						}
 				);
-				$("#corpo").html(html);
+				ondeListaOperacoes.html(html);
 				//indice
 				html = Mustache.to_html(
 						"{{#data}}" + $("#indiceTpl").html() + "{{/data}}",
 						{"data":json["operacoes"]}
 				);
+				//indice lateral
 				$("#indice").html(html);
-				//$("#indice").affix('checkPosition');
 				//monta um template para o modal de inclusao de nova operacao
 				html = Mustache.to_html(
 						$("#templateOperacoes").html(),
@@ -120,7 +98,12 @@ function pegaOperacoes(){
 							"labelDescricao": $trad("descricao",i3GEOadmin.operacoes.dicionario),
 							"operacao": $trad("operacao",i3GEOadmin.operacoes.dicionario),
 							"papeisv": $trad("papeisv",i3GEOadmin.operacoes.dicionario),
+							"excluir": $trad("cancelar",i3GEOadmin.core.dicionario),
+							"onExcluir": "fechaDialogoModal",//funcao
+							"salvar": $trad("salva",i3GEOadmin.core.dicionario),
+							"onSalvar": "adicionaOperacao",//funcao
 							"codigo": "",
+							"id_operacao": "modal",
 							"descricao": "",
 							"inputPapeis": function(){
 								return Mustache.to_html(
@@ -132,11 +115,29 @@ function pegaOperacoes(){
 							}
 						}
 				);
-				$("#adicionaOperacao .modal-body").html(html);
+				$("#dialogoModal .modal-body").html(html);
+				$('#dialogoModal').on('show.bs.modal', function (e) {
+					$("#form-modal").show();
+				});
+
 				$.material.init();
 			}
 		);
 }
+
+function adicionaOperacao(){
+	iconeAguarde(ondeListaOperacoes);
+	var parametros = $("#form-modal form").serialize();
+	fechaDialogoModal();
+	$.post(
+		"exec.php?funcao=adicionarOperacao",
+		parametros,
+		function(data, status){
+			pegaOperacoes();
+		}
+	);
+}
+
 /*
 Function: montaArvore
 

@@ -487,7 +487,7 @@ function alterarAtlas()
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function alterarPrancha()
@@ -536,7 +536,7 @@ function alterarPrancha()
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function alterarTema(){
@@ -569,7 +569,7 @@ function alterarTema(){
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirPrancha()
@@ -587,7 +587,7 @@ function excluirPrancha()
 	}
 	catch (PDOException $e)
 	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirTema()
@@ -605,7 +605,7 @@ function excluirTema()
 	}
 	catch (PDOException $e)
 	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirAtlas()
@@ -623,7 +623,7 @@ function excluirAtlas()
 	}
 	catch (PDOException $e)
 	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 ?>

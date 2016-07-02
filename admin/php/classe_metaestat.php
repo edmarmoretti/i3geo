@@ -193,7 +193,7 @@ class Metaestat{
 			$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 		if($q){
 			$r = $q->fetchAll();
@@ -277,7 +277,7 @@ class Metaestat{
 			return "ok";
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -294,7 +294,7 @@ class Metaestat{
 			return "ok";
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1187,7 +1187,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1222,7 +1222,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1257,7 +1257,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1288,7 +1288,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1333,7 +1333,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1368,7 +1368,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1398,7 +1398,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1441,7 +1441,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1471,7 +1471,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1500,7 +1500,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1545,7 +1545,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1575,7 +1575,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1615,7 +1615,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/*
@@ -1652,7 +1652,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -1703,7 +1703,7 @@ class Metaestat{
 			return $retorna;
 		}
 		catch (PDOException $e)	{
-			return "Error!: " . $e->getMessage();
+			return "Error!: ";
 		}
 	}
 	/**
@@ -2744,7 +2744,7 @@ class Metaestat{
 
 		} catch (Exception $e) {
 			$dbh->rollBack();
-			return "Falhou: " . $e->getMessage();
+			return "Falhou: " . " ";
 		}
 		return "Processo concluido para ".count($linhas)." linhas";
 	}
@@ -2852,7 +2852,7 @@ class Metaestat{
 
 		} catch (Exception $e) {
 			$dbh->rollBack();
-			return array("Falhou: " . $e->getMessage());
+			return array("Falhou: " . " ");
 		}
 		return array("ok");
 	}
@@ -2972,7 +2972,7 @@ class Metaestat{
 			$dbh->commit();
 		} catch (Exception $e) {
 			$dbh->rollBack();
-			return array("Falhou: " . $e->getMessage());
+			return array("Falhou: " . " ");
 		}
 		return array("ok");
 	}
@@ -3003,7 +3003,7 @@ class Metaestat{
 					$dbh->commit();
 				} catch (Exception $e) {
 					$dbh->rollBack();
-					return array("Falhou: " . $e->getMessage());
+					return array("Falhou: " . " ");
 				}
 			}
 		}
@@ -3043,7 +3043,7 @@ class Metaestat{
 			$dbh->commit();
 		} catch (Exception $e) {
 			$dbh->rollBack();
-			return array("Falhou: " . $e->getMessage());
+			return array("Falhou: " . " ");
 		}
 		return array("ok");
 	}
@@ -3171,7 +3171,7 @@ class Metaestat{
 			);
 			return true;
 		} catch (PDOException $e) {
-			echo $e->getMessage();exit;
+			echo " ";exit;
 		}
 	}
 }

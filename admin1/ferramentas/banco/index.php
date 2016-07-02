@@ -26,7 +26,7 @@ include "../../head.php";
 					exit;
 				}
 				$dbh = new PDO('sqlite:../../../admin/admin.db');
-				echo "<h3>Lista de tabelas</span></h3>";
+				echo "</div><div class='well'><h3>Lista de tabelas</h3>";
 				$q = $dbh->query("SELECT name FROM (SELECT * FROM sqlite_master UNION ALL SELECT * FROM sqlite_temp_master) WHERE type='table' ORDER BY name",PDO::FETCH_ASSOC);
 				$resultado = $q->fetchAll();
 				foreach ($resultado as $r){
@@ -34,7 +34,7 @@ include "../../head.php";
 				}
 				$q = $dbh->query("select * from sqlite_master",PDO::FETCH_ASSOC);
 				$resultado = $q->fetchAll();
-				echo "<h3>SQL no padr&atilde;o SQLITE</span></h3>";
+				echo "</div><div class='well'><h3>SQL no padr&atilde;o SQLITE</span></h3>";
 				foreach($resultado as $r){
 					if(mb_detect_encoding($temasacessos2[$i],'UTF-8, ISO-8859-1') == "UTF-8"){
 						echo "<p>".utf8_decode($r["sql"])."</p>";
@@ -43,7 +43,7 @@ include "../../head.php";
 						echo "<p>".$r["sql"]."</p>";
 					}
 				}
-				echo "<h3>SQL no padr&atilde;o POSTGRES</h3>";
+				echo "</div><div class='well'><h3>SQL no padr&atilde;o POSTGRES</h3>";
 				echo "<div class='alert alert-info'><p>Ap&oacute;s criar as tabelas no Postgres, vc deve definir as permiss&otilde;es para os usu&aacute;rios.</p>";
 				echo "<p>Para usar outro banco de dados que n&atilde;o seja o default (SQLITE), voc&ecirc; ter&aacute; de alterar o programa i3geo/admin/php/conexao.php</p></div>";
 				foreach($resultado as $r){
@@ -52,7 +52,7 @@ include "../../head.php";
 					}
 					echo str_ireplace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$r["sql"])."<br>";
 				}
-				echo "<h3>Listagem completa</h3>";
+				echo "</div><div class='well'><h3>Listagem completa</h3>";
 				echo "<pre style='overflow:auto;'>";
 				$resultado = var_dump($resultado);
 				if(mb_detect_encoding($resultado,'UTF-8, ISO-8859-1') == "UTF-8"){
@@ -62,7 +62,7 @@ include "../../head.php";
 				$dbh = null;
 				$dbhw = null;
 			?>
-
+				</div>
 				</div>
 			</div>
 		</div>

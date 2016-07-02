@@ -257,7 +257,7 @@ function alterarSistemas(){
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function alterarFuncoes(){
@@ -301,7 +301,7 @@ function alterarFuncoes(){
 	}
 	catch (PDOException $e)
 	{
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirFuncoes()
@@ -317,7 +317,7 @@ function excluirFuncoes()
 		return "ok";
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirSistemas()
@@ -333,7 +333,7 @@ function excluirSistemas()
 		return $id;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 

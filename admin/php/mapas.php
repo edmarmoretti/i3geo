@@ -245,7 +245,7 @@ function salvaMapfile(){
 		return array("id"=>$id,"status"=>"ok");
 	}
 	catch (PDOException $e){
-		return array("id"=>"","status"=>"Error!: " . $e->getMessage());
+		return array("id"=>"","status"=>"Error!: " . " ");
 	}
 }
 /*
@@ -302,7 +302,7 @@ function alterarMapa(){
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirMapa(){
@@ -312,7 +312,7 @@ function excluirMapa(){
 		return "ok";
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 ?>

@@ -176,6 +176,9 @@ body {
 }
 </style>
 </head>
+<script id="iconeAguardeTpl" type="x-tmpl-mustache">
+<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
+</script>
 <body style="padding-top: 55px;" id="topo">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">

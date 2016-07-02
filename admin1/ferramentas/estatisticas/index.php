@@ -92,8 +92,8 @@ include "../../head.php";
 			echo "<li class='list-group-item'><label class='text-success'>Temas v&aacute;lidos com nomes duplicados: <span class='badge'>".count($nomestemasmaisdeum)."</span></label></li>";
 			echo "<li class='list-group-item'><label class='text-success'>Temas associados a algum sub-grupo: <span class='badge'>".count($temasassocsubgrupos)."</span></label></li>";
 			echo "<li class='list-group-item'><label class='text-success'>N&uacute;mero de tags: <span class='badge'>".count($ntags)."</span></label></li>";
-			echo "</ul>";
-			echo "<h4>Dos temas v&aacute;lidos</h4>";
+			echo "</ul></div>";
+			echo "<div class='well'><h4>Dos temas v&aacute;lidos</h4>";
 			echo "<ul>";
 			echo "<li class='list-group-item'>
 					<label class='text-success'>N&uacute;mero de temas sem link: <span class='badge'>".$nsemlinktemas."<span class='badge'>
@@ -138,8 +138,8 @@ include "../../head.php";
 					</div></div>
 					</li>";
 
-			echo "</ul>";
-			echo "<h4>Acesos por tema</h4><ul>";
+			echo "</ul></div>";
+			echo "<div class='well'><h4>Acesos por tema</h4><ul>";
 			arsort($temasacessos);
 			$temasacessos2 = array_keys($temasacessos);
 			for($i=0;$i<=count($temasacessos2);$i++){

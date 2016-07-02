@@ -277,10 +277,10 @@ function autenticaUsuario($usuario,$senha){
 	//echo "select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1";exit;
 	//exit;
 	if(verificaMaster($usuario,$senha) == true){
-		
-		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$locaplic);
-		$op = pegadados("SELECT O.codigo FROM ".$esquemaadmin."i3geousr_operacoes AS O");
-		$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupos ");
+
+		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$dbh,false);
+		$op = pegadados("SELECT O.codigo FROM ".$esquemaadmin."i3geousr_operacoes AS O",$dbh,false);
+		$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupos ",$dbh,false);
 		//var_dump($gr);exit;
 		$operacoes = array();
 		foreach($op as $o){
@@ -298,20 +298,22 @@ function autenticaUsuario($usuario,$senha){
 		$master["id_usuario"] = "master";
 		$master["nome_usuario"] = "master";
 		$r = array("usuario"=>$master,"papeis"=>$papeis,"operacoes"=>$operacoes,"gruposusr"=>$gruposusr);
+		$dbh = null;
+		$dbhw = null;
 		return $r;
 	}
 	else{
 		//verifica se a senha e uma string ou pode ser um md5
 		if(strlen($senha) == 32){
-			$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and senha = '$senhamd5' and ativo = 1",$locaplic);
+			$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and senha = '$senhamd5' and ativo = 1",$dbh,false);
 		}
 		else{
-			$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1",$locaplic);
+			$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1",$dbh,false);
 		}
 		if(count($dados) > 0){
-			$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$locaplic);
-			$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papelusuario AS PU ON OP.id_papel = PU.id_papel	WHERE id_usuario = ".$dados[0]["id_usuario"],$locaplic);
-			$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupousuario where id_usuario = ".$dados[0]["id_usuario"]);
+			$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
+			$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papelusuario AS PU ON OP.id_papel = PU.id_papel	WHERE id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
+			$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupousuario where id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
 			$operacoes = array();
 			foreach($op as $o){
 				$operacoes[$o["codigo"]] = true;
@@ -325,9 +327,13 @@ function autenticaUsuario($usuario,$senha){
 				$gruposusr[] = $p["id_grupo"];
 			}
 			$r = array("usuario"=>$dados[0],"papeis"=>$papeis,"operacoes"=>$operacoes,"gruposusr"=>$gruposusr);
+			$dbh = null;
+			$dbhw = null;
 			return $r;
 		}
 		else{
+			$dbh = null;
+			$dbhw = null;
 			return false;
 		}
 	}

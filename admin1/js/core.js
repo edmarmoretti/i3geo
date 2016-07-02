@@ -65,6 +65,22 @@ Variable: $perfis
 Armazena o objeto com a lista de perfis
 */
 $perfis = "";
+
+//funcoes jquery + bootstrap
+function fechaDialogoModal(){
+	$("#dialogoModal").modal('hide');
+}
+function iconeAguarde(onde){
+	if(onde.html){
+		onde.html($("#iconeAguardeTpl").html());
+	}
+	else{
+		$("#"+onde).html($("#iconeAguardeTpl").html());
+	}
+}
+
+
+//
 function cabecalhoMetaestat(id,excluir){
 	var botao,i,n,temp,
 		ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",

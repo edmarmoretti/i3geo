@@ -216,6 +216,11 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'cancelar' : [ {
+		pt : "Cancelar",
+		en : "",
+		es : ""
+	} ],
     'salvaTxt' : [ {
 		pt : "salvando texto...",
 		en : "",

@@ -158,7 +158,7 @@ function alterarFuncoes(){
 		return $retorna;
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 function excluirFuncoes(){
@@ -168,7 +168,7 @@ function excluirFuncoes(){
 		return "ok";
 	}
 	catch (PDOException $e){
-		return "Error!: " . $e->getMessage();
+		return "Error!: ";
 	}
 }
 ?>
