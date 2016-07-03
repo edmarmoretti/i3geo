@@ -126,7 +126,7 @@ switch ($funcao)
 			header("HTTP/1.1 500 erro ao consultar banco de dados");
 			exit;
 		}
-		retornaJSON($retorna);
+		retornaJSON($id_operacao);
 		exit;
 	break;
 }

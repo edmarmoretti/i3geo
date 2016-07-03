@@ -159,7 +159,7 @@ function adicionaOperacao(){
 }
 function excluirOperacaoDialogo(id_operacao){
 	var hash = {
-			"mensagem": $trad("excluiMesmo",i3GEOadmin.core.dicionario),
+			"mensagem": $trad("confirma",i3GEOadmin.core.dicionario),
 			"onBotao1": "excluirOperacao('"+id_operacao+"')",
 			"botao1": $trad("sim",i3GEOadmin.core.dicionario),
 			"onBotao2": "fechaModalConfirma();",
@@ -172,6 +172,39 @@ function excluirOperacao(id_operacao){
 	$.post(
 			"exec.php?funcao=excluirOperacao",
 			"id_operacao="+id_operacao
+	)
+	.done(
+			function(data, status){
+				modalAguarde(false);
+				var json = jQuery.parseJSON(data)*1;
+				$("#form-" + json).remove();
+				$("#link-" + json).remove();
+			}
+	)
+	.fail(
+			function(data){
+				modalAguarde(false);
+				mostraErro(data.status + " " +data.statusText);
+			}
+	);
+}
+function salvarOperacaoDialogo(id_operacao){
+	var hash = {
+			"mensagem": $trad("confirma",i3GEOadmin.core.dicionario),
+			"onBotao1": "salvarOperacao('"+id_operacao+"')",
+			"botao1": $trad("sim",i3GEOadmin.core.dicionario),
+			"onBotao2": "fechaModalConfirma();",
+			"botao2": $trad("nao",i3GEOadmin.core.dicionario)
+	};
+	abreModalConfirma(hash);
+}
+function salvarOperacao(id_operacao){
+	var parametros = $("#form-" + id_operacao + " form").serialize();
+	fechaModalGeral();
+	modalAguarde(true);
+	$.post(
+			"exec.php?funcao=alterarOperacao",
+			"id_operacao="+ id_operacao+"&"+parametros
 	)
 	.done(
 			function(data, status){

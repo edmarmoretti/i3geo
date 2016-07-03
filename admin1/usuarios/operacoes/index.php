@@ -59,16 +59,16 @@ include "../../head.php";
 </div>
 <!-- li do indice lateral-->
 <script id="indiceTpl" type="x-tmpl-mustache">
-<li><a onclick="$('.panel').hide();$('#form-{{id_operacao}}').show();" href="#">{{{codigo}}}</a></li>
+<li id="link-{{id_operacao}}"><a onclick="$('.panel').hide();$('#form-{{id_operacao}}').show();" href="#">{{{codigo}}}</a></li>
 </script>
 <script id="templateOperacoes" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_operacao}}">
 	<div class="panel-body">
-		<form class="form" role="form" method="post" action="" >
+		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form" role="form" method="post" action="" >
 			<div class="row">
-				<div class="col-md-4">
-					<h4>{{{papeisv}}}</h4>
-					<div class="form-group form-group-lg">{{{inputPapeis}}}</div>
+				<div class="col-md-4" >
+					<h4> {{{papeisv}}}</h4>
+					<div class="form-group form-group-lg" style="padding-left:5px;">{{{inputPapeis}}}</div>
 				</div>
 				<div class="col-md-8">
 					<h4>{{{operacao}}}</h4>
