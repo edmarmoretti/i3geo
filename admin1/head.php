@@ -187,8 +187,8 @@ body {
 	<h4 class="pull-right">{{{mensagem}}}</h4>
 	<div class="clearfix"></div>
 	<div class="pull-right">
-		<a href="javascript:void(0)" onclick="{{{onBotao1}}}" class="btn btn-primary" role="button">{{{botao1}}}</a>
-		<a href="javascript:void(0)" onclick="{{{onBotao2}}}" class="btn btn-primary" role="button">{{{botao2}}}</a>
+		<button onclick="{{{onBotao1}}}" class="btn btn-primary" role="button">{{{botao1}}}</button>
+		<button onclick="{{{onBotao2}}}" class="btn btn-primary" role="button">{{{botao2}}}</button>
 	</div>
 	<div class="clearfix"></div>
 </script>
@@ -227,4 +227,9 @@ body {
 			</div>
 		</div>
 	</div>
+	<nav class="navbar-fixed-bottom">
+		<div class="container">
+
+		</div>
+	</nav>
 	<!-- ate aqui veio de admin1/head.php -->

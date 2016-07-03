@@ -42,8 +42,9 @@ Obt&eacute;m a lista de operacoes
 function pegaOperacoes(){
 	iconeAguarde(ondeListaOperacoes);
 	$.post(
-			"exec.php?funcao=pegaOperacoesEpapeis",
-			{},
+			"exec.php?funcao=pegaOperacoesEpapeis"
+	)
+	.done(
 			function(data, status){
 				//objeto json com os dados viondos do banco
 				var json = jQuery.parseJSON(data);
@@ -122,33 +123,62 @@ function pegaOperacoes(){
 				formAdicionaOperacao = html;
 				$.material.init();
 			}
-		);
+	)
+	.fail(function(data){
+		ondeListaOperacoes.html("");
+		mostraErro(data.status + " " +data.statusText);
+	});
 }
 function adicionaOperacaoDialogo(){
 	abreModalGeral(formAdicionaOperacao);
 }
-//
+
 //os parametros sao obtidos do formulario aberto do modal
-//
+
 function adicionaOperacao(){
-	iconeAguarde(ondeListaOperacoes);
 	var parametros = $("#form-modal form").serialize();
-	fechaDialogoModal();
+	fechaModalGeral();
+	modalAguarde(true);
 	$.post(
-		"exec.php?funcao=adicionarOperacao",
-		parametros,
-		function(data, status){
-			pegaOperacoes();
-		}
+			"exec.php?funcao=adicionarOperacao",
+			parametros
+	)
+	.done(
+			function(data, status){
+				modalAguarde(false);
+				iconeAguarde(ondeListaOperacoes);
+				pegaOperacoes();
+			}
+	)
+	.fail(
+			function(data){
+				modalAguarde(false);
+				mostraErro(data.status + " " +data.statusText);
+			}
 	);
 }
 function excluirOperacaoDialogo(id_operacao){
 	var hash = {
-		"mensagem": $trad("excluiMesmo",i3GEOadmin.core.dicionario),
-		"onBotao1": "",
-		"botao1": $trad("sim",i3GEOadmin.core.dicionario),
-		"onBotao2": "",
-		"botao2": $trad("nao",i3GEOadmin.core.dicionario)
+			"mensagem": $trad("excluiMesmo",i3GEOadmin.core.dicionario),
+			"onBotao1": "excluirOperacao('"+id_operacao+"')",
+			"botao1": $trad("sim",i3GEOadmin.core.dicionario),
+			"onBotao2": "fechaModalConfirma();",
+			"botao2": $trad("nao",i3GEOadmin.core.dicionario)
 	};
 	abreModalConfirma(hash);
+}
+function excluirOperacao(id_operacao){
+	modalAguarde(true);
+	/*
+	var parametros = $("#form-modal form").serialize();
+	fechaModalGeral();
+	$.post(
+		"exec.php?funcao=adicionarOperacao",
+		parametros,
+		function(data, status){
+			modalAguarde(false);
+			pegaOperacoes();
+		}
+	);
+	 */
 }

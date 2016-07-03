@@ -26,6 +26,7 @@ error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //
+
 include_once(dirname(__FILE__)."/../../../admin/php/login.php");
 $funcoesEdicao = array(
 		"ADICIONAROPERACAO",
@@ -35,7 +36,7 @@ $funcoesEdicao = array(
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/operacoes") == false){
-		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+		header("HTTP/1.1 403 Vc nao pode realizar essa operacao");exit;
 	}
 }
 include(dirname(__FILE__)."/../../../admin/php/conexao.php");
@@ -59,22 +60,42 @@ switch ($funcao)
 		if($novo != false){
 			$sql = "SELECT * from ".$esquemaadmin."i3geousr_operacoes WHERE id_operacao = ".$novo;
 			$dados = pegaDados($sql,$dbh);
+			if($dados == false){
+				header("HTTP/1.1 500 erro ao consultar banco de dados");
+				exit;
+			}
 			retornaJSON($dados);
 		}
 		else{
-			retornaJSON("erro");
+			header("HTTP/1.1 500 erro ao consultar banco de dados");
+			exit;
 		}
 		exit;
 		break;
 	case "ALTERAROPERACAO":
 		$novo = alterarOperacao($id_operacao,$codigo,$descricao,$papeis,$dbhw);
+		if($novo == false){
+			header("HTTP/1.1 500 erro ao consultar banco de dados");
+			exit;
+		}
 		$sql = "SELECT * from ".$esquemaadmin."i3geousr_operacoes WHERE id_operacao = ".$novo;
-		retornaJSON(pegaDados($sql,$dbh));
+		$dados = pegaDados($sql,$dbh);
+		if($dados == false){
+			header("HTTP/1.1 500 erro ao consultar banco de dados");
+			exit;
+		}
+		retornaJSON($dados);
 		exit;
 	break;
 	case "PEGAOPERACOESEPAPEIS":
 		$operacoes = pegaDados("SELECT id_operacao,codigo,descricao from ".$esquemaadmin."i3geousr_operacoes order by codigo",$dbh,false);
 		$papeis = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papeis AS P ON OP.id_papel = P.id_papel ",$dbh,false);
+		if($operacoes == false || $papeis == false){
+			$dbhw = null;
+			$dbh = null;
+			header("HTTP/1.1 500 erro ao consultar banco de dados");
+			exit;
+		}
 		$o = array();
 		$resultado = array();
 		foreach ($operacoes as $operacao){
@@ -91,37 +112,17 @@ switch ($funcao)
 		$papeis = pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome",$dbh);
 		$dbhw = null;
 		$dbh = null;
+		if($papeis == false){
+			header("HTTP/1.1 500 erro ao consultar banco de dados");
+			exit;
+		}
 		retornaJSON(array("operacoes"=>$o,"papeis"=>$papeis));
-	break;
-	case "PEGAOPERACOES":
-		retornaJSON(pegaDados("SELECT id_operacao,codigo,descricao from ".$esquemaadmin."i3geousr_operacoes order by codigo"));
-		exit;
-	break;
-	case "PEGAPAPEISOPERACAO":
-		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papeis AS P ON OP.id_papel = P.id_papel WHERE O.id_operacao = $id_operacao");
-		$dados[] = array("id_papel"=>1,"nome"=>"admin","descricao"=>"admin");
-		retornaJSON($dados);
-		exit;
-	break;
-	case "PEGADADOSOPERACAO":
-		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geousr_operacoes WHERE id_operacao = $id_operacao"));
-		exit;
-	break;
-	case "ADICIONAPAPELOPERACOES":
-		adicionaPapelOperacoes();
-		$dados = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papeis AS P ON OP.id_papel = P.id_papel WHERE O.id_operacao = $id_operacao AND P.id_papel = $id_papel");
-		retornaJSON($dados);
-		exit;
 	break;
 	case "EXCLUIRPAPELOPERACAO":
 		$retorna = excluirPapelOperacao($id_operacao,$id_papel,$dbhw);
 		$dbhw = null;
 		$dbh = null;
 		retornaJSON($retorna);
-		exit;
-		break;
-	case "LISTAPAPEIS":
-		retornaJSON(pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome"));
 		exit;
 	break;
 }

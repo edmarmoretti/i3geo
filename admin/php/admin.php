@@ -191,7 +191,7 @@ function pegaDados($sql,$dbh="",$close=true)
 			$dbh = null;
 			$dbhw = null;
 		}
-		throw new Exception(" erro admin.php funcao pegaDados");
+		return false;
 	}
 }
 /**

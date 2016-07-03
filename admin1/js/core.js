@@ -68,13 +68,22 @@ $perfis = "";
 
 //funcoes jquery + bootstrap
 //
+function mostraErro(erro){
+	var html = '<div class="alert alert-danger alert-dismissible" role="alert">'
+			+ '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+			+ '<strong>Erro!</strong> '
+			+ erro;
+	$(".navbar-fixed-bottom .container").html(html);
+}
 function fechaModal(id){
 	$("#"+id).modal("hide");
 }
 function abreModal(id,conteudo){
 	$("#"+id+" .modal-body").html(conteudo);
-	$("#"+id).modal("show");
-	$.material.init();
+	if($("#"+id).css("display") == "none"){
+		$("#"+id).modal("show");
+		$.material.init();
+	}
 }
 function fechaModalGeral(){
 	fechaModal("modalGeral");
@@ -82,8 +91,8 @@ function fechaModalGeral(){
 function abreModalGeral(conteudo){
 	abreModal("modalGeral",conteudo);
 }
-function fechaModalConfirmal(){
-	fechaModal("modalConfirmaTpl");
+function fechaModalConfirma(){
+	fechaModal("modalGeral");
 }
 function abreModalConfirma(hash){
 	var conteudo = Mustache.to_html(
@@ -92,7 +101,14 @@ function abreModalConfirma(hash){
 	);
 	abreModal("modalGeral",conteudo);
 }
-
+function modalAguarde(open){
+	if(open == true){
+		abreModalGeral($("#iconeAguardeTpl").html());
+	}
+	else{
+		fechaModalGeral();
+	}
+}
 function iconeAguarde(onde){
 	if(onde.html){
 		onde.html($("#iconeAguardeTpl").html());
