@@ -67,9 +67,32 @@ Armazena o objeto com a lista de perfis
 $perfis = "";
 
 //funcoes jquery + bootstrap
-function fechaDialogoModal(){
-	$("#dialogoModal").modal('hide');
+//
+function fechaModal(id){
+	$("#"+id).modal("hide");
 }
+function abreModal(id,conteudo){
+	$("#"+id+" .modal-body").html(conteudo);
+	$("#"+id).modal("show");
+	$.material.init();
+}
+function fechaModalGeral(){
+	fechaModal("modalGeral");
+}
+function abreModalGeral(conteudo){
+	abreModal("modalGeral",conteudo);
+}
+function fechaModalConfirmal(){
+	fechaModal("modalConfirmaTpl");
+}
+function abreModalConfirma(hash){
+	var conteudo = Mustache.to_html(
+		$("#modalConfirmaTpl").html(),
+		hash
+	);
+	abreModal("modalGeral",conteudo);
+}
+
 function iconeAguarde(onde){
 	if(onde.html){
 		onde.html($("#iconeAguardeTpl").html());

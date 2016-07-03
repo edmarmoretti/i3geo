@@ -179,6 +179,20 @@ body {
 <script id="iconeAguardeTpl" type="x-tmpl-mustache">
 <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
 </script>
+<!-- Template para o Modal de confirmacao -->
+<script  id="modalConfirmaTpl" type="x-tmpl-mustache">
+	<button class="btn btn-primary btn-fab btn-fab-mini pull-left">
+		<i class="material-icons">help</i>
+	</button>
+	<h4 class="pull-right">{{{mensagem}}}</h4>
+	<div class="clearfix"></div>
+	<div class="pull-right">
+		<a href="javascript:void(0)" onclick="{{{onBotao1}}}" class="btn btn-primary" role="button">{{{botao1}}}</a>
+		<a href="javascript:void(0)" onclick="{{{onBotao2}}}" class="btn btn-primary" role="button">{{{botao2}}}</a>
+	</div>
+	<div class="clearfix"></div>
+</script>
+
 <body style="padding-top: 55px;" id="topo">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
@@ -205,4 +219,12 @@ body {
 			</div>
 		</div>
 	</nav>
+	<!--Modal de uso geral Varia apenas o body -->
+	<div id="modalGeral" class="modal fade" tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-body modal-lg"></div>
+			</div>
+		</div>
+	</div>
 	<!-- ate aqui veio de admin1/head.php -->

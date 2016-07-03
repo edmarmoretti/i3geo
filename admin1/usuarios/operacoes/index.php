@@ -25,7 +25,7 @@ include "../../head.php";
 				<h3>{{{operacoes}}}</h3>
 				<h4>{{{txtAjuda}}}</h4>
 				<div class="row pull-right">
-					<a data-toggle="modal" data-target="#dialogoModal" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="adicionaOperacaoDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda-->
@@ -38,18 +38,9 @@ include "../../head.php";
 						</div>
 					</div>
 				</div>
-				<!--Modal de uso geral-->
-				<div id="dialogoModal" class="modal fade" tabindex="-1">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-							<div class="modal-body modal-lg"></div>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div class="well hidden">
 				<div id="corpo">
-
 				</div>
 			</div>
 		</div>
@@ -57,7 +48,6 @@ include "../../head.php";
 		<div class="col-md-2 hidden-sm hidden">
 			<nav class="bs-docs-sidebar affix-top" style="" id="indiceSpy">
 				<ul class="nav nav-pills nav-stacked" role="tablist">
-
 					<li><a onclick="$('.panel').show();" href="#">Links <i class="material-icons">visibility</i></a></li>
 				</ul>
 				<ul class="nav nav-pills nav-stacked" role="tablist" id="indice">
@@ -67,6 +57,7 @@ include "../../head.php";
 
 	</div>
 </div>
+<!-- li do indice lateral-->
 <script id="indiceTpl" type="x-tmpl-mustache">
 <li><a onclick="$('.panel').hide();$('#form-{{id_operacao}}').show();" href="#">{{{codigo}}}</a></li>
 </script>
@@ -75,6 +66,10 @@ include "../../head.php";
 	<div class="panel-body">
 		<form class="form" role="form" method="post" action="" >
 			<div class="row">
+				<div class="col-md-4">
+					<h4>{{{papeisv}}}</h4>
+					<div class="form-group form-group-lg">{{{inputPapeis}}}</div>
+				</div>
 				<div class="col-md-8">
 					<h4>{{{operacao}}}</h4>
 					<div class="form-group form-group-lg">
@@ -90,10 +85,7 @@ include "../../head.php";
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<h4>{{{papeisv}}}</h4>
-					<div class="form-group form-group-lg">{{{inputPapeis}}}</div>
-				</div>
+
 			</div>
 		</form>
 		<div class="pull-right">

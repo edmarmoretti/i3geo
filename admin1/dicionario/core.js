@@ -346,8 +346,8 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'excluiMesmo' : [ {
+		pt : "Confirma a exclus&atilde;o permanente?",
 		en : "",
 		es : ""
 	} ],
