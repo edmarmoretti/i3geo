@@ -32,7 +32,7 @@ $funcoesEdicao = array(
 		"ADICIONAROPERACAO",
 		"ALTERAROPERACAO",
 		"ADICIONAPAPELOPERACOES",
-		"EXCLUIRPAPELOPERACAO"
+		"EXCLUIROPERACAO"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/operacoes") == false){
@@ -118,10 +118,14 @@ switch ($funcao)
 		}
 		retornaJSON(array("operacoes"=>$o,"papeis"=>$papeis));
 	break;
-	case "EXCLUIRPAPELOPERACAO":
-		$retorna = excluirPapelOperacao($id_operacao,$id_papel,$dbhw);
+	case "EXCLUIROPERACAO":
+		$retorna = excluirOperacao($id_operacao,$dbhw);
 		$dbhw = null;
 		$dbh = null;
+		if($retorna == false){
+			header("HTTP/1.1 500 erro ao consultar banco de dados");
+			exit;
+		}
 		retornaJSON($retorna);
 		exit;
 	break;
@@ -145,59 +149,56 @@ function adicionarOperacao($codigo,$descricao,$papeis,$dbhw){
 //$papeis deve ser um array
 function alterarOperacao($id_operacao,$codigo,$descricao,$papeis,$dbhw){
 	global $esquemaadmin;
-	try{
-		if($convUTF){
-			$descricao = utf8_encode($descricao);
-		}
-		$dataCol = array(
-			"codigo" => $codigo,
-			"descricao" => $descricao
-		);
-		i3GeoAdminUpdate($dbhw,"i3geousr_operacoes",$dataCol,"WHERE id_operacao = $id_operacao");
-		//apaga todos os papeis
-		excluirPapelOperacao($id_operacao,"",$dbhw);
-		if(!empty($papeis)){
-			//atualiza papeis vinculados
-			foreach($papeis as $p){
-				adicionaPapelOperacao($id_operacao,$p,$dbhw);
-			}
-		}
-		$retorna = $id_operacao;
-		return $retorna;
+	if($convUTF){
+		$descricao = utf8_encode($descricao);
 	}
-	catch (PDOException $e){
+	$dataCol = array(
+		"codigo" => $codigo,
+		"descricao" => $descricao
+	);
+	$resultado = i3GeoAdminUpdate($dbhw,"i3geousr_operacoes",$dataCol,"WHERE id_operacao = $id_operacao");
+	if($resultado == false){
 		return false;
 	}
+	//apaga todos os papeis
+	$resultado = excluirPapeisOperacao($id_operacao,$dbhw);
+	if($resultado == false){
+		return false;
+	}
+	if(!empty($papeis)){
+		//atualiza papeis vinculados
+		foreach($papeis as $p){
+			$resultado = adicionaPapelOperacao($id_operacao,$p,$dbhw);
+			if($resultado == false){
+				return false;
+			}
+		}
+	}
+	return $id_operacao;
 }
 function adicionaPapelOperacao($id_operacao,$id_papel,$dbhw){
 	global $esquemaadmin;
-	try{
-		$dataCol = array(
-				"id_operacao" => $id_operacao,
-				"id_papel" => $id_papel
-		);
-		i3GeoAdminInsert($dbhw,"i3geousr_operacoespapeis",$dataCol);
-		return true;
-	}
-	catch (PDOException $e){
-		return false;
-	}
+	$dataCol = array(
+			"id_operacao" => $id_operacao,
+			"id_papel" => $id_papel
+	);
+	$resultado = i3GeoAdminInsert($dbhw,"i3geousr_operacoespapeis",$dataCol);
+	return $resultado;
 }
-function excluirPapelOperacao($id_operacao,$id_papel,$dbhw){
+function excluirOperacao($id_operacao,$dbhw){
 	global $esquemaadmin;
-	try{
-		if($id_papel == ""){
-			$sql = "DELETE from ".$esquemaadmin."i3geousr_operacoespapeis WHERE id_operacao = $id_operacao";
-		}
-		else{
-			$sql = "DELETE from ".$esquemaadmin."i3geousr_operacoespapeis WHERE id_operacao = $id_operacao AND id_papel = $id_papel";
-		}
-		$dbhw->query($sql);
-		i3GeoAdminInsertLog($dbhw,$sql);
-		return true;
-	}
-	catch (PDOException $e){
+	$resultado = exclui($esquemaadmin."i3geousr_operacoes","id_operacao",$id_operacao,$dbhw,false);
+	if($resultado == false){
 		return false;
 	}
+	if($resultado == true){
+		$resultado = excluirPapeisOperacao($id_operacao,$dbhw);
+	}
+	return $resultado;
+}
+function excluirPapeisOperacao($id_operacao,$dbhw){
+	global $esquemaadmin;
+	$resultado = exclui($esquemaadmin."i3geousr_operacoespapeis","id_operacao",$id_operacao,$dbhw,false);
+	return $resultado;
 }
 ?>

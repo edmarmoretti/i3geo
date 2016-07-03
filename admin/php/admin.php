@@ -139,19 +139,24 @@ coluna - nome da coluna
 
 id - valor
 */
-function exclui($tabela,$coluna,$id){
+function exclui($tabela,$coluna,$id,$dbhw="",$close=true){
 	try {
-		include("conexao.php");
+		if($dbhw == ""){
+			include("conexao.php");
+			$close = true;
+		}
 		$sql = "DELETE from $tabela WHERE $coluna = ?";
 		$prep = $dbhw->prepare($sql);
 		$prep->execute(array($id));
 		i3GeoAdminInsertLog($dbhw,$sql,array($id));
-		$dbhw = null;
-		$dbh = null;
+		if($close == true){
+			$dbhw = null;
+			$dbh = null;
+		}
 		return "ok";
 	}
 	catch (PDOException $e) {
-		return "Error!: ";
+		return false;
 	}
 }
 /*
@@ -215,14 +220,14 @@ function i3GeoAdminUpdate($pdo,$tabela,$data,$filtro=""){
 	try {
 		$prep = $pdo->prepare($sql);
 	} catch (PDOException $e) {
-		return "Error!: ";
+		return false;
 	}
 	try {
 		$exec = $prep->execute(array_values($data));
 		i3GeoAdminInsertLog($pdo,$sql,array_values($data));
 		return true;
 	} catch (PDOException $e) {
-		return "Error!: ";
+		return false;
 	}
 }
 /**
@@ -244,7 +249,7 @@ function i3GeoAdminInsert($pdo,$tabela,$data){
 	try {
 		$prep = $pdo->prepare($sql);
 	} catch (PDOException $e) {
-		return "prepare ";
+		return false;
 	}
 	try {
 		$exec = $prep->execute(array_values($data));
@@ -252,7 +257,7 @@ function i3GeoAdminInsert($pdo,$tabela,$data){
 		i3GeoAdminInsertLog($pdo,$sql,array_values($data));
 		return true;
 	} catch (PDOException $e) {
-		return "execute ";
+		return false;
 	}
 }
 /**

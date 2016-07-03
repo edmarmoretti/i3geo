@@ -169,16 +169,21 @@ function excluirOperacaoDialogo(id_operacao){
 }
 function excluirOperacao(id_operacao){
 	modalAguarde(true);
-	/*
-	var parametros = $("#form-modal form").serialize();
-	fechaModalGeral();
 	$.post(
-		"exec.php?funcao=adicionarOperacao",
-		parametros,
-		function(data, status){
-			modalAguarde(false);
-			pegaOperacoes();
-		}
+			"exec.php?funcao=excluirOperacao",
+			"id_operacao="+id_operacao
+	)
+	.done(
+			function(data, status){
+				modalAguarde(false);
+				iconeAguarde(ondeListaOperacoes);
+				pegaOperacoes();
+			}
+	)
+	.fail(
+			function(data){
+				modalAguarde(false);
+				mostraErro(data.status + " " +data.statusText);
+			}
 	);
-	 */
 }
