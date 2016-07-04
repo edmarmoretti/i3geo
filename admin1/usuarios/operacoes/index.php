@@ -131,6 +131,6 @@ include "../../head.php";
 		};
 		i3GEO.login.verificaOperacao("admin/html/operacoes",i3GEO.configura.locaplic, inicia, "sessao");
 	});
-	</script>
+</script>
 </body>
 </html>

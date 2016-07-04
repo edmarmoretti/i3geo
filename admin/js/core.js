@@ -133,20 +133,22 @@ function cabecalhoUsuarios(id,excluir){
 	ins += "<div id='i3GEONomeLogin' style=width:100%; > Login: "+u+"</div>";
 	ins += "</fieldset>";
 	temp = $i(id);
-	temp.innerHTML = ins;
-	for(i=0;i<n;i++){
-		if(excluir === "principal" && botoes[i].link)
-		{botoes[i].link = "html/"+botoes[i].link;}
-		if(botoes[i].id !== excluir){
-			botao = new YAHOO.widget.Button(botoes[i].id);
-			botao.addClass("abrir150");
-			if(botoes[i].link){
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
-			}
-			else{
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
-			}
+	if(temp){
+		temp.innerHTML = ins;
+		for(i=0;i<n;i++){
+			if(excluir === "principal" && botoes[i].link)
+			{botoes[i].link = "html/"+botoes[i].link;}
+			if(botoes[i].id !== excluir){
+				botao = new YAHOO.widget.Button(botoes[i].id);
+				botao.addClass("abrir150");
+				if(botoes[i].link){
+					eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
+				}
+				else{
+					eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
+				}
 
+			}
 		}
 	}
 	try{
@@ -360,7 +362,7 @@ function core_handleFailure(o,texto)
 	}
 	if (!YAHOO.carregando.container.wait)
 	{
-		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
+		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: false,close: true,draggable: false,zindex:4,modal: true,visible: false});
 		YAHOO.carregando.container.wait.setHeader("Aguarde...");
 		YAHOO.carregando.container.wait.render(document.body);
 	}
@@ -423,7 +425,7 @@ function core_carregando(tipo)
 	YAHOO.namespace("carregando.container");
 	if (!YAHOO.carregando.container.wait)
 	{
-		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
+		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: false,close: true,draggable: false,zindex:4,modal: true,visible: false});
 		YAHOO.carregando.container.wait.setHeader("Aguarde...");
 
 		YAHOO.carregando.container.wait.setBody("<img src=\""+img+"\"/>");
@@ -464,7 +466,7 @@ function core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho)
 	YAHOO.continua.container.simpledialog1 =
 		new YAHOO.widget.SimpleDialog("simpledialog1",
 			{ width: largura+"px",
-				fixedcenter: true,
+				fixedcenter: false,
 				visible: false,
 				draggable: false,
 				close: true,
@@ -501,7 +503,7 @@ function core_dialogoPergunta(handleYes,handleNo,mensagem,largura)
 	YAHOO.continua.container.simpledialog1 =
 		new YAHOO.widget.SimpleDialog("simpledialog1",
 			{ width: largura+"px",
-				fixedcenter: true,
+				fixedcenter: false,
 				visible: false,
 				draggable: false,
 				close: true,
@@ -1579,7 +1581,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 				);
 			}
 		}
-		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:"contained",close:true,width:w, overflow:"auto",modal: modal,visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:false,close:true,width:w, overflow:"auto",modal: modal,visible:false,constraintoviewport:true } );
 		YAHOO.admin.container.panelEditor.render();
 	}
 	else

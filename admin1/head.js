@@ -70,7 +70,7 @@ menuPrincipal = [
 		{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/usuarios/operacoes/index.php' >"+$trad("controleOperac",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/usuarios.html' >"+$trad("cadastroUsuario",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/usuarios/cadastro/index.php' >"+$trad("cadastroUsuario",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
 		html: "<a href='html/gruposusuarios.html' >"+$trad("cadastroGrupos",i3GEOadmin.menup.dicionario)+"</a>"
 		}
