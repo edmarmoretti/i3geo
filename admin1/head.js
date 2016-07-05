@@ -72,7 +72,7 @@ menuPrincipal = [
 		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/usuarios/cadastro/index.php' >"+$trad("cadastroUsuario",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/gruposusuarios.html' >"+$trad("cadastroGrupos",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/usuarios/grupos/index.php' >"+$trad("cadastroGrupos",i3GEOadmin.menup.dicionario)+"</a>"
 		}
 	]},{
 	html: $trad("metadadosEstatisticos",i3GEOadmin.menup.dicionario),
@@ -101,11 +101,11 @@ menuPrincipal = [
 	type: "html",
 	children:[
 		{
-		html: "<a href='html/subirshapefile.html' >"+$trad("enviarShp",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/upload/arquivo/index.php' >"+$trad("enviarShp",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/estat_editor.html' >"+$trad("gerenciaBd",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/upload/banco/index.php' >"+$trad("gerenciaBd",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/subirsimbolo.html' >"+$trad("uploadSimbolo",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/upload/simbolo/index.php' >"+$trad("uploadSimbolo",i3GEOadmin.menup.dicionario)+"</a>"
 		}
 	]},{
 	html: $trad("editaMapfile",i3GEOadmin.menup.dicionario),

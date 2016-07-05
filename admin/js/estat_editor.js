@@ -583,11 +583,11 @@ i3GEOadmin.editor = {
 			'<p class="paragrafo" >Nome da tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br>' +
 			'<input class=digitar type="text" size=40 id="tabelaDestino" name="tabelaDestino" style="top:0px;left:0px;cursor:pointer;"> ' +
 			'Ou escolha uma tabela existente no banco de dados: ' +
-			'<div class='styled-select'><select onchange="javascript:$i(\'tabelaDestino\').value = this.value;">' +
+			'<div class=styled-select ><select onchange="javascript:$i(\'tabelaDestino\').value = this.value;">' +
 			i3GEOadmin.editor.tabela.optionsTabela +
 			'</select></div>' +
 			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
-			'<div class='styled-select'><select id=i3GEOtipoOperacao name=tipoOperacao >' +
+			'<div class=styled-select ><select id=i3GEOtipoOperacao name=tipoOperacao >' +
 			'<option value=criar >Criar a tabela nova e incluir registros do SHP</option>' +
 			'<option value=incluir >Adicionar novos registros</option>' +
 			'<option value=apagar >Apagar dados atuais e incluir do SHP</option>' +
@@ -600,7 +600,7 @@ i3GEOadmin.editor = {
 			'</fieldset>' +
 			'<fieldset class=subbloco >' +
 			'<legend>Proje&ccedil;&atilde;o</legend>' +
-			'<p class="paragrafo" >Se voc� n�o escolheu o arquivo PRJ escolha o c&oacute;digo da proje&ccedil;&atilde;o (SRID) do arquivo</p>' +
+			'<p class="paragrafo" >Se voce nao escolheu o arquivo PRJ escolha o c&oacute;digo da proje&ccedil;&atilde;o (SRID) do arquivo</p>' +
 			'<input class=digitar type="text" value="4326" size=20 id="insrid" name="insrid" style="top:0px;left:0px;cursor:pointer;float:left;margin-right:10px;"><div id=selInSrid ></div>' +
 			'<p class="paragrafo" >Projetar o arquivo para (deixe em branco se voc&ecirc; n&atilde;o quiser aplicar nenhuma transforma&ccedil;&atilde;o de proje&ccedil;&atilde;o):</p>' +
 			'<input class=digitar type="text" value="" size=20 id="outsrid" name="outsrid" style="top:0px;left:0px;cursor:pointer;float:left;margin-right:10px;"><div id=selOutSrid ></div>' +
@@ -667,7 +667,7 @@ i3GEOadmin.editor = {
 			'<p class="paragrafo" >CSV (N&atilde;o utilize separador de milhar e utilize ponto como separador de casas decimais ou a importa&ccedil;&atilde;o poder&aacute; n&atilde;o ocorrer): <br><br><input type="file" size=22 name="i3GEOuploadcsv" style="top:0px;left:0px;cursor:pointer;"></p>' +
 			'<p class="paragrafo" >Nome da nova tabela (n&atilde;o utilize caracteres incompat&iacute;veis com o banco de dados, como -, acentos ou espa&ccedil;os em branco):<br><input class=digitar type="text" size=20 id="tabelaDestinocsv" name="tabelaDestinocsv" style="top:0px;left:0px;cursor:pointer;">&nbsp;' +
 			'Ou escolha da lista: ' +
-			'<div class='styled-select'><select onchange="javascript:$i(\'tabelaDestinocsv\').value = this.value;">' +
+			'<div class=styled-select ><select onchange="javascript:$i(\'tabelaDestinocsv\').value = this.value;">' +
 			i3GEOadmin.editor.tabela.optionsTabela +
 			'</select></div>' +
 			'</fieldset>' +
@@ -675,7 +675,7 @@ i3GEOadmin.editor = {
 			'<p class="paragrafo" >Coment&aacute;rio:</p>' +
 			'<textarea name="comentarioCsv" rows="5" cols="70" ></textarea>' +
 			'<p class="paragrafo" >Tipo de opera&ccedil;&atilde;o:</p>' +
-			'<div class='styled-select'><select id=i3GEOtipoOperacaocsv name=tipoOperacao >' +
+			'<div class=styled-select ><select id=i3GEOtipoOperacaocsv name=tipoOperacao >' +
 			'<option value=criar >Criar a tabela nova e incluir registros do CSV</option>' +
 			'<option value=incluir >Adicionar novos registros</option>' +
 			'<option value=apagar >Apagar dados atuais e incluir do CSV</option>' +

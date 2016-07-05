@@ -88,20 +88,22 @@ function cabecalhoMetaestat(id,excluir){
 	ins += "<div id='i3GEONomeLogin' style=width:100%; > Login: "+u+"</div>";
 	ins += "</fieldset>";
 	temp = $i(id);
-	temp.innerHTML = ins;
-	for(i=0;i<n;i++){
-		if(excluir === "principal" && botoes[i].link)
-		{botoes[i].link = "html/"+botoes[i].link;}
-		if(botoes[i].id !== excluir){
-			botao = new YAHOO.widget.Button(botoes[i].id);
-			botao.addClass("abrir150");
-			if(botoes[i].link){
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
-			}
-			else{
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
-			}
+	if(temp){
+		temp.innerHTML = ins;
+		for(i=0;i<n;i++){
+			if(excluir === "principal" && botoes[i].link)
+			{botoes[i].link = "html/"+botoes[i].link;}
+			if(botoes[i].id !== excluir){
+				botao = new YAHOO.widget.Button(botoes[i].id);
+				botao.addClass("abrir150");
+				if(botoes[i].link){
+					eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
+				}
+				else{
+					eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
+				}
 
+			}
 		}
 	}
 	try{
@@ -184,20 +186,22 @@ function cabecalhoGeral(id,excluir,prefixo){
 	ins += "<div id='i3GEONomeLogin' style=width:100%; > Login: "+u+"</div>";
 	ins += "</fieldset>";
 	temp = $i(id);
-	temp.innerHTML = ins;
-	for(i=0;i<n;i++){
-		if(excluir === "principal" && botoes[i].link)
-		{botoes[i].link = "html/"+botoes[i].link;}
-		if(botoes[i].id !== excluir){
-			botao = new YAHOO.widget.Button(botoes[i].id);
-			botao.addClass("abrir150");
-			if(botoes[i].link){
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
-			}
-			else{
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
-			}
+	if(temp){
+		temp.innerHTML = ins;
+		for(i=0;i<n;i++){
+			if(excluir === "principal" && botoes[i].link)
+			{botoes[i].link = "html/"+botoes[i].link;}
+			if(botoes[i].id !== excluir){
+				botao = new YAHOO.widget.Button(botoes[i].id);
+				botao.addClass("abrir150");
+				if(botoes[i].link){
+					eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
+				}
+				else{
+					eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
+				}
 
+			}
 		}
 	}
 	try{
