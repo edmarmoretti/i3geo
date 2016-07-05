@@ -112,19 +112,19 @@ menuPrincipal = [
 	type: "html",
 	children:[
 		{
-		html: "<a href='html/editormapfile.html' >"+$trad("editorMapfile",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/index.php' >"+$trad("editorMapfile",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/menus.html' >"+$trad("editorMenus",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/menus/index.php' >"+$trad("editorMenus",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/arvore.html' >"+$trad("arvoreTemas",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/arvore/index.php' >"+$trad("arvoreTemas",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/perfis.html' >"+$trad("editaPerfil",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/perfis/index.php' >"+$trad("editaPerfil",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/tags.html' >"+$trad("editaTags",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/tags/index.php' >"+$trad("editaTags",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/mapas.html' >"+$trad("linkMapas",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/mapas/index.php' >"+$trad("linkMapas",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='html/atlas.html' >"+$trad("atlas",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/atlas/index.php' >"+$trad("atlas",i3GEOadmin.menup.dicionario)+"</a>"
 		}
 	]},{
 	html: $trad("cadastros",i3GEOadmin.menup.dicionario),

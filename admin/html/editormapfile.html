@@ -50,9 +50,7 @@ table.ygtvtable {
 </head>
 <body class=" yui-skin-sam fundoPonto">
 	<center>
-		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
-			<div id=cabecalhoPrincipal></div>
 			<h1>
 				{{{adminMapfile}}}
 				<img src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
@@ -126,7 +124,7 @@ table.ygtvtable {
 		i3geo/admin/html/editormapfile.html
 		 */
 		core_parseMustacheBody(i3GEOadmin.editormapfile.dicionario);
-	
+
 		if (i3GEO.util.pegaCookie("I3GEOletraAdmin")) {
 			letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
 		} else {
@@ -191,5 +189,5 @@ table.ygtvtable {
 				initMenu();
 			};
 		i3GEO.login.verificaOperacao("admin/html/editormapfile", i3GEO.configura.locaplic, temp, "sessao", i3GEO.login.dialogo.abreLogin);
-		
+
 	</script>
