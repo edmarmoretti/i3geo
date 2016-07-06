@@ -27,7 +27,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -146,7 +146,7 @@ return:
 
 array
 */
-	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim")
+	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim",$ordenaNome="nao",$filtraOgc="nao",$filtraDown="nao")
 	{
 		$locaplic = $this->locaplic;
 		if($listasgrupos == "sim")
@@ -160,7 +160,7 @@ array
 			{
 				include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
 				$arvore = new Arvore($this->locaplic,$this->idioma,$this->filtro);
-				$grupos = $arvore->formataGruposMenu($idmenu,$this->perfil,$listasgrupos);
+				$grupos = $arvore->formataGruposMenu($idmenu,$this->perfil,$listasgrupos,$ordenaNome,$filtraOgc,$filtraDown);
 				unset($arvore);
 			}
 		}
@@ -175,7 +175,7 @@ O perfil do usu&aacute;rio &eacute; armazenado na se&ccedil;&atilde;o na inicial
 
 Parametros:
 
-codgrupo - código do grupo
+codgrupo - cï¿½digo do grupo
 
 idmenu - id que identifica o menu
 

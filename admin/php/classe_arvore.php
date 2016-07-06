@@ -483,8 +483,14 @@ class Arvore
 
 	{array}
 	*/
-	function pegaGruposMenu($id_menu){
-		$sqlgrupos = $this->sql_grupos."where ".$this->pubsql." id_menu='$id_menu' order by ordem";
+	function pegaGruposMenu($id_menu,$ordenaNome="nao"){
+		if($ordenaNome == "sim"){
+			$ordem = "nome_grupo";
+		}
+		else{
+			$ordem = "ordem";
+		}
+		$sqlgrupos = $this->sql_grupos."where ".$this->pubsql." id_menu='$id_menu' order by $ordem";
 		$sqlraiz = $this->sql_temasraiz."where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 order by ordem";
 		$grupos = $this->execSQL($sqlgrupos);
 		$raiz = $this->execSQL($sqlraiz);
@@ -506,10 +512,27 @@ class Arvore
 
 	{array}
 	*/
-	function pegaSubgruposGrupo($id_menu,$id_n1)
+	function pegaSubgruposGrupo($id_menu,$id_n1,$ordenaNome="nao",$filtraOgc="nao",$filtraDown="nao")
 	{
-		$subgrupos = $this->execSQL($this->sql_subgrupos."where ".$this->pubsql." i3geoadmin_n2.id_n1='$id_n1' order by ordem");
-		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
+		if($ordenaNome == "sim"){
+			$ordem = "nome_subgrupo";
+		}
+		else{
+			$ordem = "ordem";
+		}
+		$f = "";
+		if($filtraOgc == "sim" || $filtraDown == "sim"){
+			$ff = array();
+			if($filtraOgc == "sim"){
+				$ff[] = " i3geoadmin_temas.ogc_tema = 'SIM' ";
+			}
+			if($filtraDown == "sim"){
+				$ff[] = " i3geoadmin_temas.download_tema = 'SIM' ";
+			}
+			$f = implode(" AND ",$ff) . " AND ";
+		}
+		$subgrupos = $this->execSQL($this->sql_subgrupos."where ".$this->pubsql." i3geoadmin_n2.id_n1='$id_n1' order by $ordem");
+		$raiz = $this->execSQL($this->sql_temasraiz."where $f i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
 		$raiz = $this->validaTemas($raiz,"codigo_tema");
 		return array("raiz"=>$raiz,"subgrupos"=>$subgrupos);
 	}
@@ -547,9 +570,20 @@ class Arvore
 
 	{array}
 	*/
-	function pegaTemasRaizGrupo($id_menu,$id_n1)
+	function pegaTemasRaizGrupo($id_menu,$id_n1,$filtraOgc,$filtraDown)
 	{
-		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
+		$f = "";
+		if($filtraOgc == "sim" || $filtraDown == "sim"){
+			$ff = array();
+			if($filtraOgc == "sim"){
+				$ff[] = " i3geoadmin_temas.ogc_tema = 'SIM' ";
+			}
+			if($filtraDown == "sim"){
+				$ff[] = " i3geoadmin_temas.download_tema = 'SIM' ";
+			}
+			$f = implode(" AND ",$ff) . " AND ";
+		}
+		$raiz = $this->execSQL($this->sql_temasraiz."where $f i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
 		$raiz = $this->validaTemas($raiz,"codigo_tema");
 		return $raiz;
 	}
@@ -635,9 +669,20 @@ class Arvore
 
 	{array}
 	*/
-	function pegaTemasSubGrupo($id_n2)
+	function pegaTemasSubGrupo($id_n2,$filtraOgc="nao",$filtraDown="nao")
 	{
-		$temas = $this->execSQL($this->sql_temasSubgrupo."where ".$this->pubsql." i3geoadmin_n3.id_n2='$id_n2' order by ordem");
+		$f = "";
+		if($filtraOgc == "sim" || $filtraDown == "sim"){
+			$ff = array();
+			if($filtraOgc == "sim"){
+				$ff[] = " i3geoadmin_temas.ogc_tema = 'SIM' ";
+			}
+			if($filtraDown == "sim"){
+				$ff[] = " i3geoadmin_temas.download_tema = 'SIM' ";
+			}
+			$f = implode(" AND ",$ff) . " AND ";
+		}
+		$temas = $this->execSQL($this->sql_temasSubgrupo."where $f ".$this->pubsql." i3geoadmin_n3.id_n2='$id_n2' order by ordem");
 		$temas = $this->validaTemas($temas,"codigo_tema");
 		return $temas;
 	}
@@ -669,10 +714,10 @@ class Arvore
 
 	{array}
 	*/
-	function formataGruposMenu ($id_menu,$perfil,$listasgrupos)
+	function formataGruposMenu ($id_menu,$perfil,$listasgrupos,$ordenaNome="nao",$filtraOgc="nao",$filtraDown="nao")
 	{
 		//error_reporting(0);
-		$dados = $this->pegaGruposMenu($id_menu);
+		$dados = $this->pegaGruposMenu($id_menu,$ordenaNome);
 		$resultado = array();
 		$temasraiz = array();
 		foreach($dados["raiz"] as $temar){
@@ -681,42 +726,34 @@ class Arvore
 		if(count($dados["grupos"]) == 0){
 			$grupos[] = array();
 		}
-		foreach($dados["grupos"] as $grupo)
-		{
+		foreach($dados["grupos"] as $grupo)	{
 			$a = $grupo["n1_perfil"];
 			$a = str_replace(" ",",",$a);
 			if($this->verificaOcorrencia($perfil,explode(",",$a)) == true)
 			{
 				$temas = array();
-				$raizgrupo = $this->pegaTemasRaizGrupo($id_menu,$grupo["id_n1"]);
+				$raizgrupo = $this->pegaTemasRaizGrupo($id_menu,$grupo["id_n1"],$filtraOgc,$filtraDown);
 				$grupodown = "nao";
 				$grupoogc = "nao";
-				foreach($raizgrupo as $tema)
-				{
+				foreach($raizgrupo as $tema){
 					$temas[] = $this->formataTema($tema["id_tema"]);
 				}
-				if($temas > 0)
-				{
+				if($temas > 0){
 					$grupodown = "sim";
 					$grupoogc = "sim";
 				}
 				$subgrupos = array();
-				if($listasgrupos=="sim")
-				{
-					$dadossubgrupos = $this->pegaSubgruposGrupo($id_menu,$grupo["id_n1"]);
-
-					foreach($dadossubgrupos["subgrupos"] as $sgrupo)
-					{
+				if($listasgrupos=="sim"){
+					$dadossubgrupos = $this->pegaSubgruposGrupo($id_menu,$grupo["id_n1"],$ordenaNome,$filtraOgc,$filtraDown);
+					foreach($dadossubgrupos["subgrupos"] as $sgrupo){
 						$a = $sgrupo["n2_perfil"];
 						$a = str_replace(" ",",",$a);
-						if($this->verificaOcorrencia($perfil,explode(",",$a)))
-						{
+						if($this->verificaOcorrencia($perfil,explode(",",$a))){
 							//verifica se existem temas que podem receber download
 							$down = "nao";
 							$ogc = "nao";
-							$listaT = $this->pegaTemasSubGrupo($sgrupo["id_n2"]);
-							foreach($listaT as $tema)
-							{
+							$listaT = $this->pegaTemasSubGrupo($sgrupo["id_n2"],$filtraOgc,$filtraDown);
+							foreach($listaT as $tema){
 								if(strtolower($tema["tipoa_tema"]) != "wms")
 								{
 									if (strtolower($tema["download_tema"]) != "nao")
@@ -730,12 +767,21 @@ class Arvore
 									}
 								}
 							}
-							if(count($listaT) > 0)
+							if(count($listaT) > 0){
 								$subgrupos[] = array("id_n2"=>$sgrupo["id_n2"],"publicado"=>($sgrupo["publicado"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
+							}
 						}
 					}
 				}
-				$grupos[] = array("publicado"=>($grupo["publicado"]),"id_n1"=>($grupo["id_n1"]),"nome"=>$this->converte($grupo["nome_grupo"]),"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
+				//evita ocorrencias vazias quando for aplicado um filtro
+				if($filtraOgc == "sim" || $filtraDown == "sim"){
+					if(count($subgrupos) > 0 || count($temas) > 0){
+						$grupos[] = array("publicado"=>($grupo["publicado"]),"id_n1"=>($grupo["id_n1"]),"nome"=>$this->converte($grupo["nome_grupo"]),"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
+					}
+				}
+				else{
+					$grupos[] = array("publicado"=>($grupo["publicado"]),"id_n1"=>($grupo["id_n1"]),"nome"=>$this->converte($grupo["nome_grupo"]),"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
+				}
 			}
 		}
 		$grupos[] = array("temasraiz"=>$temasraiz);

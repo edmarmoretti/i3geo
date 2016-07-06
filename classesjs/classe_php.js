@@ -271,11 +271,22 @@ i3GEO.php =
 		 *
 		 * Obtem a lista de grupos de um menu
 		 */
-		pegalistadegrupos : function(funcao, id_menu, listasgrupos) {
+		pegalistadegrupos : function(funcao, id_menu, listasgrupos, ordenaNome, filtraOgc, filtraDown) {
 			i3GEO.php.verifica();
+			if(!ordenaNome){
+				ordenaNome = "nao";
+			}
+			if(!filtraOgc){
+				filtraOgc = "nao";
+			}
+			if(!filtraDown){
+				filtraDown = "nao";
+			}
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-				"funcao=pegalistadegrupos&map_file=&g_sid=" + i3GEO.configura.sid + "&idmenu=" + id_menu
-					+ "&listasistemas=nao&listasgrupos=" + listasgrupos + "&idioma=" + i3GEO.idioma.ATUAL;
+				"funcao=pegalistadegrupos&map_file=&g_sid=" + i3GEO.configura.sid + "&idmenu=" + id_menu +
+				"&filtraOgc=" + filtraOgc +
+				"&filtraDown=" + filtraDown +
+				"&ordenaNome=" + ordenaNome + "&listasistemas=nao&listasgrupos=" + listasgrupos + "&idioma=" + i3GEO.idioma.ATUAL;
 			//tipo de filtragem
 			if(i3GEO.arvoreDeTemas){
 				if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD === true){

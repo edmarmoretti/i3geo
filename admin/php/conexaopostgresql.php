@@ -3,8 +3,8 @@
 //$dbhw usuario com direito de escrita
 try
 {
-	$dbh = new PDO('pgsql:dbname=geodados;user=postgres;password=postgres;host=localhost');
-	$dbhw = new PDO('pgsql:dbname=geodados;user=postgres;password=postgres;host=localhost');
+	$dbh = new PDO('pgsql:dbname=dbspo;user=postgres;password=postgres;host=localhost');
+	$dbhw = new PDO('pgsql:dbname=dbspo;user=postgres;password=postgres;host=localhost');
 }
 catch (PDOException $e)
 {

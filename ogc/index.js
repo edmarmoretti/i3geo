@@ -67,7 +67,7 @@ function listaDoNivelMenu(templateMenus,templateGrupos,templateSubGrupos,templat
 					}
 				}
 			};
-			i3GEO.php.pegalistadegrupos(grupos, menus[i]["idmenu"], "sim");
+			i3GEO.php.pegalistadegrupos(grupos, menus[i]["idmenu"], "sim", "sim", "sim", "sim");
 		}
 	};
 	i3GEO.php.pegalistademenus(r);

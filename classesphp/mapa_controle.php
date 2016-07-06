@@ -1502,7 +1502,19 @@ switch (strtoupper($funcao))
 		if(!isset($listasgrupos)){
 			$listasgrupos="nao";
 		}
-		$retorno = array("idmenu"=>$idmenu,"grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas,$listasgrupos));
+		if(!isset($ordenaNome)){
+			$ordenaNome = "nao";
+		}
+		if(!isset($filtraOgc)){
+			$filtraOgc = "nao";
+		}
+		if(!isset($filtraDown)){
+			$filtraDown = "nao";
+		}
+		$retorno = array(
+				"idmenu"=>$idmenu,
+				"grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas,$listasgrupos,$ordenaNome,$filtraOgc,$filtraDown)
+		);
 		break;
 		/*
 		 Valor: PEGASISTEMASIDENTIFICACAO
