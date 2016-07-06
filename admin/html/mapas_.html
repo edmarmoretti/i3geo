@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-<title>Usuarios</title>
+<title>Links</title>
 <style type="text/css">
 /*margin and padding on body element
           can introduce errors in determining
@@ -14,32 +14,31 @@ body {
 	padding: 0;
 }
 </style>
-<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../js/core_.js"></script>
 <script type="text/javascript" src="../dicionario/core.js"></script>
-<script type="text/javascript" src="../dicionario/gruposusuarios.js"></script>
-<script type="text/javascript" src="../js/gruposusuarios.js"></script>
+<script type="text/javascript" src="../js/mapas.js"></script>
+<script type="text/javascript" src="../dicionario/mapas.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
-<body class=" yui-skin-sam fundoPonto" >
+<body class=" yui-skin-sam fundoPonto" style="background-color: white; margin-top: 20px;">
 	<center>
-		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
-			<div id=cabecalhoPrincipal></div>
 			<h1>
-				{{{gruposusuarios}}} <img
+				{{{mapas}}}<img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
 			</h1>
 			<div id="formulario" style="display: none">
-				<div id="ajuda">
+				<div id="ajuda" style="display: none">
 					<div class="hd">{{{ajuda}}}</div>
 					<div class="bd" style="height: 144px; overflow: auto">
 						{{{txtAjuda}}}
 					</div>
 					<div class="ft"></div>
 				</div>
-				<input onclick="adicionaLinha()" type=button id=adiciona
-					value="{{{adicionaGrupo}}}" /> <br>
-				<p>{{{grupoCadastrado}}}</p>
+				<input type=button id=adicionaNovoMapa
+					value="{{{ajudaNovo}}}" /> <br>
+				<p>{{{linksExistentes}}}</p>
+				<div id="letras_Mp" ></div><br>
 				<div id="tabela" style="left: -5px;"></div>
 				<div id=logajax style="display: block"></div>
 			</div>
@@ -47,13 +46,15 @@ body {
 	</center>
 	<script>
 		/*
-		 Title: Cadastro de grupos de usuarios
+		 Title: Mapas
+
+		 HTML da interface de administra&ccedil;&atilde;o do cadastro de mapas (links)
 
 		 Veja tamb&eacute;m:
 
 		 <core.js>
 
-		 <usuarios.js>
+		 <mapas.js>
 
 		 Licenca:
 
@@ -79,7 +80,7 @@ body {
 
 		 Arquivo:
 
-		 i3geo/admin/html/gruposusuarios.html
+		 i3geo/admin/html/mapas.html
 		 */
 
 		//necessario para a ferramenta login e outras
@@ -87,13 +88,13 @@ body {
 			locaplic : "../.."
 		};
 		//
-		core_parseMustacheBody(i3GEOadmin.gruposusuarios.dicionario);
-		cabecalhoUsuarios("cabecalhoPrincipal", "gruposusuarios");
+		core_parseMustacheBody(i3GEOadmin.mapas.dicionario);
+		cabecalhoGeral("cabecalhoPrincipal", "");
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
-			initMenu();
+			i3GEOadmin.mapas.inicia();
 		};
-		i3GEO.login.verificaOperacao("admin/html/usuarios",
-				i3GEO.configura.locaplic, temp, "sessao",i3GEO.login.dialogo.abreLogin);
+		i3GEO.login.verificaOperacao("admin/html/mapas",i3GEO.configura.locaplic, temp, "sessao",i3GEO.login.dialogo.abreLogin);
 	</script>
+
 </body>

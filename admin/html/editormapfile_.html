@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Editor de Mapfile</title>
+<style type="text/css">
+/*margin and padding on body element
+					can introduce errors in determining
+					element position and are not recommended;
+					we turn them off as a foundation for YUI
+					CSS treatments. */
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#ctx {
+	background: orange;
+	width: 200px;
+	height: 200px;
+}
+</style>
+<script type="text/javascript" src="../js/core_.js"></script>
+<script type="text/javascript" src="../dicionario/core.js"></script>
+<script type="text/javascript" src="../dicionario/editormapfile.js"></script>
+<script src="../js/listatemas.js" type="text/javascript"></script>
+<script type="text/javascript" src="../dicionario/listatemas.js"></script>
+<script src="../js/editormapfile.js" type="text/javascript"></script>
+<script src="../js/editormapfile_classes.js" type="text/javascript"></script>
+<script src="../js/editormapfile_estilos.js" type="text/javascript"></script>
+<script src="../js/editormapfile_editordetexto.js" type="text/javascript"></script>
+<script src="../js/editormapfile_conexao.js" type="text/javascript"></script>
+<script src="../js/editormapfile_comport.js" type="text/javascript"></script>
+<script src="../js/editormapfile_titulo.js" type="text/javascript"></script>
+<script src="../js/editormapfile_dispo.js" type="text/javascript"></script>
+<script src="../js/editormapfile_editavel.js" type="text/javascript"></script>
+<script src="../js/editormapfile_metadados.js" type="text/javascript"></script>
+<script src="../js/editormapfile_geral.js" type="text/javascript"></script>
+<script src="../js/editormapfile_label.js" type="text/javascript"></script>
+<script src="../js/editormapfile_usuario.js" type="text/javascript"></script>
+<script src="../js/editormapfile_layer.js" type="text/javascript"></script>
+<script src="../../classesjs/classe_plugini3geo.js" type="text/javascript"></script>
+
+<style>
+table.ygtvtable {
+	margin-top: 3px;;
+}
+</style>
+
+</head>
+<body class=" yui-skin-sam fundoPonto" style="background-color: white; margin-top: 20px;">
+	<center>
+		<div class="mascaraPrincipal" id="divGeral">
+			<h1>
+				{{{adminMapfile}}}
+				<img src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
+			</h1>
+			<div id="formulario" style="display: none">
+				<div id="ajuda" style="display: none">
+					<div class="hd">{{{ajuda}}}</div>
+					<div class="bd" style="height: 144px; overflow: auto">
+						{{{txtAjudaMapfile}}}
+					</div>
+					<div class="ft"></div>
+				</div>
+				<input onclick="" type=button id=adiciona value="{{{criaMapfile}}}" />
+				<input onclick="" type=button id=uploadGvsig value="{{{upGvsig}}}" />
+				<input onclick="" type=button id=semmapfiles value="{{{semMapfile}}}" />
+
+			{{{txtDesc}}}
+				<div id="letras"></div>
+				{{{listaMapfile}}}
+				<div id="tabela" style="left: -5px;"></div>
+			</div>
+		</div>
+		<div id=logajax style="display: block"></div>
+		<div id=dialogoContinua style="display: block"></div>
+	</center>
+	</body>
+	<script>
+		/*
+		Title: Editor de mapfiles
+
+		HTML da interface de administra&ccedil;&atilde;o dos mapfiles existentes em i3geo/temas
+
+		Esse HTML cont&eacute;m tamb&eacute;m alguns scripts para classifica&ccedil;&atilde;o da lista de mapfiles (busca por letra)
+
+		Veja tamb&eacute;m:
+
+		<core.js>
+
+		<listatemas.js>
+
+		<editormapfile.js>
+
+		<classe_util.js>
+
+		<classe_janela.js>
+
+		Licenca:
+
+		GPL2
+
+		i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+		Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
+		Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+		Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
+		e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
+		GNU conforme publicada pela Free Software Foundation;
+
+		Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
+		por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
+		de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
+		Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
+		Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+		GNU junto com este programa; se n&atilde;o, escreva para a
+		Free Software Foundation, Inc., no endere&ccedil;o
+		59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+		Arquivo:
+
+		i3geo/admin/html/editormapfile.html
+		 */
+		core_parseMustacheBody(i3GEOadmin.editormapfile.dicionario);
+
+		if (i3GEO.util.pegaCookie("I3GEOletraAdmin")) {
+			letraAtual = i3GEO.util.pegaCookie("I3GEOletraAdmin");
+		} else {
+			letraAtual = "";
+		}
+		function filtraLetra(letra) {
+			letraAtual = letra;
+			document.getElementById("tabela").innerHTML = "<span style=color:red >Aguarde...</span>";
+			if (letra == "Todos") {
+				letra = "";
+			}
+			i3GEO.util.insereCookie("I3GEOletraAdmin", letra);
+			core_pegaMapfiles(
+				"montaArvore()",
+				letra,
+				document.getElementById("selFiltro").value,
+				document.getElementById("checaNomes").checked,
+				document.getElementById("checaNames").checked
+			);
+		}
+		//necessario para a ferramenta login e outras
+		i3GEO.configura = {
+			locaplic : "../.."
+		};
+		//
+		cabecalhoGeral("cabecalhoPrincipal", "editormapfile");
+		temp =
+			function() {
+				var ins =
+					"<fieldset><div class='styled-select150'><select id='selFiltro' onchange='filtraLetra(\""
+						+ letraAtual
+						+ "\")' >"
+						+ "<option value='' >Filtrar listagem:</option>"
+						+ "<option value='link_tema,=,' >Sem fonte</option>"
+						+ "<option value='nome_tema,=,' >Nome n&atilde;o definido no banco de dados</option>"
+						+ "<option value='nome_tema,!=,' >Nome definido no banco de dados</option>"
+						+ "<option value='download_tema,=,sim' >Permite download</option>"
+						+ "<option value='download_tema,=,nao' >N&atilde;o permite download</option>"
+						+ "<option value='ogc_tema,=,sim' >Permite WMS</option>"
+						+ "<option value='ogc_tema,=,nao' >N&atilde;o permite WMS</option>"
+						+ "<option value='kml_tema,=,sim' >Permite KML</option>"
+						+ "<option value='kml_tema,=,nao' >N&atilde;o permite KML</option>"
+						+ "<option value='kmz_tema,=,sim' >Permite KMZ</option>"
+						+ "<option value='kmz_tema,=,nao' >N&atilde;o permite KMZ</option>"
+						+ "</select></div>";
+				ins +=
+					"<br><input onclick='filtraLetra(\"" + letraAtual
+						+ "\")' type=checkbox id=mostraMini style=position:relative;top:2px; /><span class=paragrafo >Mostra a miniatura armazenada em temas/miniaturas</span>";
+
+				ins +=
+					"<br><input onclick='filtraLetra(\"" + letraAtual
+						+ "\")' type=checkbox id=checaNomes style=position:relative;top:2px; /><span class=paragrafo >Verifica nome registrado no banco e no mapfile. Marca em vermelho o nome registrado no mapfile quando houver diverg&ecirc;ncia</span>";
+
+				ins +=
+					"<br><input onclick='filtraLetra(\"" + letraAtual
+						+ "\")' type=checkbox id=checaNames style=position:relative;top:2px; /><span class=paragrafo >Verifica se o nome do arquivo &eacute; o mesmo do LAYER</span>";
+
+				ins += "</fieldset><p><div id=filtroDeLetras ></div>";
+				document.getElementById("letras").innerHTML = ins;
+				core_listaDeLetras("filtroDeLetras", "filtraLetra",false,300);
+				document.getElementById("formulario").style.display = "block";
+				initMenu();
+			};
+		i3GEO.login.verificaOperacao("admin/html/editormapfile", i3GEO.configura.locaplic, temp, "sessao", i3GEO.login.dialogo.abreLogin);
+
+	</script>

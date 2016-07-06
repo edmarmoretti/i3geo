@@ -16,7 +16,7 @@ include "../../head.php";
 </div>
 <div class="container-fluid">
 	<div class="row">
-	<iframe src="../../../admin/html/atlas.html" style="width:100%; height:5000px;border:none; scrolling:no; frameborder:0;  marginheight:0; marginwidth:0;" ></iframe>
+	<iframe src="../../../admin/html/atlas_.html" style="width:100%; height:5000px;border:none; scrolling:no; frameborder:0;  marginheight:0; marginwidth:0;" ></iframe>
 </div>
 </div>
 <script>
