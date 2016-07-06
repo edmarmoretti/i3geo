@@ -14,17 +14,15 @@ body {
 	padding: 0;
 }
 </style>
-<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../js/core_.js"></script>
 <script type="text/javascript" src="../dicionario/core.js"></script>
 <script type="text/javascript" src="../dicionario/usuarios.js"></script>
 <script type="text/javascript" src="../js/usuarios.js"></script>
 <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
-<body class=" yui-skin-sam fundoPonto">
+<body class=" yui-skin-sam fundoPonto" style="background-color: white; margin-top: 20px;">
 	<center>
-		<div class="bordaSuperior">&nbsp;</div>
 		<div class="mascaraPrincipal" id="divGeral">
-			<div id=cabecalhoPrincipal></div>
 			<h1>
 				{{{usuarios}}}<img
 					src="../imagens/04.png" style="cursor: pointer" id=botaoAjuda />
@@ -92,6 +90,7 @@ body {
 		temp = function() {
 			document.getElementById("formulario").style.display = "block";
 			initMenu();
+			top.window.scroll(0,0);
 		};
 		i3GEO.login.verificaOperacao("admin/html/usuarios",
 				i3GEO.configura.locaplic, temp, "sessao",i3GEO.login.dialogo.abreLogin);

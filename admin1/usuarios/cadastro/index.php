@@ -17,7 +17,7 @@ include "../../head.php";
 </div>
 <div class="container-fluid">
 	<div class="row">
-	<iframe style="width:100%; height:5000px;border:none; scrolling:no; frameborder:0;  marginheight:0; marginwidth:0;" src="../../../admin/html/usuarios.html"></iframe>
+	<iframe src="../../../admin/html/usuarios_.html" style="width:100%; height:5000px;border:none; scrolling:no; frameborder:0;  marginheight:0; marginwidth:0;" ></iframe>
 </div>
 </div>
 <script>

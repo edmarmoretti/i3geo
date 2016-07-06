@@ -66,44 +66,7 @@ Armazena o objeto com a lista de perfis
 */
 $perfis = "";
 function cabecalhoMetaestat(id,excluir){
-	var botao,i,n,temp,
-		ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
-		u = i3GEO.util.pegaCookie("i3geousuarionome"),
-		botoes = [
-			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:"../principal.html"},
-			{id:"arvore",titulo:$trad("arvoreCompleta",i3GEOadmin.core.dicionario),link:"estat_variavel.html"},
-			{id:"conexao",titulo:$trad("conexoes",i3GEOadmin.core.dicionario),link:"estat_conexao.html"},
-			{id:"tipo_regiao",titulo:$trad("regioes",i3GEOadmin.core.dicionario),link:"estat_tipo_regiao.html"},
-			{id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
-		];
-	n = botoes.length;
-	for(i=0;i<n;i++){
-		if(botoes[i].id !== excluir){
-			ins += '<input type=button id="'+botoes[i].id+'" value="'+botoes[i].titulo+'" />';
-		}
-	}
-	if(!u){
-		u = "-";
-	}
-	ins += "<div id='i3GEONomeLogin' style=width:100%; > Login: "+u+"</div>";
-	ins += "</fieldset>";
-	temp = $i(id);
-	temp.innerHTML = ins;
-	for(i=0;i<n;i++){
-		if(excluir === "principal" && botoes[i].link)
-		{botoes[i].link = "html/"+botoes[i].link;}
-		if(botoes[i].id !== excluir){
-			botao = new YAHOO.widget.Button(botoes[i].id);
-			botao.addClass("abrir150");
-			if(botoes[i].link){
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
-			}
-			else{
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
-			}
 
-		}
-	}
 	try{
 		i3GEO.login.recarrega = true;
 	}
@@ -111,44 +74,6 @@ function cabecalhoMetaestat(id,excluir){
 }
 
 function cabecalhoUsuarios(id,excluir){
-	var botao,i,n,temp,
-		ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
-		u = i3GEO.util.pegaCookie("i3geousuarionome"),
-		botoes = [
-			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:"../principal.html"},
-			{id:"operacoes",titulo:$trad("operacoes",i3GEOadmin.core.dicionario),link:"operacoes.html"},
-			{id:"usuarios",titulo:$trad("usuarios",i3GEOadmin.core.dicionario),link:"usuarios.html"},
-			{id:"gruposusuarios",titulo:$trad("gruposUsuarios",i3GEOadmin.core.dicionario),link:"gruposusuarios.html"},
-			{id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
-		];
-	n = botoes.length;
-	for(i=0;i<n;i++){
-		if(botoes[i].id !== excluir){
-			ins += '<input type=button id="'+botoes[i].id+'" value="'+botoes[i].titulo+'" />';
-		}
-	}
-	if(!u){
-		u = "-";
-	}
-	ins += "<div id='i3GEONomeLogin' style=width:100%; > Login: "+u+"</div>";
-	ins += "</fieldset>";
-	temp = $i(id);
-	temp.innerHTML = ins;
-	for(i=0;i<n;i++){
-		if(excluir === "principal" && botoes[i].link)
-		{botoes[i].link = "html/"+botoes[i].link;}
-		if(botoes[i].id !== excluir){
-			botao = new YAHOO.widget.Button(botoes[i].id);
-			botao.addClass("abrir150");
-			if(botoes[i].link){
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
-			}
-			else{
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
-			}
-
-		}
-	}
 	try{
 		i3GEO.login.recarrega = true;
 	}
@@ -157,47 +82,7 @@ function cabecalhoUsuarios(id,excluir){
 	//temp.style.padding = "10px";
 }
 function cabecalhoGeral(id,excluir,prefixo){
-	if(!prefixo){
-		prefixo = "";
-	}
-	var botao,i,n,temp,
-		ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
-		u = i3GEO.util.pegaCookie("i3geousuarionome"),
-		botoes = [
-			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:prefixo+"../principal.html"},
-			{id:"menus",titulo:$trad("menus",i3GEOadmin.core.dicionario),link:prefixo+"menus.html"},
-			{id:"arvore",titulo:$trad("arvore",i3GEOadmin.core.dicionario),link:prefixo+"arvore.html"},
-			{id:"editormapfile",titulo:$trad("mapfiles",i3GEOadmin.core.dicionario),link:prefixo+"editormapfile.html"},
-			{id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
-		];
-	n = botoes.length;
-	for(i=0;i<n;i++){
-		if(botoes[i].id !== excluir){
-			ins += '<input type=button id="'+botoes[i].id+'" value="'+botoes[i].titulo+'" />';
-		}
-	}
-	if(!u){
-		u = "-";
-	}
-	ins += "<div id='i3GEONomeLogin' style=width:100%; > Login: "+u+"</div>";
-	ins += "</fieldset>";
-	temp = $i(id);
-	temp.innerHTML = ins;
-	for(i=0;i<n;i++){
-		if(excluir === "principal" && botoes[i].link)
-		{botoes[i].link = "html/"+botoes[i].link;}
-		if(botoes[i].id !== excluir){
-			botao = new YAHOO.widget.Button(botoes[i].id);
-			botao.addClass("abrir150");
-			if(botoes[i].link){
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){window.location = \''+botoes[i].link+'\';}');
-			}
-			else{
-				eval('$i("'+botoes[i].id+'-button'+'").onclick = function(){'+botoes[i].js+';}');
-			}
 
-		}
-	}
 	try{
 		i3GEO.login.recarrega = true;
 	}
@@ -360,7 +245,7 @@ function core_handleFailure(o,texto)
 	}
 	if (!YAHOO.carregando.container.wait)
 	{
-		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
+		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",y: 50,fixedcenter: false,close: true,draggable: false,zindex:4,modal: false,visible: false});
 		YAHOO.carregando.container.wait.setHeader("Aguarde...");
 		YAHOO.carregando.container.wait.render(document.body);
 	}
@@ -423,7 +308,7 @@ function core_carregando(tipo)
 	YAHOO.namespace("carregando.container");
 	if (!YAHOO.carregando.container.wait)
 	{
-		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: true,close: true,draggable: false,zindex:4,modal: true,visible: false});
+		YAHOO.carregando.container.wait = new YAHOO.widget.Panel("wait",{width: "240px",fixedcenter: false, y: 50,close: true,draggable: false,zindex:4,modal: false,visible: false});
 		YAHOO.carregando.container.wait.setHeader("Aguarde...");
 
 		YAHOO.carregando.container.wait.setBody("<img src=\""+img+"\"/>");
@@ -464,13 +349,13 @@ function core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho)
 	YAHOO.continua.container.simpledialog1 =
 		new YAHOO.widget.SimpleDialog("simpledialog1",
 			{ width: largura+"px",
-				fixedcenter: true,
+				fixedcenter: false, y: 50,
 				visible: false,
 				draggable: false,
 				close: true,
 				text: mensagem,
 				icon: YAHOO.widget.SimpleDialog.ICON_HELP,
-				modal: true,
+				modal: false,
 				constraintoviewport: true,
 				buttons: [ { text:"Sim", handler:handleYes, isDefault:true },
 							{ text:"N&atilde;o",  handler:handleNo } ]
@@ -501,13 +386,13 @@ function core_dialogoPergunta(handleYes,handleNo,mensagem,largura)
 	YAHOO.continua.container.simpledialog1 =
 		new YAHOO.widget.SimpleDialog("simpledialog1",
 			{ width: largura+"px",
-				fixedcenter: true,
+				fixedcenter: false, y: 50,
 				visible: false,
 				draggable: false,
 				close: true,
 				text: mensagem,
 				icon: "",
-				modal: true,
+				modal: false,
 				constraintoviewport: true,
 				buttons: [ { text:"Continua", handler:handleYes, isDefault:true },
 							{ text:"Cancela",  handler:handleNo } ]
@@ -1579,7 +1464,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 				);
 			}
 		}
-		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:"contained",close:true,width:w, overflow:"auto",modal: modal,visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { y: 0, fixedcenter:false,close:true,width:w, overflow:"auto",modal: false,visible:false,constraintoviewport:false } );
 		YAHOO.admin.container.panelEditor.render();
 	}
 	else
