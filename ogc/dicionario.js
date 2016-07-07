@@ -96,8 +96,8 @@ g_traducao_ogc =
 			en : "",
 			es : ""
 		}],
-		"1" : [{
-			pt : "",
+		"filtro" : [{
+			pt : "Filtro",
 			en : "",
 			es : ""
 		}]

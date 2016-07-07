@@ -93,30 +93,40 @@ include "../init/head.php";
 		</div>
 		<div class="panel-body">
 			<div id="corpoMenu{{idmenu}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
-					{{{camadas}}}
-					<div id="gruposMenu{{idmenu}}">
-						<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>
-					</div>
+				{{{camadas}}}				
+				<!-- aqui entra o filtro -->
+				<div class="form-group">
+					<label class="control-label">{{{filtro}}}</label>
+					<select onchange="filtraGrupo(this,'menu{{idmenu}}')" data-grupoFiltro="{{idmenu}}" class="form-control input-lg">
+					</select>
+				</div>
+				
+				<div id="gruposMenu{{idmenu}}">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 </script>
+<script id="templateFiltroGrupo" type="x-tmpl-mustache">
+<option value="painelGrupo{{id_n1}}">{{{nome}}}</option>
+</script>
 <script id="templateGrupos" type="x-tmpl-mustache">
-<div class="list-group">
-<div class="panel panel-default">
-	<div class="panel-heading" style="background-color: #b2dfdb;" role="tab" id="tituloGrupo{{id_n1}}">
-		<h4 class="panel-title">
-			<a class="collapsed" role="button" data-toggle="collapse" data-parent="#corpoMenu{{idmenu}}" href="#corpoGrupo{{id_n1}}" aria-expanded="false" aria-controls="corpoGrupo{{id_n1}}"> {{{nome}}} </a>
-		</h4>
-	</div>
-	<div class="panel-body">
-		<div id="corpoGrupo{{id_n1}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
-			{{{camadas}}}
-			<div id="subGruposGrupo{{id_n1}}">{{grupos}}</div>
+<div class="list-group grupo" id="painelGrupo{{id_n1}}">
+	<div class="panel panel-default">
+		<div class="panel-heading" style="background-color: #b2dfdb;" role="tab" >
+			<h4 class="panel-title">
+				<a class="collapsed" role="button" data-toggle="collapse" data-parent="#corpoMenu{{idmenu}}" href="#corpoGrupo{{id_n1}}" aria-expanded="false" aria-controls="corpoGrupo{{id_n1}}"> {{{nome}}} </a>
+			</h4>
+		</div>
+		<div class="panel-body">
+			<div id="corpoGrupo{{id_n1}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
+				{{{camadas}}}
+				<div id="subGruposGrupo{{id_n1}}">{{grupos}}</div>
+			</div>
 		</div>
 	</div>
-</div>
 </div>
 </script>
 <script id="templateSubGrupos" type="x-tmpl-mustache">

@@ -1,7 +1,7 @@
 function listaDoNivelMenu(templateMenus,templateGrupos,templateSubGrupos,templateCamadas){
 	var r = function(retorno) {
 		var menus = retorno.data,
-		nmenus = menus.length, i = 0, s = [], camadasRaiz, dataMenu, htmlMenus, grupos;
+		nmenus = menus.length, i = 0, s = [], camadasRaiz, dataMenu, htmlMenus, grupos, temp;
 		for(i=0; i<nmenus; i++){
 			camadasRaiz = "";
 			dataMenu = menus[i];
@@ -9,6 +9,7 @@ function listaDoNivelMenu(templateMenus,templateGrupos,templateSubGrupos,templat
 				camadasRaiz = ckCamada(dataMenu.temas,templateCamadas,"tema");
 				dataMenu["camadas"] = camadasRaiz;
 			}
+			dataMenu["filtro"] = $trad("filtro",g_traducao_ogc);
 			htmlMenus = Mustache.to_html(
 					templateMenus,
 					dataMenu
@@ -31,26 +32,42 @@ function listaDoNivelMenu(templateMenus,templateGrupos,templateSubGrupos,templat
 					g = [];
 					i = 0;
 					//camadas na raiz do grupo
+					//inclui no array com os grupos os temas
+					//monta o array g que contem os grupos e camadas
 					for (i = 0; i < c; i++) {
 						if(gr[i].temasgrupo){
-							camadas = ckCamada(gr[i].temasgrupo,templateCamadas,"tema");
+							camadas = ckCamada(
+								gr[i].temasgrupo,
+								templateCamadas,
+								"tema"
+							);
 							gr[i]["camadas"] = camadas;
 						} else {
 							gr[i]["camadas"] = "";
 						}
 						g.push(gr[i]);
 					}
+					//monta o combo para o filtro
+					$('[data-grupoFiltro="'+retorno.data.idmenu+'"]').html(
+							"<option value=''>---</option>" +
+							Mustache.to_html(
+								"{{#grupos}}" + $("#templateFiltroGrupo").html() + "{{/grupos}}",
+								{"grupos":g}
+							)
+					);
+					//monta a lista de grupos
 					if(g){
 						htmlGrupos = Mustache.to_html(
 								"{{#grupos}}" + templateGrupos + "{{/grupos}}",
 								{"grupos":g}
 						);
+
 					}
 					$("#gruposMenu"+retorno.data.idmenu).html(htmlGrupos);
+					//monta os subgrupos
 					for (i = 0; i < c; i++) {
 						subgrupos = gr[i].subgrupos;
 						id_n1 = gr[i]["id_n1"];
-
 						nsubgrupos = subgrupos.length;
 						j = 0;
 						for( j = 0; j < nsubgrupos; j++){
@@ -295,4 +312,19 @@ function listaCompleta(onde){
 	};
 	//cpJSON vem de class_php.js
 	cpJSON.call("../classesphp/mapa_controle.php?map_file=&funcao=pegaTodosTemas&g_sid=&idioma=pt", "foo", r);
+}
+function filtraGrupo(obj,idPainel){
+	$("#" + idPainel + " .grupo").each(
+			function(i,el){
+				if(obj.value == ""){
+					$(el).show();
+				}
+				else {
+					$(el).hide();
+				}
+			}
+	);
+	if(obj.value != ""){
+		$("#"+obj.value).show();
+	}
 }
