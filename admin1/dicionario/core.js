@@ -351,8 +351,8 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'filtro' : [ {
+		pt : "Filtro",
 		en : "",
 		es : ""
 	} ],

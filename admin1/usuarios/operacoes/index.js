@@ -88,13 +88,13 @@ function pegaOperacoes(){
 						}
 				);
 				ondeListaOperacoes.html(html);
-				//indice
+				//filtro
 				html = Mustache.to_html(
-						"{{#data}}" + $("#indiceTpl").html() + "{{/data}}",
+						"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
 						{"data":json["operacoes"]}
 				);
-				//indice lateral
-				$("#indice").html(html);
+				$("#filtro").html("<option value='' >---</option>" + html);
+
 				//monta um template para o modal de inclusao de nova operacao
 				html = Mustache.to_html(
 						$("#templateOperacoes").html(),
@@ -219,4 +219,19 @@ function salvarOperacao(id_operacao){
 				mostraErro(data.status + " " +data.statusText);
 			}
 	);
+}
+function filtra(obj,id){
+	$("#" + id + " .panel").each(
+			function(i,el){
+				if(obj.value == ""){
+					$(el).show();
+				}
+				else {
+					$(el).hide();
+				}
+			}
+	);
+	if(obj.value != ""){
+		$("#"+obj.value).show();
+	}
 }

@@ -16,7 +16,7 @@ include "../../head.php";
 </div>
 <div class="container">
 	<div class="row center-block">
-		<div class="col-sm-12 col-md-10">
+		<div class="col-md-12">
 			<div class="well hidden" id="titulo">
 				<button data-toggle="modal" data-target="#ajudaPrincipal"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
@@ -24,6 +24,12 @@ include "../../head.php";
 				</button>
 				<h3>{{{operacoes}}}</h3>
 				<h4>{{{txtAjuda}}}</h4>
+				<!-- aqui entra o filtro -->
+				<div class="form-group">
+					<label class="control-label">{{{filtro}}}</label>
+					<select onchange="filtra(this,'corpo')" id="filtro" class="form-control input-lg">
+					</select>
+				</div>
 				<div class="row pull-right">
 					<a onclick="adicionaOperacaoDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
 				</div>
@@ -44,22 +50,10 @@ include "../../head.php";
 				</div>
 			</div>
 		</div>
-		<!-- lateral-->
-		<div class="col-md-2 hidden-sm hidden">
-			<nav class="bs-docs-sidebar affix-top" style="" id="indiceSpy">
-				<ul class="nav nav-pills nav-stacked" role="tablist">
-					<li><a onclick="$('.panel').show();" href="#">Links <i class="material-icons">visibility</i></a></li>
-				</ul>
-				<ul class="nav nav-pills nav-stacked" role="tablist" id="indice">
-				</ul>
-			</nav>
-		</div>
-
 	</div>
 </div>
-<!-- li do indice lateral-->
-<script id="indiceTpl" type="x-tmpl-mustache">
-<li id="link-{{id_operacao}}"><a onclick="$('.panel').hide();$('#form-{{id_operacao}}').show();" href="#">{{{codigo}}}</a></li>
+<script id="templateFiltro" type="x-tmpl-mustache">
+<option value="form-{{id_operacao}}">{{{codigo}}}</option>
 </script>
 <script id="templateOperacoes" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_operacao}}">
@@ -118,6 +112,7 @@ include "../../head.php";
 		var t = $("#titulo");
 		//complementa dicionario
 		i3GEOadmin.operacoes.dicionario.adicionar = i3GEOadmin.core.dicionario.adicionar;
+		i3GEOadmin.operacoes.dicionario.filtro = i3GEOadmin.core.dicionario.filtro;
 		t.html(
 			Mustache.to_html(
 				t.html(),
