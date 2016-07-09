@@ -32,7 +32,8 @@ $funcoesEdicao = array (
 		"ADICIONARUSUARIO",
 		"ALTERARUSUARIO",
 		"ADICIONAPAPELUSUARIO",
-		"EXCLUIRUSUARIO" 
+		"EXCLUIRUSUARIO",
+		"ENVIARSENHA"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/usuarios" ) == false) {
@@ -45,11 +46,10 @@ $funcao = strtoupper ( $funcao );
 // converte os parametros de definicao dos papeis em um array
 if ($funcao == "ADICIONARUSUARIO" || $funcao == "ALTERARUSUARIO") {
 	$papeis = array ();
-	$papeis [] = 1; // admin
 	foreach ( array_keys ( $_POST ) as $k ) {
 		$teste = explode ( "-", $k );
-		if ($teste [0] == "id_papel") {
-			$papeis [] = $teste [1] * 1;
+		if ($teste[0] == "id_papel") {
+			$papeis[] = $teste[1] * 1;
 		}
 	}
 	array_unique ( $papeis );
@@ -63,6 +63,13 @@ switch ($funcao) {
 			if ($dados == false) {
 				header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 				exit ();
+			}
+			if(strtolower($enviaSenha) == "on"){
+				if($senha == "" || $email == ""){
+					$dados = header ( "HTTP/1.1 500 para enviar a senha &eacute; necess&aacute;rio preencher o valor de senha e e-mail" );
+				} else {
+					$dados = enviarSenha( $senha, $email );
+				}
 			}
 			retornaJSON ( $dados );
 		} else {
@@ -83,6 +90,13 @@ switch ($funcao) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
+		if(strtolower($enviaSenha) == "on"){
+			if($senha == "" || $email == ""){
+				$dados = header ( "HTTP/1.1 500 para enviar a senha &eacute; necess&aacute;rio preencher o valor de senha e e-mail" );
+			} else {
+				$dados = enviarSenha( $senha, $email );
+			}
+		}
 		retornaJSON ( $dados );
 		exit ();
 		break;
@@ -100,23 +114,23 @@ switch ($funcao) {
 			// pega os papeis registrados para cada operacao
 			$p = array ();
 			foreach ( $papeis as $papel ) {
-				if ($papel ["id_usuario"] == $usuario ["id_usuario"]) {
-					$p [$papel ["id_papel"]] = $papel;
+				if ($papel["id_usuario"] == $usuario["id_usuario"]) {
+					$p[$papel["id_papel"]] = $papel;
 				}
 			}
-			$usuarios ["papeis"] = $p;
-			$o [] = $usuario;
+			$usuario["papeis"] = $p;
+			$o[] = $usuario;
 		}
 		$papeis = pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_papeis order by nome", $dbh );
 		$dbhw = null;
 		$dbh = null;
 		if ($papeis == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
+			exit();
 		}
 		retornaJSON ( array (
 				"usuarios" => $o,
-				"papeis" => $papeis 
+				"papeis" => $papeis
 		) );
 		break;
 	case "EXCLUIRUSUARIO" :
@@ -130,8 +144,28 @@ switch ($funcao) {
 		retornaJSON ( $id_usuario );
 		exit ();
 		break;
+	case "ENVIARSENHA" :
+		if($senha == "" || $email == ""){
+			header ( "HTTP/1.1 500 erro ao enviar e-mail. Prrencha o valor de e-mail e senha" );
+			exit ();
+		}
+		$retorna = enviarSenha ( $senha, $email );
+		if ($retorna == false) {
+			header ( "HTTP/1.1 500 erro ao enviar e-mail $email" );
+			exit ();
+		}
+		retornaJSON ( true );
+		exit ();
+		break;
 }
 cpjson ( $retorno );
+
+function enviarSenha( $senha, $email ){
+	$to      = $email;
+	$subject = 'senha i3geo criada em '. date('l jS \of F Y h:i:s A');
+	$message = $senha;
+	return mail($to, $subject, $message);
+}
 // $papeis deve ser um array
 function adicionarUsuario($ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
 	global $esquemaadmin;
@@ -145,6 +179,7 @@ function adicionarUsuario($ativo, $data_cadastro, $email, $login, $nome_usuario,
 			"senha" => ''
 		);
 		$id_usuario = i3GeoAdminInsertUnico ( $dbhw, "i3geousr_usuarios", $dataCol, "nome_usuario", "id_usuario" );
+		$data_cadastro = date('l jS \of F Y h:i:s A');
 		$retorna = alterarUsuario ( $id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
@@ -161,10 +196,8 @@ function alterarUsuario($id_usuario, $ativo, $data_cadastro, $email, $login, $no
 			"nome_usuario" => $nome_usuario,
 			"login" => $login,
 			"email" => $email,
-			"ativo" => $ativo,
-			"data_cadastro" => $data_cadastro 
+			"ativo" => $ativo
 	);
-
 	// se a senha foi enviada, ela sera trocada
 	if ($senha != "") {
 		$dataCol ["senha"] = md5 ( $senha );
@@ -193,7 +226,7 @@ function adicionaPapelUsuario($id_usuario, $id_papel, $dbhw) {
 	global $esquemaadmin;
 	$dataCol = array (
 			"id_usuario" => $id_usuario,
-			"id_papel" => $id_papel 
+			"id_papel" => $id_papel
 	);
 	$resultado = i3GeoAdminInsert ( $dbhw, "i3geousr_papelusuario", $dataCol );
 	return $resultado;

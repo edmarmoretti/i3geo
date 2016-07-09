@@ -46,6 +46,8 @@ function pegaOperacoes(){
 	)
 	.done(
 			function(data, status){
+				//valor do filtro atual
+				var filtro = valorFiltro();
 				//objeto json com os dados viondos do banco
 				var json = jQuery.parseJSON(data);
 				//template dos checkbox
@@ -94,7 +96,10 @@ function pegaOperacoes(){
 						{"data":json["operacoes"]}
 				);
 				$("#filtro").html("<option value='' >---</option>" + html);
-
+				if(filtro != ""){
+					defineFiltro(filtro);
+					filtra(pegaFiltro());
+				}
 				//monta um template para o modal de inclusao de nova operacao
 				html = Mustache.to_html(
 						$("#templateOperacoes").html(),
@@ -204,7 +209,7 @@ function salvarOperacao(id_operacao){
 	modalAguarde(true);
 	$.post(
 			"exec.php?funcao=alterarOperacao",
-			"id_operacao="+ id_operacao+"&"+parametros
+			"id_operacao="+ id_operacao +"&"+parametros
 	)
 	.done(
 			function(data, status){
@@ -220,8 +225,18 @@ function salvarOperacao(id_operacao){
 			}
 	);
 }
-function filtra(obj,id){
-	$("#" + id + " .panel").each(
+function pegaFiltro(){
+	return $i("filtro");
+}
+function valorFiltro(){
+	return pegaFiltro().value;
+}
+function defineFiltro(valor){
+	pegaFiltro().value = valor;
+}
+function filtra(obj){
+
+	$("#corpo .panel").each(
 			function(i,el){
 				if(obj.value == ""){
 					$(el).show();

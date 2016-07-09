@@ -27,7 +27,7 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="filtra(this,'corpo')" id="filtro" class="form-control input-lg">
+					<select onchange="filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
@@ -81,7 +81,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="novasenha">{{{labelNovaSenha}}}</label>
 						<div class="col-md-10">
-							<input type="password" value="" class="form-control" name="novasenha" >
+							<input type="password" value="" class="form-control" name="senha" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
@@ -93,7 +93,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="data_cadastro">{{{labelDataCadastro}}}</label>
 						<div class="col-md-10">
-							<input type="date" value="{{{email}}}" class="form-control" name="data_cadastro">
+							<input disabled="" type="text" value="{{{data_cadastro}}}" class="form-control" name="data_cadastro">
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
@@ -105,12 +105,19 @@ include "../../head.php";
 							</select>
 						</div>
 					</div>
+					<div class="form-group form-group-lg">
+						<div class="col-md-2"></div>
+						<div class="checkbox col-md-10">
+								<label>
+									<input type="checkbox" checked name="enviaSenha" /> {{{enviaSenha}}}
+								</label>
+						</div>
+					</div>
 				</div>
 			</div>
 		</form>
 		<div class="pull-right">
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_usuario}}')" class="btn btn-danger" role="button">{{excluir}}</a>
-			<a href="javascript:void(0)" onclick="{{onEnviarSenha}}('{{id_usuario}}')" class="btn btn-default" role="button">{{{enviaSenha}}}</a>
 			<a href="javascript:void(0)" onclick="{{onSalvar}}('{{id_usuario}}')" class="btn btn-primary" role="button">{{salvar}}</a>
 		</div>
 	</div>

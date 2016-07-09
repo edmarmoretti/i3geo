@@ -47,7 +47,7 @@ i3GEOadmin.usuarios.dicionario = {
 		es : ""
 	} ],
     'enviaSenha' : [ {
-		pt : "enviar senha",
+		pt : "enviar senha por e-mail",
 		en : "",
 		es : ""
 	} ],

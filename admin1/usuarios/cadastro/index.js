@@ -42,6 +42,8 @@ function pegaUsuarios(){
 	)
 	.done(
 			function(data, status){
+				//valor do filtro atual
+				var filtro = valorFiltro();
 				//objeto json com os dados viondos do banco
 				var json = jQuery.parseJSON(data);
 				//template dos checkbox
@@ -58,6 +60,7 @@ function pegaUsuarios(){
 							"salvar": $trad("salva",i3GEOadmin.core.dicionario),
 							"onSalvar": "salvarUsuarioDialogo",//funcao
 							"enviaSenha": $trad("enviaSenha",i3GEOadmin.usuarios.dicionario),
+							"onEnviarSenha": "EnviarSenha",//funcao
 							"usuario": $trad("usuario",i3GEOadmin.usuarios.dicionario),
 							"nome": $trad("nome",i3GEOadmin.usuarios.dicionario),
 							"labelDataCadastro": $trad("dataCadastro",i3GEOadmin.usuarios.dicionario),
@@ -111,12 +114,16 @@ function pegaUsuarios(){
 						{"data":json["usuarios"]}
 				);
 				$("#filtro").html("<option value='' >---</option>" + html);
-
+				if(filtro != ""){
+					defineFiltro(filtro);
+					filtra(pegaFiltro());
+				}
 				//monta um template para o modal de inclusao de novo usuario
 				html = Mustache.to_html(
 						$("#templateUsuarios").html(),
 						{
 							"id_usuario": "modal",
+							"enviaSenha": $trad("enviaSenha",i3GEOadmin.usuarios.dicionario),
 							"excluir": $trad("cancelar",i3GEOadmin.core.dicionario),
 							"onExcluir": "fechaModalGeral",//funcao
 							"salvar": $trad("salva",i3GEOadmin.core.dicionario),
@@ -238,8 +245,18 @@ function salvarUsuario(id_usuario){
 			}
 	);
 }
-function filtra(obj,id){
-	$("#" + id + " .panel").each(
+function pegaFiltro(){
+	return $i("filtro");
+}
+function valorFiltro(){
+	return pegaFiltro().value;
+}
+function defineFiltro(valor){
+	pegaFiltro().value = valor;
+}
+function filtra(obj){
+
+	$("#corpo .panel").each(
 			function(i,el){
 				if(obj.value == ""){
 					$(el).show();
@@ -253,3 +270,4 @@ function filtra(obj,id){
 		$("#"+obj.value).show();
 	}
 }
+

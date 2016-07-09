@@ -27,7 +27,7 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="filtra(this,'corpo')" id="filtro" class="form-control input-lg">
+					<select onchange="filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
