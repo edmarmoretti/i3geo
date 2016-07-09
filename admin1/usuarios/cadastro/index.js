@@ -22,27 +22,23 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
  */
-/*
-Function: initMenu
 
-Inicializa o editor
- */
 function init(onde){
-	//variavel global indicando o elemento que recebera a lista de operacoes
-	ondeListaOperacoes = onde;
+	//variavel global indicando o elemento que recebera a lista de usuarios
+	ondeListaUsuarios = onde;
 	//conteudo html do formulario de adicao de operacao
-	formAdicionaOperacao = "";
-	pegaOperacoes();
+	formAdicionaUsuario = "";
+	pegaUsuarios();
 }
 /*
-Function: pegaOperacoes
+Function: pegaUsuarios
 
-Obt&eacute;m a lista de operacoes
+Obt&eacute;m a lista de usuarios
  */
-function pegaOperacoes(){
-	iconeAguarde(ondeListaOperacoes);
+function pegaUsuarios(){
+	iconeAguarde(ondeListaUsuarios);
 	$.post(
-			"exec.php?funcao=pegaOperacoesEpapeis"
+			"exec.php?funcao=pegaUsuariosEpapeis"
 	)
 	.done(
 			function(data, status){
@@ -51,20 +47,41 @@ function pegaOperacoes(){
 				//template dos checkbox
 				var templatePapeis = $("#templateInputPapeis").html();
 				//template do form de cada operacao
-				var templateOperacoes = $("#templateOperacoes").html();
-				//lista todas as operacoes
+				var templateUsuarios = $("#templateUsuarios").html();
+				//lista todas as usuarios
 				var html = Mustache.to_html(
-						"{{#data}}" + templateOperacoes + "{{/data}}",
+						"{{#data}}" + templateUsuarios + "{{/data}}",
 						{
-							"data":json["operacoes"],
+							"data": json["usuarios"],
 							"excluir": $trad("excluir",i3GEOadmin.core.dicionario),
-							"onExcluir": "excluirOperacaoDialogo",//funcao
+							"onExcluir": "excluirUsuarioDialogo",//funcao
 							"salvar": $trad("salva",i3GEOadmin.core.dicionario),
-							"onSalvar": "salvarOperacaoDialogo",//funcao
-							"labelCodigo": $trad("codigo",i3GEOadmin.operacoes.dicionario),
-							"labelDescricao": $trad("descricao",i3GEOadmin.operacoes.dicionario),
-							"operacao": $trad("operacao",i3GEOadmin.operacoes.dicionario),
-							"papeisv": $trad("papeisv",i3GEOadmin.operacoes.dicionario),
+							"onSalvar": "salvarUsuarioDialogo",//funcao
+							"enviaSenha": $trad("enviaSenha",i3GEOadmin.usuarios.dicionario),
+							"usuario": $trad("usuario",i3GEOadmin.usuarios.dicionario),
+							"nome": $trad("nome",i3GEOadmin.usuarios.dicionario),
+							"labelDataCadastro": $trad("dataCadastro",i3GEOadmin.usuarios.dicionario),
+							"labelAtivo": $trad("ativo",i3GEOadmin.usuarios.dicionario),
+							"labelNovaSenha": $trad("novaSenha",i3GEOadmin.usuarios.dicionario),
+							"papeisv": $trad("papeisv",i3GEOadmin.usuarios.dicionario),
+							"sim": $trad("sim",i3GEOadmin.usuarios.dicionario),
+							"nao": $trad("nao",i3GEOadmin.usuarios.dicionario),
+							"selAtivoSim": function(){
+								var p = this.ativo;
+								if(p == "0"){
+									return "";
+								} else {
+									return "selected";
+								}
+							},
+							"selAtivoNao": function(){
+								var p = this.ativo;
+								if(p == "0"){
+									return "selected";
+								} else {
+									return "";
+								}
+							},
 							"inputPapeis": function(){
 								//marca os checkbox
 								var p = this.papeis;
@@ -87,29 +104,31 @@ function pegaOperacoes(){
 							}
 						}
 				);
-				ondeListaOperacoes.html(html);
+				ondeListaUsuarios.html(html);
 				//filtro
 				html = Mustache.to_html(
 						"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
-						{"data":json["operacoes"]}
+						{"data":json["usuarios"]}
 				);
 				$("#filtro").html("<option value='' >---</option>" + html);
 
-				//monta um template para o modal de inclusao de nova operacao
+				//monta um template para o modal de inclusao de novo usuario
 				html = Mustache.to_html(
-						$("#templateOperacoes").html(),
+						$("#templateUsuarios").html(),
 						{
-							"labelCodigo": $trad("codigo",i3GEOadmin.operacoes.dicionario),
-							"labelDescricao": $trad("descricao",i3GEOadmin.operacoes.dicionario),
-							"operacao": $trad("operacao",i3GEOadmin.operacoes.dicionario),
-							"papeisv": $trad("papeisv",i3GEOadmin.operacoes.dicionario),
+							"id_usuario": "modal",
 							"excluir": $trad("cancelar",i3GEOadmin.core.dicionario),
 							"onExcluir": "fechaModalGeral",//funcao
 							"salvar": $trad("salva",i3GEOadmin.core.dicionario),
-							"onSalvar": "adicionaOperacao",//funcao
-							"codigo": "",
-							"id_operacao": "modal",
-							"descricao": "",
+							"onSalvar": "adicionaUsuario",//funcao
+							"usuario": $trad("usuario",i3GEOadmin.usuarios.dicionario),
+							"nome": $trad("nome",i3GEOadmin.usuarios.dicionario),
+							"labelDataCadastro": $trad("dataCadastro",i3GEOadmin.usuarios.dicionario),
+							"labelAtivo": $trad("ativo",i3GEOadmin.usuarios.dicionario),
+							"labelNovaSenha": $trad("novaSenha",i3GEOadmin.usuarios.dicionario),
+							"papeisv": $trad("papeisv",i3GEOadmin.usuarios.dicionario),
+							"sim": $trad("sim",i3GEOadmin.usuarios.dicionario),
+							"nao": $trad("nao",i3GEOadmin.usuarios.dicionario),
 							"inputPapeis": function(){
 								return Mustache.to_html(
 										"{{#data}}" + $("#templateInputPapeis").html() + "{{/data}}",
@@ -120,34 +139,34 @@ function pegaOperacoes(){
 							}
 						}
 				);
-				formAdicionaOperacao = html;
+				formAdicionaUsuario = html;
 				$.material.init();
 			}
 	)
 	.fail(function(data){
-		ondeListaOperacoes.html("");
+		ondeListaUsuarios.html("");
 		mostraErro(data.status + " " +data.statusText);
 	});
 }
-function adicionaOperacaoDialogo(){
-	abreModalGeral(formAdicionaOperacao);
+function adicionaUsuarioDialogo(){
+	abreModalGeral(formAdicionaUsuario);
 }
 
 //os parametros sao obtidos do formulario aberto do modal
 
-function adicionaOperacao(){
+function adicionaUsuario(){
 	var parametros = $("#form-modal form").serialize();
 	fechaModalGeral();
 	modalAguarde(true);
 	$.post(
-			"exec.php?funcao=adicionarOperacao",
+			"exec.php?funcao=adicionarUsuario",
 			parametros
 	)
 	.done(
 			function(data, status){
 				modalAguarde(false);
-				iconeAguarde(ondeListaOperacoes);
-				pegaOperacoes();
+				iconeAguarde(ondeListaUsuarios);
+				pegaUsuarios();
 			}
 	)
 	.fail(
@@ -157,28 +176,27 @@ function adicionaOperacao(){
 			}
 	);
 }
-function excluirOperacaoDialogo(id_operacao){
+function excluirUsuarioDialogo(id_usuario){
 	var hash = {
 			"mensagem": $trad("confirma",i3GEOadmin.core.dicionario),
-			"onBotao1": "excluirOperacao('"+id_operacao+"')",
+			"onBotao1": "excluirUsuario('"+id_usuario+"')",
 			"botao1": $trad("sim",i3GEOadmin.core.dicionario),
 			"onBotao2": "fechaModalConfirma();",
 			"botao2": $trad("nao",i3GEOadmin.core.dicionario)
 	};
 	abreModalConfirma(hash);
 }
-function excluirOperacao(id_operacao){
+function excluirUsuario(id_usuario){
 	modalAguarde(true);
 	$.post(
-			"exec.php?funcao=excluirOperacao",
-			"id_operacao="+id_operacao
+			"exec.php?funcao=excluirUsuario",
+			"id_usuario="+id_usuario
 	)
 	.done(
 			function(data, status){
 				modalAguarde(false);
 				var json = jQuery.parseJSON(data)*1;
 				$("#form-" + json).remove();
-				$("#link-" + json).remove();
 			}
 	)
 	.fail(
@@ -188,29 +206,29 @@ function excluirOperacao(id_operacao){
 			}
 	);
 }
-function salvarOperacaoDialogo(id_operacao){
+function salvarUsuarioDialogo(id_usuario){
 	var hash = {
 			"mensagem": $trad("confirma",i3GEOadmin.core.dicionario),
-			"onBotao1": "salvarOperacao('"+id_operacao+"')",
+			"onBotao1": "salvarUsuario('"+id_usuario+"')",
 			"botao1": $trad("sim",i3GEOadmin.core.dicionario),
 			"onBotao2": "fechaModalConfirma();",
 			"botao2": $trad("nao",i3GEOadmin.core.dicionario)
 	};
 	abreModalConfirma(hash);
 }
-function salvarOperacao(id_operacao){
-	var parametros = $("#form-" + id_operacao + " form").serialize();
+function salvarUsuario(id_usuario){
+	var parametros = $("#form-" + id_usuario + " form").serialize();
 	fechaModalGeral();
 	modalAguarde(true);
 	$.post(
-			"exec.php?funcao=alterarOperacao",
-			"id_operacao="+ id_operacao+"&"+parametros
+			"exec.php?funcao=alterarUsuario",
+			"id_usuario="+ id_usuario+"&"+parametros
 	)
 	.done(
 			function(data, status){
 				modalAguarde(false);
-				iconeAguarde(ondeListaOperacoes);
-				pegaOperacoes();
+				iconeAguarde(ondeListaUsuarios);
+				pegaUsuarios();
 			}
 	)
 	.fail(

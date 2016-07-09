@@ -101,23 +101,23 @@ i3GEOadmin.usuarios.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'papeisv' : [ {
+		pt : "Pap&eacute;is vinculados",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'nome' : [ {
+		pt : "Nome",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'sim' : [ {
+		pt : "Sim",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'nao' : [ {
+		pt : "N&atilde;o",
 		en : "",
 		es : ""
 	} ],

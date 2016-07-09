@@ -97,7 +97,6 @@ switch ($funcao)
 			exit;
 		}
 		$o = array();
-		$resultado = array();
 		foreach ($operacoes as $operacao){
 			//pega os papeis registrados para cada operacao
 			$p = array();
