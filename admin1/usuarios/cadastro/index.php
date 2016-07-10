@@ -149,14 +149,9 @@ include "../../head.php";
 		i3GEOadmin.usuarios.dicionario.filtro = i3GEOadmin.core.dicionario.filtro;
 		i3GEOadmin.usuarios.dicionario.excluir = i3GEOadmin.core.dicionario.excluir;
 		i3GEOadmin.usuarios.dicionario.salvar = i3GEOadmin.core.dicionario.salva;
-		i3GEOadmin.usuarios.dicionario.enviaSenha = i3GEOadmin.usuarios.dicionario.enviaSenha;
-		i3GEOadmin.usuarios.dicionario.usuario = i3GEOadmin.usuarios.dicionario.usuario;
-		i3GEOadmin.usuarios.dicionario.nome = i3GEOadmin.usuarios.dicionario.nome;
-		i3GEOadmin.usuarios.dicionario.papeisv = i3GEOadmin.usuarios.dicionario.papeisv;
 		i3GEOadmin.usuarios.dicionario.sim = i3GEOadmin.core.dicionario.sim;
 		i3GEOadmin.usuarios.dicionario.nao = i3GEOadmin.core.dicionario.nao;
 		i3GEOadmin.usuarios.dicionario.cancelar = i3GEOadmin.core.dicionario.cancelar;
-		i3GEOadmin.usuarios.dicionario.dataCadastro = i3GEOadmin.usuarios.dicionario.dataCadastro;
 		i3GEOadmin.usuarios.dicionario.confirma = i3GEOadmin.core.dicionario.confirma;
 
 		i3GEOadmin.core.dicionario = null;

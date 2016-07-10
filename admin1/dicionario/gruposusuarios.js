@@ -1,5 +1,4 @@
 //+$trad(1,i3GEOadmin.editormapfile.dicionario)+
-i3GEOadmin.gruposusuarios = {};
 i3GEOadmin.gruposusuarios.dicionario = {
 	'gruposusuarios' : [ {
 		pt : "Administra&ccedil;&atilde;o do i3geo - Grupos de usu&aacute;rios",
@@ -66,13 +65,13 @@ i3GEOadmin.gruposusuarios.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'usuariosv' : [ {
+		pt : "Usu&aacute;rios vinculados",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'grupo' : [ {
+		pt : "Grupo",
 		en : "",
 		es : ""
 	} ],

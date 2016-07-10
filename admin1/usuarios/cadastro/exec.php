@@ -58,7 +58,7 @@ switch ($funcao) {
 	case "ADICIONARUSUARIO" :
 		$novo = adicionarUsuario( $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
 		if ($novo != false) {
-			$sql = "SELECT * from " . $esquemaadmin . "i3geousr_usuarios WHERE id_usuario = " . $novo;
+			$sql = "SELECT id_usuario, ativo, data_cadastro, email, login, nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE id_usuario = " . $novo;
 			$dados = pegaDados ( $sql, $dbh );
 			if ($dados == false) {
 				header ( "HTTP/1.1 500 erro ao consultar banco de dados" );

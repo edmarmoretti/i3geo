@@ -241,12 +241,12 @@ i3GEOadmin.core.dicionario = {
 		es : ""
 	} ],
     'nome' : [ {
-		pt : "nome",
+		pt : "Nome",
 		en : "",
 		es : ""
 	} ],
     'descricao' : [ {
-		pt : "descri&ccedil;&atilde;o",
+		pt : "Descri&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
