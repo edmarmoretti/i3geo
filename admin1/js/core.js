@@ -28,8 +28,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 Arquivo:
 
 i3geo/admin/js/core.js
-*/
-
+ */
 /*
 Function: $i
 
@@ -44,93 +43,94 @@ id - id do objeto
 Retorno:
 
 object - objeto javaScript
-*/
+ */
 $i = function(id)
 {return document.getElementById(id);};
 /*
 Variable: $mapfiles
 
 Armazena o objeto com a lista de mapfiles
-*/
+ */
 $mapfiles = "";
 /*
 Variable: $tags
 
 Armazena o objeto com a lista de tags
-*/
+ */
 $tags = "";
 /*
 Variable: $perfis
 
 Armazena o objeto com a lista de perfis
-*/
+ */
 $perfis = "";
 
 //funcoes jquery + bootstrap
-//
-function mostraErro(erro){
-	var html = '<div class="alert alert-danger alert-dismissible" role="alert">'
-			+ '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
-			+ '<strong>Erro!</strong> '
-			+ erro;
-	$(".navbar-fixed-bottom .container").html(html);
-}
-function fechaModal(id){
-	$("#"+id).modal("hide");
-}
-function abreModal(id,conteudo){
-	$("#"+id+" .modal-body").html(conteudo);
-	if($("#"+id).css("display") == "none"){
-		$("#"+id).modal("show");
-		$.material.init();
-	}
-}
-function fechaModalGeral(){
-	fechaModal("modalGeral");
-}
-function abreModalGeral(conteudo){
-	abreModal("modalGeral",conteudo);
-}
-function fechaModalConfirma(){
-	fechaModal("modalGeral");
-}
-function abreModalConfirma(hash){
-	var conteudo = Mustache.to_html(
-		$("#modalConfirmaTpl").html(),
-		hash
-	);
-	abreModal("modalGeral",conteudo);
-}
-function modalAguarde(open){
-	if(open == true){
-		abreModalGeral($("#iconeAguardeTpl").html());
-	}
-	else{
-		fechaModalGeral();
-	}
-}
-function iconeAguarde(onde){
-	if(onde.html){
-		onde.html($("#iconeAguardeTpl").html());
-	}
-	else{
-		$("#"+onde).html($("#iconeAguardeTpl").html());
-	}
-}
+
+i3GEOadmin.core = {
+		mostraErro: function(erro){
+			var html = '<div class="alert alert-danger alert-dismissible" role="alert">'
+				+ '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+				+ '<strong>Erro!</strong> '
+				+ erro;
+			$(".navbar-fixed-bottom .container").html(html);
+		},
+		fechaModal: function(id){
+			$("#"+id).modal("hide");
+		},
+		abreModal: function(id,conteudo){
+			$("#"+id+" .modal-body").html(conteudo);
+			if($("#"+id).css("display") == "none"){
+				$("#"+id).modal("show");
+				$.material.init();
+			}
+		},
+		fechaModalGeral: function(){
+			i3GEOadmin.core.fechaModal("modalGeral");
+		},
+		abreModalGeral: function(conteudo){
+			i3GEOadmin.core.abreModal("modalGeral",conteudo);
+		},
+		fechaModalConfirma: function(){
+			i3GEOadmin.core.fechaModal("modalGeral");
+		},
+		abreModalConfirma: function(hash){
+			var conteudo = Mustache.to_html(
+					$("#modalConfirmaTpl").html(),
+					hash
+			);
+			i3GEOadmin.core.abreModal("modalGeral",conteudo);
+		},
+		modalAguarde: function(open){
+			if(open == true){
+				i3GEOadmin.core.abreModalGeral($("#iconeAguardeTpl").html());
+			}
+			else{
+				i3GEOadmin.core.fechaModalGeral();
+			}
+		},
+		iconeAguarde: function(onde){
+			if(onde.html){
+				onde.html($("#iconeAguardeTpl").html());
+			}
+			else{
+				$("#"+onde).html($("#iconeAguardeTpl").html());
+			}
+		}
+};
 
 
-//
 function cabecalhoMetaestat(id,excluir){
 	var botao,i,n,temp,
-		ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
-		u = i3GEO.util.pegaCookie("i3geousuarionome"),
-		botoes = [
-			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:"../principal.html"},
-			{id:"arvore",titulo:$trad("arvoreCompleta",i3GEOadmin.core.dicionario),link:"estat_variavel.html"},
-			{id:"conexao",titulo:$trad("conexoes",i3GEOadmin.core.dicionario),link:"estat_conexao.html"},
-			{id:"tipo_regiao",titulo:$trad("regioes",i3GEOadmin.core.dicionario),link:"estat_tipo_regiao.html"},
-			{id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
-		];
+	ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
+	u = i3GEO.util.pegaCookie("i3geousuarionome"),
+	botoes = [
+	          {id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:"../principal.html"},
+	          {id:"arvore",titulo:$trad("arvoreCompleta",i3GEOadmin.core.dicionario),link:"estat_variavel.html"},
+	          {id:"conexao",titulo:$trad("conexoes",i3GEOadmin.core.dicionario),link:"estat_conexao.html"},
+	          {id:"tipo_regiao",titulo:$trad("regioes",i3GEOadmin.core.dicionario),link:"estat_tipo_regiao.html"},
+	          {id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
+	          ];
 	n = botoes.length;
 	for(i=0;i<n;i++){
 		if(botoes[i].id !== excluir){
@@ -169,15 +169,15 @@ function cabecalhoMetaestat(id,excluir){
 
 function cabecalhoUsuarios(id,excluir){
 	var botao,i,n,temp,
-		ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
-		u = i3GEO.util.pegaCookie("i3geousuarionome"),
-		botoes = [
-			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:"../principal.html"},
-			{id:"operacoes",titulo:$trad("operacoes",i3GEOadmin.core.dicionario),link:"operacoes.html"},
-			{id:"usuarios",titulo:$trad("usuarios",i3GEOadmin.core.dicionario),link:"usuarios.html"},
-			{id:"gruposusuarios",titulo:$trad("gruposUsuarios",i3GEOadmin.core.dicionario),link:"gruposusuarios.html"},
-			{id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
-		];
+	ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
+	u = i3GEO.util.pegaCookie("i3geousuarionome"),
+	botoes = [
+	          {id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:"../principal.html"},
+	          {id:"operacoes",titulo:$trad("operacoes",i3GEOadmin.core.dicionario),link:"operacoes.html"},
+	          {id:"usuarios",titulo:$trad("usuarios",i3GEOadmin.core.dicionario),link:"usuarios.html"},
+	          {id:"gruposusuarios",titulo:$trad("gruposUsuarios",i3GEOadmin.core.dicionario),link:"gruposusuarios.html"},
+	          {id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
+	          ];
 	n = botoes.length;
 	for(i=0;i<n;i++){
 		if(botoes[i].id !== excluir){
@@ -220,15 +220,15 @@ function cabecalhoGeral(id,excluir,prefixo){
 		prefixo = "";
 	}
 	var botao,i,n,temp,
-		ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
-		u = i3GEO.util.pegaCookie("i3geousuarionome"),
-		botoes = [
-			{id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:prefixo+"../principal.html"},
-			{id:"menus",titulo:$trad("menus",i3GEOadmin.core.dicionario),link:prefixo+"menus.html"},
-			{id:"arvore",titulo:$trad("arvore",i3GEOadmin.core.dicionario),link:prefixo+"arvore.html"},
-			{id:"editormapfile",titulo:$trad("mapfiles",i3GEOadmin.core.dicionario),link:prefixo+"editormapfile.html"},
-			{id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
-		];
+	ins = "<fieldset><legend>" + $trad("atalhos",i3GEOadmin.core.dicionario) + "</legend>",
+	u = i3GEO.util.pegaCookie("i3geousuarionome"),
+	botoes = [
+	          {id:"principal",titulo:$trad("inicio",i3GEOadmin.core.dicionario),link:prefixo+"../principal.html"},
+	          {id:"menus",titulo:$trad("menus",i3GEOadmin.core.dicionario),link:prefixo+"menus.html"},
+	          {id:"arvore",titulo:$trad("arvore",i3GEOadmin.core.dicionario),link:prefixo+"arvore.html"},
+	          {id:"editormapfile",titulo:$trad("mapfiles",i3GEOadmin.core.dicionario),link:prefixo+"editormapfile.html"},
+	          {id:"login",titulo:$trad("login",i3GEOadmin.core.dicionario),js:"i3GEO.login.dialogo.abreLogin()"}
+	          ];
 	n = botoes.length;
 	for(i=0;i<n;i++){
 		if(botoes[i].id !== excluir){
@@ -285,7 +285,7 @@ obj - {Object} objeto contendo os parametros, exemplo
 
 	]}
 
-*/
+ */
 function core_arvore(titulo,onde,obj){
 	var arvore,root,tempNode,d,c,i,linha,conteudo,j,temaNode;
 	if(!$i(onde)){return;}
@@ -333,7 +333,7 @@ no - objeto no que ser&aacute; movimentado
 Return:
 
 true|false - se o movimento ocorreu
-*/
+ */
 function core_movimentaNo(tipo,no)
 {
 	var movimenta = false;
@@ -373,7 +373,7 @@ fun&ccedil;&atilde;o gen&eacute;rica, pouco usada.
 Parameters:
 
 o - string retornada pelo ajax
-*/
+ */
 function core_handleSuccess(o)
 {
 	//div onde ser&aacute; mostrado o log
@@ -399,7 +399,7 @@ Processa o retorno da chamada em ajax quando tiver falhado.
 Parameters:
 
 o - string retornada pelo ajax
-*/
+ */
 function core_handleFailure(o,texto)
 {
 	//div onde ser&aacute; mostrado o log
@@ -440,7 +440,7 @@ callback - fun&ccedil;&atilde;o que processar&aacute; o retorno
 tipo - GET ou POST
 
 postpar - parametros quando o tipo for post
-*/
+ */
 function core_makeRequest(sUrl,callback,tipo,postpar)
 {
 	sUrl = escape(sUrl);
@@ -472,7 +472,7 @@ Mostra uma janela de aguarde
 Parameters:
 
 tipo - ativa|desativa|string com uma mensagem
-*/
+ */
 function core_carregando(tipo)
 {
 }
@@ -490,7 +490,7 @@ handleNo - fun&ccedil;&atilde;o para n&atilde;o
 mensagem - mensagem do di&aacute;logo
 
 largura - largura do di&aacute;logo em px
-*/
+ */
 function core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho)
 {
 	if(!cabecalho || cabecalho === ""){
@@ -500,18 +500,18 @@ function core_dialogoContinua(handleYes,handleNo,mensagem,largura,cabecalho)
 	YAHOO.namespace("continua.container");
 	YAHOO.continua.container.simpledialog1 =
 		new YAHOO.widget.SimpleDialog("simpledialog1",
-			{ width: largura+"px",
-				fixedcenter: true,
-				visible: false,
-				draggable: false,
-				close: true,
-				text: mensagem,
-				icon: YAHOO.widget.SimpleDialog.ICON_HELP,
-				modal: true,
-				constraintoviewport: true,
-				buttons: [ { text:"Sim", handler:handleYes, isDefault:true },
-							{ text:"N&atilde;o",  handler:handleNo } ]
-	} );
+				{ width: largura+"px",
+			fixedcenter: true,
+			visible: false,
+			draggable: false,
+			close: true,
+			text: mensagem,
+			icon: YAHOO.widget.SimpleDialog.ICON_HELP,
+			modal: true,
+			constraintoviewport: true,
+			buttons: [ { text:"Sim", handler:handleYes, isDefault:true },
+			           { text:"N&atilde;o",  handler:handleNo } ]
+				} );
 	YAHOO.continua.container.simpledialog1.setHeader(cabecalho);
 	YAHOO.continua.container.simpledialog1.render(document.body);
 	YAHOO.continua.container.simpledialog1.show();
@@ -530,25 +530,25 @@ handleNo - fun&ccedil;&atilde;o para n&atilde;o
 mensagem - mensagem do di&aacute;logo
 
 largura - largura do di&aacute;logo em px
-*/
+ */
 function core_dialogoPergunta(handleYes,handleNo,mensagem,largura)
 {
 	// Instantiate the Dialog
 	YAHOO.namespace("continua.container");
 	YAHOO.continua.container.simpledialog1 =
 		new YAHOO.widget.SimpleDialog("simpledialog1",
-			{ width: largura+"px",
-				fixedcenter: true,
-				visible: false,
-				draggable: false,
-				close: true,
-				text: mensagem,
-				icon: "",
-				modal: true,
-				constraintoviewport: true,
-				buttons: [ { text:"Continua", handler:handleYes, isDefault:true },
-							{ text:"Cancela",  handler:handleNo } ]
-	} );
+				{ width: largura+"px",
+			fixedcenter: true,
+			visible: false,
+			draggable: false,
+			close: true,
+			text: mensagem,
+			icon: "",
+			modal: true,
+			constraintoviewport: true,
+			buttons: [ { text:"Continua", handler:handleYes, isDefault:true },
+			           { text:"Cancela",  handler:handleNo } ]
+				} );
 	//YAHOO.continua.container.simpledialog1.setHeader("Tem certeza?");
 	YAHOO.continua.container.simpledialog1.render(document.body);
 	YAHOO.continua.container.simpledialog1.show();
@@ -561,7 +561,7 @@ Parameters:
 id - id do elemento que receber&aacute; o painel
 
 botao - id do elemento que dever&aacute; ser lcicado para abrir o painel
-*/
+ */
 function core_ativaPainelAjuda(id,botao)
 {
 	$i(id).style.display = "block";
@@ -571,9 +571,9 @@ function core_ativaPainelAjuda(id,botao)
 		YAHOO.admin.container.panelAjuda.render();
 	}
 	if(arguments.length == 2)
-	YAHOO.util.Event.addListener(botao, "click", YAHOO.admin.container.panelAjuda.show, YAHOO.admin.container.panelAjuda, true);
+		YAHOO.util.Event.addListener(botao, "click", YAHOO.admin.container.panelAjuda.show, YAHOO.admin.container.panelAjuda, true);
 	else
-	YAHOO.admin.container.panelAjuda.show();
+		YAHOO.admin.container.panelAjuda.show();
 }
 /*
 Function: core_ativaPainelTexto
@@ -581,7 +581,7 @@ Function: core_ativaPainelTexto
 Parameters:
 
 id - id do elemento que receber&aacute; o painel
-*/
+ */
 function core_ativaPainelTexto(id)
 {
 	YAHOO.admin.container.panelTexto = new YAHOO.widget.Panel(id, { width:"350px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
@@ -604,7 +604,7 @@ Return
 $perfis - vari&aacute;vel global com o objeto perfis
 
 $perfisArray - array com a lista de perfis
-*/
+ */
 function core_pegaPerfis(funcao)
 {
 	if(arguments.length == 0)
@@ -622,7 +622,7 @@ function core_pegaPerfis(funcao)
 					for (var i=0;i<$perfis.length;i++)
 					{$perfisArray.push($perfis[i].perfil);}
 					if(funcao != "")
-					eval(funcao);
+						eval(funcao);
 				}
 				catch(e){core_handleFailure(o,o.responseText);}
 			},
@@ -649,7 +649,7 @@ filtro - (opcional) string com o filtro, por exemplo, "'download_tema' = 'SIM'"
 checaNomes - (0pcional) bate o nome do mapfile (tema) com o registro no banco
 
 checaNames - (opcional) bate o nome do mapfile com o nome do layer
-*/
+ */
 function core_pegaMapfiles(funcaoM,letra,filtro,checaNomes,checaNames)
 {
 	if(!letra){
@@ -679,7 +679,7 @@ function core_pegaMapfiles(funcaoM,letra,filtro,checaNomes,checaNames)
 				{
 					$mapfiles = YAHOO.lang.JSON.parse(o.responseText);
 					if(funcaoM != "")
-					eval(funcaoM);
+						eval(funcaoM);
 				}
 				catch(e){core_handleFailure(o,o.responseText);}
 			},
@@ -704,7 +704,7 @@ marcar - valor que ser&aacute; marcado como selecionado
 funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
 
 recarrega {booblean} - for&ccedil;a recarregar o combo de mapfiles
-*/
+ */
 function core_comboMapfiles(onde,id,marcar,funcao,recarrega)
 {
 	if(arguments.length == 3)
@@ -739,7 +739,7 @@ id - id do combo que ser&aacute; criado
 marcar - valor que ser&aacute; marcado como selecionado
 
 funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
-*/
+ */
 function core_comboPerfis(onde,id,marcar,funcao)
 {
 	if(arguments.length == 3)
@@ -774,7 +774,7 @@ id - id do combo que ser&aacute; criado
 marcar - valor que ser&aacute; marcado como selecionado
 
 funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
-*/
+ */
 function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
 {
 	var sUrl = "../php/atlas.php?funcao=pegaPranchas&id_atlas="+id_atlas;
@@ -785,14 +785,14 @@ function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
 				try
 				{
 					var valores = YAHOO.lang.JSON.parse(o.responseText);
-				if(arguments.length == 3)
-				{funcao = "";}
-				if (funcao != "")
-				{funcao = "onchange='"+funcao+"'";}
-				ins = "<div class='styled-select150'><select  id='"+id+"' "+funcao+" >";
-				ins += core_comboObjeto(valores,"id_prancha","titulo_prancha",marcar);
-				ins += "</select></div>";
-				$i(onde).innerHTML = ins;
+					if(arguments.length == 3)
+					{funcao = "";}
+					if (funcao != "")
+					{funcao = "onchange='"+funcao+"'";}
+					ins = "<div class='styled-select150'><select  id='"+id+"' "+funcao+" >";
+					ins += core_comboObjeto(valores,"id_prancha","titulo_prancha",marcar);
+					ins += "</select></div>";
+					$i(onde).innerHTML = ins;
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
 			},
@@ -817,7 +817,7 @@ id - id do combo que ser&aacute; criado
 marcar - valor que ser&aacute; marcado como selecionado
 
 funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
-*/
+ */
 function core_comboGrupos(onde,id,marcar,funcao)
 {
 	var sUrl = "../php/menutemas.php?funcao=pegaGrupos";
@@ -828,14 +828,14 @@ function core_comboGrupos(onde,id,marcar,funcao)
 				try
 				{
 					var valores = YAHOO.lang.JSON.parse(o.responseText);
-				if(arguments.length == 3)
-				{funcao = "";}
-				if (funcao != "")
-				{funcao = "onchange='"+funcao+"'";}
-				ins = "<select size=6 style='width:370px;font-size:12px; margin: 0px;' id='"+id+"' "+funcao+" >";
-				ins += core_comboObjeto(valores,"id_grupo","nome_grupo",marcar);
-				ins += "</select>";
-				$i(onde).innerHTML = ins;
+					if(arguments.length == 3)
+					{funcao = "";}
+					if (funcao != "")
+					{funcao = "onchange='"+funcao+"'";}
+					ins = "<select size=6 style='width:370px;font-size:12px; margin: 0px;' id='"+id+"' "+funcao+" >";
+					ins += core_comboObjeto(valores,"id_grupo","nome_grupo",marcar);
+					ins += "</select>";
+					$i(onde).innerHTML = ins;
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
 			},
@@ -860,7 +860,7 @@ id - id do combo que ser&aacute; criado
 marcar - valor que ser&aacute; marcado como selecionado
 
 funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
-*/
+ */
 function core_comboSubGrupos(onde,id,marcar,funcao)
 {
 	var sUrl = "../php/menutemas.php?funcao=pegaSubGrupos";
@@ -871,14 +871,14 @@ function core_comboSubGrupos(onde,id,marcar,funcao)
 				try
 				{
 					var valores = YAHOO.lang.JSON.parse(o.responseText);
-				if(arguments.length == 3)
-				{funcao = "";}
-				if (funcao != "")
-				{funcao = "onchange='"+funcao+"'";}
-				ins = "<select size=6 style='width:370px; font-size:12px; margin: 0px;' id='"+id+"' "+funcao+" >";
-				ins += core_comboObjeto(valores,"id_subgrupo","nome_subgrupo",marcar);
-				ins += "</select>";
-				$i(onde).innerHTML = ins;
+					if(arguments.length == 3)
+					{funcao = "";}
+					if (funcao != "")
+					{funcao = "onchange='"+funcao+"'";}
+					ins = "<select size=6 style='width:370px; font-size:12px; margin: 0px;' id='"+id+"' "+funcao+" >";
+					ins += core_comboObjeto(valores,"id_subgrupo","nome_subgrupo",marcar);
+					ins += "</select>";
+					$i(onde).innerHTML = ins;
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
 			},
@@ -903,7 +903,7 @@ id - id do combo que ser&aacute; criado
 marcar - valor que ser&aacute; marcado como selecionado
 
 funcao - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada no evento onchange
-*/
+ */
 function core_comboTemas(onde,id,marcar,funcao)
 {
 	var sUrl = "../php/menutemas.php?funcao=pegaTemas2";
@@ -914,14 +914,14 @@ function core_comboTemas(onde,id,marcar,funcao)
 				try
 				{
 					var valores = YAHOO.lang.JSON.parse(o.responseText);
-				if(arguments.length == 3)
-				{funcao = "";}
-				if (funcao != "")
-				{funcao = "onchange='"+funcao+"'";}
-				ins = "<select size=6 style='width:355px;font-size:12px; margin: 0px;' id='"+id+"' "+funcao+" >";
-				ins += core_comboObjeto(valores,"id_tema","nome_tema",marcar,"codigo_tema");
-				ins += "</select>";
-				$i(onde).innerHTML = ins;
+					if(arguments.length == 3)
+					{funcao = "";}
+					if (funcao != "")
+					{funcao = "onchange='"+funcao+"'";}
+					ins = "<select size=6 style='width:355px;font-size:12px; margin: 0px;' id='"+id+"' "+funcao+" >";
+					ins += core_comboObjeto(valores,"id_tema","nome_tema",marcar,"codigo_tema");
+					ins += "</select>";
+					$i(onde).innerHTML = ins;
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
 			},
@@ -941,7 +941,7 @@ Pega a lista de tags
 Parameters:
 
 funcao - (opcional) nome da funcao que ser&aacute; executada ao terminar a busca pelos dados
-*/
+ */
 function core_pegaTags(funcao)
 {
 	if(arguments.length == 0)
@@ -956,7 +956,7 @@ function core_pegaTags(funcao)
 					$tags = YAHOO.lang.JSON.parse(o.responseText);
 					if($tags == ""){$tags = " ";}
 					if(funcao != "")
-					eval(funcao);
+						eval(funcao);
 				}
 				catch(e){core_handleFailure(e,o.responseText);}
 			},
@@ -979,7 +979,7 @@ id - id do combo que ser&aacute; criado
 marcar - valor que ser&aacute; marcado como selecionado
 
 change - nome da fun&ccedil;&atilde;o do evento onchange
-*/
+ */
 function core_comboTags(onde,id,change)
 {
 	if($tags == "")
@@ -1014,7 +1014,7 @@ key - chave (nome do item) (utilize "" para escapar)
 unico - sim|nao indicando se apenas um pode ser escolhido
 
 funcaoFinal - (opcional) funcao que sera executada no final do processo
-*/
+ */
 function core_menuCheckBox(valores,textos,selecionados,target,record,key,unico,funcaoFinal){
 	if(!unico){
 		unico = "nao";
@@ -1059,14 +1059,14 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key,unico,f
 		ndiv.style.width = "100%";
 		ndiv.style.overflow = "auto";
 		ndiv.innerHTML = "<div id='core_botoesCabecalho' ></div><br>" +
-			"<div id='core_menuCK_bd' style='background:white;text-align:left;border:1px solid gray'></div>";
+		"<div id='core_menuCK_bd' style='background:white;text-align:left;border:1px solid gray'></div>";
 		novoel.appendChild(ndiv);
 		document.body.appendChild(novoel);
 		og_core = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:"okcancel_checkbox_id", container:"core_botoesCabecalho" });
 		og_core.addButtons([
-			{ label: "OK", value: "OK", checked: false},
-			{ label: "Fecha", value: "CANCEL", checked: false }
-		]);
+		                    { label: "OK", value: "OK", checked: false},
+		                    { label: "Fecha", value: "CANCEL", checked: false }
+		                    ]);
 		og_core.on("checkedButtonChange", on_menuCheckBoxChange);
 		YAHOO.admin.container.panelCK = new YAHOO.widget.Panel("core_menuCK", { draggable:false,modal:false,zindex:"100",close:false,underlay:false,width:"200px", height:"158px",overflow:"auto", visible:false,constraintoviewport:false } );
 		YAHOO.admin.container.panelCK.render();
@@ -1080,7 +1080,7 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key,unico,f
 		ck = "";
 		for(j=0;j<selecionados.length;j++){
 			if(selecionados[j] == valores[i])
-			ck = "CHECKED";
+				ck = "CHECKED";
 		}
 		if(unico === "nao"){
 			ins.push("<input style='cursor:pointer;' type=checkbox id='CK_"+valores[i]+"' value='"+valores[i]+"' "+ck+" />"+textos[i]+"<br>");
@@ -1103,7 +1103,7 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key,unico,f
 Function: core_combosimnao
 
 Retorna os itens option de um combo sim nao
-*/
+ */
 function core_combosimnao(marcar)
 {
 	var ins = "<option value='' ";
@@ -1121,7 +1121,7 @@ function core_combosimnao(marcar)
 Function: core_comboObjeto
 
 Retorna os itens option de um combo baseado em um objeto json
-*/
+ */
 function core_comboObjeto(obj,valor,texto,marcar,texto2,texto3)
 {
 	var ins = "<option value='' ";
@@ -1166,7 +1166,7 @@ Gera campos de formul&aacute;rio
 Parameters:
 
 dados - objeto no formato {"linhas":[{titulo:"Nome do tema:",size:"50",id:"Enome_tema",value:i.nome_tema,tipo:"text",div:""}]}
-*/
+ */
 function core_geraLinhas(dados)
 {
 	var nparam = dados.linhas.length;
@@ -1174,7 +1174,7 @@ function core_geraLinhas(dados)
 	var resultado = "";
 	core_geralinhasEscondeAjuda = function(id){
 		var a = $i(id+"_ajuda"),
-			i = $i(id+"_imgajuda");
+		i = $i(id+"_imgajuda");
 
 		if(a.style.display == "block"){
 			a.style.display = "none";
@@ -1254,7 +1254,7 @@ sUrl - url com o programa que ser&aacute; executado no servidor
 idBotao - id do elemento com o bot&atilde;o
 
 nomeFuncao - nome da fun&ccedil;&atilde;o que ser&aacute; executada ao concluir a adi&ccedil;&atilde;o da linha
-*/
+ */
 function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 {
 	if(arguments.length == 1){
@@ -1267,32 +1267,32 @@ function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 		core_carregando("ativa");
 		core_carregando(" adicionando um novo registro");
 		var callback = {
-			success:function(o){
-				var texto = "";
-				try{
-					core_carregando("desativa");
-					if(nomeFuncao != ""){
-						if(YAHOO.lang.isFunction(nomeFuncao)){
-							nomeFuncao.call(o);
+				success:function(o){
+					var texto = "";
+					try{
+						core_carregando("desativa");
+						if(nomeFuncao != ""){
+							if(YAHOO.lang.isFunction(nomeFuncao)){
+								nomeFuncao.call(o);
+							}
+							else{
+								eval(nomeFuncao+"()");
+							}
 						}
 						else{
-							eval(nomeFuncao+"()");
+							texto = YAHOO.lang.JSON.parse(o.responseText)[0];
+							if(texto === ""){
+								texto = "Clique para editar";
+							}
+							myDataTable.addRow(texto,0);
 						}
 					}
-					else{
-						texto = YAHOO.lang.JSON.parse(o.responseText)[0];
-						if(texto === ""){
-							texto = "Clique para editar";
-						}
-						myDataTable.addRow(texto,0);
+					catch(e){
+						core_handleFailure(e,o.responseText);
 					}
-				}
-				catch(e){
-					core_handleFailure(e,o.responseText);
-				}
-			},
-			failure:core_handleFailure,
-			argument: { foo:"foo", bar:"bar" }
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback);
 	};
@@ -1312,11 +1312,11 @@ mensagem - mensagem que ser&aacute; mostrada na tela
 sUrl - url do programa que ser&aacute; executado no servidor
 
 funcaoRetorno - funcao que ser&aacute; executada ao terminar a busca pelos dados
-*/
+ */
 function core_pegaDados(mensagem,sUrl,funcaoRetorno)
 {
 	if("mensagem" != "")
-	core_carregando(mensagem);
+		core_carregando(mensagem);
 	var callback =
 	{
 			success:function(o)
@@ -1361,33 +1361,33 @@ row - objeto row que foi clicado pelo usu&aacute;rio. Utilizado para se obter os
 sUrl - url do programa que ser&aacute; executado
 
 nomeFuncao - nome da funcao que sera executada apos gravar os dados (opcional)
-*/
+ */
 function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 {
 	core_carregando("ativa");
 	core_carregando(mensagem);
 	if(arguments.length < 4)
-	nomeFuncao = "";
+		nomeFuncao = "";
 	var callback =
 	{
 			success:function(o)
 			{
-			core_carregando("desativa");
-			var rec = myDataTable.getRecordSet().getRecord(row);
-			var linha = myDataTable.getTrEl(rec);
-			if(nomeFuncao != "")
-			{
-				eval(nomeFuncao+"()");
-				try
-				{myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);}
-				catch(e){}
-			}
-			else
-			{
-				myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+				core_carregando("desativa");
+				var rec = myDataTable.getRecordSet().getRecord(row);
+				var linha = myDataTable.getTrEl(rec);
+				if(nomeFuncao != "")
+				{
+					eval(nomeFuncao+"()");
+					try
+					{myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);}
+					catch(e){}
 				}
-			linha.style.color = "";
-			linha.style.textDecoration = "none";
+				else
+				{
+					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0]);
+				}
+				linha.style.color = "";
+				linha.style.textDecoration = "none";
 			},
 			failure:core_handleFailure,
 			argument: { foo:"foo", bar:"bar" }
@@ -1408,7 +1408,7 @@ sUrl - url do programa que ser&aacute; executado
 row - objeto row de um datatable
 
 mensagem -
-*/
+ */
 function core_excluiLinha(sUrl,row,mensagem,cabecalho,tabela)
 {
 	if(!cabecalho){
@@ -1471,7 +1471,7 @@ sUrl - url do programa que ser&aacute; executado
 no - objeto no de um treeview
 
 mensagem -
-*/
+ */
 function core_excluiNoTree(sUrl,no,mensagem,cabecalho)
 {
 	if(!cabecalho){
@@ -1497,11 +1497,11 @@ function core_excluiNoTree(sUrl,no,mensagem,cabecalho)
 						}
 						else
 						{
-						if(no){
-							tree.removeNode(no);
-							tree.draw();
+							if(no){
+								tree.removeNode(no);
+								tree.draw();
 							}
-						core_carregando("desativa");
+							core_carregando("desativa");
 						}
 					}
 					catch(e){core_handleFailure(o,o.responseText);}
@@ -1539,7 +1539,7 @@ modal - boolean
 bsalva - boolean botao salvar
 
 bcancela - boolean botao cancelar
-*/
+ */
 function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 {
 	if(!funcaoOK){
@@ -1569,13 +1569,13 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 	if(!$i("janela_editor"))
 	{
 		var ins = "", temp = "", lb,
-			salvai = "<input id=okcancel_checkboxOK type='buttom' value='Salva' />",
-			cancelai = "<input id=okcancel_checkboxCANCEL type='buttom' value='Cancela' />",
-			novoel = document.createElement("div");
+		salvai = "<input id=okcancel_checkboxOK type='buttom' value='Salva' />",
+		cancelai = "<input id=okcancel_checkboxCANCEL type='buttom' value='Cancela' />",
+		novoel = document.createElement("div");
 		novoel.id =  "janela_editor";
 		ins = '<div class="hd"><div id="okcancel_checkbox" ></div></div>' +
-			"<div class='bd' style='height:"+h+";overflow:auto'>" +
-			"<div id='editor_bd'></div>";
+		"<div class='bd' style='height:"+h+";overflow:auto'>" +
+		"<div id='editor_bd'></div>";
 		novoel.innerHTML = ins;
 		document.body.appendChild(novoel);
 		if(funcaoOK != "")
@@ -1590,15 +1590,15 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 			lb.innerHTML = temp + '<span style="margin-left:10px;position:relative;top:-5px">'+titulo+'</span>';
 			if(bsalva === true){
 				new YAHOO.widget.Button(
-					"okcancel_checkboxOK",
-					{onclick:{fn: function(){
-						if(YAHOO.lang.isFunction(funcaoOK)){
-							funcaoOK.call();
-						}
-						else{
-							eval(funcaoOK);
-						}
-					}}}
+						"okcancel_checkboxOK",
+						{onclick:{fn: function(){
+							if(YAHOO.lang.isFunction(funcaoOK)){
+								funcaoOK.call();
+							}
+							else{
+								eval(funcaoOK);
+							}
+						}}}
 				);
 				var temp = $i("okcancel_checkbox");
 				temp.style.top = "2px";
@@ -1608,11 +1608,11 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 			}
 			if(bcancela === true){
 				new YAHOO.widget.Button(
-					"okcancel_checkboxCANCEL",
-					{onclick:{fn: function(){
-						YAHOO.admin.container.panelEditor.destroy();
-						YAHOO.admin.container.panelEditor = null;
-					}}}
+						"okcancel_checkboxCANCEL",
+						{onclick:{fn: function(){
+							YAHOO.admin.container.panelEditor.destroy();
+							YAHOO.admin.container.panelEditor = null;
+						}}}
 				);
 			}
 		}
@@ -1653,7 +1653,7 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 Function idiomaSel
 
 Retorna o idioma selecionado pesquisando no elemento select com id = "idioma"
-*/
+ */
 function idiomaSel(){
 	var idioma = "pt";
 	if($i("idioma"))
@@ -1671,7 +1671,7 @@ function core_abreCor(janela,elemento)
 }
 function core_desativaforms(lista){
 	var n = lista.length,
-		i,t;
+	i,t;
 	for (i=0;i<n;i++){
 		t = $i(lista[i]);
 		if(t){
@@ -1682,7 +1682,7 @@ function core_desativaforms(lista){
 }
 function core_ativaforms(lista){
 	var n = lista.length,
-		i,t;
+	i,t;
 	for (i=0;i<n;i++){
 		t = $i(lista[i]);
 		if(t){
@@ -1701,7 +1701,7 @@ function core_filtraLetrasCombo(id,letra){
 		$i("iniciaisLetras").value = letra;
 	}
 	var combo = $i(id),
-		n, i, o, v;
+	n, i, o, v;
 	if(combo){
 		o = combo.options;
 		n = o.length;
@@ -1722,8 +1722,8 @@ function core_listaDeLetras(onde,nomeFuncao,semLetras,w){
 		w = 40;
 	}
 	var o,i,ins= "<p><b>",
-		letras = ["Todos","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z","_","1","2","3","4","5","6","7","8","9"],
-		nletras = letras.length;
+	letras = ["Todos","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z","_","1","2","3","4","5","6","7","8","9"],
+	nletras = letras.length;
 	if(!i3GEO.util){
 		alert("Erro i3GEO.util ???");
 		return;
@@ -1735,9 +1735,9 @@ function core_listaDeLetras(onde,nomeFuncao,semLetras,w){
 	if(!semLetras){
 		for (i = 0; i < nletras; i++) {
 			ins += "<span onclick='"+nomeFuncao+"(\""
-					+ letras[i]
-					+ "\")' style='color:blue;cursor:pointer;padding:1px;border: 1px solid #C8C8FA'>"
-					+ letras[i] + "</span>&nbsp;";
+			+ letras[i]
+			+ "\")' style='color:blue;cursor:pointer;padding:1px;border: 1px solid #C8C8FA'>"
+			+ letras[i] + "</span>&nbsp;";
 		}
 	}
 	else{

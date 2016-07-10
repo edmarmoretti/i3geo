@@ -22,231 +22,230 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
  */
-/*
+
+i3GEOadmin.operacoes = {
+		//variavel global indicando o elemento que recebera a lista de operacoes
+		ondeListaOperacoes: "",
+		//conteudo html do formulario de adicao de operacao
+		formAdicionaOperacao: "",
+		/*
 Function: initMenu
 
 Inicializa o editor
- */
-function init(onde){
-	//variavel global indicando o elemento que recebera a lista de operacoes
-	ondeListaOperacoes = onde;
-	//conteudo html do formulario de adicao de operacao
-	formAdicionaOperacao = "";
-	pegaOperacoes();
-}
-/*
+		 */
+		init: function(onde){
+			i3GEOadmin.operacoes.ondeListaOperacoes = onde;
+			i3GEOadmin.operacoes.pegaOperacoes();
+		},
+		/*
 Function: pegaOperacoes
 
 Obt&eacute;m a lista de operacoes
- */
-function pegaOperacoes(){
-	iconeAguarde(ondeListaOperacoes);
-	$.post(
-			"exec.php?funcao=pegaOperacoesEpapeis"
-	)
-	.done(
-			function(data, status){
-				//valor do filtro atual
-				var filtro = valorFiltro();
-				//objeto json com os dados viondos do banco
-				var json = jQuery.parseJSON(data);
-				//template dos checkbox
-				var templatePapeis = $("#templateInputPapeis").html();
-				//template do form de cada operacao
-				var templateOperacoes = $("#templateOperacoes").html();
-				//lista todas as operacoes
-				var html = Mustache.to_html(
-						"{{#data}}" + templateOperacoes + "{{/data}}",
-						{
-							"data":json["operacoes"],
-							"excluir": $trad("excluir",i3GEOadmin.core.dicionario),
-							"onExcluir": "excluirOperacaoDialogo",//funcao
-							"salvar": $trad("salva",i3GEOadmin.core.dicionario),
-							"onSalvar": "salvarOperacaoDialogo",//funcao
-							"labelCodigo": $trad("codigo",i3GEOadmin.operacoes.dicionario),
-							"labelDescricao": $trad("descricao",i3GEOadmin.operacoes.dicionario),
-							"operacao": $trad("operacao",i3GEOadmin.operacoes.dicionario),
-							"papeisv": $trad("papeisv",i3GEOadmin.operacoes.dicionario),
-							"inputPapeis": function(){
-								//marca os checkbox
-								var p = this.papeis;
-								$(json["papeis"]).each(
-										function(i,el){
-											if(p && el.id_papel && (p[el.id_papel] || el.id_papel == 1)){
-												json["papeis"][i]["checked"] = "checked";
-											}
-											else{
-												json["papeis"][i]["checked"] = "";
-											}
-										}
-								);
-								return Mustache.to_html(
-										"{{#data}}" + templatePapeis + "{{/data}}",
+		 */
+		pegaOperacoes: function(){
+			i3GEOadmin.core.iconeAguarde(i3GEOadmin.operacoes.ondeListaOperacoes);
+			$.post(
+					"exec.php?funcao=pegaOperacoesEpapeis"
+			)
+			.done(
+					function(data, status){
+						//valor do filtro atual
+						var filtro = i3GEOadmin.operacoes.valorFiltro();
+						//objeto json com os dados viondos do banco
+						var json = jQuery.parseJSON(data);
+						//template dos checkbox
+						var templatePapeis = $("#templateInputPapeis").html();
+						//template do form de cada operacao
+						var templateOperacoes = $("#templateOperacoes").html();
+						//lista todas as operacoes
+						var html = Mustache.to_html(
+								"{{#data}}" + templateOperacoes + "{{/data}}",
+								$.extend(
+										i3GEOadmin.operacoes.dicionario,
 										{
-											"data":json["papeis"]
+											"data":json["operacoes"],
+											"onExcluir": "i3GEOadmin.operacoes.excluirOperacaoDialogo",//funcao
+											"onSalvar": "i3GEOadmin.operacoes.salvarOperacaoDialogo",//funcao
+											"labelCodigo": i3GEOadmin.operacoes.dicionario.codigo,
+											"labelDescricao": i3GEOadmin.operacoes.dicionario.descricao,
+											"inputPapeis": function(){
+												//marca os checkbox
+												var p = this.papeis;
+												$(json["papeis"]).each(
+														function(i,el){
+															if(p && el.id_papel && (p[el.id_papel] || el.id_papel == 1)){
+																json["papeis"][i]["checked"] = "checked";
+															}
+															else{
+																json["papeis"][i]["checked"] = "";
+															}
+														}
+												);
+												return Mustache.to_html(
+														"{{#data}}" + templatePapeis + "{{/data}}",
+														{
+															"data":json["papeis"]
+														}
+												);
+											}
 										}
-								);
-							}
+								)
+						);
+						i3GEOadmin.operacoes.ondeListaOperacoes.html(html);
+						//filtro
+						html = Mustache.to_html(
+								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
+								{"data":json["operacoes"]}
+						);
+						$("#filtro").html("<option value='' >---</option>" + html);
+						if(filtro != ""){
+							i3GEOadmin.operacoes.defineFiltro(filtro);
+							i3GEOadmin.operacoes.filtra(pegaFiltro());
 						}
-				);
-				ondeListaOperacoes.html(html);
-				//filtro
-				html = Mustache.to_html(
-						"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
-						{"data":json["operacoes"]}
-				);
-				$("#filtro").html("<option value='' >---</option>" + html);
-				if(filtro != ""){
-					defineFiltro(filtro);
-					filtra(pegaFiltro());
-				}
-				//monta um template para o modal de inclusao de nova operacao
-				html = Mustache.to_html(
-						$("#templateOperacoes").html(),
-						{
-							"labelCodigo": $trad("codigo",i3GEOadmin.operacoes.dicionario),
-							"labelDescricao": $trad("descricao",i3GEOadmin.operacoes.dicionario),
-							"operacao": $trad("operacao",i3GEOadmin.operacoes.dicionario),
-							"papeisv": $trad("papeisv",i3GEOadmin.operacoes.dicionario),
-							"excluir": $trad("cancelar",i3GEOadmin.core.dicionario),
-							"onExcluir": "fechaModalGeral",//funcao
-							"salvar": $trad("salva",i3GEOadmin.core.dicionario),
-							"onSalvar": "adicionaOperacao",//funcao
-							"codigo": "",
-							"id_operacao": "modal",
-							"descricao": "",
-							"inputPapeis": function(){
-								return Mustache.to_html(
-										"{{#data}}" + $("#templateInputPapeis").html() + "{{/data}}",
+						//monta um template para o modal de inclusao de nova operacao
+						html = Mustache.to_html(
+								$("#templateOperacoes").html(),
+								$.extend(
+										i3GEOadmin.operacoes.dicionario,
 										{
-											"data":json["papeis"]
+											"labelCodigo": $trad("codigo",i3GEOadmin.operacoes.dicionario),
+											"labelDescricao": $trad("descricao",i3GEOadmin.operacoes.dicionario),
+											"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
+											"onSalvar": "i3GEOadmin.operacoes.adicionaOperacao",//funcao
+											"codigo": "",
+											"id_operacao": "modal",
+											"descricao": "",
+											"inputPapeis": function(){
+												return Mustache.to_html(
+														"{{#data}}" + $("#templateInputPapeis").html() + "{{/data}}",
+														{
+															"data":json["papeis"]
+														}
+												);
+											}
 										}
-								);
-							}
+								)
+						);
+						i3GEOadmin.operacoes.formAdicionaOperacao = html;
+						$.material.init();
+					}
+			)
+			.fail(function(data){
+				i3GEOadmin.operacoes.ondeListaOperacoes.html("");
+				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+			});
+		},
+		adicionaOperacaoDialogo: function(){
+			i3GEOadmin.core.abreModalGeral(i3GEOadmin.operacoes.formAdicionaOperacao);
+		},
+//		os parametros sao obtidos do formulario aberto do modal
+		adicionaOperacao: function(){
+			var parametros = $("#form-modal form").serialize();
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=adicionarOperacao",
+					parametros
+			)
+			.done(
+					function(data, status){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.operacoes.ondeListaOperacoes);
+						i3GEOadmin.operacoes.pegaOperacoes();
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
+		excluirOperacaoDialogo: function(id_operacao){
+			var hash = {
+					"mensagem": i3GEOadmin.operacoes.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.operacoes.excluirOperacao('"+id_operacao+"')",
+					"botao1": i3GEOadmin.operacoes.dicionario.sim,
+					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"botao2": i3GEOadmin.operacoes.dicionario.nao
+			};
+			i3GEOadmin.core.abreModalConfirma(hash);
+		},
+		excluirOperacao: function(id_operacao){
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=excluirOperacao",
+					"id_operacao="+id_operacao
+			)
+			.done(
+					function(data, status){
+						i3GEOadmin.core.modalAguarde(false);
+						var json = jQuery.parseJSON(data)*1;
+						$("#form-" + json).remove();
+						$("#link-" + json).remove();
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
+		salvarOperacaoDialogo: function(id_operacao){
+			var hash = {
+					"mensagem": i3GEOadmin.operacoes.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.operacoes.salvarOperacao('"+id_operacao+"')",
+					"botao1": i3GEOadmin.operacoes.dicionario.sim,
+					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"botao2": i3GEOadmin.operacoes.dicionario.nao
+			};
+			i3GEOadmin.core.abreModalConfirma(hash);
+		},
+		salvarOperacao: function(id_operacao){
+			var parametros = $("#form-" + id_operacao + " form").serialize();
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=alterarOperacao",
+					"id_operacao="+ id_operacao +"&"+parametros
+			)
+			.done(
+					function(data, status){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.operacoes.ondeListaOperacoes);
+						i3GEOadmin.operacoes.pegaOperacoes();
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
+		pegaFiltro: function(){
+			return $i("filtro");
+		},
+		valorFiltro: function(){
+			return i3GEOadmin.operacoes.pegaFiltro().value;
+		},
+		defineFiltro: function(valor){
+			i3GEOadmin.operacoes.pegaFiltro().value = valor;
+		},
+		filtra: function(obj){
+			$("#corpo .panel").each(
+					function(i,el){
+						if(obj.value == ""){
+							$(el).show();
 						}
-				);
-				formAdicionaOperacao = html;
-				$.material.init();
+						else {
+							$(el).hide();
+						}
+					}
+			);
+			if(obj.value != ""){
+				$("#"+obj.value).show();
 			}
-	)
-	.fail(function(data){
-		ondeListaOperacoes.html("");
-		mostraErro(data.status + " " +data.statusText);
-	});
-}
-function adicionaOperacaoDialogo(){
-	abreModalGeral(formAdicionaOperacao);
-}
-
-//os parametros sao obtidos do formulario aberto do modal
-
-function adicionaOperacao(){
-	var parametros = $("#form-modal form").serialize();
-	fechaModalGeral();
-	modalAguarde(true);
-	$.post(
-			"exec.php?funcao=adicionarOperacao",
-			parametros
-	)
-	.done(
-			function(data, status){
-				modalAguarde(false);
-				iconeAguarde(ondeListaOperacoes);
-				pegaOperacoes();
-			}
-	)
-	.fail(
-			function(data){
-				modalAguarde(false);
-				mostraErro(data.status + " " +data.statusText);
-			}
-	);
-}
-function excluirOperacaoDialogo(id_operacao){
-	var hash = {
-			"mensagem": $trad("confirma",i3GEOadmin.core.dicionario),
-			"onBotao1": "excluirOperacao('"+id_operacao+"')",
-			"botao1": $trad("sim",i3GEOadmin.core.dicionario),
-			"onBotao2": "fechaModalConfirma();",
-			"botao2": $trad("nao",i3GEOadmin.core.dicionario)
-	};
-	abreModalConfirma(hash);
-}
-function excluirOperacao(id_operacao){
-	modalAguarde(true);
-	$.post(
-			"exec.php?funcao=excluirOperacao",
-			"id_operacao="+id_operacao
-	)
-	.done(
-			function(data, status){
-				modalAguarde(false);
-				var json = jQuery.parseJSON(data)*1;
-				$("#form-" + json).remove();
-				$("#link-" + json).remove();
-			}
-	)
-	.fail(
-			function(data){
-				modalAguarde(false);
-				mostraErro(data.status + " " +data.statusText);
-			}
-	);
-}
-function salvarOperacaoDialogo(id_operacao){
-	var hash = {
-			"mensagem": $trad("confirma",i3GEOadmin.core.dicionario),
-			"onBotao1": "salvarOperacao('"+id_operacao+"')",
-			"botao1": $trad("sim",i3GEOadmin.core.dicionario),
-			"onBotao2": "fechaModalConfirma();",
-			"botao2": $trad("nao",i3GEOadmin.core.dicionario)
-	};
-	abreModalConfirma(hash);
-}
-function salvarOperacao(id_operacao){
-	var parametros = $("#form-" + id_operacao + " form").serialize();
-	fechaModalGeral();
-	modalAguarde(true);
-	$.post(
-			"exec.php?funcao=alterarOperacao",
-			"id_operacao="+ id_operacao +"&"+parametros
-	)
-	.done(
-			function(data, status){
-				modalAguarde(false);
-				iconeAguarde(ondeListaOperacoes);
-				pegaOperacoes();
-			}
-	)
-	.fail(
-			function(data){
-				modalAguarde(false);
-				mostraErro(data.status + " " +data.statusText);
-			}
-	);
-}
-function pegaFiltro(){
-	return $i("filtro");
-}
-function valorFiltro(){
-	return pegaFiltro().value;
-}
-function defineFiltro(valor){
-	pegaFiltro().value = valor;
-}
-function filtra(obj){
-
-	$("#corpo .panel").each(
-			function(i,el){
-				if(obj.value == ""){
-					$(el).show();
-				}
-				else {
-					$(el).hide();
-				}
-			}
-	);
-	if(obj.value != ""){
-		$("#"+obj.value).show();
-	}
-}
+		}
+};

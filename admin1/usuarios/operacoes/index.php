@@ -27,11 +27,11 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="filtra(this)" id="filtro" class="form-control input-lg">
+					<select onchange="i3GEOadmin.operacoes.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
-					<a onclick="adicionaOperacaoDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="i3GEOadmin.operacoes.adicionaOperacaoDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda-->
@@ -96,8 +96,8 @@ include "../../head.php";
 		</label>
 	</div>
 </script>
-<script type="text/javascript" src="../../dicionario/operacoes.js"></script>
 <script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="../../dicionario/operacoes.js"></script>
 <script>
 	$(document).ready(function(){
 		//vem de admin1/index.js
@@ -110,19 +110,30 @@ include "../../head.php";
 		});
 		//traducao
 		var t = $("#titulo");
+		//
 		//complementa dicionario
+		//
 		i3GEOadmin.operacoes.dicionario.adicionar = i3GEOadmin.core.dicionario.adicionar;
 		i3GEOadmin.operacoes.dicionario.filtro = i3GEOadmin.core.dicionario.filtro;
+		i3GEOadmin.operacoes.dicionario.excluir = i3GEOadmin.core.dicionario.excluir;
+		i3GEOadmin.operacoes.dicionario.salvar = i3GEOadmin.core.dicionario.salva;
+		i3GEOadmin.operacoes.dicionario.sim = i3GEOadmin.core.dicionario.sim;
+		i3GEOadmin.operacoes.dicionario.nao = i3GEOadmin.core.dicionario.nao;
+		i3GEOadmin.operacoes.dicionario.confirma = i3GEOadmin.core.dicionario.confirma;
+
+		i3GEOadmin.core.dicionario = null;
+
+		i3GEOadmin.operacoes.dicionario = i3GEO.idioma.objetoIdioma(i3GEOadmin.operacoes.dicionario);
 		t.html(
 			Mustache.to_html(
 				t.html(),
-				i3GEO.idioma.objetoIdioma(i3GEOadmin.operacoes.dicionario)
+				i3GEOadmin.operacoes.dicionario
 			)
 		);
 		$.material.init();
 		var inicia = function() {
 			$(".hidden").removeClass('hidden');
-			init($("#corpo"));
+			i3GEOadmin.operacoes.init($("#corpo"));
 		};
 		i3GEO.login.verificaOperacao("admin/html/operacoes",i3GEO.configura.locaplic, inicia, "sessao");
 	});

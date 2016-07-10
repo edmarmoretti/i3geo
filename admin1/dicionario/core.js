@@ -1,5 +1,4 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
-i3GEOadmin.core = {};
 i3GEOadmin.core.dicionario = {
 	'inicio' : [ {
 		pt : "In&iacute;cio",

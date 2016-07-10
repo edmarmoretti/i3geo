@@ -1,5 +1,4 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
-i3GEOadmin.operacoes = {};
 i3GEOadmin.operacoes.dicionario = {
 	'operacoes' : [ {
 		pt : "Opera&ccedil;&otilde;es e quem pode execut&aacute;-las (pap&eacute;is)",

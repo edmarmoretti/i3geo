@@ -1,5 +1,4 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
-i3GEOadmin.usuarios = {};
 i3GEOadmin.usuarios.dicionario = {
 	'usuarios' : [ {
 		pt : "Administra&ccedil;&atilde;o do i3geo - Usu&aacute;rios e pap&eacute;is operacionais",
