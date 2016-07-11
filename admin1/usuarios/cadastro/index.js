@@ -108,7 +108,8 @@ Obt&eacute;m a lista de usuarios
 								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
 								{"data":json["usuarios"]}
 						);
-						$("#filtro").html("<option value='' >---</option>" + html);
+						$("#filtro").html("<option value='' >Todos</option>" + html);
+						$("#filtro").combobox();
 						if(filtro != ""){
 							i3GEOadmin.usuarios.defineFiltro(filtro);
 							i3GEOadmin.usuarios.filtra(i3GEOadmin.usuarios.pegaFiltro());

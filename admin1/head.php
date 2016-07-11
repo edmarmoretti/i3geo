@@ -13,7 +13,7 @@ echo "
     <meta name='author' content='i3Geo'>
     <link rel='icon' href='" . ONDEI3GEO . "/favicon.ico'>
     <title>i3Geo</title>
-
+	<link rel='stylesheet' type='text/css' href='" . ONDEI3GEO . "/pacotes/jquery/jquery-ui/jquery-ui.min.css'>
     <!-- Material Design fonts -->
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons'>
@@ -38,6 +38,7 @@ echo "
       <script src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js'></script>
     <![endif]-->
      <script src='" . ONDEI3GEO . "/pacotes/jquery/dist/jquery.min.js'></script>
+     <script src='" . ONDEI3GEO . "/pacotes/jquery/jquery-ui/jquery-ui.min.js'></script>
     <script src='" . ONDEI3GEO . "/pacotes/bootstrap/js/bootstrap.min.js'></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src='" . ONDEI3GEO . "/pacotes/bootstrap/js/ie10-viewport-bug-workaround.js'></script>
@@ -173,6 +174,15 @@ body {
 	color: green;
 	font-weight: 700;
 	padding-left: 18px;
+}
+
+.ui-menu {
+	overflow-y: auto;
+	max-height: 100px;
+}
+
+.ui-menu-item {
+	width: 95%;
 }
 </style>
 </head>

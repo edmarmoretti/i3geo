@@ -97,7 +97,8 @@ Obt&eacute;m a lista de operacoes
 								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
 								{"data":json["operacoes"]}
 						);
-						$("#filtro").html("<option value='' >---</option>" + html);
+						$("#filtro").html("<option value='' >Todos</option>" + html);
+						$("#filtro").combobox();
 						if(filtro != ""){
 							i3GEOadmin.operacoes.defineFiltro(filtro);
 							i3GEOadmin.operacoes.filtra(pegaFiltro());

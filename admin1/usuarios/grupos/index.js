@@ -91,7 +91,8 @@ Obt&eacute;m a lista de grupos
 								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
 								{"data":json["grupos"]}
 						);
-						$("#filtro").html("<option value='' >---</option>" + html);
+						$("#filtro").html("<option value='' >Todos</option>" + html);
+						$("#filtro").combobox();
 						if(filtro != ""){
 							i3GEOadmin.gruposusuarios.defineFiltro(filtro);
 							i3GEOadmin.gruposusuarios.filtra(i3GEOadmin.gruposusuarios.pegaFiltro());
