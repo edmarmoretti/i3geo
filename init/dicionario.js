@@ -102,8 +102,8 @@ g_traducao_init =
 		"8a" : [
 			{
 				pt : "Com o m&oacute;dulo METAESTAT, um sistema de cadastramento de vari&aacute;veis estat&iacute;sticas, construa cartogramas com fun&ccedil;&otilde;es de agrega&ccedil;&atilde;o geogr&aacute;fica, temporal  e diferentes classifica&ccedil;&otilde;es.",
-				en : "",
-				es : ""
+				en : "METAESTAT module is a system of recording statistics variables, that allows you to build cartograms with temporal and geographical aggregation functions, and various classifications.",
+				es : "Con el m&oacute;dulo METAESTAT, un sistema de registro de variables estad&iacute;sticas, construya cartogramas con funciones de agregaci&oacute;n geogr&aacute;fica, temporal y clasificaciones diversas."
 			}
 		],
 		9 : [
@@ -116,8 +116,8 @@ g_traducao_init =
 		"9a" : [
 			{
 				pt : "Utilize esse editor vetorial para criar ou modificar as localidades ou regi&otilde;es geogr&aacute;ficas utilizadas nos cartogramas estat&iacute;sticos.",
-				en : "",
-				es : ""
+				en : "Use this vector editor to create or modify geographical regions or places used by statistics cartograms.",
+				es : "Utilice este editor vectorial para crear o modificar las localidades o regiones geogr&aacute;ficas empleadas en los cartogramas estad&iacute;sticos."
 			}
 		],
 		10 : [
@@ -130,8 +130,8 @@ g_traducao_init =
 		"10a" : [
 			{
 				pt : "Veja quais dados s&atilde;o p&uacute;blicos e podem ser obtidos por meio de download em diferentes formatos.",
-				en : "",
-				es : ""
+				en : "Look at open data that can be downloaded in various formats.",
+				es : "Vea cuales datos son p&uacute;blicos y pueden ser obtenidos por medio de descargas en formatos diferentes."
 			}
 		],
 		11 : [
