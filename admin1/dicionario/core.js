@@ -355,13 +355,13 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'ajuda' : [ {
+		pt : "Ajuda",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'tipo' : [ {
+		pt : "Tipo",
 		en : "",
 		es : ""
 	} ],

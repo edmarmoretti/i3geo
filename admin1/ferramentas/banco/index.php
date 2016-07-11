@@ -66,7 +66,7 @@ include "../../head.php";
 				</div>
 			</div>
 		</div>
-	</div>
+
 	<script>
 	$(document).ready(function(){
 		//vem de admin1/index.js

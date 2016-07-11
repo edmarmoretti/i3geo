@@ -131,7 +131,7 @@ i3GEOadmin.umedida = {
 				{ label: "Cancela", value: "CANCEL", checked: false }
 			]);
 			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);
-			YAHOO.umedida.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:true,close:false,width:"400px", height:"360px",overflow:"auto", visible:false,constraintoviewport:true } );
+			YAHOO.umedida.panelEditor2 = new YAHOO.widget.Panel("janela_editor2", { modal:true,fixedcenter:"contained",close:false,width:"400px", height:"360px",overflow:"auto", visible:false,constraintoviewport:true } );
 			YAHOO.umedida.panelEditor2.render();
 		}
 		YAHOO.umedida.panelEditor2.show();

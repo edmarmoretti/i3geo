@@ -2,17 +2,12 @@
 //i3GEOadmin.webservices = {};
 i3GEOadmin.webservices.dicionario = {
 	'webservices' : [ {
-		pt : "Administra&ccedil;&atilde;o do i3geo - web Services",
-		en : "",
-		es : ""
-	} ],
-    'ajuda' : [ {
-		pt : "Ajuda",
+		pt : "Cadastro de Webservices",
 		en : "",
 		es : ""
 	} ],
     'txtAjuda' : [ {
-		pt : "Este programa permite editar o cadastro de Web Services.<br><br> O i3Geo acessa Web Services e servi&ccedil;os para obten&ccedil;&atilde;o de dados nos padr&otilde;es WMS, RSS, GEORSS e endere&ccedil;os de sistemas de download de dados. Todos os endere&ccedil;os s&atilde;o cadastrados e organizados por tipos. A lista de WMS e GEORSS &eacute; utilizada na guia de adi&ccedil;&atilde;o de temas j&aacute; os Web Services convencionais, s&atilde;o utilizados no aplicativo WSCLIENTE. Pode-se ainda cadastrar endere&ccedil;os para s&iacute;tios na	internet que possibilitam o download de dados, esse cadastro &eacute; utilizado no aplicativo DATADOWNLOAD.<br> <br>A lista de Web Services &eacute; baseada no banco admin.db.<br><br> A lista de IPs dos usu&aacute;rios que podem administrar o i3geo &eacute; definida no arquivo i3geo/ms_configura.php",
+		pt : "O i3Geo acessa Web Services e servi&ccedil;os para obten&ccedil;&atilde;o de dados em diferentes formatos, organizados por tipo. O cadastro &eacute; utilizado no cat&aacute;logo de temas.",
 		en : "",
 		es : ""
 	} ],
@@ -26,26 +21,6 @@ i3GEOadmin.webservices.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'tipo' : [ {
-		pt : "tipo",
-		en : "",
-		es : ""
-	} ],
-    'msgBuscaEndereco' : [ {
-		pt : "buscando endere&ccedil;os...",
-		en : "",
-		es : ""
-	} ],
-    'nome' : [ {
-		pt : "Nome:",
-		en : "",
-		es : ""
-	} ],
-    'descricao' : [ {
-		pt : "Descri&ccedil;&atilde;o:",
-		en : "",
-		es : ""
-	} ],
     'autor' : [ {
 		pt : "Autor:",
 		en : "",
@@ -53,11 +28,6 @@ i3GEOadmin.webservices.dicionario = {
 	} ],
     'endereco' : [ {
 		pt : "Endere&ccedil;o:",
-		en : "",
-		es : ""
-	} ],
-    'tipo1' : [ {
-		pt : "Tipo:",
 		en : "",
 		es : ""
 	} ],
