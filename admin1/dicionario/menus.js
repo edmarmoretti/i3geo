@@ -1,8 +1,7 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
-i3GEOadmin.listamenu = {};
-i3GEOadmin.listamenu.dicionario = {
-	'menus' : [ {
-		pt : "Administra&ccedil;&atilde;o do i3geo - Menus",
+i3GEOadmin.menus.dicionario = {
+	'txtTitulo' : [ {
+		pt : "Menus utilizados no cat&aacute;logo",
 		en : "",
 		es : ""
 	} ],
@@ -22,42 +21,47 @@ i3GEOadmin.listamenu.dicionario = {
 		es : ""
 	} ],
     'nomeMenu' : [ {
-		pt : "nome padr&atilde;o do menu",
+		pt : "Nome padr&atilde;o do menu",
 		en : "",
 		es : ""
 	} ],
     'nomeIn' : [ {
-		pt : "nome em ingl&ecirc;s (opcional)",
+		pt : "Nome em ingl&ecirc;s (opcional)",
 		en : "",
 		es : ""
 	} ],
     'nomeEs' : [ {
-		pt : "nome em espanhol (opcional)",
+		pt : "Nome em espanhol (opcional)",
 		en : "",
 		es : ""
 	} ],
     'nomeIt' : [ {
-		pt : "nome em italiano (opcional)",
+		pt : "Nome em italiano (opcional)",
 		en : "",
 		es : ""
 	} ],
     'publicado' : [ {
-		pt : "publicado para todos verem?",
+		pt : "Publicado para todos verem?",
 		en : "",
 		es : ""
 	} ],
     'perfil' : [ {
-		pt : "perfis",
+		pt : "Perfis",
+		en : "",
+		es : ""
+	} ],
+    'perfilAjuda' : [ {
+		pt : "lista de perfis, separados por espa&ccedil;o, que podem visualizar esse menu",
 		en : "",
 		es : ""
 	} ],
     'iniciaAberto' : [ {
-		pt : "inicia aberto?",
+		pt : "Inicia aberto?",
 		en : "",
 		es : ""
 	} ],
     'descricao' : [ {
-		pt : "descri&ccedil;&atilde;o",
+		pt : "Descri&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
