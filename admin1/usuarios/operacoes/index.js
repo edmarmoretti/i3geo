@@ -61,6 +61,7 @@ Obt&eacute;m a lista de operacoes
 						var html = Mustache.to_html(
 								"{{#data}}" + templateOperacoes + "{{/data}}",
 								$.extend(
+										{},
 										i3GEOadmin.operacoes.dicionario,
 										{
 											"data":json["operacoes"],
@@ -104,30 +105,34 @@ Obt&eacute;m a lista de operacoes
 							i3GEOadmin.operacoes.filtra(pegaFiltro());
 						}
 						//monta um template para o modal de inclusao de nova operacao
-						html = Mustache.to_html(
-								$("#templateOperacoes").html(),
-								$.extend(
-										i3GEOadmin.operacoes.dicionario,
-										{
-											"labelCodigo": $trad("codigo",i3GEOadmin.operacoes.dicionario),
-											"labelDescricao": $trad("descricao",i3GEOadmin.operacoes.dicionario),
-											"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-											"onSalvar": "i3GEOadmin.operacoes.adicionaOperacao",//funcao
-											"codigo": "",
-											"id_operacao": "modal",
-											"descricao": "",
-											"inputPapeis": function(){
-												return Mustache.to_html(
-														"{{#data}}" + $("#templateInputPapeis").html() + "{{/data}}",
-														{
-															"data":json["papeis"]
-														}
-												);
+						if(i3GEOadmin.operacoes.formAdicionaOperacao == ""){
+							html = Mustache.to_html(
+									$("#templateOperacoes").html(),
+									$.extend(
+											{},
+											i3GEOadmin.operacoes.dicionario,
+											{
+												"labelCodigo": i3GEOadmin.operacoes.dicionario.codigo,
+												"labelDescricao": i3GEOadmin.operacoes.dicionario.descricao,
+												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
+												"onSalvar": "i3GEOadmin.operacoes.adicionaOperacao",//funcao
+												"excluir": i3GEOadmin.operacoes.dicionario.cancela,
+												"codigo": "",
+												"id_operacao": "modal",
+												"descricao": "",
+												"inputPapeis": function(){
+													return Mustache.to_html(
+															"{{#data}}" + $("#templateInputPapeis").html() + "{{/data}}",
+															{
+																"data":json["papeis"]
+															}
+													);
+												}
 											}
-										}
-								)
-						);
-						i3GEOadmin.operacoes.formAdicionaOperacao = html;
+									)
+							);
+							i3GEOadmin.operacoes.formAdicionaOperacao = html;
+						}
 						$.material.init();
 					}
 			)

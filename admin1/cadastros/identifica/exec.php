@@ -29,12 +29,12 @@ error_reporting ( 0 );
 
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
-		"ADICIONARWS",
-		"ALTERARWS",
-		"EXCLUIRWS"
+		"ADICIONARID",
+		"ALTERARID",
+		"EXCLUIRID"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/webservices" ) == false) {
+	if (verificaOperacaoSessao ( "admin/html/identifica" ) == false) {
 		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 		exit ();
 	}
@@ -42,21 +42,21 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
-	case "ADICIONARWS" :
-		$novo = adicionarWs( $autor_ws, $desc_ws, $link_ws, $nome_ws, $tipo_ws,$dbhw );
+	case "ADICIONARID" :
+		$novo = adicionarId( $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw );
 		if ($novo == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 		exit ();
 		break;
-	case "ALTERARWS" :
-		$novo = alterarWs ( $id_ws,$autor_ws, $desc_ws, $link_ws, $nome_ws, $tipo_ws,$dbhw );
+	case "ALTERARID" :
+		$novo = alterarId ( $id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw );
 		if ($novo == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		$dados = pegaDados ( "SELECT id_ws,autor_ws,desc_ws,link_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by nome_ws", $dbh, false );
+		$dados = pegaDados ( "SELECT id_i, publicado_i, abrir_i, nome_i, target_i from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = $id_i order by nome_i", $dbh, false );
 		if ($dados == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -64,9 +64,9 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
-	case "PEGAWS" :
-		$ws = pegaDados ( "SELECT id_ws,autor_ws,desc_ws,link_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by nome_ws", $dbh, false );
-		if ($ws == false) {
+	case "PEGAID" :
+		$d = pegaDados ( "SELECT id_i, publicado_i, abrir_i, nome_i, target_i from ".$esquemaadmin."i3geoadmin_identifica order by nome_i", $dbh, false );
+		if ($d == false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -74,107 +74,63 @@ switch ($funcao) {
 		}
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $ws );
+		retornaJSON ( $d );
 		break;
-	case "EXCLUIRWS" :
-		$retorna = excluirWs ( $id_ws, $dbhw );
+	case "EXCLUIRID" :
+		$retorna = excluirId ( $id_i, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		retornaJSON ( $id_ws );
+		retornaJSON ( $id_i );
 		exit ();
 		break;
 }
 cpjson ( $retorno );
 
 // $papeis deve ser um array
-function adicionarWs($autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
+function adicionarId($publicado_i, $abrir_i, $nome_i, $target_i,$dbhw) {
 	global $esquemaadmin;
 	try {
 		$dataCol = array(
-			"desc_ws" => '',
-			"nome_ws" => '',
-			"link_ws" => '',
-			"autor_ws" => '',
-			"tipo_ws" => '',
-			"nacessos" => 0,
-			"nacessosok" => 0
+			"publicado_i" => '',
+			"nome_i" => '',
+			"abrir_i" => '',
+			"target_i" => ''
 		);
-		$id_ws = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_ws",$dataCol,"nome_ws","id_ws");
-		$retorna = alterarWs ( $id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw );
-
+		$id_i = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_identifica",$dataCol,"nome_i","id_i");
+		$retorna = alterarId($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw);
 		return $retorna;
 	} catch ( PDOException $e ) {
 		return false;
 	}
 }
 // $papeis deve ser um array
-function alterarWs($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
+function alterarId($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
 	global $esquemaadmin;
 	if($convUTF){
-		$nome_ws = utf8_encode($nome_ws);
-		$desc_ws = utf8_encode($desc_ws);
-		$autor_ws = utf8_encode($autor_ws);
+		$nome_i = utf8_encode($nome_i);
 	}
 	$dataCol = array(
-		"desc_ws" => $desc_ws,
-		"nome_ws" => $nome_ws,
-		"link_ws" => $link_ws,
-		"autor_ws" => $autor_ws,
-		"tipo_ws" => $tipo_ws
+		"publicado_i" => $publicado_i,
+		"nome_i" => $nome_i,
+		"abrir_i" => $abrir_i,
+		"target_i" => $target_i
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_ws", $dataCol, "WHERE id_ws = $id_ws" );
+	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_identifica", $dataCol, "WHERE id_i = $id_i" );
 	if ($resultado == false) {
 		return false;
 	}
-	return $id_ws;
+	return $id_i;
 }
-function excluirWs($id_ws, $dbhw) {
+function excluirId($id_i, $dbhw) {
 	global $esquemaadmin;
-	$resultado = exclui ( $esquemaadmin . "i3geoadmin_ws", "id_ws", $id_ws, $dbhw, false );
+	$resultado = exclui ( $esquemaadmin . "i3geoadmin_identifica", "id_i", $id_i, $dbhw, false );
 	if ($resultado == false) {
 		return false;
 	}
 	return $resultado;
-}
-//usado em wmswfs.php
-function adicionaAcesso($id_ws,$sucesso){
-	global $esquemaadmin;
-	try	{
-		if($id_ws == ""){
-			return;
-		}
-		include("conexao.php");
-		$dados = pegaDados("select * from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id_ws");
-		if(count($dados) == 0){
-			return;
-		};
-		if($dados[0]["nacessos"] == ""){
-			$dados[0]["nacessos"] = 0;
-		}
-		$acessos = $dados[0]["nacessos"] + 1;
-
-		if($sucesso)
-			$ok = $dados[0]["nacessosok"] + 1;
-			else
-				$ok = $dados[0]["nacessosok"];
-
-				if($ok == ""){
-					$ok = 0;
-				}
-				$dataCol = array(
-						"nacessos" => $acessos,
-						"nacessosok" => $ok
-				);
-				i3GeoAdminUpdate($dbhw,"i3geoadmin_ws",$dataCol,"WHERE id_ws = $id_ws");
-				$dbhw = null;
-				$dbh = null;
-	}
-	catch (PDOException $e){
-		return "Error!: ";
-	}
 }
 ?>

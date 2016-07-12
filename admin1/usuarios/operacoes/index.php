@@ -120,6 +120,7 @@ include "../../head.php";
 		i3GEOadmin.operacoes.dicionario.sim = i3GEOadmin.core.dicionario.sim;
 		i3GEOadmin.operacoes.dicionario.nao = i3GEOadmin.core.dicionario.nao;
 		i3GEOadmin.operacoes.dicionario.confirma = i3GEOadmin.core.dicionario.confirma;
+		i3GEOadmin.operacoes.dicionario.cancela = i3GEOadmin.core.dicionario.cancela;
 
 		i3GEOadmin.core.dicionario = null;
 

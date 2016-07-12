@@ -365,8 +365,8 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'publicado' : [ {
+		pt : "Publicado",
 		en : "",
 		es : ""
 	} ],

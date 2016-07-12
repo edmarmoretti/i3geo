@@ -26,7 +26,7 @@ i3GEOadmin.gruposusuarios = {
 		//variavel global indicando o elemento que recebera a lista de usuarios
 		ondeListaGrupos: "",
 		//conteudo html do formulario de adicao de operacao
-		formAdicionaUsuario: "",
+		formAdicionaGrupo: "",
 		init: function(onde){
 			i3GEOadmin.gruposusuarios.ondeListaGrupos = onde;
 			i3GEOadmin.gruposusuarios.pegaGrupos();
@@ -55,6 +55,7 @@ Obt&eacute;m a lista de grupos
 						var html = Mustache.to_html(
 								"{{#data}}" + templateGrupos + "{{/data}}",
 								$.extend(
+										{},
 										i3GEOadmin.gruposusuarios.dicionario,
 										{
 											"data": json["grupos"],
@@ -66,7 +67,6 @@ Obt&eacute;m a lista de grupos
 												var p = this.usuarios;
 												$(json["usuarios"]).each(
 														function(i,el){
-															console.info(p)
 															if(p && el.id_usuario && p[el.id_usuario]){
 																json["usuarios"][i]["checked"] = "checked";
 															}
@@ -98,29 +98,32 @@ Obt&eacute;m a lista de grupos
 							i3GEOadmin.gruposusuarios.filtra(i3GEOadmin.gruposusuarios.pegaFiltro());
 						}
 						//monta um template para o modal de inclusao de novo usuario
-						html = Mustache.to_html(
-								$("#templateGrupos").html(),
-								$.extend(
-										i3GEOadmin.gruposusuarios.dicionario,
-										{
-											"id_grupo": "modal",
-											"excluir": i3GEOadmin.gruposusuarios.dicionario.cancelar,
-											"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-											"onSalvar": "i3GEOadmin.gruposusuarios.adicionaGrupo",//funcao
-											"nome": "",
-											"descricao": "",
-											"inputUsuarios": function(){
-												return Mustache.to_html(
-														"{{#data}}" + templateUsuarios + "{{/data}}",
-														{
-															"data":json["usuarios"]
-														}
-												);
+						if(i3GEOadmin.gruposusuarios.formAdicionaGrupo == ""){
+							html = Mustache.to_html(
+									$("#templateGrupos").html(),
+									$.extend(
+											{},
+											i3GEOadmin.gruposusuarios.dicionario,
+											{
+												"id_grupo": "modal",
+												"excluir": i3GEOadmin.gruposusuarios.dicionario.cancelar,
+												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
+												"onSalvar": "i3GEOadmin.gruposusuarios.adicionaGrupo",//funcao
+												"nome": "",
+												"descricao": "",
+												"inputUsuarios": function(){
+													return Mustache.to_html(
+															"{{#data}}" + templateUsuarios + "{{/data}}",
+															{
+																"data":json["usuarios"]
+															}
+													);
+												}
 											}
-										}
-								)
-						);
-						i3GEOadmin.gruposusuarios.formAdicionaGrupo = html;
+									)
+							);
+							i3GEOadmin.gruposusuarios.formAdicionaGrupo = html;
+						}
 						$.material.init();
 					}
 			)

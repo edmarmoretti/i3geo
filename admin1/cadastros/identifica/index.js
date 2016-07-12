@@ -22,55 +22,70 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
  */
-i3GEOadmin.webservices = {
-		//variavel global indicando o elemento que recebera a lista de Webservices
-		ondeListaWebservices: "",
+i3GEOadmin.identifica = {
+		//variavel global indicando o elemento que recebera a lista de Identifica
+		ondeListaIdentifica: "",
 		//conteudo html do formulario de adicao de operacao
-		formAdicionaWebservices: "",
+		formAdicionaIdentifica: "",
 		init: function(onde){
-			i3GEOadmin.webservices.ondeListaWebservices = onde;
-			i3GEOadmin.webservices.pegaWebservices();
+			i3GEOadmin.identifica.ondeListaIdentifica = onde;
+			i3GEOadmin.identifica.pegaIdentifica();
 		},
 		/*
-Function: pegaWebservices
+Function: pegaIdentifica
 
-Obt&eacute;m a lista de Webservices
+Obt&eacute;m a lista de Identifica
 		 */
-		pegaWebservices: function(){
-			i3GEOadmin.core.iconeAguarde(i3GEOadmin.webservices.ondeListaWebservices);
+		pegaIdentifica: function(){
+			i3GEOadmin.core.iconeAguarde(i3GEOadmin.identifica.ondeListaIdentifica);
 			$.post(
-					"exec.php?funcao=pegaWS"
+					"exec.php?funcao=pegaId"
 			)
 			.done(
 					function(data, status){
 						//valor do filtro atual
-						var filtro = i3GEOadmin.webservices.valorFiltro();
+						var filtro = i3GEOadmin.identifica.valorFiltro();
 						//objeto json com os dados viondos do banco
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
-						var templateWebservices = $("#templateWebservices").html();
-						//lista todas as Webservices
+						var templateIdentifica = $("#templateIdentifica").html();
+						//lista todas as Identifica
 						var html = Mustache.to_html(
-								"{{#data}}" + templateWebservices + "{{/data}}",
+								"{{#data}}" + templateIdentifica + "{{/data}}",
 								$.extend(
 										{},
-										i3GEOadmin.webservices.dicionario,
+										i3GEOadmin.identifica.dicionario,
 										{
 											"data": json,
-											"onExcluir": "i3GEOadmin.webservices.excluirWebserviceDialogo",//funcao
-											"onSalvar": "i3GEOadmin.webservices.salvarWebserviceDialogo",//funcao
-											"opcoesTipo": function(){
+											"excluir": i3GEOadmin.identifica.dicionario.excluir,
+											"onExcluir": "i3GEOadmin.identifica.excluirIdentificaDialogo",//funcao
+											"onSalvar": "i3GEOadmin.identifica.salvarIdentificaDialogo",//funcao
+											"opcoesPublicado": function(){
 												var hash = {};
-												hash[this.tipo_ws + "-sel"] = "selected";
+												hash[this.publicado_i + "-sel"] = "selected";
+												//traducao
+												hash["sim"] = i3GEOadmin.identifica.dicionario.sim;
+												hash["nao"] = i3GEOadmin.identifica.dicionario.nao;
 												return Mustache.to_html(
-														$("#templateOpcoesTipo").html(),
+														$("#templateOpcoesPublicado").html(),
+														hash
+												);
+											},
+											"opcoesTarget": function(){
+												var hash = {};
+												hash[this.target_i + "-sel"] = "selected";
+												//traducao
+												hash["externo"] = i3GEOadmin.identifica.dicionario.externo;
+												hash["mapa"] = i3GEOadmin.identifica.dicionario.mapa;
+												return Mustache.to_html(
+														$("#templateOpcoesTarget").html(),
 														hash
 												);
 											}
 										}
 								)
 						);
-						i3GEOadmin.webservices.ondeListaWebservices.html(html);
+						i3GEOadmin.identifica.ondeListaIdentifica.html(html);
 						//filtro
 						html = Mustache.to_html(
 								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
@@ -79,52 +94,63 @@ Obt&eacute;m a lista de Webservices
 						$("#filtro").html("<option value='' >Todos</option>" + html);
 						$("#filtro").combobox();
 						if(filtro != ""){
-							i3GEOadmin.webservices.defineFiltro(filtro);
-							i3GEOadmin.webservices.filtra(i3GEOadmin.webservices.pegaFiltro());
+							i3GEOadmin.identifica.defineFiltro(filtro);
+							i3GEOadmin.identifica.filtra(i3GEOadmin.identifica.pegaFiltro());
 						}
 						//monta um template para o modal de inclusao de novo usuario
-						if(i3GEOadmin.webservices.formAdicionaWebservices == ""){
+						if(i3GEOadmin.identifica.formAdicionaIdentifica == ""){
 							html = Mustache.to_html(
-									$("#templateWebservices").html(),
+									$("#templateIdentifica").html(),
 									$.extend(
 											{},
-											i3GEOadmin.webservices.dicionario,
+											i3GEOadmin.identifica.dicionario,
 											{
-												"id_ws": "modal",
-												"excluir": i3GEOadmin.webservices.dicionario.cancelar,
+												"id_i": "modal",
+												"excluir": i3GEOadmin.identifica.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-												"onSalvar": "i3GEOadmin.webservices.adicionaWebservice",//funcao
-												"opcoesTipo": $("#templateOpcoesTipo").html()
+												"onSalvar": "i3GEOadmin.identifica.adicionaIdentifica",//funcao
+												"opcoesPublicado": function(){
+													return Mustache.to_html(
+															$("#templateOpcoesPublicado").html(),
+															i3GEOadmin.identifica.dicionario
+													);
+												},
+												"opcoesTarget": function(){
+													return Mustache.to_html(
+															$("#templateOpcoesTarget").html(),
+															i3GEOadmin.identifica.dicionario
+													);
+												}
 											}
 									)
 							);
-							i3GEOadmin.webservices.formAdicionaWebservices = html;
+							i3GEOadmin.identifica.formAdicionaIdentifica = html;
 						}
 						$.material.init();
 					}
 			)
 			.fail(function(data){
-				i3GEOadmin.webservices.ondeListaWebservices.html("");
+				i3GEOadmin.identifica.ondeListaIdentifica.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
 		},
-		adicionaWebserviceDialogo: function(){
-			i3GEOadmin.core.abreModalGeral(i3GEOadmin.webservices.formAdicionaWebservices);
+		adicionaIdentificaDialogo: function(){
+			i3GEOadmin.core.abreModalGeral(i3GEOadmin.identifica.formAdicionaIdentifica);
 		},
 //		os parametros sao obtidos do formulario aberto do modal
-		adicionaWebservice: function(){
+		adicionaIdentifica: function(){
 			var parametros = $("#form-modal form").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
-					"exec.php?funcao=adicionarWs",
+					"exec.php?funcao=adicionarId",
 					parametros
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.webservices.ondeListaWebservices);
-						i3GEOadmin.webservices.pegaWebservices();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.identifica.ondeListaIdentifica);
+						i3GEOadmin.identifica.pegaIdentifica();
 					}
 			)
 			.fail(
@@ -134,21 +160,21 @@ Obt&eacute;m a lista de Webservices
 					}
 			);
 		},
-		excluirWebserviceDialogo: function(id_ws){
+		excluirIdentificaDialogo: function(id_i){
 			var hash = {
-					"mensagem": i3GEOadmin.webservices.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.webservices.excluirWebservice('"+id_ws+"')",
-					"botao1": i3GEOadmin.webservices.dicionario.sim,
+					"mensagem": i3GEOadmin.identifica.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.identifica.excluirIdentifica('"+id_i+"')",
+					"botao1": i3GEOadmin.identifica.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.webservices.dicionario.nao
+					"botao2": i3GEOadmin.identifica.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
-		excluirWebservice: function(id_ws){
+		excluirIdentifica: function(id_i){
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
-					"exec.php?funcao=excluirWs",
-					"id_ws="+id_ws
+					"exec.php?funcao=excluirId",
+					"id_i="+id_i
 			)
 			.done(
 					function(data, status){
@@ -164,29 +190,29 @@ Obt&eacute;m a lista de Webservices
 					}
 			);
 		},
-		salvarWebserviceDialogo: function(id_ws){
+		salvarIdentificaDialogo: function(id_i){
 			var hash = {
-					"mensagem": i3GEOadmin.webservices.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.webservices.salvarWebservice('"+id_ws+"')",
-					"botao1": i3GEOadmin.webservices.dicionario.sim,
+					"mensagem": i3GEOadmin.identifica.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.identifica.salvarIdentifica('"+id_i+"')",
+					"botao1": i3GEOadmin.identifica.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.webservices.dicionario.nao
+					"botao2": i3GEOadmin.identifica.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
-		salvarWebservice: function(id_ws){
-			var parametros = $("#form-" + id_ws + " form").serialize();
+		salvarIdentifica: function(id_i){
+			var parametros = $("#form-" + id_i + " form").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
-					"exec.php?funcao=alterarWs",
-					"id_ws="+ id_ws+"&"+parametros
+					"exec.php?funcao=alterarId",
+					"id_i="+ id_i+"&"+parametros
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.webservices.ondeListaWebservices);
-						i3GEOadmin.webservices.pegaWebservices();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.identifica.ondeListaIdentifica);
+						i3GEOadmin.identifica.pegaIdentifica();
 					}
 			)
 			.fail(
@@ -200,10 +226,10 @@ Obt&eacute;m a lista de Webservices
 			return $i("filtro");
 		},
 		valorFiltro: function(){
-			return i3GEOadmin.webservices.pegaFiltro().value;
+			return i3GEOadmin.identifica.pegaFiltro().value;
 		},
 		defineFiltro: function(valor){
-			i3GEOadmin.webservices.pegaFiltro().value = valor;
+			i3GEOadmin.identifica.pegaFiltro().value = valor;
 		},
 		filtra: function(obj){
 			$("#corpo .panel").each(

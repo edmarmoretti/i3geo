@@ -55,6 +55,7 @@ Obt&eacute;m a lista de usuarios
 						var html = Mustache.to_html(
 								"{{#data}}" + templateUsuarios + "{{/data}}",
 								$.extend(
+										{},
 										i3GEOadmin.usuarios.dicionario,
 										{
 											"data": json["usuarios"],
@@ -115,30 +116,33 @@ Obt&eacute;m a lista de usuarios
 							i3GEOadmin.usuarios.filtra(i3GEOadmin.usuarios.pegaFiltro());
 						}
 						//monta um template para o modal de inclusao de novo usuario
-						html = Mustache.to_html(
-								$("#templateUsuarios").html(),
-								$.extend(
-										i3GEOadmin.usuarios.dicionario,
-										{
-											"id_usuario": "modal",
-											"excluir": i3GEOadmin.usuarios.dicionario.cancelar,
-											"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-											"onSalvar": "i3GEOadmin.usuarios.adicionaUsuario",//funcao
-											"labelDataCadastro": i3GEOadmin.usuarios.dicionario.dataCadastro,
-											"labelAtivo": i3GEOadmin.usuarios.dicionario.ativo,
-											"labelNovaSenha": i3GEOadmin.usuarios.dicionario.novaSenha,
-											"inputPapeis": function(){
-												return Mustache.to_html(
-														"{{#data}}" + $("#templateInputPapeis").html() + "{{/data}}",
-														{
-															"data":json["papeis"]
-														}
-												);
+						if(i3GEOadmin.usuarios.formAdicionaUsuario == ""){
+							html = Mustache.to_html(
+									$("#templateUsuarios").html(),
+									$.extend(
+											{},
+											i3GEOadmin.usuarios.dicionario,
+											{
+												"id_usuario": "modal",
+												"excluir": i3GEOadmin.usuarios.dicionario.cancelar,
+												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
+												"onSalvar": "i3GEOadmin.usuarios.adicionaUsuario",//funcao
+												"labelDataCadastro": i3GEOadmin.usuarios.dicionario.dataCadastro,
+												"labelAtivo": i3GEOadmin.usuarios.dicionario.ativo,
+												"labelNovaSenha": i3GEOadmin.usuarios.dicionario.novaSenha,
+												"inputPapeis": function(){
+													return Mustache.to_html(
+															"{{#data}}" + $("#templateInputPapeis").html() + "{{/data}}",
+															{
+																"data":json["papeis"]
+															}
+													);
+												}
 											}
-										}
-								)
-						);
-						i3GEOadmin.usuarios.formAdicionaUsuario = html;
+									)
+							);
+							i3GEOadmin.usuarios.formAdicionaUsuario = html;
+						}
 						$.material.init();
 					}
 			)
