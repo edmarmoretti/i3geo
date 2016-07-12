@@ -1,6 +1,6 @@
 //+$trad(1,i3GEOadmin.editormapfile.dicionario)+
 i3GEOadmin.gruposusuarios.dicionario = {
-	'gruposusuarios' : [ {
+	'txtTitulo' : [ {
 		pt : "Administra&ccedil;&atilde;o do i3geo - Grupos de usu&aacute;rios",
 		en : "",
 		es : ""
@@ -10,7 +10,7 @@ i3GEOadmin.gruposusuarios.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'txtAjuda' : [ {
+    'txtDesc' : [ {
 		pt : "<p>Cada usu&aacute;rio pode pertencer a um ou mais grupos. Os grupos s&atilde;o utilizados na defini&ccedil;&atilde;o das permiss&otilde;es de usu&aacute;rios para acesso a dados ou mapas",
 		en : "",
 		es : ""

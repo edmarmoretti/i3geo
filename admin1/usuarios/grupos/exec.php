@@ -29,10 +29,9 @@ error_reporting ( 0 );
 
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
-		"ADICIONARGRUPO",
-		"ALTERARGRUPO",
-		"ADICIONAUSUARIOSGRUPO",
-		"EXCLUIRGRUPO"
+		"ADICIONAR",
+		"ALTERAR",
+		"EXCLUIR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/usuarios" ) == false) {
@@ -43,7 +42,7 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 $funcao = strtoupper ( $funcao );
 // converte os parametros de definicao dos papeis em um array
-if ($funcao == "ADICIONARGRUPO" || $funcao == "ALTERARGRUPO") {
+if ($funcao == "ADICIONAR" || $funcao == "ALTERAR") {
 	$usuarios = array ();
 	foreach ( array_keys ( $_POST ) as $k ) {
 		$teste = explode ( "-", $k );
@@ -54,8 +53,8 @@ if ($funcao == "ADICIONARGRUPO" || $funcao == "ALTERARGRUPO") {
 	array_unique ( $usuarios );
 }
 switch ($funcao) {
-	case "ADICIONARGRUPO" :
-		$novo = adicionarGrupo( $nome,$descricao, $usuarios, $dbhw );
+	case "ADICIONAR" :
+		$novo = adicionar( $nome,$descricao, $usuarios, $dbhw );
 		if ($novo != false) {
 			$sql = "SELECT * from " . $esquemaadmin . "i3geousr_grupos WHERE id_grupo = " . $novo;
 			$dados = pegaDados ( $sql, $dbh );
@@ -70,8 +69,8 @@ switch ($funcao) {
 		}
 		exit ();
 		break;
-	case "ALTERARGRUPO" :
-		$novo = alterarGrupo ( $id_grupo, $nome, $descricao, $usuarios, $dbhw );
+	case "ALTERAR" :
+		$novo = alterar ( $id_grupo, $nome, $descricao, $usuarios, $dbhw );
 		if ($novo == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -85,7 +84,7 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
-	case "PEGAGRUPOSEUSUARIOS" :
+	case "LISTA" :
 		$grupos = pegaDados ( "SELECT id_grupo,nome,descricao from ".$esquemaadmin."i3geousr_grupos order by nome", $dbh, false );
 		$usuarios = pegaDados ( "SELECT U.nome_usuario, U.id_usuario, U.login, UP.id_grupo FROM ".$esquemaadmin."i3geousr_usuarios AS U JOIN ".$esquemaadmin."i3geousr_grupousuario AS UP ON U.id_usuario = UP.id_usuario", dbh, false );
 		if ($usuarios == false || $grupos == false) {
@@ -117,8 +116,8 @@ switch ($funcao) {
 				"usuarios" => $usuarios
 		) );
 		break;
-	case "EXCLUIRGRUPO" :
-		$retorna = excluirGrupo ( $id_grupo, $dbhw );
+	case "EXCLUIR" :
+		$retorna = excluir ( $id_grupo, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna == false) {
@@ -131,7 +130,7 @@ switch ($funcao) {
 }
 cpjson ( $retorno );
 // $usuarios deve ser um array
-function adicionarGrupo($nome, $descricao, $usuarios, $dbhw) {
+function adicionar($nome, $descricao, $usuarios, $dbhw) {
 	global $esquemaadmin;
 	try {
 		$dataCol = array(
@@ -139,14 +138,14 @@ function adicionarGrupo($nome, $descricao, $usuarios, $dbhw) {
 			"descricao" => ''
 		);
 		$id_grupo = i3GeoAdminInsertUnico ( $dbhw, "i3geousr_grupos", $dataCol, "nome", "id_grupo" );
-		$retorna = alterarGrupo ( $id_grupo, $nome, $descricao, $usuarios, $dbhw );
+		$retorna = alterar ( $id_grupo, $nome, $descricao, $usuarios, $dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
 		return false;
 	}
 }
 // $papeis deve ser um array
-function alterarGrupo($id_grupo, $nome, $descricao, $usuarios, $dbhw) {
+function alterar($id_grupo, $nome, $descricao, $usuarios, $dbhw) {
 	global $esquemaadmin;
 	if ($convUTF) {
 		$nome = utf8_encode ( $nome );
@@ -162,14 +161,14 @@ function alterarGrupo($id_grupo, $nome, $descricao, $usuarios, $dbhw) {
 		return false;
 	}
 	// apaga todos os papeis
-	$resultado = excluirUsuariosGrupo ( $id_grupo, $dbhw );
+	$resultado = excluirUsuarios ( $id_grupo, $dbhw );
 	if ($resultado == false) {
 		return false;
 	}
 	if (! empty ( $usuarios )) {
 		// atualiza papeis vinculados
 		foreach ( $usuarios as $p ) {
-			$resultado = adicionaUsuarioGrupo ( $id_grupo, $p, $dbhw );
+			$resultado = adicionaUsuario ( $id_grupo, $p, $dbhw );
 			if ($resultado == false) {
 				return false;
 			}
@@ -177,7 +176,7 @@ function alterarGrupo($id_grupo, $nome, $descricao, $usuarios, $dbhw) {
 	}
 	return $id_grupo;
 }
-function adicionaUsuarioGrupo($id_grupo, $id_usuario, $dbhw) {
+function adicionaUsuario($id_grupo, $id_usuario, $dbhw) {
 	global $esquemaadmin;
 	$dataCol = array (
 			"id_usuario" => $id_usuario,
@@ -186,20 +185,20 @@ function adicionaUsuarioGrupo($id_grupo, $id_usuario, $dbhw) {
 	$resultado = i3GeoAdminInsert ( $dbhw, "i3geousr_grupousuario", $dataCol );
 	return $resultado;
 }
-function excluirGrupo($id_grupo, $dbhw) {
+function excluir($id_grupo, $dbhw) {
 	global $esquemaadmin;
-	$resultado = exclui ( $esquemaadmin . "i3geousr_grupos", "id_grupo", $id_grupo, $dbhw, false );
+	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geousr_grupos", "id_grupo", $id_grupo, $dbhw, false );
 	if ($resultado == false) {
 		return false;
 	}
 	if ($resultado == true) {
-		$resultado = excluirUsuariosGrupo ( $id_grupo, $dbhw );
+		$resultado = excluirUsuarios ( $id_grupo, $dbhw );
 	}
 	return $resultado;
 }
-function excluirUsuariosGrupo($id_grupo, $dbhw) {
+function excluirUsuarios($id_grupo, $dbhw) {
 	global $esquemaadmin;
-	$resultado = exclui ( $esquemaadmin . "i3geousr_grupousuario", "id_grupo", $id_grupo, $dbhw, false );
+	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geousr_grupousuario", "id_grupo", $id_grupo, $dbhw, false );
 	return $resultado;
 }
 ?>

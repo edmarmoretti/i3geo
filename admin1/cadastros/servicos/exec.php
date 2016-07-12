@@ -29,9 +29,9 @@ error_reporting ( 0 );
 
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
-		"ADICIONARWS",
-		"ALTERARWS",
-		"EXCLUIRWS"
+		"ADICIONAR",
+		"ALTERAR",
+		"EXCLUIR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/webservices" ) == false) {
@@ -42,16 +42,16 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
-	case "ADICIONARWS" :
-		$novo = adicionarWs( $autor_ws, $desc_ws, $link_ws, $nome_ws, $tipo_ws,$dbhw );
+	case "ADICIONAR" :
+		$novo = adicionar( $autor_ws, $desc_ws, $link_ws, $nome_ws, $tipo_ws,$dbhw );
 		if ($novo == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 		exit ();
 		break;
-	case "ALTERARWS" :
-		$novo = alterarWs ( $id_ws,$autor_ws, $desc_ws, $link_ws, $nome_ws, $tipo_ws,$dbhw );
+	case "ALTERAR" :
+		$novo = alterar ( $id_ws,$autor_ws, $desc_ws, $link_ws, $nome_ws, $tipo_ws,$dbhw );
 		if ($novo == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -64,7 +64,7 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
-	case "PEGAWS" :
+	case "LISTA" :
 		$ws = pegaDados ( "SELECT id_ws,autor_ws,desc_ws,link_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by nome_ws", $dbh, false );
 		if ($ws == false) {
 			$dbhw = null;
@@ -76,8 +76,8 @@ switch ($funcao) {
 		$dbh = null;
 		retornaJSON ( $ws );
 		break;
-	case "EXCLUIRWS" :
-		$retorna = excluirWs ( $id_ws, $dbhw );
+	case "EXCLUIR" :
+		$retorna = excluir ( $id_ws, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna == false) {
@@ -91,7 +91,7 @@ switch ($funcao) {
 cpjson ( $retorno );
 
 // $papeis deve ser um array
-function adicionarWs($autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
+function adicionar($autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 	global $esquemaadmin;
 	try {
 		$dataCol = array(
@@ -104,7 +104,7 @@ function adicionarWs($autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 			"nacessosok" => 0
 		);
 		$id_ws = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_ws",$dataCol,"nome_ws","id_ws");
-		$retorna = alterarWs ( $id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw );
+		$retorna = alterar ( $id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw );
 
 		return $retorna;
 	} catch ( PDOException $e ) {
@@ -112,7 +112,7 @@ function adicionarWs($autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 	}
 }
 // $papeis deve ser um array
-function alterarWs($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
+function alterar($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 	global $esquemaadmin;
 	if($convUTF){
 		$nome_ws = utf8_encode($nome_ws);
@@ -132,9 +132,9 @@ function alterarWs($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 	}
 	return $id_ws;
 }
-function excluirWs($id_ws, $dbhw) {
+function excluir($id_ws, $dbhw) {
 	global $esquemaadmin;
-	$resultado = exclui ( $esquemaadmin . "i3geoadmin_ws", "id_ws", $id_ws, $dbhw, false );
+	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_ws", "id_ws", $id_ws, $dbhw, false );
 	if ($resultado == false) {
 		return false;
 	}

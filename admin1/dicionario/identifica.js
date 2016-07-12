@@ -1,11 +1,11 @@
 //+$trad(1,i3GEOadmin.editormapfile.dicionario)+
 i3GEOadmin.identifica.dicionario = {
-	'identificacao' : [ {
+	'txtTitulo' : [ {
 		pt : "Sistemas de identifica&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
-    'txtAjuda' : [ {
+    'txtDesc' : [ {
 		pt : "Este programa permite editar a lista de sistemas de identifica&ccedil;&atilde;o. A ferramenta de	identifica&ccedil;&atilde;o utilizada no i3geo, lista os dados do ponto clicado no mapa pelo usu&aacute;rio, com base nas camadas existentes no mapa. Os sistemas de identifica&ccedil;&atilde;o adicionam outras op&ccedil;&otilde;es na janela de identifica&ccedil;&atilde;o, permitindo, por exemplo, o uso de	programas especiais de busca de dados",
  		en : "",
 		es : ""

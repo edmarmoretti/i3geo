@@ -29,11 +29,9 @@ error_reporting ( 0 );
 
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
-		"ADICIONARUSUARIO",
-		"ALTERARUSUARIO",
-		"ADICIONAPAPELUSUARIO",
-		"EXCLUIRUSUARIO",
-		"ENVIARSENHA"
+		"ADICIONAR",
+		"ALTERAR",
+		"EXCLUIR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/usuarios" ) == false) {
@@ -44,7 +42,7 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 $funcao = strtoupper ( $funcao );
 // converte os parametros de definicao dos papeis em um array
-if ($funcao == "ADICIONARUSUARIO" || $funcao == "ALTERARUSUARIO") {
+if ($funcao == "ADICIONAR" || $funcao == "ALTERAR") {
 	$papeis = array ();
 	foreach ( array_keys ( $_POST ) as $k ) {
 		$teste = explode ( "-", $k );
@@ -55,8 +53,8 @@ if ($funcao == "ADICIONARUSUARIO" || $funcao == "ALTERARUSUARIO") {
 	array_unique ( $papeis );
 }
 switch ($funcao) {
-	case "ADICIONARUSUARIO" :
-		$novo = adicionarUsuario( $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
+	case "ADICIONAR" :
+		$novo = adicionar( $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
 		if ($novo != false) {
 			$sql = "SELECT id_usuario, ativo, data_cadastro, email, login, nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE id_usuario = " . $novo;
 			$dados = pegaDados ( $sql, $dbh );
@@ -78,8 +76,8 @@ switch ($funcao) {
 		}
 		exit ();
 		break;
-	case "ALTERARUSUARIO" :
-		$novo = alterarUsuario ( $id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
+	case "ALTERAR" :
+		$novo = alterar ( $id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
 		if ($novo == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -100,7 +98,7 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
-	case "PEGAUSUARIOSEPAPEIS" :
+	case "LISTA" :
 		$usuarios = pegaDados ( "SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from " . $esquemaadmin . "i3geousr_usuarios order by nome_usuario", $dbh, false );
 		$papeis = pegaDados ( "SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM " . $esquemaadmin . "i3geousr_usuarios AS U JOIN " . $esquemaadmin . "i3geousr_papelusuario AS UP ON U.id_usuario = UP.id_usuario JOIN " . $esquemaadmin . "i3geousr_papeis AS P ON UP.id_papel = P.id_papel ", dbh, false );
 		if ($usuarios == false || $papeis == false) {
@@ -133,8 +131,8 @@ switch ($funcao) {
 				"papeis" => $papeis
 		) );
 		break;
-	case "EXCLUIRUSUARIO" :
-		$retorna = excluirUsuario ( $id_usuario, $dbhw );
+	case "EXCLUIR" :
+		$retorna = excluir ( $id_usuario, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna == false) {
@@ -167,7 +165,7 @@ function enviarSenha( $senha, $email ){
 	return mail($to, $subject, $message);
 }
 // $papeis deve ser um array
-function adicionarUsuario($ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
+function adicionar($ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
 	global $esquemaadmin;
 	try {
 		$dataCol = array(
@@ -180,14 +178,14 @@ function adicionarUsuario($ativo, $data_cadastro, $email, $login, $nome_usuario,
 		);
 		$id_usuario = i3GeoAdminInsertUnico ( $dbhw, "i3geousr_usuarios", $dataCol, "nome_usuario", "id_usuario" );
 		$data_cadastro = date('l jS \of F Y h:i:s A');
-		$retorna = alterarUsuario ( $id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
+		$retorna = alterar ( $id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
 		return false;
 	}
 }
 // $papeis deve ser um array
-function alterarUsuario($id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
+function alterar($id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
 	global $esquemaadmin;
 	if ($convUTF) {
 		$nome_usuario = utf8_encode ( $nome_usuario );
@@ -207,14 +205,14 @@ function alterarUsuario($id_usuario, $ativo, $data_cadastro, $email, $login, $no
 		return false;
 	}
 	// apaga todos os papeis
-	$resultado = excluirPapeisUsuario ( $id_usuario, $dbhw );
+	$resultado = excluirPapeis ( $id_usuario, $dbhw );
 	if ($resultado == false) {
 		return false;
 	}
 	if (! empty ( $papeis )) {
 		// atualiza papeis vinculados
 		foreach ( $papeis as $p ) {
-			$resultado = adicionaPapelUsuario ( $id_usuario, $p, $dbhw );
+			$resultado = adicionaPapel ( $id_usuario, $p, $dbhw );
 			if ($resultado == false) {
 				return false;
 			}
@@ -222,7 +220,7 @@ function alterarUsuario($id_usuario, $ativo, $data_cadastro, $email, $login, $no
 	}
 	return $id_usuario;
 }
-function adicionaPapelUsuario($id_usuario, $id_papel, $dbhw) {
+function adicionaPapel($id_usuario, $id_papel, $dbhw) {
 	global $esquemaadmin;
 	$dataCol = array (
 			"id_usuario" => $id_usuario,
@@ -231,20 +229,20 @@ function adicionaPapelUsuario($id_usuario, $id_papel, $dbhw) {
 	$resultado = i3GeoAdminInsert ( $dbhw, "i3geousr_papelusuario", $dataCol );
 	return $resultado;
 }
-function excluirUsuario($id_usuario, $dbhw) {
+function excluir($id_usuario, $dbhw) {
 	global $esquemaadmin;
-	$resultado = exclui ( $esquemaadmin . "i3geousr_usuarios", "id_usuario", $id_usuario, $dbhw, false );
+	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geousr_usuarios", "id_usuario", $id_usuario, $dbhw, false );
 	if ($resultado == false) {
 		return false;
 	}
 	if ($resultado == true) {
-		$resultado = excluirPapeisUsuario ( $id_usuario, $dbhw );
+		$resultado = excluirPapeis ( $id_usuario, $dbhw );
 	}
 	return $resultado;
 }
-function excluirPapeisUsuario($id_usuario, $dbhw) {
+function excluirPapeis($id_usuario, $dbhw) {
 	global $esquemaadmin;
-	$resultado = exclui ( $esquemaadmin . "i3geousr_papelusuario", "id_usuario", $id_usuario, $dbhw, false );
+	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geousr_papelusuario", "id_usuario", $id_usuario, $dbhw, false );
 	return $resultado;
 }
 ?>

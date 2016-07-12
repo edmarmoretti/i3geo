@@ -29,9 +29,9 @@ error_reporting ( 0 );
 
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
-		"ADICIONARID",
-		"ALTERARID",
-		"EXCLUIRID"
+		"ADICIONAR",
+		"ALTERAR",
+		"EXCLUIR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/identifica" ) == false) {
@@ -42,16 +42,16 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
-	case "ADICIONARID" :
-		$novo = adicionarId( $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw );
+	case "ADICIONAR" :
+		$novo = adicionar( $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw );
 		if ($novo == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 		exit ();
 		break;
-	case "ALTERARID" :
-		$novo = alterarId ( $id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw );
+	case "ALTERAR" :
+		$novo = alterar ( $id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw );
 		if ($novo == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -64,7 +64,7 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
-	case "PEGAID" :
+	case "LISTA" :
 		$d = pegaDados ( "SELECT id_i, publicado_i, abrir_i, nome_i, target_i from ".$esquemaadmin."i3geoadmin_identifica order by nome_i", $dbh, false );
 		if ($d == false) {
 			$dbhw = null;
@@ -76,8 +76,8 @@ switch ($funcao) {
 		$dbh = null;
 		retornaJSON ( $d );
 		break;
-	case "EXCLUIRID" :
-		$retorna = excluirId ( $id_i, $dbhw );
+	case "EXCLUIR" :
+		$retorna = excluir ( $id_i, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna == false) {
@@ -91,7 +91,7 @@ switch ($funcao) {
 cpjson ( $retorno );
 
 // $papeis deve ser um array
-function adicionarId($publicado_i, $abrir_i, $nome_i, $target_i,$dbhw) {
+function adicionar($publicado_i, $abrir_i, $nome_i, $target_i,$dbhw) {
 	global $esquemaadmin;
 	try {
 		$dataCol = array(
@@ -101,14 +101,14 @@ function adicionarId($publicado_i, $abrir_i, $nome_i, $target_i,$dbhw) {
 			"target_i" => ''
 		);
 		$id_i = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_identifica",$dataCol,"nome_i","id_i");
-		$retorna = alterarId($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw);
+		$retorna = alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw);
 		return $retorna;
 	} catch ( PDOException $e ) {
 		return false;
 	}
 }
 // $papeis deve ser um array
-function alterarId($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
+function alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
 	global $esquemaadmin;
 	if($convUTF){
 		$nome_i = utf8_encode($nome_i);
@@ -125,9 +125,9 @@ function alterarId($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
 	}
 	return $id_i;
 }
-function excluirId($id_i, $dbhw) {
+function excluir($id_i, $dbhw) {
 	global $esquemaadmin;
-	$resultado = exclui ( $esquemaadmin . "i3geoadmin_identifica", "id_i", $id_i, $dbhw, false );
+	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_identifica", "id_i", $id_i, $dbhw, false );
 	if ($resultado == false) {
 		return false;
 	}

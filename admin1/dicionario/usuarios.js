@@ -1,11 +1,11 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
 i3GEOadmin.usuarios.dicionario = {
-	'usuarios' : [ {
-		pt : "Administra&ccedil;&atilde;o do i3geo - Usu&aacute;rios e pap&eacute;is operacionais",
+	'txtTitulo' : [ {
+		pt : "Usu&aacute;rios e pap&eacute;is operacionais",
 		en : "",
 		es : ""
 	} ],
-	'txtUsuarios' : [ {
+	'txtDesc' : [ {
 		pt : "<p>Os pap&eacute;is s&atilde;o utilizados para controlar as opera&ccedil;&otilde;es administrativas que o usu&aacute;rio poder&aacute; executar. Usu&aacute;rios podem tamb&eacute;m pertencer a determinados grupos. Os grupos s&atilde;o utilizados para controlar o acesso &agrave;s camadas nos mapas.</p><p>Utilize o editor de grupos para definir de quais grupos os usu&aacute;rios fazem parte.</p>",
 		en : "",
 		es : ""

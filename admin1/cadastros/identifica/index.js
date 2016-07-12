@@ -24,22 +24,22 @@ Free Software Foundation, Inc., no endere&ccedil;o
  */
 i3GEOadmin.identifica = {
 		//variavel global indicando o elemento que recebera a lista de Identifica
-		ondeListaIdentifica: "",
+		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
-		formAdicionaIdentifica: "",
+		formAdiciona: "",
 		init: function(onde){
-			i3GEOadmin.identifica.ondeListaIdentifica = onde;
-			i3GEOadmin.identifica.pegaIdentifica();
+			i3GEOadmin.identifica.ondeLista = onde;
+			i3GEOadmin.identifica.lista();
 		},
 		/*
-Function: pegaIdentifica
+Function: lista
 
 Obt&eacute;m a lista de Identifica
 		 */
-		pegaIdentifica: function(){
-			i3GEOadmin.core.iconeAguarde(i3GEOadmin.identifica.ondeListaIdentifica);
+		lista: function(){
+			i3GEOadmin.core.iconeAguarde(i3GEOadmin.identifica.ondeLista);
 			$.post(
-					"exec.php?funcao=pegaId"
+					"exec.php?funcao=lista"
 			)
 			.done(
 					function(data, status){
@@ -48,18 +48,18 @@ Obt&eacute;m a lista de Identifica
 						//objeto json com os dados viondos do banco
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
-						var templateIdentifica = $("#templateIdentifica").html();
+						var templateLista = $("#templateLista").html();
 						//lista todas as Identifica
 						var html = Mustache.to_html(
-								"{{#data}}" + templateIdentifica + "{{/data}}",
+								"{{#data}}" + templateLista + "{{/data}}",
 								$.extend(
 										{},
 										i3GEOadmin.identifica.dicionario,
 										{
 											"data": json,
 											"excluir": i3GEOadmin.identifica.dicionario.excluir,
-											"onExcluir": "i3GEOadmin.identifica.excluirIdentificaDialogo",//funcao
-											"onSalvar": "i3GEOadmin.identifica.salvarIdentificaDialogo",//funcao
+											"onExcluir": "i3GEOadmin.identifica.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.identifica.salvarDialogo",//funcao
 											"opcoesPublicado": function(){
 												var hash = {};
 												hash[this.publicado_i + "-sel"] = "selected";
@@ -85,7 +85,7 @@ Obt&eacute;m a lista de Identifica
 										}
 								)
 						);
-						i3GEOadmin.identifica.ondeListaIdentifica.html(html);
+						i3GEOadmin.identifica.ondeLista.html(html);
 						//filtro
 						html = Mustache.to_html(
 								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
@@ -98,9 +98,9 @@ Obt&eacute;m a lista de Identifica
 							i3GEOadmin.identifica.filtra(i3GEOadmin.identifica.pegaFiltro());
 						}
 						//monta um template para o modal de inclusao de novo usuario
-						if(i3GEOadmin.identifica.formAdicionaIdentifica == ""){
+						if(i3GEOadmin.identifica.formAdiciona == ""){
 							html = Mustache.to_html(
-									$("#templateIdentifica").html(),
+									$("#templateLista").html(),
 									$.extend(
 											{},
 											i3GEOadmin.identifica.dicionario,
@@ -108,7 +108,7 @@ Obt&eacute;m a lista de Identifica
 												"id_i": "modal",
 												"excluir": i3GEOadmin.identifica.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-												"onSalvar": "i3GEOadmin.identifica.adicionaIdentifica",//funcao
+												"onSalvar": "i3GEOadmin.identifica.adicionar",//funcao
 												"opcoesPublicado": function(){
 													return Mustache.to_html(
 															$("#templateOpcoesPublicado").html(),
@@ -124,33 +124,33 @@ Obt&eacute;m a lista de Identifica
 											}
 									)
 							);
-							i3GEOadmin.identifica.formAdicionaIdentifica = html;
+							i3GEOadmin.identifica.formAdiciona = html;
 						}
 						$.material.init();
 					}
 			)
 			.fail(function(data){
-				i3GEOadmin.identifica.ondeListaIdentifica.html("");
+				i3GEOadmin.identifica.ondeLista.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
 		},
-		adicionaIdentificaDialogo: function(){
-			i3GEOadmin.core.abreModalGeral(i3GEOadmin.identifica.formAdicionaIdentifica);
+		adicionaDialogo: function(){
+			i3GEOadmin.core.abreModalGeral(i3GEOadmin.identifica.formAdiciona);
 		},
 //		os parametros sao obtidos do formulario aberto do modal
-		adicionaIdentifica: function(){
+		adicionar: function(){
 			var parametros = $("#form-modal form").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
-					"exec.php?funcao=adicionarId",
+					"exec.php?funcao=adicionar",
 					parametros
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.identifica.ondeListaIdentifica);
-						i3GEOadmin.identifica.pegaIdentifica();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.identifica.ondeLista);
+						i3GEOadmin.identifica.lista();
 					}
 			)
 			.fail(
@@ -160,21 +160,21 @@ Obt&eacute;m a lista de Identifica
 					}
 			);
 		},
-		excluirIdentificaDialogo: function(id_i){
+		excluirDialogo: function(id_i){
 			var hash = {
 					"mensagem": i3GEOadmin.identifica.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.identifica.excluirIdentifica('"+id_i+"')",
+					"onBotao1": "i3GEOadmin.identifica.excluir('"+id_i+"')",
 					"botao1": i3GEOadmin.identifica.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
 					"botao2": i3GEOadmin.identifica.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
-		excluirIdentifica: function(id_i){
+		excluir: function(id){
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
-					"exec.php?funcao=excluirId",
-					"id_i="+id_i
+					"exec.php?funcao=excluir",
+					"id_i="+id
 			)
 			.done(
 					function(data, status){
@@ -190,7 +190,7 @@ Obt&eacute;m a lista de Identifica
 					}
 			);
 		},
-		salvarIdentificaDialogo: function(id_i){
+		salvarDialogo: function(id_i){
 			var hash = {
 					"mensagem": i3GEOadmin.identifica.dicionario.confirma,
 					"onBotao1": "i3GEOadmin.identifica.salvarIdentifica('"+id_i+"')",
@@ -200,19 +200,19 @@ Obt&eacute;m a lista de Identifica
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
-		salvarIdentifica: function(id_i){
-			var parametros = $("#form-" + id_i + " form").serialize();
+		salvar: function(id){
+			var parametros = $("#form-" + id + " form").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
-					"exec.php?funcao=alterarId",
-					"id_i="+ id_i+"&"+parametros
+					"exec.php?funcao=alterar",
+					"id_i="+ id+"&"+parametros
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.identifica.ondeListaIdentifica);
-						i3GEOadmin.identifica.pegaIdentifica();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.identifica.ondeLista);
+						i3GEOadmin.identifica.lista();
 					}
 			)
 			.fail(

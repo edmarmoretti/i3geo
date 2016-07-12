@@ -22,8 +22,8 @@ include "../../head.php";
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
 				</button>
-				<h3>{{{operacoes}}}</h3>
-				<h4>{{{txtAjuda}}}</h4>
+				<h3>{{{txtTitulo}}}</h3>
+				<h4>{{{txtDesc}}}</h4>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
@@ -31,7 +31,7 @@ include "../../head.php";
 					</select>
 				</div>
 				<div class="row pull-right">
-					<a onclick="i3GEOadmin.operacoes.adicionaOperacaoDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="i3GEOadmin.operacoes.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda-->
@@ -39,7 +39,7 @@ include "../../head.php";
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-body">
-								<p>{{{txtOperacoes}}}</p>
+								<p>{{{txtAjuda}}}</p>
 							</div>
 						</div>
 					</div>
@@ -55,7 +55,7 @@ include "../../head.php";
 <script id="templateFiltro" type="x-tmpl-mustache">
 <option value="form-{{id_operacao}}">{{{codigo}}}</option>
 </script>
-<script id="templateOperacoes" type="x-tmpl-mustache">
+<script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_operacao}}">
 	<div class="panel-body">
 		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form" role="form" method="post" action="" >

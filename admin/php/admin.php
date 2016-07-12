@@ -139,7 +139,24 @@ coluna - nome da coluna
 
 id - valor
 */
+//depreciar em favor de excluiRegistro
 function exclui($tabela,$coluna,$id){
+	try {
+		include("conexao.php");
+		$sql = "DELETE from $tabela WHERE $coluna = ?";
+		$prep = $dbhw->prepare($sql);
+		$prep->execute(array($id));
+		i3GeoAdminInsertLog($dbhw,$sql,array($id));
+		$dbhw = null;
+		$dbh = null;
+		return "ok";
+	}
+	catch (PDOException $e) {
+		return "Error!: ";
+	}
+}
+//usar esse para nao haver confusao com o nome "exclui"
+function i3GeoAdminExclui($tabela,$coluna,$id){
 	try {
 		include("conexao.php");
 		$sql = "DELETE from $tabela WHERE $coluna = ?";

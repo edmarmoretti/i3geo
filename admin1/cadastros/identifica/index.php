@@ -24,8 +24,8 @@ include "../../head.php";
 					<i class="material-icons">help</i>
 				</button>
 				-->
-				<h3>{{{identificacao}}}</h3>
-				<h4>{{{txtAjuda}}}</h4>
+				<h3>{{{txtTitulo}}}</h3>
+				<h4>{{{txtDesc}}}</h4>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
@@ -33,7 +33,7 @@ include "../../head.php";
 					</select>
 				</div>
 				<div class="row pull-right">
-					<a onclick="i3GEOadmin.identifica.adicionaIdentificaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="i3GEOadmin.identifica.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda
@@ -58,7 +58,7 @@ include "../../head.php";
 <script id="templateFiltro" type="x-tmpl-mustache">
 <option value="form-{{id_i}}">{{{nome_i}}}</option>
 </script>
-<script id="templateIdentifica" type="x-tmpl-mustache">
+<script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_i}}">
 	<div class="panel-body">
 		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form" role="form" method="post" action="" >
