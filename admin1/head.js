@@ -114,10 +114,6 @@ menuPrincipal = [
 		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/arvore/index.php' >"+$trad("arvoreTemas",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/perfis/index.php' >"+$trad("editaPerfil",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/tags/index.php' >"+$trad("editaTags",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/mapas/index.php' >"+$trad("linkMapas",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/atlas/index.php' >"+$trad("atlas",i3GEOadmin.menup.dicionario)+"</a>"
@@ -131,6 +127,10 @@ menuPrincipal = [
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/cadastros/identifica/index.php' >"+$trad("sistIdentifica",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/cadastros/sistemas/index.php' >"+$trad("sistAdiciona",i3GEOadmin.menup.dicionario)+"</a>"
+		},{
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/cadastros/tags/index.php' >"+$trad("editaTags",i3GEOadmin.menup.dicionario)+"</a>"
+		},{
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/cadastros/perfis/index.php' >"+$trad("editaPerfil",i3GEOadmin.menup.dicionario)+"</a>"
 		}
 	]}
 ];

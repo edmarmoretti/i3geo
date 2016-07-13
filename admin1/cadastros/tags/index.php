@@ -9,7 +9,7 @@ include "../../head.php";
 		<ol class="breadcrumb">
 			<li><a href="../../init/index.php">i3Geo</a></li>
 			<li><a href="../../index.php">Admin</a></li>
-			<li>Cat&aacute;logo</li>
+			<li>Cadastros</li>
 			<li class="active">Tags</li>
 		</ol>
 	</div>
