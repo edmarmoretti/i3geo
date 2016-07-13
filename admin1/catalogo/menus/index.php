@@ -88,7 +88,10 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="perfil_menu">{{{perfil}}}</label>
 						<div class="col-md-9">
-							<input type="text" value="{{{perfil_menu}}}" class="form-control" name="perfil_menu">
+							<input id="perfil-{{id_menu}}" type="text" value="{{{perfil_menu}}}" class="form-control" name="perfil_menu">
+							<select class="form-control" onchange="i3GEOadmin.menus.addPerfil('perfil-{{id_menu}}',this.value)">
+								{{{opcoesPerfil}}}
+							</select>
 							<p>{{{perfilAjuda}}}</p>
 						</div>
 					</div>
@@ -117,6 +120,9 @@ include "../../head.php";
 		</div>
 	</div>
 </div>
+</script>
+<script id="templateOpcoesPerfil" type="x-tmpl-mustache">
+	<option value="{{{perfil}}}">{{{perfil}}}</option>
 </script>
 <script id="templateOpcoesPublicado" type="x-tmpl-mustache">
 	<option value="">---</option>

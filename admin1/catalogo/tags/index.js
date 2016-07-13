@@ -22,130 +22,85 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
  */
-i3GEOadmin.menus = {
-		//variavel global indicando o elemento que recebera a lista de menus
+i3GEOadmin.tags = {
+		//variavel global indicando o elemento que recebera a lista de tags
 		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
 		init: function(onde){
-			i3GEOadmin.menus.ondeLista = onde;
-			i3GEOadmin.menus.lista();
+			i3GEOadmin.tags.ondeLista = onde;
+			i3GEOadmin.tags.lista();
 		},
 		/*
 Function: lista
 
-Obt&eacute;m a lista de menus
+Obt&eacute;m a lista de tags
 		 */
 		lista: function(){
-			i3GEOadmin.core.iconeAguarde(i3GEOadmin.menus.ondeLista);
+			i3GEOadmin.core.iconeAguarde(i3GEOadmin.tags.ondeLista);
 			$.post(
 					"exec.php?funcao=lista"
 			)
 			.done(
 					function(data, status){
 						//valor do filtro atual
-						var filtro = i3GEOadmin.menus.valorFiltro();
+						var filtro = i3GEOadmin.tags.valorFiltro();
 						//objeto json com os dados viondos do banco
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
-						//combo com perfis
-						var opcoesPerfil = '<option value="">---</option>' + Mustache.to_html(
-								"{{#data}}" + $("#templateOpcoesPerfil").html() + "{{/data}}",
-								{"data":json["perfis"]}
-						);
-						//lista todas as menus
+						//lista todas as tags
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
 								$.extend(
 										{},
-										i3GEOadmin.menus.dicionario,
+										i3GEOadmin.tags.dicionario,
 										{
-											"data": json["dados"],
-											"onExcluir": "i3GEOadmin.menus.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.menus.salvarDialogo",//funcao
-											"opcoesAberto": function(){
-												var hash = {};
-												hash[this.aberto + "-sel"] = "selected";
-												hash["sim"] = i3GEOadmin.menus.dicionario.sim;
-												hash["nao"] = i3GEOadmin.menus.dicionario.nao;
-												return Mustache.to_html(
-														$("#templateOpcoesAberto").html(),
-														hash
-												);
-											},
-											"opcoesPublicado": function(){
-												var hash = {};
-												hash[this.publicado_menu + "-sel"] = "selected";
-												hash["sim"] = i3GEOadmin.menus.dicionario.sim;
-												hash["nao"] = i3GEOadmin.menus.dicionario.nao;
-												return Mustache.to_html(
-														$("#templateOpcoesPublicado").html(),
-														hash
-												);
-											},
-											"opcoesPerfil": opcoesPerfil
+											"data": json,
+											"onExcluir": "i3GEOadmin.tags.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.tags.salvarDialogo"//funcao
 										}
 								)
 						);
-						i3GEOadmin.menus.ondeLista.html(html);
+						i3GEOadmin.tags.ondeLista.html(html);
 						//filtro
 						html = Mustache.to_html(
 								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
-								{"data":json["dados"]}
+								{"data":json}
 						);
 						$("#filtro").html("<option value='' >Todos</option>" + html);
 						$("#filtro").combobox();
 						if(filtro != ""){
-							i3GEOadmin.menus.defineFiltro(filtro);
-							i3GEOadmin.menus.filtra(i3GEOadmin.menus.pegaFiltro());
+							i3GEOadmin.tags.defineFiltro(filtro);
+							i3GEOadmin.tags.filtra(i3GEOadmin.tags.pegaFiltro());
 						}
 						//monta um template para o modal de inclusao de novo usuario
-						if(i3GEOadmin.menus.formAdiciona == ""){
+						if(i3GEOadmin.tags.formAdiciona == ""){
 							html = Mustache.to_html(
 									$("#templateLista").html(),
 									$.extend(
 											{},
-											i3GEOadmin.menus.dicionario,
+											i3GEOadmin.tags.dicionario,
 											{
-												"id_menu": "modal",
-												"excluir": i3GEOadmin.menus.dicionario.cancelar,
+												"id_tag": "modal",
+												"excluir": i3GEOadmin.tags.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-												"onSalvar": "i3GEOadmin.menus.adiciona",//funcao
-												"opcoesAberto": function(){
-													var hash = {};
-													hash["sim"] = i3GEOadmin.menus.dicionario.sim;
-													hash["nao"] = i3GEOadmin.menus.dicionario.nao;
-													return Mustache.to_html(
-															$("#templateOpcoesAberto").html(),
-															hash
-													);
-												},
-												"opcoesPublicado": function(){
-													var hash = {};
-													hash["sim"] = i3GEOadmin.menus.dicionario.sim;
-													hash["nao"] = i3GEOadmin.menus.dicionario.nao;
-													return Mustache.to_html(
-															$("#templateOpcoesPublicado").html(),
-															hash
-													);
-												},
-												"opcoesPerfil": opcoesPerfil
+												"onSalvar": "i3GEOadmin.tags.adiciona"//funcao
 											}
 									)
 							);
-							i3GEOadmin.menus.formAdiciona = html;
+							i3GEOadmin.tags.formAdiciona = html;
 						}
 						$.material.init();
 					}
 			)
 			.fail(function(data){
-				i3GEOadmin.menus.ondeLista.html("");
+				i3GEOadmin.tags.ondeLista.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
 		},
 		adicionaDialogo: function(){
-			i3GEOadmin.core.abreModalGeral(i3GEOadmin.menus.formAdiciona);
+			i3GEOadmin.core.abreModalGeral(i3GEOadmin.tags.formAdiciona);
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adiciona: function(){
@@ -159,8 +114,8 @@ Obt&eacute;m a lista de menus
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.menus.ondeLista);
-						i3GEOadmin.menus.lista();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.tags.ondeLista);
+						i3GEOadmin.tags.lista();
 					}
 			)
 			.fail(
@@ -172,11 +127,11 @@ Obt&eacute;m a lista de menus
 		},
 		excluirDialogo: function(id){
 			var hash = {
-					"mensagem": i3GEOadmin.menus.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.menus.excluir('"+id+"')",
-					"botao1": i3GEOadmin.menus.dicionario.sim,
+					"mensagem": i3GEOadmin.tags.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.tags.excluir('"+id+"')",
+					"botao1": i3GEOadmin.tags.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.menus.dicionario.nao
+					"botao2": i3GEOadmin.tags.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
@@ -184,7 +139,7 @@ Obt&eacute;m a lista de menus
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=excluir",
-					"id_menu="+id
+					"id_tag="+id
 			)
 			.done(
 					function(data, status){
@@ -202,11 +157,11 @@ Obt&eacute;m a lista de menus
 		},
 		salvarDialogo: function(id){
 			var hash = {
-					"mensagem": i3GEOadmin.menus.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.menus.salvar('"+id+"')",
-					"botao1": i3GEOadmin.menus.dicionario.sim,
+					"mensagem": i3GEOadmin.tags.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.tags.salvar('"+id+"')",
+					"botao1": i3GEOadmin.tags.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.menus.dicionario.nao
+					"botao2": i3GEOadmin.tags.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
@@ -216,13 +171,13 @@ Obt&eacute;m a lista de menus
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=alterar",
-					"id_menu="+ id+"&"+parametros
+					"id_tag="+ id+"&"+parametros
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.menus.ondeLista);
-						i3GEOadmin.menus.lista();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.tags.ondeLista);
+						i3GEOadmin.tags.lista();
 					}
 			)
 			.fail(
@@ -236,10 +191,10 @@ Obt&eacute;m a lista de menus
 			return $i("filtro");
 		},
 		valorFiltro: function(){
-			return i3GEOadmin.menus.pegaFiltro().value;
+			return i3GEOadmin.tags.pegaFiltro().value;
 		},
 		defineFiltro: function(valor){
-			i3GEOadmin.menus.pegaFiltro().value = valor;
+			i3GEOadmin.tags.pegaFiltro().value = valor;
 		},
 		filtra: function(obj){
 			$("#corpo .panel").each(
@@ -255,9 +210,5 @@ Obt&eacute;m a lista de menus
 			if(obj.value != ""){
 				$("#"+obj.value).show();
 			}
-		},
-		addPerfil: function(id,valor){
-			var i = $("#"+id);
-			$(i.val(i.val() + ' ' + valor));
 		}
 };

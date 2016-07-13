@@ -43,7 +43,8 @@ include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 if(!isset($idioma) || $idioma == ""){
 	$idioma = "pt";
 }
-
+//remove espaco em branco do nome do perfil
+$perfil = str_replace(" ","",$perfil);
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :

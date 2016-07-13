@@ -56,7 +56,7 @@ include "../../head.php";
 	</div>
 </div>
 <script id="templateFiltro" type="x-tmpl-mustache">
-<option value="form-{{id_perfil}}">{{{nome_menu}}}</option>
+<option value="form-{{id_perfil}}">{{{perfil}}}</option>
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
 	<div class="panel panel-default" id="form-{{id_perfil}}">
