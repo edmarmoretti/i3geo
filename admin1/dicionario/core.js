@@ -370,8 +370,8 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'txtPerfil' : [ {
+		pt : "Perfil",
 		en : "",
 		es : ""
 	} ],

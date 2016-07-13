@@ -47,7 +47,7 @@ if(!isset($idioma) || $idioma == ""){
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw );
+		$novo = adicionar( $perfil, $dbhw );
 		if ($novo == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -55,12 +55,12 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw );
+		$novo = alterar ( $id_perfil, $perfil, $dbhw );
 		if ($novo == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		$dados = pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus order by nome_menu", $dbh, false );
+		$dados = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbh, false );
 		if ($dados == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -69,7 +69,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$dados = pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus order by nome_menu", $dbh, false );
+		$dados = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbh, false );
 		if ($dados == false) {
 			$dbhw = null;
 			$dbh = null;
@@ -81,35 +81,28 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		break;
 	case "EXCLUIR" :
-		$retorna = excluir ( $id_menu, $dbhw );
+		$retorna = excluir ( $id_perfil, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna == false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		retornaJSON ( $id_menu );
+		retornaJSON ( $id_perfil );
 		exit ();
 		break;
 }
 cpjson ( $retorno );
 
 // $papeis deve ser um array
-function adicionar($publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw) {
+function adicionar($perfil, $dbhw) {
 	global $esquemaadmin;
 	try {
 		$dataCol = array(
-			"en" => "",
-			"es" => "",
-			"it" => "",
-			"publicado_menu" => "",
-			"aberto" => "SIM",
-			"nome_menu" => "",
-			"desc_menu" => "",
-			"perfil_menu" => ""
+			"perfil" => ''
 		);
-		$id_menu = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_menus",$dataCol,"nome_menu","id_menu");
-		$retorna = alterar ( $id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en,$dbhw );
+		$id_perfil = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_perfis",$dataCol,"perfil","id_perfil");
+		$retorna = alterar ( $id_perfil, $perfil,$dbhw );
 
 		return $retorna;
 	} catch ( PDOException $e ) {
@@ -117,34 +110,26 @@ function adicionar($publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_men
 	}
 }
 // $papeis deve ser um array
-function alterar($id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en,$dbhw) {
+function alterar($id_perfil, $perfil,$dbhw) {
 	global $esquemaadmin;
 	if($convUTF){
-		$nome_menu = utf8_encode($nome_menu);
-		$desc_menu = utf8_encode($desc_menu);
-		$en = utf8_encode($en);
-		$es = utf8_encode($es);
-		$perfil_menu = utf8_encode($perfil_menu);
+		$perfil = utf8_encode($perfil);
 	}
 	$dataCol = array(
-		"en" => $en,
-		"es" => $es,
-		"it" => '',
-		"publicado_menu" => $publicado_menu,
-		"aberto" => $aberto,
-		"nome_menu" => $nome_menu,
-		"desc_menu" => $desc_menu,
-		"perfil_menu" => $perfil_menu
+		"perfil" => $perfil
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_menus", $dataCol, "WHERE id_menu = $id_menu" );
+	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_perfis", $dataCol, "WHERE id_perfil = $id_perfil" );
 	if ($resultado == false) {
 		return false;
 	}
-	return $id_menu;
+	return $id_perfil;
 }
-function excluir($id_menu, $dbhw) {
+function excluir($id_perfil, $dbhw) {
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_menus", "id_menu", $id_menu, $dbhw, false );
+	//pega o nome conforme o ID
+	$dados = pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
+	$perfil = $dados[0]["perfil];
+	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_perfis", "id_perfil", $id_perfil, $dbhw, false );
 	if ($resultado == false) {
 		return false;
 	}
