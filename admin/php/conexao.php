@@ -56,6 +56,9 @@ if(!isset($esquemaadmin)){
 if($esquemaadmin != ""){
 	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }
+if(!isset($logTransacoes)){
+	$logTransacoes = false;
+}
 //
 //indica se deve ser feita a convers&atilde;o para UTF8 ao gravar os dados
 //
