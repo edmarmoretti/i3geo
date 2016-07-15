@@ -34,7 +34,7 @@ $funcoesEdicao = array(
 		"EXCLUIR"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
-	if(verificaOperacaoSessao("admin/html/operacoes") == false){
+	if(verificaOperacaoSessao("admin/html/operacoes") === false){
 		header("HTTP/1.1 403 Vc nao pode realizar essa operacao");exit;
 	}
 }
@@ -59,7 +59,7 @@ switch ($funcao)
 		if($novo != false){
 			$sql = "SELECT * from ".$esquemaadmin."i3geousr_operacoes WHERE id_operacao = ".$novo;
 			$dados = pegaDados($sql,$dbh);
-			if($dados == false){
+			if($dados === false){
 				header("HTTP/1.1 500 erro ao consultar banco de dados");
 				exit;
 			}
@@ -73,13 +73,13 @@ switch ($funcao)
 		break;
 	case "ALTERAR":
 		$novo = alterar($id_operacao,$codigo,$descricao,$papeis,$dbhw);
-		if($novo == false){
+		if($novo === false){
 			header("HTTP/1.1 500 erro ao consultar banco de dados");
 			exit;
 		}
 		$sql = "SELECT * from ".$esquemaadmin."i3geousr_operacoes WHERE id_operacao = ".$novo;
 		$dados = pegaDados($sql,$dbh);
-		if($dados == false){
+		if($dados === false){
 			header("HTTP/1.1 500 erro ao consultar banco de dados");
 			exit;
 		}
@@ -89,7 +89,7 @@ switch ($funcao)
 	case "LISTA":
 		$operacoes = pegaDados("SELECT id_operacao,codigo,descricao from ".$esquemaadmin."i3geousr_operacoes order by codigo",$dbh,false);
 		$papeis = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papeis AS P ON OP.id_papel = P.id_papel ",$dbh,false);
-		if($operacoes == false || $papeis == false){
+		if($operacoes === false || $papeis === false){
 			$dbhw = null;
 			$dbh = null;
 			header("HTTP/1.1 500 erro ao consultar banco de dados");
@@ -110,7 +110,7 @@ switch ($funcao)
 		$papeis = pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome",$dbh);
 		$dbhw = null;
 		$dbh = null;
-		if($papeis == false){
+		if($papeis === false){
 			header("HTTP/1.1 500 erro ao consultar banco de dados");
 			exit;
 		}
@@ -120,7 +120,7 @@ switch ($funcao)
 		$retorna = excluir($id_operacao,$dbhw);
 		$dbhw = null;
 		$dbh = null;
-		if($retorna == false){
+		if($retorna === false){
 			header("HTTP/1.1 500 erro ao consultar banco de dados");
 			exit;
 		}
@@ -155,19 +155,19 @@ function alterar($id_operacao,$codigo,$descricao,$papeis,$dbhw){
 		"descricao" => $descricao
 	);
 	$resultado = i3GeoAdminUpdate($dbhw,"i3geousr_operacoes",$dataCol,"WHERE id_operacao = $id_operacao");
-	if($resultado == false){
+	if($resultado === false){
 		return false;
 	}
 	//apaga todos os papeis
 	$resultado = excluirPapeis($id_operacao,$dbhw);
-	if($resultado == false){
+	if($resultado === false){
 		return false;
 	}
 	if(!empty($papeis)){
 		//atualiza papeis vinculados
 		foreach($papeis as $p){
 			$resultado = adicionaPapel($id_operacao,$p,$dbhw);
-			if($resultado == false){
+			if($resultado === false){
 				return false;
 			}
 		}
@@ -186,10 +186,10 @@ function adicionaPapel($id_operacao,$id_papel,$dbhw){
 function excluir($id_operacao,$dbhw){
 	global $esquemaadmin;
 	$resultado = i3GeoAdminExclui($esquemaadmin."i3geousr_operacoes","id_operacao",$id_operacao,$dbhw,false);
-	if($resultado == false){
+	if($resultado === false){
 		return false;
 	}
-	if($resultado == true){
+	if($resultado === true){
 		$resultado = excluirPapeis($id_operacao,$dbhw);
 	}
 	return $resultado;

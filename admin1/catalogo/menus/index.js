@@ -44,7 +44,7 @@ Obt&eacute;m a lista de menus
 			.done(
 					function(data, status){
 						//valor do filtro atual
-						var filtro = i3GEOadmin.menus.valorFiltro();
+						var filtro = i3GEOadmin.core.valorFiltro();
 						//objeto json com os dados viondos do banco
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
@@ -97,8 +97,8 @@ Obt&eacute;m a lista de menus
 						$("#filtro").html("<option value='' >Todos</option>" + html);
 						$("#filtro").combobox();
 						if(filtro != ""){
-							i3GEOadmin.menus.defineFiltro(filtro);
-							i3GEOadmin.menus.filtra(i3GEOadmin.menus.pegaFiltro());
+							i3GEOadmin.core.defineFiltro(filtro);
+							i3GEOadmin.core.filtra(i3GEOadmin.menus.pegaFiltro());
 						}
 						//monta um template para o modal de inclusao de novo usuario
 						if(i3GEOadmin.menus.formAdiciona == ""){
@@ -231,30 +231,6 @@ Obt&eacute;m a lista de menus
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}
 			);
-		},
-		pegaFiltro: function(){
-			return $i("filtro");
-		},
-		valorFiltro: function(){
-			return i3GEOadmin.menus.pegaFiltro().value;
-		},
-		defineFiltro: function(valor){
-			i3GEOadmin.menus.pegaFiltro().value = valor;
-		},
-		filtra: function(obj){
-			$("#corpo .panel").each(
-					function(i,el){
-						if(obj.value == ""){
-							$(el).show();
-						}
-						else {
-							$(el).hide();
-						}
-					}
-			);
-			if(obj.value != ""){
-				$("#"+obj.value).show();
-			}
 		},
 		addPerfil: function(id,valor){
 			var i = $("#"+id);

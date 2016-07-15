@@ -34,7 +34,7 @@ $funcoesEdicao = array (
 		"EXCLUIR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/arvore" ) == false) {
+	if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
 		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 		exit ();
 	}
@@ -47,7 +47,7 @@ $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
 		$novo = adicionar( $nome, $dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -55,12 +55,12 @@ switch ($funcao) {
 		break;
 	case "ALTERAR" :
 		$novo = alterar ( $id_tag, $nome, $dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags order by nome", $dbh, false );
-		if ($dados == false) {
+		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -69,7 +69,7 @@ switch ($funcao) {
 		break;
 	case "LISTA" :
 		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags order by nome", $dbh, false );
-		if ($dados == false) {
+		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -83,7 +83,7 @@ switch ($funcao) {
 		$retorna = excluir ( $id_tag, $dbhw );
 		$dbhw = null;
 		$dbh = null;
-		if ($retorna == false) {
+		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -118,7 +118,7 @@ function alterar($id_tag, $nome,$dbhw) {
 		"nome" => $nome
 	);
 	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_tags", $dataCol, "WHERE id_tag = $id_tag" );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	return $id_tag;
@@ -126,7 +126,7 @@ function alterar($id_tag, $nome,$dbhw) {
 function excluir($id_tag, $dbhw) {
 	global $esquemaadmin;
 	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_tags", "id_tag", $id_tag, $dbhw, false );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	return $resultado;

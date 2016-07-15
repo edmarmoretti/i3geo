@@ -184,6 +184,29 @@ body {
 .ui-menu-item {
 	width: 95%;
 }
+
+.panel-heading [data-toggle="collapse"]:after {
+	font-family: 'FontAwesome';
+	content: "\f054";
+	float: right;
+	margin-right: 5px;
+	color: #fffff;
+	font-size: 12px;
+	line-height: 16px;
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+
+.panel-heading [data-toggle="collapse"].collapsed:after {
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
 </style>
 </head>
 <script id="iconeAguardeTpl" type="x-tmpl-mustache">

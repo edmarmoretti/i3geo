@@ -103,7 +103,7 @@ i3GEOadmin.uploaddados = {
 			return ok;
 		},
 		concluir: function(){
-			if(i3GEOadmin.uploaddados.upload.verificaForm() == false){
+			if(i3GEOadmin.uploaddados.upload.verificaForm() === false){
 				alert("Verifique a escolha dos parametros");
 				return;
 			};

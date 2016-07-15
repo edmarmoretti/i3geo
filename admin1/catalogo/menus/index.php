@@ -27,7 +27,7 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.menus.filtra(this)" id="filtro" class="form-control input-lg">
+					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
@@ -56,7 +56,13 @@ include "../../head.php";
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_menu}}">
-	<div class="panel-body">
+	<div class="panel-heading" role="tab">
+		<h3 class="panel-title">
+			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_menu}}"
+			aria-expanded="false" aria-controls="#body-form-{{id_menu}}"> {{{nome_menu}}} </a>
+		</h3>
+	</div>
+	<div class="panel-body panel-collapse collapse" id="body-form-{{id_menu}}">
 		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post" action="" >
 			<div class="row">
 				<div class="col-md-12">

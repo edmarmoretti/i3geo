@@ -116,7 +116,7 @@ i3GEOadmin.editor = {
 			},
 			novoEsquema = window.prompt("Novo nome:","");
 			if (novoEsquema != null && novoEsquema != ""){
-				if(i3GEOadmin.editor.esquema.verificaExiste(novoEsquema) == false){
+				if(i3GEOadmin.editor.esquema.verificaExiste(novoEsquema) === false){
 					core_carregando("adicionando...");
 					core_makeRequest("../php/metaestat.php?funcao=criaEsquemaDB&formato=json&nome_esquema="+novoEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
 				}
@@ -144,7 +144,7 @@ i3GEOadmin.editor = {
 			nomeEsquema = $i("i3GEOadminesquema").value;
 			novoEsquema = window.prompt("Novo nome:","");
 			if (novoEsquema != null && novoEsquema != ""){
-				if(i3GEOadmin.editor.esquema.verificaExiste(novoEsquema) == false){
+				if(i3GEOadmin.editor.esquema.verificaExiste(novoEsquema) === false){
 					core_carregando("adicionando...");
 					core_makeRequest("../php/metaestat.php?funcao=alteraNomeEsquemaDB&formato=json&nome_esquema="+nomeEsquema+"&novonome_esquema="+novoEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
 				}
@@ -265,13 +265,13 @@ i3GEOadmin.editor = {
 			},
 			novaTabela = "",
 			nomeEsquema = $i("i3GEOadminesquema").value;
-			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
+			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) === false){
 				return;
 			}
 			novaTabela = window.prompt("Nome da tabela:","");
 			comentarioTabela = window.prompt("Comentario (opcional):","");
 			if (novaTabela!=null && novaTabela!=""){
-				if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) == false){
+				if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) === false){
 					core_carregando("adicionando...");
 					core_makeRequest("../php/metaestat.php?funcao=criaTabelaDB&formato=json&comentario="+comentarioTabela+"&nome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
 				}
@@ -298,12 +298,12 @@ i3GEOadmin.editor = {
 			},
 			novaTabela = "",
 			nomeEsquema = $i("i3GEOadminesquema").value;
-			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
+			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) === false){
 				return;
 			}
 			novaTabela = window.prompt("Novo nome:","");
 			if (novaTabela!=null && novaTabela!=""){
-				if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) == false){
+				if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) === false){
 					core_carregando("adicionando...");
 					core_makeRequest("../php/metaestat.php?funcao=alteraNomeTabelaDB&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&novonome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
 				}
@@ -330,12 +330,12 @@ i3GEOadmin.editor = {
 			},
 			novaTabela = "",
 			nomeEsquema = $i("i3GEOadminesquema").value;
-			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
+			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) === false){
 				return;
 			}
 			novaTabela = window.prompt("Novo nome:","");
 			if (novaTabela!=null && novaTabela!=""){
-				if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) == false){
+				if(i3GEOadmin.editor.tabela.verificaExiste(novaTabela) === false){
 					core_carregando("adicionando...");
 					core_makeRequest("../php/metaestat.php?funcao=copiaTabelaDB&formato=json&nome_tabela="+$i("i3GEOadmintabela").value+"&novonome_tabela="+novaTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
 				}
@@ -484,7 +484,7 @@ i3GEOadmin.editor = {
 			tipo = "",
 			nomeEsquema = $i("i3GEOadminesquema").value,
 			nomeTabela = $i("i3GEOadmintabela").value;
-			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
+			if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) === false){
 				return;
 			}
 
@@ -492,7 +492,7 @@ i3GEOadmin.editor = {
 			if (novaColuna!=null && novaColuna!=""){
 				tipo = window.prompt("Tipo (integer, numeric, text, geometry):","");
 				if (tipo!=null && tipo!=""){
-					if(i3GEOadmin.editor.coluna.verificaExiste(novaColuna) == false){
+					if(i3GEOadmin.editor.coluna.verificaExiste(novaColuna) === false){
 						core_carregando("adicionando...");
 						core_makeRequest("../php/metaestat.php?funcao=criaColunaDB&formato=json&tipo="+tipo+"&nova_coluna="+novaColuna+"&nome_tabela="+nomeTabela+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
 					}
@@ -518,10 +518,10 @@ i3GEOadmin.editor = {
 			nomeColuna = $i("i3GEOadmincoluna").value;
 			novaColuna = window.prompt("Novo nome:","");
 			if (novaColuna!=null && novaColuna!=""){
-				if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) == false){
+				if(i3GEOadmin.editor.verificaEsquema(nomeEsquema) === false){
 					return;
 				}
-				if(i3GEOadmin.editor.coluna.verificaExiste(novaColuna) == false){
+				if(i3GEOadmin.editor.coluna.verificaExiste(novaColuna) === false){
 					core_carregando("adicionando...");
 					core_makeRequest("../php/metaestat.php?funcao=alteraNomeColunaDB&formato=json&nome_coluna="+nomeColuna+"&nome_tabela="+$i("i3GEOadmintabela").value+"&novonome_coluna="+novaColuna+"&nome_esquema="+nomeEsquema+"&codigo_estat_conexao="+$i("i3GEOadmincodigo_estat_conexao").value,callback);
 				}

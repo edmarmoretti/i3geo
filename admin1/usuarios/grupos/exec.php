@@ -34,7 +34,7 @@ $funcoesEdicao = array (
 		"EXCLUIR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/usuarios" ) == false) {
+	if (verificaOperacaoSessao ( "admin/html/usuarios" ) === false) {
 		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 		exit ();
 	}
@@ -58,7 +58,7 @@ switch ($funcao) {
 		if ($novo != false) {
 			$sql = "SELECT * from " . $esquemaadmin . "i3geousr_grupos WHERE id_grupo = " . $novo;
 			$dados = pegaDados ( $sql, $dbh );
-			if ($dados == false) {
+			if ($dados === false) {
 				header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 				exit ();
 			}
@@ -71,13 +71,13 @@ switch ($funcao) {
 		break;
 	case "ALTERAR" :
 		$novo = alterar ( $id_grupo, $nome, $descricao, $usuarios, $dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 		$sql = "SELECT * from " . $esquemaadmin . "i3geousr_grupos WHERE id_grupo = " . $novo;
 		$dados = pegaDados ( $sql, $dbh );
-		if ($dados == false) {
+		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -87,7 +87,7 @@ switch ($funcao) {
 	case "LISTA" :
 		$grupos = pegaDados ( "SELECT id_grupo,nome,descricao from ".$esquemaadmin."i3geousr_grupos order by nome", $dbh, false );
 		$usuarios = pegaDados ( "SELECT U.nome_usuario, U.id_usuario, U.login, UP.id_grupo FROM ".$esquemaadmin."i3geousr_usuarios AS U JOIN ".$esquemaadmin."i3geousr_grupousuario AS UP ON U.id_usuario = UP.id_usuario", dbh, false );
-		if ($usuarios == false || $grupos == false) {
+		if ($usuarios === false || $grupos === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -107,7 +107,7 @@ switch ($funcao) {
 		$usuarios = pegaDados ( "SELECT id_usuario, login, nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE ativo = 1 order by login", $dbh );
 		$dbhw = null;
 		$dbh = null;
-		if ($usuarios == false) {
+		if ($usuarios === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit();
 		}
@@ -120,7 +120,7 @@ switch ($funcao) {
 		$retorna = excluir ( $id_grupo, $dbhw );
 		$dbhw = null;
 		$dbh = null;
-		if ($retorna == false) {
+		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -157,19 +157,19 @@ function alterar($id_grupo, $nome, $descricao, $usuarios, $dbhw) {
 	);
 
 	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geousr_grupos", $dataCol, "WHERE id_grupo = $id_grupo" );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	// apaga todos os papeis
 	$resultado = excluirUsuarios ( $id_grupo, $dbhw );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	if (! empty ( $usuarios )) {
 		// atualiza papeis vinculados
 		foreach ( $usuarios as $p ) {
 			$resultado = adicionaUsuario ( $id_grupo, $p, $dbhw );
-			if ($resultado == false) {
+			if ($resultado === false) {
 				return false;
 			}
 		}
@@ -188,10 +188,10 @@ function adicionaUsuario($id_grupo, $id_usuario, $dbhw) {
 function excluir($id_grupo, $dbhw) {
 	global $esquemaadmin;
 	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geousr_grupos", "id_grupo", $id_grupo, $dbhw, false );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
-	if ($resultado == true) {
+	if ($resultado === true) {
 		$resultado = excluirUsuarios ( $id_grupo, $dbhw );
 	}
 	return $resultado;

@@ -27,7 +27,7 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.mapas.filtra(this)" id="filtro" class="form-control input-lg">
+					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
@@ -56,7 +56,13 @@ include "../../head.php";
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_mapa}}">
-	<div class="panel-body">
+	<div class="panel-heading" role="tab">
+		<h3 class="panel-title">
+			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_mapa}}"
+			aria-expanded="false" aria-controls="#body-form-{{id_mapa}}"> {{{nome_mapa}}} </a>
+		</h3>
+	</div>
+	<div class="panel-body panel-collapse collapse" id="body-form-{{id_mapa}}">
 		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post" action="" >
 			<div class="row">
 				<div class="col-md-12">
@@ -134,8 +140,13 @@ include "../../head.php";
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="imagem_mapa">{{{img}}}</label>
-						<div class="col-md-8">
+						<div class="col-md-4">
 							<input type="text" value="{{{imagem_mapa}}}" class="form-control" name="imagem_mapa">
+						</div>
+						<div class="col-md-4">
+							<a href="#" class="thumbnail">
+      							<img src="{{{imagem_mapa}}}">
+    						</a>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
@@ -150,7 +161,6 @@ include "../../head.php";
 							<input type="text" value="{{{outros_mapa}}}" class="form-control" name="outros_mapa">
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</form>

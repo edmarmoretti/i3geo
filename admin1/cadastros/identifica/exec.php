@@ -34,7 +34,7 @@ $funcoesEdicao = array (
 		"EXCLUIR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/identifica" ) == false) {
+	if (verificaOperacaoSessao ( "admin/html/identifica" ) === false) {
 		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 		exit ();
 	}
@@ -44,7 +44,7 @@ $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
 		$novo = adicionar( $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -52,12 +52,12 @@ switch ($funcao) {
 		break;
 	case "ALTERAR" :
 		$novo = alterar ( $id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 		$dados = pegaDados ( "SELECT id_i, publicado_i, abrir_i, nome_i, target_i from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = $id_i order by nome_i", $dbh, false );
-		if ($dados == false) {
+		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -66,7 +66,7 @@ switch ($funcao) {
 		break;
 	case "LISTA" :
 		$d = pegaDados ( "SELECT id_i, publicado_i, abrir_i, nome_i, target_i from ".$esquemaadmin."i3geoadmin_identifica order by nome_i", $dbh, false );
-		if ($d == false) {
+		if ($d === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -80,7 +80,7 @@ switch ($funcao) {
 		$retorna = excluir ( $id_i, $dbhw );
 		$dbhw = null;
 		$dbh = null;
-		if ($retorna == false) {
+		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -120,7 +120,7 @@ function alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
 		"target_i" => $target_i
 	);
 	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_identifica", $dataCol, "WHERE id_i = $id_i" );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	return $id_i;
@@ -128,7 +128,7 @@ function alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
 function excluir($id_i, $dbhw) {
 	global $esquemaadmin;
 	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_identifica", "id_i", $id_i, $dbhw, false );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	return $resultado;

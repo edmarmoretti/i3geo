@@ -19,7 +19,7 @@ include "index.php";
 							exit ();
 						} else {
 							$continua = verificaMaster ( $_POST ["usuario"], $_POST ["senha"], $i3geomaster );
-							if ($continua == false) {
+							if ($continua === false) {
 								echo "<div class='alert alert-warning'>Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster</div>";
 								exit ();
 							}

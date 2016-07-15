@@ -34,7 +34,7 @@ $funcoesEdicao = array (
 		"EXCLUIR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/mapas" ) == false) {
+	if (verificaOperacaoSessao ( "admin/html/mapas" ) === false) {
 		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 		exit ();
 	}
@@ -45,7 +45,7 @@ $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
 		$novo = adicionar( $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, $dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -53,13 +53,13 @@ switch ($funcao) {
 		break;
 	case "ALTERAR" :
 		$novo = alterar ( $id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, $mapfile , $dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 		$dados = pegaDados ( "SELECT id_mapa  from ".$esquemaadmin."i3geoadmin_mapas WHERE id_mapa = $id_mapa order by ordem_mapa, nome_mapa", $dbh, false );
 
-		if ($dados == false) {
+		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -69,15 +69,12 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$dados = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, mapfile  from ".$esquemaadmin."i3geoadmin_mapas order by ordem_mapa, nome_mapa", $dbh, false );
-
 		$semmapfile = pegaDados("SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'nao' as contemmapfile from ".$esquemaadmin."i3geoadmin_mapas where mapfile = '' or mapfile is null order by ordem_mapa, nome_mapa", $dbh, false);
 		$commapfile = pegaDados("SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'sim' as contemmapfile from ".$esquemaadmin."i3geoadmin_mapas where mapfile != '' and mapfile is not null order by ordem_mapa, nome_mapa", $dbh, false);
-
-		if ($semmapfile == false || $commapfile == false) {
+		if ($semmapfile === false || $commapfile === false) {
 			$dbhw = null;
 			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de mapas" );
 			exit ();
 		}
 		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbh, false );
@@ -93,7 +90,7 @@ switch ($funcao) {
 		$retorna = excluir ( $id_mapa, $dbhw );
 		$dbhw = null;
 		$dbh = null;
-		if ($retorna == false) {
+		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -159,7 +156,7 @@ function alterar($id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_
 		"perfil_mapa" => $perfil_mapa
 	);
 	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_mapas", $dataCol, "WHERE id_mapa = $id_mapa" );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	return $id_mapa;
@@ -167,7 +164,7 @@ function alterar($id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_
 function excluir($id_mapa, $dbhw) {
 	global $esquemaadmin;
 	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_mapas", "id_mapa", $id_mapa, $dbhw, false );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	return $resultado;
