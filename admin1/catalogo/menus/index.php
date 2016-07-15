@@ -57,7 +57,7 @@ include "../../head.php";
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_menu}}">
 	<div class="panel-body">
-		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form" role="form" method="post" action="" >
+		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post" action="" >
 			<div class="row">
 				<div class="col-md-12">
 					<h4>{{{nome_menu}}}</h4>
@@ -85,16 +85,19 @@ include "../../head.php";
 							<input type="text" value="{{{desc_menu}}}" class="form-control" name="desc_menu">
 						</div>
 					</div>
+
 					<div class="form-group form-group-lg">
-						<label class="col-md-3 control-label" for="perfil_menu">{{{perfil}}}</label>
-						<div class="col-md-9">
+						<label class="col-md-3 control-label" for="perfil_menu">{{{perfilAjuda}}}</label>
+						<div class="col-md-5">
 							<input id="perfil-{{id_menu}}" type="text" value="{{{perfil_menu}}}" class="form-control" name="perfil_menu">
+						</div>
+						<div class="col-md-4">
 							<select class="form-control" onchange="i3GEOadmin.menus.addPerfil('perfil-{{id_menu}}',this.value)">
 								{{{opcoesPerfil}}}
 							</select>
-							<p>{{{perfilAjuda}}}</p>
 						</div>
 					</div>
+
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="publicado_menu">{{{publicado}}}</label>
 						<div class="col-md-9">

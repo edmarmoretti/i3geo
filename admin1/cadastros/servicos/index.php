@@ -61,7 +61,7 @@ include "../../head.php";
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_ws}}">
 	<div class="panel-body">
-		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form" role="form" method="post" action="" >
+		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post" action="" >
 			<div class="row">
 				<div class="col-md-12">
 					<h4>{{{nome_ws}}}</h4>

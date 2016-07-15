@@ -239,6 +239,7 @@ function i3GeoAdminUpdate($pdo,$tabela,$data,$filtro=""){
 		i3GeoAdminInsertLog($pdo,$sql,array_values($data));
 		return true;
 	} catch (PDOException $e) {
+		//echo $e->getMessage( );
 		return "Error!: ";
 	}
 }
@@ -344,7 +345,7 @@ function i3GeoAdminInsertLog($pdo,$sql,$data=array()){
 		);
 		return true;
 	} catch (PDOException $e) {
-		echo " ";exit;
+		echo "insert log";exit;
 	}
 }
 /*

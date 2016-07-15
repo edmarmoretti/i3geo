@@ -104,7 +104,7 @@ Parametros:
 return:
 array
 */
-	function pegaListaDeMenus()
+	function pegaListaDeMenus($filtraOgc="nao",$filtraDown="nao")
 	{
 		$resultado = array();
 		//necess&aacute;rio por conta da inclusao do conexao.php
@@ -113,7 +113,7 @@ array
 		{return "locaplic nao foi definido";}
 		include_once($this->locaplic."/admin/php/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
-		$resultado = $arvore->pegaListaDeMenus($this->perfil);
+		$resultado = $arvore->pegaListaDeMenus($this->perfil,$filtraOgc,$filtraDown);
 		$final = array();
 		//pega os temas na raiz
 		foreach($resultado as $r){
@@ -153,7 +153,7 @@ array
 		{$tipo = "";}
 		else
 		{$tipo = "gruposeraiz";}
-		$tempm = $this->pegaListaDeMenus();
+		$tempm = $this->pegaListaDeMenus($filtraOgc,$filtraDown);
 		foreach($tempm as $menu)
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
@@ -175,7 +175,7 @@ O perfil do usu&aacute;rio &eacute; armazenado na se&ccedil;&atilde;o na inicial
 
 Parametros:
 
-codgrupo - c�digo do grupo
+codgrupo - codigo do grupo
 
 idmenu - id que identifica o menu
 

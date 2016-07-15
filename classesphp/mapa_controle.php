@@ -1478,7 +1478,7 @@ switch (strtoupper($funcao))
 			$editores = "";
 		}
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
-		$retorno = $m->pegaListaDeMenus();
+		$retorno = $m->pegaListaDeMenus($filtraOgc,$filtraDown);
 		break;
 		/*
 		 Valor: PEGALISTADEGRUPOS

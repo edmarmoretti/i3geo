@@ -63,7 +63,7 @@ include "../../head.php";
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-md-7">
-					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form" role="form"
+					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
 						method="post" action="">
 						<div class="form-group form-group-lg">
 							<label class="col-md-2 control-label" for="perfil">{{{txtPerfil}}}</label>

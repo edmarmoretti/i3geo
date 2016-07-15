@@ -1,8 +1,8 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
 //i3GEOadmin.mapas = {};
 i3GEOadmin.mapas.dicionario = {
-	'mapas' : [ {
-		pt : "Administra&ccedil;&atilde;o do i3geo - Links para mapas",
+	'txtTitulo' : [ {
+		pt : "Links para mapas",
 		en : "",
 		es : ""
 	} ],
@@ -12,7 +12,7 @@ i3GEOadmin.mapas.dicionario = {
 		es : ""
 	} ],
     'txtAjuda' : [ {
-		pt : "<p>Vc pode registrar qualquer link para mapas. A op&ccedil;&atilde;o 'editar' abre um formul&aacute;rio para a cria&ccedil;&atilde;o do link conforme os par&acirc;metros utilizados pelo i3Geo. Voc&ecirc; pode desprezar todos os campos do formul&aacute;rio e incluir apenas o link direto desejado. Pode ser armazenado um mapfile completo com todas as configura&ccedil;&otilde;es do mapa",
+		pt : "Vc pode registrar qualquer link para mapas. A op&ccedil;&atilde;o 'editar' abre um formul&aacute;rio para a cria&ccedil;&atilde;o do link conforme os par&acirc;metros utilizados pelo i3Geo. Voc&ecirc; pode desprezar todos os campos do formul&aacute;rio e incluir apenas o link direto desejado. Pode ser armazenado também um mapfile completo com todas as configura&ccedil;&otilde;es do mapa",
 		en : "",
 		es : ""
 	} ],
@@ -32,17 +32,17 @@ i3GEOadmin.mapas.dicionario = {
 		es : ""
 	} ],
     'contemMapfile' : [ {
-		pt : "contem mapfile",
+		pt : "Contem mapfile embutido",
 		en : "",
 		es : ""
 	} ],
     'ordemMapa' : [ {
-		pt : "Ordem de apresenta&ccedil;&atilde;o do mapa:",
+		pt : "Ordem ao listar",
 		en : "",
 		es : ""
 	} ],
     'nomeMapa' : [ {
-		pt : "Nome do mapa:",
+		pt : "Nome",
 		en : "",
 		es : ""
 	} ],
@@ -52,32 +52,32 @@ i3GEOadmin.mapas.dicionario = {
 		es : ""
 	} ],
     'descricao' : [ {
-		pt : "Descri&ccedil;&atilde;o:",
+		pt : "Descri&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
     'extensao' : [ {
-		pt : "Extens&atilde;o geogr&aacute;fica:",
+		pt : "Extens&atilde;o geogr&aacute;fica",
 		en : "",
 		es : ""
 	} ],
     'img' : [ {
-		pt : "URL da imagem miniatura:",
+		pt : "URL da imagem miniatura",
 		en : "",
 		es : ""
 	} ],
     'temas' : [ {
-		pt : "Temas que ser&atilde;o inclu&iacute;dos nesse mapa (utilize os c&oacute;digos dos mapfiles mostrados na lista abaixo): ",
+		pt : "Temas que ser&atilde;o inclu&iacute;dos nesse mapa. Separe por espa&ccedil;os e escolha da lista ao lado.",
 		en : "",
 		es : ""
 	} ],
     'temasLigados' : [ {
-		pt : "Temas que ser&atilde;o ligados. Devem constar na lista de temas inclu&iacute;dos: ",
+		pt : "Temas que ser&atilde;o ligados. Devem constar na lista de temas inclu&iacute;dos",
 		en : "",
 		es : ""
 	} ],
     'perfis' : [ {
-		pt : "Perfis que podem ver este mapa: ",
+		pt : "Perfis que podem ver este mapa. Separe por espa&ccedil;os e escolha da lista ao lado.",
 		en : "",
 		es : ""
 	} ],
@@ -87,12 +87,12 @@ i3GEOadmin.mapas.dicionario = {
 		es : ""
 	} ],
     'parametros' : [ {
-		pt : "Outros par&acirc;metros (separe com '&'):",
+		pt : "Outros par&acirc;metros (separe com '&')",
 		en : "",
 		es : ""
 	} ],
     'linkDireto' : [ {
-		pt : "Link direto para abertura do mapa (despreza os outros par&acirc;metros):",
+		pt : "Link direto para abertura do mapa (despreza os outros par&acirc;metros)",
 		en : "",
 		es : ""
 	} ]
