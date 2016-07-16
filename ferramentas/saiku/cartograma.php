@@ -121,6 +121,8 @@ else{
 	$nlayers = $mapa->numlayers;
 	for($i=0;$i<$nlayers;$i++){
 		$ll = $mapa->getlayer($i);
+		$ll->set("status",MS_DELETE);
+		/*
 		if($ll->getmetadata("SAIKU") == $opcoes["tipo"]){
 			$ll->set("status",MS_DELETE);
 		}
@@ -129,6 +131,7 @@ else{
 				$ll->set("status",MS_OFF);
 			}
 		}
+		*/
 		if($ll->getmetadata("tema") == "Limites"){
 			$ll->set("status",MS_DELETE);
 		}
@@ -149,13 +152,19 @@ else{
 	$l[] = '	TEMPLATE "none.htm"';
 	$l[] = '	STATUS DEFAULT';
 	$l[] = '	METADATA';
-	$l[] = '		TEMA "'.$titulolayer.' - '.$nomesColunas[1].' - '.$opcoes["tipo"].'"';
+	if($opcoes["tipo"] == "mapaBarras" || $opcoes["tipo"] == "mapaPizzas"){
+		$l[] = '		TEMA "'.$titulolayer.' - '.$opcoes["tipo"].'"';
+	}
+	else{
+		$l[] = '		TEMA "'.$titulolayer.' - '.$metadataItens[1].' - '.$opcoes["tipo"].'"';
+	}
 	$l[] = '		CLASSE "SIM"';
 	$l[] = '		SAIKU "'.$opcoes["tipo"].'"';
 	$l[] = '		TIP "'.$meta["colunanomeregiao"].','.implode(',',$nomesColunas).'"';
 	$l[] = '		ITENSDESC "'.$meta["colunanomeregiao"].','.implode(',',$metadataItens).'"';
 	$l[] = '		ITENS "'.$meta["colunanomeregiao"].','.implode(',',$nomesColunas).'"';
 	$l[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
+	$l[] = '		TILES "NAO"';
 	$l[] = '	END	';
 
 	$l = implode(PHP_EOL,$l);
@@ -174,12 +183,12 @@ else{
 	if($opcoes["tipo"] == "mapaBarras"){
 		$l .= PHP_EOL.' PROCESSING "CHART_SIZE='.$opcoes["size"].' '.$opcoes["size"].'"';
 		$l .= PHP_EOL.' PROCESSING "CHART_TYPE=bar"';
-		$l .= implode(PHP_EOL,mapaBarras($nomesColunas));
+		$l .= implode(PHP_EOL,mapaBarras($nomesColunas,$metadataItens));
 	}
 	if($opcoes["tipo"] == "mapaPizzas"){
 		$l .= PHP_EOL.' PROCESSING "CHART_SIZE='.$opcoes["size"].' '.$opcoes["size"].'"';
 		$l .= PHP_EOL.' PROCESSING "CHART_TYPE=pie"';
-		$l .= implode(PHP_EOL,mapaBarras($nomesColunas));
+		$l .= implode(PHP_EOL,mapaBarras($nomesColunas,$metadataItens));
 	}
 	$l .= PHP_EOL.'END';
 
@@ -204,6 +213,7 @@ else{
 		$l[] = '		CLASSE "SIM"';
 		$l[] = '		SAIKU "'.$opcoes["tipo"].'"';
 		$l[] = '		METAESTAT_CODIGO_TIPO_REGIAO "'.$codigo_tipo_regiao.'"';
+		$l[] = '		TILES "NAO"';
 		$l[] = '	END	';
 		$l[] = '	CLASS	';
 		$l[] = '	OUTLINECOLOR 255 255 255	';
@@ -235,7 +245,7 @@ else{
 
 header("Location:".$opcoes["locaplic"]."/mashups/openlayers.php?temas=".$map_file."&DESLIGACACHE=sim&botoes=legenda,pan,zoombox,zoomtot,zoomin,zoomout,distancia,area,identifica&controles=navigation,layerswitcher,scaleline,mouseposition,overviewmap,keyboarddefaults&tiles=false&mapext=".$opcoes["mapext"]);
 
-function mapaBarras($colunas){
+function mapaBarras($colunas,$metadataItens){
 	global $opcoes;
 	//$opcoes["coreshex"] = array_reverse($opcoes["coreshex"]);
 	//$valores = retornaDadosColuna($coluna);
@@ -245,7 +255,7 @@ function mapaBarras($colunas){
 	$classes = array();
 	for($i=1;$i<$nclasses;$i++){
 		$classes[] = PHP_EOL.'CLASS';
-		$classes[] = '	NAME "'.$colunas[$i].'"';
+		$classes[] = '	NAME "'.$metadataItens[$i].'"';
 		$classes[] = '	STYLE';
 		$cor = $opcoes["outlinecolor"];
 		$classes[] = '		OUTLINECOLOR '.$cor["red"].' '.$cor["green"].' '.$cor["blue"];
