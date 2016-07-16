@@ -29,7 +29,7 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label> <select
-						onchange="i3GEOadmin.tags.filtra(this)" id="filtro" class="form-control input-lg">
+						onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
@@ -63,7 +63,7 @@ include "../../head.php";
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-md-7">
-					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form" role="form"
+					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
 						method="post" action="">
 						<div class="form-group form-group-lg">
 							<label class="col-md-2 control-label" for="nome">{{{txtTag}}}</label>

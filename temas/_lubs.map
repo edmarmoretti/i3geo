@@ -41,7 +41,7 @@ MAP
       "convcaracter"	""
     END # METADATA
     NAME "_lubs"
-    STATUS DEFAULT
+    STATUS OFF
     TEMPLATE "none.htm"
     TILEITEM "location"
     TYPE POINT

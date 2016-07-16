@@ -38,7 +38,7 @@ include "index.php";
 						}
 						else{
 							$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
-							if($continua == false){
+							if($continua === false){
 								echo "<div class='alert alert-warning'>Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster</div>";
 								exit;
 							}
@@ -251,7 +251,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			$nomecG = ($objImagemG->imagepath).$map.".grande.png";
 			$objImagemG->saveImage($nomecG);
 		}
-		if($admin == false){
+		if($admin === false){
 			if($tipo=="mini" || $tipo == "todos")
 			{echo "<img class='img-thumbnail' src='".$urlM.".mini.png' />";}
 			if($tipo=="grande" || $tipo == "todos")
@@ -260,7 +260,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 		//
 		//copia a imagem
 		//
-		if($admin == true){
+		if($admin === true){
 			$dir = $locaplic."/temas/miniaturas";
 			$mini = $dir."/".$map.".map.mini.png";
 			$grande = $dir."/".$map.".map.grande.png";

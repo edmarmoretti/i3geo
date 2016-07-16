@@ -34,7 +34,7 @@ $funcoesEdicao = array (
 		"EXCLUIR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/webservices" ) == false) {
+	if (verificaOperacaoSessao ( "admin/html/webservices" ) === false) {
 		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 		exit ();
 	}
@@ -44,7 +44,7 @@ $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
 		$novo = adicionar( $autor_ws, $desc_ws, $link_ws, $nome_ws, $tipo_ws,$dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -52,12 +52,12 @@ switch ($funcao) {
 		break;
 	case "ALTERAR" :
 		$novo = alterar ( $id_ws,$autor_ws, $desc_ws, $link_ws, $nome_ws, $tipo_ws,$dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 		$dados = pegaDados ( "SELECT id_ws,autor_ws,desc_ws,link_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by nome_ws", $dbh, false );
-		if ($dados == false) {
+		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -66,7 +66,7 @@ switch ($funcao) {
 		break;
 	case "LISTA" :
 		$ws = pegaDados ( "SELECT id_ws,autor_ws,desc_ws,link_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by nome_ws", $dbh, false );
-		if ($ws == false) {
+		if ($ws === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -80,7 +80,7 @@ switch ($funcao) {
 		$retorna = excluir ( $id_ws, $dbhw );
 		$dbhw = null;
 		$dbh = null;
-		if ($retorna == false) {
+		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -127,7 +127,7 @@ function alterar($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 		"tipo_ws" => $tipo_ws
 	);
 	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_ws", $dataCol, "WHERE id_ws = $id_ws" );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	return $id_ws;
@@ -135,7 +135,7 @@ function alterar($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 function excluir($id_ws, $dbhw) {
 	global $esquemaadmin;
 	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_ws", "id_ws", $id_ws, $dbhw, false );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	return $resultado;

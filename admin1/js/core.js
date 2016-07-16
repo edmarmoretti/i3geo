@@ -102,7 +102,7 @@ i3GEOadmin.core = {
 			i3GEOadmin.core.abreModal("modalGeral",conteudo);
 		},
 		modalAguarde: function(open){
-			if(open == true){
+			if(open === true){
 				i3GEOadmin.core.abreModalGeral($("#iconeAguardeTpl").html());
 			}
 			else{
@@ -115,6 +115,32 @@ i3GEOadmin.core = {
 			}
 			else{
 				$("#"+onde).html($("#iconeAguardeTpl").html());
+			}
+		},
+		pegaFiltro: function(){
+			return $i("filtro");
+		},
+		valorFiltro: function(){
+			return i3GEOadmin.core.pegaFiltro().value;
+		},
+		defineFiltro: function(valor){
+			i3GEOadmin.core.pegaFiltro().value = valor;
+		},
+		filtra: function(obj){
+			$("#corpo .panel").each(
+					function(i,el){
+						if(obj.value == ""){
+							$(el).show();
+							$("#body-"+el.id).collapse('hide');
+						}
+						else {
+							$(el).hide();
+						}
+					}
+			);
+			if(obj.value != ""){
+				$("#"+obj.value).show();
+				$("#body-"+obj.value).collapse('show');
 			}
 		}
 };

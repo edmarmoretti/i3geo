@@ -27,7 +27,7 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.menus.filtra(this)" id="filtro" class="form-control input-lg">
+					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
@@ -56,8 +56,14 @@ include "../../head.php";
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_menu}}">
-	<div class="panel-body">
-		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form" role="form" method="post" action="" >
+	<div class="panel-heading" role="tab">
+		<h3 class="panel-title">
+			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_menu}}"
+			aria-expanded="false" aria-controls="#body-form-{{id_menu}}"> {{{nome_menu}}} </a>
+		</h3>
+	</div>
+	<div class="panel-body panel-collapse collapse" id="body-form-{{id_menu}}">
+		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post" action="" >
 			<div class="row">
 				<div class="col-md-12">
 					<h4>{{{nome_menu}}}</h4>
@@ -85,16 +91,19 @@ include "../../head.php";
 							<input type="text" value="{{{desc_menu}}}" class="form-control" name="desc_menu">
 						</div>
 					</div>
+
 					<div class="form-group form-group-lg">
-						<label class="col-md-3 control-label" for="perfil_menu">{{{perfil}}}</label>
-						<div class="col-md-9">
+						<label class="col-md-3 control-label" for="perfil_menu">{{{perfilAjuda}}}</label>
+						<div class="col-md-5">
 							<input id="perfil-{{id_menu}}" type="text" value="{{{perfil_menu}}}" class="form-control" name="perfil_menu">
+						</div>
+						<div class="col-md-4">
 							<select class="form-control" onchange="i3GEOadmin.menus.addPerfil('perfil-{{id_menu}}',this.value)">
 								{{{opcoesPerfil}}}
 							</select>
-							<p>{{{perfilAjuda}}}</p>
 						</div>
 					</div>
+
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="publicado_menu">{{{publicado}}}</label>
 						<div class="col-md-9">

@@ -34,7 +34,7 @@ $funcoesEdicao = array (
 		"EXCLUIR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/arvore" ) == false) {
+	if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
 		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 		exit ();
 	}
@@ -48,7 +48,7 @@ $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
 		$novo = adicionar( $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -56,12 +56,12 @@ switch ($funcao) {
 		break;
 	case "ALTERAR" :
 		$novo = alterar ( $id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw );
-		if ($novo == false) {
+		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		$dados = pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus order by nome_menu", $dbh, false );
-		if ($dados == false) {
+		$dados = pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus WHERE id_menu = $id_menu order by nome_menu", $dbh, false );
+		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -72,7 +72,7 @@ switch ($funcao) {
 		break;
 	case "LISTA" :
 		$dados = pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus order by nome_menu", $dbh, false );
-		if ($dados == false) {
+		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -87,7 +87,7 @@ switch ($funcao) {
 		$retorna = excluir ( $id_menu, $dbhw );
 		$dbhw = null;
 		$dbh = null;
-		if ($retorna == false) {
+		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
@@ -149,7 +149,7 @@ function alterar($id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $
 		"perfil_menu" => $perfil_menu
 	);
 	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_menus", $dataCol, "WHERE id_menu = $id_menu" );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	return $id_menu;
@@ -157,7 +157,7 @@ function alterar($id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $
 function excluir($id_menu, $dbhw) {
 	global $esquemaadmin;
 	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_menus", "id_menu", $id_menu, $dbhw, false );
-	if ($resultado == false) {
+	if ($resultado === false) {
 		return false;
 	}
 	return $resultado;

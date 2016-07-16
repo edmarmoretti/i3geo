@@ -260,10 +260,19 @@ i3GEO.php =
 		 *
 		 * Obtem a lista de menus
 		 */
-		pegalistademenus : function(funcao) {
+		pegalistademenus : function(funcao,filtraOgc,filtraDown) {
 			i3GEO.php.verifica();
+			if(!filtraOgc){
+				filtraOgc = "nao";
+			}
+			if(!filtraDown){
+				filtraDown = "nao";
+			}
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-				"funcao=pegalistademenus&g_sid=" + i3GEO.configura.sid + "&map_file=&idioma=" + i3GEO.idioma.ATUAL;
+				"funcao=pegalistademenus&g_sid=" + i3GEO.configura.sid
+				+ "&map_file=&idioma=" + i3GEO.idioma.ATUAL
+				+ "&filtraOgc=" + filtraOgc
+				+ "&filtraDown=" + filtraDown;
 			cpJSON.call(p, "pegalistademenus", funcao, par);
 		},
 		/**

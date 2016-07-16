@@ -11,7 +11,7 @@ i3GEOadmin.menus.dicionario = {
 		es : ""
 	} ],
     'txtAjuda' : [ {
-		pt : "<p>Este formul&aacute;rio permite editar a lista de menus que ser&aacute; utilizada pelo i3Geo.<p>A &aacute;rvore &eacute; composta de menus, grupos, sub-grupos e temas. Vc deve criar os menus, a lista de grupos e a lista de sub-grupos. Ao criar um menu, esse &eacute; mostrado imediatamente na &aacute;rvore.<p>Menus ou n&oacute;s da &aacute;rvore marcados como n&atilde;o publicados s&atilde;o mostrados em vermelho e aparecem apenas para os administradores.<p>Em cada n&oacute; da &aacute;rvore podem ser associados os temas, mesmo na raiz de um dos n&iacute;veis. Os temas s&atilde;o arquivos mapfiles armazenados em i3geo/temas e registrados no sistema de administra&ccedil;&atilde;o.<p>A cria&ccedil;&atilde;o de mapfiles e a vincula&ccedil;&atilde;o tema-mapfile &eacute; feita por meio do editor de mapfiles, e consiste na determina&ccedil;&atilde;o de um nome para cada mapfile. Esse nome &eacute; listado ao ser adicionado um tema na &aacute;rvore.</div>",
+		pt : "Este formul&aacute;rio permite editar a lista de menus que ser&aacute; utilizada pelo i3Geo.<p>A &aacute;rvore &eacute; composta de menus, grupos, sub-grupos e temas. Vc deve criar os menus, a lista de grupos e a lista de sub-grupos. Ao criar um menu, esse &eacute; mostrado imediatamente na &aacute;rvore.<p>Menus ou n&oacute;s da &aacute;rvore marcados como n&atilde;o publicados s&atilde;o mostrados em vermelho e aparecem apenas para os administradores.<p>Em cada n&oacute; da &aacute;rvore podem ser associados os temas, mesmo na raiz de um dos n&iacute;veis. Os temas s&atilde;o arquivos mapfiles armazenados em i3geo/temas e registrados no sistema de administra&ccedil;&atilde;o.<p>A cria&ccedil;&atilde;o de mapfiles e a vincula&ccedil;&atilde;o tema-mapfile &eacute; feita por meio do editor de mapfiles, e consiste na determina&ccedil;&atilde;o de um nome para cada mapfile. Esse nome &eacute; listado ao ser adicionado um tema na &aacute;rvore.</div>",
 		en : "",
 		es : ""
 	} ],
@@ -51,7 +51,7 @@ i3GEOadmin.menus.dicionario = {
 		es : ""
 	} ],
     'perfilAjuda' : [ {
-		pt : "lista de perfis, separados por espa&ccedil;o, que podem visualizar esse menu",
+		pt : "Perfis que podem visualizar esse menu, separe por espa&ccedil;o e use a lista ao lado",
 		en : "",
 		es : ""
 	} ],

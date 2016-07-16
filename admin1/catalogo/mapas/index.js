@@ -22,22 +22,22 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
  */
-i3GEOadmin.menus = {
+i3GEOadmin.mapas = {
 		//variavel global indicando o elemento que recebera a lista de menus
 		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
 		init: function(onde){
-			i3GEOadmin.menus.ondeLista = onde;
-			i3GEOadmin.menus.lista();
+			i3GEOadmin.mapas.ondeLista = onde;
+			i3GEOadmin.mapas.lista();
 		},
 		/*
 Function: lista
 
-Obt&eacute;m a lista de menus
+Obt&eacute;m a lista
 		 */
 		lista: function(){
-			i3GEOadmin.core.iconeAguarde(i3GEOadmin.menus.ondeLista);
+			i3GEOadmin.core.iconeAguarde(i3GEOadmin.mapas.ondeLista);
 			$.post(
 					"exec.php?funcao=lista"
 			)
@@ -50,6 +50,11 @@ Obt&eacute;m a lista de menus
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
 						//combo com perfis
+						var opcoesTema = '<option value="">---</option>' + Mustache.to_html(
+								"{{#data}}" + $("#templateTemas").html() + "{{/data}}",
+								{"data":json["temas"]}
+						);
+						//combo com temas
 						var opcoesPerfil = '<option value="">---</option>' + Mustache.to_html(
 								"{{#data}}" + $("#templateOpcoesPerfil").html() + "{{/data}}",
 								{"data":json["perfis"]}
@@ -59,36 +64,30 @@ Obt&eacute;m a lista de menus
 								"{{#data}}" + templateLista + "{{/data}}",
 								$.extend(
 										{},
-										i3GEOadmin.menus.dicionario,
+										i3GEOadmin.mapas.dicionario,
 										{
 											"data": json["dados"],
-											"onExcluir": "i3GEOadmin.menus.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.menus.salvarDialogo",//funcao
-											"opcoesAberto": function(){
-												var hash = {};
-												hash[this.aberto + "-sel"] = "selected";
-												hash["sim"] = i3GEOadmin.menus.dicionario.sim;
-												hash["nao"] = i3GEOadmin.menus.dicionario.nao;
-												return Mustache.to_html(
-														$("#templateOpcoesAberto").html(),
-														hash
-												);
-											},
+											"onExcluir": "i3GEOadmin.mapas.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.mapas.salvarDialogo",//funcao
 											"opcoesPublicado": function(){
 												var hash = {};
-												hash[this.publicado_menu + "-sel"] = "selected";
-												hash["sim"] = i3GEOadmin.menus.dicionario.sim;
-												hash["nao"] = i3GEOadmin.menus.dicionario.nao;
+												hash[this.publicado_mapa + "-sel"] = "selected";
+												hash["sim"] = i3GEOadmin.mapas.dicionario.sim;
+												hash["nao"] = i3GEOadmin.mapas.dicionario.nao;
+												if(this.publicado_mapa == ""){
+													this.publicado_mapa = "sim";
+												}
 												return Mustache.to_html(
 														$("#templateOpcoesPublicado").html(),
 														hash
 												);
 											},
-											"opcoesPerfil": opcoesPerfil
+											"opcoesPerfil": opcoesPerfil,
+											"opcoesTema": opcoesTema
 										}
 								)
 						);
-						i3GEOadmin.menus.ondeLista.html(html);
+						i3GEOadmin.mapas.ondeLista.html(html);
 						//filtro
 						html = Mustache.to_html(
 								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
@@ -98,54 +97,46 @@ Obt&eacute;m a lista de menus
 						$("#filtro").combobox();
 						if(filtro != ""){
 							i3GEOadmin.core.defineFiltro(filtro);
-							i3GEOadmin.core.filtra(i3GEOadmin.menus.pegaFiltro());
+							i3GEOadmin.core.filtra(i3GEOadmin.mapas.pegaFiltro());
 						}
 						//monta um template para o modal de inclusao de novo usuario
-						if(i3GEOadmin.menus.formAdiciona == ""){
+						if(i3GEOadmin.mapas.formAdiciona == ""){
 							html = Mustache.to_html(
 									$("#templateLista").html(),
 									$.extend(
 											{},
-											i3GEOadmin.menus.dicionario,
+											i3GEOadmin.mapas.dicionario,
 											{
-												"id_menu": "modal",
-												"excluir": i3GEOadmin.menus.dicionario.cancelar,
+												"id_mapa": "modal",
+												"excluir": i3GEOadmin.mapas.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-												"onSalvar": "i3GEOadmin.menus.adiciona",//funcao
-												"opcoesAberto": function(){
-													var hash = {};
-													hash["sim"] = i3GEOadmin.menus.dicionario.sim;
-													hash["nao"] = i3GEOadmin.menus.dicionario.nao;
-													return Mustache.to_html(
-															$("#templateOpcoesAberto").html(),
-															hash
-													);
-												},
+												"onSalvar": "i3GEOadmin.mapas.adiciona",//funcao
 												"opcoesPublicado": function(){
 													var hash = {};
-													hash["sim"] = i3GEOadmin.menus.dicionario.sim;
-													hash["nao"] = i3GEOadmin.menus.dicionario.nao;
+													hash["sim"] = i3GEOadmin.mapas.dicionario.sim;
+													hash["nao"] = i3GEOadmin.mapas.dicionario.nao;
 													return Mustache.to_html(
 															$("#templateOpcoesPublicado").html(),
 															hash
 													);
 												},
-												"opcoesPerfil": opcoesPerfil
+												"opcoesPerfil": opcoesPerfil,
+												"opcoesTema": opcoesTema
 											}
 									)
 							);
-							i3GEOadmin.menus.formAdiciona = html;
+							i3GEOadmin.mapas.formAdiciona = html;
 						}
 						$.material.init();
 					}
 			)
 			.fail(function(data){
-				i3GEOadmin.menus.ondeLista.html("");
+				i3GEOadmin.mapas.ondeLista.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
 		},
 		adicionaDialogo: function(){
-			i3GEOadmin.core.abreModalGeral(i3GEOadmin.menus.formAdiciona);
+			i3GEOadmin.core.abreModalGeral(i3GEOadmin.mapas.formAdiciona);
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adiciona: function(){
@@ -159,8 +150,8 @@ Obt&eacute;m a lista de menus
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.menus.ondeLista);
-						i3GEOadmin.menus.lista();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.mapas.ondeLista);
+						i3GEOadmin.mapas.lista();
 					}
 			)
 			.fail(
@@ -172,11 +163,11 @@ Obt&eacute;m a lista de menus
 		},
 		excluirDialogo: function(id){
 			var hash = {
-					"mensagem": i3GEOadmin.menus.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.menus.excluir('"+id+"')",
-					"botao1": i3GEOadmin.menus.dicionario.sim,
+					"mensagem": i3GEOadmin.mapas.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.mapas.excluir('"+id+"')",
+					"botao1": i3GEOadmin.mapas.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.menus.dicionario.nao
+					"botao2": i3GEOadmin.mapas.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
@@ -184,7 +175,7 @@ Obt&eacute;m a lista de menus
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=excluir",
-					"id_menu="+id
+					"id_mapa="+id
 			)
 			.done(
 					function(data, status){
@@ -202,11 +193,11 @@ Obt&eacute;m a lista de menus
 		},
 		salvarDialogo: function(id){
 			var hash = {
-					"mensagem": i3GEOadmin.menus.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.menus.salvar('"+id+"')",
-					"botao1": i3GEOadmin.menus.dicionario.sim,
+					"mensagem": i3GEOadmin.mapas.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.mapas.salvar('"+id+"')",
+					"botao1": i3GEOadmin.mapas.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.menus.dicionario.nao
+					"botao2": i3GEOadmin.mapas.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
@@ -216,13 +207,13 @@ Obt&eacute;m a lista de menus
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=alterar",
-					"id_menu="+ id+"&"+parametros
+					"id_mapa="+ id+"&"+parametros
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.menus.ondeLista);
-						i3GEOadmin.menus.lista();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.mapas.ondeLista);
+						i3GEOadmin.mapas.lista();
 					}
 			)
 			.fail(
@@ -232,7 +223,7 @@ Obt&eacute;m a lista de menus
 					}
 			);
 		},
-		addPerfil: function(id,valor){
+		addInput: function(id,valor){
 			var i = $("#"+id);
 			$(i.val(i.val() + ' ' + valor));
 		}

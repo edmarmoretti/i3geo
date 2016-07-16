@@ -87,7 +87,7 @@ function listaDoNivelMenu(templateMenus,templateGrupos,templateSubGrupos,templat
 			i3GEO.php.pegalistadegrupos(grupos, menus[i]["idmenu"], "sim", "sim", "sim", "sim");
 		}
 	};
-	i3GEO.php.pegalistademenus(r);
+	i3GEO.php.pegalistademenus(r,"sim","sim");
 }
 function listaCamadasSubgrupo(idmenu,id_n1,id_n2){
 	//console.info(id_n2)
