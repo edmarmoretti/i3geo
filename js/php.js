@@ -256,7 +256,7 @@ i3GEO.php =
 		 *
 		 * Obtem a lista de menus
 		 */
-		pegalistademenus : function(funcao) {
+		pegalistademenus : function(funcao,filtraOgc,filtraDown) {
 			i3GEO.php.verifica();
 			if(!filtraOgc){
 				filtraOgc = "nao";
