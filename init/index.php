@@ -35,6 +35,7 @@ if (file_exists ( $dir_tmp )) {
 error_reporting ( 0 );
 include "head.php";
 ?>
+<link href='imagens/sprites.css' rel='stylesheet'>
 <style>
 .amarelo {
 	color: yellow;
@@ -103,11 +104,19 @@ include "head.php";
 					style="width: 260px; min-width: 260px; max-width: 260px;">
 					<div class="panel panel-default">
 						<div class="panel-body">
+							<!--
 							<div class="thumbnail" role="button" style="height: 90px;">
 								<a target="{{{target}}}" href="{{{href}}}"> <img class="img-rounded"
 									style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
 								</a>
 							</div>
+							-->
+							<div class="thumbnail" role="button" style="height: 90px;">
+								<a target="{{{target}}}" href="{{{href}}}"> <img class="img-rounded {{{img}}}"
+									style="height: 100%; width: 100%" src="../imagens/branco.gif" />
+								</a>
+							</div>
+
 							<h4 style="height: 40px;">{{{titulo}}}</h4>
 							<h5 class="hidden-xs" style="height: 100px;">{{{subtitulo}}}</h5>
 
@@ -185,15 +194,7 @@ include "head.php";
 	//utilizado em ms_configura.php para customizar o local da pasta de inicializacao
 	var customDir = "<?php echo $customDir; ?>";
 	</script>
-	<script src='../pacotes/cpaint/cpaint2_compacto.inc.js'></script>
-	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_login_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_php_compacto.js'></script>
-	<script src='../classesjs/compactados/mustache.js'></script>
-	<script src='dicionario.js'></script>
-	<script src='index.js'></script>
+	<script src='indexjs.php'></script>
 	<script>
 	$(document).ready(function(){
 		<?php
