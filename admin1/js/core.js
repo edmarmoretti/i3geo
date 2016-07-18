@@ -80,8 +80,10 @@ i3GEOadmin.core = {
 		},
 		abreModal: function(id,conteudo){
 			$("#"+id+" .modal-body").html(conteudo);
+			console.info(id)
 			if($("#"+id).css("display") == "none"){
 				$("#"+id).modal("show");
+
 				$.material.init();
 			}
 		},
@@ -90,6 +92,7 @@ i3GEOadmin.core = {
 		},
 		abreModalGeral: function(conteudo){
 			i3GEOadmin.core.abreModal("modalGeral",conteudo);
+			$("#body-form-modal").collapse('show');
 		},
 		fechaModalConfirma: function(){
 			i3GEOadmin.core.fechaModal("modalGeral");

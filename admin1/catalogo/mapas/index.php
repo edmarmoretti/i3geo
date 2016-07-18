@@ -66,7 +66,6 @@ include "../../head.php";
 		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post" action="" >
 			<div class="row">
 				<div class="col-md-12">
-					<h4>{{{nome_mapa}}}</h4>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="nome_mapa" >{{{nomeMapa}}}</label>
 						<div class="col-md-8">
