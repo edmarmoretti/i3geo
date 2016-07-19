@@ -172,22 +172,22 @@ g_traducao_init =
 		"13a" : [
 			{
 				pt : "Com esse utilit&aacute;rio voc&ecirc; pode criar links para abrir o i3Geo. Escolha as camadas, a abrang&ecirc;ncia geogr&aacute;fica, a interface e outros par&acirc;metros.",
-				en : "",
-				es : ""
+				en : "This tool allow you to create links to open i3Geo. Select layers, geographic extent, interface and any other parameter.",
+				es : "Con esta herramienta usted puede crear enlaces para abrir i3Geo. Seleccione las capas, la extensi&oacute;n geogr&aacute;fica, la interfaz y otros par&aacute;metros."
 			}
 		],
 		14 : [
 			{
 				pt : "Exemplos de customiza&ccedil;&atilde;o",
-				en : "Examples of customization",
+				en : "Customization examples",
 				es : "Ejemplos de personalizaci&oacute;n"
 			}
 		],
 		"14a" : [
 			{
 				pt : "As interfaces dos mapas podem ser modificadas de diferentes maneiras. Os exemplos mostram como fazer as mais comuns.",
-				en : "",
-				es : ""
+				en : "There are many ways of modifying map interfaces. The examples show how to execute the ones that are more popular.",
+				es : "Las interfaces de los mapas pueden ser modificadas de varias formas. Los ejemplos muestran c&oacute;mo hacer las m&aacute;s comunes."
 			}
 		],
 		15 : [
