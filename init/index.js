@@ -1,21 +1,21 @@
 botoesIni = [
 {
 	"img":"openlayers",
-	"href": location.href.replace("init/index.php","") + customDir + "/black_ol.htm",
+	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/black_ol.htm",
 	"titulo":$trad(4,g_traducao_init),
 	"subtitulo": $trad("4a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
 },{
 	"img":"osm",
-	"href": location.href.replace("init/index.php","") + customDir + "/black_osm.htm",
+	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/black_osm.htm",
 	"titulo":$trad(23,g_traducao_init),
 	"subtitulo": $trad("23a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
 },{
 	"img":"googlemaps",
-	"href": location.href.replace("init/index.php","") + customDir + "/black_gm.phtml",
+	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/black_gm.phtml",
 	"titulo":$trad(6,g_traducao_init),
 	"subtitulo": $trad("6a",g_traducao_init),
 	"fa": "map-o",
@@ -29,14 +29,14 @@ botoesIni = [
 	"target": "_self"
 },{
 	"img":"googleearth",
-	"href": location.href.replace("init/index.php","") + customDir + "/googleearth.phtml",
+	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/googleearth.phtml",
 	"titulo":$trad(7,g_traducao_init),
 	"subtitulo": $trad("7a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
 },{
 	"img":"cartogramas",
-	"href": location.href.replace("init/index.php","") + customDir + "/black_carto_ol.htm",
+	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/black_carto_ol.htm",
 	"titulo":$trad(8,g_traducao_init),
 	"subtitulo": $trad("8a",g_traducao_init),
 	"fa": "map-o",
@@ -85,7 +85,7 @@ botoesIni = [
 	"target": "_self"
 },{
 	"img":"openlayersdebug",
-	"href": location.href.replace("init/index.php","") +  customDir + "/openlayersdebug.htm",
+	"href": location.href.replace("init/index.php"+window.location.search,"") +  customDir + "/openlayersdebug.htm",
 	"titulo":$trad(5,g_traducao_init),
 	"subtitulo": $trad("5a",g_traducao_init),
 	"fa": "cogs",

@@ -22,14 +22,15 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
  */
-i3GEOadmin.atlas = {
+i3GEOadmin.prancha = {
+		id_atlas: "",
 		//variavel global indicando o elemento que recebera a lista de menus
 		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
 		init: function(onde){
-			i3GEOadmin.atlas.ondeLista = onde;
-			i3GEOadmin.atlas.lista();
+			i3GEOadmin.prancha.ondeLista = onde;
+			i3GEOadmin.prancha.lista();
 		},
 		/*
 Function: lista
@@ -37,9 +38,9 @@ Function: lista
 Obt&eacute;m a lista
 		 */
 		lista: function(){
-			i3GEOadmin.core.iconeAguarde(i3GEOadmin.atlas.ondeLista);
+			i3GEOadmin.core.iconeAguarde(i3GEOadmin.prancha.ondeLista);
 			$.post(
-					"exec.php?funcao=lista"
+					"exec.php?funcao=lista&id_atlas=" + i3GEOadmin.prancha.id_atlas
 			)
 			.done(
 					function(data, status){
@@ -54,36 +55,15 @@ Obt&eacute;m a lista
 								"{{#data}}" + templateLista + "{{/data}}",
 								$.extend(
 										{},
-										i3GEOadmin.atlas.dicionario,
+										i3GEOadmin.prancha.dicionario,
 										{
 											"data": json["dados"],
-											"onExcluir": "i3GEOadmin.atlas.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.atlas.salvarDialogo",//funcao
-											"opcoesPublicado": function(){
-												var hash = {};
-												hash["sim"] = i3GEOadmin.atlas.dicionario.sim;
-												hash["nao"] = i3GEOadmin.atlas.dicionario.nao;
-												if(this.publicado_atlas == ""){
-													this.publicado_atlas = "SIM";
-												}
-												hash[this.publicado_atlas + "-sel"] = "selected";
-												return Mustache.to_html(
-														$("#templateOpcoesPublicado").html(),
-														hash
-												);
-											},
-											"opcoesTipoGuia": function(){
-												var hash = {};
-												hash[this.tipoguias_atlas + "-sel"] = "selected";
-												return Mustache.to_html(
-														$("#templateOpcoesTipoGuia").html(),
-														hash
-												);
-											}
+											"onExcluir": "i3GEOadmin.prancha.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.prancha.salvarDialogo"//funcao
 										}
 								)
 						);
-						i3GEOadmin.atlas.ondeLista.html(html);
+						i3GEOadmin.prancha.ondeLista.html(html);
 						//filtro
 						html = Mustache.to_html(
 								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
@@ -93,46 +73,37 @@ Obt&eacute;m a lista
 						$("#filtro").combobox();
 						if(filtro != ""){
 							i3GEOadmin.core.defineFiltro(filtro);
-							i3GEOadmin.core.filtra(i3GEOadmin.core.pegaFiltro());
+							i3GEOadmin.core.filtra(i3GEOadmin.prancha.pegaFiltro());
 						}
 						//monta um template para o modal de inclusao de novo usuario
-						if(i3GEOadmin.atlas.formAdiciona == ""){
+						if(i3GEOadmin.prancha.formAdiciona == ""){
 							html = Mustache.to_html(
 									$("#templateLista").html(),
 									$.extend(
 											{},
-											i3GEOadmin.atlas.dicionario,
+											i3GEOadmin.prancha.dicionario,
 											{
-												"id_atlas": "modal",
+												"id_prancha": "modal",
 												"pranchas": "",
-												"excluir": i3GEOadmin.atlas.dicionario.cancelar,
+												"excluir": i3GEOadmin.prancha.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-												"onSalvar": "i3GEOadmin.atlas.adiciona",//funcao
-												"opcoesPublicado": function(){
-													var hash = {};
-													hash["sim"] = i3GEOadmin.atlas.dicionario.sim;
-													hash["nao"] = i3GEOadmin.atlas.dicionario.nao;
-													return Mustache.to_html(
-															$("#templateOpcoesPublicado").html(),
-															hash
-													);
-												},
-												"opcoesTipoGuia": $("#templateOpcoesTipoGuia").html()
+												"onSalvar": "i3GEOadmin.prancha.adiciona",//funcao
+												"editarTema": ""
 											}
 									)
 							);
-							i3GEOadmin.atlas.formAdiciona = html;
+							i3GEOadmin.prancha.formAdiciona = html;
 						}
 						$.material.init();
 					}
 			)
 			.fail(function(data){
-				i3GEOadmin.atlas.ondeLista.html("");
+				i3GEOadmin.prancha.ondeLista.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
 		},
 		adicionaDialogo: function(){
-			i3GEOadmin.core.abreModalGeral(i3GEOadmin.atlas.formAdiciona);
+			i3GEOadmin.core.abreModalGeral(i3GEOadmin.prancha.formAdiciona);
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adiciona: function(){
@@ -141,13 +112,13 @@ Obt&eacute;m a lista
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=adicionar",
-					parametros
+					parametros + "&id_atlas=" + i3GEOadmin.prancha.id_atlas
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.atlas.ondeLista);
-						i3GEOadmin.atlas.lista();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.prancha.ondeLista);
+						i3GEOadmin.prancha.lista();
 					}
 			)
 			.fail(
@@ -159,11 +130,11 @@ Obt&eacute;m a lista
 		},
 		excluirDialogo: function(id){
 			var hash = {
-					"mensagem": i3GEOadmin.atlas.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.atlas.excluir('"+id+"')",
-					"botao1": i3GEOadmin.atlas.dicionario.sim,
+					"mensagem": i3GEOadmin.prancha.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.prancha.excluir('"+id+"')",
+					"botao1": i3GEOadmin.prancha.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.atlas.dicionario.nao
+					"botao2": i3GEOadmin.prancha.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
@@ -171,7 +142,7 @@ Obt&eacute;m a lista
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=excluir",
-					"id_atlas="+id
+					"id_prancha=" + id + "&id_atlas=" + i3GEOadmin.prancha.id_atlas
 			)
 			.done(
 					function(data, status){
@@ -189,11 +160,11 @@ Obt&eacute;m a lista
 		},
 		salvarDialogo: function(id){
 			var hash = {
-					"mensagem": i3GEOadmin.atlas.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.atlas.salvar('"+id+"')",
-					"botao1": i3GEOadmin.atlas.dicionario.sim,
+					"mensagem": i3GEOadmin.prancha.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.prancha.salvar('"+id+"')",
+					"botao1": i3GEOadmin.prancha.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.atlas.dicionario.nao
+					"botao2": i3GEOadmin.prancha.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
@@ -203,13 +174,13 @@ Obt&eacute;m a lista
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=alterar",
-					"id_atlas="+ id+"&"+parametros
+					"id_prancha="+ id + "&"+parametros + "&id_atlas=" + i3GEOadmin.prancha.id_atlas
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.atlas.ondeLista);
-						i3GEOadmin.atlas.lista();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.prancha.ondeLista);
+						i3GEOadmin.prancha.lista();
 					}
 			)
 			.fail(
@@ -219,12 +190,12 @@ Obt&eacute;m a lista
 					}
 			);
 		},
-		editarPranchas: function(id_atlas,titulo_atlas){
+		editarTemas: function(id_atlas, id_prancha,titulo_prancha){
 			//muda a url para que o usuario possa voltar pelo botao do navegador
-			var u = window.location.origin + window.location.pathname + "?id_filtro=" + id_atlas;
+			var u = window.location.origin + window.location.pathname + "?id_atlas=" + id_atlas + "&id_filtro=" + id_prancha;
 			window.history.replaceState(null,null,u);
 			//abre a pagina de edicao
-			window.location.href = "pranchas/index.php?id_atlas=" + id_atlas + "&titulo_atlas=" + titulo_atlas;
+			window.location.href = "temas/index.php?id_prancha=" + id_prancha + "&titulo_prancha=" + titulo_prancha + "&id_atlas=" + id_atlas;
 		},
 		addInput: function(id,valor){
 			var i = $("#"+id);

@@ -29,7 +29,7 @@ include "../init/head.php";
 	<div class="container-fluid">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="../init/index.php">i3Geo</a></li>
+				<li><a href="../init/index.php?home=">i3Geo</a></li>
 				<li class="active"></li>
 			</ol>
 		</div>

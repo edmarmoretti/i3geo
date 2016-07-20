@@ -52,7 +52,7 @@ include "../../head.php";
 	</div>
 </div>
 <script id="templateFiltro" type="x-tmpl-mustache">
-<option value="form-{{id_atlas}}">{{{nome_atlas}}}</option>
+<option value="form-{{id_atlas}}">{{{titulo_atlas}}}</option>
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_atlas}}">
@@ -224,6 +224,11 @@ include "../../head.php";
 		);
 		$.material.init();
 		var inicia = function() {
+			//verifica se foi enviado um parametro de filtro pela url
+			var f = "<?php echo filter_var($_GET["id_filtro"], FILTER_SANITIZE_NUMBER_INT); ?>";
+			if(f != ""){
+				i3GEOadmin.core.initFiltro = "form-" + f;
+			}
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.atlas.init($("#corpo"));
 		};

@@ -171,7 +171,7 @@ include "../init/head.php";
 	<div class="container-fluid">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="../init/index.php">i3Geo</a></li>
+				<li><a href="../init/index.php?home=">i3Geo</a></li>
 				<li class="active">Mapas de usu&aacute;rios</li>
 				<li><a title="RSS" href="../admin/rssmapas.php"><i class="material-icons ">rss_feed</i></a>&nbsp;
 					<a title="JSON" href="../admin/rssmapas.php?output=json"><i class="material-icons ">code</i></a>

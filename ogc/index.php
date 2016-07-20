@@ -93,14 +93,14 @@ include "../init/head.php";
 		</div>
 		<div class="panel-body">
 			<div id="corpoMenu{{idmenu}}" class="panel-collapse collapse" role="tabpanel" aria-multiselectable="true">
-				{{{camadas}}}				
+				{{{camadas}}}
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
 					<select onchange="filtraGrupo(this,'menu{{idmenu}}')" data-grupoFiltro="{{idmenu}}" class="form-control input-lg">
 					</select>
 				</div>
-				
+
 				<div id="gruposMenu{{idmenu}}">
 					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>
 				</div>
@@ -172,7 +172,7 @@ include "../init/head.php";
 	<div class="container-fluid">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="../init/index.php">i3Geo</a></li>
+				<li><a href="../init/index.php?home=">i3Geo</a></li>
 				<li class="active">OGC</li>
 			</ol>
 		</div>

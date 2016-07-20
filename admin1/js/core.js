@@ -68,6 +68,9 @@ $perfis = "";
 //funcoes jquery + bootstrap
 
 i3GEOadmin.core = {
+		//valor do filtro utilizado ao iniciar a pagina
+		//usado para enviar parametros pela URL ao iniciar uma pagina
+		initFiltro: "",
 		mostraErro: function(erro){
 			var html = '<div class="alert alert-danger alert-dismissible" role="alert">'
 				+ '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
@@ -80,7 +83,6 @@ i3GEOadmin.core = {
 		},
 		abreModal: function(id,conteudo){
 			$("#"+id+" .modal-body").html(conteudo);
-			console.info(id)
 			if($("#"+id).css("display") == "none"){
 				$("#"+id).modal("show");
 
@@ -124,7 +126,16 @@ i3GEOadmin.core = {
 			return $i("filtro");
 		},
 		valorFiltro: function(){
-			return i3GEOadmin.core.pegaFiltro().value;
+			var v = "";
+			//verifica se o valor do filtro foi passado pela url
+			if(i3GEOadmin.core.initFiltro != ""){
+				v = i3GEOadmin.core.initFiltro;
+				i3GEOadmin.core.initFiltro = "";
+			}
+			else{
+				v = i3GEOadmin.core.pegaFiltro().value;
+			}
+			return v;
 		},
 		defineFiltro: function(valor){
 			i3GEOadmin.core.pegaFiltro().value = valor;

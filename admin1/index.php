@@ -8,7 +8,7 @@ include "head.php";
 	<div class="container-fluid">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="../init/index.php">i3Geo</a></li>
+				<li><a href="../init/index.php?home=">i3Geo</a></li>
 				<li class="active">Admin</li>
 			</ol>
 		</div>
@@ -27,9 +27,6 @@ include "head.php";
 							<a href="http://moodle.gvsig-training.com/course/view.php?id=11"
 								target="_blank">{{manualAdmin}}</a>
 						</p>
-						<div id="mensagemIE" style="display: none; position: relative">
-							{{{msgIe}}}
-						</div>
 						<p>
 							{{msgSqlite}} <a
 								href='../pacotes/phpliteadmin/phpliteadmin.php'>(link)</a>.
@@ -42,7 +39,6 @@ include "head.php";
 			                   target="_new">{{{merBdMetaestat}}}</a><br>
 						</p>
 						</div>
-						<div class="alert alert-danger">{{atencao}}</div>
 						<div class="alert alert-warning">{{{leiaMe}}}</div>
 
 			</div>

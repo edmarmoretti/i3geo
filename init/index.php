@@ -212,6 +212,14 @@ include "head.php";
 				$("#jumbotron").fadeOut(300)
 			}
 		);
+		//verifica se deve ou nao esconder a mensagem de boas vindas verificando o parametro enviado pela url
+		if("<?php echo isset($_GET["home"]) ? "ok" : ""; ?>" == "ok"){
+			$("#jumbotron").hide();
+		}
+		//modifica a url para que ao voltar a pagina a mensagem de boas vindas nao seja mostrada
+		var u = window.location.origin + window.location.pathname + "?home=";
+		window.history.replaceState(null,null,u);
+
 		var tamanho = findBootstrapDeviceSize();
 		if(tamanho != "xs"){
 			$(".tline").attr("src","https://twitter.com/i3geo");
