@@ -100,6 +100,7 @@ Obt&eacute;m a lista
 											i3GEOadmin.prancha.dicionario,
 											{
 												"id_tema": "modal",
+												"escondido": "hidden",
 												"excluir": i3GEOadmin.prancha.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 												"onSalvar": "i3GEOadmin.tema.adiciona",//funcao

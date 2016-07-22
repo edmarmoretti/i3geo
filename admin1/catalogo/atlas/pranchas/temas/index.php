@@ -49,7 +49,11 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_tema}}">
 	<div class="panel-heading" role="tab">
-		<h3 class="panel-title">
+		<h3 class="panel-title {{escondido}}">
+			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
+				<i class="material-icons">delete_forever</i>
+			</a>
+			&nbsp;
 			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_tema}}"
 			aria-expanded="false" aria-controls="#body-form-{{id_tema}}"> {{{codigo_tema}}} </a>
 		</h3>

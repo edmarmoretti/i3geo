@@ -109,6 +109,7 @@ Obt&eacute;m a lista de menus
 											i3GEOadmin.menus.dicionario,
 											{
 												"id_menu": "modal",
+												"escondido": "hidden",
 												"excluir": i3GEOadmin.menus.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 												"onSalvar": "i3GEOadmin.menus.adiciona",//funcao

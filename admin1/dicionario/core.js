@@ -395,8 +395,8 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'ordemTxt' : [ {
+		pt : "Ordem de apresenta&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ]

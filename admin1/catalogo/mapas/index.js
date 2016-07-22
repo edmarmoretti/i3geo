@@ -108,6 +108,7 @@ Obt&eacute;m a lista
 											i3GEOadmin.mapas.dicionario,
 											{
 												"id_mapa": "modal",
+												"escondido": "hidden",
 												"excluir": i3GEOadmin.mapas.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 												"onSalvar": "i3GEOadmin.mapas.adiciona",//funcao

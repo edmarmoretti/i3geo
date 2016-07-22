@@ -104,6 +104,7 @@ Obt&eacute;m a lista
 											i3GEOadmin.atlas.dicionario,
 											{
 												"id_atlas": "modal",
+												"escondido": "hidden",
 												"pranchas": "",
 												"excluir": i3GEOadmin.atlas.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao

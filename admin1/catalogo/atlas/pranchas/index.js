@@ -84,6 +84,7 @@ Obt&eacute;m a lista
 											i3GEOadmin.prancha.dicionario,
 											{
 												"id_prancha": "modal",
+												"escondido": "hidden",
 												"pranchas": "",
 												"excluir": i3GEOadmin.prancha.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao

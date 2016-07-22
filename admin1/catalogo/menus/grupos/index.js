@@ -50,7 +50,7 @@ i3GEOadmin.grupos = {
 								{"data":json["perfis"]}
 						);
 						i3GEOadmin.grupos.listaRaiz(json["raiz"],opcoesPerfil,json["temas"]);
-						i3GEOadmin.grupos.listaNos(json["grupos"]);
+						i3GEOadmin.grupos.listaNos(json["grupos"],opcoesPerfil);
 						$.material.init();
 					}
 			)
@@ -103,7 +103,7 @@ i3GEOadmin.grupos = {
 			//monta um template para o modal de inclusao de novo tema
 			if(i3GEOadmin.grupos.formAdicionaRaiz == ""){
 				html = Mustache.to_html(
-						templateRaiz,
+						$("#templateRaiz").html(),
 						$.extend(
 								{},
 								i3GEOadmin.grupos.dicionario,
@@ -127,7 +127,29 @@ i3GEOadmin.grupos = {
 				i3GEOadmin.grupos.formAdicionaRaiz = html;
 			}
 		},
-		listaNos: function(dados){
+		listaNos: function(dados,opcoesPerfil){
+			//{"nome_grupo":"_Grupo teste","id_n1":"3","id_menu":"4","publicado":"SIM","n1_perfil":""}
+
+			var templateNos = $("#templateNos").html();
+			var html = Mustache.to_html(
+					"{{#data}}" + templateNos + "{{/data}}",
+					$.extend(
+							{},
+							i3GEOadmin.grupos.dicionario,
+							{
+								"data": dados,
+								"opcoesPerfil": opcoesPerfil,
+								"onExcluir": "i3GEOadmin.grupos.excluirNoDialogo",//funcao
+								"onSalvar": "i3GEOadmin.grupos.salvarNoDialogo",//funcao
+								"opcoesNo": function(){
+
+								}
+							}
+					)
+			);
+			i3GEOadmin.grupos.ondeNos.html(html);
+
+
 			//valor do filtro atual
 			var filtro = i3GEOadmin.core.valorFiltro();
 			//filtro
@@ -144,6 +166,7 @@ i3GEOadmin.grupos = {
 		},
 		adicionaTemaDialogo: function(){
 			i3GEOadmin.core.abreModalGeral(i3GEOadmin.grupos.formAdicionaRaiz);
+			$("#body-formRaiz-modal").collapse('show');
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adicionaTemaRaiz: function(){
