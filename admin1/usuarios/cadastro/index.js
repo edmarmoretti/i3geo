@@ -124,6 +124,7 @@ Obt&eacute;m a lista de usuarios
 											i3GEOadmin.usuarios.dicionario,
 											{
 												"id_usuario": "modal",
+												"escondido": "hidden",
 												"excluir": i3GEOadmin.usuarios.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 												"onSalvar": "i3GEOadmin.usuarios.adiciona",//funcao

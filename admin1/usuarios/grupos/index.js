@@ -106,6 +106,7 @@ Obt&eacute;m a lista de grupos
 											i3GEOadmin.gruposusuarios.dicionario,
 											{
 												"id_grupo": "modal",
+												"escondido": "hidden",
 												"excluir": i3GEOadmin.gruposusuarios.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 												"onSalvar": "i3GEOadmin.gruposusuarios.adiciona",//funcao

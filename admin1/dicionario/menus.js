@@ -105,8 +105,8 @@ i3GEOadmin.menus.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'txtDesc' : [ {
+		pt : "Utilize o bot&atilde;o 'Grupos' para editar os temas existentes na raiz do menu e os seus grupos.",
 		en : "",
 		es : ""
 	} ],

@@ -119,6 +119,7 @@ Obt&eacute;m a lista de operacoes
 												"excluir": i3GEOadmin.operacoes.dicionario.cancela,
 												"codigo": "",
 												"id_operacao": "modal",
+												"escondido": "hidden",
 												"descricao": "",
 												"inputPapeis": function(){
 													return Mustache.to_html(

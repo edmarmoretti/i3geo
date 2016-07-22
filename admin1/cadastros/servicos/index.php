@@ -61,7 +61,11 @@ include "../../head.php";
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_ws}}">
 	<div class="panel-heading" role="tab">
-		<h3 class="panel-title">
+		<h3 class="panel-title {{escondido}}">
+			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_ws}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
+				<i class="material-icons">delete_forever</i>
+			</a>
+			&nbsp;
 			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_ws}}"
 			aria-expanded="false" aria-controls="#body-form-{{id_ws}}"> {{{nome_ws}}} </a>
 		</h3>

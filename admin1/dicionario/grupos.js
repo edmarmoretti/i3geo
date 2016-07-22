@@ -31,18 +31,23 @@ i3GEOadmin.grupos.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'adicionarGrupo' : [ {
+		pt : "Adicionar um grupo",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'temasRaizMenu' : [ {
+		pt : "Temas na raiz do menu",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'txtAjuda' : [ {
+		pt : "Utilize as op&ccedil;&otilde;es para incluir, adicionar ou alterar os temas existentes na raiz do menu. O menu pode tamb&eacute;m conter grupos, que por sua vez tamb&eacute;m podem conter temas e subgrupos.",
+		en : "",
+		es : ""
+	} ],
+    'perfis' : [ {
+		pt : "Perfis que podem ver a camada. Separe por espa&ccedil;os e escolha da lista ao lado.",
 		en : "",
 		es : ""
 	} ]

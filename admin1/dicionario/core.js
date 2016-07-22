@@ -260,6 +260,11 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'grupos' : [ {
+		pt : "Grupos",
+		en : "",
+		es : ""
+	} ],
     'gravaId' : [ {
 		pt : " gravando o registro do id= ",
 		en : "",
@@ -375,18 +380,18 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'temasRaiz' : [ {
+		pt : "Temas na raiz",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'adicionarTema' : [ {
+		pt : "Adicionar um tema",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'tema' : [ {
+		pt : "Tema",
 		en : "",
 		es : ""
 	} ],

@@ -106,6 +106,7 @@ Obt&eacute;m a lista de Identifica
 											i3GEOadmin.identifica.dicionario,
 											{
 												"id_i": "modal",
+												"escondido": "hidden",
 												"excluir": i3GEOadmin.identifica.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 												"onSalvar": "i3GEOadmin.identifica.adicionar",//funcao

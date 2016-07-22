@@ -49,12 +49,12 @@ Obt&eacute;m a lista
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
-						//combo com perfis
+						//combo com temas
 						var opcoesTema = '<option value="">---</option>' + Mustache.to_html(
 								"{{#data}}" + $("#templateTemas").html() + "{{/data}}",
 								{"data":json["temas"]}
 						);
-						//combo com temas
+						//combo com perfis
 						var opcoesPerfil = '<option value="">---</option>' + Mustache.to_html(
 								"{{#data}}" + $("#templateOpcoesPerfil").html() + "{{/data}}",
 								{"data":json["perfis"]}

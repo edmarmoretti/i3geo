@@ -66,7 +66,7 @@ include "../../head.php";
 					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
 						method="post" action="">
 						<div class="form-group form-group-lg">
-							<label class="col-md-2 control-label" for="nome">{{{txtTag}}}</label>
+							<label class="col-md-2 control-label" for="nome">Tag</label>
 							<div class="col-md-10">
 								<input type="text" value="{{{nome}}}" class="form-control" name="nome" required>
 							</div>

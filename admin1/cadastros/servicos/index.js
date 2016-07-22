@@ -91,6 +91,7 @@ Obt&eacute;m a lista de Webservices
 											i3GEOadmin.webservices.dicionario,
 											{
 												"id_ws": "modal",
+												"escondido": "hidden",
 												"excluir": i3GEOadmin.webservices.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 												"onSalvar": "i3GEOadmin.webservices.adiciona",//funcao
