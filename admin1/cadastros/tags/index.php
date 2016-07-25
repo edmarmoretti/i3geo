@@ -101,15 +101,11 @@ include "../../head.php";
 		//traducao
 		var t = $("#titulo");
 		//complementa dicionario
-		i3GEOadmin.tags.dicionario.adicionar = i3GEOadmin.core.dicionario.adicionar;
-		i3GEOadmin.tags.dicionario.filtro = i3GEOadmin.core.dicionario.filtro;
-		i3GEOadmin.tags.dicionario.excluir = i3GEOadmin.core.dicionario.excluir;
-		i3GEOadmin.tags.dicionario.salvar = i3GEOadmin.core.dicionario.salva;
-		i3GEOadmin.tags.dicionario.cancelar = i3GEOadmin.core.dicionario.cancelar;
-		i3GEOadmin.tags.dicionario.confirma = i3GEOadmin.core.dicionario.confirma;
-		i3GEOadmin.tags.dicionario.txtTag = i3GEOadmin.core.dicionario.txtTag;
-		i3GEOadmin.tags.dicionario.sim = i3GEOadmin.core.dicionario.sim;
-		i3GEOadmin.tags.dicionario.nao = i3GEOadmin.core.dicionario.nao;
+		i3GEOadmin.tags.dicionario = $.extend(
+			{},
+			i3GEOadmin.tags.dicionario,
+			i3GEOadmin.core.dicionario
+		);
 
 		i3GEOadmin.core.dicionario = null;
 

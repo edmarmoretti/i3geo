@@ -47,7 +47,17 @@ i3GEOadmin.grupos.dicionario = {
 		es : ""
 	} ],
     'perfis' : [ {
-		pt : "Perfis que podem ver a camada. Separe por espa&ccedil;os e escolha da lista ao lado.",
+		pt : "Perfis que podem ver. Separe por espa&ccedil;os e escolha da lista ao lado.",
+		en : "",
+		es : ""
+	} ],
+    'editarSubgrupos' : [ {
+		pt : "Editar subgrupos",
+		en : "",
+		es : ""
+	} ],
+    'txtDesc' : [ {
+		pt : "Utilze as op&ccedil;&otilde;es abaixo para criar ou editar temas que ficar&atilde;o na raiz do menu e tamb&eacute;m para editar os subgrupos existentes dentro do grupo atual.",
 		en : "",
 		es : ""
 	} ]

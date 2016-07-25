@@ -123,14 +123,11 @@ include "../../head.php";
 		//
 		//complementa dicionario
 		//
-		i3GEOadmin.operacoes.dicionario.adicionar = i3GEOadmin.core.dicionario.adicionar;
-		i3GEOadmin.operacoes.dicionario.filtro = i3GEOadmin.core.dicionario.filtro;
-		i3GEOadmin.operacoes.dicionario.excluir = i3GEOadmin.core.dicionario.excluir;
-		i3GEOadmin.operacoes.dicionario.salvar = i3GEOadmin.core.dicionario.salva;
-		i3GEOadmin.operacoes.dicionario.sim = i3GEOadmin.core.dicionario.sim;
-		i3GEOadmin.operacoes.dicionario.nao = i3GEOadmin.core.dicionario.nao;
-		i3GEOadmin.operacoes.dicionario.confirma = i3GEOadmin.core.dicionario.confirma;
-		i3GEOadmin.operacoes.dicionario.cancela = i3GEOadmin.core.dicionario.cancela;
+		i3GEOadmin.operacoes.dicionario = $.extend(
+			{},
+			i3GEOadmin.operacoes.dicionario,
+			i3GEOadmin.core.dicionario
+		);
 
 		i3GEOadmin.core.dicionario = null;
 

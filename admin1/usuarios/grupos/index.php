@@ -81,13 +81,13 @@ include "../../head.php";
 				<div class="col-md-8">
 					<h4>{{{grupo}}}</h4>
 					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="nome" >{{{labelNome}}}</label>
+						<label class="col-md-2 control-label" for="nome" >{{{nomeTxt}}}</label>
 						<div class="col-md-10">
 							<input type="text" value="{{{nome}}}" class="form-control" name="nome" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="login">{{{labelDescricao}}}</label>
+						<label class="col-md-2 control-label" for="login">{{{descricaoTxt}}}</label>
 						<div class="col-md-10">
 							<input type="text" value="{{{descricao}}}" class="form-control" name="descricao">
 						</div>
@@ -124,16 +124,11 @@ include "../../head.php";
 		//traducao
 		var t = $("#titulo");
 		//complementa dicionario
-		i3GEOadmin.gruposusuarios.dicionario.adicionar = i3GEOadmin.core.dicionario.adicionar;
-		i3GEOadmin.gruposusuarios.dicionario.filtro = i3GEOadmin.core.dicionario.filtro;
-		i3GEOadmin.gruposusuarios.dicionario.excluir = i3GEOadmin.core.dicionario.excluir;
-		i3GEOadmin.gruposusuarios.dicionario.salvar = i3GEOadmin.core.dicionario.salva;
-		i3GEOadmin.gruposusuarios.dicionario.sim = i3GEOadmin.core.dicionario.sim;
-		i3GEOadmin.gruposusuarios.dicionario.nao = i3GEOadmin.core.dicionario.nao;
-		i3GEOadmin.gruposusuarios.dicionario.cancelar = i3GEOadmin.core.dicionario.cancelar;
-		i3GEOadmin.gruposusuarios.dicionario.confirma = i3GEOadmin.core.dicionario.confirma;
-		i3GEOadmin.gruposusuarios.dicionario.labelNome = i3GEOadmin.core.dicionario.nome;
-		i3GEOadmin.gruposusuarios.dicionario.labelDescricao = i3GEOadmin.core.dicionario.descricao;
+		i3GEOadmin.gruposusuarios.dicionario = $.extend(
+			{},
+			i3GEOadmin.gruposusuarios.dicionario,
+			i3GEOadmin.core.dicionario
+		);
 
 		i3GEOadmin.core.dicionario = null;
 

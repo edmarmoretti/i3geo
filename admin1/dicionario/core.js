@@ -245,7 +245,7 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'descricao' : [ {
+    'descricaoTxt' : [ {
 		pt : "Descri&ccedil;&atilde;o",
 		en : "",
 		es : ""
@@ -325,6 +325,11 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'salvar' : [ {
+		pt : "Salvar",
+		en : "",
+		es : ""
+	} ],
     'nome2' : [ {
 		pt : "Nome:",
 		en : "",
@@ -397,6 +402,16 @@ i3GEOadmin.core.dicionario = {
 	} ],
     'ordemTxt' : [ {
 		pt : "Ordem de apresenta&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	} ],
+    'publicadoTxt' : [ {
+		pt : "Publicado para todos verem?",
+		en : "",
+		es : ""
+	} ],
+    'nomeTxt' : [ {
+		pt : "Nome",
 		en : "",
 		es : ""
 	} ]

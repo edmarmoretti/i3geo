@@ -204,17 +204,11 @@ include "../../head.php";
 		//traducao
 		var t = $("#titulo");
 		//complementa dicionario
-		i3GEOadmin.atlas.dicionario.adicionar = i3GEOadmin.core.dicionario.adicionar;
-		i3GEOadmin.atlas.dicionario.filtro = i3GEOadmin.core.dicionario.filtro;
-		i3GEOadmin.atlas.dicionario.excluir = i3GEOadmin.core.dicionario.excluir;
-		i3GEOadmin.atlas.dicionario.salvar = i3GEOadmin.core.dicionario.salva;
-		i3GEOadmin.atlas.dicionario.cancelar = i3GEOadmin.core.dicionario.cancelar;
-		i3GEOadmin.atlas.dicionario.confirma = i3GEOadmin.core.dicionario.confirma;
-		i3GEOadmin.atlas.dicionario.nome = i3GEOadmin.core.dicionario.nome;
-		i3GEOadmin.atlas.dicionario.tipo = i3GEOadmin.core.dicionario.tipo;
-		i3GEOadmin.atlas.dicionario.descricao = i3GEOadmin.core.dicionario.descricao;
-		i3GEOadmin.atlas.dicionario.sim = i3GEOadmin.core.dicionario.sim;
-		i3GEOadmin.atlas.dicionario.nao = i3GEOadmin.core.dicionario.nao;
+		i3GEOadmin.atlas.dicionario = $.extend(
+			{},
+			i3GEOadmin.atlas.dicionario,
+			i3GEOadmin.core.dicionario
+		);
 
 		i3GEOadmin.core.dicionario = null;
 

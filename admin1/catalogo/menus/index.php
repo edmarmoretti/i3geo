@@ -108,9 +108,8 @@ include "../../head.php";
 							</select>
 						</div>
 					</div>
-
 					<div class="form-group form-group-lg">
-						<label class="col-md-3 control-label" for="publicado_menu">{{{publicado}}}</label>
+						<label class="col-md-3 control-label" for="publicado_menu">{{{publicadoTxt}}}</label>
 						<div class="col-md-9">
 							<select name="publicado_menu" class="form-control"> {{{opcoesPublicado}}}
 							</select>
@@ -132,14 +131,14 @@ include "../../head.php";
 				class="btn btn-primary" role="button">{{salvar}}</a>
 		</div>
 	</div>
-<div class="panel-footer" style="padding-top: 0px; padding-bottom: 0px;">
-	<div class="pull-right">
-		<button onclick="i3GEOadmin.menus.editarGrupos('{{id_menu}}','{{{nome_menu}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
-			<i class="material-icons">folder_open</i> {{{grupos}}}
-		</button>
+	<div class="panel-footer" style="padding-top: 0px; padding-bottom: 0px;">
+		<div class="pull-right">
+			<button onclick="i3GEOadmin.menus.editarGrupos('{{id_menu}}','{{{nome_menu}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
+				<i class="material-icons">folder_open</i> {{{grupos}}}
+			</button>
+		</div>
+		<div class="clearfix"></div>
 	</div>
-	<div class="clearfix"></div>
-</div>
 </div>
 </script>
 <script id="templateOpcoesPerfil" type="x-tmpl-mustache">
@@ -170,18 +169,11 @@ include "../../head.php";
 		//traducao
 		var t = $("#titulo");
 		//complementa dicionario
-		i3GEOadmin.menus.dicionario.adicionar = i3GEOadmin.core.dicionario.adicionar;
-		i3GEOadmin.menus.dicionario.filtro = i3GEOadmin.core.dicionario.filtro;
-		i3GEOadmin.menus.dicionario.excluir = i3GEOadmin.core.dicionario.excluir;
-		i3GEOadmin.menus.dicionario.salvar = i3GEOadmin.core.dicionario.salva;
-		i3GEOadmin.menus.dicionario.cancelar = i3GEOadmin.core.dicionario.cancelar;
-		i3GEOadmin.menus.dicionario.confirma = i3GEOadmin.core.dicionario.confirma;
-		i3GEOadmin.menus.dicionario.nome = i3GEOadmin.core.dicionario.nome;
-		i3GEOadmin.menus.dicionario.tipo = i3GEOadmin.core.dicionario.tipo;
-		i3GEOadmin.menus.dicionario.descricao = i3GEOadmin.core.dicionario.descricao;
-		i3GEOadmin.menus.dicionario.sim = i3GEOadmin.core.dicionario.sim;
-		i3GEOadmin.menus.dicionario.nao = i3GEOadmin.core.dicionario.nao;
-		i3GEOadmin.menus.dicionario.grupos = i3GEOadmin.core.dicionario.grupos;
+		i3GEOadmin.menus.dicionario = $.extend(
+			{},
+			i3GEOadmin.menus.dicionario,
+			i3GEOadmin.core.dicionario
+		);
 
 		i3GEOadmin.core.dicionario = null;
 

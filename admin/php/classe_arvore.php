@@ -92,7 +92,7 @@ class Arvore
 		else{
 			$coluna = $idioma;
 		}
-		$this->sql_grupos = "select CASE i3geoadmin_grupos.$coluna WHEN '' THEN nome_grupo ELSE i3geoadmin_grupos.$coluna END as nome_grupo,id_n1,id_menu,i3geoadmin_n1.publicado,n1_perfil,ordem from ".$this->esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo ";
+		$this->sql_grupos = "select CASE i3geoadmin_grupos.$coluna WHEN '' THEN nome_grupo ELSE i3geoadmin_grupos.$coluna END as nome_grupo,i3geoadmin_grupos.id_grupo, id_n1,id_menu,i3geoadmin_n1.publicado,n1_perfil,ordem from ".$this->esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo ";
 		if($filtro === "ogc" || $filtro === "download"){
 			//esse sql retorna tambem os grupos dos temas que estao na raiz do grupo
 			$this->sql_grupos = "select DISTINCT * from (select CASE grupos.$coluna WHEN '' THEN nome_grupo ELSE grupos.$coluna END as nome_grupo,gr.id_n1,gr.id_menu,gr.publicado,gr.n1_perfil, 0 as ordem from ".$this->esquemaadmin."i3geoadmin_grupos as grupos, ".$this->esquemaadmin."i3geoadmin_n1 as gr, ".$this->esquemaadmin."i3geoadmin_n2 as sg, ".$this->esquemaadmin."i3geoadmin_n3 as t, ".$this->esquemaadmin."i3geoadmin_temas as temas where gr.id_grupo = grupos.id_grupo AND sg.id_n1 = gr.id_n1 AND t.id_n2 = sg.id_n2 AND t.id_tema = temas.id_tema AND (temas.ogc_tema NOT IN ('NAO','nao') OR temas.download_tema NOT IN ('NAO','nao') ) UNION select c.nome_grupo as nome_grupo,a.id_nivel as id_n1,a.id_menu,'SIM' as publicado,a.perfil as n1_perfil, 0 as ordem from ".$this->esquemaadmin."i3geoadmin_raiz as a, ".$this->esquemaadmin."i3geoadmin_temas as b, ".$this->esquemaadmin."i3geoadmin_grupos as c, ".$this->esquemaadmin."i3geoadmin_n1 as d where nivel = 1 AND a.id_tema = b.id_tema AND a.id_nivel = d.id_n1 AND d.id_grupo = c.id_grupo) as s ";
@@ -104,7 +104,7 @@ class Arvore
 		else{
 			$coluna = $idioma;
 		}
-		$this->sql_subgrupos = "select CASE i3geoadmin_subgrupos.$coluna WHEN '' THEN nome_subgrupo ELSE i3geoadmin_subgrupos.$coluna END as nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado,i3geoadmin_n2.n2_perfil from ".$this->esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo ";
+		$this->sql_subgrupos = "select CASE i3geoadmin_subgrupos.$coluna WHEN '' THEN nome_subgrupo ELSE i3geoadmin_subgrupos.$coluna END as nome_subgrupo,i3geoadmin_subgrupos.id_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado,i3geoadmin_n2.n2_perfil from ".$this->esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo ";
 
 		if($idioma == "pt"){
 			$coluna = "nome_tema";
@@ -199,6 +199,54 @@ class Arvore
 			}
 		}
 		return $resultado;
+	}
+	/*
+	 Function: pegaListaDeTiposGrupos
+
+	 Retorna a lista de grupos de um menu
+
+	 Parametros:
+
+	 id_menu {string}
+
+	 Return:
+
+	 {array}
+	 */
+	function pegaListaDeTiposGrupos(){
+		if($this->idioma == "pt"){
+			$coluna = "nome_grupo";
+		}
+		else{
+			$coluna = $this->idioma;
+		}
+		$sql = "select CASE i3geoadmin_grupos.$coluna WHEN '' THEN nome_grupo ELSE i3geoadmin_grupos.$coluna END as nome_grupo, id_grupo from ".$this->esquemaadmin."i3geoadmin_grupos ORDER by nome_grupo ";
+		$grupos = $this->execSQL($sql);
+		return $grupos;
+	}
+	/*
+	 Function: pegaListaDeTiposSubGrupos
+
+	 Retorna a lista de grupos de um menu
+
+	 Parametros:
+
+	 id_menu {string}
+
+	 Return:
+
+	 {array}
+	 */
+	function pegaListaDeTiposSubGrupos(){
+		if($this->idioma == "pt"){
+			$coluna = "nome_subgrupo";
+		}
+		else{
+			$coluna = $this->idioma;
+		}
+		$sql = "select CASE i3geoadmin_subgrupos.$coluna WHEN '' THEN nome_subgrupo ELSE i3geoadmin_subgrupos.$coluna END as nome_subgrupo, id_subgrupo from ".$this->esquemaadmin."i3geoadmin_subgrupos ORDER by nome_subgrupo ";
+		$subgrupos = $this->execSQL($sql);
+		return $subgrupos;
 	}
 	/*
 	Function: procuraTemas

@@ -76,13 +76,13 @@ include "../../head.php";
 				<div class="col-md-12">
 					<h4>{{{nome_ws}}}</h4>
 					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="nome_ws" >{{{nome}}}</label>
+						<label class="col-md-2 control-label" for="nome_ws" >{{{nomeTxt}}}</label>
 						<div class="col-md-10">
 							<input type="text" value="{{{nome_ws}}}" class="form-control" name="nome_ws" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="login">{{{descricao}}}</label>
+						<label class="col-md-2 control-label" for="login">{{{descricaoTxt}}}</label>
 						<div class="col-md-10">
 							<input type="text" value="{{{desc_ws}}}" class="form-control" name="desc_ws" >
 						</div>
@@ -142,17 +142,11 @@ include "../../head.php";
 		//traducao
 		var t = $("#titulo");
 		//complementa dicionario
-		i3GEOadmin.webservices.dicionario.adicionar = i3GEOadmin.core.dicionario.adicionar;
-		i3GEOadmin.webservices.dicionario.filtro = i3GEOadmin.core.dicionario.filtro;
-		i3GEOadmin.webservices.dicionario.excluir = i3GEOadmin.core.dicionario.excluir;
-		i3GEOadmin.webservices.dicionario.salvar = i3GEOadmin.core.dicionario.salva;
-		i3GEOadmin.webservices.dicionario.cancelar = i3GEOadmin.core.dicionario.cancelar;
-		i3GEOadmin.webservices.dicionario.confirma = i3GEOadmin.core.dicionario.confirma;
-		i3GEOadmin.webservices.dicionario.nome = i3GEOadmin.core.dicionario.nome;
-		i3GEOadmin.webservices.dicionario.tipo = i3GEOadmin.core.dicionario.tipo;
-		i3GEOadmin.webservices.dicionario.descricao = i3GEOadmin.core.dicionario.descricao;
-		i3GEOadmin.webservices.dicionario.sim = i3GEOadmin.core.dicionario.sim;
-		i3GEOadmin.webservices.dicionario.nao = i3GEOadmin.core.dicionario.nao;
+		i3GEOadmin.webservices.dicionario = $.extend(
+			{},
+			i3GEOadmin.webservices.dicionario,
+			i3GEOadmin.core.dicionario
+		);
 
 		i3GEOadmin.core.dicionario = null;
 

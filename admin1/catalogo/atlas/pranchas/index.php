@@ -162,17 +162,11 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 		//traducao
 		var t = $("#titulo");
 		//complementa dicionario
-		i3GEOadmin.prancha.dicionario.adicionar = i3GEOadmin.core.dicionario.adicionar;
-		i3GEOadmin.prancha.dicionario.filtro = i3GEOadmin.core.dicionario.filtro;
-		i3GEOadmin.prancha.dicionario.excluir = i3GEOadmin.core.dicionario.excluir;
-		i3GEOadmin.prancha.dicionario.salvar = i3GEOadmin.core.dicionario.salva;
-		i3GEOadmin.prancha.dicionario.cancelar = i3GEOadmin.core.dicionario.cancelar;
-		i3GEOadmin.prancha.dicionario.confirma = i3GEOadmin.core.dicionario.confirma;
-		i3GEOadmin.prancha.dicionario.nome = i3GEOadmin.core.dicionario.nome;
-		i3GEOadmin.prancha.dicionario.tipo = i3GEOadmin.core.dicionario.tipo;
-		i3GEOadmin.prancha.dicionario.descricao = i3GEOadmin.core.dicionario.descricao;
-		i3GEOadmin.prancha.dicionario.sim = i3GEOadmin.core.dicionario.sim;
-		i3GEOadmin.prancha.dicionario.nao = i3GEOadmin.core.dicionario.nao;
+		i3GEOadmin.prancha.dicionario = $.extend(
+			{},
+			i3GEOadmin.prancha.dicionario,
+			i3GEOadmin.core.dicionario
+		);
 
 		i3GEOadmin.core.dicionario = null;
 

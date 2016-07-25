@@ -1,6 +1,5 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
-i3GEOadmin.listasubgrupos = {};
-i3GEOadmin.listasubgrupos.dicionario = {
+i3GEOadmin.subgrupos.dicionario = {
 	'msgBuscaSubgrupo' : [ {
 		pt : "buscando subgrupos...",
 		en : "",
@@ -36,18 +35,28 @@ i3GEOadmin.listasubgrupos.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'editarSub' : [ {
+		pt : "Editar temas",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'txtDesc' : [ {
+		pt : "Utilze as op&ccedil;&otilde;es abaixo para criar ou editar temas que ficar&atilde;o na raiz do grupo e tamb&eacute;m para editar os temas existentes dentro do subgrupo atual.",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'temasRaizSubgrupo' : [ {
+		pt : "Temas na raiz do grupo",
+		en : "",
+		es : ""
+	} ],
+    'adicionarSubgrupo' : [ {
+		pt : "Adicionar subgrupo",
+		en : "",
+		es : ""
+	} ],
+    'perfis' : [ {
+		pt : "Perfis que podem ver. Separe por espa&ccedil;os e escolha da lista ao lado.",
 		en : "",
 		es : ""
 	} ],

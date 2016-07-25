@@ -40,11 +40,6 @@ i3GEOadmin.menus.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'publicado' : [ {
-		pt : "Publicado para todos verem?",
-		en : "",
-		es : ""
-	} ],
     'perfil' : [ {
 		pt : "Perfis",
 		en : "",
@@ -106,7 +101,7 @@ i3GEOadmin.menus.dicionario = {
 		es : ""
 	} ],
     'txtDesc' : [ {
-		pt : "Utilize o bot&atilde;o 'Grupos' para editar os temas existentes na raiz do menu e os seus grupos.",
+		pt : "Utilize o bot&atilde;o 'Grupos' para editar os temas existentes na raiz de um menu e tamb&eacute;m os seus grupos.",
 		en : "",
 		es : ""
 	} ],

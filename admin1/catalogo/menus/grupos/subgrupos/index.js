@@ -22,25 +22,27 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
  */
-i3GEOadmin.grupos = {
+i3GEOadmin.subgrupos = {
 		id_menu: "",
 		nome_menu: "",
+		id_n1: "",
+		nome_grupo: "",
 		ondeRaiz: "",
 		ondeNos: "",
 		//conteudo html do formulario de adicao na raiz
 		formAdicionaRaiz: "",
 		formAdicionaNo: "",
 		init: function(ondenos,onderaiz){
-			i3GEOadmin.grupos.ondeRaiz = onderaiz;
-			i3GEOadmin.grupos.ondeNos = ondenos;
-			i3GEOadmin.grupos.lista();
+			i3GEOadmin.subgrupos.ondeRaiz = onderaiz;
+			i3GEOadmin.subgrupos.ondeNos = ondenos;
+			i3GEOadmin.subgrupos.lista();
 		},
 		lista: function(){
-			i3GEOadmin.core.iconeAguarde(i3GEOadmin.grupos.ondeRaiz);
-			i3GEOadmin.core.iconeAguarde(i3GEOadmin.grupos.ondeNos);
+			i3GEOadmin.core.iconeAguarde(i3GEOadmin.subgrupos.ondeRaiz);
+			i3GEOadmin.core.iconeAguarde(i3GEOadmin.subgrupos.ondeNos);
 
 			$.post(
-					"exec.php?funcao=lista&id_menu=" + i3GEOadmin.grupos.id_menu
+					"exec.php?funcao=lista&id_n1=" + i3GEOadmin.subgrupos.id_n1 + "&id_menu=" + i3GEOadmin.subgrupos.id_menu
 			)
 			.done(
 					function(data, status){
@@ -51,14 +53,14 @@ i3GEOadmin.grupos = {
 								"{{#data}}" + $("#templateOpcoesPerfil").html() + "{{/data}}",
 								{"data":json["perfis"]}
 						);
-						i3GEOadmin.grupos.listaRaiz(json["raiz"],opcoesPerfil,json["temas"]);
-						i3GEOadmin.grupos.listaNos(json["grupos"],opcoesPerfil,json["tiposGrupos"]);
+						i3GEOadmin.subgrupos.listaRaiz(json["raiz"],opcoesPerfil,json["temas"]);
+						i3GEOadmin.subgrupos.listaNos(json["subgrupos"],opcoesPerfil,json["tiposSubGrupos"]);
 						$.material.init();
 					}
 			)
 			.fail(function(data){
-				i3GEOadmin.grupos.ondeRaiz.html("");
-				i3GEOadmin.grupos.ondeNos.html("");
+				i3GEOadmin.subgrupos.ondeRaiz.html("");
+				i3GEOadmin.subgrupos.ondeNos.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
 		},
@@ -68,12 +70,12 @@ i3GEOadmin.grupos = {
 					"{{#data}}" + templateRaiz + "{{/data}}",
 					$.extend(
 							{},
-							i3GEOadmin.grupos.dicionario,
+							i3GEOadmin.subgrupos.dicionario,
 							{
 								"data": dados,
 								"opcoesPerfil": opcoesPerfil,
-								"onExcluir": "i3GEOadmin.grupos.excluirTemaDialogo",//funcao
-								"onSalvar": "i3GEOadmin.grupos.salvarTemaDialogo",//funcao
+								"onExcluir": "i3GEOadmin.subgrupos.excluirTemaDialogo",//funcao
+								"onSalvar": "i3GEOadmin.subgrupos.salvarTemaDialogo",//funcao
 								"opcoesTema": function(){
 									var p = this.codigo_tema;
 									var id = "";
@@ -100,22 +102,22 @@ i3GEOadmin.grupos = {
 							}
 					)
 			);
-			i3GEOadmin.grupos.ondeRaiz.html(html);
+			i3GEOadmin.subgrupos.ondeRaiz.html(html);
 
 			//monta um template para o modal de inclusao de novo tema
-			if(i3GEOadmin.grupos.formAdicionaRaiz == ""){
+			if(i3GEOadmin.subgrupos.formAdicionaRaiz == ""){
 				html = Mustache.to_html(
 						$("#templateRaiz").html(),
 						$.extend(
 								{},
-								i3GEOadmin.grupos.dicionario,
+								i3GEOadmin.subgrupos.dicionario,
 								{
 									"id_raiz": "modal",
 									"escondido": "hidden",
 									"opcoesPerfil": opcoesPerfil,
-									"excluir": i3GEOadmin.grupos.dicionario.cancelar,
+									"excluir": i3GEOadmin.subgrupos.dicionario.cancelar,
 									"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-									"onSalvar": "i3GEOadmin.grupos.adicionaTemaRaiz",//funcao
+									"onSalvar": "i3GEOadmin.subgrupos.adicionaTemaRaiz",//funcao
 									"opcoesTema": function(){
 										var html = '<option value="">---</option>' + Mustache.to_html(
 												"{{#data}}" + $("#templateOpcoesTema").html() + "{{/data}}",
@@ -126,58 +128,58 @@ i3GEOadmin.grupos = {
 								}
 						)
 				);
-				i3GEOadmin.grupos.formAdicionaRaiz = html;
+				i3GEOadmin.subgrupos.formAdicionaRaiz = html;
 			}
 		},
-		listaNos: function(dados,opcoesPerfil,grupos){
+		listaNos: function(dados,opcoesPerfil,subgrupos){
 			var templateNos = $("#templateNos").html();
 			var html = Mustache.to_html(
 					"{{#data}}" + templateNos + "{{/data}}",
 					$.extend(
 							{},
-							i3GEOadmin.grupos.dicionario,
+							i3GEOadmin.subgrupos.dicionario,
 							{
 								"data": dados,
 								"opcoesPerfil": opcoesPerfil,
-								"onExcluir": "i3GEOadmin.grupos.excluirNoDialogo",//funcao
-								"onSalvar": "i3GEOadmin.grupos.salvarNoDialogo",//funcao
+								"onExcluir": "i3GEOadmin.subgrupos.excluirNoDialogo",//funcao
+								"onSalvar": "i3GEOadmin.subgrupos.salvarNoDialogo",//funcao
 								"opcoesPublicado": function(){
 									var hash = {};
 									hash[this.publicado + "-sel"] = "selected";
-									hash["sim"] = i3GEOadmin.grupos.dicionario.sim;
-									hash["nao"] = i3GEOadmin.grupos.dicionario.nao;
+									hash["sim"] = i3GEOadmin.subgrupos.dicionario.sim;
+									hash["nao"] = i3GEOadmin.subgrupos.dicionario.nao;
 									return Mustache.to_html(
 											$("#templateOpcoesPublicado").html(),
 											hash
 									);
 								},
 								"opcoesNo": function(){
-									var p = this.id_grupo;
+									var p = this.id_subgrupo;
 									var id = "";
 									//marca o selecionado
-									$(grupos).each(
+									$(subgrupos).each(
 										function(i,el){
-											if(el.id_grupo == p){
-												grupos[i]["selected"] = "selected";
+											if(el.id_subgrupo == p){
+												subgrupos[i]["selected"] = "selected";
 												id = i;
 											}
 											else{
-												grupos[i]["selected"] = "";
+												subgrupos[i]["selected"] = "";
 											}
 										}
 									);
 									var html = '<option value="">---</option>' + Mustache.to_html(
 										"{{#data}}" + $("#templateOpcoesNo").html() + "{{/data}}",
-										{"data":grupos}
+										{"data":subgrupos}
 									);
 									//volta ao normal
-									grupos[id]["selected"] = "";
+									subgrupos[id]["selected"] = "";
 									return html;
 								}
 							}
 					)
 			);
-			i3GEOadmin.grupos.ondeNos.html(html);
+			i3GEOadmin.subgrupos.ondeNos.html(html);
 			//valor do filtro atual
 			var filtro = i3GEOadmin.core.valorFiltro();
 			//filtro
@@ -191,23 +193,23 @@ i3GEOadmin.grupos = {
 				i3GEOadmin.core.defineFiltro(filtro);
 				i3GEOadmin.core.filtra(i3GEOadmin.core.pegaFiltro());
 			}
-			if(i3GEOadmin.grupos.formAdicionaNo == ""){
+			if(i3GEOadmin.subgrupos.formAdicionaNo == ""){
 				html = Mustache.to_html(
 						templateNos,
 						$.extend(
 								{},
-								i3GEOadmin.grupos.dicionario,
+								i3GEOadmin.subgrupos.dicionario,
 								{
-									"id_n1": "modal",
+									"id_n2": "modal",
 									"escondido": "hidden",
-									"excluir": i3GEOadmin.grupos.dicionario.cancelar,
+									"excluir": i3GEOadmin.subgrupos.dicionario.cancelar,
 									"opcoesPerfil": opcoesPerfil,
 									"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-									"onSalvar": "i3GEOadmin.grupos.adicionaNo",//funcao
+									"onSalvar": "i3GEOadmin.subgrupos.adicionaNo",//funcao
 									"opcoesPublicado": function(){
 										var hash = {};
-										hash["sim"] = i3GEOadmin.grupos.dicionario.sim;
-										hash["nao"] = i3GEOadmin.grupos.dicionario.nao;
+										hash["sim"] = i3GEOadmin.subgrupos.dicionario.sim;
+										hash["nao"] = i3GEOadmin.subgrupos.dicionario.nao;
 										return Mustache.to_html(
 												$("#templateOpcoesPublicado").html(),
 												hash
@@ -216,18 +218,18 @@ i3GEOadmin.grupos = {
 									"opcoesNo": function(){
 										var html = '<option value="">---</option>' + Mustache.to_html(
 											"{{#data}}" + $("#templateOpcoesNo").html() + "{{/data}}",
-											{"data":grupos}
+											{"data":subgrupos}
 										);
 										return html;
 									}
 								}
 						)
 				);
-				i3GEOadmin.grupos.formAdicionaNo = html;
+				i3GEOadmin.subgrupos.formAdicionaNo = html;
 			}
 		},
 		adicionaTemaDialogo: function(){
-			i3GEOadmin.core.abreModalGeral(i3GEOadmin.grupos.formAdicionaRaiz);
+			i3GEOadmin.core.abreModalGeral(i3GEOadmin.subgrupos.formAdicionaRaiz);
 			$("#body-formRaiz-modal").collapse('show');
 		},
 //		os parametros sao obtidos do formulario aberto do modal
@@ -237,13 +239,13 @@ i3GEOadmin.grupos = {
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"execraiz.php?funcao=adicionar",
-					parametros + "&id_menu=" + i3GEOadmin.grupos.id_menu
+					parametros + "&id_menu=" + i3GEOadmin.subgrupos.id_menu + "&id_n1=" + i3GEOadmin.subgrupos.id_n1
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.grupos.ondeRaiz);
-						i3GEOadmin.grupos.lista();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.subgrupos.ondeRaiz);
+						i3GEOadmin.subgrupos.lista();
 					}
 			)
 			.fail(
@@ -255,11 +257,11 @@ i3GEOadmin.grupos = {
 		},
 		excluirTemaDialogo: function(id){
 			var hash = {
-					"mensagem": i3GEOadmin.grupos.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.grupos.excluirTema('"+id+"')",
-					"botao1": i3GEOadmin.grupos.dicionario.sim,
+					"mensagem": i3GEOadmin.subgrupos.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.subgrupos.excluirTema('"+id+"')",
+					"botao1": i3GEOadmin.subgrupos.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.grupos.dicionario.nao
+					"botao2": i3GEOadmin.subgrupos.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
@@ -267,7 +269,7 @@ i3GEOadmin.grupos = {
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"execraiz.php?funcao=excluir",
-					"id_raiz=" + id + "&id_menu=" + i3GEOadmin.grupos.id_menu
+					"id_raiz=" + id + "&id_menu=" + i3GEOadmin.subgrupos.id_menu
 			)
 			.done(
 					function(data, status){
@@ -285,11 +287,11 @@ i3GEOadmin.grupos = {
 		},
 		salvarTemaDialogo: function(id){
 			var hash = {
-					"mensagem": i3GEOadmin.grupos.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.grupos.salvarTema('"+id+"')",
-					"botao1": i3GEOadmin.grupos.dicionario.sim,
+					"mensagem": i3GEOadmin.subgrupos.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.subgrupos.salvarTema('"+id+"')",
+					"botao1": i3GEOadmin.subgrupos.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.grupos.dicionario.nao
+					"botao2": i3GEOadmin.subgrupos.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
@@ -299,13 +301,13 @@ i3GEOadmin.grupos = {
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"execraiz.php?funcao=alterar",
-					"id_raiz="+ id + "&"+parametros + "&id_menu=" + i3GEOadmin.grupos.id_menu
+					"id_raiz="+ id + "&"+parametros + "&id_menu=" + i3GEOadmin.subgrupos.id_menu
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.grupos.ondeRaiz);
-						i3GEOadmin.grupos.lista();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.subgrupos.ondeRaiz);
+						i3GEOadmin.subgrupos.lista();
 					}
 			)
 			.fail(
@@ -316,7 +318,7 @@ i3GEOadmin.grupos = {
 			);
 		},
 		adicionaNoDialogo: function(){
-			i3GEOadmin.core.abreModalGeral(i3GEOadmin.grupos.formAdicionaNo);
+			i3GEOadmin.core.abreModalGeral(i3GEOadmin.subgrupos.formAdicionaNo);
 			$("#body-formNo-modal").collapse('show');
 		},
 //		os parametros sao obtidos do formulario aberto do modal
@@ -326,13 +328,13 @@ i3GEOadmin.grupos = {
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=adicionar",
-					parametros + "&id_menu=" + i3GEOadmin.grupos.id_menu
+					parametros + "&id_menu=" + i3GEOadmin.subgrupos.id_menu + "&id_n1=" + i3GEOadmin.subgrupos.id_n1
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.grupos.ondeNos);
-						i3GEOadmin.grupos.lista();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.subgrupos.ondeNos);
+						i3GEOadmin.subgrupos.lista();
 					}
 			)
 			.fail(
@@ -344,11 +346,11 @@ i3GEOadmin.grupos = {
 		},
 		excluirNoDialogo: function(id){
 			var hash = {
-					"mensagem": i3GEOadmin.grupos.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.grupos.excluirNo('"+id+"')",
-					"botao1": i3GEOadmin.grupos.dicionario.sim,
+					"mensagem": i3GEOadmin.subgrupos.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.subgrupos.excluirNo('"+id+"')",
+					"botao1": i3GEOadmin.subgrupos.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.grupos.dicionario.nao
+					"botao2": i3GEOadmin.subgrupos.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
@@ -356,7 +358,7 @@ i3GEOadmin.grupos = {
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=excluir",
-					"id_n1=" + id
+					"id_n2=" + id
 			)
 			.done(
 					function(data, status){
@@ -374,11 +376,11 @@ i3GEOadmin.grupos = {
 		},
 		salvarNoDialogo: function(id){
 			var hash = {
-					"mensagem": i3GEOadmin.grupos.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.grupos.salvarNo('"+id+"')",
-					"botao1": i3GEOadmin.grupos.dicionario.sim,
+					"mensagem": i3GEOadmin.subgrupos.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.subgrupos.salvarNo('"+id+"')",
+					"botao1": i3GEOadmin.subgrupos.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.grupos.dicionario.nao
+					"botao2": i3GEOadmin.subgrupos.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
@@ -388,13 +390,13 @@ i3GEOadmin.grupos = {
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=alterar",
-					"id_n1="+ id + "&"+parametros + "&id_menu=" + i3GEOadmin.grupos.id_menu
+					"id_n2="+ id + "&"+parametros + "&id_menu=" + i3GEOadmin.subgrupos.id_menu
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.grupos.ondeNos);
-						i3GEOadmin.grupos.lista();
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.subgrupos.ondeNos);
+						i3GEOadmin.subgrupos.lista();
 					}
 			)
 			.fail(
@@ -404,12 +406,12 @@ i3GEOadmin.grupos = {
 					}
 			);
 		},
-		editarSubGrupos: function(id,titulo){
+		editarSubsubgrupos: function(id,titulo){
 			//muda a url para que o usuario possa voltar pelo botao do navegador
-			var u = window.location.origin + window.location.pathname + "?nome_menu=" + i3GEOadmin.grupos.nome_menu + "&id_menu=" + i3GEOadmin.grupos.id_menu + "&id_filtro=" + id;
+			var u = window.location.origin + window.location.pathname + "?nome_menu=" + i3GEOadmin.subgrupos.nome_menu + "id_menu=" + i3GEOadmin.subgrupos.id_menu + "&id_filtro=" + id_n1;
 			window.history.replaceState(null,null,u);
 			//abre a pagina de edicao
-			window.location.href = "subgrupos/index.php?id_n1=" + id + "&nome_grupo=" + titulo + "&id_menu=" + i3GEOadmin.grupos.id_menu + "&nome_menu=" + i3GEOadmin.grupos.nome_menu;
+			window.location.href = "subsubgrupos/index.php?id_n2=" + id + "&nome_grupo=" + titulo + "&id_menu=" + i3GEOadmin.subgrupos.id_menu + "&nome_menu=" + i3GEOadmin.subgrupos.nome_menu;
 		},
 		addInput: function(id,valor){
 			var i = $("#"+id);
