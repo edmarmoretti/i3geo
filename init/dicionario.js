@@ -144,8 +144,8 @@ g_traducao_init =
 		"11a" : [
 			{
 				pt : "Dados p&uacute;blicos podem ser acessados por meio de download ou dos padr&otilde;es OGC mais comuns, como WMS e WFS. Veja aqui a lista e os links dos servi&ccedil;os",
-				en : "",
-				es : ""
+				en : "Open data can be obtained by common OGC services, like WMS and WFS. Here, you can find a service list and links.",
+				es : "Se puede acceder a datos p&uacute;blicos a trav&eacute;s de los servicios OGC m&aacute;s comunes, como WMS y WFS. Vea aqu&iacute; la lista y los enlaces de los servicios."
 			}
 		],
 		12 : [
@@ -158,8 +158,8 @@ g_traducao_init =
 		"12a" : [
 			{
 				pt : "O cat&aacute;logo de temas pode ser visto tamb&eacute;m no Google Earth. Basta adicion&aacute;-lo como um link de rede.",
-				en : "",
-				es : ""
+				en : "Theme catalog can also be displayed on Google Earth. You only need to add it as a web link.",
+				es : "El cat&aacute;logo de temas puede ser visto tambi&eacute;n en Google Earth. S&oacute;lo basta con adicionarlo como un enlace de red."
 			}
 		],
 		13 : [
