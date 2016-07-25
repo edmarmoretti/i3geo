@@ -26,9 +26,9 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
 				</button>
-				<h3>{{{txtTitulo}}}</h3>
-				<h3><?php echo $nome_menu; ?></h3>
-				<h4>{{{txtDesc}}}</h4>
+				<h2><small>{{{menu}}}: <?php echo $nome_menu; ?></small></h2>
+				<blockquote>{{{txtDesc}}}</blockquote>
+
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label> <select

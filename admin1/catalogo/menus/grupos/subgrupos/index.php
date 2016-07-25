@@ -30,9 +30,8 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
 				</button>
-				<h3>{{{txtTitulo}}}</h3>
-				<h3><?php echo $nome_grupo; ?></h3>
-				<h4>{{{txtDesc}}}</h4>
+				<h2><small>{{{txtTitulo}}}: <?php echo $nome_grupo; ?></small></h2>
+				<blockquote>{{{txtDesc}}}</blockquote>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label> <select
@@ -195,7 +194,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 	</div>
 	<div class="panel-footer {{escondido}}" style="padding-top: 0px; padding-bottom: 0px;">
 		<div class="pull-right">
-			<button onclick="i3GEOadmin.subgrupos.editarSubsubgrupos('{{id_n2}}','{{{nome_subgrupo}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
+			<button onclick="i3GEOadmin.subgrupos.editarTemas('{{id_n2}}','{{{nome_subgrupo}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
 				<i class="material-icons">folder_open</i> {{{editarSub}}}
 			</button>
 		</div>

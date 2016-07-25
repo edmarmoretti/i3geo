@@ -406,7 +406,10 @@ i3GEOadmin.grupos = {
 		},
 		editarSubGrupos: function(id,titulo){
 			//muda a url para que o usuario possa voltar pelo botao do navegador
-			var u = window.location.origin + window.location.pathname + "?nome_menu=" + i3GEOadmin.grupos.nome_menu + "&id_menu=" + i3GEOadmin.grupos.id_menu + "&id_filtro=" + id;
+			var u = window.location.origin
+			+ window.location.pathname
+			+ "?id_filtro=" + id + "&id_menu=" + i3GEOadmin.grupos.id_menu + "&nome_menu=" + i3GEOadmin.grupos.nome_menu
+			+ "&nome_grupo=" + titulo + "&id_n1=" + id;
 			window.history.replaceState(null,null,u);
 			//abre a pagina de edicao
 			window.location.href = "subgrupos/index.php?id_n1=" + id + "&nome_grupo=" + titulo + "&id_menu=" + i3GEOadmin.grupos.id_menu + "&nome_menu=" + i3GEOadmin.grupos.nome_menu;

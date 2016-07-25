@@ -41,7 +41,7 @@ i3GEOadmin.subgrupos.dicionario = {
 		es : ""
 	} ],
     'txtDesc' : [ {
-		pt : "Utilze as op&ccedil;&otilde;es abaixo para criar ou editar temas que ficar&atilde;o na raiz do grupo e tamb&eacute;m para editar os temas existentes dentro do subgrupo atual.",
+		pt : "Utilize as op&ccedil;&otilde;es abaixo para criar ou editar temas que ficar&atilde;o na raiz do grupo e tamb&eacute;m para editar os temas existentes dentro do subgrupo atual.",
 		en : "",
 		es : ""
 	} ],
@@ -60,8 +60,8 @@ i3GEOadmin.subgrupos.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'txtTitulo' : [ {
+		pt : "Grupo",
 		en : "",
 		es : ""
 	} ],

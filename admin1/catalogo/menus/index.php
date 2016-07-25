@@ -22,8 +22,9 @@ include "../../head.php";
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
 				</button>
-				<h3>{{{txtTitulo}}}</h3>
-				<h4>{{{txtDesc}}}</h4>
+				<h2><small>{{{txtTitulo}}}</small></h2>
+				<blockquote>{{{txtDesc}}}</blockquote>
+
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label> <select
