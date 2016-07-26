@@ -47,7 +47,7 @@ include (dirname ( __FILE__ ) . "/../../../../../../admin/php/conexao.php");
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $id_subgrupo, $id_n1, $publicado, $n2_perfil, $ordem, $dbhw );
+		$novo = adicionar( $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -55,12 +55,12 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_n2, $id_subgrupo, $id_menu, $publicado, $n2_perfil, $ordem, $dbhw );
+		$novo = alterar ( $id_n3, $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		$dados = pegaDados ( "SELECT id_n2 from ".$esquemaadmin."i3geoadmin_n2 WHERE id_n2 = $id_n2", $dbh, false );
+		$dados = pegaDados ( "SELECT id_n3 from ".$esquemaadmin."i3geoadmin_n3 WHERE id_n3 = $id_n3", $dbh, false );
 
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -85,58 +85,53 @@ switch ($funcao) {
 		retornaJSON($temassubgrupo);
 		break;
 	case "EXCLUIR" :
-		$r = pegaDados("SELECT id_n3 from ".$esquemaadmin."i3geoadmin_n3 where id_n2 ='$id'");
-		if(count($r) > 0){
-			header ( "HTTP/1.1 500 erro ao excluir. Exclua os subgrupos primeiro" );
-			exit ();
-		}
-		$retorna = excluir ( $id_n2, $dbhw );
+		$retorna = excluir ( $id_n3, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		retornaJSON ( $id_n2 );
+		retornaJSON ( $id_n3 );
 		exit ();
 		break;
 }
 cpjson ( $retorno );
 
-function adicionar( $id_subgrupo, $id_n1, $publicado, $n2_perfil, $ordem, $dbhw) {
+function adicionar( $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw) {
 	global $esquemaadmin;
 	try {
 		$dataCol = array(
-				"id_n1" => $id_n1,
+				"id_n2" => $id_n2,
 				"publicado" => 'NAO',
 				"ordem" => 0,
-				"n2_perfil" => ''
+				"n3_perfil" => ''
 		);
-		$id_n2 = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_n2",$dataCol,"n2_perfil","id_n2");
-		$retorna = alterar ( $id_n2, $id_subgrupo, $id_n1, $publicado, $n2_perfil, $ordem, $dbhw );
+		$id_n3 = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_n3",$dataCol,"n3_perfil","id_n3");
+		$retorna = alterar ( $id_n3, $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
 		return false;
 	}
 }
 // $papeis deve ser um array
-function alterar($id_n2, $id_subgrupo, $id_n1, $publicado, $n2_perfil, $ordem, $dbhw) {
+function alterar($id_n3, $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw) {
 	global $esquemaadmin;
 	$dataCol = array(
 			"publicado" => $publicado,
-			"id_subgrupo" => $id_subgrupo,
+			"id_tema" => $id_tema,
 			"ordem" => $ordem,
-			"n2_perfil" => $n2_perfil
+			"n3_perfil" => $n3_perfil
 	);
-	$resultado = i3GeoAdminUpdate($dbhw,"i3geoadmin_n2",$dataCol,"WHERE id_n2 = $id_n2");
+	$resultado = i3GeoAdminUpdate($dbhw,"i3geoadmin_n3",$dataCol,"WHERE id_n3 = $id_n3");
 	if ($resultado === false) {
 		return false;
 	}
-	return $id_n2;
+	return $id_n3;
 }
-function excluir($id_n1, $dbhw) {
+function excluir($id_n3, $dbhw) {
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_n2", "id_n2", $id_n2, $dbhw, false );
+	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_n3", "id_n3", $id_n3, $dbhw, false );
 	if ($resultado === false) {
 		return false;
 	}

@@ -136,7 +136,7 @@ function alterar($id_n2, $id_subgrupo, $id_n1, $publicado, $n2_perfil, $ordem, $
 	}
 	return $id_n2;
 }
-function excluir($id_n1, $dbhw) {
+function excluir($id_n2, $dbhw) {
 	global $esquemaadmin;
 	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_n2", "id_n2", $id_n2, $dbhw, false );
 	if ($resultado === false) {
