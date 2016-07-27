@@ -165,7 +165,7 @@ include "head.php";
 		</div>
 
 	</div>
-	<div class="container-fluid"
+	<div tabindex="-1" class="container-fluid"
 		style="background-color: rgb(250, 250, 250); margin-top: 10px; padding-top: 10px;">
 
 		<div class="row text-center hidden">
