@@ -15,9 +15,9 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			<li><a href="../../../../index.php">Admin</a></li>
 			<li>Cat&aacute;logo</li>
 			<li><a href="../../index.php">menus</a></li>
-			<li><a href="../../index.php?id_filtro=<?php echo $id_menu; ?>">menu - <?php echo $nome_menu; ?></a></li>
+			<li><a href="../../index.php?id_filtro=<?php echo $id_menu; ?>"> <?php echo $nome_menu; ?></a></li>
 			<li><a href="../index.php?id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>">grupos</a></li>
-			<li><a href="../index.php?id_filtro=<?php echo $id_n1; ?>&id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>">grupo - <?php echo $nome_grupo; ?></a></li>
+			<li><a href="../index.php?id_filtro=<?php echo $id_n1; ?>&id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>"> <?php echo $nome_grupo; ?></a></li>
 			<li class="active">subgrupos</li>
 		</ol>
 	</div>
@@ -153,10 +153,14 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<div class="col-md-12">
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="id_subgrupo">{{{nomeTxt}}}</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<select class="form-control" name="id_subgrupo">
 								{{{opcoesNo}}}
 							</select>
+						</div>
+						<div class="col-md-2">
+							<a onclick="i3GEOadmin.subgrupos.editarListaDeSubGrupos('{{id_n2}}','{{{nome_subgrupo}}}');" href="javascript:void(0)"
+							class="btn btn-primary btn-xs" role="button">{{{editarLista}}}</a>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">

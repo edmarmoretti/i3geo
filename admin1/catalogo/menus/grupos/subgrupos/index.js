@@ -417,6 +417,16 @@ i3GEOadmin.subgrupos = {
 			//abre a pagina de edicao
 			window.location.href = "temas/index.php?id_n1=" + i3GEOadmin.subgrupos.id_n1 + "&nome_grupo=" + i3GEOadmin.subgrupos.nome_grupo + "&id_n2=" + id + "&nome_subgrupo=" + titulo + "&id_menu=" + i3GEOadmin.subgrupos.id_menu + "&nome_menu=" + i3GEOadmin.subgrupos.nome_menu;
 		},
+		editarListaDeSubGrupos: function(id,titulo){
+			//muda a url para que o usuario possa voltar pelo botao do navegador
+			var u = window.location.origin
+			+ window.location.pathname
+			+ "?id_filtro=" + id + "&id_menu=" + i3GEOadmin.subgrupos.id_menu + "&nome_menu=" + i3GEOadmin.subgrupos.nome_menu
+			+ "&nome_grupo=" + i3GEOadmin.subgrupos.nome_grupo + "&id_n1=" + i3GEOadmin.subgrupos.id_n1 + "&nome_subgrupo=" + titulo + "&id_n2=" + id;
+			window.history.replaceState(null,null,u);
+			//abre a pagina de edicao
+			window.location.href = "listadesubgrupos/index.php?id_n2=" + id + "&nome_subgrupo=" + titulo + "&id_menu=" + i3GEOadmin.subgrupos.id_menu + "&nome_menu=" + i3GEOadmin.subgrupos.nome_menu + "&nome_grupo=" + i3GEOadmin.subgrupos.nome_grupo + "&id_n1=" + i3GEOadmin.subgrupos.id_n1;
+		},
 		addInput: function(id,valor){
 			var i = $("#"+id);
 			$(i.val(i.val() + ' ' + valor));

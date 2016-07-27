@@ -20,11 +20,11 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 			<li><a href="../../../index.php?id_filtro=<?php echo $id_menu; ?>">menu: <?php echo $nome_menu; ?></a></li>
 			<li><a href="../../index.php?id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>">grupos</a></li>
 			<li><a
-				href="../../index.php?id_filtro=<?php echo $id_n1; ?>&id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>">grupo: <?php echo $nome_grupo; ?></a></li>
+				href="../../index.php?id_filtro=<?php echo $id_n1; ?>&id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>"> <?php echo $nome_grupo; ?></a></li>
 			<li><a
 				href="../../index.php?id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>&id_grupo=<?php echo $id_grupo; ?>&nome_grupo=<?php echo $nome_grupo; ?>">subgrupos</a></li>
 			<li><a
-				href="../../index.php?id_filtro=<?php echo $id_n2; ?>&id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>&id_grupo=<?php echo $id_grupo; ?>&nome_grupo=<?php echo $nome_grupo; ?>">subgrupo: <?php echo $nome_subgrupo; ?></a></li>
+				href="../../index.php?id_filtro=<?php echo $id_n2; ?>&id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>&id_grupo=<?php echo $id_grupo; ?>&nome_grupo=<?php echo $nome_grupo; ?>"> <?php echo $nome_subgrupo; ?></a></li>
 			<li class="active">Temas</li>
 		</ol>
 	</div>

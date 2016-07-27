@@ -414,5 +414,10 @@ i3GEOadmin.core.dicionario = {
 		pt : "Nome",
 		en : "",
 		es : ""
+	} ],
+    'editarLista' : [ {
+		pt : "Editar lista",
+		en : "",
+		es : ""
 	} ]
 };

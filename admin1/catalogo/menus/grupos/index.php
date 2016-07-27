@@ -13,7 +13,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			<li><a href="../../../index.php">Admin</a></li>
 			<li>Cat&aacute;logo</li>
 			<li><a href="../index.php">Menus</a></li>
-			<li><a href="../index.php?id_filtro=<?php echo $id_menu; ?>">Menu - <?php echo $nome_menu; ?></a></li>
+			<li><a href="../index.php?id_filtro=<?php echo $id_menu; ?>"> <?php echo $nome_menu; ?></a></li>
 			<li class="active">Grupos</li>
 		</ol>
 	</div>
@@ -150,10 +150,14 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<div class="col-md-12">
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="id_grupo">{{{nomeTxt}}}</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<select class="form-control" name="id_grupo">
 								{{{opcoesNo}}}
 							</select>
+						</div>
+						<div class="col-md-2">
+							<a onclick="i3GEOadmin.grupos.editarListaDeGrupos('{{id_n1}}','{{{nome_grupo}}}');" href="javascript:void(0)"
+							class="btn btn-primary btn-xs" role="button">{{{editarLista}}}</a>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
