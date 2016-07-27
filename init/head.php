@@ -26,6 +26,8 @@ echo "
     <!-- Custom styles for this template -->
     <link href='" . ONDEI3GEO . "/pacotes/font-awesome/css/font-awesome.min.css' rel='stylesheet'>
 
+    <link href='" . ONDEI3GEO . "/pacotes/bootstrap-accessibility-plugin/plugins/css/bootstrap-accessibility.css' rel='stylesheet'>
+
     <script src='" . ONDEI3GEO . "/init/headjs.php'></script>";
 ?>
 <style>

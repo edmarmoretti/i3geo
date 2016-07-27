@@ -13,6 +13,8 @@ include (ONDEI3GEO . "/pacotes/bootstrap/js/ie10-viewport-bug-workaround.js");
 echo "\n";
 include (ONDEI3GEO . "/pacotes/bootstrap-material-design/dist/js/material.min.js");
 echo "\n";
+include (ONDEI3GEO . "/pacotes/bootstrap-accessibility-plugin/plugins/js/bootstrap-accessibility.min.js");
+echo "\n";
 
 if (extension_loaded ( 'zlib' )) {
 	ob_end_flush ();

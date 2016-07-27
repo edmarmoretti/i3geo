@@ -22,6 +22,10 @@ botoesIni = [
 	{
 		"link":"http://codebeautify.org/",
 		"corpo": "Free Online Tools For Developers - To Beautify, Validate, Minify, Analyse and Convert"
+	},
+	{
+		"link":"http://www.dasplankton.de/ContrastA/",
+		"corpo": "Contrast-A - find accessible color combinations"
 	}
 ];
 
