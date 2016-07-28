@@ -42,6 +42,7 @@ include "head.php";
 }
 </style>
 <body style="padding-top: 90px;" id="topo">
+	<a href="#conteudoPrincipal" class="sr-only sr-only-focusable"><span class="well" >Skip to main content</span></a>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -55,7 +56,7 @@ include "head.php";
 			</div>
 			<div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav">
-					<li class="fa"><a href="#"><span id="bandeiras"></span></a></li>
+					<li class="fa"><a href="#" tabindex='-1' ><span id="bandeiras"></span></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a
@@ -73,6 +74,7 @@ include "head.php";
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.cogs').fadeIn(600);">{{{admin}}}</a></li>
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
 						<li><a href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
+						<li><a href="../social/index.php" >Social</a></li>
 					</ul>
 				</div>
 			</div>
@@ -96,14 +98,14 @@ include "head.php";
 		</div>
 	</nav>
 
-	<div class="container">
+	<div class="container" id="conteudoPrincipal">
 		<div class="row center-block">
 			<!-- Template para criacao dos quadros ver index.js -->
 			<div id="botoesTpl" class="hidden">
 				<div class="cartao {{{fa}}} col-xs-12 center-block"
 					style="width: 260px; min-width: 260px; max-width: 260px;">
 					<div class="panel panel-default">
-						<div class="panel-body">
+						<div class="panel-body" tabindex="-1" >
 							<!--
 							<div class="thumbnail" role="button" style="height: 90px;">
 								<a target="{{{target}}}" href="{{{href}}}"> <img class="img-rounded"
@@ -112,25 +114,25 @@ include "head.php";
 							</div>
 							-->
 							<div class="thumbnail" role="button" style="height: 90px;">
-								<a target="{{{target}}}" href="{{{href}}}"> <img class="img-rounded {{{img}}}"
+								<a tabindex="-1" target="{{{target}}}" href="{{{href}}}"> <img tabindex="-1" class="img-rounded {{{img}}}"
 									style="height: 100%; width: 100%" src="../imagens/branco.gif" />
 								</a>
 							</div>
 
 							<h4 style="height: 40px;">{{{titulo}}}</h4>
-							<h5 class="hidden-xs" style="height: 100px;">{{{subtitulo}}}</h5>
+							<h5 tabindex="-1" class="hidden-xs" style="height: 100px;">{{{subtitulo}}}</h5>
 
 						</div>
 						<div class="panel-footer text-right"
 							style="padding: 0px; padding-right: 15px; border: 0px; background-color: white;">
 							<div class="row center-block">
 								<div class="col-xs-6" style="line-height: 3.5; text-align: left;">
-									<a role="button" data-toggle="quadroQrcode" data-url="{{{href}}}"
+									<a tabindex="-1" role="button" data-toggle="quadroQrcode" data-url="{{{href}}}"
 										class="btn btn-primary btn-fab btn-fab-mini" href="#"> <span
 										class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
 									</a>
 
-									<button onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
+									<button tabindex="-1" onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
 										<span data-cookie="{{{img}}}" class="glyphicon glyphicon-star" aria-hidden="true"></span>
 									</button>
 								</div>
@@ -144,48 +146,19 @@ include "head.php";
 					</div>
 				</div>
 			</div>
-			<div class="center-block col-xs-12 hidden" id="tt"
-				style="width: 260px; min-width: 260px; max-width: 260px;">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<a class="twitter-timeline tline" href="" data-widget-id="288061915689787392" height="320">Tweets
-							@i3Geo</a>
-					</div>
-				</div>
-			</div>
-			<div class="center-block col-xs-12 hidden"
-				style="width: 260px; min-width: 260px; max-width: 260px;">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<a class="twitter-timeline htag" href="" data-widget-id="643417277208133633" height="320">i3geo
-							Tweets</a>
-					</div>
-				</div>
-			</div>
 		</div>
 
 	</div>
 	<div tabindex="-1" class="container-fluid"
 		style="background-color: rgb(250, 250, 250); margin-top: 10px; padding-top: 10px;">
-
 		<div class="row text-center hidden">
-
-			<div class="col-lg-4 center-block">
-				<a rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank"><img
+			<div class="col-lg-12 center-block">
+				<a tabindex="-1" rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank"><img
 					alt="Licen&ccedil;a Creative Commons" style="border-width: 0"
 					src="https://i.creativecommons.org/l/GPL/2.0/88x62.png" /></a><br />O i3Geo est&aacute;
-				licenciado com uma Licen&ccedil;a <a rel="license"
+				licenciado com uma Licen&ccedil;a <a tabindex="-1" rel="license"
 					href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank">Creative
 					Commons - Licen&ccedil;a P&uacute;blica Geral GNU (&#34;GNU General Public License&#34;)</a>
-			</div>
-			<div class="col-lg-4 center-block">
-
-				<script type='text/javascript'
-					src='https://www.openhub.net/p/i3geo/widgets/project_users?format=js&style=blue'></script>
-			</div>
-			<div class="col-lg-4 text-center">
-				<script type="text/javascript"
-					src="http://www.openhub.net/p/150688/widgets/project_basic_stats.js"></script>
 			</div>
 		</div>
 	</div>
@@ -220,28 +193,6 @@ include "head.php";
 		var u = window.location.origin + window.location.pathname + "?home=";
 		window.history.replaceState(null,null,u);
 
-		var tamanho = findBootstrapDeviceSize();
-		if(tamanho != "xs"){
-			$(".tline").attr("src","https://twitter.com/i3geo");
-			$(".tline").attr("src","https://twitter.com/hashtag/i3geo");
-
-			window.twttr = (function(d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0],
-					t = window.twttr || {};
-				if (d.getElementById(id)) return t;
-				js = d.createElement(s);
-				js.id = id;
-				js.src = "https://platform.twitter.com/widgets.js";
-				fjs.parentNode.insertBefore(js, fjs);
-
-				t._e = [];
-				t.ready = function(f) {
-					t._e.push(f);
-				};
-
-				return t;
-			}(document, "script", "twitter-wjs"));
-		}
 		$('[data-toggle="quadroQrcode"]').popover({
 			html: true,
 			placement: "auto",

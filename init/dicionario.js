@@ -38,9 +38,9 @@ g_traducao_init =
 			],
 		4 : [
 			{
-				pt : "i3Geo + <a href='http://openlayers.org/' >OpenLayers </a>",
-				en : "i3Geo + <a href='http://openlayers.org/' >OpenLayers </a>",
-				es : "i3Geo + <a href='http://openlayers.org/' >OpenLayers </a>"
+				pt : "i3Geo + <a tabindex='-1' href='http://openlayers.org/' >OpenLayers </a>",
+				en : "i3Geo + <a tabindex='-1' href='http://openlayers.org/' >OpenLayers </a>",
+				es : "i3Geo + <a tabindex='-1' href='http://openlayers.org/' >OpenLayers </a>"
 			}
 		],
 		"4a" : [
@@ -59,16 +59,16 @@ g_traducao_init =
 		],
 		"5a" : [
 				{
-					pt : "Mapa (OpenLayers) com o c&oacute;digo javascript n&atilde;o compactado, &uacute;til para desenvolvedores. Tamb&eacute;m nas vers&otilde;es com <a target='_blank' href='../interface/osmdebug.htm' >OSM</a> e <a href='../interface/gmdebug.phtml'>GoogleMaps</a>.",
-					en : "Map (OpenLayers) with non-compacted javascript code, useful for developers. There are versions for <a target='_blank' href='../interface/osmdebug.htm' >OSM</a> and <a target='_blank' href='../interface/gmdebug.phtml'>GoogleMaps.</a>",
-					es : "Mapa (OpenLayers) con un c&oacute;digo javascript no compactado, &uacute;til para desarrolladores. Tambi&eacute;n en versiones de <a target='_blank' href='../interface/osmdebug.htm' >OSM</a> y <a target='_blank' href='../interface/gmdebug.phtml'>GoogleMaps.</a>"
+					pt : "Mapa (OpenLayers) com o c&oacute;digo javascript n&atilde;o compactado, &uacute;til para desenvolvedores. Tamb&eacute;m nas vers&otilde;es com <a tabindex='-1' target='_blank' href='../interface/osmdebug.htm' >OSM</a> e <a tabindex='-1' href='../interface/gmdebug.phtml'>GoogleMaps</a>.",
+					en : "Map (OpenLayers) with non-compacted javascript code, useful for developers. There are versions for <a tabindex='-1' target='_blank' href='../interface/osmdebug.htm' >OSM</a> and <a tabindex='-1' target='_blank' href='../interface/gmdebug.phtml'>GoogleMaps.</a>",
+					es : "Mapa (OpenLayers) con un c&oacute;digo javascript no compactado, &uacute;til para desarrolladores. Tambi&eacute;n en versiones de <a tabindex='-1' target='_blank' href='../interface/osmdebug.htm' >OSM</a> y <a tabindex='-1' target='_blank' href='../interface/gmdebug.phtml'>GoogleMaps.</a>"
 				}
 			],
 		6 : [
 			{
-				pt : "i3Geo + <a href='https://developers.google.com/maps' >Google Maps </a>",
-				en : "i3Geo + <a href='https://developers.google.com/maps' >Google Maps </a>",
-				es : "i3Geo + <a href='https://developers.google.com/maps' >Google Maps </a>"
+				pt : "i3Geo + <a tabindex='-1' href='https://developers.google.com/maps' >Google Maps </a>",
+				en : "i3Geo + <a tabindex='-1' href='https://developers.google.com/maps' >Google Maps </a>",
+				es : "i3Geo + <a tabindex='-1' href='https://developers.google.com/maps' >Google Maps </a>"
 			}
 		],
 		"6a" : [
@@ -262,7 +262,7 @@ g_traducao_init =
 		],
 		23 : [
 			{
-				pt : "i3Geo + <a href='http://wiki.openstreetmap.org' >OSM </a>",
+				pt : "i3Geo + <a tabindex='-1' href='http://wiki.openstreetmap.org' >OSM </a>",
 				en : "",
 				es : ""
 			}
@@ -290,7 +290,7 @@ g_traducao_init =
 		],
 		25 : [
 			{
-				pt : "i3Geo + <a href='http://community.meteorite.bi/' >SAIKU </a>",
+				pt : "i3Geo + <a  tabindex='-1' href='http://community.meteorite.bi/' >SAIKU </a>",
 				en : "",
 				es : ""
 			}
@@ -374,7 +374,7 @@ g_traducao_init =
 		],
 		"32a" : [
 			{
-				pt : "Lista de e-mails da comunidade i3Geo mantida pela <a href='http://www.osgeo.org/' target='_blank' >OSGEO </a>. Tire d&uacute;vidas com outros usu&aacute;rios e divulgue assuntos de interesse.",
+				pt : "Lista de e-mails da comunidade i3Geo mantida pela <a tabindex='-1' href='http://www.osgeo.org/' target='_blank' >OSGEO </a>. Tire d&uacute;vidas com outros usu&aacute;rios e divulgue assuntos de interesse.",
 				en : "",
 				es : ""
 			}

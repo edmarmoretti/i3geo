@@ -5,15 +5,17 @@ error_reporting ( 0 );
 include "../init/head.php";
 ?>
 <style>
-.list-group .list-group-separator::before{
+.list-group .list-group-separator::before {
 	width: calc(100% - 45px);
 }
-.list-group-item-heading{
+
+.list-group-item-heading {
 	line-height: 2;
 	left: 5px;
 	margin-left: 45px;
 }
-.list-group{
+
+.list-group {
 	margin: auto;
 }
 </style>
@@ -21,7 +23,7 @@ include "../init/head.php";
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="../init/index.php?home="><?php echo $mensagemInicia;?> <i
+				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i
 					class="fa fa-home fa-1x"></i></a>
 			</div>
 		</div>
@@ -30,32 +32,37 @@ include "../init/head.php";
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="../init/index.php?home=">i3Geo</a></li>
-				<li class="active">Utilit&aacute;rios</li>
+				<li class="active">Social</li>
 			</ol>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row center-block">
-			<div class="col-sm-12 hidden">
-				<!-- Template para criacao dos quadros ver index.js -->
+			<div class="center-block col-xs-6">
 				<div class="panel panel-default">
-					<div class="panel-body" id="botoesTpl">
-						<div class="list-group" >
-							<div class="row-action-primary">
-								<div class="bs-component btn-group-sm pull-left">
-									<a class="btn btn-primary btn-fab" href="{{{link}}}"> <i class="material-icons">launch</i>
-									</a>
-								</div>
-							</div>
-							<div class="row-content">
-								<h4 class="list-group-item-heading">
-									<a href="{{{link}}}">{{{corpo}}} </a>
-								</h4>
-							</div>
-							<div class="list-group-separator"></div>
-						</div>
+					<div class="panel-body">
+						<a class="twitter-timeline tline" href="https://twitter.com/i3geo"
+							data-widget-id="288061915689787392" height="320">Tweets @i3Geo</a>
 					</div>
 				</div>
+			</div>
+			<div class="center-block col-xs-6">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a class="twitter-timeline htag" href="https://twitter.com/hashtag/i3geo"
+							data-widget-id="643417277208133633" height="320">i3geo Tweets</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row center-block">
+			<div tabindex="-1" class="col-xs-6 text-center">
+				<script type='text/javascript'
+					src='https://www.openhub.net/p/i3geo/widgets/project_users?format=js&style=blue'></script>
+			</div>
+			<div tabindex="-1" class="col-xs-6 text-center">
+				<script type="text/javascript"
+					src="http://www.openhub.net/p/150688/widgets/project_basic_stats.js"></script>
 			</div>
 		</div>
 	</div>
@@ -63,15 +70,10 @@ include "../init/head.php";
 	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
 	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
 	<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
-	<script src='dicionario.js'></script>
-	<script src='index.js'></script>
-
+	<script src="https://platform.twitter.com/widgets.js"></script>
 	<script>
 	$(document).ready(function(){
 		i3GEO.configura = {"locaplic" : "..","sid": ""};
-		$(".active").html($trad("util",g_traducao_util));
-		mostraBotoesBT();
-		$('.hidden').removeClass('hidden');
 		$.material.init();
 	});
 	</script>
