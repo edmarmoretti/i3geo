@@ -106,5 +106,15 @@ hr {
 body{
 	background-color: rgb(240,240,240);
 }
+/* conforme regra de acessibilidade */
+.navbar, .navbar.navbar-default, .btn.btn-fab.btn-primary {
+    background-color: #008579;
+}
+.alert.alert-danger {
+	background-color: #e13023;
+}
+a, a:focus, a:hover {
+    color: #008579;
+}
 </style>
 </head>

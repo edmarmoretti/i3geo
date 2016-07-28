@@ -42,17 +42,17 @@ include "head.php";
 }
 </style>
 <body style="padding-top: 90px;" id="topo">
-	<a href="#conteudoPrincipal" class="sr-only sr-only-focusable"><span class="well" >Skip to main content</span></a>
+	<a href="#conteudoPrincipal" class="sr-only sr-only-focusable"><span class="well" style="background: white; color: #007e72;">Skip to main content</span></a>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+				<button type="button" title="icon-bar" class="navbar-toggle collapsed" data-toggle="collapse"
 					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" onclick="$('.cartao').fadeIn(600);" href="#"><?php echo $mensagemInicia;?> <i
-					class="fa fa-home fa-1x"></i></a>
+				<a class="navbar-brand" onclick="$('.cartao').fadeIn(600);" href="#">
+				<?php echo $mensagemInicia;?> <i class="material-icons">home</i></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav">
@@ -87,8 +87,8 @@ include "head.php";
 				style="background: rgb(255, 255, 255); background: rgba(255, 255, 255, 0.8);">
 				<!-- Template para mensagem do i3Geo -->
 				<ul class="list-inline">
-					<li><img class="pull-left" src='../imagens/i3Geo_bigTransp.png'
-						style='width: 80px; margin: 5px;' /> <img class="pull-right hidden-xs"
+					<li><img class="pull-left" alt="i3Geo Logo" src='../imagens/i3Geo_bigTransp.png'
+						style='width: 80px; margin: 5px;' /> <img alt="qrcode site" class="pull-right hidden-xs"
 						src='../pacotes/qrcode/php/qr_img.php?host={{{host}}}&d={{{href}}}'
 						style='width: 80px; margin: 5px;' />
 						<p>{{{jumbotron}}}</p></li>
@@ -98,7 +98,7 @@ include "head.php";
 		</div>
 	</nav>
 
-	<div class="container" id="conteudoPrincipal">
+	<div class="container" id="conteudoPrincipal" tabindex="-1">
 		<div class="row center-block">
 			<!-- Template para criacao dos quadros ver index.js -->
 			<div id="botoesTpl" class="hidden">
@@ -114,7 +114,7 @@ include "head.php";
 							</div>
 							-->
 							<div class="thumbnail" role="button" style="height: 90px;">
-								<a tabindex="-1" target="{{{target}}}" href="{{{href}}}"> <img tabindex="-1" class="img-rounded {{{img}}}"
+								<a tabindex="-1" target="{{{target}}}" href="{{{href}}}"> <img alt="{{{titulo}}}" tabindex="-1" class="img-rounded {{{img}}}"
 									style="height: 100%; width: 100%" src="../imagens/branco.gif" />
 								</a>
 							</div>
@@ -127,17 +127,18 @@ include "head.php";
 							style="padding: 0px; padding-right: 15px; border: 0px; background-color: white;">
 							<div class="row center-block">
 								<div class="col-xs-6" style="line-height: 3.5; text-align: left;">
-									<a tabindex="-1" role="button" data-toggle="quadroQrcode" data-url="{{{href}}}"
-										class="btn btn-primary btn-fab btn-fab-mini" href="#"> <span
-										class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
-									</a>
+									<!-- o texto no span e para acessibilidade-->
+									<button tabindex="-1" role="button" data-toggle="quadroQrcode" data-url="{{{href}}}"
+										class="btn btn-primary btn-fab btn-fab-mini" > <span
+										class="glyphicon glyphicon-qrcode" aria-hidden="true">&nbsp;&nbsp;qrcode</span>
+									</button>
 
-									<button tabindex="-1" onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
-										<span data-cookie="{{{img}}}" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+									<button tabindex="-1" role="button" onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
+										<span data-cookie="{{{img}}}" ><i class="material-icons">grade</i></span>
 									</button>
 								</div>
 								<div class="col-xs-6">
-									<a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}">
+									<a class="btn btn-primary" style="color:#008579;" href="{{{href}}}" role="button" target="{{{target}}}">
 										{{{abrir}}} </a>
 								</div>
 
@@ -150,14 +151,14 @@ include "head.php";
 
 	</div>
 	<div tabindex="-1" class="container-fluid"
-		style="background-color: rgb(250, 250, 250); margin-top: 10px; padding-top: 10px;">
+		style="background-color: #fff; margin-top: 10px; padding-top: 10px;">
 		<div class="row text-center hidden">
 			<div class="col-lg-12 center-block">
 				<a tabindex="-1" rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank"><img
 					alt="Licen&ccedil;a Creative Commons" style="border-width: 0"
 					src="https://i.creativecommons.org/l/GPL/2.0/88x62.png" /></a><br />O i3Geo est&aacute;
 				licenciado com uma Licen&ccedil;a <a tabindex="-1" rel="license"
-					href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank">Creative
+					href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" style="color:#008579;" target="_blank">Creative
 					Commons - Licen&ccedil;a P&uacute;blica Geral GNU (&#34;GNU General Public License&#34;)</a>
 			</div>
 		</div>

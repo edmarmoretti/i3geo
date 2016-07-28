@@ -360,7 +360,7 @@ g_traducao_init =
 		],
 		"31a" : [
 			{
-				pt : "Página da comunidade de usuários no Portal do Software pÚblico Brasileiro.",
+				pt : "P&aacute;gina da comunidade de usuários no Portal do Software P&uacute;blico Brasileiro.",
 				en : "",
 				es : ""
 			}

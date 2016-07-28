@@ -182,6 +182,9 @@ body {
 	-o-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
+.navbar, .navbar.navbar-default {
+    background-color: #008579;
+}
 </style>
 </head>
 <script id="iconeAguardeTpl" type="x-tmpl-mustache">
