@@ -243,15 +243,15 @@ a, a:focus, a:hover {
 					class="material-icons">home</i></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav" id="menuPrincipalTpl">
+				</ul>
+				<ul class="nav navbar-nav">
 					<li class="dropdown"><a
 						onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>/','template_mst_bt.html');"
 						href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
 						<ul id="i3GEOF_loginusuario" class="dropdown-menu"
 							style="min-width: 280px; padding: 10px; background-color: white;">
 						</ul></li>
-				</ul>
-				<ul class="nav navbar-nav" id="menuPrincipalTpl">
 				</ul>
 			</div>
 		</div>

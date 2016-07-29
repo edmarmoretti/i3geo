@@ -55,26 +55,21 @@ include "head.php";
 				<?php echo $mensagemInicia;?> <i class="material-icons">home</i></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
-				<ul class="nav navbar-nav">
-					<li class="fa"><a href="#" tabindex='-1' ><span id="bandeiras"></span></a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a
-						onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');"
-						href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
-						<ul id="i3GEOF_loginusuario" class="dropdown-menu"
-							style="min-width: 280px; padding: 10px; background-color: white;">
-						</ul></li>
-				</ul>
 				<!-- template para permitir a traducao -->
 				<div id="menuTpl" class="hidden">
 					<ul class="nav navbar-nav">
-						<li><a href="#topo" onclick="$('.cartao').hide();$('.map-o').fadeIn(600);">{{{mapas}}}</a></li>
-						<li><a href="#topo" onclick="$('.cartao').hide();$('.download').fadeIn(600);">OGC/Download</a></li>
-						<li><a href="#topo" onclick="$('.cartao').hide();$('.cogs').fadeIn(600);">{{{admin}}}</a></li>
-						<li><a href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
-						<li><a href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
-						<li><a href="../social/index.php" >Social</a></li>
+						<li class="fa"><a href="#" tabindex='-1' ><span id="bandeiras"></span></a></li>
+						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.map-o').fadeIn(600);">{{{mapas}}}</a></li>
+						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.download').fadeIn(600);">OGC/Download</a></li>
+						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.cogs').fadeIn(600);">{{{admin}}}</a></li>
+						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
+						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
+						<li><a role="button" href="../social/index.php" >Social</a></li>
+						<li class="dropdown"><a role="button"
+						onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');"
+						href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
+						<ul id="i3GEOF_loginusuario" class="dropdown-menu" style="min-width: 280px; padding: 10px; background-color: white;">
+						</ul></li>
 					</ul>
 				</div>
 			</div>
