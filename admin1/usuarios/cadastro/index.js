@@ -111,6 +111,8 @@ Obt&eacute;m a lista de usuarios
 						);
 						$("#filtro").html("<option value='' >Todos</option>" + html);
 						$("#filtro").combobox();
+						$(".ui-autocomplete-input").attr( "title", "Filtro" );
+
 						if(filtro != ""){
 							i3GEOadmin.core.defineFiltro(filtro);
 							i3GEOadmin.core.filtra(i3GEOadmin.usuarios.pegaFiltro());

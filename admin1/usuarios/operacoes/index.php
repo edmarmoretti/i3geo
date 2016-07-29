@@ -22,16 +22,17 @@ include "../../head.php";
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
 				</button>
-				<h3>{{{txtTitulo}}}</h3>
-				<h4>{{{txtDesc}}}</h4>
+				<h2><small>{{{txtTitulo}}}</small></h2>
+				<blockquote>{{{txtDesc}}}</blockquote>
+
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
-					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+					<label class="control-label" for="filtro">{{{filtro}}}</label>
+					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
-					<a onclick="i3GEOadmin.operacoes.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<button onclick="i3GEOadmin.operacoes.adicionaDialogo();" style="color:#008579;" style="color:#008579;" class="btn btn-primary" role="button">{{{adicionar}}}</button>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda-->
@@ -68,7 +69,7 @@ include "../../head.php";
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{id_operacao}}">
-		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post" action="" >
+		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_operacao}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
 			<div class="row">
 				<div class="col-md-4" >
 					<h4> {{{papeisv}}}</h4>
@@ -79,23 +80,21 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="codigo">{{{labelCodigo}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{codigo}}}" class="form-control" name="codigo" required>
+							<input title="{{{labelCodigo}}}" type="text" value="{{{codigo}}}" class="form-control" name="codigo" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="descricao">{{{labelDescricao}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{descricao}}}" class="form-control" name="descricao" required>
+							<input title="{{{labelDescricao}}}" type="text" value="{{{descricao}}}" class="form-control" name="descricao" required>
 						</div>
 					</div>
 				</div>
-
+			</div>
+			<div class="pull-right">
+				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
 			</div>
 		</form>
-		<div class="pull-right">
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_operacao}}')" class="btn btn-danger" role="button">{{excluir}}</a>
-			<a href="javascript:void(0)" onclick="{{onSalvar}}('{{id_operacao}}')" class="btn btn-primary" role="button">{{salvar}}</a>
-		</div>
 	</div>
 </div>
 </script>

@@ -110,9 +110,7 @@ menuPrincipal = [
 		{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/index.php' >"+$trad("editorMapfile",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/menus/index.php' >"+$trad("editorMenus",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/arvore/index.php' >"+$trad("arvoreTemas",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/menus/index.php' >"+$trad("arvoreTemas",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/mapas/index.php' >"+$trad("linkMapas",i3GEOadmin.menup.dicionario)+"</a>"
 		},{

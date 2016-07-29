@@ -72,7 +72,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			<div class="row">
 				<div class="col-md-12">
 					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
-						method="post" action="">
+						method="post"  >
 						<div class="form-group form-group-lg">
 							<label class="col-md-2 control-label" for="nome">{{{nomeTxt}}} (Pt)</label>
 							<div class="col-md-10">

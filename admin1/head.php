@@ -6,7 +6,8 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name='description' content='Interface Integrada para Internet de ferramentas de geoprocessamento'>
+<meta name='description'
+	content='Interface Integrada para Internet de ferramentas de geoprocessamento'>
 <meta name='author' content='i3Geo'>
 <title>i3Geo</title>
 <?php
@@ -29,7 +30,7 @@ echo "
 
     <link href='" . ONDEI3GEO . "/pacotes/bootstrap-accessibility-plugin/plugins/css/bootstrap-accessibility.css' rel='stylesheet'>
 
-    <script src='". ONDEI3GEO . "/admin1/headjs.php'></script>
+    <script src='" . ONDEI3GEO . "/admin1/headjs.php'></script>
 ";
 ?>
 <script>
@@ -79,7 +80,7 @@ hr {
 }
 
 body {
-	background-color: background-color: rgb(240,240,250);;
+	background-color: background-color: rgb(240, 240, 250);;
 }
 
 .marginBottom-0 {
@@ -182,8 +183,33 @@ body {
 	-o-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
-.navbar, .navbar.navbar-default {
-    background-color: #008579;
+/* conforme regra de acessibilidade */
+.navbar, .navbar.navbar-default, .btn.btn-fab.btn-primary {
+	background-color: #008579;
+}
+
+.breadcrumb a, .breadcrumb a:focus, .breadcrumb a:hover {
+	color: #007e72;
+}
+
+.breadcrumb>.active, .breadcrumb>li+li::before {
+	color: #707070;
+}
+
+a, a:focus, a:hover {
+	color: #008579;
+}
+
+.alert.alert-warning {
+	background-color: #de3601;
+}
+
+.form-group.form-group-lg label.control-label {
+	color: #767676;
+}
+
+.form-group.form-group-lg .checkbox label, .form-group.form-group-lg .radio label, .form-group.form-group-lg label {
+	color: #767676;
 }
 </style>
 </head>
@@ -191,7 +217,7 @@ body {
 <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
 </script>
 <!-- Template para o Modal de confirmacao -->
-<script  id="modalConfirmaTpl" type="x-tmpl-mustache">
+<script id="modalConfirmaTpl" type="x-tmpl-mustache">
 	<button class="btn btn-primary btn-fab btn-fab-mini pull-left">
 		<i class="material-icons">help</i>
 	</button>
@@ -208,13 +234,13 @@ body {
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+				<button title="icon bar" type="button" class="navbar-toggle collapsed" data-toggle="collapse"
 					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="<?php echo ONDEI3GEO; ?>/init/index.php"><?php echo $mensagemInicia;?> <i
-					class="fa fa-home fa-1x"></i></a>
+					class="material-icons">home</i></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -234,13 +260,16 @@ body {
 	<div id="modalGeral" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 				<div class="modal-body modal-lg"></div>
 			</div>
 		</div>
 	</div>
 	<nav class="navbar-fixed-bottom">
-		<div class="container">
-
-		</div>
+		<div class="container"></div>
 	</nav>
 	<!-- ate aqui veio de admin1/head.php -->

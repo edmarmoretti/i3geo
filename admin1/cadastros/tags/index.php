@@ -24,8 +24,8 @@ include "../../head.php";
 					<i class="material-icons">help</i>
 				</button>
 				-->
-				<h3>{{{txtTitulo}}}</h3>
-				<h4>{{{txtDesc}}}</h4>
+				<h2><small>{{{txtTitulo}}}</small></h2>
+				<blockquote>{{{txtDesc}}}</blockquote>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label> <select
@@ -64,7 +64,7 @@ include "../../head.php";
 			<div class="row">
 				<div class="col-md-7">
 					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
-						method="post" action="">
+						method="post"  >
 						<div class="form-group form-group-lg">
 							<label class="col-md-2 control-label" for="nome">Tag</label>
 							<div class="col-md-10">

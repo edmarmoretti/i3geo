@@ -107,11 +107,14 @@ body{
 	background-color: rgb(240,240,240);
 }
 /* conforme regra de acessibilidade */
-.navbar, .navbar.navbar-default, .btn.btn-fab.btn-primary {
+.navbar, .navbar.navbar-default, .btn.btn-fab.btn-primary, .btn.btn-primary {
     background-color: #008579;
 }
 .alert.alert-danger {
 	background-color: #e13023;
+}
+.alert.alert-warning {
+    background-color: #de3601;
 }
 a, a:focus, a:hover {
     color: #008579;

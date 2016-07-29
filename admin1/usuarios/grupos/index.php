@@ -24,8 +24,8 @@ include "../../head.php";
 					<i class="material-icons">help</i>
 				</button>
 				-->
-				<h3>{{{txtTitulo}}}</h3>
-				<h4>{{{txtDesc}}}</h4>
+				<h2><small>{{{txtTitulo}}}</small></h2>
+				<blockquote>{{{txtDesc}}}</blockquote>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
@@ -72,7 +72,7 @@ include "../../head.php";
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{id_grupo}}">
-		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post" action="" >
+		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_grupo}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
 			<div class="row">
 				<div class="col-md-4" style="max-height: 230px; overflow-y: auto;">
 					<h4> {{{usuariosv}}}</h4>
@@ -94,11 +94,11 @@ include "../../head.php";
 					</div>
 				</div>
 			</div>
-		</form>
 		<div class="pull-right">
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_grupo}}')" class="btn btn-danger" role="button">{{excluir}}</a>
-			<a href="javascript:void(0)" onclick="{{onSalvar}}('{{id_grupo}}')" class="btn btn-primary" role="button">{{salvar}}</a>
+				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
 		</div>
+		</form>
+
 	</div>
 </div>
 </script>

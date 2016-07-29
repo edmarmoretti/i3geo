@@ -71,7 +71,7 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{id_n3}}">
-		<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post" action="" >
+		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_n3}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group form-group-lg">
@@ -101,11 +101,11 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 					</div>
 				</div>
 			</div>
-		</form>
 		<div class="pull-right">
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_n3}}')" class="btn btn-danger" role="button">{{excluir}}</a>
-			<a href="javascript:void(0)" onclick="{{onSalvar}}('{{id_n3}}')" class="btn btn-primary" role="button">{{salvar}}</a>
+				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
 		</div>
+		</form>
+
 	</div>
 </div>
 </script>
