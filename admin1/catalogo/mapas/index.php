@@ -170,6 +170,7 @@ include "../../head.php";
 				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
 		</div>
 		</form>
+
 	</div>
 </div>
 </script>

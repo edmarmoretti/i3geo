@@ -53,6 +53,23 @@ i3GEOadmin.grupos = {
 						);
 						i3GEOadmin.grupos.listaRaiz(json["raiz"],opcoesPerfil,json["temas"]);
 						i3GEOadmin.grupos.listaNos(json["grupos"],opcoesPerfil,json["tiposGrupos"]);
+						i3GEOadmin.grupos.ondeNos.sortable({
+							update: function( event, ui ) {
+								var data = i3GEOadmin.grupos.ondeNos.sortable('toArray', {attribute: "data-id"});
+								console.info(data);
+							}
+						});
+						i3GEOadmin.grupos.ondeRaiz.sortable();
+
+						$('.panel').hover(
+						        function(){
+						            $(this).find('.move').fadeIn(400);
+						        },
+						        function(){
+						            $(this).find('.move').fadeOut(250);
+						        }
+						    );
+
 						$.material.init();
 					}
 			)

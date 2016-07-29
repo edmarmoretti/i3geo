@@ -107,7 +107,7 @@ body{
 	background-color: rgb(240,240,240);
 }
 /* conforme regra de acessibilidade */
-.navbar, .navbar.navbar-default, .btn.btn-fab.btn-primary, .btn.btn-primary {
+.navbar, .navbar.navbar-default, .btn.btn-fab.btn-primary {
     background-color: #008579;
 }
 .alert.alert-danger {

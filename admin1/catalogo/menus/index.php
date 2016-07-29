@@ -64,7 +64,7 @@ include "../../head.php";
 			</a>
 			&nbsp;
 			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_menu}}"
-				aria-expanded="false" aria-controls="#body-form-{{id_menu}}"> Menu: {{{nome_menu}}} </a>
+				aria-expanded="false" aria-controls="#body-form-{{id_menu}}"> {{{nome_menu}}} </a>
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{id_menu}}">
