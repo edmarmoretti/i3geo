@@ -34,7 +34,8 @@ include_once (dirname ( __FILE__ ) . "/../../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"ORDENA"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
@@ -46,6 +47,31 @@ include (dirname ( __FILE__ ) . "/../../../../admin/php/conexao.php");
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
+	case "ORDENA" :
+		$ordem = explode(" ",$ordem);
+		//verifica se existe a mesma quantidade de registros no banco e na lista de ids
+		$dados = pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n1 WHERE id_menu = $id_menu", $dbh, false );
+		if(count($dados) != count($ordem)){
+			header ( "HTTP/1.1 500 erro numero de registros nao batem" );
+			exit ();
+		}
+		//verifica se os ids existem no mesmo nivel
+		$dados = pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n1 WHERE id_menu = $id_menu AND id_n1 IN (" . implode(",",$ordem). ")", $dbh, false );
+		if(count($dados) != count($ordem)){
+			header ( "HTTP/1.1 500 erro ids nao batem" );
+			exit ();
+		}
+
+		$retorna = i3GeoAdminOrdena($dbhw,$ordem,i3geoadmin_n1,"id_n1");
+		$dbhw = null;
+		$dbh = null;
+		if ($retorna === false) {
+			header ( "HTTP/1.1 500 erro ao ordenar" );
+			exit ();
+		}
+		retornaJSON ( $retorna );
+		exit();
+		break;
 	case "ADICIONAR" :
 		$novo = adicionar( $id_grupo, $id_menu, $publicado, $n1_perfil, $ordem, $dbhw );
 		if ($novo === false) {

@@ -90,7 +90,9 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			</a>
 			&nbsp;
 			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-formRaiz-{{id_raiz}}"
-			aria-expanded="false" aria-controls="#body-formRaiz-{{id_raiz}}"> {{{nome_tema}}} </a>
+			aria-expanded="false" aria-controls="#body-formRaiz-{{id_raiz}}"> {{{nome_tema}}}
+			<i  class="material-icons move" style="color: gray; display:none;">swap_vert</i>
+			</a>
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-formRaiz-{{id_raiz}}">

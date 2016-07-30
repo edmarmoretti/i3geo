@@ -313,6 +313,38 @@ function i3GeoAdminInsertUnico($pdo,$tabela,$data,$colTemp,$colId){
 		return "UPDATE ID ";
 	}
 }
+function i3GeoAdminOrdena($pdo,$ordem,$tabela,$colunaid){
+	global $esquemaadmin;
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$arr = array();
+	$n = count($ordem) + 1;
+	for($i = 1; $i < $n; $i++){
+		$arr[$ordem[$i - 1]] = $i;
+	}
+	$str_ids = implode(',', array_keys($arr));
+	$str_when_then = "";
+	foreach($arr as $id => $ordem) {
+		$str_when_then .= sprintf(" WHEN " . $colunaid . " = %d THEN %s ",
+			$id,
+			$ordem // note, you'd sanitize this if from user input
+		);
+	}
+	//whitespace + appends included in example for readability
+	$template =   "UPDATE '".$esquemaadmin . $tabela."' "
+		. "   SET 'ordem' = CASE "
+		. "     %s "
+		. "   END "
+		. " WHERE " . $colunaid . " IN (%s);";
+	$sql = sprintf($template, $str_when_then, $str_ids);
+
+	try {
+		$resultado = $pdo->query($sql);
+	} catch (PDOException $e) {
+		return false;
+	}
+	i3GeoAdminInsertLog($pdo,$sql,array());
+	return true;
+}
 //$logTransacoes vem do ms_configura.php
 //ver tambem classe_metaestat.php
 function i3GeoAdminInsertLog($pdo,$sql,$data=array()){
