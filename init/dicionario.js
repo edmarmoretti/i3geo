@@ -207,8 +207,8 @@ g_traducao_init =
 		"16a" : [
 			{
 				pt : "Nessa plataforma de registro de bugs voc&ecirc; pode informar problemas e interagir com os desenvolvedores.",
-				en : "",
-				es : ""
+				en : "Bug record interface allows you to report issues and interact with developers.",
+				es : "En la plataforma de registro de bugs usted podr&aacute; reportar problemas e interactuar con los desarrolladores."
 			}
 		],
 		17 : [
